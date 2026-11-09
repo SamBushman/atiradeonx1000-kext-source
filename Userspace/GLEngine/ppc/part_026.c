@@ -1001,14 +1001,14 @@ int _glGetObjectParameterfvARB_Exec(param_1, param_2, param_3, param_4)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar1 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar1 + 0x8028));
+      _pthread_mutex_lock(iVar1 + 0x8028);
       iVar1 = *(int *)(param_1 + 0x5148);
     }
     iVar1 = _gleLookupHashObject(iVar1 + 0x6018,param_2);
     if (iVar1 != 0) {
       iVar1 = ((int (*)())_gleGetObjectParameter)(param_1,iVar1,param_3,local_28);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (iVar1 != 0) {
         if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1021,7 +1021,7 @@ int _glGetObjectParameterfvARB_Exec(param_1, param_2, param_3, param_4)
       return;
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   if (*(int *)(param_1 + 0x7574) == 0) {
@@ -1043,14 +1043,14 @@ int _glGetObjectParameterivARB_Exec(param_1, param_2, param_3, param_4)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar1 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar1 + 0x8028));
+      _pthread_mutex_lock(iVar1 + 0x8028);
       iVar1 = *(int *)(param_1 + 0x5148);
     }
     iVar1 = _gleLookupHashObject(iVar1 + 0x6018,param_2);
     if (iVar1 != 0) {
       iVar1 = ((int (*)())_gleGetObjectParameter)(param_1,iVar1,param_3,local_30);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (iVar1 != 0) {
         if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1063,7 +1063,7 @@ int _glGetObjectParameterivARB_Exec(param_1, param_2, param_3, param_4)
       return;
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   if (*(int *)(param_1 + 0x7574) == 0) {
@@ -1086,13 +1086,13 @@ int _glGetShaderiv_Exec(param_1, param_2, param_3, param_4)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar2 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+      _pthread_mutex_lock(iVar2 + 0x8028);
       iVar2 = *(int *)(param_1 + 0x5148);
     }
     iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
     if (iVar2 == 0) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
         return;
@@ -1106,7 +1106,7 @@ int _glGetShaderiv_Exec(param_1, param_2, param_3, param_4)
       }
       iVar2 = ((int (*)())_gleGetObjectParameter)(param_1,iVar2,param_3,local_30);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (iVar2 != 0) {
         if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1119,7 +1119,7 @@ int _glGetShaderiv_Exec(param_1, param_2, param_3, param_4)
       return;
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1145,13 +1145,13 @@ int _glGetProgramiv_Exec(param_1, param_2, param_3, param_4)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar2 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+      _pthread_mutex_lock(iVar2 + 0x8028);
       iVar2 = *(int *)(param_1 + 0x5148);
     }
     iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
     if (iVar2 == 0) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
         return;
@@ -1162,7 +1162,7 @@ int _glGetProgramiv_Exec(param_1, param_2, param_3, param_4)
     if (*(int *)(iVar2 + 0x10) == 0x8b40) {
       iVar2 = ((int (*)())_gleGetObjectParameter)(param_1,iVar2,param_3,local_30);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (iVar2 != 0) {
         if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1175,7 +1175,7 @@ int _glGetProgramiv_Exec(param_1, param_2, param_3, param_4)
       return;
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1202,13 +1202,13 @@ int _glGetInfoLogARB_Exec(param_1, param_2, param_3, param_4, param_5)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar2 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+      _pthread_mutex_lock(iVar2 + 0x8028);
       iVar2 = *(int *)(param_1 + 0x5148);
     }
     iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
     if (iVar2 == 0) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
         return;
@@ -1229,11 +1229,11 @@ int _glGetInfoLogARB_Exec(param_1, param_2, param_3, param_4, param_5)
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       return;
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1260,13 +1260,13 @@ int _glGetShaderInfoLog_Exec(param_1, param_2, param_3, param_4, param_5)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar2 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+      _pthread_mutex_lock(iVar2 + 0x8028);
       iVar2 = *(int *)(param_1 + 0x5148);
     }
     iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
     if (iVar2 == 0) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
         return;
@@ -1287,11 +1287,11 @@ int _glGetShaderInfoLog_Exec(param_1, param_2, param_3, param_4, param_5)
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       return;
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1318,13 +1318,13 @@ int _glGetProgramInfoLog_Exec(param_1, param_2, param_3, param_4, param_5)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar2 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+      _pthread_mutex_lock(iVar2 + 0x8028);
       iVar2 = *(int *)(param_1 + 0x5148);
     }
     iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
     if (iVar2 == 0) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
         return;
@@ -1345,11 +1345,11 @@ int _glGetProgramInfoLog_Exec(param_1, param_2, param_3, param_4, param_5)
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       return;
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1372,7 +1372,7 @@ int _glIsShader_Exec(param_1, param_2)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar2 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+      _pthread_mutex_lock(iVar2 + 0x8028);
       iVar2 = *(int *)(param_1 + 0x5148);
     }
     iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
@@ -1381,11 +1381,11 @@ int _glIsShader_Exec(param_1, param_2)
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return bVar1;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       return bVar1;
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   else if (*(int *)(param_1 + 0x7574) == 0) {
@@ -1405,7 +1405,7 @@ int _glIsProgram_Exec(param_1, param_2)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar2 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+      _pthread_mutex_lock(iVar2 + 0x8028);
       iVar2 = *(int *)(param_1 + 0x5148);
     }
     iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
@@ -1414,11 +1414,11 @@ int _glIsProgram_Exec(param_1, param_2)
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return bVar1;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       return bVar1;
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   else if (*(int *)(param_1 + 0x7574) == 0) {
@@ -1444,13 +1444,13 @@ int _glGetAttachedObjectsARB_Exec(param_1, param_2, param_3, param_4, param_5)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar3 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar3 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar3 + 0x8028));
+      _pthread_mutex_lock(iVar3 + 0x8028);
       iVar3 = *(int *)(param_1 + 0x5148);
     }
     iVar3 = _gleLookupHashObject(iVar3 + 0x6018,param_2);
     if (iVar3 == 0) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
         return;
@@ -1474,11 +1474,11 @@ int _glGetAttachedObjectsARB_Exec(param_1, param_2, param_3, param_4, param_5)
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       return;
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1502,13 +1502,13 @@ int _glGetUniformLocationARB_Exec(param_1, param_2, param_3)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar2 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+      _pthread_mutex_lock(iVar2 + 0x8028);
       iVar2 = *(int *)(param_1 + 0x5148);
     }
     iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
     if (iVar2 == 0) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
         return 0xffffffff;
@@ -1519,13 +1519,13 @@ int _glGetUniformLocationARB_Exec(param_1, param_2, param_3)
     if ((*(int *)(iVar2 + 0x10) == 0x8b40) && (*(char *)(iVar2 + 0x3c) == '\x01')) {
       uVar1 = _ShGetUniformLocation(*(undefined4 *)(iVar2 + 0x40),param_3);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
         return uVar1;
       }
       return uVar1;
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1554,14 +1554,14 @@ int _glGetActiveUniformARB_Exec(param_1, param_2, param_3, param_4, param_5, par
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar2 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+      _pthread_mutex_lock(iVar2 + 0x8028);
       iVar2 = *(int *)(param_1 + 0x5148);
     }
     iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
     if (iVar2 == 0) {
 LAB_0008ef74:
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
         return;
@@ -1577,12 +1577,12 @@ LAB_0008ef74:
         if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
           return;
         }
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
         return;
       }
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1624,13 +1624,13 @@ LAB_0008f164:
   }
   iVar4 = *(int *)(param_1 + 0x5148);
   if (*(char *)(iVar4 + 0x8024) != '\0') {
-    _pthread_mutex_lock((pthread_mutex_t *)(iVar4 + 0x8028));
+    _pthread_mutex_lock(iVar4 + 0x8028);
     iVar4 = *(int *)(param_1 + 0x5148);
   }
   iVar4 = _gleLookupHashObject(iVar4 + 0x6018,param_2);
   if (iVar4 == 0) {
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
     if (*(int *)(param_1 + 0x7574) != 0) {
       return;
@@ -1645,7 +1645,7 @@ LAB_0008f164:
                          (*(undefined4 *)(iVar4 + 0x40),param_3,auStack_38,&local_34,local_30),
       dVar2 = DOUBLE_00108d58, iVar5 == 0)))) {
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
     goto LAB_0008f154;
   }
@@ -1765,7 +1765,7 @@ LAB_0008f534:
   if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
     return;
   }
-  _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+  _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
   return;
 }
 
@@ -1776,12 +1776,11 @@ int _glGetUniformivARB_Exec(param_1, param_2, param_3, param_4)
   int param_3;
   int *param_4;
 {
-  float fVar1;
-  undefined4 uVar2;
+  undefined4 uVar1;
+  int iVar2;
   int iVar3;
-  int iVar4;
-  int *piVar5;
-  double dVar6;
+  int *piVar4;
+  float fVar5;
   undefined1 auStack_38 [4];
   uint local_34;
   undefined2 local_30 [14];
@@ -1792,153 +1791,153 @@ LAB_0008f670:
     if (*(int *)(param_1 + 0x7574) != 0) {
       return;
     }
-    uVar2 = 0x502;
+    uVar1 = 0x502;
 LAB_0008f680:
-    *(undefined4 *)(param_1 + 0x7574) = uVar2;
+    *(undefined4 *)(param_1 + 0x7574) = uVar1;
     return;
   }
-  iVar3 = *(int *)(param_1 + 0x5148);
-  if (*(char *)(iVar3 + 0x8024) != '\0') {
-    _pthread_mutex_lock((pthread_mutex_t *)(iVar3 + 0x8028));
-    iVar3 = *(int *)(param_1 + 0x5148);
+  iVar2 = *(int *)(param_1 + 0x5148);
+  if (*(char *)(iVar2 + 0x8024) != '\0') {
+    _pthread_mutex_lock(iVar2 + 0x8028);
+    iVar2 = *(int *)(param_1 + 0x5148);
   }
-  iVar3 = _gleLookupHashObject(iVar3 + 0x6018,param_2);
-  if (iVar3 == 0) {
+  iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
+  if (iVar2 == 0) {
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
     if (*(int *)(param_1 + 0x7574) != 0) {
       return;
     }
-    uVar2 = 0x501;
+    uVar1 = 0x501;
     goto LAB_0008f680;
   }
-  if ((((*(int *)(iVar3 + 0x10) != 0x8b40) || (*(char *)(iVar3 + 0x3c) != '\x01')) ||
-      (*(int *)(iVar3 + 0x30) <= param_3)) ||
+  if ((((*(int *)(iVar2 + 0x10) != 0x8b40) || (*(char *)(iVar2 + 0x3c) != '\x01')) ||
+      (*(int *)(iVar2 + 0x30) <= param_3)) ||
      ((param_3 == -1 ||
-      (iVar4 = _ShGetUniformTypeInfo
-                         (*(undefined4 *)(iVar3 + 0x40),param_3,auStack_38,&local_34,local_30),
-      iVar4 == 0)))) {
+      (iVar3 = _ShGetUniformTypeInfo
+                         (*(undefined4 *)(iVar2 + 0x40),param_3,auStack_38,&local_34,local_30),
+      iVar3 == 0)))) {
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
     goto LAB_0008f670;
   }
-  iVar4 = *(int *)(iVar3 + 0x4c);
-  iVar3 = param_3 * 0x10;
-  piVar5 = (int *)(iVar4 + iVar3);
+  iVar3 = *(int *)(iVar2 + 0x4c);
+  iVar2 = param_3 * 0x10;
+  piVar4 = (int *)(iVar3 + iVar2);
   if (local_34 == 0x8b56) {
 LAB_0008f8c4:
-    iVar3 = *piVar5;
+    iVar2 = *piVar4;
   }
   else {
     if (0x8b56 < local_34) {
       if (local_34 == 0x8b5a) {
-        dVar6 = (double)_roundf((double)*(float *)(iVar4 + iVar3));
-        *param_4 = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[1])));
-        param_4[1] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[4])));
-        param_4[2] = (int)dVar6;
-        fVar1 = GH_U2F((unsigned int)(piVar5[5]));
+        fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+        *param_4 = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
+        param_4[1] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[4])));
+        param_4[2] = (int)fVar5;
+        fVar5 = GH_U2F((unsigned int)(piVar4[5]));
 LAB_0008f91c:
-        dVar6 = (double)_roundf((double)fVar1);
-        param_4[3] = (int)dVar6;
+        fVar5 = _roundf(fVar5);
+        param_4[3] = (int)fVar5;
         goto LAB_0008fb90;
       }
       if (local_34 < 0x8b5b) {
         if (local_34 != 0x8b58) {
           if (0x8b58 < local_34) {
 LAB_0008f7dc:
-            *param_4 = *piVar5;
-            param_4[1] = piVar5[1];
-            param_4[2] = piVar5[2];
-            param_4[3] = piVar5[3];
+            *param_4 = *piVar4;
+            param_4[1] = piVar4[1];
+            param_4[2] = piVar4[2];
+            param_4[3] = piVar4[3];
             goto LAB_0008fb90;
           }
           goto LAB_0008f898;
         }
 LAB_0008f848:
-        *param_4 = *piVar5;
-        param_4[1] = piVar5[1];
-        iVar3 = piVar5[2];
+        *param_4 = *piVar4;
+        param_4[1] = piVar4[1];
+        iVar2 = piVar4[2];
         goto LAB_0008f85c;
       }
       if (local_34 == 0x8b5c) {
-        dVar6 = (double)_roundf((double)*(float *)(iVar4 + iVar3));
-        *param_4 = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[1])));
-        param_4[1] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[2])));
-        param_4[2] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[3])));
-        param_4[3] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[4])));
-        param_4[4] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[5])));
-        param_4[5] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[6])));
-        param_4[6] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[7])));
-        param_4[7] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[8])));
-        param_4[8] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[9])));
-        param_4[9] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[10])));
-        param_4[10] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[0xb])));
-        param_4[0xb] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[0xc])));
-        param_4[0xc] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[0xd])));
-        param_4[0xd] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[0xe])));
-        param_4[0xe] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[0xf])));
-        param_4[0xf] = (int)dVar6;
+        fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+        *param_4 = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
+        param_4[1] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[2])));
+        param_4[2] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[3])));
+        param_4[3] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[4])));
+        param_4[4] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[5])));
+        param_4[5] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[6])));
+        param_4[6] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[7])));
+        param_4[7] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[8])));
+        param_4[8] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[9])));
+        param_4[9] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[10])));
+        param_4[10] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[0xb])));
+        param_4[0xb] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[0xc])));
+        param_4[0xc] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[0xd])));
+        param_4[0xd] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[0xe])));
+        param_4[0xe] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[0xf])));
+        param_4[0xf] = (int)fVar5;
         goto LAB_0008fb90;
       }
       if (local_34 < 0x8b5c) {
-        dVar6 = (double)_roundf((double)*(float *)(iVar4 + iVar3));
-        *param_4 = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[1])));
-        param_4[1] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[2])));
-        param_4[2] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[4])));
-        param_4[3] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[5])));
-        param_4[4] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[6])));
-        param_4[5] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[8])));
-        param_4[6] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[9])));
-        param_4[7] = (int)dVar6;
-        dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[10])));
-        param_4[8] = (int)dVar6;
+        fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+        *param_4 = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
+        param_4[1] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[2])));
+        param_4[2] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[4])));
+        param_4[3] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[5])));
+        param_4[4] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[6])));
+        param_4[5] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[8])));
+        param_4[6] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[9])));
+        param_4[7] = (int)fVar5;
+        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[10])));
+        param_4[8] = (int)fVar5;
         goto LAB_0008fb90;
       }
       if (0x8b64 < local_34) goto LAB_0008fb90;
       goto LAB_0008f8c4;
     }
     if (local_34 == 0x8b51) {
-      dVar6 = (double)_roundf((double)*(float *)(iVar4 + iVar3));
-      *param_4 = (int)dVar6;
-      dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[1])));
-      param_4[1] = (int)dVar6;
-      dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[2])));
-      iVar3 = (int)dVar6;
+      fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+      *param_4 = (int)fVar5;
+      fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
+      param_4[1] = (int)fVar5;
+      fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[2])));
+      iVar2 = (int)fVar5;
 LAB_0008f85c:
-      param_4[2] = iVar3;
+      param_4[2] = iVar2;
       goto LAB_0008fb90;
     }
     if (0x8b51 < local_34) {
       if (local_34 == 0x8b53) {
 LAB_0008f898:
-        *param_4 = *piVar5;
-        param_4[1] = piVar5[1];
+        *param_4 = *piVar4;
+        param_4[1] = piVar4[1];
         goto LAB_0008fb90;
       }
       if (0x8b52 < local_34) {
@@ -1948,37 +1947,37 @@ LAB_0008f898:
         }
         goto LAB_0008f848;
       }
-      dVar6 = (double)_roundf((double)*(float *)(iVar4 + iVar3));
-      *param_4 = (int)dVar6;
-      dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[1])));
-      param_4[1] = (int)dVar6;
-      dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[2])));
-      param_4[2] = (int)dVar6;
-      fVar1 = GH_U2F((unsigned int)(piVar5[3]));
+      fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+      *param_4 = (int)fVar5;
+      fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
+      param_4[1] = (int)fVar5;
+      fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[2])));
+      param_4[2] = (int)fVar5;
+      fVar5 = GH_U2F((unsigned int)(piVar4[3]));
       goto LAB_0008f91c;
     }
     if (local_34 != 0x1406) {
       if (0x1406 < local_34) {
         if (local_34 == 0x8b50) {
-          dVar6 = (double)_roundf((double)*(float *)(iVar4 + iVar3));
-          *param_4 = (int)dVar6;
-          dVar6 = (double)_roundf((double)GH_U2F((unsigned int)(piVar5[1])));
-          param_4[1] = (int)dVar6;
+          fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+          *param_4 = (int)fVar5;
+          fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
+          param_4[1] = (int)fVar5;
         }
         goto LAB_0008fb90;
       }
       if (local_34 != 0x1404) goto LAB_0008fb90;
       goto LAB_0008f8c4;
     }
-    dVar6 = (double)_roundf((double)*(float *)(iVar4 + iVar3));
-    iVar3 = (int)dVar6;
+    fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+    iVar2 = (int)fVar5;
   }
-  *param_4 = iVar3;
+  *param_4 = iVar2;
 LAB_0008fb90:
   if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
     return;
   }
-  _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+  _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
   return;
 }
 
@@ -1997,13 +1996,13 @@ int _glGetShaderSourceARB_Exec(param_1, param_2, param_3, param_4, param_5)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar2 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+      _pthread_mutex_lock(iVar2 + 0x8028);
       iVar2 = *(int *)(param_1 + 0x5148);
     }
     iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
     if (iVar2 == 0) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
         return;
@@ -2024,11 +2023,11 @@ int _glGetShaderSourceARB_Exec(param_1, param_2, param_3, param_4, param_5)
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       return;
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -2053,7 +2052,7 @@ int _glBindAttribLocationARB_Exec(param_1, param_2, param_3, param_4)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar2 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+      _pthread_mutex_lock(iVar2 + 0x8028);
       iVar2 = *(int *)(param_1 + 0x5148);
     }
     iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
@@ -2062,7 +2061,7 @@ int _glBindAttribLocationARB_Exec(param_1, param_2, param_3, param_4)
          ((((param_4 != (char *)0x0 && (*param_4 == 'g')) && (param_4[1] == 'l')) &&
           (param_4[2] == '_')))) {
         if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-          _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+          _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
         }
         goto LAB_0008fddc;
       }
@@ -2071,12 +2070,12 @@ int _glBindAttribLocationARB_Exec(param_1, param_2, param_3, param_4)
         if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
           return;
         }
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
         return;
       }
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
     if (*(int *)(param_1 + 0x7574) != 0) {
       return;
@@ -2106,13 +2105,13 @@ int _glGetAttribLocationARB_Exec(param_1, param_2, param_3)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar2 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+      _pthread_mutex_lock(iVar2 + 0x8028);
       iVar2 = *(int *)(param_1 + 0x5148);
     }
     iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
     if (iVar2 == 0) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
         return 0xffffffff;
@@ -2123,13 +2122,13 @@ int _glGetAttribLocationARB_Exec(param_1, param_2, param_3)
     if ((*(int *)(iVar2 + 0x10) == 0x8b40) && (*(char *)(iVar2 + 0x3c) == '\x01')) {
       uVar1 = _ShGetAttribLocation(*(undefined4 *)(iVar2 + 0x40),param_3);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
         return uVar1;
       }
       return uVar1;
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -2158,14 +2157,14 @@ int _glGetActiveAttribARB_Exec(param_1, param_2, param_3, param_4, param_5, para
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar2 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+      _pthread_mutex_lock(iVar2 + 0x8028);
       iVar2 = *(int *)(param_1 + 0x5148);
     }
     iVar2 = _gleLookupHashObject(iVar2 + 0x6018,param_2);
     if (iVar2 == 0) {
 LAB_00090034:
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
         return;
@@ -2181,12 +2180,12 @@ LAB_00090034:
         if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
           return;
         }
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
         return;
       }
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
   }
   if (*(int *)(param_1 + 0x7574) != 0) {

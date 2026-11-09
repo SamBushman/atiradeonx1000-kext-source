@@ -789,21 +789,21 @@ int _gleUpdateLightExponents(param_1, param_2)
         pfVar7 = (float *)(iVar6 + 0x4aa8);
         dVar11 = (double)FLOAT_00108e54;
         iVar5 = 9;
-        dVar9 = (double)_log(DOUBLE_00108dd8);
+        dVar9 = _log(DOUBLE_00108dd8);
         fVar2 = FLOAT_00108f44;
-        dVar9 = (double)_exp(dVar9 / (double)*(float *)(iVar3 + 0x287c));
+        dVar9 = _exp(dVar9 / (double)*(float *)(iVar3 + 0x287c));
         dVar10 = (double)(float)dVar9;
         dVar8 = (double)FLOAT_00108f40;
         *(float *)(iVar6 + 0x4a98) = (float)dVar9;
         dVar9 = DOUBLE_00108de0;
         *(float *)(iVar6 + 0x4aa0) = (float)(dVar8 / dVar10);
         *(float *)(iVar6 + 0x4a9c) = fVar2 / (float)(dVar11 - dVar10);
-        dVar9 = (double)_pow(dVar9,(double)*(float *)(iVar3 + 0x287c));
+        dVar9 = _pow(dVar9,(double)*(float *)(iVar3 + 0x287c));
         fVar1 = *(float *)(iVar6 + 0x4a98);
         *(float *)(iVar6 + 0x4aa4) = (float)(dVar9 - DOUBLE_00108d68);
         dVar9 = (double)fVar1;
         do {
-          dVar8 = (double)_pow(dVar9,(double)*(float *)(iVar3 + 0x287c));
+          dVar8 = _pow(dVar9,(double)*(float *)(iVar3 + 0x287c));
           iVar5 = iVar5 + -1;
           *pfVar7 = (float)dVar8;
           pfVar7 = pfVar7 + 1;
@@ -5140,9 +5140,8 @@ int _glGetString_Exec(param_1, param_2)
   undefined4 uVar3;
   undefined **ppuVar4;
   char *pcVar5;
-  size_t sVar6;
-  char *pcVar7;
-  uint uVar8;
+  char *pcVar6;
+  uint uVar7;
   
   if (-1 < *(short *)(param_1 + 0x4a10)) {
     if (*(int *)(param_1 + 0x7574) != 0) {
@@ -5153,26 +5152,26 @@ int _glGetString_Exec(param_1, param_2)
   }
   if (param_2 == 0x1f03) {
     ppuVar4 = &_engine_extensions;
-    pcVar7 = (char *)(param_1 + 0x759e);
+    pcVar6 = (char *)(param_1 + 0x759e);
     do {
       pcVar5 = *ppuVar4;
       ppuVar4 = ppuVar4 + 1;
       cVar2 = *pcVar5;
       while (cVar2 != '\0') {
-        *pcVar7 = cVar2;
-        pcVar7 = pcVar7 + 1;
+        *pcVar6 = cVar2;
+        pcVar6 = pcVar6 + 1;
         pcVar5 = pcVar5 + 1;
         cVar2 = *pcVar5;
       }
-      *pcVar7 = ' ';
-      pcVar7 = pcVar7 + 1;
+      *pcVar6 = ' ';
+      pcVar6 = pcVar6 + 1;
     } while ((int)ppuVar4 < 0x110389);
-    uVar8 = 0;
+    uVar7 = 0;
     do {
-      if ((*(uint *)(((int)uVar8 >> 5) * 4 + *(int *)(param_1 + 0x468c) + 0x124) >> (uVar8 & 0x1f) &
+      if ((*(uint *)(((int)uVar7 >> 5) * 4 + *(int *)(param_1 + 0x468c) + 0x124) >> (uVar7 & 0x1f) &
           1) != 0) {
         pcVar5 = (char *)0x0;
-        switch(uVar8) {
+        switch(uVar7) {
         case 0:
           pcVar5 = "GL_ARB_imaging";
           break;
@@ -5414,19 +5413,19 @@ int _glGetString_Exec(param_1, param_2)
         if (pcVar5 != (char *)0x0) {
           cVar2 = *pcVar5;
           while (cVar2 != '\0') {
-            *pcVar7 = cVar2;
-            pcVar7 = pcVar7 + 1;
+            *pcVar6 = cVar2;
+            pcVar6 = pcVar6 + 1;
             pcVar5 = pcVar5 + 1;
             cVar2 = *pcVar5;
           }
-          *pcVar7 = ' ';
-          pcVar7 = pcVar7 + 1;
+          *pcVar6 = ' ';
+          pcVar6 = pcVar6 + 1;
         }
       }
 LAB_000122ec:
-      uVar8 = uVar8 + 1;
-      if (0x4e < (int)uVar8) {
-        *pcVar7 = '\0';
+      uVar7 = uVar7 + 1;
+      if (0x4e < (int)uVar7) {
+        *pcVar6 = '\0';
         return (char *)(param_1 + 0x759e);
       }
     } while( true );
@@ -5434,18 +5433,18 @@ LAB_000122ec:
   if (param_2 < 0x1f04) {
     if (param_2 == 0x1f01) {
       if (*(char *)(param_1 + 0x7585) != '\0') {
-        pcVar7 = (char *)(**(code **)(param_1 + 0x47bc))(*(undefined4 *)(param_1 + 0x4688));
+        pcVar6 = (char *)(**(code **)(param_1 + 0x47bc))(*(undefined4 *)(param_1 + 0x4688));
         if (*(short *)((uint)*(byte *)(param_1 + 0x85a8) * 0x2e0 + param_1 + 0x888a) == 0x2402) {
-          return pcVar7;
+          return pcVar6;
         }
-        pcVar5 = _strstr(pcVar7,"FX");
+        pcVar5 = _strstr(pcVar6,"FX");
         if (pcVar5 != (char *)0x0) {
-          sVar6 = _strlen(pcVar7);
-          _memcpy(&_new_rend_str_0,pcVar7,sVar6);
-          (DAT_00113e61)[(int)pcVar5 - (int)pcVar7] = 0x78;
+          uVar3 = _strlen(pcVar6);
+          _memcpy(&_new_rend_str_0,pcVar6,uVar3);
+          (DAT_00113e61)[(int)pcVar5 - (int)pcVar6] = 0x78;
           return &_new_rend_str_0;
         }
-        return pcVar7;
+        return pcVar6;
       }
       goto LAB_00011cf8;
     }
@@ -5454,8 +5453,8 @@ LAB_000122ec:
 LAB_00011c44:
     if (bVar1) {
 LAB_00011cf8:
-      pcVar7 = (char *)(**(code **)(param_1 + 0x47bc))(*(undefined4 *)(param_1 + 0x4688),param_2);
-      return pcVar7;
+      pcVar6 = (char *)(**(code **)(param_1 + 0x47bc))(*(undefined4 *)(param_1 + 0x4688),param_2);
+      return pcVar6;
     }
   }
   else {
@@ -5541,7 +5540,7 @@ int _gleGenHashNames(param_1, param_2)
   puVar7 = *(undefined4 **)(param_1 + 0x1000);
   if (param_2 != 0) {
     if (puVar7 == (undefined4 *)0x0) {
-      puVar7 = _malloc(0xc);
+      puVar7 = (undefined4 *)_malloc(0xc);
       *puVar7 = 0;
       puVar7[1] = 1;
       puVar7[2] = param_2;
@@ -5551,7 +5550,7 @@ int _gleGenHashNames(param_1, param_2)
       uVar1 = puVar7[1];
       if (uVar1 != param_2 + 1) {
         if (param_2 < uVar1) {
-          puVar4 = _malloc(0xc);
+          puVar4 = (undefined4 *)_malloc(0xc);
           *(undefined4 **)(param_1 + 0x1000) = puVar4;
           *puVar4 = puVar7;
           puVar4[1] = 1;
@@ -5792,7 +5791,7 @@ int _gleDCBRealloc(param_1, param_2)
   uint uVar2;
   uint uVar3;
   int iVar4;
-  void *pvVar5;
+  int iVar5;
   int iVar6;
   uint uVar7;
   
@@ -5808,11 +5807,11 @@ int _gleDCBRealloc(param_1, param_2)
       return uVar3;
     }
     uVar7 = (uint)*(byte *)(param_1 + -1);
-    pvVar5 = _realloc((void *)(param_1 - uVar7),param_2 + 0x3fU & 0xffffffe0);
+    iVar5 = _realloc(param_1 - uVar7,param_2 + 0x3fU & 0xffffffe0);
     uVar3 = 0;
-    if (pvVar5 != (void *)0x0) {
-      uVar3 = (int)pvVar5 + 0x20U & 0xffffffe0;
-      uVar2 = uVar3 - (int)pvVar5 & 0xff;
+    if (iVar5 != 0) {
+      uVar3 = iVar5 + 0x20U & 0xffffffe0;
+      uVar2 = uVar3 - iVar5 & 0xff;
       if (uVar2 != uVar7) {
         iVar4 = param_2 + 3 >> 2;
         if (uVar2 < uVar7) {
@@ -5821,7 +5820,7 @@ int _gleDCBRealloc(param_1, param_2)
             do {
               iVar1 = iVar6 * 4;
               iVar6 = iVar6 + 1;
-              *(undefined4 *)(iVar1 + uVar3) = *(undefined4 *)((int)pvVar5 + iVar1 + uVar7);
+              *(undefined4 *)(iVar1 + uVar3) = *(undefined4 *)(iVar1 + iVar5 + uVar7);
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
@@ -5832,12 +5831,12 @@ int _gleDCBRealloc(param_1, param_2)
             do {
               iVar1 = iVar6 * 4;
               iVar6 = iVar6 + -1;
-              *(undefined4 *)(iVar1 + uVar3) = *(undefined4 *)((int)pvVar5 + iVar1 + uVar7);
+              *(undefined4 *)(iVar1 + uVar3) = *(undefined4 *)(iVar1 + iVar5 + uVar7);
               iVar4 = iVar4 + -1;
             } while (iVar4 != 0);
           }
         }
-        *(char *)(uVar3 - 1) = (char)(uVar3 - (int)pvVar5);
+        *(char *)(uVar3 - 1) = (char)(uVar3 - iVar5);
       }
     }
   }
@@ -5945,7 +5944,7 @@ int _gleGetState(param_1, param_2, param_3, param_4, param_5)
   code *pcVar12;
   int iVar13;
   double dVar14;
-  undefined8 uVar15;
+  longlong lVar15;
   
   *param_4 = 0x1404;
   *param_5 = 0;
@@ -6636,10 +6635,10 @@ LAB_00014d40:
                 return 0;
               }
               iVar13 = *(int *)(param_1 + 0x4a60);
-              uVar15 = ___ashldi3(0,0x1000000,*(undefined4 *)(param_1 + 0x53d8));
+              lVar15 = ___ashldi3(0,0x1000000,*(undefined4 *)(param_1 + 0x53d8));
               uVar2 = 0;
-              if ((*(uint *)(iVar13 + 0x330) & (uint)((ulonglong)uVar15 >> 0x20)) != 0 ||
-                  (*(uint *)(iVar13 + 0x334) & (uint)uVar15) != 0) {
+              if ((*(uint *)(iVar13 + 0x330) & (uint)((ulonglong)lVar15 >> 0x20)) != 0 ||
+                  (*(uint *)(iVar13 + 0x334) & (uint)lVar15) != 0) {
                 uVar2 = 1;
               }
             }

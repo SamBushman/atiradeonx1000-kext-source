@@ -7,15 +7,15 @@ int _glBindBuffer_Exec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   undefined4 uVar1;
-  pthread_mutex_t *ppVar2;
+  int iVar2;
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if ((0x8891 < param_2) && ((param_2 < 0x8894 || (param_2 - 0x88eb < 2)))) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        ppVar2 = (pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028);
-        _pthread_mutex_lock(ppVar2);
+        iVar2 = *(int *)(param_1 + 0x5148) + 0x8028;
+        _pthread_mutex_lock(iVar2);
         _gleBindBufferObject(param_1,param_2,param_3);
-        _pthread_mutex_unlock(ppVar2);
+        _pthread_mutex_unlock(iVar2);
         return;
       }
       _gleBindBufferObject(param_1,param_2,param_3);
@@ -61,7 +61,7 @@ int _glDeleteBuffers_Exec(param_1, param_2, param_3)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (-1 < param_2) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       iVar3 = *(int *)(param_1 + 0x4a60);
       iVar9 = 0;
@@ -142,7 +142,7 @@ int _glDeleteBuffers_Exec(param_1, param_2, param_3)
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       return;
     }
     if (*(int *)(param_1 + 0x7574) != 0) {
@@ -216,12 +216,12 @@ int _glIsBuffer_Exec(param_1, param_2)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar1 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar1 + 0x8028));
+      _pthread_mutex_lock(iVar1 + 0x8028);
       iVar1 = *(int *)(param_1 + 0x5148);
     }
     iVar1 = _gleLookupHashObject(iVar1 + 0x701c,param_2);
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
     bVar2 = iVar1 != 0;
   }
@@ -238,8 +238,8 @@ int _glIsBuffer_Exec(param_1, param_2)
 int FUN_00058a1c(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint param_2;
-  size_t param_3;
-  void *param_4;
+  int param_3;
+  int param_4;
   uint param_5;
 {
   byte bVar1;
@@ -249,7 +249,7 @@ int FUN_00058a1c(param_1, param_2, param_3, param_4, param_5)
   int iVar4;
   uint uVar5;
   int iVar6;
-  void *apvStack_40 [7];
+  unsigned char avStack_40 [7];
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (param_2 == 0x8893) {
@@ -267,12 +267,12 @@ LAB_00058acc:
       case 0x88e9:
       case 0x88ea:
         _gleOrphanBufferData(param_1,iVar6 + 0x10,param_3,param_5 & 0xffff);
-        if (*(void **)(iVar6 + 0x30) != (void *)0x0) {
-          if ((param_4 != (void *)0x0) && (param_3 != 0)) {
-            _memcpy(*(void **)(iVar6 + 0x30),param_4,param_3);
+        if (*(int *)(iVar6 + 0x30) != 0) {
+          if ((param_4 != 0) && (param_3 != 0)) {
+            _memcpy(*(int *)(iVar6 + 0x30),param_4,param_3);
           }
           if (1 < *(int *)(iVar6 + 8)) {
-            if ((param_4 == (void *)0x0) || (param_3 == 0)) {
+            if ((param_4 == 0) || (param_3 == 0)) {
               uVar2 = *(undefined4 *)(param_1 + 0x4688);
               bVar1 = *(byte *)(param_1 + 0x85a8);
               uVar3 = 0;
@@ -294,19 +294,19 @@ LAB_00058acc:
           }
           *(short *)(iVar6 + 0x3c) = (short)param_5;
           *(undefined1 *)(iVar6 + 0x44) = 0;
-          *(size_t *)(iVar6 + 0x38) = param_3;
+          *(int *)(iVar6 + 0x38) = param_3;
           return;
         }
-        size = param_3 + 0xfff & 0xfffff000;
+        size = param_3 + 0xfffU & 0xfffff000;
         if (param_3 == 0) {
           uVar5 = 0;
-          apvStack_40[0] = (void *)0x0;
+          avStack_40[0] = 0;
 code_r0x00058cb0:
           *(undefined1 *)(iVar6 + 0x44) = 0;
-          *(size_t *)(iVar6 + 0x38) = param_3;
+          *(int *)(iVar6 + 0x38) = param_3;
           *(short *)(iVar6 + 0x3c) = (short)param_5;
           *(uint *)(iVar6 + 0x34) = size;
-          *(void **)(iVar6 + 0x30) = apvStack_40[0];
+          *(unsigned char *)(iVar6 + 0x30) = avStack_40[0];
           if ((param_2 - 0x8892 < 2) && (1 < *(int *)(iVar6 + 8))) {
             _gleResetVACachePointers(param_1);
             iVar4 = *(int *)(param_1 + 0x4a60);
@@ -328,11 +328,11 @@ code_r0x00058cb0:
           } while (iVar4 < (int)(uint)*(byte *)(param_1 + 0x85a4));
           return;
         }
-        _vm_allocate(*(unsigned char *)PTR_00112034,(unsigned char *)apvStack_40,size,1);
-        if (apvStack_40[0] != (void *)0x0) {
+        _vm_allocate(*(unsigned char *)PTR_00112034,avStack_40,size,1);
+        if (avStack_40[0] != 0) {
           uVar5 = 3;
-          if (param_4 != (void *)0x0) {
-            _memcpy(apvStack_40[0],param_4,param_3);
+          if (param_4 != 0) {
+            _memcpy(avStack_40[0],param_4,param_3);
           }
           goto code_r0x00058cb0;
         }
@@ -382,8 +382,8 @@ int _glBufferSubData_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint param_2;
   int param_3;
-  size_t param_4;
-  void *param_5;
+  undefined4 param_4;
+  undefined4 param_5;
 {
   int *piVar1;
   undefined4 *puVar2;
@@ -448,7 +448,7 @@ LAB_00058e24:
             iVar4 = iVar4 + 4;
           } while (iVar6 < (int)(uint)*(byte *)(param_1 + 0x85a4));
         }
-        _memcpy((void *)(local_40[0] + param_3),param_5,param_4);
+        _memcpy(local_40[0] + param_3,param_5,param_4);
         if (*(int *)(iVar7 + 8) < 2) {
           return;
         }
@@ -487,7 +487,7 @@ LAB_00058e24:
             iVar7 = iVar7 + 4;
           } while (iVar4 < (int)(uint)*(byte *)(param_1 + 0x85a4));
         }
-        _memcpy((void *)(local_40[0] + param_3),param_5,param_4);
+        _memcpy(local_40[0] + param_3,param_5,param_4);
         return;
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
@@ -511,8 +511,8 @@ int _glGetBufferSubData_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint param_2;
   int param_3;
-  size_t param_4;
-  void *param_5;
+  undefined4 param_4;
+  undefined4 param_5;
 {
   undefined4 uVar1;
   int iVar2;
@@ -546,7 +546,7 @@ LAB_00059160:
       if (*(int *)(iVar2 + 0x30) == 0) {
         return;
       }
-      _memcpy(param_5,(void *)(*(int *)(iVar2 + 0x30) + param_3),param_4);
+      _memcpy(param_5,*(int *)(iVar2 + 0x30) + param_3,param_4);
       return;
     }
   }

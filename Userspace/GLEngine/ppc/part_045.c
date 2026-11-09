@@ -287,7 +287,7 @@ LAB_000d7dc4:
   return iVar10;
 }
 
-/* FUN_000d7e1c @ 0xd7e1c (780 bytes) */
+/* FUN_000d7e1c @ 0xd7e1c (776 bytes) */
 int FUN_000d7e1c(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
@@ -396,7 +396,7 @@ int FUN_000d7e1c(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000d811c @ 0xd811c (832 bytes) */
+/* FUN_000d811c @ 0xd811c (828 bytes) */
 int FUN_000d811c(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
@@ -404,155 +404,152 @@ int FUN_000d811c(param_1, param_2, param_3)
 {
   uint *puVar1;
   undefined4 uVar2;
-  uint uVar3;
-  bool bVar4;
-  undefined4 uVar5;
-  uint *puVar6;
-  void *pvVar7;
+  int iVar3;
+  uint uVar4;
+  bool bVar5;
+  undefined4 uVar6;
+  uint *puVar7;
   uint uVar8;
-  void *pvVar9;
-  int iVar10;
-  uint uVar11;
-  void *pvVar12;
-  uint *puVar13;
-  double dVar14;
+  uint uVar9;
+  uint *puVar10;
+  double dVar11;
   double extraout_f1;
   
-  bVar4 = false;
+  bVar5 = false;
   if ((*(char *)(param_1 + 0x4664) != '\0') || (*(int *)(param_1 + 0x5434) != 0)) {
-    bVar4 = true;
+    bVar5 = true;
   }
-  pvVar12 = *(void **)(param_1 + 0x4854);
+  uVar9 = *(uint *)(param_1 + 0x4854);
   if (((int)*(short *)(param_1 + 0x487c) != 0) &&
-     (uVar8 = (uint)(*(int *)(param_1 + 0x4858) - (int)pvVar12) /
-              (uint)(int)*(short *)(param_1 + 0x487c), 1 < (int)uVar8)) {
-    bVar4 = !bVar4;
-    if (bVar4) {
-      uVar3 = (**(code **)(param_1 + 0x5060))(param_1,pvVar12,uVar8);
+     (uVar8 = (*(int *)(param_1 + 0x4858) - uVar9) / (uint)(int)*(short *)(param_1 + 0x487c),
+     1 < (int)uVar8)) {
+    bVar5 = !bVar5;
+    if (bVar5) {
+      uVar4 = (**(code **)(param_1 + 0x5060))(param_1,uVar9,uVar8);
     }
     else {
-      uVar3 = _gleVPEmulate(param_1,uVar8);
+      uVar4 = _gleVPEmulate(param_1,uVar8);
     }
-    if ((uVar3 & 0xff00) == 0) {
-      if (bVar4) {
+    if ((uVar4 & 0xff00) == 0) {
+      if (bVar5) {
         if (*(char *)(param_1 + 0x53e4) != '\0') {
-          (**(code **)(param_1 + 0x53dc))(param_1,pvVar12,uVar8);
+          (**(code **)(param_1 + 0x53dc))(param_1,uVar9,uVar8);
         }
         if (*(char *)(param_1 + 0x50b4) != '\0') {
-          (**(code **)(param_1 + 0x5064))(param_1,pvVar12,uVar8);
+          (**(code **)(param_1 + 0x5064))(param_1,uVar9,uVar8);
         }
         if ((*(char *)(param_1 + 0x30aa) != '\0') || (*(char *)(param_1 + 0x53e6) != '\0')) {
-          (**(code **)(param_1 + 0x5068))(param_1,pvVar12,uVar8);
+          (**(code **)(param_1 + 0x5068))(param_1,uVar9,uVar8);
         }
       }
       else {
-        pvVar12 = *(void **)(param_1 + 0x4864);
+        uVar9 = *(uint *)(param_1 + 0x4864);
       }
-      if (((uVar3 & 0xff) == 0) && (*(char *)(param_1 + 0x4e18) == '\0')) {
-        if ((bVar4) && (*(char *)(param_1 + 0x53e5) != '\0')) {
-          (**(code **)(param_1 + 0x53e0))(param_1,pvVar12,uVar8);
+      if (((uVar4 & 0xff) == 0) && (*(char *)(param_1 + 0x4e18) == '\0')) {
+        if ((bVar5) && (*(char *)(param_1 + 0x53e5) != '\0')) {
+          (**(code **)(param_1 + 0x53e0))(param_1,uVar9,uVar8);
         }
-        (**(code **)(param_1 + 0x506c))(param_1,pvVar12,uVar8,0);
-        if ((bVar4) && (*(char *)(param_1 + 0x30aa) != '\0')) {
-          (**(code **)(param_1 + 0x4de8))(param_1,pvVar12,uVar8);
+        (**(code **)(param_1 + 0x506c))(param_1,uVar9,uVar8,0);
+        if ((bVar5) && (*(char *)(param_1 + 0x30aa) != '\0')) {
+          (**(code **)(param_1 + 0x4de8))(param_1,uVar9,uVar8);
         }
-        dVar14 = DOUBLE_00108d70;
-        bVar4 = *(char *)(param_1 + 0x4a18) == '\0';
+        dVar11 = DOUBLE_00108d70;
+        bVar5 = *(char *)(param_1 + 0x4a18) == '\0';
         if (1 < (int)uVar8) {
-          if (bVar4) {
-            if (bVar4) {
+          if (bVar5) {
+            if (bVar5) {
               uVar2 = 0x707;
-              uVar5 = 0x702;
+              uVar6 = 0x702;
             }
             else {
-              uVar5 = 0x707;
+              uVar6 = 0x707;
               uVar2 = 0x707;
             }
           }
           else {
-            uVar5 = 0x702;
+            uVar6 = 0x702;
             uVar2 = 0x702;
           }
-          uVar3 = (int)pvVar12 + 0x100;
+          uVar4 = uVar9 + 0x100;
           ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar2) -
                                                    DOUBLE_00108d70));
-          _gleFeedbackHitRecord(param_1,pvVar12);
-          _gleFeedbackHitRecord(param_1,uVar3);
-          uVar8 = (int)pvVar12 + uVar8 * 0x100 + -0x100;
-          if (uVar3 < uVar8) {
+          _gleFeedbackHitRecord(param_1,uVar9);
+          _gleFeedbackHitRecord(param_1,uVar4);
+          uVar9 = (uVar9 + uVar8 * 0x100) - 0x100;
+          if (uVar4 < uVar9) {
             do {
-              uVar11 = uVar3 + 0x100;
-              ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar5) - dVar14)
+              uVar8 = uVar4 + 0x100;
+              ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar6) - dVar11)
                                );
-              _gleFeedbackHitRecord(param_1,uVar3);
-              _gleFeedbackHitRecord(param_1,uVar11);
-              uVar3 = uVar11;
-            } while (uVar11 < uVar8);
+              _gleFeedbackHitRecord(param_1,uVar4);
+              _gleFeedbackHitRecord(param_1,uVar8);
+              uVar4 = uVar8;
+            } while (uVar8 < uVar9);
           }
         }
         return;
       }
-      if ((bVar4) && (*(char *)(param_1 + 0x53e5) != '\0')) {
-        (**(code **)(param_1 + 0x53e0))(param_1,pvVar12,uVar8);
+      if ((bVar5) && (*(char *)(param_1 + 0x53e5) != '\0')) {
+        (**(code **)(param_1 + 0x53e0))(param_1,uVar9,uVar8);
       }
-      dVar14 = (double)(**(double ( **)(int,int,int,int))(param_1 + 0x5074))(param_1, pvVar12, uVar8, 0);
-      puVar6 = *(uint **)(param_1 + 0x4870);
-      pvVar7 = (void *)((int)pvVar12 + uVar8 * 0x100 + -0x100);
-      puVar13 = puVar6;
-      if (bVar4) {
-        pvVar9 = *(void **)(param_1 + 0x4858);
+      dVar11 = (double)(**(double ( **)(int,int,int,int))(param_1 + 0x5074))(param_1, uVar9, uVar8, 0);
+      puVar7 = *(uint **)(param_1 + 0x4870);
+      iVar3 = uVar9 + uVar8 * 0x100;
+      puVar10 = puVar7;
+      if (bVar5) {
+        uVar8 = *(uint *)(param_1 + 0x4858);
       }
       else {
-        pvVar9 = *(void **)(param_1 + 0x4854);
+        uVar8 = *(uint *)(param_1 + 0x4854);
       }
-      while (pvVar12 < pvVar7) {
-        *puVar13 = (uint)pvVar12;
-        _memcpy(pvVar9,(void *)((int)pvVar12 + 0x100U),0x100);
-        puVar13[1] = (uint)pvVar9;
-        pvVar9 = (void *)((int)pvVar9 + 0x100);
-        puVar13 = puVar13 + 2;
-        pvVar12 = (void *)((int)pvVar12 + 0x100U);
-        dVar14 = extraout_f1;
+      while (uVar9 < iVar3 - 0x100U) {
+        *puVar10 = uVar9;
+        _memcpy(uVar8,uVar9 + 0x100,0x100);
+        puVar10[1] = uVar8;
+        uVar8 = uVar8 + 0x100;
+        puVar10 = puVar10 + 2;
+        uVar9 = uVar9 + 0x100;
+        dVar11 = extraout_f1;
       }
-      iVar10 = (int)puVar13 - (int)puVar6 >> 2;
+      iVar3 = (int)puVar10 - (int)puVar7 >> 2;
       if (((*(char *)(param_1 + 0x4e18) == '\0') ||
-          (iVar10 = ((int (*)())_gleClipLinesPlane)(param_1,puVar6,iVar10,dVar14), iVar10 != 0)) &&
-         (((uVar3 & 0xff) == 0 ||
-          (iVar10 = ((int (*)())_gleClipLines)(param_1,puVar6,iVar10,uVar3 & 0xff), iVar10 != 0)))) {
-        if ((bVar4) && (*(char *)(param_1 + 0x30aa) != '\0')) {
-          (**(code **)(param_1 + 0x4df0))(param_1,puVar6,iVar10);
+          (iVar3 = ((int (*)())_gleClipLinesPlane)(param_1,puVar7,iVar3,dVar11), iVar3 != 0)) &&
+         (((uVar4 & 0xff) == 0 ||
+          (iVar3 = ((int (*)())_gleClipLines)(param_1,puVar7,iVar3,uVar4 & 0xff), iVar3 != 0)))) {
+        if ((bVar5) && (*(char *)(param_1 + 0x30aa) != '\0')) {
+          (**(code **)(param_1 + 0x4df0))(param_1,puVar7,iVar3);
         }
-        dVar14 = DOUBLE_00108d70;
-        bVar4 = *(char *)(param_1 + 0x4a18) == '\0';
-        if (1 < iVar10) {
-          if (bVar4) {
-            if (bVar4) {
+        dVar11 = DOUBLE_00108d70;
+        bVar5 = *(char *)(param_1 + 0x4a18) == '\0';
+        if (1 < iVar3) {
+          if (bVar5) {
+            if (bVar5) {
               uVar2 = 0x707;
-              uVar5 = 0x702;
+              uVar6 = 0x702;
             }
             else {
-              uVar5 = 0x707;
+              uVar6 = 0x707;
               uVar2 = 0x707;
             }
           }
           else {
-            uVar5 = 0x702;
+            uVar6 = 0x702;
             uVar2 = 0x702;
           }
-          puVar13 = puVar6 + 2;
+          puVar10 = puVar7 + 2;
           ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar2) -
                                                    DOUBLE_00108d70));
-          _gleFeedbackHitRecord(param_1,*puVar6);
-          _gleFeedbackHitRecord(param_1,puVar6[1]);
-          if (puVar13 < puVar6 + iVar10 + -1) {
+          _gleFeedbackHitRecord(param_1,*puVar7);
+          _gleFeedbackHitRecord(param_1,puVar7[1]);
+          if (puVar10 < puVar7 + iVar3 + -1) {
             do {
-              ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar5) - dVar14)
+              ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar6) - dVar11)
                                );
-              _gleFeedbackHitRecord(param_1,*puVar13);
-              puVar1 = puVar13 + 1;
-              puVar13 = puVar13 + 2;
+              _gleFeedbackHitRecord(param_1,*puVar10);
+              puVar1 = puVar10 + 1;
+              puVar10 = puVar10 + 2;
               _gleFeedbackHitRecord(param_1,*puVar1);
-            } while (puVar13 < puVar6 + iVar10 + -1);
+            } while (puVar10 < puVar7 + iVar3 + -1);
           }
         }
         return;
@@ -577,13 +574,10 @@ int FUN_000d845c(param_1)
   short sVar9;
   undefined4 uVar10;
   uint *puVar11;
-  void *pvVar12;
-  uint uVar13;
-  void *pvVar14;
-  uint *puVar15;
-  uint uVar16;
-  void *pvVar17;
-  double dVar18;
+  uint uVar12;
+  uint *puVar13;
+  uint uVar14;
+  double dVar15;
   double extraout_f1;
   
   bVar6 = false;
@@ -591,17 +585,17 @@ int FUN_000d845c(param_1)
     bVar6 = true;
   }
   sVar9 = *(short *)(param_1 + 0x487c);
-  pvVar14 = *(void **)(param_1 + 0x4854);
+  uVar12 = *(uint *)(param_1 + 0x4854);
   if ((int)sVar9 != 0) {
     iVar7 = *(int *)(param_1 + 0x4858);
-    uVar16 = (uint)(iVar7 - (int)pvVar14) / (uint)(int)sVar9;
+    uVar14 = (iVar7 - uVar12) / (uint)(int)sVar9;
     if (*(short *)(param_1 + 0x4a10) < 0) {
-      if ((int)uVar16 < 1) {
+      if ((int)uVar14 < 1) {
         return;
       }
-      pvVar12 = (void *)((int)pvVar14 - 0x100);
+      uVar5 = uVar12 - 0x100;
       if (*(char *)(param_1 + 0x4a18) == '\0') {
-        pvVar12 = pvVar14;
+        uVar5 = uVar12;
       }
       iVar8 = 0;
       iVar4 = (int)sVar9 >> 3;
@@ -609,47 +603,47 @@ int FUN_000d845c(param_1)
         do {
           iVar2 = iVar8 * 8;
           iVar8 = iVar8 + 1;
-          *(undefined8 *)(iVar2 + iVar7) = *(undefined8 *)(iVar2 + (int)pvVar12);
+          *(undefined8 *)(iVar2 + iVar7) = *(undefined8 *)(iVar2 + uVar5);
           iVar4 = iVar4 + -1;
         } while (iVar4 != 0);
         sVar9 = *(short *)(param_1 + 0x487c);
       }
-      uVar16 = uVar16 + 1;
+      uVar14 = uVar14 + 1;
       *(int *)(param_1 + 0x4858) = iVar7 + sVar9;
     }
     bVar6 = !bVar6;
     if (bVar6) {
-      uVar5 = (**(code **)(param_1 + 0x5060))(param_1,pvVar14,uVar16);
+      uVar5 = (**(code **)(param_1 + 0x5060))(param_1,uVar12,uVar14);
     }
     else {
-      uVar5 = _gleVPEmulate(param_1,uVar16);
+      uVar5 = _gleVPEmulate(param_1,uVar14);
     }
     if ((uVar5 & 0xff00) == 0) {
       if (bVar6) {
         if (*(char *)(param_1 + 0x53e4) != '\0') {
-          (**(code **)(param_1 + 0x53dc))(param_1,pvVar14,uVar16);
+          (**(code **)(param_1 + 0x53dc))(param_1,uVar12,uVar14);
         }
         if (*(char *)(param_1 + 0x50b4) != '\0') {
-          (**(code **)(param_1 + 0x5064))(param_1,pvVar14,uVar16);
+          (**(code **)(param_1 + 0x5064))(param_1,uVar12,uVar14);
         }
         if ((*(char *)(param_1 + 0x30aa) != '\0') || (*(char *)(param_1 + 0x53e6) != '\0')) {
-          (**(code **)(param_1 + 0x5068))(param_1,pvVar14,uVar16);
+          (**(code **)(param_1 + 0x5068))(param_1,uVar12,uVar14);
         }
       }
       else {
-        pvVar14 = *(void **)(param_1 + 0x4864);
+        uVar12 = *(uint *)(param_1 + 0x4864);
       }
       if (((uVar5 & 0xff) == 0) && (*(char *)(param_1 + 0x4e18) == '\0')) {
         if ((bVar6) && (*(char *)(param_1 + 0x53e5) != '\0')) {
-          (**(code **)(param_1 + 0x53e0))(param_1,pvVar14,uVar16);
+          (**(code **)(param_1 + 0x53e0))(param_1,uVar12,uVar14);
         }
-        (**(code **)(param_1 + 0x506c))(param_1,pvVar14,uVar16,0);
+        (**(code **)(param_1 + 0x506c))(param_1,uVar12,uVar14,0);
         if ((bVar6) && (*(char *)(param_1 + 0x30aa) != '\0')) {
-          (**(code **)(param_1 + 0x4de8))(param_1,pvVar14,uVar16);
+          (**(code **)(param_1 + 0x4de8))(param_1,uVar12,uVar14);
         }
-        dVar18 = DOUBLE_00108d70;
+        dVar15 = DOUBLE_00108d70;
         bVar6 = *(char *)(param_1 + 0x4a18) == '\0';
-        if (1 < (int)uVar16) {
+        if (1 < (int)uVar14) {
           if (bVar6) {
             if (bVar6) {
               uVar3 = 0x707;
@@ -664,56 +658,56 @@ int FUN_000d845c(param_1)
             uVar10 = 0x702;
             uVar3 = 0x702;
           }
-          uVar5 = (int)pvVar14 + 0x100;
+          uVar5 = uVar12 + 0x100;
           ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar3) -
                                                    DOUBLE_00108d70));
-          _gleFeedbackHitRecord(param_1,pvVar14);
+          _gleFeedbackHitRecord(param_1,uVar12);
           _gleFeedbackHitRecord(param_1,uVar5);
-          uVar16 = (int)pvVar14 + uVar16 * 0x100 + -0x100;
-          if (uVar5 < uVar16) {
+          uVar12 = (uVar12 + uVar14 * 0x100) - 0x100;
+          if (uVar5 < uVar12) {
             do {
-              uVar13 = uVar5 + 0x100;
-              ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar10) - dVar18
+              uVar14 = uVar5 + 0x100;
+              ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar10) - dVar15
                                                        ));
               _gleFeedbackHitRecord(param_1,uVar5);
-              _gleFeedbackHitRecord(param_1,uVar13);
-              uVar5 = uVar13;
-            } while (uVar13 < uVar16);
+              _gleFeedbackHitRecord(param_1,uVar14);
+              uVar5 = uVar14;
+            } while (uVar14 < uVar12);
           }
         }
         return;
       }
       if ((bVar6) && (*(char *)(param_1 + 0x53e5) != '\0')) {
-        (**(code **)(param_1 + 0x53e0))(param_1,pvVar14,uVar16);
+        (**(code **)(param_1 + 0x53e0))(param_1,uVar12,uVar14);
       }
-      dVar18 = (double)(**(double ( **)(int,int,int,int))(param_1 + 0x5074))(param_1, pvVar14, uVar16, 0);
+      dVar15 = (double)(**(double ( **)(int,int,int,int))(param_1 + 0x5074))(param_1, uVar12, uVar14, 0);
       puVar11 = *(uint **)(param_1 + 0x4870);
-      pvVar12 = (void *)((int)pvVar14 + uVar16 * 0x100 + -0x100);
-      puVar15 = puVar11;
+      iVar7 = uVar12 + uVar14 * 0x100;
+      puVar13 = puVar11;
       if (bVar6) {
-        pvVar17 = *(void **)(param_1 + 0x4858);
+        uVar14 = *(uint *)(param_1 + 0x4858);
       }
       else {
-        pvVar17 = *(void **)(param_1 + 0x4854);
+        uVar14 = *(uint *)(param_1 + 0x4854);
       }
-      while (pvVar14 < pvVar12) {
-        *puVar15 = (uint)pvVar14;
-        _memcpy(pvVar17,(void *)((int)pvVar14 + 0x100U),0x100);
-        puVar15[1] = (uint)pvVar17;
-        pvVar17 = (void *)((int)pvVar17 + 0x100);
-        puVar15 = puVar15 + 2;
-        pvVar14 = (void *)((int)pvVar14 + 0x100U);
-        dVar18 = extraout_f1;
+      while (uVar12 < iVar7 - 0x100U) {
+        *puVar13 = uVar12;
+        _memcpy(uVar14,uVar12 + 0x100,0x100);
+        puVar13[1] = uVar14;
+        uVar14 = uVar14 + 0x100;
+        puVar13 = puVar13 + 2;
+        uVar12 = uVar12 + 0x100;
+        dVar15 = extraout_f1;
       }
-      iVar7 = (int)puVar15 - (int)puVar11 >> 2;
+      iVar7 = (int)puVar13 - (int)puVar11 >> 2;
       if (((*(char *)(param_1 + 0x4e18) == '\0') ||
-          (iVar7 = ((int (*)())_gleClipLinesPlane)(param_1,puVar11,iVar7,dVar18), iVar7 != 0)) &&
+          (iVar7 = ((int (*)())_gleClipLinesPlane)(param_1,puVar11,iVar7,dVar15), iVar7 != 0)) &&
          (((uVar5 & 0xff) == 0 ||
           (iVar7 = ((int (*)())_gleClipLines)(param_1,puVar11,iVar7,uVar5 & 0xff), iVar7 != 0)))) {
         if ((bVar6) && (*(char *)(param_1 + 0x30aa) != '\0')) {
           (**(code **)(param_1 + 0x4df0))(param_1,puVar11,iVar7);
         }
-        dVar18 = DOUBLE_00108d70;
+        dVar15 = DOUBLE_00108d70;
         bVar6 = *(char *)(param_1 + 0x4a18) == '\0';
         if (1 < iVar7) {
           if (bVar6) {
@@ -730,20 +724,20 @@ int FUN_000d845c(param_1)
             uVar10 = 0x702;
             uVar3 = 0x702;
           }
-          puVar15 = puVar11 + 2;
+          puVar13 = puVar11 + 2;
           ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar3) -
                                                    DOUBLE_00108d70));
           _gleFeedbackHitRecord(param_1,*puVar11);
           _gleFeedbackHitRecord(param_1,puVar11[1]);
-          if (puVar15 < puVar11 + iVar7 + -1) {
+          if (puVar13 < puVar11 + iVar7 + -1) {
             do {
-              ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar10) - dVar18
+              ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar10) - dVar15
                                                        ));
-              _gleFeedbackHitRecord(param_1,*puVar15);
-              puVar1 = puVar15 + 1;
-              puVar15 = puVar15 + 2;
+              _gleFeedbackHitRecord(param_1,*puVar13);
+              puVar1 = puVar13 + 1;
+              puVar13 = puVar13 + 2;
               _gleFeedbackHitRecord(param_1,*puVar1);
-            } while (puVar15 < puVar11 + iVar7 + -1);
+            } while (puVar13 < puVar11 + iVar7 + -1);
           }
         }
         return;
@@ -850,7 +844,7 @@ int FUN_000d8af8(param_1)
   uint *puVar7;
   uint *puVar8;
   int iVar9;
-  void *pvVar10;
+  uint uVar10;
   double extraout_f1;
   double fparam_1;
   double extraout_f1_00;
@@ -895,14 +889,14 @@ int FUN_000d8af8(param_1)
       fparam_1 = (double)(**(double ( **)(int,int,int,int))(param_1 + 0x5074))(param_1, puVar8, iVar9, 0);
     }
     puVar6 = *(uint **)(param_1 + 0x4870);
-    pvVar10 = *(void **)(param_1 + 0x4858);
+    uVar10 = *(uint *)(param_1 + 0x4858);
     puVar3 = puVar8;
     puVar7 = puVar6;
     while (puVar3 < puVar8 + iVar9 * 0x40 + -0x40) {
       *puVar7 = (uint)puVar3;
-      _memcpy(pvVar10,puVar3 + 0x40,0x100);
-      puVar7[1] = (uint)pvVar10;
-      pvVar10 = (void *)((int)pvVar10 + 0x100);
+      _memcpy(uVar10,puVar3 + 0x40,0x100);
+      puVar7[1] = uVar10;
+      uVar10 = uVar10 + 0x100;
       puVar7 = puVar7 + 2;
       puVar3 = puVar3 + 0x40;
       fparam_1 = extraout_f1_00;
@@ -946,7 +940,7 @@ int FUN_000d8dd4(param_1)
   uint *puVar11;
   uint *puVar12;
   int iVar13;
-  void *pvVar14;
+  uint uVar14;
   double extraout_f1;
   double fparam_1;
   double extraout_f1_00;
@@ -1014,14 +1008,14 @@ int FUN_000d8dd4(param_1)
       fparam_1 = (double)(**(double ( **)(int,int,int,int))(param_1 + 0x5074))(param_1, puVar12, iVar13, 0);
     }
     puVar10 = *(uint **)(param_1 + 0x4870);
-    pvVar14 = *(void **)(param_1 + 0x4858);
+    uVar14 = *(uint *)(param_1 + 0x4858);
     puVar7 = puVar12;
     puVar11 = puVar10;
     while (puVar7 < puVar12 + iVar13 * 0x40 + -0x40) {
       *puVar11 = (uint)puVar7;
-      _memcpy(pvVar14,puVar7 + 0x40,0x100);
-      puVar11[1] = (uint)pvVar14;
-      pvVar14 = (void *)((int)pvVar14 + 0x100);
+      _memcpy(uVar14,puVar7 + 0x40,0x100);
+      puVar11[1] = uVar14;
+      uVar14 = uVar14 + 0x100;
       puVar11 = puVar11 + 2;
       puVar7 = puVar7 + 0x40;
       fparam_1 = extraout_f1_00;
@@ -1144,7 +1138,7 @@ int FUN_000d9420(param_1)
   code *UNRECOVERED_JUMPTABLE;
   uint *puVar6;
   int iVar7;
-  void *pvVar8;
+  uint uVar8;
   uint *puVar9;
   uint *puVar10;
   double extraout_f1;
@@ -1191,14 +1185,14 @@ int FUN_000d9420(param_1)
       fparam_1 = (double)(**(double ( **)(int,int,int,int))(param_1 + 0x5074))(param_1, puVar9, iVar7, 0);
     }
     puVar6 = *(uint **)(param_1 + 0x4870);
-    pvVar8 = *(void **)(param_1 + 0x4858);
+    uVar8 = *(uint *)(param_1 + 0x4858);
     puVar3 = puVar9;
     puVar10 = puVar6;
     while (puVar3 < puVar9 + iVar7 * 0x40 + -0x40) {
       *puVar10 = (uint)puVar3;
-      _memcpy(pvVar8,puVar3 + 0x40,0x100);
-      puVar10[1] = (uint)pvVar8;
-      pvVar8 = (void *)((int)pvVar8 + 0x100);
+      _memcpy(uVar8,puVar3 + 0x40,0x100);
+      puVar10[1] = uVar8;
+      uVar8 = uVar8 + 0x100;
       puVar10 = puVar10 + 2;
       puVar3 = puVar3 + 0x40;
       fparam_1 = extraout_f1_00;
@@ -1241,7 +1235,7 @@ int FUN_000d971c(param_1)
   int iVar9;
   code *UNRECOVERED_JUMPTABLE;
   uint *puVar10;
-  void *pvVar11;
+  uint uVar11;
   int iVar12;
   uint *puVar13;
   uint *puVar14;
@@ -1312,14 +1306,14 @@ int FUN_000d971c(param_1)
       fparam_1 = (double)(**(double ( **)(int,int,int,int))(param_1 + 0x5074))(param_1, puVar13, iVar12, 0);
     }
     puVar10 = *(uint **)(param_1 + 0x4870);
-    pvVar11 = *(void **)(param_1 + 0x4858);
+    uVar11 = *(uint *)(param_1 + 0x4858);
     puVar7 = puVar13;
     puVar14 = puVar10;
     while (puVar7 < puVar13 + iVar12 * 0x40 + -0x40) {
       *puVar14 = (uint)puVar7;
-      _memcpy(pvVar11,puVar7 + 0x40,0x100);
-      puVar14[1] = (uint)pvVar11;
-      pvVar11 = (void *)((int)pvVar11 + 0x100);
+      _memcpy(uVar11,puVar7 + 0x40,0x100);
+      puVar14[1] = uVar11;
+      uVar11 = uVar11 + 0x100;
       puVar14 = puVar14 + 2;
       puVar7 = puVar7 + 0x40;
       fparam_1 = extraout_f1_00;
@@ -1412,61 +1406,59 @@ int FUN_000d9c14(param_1)
 {
   bool bVar1;
   uint *puVar2;
-  uint uVar3;
-  uint *puVar4;
-  void *pvVar5;
+  int iVar3;
+  uint uVar4;
+  uint *puVar5;
   uint uVar6;
-  void *pvVar7;
-  int iVar8;
-  void *pvVar9;
+  uint uVar7;
   double extraout_f1;
-  double dVar10;
+  double dVar8;
   double extraout_f1_00;
   
   bVar1 = false;
   if ((*(char *)(param_1 + 0x4664) != '\0') || (*(int *)(param_1 + 0x5434) != 0)) {
     bVar1 = true;
   }
-  pvVar9 = *(void **)(param_1 + 0x4854);
+  uVar7 = *(uint *)(param_1 + 0x4854);
   if ((((int)*(short *)(param_1 + 0x487c) != 0) &&
-      (uVar6 = (uint)(*(int *)(param_1 + 0x4858) - (int)pvVar9) /
-               (uint)(int)*(short *)(param_1 + 0x487c), 1 < (int)uVar6)) &&
-     (uVar3 = (**(code **)(param_1 + 0x5060))(param_1,pvVar9,uVar6), (uVar3 & 0xff00) == 0)) {
-    dVar10 = extraout_f1;
+      (uVar6 = (*(int *)(param_1 + 0x4858) - uVar7) / (uint)(int)*(short *)(param_1 + 0x487c),
+      1 < (int)uVar6)) &&
+     (uVar4 = (**(code **)(param_1 + 0x5060))(param_1,uVar7,uVar6), (uVar4 & 0xff00) == 0)) {
+    dVar8 = extraout_f1;
     if (bVar1) {
-      pvVar9 = *(void **)(param_1 + 0x4864);
+      uVar7 = *(uint *)(param_1 + 0x4864);
     }
     else if (*(char *)(param_1 + 0x4e18) != '\0') {
-      dVar10 = (double)(**(double ( **)(int,int,int))(param_1 + 0x5064))(param_1, pvVar9, uVar6);
+      dVar8 = (double)(**(double ( **)(int,int,int))(param_1 + 0x5064))(param_1, uVar7, uVar6);
     }
-    if (((uVar3 & 0xff) == 0) && (*(char *)(param_1 + 0x4e18) == '\0')) {
-      _gleSelectLineStrip(param_1,pvVar9,uVar6);
+    if (((uVar4 & 0xff) == 0) && (*(char *)(param_1 + 0x4e18) == '\0')) {
+      _gleSelectLineStrip(param_1,uVar7,uVar6);
       return;
     }
-    puVar4 = *(uint **)(param_1 + 0x4870);
-    pvVar5 = (void *)((int)pvVar9 + uVar6 * 0x100 + -0x100);
-    puVar2 = puVar4;
+    puVar5 = *(uint **)(param_1 + 0x4870);
+    iVar3 = uVar7 + uVar6 * 0x100;
+    puVar2 = puVar5;
     if (bVar1) {
-      pvVar7 = *(void **)(param_1 + 0x4854);
+      uVar6 = *(uint *)(param_1 + 0x4854);
     }
     else {
-      pvVar7 = *(void **)(param_1 + 0x4858);
+      uVar6 = *(uint *)(param_1 + 0x4858);
     }
-    while (pvVar9 < pvVar5) {
-      *puVar2 = (uint)pvVar9;
-      _memcpy(pvVar7,(void *)((int)pvVar9 + 0x100U),0x100);
-      puVar2[1] = (uint)pvVar7;
-      pvVar7 = (void *)((int)pvVar7 + 0x100);
+    while (uVar7 < iVar3 - 0x100U) {
+      *puVar2 = uVar7;
+      _memcpy(uVar6,uVar7 + 0x100,0x100);
+      puVar2[1] = uVar6;
+      uVar6 = uVar6 + 0x100;
       puVar2 = puVar2 + 2;
-      pvVar9 = (void *)((int)pvVar9 + 0x100U);
-      dVar10 = extraout_f1_00;
+      uVar7 = uVar7 + 0x100;
+      dVar8 = extraout_f1_00;
     }
-    iVar8 = (int)puVar2 - (int)puVar4 >> 2;
+    iVar3 = (int)puVar2 - (int)puVar5 >> 2;
     if (((*(char *)(param_1 + 0x4e18) == '\0') ||
-        (iVar8 = ((int (*)())_gleClipLinesPlane)(param_1,puVar4,iVar8,dVar10), iVar8 != 0)) &&
-       (((uVar3 & 0xff) == 0 ||
-        (iVar8 = ((int (*)())_gleClipLines)(param_1,puVar4,iVar8,uVar3 & 0xff), iVar8 != 0)))) {
-      _gleSelectLinesPtr(param_1,puVar4,iVar8);
+        (iVar3 = ((int (*)())_gleClipLinesPlane)(param_1,puVar5,iVar3,dVar8), iVar3 != 0)) &&
+       (((uVar4 & 0xff) == 0 ||
+        (iVar3 = ((int (*)())_gleClipLines)(param_1,puVar5,iVar3,uVar4 & 0xff), iVar3 != 0)))) {
+      _gleSelectLinesPtr(param_1,puVar5,iVar3);
       return;
     }
   }
@@ -1486,12 +1478,10 @@ int FUN_000d9dfc(param_1)
   short sVar7;
   int iVar8;
   uint *puVar9;
-  void *pvVar10;
-  void *pvVar11;
-  uint uVar12;
-  void *pvVar13;
+  uint uVar10;
+  uint uVar11;
   double extraout_f1;
-  double dVar14;
+  double dVar12;
   double extraout_f1_00;
   
   bVar2 = false;
@@ -1499,17 +1489,17 @@ int FUN_000d9dfc(param_1)
     bVar2 = true;
   }
   sVar7 = *(short *)(param_1 + 0x487c);
-  pvVar11 = *(void **)(param_1 + 0x4854);
+  uVar10 = *(uint *)(param_1 + 0x4854);
   if ((int)sVar7 != 0) {
     iVar6 = *(int *)(param_1 + 0x4858);
-    uVar12 = (uint)(iVar6 - (int)pvVar11) / (uint)(int)sVar7;
+    uVar11 = (iVar6 - uVar10) / (uint)(int)sVar7;
     if (*(short *)(param_1 + 0x4a10) < 0) {
-      if ((int)uVar12 < 1) {
+      if ((int)uVar11 < 1) {
         return;
       }
-      pvVar10 = (void *)((int)pvVar11 - 0x100);
+      uVar5 = uVar10 - 0x100;
       if (*(char *)(param_1 + 0x4a18) == '\0') {
-        pvVar10 = pvVar11;
+        uVar5 = uVar10;
       }
       iVar8 = 0;
       iVar4 = (int)sVar7 >> 3;
@@ -1517,48 +1507,48 @@ int FUN_000d9dfc(param_1)
         do {
           iVar1 = iVar8 * 8;
           iVar8 = iVar8 + 1;
-          *(undefined8 *)(iVar1 + iVar6) = *(undefined8 *)(iVar1 + (int)pvVar10);
+          *(undefined8 *)(iVar1 + iVar6) = *(undefined8 *)(iVar1 + uVar5);
           iVar4 = iVar4 + -1;
         } while (iVar4 != 0);
         sVar7 = *(short *)(param_1 + 0x487c);
       }
-      uVar12 = uVar12 + 1;
+      uVar11 = uVar11 + 1;
       *(int *)(param_1 + 0x4858) = iVar6 + sVar7;
     }
-    uVar5 = (**(code **)(param_1 + 0x5060))(param_1,pvVar11,uVar12);
+    uVar5 = (**(code **)(param_1 + 0x5060))(param_1,uVar10,uVar11);
     if ((uVar5 & 0xff00) == 0) {
-      dVar14 = extraout_f1;
+      dVar12 = extraout_f1;
       if (bVar2) {
-        pvVar11 = *(void **)(param_1 + 0x4864);
+        uVar10 = *(uint *)(param_1 + 0x4864);
       }
       else if (*(char *)(param_1 + 0x4e18) != '\0') {
-        dVar14 = (double)(**(double ( **)(int,int,int))(param_1 + 0x5064))(param_1, pvVar11, uVar12);
+        dVar12 = (double)(**(double ( **)(int,int,int))(param_1 + 0x5064))(param_1, uVar10, uVar11);
       }
       if (((uVar5 & 0xff) == 0) && (*(char *)(param_1 + 0x4e18) == '\0')) {
-        _gleSelectLineStrip(param_1,pvVar11,uVar12);
+        _gleSelectLineStrip(param_1,uVar10,uVar11);
         return;
       }
       puVar9 = *(uint **)(param_1 + 0x4870);
-      pvVar10 = (void *)((int)pvVar11 + uVar12 * 0x100 + -0x100);
+      iVar6 = uVar10 + uVar11 * 0x100;
       puVar3 = puVar9;
       if (bVar2) {
-        pvVar13 = *(void **)(param_1 + 0x4854);
+        uVar11 = *(uint *)(param_1 + 0x4854);
       }
       else {
-        pvVar13 = *(void **)(param_1 + 0x4858);
+        uVar11 = *(uint *)(param_1 + 0x4858);
       }
-      while (pvVar11 < pvVar10) {
-        *puVar3 = (uint)pvVar11;
-        _memcpy(pvVar13,(void *)((int)pvVar11 + 0x100U),0x100);
-        puVar3[1] = (uint)pvVar13;
-        pvVar13 = (void *)((int)pvVar13 + 0x100);
+      while (uVar10 < iVar6 - 0x100U) {
+        *puVar3 = uVar10;
+        _memcpy(uVar11,uVar10 + 0x100,0x100);
+        puVar3[1] = uVar11;
+        uVar11 = uVar11 + 0x100;
         puVar3 = puVar3 + 2;
-        pvVar11 = (void *)((int)pvVar11 + 0x100U);
-        dVar14 = extraout_f1_00;
+        uVar10 = uVar10 + 0x100;
+        dVar12 = extraout_f1_00;
       }
       iVar6 = (int)puVar3 - (int)puVar9 >> 2;
       if (((*(char *)(param_1 + 0x4e18) == '\0') ||
-          (iVar6 = ((int (*)())_gleClipLinesPlane)(param_1,puVar9,iVar6,dVar14), iVar6 != 0)) &&
+          (iVar6 = ((int (*)())_gleClipLinesPlane)(param_1,puVar9,iVar6,dVar12), iVar6 != 0)) &&
          (((uVar5 & 0xff) == 0 ||
           (iVar6 = ((int (*)())_gleClipLines)(param_1,puVar9,iVar6,uVar5 & 0xff), iVar6 != 0)))) {
         _gleSelectLinesPtr(param_1,puVar9,iVar6);
@@ -2268,7 +2258,7 @@ LAB_000dad98:
       goto LAB_000dad94;
     }
     if (param_5 == 0x14ff) {
-      piVar4 = _malloc(param_4 << 2);
+      piVar4 = (int *)_malloc(param_4 << 2);
       if (piVar4 != (int *)0x0) {
         if (param_3 < param_3 + param_4) {
           iVar1 = (param_3 + param_4) - param_3;
@@ -2402,7 +2392,7 @@ LAB_000db024:
     }
     if (param_5 != 0x14ff) goto LAB_000db014;
     param_5 = 0x1405;
-    pdVar6 = _malloc(param_4 << 2);
+    pdVar6 = (dword *)_malloc(param_4 << 2);
     if (pdVar6 == (dword *)0x0) {
       if (param_1[0x1d5d] != 0) {
         return (dword *)0;

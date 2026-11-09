@@ -1220,9 +1220,13 @@ int _glDrawPixels_Comp(param_1, param_2, param_3, param_4, param_5, param_6)
   int iVar2;
   int iVar3;
   undefined4 *puVar4;
-  int iVar5;
-  int iVar6;
-  double dVar7;
+  undefined4 *puVar5;
+  undefined4 *puVar6;
+  undefined1 *puVar7;
+  int *piVar8;
+  int iVar9;
+  int iVar10;
+  double dVar11;
   int local_c0;
   undefined4 local_bc;
   undefined4 local_b8;
@@ -1246,14 +1250,18 @@ int _glDrawPixels_Comp(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 local_38;
   undefined4 local_34 [2];
   
-  iVar6 = *(int *)(param_1 + 0x4a6c);
-  if (iVar6 == 0) {
+  iVar10 = *(int *)(param_1 + 0x4a6c);
+  if (iVar10 == 0) {
 LAB_00063c10:
+    iVar9 = param_1 + 0x31cc;
+    puVar7 = auStack_40;
+    piVar8 = &local_3c;
+    iVar10 = param_3;
     _glePixelPackSettings
-              (param_1,param_4,param_5,param_2,param_3,param_1 + 0x31cc,auStack_40,&local_3c,
-               &local_50,auStack_4c,auStack_48,auStack_44);
-    iVar6 = _gleRowBytes(param_4,param_5,param_2);
-    uVar1 = iVar6 * param_3 + 3U & 0xfffffffc;
+              (param_1,param_4,param_5,param_2,param_3,iVar9,puVar7,piVar8,&local_50,auStack_4c,
+               auStack_48,auStack_44);
+    iVar2 = _gleRowBytes(param_4,param_5,param_2);
+    uVar1 = iVar2 * param_3 + 3U & 0xfffffffc;
     puVar4 = (undefined4 *)_gleAddListItem(param_1,PTR__glDrawPixels_ListExec_001100a8,uVar1 + 0x14)
     ;
     iVar3 = 0;
@@ -1264,10 +1272,12 @@ LAB_00063c10:
       puVar4[2] = param_4;
       puVar4[3] = param_5;
       if ((*(uint *)(param_1 + 0x31e4) & 0xffff0000) == 0) {
-        iVar3 = _gleCopy(param_6 + local_3c,puVar4 + 5,iVar6,param_3,local_50,iVar6);
+        iVar3 = _gleCopy(param_6 + local_3c,puVar4 + 5,iVar2,param_3,local_50,iVar2);
       }
       else {
-        _glgConvertType(param_4,param_5,&local_38,local_34);
+        puVar5 = &local_38;
+        puVar6 = local_34;
+        _glgConvertType(param_4,param_5,puVar5,puVar6,iVar10,iVar9,puVar7,piVar8);
         local_bc = local_50;
         local_a8 = local_38;
         local_a4 = local_34[0];
@@ -1282,19 +1292,19 @@ LAB_00063c10:
         }
         local_c0 = param_6 + local_3c;
         local_b0 = puVar4 + 5;
-        local_ac = iVar6;
+        local_ac = iVar2;
         local_94 = param_2;
         local_90 = param_3;
-        iVar3 = _glgProcessPixels(0,&local_c0);
+        iVar3 = _glgProcessPixels(0,&local_c0,puVar5,puVar6,iVar10,iVar9,local_34[0],local_38);
       }
     }
   }
   else {
     iVar2 = _gleOffsetLimitImage(param_1 + 0x31cc,param_2,param_3,param_4,param_5,param_6);
-    iVar5 = *(int *)(iVar6 + 0x38);
-    dVar7 = (double)((double (*)())_gleBytesPerElement)(param_5);
-    iVar3 = (int)dVar7;
-    if (iVar2 <= iVar5) {
+    iVar9 = *(int *)(iVar10 + 0x38);
+    dVar11 = (double)((double (*)())_gleBytesPerElement)(param_5);
+    iVar3 = (int)dVar11;
+    if (iVar2 <= iVar9) {
       if (iVar3 == 0) {
         iVar3 = _glePixelBytes(param_4,param_5);
       }
@@ -1303,7 +1313,7 @@ LAB_00063c10:
         if ((iVar3 != 0) && (*(int *)(iVar3 + 0x40) != 0)) {
           _gleSynchronizePluginBuffer(param_1,iVar3 + 0x10);
         }
-        param_6 = param_6 + *(int *)(iVar6 + 0x30);
+        param_6 = param_6 + *(int *)(iVar10 + 0x30);
         goto LAB_00063c10;
       }
     }

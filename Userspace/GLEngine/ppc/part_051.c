@@ -508,7 +508,7 @@ int _gleClipPointsPlane(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000eab28 @ 0xeab28 (724 bytes) */
+/* FUN_000eab28 @ 0xeab28 (700 bytes) */
 int FUN_000eab28(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
@@ -705,8 +705,8 @@ int _gleSelectPointsFunc(param_1)
   return;
 }
 
-/* FUN_000eb1e4 @ 0xeb1e4 (116 bytes) */
-double FUN_000eb1e4(undefined4 param_1,float *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,float *param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+/* _glePolyArea @ 0xeb1d8 (128 bytes) */
+double _glePolyArea(undefined4 param_1,float *param_2,int param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   float fVar1;
   float fVar2;
@@ -715,62 +715,64 @@ double FUN_000eb1e4(undefined4 param_1,float *param_2,undefined4 param_3,undefin
   float fVar5;
   float fVar6;
   float fVar7;
-  float *unaff_r2;
-  uint uVar8;
+  float *pfVar8;
+  uint uVar9;
   
+  pfVar8 = param_2 + 0x40;
   fVar1 = *param_2;
   fVar2 = param_2[1];
   fVar4 = fVar2;
   fVar3 = fVar1;
   fVar7 = FLOAT_00108e50;
-  if (param_7 < unaff_r2) {
-    uVar8 = (uint)((int)unaff_r2 + (0xff - (int)param_7)) >> 8;
+  if (pfVar8 < param_2 + param_3 * 0x40) {
+    uVar9 = (uint)((int)(param_2 + param_3 * 0x40) + (0xff - (int)pfVar8)) >> 8;
     fVar5 = fVar2;
     fVar6 = fVar1;
     do {
-      fVar3 = *param_7;
-      fVar4 = param_7[1];
-      param_7 = param_7 + 0x40;
+      fVar3 = *pfVar8;
+      fVar4 = pfVar8[1];
+      pfVar8 = pfVar8 + 0x40;
       fVar7 = fVar7 + ((fVar6 * fVar4 - fVar3 * fVar5));
-      uVar8 = uVar8 - 1;
+      uVar9 = uVar9 - 1;
       fVar5 = fVar4;
       fVar6 = fVar3;
-    } while (uVar8 != 0);
+    } while (uVar9 != 0);
   }
   return (double)(fVar7 + ((fVar3 * fVar2 - fVar1 * fVar4)));
 }
 
-/* FUN_000eb264 @ 0xeb264 (124 bytes) */
-double FUN_000eb264(undefined4 param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 *param_7)
+/* _glePolyAreaPtr @ 0xeb258 (136 bytes) */
+double _glePolyAreaPtr(undefined4 param_1,undefined4 *param_2,int param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7)
 {
   float fVar1;
   float fVar2;
   float fVar3;
   float fVar4;
   float fVar5;
-  undefined4 *unaff_r2;
   float *pfVar6;
   float *pfVar7;
-  uint uVar8;
+  undefined4 *puVar8;
+  uint uVar9;
   
+  puVar8 = param_2 + 1;
   pfVar7 = (float *)*param_2;
   fVar1 = *pfVar7;
   fVar2 = pfVar7[1];
   fVar3 = FLOAT_00108e50;
-  if (param_7 < unaff_r2) {
-    uVar8 = (uint)((int)unaff_r2 + (3 - (int)param_7)) >> 2;
+  if (puVar8 < param_2 + param_3) {
+    uVar9 = (uint)((int)(param_2 + param_3) + (3 - (int)puVar8)) >> 2;
     fVar4 = fVar1;
     fVar5 = fVar2;
     do {
-      pfVar6 = (float *)*param_7;
-      param_7 = param_7 + 1;
+      pfVar6 = (float *)*puVar8;
+      puVar8 = puVar8 + 1;
       fVar1 = *pfVar6;
       fVar2 = pfVar6[1];
       fVar3 = fVar3 + ((fVar4 * fVar2 - fVar1 * fVar5));
-      uVar8 = uVar8 - 1;
+      uVar9 = uVar9 - 1;
       fVar4 = fVar1;
       fVar5 = fVar2;
-    } while (uVar8 != 0);
+    } while (uVar9 != 0);
   }
   return (double)(fVar3 + ((fVar1 * pfVar7[1] - *pfVar7 * fVar2)));
 }

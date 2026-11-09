@@ -264,7 +264,7 @@ int _glBindVertexArrayEXT_Exec(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
-  pthread_mutex_t *ppVar1;
+  int iVar1;
   
   if (-1 < *(short *)(param_1 + 0x4a10)) {
     if (*(int *)(param_1 + 0x7574) == 0) {
@@ -276,10 +276,10 @@ int _glBindVertexArrayEXT_Exec(param_1, param_2)
     _gleBindVertexArray(param_1,param_2);
     return;
   }
-  ppVar1 = (pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028);
-  _pthread_mutex_lock(ppVar1);
+  iVar1 = *(int *)(param_1 + 0x5148) + 0x8028;
+  _pthread_mutex_lock(iVar1);
   _gleBindVertexArray(param_1,param_2);
-  _pthread_mutex_unlock(ppVar1);
+  _pthread_mutex_unlock(iVar1);
   return;
 }
 
@@ -328,7 +328,7 @@ int _glDeleteVertexArraysEXT_Exec(param_1, param_2, param_3)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (-1 < param_2) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (0 < param_2) {
         do {
@@ -346,7 +346,7 @@ int _glDeleteVertexArraysEXT_Exec(param_1, param_2, param_3)
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       return;
     }
     if (*(int *)(param_1 + 0x7574) != 0) {
@@ -379,12 +379,12 @@ int _glGenVertexArraysEXT_Exec(param_1, param_2, param_3)
     if (-1 < param_2) {
       iVar4 = *(int *)(param_1 + 0x5148);
       if (*(char *)(iVar4 + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(iVar4 + 0x8028));
+        _pthread_mutex_lock(iVar4 + 0x8028);
         iVar4 = *(int *)(param_1 + 0x5148);
       }
       iVar4 = _gleGenHashNames(iVar4 + 0x5014,param_2);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (iVar4 == 0) {
         return;
@@ -428,12 +428,12 @@ int _glIsVertexArrayEXT_Exec(param_1, param_2)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar1 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar1 + 0x8028));
+      _pthread_mutex_lock(iVar1 + 0x8028);
       iVar1 = *(int *)(param_1 + 0x5148);
     }
     iVar1 = _gleLookupHashObject(iVar1 + 0x5014,param_2);
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
     bVar2 = iVar1 != 0;
   }

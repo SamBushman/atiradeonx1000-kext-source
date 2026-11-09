@@ -1618,10 +1618,15 @@ int _glGetColorTable_Exec(param_1, param_2, param_3, param_4, param_5)
   int iVar4;
   int iVar5;
   int iVar6;
-  char cVar7;
-  int iVar8;
-  int iVar9;
-  double dVar10;
+  undefined4 *puVar7;
+  undefined4 *puVar8;
+  uint uVar9;
+  uint uVar10;
+  undefined1 *puVar11;
+  int *piVar12;
+  int iVar13;
+  int iVar14;
+  double dVar15;
   undefined4 local_d0;
   undefined4 local_cc;
   undefined4 local_c8;
@@ -1659,8 +1664,8 @@ LAB_000612c4:
             if (!bVar1) goto LAB_00061354;
           }
 LAB_000612e0:
-          iVar8 = *(int *)(param_1 + 0x4a68);
-          if (iVar8 == 0) {
+          iVar13 = *(int *)(param_1 + 0x4a68);
+          if (iVar13 == 0) {
 LAB_0006138c:
             bVar2 = *(byte *)(iVar4 + 0xb7);
             if ((bVar2 & 0x20) == 0) {
@@ -1675,27 +1680,31 @@ LAB_0006138c:
               _gleUploadPluginTextureLevel
                         (param_1,iVar4,iVar4 + 0xac,0,0xffffffff,(uint)*(byte *)(param_1 + 0x85a8));
             }
+            uVar9 = (uint)*(ushort *)(iVar4 + 0xb2);
+            puVar11 = auStack_50;
+            piVar12 = &local_4c;
             _glePixelPackSettings
-                      (param_1,param_3,param_4,(uint)*(ushort *)(iVar4 + 0xb0),
-                       (uint)*(ushort *)(iVar4 + 0xb2),param_1 + 0x31b0,auStack_50,&local_4c,
-                       &local_60,auStack_5c,auStack_58,auStack_54);
+                      (param_1,param_3,param_4,(uint)*(ushort *)(iVar4 + 0xb0),uVar9,
+                       param_1 + 0x31b0,puVar11,piVar12,&local_60,auStack_5c,auStack_58,auStack_54);
             if (((((*(byte *)(iVar4 + 0xb7) & 1) == 0) ||
                  (param_5 + local_4c != *(int *)(iVar4 + 0xc0))) ||
                 (param_3 != *(ushort *)(iVar4 + 0xbc))) || (param_4 != *(ushort *)(iVar4 + 0xbe))) {
-              cVar7 = *(char *)(param_1 + 0x31c8);
+              uVar10 = (uint)*(byte *)(param_1 + 0x31c8);
             }
             else {
-              cVar7 = *(char *)(param_1 + 0x31c8);
-              if (cVar7 == '\0') {
+              uVar10 = (uint)*(byte *)(param_1 + 0x31c8);
+              if (uVar10 == 0) {
                 return;
               }
             }
-            local_ac = (uint)(cVar7 != '\0');
+            local_ac = (uint)(uVar10 != 0);
             uVar3 = _gleRowBytes((uint)*(ushort *)(iVar4 + 0xbc),(uint)*(ushort *)(iVar4 + 0xbe),
                                  (uint)*(ushort *)(iVar4 + 0xb8));
-            _glgConvertType(*(undefined2 *)(iVar4 + 0xbc),*(undefined2 *)(iVar4 + 0xbe),&local_48,
-                            &local_44);
-            _glgConvertType(param_3,param_4,&local_40,local_3c);
+            _glgConvertType((uint)*(ushort *)(iVar4 + 0xbc),(uint)*(ushort *)(iVar4 + 0xbe),
+                            &local_48,&local_44,uVar9,uVar10,puVar11,piVar12);
+            puVar7 = &local_40;
+            puVar8 = local_3c;
+            _glgConvertType(param_3,param_4,puVar7,puVar8,uVar9,uVar10,puVar11,piVar12);
             local_c8 = local_48;
             local_c4 = local_44;
             local_bc = local_60;
@@ -1709,24 +1718,25 @@ LAB_0006138c:
             local_d0 = *(undefined4 *)(iVar4 + 0xc0);
             local_64 = 0;
             local_cc = uVar3;
-            _glgProcessPixels(param_1 + 0x31a8,&local_d0);
+            _glgProcessPixels(param_1 + 0x31a8,&local_d0,puVar7,puVar8,uVar9,uVar10,local_a0,piVar12
+                             );
             return;
           }
           iVar5 = _gleOffsetLimitImage
                             (param_1 + 0x31b0,(uint)*(ushort *)(iVar4 + 0xb0),
                              (uint)*(ushort *)(iVar4 + 0xb2),param_3,param_4,param_5);
-          iVar9 = *(int *)(iVar8 + 0x38);
-          dVar10 = (double)((double (*)())_gleBytesPerElement)(param_4);
-          iVar6 = (int)dVar10;
-          if (iVar5 <= iVar9) {
+          iVar14 = *(int *)(iVar13 + 0x38);
+          dVar15 = (double)((double (*)())_gleBytesPerElement)(param_4);
+          iVar6 = (int)dVar15;
+          if (iVar5 <= iVar14) {
             if (iVar6 == 0) {
               iVar6 = _glePixelBytes(param_3,param_4);
             }
             if (param_5 == (param_5 / iVar6) * iVar6) {
-              if (*(int *)(iVar8 + 0x40) != 0) {
-                _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
+              if (*(int *)(iVar13 + 0x40) != 0) {
+                _gleSynchronizePluginBuffer(param_1,iVar13 + 0x10);
               }
-              param_5 = param_5 + *(int *)(iVar8 + 0x30);
+              param_5 = param_5 + *(int *)(iVar13 + 0x30);
               goto LAB_0006138c;
             }
           }

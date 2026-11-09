@@ -660,7 +660,7 @@ int _gleCreateFenceObject(param_1)
   undefined4 *puVar3;
   int iVar4;
   
-  puVar3 = _malloc(0x30);
+  puVar3 = (undefined4 *)_malloc(0x30);
   puVar1 = PTR__gleFreeFenceObject_00110e1c;
   puVar3[2] = 1;
   puVar3[3] = puVar1;
@@ -834,7 +834,7 @@ int _glPrioritizeTextures_Exec(param_1, param_2, param_3, param_4)
       }
       iVar5 = *(int *)(param_1 + 0x5148);
       if (*(char *)(iVar5 + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(iVar5 + 0x8028));
+        _pthread_mutex_lock(iVar5 + 0x8028);
         iVar5 = *(int *)(param_1 + 0x5148);
       }
       fVar2 = FLOAT_00108e54;
@@ -865,7 +865,7 @@ int _glPrioritizeTextures_Exec(param_1, param_2, param_3, param_4)
       if (*(char *)(iVar5 + 0x8024) == '\0') {
         return;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(iVar5 + 0x8028));
+      _pthread_mutex_unlock(iVar5 + 0x8028);
       return;
     }
     if (*(int *)(param_1 + 0x7574) != 0) {
@@ -924,7 +924,7 @@ LAB_0005041c:
       if (puVar1 == PTR__gle_default_pix_map_i_00112044) {
         puVar1 = (undefined *)0x0;
       }
-      puVar1 = _realloc(puVar1,param_3 << 2);
+      puVar1 = (undefined *)_realloc(puVar1,param_3 << 2);
       if (puVar1 == (undefined *)0x0) goto LAB_0005041c;
       *param_2 = puVar1;
       *param_4 = param_3;
@@ -966,7 +966,7 @@ LAB_0005050c:
       if (puVar2 == PTR__gle_default_pix_map_f_00112040) {
         puVar2 = (undefined *)0x0;
       }
-      puVar2 = _realloc(puVar2,param_3 << 2);
+      puVar2 = (undefined *)_realloc(puVar2,param_3 << 2);
       if (puVar2 == (undefined *)0x0) goto LAB_0005050c;
       *param_2 = puVar2;
       *param_4 = param_3;
@@ -986,9 +986,9 @@ LAB_0005050c:
 /* _gleFreeFenceObject @ 0x50530 (52 bytes) */
 int _gleFreeFenceObject(param_1, param_2)
   undefined4 param_1;
-  void *param_2;
+  int param_2;
 {
-  ((int (*)())_gleDestroyPluginFence)(param_1,(int)param_2 + 0x10);
+  ((int (*)())_gleDestroyPluginFence)(param_1,param_2 + 0x10);
   _free(param_2);
   return;
 }

@@ -700,12 +700,12 @@ int _glGenTextures_Exec(param_1, param_2, param_3)
     if (-1 < param_2) {
       iVar4 = *(int *)(param_1 + 0x5148);
       if (*(char *)(iVar4 + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(iVar4 + 0x8028));
+        _pthread_mutex_lock(iVar4 + 0x8028);
         iVar4 = *(int *)(param_1 + 0x5148);
       }
       iVar4 = _gleGenHashNames(iVar4 + 0x2008,param_2);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (iVar4 == 0) {
         return;
@@ -902,7 +902,7 @@ int _glBindTexture_Exec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   undefined4 uVar1;
-  pthread_mutex_t *ppVar2;
+  int iVar2;
   
   if (-1 < *(short *)(param_1 + 0x4a10)) {
     if (*(int *)(param_1 + 0x7574) != 0) {
@@ -953,10 +953,10 @@ LAB_000179b4:
     ((int (*)())_gleBindTexture)(param_1,uVar1,param_3,*(undefined4 *)(param_1 + 0x53d4));
     return;
   }
-  ppVar2 = (pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028);
-  _pthread_mutex_lock(ppVar2);
+  iVar2 = *(int *)(param_1 + 0x5148) + 0x8028;
+  _pthread_mutex_lock(iVar2);
   ((int (*)())_gleBindTexture)(param_1,uVar1,param_3,*(undefined4 *)(param_1 + 0x53d4));
-  _pthread_mutex_unlock(ppVar2);
+  _pthread_mutex_unlock(iVar2);
   return;
 }
 
@@ -1081,54 +1081,55 @@ int _gleAddHashName(param_1, param_2)
   undefined4 uVar1;
   int iVar2;
   uint uVar3;
-  int iVar4;
-  undefined4 *puVar5;
-  undefined4 *puVar6;
+  undefined4 *puVar4;
+  int iVar5;
+  int *piVar6;
+  int *piVar7;
   
-  puVar5 = *(undefined4 **)(param_1 + 0x1000);
-  if ((puVar5 == (undefined4 *)0x0) || (uVar3 = puVar5[1], param_2 < uVar3 - 1)) {
-    puVar5 = _malloc(0xc);
+  piVar6 = *(int **)(param_1 + 0x1000);
+  if ((piVar6 == (int *)0x0) || (uVar3 = piVar6[1], param_2 < uVar3 - 1)) {
+    puVar4 = (undefined4 *)_malloc(0xc);
     uVar1 = *(undefined4 *)(param_1 + 0x1000);
-    puVar5[1] = param_2;
-    *puVar5 = uVar1;
-    puVar5[2] = 1;
-    *(undefined4 **)(param_1 + 0x1000) = puVar5;
+    puVar4[1] = param_2;
+    *puVar4 = uVar1;
+    puVar4[2] = 1;
+    *(undefined4 **)(param_1 + 0x1000) = puVar4;
   }
   else {
     do {
-      puVar6 = puVar5;
-      iVar4 = puVar6[2];
+      piVar7 = piVar6;
+      iVar5 = piVar7[2];
       if (param_2 == uVar3 - 1) {
-        puVar6[1] = param_2;
-        puVar6[2] = iVar4 + 1;
+        piVar7[1] = param_2;
+        piVar7[2] = iVar5 + 1;
         return 1;
       }
-      if ((uVar3 <= param_2) && (param_2 < uVar3 + iVar4)) {
+      if ((uVar3 <= param_2) && (param_2 < uVar3 + iVar5)) {
         return 0;
       }
-      if (param_2 == uVar3 + iVar4) {
-        puVar5 = (undefined4 *)*puVar6;
-        puVar6[2] = iVar4 + 1;
-        if (puVar5 == (undefined4 *)0x0) {
+      if (param_2 == uVar3 + iVar5) {
+        piVar6 = (int *)*piVar7;
+        piVar7[2] = iVar5 + 1;
+        if (piVar6 == (int *)0x0) {
           return 1;
         }
-        if (param_2 + 1 != puVar5[1]) {
+        if (param_2 + 1 != piVar6[1]) {
           return 1;
         }
-        iVar2 = puVar5[2];
-        *puVar6 = *puVar5;
-        puVar6[2] = iVar4 + 1 + iVar2;
-        _free(puVar5);
+        iVar2 = piVar6[2];
+        *piVar7 = *piVar6;
+        piVar7[2] = iVar5 + 1 + iVar2;
+        _free(piVar6);
         return 1;
       }
-      puVar5 = (undefined4 *)*puVar6;
-    } while ((puVar5 != (undefined4 *)0x0) && (uVar3 = puVar5[1], uVar3 - 1 <= param_2));
-    puVar5 = _malloc(0xc);
-    uVar1 = *puVar6;
-    puVar5[1] = param_2;
-    *puVar5 = uVar1;
-    puVar5[2] = 1;
-    *puVar6 = puVar5;
+      piVar6 = (int *)*piVar7;
+    } while ((piVar6 != (int *)0x0) && (uVar3 = piVar6[1], uVar3 - 1 <= param_2));
+    piVar6 = (int *)_malloc(0xc);
+    iVar5 = *piVar7;
+    piVar6[1] = param_2;
+    *piVar6 = iVar5;
+    piVar6[2] = 1;
+    *piVar7 = (int)piVar6;
   }
   return 1;
 }
@@ -4780,8 +4781,8 @@ void _gleSetVertexSubmitFunc(int param_1,undefined4 param_2,undefined4 param_3,u
   return;
 }
 
-/* FUN_0001d2dc @ 0x1d2dc (2464 bytes) */
-int FUN_0001d2dc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* _gleBuildVertexFuncNO @ 0x1d2d4 (2472 bytes) */
+int _gleBuildVertexFuncNO(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   int param_2;
   uint *param_3;
@@ -4818,12 +4819,11 @@ int FUN_0001d2dc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar25;
   int iVar26;
   uint uVar27;
-  byte in_cr7;
-  uint local_d0;
-  uint local_cc [33];
+  uint uStack_d0;
+  uint auStack_cc [33];
   
-  if ((bool)(in_cr7 >> 1 & 1)) {
-    _gleSetFunctionIDToList(param_1,*(int *)(param_1 + 0x4a60) + 0x30,&local_d0);
+  if (param_2 == 3) {
+    _gleSetFunctionIDToList(param_1,*(int *)(param_1 + 0x4a60) + 0x30,&uStack_d0);
   }
   else {
     if (((*(char *)(param_1 + 0x7580) == '\0') || (*(int *)(param_1 + 0x4e1c) != 0x1c00)) ||
@@ -4831,7 +4831,7 @@ int FUN_0001d2dc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
       if (*(char *)(param_1 + 0x4664) == '\0') {
         iVar26 = *(int *)(param_1 + 0x5434);
         if (iVar26 == 0) {
-          param_3 = &local_d0;
+          param_3 = &uStack_d0;
           _gleSetFuncOutputDesc(param_1,param_2,param_3);
           goto LAB_0001d42c;
         }
@@ -4851,7 +4851,7 @@ int FUN_0001d2dc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
         uVar14 = *(undefined4 *)(uVar25 + 0x20);
         uVar25 = uVar25 + *(int *)(uVar25 + 0x24) * 8;
       }
-      param_3 = &local_d0;
+      param_3 = &uStack_d0;
       param_4 = (uint)(*(int *)(param_1 + 0x34d0) != 0x1b021b02);
       _gleVPSetFuncOutputDesc(uVar25,uVar14,param_3,param_4);
     }
@@ -4862,7 +4862,7 @@ int FUN_0001d2dc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
       }
       iVar26 = ((int)(*pbVar16 + 1) >> 1) + 1;
       if (iVar26 != 0) {
-        param_7 = &local_d0;
+        param_7 = &uStack_d0;
         iVar23 = 0;
         do {
           param_7[iVar23] = *(uint *)(pbVar16 + iVar23 * 4);
@@ -4873,16 +4873,16 @@ int FUN_0001d2dc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     }
 LAB_0001d42c:
     if (param_2 == 0) {
-      ((int (*)())_gleSetFunctionIDFromCurrent)(param_1,&local_d0,param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())_gleSetFunctionIDFromCurrent)(param_1,&uStack_d0,param_3,param_4,param_5,param_6,param_7,param_8);
     }
     else if (*(int *)(param_1 + 0x48ec) == 0) {
-      _gleSetFunctionIDFromArray(param_1,*(int *)(param_1 + 0x4a60) + 0x30,&local_d0);
+      _gleSetFunctionIDFromArray(param_1,*(int *)(param_1 + 0x4a60) + 0x30,&uStack_d0);
     }
     else {
-      _gleSetFunctionIDFromList(param_1,*(int *)(param_1 + 0x48ec),&local_d0);
+      _gleSetFunctionIDFromList(param_1,*(int *)(param_1 + 0x48ec),&uStack_d0);
     }
   }
-  uVar25 = local_d0 >> 0x18;
+  uVar25 = uStack_d0 >> 0x18;
   switch(param_2) {
   case 0:
     piVar17 = (int *)(param_1 + 0x48a0);
@@ -4904,9 +4904,9 @@ LAB_0001d42c:
   piVar22 = piVar21;
   do {
     iVar23 = 0;
-    if ((iVar26 != 0) && (local_d0 == piVar22[3])) {
+    if ((iVar26 != 0) && (uStack_d0 == piVar22[3])) {
       puVar15 = (uint *)(piVar22 + 3);
-      puVar8 = &local_d0;
+      puVar8 = &uStack_d0;
       do {
         iVar23 = iVar23 + 1;
         if (iVar26 <= iVar23) break;
@@ -4924,7 +4924,7 @@ LAB_0001d42c:
   iVar23 = ((int (*)())_gleCreateFuncCacheElem)(piVar22,0xf0);
   if (iVar26 != 0) {
     puVar8 = (uint *)(iVar23 + 0xc);
-    puVar15 = &local_d0;
+    puVar15 = &uStack_d0;
     do {
       uVar6 = *puVar15;
       puVar15 = puVar15 + 1;
@@ -4946,9 +4946,9 @@ LAB_0001d42c:
   iVar26 = iVar23 + iVar26 * 4;
   puVar8 = (uint *)(iVar26 + 0x20);
   bVar1 = param_2 != 4;
-  uVar9 = ((int (*)())_gleCalculateOptions)(&local_d0,uVar25);
+  uVar9 = ((int (*)())_gleCalculateOptions)(&uStack_d0,uVar25);
   *(uint **)(iVar23 + 8) = puVar8;
-  uVar6 = local_d0 & 0xff;
+  uVar6 = uStack_d0 & 0xff;
   uVar24 = uVar6 << 2;
   if (!bVar1) {
     *(undefined4 *)(iVar26 + 0x20) = 0x7c0802a6;
@@ -4961,7 +4961,7 @@ LAB_0001d42c:
     *(undefined4 *)(iVar26 + 0x38) = 0x80a34858;
   }
   puVar15 = puVar8;
-  switch(local_d0 >> 0x10 & 0xf) {
+  switch(uStack_d0 >> 0x10 & 0xf) {
   default:
     __mh_bundle_header.magic = 0;
     break;
@@ -5014,8 +5014,8 @@ code_r0x0001d73c:
   case 0xe:
     break;
   }
-  if ((local_d0 & 0x400000) != 0) {
-    uVar24 = local_d0 >> 6 & 0x3fc;
+  if ((uStack_d0 & 0x400000) != 0) {
+    uVar24 = uStack_d0 >> 6 & 0x3fc;
     if ((*(uint *)PTR__gle_processor_0011204c & 0x40) == 0) {
       *puVar15 = 0x3900001f;
       puVar15[1] = 0x7c0547ec;
@@ -5047,8 +5047,8 @@ code_r0x0001d73c:
   }
   puVar10 = (uint *)((int (*)())_gleLoadForOptionsNO)(puVar15,uVar9);
   if (uVar25 != 0) {
-    puVar20 = &local_d0;
-    puVar19 = (ushort *)((int)local_cc + uVar25 * 2);
+    puVar20 = &uStack_d0;
+    puVar19 = (ushort *)((int)auStack_cc + uVar25 * 2);
     uVar24 = 0;
     puVar11 = puVar10;
     do {
@@ -5120,7 +5120,7 @@ LAB_0001dcc8:
               uVar27 = 0;
             }
             else {
-              uVar27 = local_d0 >> 0x13 & 4;
+              uVar27 = uStack_d0 >> 0x13 & 4;
               uVar13 = 6;
               puVar11 = (uint *)((int (*)())_gleLoadDataElementFromCtxNO)(puVar11,iVar26,uVar27,iVar12);
             }
@@ -5137,7 +5137,7 @@ LAB_0001dcc8:
               puVar11 = (uint *)_gleSetArrayLoadAddressNO(puVar11,puVar15,uVar7 * 4 + 0x48f8,uVar27)
               ;
               uVar14 = 0;
-              if (((local_d0 & 0x800000) != 0) && ((uVar3 & 3) == 0)) {
+              if (((uStack_d0 & 0x800000) != 0) && ((uVar3 & 3) == 0)) {
                 uVar14 = 1;
               }
             }
@@ -5147,18 +5147,18 @@ LAB_0001dcc8:
             if (((((1 < uVar13) && (uVar13 != 8)) && (uVar13 != 9)) || (uVar27 = 1, uVar4 != 1)) &&
                (((((1 < uVar13 - 2 && (uVar13 != 10)) && (uVar13 != 0xb)) ||
                  (uVar27 = 2, uVar4 != 2)) &&
-                ((uVar13 != 6 || (uVar27 = 4, (local_d0 & 0x200000) == 0)))))) {
+                ((uVar13 != 6 || (uVar27 = 4, (uStack_d0 & 0x200000) == 0)))))) {
               uVar27 = 0;
             }
             puVar11 = (uint *)_gleLoadDataElementNO(puVar11,iVar26,uVar13,uVar27,uVar14);
           }
           uVar2 = *(ushort *)(puVar20 + 1);
-          uVar7 = local_d0;
+          uVar7 = uStack_d0;
         }
         else {
           if (0x29 < uVar7) {
             if (uVar7 < 0x2c) {
-              if ((local_d0 >> 0x10 & 0xf) == 6) {
+              if ((uStack_d0 >> 0x10 & 0xf) == 6) {
                 *puVar11 = 0x39200001;
                 puVar11[1] = (uVar7 - 0x1f) * 0x10000 | 0x912001e0;
                 puVar11 = puVar11 + 2;
@@ -5180,10 +5180,10 @@ LAB_0001dcc8:
              && (uVar14 = 0x30, 0x27 < uVar7)) {
             uVar14 = 0x40;
           }
-          uVar27 = local_d0 >> 0x13 & 4;
+          uVar27 = uStack_d0 >> 0x13 & 4;
           puVar11 = (uint *)_gleLoadDataElementFromMatNO(puVar11,iVar26,uVar27,uVar14,uVar7 & 1);
           uVar2 = *(ushort *)(puVar20 + 1);
-          uVar7 = local_d0 >> 0x15 & 1;
+          uVar7 = uStack_d0 >> 0x15 & 1;
           uVar13 = 6;
         }
         puVar10 = (uint *)((int (*)())_gleStoreDataElementNO)(puVar11,(uVar2 & 0x3f) << 2,iVar26,uVar13,uVar27,iVar18,uVar7);
@@ -5198,13 +5198,13 @@ LAB_0001dcd0:
       puVar11 = puVar10;
     } while (uVar25 != 0);
   }
-  uVar25 = local_d0 >> 6 & 0x3fc;
+  uVar25 = uStack_d0 >> 6 & 0x3fc;
   if (bVar1) {
     if (param_2 == 1) {
-      puVar10 = (uint *)_gleArrayIncAndStoreVertexLoop(puVar10,puVar8,uVar25,local_d0 >> 0x10 & 0xf)
-      ;
+      puVar10 = (uint *)_gleArrayIncAndStoreVertexLoop
+                                  (puVar10,puVar8,uVar25,uStack_d0 >> 0x10 & 0xf);
     }
-    else if ((local_d0 >> 0x10 & 0xf) == 6) {
+    else if ((uStack_d0 >> 0x10 & 0xf) == 6) {
       *puVar10 = uVar25 | 0x39250000;
       puVar10[1] = 0x91234858;
       puVar10 = puVar10 + 2;

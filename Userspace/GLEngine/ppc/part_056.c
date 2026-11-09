@@ -434,7 +434,7 @@ int _gliSwitchPlugin(param_1, param_2)
   uVar3 = *(undefined4 *)(iVar4 + 0x85ac);
   *(int *)(param_1 + 0x468c) = iVar4 + 0x85b0;
   *(undefined4 *)(param_1 + 0x4688) = uVar3;
-  _memcpy((void *)(param_1 + 0x4754),(void *)(*(int *)(iVar4 + 0x8884) + 0x114),0xf4);
+  _memcpy(param_1 + 0x4754,*(int *)(iVar4 + 0x8884) + 0x114,0xf4);
   *(undefined4 *)(param_1 + 800) = 0xffffffff;
   *(undefined4 *)(param_1 + 0x310) = 0xffffffff;
   *(uint *)(param_1 + 0x314) = *(uint *)(param_1 + 0x314) | 0x3ffffff;

@@ -1095,8 +1095,8 @@ int _gleAllocateTextureLevel(param_1, param_2, param_3)
 {
   undefined *puVar1;
   undefined4 uVar2;
-  size_t size;
-  void *local_20 [4];
+  unsigned char size;
+  unsigned char local_20 [4];
   
   size = ((int (*)())_gleTextureLevelBytes)(param_1,param_3);
   puVar1 = PTR_00112034;
@@ -1107,16 +1107,16 @@ int _gleAllocateTextureLevel(param_1, param_2, param_3)
     }
     else {
       *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) | 8;
-      _vm_allocate(*(unsigned char *)puVar1,(unsigned char *)local_20,size,1);
+      _vm_allocate(*(unsigned char *)puVar1,local_20,size,1);
     }
-    if (local_20[0] == (void *)0x0) {
+    if (local_20[0] == 0) {
       if (*(int *)(param_1 + 0x7574) == 0) {
         *(undefined4 *)(param_1 + 0x7574) = 0x505;
       }
       uVar2 = 0;
     }
     else {
-      *(void **)(param_3 + 0x14) = local_20[0];
+      *(unsigned char *)(param_3 + 0x14) = local_20[0];
       uVar2 = 1;
     }
   }
@@ -2256,8 +2256,8 @@ LAB_0004838c:
 
 /* _gleCopy @ 0x483a4 (212 bytes) */
 int _gleCopy(param_1, param_2, param_3, param_4, param_5, param_6)
-  void *param_1;
-  void *param_2;
+  int param_1;
+  int param_2;
   uint param_3;
   uint param_4;
   uint param_5;
@@ -2283,24 +2283,24 @@ int _gleCopy(param_1, param_2, param_3, param_4, param_5, param_6)
     for (iVar5 = (int)param_3 >> 2; iVar5 != 0; iVar5 = iVar5 + -1) {
       iVar1 = iVar3 * 4;
       iVar3 = iVar3 + 1;
-      *(undefined4 *)((int)param_2 + iVar1) = *(undefined4 *)((int)param_1 + iVar1);
+      *(undefined4 *)(param_2 + iVar1) = *(undefined4 *)(param_1 + iVar1);
     }
     if (uVar2 == 2) {
 LAB_00048444:
-      *(undefined1 *)((int)param_2 + (param_3 - 2)) = *(undefined1 *)((int)param_1 + (param_3 - 2));
+      *(undefined1 *)(param_2 + param_3 + -2) = *(undefined1 *)(param_1 + param_3 + -2);
 LAB_00048458:
-      *(undefined1 *)((int)param_2 + (param_3 - 1)) = *(undefined1 *)((int)param_1 + (param_3 - 1));
+      *(undefined1 *)(param_2 + param_3 + -1) = *(undefined1 *)(param_1 + param_3 + -1);
     }
     else if (uVar2 < 3) {
       if (uVar2 == 1) goto LAB_00048458;
     }
     else if (uVar2 == 3) {
-      *(undefined1 *)((int)param_2 + (param_3 - 3)) = *(undefined1 *)((int)param_1 + (param_3 - 3));
+      *(undefined1 *)(param_2 + param_3 + -3) = *(undefined1 *)(param_1 + param_3 + -3);
       goto LAB_00048444;
     }
     uVar4 = uVar4 + 1;
-    param_1 = (void *)((int)param_1 + param_5);
-    param_2 = (void *)((int)param_2 + param_6);
+    param_1 = param_1 + param_5;
+    param_2 = param_2 + param_6;
     if (param_4 <= uVar4) {
       return;
     }
@@ -2407,8 +2407,8 @@ void _glRotatef_Comp(int param_1,double fparam_1,double fparam_2,double fparam_3
     if (fparam_2 < dVar3) {
       fVar1 = FLOAT_00108eb0;
     }
-    dVar3 = (double)_sin();
-    dVar2 = (double)_cos((double)(float)(fparam_1 * (double)fVar1));
+    dVar3 = _sin((double)(float)(fparam_1 * (double)fVar1));
+    dVar2 = _cos((double)(float)(fparam_1 * (double)fVar1));
     ((void (*)())_glRotateX_Comp)(param_1,(double)(float)dVar3,(double)(float)dVar2);
     return;
   }
@@ -2417,8 +2417,8 @@ void _glRotatef_Comp(int param_1,double fparam_1,double fparam_2,double fparam_3
     if (fparam_3 < dVar3) {
       fVar1 = FLOAT_00108eb0;
     }
-    dVar3 = (double)_sin();
-    dVar2 = (double)_cos((double)(float)(fparam_1 * (double)fVar1));
+    dVar3 = _sin((double)(float)(fparam_1 * (double)fVar1));
+    dVar2 = _cos((double)(float)(fparam_1 * (double)fVar1));
     ((void (*)())_glRotateY_Comp)(param_1,(double)(float)dVar3,(double)(float)dVar2);
     return;
   }
@@ -2427,8 +2427,8 @@ void _glRotatef_Comp(int param_1,double fparam_1,double fparam_2,double fparam_3
     if (fparam_4 < dVar3) {
       fVar1 = FLOAT_00108eb0;
     }
-    dVar3 = (double)_sin();
-    dVar2 = (double)_cos((double)(float)(fparam_1 * (double)fVar1));
+    dVar3 = _sin((double)(float)(fparam_1 * (double)fVar1));
+    dVar2 = _cos((double)(float)(fparam_1 * (double)fVar1));
     ((void (*)())_glRotateZ_Comp)(param_1,(double)(float)dVar3,(double)(float)dVar2);
     return;
   }
@@ -2768,10 +2768,10 @@ int _gleAddAttribElem(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
-  undefined4 *puVar1;
+  int *piVar1;
   undefined4 *puVar2;
   
-  puVar2 = _malloc(0x2c48);
+  puVar2 = (undefined4 *)_malloc(0x2c48);
   if (puVar2 == (undefined4 *)0x0) {
     if (*(int *)(param_1 + 0x7574) == 0) {
       *(undefined4 *)(param_1 + 0x7574) = 0x505;
@@ -2780,9 +2780,9 @@ int _gleAddAttribElem(param_1, param_2)
   else {
     *puVar2 = param_2;
     ((int (*)())_gleGetAttrib)(param_1,param_2,puVar2 + 1);
-    puVar1 = *(undefined4 **)(param_1 + 0x50f8);
-    puVar2[0xb11] = *puVar1;
-    *puVar1 = puVar2;
+    piVar1 = *(int **)(param_1 + 0x50f8);
+    puVar2[0xb11] = *piVar1;
+    *piVar1 = (int)puVar2;
   }
   return;
 }
@@ -4413,7 +4413,7 @@ int _gleSetAttrib(param_1, param_2, param_3)
         do {
           *(undefined4 *)(iVar26 + 4) = *(undefined4 *)((int)param_3 + iVar8 + 0x710);
           if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-            _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+            _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
           }
           puVar25 = (undefined4 *)((int)param_3 + iVar8 + 0x524);
           iVar27 = 0;
@@ -4424,7 +4424,7 @@ int _gleSetAttrib(param_1, param_2, param_3)
             iVar27 = iVar23;
           } while (iVar23 < 5);
           if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-            _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+            _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
           }
           iVar27 = 5;
           piVar19 = (int *)(param_1 + iVar7 * 4 + 0x5154);
@@ -4728,24 +4728,24 @@ int _gleSetAttrib(param_1, param_2, param_3)
         } while (fVar9 != 0.0);
       }
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       pfVar11 = param_3 + 7;
       puVar14 = (undefined1 *)(param_1 + 0x4664);
       pfVar20 = param_3 + 0x809;
       iVar16 = 0;
       do {
-        iVar8 = iVar16 + 1;
-        iVar7 = _gleBindPipelineProgram(param_1, iVar16, *(unsigned int *)pfVar11);
+        iVar7 = iVar16 + 1;
+        uVar15 = _gleBindPipelineProgram(param_1, iVar16, *(unsigned int *)pfVar11);
         uVar6 = *(undefined1 *)pfVar20;
         pfVar11 = pfVar11 + 1;
         pfVar20 = (float *)((int)pfVar20 + 1);
         *puVar14 = uVar6;
         puVar14 = puVar14 + 8;
-        iVar16 = iVar8;
-      } while (iVar8 < 2);
+        iVar16 = iVar7;
+      } while (iVar7 < 2);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        iVar7 = _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        uVar15 = _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       pfVar20 = *(float **)(param_1 + 0x4668);
       iVar16 = 0x100;
@@ -4775,7 +4775,7 @@ int _gleSetAttrib(param_1, param_2, param_3)
       } while (iVar16 != 0);
       *(undefined1 *)(param_1 + 0x4661) = *(undefined1 *)((int)param_3 + 0xe);
       *(undefined1 *)(param_1 + 0x4660) = *(undefined1 *)((int)param_3 + 0xb);
-      return iVar7;
+      return uVar15;
     }
     if (param_2 < ((unsigned char *)0x00001001)) {
       if (param_2 != (undefined *)0x800) {
@@ -5050,7 +5050,7 @@ int _gleFreeTextureLevel(param_1, param_2, param_3)
   unsigned char size;
   
   if ((*(byte *)(param_3 + 0xb) & 8) == 0) {
-    _free(*(void **)(param_3 + 0x14));
+    _free(*(undefined4 *)(param_3 + 0x14));
   }
   else {
     size = ((int (*)())_gleTextureLevelBytes)(param_1,param_3);
@@ -5805,7 +5805,7 @@ int _gleDrawArraysOrElements_IMM_Exec(int param_1,uint param_2,undefined4 param_
   int *piVar13;
   short *psVar14;
   double extraout_f1;
-  undefined8 uVar15;
+  longlong lVar15;
   
   if (-1 < *(short *)(param_1 + 0x4a10)) {
 LAB_0004d920:
@@ -5958,9 +5958,9 @@ LAB_0004dc00:
       if (uVar5 == 0) goto LAB_0004dc00;
     }
     else {
-      uVar15 = ___ashldi3(0,0x1000000,uVar12);
-      if ((*(uint *)(param_6 + 800) & (uint)((ulonglong)uVar15 >> 0x20)) != 0 ||
-          (*(uint *)(param_6 + 0x324) & (uint)uVar15) != 0) {
+      lVar15 = ___ashldi3(0,0x1000000,uVar12);
+      if ((*(uint *)(param_6 + 800) & (uint)((ulonglong)lVar15 >> 0x20)) != 0 ||
+          (*(uint *)(param_6 + 0x324) & (uint)lVar15) != 0) {
         if (*psVar14 == 4) {
           uVar10 = 3;
         }
@@ -6002,7 +6002,7 @@ int _gleSetFunctionIDFromArray(param_1, param_2, param_3)
   uint uVar10;
   uint uVar11;
   uint uVar12;
-  undefined8 uVar13;
+  longlong lVar13;
   
   iVar7 = *(int *)(param_1 + 0x48dc);
   iVar5 = *(int *)(param_1 + 0x4674);
@@ -6026,8 +6026,8 @@ int _gleSetFunctionIDFromArray(param_1, param_2, param_3)
       uVar12 = 0;
       uVar3 = (uint)(uVar4 >> 10);
       if ((uVar3 == 0) || (uVar3 == 0x10)) {
-        uVar13 = ___ashldi3(0,1,uVar3 + 0x10);
-        if ((uVar10 & (uint)((ulonglong)uVar13 >> 0x20)) == 0 && (uVar11 & (uint)uVar13) == 0) {
+        lVar13 = ___ashldi3(0,1,uVar3 + 0x10);
+        if ((uVar10 & (uint)((ulonglong)lVar13 >> 0x20)) == 0 && (uVar11 & (uint)lVar13) == 0) {
           if ((uVar11 & 0x10000) == 0) {
             if ((uVar10 & 1) == 0) goto LAB_0004de9c;
             iVar7 = *(int *)(param_2 + 0x184);
@@ -6053,8 +6053,8 @@ LAB_0004de6c:
         }
       }
       else if (uVar3 < 0x20) {
-        uVar13 = ___ashldi3(0,1,uVar3 + 0x10);
-        if ((uVar10 & (uint)((ulonglong)uVar13 >> 0x20)) != 0 || (uVar11 & (uint)uVar13) != 0)
+        lVar13 = ___ashldi3(0,1,uVar3 + 0x10);
+        if ((uVar10 & (uint)((ulonglong)lVar13 >> 0x20)) != 0 || (uVar11 & (uint)lVar13) != 0)
         goto LAB_0004de6c;
         uVar8 = (ushort)*(byte *)(iVar5 + 0x400 + uVar3);
         iVar7 = 0;

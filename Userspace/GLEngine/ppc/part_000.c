@@ -121,18 +121,18 @@ int _glepLoadRenderers()
   int iVar7;
   char *pcVar8;
   int iVar9;
-  int iVar10;
-  size_t sVar11;
   undefined4 extraout_r3;
+  int iVar10;
+  int iVar11;
+  undefined4 extraout_r3_00;
   char *pcVar12;
   uint uVar13;
   uint uVar14;
-  void *pvVar15;
-  int *piVar16;
-  void *pvVar17;
+  int *piVar15;
+  int iVar16;
   undefined1 auStack_147 [7];
   char acStack_140 [256];
-  void *local_40 [4];
+  int local_40 [4];
   
   puVar5 = PTR__gle_io_data_00112434;
   puVar4 = PTR_00112430;
@@ -151,9 +151,9 @@ int _glepLoadRenderers()
           bVar1 = pcVar8 == (char *)0x0;
           if (bVar1) {
             iVar9 = _CFStringGetLength(iVar7);
-            pcVar12 = _malloc(iVar9 + 1U);
+            pcVar12 = (char *)_malloc(iVar9 + 1);
             bVar2 = pcVar12 == (char *)0x0;
-            if ((!bVar2) && (iVar9 = _CFStringGetCString(iVar7,pcVar12,iVar9 + 1U,0), iVar9 != 0)) {
+            if ((!bVar2) && (iVar9 = _CFStringGetCString(iVar7,pcVar12,iVar9 + 1,0), iVar9 != 0)) {
               pcVar8 = pcVar12;
               bVar1 = bVar2;
             }
@@ -166,26 +166,27 @@ int _glepLoadRenderers()
             _strncat(acStack_140,pcVar8,0x100);
             _strcat(acStack_140,".bundle/Contents/MacOS/");
             _strncat(acStack_140,pcVar8,0x100);
-            for (piVar16 = (int *)_glep_plugin_head; piVar16 != (int *)0x0;
-                piVar16 = (int *)*piVar16) {
-              iVar9 = _strcmp(acStack_140,(char *)(piVar16 + 1));
+            for (piVar15 = (int *)_glep_plugin_head; piVar15 != (int *)0x0;
+                piVar15 = (int *)*piVar15) {
+              iVar9 = _strcmp(acStack_140,piVar15 + 1);
               if (iVar9 == 0) {
-                uVar6 = piVar16[0x44] | 1 << (uVar14 & 0x3f);
+                uVar6 = piVar15[0x44] | 1 << (uVar14 & 0x3f);
                 goto LAB_000017c4;
               }
             }
-            piVar16 = (int *)((int (*)())_glepAddPlugin)();
-            if (piVar16 != (int *)0x0) {
-              _strcpy((char *)((int)piVar16 + 4),acStack_140);
+            piVar15 = (int *)((int (*)())_glepAddPlugin)();
+            if (piVar15 != (int *)0x0) {
+              _strcpy((int)piVar15 + 4,acStack_140);
               uVar6 = 1 << (uVar14 & 0x3f);
 LAB_000017c4:
-              *(uint *)((int)piVar16 + 0x110) = uVar6;
+              *(uint *)((int)piVar15 + 0x110) = uVar6;
             }
           }
           if (!bVar2) {
             _free(pcVar12);
           }
-          in_r3 = _CFRelease(iVar7);
+          _CFRelease(iVar7);
+          in_r3 = extraout_r3;
         }
       }
       uVar6 = uVar14 & 0x3f;
@@ -201,7 +202,7 @@ LAB_000017c4:
     *(undefined **)(puVar5 + 0x10) = puVar4;
   }
   else {
-    pcVar12 = _getenv("GL_RESOURCES");
+    pcVar12 = (char *)_getenv("GL_RESOURCES");
     pcVar8 = "/System/Library/Frameworks/OpenGL.framework/Versions/A/Resources/";
     if (pcVar12 != (char *)0x0) {
       pcVar8 = pcVar12;
@@ -212,31 +213,31 @@ LAB_000017c4:
       iVar9 = 0;
       if (0 < iVar7) {
         do {
-          pvVar15 = local_40[0];
+          iVar11 = local_40[0];
           iVar3 = iVar9 * 4;
-          pvVar17 = (void *)(*(int *)(iVar3 + (int)local_40[0]) + 8);
-          iVar10 = _memcmp(pvVar17,"GLDriver",8);
-          if ((iVar10 == 0) || (iVar10 = _memcmp(pvVar17,"GLRendererFloat",0xf), iVar10 == 0)) {
-            iVar10 = ((int (*)())_glepAddPlugin)();
-            if (iVar10 == 0) {
+          iVar16 = *(int *)(iVar3 + local_40[0]) + 8;
+          iVar10 = _memcmp(iVar16,"GLDriver",8);
+          if ((iVar10 == 0) || (iVar10 = _memcmp(iVar16,"GLRendererFloat",0xf), iVar10 == 0)) {
+            iVar11 = ((int (*)())_glepAddPlugin)();
+            if (iVar11 == 0) {
               return 0;
             }
             _strncpy(acStack_140,pcVar8,0x100);
-            _strncat(acStack_140,(char *)(*(int *)(iVar3 + (int)local_40[0]) + 8),0x100);
+            _strncat(acStack_140,(char *)(*(int *)(iVar3 + local_40[0]) + 8),0x100);
             _strcat(acStack_140,"/");
-            _strncat(acStack_140,(char *)(*(int *)(iVar3 + (int)local_40[0]) + 8),0x100);
-            sVar11 = _strlen(acStack_140);
-            auStack_147[sVar11] = 0;
-            _strncpy((char *)(iVar10 + 4),acStack_140,0x100);
-            *(uint *)(iVar10 + 0x110) = uVar13;
-            pvVar15 = local_40[0];
+            _strncat(acStack_140,(char *)(*(int *)(iVar3 + local_40[0]) + 8),0x100);
+            iVar10 = _strlen(acStack_140);
+            auStack_147[iVar10] = 0;
+            _strncpy((char *)(iVar11 + 4),acStack_140,0x100);
+            *(uint *)(iVar11 + 0x110) = uVar13;
+            iVar11 = local_40[0];
           }
           iVar9 = iVar9 + 1;
-          _free(*(void **)(iVar3 + (int)pvVar15));
+          _free(*(undefined4 *)(iVar3 + iVar11));
         } while (iVar9 < iVar7);
       }
       _free(local_40[0]);
-      in_r3 = extraout_r3;
+      in_r3 = extraout_r3_00;
     }
   }
   return in_r3;
@@ -262,7 +263,7 @@ int _glepAddPlugin()
   for (puVar2 = _glep_plugin_head; puVar2 != (undefined4 *)0x0; puVar2 = (undefined4 *)*puVar2) {
     puVar1 = puVar2;
   }
-  puVar3 = _malloc(0x208);
+  puVar3 = (undefined4 *)_malloc(0x208);
   puVar2 = (undefined4 *)0x0;
   if (puVar3 != (undefined4 *)0x0) {
     *puVar1 = puVar3;
@@ -307,7 +308,7 @@ LAB_00001b38:
             _glepPluginDisconnect(param_1);
             goto LAB_00001b40;
           }
-          iVar1 = _NSAddressOfSymbol();
+          iVar1 = _NSAddressOfSymbol(iVar1);
           *piVar4 = iVar1;
           piVar4 = piVar4 + 1;
           if (iVar1 == 0) goto LAB_00001b38;
@@ -348,13 +349,13 @@ int _glepValidatePlugin(param_1)
   
   if (((*(int *)(param_1 + 0x104) != 0xffff) &&
       (iVar4 = _NSLookupSymbolInModule(*(undefined4 *)(param_1 + 0x10c),"_gldInitializeLibrary"),
-      iVar4 != 0)) && (pcVar5 = (code *)_NSAddressOfSymbol(), pcVar5 != (code *)0x0)) {
+      iVar4 != 0)) && (pcVar5 = (code *)_NSAddressOfSymbol(iVar4), pcVar5 != (code *)0x0)) {
     (*pcVar5)(*(undefined4 *)(PTR__gle_io_data_00112434 + 4),
               *(undefined4 *)(PTR__gle_io_data_00112434 + 8),*(undefined4 *)(param_1 + 0x110),
               *(undefined4 *)(PTR__gle_io_data_00112434 + 0xc),
               *(undefined4 *)(PTR__gle_io_data_00112434 + 0x10));
     iVar4 = _NSLookupSymbolInModule(*(undefined4 *)(param_1 + 0x10c),_glep_gld_names);
-    if (((iVar4 != 0) && (pcVar5 = (code *)_NSAddressOfSymbol(), pcVar5 != (code *)0x0)) &&
+    if (((iVar4 != 0) && (pcVar5 = (code *)_NSAddressOfSymbol(iVar4), pcVar5 != (code *)0x0)) &&
        (iVar4 = (*pcVar5)(&local_20,&local_1c,&local_18,local_14), iVar4 != 0)) {
       if (*(int *)(param_1 + 0x104) == 0) {
         local_14[0] = local_14[0] & 0xff00;
@@ -608,44 +609,43 @@ int _gleOptimizeDisplayListCreateHashTable()
 {
   uint uVar1;
   int iVar2;
-  void *pvVar3;
-  undefined4 uVar4;
-  int iVar5;
-  undefined4 *puVar6;
-  uint uVar7;
-  undefined4 uVar8;
-  undefined **ppuVar9;
-  int iVar10;
+  undefined4 uVar3;
+  int iVar4;
+  undefined4 *puVar5;
+  uint uVar6;
+  undefined4 uVar7;
+  undefined **ppuVar8;
+  int iVar9;
   
-  if ((_gleDisplayListFunctionHash == (void *)0x0) &&
+  if ((_gleDisplayListFunctionHash == 0) &&
      (_gleDisplayListFunctionHash = _calloc(1,0x80),
      PTR__glBegin_ListExec_00110a2c != (undefined *)0x0)) {
-    iVar10 = 0;
-    ppuVar9 = &PTR__glBegin_ListExec_00110a2c;
+    iVar9 = 0;
+    ppuVar8 = &PTR__glBegin_ListExec_00110a2c;
     do {
-      puVar6 = _malloc(0x10);
-      pvVar3 = _gleDisplayListFunctionHash;
-      uVar4 = *(undefined4 *)((int)&DAT_00110a30 + iVar10);
-      uVar8 = *(undefined4 *)((int)&DAT_00110a34 + iVar10);
-      uVar7 = *(uint *)((int)&PTR__glBegin_ListExec_00110a2c + iVar10);
-      uVar1 = uVar7 & 0x7c;
-      *puVar6 = *(undefined4 *)((int)&_fi + iVar10);
-      puVar6[2] = uVar4;
-      puVar6[3] = uVar8;
-      puVar6[1] = uVar7;
-      iVar5 = *(int *)(uVar1 + (int)pvVar3);
-      if (iVar5 == 0) {
-        *(undefined4 **)(uVar1 + (int)pvVar3) = puVar6;
+      puVar5 = (undefined4 *)_malloc(0x10);
+      iVar2 = _gleDisplayListFunctionHash;
+      uVar3 = *(undefined4 *)((int)&DAT_00110a30 + iVar9);
+      uVar7 = *(undefined4 *)((int)&DAT_00110a34 + iVar9);
+      uVar6 = *(uint *)((int)&PTR__glBegin_ListExec_00110a2c + iVar9);
+      uVar1 = uVar6 & 0x7c;
+      *puVar5 = *(undefined4 *)((int)&_fi + iVar9);
+      puVar5[2] = uVar3;
+      puVar5[3] = uVar7;
+      puVar5[1] = uVar6;
+      iVar4 = *(int *)(uVar1 + iVar2);
+      if (iVar4 == 0) {
+        *(undefined4 **)(uVar1 + iVar2) = puVar5;
       }
       else {
-        for (iVar2 = *(int *)(iVar5 + 0xc); iVar2 != 0; iVar2 = *(int *)(iVar2 + 0xc)) {
-          iVar5 = iVar2;
+        for (iVar2 = *(int *)(iVar4 + 0xc); iVar2 != 0; iVar2 = *(int *)(iVar2 + 0xc)) {
+          iVar4 = iVar2;
         }
-        *(undefined4 **)(iVar5 + 0xc) = puVar6;
+        *(undefined4 **)(iVar4 + 0xc) = puVar5;
       }
-      ppuVar9 = ppuVar9 + 4;
-      iVar10 = iVar10 + 0x10;
-    } while (*ppuVar9 != (undefined *)0x0);
+      ppuVar8 = ppuVar8 + 4;
+      iVar9 = iVar9 + 0x10;
+    } while (*ppuVar8 != (undefined *)0x0);
   }
   return;
 }
@@ -841,7 +841,7 @@ LAB_0000272c:
       if (param_2 == 0x6a6) {
         iVar2 = *(int *)(param_1 + 0x5148);
         if (*(char *)(iVar2 + 0x8024) != '\0') {
-          _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+          _pthread_mutex_lock(iVar2 + 0x8028);
           iVar2 = *(int *)(param_1 + 0x5148);
         }
         iVar2 = _gleLookupHashObject(iVar2 + 0x6018,*param_3);
@@ -858,7 +858,7 @@ LAB_0000272c:
         if (param_2 == 0x6a4) {
           iVar2 = *(int *)(param_1 + 0x5148);
           if (*(char *)(iVar2 + 0x8024) != '\0') {
-            _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+            _pthread_mutex_lock(iVar2 + 0x8028);
             iVar2 = *(int *)(param_1 + 0x5148);
           }
           iVar2 = _gleLookupHashObject(iVar2 + 0x6018,*param_3);
@@ -875,7 +875,7 @@ LAB_0000272c:
           if (param_2 != 0x6a5) goto LAB_00002978;
           iVar2 = *(int *)(param_1 + 0x5148);
           if (*(char *)(iVar2 + 0x8024) != '\0') {
-            _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+            _pthread_mutex_lock(iVar2 + 0x8028);
             iVar2 = *(int *)(param_1 + 0x5148);
           }
           iVar2 = _gleLookupHashObject(iVar2 + 0x6018,*param_3);
@@ -901,7 +901,7 @@ LAB_0000272c:
         if (param_2 != 0x6a9) goto LAB_00002978;
         iVar2 = *(int *)(param_1 + 0x5148);
         if (*(char *)(iVar2 + 0x8024) != '\0') {
-          _pthread_mutex_lock((pthread_mutex_t *)(iVar2 + 0x8028));
+          _pthread_mutex_lock(iVar2 + 0x8028);
           iVar2 = *(int *)(param_1 + 0x5148);
         }
         iVar2 = _gleLookupHashObject(iVar2 + 0x6018,*param_3);
@@ -919,7 +919,7 @@ LAB_000028f4:
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return 0;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       return 0;
     }
     if (param_2 == 0x3e2) {
@@ -1030,7 +1030,7 @@ int _gliChoosePixelFormat(param_1, param_2)
 
 /* _gliQueryRendererInfo @ 0x2aa8 (292 bytes) */
 int _gliQueryRendererInfo(param_1, param_2)
-  undefined4 *param_1;
+  int *param_1;
   undefined4 param_2;
 {
   int *piVar1;
@@ -1042,7 +1042,7 @@ int _gliQueryRendererInfo(param_1, param_2)
   
   iVar4 = 0;
   iVar6 = 0;
-  if (param_1 == (undefined4 *)0x0) {
+  if (param_1 == (int *)0x0) {
     return 0x271e;
   }
   *param_1 = 0;
@@ -1054,7 +1054,7 @@ int _gliQueryRendererInfo(param_1, param_2)
     piVar1 = (int *)*piVar1;
     iVar6 = iVar6 + 1;
   } while (piVar1 != (int *)0x0);
-  piVar1 = _malloc(iVar6 * 0x38);
+  piVar1 = (int *)_malloc(iVar6 * 0x38);
   if (piVar1 == (int *)0x0) {
     return 0x2720;
   }
@@ -1089,18 +1089,18 @@ int _gliQueryRendererInfo(param_1, param_2)
   piVar3 = (int *)0x0;
   _free(piVar1);
 LAB_00002bb0:
-  *param_1 = piVar3;
+  *param_1 = (int)piVar3;
   return iVar4;
 }
 
 /* _gliDestroyRendererInfo @ 0x2bcc (52 bytes) */
 int _gliDestroyRendererInfo(param_1)
-  void *param_1;
+  int param_1;
 {
   undefined4 uVar1;
   
   uVar1 = 0x271e;
-  if (param_1 != (void *)0x0) {
+  if (param_1 != 0) {
     _free(param_1);
     uVar1 = 0;
   }
@@ -1191,12 +1191,11 @@ int _gliCreateContext(param_1, param_2, param_3, param_4, param_5, param_6, para
   int iVar7;
   undefined4 uVar8;
   int iVar9;
-  void *pvVar10;
+  int iVar10;
   uint uVar11;
   uint uVar12;
   uint uVar13;
   int *piVar14;
-  int iVar15;
   
   uVar12 = 0xff;
   bVar3 = false;
@@ -1259,11 +1258,11 @@ int _gliCreateContext(param_1, param_2, param_3, param_4, param_5, param_6, para
       *(undefined4 *)(iVar5 + 0x5148) = 0;
       *(char *)(iVar5 + 0x85a4) = (char)uVar13;
       if (0 < (int)uVar13) {
-        pvVar10 = (void *)(iVar5 + 0x85ac);
+        iVar10 = iVar5 + 0x85ac;
         iVar9 = 0;
         piVar14 = param_2;
         do {
-          _memset(pvVar10,0,0x2e0);
+          _memset(iVar10,0,0x2e0);
           if (piVar14 == (int *)0x0) {
             uVar12 = 0x400;
             iVar7 = ((int (*)())_glepGetPlugin)(0x400);
@@ -1289,7 +1288,7 @@ LAB_00002ef4:
           bVar2 = uVar11 == uVar13;
           iVar9 = iVar9 + 0x2e0;
           *(int *)(iVar4 + 0x8884) = iVar7;
-          pvVar10 = (void *)((int)pvVar10 + 0x2e0);
+          iVar10 = iVar10 + 0x2e0;
           *(uint *)(iVar4 + 0x8888) = uVar12;
           piVar14 = (int *)*piVar14;
         } while ((int)uVar11 < (int)uVar13);
@@ -1307,48 +1306,48 @@ LAB_00002ef4:
           _gleDCBFree(iVar5);
           return 0x2720;
         }
-        iVar7 = 0;
+        iVar10 = 0;
         piVar14 = param_2;
         if (0 < (int)uVar13) {
           while( true ) {
             if (piVar14 == (int *)0x0) {
               piVar14 = param_2;
             }
-            iVar4 = iVar7 * 0x2e0;
+            iVar7 = iVar10 * 0x2e0;
             if (bVar3) {
               uVar8 = 0;
             }
             else {
-              uVar8 = *(undefined4 *)(iVar4 + param_3 + 0x85ac);
+              uVar8 = *(undefined4 *)(iVar7 + param_3 + 0x85ac);
             }
-            iVar9 = (**(code **)(*(int *)(iVar4 + iVar5 + 0x8884) + 300))
-                              (iVar4 + iVar5 + 0x85ac,piVar14,
-                               *(undefined4 *)(iVar7 * 4 + iVar9 + 0x8054),uVar8,
-                               iVar5 + iVar4 + 0x85b0,iVar5 + 0x360,iVar5 + iVar4 + 0x86e0);
+            iVar9 = (**(code **)(*(int *)(iVar7 + iVar5 + 0x8884) + 300))
+                              (iVar7 + iVar5 + 0x85ac,piVar14,
+                               *(undefined4 *)(iVar10 * 4 + iVar9 + 0x8054),uVar8,
+                               iVar5 + iVar7 + 0x85b0,iVar5 + 0x360,iVar5 + iVar7 + 0x86e0);
             if (iVar9 != 0) {
-              iVar4 = _gleReleaseSharedState(iVar5);
-              if (-1 < iVar7) {
-                iVar15 = iVar7 * 0x2e0 + iVar5 + 0x10000;
+              iVar7 = _gleReleaseSharedState(iVar5);
+              if (-1 < iVar10) {
+                iVar4 = iVar10 * 0x2e0 + iVar5 + 0x10000;
                 do {
-                  piVar14 = (int *)(iVar15 + -0x777c);
-                  puVar1 = (undefined4 *)(iVar15 + -0x7a54);
-                  iVar15 = iVar15 + -0x2e0;
+                  piVar14 = (int *)(iVar4 + -0x777c);
+                  puVar1 = (undefined4 *)(iVar4 + -0x7a54);
+                  iVar4 = iVar4 + -0x2e0;
                   (**(code **)(*piVar14 + 0x130))(*puVar1);
-                  iVar7 = iVar7 + -1;
-                } while (-1 < iVar7);
+                  iVar10 = iVar10 + -1;
+                } while (-1 < iVar10);
               }
               goto LAB_00003108;
             }
-            iVar7 = iVar7 + 1;
+            iVar10 = iVar10 + 1;
             piVar14 = (int *)*piVar14;
-            if ((int)uVar13 <= iVar7) break;
+            if ((int)uVar13 <= iVar10) break;
             iVar9 = *(int *)(iVar5 + 0x5148);
           }
         }
         *(int *)(iVar5 + 0x468c) = iVar5 + 0x85b0;
         *(undefined4 *)(iVar5 + 0x4688) = *(undefined4 *)(iVar5 + 0x85ac);
         *(undefined1 *)(iVar5 + 0x85a8) = 0;
-        _memcpy((void *)(iVar5 + 0x4754),(void *)(*(int *)(iVar5 + 0x8884) + 0x114),0xf4);
+        _memcpy(iVar5 + 0x4754,*(int *)(iVar5 + 0x8884) + 0x114,0xf4);
         if (_gl_list == 0) {
           ((int (*)())_gleCreateEnableHashTable)();
         }
@@ -1362,20 +1361,20 @@ LAB_00002ef4:
           *param_1 = iVar5;
           return 0;
         }
-        iVar7 = 0;
-        iVar4 = _gleReleaseSharedState(iVar5);
+        iVar10 = 0;
+        iVar7 = _gleReleaseSharedState(iVar5);
         if (*(char *)(iVar5 + 0x85a4) != '\0') {
-          iVar15 = iVar5 + 0x10000;
+          iVar4 = iVar5 + 0x10000;
           do {
-            piVar14 = (int *)(iVar15 + -0x777c);
-            iVar7 = iVar7 + 1;
-            puVar1 = (undefined4 *)(iVar15 + -0x7a54);
-            iVar15 = iVar15 + 0x2e0;
+            piVar14 = (int *)(iVar4 + -0x777c);
+            iVar10 = iVar10 + 1;
+            puVar1 = (undefined4 *)(iVar4 + -0x7a54);
+            iVar4 = iVar4 + 0x2e0;
             (**(code **)(*piVar14 + 0x130))(*puVar1);
-          } while (iVar7 < (int)(uint)*(byte *)(iVar5 + 0x85a4));
+          } while (iVar10 < (int)(uint)*(byte *)(iVar5 + 0x85a4));
         }
 LAB_00003108:
-        if (iVar4 != 0) {
+        if (iVar7 != 0) {
           _gleDestroySharedState(iVar5);
         }
         _gleDCBFree(iVar5);
@@ -1391,14 +1390,14 @@ LAB_00003108:
 int _gleDCBAlloc(param_1)
   int param_1;
 {
-  void *pvVar1;
+  int iVar1;
   uint uVar2;
   
-  pvVar1 = _malloc(param_1 + 0x3fU & 0xffffffe0);
+  iVar1 = _malloc(param_1 + 0x3fU & 0xffffffe0);
   uVar2 = 0;
-  if (pvVar1 != (void *)0x0) {
-    uVar2 = (int)pvVar1 + 0x20U & 0xffffffe0;
-    *(char *)(uVar2 - 1) = (char)uVar2 - (char)pvVar1;
+  if (iVar1 != 0) {
+    uVar2 = iVar1 + 0x20U & 0xffffffe0;
+    *(char *)(uVar2 - 1) = (char)uVar2 - (char)iVar1;
   }
   return uVar2;
 }
@@ -1409,7 +1408,7 @@ int _gleCreateSharedState(param_1)
 {
   int iVar1;
   undefined4 *puVar2;
-  void *pvVar3;
+  int iVar3;
   undefined4 uVar4;
   int iVar5;
   int iVar6;
@@ -1421,13 +1420,13 @@ int _gleCreateSharedState(param_1)
   uint uVar12;
   int iVar13;
   
-  pvVar3 = _malloc(0x94d4);
-  *(undefined4 *)((int)pvVar3 + 0x8020) = 1;
-  *(undefined1 *)((int)pvVar3 + 0x8024) = 0;
-  _pthread_mutex_init((pthread_mutex_t *)((int)pvVar3 + 0x8028),(unsigned char *)0x0);
+  iVar3 = _malloc(0x94d4);
+  *(undefined4 *)(iVar3 + 0x8020) = 1;
+  *(undefined1 *)(iVar3 + 0x8024) = 0;
+  _pthread_mutex_init(iVar3 + 0x8028,0);
   uVar12 = 0;
   if (*(char *)(param_1 + 0x85a4) != '\0') {
-    iVar9 = (int)pvVar3 + 0x8054;
+    iVar9 = iVar3 + 0x8054;
     piVar11 = (int *)(param_1 + 0x8884);
     do {
       iVar1 = *piVar11;
@@ -1441,7 +1440,7 @@ int _gleCreateSharedState(param_1)
   if (uVar12 == *(byte *)(param_1 + 0x85a4)) {
     if ((int)uVar12 < 8) {
       iVar9 = 8 - uVar12;
-      puVar10 = (undefined4 *)((int)pvVar3 + uVar12 * 4 + 0x8054);
+      puVar10 = (undefined4 *)(uVar12 * 4 + iVar3 + 0x8054);
       do {
         *puVar10 = 0;
         puVar10 = puVar10 + 1;
@@ -1449,9 +1448,9 @@ int _gleCreateSharedState(param_1)
       } while (iVar9 != 0);
     }
     iVar9 = 0;
-    puVar10 = (undefined4 *)((int)pvVar3 + 0x1000);
+    puVar10 = (undefined4 *)(iVar3 + 0x1000);
     do {
-      puVar2 = (undefined4 *)(iVar9 * 0x1004 + (int)pvVar3);
+      puVar2 = (undefined4 *)(iVar9 * 0x1004 + iVar3);
       iVar1 = 0x400;
       do {
         *puVar2 = 0;
@@ -1462,7 +1461,7 @@ int _gleCreateSharedState(param_1)
       *puVar10 = 0;
       puVar10 = puVar10 + 0x401;
     } while (iVar9 < 8);
-    iVar8 = (int)pvVar3 + 0x10000;
+    iVar8 = iVar3 + 0x10000;
     iVar6 = 0;
     iVar5 = 0;
     iVar9 = iVar8;
@@ -1480,7 +1479,7 @@ int _gleCreateSharedState(param_1)
         iVar13 = iVar13 + -1;
       } while (iVar13 != 0);
       iVar13 = 9;
-      puVar10 = (undefined4 *)((int)pvVar3 + iVar5 * 4 + 0x8a74);
+      puVar10 = (undefined4 *)(iVar5 * 4 + iVar3 + 0x8a74);
       do {
         *puVar10 = 0xffffffff;
         puVar10 = puVar10 + 1;
@@ -1499,7 +1498,7 @@ int _gleCreateSharedState(param_1)
   else {
     iVar9 = uVar12 - 1;
     if (-1 < iVar9) {
-      puVar10 = (undefined4 *)((int)pvVar3 + iVar9 * 4 + 0x8054);
+      puVar10 = (undefined4 *)(iVar9 * 4 + iVar3 + 0x8054);
       piVar11 = (int *)(iVar9 * 0x2e0 + param_1 + 0x8884);
       do {
         iVar1 = *piVar11;
@@ -1510,11 +1509,11 @@ int _gleCreateSharedState(param_1)
         iVar9 = iVar9 + -1;
       } while (-1 < iVar9);
     }
-    _pthread_mutex_destroy((pthread_mutex_t *)((int)pvVar3 + 0x8028));
-    _free(pvVar3);
-    pvVar3 = (void *)0x0;
+    _pthread_mutex_destroy(iVar3 + 0x8028);
+    _free(iVar3);
+    iVar3 = 0;
   }
-  return pvVar3;
+  return iVar3;
 }
 
 /* _gleCreateEnableHashTable @ 0x33d8 (2092 bytes) */
@@ -1526,7 +1525,7 @@ int _gleCreateEnableHashTable()
   undefined4 uVar4;
   int iVar5;
   
-  puVar3 = _malloc(0x4000);
+  puVar3 = (undefined4 *)_malloc(0x4000);
   puVar1 = PTR__gleSetEnable_Error_00110e18;
   iVar5 = 0x400;
   puVar2 = puVar3;
@@ -1656,7 +1655,7 @@ int _gleAddEnableHashFunc(param_1, param_2, param_3)
     *(undefined4 *)(iVar5 + 8) = 0;
   }
   else {
-    puVar3 = _malloc(0x10);
+    puVar3 = (undefined4 *)_malloc(0x10);
     uVar1 = *(undefined4 *)(iVar6 + param_1);
     uVar4 = *(undefined4 *)(iVar5 + 8);
     uVar2 = *(undefined4 *)(iVar5 + 4);
@@ -2941,8 +2940,8 @@ int _gleInitGLIState(param_1)
   *(undefined1 *)(param_1 + 0x74f0) = 0;
   *(undefined1 *)(param_1 + 0x74f1) = 0;
   *(undefined1 *)(param_1 + 0x74f2) = 0;
-  _memset((void *)(param_1 + 0x74f4),0,0x40);
-  _memset((void *)(param_1 + 0x7534),0,0x40);
+  _memset(param_1 + 0x74f4,0,0x40);
+  _memset(param_1 + 0x7534,0,0x40);
   *(undefined4 *)(param_1 + 0x4fd8) = 0x600;
   *(undefined4 *)(param_1 + 0x4ff4) = 4;
   *(undefined4 *)(param_1 + 0x754c) = 1;
@@ -3289,7 +3288,7 @@ int _gleCreateTextureObject(param_1, param_2)
   if (((param_1 & 0x200) == 0) && (iVar3 = 6, (param_1 & 0xf) != 0)) {
     iVar3 = 1;
   }
-  puVar2 = _malloc(iVar3 * 0x168 + 0x944);
+  puVar2 = (undefined4 *)_malloc(iVar3 * 0x168 + 0x944);
   puVar1 = PTR__gleFreeTextureObject_001115dc;
   *puVar2 = 0;
   puVar2[1] = param_2;
@@ -3529,124 +3528,123 @@ int _gleInitPipelineProgramState(param_1)
   undefined1 *puVar7;
   int iVar8;
   uint *puVar9;
-  void *pvVar10;
-  uint *puVar11;
-  undefined4 *puVar12;
-  uint *puVar13;
-  uint uVar14;
-  undefined4 *puVar15;
+  uint *puVar10;
+  undefined4 *puVar11;
+  uint *puVar12;
+  uint uVar13;
+  undefined4 *puVar14;
+  int iVar15;
   int iVar16;
-  int iVar17;
-  uint uVar18;
+  uint uVar17;
+  int iVar18;
   int iVar19;
-  int iVar20;
-  uint uVar21;
-  int iVar22;
-  uint uVar23;
+  uint uVar20;
+  int iVar21;
+  uint uVar22;
   
-  iVar16 = *(int *)(param_1 + 0x5148);
-  puVar7 = _malloc(0x600);
+  iVar15 = *(int *)(param_1 + 0x5148);
+  puVar7 = (undefined1 *)_malloc(0x600);
   *puVar7 = 0;
-  iVar20 = 0;
+  iVar19 = 0;
   *(undefined4 *)(param_1 + 0x541c) = 0xffffffff;
   *(undefined1 **)(param_1 + 0x5418) = puVar7;
-  iVar17 = param_1;
-  iVar19 = param_1;
+  iVar16 = param_1;
+  iVar18 = param_1;
   do {
-    iVar22 = 0;
-    iVar8 = ((int (*)())_gleCreatePipelineProgramObject)(param_1,iVar20,0);
+    iVar21 = 0;
+    iVar8 = ((int (*)())_gleCreatePipelineProgramObject)(param_1,iVar19,0);
     ((int (*)())_gleCreatePluginPipelineProgram)(param_1,iVar8 + 0x10);
     cVar1 = *(char *)(param_1 + 0x85a4);
-    *(int *)(iVar19 + 0x5428) = iVar8;
-    *(int *)(iVar19 + 0x5420) = iVar8;
+    *(int *)(iVar18 + 0x5428) = iVar8;
+    *(int *)(iVar18 + 0x5420) = iVar8;
     if (cVar1 != '\0') {
-      puVar12 = (undefined4 *)(iVar8 + 0x4a8);
-      puVar15 = (undefined4 *)(iVar17 + 0x886c);
+      puVar11 = (undefined4 *)(iVar8 + 0x4a8);
+      puVar14 = (undefined4 *)(iVar16 + 0x886c);
       do {
-        uVar3 = *puVar12;
-        iVar22 = iVar22 + 1;
-        puVar12 = puVar12 + 1;
-        *puVar15 = uVar3;
-        puVar15 = puVar15 + 0xb8;
-      } while (iVar22 < (int)(uint)*(byte *)(param_1 + 0x85a4));
+        uVar3 = *puVar11;
+        iVar21 = iVar21 + 1;
+        puVar11 = puVar11 + 1;
+        *puVar14 = uVar3;
+        puVar14 = puVar14 + 0xb8;
+      } while (iVar21 < (int)(uint)*(byte *)(param_1 + 0x85a4));
     }
-    iVar20 = iVar20 + 1;
-    iVar17 = iVar17 + 4;
-    iVar19 = iVar19 + 4;
+    iVar19 = iVar19 + 1;
+    iVar16 = iVar16 + 4;
+    iVar18 = iVar18 + 4;
     *(int *)(iVar8 + 8) = *(int *)(iVar8 + 8) + 1;
-  } while (iVar20 < 2);
-  iVar17 = iVar16 + 0x10000;
-  if (*(char *)(iVar16 + 0x8024) != '\0') {
-    _pthread_mutex_lock((pthread_mutex_t *)(iVar16 + 0x8028));
+  } while (iVar19 < 2);
+  iVar16 = iVar15 + 0x10000;
+  if (*(char *)(iVar15 + 0x8024) != '\0') {
+    _pthread_mutex_lock(iVar15 + 0x8028);
   }
-  iVar20 = 0;
-  iVar19 = param_1;
+  iVar19 = 0;
+  iVar18 = param_1;
   do {
-    if (*(int *)(iVar17 + -0x7560) == 0) {
-      uVar18 = 0;
-      uVar21 = 0;
-      puVar9 = _malloc((uint)*(byte *)(param_1 + 0x85a4) * 4 + 4);
-      uVar23 = 1;
+    if (*(int *)(iVar16 + -0x7560) == 0) {
+      uVar17 = 0;
+      uVar20 = 0;
+      puVar9 = (uint *)_malloc((uint)*(byte *)(param_1 + 0x85a4) * 4 + 4);
+      uVar22 = 1;
       uVar4 = 0x100;
-      if (iVar20 != 0) {
+      if (iVar19 != 0) {
         uVar4 = 0x80;
       }
       bVar2 = *(byte *)(param_1 + 0x85a4);
       iVar8 = 0;
       *puVar9 = uVar4;
       if (bVar2 != 0) {
-        puVar6 = (ushort *)(iVar19 + 0x86a0);
-        puVar11 = puVar9 + 1;
+        puVar6 = (ushort *)(iVar18 + 0x86a0);
+        puVar10 = puVar9 + 1;
         do {
           uVar4 = (uint)*puVar6;
           puVar6 = puVar6 + 0x170;
           if (uVar4 != 0) {
-            uVar14 = 0;
-            puVar13 = puVar9;
-            if (uVar23 != 0) {
+            uVar13 = 0;
+            puVar12 = puVar9;
+            if (uVar22 != 0) {
               do {
-                if (uVar4 == *puVar13) break;
-                uVar14 = uVar14 + 1;
-                puVar13 = puVar13 + 1;
-              } while (uVar14 < uVar23);
+                if (uVar4 == *puVar12) break;
+                uVar13 = uVar13 + 1;
+                puVar12 = puVar12 + 1;
+              } while (uVar13 < uVar22);
             }
-            if (uVar14 == uVar23) {
-              *puVar11 = uVar4;
-              uVar23 = uVar23 + 1;
-              puVar11 = puVar11 + 1;
+            if (uVar13 == uVar22) {
+              *puVar10 = uVar4;
+              uVar22 = uVar22 + 1;
+              puVar10 = puVar10 + 1;
             }
           }
           iVar8 = iVar8 + 1;
         } while (iVar8 < (int)(uint)bVar2);
       }
-      *(uint *)(iVar17 + -0x7564) = uVar23;
-      pvVar10 = _malloc(uVar23 << 2);
-      *(void **)(iVar17 + -0x7560) = pvVar10;
-      if (uVar23 != 0) {
+      *(uint *)(iVar16 + -0x7564) = uVar22;
+      uVar3 = _malloc(uVar22 << 2);
+      *(undefined4 *)(iVar16 + -0x7560) = uVar3;
+      if (uVar22 != 0) {
         do {
           uVar4 = 0x7ffffff;
-          puVar11 = puVar9;
-          for (uVar14 = uVar23; uVar14 != 0; uVar14 = uVar14 - 1) {
-            uVar5 = *puVar11;
-            puVar11 = puVar11 + 1;
-            if ((uVar18 < uVar5) && (uVar5 < uVar4)) {
+          puVar10 = puVar9;
+          for (uVar13 = uVar22; uVar13 != 0; uVar13 = uVar13 - 1) {
+            uVar5 = *puVar10;
+            puVar10 = puVar10 + 1;
+            if ((uVar17 < uVar5) && (uVar5 < uVar4)) {
               uVar4 = uVar5;
             }
           }
-          iVar8 = uVar21 * 4;
-          uVar21 = uVar21 + 1;
-          *(uint *)(iVar8 + *(int *)(iVar17 + -0x7560)) = uVar4;
-          uVar18 = uVar4;
-        } while (uVar21 < uVar23);
+          iVar8 = uVar20 * 4;
+          uVar20 = uVar20 + 1;
+          *(uint *)(iVar8 + *(int *)(iVar16 + -0x7560)) = uVar4;
+          uVar17 = uVar4;
+        } while (uVar20 < uVar22);
       }
       _free(puVar9);
     }
-    iVar20 = iVar20 + 1;
-    iVar19 = iVar19 + 0x10;
-    iVar17 = iVar17 + 0xa30;
-    if (1 < iVar20) {
-      if (*(char *)(iVar16 + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(iVar16 + 0x8028));
+    iVar19 = iVar19 + 1;
+    iVar18 = iVar18 + 0x10;
+    iVar16 = iVar16 + 0xa30;
+    if (1 < iVar19) {
+      if (*(char *)(iVar15 + 0x8024) != '\0') {
+        _pthread_mutex_unlock(iVar15 + 0x8028);
         return;
       }
       return;
@@ -3762,10 +3760,10 @@ int _gleCreatePipelineProgramObject(param_1, param_2, param_3)
 int _gleVecAlloc(param_1)
   int param_1;
 {
-  void *pvVar1;
+  undefined4 uVar1;
   
-  pvVar1 = _malloc(param_1 + 0xfU & 0xfffffff0);
-  return pvVar1;
+  uVar1 = _malloc(param_1 + 0xfU & 0xfffffff0);
+  return uVar1;
 }
 
 /* _gleCreatePluginPipelineProgram @ 0x62b8 (120 bytes) */

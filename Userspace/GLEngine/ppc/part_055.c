@@ -941,7 +941,7 @@ int _gleVPRenderLineStrip(param_1)
   uint *puVar5;
   uint *puVar6;
   uint uVar7;
-  void *pvVar8;
+  uint uVar8;
   uint *puVar9;
   double extraout_f1;
   double fparam_1;
@@ -969,14 +969,14 @@ int _gleVPRenderLineStrip(param_1)
       fparam_1 = (double)(**(double ( **)(int,int,int,int))(param_1 + 0x5074))(param_1, puVar9, uVar7, 0);
     }
     puVar5 = *(uint **)(param_1 + 0x4870);
-    pvVar8 = *(void **)(param_1 + 0x4854);
+    uVar8 = *(uint *)(param_1 + 0x4854);
     puVar2 = puVar9;
     puVar6 = puVar5;
     while (puVar2 < puVar9 + uVar7 * 0x40 + -0x40) {
       *puVar6 = (uint)puVar2;
-      _memcpy(pvVar8,puVar2 + 0x40,0x100);
-      puVar6[1] = (uint)pvVar8;
-      pvVar8 = (void *)((int)pvVar8 + 0x100);
+      _memcpy(uVar8,puVar2 + 0x40,0x100);
+      puVar6[1] = uVar8;
+      uVar8 = uVar8 + 0x100;
       puVar6 = puVar6 + 2;
       puVar2 = puVar2 + 0x40;
       fparam_1 = extraout_f1_00;
@@ -1018,7 +1018,7 @@ int _gleVPRenderLineLoop(param_1)
   uint uVar12;
   int iVar13;
   uint *puVar14;
-  void *pvVar15;
+  uint uVar15;
   double extraout_f1;
   double fparam_1;
   double extraout_f1_00;
@@ -1068,14 +1068,14 @@ int _gleVPRenderLineLoop(param_1)
           fparam_1 = (double)(**(double ( **)(int,int,int,int))(param_1 + 0x5074))(param_1, puVar14, uVar12, 0);
         }
         puVar10 = *(uint **)(param_1 + 0x4870);
-        pvVar15 = *(void **)(param_1 + 0x4854);
+        uVar15 = *(uint *)(param_1 + 0x4854);
         puVar3 = puVar14;
         puVar11 = puVar10;
         while (puVar3 < puVar14 + uVar12 * 0x40 + -0x40) {
           *puVar11 = (uint)puVar3;
-          _memcpy(pvVar15,puVar3 + 0x40,0x100);
-          puVar11[1] = (uint)pvVar15;
-          pvVar15 = (void *)((int)pvVar15 + 0x100);
+          _memcpy(uVar15,puVar3 + 0x40,0x100);
+          puVar11[1] = uVar15;
+          uVar15 = uVar15 + 0x100;
           puVar11 = puVar11 + 2;
           puVar3 = puVar3 + 0x40;
           fparam_1 = extraout_f1_00;

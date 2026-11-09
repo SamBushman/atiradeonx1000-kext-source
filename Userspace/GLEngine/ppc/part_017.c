@@ -1282,13 +1282,12 @@ int _glGetMinmaxParameterfv_Exec(param_1, param_2, param_3, param_4)
 int _glHistogram_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
-  size_t param_3;
+  uint param_3;
   undefined4 param_4;
   int param_5;
 {
   undefined4 uVar1;
   int iVar2;
-  void *pvVar3;
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (((param_3 & param_3 - 1) == 0) && (-1 < (int)param_3)) {
@@ -1297,15 +1296,15 @@ int _glHistogram_Exec(param_1, param_2, param_3, param_4, param_5)
         if (iVar2 != 0) {
           *(short *)(param_1 + 0x338c) = (short)param_4;
           *(byte *)(param_1 + 0x338e) = (byte)((uint)-param_5 >> 0x1f);
-          *(size_t *)(param_1 + 0x3388) = param_3;
-          if (*(void **)(param_1 + 0x3384) != (void *)0x0) {
-            _free(*(void **)(param_1 + 0x3384));
+          *(uint *)(param_1 + 0x3388) = param_3;
+          if (*(int *)(param_1 + 0x3384) != 0) {
+            _free(*(int *)(param_1 + 0x3384));
           }
           if ((int)param_3 < 1) {
             param_3 = 1;
           }
-          pvVar3 = _calloc(param_3,0x10);
-          *(void **)(param_1 + 0x3384) = pvVar3;
+          uVar1 = _calloc(param_3,0x10);
+          *(undefined4 *)(param_1 + 0x3384) = uVar1;
           return;
         }
         if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1673,7 +1672,7 @@ void _glLightf_Exec(int param_1,int param_2,undefined4 param_3,double fparam_1)
       }
       else {
         *(float *)(iVar3 + 0x2890) = (float)fparam_1;
-        dVar6 = (double)_cos((double)(float)(fparam_1 * (double)FLOAT_00108e84));
+        dVar6 = _cos((double)(float)(fparam_1 * (double)FLOAT_00108e84));
         *(float *)(iVar3 + 0x286c) = (float)dVar6;
       }
       _gleUpdateLightExponents(param_1,uVar5);
@@ -1897,7 +1896,7 @@ double _glLighti_Exec(int param_1,int param_2,undefined4 param_3,uint param_4,do
       }
       else {
         *(float *)(iVar4 + 0x2890) = fVar1;
-        dVar7 = (double)_cos((double)(fVar1 * FLOAT_00108e84));
+        dVar7 = _cos((double)(fVar1 * FLOAT_00108e84));
         *(float *)(iVar4 + 0x286c) = (float)dVar7;
       }
       dVar7 = (double)_gleUpdateLightExponents(param_1,uVar6);
@@ -2225,7 +2224,7 @@ switchD_0006bed0_default:
     }
     else {
       *(float *)(iVar8 + 0x2890) = fVar1;
-      dVar12 = (double)_cos((double)(fVar1 * FLOAT_00108e84));
+      dVar12 = _cos((double)(fVar1 * FLOAT_00108e84));
       *(float *)(iVar8 + 0x286c) = (float)dVar12;
     }
     _gleUpdateLightExponents(param_1,uVar11);

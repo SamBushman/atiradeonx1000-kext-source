@@ -236,123 +236,122 @@ int _gleDecomposePrimitiveVertices(param_1, param_2, param_3, param_4, param_5, 
   undefined1 *param_6;
 {
   byte bVar1;
-  undefined4 uVar2;
-  int iVar3;
-  ushort uVar4;
-  int iVar5;
-  undefined1 uVar6;
-  undefined4 *puVar7;
-  void *pvVar8;
+  int iVar2;
+  ushort uVar3;
+  int iVar4;
+  undefined1 uVar5;
+  undefined4 *puVar6;
+  undefined4 uVar7;
+  int iVar8;
   int iVar9;
-  int iVar10;
-  undefined4 *puVar11;
+  undefined4 *puVar10;
   
   bVar1 = *param_2;
   if (0x24 < (int)param_3) {
     if (*(uint *)(param_1 + 0x7588) < param_3) {
-      if (*(void **)(param_1 + 0x758c) != (void *)0x0) {
-        _free(*(void **)(param_1 + 0x758c));
+      if (*(int *)(param_1 + 0x758c) != 0) {
+        _free(*(int *)(param_1 + 0x758c));
       }
-      pvVar8 = _malloc(param_3 << 8);
-      *(void **)(param_1 + 0x758c) = pvVar8;
+      uVar7 = _malloc(param_3 << 8);
+      *(undefined4 *)(param_1 + 0x758c) = uVar7;
       *(uint *)(param_1 + 0x7588) = param_3;
       *param_6 = 1;
     }
     param_5 = *(int *)(param_1 + 0x758c);
   }
-  iVar9 = 0;
+  iVar8 = 0;
   if (0 < (int)param_3) {
     do {
-      iVar10 = 0;
+      iVar9 = 0;
       if (bVar1 != 0) {
         do {
-          iVar3 = iVar10 * 2;
-          switch((uint)(*(ushort *)(param_2 + iVar3 + 4) >> 10)) {
+          iVar2 = iVar9 * 2;
+          switch((uint)(*(ushort *)(param_2 + iVar2 + 4) >> 10)) {
           case 0:
-            iVar5 = (*(ushort *)(param_2 + iVar3 + 4) >> 8 & 3) + 1;
-            if (iVar5 != 0) {
-              puVar7 = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar3 + 4) & 0x3f) * 4);
-              puVar11 = (undefined4 *)(param_5 + 0x20);
+            iVar4 = (*(ushort *)(param_2 + iVar2 + 4) >> 8 & 3) + 1;
+            if (iVar4 != 0) {
+              puVar6 = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
+              puVar10 = (undefined4 *)(param_5 + 0x20);
               do {
-                uVar2 = *puVar7;
-                puVar7 = puVar7 + 1;
-                *puVar11 = uVar2;
-                puVar11 = puVar11 + 1;
-                iVar5 = iVar5 + -1;
-              } while (iVar5 != 0);
+                uVar7 = *puVar6;
+                puVar6 = puVar6 + 1;
+                *puVar10 = uVar7;
+                puVar10 = puVar10 + 1;
+                iVar4 = iVar4 + -1;
+              } while (iVar4 != 0);
             }
             break;
           case 1:
-            iVar5 = (*(ushort *)(param_2 + iVar3 + 4) >> 8 & 3) + 1;
-            if (iVar5 != 0) {
-              puVar7 = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar3 + 4) & 0x3f) * 4);
-              puVar11 = (undefined4 *)(param_5 + 0x40);
+            iVar4 = (*(ushort *)(param_2 + iVar2 + 4) >> 8 & 3) + 1;
+            if (iVar4 != 0) {
+              puVar6 = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
+              puVar10 = (undefined4 *)(param_5 + 0x40);
               do {
-                uVar2 = *puVar7;
-                puVar7 = puVar7 + 1;
-                *puVar11 = uVar2;
-                puVar11 = puVar11 + 1;
-                iVar5 = iVar5 + -1;
-              } while (iVar5 != 0);
+                uVar7 = *puVar6;
+                puVar6 = puVar6 + 1;
+                *puVar10 = uVar7;
+                puVar10 = puVar10 + 1;
+                iVar4 = iVar4 + -1;
+              } while (iVar4 != 0);
             }
             break;
           case 2:
-            iVar5 = (*(ushort *)(param_2 + iVar3 + 4) >> 8 & 3) + 1;
-            if (iVar5 != 0) {
-              puVar7 = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar3 + 4) & 0x3f) * 4);
-              puVar11 = (undefined4 *)(param_5 + 0x30);
+            iVar4 = (*(ushort *)(param_2 + iVar2 + 4) >> 8 & 3) + 1;
+            if (iVar4 != 0) {
+              puVar6 = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
+              puVar10 = (undefined4 *)(param_5 + 0x30);
               do {
-                uVar2 = *puVar7;
-                puVar7 = puVar7 + 1;
-                *puVar11 = uVar2;
-                puVar11 = puVar11 + 1;
-                iVar5 = iVar5 + -1;
-              } while (iVar5 != 0);
+                uVar7 = *puVar6;
+                puVar6 = puVar6 + 1;
+                *puVar10 = uVar7;
+                puVar10 = puVar10 + 1;
+                iVar4 = iVar4 + -1;
+              } while (iVar4 != 0);
             }
             break;
           case 3:
             *(undefined4 *)(param_5 + 0x4c) =
-                 *(undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar3 + 4) & 0x3f) * 4);
+                 *(undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
             break;
           case 4:
-            iVar5 = (*(ushort *)(param_2 + iVar3 + 4) >> 8 & 3) + 1;
-            if (iVar5 != 0) {
-              puVar7 = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar3 + 4) & 0x3f) * 4);
-              puVar11 = (undefined4 *)(param_5 + 0x50);
+            iVar4 = (*(ushort *)(param_2 + iVar2 + 4) >> 8 & 3) + 1;
+            if (iVar4 != 0) {
+              puVar6 = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
+              puVar10 = (undefined4 *)(param_5 + 0x50);
               do {
-                uVar2 = *puVar7;
-                puVar7 = puVar7 + 1;
-                *puVar11 = uVar2;
-                puVar11 = puVar11 + 1;
-                iVar5 = iVar5 + -1;
-              } while (iVar5 != 0);
+                uVar7 = *puVar6;
+                puVar6 = puVar6 + 1;
+                *puVar10 = uVar7;
+                puVar10 = puVar10 + 1;
+                iVar4 = iVar4 + -1;
+              } while (iVar4 != 0);
             }
             break;
           case 5:
-            iVar5 = (*(ushort *)(param_2 + iVar3 + 4) >> 8 & 3) + 1;
-            if (iVar5 != 0) {
-              puVar7 = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar3 + 4) & 0x3f) * 4);
-              puVar11 = (undefined4 *)(param_5 + 0x60);
+            iVar4 = (*(ushort *)(param_2 + iVar2 + 4) >> 8 & 3) + 1;
+            if (iVar4 != 0) {
+              puVar6 = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
+              puVar10 = (undefined4 *)(param_5 + 0x60);
               do {
-                uVar2 = *puVar7;
-                puVar7 = puVar7 + 1;
-                *puVar11 = uVar2;
-                puVar11 = puVar11 + 1;
-                iVar5 = iVar5 + -1;
-              } while (iVar5 != 0);
+                uVar7 = *puVar6;
+                puVar6 = puVar6 + 1;
+                *puVar10 = uVar7;
+                puVar10 = puVar10 + 1;
+                iVar4 = iVar4 + -1;
+              } while (iVar4 != 0);
             }
             break;
           case 6:
-            uVar4 = *(ushort *)(param_2 + iVar3 + 4) >> 6 & 3;
-            iVar3 = (*(ushort *)(param_2 + iVar3 + 4) & 0x3f) * 4;
-            if (uVar4 == 1) {
-              uVar6 = *(undefined1 *)(param_4 + iVar3);
+            uVar3 = *(ushort *)(param_2 + iVar2 + 4) >> 6 & 3;
+            iVar2 = (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4;
+            if (uVar3 == 1) {
+              uVar5 = *(undefined1 *)(param_4 + iVar2);
             }
             else {
-              if (uVar4 != 3) break;
-              uVar6 = *(undefined1 *)(param_4 + iVar3 + 3);
+              if (uVar3 != 3) break;
+              uVar5 = *(undefined1 *)(param_4 + iVar2 + 3);
             }
-            *(undefined1 *)(param_5 + 0x7c) = uVar6;
+            *(undefined1 *)(param_5 + 0x7c) = uVar5;
             break;
           case 8:
           case 9:
@@ -362,27 +361,27 @@ int _gleDecomposePrimitiveVertices(param_1, param_2, param_3, param_4, param_5, 
           case 0xd:
           case 0xe:
           case 0xf:
-            iVar5 = (*(ushort *)(param_2 + iVar3 + 4) >> 8 & 3) + 1;
-            if (iVar5 != 0) {
-              puVar11 = (undefined4 *)
-                        (((*(ushort *)(param_2 + iVar3 + 4) >> 10) - 8) * 0x10 + param_5 + 0x80);
-              puVar7 = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar3 + 4) & 0x3f) * 4);
+            iVar4 = (*(ushort *)(param_2 + iVar2 + 4) >> 8 & 3) + 1;
+            if (iVar4 != 0) {
+              puVar10 = (undefined4 *)
+                        (((*(ushort *)(param_2 + iVar2 + 4) >> 10) - 8) * 0x10 + param_5 + 0x80);
+              puVar6 = (undefined4 *)(param_4 + (*(ushort *)(param_2 + iVar2 + 4) & 0x3f) * 4);
               do {
-                uVar2 = *puVar7;
-                puVar7 = puVar7 + 1;
-                *puVar11 = uVar2;
-                puVar11 = puVar11 + 1;
-                iVar5 = iVar5 + -1;
-              } while (iVar5 != 0);
+                uVar7 = *puVar6;
+                puVar6 = puVar6 + 1;
+                *puVar10 = uVar7;
+                puVar10 = puVar10 + 1;
+                iVar4 = iVar4 + -1;
+              } while (iVar4 != 0);
             }
           }
-          iVar10 = iVar10 + 1;
-        } while (iVar10 < (int)(uint)bVar1);
+          iVar9 = iVar9 + 1;
+        } while (iVar9 < (int)(uint)bVar1);
       }
-      iVar9 = iVar9 + 1;
+      iVar8 = iVar8 + 1;
       param_5 = param_5 + 0x100;
       param_4 = param_4 + (uint)param_2[2] * 4;
-    } while (iVar9 < (int)param_3);
+    } while (iVar8 < (int)param_3);
   }
   return;
 }
@@ -644,7 +643,7 @@ int _gleSetFunctionIDToList(param_1, param_2, param_3)
   int iVar10;
   uint *puVar11;
   int iVar12;
-  undefined8 uVar13;
+  longlong lVar13;
   
   *param_3 = 0;
   if (*(char *)(param_2 + 0x31c) != '\0') {
@@ -655,8 +654,8 @@ int _gleSetFunctionIDToList(param_1, param_2, param_3)
   iVar12 = 0;
   uVar4 = *(uint *)(param_2 + 0x304) & 0xff7fffff;
   do {
-    uVar13 = ___ashldi3(0,1,iVar12 + 0x10);
-    if ((uVar7 & (uint)((ulonglong)uVar13 >> 0x20)) != 0 || (uVar4 & (uint)uVar13) != 0) {
+    lVar13 = ___ashldi3(0,1,iVar12 + 0x10);
+    if ((uVar7 & (uint)((ulonglong)lVar13 >> 0x20)) != 0 || (uVar4 & (uint)lVar13) != 0) {
       iVar10 = iVar10 + 1;
     }
     iVar12 = iVar12 + 1;
@@ -674,8 +673,8 @@ int _gleSetFunctionIDToList(param_1, param_2, param_3)
   iVar10 = 1;
   puVar11 = param_3 + 1;
   while( true ) {
-    uVar13 = ___ashldi3(0,1,iVar10 + 0x10);
-    if ((uVar7 & (uint)((ulonglong)uVar13 >> 0x20)) != 0 || (uVar4 & (uint)uVar13) != 0) {
+    lVar13 = ___ashldi3(0,1,iVar10 + 0x10);
+    if ((uVar7 & (uint)((ulonglong)lVar13 >> 0x20)) != 0 || (uVar4 & (uint)lVar13) != 0) {
       iVar12 = iVar10 * 0x18 + param_2;
       uVar8 = (uint)*(ushort *)(iVar12 + 8);
       uVar6 = uVar8 - 0x1400;

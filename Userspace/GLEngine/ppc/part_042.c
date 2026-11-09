@@ -964,28 +964,32 @@ int _gleFeedbackBitmap(param_1, param_2)
   return;
 }
 
-/* FUN_000cc124 @ 0xcc124 (100 bytes) */
-int FUN_000cc124(param_1, param_2)
+/* _gleFeedbackPoints @ 0xcc118 (112 bytes) */
+int _gleFeedbackPoints(param_1, param_2)
   undefined4 param_1;
   uint param_2;
 {
-  uint unaff_r28;
+  int in_r5;
+  uint uVar1;
   
-  for (; param_2 < unaff_r28; param_2 = param_2 + 0x100) {
+  uVar1 = param_2 + in_r5 * 0x100;
+  for (; param_2 < uVar1; param_2 = param_2 + 0x100) {
     ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f28);
     _gleFeedbackHitRecord(param_1,param_2);
   }
   return;
 }
 
-/* FUN_000cc194 @ 0xcc194 (100 bytes) */
-int FUN_000cc194(param_1, param_2)
+/* _gleFeedbackPointsPtr @ 0xcc188 (112 bytes) */
+int _gleFeedbackPointsPtr(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  undefined4 *unaff_r28;
+  int in_r5;
+  undefined4 *puVar1;
   
-  for (; param_2 < unaff_r28; param_2 = param_2 + 1) {
+  puVar1 = param_2 + in_r5;
+  for (; param_2 < puVar1; param_2 = param_2 + 1) {
     ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f28);
     _gleFeedbackHitRecord(param_1,*param_2);
   }

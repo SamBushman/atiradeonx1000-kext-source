@@ -163,12 +163,12 @@ int _glIsProgramARB_Exec(param_1, param_2)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar1 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar1 + 0x8028));
+      _pthread_mutex_lock(iVar1 + 0x8028);
       iVar1 = *(int *)(param_1 + 0x5148);
     }
     iVar1 = _gleLookupHashObject(iVar1 + 0x4010,param_2);
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
     bVar2 = iVar1 != 0;
   }
@@ -815,25 +815,25 @@ int _glProgramStringARB_Comp(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  size_t param_4;
-  void *param_5;
+  int param_4;
+  undefined4 param_5;
 {
   uint uVar1;
   int iVar2;
   undefined1 *puVar3;
   undefined4 *puVar4;
-  void *pvVar5;
+  undefined4 uVar5;
   
-  uVar1 = param_4 + 3 & 0xfffffffc;
+  uVar1 = param_4 + 3U & 0xfffffffc;
   puVar4 = (undefined4 *)
            _gleAddListItem(param_1,PTR__glProgramStringARB_ListExec_00110234,uVar1 + 0xc);
-  pvVar5 = (void *)0x0;
+  uVar5 = 0;
   if (puVar4 != (undefined4 *)0x0) {
     *puVar4 = param_2;
     puVar4[1] = param_3;
     puVar4[2] = uVar1;
-    pvVar5 = _memcpy(puVar4 + 3,param_5,param_4);
-    if ((int)param_4 <= (int)uVar1) {
+    uVar5 = _memcpy(puVar4 + 3,param_5,param_4);
+    if (param_4 <= (int)uVar1) {
       iVar2 = (uVar1 + 1) - param_4;
       puVar3 = (undefined1 *)((int)puVar4 + param_4 + 0xc);
       do {
@@ -843,7 +843,7 @@ int _glProgramStringARB_Comp(param_1, param_2, param_3, param_4, param_5)
       } while (iVar2 != 0);
     }
   }
-  return pvVar5;
+  return uVar5;
 }
 
 /* _glProgramStringARB_CompExec @ 0x7a730 (80 bytes) */
@@ -1224,9 +1224,8 @@ int _glPixelMapfv_Exec(param_1, param_2, param_3, param_4)
   float fVar3;
   undefined4 uVar4;
   float fVar5;
-  void *pvVar6;
-  uint uVar7;
-  int iVar8;
+  uint uVar6;
+  int iVar7;
   
   if (-1 < *(short *)(param_1 + 0x4a10)) {
 LAB_0007ad34:
@@ -1236,32 +1235,32 @@ LAB_0007ad34:
     uVar4 = 0x502;
     goto LAB_0007b32c;
   }
-  uVar7 = param_3 - 1;
-  if (uVar7 < 0x100) {
-    iVar8 = *(int *)(param_1 + 0x4a6c);
-    if (iVar8 != 0) {
-      if ((*(int *)(iVar8 + 0x38) < (int)(param_3 * 4 + param_4)) || ((param_4 & 3) != 0))
+  uVar6 = param_3 - 1;
+  if (uVar6 < 0x100) {
+    iVar7 = *(int *)(param_1 + 0x4a6c);
+    if (iVar7 != 0) {
+      if ((*(int *)(iVar7 + 0x38) < (int)(param_3 * 4 + param_4)) || ((param_4 & 3) != 0))
       goto LAB_0007ad34;
-      if (*(int *)(iVar8 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
+      if (*(int *)(iVar7 + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(param_1,iVar7 + 0x10);
       }
-      param_4 = param_4 + *(int *)(iVar8 + 0x30);
+      param_4 = param_4 + *(int *)(iVar7 + 0x30);
     }
     switch(param_2) {
     case 0xc70:
-      if ((param_3 & uVar7) != 0) goto LAB_0007b07c;
+      if ((param_3 & uVar6) != 0) goto LAB_0007b07c;
       if (*(undefined **)(param_1 + 0x3248) != PTR__gle_default_pix_map_i_00112044) {
         _free(*(undefined **)(param_1 + 0x3248));
       }
-      pvVar6 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3248) = pvVar6;
-      if (pvVar6 != (void *)0x0) {
-        iVar8 = 0;
+      iVar7 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3248) = iVar7;
+      if (iVar7 != 0) {
+        iVar7 = 0;
         *(uint *)(param_1 + 0x3270) = param_3;
         if (0 < (int)param_3) {
           do {
-            iVar1 = iVar8 * 4;
-            iVar8 = iVar8 + 1;
+            iVar1 = iVar7 * 4;
+            iVar7 = iVar7 + 1;
             *(int *)(iVar1 + *(int *)(param_1 + 0x3248)) = (int)GH_F2U(*(float *)(iVar1 + param_4));
             param_3 = param_3 - 1;
           } while (param_3 != 0);
@@ -1270,19 +1269,19 @@ LAB_0007ad34:
       }
       break;
     case 0xc71:
-      if ((param_3 & uVar7) != 0) goto LAB_0007b07c;
+      if ((param_3 & uVar6) != 0) goto LAB_0007b07c;
       if (*(undefined **)(param_1 + 0x326c) != PTR__gle_default_pix_map_i_00112044) {
         _free(*(undefined **)(param_1 + 0x326c));
       }
-      pvVar6 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x326c) = pvVar6;
-      if (pvVar6 != (void *)0x0) {
-        iVar8 = 0;
+      iVar7 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x326c) = iVar7;
+      if (iVar7 != 0) {
+        iVar7 = 0;
         *(uint *)(param_1 + 0x3274) = param_3;
         if (0 < (int)param_3) {
           do {
-            iVar1 = iVar8 * 4;
-            iVar8 = iVar8 + 1;
+            iVar1 = iVar7 * 4;
+            iVar7 = iVar7 + 1;
             *(int *)(iVar1 + *(int *)(param_1 + 0x326c)) = (int)GH_F2U(*(float *)(iVar1 + param_4));
             param_3 = param_3 - 1;
           } while (param_3 != 0);
@@ -1291,20 +1290,20 @@ LAB_0007ad34:
       }
       break;
     case 0xc72:
-      if ((param_3 & uVar7) != 0) goto LAB_0007b07c;
+      if ((param_3 & uVar6) != 0) goto LAB_0007b07c;
       if (*(undefined **)(param_1 + 0x324c) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x324c));
       }
-      pvVar6 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x324c) = pvVar6;
-      if (pvVar6 != (void *)0x0) {
-        iVar8 = 0;
+      iVar7 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x324c) = iVar7;
+      if (iVar7 != 0) {
+        iVar7 = 0;
         *(uint *)(param_1 + 0x3278) = param_3;
         fVar3 = FLOAT_00108e54;
         fVar2 = FLOAT_00108e50;
         if (0 < (int)param_3) {
           do {
-            fVar5 = *(float *)(param_4 + iVar8 * 4);
+            fVar5 = *(float *)(param_4 + iVar7 * 4);
             if (fVar2 <= fVar5) {
               if (fVar3 < fVar5) {
                 fVar5 = 1.0;
@@ -1313,8 +1312,8 @@ LAB_0007ad34:
             else {
               fVar5 = 0.0;
             }
-            *(float *)(iVar8 * 4 + *(int *)(param_1 + 0x324c)) = fVar5;
-            iVar8 = iVar8 + 1;
+            *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x324c)) = fVar5;
+            iVar7 = iVar7 + 1;
             param_3 = param_3 - 1;
           } while (param_3 != 0);
         }
@@ -1322,20 +1321,20 @@ LAB_0007ad34:
       }
       break;
     case 0xc73:
-      if ((param_3 & uVar7) != 0) goto LAB_0007b07c;
+      if ((param_3 & uVar6) != 0) goto LAB_0007b07c;
       if (*(undefined **)(param_1 + 0x3250) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3250));
       }
-      pvVar6 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3250) = pvVar6;
-      if (pvVar6 != (void *)0x0) {
-        iVar8 = 0;
+      iVar7 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3250) = iVar7;
+      if (iVar7 != 0) {
+        iVar7 = 0;
         *(uint *)(param_1 + 0x327c) = param_3;
         fVar3 = FLOAT_00108e54;
         fVar2 = FLOAT_00108e50;
         if (0 < (int)param_3) {
           do {
-            fVar5 = *(float *)(param_4 + iVar8 * 4);
+            fVar5 = *(float *)(param_4 + iVar7 * 4);
             if (fVar2 <= fVar5) {
               if (fVar3 < fVar5) {
                 fVar5 = 1.0;
@@ -1344,8 +1343,8 @@ LAB_0007ad34:
             else {
               fVar5 = 0.0;
             }
-            *(float *)(iVar8 * 4 + *(int *)(param_1 + 0x3250)) = fVar5;
-            iVar8 = iVar8 + 1;
+            *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x3250)) = fVar5;
+            iVar7 = iVar7 + 1;
             param_3 = param_3 - 1;
           } while (param_3 != 0);
         }
@@ -1353,20 +1352,20 @@ LAB_0007ad34:
       }
       break;
     case 0xc74:
-      if ((param_3 & uVar7) != 0) goto LAB_0007b07c;
+      if ((param_3 & uVar6) != 0) goto LAB_0007b07c;
       if (*(undefined **)(param_1 + 0x3254) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3254));
       }
-      pvVar6 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3254) = pvVar6;
-      if (pvVar6 != (void *)0x0) {
-        iVar8 = 0;
+      iVar7 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3254) = iVar7;
+      if (iVar7 != 0) {
+        iVar7 = 0;
         *(uint *)(param_1 + 0x3280) = param_3;
         fVar3 = FLOAT_00108e54;
         fVar2 = FLOAT_00108e50;
         if (0 < (int)param_3) {
           do {
-            fVar5 = *(float *)(param_4 + iVar8 * 4);
+            fVar5 = *(float *)(param_4 + iVar7 * 4);
             if (fVar2 <= fVar5) {
               if (fVar3 < fVar5) {
                 fVar5 = 1.0;
@@ -1375,8 +1374,8 @@ LAB_0007ad34:
             else {
               fVar5 = 0.0;
             }
-            *(float *)(iVar8 * 4 + *(int *)(param_1 + 0x3254)) = fVar5;
-            iVar8 = iVar8 + 1;
+            *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x3254)) = fVar5;
+            iVar7 = iVar7 + 1;
             param_3 = param_3 - 1;
           } while (param_3 != 0);
         }
@@ -1384,20 +1383,20 @@ LAB_0007ad34:
       }
       break;
     case 0xc75:
-      if ((param_3 & uVar7) != 0) goto LAB_0007b07c;
+      if ((param_3 & uVar6) != 0) goto LAB_0007b07c;
       if (*(undefined **)(param_1 + 0x3258) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3258));
       }
-      pvVar6 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3258) = pvVar6;
-      if (pvVar6 != (void *)0x0) {
-        iVar8 = 0;
+      iVar7 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3258) = iVar7;
+      if (iVar7 != 0) {
+        iVar7 = 0;
         *(uint *)(param_1 + 0x3284) = param_3;
         fVar3 = FLOAT_00108e54;
         fVar2 = FLOAT_00108e50;
         if (0 < (int)param_3) {
           do {
-            fVar5 = *(float *)(param_4 + iVar8 * 4);
+            fVar5 = *(float *)(param_4 + iVar7 * 4);
             if (fVar2 <= fVar5) {
               if (fVar3 < fVar5) {
                 fVar5 = 1.0;
@@ -1406,8 +1405,8 @@ LAB_0007ad34:
             else {
               fVar5 = 0.0;
             }
-            *(float *)(iVar8 * 4 + *(int *)(param_1 + 0x3258)) = fVar5;
-            iVar8 = iVar8 + 1;
+            *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x3258)) = fVar5;
+            iVar7 = iVar7 + 1;
             param_3 = param_3 - 1;
           } while (param_3 != 0);
         }
@@ -1418,16 +1417,16 @@ LAB_0007ad34:
       if (*(undefined **)(param_1 + 0x325c) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x325c));
       }
-      pvVar6 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x325c) = pvVar6;
-      if (pvVar6 != (void *)0x0) {
-        iVar8 = 0;
+      iVar7 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x325c) = iVar7;
+      if (iVar7 != 0) {
+        iVar7 = 0;
         *(uint *)(param_1 + 0x3288) = param_3;
         fVar3 = FLOAT_00108e54;
         fVar2 = FLOAT_00108e50;
         if (0 < (int)param_3) {
           do {
-            fVar5 = *(float *)(param_4 + iVar8 * 4);
+            fVar5 = *(float *)(param_4 + iVar7 * 4);
             if (fVar2 <= fVar5) {
               if (fVar3 < fVar5) {
                 fVar5 = 1.0;
@@ -1436,8 +1435,8 @@ LAB_0007ad34:
             else {
               fVar5 = 0.0;
             }
-            *(float *)(iVar8 * 4 + *(int *)(param_1 + 0x325c)) = fVar5;
-            iVar8 = iVar8 + 1;
+            *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x325c)) = fVar5;
+            iVar7 = iVar7 + 1;
             param_3 = param_3 - 1;
           } while (param_3 != 0);
         }
@@ -1448,16 +1447,16 @@ LAB_0007ad34:
       if (*(undefined **)(param_1 + 0x3260) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3260));
       }
-      pvVar6 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3260) = pvVar6;
-      if (pvVar6 != (void *)0x0) {
-        iVar8 = 0;
+      iVar7 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3260) = iVar7;
+      if (iVar7 != 0) {
+        iVar7 = 0;
         *(uint *)(param_1 + 0x328c) = param_3;
         fVar3 = FLOAT_00108e54;
         fVar2 = FLOAT_00108e50;
         if (0 < (int)param_3) {
           do {
-            fVar5 = *(float *)(param_4 + iVar8 * 4);
+            fVar5 = *(float *)(param_4 + iVar7 * 4);
             if (fVar2 <= fVar5) {
               if (fVar3 < fVar5) {
                 fVar5 = 1.0;
@@ -1466,8 +1465,8 @@ LAB_0007ad34:
             else {
               fVar5 = 0.0;
             }
-            *(float *)(iVar8 * 4 + *(int *)(param_1 + 0x3260)) = fVar5;
-            iVar8 = iVar8 + 1;
+            *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x3260)) = fVar5;
+            iVar7 = iVar7 + 1;
             param_3 = param_3 - 1;
           } while (param_3 != 0);
         }
@@ -1478,16 +1477,16 @@ LAB_0007ad34:
       if (*(undefined **)(param_1 + 0x3264) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3264));
       }
-      pvVar6 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3264) = pvVar6;
-      if (pvVar6 != (void *)0x0) {
-        iVar8 = 0;
+      iVar7 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3264) = iVar7;
+      if (iVar7 != 0) {
+        iVar7 = 0;
         *(uint *)(param_1 + 0x3290) = param_3;
         fVar3 = FLOAT_00108e54;
         fVar2 = FLOAT_00108e50;
         if (0 < (int)param_3) {
           do {
-            fVar5 = *(float *)(param_4 + iVar8 * 4);
+            fVar5 = *(float *)(param_4 + iVar7 * 4);
             if (fVar2 <= fVar5) {
               if (fVar3 < fVar5) {
                 fVar5 = 1.0;
@@ -1496,8 +1495,8 @@ LAB_0007ad34:
             else {
               fVar5 = 0.0;
             }
-            *(float *)(iVar8 * 4 + *(int *)(param_1 + 0x3264)) = fVar5;
-            iVar8 = iVar8 + 1;
+            *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x3264)) = fVar5;
+            iVar7 = iVar7 + 1;
             param_3 = param_3 - 1;
           } while (param_3 != 0);
         }
@@ -1508,16 +1507,16 @@ LAB_0007ad34:
       if (*(undefined **)(param_1 + 0x3268) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3268));
       }
-      pvVar6 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3268) = pvVar6;
-      if (pvVar6 != (void *)0x0) {
-        iVar8 = 0;
+      iVar7 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3268) = iVar7;
+      if (iVar7 != 0) {
+        iVar7 = 0;
         *(uint *)(param_1 + 0x3294) = param_3;
         fVar3 = FLOAT_00108e54;
         fVar2 = FLOAT_00108e50;
         if (0 < (int)param_3) {
           do {
-            fVar5 = *(float *)(param_4 + iVar8 * 4);
+            fVar5 = *(float *)(param_4 + iVar7 * 4);
             if (fVar2 <= fVar5) {
               if (fVar3 < fVar5) {
                 fVar5 = 1.0;
@@ -1526,8 +1525,8 @@ LAB_0007ad34:
             else {
               fVar5 = 0.0;
             }
-            *(float *)(iVar8 * 4 + *(int *)(param_1 + 0x3268)) = fVar5;
-            iVar8 = iVar8 + 1;
+            *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x3268)) = fVar5;
+            iVar7 = iVar7 + 1;
             param_3 = param_3 - 1;
           } while (param_3 != 0);
         }
@@ -1637,9 +1636,8 @@ int _glPixelMapuiv_Exec(param_1, param_2, param_3, param_4)
   double dVar2;
   double dVar3;
   undefined4 uVar4;
-  void *pvVar5;
-  uint uVar6;
-  int iVar7;
+  uint uVar5;
+  int iVar6;
   
   if (-1 < *(short *)(param_1 + 0x4a10)) {
 LAB_0007b5b4:
@@ -1649,32 +1647,32 @@ LAB_0007b5b4:
     uVar4 = 0x502;
     goto LAB_0007bb40;
   }
-  uVar6 = param_3 - 1;
-  if (uVar6 < 0x100) {
-    iVar7 = *(int *)(param_1 + 0x4a6c);
-    if (iVar7 != 0) {
-      if ((*(int *)(iVar7 + 0x38) < (int)(param_3 * 4 + param_4)) || ((param_4 & 3) != 0))
+  uVar5 = param_3 - 1;
+  if (uVar5 < 0x100) {
+    iVar6 = *(int *)(param_1 + 0x4a6c);
+    if (iVar6 != 0) {
+      if ((*(int *)(iVar6 + 0x38) < (int)(param_3 * 4 + param_4)) || ((param_4 & 3) != 0))
       goto LAB_0007b5b4;
-      if (*(int *)(iVar7 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(param_1,iVar7 + 0x10);
+      if (*(int *)(iVar6 + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(param_1,iVar6 + 0x10);
       }
-      param_4 = param_4 + *(int *)(iVar7 + 0x30);
+      param_4 = param_4 + *(int *)(iVar6 + 0x30);
     }
     switch(param_2) {
     case 0xc70:
-      if ((param_3 & uVar6) != 0) goto LAB_0007b8c0;
+      if ((param_3 & uVar5) != 0) goto LAB_0007b8c0;
       if (*(undefined **)(param_1 + 0x3248) != PTR__gle_default_pix_map_i_00112044) {
         _free(*(undefined **)(param_1 + 0x3248));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3248) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3248) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3270) = param_3;
         if (0 < (int)param_3) {
           do {
-            iVar1 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar1 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(undefined4 *)(iVar1 + *(int *)(param_1 + 0x3248)) = *(undefined4 *)(iVar1 + param_4);
             param_3 = param_3 - 1;
           } while (param_3 != 0);
@@ -1683,19 +1681,19 @@ LAB_0007b5b4:
       }
       break;
     case 0xc71:
-      if ((param_3 & uVar6) != 0) goto LAB_0007b8c0;
+      if ((param_3 & uVar5) != 0) goto LAB_0007b8c0;
       if (*(undefined **)(param_1 + 0x326c) != PTR__gle_default_pix_map_i_00112044) {
         _free(*(undefined **)(param_1 + 0x326c));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x326c) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x326c) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3274) = param_3;
         if (0 < (int)param_3) {
           do {
-            iVar1 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar1 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(undefined4 *)(iVar1 + *(int *)(param_1 + 0x326c)) = *(undefined4 *)(iVar1 + param_4);
             param_3 = param_3 - 1;
           } while (param_3 != 0);
@@ -1704,21 +1702,21 @@ LAB_0007b5b4:
       }
       break;
     case 0xc72:
-      if ((param_3 & uVar6) != 0) goto LAB_0007b8c0;
+      if ((param_3 & uVar5) != 0) goto LAB_0007b8c0;
       if (*(undefined **)(param_1 + 0x324c) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x324c));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x324c) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x324c) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3278) = param_3;
         dVar3 = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)param_3) {
           do {
-            iVar1 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar1 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar1 + *(int *)(param_1 + 0x324c)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
                                                           *(undefined4 *)(iVar1 + param_4)) - dVar2)
@@ -1730,21 +1728,21 @@ LAB_0007b5b4:
       }
       break;
     case 0xc73:
-      if ((param_3 & uVar6) != 0) goto LAB_0007b8c0;
+      if ((param_3 & uVar5) != 0) goto LAB_0007b8c0;
       if (*(undefined **)(param_1 + 0x3250) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3250));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3250) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3250) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x327c) = param_3;
         dVar3 = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)param_3) {
           do {
-            iVar1 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar1 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar1 + *(int *)(param_1 + 0x3250)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
                                                           *(undefined4 *)(iVar1 + param_4)) - dVar2)
@@ -1756,21 +1754,21 @@ LAB_0007b5b4:
       }
       break;
     case 0xc74:
-      if ((param_3 & uVar6) != 0) goto LAB_0007b8c0;
+      if ((param_3 & uVar5) != 0) goto LAB_0007b8c0;
       if (*(undefined **)(param_1 + 0x3254) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3254));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3254) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3254) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3280) = param_3;
         dVar3 = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)param_3) {
           do {
-            iVar1 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar1 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar1 + *(int *)(param_1 + 0x3254)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
                                                           *(undefined4 *)(iVar1 + param_4)) - dVar2)
@@ -1782,21 +1780,21 @@ LAB_0007b5b4:
       }
       break;
     case 0xc75:
-      if ((param_3 & uVar6) != 0) goto LAB_0007b8c0;
+      if ((param_3 & uVar5) != 0) goto LAB_0007b8c0;
       if (*(undefined **)(param_1 + 0x3258) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3258));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3258) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3258) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3284) = param_3;
         dVar3 = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)param_3) {
           do {
-            iVar1 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar1 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar1 + *(int *)(param_1 + 0x3258)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
                                                           *(undefined4 *)(iVar1 + param_4)) - dVar2)
@@ -1811,17 +1809,17 @@ LAB_0007b5b4:
       if (*(undefined **)(param_1 + 0x325c) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x325c));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x325c) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x325c) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3288) = param_3;
         dVar3 = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)param_3) {
           do {
-            iVar1 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar1 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar1 + *(int *)(param_1 + 0x325c)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
                                                           *(undefined4 *)(iVar1 + param_4)) - dVar2)
@@ -1836,17 +1834,17 @@ LAB_0007b5b4:
       if (*(undefined **)(param_1 + 0x3260) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3260));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3260) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3260) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x328c) = param_3;
         dVar3 = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)param_3) {
           do {
-            iVar1 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar1 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar1 + *(int *)(param_1 + 0x3260)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
                                                           *(undefined4 *)(iVar1 + param_4)) - dVar2)
@@ -1861,17 +1859,17 @@ LAB_0007b5b4:
       if (*(undefined **)(param_1 + 0x3264) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3264));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3264) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3264) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3290) = param_3;
         dVar3 = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)param_3) {
           do {
-            iVar1 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar1 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar1 + *(int *)(param_1 + 0x3264)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
                                                           *(undefined4 *)(iVar1 + param_4)) - dVar2)
@@ -1886,17 +1884,17 @@ LAB_0007b5b4:
       if (*(undefined **)(param_1 + 0x3268) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3268));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3268) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3268) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3294) = param_3;
         dVar3 = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)param_3) {
           do {
-            iVar1 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar1 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar1 + *(int *)(param_1 + 0x3268)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
                                                           *(undefined4 *)(iVar1 + param_4)) - dVar2)
@@ -2009,9 +2007,8 @@ int _glPixelMapusv_Exec(param_1, param_2, param_3, param_4)
   int iVar2;
   float fVar3;
   undefined4 uVar4;
-  void *pvVar5;
-  uint uVar6;
-  int iVar7;
+  uint uVar5;
+  int iVar6;
   
   if (-1 < *(short *)(param_1 + 0x4a10)) {
 LAB_0007bdc8:
@@ -2021,34 +2018,34 @@ LAB_0007bdc8:
     uVar4 = 0x502;
     goto LAB_0007c380;
   }
-  uVar6 = param_3 - 1;
-  if (uVar6 < 0x100) {
-    iVar7 = *(int *)(param_1 + 0x4a6c);
-    if (iVar7 != 0) {
-      if ((*(int *)(iVar7 + 0x38) < (int)(param_4 + param_3)) || (((uint)param_4 & 1) != 0))
+  uVar5 = param_3 - 1;
+  if (uVar5 < 0x100) {
+    iVar6 = *(int *)(param_1 + 0x4a6c);
+    if (iVar6 != 0) {
+      if ((*(int *)(iVar6 + 0x38) < (int)(param_4 + param_3)) || (((uint)param_4 & 1) != 0))
       goto LAB_0007bdc8;
-      if (*(int *)(iVar7 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(param_1,iVar7 + 0x10);
+      if (*(int *)(iVar6 + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(param_1,iVar6 + 0x10);
       }
-      param_4 = (ushort *)((int)param_4 + *(int *)(iVar7 + 0x30));
+      param_4 = (ushort *)((int)param_4 + *(int *)(iVar6 + 0x30));
     }
     switch(param_2) {
     case 0xc70:
-      if ((param_3 & uVar6) != 0) goto LAB_0007c0f0;
+      if ((param_3 & uVar5) != 0) goto LAB_0007c0f0;
       if (*(undefined **)(param_1 + 0x3248) != PTR__gle_default_pix_map_i_00112044) {
         _free(*(undefined **)(param_1 + 0x3248));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3248) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3248) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3270) = param_3;
         if (0 < (int)param_3) {
           do {
             uVar1 = *param_4;
-            iVar2 = iVar7 * 4;
+            iVar2 = iVar6 * 4;
             param_4 = param_4 + 1;
-            iVar7 = iVar7 + 1;
+            iVar6 = iVar6 + 1;
             *(uint *)(iVar2 + *(int *)(param_1 + 0x3248)) = (uint)uVar1;
             param_3 = param_3 - 1;
           } while (param_3 != 0);
@@ -2057,21 +2054,21 @@ LAB_0007bdc8:
       }
       break;
     case 0xc71:
-      if ((param_3 & uVar6) != 0) goto LAB_0007c0f0;
+      if ((param_3 & uVar5) != 0) goto LAB_0007c0f0;
       if (*(undefined **)(param_1 + 0x326c) != PTR__gle_default_pix_map_i_00112044) {
         _free(*(undefined **)(param_1 + 0x326c));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x326c) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x326c) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3274) = param_3;
         if (0 < (int)param_3) {
           do {
             uVar1 = *param_4;
-            iVar2 = iVar7 * 4;
+            iVar2 = iVar6 * 4;
             param_4 = param_4 + 1;
-            iVar7 = iVar7 + 1;
+            iVar6 = iVar6 + 1;
             *(uint *)(iVar2 + *(int *)(param_1 + 0x326c)) = (uint)uVar1;
             param_3 = param_3 - 1;
           } while (param_3 != 0);
@@ -2080,22 +2077,22 @@ LAB_0007bdc8:
       }
       break;
     case 0xc72:
-      if ((param_3 & uVar6) != 0) goto LAB_0007c0f0;
+      if ((param_3 & uVar5) != 0) goto LAB_0007c0f0;
       if (*(undefined **)(param_1 + 0x324c) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x324c));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x324c) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x324c) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3278) = param_3;
         fVar3 = FLOAT_00108e74;
         if (0 < (int)param_3) {
           do {
             uVar1 = *param_4;
             param_4 = param_4 + 1;
-            iVar2 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar2 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar2 + *(int *)(param_1 + 0x324c)) =
                  (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
             param_3 = param_3 - 1;
@@ -2105,22 +2102,22 @@ LAB_0007bdc8:
       }
       break;
     case 0xc73:
-      if ((param_3 & uVar6) != 0) goto LAB_0007c0f0;
+      if ((param_3 & uVar5) != 0) goto LAB_0007c0f0;
       if (*(undefined **)(param_1 + 0x3250) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3250));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3250) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3250) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x327c) = param_3;
         fVar3 = FLOAT_00108e74;
         if (0 < (int)param_3) {
           do {
             uVar1 = *param_4;
             param_4 = param_4 + 1;
-            iVar2 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar2 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar2 + *(int *)(param_1 + 0x3250)) =
                  (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
             param_3 = param_3 - 1;
@@ -2130,22 +2127,22 @@ LAB_0007bdc8:
       }
       break;
     case 0xc74:
-      if ((param_3 & uVar6) != 0) goto LAB_0007c0f0;
+      if ((param_3 & uVar5) != 0) goto LAB_0007c0f0;
       if (*(undefined **)(param_1 + 0x3254) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3254));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3254) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3254) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3280) = param_3;
         fVar3 = FLOAT_00108e74;
         if (0 < (int)param_3) {
           do {
             uVar1 = *param_4;
             param_4 = param_4 + 1;
-            iVar2 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar2 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar2 + *(int *)(param_1 + 0x3254)) =
                  (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
             param_3 = param_3 - 1;
@@ -2155,22 +2152,22 @@ LAB_0007bdc8:
       }
       break;
     case 0xc75:
-      if ((param_3 & uVar6) != 0) goto LAB_0007c0f0;
+      if ((param_3 & uVar5) != 0) goto LAB_0007c0f0;
       if (*(undefined **)(param_1 + 0x3258) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3258));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3258) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3258) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3284) = param_3;
         fVar3 = FLOAT_00108e74;
         if (0 < (int)param_3) {
           do {
             uVar1 = *param_4;
             param_4 = param_4 + 1;
-            iVar2 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar2 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar2 + *(int *)(param_1 + 0x3258)) =
                  (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
             param_3 = param_3 - 1;
@@ -2183,18 +2180,18 @@ LAB_0007bdc8:
       if (*(undefined **)(param_1 + 0x325c) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x325c));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x325c) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x325c) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3288) = param_3;
         fVar3 = FLOAT_00108e74;
         if (0 < (int)param_3) {
           do {
             uVar1 = *param_4;
             param_4 = param_4 + 1;
-            iVar2 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar2 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar2 + *(int *)(param_1 + 0x325c)) =
                  (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
             param_3 = param_3 - 1;
@@ -2207,18 +2204,18 @@ LAB_0007bdc8:
       if (*(undefined **)(param_1 + 0x3260) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3260));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3260) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3260) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x328c) = param_3;
         fVar3 = FLOAT_00108e74;
         if (0 < (int)param_3) {
           do {
             uVar1 = *param_4;
             param_4 = param_4 + 1;
-            iVar2 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar2 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar2 + *(int *)(param_1 + 0x3260)) =
                  (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
             param_3 = param_3 - 1;
@@ -2231,18 +2228,18 @@ LAB_0007bdc8:
       if (*(undefined **)(param_1 + 0x3264) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3264));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3264) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3264) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3290) = param_3;
         fVar3 = FLOAT_00108e74;
         if (0 < (int)param_3) {
           do {
             uVar1 = *param_4;
             param_4 = param_4 + 1;
-            iVar2 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar2 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar2 + *(int *)(param_1 + 0x3264)) =
                  (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
             param_3 = param_3 - 1;
@@ -2255,18 +2252,18 @@ LAB_0007bdc8:
       if (*(undefined **)(param_1 + 0x3268) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(param_1 + 0x3268));
       }
-      pvVar5 = _malloc(param_3 << 2);
-      *(void **)(param_1 + 0x3268) = pvVar5;
-      if (pvVar5 != (void *)0x0) {
-        iVar7 = 0;
+      iVar6 = _malloc(param_3 << 2);
+      *(int *)(param_1 + 0x3268) = iVar6;
+      if (iVar6 != 0) {
+        iVar6 = 0;
         *(uint *)(param_1 + 0x3294) = param_3;
         fVar3 = FLOAT_00108e74;
         if (0 < (int)param_3) {
           do {
             uVar1 = *param_4;
             param_4 = param_4 + 1;
-            iVar2 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
+            iVar2 = iVar6 * 4;
+            iVar6 = iVar6 + 1;
             *(float *)(iVar2 + *(int *)(param_1 + 0x3268)) =
                  (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
             param_3 = param_3 - 1;

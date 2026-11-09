@@ -142,19 +142,18 @@ int _gleExtractPixel_RGBA_Short(param_1, param_2)
   return;
 }
 
-/* FUN_000e20f0 @ 0xe20f0 (172 bytes) */
-int FUN_000e20f0(param_1, param_2)
+/* _gleExtractPixel_RGBA_Ushort @ 0xe20ec (176 bytes) */
+int _gleExtractPixel_RGBA_Ushort(param_1, param_2)
   int param_1;
-  int param_2;
+  ushort *param_2;
 {
   float fVar1;
-  uint unaff_r2;
   
   fVar1 = FLOAT_00108e74;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((unaff_r2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((*(ushort *)(param_2 + 2) | 0x4b000000))) - 8388608.0) * fVar1;
-  *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((*(ushort *)(param_2 + 4) | 0x4b000000))) - 8388608.0) * fVar1;
-  *(float *)(param_1 + 0x10) = (GH_U2F((unsigned int)((*(ushort *)(param_2 + 6) | 0x4b000000))) - 8388608.0) * fVar1;
+  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
+  *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * fVar1;
+  *(float *)(param_1 + 0x10) = (GH_U2F((unsigned int)((param_2[3] | 0x4b000000))) - 8388608.0) * fVar1;
   return;
 }
 
@@ -406,16 +405,15 @@ int _gleExtractPixel_ABGR_EXT_Byte(param_1, param_2)
   return;
 }
 
-/* FUN_000e2970 @ 0xe2970 (168 bytes) */
-int FUN_000e2970(param_1, param_2)
+/* _gleExtractPixel_ABGR_EXT_Ubyte @ 0xe296c (172 bytes) */
+int _gleExtractPixel_ABGR_EXT_Ubyte(param_1, param_2)
   int param_1;
   byte *param_2;
 {
   float fVar1;
-  uint unaff_r2;
   
   fVar1 = FLOAT_00108e78;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((unaff_r2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((param_2[3] | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
   *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * fVar1;
   *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
   *(float *)(param_1 + 0x10) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * fVar1;
@@ -444,16 +442,15 @@ int _gleExtractPixel_ABGR_EXT_Short(param_1, param_2)
   return;
 }
 
-/* FUN_000e2ac8 @ 0xe2ac8 (168 bytes) */
-int FUN_000e2ac8(param_1, param_2)
+/* _gleExtractPixel_ABGR_EXT_Ushort @ 0xe2ac4 (172 bytes) */
+int _gleExtractPixel_ABGR_EXT_Ushort(param_1, param_2)
   int param_1;
   ushort *param_2;
 {
   float fVar1;
-  uint unaff_r2;
   
   fVar1 = FLOAT_00108e74;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((unaff_r2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((param_2[3] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * fVar1;
   *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
   *(float *)(param_1 + 0x10) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * fVar1;
@@ -540,16 +537,15 @@ int _gleExtractPixel_BGRA_EXT_Byte(param_1, param_2)
   return;
 }
 
-/* FUN_000e2dbc @ 0xe2dbc (168 bytes) */
-int FUN_000e2dbc(param_1, param_2)
+/* _gleExtractPixel_BGRA_EXT_Ubyte @ 0xe2db8 (172 bytes) */
+int _gleExtractPixel_BGRA_EXT_Ubyte(param_1, param_2)
   int param_1;
   byte *param_2;
 {
   float fVar1;
-  uint unaff_r2;
   
   fVar1 = FLOAT_00108e78;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((unaff_r2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
   *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
   *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * fVar1;
   *(float *)(param_1 + 0x10) = (GH_U2F((unsigned int)((param_2[3] | 0x4b000000))) - 8388608.0) * fVar1;
@@ -578,16 +574,15 @@ int _gleExtractPixel_BGRA_EXT_Short(param_1, param_2)
   return;
 }
 
-/* FUN_000e2f14 @ 0xe2f14 (168 bytes) */
-int FUN_000e2f14(param_1, param_2)
+/* _gleExtractPixel_BGRA_EXT_Ushort @ 0xe2f10 (172 bytes) */
+int _gleExtractPixel_BGRA_EXT_Ushort(param_1, param_2)
   int param_1;
   ushort *param_2;
 {
   float fVar1;
-  uint unaff_r2;
   
   fVar1 = FLOAT_00108e74;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((unaff_r2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
   *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * fVar1;
   *(float *)(param_1 + 0x10) = (GH_U2F((unsigned int)((param_2[3] | 0x4b000000))) - 8388608.0) * fVar1;
@@ -839,16 +834,15 @@ int _gleExtractPixel_BGR_EXT_Byte(param_1, param_2)
   return;
 }
 
-/* FUN_000e376c @ 0xe376c (132 bytes) */
-int FUN_000e376c(param_1, param_2)
+/* _gleExtractPixel_BGR_EXT_Ubyte @ 0xe3768 (136 bytes) */
+int _gleExtractPixel_BGR_EXT_Ubyte(param_1, param_2)
   int param_1;
   byte *param_2;
 {
   float fVar1;
-  uint unaff_r2;
   
   fVar1 = FLOAT_00108e78;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((unaff_r2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
   *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
   *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * fVar1;
   return;
@@ -874,16 +868,15 @@ int _gleExtractPixel_BGR_EXT_Short(param_1, param_2)
   return;
 }
 
-/* FUN_000e3880 @ 0xe3880 (132 bytes) */
-int FUN_000e3880(param_1, param_2)
+/* _gleExtractPixel_BGR_EXT_Ushort @ 0xe387c (136 bytes) */
+int _gleExtractPixel_BGR_EXT_Ushort(param_1, param_2)
   int param_1;
   ushort *param_2;
 {
   float fVar1;
-  uint unaff_r2;
   
   fVar1 = FLOAT_00108e74;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((unaff_r2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
   *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * fVar1;
   return;
@@ -961,18 +954,17 @@ int _gleExtractPixel_RGB_Byte(param_1, param_2)
   return;
 }
 
-/* FUN_000e3ae0 @ 0xe3ae0 (136 bytes) */
-int FUN_000e3ae0(param_1, param_2)
+/* _gleExtractPixel_RGB_Ubyte @ 0xe3adc (140 bytes) */
+int _gleExtractPixel_RGB_Ubyte(param_1, param_2)
   int param_1;
-  int param_2;
+  byte *param_2;
 {
   float fVar1;
-  uint unaff_r2;
   
   fVar1 = FLOAT_00108e78;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((unaff_r2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-  *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((*(byte *)(param_2 + 1) | 0x4b000000))) - 8388608.0) * fVar1;
-  *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((*(byte *)(param_2 + 2) | 0x4b000000))) - 8388608.0) * fVar1;
+  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+  *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
+  *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * fVar1;
   return;
 }
 
@@ -996,18 +988,17 @@ int _gleExtractPixel_RGB_Short(param_1, param_2)
   return;
 }
 
-/* FUN_000e3bf8 @ 0xe3bf8 (136 bytes) */
-int FUN_000e3bf8(param_1, param_2)
+/* _gleExtractPixel_RGB_Ushort @ 0xe3bf4 (140 bytes) */
+int _gleExtractPixel_RGB_Ushort(param_1, param_2)
   int param_1;
-  int param_2;
+  ushort *param_2;
 {
   float fVar1;
-  uint unaff_r2;
   
   fVar1 = FLOAT_00108e74;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((unaff_r2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((*(ushort *)(param_2 + 2) | 0x4b000000))) - 8388608.0) * fVar1;
-  *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((*(ushort *)(param_2 + 4) | 0x4b000000))) - 8388608.0) * fVar1;
+  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
+  *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * fVar1;
   return;
 }
 

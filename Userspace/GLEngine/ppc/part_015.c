@@ -963,12 +963,12 @@ int _glGenRenderbuffersEXT_Exec(param_1, param_2, param_3)
     if (-1 < param_2) {
       iVar4 = *(int *)(param_1 + 0x5148);
       if (*(char *)(iVar4 + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(iVar4 + 0x8028));
+        _pthread_mutex_lock(iVar4 + 0x8028);
         iVar4 = *(int *)(param_1 + 0x5148);
       }
       iVar4 = _gleGenHashNames(((unsigned char *)0x00001004) + iVar4,param_2);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (iVar4 == 0) {
         return;
@@ -1023,7 +1023,7 @@ int FUN_00065f84(param_1, param_2, param_3)
       puVar6 = (undefined *)0x0;
       piVar5 = (int *)0x0;
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       iVar4 = *(int *)(param_1 + 0x744c);
       if (iVar4 != 0) {
@@ -1062,7 +1062,7 @@ int FUN_00065f84(param_1, param_2, param_3)
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       return;
     }
     if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1087,15 +1087,15 @@ int _glBindRenderbufferEXT_Exec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   undefined4 uVar1;
-  pthread_mutex_t *ppVar2;
+  int iVar2;
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (param_2 == 0x8d41) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        ppVar2 = (pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028);
-        _pthread_mutex_lock(ppVar2);
+        iVar2 = *(int *)(param_1 + 0x5148) + 0x8028;
+        _pthread_mutex_lock(iVar2);
         _gleBindRenderbuffer(param_1,param_3);
-        _pthread_mutex_unlock(ppVar2);
+        _pthread_mutex_unlock(iVar2);
         return;
       }
       _gleBindRenderbuffer(param_1,param_3);
@@ -1126,7 +1126,7 @@ int _glRenderbufferStorageEXT_Exec(param_1, param_2, param_3, param_4, param_5)
 {
   bool bVar1;
   undefined4 uVar2;
-  pthread_mutex_t *ppVar3;
+  int iVar3;
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (param_2 != 0x8d41) goto LAB_00066334;
@@ -1166,10 +1166,10 @@ LAB_0006634c:
             _gleRenderbufferStorage(param_1,0x8d41,param_3,param_4,param_5);
             return;
           }
-          ppVar3 = (pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028);
-          _pthread_mutex_lock(ppVar3);
+          iVar3 = *(int *)(param_1 + 0x5148) + 0x8028;
+          _pthread_mutex_lock(iVar3);
           _gleRenderbufferStorage(param_1,0x8d41,param_3,param_4,param_5);
-          _pthread_mutex_unlock(ppVar3);
+          _pthread_mutex_unlock(iVar3);
           return;
         }
       }
@@ -1201,12 +1201,12 @@ int _glIsRenderbufferEXT_Exec(param_1, param_2)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar1 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar1 + 0x8028));
+      _pthread_mutex_lock(iVar1 + 0x8028);
       iVar1 = *(int *)(param_1 + 0x5148);
     }
     iVar1 = _gleLookupHashObject(((unsigned char *)0x00001004) + iVar1,param_2);
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
     bVar2 = iVar1 != 0;
   }
@@ -1333,12 +1333,12 @@ int _glGenFramebuffersEXT_Exec(param_1, param_2, param_3)
     if (-1 < param_2) {
       iVar4 = *(int *)(param_1 + 0x5148);
       if (*(char *)(iVar4 + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(iVar4 + 0x8028));
+        _pthread_mutex_lock(iVar4 + 0x8028);
         iVar4 = *(int *)(param_1 + 0x5148);
       }
       iVar4 = _gleGenHashNames(iVar4,param_2);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (iVar4 == 0) {
         return;
@@ -1384,7 +1384,7 @@ int _glDeleteFramebuffersEXT_Exec(param_1, param_2, param_3)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (-1 < param_2) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       iVar2 = 0;
       if (*(int *)(param_1 + 0x744c) != 0) {
@@ -1406,7 +1406,7 @@ int _glDeleteFramebuffersEXT_Exec(param_1, param_2, param_3)
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       return;
     }
     if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1431,15 +1431,15 @@ int _glBindFramebufferEXT_Exec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   undefined4 uVar1;
-  pthread_mutex_t *ppVar2;
+  int iVar2;
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (param_2 == 0x8d40) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        ppVar2 = (pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028);
-        _pthread_mutex_lock(ppVar2);
+        iVar2 = *(int *)(param_1 + 0x5148) + 0x8028;
+        _pthread_mutex_lock(iVar2);
         _gleBindFramebuffer(param_1,param_3);
-        _pthread_mutex_unlock(ppVar2);
+        _pthread_mutex_unlock(iVar2);
         return;
       }
       _gleBindFramebuffer(param_1,param_3);
@@ -1505,7 +1505,7 @@ LAB_00066a74:
         if (*(uint *)(*(int *)(param_1 + 0x468c) + 0x18) <= uVar1) goto LAB_00066a74;
       }
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (param_5 == 0) {
 LAB_00066afc:
@@ -1513,7 +1513,7 @@ LAB_00066afc:
         if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
           return;
         }
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
         return;
       }
       iVar2 = _gleLookupHashObject(*(int *)(param_1 + 0x5148) + 0x2008,param_5);
@@ -1522,7 +1522,7 @@ LAB_00066afc:
         goto LAB_00066afc;
       }
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
     }
   }
@@ -1570,7 +1570,7 @@ int _glFramebufferTexture2DEXT_Exec(param_1, param_2, param_3, param_4, param_5,
             uVar1 = 2;
 LAB_00066cac:
             if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-              _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+              _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
             }
             if ((param_5 == 0) ||
                (iVar3 = _gleLookupHashObject(*(int *)(param_1 + 0x5148) + 0x2008,param_5),
@@ -1579,11 +1579,11 @@ LAB_00066cac:
               if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
                 return;
               }
-              _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+              _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
               return;
             }
             if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-              _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+              _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
             }
             goto LAB_00066d04;
           }
@@ -1661,7 +1661,7 @@ int _glFramebufferTexture3DEXT_Exec(param_1, param_2, param_3, param_4, param_5,
               if (*(uint *)(*(int *)(param_1 + 0x468c) + 0x18) <= uVar1) goto LAB_00066e60;
             }
             if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-              _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+              _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
             }
             if (param_5 == 0) {
 LAB_00066ee8:
@@ -1669,7 +1669,7 @@ LAB_00066ee8:
               if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
                 return;
               }
-              _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+              _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
               return;
             }
             iVar2 = _gleLookupHashObject(*(int *)(param_1 + 0x5148) + 0x2008,param_5);
@@ -1678,7 +1678,7 @@ LAB_00066ee8:
               goto LAB_00066ee8;
             }
             if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-              _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+              _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
             }
             goto LAB_00066ecc;
           }
@@ -1743,7 +1743,7 @@ LAB_00066ffc:
         if (*(uint *)(*(int *)(param_1 + 0x468c) + 0x18) <= uVar1) goto LAB_00066ffc;
       }
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (param_5 == 0) {
 LAB_00067080:
@@ -1751,7 +1751,7 @@ LAB_00067080:
         if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
           return;
         }
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
         return;
       }
       iVar2 = _gleLookupHashObject(((unsigned char *)0x00001004) + *(int *)(param_1 + 0x5148),param_5);
@@ -1760,7 +1760,7 @@ LAB_00067080:
         goto LAB_00067080;
       }
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
     }
   }
@@ -1784,12 +1784,12 @@ int _glIsFramebufferEXT_Exec(param_1, param_2)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar1 = *(int *)(param_1 + 0x5148);
     if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(iVar1 + 0x8028));
+      _pthread_mutex_lock(iVar1 + 0x8028);
       iVar1 = *(int *)(param_1 + 0x5148);
     }
     iVar1 = _gleLookupHashObject(iVar1,param_2);
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
     bVar2 = iVar1 != 0;
   }
@@ -1816,14 +1816,14 @@ undefined4 _glCheckFramebufferStatusEXT_Exec(int param_1,int param_2,undefined4 
         return 0x8cd5;
       }
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
         iVar2 = *(int *)(param_1 + 0x744c);
         fparam_1 = extraout_f1;
       }
       uVar1 = ((int (*)())_gleCheckFramebufferStatus)(param_1,iVar2 + 0x10,param_3,param_4,param_5,param_6,param_7,fparam_1,
                          fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
         return uVar1;
       }
       return uVar1;
@@ -1938,10 +1938,9 @@ int _glGenerateMipmapEXT_Exec(param_1, param_2)
 {
   ushort uVar1;
   undefined4 uVar2;
-  int iVar3;
-  ushort *puVar4;
-  uint uVar5;
-  pthread_mutex_t *ppVar6;
+  ushort *puVar3;
+  uint uVar4;
+  int iVar5;
   
   if (param_2 != 0x806f) {
     if (param_2 < 0x8070) {
@@ -1957,36 +1956,36 @@ LAB_00067554:
     }
     else {
       if (param_2 != 0x8513) goto LAB_000674d0;
-      iVar3 = _gleLookUpTexture2D(param_1,0x8513);
-      uVar5 = (int)*(short *)(iVar3 + 0x60);
-      if ((int)(uint)*(byte *)(iVar3 + 0x87) < (int)*(short *)(iVar3 + 0x60)) {
-        uVar5 = (uint)*(byte *)(iVar3 + 0x87);
+      iVar5 = _gleLookUpTexture2D(param_1,0x8513);
+      uVar4 = (int)*(short *)(iVar5 + 0x60);
+      if ((int)(uint)*(byte *)(iVar5 + 0x87) < (int)*(short *)(iVar5 + 0x60)) {
+        uVar4 = (uint)*(byte *)(iVar5 + 0x87);
       }
-      puVar4 = (ushort *)(iVar3 + 0x94);
-      iVar3 = 0;
-      uVar5 = 1 << (uVar5 & 0x3f) | 1;
+      puVar3 = (ushort *)(iVar5 + 0x94);
+      iVar5 = 0;
+      uVar4 = 1 << (uVar4 & 0x3f) | 1;
       do {
-        uVar1 = *puVar4;
-        puVar4 = puVar4 + 1;
-        if ((uVar1 & uVar5) != uVar5) {
+        uVar1 = *puVar3;
+        puVar3 = puVar3 + 1;
+        if ((uVar1 & uVar4) != uVar4) {
           if (*(int *)(param_1 + 0x7574) != 0) {
             return;
           }
           uVar2 = 0x502;
           goto LAB_00067554;
         }
-        iVar3 = iVar3 + 1;
-      } while (iVar3 < 6);
+        iVar5 = iVar5 + 1;
+      } while (iVar5 < 6);
     }
   }
   if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
     _gleGenerateMipmap(param_1,param_2);
     return;
   }
-  ppVar6 = (pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028);
-  _pthread_mutex_lock(ppVar6);
+  iVar5 = *(int *)(param_1 + 0x5148) + 0x8028;
+  _pthread_mutex_lock(iVar5);
   _gleGenerateMipmap(param_1,param_2);
-  _pthread_mutex_unlock(ppVar6);
+  _pthread_mutex_unlock(iVar5);
   return;
 }
 

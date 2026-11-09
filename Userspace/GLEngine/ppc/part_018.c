@@ -321,35 +321,35 @@ int _glLockArraysEXT_Exec(param_1, param_2, param_3)
 {
   bool bVar1;
   undefined4 uVar2;
-  void *pvVar3;
+  int iVar3;
   int iVar4;
   
   if ((*(short *)(param_1 + 0x4a10) < 0) && (*(int *)(param_1 + 0x4988) == 0)) {
     if ((-1 < param_2) && (0 < param_3)) {
       iVar4 = *(int *)(*(int *)(param_1 + 0x468c) + 0x88);
       if (param_3 < iVar4 + -0x12) {
-        pvVar3 = *(void **)(param_1 + 0x49ac);
-        bVar1 = pvVar3 == (void *)0x0;
+        iVar3 = *(int *)(param_1 + 0x49ac);
+        bVar1 = iVar3 == 0;
         if (bVar1) {
-          pvVar3 = _malloc(iVar4 * 5 + 0x48);
-          *(void **)(param_1 + 0x49ac) = pvVar3;
-          *(int *)(param_1 + 0x49a0) = (int)pvVar3 + iVar4;
-          *(int *)(param_1 + 0x499c) = (int)pvVar3 + iVar4 + iVar4 * 4;
-          bVar1 = pvVar3 == (void *)0x0;
+          iVar3 = _malloc(iVar4 * 5 + 0x48);
+          *(int *)(param_1 + 0x49ac) = iVar3;
+          *(int *)(param_1 + 0x49a0) = iVar3 + iVar4;
+          *(int *)(param_1 + 0x499c) = iVar3 + iVar4 + iVar4 * 4;
+          bVar1 = iVar3 == 0;
         }
         else if (param_2 != *(int *)(param_1 + 0x4984)) {
           *(int *)(param_1 + 0x499c) = *(int *)(param_1 + 0x49a0) + iVar4 * 4;
         }
         if (bVar1) {
-          *(void **)(param_1 + 0x499c) = pvVar3;
-          *(void **)(param_1 + 0x49a0) = pvVar3;
+          *(int *)(param_1 + 0x499c) = iVar3;
+          *(int *)(param_1 + 0x49a0) = iVar3;
         }
         else {
           *(undefined4 *)(param_1 + 0x497c) = 0x1f;
         }
       }
-      else if (*(void **)(param_1 + 0x49ac) != (void *)0x0) {
-        _free(*(void **)(param_1 + 0x49ac));
+      else if (*(int *)(param_1 + 0x49ac) != 0) {
+        _free(*(int *)(param_1 + 0x49ac));
         *(undefined4 *)(param_1 + 0x499c) = 0;
         *(undefined4 *)(param_1 + 0x49ac) = 0;
         *(undefined4 *)(param_1 + 0x49a0) = 0;

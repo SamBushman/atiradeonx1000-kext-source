@@ -2673,26 +2673,26 @@ LAB_000e1388:
 /* _gleFreeQueryObject @ 0xe13d0 (128 bytes) */
 int _gleFreeQueryObject(param_1, param_2)
   int param_1;
-  void *param_2;
+  int param_2;
 {
   int *piVar1;
   undefined4 *puVar2;
   int iVar3;
   int iVar4;
-  void *pvVar5;
+  int iVar5;
   
   iVar3 = param_1 + 0x10000;
   iVar4 = 0;
-  pvVar5 = param_2;
+  iVar5 = param_2;
   if (*(char *)(param_1 + 0x85a4) != '\0') {
     do {
       piVar1 = (int *)(iVar3 + -0x777c);
       iVar4 = iVar4 + 1;
       puVar2 = (undefined4 *)(iVar3 + -0x7a54);
       iVar3 = iVar3 + 0x2e0;
-      (**(code **)(*piVar1 + 0x1cc))(*puVar2,*(undefined4 *)((int)pvVar5 + 0x10));
-      *(undefined4 *)((int)pvVar5 + 0x10) = 0;
-      pvVar5 = (void *)((int)pvVar5 + 4);
+      (**(code **)(*piVar1 + 0x1cc))(*puVar2,*(undefined4 *)(iVar5 + 0x10));
+      *(undefined4 *)(iVar5 + 0x10) = 0;
+      iVar5 = iVar5 + 4;
     } while (iVar4 < (int)(uint)*(byte *)(param_1 + 0x85a4));
   }
   _free(param_2);
@@ -2712,7 +2712,7 @@ int _gleCreateQueryObject(param_1, param_2)
   int iVar6;
   int iVar7;
   
-  puVar5 = _malloc(0x30);
+  puVar5 = (undefined4 *)_malloc(0x30);
   puVar3 = PTR__gleFreeQueryObject_00110e8c;
   puVar5[2] = 1;
   puVar5[3] = puVar3;
@@ -2932,9 +2932,9 @@ char * _gle_dtostr(undefined4 param_1,undefined4 param_2,char *param_3,uint para
   dVar10 = fparam_2;
   if (dVar8 < fparam_1) {
     if ((fparam_1 < DOUBLE_00108e20) || (DOUBLE_00108e30 < fparam_1)) {
-      _frexp(fparam_1,0,param_2,local_50);
-      dVar8 = (double)_round(((double)CONCAT44(0x43300000,local_50[0] ^ 0x80000000) -
-                             DOUBLE_00108d58) * DOUBLE_00108e28);
+      _frexp(fparam_1,local_50);
+      dVar8 = _round(((double)CONCAT44(0x43300000,local_50[0] ^ 0x80000000) - DOUBLE_00108d58) *
+                     DOUBLE_00108e28);
       local_50[0] = (uint)(int)dVar8;
       dVar8 = (double)((double (*)())_pow_10)(local_50[0]);
       dVar9 = (double)((double (*)())_pow_10)(-local_50[0]);
@@ -2961,7 +2961,7 @@ char * _gle_dtostr(undefined4 param_1,undefined4 param_2,char *param_3,uint para
   fparam_2 = dVar10;
 LAB_000e1adc:
   dVar8 = fparam_2 * DOUBLE_00108dc0 + dVar8;
-  dVar10 = (double)_floor(dVar8);
+  dVar10 = _floor(dVar8);
   dVar3 = DOUBLE_00108e10;
   dVar9 = DOUBLE_00108e08;
   pcVar6 = param_3;
@@ -2970,7 +2970,7 @@ LAB_000e1adc:
       return (char *)0x0;
     }
     dVar11 = dVar10 * dVar9;
-    dVar10 = (double)_floor(dVar11,0);
+    dVar10 = _floor(dVar11);
     *pcVar6 = (char)(int)((dVar11 - dVar10) * dVar3) + '0';
     pcVar6 = pcVar6 + 1;
   }
@@ -2990,7 +2990,7 @@ LAB_000e1adc:
     *pcVar6 = '0';
     pcVar6 = pcVar6 + 1;
   }
-  dVar9 = (double)_floor(dVar8);
+  dVar9 = _floor(dVar8);
   dVar10 = DOUBLE_00108e10;
   dVar8 = dVar8 - dVar9;
   if (dVar8 <= fparam_2) {
@@ -3015,7 +3015,7 @@ LAB_000e1adc:
       }
       dVar8 = dVar8 * dVar10;
       fparam_2 = fparam_2 * dVar10;
-      dVar9 = (double)_floor(dVar8,0);
+      dVar9 = _floor(dVar8);
       dVar8 = dVar8 - dVar9;
       *pcVar6 = (char)(int)dVar9 + '0';
       pcVar6 = pcVar6 + 1;

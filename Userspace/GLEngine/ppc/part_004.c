@@ -7,19 +7,18 @@ int _gleIsIndex(param_1)
   return param_1 - 0x1900U < 2;
 }
 
-/* FUN_0002f1c4 @ 0x2f1c4 (172 bytes) */
-int FUN_0002f1c4(param_1, param_2)
+/* _gleExtractPixel_RGBA_Ubyte @ 0x2f1c0 (176 bytes) */
+int _gleExtractPixel_RGBA_Ubyte(param_1, param_2)
   int param_1;
-  int param_2;
+  byte *param_2;
 {
   float fVar1;
-  uint unaff_r2;
   
   fVar1 = FLOAT_00108e78;
-  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((unaff_r2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-  *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((*(byte *)(param_2 + 1) | 0x4b000000))) - 8388608.0) * fVar1;
-  *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((*(byte *)(param_2 + 2) | 0x4b000000))) - 8388608.0) * fVar1;
-  *(float *)(param_1 + 0x10) = (GH_U2F((unsigned int)((*(byte *)(param_2 + 3) | 0x4b000000))) - 8388608.0) * fVar1;
+  *(float *)(param_1 + 4) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+  *(float *)(param_1 + 8) = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
+  *(float *)(param_1 + 0xc) = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * fVar1;
+  *(float *)(param_1 + 0x10) = (GH_U2F((unsigned int)((param_2[3] | 0x4b000000))) - 8388608.0) * fVar1;
   return;
 }
 
@@ -130,23 +129,23 @@ int _gleUpdateLightRGBASums(param_1, param_2, param_3)
       else {
         dVar27 = (double)FLOAT_00108e54;
         uVar8 = 0;
-        dVar24 = (double)_log(DOUBLE_00108dd8);
+        dVar24 = _log(DOUBLE_00108dd8);
         fVar9 = FLOAT_00108f44;
         pfVar5 = param_2 + 0x82;
-        dVar24 = (double)_exp(dVar24 / dVar26);
+        dVar24 = _exp(dVar24 / dVar26);
         dVar25 = (double)(float)dVar24;
         dVar23 = (double)FLOAT_00108f40;
         param_2[0x7e] = (float)dVar24;
         dVar24 = DOUBLE_00108de0;
         param_2[0x80] = (float)(dVar23 / dVar25);
         param_2[0x7f] = fVar9 / (float)(dVar27 - dVar25);
-        dVar24 = (double)_pow(dVar24,dVar26);
+        dVar24 = _pow(dVar24,dVar26);
         fVar4 = param_2[0x7e];
         param_2[0x81] = (float)(dVar24 - DOUBLE_00108d68);
         dVar24 = (double)fVar4;
         do {
           uVar8 = uVar8 + 1;
-          dVar23 = (double)_pow(dVar24,dVar26);
+          dVar23 = _pow(dVar24,dVar26);
           *pfVar5 = (float)dVar23;
           pfVar5 = pfVar5 + 1;
           dVar24 = (double)(float)(dVar24 + (double)((float)(dVar27 - (double)fVar4) / fVar9));
@@ -382,7 +381,7 @@ int _gleTerminateContext(param_1)
   _gleFreeFramebufferState(param_1);
   ((int (*)())_gleFreeMapData)(param_1);
   ((int (*)())_gleFreeTextureState)(param_1);
-  _gleVecFree(*(void **)(param_1 + 0x4678));
+  _gleVecFree(*(undefined4 *)(param_1 + 0x4678));
   return 0;
 }
 
@@ -436,11 +435,11 @@ int _gleFreeOrphans(param_1)
       }
       _gleVecFree(piVar6);
     }
-    _gleVecFree(*(void **)(param_1 + 0x7484));
+    _gleVecFree(*(undefined4 *)(param_1 + 0x7484));
     *(undefined4 *)(param_1 + 0x7484) = 0;
     iVar3 = 0;
-    if (*(void **)(param_1 + 0x7464) != (void *)0x0) {
-      _gleVecFree(*(void **)(param_1 + 0x7464));
+    if (*(int *)(param_1 + 0x7464) != 0) {
+      _gleVecFree(*(int *)(param_1 + 0x7464));
       *(undefined4 *)(param_1 + 0x7464) = 0;
       iVar3 = extraout_r3;
     }
@@ -464,8 +463,8 @@ int _gleFreeVertexMachine(param_1)
     *(undefined4 *)(param_1 + 0x4858) = 0;
   }
   if (*(int *)(param_1 + 0x7588) != 0) {
-    if (*(void **)(param_1 + 0x758c) != (void *)0x0) {
-      _free(*(void **)(param_1 + 0x758c));
+    if (*(int *)(param_1 + 0x758c) != 0) {
+      _free(*(int *)(param_1 + 0x758c));
     }
     *(undefined4 *)(param_1 + 0x7588) = 0;
     *(undefined4 *)(param_1 + 0x758c) = 0;
@@ -479,7 +478,7 @@ int _gleDCBFree(param_1)
 {
   undefined4 extraout_r3;
   
-  _free((void *)(param_1 - (uint)*(byte *)(param_1 + -1)));
+  _free(param_1 - (uint)*(byte *)(param_1 + -1));
   return extraout_r3;
 }
 
@@ -538,29 +537,28 @@ int _gleFreePixelMap(param_1)
 int _gleFreeMaterials(param_1)
   int param_1;
 {
-  void *pvVar1;
+  int iVar1;
   int iVar2;
-  undefined4 *puVar3;
-  void *pvVar4;
+  int *piVar3;
+  int iVar4;
   
-  puVar3 = (undefined4 *)(param_1 + 0x4dd0);
+  piVar3 = (int *)(param_1 + 0x4dd0);
   iVar2 = 1;
   do {
-    pvVar1 = (void *)*puVar3;
-    for (pvVar4 = *(void **)((int)*puVar3 + 0x23c); pvVar4 != (void *)0x0;
-        pvVar4 = *(void **)((int)pvVar4 + 0x23c)) {
-      _gleVecFree(pvVar1);
-      pvVar1 = pvVar4;
+    iVar4 = *piVar3;
+    for (iVar1 = *(int *)(*piVar3 + 0x23c); iVar1 != 0; iVar1 = *(int *)(iVar1 + 0x23c)) {
+      _gleVecFree(iVar4);
+      iVar4 = iVar1;
     }
     iVar2 = iVar2 + -1;
-    *puVar3 = pvVar1;
-    puVar3 = puVar3 + 1;
+    *piVar3 = iVar4;
+    piVar3 = piVar3 + 1;
   } while (-1 < iVar2);
-  pvVar1 = *(void **)(param_1 + 0x4dd8);
-  while (pvVar1 != (void *)0x0) {
-    pvVar4 = *(void **)((int)pvVar1 + 0x23c);
-    _gleVecFree(pvVar1);
-    pvVar1 = pvVar4;
+  iVar2 = *(int *)(param_1 + 0x4dd8);
+  while (iVar2 != 0) {
+    iVar4 = *(int *)(iVar2 + 0x23c);
+    _gleVecFree(iVar2);
+    iVar2 = iVar4;
   }
   *(undefined4 *)(param_1 + 0x4dd8) = 0;
   return;
@@ -571,47 +569,46 @@ int _gleFreeAllAttrib(param_1)
   int param_1;
 {
   int iVar1;
-  void *pvVar2;
+  int iVar2;
   int iVar3;
-  void *pvVar4;
-  int *piVar5;
+  int *piVar4;
   
   iVar3 = 0;
   iVar1 = *(int *)(param_1 + 0x50fc);
   if (0 < iVar1) {
-    piVar5 = (int *)(param_1 + 0x50b8);
+    piVar4 = (int *)(param_1 + 0x50b8);
     do {
-      pvVar2 = (void *)*piVar5;
-      if ((void *)*piVar5 != (void *)0x0) {
+      iVar2 = *piVar4;
+      if (*piVar4 != 0) {
         do {
-          pvVar4 = *(void **)((int)pvVar2 + 0x2c44);
-          _free(pvVar2);
-          pvVar2 = pvVar4;
-        } while (pvVar4 != (void *)0x0);
+          iVar1 = *(int *)(iVar2 + 0x2c44);
+          _free(iVar2);
+          iVar2 = iVar1;
+        } while (iVar1 != 0);
         iVar1 = *(int *)(param_1 + 0x50fc);
       }
       iVar3 = iVar3 + 1;
-      *piVar5 = 0;
-      piVar5 = piVar5 + 1;
+      *piVar4 = 0;
+      piVar4 = piVar4 + 1;
     } while (iVar3 < iVar1);
   }
   iVar1 = *(int *)(param_1 + 0x5144);
   iVar3 = 0;
   if (0 < iVar1) {
-    piVar5 = (int *)(param_1 + 0x5100);
+    piVar4 = (int *)(param_1 + 0x5100);
     do {
-      pvVar2 = (void *)*piVar5;
-      if ((void *)*piVar5 != (void *)0x0) {
+      iVar2 = *piVar4;
+      if (*piVar4 != 0) {
         do {
-          pvVar4 = *(void **)((int)pvVar2 + 700);
-          _free(pvVar2);
-          pvVar2 = pvVar4;
-        } while (pvVar4 != (void *)0x0);
+          iVar1 = *(int *)(iVar2 + 700);
+          _free(iVar2);
+          iVar2 = iVar1;
+        } while (iVar1 != 0);
         iVar1 = *(int *)(param_1 + 0x5144);
       }
       iVar3 = iVar3 + 1;
-      *piVar5 = 0;
-      piVar5 = piVar5 + 1;
+      *piVar4 = 0;
+      piVar4 = piVar4 + 1;
     } while (iVar3 < iVar1);
   }
   *(int *)(param_1 + 0x5140) = param_1 + 0x5100;
@@ -625,8 +622,8 @@ int _gleFreeAllAttrib(param_1)
 int _gleFreeVertexArrays(param_1)
   int param_1;
 {
-  if (*(void **)(param_1 + 0x49ac) != (void *)0x0) {
-    _free(*(void **)(param_1 + 0x49ac));
+  if (*(int *)(param_1 + 0x49ac) != 0) {
+    _free(*(int *)(param_1 + 0x49ac));
   }
   ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x49b4));
   ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x49b8));
@@ -672,30 +669,28 @@ int _gleFreeFunctions(param_1)
 int _gleFreeQueryMachine(param_1)
   int param_1;
 {
-  undefined4 *puVar1;
-  int iVar2;
+  int iVar1;
+  int *piVar2;
   int *piVar3;
-  int *piVar4;
-  int iVar5;
-  void *pvVar6;
+  int iVar4;
   
-  piVar3 = (int *)(param_1 + 0x6440);
-  iVar2 = 0x3ff;
+  piVar2 = (int *)(param_1 + 0x6440);
+  iVar1 = 0x3ff;
   do {
-    piVar4 = (int *)*piVar3;
-    piVar3 = piVar3 + 1;
-    while (piVar4 != (int *)0x0) {
-      iVar5 = *piVar4;
-      (*(code *)piVar4[3])(param_1,piVar4);
-      piVar4 = (int *)iVar5;
+    piVar3 = (int *)*piVar2;
+    piVar2 = piVar2 + 1;
+    while (piVar3 != (int *)0x0) {
+      iVar4 = *piVar3;
+      (*(code *)piVar3[3])(param_1,piVar3);
+      piVar3 = (int *)iVar4;
     }
-    iVar2 = iVar2 + -1;
-  } while (-1 < iVar2);
-  puVar1 = *(void **)(param_1 + 0x7440);
-  while (puVar1 != (void *)0x0) {
-    pvVar6 = (void *)*puVar1;
-    _free(puVar1);
-    puVar1 = pvVar6;
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  piVar2 = (int *)*(int *)(param_1 + 0x7440);
+  while (piVar2 != (int *)0x0) {
+    iVar1 = *piVar2;
+    _free(piVar2);
+    piVar2 = (int *)iVar1;
   }
   return;
 }
@@ -704,30 +699,28 @@ int _gleFreeQueryMachine(param_1)
 int _gleFreeFenceMachine(param_1)
   int param_1;
 {
-  undefined4 *puVar1;
-  int iVar2;
+  int iVar1;
+  int *piVar2;
   int *piVar3;
-  int *piVar4;
-  int iVar5;
-  void *pvVar6;
+  int iVar4;
   
-  piVar3 = (int *)(param_1 + 0x543c);
-  iVar2 = 0x3ff;
+  piVar2 = (int *)(param_1 + 0x543c);
+  iVar1 = 0x3ff;
   do {
-    piVar4 = (int *)*piVar3;
-    piVar3 = piVar3 + 1;
-    while (piVar4 != (int *)0x0) {
-      iVar5 = *piVar4;
-      (*(code *)piVar4[3])(param_1,piVar4);
-      piVar4 = (int *)iVar5;
+    piVar3 = (int *)*piVar2;
+    piVar2 = piVar2 + 1;
+    while (piVar3 != (int *)0x0) {
+      iVar4 = *piVar3;
+      (*(code *)piVar3[3])(param_1,piVar3);
+      piVar3 = (int *)iVar4;
     }
-    iVar2 = iVar2 + -1;
-  } while (-1 < iVar2);
-  puVar1 = *(void **)(param_1 + 0x643c);
-  while (puVar1 != (void *)0x0) {
-    pvVar6 = (void *)*puVar1;
-    _free(puVar1);
-    puVar1 = pvVar6;
+    iVar1 = iVar1 + -1;
+  } while (-1 < iVar1);
+  piVar2 = (int *)*(int *)(param_1 + 0x643c);
+  while (piVar2 != (int *)0x0) {
+    iVar1 = *piVar2;
+    _free(piVar2);
+    piVar2 = (int *)iVar1;
   }
   return;
 }
@@ -743,7 +736,7 @@ int _gleFreeVertexArrayState(param_1)
   if (iVar2 != 0) {
     if (*(int *)(iVar2 + 4) != 0) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       iVar1 = *(int *)(iVar2 + 8) + -1;
       *(int *)(iVar2 + 8) = iVar1;
@@ -751,7 +744,7 @@ int _gleFreeVertexArrayState(param_1)
         ((int (*)())_gleFreeVertexArrayObject)(param_1,iVar2);
       }
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
     }
     ((int (*)())_gleFreeVertexArrayObject)(param_1,*(undefined4 *)(param_1 + 0x4a64));
@@ -763,23 +756,23 @@ int _gleFreeVertexArrayState(param_1)
 /* _gleFreeVertexArrayObject @ 0x30200 (196 bytes) */
 int _gleFreeVertexArrayObject(param_1, param_2)
   undefined4 param_1;
-  void *param_2;
+  int param_2;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int *piVar4;
   
-  ((int (*)())_gleDestroyPluginVertexArray)(param_1,(int)param_2 + 0x10);
-  iVar3 = *(int *)((int)param_2 + 0x358);
+  ((int (*)())_gleDestroyPluginVertexArray)(param_1,param_2 + 0x10);
+  iVar3 = *(int *)(param_2 + 0x358);
   if ((iVar3 != 0) && (iVar1 = *(int *)(iVar3 + 8) + -1, *(int *)(iVar3 + 8) = iVar1, iVar1 == 0)) {
     _gleFreeBufferObject(param_1,iVar3);
   }
-  iVar3 = *(int *)((int)param_2 + 0x35c);
+  iVar3 = *(int *)(param_2 + 0x35c);
   if ((iVar3 != 0) && (iVar1 = *(int *)(iVar3 + 8) + -1, *(int *)(iVar3 + 8) = iVar1, iVar1 == 0)) {
     _gleFreeBufferObject(param_1,iVar3);
   }
-  piVar4 = (int *)((int)param_2 + 0x360);
+  piVar4 = (int *)(param_2 + 0x360);
   iVar3 = 0x1f;
   do {
     iVar1 = *piVar4;
@@ -868,7 +861,7 @@ int _gleFreeShaderState(param_1)
   iVar2 = *(int *)(param_1 + 0x5430);
   if (iVar2 != 0) {
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
     iVar1 = *(int *)(iVar2 + 8) + -1;
     *(int *)(iVar2 + 8) = iVar1;
@@ -876,7 +869,7 @@ int _gleFreeShaderState(param_1)
       ((int (*)())_gleDeleteHashNameAndObject)(param_1,*(int *)(param_1 + 0x5148) + 0x6018,*(undefined4 *)(iVar2 + 4));
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
     }
     *(undefined4 *)(param_1 + 0x5430) = 0;
   }
@@ -892,8 +885,8 @@ int _gleFreePipelineProgramState(param_1)
   undefined4 *puVar3;
   int iVar4;
   
-  if (*(void **)(param_1 + 0x5418) != (void *)0x0) {
-    _free(*(void **)(param_1 + 0x5418));
+  if (*(int *)(param_1 + 0x5418) != 0) {
+    _free(*(int *)(param_1 + 0x5418));
     *(undefined4 *)(param_1 + 0x5418) = 0;
   }
   puVar3 = (undefined4 *)(param_1 + 0x5428);
@@ -903,7 +896,7 @@ int _gleFreePipelineProgramState(param_1)
     if (iVar4 != 0) {
       if (*(int *)(iVar4 + 4) != 0) {
         if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-          _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+          _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
         }
         iVar1 = *(int *)(iVar4 + 8) + -1;
         *(int *)(iVar4 + 8) = iVar1;
@@ -911,7 +904,7 @@ int _gleFreePipelineProgramState(param_1)
           ((int (*)())_gleFreePipelineProgramObject)(param_1,iVar4);
         }
         if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-          _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+          _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
         }
       }
       ((int (*)())_gleFreePipelineProgramObject)(param_1,*puVar3);
@@ -925,10 +918,10 @@ int _gleFreePipelineProgramState(param_1)
 /* _gleFreePipelineProgramObject @ 0x30568 (72 bytes) */
 int _gleFreePipelineProgramObject(param_1, param_2)
   undefined4 param_1;
-  void *param_2;
+  int param_2;
 {
-  ((int (*)())_gleClearPipelineProgram)(param_1,(int)param_2 + 0x10);
-  ((int (*)())_gleDestroyPluginPipelineProgram)(param_1,(int)param_2 + 0x10);
+  ((int (*)())_gleClearPipelineProgram)(param_1,param_2 + 0x10);
+  ((int (*)())_gleDestroyPluginPipelineProgram)(param_1,param_2 + 0x10);
   _gleVecFree(param_2);
   return;
 }
@@ -942,12 +935,11 @@ int _gleClearPipelineProgram(param_1, param_2)
   int iVar2;
   int iVar3;
   int iVar4;
-  void *pvVar5;
-  int iVar6;
+  int iVar5;
   
-  pvVar5 = (void *)param_2[0x12f];
-  if ((void *)param_2[1] != (void *)0x0) {
-    _free((void *)param_2[1]);
+  iVar4 = param_2[0x12f];
+  if (param_2[1] != 0) {
+    _free(param_2[1]);
     param_2[1] = 0;
   }
   param_2[2] = 0;
@@ -966,7 +958,7 @@ int _gleClearPipelineProgram(param_1, param_2)
       _PPEmulatorProgramFree();
       param_2[0x135] = 0;
     }
-    iVar6 = 0x100;
+    iVar5 = 0x100;
   }
   else if (*(short *)((int)param_2 + 0x4ba) == 1) {
     if (param_2[0x135] != 0) {
@@ -976,27 +968,26 @@ int _gleClearPipelineProgram(param_1, param_2)
     *(undefined2 *)(param_2 + 0x138) = 0;
     *(undefined2 *)(param_2 + 0x137) = 0;
     *(undefined2 *)((int)param_2 + 0x4de) = 0;
-    iVar6 = 0x80;
+    iVar5 = 0x80;
   }
   else {
-    iVar6 = 0;
+    iVar5 = 0;
   }
-  if (pvVar5 != (void *)0x0) {
+  if (iVar4 != 0) {
     if (*(short *)(param_2 + 0x12e) != -0x7e00) {
-      ((int (*)())_glePPUnlogParameters)(param_1,param_2,*(undefined4 *)((int)pvVar5 + 0x28),
-                 (void *)((int)pvVar5 + *(int *)((int)pvVar5 + 0x2c) * 8));
+      ((int (*)())_glePPUnlogParameters)(param_1,param_2,*(undefined4 *)(iVar4 + 0x28),iVar4 + *(int *)(iVar4 + 0x2c) * 8);
     }
-    _gleVecFree(pvVar5);
+    _gleVecFree(iVar4);
     param_2[0x12f] = 0;
   }
-  iVar3 = param_2[0x134];
-  if (iVar3 != 0) {
-    iVar4 = 0;
-    for (; iVar6 != 0; iVar6 = iVar6 + -1) {
-      iVar1 = iVar4 * 0x10;
-      iVar4 = iVar4 + 1;
-      iVar2 = iVar1 + iVar3;
-      *(undefined4 *)(iVar3 + iVar1) = 0;
+  iVar4 = param_2[0x134];
+  if (iVar4 != 0) {
+    iVar3 = 0;
+    for (; iVar5 != 0; iVar5 = iVar5 + -1) {
+      iVar1 = iVar3 * 0x10;
+      iVar3 = iVar3 + 1;
+      iVar2 = iVar1 + iVar4;
+      *(undefined4 *)(iVar4 + iVar1) = 0;
       *(undefined4 *)(iVar2 + 0xc) = 0x3f800000;
       *(undefined4 *)(iVar2 + 4) = 0;
       *(undefined4 *)(iVar2 + 8) = 0;
@@ -1050,11 +1041,11 @@ int _gleReclaimDrawPixelResources(param_1)
       }
       puVar1 = *(undefined4 **)(param_1 + 0x74a0);
     }
-    _gleVecFree((void *)*puVar1);
-    _gleVecFree(*(void **)(param_1 + 0x74a0));
+    _gleVecFree(*puVar1);
+    _gleVecFree(*(undefined4 *)(param_1 + 0x74a0));
   }
-  if (*(void **)(0x74a4 + param_1) != (void *)0x0) {
-    _gleVecFree(*(void **)(0x74a4 + param_1));
+  if (*(int *)(0x74a4 + param_1) != 0) {
+    _gleVecFree(*(int *)(0x74a4 + param_1));
   }
   *(undefined4 *)(0x74a4 + param_1) = 0;
   *(undefined4 *)(param_1 + 0x7488) = 0;
@@ -1071,10 +1062,10 @@ int _gleReclaimDrawPixelResources(param_1)
 int _gleFreeMapData(param_1)
   int param_1;
 {
-  if (*(void **)(param_1 + 0x7450) == (void *)0x0) {
+  if (*(int *)(param_1 + 0x7450) == 0) {
     return;
   }
-  _free(*(void **)(param_1 + 0x7450));
+  _free(*(int *)(param_1 + 0x7450));
   return;
 }
 
@@ -1099,7 +1090,7 @@ int _gleFreeTextureState(param_1)
       piVar5 = piVar5 + 1;
       if ((iVar6 != 0) && (*(int *)(iVar6 + 4) != 0)) {
         if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-          _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+          _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
         }
         iVar1 = *(int *)(iVar6 + 8) + -1;
         *(int *)(iVar6 + 8) = iVar1;
@@ -1107,7 +1098,7 @@ int _gleFreeTextureState(param_1)
           _gleFreeTextureObject(param_1,iVar6);
         }
         if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-          _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+          _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
         }
       }
       iVar4 = iVar4 + -1;
@@ -1155,64 +1146,62 @@ int _gleReleaseSharedState(param_1)
   int param_1;
 {
   undefined4 uVar1;
-  undefined4 *puVar2;
-  undefined *puVar3;
-  int iVar4;
-  undefined *puVar5;
-  int iVar6;
+  undefined *puVar2;
+  int iVar3;
+  undefined *puVar4;
+  int iVar5;
+  int *piVar6;
   int *piVar7;
-  int *piVar8;
-  void *pvVar9;
-  int iVar10;
+  int iVar8;
   
-  puVar5 = *(undefined **)(param_1 + 0x5148);
-  _pthread_mutex_lock((pthread_mutex_t *)(puVar5 + 0x8028));
-  iVar4 = *(int *)(puVar5 + 0x8020);
-  *(int *)(puVar5 + 0x8020) = iVar4 + -1;
-  _pthread_mutex_unlock((pthread_mutex_t *)(puVar5 + 0x8028));
+  puVar4 = *(undefined **)(param_1 + 0x5148);
+  _pthread_mutex_lock(puVar4 + 0x8028);
+  iVar3 = *(int *)(puVar4 + 0x8020);
+  *(int *)(puVar4 + 0x8020) = iVar3 + -1;
+  _pthread_mutex_unlock(puVar4 + 0x8028);
   uVar1 = 0;
-  if (iVar4 < 2) {
-    iVar4 = 0;
+  if (iVar3 < 2) {
+    iVar3 = 0;
     ((int (*)())_gleDetachShaderObjects)(param_1);
-    puVar3 = puVar5;
+    puVar2 = puVar4;
     do {
-      iVar10 = 0x3ff;
-      iVar6 = iVar4 * 0x1004;
+      iVar8 = 0x3ff;
+      iVar5 = iVar3 * 0x1004;
       do {
-        piVar7 = *(int **)(puVar5 + iVar6);
-        if (piVar7 != (int *)0x0) {
-          *(undefined4 *)(puVar5 + iVar6) = 0;
+        piVar6 = *(int **)(puVar4 + iVar5);
+        if (piVar6 != (int *)0x0) {
+          *(undefined4 *)(puVar4 + iVar5) = 0;
           do {
-            piVar8 = (int *)*piVar7;
-            (*(code *)piVar7[3])(param_1,piVar7);
-            piVar7 = piVar8;
-          } while (piVar8 != (int *)0x0);
+            piVar7 = (int *)*piVar6;
+            (*(code *)piVar6[3])(param_1,piVar6);
+            piVar6 = piVar7;
+          } while (piVar7 != (int *)0x0);
         }
-        iVar10 = iVar10 + -1;
-        iVar6 = iVar6 + 4;
-      } while (-1 < iVar10);
-      puVar2 = *(undefined4 **)(puVar3 + 0x1000);
-      if (puVar2 != (void *)0x0) {
-        *(undefined4 *)(puVar3 + 0x1000) = 0;
+        iVar8 = iVar8 + -1;
+        iVar5 = iVar5 + 4;
+      } while (-1 < iVar8);
+      piVar6 = *(int **)(puVar2 + 0x1000);
+      if (piVar6 != (int *)0x0) {
+        *(undefined4 *)(puVar2 + 0x1000) = 0;
         do {
-          pvVar9 = (void *)*puVar2;
-          _free(puVar2);
-          puVar2 = pvVar9;
-        } while (pvVar9 != (void *)0x0);
+          piVar7 = (int *)*piVar6;
+          _free(piVar6);
+          piVar6 = piVar7;
+        } while (piVar7 != (int *)0x0);
       }
-      iVar4 = iVar4 + 1;
-      puVar3 = ((unsigned char *)0x00001004) + (int)puVar3;
-    } while (iVar4 < 8);
-    puVar5 = puVar5 + 0x10000;
-    iVar4 = 1;
+      iVar3 = iVar3 + 1;
+      puVar2 = ((unsigned char *)0x00001004) + (int)puVar2;
+    } while (iVar3 < 8);
+    puVar4 = puVar4 + 0x10000;
+    iVar3 = 1;
     do {
-      if (*(void **)(puVar5 + -0x7560) != (void *)0x0) {
-        _free(*(void **)(puVar5 + -0x7560));
+      if (*(int *)(puVar4 + -0x7560) != 0) {
+        _free(*(int *)(puVar4 + -0x7560));
       }
-      iVar4 = iVar4 + -1;
-      *(undefined4 *)(puVar5 + -0x7560) = 0;
-      puVar5 = puVar5 + 0xa30;
-    } while (-1 < iVar4);
+      iVar3 = iVar3 + -1;
+      *(undefined4 *)(puVar4 + -0x7560) = 0;
+      puVar4 = puVar4 + 0xa30;
+    } while (-1 < iVar3);
     uVar1 = 1;
   }
   return uVar1;
@@ -1246,16 +1235,16 @@ int _gleDestroySharedState(param_1)
 {
   int iVar1;
   undefined4 uVar2;
-  void *pvVar3;
+  int iVar3;
   int iVar4;
   undefined4 *puVar5;
   int *piVar6;
   
   iVar4 = 0;
-  pvVar3 = *(void **)(param_1 + 0x5148);
+  iVar3 = *(int *)(param_1 + 0x5148);
   if (*(char *)(param_1 + 0x85a4) != '\0') {
     piVar6 = (int *)(param_1 + 0x8884);
-    puVar5 = (undefined4 *)((int)pvVar3 + 0x8054);
+    puVar5 = (undefined4 *)(iVar3 + 0x8054);
     do {
       iVar1 = *piVar6;
       piVar6 = piVar6 + 0xb8;
@@ -1265,8 +1254,8 @@ int _gleDestroySharedState(param_1)
       (**(code **)(iVar1 + 0x128))(uVar2);
     } while (iVar4 < (int)(uint)*(byte *)(param_1 + 0x85a4));
   }
-  _pthread_mutex_destroy((pthread_mutex_t *)((int)pvVar3 + 0x8028));
-  _free(pvVar3);
+  _pthread_mutex_destroy(iVar3 + 0x8028);
+  _free(iVar3);
   return;
 }
 
@@ -1382,7 +1371,7 @@ int _glDeleteProgramsARB_Exec(param_1, param_2, param_3)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (-1 < param_2) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
-        _pthread_mutex_lock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+        _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
       if (0 < param_2) {
         do {
@@ -1407,7 +1396,7 @@ int _glDeleteProgramsARB_Exec(param_1, param_2, param_3)
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return;
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)(*(int *)(param_1 + 0x5148) + 0x8028));
+      _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       return;
     }
     if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1475,7 +1464,7 @@ int _gleRemoveHashName(param_1, param_2)
         if (uVar4 < param_2) {
           puVar6[2] = param_2 - uVar4;
           if (uVar2 < uVar5) {
-            puVar3 = _malloc(0xc);
+            puVar3 = (undefined4 *)_malloc(0xc);
             uVar1 = *puVar6;
             puVar3[1] = uVar2;
             *puVar3 = uVar1;
@@ -1552,15 +1541,15 @@ int _glePPUnlogParameters(param_1, param_2, param_3, param_4)
 /* _gleDestroyEnableHashTable @ 0x3115c (104 bytes) */
 int _gleDestroyEnableHashTable()
 {
-  void *pvVar1;
+  int iVar1;
   int iVar2;
   undefined4 extraout_r3;
   int iVar3;
   int *piVar4;
   
-  pvVar1 = _gle_enable_hash_table;
+  iVar1 = _gle_enable_hash_table;
   iVar3 = 0x3ff;
-  piVar4 = (int *)((int)_gle_enable_hash_table + 8);
+  piVar4 = (int *)(_gle_enable_hash_table + 8);
   do {
     iVar2 = *piVar4;
     piVar4 = piVar4 + 4;
@@ -1569,19 +1558,19 @@ int _gleDestroyEnableHashTable()
     }
     iVar3 = iVar3 + -1;
   } while (-1 < iVar3);
-  _free(pvVar1);
-  _gle_enable_hash_table = (void *)0x0;
+  _free(iVar1);
+  _gle_enable_hash_table = 0;
   return extraout_r3;
 }
 
 /* _gleFreeEnableHashObject @ 0x311c4 (60 bytes) */
 int _gleFreeEnableHashObject(param_1)
-  void *param_1;
+  int param_1;
 {
   undefined4 extraout_r3;
   
-  if (*(int *)((int)param_1 + 8) != 0) {
-    ((int (*)())_gleFreeEnableHashObject)((void *)*(int *)((int)param_1 + 8));
+  if (*(int *)(param_1 + 8) != 0) {
+    ((int (*)())_gleFreeEnableHashObject)(*(int *)(param_1 + 8));
   }
   _free(param_1);
   return extraout_r3;
@@ -1945,7 +1934,7 @@ switchD_000316d0_default:
     }
     else {
       *(float *)(iVar7 + 0x2890) = fVar5;
-      dVar11 = (double)_cos((double)(*param_4 * FLOAT_00108e84));
+      dVar11 = _cos((double)(*param_4 * FLOAT_00108e84));
       *(float *)(iVar7 + 0x286c) = (float)dVar11;
     }
     _gleUpdateLightExponents(param_1,uVar10);
@@ -2337,8 +2326,8 @@ void _glRotatef_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3
     if (fparam_2 < fparam_3_00) {
       fVar1 = FLOAT_00108eb0;
     }
-    dVar2 = (double)_sin();
-    dVar3 = (double)_cos((double)(float)(fparam_1 * (double)fVar1));
+    dVar2 = _sin((double)(float)(fparam_1 * (double)fVar1));
+    dVar3 = _cos((double)(float)(fparam_1 * (double)fVar1));
     ((void (*)())_glRotateX_Exec)(param_1,(double)(float)dVar2,(double)(float)dVar3,fparam_3_00,fparam_4,in_f5,
                     in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
@@ -2349,8 +2338,8 @@ void _glRotatef_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3
     if (fparam_3 < fparam_3_00) {
       fVar1 = FLOAT_00108eb0;
     }
-    dVar2 = (double)_sin();
-    dVar3 = (double)_cos((double)(float)(fparam_1 * (double)fVar1));
+    dVar2 = _sin((double)(float)(fparam_1 * (double)fVar1));
+    dVar3 = _cos((double)(float)(fparam_1 * (double)fVar1));
     ((void (*)())_glRotateY_Exec)(param_1,(double)(float)dVar2,(double)(float)dVar3,fparam_3_00,fparam_4,in_f5,
                     in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
@@ -2361,8 +2350,8 @@ void _glRotatef_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3
     if (fparam_4 < fparam_3_00) {
       fVar1 = FLOAT_00108eb0;
     }
-    dVar2 = (double)_sin();
-    dVar3 = (double)_cos((double)(float)(fparam_1 * (double)fVar1));
+    dVar2 = _sin((double)(float)(fparam_1 * (double)fVar1));
+    dVar3 = _cos((double)(float)(fparam_1 * (double)fVar1));
     ((void (*)())_glRotateZ_Exec)(param_1,(double)(float)dVar2,(double)(float)dVar3,fparam_3_00,fparam_4,in_f5,
                     in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));

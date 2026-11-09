@@ -1931,7 +1931,7 @@ int _glArrayElement_Comp(param_1, param_2)
   int *piVar11;
   short *psVar12;
   undefined1 *puVar13;
-  undefined8 uVar14;
+  longlong lVar14;
   undefined4 local_b0;
   undefined1 auStack_34 [4];
   
@@ -1950,8 +1950,8 @@ int _glArrayElement_Comp(param_1, param_2)
   iVar9 = 0;
   iVar10 = 0x10;
   do {
-    uVar14 = ___ashldi3(0,1,iVar10);
-    if ((uVar2 & (uint)((ulonglong)uVar14 >> 0x20)) == 0 && (uVar4 & 0xff7fffff & (uint)uVar14) == 0
+    lVar14 = ___ashldi3(0,1,iVar10);
+    if ((uVar2 & (uint)((ulonglong)lVar14 >> 0x20)) == 0 && (uVar4 & 0xff7fffff & (uint)lVar14) == 0
        ) {
       *piVar11 = 0;
     }
@@ -3027,7 +3027,7 @@ int _gleDrawArraysOrElements_Comp(param_1, param_2, param_3, param_4)
   int *piVar10;
   short *psVar11;
   code *pcVar12;
-  undefined8 uVar13;
+  longlong lVar13;
   undefined4 local_c0;
   undefined1 auStack_44 [12];
   
@@ -3042,8 +3042,8 @@ int _gleDrawArraysOrElements_Comp(param_1, param_2, param_3, param_4)
     iVar8 = 0;
     iVar9 = 0x10;
     do {
-      uVar13 = ___ashldi3(0,1,iVar9);
-      if ((uVar3 & (uint)((ulonglong)uVar13 >> 0x20)) == 0 && (uVar2 & (uint)uVar13) == 0) {
+      lVar13 = ___ashldi3(0,1,iVar9);
+      if ((uVar3 & (uint)((ulonglong)lVar13 >> 0x20)) == 0 && (uVar2 & (uint)lVar13) == 0) {
         *piVar10 = 0;
       }
       else {
@@ -3118,7 +3118,7 @@ int _gleDrawArraysOrElements_Exec(int param_1,int *param_2,int *param_3,int *par
   double extraout_f1_06;
   double extraout_f1_07;
   double extraout_f1_08;
-  undefined8 uVar16;
+  longlong lVar16;
   
   iVar13 = param_1;
   if (-1 < *(short *)(param_1 + 0x4a10)) {
@@ -3388,9 +3388,9 @@ LAB_000a796c:
         if (uVar4 == 0) goto LAB_000a796c;
       }
       else {
-        uVar16 = ___ashldi3(0,0x1000000,uVar12);
-        if ((*(uint *)(param_6 + 800) & (uint)((ulonglong)uVar16 >> 0x20)) != 0 ||
-            (*(uint *)(param_6 + 0x324) & (uint)uVar16) != 0) {
+        lVar16 = ___ashldi3(0,0x1000000,uVar12);
+        if ((*(uint *)(param_6 + 800) & (uint)((ulonglong)lVar16 >> 0x20)) != 0 ||
+            (*(uint *)(param_6 + 0x324) & (uint)lVar16) != 0) {
           if (*psVar15 == 4) {
             uVar9 = 3;
           }
@@ -3563,7 +3563,7 @@ int _gleDrawArraysOrElements_VBO_Exec(int param_1,int *param_2,int *param_3,int 
   double extraout_f1_02;
   double extraout_f1_03;
   double extraout_f1_04;
-  undefined8 uVar17;
+  longlong lVar17;
   
   iVar13 = param_1;
   if (-1 < *(short *)(param_1 + 0x4a10)) {
@@ -3842,9 +3842,9 @@ LAB_000a8030:
       if (uVar4 == 0) goto LAB_000a8030;
     }
     else {
-      uVar17 = ___ashldi3(0,0x1000000,uVar15);
-      if ((*(uint *)(param_6 + 800) & (uint)((ulonglong)uVar17 >> 0x20)) != 0 ||
-          (*(uint *)(param_6 + 0x324) & (uint)uVar17) != 0) {
+      lVar17 = ___ashldi3(0,0x1000000,uVar15);
+      if ((*(uint *)(param_6 + 800) & (uint)((ulonglong)lVar17 >> 0x20)) != 0 ||
+          (*(uint *)(param_6 + 0x324) & (uint)lVar17) != 0) {
         if (*psVar16 == 4) {
           uVar11 = 3;
         }

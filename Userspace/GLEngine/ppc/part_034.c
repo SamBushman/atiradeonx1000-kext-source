@@ -1640,17 +1640,16 @@ void _glMultiDrawElementArrayAPPLE_Exec(int param_1,undefined4 param_2,int param
   return;
 }
 
-/* FUN_000aa2a4 @ 0xaa2a4 (144 bytes) */
-int FUN_000aa2a4(param_1, param_2, param_3, param_4)
+/* _glMultiDrawElementArrayAPPLE_CompExec @ 0xaa29c (152 bytes) */
+int _glMultiDrawElementArrayAPPLE_CompExec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   int param_3;
   int param_4;
 {
   int iVar1;
-  int unaff_r27;
+  int in_r7;
   int iVar2;
-  byte in_cr0;
   double fparam_1;
   double in_f2;
   double in_f3;
@@ -1660,14 +1659,14 @@ int FUN_000aa2a4(param_1, param_2, param_3, param_4)
   double in_f7;
   double in_f8;
   
-  if ((bool)(in_cr0 >> 3 & 1)) {
+  if (in_r7 < 0) {
     if (*(int *)(param_1 + 0x7574) == 0) {
       *(undefined4 *)(param_1 + 0x7574) = 0x501;
     }
   }
   else {
     iVar2 = 0;
-    if (0 < unaff_r27) {
+    if (0 < in_r7) {
       do {
         iVar1 = iVar2 * 4;
         ((int (*)())_glDrawElementArrayAPPLE_Comp)(param_1,param_2,*(undefined4 *)(iVar1 + param_3),*(undefined4 *)(iVar1 + param_4)
@@ -1675,7 +1674,7 @@ int FUN_000aa2a4(param_1, param_2, param_3, param_4)
         iVar2 = iVar2 + 1;
         ((void (*)())_glDrawElementArrayAPPLE_Exec)(param_1,param_2,*(undefined4 *)(iVar1 + param_3),*(undefined4 *)(iVar1 + param_4)
                    ,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
-      } while (iVar2 < unaff_r27);
+      } while (iVar2 < in_r7);
     }
   }
   return;

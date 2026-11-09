@@ -571,19 +571,19 @@ int _glEnableVertexAttribArrayARB_Exec(param_1, param_2)
   undefined4 uVar1;
   int iVar2;
   uint uVar3;
-  undefined8 uVar4;
+  longlong lVar4;
   
   iVar2 = *(int *)(param_1 + 0x4a60);
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (param_2 < 0x10) {
-      uVar4 = ___ashldi3(1,0,param_2);
-      uVar3 = (uint)((ulonglong)uVar4 >> 0x20);
+      lVar4 = ___ashldi3(1,0,param_2);
+      uVar3 = (uint)((ulonglong)lVar4 >> 0x20);
       *(uint *)(iVar2 + 0x330) = *(uint *)(iVar2 + 0x330) | uVar3;
-      *(uint *)(iVar2 + 0x334) = *(uint *)(iVar2 + 0x334) | (uint)uVar4;
+      *(uint *)(iVar2 + 0x334) = *(uint *)(iVar2 + 0x334) | (uint)lVar4;
       *(undefined4 *)(param_1 + 0x488c) = 0;
       *(undefined4 *)(param_1 + 0x4890) = 0;
       *(uint *)(iVar2 + 0x350) = *(uint *)(iVar2 + 0x350) | uVar3;
-      *(uint *)(iVar2 + 0x354) = *(uint *)(iVar2 + 0x354) | (uint)uVar4;
+      *(uint *)(iVar2 + 0x354) = *(uint *)(iVar2 + 0x354) | (uint)lVar4;
       if (((*(int *)(iVar2 + 0x344) == 0) && (*(int *)(iVar2 + 0x358) == 0)) &&
          (*(int *)(param_1 + 0x49a0) == 0)) {
         return;
@@ -614,19 +614,19 @@ int _glDisableVertexAttribArrayARB_Exec(param_1, param_2)
   undefined4 uVar1;
   int iVar2;
   uint uVar3;
-  undefined8 uVar4;
+  longlong lVar4;
   
   iVar2 = *(int *)(param_1 + 0x4a60);
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (param_2 < 0x10) {
-      uVar4 = ___ashldi3(1,0,param_2);
-      uVar3 = (uint)((ulonglong)uVar4 >> 0x20);
+      lVar4 = ___ashldi3(1,0,param_2);
+      uVar3 = (uint)((ulonglong)lVar4 >> 0x20);
       *(uint *)(iVar2 + 0x330) = *(uint *)(iVar2 + 0x330) & ~uVar3;
-      *(uint *)(iVar2 + 0x334) = *(uint *)(iVar2 + 0x334) & ~(uint)uVar4;
+      *(uint *)(iVar2 + 0x334) = *(uint *)(iVar2 + 0x334) & ~(uint)lVar4;
       *(undefined4 *)(param_1 + 0x488c) = 0;
       *(undefined4 *)(param_1 + 0x4890) = 0;
       *(uint *)(iVar2 + 0x350) = *(uint *)(iVar2 + 0x350) | uVar3;
-      *(uint *)(iVar2 + 0x354) = *(uint *)(iVar2 + 0x354) | (uint)uVar4;
+      *(uint *)(iVar2 + 0x354) = *(uint *)(iVar2 + 0x354) | (uint)lVar4;
       if (((*(int *)(iVar2 + 0x344) == 0) && (*(int *)(iVar2 + 0x358) == 0)) &&
          (*(int *)(param_1 + 0x49a0) == 0)) {
         return;
@@ -856,10 +856,10 @@ LAB_000b0a94:
   return false;
 }
 
-/* FUN_000b0aa4 @ 0xb0aa4 (1100 bytes) */
-int FUN_000b0aa4(param_1, param_2, param_3, param_4)
+/* _glGetVertexAttribdvARB_Exec @ 0xb0aa0 (1104 bytes) */
+int _glGetVertexAttribdvARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
-  int param_2;
+  uint param_2;
   uint param_3;
   double *param_4;
 {
@@ -872,13 +872,12 @@ int FUN_000b0aa4(param_1, param_2, param_3, param_4)
   int iVar7;
   double *pdVar8;
   int iVar9;
-  byte in_cr7;
   double dVar10;
   double dVar11;
-  undefined8 uVar12;
+  longlong lVar12;
   uint uStack_1c;
   
-  if ((bool)(in_cr7 >> 2 & 1)) {
+  if (0xf < param_2) {
     if (*(int *)(param_1 + 0x7574) != 0) {
       return;
     }
@@ -903,10 +902,10 @@ LAB_000b0dcc:
       if (param_3 < 0x8625) {
         if (param_3 == 0x8622) {
           iVar9 = *(int *)(param_1 + 0x4a60);
-          uVar12 = ___ashldi3(1,0,param_2);
+          lVar12 = ___ashldi3(1,0,param_2);
           uVar3 = 0x3ff00000;
-          if ((*(uint *)(iVar9 + 0x330) & (uint)((ulonglong)uVar12 >> 0x20)) == 0 &&
-              (*(uint *)(iVar9 + 0x334) & (uint)uVar12) == 0) {
+          if ((*(uint *)(iVar9 + 0x330) & (uint)((ulonglong)lVar12 >> 0x20)) == 0 &&
+              (*(uint *)(iVar9 + 0x334) & (uint)lVar12) == 0) {
             uVar3 = 0;
           }
           *(undefined4 *)param_4 = uVar3;
@@ -1047,10 +1046,10 @@ LAB_000b0de4:
   return;
 }
 
-/* FUN_000b0ef4 @ 0xb0ef4 (1112 bytes) */
-int FUN_000b0ef4(param_1, param_2, param_3, param_4)
+/* _glGetVertexAttribfvARB_Exec @ 0xb0ef0 (1116 bytes) */
+int _glGetVertexAttribfvARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
-  int param_2;
+  uint param_2;
   uint param_3;
   float *param_4;
 {
@@ -1060,14 +1059,13 @@ int FUN_000b0ef4(param_1, param_2, param_3, param_4)
   uint uVar4;
   int iVar5;
   int iVar6;
-  byte in_cr7;
   int iVar7;
   double dVar8;
   double dVar9;
-  undefined8 uVar10;
+  longlong lVar10;
   uint uStack_2c;
   
-  if ((bool)(in_cr7 >> 2 & 1)) {
+  if (0xf < param_2) {
     if (*(int *)(param_1 + 0x7574) != 0) {
       return;
     }
@@ -1087,10 +1085,10 @@ LAB_000b1220:
         if (param_3 < 0x8625) {
           if (param_3 == 0x8622) {
             iVar6 = *(int *)(param_1 + 0x4a60);
-            uVar10 = ___ashldi3(1,0,param_2);
+            lVar10 = ___ashldi3(1,0,param_2);
             fVar3 = 1.0;
-            if ((*(uint *)(iVar6 + 0x330) & (uint)((ulonglong)uVar10 >> 0x20)) == 0 &&
-                (*(uint *)(iVar6 + 0x334) & (uint)uVar10) == 0) {
+            if ((*(uint *)(iVar6 + 0x330) & (uint)((ulonglong)lVar10 >> 0x20)) == 0 &&
+                (*(uint *)(iVar6 + 0x334) & (uint)lVar10) == 0) {
               fVar3 = 0.0;
             }
             *param_4 = fVar3;
@@ -1232,10 +1230,10 @@ LAB_000b11cc:
   return;
 }
 
-/* FUN_000b1350 @ 0xb1350 (1036 bytes) */
-int FUN_000b1350(param_1, param_2, param_3, param_4)
+/* _glGetVertexAttribivARB_Exec @ 0xb134c (1040 bytes) */
+int _glGetVertexAttribivARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
-  int param_2;
+  uint param_2;
   uint param_3;
   uint *param_4;
 {
@@ -1243,19 +1241,10 @@ int FUN_000b1350(param_1, param_2, param_3, param_4)
   uint uVar2;
   int iVar3;
   int iVar4;
-  byte in_cr7;
   int iVar5;
-  undefined8 uVar6;
+  longlong lVar6;
   
-  if ((bool)(in_cr7 >> 2 & 1)) {
-    if (*(int *)(param_1 + 0x7574) != 0) {
-      return;
-    }
-    uVar1 = 0x501;
-LAB_000b1744:
-    *(undefined4 *)(param_1 + 0x7574) = uVar1;
-  }
-  else {
+  if (param_2 < 0x10) {
     if (param_3 == 0x8a02) {
       iVar4 = _gleGetMapData(param_1);
       uVar2 = (uint)(byte)((code **)_gleSelectVertexAddMaterialFunc)[param_2 + iVar4];
@@ -1279,10 +1268,10 @@ LAB_000b1560:
           }
           if (param_3 == 0x8622) {
             iVar4 = *(int *)(param_1 + 0x4a60);
-            uVar6 = ___ashldi3(1,0,param_2);
+            lVar6 = ___ashldi3(1,0,param_2);
             uVar2 = 0;
-            if ((*(uint *)(iVar4 + 0x330) & (uint)((ulonglong)uVar6 >> 0x20)) != 0 ||
-                (*(uint *)(iVar4 + 0x334) & (uint)uVar6) != 0) {
+            if ((*(uint *)(iVar4 + 0x330) & (uint)((ulonglong)lVar6 >> 0x20)) != 0 ||
+                (*(uint *)(iVar4 + 0x334) & (uint)lVar6) != 0) {
               uVar2 = 1;
             }
             goto LAB_000b165c;
@@ -1404,6 +1393,14 @@ LAB_000b1734:
     }
 LAB_000b165c:
     *param_4 = uVar2;
+  }
+  else {
+    if (*(int *)(param_1 + 0x7574) != 0) {
+      return;
+    }
+    uVar1 = 0x501;
+LAB_000b1744:
+    *(undefined4 *)(param_1 + 0x7574) = uVar1;
   }
   return;
 }
