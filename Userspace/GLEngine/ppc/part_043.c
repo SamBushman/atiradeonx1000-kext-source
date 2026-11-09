@@ -1148,8 +1148,8 @@ LAB_000cdca4:
   else {
     uVar15 = *(undefined4 *)((uint)*(byte *)(param_1 + 0x85a8) * 4 + iVar4 + 0x10);
   }
-  fparam_1 = (double)(**(code **)(param_1 + 0x4778))
-                               (*(undefined4 *)(param_1 + 0x4688),0x5b,uVar15,0);
+  fparam_1 = (double)(**(double ( **)(int,int,int,int))(param_1 + 0x4778))
+                               (*(undefined4 *)(param_1 + 0x4688), 0x5b, uVar15, 0);
   *(undefined1 *)(param_1 + 0x7582) = *(undefined1 *)(*(int *)(param_1 + 0x468c) + 0x25);
   if ((bVar1) ||
      ((*(int *)(iVar4 + 0xec) == 0 &&

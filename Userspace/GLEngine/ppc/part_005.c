@@ -256,14 +256,14 @@ double _gleModelMatInvert(int param_1)
   double dVar4;
   
   *(uint *)(param_1 + 0x50b0) = *(uint *)(param_1 + 0x50b0) & 0xffffffef;
-  dVar3 = (double)(*(code *)_gleInvertMatrix)(param_1,4);
+  dVar3 = (double)(*(double ( *)(int,int))_gleInvertMatrix)(param_1, 4);
   if (*(char *)(param_1 + 0x280e) == '\0') {
     *(undefined4 *)(param_1 + 0x2804) = 0x3f800000;
   }
   else {
     dVar4 = (double)_sqrt((double)(*(float *)(param_1 + 0x22e8) * *(float *)(param_1 + 0x22e8) +
-                                  *(float *)(param_1 + 0x22d8) * *(float *)(param_1 + 0x22d8) +
-                                  *(float *)(param_1 + 0x22c8) * *(float *)(param_1 + 0x22c8)));
+                                  (*(float *)(param_1 + 0x22d8) * *(float *)(param_1 + 0x22d8) +
+                                  *(float *)(param_1 + 0x22c8) * *(float *)(param_1 + 0x22c8))));
     iVar2 = 0x10;
     iVar1 = 0;
     dVar4 = DOUBLE_00108d68 / dVar4;
@@ -2876,9 +2876,8 @@ void _glVertex3d_Exec(int param_1,double fparam_1,double fparam_2,double fparam_
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)
-            ((double)(float)fparam_1,(double)(float)fparam_2,(double)(float)fparam_3,
-             (double)*(float *)(param_1 + 0x24));
+  (*((int (*)(double,double,double,double))UNRECOVERED_JUMPTABLE))
+            ((double)(float)fparam_1, (double)(float)fparam_2, (double)(float)fparam_3, (double)*(float *)(param_1 + 0x24));
   return;
 }
 

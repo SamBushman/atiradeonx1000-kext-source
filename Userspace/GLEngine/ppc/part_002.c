@@ -623,7 +623,7 @@ int _glHint_Exec(param_1, param_2, param_3)
       uVar4 = (undefined2)param_3;
       if (param_2 < 0x80f1) {
         if (param_2 == 0xc52) {
-          *(undefined2 *)(_gleDCBAlloc + param_1) = uVar4;
+          *(undefined2 *)(0x3170 + param_1) = uVar4;
         }
         else if (param_2 < 0xc53) {
           if (param_2 == 0xc50) {
@@ -840,7 +840,7 @@ LAB_00017874:
       }
       else if (param_2 < 0x806d) {
         if (-1 < param_3) {
-          *(int *)(_gleCreateSharedState + param_1) = param_3;
+          *(int *)(0x31b4 + param_1) = param_3;
           goto LAB_000178a4;
         }
       }
@@ -4728,8 +4728,8 @@ int _glVertex2f_Exec(param_1)
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)
-            (in_f1,in_f2,(double)*(float *)(param_1 + 0x20),(double)*(float *)(param_1 + 0x24));
+  (*((int (*)(double,double,double,double))UNRECOVERED_JUMPTABLE))
+            (in_f1, in_f2, (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
   return;
 }
 
@@ -4747,7 +4747,7 @@ void _gleSetVertexSubmitFunc(int param_1,undefined4 param_2,undefined4 param_3,u
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(fparam_1,fparam_2,fparam_3,fparam_4,param_1);
+  (*((int (*)(int,double,double,double,double))UNRECOVERED_JUMPTABLE))(param_1, fparam_1, fparam_2, fparam_3, fparam_4);
   return;
 }
 

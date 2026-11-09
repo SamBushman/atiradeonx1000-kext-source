@@ -1850,7 +1850,7 @@ double _gleSphereGenST(undefined4 param_1,undefined4 param_2,float *param_3,floa
   float local_28;
   
   (**(code **)PTR__gleVectorNormalize_00112064)(param_1,param_2,&local_30);
-  fVar1 = param_3[2] * local_28 + *param_3 * local_30 + param_3[1] * local_2c;
+  fVar1 = param_3[2] * local_28 + (*param_3 * local_30 + param_3[1] * local_2c);
   fVar1 = fVar1 + fVar1;
   dVar4 = -(double)(param_3[1] * fVar1 - local_2c);
   dVar3 = -(double)(*param_3 * fVar1 - local_30);
@@ -1904,8 +1904,8 @@ int _gleVtxTextureCoordGenObjectSlow(param_1, param_2, param_3)
       do {
         *(float *)(uVar5 + 0x80) =
              fVar1 * *(float *)(uVar5 + 0x2c) +
-             fVar4 * *(float *)(uVar5 + 0x28) +
-             fVar2 * *(float *)(uVar5 + 0x20) + fVar3 * *(float *)(uVar5 + 0x24);
+             (fVar4 * *(float *)(uVar5 + 0x28) +
+             (fVar2 * *(float *)(uVar5 + 0x20) + fVar3 * *(float *)(uVar5 + 0x24)));
         uVar5 = uVar5 + 0x100;
         uVar7 = uVar7 - 1;
       } while (uVar7 != 0);
@@ -1922,8 +1922,8 @@ int _gleVtxTextureCoordGenObjectSlow(param_1, param_2, param_3)
       do {
         *(float *)(uVar5 + 0x84) =
              fVar1 * *(float *)(uVar5 + 0x2c) +
-             fVar4 * *(float *)(uVar5 + 0x28) +
-             fVar2 * *(float *)(uVar5 + 0x20) + fVar3 * *(float *)(uVar5 + 0x24);
+             (fVar4 * *(float *)(uVar5 + 0x28) +
+             (fVar2 * *(float *)(uVar5 + 0x20) + fVar3 * *(float *)(uVar5 + 0x24)));
         uVar5 = uVar5 + 0x100;
         uVar7 = uVar7 - 1;
       } while (uVar7 != 0);
@@ -1940,8 +1940,8 @@ int _gleVtxTextureCoordGenObjectSlow(param_1, param_2, param_3)
       do {
         *(float *)(uVar5 + 0x88) =
              fVar1 * *(float *)(uVar5 + 0x2c) +
-             fVar4 * *(float *)(uVar5 + 0x28) +
-             fVar2 * *(float *)(uVar5 + 0x20) + fVar3 * *(float *)(uVar5 + 0x24);
+             (fVar4 * *(float *)(uVar5 + 0x28) +
+             (fVar2 * *(float *)(uVar5 + 0x20) + fVar3 * *(float *)(uVar5 + 0x24)));
         uVar5 = uVar5 + 0x100;
         uVar7 = uVar7 - 1;
       } while (uVar7 != 0);
@@ -1963,8 +1963,8 @@ int _gleVtxTextureCoordGenObjectSlow(param_1, param_2, param_3)
     do {
       *(float *)(param_2 + 0x8c) =
            fVar1 * *(float *)(param_2 + 0x2c) +
-           fVar4 * *(float *)(param_2 + 0x28) +
-           fVar2 * *(float *)(param_2 + 0x20) + fVar3 * *(float *)(param_2 + 0x24);
+           (fVar4 * *(float *)(param_2 + 0x28) +
+           (fVar2 * *(float *)(param_2 + 0x20) + fVar3 * *(float *)(param_2 + 0x24)));
       param_2 = param_2 + 0x100;
       uVar6 = uVar6 - 1;
     } while (uVar6 != 0);
@@ -2014,8 +2014,8 @@ void _gleVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,double f
           do {
             *(float *)(uVar8 + 0x80) =
                  fVar1 * *(float *)(uVar8 + 0x2c) +
-                 fVar4 * *(float *)(uVar8 + 0x28) +
-                 fVar2 * *(float *)(uVar8 + 0x20) + fVar3 * *(float *)(uVar8 + 0x24);
+                 (fVar4 * *(float *)(uVar8 + 0x28) +
+                 (fVar2 * *(float *)(uVar8 + 0x20) + fVar3 * *(float *)(uVar8 + 0x24)));
             uVar8 = uVar8 + 0x100;
             uVar9 = uVar9 - 1;
           } while (uVar9 != 0);
@@ -2035,9 +2035,9 @@ void _gleVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,double f
     }
     else if ((uVar5 == 0x8512) && (param_2 < uVar7)) {
       do {
-        fparam_1 = (double)(**(code **)puVar6)(param_1,uVar9 + 0x20,&local_30);
+        fparam_1 = (double)(**(double ( **)(int,int,int))puVar6)(param_1, uVar9 + 0x20, &local_30);
         fVar1 = *(float *)(uVar9 + 0x48) * local_28 +
-                *(float *)(uVar9 + 0x40) * local_30 + *(float *)(uVar9 + 0x44) * local_2c;
+                (*(float *)(uVar9 + 0x40) * local_30 + *(float *)(uVar9 + 0x44) * local_2c);
         *(float *)(uVar9 + 0x80) = -(*(float *)(uVar9 + 0x40) * (fVar1 + fVar1) - local_30);
         uVar9 = uVar9 + 0x100;
       } while (uVar9 < uVar7);
@@ -2065,8 +2065,8 @@ void _gleVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,double f
           do {
             *(float *)(uVar8 + 0x84) =
                  fVar1 * *(float *)(uVar8 + 0x2c) +
-                 fVar4 * *(float *)(uVar8 + 0x28) +
-                 fVar2 * *(float *)(uVar8 + 0x20) + fVar3 * *(float *)(uVar8 + 0x24);
+                 (fVar4 * *(float *)(uVar8 + 0x28) +
+                 (fVar2 * *(float *)(uVar8 + 0x20) + fVar3 * *(float *)(uVar8 + 0x24)));
             uVar8 = uVar8 + 0x100;
             uVar9 = uVar9 - 1;
           } while (uVar9 != 0);
@@ -2088,7 +2088,7 @@ void _gleVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,double f
       do {
         (**(code **)puVar6)(param_1,uVar9 + 0x20,&local_30);
         fVar1 = *(float *)(uVar9 + 0x48) * local_28 +
-                *(float *)(uVar9 + 0x40) * local_30 + *(float *)(uVar9 + 0x44) * local_2c;
+                (*(float *)(uVar9 + 0x40) * local_30 + *(float *)(uVar9 + 0x44) * local_2c);
         *(float *)(uVar9 + 0x84) = -(*(float *)(uVar9 + 0x44) * (fVar1 + fVar1) - local_2c);
         uVar9 = uVar9 + 0x100;
       } while (uVar9 < uVar7);
@@ -2120,8 +2120,8 @@ void _gleVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,double f
           do {
             *(float *)(uVar8 + 0x88) =
                  fVar1 * *(float *)(uVar8 + 0x2c) +
-                 fVar4 * *(float *)(uVar8 + 0x28) +
-                 fVar2 * *(float *)(uVar8 + 0x20) + fVar3 * *(float *)(uVar8 + 0x24);
+                 (fVar4 * *(float *)(uVar8 + 0x28) +
+                 (fVar2 * *(float *)(uVar8 + 0x20) + fVar3 * *(float *)(uVar8 + 0x24)));
             uVar8 = uVar8 + 0x100;
             uVar9 = uVar9 - 1;
           } while (uVar9 != 0);
@@ -2133,7 +2133,7 @@ void _gleVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,double f
       do {
         (**(code **)puVar6)(param_1,uVar9 + 0x20,&local_30);
         fVar1 = *(float *)(uVar9 + 0x48) * local_28 +
-                *(float *)(uVar9 + 0x40) * local_30 + *(float *)(uVar9 + 0x44) * local_2c;
+                (*(float *)(uVar9 + 0x40) * local_30 + *(float *)(uVar9 + 0x44) * local_2c);
         *(float *)(uVar9 + 0x88) = -(*(float *)(uVar9 + 0x48) * (fVar1 + fVar1) - local_28);
         uVar9 = uVar9 + 0x100;
       } while (uVar9 < uVar7);
@@ -2151,8 +2151,8 @@ void _gleVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,double f
         do {
           *(float *)(param_2 + 0x8c) =
                fVar1 * *(float *)(param_2 + 0x2c) +
-               fVar4 * *(float *)(param_2 + 0x28) +
-               fVar2 * *(float *)(param_2 + 0x20) + fVar3 * *(float *)(param_2 + 0x24);
+               (fVar4 * *(float *)(param_2 + 0x28) +
+               (fVar2 * *(float *)(param_2 + 0x20) + fVar3 * *(float *)(param_2 + 0x24)));
           param_2 = param_2 + 0x100;
           uVar7 = uVar7 - 1;
         } while (uVar7 != 0);
@@ -2195,12 +2195,12 @@ int _gleVtxTextureCoordGenEyeST(param_1, param_2, param_3)
   do {
     *(float *)(param_2 + 0x84) =
          fVar5 * *(float *)(param_2 + 0x2c) +
-         fVar8 * *(float *)(param_2 + 0x28) +
-         fVar4 * *(float *)(param_2 + 0x20) + fVar7 * *(float *)(param_2 + 0x24);
+         (fVar8 * *(float *)(param_2 + 0x28) +
+         (fVar4 * *(float *)(param_2 + 0x20) + fVar7 * *(float *)(param_2 + 0x24)));
     *(float *)(param_2 + 0x80) =
          fVar1 * *(float *)(param_2 + 0x2c) +
-         fVar3 * *(float *)(param_2 + 0x28) +
-         fVar6 * *(float *)(param_2 + 0x20) + fVar2 * *(float *)(param_2 + 0x24);
+         (fVar3 * *(float *)(param_2 + 0x28) +
+         (fVar6 * *(float *)(param_2 + 0x20) + fVar2 * *(float *)(param_2 + 0x24)));
     param_2 = param_2 + 0x100;
     uVar9 = uVar9 - 1;
   } while (uVar9 != 0);
@@ -2239,12 +2239,12 @@ int _gleVtxTextureCoordGenObjectST(param_1, param_2, param_3)
   do {
     *(float *)(param_2 + 0x84) =
          fVar5 * *(float *)(param_2 + 0x2c) +
-         fVar8 * *(float *)(param_2 + 0x28) +
-         fVar4 * *(float *)(param_2 + 0x20) + fVar7 * *(float *)(param_2 + 0x24);
+         (fVar8 * *(float *)(param_2 + 0x28) +
+         (fVar4 * *(float *)(param_2 + 0x20) + fVar7 * *(float *)(param_2 + 0x24)));
     *(float *)(param_2 + 0x80) =
          fVar1 * *(float *)(param_2 + 0x2c) +
-         fVar3 * *(float *)(param_2 + 0x28) +
-         fVar6 * *(float *)(param_2 + 0x20) + fVar2 * *(float *)(param_2 + 0x24);
+         (fVar3 * *(float *)(param_2 + 0x28) +
+         (fVar6 * *(float *)(param_2 + 0x20) + fVar2 * *(float *)(param_2 + 0x24)));
     param_2 = param_2 + 0x100;
     uVar9 = uVar9 - 1;
   } while (uVar9 != 0);
@@ -2279,7 +2279,7 @@ int FUN_000f65d0(param_1, param_2)
   for (; param_2 < unaff_r29; param_2 = param_2 + 0x100) {
     (**(code **)puVar2)(param_1,param_2 + 0x20,&local_30);
     fVar1 = *(float *)(param_2 + 0x48) * local_28 +
-            *(float *)(param_2 + 0x40) * local_30 + *(float *)(param_2 + 0x44) * local_2c;
+            (*(float *)(param_2 + 0x40) * local_30 + *(float *)(param_2 + 0x44) * local_2c);
     fVar1 = fVar1 + fVar1;
     *(float *)(param_2 + 0x84) = -(*(float *)(param_2 + 0x44) * fVar1 - local_2c);
     *(float *)(param_2 + 0x80) = -(*(float *)(param_2 + 0x40) * fVar1 - local_30);
@@ -2299,9 +2299,9 @@ void FUN_000f6678(int param_1,uint param_2,double fparam_1)
   
   puVar2 = PTR__gleVectorNormalize_00112064;
   for (; param_2 < unaff_r28; param_2 = param_2 + 0x100) {
-    fparam_1 = (double)(**(code **)puVar2)(fparam_1,param_1,param_2 + 0x20,&local_30);
+    fparam_1 = (double)(**(double ( **)(int,int,int,double))puVar2)(param_1, param_2 + 0x20, &local_30, fparam_1);
     fVar1 = *(float *)(param_2 + 0x48) * local_28 +
-            *(float *)(param_2 + 0x40) * local_30 + *(float *)(param_2 + 0x44) * local_2c;
+            (*(float *)(param_2 + 0x40) * local_30 + *(float *)(param_2 + 0x44) * local_2c);
     fVar1 = fVar1 + fVar1;
     *(float *)(param_2 + 0x88) = -(*(float *)(param_2 + 0x48) * fVar1 - local_28);
     *(float *)(param_2 + 0x80) = -(*(float *)(param_2 + 0x40) * fVar1 - local_30);
@@ -2438,7 +2438,7 @@ int _gleMultiVtxTextureCoordGenObjectSlow(param_1, param_2, param_3, param_4)
         pfVar4 = (float *)(uVar11 + 0x2c);
         uVar11 = uVar11 + 0x100;
         *(float *)(iVar9 + 0x80) =
-             fVar6 * *pfVar4 + fVar8 * *pfVar3 + fVar5 * *pfVar2 + fVar7 * *pfVar1;
+             fVar6 * *pfVar4 + (fVar8 * *pfVar3 + (fVar5 * *pfVar2 + fVar7 * *pfVar1));
         uVar13 = uVar13 - 1;
       } while (uVar13 != 0);
     }
@@ -2460,7 +2460,7 @@ int _gleMultiVtxTextureCoordGenObjectSlow(param_1, param_2, param_3, param_4)
         pfVar4 = (float *)(uVar11 + 0x2c);
         uVar11 = uVar11 + 0x100;
         *(float *)(iVar9 + 0x84) =
-             fVar6 * *pfVar4 + fVar8 * *pfVar3 + fVar5 * *pfVar2 + fVar7 * *pfVar1;
+             fVar6 * *pfVar4 + (fVar8 * *pfVar3 + (fVar5 * *pfVar2 + fVar7 * *pfVar1));
         uVar13 = uVar13 - 1;
       } while (uVar13 != 0);
     }
@@ -2482,7 +2482,7 @@ int _gleMultiVtxTextureCoordGenObjectSlow(param_1, param_2, param_3, param_4)
         pfVar4 = (float *)(uVar11 + 0x2c);
         uVar11 = uVar11 + 0x100;
         *(float *)(iVar9 + 0x88) =
-             fVar6 * *pfVar4 + fVar8 * *pfVar3 + fVar5 * *pfVar2 + fVar7 * *pfVar1;
+             fVar6 * *pfVar4 + (fVar8 * *pfVar3 + (fVar5 * *pfVar2 + fVar7 * *pfVar1));
         uVar13 = uVar13 - 1;
       } while (uVar13 != 0);
     }
@@ -2509,7 +2509,7 @@ int _gleMultiVtxTextureCoordGenObjectSlow(param_1, param_2, param_3, param_4)
       pfVar4 = (float *)(param_2 + 0x2c);
       param_2 = param_2 + 0x100;
       *(float *)(iVar9 + 0x8c) =
-           fVar6 * *pfVar4 + fVar8 * *pfVar3 + fVar5 * *pfVar2 + fVar7 * *pfVar1;
+           fVar6 * *pfVar4 + (fVar8 * *pfVar3 + (fVar5 * *pfVar2 + fVar7 * *pfVar1));
       uVar10 = uVar10 - 1;
     } while (uVar10 != 0);
   }
@@ -2576,7 +2576,7 @@ void FUN_000f6ac8(int param_1,uint param_2,int param_3,int param_4,double fparam
             pfVar5 = (float *)(uVar14 + 0x2c);
             uVar14 = uVar14 + 0x100;
             *(float *)(iVar12 + 0x80) =
-                 fVar7 * *pfVar5 + fVar9 * *pfVar4 + fVar6 * *pfVar3 + fVar8 * *pfVar2;
+                 fVar7 * *pfVar5 + (fVar9 * *pfVar4 + (fVar6 * *pfVar3 + fVar8 * *pfVar2));
             uVar15 = uVar15 - 1;
           } while (uVar15 != 0);
         }
@@ -2598,13 +2598,13 @@ void FUN_000f6ac8(int param_1,uint param_2,int param_3,int param_4,double fparam
     else if ((uVar10 == 0x8512) && (param_2 < uVar13)) {
       uVar15 = param_2;
       do {
-        fparam_1 = (double)(**(code **)puVar11)(param_1,uVar15 + 0x20,&local_40);
+        fparam_1 = (double)(**(double ( **)(int,int,int))puVar11)(param_1, uVar15 + 0x20, &local_40);
         pfVar2 = (float *)(uVar15 + 0x44);
         iVar12 = param_4 * 0x10 + uVar15;
         pfVar3 = (float *)(uVar15 + 0x40);
         pfVar4 = (float *)(uVar15 + 0x48);
         uVar15 = uVar15 + 0x100;
-        fVar6 = *pfVar4 * local_38 + *pfVar3 * local_40 + *pfVar2 * local_3c;
+        fVar6 = *pfVar4 * local_38 + (*pfVar3 * local_40 + *pfVar2 * local_3c);
         *(float *)(iVar12 + 0x80) = -(*pfVar3 * (fVar6 + fVar6) - local_40);
       } while (uVar15 < uVar13);
     }
@@ -2642,7 +2642,7 @@ void FUN_000f6ac8(int param_1,uint param_2,int param_3,int param_4,double fparam
             pfVar5 = (float *)(uVar14 + 0x2c);
             uVar14 = uVar14 + 0x100;
             *(float *)(iVar12 + 0x84) =
-                 fVar7 * *pfVar5 + fVar9 * *pfVar4 + fVar6 * *pfVar3 + fVar8 * *pfVar2;
+                 fVar7 * *pfVar5 + (fVar9 * *pfVar4 + (fVar6 * *pfVar3 + fVar8 * *pfVar2));
             uVar15 = uVar15 - 1;
           } while (uVar15 != 0);
         }
@@ -2670,7 +2670,7 @@ void FUN_000f6ac8(int param_1,uint param_2,int param_3,int param_4,double fparam
         pfVar3 = (float *)(uVar15 + 0x40);
         pfVar4 = (float *)(uVar15 + 0x48);
         uVar15 = uVar15 + 0x100;
-        fVar6 = *pfVar4 * local_38 + *pfVar3 * local_40 + *pfVar2 * local_3c;
+        fVar6 = *pfVar4 * local_38 + (*pfVar3 * local_40 + *pfVar2 * local_3c);
         *(float *)(iVar12 + 0x84) = -(*pfVar2 * (fVar6 + fVar6) - local_3c);
       } while (uVar15 < uVar13);
     }
@@ -2709,7 +2709,7 @@ void FUN_000f6ac8(int param_1,uint param_2,int param_3,int param_4,double fparam
             pfVar5 = (float *)(uVar14 + 0x2c);
             uVar14 = uVar14 + 0x100;
             *(float *)(iVar12 + 0x88) =
-                 fVar7 * *pfVar5 + fVar9 * *pfVar4 + fVar6 * *pfVar3 + fVar8 * *pfVar2;
+                 fVar7 * *pfVar5 + (fVar9 * *pfVar4 + (fVar6 * *pfVar3 + fVar8 * *pfVar2));
             uVar15 = uVar15 - 1;
           } while (uVar15 != 0);
         }
@@ -2724,7 +2724,7 @@ void FUN_000f6ac8(int param_1,uint param_2,int param_3,int param_4,double fparam
         pfVar3 = (float *)(uVar15 + 0x40);
         pfVar4 = (float *)(uVar15 + 0x48);
         uVar15 = uVar15 + 0x100;
-        fVar6 = *pfVar4 * local_38 + *pfVar3 * local_40 + *pfVar2 * local_3c;
+        fVar6 = *pfVar4 * local_38 + (*pfVar3 * local_40 + *pfVar2 * local_3c);
         *(float *)(iVar12 + 0x88) = -(*pfVar4 * (fVar6 + fVar6) - local_38);
       } while (uVar15 < uVar13);
     }
@@ -2747,7 +2747,7 @@ void FUN_000f6ac8(int param_1,uint param_2,int param_3,int param_4,double fparam
           pfVar5 = (float *)(param_2 + 0x2c);
           param_2 = param_2 + 0x100;
           *(float *)(iVar12 + 0x8c) =
-               fVar7 * *pfVar5 + fVar9 * *pfVar4 + fVar6 * *pfVar3 + fVar8 * *pfVar2;
+               fVar7 * *pfVar5 + (fVar9 * *pfVar4 + (fVar6 * *pfVar3 + fVar8 * *pfVar2));
           uVar13 = uVar13 - 1;
         } while (uVar13 != 0);
       }
@@ -2800,8 +2800,8 @@ int _gleMultiVtxTextureCoordGenEyeST(param_1, param_2, param_3, param_4)
     fVar11 = *(float *)(param_2 + 0x28);
     fVar12 = *(float *)(param_2 + 0x2c);
     param_2 = param_2 + 0x100;
-    *(float *)(iVar14 + 0x84) = fVar5 * fVar12 + fVar8 * fVar11 + fVar1 * fVar10 + fVar7 * fVar9;
-    *(float *)(iVar14 + 0x80) = fVar2 * fVar12 + fVar4 * fVar11 + fVar6 * fVar10 + fVar3 * fVar9;
+    *(float *)(iVar14 + 0x84) = fVar5 * fVar12 + (fVar8 * fVar11 + (fVar1 * fVar10 + fVar7 * fVar9));
+    *(float *)(iVar14 + 0x80) = fVar2 * fVar12 + (fVar4 * fVar11 + (fVar6 * fVar10 + fVar3 * fVar9));
     uVar13 = uVar13 - 1;
   } while (uVar13 != 0);
   return;
@@ -2850,8 +2850,8 @@ int _gleMultiVtxTextureCoordGenObjectST(param_1, param_2, param_3, param_4)
     fVar11 = *(float *)(param_2 + 0x28);
     fVar12 = *(float *)(param_2 + 0x2c);
     param_2 = param_2 + 0x100;
-    *(float *)(iVar14 + 0x84) = fVar5 * fVar12 + fVar8 * fVar11 + fVar1 * fVar10 + fVar7 * fVar9;
-    *(float *)(iVar14 + 0x80) = fVar2 * fVar12 + fVar4 * fVar11 + fVar6 * fVar10 + fVar3 * fVar9;
+    *(float *)(iVar14 + 0x84) = fVar5 * fVar12 + (fVar8 * fVar11 + (fVar1 * fVar10 + fVar7 * fVar9));
+    *(float *)(iVar14 + 0x80) = fVar2 * fVar12 + (fVar4 * fVar11 + (fVar6 * fVar10 + fVar3 * fVar9));
     uVar13 = uVar13 - 1;
   } while (uVar13 != 0);
   return;
@@ -2900,7 +2900,7 @@ int FUN_000f71f0(param_1, param_2, param_3, param_4)
       (**(code **)puVar3)(param_1,param_2 + 0x20,&local_30);
       iVar4 = param_4 * 0x10 + param_2;
       fVar2 = *(float *)(param_2 + 0x48) * local_28 +
-              *(float *)(param_2 + 0x40) * local_30 + *(float *)(param_2 + 0x44) * local_2c;
+              (*(float *)(param_2 + 0x40) * local_30 + *(float *)(param_2 + 0x44) * local_2c);
       fVar2 = fVar2 + fVar2;
       *(float *)(iVar4 + 0x80) = -(*(float *)(param_2 + 0x40) * fVar2 - local_30);
       pfVar1 = (float *)(param_2 + 0x44);
@@ -2926,10 +2926,10 @@ void FUN_000f72a8(int param_1,uint param_2,undefined4 param_3,int param_4,double
   puVar3 = PTR__gleVectorNormalize_00112064;
   if (param_2 < unaff_r27) {
     do {
-      fparam_1 = (double)(**(code **)puVar3)(fparam_1,param_1,param_2 + 0x20,&local_30);
+      fparam_1 = (double)(**(double ( **)(int,int,int,double))puVar3)(param_1, param_2 + 0x20, &local_30, fparam_1);
       iVar4 = param_4 * 0x10 + param_2;
       fVar2 = *(float *)(param_2 + 0x48) * local_28 +
-              *(float *)(param_2 + 0x40) * local_30 + *(float *)(param_2 + 0x44) * local_2c;
+              (*(float *)(param_2 + 0x40) * local_30 + *(float *)(param_2 + 0x44) * local_2c);
       fVar2 = fVar2 + fVar2;
       *(float *)(iVar4 + 0x80) = -(*(float *)(param_2 + 0x40) * fVar2 - local_30);
       *(float *)(iVar4 + 0x84) = -(*(float *)(param_2 + 0x44) * fVar2 - local_2c);

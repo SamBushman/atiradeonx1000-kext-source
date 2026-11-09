@@ -2594,53 +2594,53 @@ int _gleMultMatrixd(param_1, param_2, param_3)
   float *param_3;
 {
   *param_3 = (float)((double)param_1[0xc] * param_2[3] +
-                    (double)param_1[8] * param_2[2] +
-                    (double)*param_1 * *param_2 + (double)param_1[4] * param_2[1]);
+                    ((double)param_1[8] * param_2[2] +
+                    ((double)*param_1 * *param_2 + (double)param_1[4] * param_2[1])));
   param_3[4] = (float)((double)param_1[0xc] * param_2[7] +
-                      (double)param_1[8] * param_2[6] +
-                      (double)*param_1 * param_2[4] + (double)param_1[4] * param_2[5]);
+                      ((double)param_1[8] * param_2[6] +
+                      ((double)*param_1 * param_2[4] + (double)param_1[4] * param_2[5])));
   param_3[8] = (float)((double)param_1[0xc] * param_2[0xb] +
-                      (double)param_1[8] * param_2[10] +
-                      (double)*param_1 * param_2[8] + (double)param_1[4] * param_2[9]);
+                      ((double)param_1[8] * param_2[10] +
+                      ((double)*param_1 * param_2[8] + (double)param_1[4] * param_2[9])));
   param_3[0xc] = (float)((double)param_1[0xc] * param_2[0xf] +
-                        (double)param_1[8] * param_2[0xe] +
-                        (double)*param_1 * param_2[0xc] + (double)param_1[4] * param_2[0xd]);
+                        ((double)param_1[8] * param_2[0xe] +
+                        ((double)*param_1 * param_2[0xc] + (double)param_1[4] * param_2[0xd])));
   param_3[1] = (float)((double)param_1[0xd] * param_2[3] +
-                      (double)param_1[9] * param_2[2] +
-                      (double)param_1[1] * *param_2 + (double)param_1[5] * param_2[1]);
+                      ((double)param_1[9] * param_2[2] +
+                      ((double)param_1[1] * *param_2 + (double)param_1[5] * param_2[1])));
   param_3[5] = (float)((double)param_1[0xd] * param_2[7] +
-                      (double)param_1[9] * param_2[6] +
-                      (double)param_1[1] * param_2[4] + (double)param_1[5] * param_2[5]);
+                      ((double)param_1[9] * param_2[6] +
+                      ((double)param_1[1] * param_2[4] + (double)param_1[5] * param_2[5])));
   param_3[9] = (float)((double)param_1[0xd] * param_2[0xb] +
-                      (double)param_1[9] * param_2[10] +
-                      (double)param_1[1] * param_2[8] + (double)param_1[5] * param_2[9]);
+                      ((double)param_1[9] * param_2[10] +
+                      ((double)param_1[1] * param_2[8] + (double)param_1[5] * param_2[9])));
   param_3[0xd] = (float)((double)param_1[0xd] * param_2[0xf] +
-                        (double)param_1[9] * param_2[0xe] +
-                        (double)param_1[1] * param_2[0xc] + (double)param_1[5] * param_2[0xd]);
+                        ((double)param_1[9] * param_2[0xe] +
+                        ((double)param_1[1] * param_2[0xc] + (double)param_1[5] * param_2[0xd])));
   param_3[2] = (float)((double)param_1[0xe] * param_2[3] +
-                      (double)param_1[10] * param_2[2] +
-                      (double)param_1[2] * *param_2 + (double)param_1[6] * param_2[1]);
+                      ((double)param_1[10] * param_2[2] +
+                      ((double)param_1[2] * *param_2 + (double)param_1[6] * param_2[1])));
   param_3[6] = (float)((double)param_1[0xe] * param_2[7] +
-                      (double)param_1[10] * param_2[6] +
-                      (double)param_1[2] * param_2[4] + (double)param_1[6] * param_2[5]);
+                      ((double)param_1[10] * param_2[6] +
+                      ((double)param_1[2] * param_2[4] + (double)param_1[6] * param_2[5])));
   param_3[10] = (float)((double)param_1[0xe] * param_2[0xb] +
-                       (double)param_1[10] * param_2[10] +
-                       (double)param_1[2] * param_2[8] + (double)param_1[6] * param_2[9]);
+                       ((double)param_1[10] * param_2[10] +
+                       ((double)param_1[2] * param_2[8] + (double)param_1[6] * param_2[9])));
   param_3[0xe] = (float)((double)param_1[0xe] * param_2[0xf] +
-                        (double)param_1[10] * param_2[0xe] +
-                        (double)param_1[2] * param_2[0xc] + (double)param_1[6] * param_2[0xd]);
+                        ((double)param_1[10] * param_2[0xe] +
+                        ((double)param_1[2] * param_2[0xc] + (double)param_1[6] * param_2[0xd])));
   param_3[3] = (float)((double)param_1[0xf] * param_2[3] +
-                      (double)param_1[0xb] * param_2[2] +
-                      (double)param_1[3] * *param_2 + (double)param_1[7] * param_2[1]);
+                      ((double)param_1[0xb] * param_2[2] +
+                      ((double)param_1[3] * *param_2 + (double)param_1[7] * param_2[1])));
   param_3[7] = (float)((double)param_1[0xf] * param_2[7] +
-                      (double)param_1[0xb] * param_2[6] +
-                      (double)param_1[3] * param_2[4] + (double)param_1[7] * param_2[5]);
+                      ((double)param_1[0xb] * param_2[6] +
+                      ((double)param_1[3] * param_2[4] + (double)param_1[7] * param_2[5])));
   param_3[0xb] = (float)((double)param_1[0xf] * param_2[0xb] +
-                        (double)param_1[0xb] * param_2[10] +
-                        (double)param_1[3] * param_2[8] + (double)param_1[7] * param_2[9]);
+                        ((double)param_1[0xb] * param_2[10] +
+                        ((double)param_1[3] * param_2[8] + (double)param_1[7] * param_2[9])));
   param_3[0xf] = (float)((double)param_1[0xf] * param_2[0xf] +
-                        (double)param_1[0xb] * param_2[0xe] +
-                        (double)param_1[3] * param_2[0xc] + (double)param_1[7] * param_2[0xd]);
+                        ((double)param_1[0xb] * param_2[0xe] +
+                        ((double)param_1[3] * param_2[0xc] + (double)param_1[7] * param_2[0xd])));
   return;
 }
 
@@ -5196,9 +5196,8 @@ void _glVertex2d_Exec(int param_1,double fparam_1,double fparam_2)
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)
-            ((double)(float)fparam_1,(double)(float)fparam_2,(double)*(float *)(param_1 + 0x20),
-             (double)*(float *)(param_1 + 0x24));
+  (*((int (*)(double,double,double,double))UNRECOVERED_JUMPTABLE))
+            ((double)(float)fparam_1, (double)(float)fparam_2, (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
   return;
 }
 
@@ -6806,7 +6805,7 @@ void _gleFlushAndSubmit(int param_1,double fparam_1,double fparam_2,double fpara
   (**(code **)(param_1 + 0x4a0c))();
                     
                     
-  (**(code **)(param_1 + 0x4884))(fparam_1,fparam_2,fparam_3,fparam_4,param_1);
+  (**(int ( **)(int,double,double,double,double))(param_1 + 0x4884))(param_1, fparam_1, fparam_2, fparam_3, fparam_4);
   return;
 }
 

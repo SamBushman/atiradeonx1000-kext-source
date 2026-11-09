@@ -6307,7 +6307,7 @@ int _gleSelectArrayInterpFunc(param_1, param_2)
   if ((*(char *)(param_1 + 0x316a) != '\0') && (*(int *)(param_1 + 0x4e1c) == 0x1c00)) {
     uVar8 = uVar8 + 2;
   }
-  if ((*(short *)(_gleDCBAlloc + param_1 + 4) == 0x1102) ||
+  if ((*(short *)(0x3170 + param_1 + 4) == 0x1102) ||
      ((*(char *)(param_1 + 0x4fea) != '\0' &&
       (((*(char *)(param_1 + 0x30aa) == '\0' || (*(char *)(param_1 + 0x4664) != '\0')) ||
        (*(int *)(param_1 + 0x5434) != 0)))))) {
@@ -6358,7 +6358,7 @@ void _gleSetEyeInterpFunc(int param_1,undefined4 param_2,undefined4 param_3,unde
   *(code **)(param_1 + 0x49c8) = UNRECOVERED_JUMPTABLE;
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(fparam_1,param_1,param_2,param_3,param_4);
+  (*((int (*)(int,int,int,int,double))UNRECOVERED_JUMPTABLE))(param_1, param_2, param_3, param_4, fparam_1);
   return;
 }
 
@@ -8116,7 +8116,7 @@ int FUN_000c4664(param_1, param_2)
     uVar11 = uVar2 & 0xffff00ff | 0xfb00;
   }
   uVar2 = param_2 | *(ushort *)(param_1 + 0x4fe8);
-  if (*(short *)(_gleDCBAlloc + param_1 + 4) == 0x1102) {
+  if (*(short *)(0x3170 + param_1 + 4) == 0x1102) {
     uVar2 = uVar2 | 0x20;
   }
   if ((*(byte *)(param_1 + 0x50b4) & 1) == 0) {
@@ -8308,7 +8308,7 @@ int _gleBuildModelviewTransformFuncNO(param_1, param_2)
     uVar14 = uVar3 & 0xffff00ff | 0xfb00;
   }
   uVar3 = param_2 | *(ushort *)(param_1 + 0x4fe8);
-  if (*(short *)(_gleDCBAlloc + param_1 + 4) == 0x1102) {
+  if (*(short *)(0x3170 + param_1 + 4) == 0x1102) {
     uVar3 = uVar3 | 0x20;
   }
   if ((*(byte *)(param_1 + 0x50b4) & 1) == 0) {

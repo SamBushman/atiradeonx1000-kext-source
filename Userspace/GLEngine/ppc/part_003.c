@@ -2538,8 +2538,8 @@ int _glVertex4fv_Exec(param_1, param_2)
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)
-            ((double)*param_2,(double)param_2[1],(double)param_2[2],(double)param_2[3]);
+  (*((int (*)(double,double,double,double))UNRECOVERED_JUMPTABLE))
+            ((double)*param_2, (double)param_2[1], (double)param_2[2], (double)param_2[3]);
   return;
 }
 

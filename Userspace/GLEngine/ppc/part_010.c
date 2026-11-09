@@ -1285,20 +1285,20 @@ int _glClipPlane_Exec(param_1, param_2, param_3)
       fVar5 = *(float *)(iVar9 + 0x4198);
       *(float *)(iVar9 + 0x418c) =
            fVar5 * *(float *)(param_1 + 0x22f0) +
-           fVar4 * *(float *)(param_1 + 0x22e0) +
-           fVar3 * *(float *)(param_1 + 0x22c0) + fVar2 * *(float *)(param_1 + 0x22d0);
+           (fVar4 * *(float *)(param_1 + 0x22e0) +
+           (fVar3 * *(float *)(param_1 + 0x22c0) + fVar2 * *(float *)(param_1 + 0x22d0)));
       *(float *)(iVar9 + 0x4190) =
            fVar5 * *(float *)(param_1 + 0x22f4) +
-           fVar4 * *(float *)(param_1 + 0x22e4) +
-           fVar3 * *(float *)(param_1 + 0x22c4) + fVar2 * *(float *)(param_1 + 0x22d4);
+           (fVar4 * *(float *)(param_1 + 0x22e4) +
+           (fVar3 * *(float *)(param_1 + 0x22c4) + fVar2 * *(float *)(param_1 + 0x22d4)));
       *(float *)(iVar9 + 0x4194) =
            fVar5 * *(float *)(param_1 + 0x22f8) +
-           fVar4 * *(float *)(param_1 + 0x22e8) +
-           fVar3 * *(float *)(param_1 + 0x22c8) + fVar2 * *(float *)(param_1 + 0x22d8);
+           (fVar4 * *(float *)(param_1 + 0x22e8) +
+           (fVar3 * *(float *)(param_1 + 0x22c8) + fVar2 * *(float *)(param_1 + 0x22d8)));
       *(float *)(iVar9 + 0x4198) =
            fVar5 * *(float *)(param_1 + 0x22fc) +
-           fVar4 * *(float *)(param_1 + 0x22ec) +
-           fVar3 * *(float *)(param_1 + 0x22cc) + fVar2 * *(float *)(param_1 + 0x22dc);
+           (fVar4 * *(float *)(param_1 + 0x22ec) +
+           (fVar3 * *(float *)(param_1 + 0x22cc) + fVar2 * *(float *)(param_1 + 0x22dc)));
       if (*(int *)(param_1 + 0x5434) == 0) {
         bVar1 = *(byte *)(uVar8 + *(int *)(param_1 + 0x5420) + 0x31c);
       }

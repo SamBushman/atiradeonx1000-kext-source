@@ -1053,10 +1053,10 @@ int _gleReclaimDrawPixelResources(param_1)
     _gleVecFree((void *)*puVar1);
     _gleVecFree(*(void **)(param_1 + 0x74a0));
   }
-  if (*(void **)(_gleUpdateLightPosition + param_1) != (void *)0x0) {
-    _gleVecFree(*(void **)(_gleUpdateLightPosition + param_1));
+  if (*(void **)(0x74a4 + param_1) != (void *)0x0) {
+    _gleVecFree(*(void **)(0x74a4 + param_1));
   }
-  *(undefined4 *)(_gleUpdateLightPosition + param_1) = 0;
+  *(undefined4 *)(0x74a4 + param_1) = 0;
   *(undefined4 *)(param_1 + 0x7488) = 0;
   *(undefined4 *)(param_1 + 0x7494) = 0;
   *(undefined4 *)(param_1 + 0x748c) = 0;
@@ -1297,9 +1297,7 @@ int _glVertex2i_Exec(param_1, param_2, param_3)
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*pcVar1)((double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58),
-            (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58),
-            (double)*(float *)(param_1 + 0x20),(double)*(float *)(param_1 + 0x24));
+  (*((int (*)(double,double,double,double))pcVar1))((double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58), (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
   return;
 }
 
@@ -1652,12 +1650,12 @@ void _glFrustum_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3
             fVar6 = (float)((fparam_6 + fparam_5) * (double)(1.0 / fVar3));
             dVar13 = (double)(float)(fparam_5 + fparam_5);
             fVar1 = (float)(dVar13 * (double)(1.0 / fVar1));
-            pfVar12[8] = (fVar7 * fVar6 + *pfVar12 * fVar5 + pfVar12[4] * fVar4) - pfVar12[0xc];
+            pfVar12[8] = (fVar7 * fVar6 + (*pfVar12 * fVar5 + pfVar12[4] * fVar4)) - pfVar12[0xc];
             fVar3 = (float)(fparam_6 * dVar13 * (double)(1.0 / fVar3));
             fVar2 = (float)(dVar13 * (double)(1.0 / fVar2));
-            pfVar12[9] = (fVar8 * fVar6 + pfVar12[1] * fVar5 + pfVar12[5] * fVar4) - pfVar12[0xd];
-            pfVar12[10] = (fVar9 * fVar6 + pfVar12[2] * fVar5 + pfVar12[6] * fVar4) - pfVar12[0xe];
-            pfVar12[0xb] = (fVar10 * fVar6 + pfVar12[3] * fVar5 + pfVar12[7] * fVar4) - pfVar12[0xf]
+            pfVar12[9] = (fVar8 * fVar6 + (pfVar12[1] * fVar5 + pfVar12[5] * fVar4)) - pfVar12[0xd];
+            pfVar12[10] = (fVar9 * fVar6 + (pfVar12[2] * fVar5 + pfVar12[6] * fVar4)) - pfVar12[0xe];
+            pfVar12[0xb] = (fVar10 * fVar6 + (pfVar12[3] * fVar5 + pfVar12[7] * fVar4)) - pfVar12[0xf]
             ;
             pfVar12[3] = pfVar12[3] * fVar1;
             pfVar12[4] = pfVar12[4] * fVar2;
@@ -1896,20 +1894,20 @@ switchD_000316d0_default:
     *(float *)(iVar7 + 0x285c) = fVar4;
     *(float *)(iVar7 + 0x2850) =
          fVar4 * *(float *)(param_1 + 0x1cf0) +
-         fVar3 * *(float *)(param_1 + 0x1ce0) +
-         fVar5 * *(float *)(param_1 + 0x1cc0) + fVar2 * *(float *)(param_1 + 0x1cd0);
+         (fVar3 * *(float *)(param_1 + 0x1ce0) +
+         (fVar5 * *(float *)(param_1 + 0x1cc0) + fVar2 * *(float *)(param_1 + 0x1cd0)));
     *(float *)(iVar7 + 0x2854) =
          fVar4 * *(float *)(param_1 + 0x1cf4) +
-         fVar3 * *(float *)(param_1 + 0x1ce4) +
-         fVar5 * *(float *)(param_1 + 0x1cc4) + fVar2 * *(float *)(param_1 + 0x1cd4);
+         (fVar3 * *(float *)(param_1 + 0x1ce4) +
+         (fVar5 * *(float *)(param_1 + 0x1cc4) + fVar2 * *(float *)(param_1 + 0x1cd4)));
     *(float *)(iVar7 + 0x2858) =
          fVar4 * *(float *)(param_1 + 0x1cf8) +
-         fVar3 * *(float *)(param_1 + 0x1ce8) +
-         fVar5 * *(float *)(_glePreInitGlobals + param_1) + fVar2 * *(float *)(param_1 + 0x1cd8);
+         (fVar3 * *(float *)(param_1 + 0x1ce8) +
+         (fVar5 * *(float *)(0x1cc8 + param_1) + fVar2 * *(float *)(param_1 + 0x1cd8)));
     *(float *)(iVar7 + 0x285c) =
          fVar4 * *(float *)(param_1 + 0x1cfc) +
-         fVar3 * *(float *)(param_1 + 0x1cec) +
-         fVar5 * *(float *)(param_1 + 0x1ccc) + fVar2 * *(float *)(param_1 + 0x1cdc);
+         (fVar3 * *(float *)(param_1 + 0x1cec) +
+         (fVar5 * *(float *)(param_1 + 0x1ccc) + fVar2 * *(float *)(param_1 + 0x1cdc)));
     ((double (*)())_gleUpdateLightPosition)(param_1,uVar10,fparam_1);
     goto LAB_00031c08;
   case 0x1204:

@@ -1340,37 +1340,37 @@ int _gleMultMatrix(param_1, param_2, param_3)
   float *param_3;
 {
   *param_3 = param_1[0xc] * param_2[3] +
-             param_1[8] * param_2[2] + *param_1 * *param_2 + param_1[4] * param_2[1];
+             (param_1[8] * param_2[2] + (*param_1 * *param_2 + param_1[4] * param_2[1]));
   param_3[4] = param_1[0xc] * param_2[7] +
-               param_1[8] * param_2[6] + *param_1 * param_2[4] + param_1[4] * param_2[5];
+               (param_1[8] * param_2[6] + (*param_1 * param_2[4] + param_1[4] * param_2[5]));
   param_3[8] = param_1[0xc] * param_2[0xb] +
-               param_1[8] * param_2[10] + *param_1 * param_2[8] + param_1[4] * param_2[9];
+               (param_1[8] * param_2[10] + (*param_1 * param_2[8] + param_1[4] * param_2[9]));
   param_3[0xc] = param_1[0xc] * param_2[0xf] +
-                 param_1[8] * param_2[0xe] + *param_1 * param_2[0xc] + param_1[4] * param_2[0xd];
+                 (param_1[8] * param_2[0xe] + (*param_1 * param_2[0xc] + param_1[4] * param_2[0xd]));
   param_3[1] = param_1[0xd] * param_2[3] +
-               param_1[9] * param_2[2] + param_1[1] * *param_2 + param_1[5] * param_2[1];
+               (param_1[9] * param_2[2] + (param_1[1] * *param_2 + param_1[5] * param_2[1]));
   param_3[5] = param_1[0xd] * param_2[7] +
-               param_1[9] * param_2[6] + param_1[1] * param_2[4] + param_1[5] * param_2[5];
+               (param_1[9] * param_2[6] + (param_1[1] * param_2[4] + param_1[5] * param_2[5]));
   param_3[9] = param_1[0xd] * param_2[0xb] +
-               param_1[9] * param_2[10] + param_1[1] * param_2[8] + param_1[5] * param_2[9];
+               (param_1[9] * param_2[10] + (param_1[1] * param_2[8] + param_1[5] * param_2[9]));
   param_3[0xd] = param_1[0xd] * param_2[0xf] +
-                 param_1[9] * param_2[0xe] + param_1[1] * param_2[0xc] + param_1[5] * param_2[0xd];
+                 (param_1[9] * param_2[0xe] + (param_1[1] * param_2[0xc] + param_1[5] * param_2[0xd]));
   param_3[2] = param_1[0xe] * param_2[3] +
-               param_1[10] * param_2[2] + param_1[2] * *param_2 + param_1[6] * param_2[1];
+               (param_1[10] * param_2[2] + (param_1[2] * *param_2 + param_1[6] * param_2[1]));
   param_3[6] = param_1[0xe] * param_2[7] +
-               param_1[10] * param_2[6] + param_1[2] * param_2[4] + param_1[6] * param_2[5];
+               (param_1[10] * param_2[6] + (param_1[2] * param_2[4] + param_1[6] * param_2[5]));
   param_3[10] = param_1[0xe] * param_2[0xb] +
-                param_1[10] * param_2[10] + param_1[2] * param_2[8] + param_1[6] * param_2[9];
+                (param_1[10] * param_2[10] + (param_1[2] * param_2[8] + param_1[6] * param_2[9]));
   param_3[0xe] = param_1[0xe] * param_2[0xf] +
-                 param_1[10] * param_2[0xe] + param_1[2] * param_2[0xc] + param_1[6] * param_2[0xd];
+                 (param_1[10] * param_2[0xe] + (param_1[2] * param_2[0xc] + param_1[6] * param_2[0xd]));
   param_3[3] = param_1[0xf] * param_2[3] +
-               param_1[0xb] * param_2[2] + param_1[3] * *param_2 + param_1[7] * param_2[1];
+               (param_1[0xb] * param_2[2] + (param_1[3] * *param_2 + param_1[7] * param_2[1]));
   param_3[7] = param_1[0xf] * param_2[7] +
-               param_1[0xb] * param_2[6] + param_1[3] * param_2[4] + param_1[7] * param_2[5];
+               (param_1[0xb] * param_2[6] + (param_1[3] * param_2[4] + param_1[7] * param_2[5]));
   param_3[0xb] = param_1[0xf] * param_2[0xb] +
-                 param_1[0xb] * param_2[10] + param_1[3] * param_2[8] + param_1[7] * param_2[9];
+                 (param_1[0xb] * param_2[10] + (param_1[3] * param_2[8] + param_1[7] * param_2[9]));
   param_3[0xf] = param_1[0xf] * param_2[0xf] +
-                 param_1[0xb] * param_2[0xe] + param_1[3] * param_2[0xc] + param_1[7] * param_2[0xd]
+                 (param_1[0xb] * param_2[0xe] + (param_1[3] * param_2[0xc] + param_1[7] * param_2[0xd]))
   ;
   return;
 }
@@ -1744,7 +1744,7 @@ double _gleUpdateFogData(int param_1)
     else {
       fVar1 = *(float *)(iVar5 + -0x1d8);
     }
-    in_f1 = (double)(**(code **)(param_1 + 0x4fe4))((double)fVar1,param_1);
+    in_f1 = (double)(**(double ( **)(int,double))(param_1 + 0x4fe4))(param_1, (double)fVar1);
     *(float *)(iVar5 + -0x1b4) = (float)in_f1;
     uVar3 = *(uint *)(param_1 + 0x4980) | 4;
   }
@@ -1835,7 +1835,7 @@ int _gleUpdateEvalData(param_1)
   *(float *)(param_1 + 0x74b4) =
        (*(float *)(param_1 + 0x74b0) - *(float *)(param_1 + 0x74ac)) /
        (float)((double)CONCAT44(0x43300000,
-                                *(uint *)(_gleUpdateLightPosition + param_1 + 4) ^ 0x80000000) -
+                                *(uint *)(0x74a4 + param_1 + 4) ^ 0x80000000) -
               DOUBLE_00108d58);
   *(float *)(param_1 + 0x74c4) =
        (*(float *)(param_1 + 0x74c0) - *(float *)(param_1 + 0x74bc)) / (float)dVar1;
@@ -6802,7 +6802,7 @@ LAB_00014d40:
             uVar2 = *(uint *)(*(int *)(*(int *)(param_1 + 0x53d4) * 0x14 + param_1 + 0x5158) + 4);
           }
           else {
-            uVar2 = *(uint *)(_gleCreateSharedState + param_1);
+            uVar2 = *(uint *)(0x31b4 + param_1);
           }
           goto LAB_00015f48;
         }
@@ -7688,7 +7688,7 @@ LAB_00015488:
           return 0;
         }
         dVar14 = (double)CONCAT44(0x43300000,
-                                  *(uint *)(_gleUpdateLightPosition + param_1 + 4) ^ 0x80000000) -
+                                  *(uint *)(0x74a4 + param_1 + 4) ^ 0x80000000) -
                  DOUBLE_00108d58;
       }
       else {
@@ -8112,7 +8112,7 @@ LAB_00014d84:
         }
       }
       else if (param_2 == 0xc52) {
-        uVar2 = (uint)*(ushort *)(_gleDCBAlloc + param_1);
+        uVar2 = (uint)*(ushort *)(0x3170 + param_1);
       }
       else if (param_2 < 0xc53) {
         if (param_2 == 0xc50) {
@@ -8586,10 +8586,10 @@ void _glOrtho_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,d
           fVar6 = (float)(-(fparam_4 + fparam_3) * dVar10);
           fVar2 = (float)(dVar11 + dVar11);
           fVar3 = (float)(dVar10 + dVar10);
-          pfVar8[0xc] = pfVar8[0xc] + pfVar8[8] * fVar4 + *pfVar8 * fVar5 + pfVar8[4] * fVar6;
-          pfVar8[0xd] = pfVar8[0xd] + pfVar8[9] * fVar4 + pfVar8[1] * fVar5 + pfVar8[5] * fVar6;
-          pfVar8[0xe] = pfVar8[0xe] + pfVar8[10] * fVar4 + pfVar8[2] * fVar5 + pfVar8[6] * fVar6;
-          pfVar8[0xf] = pfVar8[0xf] + pfVar8[0xb] * fVar4 + pfVar8[3] * fVar5 + pfVar8[7] * fVar6;
+          pfVar8[0xc] = pfVar8[0xc] + (pfVar8[8] * fVar4 + (*pfVar8 * fVar5 + pfVar8[4] * fVar6));
+          pfVar8[0xd] = pfVar8[0xd] + (pfVar8[9] * fVar4 + (pfVar8[1] * fVar5 + pfVar8[5] * fVar6));
+          pfVar8[0xe] = pfVar8[0xe] + (pfVar8[10] * fVar4 + (pfVar8[2] * fVar5 + pfVar8[6] * fVar6));
+          pfVar8[0xf] = pfVar8[0xf] + (pfVar8[0xb] * fVar4 + (pfVar8[3] * fVar5 + pfVar8[7] * fVar6));
           pfVar8[3] = pfVar8[3] * fVar2;
           pfVar8[7] = pfVar8[7] * fVar3;
           pfVar8[0xb] = pfVar8[0xb] * fVar1;

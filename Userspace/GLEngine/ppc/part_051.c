@@ -492,8 +492,8 @@ int _gleClipPointsPlane(param_1, param_2, param_3)
         do {
           iVar6 = *piVar10;
           if (fVar5 <= *(float *)(iVar6 + 0x2c) * fVar2 +
-                       *(float *)(iVar6 + 0x28) * fVar4 +
-                       *(float *)(iVar6 + 0x20) * fVar1 + *(float *)(iVar6 + 0x24) * fVar3) {
+                       (*(float *)(iVar6 + 0x28) * fVar4 +
+                       (*(float *)(iVar6 + 0x20) * fVar1 + *(float *)(iVar6 + 0x24) * fVar3))) {
             *piVar9 = iVar6;
             piVar9 = piVar9 + 1;
           }
@@ -731,13 +731,13 @@ double FUN_000eb1e4(undefined4 param_1,float *param_2,undefined4 param_3,undefin
       fVar3 = *param_7;
       fVar4 = param_7[1];
       param_7 = param_7 + 0x40;
-      fVar7 = fVar7 + (fVar6 * fVar4 - fVar3 * fVar5);
+      fVar7 = fVar7 + ((fVar6 * fVar4 - fVar3 * fVar5));
       uVar8 = uVar8 - 1;
       fVar5 = fVar4;
       fVar6 = fVar3;
     } while (uVar8 != 0);
   }
-  return (double)(fVar7 + (fVar3 * fVar2 - fVar1 * fVar4));
+  return (double)(fVar7 + ((fVar3 * fVar2 - fVar1 * fVar4)));
 }
 
 /* FUN_000eb264 @ 0xeb264 (124 bytes) */
@@ -766,13 +766,13 @@ double FUN_000eb264(undefined4 param_1,undefined4 *param_2,undefined4 param_3,un
       param_7 = param_7 + 1;
       fVar1 = *pfVar6;
       fVar2 = pfVar6[1];
-      fVar3 = fVar3 + (fVar4 * fVar2 - fVar1 * fVar5);
+      fVar3 = fVar3 + ((fVar4 * fVar2 - fVar1 * fVar5));
       uVar8 = uVar8 - 1;
       fVar4 = fVar1;
       fVar5 = fVar2;
     } while (uVar8 != 0);
   }
-  return (double)(fVar3 + (fVar1 * pfVar7[1] - *pfVar7 * fVar2));
+  return (double)(fVar3 + ((fVar1 * pfVar7[1] - *pfVar7 * fVar2)));
 }
 
 /* _gleBeginTrianglesRenderSmooth @ 0xeb2e0 (52 bytes) */

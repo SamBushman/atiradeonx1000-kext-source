@@ -192,6 +192,7 @@ for a, sz, name in idx:
     bodies[a] = body.strip('\n') + '\n'
 # collect referenced tokens
 defined_names = {name for a, sz, name in idx}
+fn_addr_of = {name: int(a, 16) for a, sz, name in idx}   # name -> stock entry address (fix_code_offsets: a NAMED function whose address is really a struct offset)
 allbody = '\n'.join(b for b in bodies.values() if b)
 data_syms = sorted(set(re.findall(r'\bswitchdataD_[0-9a-f]{8}\b|(?<![A-Za-z0-9])_?(?:DAT|UNK|PTR|EXT)_[0-9a-f]{8}\b|\b(?:PTR_)?(?:s|u|PTR)_[A-Za-z_0-9]*_[0-9a-f]{8}\b|\bPTR_[A-Za-z_0-9]+_[0-9a-f]{8}\b', allbody)))
 # `uRam001dbf94`: Ghidra's name for a read of an absolute address it has no data symbol for (a PIC `addis r2,r31,0x12; lwz` it folded into a constant). Left as an
@@ -941,6 +942,19 @@ def fix_code_offsets(b):
             out.append(b[i:m.start()]); out.append('0x' + m.group(1)); i = m.end(); n += 1
     out.append(b[i:])
     b = ''.join(out)
+    # the same with a function that has a real name (GLEngine's symbol table names its static functions: `*(undefined4 *)(_gleUpdateLightPosition + param_1) = 0` is
+    # `stw r0,0x7484(r3)`, the context offset 0x7484 that is also the address of _gleUpdateLightPosition; 30 functions, 6 such names). Only a NAME that is a defined function
+    # and sits next to a binary + / - and is not called is the number.
+    if fn_addr_of:
+        def _named(m):
+            pre = b[:m.start()][-12:]; post = b[m.end():m.end() + 6]
+            if re.search(r'[\w)\]]\s*[-+]\s*$', pre) or re.match(r'\s*[-+](?![-+>=])', post):
+                return '0x%x' % fn_addr_of[m.group(1)]
+            return m.group(0)
+        _rx = re.compile(r'(?<![\w&.>])(%s)\b(?!\s*\()' % '|'.join(re.escape(n) for n in sorted(fn_addr_of, key=len, reverse=True) if not n.startswith('FUN_')))
+        b2 = _rx.sub(_named, b)
+        if b2 != b: n += len(_rx.findall(b)) if False else 1
+        b = b2
     # `((code **)FUN_00030c50)[param_3 + param_1]`: the same coincidence as a table base (GLDriver FUN_0001ecd0 and one more function)
     # ...and it is a BYTE table, not a table of code pointers: the stock does `lbz r0,0xc50(r2)` with r2 = r5 + r3 + 0x30000 (FUN_00079b00) and `stb r0,0x2595(r30)` (= param_1 +
     # 0x27d5, FUN_0001ecd0). Ghidra's `code **` scaled the index by 4 and stored a pointer.

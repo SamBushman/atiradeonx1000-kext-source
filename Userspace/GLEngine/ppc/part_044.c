@@ -1704,17 +1704,17 @@ void _gleTransformLightDirection(int param_1,int param_2,double fparam_1,double 
   }
   bVar8 = *(float *)(iVar7 + 0x285c) != FLOAT_00108e50;
   fVar6 = fVar3 * *(float *)(param_1 + 0x22e0) +
-          fVar1 * *(float *)(param_1 + 0x22c0) + fVar2 * *(float *)(param_1 + 0x22d0);
+          (fVar1 * *(float *)(param_1 + 0x22c0) + fVar2 * *(float *)(param_1 + 0x22d0));
   *(float *)(iVar7 + 0x2860) = fVar6;
   fVar5 = fVar3 * *(float *)(param_1 + 0x22e4) +
-          fVar1 * *(float *)(param_1 + 0x22c4) + fVar2 * *(float *)(param_1 + 0x22d4);
+          (fVar1 * *(float *)(param_1 + 0x22c4) + fVar2 * *(float *)(param_1 + 0x22d4));
   *(float *)(iVar7 + 0x2864) = fVar5;
   fVar4 = fVar3 * *(float *)(param_1 + 0x22e8) +
-          fVar1 * *(float *)(param_1 + 0x22c8) + fVar2 * *(float *)(param_1 + 0x22d8);
+          (fVar1 * *(float *)(param_1 + 0x22c8) + fVar2 * *(float *)(param_1 + 0x22d8));
   *(float *)(iVar7 + 0x2868) = fVar4;
   if (bVar8) {
     fVar1 = -(fVar3 * *(float *)(iVar7 + 0x2858) +
-             fVar1 * *(float *)(iVar7 + 0x2850) + fVar2 * *(float *)(iVar7 + 0x2854)) /
+             (fVar1 * *(float *)(iVar7 + 0x2850) + fVar2 * *(float *)(iVar7 + 0x2854))) /
             *(float *)(iVar7 + 0x285c);
     *(float *)(iVar7 + 0x2860) = fVar1 * *(float *)(param_1 + 0x22f0) + fVar6;
     *(float *)(iVar7 + 0x2864) = fVar1 * *(float *)(param_1 + 0x22f4) + fVar5;
@@ -2050,8 +2050,8 @@ LAB_000d462c:
           else {
             fVar1 = (float)(dVar15 / extraout_f1_01);
             dVar22 = (double)(float)(dVar15 / (double)(*(float *)(iVar11 + 0x2878) * fVar1 * fVar1 +
-                                                      *(float *)(iVar11 + 0x2874) * fVar1 +
-                                                      *(float *)(iVar11 + 0x2870)));
+                                                      (*(float *)(iVar11 + 0x2874) * fVar1 +
+                                                      *(float *)(iVar11 + 0x2870))));
           }
         }
         else {
@@ -2062,8 +2062,8 @@ LAB_000d462c:
         }
         if (*(char *)(iVar13 + 0x4ada) != '\0') {
           fparam_1 = -(double)(local_c8 * *(float *)(iVar13 + 0x4a90) +
-                              local_d0 * *(float *)(iVar13 + 0x4a88) +
-                              local_cc * *(float *)(iVar13 + 0x4a8c));
+                              (local_d0 * *(float *)(iVar13 + 0x4a88) +
+                              local_cc * *(float *)(iVar13 + 0x4a8c)));
           if (fparam_1 < (double)*(float *)(iVar11 + 0x286c)) goto LAB_000d4a44;
           dVar14 = (double)((double (*)())_gleLightExponentPow)(iVar4,iVar13 + 0x4a70,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,
                                       in_f7,in_f8,in_stack_fffffee8,in_stack_fffffef0,
@@ -2276,8 +2276,8 @@ LAB_000d4acc:
           else {
             fVar1 = (float)(dVar16 / extraout_f1_01);
             dVar15 = (double)(float)(dVar16 / (double)(*(float *)(iVar11 + 0x2878) * fVar1 * fVar1 +
-                                                      *(float *)(iVar11 + 0x2874) * fVar1 +
-                                                      *(float *)(iVar11 + 0x2870)));
+                                                      (*(float *)(iVar11 + 0x2874) * fVar1 +
+                                                      *(float *)(iVar11 + 0x2870))));
           }
         }
         else {
@@ -2288,8 +2288,8 @@ LAB_000d4acc:
         }
         if (*(char *)(iVar13 + 0x4ada) != '\0') {
           fparam_1 = -(double)(local_c8 * *(float *)(iVar13 + 0x4a90) +
-                              local_d0 * *(float *)(iVar13 + 0x4a88) +
-                              local_cc * *(float *)(iVar13 + 0x4a8c));
+                              (local_d0 * *(float *)(iVar13 + 0x4a88) +
+                              local_cc * *(float *)(iVar13 + 0x4a8c)));
           if (fparam_1 < (double)*(float *)(iVar11 + 0x286c)) goto LAB_000d4eec;
           dVar14 = (double)((double (*)())_gleLightExponentPow)(iVar4,iVar13 + 0x4a70,fparam_1,fparam_2,fparam_3,fparam_4,
                                       fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffee8,
@@ -2552,8 +2552,8 @@ LAB_000d4f74:
         }
         if (*(char *)(iVar15 + 0x4ada) != '\0') {
           fparam_1 = -(double)(local_f8 * *(float *)(iVar15 + 0x4a90) +
-                              local_100 * *(float *)(iVar15 + 0x4a88) +
-                              local_fc * *(float *)(iVar15 + 0x4a8c));
+                              (local_100 * *(float *)(iVar15 + 0x4a88) +
+                              local_fc * *(float *)(iVar15 + 0x4a8c)));
           if (fparam_1 < (double)*(float *)(iVar12 + 0x286c)) goto LAB_000d5518;
           iVar6 = ((double (*)())_gleLightExponentPow)(iVar6,iVar15 + 0x4a70,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                              fparam_6,fparam_7,fparam_8,in_stack_fffffea8,in_stack_fffffeb0,
@@ -2620,7 +2620,7 @@ LAB_000d54cc:
               local_dc = (float)((double)(fVar1 + fVar1) + dVar26);
               local_d8 = (float)((double)(fVar2 + fVar2) + fparam_2);
               local_e0 = (float)((double)(fVar3 + fVar3) + fparam_3);
-              fVar1 = local_d8 * local_108 + local_e0 * local_110 + local_dc * local_10c;
+              fVar1 = local_d8 * local_108 + (local_e0 * local_110 + local_dc * local_10c);
             }
             if ((double)fVar1 <= dVar22) goto LAB_000d54cc;
             fparam_2 = (double)*(float *)(iVar13 + 0x40);
@@ -2871,8 +2871,8 @@ LAB_000d55d4:
         }
         if (*(char *)(iVar15 + 0x4ada) != '\0') {
           fparam_1 = -(double)(local_f8 * *(float *)(iVar15 + 0x4a90) +
-                              local_100 * *(float *)(iVar15 + 0x4a88) +
-                              local_fc * *(float *)(iVar15 + 0x4a8c));
+                              (local_100 * *(float *)(iVar15 + 0x4a88) +
+                              local_fc * *(float *)(iVar15 + 0x4a8c)));
           if (fparam_1 < (double)*(float *)(iVar12 + 0x286c)) goto LAB_000d5b80;
           iVar6 = ((double (*)())_gleLightExponentPow)(iVar6,iVar15 + 0x4a70,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                              fparam_6,fparam_7,fparam_8,in_stack_fffffea8,in_stack_fffffeb0,
@@ -2940,7 +2940,7 @@ LAB_000d5b34:
               local_dc = (float)((double)(fVar1 + fVar1) + dVar26);
               local_e0 = (float)((double)(fVar2 + fVar2) + fparam_3);
               local_d8 = (float)((double)(fVar3 + fVar3) + fparam_2);
-              dVar17 = (double)(local_d8 * local_108 + local_e0 * local_110 + local_dc * local_10c);
+              dVar17 = (double)(local_d8 * local_108 + (local_e0 * local_110 + local_dc * local_10c));
             }
             if (dVar17 <= dVar22) goto LAB_000d5b34;
             fparam_2 = (double)*(float *)(iVar13 + 0x40);
@@ -3352,8 +3352,8 @@ LAB_000d5f28:
           else {
             fVar1 = (float)(dVar16 / extraout_f1_01);
             dVar23 = (double)(float)(dVar16 / (double)(*(float *)(iVar11 + 0x2878) * fVar1 * fVar1 +
-                                                      *(float *)(iVar11 + 0x2874) * fVar1 +
-                                                      *(float *)(iVar11 + 0x2870)));
+                                                      (*(float *)(iVar11 + 0x2874) * fVar1 +
+                                                      *(float *)(iVar11 + 0x2870))));
           }
         }
         else {
@@ -3364,8 +3364,8 @@ LAB_000d5f28:
         }
         if (*(char *)(iVar13 + 0x4ada) != '\0') {
           fparam_1 = -(double)(local_c8 * *(float *)(iVar13 + 0x4a90) +
-                              local_d0 * *(float *)(iVar13 + 0x4a88) +
-                              local_cc * *(float *)(iVar13 + 0x4a8c));
+                              (local_d0 * *(float *)(iVar13 + 0x4a88) +
+                              local_cc * *(float *)(iVar13 + 0x4a8c)));
           if (fparam_1 < (double)*(float *)(iVar11 + 0x286c)) goto LAB_000d6348;
           dVar15 = (double)((double (*)())_gleLightExponentPow)(iVar4,iVar13 + 0x4a70,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,
                                       in_f7,in_f8,in_stack_fffffee8,in_stack_fffffef0,
@@ -3580,8 +3580,8 @@ LAB_000d63d0:
           else {
             fVar1 = (float)(dVar17 / extraout_f1_01);
             dVar16 = (double)(float)(dVar17 / (double)(*(float *)(iVar11 + 0x2878) * fVar1 * fVar1 +
-                                                      *(float *)(iVar11 + 0x2874) * fVar1 +
-                                                      *(float *)(iVar11 + 0x2870)));
+                                                      (*(float *)(iVar11 + 0x2874) * fVar1 +
+                                                      *(float *)(iVar11 + 0x2870))));
           }
         }
         else {
@@ -3592,8 +3592,8 @@ LAB_000d63d0:
         }
         if (*(char *)(iVar13 + 0x4ada) != '\0') {
           fparam_1 = -(double)(local_c8 * *(float *)(iVar13 + 0x4a90) +
-                              local_d0 * *(float *)(iVar13 + 0x4a88) +
-                              local_cc * *(float *)(iVar13 + 0x4a8c));
+                              (local_d0 * *(float *)(iVar13 + 0x4a88) +
+                              local_cc * *(float *)(iVar13 + 0x4a8c)));
           if (fparam_1 < (double)*(float *)(iVar11 + 0x286c)) goto LAB_000d67f8;
           dVar15 = (double)((double (*)())_gleLightExponentPow)(iVar4,iVar13 + 0x4a70,fparam_1,fparam_2,fparam_3,fparam_4,
                                       fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffee8,
@@ -3857,8 +3857,8 @@ LAB_000d6880:
         }
         if (*(char *)(iVar13 + 0x4ada) != '\0') {
           fparam_1 = -(double)(local_f8 * *(float *)(iVar13 + 0x4a90) +
-                              local_100 * *(float *)(iVar13 + 0x4a88) +
-                              local_fc * *(float *)(iVar13 + 0x4a8c));
+                              (local_100 * *(float *)(iVar13 + 0x4a88) +
+                              local_fc * *(float *)(iVar13 + 0x4a8c)));
           if (fparam_1 < (double)*(float *)(iVar10 + 0x286c)) goto LAB_000d6e5c;
           iVar4 = ((double (*)())_gleLightExponentPow)(iVar4,iVar13 + 0x4a70,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                              fparam_6,fparam_7,fparam_8,in_stack_fffffea8,in_stack_fffffeb0,
@@ -3929,7 +3929,7 @@ LAB_000d6e10:
               fVar1 = (float)((double)*(float *)(iVar14 + 0x40) * dVar15 -
                              (double)(float)((double)*(float *)(iVar14 + 0x44) * fparam_8));
               local_d8 = (float)((double)(fVar1 + fVar1) + fparam_5);
-              fVar1 = local_d8 * local_108 + local_e0 * local_110 + local_dc * local_10c;
+              fVar1 = local_d8 * local_108 + (local_e0 * local_110 + local_dc * local_10c);
             }
             if ((double)fVar1 <= dVar22) goto LAB_000d6e10;
             fparam_2 = (double)*(float *)(iVar11 + 0x40);
@@ -4183,8 +4183,8 @@ LAB_000d6f10:
         }
         if (*(char *)(iVar14 + 0x4ada) != '\0') {
           fparam_1 = -(double)(local_f8 * *(float *)(iVar14 + 0x4a90) +
-                              local_100 * *(float *)(iVar14 + 0x4a88) +
-                              local_fc * *(float *)(iVar14 + 0x4a8c));
+                              (local_100 * *(float *)(iVar14 + 0x4a88) +
+                              local_fc * *(float *)(iVar14 + 0x4a8c)));
           if (fparam_1 < (double)*(float *)(iVar11 + 0x286c)) goto LAB_000d74f0;
           iVar5 = ((double (*)())_gleLightExponentPow)(iVar5,iVar14 + 0x4a70,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                              fparam_6,fparam_7,fparam_8,in_stack_fffffea8,in_stack_fffffeb0,
@@ -4256,7 +4256,7 @@ LAB_000d74a4:
               fVar1 = (float)((double)*(float *)(iVar15 + 0x44) * dVar19 -
                              (double)(float)((double)*(float *)(iVar15 + 0x40) * dVar18));
               local_d8 = (float)((double)(fVar1 + fVar1) + fparam_6);
-              dVar17 = (double)(local_d8 * local_108 + local_e0 * local_110 + local_dc * local_10c);
+              dVar17 = (double)(local_d8 * local_108 + (local_e0 * local_110 + local_dc * local_10c));
             }
             if (dVar17 <= dVar23) goto LAB_000d74a4;
             fparam_2 = (double)*(float *)(iVar12 + 0x40);

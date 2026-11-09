@@ -2844,8 +2844,8 @@ LAB_000e16fc:
     }
     while (pbVar7 = pbVar7 + -1, pbVar8 <= pbVar7) {
       dVar10 = dVar10 * DOUBLE_00108e08 +
-               ((double)CONCAT44(0x43300000,(int)(char)*pbVar7 - 0x30U ^ 0x80000000) -
-               DOUBLE_00108d58);
+               (((double)CONCAT44(0x43300000,(int)(char)*pbVar7 - 0x30U ^ 0x80000000) -
+               DOUBLE_00108d58));
     }
     bVar2 = true;
     bVar6 = *pbStack00000018;

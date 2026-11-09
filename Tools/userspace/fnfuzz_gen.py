@@ -11,6 +11,15 @@ built-ins among them) in __textcoal_nt; a __text-only disassembly made them look
 every other stock-code audit (indirect_args, inreg_liveness, ...)."""
 import sys, re, os
 key, dis, dump, link, snm, rnm, out = sys.argv[1:8]
+# FNFUZZ_CTX=1: the ledger for tests/userspace/ctxfuzz.c (hand-built context) instead of the pure-function one. It keeps exactly the functions the plain ledger leaves out
+# because they call through a pointer (`bctrl`) or import something outside the whitelist, minus those that can reach an import that is not safe to run on garbage arguments (UNSAFE),
+# and adds a column per function: the indirect-call slots `param:off[:off...]` (each a code pointer the stock loads from `*(param+off)` or deeper and jumps to) that the harness
+# fills with recording stubs.
+CTX = bool(os.environ.get('FNFUZZ_CTX'))
+# FNFUZZ_RZ_STORED=1: a load from the red zone (`lwz r9,0xfff4(r1)`) is the function's own when an earlier instruction of the SAME function stored to that slot (`stfd f0,0xfff0(r1)`: the
+# float->int move of a leaf function; GLEngine has 715 of them), and only a load of a slot nothing stored is a fragment of a caller's frame
+RZ_STORED = bool(os.environ.get('FNFUZZ_RZ_STORED'))
+UNSAFE = re.compile(r'^_?(NS[A-Z]|IO[A-Z]|exit$|scandir$|mach_|host_info$|sysctl$|PP[A-Z]|Sh[A-Z]|glp|pthread_(?!mutex)|fork|exec|kill|abort$|system$|open$|write$|read$|unlink$)')
 WL = set('memcpy memset bcopy memmove memcmp strlen strcmp strncmp strcpy strncpy strcat strchr strrchr bzero sqrt sqrtf pow powf exp exp2 log log2 log10 sin cos tan atan atan2 asin acos floor ceil fabs fmod modf frexp ldexp abs labs'.split())
 seq = []; lab = {}; cur = None
 for l in open(dis, errors='replace'):
@@ -110,27 +119,96 @@ for _pf in sorted(glob.glob(os.path.join(link, 'part_*.c'))):
 # FNFUZZ_ALLOW=dcbz,lwarx,... lets functions containing those (otherwise excluded) instructions in; FNFUZZ_ONLY_ALLOWED=1 then keeps ONLY the functions that do contain one:
 # the ledger of the hardware-flavoured functions (cache ops, atomics, barriers) for a single-threaded differential (issue #69)
 ALLOW = set(x for x in os.environ.get('FNFUZZ_ALLOW', '').split(',') if x); ONLY_ALLOWED = bool(os.environ.get('FNFUZZ_ONLY_ALLOWED'))
-rows = []
-for ent, (nm, rs) in sorted(fns.items()):
-    nm = BYADDR.get(ent, nm)
-    if nm in IMPLICIT: continue
-    bad = None; size = 0; used_allowed = False
+FN_INFO = {}
+WHY = []
+def scan(ent, rs):
+    bad = None; badc = None; size = 0; used_allowed = False; imps = set(); callees = set(); ctxops = []; rzs = set()
     for lo, hi in rs:
         size += hi - lo
         for a in range(lo, hi, 4):
             if a not in idx: continue
             op, arg = seq[idx[a]][1:]
-            if op in ('bctrl', 'blrl', 'sc'): bad = op
-            elif op == 'mtspr' and 'lr' not in arg and 'ctr' not in arg: bad = 'spr'
-            elif op == 'mfspr' and not re.search(r'\b(lr|ctr|xer)\b', arg): bad = 'spr'
-            elif re.search(r'\b0xff[0-9a-f]{2}\(r1\)', arg) and op in ('lwz', 'lhz', 'lbz', 'lfs', 'lfd', 'lha'): bad = 'redzone'   # a load below the stack pointer: a fragment of a caller's frame (prologue saves are stores)
+            if CTX: ctxops.append((op, arg))
+            if RZ_STORED and op.startswith('st'):
+                mz = re.search(r'\b(0x[0-9a-f]+)\(r1\)', arg)
+                if mz:
+                    o_ = int(mz.group(1), 16); n_ = 1
+                    if op.startswith('stfd'): n_ = 2
+                    elif op == 'stmw': n_ = 32 - int(re.match(r'r(\d+)', arg).group(1))
+                    for k_ in range(n_): rzs.add(o_ + 4 * k_)
+            if op in ('bctrl', 'blrl', 'sc'):
+                if not bad: bad = op
+                if op != 'bctrl' and not badc: badc = op
+            elif op == 'mtspr' and 'lr' not in arg and 'ctr' not in arg: bad = bad or 'spr'; badc = badc or 'spr'
+            elif op == 'mfspr' and not re.search(r'\b(lr|ctr|xer)\b', arg): bad = bad or 'spr'; badc = badc or 'spr'
+            elif re.search(r'\b0xff[0-9a-f]{2}\(r1\)', arg) and op in ('lwz', 'lhz', 'lbz', 'lfs', 'lfd', 'lha') and not (RZ_STORED and int(re.search(r'(0x[0-9a-f]+)\(r1\)', arg).group(1), 16) & ~3 in rzs): bad = bad or 'redzone'; badc = badc or 'redzone'   # a load below the stack pointer: a fragment of a caller's frame (prologue saves are stores)
             elif op in ('sync', 'eieio', 'isync', 'lwarx', 'stwcx.', 'dcbz', 'dcbf', 'icbi', 'dcbst'):
                 if op in ALLOW: used_allowed = True
-                else: bad = op
-            elif op in ('bl', 'bl+', 'bl-'):
+                else: bad = bad or op; badc = badc or op
+            elif op in ('bl', 'bl+', 'bl-', 'b'):
                 mm = re.search(r'symbol stub for: (\S+)', arg)
-                if mm and mm.group(1).lstrip('_') not in WL: bad = 'import'
-        if bad: break
+                if mm:
+                    imps.add(mm.group(1))
+                    if op != 'b' and mm.group(1).lstrip('_') not in WL: bad = bad or 'import'     # (a tail `b` to a stub only counts for the hand-built-context ledger)
+                    if UNSAFE.match(mm.group(1)): badc = badc or 'unsafe:' + mm.group(1)
+                else:
+                    t_ = arg.split()[0] if arg.split() else ''
+                    if t_.startswith('0x') and int(t_, 16) in fns and not any(l_ <= int(t_, 16) < h_ for l_, h_ in rs): callees.add(int(t_, 16))
+        if bad and not CTX: break
+    return bad, badc, callees, size, ctxops, used_allowed
+UNS = set()
+if CTX:
+    for _e, (_nm, _rs) in fns.items():
+        _b, _bc, _cal, _sz, _ops, _ua = scan(_e, _rs); FN_INFO[_e] = (_b, _bc, _cal)
+    UNS = {e for e, v in FN_INFO.items() if v[1] and v[1].startswith('unsafe:')}
+    ch = True
+    while ch:                      # an unsafe import reached through direct calls makes the caller unsafe too
+        ch = False
+        for e, v in FN_INFO.items():
+            if e not in UNS and any(c in UNS for c in v[2]): UNS.add(e); ch = True
+def ind_chains(ops):
+    """the code pointers a function jumps through (`lwz rX,OFF(rB); ...; mtctr rX`) as chains from an incoming parameter: (param index, (off1, off2, ...)): rB is a parameter
+    (r3..r10, or a register copied from one) for off1, and the result of the previous load for the deeper ones. Straight-line over the address order, all paths merged."""
+    st = {'r%d' % r: (r - 3, ()) for r in range(3, 11)}; out = []; recent = []     # recent: (instruction index, destination register, chain) of every load from a tracked pointer
+    VOL = ['r0'] + ['r%d' % i for i in range(3, 13)]
+    for ix, (op, arg) in enumerate(ops):
+        o = [x.strip() for x in arg.split(';')[0].split(',')]
+        if op in ('lwz', 'lwzu') and len(o) == 2:
+            mm = re.match(r'(0x[0-9a-f]+|\d+)\((r\d+)\)$', o[1])
+            if mm:
+                off, rb = int(mm.group(1), 0), mm.group(2)
+                src = st.get(rb)
+                if op == 'lwzu': st.pop(rb, None)
+                if src and off < 0x8000 and len(src[1]) < 3: st[o[0]] = (src[0], src[1] + (off,)); recent.append((ix, o[0], st[o[0]]))
+                else: st.pop(o[0], None)
+                continue
+        if op == 'or' and len(o) == 3 and o[1] == o[2]:
+            if o[1] in st: st[o[0]] = st[o[1]]
+            else: st.pop(o[0], None)
+            continue
+        if op == 'mtspr' and o[0] == 'ctr' and len(o) == 2:
+            for c in [st.get(o[1])] + [ch for k, r, ch in recent if r == o[1] and ix - k <= 16]:      # a conditional load picks one of several slots: all loads of that register just before
+                if c and c[1] and c not in out: out.append(c)
+            continue
+        if op in ('bl', 'bl+', 'bl-', 'bctrl', 'blrl'):
+            for r in VOL: st.pop(r, None)
+            continue
+        if re.match(r'^(st|cmp|b|mt|tw|dcb|sync|isync|eieio|nop|icbi|cr)', op) and not op.startswith('stwu') and not op.startswith('stbu'): continue
+        if o and re.match(r'^r\d+$', o[0]): st.pop(o[0], None)
+        if op in ('stwu', 'stbu', 'sthu', 'lbzu', 'lhzu') and len(o) == 2:
+            mm = re.search(r'\((r\d+)\)', o[1])
+            if mm: st.pop(mm.group(1), None)
+    return out
+rows = []
+for ent, (nm, rs) in sorted(fns.items()):
+    nm = BYADDR.get(ent, nm)
+    if nm in IMPLICIT:
+        WHY.append((ent, nm, 'implicit-register-input')); continue
+    bad, badc, callees, size, ctxops, used_allowed = scan(ent, rs)
+    if CTX:
+        if not ((bad or ind_chains(ctxops)) and not badc and ent not in UNS):
+            WHY.append((ent, nm, 'unsafe-import-reachable' if (badc or ent in UNS) else 'plain-candidate')); continue         # what the plain ledger cannot run (indirect calls, imports): unless it can reach an unsafe import, that is left for the live test
+        bad = None
     first = seq[idx[ent]][1:] if ent in idx else ('', '')
     if first[0] in ('stfd', 'lfd') and re.match(r'f(1[4-9]|2\d|3[01])\b', first[1]): continue      # saveFP / restFP millicode entry points (a register-save chain, not a function)
     if re.search(r'_frag_[0-9a-f]+$', nm): continue                                              # `_frag_` = a clipped piece of a function (a switch case body that reads the parent's registers), not a function
@@ -138,18 +216,25 @@ for ent, (nm, rs) in sorted(fns.items()):
     if bad or size < 16 or re.match(r'^(eh_|__Unwind|orph_|save_world|rest_world|dyld_stub|_glp?Unwind|_*(lshr|ashl|ashr|mul|div|mod|udiv|umod|cmp|ucmp|fix|float|neg|ffs|clz|ctz|popcount|parity)[a-z]*[ds]i[0-9]?$)', nm): continue
     if ONLY_ALLOWED and not used_allowed: continue
     sg = sig_of(ent)
-    if sg is None: continue
+    if sg is None:
+        WHY.append((ent, nm, 'no-signature (variadic / >8 arg slots / none)')); continue
     ct = CTYPES.get(nm)
     if ct and len(ct) == len(sg[0]):     # the decompile's own types refine the header's class letters
         sg = (''.join(('p' if '*' in t else 'n' if re.match(r'^(u?int|u?short|u?char|byte|bool|u?long)$', t) and c == 'i' else c) for t, c in zip(ct, sg[0])), sg[1])
     sym = asm.get(nm) or ('_' + nm if not nm.startswith('FUN_') and not nm.startswith('_') else nm)
     roff = R.get(sym) if sym in R else (R.get('_' + nm) if ('_' + nm) in R else R.get(nm))
-    if roff is None: continue
+    if roff is None:
+        WHY.append((ent, nm, 'no-rebuilt-symbol')); continue
     rc = sg[1]
     if rc == 'v' and ent in RETUSED: rc = 'i'
-    rows.append((ent, nm, size, roff, sg[0], rc))
+    rows.append((ent, nm, size, roff, sg[0], rc, ind_chains(ctxops) if CTX else None))
 with open(out, 'w') as f:
     f.write('#anchor\t%s\t%x\t%x\n' % (anchor, S[anchor], R[anchor]))
-    for i, (ent, nm, size, roff, pc, rc) in enumerate(rows):
-        f.write('%d\t%s\t%x\t%x\t%d\t%s\t%s\n' % (i, nm, ent, roff, size, pc or '-', rc))
+    for i, (ent, nm, size, roff, pc, rc, ind) in enumerate(rows):
+        f.write('%d\t%s\t%x\t%x\t%d\t%s\t%s' % (i, nm, ent, roff, size, pc or '-', rc))
+        if CTX: f.write('\t' + (','.join('%d:' % p_ + ':'.join('%x' % o_ for o_ in offs_) for p_, offs_ in ind[:24]) or '-'))
+        f.write('\n')
 print('%s: %d candidates, anchor %s' % (key, len(rows), anchor))
+if CTX:
+    with open(out + '.why', 'w') as f:
+        for e_, n_, w_ in WHY: f.write('%x\t%s\t%s\n' % (e_, n_, w_))

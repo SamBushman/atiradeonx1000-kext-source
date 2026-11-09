@@ -378,7 +378,7 @@ double _glColor3us_Exec(int param_1,uint param_2,uint param_3,uint param_4,doubl
   *(float *)(param_1 + 0x2a8) = fVar2;
   *(float *)(param_1 + 0x2a4) = (GH_U2F((unsigned int)((param_3 | 0x4b000000))) - 8388608.0) * fVar3;
   if (*(char *)(param_1 + 0x4df8) != '\0') {
-    fparam_1 = (double)(**(code **)(param_1 + 0x4de0))(param_1,param_1 + 0x2a0);
+    fparam_1 = (double)(**(double ( **)(int,int))(param_1 + 0x4de0))(param_1, param_1 + 0x2a0);
   }
   return fparam_1;
 }
@@ -443,7 +443,7 @@ double _glColor3usv_Exec(int param_1,ushort *param_2,double fparam_1,double fpar
   *(float *)(param_1 + 0x2a8) = fVar3;
   *(float *)(param_1 + 0x2a4) = (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar4;
   if (*(char *)(param_1 + 0x4df8) != '\0') {
-    fparam_1 = (double)(**(code **)(param_1 + 0x4de0))(param_1,param_1 + 0x2a0);
+    fparam_1 = (double)(**(double ( **)(int,int))(param_1 + 0x4de0))(param_1, param_1 + 0x2a0);
   }
   return fparam_1;
 }

@@ -210,7 +210,7 @@ int _gleVPEmulate(param_1, param_2)
     iVar8 = param_2;
     if (*(char *)(param_1 + 0x316a) != '\0') {
       for (; iVar8 != 0; iVar8 = iVar8 + -1) {
-        dVar10 = (double)(**(code **)(param_1 + 0x4fe4))((double)*(float *)(iVar7 + 0x5c),param_1);
+        dVar10 = (double)(**(double ( **)(int,double))(param_1 + 0x4fe4))(param_1, (double)*(float *)(iVar7 + 0x5c));
         *(float *)(iVar7 + 0x4c) = (float)dVar10;
         iVar7 = iVar7 + 0x100;
       }
@@ -271,12 +271,12 @@ double _gleSetWindowPos(int param_1,double fparam_1,double fparam_2,double fpara
   *(float *)(param_1 + 0x2e8) = (float)dVar10;
   *(undefined4 *)(iVar6 + -500) = 0x3f800000;
   if (*(short *)(param_1 + 0x3166) == -0x7baf) {
-    dVar10 = (double)(**(code **)(param_1 + 0x4fe4))((double)*(float *)(param_1 + 0x2cc),param_1);
+    dVar10 = (double)(**(double ( **)(int,double))(param_1 + 0x4fe4))(param_1, (double)*(float *)(param_1 + 0x2cc));
     *(float *)(iVar6 + -0x1b4) = (float)dVar10;
     *(undefined4 *)(iVar6 + -0x1d8) = *(undefined4 *)(param_1 + 0x2cc);
   }
   else {
-    dVar10 = (double)(**(code **)(param_1 + 0x4fe4))((double)FLOAT_00108e50,param_1);
+    dVar10 = (double)(**(double ( **)(int,double))(param_1 + 0x4fe4))(param_1, (double)FLOAT_00108e50);
     *(float *)(iVar6 + -0x1d8) = fVar5;
     *(float *)(iVar6 + -0x1b4) = (float)dVar10;
   }

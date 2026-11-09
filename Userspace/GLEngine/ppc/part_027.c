@@ -307,7 +307,7 @@ int _glGetPolygonStipple_Exec(param_1, param_2)
       param_2 = param_2 + *(int *)(iVar3 + 0x30);
     }
     uVar1 = *(uint *)(param_1 + 0x31bc);
-    iVar3 = *(int *)(_gleCreateSharedState + param_1 + 4);
+    iVar3 = *(int *)(0x31b4 + param_1 + 4);
     if ((((*(char *)(param_1 + 0x31c9) != '\0') || (*(int *)(param_1 + 0x31b0) != 0)) ||
         (4 < *(int *)(param_1 + 0x31c4))) || ((uVar1 & 7) != 0)) {
       _gleEmptyImage(param_1,0x20,0x20,0x1900,0x1a00,param_1 + 0x3448,param_2);

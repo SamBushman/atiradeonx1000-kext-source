@@ -172,7 +172,7 @@ void _glEvalMesh1_Exec(int param_1,int param_2,uint param_3,int param_4,double f
     dVar4 = DOUBLE_00108d58;
     fVar1 = *(float *)(param_1 + 0x74b4);
     dVar7 = (double)CONCAT44(0x43300000,
-                             *(uint *)(_gleUpdateLightPosition + param_1 + 4) ^ 0x80000000) -
+                             *(uint *)(0x74a4 + param_1 + 4) ^ 0x80000000) -
             DOUBLE_00108d58;
     fVar2 = *(float *)(param_1 + 0x74ac);
     fVar3 = *(float *)(param_1 + 0x74b0);
@@ -507,7 +507,7 @@ void _glEvalPoint1_Exec(int param_1,uint param_2,double fparam_1)
   if (param_2 == 0) {
     fparam_1_00 = (double)*(float *)(param_1 + 0x74ac);
   }
-  else if (param_2 == *(uint *)(_gleUpdateLightPosition + param_1 + 4)) {
+  else if (param_2 == *(uint *)(0x74a4 + param_1 + 4)) {
     fparam_1_00 = (double)*(float *)(param_1 + 0x74b0);
   }
   else {

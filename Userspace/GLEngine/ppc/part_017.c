@@ -2167,20 +2167,20 @@ switchD_0006bed0_default:
     *(float *)(iVar8 + 0x285c) = fVar1;
     *(float *)(iVar8 + 0x2850) =
          fVar1 * *(float *)(param_1 + 0x1cf0) +
-         fVar5 * *(float *)(param_1 + 0x1ce0) +
-         fVar4 * *(float *)(param_1 + 0x1cc0) + fVar3 * *(float *)(param_1 + 0x1cd0);
+         (fVar5 * *(float *)(param_1 + 0x1ce0) +
+         (fVar4 * *(float *)(param_1 + 0x1cc0) + fVar3 * *(float *)(param_1 + 0x1cd0)));
     *(float *)(iVar8 + 0x2854) =
          fVar1 * *(float *)(param_1 + 0x1cf4) +
-         fVar5 * *(float *)(param_1 + 0x1ce4) +
-         fVar4 * *(float *)(param_1 + 0x1cc4) + fVar3 * *(float *)(param_1 + 0x1cd4);
+         (fVar5 * *(float *)(param_1 + 0x1ce4) +
+         (fVar4 * *(float *)(param_1 + 0x1cc4) + fVar3 * *(float *)(param_1 + 0x1cd4)));
     *(float *)(iVar8 + 0x2858) =
          fVar1 * *(float *)(param_1 + 0x1cf8) +
-         fVar5 * *(float *)(param_1 + 0x1ce8) +
-         fVar4 * *(float *)(_glePreInitGlobals + param_1) + fVar3 * *(float *)(param_1 + 0x1cd8);
+         (fVar5 * *(float *)(param_1 + 0x1ce8) +
+         (fVar4 * *(float *)(0x1cc8 + param_1) + fVar3 * *(float *)(param_1 + 0x1cd8)));
     *(float *)(iVar8 + 0x285c) =
          fVar1 * *(float *)(param_1 + 0x1cfc) +
-         fVar5 * *(float *)(param_1 + 0x1cec) +
-         fVar4 * *(float *)(param_1 + 0x1ccc) + fVar3 * *(float *)(param_1 + 0x1cdc);
+         (fVar5 * *(float *)(param_1 + 0x1cec) +
+         (fVar4 * *(float *)(param_1 + 0x1ccc) + fVar3 * *(float *)(param_1 + 0x1cdc)));
     ((double (*)())_gleUpdateLightPosition)(param_1,uVar11,fparam_1);
     goto LAB_0006c730;
   case 0x1204:

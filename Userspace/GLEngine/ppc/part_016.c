@@ -474,9 +474,9 @@ undefined4 _glFrustum_ListExec(int param_1,float *param_2,double fparam_1,double
     fVar8 = *param_2;
     fVar9 = param_2[1];
     fVar10 = pfVar11[0xf];
-    pfVar11[8] = (fVar4 * fVar3 + *pfVar11 * fVar2 + pfVar11[4] * fVar1) - pfVar11[0xc];
-    pfVar11[9] = (fVar5 * fVar3 + pfVar11[1] * fVar2 + pfVar11[5] * fVar1) - pfVar11[0xd];
-    pfVar11[10] = (fVar6 * fVar3 + pfVar11[2] * fVar2 + pfVar11[6] * fVar1) - pfVar11[0xe];
+    pfVar11[8] = (fVar4 * fVar3 + (*pfVar11 * fVar2 + pfVar11[4] * fVar1)) - pfVar11[0xc];
+    pfVar11[9] = (fVar5 * fVar3 + (pfVar11[1] * fVar2 + pfVar11[5] * fVar1)) - pfVar11[0xd];
+    pfVar11[10] = (fVar6 * fVar3 + (pfVar11[2] * fVar2 + pfVar11[6] * fVar1)) - pfVar11[0xe];
     pfVar11[4] = pfVar11[4] * fVar9;
     *pfVar11 = *pfVar11 * fVar8;
     pfVar11[5] = pfVar11[5] * fVar9;
@@ -487,7 +487,7 @@ undefined4 _glFrustum_ListExec(int param_1,float *param_2,double fparam_1,double
     pfVar11[0xe] = fVar6 * fVar7;
     pfVar11[2] = pfVar11[2] * fVar8;
     pfVar11[0xf] = pfVar11[0xb] * fVar7;
-    pfVar11[0xb] = (pfVar11[0xb] * fVar3 + pfVar11[3] * fVar2 + pfVar11[7] * fVar1) - fVar10;
+    pfVar11[0xb] = (pfVar11[0xb] * fVar3 + (pfVar11[3] * fVar2 + pfVar11[7] * fVar1)) - fVar10;
     pfVar11[3] = pfVar11[3] * fVar8;
     pfVar11[7] = pfVar11[7] * fVar9;
     *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | *(uint *)(param_1 + 0x50a8);

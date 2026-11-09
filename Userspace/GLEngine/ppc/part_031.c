@@ -2284,20 +2284,20 @@ void _glTexGen_Exec(int param_1,uint param_2,uint param_3,double fparam_1,double
         fVar5 = *(float *)(iVar7 + 0x3d1c);
         *(float *)(iVar7 + 0x3d10) =
              fVar5 * *(float *)(param_1 + 0x22f0) +
-             fVar4 * *(float *)(param_1 + 0x22e0) +
-             fVar3 * *(float *)(param_1 + 0x22c0) + fVar2 * *(float *)(param_1 + 0x22d0);
+             (fVar4 * *(float *)(param_1 + 0x22e0) +
+             (fVar3 * *(float *)(param_1 + 0x22c0) + fVar2 * *(float *)(param_1 + 0x22d0)));
         *(float *)(iVar7 + 0x3d14) =
              fVar5 * *(float *)(param_1 + 0x22f4) +
-             fVar4 * *(float *)(param_1 + 0x22e4) +
-             fVar3 * *(float *)(param_1 + 0x22c4) + fVar2 * *(float *)(param_1 + 0x22d4);
+             (fVar4 * *(float *)(param_1 + 0x22e4) +
+             (fVar3 * *(float *)(param_1 + 0x22c4) + fVar2 * *(float *)(param_1 + 0x22d4)));
         *(float *)(iVar7 + 0x3d18) =
              fVar5 * *(float *)(param_1 + 0x22f8) +
-             fVar4 * *(float *)(param_1 + 0x22e8) +
-             fVar3 * *(float *)(param_1 + 0x22c8) + fVar2 * *(float *)(param_1 + 0x22d8);
+             (fVar4 * *(float *)(param_1 + 0x22e8) +
+             (fVar3 * *(float *)(param_1 + 0x22c8) + fVar2 * *(float *)(param_1 + 0x22d8)));
         *(float *)(iVar7 + 0x3d1c) =
              fVar5 * *(float *)(param_1 + 0x22fc) +
-             fVar4 * *(float *)(param_1 + 0x22ec) +
-             fVar3 * *(float *)(param_1 + 0x22cc) + fVar2 * *(float *)(param_1 + 0x22dc);
+             (fVar4 * *(float *)(param_1 + 0x22ec) +
+             (fVar3 * *(float *)(param_1 + 0x22cc) + fVar2 * *(float *)(param_1 + 0x22dc)));
         if (*(int *)(param_1 + 0x5434) == 0) {
           bVar1 = *(byte *)(uVar10 * 4 + *(int *)(param_1 + 0x5420) + 0x2cd);
         }
@@ -2366,20 +2366,20 @@ LAB_0009c0f4:
         fVar5 = *(float *)(iVar7 + 0x3cf8);
         *(float *)(iVar7 + 0x3cec) =
              fVar5 * *(float *)(param_1 + 0x22f0) +
-             fVar4 * *(float *)(param_1 + 0x22e0) +
-             fVar3 * *(float *)(param_1 + 0x22c0) + fVar2 * *(float *)(param_1 + 0x22d0);
+             (fVar4 * *(float *)(param_1 + 0x22e0) +
+             (fVar3 * *(float *)(param_1 + 0x22c0) + fVar2 * *(float *)(param_1 + 0x22d0)));
         *(float *)(iVar7 + 0x3cf0) =
              fVar5 * *(float *)(param_1 + 0x22f4) +
-             fVar4 * *(float *)(param_1 + 0x22e4) +
-             fVar3 * *(float *)(param_1 + 0x22c4) + fVar2 * *(float *)(param_1 + 0x22d4);
+             (fVar4 * *(float *)(param_1 + 0x22e4) +
+             (fVar3 * *(float *)(param_1 + 0x22c4) + fVar2 * *(float *)(param_1 + 0x22d4)));
         *(float *)(iVar7 + 0x3cf4) =
              fVar5 * *(float *)(param_1 + 0x22f8) +
-             fVar4 * *(float *)(param_1 + 0x22e8) +
-             fVar3 * *(float *)(param_1 + 0x22c8) + fVar2 * *(float *)(param_1 + 0x22d8);
+             (fVar4 * *(float *)(param_1 + 0x22e8) +
+             (fVar3 * *(float *)(param_1 + 0x22c8) + fVar2 * *(float *)(param_1 + 0x22d8)));
         *(float *)(iVar7 + 0x3cf8) =
              fVar5 * *(float *)(param_1 + 0x22fc) +
-             fVar4 * *(float *)(param_1 + 0x22ec) +
-             fVar3 * *(float *)(param_1 + 0x22cc) + fVar2 * *(float *)(param_1 + 0x22dc);
+             (fVar4 * *(float *)(param_1 + 0x22ec) +
+             (fVar3 * *(float *)(param_1 + 0x22cc) + fVar2 * *(float *)(param_1 + 0x22dc)));
         if (*(int *)(param_1 + 0x5434) == 0) {
           bVar1 = *(byte *)(uVar10 * 4 + *(int *)(param_1 + 0x5420) + 0x2cc);
         }
@@ -2434,20 +2434,20 @@ LAB_0009c0f4:
         fVar5 = *(float *)(iVar7 + 0x3d40);
         *(float *)(iVar7 + 0x3d34) =
              fVar5 * *(float *)(param_1 + 0x22f0) +
-             fVar4 * *(float *)(param_1 + 0x22e0) +
-             fVar3 * *(float *)(param_1 + 0x22c0) + fVar2 * *(float *)(param_1 + 0x22d0);
+             (fVar4 * *(float *)(param_1 + 0x22e0) +
+             (fVar3 * *(float *)(param_1 + 0x22c0) + fVar2 * *(float *)(param_1 + 0x22d0)));
         *(float *)(iVar7 + 0x3d38) =
              fVar5 * *(float *)(param_1 + 0x22f4) +
-             fVar4 * *(float *)(param_1 + 0x22e4) +
-             fVar3 * *(float *)(param_1 + 0x22c4) + fVar2 * *(float *)(param_1 + 0x22d4);
+             (fVar4 * *(float *)(param_1 + 0x22e4) +
+             (fVar3 * *(float *)(param_1 + 0x22c4) + fVar2 * *(float *)(param_1 + 0x22d4)));
         *(float *)(iVar7 + 0x3d3c) =
              fVar5 * *(float *)(param_1 + 0x22f8) +
-             fVar4 * *(float *)(param_1 + 0x22e8) +
-             fVar3 * *(float *)(param_1 + 0x22c8) + fVar2 * *(float *)(param_1 + 0x22d8);
+             (fVar4 * *(float *)(param_1 + 0x22e8) +
+             (fVar3 * *(float *)(param_1 + 0x22c8) + fVar2 * *(float *)(param_1 + 0x22d8)));
         *(float *)(iVar7 + 0x3d40) =
              fVar5 * *(float *)(param_1 + 0x22fc) +
-             fVar4 * *(float *)(param_1 + 0x22ec) +
-             fVar3 * *(float *)(param_1 + 0x22cc) + fVar2 * *(float *)(param_1 + 0x22dc);
+             (fVar4 * *(float *)(param_1 + 0x22ec) +
+             (fVar3 * *(float *)(param_1 + 0x22cc) + fVar2 * *(float *)(param_1 + 0x22dc)));
         if (*(int *)(param_1 + 0x5434) == 0) {
           bVar1 = *(byte *)(uVar10 * 4 + *(int *)(param_1 + 0x5420) + 0x2ce);
         }
@@ -2502,20 +2502,20 @@ LAB_0009c0f4:
         fVar5 = *(float *)(iVar7 + 0x3d64);
         *(float *)(iVar7 + 0x3d58) =
              fVar5 * *(float *)(param_1 + 0x22f0) +
-             fVar4 * *(float *)(param_1 + 0x22e0) +
-             fVar3 * *(float *)(param_1 + 0x22c0) + fVar2 * *(float *)(param_1 + 0x22d0);
+             (fVar4 * *(float *)(param_1 + 0x22e0) +
+             (fVar3 * *(float *)(param_1 + 0x22c0) + fVar2 * *(float *)(param_1 + 0x22d0)));
         *(float *)(iVar7 + 0x3d5c) =
              fVar5 * *(float *)(param_1 + 0x22f4) +
-             fVar4 * *(float *)(param_1 + 0x22e4) +
-             fVar3 * *(float *)(param_1 + 0x22c4) + fVar2 * *(float *)(param_1 + 0x22d4);
+             (fVar4 * *(float *)(param_1 + 0x22e4) +
+             (fVar3 * *(float *)(param_1 + 0x22c4) + fVar2 * *(float *)(param_1 + 0x22d4)));
         *(float *)(iVar7 + 0x3d60) =
              fVar5 * *(float *)(param_1 + 0x22f8) +
-             fVar4 * *(float *)(param_1 + 0x22e8) +
-             fVar3 * *(float *)(param_1 + 0x22c8) + fVar2 * *(float *)(param_1 + 0x22d8);
+             (fVar4 * *(float *)(param_1 + 0x22e8) +
+             (fVar3 * *(float *)(param_1 + 0x22c8) + fVar2 * *(float *)(param_1 + 0x22d8)));
         *(float *)(iVar7 + 0x3d64) =
              fVar5 * *(float *)(param_1 + 0x22fc) +
-             fVar4 * *(float *)(param_1 + 0x22ec) +
-             fVar3 * *(float *)(param_1 + 0x22cc) + fVar2 * *(float *)(param_1 + 0x22dc);
+             (fVar4 * *(float *)(param_1 + 0x22ec) +
+             (fVar3 * *(float *)(param_1 + 0x22cc) + fVar2 * *(float *)(param_1 + 0x22dc)));
         if (*(int *)(param_1 + 0x5434) == 0) {
           bVar1 = *(byte *)(uVar10 * 4 + *(int *)(param_1 + 0x5420) + 0x2cf);
         }

@@ -1281,7 +1281,7 @@ int FUN_00050900(param_1)
         uVar19 = *(uint *)(param_1 + 0x4864);
       }
       if (((uVar9 & 0xff) == 0) && (*(char *)(param_1 + 0x4e18) == '\0')) {
-        dVar22 = (double)(**(code **)(param_1 + 0x506c))(param_1,uVar19,uVar15,0);
+        dVar22 = (double)(**(double ( **)(int,int,int,int))(param_1 + 0x506c))(param_1, uVar19, uVar15, 0);
         if (cVar1 == '\0') {
           if (bVar5) {
             (**(code **)(param_1 + 0x4de8))(param_1,uVar19,uVar15);
@@ -1346,7 +1346,7 @@ LAB_00050bc0:
         }
       }
       else {
-        dVar22 = (double)(**(code **)(param_1 + 0x5074))(param_1,uVar19,uVar15,0);
+        dVar22 = (double)(**(double ( **)(int,int,int,int))(param_1 + 0x5074))(param_1, uVar19, uVar15, 0);
         iVar12 = uVar19 + uVar15 * 0x100;
         puVar16 = *(uint **)(param_1 + 0x4870);
         puVar13 = *(uint **)(param_1 + 0x4874);
@@ -1662,7 +1662,7 @@ void FUN_00051364(int param_1,uint param_2,int param_3,int param_4,double fparam
   fVar1 = *(float *)(iVar21 + 0x1fc0);
   fVar2 = *(float *)(iVar21 + 0x1ff8);
   fVar3 = *(float *)(iVar21 + 0x1fc4);
-  fVar4 = *(float *)(_glePreInitVectorTOC + iVar21);
+  fVar4 = *(float *)(0x1fcc + iVar21);
   fVar5 = *(float *)(iVar21 + 0x1fd0);
   fVar6 = *(float *)(iVar21 + 0x1fd4);
   fVar7 = *(float *)(iVar21 + 0x1fdc);
@@ -1685,13 +1685,13 @@ void FUN_00051364(int param_1,uint param_2,int param_3,int param_4,double fparam
       fVar19 = *(float *)(iVar21 + 0x88);
       fVar20 = *(float *)(iVar21 + 0x8c);
       *(float *)(iVar21 + 0x8c) =
-           fVar20 * fVar13 + fVar19 * fVar10 + fVar17 * fVar4 + fVar18 * fVar7;
-      *(float *)(iVar21 + 0x80) = fVar20 * fVar11 + fVar19 * fVar8 + fVar17 * fVar1 + fVar18 * fVar5
+           fVar20 * fVar13 + (fVar19 * fVar10 + (fVar17 * fVar4 + fVar18 * fVar7));
+      *(float *)(iVar21 + 0x80) = fVar20 * fVar11 + (fVar19 * fVar8 + (fVar17 * fVar1 + fVar18 * fVar5))
       ;
-      *(float *)(iVar21 + 0x84) = fVar20 * fVar12 + fVar19 * fVar9 + fVar17 * fVar3 + fVar18 * fVar6
+      *(float *)(iVar21 + 0x84) = fVar20 * fVar12 + (fVar19 * fVar9 + (fVar17 * fVar3 + fVar18 * fVar6))
       ;
       *(float *)(iVar21 + 0x88) =
-           fVar20 * fVar2 + fVar19 * fVar16 + fVar17 * fVar14 + fVar18 * fVar15;
+           fVar20 * fVar2 + (fVar19 * fVar16 + (fVar17 * fVar14 + fVar18 * fVar15));
       uVar22 = uVar22 - 1;
     } while (uVar22 != 0);
   }
@@ -1927,7 +1927,7 @@ int _gleBuildInterpolateFunc(param_1, param_2, param_3, param_4, param_5, param_
 LAB_00051840:
       uVar2 = uVar11;
       if ((*(char *)(param_1 + 0x316a) != '\0') &&
-         (uVar2 = uVar11 | 0x80, *(short *)(_gleDCBAlloc + param_1 + 4) == 0x1102)) {
+         (uVar2 = uVar11 | 0x80, *(short *)(0x3170 + param_1 + 4) == 0x1102)) {
         uVar2 = uVar11 | 0x280;
       }
       if (((*(char *)(param_1 + 0x30aa) == '\0') || (*(char *)(param_1 + 0x4664) != '\0')) ||
@@ -4005,7 +4005,7 @@ void _gleSetRasterPos(int param_1,double fparam_1,double fparam_2,double fparam_
     fVar5 = (float)(fparam_4 * (double)*(float *)(param_1 + 0x1cf8) +
                    (double)(float)(fparam_3 * (double)*(float *)(param_1 + 0x1ce8) +
                                   (double)(float)(fparam_1 *
-                                                  (double)*(float *)(_glePreInitGlobals + param_1) +
+                                                  (double)*(float *)(0x1cc8 + param_1) +
                                                  (double)(float)(fparam_2 *
                                                                 (double)*(float *)(param_1 + 0x1cd8)
                                                                 ))));
@@ -4016,17 +4016,17 @@ void _gleSetRasterPos(int param_1,double fparam_1,double fparam_2,double fparam_
                                                                 (double)*(float *)(param_1 + 0x1cdc)
                                                                 ))));
     fVar12 = fVar6 * *(float *)(param_1 + 0x1cbc) +
-             fVar5 * *(float *)(param_1 + 0x1cac) +
-             fVar4 * *(float *)(param_1 + 0x1c8c) + fVar3 * *(float *)(param_1 + 0x1c9c);
+             (fVar5 * *(float *)(param_1 + 0x1cac) +
+             (fVar4 * *(float *)(param_1 + 0x1c8c) + fVar3 * *(float *)(param_1 + 0x1c9c)));
     fVar11 = fVar6 * *(float *)(param_1 + 0x1cb0) +
-             fVar5 * *(float *)(param_1 + 0x1ca0) +
-             fVar4 * *(float *)(param_1 + 0x1c80) + fVar3 * *(float *)(param_1 + 0x1c90);
+             (fVar5 * *(float *)(param_1 + 0x1ca0) +
+             (fVar4 * *(float *)(param_1 + 0x1c80) + fVar3 * *(float *)(param_1 + 0x1c90)));
     fVar10 = fVar6 * *(float *)(param_1 + 0x1cb8) +
-             fVar5 * *(float *)(param_1 + 0x1ca8) +
-             fVar4 * *(float *)(param_1 + 0x1c88) + fVar3 * *(float *)(param_1 + 0x1c98);
+             (fVar5 * *(float *)(param_1 + 0x1ca8) +
+             (fVar4 * *(float *)(param_1 + 0x1c88) + fVar3 * *(float *)(param_1 + 0x1c98)));
     fVar9 = fVar6 * *(float *)(param_1 + 0x1cb4) +
-            fVar5 * *(float *)(param_1 + 0x1ca4) +
-            fVar4 * *(float *)(param_1 + 0x1c84) + fVar3 * *(float *)(param_1 + 0x1c94);
+            (fVar5 * *(float *)(param_1 + 0x1ca4) +
+            (fVar4 * *(float *)(param_1 + 0x1c84) + fVar3 * *(float *)(param_1 + 0x1c94)));
     fVar13 = -fVar12;
     if (((*(char *)(param_1 + 0x50b5) == '\0') &&
         ((((fVar11 < fVar13 || (fVar12 < fVar11)) || (fVar9 < fVar13)) || (fVar12 < fVar9)))) ||
@@ -4040,8 +4040,8 @@ void _gleSetRasterPos(int param_1,double fparam_1,double fparam_2,double fparam_
           piVar16 = piVar16 + 1;
           iVar15 = param_1 + iVar15 * 0x10;
           if (fVar6 * *(float *)(iVar15 + 0x4198) +
-              fVar5 * *(float *)(iVar15 + 0x4194) +
-              fVar4 * *(float *)(iVar15 + 0x418c) + fVar3 * *(float *)(iVar15 + 0x4190) <
+              (fVar5 * *(float *)(iVar15 + 0x4194) +
+              (fVar4 * *(float *)(iVar15 + 0x418c) + fVar3 * *(float *)(iVar15 + 0x4190))) <
               FLOAT_00108e50) goto LAB_00054e14;
           iVar18 = iVar18 + 1;
         } while (iVar18 < *(int *)(param_1 + 0x4dfc));
@@ -4088,13 +4088,13 @@ void _gleSetRasterPos(int param_1,double fparam_1,double fparam_2,double fparam_
       fVar5 = *(float *)(param_1 + 0x2b8);
       *(float *)(iVar14 + -0x1c0) =
            fVar5 * *(float *)(param_1 + 0x22e0) +
-           fVar4 * *(float *)(param_1 + 0x22c0) + fVar3 * *(float *)(param_1 + 0x22d0);
+           (fVar4 * *(float *)(param_1 + 0x22c0) + fVar3 * *(float *)(param_1 + 0x22d0));
       *(float *)(iVar14 + -0x1bc) =
            fVar5 * *(float *)(param_1 + 0x22e4) +
-           fVar4 * *(float *)(param_1 + 0x22c4) + fVar3 * *(float *)(param_1 + 0x22d4);
+           (fVar4 * *(float *)(param_1 + 0x22c4) + fVar3 * *(float *)(param_1 + 0x22d4));
       *(float *)(iVar14 + -0x1b8) =
            fVar5 * *(float *)(param_1 + 0x22e8) +
-           fVar4 * *(float *)(param_1 + 0x22c8) + fVar3 * *(float *)(param_1 + 0x22d8);
+           (fVar4 * *(float *)(param_1 + 0x22c8) + fVar3 * *(float *)(param_1 + 0x22d8));
       if (*(char *)(param_1 + 0x280d) != '\0') {
         (**(code **)PTR__gleVectorNormalize_00112064)(param_1,iVar14 + -0x1c0,iVar14 + -0x1c0);
       }
@@ -4106,7 +4106,7 @@ void _gleSetRasterPos(int param_1,double fparam_1,double fparam_2,double fparam_
     if (*(short *)(param_1 + 0x3166) == -0x7baf) {
       *(undefined4 *)(iVar14 + -0x1d8) = *(undefined4 *)(param_1 + 0x2cc);
     }
-    dVar21 = (double)(**(code **)(param_1 + 0x4fe4))((double)*(float *)(iVar14 + -0x1d8),param_1);
+    dVar21 = (double)(**(double ( **)(int,double))(param_1 + 0x4fe4))(param_1, (double)*(float *)(iVar14 + -0x1d8));
     *(float *)(iVar14 + -0x1b4) = (float)dVar21;
     if (*(char *)(param_1 + 0x30aa) == '\0') {
       *(undefined8 *)(iVar14 + -0x1d0) = *(undefined8 *)(param_1 + 0x2a0);
@@ -4129,7 +4129,7 @@ void _gleSetRasterPos(int param_1,double fparam_1,double fparam_2,double fparam_
       *(undefined4 *)(param_1 + 0x48d0) = 0;
       _gleSelectVertexSubmitFunc(param_1);
     }
-    (**(code **)(param_1 + 0x4888))(fparam_1,fparam_2,fparam_3,fparam_4,param_1);
+    (**(int ( **)(int,double,double,double,double))(param_1 + 0x4888))(param_1, fparam_1, fparam_2, fparam_3, fparam_4);
     if (iVar18 != 0) {
       *(int *)(param_1 + 0x48d0) = iVar18;
       _gleSelectVertexSubmitFunc(param_1);
@@ -4296,8 +4296,8 @@ LAB_0005501c:
                *(float *)(param_1 + 0x4a4c) * *(float *)(param_1 + 0x2e4) +
                *(float *)(param_1 + 0x4a50);
           *(float *)(iVar4 + -0x1f8) = *(float *)(param_1 + 0x4a54) * *(float *)(param_1 + 0x2e8);
-          (**(code **)(param_1 + 0x46ac))
-                    (fparam_1,fparam_2,*(undefined4 *)(param_1 + 0x4688),pfVar9,param_2,param_3);
+          (**(int ( **)(int,int,int,int,double,double))(param_1 + 0x46ac))
+                    (*(undefined4 *)(param_1 + 0x4688), pfVar9, param_2, param_3, fparam_1, fparam_2);
         }
       }
       else if (*(int *)(param_1 + 0x4e1c) == 0x1c01) {

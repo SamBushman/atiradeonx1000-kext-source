@@ -2433,7 +2433,7 @@ int _gleInitGLDState(param_1)
   *(undefined2 *)(param_1 + 0x3176) = 0x405;
   *(undefined1 *)(param_1 + 0x317e) = 0;
   *(undefined4 *)(param_1 + 0x3194) = 0x1d01;
-  *(undefined2 *)(_gleDCBAlloc + param_1) = 0x1b02;
+  *(undefined2 *)(0x3170 + param_1) = 0x1b02;
   *(undefined1 *)(param_1 + 0x3178) = 0;
   *(undefined1 *)(param_1 + 0x3179) = 0;
   *(undefined1 *)(param_1 + 0x317a) = 0;
@@ -2458,7 +2458,7 @@ int _gleInitGLDState(param_1)
     iVar9 = iVar9 + 0x10;
   } while (iVar9 <= param_1 + 0x10);
   iVar10 = 0x10;
-  *(undefined2 *)(_gleCreateSharedState + param_1 + 4) = 0x207;
+  *(undefined2 *)(0x31b4 + param_1 + 4) = 0x207;
   *(undefined2 *)(param_1 + 0x31be) = 0x1e00;
   *(undefined1 *)(param_1 + 0x3e90) = 1;
   ((code **)_gleNullMemoryPointers)[param_1] = (code *)0x0;
@@ -2913,7 +2913,7 @@ int _gleInitGLIState(param_1)
   *(undefined4 *)(param_1 + 0x74d0) = 0x3f800000;
   *(undefined4 *)(param_1 + 0x5408) = 0;
   *(undefined4 *)(param_1 + 0x5404) = 0;
-  *(undefined4 *)(_gleUpdateLightPosition + param_1 + 4) = 1;
+  *(undefined4 *)(0x74a4 + param_1 + 4) = 1;
   *(undefined4 *)(param_1 + 0x74ac) = 0;
   *(undefined4 *)(param_1 + 0x74b0) = 0x3f800000;
   *(undefined4 *)(param_1 + 0x74b8) = 1;
@@ -4025,7 +4025,7 @@ int _gleInitQueryMachine(param_1)
 int _gleInitDrawPixelsObject(param_1)
   int param_1;
 {
-  *(undefined4 *)(_gleUpdateLightPosition + param_1) = 0;
+  *(undefined4 *)(0x74a4 + param_1) = 0;
   *(undefined4 *)(param_1 + 0x7488) = 0;
   *(undefined4 *)(param_1 + 0x7494) = 0;
   *(undefined4 *)(param_1 + 0x748c) = 0;

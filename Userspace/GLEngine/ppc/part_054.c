@@ -50,9 +50,9 @@ int _gleTextureImageCopy(param_1, param_2, param_3, param_4, param_5, param_6, p
   *(uint *)(param_1 + 0x31b0) = (uint)*(ushort *)(param_2 + 0xc);
   uVar4 = *(undefined4 *)(param_1 + 0x31c8);
   uVar3 = *(undefined4 *)(param_1 + 0x31c0);
-  uVar6 = *(undefined4 *)(_gleCreateSharedState + param_1);
+  uVar6 = *(undefined4 *)(0x31b4 + param_1);
   uVar7 = *(undefined4 *)(param_1 + 0x31b8);
-  *(uint *)(_gleCreateSharedState + param_1) = (uint)*(ushort *)(param_2 + 0xe);
+  *(uint *)(0x31b4 + param_1) = (uint)*(ushort *)(param_2 + 0xe);
   uVar2 = *(undefined4 *)(param_1 + 0x31bc);
   uVar1 = *(undefined4 *)(param_1 + 0x31c4);
   *(undefined1 *)(param_1 + 0x31c8) = 0;
@@ -67,7 +67,7 @@ int _gleTextureImageCopy(param_1, param_2, param_3, param_4, param_5, param_6, p
              *(undefined4 *)(param_2 + 0x14));
   *(undefined4 *)(param_1 + 0x31b0) = uVar5;
   *(undefined4 *)(param_1 + 0x31c8) = uVar4;
-  *(undefined4 *)(_gleCreateSharedState + param_1) = uVar6;
+  *(undefined4 *)(0x31b4 + param_1) = uVar6;
   *(undefined4 *)(param_1 + 0x31b8) = uVar7;
   *(undefined4 *)(param_1 + 0x31bc) = uVar2;
   *(undefined4 *)(param_1 + 0x31c0) = uVar3;
@@ -97,8 +97,8 @@ int _gleTextureSubImageCopy(param_1, param_2, param_3, param_4, param_5, param_6
   
   uVar7 = *(undefined4 *)(param_1 + 0x31b0);
   *(uint *)(param_1 + 0x31b0) = (uint)*(ushort *)(param_2 + 0xc);
-  uVar8 = *(undefined4 *)(_gleCreateSharedState + param_1);
-  *(uint *)(_gleCreateSharedState + param_1) = (uint)*(ushort *)(param_2 + 0xe);
+  uVar8 = *(undefined4 *)(0x31b4 + param_1);
+  *(uint *)(0x31b4 + param_1) = (uint)*(ushort *)(param_2 + 0xe);
   uVar4 = *(undefined4 *)(param_1 + 0x31b8);
   uVar5 = *(undefined4 *)(param_1 + 0x31c8);
   uVar2 = *(undefined4 *)(param_1 + 0x31bc);
@@ -127,7 +127,7 @@ int _gleTextureSubImageCopy(param_1, param_2, param_3, param_4, param_5, param_6
              *(undefined4 *)(param_2 + 0x14));
   *(undefined4 *)(param_1 + 0x31b0) = uVar7;
   *(undefined4 *)(param_1 + 0x31c8) = uVar5;
-  *(undefined4 *)(_gleCreateSharedState + param_1) = uVar8;
+  *(undefined4 *)(0x31b4 + param_1) = uVar8;
   *(undefined4 *)(param_1 + 0x31b8) = uVar4;
   *(undefined4 *)(param_1 + 0x31bc) = uVar2;
   *(undefined4 *)(param_1 + 0x31c0) = uVar3;

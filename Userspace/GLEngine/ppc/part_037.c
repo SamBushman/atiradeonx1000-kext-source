@@ -44,9 +44,8 @@ int _glVertexAttrib4dvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*UNRECOVERED_JUMPTABLE)
-              ((double)GH_U2F((unsigned int)(*param_3)),(double)GH_U2F((unsigned int)(param_3[1])),(double)GH_U2F((unsigned int)(param_3[2])),
-               (double)GH_U2F((unsigned int)(param_3[3])));
+    (*((int (*)(double,double,double,double))UNRECOVERED_JUMPTABLE))
+              ((double)GH_U2F((unsigned int)(*param_3)), (double)GH_U2F((unsigned int)(param_3[1])), (double)GH_U2F((unsigned int)(param_3[2])), (double)GH_U2F((unsigned int)(param_3[3])));
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -116,14 +115,7 @@ int _glVertexAttrib4NbvARB_Exec(param_1, param_2, param_3)
       if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
         pcVar5 = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar5)((double)((float)((double)CONCAT44(0x43300000,(int)*param_3 ^ 0x80000000) -
-                                DOUBLE_00108d58) * FLOAT_00108e60 + FLOAT_00108e64),
-                (double)((float)((double)CONCAT44(0x43300000,(int)param_3[1] ^ 0x80000000) -
-                                DOUBLE_00108d58) * FLOAT_00108e60 + FLOAT_00108e64),
-                (double)((float)((double)CONCAT44(0x43300000,(int)param_3[2] ^ 0x80000000) -
-                                DOUBLE_00108d58) * FLOAT_00108e60 + FLOAT_00108e64),
-                (double)((float)((double)CONCAT44(0x43300000,(int)param_3[3] ^ 0x80000000) -
-                                DOUBLE_00108d58) * FLOAT_00108e60 + FLOAT_00108e64));
+      (*((int (*)(double,double,double,double))pcVar5))((double)((float)((double)CONCAT44(0x43300000,(int)*param_3 ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e60 + FLOAT_00108e64), (double)((float)((double)CONCAT44(0x43300000,(int)param_3[1] ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e60 + FLOAT_00108e64), (double)((float)((double)CONCAT44(0x43300000,(int)param_3[2] ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e60 + FLOAT_00108e64), (double)((float)((double)CONCAT44(0x43300000,(int)param_3[3] ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e60 + FLOAT_00108e64));
     }
     else {
       iVar4 = param_1 + param_2 * 0x10;
@@ -207,14 +199,7 @@ int _glVertexAttrib4NsvARB_Exec(param_1, param_2, param_3)
       if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
         pcVar5 = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar5)((double)((float)((double)CONCAT44(0x43300000,(int)*param_3 ^ 0x80000000) -
-                                DOUBLE_00108d58) * FLOAT_00108e70 + FLOAT_00108e74),
-                (double)((float)((double)CONCAT44(0x43300000,(int)param_3[1] ^ 0x80000000) -
-                                DOUBLE_00108d58) * FLOAT_00108e70 + FLOAT_00108e74),
-                (double)((float)((double)CONCAT44(0x43300000,(int)param_3[2] ^ 0x80000000) -
-                                DOUBLE_00108d58) * FLOAT_00108e70 + FLOAT_00108e74),
-                (double)((float)((double)CONCAT44(0x43300000,(int)param_3[3] ^ 0x80000000) -
-                                DOUBLE_00108d58) * FLOAT_00108e70 + FLOAT_00108e74));
+      (*((int (*)(double,double,double,double))pcVar5))((double)((float)((double)CONCAT44(0x43300000,(int)*param_3 ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e70 + FLOAT_00108e74), (double)((float)((double)CONCAT44(0x43300000,(int)param_3[1] ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e70 + FLOAT_00108e74), (double)((float)((double)CONCAT44(0x43300000,(int)param_3[2] ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e70 + FLOAT_00108e74), (double)((float)((double)CONCAT44(0x43300000,(int)param_3[3] ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e70 + FLOAT_00108e74));
     }
     else {
       iVar4 = param_1 + param_2 * 0x10;
@@ -298,14 +283,7 @@ int _glVertexAttrib4NivARB_Exec(param_1, param_2, param_3)
       if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
         pcVar5 = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar5)((double)((float)((double)CONCAT44(0x43300000,*param_3 ^ 0x80000000) -
-                                DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c),
-                (double)((float)((double)CONCAT44(0x43300000,param_3[1] ^ 0x80000000) -
-                                DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c),
-                (double)((float)((double)CONCAT44(0x43300000,param_3[2] ^ 0x80000000) -
-                                DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c),
-                (double)((float)((double)CONCAT44(0x43300000,param_3[3] ^ 0x80000000) -
-                                DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c));
+      (*((int (*)(double,double,double,double))pcVar5))((double)((float)((double)CONCAT44(0x43300000,*param_3 ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c), (double)((float)((double)CONCAT44(0x43300000,param_3[1] ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c), (double)((float)((double)CONCAT44(0x43300000,param_3[2] ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c), (double)((float)((double)CONCAT44(0x43300000,param_3[3] ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c));
     }
     else {
       iVar4 = param_1 + param_2 * 0x10;
@@ -379,14 +357,7 @@ double _glVertexAttrib4NubvARB_Exec(int param_1,uint param_2,byte *param_3,doubl
       if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
         pcVar3 = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      fparam_1 = (double)(*pcVar3)((double)((GH_U2F((unsigned int)((*param_3 | 0x4b000000))) - 8388608.0) *
-                                           FLOAT_00108e78),
-                                   (double)((GH_U2F((unsigned int)((param_3[1] | 0x4b000000))) - 8388608.0) *
-                                           FLOAT_00108e78),
-                                   (double)((GH_U2F((unsigned int)((param_3[2] | 0x4b000000))) - 8388608.0) *
-                                           FLOAT_00108e78),
-                                   (double)((GH_U2F((unsigned int)((param_3[3] | 0x4b000000))) - 8388608.0) *
-                                           FLOAT_00108e78));
+      fparam_1 = (double)(*((double (*)(double,double,double,double))pcVar3))((double)((GH_U2F((unsigned int)((*param_3 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78), (double)((GH_U2F((unsigned int)((param_3[1] | 0x4b000000))) - 8388608.0) * FLOAT_00108e78), (double)((GH_U2F((unsigned int)((param_3[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e78), (double)((GH_U2F((unsigned int)((param_3[3] | 0x4b000000))) - 8388608.0) * FLOAT_00108e78));
     }
     else {
       iVar2 = param_1 + param_2 * 0x10;
@@ -458,14 +429,7 @@ double _glVertexAttrib4NusvARB_Exec(int param_1,uint param_2,ushort *param_3,dou
       if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
         pcVar3 = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      fparam_1 = (double)(*pcVar3)((double)((GH_U2F((unsigned int)((*param_3 | 0x4b000000))) - 8388608.0) *
-                                           FLOAT_00108e74),
-                                   (double)((GH_U2F((unsigned int)((param_3[1] | 0x4b000000))) - 8388608.0) *
-                                           FLOAT_00108e74),
-                                   (double)((GH_U2F((unsigned int)((param_3[2] | 0x4b000000))) - 8388608.0) *
-                                           FLOAT_00108e74),
-                                   (double)((GH_U2F((unsigned int)((param_3[3] | 0x4b000000))) - 8388608.0) *
-                                           FLOAT_00108e74));
+      fparam_1 = (double)(*((double (*)(double,double,double,double))pcVar3))((double)((GH_U2F((unsigned int)((*param_3 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74), (double)((GH_U2F((unsigned int)((param_3[1] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74), (double)((GH_U2F((unsigned int)((param_3[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74), (double)((GH_U2F((unsigned int)((param_3[3] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74));
     }
     else {
       iVar2 = param_1 + param_2 * 0x10;
@@ -542,14 +506,7 @@ int _glVertexAttrib4NuivARB_Exec(param_1, param_2, param_3)
       if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
         pcVar4 = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar4)((double)((float)((double)CONCAT44(0x43300000,*param_3) - DOUBLE_00108d70) *
-                        FLOAT_00108e6c),
-                (double)((float)((double)CONCAT44(0x43300000,param_3[1]) - DOUBLE_00108d70) *
-                        FLOAT_00108e6c),
-                (double)((float)((double)CONCAT44(0x43300000,param_3[2]) - DOUBLE_00108d70) *
-                        FLOAT_00108e6c),
-                (double)((float)((double)CONCAT44(0x43300000,param_3[3]) - DOUBLE_00108d70) *
-                        FLOAT_00108e6c));
+      (*((int (*)(double,double,double,double))pcVar4))((double)((float)((double)CONCAT44(0x43300000,*param_3) - DOUBLE_00108d70) * FLOAT_00108e6c), (double)((float)((double)CONCAT44(0x43300000,param_3[1]) - DOUBLE_00108d70) * FLOAT_00108e6c), (double)((float)((double)CONCAT44(0x43300000,param_3[2]) - DOUBLE_00108d70) * FLOAT_00108e6c), (double)((float)((double)CONCAT44(0x43300000,param_3[3]) - DOUBLE_00108d70) * FLOAT_00108e6c));
     }
     else {
       iVar3 = param_1 + param_2 * 0x10;

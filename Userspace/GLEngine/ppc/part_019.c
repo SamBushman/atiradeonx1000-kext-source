@@ -2484,7 +2484,7 @@ void _glMapGrid1f_Exec(int param_1,uint param_2,double fparam_1,double fparam_2,
   dVar1 = DOUBLE_00108d58;
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (0 < (int)param_2) {
-      *(uint *)(_gleUpdateLightPosition + param_1 + 4) = param_2;
+      *(uint *)(0x74a4 + param_1 + 4) = param_2;
       *(float *)(param_1 + 0x74ac) = (float)fparam_1;
       *(float *)(param_1 + 0x74b0) = (float)fparam_2;
       *(float *)(param_1 + 0x74b4) =
@@ -2569,7 +2569,7 @@ void _glMapGrid1d_Exec(int param_1,uint param_2,double fparam_1,double fparam_2,
   dVar1 = DOUBLE_00108d58;
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (0 < (int)param_2) {
-      *(uint *)(_gleUpdateLightPosition + param_1 + 4) = param_2;
+      *(uint *)(0x74a4 + param_1 + 4) = param_2;
       *(float *)(param_1 + 0x74ac) = (float)fparam_1;
       *(float *)(param_1 + 0x74b0) = (float)fparam_2;
       *(float *)(param_1 + 0x74b4) =

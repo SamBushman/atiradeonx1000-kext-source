@@ -21,11 +21,11 @@ undefined4 _glOrtho_ListExec(int param_1,float *param_2,double fparam_1,double f
     fVar5 = *param_2;
     fVar6 = param_2[2];
     fVar7 = param_2[1];
-    pfVar8[0xc] = pfVar8[0xc] + pfVar8[8] * fVar4 + *pfVar8 * fVar2 + pfVar8[4] * fVar1;
+    pfVar8[0xc] = pfVar8[0xc] + (pfVar8[8] * fVar4 + (*pfVar8 * fVar2 + pfVar8[4] * fVar1));
     pfVar8[3] = fVar3 * fVar5;
-    pfVar8[0xd] = pfVar8[0xd] + pfVar8[9] * fVar4 + pfVar8[1] * fVar2 + pfVar8[5] * fVar1;
-    pfVar8[0xe] = pfVar8[0xe] + pfVar8[10] * fVar4 + pfVar8[2] * fVar2 + pfVar8[6] * fVar1;
-    pfVar8[0xf] = pfVar8[0xf] + pfVar8[0xb] * fVar4 + fVar3 * fVar2 + pfVar8[7] * fVar1;
+    pfVar8[0xd] = pfVar8[0xd] + (pfVar8[9] * fVar4 + (pfVar8[1] * fVar2 + pfVar8[5] * fVar1));
+    pfVar8[0xe] = pfVar8[0xe] + (pfVar8[10] * fVar4 + (pfVar8[2] * fVar2 + pfVar8[6] * fVar1));
+    pfVar8[0xf] = pfVar8[0xf] + (pfVar8[0xb] * fVar4 + (fVar3 * fVar2 + pfVar8[7] * fVar1));
     *pfVar8 = *pfVar8 * fVar5;
     pfVar8[1] = pfVar8[1] * fVar5;
     pfVar8[2] = pfVar8[2] * fVar5;
@@ -3010,7 +3010,7 @@ LAB_0007d734:
       }
       else if (param_2 < 0x806d) {
         if ((double)FLOAT_00108e50 <= fparam_1) {
-          *(int *)(_gleCreateSharedState + param_1) = (int)(fparam_1 + (double)FLOAT_00108e90);
+          *(int *)(0x31b4 + param_1) = (int)(fparam_1 + (double)FLOAT_00108e90);
           goto LAB_0007d77c;
         }
       }
