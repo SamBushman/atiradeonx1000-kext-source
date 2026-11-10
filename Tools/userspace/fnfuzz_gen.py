@@ -88,15 +88,15 @@ def sig_of(entry):
     rc = 'd' if re.match(r'^(double|float)', ret.strip()) else ('v' if ret.strip() in ('void', 'undefined') else 'i')   # `undefined`: Ghidra saw no use of a result (r3 is whatever the function leaves there)
     pc = ''.join(cls(x) for x in ps)
     # Darwin PPC: every argument has a slot in the GPR/stack word sequence (a double or a 64-bit integer takes two, a float one); doubles and floats travel in f1..f13
-    # (their slots are only shadows), integers in r3..r10 and then in the caller's stack words 0x38(r1).. - the harness defines the four words 9..12 and f1..f13
+    # (their slots are only shadows), integers in r3..r10 and then in the caller's stack words 0x38(r1).. - the harness defines the sixteen words 9..24 and f1..f13
     k_, nfp_ = 0, 0
     for c_ in pc:
         if c_ in 'dL': 
-            if c_ == 'L' and k_ + 2 > 12: SIGWHY[entry] = 'integer parameter beyond slot 12'; return None
+            if c_ == 'L' and k_ + 2 > 24: SIGWHY[entry] = 'integer parameter beyond slot 24'; return None
             k_ += 2; nfp_ += (c_ == 'd')
         elif c_ == 'f': k_ += 1; nfp_ += 1
         else:
-            if k_ + 1 > 12: SIGWHY[entry] = 'integer parameter beyond slot 12'; return None
+            if k_ + 1 > 24: SIGWHY[entry] = 'integer parameter beyond slot 24'; return None
             k_ += 1
     if nfp_ > 13: SIGWHY[entry] = '%d floating parameters (>13)' % nfp_; return None
     return pc, rc
@@ -147,6 +147,10 @@ def scan(ent, rs):
                     if op.startswith('stfd'): n_ = 2
                     elif op == 'stmw': n_ = 32 - int(re.match(r'r(\d+)', arg).group(1))
                     for k_ in range(n_): rzs.add(o_ + 4 * k_)
+            if RZ_STORED and op in ('bl', 'bl+', 'bl-'):
+                # a call to the register save millicode (saveFP / saveGPR chain at 0x87a8..0x87d4, 0x8b68: `bl 0x87d4` stores f14..f31 into the slots below the caller's sp) is the function's own store of its red-zone slots
+                mt = re.match(r'0x([0-9a-f]+)\b', arg.strip())
+                if mt and (0x87a8 <= int(mt.group(1), 16) <= 0x87d8 or int(mt.group(1), 16) == 0x8b68): rzs.update(range(0xff00, 0x10000, 4))
             if op in ('bctrl', 'blrl', 'sc'):
                 if not bad: bad = op
                 if op != 'bctrl' and not badc: badc = op
