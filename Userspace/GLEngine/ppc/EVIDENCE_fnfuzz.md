@@ -135,3 +135,16 @@ Fuzz run24 on 866643c7 (plain 2673 + ctx 595): all DIFF names are in the set cla
 - `_Comp` family (966 functions) on a valid list context (run25): **0 DIFFs** (11616 trials, 72 uninformative); `_glWeight*` targeted with 3 stack fills: 0 differ.
 - Not covered by a differential: functions the harnesses cannot run (system calls, atomics, unsafe imports: 3385 - 2673 - 595 = 117 functions). Those need the mock harnesses (phase 3, import-reachable functions) and are open.
 - The sites that need a valid context rather than a random one (TexEnv compares, shader-type compares, MapVertexAttrib readers) are covered by the immediate comparison of section 11 and `gleng_mock_listexec`, not by the fuzzers.
+
+## 13. Single-precision arithmetic as float arithmetic (pipeline step 15; images 9b93bd2c, cd1bf96f, 9749f935)
+
+Ghidra models the stock's `fsubs` / `fmadds` / `fmuls` as double arithmetic rounded to float, so gcc emitted the double operation plus `frsp` where the stock has one single-precision instruction.
+Total `frsp` in the image disassembly: stock 2134, image 866643c7 3024, 9b93bd2c 3024 -> 2898 (cd1bf96f) -> 2605 (9749f935); instruction count 316989 -> 316565 (stock 268909).
+Per-function extra `frsp` (width_audit helpers, only functions with more than the stock): 1885 in 228 functions -> 905 / 187 -> 779 / 144 for the second image. The remainder is mostly real int-to-float conversions (the CONCAT44 magic-double form) and expressions over values that are still double.
+Value-preserving rewrites only (`Tools/userspace/narrow_float_ops.py`, `float_params.py`, run from `build_corpus.py` for GLEngine):
+- `(float)(X op Y)` with op in + - * / and both operands float-valued is the float operation (a double carries more than 2p+2 bits, so double rounding is innocuous); `(float)((X*Y)+-Z)` becomes a float expression that gcc contracts to the stock's `fmadds`.
+- A `double` local whose every assignment is float-valued is retyped `float` (uses become `(double)local`).
+- A `double fparam_k` is retyped `float` when every stock read of the argument FPR is single-precision or neutral and at least one is single-precision. `fmr` copies into f14-f31 survive calls, calls clobber f0-f13, millicode calls are skipped, and a parameter passed through to a callee's float parameter is float (least fixed point over the call graph): 1284 parameters in 286 functions.
+Float-valued = type float, `(double)<float>`, or a double literal exactly representable as float. This is a change of expression form, not of values; there is no guard and no stock behaviour is added.
+Verification on 9749f935 (`trap` count 0): plain ledger 2673 + ctx ledger 595 (run27): 36 + 6 plain and 6 ctx DIFF lines, 48 distinct names, 0 outside the classified set of sections 1-9; the same plain ledger with `FNFUZZ_FLOATARGS=1` (run29): 36 + 6, 42 names, 0 new;
+`_Comp` family (966 functions, valid list ctx, float-valued args, run28): 0 DIFFs, 11616 trials; `_glWeight*` with 3 stack fills: 0 differ. Run26 (9b93bd2c): 50 names, 0 new. Compared with run26 the two names `_glMultiTexCoord3d_CompExec` and `_glMultiTexCoord4f_Comp` no longer differ.
