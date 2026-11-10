@@ -93,11 +93,16 @@ static slot_t slots[2][512]; static int nslots[2];
 static unsigned char retblk[0x2000];
 static int nargs_tab[MAXSTUB];   /* FNFUZZ_IMPORT_NARGS=file (name<TAB>count, Tools/userspace/import_nargs.py): the argument registers a stub hashes; default 8 (r3..r10), which includes dead registers the images do not set alike */
 static unsigned ncalls_c, trace_c, mask_c[5]; static unsigned long long ret_state;
+static int gs_malloc;   /* FNFUZZ_GRAPHSPEC: malloc/calloc/realloc/free are stubbed onto an arena heap (deterministic, digested, a free of a graph node is a no-op) */
+static unsigned gm_next;
+#define GM_LO (ARENA_BASE + 0x16000u)
+#define GM_HI (ARENA_BASE + 0x1f000u)
 static int stub_class(const char *n) {
     static const char *pre[] = { "Sh", "PP", "glg", "glp", "NS", "CF", "IO", "host_", "mach_", "sysctl", "scandir", "pthread_mutex_", NULL };
     if (*n == '_') n++;
     { size_t L = strlen(n); if (L && n[L - 1] == '_') return 0; }   /* mach_task_self_ is a DATA symbol (the stock binds its non-lazy slot to the variable; the rebuilt through an external relocation): never overwrite a data slot with a function */
     for (int i = 0; pre[i]; i++) if (!strncmp(n, pre[i], strlen(pre[i]))) return 1;
+    if (gs_malloc && (!strcmp(n, "malloc") || !strcmp(n, "calloc") || !strcmp(n, "realloc") || !strcmp(n, "free"))) return 1;
     return 0;
 }
 static int stub_index(const char *n) {
@@ -131,23 +136,48 @@ static void collect_slots(int img, const struct mach_header *mh) {
         }
     }
 }
-static unsigned long long stub_common(int idx, unsigned *a) {
+static int gs_semantic(const char *nm, unsigned *a, unsigned *r);
+static unsigned stub_common(int idx, unsigned *a) {   /* 32-bit return: an `unsigned long long` is returned in r3:r4 (high word in r3), so the callers read 0 from r3 */
     unsigned h = trace_c ? trace_c : 2166136261u; h = (h ^ (unsigned)idx) * 16777619u;
     ncalls_c++; mask_c[idx >> 5] |= 1u << (idx & 31);
     { static int dump = -1; if (dump < 0) dump = getenv("FNFUZZ_IMPDUMP") != NULL; if (dump) { fprintf(stderr, "  [%s call %u] %s(%x %x %x %x %x %x %x %x)\n", cur_img ? "rebuilt" : "stock", ncalls_c, stub_names[idx], a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7]); } }
     for (int i = 0; i < nargs_tab[idx]; i++) {
         unsigned v = a[i];
         if (v >= ARENA_BASE && v <= ARENA_BASE + ARENA_SIZE - 16) { h = (h ^ 0xA7E4A000u) * 16777619u; for (int k = 0; k < 16; k++) h = (h ^ ((unsigned char *)v)[k]) * 16777619u; }
-        else { if (in_image(v)) v = 0x1A6E0001; h = (h ^ v) * 16777619u; }
+        else { if (in_image(v)) v = 0x1A6E0001; else if (v >= 0xbf000000u && v < 0xc0000000u) v = 0x57AC0001;   /* a stack address differs with the frame layout of the two images */
+               h = (h ^ v) * 16777619u; }
     }
     trace_c = h;
     ret_state = ret_state * 6364136223846793005ULL + 1442695040888963407ULL + (unsigned)idx * 2654435761u + ncalls_c;
     unsigned k = (unsigned)(ret_state >> 40) % 20, r;
     if (k < 5) r = 0; else if (k < 7) r = 1; else if (k < 9) r = 2 + (unsigned)(ret_state >> 20) % 15; else if (k < 10) r = (unsigned)-1; else r = (unsigned)(uintptr_t)(retblk + (((unsigned)(ret_state >> 16) % 0x1000) & ~3u));
+    if (strstr(stub_names[idx], "InfoLog")) r = (unsigned)(uintptr_t)(retblk + (((unsigned)(ret_state >> 16) % 0x1000) & ~3u));   /* a log string: callers strlen/strncpy it */
+    int handled = gs_malloc && gs_semantic(stub_names[idx], a, &r);   /* graph-mode semantics: returned objects, list operations (declared with `ret` / `retpick` or built in) */
     int ctl = cur_img == 1 && imp_ctl && !strcmp(stub_names[idx], imp_ctl);
     if (ctl) r = ~r ^ 0x1234;
+    if (handled) return r;   /* a modelled import writes exactly what its semantics say, no generic out-parameter words */
     /* out parameters: the library writes results through pointer arguments (ShGetUniformTypeInfo(.., &type, &size)); a caller that reads them must see defined values, not stack residue. Every argument that is a
        word-aligned stack address gets ONE word from the PRNG (a small value: types, counts, indexes), the same in both images; an arena pointer too (the arena digest compares what the function does with it) */
+    /* behaviour the graph mocks need (the library's own semantics, identical for both images): PPStreamChunkListRemoveChunk(list, node) unlinks the node (list+0 first, node+8 next, list+8 count) instead of
+       scribbling a random word over both, and a predicate (`...IsEqual`) writes nothing through its arguments */
+    { const char *nm = stub_names[idx];
+      if (gs_malloc && (!strcmp(nm, "malloc") || !strcmp(nm, "calloc") || !strcmp(nm, "realloc") || !strcmp(nm, "free"))) {
+          if (!strcmp(nm, "free")) return 0;
+          unsigned sz = !strcmp(nm, "calloc") ? a[0] * a[1] : !strcmp(nm, "realloc") ? a[1] : a[0], old = 0; unsigned char *op = NULL;
+          if (!strcmp(nm, "realloc") && a[0] >= GM_LO + 16 && a[0] < GM_HI) { op = (unsigned char *)a[0]; old = *(unsigned *)(op - 16); }
+          if (gm_next < GM_LO) gm_next = GM_LO;
+          unsigned need = (sz + 15) & ~15u; if (sz > 0x4000 || gm_next + 16 + need > GM_HI) return 0;
+          if (ctl) gm_next += 16;   /* mismatch control: the rebuilt side's blocks sit 16 bytes higher */
+          unsigned char *b = (unsigned char *)gm_next + 16; gm_next += 16 + need; *(unsigned *)(b - 16) = sz;
+          if (!strcmp(nm, "calloc")) memset(b, 0, sz); if (op) memcpy(b, op, old < sz ? old : sz);
+          return (unsigned)(uintptr_t)b; } }
+    { const char *nm = stub_names[idx]; size_t L = strlen(nm);
+      if (!strcmp(nm, "PPStreamChunkListRemoveChunk") && a[0] >= ARENA_BASE && a[0] <= ARENA_BASE + ARENA_SIZE - 16 && a[1] >= ARENA_BASE && a[1] <= ARENA_BASE + ARENA_SIZE - 16) {
+          unsigned *hd = (unsigned *)a[0], nx = *(unsigned *)(a[1] + 8);
+          if (hd[0] == a[1]) hd[0] = nx; else { unsigned pp = hd[0]; for (int g = 0; g < 64 && pp >= ARENA_BASE && pp <= ARENA_BASE + ARENA_SIZE - 16; g++) { unsigned *pn = (unsigned *)(pp + 8); if (*pn == a[1]) { *pn = nx; break; } pp = *pn; } }
+          if (hd[2]) hd[2]--;
+          return r; }
+      if (L >= 7 && !strcmp(nm + L - 7, "IsEqual")) return r; }
     for (int i = 0; i < nargs_tab[idx]; i++) {
         unsigned v = a[i];
         if ((v & 3) == 0 && ((v >= 0xbf000000u && v < 0xbffffff0u) || (v >= ARENA_BASE && v <= ARENA_BASE + ARENA_SIZE - 4))) {
@@ -156,7 +186,7 @@ static unsigned long long stub_common(int idx, unsigned *a) {
     }
     return r;
 }
-#define S1(n) static unsigned long long stb##n(unsigned a, unsigned b, unsigned c, unsigned d, unsigned e, unsigned f, unsigned g, unsigned h) { unsigned v[8] = { a, b, c, d, e, f, g, h }; return stub_common(n, v); }
+#define S1(n) static unsigned stb##n(unsigned a, unsigned b, unsigned c, unsigned d, unsigned e, unsigned f, unsigned g, unsigned h) { unsigned v[8] = { a, b, c, d, e, f, g, h }; return stub_common(n, v); }
 #define R10(p) S1(p##0) S1(p##1) S1(p##2) S1(p##3) S1(p##4) S1(p##5) S1(p##6) S1(p##7) S1(p##8) S1(p##9)
 S1(0) S1(1) S1(2) S1(3) S1(4) S1(5) S1(6) S1(7) S1(8) S1(9) R10(1) R10(2) R10(3) R10(4) R10(5) R10(6) R10(7) R10(8) R10(9) R10(10) R10(11) R10(12) R10(13) R10(14) R10(15)
 #define T1(n) (void *)stb##n,
@@ -168,7 +198,9 @@ static void load_nargs(void) {
     const char *fn = getenv("FNFUZZ_IMPORT_NARGS"); if (!fn) return; FILE *f = fopen(fn, "r"); if (!f) { perror(fn); exit(2); }
     char l[160], n[96]; int k, got = 0;
     while (fgets(l, sizeof l, f)) if (sscanf(l, "%95s %d", n, &k) == 2) for (int i = 0; i < nstub; i++) if (!strcmp(stub_names[i], n)) { nargs_tab[i] = k > 8 ? 8 : k; got++; }
-    fclose(f); fprintf(stderr, "interposer: argument counts for %d of %d imports\n", got, nstub);
+    fclose(f);
+    for (int i = 0; i < nstub; i++) { const char *nm = stub_names[i]; if (!strcmp(nm, "malloc") || !strcmp(nm, "free")) nargs_tab[i] = 1; else if (!strcmp(nm, "calloc") || !strcmp(nm, "realloc")) nargs_tab[i] = 2; }
+    fprintf(stderr, "interposer: argument counts for %d of %d imports\n", got, nstub);
 }
 static void init_retblk(void) { unsigned *w = (unsigned *)retblk; unsigned long long x = 88172645463325252ULL; for (unsigned i = 0; i < sizeof retblk / 4; i++) { x ^= x << 13; x ^= x >> 7; x ^= x << 17; unsigned k = (unsigned)(x >> 32) % 8; w[i] = k < 2 ? 0 : k < 6 ? (unsigned)(x >> 40) % 64 : (unsigned)(uintptr_t)(retblk + (((unsigned)(x >> 36) % 0x1ff0) & ~3u)); } }
 
@@ -188,6 +220,168 @@ static void on_sig(int s) { report(s, 0, 0, 0); }
    layouts; filling makes the residue a known value in both, so only a difference in what the function itself writes or reads is left. */
 static int stackfill_set; static unsigned stackfill_word;
 static void __attribute__((noinline)) fill_stack(void) { volatile unsigned buf[8192]; for (int i = 0; i < 8192; i++) buf[i] = stackfill_word; }
+
+/* FNFUZZ_GRAPHSPEC=<file>: structured object graphs for the functions the random arena cannot reach (a PPStream, a shader/program object, a hash table of machine objects). The spec declares node
+   types and per-function roots; for a function it names, child() builds the graph in the arena (zeroed, deterministic from the trial seed, so both images see the same bytes at the same addresses)
+   and the declared arguments are replaced by pointers into it. Lines (`#` comments, blank lines ignored):
+     type NAME SIZE                       start a node type (SIZE bytes, zero-filled; every field not listed stays 0)
+       ptr OFF TYPE [PCT]                 +OFF = pointer to a fresh TYPE node (non-NULL in PCT percent of the nodes, default 100)
+       list OFF TYPE MIN MAX NEXTOFF      +OFF = first of a chain of MIN..MAX fresh TYPE nodes linked through their +NEXTOFF word (NULL-terminated; 0 nodes -> NULL)
+       u8|u16|u32 OFF LO HI               +OFF = random value in LO..HI
+       rand OFF                           +OFF = random 32-bit word
+       set OFF VALUE                      +OFF = VALUE
+       pick OFF V1 V2 ...                 +OFF = one of the values
+       bits OFF MASK                      +OFF = random word & MASK
+       str OFF TEXT                       +OFF = pointer to a NUL-terminated copy of TEXT (one of the `|`-separated alternatives)
+       hash OFF TYPE MIN MAX NAMEOFF MASK  +OFF = inline bucket array of MASK+1 words; MIN..MAX fresh TYPE nodes, each given a distinct name (1..) at +NAMEOFF and pushed on the front of bucket
+                                          (name & MASK) through its +0 word (the machine-object hash table `_gleLookupHashObject` walks); the names are recorded for `arg N name`
+       (`ret`/`retpick` after a `func` line apply to that function only, before any `func` line to all) ret IMPORT TYPE          the stubbed import returns a fresh TYPE graph on every call (parser/stream/list objects: PPParserCreate, PPStreamCreate, ...)
+       (top level) retpick IMPORT V1 V2 ..  the stubbed import returns one of the values (an error code, a count)
+       fn OFF                             +OFF = the address of a harmless harness function (a callback slot the code under test calls: same address in both images)
+       parr OFF TYPE COUNTOFF MIN MAX     +OFF = pointer to an array of N (MIN..MAX) pointers to fresh TYPE nodes, N stored at +COUNTOFF
+     func NAME                            start a function
+       arg N ptr TYPE [PCT] | arg N int LO HI | arg N pick V1 V2 ... | arg N rand | arg N null | arg N str TEXT (a NUL-terminated copy of one of the `|`-separated alternatives) | arg N name [PCT]   (name: one of the recorded hash names, else a random small one)
+   Numbers are decimal or 0x hex. */
+typedef struct { unsigned off; int kind; unsigned a, b, c; int n; unsigned v[8]; char tname[32]; char text[96]; } gfield_t;
+typedef struct { char name[32]; unsigned size; int nf; gfield_t f[40]; } gtype_t;
+typedef struct { int n; int kind; unsigned a, b; int pct; unsigned v[8]; int nv; char tname[32]; char text[96]; } garg_t;
+typedef struct { char name[96]; int na; garg_t a[8]; } gfunc_t;
+enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN };
+enum { GA_PTR = 1, GA_INT, GA_PICK, GA_RAND, GA_NULL, GA_NAME, GA_STR };
+static unsigned g_names[64]; static int g_nnames;
+typedef struct { char name[48]; char tname[32]; unsigned v[8]; int nv; char func[96]; } gret_t;
+static char gs_curfunc[96]; static unsigned gs_first_cnt;
+static gret_t grets[32]; static int ngrets;
+static gtype_t gtypes[64]; static int ngtypes; static gfunc_t gfuncs[160]; static int ngfuncs; static unsigned gb_next;
+static unsigned gnum(const char *s) { return (unsigned)strtoul(s, NULL, 0); }
+static void load_graphspec(const char *path) {
+    FILE *f = fopen(path, "r"); if (!f) { perror(path); exit(2); }
+    char line[512]; gtype_t *ct = NULL; gfunc_t *cf = NULL;
+    while (fgets(line, sizeof line, f)) {
+        char *tok[16]; int nt = 0; char *h = strchr(line, '#'); if (h) *h = 0;
+        for (char *p = strtok(line, " \t\r\n"); p && nt < 16; p = strtok(NULL, " \t\r\n")) tok[nt++] = p;
+        if (!nt) continue;
+        if (!strcmp(tok[0], "type") && nt >= 3) { ct = &gtypes[ngtypes++]; memset(ct, 0, sizeof *ct); snprintf(ct->name, sizeof ct->name, "%s", tok[1]); ct->size = gnum(tok[2]); cf = NULL; continue; }
+        if (!strcmp(tok[0], "ret") && nt >= 3 && ngrets < 32) { gret_t *g = &grets[ngrets++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); snprintf(g->tname, sizeof g->tname, "%s", tok[2]); if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
+        if (!strcmp(tok[0], "retpick") && nt >= 3 && ngrets < 32) { gret_t *g = &grets[ngrets++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); for (int i = 2; i < nt && g->nv < 8; i++) g->v[g->nv++] = gnum(tok[i]); if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
+        if (!strcmp(tok[0], "func") && nt >= 2) { cf = &gfuncs[ngfuncs++]; memset(cf, 0, sizeof *cf); snprintf(cf->name, sizeof cf->name, "%s", tok[1]); ct = NULL; continue; }
+        if (cf && !strcmp(tok[0], "arg") && nt >= 3) {
+            garg_t *a = &cf->a[cf->na++]; memset(a, 0, sizeof *a); a->n = atoi(tok[1]); a->pct = 100;
+            if (!strcmp(tok[2], "ptr") && nt >= 4) { a->kind = GA_PTR; snprintf(a->tname, sizeof a->tname, "%s", tok[3]); if (nt >= 5) a->pct = atoi(tok[4]); }
+            else if (!strcmp(tok[2], "int") && nt >= 5) { a->kind = GA_INT; a->a = gnum(tok[3]); a->b = gnum(tok[4]); }
+            else if (!strcmp(tok[2], "pick")) { a->kind = GA_PICK; for (int i = 3; i < nt && a->nv < 8; i++) a->v[a->nv++] = gnum(tok[i]); }
+            else if (!strcmp(tok[2], "rand")) a->kind = GA_RAND; else if (!strcmp(tok[2], "null")) a->kind = GA_NULL;
+            else if (!strcmp(tok[2], "str") && nt >= 4) { a->kind = GA_STR; snprintf(a->text, sizeof a->text, "%s", tok[3]); }
+            else if (!strcmp(tok[2], "name")) { a->kind = GA_NAME; if (nt >= 4) a->pct = atoi(tok[3]); }
+            continue;
+        }
+        if (ct && nt >= 2 && ct->nf < 40) {
+            gfield_t *g = &ct->f[ct->nf]; memset(g, 0, sizeof *g); g->off = gnum(tok[1]); g->a = 0; g->b = 0; g->c = 100;
+            if (!strcmp(tok[0], "ptr") && nt >= 3) { g->kind = GF_PTR; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); if (nt >= 4) g->c = gnum(tok[3]); }
+            else if (!strcmp(tok[0], "list") && nt >= 6) { g->kind = GF_LIST; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->a = gnum(tok[3]); g->b = gnum(tok[4]); g->c = gnum(tok[5]); }
+            else if ((!strcmp(tok[0], "u8") || !strcmp(tok[0], "u16") || !strcmp(tok[0], "u32")) && nt >= 4) { g->kind = tok[0][1] == '8' ? GF_U8 : tok[0][1] == '1' ? GF_U16 : GF_U32; g->a = gnum(tok[2]); g->b = gnum(tok[3]); }
+            else if (!strcmp(tok[0], "rand")) g->kind = GF_RAND;
+            else if (!strcmp(tok[0], "set") && nt >= 3) { g->kind = GF_SET; g->a = gnum(tok[2]); }
+            else if (!strcmp(tok[0], "pick")) { g->kind = GF_PICK; for (int i = 2; i < nt && g->n < 8; i++) g->v[g->n++] = gnum(tok[i]); }
+            else if (!strcmp(tok[0], "hash") && nt >= 7) { g->kind = GF_HASH; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->a = gnum(tok[3]); g->b = gnum(tok[4]); g->c = gnum(tok[5]); g->n = (int)gnum(tok[6]); }
+            else if (!strcmp(tok[0], "parr") && nt >= 6) { g->kind = GF_PARR; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->c = gnum(tok[3]); g->a = gnum(tok[4]); g->b = gnum(tok[5]); }
+            else if (!strcmp(tok[0], "fn")) g->kind = GF_FN;
+            else if (!strcmp(tok[0], "bits") && nt >= 3) { g->kind = GF_BITS; g->a = gnum(tok[2]); }
+            else if (!strcmp(tok[0], "str") && nt >= 3) { g->kind = GF_STR; snprintf(g->text, sizeof g->text, "%s", tok[2]); }
+            else continue;
+            ct->nf++;
+        }
+    }
+    fclose(f);
+}
+static gtype_t *gfind_type(const char *n) { for (int i = 0; i < ngtypes; i++) if (!strcmp(gtypes[i].name, n)) return &gtypes[i]; fprintf(stderr, "graphspec: no type %s\n", n); exit(2); }
+static unsigned gb_build(gtype_t *t, int depth);
+static int gs_nop(int a) { return a; }
+static unsigned gb_alloc(unsigned size) { unsigned a = gb_next; gb_next += (size + 15) & ~15u; if (gb_next > GM_LO) _exit(9); memset((void *)a, 0, size); return a; }
+static unsigned grange(unsigned lo, unsigned hi) { return hi <= lo ? lo : lo + rnd32() % (hi - lo + 1); }
+static unsigned gb_build(gtype_t *t, int depth) {
+    unsigned a = gb_alloc(t->size); unsigned char *b = (unsigned char *)a;
+    if (depth > 6) return a;
+    for (int i = 0; i < t->nf; i++) {
+        gfield_t *g = &t->f[i];
+        switch (g->kind) {
+        case GF_PTR: if (rnd32() % 100 < g->c) *(unsigned *)(b + g->off) = gb_build(gfind_type(g->tname), depth + 1); break;
+        case GF_LIST: { unsigned n = grange(g->a, g->b), prev = 0; for (unsigned k = 0; k < n; k++) { unsigned e = gb_build(gfind_type(g->tname), depth + 1); if (prev) *(unsigned *)((unsigned char *)prev + g->c) = e; else *(unsigned *)(b + g->off) = e; prev = e; } break; }
+        case GF_HASH: { unsigned nn = grange(g->a, g->b); unsigned nameoff = g->c; unsigned mask = (unsigned)g->n; unsigned *bk = (unsigned *)(b + g->off);
+            for (unsigned k = 0; k < nn; k++) { unsigned e = gb_build(gfind_type(g->tname), depth + 1); unsigned nm = 1 + k * 3 + rnd32() % 3;
+                *(unsigned *)(e + nameoff) = nm; *(unsigned *)e = bk[nm & mask]; bk[nm & mask] = e; if (g_nnames < 64) g_names[g_nnames++] = nm; }
+            break; }
+        case GF_PARR: { unsigned nn = grange(g->a, g->b); unsigned arr = gb_alloc(nn * 4 + 4);
+            for (unsigned k = 0; k < nn; k++) *(unsigned *)(arr + k * 4) = gb_build(gfind_type(g->tname), depth + 1);
+            *(unsigned *)(b + g->off) = arr; *(unsigned *)(b + g->c) = nn; break; }
+        case GF_FN: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_nop; break;
+        case GF_U8: b[g->off] = (unsigned char)grange(g->a, g->b); break;
+        case GF_U16: *(unsigned short *)(b + g->off) = (unsigned short)grange(g->a, g->b); break;
+        case GF_U32: *(unsigned *)(b + g->off) = grange(g->a, g->b); break;
+        case GF_RAND: *(unsigned *)(b + g->off) = rnd32(); break;
+        case GF_SET: *(unsigned *)(b + g->off) = g->a; break;
+        case GF_PICK: *(unsigned *)(b + g->off) = g->v[rnd32() % g->n]; break;
+        case GF_BITS: *(unsigned *)(b + g->off) = rnd32() & g->a; break;
+        case GF_STR: { char txt[96]; snprintf(txt, sizeof txt, "%s", g->text); int na = 1; for (char *q = txt; *q; q++) if (*q == '|') na++;
+            int pick = rnd32() % na; char *s0 = txt; for (int k = 0; k < pick; k++) { s0 = strchr(s0, '|') + 1; } char *e = strchr(s0, '|'); if (e) *e = 0;
+            unsigned sa = gb_alloc((unsigned)strlen(s0) + 1); memcpy((void *)sa, s0, strlen(s0) + 1); *(unsigned *)(b + g->off) = sa; break; }
+        }
+    }
+    return a;
+}
+/* build the graph for function `name` and store the declared arguments into ia[]; returns 1 when the function has a spec */
+static int apply_graph(const char *name, unsigned *ia) {
+    int nalt = 0, alt[16]; for (int i = 0; i < ngfuncs && nalt < 16; i++) if (!strcmp(gfuncs[i].name, name)) alt[nalt++] = i;   /* several `func` blocks of one name are alternatives, one is drawn per trial */
+    snprintf(gs_curfunc, sizeof gs_curfunc, "%s", name);
+    if (nalt) { int i = alt[nalt > 1 ? rnd32() % nalt : 0];
+        gfunc_t *f = &gfuncs[i]; gb_next = ARENA_BASE + 0x1000; g_nnames = 0; gm_next = GM_LO; gs_first_cnt = 0xffffffffu;
+        for (int k = 0; k < f->na; k++) { garg_t *a = &f->a[k]; if (a->n < 0 || a->n >= 8) continue;
+            switch (a->kind) {
+            case GA_PTR: ia[a->n] = (rnd32() % 100 < (unsigned)a->pct) ? gb_build(gfind_type(a->tname), 0) : 0; break;
+            case GA_INT: ia[a->n] = grange(a->a, a->b); break;
+            case GA_PICK: ia[a->n] = a->v[rnd32() % a->nv]; break;
+            case GA_RAND: ia[a->n] = rnd32(); break;
+            case GA_NULL: ia[a->n] = 0; break;
+            case GA_STR: { char txt[96]; snprintf(txt, sizeof txt, "%s", a->text); int na = 1; for (char *q = txt; *q; q++) if (*q == '|') na++;
+                int pick = rnd32() % na; char *s0 = txt; for (int q = 0; q < pick; q++) s0 = strchr(s0, '|') + 1; char *e = strchr(s0, '|'); if (e) *e = 0;
+                unsigned sa = gb_alloc((unsigned)strlen(s0) + 1); memcpy((void *)sa, s0, strlen(s0) + 1); ia[a->n] = sa; break; }
+            case GA_NAME: ia[a->n] = (g_nnames && rnd32() % 100 < (unsigned)a->pct) ? g_names[rnd32() % g_nnames] : 1 + rnd32() % 40; break;
+            } }
+        return 1;
+    }
+    return 0;
+}
+
+/* semantics of the library imports the graph mocks model (the same for both images): the return objects declared by `ret`/`retpick`, and the list/stream operations whose effect on the arena the
+   functions under test read back (PPParserAttachStream, PPStreamChunkListAddChunk, ...CreateFromChunkList, ...CreateFromChunk, ...GetStream). List head: +0 first, +8 count; node: +8 next, 0x40 bytes. */
+static int gs_semantic(const char *nm, unsigned *a, unsigned *r) {
+    #define INARENA(v) ((v) >= ARENA_BASE + 0x1000 && (v) <= ARENA_BASE + ARENA_SIZE - 0x50)
+    for (int i = 0; i < ngrets; i++) if (!strcmp(grets[i].name, nm) && (!grets[i].func[0] || !strcmp(grets[i].func, gs_curfunc))) {
+        if (grets[i].nv) { *r = grets[i].v[rnd32() % grets[i].nv]; return 1; }
+        if (gb_next + 0x800 > GM_LO) return 0;
+        *r = gb_build(gfind_type(grets[i].tname), 0); return 1; }
+    if (!strcmp(nm, "PPStreamAttachOperationsChunkList")) { if (INARENA(a[0])) *(unsigned *)(a[0] + 0x20) = a[1]; return 1; }
+    if (!strcmp(nm, "PPStreamAttachParamBindingsChunkList")) { if (INARENA(a[0])) *(unsigned *)(a[0] + 0x10) = a[1]; return 1; }
+    if (!strcmp(nm, "PPStreamAttachParamBindingArraysChunkList")) { if (INARENA(a[0])) *(unsigned *)(a[0] + 0x14) = a[1]; return 1; }
+    if (!strcmp(nm, "PPStreamChunkListSort") || !strcmp(nm, "PPStreamAddOperation") || !strcmp(nm, "PPStreamAddParamBinding") || !strcmp(nm, "PPStreamAddOutputBinding") || !strcmp(nm, "PPStreamAddTempUsage")) return 1;   /* records are only handed over: no write through the arguments */
+    if (!strcmp(nm, "PPParserAttachStream")) { if (INARENA(a[0])) *(unsigned *)(a[0] + 0x1c) = a[1]; return 1; }
+    if (!strcmp(nm, "PPStreamChunkListAddChunk")) { if (INARENA(a[0]) && INARENA(a[1])) { unsigned *hd = (unsigned *)a[0]; *(unsigned *)(a[1] + 8) = 0;
+            if (!hd[0]) hd[0] = a[1]; else { unsigned pp = hd[0]; for (int g = 0; g < 64 && INARENA(pp) && *(unsigned *)(pp + 8); g++) pp = *(unsigned *)(pp + 8); if (INARENA(pp)) *(unsigned *)(pp + 8) = a[1]; }
+            hd[2]++; } return 1; }
+    if (!strcmp(nm, "PPStreamChunkCreateFromChunk")) { if (INARENA(a[0]) && gb_next + 0x100 < GM_LO) { unsigned n = gb_alloc(0x40); memcpy((void *)n, (void *)a[0], 0x40); *(unsigned *)(n + 8) = 0; *r = n; } return 1; }
+    if (!strcmp(nm, "PPStreamChunkListCreateFromChunkList")) { if (INARENA(a[0]) && gb_next + 0x1000 < GM_LO) { unsigned h = gb_alloc(0x10); memcpy((void *)h, (void *)a[0], 0x10); unsigned prev = 0, src = *(unsigned *)a[0]; *(unsigned *)h = 0;
+            for (int g = 0; g < 16 && INARENA(src); g++, src = *(unsigned *)(src + 8)) { unsigned n = gb_alloc(0x40); memcpy((void *)n, (void *)src, 0x40); *(unsigned *)(n + 8) = 0; if (prev) *(unsigned *)(prev + 8) = n; else *(unsigned *)h = n; prev = n; }
+            *r = h; } return 1; }
+    if (!strcmp(nm, "PPStreamChunkListGetStream")) {   /* (list, buf, &count, stream): count = nodes in the list; buf (when non-NULL) gets count (first, last) index pairs, each below the first list's count (the params list; the param-array list refers to ranges of it) */
+        unsigned n = 0, src = INARENA(a[0]) ? *(unsigned *)a[0] : 0; for (int g = 0; g < 16 && INARENA(src); g++, src = *(unsigned *)(src + 8)) n++;
+        if (gs_first_cnt == 0xffffffffu) gs_first_cnt = n;
+        if (((a[2] & 3) == 0) && ((a[2] >= 0xbf000000u && a[2] < 0xbffffff0u) || INARENA(a[2]))) *(unsigned *)a[2] = n;   /* the count goes to a stack local or an arena word */
+        if (a[1] >= GM_LO && n && a[1] < GM_HI - 8 * n) { unsigned lim = gs_first_cnt ? gs_first_cnt : 1;
+            for (unsigned k = 0; k < n; k++) { unsigned lo = k % lim, hi = lo + (rnd32() % 2 && lo + 1 < lim); ((unsigned *)a[1])[2 * k] = lo; ((unsigned *)a[1])[2 * k + 1] = hi; } }
+        *r = 0; return 1; }
+    #undef INARENA
+    return 0;
+}
 static unsigned alarm_us = 300000;
 static int nohandlers;
 static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
@@ -216,6 +410,7 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     for (int q = (j < 13 ? j : 13); q < 13; q++) da[q] = gen_double(0);
     /* the 9th..12th integer words of the call are the caller-stack words at SP+0x38..0x44 (Darwin PPC); a function with more than 8 integer parameters (or reading its caller's frame) must see defined values, not the harness's stack residue, which differs between the images */
     unsigned sa[16]; for (int q = 0; q < 16; q++) { unsigned k4 = rnd32() % 4; sa[q] = k4 == 0 ? 0 : k4 < 3 ? arena_ptr() : gen_int(); }
+    if (ngfuncs) apply_graph(c->name, ia);
     memcpy(cur_args, ia, sizeof cur_args); memcpy(cur_dargs, da, sizeof cur_dargs);
     if (getenv("FNFUZZ_LISTCTX")) {
         /* FNFUZZ_LISTCTX=1: parameter 0 is a valid display-list context (the shape gleng_mock_listitem.c builds): a zeroed 0x8000-byte ctx at arena+0x1000 whose +0x53e8 points at a list block H
@@ -280,6 +475,7 @@ int main(int argc, char **argv) {
     unsigned long ap[2] = { (unsigned long)dlsym(L[0], an), (unsigned long)dlsym(L[1], an) };
     if (!ap[0] || !ap[1]) { fprintf(stderr, "anchor %s not found\n", an); return 2; }
     Dl_info di; dladdr((void *)ap[0], &di); img_hdr[0] = (const struct mach_header *)di.dli_fbase; dladdr((void *)ap[1], &di); img_hdr[1] = (const struct mach_header *)di.dli_fbase;
+    if (getenv("FNFUZZ_GRAPHSPEC")) { gs_malloc = 1; load_graphspec(getenv("FNFUZZ_GRAPHSPEC")); }
     interpose = getenv("FNFUZZ_INTERPOSE") != NULL; imp_ctl = getenv("FNFUZZ_IMPORT_CTL");
     if (interpose) { init_retblk(); collect_slots(0, img_hdr[0]); collect_slots(1, img_hdr[1]); load_nargs(); fprintf(stderr, "interposer: %d stock slots, %d rebuilt slots, %d distinct imports\n", nslots[0], nslots[1], nstub); }
     int first = 0, count = nc; if (flt && flt[0] == '@') sscanf(flt + 1, "%d,%d", &first, &count);

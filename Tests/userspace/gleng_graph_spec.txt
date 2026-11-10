@@ -1,0 +1,173 @@
+# gleng_graph_spec.txt - object graphs for fnfuzz FNFUZZ_GRAPHSPEC (see the comment above load_graphspec in fnfuzz.c). One section per family; see EVIDENCE_fnfuzz.md section 17.
+
+# ---- PPStream (the parser/optimiser stream the _glePPPrune* functions walk) --------------------------------------------------------------------------------------------------
+# ctx+0x1c -> stream; stream+4 locals, +0x10 params, +0x14 param arrays, +0x18 attribs, +0x1c outputs, +0x20 operations: each a pointer to a list head (+0 first node, +8 count);
+# a chunk node: +8 next, +0xc.. binding words, +0xe lo index, +0x12 index, +0x14 flag; an operation node: +0xc header (>>0x1d operand count, >>0x12&0xff opcode), operand words at +0x14,+0x1c,+0x24,+0x2c
+# (type in bits 0x11/0x17..0x19, sign bit, index shorts at +0x1a,+0x22,+0x2a,+0x32). The words come from small pick sets (count 0..3 / opcode 0, 0x10, 0x44, 0x4a; operand type 0..3 with and without the sign bit)
+# and the indexes are drawn from 0..3, so the equal-index and type tests of all five functions are taken often (a fully random word takes one of them in ~2% of the nodes).
+type PPNODE 0x40
+  pick 0x0c 0x20000000 0x20400000 0x21280000 0x21100000 0x40000000 0x40400000 0x41100000 0x60000000
+  rand 0x10
+  u16 0x0e 0 3
+  u16 0x12 0 3
+  pick 0x14 0 1 0x00020000 0x00060000 0x00040000
+  pick 0x1c 0 0x00800000 0x01000000 0x01800000 0x80000000 0x81000000
+  pick 0x24 0 0x00800000 0x01000000 0x01800000 0x80000000 0x81000000
+  pick 0x2c 0 0x00800000 0x01000000 0x01800000 0x80000000 0x81000000
+  u16 0x1a 0 3
+  u16 0x22 0 3
+  u16 0x2a 0 3
+  u16 0x32 0 3
+type PPLIST 0x10
+  list 0x00 PPNODE 0 4 8
+  u32 0x08 0 6
+type PPSTREAM 0x40
+  ptr 0x04 PPLIST
+  ptr 0x10 PPLIST
+  ptr 0x14 PPLIST
+  ptr 0x18 PPLIST
+  ptr 0x1c PPLIST
+  ptr 0x20 PPLIST
+type PPCTX 0x600
+  ptr 0x1c PPSTREAM
+  u32 0x464 0 6
+  u32 0x468 0 6
+  bits 0x440 0xffffffff
+func _glePPPruneParams
+  arg 0 ptr PPCTX
+func _glePPPruneAttribs
+  arg 0 ptr PPCTX
+func _glePPPruneLocals
+  arg 0 ptr PPCTX
+func _glePPPruneOutputs
+  arg 0 ptr PPCTX
+func _glePPPruneParamArrays
+  arg 0 ptr PPCTX
+
+# ---- shader / program objects (ARB_shader_objects): the machine-object hash table, a program object, a shader object --------------------------------------------------------------
+# ctx+0x4a10 (short, negative = outside Begin/End), +0x7574 (GL error), +0x5148 -> shared state SS (+0x8024 mutex flag byte, +0x8028 mutex, +0x6018 the 1024-bucket machine-object hash table, whose
+# +0x1000 word (SS+0x7018) is the free-name range list), +0x7594/+0x7598 (the compile/link option words handed to the Sh* library). A hashed object: +0 next, +4 name, +8 refcount, +0xc free callback,
+# +0x10 tag (0x8b40 program, 0x8b48 shader); program: +0x18 info log, +0x1c log length, +0x20/+0x24 per-stage state (+0x4dc PP emulator program, +0x508 / +0x51c arrays, +0x518 sub-block),
+# +0x3c link-ok byte, +0x40 ShHandle, +0x44/+0x48 attached shader array + count; shader: +0x20 stage (0x8b30 fragment / 0x8b31 vertex), +0x24 needs-compile, +0x25 compiled-ok, +0x2c source, +0x30 compiler.
+type SHH 0x40
+type SUBBLK 0x30
+  ptr 0x08 SHH 50
+  ptr 0x0c SHH 50
+  ptr 0x18 SHH 50
+  ptr 0x1c SHH 50
+  ptr 0x20 SHH 50
+type PSTATE 0x540
+  u8 0x00 0 1
+  ptr 0x4dc SHH 60
+  u32 0x4e0 0 3
+  ptr 0x508 SHH 50
+  ptr 0x518 SUBBLK 50
+  ptr 0x51c SHH 50
+type GSHADER 0x60
+  u32 0x08 1 3
+  fn 0x0c
+  set 0x10 0x8b48
+  ptr 0x18 SHH 40
+  u32 0x1c 0 5
+  pick 0x20 0x8b30 0x8b31
+  u8 0x24 0 1
+  u8 0x25 0 1
+  ptr 0x2c SHH 60
+  ptr 0x30 SHH 80
+type GPROG 0x60
+  u32 0x08 1 3
+  fn 0x0c
+  pick 0x10 0x8b40 0x8b40 0x8b40 0x8b48
+  ptr 0x18 SHH 40
+  u32 0x1c 0 5
+  ptr 0x20 PSTATE
+  ptr 0x24 PSTATE
+  u8 0x3c 0 1
+  u8 0x3e 0 1
+  ptr 0x40 SHH 90
+  parr 0x44 GSHADER 0x48 0 3
+  ptr 0x4c SHH 30
+type GSS 0x8040
+  u8 0x8024 0 1
+  hash 0x6018 GPROG 0 4 4 0x3ff
+type GCTX 0x8800
+  pick 0x4a10 0x80000000 0xffff0000 0xc0000000 0x80000000 0x00010000
+  pick 0x7574 0 0 0x502
+  ptr 0x5148 GSS
+  rand 0x7594
+  rand 0x7598
+  u8 0x4693 0 1
+func _glCreateShaderObjectARB_Exec
+  arg 0 ptr GCTX
+  arg 1 pick 0x8b30 0x8b31 0x8b30 0x1234
+func _glBindAttribLocationARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 int 0 20
+  arg 3 str gl_Vertex|myattr|a|gl_|
+func _glGetAttribLocationARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 str gl_Vertex|myattr|a|
+func _gleFreeShaderObject
+  arg 0 ptr GCTX
+  arg 1 ptr GPROG
+func _gleFreeShaderObject
+  arg 0 ptr GCTX
+  arg 1 ptr GSHADER
+func _gleShaderParse
+  arg 0 ptr GCTX
+  arg 1 ptr GSHADER
+
+# ---- _glePPParse: the assembly-program parser front end ----------------------------------------------------------------------------------------------------------------------------
+# The PP* imports hand back library objects (parser, stream, chunk lists); here they are declared as graphs (`ret`) or modelled in fnfuzz.c gs_semantic (PPParserAttachStream sets parser+0x1c,
+# PPStreamChunkListAddChunk appends, ...CreateFromChunkList / ...CreateFromChunk clone, ...GetStream reports the node count). The parser is the object the _glePPPrune* functions read
+# (+0x1c stream, +0x442 flag byte, +0x464 / +0x468 limits); the program state `param_2` holds the stream (+0), the source (+4), a result array (+0x4bc) and the PP emulator program (+0x4d4).
+type PPLIST0 0x10
+# the parse succeeds only when every _glePPPrune* passes its count limit (stream list count <= parser +0x464 / +0x468): lists of 0..3 nodes, limits 4..8
+type PPLIST_P 0x10
+  list 0x00 PPNODE 0 3 8
+  u32 0x08 0 3
+type PPSTREAM_P 0x40
+  ptr 0x04 PPLIST_P
+  ptr 0x10 PPLIST_P
+  ptr 0x14 PPLIST_P
+  ptr 0x18 PPLIST_P
+  ptr 0x1c PPLIST_P
+  ptr 0x20 PPLIST_P
+type PPPARSER 0x4c0
+  rand 0x34
+  rand 0x38
+  bits 0x440 0xffffffff
+  u32 0x464 4 8
+  u32 0x468 4 8
+type PERRBUF 0x620
+type PU468C 0x120
+  pick 0x118 0 1 2 3
+type PCTX 0x5600
+  ptr 0x5148 GSS0
+  ptr 0x468c PU468C
+  ptr 0x5418 PERRBUF
+  pick 0x7574 0 0 0x502
+type GSS0 0xa000
+  u8 0x8024 0 1
+type PPOBJ 0x560
+  ptr 0x00 PPSTREAM 40
+  ptr 0x04 SHH 80
+  ptr 0x4bc SHH 50
+  ptr 0x4d4 SHH 60
+  u16 0x4ba 0 1
+func _glePPParse
+  arg 0 ptr PCTX
+  arg 1 ptr PPOBJ
+  arg 2 pick 0 1
+  ret PPParserCreate PPPARSER
+  ret PPStreamCreate PPSTREAM_P
+  ret PPStreamChunkListCreate PPLIST0
+  ret PPEmulatorProgramCreate SHH
+  retpick PPParserParse 0 0 0 0 0 5
+  retpick PPStreamChunkListGetMaxIndex 0 1 2 3
+  retpick PPStreamGetTexOperationCount 0 1 2 3
+  retpick PPStreamParamBindingIsEqual 0 0 0 0 1
+  retpick PPStreamAttribBindingIsEqual 0 0 0 0 1
+  retpick PPStreamOutputBindingIsEqual 0 0 0 0 1
