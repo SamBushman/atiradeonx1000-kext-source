@@ -507,7 +507,7 @@ int _glFrustum_Comp(int param_1,double fparam_1,double fparam_2,double fparam_3,
   float fVar3;
   float fVar4;
   float *pfVar5;
-  double dVar6;
+  float dVar6;
   
   if ((DOUBLE_00108d60 < fparam_5) && (DOUBLE_00108d60 < fparam_6)) {
     fVar1 = (float)(fparam_2 - fparam_1);
@@ -533,12 +533,12 @@ int _glFrustum_Comp(int param_1,double fparam_1,double fparam_2,double fparam_3,
             return 0;
           }
           dVar6 = (double)(float)(fparam_5 + fparam_5);
-          *pfVar5 = (float)(dVar6 * (double)(1.0 / fVar1));
+          *pfVar5 = (float)((double)dVar6 * (double)(1.0 / fVar1));
           pfVar5[2] = (float)((fparam_2 + fparam_1) * (double)(1.0 / fVar1));
           pfVar5[3] = (float)((fparam_4 + fparam_3) * (double)(1.0 / fVar2));
           pfVar5[4] = (float)((fparam_6 + fparam_5) * (double)(1.0 / fVar3));
-          pfVar5[5] = (float)(fparam_6 * dVar6 * (double)(1.0 / fVar3));
-          pfVar5[1] = (float)(dVar6 * (double)(1.0 / fVar2));
+          pfVar5[5] = (float)(fparam_6 * (double)dVar6 * (double)(1.0 / fVar3));
+          pfVar5[1] = (float)((double)dVar6 * (double)(1.0 / fVar2));
           return (int)pfVar5;
         }
       }

@@ -3086,7 +3086,7 @@ void _glPixelTransferf_Exec(int param_1,uint param_2,float fparam_1)
   undefined4 uVar1;
   uint uVar2;
   uint uVar3;
-  double dVar4;
+  float dVar4;
   
   if (-1 < *(short *)(param_1 + 0x4a10)) {
     if (*(int *)(param_1 + 0x7574) != 0) {
@@ -3232,7 +3232,7 @@ void _glPixelTransferf_Exec(int param_1,uint param_2,float fparam_1)
       }
 LAB_0007deb8:
       uVar2 = *(uint *)(param_1 + 0x3418) & ~uVar3;
-      if (fparam_1 != dVar4) {
+      if (fparam_1 != (double)dVar4) {
         uVar2 = uVar2 | uVar3;
       }
       *(uint *)(param_1 + 0x3418) = uVar2;
@@ -3363,7 +3363,7 @@ LAB_0007de90:
   }
 LAB_0007de98:
   uVar2 = *(uint *)(param_1 + 0x3414) & ~uVar3;
-  if (fparam_1 != dVar4) {
+  if (fparam_1 != (double)dVar4) {
     uVar2 = uVar2 | uVar3;
   }
   *(uint *)(param_1 + 0x3414) = uVar2;

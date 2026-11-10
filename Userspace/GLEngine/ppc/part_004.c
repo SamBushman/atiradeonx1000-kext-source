@@ -52,9 +52,9 @@ double _gleUpdateLightRGBASums(param_1, param_2, param_3)
   int iVar22;
   double dVar23;
   double dVar24;
-  double dVar25;
-  double dVar26;
-  double dVar27;
+  float dVar25;
+  float dVar26;
+  float dVar27;
   
   fVar3 = param_2[0x8f];
   bVar2 = *(byte *)((int)param_2 + 0x235) | *(byte *)(param_2 + 0x8d);
@@ -110,10 +110,10 @@ double _gleUpdateLightRGBASums(param_1, param_2, param_3)
     }
   }
   dVar26 = (double)param_2[0x10];
-  if (((bVar2 & 1) != 0) && (dVar26 != (double)param_2[0x7d])) {
+  if (((bVar2 & 1) != 0) && ((double)dVar26 != (double)param_2[0x7d])) {
     if ((uVar19 & 1) == 0) {
       param_2[0x7d] = param_2[0x10];
-      if (dVar26 <= (double)FLOAT_00108e80) {
+      if ((double)dVar26 <= (double)FLOAT_00108e80) {
         iVar22 = 0xb;
         param_2[0x81] = 1.0;
         param_2[0x7e] = 1.0;
@@ -132,23 +132,23 @@ double _gleUpdateLightRGBASums(param_1, param_2, param_3)
         dVar24 = _log(DOUBLE_00108dd8);
         fVar9 = FLOAT_00108f44;
         pfVar5 = param_2 + 0x82;
-        dVar24 = _exp(dVar24 / dVar26);
+        dVar24 = _exp(dVar24 / (double)dVar26);
         dVar25 = (double)(float)dVar24;
         dVar23 = (double)FLOAT_00108f40;
         param_2[0x7e] = (float)dVar24;
         dVar24 = DOUBLE_00108de0;
-        param_2[0x80] = (float)(dVar23 / dVar25);
-        param_2[0x7f] = fVar9 / (float)(dVar27 - dVar25);
-        dVar24 = _pow(dVar24,dVar26);
+        param_2[0x80] = (float)(dVar23 / (double)dVar25);
+        param_2[0x7f] = fVar9 / (dVar27 - dVar25);
+        dVar24 = _pow(dVar24,(double)dVar26);
         fVar4 = param_2[0x7e];
         param_2[0x81] = (float)(dVar24 - DOUBLE_00108d68);
         dVar24 = (double)fVar4;
         do {
           uVar8 = uVar8 + 1;
-          dVar23 = _pow(dVar24,dVar26);
+          dVar23 = _pow(dVar24,(double)dVar26);
           *pfVar5 = (float)dVar23;
           pfVar5 = pfVar5 + 1;
-          dVar24 = (double)(float)(dVar24 + (double)((float)(dVar27 - (double)fVar4) / fVar9));
+          dVar24 = (double)(float)(dVar24 + (double)((dVar27 - fVar4) / fVar9));
         } while (uVar8 < 10);
         param_2[0x8c] = 1.0;
       }
@@ -1591,7 +1591,7 @@ void _glVertex4f_Exec(param_1)
 }
 
 /* _glFrustum_Exec @ 0x31220 (660 bytes) */
-void _glFrustum_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glFrustum_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,float fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -1605,7 +1605,7 @@ void _glFrustum_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3
   float fVar10;
   undefined4 uVar11;
   float *pfVar12;
-  double dVar13;
+  float dVar13;
   
   pfVar12 = *(float **)(param_1 + 0x4fec);
   if ((*(short *)(param_1 + 0x4a10) < 0) && (*(int *)(param_1 + 0x4ff4) < 0x18)) {
@@ -1635,11 +1635,11 @@ void _glFrustum_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3
             fVar4 = (float)((fparam_4 + fparam_3) * (double)(1.0 / fVar2));
             fVar5 = (float)((fparam_2 + fparam_1) * (double)(1.0 / fVar1));
             fVar6 = (float)((fparam_6 + fparam_5) * (double)(1.0 / fVar3));
-            dVar13 = (double)(float)(fparam_5 + fparam_5);
-            fVar1 = (float)(dVar13 * (double)(1.0 / fVar1));
+            dVar13 = (double)(fparam_5 + fparam_5);
+            fVar1 = (float)((double)dVar13 * (double)(1.0 / fVar1));
             pfVar12[8] = (fVar7 * fVar6 + (*pfVar12 * fVar5 + pfVar12[4] * fVar4)) - pfVar12[0xc];
-            fVar3 = (float)(fparam_6 * dVar13 * (double)(1.0 / fVar3));
-            fVar2 = (float)(dVar13 * (double)(1.0 / fVar2));
+            fVar3 = (float)(fparam_6 * (double)dVar13 * (double)(1.0 / fVar3));
+            fVar2 = (float)((double)dVar13 * (double)(1.0 / fVar2));
             pfVar12[9] = (fVar8 * fVar6 + (pfVar12[1] * fVar5 + pfVar12[5] * fVar4)) - pfVar12[0xd];
             pfVar12[10] = (fVar9 * fVar6 + (pfVar12[2] * fVar5 + pfVar12[6] * fVar4)) - pfVar12[0xe];
             pfVar12[0xb] = (fVar10 * fVar6 + (pfVar12[3] * fVar5 + pfVar12[7] * fVar4)) - pfVar12[0xf]
@@ -2195,35 +2195,27 @@ int _gliDispatchNoop()
 }
 
 /* _glTranslate_Exec @ 0x32098 (448 bytes) */
-void _glTranslate_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glTranslate_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   float *pfVar1;
   uint uVar2;
   uint uVar3;
-  double dVar4;
-  double dVar5;
-  double dVar6;
-  double dVar7;
+  float dVar4;
+  float dVar5;
+  float dVar6;
+  float dVar7;
   
   pfVar1 = *(float **)(param_1 + 0x4fec);
   uVar3 = *(uint *)(param_1 + 0x50a8);
   if ((*(short *)(param_1 + 0x4a10) < 0) && (*(int *)(param_1 + 0x4ff4) < 0x18)) {
     pfVar1[0xc] = pfVar1[0xc] +
-                  (float)((double)pfVar1[8] * fparam_3 +
-                         (double)(float)((double)*pfVar1 * fparam_1 +
-                                        (double)(float)((double)pfVar1[4] * fparam_2)));
+                  (pfVar1[8] * fparam_3 + (*pfVar1 * fparam_1 + (pfVar1[4] * fparam_2)));
     pfVar1[0xd] = pfVar1[0xd] +
-                  (float)((double)pfVar1[9] * fparam_3 +
-                         (double)(float)((double)pfVar1[1] * fparam_1 +
-                                        (double)(float)((double)pfVar1[5] * fparam_2)));
+                  (pfVar1[9] * fparam_3 + (pfVar1[1] * fparam_1 + (pfVar1[5] * fparam_2)));
     pfVar1[0xe] = pfVar1[0xe] +
-                  (float)((double)pfVar1[10] * fparam_3 +
-                         (double)(float)((double)pfVar1[2] * fparam_1 +
-                                        (double)(float)((double)pfVar1[6] * fparam_2)));
+                  (pfVar1[10] * fparam_3 + (pfVar1[2] * fparam_1 + (pfVar1[6] * fparam_2)));
     pfVar1[0xf] = pfVar1[0xf] +
-                  (float)((double)pfVar1[0xb] * fparam_3 +
-                         (double)(float)((double)pfVar1[3] * fparam_1 +
-                                        (double)(float)((double)pfVar1[7] * fparam_2)));
+                  (pfVar1[0xb] * fparam_3 + (pfVar1[3] * fparam_1 + (pfVar1[7] * fparam_2)));
     uVar2 = *(uint *)(param_1 + 0x50b0);
     *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | uVar3;
     if ((uVar3 & ~uVar2 & *(uint *)(param_1 + 0x505c) & 0xfffffc) != 0) {
@@ -2233,18 +2225,18 @@ void _glTranslate_Exec(int param_1,double fparam_1,double fparam_2,double fparam
       dVar5 = (double)pfVar1[0xd];
       dVar6 = (double)pfVar1[0xe];
       dVar7 = (double)pfVar1[0xf];
-      *pfVar1 = -(float)(fparam_1 * dVar4 - (double)*pfVar1);
-      pfVar1[4] = -(float)(fparam_2 * dVar4 - (double)pfVar1[4]);
-      pfVar1[8] = -(float)(fparam_3 * dVar4 - (double)pfVar1[8]);
-      pfVar1[1] = -(float)(fparam_1 * dVar5 - (double)pfVar1[1]);
-      pfVar1[5] = -(float)(fparam_2 * dVar5 - (double)pfVar1[5]);
-      pfVar1[0xb] = -(float)(fparam_3 * dVar7 - (double)pfVar1[0xb]);
-      pfVar1[9] = -(float)(fparam_3 * dVar5 - (double)pfVar1[9]);
-      pfVar1[2] = -(float)(fparam_1 * dVar6 - (double)pfVar1[2]);
-      pfVar1[6] = -(float)(fparam_2 * dVar6 - (double)pfVar1[6]);
-      pfVar1[10] = -(float)(fparam_3 * dVar6 - (double)pfVar1[10]);
-      pfVar1[3] = -(float)(fparam_1 * dVar7 - (double)pfVar1[3]);
-      pfVar1[7] = -(float)(fparam_2 * dVar7 - (double)pfVar1[7]);
+      *pfVar1 = -(fparam_1 * dVar4 - *pfVar1);
+      pfVar1[4] = -(fparam_2 * dVar4 - pfVar1[4]);
+      pfVar1[8] = -(fparam_3 * dVar4 - pfVar1[8]);
+      pfVar1[1] = -(fparam_1 * dVar5 - pfVar1[1]);
+      pfVar1[5] = -(fparam_2 * dVar5 - pfVar1[5]);
+      pfVar1[0xb] = -(fparam_3 * dVar7 - pfVar1[0xb]);
+      pfVar1[9] = -(fparam_3 * dVar5 - pfVar1[9]);
+      pfVar1[2] = -(fparam_1 * dVar6 - pfVar1[2]);
+      pfVar1[6] = -(fparam_2 * dVar6 - pfVar1[6]);
+      pfVar1[10] = -(fparam_3 * dVar6 - pfVar1[10]);
+      pfVar1[3] = -(fparam_1 * dVar7 - pfVar1[3]);
+      pfVar1[7] = -(fparam_2 * dVar7 - pfVar1[7]);
       uVar2 = *(uint *)(param_1 + 0x50b0);
     }
     *(uint *)(param_1 + 0x50b0) = uVar2 | uVar3;
@@ -2373,16 +2365,16 @@ void _glRotateZ_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3,d
   if ((*(short *)(param_1 + 0x4a10) < 0) && (*(int *)(param_1 + 0x4ff4) < 0x18)) {
     fVar1 = pfVar3[4];
     fVar2 = pfVar3[1];
-    pfVar3[4] = (float)((double)fVar1 * fparam_2 - (double)(float)((double)*pfVar3 * fparam_1));
-    *pfVar3 = (float)((double)*pfVar3 * fparam_2 + (double)(float)((double)fVar1 * fparam_1));
+    pfVar3[4] = (fVar1 * fparam_2 - (*pfVar3 * fparam_1));
+    *pfVar3 = (*pfVar3 * fparam_2 + (fVar1 * fparam_1));
     fVar1 = pfVar3[6];
-    pfVar3[1] = (float)((double)fVar2 * fparam_2 + (double)(float)((double)pfVar3[5] * fparam_1));
-    pfVar3[5] = (float)((double)pfVar3[5] * fparam_2 - (double)(float)((double)fVar2 * fparam_1));
+    pfVar3[1] = (fVar2 * fparam_2 + (pfVar3[5] * fparam_1));
+    pfVar3[5] = (pfVar3[5] * fparam_2 - (fVar2 * fparam_1));
     fVar2 = pfVar3[3];
-    pfVar3[6] = (float)((double)fVar1 * fparam_2 - (double)(float)((double)pfVar3[2] * fparam_1));
-    pfVar3[2] = (float)((double)pfVar3[2] * fparam_2 + (double)(float)((double)fVar1 * fparam_1));
-    pfVar3[3] = (float)((double)fVar2 * fparam_2 + (double)(float)((double)pfVar3[7] * fparam_1));
-    pfVar3[7] = (float)((double)pfVar3[7] * fparam_2 - (double)(float)((double)fVar2 * fparam_1));
+    pfVar3[6] = (fVar1 * fparam_2 - (pfVar3[2] * fparam_1));
+    pfVar3[2] = (pfVar3[2] * fparam_2 + (fVar1 * fparam_1));
+    pfVar3[3] = (fVar2 * fparam_2 + (pfVar3[7] * fparam_1));
+    pfVar3[7] = (pfVar3[7] * fparam_2 - (fVar2 * fparam_1));
     uVar4 = *(uint *)(param_1 + 0x50b0);
     *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | uVar5;
     if ((uVar5 & ~uVar4 & *(uint *)(param_1 + 0x505c) & 0xfffffc) != 0) {
@@ -2390,16 +2382,16 @@ void _glRotateZ_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3,d
       uVar5 = uVar5 & 0xff000003;
       fVar1 = pfVar3[4];
       fVar2 = pfVar3[1];
-      pfVar3[4] = (float)((double)fVar1 * fparam_2 - (double)(float)((double)*pfVar3 * fparam_1));
-      *pfVar3 = (float)((double)*pfVar3 * fparam_2 + (double)(float)((double)fVar1 * fparam_1));
+      pfVar3[4] = (fVar1 * fparam_2 - (*pfVar3 * fparam_1));
+      *pfVar3 = (*pfVar3 * fparam_2 + (fVar1 * fparam_1));
       fVar1 = pfVar3[6];
-      pfVar3[1] = (float)((double)fVar2 * fparam_2 + (double)(float)((double)pfVar3[5] * fparam_1));
-      pfVar3[5] = (float)((double)pfVar3[5] * fparam_2 - (double)(float)((double)fVar2 * fparam_1));
+      pfVar3[1] = (fVar2 * fparam_2 + (pfVar3[5] * fparam_1));
+      pfVar3[5] = (pfVar3[5] * fparam_2 - (fVar2 * fparam_1));
       fVar2 = pfVar3[3];
-      pfVar3[6] = (float)((double)fVar1 * fparam_2 - (double)(float)((double)pfVar3[2] * fparam_1));
-      pfVar3[2] = (float)((double)pfVar3[2] * fparam_2 + (double)(float)((double)fVar1 * fparam_1));
-      pfVar3[3] = (float)((double)fVar2 * fparam_2 + (double)(float)((double)pfVar3[7] * fparam_1));
-      pfVar3[7] = (float)((double)pfVar3[7] * fparam_2 - (double)(float)((double)fVar2 * fparam_1));
+      pfVar3[6] = (fVar1 * fparam_2 - (pfVar3[2] * fparam_1));
+      pfVar3[2] = (pfVar3[2] * fparam_2 + (fVar1 * fparam_1));
+      pfVar3[3] = (fVar2 * fparam_2 + (pfVar3[7] * fparam_1));
+      pfVar3[7] = (pfVar3[7] * fparam_2 - (fVar2 * fparam_1));
       uVar4 = *(uint *)(param_1 + 0x50b0);
     }
     *(uint *)(param_1 + 0x50b0) = uVar4 | uVar5;
@@ -2426,17 +2418,16 @@ void _glRotateY_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3,d
   if ((*(short *)(param_1 + 0x4a10) < 0) && (*(int *)(param_1 + 0x4ff4) < 0x18)) {
     fVar1 = pfVar3[8];
     fVar2 = pfVar3[1];
-    pfVar3[8] = (float)((double)fVar1 * fparam_2 + (double)(float)((double)*pfVar3 * fparam_1));
-    *pfVar3 = (float)((double)*pfVar3 * fparam_2 - (double)(float)((double)fVar1 * fparam_1));
+    pfVar3[8] = (fVar1 * fparam_2 + (*pfVar3 * fparam_1));
+    *pfVar3 = (*pfVar3 * fparam_2 - (fVar1 * fparam_1));
     fVar1 = pfVar3[10];
-    pfVar3[1] = (float)((double)fVar2 * fparam_2 - (double)(float)((double)pfVar3[9] * fparam_1));
-    pfVar3[9] = (float)((double)pfVar3[9] * fparam_2 + (double)(float)((double)fVar2 * fparam_1));
+    pfVar3[1] = (fVar2 * fparam_2 - (pfVar3[9] * fparam_1));
+    pfVar3[9] = (pfVar3[9] * fparam_2 + (fVar2 * fparam_1));
     fVar2 = pfVar3[3];
-    pfVar3[10] = (float)((double)fVar1 * fparam_2 + (double)(float)((double)pfVar3[2] * fparam_1));
-    pfVar3[2] = (float)((double)pfVar3[2] * fparam_2 - (double)(float)((double)fVar1 * fparam_1));
-    pfVar3[3] = (float)((double)fVar2 * fparam_2 - (double)(float)((double)pfVar3[0xb] * fparam_1));
-    pfVar3[0xb] = (float)((double)pfVar3[0xb] * fparam_2 + (double)(float)((double)fVar2 * fparam_1)
-                         );
+    pfVar3[10] = (fVar1 * fparam_2 + (pfVar3[2] * fparam_1));
+    pfVar3[2] = (pfVar3[2] * fparam_2 - (fVar1 * fparam_1));
+    pfVar3[3] = (fVar2 * fparam_2 - (pfVar3[0xb] * fparam_1));
+    pfVar3[0xb] = (pfVar3[0xb] * fparam_2 + (fVar2 * fparam_1));
     uVar4 = *(uint *)(param_1 + 0x50b0);
     *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | uVar5;
     if ((uVar5 & ~uVar4 & *(uint *)(param_1 + 0x505c) & 0xfffffc) != 0) {
@@ -2444,19 +2435,17 @@ void _glRotateY_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3,d
       uVar5 = uVar5 & 0xff000003;
       fVar1 = pfVar3[8];
       fVar2 = pfVar3[1];
-      pfVar3[8] = (float)((double)fVar1 * fparam_2 + (double)(float)((double)*pfVar3 * fparam_1));
-      *pfVar3 = (float)((double)*pfVar3 * fparam_2 - (double)(float)((double)fVar1 * fparam_1));
+      pfVar3[8] = (fVar1 * fparam_2 + (*pfVar3 * fparam_1));
+      *pfVar3 = (*pfVar3 * fparam_2 - (fVar1 * fparam_1));
       fVar1 = pfVar3[10];
-      pfVar3[1] = (float)((double)fVar2 * fparam_2 - (double)(float)((double)pfVar3[9] * fparam_1));
-      pfVar3[9] = (float)((double)pfVar3[9] * fparam_2 + (double)(float)((double)fVar2 * fparam_1));
+      pfVar3[1] = (fVar2 * fparam_2 - (pfVar3[9] * fparam_1));
+      pfVar3[9] = (pfVar3[9] * fparam_2 + (fVar2 * fparam_1));
       fVar2 = pfVar3[3];
-      pfVar3[10] = (float)((double)fVar1 * fparam_2 + (double)(float)((double)pfVar3[2] * fparam_1))
+      pfVar3[10] = (fVar1 * fparam_2 + (pfVar3[2] * fparam_1))
       ;
-      pfVar3[2] = (float)((double)pfVar3[2] * fparam_2 - (double)(float)((double)fVar1 * fparam_1));
-      pfVar3[3] = (float)((double)fVar2 * fparam_2 - (double)(float)((double)pfVar3[0xb] * fparam_1)
-                         );
-      pfVar3[0xb] = (float)((double)pfVar3[0xb] * fparam_2 +
-                           (double)(float)((double)fVar2 * fparam_1));
+      pfVar3[2] = (pfVar3[2] * fparam_2 - (fVar1 * fparam_1));
+      pfVar3[3] = (fVar2 * fparam_2 - (pfVar3[0xb] * fparam_1));
+      pfVar3[0xb] = (pfVar3[0xb] * fparam_2 + (fVar2 * fparam_1));
       uVar4 = *(uint *)(param_1 + 0x50b0);
     }
     *(uint *)(param_1 + 0x50b0) = uVar4 | uVar5;
@@ -2470,18 +2459,18 @@ void _glRotateY_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3,d
 }
 
 /* _glScale_Exec @ 0x327b0 (684 bytes) */
-void _glScale_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3)
+void _glScale_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   float fVar1;
   float fVar2;
-  double dVar3;
+  float dVar3;
   float *pfVar4;
   uint uVar5;
   uint uVar6;
-  double dVar7;
-  double dVar8;
-  double dVar9;
-  double dVar10;
+  float dVar7;
+  float dVar8;
+  float dVar9;
+  float dVar10;
   
   pfVar4 = *(float **)(param_1 + 0x4fec);
   uVar6 = *(uint *)(param_1 + 0x50a8);
@@ -2492,18 +2481,18 @@ void _glScale_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3)
     *(undefined4 *)(param_1 + 0x7574) = 0x502;
     return;
   }
-  *pfVar4 = (float)((double)*pfVar4 * fparam_1);
-  pfVar4[4] = (float)((double)pfVar4[4] * fparam_2);
-  pfVar4[8] = (float)((double)pfVar4[8] * fparam_3);
-  pfVar4[1] = (float)((double)pfVar4[1] * fparam_1);
-  pfVar4[0xb] = (float)((double)pfVar4[0xb] * fparam_3);
-  pfVar4[5] = (float)((double)pfVar4[5] * fparam_2);
-  pfVar4[9] = (float)((double)pfVar4[9] * fparam_3);
-  pfVar4[2] = (float)((double)pfVar4[2] * fparam_1);
-  pfVar4[6] = (float)((double)pfVar4[6] * fparam_2);
-  pfVar4[10] = (float)((double)pfVar4[10] * fparam_3);
-  pfVar4[3] = (float)((double)pfVar4[3] * fparam_1);
-  pfVar4[7] = (float)((double)pfVar4[7] * fparam_2);
+  *pfVar4 = (*pfVar4 * fparam_1);
+  pfVar4[4] = (pfVar4[4] * fparam_2);
+  pfVar4[8] = (pfVar4[8] * fparam_3);
+  pfVar4[1] = (pfVar4[1] * fparam_1);
+  pfVar4[0xb] = (pfVar4[0xb] * fparam_3);
+  pfVar4[5] = (pfVar4[5] * fparam_2);
+  pfVar4[9] = (pfVar4[9] * fparam_3);
+  pfVar4[2] = (pfVar4[2] * fparam_1);
+  pfVar4[6] = (pfVar4[6] * fparam_2);
+  pfVar4[10] = (pfVar4[10] * fparam_3);
+  pfVar4[3] = (pfVar4[3] * fparam_1);
+  pfVar4[7] = (pfVar4[7] * fparam_2);
   *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | uVar6;
   fVar1 = FLOAT_00108eb4;
   if (*(char *)(param_1 + 0x280e) == '\0') {
@@ -2514,17 +2503,17 @@ void _glScale_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3)
     dVar9 = (double)FLOAT_00108e54;
     pfVar4 = *(float **)(param_1 + 0x4ff0);
     dVar3 = fparam_1;
-    if (fparam_1 < dVar8) {
+    if (fparam_1 < (double)dVar8) {
       dVar3 = -fparam_1;
     }
-    if (dVar3 < dVar10) {
+    if ((double)dVar3 < (double)dVar10) {
       fVar2 = FLOAT_00108eb4;
-      if (fparam_1 < dVar8) {
+      if (fparam_1 < (double)dVar8) {
         fVar2 = -FLOAT_00108eb4;
       }
     }
     else {
-      fVar2 = (float)(dVar9 / fparam_1);
+      fVar2 = (dVar9 / fparam_1);
     }
     dVar7 = (double)FLOAT_00108e50;
     *pfVar4 = *pfVar4 * fVar2;
@@ -2532,17 +2521,17 @@ void _glScale_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3)
     pfVar4[3] = pfVar4[3] * fVar2;
     pfVar4[1] = pfVar4[1] * fVar2;
     dVar3 = fparam_2;
-    if (fparam_2 < dVar7) {
+    if (fparam_2 < (double)dVar7) {
       dVar3 = -fparam_2;
     }
-    if (dVar3 < dVar10) {
+    if ((double)dVar3 < (double)dVar10) {
       fVar2 = fVar1;
-      if (fparam_2 < dVar8) {
+      if (fparam_2 < (double)dVar8) {
         fVar2 = -fVar1;
       }
     }
     else {
-      fVar2 = (float)(dVar9 / fparam_2);
+      fVar2 = (dVar9 / fparam_2);
     }
     dVar7 = (double)FLOAT_00108e50;
     pfVar4[4] = pfVar4[4] * fVar2;
@@ -2550,16 +2539,16 @@ void _glScale_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3)
     pfVar4[7] = pfVar4[7] * fVar2;
     pfVar4[5] = pfVar4[5] * fVar2;
     dVar3 = fparam_3;
-    if (fparam_3 < dVar7) {
+    if (fparam_3 < (double)dVar7) {
       dVar3 = -fparam_3;
     }
-    if (dVar3 < dVar10) {
-      if (fparam_3 < dVar8) {
+    if ((double)dVar3 < (double)dVar10) {
+      if (fparam_3 < (double)dVar8) {
         fVar1 = -fVar1;
       }
     }
     else {
-      fVar1 = (float)(dVar9 / fparam_3);
+      fVar1 = (dVar9 / fparam_3);
     }
     uVar6 = uVar6 & 0xff000003;
     pfVar4[8] = pfVar4[8] * fVar1;

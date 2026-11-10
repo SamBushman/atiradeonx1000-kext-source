@@ -1773,8 +1773,8 @@ void _glBlendColor_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3
 {
   float fVar1;
   float fVar2;
-  double dVar3;
-  double dVar4;
+  float dVar3;
+  float dVar4;
   
   fVar2 = FLOAT_00108e54;
   fVar1 = FLOAT_00108e50;
@@ -1788,8 +1788,8 @@ void _glBlendColor_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3
   dVar3 = (double)FLOAT_00108e50;
   dVar4 = (double)FLOAT_00108e54;
   *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 4;
-  if (dVar3 <= fparam_1) {
-    if (fparam_1 <= dVar4) {
+  if ((double)dVar3 <= fparam_1) {
+    if (fparam_1 <= (double)dVar4) {
       *(float *)(param_1 + 0x30d0) = (float)fparam_1;
     }
     else {
@@ -1799,8 +1799,8 @@ void _glBlendColor_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3
   else {
     *(float *)(param_1 + 0x30d0) = fVar1;
   }
-  if (dVar3 <= fparam_2) {
-    if (fparam_2 <= dVar4) {
+  if ((double)dVar3 <= fparam_2) {
+    if (fparam_2 <= (double)dVar4) {
       *(float *)(param_1 + 0x30d4) = (float)fparam_2;
     }
     else {
@@ -1810,8 +1810,8 @@ void _glBlendColor_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3
   else {
     *(float *)(param_1 + 0x30d4) = fVar1;
   }
-  if (dVar3 <= fparam_3) {
-    if (fparam_3 <= dVar4) {
+  if ((double)dVar3 <= fparam_3) {
+    if (fparam_3 <= (double)dVar4) {
       *(float *)(param_1 + 0x30d8) = (float)fparam_3;
     }
     else {
@@ -1821,11 +1821,11 @@ void _glBlendColor_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3
   else {
     *(float *)(param_1 + 0x30d8) = fVar1;
   }
-  if (fparam_4 < dVar3) {
+  if (fparam_4 < (double)dVar3) {
     *(float *)(param_1 + 0x30dc) = fVar1;
     return;
   }
-  if (dVar4 < fparam_4) {
+  if ((double)dVar4 < fparam_4) {
     *(float *)(param_1 + 0x30dc) = fVar2;
     return;
   }

@@ -999,7 +999,7 @@ void _glClearAccum_Comp(undefined4 param_1,double fparam_1,double fparam_2,doubl
 void _glClearAccum_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   float fVar1;
-  double dVar2;
+  float dVar2;
   
   fVar1 = FLOAT_00108e58;
   if (-1 < *(short *)(param_1 + 0x4a10)) {
@@ -1011,7 +1011,7 @@ void _glClearAccum_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3
   }
   dVar2 = (double)FLOAT_00108e58;
   *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x40;
-  if (dVar2 <= fparam_1) {
+  if ((double)dVar2 <= fparam_1) {
     if (fparam_1 <= 1.0) {
       *(float *)(param_1 + 0x30f0) = (float)fparam_1;
     }
@@ -1151,12 +1151,12 @@ float * _glClearIndex_Comp(undefined4 param_1,double fparam_1)
 /* _glClearIndex_Exec @ 0x59e94 (84 bytes) */
 void _glClearIndex_Exec(int param_1,float fparam_1)
 {
-  double dVar1;
+  float dVar1;
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
     dVar1 = (double)FLOAT_00108e5c;
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 8;
-    *(float *)(param_1 + 0x3110) = (float)(fparam_1 * dVar1);
+    *(float *)(param_1 + 0x3110) = (fparam_1 * dVar1);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1616,7 +1616,7 @@ float * _glColor3f_Comp(undefined4 param_1,double fparam_1,double fparam_2,doubl
 }
 
 /* _glColor3f_CompExec @ 0x5aa1c (216 bytes) */
-void _glColor3f_CompExec(int param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glColor3f_CompExec(int param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   ((float * (*)())_glColor3f_Comp)(param_1,fparam_1,fparam_2,fparam_3);
   if (*(char *)(param_1 + 0x4df8) != '\0') {

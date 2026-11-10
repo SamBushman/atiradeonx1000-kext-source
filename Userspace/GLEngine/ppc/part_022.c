@@ -37,13 +37,13 @@ float * _glPixelZoom_Comp(undefined4 param_1,double fparam_1,double fparam_2)
 void _glPixelZoom_Exec(int param_1,float fparam_1,float fparam_2)
 {
   uint uVar1;
-  double dVar2;
+  float dVar2;
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
     *(float *)(param_1 + 0x31a8) = (float)fparam_1;
     dVar2 = (double)FLOAT_00108e54;
     *(float *)(param_1 + 0x31ac) = (float)fparam_2;
-    if (fparam_1 == dVar2) {
+    if (fparam_1 == (double)dVar2) {
       uVar1 = *(uint *)(param_1 + 0x3414) & 0xffffbfff;
     }
     else {
@@ -335,7 +335,7 @@ void _glPointParameterfv_Exec(param_1, param_2, param_3)
   uint uVar3;
   int iVar4;
   int iVar5;
-  double dVar6;
+  float dVar6;
   
   if (param_2 == 0x8127) {
     bVar1 = *(int *)(param_1 + 0x5434) == 0;
@@ -356,8 +356,8 @@ LAB_0007e788:
     if (param_2 < 0x8128) {
       if (param_2 == 0x60b3) {
         dVar6 = (double)*param_3;
-        if (DOUBLE_00108d80 <= dVar6) {
-          uVar3 = (int)(dVar6 - DOUBLE_00108d80) ^ 0x80000000;
+        if (DOUBLE_00108d80 <= (double)dVar6) {
+          uVar3 = (int)((double)dVar6 - DOUBLE_00108d80) ^ 0x80000000;
         }
         else {
           uVar3 = (uint)(int)*param_3;
@@ -388,8 +388,8 @@ LAB_0007e920:
       if (0x8128 < param_2) {
         if (param_2 != 0x8863) goto LAB_0007e920;
         dVar6 = (double)*param_3;
-        if (DOUBLE_00108d80 <= dVar6) {
-          uVar3 = (int)(dVar6 - DOUBLE_00108d80) ^ 0x80000000;
+        if (DOUBLE_00108d80 <= (double)dVar6) {
+          uVar3 = (int)((double)dVar6 - DOUBLE_00108d80) ^ 0x80000000;
         }
         else {
           uVar3 = (uint)(int)*param_3;

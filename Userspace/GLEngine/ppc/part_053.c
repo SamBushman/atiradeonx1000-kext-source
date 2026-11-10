@@ -1848,10 +1848,10 @@ double _gleSphereGenST(undefined4 param_1,undefined4 param_2,float *param_3,floa
   undefined4 in_r7;
   undefined4 in_r8;
   double dVar2;
-  double dVar3;
-  double dVar4;
-  double dVar5;
-  double dVar6;
+  float dVar3;
+  float dVar4;
+  float dVar5;
+  float dVar6;
   float local_30;
   float local_2c;
   float local_28;
@@ -1861,17 +1861,17 @@ double _gleSphereGenST(undefined4 param_1,undefined4 param_2,float *param_3,floa
   fVar1 = fVar1 + fVar1;
   dVar4 = -(double)(param_3[1] * fVar1 - local_2c);
   dVar3 = -(double)(*param_3 * fVar1 - local_30);
-  fVar1 = (float)(-(double)(param_3[2] * fVar1 - local_28) + (double)FLOAT_00108e54);
-  fVar1 = fVar1 * fVar1 + (float)(dVar3 * dVar3 + (double)(float)(dVar4 * dVar4));
+  fVar1 = (-(param_3[2] * fVar1 - local_28) + FLOAT_00108e54);
+  fVar1 = fVar1 * fVar1 + (dVar3 * dVar3 + (dVar4 * dVar4));
   dVar5 = (double)fVar1;
   dVar2 = (double)FLOAT_00108e50;
-  if (((double)FLOAT_00108e50 < dVar5) && (dVar2 = dVar5, dVar5 != (double)FLOAT_00108e54)) {
+  if (((double)FLOAT_00108e50 < (double)dVar5) && (dVar2 = (double)dVar5, (double)dVar5 != (double)FLOAT_00108e54)) {
     dVar2 = (double)(float)(0x5f375a00 - ((uint)GH_F2U(fVar1) >> 1));
-    dVar6 = (double)(float)((double)(float)(dVar5 * dVar2) * dVar2);
-    dVar5 = (double)(float)(DOUBLE_00108e40 - dVar6);
-    dVar2 = (double)(float)(dVar2 * DOUBLE_00108e38 * dVar5 *
+    dVar6 = (double)(float)((double)(float)((double)dVar5 * dVar2) * dVar2);
+    dVar5 = (double)(float)(DOUBLE_00108e40 - (double)dVar6);
+    dVar2 = (double)(float)(dVar2 * DOUBLE_00108e38 * (double)dVar5 *
                            (DOUBLE_00108e48 -
-                           (double)(float)((double)(float)(dVar6 * dVar5) * dVar5)));
+                           (double)((dVar6 * dVar5) * dVar5)));
   }
   if (dVar2 <= (double)FLOAT_00108e80) {
     param_4[1] = 0.5;
@@ -1879,8 +1879,8 @@ double _gleSphereGenST(undefined4 param_1,undefined4 param_2,float *param_3,floa
   }
   else {
     dVar5 = (double)FLOAT_00108e90;
-    param_4[1] = (float)(dVar4 * dVar2 + dVar5);
-    *param_4 = (float)(dVar3 * dVar2 + dVar5);
+    param_4[1] = (float)((double)dVar4 * dVar2 + (double)dVar5);
+    *param_4 = (float)((double)dVar3 * dVar2 + (double)dVar5);
   }
   return;
 }

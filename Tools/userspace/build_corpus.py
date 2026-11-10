@@ -46,6 +46,9 @@ if os.path.exists(_fpf):
         _t2 = re.sub(r'(?m)^((?:extern )?\w[\w \*]*?\b(\w+)\()([^)\n]*\bfparam_[^)\n]*)', _retype, _t)
         if _t2 != _t: open(_f, 'w').write(_t2)
     print('float parameters retyped: %d (%d functions)' % (_nf, len(_fp)))
+# single-precision arithmetic: Ghidra prints `fsubs` / `fmadds` as double arithmetic rounded to float, gcc compiles that to a double op + frsp (GLEngine only: its stock code has ~no frsp)
+if _env['CORPUS_SCOPE'] == 'gleng':
+    subprocess.run(['python3', here + '/narrow_float_ops.py', out], check=True)
 name = os.path.basename(out.rstrip('/'))
 tmp = '/tmp/bc_%s_%s' % (name, arch)
 subprocess.run('rm -rf %s && mkdir -p %s && cp -r %s %s/corpus' % (tmp, tmp, out, tmp), shell=True, check=True)

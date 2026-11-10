@@ -65,7 +65,7 @@ void _gleTransformNormalBlend(int param_1,uint param_2,int param_3,double fparam
   int iVar16;
   uint uVar17;
   uint uVar18;
-  double dVar19;
+  float dVar19;
   
   iVar13 = param_3 * 0x100;
   bVar1 = *(byte *)(param_1 + 0x4660);
@@ -102,13 +102,13 @@ void _gleTransformNormalBlend(int param_1,uint param_2,int param_3,double fparam
           fVar11 = *(float *)(uVar17 + 0x48);
           fVar12 = *(float *)(iVar16 * 4 + uVar17 + 0x60);
           *(float *)(uVar17 + 0xf0) =
-               fVar12 * (fVar11 * fVar7 + (float)(dVar19 * (double)fVar2 + (double)(fVar10 * fVar4))
+               fVar12 * (fVar11 * fVar7 + (dVar19 * fVar2 + (fVar10 * fVar4))
                         ) + *(float *)(uVar17 + 0xf0);
           *(float *)(uVar17 + 0xf8) =
-               fVar12 * (fVar11 * fVar9 + (float)(dVar19 * fparam_1 + (double)(fVar10 * fVar6))) +
+               fVar12 * (fVar11 * fVar9 + (float)((double)dVar19 * fparam_1 + (double)(fVar10 * fVar6))) +
                *(float *)(uVar17 + 0xf8);
           *(float *)(uVar17 + 0xf4) =
-               fVar12 * (fVar11 * fVar8 + (float)(dVar19 * (double)fVar3 + (double)(fVar10 * fVar5))
+               fVar12 * (fVar11 * fVar8 + (dVar19 * fVar3 + (fVar10 * fVar5))
                         ) + *(float *)(uVar17 + 0xf4);
           uVar17 = uVar17 + 0x100;
           uVar18 = uVar18 - 1;
@@ -3004,8 +3004,8 @@ void _CopySourceSubImageToTexture(int param_1,undefined4 param_2,undefined4 para
   int iVar4;
   int *piVar5;
   undefined4 uVar6;
-  double dVar7;
-  double dVar8;
+  float dVar7;
+  float dVar8;
   int local_e0;
   int local_dc;
   undefined1 auStack_d8 [4];
@@ -3047,7 +3047,7 @@ void _CopySourceSubImageToTexture(int param_1,undefined4 param_2,undefined4 para
   dVar8 = (double)*(float *)(param_1 + 0x31ac);
   local_c0 = 2;
   local_bc = 0;
-  if ((dVar8 <= DOUBLE_00108dc8) || (DOUBLE_00108d68 <= dVar8)) {
+  if (((double)dVar8 <= DOUBLE_00108dc8) || (DOUBLE_00108d68 <= (double)dVar8)) {
     local_b8 = 0x6efff;
   }
   else {
@@ -3072,23 +3072,23 @@ void _CopySourceSubImageToTexture(int param_1,undefined4 param_2,undefined4 para
   dVar7 = (double)FLOAT_00108e50;
   uVar6 = *(undefined4 *)(param_1 + 0x31a8);
   *(undefined4 *)(param_1 + 0x31a8) = 0x3f800000;
-  if (dVar7 <= dVar8) {
+  if ((double)dVar7 <= (double)dVar8) {
     local_50 = 0x3f800000;
-    if (1.0 < dVar8) goto LAB_000c99b8;
+    if (1.0 < (double)dVar8) goto LAB_000c99b8;
   }
-  else if (dVar8 < (double)FLOAT_00108e58) goto LAB_000c99b8;
-  if ((double)FLOAT_00108e50 <= dVar8) {
-    fparam_4 = (double)(float)(fparam_4 * dVar8);
+  else if ((double)dVar8 < (double)FLOAT_00108e58) goto LAB_000c99b8;
+  if ((double)FLOAT_00108e50 <= (double)dVar8) {
+    fparam_4 = (double)(float)(fparam_4 * (double)dVar8);
   }
   else {
-    fparam_4 = (double)(float)(fparam_4 * -dVar8);
+    fparam_4 = (double)(float)(fparam_4 * -(double)dVar8);
   }
 LAB_000c99b8:
   *(float *)(param_1 + 0x31ac) = (float)fparam_4;
   local_b4 = param_7;
   local_b0 = param_8;
   _glgProcessPixels(param_1 + 0x31a8,&local_e0,puVar1,puVar2,param_3,iVar3,iVar4,piVar5);
-  *(float *)(param_1 + 0x31ac) = (float)dVar8;
+  *(float *)(param_1 + 0x31ac) = (float)(double)dVar8;
   *(undefined4 *)(param_1 + 0x31a8) = uVar6;
   FUN_00008b68();
   return;
@@ -3486,8 +3486,7 @@ uint _pixelBoundaryBottomLeft(float fparam_1)
   uint uVar1;
   
   uVar1 = (uint)(int)fparam_1;
-  if ((float)(fparam_1 -
-             (double)(float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58)) <=
+  if ((fparam_1 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58)) <=
       FLOAT_00108e90) {
     return uVar1;
   }
@@ -3500,8 +3499,7 @@ uint _pixelBoundaryTopRight(float fparam_1)
   uint uVar1;
   
   uVar1 = (uint)(int)fparam_1;
-  if ((float)(fparam_1 -
-             (double)(float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58)) <=
+  if ((fparam_1 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58)) <=
       FLOAT_00108e90) {
     return uVar1;
   }
@@ -3585,8 +3583,8 @@ int _gleDrawPixelsFast(param_1, param_2, param_3, param_4, param_5, param_6)
   double in_f6;
   double in_f7;
   double in_f8;
-  double dVar35;
-  double dVar36;
+  float dVar35;
+  float dVar36;
   double fparam_3;
   double fparam_1_00;
   double dVar37;
@@ -3594,7 +3592,7 @@ int _gleDrawPixelsFast(param_1, param_2, param_3, param_4, param_5, param_6)
   double f2;
   double fparam_4;
   double fparam_3_01;
-  double dVar38;
+  float dVar38;
   double fparam_2;
   double dVar39;
   undefined4 in_stack_fffffd90;
@@ -3758,15 +3756,15 @@ LAB_000ca704:
       uStack_114 = local_224 ^ 0x80000000;
       local_120 = 0x43300000;
       dVar35 = (double)(float)((double)CONCAT44(0x43300000,uStack_114) - dVar39);
-      fVar2 = (float)(dVar35 + dVar38);
+      fVar2 = (dVar35 + dVar38);
       if ((float)((double)CONCAT44(0x43300000,uStack_11c) - dVar39) < fVar2) {
         local_110 = 0x43300000;
         uStack_10c = uVar31 - local_224 ^ 0x80000000;
         dVar38 = (double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar39);
-        fVar2 = (float)(dVar35 + dVar38);
+        fVar2 = (dVar35 + dVar38);
       }
       dVar35 = (double)FLOAT_00108f18;
-      fVar4 = (float)((double)(float)(dVar38 * dVar12) * fparam_3 + (double)local_234);
+      fVar4 = (float)((double)(float)((double)dVar38 * dVar12) * fparam_3 + (double)local_234);
       uStack_10c = ((int (*)())_pixelCenters)((double)local_234,(double)fVar4,fparam_3_00);
       local_110 = 0x43300000;
       uStack_10c = uStack_10c ^ 0x80000000;
@@ -3797,15 +3795,15 @@ LAB_000ca704:
           uStack_10c = local_22c ^ 0x80000000;
           local_118 = 0x43300000;
           dVar36 = (double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar13);
-          fVar3 = (float)(dVar36 + dVar35);
+          fVar3 = (dVar36 + dVar35);
           if ((float)((double)CONCAT44(0x43300000,uStack_114) - dVar13) < fVar3) {
             local_120 = 0x43300000;
             uStack_11c = uVar15 - local_22c ^ 0x80000000;
             dVar35 = (double)(float)((double)CONCAT44(0x43300000,uStack_11c) - dVar13);
-            fVar3 = (float)(dVar36 + dVar35);
+            fVar3 = (dVar36 + dVar35);
           }
-          dVar36 = (double)(float)(dVar35 * dVar37);
-          fVar6 = (float)(dVar36 * fparam_4 + (double)local_23c);
+          dVar36 = (double)(float)((double)dVar35 * dVar37);
+          fVar6 = (float)((double)dVar36 * fparam_4 + (double)local_23c);
           uStack_10c = ((int (*)())_pixelCenters)((double)local_23c,(double)fVar6,fparam_3_01);
           iVar10 = local_e4;
           local_110 = 0x43300000;
@@ -3813,10 +3811,10 @@ LAB_000ca704:
           local_108 = (longlong)(int)fVar3;
           fVar7 = (float)((double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar13) *
                           fparam_4 + (double)local_24c);
-          if ((double)FLOAT_00108e54 <= dVar38) {
-            dVar34 = dVar36;
-            if (dVar35 < dVar36) {
-              dVar34 = dVar35;
+          if ((double)FLOAT_00108e54 <= (double)dVar38) {
+            dVar34 = (double)dVar36;
+            if ((double)dVar35 < (double)dVar36) {
+              dVar34 = (double)dVar35;
             }
             if ((double)FLOAT_00108e54 <= dVar34) {
               uVar32 = 0;
@@ -3843,7 +3841,7 @@ LAB_000ca704:
               uStack_10c = _glePixelBytes(0x80e1,iVar19);
               uStack_10c = uStack_10c ^ 0x80000000;
               local_110 = 0x43300000;
-              dVar34 = dVar38 * (double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar13);
+              dVar34 = (double)dVar38 * (double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar13);
               dVar33 = (double)(float)dVar34;
               if (DOUBLE_00108d80 <= dVar33) {
                 uVar32 = (uint)(int)(dVar33 - DOUBLE_00108d80);
@@ -3854,11 +3852,11 @@ LAB_000ca704:
                 uVar32 = (uint)(int)dVar34;
                 local_108 = (longlong)(int)uVar32;
               }
-              iVar16 = (int)dVar35;
+              iVar16 = (int)(double)dVar35;
               local_f8 = (longlong)iVar16;
               dVar34 = fparam_3;
               dVar33 = fparam_4;
-              ((void (*)())_CopySourceSubImageToTexture)(param_1,uVar31,uVar15,iVar27,param_5,local_e8,(int)dVar38,iVar16,uVar32,
+              ((void (*)())_CopySourceSubImageToTexture)(param_1,uVar31,uVar15,iVar27,param_5,local_e8,(int)(double)dVar38,iVar16,uVar32,
                          0x80e1,iVar19,
                          *(int *)(0x74a4 + param_1) +
                          *puVar29 * *(int *)(param_1 + 0x748c),local_224,local_22c,in_stack_fffffd90
@@ -3869,9 +3867,9 @@ LAB_000ca704:
               iVar21 = *(int *)(*puVar29 * 4 + *(int *)(param_1 + 0x74a0));
               piVar17 = (int *)(iVar21 + 0xc4);
               _gleDeletePluginTextureLevel(param_1,iVar21,piVar17,0,0);
-              *(short *)(iVar21 + 0xd0) = (short)(int)dVar38;
-              if (dVar36 <= dVar35) {
-                iVar16 = (int)(dVar35 * dVar37);
+              *(short *)(iVar21 + 0xd0) = (short)(int)(double)dVar38;
+              if ((double)dVar36 <= (double)dVar35) {
+                iVar16 = (int)((double)dVar35 * dVar37);
                 (*(unsigned short *)((unsigned char *)&(local_100) + 6)) = (undefined2)iVar16;
                 uVar24 = (*(unsigned short *)((unsigned char *)&(local_100) + 6));
                 local_100 = (longlong)iVar16;
@@ -4004,17 +4002,17 @@ LAB_000cae0c:
               (**(code **)(param_1 + 0x4884))
                         (param_1,a1,piVar17,iVar16,iVar21,*(undefined4 *)(param_1 + 0x4858),
                          (double)local_244,(double)local_24c,f2,(double)*(float *)(param_1 + 0x24));
-              *(float *)(param_1 + 0x120) = (float)dVar38;
+              *(float *)(param_1 + 0x120) = (float)(double)dVar38;
               *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
               *(undefined4 *)(param_1 + 0x124) = 0;
               *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
               (**(code **)(param_1 + 0x4884))
                         (param_1,a1_00,piVar17,iVar16,iVar21,*(undefined4 *)(param_1 + 0x4858),
                          (double)fVar5,(double)local_24c,f2);
-              *(float *)(param_1 + 0x120) = (float)dVar38;
-              dVar34 = dVar36;
-              if (dVar35 < dVar36) {
-                dVar34 = dVar35;
+              *(float *)(param_1 + 0x120) = (float)(double)dVar38;
+              dVar34 = (double)dVar36;
+              if ((double)dVar35 < (double)dVar36) {
+                dVar34 = (double)dVar35;
               }
               *(float *)(param_1 + 0x124) = (float)dVar34;
               *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
@@ -4023,10 +4021,10 @@ LAB_000cae0c:
                         (param_1,a1_01,piVar17,iVar16,iVar21,*(undefined4 *)(param_1 + 0x4858),
                          (double)fVar5,(double)fVar7,f2);
               *(undefined4 *)(param_1 + 0x120) = 0;
-              if (dVar35 < dVar36) {
-                dVar36 = dVar35;
+              if ((double)dVar35 < (double)dVar36) {
+                dVar36 = (double)dVar35;
               }
-              *(float *)(param_1 + 0x124) = (float)dVar36;
+              *(float *)(param_1 + 0x124) = (float)(double)dVar36;
               *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
               *(float *)(param_1 + 300) = *(float *)(param_1 + 0x24);
               iVar22 = *(int *)(param_1 + 0x4858);
@@ -4042,7 +4040,7 @@ LAB_000cae0c:
             }
           }
           uVar28 = (uint)(int)((double)(float)((double)CONCAT44(0x43300000,uVar28 ^ 0x80000000) - dVar13)
-                         + dVar35);
+                         + (double)dVar35);
           local_f8 = (longlong)(int)uVar28;
           local_24c = fVar7;
           local_23c = fVar6;
@@ -4051,7 +4049,7 @@ LAB_000cae0c:
       }
       uStack_10c = uVar26 ^ 0x80000000;
       local_110 = 0x43300000;
-      uVar26 = (uint)(int)((double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar39) + dVar38);
+      uVar26 = (uint)(int)((double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar39) + (double)dVar38);
       local_f8 = (longlong)(int)uVar26;
       local_244 = fVar5;
       local_234 = fVar4;

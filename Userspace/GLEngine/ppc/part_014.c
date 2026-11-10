@@ -401,7 +401,7 @@ void _glCallLists_Exec(param_1, param_2, param_3, param_4)
   uint uVar6;
   int iVar7;
   int iVar8;
-  double dVar9;
+  float dVar9;
   
   dVar4 = DOUBLE_00108d80;
   switch(param_3) {
@@ -471,8 +471,8 @@ void _glCallLists_Exec(param_1, param_2, param_3, param_4)
         fVar5 = *param_4;
         dVar9 = (double)fVar5;
         param_4 = param_4 + 1;
-        if (dVar4 <= dVar9) {
-          uVar6 = (int)(dVar9 - dVar4) ^ 0x80000000;
+        if (dVar4 <= (double)dVar9) {
+          uVar6 = (int)((double)dVar9 - dVar4) ^ 0x80000000;
         }
         else {
           uVar6 = (uint)(int)fVar5;

@@ -2771,7 +2771,7 @@ void _glGetTexGendv_Exec(param_1, param_2, param_3, param_4)
   undefined4 uVar1;
   uint uVar2;
   int iVar3;
-  double dVar4;
+  float dVar4;
   
   uVar2 = *(uint *)(param_1 + 0x53d4);
   if ((-1 < *(short *)(param_1 + 0x4a10)) || (7 < uVar2)) {
@@ -2790,7 +2790,7 @@ LAB_0009c790:
       param_4[2] = (double)*(float *)(iVar3 + 0x18);
       dVar4 = (double)*(float *)(iVar3 + 0x1c);
 LAB_0009c6fc:
-      param_4[3] = dVar4;
+      param_4[3] = (double)dVar4;
       return;
     }
     if (param_3 < 0x2502) {

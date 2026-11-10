@@ -628,37 +628,36 @@ double _gleUpdateLightPosition(int param_1,int param_2,double fparam_1)
 double _gleVectorNormalizeNO(undefined4 param_1,float *param_2,float *param_3,double fparam_1)
 {
   float fVar1;
-  double dVar2;
-  double dVar3;
-  double dVar4;
-  double dVar5;
-  double dVar6;
-  double dVar7;
+  float dVar2;
+  float dVar3;
+  float dVar4;
+  float dVar5;
+  float dVar6;
+  float dVar7;
   
   dVar3 = (double)param_2[1];
   dVar4 = (double)*param_2;
   dVar5 = (double)param_2[2];
-  fVar1 = (float)(dVar5 * dVar5 + (double)(float)(dVar4 * dVar4 + (double)(float)(dVar3 * dVar3)));
+  fVar1 = (dVar5 * dVar5 + (dVar4 * dVar4 + (dVar3 * dVar3)));
   dVar2 = (double)fVar1;
-  if (DOUBLE_00108de8 < dVar2) {
+  if (DOUBLE_00108de8 < (double)dVar2) {
     dVar7 = (double)(float)(0x5f375a00 - ((uint)GH_F2U(fVar1) >> 1));
-    dVar2 = (double)(float)((double)(float)(dVar2 * dVar7) * dVar7);
-    dVar6 = (double)(float)((double)FLOAT_00108f38 - dVar2);
-    dVar2 = (double)(float)(dVar7 * DOUBLE_00108df0 * dVar6 *
-                           -(double)(float)((double)(float)(dVar2 * dVar6) * dVar6 -
-                                           (double)FLOAT_00108f48));
-    dVar4 = (double)(float)(dVar4 * dVar2);
-    dVar3 = (double)(float)(dVar3 * dVar2);
-    fVar1 = (float)(dVar5 * dVar2);
+    dVar2 = (double)((dVar2 * dVar7) * dVar7);
+    dVar6 = (double)(FLOAT_00108f38 - dVar2);
+    dVar2 = (double)(float)((double)dVar7 * DOUBLE_00108df0 * (double)dVar6 *
+                           -(double)((dVar2 * dVar6) * dVar6 - FLOAT_00108f48));
+    dVar4 = (double)(dVar4 * dVar2);
+    dVar3 = (double)(dVar3 * dVar2);
+    fVar1 = (dVar5 * dVar2);
   }
   else {
     dVar2 = (double)FLOAT_00108eb4;
     fVar1 = FLOAT_00108e58;
   }
   param_3[2] = fVar1;
-  *param_3 = (float)dVar4;
-  param_3[1] = (float)dVar3;
-  return dVar2;
+  *param_3 = (float)(double)dVar4;
+  param_3[1] = (float)(double)dVar3;
+  return (double)dVar2;
 }
 
 /* _gleUpdateLightFast @ 0x778c (152 bytes) */
@@ -767,8 +766,8 @@ double _gleUpdateLightExponents(param_1, param_2)
   float *pfVar7;
   double dVar8;
   double dVar9;
-  double dVar10;
-  double dVar11;
+  float dVar10;
+  float dVar11;
   
   iVar3 = param_1 + param_2 * 0x80;
   iVar6 = param_1 + param_2 * 0x6c;
@@ -800,8 +799,8 @@ double _gleUpdateLightExponents(param_1, param_2)
         dVar8 = (double)FLOAT_00108f40;
         *(float *)(iVar6 + 0x4a98) = (float)dVar9;
         dVar9 = DOUBLE_00108de0;
-        *(float *)(iVar6 + 0x4aa0) = (float)(dVar8 / dVar10);
-        *(float *)(iVar6 + 0x4a9c) = fVar2 / (float)(dVar11 - dVar10);
+        *(float *)(iVar6 + 0x4aa0) = (float)(dVar8 / (double)dVar10);
+        *(float *)(iVar6 + 0x4a9c) = fVar2 / (dVar11 - dVar10);
         dVar9 = _pow(dVar9,(double)*(float *)(iVar3 + 0x287c));
         fVar1 = *(float *)(iVar6 + 0x4a98);
         *(float *)(iVar6 + 0x4aa4) = (float)(dVar9 - DOUBLE_00108d68);
@@ -811,7 +810,7 @@ double _gleUpdateLightExponents(param_1, param_2)
           iVar5 = iVar5 + -1;
           *pfVar7 = (float)dVar8;
           pfVar7 = pfVar7 + 1;
-          dVar9 = (double)(float)(dVar9 + (double)((float)(dVar11 - (double)fVar1) / fVar2));
+          dVar9 = (double)(float)(dVar9 + (double)((dVar11 - fVar1) / fVar2));
         } while (-1 < iVar5);
         *(undefined4 *)(iVar6 + 0x4ad0) = 0x3f800000;
       }

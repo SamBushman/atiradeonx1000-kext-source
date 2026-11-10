@@ -4449,31 +4449,23 @@ void _glRotateX_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3,d
     fVar1 = *(float *)(iVar3 + 0x20);
     fVar2 = *(float *)(iVar3 + 0x14);
     *(float *)(iVar3 + 0x20) =
-         (float)((double)fVar1 * fparam_2 -
-                (double)(float)((double)*(float *)(iVar3 + 0x10) * fparam_1));
+         (fVar1 * fparam_2 - (*(float *)(iVar3 + 0x10) * fparam_1));
     *(float *)(iVar3 + 0x10) =
-         (float)((double)*(float *)(iVar3 + 0x10) * fparam_2 +
-                (double)(float)((double)fVar1 * fparam_1));
+         (*(float *)(iVar3 + 0x10) * fparam_2 + (fVar1 * fparam_1));
     fVar1 = *(float *)(iVar3 + 0x28);
     *(float *)(iVar3 + 0x14) =
-         (float)((double)fVar2 * fparam_2 +
-                (double)(float)((double)*(float *)(iVar3 + 0x24) * fparam_1));
+         (fVar2 * fparam_2 + (*(float *)(iVar3 + 0x24) * fparam_1));
     *(float *)(iVar3 + 0x24) =
-         (float)((double)*(float *)(iVar3 + 0x24) * fparam_2 -
-                (double)(float)((double)fVar2 * fparam_1));
+         (*(float *)(iVar3 + 0x24) * fparam_2 - (fVar2 * fparam_1));
     fVar2 = *(float *)(iVar3 + 0x1c);
     *(float *)(iVar3 + 0x28) =
-         (float)((double)fVar1 * fparam_2 -
-                (double)(float)((double)*(float *)(iVar3 + 0x18) * fparam_1));
+         (fVar1 * fparam_2 - (*(float *)(iVar3 + 0x18) * fparam_1));
     *(float *)(iVar3 + 0x18) =
-         (float)((double)*(float *)(iVar3 + 0x18) * fparam_2 +
-                (double)(float)((double)fVar1 * fparam_1));
+         (*(float *)(iVar3 + 0x18) * fparam_2 + (fVar1 * fparam_1));
     *(float *)(iVar3 + 0x1c) =
-         (float)((double)fVar2 * fparam_2 +
-                (double)(float)((double)*(float *)(iVar3 + 0x2c) * fparam_1));
+         (fVar2 * fparam_2 + (*(float *)(iVar3 + 0x2c) * fparam_1));
     *(float *)(iVar3 + 0x2c) =
-         (float)((double)*(float *)(iVar3 + 0x2c) * fparam_2 -
-                (double)(float)((double)fVar2 * fparam_1));
+         (*(float *)(iVar3 + 0x2c) * fparam_2 - (fVar2 * fparam_1));
     uVar4 = *(uint *)(param_1 + 0x50b0);
     *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | uVar5;
     if ((uVar5 & ~uVar4 & *(uint *)(param_1 + 0x505c) & 0xfffffc) != 0) {
@@ -4482,31 +4474,23 @@ void _glRotateX_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3,d
       fVar1 = *(float *)(iVar3 + 0x20);
       fVar2 = *(float *)(iVar3 + 0x14);
       *(float *)(iVar3 + 0x20) =
-           (float)((double)fVar1 * fparam_2 -
-                  (double)(float)((double)*(float *)(iVar3 + 0x10) * fparam_1));
+           (fVar1 * fparam_2 - (*(float *)(iVar3 + 0x10) * fparam_1));
       *(float *)(iVar3 + 0x10) =
-           (float)((double)*(float *)(iVar3 + 0x10) * fparam_2 +
-                  (double)(float)((double)fVar1 * fparam_1));
+           (*(float *)(iVar3 + 0x10) * fparam_2 + (fVar1 * fparam_1));
       fVar1 = *(float *)(iVar3 + 0x28);
       *(float *)(iVar3 + 0x14) =
-           (float)((double)fVar2 * fparam_2 +
-                  (double)(float)((double)*(float *)(iVar3 + 0x24) * fparam_1));
+           (fVar2 * fparam_2 + (*(float *)(iVar3 + 0x24) * fparam_1));
       *(float *)(iVar3 + 0x24) =
-           (float)((double)*(float *)(iVar3 + 0x24) * fparam_2 -
-                  (double)(float)((double)fVar2 * fparam_1));
+           (*(float *)(iVar3 + 0x24) * fparam_2 - (fVar2 * fparam_1));
       fVar2 = *(float *)(iVar3 + 0x1c);
       *(float *)(iVar3 + 0x28) =
-           (float)((double)fVar1 * fparam_2 -
-                  (double)(float)((double)*(float *)(iVar3 + 0x18) * fparam_1));
+           (fVar1 * fparam_2 - (*(float *)(iVar3 + 0x18) * fparam_1));
       *(float *)(iVar3 + 0x18) =
-           (float)((double)*(float *)(iVar3 + 0x18) * fparam_2 +
-                  (double)(float)((double)fVar1 * fparam_1));
+           (*(float *)(iVar3 + 0x18) * fparam_2 + (fVar1 * fparam_1));
       *(float *)(iVar3 + 0x1c) =
-           (float)((double)fVar2 * fparam_2 +
-                  (double)(float)((double)*(float *)(iVar3 + 0x2c) * fparam_1));
+           (fVar2 * fparam_2 + (*(float *)(iVar3 + 0x2c) * fparam_1));
       *(float *)(iVar3 + 0x2c) =
-           (float)((double)*(float *)(iVar3 + 0x2c) * fparam_2 -
-                  (double)(float)((double)fVar2 * fparam_1));
+           (*(float *)(iVar3 + 0x2c) * fparam_2 - (fVar2 * fparam_1));
       uVar4 = *(uint *)(param_1 + 0x50b0);
     }
     *(uint *)(param_1 + 0x50b0) = uVar4 | uVar5;

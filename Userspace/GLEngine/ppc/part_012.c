@@ -230,7 +230,7 @@ float * _glIndexf_Comp(undefined4 param_1,double fparam_1)
 /* _glIndexf_Exec @ 0x5d770 (36 bytes) */
 void _glIndexf_Exec(int param_1,float fparam_1)
 {
-  *(float *)(param_1 + 700) = (float)(fparam_1 * (double)FLOAT_00108e5c);
+  *(float *)(param_1 + 700) = (fparam_1 * FLOAT_00108e5c);
   return;
 }
 

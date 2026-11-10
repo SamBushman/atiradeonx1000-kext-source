@@ -45,7 +45,7 @@ void _glLightModelfv_Exec(param_1, param_2, param_3)
   undefined2 uVar5;
   int iVar6;
   int iVar7;
-  double dVar8;
+  float dVar8;
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (param_2 == 0xb53) {
@@ -85,15 +85,15 @@ void _glLightModelfv_Exec(param_1, param_2, param_3)
     else if (param_2 == 0x81f8) {
       fVar2 = *param_3;
       dVar8 = (double)fVar2;
-      if (DOUBLE_00108d80 <= dVar8) {
-        uVar4 = (int)(dVar8 - DOUBLE_00108d80) ^ 0x80000000;
+      if (DOUBLE_00108d80 <= (double)dVar8) {
+        uVar4 = (int)((double)dVar8 - DOUBLE_00108d80) ^ 0x80000000;
       }
       else {
         uVar4 = (uint)(int)fVar2;
       }
       if (1 < uVar4 - 0x81f9) goto LAB_0006d214;
-      if (DOUBLE_00108d80 <= dVar8) {
-        uVar5 = (undefined2)(int)(dVar8 - DOUBLE_00108d80);
+      if (DOUBLE_00108d80 <= (double)dVar8) {
+        uVar5 = (undefined2)(int)((double)dVar8 - DOUBLE_00108d80);
       }
       else {
         uVar5 = (undefined2)(int)fVar2;

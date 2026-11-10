@@ -352,7 +352,7 @@ int _gleMap1Vertex3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_
   *param_7 = param_5;
   param_7[1] = (int)GH_F2U((float)fparam_1);
   param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((float)((fVar2 / (float)(fparam_2 - fparam_1))));
+  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
   if (0 < param_5) {
     do {
       iVar1 = iVar3 * 4;
@@ -382,7 +382,7 @@ int _gleMap1Vertex4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_
   *param_7 = param_5;
   param_7[1] = (int)GH_F2U((float)fparam_1);
   param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((float)((fVar2 / (float)(fparam_2 - fparam_1))));
+  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
   if (0 < param_5) {
     do {
       iVar1 = iVar3 * 4;
@@ -413,7 +413,7 @@ int _gleMap1ColorfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,
   *param_7 = param_5;
   param_7[1] = (int)GH_F2U((float)fparam_1);
   param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((float)((fVar2 / (float)(fparam_2 - fparam_1))));
+  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
   if (0 < param_5) {
     do {
       iVar1 = iVar3 * 4;
@@ -442,7 +442,7 @@ int _gleMap1IndexfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,
   *param_7 = param_5;
   param_7[1] = (int)GH_F2U((float)fparam_1);
   param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((float)((fVar2 / (float)(fparam_2 - fparam_1))));
+  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
   if (param_5 < 1) {
     return;
   }
@@ -470,7 +470,7 @@ int _gleMap1NormalfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3
   *param_7 = param_5;
   param_7[1] = (int)GH_F2U((float)fparam_1);
   param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((float)((fVar2 / (float)(fparam_2 - fparam_1))));
+  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
   if (0 < param_5) {
     do {
       iVar1 = iVar3 * 4;
@@ -498,7 +498,7 @@ int _gleMap1Texture1fLoad(undefined4 param_1,undefined4 param_2,undefined4 param
   *param_7 = param_5;
   param_7[1] = (int)GH_F2U((float)fparam_1);
   param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((float)((fVar2 / (float)(fparam_2 - fparam_1))));
+  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
   if (param_5 < 1) {
     return;
   }
@@ -523,7 +523,7 @@ int _gleMap1Texture2fLoad(undefined4 param_1,undefined4 param_2,undefined4 param
   *param_7 = param_5;
   param_7[1] = (int)GH_F2U((float)fparam_1);
   param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((float)((fVar2 / (float)(fparam_2 - fparam_1))));
+  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
   if (0 < param_5) {
     do {
       param_7[4] = *param_6;
@@ -551,7 +551,7 @@ int _gleMap1Texture3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param
   *param_7 = param_5;
   param_7[1] = (int)GH_F2U((float)fparam_1);
   param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((float)((fVar2 / (float)(fparam_2 - fparam_1))));
+  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
   if (0 < param_5) {
     do {
       iVar1 = iVar3 * 4;
@@ -581,7 +581,7 @@ int _gleMap1Texture4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param
   *param_7 = param_5;
   param_7[1] = (int)GH_F2U((float)fparam_1);
   param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((float)((fVar2 / (float)(fparam_2 - fparam_1))));
+  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
   if (0 < param_5) {
     do {
       iVar1 = iVar3 * 4;
@@ -610,7 +610,7 @@ void _gleMap1VertexAttrib1fLoad(undefined4 param_1,undefined4 param_2,undefined4
   *param_7 = param_5;
   param_7[1] = (int)GH_F2U((float)fparam_1);
   param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((float)((fVar2 / (float)(fparam_2 - fparam_1))));
+  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
   if (param_5 < 1) {
     return;
   }
@@ -635,7 +635,7 @@ void _gleMap1VertexAttrib2fLoad(undefined4 param_1,undefined4 param_2,undefined4
   *param_7 = param_5;
   param_7[1] = (int)GH_F2U((float)fparam_1);
   param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((float)((fVar2 / (float)(fparam_2 - fparam_1))));
+  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
   if (0 < param_5) {
     do {
       param_7[4] = *param_6;
@@ -663,7 +663,7 @@ void _gleMap1VertexAttrib3fLoad(undefined4 param_1,undefined4 param_2,undefined4
   *param_7 = param_5;
   param_7[1] = (int)GH_F2U((float)fparam_1);
   param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((float)((fVar2 / (float)(fparam_2 - fparam_1))));
+  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
   if (0 < param_5) {
     do {
       iVar1 = iVar3 * 4;
@@ -693,7 +693,7 @@ void _gleMap1VertexAttrib4fLoad(undefined4 param_1,undefined4 param_2,undefined4
   *param_7 = param_5;
   param_7[1] = (int)GH_F2U((float)fparam_1);
   param_7[2] = (int)GH_F2U((float)fparam_2);
-  param_7[3] = (int)GH_F2U((float)((fVar2 / (float)(fparam_2 - fparam_1))));
+  param_7[3] = (int)GH_F2U((fVar2 / (fparam_2 - fparam_1)));
   if (0 < param_5) {
     do {
       iVar1 = iVar3 * 4;
@@ -712,7 +712,7 @@ void _gleMap1VertexAttrib4fLoad(undefined4 param_1,undefined4 param_2,undefined4
 }
 
 /* _gleEvalMap1 @ 0xdf0f4 (968 bytes) */
-void _gleEvalMap1(int param_1,double fparam_1)
+void _gleEvalMap1(int param_1,float fparam_1)
 {
   byte bVar1;
   float fVar2;
@@ -783,7 +783,7 @@ void _gleEvalMap1(int param_1,double fparam_1)
     iVar10 = iVar11 + 8;
 LAB_000df2c8:
     ((void (*)())_gleEvalDomain1Coord)(param_1,puVar5,uVar7,in_r6,uVar8,iVar11,
-               (double)((float)(fparam_1 - (double)fVar2) * fVar3),in_f2,in_f3,in_f4,in_f5,in_f6,
+               (double)((fparam_1 - fVar2) * fVar3),in_f2,in_f3,in_f4,in_f5,in_f6,
                in_f7,in_f8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98,in_stack_ffffffa0,
                in_stack_ffffffa8);
     iVar11 = iVar10;
@@ -911,7 +911,7 @@ LAB_000df3c8:
     uVar8 = 4;
   }
   ((void (*)())_gleEvalDomain1Coord)(param_1,puVar4,uVar7,in_r6,uVar8,iVar11,
-             (double)((float)(fparam_1 - (double)fVar2) * fVar3),in_f2,in_f3,in_f4,in_f5,in_f6,in_f7
+             (double)((fparam_1 - fVar2) * fVar3),in_f2,in_f3,in_f4,in_f5,in_f6,in_f7
              ,in_f8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98,in_stack_ffffffa0,
              in_stack_ffffffa8);
 LAB_000df478:
@@ -1750,7 +1750,7 @@ void _gleMap2Vertex3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param
   
   fVar3 = FLOAT_00108e54;
   iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (float)(fparam_2 - fparam_1);
+  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
   *param_11 = param_5;
   iVar6 = 0;
   param_11[1] = param_9;
@@ -1759,7 +1759,7 @@ void _gleMap2Vertex3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param
   param_11[4] = (int)GH_F2U((float)fparam_3);
   param_11[5] = (int)GH_F2U((float)fparam_4);
   param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((float)((fVar3 / (float)(fparam_4 - fparam_3))));
+  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
   if (0 < param_5) {
     iVar8 = 0;
     do {
@@ -1800,7 +1800,7 @@ void _gleMap2Vertex4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param
   
   fVar3 = FLOAT_00108e54;
   iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (float)(fparam_2 - fparam_1);
+  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
   *param_11 = param_5;
   iVar6 = 0;
   param_11[1] = param_9;
@@ -1809,7 +1809,7 @@ void _gleMap2Vertex4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param
   param_11[4] = (int)GH_F2U((float)fparam_3);
   param_11[5] = (int)GH_F2U((float)fparam_4);
   param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((float)((fVar3 / (float)(fparam_4 - fparam_3))));
+  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
   if (0 < param_5) {
     iVar8 = 0;
     do {
@@ -1851,7 +1851,7 @@ void _gleMap2ColorfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3
   
   fVar3 = FLOAT_00108e54;
   iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (float)(fparam_2 - fparam_1);
+  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
   *param_11 = param_5;
   iVar6 = 0;
   param_11[1] = param_9;
@@ -1860,7 +1860,7 @@ void _gleMap2ColorfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3
   param_11[4] = (int)GH_F2U((float)fparam_3);
   param_11[5] = (int)GH_F2U((float)fparam_4);
   param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((float)((fVar3 / (float)(fparam_4 - fparam_3))));
+  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
   if (0 < param_5) {
     iVar8 = 0;
     do {
@@ -1902,7 +1902,7 @@ void _gleMap2IndexfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3
   
   fVar3 = FLOAT_00108e54;
   iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (float)(fparam_2 - fparam_1);
+  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
   *param_11 = param_5;
   iVar6 = 0;
   param_11[1] = param_9;
@@ -1911,7 +1911,7 @@ void _gleMap2IndexfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3
   param_11[4] = (int)GH_F2U((float)fparam_3);
   param_11[5] = (int)GH_F2U((float)fparam_4);
   param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((float)((fVar3 / (float)(fparam_4 - fparam_3))));
+  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
   if (0 < param_5) {
     iVar8 = 0;
     do {
@@ -1950,7 +1950,7 @@ void _gleMap2NormalfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_
   
   fVar3 = FLOAT_00108e54;
   iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (float)(fparam_2 - fparam_1);
+  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
   *param_11 = param_5;
   iVar6 = 0;
   param_11[1] = param_9;
@@ -1959,7 +1959,7 @@ void _gleMap2NormalfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_
   param_11[4] = (int)GH_F2U((float)fparam_3);
   param_11[5] = (int)GH_F2U((float)fparam_4);
   param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((float)((fVar3 / (float)(fparam_4 - fparam_3))));
+  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
   if (0 < param_5) {
     iVar8 = 0;
     do {
@@ -2000,7 +2000,7 @@ void _gleMap2Texture1fLoad(undefined4 param_1,undefined4 param_2,undefined4 para
   
   fVar3 = FLOAT_00108e54;
   iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (float)(fparam_2 - fparam_1);
+  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
   *param_11 = param_5;
   iVar6 = 0;
   param_11[1] = param_9;
@@ -2009,7 +2009,7 @@ void _gleMap2Texture1fLoad(undefined4 param_1,undefined4 param_2,undefined4 para
   param_11[4] = (int)GH_F2U((float)fparam_3);
   param_11[5] = (int)GH_F2U((float)fparam_4);
   param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((float)((fVar3 / (float)(fparam_4 - fparam_3))));
+  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
   if (0 < param_5) {
     iVar8 = 0;
     do {
@@ -2051,7 +2051,7 @@ void _gleMap2Texture2fLoad(undefined4 param_1,undefined4 param_2,undefined4 para
   
   fVar4 = FLOAT_00108e54;
   iVar9 = 0;
-  fVar3 = FLOAT_00108e54 / (float)(fparam_2 - fparam_1);
+  fVar3 = FLOAT_00108e54 / (fparam_2 - fparam_1);
   iVar7 = 0;
   *param_11 = param_5;
   param_11[1] = param_9;
@@ -2060,7 +2060,7 @@ void _gleMap2Texture2fLoad(undefined4 param_1,undefined4 param_2,undefined4 para
   param_11[4] = (int)GH_F2U((float)fparam_3);
   param_11[5] = (int)GH_F2U((float)fparam_4);
   param_11[6] = (int)GH_F2U(fVar3);
-  param_11[7] = (int)GH_F2U((float)((fVar4 / (float)(fparam_4 - fparam_3))));
+  param_11[7] = (int)GH_F2U((fVar4 / (fparam_4 - fparam_3)));
   if (0 < param_5) {
     iVar8 = 0;
     iVar10 = param_10;
@@ -2105,7 +2105,7 @@ void _gleMap2Texture3fLoad(undefined4 param_1,undefined4 param_2,undefined4 para
   
   fVar3 = FLOAT_00108e54;
   iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (float)(fparam_2 - fparam_1);
+  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
   *param_11 = param_5;
   iVar6 = 0;
   param_11[1] = param_9;
@@ -2114,7 +2114,7 @@ void _gleMap2Texture3fLoad(undefined4 param_1,undefined4 param_2,undefined4 para
   param_11[4] = (int)GH_F2U((float)fparam_3);
   param_11[5] = (int)GH_F2U((float)fparam_4);
   param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((float)((fVar3 / (float)(fparam_4 - fparam_3))));
+  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
   if (0 < param_5) {
     iVar8 = 0;
     do {
@@ -2155,7 +2155,7 @@ void _gleMap2Texture4fLoad(undefined4 param_1,undefined4 param_2,undefined4 para
   
   fVar3 = FLOAT_00108e54;
   iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (float)(fparam_2 - fparam_1);
+  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
   *param_11 = param_5;
   iVar6 = 0;
   param_11[1] = param_9;
@@ -2164,7 +2164,7 @@ void _gleMap2Texture4fLoad(undefined4 param_1,undefined4 param_2,undefined4 para
   param_11[4] = (int)GH_F2U((float)fparam_3);
   param_11[5] = (int)GH_F2U((float)fparam_4);
   param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((float)((fVar3 / (float)(fparam_4 - fparam_3))));
+  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
   if (0 < param_5) {
     iVar8 = 0;
     do {
@@ -2206,7 +2206,7 @@ void _gleMap2VertexAttrib1fLoad(undefined4 param_1,undefined4 param_2,undefined4
   
   fVar3 = FLOAT_00108e54;
   iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (float)(fparam_2 - fparam_1);
+  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
   *param_11 = param_5;
   iVar6 = 0;
   param_11[1] = param_9;
@@ -2215,7 +2215,7 @@ void _gleMap2VertexAttrib1fLoad(undefined4 param_1,undefined4 param_2,undefined4
   param_11[4] = (int)GH_F2U((float)fparam_3);
   param_11[5] = (int)GH_F2U((float)fparam_4);
   param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((float)((fVar3 / (float)(fparam_4 - fparam_3))));
+  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
   if (0 < param_5) {
     iVar8 = 0;
     do {
@@ -2257,7 +2257,7 @@ void _gleMap2VertexAttrib2fLoad(undefined4 param_1,undefined4 param_2,undefined4
   
   fVar4 = FLOAT_00108e54;
   iVar9 = 0;
-  fVar3 = FLOAT_00108e54 / (float)(fparam_2 - fparam_1);
+  fVar3 = FLOAT_00108e54 / (fparam_2 - fparam_1);
   iVar7 = 0;
   *param_11 = param_5;
   param_11[1] = param_9;
@@ -2266,7 +2266,7 @@ void _gleMap2VertexAttrib2fLoad(undefined4 param_1,undefined4 param_2,undefined4
   param_11[4] = (int)GH_F2U((float)fparam_3);
   param_11[5] = (int)GH_F2U((float)fparam_4);
   param_11[6] = (int)GH_F2U(fVar3);
-  param_11[7] = (int)GH_F2U((float)((fVar4 / (float)(fparam_4 - fparam_3))));
+  param_11[7] = (int)GH_F2U((fVar4 / (fparam_4 - fparam_3)));
   if (0 < param_5) {
     iVar8 = 0;
     iVar10 = param_10;
@@ -2311,7 +2311,7 @@ void _gleMap2VertexAttrib3fLoad(undefined4 param_1,undefined4 param_2,undefined4
   
   fVar3 = FLOAT_00108e54;
   iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (float)(fparam_2 - fparam_1);
+  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
   *param_11 = param_5;
   iVar6 = 0;
   param_11[1] = param_9;
@@ -2320,7 +2320,7 @@ void _gleMap2VertexAttrib3fLoad(undefined4 param_1,undefined4 param_2,undefined4
   param_11[4] = (int)GH_F2U((float)fparam_3);
   param_11[5] = (int)GH_F2U((float)fparam_4);
   param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((float)((fVar3 / (float)(fparam_4 - fparam_3))));
+  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
   if (0 < param_5) {
     iVar8 = 0;
     do {
@@ -2361,7 +2361,7 @@ void _gleMap2VertexAttrib4fLoad(undefined4 param_1,undefined4 param_2,undefined4
   
   fVar3 = FLOAT_00108e54;
   iVar5 = 0;
-  fVar2 = FLOAT_00108e54 / (float)(fparam_2 - fparam_1);
+  fVar2 = FLOAT_00108e54 / (fparam_2 - fparam_1);
   *param_11 = param_5;
   iVar6 = 0;
   param_11[1] = param_9;
@@ -2370,7 +2370,7 @@ void _gleMap2VertexAttrib4fLoad(undefined4 param_1,undefined4 param_2,undefined4
   param_11[4] = (int)GH_F2U((float)fparam_3);
   param_11[5] = (int)GH_F2U((float)fparam_4);
   param_11[6] = (int)GH_F2U(fVar2);
-  param_11[7] = (int)GH_F2U((float)((fVar3 / (float)(fparam_4 - fparam_3))));
+  param_11[7] = (int)GH_F2U((fVar3 / (fparam_4 - fparam_3)));
   if (0 < param_5) {
     iVar8 = 0;
     do {
@@ -2398,7 +2398,7 @@ void _gleMap2VertexAttrib4fLoad(undefined4 param_1,undefined4 param_2,undefined4
 }
 
 /* _gleEvalMap2 @ 0xe0df0 (1504 bytes) */
-void _gleEvalMap2(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void _gleEvalMap2(int param_1,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   byte bVar1;
   float fVar2;
@@ -2422,11 +2422,11 @@ void _gleEvalMap2(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   uint uVar18;
   int iVar19;
   byte *pbVar20;
-  double dVar21;
-  double dVar22;
+  float dVar21;
+  float dVar22;
   double in_f9;
   double in_f10;
-  double dVar23;
+  float dVar23;
   double in_stack_ffffff48;
   double in_stack_ffffff50;
   double in_stack_ffffff58;
@@ -2454,9 +2454,9 @@ void _gleEvalMap2(int param_1,double fparam_1,double fparam_2,double fparam_3,do
     if (*(char *)(param_1 + 0x74f2) == '\0') {
       ((void (*)())_gleEvalDomain2Coord)(param_1,iVar13 + 0xfc8,*(undefined4 *)(iVar13 + 0xfa8),
                  *(undefined4 *)(iVar13 + 0xfac),in_r7,in_r8,3,pfVar10,
-                 (double)((float)(fparam_1 - (double)*(float *)(iVar13 + 0xfb0)) *
+                 (double)((fparam_1 - *(float *)(iVar13 + 0xfb0)) *
                          *(float *)(iVar13 + 0xfc0)),
-                 (double)((float)(fparam_2 - (double)*(float *)(iVar13 + 0xfb8)) *
+                 (double)((fparam_2 - *(float *)(iVar13 + 0xfb8)) *
                          *(float *)(iVar13 + 0xfc4)),fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
                  fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,in_stack_ffffff60,
                  in_stack_ffffff68);
@@ -2466,9 +2466,9 @@ void _gleEvalMap2(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   if (*(char *)(param_1 + 0x7556) != '\0') {
     ((void (*)())_gleEvalDomain2Color)(param_1,iVar13 + 0x1498,*(undefined4 *)(iVar13 + 0x1478),
                *(undefined4 *)(iVar13 + 0x147c),in_r7,in_r8,4,pfVar12,
-               (double)((float)(fparam_1 - (double)*(float *)(iVar13 + 0x1480)) *
+               (double)((fparam_1 - *(float *)(iVar13 + 0x1480)) *
                        *(float *)(iVar13 + 0x1490)),
-               (double)((float)(fparam_2 - (double)*(float *)(iVar13 + 0x1488)) *
+               (double)((fparam_2 - *(float *)(iVar13 + 0x1488)) *
                        *(float *)(iVar13 + 0x1494)),fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
                fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,in_stack_ffffff60,
                in_stack_ffffff68);
@@ -2481,9 +2481,9 @@ void _gleEvalMap2(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   if (bVar1 == 8) {
     uVar5 = *(undefined4 *)(iVar13 + 0x1e38);
     iVar14 = iVar13 + 0x1e58;
-    fVar2 = (float)(fparam_1 - (double)*(float *)(iVar13 + 0x1e40)) * *(float *)(iVar13 + 0x1e50);
+    fVar2 = (fparam_1 - *(float *)(iVar13 + 0x1e40)) * *(float *)(iVar13 + 0x1e50);
     uVar7 = *(undefined4 *)(iVar13 + 0x1e3c);
-    fVar3 = (float)(fparam_2 - (double)*(float *)(iVar13 + 0x1e48)) * *(float *)(iVar13 + 0x1e54);
+    fVar3 = (fparam_2 - *(float *)(iVar13 + 0x1e48)) * *(float *)(iVar13 + 0x1e54);
     uVar8 = 2;
     pfVar11 = pfVar12 + 2;
 LAB_000e105c:
@@ -2496,9 +2496,9 @@ LAB_000e105c:
     if (bVar1 == 4) {
       uVar5 = *(undefined4 *)(iVar13 + 0x1c88);
       iVar14 = iVar13 + 0x1ca8;
-      fVar2 = (float)(fparam_1 - (double)*(float *)(iVar13 + 0x1c90)) * *(float *)(iVar13 + 0x1ca0);
+      fVar2 = (fparam_1 - *(float *)(iVar13 + 0x1c90)) * *(float *)(iVar13 + 0x1ca0);
       uVar7 = *(undefined4 *)(iVar13 + 0x1c8c);
-      fVar3 = (float)(fparam_2 - (double)*(float *)(iVar13 + 0x1c98)) * *(float *)(iVar13 + 0x1ca4);
+      fVar3 = (fparam_2 - *(float *)(iVar13 + 0x1c98)) * *(float *)(iVar13 + 0x1ca4);
       uVar8 = 1;
       pfVar11 = pfVar12 + 1;
       goto LAB_000e105c;
@@ -2509,9 +2509,9 @@ LAB_000e105c:
       pfVar11 = pfVar12 + 3;
       ((void (*)())_gleEvalDomain2Coord)(param_1,iVar13 + 0x2198,*(undefined4 *)(iVar13 + 0x2178),
                  *(undefined4 *)(iVar13 + 0x217c),in_r7,in_r8,3,pfVar12,
-                 (double)((float)(fparam_1 - (double)*(float *)(iVar13 + 0x2180)) *
+                 (double)((fparam_1 - *(float *)(iVar13 + 0x2180)) *
                          *(float *)(iVar13 + 0x2190)),
-                 (double)((float)(fparam_2 - (double)*(float *)(iVar13 + 0x2188)) *
+                 (double)((fparam_2 - *(float *)(iVar13 + 0x2188)) *
                          *(float *)(iVar13 + 0x2194)),fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
                  fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,in_stack_ffffff60,
                  in_stack_ffffff68);
@@ -2522,9 +2522,9 @@ LAB_000e105c:
       pfVar11 = pfVar12 + 4;
       ((void (*)())_gleEvalDomain2Coord)(param_1,iVar13 + 0x2668,*(undefined4 *)(iVar13 + 0x2648),
                  *(undefined4 *)(iVar13 + 0x264c),in_r7,in_r8,4,pfVar12,
-                 (double)((float)(fparam_1 - (double)*(float *)(iVar13 + 0x2650)) *
+                 (double)((fparam_1 - *(float *)(iVar13 + 0x2650)) *
                          *(float *)(iVar13 + 0x2660)),
-                 (double)((float)(fparam_2 - (double)*(float *)(iVar13 + 0x2658)) *
+                 (double)((fparam_2 - *(float *)(iVar13 + 0x2658)) *
                          *(float *)(iVar13 + 0x2664)),fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
                  fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,in_stack_ffffff60,
                  in_stack_ffffff68);
@@ -2547,16 +2547,16 @@ LAB_000e1060:
       pbVar20 = pbVar20 + 1;
       if (bVar1 == 8) {
         uVar5 = *(undefined4 *)(iVar19 + 0x37a8);
-        dVar21 = (double)((float)(fparam_1 - (double)*(float *)(iVar19 + 0x37b0)) *
+        dVar21 = (double)((fparam_1 - *(float *)(iVar19 + 0x37b0)) *
                          *(float *)(iVar19 + 0x37c0));
         uVar7 = *(undefined4 *)(iVar19 + 0x37ac);
-        dVar22 = (double)((float)(fparam_2 - (double)*(float *)(iVar19 + 0x37b8)) *
+        dVar22 = (double)((fparam_2 - *(float *)(iVar19 + 0x37b8)) *
                          *(float *)(iVar19 + 0x37c4));
         uVar8 = 2;
         pfVar11 = pfVar12 + 2;
         iVar6 = iVar15;
 LAB_000e11b0:
-        ((void (*)())_gleEvalDomain2Coord)(param_1,iVar6,uVar5,uVar7,in_r7,in_r8,uVar8,pfVar12,dVar21,dVar22,fparam_3,
+        ((void (*)())_gleEvalDomain2Coord)(param_1,iVar6,uVar5,uVar7,in_r7,in_r8,uVar8,pfVar12,(double)dVar21,(double)dVar22,fparam_3,
                    fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                    in_stack_ffffff58,in_stack_ffffff60,in_stack_ffffff68);
         pfVar12 = pfVar11;
@@ -2565,10 +2565,10 @@ LAB_000e11b0:
         if (8 < bVar1) {
           if (bVar1 == 0xc) {
             uVar5 = *(undefined4 *)(iVar19 + 0x37a8);
-            dVar21 = (double)((float)(fparam_1 - (double)*(float *)(iVar19 + 0x37b0)) *
+            dVar21 = (double)((fparam_1 - *(float *)(iVar19 + 0x37b0)) *
                              *(float *)(iVar19 + 0x37c0));
             uVar7 = *(undefined4 *)(iVar19 + 0x37ac);
-            dVar22 = (double)((float)(fparam_2 - (double)*(float *)(iVar19 + 0x37b8)) *
+            dVar22 = (double)((fparam_2 - *(float *)(iVar19 + 0x37b8)) *
                              *(float *)(iVar19 + 0x37c4));
             uVar8 = 3;
             pfVar11 = pfVar12 + 3;
@@ -2577,10 +2577,10 @@ LAB_000e11b0:
           else {
             if (bVar1 != 0x10) goto LAB_000e11b4;
             uVar5 = *(undefined4 *)(iVar19 + 0x37a8);
-            dVar21 = (double)((float)(fparam_1 - (double)*(float *)(iVar19 + 0x37b0)) *
+            dVar21 = (double)((fparam_1 - *(float *)(iVar19 + 0x37b0)) *
                              *(float *)(iVar19 + 0x37c0));
             uVar7 = *(undefined4 *)(iVar19 + 0x37ac);
-            dVar22 = (double)((float)(fparam_2 - (double)*(float *)(iVar19 + 0x37b8)) *
+            dVar22 = (double)((fparam_2 - *(float *)(iVar19 + 0x37b8)) *
                              *(float *)(iVar19 + 0x37c4));
             uVar8 = 4;
             pfVar11 = pfVar12 + 4;
@@ -2590,10 +2590,10 @@ LAB_000e11b0:
         }
         if (bVar1 == 4) {
           uVar5 = *(undefined4 *)(iVar19 + 0x37a8);
-          dVar21 = (double)((float)(fparam_1 - (double)*(float *)(iVar19 + 0x37b0)) *
+          dVar21 = (double)((fparam_1 - *(float *)(iVar19 + 0x37b0)) *
                            *(float *)(iVar19 + 0x37c0));
           uVar7 = *(undefined4 *)(iVar19 + 0x37ac);
-          dVar22 = (double)((float)(fparam_2 - (double)*(float *)(iVar19 + 0x37b8)) *
+          dVar22 = (double)((fparam_2 - *(float *)(iVar19 + 0x37b8)) *
                            *(float *)(iVar19 + 0x37c4));
           uVar8 = 1;
           pfVar11 = pfVar12 + 1;
@@ -2611,25 +2611,24 @@ LAB_000e11b4:
     } while (uVar18 != 0);
   }
   if (*(char *)(param_1 + 0x7554) == '\f') {
-    dVar23 = (double)(float)(fparam_2 - (double)*(float *)(iVar13 + 0x488));
-    dVar21 = (double)(float)((double)(float)(fparam_1 - (double)*(float *)(iVar13 + 0x480)) *
-                            (double)*(float *)(iVar13 + 0x490));
-    dVar22 = (double)(float)(dVar23 * (double)*(float *)(iVar13 + 0x494));
+    dVar23 = (double)(fparam_2 - *(float *)(iVar13 + 0x488));
+    dVar21 = (double)((fparam_1 - *(float *)(iVar13 + 0x480)) * *(float *)(iVar13 + 0x490));
+    dVar22 = (double)(dVar23 * *(float *)(iVar13 + 0x494));
     if (*(char *)(param_1 + 0x74f2) == '\0') {
       uVar7 = *(undefined4 *)(iVar13 + 0x47c);
       uVar5 = *(undefined4 *)(iVar13 + 0x478);
       iVar13 = iVar13 + 0x498;
       uVar8 = 3;
 LAB_000e1350:
-      ((void (*)())_gleEvalDomain2Coord)(param_1,iVar13,uVar5,uVar7,in_r7,in_r8,uVar8,pfVar12,dVar21,dVar22,fparam_3,
+      ((void (*)())_gleEvalDomain2Coord)(param_1,iVar13,uVar5,uVar7,in_r7,in_r8,uVar8,pfVar12,(double)dVar21,(double)dVar22,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                  in_stack_ffffff58,in_stack_ffffff60,in_stack_ffffff68);
       goto LAB_000e1388;
     }
     ((void (*)())_gleEvalDomainDeriv2Coord)(param_1,iVar13 + 0x498,*(undefined4 *)(iVar13 + 0x478),
-               *(undefined4 *)(iVar13 + 0x47c),in_r7,in_r8,3,&local_70,&local_60,pfVar12,dVar21,
-               dVar22,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_f9,in_f10,
-               (double)*(float *)(iVar13 + 0x494),(double)*(float *)(iVar13 + 0x490),dVar23);
+               *(undefined4 *)(iVar13 + 0x47c),in_r7,in_r8,3,&local_70,&local_60,pfVar12,(double)dVar21,
+               (double)dVar22,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_f9,in_f10,
+               (double)*(float *)(iVar13 + 0x494),(double)*(float *)(iVar13 + 0x490),(double)dVar23);
   }
   else {
     if (*(char *)(param_1 + 0x7554) != '\x10') {
@@ -2643,10 +2642,9 @@ LAB_000e1350:
       }
       goto LAB_000e1388;
     }
-    dVar23 = (double)(float)(fparam_2 - (double)*(float *)(iVar13 + 0x958));
-    dVar21 = (double)(float)((double)(float)(fparam_1 - (double)*(float *)(iVar13 + 0x950)) *
-                            (double)*(float *)(iVar13 + 0x960));
-    dVar22 = (double)(float)(dVar23 * (double)*(float *)(iVar13 + 0x964));
+    dVar23 = (double)(fparam_2 - *(float *)(iVar13 + 0x958));
+    dVar21 = (double)((fparam_1 - *(float *)(iVar13 + 0x950)) * *(float *)(iVar13 + 0x960));
+    dVar22 = (double)(dVar23 * *(float *)(iVar13 + 0x964));
     if (*(char *)(param_1 + 0x74f2) == '\0') {
       uVar7 = *(undefined4 *)(iVar13 + 0x94c);
       uVar5 = *(undefined4 *)(iVar13 + 0x948);
@@ -2655,9 +2653,9 @@ LAB_000e1350:
       goto LAB_000e1350;
     }
     ((void (*)())_gleEvalDomainDeriv2Coord)(param_1,iVar13 + 0x968,*(undefined4 *)(iVar13 + 0x948),
-               *(undefined4 *)(iVar13 + 0x94c),in_r7,in_r8,4,&local_70,&local_60,pfVar12,dVar21,
-               dVar22,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_f9,in_f10,
-               (double)*(float *)(iVar13 + 0x964),(double)*(float *)(iVar13 + 0x960),dVar23);
+               *(undefined4 *)(iVar13 + 0x94c),in_r7,in_r8,4,&local_70,&local_60,pfVar12,(double)dVar21,
+               (double)dVar22,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_f9,in_f10,
+               (double)*(float *)(iVar13 + 0x964),(double)*(float *)(iVar13 + 0x960),(double)dVar23);
     ((void (*)())_gleComputeFirstPartial)(param_1,pfVar12,&local_70,&local_60);
   }
   puVar4 = PTR__gleVectorNormalize_00112064;

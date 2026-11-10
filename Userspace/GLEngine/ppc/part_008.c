@@ -2854,7 +2854,7 @@ void _gleSetEnable_POLYGON_SMOOTH(param_1, param_2, param_3)
 }
 
 /* _gleFogExp @ 0x52eac (88 bytes) */
-double _gleFogExp(int param_1,double fparam_1)
+double _gleFogExp(int param_1,float fparam_1)
 {
   float fVar1;
   float fVar2;
@@ -2863,7 +2863,7 @@ double _gleFogExp(int param_1,double fparam_1)
   if ((double)FLOAT_00108e50 < fparam_1) {
     fparam_1 = -fparam_1;
   }
-  fVar1 = (float)((double)*(float *)(param_1 + 0x3150) * fparam_1);
+  fVar1 = (*(float *)(param_1 + 0x3150) * fparam_1);
   return (double)(fVar2 / ((((*(float *)(param_1 + 0x38) * fVar1 - *(float *)(param_1 + 0x34)) *
                              fVar1 + *(float *)(param_1 + 0x30)) * fVar1 - fVar2) * fVar1 + fVar2));
 }
@@ -2970,18 +2970,18 @@ LAB_00053168:
 /* _gleFogLinear @ 0x53190 (92 bytes) */
 double _gleFogLinear(int param_1,float fparam_1)
 {
-  double dVar1;
+  float dVar1;
   
   if ((double)FLOAT_00108e50 < fparam_1) {
     fparam_1 = -fparam_1;
   }
-  dVar1 = (double)((float)((double)*(float *)(param_1 + 0x3158) + fparam_1) *
+  dVar1 = (double)((*(float *)(param_1 + 0x3158) + fparam_1) *
                   *(float *)(param_1 + 0x315c));
-  if ((double)*(float *)(param_1 + 0x24) < dVar1) {
+  if ((double)*(float *)(param_1 + 0x24) < (double)dVar1) {
     return (double)*(float *)(param_1 + 0x24);
   }
-  if ((double)FLOAT_00108e50 <= dVar1) {
-    return dVar1;
+  if ((double)FLOAT_00108e50 <= (double)dVar1) {
+    return (double)dVar1;
   }
   return (double)FLOAT_00108e50;
 }
@@ -3002,7 +3002,7 @@ void _glFogfv_Exec(param_1, param_2, param_3)
   uint uVar8;
   int iVar9;
   int iVar10;
-  double dVar11;
+  float dVar11;
   
   fVar5 = FLOAT_00108e54;
   fVar4 = FLOAT_00108e50;
@@ -3059,8 +3059,8 @@ LAB_00053594:
     if (param_2 != 0xb66) {
       if (param_2 < 0xb66) {
         dVar11 = (double)*param_3;
-        if (DOUBLE_00108d80 <= dVar11) {
-          uVar8 = (int)(dVar11 - DOUBLE_00108d80) ^ 0x80000000;
+        if (DOUBLE_00108d80 <= (double)dVar11) {
+          uVar8 = (int)((double)dVar11 - DOUBLE_00108d80) ^ 0x80000000;
         }
         else {
           uVar8 = (uint)(int)*param_3;
@@ -3080,15 +3080,15 @@ LAB_00053594:
         if (param_2 == 0x8450) {
           fVar4 = *param_3;
           dVar11 = (double)fVar4;
-          if (DOUBLE_00108d80 <= dVar11) {
-            uVar8 = (int)(dVar11 - DOUBLE_00108d80) ^ 0x80000000;
+          if (DOUBLE_00108d80 <= (double)dVar11) {
+            uVar8 = (int)((double)dVar11 - DOUBLE_00108d80) ^ 0x80000000;
           }
           else {
             uVar8 = (uint)(int)fVar4;
           }
           if (uVar8 - 0x8451 < 2) {
-            if (DOUBLE_00108d80 <= dVar11) {
-              uVar7 = (undefined2)(int)(dVar11 - DOUBLE_00108d80);
+            if (DOUBLE_00108d80 <= (double)dVar11) {
+              uVar7 = (undefined2)(int)((double)dVar11 - DOUBLE_00108d80);
             }
             else {
               uVar7 = (undefined2)(int)fVar4;
@@ -3101,15 +3101,15 @@ LAB_00053594:
         else if (param_2 == 0x855a) {
           fVar4 = *param_3;
           dVar11 = (double)fVar4;
-          if (DOUBLE_00108d80 <= dVar11) {
-            uVar8 = (int)(dVar11 - DOUBLE_00108d80) ^ 0x80000000;
+          if (DOUBLE_00108d80 <= (double)dVar11) {
+            uVar8 = (int)((double)dVar11 - DOUBLE_00108d80) ^ 0x80000000;
           }
           else {
             uVar8 = (uint)(int)fVar4;
           }
           if ((uVar8 == 0x2502) || ((0x2501 < uVar8 && (uVar8 - 0x855b < 2)))) {
-            if (DOUBLE_00108d80 <= dVar11) {
-              uVar7 = (undefined2)(int)(dVar11 - DOUBLE_00108d80);
+            if (DOUBLE_00108d80 <= (double)dVar11) {
+              uVar7 = (undefined2)(int)((double)dVar11 - DOUBLE_00108d80);
             }
             else {
               uVar7 = (undefined2)(int)fVar4;

@@ -290,7 +290,7 @@ double _gleFeedbackTriangleFan(param_1, param_2, param_3, param_4, param_5)
   int iVar2;
   int iVar3;
   int iVar4;
-  double dVar5;
+  float dVar5;
   
   uVar1 = param_5 & 3;
   iVar2 = param_4 + -2;
@@ -304,10 +304,10 @@ double _gleFeedbackTriangleFan(param_1, param_2, param_3, param_4, param_5)
         ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f2c);
         _gleFeedbackHitRecord(param_1,param_2);
         _gleFeedbackHitRecord(param_1,param_3);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar5);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar5);
         _gleFeedbackHitRecord(param_1,param_3);
         _gleFeedbackHitRecord(param_1,iVar4);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar5);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar5);
         _gleFeedbackHitRecord(param_1,iVar4);
         _gleFeedbackHitRecord(param_1,param_2);
         param_3 = iVar4;
@@ -319,11 +319,11 @@ double _gleFeedbackTriangleFan(param_1, param_2, param_3, param_4, param_5)
       dVar5 = (double)FLOAT_00108f28;
       do {
         iVar3 = iVar3 + 1;
-        ((void (*)())_gleFeedbackToken)(param_1,dVar5);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar5);
         _gleFeedbackHitRecord(param_1,param_2);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar5);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar5);
         _gleFeedbackHitRecord(param_1,param_3);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar5);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar5);
         _gleFeedbackHitRecord(param_1,param_3 + 0x100);
         param_3 = param_3 + 0x100;
       } while (iVar3 <= iVar2);
@@ -357,7 +357,7 @@ double _gleFeedbackTriangleStrip(param_1, param_2, param_3, param_4)
   int iVar4;
   int iVar5;
   int iVar6;
-  double dVar7;
+  float dVar7;
   
   uVar2 = param_4 & 3;
   iVar3 = param_3 + -3;
@@ -372,20 +372,20 @@ double _gleFeedbackTriangleStrip(param_1, param_2, param_3, param_4)
         ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f2c);
         _gleFeedbackHitRecord(param_1,param_2);
         _gleFeedbackHitRecord(param_1,iVar6);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar7);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar7);
         _gleFeedbackHitRecord(param_1,iVar6);
         _gleFeedbackHitRecord(param_1,iVar5);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar7);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar7);
         _gleFeedbackHitRecord(param_1,iVar5);
         _gleFeedbackHitRecord(param_1,param_2);
         if (bVar1) {
-          ((void (*)())_gleFeedbackToken)(param_1,dVar7);
+          ((void (*)())_gleFeedbackToken)(param_1,(double)dVar7);
           _gleFeedbackHitRecord(param_1,iVar5);
           _gleFeedbackHitRecord(param_1,iVar6);
-          ((void (*)())_gleFeedbackToken)(param_1,dVar7);
+          ((void (*)())_gleFeedbackToken)(param_1,(double)dVar7);
           _gleFeedbackHitRecord(param_1,iVar6);
           _gleFeedbackHitRecord(param_1,param_2 + 0x300);
-          ((void (*)())_gleFeedbackToken)(param_1,dVar7);
+          ((void (*)())_gleFeedbackToken)(param_1,(double)dVar7);
           _gleFeedbackHitRecord(param_1,param_2 + 0x300);
           _gleFeedbackHitRecord(param_1,iVar5);
         }
@@ -401,18 +401,18 @@ double _gleFeedbackTriangleStrip(param_1, param_2, param_3, param_4)
       dVar7 = (double)FLOAT_00108f28;
       do {
         iVar6 = param_2 + 0x200;
-        ((void (*)())_gleFeedbackToken)(param_1,dVar7);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar7);
         _gleFeedbackHitRecord(param_1,param_2);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar7);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar7);
         _gleFeedbackHitRecord(param_1,param_2 + 0x100);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar7);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar7);
         _gleFeedbackHitRecord(param_1,iVar6);
         if (bVar1) {
-          ((void (*)())_gleFeedbackToken)(param_1,dVar7);
+          ((void (*)())_gleFeedbackToken)(param_1,(double)dVar7);
           _gleFeedbackHitRecord(param_1,iVar6);
-          ((void (*)())_gleFeedbackToken)(param_1,dVar7);
+          ((void (*)())_gleFeedbackToken)(param_1,(double)dVar7);
           _gleFeedbackHitRecord(param_1,param_2 + 0x100);
-          ((void (*)())_gleFeedbackToken)(param_1,dVar7);
+          ((void (*)())_gleFeedbackToken)(param_1,(double)dVar7);
           _gleFeedbackHitRecord(param_1,param_2 + 0x300);
         }
         iVar4 = iVar4 + 2;
@@ -425,13 +425,13 @@ double _gleFeedbackTriangleStrip(param_1, param_2, param_3, param_4)
     dVar7 = (double)FLOAT_00108f30;
     do {
       iVar6 = param_2 + 0x200;
-      ((void (*)())_gleFeedbackToken)(param_1,dVar7);
+      ((void (*)())_gleFeedbackToken)(param_1,(double)dVar7);
       ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f38);
       _gleFeedbackHitRecord(param_1,param_2);
       _gleFeedbackHitRecord(param_1,param_2 + 0x100);
       _gleFeedbackHitRecord(param_1,iVar6);
       if (bVar1) {
-        ((void (*)())_gleFeedbackToken)(param_1,dVar7);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar7);
         ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f38);
         _gleFeedbackHitRecord(param_1,iVar6);
         _gleFeedbackHitRecord(param_1,param_2 + 0x100);
@@ -535,7 +535,7 @@ double _gleFeedbackQuadStrip(param_1, param_2, param_3, param_4)
   int iVar2;
   int iVar3;
   int iVar4;
-  double dVar5;
+  float dVar5;
   
   uVar1 = param_4 & 3;
   iVar2 = param_3 + -4;
@@ -548,14 +548,14 @@ double _gleFeedbackQuadStrip(param_1, param_2, param_3, param_4)
         iVar3 = iVar3 + 2;
         _gleFeedbackHitRecord(param_1,param_2);
         _gleFeedbackHitRecord(param_1,param_2 + 0x100);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar5);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar5);
         iVar4 = param_2 + 0x200;
         _gleFeedbackHitRecord(param_1,param_2 + 0x100);
         _gleFeedbackHitRecord(param_1,param_2 + 0x300);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar5);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar5);
         _gleFeedbackHitRecord(param_1,param_2 + 0x300);
         _gleFeedbackHitRecord(param_1,iVar4);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar5);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar5);
         _gleFeedbackHitRecord(param_1,iVar4);
         _gleFeedbackHitRecord(param_1,param_2);
         param_2 = iVar4;
@@ -567,13 +567,13 @@ double _gleFeedbackQuadStrip(param_1, param_2, param_3, param_4)
       dVar5 = (double)FLOAT_00108f28;
       do {
         iVar3 = iVar3 + 2;
-        ((void (*)())_gleFeedbackToken)(param_1,dVar5);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar5);
         _gleFeedbackHitRecord(param_1,param_2);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar5);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar5);
         _gleFeedbackHitRecord(param_1,param_2 + 0x100);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar5);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar5);
         _gleFeedbackHitRecord(param_1,param_2 + 0x300);
-        ((void (*)())_gleFeedbackToken)(param_1,dVar5);
+        ((void (*)())_gleFeedbackToken)(param_1,(double)dVar5);
         _gleFeedbackHitRecord(param_1,param_2 + 0x200);
         param_2 = param_2 + 0x200;
       } while (iVar3 <= iVar2);
@@ -1782,7 +1782,7 @@ double _gleFogExp2(int param_1,float fparam_1)
   float fVar1;
   float fVar2;
   
-  fVar1 = (float)((double)*(float *)(param_1 + 0x3150) * fparam_1);
+  fVar1 = (*(float *)(param_1 + 0x3150) * fparam_1);
   fVar2 = *(float *)(param_1 + 0x24);
   fVar1 = fVar1 * -fVar1;
   return (double)(fVar2 / ((((*(float *)(param_1 + 0x38) * fVar1 - *(float *)(param_1 + 0x34)) *
@@ -3596,9 +3596,9 @@ void _LFSStreamChunkOutputDebugInfo(param_1)
   uint uVar8;
   uint uVar9;
   byte *pbVar10;
-  double dVar11;
-  double dVar12;
-  double dVar13;
+  float dVar11;
+  float dVar12;
+  float dVar13;
   undefined4 local_30;
   undefined4 uStack_2c;
   
@@ -3648,17 +3648,17 @@ void _LFSStreamChunkOutputDebugInfo(param_1)
           dVar12 = (double)*(float *)(param_1 + 0xc);
           local_30 = (undefined4)((ulonglong)(double)*(float *)(param_1 + 0x10) >> 0x20);
           uVar7 = local_30;
-          local_30 = (undefined4)((ulonglong)dVar11 >> 0x20);
+          local_30 = (undefined4)((ulonglong)(double)dVar11 >> 0x20);
           uVar2 = local_30;
-          uStack_2c = SUB84(dVar11,0);
+          uStack_2c = SUB84((double)dVar11,0);
           uVar4 = uStack_2c;
-          local_30 = (undefined4)((ulonglong)dVar13 >> 0x20);
+          local_30 = (undefined4)((ulonglong)(double)dVar13 >> 0x20);
           uVar3 = local_30;
-          uStack_2c = SUB84(dVar13,0);
+          uStack_2c = SUB84((double)dVar13,0);
           uVar5 = uStack_2c;
-          local_30 = (undefined4)((ulonglong)dVar12 >> 0x20);
-          uStack_2c = SUB84(dVar12,0);
-          _printf("      constant = { %f, %f, %f, %f }\n;",dVar11,dVar13,dVar12,
+          local_30 = (undefined4)((ulonglong)(double)dVar12 >> 0x20);
+          uStack_2c = SUB84((double)dVar12,0);
+          _printf("      constant = { %f, %f, %f, %f }\n;",(double)dVar11,(double)dVar13,(double)dVar12,
                   (double)*(float *)(param_1 + 0x10),uVar2,uVar4,uVar3,uVar5,local_30,uStack_2c,
                   uVar7);
         }

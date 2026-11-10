@@ -2516,7 +2516,7 @@ void _glMapGrid1f_Exec(int param_1,uint param_2,float fparam_1,float fparam_2,do
       *(float *)(param_1 + 0x74ac) = (float)fparam_1;
       *(float *)(param_1 + 0x74b0) = (float)fparam_2;
       *(float *)(param_1 + 0x74b4) =
-           (float)(fparam_2 - fparam_1) /
+           (fparam_2 - fparam_1) /
            (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - dVar1);
       return;
     }
@@ -2713,9 +2713,9 @@ void _glMapGrid2f_Exec(int param_1,uint param_2,undefined4 param_3,undefined4 pa
       *(uint *)(param_1 + 0x74c8) = param_5;
       *(float *)(param_1 + 0x74cc) = (float)fparam_3;
       *(float *)(param_1 + 0x74d0) = (float)fparam_4;
-      *(float *)(param_1 + 0x74c4) = (float)(fparam_2 - fparam_1) / (float)dVar3;
+      *(float *)(param_1 + 0x74c4) = (fparam_2 - fparam_1) / (float)dVar3;
       *(float *)(param_1 + 0x74d4) =
-           (float)(fparam_4 - fparam_3) /
+           (fparam_4 - fparam_3) /
            (float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - dVar1);
       return;
     }

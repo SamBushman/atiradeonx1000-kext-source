@@ -87,12 +87,10 @@ int _gleElementOffset(param_1, param_2, param_3, param_4, param_5, param_6)
 int _gleGetFrac(float fparam_1)
 {
   if ((double)FLOAT_00108e50 <= fparam_1) {
-    return (int)((float)(fparam_1 -
-                        (double)(float)((double)CONCAT44(0x43300000,(int)fparam_1 ^ 0x80000000) -
+    return (int)((fparam_1 - (float)((double)CONCAT44(0x43300000,(int)fparam_1 ^ 0x80000000) -
                                        DOUBLE_00108d58)) * FLOAT_00108f54);
   }
-  return (int)((float)(fparam_1 -
-                      (double)(float)((double)CONCAT44(0x43300000,
+  return (int)((fparam_1 - (float)((double)CONCAT44(0x43300000,
                                                        (int)(fparam_1 - (double)FLOAT_00108f50) ^
                                                        0x80000000) - DOUBLE_00108d58)) *
               FLOAT_00108f54);

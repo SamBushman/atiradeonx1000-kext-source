@@ -48,14 +48,21 @@ for ent, (name, ks) in sorted(sig.items()):
     res = []
     for k in ks:
         sp = bad = 0; first = None
+        alias = set()         # registers that hold a plain copy of the parameter (`fmr f4,f1`), from the fmr until something else writes them or a call: their reads are reads of the parameter
         for a in addrs:
             op, arg = ins[a]; d, u = fdefs_uses(op, arg)
             if first is None and (k in u or k in d): first = 'u' if (k in u and op not in ('bl', 'bctrl', 'blrl')) else 'd'   # a call first: unknown, left double   # the entry value must be read before anything writes the register (address order)
-            if k in u:
+            holds = {k} | alias
+            if op == 'fmr' and len(u) == 1 and next(iter(u)) in holds and first == 'u' and (k not in d):
+                alias.add(next(iter(d)))             # a copy: its reads count (the copy itself is not a read of the format)
+                continue
+            if holds & u:
                 if op in ('bl', 'bctrl', 'blrl'): pass      # argument passing: consistent with either type
                 elif op in SP or op in SPD: sp += 1
                 elif op in NEUTRAL: pass
                 else: bad += 1
+            alias -= (d - ({k} if False else set()))       # any other write ends an alias
+            if op in ('bl', 'bctrl', 'blrl'): alias = set()
         if sp and not bad and first == 'u': res.append(k)
     if res: print('%x\t%s\t%s' % (ent, name, ','.join(map(str, res)))); out += 1
 sys.stderr.write('float_params: %d functions with float parameters (of %d with double parameters)\n' % (out, len(sig)))

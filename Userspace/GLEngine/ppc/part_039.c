@@ -878,26 +878,21 @@ void _gleInterpolEyeNO0000(int param_1,float *param_2,int param_3,float *param_4
   fVar6 = *(float *)(param_3 + 0x28);
   fVar7 = param_2[4];
   fVar8 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar2 - (double)fVar11) + (double)fVar11
-                        );
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar2 - fVar11) + fVar11);
   fVar2 = param_2[5];
   fVar9 = *(float *)(param_3 + 0x14);
   fVar10 = param_2[6];
-  fVar11 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar7) + (double)fVar7);
+  fVar11 = (fparam_1 * (fVar8 - fVar7) + fVar7);
   fVar7 = *(float *)(param_3 + 0x18);
   fVar8 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
+  param_4[9] = (fparam_1 * (fVar5 - fVar3) + fVar3);
+  param_4[10] = (fparam_1 * (fVar6 - fVar4) + fVar4);
   param_4[4] = fVar11;
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar2) + (double)fVar2);
+  fVar2 = (fparam_1 * (fVar9 - fVar2) + fVar2);
   param_4[7] = fVar1;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar10) + (double)fVar10);
+  fVar3 = (fparam_1 * (fVar7 - fVar10) + fVar10);
   param_4[5] = fVar2;
   param_4[6] = fVar3;
   if (fVar11 < fVar8) {
@@ -974,26 +969,21 @@ void _gleInterpolEyeNO0010(int param_1,float *param_2,int param_3,float *param_4
   fVar6 = *(float *)(param_3 + 0x28);
   fVar7 = param_2[4];
   fVar8 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar2 - (double)fVar11) + (double)fVar11
-                        );
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar2 - fVar11) + fVar11);
   fVar2 = param_2[5];
   fVar9 = *(float *)(param_3 + 0x14);
   fVar10 = param_2[6];
-  fVar11 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar7) + (double)fVar7);
+  fVar11 = (fparam_1 * (fVar8 - fVar7) + fVar7);
   fVar7 = *(float *)(param_3 + 0x18);
   fVar8 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
+  param_4[9] = (fparam_1 * (fVar5 - fVar3) + fVar3);
+  param_4[10] = (fparam_1 * (fVar6 - fVar4) + fVar4);
   param_4[4] = fVar11;
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar2) + (double)fVar2);
+  fVar2 = (fparam_1 * (fVar9 - fVar2) + fVar2);
   param_4[7] = fVar1;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar10) + (double)fVar10);
+  fVar3 = (fparam_1 * (fVar7 - fVar10) + fVar10);
   param_4[5] = fVar2;
   param_4[6] = fVar3;
   if (fVar11 < fVar8) {
@@ -1032,9 +1022,7 @@ void _gleInterpolEyeNO0010(int param_1,float *param_2,int param_3,float *param_4
     param_4[2] = fVar2 * fVar3 + fVar11;
   }
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) - (double)param_2[0x13]) +
-              (double)param_2[0x13]);
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
   if (param_2 == param_4) {
     return;
   }
@@ -1065,15 +1053,15 @@ void _gleInterpolEyeNO0100(int param_1,float *param_2,int param_3,float *param_4
   float fVar11;
   float fVar12;
   uint uVar13;
-  double dVar14;
-  double dVar15;
-  double dVar16;
-  double dVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  double dVar22;
+  float dVar14;
+  float dVar15;
+  float dVar16;
+  float dVar17;
+  float dVar18;
+  float dVar19;
+  float dVar20;
+  float dVar21;
+  float dVar22;
   
   fVar12 = param_2[0xb];
   fVar3 = *(float *)(param_3 + 0x2c);
@@ -1084,26 +1072,21 @@ void _gleInterpolEyeNO0100(int param_1,float *param_2,int param_3,float *param_4
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = param_2[4];
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar12) + (double)fVar12
-                        );
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar3 - fVar12) + fVar12);
   fVar3 = param_2[5];
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = param_2[6];
-  fVar12 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar12 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar12;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar3) + (double)fVar3);
+  fVar3 = (fparam_1 * (fVar10 - fVar3) + fVar3);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar8 - fVar11) + fVar11);
   cVar2 = *(char *)((int)param_2 + 0x7f);
   param_4[5] = fVar3;
   param_4[6] = fVar4;
@@ -1148,10 +1131,10 @@ void _gleInterpolEyeNO0100(int param_1,float *param_2,int param_3,float *param_4
   dVar22 = (double)param_2[0x23];
   if (cVar2 == '\0') {
     dVar14 = (double)param_2[7];
-    dVar22 = (double)(float)(dVar22 * dVar14);
-    dVar16 = (double)(float)(dVar16 * dVar14);
-    dVar18 = (double)(float)(dVar18 * dVar14);
-    dVar17 = (double)(float)(dVar17 * dVar14);
+    dVar22 = (double)(dVar22 * dVar14);
+    dVar16 = (double)(dVar16 * dVar14);
+    dVar18 = (double)(dVar18 * dVar14);
+    dVar17 = (double)(dVar17 * dVar14);
   }
   dVar14 = (double)*(float *)(param_3 + 0x80);
   dVar21 = (double)*(float *)(param_3 + 0x84);
@@ -1159,15 +1142,15 @@ void _gleInterpolEyeNO0100(int param_1,float *param_2,int param_3,float *param_4
   dVar20 = (double)*(float *)(param_3 + 0x8c);
   if (*(char *)(param_3 + 0x7f) == '\0') {
     dVar15 = (double)*(float *)(param_3 + 0x1c);
-    dVar20 = (double)(float)(dVar20 * dVar15);
-    dVar14 = (double)(float)(dVar14 * dVar15);
-    dVar21 = (double)(float)(dVar21 * dVar15);
-    dVar19 = (double)(float)(dVar19 * dVar15);
+    dVar20 = (double)(dVar20 * dVar15);
+    dVar14 = (double)(dVar14 * dVar15);
+    dVar21 = (double)(dVar21 * dVar15);
+    dVar19 = (double)(dVar19 * dVar15);
   }
-  fVar1 = (float)(fparam_1 * (double)(float)(dVar14 - dVar16) + dVar16);
-  fVar12 = (float)(fparam_1 * (double)(float)(dVar21 - dVar18) + dVar18);
-  fVar3 = (float)(fparam_1 * (double)(float)(dVar20 - dVar22) + dVar22);
-  fVar4 = (float)(fparam_1 * (double)(float)(dVar19 - dVar17) + dVar17);
+  fVar1 = (fparam_1 * (dVar14 - dVar16) + dVar16);
+  fVar12 = (fparam_1 * (dVar21 - dVar18) + dVar18);
+  fVar3 = (fparam_1 * (dVar20 - dVar22) + dVar22);
+  fVar4 = (fparam_1 * (dVar19 - dVar17) + dVar17);
   if (uVar13 == 0) {
     fVar5 = param_4[3];
     fVar3 = fVar3 * fVar5;
@@ -1218,26 +1201,21 @@ void _gleInterpolEyeNO0100w(int param_1,float *param_2,int param_3,float *param_
   fVar6 = *(float *)(param_3 + 0x28);
   fVar7 = param_2[4];
   fVar8 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar2 - (double)fVar11) + (double)fVar11
-                        );
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar2 - fVar11) + fVar11);
   fVar2 = param_2[5];
   fVar9 = *(float *)(param_3 + 0x14);
   fVar10 = param_2[6];
-  fVar11 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar7) + (double)fVar7);
+  fVar11 = (fparam_1 * (fVar8 - fVar7) + fVar7);
   fVar7 = *(float *)(param_3 + 0x18);
   fVar8 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
+  param_4[9] = (fparam_1 * (fVar5 - fVar3) + fVar3);
+  param_4[10] = (fparam_1 * (fVar6 - fVar4) + fVar4);
   param_4[4] = fVar11;
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar2) + (double)fVar2);
+  fVar2 = (fparam_1 * (fVar9 - fVar2) + fVar2);
   param_4[7] = fVar1;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar10) + (double)fVar10);
+  fVar3 = (fparam_1 * (fVar7 - fVar10) + fVar10);
   param_4[5] = fVar2;
   param_4[6] = fVar3;
   if (fVar11 < fVar8) {
@@ -1282,15 +1260,13 @@ void _gleInterpolEyeNO0100w(int param_1,float *param_2,int param_3,float *param_
   fVar4 = *(float *)(param_3 + 0x84);
   fVar5 = *(float *)(param_3 + 0x88);
   param_4[0x20] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x80) - (double)param_2[0x20]) +
-              (double)param_2[0x20]);
-  param_4[0x23] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar2) + (double)fVar2)
+       (fparam_1 * (*(float *)(param_3 + 0x80) - param_2[0x20]) + param_2[0x20]);
+  param_4[0x23] = (fparam_1 * (fVar3 - fVar2) + fVar2)
   ;
-  param_4[0x21] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1)
+  param_4[0x21] = (fparam_1 * (fVar4 - fVar1) + fVar1)
   ;
   param_4[0x22] =
-       (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar11) + (double)fVar11);
+       (fparam_1 * (fVar5 - fVar11) + fVar11);
   if (param_2 == param_4) {
     return;
   }
@@ -1321,15 +1297,15 @@ void _gleInterpolEyeNO0110(int param_1,float *param_2,int param_3,float *param_4
   float fVar11;
   float fVar12;
   uint uVar13;
-  double dVar14;
-  double dVar15;
-  double dVar16;
-  double dVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  double dVar22;
+  float dVar14;
+  float dVar15;
+  float dVar16;
+  float dVar17;
+  float dVar18;
+  float dVar19;
+  float dVar20;
+  float dVar21;
+  float dVar22;
   
   fVar12 = param_2[0xb];
   fVar3 = *(float *)(param_3 + 0x2c);
@@ -1340,26 +1316,21 @@ void _gleInterpolEyeNO0110(int param_1,float *param_2,int param_3,float *param_4
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = param_2[4];
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar12) + (double)fVar12
-                        );
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar3 - fVar12) + fVar12);
   fVar3 = param_2[5];
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = param_2[6];
-  fVar12 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar12 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar12;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar3) + (double)fVar3);
+  fVar3 = (fparam_1 * (fVar10 - fVar3) + fVar3);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar8 - fVar11) + fVar11);
   cVar2 = *(char *)((int)param_2 + 0x7f);
   param_4[5] = fVar3;
   param_4[6] = fVar4;
@@ -1399,19 +1370,17 @@ void _gleInterpolEyeNO0110(int param_1,float *param_2,int param_3,float *param_4
     param_4[2] = fVar3 * fVar4 + fVar12;
   }
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) - (double)param_2[0x13]) +
-              (double)param_2[0x13]);
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
   dVar16 = (double)param_2[0x20];
   dVar17 = (double)param_2[0x21];
   dVar18 = (double)param_2[0x22];
   dVar22 = (double)param_2[0x23];
   if (cVar2 == '\0') {
     dVar14 = (double)param_2[7];
-    dVar22 = (double)(float)(dVar22 * dVar14);
-    dVar16 = (double)(float)(dVar16 * dVar14);
-    dVar17 = (double)(float)(dVar17 * dVar14);
-    dVar18 = (double)(float)(dVar18 * dVar14);
+    dVar22 = (double)(dVar22 * dVar14);
+    dVar16 = (double)(dVar16 * dVar14);
+    dVar17 = (double)(dVar17 * dVar14);
+    dVar18 = (double)(dVar18 * dVar14);
   }
   dVar14 = (double)*(float *)(param_3 + 0x80);
   dVar20 = (double)*(float *)(param_3 + 0x84);
@@ -1419,15 +1388,15 @@ void _gleInterpolEyeNO0110(int param_1,float *param_2,int param_3,float *param_4
   dVar19 = (double)*(float *)(param_3 + 0x8c);
   if (*(char *)(param_3 + 0x7f) == '\0') {
     dVar15 = (double)*(float *)(param_3 + 0x1c);
-    dVar19 = (double)(float)(dVar19 * dVar15);
-    dVar14 = (double)(float)(dVar14 * dVar15);
-    dVar20 = (double)(float)(dVar20 * dVar15);
-    dVar21 = (double)(float)(dVar21 * dVar15);
+    dVar19 = (double)(dVar19 * dVar15);
+    dVar14 = (double)(dVar14 * dVar15);
+    dVar20 = (double)(dVar20 * dVar15);
+    dVar21 = (double)(dVar21 * dVar15);
   }
-  fVar1 = (float)(fparam_1 * (double)(float)(dVar14 - dVar16) + dVar16);
-  fVar12 = (float)(fparam_1 * (double)(float)(dVar20 - dVar17) + dVar17);
-  fVar3 = (float)(fparam_1 * (double)(float)(dVar19 - dVar22) + dVar22);
-  fVar4 = (float)(fparam_1 * (double)(float)(dVar21 - dVar18) + dVar18);
+  fVar1 = (fparam_1 * (dVar14 - dVar16) + dVar16);
+  fVar12 = (fparam_1 * (dVar20 - dVar17) + dVar17);
+  fVar3 = (fparam_1 * (dVar19 - dVar22) + dVar22);
+  fVar4 = (fparam_1 * (dVar21 - dVar18) + dVar18);
   if (uVar13 == 0) {
     fVar5 = param_4[3];
     fVar3 = fVar3 * fVar5;
@@ -1478,26 +1447,21 @@ void _gleInterpolEyeNO0110w(int param_1,float *param_2,int param_3,float *param_
   fVar6 = *(float *)(param_3 + 0x28);
   fVar7 = param_2[4];
   fVar8 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar2 - (double)fVar11) + (double)fVar11
-                        );
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar2 - fVar11) + fVar11);
   fVar2 = param_2[5];
   fVar9 = *(float *)(param_3 + 0x14);
   fVar10 = param_2[6];
-  fVar11 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar7) + (double)fVar7);
+  fVar11 = (fparam_1 * (fVar8 - fVar7) + fVar7);
   fVar7 = *(float *)(param_3 + 0x18);
   fVar8 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
+  param_4[9] = (fparam_1 * (fVar5 - fVar3) + fVar3);
+  param_4[10] = (fparam_1 * (fVar6 - fVar4) + fVar4);
   param_4[4] = fVar11;
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar2) + (double)fVar2);
+  fVar2 = (fparam_1 * (fVar9 - fVar2) + fVar2);
   param_4[7] = fVar1;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar10) + (double)fVar10);
+  fVar3 = (fparam_1 * (fVar7 - fVar10) + fVar10);
   param_4[5] = fVar2;
   param_4[6] = fVar3;
   if (fVar11 < fVar8) {
@@ -1536,9 +1500,7 @@ void _gleInterpolEyeNO0110w(int param_1,float *param_2,int param_3,float *param_
     param_4[2] = fVar2 * fVar3 + fVar11;
   }
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) - (double)param_2[0x13]) +
-              (double)param_2[0x13]);
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
   fVar1 = param_2[0x21];
   fVar11 = param_2[0x22];
   fVar2 = param_2[0x23];
@@ -1546,15 +1508,13 @@ void _gleInterpolEyeNO0110w(int param_1,float *param_2,int param_3,float *param_
   fVar4 = *(float *)(param_3 + 0x84);
   fVar5 = *(float *)(param_3 + 0x88);
   param_4[0x20] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x80) - (double)param_2[0x20]) +
-              (double)param_2[0x20]);
-  param_4[0x21] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1)
+       (fparam_1 * (*(float *)(param_3 + 0x80) - param_2[0x20]) + param_2[0x20]);
+  param_4[0x21] = (fparam_1 * (fVar4 - fVar1) + fVar1)
   ;
-  param_4[0x23] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar2) + (double)fVar2)
+  param_4[0x23] = (fparam_1 * (fVar3 - fVar2) + fVar2)
   ;
   param_4[0x22] =
-       (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar11) + (double)fVar11);
+       (fparam_1 * (fVar5 - fVar11) + fVar11);
   if (param_2 == param_4) {
     return;
   }
@@ -1589,15 +1549,15 @@ void _gleInterpolEyeNO0200(int param_1,float *param_2,int param_3,float *param_4
   uint uVar15;
   uint uVar16;
   uint uVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  double dVar22;
-  double dVar23;
-  double dVar24;
-  double dVar25;
-  double dVar26;
+  float dVar18;
+  float dVar19;
+  float dVar20;
+  float dVar21;
+  float dVar22;
+  float dVar23;
+  float dVar24;
+  float dVar25;
+  float dVar26;
   
   fVar14 = param_2[0xb];
   fVar3 = *(float *)(param_3 + 0x2c);
@@ -1608,26 +1568,21 @@ void _gleInterpolEyeNO0200(int param_1,float *param_2,int param_3,float *param_4
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = param_2[4];
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar14) + (double)fVar14
-                        );
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar3 - fVar14) + fVar14);
   fVar3 = param_2[5];
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = param_2[6];
-  fVar14 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar14 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar14;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar3) + (double)fVar3);
+  fVar3 = (fparam_1 * (fVar10 - fVar3) + fVar3);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar8 - fVar11) + fVar11);
   cVar2 = *(char *)((int)param_2 + 0x7f);
   param_4[5] = fVar3;
   param_4[6] = fVar4;
@@ -1693,10 +1648,10 @@ void _gleInterpolEyeNO0200(int param_1,float *param_2,int param_3,float *param_4
       dVar22 = (double)param_2[uVar17 * 4 + 0x22];
       if (cVar2 == '\0') {
         dVar18 = (double)param_2[7];
-        dVar26 = (double)(float)(dVar26 * dVar18);
-        dVar20 = (double)(float)(dVar20 * dVar18);
-        dVar21 = (double)(float)(dVar21 * dVar18);
-        dVar22 = (double)(float)(dVar22 * dVar18);
+        dVar26 = (double)(dVar26 * dVar18);
+        dVar20 = (double)(dVar20 * dVar18);
+        dVar21 = (double)(dVar21 * dVar18);
+        dVar22 = (double)(dVar22 * dVar18);
       }
       iVar13 = uVar17 * 0x10 + param_3;
       dVar23 = (double)*(float *)(iVar13 + 0x8c);
@@ -1705,15 +1660,15 @@ void _gleInterpolEyeNO0200(int param_1,float *param_2,int param_3,float *param_4
       dVar24 = (double)*(float *)(iVar13 + 0x88);
       if (*(char *)(param_3 + 0x7f) == '\0') {
         dVar19 = (double)*(float *)(param_3 + 0x1c);
-        dVar23 = (double)(float)(dVar23 * dVar19);
-        dVar18 = (double)(float)(dVar18 * dVar19);
-        dVar25 = (double)(float)(dVar25 * dVar19);
-        dVar24 = (double)(float)(dVar24 * dVar19);
+        dVar23 = (double)(dVar23 * dVar19);
+        dVar18 = (double)(dVar18 * dVar19);
+        dVar25 = (double)(dVar25 * dVar19);
+        dVar24 = (double)(dVar24 * dVar19);
       }
-      fVar1 = (float)(fparam_1 * (double)(float)(dVar18 - dVar20) + dVar20);
-      fVar14 = (float)(fparam_1 * (double)(float)(dVar25 - dVar21) + dVar21);
-      fVar3 = (float)(fparam_1 * (double)(float)(dVar24 - dVar22) + dVar22);
-      fVar4 = (float)(fparam_1 * (double)(float)(dVar23 - dVar26) + dVar26);
+      fVar1 = (fparam_1 * (dVar18 - dVar20) + dVar20);
+      fVar14 = (fparam_1 * (dVar25 - dVar21) + dVar21);
+      fVar3 = (fparam_1 * (dVar24 - dVar22) + dVar22);
+      fVar4 = (fparam_1 * (dVar23 - dVar26) + dVar26);
       if (uVar16 == 0) {
         fVar5 = param_4[3];
         fVar4 = fVar4 * fVar5;
@@ -1758,26 +1713,21 @@ void _gleInterpolEyeNO0200w(int param_1,float *param_2,int param_3,float *param_
   fVar6 = *(float *)(param_3 + 0x28);
   fVar7 = param_2[4];
   fVar8 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar2 - (double)fVar12) + (double)fVar12
-                        );
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar2 - fVar12) + fVar12);
   fVar2 = param_2[5];
   fVar9 = *(float *)(param_3 + 0x14);
   fVar10 = param_2[6];
-  fVar12 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar7) + (double)fVar7);
+  fVar12 = (fparam_1 * (fVar8 - fVar7) + fVar7);
   fVar7 = *(float *)(param_3 + 0x18);
   fVar8 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
+  param_4[9] = (fparam_1 * (fVar5 - fVar3) + fVar3);
+  param_4[10] = (fparam_1 * (fVar6 - fVar4) + fVar4);
   param_4[4] = fVar12;
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar2) + (double)fVar2);
+  fVar2 = (fparam_1 * (fVar9 - fVar2) + fVar2);
   param_4[7] = fVar1;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar10) + (double)fVar10);
+  fVar3 = (fparam_1 * (fVar7 - fVar10) + fVar10);
   param_4[5] = fVar2;
   param_4[6] = fVar3;
   if (fVar12 < fVar8) {
@@ -1844,16 +1794,13 @@ void _gleInterpolEyeNO0200w(int param_1,float *param_2,int param_3,float *param_
       fVar4 = *(float *)(iVar15 + 0x84);
       fVar5 = *(float *)(iVar15 + 0x88);
       param_4[uVar14 * 4 + 0x20] =
-           (float)(fparam_1 *
-                   (double)(float)((double)*(float *)(iVar15 + 0x80) -
-                                  (double)param_2[uVar14 * 4 + 0x20]) +
-                  (double)param_2[uVar14 * 4 + 0x20]);
+           (fparam_1 * (*(float *)(iVar15 + 0x80) - param_2[uVar14 * 4 + 0x20]) + param_2[uVar14 * 4 + 0x20]);
       param_4[uVar14 * 4 + 0x21] =
-           (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar12) + (double)fVar12);
+           (fparam_1 * (fVar4 - fVar12) + fVar12);
       param_4[uVar14 * 4 + 0x22] =
-           (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2);
+           (fparam_1 * (fVar5 - fVar2) + fVar2);
       param_4[uVar14 * 4 + 0x23] =
-           (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar1) + (double)fVar1);
+           (fparam_1 * (fVar3 - fVar1) + fVar1);
     }
     uVar14 = uVar14 + 1;
   } while( true );
@@ -1879,15 +1826,15 @@ void _gleInterpolEyeNO0210(int param_1,float *param_2,int param_3,float *param_4
   uint uVar15;
   uint uVar16;
   uint uVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  double dVar22;
-  double dVar23;
-  double dVar24;
-  double dVar25;
-  double dVar26;
+  float dVar18;
+  float dVar19;
+  float dVar20;
+  float dVar21;
+  float dVar22;
+  float dVar23;
+  float dVar24;
+  float dVar25;
+  float dVar26;
   
   fVar14 = param_2[0xb];
   fVar3 = *(float *)(param_3 + 0x2c);
@@ -1898,26 +1845,21 @@ void _gleInterpolEyeNO0210(int param_1,float *param_2,int param_3,float *param_4
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = param_2[4];
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar14) + (double)fVar14
-                        );
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar3 - fVar14) + fVar14);
   fVar3 = param_2[5];
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = param_2[6];
-  fVar14 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar14 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar14;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar3) + (double)fVar3);
+  fVar3 = (fparam_1 * (fVar10 - fVar3) + fVar3);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar8 - fVar11) + fVar11);
   cVar2 = *(char *)((int)param_2 + 0x7f);
   param_4[5] = fVar3;
   param_4[6] = fVar4;
@@ -1958,9 +1900,7 @@ void _gleInterpolEyeNO0210(int param_1,float *param_2,int param_3,float *param_4
   }
   uVar17 = 0;
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) - (double)param_2[0x13]) +
-              (double)param_2[0x13]);
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
   uVar15 = *(uint *)(param_1 + 0x5150);
   do {
     uVar12 = uVar15 >> (uVar17 & 0x3f);
@@ -1987,10 +1927,10 @@ void _gleInterpolEyeNO0210(int param_1,float *param_2,int param_3,float *param_4
       dVar22 = (double)param_2[uVar17 * 4 + 0x22];
       if (cVar2 == '\0') {
         dVar18 = (double)param_2[7];
-        dVar26 = (double)(float)(dVar26 * dVar18);
-        dVar20 = (double)(float)(dVar20 * dVar18);
-        dVar21 = (double)(float)(dVar21 * dVar18);
-        dVar22 = (double)(float)(dVar22 * dVar18);
+        dVar26 = (double)(dVar26 * dVar18);
+        dVar20 = (double)(dVar20 * dVar18);
+        dVar21 = (double)(dVar21 * dVar18);
+        dVar22 = (double)(dVar22 * dVar18);
       }
       iVar13 = uVar17 * 0x10 + param_3;
       dVar23 = (double)*(float *)(iVar13 + 0x8c);
@@ -1999,15 +1939,15 @@ void _gleInterpolEyeNO0210(int param_1,float *param_2,int param_3,float *param_4
       dVar25 = (double)*(float *)(iVar13 + 0x88);
       if (*(char *)(param_3 + 0x7f) == '\0') {
         dVar19 = (double)*(float *)(param_3 + 0x1c);
-        dVar23 = (double)(float)(dVar23 * dVar19);
-        dVar18 = (double)(float)(dVar18 * dVar19);
-        dVar24 = (double)(float)(dVar24 * dVar19);
-        dVar25 = (double)(float)(dVar25 * dVar19);
+        dVar23 = (double)(dVar23 * dVar19);
+        dVar18 = (double)(dVar18 * dVar19);
+        dVar24 = (double)(dVar24 * dVar19);
+        dVar25 = (double)(dVar25 * dVar19);
       }
-      fVar1 = (float)(fparam_1 * (double)(float)(dVar18 - dVar20) + dVar20);
-      fVar14 = (float)(fparam_1 * (double)(float)(dVar24 - dVar21) + dVar21);
-      fVar3 = (float)(fparam_1 * (double)(float)(dVar25 - dVar22) + dVar22);
-      fVar4 = (float)(fparam_1 * (double)(float)(dVar23 - dVar26) + dVar26);
+      fVar1 = (fparam_1 * (dVar18 - dVar20) + dVar20);
+      fVar14 = (fparam_1 * (dVar24 - dVar21) + dVar21);
+      fVar3 = (fparam_1 * (dVar25 - dVar22) + dVar22);
+      fVar4 = (fparam_1 * (dVar23 - dVar26) + dVar26);
       if (uVar16 == 0) {
         fVar5 = param_4[3];
         fVar4 = fVar4 * fVar5;
@@ -2052,26 +1992,21 @@ void _gleInterpolEyeNO0210w(int param_1,float *param_2,int param_3,float *param_
   fVar6 = *(float *)(param_3 + 0x28);
   fVar7 = param_2[4];
   fVar8 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar2 - (double)fVar12) + (double)fVar12
-                        );
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar2 - fVar12) + fVar12);
   fVar2 = param_2[5];
   fVar9 = *(float *)(param_3 + 0x14);
   fVar10 = param_2[6];
-  fVar12 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar7) + (double)fVar7);
+  fVar12 = (fparam_1 * (fVar8 - fVar7) + fVar7);
   fVar7 = *(float *)(param_3 + 0x18);
   fVar8 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
+  param_4[9] = (fparam_1 * (fVar5 - fVar3) + fVar3);
+  param_4[10] = (fparam_1 * (fVar6 - fVar4) + fVar4);
   param_4[4] = fVar12;
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar2) + (double)fVar2);
+  fVar2 = (fparam_1 * (fVar9 - fVar2) + fVar2);
   param_4[7] = fVar1;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar10) + (double)fVar10);
+  fVar3 = (fparam_1 * (fVar7 - fVar10) + fVar10);
   param_4[5] = fVar2;
   param_4[6] = fVar3;
   if (fVar12 < fVar8) {
@@ -2111,9 +2046,7 @@ void _gleInterpolEyeNO0210w(int param_1,float *param_2,int param_3,float *param_
   }
   uVar14 = 0;
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) - (double)param_2[0x13]) +
-              (double)param_2[0x13]);
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
   uVar13 = *(uint *)(param_1 + 0x5150);
   do {
     uVar11 = uVar13 >> (uVar14 & 0x3f);
@@ -2142,23 +2075,20 @@ void _gleInterpolEyeNO0210w(int param_1,float *param_2,int param_3,float *param_
       fVar4 = *(float *)(iVar15 + 0x84);
       fVar5 = *(float *)(iVar15 + 0x88);
       param_4[uVar14 * 4 + 0x20] =
-           (float)(fparam_1 *
-                   (double)(float)((double)*(float *)(iVar15 + 0x80) -
-                                  (double)param_2[uVar14 * 4 + 0x20]) +
-                  (double)param_2[uVar14 * 4 + 0x20]);
+           (fparam_1 * (*(float *)(iVar15 + 0x80) - param_2[uVar14 * 4 + 0x20]) + param_2[uVar14 * 4 + 0x20]);
       param_4[uVar14 * 4 + 0x21] =
-           (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar12) + (double)fVar12);
+           (fparam_1 * (fVar4 - fVar12) + fVar12);
       param_4[uVar14 * 4 + 0x22] =
-           (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2);
+           (fparam_1 * (fVar5 - fVar2) + fVar2);
       param_4[uVar14 * 4 + 0x23] =
-           (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar1) + (double)fVar1);
+           (fparam_1 * (fVar3 - fVar1) + fVar1);
     }
     uVar14 = uVar14 + 1;
   } while( true );
 }
 
 /* _gleInterpolEyeNO1000 @ 0xb6a34 (476 bytes) */
-void _gleInterpolEyeNO1000(int param_1,int param_2,int param_3,float *param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1000(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2181,27 +2111,21 @@ void _gleInterpolEyeNO1000(int param_1,int param_2,int param_3,float *param_4,do
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = *(float *)(param_2 + 0x10);
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) -
-                                 (double)*(float *)(param_2 + 0x1c)) +
-                 (double)*(float *)(param_2 + 0x1c));
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) -
-                                      (double)*(float *)(param_2 + 0x20)) +
-                      (double)*(float *)(param_2 + 0x20));
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar2) + (double)fVar2);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - *(float *)(param_2 + 0x1c)) + *(float *)(param_2 + 0x1c));
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - *(float *)(param_2 + 0x20)) + *(float *)(param_2 + 0x20));
+  param_4[0xb] = (fparam_1 * (fVar3 - fVar2) + fVar2);
   fVar3 = *(float *)(param_2 + 0x14);
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = *(float *)(param_2 + 0x18);
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar2 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar6) + (double)fVar6);
+  param_4[9] = (fparam_1 * (fVar5 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar6) + fVar6);
   param_4[4] = fVar2;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar3) + (double)fVar3);
+  fVar3 = (fparam_1 * (fVar10 - fVar3) + fVar3);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar8 - fVar11) + fVar11);
   uVar12 = 0;
   param_4[5] = fVar3;
   param_4[6] = fVar4;
@@ -2246,18 +2170,15 @@ void _gleInterpolEyeNO1000(int param_1,int param_2,int param_3,float *param_4,do
   fVar4 = *(float *)(param_3 + 0x3c);
   fVar5 = *(float *)(param_3 + 0x34);
   fVar6 = *(float *)(param_3 + 0x38);
-  param_4[0xc] = (float)(fparam_1 *
-                         (double)(float)((double)*(float *)(param_3 + 0x30) -
-                                        (double)*(float *)(param_2 + 0x30)) +
-                        (double)*(float *)(param_2 + 0x30));
-  param_4[0xd] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2);
-  param_4[0xf] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1);
-  param_4[0xe] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3);
+  param_4[0xc] = (fparam_1 * (*(float *)(param_3 + 0x30) - *(float *)(param_2 + 0x30)) + *(float *)(param_2 + 0x30));
+  param_4[0xd] = (fparam_1 * (fVar5 - fVar2) + fVar2);
+  param_4[0xf] = (fparam_1 * (fVar4 - fVar1) + fVar1);
+  param_4[0xe] = (fparam_1 * (fVar6 - fVar3) + fVar3);
   return;
 }
 
 /* _gleInterpolEyeNO1001 @ 0xb6c10 (480 bytes) */
-void _gleInterpolEyeNO1001(int param_1,float *param_2,int param_3,float *param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1001(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2280,25 +2201,21 @@ void _gleInterpolEyeNO1001(int param_1,float *param_2,int param_3,float *param_4
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = param_2[4];
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar2) + (double)fVar2);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar3 - fVar2) + fVar2);
   fVar3 = param_2[5];
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = param_2[6];
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar2 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar6) + (double)fVar6);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar4) + (double)fVar4);
+  param_4[9] = (fparam_1 * (fVar5 - fVar6) + fVar6);
+  param_4[10] = (fparam_1 * (fVar7 - fVar4) + fVar4);
   param_4[4] = fVar2;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar3) + (double)fVar3);
+  fVar3 = (fparam_1 * (fVar10 - fVar3) + fVar3);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar8 - fVar11) + fVar11);
   uVar12 = 0;
   param_4[5] = fVar3;
   param_4[6] = fVar4;
@@ -2342,12 +2259,10 @@ void _gleInterpolEyeNO1001(int param_1,float *param_2,int param_3,float *param_4
   fVar3 = *(float *)(param_3 + 0x40);
   fVar4 = *(float *)(param_3 + 0x44);
   param_4[0x12] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x48) - (double)param_2[0x12]) +
-              (double)param_2[0x12]);
-  param_4[0x10] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar1) + (double)fVar1)
+       (fparam_1 * (*(float *)(param_3 + 0x48) - param_2[0x12]) + param_2[0x12]);
+  param_4[0x10] = (fparam_1 * (fVar3 - fVar1) + fVar1)
   ;
-  param_4[0x11] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar2) + (double)fVar2)
+  param_4[0x11] = (fparam_1 * (fVar4 - fVar2) + fVar2)
   ;
   if (param_2 == param_4) {
     return;
@@ -2358,7 +2273,7 @@ void _gleInterpolEyeNO1001(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO1010 @ 0xb6df0 (496 bytes) */
-void _gleInterpolEyeNO1010(int param_1,int param_2,int param_3,float *param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1010(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2381,27 +2296,21 @@ void _gleInterpolEyeNO1010(int param_1,int param_2,int param_3,float *param_4,do
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = *(float *)(param_2 + 0x10);
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) -
-                                 (double)*(float *)(param_2 + 0x1c)) +
-                 (double)*(float *)(param_2 + 0x1c));
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) -
-                                      (double)*(float *)(param_2 + 0x20)) +
-                      (double)*(float *)(param_2 + 0x20));
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar2) + (double)fVar2);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - *(float *)(param_2 + 0x1c)) + *(float *)(param_2 + 0x1c));
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - *(float *)(param_2 + 0x20)) + *(float *)(param_2 + 0x20));
+  param_4[0xb] = (fparam_1 * (fVar3 - fVar2) + fVar2);
   fVar3 = *(float *)(param_2 + 0x14);
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = *(float *)(param_2 + 0x18);
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar2 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar2;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar3) + (double)fVar3);
+  fVar3 = (fparam_1 * (fVar10 - fVar3) + fVar3);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar8 - fVar11) + fVar11);
   uVar12 = 0;
   param_4[5] = fVar3;
   param_4[6] = fVar4;
@@ -2448,20 +2357,17 @@ void _gleInterpolEyeNO1010(int param_1,int param_2,int param_3,float *param_4,do
   fVar6 = *(float *)(param_2 + 0x38);
   fVar7 = *(float *)(param_3 + 0x34);
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) -
-                              (double)*(float *)(param_2 + 0x4c)) +
-              (double)*(float *)(param_2 + 0x4c));
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - *(float *)(param_2 + 0x4c)) + *(float *)(param_2 + 0x4c));
   fVar8 = *(float *)(param_3 + 0x38);
-  param_4[0xc] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2);
-  param_4[0xd] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar3) + (double)fVar3);
-  param_4[0xf] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1);
-  param_4[0xe] = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar6) + (double)fVar6);
+  param_4[0xc] = (fparam_1 * (fVar5 - fVar2) + fVar2);
+  param_4[0xd] = (fparam_1 * (fVar7 - fVar3) + fVar3);
+  param_4[0xf] = (fparam_1 * (fVar4 - fVar1) + fVar1);
+  param_4[0xe] = (fparam_1 * (fVar8 - fVar6) + fVar6);
   return;
 }
 
 /* _gleInterpolEyeNO1011 @ 0xb6fe0 (500 bytes) */
-void _gleInterpolEyeNO1011(int param_1,float *param_2,int param_3,float *param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1011(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2484,25 +2390,21 @@ void _gleInterpolEyeNO1011(int param_1,float *param_2,int param_3,float *param_4
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = param_2[4];
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar2) + (double)fVar2);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar3 - fVar2) + fVar2);
   fVar3 = param_2[5];
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = param_2[6];
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar2 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar2;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar3) + (double)fVar3);
+  fVar3 = (fparam_1 * (fVar10 - fVar3) + fVar3);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar8 - fVar11) + fVar11);
   uVar12 = 0;
   param_4[5] = fVar3;
   param_4[6] = fVar4;
@@ -2547,15 +2449,13 @@ void _gleInterpolEyeNO1011(int param_1,float *param_2,int param_3,float *param_4
   fVar4 = *(float *)(param_3 + 0x44);
   fVar5 = param_2[0x12];
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) - (double)param_2[0x13]) +
-              (double)param_2[0x13]);
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
   fVar6 = *(float *)(param_3 + 0x48);
-  param_4[0x10] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar1) + (double)fVar1)
+  param_4[0x10] = (fparam_1 * (fVar3 - fVar1) + fVar1)
   ;
-  param_4[0x11] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar2) + (double)fVar2)
+  param_4[0x11] = (fparam_1 * (fVar4 - fVar2) + fVar2)
   ;
-  param_4[0x12] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar5) + (double)fVar5)
+  param_4[0x12] = (fparam_1 * (fVar6 - fVar5) + fVar5)
   ;
   if (param_2 == param_4) {
     return;
@@ -2581,15 +2481,15 @@ void FUN_000b71d8(int param_1,int param_2,int param_3,float *param_4,float fpara
   float fVar11;
   float fVar12;
   uint uVar13;
-  double dVar14;
-  double dVar15;
-  double dVar16;
-  double dVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  double dVar22;
+  float dVar14;
+  float dVar15;
+  float dVar16;
+  float dVar17;
+  float dVar18;
+  float dVar19;
+  float dVar20;
+  float dVar21;
+  float dVar22;
   
   fVar3 = *(float *)(param_3 + 0x2c);
   fVar4 = *(float *)(param_2 + 0x24);
@@ -2599,27 +2499,21 @@ void FUN_000b71d8(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = *(float *)(param_2 + 0x10);
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) -
-                                 (double)*(float *)(param_2 + 0x1c)) +
-                 (double)*(float *)(param_2 + 0x1c));
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) -
-                                      (double)*(float *)(param_2 + 0x20)) +
-                      (double)*(float *)(param_2 + 0x20));
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - fparam_6) + fparam_6);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - *(float *)(param_2 + 0x1c)) + *(float *)(param_2 + 0x1c));
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - *(float *)(param_2 + 0x20)) + *(float *)(param_2 + 0x20));
+  param_4[0xb] = (fparam_1 * (fVar3 - fparam_6) + fparam_6);
   fVar10 = *(float *)(param_2 + 0x14);
   fVar11 = *(float *)(param_3 + 0x14);
   fVar12 = *(float *)(param_2 + 0x18);
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar3 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar3;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar11 - (double)fVar10) + (double)fVar10);
+  fVar4 = (fparam_1 * (fVar11 - fVar10) + fVar10);
   param_4[7] = fVar1;
-  fVar5 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar12) + (double)fVar12);
+  fVar5 = (fparam_1 * (fVar8 - fVar12) + fVar12);
   cVar2 = *(char *)(param_2 + 0x7f);
   param_4[5] = fVar4;
   param_4[6] = fVar5;
@@ -2664,23 +2558,20 @@ void FUN_000b71d8(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar5 = *(float *)(param_3 + 0x34);
   fVar6 = *(float *)(param_3 + 0x38);
   fVar7 = *(float *)(param_3 + 0x3c);
-  param_4[0xc] = (float)(fparam_1 *
-                         (double)(float)((double)*(float *)(param_3 + 0x30) -
-                                        (double)*(float *)(param_2 + 0x30)) +
-                        (double)*(float *)(param_2 + 0x30));
-  param_4[0xd] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar1) + (double)fVar1);
-  param_4[0xe] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3);
-  param_4[0xf] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar4) + (double)fVar4);
+  param_4[0xc] = (fparam_1 * (*(float *)(param_3 + 0x30) - *(float *)(param_2 + 0x30)) + *(float *)(param_2 + 0x30));
+  param_4[0xd] = (fparam_1 * (fVar5 - fVar1) + fVar1);
+  param_4[0xe] = (fparam_1 * (fVar6 - fVar3) + fVar3);
+  param_4[0xf] = (fparam_1 * (fVar7 - fVar4) + fVar4);
   dVar16 = (double)*(float *)(param_2 + 0x80);
   dVar18 = (double)*(float *)(param_2 + 0x84);
   dVar17 = (double)*(float *)(param_2 + 0x88);
   dVar19 = (double)*(float *)(param_2 + 0x8c);
   if (cVar2 == '\0') {
     dVar14 = (double)*(float *)(param_2 + 0x1c);
-    dVar19 = (double)(float)(dVar19 * dVar14);
-    dVar16 = (double)(float)(dVar16 * dVar14);
-    dVar18 = (double)(float)(dVar18 * dVar14);
-    dVar17 = (double)(float)(dVar17 * dVar14);
+    dVar19 = (double)(dVar19 * dVar14);
+    dVar16 = (double)(dVar16 * dVar14);
+    dVar18 = (double)(dVar18 * dVar14);
+    dVar17 = (double)(dVar17 * dVar14);
   }
   dVar14 = (double)*(float *)(param_3 + 0x80);
   dVar21 = (double)*(float *)(param_3 + 0x84);
@@ -2688,15 +2579,15 @@ void FUN_000b71d8(int param_1,int param_2,int param_3,float *param_4,float fpara
   dVar22 = (double)*(float *)(param_3 + 0x8c);
   if (*(char *)(param_3 + 0x7f) == '\0') {
     dVar15 = (double)*(float *)(param_3 + 0x1c);
-    dVar22 = (double)(float)(dVar22 * dVar15);
-    dVar14 = (double)(float)(dVar14 * dVar15);
-    dVar21 = (double)(float)(dVar21 * dVar15);
-    dVar20 = (double)(float)(dVar20 * dVar15);
+    dVar22 = (double)(dVar22 * dVar15);
+    dVar14 = (double)(dVar14 * dVar15);
+    dVar21 = (double)(dVar21 * dVar15);
+    dVar20 = (double)(dVar20 * dVar15);
   }
-  fVar1 = (float)(fparam_1 * (double)(float)(dVar14 - dVar16) + dVar16);
-  fVar3 = (float)(fparam_1 * (double)(float)(dVar21 - dVar18) + dVar18);
-  fVar4 = (float)(fparam_1 * (double)(float)(dVar22 - dVar19) + dVar19);
-  fVar5 = (float)(fparam_1 * (double)(float)(dVar20 - dVar17) + dVar17);
+  fVar1 = (fparam_1 * (dVar14 - dVar16) + dVar16);
+  fVar3 = (fparam_1 * (dVar21 - dVar18) + dVar18);
+  fVar4 = (fparam_1 * (dVar22 - dVar19) + dVar19);
+  fVar5 = (fparam_1 * (dVar20 - dVar17) + dVar17);
   if (uVar13 == 0) {
     fVar6 = param_4[3];
     fVar4 = fVar4 * fVar6;
@@ -2735,27 +2626,21 @@ void FUN_000b7458(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar6 = *(float *)(param_3 + 0x28);
   fVar7 = *(float *)(param_2 + 0x10);
   fVar8 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) -
-                                 (double)*(float *)(param_2 + 0x1c)) +
-                 (double)*(float *)(param_2 + 0x1c));
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) -
-                                      (double)*(float *)(param_2 + 0x20)) +
-                      (double)*(float *)(param_2 + 0x20));
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar2 - fparam_4) + fparam_4);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - *(float *)(param_2 + 0x1c)) + *(float *)(param_2 + 0x1c));
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - *(float *)(param_2 + 0x20)) + *(float *)(param_2 + 0x20));
+  param_4[0xb] = (fparam_1 * (fVar2 - fparam_4) + fparam_4);
   fVar9 = *(float *)(param_2 + 0x14);
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = *(float *)(param_2 + 0x18);
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar7) + (double)fVar7);
+  fVar2 = (fparam_1 * (fVar8 - fVar7) + fVar7);
   fVar7 = *(float *)(param_3 + 0x18);
   fVar8 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
+  param_4[9] = (fparam_1 * (fVar5 - fVar3) + fVar3);
+  param_4[10] = (fparam_1 * (fVar6 - fVar4) + fVar4);
   param_4[4] = fVar2;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar9) + (double)fVar9);
+  fVar3 = (fparam_1 * (fVar10 - fVar9) + fVar9);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar7 - fVar11) + fVar11);
   param_4[5] = fVar3;
   param_4[6] = fVar4;
   if (fVar2 < fVar8) {
@@ -2799,13 +2684,10 @@ void FUN_000b7458(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar4 = *(float *)(param_3 + 0x34);
   fVar5 = *(float *)(param_3 + 0x38);
   fVar6 = *(float *)(param_3 + 0x3c);
-  param_4[0xc] = (float)(fparam_1 *
-                         (double)(float)((double)*(float *)(param_3 + 0x30) -
-                                        (double)*(float *)(param_2 + 0x30)) +
-                        (double)*(float *)(param_2 + 0x30));
-  param_4[0xd] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1);
-  param_4[0xe] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2);
-  param_4[0xf] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3);
+  param_4[0xc] = (fparam_1 * (*(float *)(param_3 + 0x30) - *(float *)(param_2 + 0x30)) + *(float *)(param_2 + 0x30));
+  param_4[0xd] = (fparam_1 * (fVar4 - fVar1) + fVar1);
+  param_4[0xe] = (fparam_1 * (fVar5 - fVar2) + fVar2);
+  param_4[0xf] = (fparam_1 * (fVar6 - fVar3) + fVar3);
   fVar1 = *(float *)(param_2 + 0x8c);
   fVar2 = *(float *)(param_2 + 0x84);
   fVar3 = *(float *)(param_2 + 0x88);
@@ -2813,21 +2695,18 @@ void FUN_000b7458(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar5 = *(float *)(param_3 + 0x84);
   fVar6 = *(float *)(param_3 + 0x88);
   param_4[0x20] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x80) -
-                              (double)*(float *)(param_2 + 0x80)) +
-              (double)*(float *)(param_2 + 0x80));
-  param_4[0x21] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2)
+       (fparam_1 * (*(float *)(param_3 + 0x80) - *(float *)(param_2 + 0x80)) + *(float *)(param_2 + 0x80));
+  param_4[0x21] = (fparam_1 * (fVar5 - fVar2) + fVar2)
   ;
-  param_4[0x23] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1)
+  param_4[0x23] = (fparam_1 * (fVar4 - fVar1) + fVar1)
   ;
-  param_4[0x22] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3)
+  param_4[0x22] = (fparam_1 * (fVar6 - fVar3) + fVar3)
   ;
   return;
 }
 
 /* _gleInterpolEyeNO1101 @ 0xb767c (648 bytes) */
-void _gleInterpolEyeNO1101(int param_1,float *param_2,int param_3,float *param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1101(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -2842,15 +2721,15 @@ void _gleInterpolEyeNO1101(int param_1,float *param_2,int param_3,float *param_4
   float fVar11;
   float fVar12;
   uint uVar13;
-  double dVar14;
-  double dVar15;
-  double dVar16;
-  double dVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  double dVar22;
+  float dVar14;
+  float dVar15;
+  float dVar16;
+  float dVar17;
+  float dVar18;
+  float dVar19;
+  float dVar20;
+  float dVar21;
+  float dVar22;
   
   fVar3 = param_2[0xb];
   fVar4 = *(float *)(param_3 + 0x2c);
@@ -2860,25 +2739,21 @@ void _gleInterpolEyeNO1101(int param_1,float *param_2,int param_3,float *param_4
   fVar8 = *(float *)(param_3 + 0x28);
   fVar9 = param_2[4];
   fVar10 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar3) + (double)fVar3);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar4 - fVar3) + fVar3);
   fVar4 = param_2[5];
   fVar11 = *(float *)(param_3 + 0x14);
   fVar12 = param_2[6];
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar9) + (double)fVar9);
+  fVar3 = (fparam_1 * (fVar10 - fVar9) + fVar9);
   fVar9 = *(float *)(param_3 + 0x18);
   fVar10 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar6) + (double)fVar6);
+  param_4[9] = (fparam_1 * (fVar7 - fVar5) + fVar5);
+  param_4[10] = (fparam_1 * (fVar8 - fVar6) + fVar6);
   param_4[4] = fVar3;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar11 - (double)fVar4) + (double)fVar4);
+  fVar4 = (fparam_1 * (fVar11 - fVar4) + fVar4);
   param_4[7] = fVar1;
-  fVar5 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar12) + (double)fVar12);
+  fVar5 = (fparam_1 * (fVar9 - fVar12) + fVar12);
   cVar2 = *(char *)((int)param_2 + 0x7f);
   uVar13 = 0;
   param_4[5] = fVar4;
@@ -2924,10 +2799,10 @@ void _gleInterpolEyeNO1101(int param_1,float *param_2,int param_3,float *param_4
   dVar22 = (double)param_2[0x23];
   if (cVar2 == '\0') {
     dVar14 = (double)param_2[7];
-    dVar22 = (double)(float)(dVar22 * dVar14);
-    dVar16 = (double)(float)(dVar16 * dVar14);
-    dVar17 = (double)(float)(dVar17 * dVar14);
-    dVar18 = (double)(float)(dVar18 * dVar14);
+    dVar22 = (double)(dVar22 * dVar14);
+    dVar16 = (double)(dVar16 * dVar14);
+    dVar17 = (double)(dVar17 * dVar14);
+    dVar18 = (double)(dVar18 * dVar14);
   }
   dVar21 = (double)*(float *)(param_3 + 0x80);
   dVar14 = (double)*(float *)(param_3 + 0x84);
@@ -2935,15 +2810,15 @@ void _gleInterpolEyeNO1101(int param_1,float *param_2,int param_3,float *param_4
   dVar19 = (double)*(float *)(param_3 + 0x8c);
   if (*(char *)(param_3 + 0x7f) == '\0') {
     dVar15 = (double)*(float *)(param_3 + 0x1c);
-    dVar19 = (double)(float)(dVar19 * dVar15);
-    dVar21 = (double)(float)(dVar21 * dVar15);
-    dVar14 = (double)(float)(dVar14 * dVar15);
-    dVar20 = (double)(float)(dVar20 * dVar15);
+    dVar19 = (double)(dVar19 * dVar15);
+    dVar21 = (double)(dVar21 * dVar15);
+    dVar14 = (double)(dVar14 * dVar15);
+    dVar20 = (double)(dVar20 * dVar15);
   }
-  fVar1 = (float)(fparam_1 * (double)(float)(dVar21 - dVar16) + dVar16);
-  fVar3 = (float)(fparam_1 * (double)(float)(dVar14 - dVar17) + dVar17);
-  fVar4 = (float)(fparam_1 * (double)(float)(dVar20 - dVar18) + dVar18);
-  fVar5 = (float)(fparam_1 * (double)(float)(dVar19 - dVar22) + dVar22);
+  fVar1 = (fparam_1 * (dVar21 - dVar16) + dVar16);
+  fVar3 = (fparam_1 * (dVar14 - dVar17) + dVar17);
+  fVar4 = (fparam_1 * (dVar20 - dVar18) + dVar18);
+  fVar5 = (fparam_1 * (dVar19 - dVar22) + dVar22);
   if (uVar13 == 0) {
     fVar6 = param_4[3];
     fVar5 = fVar5 * fVar6;
@@ -2960,12 +2835,10 @@ void _gleInterpolEyeNO1101(int param_1,float *param_2,int param_3,float *param_4
   fVar4 = *(float *)(param_3 + 0x40);
   fVar5 = *(float *)(param_3 + 0x44);
   param_4[0x12] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x48) - (double)param_2[0x12]) +
-              (double)param_2[0x12]);
-  param_4[0x10] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1)
+       (fparam_1 * (*(float *)(param_3 + 0x48) - param_2[0x12]) + param_2[0x12]);
+  param_4[0x10] = (fparam_1 * (fVar4 - fVar1) + fVar1)
   ;
-  param_4[0x11] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3)
+  param_4[0x11] = (fparam_1 * (fVar5 - fVar3) + fVar3)
   ;
   if (param_2 == param_4) {
     return;
@@ -2976,7 +2849,7 @@ void _gleInterpolEyeNO1101(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO1101w @ 0xb7904 (560 bytes) */
-void _gleInterpolEyeNO1101w(int param_1,float *param_2,int param_3,float *param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1101w(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2999,25 +2872,21 @@ void _gleInterpolEyeNO1101w(int param_1,float *param_2,int param_3,float *param_
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = param_2[4];
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar2) + (double)fVar2);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar3 - fVar2) + fVar2);
   fVar3 = param_2[5];
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = param_2[6];
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar2 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar2;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar3) + (double)fVar3);
+  fVar3 = (fparam_1 * (fVar10 - fVar3) + fVar3);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar8 - fVar11) + fVar11);
   uVar12 = 0;
   param_4[5] = fVar3;
   param_4[6] = fVar4;
@@ -3063,26 +2932,22 @@ void _gleInterpolEyeNO1101w(int param_1,float *param_2,int param_3,float *param_
   fVar5 = *(float *)(param_3 + 0x88);
   fVar6 = *(float *)(param_3 + 0x8c);
   param_4[0x20] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x80) - (double)param_2[0x20]) +
-              (double)param_2[0x20]);
-  param_4[0x21] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1)
+       (fparam_1 * (*(float *)(param_3 + 0x80) - param_2[0x20]) + param_2[0x20]);
+  param_4[0x21] = (fparam_1 * (fVar4 - fVar1) + fVar1)
   ;
-  param_4[0x22] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2)
+  param_4[0x22] = (fparam_1 * (fVar5 - fVar2) + fVar2)
   ;
-  param_4[0x23] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3)
+  param_4[0x23] = (fparam_1 * (fVar6 - fVar3) + fVar3)
   ;
   fVar1 = param_2[0x10];
   fVar2 = param_2[0x11];
   fVar3 = *(float *)(param_3 + 0x40);
   fVar4 = *(float *)(param_3 + 0x44);
   param_4[0x12] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x48) - (double)param_2[0x12]) +
-              (double)param_2[0x12]);
-  param_4[0x10] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar1) + (double)fVar1)
+       (fparam_1 * (*(float *)(param_3 + 0x48) - param_2[0x12]) + param_2[0x12]);
+  param_4[0x10] = (fparam_1 * (fVar3 - fVar1) + fVar1)
   ;
-  param_4[0x11] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar2) + (double)fVar2)
+  param_4[0x11] = (fparam_1 * (fVar4 - fVar2) + fVar2)
   ;
   if (param_2 == param_4) {
     return;
@@ -3108,15 +2973,15 @@ void FUN_000b7b38(int param_1,int param_2,int param_3,float *param_4,float fpara
   float fVar11;
   float fVar12;
   uint uVar13;
-  double dVar14;
-  double dVar15;
-  double dVar16;
-  double dVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  double dVar22;
+  float dVar14;
+  float dVar15;
+  float dVar16;
+  float dVar17;
+  float dVar18;
+  float dVar19;
+  float dVar20;
+  float dVar21;
+  float dVar22;
   
   fVar3 = *(float *)(param_3 + 0x2c);
   fVar4 = *(float *)(param_2 + 0x24);
@@ -3126,27 +2991,21 @@ void FUN_000b7b38(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = *(float *)(param_2 + 0x10);
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) -
-                                 (double)*(float *)(param_2 + 0x1c)) +
-                 (double)*(float *)(param_2 + 0x1c));
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) -
-                                      (double)*(float *)(param_2 + 0x20)) +
-                      (double)*(float *)(param_2 + 0x20));
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - fparam_5) + fparam_5);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - *(float *)(param_2 + 0x1c)) + *(float *)(param_2 + 0x1c));
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - *(float *)(param_2 + 0x20)) + *(float *)(param_2 + 0x20));
+  param_4[0xb] = (fparam_1 * (fVar3 - fparam_5) + fparam_5);
   fVar10 = *(float *)(param_2 + 0x14);
   fVar11 = *(float *)(param_3 + 0x14);
   fVar12 = *(float *)(param_2 + 0x18);
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar3 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar3;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar11 - (double)fVar10) + (double)fVar10);
+  fVar4 = (fparam_1 * (fVar11 - fVar10) + fVar10);
   param_4[7] = fVar1;
-  fVar5 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar12) + (double)fVar12);
+  fVar5 = (fparam_1 * (fVar8 - fVar12) + fVar12);
   cVar2 = *(char *)(param_2 + 0x7f);
   param_4[5] = fVar4;
   param_4[6] = fVar5;
@@ -3193,25 +3052,22 @@ void FUN_000b7b38(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar7 = *(float *)(param_2 + 0x38);
   fVar8 = *(float *)(param_3 + 0x3c);
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) -
-                              (double)*(float *)(param_2 + 0x4c)) +
-              (double)*(float *)(param_2 + 0x4c));
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - *(float *)(param_2 + 0x4c)) + *(float *)(param_2 + 0x4c));
   fVar9 = *(float *)(param_3 + 0x38);
-  param_4[0xc] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar1) + (double)fVar1);
-  param_4[0xd] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3);
-  param_4[0xf] = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar4) + (double)fVar4);
-  param_4[0xe] = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar7) + (double)fVar7);
+  param_4[0xc] = (fparam_1 * (fVar5 - fVar1) + fVar1);
+  param_4[0xd] = (fparam_1 * (fVar6 - fVar3) + fVar3);
+  param_4[0xf] = (fparam_1 * (fVar8 - fVar4) + fVar4);
+  param_4[0xe] = (fparam_1 * (fVar9 - fVar7) + fVar7);
   dVar16 = (double)*(float *)(param_2 + 0x80);
   dVar17 = (double)*(float *)(param_2 + 0x84);
   dVar20 = (double)*(float *)(param_2 + 0x88);
   dVar18 = (double)*(float *)(param_2 + 0x8c);
   if (cVar2 == '\0') {
     dVar14 = (double)*(float *)(param_2 + 0x1c);
-    dVar18 = (double)(float)(dVar18 * dVar14);
-    dVar16 = (double)(float)(dVar16 * dVar14);
-    dVar17 = (double)(float)(dVar17 * dVar14);
-    dVar20 = (double)(float)(dVar20 * dVar14);
+    dVar18 = (double)(dVar18 * dVar14);
+    dVar16 = (double)(dVar16 * dVar14);
+    dVar17 = (double)(dVar17 * dVar14);
+    dVar20 = (double)(dVar20 * dVar14);
   }
   dVar14 = (double)*(float *)(param_3 + 0x80);
   dVar19 = (double)*(float *)(param_3 + 0x84);
@@ -3219,15 +3075,15 @@ void FUN_000b7b38(int param_1,int param_2,int param_3,float *param_4,float fpara
   dVar21 = (double)*(float *)(param_3 + 0x8c);
   if (*(char *)(param_3 + 0x7f) == '\0') {
     dVar15 = (double)*(float *)(param_3 + 0x1c);
-    dVar21 = (double)(float)(dVar21 * dVar15);
-    dVar14 = (double)(float)(dVar14 * dVar15);
-    dVar19 = (double)(float)(dVar19 * dVar15);
-    dVar22 = (double)(float)(dVar22 * dVar15);
+    dVar21 = (double)(dVar21 * dVar15);
+    dVar14 = (double)(dVar14 * dVar15);
+    dVar19 = (double)(dVar19 * dVar15);
+    dVar22 = (double)(dVar22 * dVar15);
   }
-  fVar1 = (float)(fparam_1 * (double)(float)(dVar14 - dVar16) + dVar16);
-  fVar3 = (float)(fparam_1 * (double)(float)(dVar19 - dVar17) + dVar17);
-  fVar4 = (float)(fparam_1 * (double)(float)(dVar21 - dVar18) + dVar18);
-  fVar5 = (float)(fparam_1 * (double)(float)(dVar22 - dVar20) + dVar20);
+  fVar1 = (fparam_1 * (dVar14 - dVar16) + dVar16);
+  fVar3 = (fparam_1 * (dVar19 - dVar17) + dVar17);
+  fVar4 = (fparam_1 * (dVar21 - dVar18) + dVar18);
+  fVar5 = (fparam_1 * (dVar22 - dVar20) + dVar20);
   if (uVar13 == 0) {
     fVar6 = param_4[3];
     fVar4 = fVar4 * fVar6;
@@ -3266,27 +3122,21 @@ void FUN_000b7dcc(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar6 = *(float *)(param_3 + 0x28);
   fVar7 = *(float *)(param_2 + 0x10);
   fVar8 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) -
-                                 (double)*(float *)(param_2 + 0x1c)) +
-                 (double)*(float *)(param_2 + 0x1c));
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) -
-                                      (double)*(float *)(param_2 + 0x20)) +
-                      (double)*(float *)(param_2 + 0x20));
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar2 - fparam_4) + fparam_4);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - *(float *)(param_2 + 0x1c)) + *(float *)(param_2 + 0x1c));
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - *(float *)(param_2 + 0x20)) + *(float *)(param_2 + 0x20));
+  param_4[0xb] = (fparam_1 * (fVar2 - fparam_4) + fparam_4);
   fVar9 = *(float *)(param_2 + 0x14);
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = *(float *)(param_2 + 0x18);
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar7) + (double)fVar7);
+  fVar2 = (fparam_1 * (fVar8 - fVar7) + fVar7);
   fVar7 = *(float *)(param_3 + 0x18);
   fVar8 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
+  param_4[9] = (fparam_1 * (fVar5 - fVar3) + fVar3);
+  param_4[10] = (fparam_1 * (fVar6 - fVar4) + fVar4);
   param_4[4] = fVar2;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar9) + (double)fVar9);
+  fVar3 = (fparam_1 * (fVar10 - fVar9) + fVar9);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar7 - fVar11) + fVar11);
   param_4[5] = fVar3;
   param_4[6] = fVar4;
   if (fVar2 < fVar8) {
@@ -3332,15 +3182,12 @@ void FUN_000b7dcc(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar6 = *(float *)(param_2 + 0x38);
   fVar7 = *(float *)(param_3 + 0x3c);
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) -
-                              (double)*(float *)(param_2 + 0x4c)) +
-              (double)*(float *)(param_2 + 0x4c));
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - *(float *)(param_2 + 0x4c)) + *(float *)(param_2 + 0x4c));
   fVar8 = *(float *)(param_3 + 0x38);
-  param_4[0xc] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1);
-  param_4[0xd] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2);
-  param_4[0xf] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar3) + (double)fVar3);
-  param_4[0xe] = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar6) + (double)fVar6);
+  param_4[0xc] = (fparam_1 * (fVar4 - fVar1) + fVar1);
+  param_4[0xd] = (fparam_1 * (fVar5 - fVar2) + fVar2);
+  param_4[0xf] = (fparam_1 * (fVar7 - fVar3) + fVar3);
+  param_4[0xe] = (fparam_1 * (fVar8 - fVar6) + fVar6);
   fVar1 = *(float *)(param_2 + 0x8c);
   fVar2 = *(float *)(param_2 + 0x84);
   fVar3 = *(float *)(param_2 + 0x88);
@@ -3348,21 +3195,18 @@ void FUN_000b7dcc(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar5 = *(float *)(param_3 + 0x84);
   fVar6 = *(float *)(param_3 + 0x88);
   param_4[0x20] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x80) -
-                              (double)*(float *)(param_2 + 0x80)) +
-              (double)*(float *)(param_2 + 0x80));
-  param_4[0x21] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2)
+       (fparam_1 * (*(float *)(param_3 + 0x80) - *(float *)(param_2 + 0x80)) + *(float *)(param_2 + 0x80));
+  param_4[0x21] = (fparam_1 * (fVar5 - fVar2) + fVar2)
   ;
-  param_4[0x23] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1)
+  param_4[0x23] = (fparam_1 * (fVar4 - fVar1) + fVar1)
   ;
-  param_4[0x22] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3)
+  param_4[0x22] = (fparam_1 * (fVar6 - fVar3) + fVar3)
   ;
   return;
 }
 
 /* _gleInterpolEyeNO1111 @ 0xb8004 (668 bytes) */
-void _gleInterpolEyeNO1111(int param_1,float *param_2,int param_3,float *param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1111(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -3377,15 +3221,15 @@ void _gleInterpolEyeNO1111(int param_1,float *param_2,int param_3,float *param_4
   float fVar11;
   float fVar12;
   uint uVar13;
-  double dVar14;
-  double dVar15;
-  double dVar16;
-  double dVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  double dVar22;
+  float dVar14;
+  float dVar15;
+  float dVar16;
+  float dVar17;
+  float dVar18;
+  float dVar19;
+  float dVar20;
+  float dVar21;
+  float dVar22;
   
   fVar3 = param_2[0xb];
   fVar4 = *(float *)(param_3 + 0x2c);
@@ -3395,25 +3239,21 @@ void _gleInterpolEyeNO1111(int param_1,float *param_2,int param_3,float *param_4
   fVar8 = *(float *)(param_3 + 0x28);
   fVar9 = param_2[4];
   fVar10 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar3) + (double)fVar3);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar4 - fVar3) + fVar3);
   fVar4 = param_2[5];
   fVar11 = *(float *)(param_3 + 0x14);
   fVar12 = param_2[6];
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar9) + (double)fVar9);
+  fVar3 = (fparam_1 * (fVar10 - fVar9) + fVar9);
   fVar9 = *(float *)(param_3 + 0x18);
   fVar10 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar6) + (double)fVar6);
+  param_4[9] = (fparam_1 * (fVar7 - fVar5) + fVar5);
+  param_4[10] = (fparam_1 * (fVar8 - fVar6) + fVar6);
   param_4[4] = fVar3;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar11 - (double)fVar4) + (double)fVar4);
+  fVar4 = (fparam_1 * (fVar11 - fVar4) + fVar4);
   param_4[7] = fVar1;
-  fVar5 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar12) + (double)fVar12);
+  fVar5 = (fparam_1 * (fVar9 - fVar12) + fVar12);
   cVar2 = *(char *)((int)param_2 + 0x7f);
   uVar13 = 0;
   param_4[5] = fVar4;
@@ -3454,19 +3294,17 @@ void _gleInterpolEyeNO1111(int param_1,float *param_2,int param_3,float *param_4
     param_4[2] = fVar4 * fVar5 + fVar3;
   }
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) - (double)param_2[0x13]) +
-              (double)param_2[0x13]);
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
   dVar16 = (double)param_2[0x20];
   dVar17 = (double)param_2[0x21];
   dVar20 = (double)param_2[0x22];
   dVar22 = (double)param_2[0x23];
   if (cVar2 == '\0') {
     dVar14 = (double)param_2[7];
-    dVar22 = (double)(float)(dVar22 * dVar14);
-    dVar16 = (double)(float)(dVar16 * dVar14);
-    dVar17 = (double)(float)(dVar17 * dVar14);
-    dVar20 = (double)(float)(dVar20 * dVar14);
+    dVar22 = (double)(dVar22 * dVar14);
+    dVar16 = (double)(dVar16 * dVar14);
+    dVar17 = (double)(dVar17 * dVar14);
+    dVar20 = (double)(dVar20 * dVar14);
   }
   dVar19 = (double)*(float *)(param_3 + 0x80);
   dVar14 = (double)*(float *)(param_3 + 0x84);
@@ -3474,15 +3312,15 @@ void _gleInterpolEyeNO1111(int param_1,float *param_2,int param_3,float *param_4
   dVar18 = (double)*(float *)(param_3 + 0x8c);
   if (*(char *)(param_3 + 0x7f) == '\0') {
     dVar15 = (double)*(float *)(param_3 + 0x1c);
-    dVar18 = (double)(float)(dVar18 * dVar15);
-    dVar19 = (double)(float)(dVar19 * dVar15);
-    dVar14 = (double)(float)(dVar14 * dVar15);
-    dVar21 = (double)(float)(dVar21 * dVar15);
+    dVar18 = (double)(dVar18 * dVar15);
+    dVar19 = (double)(dVar19 * dVar15);
+    dVar14 = (double)(dVar14 * dVar15);
+    dVar21 = (double)(dVar21 * dVar15);
   }
-  fVar1 = (float)(fparam_1 * (double)(float)(dVar19 - dVar16) + dVar16);
-  fVar3 = (float)(fparam_1 * (double)(float)(dVar14 - dVar17) + dVar17);
-  fVar4 = (float)(fparam_1 * (double)(float)(dVar21 - dVar20) + dVar20);
-  fVar5 = (float)(fparam_1 * (double)(float)(dVar18 - dVar22) + dVar22);
+  fVar1 = (fparam_1 * (dVar19 - dVar16) + dVar16);
+  fVar3 = (fparam_1 * (dVar14 - dVar17) + dVar17);
+  fVar4 = (fparam_1 * (dVar21 - dVar20) + dVar20);
+  fVar5 = (fparam_1 * (dVar18 - dVar22) + dVar22);
   if (uVar13 == 0) {
     fVar6 = param_4[3];
     fVar5 = fVar5 * fVar6;
@@ -3499,12 +3337,10 @@ void _gleInterpolEyeNO1111(int param_1,float *param_2,int param_3,float *param_4
   fVar4 = *(float *)(param_3 + 0x40);
   fVar5 = *(float *)(param_3 + 0x44);
   param_4[0x12] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x48) - (double)param_2[0x12]) +
-              (double)param_2[0x12]);
-  param_4[0x10] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1)
+       (fparam_1 * (*(float *)(param_3 + 0x48) - param_2[0x12]) + param_2[0x12]);
+  param_4[0x10] = (fparam_1 * (fVar4 - fVar1) + fVar1)
   ;
-  param_4[0x11] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3)
+  param_4[0x11] = (fparam_1 * (fVar5 - fVar3) + fVar3)
   ;
   if (param_2 == param_4) {
     return;
@@ -3515,7 +3351,7 @@ void _gleInterpolEyeNO1111(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO1111w @ 0xb82a0 (580 bytes) */
-void _gleInterpolEyeNO1111w(int param_1,float *param_2,int param_3,float *param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1111w(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -3538,25 +3374,21 @@ void _gleInterpolEyeNO1111w(int param_1,float *param_2,int param_3,float *param_
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = param_2[4];
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar2) + (double)fVar2);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar3 - fVar2) + fVar2);
   fVar3 = param_2[5];
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = param_2[6];
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar2 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar2;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar3) + (double)fVar3);
+  fVar3 = (fparam_1 * (fVar10 - fVar3) + fVar3);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar8 - fVar11) + fVar11);
   uVar12 = 0;
   param_4[5] = fVar3;
   param_4[6] = fVar4;
@@ -3596,9 +3428,7 @@ void _gleInterpolEyeNO1111w(int param_1,float *param_2,int param_3,float *param_
     param_4[2] = fVar3 * fVar4 + fVar2;
   }
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) - (double)param_2[0x13]) +
-              (double)param_2[0x13]);
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
   fVar1 = param_2[0x21];
   fVar2 = param_2[0x22];
   fVar3 = param_2[0x23];
@@ -3606,26 +3436,22 @@ void _gleInterpolEyeNO1111w(int param_1,float *param_2,int param_3,float *param_
   fVar5 = *(float *)(param_3 + 0x88);
   fVar6 = *(float *)(param_3 + 0x8c);
   param_4[0x20] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x80) - (double)param_2[0x20]) +
-              (double)param_2[0x20]);
-  param_4[0x21] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1)
+       (fparam_1 * (*(float *)(param_3 + 0x80) - param_2[0x20]) + param_2[0x20]);
+  param_4[0x21] = (fparam_1 * (fVar4 - fVar1) + fVar1)
   ;
-  param_4[0x22] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2)
+  param_4[0x22] = (fparam_1 * (fVar5 - fVar2) + fVar2)
   ;
-  param_4[0x23] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3)
+  param_4[0x23] = (fparam_1 * (fVar6 - fVar3) + fVar3)
   ;
   fVar1 = param_2[0x10];
   fVar2 = param_2[0x11];
   fVar3 = *(float *)(param_3 + 0x40);
   fVar4 = *(float *)(param_3 + 0x44);
   param_4[0x12] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x48) - (double)param_2[0x12]) +
-              (double)param_2[0x12]);
-  param_4[0x10] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar1) + (double)fVar1)
+       (fparam_1 * (*(float *)(param_3 + 0x48) - param_2[0x12]) + param_2[0x12]);
+  param_4[0x10] = (fparam_1 * (fVar3 - fVar1) + fVar1)
   ;
-  param_4[0x11] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar2) + (double)fVar2)
+  param_4[0x11] = (fparam_1 * (fVar4 - fVar2) + fVar2)
   ;
   if (param_2 == param_4) {
     return;
@@ -3655,15 +3481,15 @@ void FUN_000b84e8(int param_1,int param_2,int param_3,float *param_4,float fpara
   uint uVar15;
   uint uVar16;
   uint uVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  double dVar22;
-  double dVar23;
-  double dVar24;
-  double dVar25;
-  double dVar26;
+  float dVar18;
+  float dVar19;
+  float dVar20;
+  float dVar21;
+  float dVar22;
+  float dVar23;
+  float dVar24;
+  float dVar25;
+  float dVar26;
   
   fVar3 = *(float *)(param_3 + 0x2c);
   fVar4 = *(float *)(param_2 + 0x24);
@@ -3673,27 +3499,21 @@ void FUN_000b84e8(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = *(float *)(param_2 + 0x10);
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) -
-                                 (double)*(float *)(param_2 + 0x1c)) +
-                 (double)*(float *)(param_2 + 0x1c));
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) -
-                                      (double)*(float *)(param_2 + 0x20)) +
-                      (double)*(float *)(param_2 + 0x20));
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - fparam_4) + fparam_4);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - *(float *)(param_2 + 0x1c)) + *(float *)(param_2 + 0x1c));
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - *(float *)(param_2 + 0x20)) + *(float *)(param_2 + 0x20));
+  param_4[0xb] = (fparam_1 * (fVar3 - fparam_4) + fparam_4);
   fVar10 = *(float *)(param_2 + 0x14);
   fVar11 = *(float *)(param_3 + 0x14);
   fVar12 = *(float *)(param_2 + 0x18);
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar3 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar3;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar11 - (double)fVar10) + (double)fVar10);
+  fVar4 = (fparam_1 * (fVar11 - fVar10) + fVar10);
   param_4[7] = fVar1;
-  fVar5 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar12) + (double)fVar12);
+  fVar5 = (fparam_1 * (fVar8 - fVar12) + fVar12);
   cVar2 = *(char *)(param_2 + 0x7f);
   param_4[5] = fVar4;
   param_4[6] = fVar5;
@@ -3739,13 +3559,10 @@ void FUN_000b84e8(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar5 = *(float *)(param_3 + 0x34);
   fVar6 = *(float *)(param_3 + 0x38);
   fVar7 = *(float *)(param_3 + 0x3c);
-  param_4[0xc] = (float)(fparam_1 *
-                         (double)(float)((double)*(float *)(param_3 + 0x30) -
-                                        (double)*(float *)(param_2 + 0x30)) +
-                        (double)*(float *)(param_2 + 0x30));
-  param_4[0xd] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar1) + (double)fVar1);
-  param_4[0xe] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3);
-  param_4[0xf] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar4) + (double)fVar4);
+  param_4[0xc] = (fparam_1 * (*(float *)(param_3 + 0x30) - *(float *)(param_2 + 0x30)) + *(float *)(param_2 + 0x30));
+  param_4[0xd] = (fparam_1 * (fVar5 - fVar1) + fVar1);
+  param_4[0xe] = (fparam_1 * (fVar6 - fVar3) + fVar3);
+  param_4[0xf] = (fparam_1 * (fVar7 - fVar4) + fVar4);
   uVar15 = *(uint *)(param_1 + 0x5150);
   do {
     uVar13 = uVar15 >> (uVar17 & 0x3f);
@@ -3762,10 +3579,10 @@ void FUN_000b84e8(int param_1,int param_2,int param_3,float *param_4,float fpara
       dVar23 = (double)*(float *)(iVar14 + 0x88);
       if (cVar2 == '\0') {
         dVar18 = (double)*(float *)(param_2 + 0x1c);
-        dVar21 = (double)(float)(dVar21 * dVar18);
-        dVar20 = (double)(float)(dVar20 * dVar18);
-        dVar22 = (double)(float)(dVar22 * dVar18);
-        dVar23 = (double)(float)(dVar23 * dVar18);
+        dVar21 = (double)(dVar21 * dVar18);
+        dVar20 = (double)(dVar20 * dVar18);
+        dVar22 = (double)(dVar22 * dVar18);
+        dVar23 = (double)(dVar23 * dVar18);
       }
       iVar14 = uVar17 * 0x10 + param_3;
       dVar26 = (double)*(float *)(iVar14 + 0x8c);
@@ -3774,15 +3591,15 @@ void FUN_000b84e8(int param_1,int param_2,int param_3,float *param_4,float fpara
       dVar24 = (double)*(float *)(iVar14 + 0x88);
       if (*(char *)(param_3 + 0x7f) == '\0') {
         dVar19 = (double)*(float *)(param_3 + 0x1c);
-        dVar26 = (double)(float)(dVar26 * dVar19);
-        dVar18 = (double)(float)(dVar18 * dVar19);
-        dVar25 = (double)(float)(dVar25 * dVar19);
-        dVar24 = (double)(float)(dVar24 * dVar19);
+        dVar26 = (double)(dVar26 * dVar19);
+        dVar18 = (double)(dVar18 * dVar19);
+        dVar25 = (double)(dVar25 * dVar19);
+        dVar24 = (double)(dVar24 * dVar19);
       }
-      fVar1 = (float)(fparam_1 * (double)(float)(dVar18 - dVar20) + dVar20);
-      fVar3 = (float)(fparam_1 * (double)(float)(dVar25 - dVar22) + dVar22);
-      fVar4 = (float)(fparam_1 * (double)(float)(dVar24 - dVar23) + dVar23);
-      fVar5 = (float)(fparam_1 * (double)(float)(dVar26 - dVar21) + dVar21);
+      fVar1 = (fparam_1 * (dVar18 - dVar20) + dVar20);
+      fVar3 = (fparam_1 * (dVar25 - dVar22) + dVar22);
+      fVar4 = (fparam_1 * (dVar24 - dVar23) + dVar23);
+      fVar5 = (fparam_1 * (dVar26 - dVar21) + dVar21);
       if (uVar16 == 0) {
         fVar6 = param_4[3];
         fVar5 = fVar5 * fVar6;
@@ -3827,27 +3644,21 @@ void FUN_000b879c(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar6 = *(float *)(param_3 + 0x28);
   fVar7 = *(float *)(param_2 + 0x10);
   fVar8 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) -
-                                 (double)*(float *)(param_2 + 0x1c)) +
-                 (double)*(float *)(param_2 + 0x1c));
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) -
-                                      (double)*(float *)(param_2 + 0x20)) +
-                      (double)*(float *)(param_2 + 0x20));
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar2 - fparam_3) + fparam_3);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - *(float *)(param_2 + 0x1c)) + *(float *)(param_2 + 0x1c));
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - *(float *)(param_2 + 0x20)) + *(float *)(param_2 + 0x20));
+  param_4[0xb] = (fparam_1 * (fVar2 - fparam_3) + fparam_3);
   fVar9 = *(float *)(param_2 + 0x14);
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = *(float *)(param_2 + 0x18);
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar7) + (double)fVar7);
+  fVar2 = (fparam_1 * (fVar8 - fVar7) + fVar7);
   fVar7 = *(float *)(param_3 + 0x18);
   fVar8 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
+  param_4[9] = (fparam_1 * (fVar5 - fVar3) + fVar3);
+  param_4[10] = (fparam_1 * (fVar6 - fVar4) + fVar4);
   param_4[4] = fVar2;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar9) + (double)fVar9);
+  fVar3 = (fparam_1 * (fVar10 - fVar9) + fVar9);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar7 - fVar11) + fVar11);
   param_4[5] = fVar3;
   param_4[6] = fVar4;
   if (fVar2 < fVar8) {
@@ -3892,13 +3703,10 @@ void FUN_000b879c(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar4 = *(float *)(param_3 + 0x34);
   fVar5 = *(float *)(param_3 + 0x38);
   fVar6 = *(float *)(param_3 + 0x3c);
-  param_4[0xc] = (float)(fparam_1 *
-                         (double)(float)((double)*(float *)(param_3 + 0x30) -
-                                        (double)*(float *)(param_2 + 0x30)) +
-                        (double)*(float *)(param_2 + 0x30));
-  param_4[0xd] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1);
-  param_4[0xe] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2);
-  param_4[0xf] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3);
+  param_4[0xc] = (fparam_1 * (*(float *)(param_3 + 0x30) - *(float *)(param_2 + 0x30)) + *(float *)(param_2 + 0x30));
+  param_4[0xd] = (fparam_1 * (fVar4 - fVar1) + fVar1);
+  param_4[0xe] = (fparam_1 * (fVar5 - fVar2) + fVar2);
+  param_4[0xf] = (fparam_1 * (fVar6 - fVar3) + fVar3);
   uVar13 = *(uint *)(param_1 + 0x5150);
   do {
     uVar12 = uVar13 >> (uVar15 & 0x3f);
@@ -3917,23 +3725,20 @@ void FUN_000b879c(int param_1,int param_2,int param_3,float *param_4,float fpara
       fVar5 = *(float *)(iVar16 + 0x84);
       fVar6 = *(float *)(iVar16 + 0x88);
       param_4[uVar15 * 4 + 0x20] =
-           (float)(fparam_1 *
-                   (double)(float)((double)*(float *)(iVar16 + 0x80) -
-                                  (double)*(float *)(iVar14 + 0x80)) +
-                  (double)*(float *)(iVar14 + 0x80));
+           (fparam_1 * (*(float *)(iVar16 + 0x80) - *(float *)(iVar14 + 0x80)) + *(float *)(iVar14 + 0x80));
       param_4[uVar15 * 4 + 0x21] =
-           (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2);
+           (fparam_1 * (fVar5 - fVar2) + fVar2);
       param_4[uVar15 * 4 + 0x22] =
-           (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3);
+           (fparam_1 * (fVar6 - fVar3) + fVar3);
       param_4[uVar15 * 4 + 0x23] =
-           (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1);
+           (fparam_1 * (fVar4 - fVar1) + fVar1);
     }
     uVar15 = uVar15 + 1;
   } while( true );
 }
 
 /* _gleInterpolEyeNO1201 @ 0xb89f4 (704 bytes) */
-void _gleInterpolEyeNO1201(int param_1,float *param_2,int param_3,float *param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1201(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -3952,15 +3757,15 @@ void _gleInterpolEyeNO1201(int param_1,float *param_2,int param_3,float *param_4
   uint uVar15;
   uint uVar16;
   uint uVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  double dVar22;
-  double dVar23;
-  double dVar24;
-  double dVar25;
-  double dVar26;
+  float dVar18;
+  float dVar19;
+  float dVar20;
+  float dVar21;
+  float dVar22;
+  float dVar23;
+  float dVar24;
+  float dVar25;
+  float dVar26;
   
   fVar3 = param_2[0xb];
   fVar4 = *(float *)(param_3 + 0x2c);
@@ -3970,25 +3775,21 @@ void _gleInterpolEyeNO1201(int param_1,float *param_2,int param_3,float *param_4
   fVar8 = *(float *)(param_3 + 0x28);
   fVar9 = param_2[4];
   fVar10 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar3) + (double)fVar3);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar4 - fVar3) + fVar3);
   fVar4 = param_2[5];
   fVar11 = *(float *)(param_3 + 0x14);
   fVar12 = param_2[6];
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar9) + (double)fVar9);
+  fVar3 = (fparam_1 * (fVar10 - fVar9) + fVar9);
   fVar9 = *(float *)(param_3 + 0x18);
   fVar10 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar6) + (double)fVar6);
+  param_4[9] = (fparam_1 * (fVar7 - fVar5) + fVar5);
+  param_4[10] = (fparam_1 * (fVar8 - fVar6) + fVar6);
   param_4[4] = fVar3;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar11 - (double)fVar4) + (double)fVar4);
+  fVar4 = (fparam_1 * (fVar11 - fVar4) + fVar4);
   param_4[7] = fVar1;
-  fVar5 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar12) + (double)fVar12);
+  fVar5 = (fparam_1 * (fVar9 - fVar12) + fVar12);
   cVar2 = *(char *)((int)param_2 + 0x7f);
   uVar16 = 0;
   param_4[5] = fVar4;
@@ -4039,13 +3840,11 @@ void _gleInterpolEyeNO1201(int param_1,float *param_2,int param_3,float *param_4
         fVar4 = *(float *)(param_3 + 0x40);
         fVar5 = *(float *)(param_3 + 0x44);
         param_4[0x12] =
-             (float)(fparam_1 *
-                     (double)(float)((double)*(float *)(param_3 + 0x48) - (double)param_2[0x12]) +
-                    (double)param_2[0x12]);
+             (fparam_1 * (*(float *)(param_3 + 0x48) - param_2[0x12]) + param_2[0x12]);
         param_4[0x10] =
-             (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1);
+             (fparam_1 * (fVar4 - fVar1) + fVar1);
         param_4[0x11] =
-             (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3);
+             (fparam_1 * (fVar5 - fVar3) + fVar3);
         if (param_2 == param_4) {
           return;
         }
@@ -4061,10 +3860,10 @@ void _gleInterpolEyeNO1201(int param_1,float *param_2,int param_3,float *param_4
       dVar22 = (double)param_2[uVar17 * 4 + 0x22];
       if (cVar2 == '\0') {
         dVar18 = (double)param_2[7];
-        dVar26 = (double)(float)(dVar26 * dVar18);
-        dVar20 = (double)(float)(dVar20 * dVar18);
-        dVar21 = (double)(float)(dVar21 * dVar18);
-        dVar22 = (double)(float)(dVar22 * dVar18);
+        dVar26 = (double)(dVar26 * dVar18);
+        dVar20 = (double)(dVar20 * dVar18);
+        dVar21 = (double)(dVar21 * dVar18);
+        dVar22 = (double)(dVar22 * dVar18);
       }
       iVar14 = uVar17 * 0x10 + param_3;
       dVar23 = (double)*(float *)(iVar14 + 0x8c);
@@ -4073,15 +3872,15 @@ void _gleInterpolEyeNO1201(int param_1,float *param_2,int param_3,float *param_4
       dVar24 = (double)*(float *)(iVar14 + 0x88);
       if (*(char *)(param_3 + 0x7f) == '\0') {
         dVar19 = (double)*(float *)(param_3 + 0x1c);
-        dVar23 = (double)(float)(dVar23 * dVar19);
-        dVar25 = (double)(float)(dVar25 * dVar19);
-        dVar18 = (double)(float)(dVar18 * dVar19);
-        dVar24 = (double)(float)(dVar24 * dVar19);
+        dVar23 = (double)(dVar23 * dVar19);
+        dVar25 = (double)(dVar25 * dVar19);
+        dVar18 = (double)(dVar18 * dVar19);
+        dVar24 = (double)(dVar24 * dVar19);
       }
-      fVar1 = (float)(fparam_1 * (double)(float)(dVar25 - dVar20) + dVar20);
-      fVar3 = (float)(fparam_1 * (double)(float)(dVar18 - dVar21) + dVar21);
-      fVar4 = (float)(fparam_1 * (double)(float)(dVar24 - dVar22) + dVar22);
-      fVar5 = (float)(fparam_1 * (double)(float)(dVar23 - dVar26) + dVar26);
+      fVar1 = (fparam_1 * (dVar25 - dVar20) + dVar20);
+      fVar3 = (fparam_1 * (dVar18 - dVar21) + dVar21);
+      fVar4 = (fparam_1 * (dVar24 - dVar22) + dVar22);
+      fVar5 = (fparam_1 * (dVar23 - dVar26) + dVar26);
       if (uVar16 == 0) {
         fVar6 = param_4[3];
         fVar5 = fVar5 * fVar6;
@@ -4099,7 +3898,7 @@ void _gleInterpolEyeNO1201(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO1201w @ 0xb8cb4 (616 bytes) */
-void _gleInterpolEyeNO1201w(int param_1,float *param_2,int param_3,float *param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1201w(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -4125,25 +3924,21 @@ void _gleInterpolEyeNO1201w(int param_1,float *param_2,int param_3,float *param_
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = param_2[4];
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar2) + (double)fVar2);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar3 - fVar2) + fVar2);
   fVar3 = param_2[5];
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = param_2[6];
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar2 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar2;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar3) + (double)fVar3);
+  fVar3 = (fparam_1 * (fVar10 - fVar3) + fVar3);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar8 - fVar11) + fVar11);
   uVar13 = 0;
   param_4[5] = fVar3;
   param_4[6] = fVar4;
@@ -4193,13 +3988,11 @@ void _gleInterpolEyeNO1201w(int param_1,float *param_2,int param_3,float *param_
         fVar3 = *(float *)(param_3 + 0x40);
         fVar4 = *(float *)(param_3 + 0x44);
         param_4[0x12] =
-             (float)(fparam_1 *
-                     (double)(float)((double)*(float *)(param_3 + 0x48) - (double)param_2[0x12]) +
-                    (double)param_2[0x12]);
+             (fparam_1 * (*(float *)(param_3 + 0x48) - param_2[0x12]) + param_2[0x12]);
         param_4[0x10] =
-             (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar1) + (double)fVar1);
+             (fparam_1 * (fVar3 - fVar1) + fVar1);
         param_4[0x11] =
-             (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar2) + (double)fVar2);
+             (fparam_1 * (fVar4 - fVar2) + fVar2);
         if (param_2 == param_4) {
           return;
         }
@@ -4217,16 +4010,13 @@ void _gleInterpolEyeNO1201w(int param_1,float *param_2,int param_3,float *param_
       fVar5 = *(float *)(iVar15 + 0x84);
       fVar6 = *(float *)(iVar15 + 0x88);
       param_4[uVar14 * 4 + 0x20] =
-           (float)(fparam_1 *
-                   (double)(float)((double)*(float *)(iVar15 + 0x80) -
-                                  (double)param_2[uVar14 * 4 + 0x20]) +
-                  (double)param_2[uVar14 * 4 + 0x20]);
+           (fparam_1 * (*(float *)(iVar15 + 0x80) - param_2[uVar14 * 4 + 0x20]) + param_2[uVar14 * 4 + 0x20]);
       param_4[uVar14 * 4 + 0x21] =
-           (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2);
+           (fparam_1 * (fVar5 - fVar2) + fVar2);
       param_4[uVar14 * 4 + 0x22] =
-           (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3);
+           (fparam_1 * (fVar6 - fVar3) + fVar3);
       param_4[uVar14 * 4 + 0x23] =
-           (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1);
+           (fparam_1 * (fVar4 - fVar1) + fVar1);
     }
     uVar14 = uVar14 + 1;
   } while( true );
@@ -4252,15 +4042,15 @@ void FUN_000b8f20(int param_1,int param_2,int param_3,float *param_4,float fpara
   uint uVar15;
   uint uVar16;
   uint uVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  double dVar22;
-  double dVar23;
-  double dVar24;
-  double dVar25;
-  double dVar26;
+  float dVar18;
+  float dVar19;
+  float dVar20;
+  float dVar21;
+  float dVar22;
+  float dVar23;
+  float dVar24;
+  float dVar25;
+  float dVar26;
   
   fVar3 = *(float *)(param_3 + 0x2c);
   fVar4 = *(float *)(param_2 + 0x24);
@@ -4270,27 +4060,21 @@ void FUN_000b8f20(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = *(float *)(param_2 + 0x10);
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) -
-                                 (double)*(float *)(param_2 + 0x1c)) +
-                 (double)*(float *)(param_2 + 0x1c));
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) -
-                                      (double)*(float *)(param_2 + 0x20)) +
-                      (double)*(float *)(param_2 + 0x20));
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - fparam_4) + fparam_4);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - *(float *)(param_2 + 0x1c)) + *(float *)(param_2 + 0x1c));
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - *(float *)(param_2 + 0x20)) + *(float *)(param_2 + 0x20));
+  param_4[0xb] = (fparam_1 * (fVar3 - fparam_4) + fparam_4);
   fVar10 = *(float *)(param_2 + 0x14);
   fVar11 = *(float *)(param_3 + 0x14);
   fVar12 = *(float *)(param_2 + 0x18);
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar3 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar3;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar11 - (double)fVar10) + (double)fVar10);
+  fVar4 = (fparam_1 * (fVar11 - fVar10) + fVar10);
   param_4[7] = fVar1;
-  fVar5 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar12) + (double)fVar12);
+  fVar5 = (fparam_1 * (fVar8 - fVar12) + fVar12);
   cVar2 = *(char *)(param_2 + 0x7f);
   param_4[5] = fVar4;
   param_4[6] = fVar5;
@@ -4338,15 +4122,12 @@ void FUN_000b8f20(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar7 = *(float *)(param_2 + 0x38);
   fVar8 = *(float *)(param_3 + 0x3c);
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) -
-                              (double)*(float *)(param_2 + 0x4c)) +
-              (double)*(float *)(param_2 + 0x4c));
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - *(float *)(param_2 + 0x4c)) + *(float *)(param_2 + 0x4c));
   fVar9 = *(float *)(param_3 + 0x38);
-  param_4[0xc] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar1) + (double)fVar1);
-  param_4[0xd] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3);
-  param_4[0xf] = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar4) + (double)fVar4);
-  param_4[0xe] = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar7) + (double)fVar7);
+  param_4[0xc] = (fparam_1 * (fVar5 - fVar1) + fVar1);
+  param_4[0xd] = (fparam_1 * (fVar6 - fVar3) + fVar3);
+  param_4[0xf] = (fparam_1 * (fVar8 - fVar4) + fVar4);
+  param_4[0xe] = (fparam_1 * (fVar9 - fVar7) + fVar7);
   uVar15 = *(uint *)(param_1 + 0x5150);
   do {
     uVar13 = uVar15 >> (uVar17 & 0x3f);
@@ -4363,10 +4144,10 @@ void FUN_000b8f20(int param_1,int param_2,int param_3,float *param_4,float fpara
       dVar24 = (double)*(float *)(iVar14 + 0x88);
       if (cVar2 == '\0') {
         dVar18 = (double)*(float *)(param_2 + 0x1c);
-        dVar21 = (double)(float)(dVar21 * dVar18);
-        dVar20 = (double)(float)(dVar20 * dVar18);
-        dVar22 = (double)(float)(dVar22 * dVar18);
-        dVar24 = (double)(float)(dVar24 * dVar18);
+        dVar21 = (double)(dVar21 * dVar18);
+        dVar20 = (double)(dVar20 * dVar18);
+        dVar22 = (double)(dVar22 * dVar18);
+        dVar24 = (double)(dVar24 * dVar18);
       }
       iVar14 = uVar17 * 0x10 + param_3;
       dVar25 = (double)*(float *)(iVar14 + 0x8c);
@@ -4375,15 +4156,15 @@ void FUN_000b8f20(int param_1,int param_2,int param_3,float *param_4,float fpara
       dVar26 = (double)*(float *)(iVar14 + 0x88);
       if (*(char *)(param_3 + 0x7f) == '\0') {
         dVar19 = (double)*(float *)(param_3 + 0x1c);
-        dVar25 = (double)(float)(dVar25 * dVar19);
-        dVar18 = (double)(float)(dVar18 * dVar19);
-        dVar23 = (double)(float)(dVar23 * dVar19);
-        dVar26 = (double)(float)(dVar26 * dVar19);
+        dVar25 = (double)(dVar25 * dVar19);
+        dVar18 = (double)(dVar18 * dVar19);
+        dVar23 = (double)(dVar23 * dVar19);
+        dVar26 = (double)(dVar26 * dVar19);
       }
-      fVar1 = (float)(fparam_1 * (double)(float)(dVar18 - dVar20) + dVar20);
-      fVar3 = (float)(fparam_1 * (double)(float)(dVar23 - dVar22) + dVar22);
-      fVar4 = (float)(fparam_1 * (double)(float)(dVar26 - dVar24) + dVar24);
-      fVar5 = (float)(fparam_1 * (double)(float)(dVar25 - dVar21) + dVar21);
+      fVar1 = (fparam_1 * (dVar18 - dVar20) + dVar20);
+      fVar3 = (fparam_1 * (dVar23 - dVar22) + dVar22);
+      fVar4 = (fparam_1 * (dVar26 - dVar24) + dVar24);
+      fVar5 = (fparam_1 * (dVar25 - dVar21) + dVar21);
       if (uVar16 == 0) {
         fVar6 = param_4[3];
         fVar5 = fVar5 * fVar6;
@@ -4428,27 +4209,21 @@ void FUN_000b91e8(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar6 = *(float *)(param_3 + 0x28);
   fVar7 = *(float *)(param_2 + 0x10);
   fVar8 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) -
-                                 (double)*(float *)(param_2 + 0x1c)) +
-                 (double)*(float *)(param_2 + 0x1c));
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) -
-                                      (double)*(float *)(param_2 + 0x20)) +
-                      (double)*(float *)(param_2 + 0x20));
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar2 - fparam_3) + fparam_3);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - *(float *)(param_2 + 0x1c)) + *(float *)(param_2 + 0x1c));
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - *(float *)(param_2 + 0x20)) + *(float *)(param_2 + 0x20));
+  param_4[0xb] = (fparam_1 * (fVar2 - fparam_3) + fparam_3);
   fVar9 = *(float *)(param_2 + 0x14);
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = *(float *)(param_2 + 0x18);
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar7) + (double)fVar7);
+  fVar2 = (fparam_1 * (fVar8 - fVar7) + fVar7);
   fVar7 = *(float *)(param_3 + 0x18);
   fVar8 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
+  param_4[9] = (fparam_1 * (fVar5 - fVar3) + fVar3);
+  param_4[10] = (fparam_1 * (fVar6 - fVar4) + fVar4);
   param_4[4] = fVar2;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar9) + (double)fVar9);
+  fVar3 = (fparam_1 * (fVar10 - fVar9) + fVar9);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar7 - fVar11) + fVar11);
   param_4[5] = fVar3;
   param_4[6] = fVar4;
   if (fVar2 < fVar8) {
@@ -4495,15 +4270,12 @@ void FUN_000b91e8(int param_1,int param_2,int param_3,float *param_4,float fpara
   fVar6 = *(float *)(param_2 + 0x38);
   fVar7 = *(float *)(param_3 + 0x3c);
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) -
-                              (double)*(float *)(param_2 + 0x4c)) +
-              (double)*(float *)(param_2 + 0x4c));
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - *(float *)(param_2 + 0x4c)) + *(float *)(param_2 + 0x4c));
   fVar8 = *(float *)(param_3 + 0x38);
-  param_4[0xc] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1);
-  param_4[0xd] = (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2);
-  param_4[0xf] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar3) + (double)fVar3);
-  param_4[0xe] = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar6) + (double)fVar6);
+  param_4[0xc] = (fparam_1 * (fVar4 - fVar1) + fVar1);
+  param_4[0xd] = (fparam_1 * (fVar5 - fVar2) + fVar2);
+  param_4[0xf] = (fparam_1 * (fVar7 - fVar3) + fVar3);
+  param_4[0xe] = (fparam_1 * (fVar8 - fVar6) + fVar6);
   uVar13 = *(uint *)(param_1 + 0x5150);
   do {
     uVar12 = uVar13 >> (uVar15 & 0x3f);
@@ -4522,23 +4294,20 @@ void FUN_000b91e8(int param_1,int param_2,int param_3,float *param_4,float fpara
       fVar5 = *(float *)(iVar16 + 0x84);
       fVar6 = *(float *)(iVar16 + 0x88);
       param_4[uVar15 * 4 + 0x20] =
-           (float)(fparam_1 *
-                   (double)(float)((double)*(float *)(iVar16 + 0x80) -
-                                  (double)*(float *)(iVar14 + 0x80)) +
-                  (double)*(float *)(iVar14 + 0x80));
+           (fparam_1 * (*(float *)(iVar16 + 0x80) - *(float *)(iVar14 + 0x80)) + *(float *)(iVar14 + 0x80));
       param_4[uVar15 * 4 + 0x21] =
-           (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2);
+           (fparam_1 * (fVar5 - fVar2) + fVar2);
       param_4[uVar15 * 4 + 0x22] =
-           (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3);
+           (fparam_1 * (fVar6 - fVar3) + fVar3);
       param_4[uVar15 * 4 + 0x23] =
-           (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1);
+           (fparam_1 * (fVar4 - fVar1) + fVar1);
     }
     uVar15 = uVar15 + 1;
   } while( true );
 }
 
 /* _gleInterpolEyeNO1211 @ 0xb9454 (724 bytes) */
-void _gleInterpolEyeNO1211(int param_1,float *param_2,int param_3,float *param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1211(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -4557,15 +4326,15 @@ void _gleInterpolEyeNO1211(int param_1,float *param_2,int param_3,float *param_4
   uint uVar15;
   uint uVar16;
   uint uVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  double dVar22;
-  double dVar23;
-  double dVar24;
-  double dVar25;
-  double dVar26;
+  float dVar18;
+  float dVar19;
+  float dVar20;
+  float dVar21;
+  float dVar22;
+  float dVar23;
+  float dVar24;
+  float dVar25;
+  float dVar26;
   
   fVar3 = param_2[0xb];
   fVar4 = *(float *)(param_3 + 0x2c);
@@ -4575,25 +4344,21 @@ void _gleInterpolEyeNO1211(int param_1,float *param_2,int param_3,float *param_4
   fVar8 = *(float *)(param_3 + 0x28);
   fVar9 = param_2[4];
   fVar10 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar3) + (double)fVar3);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar4 - fVar3) + fVar3);
   fVar4 = param_2[5];
   fVar11 = *(float *)(param_3 + 0x14);
   fVar12 = param_2[6];
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar9) + (double)fVar9);
+  fVar3 = (fparam_1 * (fVar10 - fVar9) + fVar9);
   fVar9 = *(float *)(param_3 + 0x18);
   fVar10 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar6) + (double)fVar6);
+  param_4[9] = (fparam_1 * (fVar7 - fVar5) + fVar5);
+  param_4[10] = (fparam_1 * (fVar8 - fVar6) + fVar6);
   param_4[4] = fVar3;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar11 - (double)fVar4) + (double)fVar4);
+  fVar4 = (fparam_1 * (fVar11 - fVar4) + fVar4);
   param_4[7] = fVar1;
-  fVar5 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar12) + (double)fVar12);
+  fVar5 = (fparam_1 * (fVar9 - fVar12) + fVar12);
   cVar2 = *(char *)((int)param_2 + 0x7f);
   uVar16 = 0;
   param_4[5] = fVar4;
@@ -4635,9 +4400,7 @@ void _gleInterpolEyeNO1211(int param_1,float *param_2,int param_3,float *param_4
   }
   uVar17 = 0;
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) - (double)param_2[0x13]) +
-              (double)param_2[0x13]);
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
   uVar15 = *(uint *)(param_1 + 0x5150);
   do {
     uVar13 = uVar15 >> (uVar17 & 0x3f);
@@ -4648,13 +4411,11 @@ void _gleInterpolEyeNO1211(int param_1,float *param_2,int param_3,float *param_4
         fVar4 = *(float *)(param_3 + 0x40);
         fVar5 = *(float *)(param_3 + 0x44);
         param_4[0x12] =
-             (float)(fparam_1 *
-                     (double)(float)((double)*(float *)(param_3 + 0x48) - (double)param_2[0x12]) +
-                    (double)param_2[0x12]);
+             (fparam_1 * (*(float *)(param_3 + 0x48) - param_2[0x12]) + param_2[0x12]);
         param_4[0x10] =
-             (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1);
+             (fparam_1 * (fVar4 - fVar1) + fVar1);
         param_4[0x11] =
-             (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar3) + (double)fVar3);
+             (fparam_1 * (fVar5 - fVar3) + fVar3);
         if (param_2 == param_4) {
           return;
         }
@@ -4670,10 +4431,10 @@ void _gleInterpolEyeNO1211(int param_1,float *param_2,int param_3,float *param_4
       dVar24 = (double)param_2[uVar17 * 4 + 0x22];
       if (cVar2 == '\0') {
         dVar18 = (double)param_2[7];
-        dVar26 = (double)(float)(dVar26 * dVar18);
-        dVar20 = (double)(float)(dVar20 * dVar18);
-        dVar21 = (double)(float)(dVar21 * dVar18);
-        dVar24 = (double)(float)(dVar24 * dVar18);
+        dVar26 = (double)(dVar26 * dVar18);
+        dVar20 = (double)(dVar20 * dVar18);
+        dVar21 = (double)(dVar21 * dVar18);
+        dVar24 = (double)(dVar24 * dVar18);
       }
       iVar14 = uVar17 * 0x10 + param_3;
       dVar22 = (double)*(float *)(iVar14 + 0x8c);
@@ -4682,15 +4443,15 @@ void _gleInterpolEyeNO1211(int param_1,float *param_2,int param_3,float *param_4
       dVar25 = (double)*(float *)(iVar14 + 0x88);
       if (*(char *)(param_3 + 0x7f) == '\0') {
         dVar19 = (double)*(float *)(param_3 + 0x1c);
-        dVar22 = (double)(float)(dVar22 * dVar19);
-        dVar23 = (double)(float)(dVar23 * dVar19);
-        dVar18 = (double)(float)(dVar18 * dVar19);
-        dVar25 = (double)(float)(dVar25 * dVar19);
+        dVar22 = (double)(dVar22 * dVar19);
+        dVar23 = (double)(dVar23 * dVar19);
+        dVar18 = (double)(dVar18 * dVar19);
+        dVar25 = (double)(dVar25 * dVar19);
       }
-      fVar1 = (float)(fparam_1 * (double)(float)(dVar23 - dVar20) + dVar20);
-      fVar3 = (float)(fparam_1 * (double)(float)(dVar18 - dVar21) + dVar21);
-      fVar4 = (float)(fparam_1 * (double)(float)(dVar25 - dVar24) + dVar24);
-      fVar5 = (float)(fparam_1 * (double)(float)(dVar22 - dVar26) + dVar26);
+      fVar1 = (fparam_1 * (dVar23 - dVar20) + dVar20);
+      fVar3 = (fparam_1 * (dVar18 - dVar21) + dVar21);
+      fVar4 = (fparam_1 * (dVar25 - dVar24) + dVar24);
+      fVar5 = (fparam_1 * (dVar22 - dVar26) + dVar26);
       if (uVar16 == 0) {
         fVar6 = param_4[3];
         fVar5 = fVar5 * fVar6;
@@ -4708,7 +4469,7 @@ void _gleInterpolEyeNO1211(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO1211w @ 0xb9728 (636 bytes) */
-void _gleInterpolEyeNO1211w(int param_1,float *param_2,int param_3,float *param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1211w(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -4734,25 +4495,21 @@ void _gleInterpolEyeNO1211w(int param_1,float *param_2,int param_3,float *param_
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = param_2[4];
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar2) + (double)fVar2);
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar3 - fVar2) + fVar2);
   fVar3 = param_2[5];
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = param_2[6];
-  fVar2 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar2 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar2;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar3) + (double)fVar3);
+  fVar3 = (fparam_1 * (fVar10 - fVar3) + fVar3);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar8 - fVar11) + fVar11);
   uVar13 = 0;
   param_4[5] = fVar3;
   param_4[6] = fVar4;
@@ -4793,9 +4550,7 @@ void _gleInterpolEyeNO1211w(int param_1,float *param_2,int param_3,float *param_
   }
   uVar14 = 0;
   param_4[0x13] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x4c) - (double)param_2[0x13]) +
-              (double)param_2[0x13]);
+       (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
   uVar13 = *(uint *)(param_1 + 0x5150);
   do {
     uVar12 = uVar13 >> (uVar14 & 0x3f);
@@ -4806,13 +4561,11 @@ void _gleInterpolEyeNO1211w(int param_1,float *param_2,int param_3,float *param_
         fVar3 = *(float *)(param_3 + 0x40);
         fVar4 = *(float *)(param_3 + 0x44);
         param_4[0x12] =
-             (float)(fparam_1 *
-                     (double)(float)((double)*(float *)(param_3 + 0x48) - (double)param_2[0x12]) +
-                    (double)param_2[0x12]);
+             (fparam_1 * (*(float *)(param_3 + 0x48) - param_2[0x12]) + param_2[0x12]);
         param_4[0x10] =
-             (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar1) + (double)fVar1);
+             (fparam_1 * (fVar3 - fVar1) + fVar1);
         param_4[0x11] =
-             (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar2) + (double)fVar2);
+             (fparam_1 * (fVar4 - fVar2) + fVar2);
         if (param_2 == param_4) {
           return;
         }
@@ -4830,16 +4583,13 @@ void _gleInterpolEyeNO1211w(int param_1,float *param_2,int param_3,float *param_
       fVar5 = *(float *)(iVar15 + 0x84);
       fVar6 = *(float *)(iVar15 + 0x88);
       param_4[uVar14 * 4 + 0x20] =
-           (float)(fparam_1 *
-                   (double)(float)((double)*(float *)(iVar15 + 0x80) -
-                                  (double)param_2[uVar14 * 4 + 0x20]) +
-                  (double)param_2[uVar14 * 4 + 0x20]);
+           (fparam_1 * (*(float *)(iVar15 + 0x80) - param_2[uVar14 * 4 + 0x20]) + param_2[uVar14 * 4 + 0x20]);
       param_4[uVar14 * 4 + 0x21] =
-           (float)(fparam_1 * (double)(float)((double)fVar5 - (double)fVar2) + (double)fVar2);
+           (fparam_1 * (fVar5 - fVar2) + fVar2);
       param_4[uVar14 * 4 + 0x22] =
-           (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar3) + (double)fVar3);
+           (fparam_1 * (fVar6 - fVar3) + fVar3);
       param_4[uVar14 * 4 + 0x23] =
-           (float)(fparam_1 * (double)(float)((double)fVar4 - (double)fVar1) + (double)fVar1);
+           (fparam_1 * (fVar4 - fVar1) + fVar1);
     }
     uVar14 = uVar14 + 1;
   } while( true );
@@ -4865,15 +4615,15 @@ void _gleInterpolEyeAllFlat(int param_1,float *param_2,int param_3,float *param_
   uint uVar15;
   uint uVar16;
   uint uVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  double dVar22;
-  double dVar23;
-  double dVar24;
-  double dVar25;
-  double dVar26;
+  float dVar18;
+  float dVar19;
+  float dVar20;
+  float dVar21;
+  float dVar22;
+  float dVar23;
+  float dVar24;
+  float dVar25;
+  float dVar26;
   
   fVar14 = param_2[0xb];
   fVar3 = *(float *)(param_3 + 0x2c);
@@ -4884,26 +4634,21 @@ void _gleInterpolEyeAllFlat(int param_1,float *param_2,int param_3,float *param_
   fVar7 = *(float *)(param_3 + 0x28);
   fVar8 = param_2[4];
   fVar9 = *(float *)(param_3 + 0x10);
-  fVar1 = (float)(fparam_1 *
-                  (double)(float)((double)*(float *)(param_3 + 0x1c) - (double)param_2[7]) +
-                 (double)param_2[7]);
-  param_4[8] = (float)(fparam_1 *
-                       (double)(float)((double)*(float *)(param_3 + 0x20) - (double)param_2[8]) +
-                      (double)param_2[8]);
-  param_4[0xb] = (float)(fparam_1 * (double)(float)((double)fVar3 - (double)fVar14) + (double)fVar14
-                        );
+  fVar1 = (fparam_1 * (*(float *)(param_3 + 0x1c) - param_2[7]) + param_2[7]);
+  param_4[8] = (fparam_1 * (*(float *)(param_3 + 0x20) - param_2[8]) + param_2[8]);
+  param_4[0xb] = (fparam_1 * (fVar3 - fVar14) + fVar14);
   fVar3 = param_2[5];
   fVar10 = *(float *)(param_3 + 0x14);
   fVar11 = param_2[6];
-  fVar14 = (float)(fparam_1 * (double)(float)((double)fVar9 - (double)fVar8) + (double)fVar8);
+  fVar14 = (fparam_1 * (fVar9 - fVar8) + fVar8);
   fVar8 = *(float *)(param_3 + 0x18);
   fVar9 = -fVar1;
-  param_4[9] = (float)(fparam_1 * (double)(float)((double)fVar6 - (double)fVar4) + (double)fVar4);
-  param_4[10] = (float)(fparam_1 * (double)(float)((double)fVar7 - (double)fVar5) + (double)fVar5);
+  param_4[9] = (fparam_1 * (fVar6 - fVar4) + fVar4);
+  param_4[10] = (fparam_1 * (fVar7 - fVar5) + fVar5);
   param_4[4] = fVar14;
-  fVar3 = (float)(fparam_1 * (double)(float)((double)fVar10 - (double)fVar3) + (double)fVar3);
+  fVar3 = (fparam_1 * (fVar10 - fVar3) + fVar3);
   param_4[7] = fVar1;
-  fVar4 = (float)(fparam_1 * (double)(float)((double)fVar8 - (double)fVar11) + (double)fVar11);
+  fVar4 = (fparam_1 * (fVar8 - fVar11) + fVar11);
   cVar2 = *(char *)((int)param_2 + 0x7f);
   param_4[5] = fVar3;
   param_4[6] = fVar4;
@@ -4946,11 +4691,9 @@ void _gleInterpolEyeAllFlat(int param_1,float *param_2,int param_3,float *param_
   uVar17 = 0;
   fVar14 = *(float *)(param_3 + 0x4c);
   param_4[0x17] =
-       (float)(fparam_1 *
-               (double)(float)((double)*(float *)(param_3 + 0x5c) - (double)param_2[0x17]) +
-              (double)param_2[0x17]);
+       (fparam_1 * (*(float *)(param_3 + 0x5c) - param_2[0x17]) + param_2[0x17]);
   param_4[0x13] =
-       (float)(fparam_1 * (double)(float)((double)fVar14 - (double)fVar1) + (double)fVar1);
+       (fparam_1 * (fVar14 - fVar1) + fVar1);
   uVar15 = *(uint *)(param_1 + 0x5150);
   do {
     uVar12 = uVar15 >> (uVar17 & 0x3f);
@@ -4979,10 +4722,10 @@ void _gleInterpolEyeAllFlat(int param_1,float *param_2,int param_3,float *param_
       dVar22 = (double)param_2[uVar17 * 4 + 0x22];
       if (cVar2 == '\0') {
         dVar18 = (double)param_2[7];
-        dVar26 = (double)(float)(dVar26 * dVar18);
-        dVar20 = (double)(float)(dVar20 * dVar18);
-        dVar21 = (double)(float)(dVar21 * dVar18);
-        dVar22 = (double)(float)(dVar22 * dVar18);
+        dVar26 = (double)(dVar26 * dVar18);
+        dVar20 = (double)(dVar20 * dVar18);
+        dVar21 = (double)(dVar21 * dVar18);
+        dVar22 = (double)(dVar22 * dVar18);
       }
       iVar13 = uVar17 * 0x10 + param_3;
       dVar23 = (double)*(float *)(iVar13 + 0x8c);
@@ -4991,15 +4734,15 @@ void _gleInterpolEyeAllFlat(int param_1,float *param_2,int param_3,float *param_
       dVar24 = (double)*(float *)(iVar13 + 0x88);
       if (*(char *)(param_3 + 0x7f) == '\0') {
         dVar19 = (double)*(float *)(param_3 + 0x1c);
-        dVar23 = (double)(float)(dVar23 * dVar19);
-        dVar18 = (double)(float)(dVar18 * dVar19);
-        dVar25 = (double)(float)(dVar25 * dVar19);
-        dVar24 = (double)(float)(dVar24 * dVar19);
+        dVar23 = (double)(dVar23 * dVar19);
+        dVar18 = (double)(dVar18 * dVar19);
+        dVar25 = (double)(dVar25 * dVar19);
+        dVar24 = (double)(dVar24 * dVar19);
       }
-      fVar1 = (float)(fparam_1 * (double)(float)(dVar18 - dVar20) + dVar20);
-      fVar14 = (float)(fparam_1 * (double)(float)(dVar25 - dVar21) + dVar21);
-      fVar3 = (float)(fparam_1 * (double)(float)(dVar24 - dVar22) + dVar22);
-      fVar4 = (float)(fparam_1 * (double)(float)(dVar23 - dVar26) + dVar26);
+      fVar1 = (fparam_1 * (dVar18 - dVar20) + dVar20);
+      fVar14 = (fparam_1 * (dVar25 - dVar21) + dVar21);
+      fVar3 = (fparam_1 * (dVar24 - dVar22) + dVar22);
+      fVar4 = (fparam_1 * (dVar23 - dVar26) + dVar26);
       if (uVar16 == 0) {
         fVar5 = param_4[3];
         fVar4 = fVar4 * fVar5;

@@ -3822,8 +3822,8 @@ void _glePreEvaluate(undefined4 param_1,int param_2,undefined4 param_3,float *pa
   int iVar3;
   int iVar4;
   int iVar5;
-  double dVar6;
-  double dVar7;
+  float dVar6;
+  float dVar7;
   
   if (param_2 == 1) {
     *param_4 = 1.0;
@@ -3831,29 +3831,29 @@ void _glePreEvaluate(undefined4 param_1,int param_2,undefined4 param_3,float *pa
   }
   dVar6 = (double)FLOAT_00108e54;
   param_4[1] = (float)fparam_1;
-  dVar7 = (double)(float)(dVar6 - fparam_1);
-  *param_4 = (float)(dVar6 - fparam_1);
+  dVar7 = (double)(dVar6 - fparam_1);
+  *param_4 = (dVar6 - fparam_1);
   if (param_2 != 2) {
     iVar5 = 2;
     if (2 < param_2) {
       do {
         iVar3 = 1;
-        dVar6 = (double)(float)((double)*param_4 * fparam_1);
-        *param_4 = (float)(dVar7 * (double)*param_4);
+        dVar6 = (double)(*param_4 * fparam_1);
+        *param_4 = (dVar7 * *param_4);
         if (1 < iVar5) {
           iVar2 = iVar5 + -1;
           iVar4 = iVar3;
           do {
             iVar3 = iVar4 + 1;
-            dVar1 = dVar7 * (double)param_4[iVar4] + dVar6;
-            dVar6 = (double)(float)((double)param_4[iVar4] * fparam_1);
+            dVar1 = (double)dVar7 * (double)param_4[iVar4] + (double)dVar6;
+            dVar6 = (double)(param_4[iVar4] * fparam_1);
             param_4[iVar4] = (float)dVar1;
             iVar2 = iVar2 + -1;
             iVar4 = iVar3;
           } while (iVar2 != 0);
         }
         iVar5 = iVar5 + 1;
-        param_4[iVar3] = (float)dVar6;
+        param_4[iVar3] = (float)(double)dVar6;
       } while (iVar5 < param_2);
       return;
     }
@@ -3873,10 +3873,10 @@ void _glePreEvaluateWithDeriv(undefined4 param_1,int param_2,undefined4 param_3,
   int iVar6;
   float *pfVar7;
   int iVar8;
-  double dVar9;
-  double dVar10;
+  float dVar9;
+  float dVar10;
   
-  fVar2 = (float)((double)FLOAT_00108e54 - fparam_1);
+  fVar2 = (FLOAT_00108e54 - fparam_1);
   dVar9 = (double)fVar2;
   if (param_2 == 1) {
     *param_4 = FLOAT_00108e54;
@@ -3897,22 +3897,22 @@ void _glePreEvaluateWithDeriv(undefined4 param_1,int param_2,undefined4 param_3,
   if (2 < iVar5) {
     do {
       iVar4 = 1;
-      dVar10 = (double)(float)((double)*param_4 * fparam_1);
-      *param_4 = (float)(dVar9 * (double)*param_4);
+      dVar10 = (double)(*param_4 * fparam_1);
+      *param_4 = (dVar9 * *param_4);
       if (1 < iVar8) {
         iVar3 = iVar8 + -1;
         iVar6 = iVar4;
         do {
           iVar4 = iVar6 + 1;
-          dVar1 = dVar9 * (double)param_4[iVar6] + dVar10;
-          dVar10 = (double)(float)((double)param_4[iVar6] * fparam_1);
+          dVar1 = (double)dVar9 * (double)param_4[iVar6] + (double)dVar10;
+          dVar10 = (double)(param_4[iVar6] * fparam_1);
           param_4[iVar6] = (float)dVar1;
           iVar3 = iVar3 + -1;
           iVar6 = iVar4;
         } while (iVar3 != 0);
       }
       iVar8 = iVar8 + 1;
-      param_4[iVar4] = (float)dVar10;
+      param_4[iVar4] = (float)(double)dVar10;
     } while (iVar8 < iVar5);
   }
   iVar6 = param_2 + -2;
@@ -3932,21 +3932,21 @@ void _glePreEvaluateWithDeriv(undefined4 param_1,int param_2,undefined4 param_3,
   } while (iVar6 != 0);
   iVar4 = 1;
   param_5[iVar5 + 1] = param_4[iVar5];
-  dVar10 = (double)(float)((double)*param_4 * fparam_1);
-  *param_4 = (float)(dVar9 * (double)*param_4);
+  dVar10 = (double)(*param_4 * fparam_1);
+  *param_4 = (dVar9 * *param_4);
   if (1 < iVar8) {
     iVar8 = iVar8 + -1;
     iVar5 = iVar4;
     do {
       iVar4 = iVar5 + 1;
-      dVar1 = dVar9 * (double)param_4[iVar5] + dVar10;
-      dVar10 = (double)(float)((double)param_4[iVar5] * fparam_1);
+      dVar1 = (double)dVar9 * (double)param_4[iVar5] + (double)dVar10;
+      dVar10 = (double)(param_4[iVar5] * fparam_1);
       param_4[iVar5] = (float)dVar1;
       iVar8 = iVar8 + -1;
       iVar5 = iVar4;
     } while (iVar8 != 0);
   }
-  param_4[iVar4] = (float)dVar10;
+  param_4[iVar4] = (float)(double)dVar10;
   return;
 }
 
