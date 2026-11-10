@@ -66,4 +66,31 @@ instruction-by-instruction it matches stock (checked against 0xd3be8: same argum
 `_gleAddListItem` itself is proven identical on a valid context (`gleng_mock_listitem`). With a valid list context (`FNFUZZ_LISTCTX=1`) `_glRotatef_Comp` passes 48 of 48.
 The run16_compfamily.log run applies `FNFUZZ_LISTCTX=1 FNFUZZ_FLOATARGS=1 FNFUZZ_STACKFILL=0` to every `_Comp` function: results below.
 
-<!-- RUN16 RESULTS: filled in when the runs finish -->
+## 6. `_glResetHistogram_*` (hoisted load; invalid ctx only)
+
+`_glResetHistogram_ListExec`, `_glResetHistogram_Exec`, `_glResetHistogram_CompExec` (run17_targeted.log, 24 trials each): with a random context stock takes SIGBUS/SIGSEGV (st 10/11) and the rebuilt
+code returns (st 0) with an equal digest, under no fill, fill 0 and fill 01010101 alike. Stock `_glResetHistogram_Exec` (0x6ae9c) loads `lfs f0,0x20(r3)` (ctx+0x20) unconditionally on entry; the rebuilt code
+loads that float only on the branch that uses it. With `FNFUZZ_LISTCTX=1` (a context that is a real address) all three pass 24 of 24 under all three fills (RESULT: PASS x3 each). Same class as
+`_gleLookUpTexture3D` in section 2: the stock fault is a load from a bad context pointer, which no caller can pass.
+
+## 7. `_glGetHistogramParameterfv_Exec` / `_glGetMinmaxParameterfv_Exec`: stack residue on the error path
+
+Fuzz result (run17_targeted.log): both differ in 19/24 and 17/24 trials without `LISTCTX`, 24/24 with it, with every fill (digest and r3 differ; stock r3 = ctx, rebuilt r3 = ctx+0x7574).
+The functions are `fv(ctx, target, pname, float *out)`: call `iv(ctx, target, pname, &local)`, then store `(float)local` to `*out`. The stock iv function (0x6aa3c, 0x6ac28) returns without writing
+`local` whenever it sets a GL error (ctx+0x4a10 >= 0, bad target, bad pname), so `local` is whatever the stack held: the stock slot is `0x48(r1)` of a 0x60 frame, the rebuilt slot `0x40(r1)` of its frame.
+In the failing fuzz trials the stock stored float is 0x4ea00020 = (float)0x50001000, i.e. a word equal to the ctx argument (how it got into the slot is not established; neither function writes the slot), and the rebuilt one stores (float)0 from its own slot;
+the arena difference is those words (`FNFUZZ_VERBOSE=1 FNFUZZ_CONTEXT=1`: `arena+02220: stock 4ea00020 rebuilt 00000000`, every other word listed equal). The return register differs for the same reason:
+the stock iv function is a leaf that returns with r3 untouched (`bnelr`), the rebuilt returns `&ctx->error` (`addi r3,r3,0x7574`) in r3; both functions are void.
+Valid-context test `gleng_mock_getparam` (`mock_getparam_a3a6228a.txt`): ctx+0x4a10 = -1 (the non-error state), 7 targets x 19 pnames x error word {0, 0x502} x 2 context fills, for the four functions
+Histogram iv/fv and Minmax iv/fv. Cases where the stock iv function writes the output word: Histogram 64 (targets 0x8024/0x8025 x pnames 0x8026..0x802d), Minmax 8 (target 0x802e x pnames 0x802f/0x8030) each:
+**0 differences** in the output word and in the whole 32 KB context. The 1984 error-path cases (output word is residue in both images, not compared) also leave the whole context identical.
+Conclusion: the DIFF is an uninitialised stack word read in both images; every defined input behaves identically.
+
+## 8. `_gleGenerateMipmapData` (ctx fuzz)
+
+Earlier run16 ctxfuzz DIFF (stock st 14 hang, rebuilt returned) does not reproduce: with `CTXFUZZ_ARGINFO=1` 48 trials PASS under no fill, fill 0 and fill 01010101 (run17_targeted.log).
+The earlier divergence therefore depended on stack residue / heap state of that run, not on the code.
+
+<!-- RUN17/18 RESULTS: filled in when the runs finish -->
+<!-- RUN16 RESULTS (superseded by the run17/run18 lines above) -->
+

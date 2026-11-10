@@ -1,44 +1,46 @@
 #include "decls.h"
 
 /* _glWeightubvARB_Comp @ 0xab750 (200 bytes) */
-float * _glWeightubvARB_Comp(float *param_1,float param_2,int param_3)
+int _glWeightubvARB_Comp(param_1, param_2, param_3)
+  uint param_1;
+  uint param_2;
+  uint param_3;
 {
   byte *pbVar1;
   float fVar2;
   int iVar3;
   
   if ((int)param_2 < 5) {
-    param_1 = (float *)_gleAddListItem(param_1,PTR__glWeightARB_ListExec_0011045c,
-                                       (int)param_2 * 4 + 4);
-    if (param_1 != (float *)0x0) {
+    param_1 = _gleAddListItem(param_1,PTR__glWeightARB_ListExec_0011045c,param_2 * 4 + 4);
+    if ((float *)param_1 != (float *)0x0) {
       iVar3 = 0;
-      *param_1 = param_2;
+      *(uint *)param_1 = param_2;
       fVar2 = FLOAT_00108e78;
       if (0 < (int)param_2) {
-        param_1 = param_1 + 1;
+        param_1 = param_1 + 4;
         do {
           pbVar1 = (byte *)(param_3 + iVar3);
           iVar3 = iVar3 + 1;
-          *param_1 = (GH_U2F((unsigned int)((*pbVar1 | 0x4b000000))) - 8388608.0) * fVar2;
-          param_1 = param_1 + 1;
-          param_2 = GH_U2F((unsigned int)(((int)param_2 + -1)));
-        } while (param_2 != 0.0);
+          *(float *)param_1 = (GH_U2F((unsigned int)((*pbVar1 | 0x4b000000))) - 8388608.0) * fVar2;
+          param_1 = param_1 + 4;
+          param_2 = param_2 - 1;
+        } while (param_2 != 0);
       }
     }
   }
-  else if (param_1[0x1d5d] == 0.0) {
-    param_1[0x1d5d] = 1.79506e-42;
+  else if (*(int *)(param_1 + 0x7574) == 0) {
+    *(undefined4 *)(param_1 + 0x7574) = 0x501;
   }
   return param_1;
 }
 
 /* _glWeightubvARB_CompExec @ 0xab818 (64 bytes) */
 int _glWeightubvARB_CompExec(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+  uint param_1;
+  uint param_2;
+  uint param_3;
 {
-  ((float * (*)())_glWeightubvARB_Comp)(param_1,param_2,param_3);
+  ((int (*)())_glWeightubvARB_Comp)(param_1,param_2,param_3);
   _glWeightubvARB_Exec(param_1,param_2,param_3);
   return;
 }
@@ -88,39 +90,41 @@ int _glWeightusvARB_Exec(param_1, param_2, param_3)
 }
 
 /* _glWeightusvARB_Comp @ 0xab908 (200 bytes) */
-float * _glWeightusvARB_Comp(float *param_1,float param_2,ushort *param_3)
+int _glWeightusvARB_Comp(param_1, param_2, param_3)
+  uint param_1;
+  uint param_2;
+  uint param_3;
 {
   ushort uVar1;
   float fVar2;
   
   if ((int)param_2 < 5) {
-    param_1 = (float *)_gleAddListItem(param_1,PTR__glWeightARB_ListExec_0011045c,
-                                       (int)param_2 * 4 + 4);
-    if ((param_1 != (float *)0x0) && (*param_1 = param_2, fVar2 = FLOAT_00108e74, 0 < (int)param_2))
-    {
-      param_1 = param_1 + 1;
+    param_1 = _gleAddListItem(param_1,PTR__glWeightARB_ListExec_0011045c,param_2 * 4 + 4);
+    if (((float *)param_1 != (float *)0x0) &&
+       (*(uint *)param_1 = param_2, fVar2 = FLOAT_00108e74, 0 < (int)param_2)) {
+      param_1 = param_1 + 4;
       do {
-        uVar1 = *param_3;
-        param_3 = param_3 + 1;
-        *param_1 = (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar2;
-        param_1 = param_1 + 1;
-        param_2 = GH_U2F((unsigned int)(((int)param_2 + -1)));
-      } while (param_2 != 0.0);
+        uVar1 = *(ushort *)param_3;
+        param_3 = param_3 + 2;
+        *(float *)param_1 = (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar2;
+        param_1 = param_1 + 4;
+        param_2 = param_2 - 1;
+      } while (param_2 != 0);
     }
   }
-  else if (param_1[0x1d5d] == 0.0) {
-    param_1[0x1d5d] = 1.79506e-42;
+  else if (*(int *)(param_1 + 0x7574) == 0) {
+    *(undefined4 *)(param_1 + 0x7574) = 0x501;
   }
   return param_1;
 }
 
 /* _glWeightusvARB_CompExec @ 0xab9d0 (64 bytes) */
 int _glWeightusvARB_CompExec(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+  uint param_1;
+  uint param_2;
+  uint param_3;
 {
-  ((float * (*)())_glWeightusvARB_Comp)(param_1,param_2,param_3);
+  ((int (*)())_glWeightusvARB_Comp)(param_1,param_2,param_3);
   ((int (*)())_glWeightusvARB_Exec)(param_1,param_2,param_3);
   return;
 }
@@ -171,40 +175,43 @@ int _glWeightuivARB_Exec(param_1, param_2, param_3)
 }
 
 /* _glWeightuivARB_Comp @ 0xabac0 (200 bytes) */
-float * _glWeightuivARB_Comp(float *param_1,float param_2,undefined4 *param_3)
+int _glWeightuivARB_Comp(param_1, param_2, param_3)
+  uint param_1;
+  uint param_2;
+  uint param_3;
 {
   double dVar1;
   float fVar2;
   undefined4 uVar3;
   
   if ((int)param_2 < 5) {
-    param_1 = (float *)_gleAddListItem(param_1,PTR__glWeightARB_ListExec_0011045c,
-                                       (int)param_2 * 4 + 4);
-    if ((param_1 != (float *)0x0) &&
-       (*param_1 = param_2, fVar2 = FLOAT_00108e6c, dVar1 = DOUBLE_00108d70, 0 < (int)param_2)) {
-      param_1 = param_1 + 1;
+    param_1 = _gleAddListItem(param_1,PTR__glWeightARB_ListExec_0011045c,param_2 * 4 + 4);
+    if (((float *)param_1 != (float *)0x0) &&
+       (*(uint *)param_1 = param_2, fVar2 = FLOAT_00108e6c, dVar1 = DOUBLE_00108d70,
+       0 < (int)param_2)) {
+      param_1 = param_1 + 4;
       do {
-        uVar3 = *param_3;
-        param_3 = param_3 + 1;
-        *param_1 = (float)((double)CONCAT44(0x43300000,uVar3) - dVar1) * fVar2;
-        param_1 = param_1 + 1;
-        param_2 = GH_U2F((unsigned int)(((int)param_2 + -1)));
-      } while (param_2 != 0.0);
+        uVar3 = *(undefined4 *)param_3;
+        param_3 = param_3 + 4;
+        *(float *)param_1 = (float)((double)CONCAT44(0x43300000,uVar3) - dVar1) * fVar2;
+        param_1 = param_1 + 4;
+        param_2 = param_2 - 1;
+      } while (param_2 != 0);
     }
   }
-  else if (param_1[0x1d5d] == 0.0) {
-    param_1[0x1d5d] = 1.79506e-42;
+  else if (*(int *)(param_1 + 0x7574) == 0) {
+    *(undefined4 *)(param_1 + 0x7574) = 0x501;
   }
   return param_1;
 }
 
 /* _glWeightuivARB_CompExec @ 0xabb88 (64 bytes) */
 int _glWeightuivARB_CompExec(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+  uint param_1;
+  uint param_2;
+  uint param_3;
 {
-  ((float * (*)())_glWeightuivARB_Comp)(param_1,param_2,param_3);
+  ((int (*)())_glWeightuivARB_Comp)(param_1,param_2,param_3);
   ((int (*)())_glWeightuivARB_Exec)(param_1,param_2,param_3);
   return;
 }
