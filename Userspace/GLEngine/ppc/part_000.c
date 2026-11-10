@@ -503,45 +503,23 @@ void _glePreInitVectorTOC()
 {
   undefined4 *puVar1;
   undefined *puVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  undefined4 uVar9;
-  undefined4 uVar10;
-  undefined4 uVar11;
-  undefined4 uVar12;
-  undefined4 uVar13;
   
-  uVar13 = _UNK_00113e3c;
-  uVar12 = _UNK_00113e38;
-  uVar11 = _UNK_00113e34;
-  uVar10 = _DAT_00113e30;
-  uVar9 = _UNK_00113e2c;
-  uVar8 = _UNK_00113e28;
-  uVar7 = _UNK_00113e24;
-  uVar6 = _UNK_00113e1c;
-  uVar5 = _UNK_00113e18;
-  uVar4 = _UNK_00113e14;
-  uVar3 = _DAT_00113e10;
   puVar2 = PTR__gle_rtc_toc_struct_0011205c;
   puVar1 = (undefined4 *)((uint)(PTR__gle_rtc_toc_struct_0011205c + 0x10) & 0xfffffff0);
-  *puVar1 = _DAT_00113e20;
-  puVar1[1] = uVar7;
-  puVar1[2] = uVar8;
-  puVar1[3] = uVar9;
+  *puVar1 = 0x100004;
+  puVar1[1] = 0x10000;
+  puVar1[2] = 0x200008;
+  puVar1[3] = 0x20000;
   puVar1 = (undefined4 *)((uint)(puVar2 + 0x20) & 0xfffffff0);
-  *puVar1 = uVar10;
-  puVar1[1] = uVar11;
-  puVar1[2] = uVar12;
-  puVar1[3] = uVar13;
+  *puVar1 = 0x40;
+  puVar1[1] = 0x80;
+  puVar1[2] = 0;
+  puVar1[3] = 0;
   puVar1 = (undefined4 *)((uint)puVar2 & 0xfffffff0);
-  *puVar1 = uVar3;
-  puVar1[1] = uVar4;
-  puVar1[2] = uVar5;
-  puVar1[3] = uVar6;
+  *puVar1 = 0x3020100;
+  puVar1[1] = 0x7060504;
+  puVar1[2] = 0xb0a0908;
+  puVar1[3] = 0xf0e0d0c;
   return;
 }
 
@@ -2124,18 +2102,12 @@ void _gleInitVectorConstants(param_1)
   int param_1;
 {
   undefined4 *puVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
   
-  uVar4 = _UNK_00113e4c;
-  uVar3 = _UNK_00113e48;
-  uVar2 = _UNK_00113e44;
   puVar1 = (undefined4 *)(param_1 + 0x10U & 0xfffffff0);
-  *puVar1 = _DAT_00113e40;
-  puVar1[1] = uVar2;
-  puVar1[2] = uVar3;
-  puVar1[3] = uVar4;
+  *puVar1 = 0x1a;
+  puVar1[1] = 0x1c;
+  puVar1[2] = 0x1e;
+  puVar1[3] = 0;
   return;
 }
 
