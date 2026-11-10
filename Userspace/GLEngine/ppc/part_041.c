@@ -2996,7 +2996,7 @@ void _gleDrawPixelsFastLoadColorTables(param_1, param_2)
 }
 
 /* _CopySourceSubImageToTexture @ 0xc97a4 (568 bytes) */
-void _CopySourceSubImageToTexture(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,int param_13,int param_14,undefined4 param_15,undefined4 param_16,undefined4 param_17,undefined4 param_18,int param_19,undefined4 param_20,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _CopySourceSubImageToTexture(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,int param_13,int param_14,undefined4 param_15,undefined4 param_16,undefined4 param_17,undefined4 param_18,int param_19,undefined4 param_20,float fparam_1,float fparam_2,double fparam_3,float fparam_4)
 {
   undefined1 *puVar1;
   undefined1 *puVar2;
@@ -3078,10 +3078,10 @@ void _CopySourceSubImageToTexture(int param_1,undefined4 param_2,undefined4 para
   }
   else if ((double)dVar8 < (double)FLOAT_00108e58) goto LAB_000c99b8;
   if ((double)FLOAT_00108e50 <= (double)dVar8) {
-    fparam_4 = (double)(float)(fparam_4 * (double)dVar8);
+    fparam_4 = (double)(fparam_4 * dVar8);
   }
   else {
-    fparam_4 = (double)(float)(fparam_4 * -(double)dVar8);
+    fparam_4 = (double)(fparam_4 * -dVar8);
   }
 LAB_000c99b8:
   *(float *)(param_1 + 0x31ac) = (float)fparam_4;

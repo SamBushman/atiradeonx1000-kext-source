@@ -786,7 +786,7 @@ undefined4 _glAccum_ListExec(undefined4 param_1,undefined4 *param_2,double fpara
 }
 
 /* _glAccum_Comp @ 0x568fc (92 bytes) */
-undefined4 * _glAccum_Comp(undefined4 param_1,undefined4 param_2,double fparam_1)
+undefined4 * _glAccum_Comp(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   undefined4 *puVar1;
   
@@ -990,7 +990,7 @@ int _glAlphaFunc_ListExec(param_1, param_2)
 }
 
 /* _glAlphaFunc_Comp @ 0x56d64 (92 bytes) */
-undefined4 * _glAlphaFunc_Comp(undefined4 param_1,undefined4 param_2,double fparam_1)
+undefined4 * _glAlphaFunc_Comp(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   undefined4 *puVar1;
   
@@ -1522,7 +1522,7 @@ LAB_000578e8:
 }
 
 /* _glBitmap_Comp @ 0x57920 (444 bytes) */
-void _glBitmap_Comp(int param_1,int param_2,int param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,int param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glBitmap_Comp(int param_1,int param_2,int param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,int param_8,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   uint uVar1;
   int iVar2;
@@ -1753,7 +1753,7 @@ int _glBlendColor_ListExec(param_1, param_2)
 }
 
 /* _glBlendColor_Comp @ 0x57f00 (92 bytes) */
-void _glBlendColor_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glBlendColor_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   float *pfVar1;
   

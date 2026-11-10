@@ -216,13 +216,13 @@ void _glIndexdv_CompExec(param_1, param_2)
 }
 
 /* _glIndexf_Comp @ 0x5d710 (96 bytes) */
-float * _glIndexf_Comp(undefined4 param_1,double fparam_1)
+float * _glIndexf_Comp(undefined4 param_1,float fparam_1)
 {
   float *pfVar1;
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glIndex_ListExec_00110054,4);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = (float)(fparam_1 * (double)FLOAT_00108e5c);
+    *pfVar1 = (fparam_1 * FLOAT_00108e5c);
   }
   return pfVar1;
 }

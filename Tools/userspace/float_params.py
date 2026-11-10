@@ -34,6 +34,31 @@ def fdefs_uses(op, arg):
     if op.startswith('fc') or op.startswith('fcmp'): return set(), set(regs[-2:])
     if regs: return {regs[0]}, set(regs[1:])
     return set(), set()
+# millicode: an in-image function that never calls, and reads / writes no FPR below f14 (the save / restore stubs `saveFP`, `restFP`, `_savef28`...): a `bl` to it is not a use or a definition of the
+# argument registers f1-f13
+names = {}
+for l in open(rng_f):
+    p = l.rstrip('\n').split('\t')
+    if len(p) > 3 and p[0].startswith('0x') and p[2] == 'fn': names[p[1]] = int(p[0], 16)
+def _millicode(ent):
+    for lo, hi in rows.get(ent, ()):
+        for a in range(lo, hi, 4):
+            if a not in ins: continue
+            op, arg = ins[a]
+            if op in ('bl', 'bctrl', 'blrl', 'bctr') : return False
+            if op.startswith('b') and op != 'blr' and not re.match(r'0x[0-9a-f]+$', arg.split(',')[-1].strip()): return False
+            if op in ('stfd', 'lfd', 'stfs', 'lfs', 'blr', 'mfspr', 'mtspr', 'addi', 'addis', 'li', 'lwz', 'stw', 'or', 'nop', 'ori', 'stfdx', 'lfdx'):
+                if any(int(x) < 14 for x in FR.findall(arg)): return False
+            elif op == 'b': pass
+            else: return False
+    return ent in rows
+_mc = {}
+def is_millicode(target):
+    t = target.strip().split(';')[0].strip()
+    ent = names.get(t) if not t.startswith('0x') else int(t, 16)
+    if ent is None: return False
+    if ent not in _mc: _mc[ent] = _millicode(ent)
+    return _mc[ent]
 # the corpus functions with double params: name -> [k]
 sig = {}
 import glob
@@ -51,9 +76,10 @@ for ent, (name, ks) in sorted(sig.items()):
         alias = set()         # registers that hold a plain copy of the parameter (`fmr f4,f1`), from the fmr until something else writes them or a call: their reads are reads of the parameter
         for a in addrs:
             op, arg = ins[a]; d, u = fdefs_uses(op, arg)
+            if op == 'bl' and is_millicode(arg): continue
             if first is None and (k in u or k in d): first = 'u' if (k in u and op not in ('bl', 'bctrl', 'blrl')) else 'd'   # a call first: unknown, left double   # the entry value must be read before anything writes the register (address order)
             holds = {k} | alias
-            if op == 'fmr' and len(u) == 1 and next(iter(u)) in holds and first == 'u' and (k not in d):
+            if op == 'fmr' and len(u) == 1 and next(iter(u)) in holds and first == 'u':
                 alias.add(next(iter(d)))             # a copy: its reads count (the copy itself is not a read of the format)
                 continue
             if holds & u:
@@ -62,7 +88,7 @@ for ent, (name, ks) in sorted(sig.items()):
                 elif op in NEUTRAL: pass
                 else: bad += 1
             alias -= (d - ({k} if False else set()))       # any other write ends an alias
-            if op in ('bl', 'bctrl', 'blrl'): alias = set()
+            if op in ('bl', 'bctrl', 'blrl'): alias = {r for r in alias if r >= 14}      # a call clobbers f0-f13 only: the callee-saved copies (f14-f31) survive it
         if sp and not bad and first == 'u': res.append(k)
     if res: print('%x\t%s\t%s' % (ent, name, ','.join(map(str, res)))); out += 1
 sys.stderr.write('float_params: %d functions with float parameters (of %d with double parameters)\n' % (out, len(sig)))

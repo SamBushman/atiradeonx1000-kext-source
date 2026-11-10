@@ -1872,7 +1872,7 @@ int _glEvalCoord1f_ListExec(param_1, param_2)
 }
 
 /* _glEvalCoord1f_Comp @ 0x64950 (84 bytes) */
-float * _glEvalCoord1f_Comp(undefined4 param_1,double fparam_1)
+float * _glEvalCoord1f_Comp(undefined4 param_1,float fparam_1)
 {
   float *pfVar1;
   

@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _glNormal3f_Comp @ 0x3a8cc (116 bytes) */
-float * _glNormal3f_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+float * _glNormal3f_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   float *pfVar1;
   
@@ -32,7 +32,7 @@ void _glVertex3f_CompExec(undefined4 param_1,double fparam_1,double fparam_2,dou
 }
 
 /* _glVertex3f_Comp @ 0x3a9b0 (116 bytes) */
-float * _glVertex3f_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+float * _glVertex3f_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   float *pfVar1;
   
@@ -89,7 +89,7 @@ void _glScalef_CompExec(undefined4 param_1,double fparam_1,double fparam_2,doubl
 }
 
 /* _glScalef_Comp @ 0x3ab24 (116 bytes) */
-float * _glScalef_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+float * _glScalef_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   float *pfVar1;
   
@@ -130,7 +130,7 @@ void _glTranslatef_CompExec(undefined4 param_1,double fparam_1,double fparam_2,d
 }
 
 /* _glTranslatef_Comp @ 0x3ac48 (116 bytes) */
-float * _glTranslatef_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+float * _glTranslatef_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   float *pfVar1;
   
@@ -4409,7 +4409,7 @@ void _glRotated_CompExec(int param_1,double fparam_1,double fparam_2,double fpar
 }
 
 /* _glRotateY_Comp @ 0x43a6c (100 bytes) */
-void _glRotateY_Comp(undefined4 param_1,double fparam_1,double fparam_2)
+void _glRotateY_Comp(undefined4 param_1,float fparam_1,float fparam_2)
 {
   float *pfVar1;
   
@@ -4422,7 +4422,7 @@ void _glRotateY_Comp(undefined4 param_1,double fparam_1,double fparam_2)
 }
 
 /* _glRotateX_Comp @ 0x43ad0 (100 bytes) */
-void _glRotateX_Comp(undefined4 param_1,double fparam_1,double fparam_2)
+void _glRotateX_Comp(undefined4 param_1,float fparam_1,float fparam_2)
 {
   float *pfVar1;
   

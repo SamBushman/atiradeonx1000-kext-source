@@ -552,7 +552,7 @@ void _glVertexAttrib1fARB_Exec(int param_1,uint param_2,float fparam_1)
 }
 
 /* _glVertexAttrib1fARB_Comp @ 0xac2dc (92 bytes) */
-undefined4 * _glVertexAttrib1fARB_Comp(undefined4 param_1,undefined4 param_2,double fparam_1)
+undefined4 * _glVertexAttrib1fARB_Comp(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   undefined4 *puVar1;
   
@@ -737,7 +737,7 @@ void _glVertexAttrib2fARB_Exec(int param_1,uint param_2,float fparam_1,float fpa
 }
 
 /* _glVertexAttrib2fARB_Comp @ 0xac6f0 (108 bytes) */
-undefined4 * _glVertexAttrib2fARB_Comp(undefined4 param_1,undefined4 param_2,double fparam_1,double fparam_2)
+undefined4 * _glVertexAttrib2fARB_Comp(undefined4 param_1,undefined4 param_2,float fparam_1,float fparam_2)
 {
   undefined4 *puVar1;
   
@@ -937,7 +937,7 @@ void _glVertexAttrib3fARB_Exec(int param_1,uint param_2,float fparam_1,float fpa
 }
 
 /* _glVertexAttrib3fARB_Comp @ 0xacb80 (128 bytes) */
-undefined4 * _glVertexAttrib3fARB_Comp(undefined4 param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3)
+undefined4 * _glVertexAttrib3fARB_Comp(undefined4 param_1,undefined4 param_2,float fparam_1,float fparam_2,float fparam_3)
 {
   undefined4 *puVar1;
   
@@ -1139,7 +1139,7 @@ void _glVertexAttrib4fARB_Exec(int param_1,uint param_2,float fparam_1,float fpa
 }
 
 /* _glVertexAttrib4fARB_Comp @ 0xad094 (104 bytes) */
-void _glVertexAttrib4fARB_Comp(undefined4 param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glVertexAttrib4fARB_Comp(undefined4 param_1,undefined4 param_2,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   undefined4 *puVar1;
   

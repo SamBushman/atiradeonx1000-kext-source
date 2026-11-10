@@ -21,7 +21,7 @@ int _glPixelZoom_ListExec(param_1, param_2)
 }
 
 /* _glPixelZoom_Comp @ 0x7e014 (100 bytes) */
-float * _glPixelZoom_Comp(undefined4 param_1,double fparam_1,double fparam_2)
+float * _glPixelZoom_Comp(undefined4 param_1,float fparam_1,float fparam_2)
 {
   float *pfVar1;
   
@@ -295,7 +295,7 @@ LAB_0007e600:
 }
 
 /* _glPointParameterf_Comp @ 0x7e610 (92 bytes) */
-undefined4 * _glPointParameterf_Comp(undefined4 param_1,undefined4 param_2,double fparam_1)
+undefined4 * _glPointParameterf_Comp(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   undefined4 *puVar1;
   
@@ -763,7 +763,7 @@ int _glPointSize_ListExec(param_1, param_2)
 }
 
 /* _glPointSize_Comp @ 0x7f118 (84 bytes) */
-float * _glPointSize_Comp(undefined4 param_1,double fparam_1)
+float * _glPointSize_Comp(undefined4 param_1,float fparam_1)
 {
   float *pfVar1;
   
@@ -828,7 +828,7 @@ int _glPolygonOffset_ListExec(param_1, param_2)
 }
 
 /* _glPolygonOffset_Comp @ 0x7f298 (100 bytes) */
-float * _glPolygonOffset_Comp(undefined4 param_1,double fparam_1,double fparam_2)
+float * _glPolygonOffset_Comp(undefined4 param_1,float fparam_1,float fparam_2)
 {
   float *pfVar1;
   
@@ -880,7 +880,7 @@ int _glSetRasterPos_ListExec(param_1, param_2)
 }
 
 /* _glSetRasterPos_Comp @ 0x7f3e0 (92 bytes) */
-void _glSetRasterPos_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glSetRasterPos_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   float *pfVar1;
   

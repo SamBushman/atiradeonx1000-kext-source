@@ -2469,7 +2469,7 @@ undefined4 _glMapGrid1_ListExec(undefined4 param_1,undefined4 *param_2,double fp
 }
 
 /* _glMapGrid1f_Comp @ 0x75670 (224 bytes) */
-int _glMapGrid1f_Comp(int param_1,uint param_2,double fparam_1,double fparam_2)
+int _glMapGrid1f_Comp(int param_1,uint param_2,float fparam_1,float fparam_2)
 {
   undefined4 uVar1;
   uint *puVar2;
@@ -2483,7 +2483,7 @@ int _glMapGrid1f_Comp(int param_1,uint param_2,double fparam_1,double fparam_2)
       *puVar2 = param_2;
       puVar2[1] = (uint)GH_F2U((float)fparam_1);
       puVar2[2] = (uint)GH_F2U((float)fparam_2);
-      puVar2[3] = (uint)(int)((float)(fparam_2 - fparam_1) /
+      puVar2[3] = (uint)(int)((fparam_2 - fparam_1) /
                         (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58)
                         );
       return (int)puVar2;
@@ -2659,7 +2659,7 @@ undefined4 _glMapGrid2_ListExec(undefined4 param_1,undefined4 *param_2,double fp
 }
 
 /* _glMapGrid2f_Comp @ 0x75a4c (268 bytes) */
-void _glMapGrid2f_Comp(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMapGrid2f_Comp(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,uint param_5,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   double dVar1;
   undefined4 uVar2;
@@ -2676,9 +2676,9 @@ void _glMapGrid2f_Comp(int param_1,uint param_2,undefined4 param_3,undefined4 pa
         puVar3[4] = param_5;
         puVar3[5] = (uint)GH_F2U((float)fparam_3);
         puVar3[6] = (uint)GH_F2U((float)fparam_4);
-        puVar3[3] = (uint)(int)((float)(fparam_2 - fparam_1) /
+        puVar3[3] = (uint)(int)((fparam_2 - fparam_1) /
                           (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - dVar1));
-        puVar3[7] = (uint)(int)((float)(fparam_4 - fparam_3) /
+        puVar3[7] = (uint)(int)((fparam_4 - fparam_3) /
                           (float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - dVar1));
       }
       goto LAB_00075b4c;
@@ -3018,7 +3018,7 @@ undefined4 _glMaterialf_ListExec(undefined4 param_1,undefined4 *param_2,double f
 }
 
 /* _glMaterialf_Comp @ 0x7622c (100 bytes) */
-undefined4 * _glMaterialf_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+undefined4 * _glMaterialf_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   undefined4 *puVar1;
   

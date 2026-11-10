@@ -1609,7 +1609,7 @@ int _glLightf_ListExec(param_1, param_2)
 }
 
 /* _glLightf_Comp @ 0x6b44c (100 bytes) */
-undefined4 * _glLightf_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+undefined4 * _glLightf_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   undefined4 *puVar1;
   
@@ -2491,7 +2491,7 @@ int _glLightModelf_ListExec(param_1, param_2)
 }
 
 /* _glLightModelf_Comp @ 0x6cc18 (92 bytes) */
-undefined4 * _glLightModelf_Comp(undefined4 param_1,undefined4 param_2,double fparam_1)
+undefined4 * _glLightModelf_Comp(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   undefined4 *puVar1;
   

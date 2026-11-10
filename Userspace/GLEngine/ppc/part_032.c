@@ -2643,7 +2643,7 @@ void _glVertex4dv_CompExec(param_1, param_2)
 }
 
 /* _glVertex2f_Comp @ 0xa20d0 (100 bytes) */
-float * _glVertex2f_Comp(undefined4 param_1,double fparam_1,double fparam_2)
+float * _glVertex2f_Comp(undefined4 param_1,float fparam_1,float fparam_2)
 {
   float *pfVar1;
   
@@ -2751,7 +2751,7 @@ void _glVertex3fv_CompExec(param_1, param_2)
 }
 
 /* _glVertex4f_Comp @ 0xa2314 (92 bytes) */
-void _glVertex4f_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glVertex4f_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   float *pfVar1;
   

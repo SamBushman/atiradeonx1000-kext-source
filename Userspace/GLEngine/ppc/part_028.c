@@ -170,7 +170,7 @@ void _glTexCoord1f_Exec(int param_1,float fparam_1)
 }
 
 /* _glTexCoord1f_Comp @ 0x93a98 (84 bytes) */
-float * _glTexCoord1f_Comp(undefined4 param_1,double fparam_1)
+float * _glTexCoord1f_Comp(undefined4 param_1,float fparam_1)
 {
   float *pfVar1;
   
@@ -259,7 +259,7 @@ void _glTexCoord2fv_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord3f_Comp @ 0x93cb4 (116 bytes) */
-float * _glTexCoord3f_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+float * _glTexCoord3f_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   float *pfVar1;
   
@@ -338,7 +338,7 @@ void _glTexCoord4f_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3
 }
 
 /* _glTexCoord4f_Comp @ 0x93e70 (92 bytes) */
-void _glTexCoord4f_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glTexCoord4f_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   float *pfVar1;
   

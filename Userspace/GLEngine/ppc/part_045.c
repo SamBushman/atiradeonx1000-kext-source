@@ -3129,7 +3129,7 @@ void _gleLightMaterialRGBAChange_F_D(param_1, param_2)
 }
 
 /* _gleLightMaterialShineChange_B @ 0xdc210 (180 bytes) */
-void _gleLightMaterialShineChange_B(int param_1,double fparam_1)
+void _gleLightMaterialShineChange_B(int param_1,float fparam_1)
 {
   byte bVar1;
   int iVar2;
@@ -3951,7 +3951,7 @@ void _glePreEvaluateWithDeriv(undefined4 param_1,int param_2,undefined4 param_3,
 }
 
 /* _gleEvalDomain1Color @ 0xddbd4 (244 bytes) */
-void _gleEvalDomain1Color(undefined4 param_1,int param_2,int param_3,undefined4 param_4,int param_5,int param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleEvalDomain1Color(undefined4 param_1,int param_2,int param_3,undefined4 param_4,int param_5,int param_6,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -3999,7 +3999,7 @@ void _gleEvalDomain1Color(undefined4 param_1,int param_2,int param_3,undefined4 
 }
 
 /* _gleEvalDomain1Coord @ 0xddcc8 (244 bytes) */
-void _gleEvalDomain1Coord(undefined4 param_1,int param_2,int param_3,undefined4 param_4,int param_5,int param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleEvalDomain1Coord(undefined4 param_1,int param_2,int param_3,undefined4 param_4,int param_5,int param_6,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -4047,7 +4047,7 @@ void _gleEvalDomain1Coord(undefined4 param_1,int param_2,int param_3,undefined4 
 }
 
 /* _gleEvalDomain2Color @ 0xdddbc (420 bytes) */
-void _gleEvalDomain2Color(undefined4 param_1,int param_2,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleEvalDomain2Color(undefined4 param_1,int param_2,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -4058,7 +4058,7 @@ void _gleEvalDomain2Color(undefined4 param_1,int param_2,int param_3,int param_4
   float *pfVar7;
   float *pfVar8;
   int iVar9;
-  double dVar10;
+  float dVar10;
   double in_stack_ffffff88;
   double in_stack_ffffff90;
   double in_stack_ffffff98;
@@ -4076,7 +4076,7 @@ void _gleEvalDomain2Color(undefined4 param_1,int param_2,int param_3,int param_4
     _uorder_c = param_3;
   }
   if (((double)_vvalue_c != fparam_2) || (_vorder_c != param_4)) {
-    ((void (*)())_glePreEvaluate)(param_1,param_4,iVar6,&_vcoeff_c,fparam_2,dVar10,fparam_3,fparam_4,fparam_5,
+    ((void (*)())_glePreEvaluate)(param_1,param_4,iVar6,&_vcoeff_c,fparam_2,(double)dVar10,fparam_3,fparam_4,fparam_5,
                     fparam_6,fparam_7,fparam_8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98
                     ,in_stack_ffffffa0,in_stack_ffffffa8);
     _vvalue_c = (float)fparam_2;
@@ -4120,7 +4120,7 @@ void _gleEvalDomain2Color(undefined4 param_1,int param_2,int param_3,int param_4
 }
 
 /* _gleEvalDomain2Coord @ 0xddf60 (420 bytes) */
-void _gleEvalDomain2Coord(undefined4 param_1,int param_2,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleEvalDomain2Coord(undefined4 param_1,int param_2,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -4131,7 +4131,7 @@ void _gleEvalDomain2Coord(undefined4 param_1,int param_2,int param_3,int param_4
   float *pfVar7;
   float *pfVar8;
   int iVar9;
-  double dVar10;
+  float dVar10;
   double in_stack_ffffff88;
   double in_stack_ffffff90;
   double in_stack_ffffff98;
@@ -4149,7 +4149,7 @@ void _gleEvalDomain2Coord(undefined4 param_1,int param_2,int param_3,int param_4
     _uorder_c = param_3;
   }
   if (((double)_vvalue_c != fparam_2) || (_vorder_c != param_4)) {
-    ((void (*)())_glePreEvaluate)(param_1,param_4,iVar6,&_vcoeff_c,fparam_2,dVar10,fparam_3,fparam_4,fparam_5,
+    ((void (*)())_glePreEvaluate)(param_1,param_4,iVar6,&_vcoeff_c,fparam_2,(double)dVar10,fparam_3,fparam_4,fparam_5,
                     fparam_6,fparam_7,fparam_8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98
                     ,in_stack_ffffffa0,in_stack_ffffffa8);
     _vvalue_c = (float)fparam_2;
@@ -4193,7 +4193,7 @@ void _gleEvalDomain2Coord(undefined4 param_1,int param_2,int param_3,int param_4
 }
 
 /* _gleEvalDomainDeriv2Coord @ 0xde104 (572 bytes) */
-void _gleEvalDomainDeriv2Coord(undefined4 param_1,int param_2,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,int param_9,int param_10,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleEvalDomainDeriv2Coord(undefined4 param_1,int param_2,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,int param_9,int param_10,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -4207,7 +4207,7 @@ void _gleEvalDomainDeriv2Coord(undefined4 param_1,int param_2,int param_3,int pa
   int iVar10;
   int iVar11;
   int iVar12;
-  double dVar13;
+  float dVar13;
   double in_stack_ffffff78;
   double in_stack_ffffff80;
   double in_stack_ffffff88;
@@ -4225,7 +4225,7 @@ void _gleEvalDomainDeriv2Coord(undefined4 param_1,int param_2,int param_3,int pa
     _uorder_c = param_3;
   }
   if ((((double)_vvalue_c != fparam_2) || (_vtype_c != 1)) || (_vorder_c != param_4)) {
-    ((void (*)())_glePreEvaluateWithDeriv)(param_1,param_4,iVar12,&_vcoeff_c,&_vcoeffDeriv_c,fparam_2,dVar13,fparam_3,fparam_4,
+    ((void (*)())_glePreEvaluateWithDeriv)(param_1,param_4,iVar12,&_vcoeff_c,&_vcoeffDeriv_c,fparam_2,(double)dVar13,fparam_3,fparam_4,
                fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff78,in_stack_ffffff80,
                in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98);
     _vtype_c = 1;

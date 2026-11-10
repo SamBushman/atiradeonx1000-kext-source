@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _glFogf_Comp @ 0x67598 (92 bytes) */
-undefined4 * _glFogf_Comp(undefined4 param_1,undefined4 param_2,double fparam_1)
+undefined4 * _glFogf_Comp(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   undefined4 *puVar1;
   
@@ -295,7 +295,7 @@ int _glFogCoord_ListExec(param_1, param_2)
 }
 
 /* _glFogCoordf_Comp @ 0x67d14 (84 bytes) */
-float * _glFogCoordf_Comp(undefined4 param_1,double fparam_1)
+float * _glFogCoordf_Comp(undefined4 param_1,float fparam_1)
 {
   float *pfVar1;
   

@@ -1306,7 +1306,7 @@ LAB_00088c48:
 }
 
 /* _glUniform4fARB_Exec @ 0x88dcc (716 bytes) */
-void _glUniform4fARB_Exec(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glUniform4fARB_Exec(int param_1,int param_2,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   int *piVar1;
   undefined4 *puVar2;
@@ -1416,7 +1416,7 @@ void _glUniform4fARB_Exec(int param_1,int param_2,double fparam_1,double fparam_
 }
 
 /* _glUniform3fARB_Exec @ 0x89098 (712 bytes) */
-void _glUniform3fARB_Exec(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3)
+void _glUniform3fARB_Exec(int param_1,int param_2,float fparam_1,float fparam_2,float fparam_3)
 {
   int *piVar1;
   undefined4 *puVar2;
@@ -1523,7 +1523,7 @@ void _glUniform3fARB_Exec(int param_1,int param_2,double fparam_1,double fparam_
 }
 
 /* _glUniform2fARB_Exec @ 0x89360 (668 bytes) */
-void _glUniform2fARB_Exec(int param_1,int param_2,double fparam_1,double fparam_2)
+void _glUniform2fARB_Exec(int param_1,int param_2,float fparam_1,float fparam_2)
 {
   int *piVar1;
   undefined4 *puVar2;
@@ -1627,7 +1627,7 @@ void _glUniform2fARB_Exec(int param_1,int param_2,double fparam_1,double fparam_
 }
 
 /* _glUniform1fARB_Exec @ 0x895fc (600 bytes) */
-void _glUniform1fARB_Exec(int param_1,int param_2,double fparam_1)
+void _glUniform1fARB_Exec(int param_1,int param_2,float fparam_1)
 {
   int *piVar1;
   undefined4 *puVar2;
@@ -3585,7 +3585,7 @@ LAB_0008bc7c:
 }
 
 /* _glUniform4fARB_Comp @ 0x8be44 (100 bytes) */
-void _glUniform4fARB_Comp(undefined4 param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glUniform4fARB_Comp(undefined4 param_1,undefined4 param_2,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   undefined4 *puVar1;
   
@@ -3602,7 +3602,7 @@ void _glUniform4fARB_Comp(undefined4 param_1,undefined4 param_2,double fparam_1,
 }
 
 /* _glUniform3fARB_Comp @ 0x8bea8 (124 bytes) */
-undefined4 * _glUniform3fARB_Comp(undefined4 param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3)
+undefined4 * _glUniform3fARB_Comp(undefined4 param_1,undefined4 param_2,float fparam_1,float fparam_2,float fparam_3)
 {
   undefined4 *puVar1;
   
@@ -3617,7 +3617,7 @@ undefined4 * _glUniform3fARB_Comp(undefined4 param_1,undefined4 param_2,double f
 }
 
 /* _glUniform2fARB_Comp @ 0x8bf24 (108 bytes) */
-undefined4 * _glUniform2fARB_Comp(undefined4 param_1,undefined4 param_2,double fparam_1,double fparam_2)
+undefined4 * _glUniform2fARB_Comp(undefined4 param_1,undefined4 param_2,float fparam_1,float fparam_2)
 {
   undefined4 *puVar1;
   
@@ -3631,7 +3631,7 @@ undefined4 * _glUniform2fARB_Comp(undefined4 param_1,undefined4 param_2,double f
 }
 
 /* _glUniform1fARB_Comp @ 0x8bf90 (92 bytes) */
-undefined4 * _glUniform1fARB_Comp(undefined4 param_1,undefined4 param_2,double fparam_1)
+undefined4 * _glUniform1fARB_Comp(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   undefined4 *puVar1;
   

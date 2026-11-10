@@ -787,7 +787,7 @@ void _glMultiTexCoord1f_Exec(int param_1,uint param_2,float fparam_1)
 }
 
 /* _glMultiTexCoord1f_Comp @ 0x95e68 (96 bytes) */
-int * _glMultiTexCoord1f_Comp(undefined4 param_1,int param_2,double fparam_1)
+int * _glMultiTexCoord1f_Comp(undefined4 param_1,int param_2,float fparam_1)
 {
   int *piVar1;
   
@@ -855,7 +855,7 @@ void _glMultiTexCoord1fv_CompExec(param_1, param_2, param_3)
 }
 
 /* _glMultiTexCoord2f_Comp @ 0x95fd8 (112 bytes) */
-int * _glMultiTexCoord2f_Comp(undefined4 param_1,int param_2,double fparam_1,double fparam_2)
+int * _glMultiTexCoord2f_Comp(undefined4 param_1,int param_2,float fparam_1,float fparam_2)
 {
   int *piVar1;
   

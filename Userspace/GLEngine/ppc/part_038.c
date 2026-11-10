@@ -41,7 +41,7 @@ void _glWindowPos2f_Exec(int param_1,double fparam_1,double fparam_2)
 }
 
 /* _glWindowPos2f_Comp @ 0xb1d3c (100 bytes) */
-float * _glWindowPos2f_Comp(undefined4 param_1,double fparam_1,double fparam_2)
+float * _glWindowPos2f_Comp(undefined4 param_1,float fparam_1,float fparam_2)
 {
   float *pfVar1;
   
@@ -117,7 +117,7 @@ void _glWindowPos3f_Exec(int param_1,double fparam_1,double fparam_2,double fpar
 }
 
 /* _glWindowPos3f_Comp @ 0xb1ef0 (116 bytes) */
-float * _glWindowPos3f_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+float * _glWindowPos3f_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   float *pfVar1;
   
@@ -1396,7 +1396,7 @@ int _glCombinerStageParameterfvNV_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glCombinerParameterfNV_Comp @ 0xb3ff8 (92 bytes) */
-undefined4 * _glCombinerParameterfNV_Comp(undefined4 param_1,undefined4 param_2,double fparam_1)
+undefined4 * _glCombinerParameterfNV_Comp(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   undefined4 *puVar1;
   

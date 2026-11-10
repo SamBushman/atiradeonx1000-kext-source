@@ -3940,7 +3940,7 @@ LAB_000547a4:
 }
 
 /* _gleSetRasterPos @ 0x54834 (1524 bytes) */
-void _gleSetRasterPos(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _gleSetRasterPos(int param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   undefined4 *puVar1;
   bool bVar2;
@@ -3992,31 +3992,10 @@ void _gleSetRasterPos(int param_1,double fparam_1,double fparam_2,double fparam_
       *(float *)(iVar14 + -0x1d4) = (float)fparam_4;
       (**(code **)(param_1 + 0x53dc))(param_1,iVar19,1);
     }
-    fVar3 = (float)(fparam_4 * (double)*(float *)(param_1 + 0x1cf4) +
-                   (double)(float)(fparam_3 * (double)*(float *)(param_1 + 0x1ce4) +
-                                  (double)(float)(fparam_1 * (double)*(float *)(param_1 + 0x1cc4) +
-                                                 (double)(float)(fparam_2 *
-                                                                (double)*(float *)(param_1 + 0x1cd4)
-                                                                ))));
-    fVar4 = (float)(fparam_4 * (double)*(float *)(param_1 + 0x1cf0) +
-                   (double)(float)(fparam_3 * (double)*(float *)(param_1 + 0x1ce0) +
-                                  (double)(float)(fparam_1 * (double)*(float *)(param_1 + 0x1cc0) +
-                                                 (double)(float)(fparam_2 *
-                                                                (double)*(float *)(param_1 + 0x1cd0)
-                                                                ))));
-    fVar5 = (float)(fparam_4 * (double)*(float *)(param_1 + 0x1cf8) +
-                   (double)(float)(fparam_3 * (double)*(float *)(param_1 + 0x1ce8) +
-                                  (double)(float)(fparam_1 *
-                                                  (double)*(float *)(0x1cc8 + param_1) +
-                                                 (double)(float)(fparam_2 *
-                                                                (double)*(float *)(param_1 + 0x1cd8)
-                                                                ))));
-    fVar6 = (float)(fparam_4 * (double)*(float *)(param_1 + 0x1cfc) +
-                   (double)(float)(fparam_3 * (double)*(float *)(param_1 + 0x1cec) +
-                                  (double)(float)(fparam_1 * (double)*(float *)(param_1 + 0x1ccc) +
-                                                 (double)(float)(fparam_2 *
-                                                                (double)*(float *)(param_1 + 0x1cdc)
-                                                                ))));
+    fVar3 = (fparam_4 * *(float *)(param_1 + 0x1cf4) + (fparam_3 * *(float *)(param_1 + 0x1ce4) + (fparam_1 * *(float *)(param_1 + 0x1cc4) + (fparam_2 * *(float *)(param_1 + 0x1cd4)))));
+    fVar4 = (fparam_4 * *(float *)(param_1 + 0x1cf0) + (fparam_3 * *(float *)(param_1 + 0x1ce0) + (fparam_1 * *(float *)(param_1 + 0x1cc0) + (fparam_2 * *(float *)(param_1 + 0x1cd0)))));
+    fVar5 = (fparam_4 * *(float *)(param_1 + 0x1cf8) + (fparam_3 * *(float *)(param_1 + 0x1ce8) + (fparam_1 * *(float *)(0x1cc8 + param_1) + (fparam_2 * *(float *)(param_1 + 0x1cd8)))));
+    fVar6 = (fparam_4 * *(float *)(param_1 + 0x1cfc) + (fparam_3 * *(float *)(param_1 + 0x1cec) + (fparam_1 * *(float *)(param_1 + 0x1ccc) + (fparam_2 * *(float *)(param_1 + 0x1cdc)))));
     fVar12 = fVar6 * *(float *)(param_1 + 0x1cbc) +
              (fVar5 * *(float *)(param_1 + 0x1cac) +
              (fVar4 * *(float *)(param_1 + 0x1c8c) + fVar3 * *(float *)(param_1 + 0x1c9c)));
@@ -4160,7 +4139,7 @@ LAB_00054e14:
 }
 
 /* _glBitmap_Exec @ 0x54e2c (984 bytes) */
-void _glBitmap_Exec(int param_1,int param_2,int param_3,undefined4 param_4,undefined4 param_5,int param_6,undefined4 param_7,int param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glBitmap_Exec(int param_1,int param_2,int param_3,undefined4 param_4,undefined4 param_5,int param_6,undefined4 param_7,int param_8,double fparam_1,double fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   bool bVar1;
   char cVar2;
@@ -4309,8 +4288,8 @@ LAB_0005501c:
         *(undefined4 *)(iVar4 + -0x1f8) = *(undefined4 *)(param_1 + 0x2e8);
         _gleFeedbackBitmap(param_1,a1);
       }
-      *(float *)(param_1 + 0x2e0) = (float)((double)*(float *)(param_1 + 0x2e0) + fparam_3);
-      *(float *)(param_1 + 0x2e4) = (float)((double)*(float *)(param_1 + 0x2e4) + fparam_4);
+      *(float *)(param_1 + 0x2e0) = (*(float *)(param_1 + 0x2e0) + fparam_3);
+      *(float *)(param_1 + 0x2e4) = (*(float *)(param_1 + 0x2e4) + fparam_4);
       goto LAB_000551f0;
     }
     if (*(int *)(param_1 + 0x7574) != 0) goto LAB_000551f0;

@@ -396,7 +396,7 @@ undefined4 _glRotateXYZ_ListExec(int param_1,float *param_2,double fparam_1,doub
 }
 
 /* _glRotateZ_Comp @ 0x853dc (100 bytes) */
-void _glRotateZ_Comp(undefined4 param_1,double fparam_1,double fparam_2)
+void _glRotateZ_Comp(undefined4 param_1,float fparam_1,float fparam_2)
 {
   float *pfVar1;
   
@@ -409,7 +409,7 @@ void _glRotateZ_Comp(undefined4 param_1,double fparam_1,double fparam_2)
 }
 
 /* _glRotateXYZ_Comp @ 0x85440 (292 bytes) */
-void _glRotateXYZ_Comp(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glRotateXYZ_Comp(int param_1,double fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   float fVar1;
   float fVar2;
@@ -432,9 +432,7 @@ void _glRotateXYZ_Comp(int param_1,double fparam_1,double fparam_2,double fparam
     fVar4 = (float)dVar12;
     dVar11 = _cos((double)(float)(fparam_1 * dVar11));
     fVar5 = (float)dVar11;
-    dVar11 = _sqrt((double)(float)(fparam_4 * fparam_4 +
-                                  (double)(float)(fparam_2 * fparam_2 +
-                                                 (double)(float)(fparam_3 * fparam_3))));
+    dVar11 = _sqrt((double)(fparam_4 * fparam_4 + (fparam_2 * fparam_2 + (fparam_3 * fparam_3))));
     fVar7 = fVar6 - fVar5;
     dVar11 = (double)(fVar6 / (float)dVar11);
     fVar1 = (float)(fparam_4 * dVar11);
@@ -457,7 +455,7 @@ void _glRotateXYZ_Comp(int param_1,double fparam_1,double fparam_2,double fparam
 }
 
 /* _glRotateXYZ_Exec @ 0x85564 (824 bytes) */
-void _glRotateXYZ_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glRotateXYZ_Exec(int param_1,double fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   float fVar1;
   float fVar2;
@@ -493,9 +491,7 @@ void _glRotateXYZ_Exec(int param_1,double fparam_1,double fparam_2,double fparam
     fVar4 = (float)dVar24;
     dVar23 = _cos((double)(float)(fparam_1 * dVar23));
     fVar5 = (float)dVar23;
-    dVar23 = _sqrt((double)(float)(fparam_4 * fparam_4 +
-                                  (double)(float)(fparam_2 * fparam_2 +
-                                                 (double)(float)(fparam_3 * fparam_3))));
+    dVar23 = _sqrt((double)(fparam_4 * fparam_4 + (fparam_2 * fparam_2 + (fparam_3 * fparam_3))));
     fVar11 = fVar6 - fVar5;
     fVar7 = pfVar22[4];
     fVar8 = *pfVar22;
@@ -747,7 +743,7 @@ int _glSamplePass_ListExec(param_1, param_2)
 }
 
 /* _glSampleCoverage_Comp @ 0x85e48 (92 bytes) */
-float * _glSampleCoverage_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+float * _glSampleCoverage_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   float *pfVar1;
   

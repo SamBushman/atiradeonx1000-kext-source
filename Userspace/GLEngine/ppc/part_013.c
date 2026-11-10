@@ -10,7 +10,7 @@ void _glSecondaryColor3f_Exec(int param_1,float fparam_1,float fparam_2,float fp
 }
 
 /* _glSecondaryColor3f_Comp @ 0x5e9cc (116 bytes) */
-float * _glSecondaryColor3f_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+float * _glSecondaryColor3f_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   float *pfVar1;
   

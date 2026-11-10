@@ -425,7 +425,7 @@ int _glProgramEnvParameter4dvARB_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glProgramEnvParameter4fARB_Comp @ 0x79d74 (108 bytes) */
-void _glProgramEnvParameter4fARB_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glProgramEnvParameter4fARB_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   undefined4 *puVar1;
   
@@ -705,7 +705,7 @@ int _glProgramLocalParameter4dvARB_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glProgramLocalParameter4fARB_Comp @ 0x7a3c0 (108 bytes) */
-void _glProgramLocalParameter4fARB_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glProgramLocalParameter4fARB_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   undefined4 *puVar1;
   
@@ -3068,7 +3068,7 @@ int _glPixelTransferf_ListExec(param_1, param_2)
 }
 
 /* _glPixelTransferf_Comp @ 0x7d7b8 (92 bytes) */
-undefined4 * _glPixelTransferf_Comp(undefined4 param_1,undefined4 param_2,double fparam_1)
+undefined4 * _glPixelTransferf_Comp(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   undefined4 *puVar1;
   

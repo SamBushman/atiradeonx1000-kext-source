@@ -121,7 +121,7 @@ void _gleLightMaterialRGBAChange_FB_D(param_1, param_2)
 }
 
 /* _gleLightMaterialShineChange_FB @ 0x331c0 (220 bytes) */
-void _gleLightMaterialShineChange_FB(int param_1,double fparam_1)
+void _gleLightMaterialShineChange_FB(int param_1,float fparam_1)
 {
   byte bVar1;
   int iVar2;
@@ -2761,7 +2761,7 @@ void _glColor4f_CompExec(int param_1,double fparam_1,double fparam_2,double fpar
 }
 
 /* _glColor4f_Comp @ 0x39890 (92 bytes) */
-void _glColor4f_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glColor4f_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   float *pfVar1;
   
@@ -3215,7 +3215,7 @@ void _glLineWidth_CompExec(undefined4 param_1,double fparam_1)
 }
 
 /* _glLineWidth_Comp @ 0x3a288 (84 bytes) */
-float * _glLineWidth_Comp(undefined4 param_1,double fparam_1)
+float * _glLineWidth_Comp(undefined4 param_1,float fparam_1)
 {
   float *pfVar1;
   

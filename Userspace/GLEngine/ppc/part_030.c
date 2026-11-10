@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _glMultiTexCoord3f_Comp @ 0x961a4 (128 bytes) */
-int * _glMultiTexCoord3f_Comp(undefined4 param_1,int param_2,double fparam_1,double fparam_2,double fparam_3)
+int * _glMultiTexCoord3f_Comp(undefined4 param_1,int param_2,float fparam_1,float fparam_2,float fparam_3)
 {
   int *piVar1;
   
@@ -90,7 +90,7 @@ void _glMultiTexCoord4f_Exec(int param_1,uint param_2,float fparam_1,float fpara
 }
 
 /* _glMultiTexCoord4f_Comp @ 0x963a0 (104 bytes) */
-void _glMultiTexCoord4f_Comp(undefined4 param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMultiTexCoord4f_Comp(undefined4 param_1,int param_2,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   int *piVar1;
   

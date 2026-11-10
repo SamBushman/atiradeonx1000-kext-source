@@ -2437,7 +2437,7 @@ void _glRotatef_Comp(int param_1,double fparam_1,double fparam_2,double fparam_3
 }
 
 /* _glTexCoord2f_Comp @ 0x487b4 (100 bytes) */
-float * _glTexCoord2f_Comp(undefined4 param_1,double fparam_1,double fparam_2)
+float * _glTexCoord2f_Comp(undefined4 param_1,float fparam_1,float fparam_2)
 {
   float *pfVar1;
   
@@ -3899,7 +3899,7 @@ LAB_0004ab74:
 }
 
 /* _gleLightMaterialShineChange_F @ 0x4ab90 (180 bytes) */
-void _gleLightMaterialShineChange_F(int param_1,double fparam_1)
+void _gleLightMaterialShineChange_F(int param_1,float fparam_1)
 {
   byte bVar1;
   int iVar2;
