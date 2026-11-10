@@ -1,0 +1,14 @@
+@retfn b5390 d4e10
+@retfn ba59c de0d0
+@retfn c5310 e60a0
+@retfn c4614 dc970
+@chunk 51324 5c820
+@chunk b50a8 d4780
+@chunk c20b0 d9ea0
+@chunk c2458 da320
+@chunk c3074 db130
+@chunk c44b8 dc7f0
+@chunk c5280 e6000
+@chunk c5ddc e6c20
+_gleBuildVertexFuncNO 1d2d4 20da0
+_gleBuildInterpolateFunc 516ac 5cbb0
