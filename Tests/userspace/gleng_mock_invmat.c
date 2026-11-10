@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
     int N = argc > 8 ? atoi(argv[8]) : 2000;
     if (!ap[0] || !ap[1]) { printf("anchor not found\n"); return 2; }
     fn_t f[2] = { (fn_t)(ap[0] + (sf - sa)), (fn_t)(ap[1] + (rfn - ra)) };
-    int ntests = 0, bad = 0, a, idx, k, n;
+    int ntests = 0, bad = 0, wrote = 0, idok = 0, a, idx, k, n;
     for (a = 0; a < 16; a++) for (idx = 0; idx < 5; idx++) {
         int nb = 0;
         for (k = 0; k < 9; k++) for (n = 0; n < (k < 8 ? (k == 0 || k == 3 ? 1 : 40) : N); n++) {
@@ -48,6 +48,8 @@ int main(int argc, char **argv) {
                 f[s](c[s], idx);
             }
             ntests++;
+            { int i, w = 0; for (i = 0; i < 64; i++) if (raw[0][a + 0x21c0 + idx * 64 + i] != 0xA5) w = 1; wrote += w; }   /* liveness: the stock wrote its output region */
+            if (k == 0) { float *o = (float *)(raw[0] + a + 0x21c0 + idx * 64), *r = (float *)(raw[1] + a + 0x21c0 + idx * 64); int i, ok = 1; unsigned char t[64]; memcpy(t, o, 64); o = (float *)t; memcpy(t, raw[0] + a + 0x21c0 + idx * 64, 64); for (i = 0; i < 16; i++) { float e = (i % 5 == 0) ? 1.0f : 0.0f; if (o[i] != e) ok = 0; } (void)r; idok += ok; }
             if (memcmp(raw[0], raw[1], BLK + 64) != 0) {
                 bad++; nb++;
                 if (nb <= 3) { int i; for (i = 0; i < BLK + 64; i++) if (raw[0][i] != raw[1][i]) break; printf("DIFF align %d idx %d kind %d n %d: first differing byte at +0x%x (stock %02x rebuilt %02x); out at +0x%x\n", a, idx, k, n, i, raw[0][i], raw[1][i], a + 0x21c0 + idx * 64); }
@@ -55,6 +57,7 @@ int main(int argc, char **argv) {
             free(base[0]); free(base[1]);
         }
     }
+    printf("liveness: %d of %d tests wrote the 64 output bytes; identity -> identity in %d of 80 cases (stock and rebuilt each)\n", wrote, ntests, idok);
     printf("tests %d; bad %d\nRESULT: %s\n", ntests, bad, bad ? "FAIL" : "PASS");
     return bad != 0;
 }
