@@ -197,29 +197,29 @@ int FUN_000c54e8(param_1)
       }
       puVar9 = (undefined4 *)(iVar2 + 0x20);
       if ((uVar8 != 0) || (iVar10 != -0x40100401)) {
-        iVar3 = ((int (*)())_gleRTCAddAChunk_c5280)(&_glePrologAVRTC,puVar9);
+        iVar3 = ((int (*)())_gleRTCAddAChunk_c5280)(&_glePrologAVRTC_10f4e8,puVar9);
         puVar7 = puVar9 + iVar3;
         if (iVar10 != -0x40100401) {
-          iVar3 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadMatrixPtrRTC,puVar7);
-          iVar4 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadMatrixVectorsRTC,puVar7 + iVar3);
+          iVar3 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadMatrixPtrRTC_10f4cc,puVar7);
+          iVar4 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadMatrixVectorsRTC_10f540,puVar7 + iVar3);
           puVar7 = puVar7 + iVar3 + iVar4;
         }
         if (iVar10 == 0x30303ff) {
-          iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadVectorsRTC,puVar7);
+          iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadVectorsRTC_10f5c4,puVar7);
           puVar9 = puVar7 + iVar10;
-          puVar5 = &_gleFullMatrixMultRTC;
+          puVar5 = &_gleFullMatrixMultRTC_10f564;
         }
         else if (iVar10 == 0x3fcff3ff) {
-          iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleDiagMatrixSetupRTC,puVar7);
+          iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleDiagMatrixSetupRTC_10f598,puVar7);
           puVar7 = puVar7 + iVar10;
-          iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadVectorsRTC,puVar7);
+          iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadVectorsRTC_10f5c4,puVar7);
           puVar9 = puVar7 + iVar10;
-          puVar5 = &_gleDiagMatrixMultRTC;
+          puVar5 = &_gleDiagMatrixMultRTC_10f5ac;
         }
         else {
-          iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadVectorsRTC,puVar7);
+          iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadVectorsRTC_10f5c4,puVar7);
           puVar9 = puVar7 + iVar10;
-          puVar5 = &_gleIdentityMatrixMultRTC;
+          puVar5 = &_gleIdentityMatrixMultRTC_10f5b8;
         }
         iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(puVar5,puVar9);
         puVar9 = puVar9 + iVar10;
@@ -227,9 +227,9 @@ int FUN_000c54e8(param_1)
           iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleNormalizeAVRTC,puVar9);
           puVar9 = puVar9 + iVar10;
         }
-        iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleStoreVectorsRTC,puVar9);
+        iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleStoreVectorsRTC_10f5d0,puVar9);
         puVar9 = puVar9 + iVar10;
-        iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleEpilogAVRTC,puVar9);
+        iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleEpilogAVRTC_10f534,puVar9);
         puVar11 = puVar9 + -1;
         puVar9 = puVar9 + iVar10;
         uVar6 = ((int (*)())_gleRTCBuildABranch_c5274)(*puVar11,(int)puVar7 - (int)puVar11 >> 2);
@@ -339,10 +339,10 @@ int FUN_000c5840(param_1)
     iVar19 = iVar19 + -1;
   } while (iVar19 != 0);
   if (bVar2) {
-    iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadMatrixPtrRTC,puVar17);
+    iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadMatrixPtrRTC_10f4cc,puVar17);
     puVar17 = puVar17 + iVar10;
   }
-  iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadCounterRTC,puVar17);
+  iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleLoadCounterRTC_10f4e0,puVar17);
   puVar18 = puVar17 + iVar10;
   uVar16 = 0;
   uVar4 = 0;
@@ -444,7 +444,7 @@ int FUN_000c5840(param_1)
     uVar16 = uVar16 - 4;
     iVar10 = iVar10 + -1;
   } while (iVar10 != 0);
-  iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleEndLoopRTC,puVar17);
+  iVar10 = ((int (*)())_gleRTCAddAChunk_c5280)(&_gleEndLoopRTC_10f4d4,puVar17);
   puVar17 = puVar17 + iVar10;
   puVar15 = puVar17 + -1;
   if ((bVar1) || (uVar4 = 0xfffffff8, (*(uint *)PTR__gle_processor_0011204c & 1) != 0)) {
@@ -880,7 +880,7 @@ int _gleBuildProjectionTransformFuncNO(param_1, param_2)
   puVar17[iVar11] = 0xc1230024;
   puVar17 = puVar17 + iVar11 + 1;
   if (bVar1) {
-    iVar11 = ((int (*)())_gleRTCAddAChunk_c5ddc)(&_gleLoadMatrixPtrRTC,puVar17);
+    iVar11 = ((int (*)())_gleRTCAddAChunk_c5ddc)(&_gleLoadMatrixPtrRTC_10f758,puVar17);
     puVar17 = puVar17 + iVar11;
   }
   iVar11 = ((int (*)())_gleRTCAddAChunk_c5ddc)(&_gleLoadViewportRTC,puVar17);

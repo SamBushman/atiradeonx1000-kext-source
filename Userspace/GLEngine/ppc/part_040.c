@@ -6378,7 +6378,7 @@ int _gleBuildInterpFunc(param_1, param_2)
   }
   bVar1 = (uVar2 >> 0xf & 1) == 0;
   if (bVar1) {
-    puVar4 = &_gleVAPrologRTC;
+    puVar4 = &_gleVAPrologRTC_10b2d0;
   }
   else {
     puVar4 = &_gleVASwapPrologRTC;
@@ -6469,17 +6469,17 @@ int _gleBuildInterpFunc(param_1, param_2)
     iVar5 = iVar5 + iVar6 * 4;
   }
   if (cVar7 == '\x01') {
-    puVar4 = &_gleVASingleFlushDataRTC;
+    puVar4 = &_gleVASingleFlushDataRTC_10b2f0;
   }
   else {
     if (cVar7 != '\x02') goto LAB_000c23b8;
-    puVar4 = &_gleVADoubleFlushDataRTC;
+    puVar4 = &_gleVADoubleFlushDataRTC_10b318;
   }
   iVar6 = ((int (*)())_gleRTCAddAChunk_c20b0)(puVar4,iVar5);
   iVar5 = iVar5 + iVar6 * 4;
 LAB_000c23b8:
   if (bVar1) {
-    puVar4 = &_gleVAEpilogRTC;
+    puVar4 = &_gleVAEpilogRTC_10b348;
   }
   else {
     puVar4 = &_gleVASwapEpilogRTC;
@@ -6740,13 +6740,13 @@ LAB_000c28d0:
     }
   }
   if (bVar1) {
-    puVar11 = &_gleVASingleFlushDataRTC;
+    puVar11 = &_gleVASingleFlushDataRTC_10c068;
 LAB_000c2950:
     iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar11,iVar9);
     iVar9 = iVar9 + iVar6 * 4;
   }
   else if (uVar3 == 2) {
-    puVar11 = &_gleVADoubleFlushDataRTC;
+    puVar11 = &_gleVADoubleFlushDataRTC_10c070;
     goto LAB_000c2950;
   }
   if (bVar2) {
@@ -6757,7 +6757,7 @@ LAB_000c2950:
   iVar9 = iVar9 + iVar6 * 4;
   puVar14 = (undefined4 *)(iVar9 + -4);
   if (bVar1) {
-    puVar11 = &_gleVASingleFlushDataRTC;
+    puVar11 = &_gleVASingleFlushDataRTC_10c068;
   }
   else {
     if (uVar3 != 2) goto LAB_000c29e8;
@@ -6821,7 +6821,7 @@ int _gleBuildCompileFuncNO(param_1, param_2)
   }
   uVar2 = param_2 >> 0x10;
   if ((uVar2 & 0x21) == 0x21) {
-    puVar6 = &_gleVAPrologRTC;
+    puVar6 = &_gleVAPrologRTC_10bb18;
   }
   else {
     puVar6 = &_gleVAPrologNoTransRTC;
@@ -6971,13 +6971,13 @@ LAB_000c2eb8:
     goto LAB_000c2eb8;
   }
   if (bVar1) {
-    puVar6 = &_gleVASingleFlushDataRTC;
+    puVar6 = &_gleVASingleFlushDataRTC_10c068;
 LAB_000c2f20:
     iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar8);
     iVar8 = iVar8 + iVar9 * 4;
   }
   else if (cVar11 == '\x02') {
-    puVar6 = &_gleVADoubleFlushDataRTC;
+    puVar6 = &_gleVADoubleFlushDataRTC_10c070;
     goto LAB_000c2f20;
   }
   if (bVar3) {
@@ -6988,7 +6988,7 @@ LAB_000c2f20:
   iVar8 = iVar8 + iVar9 * 4;
   puVar13 = (undefined4 *)(iVar8 + -4);
   if (bVar1) {
-    puVar6 = &_gleVASingleFlushDataRTC;
+    puVar6 = &_gleVASingleFlushDataRTC_10c068;
   }
   else {
     if (cVar11 != '\x02') goto LAB_000c2fb8;
@@ -7000,7 +7000,7 @@ LAB_000c2f20:
   iVar8 = iVar8 + iVar9 * 4;
 LAB_000c2fb8:
   if ((uVar2 & 0x21) == 0x21) {
-    puVar6 = &_gleVAEpilogRTC;
+    puVar6 = &_gleVAEpilogRTC_10bd34;
   }
   else {
     puVar6 = &_gleVAEpilogNoTransRTC;
@@ -7369,7 +7369,7 @@ LAB_000c3774:
   iVar10 = iVar10 + iVar11 * 4;
   puVar15 = (undefined4 *)(iVar10 + -4);
   if (uVar5 - 1 < 3) {
-    iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVACompleteFlushDataRTC,iVar10);
+    iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVACompleteFlushDataRTC_10d8a4,iVar10);
     iVar10 = iVar10 + iVar11 * 4;
   }
   iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAEpilogNoTransAVRTC,iVar10);
@@ -7687,7 +7687,7 @@ LAB_000c3f50:
   iVar12 = iVar12 + iVar13 * 4;
   puVar15 = (undefined4 *)(iVar12 + -4);
   if (iVar7 - 2U < 2) {
-    iVar7 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVACompleteFlushDataRTC,iVar12);
+    iVar7 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVACompleteFlushDataRTC_10d8a4,iVar12);
     iVar12 = iVar12 + iVar7 * 4;
   }
   if ((uVar2 & 0x21) == 0x21) {
@@ -8096,15 +8096,15 @@ int FUN_000c4664(param_1, param_2)
   puVar9 = (undefined4 *)(iVar3 + 0x20);
   if ((uVar1 == 0xbfeffbfe) && ((uVar2 & 0xc) == 0)) goto LAB_000c4ac0;
   uVar11 = uVar2 & 0xc;
-  iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_glePrologAVRTC,puVar9);
+  iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_glePrologAVRTC_10f1c8,puVar9);
   puVar8 = puVar9 + iVar4;
   if (uVar1 != 0xbfeffbfe) {
-    iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadMatrixPtrRTC,puVar8);
+    iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadMatrixPtrRTC_10f0a4,puVar8);
     if ((uVar2 & 2) == 0) {
-      puVar5 = &_gleLoadMatrixVectorsRTC;
+      puVar5 = &_gleLoadMatrixVectorsRTC_10f20c;
     }
     else {
-      puVar5 = &_gleLoadMatrixVectorsZ0RTC;
+      puVar5 = &_gleLoadMatrixVectorsZ0RTC_10f22c;
     }
     iVar6 = ((int (*)())_gleRTCAddAChunk_c44b8)(puVar5,puVar8 + iVar4);
     puVar8 = puVar8 + iVar4 + iVar6;
@@ -8126,35 +8126,35 @@ LAB_000c48cc:
     goto LAB_000c48cc;
   }
   if (uVar1 == 0) {
-    iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadVectorsRTC,puVar8);
+    iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadVectorsRTC_10f248,puVar8);
     puVar9 = puVar8 + iVar4;
     if ((uVar2 & 1) == 0) {
       if ((uVar2 & 2) == 0) {
-        puVar5 = &_gleFullMatrixMultRTC;
+        puVar5 = &_gleFullMatrixMultRTC_10f274;
       }
       else {
-        puVar5 = &_gleFullMatrixMultZ0RTC;
+        puVar5 = &_gleFullMatrixMultZ0RTC_10f2b8;
       }
     }
     else if ((uVar2 & 2) == 0) {
-      puVar5 = &_gleFullMatrixMultW1RTC;
+      puVar5 = &_gleFullMatrixMultW1RTC_10f2ec;
     }
     else {
-      puVar5 = &_gleFullMatrixMultZ0W1RTC;
+      puVar5 = &_gleFullMatrixMultZ0W1RTC_10f320;
     }
 LAB_000c4998:
     iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(puVar5,puVar9);
-    iVar6 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleStoreVectorsRTC,puVar9 + iVar4);
+    iVar6 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleStoreVectorsRTC_10f260,puVar9 + iVar4);
     puVar10 = puVar9 + iVar4 + iVar6;
   }
   else {
     puVar10 = puVar8;
     if (uVar1 == 0x3fcff3fc) {
-      iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleDiagMatrixSetupRTC,puVar8);
+      iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleDiagMatrixSetupRTC_10f344,puVar8);
       puVar8 = puVar8 + iVar4;
-      iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadVectorsRTC,puVar8);
+      iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadVectorsRTC_10f248,puVar8);
       puVar9 = puVar8 + iVar4;
-      puVar5 = &_gleDiagMatrixMultRTC;
+      puVar5 = &_gleDiagMatrixMultRTC_10f35c;
       goto LAB_000c4998;
     }
   }
@@ -8192,7 +8192,7 @@ LAB_000c4a68:
   }
   iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleIncVertex2PtrRTC,puVar10);
   puVar10 = puVar10 + iVar4;
-  iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleEpilogAVRTC,puVar10);
+  iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleEpilogAVRTC_10f1fc,puVar10);
   puVar9 = puVar10 + iVar4;
   uVar7 = ((int (*)())_gleRTCBuildABranch_c44ac)(*puVar10,(int)puVar8 - (int)puVar10 >> 2);
   *puVar10 = uVar7;
@@ -8316,10 +8316,10 @@ LAB_000c4cfc:
     iVar18 = iVar18 + -1;
   } while (iVar18 != 0);
   if (bVar1) {
-    iVar8 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadMatrixPtrRTC,puVar16);
+    iVar8 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadMatrixPtrRTC_10f0a4,puVar16);
     puVar16 = puVar16 + iVar8;
   }
-  iVar8 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadCounterRTC,puVar16);
+  iVar8 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadCounterRTC_10f0ac,puVar16);
   puVar17 = puVar16 + iVar8;
   uVar10 = 0;
   uVar6 = 0;
@@ -8480,7 +8480,7 @@ LAB_000c516c:
     goto LAB_000c516c;
   }
   uVar11 = 0;
-  iVar8 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleEndLoopRTC,puVar16);
+  iVar8 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleEndLoopRTC_10f0b4,puVar16);
   uVar3 = 0;
   puVar16 = puVar16 + iVar8;
   piVar13 = local_70;
