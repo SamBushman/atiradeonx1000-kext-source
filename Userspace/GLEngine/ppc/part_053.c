@@ -681,7 +681,7 @@ void _gleFreeShaderObject(param_1, param_2)
       _free(iVar6);
     }
     if (*(int *)(param_2 + 0x40) != 0) {
-      _ShDestruct();
+      _ShDestruct(*(int *)(param_2 + 0x40));
     }
     iVar5 = 0;
     if (*(char *)(param_1 + 0x85a4) != '\0') {
@@ -717,7 +717,7 @@ void _gleFreeShaderObject(param_1, param_2)
       _free(*(int *)(param_2 + 0x18));
     }
     if (*(int *)(param_2 + 0x30) != 0) {
-      _ShDestruct();
+      _ShDestruct(*(int *)(param_2 + 0x30));
     }
   }
   _gleVecFree(param_2);

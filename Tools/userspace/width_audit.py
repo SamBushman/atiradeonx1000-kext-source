@@ -68,6 +68,19 @@ def counts(insns):
     return c
 
 
+def pair_counts(insns):
+    """{(width class, displacement): count} of loads/stores not based on the stack frame (the same filter as counts())."""
+    stack = {'r1'}
+    for _, mn, ops in insns[:8]:
+        if mn == 'or' and ops.replace(' ', '') == 'r30,r1,r1': stack.add('r30')
+    c = collections.Counter()
+    for _, mn, ops in insns:
+        if mn in WIDTH:
+            m = MEM.match(ops.replace(' ', ''))
+            if m and m.group(4) not in stack: c[(WIDTH[mn], m.group(2) if m.group(2) is not None else (m.group(3) or ''))] += 1
+    return c
+
+
 def main():
     a = [x for x in sys.argv[1:] if not x.startswith('--')]
     only = sys.argv[sys.argv.index('--only') + 1] if '--only' in sys.argv else None
@@ -97,6 +110,19 @@ def main():
     flagged.sort(key=lambda r: (-r[0], -r[1], r[2]))
     for dn, dw, name, part, cs, co in flagged[:show]:
         print('%-4s +%d byte/half, -%d word   %-40s stock b%d h%d w%d   ours b%d h%d w%d' % (part[5:9], dn, dw, name, cs['b'], cs['h'], cs['w'], co['b'], co['h'], co['w']))
+    if '--pairs' in sys.argv:   # per displacement: more byte/half accesses at d than the stock AND fewer word accesses at d (a `lwz 0(r9)` that became `lbz 0(r9)` is invisible to the totals when the function has other word loads)
+        n = 0
+        for name, addr, size, part in fns:
+            if only and name != only: continue
+            o = ours.get(name) or ours.get('_' + name) or ours.get(name.lstrip('_'))
+            if not o: continue
+            lo = bisect.bisect_left(addrs, addr); hi = bisect.bisect_left(addrs, addr + size); s_ = stock[lo:hi]
+            if len(s_) < 4: continue
+            ps, po = pair_counts(s_), pair_counts(o)
+            for d in sorted(set(k[1] for k in list(ps) + list(po))):
+                bs = ps[('b', d)] + ps[('h', d)]; bo = po[('b', d)] + po[('h', d)]; ws = ps[('w', d)]; wo = po[('w', d)]
+                if bo > bs and wo < ws: n += 1; print('PAIR %-4s %-40s disp %-8s stock b/h %d w %d   ours b/h %d w %d' % (part[5:9], name, d, bs, ws, bo, wo))
+        print('PAIRS: %d (function, displacement) pairs with a byte/half excess and a word deficit' % n)
     print('WIDTH-AUDIT: %d functions compared, %d not matched, %d have more byte/half accesses, %d fewer word accesses, %d FLAGGED (both)' % (compared, nomatch, narrower, fewerword, len(flagged)))
 
 

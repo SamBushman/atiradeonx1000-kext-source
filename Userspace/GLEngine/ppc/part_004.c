@@ -947,12 +947,12 @@ void _gleClearPipelineProgram(param_1, param_2)
   *(undefined2 *)((int)param_2 + 0x46) = 0;
   *(undefined2 *)((int)param_2 + 0x3e) = 0;
   if (*param_2 != 0) {
-    _PPStreamFree();
+    _PPStreamFree(*param_2);
     *param_2 = 0;
   }
   if (*(short *)((int)param_2 + 0x4ba) == 0) {
     if (param_2[0x135] != 0) {
-      _PPEmulatorProgramFree();
+      _PPEmulatorProgramFree(param_2[0x135]);
       param_2[0x135] = 0;
     }
     iVar5 = 0x100;

@@ -36,7 +36,7 @@ int _gliGetVersion(param_1, param_2, param_3)
   local_40[0] = 0xc;
   host = _mach_host_self();
   kVar1 = _host_info(host,1,aiStack_70,local_40);
-  _mach_port_deallocate(*(unsigned char *)PTR_00112034,host);
+  _mach_port_deallocate(*(ipc_space_t *)PTR_00112034,host);
   iVar2 = 0;
   if (kVar1 != 0) {
     return 0;

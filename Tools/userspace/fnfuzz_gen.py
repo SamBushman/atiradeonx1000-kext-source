@@ -20,6 +20,10 @@ CTX = bool(os.environ.get('FNFUZZ_CTX'))
 # float->int move of a leaf function; GLEngine has 715 of them), and only a load of a slot nothing stored is a fragment of a caller's frame
 RZ_STORED = bool(os.environ.get('FNFUZZ_RZ_STORED'))
 # FNFUZZ_ALLOW_EXIT=1: `exit` is not unsafe for the ledger: the harness runs every call in a forked child, so an `exit(1)` on a failed check (the RTC builders do it when their code buffer overflows) only ends that child, and both images must end alike
+# FNFUZZ_IMPORTS=1: the ledger for the import-interposer mode of tests/userspace/fnfuzz.c (FNFUZZ_INTERPOSE=1): exactly the functions the plain ledger leaves out ONLY because they call an
+# import outside the whitelist (reason 'import'); the harness replaces the library imports (Sh*, PP*, glg*, glp*, NS*, CF*, IO*, mach/host/sysctl/scandir, pthread_mutex_*) by recording stubs
+# in both images, so the call sequence and the arguments the function hands to the library are compared too (Tests/userspace/fnfuzz.c). A function with another hazard (indirect call, red-zone load, ...) stays excluded.
+IMPORTS = bool(os.environ.get('FNFUZZ_IMPORTS'))
 UNSAFE = re.compile(r'^_?(NS[A-Z]|IO[A-Z]|' + ('' if os.environ.get('FNFUZZ_ALLOW_EXIT') else 'exit$|') + r'scandir$|mach_|host_info$|sysctl$|PP[A-Z]|Sh[A-Z]|glp|pthread_(?!mutex)|fork|exec|kill|abort$|system$|open$|write$|read$|unlink$)')
 WL = set('memcpy memset bcopy memmove memcmp strlen strcmp strncmp strcpy strncpy strcat strchr strrchr bzero sqrt sqrtf pow powf exp exp2 log log2 log10 sin cos tan atan atan2 asin acos floor ceil fabs fmod modf frexp ldexp abs labs'.split())
 seq = []; lab = {}; cur = None
@@ -223,6 +227,9 @@ for ent, (nm, rs) in sorted(fns.items()):
     if nm in IMPLICIT:
         WHY.append((ent, nm, 'implicit-register-input')); continue
     bad, badc, callees, size, ctxops, used_allowed = scan(ent, rs)
+    if IMPORTS:
+        if bad != 'import': continue                   # not an import-only function (a plain candidate, or excluded for another reason)
+        bad = None
     if bad == 'redzone' and nm in FORCE_RZ: bad = None; badc = None if badc == 'redzone' else badc
     if CTX:
         if not ((bad or ind_chains(ctxops)) and not badc and ent not in UNS):

@@ -12,6 +12,7 @@ typedef unsigned int uint;
 typedef unsigned long ulong;
 typedef unsigned int vm_size_t;
 typedef unsigned int vm_map_t;
+typedef unsigned int ipc_space_t;   /* = mach_port_t; GLEngine _gliGetVersion mach_port_deallocate(mach_task_self(), host): without this ghidra2c turned `*(ipc_space_t *)` into a BYTE load of the task port */
 typedef unsigned int mach_port_t;
 typedef unsigned int mach_msg_type_number_t;
 typedef int kern_return_t;

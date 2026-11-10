@@ -829,7 +829,7 @@ void _glLinkProgramARB_Exec(param_1, param_2)
           iVar18 = iVar18 + -1;
         } while (iVar18 != 0);
         if (*(int *)(puVar17 + 0x4dc) != 0) {
-          _PPEmulatorProgramFree();
+          _PPEmulatorProgramFree(*(int *)(puVar17 + 0x4dc));
         }
         *(undefined4 *)(puVar17 + 0x4dc) = 0;
         *(undefined4 *)(puVar17 + 0x4e0) = 0;

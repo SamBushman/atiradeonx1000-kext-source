@@ -3477,7 +3477,7 @@ void _glePPParse(param_1, param_2, param_3)
         ((void (*)())_PPEmulatorProgramSetupHandlesFromPPStream)(iVar5,param_1,iVar22);
         _PPEmulatorProgramConvertFromPPStream(iVar5,iVar22);
         if (param_2[0x135] != 0) {
-          _PPEmulatorProgramFree();
+          _PPEmulatorProgramFree(param_2[0x135]);
         }
         param_2[0x135] = iVar5;
       }

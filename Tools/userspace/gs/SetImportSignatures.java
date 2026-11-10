@@ -40,7 +40,28 @@ public class SetImportSignatures extends GhidraScript {
             // GLDriver's imports from libGLProgrammability (their definitions there: registers each one reads) and libGLImage (not transcribed
             // here: all eight argument registers, so no argument can be dropped; an extra one is ignored)
             "glpPPShaderLinearize:2 glpPPShaderToProgram:3 glpFreePPShaderLinearize:1 glpFreePPShaderToProgram:1 glpUniformToFloat:4",
-            "glgConvertType:8 glgProcessPixels:8 glgPixelCenters:8");
+            "glgConvertType:8 glgProcessPixels:8 glgPixelCenters:8",
+            // GLEngine's imports from libGLProgrammability (Sh*, PP*), (the CoreFoundation / IOKit / NS* / Mach / libSystem imports keep the typed prototypes Ghidra already has): the registers each one READS, from the library's own code
+            // (Tools/userspace/import_arity.py) or, where larger, from the call sites; the interposer differential (Tests/userspace/fnfuzz.c FNFUZZ_INTERPOSE) found `_PPStreamFree()` and
+            // `_PPEmulatorProgramFree()` / `_ShDestruct()` called WITHOUT the object to free (6 call sites in 4 functions: the stock passes r3 left by the code before the call)
+            "PPEmulatorAttachProgram:2 PPEmulatorCreate:0 PPEmulatorFree:1",
+            "PPEmulatorProgramConvertFromPPStream:2 PPEmulatorProgramCreate:0 PPEmulatorProgramFree:1 PPEmulatorProgramInitialiseHandleBanks:5",
+            "PPEmulatorRun:2 PPParserAttachStream:2 PPParserAttachString:3 PPParserBuildErrorString:3",
+            "PPParserCreate:1 PPParserFree:1 PPParserInit:0 PPParserParse:1",
+            "PPStreamAddOperation:4 PPStreamAddOutputBinding:2 PPStreamAddParamBinding:2 PPStreamAddTempUsage:2",
+            "PPStreamAttachOperationsChunkList:2 PPStreamAttachParamBindingArraysChunkList:2 PPStreamAttachParamBindingsChunkList:2 PPStreamAttribBindingIsEqual:2",
+            "PPStreamChunkCreateFromChunk:1 PPStreamChunkGetStream:5 PPStreamChunkListAddChunk:2 PPStreamChunkListCreate:0",
+            "PPStreamChunkListCreateFromChunkList:1 PPStreamChunkListGetMaxIndex:1 PPStreamChunkListGetStream:4 PPStreamChunkListRemoveChunk:2",
+            "PPStreamChunkListSort:1 PPStreamCreate:0 PPStreamDuplicate:1 PPStreamFree:1",
+            "PPStreamGetStream:3 PPStreamGetTexOperationCount:1 PPStreamOutputBindingIsEqual:2 PPStreamParamBindingIsEqual:2",
+            "ShAttributeBindingRequest:3 ShCompile:5 ShConstructCompiler:2 ShConstructLinker:1",
+            "ShDestruct:1 ShGetActiveAttrib:7 ShGetActiveUniform:7 ShGetActiveUserUniformsSize:1",
+            "ShGetAttribLocation:2 ShGetCompilerPPStream:1 ShGetCompilerShaderToProgramString:1 ShGetCompilerStats:1",
+            "ShGetCompilerSymbolTable:1 ShGetInfoLog:1 ShGetLinkerBindingTable:1 ShGetLinkerPPStream:1",
+            "ShGetLinkerShaderToProgramString:1 ShGetLinkerStats:1 ShGetMaxAttributeLength:1 ShGetMaxUniformLength:1",
+            "ShGetNumActiveAttributes:1 ShGetNumActiveUniforms:1 ShGetNumShaderLocalParams:2 ShGetPPStreamManager:2",
+            "ShGetShaderLocalParamRemapTable:2 ShGetUniformLocation:2 ShGetUniformTypeInfo:5 ShInitialize:0",
+            "ShLink:5 glpPPShaderLinearizeStreamMgr:2");
         for (String kv : t.split(" ")) { String[] p = kv.split(":"); N.put(p[0], Integer.parseInt(p[1])); }
     }
     int count = 0;
