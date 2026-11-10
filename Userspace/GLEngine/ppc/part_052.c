@@ -267,7 +267,17 @@ double _gleClipPolyPlane(int param_1,int *param_2,int param_3,int *param_4,int *
         fVar4 = *(float *)(iVar10 + 0x2c) * fVar7 +
                 (*(float *)(iVar10 + 0x28) * fVar5 +
                 (*(float *)(iVar10 + 0x20) * fVar3 + *(float *)(iVar10 + 0x24) * fVar2));
-        if (fVar9 <= fVar1) {
+        if (fVar1 < fVar9) {
+          if (fVar9 <= fVar4) {
+            fparam_1 = (double)(**(double ( **)(int,int,int,int,double))(param_1 + 0x49c8))
+                                         (param_1, *piVar19, iVar10, iVar15, (double)(fVar1 / (fVar1 - fVar4)));
+LAB_000ebb68:
+            *piVar18 = iVar15;
+            iVar15 = iVar15 + 0x100;
+            piVar18 = piVar18 + 1;
+          }
+        }
+        else {
           *piVar18 = *piVar19;
           piVar18 = piVar18 + 1;
           if (fVar4 < fVar9) {
@@ -276,14 +286,6 @@ double _gleClipPolyPlane(int param_1,int *param_2,int param_3,int *param_4,int *
             *(undefined1 *)(iVar15 + 0x7c) = 0;
             goto LAB_000ebb68;
           }
-        }
-        else if (fVar9 <= fVar4) {
-          fparam_1 = (double)(**(double ( **)(int,int,int,int,double))(param_1 + 0x49c8))
-                                       (param_1, *piVar19, iVar10, iVar15, (double)(fVar1 / (fVar1 - fVar4)));
-LAB_000ebb68:
-          *piVar18 = iVar15;
-          iVar15 = iVar15 + 0x100;
-          piVar18 = piVar18 + 1;
         }
         fVar1 = fVar4;
       }

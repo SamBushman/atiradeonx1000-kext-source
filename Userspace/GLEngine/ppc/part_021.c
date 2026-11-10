@@ -62,20 +62,20 @@ int _glOrtho_Comp(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   fVar2 = (float)(fparam_5 - fparam_6);
   fVar3 = (float)(fparam_4 - fparam_3);
   fVar4 = fVar1;
-  if (fVar1 < FLOAT_00108e50) {
+  if (!(FLOAT_00108e50 <= fVar1)) {
     fVar4 = -fVar1;
   }
-  if (FLOAT_00108e80 <= fVar4) {
+  if (!(fVar4 < FLOAT_00108e80)) {
     fVar4 = fVar3;
-    if (fVar3 < FLOAT_00108e50) {
+    if (!(FLOAT_00108e50 <= fVar3)) {
       fVar4 = -fVar3;
     }
-    if (FLOAT_00108e80 <= fVar4) {
+    if (!(fVar4 < FLOAT_00108e80)) {
       fVar4 = fVar2;
-      if (fVar2 < FLOAT_00108e50) {
+      if (!(FLOAT_00108e50 <= fVar2)) {
         fVar4 = -fVar2;
       }
-      if (FLOAT_00108e80 <= fVar4) {
+      if (!(fVar4 < FLOAT_00108e80)) {
         pfVar5 = (float *)_gleAddListItem(param_1,PTR__glOrtho_ListExec_00110230,0x18);
         if (pfVar5 == (float *)0x0) {
           return 0;
@@ -1300,13 +1300,11 @@ LAB_0007ad34:
         if (0 < (int)param_3) {
           do {
             fVar5 = *(float *)(param_4 + iVar7 * 4);
-            if (fVar2 <= fVar5) {
-              if (fVar3 < fVar5) {
-                fVar5 = 1.0;
-              }
-            }
-            else {
+            if (fVar5 < fVar2) {
               fVar5 = 0.0;
+            }
+            else if (fVar3 < fVar5) {
+              fVar5 = 1.0;
             }
             *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x324c)) = fVar5;
             iVar7 = iVar7 + 1;
@@ -1331,13 +1329,11 @@ LAB_0007ad34:
         if (0 < (int)param_3) {
           do {
             fVar5 = *(float *)(param_4 + iVar7 * 4);
-            if (fVar2 <= fVar5) {
-              if (fVar3 < fVar5) {
-                fVar5 = 1.0;
-              }
-            }
-            else {
+            if (fVar5 < fVar2) {
               fVar5 = 0.0;
+            }
+            else if (fVar3 < fVar5) {
+              fVar5 = 1.0;
             }
             *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x3250)) = fVar5;
             iVar7 = iVar7 + 1;
@@ -1362,13 +1358,11 @@ LAB_0007ad34:
         if (0 < (int)param_3) {
           do {
             fVar5 = *(float *)(param_4 + iVar7 * 4);
-            if (fVar2 <= fVar5) {
-              if (fVar3 < fVar5) {
-                fVar5 = 1.0;
-              }
-            }
-            else {
+            if (fVar5 < fVar2) {
               fVar5 = 0.0;
+            }
+            else if (fVar3 < fVar5) {
+              fVar5 = 1.0;
             }
             *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x3254)) = fVar5;
             iVar7 = iVar7 + 1;
@@ -1393,13 +1387,11 @@ LAB_0007ad34:
         if (0 < (int)param_3) {
           do {
             fVar5 = *(float *)(param_4 + iVar7 * 4);
-            if (fVar2 <= fVar5) {
-              if (fVar3 < fVar5) {
-                fVar5 = 1.0;
-              }
-            }
-            else {
+            if (fVar5 < fVar2) {
               fVar5 = 0.0;
+            }
+            else if (fVar3 < fVar5) {
+              fVar5 = 1.0;
             }
             *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x3258)) = fVar5;
             iVar7 = iVar7 + 1;
@@ -1423,13 +1415,11 @@ LAB_0007ad34:
         if (0 < (int)param_3) {
           do {
             fVar5 = *(float *)(param_4 + iVar7 * 4);
-            if (fVar2 <= fVar5) {
-              if (fVar3 < fVar5) {
-                fVar5 = 1.0;
-              }
-            }
-            else {
+            if (fVar5 < fVar2) {
               fVar5 = 0.0;
+            }
+            else if (fVar3 < fVar5) {
+              fVar5 = 1.0;
             }
             *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x325c)) = fVar5;
             iVar7 = iVar7 + 1;
@@ -1453,13 +1443,11 @@ LAB_0007ad34:
         if (0 < (int)param_3) {
           do {
             fVar5 = *(float *)(param_4 + iVar7 * 4);
-            if (fVar2 <= fVar5) {
-              if (fVar3 < fVar5) {
-                fVar5 = 1.0;
-              }
-            }
-            else {
+            if (fVar5 < fVar2) {
               fVar5 = 0.0;
+            }
+            else if (fVar3 < fVar5) {
+              fVar5 = 1.0;
             }
             *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x3260)) = fVar5;
             iVar7 = iVar7 + 1;
@@ -1483,13 +1471,11 @@ LAB_0007ad34:
         if (0 < (int)param_3) {
           do {
             fVar5 = *(float *)(param_4 + iVar7 * 4);
-            if (fVar2 <= fVar5) {
-              if (fVar3 < fVar5) {
-                fVar5 = 1.0;
-              }
-            }
-            else {
+            if (fVar5 < fVar2) {
               fVar5 = 0.0;
+            }
+            else if (fVar3 < fVar5) {
+              fVar5 = 1.0;
             }
             *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x3264)) = fVar5;
             iVar7 = iVar7 + 1;
@@ -1513,13 +1499,11 @@ LAB_0007ad34:
         if (0 < (int)param_3) {
           do {
             fVar5 = *(float *)(param_4 + iVar7 * 4);
-            if (fVar2 <= fVar5) {
-              if (fVar3 < fVar5) {
-                fVar5 = 1.0;
-              }
-            }
-            else {
+            if (fVar5 < fVar2) {
               fVar5 = 0.0;
+            }
+            else if (fVar3 < fVar5) {
+              fVar5 = 1.0;
             }
             *(float *)(iVar7 * 4 + *(int *)(param_1 + 0x3268)) = fVar5;
             iVar7 = iVar7 + 1;
@@ -2926,7 +2910,7 @@ void _glPixelStoref_Exec(int param_1,uint param_2,float fparam_1)
     return;
   }
   if (param_2 == 0xd02) {
-    if ((double)FLOAT_00108e50 <= fparam_1) {
+    if (!(fparam_1 < (double)FLOAT_00108e50)) {
       *(int *)(param_1 + 0x31b0) = (int)(fparam_1 + (double)FLOAT_00108e90);
       goto LAB_0007d77c;
     }
@@ -2937,7 +2921,7 @@ LAB_0007d734:
   else {
     if (param_2 < 0xd03) {
       if (param_2 == 0xcf3) {
-        if ((double)FLOAT_00108e50 <= fparam_1) {
+        if (!(fparam_1 < (double)FLOAT_00108e50)) {
           *(int *)(param_1 + 0x31d4) = (int)(fparam_1 + (double)FLOAT_00108e90);
           goto LAB_0007d77c;
         }
@@ -2954,7 +2938,7 @@ LAB_0007d734:
           }
           goto LAB_0007d768;
         }
-        if ((double)FLOAT_00108e50 <= fparam_1) {
+        if (!(fparam_1 < (double)FLOAT_00108e50)) {
           *(int *)(param_1 + 0x31cc) = (int)(fparam_1 + (double)FLOAT_00108e90);
           goto LAB_0007d77c;
         }
@@ -2967,20 +2951,20 @@ LAB_0007d734:
         }
       }
       else if (param_2 < 0xcf5) {
-        if ((double)FLOAT_00108e50 <= fparam_1) {
+        if (!(fparam_1 < (double)FLOAT_00108e50)) {
           *(int *)(param_1 + 0x31d8) = (int)(fparam_1 + (double)FLOAT_00108e90);
           goto LAB_0007d77c;
         }
       }
       else if (param_2 == 0xd00) {
-        if ((double)FLOAT_00108e50 <= fparam_1) {
+        if (!(fparam_1 < (double)FLOAT_00108e50)) {
           *(bool *)(param_1 + 0x31c8) = fparam_1 != (double)FLOAT_00108e50;
           goto LAB_0007d77c;
         }
       }
       else {
         if (param_2 != 0xd01) goto LAB_0007d768;
-        if ((double)FLOAT_00108e50 <= fparam_1) {
+        if (!(fparam_1 < (double)FLOAT_00108e50)) {
           *(bool *)(param_1 + 0x31c9) = fparam_1 != (double)FLOAT_00108e50;
           goto LAB_0007d77c;
         }
@@ -2988,7 +2972,7 @@ LAB_0007d734:
       goto LAB_0007d734;
     }
     if (param_2 == 0x806b) {
-      if ((double)FLOAT_00108e50 <= fparam_1) {
+      if (!(fparam_1 < (double)FLOAT_00108e50)) {
         *(int *)(param_1 + 0x31c0) = (int)(fparam_1 + (double)FLOAT_00108e90);
         goto LAB_0007d77c;
       }
@@ -2996,13 +2980,13 @@ LAB_0007d734:
     }
     if (0x806b < param_2) {
       if (param_2 == 0x806d) {
-        if ((double)FLOAT_00108e50 <= fparam_1) {
+        if (!(fparam_1 < (double)FLOAT_00108e50)) {
           *(int *)(param_1 + 0x31dc) = (int)(fparam_1 + (double)FLOAT_00108e90);
           goto LAB_0007d77c;
         }
       }
       else if (param_2 < 0x806d) {
-        if ((double)FLOAT_00108e50 <= fparam_1) {
+        if (!(fparam_1 < (double)FLOAT_00108e50)) {
           *(int *)(0x31b4 + param_1) = (int)(fparam_1 + (double)FLOAT_00108e90);
           goto LAB_0007d77c;
         }
@@ -3015,7 +2999,7 @@ LAB_0007d734:
           }
           goto LAB_0007d768;
         }
-        if ((double)FLOAT_00108e50 <= fparam_1) {
+        if (!(fparam_1 < (double)FLOAT_00108e50)) {
           *(int *)(param_1 + 0x31d0) = (int)(fparam_1 + (double)FLOAT_00108e90);
           goto LAB_0007d77c;
         }
@@ -3023,14 +3007,14 @@ LAB_0007d734:
       goto LAB_0007d734;
     }
     if (param_2 == 0xd04) {
-      if ((double)FLOAT_00108e50 <= fparam_1) {
+      if (!(fparam_1 < (double)FLOAT_00108e50)) {
         *(int *)(param_1 + 0x31bc) = (int)(fparam_1 + (double)FLOAT_00108e90);
         goto LAB_0007d77c;
       }
       goto LAB_0007d734;
     }
     if (param_2 < 0xd04) {
-      if ((double)FLOAT_00108e50 <= fparam_1) {
+      if (!(fparam_1 < (double)FLOAT_00108e50)) {
         *(int *)(param_1 + 0x31b8) = (int)(fparam_1 + (double)FLOAT_00108e90);
         goto LAB_0007d77c;
       }

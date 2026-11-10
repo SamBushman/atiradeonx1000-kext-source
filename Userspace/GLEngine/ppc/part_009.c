@@ -1411,7 +1411,7 @@ int _glBitmap_ListExec(int param_1,uint *param_2,double fparam_1,double fparam_2
     }
     goto LAB_000578e8;
   }
-  if ((fVar2 <= FLOAT_00108e50) || (fVar3 <= FLOAT_00108e50)) goto LAB_000578e8;
+  if ((!(FLOAT_00108e50 < fVar2)) || (!(FLOAT_00108e50 < fVar3))) goto LAB_000578e8;
   iVar9 = *(int *)(param_1 + 0x50ac);
   if (iVar9 != 0 || (*(uint *)(param_1 + 0x505c) & *(uint *)(param_1 + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(param_1);
@@ -1780,38 +1780,32 @@ void _glBlendColor_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3
   dVar3 = (double)FLOAT_00108e50;
   dVar4 = (double)FLOAT_00108e54;
   *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 4;
-  if ((double)dVar3 <= fparam_1) {
-    if (fparam_1 <= (double)dVar4) {
-      *(float *)(param_1 + 0x30d0) = (float)fparam_1;
-    }
-    else {
-      *(float *)(param_1 + 0x30d0) = fVar2;
-    }
-  }
-  else {
+  if (fparam_1 < (double)dVar3) {
     *(float *)(param_1 + 0x30d0) = fVar1;
   }
-  if ((double)dVar3 <= fparam_2) {
-    if (fparam_2 <= (double)dVar4) {
-      *(float *)(param_1 + 0x30d4) = (float)fparam_2;
-    }
-    else {
-      *(float *)(param_1 + 0x30d4) = fVar2;
-    }
+  else if ((double)dVar4 < fparam_1) {
+    *(float *)(param_1 + 0x30d0) = fVar2;
   }
   else {
+    *(float *)(param_1 + 0x30d0) = (float)fparam_1;
+  }
+  if (fparam_2 < (double)dVar3) {
     *(float *)(param_1 + 0x30d4) = fVar1;
   }
-  if ((double)dVar3 <= fparam_3) {
-    if (fparam_3 <= (double)dVar4) {
-      *(float *)(param_1 + 0x30d8) = (float)fparam_3;
-    }
-    else {
-      *(float *)(param_1 + 0x30d8) = fVar2;
-    }
+  else if ((double)dVar4 < fparam_2) {
+    *(float *)(param_1 + 0x30d4) = fVar2;
   }
   else {
+    *(float *)(param_1 + 0x30d4) = (float)fparam_2;
+  }
+  if (fparam_3 < (double)dVar3) {
     *(float *)(param_1 + 0x30d8) = fVar1;
+  }
+  else if ((double)dVar4 < fparam_3) {
+    *(float *)(param_1 + 0x30d8) = fVar2;
+  }
+  else {
+    *(float *)(param_1 + 0x30d8) = (float)fparam_3;
   }
   if (fparam_4 < (double)dVar3) {
     *(float *)(param_1 + 0x30dc) = fVar1;

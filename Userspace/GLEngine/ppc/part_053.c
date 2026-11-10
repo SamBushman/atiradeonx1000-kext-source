@@ -1865,7 +1865,7 @@ double _gleSphereGenST(undefined4 param_1,undefined4 param_2,float *param_3,floa
   fVar1 = fVar1 * fVar1 + (dVar3 * dVar3 + (dVar4 * dVar4));
   dVar5 = (double)fVar1;
   dVar2 = (double)FLOAT_00108e50;
-  if (((double)FLOAT_00108e50 < (double)dVar5) && (dVar2 = (double)dVar5, (double)dVar5 != (double)FLOAT_00108e54)) {
+  if ((!((double)dVar5 <= (double)FLOAT_00108e50)) && (dVar2 = (double)dVar5, (double)dVar5 != (double)FLOAT_00108e54)) {
     dVar2 = (double)GH_U2F((unsigned int)((0x5f375a00 - ((uint)GH_F2U(fVar1) >> 1))));
     dVar6 = (double)(float)((double)(float)((double)dVar5 * dVar2) * dVar2);
     dVar5 = (double)(float)(DOUBLE_00108e40 - (double)dVar6);
@@ -1873,14 +1873,14 @@ double _gleSphereGenST(undefined4 param_1,undefined4 param_2,float *param_3,floa
                            (DOUBLE_00108e48 -
                            (double)((dVar6 * dVar5) * dVar5)));
   }
-  if (dVar2 <= (double)FLOAT_00108e80) {
-    param_4[1] = 0.5;
-    *param_4 = 0.5;
-  }
-  else {
+  if ((double)FLOAT_00108e80 < dVar2) {
     dVar5 = (double)FLOAT_00108e90;
     param_4[1] = (float)((double)dVar4 * dVar2 + (double)dVar5);
     *param_4 = (float)((double)dVar3 * dVar2 + (double)dVar5);
+  }
+  else {
+    param_4[1] = 0.5;
+    *param_4 = 0.5;
   }
   return;
 }

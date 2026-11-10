@@ -596,7 +596,7 @@ void _gleExtractPixel_Index_Float(param_1, param_2)
   undefined4 uVar2;
   
   fVar1 = *param_2;
-  if (fVar1 < FLOAT_00108e50) {
+  if (!(FLOAT_00108e50 <= fVar1)) {
     fVar1 = fVar1 - FLOAT_00108f50;
   }
   *(int *)(param_1 + 0x18) = (int)fVar1;

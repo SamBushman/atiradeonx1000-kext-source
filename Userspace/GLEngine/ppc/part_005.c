@@ -3231,7 +3231,7 @@ void _glLineWidth_Exec(int param_1,float fparam_1)
   undefined4 uVar1;
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
-    if ((double)FLOAT_00108e50 < fparam_1) {
+    if (!(fparam_1 <= (double)FLOAT_00108e50)) {
       *(float *)(param_1 + 0x3180) = (float)fparam_1;
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x4000;
       return;

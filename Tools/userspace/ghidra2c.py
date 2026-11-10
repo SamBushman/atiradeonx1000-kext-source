@@ -1094,6 +1094,9 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\b(?:LAB|DAT|UNK)_([0-9a-f]{8})\b', lambda m: '(*(unsigned char *)0x%s)' % m.group(1) if in_text(m.group(1)) and m.group(0).startswith(('DAT', 'UNK')) else m.group(0), b)
             b = re.sub(r'(?<![\w.>])(%s)\s*\[' % '|'.join(re.escape(n) for n in defined_names) if defined_names else 'x^', lambda m: '((code **)%s)[' % m.group(1), b)
             b, _nfi = fix_float_int(b, int(a, 16))
+            # `fparam_1 = (double)((ulonglong)0x3ff00000 << 0x20)`: a double made of its two words (the clamp constant 1.0 of glDepthRange / glClearDepth / glDepthBoundsEXT), a bit copy; the C cast
+            # converted the integer VALUE (4.6e18 = 0x43cff800... stored instead of 1.0; found when fnfuzz FNFUZZ_REPAIR+NANMODE reached the clamp path of _glClearDepth_Exec)
+            b = re.sub(r'\(double\)\(\(ulonglong\)(\w+) << 0x20\)', r'GH_U2D((unsigned long long)\1 << 0x20)', b)
             b, _nrc = resolve_float_casts(b, int(a, 16))
             b, _ncl = fix_cstring_literals(b)
             b, _nnan = fix_nan(b, int(a, 16))

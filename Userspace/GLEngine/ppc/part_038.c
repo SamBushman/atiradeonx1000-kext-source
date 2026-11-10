@@ -579,10 +579,10 @@ void _glCombinerParameterfvNV_Exec(param_1, param_2, param_3)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (param_2 == 0x854e) {
       fVar1 = *param_3;
-      if ((1.0 <= fVar1) &&
-         (fVar1 <= (float)((double)CONCAT44(0x43300000,
-                                            *(uint *)(*(int *)(param_1 + 0x468c) + 0x98) ^
-                                            0x80000000) - DOUBLE_00108d58))) {
+      if ((!(fVar1 < 1.0)) &&
+         (!((float)((double)CONCAT44(0x43300000,
+                                     *(uint *)(*(int *)(param_1 + 0x468c) + 0x98) ^ 0x80000000) -
+                   DOUBLE_00108d58) < fVar1))) {
         *(int *)(param_1 + 0x41fc) = (int)fVar1;
         goto LAB_000b2eb0;
       }
@@ -599,19 +599,19 @@ void _glCombinerParameterfvNV_Exec(param_1, param_2, param_3)
           fVar3 = param_3[1];
           fVar4 = param_3[2];
           fVar5 = FLOAT_00108e50;
-          if ((0.0 <= fVar1) && (fVar5 = fVar1, 1.0 < fVar1)) {
+          if ((!(fVar1 < 0.0)) && (fVar5 = fVar1, 1.0 < fVar1)) {
             fVar5 = FLOAT_00108e54;
           }
           fVar1 = FLOAT_00108e50;
-          if ((0.0 <= fVar3) && (fVar1 = fVar3, 1.0 < fVar3)) {
+          if ((!(fVar3 < 0.0)) && (fVar1 = fVar3, 1.0 < fVar3)) {
             fVar1 = FLOAT_00108e54;
           }
           fVar3 = FLOAT_00108e50;
-          if ((0.0 <= fVar4) && (fVar3 = fVar4, 1.0 < fVar4)) {
+          if ((!(fVar4 < 0.0)) && (fVar3 = fVar4, 1.0 < fVar4)) {
             fVar3 = FLOAT_00108e54;
           }
           fVar4 = FLOAT_00108e50;
-          if ((0.0 <= fVar2) && (fVar4 = fVar2, 1.0 < fVar2)) {
+          if ((!(fVar2 < 0.0)) && (fVar4 = fVar2, 1.0 < fVar2)) {
             fVar4 = FLOAT_00108e54;
           }
           iVar7 = (param_2 - 0x852a) * 0x10 + param_1;
@@ -668,19 +668,19 @@ void _glCombinerStageParameterfvNV_Exec(param_1, param_2, param_3, param_4)
       fVar3 = param_4[2];
       fVar4 = param_4[1];
       fVar5 = FLOAT_00108e50;
-      if ((0.0 <= fVar1) && (fVar5 = fVar1, 1.0 < fVar1)) {
+      if ((!(fVar1 < 0.0)) && (fVar5 = fVar1, 1.0 < fVar1)) {
         fVar5 = FLOAT_00108e54;
       }
       fVar1 = FLOAT_00108e50;
-      if ((0.0 <= fVar4) && (fVar1 = fVar4, 1.0 < fVar4)) {
+      if ((!(fVar4 < 0.0)) && (fVar1 = fVar4, 1.0 < fVar4)) {
         fVar1 = FLOAT_00108e54;
       }
       fVar4 = FLOAT_00108e50;
-      if ((0.0 <= fVar3) && (fVar4 = fVar3, 1.0 < fVar3)) {
+      if ((!(fVar3 < 0.0)) && (fVar4 = fVar3, 1.0 < fVar3)) {
         fVar4 = FLOAT_00108e54;
       }
       fVar3 = FLOAT_00108e50;
-      if ((0.0 <= fVar2) && (fVar3 = fVar2, 1.0 < fVar2)) {
+      if ((!(fVar2 < 0.0)) && (fVar3 = fVar2, 1.0 < fVar2)) {
         fVar3 = FLOAT_00108e54;
       }
       iVar7 = (iVar7 * 8 + (param_3 - 0x852aU)) * 0x10 + param_1;
@@ -753,19 +753,19 @@ void _glCombinerParameterivNV_Exec(int param_1,uint param_2,uint *param_3,double
           fVar3 = (float)((double)CONCAT44(0x43300000,param_3[2] ^ 0x80000000) - DOUBLE_00108d58);
           fVar4 = (float)((double)CONCAT44(0x43300000,param_3[3] ^ 0x80000000) - DOUBLE_00108d58);
           fVar5 = FLOAT_00108e50;
-          if ((0.0 <= fVar1) && (fVar5 = fVar1, 1.0 < fVar1)) {
+          if ((!(fVar1 < 0.0)) && (fVar5 = fVar1, 1.0 < fVar1)) {
             fVar5 = FLOAT_00108e54;
           }
           fVar1 = FLOAT_00108e50;
-          if ((0.0 <= fVar2) && (fVar1 = fVar2, 1.0 < fVar2)) {
+          if ((!(fVar2 < 0.0)) && (fVar1 = fVar2, 1.0 < fVar2)) {
             fVar1 = FLOAT_00108e54;
           }
           fVar2 = FLOAT_00108e50;
-          if ((0.0 <= fVar3) && (fVar2 = fVar3, 1.0 < fVar3)) {
+          if ((!(fVar3 < 0.0)) && (fVar2 = fVar3, 1.0 < fVar3)) {
             fVar2 = FLOAT_00108e54;
           }
           fVar3 = FLOAT_00108e50;
-          if ((0.0 <= fVar4) && (fVar3 = fVar4, 1.0 < fVar4)) {
+          if ((!(fVar4 < 0.0)) && (fVar3 = fVar4, 1.0 < fVar4)) {
             fVar3 = FLOAT_00108e54;
           }
           iVar7 = (param_2 - 0x852a) * 0x10 + param_1;

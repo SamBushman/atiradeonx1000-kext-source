@@ -503,11 +503,11 @@ uint _gleInterpolClipNO0000(int param_1,float *param_2,int param_3,float *param_
       fVar10 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar4 + fVar10));
       fVar4 = fVar10 * (fVar4 - fVar7) + fVar7;
       fVar6 = -fVar4;
-      if (FLOAT_00108e50 <= fVar4) {
-        uVar12 = 0;
+      if (fVar4 < FLOAT_00108e50) {
+        uVar12 = 2;
       }
       else {
-        uVar12 = 2;
+        uVar12 = 0;
       }
     }
     else {
@@ -521,12 +521,12 @@ uint _gleInterpolClipNO0000(int param_1,float *param_2,int param_3,float *param_
     fVar5 = fVar10 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000ba7a0;
     fVar11 = -fVar4;
-    if (fVar11 <= fVar5) {
-      if (fVar5 < fVar4) goto LAB_000ba700;
-      uVar12 = 8;
+    if (fVar5 < fVar11) {
+      uVar12 = 4;
     }
     else {
-      uVar12 = 4;
+      if (!(fVar4 <= fVar5)) goto LAB_000ba700;
+      uVar12 = 8;
     }
   }
   else {
@@ -566,12 +566,12 @@ uint _gleInterpolClipNO0000(int param_1,float *param_2,int param_3,float *param_
     if (!bVar1) goto LAB_000ba7a0;
     fVar11 = -fVar4;
 LAB_000ba700:
-    if (fVar11 <= fVar7) {
-      if (fVar7 < fVar4) goto LAB_000ba7a0;
-      uVar12 = 0x20;
+    if (fVar7 < fVar11) {
+      uVar12 = 0x10;
     }
     else {
-      uVar12 = 0x10;
+      if (!(fVar4 <= fVar7)) goto LAB_000ba7a0;
+      uVar12 = 0x20;
     }
   }
   bVar1 = uVar12 == 0;
@@ -642,11 +642,11 @@ uint _gleInterpolClipNO0010(int param_1,float *param_2,int param_3,float *param_
       fVar11 = (fVar6 + fVar5) / ((fVar6 + fVar5) - (fVar10 + fVar9));
       fVar6 = fVar11 * (fVar10 - fVar6) + fVar6;
       fVar5 = -fVar6;
-      if (FLOAT_00108e50 <= fVar6) {
-        uVar13 = 0;
+      if (fVar6 < FLOAT_00108e50) {
+        uVar13 = 2;
       }
       else {
-        uVar13 = 2;
+        uVar13 = 0;
       }
     }
     else {
@@ -660,12 +660,12 @@ uint _gleInterpolClipNO0010(int param_1,float *param_2,int param_3,float *param_
     fVar12 = fVar11 * (fVar8 - fVar12) + fVar12;
     if (!bVar1) goto LAB_000baa7c;
     fVar7 = -fVar6;
-    if (fVar7 <= fVar12) {
-      if (fVar12 < fVar6) goto LAB_000ba9dc;
-      uVar13 = 8;
+    if (fVar12 < fVar7) {
+      uVar13 = 4;
     }
     else {
-      uVar13 = 4;
+      if (!(fVar6 <= fVar12)) goto LAB_000ba9dc;
+      uVar13 = 8;
     }
   }
   else {
@@ -705,12 +705,12 @@ uint _gleInterpolClipNO0010(int param_1,float *param_2,int param_3,float *param_
     if (!bVar1) goto LAB_000baa7c;
     fVar7 = -fVar6;
 LAB_000ba9dc:
-    if (fVar7 <= fVar4) {
-      if (fVar4 < fVar6) goto LAB_000baa7c;
-      uVar13 = 0x20;
+    if (fVar4 < fVar7) {
+      uVar13 = 0x10;
     }
     else {
-      uVar13 = 0x10;
+      if (!(fVar6 <= fVar4)) goto LAB_000baa7c;
+      uVar13 = 0x20;
     }
   }
   bVar1 = uVar13 == 0;
@@ -782,11 +782,11 @@ uint _gleInterpolClipNO0100(int param_1,float *param_2,int param_3,float *param_
       fVar11 = (fVar6 + fVar5) / ((fVar6 + fVar5) - (fVar10 + fVar9));
       fVar6 = fVar11 * (fVar10 - fVar6) + fVar6;
       fVar5 = -fVar6;
-      if (FLOAT_00108e50 <= fVar6) {
-        uVar13 = 0;
+      if (fVar6 < FLOAT_00108e50) {
+        uVar13 = 2;
       }
       else {
-        uVar13 = 2;
+        uVar13 = 0;
       }
     }
     else {
@@ -800,12 +800,12 @@ uint _gleInterpolClipNO0100(int param_1,float *param_2,int param_3,float *param_
     fVar12 = fVar11 * (fVar8 - fVar12) + fVar12;
     if (!bVar1) goto LAB_000bad6c;
     fVar7 = -fVar6;
-    if (fVar7 <= fVar12) {
-      if (fVar12 < fVar6) goto LAB_000baccc;
-      uVar13 = 8;
+    if (fVar12 < fVar7) {
+      uVar13 = 4;
     }
     else {
-      uVar13 = 4;
+      if (!(fVar6 <= fVar12)) goto LAB_000baccc;
+      uVar13 = 8;
     }
   }
   else {
@@ -845,12 +845,12 @@ uint _gleInterpolClipNO0100(int param_1,float *param_2,int param_3,float *param_
     if (!bVar1) goto LAB_000bad6c;
     fVar7 = -fVar6;
 LAB_000baccc:
-    if (fVar7 <= fVar4) {
-      if (fVar4 < fVar6) goto LAB_000bad6c;
-      uVar13 = 0x20;
+    if (fVar4 < fVar7) {
+      uVar13 = 0x10;
     }
     else {
-      uVar13 = 0x10;
+      if (!(fVar6 <= fVar4)) goto LAB_000bad6c;
+      uVar13 = 0x20;
     }
   }
   bVar1 = uVar13 == 0;
@@ -947,11 +947,11 @@ uint _gleInterpolClipNO0100w(int param_1,float *param_2,int param_3,float *param
       fVar11 = (fVar6 + fVar5) / ((fVar6 + fVar5) - (fVar10 + fVar9));
       fVar6 = fVar11 * (fVar10 - fVar6) + fVar6;
       fVar5 = -fVar6;
-      if (FLOAT_00108e50 <= fVar6) {
-        uVar13 = 0;
+      if (fVar6 < FLOAT_00108e50) {
+        uVar13 = 2;
       }
       else {
-        uVar13 = 2;
+        uVar13 = 0;
       }
     }
     else {
@@ -965,12 +965,12 @@ uint _gleInterpolClipNO0100w(int param_1,float *param_2,int param_3,float *param
     fVar12 = fVar11 * (fVar8 - fVar12) + fVar12;
     if (!bVar1) goto LAB_000bb0d0;
     fVar7 = -fVar6;
-    if (fVar7 <= fVar12) {
-      if (fVar12 < fVar6) goto LAB_000bb030;
-      uVar13 = 8;
+    if (fVar12 < fVar7) {
+      uVar13 = 4;
     }
     else {
-      uVar13 = 4;
+      if (!(fVar6 <= fVar12)) goto LAB_000bb030;
+      uVar13 = 8;
     }
   }
   else {
@@ -1010,12 +1010,12 @@ uint _gleInterpolClipNO0100w(int param_1,float *param_2,int param_3,float *param
     if (!bVar1) goto LAB_000bb0d0;
     fVar7 = -fVar6;
 LAB_000bb030:
-    if (fVar7 <= fVar4) {
-      if (fVar4 < fVar6) goto LAB_000bb0d0;
-      uVar13 = 0x20;
+    if (fVar4 < fVar7) {
+      uVar13 = 0x10;
     }
     else {
-      uVar13 = 0x10;
+      if (!(fVar6 <= fVar4)) goto LAB_000bb0d0;
+      uVar13 = 0x20;
     }
   }
   bVar1 = uVar13 == 0;
@@ -1097,11 +1097,11 @@ uint _gleInterpolClipNO0110(int param_1,float *param_2,int param_3,float *param_
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar14 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar14 = 2;
       }
       else {
-        uVar14 = 2;
+        uVar14 = 0;
       }
     }
     else {
@@ -1115,12 +1115,12 @@ uint _gleInterpolClipNO0110(int param_1,float *param_2,int param_3,float *param_
     fVar13 = fVar12 * (fVar9 - fVar13) + fVar13;
     if (!bVar1) goto LAB_000bb3fc;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar13) {
-      if (fVar13 < fVar7) goto LAB_000bb35c;
-      uVar14 = 8;
+    if (fVar13 < fVar8) {
+      uVar14 = 4;
     }
     else {
-      uVar14 = 4;
+      if (!(fVar7 <= fVar13)) goto LAB_000bb35c;
+      uVar14 = 8;
     }
   }
   else {
@@ -1160,12 +1160,12 @@ uint _gleInterpolClipNO0110(int param_1,float *param_2,int param_3,float *param_
     if (!bVar1) goto LAB_000bb3fc;
     fVar8 = -fVar7;
 LAB_000bb35c:
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bb3fc;
-      uVar14 = 0x20;
+    if (fVar5 < fVar8) {
+      uVar14 = 0x10;
     }
     else {
-      uVar14 = 0x10;
+      if (!(fVar7 <= fVar5)) goto LAB_000bb3fc;
+      uVar14 = 0x20;
     }
   }
   bVar1 = uVar14 == 0;
@@ -1264,11 +1264,11 @@ uint _gleInterpolClipNO0110w(int param_1,float *param_2,int param_3,float *param
       fVar11 = (fVar6 + fVar5) / ((fVar6 + fVar5) - (fVar10 + fVar9));
       fVar6 = fVar11 * (fVar10 - fVar6) + fVar6;
       fVar5 = -fVar6;
-      if (FLOAT_00108e50 <= fVar6) {
-        uVar13 = 0;
+      if (fVar6 < FLOAT_00108e50) {
+        uVar13 = 2;
       }
       else {
-        uVar13 = 2;
+        uVar13 = 0;
       }
     }
     else {
@@ -1282,12 +1282,12 @@ uint _gleInterpolClipNO0110w(int param_1,float *param_2,int param_3,float *param
     fVar12 = fVar11 * (fVar8 - fVar12) + fVar12;
     if (!bVar1) goto LAB_000bb774;
     fVar7 = -fVar6;
-    if (fVar7 <= fVar12) {
-      if (fVar12 < fVar6) goto LAB_000bb6d4;
-      uVar13 = 8;
+    if (fVar12 < fVar7) {
+      uVar13 = 4;
     }
     else {
-      uVar13 = 4;
+      if (!(fVar6 <= fVar12)) goto LAB_000bb6d4;
+      uVar13 = 8;
     }
   }
   else {
@@ -1327,12 +1327,12 @@ uint _gleInterpolClipNO0110w(int param_1,float *param_2,int param_3,float *param
     if (!bVar1) goto LAB_000bb774;
     fVar7 = -fVar6;
 LAB_000bb6d4:
-    if (fVar7 <= fVar4) {
-      if (fVar4 < fVar6) goto LAB_000bb774;
-      uVar13 = 0x20;
+    if (fVar4 < fVar7) {
+      uVar13 = 0x10;
     }
     else {
-      uVar13 = 0x10;
+      if (!(fVar6 <= fVar4)) goto LAB_000bb774;
+      uVar13 = 0x20;
     }
   }
   bVar1 = uVar13 == 0;
@@ -1418,11 +1418,11 @@ uint _gleInterpolClipNO0200(int param_1,float *param_2,int param_3,float *param_
       fVar11 = (fVar6 + fVar5) / ((fVar6 + fVar5) - (fVar10 + fVar9));
       fVar6 = fVar11 * (fVar10 - fVar6) + fVar6;
       fVar5 = -fVar6;
-      if (FLOAT_00108e50 <= fVar6) {
-        uVar15 = 0;
+      if (fVar6 < FLOAT_00108e50) {
+        uVar15 = 2;
       }
       else {
-        uVar15 = 2;
+        uVar15 = 0;
       }
     }
     else {
@@ -1436,12 +1436,12 @@ uint _gleInterpolClipNO0200(int param_1,float *param_2,int param_3,float *param_
     fVar13 = fVar11 * (fVar8 - fVar13) + fVar13;
     if (!bVar1) goto LAB_000bbab4;
     fVar7 = -fVar6;
-    if (fVar7 <= fVar13) {
-      if (fVar13 < fVar6) goto LAB_000bba14;
-      uVar15 = 8;
+    if (fVar13 < fVar7) {
+      uVar15 = 4;
     }
     else {
-      uVar15 = 4;
+      if (!(fVar6 <= fVar13)) goto LAB_000bba14;
+      uVar15 = 8;
     }
   }
   else {
@@ -1481,12 +1481,12 @@ uint _gleInterpolClipNO0200(int param_1,float *param_2,int param_3,float *param_
     if (!bVar1) goto LAB_000bbab4;
     fVar7 = -fVar6;
 LAB_000bba14:
-    if (fVar7 <= fVar4) {
-      if (fVar4 < fVar6) goto LAB_000bbab4;
-      uVar15 = 0x20;
+    if (fVar4 < fVar7) {
+      uVar15 = 0x10;
     }
     else {
-      uVar15 = 0x10;
+      if (!(fVar6 <= fVar4)) goto LAB_000bbab4;
+      uVar15 = 0x20;
     }
   }
   bVar1 = uVar15 == 0;
@@ -1600,11 +1600,11 @@ uint _gleInterpolClipNO0200w(int param_1,float *param_2,int param_3,float *param
       fVar11 = (fVar6 + fVar5) / ((fVar6 + fVar5) - (fVar10 + fVar9));
       fVar6 = fVar11 * (fVar10 - fVar6) + fVar6;
       fVar5 = -fVar6;
-      if (FLOAT_00108e50 <= fVar6) {
-        uVar15 = 0;
+      if (fVar6 < FLOAT_00108e50) {
+        uVar15 = 2;
       }
       else {
-        uVar15 = 2;
+        uVar15 = 0;
       }
     }
     else {
@@ -1618,12 +1618,12 @@ uint _gleInterpolClipNO0200w(int param_1,float *param_2,int param_3,float *param
     fVar13 = fVar11 * (fVar8 - fVar13) + fVar13;
     if (!bVar1) goto LAB_000bbe50;
     fVar7 = -fVar6;
-    if (fVar7 <= fVar13) {
-      if (fVar13 < fVar6) goto LAB_000bbdb0;
-      uVar15 = 8;
+    if (fVar13 < fVar7) {
+      uVar15 = 4;
     }
     else {
-      uVar15 = 4;
+      if (!(fVar6 <= fVar13)) goto LAB_000bbdb0;
+      uVar15 = 8;
     }
   }
   else {
@@ -1663,12 +1663,12 @@ uint _gleInterpolClipNO0200w(int param_1,float *param_2,int param_3,float *param
     if (!bVar1) goto LAB_000bbe50;
     fVar7 = -fVar6;
 LAB_000bbdb0:
-    if (fVar7 <= fVar4) {
-      if (fVar4 < fVar6) goto LAB_000bbe50;
-      uVar15 = 0x20;
+    if (fVar4 < fVar7) {
+      uVar15 = 0x10;
     }
     else {
-      uVar15 = 0x10;
+      if (!(fVar6 <= fVar4)) goto LAB_000bbe50;
+      uVar15 = 0x20;
     }
   }
   bVar1 = uVar15 == 0;
@@ -1768,11 +1768,11 @@ uint _gleInterpolClipNO0210(int param_1,float *param_2,int param_3,float *param_
       fVar11 = (fVar6 + fVar5) / ((fVar6 + fVar5) - (fVar10 + fVar9));
       fVar6 = fVar11 * (fVar10 - fVar6) + fVar6;
       fVar5 = -fVar6;
-      if (FLOAT_00108e50 <= fVar6) {
-        uVar15 = 0;
+      if (fVar6 < FLOAT_00108e50) {
+        uVar15 = 2;
       }
       else {
-        uVar15 = 2;
+        uVar15 = 0;
       }
     }
     else {
@@ -1786,12 +1786,12 @@ uint _gleInterpolClipNO0210(int param_1,float *param_2,int param_3,float *param_
     fVar13 = fVar11 * (fVar8 - fVar13) + fVar13;
     if (!bVar1) goto LAB_000bc1b4;
     fVar7 = -fVar6;
-    if (fVar7 <= fVar13) {
-      if (fVar13 < fVar6) goto LAB_000bc114;
-      uVar15 = 8;
+    if (fVar13 < fVar7) {
+      uVar15 = 4;
     }
     else {
-      uVar15 = 4;
+      if (!(fVar6 <= fVar13)) goto LAB_000bc114;
+      uVar15 = 8;
     }
   }
   else {
@@ -1831,12 +1831,12 @@ uint _gleInterpolClipNO0210(int param_1,float *param_2,int param_3,float *param_
     if (!bVar1) goto LAB_000bc1b4;
     fVar7 = -fVar6;
 LAB_000bc114:
-    if (fVar7 <= fVar4) {
-      if (fVar4 < fVar6) goto LAB_000bc1b4;
-      uVar15 = 0x20;
+    if (fVar4 < fVar7) {
+      uVar15 = 0x10;
     }
     else {
-      uVar15 = 0x10;
+      if (!(fVar6 <= fVar4)) goto LAB_000bc1b4;
+      uVar15 = 0x20;
     }
   }
   bVar1 = uVar15 == 0;
@@ -1951,11 +1951,11 @@ uint _gleInterpolClipNO0210w(int param_1,float *param_2,int param_3,float *param
       fVar11 = (fVar6 + fVar5) / ((fVar6 + fVar5) - (fVar10 + fVar9));
       fVar6 = fVar11 * (fVar10 - fVar6) + fVar6;
       fVar5 = -fVar6;
-      if (FLOAT_00108e50 <= fVar6) {
-        uVar15 = 0;
+      if (fVar6 < FLOAT_00108e50) {
+        uVar15 = 2;
       }
       else {
-        uVar15 = 2;
+        uVar15 = 0;
       }
     }
     else {
@@ -1969,12 +1969,12 @@ uint _gleInterpolClipNO0210w(int param_1,float *param_2,int param_3,float *param
     fVar13 = fVar11 * (fVar8 - fVar13) + fVar13;
     if (!bVar1) goto LAB_000bc564;
     fVar7 = -fVar6;
-    if (fVar7 <= fVar13) {
-      if (fVar13 < fVar6) goto LAB_000bc4c4;
-      uVar15 = 8;
+    if (fVar13 < fVar7) {
+      uVar15 = 4;
     }
     else {
-      uVar15 = 4;
+      if (!(fVar6 <= fVar13)) goto LAB_000bc4c4;
+      uVar15 = 8;
     }
   }
   else {
@@ -2014,12 +2014,12 @@ uint _gleInterpolClipNO0210w(int param_1,float *param_2,int param_3,float *param
     if (!bVar1) goto LAB_000bc564;
     fVar7 = -fVar6;
 LAB_000bc4c4:
-    if (fVar7 <= fVar4) {
-      if (fVar4 < fVar6) goto LAB_000bc564;
-      uVar15 = 0x20;
+    if (fVar4 < fVar7) {
+      uVar15 = 0x10;
     }
     else {
-      uVar15 = 0x10;
+      if (!(fVar6 <= fVar4)) goto LAB_000bc564;
+      uVar15 = 0x20;
     }
   }
   bVar1 = uVar15 == 0;
@@ -2116,11 +2116,11 @@ uint _gleInterpolClipNO1000(int param_1,int param_2,int param_3,float *param_4,u
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar13 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar13 = 2;
       }
       else {
-        uVar13 = 2;
+        uVar13 = 0;
       }
     }
     else {
@@ -2134,12 +2134,12 @@ uint _gleInterpolClipNO1000(int param_1,int param_2,int param_3,float *param_4,u
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000bc8dc;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bc83c;
-      uVar13 = 8;
+    if (fVar5 < fVar8) {
+      uVar13 = 4;
     }
     else {
-      uVar13 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000bc83c;
+      uVar13 = 8;
     }
   }
   else {
@@ -2179,12 +2179,12 @@ uint _gleInterpolClipNO1000(int param_1,int param_2,int param_3,float *param_4,u
     if (!bVar1) goto LAB_000bc8dc;
     fVar8 = -fVar7;
 LAB_000bc83c:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000bc8dc;
-      uVar13 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar13 = 0x10;
     }
     else {
-      uVar13 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000bc8dc;
+      uVar13 = 0x20;
     }
   }
   bVar1 = uVar13 == 0;
@@ -2254,11 +2254,11 @@ uint _gleInterpolClipNO1001(int param_1,float *param_2,int param_3,float *param_
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar13 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar13 = 2;
       }
       else {
-        uVar13 = 2;
+        uVar13 = 0;
       }
     }
     else {
@@ -2272,12 +2272,12 @@ uint _gleInterpolClipNO1001(int param_1,float *param_2,int param_3,float *param_
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000bcbc0;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bcb20;
-      uVar13 = 8;
+    if (fVar5 < fVar8) {
+      uVar13 = 4;
     }
     else {
-      uVar13 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000bcb20;
+      uVar13 = 8;
     }
   }
   else {
@@ -2317,12 +2317,12 @@ uint _gleInterpolClipNO1001(int param_1,float *param_2,int param_3,float *param_
     if (!bVar1) goto LAB_000bcbc0;
     fVar8 = -fVar7;
 LAB_000bcb20:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000bcbc0;
-      uVar13 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar13 = 0x10;
     }
     else {
-      uVar13 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000bcbc0;
+      uVar13 = 0x20;
     }
   }
   bVar1 = uVar13 == 0;
@@ -2402,11 +2402,11 @@ uint _gleInterpolClipNO1010(int param_1,int param_2,int param_3,float *param_4,u
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar13 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar13 = 2;
       }
       else {
-        uVar13 = 2;
+        uVar13 = 0;
       }
     }
     else {
@@ -2420,12 +2420,12 @@ uint _gleInterpolClipNO1010(int param_1,int param_2,int param_3,float *param_4,u
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000bcef8;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bce58;
-      uVar13 = 8;
+    if (fVar5 < fVar8) {
+      uVar13 = 4;
     }
     else {
-      uVar13 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000bce58;
+      uVar13 = 8;
     }
   }
   else {
@@ -2465,12 +2465,12 @@ uint _gleInterpolClipNO1010(int param_1,int param_2,int param_3,float *param_4,u
     if (!bVar1) goto LAB_000bcef8;
     fVar8 = -fVar7;
 LAB_000bce58:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000bcef8;
-      uVar13 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar13 = 0x10;
     }
     else {
-      uVar13 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000bcef8;
+      uVar13 = 0x20;
     }
   }
   bVar1 = uVar13 == 0;
@@ -2544,11 +2544,11 @@ uint _gleInterpolClipNO1011(int param_1,float *param_2,int param_3,float *param_
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar13 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar13 = 2;
       }
       else {
-        uVar13 = 2;
+        uVar13 = 0;
       }
     }
     else {
@@ -2562,12 +2562,12 @@ uint _gleInterpolClipNO1011(int param_1,float *param_2,int param_3,float *param_
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000bd1f0;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bd150;
-      uVar13 = 8;
+    if (fVar5 < fVar8) {
+      uVar13 = 4;
     }
     else {
-      uVar13 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000bd150;
+      uVar13 = 8;
     }
   }
   else {
@@ -2607,12 +2607,12 @@ uint _gleInterpolClipNO1011(int param_1,float *param_2,int param_3,float *param_
     if (!bVar1) goto LAB_000bd1f0;
     fVar8 = -fVar7;
 LAB_000bd150:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000bd1f0;
-      uVar13 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar13 = 0x10;
     }
     else {
-      uVar13 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000bd1f0;
+      uVar13 = 0x20;
     }
   }
   bVar1 = uVar13 == 0;
@@ -2696,11 +2696,11 @@ uint _gleInterpolClipNO1100(int param_1,int param_2,int param_3,float *param_4,u
       fVar13 = (fVar8 + fVar7) / ((fVar8 + fVar7) - (fVar12 + fVar11));
       fVar8 = fVar13 * (fVar12 - fVar8) + fVar8;
       fVar7 = -fVar8;
-      if (FLOAT_00108e50 <= fVar8) {
-        uVar14 = 0;
+      if (fVar8 < FLOAT_00108e50) {
+        uVar14 = 2;
       }
       else {
-        uVar14 = 2;
+        uVar14 = 0;
       }
     }
     else {
@@ -2714,12 +2714,12 @@ uint _gleInterpolClipNO1100(int param_1,int param_2,int param_3,float *param_4,u
     fVar6 = fVar13 * (fVar10 - fVar6) + fVar6;
     if (!bVar1) goto LAB_000bd53c;
     fVar9 = -fVar8;
-    if (fVar9 <= fVar6) {
-      if (fVar6 < fVar8) goto LAB_000bd49c;
-      uVar14 = 8;
+    if (fVar6 < fVar9) {
+      uVar14 = 4;
     }
     else {
-      uVar14 = 4;
+      if (!(fVar8 <= fVar6)) goto LAB_000bd49c;
+      uVar14 = 8;
     }
   }
   else {
@@ -2759,12 +2759,12 @@ uint _gleInterpolClipNO1100(int param_1,int param_2,int param_3,float *param_4,u
     if (!bVar1) goto LAB_000bd53c;
     fVar9 = -fVar8;
 LAB_000bd49c:
-    if (fVar9 <= fVar5) {
-      if (fVar5 < fVar8) goto LAB_000bd53c;
-      uVar14 = 0x20;
+    if (fVar5 < fVar9) {
+      uVar14 = 0x10;
     }
     else {
-      uVar14 = 0x10;
+      if (!(fVar8 <= fVar5)) goto LAB_000bd53c;
+      uVar14 = 0x20;
     }
   }
   bVar1 = uVar14 == 0;
@@ -2861,11 +2861,11 @@ uint _gleInterpolClipNO1100w(int param_1,int param_2,int param_3,float *param_4,
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar13 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar13 = 2;
       }
       else {
-        uVar13 = 2;
+        uVar13 = 0;
       }
     }
     else {
@@ -2879,12 +2879,12 @@ uint _gleInterpolClipNO1100w(int param_1,int param_2,int param_3,float *param_4,
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000bd8a8;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bd808;
-      uVar13 = 8;
+    if (fVar5 < fVar8) {
+      uVar13 = 4;
     }
     else {
-      uVar13 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000bd808;
+      uVar13 = 8;
     }
   }
   else {
@@ -2924,12 +2924,12 @@ uint _gleInterpolClipNO1100w(int param_1,int param_2,int param_3,float *param_4,
     if (!bVar1) goto LAB_000bd8a8;
     fVar8 = -fVar7;
 LAB_000bd808:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000bd8a8;
-      uVar13 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar13 = 0x10;
     }
     else {
-      uVar13 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000bd8a8;
+      uVar13 = 0x20;
     }
   }
   bVar1 = uVar13 == 0;
@@ -3011,11 +3011,11 @@ uint _gleInterpolClipNO1101(int param_1,float *param_2,int param_3,float *param_
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar13 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar13 = 2;
       }
       else {
-        uVar13 = 2;
+        uVar13 = 0;
       }
     }
     else {
@@ -3029,12 +3029,12 @@ uint _gleInterpolClipNO1101(int param_1,float *param_2,int param_3,float *param_
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000bdbdc;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bdb3c;
-      uVar13 = 8;
+    if (fVar5 < fVar8) {
+      uVar13 = 4;
     }
     else {
-      uVar13 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000bdb3c;
+      uVar13 = 8;
     }
   }
   else {
@@ -3074,12 +3074,12 @@ uint _gleInterpolClipNO1101(int param_1,float *param_2,int param_3,float *param_
     if (!bVar1) goto LAB_000bdbdc;
     fVar8 = -fVar7;
 LAB_000bdb3c:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000bdbdc;
-      uVar13 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar13 = 0x10;
     }
     else {
-      uVar13 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000bdbdc;
+      uVar13 = 0x20;
     }
   }
   bVar1 = uVar13 == 0;
@@ -3185,11 +3185,11 @@ uint _gleInterpolClipNO1101w(int param_1,float *param_2,int param_3,float *param
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar13 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar13 = 2;
       }
       else {
-        uVar13 = 2;
+        uVar13 = 0;
       }
     }
     else {
@@ -3203,12 +3203,12 @@ uint _gleInterpolClipNO1101w(int param_1,float *param_2,int param_3,float *param
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000bdf9c;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bdefc;
-      uVar13 = 8;
+    if (fVar5 < fVar8) {
+      uVar13 = 4;
     }
     else {
-      uVar13 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000bdefc;
+      uVar13 = 8;
     }
   }
   else {
@@ -3248,12 +3248,12 @@ uint _gleInterpolClipNO1101w(int param_1,float *param_2,int param_3,float *param
     if (!bVar1) goto LAB_000bdf9c;
     fVar8 = -fVar7;
 LAB_000bdefc:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000bdf9c;
-      uVar13 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar13 = 0x10;
     }
     else {
-      uVar13 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000bdf9c;
+      uVar13 = 0x20;
     }
   }
   bVar1 = uVar13 == 0;
@@ -3344,11 +3344,11 @@ uint _gleInterpolClipNO1110(int param_1,int param_2,int param_3,float *param_4,u
       fVar13 = (fVar8 + fVar7) / ((fVar8 + fVar7) - (fVar12 + fVar11));
       fVar8 = fVar13 * (fVar12 - fVar8) + fVar8;
       fVar7 = -fVar8;
-      if (FLOAT_00108e50 <= fVar8) {
-        uVar14 = 0;
+      if (fVar8 < FLOAT_00108e50) {
+        uVar14 = 2;
       }
       else {
-        uVar14 = 2;
+        uVar14 = 0;
       }
     }
     else {
@@ -3362,12 +3362,12 @@ uint _gleInterpolClipNO1110(int param_1,int param_2,int param_3,float *param_4,u
     fVar6 = fVar13 * (fVar10 - fVar6) + fVar6;
     if (!bVar1) goto LAB_000be324;
     fVar9 = -fVar8;
-    if (fVar9 <= fVar6) {
-      if (fVar6 < fVar8) goto LAB_000be284;
-      uVar14 = 8;
+    if (fVar6 < fVar9) {
+      uVar14 = 4;
     }
     else {
-      uVar14 = 4;
+      if (!(fVar8 <= fVar6)) goto LAB_000be284;
+      uVar14 = 8;
     }
   }
   else {
@@ -3407,12 +3407,12 @@ uint _gleInterpolClipNO1110(int param_1,int param_2,int param_3,float *param_4,u
     if (!bVar1) goto LAB_000be324;
     fVar9 = -fVar8;
 LAB_000be284:
-    if (fVar9 <= fVar5) {
-      if (fVar5 < fVar8) goto LAB_000be324;
-      uVar14 = 0x20;
+    if (fVar5 < fVar9) {
+      uVar14 = 0x10;
     }
     else {
-      uVar14 = 0x10;
+      if (!(fVar8 <= fVar5)) goto LAB_000be324;
+      uVar14 = 0x20;
     }
   }
   bVar1 = uVar14 == 0;
@@ -3513,11 +3513,11 @@ uint _gleInterpolClipNO1110w(int param_1,int param_2,int param_3,float *param_4,
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar13 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar13 = 2;
       }
       else {
-        uVar13 = 2;
+        uVar13 = 0;
       }
     }
     else {
@@ -3531,12 +3531,12 @@ uint _gleInterpolClipNO1110w(int param_1,int param_2,int param_3,float *param_4,
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000be6a4;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000be604;
-      uVar13 = 8;
+    if (fVar5 < fVar8) {
+      uVar13 = 4;
     }
     else {
-      uVar13 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000be604;
+      uVar13 = 8;
     }
   }
   else {
@@ -3576,12 +3576,12 @@ uint _gleInterpolClipNO1110w(int param_1,int param_2,int param_3,float *param_4,
     if (!bVar1) goto LAB_000be6a4;
     fVar8 = -fVar7;
 LAB_000be604:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000be6a4;
-      uVar13 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar13 = 0x10;
     }
     else {
-      uVar13 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000be6a4;
+      uVar13 = 0x20;
     }
   }
   bVar1 = uVar13 == 0;
@@ -3668,11 +3668,11 @@ uint _gleInterpolClipNO1111(int param_1,float *param_2,int param_3,float *param_
       fVar13 = (fVar8 + fVar7) / ((fVar8 + fVar7) - (fVar12 + fVar11));
       fVar8 = fVar13 * (fVar12 - fVar8) + fVar8;
       fVar7 = -fVar8;
-      if (FLOAT_00108e50 <= fVar8) {
-        uVar14 = 0;
+      if (fVar8 < FLOAT_00108e50) {
+        uVar14 = 2;
       }
       else {
-        uVar14 = 2;
+        uVar14 = 0;
       }
     }
     else {
@@ -3686,12 +3686,12 @@ uint _gleInterpolClipNO1111(int param_1,float *param_2,int param_3,float *param_
     fVar6 = fVar13 * (fVar10 - fVar6) + fVar6;
     if (!bVar1) goto LAB_000be9ec;
     fVar9 = -fVar8;
-    if (fVar9 <= fVar6) {
-      if (fVar6 < fVar8) goto LAB_000be94c;
-      uVar14 = 8;
+    if (fVar6 < fVar9) {
+      uVar14 = 4;
     }
     else {
-      uVar14 = 4;
+      if (!(fVar8 <= fVar6)) goto LAB_000be94c;
+      uVar14 = 8;
     }
   }
   else {
@@ -3731,12 +3731,12 @@ uint _gleInterpolClipNO1111(int param_1,float *param_2,int param_3,float *param_
     if (!bVar1) goto LAB_000be9ec;
     fVar9 = -fVar8;
 LAB_000be94c:
-    if (fVar9 <= fVar5) {
-      if (fVar5 < fVar8) goto LAB_000be9ec;
-      uVar14 = 0x20;
+    if (fVar5 < fVar9) {
+      uVar14 = 0x10;
     }
     else {
-      uVar14 = 0x10;
+      if (!(fVar8 <= fVar5)) goto LAB_000be9ec;
+      uVar14 = 0x20;
     }
   }
   bVar1 = uVar14 == 0;
@@ -3844,11 +3844,11 @@ uint _gleInterpolClipNO1111w(int param_1,float *param_2,int param_3,float *param
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar13 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar13 = 2;
       }
       else {
-        uVar13 = 2;
+        uVar13 = 0;
       }
     }
     else {
@@ -3862,12 +3862,12 @@ uint _gleInterpolClipNO1111w(int param_1,float *param_2,int param_3,float *param
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000bedc0;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bed20;
-      uVar13 = 8;
+    if (fVar5 < fVar8) {
+      uVar13 = 4;
     }
     else {
-      uVar13 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000bed20;
+      uVar13 = 8;
     }
   }
   else {
@@ -3907,12 +3907,12 @@ uint _gleInterpolClipNO1111w(int param_1,float *param_2,int param_3,float *param
     if (!bVar1) goto LAB_000bedc0;
     fVar8 = -fVar7;
 LAB_000bed20:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000bedc0;
-      uVar13 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar13 = 0x10;
     }
     else {
-      uVar13 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000bedc0;
+      uVar13 = 0x20;
     }
   }
   bVar1 = uVar13 == 0;
@@ -4008,11 +4008,11 @@ uint _gleInterpolClipNO1200(int param_1,int param_2,int param_3,float *param_4,u
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar16 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar16 = 2;
       }
       else {
-        uVar16 = 2;
+        uVar16 = 0;
       }
     }
     else {
@@ -4026,12 +4026,12 @@ uint _gleInterpolClipNO1200(int param_1,int param_2,int param_3,float *param_4,u
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000bf15c;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bf0bc;
-      uVar16 = 8;
+    if (fVar5 < fVar8) {
+      uVar16 = 4;
     }
     else {
-      uVar16 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000bf0bc;
+      uVar16 = 8;
     }
   }
   else {
@@ -4071,12 +4071,12 @@ uint _gleInterpolClipNO1200(int param_1,int param_2,int param_3,float *param_4,u
     if (!bVar1) goto LAB_000bf15c;
     fVar8 = -fVar7;
 LAB_000bf0bc:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000bf15c;
-      uVar16 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar16 = 0x10;
     }
     else {
-      uVar16 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000bf15c;
+      uVar16 = 0x20;
     }
   }
   bVar1 = uVar16 == 0;
@@ -4191,11 +4191,11 @@ uint _gleInterpolClipNO1200w(int param_1,int param_2,int param_3,float *param_4,
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar15 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar15 = 2;
       }
       else {
-        uVar15 = 2;
+        uVar15 = 0;
       }
     }
     else {
@@ -4209,12 +4209,12 @@ uint _gleInterpolClipNO1200w(int param_1,int param_2,int param_3,float *param_4,
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000bf500;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bf460;
-      uVar15 = 8;
+    if (fVar5 < fVar8) {
+      uVar15 = 4;
     }
     else {
-      uVar15 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000bf460;
+      uVar15 = 8;
     }
   }
   else {
@@ -4254,12 +4254,12 @@ uint _gleInterpolClipNO1200w(int param_1,int param_2,int param_3,float *param_4,
     if (!bVar1) goto LAB_000bf500;
     fVar8 = -fVar7;
 LAB_000bf460:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000bf500;
-      uVar15 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar15 = 0x10;
     }
     else {
-      uVar15 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000bf500;
+      uVar15 = 0x20;
     }
   }
   bVar1 = uVar15 == 0;
@@ -4359,11 +4359,11 @@ uint _gleInterpolClipNO1201(int param_1,float *param_2,int param_3,float *param_
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar15 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar15 = 2;
       }
       else {
-        uVar15 = 2;
+        uVar15 = 0;
       }
     }
     else {
@@ -4377,12 +4377,12 @@ uint _gleInterpolClipNO1201(int param_1,float *param_2,int param_3,float *param_
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000bf86c;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bf7cc;
-      uVar15 = 8;
+    if (fVar5 < fVar8) {
+      uVar15 = 4;
     }
     else {
-      uVar15 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000bf7cc;
+      uVar15 = 8;
     }
   }
   else {
@@ -4422,12 +4422,12 @@ uint _gleInterpolClipNO1201(int param_1,float *param_2,int param_3,float *param_
     if (!bVar1) goto LAB_000bf86c;
     fVar8 = -fVar7;
 LAB_000bf7cc:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000bf86c;
-      uVar15 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar15 = 0x10;
     }
     else {
-      uVar15 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000bf86c;
+      uVar15 = 0x20;
     }
   }
   bVar1 = uVar15 == 0;
@@ -4550,11 +4550,11 @@ uint _gleInterpolClipNO1201w(int param_1,float *param_2,int param_3,float *param
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar15 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar15 = 2;
       }
       else {
-        uVar15 = 2;
+        uVar15 = 0;
       }
     }
     else {
@@ -4568,12 +4568,12 @@ uint _gleInterpolClipNO1201w(int param_1,float *param_2,int param_3,float *param
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000bfc64;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bfbc4;
-      uVar15 = 8;
+    if (fVar5 < fVar8) {
+      uVar15 = 4;
     }
     else {
-      uVar15 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000bfbc4;
+      uVar15 = 8;
     }
   }
   else {
@@ -4613,12 +4613,12 @@ uint _gleInterpolClipNO1201w(int param_1,float *param_2,int param_3,float *param
     if (!bVar1) goto LAB_000bfc64;
     fVar8 = -fVar7;
 LAB_000bfbc4:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000bfc64;
-      uVar15 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar15 = 0x10;
     }
     else {
-      uVar15 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000bfc64;
+      uVar15 = 0x20;
     }
   }
   bVar1 = uVar15 == 0;
@@ -4728,11 +4728,11 @@ uint _gleInterpolClipNO1210(int param_1,int param_2,int param_3,float *param_4,u
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar16 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar16 = 2;
       }
       else {
-        uVar16 = 2;
+        uVar16 = 0;
       }
     }
     else {
@@ -4746,12 +4746,12 @@ uint _gleInterpolClipNO1210(int param_1,int param_2,int param_3,float *param_4,u
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000c0024;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000bff84;
-      uVar16 = 8;
+    if (fVar5 < fVar8) {
+      uVar16 = 4;
     }
     else {
-      uVar16 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000bff84;
+      uVar16 = 8;
     }
   }
   else {
@@ -4791,12 +4791,12 @@ uint _gleInterpolClipNO1210(int param_1,int param_2,int param_3,float *param_4,u
     if (!bVar1) goto LAB_000c0024;
     fVar8 = -fVar7;
 LAB_000bff84:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000c0024;
-      uVar16 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar16 = 0x10;
     }
     else {
-      uVar16 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000c0024;
+      uVar16 = 0x20;
     }
   }
   bVar1 = uVar16 == 0;
@@ -4915,11 +4915,11 @@ uint _gleInterpolClipNO1210w(int param_1,int param_2,int param_3,float *param_4,
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar15 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar15 = 2;
       }
       else {
-        uVar15 = 2;
+        uVar15 = 0;
       }
     }
     else {
@@ -4933,12 +4933,12 @@ uint _gleInterpolClipNO1210w(int param_1,int param_2,int param_3,float *param_4,
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000c03dc;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000c033c;
-      uVar15 = 8;
+    if (fVar5 < fVar8) {
+      uVar15 = 4;
     }
     else {
-      uVar15 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000c033c;
+      uVar15 = 8;
     }
   }
   else {
@@ -4978,12 +4978,12 @@ uint _gleInterpolClipNO1210w(int param_1,int param_2,int param_3,float *param_4,
     if (!bVar1) goto LAB_000c03dc;
     fVar8 = -fVar7;
 LAB_000c033c:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000c03dc;
-      uVar15 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar15 = 0x10;
     }
     else {
-      uVar15 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000c03dc;
+      uVar15 = 0x20;
     }
   }
   bVar1 = uVar15 == 0;
@@ -5087,11 +5087,11 @@ uint _gleInterpolClipNO1211(int param_1,float *param_2,int param_3,float *param_
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar15 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar15 = 2;
       }
       else {
-        uVar15 = 2;
+        uVar15 = 0;
       }
     }
     else {
@@ -5105,12 +5105,12 @@ uint _gleInterpolClipNO1211(int param_1,float *param_2,int param_3,float *param_
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000c075c;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000c06bc;
-      uVar15 = 8;
+    if (fVar5 < fVar8) {
+      uVar15 = 4;
     }
     else {
-      uVar15 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000c06bc;
+      uVar15 = 8;
     }
   }
   else {
@@ -5150,12 +5150,12 @@ uint _gleInterpolClipNO1211(int param_1,float *param_2,int param_3,float *param_
     if (!bVar1) goto LAB_000c075c;
     fVar8 = -fVar7;
 LAB_000c06bc:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000c075c;
-      uVar15 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar15 = 0x10;
     }
     else {
-      uVar15 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000c075c;
+      uVar15 = 0x20;
     }
   }
   bVar1 = uVar15 == 0;
@@ -5279,11 +5279,11 @@ uint _gleInterpolClipNO1211w(int param_1,float *param_2,int param_3,float *param
       fVar12 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar12 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar15 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar15 = 2;
       }
       else {
-        uVar15 = 2;
+        uVar15 = 0;
       }
     }
     else {
@@ -5297,12 +5297,12 @@ uint _gleInterpolClipNO1211w(int param_1,float *param_2,int param_3,float *param
     fVar5 = fVar12 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000c0b68;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000c0ac8;
-      uVar15 = 8;
+    if (fVar5 < fVar8) {
+      uVar15 = 4;
     }
     else {
-      uVar15 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000c0ac8;
+      uVar15 = 8;
     }
   }
   else {
@@ -5342,12 +5342,12 @@ uint _gleInterpolClipNO1211w(int param_1,float *param_2,int param_3,float *param
     if (!bVar1) goto LAB_000c0b68;
     fVar8 = -fVar7;
 LAB_000c0ac8:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000c0b68;
-      uVar15 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar15 = 0x10;
     }
     else {
-      uVar15 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000c0b68;
+      uVar15 = 0x20;
     }
   }
   bVar1 = uVar15 == 0;
@@ -5457,11 +5457,11 @@ uint _gleInterpolClipAllFlat(int param_1,float *param_2,int param_3,float *param
       fVar11 = (fVar6 + fVar5) / ((fVar6 + fVar5) - (fVar10 + fVar9));
       fVar6 = fVar11 * (fVar10 - fVar6) + fVar6;
       fVar5 = -fVar6;
-      if (FLOAT_00108e50 <= fVar6) {
-        uVar15 = 0;
+      if (fVar6 < FLOAT_00108e50) {
+        uVar15 = 2;
       }
       else {
-        uVar15 = 2;
+        uVar15 = 0;
       }
     }
     else {
@@ -5475,12 +5475,12 @@ uint _gleInterpolClipAllFlat(int param_1,float *param_2,int param_3,float *param
     fVar13 = fVar11 * (fVar8 - fVar13) + fVar13;
     if (!bVar1) goto LAB_000c0f3c;
     fVar7 = -fVar6;
-    if (fVar7 <= fVar13) {
-      if (fVar13 < fVar6) goto LAB_000c0e9c;
-      uVar15 = 8;
+    if (fVar13 < fVar7) {
+      uVar15 = 4;
     }
     else {
-      uVar15 = 4;
+      if (!(fVar6 <= fVar13)) goto LAB_000c0e9c;
+      uVar15 = 8;
     }
   }
   else {
@@ -5520,12 +5520,12 @@ uint _gleInterpolClipAllFlat(int param_1,float *param_2,int param_3,float *param
     if (!bVar1) goto LAB_000c0f3c;
     fVar7 = -fVar6;
 LAB_000c0e9c:
-    if (fVar7 <= fVar4) {
-      if (fVar4 < fVar6) goto LAB_000c0f3c;
-      uVar15 = 0x20;
+    if (fVar4 < fVar7) {
+      uVar15 = 0x10;
     }
     else {
-      uVar15 = 0x10;
+      if (!(fVar6 <= fVar4)) goto LAB_000c0f3c;
+      uVar15 = 0x20;
     }
   }
   bVar1 = uVar15 == 0;
@@ -5645,11 +5645,11 @@ uint _gleInterpolClipAllFlatw(int param_1,float *param_2,int param_3,float *para
       fVar11 = (fVar6 + fVar5) / ((fVar6 + fVar5) - (fVar10 + fVar9));
       fVar6 = fVar11 * (fVar10 - fVar6) + fVar6;
       fVar5 = -fVar6;
-      if (FLOAT_00108e50 <= fVar6) {
-        uVar15 = 0;
+      if (fVar6 < FLOAT_00108e50) {
+        uVar15 = 2;
       }
       else {
-        uVar15 = 2;
+        uVar15 = 0;
       }
     }
     else {
@@ -5663,12 +5663,12 @@ uint _gleInterpolClipAllFlatw(int param_1,float *param_2,int param_3,float *para
     fVar13 = fVar11 * (fVar8 - fVar13) + fVar13;
     if (!bVar1) goto LAB_000c1310;
     fVar7 = -fVar6;
-    if (fVar7 <= fVar13) {
-      if (fVar13 < fVar6) goto LAB_000c1270;
-      uVar15 = 8;
+    if (fVar13 < fVar7) {
+      uVar15 = 4;
     }
     else {
-      uVar15 = 4;
+      if (!(fVar6 <= fVar13)) goto LAB_000c1270;
+      uVar15 = 8;
     }
   }
   else {
@@ -5708,12 +5708,12 @@ uint _gleInterpolClipAllFlatw(int param_1,float *param_2,int param_3,float *para
     if (!bVar1) goto LAB_000c1310;
     fVar7 = -fVar6;
 LAB_000c1270:
-    if (fVar7 <= fVar4) {
-      if (fVar4 < fVar6) goto LAB_000c1310;
-      uVar15 = 0x20;
+    if (fVar4 < fVar7) {
+      uVar15 = 0x10;
     }
     else {
-      uVar15 = 0x10;
+      if (!(fVar6 <= fVar4)) goto LAB_000c1310;
+      uVar15 = 0x20;
     }
   }
   bVar1 = uVar15 == 0;
@@ -5823,11 +5823,11 @@ uint _gleInterpolClipAllSmooth(int param_1,float *param_2,int param_3,float *par
       fVar16 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar16 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar19 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar19 = 2;
       }
       else {
-        uVar19 = 2;
+        uVar19 = 0;
       }
     }
     else {
@@ -5841,12 +5841,12 @@ uint _gleInterpolClipAllSmooth(int param_1,float *param_2,int param_3,float *par
     fVar5 = fVar16 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000c16ac;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000c160c;
-      uVar19 = 8;
+    if (fVar5 < fVar8) {
+      uVar19 = 4;
     }
     else {
-      uVar19 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000c160c;
+      uVar19 = 8;
     }
   }
   else {
@@ -5886,12 +5886,12 @@ uint _gleInterpolClipAllSmooth(int param_1,float *param_2,int param_3,float *par
     if (!bVar1) goto LAB_000c16ac;
     fVar8 = -fVar7;
 LAB_000c160c:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000c16ac;
-      uVar19 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar19 = 0x10;
     }
     else {
-      uVar19 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000c16ac;
+      uVar19 = 0x20;
     }
   }
   bVar1 = uVar19 == 0;
@@ -6043,11 +6043,11 @@ uint _gleInterpolClipAllSmoothw(int param_1,float *param_2,int param_3,float *pa
       fVar16 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar11 + fVar10));
       fVar7 = fVar16 * (fVar11 - fVar7) + fVar7;
       fVar6 = -fVar7;
-      if (FLOAT_00108e50 <= fVar7) {
-        uVar19 = 0;
+      if (fVar7 < FLOAT_00108e50) {
+        uVar19 = 2;
       }
       else {
-        uVar19 = 2;
+        uVar19 = 0;
       }
     }
     else {
@@ -6061,12 +6061,12 @@ uint _gleInterpolClipAllSmoothw(int param_1,float *param_2,int param_3,float *pa
     fVar5 = fVar16 * (fVar9 - fVar5) + fVar5;
     if (!bVar1) goto LAB_000c1b58;
     fVar8 = -fVar7;
-    if (fVar8 <= fVar5) {
-      if (fVar5 < fVar7) goto LAB_000c1ab8;
-      uVar19 = 8;
+    if (fVar5 < fVar8) {
+      uVar19 = 4;
     }
     else {
-      uVar19 = 4;
+      if (!(fVar7 <= fVar5)) goto LAB_000c1ab8;
+      uVar19 = 8;
     }
   }
   else {
@@ -6106,12 +6106,12 @@ uint _gleInterpolClipAllSmoothw(int param_1,float *param_2,int param_3,float *pa
     if (!bVar1) goto LAB_000c1b58;
     fVar8 = -fVar7;
 LAB_000c1ab8:
-    if (fVar8 <= fVar4) {
-      if (fVar4 < fVar7) goto LAB_000c1b58;
-      uVar19 = 0x20;
+    if (fVar4 < fVar8) {
+      uVar19 = 0x10;
     }
     else {
-      uVar19 = 0x10;
+      if (!(fVar7 <= fVar4)) goto LAB_000c1b58;
+      uVar19 = 0x20;
     }
   }
   bVar1 = uVar19 == 0;

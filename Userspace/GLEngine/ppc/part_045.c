@@ -259,7 +259,17 @@ int _gleClipLinesPlane(int param_1,int *param_2,int param_3,double fparam_1)
         fVar5 = *(float *)(iVar10 + 0x2c) * fVar2 +
                 (*(float *)(iVar10 + 0x28) * fVar4 +
                 (*(float *)(iVar10 + 0x20) * fVar1 + *(float *)(iVar10 + 0x24) * fVar3));
-        if (fVar7 <= fVar6) {
+        if (fVar6 < fVar7) {
+          if (fVar7 <= fVar5) {
+            fVar5 = fVar6 / (fVar6 - fVar5);
+            iVar8 = iVar10;
+            iVar9 = iVar16;
+LAB_000d7dc4:
+            (**(int ( **)(int,int,int,int,double))(param_1 + 0x49c8))(param_1, iVar9, iVar8, iVar9, (double)fVar5);
+            goto LAB_000d7dd0;
+          }
+        }
+        else {
           if (fVar5 < fVar7) {
             fVar5 = fVar5 / (fVar5 - fVar6);
             iVar8 = iVar16;
@@ -270,14 +280,6 @@ LAB_000d7dd0:
           *piVar14 = iVar16;
           piVar14[1] = iVar10;
           piVar14 = piVar14 + 2;
-        }
-        else if (fVar7 <= fVar5) {
-          fVar5 = fVar6 / (fVar6 - fVar5);
-          iVar8 = iVar10;
-          iVar9 = iVar16;
-LAB_000d7dc4:
-          (**(int ( **)(int,int,int,int,double))(param_1 + 0x49c8))(param_1, iVar9, iVar8, iVar9, (double)fVar5);
-          goto LAB_000d7dd0;
         }
       }
       param_3 = (int)piVar14 - (int)param_2 >> 2;

@@ -1010,38 +1010,32 @@ void _glClearAccum_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3
   }
   dVar2 = (double)FLOAT_00108e58;
   *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x40;
-  if ((double)dVar2 <= fparam_1) {
-    if (fparam_1 <= 1.0) {
-      *(float *)(param_1 + 0x30f0) = (float)fparam_1;
-    }
-    else {
-      *(undefined4 *)(param_1 + 0x30f0) = 0x3f800000;
-    }
-  }
-  else {
+  if (fparam_1 < (double)dVar2) {
     *(float *)(param_1 + 0x30f0) = fVar1;
   }
-  if ((double)FLOAT_00108e58 <= fparam_2) {
-    if (fparam_2 <= 1.0) {
-      *(float *)(param_1 + 0x30f4) = (float)fparam_2;
-    }
-    else {
-      *(undefined4 *)(param_1 + 0x30f4) = 0x3f800000;
-    }
+  else if (1.0 < fparam_1) {
+    *(undefined4 *)(param_1 + 0x30f0) = 0x3f800000;
   }
   else {
+    *(float *)(param_1 + 0x30f0) = (float)fparam_1;
+  }
+  if (fparam_2 < (double)FLOAT_00108e58) {
     *(float *)(param_1 + 0x30f4) = FLOAT_00108e58;
   }
-  if ((double)FLOAT_00108e58 <= fparam_3) {
-    if (fparam_3 <= 1.0) {
-      *(float *)(param_1 + 0x30f8) = (float)fparam_3;
-    }
-    else {
-      *(undefined4 *)(param_1 + 0x30f8) = 0x3f800000;
-    }
+  else if (1.0 < fparam_2) {
+    *(undefined4 *)(param_1 + 0x30f4) = 0x3f800000;
   }
   else {
+    *(float *)(param_1 + 0x30f4) = (float)fparam_2;
+  }
+  if (fparam_3 < (double)FLOAT_00108e58) {
     *(float *)(param_1 + 0x30f8) = FLOAT_00108e58;
+  }
+  else if (1.0 < fparam_3) {
+    *(undefined4 *)(param_1 + 0x30f8) = 0x3f800000;
+  }
+  else {
+    *(float *)(param_1 + 0x30f8) = (float)fparam_3;
   }
   if (fparam_4 < (double)FLOAT_00108e58) {
     *(float *)(param_1 + 0x30fc) = FLOAT_00108e58;

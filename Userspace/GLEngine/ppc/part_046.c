@@ -2994,17 +2994,7 @@ LAB_000e1adc:
   dVar9 = _floor(dVar8);
   dVar10 = DOUBLE_00108e10;
   dVar8 = dVar8 - dVar9;
-  if (dVar8 <= fparam_2) {
-    if (local_50[0] == 0) {
-      if ((int)pcVar5 - (int)pcVar6 < 2) {
-        return (char *)0x0;
-      }
-      *pcVar6 = '.';
-      pcVar6[1] = '0';
-      pcVar6 = pcVar6 + 2;
-    }
-  }
-  else {
+  if (fparam_2 < dVar8) {
     if (pcVar6 == pcVar5) {
       return (char *)0x0;
     }
@@ -3021,6 +3011,14 @@ LAB_000e1adc:
       *pcVar6 = (char)(int)dVar9 + '0';
       pcVar6 = pcVar6 + 1;
     } while (fparam_2 < dVar8);
+  }
+  else if (local_50[0] == 0) {
+    if ((int)pcVar5 - (int)pcVar6 < 2) {
+      return (char *)0x0;
+    }
+    *pcVar6 = '.';
+    pcVar6[1] = '0';
+    pcVar6 = pcVar6 + 2;
   }
   if (local_50[0] != 0) {
     if ((int)pcVar5 - (int)pcVar6 < 3) {

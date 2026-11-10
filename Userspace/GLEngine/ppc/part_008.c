@@ -710,7 +710,7 @@ void _glPointSize_Exec(int param_1,float fparam_1)
   int iVar4;
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
-    if ((double)FLOAT_00108e50 < fparam_1) {
+    if (!(fparam_1 <= (double)FLOAT_00108e50)) {
       *(float *)(param_1 + 0x341c) = (float)fparam_1;
       if (*(int *)(param_1 + 0x5434) == 0) {
         bVar1 = *(byte *)(*(int *)(param_1 + 0x5420) + 0x325);
@@ -847,13 +847,11 @@ void _glPrioritizeTextures_Exec(param_1, param_2, param_3, param_4)
             iVar5 = _gleLookupHashObject(iVar5 + 0x2008,iVar6);
             if (iVar5 != 0) {
               fVar4 = *(float *)(iVar7 * 4 + param_4);
-              if (fVar1 <= fVar4) {
-                if (fVar2 < fVar4) {
-                  fVar4 = 1.0;
-                }
-              }
-              else {
+              if (fVar4 < fVar1) {
                 fVar4 = 0.0;
+              }
+              else if (fVar2 < fVar4) {
+                fVar4 = 1.0;
               }
               *(float *)(iVar5 + 0x38) = fVar4;
             }
@@ -2980,7 +2978,7 @@ double _gleFogLinear(int param_1,float fparam_1)
   if ((double)*(float *)(param_1 + 0x24) < (double)dVar1) {
     return (double)*(float *)(param_1 + 0x24);
   }
-  if ((double)FLOAT_00108e50 <= (double)dVar1) {
+  if (!((double)dVar1 < (double)FLOAT_00108e50)) {
     return (double)dVar1;
   }
   return (double)FLOAT_00108e50;
@@ -3126,52 +3124,44 @@ LAB_000535f8:
       goto LAB_0005360c;
     }
     fVar3 = *param_3;
-    if (FLOAT_00108e50 <= fVar3) {
-      if (fVar3 <= FLOAT_00108e54) {
-        *(float *)(param_1 + 0x3140) = fVar3;
-      }
-      else {
-        *(float *)(param_1 + 0x3140) = FLOAT_00108e54;
-      }
-    }
-    else {
+    if (fVar3 < FLOAT_00108e50) {
       *(float *)(param_1 + 0x3140) = FLOAT_00108e50;
     }
-    fVar3 = param_3[1];
-    if (fVar4 <= fVar3) {
-      if (fVar3 <= fVar5) {
-        *(float *)(param_1 + 0x3144) = fVar3;
-      }
-      else {
-        *(float *)(param_1 + 0x3144) = fVar5;
-      }
+    else if (FLOAT_00108e54 < fVar3) {
+      *(float *)(param_1 + 0x3140) = FLOAT_00108e54;
     }
     else {
+      *(float *)(param_1 + 0x3140) = fVar3;
+    }
+    fVar3 = param_3[1];
+    if (fVar3 < fVar4) {
       *(float *)(param_1 + 0x3144) = fVar4;
     }
-    fVar3 = param_3[2];
-    if (fVar4 <= fVar3) {
-      if (fVar3 <= fVar5) {
-        *(float *)(param_1 + 0x3148) = fVar3;
-      }
-      else {
-        *(float *)(param_1 + 0x3148) = fVar5;
-      }
+    else if (fVar5 < fVar3) {
+      *(float *)(param_1 + 0x3144) = fVar5;
     }
     else {
+      *(float *)(param_1 + 0x3144) = fVar3;
+    }
+    fVar3 = param_3[2];
+    if (fVar3 < fVar4) {
       *(float *)(param_1 + 0x3148) = fVar4;
     }
-    fVar3 = param_3[3];
-    if (fVar4 <= fVar3) {
-      if (fVar3 <= fVar5) {
-        *(float *)(param_1 + 0x314c) = fVar3;
-      }
-      else {
-        *(float *)(param_1 + 0x314c) = fVar5;
-      }
+    else if (fVar5 < fVar3) {
+      *(float *)(param_1 + 0x3148) = fVar5;
     }
     else {
+      *(float *)(param_1 + 0x3148) = fVar3;
+    }
+    fVar3 = param_3[3];
+    if (fVar3 < fVar4) {
       *(float *)(param_1 + 0x314c) = fVar4;
+    }
+    else if (fVar5 < fVar3) {
+      *(float *)(param_1 + 0x314c) = fVar5;
+    }
+    else {
+      *(float *)(param_1 + 0x314c) = fVar3;
     }
     if (*(int *)(param_1 + 0x5434) == 0) {
       bVar2 = *(byte *)(*(int *)(param_1 + 0x5420) + 0x322);
@@ -4037,11 +4027,11 @@ void _gleSetRasterPos(int param_1,float fparam_1,float fparam_2,float fparam_3,f
     *(float *)(iVar14 + -0x1ec) = fVar9;
     *(float *)(iVar14 + -0x1e8) = fVar10;
     *(float *)(iVar14 + -0x1e4) = fVar12;
-    if (fVar12 < fVar4) {
-      bVar2 = fVar12 <= FLOAT_00108f3c;
+    if (fVar4 <= fVar12) {
+      bVar2 = FLOAT_00108e80 <= fVar12;
     }
     else {
-      bVar2 = FLOAT_00108e80 <= fVar12;
+      bVar2 = fVar12 <= FLOAT_00108f3c;
     }
     if (bVar2) {
       fVar3 = FLOAT_00108e54 / fVar12;

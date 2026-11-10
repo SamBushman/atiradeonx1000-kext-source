@@ -2468,38 +2468,32 @@ void _glClearColor_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3
   dVar3 = (double)FLOAT_00108e50;
   dVar4 = (double)FLOAT_00108e54;
   *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 8;
-  if ((double)dVar3 <= fparam_1) {
-    if (fparam_1 <= (double)dVar4) {
-      *(float *)(param_1 + 0x3100) = (float)fparam_1;
-    }
-    else {
-      *(float *)(param_1 + 0x3100) = fVar2;
-    }
-  }
-  else {
+  if (fparam_1 < (double)dVar3) {
     *(float *)(param_1 + 0x3100) = fVar1;
   }
-  if ((double)dVar3 <= fparam_2) {
-    if (fparam_2 <= (double)dVar4) {
-      *(float *)(param_1 + 0x3104) = (float)fparam_2;
-    }
-    else {
-      *(float *)(param_1 + 0x3104) = fVar2;
-    }
+  else if ((double)dVar4 < fparam_1) {
+    *(float *)(param_1 + 0x3100) = fVar2;
   }
   else {
+    *(float *)(param_1 + 0x3100) = (float)fparam_1;
+  }
+  if (fparam_2 < (double)dVar3) {
     *(float *)(param_1 + 0x3104) = fVar1;
   }
-  if ((double)dVar3 <= fparam_3) {
-    if (fparam_3 <= (double)dVar4) {
-      *(float *)(param_1 + 0x3108) = (float)fparam_3;
-    }
-    else {
-      *(float *)(param_1 + 0x3108) = fVar2;
-    }
+  else if ((double)dVar4 < fparam_2) {
+    *(float *)(param_1 + 0x3104) = fVar2;
   }
   else {
+    *(float *)(param_1 + 0x3104) = (float)fparam_2;
+  }
+  if (fparam_3 < (double)dVar3) {
     *(float *)(param_1 + 0x3108) = fVar1;
+  }
+  else if ((double)dVar4 < fparam_3) {
+    *(float *)(param_1 + 0x3108) = fVar2;
+  }
+  else {
+    *(float *)(param_1 + 0x3108) = (float)fparam_3;
   }
   if (fparam_4 < (double)dVar3) {
     *(float *)(param_1 + 0x310c) = fVar1;
@@ -5655,7 +5649,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0x81;
-                      if (fVar8 <= local_1a0) {
+                      if (!(local_1a0 < fVar8)) {
                         iVar1 = (int)(local_1a0 * fVar9);
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                         uVar16 = (undefined1)local_c8;
@@ -5668,7 +5662,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0x81;
-                      if (fVar8 <= local_1ac) {
+                      if (!(local_1ac < fVar8)) {
                         iVar1 = (int)(local_1ac * fVar9);
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                         uVar16 = (undefined1)local_c8;
@@ -5714,7 +5708,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0;
-                    if (fVar7 <= local_1ac) {
+                    if (!(local_1ac < fVar7)) {
                       iVar1 = (int)(local_1ac * fVar9);
                       (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                       uVar16 = (undefined1)local_c8;
@@ -5727,7 +5721,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0;
-                    if (fVar7 <= local_1a0) {
+                    if (!(local_1a0 < fVar7)) {
                       iVar1 = (int)(local_1a0 * fVar9);
                       (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                       uVar16 = (undefined1)local_c8;
@@ -5815,7 +5809,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                         }
                         else {
                           uVar16 = 0x81;
-                          if (fVar8 <= local_1ac) {
+                          if (!(local_1ac < fVar8)) {
                             (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                             uVar16 = (undefined1)local_c8;
                             local_c8 = (longlong)(int)(local_1ac * fVar9);
@@ -5827,7 +5821,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                         }
                         else {
                           uVar16 = 0x81;
-                          if (fVar8 <= local_1a8) {
+                          if (!(local_1a8 < fVar8)) {
                             (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * fVar9);
                             uVar16 = (undefined1)local_c8;
                             local_c8 = (longlong)(int)(local_1a8 * fVar9);
@@ -5839,7 +5833,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                         }
                         else {
                           uVar16 = 0x81;
-                          if (fVar8 <= local_1a4) {
+                          if (!(local_1a4 < fVar8)) {
                             (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * fVar9);
                             uVar16 = (undefined1)local_c8;
                             local_c8 = (longlong)(int)(local_1a4 * fVar9);
@@ -6004,7 +5998,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1ac) {
+                      if (!(local_1ac < fVar7)) {
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                         uVar16 = (undefined1)local_c8;
                         local_c8 = (longlong)(int)(local_1ac * fVar9);
@@ -6016,7 +6010,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1a8) {
+                      if (!(local_1a8 < fVar7)) {
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * fVar9);
                         uVar16 = (undefined1)local_c8;
                         local_c8 = (longlong)(int)(local_1a8 * fVar9);
@@ -6028,7 +6022,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1a4) {
+                      if (!(local_1a4 < fVar7)) {
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * fVar9);
                         uVar16 = (undefined1)local_c8;
                         local_c8 = (longlong)(int)(local_1a4 * fVar9);
@@ -6075,7 +6069,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                         }
                         else {
                           uVar16 = 0;
-                          if (fVar7 <= local_1a0) {
+                          if (!(local_1a0 < fVar7)) {
                             (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * fVar9);
                             uVar16 = (undefined1)local_c8;
                             local_c8 = (longlong)(int)(local_1a0 * fVar9);
@@ -6119,7 +6113,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0;
-                        if (fVar7 <= local_1a0) {
+                        if (!(local_1a0 < fVar7)) {
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * fVar9);
                           uVar16 = (undefined1)local_c8;
                           local_c8 = (longlong)(int)(local_1a0 * fVar9);
@@ -6280,7 +6274,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                             }
                             else {
                               uVar16 = 0x81;
-                              if (fVar8 <= local_1ac) {
+                              if (!(local_1ac < fVar8)) {
                                 (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                                 uVar16 = (undefined1)local_c8;
                                 local_c8 = (longlong)(int)(local_1ac * fVar9);
@@ -6292,7 +6286,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                             }
                             else {
                               uVar16 = 0x81;
-                              if (fVar8 <= local_1a8) {
+                              if (!(local_1a8 < fVar8)) {
                                 (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * fVar9);
                                 uVar16 = (undefined1)local_c8;
                                 local_c8 = (longlong)(int)(local_1a8 * fVar9);
@@ -6304,7 +6298,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                             }
                             else {
                               uVar16 = 0x81;
-                              if (fVar8 <= local_1a4) {
+                              if (!(local_1a4 < fVar8)) {
                                 (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * fVar9);
                                 uVar16 = (undefined1)local_c8;
                                 local_c8 = (longlong)(int)(local_1a4 * fVar9);
@@ -6316,7 +6310,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                             }
                             else {
                               uVar16 = 0x81;
-                              if (fVar8 <= local_1a0) {
+                              if (!(local_1a0 < fVar8)) {
                                 (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * fVar9);
                                 uVar16 = (undefined1)local_c8;
                                 local_c8 = (longlong)(int)(local_1a0 * fVar9);
@@ -6704,7 +6698,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0;
-                        if (fVar7 <= local_1ac) {
+                        if (!(local_1ac < fVar7)) {
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                           uVar16 = (undefined1)local_c8;
                           local_c8 = (longlong)(int)(local_1ac * fVar9);
@@ -6716,7 +6710,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0;
-                        if (fVar7 <= local_1a8) {
+                        if (!(local_1a8 < fVar7)) {
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * fVar9);
                           uVar16 = (undefined1)local_c8;
                           local_c8 = (longlong)(int)(local_1a8 * fVar9);
@@ -6728,7 +6722,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0;
-                        if (fVar7 <= local_1a4) {
+                        if (!(local_1a4 < fVar7)) {
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * fVar9);
                           uVar16 = (undefined1)local_c8;
                           local_c8 = (longlong)(int)(local_1a4 * fVar9);
@@ -6740,7 +6734,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0;
-                        if (fVar7 <= local_1a0) {
+                        if (!(local_1a0 < fVar7)) {
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * fVar9);
                           uVar16 = (undefined1)local_c8;
                           local_c8 = (longlong)(int)(local_1a0 * fVar9);
@@ -6786,7 +6780,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                         }
                         else {
                           uVar16 = 0x81;
-                          if (fVar8 <= local_1ac) {
+                          if (!(local_1ac < fVar8)) {
                             (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                             uVar16 = (undefined1)local_c8;
                             local_c8 = (longlong)(int)(local_1ac * fVar9);
@@ -6830,7 +6824,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0;
-                        if (fVar7 <= local_1ac) {
+                        if (!(local_1ac < fVar7)) {
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                           uVar16 = (undefined1)local_c8;
                           local_c8 = (longlong)(int)(local_1ac * fVar9);
@@ -6883,7 +6877,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar15 = 0x8001;
-                        if (fVar8 <= local_190) {
+                        if (!(local_190 < fVar8)) {
                           iVar1 = (int)(local_190 * fVar9);
                           (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)iVar1;
                           uVar15 = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
@@ -6896,7 +6890,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar15 = 0x8001;
-                        if (fVar8 <= local_18c) {
+                        if (!(local_18c < fVar8)) {
                           iVar1 = (int)(local_18c * fVar9);
                           (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)iVar1;
                           uVar15 = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
@@ -6944,7 +6938,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar15 = 0;
-                        if (fVar7 <= local_190) {
+                        if (!(local_190 < fVar7)) {
                           iVar1 = (int)(local_190 * fVar9);
                           (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)iVar1;
                           uVar15 = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
@@ -6957,7 +6951,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar15 = 0;
-                        if (fVar7 <= local_18c) {
+                        if (!(local_18c < fVar7)) {
                           iVar1 = (int)(local_18c * fVar9);
                           (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)iVar1;
                           uVar15 = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
@@ -7002,7 +6996,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0x81;
-                        if (fVar8 <= local_190) {
+                        if (!(local_190 < fVar8)) {
                           iVar1 = (int)(local_190 * fVar9);
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                           uVar16 = (undefined1)local_c8;
@@ -7015,7 +7009,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0x81;
-                        if (fVar8 <= local_18c) {
+                        if (!(local_18c < fVar8)) {
                           iVar1 = (int)(local_18c * fVar9);
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                           uVar16 = (undefined1)local_c8;
@@ -7059,7 +7053,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_190) {
+                      if (!(local_190 < fVar7)) {
                         iVar1 = (int)(local_190 * fVar9);
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                         uVar16 = (undefined1)local_c8;
@@ -7072,7 +7066,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_18c) {
+                      if (!(local_18c < fVar7)) {
                         iVar1 = (int)(local_18c * fVar9);
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                         uVar16 = (undefined1)local_c8;
@@ -7236,7 +7230,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                             }
                             else {
                               uVar16 = 0;
-                              if (fVar7 <= local_1a0) {
+                              if (!(local_1a0 < fVar7)) {
                                 (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * fVar11);
                                 uVar16 = (undefined1)local_c8;
                                 local_c8 = (longlong)(int)(local_1a0 * fVar11);
@@ -7248,7 +7242,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                             }
                             else {
                               uVar16 = 0x81;
-                              if (fVar9 <= local_1ac) {
+                              if (!(local_1ac < fVar9)) {
                                 (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar10);
                                 uVar16 = (undefined1)local_c8;
                                 local_c8 = (longlong)(int)(local_1ac * fVar10);
@@ -7260,7 +7254,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                             }
                             else {
                               uVar16 = 0x81;
-                              if (fVar9 <= local_1a8) {
+                              if (!(local_1a8 < fVar9)) {
                                 (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * fVar10);
                                 uVar16 = (undefined1)local_c8;
                                 local_c8 = (longlong)(int)(local_1a8 * fVar10);
@@ -7272,7 +7266,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                             }
                             else {
                               uVar16 = 0x81;
-                              if (fVar9 <= local_1a4) {
+                              if (!(local_1a4 < fVar9)) {
                                 (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * fVar10);
                                 uVar16 = (undefined1)local_c8;
                                 local_c8 = (longlong)(int)(local_1a4 * fVar10);
@@ -7661,7 +7655,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0;
-                        if (fVar7 <= local_1a4) {
+                        if (!(local_1a4 < fVar7)) {
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * fVar9);
                           uVar16 = (undefined1)local_c8;
                           local_c8 = (longlong)(int)(local_1a4 * fVar9);
@@ -7673,7 +7667,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0;
-                        if (fVar7 <= local_1a8) {
+                        if (!(local_1a8 < fVar7)) {
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * fVar9);
                           uVar16 = (undefined1)local_c8;
                           local_c8 = (longlong)(int)(local_1a8 * fVar9);
@@ -7685,7 +7679,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0;
-                        if (fVar7 <= local_1ac) {
+                        if (!(local_1ac < fVar7)) {
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                           uVar16 = (undefined1)local_c8;
                           local_c8 = (longlong)(int)(local_1ac * fVar9);
@@ -7697,7 +7691,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0;
-                        if (fVar7 <= local_1a0) {
+                        if (!(local_1a0 < fVar7)) {
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * fVar9);
                           uVar16 = (undefined1)local_c8;
                           local_c8 = (longlong)(int)(local_1a0 * fVar9);
@@ -7745,7 +7739,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0x81;
-                        if (fVar8 <= local_188) {
+                        if (!(local_188 < fVar8)) {
                           iVar1 = (int)(local_188 * fVar9);
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                           uVar16 = (undefined1)local_c8;
@@ -7758,7 +7752,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0x81;
-                        if (fVar8 <= local_184) {
+                        if (!(local_184 < fVar8)) {
                           iVar1 = (int)(local_184 * fVar9);
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                           uVar16 = (undefined1)local_c8;
@@ -7809,7 +7803,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1ac) {
+                      if (!(local_1ac < fVar7)) {
                         iVar1 = (int)(local_1ac * fVar11);
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                         uVar16 = (undefined1)local_c8;
@@ -7822,7 +7816,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_180) {
+                      if (!(local_180 < fVar7)) {
                         iVar1 = (int)(local_180 * fVar11);
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                         uVar16 = (undefined1)local_c8;
@@ -7835,7 +7829,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0x81;
-                      if (fVar9 <= local_184) {
+                      if (!(local_184 < fVar9)) {
                         iVar1 = (int)(local_184 * fVar10);
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                         uVar16 = (undefined1)local_c8;
@@ -7848,7 +7842,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0x81;
-                      if (fVar9 <= local_188) {
+                      if (!(local_188 < fVar9)) {
                         iVar1 = (int)(local_188 * fVar10);
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                         uVar16 = (undefined1)local_c8;
@@ -7896,7 +7890,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0x81;
-                    if (fVar8 <= local_1ac) {
+                    if (!(local_1ac < fVar8)) {
                       (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                       uVar16 = (undefined1)local_c8;
                       local_c8 = (longlong)(int)(local_1ac * fVar9);
@@ -7940,7 +7934,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                 }
                 else {
                   uVar16 = 0;
-                  if (fVar7 <= local_1ac) {
+                  if (!(local_1ac < fVar7)) {
                     (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                     uVar16 = (undefined1)local_c8;
                     local_c8 = (longlong)(int)(local_1ac * fVar9);
@@ -7986,7 +7980,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0x81;
-                    if (fVar8 <= local_1a0) {
+                    if (!(local_1a0 < fVar8)) {
                       iVar1 = (int)(local_1a0 * fVar9);
                       (*(unsigned char *)((unsigned char *)&(local_100) + 7)) = (undefined1)iVar1;
                       uVar16 = (undefined1)local_100;
@@ -7999,7 +7993,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0x81;
-                    if (fVar8 <= local_1ac) {
+                    if (!(local_1ac < fVar8)) {
                       iVar1 = (int)(local_1ac * fVar9);
                       (*(unsigned char *)((unsigned char *)&(local_100) + 7)) = (undefined1)iVar1;
                       uVar16 = (undefined1)local_100;
@@ -8042,7 +8036,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                 }
                 else {
                   uVar16 = 0;
-                  if (fVar7 <= local_1ac) {
+                  if (!(local_1ac < fVar7)) {
                     iVar1 = (int)(local_1ac * fVar9);
                     (*(unsigned char *)((unsigned char *)&(local_100) + 7)) = (undefined1)iVar1;
                     uVar16 = (undefined1)local_100;
@@ -8055,7 +8049,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                 }
                 else {
                   uVar16 = 0;
-                  if (fVar7 <= local_1a0) {
+                  if (!(local_1a0 < fVar7)) {
                     iVar1 = (int)(local_1a0 * fVar9);
                     (*(unsigned char *)((unsigned char *)&(local_100) + 7)) = (undefined1)iVar1;
                     uVar16 = (undefined1)local_100;
@@ -8142,7 +8136,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0x81;
-                        if (fVar8 <= local_1ac) {
+                        if (!(local_1ac < fVar8)) {
                           (*(unsigned char *)((unsigned char *)&(local_f0) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                           uVar16 = (undefined1)local_f0;
                           local_f0 = (longlong)(int)(local_1ac * fVar9);
@@ -8154,7 +8148,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0x81;
-                        if (fVar8 <= local_1a8) {
+                        if (!(local_1a8 < fVar8)) {
                           (*(unsigned char *)((unsigned char *)&(local_f0) + 7)) = (undefined1)(int)(local_1a8 * fVar9);
                           uVar16 = (undefined1)local_f0;
                           local_f0 = (longlong)(int)(local_1a8 * fVar9);
@@ -8166,7 +8160,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0x81;
-                        if (fVar8 <= local_1a4) {
+                        if (!(local_1a4 < fVar8)) {
                           (*(unsigned char *)((unsigned char *)&(local_f0) + 7)) = (undefined1)(int)(local_1a4 * fVar9);
                           uVar16 = (undefined1)local_f0;
                           local_f0 = (longlong)(int)(local_1a4 * fVar9);
@@ -8323,7 +8317,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0;
-                    if (fVar7 <= local_1ac) {
+                    if (!(local_1ac < fVar7)) {
                       (*(unsigned char *)((unsigned char *)&(local_f0) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                       uVar16 = (undefined1)local_f0;
                       local_f0 = (longlong)(int)(local_1ac * fVar9);
@@ -8335,7 +8329,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0;
-                    if (fVar7 <= local_1a8) {
+                    if (!(local_1a8 < fVar7)) {
                       (*(unsigned char *)((unsigned char *)&(local_f0) + 7)) = (undefined1)(int)(local_1a8 * fVar9);
                       uVar16 = (undefined1)local_f0;
                       local_f0 = (longlong)(int)(local_1a8 * fVar9);
@@ -8347,7 +8341,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0;
-                    if (fVar7 <= local_1a4) {
+                    if (!(local_1a4 < fVar7)) {
                       (*(unsigned char *)((unsigned char *)&(local_f0) + 7)) = (undefined1)(int)(local_1a4 * fVar9);
                       uVar16 = (undefined1)local_f0;
                       local_f0 = (longlong)(int)(local_1a4 * fVar9);
@@ -8467,7 +8461,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0;
-                        if (fVar7 <= local_1a0) {
+                        if (!(local_1a0 < fVar7)) {
                           (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * fVar9);
                           uVar16 = (undefined1)local_c8;
                           local_c8 = (longlong)(int)(local_1a0 * fVar9);
@@ -8509,7 +8503,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1a0) {
+                      if (!(local_1a0 < fVar7)) {
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * fVar9);
                         uVar16 = (undefined1)local_c8;
                         local_c8 = (longlong)(int)(local_1a0 * fVar9);
@@ -8627,7 +8621,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                         }
                         else {
                           uVar16 = 0x81;
-                          if (fVar8 <= local_1a0) {
+                          if (!(local_1a0 < fVar8)) {
                             (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * fVar9);
                             uVar16 = (undefined1)local_c8;
                             local_c8 = (longlong)(int)(local_1a0 * fVar9);
@@ -8639,7 +8633,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                         }
                         else {
                           uVar16 = 0x81;
-                          if (fVar8 <= local_1ac) {
+                          if (!(local_1ac < fVar8)) {
                             (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                             uVar16 = (undefined1)local_c8;
                             local_c8 = (longlong)(int)(local_1ac * fVar9);
@@ -8651,7 +8645,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                         }
                         else {
                           uVar16 = 0x81;
-                          if (fVar8 <= local_1a8) {
+                          if (!(local_1a8 < fVar8)) {
                             (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * fVar9);
                             uVar16 = (undefined1)local_c8;
                             local_c8 = (longlong)(int)(local_1a8 * fVar9);
@@ -8663,7 +8657,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                         }
                         else {
                           uVar16 = 0x81;
-                          if (fVar8 <= local_1a4) {
+                          if (!(local_1a4 < fVar8)) {
                             (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * fVar9);
                             uVar16 = (undefined1)local_c8;
                             local_c8 = (longlong)(int)(local_1a4 * fVar9);
@@ -8711,7 +8705,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                           }
                           else {
                             uVar16 = 0;
-                            if (fVar7 <= local_1a0) {
+                            if (!(local_1a0 < fVar7)) {
                               (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * fVar11);
                               uVar16 = (undefined1)local_c8;
                               local_c8 = (longlong)(int)(local_1a0 * fVar11);
@@ -8723,7 +8717,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                           }
                           else {
                             uVar16 = 0x81;
-                            if (fVar9 <= local_1ac) {
+                            if (!(local_1ac < fVar9)) {
                               (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar10);
                               uVar16 = (undefined1)local_c8;
                               local_c8 = (longlong)(int)(local_1ac * fVar10);
@@ -8735,7 +8729,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                           }
                           else {
                             uVar16 = 0x81;
-                            if (fVar9 <= local_1a8) {
+                            if (!(local_1a8 < fVar9)) {
                               (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * fVar10);
                               uVar16 = (undefined1)local_c8;
                               local_c8 = (longlong)(int)(local_1a8 * fVar10);
@@ -8747,7 +8741,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                           }
                           else {
                             uVar16 = 0x81;
-                            if (fVar9 <= local_1a4) {
+                            if (!(local_1a4 < fVar9)) {
                               (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * fVar10);
                               uVar16 = (undefined1)local_c8;
                               local_c8 = (longlong)(int)(local_1a4 * fVar10);
@@ -9164,7 +9158,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1ac) {
+                      if (!(local_1ac < fVar7)) {
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                         uVar16 = (undefined1)local_c8;
                         local_c8 = (longlong)(int)(local_1ac * fVar9);
@@ -9176,7 +9170,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1a8) {
+                      if (!(local_1a8 < fVar7)) {
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * fVar9);
                         uVar16 = (undefined1)local_c8;
                         local_c8 = (longlong)(int)(local_1a8 * fVar9);
@@ -9188,7 +9182,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1a4) {
+                      if (!(local_1a4 < fVar7)) {
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * fVar9);
                         uVar16 = (undefined1)local_c8;
                         local_c8 = (longlong)(int)(local_1a4 * fVar9);
@@ -9200,7 +9194,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1a0) {
+                      if (!(local_1a0 < fVar7)) {
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * fVar9);
                         uVar16 = (undefined1)local_c8;
                         local_c8 = (longlong)(int)(local_1a0 * fVar9);
@@ -9245,7 +9239,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                       }
                       else {
                         uVar16 = 0x81;
-                        if (fVar8 <= local_1ac) {
+                        if (!(local_1ac < fVar8)) {
                           (*(unsigned char *)((unsigned char *)&(local_100) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                           uVar16 = (undefined1)local_100;
                           local_100 = (longlong)(int)(local_1ac * fVar9);
@@ -9287,7 +9281,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1ac) {
+                      if (!(local_1ac < fVar7)) {
                         (*(unsigned char *)((unsigned char *)&(local_100) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                         uVar16 = (undefined1)local_100;
                         local_100 = (longlong)(int)(local_1ac * fVar9);
@@ -9337,7 +9331,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar15 = 0x8001;
-                      if (fVar9 <= local_190) {
+                      if (!(local_190 < fVar9)) {
                         (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)(int)(local_190 * fVar7);
                         uVar15 = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
                         local_c8 = (longlong)(int)(local_190 * fVar7);
@@ -9349,7 +9343,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar15 = 0x8001;
-                      if (fVar9 <= local_18c) {
+                      if (!(local_18c < fVar9)) {
                         (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)(int)(local_18c * fVar7);
                         uVar15 = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
                         local_c8 = (longlong)(int)(local_18c * fVar7);
@@ -9393,7 +9387,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar15 = 0;
-                      if (fVar8 <= local_190) {
+                      if (!(local_190 < fVar8)) {
                         (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)(int)(local_190 * fVar7);
                         uVar15 = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
                         local_c8 = (longlong)(int)(local_190 * fVar7);
@@ -9405,7 +9399,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar15 = 0;
-                      if (fVar8 <= local_18c) {
+                      if (!(local_18c < fVar8)) {
                         (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)(int)(local_18c * fVar7);
                         uVar15 = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
                         local_c8 = (longlong)(int)(local_18c * fVar7);
@@ -9448,7 +9442,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0x81;
-                      if (fVar8 <= local_190) {
+                      if (!(local_190 < fVar8)) {
                         iVar1 = (int)(local_190 * fVar9);
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                         uVar16 = (undefined1)local_c8;
@@ -9461,7 +9455,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0x81;
-                      if (fVar8 <= local_18c) {
+                      if (!(local_18c < fVar8)) {
                         iVar1 = (int)(local_18c * fVar9);
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                         uVar16 = (undefined1)local_c8;
@@ -9504,7 +9498,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0;
-                    if (fVar7 <= local_190) {
+                    if (!(local_190 < fVar7)) {
                       iVar1 = (int)(local_190 * fVar9);
                       (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                       uVar16 = (undefined1)local_c8;
@@ -9517,7 +9511,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0;
-                    if (fVar7 <= local_18c) {
+                    if (!(local_18c < fVar7)) {
                       iVar1 = (int)(local_18c * fVar9);
                       (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                       uVar16 = (undefined1)local_c8;
@@ -10004,7 +9998,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1a4) {
+                      if (!(local_1a4 < fVar7)) {
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * fVar9);
                         uVar16 = (undefined1)local_c8;
                         local_c8 = (longlong)(int)(local_1a4 * fVar9);
@@ -10016,7 +10010,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1a8) {
+                      if (!(local_1a8 < fVar7)) {
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * fVar9);
                         uVar16 = (undefined1)local_c8;
                         local_c8 = (longlong)(int)(local_1a8 * fVar9);
@@ -10028,7 +10022,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1ac) {
+                      if (!(local_1ac < fVar7)) {
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                         uVar16 = (undefined1)local_c8;
                         local_c8 = (longlong)(int)(local_1ac * fVar9);
@@ -10040,7 +10034,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0;
-                      if (fVar7 <= local_1a0) {
+                      if (!(local_1a0 < fVar7)) {
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * fVar9);
                         uVar16 = (undefined1)local_c8;
                         local_c8 = (longlong)(int)(local_1a0 * fVar9);
@@ -10087,7 +10081,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0x81;
-                      if (fVar8 <= local_188) {
+                      if (!(local_188 < fVar8)) {
                         iVar1 = (int)(local_188 * fVar9);
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                         uVar16 = (undefined1)local_c8;
@@ -10100,7 +10094,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                     }
                     else {
                       uVar16 = 0x81;
-                      if (fVar8 <= local_184) {
+                      if (!(local_184 < fVar8)) {
                         iVar1 = (int)(local_184 * fVar9);
                         (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                         uVar16 = (undefined1)local_c8;
@@ -10150,7 +10144,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0x81;
-                    if (fVar9 <= local_188) {
+                    if (!(local_188 < fVar9)) {
                       iVar1 = (int)(local_188 * fVar10);
                       (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                       uVar16 = (undefined1)local_c8;
@@ -10163,7 +10157,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0x81;
-                    if (fVar9 <= local_184) {
+                    if (!(local_184 < fVar9)) {
                       iVar1 = (int)(local_184 * fVar10);
                       (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                       uVar16 = (undefined1)local_c8;
@@ -10176,7 +10170,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0;
-                    if (fVar7 <= local_180) {
+                    if (!(local_180 < fVar7)) {
                       iVar1 = (int)(local_180 * fVar11);
                       (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                       uVar16 = (undefined1)local_c8;
@@ -10189,7 +10183,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                   }
                   else {
                     uVar16 = 0;
-                    if (fVar7 <= local_1ac) {
+                    if (!(local_1ac < fVar7)) {
                       iVar1 = (int)(local_1ac * fVar11);
                       (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)iVar1;
                       uVar16 = (undefined1)local_c8;
@@ -10236,7 +10230,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
                 }
                 else {
                   uVar16 = 0x81;
-                  if (fVar8 <= local_1ac) {
+                  if (!(local_1ac < fVar8)) {
                     (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                     uVar16 = (undefined1)local_c8;
                     local_c8 = (longlong)(int)(local_1ac * fVar9);
@@ -10278,7 +10272,7 @@ void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param
               }
               else {
                 uVar16 = 0;
-                if (fVar7 <= local_1ac) {
+                if (!(local_1ac < fVar7)) {
                   (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * fVar9);
                   uVar16 = (undefined1)local_c8;
                   local_c8 = (longlong)(int)(local_1ac * fVar9);

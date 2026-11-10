@@ -256,17 +256,15 @@ double _gleSetWindowPos(int param_1,float fparam_1,float fparam_2,double fparam_
   *(undefined1 *)(iVar6 + -0x181) = 0;
   *(float *)(param_1 + 0x2e0) = (float)fparam_1;
   *(float *)(param_1 + 0x2e4) = (float)fparam_2;
-  if (dVar10 <= fparam_3) {
-    if (fparam_3 <= 1.0) {
-      dVar10 = fparam_3 * (*(double *)(param_1 + 0x1b98) - *(double *)(param_1 + 0x1b90)) +
-               *(double *)(param_1 + 0x1b90);
-    }
-    else {
-      dVar10 = *(double *)(param_1 + 0x1b98);
-    }
+  if (fparam_3 < dVar10) {
+    dVar10 = *(double *)(param_1 + 0x1b90);
+  }
+  else if (1.0 < fparam_3) {
+    dVar10 = *(double *)(param_1 + 0x1b98);
   }
   else {
-    dVar10 = *(double *)(param_1 + 0x1b90);
+    dVar10 = fparam_3 * (*(double *)(param_1 + 0x1b98) - *(double *)(param_1 + 0x1b90)) +
+             *(double *)(param_1 + 0x1b90);
   }
   *(float *)(param_1 + 0x2e8) = (float)dVar10;
   *(undefined4 *)(iVar6 + -500) = 0x3f800000;

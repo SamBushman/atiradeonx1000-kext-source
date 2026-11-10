@@ -852,7 +852,7 @@ void _gleModifyPixelDepth(param_1, param_2)
   
   fVar1 = *(float *)(param_2 + 0x14) * *(float *)(param_1 + 0x320c) + *(float *)(param_1 + 0x3208);
   fVar2 = FLOAT_00108e50;
-  if ((FLOAT_00108e50 <= fVar1) && (fVar2 = fVar1, FLOAT_00108e54 < fVar1)) {
+  if ((!(fVar1 < FLOAT_00108e50)) && (fVar2 = fVar1, FLOAT_00108e54 < fVar1)) {
     fVar2 = FLOAT_00108e54;
   }
   *(float *)(param_2 + 0x14) = fVar2;
@@ -1199,7 +1199,7 @@ void _gleModifyPixelDSDTMagVib(int param_1,int param_2,double fparam_1,double fp
   fVar4 = *(float *)(param_2 + 0x30) * *(float *)(param_1 + 0x323c) + *(float *)(param_1 + 0x3238);
   fVar2 = *(float *)(param_2 + 4) * *(float *)(param_1 + 0x3244) + *(float *)(param_1 + 0x3240);
   fVar3 = FLOAT_00108e54;
-  if ((fVar1 <= FLOAT_00108e54) && (fVar3 = fVar1, fVar1 < FLOAT_00108e58)) {
+  if ((!(FLOAT_00108e54 < fVar1)) && (fVar3 = fVar1, fVar1 < FLOAT_00108e58)) {
     fVar3 = FLOAT_00108e58;
   }
   fVar1 = FLOAT_00108e54;

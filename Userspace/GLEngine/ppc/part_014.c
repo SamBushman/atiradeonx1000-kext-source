@@ -196,15 +196,15 @@ void _glDepthRange_Exec(int param_1,double fparam_1,double fparam_2,double fpara
     }
     return;
   }
-  if (DOUBLE_00108d60 <= fparam_1) {
-    dVar5 = fparam_1;
-    if (fparam_1 <= DOUBLE_00108d68) goto LAB_000626d0;
-    uVar2 = 0x3ff00000;
-  }
-  else {
+  if (fparam_1 < DOUBLE_00108d60) {
     uVar2 = 0;
   }
-  dVar5 = (double)((ulonglong)uVar2 << 0x20);
+  else {
+    dVar5 = fparam_1;
+    if (!(DOUBLE_00108d68 < fparam_1)) goto LAB_000626d0;
+    uVar2 = 0x3ff00000;
+  }
+  dVar5 = GH_U2D((unsigned long long)uVar2 << 0x20);
 LAB_000626d0:
   *(double *)(param_1 + 0x1b90) = dVar5;
   dVar5 = DOUBLE_00108d60;
@@ -285,26 +285,24 @@ void _glDepthBoundsEXT_Exec(int param_1,double fparam_1,double fparam_2)
     }
     return;
   }
-  if (DOUBLE_00108d60 <= fparam_1) {
-    if (DOUBLE_00108d68 < fparam_1) {
-      uVar1 = 0x3ff00000;
-      goto LAB_000628d8;
-    }
-  }
-  else {
+  if (fparam_1 < DOUBLE_00108d60) {
     uVar1 = 0;
 LAB_000628d8:
-    fparam_1 = (double)((ulonglong)uVar1 << 0x20);
+    fparam_1 = GH_U2D((unsigned long long)uVar1 << 0x20);
+  }
+  else if (DOUBLE_00108d68 < fparam_1) {
+    uVar1 = 0x3ff00000;
+    goto LAB_000628d8;
   }
   *(double *)(param_1 + 0x312c) = fparam_1;
-  if (DOUBLE_00108d60 <= fparam_2) {
-    if (fparam_2 <= DOUBLE_00108d68) goto LAB_00062934;
-    uVar1 = 0x3ff00000;
-  }
-  else {
+  if (fparam_2 < DOUBLE_00108d60) {
     uVar1 = 0;
   }
-  fparam_2 = (double)((ulonglong)uVar1 << 0x20);
+  else {
+    if (!(DOUBLE_00108d68 < fparam_2)) goto LAB_00062934;
+    uVar1 = 0x3ff00000;
+  }
+  fparam_2 = GH_U2D((unsigned long long)uVar1 << 0x20);
 LAB_00062934:
   *(double *)(param_1 + 0x3134) = fparam_2;
   *(uint *)(param_1 + 0x318) = *(uint *)(param_1 + 0x318) | 1;

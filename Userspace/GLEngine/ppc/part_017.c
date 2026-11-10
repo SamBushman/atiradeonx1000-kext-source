@@ -1644,11 +1644,10 @@ void _glLightf_Exec(int param_1,int param_2,undefined4 param_3,double fparam_1)
     iVar3 = param_1 + uVar5 * 0x80;
     switch(param_3) {
     case 0x1205:
-      if (((double)FLOAT_00108e50 <= fparam_1) &&
-         (fparam_1 <=
-          (double)(float)((double)CONCAT44(0x43300000,
-                                           *(uint *)(*(int *)(param_1 + 0x468c) + 0xa4) ^ 0x80000000
-                                          ) - DOUBLE_00108d58))) {
+      if ((!(fparam_1 < (double)FLOAT_00108e50)) &&
+         (!((double)(float)((double)CONCAT44(0x43300000,
+                                             *(uint *)(*(int *)(param_1 + 0x468c) + 0xa4) ^
+                                             0x80000000) - DOUBLE_00108d58) < fparam_1))) {
         *(float *)(iVar3 + 0x287c) = (float)fparam_1;
         _gleUpdateLightExponents(param_1,uVar5);
         if (*(int *)(param_1 + 0x5434) == 0) {
@@ -1665,15 +1664,15 @@ void _glLightf_Exec(int param_1,int param_2,undefined4 param_3,double fparam_1)
       }
       break;
     case 0x1206:
-      if ((fparam_1 < (double)FLOAT_00108e50) || ((double)FLOAT_00108e88 < fparam_1)) {
-        if (fparam_1 != (double)FLOAT_00108e8c) break;
-        *(undefined4 *)(iVar3 + 0x286c) = 0xbf800000;
-        *(undefined4 *)(iVar3 + 0x2890) = 0;
-      }
-      else {
+      if (((double)FLOAT_00108e50 <= fparam_1) && (fparam_1 <= (double)FLOAT_00108e88)) {
         *(float *)(iVar3 + 0x2890) = (float)fparam_1;
         dVar6 = _cos((double)(float)(fparam_1 * (double)FLOAT_00108e84));
         *(float *)(iVar3 + 0x286c) = (float)dVar6;
+      }
+      else {
+        if (fparam_1 != (double)FLOAT_00108e8c) break;
+        *(undefined4 *)(iVar3 + 0x286c) = 0xbf800000;
+        *(undefined4 *)(iVar3 + 0x2890) = 0;
       }
       _gleUpdateLightExponents(param_1,uVar5);
       if (*(int *)(param_1 + 0x5434) == 0) {
@@ -1693,7 +1692,7 @@ LAB_0006b76c:
       *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 4 << (uVar5 * 2 & 0x3e);
       return;
     case 0x1207:
-      if ((double)FLOAT_00108e50 <= fparam_1) {
+      if (!(fparam_1 < (double)FLOAT_00108e50)) {
         *(float *)(iVar3 + 0x2870) = (float)fparam_1;
 LAB_0006b744:
         _gleUpdateLightAttenuation(param_1,uVar5);
@@ -1701,13 +1700,13 @@ LAB_0006b744:
       }
       break;
     case 0x1208:
-      if ((double)FLOAT_00108e50 <= fparam_1) {
+      if (!(fparam_1 < (double)FLOAT_00108e50)) {
         *(float *)(iVar3 + 0x2874) = (float)fparam_1;
         goto LAB_0006b744;
       }
       break;
     case 0x1209:
-      if ((double)FLOAT_00108e50 <= fparam_1) {
+      if (!(fparam_1 < (double)FLOAT_00108e50)) {
         *(float *)(iVar3 + 0x2878) = (float)fparam_1;
         goto LAB_0006b744;
       }
@@ -1869,10 +1868,10 @@ double _glLighti_Exec(int param_1,int param_2,undefined4 param_3,uint param_4,do
     fVar1 = (float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58);
     switch(param_3) {
     case 0x1205:
-      if ((FLOAT_00108e50 <= fVar1) &&
-         (fVar1 <= (float)((double)CONCAT44(0x43300000,
-                                            *(uint *)(*(int *)(param_1 + 0x468c) + 0xa4) ^
-                                            0x80000000) - DOUBLE_00108d58))) {
+      if ((!(fVar1 < FLOAT_00108e50)) &&
+         (!((float)((double)CONCAT44(0x43300000,
+                                     *(uint *)(*(int *)(param_1 + 0x468c) + 0xa4) ^ 0x80000000) -
+                   DOUBLE_00108d58) < fVar1))) {
         *(float *)(iVar4 + 0x287c) = fVar1;
         dVar7 = (double)_gleUpdateLightExponents(param_1,uVar6);
         if (*(int *)(param_1 + 0x5434) == 0) {
@@ -1889,15 +1888,15 @@ double _glLighti_Exec(int param_1,int param_2,undefined4 param_3,uint param_4,do
       }
       break;
     case 0x1206:
-      if ((fVar1 < FLOAT_00108e50) || (FLOAT_00108e88 < fVar1)) {
-        if (fVar1 != FLOAT_00108e8c) break;
-        *(undefined4 *)(iVar4 + 0x286c) = 0xbf800000;
-        *(undefined4 *)(iVar4 + 0x2890) = 0;
-      }
-      else {
+      if ((FLOAT_00108e50 <= fVar1) && (fVar1 <= FLOAT_00108e88)) {
         *(float *)(iVar4 + 0x2890) = fVar1;
         dVar7 = _cos((double)(fVar1 * FLOAT_00108e84));
         *(float *)(iVar4 + 0x286c) = (float)dVar7;
+      }
+      else {
+        if (fVar1 != FLOAT_00108e8c) break;
+        *(undefined4 *)(iVar4 + 0x286c) = 0xbf800000;
+        *(undefined4 *)(iVar4 + 0x2890) = 0;
       }
       dVar7 = (double)_gleUpdateLightExponents(param_1,uVar6);
       if (*(int *)(param_1 + 0x5434) == 0) {
@@ -1917,7 +1916,7 @@ LAB_0006bcc0:
       *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 4 << (uVar6 * 2 & 0x3e);
       return dVar7;
     case 0x1207:
-      if (FLOAT_00108e50 <= fVar1) {
+      if (!(fVar1 < FLOAT_00108e50)) {
         *(float *)(iVar4 + 0x2870) = fVar1;
 LAB_0006bc98:
         dVar7 = (double)_gleUpdateLightAttenuation(param_1,uVar6);
@@ -1925,13 +1924,13 @@ LAB_0006bc98:
       }
       break;
     case 0x1208:
-      if (FLOAT_00108e50 <= fVar1) {
+      if (!(fVar1 < FLOAT_00108e50)) {
         *(float *)(iVar4 + 0x2874) = fVar1;
         goto LAB_0006bc98;
       }
       break;
     case 0x1209:
-      if (FLOAT_00108e50 <= fVar1) {
+      if (!(fVar1 < FLOAT_00108e50)) {
         *(float *)(iVar4 + 0x2878) = fVar1;
         goto LAB_0006bc98;
       }
@@ -2217,15 +2216,15 @@ switchD_0006bed0_default:
     break;
   case 0x1206:
     fVar1 = (float)((double)CONCAT44(0x43300000,*param_4 ^ 0x80000000) - DOUBLE_00108d58);
-    if ((fVar1 < FLOAT_00108e50) || (FLOAT_00108e88 < fVar1)) {
-      if (fVar1 != FLOAT_00108e8c) goto LAB_0006c6f0;
-      *(undefined4 *)(iVar8 + 0x286c) = 0xbf800000;
-      *(undefined4 *)(iVar8 + 0x2890) = 0;
-    }
-    else {
+    if ((FLOAT_00108e50 <= fVar1) && (fVar1 <= FLOAT_00108e88)) {
       *(float *)(iVar8 + 0x2890) = fVar1;
       dVar12 = _cos((double)(fVar1 * FLOAT_00108e84));
       *(float *)(iVar8 + 0x286c) = (float)dVar12;
+    }
+    else {
+      if (fVar1 != FLOAT_00108e8c) goto LAB_0006c6f0;
+      *(undefined4 *)(iVar8 + 0x286c) = 0xbf800000;
+      *(undefined4 *)(iVar8 + 0x2890) = 0;
     }
     _gleUpdateLightExponents(param_1,uVar11);
     if (*(int *)(param_1 + 0x5434) == 0) {
@@ -2241,7 +2240,7 @@ switchD_0006bed0_default:
     break;
   case 0x1207:
     fVar1 = (float)((double)CONCAT44(0x43300000,*param_4 ^ 0x80000000) - DOUBLE_00108d58);
-    if (FLOAT_00108e50 <= fVar1) {
+    if (!(fVar1 < FLOAT_00108e50)) {
       *(float *)(iVar8 + 0x2870) = fVar1;
 LAB_0006c708:
       _gleUpdateLightAttenuation(param_1,uVar11);
@@ -2250,14 +2249,14 @@ LAB_0006c708:
     goto LAB_0006c6f0;
   case 0x1208:
     fVar1 = (float)((double)CONCAT44(0x43300000,*param_4 ^ 0x80000000) - DOUBLE_00108d58);
-    if (FLOAT_00108e50 <= fVar1) {
+    if (!(fVar1 < FLOAT_00108e50)) {
       *(float *)(iVar8 + 0x2874) = fVar1;
       goto LAB_0006c708;
     }
     goto LAB_0006c6f0;
   case 0x1209:
     fVar1 = (float)((double)CONCAT44(0x43300000,*param_4 ^ 0x80000000) - DOUBLE_00108d58);
-    if (FLOAT_00108e50 <= fVar1) {
+    if (!(fVar1 < FLOAT_00108e50)) {
       *(float *)(iVar8 + 0x2878) = fVar1;
       goto LAB_0006c708;
     }

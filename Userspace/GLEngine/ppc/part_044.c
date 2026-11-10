@@ -840,7 +840,7 @@ void _gleImagingScaleAndBias(param_1, param_2, param_3, param_4, param_5, param_
         case 0x1906:
           fVar1 = *pfVar8 * param_2[6] + param_2[7];
           if ((param_7 != 0) &&
-             ((fVar2 = FLOAT_00108e50, fVar1 <= FLOAT_00108e50 ||
+             ((fVar2 = FLOAT_00108e50, !(FLOAT_00108e50 < fVar1) ||
               (fVar2 = FLOAT_00108e54, FLOAT_00108e54 < fVar1)))) {
             fVar1 = fVar2;
           }
@@ -852,15 +852,15 @@ void _gleImagingScaleAndBias(param_1, param_2, param_3, param_4, param_5, param_
           fVar3 = pfVar8[2] * param_2[4] + param_2[5];
           if (param_7 != 0) {
             fVar5 = FLOAT_00108e50;
-            if ((fVar1 <= FLOAT_00108e50) || (fVar5 = FLOAT_00108e54, FLOAT_00108e54 < fVar1)) {
+            if ((!(FLOAT_00108e50 < fVar1)) || (fVar5 = FLOAT_00108e54, FLOAT_00108e54 < fVar1)) {
               fVar1 = fVar5;
             }
             fVar5 = FLOAT_00108e50;
-            if ((fVar2 <= FLOAT_00108e50) || (fVar5 = FLOAT_00108e54, FLOAT_00108e54 < fVar2)) {
+            if ((!(FLOAT_00108e50 < fVar2)) || (fVar5 = FLOAT_00108e54, FLOAT_00108e54 < fVar2)) {
               fVar2 = fVar5;
             }
             fVar5 = FLOAT_00108e50;
-            if ((fVar3 <= FLOAT_00108e50) || (fVar5 = FLOAT_00108e54, FLOAT_00108e54 < fVar3)) {
+            if ((!(FLOAT_00108e50 < fVar3)) || (fVar5 = FLOAT_00108e54, FLOAT_00108e54 < fVar3)) {
               fVar3 = fVar5;
             }
           }
@@ -876,19 +876,19 @@ void _gleImagingScaleAndBias(param_1, param_2, param_3, param_4, param_5, param_
           fVar2 = pfVar8[3] * param_2[6] + param_2[7];
           if (param_7 != 0) {
             fVar4 = FLOAT_00108e50;
-            if ((fVar1 <= FLOAT_00108e50) || (fVar4 = FLOAT_00108e54, FLOAT_00108e54 < fVar1)) {
+            if ((!(FLOAT_00108e50 < fVar1)) || (fVar4 = FLOAT_00108e54, FLOAT_00108e54 < fVar1)) {
               fVar1 = fVar4;
             }
             fVar4 = FLOAT_00108e50;
-            if ((fVar3 <= FLOAT_00108e50) || (fVar4 = FLOAT_00108e54, FLOAT_00108e54 < fVar3)) {
+            if ((!(FLOAT_00108e50 < fVar3)) || (fVar4 = FLOAT_00108e54, FLOAT_00108e54 < fVar3)) {
               fVar3 = fVar4;
             }
             fVar4 = FLOAT_00108e50;
-            if ((fVar5 <= FLOAT_00108e50) || (fVar4 = FLOAT_00108e54, FLOAT_00108e54 < fVar5)) {
+            if ((!(FLOAT_00108e50 < fVar5)) || (fVar4 = FLOAT_00108e54, FLOAT_00108e54 < fVar5)) {
               fVar5 = fVar4;
             }
             fVar4 = FLOAT_00108e50;
-            if ((fVar2 <= FLOAT_00108e50) || (fVar4 = FLOAT_00108e54, FLOAT_00108e54 < fVar2)) {
+            if ((!(FLOAT_00108e50 < fVar2)) || (fVar4 = FLOAT_00108e54, FLOAT_00108e54 < fVar2)) {
               fVar2 = fVar4;
             }
           }
@@ -900,7 +900,7 @@ void _gleImagingScaleAndBias(param_1, param_2, param_3, param_4, param_5, param_
         case 0x1909:
           fVar1 = *pfVar8 * *param_2 + param_2[1];
           if ((param_7 != 0) &&
-             ((fVar2 = FLOAT_00108e50, fVar1 <= FLOAT_00108e50 ||
+             ((fVar2 = FLOAT_00108e50, !(FLOAT_00108e50 < fVar1) ||
               (fVar2 = FLOAT_00108e54, FLOAT_00108e54 < fVar1)))) {
             fVar1 = fVar2;
           }
@@ -911,11 +911,11 @@ void _gleImagingScaleAndBias(param_1, param_2, param_3, param_4, param_5, param_
           fVar2 = pfVar8[1] * param_2[6] + param_2[7];
           if (param_7 != 0) {
             fVar3 = FLOAT_00108e50;
-            if ((fVar1 <= FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < fVar1)) {
+            if ((!(FLOAT_00108e50 < fVar1)) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < fVar1)) {
               fVar1 = fVar3;
             }
             fVar3 = FLOAT_00108e50;
-            if ((fVar2 <= FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < fVar2)) {
+            if ((!(FLOAT_00108e50 < fVar2)) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < fVar2)) {
               fVar2 = fVar3;
             }
           }
@@ -2635,13 +2635,7 @@ LAB_000d4f74:
           dVar16 = (double)(float)(fparam_6 * fparam_2 +
                                   (double)(float)(fparam_5 * fparam_3 +
                                                  (double)(float)(fparam_4 * (double)dVar26)));
-          if (dVar16 <= (double)FLOAT_00108e50) {
-LAB_000d54cc:
-            dVar26 = (double)FLOAT_00108e50;
-            fparam_1 = (double)dVar26;
-            dVar16 = (double)dVar26;
-          }
-          else {
+          if ((double)FLOAT_00108e50 < dVar16) {
             dVar25 = (double)(float)(dVar16 * (double)*(float *)(iVar14 + 0x60) + (double)dVar25);
             dVar24 = (double)(float)(dVar16 * (double)*(float *)(iVar14 + 100) + (double)dVar24);
             dVar17 = (double)(float)(dVar16 * (double)*(float *)(iVar14 + 0x68) + (double)dVar17);
@@ -2665,7 +2659,7 @@ LAB_000d54cc:
               local_e0 = (float)((double)(fVar3 + fVar3) + fparam_3);
               fVar1 = local_d8 * local_108 + (local_e0 * local_110 + local_dc * local_10c);
             }
-            if ((double)fVar1 <= (double)dVar22) goto LAB_000d54cc;
+            if (!((double)dVar22 < (double)fVar1)) goto LAB_000d54cc;
             fparam_2 = (double)*(float *)(iVar13 + 0x40);
             dVar16 = _pow((double)fVar1,fparam_2);
             fVar1 = (float)dVar16;
@@ -2673,6 +2667,12 @@ LAB_000d54cc:
             iVar6 = extraout_r3_01;
             fparam_1 = (double)(fVar1 * *(float *)(iVar14 + 0x74));
             dVar16 = (double)(fVar1 * *(float *)(iVar14 + 0x70));
+          }
+          else {
+LAB_000d54cc:
+            dVar26 = (double)FLOAT_00108e50;
+            fparam_1 = (double)dVar26;
+            dVar16 = (double)dVar26;
           }
           if (dVar18 == (double)dVar19) {
             dVar29 = (double)(dVar29 + dVar25);
@@ -2954,13 +2954,7 @@ LAB_000d55d4:
           dVar17 = (double)(float)(fparam_6 * fparam_2 +
                                   (double)(float)(fparam_5 * fparam_3 +
                                                  (double)(float)(fparam_4 * (double)dVar26)));
-          if (-dVar17 <= (double)FLOAT_00108e50) {
-LAB_000d5b34:
-            dVar26 = (double)FLOAT_00108e50;
-            fparam_1 = (double)dVar26;
-            dVar17 = (double)dVar26;
-          }
-          else {
+          if ((double)FLOAT_00108e50 < -dVar17) {
             dVar25 = -(double)(float)(dVar17 * (double)*(float *)(iVar14 + 0x60) - (double)dVar25);
             dVar24 = -(double)(float)(dVar17 * (double)*(float *)(iVar14 + 100) - (double)dVar24);
             dVar18 = -(double)(float)(dVar17 * (double)*(float *)(iVar14 + 0x68) - (double)dVar18);
@@ -2985,7 +2979,7 @@ LAB_000d5b34:
               local_d8 = (float)((double)(fVar3 + fVar3) + fparam_2);
               dVar17 = (double)(local_d8 * local_108 + (local_e0 * local_110 + local_dc * local_10c));
             }
-            if (dVar17 <= (double)dVar22) goto LAB_000d5b34;
+            if (!((double)dVar22 < dVar17)) goto LAB_000d5b34;
             fparam_2 = (double)*(float *)(iVar13 + 0x40);
             dVar17 = _pow(dVar17,fparam_2);
             fVar1 = (float)dVar17;
@@ -2993,6 +2987,12 @@ LAB_000d5b34:
             iVar6 = extraout_r3_01;
             fparam_1 = (double)(fVar1 * *(float *)(iVar14 + 0x74));
             dVar17 = (double)(fVar1 * *(float *)(iVar14 + 0x70));
+          }
+          else {
+LAB_000d5b34:
+            dVar26 = (double)FLOAT_00108e50;
+            fparam_1 = (double)dVar26;
+            dVar17 = (double)dVar26;
           }
           if ((double)dVar16 == (double)dVar19) {
             dVar29 = (double)(dVar29 + dVar25);
@@ -3940,13 +3940,7 @@ LAB_000d6880:
           dVar15 = (double)(float)((double)dVar17 * fparam_5 +
                                   (double)(float)((double)*(float *)(iVar14 + 0x40) * fparam_7 +
                                                  (double)(float)((double)dVar18 * fparam_6)));
-          if (dVar15 <= (double)FLOAT_00108e50) {
-LAB_000d6e10:
-            dVar17 = (double)FLOAT_00108e50;
-            fparam_1 = (double)dVar17;
-            dVar15 = (double)dVar17;
-          }
-          else {
+          if ((double)FLOAT_00108e50 < dVar15) {
             dVar26 = (double)(float)(dVar15 * (double)*(float *)(iVar12 + 0x60) + (double)dVar26);
             dVar25 = (double)(float)(dVar15 * (double)*(float *)(iVar12 + 100) + (double)dVar25);
             dVar24 = (double)(float)(dVar15 * (double)*(float *)(iVar12 + 0x68) + (double)dVar24);
@@ -3972,7 +3966,7 @@ LAB_000d6e10:
               local_d8 = (float)((double)(fVar1 + fVar1) + fparam_5);
               fVar1 = local_d8 * local_108 + (local_e0 * local_110 + local_dc * local_10c);
             }
-            if ((double)fVar1 <= (double)dVar22) goto LAB_000d6e10;
+            if (!((double)dVar22 < (double)fVar1)) goto LAB_000d6e10;
             fparam_2 = (double)*(float *)(iVar11 + 0x40);
             dVar15 = _pow((double)fVar1,fparam_2);
             fVar1 = (float)dVar15;
@@ -3980,6 +3974,12 @@ LAB_000d6e10:
             iVar4 = extraout_r3_01;
             fparam_1 = (double)(fVar1 * *(float *)(iVar12 + 0x74));
             dVar15 = (double)(fVar1 * *(float *)(iVar12 + 0x70));
+          }
+          else {
+LAB_000d6e10:
+            dVar17 = (double)FLOAT_00108e50;
+            fparam_1 = (double)dVar17;
+            dVar15 = (double)dVar17;
           }
           if (dVar16 == (double)dVar19) {
             dVar29 = (double)(dVar29 + dVar26);
@@ -4262,13 +4262,7 @@ LAB_000d6f10:
           dVar19 = (double)(float)(fparam_8 * fparam_6 +
                                   (double)(float)(fparam_4 * fparam_7 +
                                                  (double)(float)(dVar17 * fparam_5)));
-          if (-(double)dVar19 <= (double)FLOAT_00108e50) {
-LAB_000d74a4:
-            dVar19 = (double)FLOAT_00108e50;
-            fparam_1 = (double)dVar19;
-            dVar17 = (double)dVar19;
-          }
-          else {
+          if ((double)FLOAT_00108e50 < -(double)dVar19) {
             dVar27 = -(double)(dVar19 * *(float *)(iVar13 + 0x60) - dVar27);
             dVar26 = -(double)(dVar19 * *(float *)(iVar13 + 100) - dVar26);
             dVar25 = -(double)(dVar19 * *(float *)(iVar13 + 0x68) - dVar25);
@@ -4295,7 +4289,7 @@ LAB_000d74a4:
               local_d8 = (float)((double)(fVar1 + fVar1) + fparam_6);
               dVar17 = (double)(local_d8 * local_108 + (local_e0 * local_110 + local_dc * local_10c));
             }
-            if (dVar17 <= (double)dVar23) goto LAB_000d74a4;
+            if (!((double)dVar23 < dVar17)) goto LAB_000d74a4;
             fparam_2 = (double)*(float *)(iVar12 + 0x40);
             dVar17 = _pow(dVar17,fparam_2);
             fVar1 = (float)dVar17;
@@ -4303,6 +4297,12 @@ LAB_000d74a4:
             iVar5 = extraout_r3_01;
             fparam_1 = (double)(fVar1 * *(float *)(iVar13 + 0x74));
             dVar17 = (double)(fVar1 * *(float *)(iVar13 + 0x70));
+          }
+          else {
+LAB_000d74a4:
+            dVar19 = (double)FLOAT_00108e50;
+            fparam_1 = (double)dVar19;
+            dVar17 = (double)dVar19;
           }
           if ((double)dVar16 == (double)dVar20) {
             dVar30 = (double)(dVar30 + dVar27);

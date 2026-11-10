@@ -6,7 +6,7 @@
 # Inputs: the stock GLEngine (Apple's, Tiger 10.4.11, md5 02f4a2854a95be1f2853baeb99ae22b3; STOCK_GLENGINE=) and the Ghidra gs/DumpData.java output of the
 # analysed copy (GLENGINE_GHIDRA_DATA=; the corpus archive carries it as Userspace/GLEngine/ppc/ghidra/gleng_data.tsv.xz).
 # Same optimisation/code model as the GLDriver image: -O2 -mtune=970, -mdynamic-no-pic (stock addresses its globals directly).
-H=${1:-G5}; EV=${2:-$HOME/g5logs/gleng-corpus/link}; SHA=$(git rev-parse --short HEAD) || exit 2
+H=${1:-G5}; EV=${2:-$HOME/g5logs/gleng-corpus/link}; SHA=${IMG_TAG:-$(git rev-parse --short HEAD)} || exit 2
 export LINK_OPT=${LINK_OPT:--O2 -mtune=970} LINK_PIC=${LINK_PIC:--mdynamic-no-pic}
 STOCK=${STOCK_GLENGINE:-$HOME/Documents/ATI-X1900-Decomp/tiger-hd-pull/GLEngine.bundle.bin}
 GDATA=${GLENGINE_GHIDRA_DATA:-$EV/gleng_data.tsv}

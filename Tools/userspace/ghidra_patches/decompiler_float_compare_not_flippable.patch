@@ -1,0 +1,17 @@
+--- Ghidra/Features/Decompiler/src/decompile/cpp/opcodes.cc	2026-08-17 17:31:08.000000000 -0700
++++ Ghidra/Features/Decompiler/src/decompile/cpp/opcodes.cc	2026-11-10 15:10:32.659584602 -0800
+@@ -123,11 +123,10 @@
+     reorder = false;
+     return CPUI_FLOAT_EQUAL;
+   case CPUI_FLOAT_LESS:
+-    reorder = true;
+-    return CPUI_FLOAT_LESSEQUAL;
+   case CPUI_FLOAT_LESSEQUAL:
+-    reorder = true;
+-    return CPUI_FLOAT_LESS;
++    // NOT flippable: !(a < b) is not (b <= a) when an operand is NaN (an unordered compare is false for BOTH); the stock's gcc code keeps the
++    // distinction (cror eq,lt,eq; bne) and a flipped condition printed in the C changes what the rebuilt does with a NaN operand.
++    break;
+   default:
+     break;
+   }

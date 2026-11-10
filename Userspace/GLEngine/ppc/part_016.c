@@ -225,35 +225,35 @@ LAB_00067c88:
     }
     fVar3 = (float)((double)CONCAT44(0x43300000,*param_3 ^ 0x80000000) - DOUBLE_00108d58) *
             FLOAT_00108e68 + FLOAT_00108e6c;
-    if (FLOAT_00108e50 <= fVar3) {
-      *(float *)(param_1 + 0x3140) = fVar3;
+    if (fVar3 < FLOAT_00108e50) {
+      *(float *)(param_1 + 0x3140) = FLOAT_00108e50;
     }
     else {
-      *(float *)(param_1 + 0x3140) = FLOAT_00108e50;
+      *(float *)(param_1 + 0x3140) = fVar3;
     }
     fVar3 = (float)((double)CONCAT44(0x43300000,param_3[1] ^ 0x80000000) - DOUBLE_00108d58) *
             FLOAT_00108e68 + FLOAT_00108e6c;
-    if (fVar4 <= fVar3) {
-      *(float *)(param_1 + 0x3144) = fVar3;
+    if (fVar3 < fVar4) {
+      *(float *)(param_1 + 0x3144) = fVar4;
     }
     else {
-      *(float *)(param_1 + 0x3144) = fVar4;
+      *(float *)(param_1 + 0x3144) = fVar3;
     }
     fVar3 = (float)((double)CONCAT44(0x43300000,param_3[2] ^ 0x80000000) - DOUBLE_00108d58) *
             FLOAT_00108e68 + FLOAT_00108e6c;
-    if (fVar4 <= fVar3) {
-      *(float *)(param_1 + 0x3148) = fVar3;
+    if (fVar3 < fVar4) {
+      *(float *)(param_1 + 0x3148) = fVar4;
     }
     else {
-      *(float *)(param_1 + 0x3148) = fVar4;
+      *(float *)(param_1 + 0x3148) = fVar3;
     }
     fVar3 = (float)((double)CONCAT44(0x43300000,param_3[3] ^ 0x80000000) - DOUBLE_00108d58) *
             FLOAT_00108e68 + FLOAT_00108e6c;
-    if (fVar4 <= fVar3) {
-      *(float *)(param_1 + 0x314c) = fVar3;
+    if (fVar3 < fVar4) {
+      *(float *)(param_1 + 0x314c) = fVar4;
     }
     else {
-      *(float *)(param_1 + 0x314c) = fVar4;
+      *(float *)(param_1 + 0x314c) = fVar3;
     }
     if (*(int *)(param_1 + 0x5434) == 0) {
       bVar2 = *(byte *)(*(int *)(param_1 + 0x5420) + 0x322);
@@ -509,25 +509,25 @@ int _glFrustum_Comp(int param_1,double fparam_1,double fparam_2,double fparam_3,
   float *pfVar5;
   float dVar6;
   
-  if ((DOUBLE_00108d60 < fparam_5) && (DOUBLE_00108d60 < fparam_6)) {
+  if ((!(fparam_5 <= DOUBLE_00108d60)) && (!(fparam_6 <= DOUBLE_00108d60))) {
     fVar1 = (float)(fparam_2 - fparam_1);
     fVar2 = (float)(fparam_4 - fparam_3);
     fVar3 = (float)(fparam_5 - fparam_6);
     fVar4 = fVar1;
-    if (fVar1 < 0.0) {
+    if (!(0.0 <= fVar1)) {
       fVar4 = -fVar1;
     }
-    if (FLOAT_00108e80 <= fVar4) {
+    if (!(fVar4 < FLOAT_00108e80)) {
       fVar4 = fVar2;
-      if (fVar2 < FLOAT_00108e50) {
+      if (!(FLOAT_00108e50 <= fVar2)) {
         fVar4 = -fVar2;
       }
-      if (FLOAT_00108e80 <= fVar4) {
+      if (!(fVar4 < FLOAT_00108e80)) {
         fVar4 = fVar3;
-        if (fVar3 < FLOAT_00108e50) {
+        if (!(FLOAT_00108e50 <= fVar3)) {
           fVar4 = -fVar3;
         }
-        if (FLOAT_00108e80 <= fVar4) {
+        if (!(fVar4 < FLOAT_00108e80)) {
           pfVar5 = (float *)_gleAddListItem(param_1,PTR__glFrustum_ListExec_00110104,0x18);
           if (pfVar5 == (float *)0x0) {
             return 0;

@@ -57,8 +57,14 @@ static unsigned gen_int(void) {
     if (k < 19) return (unsigned)-(int)(1 + rnd32() % 16);
     return rnd32() % 4096;
 }
+/* FNFUZZ_NANMODE=1: half of the float arguments are special values (quiet NaN of both signs, +-Inf, -0, denormals, the largest float, +-1e300) and one arena word in 24 is a special float
+   word: the plain values never reach the branch of a compare that only an unordered (NaN) operand takes (the stock's `cror eq,lt,eq; bne` against a decompiled `a < b`). */
+static int nanmode;
+static const unsigned long long nan_dbl[] = { 0x7ff8000000000000ULL, 0xfff8000000000000ULL, 0x7ff0000000000000ULL, 0xfff0000000000000ULL, 0x8000000000000000ULL, 0x0000000000000001ULL, 0x000fffffffffffffULL, 0x47efffffe0000000ULL, 0x7e37e43c8800759cULL, 0xfe37e43c8800759cULL, 0x36a0000000000000ULL, 0x3810000000000000ULL };
+static const unsigned nan_wrd[] = { 0x7fc00000u, 0xffc00000u, 0x7f800000u, 0xff800000u, 0x80000000u, 0x00000001u, 0x007fffffu, 0x7f7fffffu, 0xff7fffffu, 0x7fa00000u };
 static double gen_double(int single) {
     unsigned k = rnd32() % 16; double v;
+    if (nanmode && (rnd32() & 1)) { unsigned long long b = nan_dbl[rnd32() % (sizeof nan_dbl / sizeof *nan_dbl)]; memcpy(&v, &b, 8); return single ? (double)(float)v : v; }
     if (k < 3) v = 0; else if (k < 5) v = 1; else if (k < 6) v = -1; else if (k < 9) v = ((int)(rnd32() % 2001) - 1000) / 64.0;
     else if (k < 11) v = ((int)(rnd32() % 200001) - 100000) / 7.0; else if (k < 13) v = 0.5; else if (k < 14) v = 1e-6 * (rnd32() % 1000); else v = ((int)(rnd32() % 65) - 32) * 0.25;
     return single ? (double)(float)v : v;
@@ -524,6 +530,7 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     if (interpose) { ncalls_c = 0; trace_c = 0; memset(mask_c, 0, sizeof mask_c); ret_state = (unsigned long long)seed * 0x9E3779B97F4A7C15ULL + c->id; install_stubs(cur_img); }
     unsigned *w = (unsigned *)ARENA_BASE;
     for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned k = rnd32() % 10; w[i] = graph ? (k < 2 ? 0 : k < 4 ? rnd32() % 64 : arena_ptr()) : tiny ? (k < 6 ? 0 : k < 9 ? rnd32() % 16 : arena_ptr()) : (k < 3 ? 0 : k < 6 ? rnd32() % 64 : k < 7 ? (narrow ? rnd32() % 256 : rnd32()) : arena_ptr()); }
+    if (nanmode) for (unsigned i = 0; i < ARENA_SIZE / 4; i++) if (rnd32() % 24 == 0) w[i] = nan_wrd[rnd32() % (sizeof nan_wrd / sizeof *nan_wrd)];
     unsigned ia[8]; double da[13]; int k = 0, j = 0;
     for (const char *p = c->pc; *p && *p != '-'; p++) {
         switch (*p) {
@@ -563,7 +570,7 @@ static int run_one(void *fn, const cand_t *c, unsigned seed, int mode, int img, 
     int fd[2]; if (pipe(fd)) return -1;
     fflush(stdout);   /* a child that calls exit() would flush the parent's pending lines a second time */
     pid_t p = fork();
-    if (p == 0) { close(fd[0]); wfd = fd[1]; cur_img = img; nrng = 0; image_ranges(img_hdr[0]); image_ranges(img_hdr[1]); child(fn, c, seed, mode); _exit(8); }
+    if (p == 0) { close(fd[0]); wfd = fd[1]; cur_img = img; nrng = 0; image_ranges(img_hdr[0]); image_ranges(img_hdr[1]); if (getenv("FNFUZZ_RANGES")) { for (int q = 0; q < nrng; q++) fprintf(stderr, "range %08x-%08x\n", rng_lo[q], rng_hi[q]); } child(fn, c, seed, mode); _exit(8); }
     close(fd[1]);
     int st = 0; ssize_t n;
     {   /* watchdog: a child stuck where signals cannot reach it (a mutex the random arena left locked) is killed and counted as a hang */
@@ -593,6 +600,7 @@ static int same(const result_t *a, const result_t *b, char rc) {
 
 int main(int argc, char **argv) {
     if (argc < 4) { fprintf(stderr, "usage: fnfuzz LEDGER.tsv STOCK REBUILT [trials] [filter|@first,count]\n"); return 2; }
+    nanmode = getenv("FNFUZZ_NANMODE") != NULL;
     narrow = getenv("FNFUZZ_PROFILE") && (!strcmp(getenv("FNFUZZ_PROFILE"), "narrow") || !strcmp(getenv("FNFUZZ_PROFILE"), "tiny")); tiny = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "tiny"); graph = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "graph");
     int trials = argc > 4 ? atoi(argv[4]) : 12; const char *flt = argc > 5 ? argv[5] : NULL;
     FILE *f = fopen(argv[1], "r"); if (!f) { perror(argv[1]); return 2; }
