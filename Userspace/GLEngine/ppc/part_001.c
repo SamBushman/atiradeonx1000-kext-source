@@ -633,7 +633,7 @@ double _gleVectorNormalizeNO(undefined4 param_1,float *param_2,float *param_3,do
   float dVar4;
   float dVar5;
   float dVar6;
-  float dVar7;
+  double dVar7;
   
   dVar3 = (double)param_2[1];
   dVar4 = (double)*param_2;
@@ -641,10 +641,10 @@ double _gleVectorNormalizeNO(undefined4 param_1,float *param_2,float *param_3,do
   fVar1 = (dVar5 * dVar5 + (dVar4 * dVar4 + (dVar3 * dVar3)));
   dVar2 = (double)fVar1;
   if (DOUBLE_00108de8 < (double)dVar2) {
-    dVar7 = (double)(float)(0x5f375a00 - ((uint)GH_F2U(fVar1) >> 1));
-    dVar2 = (double)((dVar2 * dVar7) * dVar7);
+    dVar7 = (double)GH_U2F((unsigned int)((0x5f375a00 - ((uint)GH_F2U(fVar1) >> 1))));
+    dVar2 = (double)(float)((double)(float)((double)dVar2 * dVar7) * dVar7);
     dVar6 = (double)(FLOAT_00108f38 - dVar2);
-    dVar2 = (double)(float)((double)dVar7 * DOUBLE_00108df0 * (double)dVar6 *
+    dVar2 = (double)(float)(dVar7 * DOUBLE_00108df0 * (double)dVar6 *
                            -(double)((dVar2 * dVar6) * dVar6 - FLOAT_00108f48));
     dVar4 = (double)(dVar4 * dVar2);
     dVar3 = (double)(dVar3 * dVar2);

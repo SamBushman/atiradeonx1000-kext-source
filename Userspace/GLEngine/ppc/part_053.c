@@ -1866,7 +1866,7 @@ double _gleSphereGenST(undefined4 param_1,undefined4 param_2,float *param_3,floa
   dVar5 = (double)fVar1;
   dVar2 = (double)FLOAT_00108e50;
   if (((double)FLOAT_00108e50 < (double)dVar5) && (dVar2 = (double)dVar5, (double)dVar5 != (double)FLOAT_00108e54)) {
-    dVar2 = (double)(float)(0x5f375a00 - ((uint)GH_F2U(fVar1) >> 1));
+    dVar2 = (double)GH_U2F((unsigned int)((0x5f375a00 - ((uint)GH_F2U(fVar1) >> 1))));
     dVar6 = (double)(float)((double)(float)((double)dVar5 * dVar2) * dVar2);
     dVar5 = (double)(float)(DOUBLE_00108e40 - (double)dVar6);
     dVar2 = (double)(float)(dVar2 * DOUBLE_00108e38 * (double)dVar5 *

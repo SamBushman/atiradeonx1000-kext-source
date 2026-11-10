@@ -18,6 +18,7 @@
 #include <dlfcn.h>
 #include <unistd.h>
 #include <signal.h>
+#include <sys/ucontext.h>
 #include <sys/mman.h>
 #include <sys/wait.h>
 #include <sys/select.h>
@@ -32,7 +33,7 @@
 typedef unsigned long long (*fi_t)(unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, double, double, double, double, double, double, double, double, double, double, double, double, double);
 typedef double (*fd_t)(unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, double, double, double, double, double, double, double, double, double, double, double, double, double);
 
-typedef struct { int status; unsigned r3, r4; unsigned long long f1; unsigned digest; unsigned args[8]; double dargs[4]; unsigned ncalls, trace, mask[5]; } result_t;   /* ncalls / trace / mask: import-interposer mode (FNFUZZ_INTERPOSE=1) */
+typedef struct { int status; unsigned r3, r4; unsigned long long f1; unsigned digest; unsigned args[8]; double dargs[4]; unsigned ncalls, trace, mask[5]; unsigned fix_valid, fix_src, fix_disp, fix_arg, fault_pc, fault_ra; } result_t;   /* ncalls / trace / mask: import-interposer mode (FNFUZZ_INTERPOSE=1) */
 static unsigned cur_args[8]; static double cur_dargs[4];
 typedef struct { int id; char name[96]; unsigned stock_addr, reb_off; int size; char pc[24]; char rc; } cand_t;
 
@@ -233,12 +234,33 @@ static unsigned fn_token(unsigned v) {
     for (int i = 0; i < g_nc; i++) { unsigned a = (unsigned)(g_ap[cur_img] + (cur_img ? g_cs[i].reb_off - g_areb : g_cs[i].stock_addr - g_astock)); if (a == v) return 0x4E000000u + (unsigned)g_cs[i].id; }
     return 0x1A6E0001;
 }
+/* FNFUZZ_REPAIR=1 (fault-driven pointer repair): a random arena makes most functions fault on the first NULL / wild pointer field they dereference, in both images alike (an `uninformative` function: it was never
+   run past its first loads). When the stock faults on a D-form load/store `op rt,D(ra)`, the handler looks back in the code for the `lwz ra,D2(rb)` that produced the base register, works out the arena word
+   it came from (rb + D2) and reports it; the parent then patches that word to a valid arena pointer (a value that keeps rb+D inside the arena) and runs again, up to 16 patches per trial. The final patch list
+   is applied to the arena before the call in all three runs of the trial (stock twice, rebuilt), so the stock decides which fields must be pointers and the images are compared on a path that runs. */
+static unsigned g_fix_valid, g_fix_src, g_fix_disp, g_fix_arg, g_fault_pc, g_fault_ra;
+static void report(int status, unsigned r3, unsigned r4, unsigned long long f1);
+static void on_sig_info(int s, siginfo_t *si, void *ucv) {
+    (void)si;
+    if (s == SIGSEGV || s == SIGBUS) {
+        ucontext_t *u = (ucontext_t *)ucv; unsigned *R = (unsigned *)&u->uc_mcontext->ss.r0; unsigned pc = u->uc_mcontext->ss.srr0;
+        unsigned w = *(unsigned *)pc, op = w >> 26, ra = (w >> 16) & 31; int D = (short)(w & 0xffff); g_fault_pc = pc; g_fault_ra = R[ra];
+        if (((op >= 32 && op <= 47) || (op >= 48 && op <= 55)) && ra != 0) {
+            for (int k = 1; k <= 64; k++) { unsigned pw = ((unsigned *)pc)[-k]; if (pw == 0x4e800020u) break;
+                if ((pw >> 26) == 32 && ((pw >> 21) & 31) == ra) { unsigned rb = (pw >> 16) & 31; int D2 = (short)(pw & 0xffff);
+                    if (rb != 0) { unsigned src = R[rb] + D2; if (src >= ARENA_BASE && src < ARENA_BASE + ARENA_SIZE - 3 && !(src & 3)) { g_fix_valid = 1; g_fix_src = src; g_fix_disp = (unsigned)D; }
+                        else for (int k2 = 0; k2 < 8; k2++) { unsigned delta = R[rb] - cur_args[k2]; if (delta < 0x20000u) { g_fix_valid = 1; g_fix_arg = (unsigned)k2 + 1; g_fix_disp = delta + (unsigned)D2; break; } } }   /* the loaded-from address is not in the arena but is an argument plus a constant (`addi r29,r3,0x4dd0`): the argument must be a pointer */
+                    break; }
+                if ((pw >> 26) == 14 && ((pw >> 21) & 31) == ra) break;   /* `addi ra,..`: a computed base, not a loaded one */ }
+            if (!g_fix_valid) for (int k = 0; k < 8; k++) { unsigned delta = R[ra] - cur_args[k]; if (delta < 0x20000u) { g_fix_valid = 1; g_fix_arg = (unsigned)k + 1; g_fix_disp = delta + (unsigned)D; break; } }   /* the base is an incoming argument itself */ } }
+    report(s, 0, 0, 0);
+}
 static void report(int status, unsigned r3, unsigned r4, unsigned long long f1) {
     unsigned *w = (unsigned *)ARENA_BASE; unsigned long long h = 1469598103934665603ULL;
     for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned v = w[i]; if (in_image(v)) v = 0x1A6E0001; h = fnv((unsigned char *)&v, 4, h); }
     for (int q = 0; q < ncur_watch; q++) for (int k = 0; k < cur_watch[q].words; k++) { unsigned v = fn_token(cur_watch[q].p[k]); if (getenv("FNFUZZ_WATCHDUMP")) fprintf(stderr, "  [%s watch%d+%d raw %08x -> %08x]\n", cur_img ? "R" : "S", q, k, cur_watch[q].p[k], v); h = fnv((unsigned char *)&v, 4, h); }
     if (interpose) for (unsigned i = 0; i < sizeof retblk / 4; i++) { unsigned v = ((unsigned *)retblk)[i]; if (v >= (unsigned)(uintptr_t)retblk && v < (unsigned)(uintptr_t)retblk + sizeof retblk) v = 0x1A6E0003; h = fnv((unsigned char *)&v, 4, h); }
-    result_t r; memset(&r, 0, sizeof r); r.ncalls = ncalls_c; r.trace = trace_c; memcpy(r.mask, mask_c, sizeof r.mask); r.status = status; r.r3 = in_image(r3) ? 0x1A6E0002 : r3; r.r4 = r4; r.f1 = f1; r.digest = (unsigned)(h ^ (h >> 32)); memcpy(r.args, cur_args, sizeof r.args); memcpy(r.dargs, cur_dargs, sizeof r.dargs);
+    result_t r; memset(&r, 0, sizeof r); r.ncalls = ncalls_c; r.trace = trace_c; memcpy(r.mask, mask_c, sizeof r.mask); r.fix_valid = g_fix_valid; r.fix_src = g_fix_src; r.fix_disp = g_fix_disp; r.fix_arg = g_fix_arg; r.fault_pc = g_fault_pc; r.fault_ra = g_fault_ra; r.status = status; r.r3 = in_image(r3) ? 0x1A6E0002 : r3; r.r4 = r4; r.f1 = f1; r.digest = (unsigned)(h ^ (h >> 32)); memcpy(r.args, cur_args, sizeof r.args); memcpy(r.dargs, cur_dargs, sizeof r.dargs);
     (void)!write(wfd, &r, sizeof r);
     if (getenv("FNFUZZ_VERBOSE")) { for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned v = w[i]; if (in_image(v)) v = 0x1A6E0001; (void)!write(wfd, &v, 4); } }
     _exit(0);
@@ -256,6 +278,7 @@ static void __attribute__((noinline)) fill_stack(void) { volatile unsigned buf[8
    and the declared arguments are replaced by pointers into it. Lines (`#` comments, blank lines ignored):
      type NAME SIZE                       start a node type (SIZE bytes, zero-filled; every field not listed stays 0)
        ptr OFF TYPE [PCT]                 +OFF = pointer to a fresh TYPE node (non-NULL in PCT percent of the nodes, default 100)
+       rlist OFF MIN MAX                  +OFF = first of MIN..MAX free-name range nodes {+0 next, +4 first name, +8 length}, ascending, gaps 0..3 (the lists _gleGenHashNames / _gleAddHashName / _gleRemoveHashName keep)
        list OFF TYPE MIN MAX NEXTOFF      +OFF = first of a chain of MIN..MAX fresh TYPE nodes linked through their +NEXTOFF word (NULL-terminated; 0 nodes -> NULL)
        u8|u16|u32 OFF LO HI               +OFF = random value in LO..HI
        rand OFF                           +OFF = random 32-bit word
@@ -280,17 +303,17 @@ typedef struct { unsigned off; int kind; unsigned a, b, c; int n; unsigned v[8];
 typedef struct { char name[32]; unsigned size; int nf; gfield_t f[40]; } gtype_t;
 typedef struct { int n; int kind; unsigned a, b; int pct; unsigned v[64]; int nv; char tname[32]; char text[96]; } garg_t;
 typedef struct { char name[96]; int na; garg_t a[8]; } gfunc_t;
-enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR };
+enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST };
 enum { GA_PTR = 1, GA_INT, GA_PICK, GA_RAND, GA_NULL, GA_NAME, GA_STR };
 static unsigned g_names[64]; static int g_nnames;
 typedef struct { char name[48]; char tname[32]; unsigned v[8]; int nv; char func[96]; int pct; } gret_t;
-typedef struct { char name[48]; char func[96]; int arg; unsigned v[8]; int nv; } gout_t; static gout_t gouts[16]; static int ngouts;   /* `out IMPORT ARG V1 V2 ..`: after the stubbed import the word its ARG-th argument points to holds one of the values (an out-parameter the library fills: a type enum) */
+typedef struct { char name[48]; char func[96]; int arg; unsigned v[8]; int nv; } gout_t; static gout_t gouts[160]; static int ngouts;   /* `out IMPORT ARG V1 V2 ..`: after the stubbed import the word its ARG-th argument points to holds one of the values (an out-parameter the library fills: a type enum) */
 static char gs_curfunc[96]; static unsigned gs_first_cnt, gs_lg_n = 0xffffffffu, gs_lg_c, gs_lg_o;
 typedef struct { char func[96]; int kind; char name[48]; char tname[32]; unsigned a, pct; char text[96]; } gglob_t; static gglob_t gglobs[64]; static int nglobs;   /* gcopy NAME TYPE | gptr NAME TYPE PCT | gset NAME VAL | gwatch NAME WORDS | env NAME a|b|- | scandirout a|b MAXN | retcfstr IMPORT a|b|- (all function-scoped) */
 enum { GG_COPY = 1, GG_PTR, GG_SET, GG_WATCH, GG_ENV, GG_SCANDIR, GG_CFSTR };
 static char cfstr_pool[32][96]; static int ncfstr;   /* CF string stand-ins: a CFStringRef is a pointer to the characters here */
-static gret_t grets[32]; static int ngrets;
-static gtype_t gtypes[64]; static int ngtypes; static gfunc_t gfuncs[160]; static int ngfuncs; static unsigned gb_next;
+static gret_t grets[160]; static int ngrets;
+static gtype_t gtypes[160]; static int ngtypes; static gfunc_t gfuncs[320]; static int ngfuncs; static unsigned gb_next;
 static int gs_nop(int a);
 static double gs_nopd(int a, double x) { (void)a; return x; }   /* a callback slot that returns a double: the argument back */
 static unsigned gnum(const char *s) { if (!strcmp(s, "fn")) return (unsigned)(uintptr_t)gs_nop; if (!strcmp(s, "fnd")) return (unsigned)(uintptr_t)gs_nopd; return (unsigned)strtoul(s, NULL, 0); }   /* `fn` / `fnd`: the address of the harmless harness function (the same in both images) */
@@ -301,10 +324,10 @@ static void load_graphspec(const char *path) {
         char *tok[80]; int nt = 0; char *h = strchr(line, '#'); if (h) *h = 0;
         for (char *p = strtok(line, " \t\r\n"); p && nt < 80; p = strtok(NULL, " \t\r\n")) tok[nt++] = p;
         if (!nt) continue;
-        if (!strcmp(tok[0], "type") && nt >= 3) { ct = &gtypes[ngtypes++]; memset(ct, 0, sizeof *ct); snprintf(ct->name, sizeof ct->name, "%s", tok[1]); ct->size = gnum(tok[2]); cf = NULL; continue; }
-        if (!strcmp(tok[0], "ret") && nt >= 3 && ngrets < 32) { gret_t *g = &grets[ngrets++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->pct = nt >= 4 ? atoi(tok[3]) : 100; if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
-        if (!strcmp(tok[0], "retpick") && nt >= 3 && ngrets < 32) { gret_t *g = &grets[ngrets++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); for (int i = 2; i < nt && g->nv < 8; i++) g->v[g->nv++] = gnum(tok[i]); if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
-        if (!strcmp(tok[0], "out") && nt >= 4 && ngouts < 16) { gout_t *g = &gouts[ngouts++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); g->arg = atoi(tok[2]); for (int i = 3; i < nt && g->nv < 8; i++) g->v[g->nv++] = gnum(tok[i]); if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
+        if (!strcmp(tok[0], "type") && nt >= 3) { if (ngtypes >= (int)(sizeof gtypes / sizeof *gtypes)) { fprintf(stderr, "graph spec: too many types\n"); exit(2); } ct = &gtypes[ngtypes++]; memset(ct, 0, sizeof *ct); snprintf(ct->name, sizeof ct->name, "%s", tok[1]); ct->size = gnum(tok[2]); cf = NULL; continue; }
+        if (!strcmp(tok[0], "ret") && nt >= 3 && ngrets < 160) { gret_t *g = &grets[ngrets++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->pct = nt >= 4 ? atoi(tok[3]) : 100; if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
+        if (!strcmp(tok[0], "retpick") && nt >= 3 && ngrets < 160) { gret_t *g = &grets[ngrets++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); for (int i = 2; i < nt && g->nv < 8; i++) g->v[g->nv++] = gnum(tok[i]); if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
+        if (!strcmp(tok[0], "out") && nt >= 4 && ngouts < 160) { gout_t *g = &gouts[ngouts++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); g->arg = atoi(tok[2]); for (int i = 3; i < nt && g->nv < 8; i++) g->v[g->nv++] = gnum(tok[i]); if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
         { int gk = !strcmp(tok[0], "gcopy") ? GG_COPY : !strcmp(tok[0], "gptr") ? GG_PTR : !strcmp(tok[0], "gset") ? GG_SET : !strcmp(tok[0], "gwatch") ? GG_WATCH : !strcmp(tok[0], "env") ? GG_ENV : !strcmp(tok[0], "scandirout") ? GG_SCANDIR : !strcmp(tok[0], "retcfstr") ? GG_CFSTR : 0;
           if (gk && cf && nt >= 2 && nglobs < 64) { gglob_t *g = &gglobs[nglobs++]; memset(g, 0, sizeof *g); g->kind = gk; g->pct = 100; snprintf(g->func, sizeof g->func, "%s", cf->name);
               if (gk == GG_SCANDIR) { snprintf(g->text, sizeof g->text, "%s", tok[1]); g->a = nt >= 3 ? gnum(tok[2]) : 3; }
@@ -316,7 +339,7 @@ static void load_graphspec(const char *path) {
                   if (gk == GG_WATCH && nt >= 3) g->a = gnum(tok[2]);
                   if (gk == GG_ENV && nt >= 3) snprintf(g->text, sizeof g->text, "%s", tok[2]); }
               ct = NULL; continue; } }
-        if (!strcmp(tok[0], "func") && nt >= 2) { cf = &gfuncs[ngfuncs++]; memset(cf, 0, sizeof *cf); snprintf(cf->name, sizeof cf->name, "%s", tok[1]); ct = NULL; continue; }
+        if (!strcmp(tok[0], "func") && nt >= 2) { if (ngfuncs >= (int)(sizeof gfuncs / sizeof *gfuncs)) { fprintf(stderr, "graph spec: too many funcs\n"); exit(2); } cf = &gfuncs[ngfuncs++]; memset(cf, 0, sizeof *cf); snprintf(cf->name, sizeof cf->name, "%s", tok[1]); ct = NULL; continue; }
         if (cf && !strcmp(tok[0], "arg") && nt >= 3) {
             garg_t *a = &cf->a[cf->na++]; memset(a, 0, sizeof *a); a->n = atoi(tok[1]); a->pct = 100;
             if (!strcmp(tok[2], "ptr") && nt >= 4) { a->kind = GA_PTR; snprintf(a->tname, sizeof a->tname, "%s", tok[3]); if (nt >= 5) a->pct = atoi(tok[4]); }
@@ -330,6 +353,7 @@ static void load_graphspec(const char *path) {
         if (ct && nt >= 2 && ct->nf < 40) {
             gfield_t *g = &ct->f[ct->nf]; memset(g, 0, sizeof *g); g->off = gnum(tok[1]); g->a = 0; g->b = 0; g->c = 100;
             if (!strcmp(tok[0], "ptr") && nt >= 3) { g->kind = GF_PTR; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); if (nt >= 4) g->c = gnum(tok[3]); }
+            else if (!strcmp(tok[0], "rlist") && nt >= 4) { g->kind = GF_RLIST; g->a = gnum(tok[2]); g->b = gnum(tok[3]); }
             else if (!strcmp(tok[0], "list") && nt >= 6) { g->kind = GF_LIST; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->a = gnum(tok[3]); g->b = gnum(tok[4]); g->c = gnum(tok[5]); }
             else if ((!strcmp(tok[0], "u8") || !strcmp(tok[0], "u16") || !strcmp(tok[0], "u32")) && nt >= 4) { g->kind = tok[0][1] == '8' ? GF_U8 : tok[0][1] == '1' ? GF_U16 : GF_U32; g->a = gnum(tok[2]); g->b = gnum(tok[3]); }
             else if (!strcmp(tok[0], "rand")) g->kind = GF_RAND;
@@ -362,6 +386,8 @@ static unsigned gb_build(gtype_t *t, int depth) {
         gfield_t *g = &t->f[i];
         switch (g->kind) {
         case GF_PTR: if (rnd32() % 100 < g->c) *(unsigned *)(b + g->off) = gb_build(gfind_type(g->tname), depth + 1); break;
+        case GF_RLIST: { unsigned n = grange(g->a, g->b), prev = 0, pos = 1 + rnd32() % 3; for (unsigned k = 0; k < n; k++) { unsigned e = gb_alloc(12), len = 1 + rnd32() % 4; *(unsigned *)(e + 4) = pos; *(unsigned *)(e + 8) = len; pos += len + rnd32() % 4;
+                if (prev) *(unsigned *)prev = e; else *(unsigned *)(b + g->off) = e; prev = e; } break; }
         case GF_LIST: { unsigned n = grange(g->a, g->b), prev = 0; for (unsigned k = 0; k < n; k++) { unsigned e = gb_build(gfind_type(g->tname), depth + 1); if (prev) *(unsigned *)((unsigned char *)prev + g->c) = e; else *(unsigned *)(b + g->off) = e; prev = e; } break; }
         case GF_HASH: { unsigned nn = grange(g->a, g->b); unsigned nameoff = g->c; unsigned mask = (unsigned)g->n; unsigned *bk = (unsigned *)(b + g->off);
             for (unsigned k = 0; k < nn; k++) { unsigned e = gb_build(gfind_type(g->tname), depth + 1); unsigned nm = 1 + k * 3 + rnd32() % 3;
@@ -485,11 +511,12 @@ static int gs_semantic(const char *nm, unsigned *a, unsigned *r) {
     return 0;
 }
 static unsigned alarm_us = 300000;
+static struct { unsigned addr, val; } cur_patch[16]; static int ncur_patch; static unsigned cur_apatch[8];   /* FNFUZZ_REPAIR: arena words the repair loop found must be pointers */
 static int nohandlers;
 static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     if (!nohandlers) {
         ualarm(alarm_us, 0);   /* a pure function finishes in microseconds; anything longer is a hang (both images are treated alike) */
-        signal(SIGSEGV, on_sig); signal(SIGBUS, on_sig); signal(SIGILL, on_sig); signal(SIGFPE, on_sig); signal(SIGTRAP, on_sig); signal(SIGABRT, on_sig); signal(SIGALRM, on_sig); signal(SIGSYS, on_sig);
+        if (getenv("FNFUZZ_REPAIR")) { struct sigaction sa; memset(&sa, 0, sizeof sa); sa.sa_sigaction = on_sig_info; sa.sa_flags = SA_SIGINFO; sigemptyset(&sa.sa_mask); sigaction(SIGSEGV, &sa, NULL); sigaction(SIGBUS, &sa, NULL); } else { signal(SIGSEGV, on_sig); signal(SIGBUS, on_sig); } signal(SIGILL, on_sig); signal(SIGFPE, on_sig); signal(SIGTRAP, on_sig); signal(SIGABRT, on_sig); signal(SIGALRM, on_sig); signal(SIGSYS, on_sig);
     }
     void *m = mmap((void *)ARENA_BASE, ARENA_SIZE, PROT_READ | PROT_WRITE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0);
     if (m != (void *)ARENA_BASE) _exit(9);
@@ -524,6 +551,8 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
         *(unsigned *)(H + 0x10) = 0; *(unsigned **)(H + 0x14) = T; *(unsigned *)(H + 0x18) = 0x400;
         ia[0] = (unsigned)ctx;
     }
+    for (int q = 0; q < ncur_patch; q++) *(unsigned *)cur_patch[q].addr = cur_patch[q].val;
+    for (int q = 0; q < 8; q++) if (cur_apatch[q]) { ia[q] = cur_apatch[q]; cur_args[q] = ia[q]; }
     { const char *sf = getenv("FNFUZZ_STACKFILL"); if (use_fill2 && getenv("FNFUZZ_STACKFILL2")) sf = getenv("FNFUZZ_STACKFILL2"); if (sf) { stackfill_word = (unsigned)strtoul(sf, NULL, 16); fill_stack(); } }
     if (mode == 0) { unsigned long long r = ((fi_t)fn)(ia[0], ia[1], ia[2], ia[3], ia[4], ia[5], ia[6], ia[7], sa[0], sa[1], sa[2], sa[3], sa[4], sa[5], sa[6], sa[7], sa[8], sa[9], sa[10], sa[11], sa[12], sa[13], sa[14], sa[15], da[0], da[1], da[2], da[3], da[4], da[5], da[6], da[7], da[8], da[9], da[10], da[11], da[12]); report(0, (unsigned)(r >> 32), (unsigned)r, 0); }
     else { double r = ((fd_t)fn)(ia[0], ia[1], ia[2], ia[3], ia[4], ia[5], ia[6], ia[7], sa[0], sa[1], sa[2], sa[3], sa[4], sa[5], sa[6], sa[7], sa[8], sa[9], sa[10], sa[11], sa[12], sa[13], sa[14], sa[15], da[0], da[1], da[2], da[3], da[4], da[5], da[6], da[7], da[8], da[9], da[10], da[11], da[12]); unsigned long long b; memcpy(&b, &r, 8); report(0, 0, 0, b); }
@@ -600,16 +629,30 @@ int main(int argc, char **argv) {
         cand_t *c = &cs[i]; if (flt && flt[0] != '@' && !strstr(c->name, flt)) continue;
         void *fn[2] = { (void *)(ap[0] + (c->stock_addr - a_stock)), (void *)(ap[1] + (c->reb_off - a_reb)) };
         cur_addrdep = 0; { const char *ad = getenv("FNFUZZ_ADDRDEP"); if (ad) { char bb[512]; snprintf(bb, sizeof bb, ",%s,", ad); char nn[160]; snprintf(nn, sizeof nn, ",%s,", c->name); cur_addrdep = strstr(bb, nn) != NULL; } }
-        int diffs = 0, good = 0, crash2 = 0, nd = 0, live = 0; unsigned lmask[5] = { 0, 0, 0, 0, 0 }, lcalls = 0; char why[360] = "";
+        int diffs = 0, good = 0, crash2 = 0, nd = 0, live = 0, nrun_ok = 0, npatched = 0; unsigned lmask[5] = { 0, 0, 0, 0, 0 }, lcalls = 0; char why[360] = "";
         for (int t = 0; t < trials; t++) {
             unsigned seed = 0x9e3779b1u * (t + 1) + c->id * 7919u;
             result_t a, a2, b;
             for (int mode = 0; mode < (c->rc == 'd' ? 2 : 1); mode++) {
                 if (c->rc == 'd' && mode == 0) { /* the digest is checked in the integer-return run, f1 in the second */ }
+                ncur_patch = 0; memset(cur_apatch, 0, sizeof cur_apatch); unsigned last_pc = 0, last_ra = 0;
+                if (getenv("FNFUZZ_REPAIR")) for (int it = 0; it < 16; it++) { result_t r0; run_one(fn[0], c, seed, mode, 0, &r0);
+                    if (getenv("FNFUZZ_REPAIR_DEBUG")) printf("  repair %s trial %d it %d: st=%d fix=%u src=%08x arg=%u disp=%d args %x %x pc %08x word %08x ra-value %08x\n", c->name, t, it, r0.status, r0.fix_valid, r0.fix_src, r0.fix_arg, (int)r0.fix_disp, r0.args[0], r0.args[1], r0.fault_pc, r0.fault_pc ? 0u : 0u, r0.fault_ra);
+                    if ((r0.status != 11 && r0.status != 10) || !r0.fix_valid) break;
+                    if (r0.fault_pc == last_pc && r0.fault_ra == last_ra) break;   /* the patch did not move the fault: the base is not what the backward scan found */
+                    last_pc = r0.fault_pc; last_ra = r0.fault_ra;
+                    int disp = (int)r0.fix_disp; unsigned lo = ARENA_BASE + 0x1000 + (disp < 0 ? -disp : 0), hi = ARENA_BASE + ARENA_SIZE - 0x1000 - (disp > 0 ? disp : 0) - 0x80;
+                    if (hi <= lo) break;
+                    unsigned h = (seed ^ 0x5bd1e995u) * (unsigned)(it * 2 + 3); h ^= h >> 15; h *= 0x2c1b3c6du; h ^= h >> 12;
+                    unsigned val = (lo + h % (hi - lo)) & ~15u; if (val < lo) val += 16;
+                    if (r0.fix_arg) { cur_apatch[r0.fix_arg - 1] = val; continue; }
+                    int q = 0; while (q < ncur_patch && cur_patch[q].addr != r0.fix_src) q++;
+                    if (q == ncur_patch) { if (ncur_patch >= 16) break; ncur_patch++; }
+                    cur_patch[q].addr = r0.fix_src; cur_patch[q].val = val; }
                 run_one(fn[0], c, seed, mode, 0, &a);
                 use_fill2 = 1; run_one(fn[0], c, seed, mode, 0, &a2); use_fill2 = 0;
                 run_one(fn[1], c, seed, mode, 1, &b);
-                ntrials++;
+                ntrials++; if (!a.status && !b.status) nrun_ok++; if (ncur_patch || cur_apatch[0] || cur_apatch[1] || cur_apatch[2] || cur_apatch[3]) npatched++;
                 if (!same(&a, &a2, c->rc)) { nd++; continue; }
                 if ((a.status == 14) != (b.status == 14)) {   /* a hang on one side only: the -O0 rebuild is several times slower than the -O2 stock on a long loop (`_pow_10(0x5000ec80)`), and machine load adds to it - rerun both with a 6 s limit before blaming the code */
                     alarm_us = 6000000; run_one(fn[0], c, seed, mode, 0, &a); run_one(fn[1], c, seed, mode, 1, &b); alarm_us = 300000;
@@ -623,6 +666,7 @@ int main(int argc, char **argv) {
             }
         }
         ncomp++;
+        if (getenv("FNFUZZ_REPAIR") && getenv("FNFUZZ_LISTUNINF")) printf("RUN %-40s %d/%d trials ran to the end in both images (%d trials needed patches)\n", c->name, nrun_ok, trials * (c->rc == 'd' ? 2 : 1), npatched);
         if (interpose) { char nm[1200] = ""; for (int q = 0; q < nstub; q++) if (lmask[q >> 5] & (1u << (q & 31))) { if (strlen(nm) + 60 < sizeof nm) { strcat(nm, " "); strcat(nm, stub_names[q]); } }
             printf("IMP %-40s live %d/%d trials (%d ended in a fault in both images), %u calls, imports:%s\n", c->name, live, trials, crash2, lcalls, nm[0] ? nm : " -"); if (live) nlive++; }
         if (nd == trials * (c->rc == 'd' ? 2 : 1)) { nnondet++; continue; }

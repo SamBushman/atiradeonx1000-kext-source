@@ -300,7 +300,7 @@ int main(int argc, char **argv) {
         if (getenv("CTXFUZZ_STATS")) printf("STAT %-40s slots %d, trials reaching a stub %d of %d\n", c->name, c->nind, nstub, trials);
         if (nd == trials * (c->rc == 'd' ? 2 : 1)) { nnondet++; continue; }
         if (diffs) { ndiff++; printf("DIFF %-40s %x (%s->%c, %d trials: %d differ, %d agree) %s\n", c->name, c->stock_addr, c->pc, c->rc, trials, diffs, good, why); }
-        else if (crash2 && good == crash2) { nuninf++; }
+        else if (crash2 && good == crash2) { nuninf++; if (getenv("FNFUZZ_LISTUNINF")) printf("UNINF %-40s %x (%s->%c) every one of %d trials ended in a signal in both images\n", c->name, c->stock_addr, c->pc, c->rc, trials); }
         if (!diffs && nargdiff && getenv("CTXFUZZ_ARGINFO")) printf("INFO %-40s %x: register values passed to the stubs differ in %d of %d agreeing trials (leftovers or a missing argument: see argtriage)\n", c->name, c->stock_addr, nargdiff, good);
         nboth_crash += crash2;
     }

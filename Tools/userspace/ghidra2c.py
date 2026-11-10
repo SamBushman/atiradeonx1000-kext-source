@@ -780,7 +780,10 @@ def fix_float_int(b, entry):
             # integer WORDS (GLDriver FUN_0002d2b0 packs colour channels: the C converted the value to float and lost the low bits of a 32-bit pixel; fnfuzz `graph` profile).
             # 32-bit PowerPC has no int -> float instruction outside the CONCAT44 magic-double sequence, so this is a bit copy even when float variables occur inside.
             # `(float)param_2[2]` with `double *param_2` is a conversion, not a word: _fv knows the function's own float/double pointers and variables (_FLOATY only the Ghidra names)
-            if opd and (not (_FLOATY.search(opd) or _fv.search(opd)) or re.match(r'^\(*\s*\(?(?:int|uint)\)', opd)) and not opd.startswith('('+'double') and 'CONCAT44' not in opd:
+            # a shift is an integer operation whatever the variables inside it are: `(float)(0x5f375a00 - ((uint)fVar1 >> 1))` is the inverse-square-root bit trick (_gleVectorNormalizeNO,
+            # _gleSphereGenST: the stock stores the integer word and reloads it with `lfs`), the rebuilt C converted the integer VALUE to float (fnfuzz FNFUZZ_REPAIR: normals came out +inf)
+            _isshift = bool(re.search(r'>>|<<', re.sub(r'"[^"]*"', '', opd)))
+            if opd and (not (_FLOATY.search(opd) or _fv.search(opd)) or _isshift or re.match(r'^\(*\s*\(?(?:int|uint)\)', opd)) and not opd.startswith('('+'double') and 'CONCAT44' not in opd:
                 out.append(b[i:st]); out.append('GH_U2F((unsigned int)(%s))' % fix_float_int(opd, entry)[0]); i = e; n += 1; continue
         elif _FCTIW is not None and (opd.startswith('(float)') or (opd.startswith('*(float *)') and re.search(r'[\])]\s*=\s*$', b[max(0, st - 40):st]))) and (opd.startswith('(float)((double)CONCAT44(0x43300000') or _FRSPCT.get(entry, 0) < len(re.findall(r'\((?:int|uint|undefined4|ulong)\)(?:\(float\)|\*\(float \*\))', b))):
             # `param_2[0x20] = (int)(float)((double)CONCAT44(0x43300000, x) - magic)`: the int -> float conversion sequence followed by `frsp; stfs` into a word Ghidra

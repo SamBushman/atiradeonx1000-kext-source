@@ -513,3 +513,257 @@ func _glePreInitVectorTOC
   gwatch _gle_rtc_toc_struct 24
 func _gleInitVectorConstants
   arg 0 ptr VTOC
+
+# ---- _glUniform*ARB_Exec (19 functions): the current program object (ctx+0x5430) with its uniform count (+0x30), ShHandle (+0x40), uniform value storage (+0x4c, 16 bytes per location) and the two stage states
+# (+0x20 / +0x24: +0x4e0 -> per-location index table (-1 = unused), +0x51c -> stage constant storage, +0x4e4.. the per-slot ids handed to the renderer dispatch), plus the per-renderer dispatch blocks
+# (ctx+0x85a4 count byte; ctx+0x8884 + 0x2e0*k -> block with a callback at +0x194). ShGetUniformTypeInfo (size, type, shorts through out-pointers 2 / 3 / 4) answers from the type families the function accepts
+# and sometimes an unaccepted type, so both the store paths and the GL_INVALID_OPERATION path (ctx+0x7574 = 0x502) are taken.
+type UNIDSP 0x200
+  fn 0x194
+type UNIDX 0x40
+  pick 0x00 0xffffffff 0 1 2 3
+  pick 0x04 0xffffffff 0 1 2 3
+  pick 0x08 0xffffffff 0 1 2 3
+  pick 0x0c 0xffffffff 0 1 2 3
+  pick 0x10 0xffffffff 0 1 2 3
+  pick 0x14 0xffffffff 0 1 2 3
+  pick 0x18 0xffffffff 0 1 2 3
+  pick 0x1c 0xffffffff 0 1 2 3
+type UNSTO 0x100
+  randfill 0 0x100 65536
+type UNPS 0x540
+  ptr 0x4e0 UNIDX
+  randfill 0x4e4 0x10 256
+  ptr 0x51c UNSTO
+type UNPROG 0x60
+  u32 0x30 1 8
+  ptr 0x20 UNPS
+  ptr 0x24 UNPS
+  ptr 0x40 SHH 100
+  ptr 0x4c UNSTO
+type UNCTX 0x9000
+  pick 0x4a10 0x80000000 0x80000000 0x80000000 0x00010000
+  pick 0x7574 0 0 0x502
+  ptr 0x5430 UNPROG 92
+  u8 0x85a4 0 2
+  ptr 0x8884 UNIDSP
+  ptr 0x8b64 UNIDSP
+  ptr 0x8e44 UNIDSP
+  randfill 0x31c 0x10 0x100
+func _glUniform1fARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x1406 0x1406 0x8b56 0x1406 0x1234
+func _glUniform2fARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b50 0x8b50 0x8b57 0x8b50 0x1234
+func _glUniform3fARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b51 0x8b51 0x8b58 0x8b51 0x1234
+func _glUniform4fARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b52 0x8b52 0x8b59 0x8b52 0x1234
+func _glUniform1fvARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 4 0xffffffff
+  arg 3 ptr UNSTO
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x1406 0x1406 0x8b56 0x1406 0x1234
+func _glUniform2fvARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 4 0xffffffff
+  arg 3 ptr UNSTO
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b50 0x8b50 0x8b57 0x8b50 0x1234
+func _glUniform3fvARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 4 0xffffffff
+  arg 3 ptr UNSTO
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b51 0x8b51 0x8b58 0x8b51 0x1234
+func _glUniform4fvARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 4 0xffffffff
+  arg 3 ptr UNSTO
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b52 0x8b52 0x8b59 0x8b52 0x1234
+func _glUniform1iARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 0xffffffff
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x1404 0x1404 0x8b56 0x8b5d 0x8b64 0x1234
+func _glUniform2iARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 0xffffffff
+  arg 3 pick 0 1 2 3 0xffffffff
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b53 0x8b53 0x8b57 0x8b53 0x1234
+func _glUniform3iARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 0xffffffff
+  arg 3 pick 0 1 2 3 0xffffffff
+  arg 4 pick 0 1 2 3 0xffffffff
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b54 0x8b54 0x8b58 0x8b54 0x1234
+func _glUniform4iARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 0xffffffff
+  arg 3 pick 0 1 2 3 0xffffffff
+  arg 4 pick 0 1 2 3 0xffffffff
+  arg 5 pick 0 1 2 3 0xffffffff
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b55 0x8b55 0x8b59 0x8b55 0x1234
+func _glUniform1ivARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 4 0xffffffff
+  arg 3 ptr UNSTO
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x1404 0x1404 0x8b56 0x8b5d 0x8b64 0x1234
+func _glUniform2ivARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 4 0xffffffff
+  arg 3 ptr UNSTO
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b53 0x8b53 0x8b57 0x8b53 0x1234
+func _glUniform3ivARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 4 0xffffffff
+  arg 3 ptr UNSTO
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b54 0x8b54 0x8b58 0x8b54 0x1234
+func _glUniform4ivARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 4 0xffffffff
+  arg 3 ptr UNSTO
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b55 0x8b55 0x8b59 0x8b55 0x1234
+func _glUniformMatrix2fvARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 4 0xffffffff
+  arg 3 int 0 1
+  arg 4 ptr UNSTO
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b5a 0x8b5a 0x8b5a 0x1234
+func _glUniformMatrix3fvARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 4 0xffffffff
+  arg 3 int 0 1
+  arg 4 ptr UNSTO
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b5b 0x8b5b 0x8b5b 0x1234
+func _glUniformMatrix4fvARB_Exec
+  arg 0 ptr UNCTX
+  arg 1 pick 0 1 2 3 4 5 6 7 0xffffffff
+  arg 2 pick 0 1 2 3 4 0xffffffff
+  arg 3 int 0 1
+  arg 4 ptr UNSTO
+  retpick ShGetUniformTypeInfo 1 1 1 0
+  out ShGetUniformTypeInfo 2 1 2 3 4
+  out ShGetUniformTypeInfo 3 0x8b5c 0x8b5c 0x8b5c 0x1234
+
+# ---- the name generators: _gleGenHashNames / _gleAddHashName / _gleRemoveHashName (a free-name range list: head word at +0x1000 of their first argument, nodes {+0 next, +4 first free name, +8 length}) and the
+# _glGen{Textures,Lists,Buffers,VertexArraysEXT,ProgramsARB,RenderbuffersEXT,FramebuffersEXT,Queries}_Exec callers (each passes another base inside the shared state ctx+0x5148, or inside the context itself for the queries:
+# the list heads are SS+0x1000 (framebuffers), +0x2004, +0x3008 (textures), +0x400c (lists), +0x5010 (programs), +0x6014 (vertex arrays), +0x801c (buffers); ctx+0x7440 (queries, only when ctx+0x7444 == 0);
+# SS+0x8024 is the mutex flag byte). Ranges are short (first name 1..40, length 1..6) and the requested count 0..6 (or -1), so the merge / split / append / malloc / free branches are all taken.
+type HNNODE 0xc
+  ptr 0x00 HNNODE 60
+  u32 0x04 1 40
+  u32 0x08 1 6
+type HNLIST 0x1010
+  rlist 0x1000 0 5
+type HNSS 0x8040
+  u8 0x8024 0 1
+  rlist 0x1000 0 5
+  rlist 0x2004 0 5
+  rlist 0x3008 0 5
+  rlist 0x400c 0 5
+  rlist 0x5010 0 5
+  rlist 0x6014 0 5
+  rlist 0x801c 0 5
+type HNOUT 0x40
+  randfill 0 0x40 65536
+type HNCTX 0x7600
+  pick 0x4a10 0x80000000 0x80000000 0x80000000 0x00010000
+  pick 0x7574 0 0 0x502
+  ptr 0x5148 HNSS
+  rlist 0x7440 0 5
+  pick 0x7444 0 0 0 1
+func _gleGenHashNames
+  arg 0 ptr HNLIST
+  arg 1 pick 0 1 2 3 4 5 6 40
+func _gleAddHashName
+  arg 0 ptr HNLIST
+  arg 1 int 0 45
+func _gleRemoveHashName
+  arg 0 ptr HNLIST
+  arg 1 int 0 45
+func _glGenTextures_Exec
+  arg 0 ptr HNCTX
+  arg 1 pick 0 1 2 3 4 5 0xffffffff
+  arg 2 ptr HNOUT
+func _glGenBuffers_Exec
+  arg 0 ptr HNCTX
+  arg 1 pick 0 1 2 3 4 5 0xffffffff
+  arg 2 ptr HNOUT
+func _glGenVertexArraysEXT_Exec
+  arg 0 ptr HNCTX
+  arg 1 pick 0 1 2 3 4 5 0xffffffff
+  arg 2 ptr HNOUT
+func _glGenProgramsARB_Exec
+  arg 0 ptr HNCTX
+  arg 1 pick 0 1 2 3 4 5 0xffffffff
+  arg 2 ptr HNOUT
+func _glGenRenderbuffersEXT_Exec
+  arg 0 ptr HNCTX
+  arg 1 pick 0 1 2 3 4 5 0xffffffff
+  arg 2 ptr HNOUT
+func _glGenFramebuffersEXT_Exec
+  arg 0 ptr HNCTX
+  arg 1 pick 0 1 2 3 4 5 0xffffffff
+  arg 2 ptr HNOUT
+func _glGenQueries_Exec
+  arg 0 ptr HNCTX
+  arg 1 pick 0 1 2 3 4 5 0xffffffff
+  arg 2 ptr HNOUT
+func _glGenLists_Exec
+  arg 0 ptr HNCTX
+  arg 1 pick 0 1 2 3 4 5 0xffffffff
