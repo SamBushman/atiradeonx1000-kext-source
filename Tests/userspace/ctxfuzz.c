@@ -167,7 +167,7 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
         case 'n': if (k < 8) { unsigned v; do v = gen_int(); while (v >= ARENA_BASE && v < ARENA_BASE + ARENA_SIZE); ia[k] = v; } k++; break;   /* a definite integer: no arena pointers (a table index made of an address reads wherever the image's layout puts it) */
         case 'L': if (k < 8) ia[k] = gen_int(); if (k + 1 < 8) ia[k + 1] = gen_int(); k += 2; break;
         case 'f': if (j < 13) da[j] = gen_double(1); j++; k += 1; break;
-        case 'd': if (j < 13) da[j] = gen_double(0); j++; k += 2; break;
+        case 'd': if (j < 13) da[j] = gen_double(getenv("FNFUZZ_FLOATARGS") != NULL); j++; k += 2; break;   /* FNFUZZ_FLOATARGS=1: only float-valued doubles (see fnfuzz.c) */
         }
     }
     for (int q = (k < 8 ? k : 8); q < 8; q++) ia[q] = gen_int();

@@ -110,7 +110,7 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
         case 'n': if (k < 8) { unsigned v; do v = gen_int(); while (v >= ARENA_BASE && v < ARENA_BASE + ARENA_SIZE); ia[k] = v; } k++; break;   /* a definite integer: no arena pointers (a table index made of an address reads wherever the image's layout puts it) */
         case 'L': if (k < 8) ia[k] = gen_int(); if (k + 1 < 8) ia[k + 1] = gen_int(); k += 2; break;
         case 'f': if (j < 13) da[j] = gen_double(1); j++; k += 1; break;
-        case 'd': if (j < 13) da[j] = gen_double(0); j++; k += 2; break;
+        case 'd': if (j < 13) da[j] = gen_double(getenv("FNFUZZ_FLOATARGS") != NULL); j++; k += 2; break;   /* FNFUZZ_FLOATARGS=1: only float-valued doubles (an ABI-valid argument of a float parameter the corpus declares double) */
         }
     }
     for (int q = (k < 8 ? k : 8); q < 8; q++) ia[q] = gen_int();
@@ -118,6 +118,16 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     /* the 9th..12th integer words of the call are the caller-stack words at SP+0x38..0x44 (Darwin PPC); a function with more than 8 integer parameters (or reading its caller's frame) must see defined values, not the harness's stack residue, which differs between the images */
     unsigned sa[4]; for (int q = 0; q < 4; q++) { unsigned k4 = rnd32() % 4; sa[q] = k4 == 0 ? 0 : k4 < 3 ? arena_ptr() : gen_int(); }
     memcpy(cur_args, ia, sizeof cur_args); memcpy(cur_dargs, da, sizeof cur_dargs);
+    if (getenv("FNFUZZ_LISTCTX")) {
+        /* FNFUZZ_LISTCTX=1: parameter 0 is a valid display-list context (the shape gleng_mock_listitem.c builds): a zeroed 0x8000-byte ctx at arena+0x1000 whose +0x53e8 points at a list block H
+           (+0x10 item count, +0x14 table of item sizes, +0x18 table capacity) with room for ~100 items, ctx+0x5400 = 0x1c bytes used, ctx+0x53fc = the buffer capacity. The _Comp functions
+           (glList compilers: _gleAddListItem, then stores of the arguments) then run on a context they can use instead of garbage, where _gleAddListItem's realloc is the divergence. */
+        unsigned char *ctx = (unsigned char *)ARENA_BASE + 0x1000, *H = (unsigned char *)ARENA_BASE + 0xa000; unsigned *T = (unsigned *)(ARENA_BASE + 0x12000);
+        memset(ctx, 0, 0x8000); memset(H, 0, 0x8000); memset(T, 0, 0x1000);
+        *(unsigned char **)(ctx + 0x53e8) = H; *(unsigned *)(ctx + 0x53fc) = 0x8000; *(unsigned *)(ctx + 0x5400) = 0x1c;
+        *(unsigned *)(H + 0x10) = 0; *(unsigned **)(H + 0x14) = T; *(unsigned *)(H + 0x18) = 0x400;
+        ia[0] = (unsigned)ctx;
+    }
     { const char *sf = getenv("FNFUZZ_STACKFILL"); if (sf) { stackfill_word = (unsigned)strtoul(sf, NULL, 16); fill_stack(); } }
     if (mode == 0) { unsigned long long r = ((fi_t)fn)(ia[0], ia[1], ia[2], ia[3], ia[4], ia[5], ia[6], ia[7], sa[0], sa[1], sa[2], sa[3], da[0], da[1], da[2], da[3], da[4], da[5], da[6], da[7], da[8], da[9], da[10], da[11], da[12]); report(0, (unsigned)(r >> 32), (unsigned)r, 0); }
     else { double r = ((fd_t)fn)(ia[0], ia[1], ia[2], ia[3], ia[4], ia[5], ia[6], ia[7], sa[0], sa[1], sa[2], sa[3], da[0], da[1], da[2], da[3], da[4], da[5], da[6], da[7], da[8], da[9], da[10], da[11], da[12]); unsigned long long b; memcpy(&b, &r, 8); report(0, 0, 0, b); }
