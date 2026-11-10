@@ -91,6 +91,27 @@ Conclusion: the DIFF is an uninitialised stack word read in both images; every d
 Earlier run16 ctxfuzz DIFF (stock st 14 hang, rebuilt returned) does not reproduce: with `CTXFUZZ_ARGINFO=1` 48 trials PASS under no fill, fill 0 and fill 01010101 (run17_targeted.log).
 The earlier divergence therefore depended on stack residue / heap state of that run, not on the code.
 
-<!-- RUN17/18 RESULTS: filled in when the runs finish -->
-<!-- RUN16 RESULTS (superseded by the run17/run18 lines above) -->
+## 9. `_glWeight{bv,sv,iv,dv,ubv,usv,uiv}ARB_Comp[Exec]`: a real defect (fixed in 05a0a503)
+
+Found by the `_Comp` family run (run19: `FNFUZZ_LISTCTX=1 FNFUZZ_FLOATARGS=1 FNFUZZ_STACKFILL=0`, 966 functions, 11796 trials): 14 functions, digest differs (the list item the function writes), r3 differs.
+Cause: Ghidra's decompiler prototype typed the count (`param_2`) `float` and the context/list pointer (`param_1`, reused for the list slot) `float *`, because the count is stored through a `float *` slot.
+A `float` parameter arrives in f1; the stock code (and the K&R `_CompExec` callers) pass the count in r4, so the rebuilt function (a3a6228a: `fctiwz f0,f1`) read it from f1, and the list item's count word was the f1 bit pattern.
+The old C also compared and stored the context's error word as a float (`param_1[0x1d5d] == 0.0`, store of `1.79506e-42` = 0x501).
+Fix at the source, not in the C: `RetypeParams.java 0x<entry>:0` (all three parameters -> `uint`) on the Ghidra project copy, full re-dump, corpus rebuilt; the stored count is `*(uint *)p = n` (integer store, `stw`), the entries `*(float *)p`.
+Audit: over the whole dump (3385 functions) and the corpus, no other function has a `float`/`double` parameter named `param_N` (a general-purpose-register parameter).
+Verification (image 05a0a503): `image_function_diff.py` a3a6228a vs 05a0a503: 17 functions differ: the 14 Weight functions (`stmw r30` prologue -> `cmpwi cr7,r4,0x4`; `or r29,r4,r4` -> `or r29,r3,r3` in the wrappers) and `_gleVPGetResultOffset`,
+`_gleVPGetParameterPtr`, `_glGetPixelMapuiv_Exec`, whose only change is a displacement that moves with the code layout (`lis r2,0x2 -> 0x3`, `addi r2,r2,0x88 -> 0x428`). All 26 `_glWeight*` functions
+(run20_weight.log): `FNFUZZ_LISTCTX=1 FNFUZZ_FLOATARGS=1` with stack fill 0, 01010101 and none, 48 trials each: 1248 trials, 0 differ, three times.
+
+## 10. Totals (images a3a6228a for run16-run19, 05a0a503 for run20)
+
+- Plain ledger (2673 candidates): complete. run16 covered 0..844 (30 DIFF lines, sections 1-5), run18 A/B/C covered 845..2672 (A 24, B 15, C 3 DIFF lines; the partial run16 ranges from index 1000 are superseded by it).
+  Every DIFF line is explained by a section of this file: `_Comp` list compilers on a random context -> section 5 and the family run below; `_gleLookUpTexture1D`, `_gleLookUpNonProxyTexture1D`,
+  `_gleLookUpNonProxyTexture3D` -> section 2 (stock loads ctx+0x53d4 first; random ctx faults in stock only; 48 of 48 pass with `FNFUZZ_LISTCTX=1`, run19_lookup.log).
+- ctx ledger (595 candidates): complete; the tail 555..594 (run17) has 0 DIFFs.
+- `_Comp` family (966 functions) on a valid list context: run19 26 DIFFs = 14 Weight (section 9, fixed) + 12 f1-only. run20 on 05a0a503: **12 DIFFs, all f1-only, digest and r3 equal**:
+  `_glMapVertexAttrib1dARB_Comp` (f1 +1.28125 / -1.28125) and the 11 `_glRasterPos{2,3,4}{i,s,iv,sv}_Comp` (rebuilt f1 = c24bc19587859393 = the magic-double constant left in f1, stock f1 = whatever the last
+  float operation left). These stock functions are void (they end in `blr` with no value computed); the corpus declares a `double` return because Ghidra's signature comes from register liveness. Not changed (same
+  decision as section 1: a `void` return would only hide the leftover).
+- Not covered by a differential: functions the harnesses cannot run (system calls, atomics, unsafe imports: 3385 - 2673 - 595 = 117 functions). Those need the mock harnesses (phase 3, import-reachable functions) and are open.
 
