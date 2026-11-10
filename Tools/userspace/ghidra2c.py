@@ -1028,7 +1028,11 @@ for pi in range(0, len(funcs), part):
         f.write('#include "decls.h"\n\n')
         for a, sz, name in chunk:
             b = bodies.get(a)
-            if b is None: led.append((a, sz, name, pn, 'DECOMPILE-FAILED')); continue
+            if b is None:
+                # a function the decompiler cannot handle (GLEngine _gleInvertMatrix_AltiVec: AltiVec) that is transcribed by hand: <out>/hand/ledger.tsv + part_000.c (an extra corpus of the link, link_config/gleng.json)
+                _hl = os.path.join(out, 'hand', 'ledger.tsv')
+                if os.path.exists(_hl) and any(l_.split('\t')[2:3] == [name] for l_ in open(_hl)): led.append((a, sz, name, pn, 'hand-transcribed (hand/part_000.c)')); continue
+                led.append((a, sz, name, pn, 'DECOMPILE-FAILED')); continue
             f.write('/* %s @ %s (%d bytes) */\n' % (name, a, sz))
             labels = set(re.findall(r'^\s*(LAB_[0-9a-f]+):', b, flags=re.M)) | set(re.findall(r'^(switchD_\w+):', b, flags=re.M))
             def fixgoto(m):

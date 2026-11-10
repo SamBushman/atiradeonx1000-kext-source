@@ -13,5 +13,8 @@
  },
  "extra_raw_entries": [
   "9e4cc"
+ ],
+ "extra_corpora": [
+  "hand"
  ]
 }

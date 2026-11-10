@@ -307,7 +307,7 @@
 0x33470	68	_gleCopyMatrix	part_005	converted
 0x334b4	188	_gleModelMatInvert	part_005	converted
 0x33570	80	_gleSetupInvertMatrix	part_005	converted
-0x335c0	624	_gleInvertMatrix_AltiVec	part_005	DECOMPILE-FAILED
+0x335c0	624	_gleInvertMatrix_AltiVec	part_005	hand-transcribed (hand/part_000.c)
 0x33830	276	_glPopMatrix_Exec	part_005	converted
 0x33944	188	_glGenLists_Exec	part_005	converted
 0x33a00	116	_glNewList_Exec	part_005	converted
