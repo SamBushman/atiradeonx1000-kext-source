@@ -17,7 +17,7 @@ int _glWindowPos3dv_Comp(param_1, param_2)
 }
 
 /* _glWindowPos3dv_CompExec @ 0xb1cc4 (56 bytes) */
-int _glWindowPos3dv_CompExec(param_1, param_2)
+void _glWindowPos3dv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -62,7 +62,7 @@ void _glWindowPos2f_CompExec(undefined4 param_1,double fparam_1,double fparam_2)
 }
 
 /* _glWindowPos2fv_Exec @ 0xb1df0 (72 bytes) */
-int _glWindowPos2fv_Exec(param_1, param_2)
+void _glWindowPos2fv_Exec(param_1, param_2)
   int param_1;
   float *param_2;
 {
@@ -93,7 +93,7 @@ int _glWindowPos2fv_Comp(param_1, param_2)
 }
 
 /* _glWindowPos2fv_CompExec @ 0xb1e90 (56 bytes) */
-int _glWindowPos2fv_CompExec(param_1, param_2)
+void _glWindowPos2fv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -139,7 +139,7 @@ void _glWindowPos3f_CompExec(undefined4 param_1,double fparam_1,double fparam_2,
 }
 
 /* _glWindowPos3fv_Exec @ 0xb1fc4 (52 bytes) */
-int _glWindowPos3fv_Exec(param_1, param_2)
+void _glWindowPos3fv_Exec(param_1, param_2)
   int param_1;
   float *param_2;
 {
@@ -171,7 +171,7 @@ int _glWindowPos3fv_Comp(param_1, param_2)
 }
 
 /* _glWindowPos3fv_CompExec @ 0xb2058 (56 bytes) */
-int _glWindowPos3fv_CompExec(param_1, param_2)
+void _glWindowPos3fv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -181,7 +181,7 @@ int _glWindowPos3fv_CompExec(param_1, param_2)
 }
 
 /* _glWindowPos2i_Exec @ 0xb2090 (148 bytes) */
-int _glWindowPos2i_Exec(param_1, param_2, param_3)
+void _glWindowPos2i_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   uint param_3;
@@ -217,7 +217,7 @@ int _glWindowPos2i_Comp(param_1, param_2, param_3)
 }
 
 /* _glWindowPos2i_CompExec @ 0xb21b4 (64 bytes) */
-int _glWindowPos2i_CompExec(param_1, param_2, param_3)
+void _glWindowPos2i_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -228,7 +228,7 @@ int _glWindowPos2i_CompExec(param_1, param_2, param_3)
 }
 
 /* _glWindowPos2iv_Exec @ 0xb21f4 (156 bytes) */
-int _glWindowPos2iv_Exec(param_1, param_2)
+void _glWindowPos2iv_Exec(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -262,7 +262,7 @@ int _glWindowPos2iv_Comp(param_1, param_2)
 }
 
 /* _glWindowPos2iv_CompExec @ 0xb2324 (56 bytes) */
-int _glWindowPos2iv_CompExec(param_1, param_2)
+void _glWindowPos2iv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -272,7 +272,7 @@ int _glWindowPos2iv_CompExec(param_1, param_2)
 }
 
 /* _glWindowPos3i_Exec @ 0xb235c (160 bytes) */
-int _glWindowPos3i_Exec(param_1, param_2, param_3, param_4)
+void _glWindowPos3i_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -313,7 +313,7 @@ int _glWindowPos3i_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glWindowPos3i_CompExec @ 0xb24ac (72 bytes) */
-int _glWindowPos3i_CompExec(param_1, param_2, param_3, param_4)
+void _glWindowPos3i_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -325,7 +325,7 @@ int _glWindowPos3i_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glWindowPos3iv_Exec @ 0xb24f4 (172 bytes) */
-int _glWindowPos3iv_Exec(param_1, param_2)
+void _glWindowPos3iv_Exec(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -362,7 +362,7 @@ int _glWindowPos3iv_Comp(param_1, param_2)
 }
 
 /* _glWindowPos3iv_CompExec @ 0xb2654 (56 bytes) */
-int _glWindowPos3iv_CompExec(param_1, param_2)
+void _glWindowPos3iv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -372,7 +372,7 @@ int _glWindowPos3iv_CompExec(param_1, param_2)
 }
 
 /* _glWindowPos2s_Exec @ 0xb268c (148 bytes) */
-int _glWindowPos2s_Exec(param_1, param_2, param_3)
+void _glWindowPos2s_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   uint param_3;
@@ -408,7 +408,7 @@ int _glWindowPos2s_Comp(param_1, param_2, param_3)
 }
 
 /* _glWindowPos2s_CompExec @ 0xb27b0 (64 bytes) */
-int _glWindowPos2s_CompExec(param_1, param_2, param_3)
+void _glWindowPos2s_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -419,7 +419,7 @@ int _glWindowPos2s_CompExec(param_1, param_2, param_3)
 }
 
 /* _glWindowPos2sv_Exec @ 0xb27f0 (156 bytes) */
-int _glWindowPos2sv_Exec(param_1, param_2)
+void _glWindowPos2sv_Exec(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -453,7 +453,7 @@ int _glWindowPos2sv_Comp(param_1, param_2)
 }
 
 /* _glWindowPos2sv_CompExec @ 0xb2920 (56 bytes) */
-int _glWindowPos2sv_CompExec(param_1, param_2)
+void _glWindowPos2sv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -463,7 +463,7 @@ int _glWindowPos2sv_CompExec(param_1, param_2)
 }
 
 /* _glWindowPos3s_Exec @ 0xb2958 (160 bytes) */
-int _glWindowPos3s_Exec(param_1, param_2, param_3, param_4)
+void _glWindowPos3s_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -504,7 +504,7 @@ int _glWindowPos3s_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glWindowPos3s_CompExec @ 0xb2aa8 (72 bytes) */
-int _glWindowPos3s_CompExec(param_1, param_2, param_3, param_4)
+void _glWindowPos3s_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -516,7 +516,7 @@ int _glWindowPos3s_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glWindowPos3sv_Exec @ 0xb2af0 (172 bytes) */
-int _glWindowPos3sv_Exec(param_1, param_2)
+void _glWindowPos3sv_Exec(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -553,7 +553,7 @@ int _glWindowPos3sv_Comp(param_1, param_2)
 }
 
 /* _glWindowPos3sv_CompExec @ 0xb2c50 (56 bytes) */
-int _glWindowPos3sv_CompExec(param_1, param_2)
+void _glWindowPos3sv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -563,7 +563,7 @@ int _glWindowPos3sv_CompExec(param_1, param_2)
 }
 
 /* _glCombinerParameterfvNV_Exec @ 0xb2c88 (568 bytes) */
-int _glCombinerParameterfvNV_Exec(param_1, param_2, param_3)
+void _glCombinerParameterfvNV_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   float *param_3;
@@ -645,7 +645,7 @@ LAB_000b2eb0:
 }
 
 /* _glCombinerStageParameterfvNV_Exec @ 0xb2ec0 (404 bytes) */
-int _glCombinerStageParameterfvNV_Exec(param_1, param_2, param_3, param_4)
+void _glCombinerStageParameterfvNV_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -817,7 +817,7 @@ void _glCombinerParameteriNV_Exec(int param_1,int param_2,undefined4 param_3,dou
 }
 
 /* _glCombinerInputNV_Exec @ 0xb3344 (336 bytes) */
-int _glCombinerInputNV_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _glCombinerInputNV_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   int param_2;
   int param_3;
@@ -896,7 +896,7 @@ LAB_000b3448:
 }
 
 /* _glCombinerOutputNV_Exec @ 0xb3494 (504 bytes) */
-int _glCombinerOutputNV_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
+void _glCombinerOutputNV_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
   int param_1;
   int param_2;
   int param_3;
@@ -979,7 +979,7 @@ LAB_000b362c:
 }
 
 /* _glFinalCombinerInputNV_Exec @ 0xb368c (336 bytes) */
-int _glFinalCombinerInputNV_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glFinalCombinerInputNV_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   uint param_3;
@@ -1045,7 +1045,7 @@ LAB_000b36b8:
 }
 
 /* _glGetCombinerStageParameterfvNV_Exec @ 0xb37dc (124 bytes) */
-int _glGetCombinerStageParameterfvNV_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _glGetCombinerStageParameterfvNV_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   int param_2;
   int param_3;
@@ -1118,7 +1118,7 @@ LAB_000b3964:
 }
 
 /* _glGetCombinerInputParameterivNV_Exec @ 0xb397c (260 bytes) */
-int _glGetCombinerInputParameterivNV_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glGetCombinerInputParameterivNV_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   int param_3;
@@ -1223,7 +1223,7 @@ switchD_000b3af0_default:
 }
 
 /* FUN_000b3c14 @ 0xb3c14 (332 bytes) */
-int FUN_000b3c14(param_1, param_2, param_3, param_4, param_5)
+void FUN_000b3c14(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -1312,7 +1312,7 @@ LAB_000b3e24:
 }
 
 /* _glGetFinalCombinerInputParameterivNV_Exec @ 0xb3e3c (156 bytes) */
-int _glGetFinalCombinerInputParameterivNV_Exec(param_1, param_2, param_3, param_4)
+void _glGetFinalCombinerInputParameterivNV_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   uint param_3;

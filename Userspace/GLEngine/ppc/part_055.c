@@ -23,7 +23,7 @@ int _gleCreateGlobalLevel(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gleSynchronizePluginTextureLevels @ 0x103574 (308 bytes) */
-int _gleSynchronizePluginTextureLevels(param_1, param_2)
+void _gleSynchronizePluginTextureLevels(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -73,7 +73,7 @@ int _gleSynchronizePluginTextureLevels(param_1, param_2)
 }
 
 /* _gleSynchronizePluginTextures @ 0x1036a8 (108 bytes) */
-int _gleSynchronizePluginTextures(param_1)
+void _gleSynchronizePluginTextures(param_1)
   int param_1;
 {
   int iVar1;
@@ -307,7 +307,7 @@ void FUN_00103960(int param_1,uint param_2,int param_3,int param_4,double fparam
 }
 
 /* _gleMultiTextureMatTrans @ 0x103a68 (120 bytes) */
-int _gleMultiTextureMatTrans(param_1, param_2, param_3)
+void _gleMultiTextureMatTrans(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -423,7 +423,7 @@ undefined4 _gleForceToSoftwareTCL(int param_1,double fparam_1,double fparam_2,do
   piVar14 = (int *)(param_1 + 0x310);
   cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
   if ((iVar6 != 0) && (*(int *)(iVar6 + 0xec) != 0)) {
-    ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar8,fparam_1,fparam_2,fparam_3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar8,fparam_1,fparam_2,fparam_3,
                fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
   }
@@ -682,7 +682,7 @@ int _gleBindVertexArray(param_1, param_2)
 }
 
 /* _gleReclaimVertexArrayResources @ 0x104260 (352 bytes) */
-int _gleReclaimVertexArrayResources(param_1)
+void _gleReclaimVertexArrayResources(param_1)
   int param_1;
 {
   int *piVar1;
@@ -751,7 +751,7 @@ int _gleReclaimVertexArrayResources(param_1)
 }
 
 /* _gleVPFlipColors @ 0x1043c0 (404 bytes) */
-int _gleVPFlipColors(param_1, param_2, param_3, param_4)
+double _gleVPFlipColors(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   int param_3;
@@ -826,7 +826,7 @@ int _gleVPFlipColors(param_1, param_2, param_3, param_4)
 }
 
 /* _gleVPRenderPoints @ 0x104554 (324 bytes) */
-int _gleVPRenderPoints(param_1)
+void _gleVPRenderPoints(param_1)
   int param_1;
 {
   int iVar1;
@@ -873,7 +873,7 @@ int _gleVPRenderPoints(param_1)
 }
 
 /* _gleVPRenderLines @ 0x104698 (420 bytes) */
-int _gleVPRenderLines(param_1)
+void _gleVPRenderLines(param_1)
   int param_1;
 {
   uint uVar1;
@@ -933,7 +933,7 @@ int _gleVPRenderLines(param_1)
 }
 
 /* _gleVPRenderLineStrip @ 0x10483c (436 bytes) */
-int _gleVPRenderLineStrip(param_1)
+void _gleVPRenderLineStrip(param_1)
   int param_1;
 {
   char cVar1;
@@ -1003,7 +1003,7 @@ int _gleVPRenderLineStrip(param_1)
 }
 
 /* _gleVPRenderLineLoop @ 0x1049f0 (540 bytes) */
-int _gleVPRenderLineLoop(param_1)
+void _gleVPRenderLineLoop(param_1)
   int param_1;
 {
   char cVar1;
@@ -1105,7 +1105,7 @@ int _gleVPRenderLineLoop(param_1)
 }
 
 /* FUN_00104c10 @ 0x104c10 (876 bytes) */
-int FUN_00104c10(param_1)
+void FUN_00104c10(param_1)
   int param_1;
 {
   byte bVar1;
@@ -1272,7 +1272,7 @@ LAB_00104f54:
 }
 
 /* FUN_00104f80 @ 0x104f80 (1040 bytes) */
-int FUN_00104f80(param_1)
+void FUN_00104f80(param_1)
   int param_1;
 {
   byte bVar1;
@@ -1475,7 +1475,7 @@ LAB_00105368: ;
 }
 
 /* FUN_00105394 @ 0x105394 (888 bytes) */
-int FUN_00105394(param_1)
+void FUN_00105394(param_1)
   int param_1;
 {
   byte bVar1;
@@ -1641,7 +1641,7 @@ LAB_001056e4:
 }
 
 /* FUN_00105710 @ 0x105710 (884 bytes) */
-int FUN_00105710(param_1)
+void FUN_00105710(param_1)
   int param_1;
 {
   byte bVar1;
@@ -1810,7 +1810,7 @@ LAB_00105a5c:
 }
 
 /* FUN_00105a88 @ 0x105a88 (884 bytes) */
-int FUN_00105a88(param_1)
+void FUN_00105a88(param_1)
   int param_1;
 {
   byte bVar1;
@@ -1975,7 +1975,7 @@ LAB_00105dd4:
 }
 
 /* _gleVPRenderPolygon @ 0x105dfc (728 bytes) */
-int _gleVPRenderPolygon(param_1)
+void _gleVPRenderPolygon(param_1)
   int param_1;
 {
   byte bVar1;
@@ -2108,7 +2108,7 @@ int _gleVPRenderPolygon(param_1)
 }
 
 /* _gleVPFlushAtomic @ 0x1060d4 (60 bytes) */
-int _gleVPFlushAtomic(param_1)
+void _gleVPFlushAtomic(param_1)
   int param_1;
 {
   (**(code **)(param_1 + 0x4a08))(param_1);
@@ -2117,7 +2117,7 @@ int _gleVPFlushAtomic(param_1)
 }
 
 /* _gleVPFlushAtomicTCL @ 0x106110 (60 bytes) */
-int _gleVPFlushAtomicTCL(param_1)
+void _gleVPFlushAtomicTCL(param_1)
   int param_1;
 {
   (**(code **)(param_1 + 0x4a08))(param_1);
@@ -2139,7 +2139,7 @@ void _gleVPFlushAtomicTCLRDirty(int param_1,double fparam_1,double fparam_2,doub
 }
 
 /* _gleVPFlushLineLoop @ 0x1061d0 (228 bytes) */
-int _gleVPFlushLineLoop(param_1)
+void _gleVPFlushLineLoop(param_1)
   int param_1;
 {
   int iVar1;
@@ -2179,7 +2179,7 @@ int _gleVPFlushLineLoop(param_1)
 }
 
 /* _gleVPFlushLineLoopTCL @ 0x1062b4 (180 bytes) */
-int _gleVPFlushLineLoopTCL(param_1)
+void _gleVPFlushLineLoopTCL(param_1)
   int param_1;
 {
   int iVar1;
@@ -2257,7 +2257,7 @@ void _gleVPFlushLineLoopTCLRDirty(int param_1,double fparam_1,double fparam_2,do
 }
 
 /* _gleVPFlushLineStrip @ 0x106464 (176 bytes) */
-int _gleVPFlushLineStrip(param_1)
+void _gleVPFlushLineStrip(param_1)
   int param_1;
 {
   int iVar1;
@@ -2288,7 +2288,7 @@ int _gleVPFlushLineStrip(param_1)
 }
 
 /* _gleVPFlushLineStripTCL @ 0x106514 (128 bytes) */
-int _gleVPFlushLineStripTCL(param_1)
+void _gleVPFlushLineStripTCL(param_1)
   int param_1;
 {
   int iVar1;
@@ -2350,7 +2350,7 @@ void _gleVPFlushLineStripTCLRDirty(int param_1,double fparam_1,double fparam_2,d
 }
 
 /* _gleVPFlushTriQuadStrip @ 0x10665c (168 bytes) */
-int _gleVPFlushTriQuadStrip(param_1)
+void _gleVPFlushTriQuadStrip(param_1)
   int param_1;
 {
   int iVar1;
@@ -2380,7 +2380,7 @@ int _gleVPFlushTriQuadStrip(param_1)
 }
 
 /* _gleVPFlushTriQuadStripTCL @ 0x106704 (120 bytes) */
-int _gleVPFlushTriQuadStripTCL(param_1)
+void _gleVPFlushTriQuadStripTCL(param_1)
   int param_1;
 {
   int iVar1;
@@ -2440,7 +2440,7 @@ void _gleVPFlushTriQuadStripTCLRDirty(int param_1,double fparam_1,double fparam_
 }
 
 /* _gleVPFlushTriangleFan @ 0x10683c (252 bytes) */
-int _gleVPFlushTriangleFan(param_1)
+void _gleVPFlushTriangleFan(param_1)
   int param_1;
 {
   undefined8 *puVar1;
@@ -2497,7 +2497,7 @@ int _gleVPFlushTriangleFan(param_1)
 }
 
 /* _gleVPFlushTriangleFanTCL @ 0x106938 (124 bytes) */
-int _gleVPFlushTriangleFanTCL(param_1)
+void _gleVPFlushTriangleFanTCL(param_1)
   int param_1;
 {
   int iVar1;
@@ -2557,7 +2557,7 @@ void _gleVPFlushTriangleFanTCLRDirty(int param_1,double fparam_1,double fparam_2
 }
 
 /* _gleVPFlushPolygon @ 0x106a78 (324 bytes) */
-int _gleVPFlushPolygon(param_1)
+void _gleVPFlushPolygon(param_1)
   int param_1;
 {
   uint uVar1;
@@ -2632,7 +2632,7 @@ int _gleVPFlushPolygon(param_1)
 }
 
 /* _gleVPFlushPolygonTCL @ 0x106bbc (196 bytes) */
-int _gleVPFlushPolygonTCL(param_1)
+void _gleVPFlushPolygonTCL(param_1)
   int param_1;
 {
   uint uVar1;
@@ -2724,7 +2724,7 @@ void _gleVPFlushPolygonTCLRDirty(int param_1,double fparam_1,double fparam_2,dou
 }
 
 /* _gleVPBeginPoints @ 0x106d8c (60 bytes) */
-int _gleVPBeginPoints(param_1)
+void _gleVPBeginPoints(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2740,7 +2740,7 @@ int _gleVPBeginPoints(param_1)
 }
 
 /* _gleVPBeginLines @ 0x106dc8 (60 bytes) */
-int _gleVPBeginLines(param_1)
+void _gleVPBeginLines(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2756,7 +2756,7 @@ int _gleVPBeginLines(param_1)
 }
 
 /* _gleVPBeginLineLoop @ 0x106e04 (68 bytes) */
-int _gleVPBeginLineLoop(param_1)
+void _gleVPBeginLineLoop(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2773,7 +2773,7 @@ int _gleVPBeginLineLoop(param_1)
 }
 
 /* _gleVPBeginLineStrip @ 0x106e48 (68 bytes) */
-int _gleVPBeginLineStrip(param_1)
+void _gleVPBeginLineStrip(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2790,7 +2790,7 @@ int _gleVPBeginLineStrip(param_1)
 }
 
 /* _gleVPBeginTriangles @ 0x106e8c (60 bytes) */
-int _gleVPBeginTriangles(param_1)
+void _gleVPBeginTriangles(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2806,7 +2806,7 @@ int _gleVPBeginTriangles(param_1)
 }
 
 /* _gleVPBeginTriangleStrip @ 0x106ec8 (60 bytes) */
-int _gleVPBeginTriangleStrip(param_1)
+void _gleVPBeginTriangleStrip(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2822,7 +2822,7 @@ int _gleVPBeginTriangleStrip(param_1)
 }
 
 /* _gleVPBeginTriangleFan @ 0x106f04 (60 bytes) */
-int _gleVPBeginTriangleFan(param_1)
+void _gleVPBeginTriangleFan(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2838,7 +2838,7 @@ int _gleVPBeginTriangleFan(param_1)
 }
 
 /* _gleVPBeginQuads @ 0x106f40 (60 bytes) */
-int _gleVPBeginQuads(param_1)
+void _gleVPBeginQuads(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2854,7 +2854,7 @@ int _gleVPBeginQuads(param_1)
 }
 
 /* _gleVPBeginQuadStrip @ 0x106f7c (60 bytes) */
-int _gleVPBeginQuadStrip(param_1)
+void _gleVPBeginQuadStrip(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2870,7 +2870,7 @@ int _gleVPBeginQuadStrip(param_1)
 }
 
 /* _gleVPBeginPolygon @ 0x106fb8 (68 bytes) */
-int _gleVPBeginPolygon(param_1)
+void _gleVPBeginPolygon(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2887,7 +2887,7 @@ int _gleVPBeginPolygon(param_1)
 }
 
 /* _gleVPBeginPointsTCL @ 0x106ffc (52 bytes) */
-int _gleVPBeginPointsTCL(param_1)
+void _gleVPBeginPointsTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2900,7 +2900,7 @@ int _gleVPBeginPointsTCL(param_1)
 }
 
 /* _gleVPBeginLinesTCL @ 0x107030 (52 bytes) */
-int _gleVPBeginLinesTCL(param_1)
+void _gleVPBeginLinesTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2913,7 +2913,7 @@ int _gleVPBeginLinesTCL(param_1)
 }
 
 /* _gleVPBeginLineLoopTCL @ 0x107064 (60 bytes) */
-int _gleVPBeginLineLoopTCL(param_1)
+void _gleVPBeginLineLoopTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2929,7 +2929,7 @@ int _gleVPBeginLineLoopTCL(param_1)
 }
 
 /* _gleVPBeginLineStripTCL @ 0x1070a0 (60 bytes) */
-int _gleVPBeginLineStripTCL(param_1)
+void _gleVPBeginLineStripTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2945,7 +2945,7 @@ int _gleVPBeginLineStripTCL(param_1)
 }
 
 /* _gleVPBeginTrianglesTCL @ 0x1070dc (52 bytes) */
-int _gleVPBeginTrianglesTCL(param_1)
+void _gleVPBeginTrianglesTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2958,7 +2958,7 @@ int _gleVPBeginTrianglesTCL(param_1)
 }
 
 /* _gleVPBeginTriangleStripTCL @ 0x107110 (52 bytes) */
-int _gleVPBeginTriangleStripTCL(param_1)
+void _gleVPBeginTriangleStripTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2971,7 +2971,7 @@ int _gleVPBeginTriangleStripTCL(param_1)
 }
 
 /* _gleVPBeginTriangleFanTCL @ 0x107144 (52 bytes) */
-int _gleVPBeginTriangleFanTCL(param_1)
+void _gleVPBeginTriangleFanTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2984,7 +2984,7 @@ int _gleVPBeginTriangleFanTCL(param_1)
 }
 
 /* _gleVPBeginQuadsTCL @ 0x107178 (52 bytes) */
-int _gleVPBeginQuadsTCL(param_1)
+void _gleVPBeginQuadsTCL(param_1)
   int param_1;
 {
   undefined *puVar1;

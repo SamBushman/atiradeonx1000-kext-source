@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gleVPBeginQuadStripTCL @ 0x1071ac (52 bytes) */
-int _gleVPBeginQuadStripTCL(param_1)
+void _gleVPBeginQuadStripTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -14,7 +14,7 @@ int _gleVPBeginQuadStripTCL(param_1)
 }
 
 /* _gleVPBeginPolygonTCL @ 0x1071e0 (60 bytes) */
-int _gleVPBeginPolygonTCL(param_1)
+void _gleVPBeginPolygonTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -30,7 +30,7 @@ int _gleVPBeginPolygonTCL(param_1)
 }
 
 /* _gleVPBeginPointsTCLRDirty @ 0x10721c (52 bytes) */
-int _gleVPBeginPointsTCLRDirty(param_1)
+void _gleVPBeginPointsTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -43,7 +43,7 @@ int _gleVPBeginPointsTCLRDirty(param_1)
 }
 
 /* _gleVPBeginLinesTCLRDirty @ 0x107250 (52 bytes) */
-int _gleVPBeginLinesTCLRDirty(param_1)
+void _gleVPBeginLinesTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -56,7 +56,7 @@ int _gleVPBeginLinesTCLRDirty(param_1)
 }
 
 /* _gleVPBeginLineLoopTCLRDirty @ 0x107284 (60 bytes) */
-int _gleVPBeginLineLoopTCLRDirty(param_1)
+void _gleVPBeginLineLoopTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -72,7 +72,7 @@ int _gleVPBeginLineLoopTCLRDirty(param_1)
 }
 
 /* _gleVPBeginLineStripTCLRDirty @ 0x1072c0 (60 bytes) */
-int _gleVPBeginLineStripTCLRDirty(param_1)
+void _gleVPBeginLineStripTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -88,7 +88,7 @@ int _gleVPBeginLineStripTCLRDirty(param_1)
 }
 
 /* _gleVPBeginTrianglesTCLRDirty @ 0x1072fc (52 bytes) */
-int _gleVPBeginTrianglesTCLRDirty(param_1)
+void _gleVPBeginTrianglesTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -101,7 +101,7 @@ int _gleVPBeginTrianglesTCLRDirty(param_1)
 }
 
 /* _gleVPBeginTriangleStripTCLRDirty @ 0x107330 (52 bytes) */
-int _gleVPBeginTriangleStripTCLRDirty(param_1)
+void _gleVPBeginTriangleStripTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -114,7 +114,7 @@ int _gleVPBeginTriangleStripTCLRDirty(param_1)
 }
 
 /* _gleVPBeginTriangleFanTCLRDirty @ 0x107364 (52 bytes) */
-int _gleVPBeginTriangleFanTCLRDirty(param_1)
+void _gleVPBeginTriangleFanTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -127,7 +127,7 @@ int _gleVPBeginTriangleFanTCLRDirty(param_1)
 }
 
 /* _gleVPBeginQuadsTCLRDirty @ 0x107398 (52 bytes) */
-int _gleVPBeginQuadsTCLRDirty(param_1)
+void _gleVPBeginQuadsTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -140,7 +140,7 @@ int _gleVPBeginQuadsTCLRDirty(param_1)
 }
 
 /* _gleVPBeginQuadStripTCLRDirty @ 0x1073cc (52 bytes) */
-int _gleVPBeginQuadStripTCLRDirty(param_1)
+void _gleVPBeginQuadStripTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -153,7 +153,7 @@ int _gleVPBeginQuadStripTCLRDirty(param_1)
 }
 
 /* _gleVPBeginPolygonTCLRDirty @ 0x107400 (60 bytes) */
-int _gleVPBeginPolygonTCLRDirty(param_1)
+void _gleVPBeginPolygonTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -354,7 +354,7 @@ LAB_001077b0:
 }
 
 /* _gliGetAttribute @ 0x1077e4 (12 bytes) */
-int _gliGetAttribute(param_1, param_2, param_3)
+void _gliGetAttribute(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -367,7 +367,7 @@ int _gliGetAttribute(param_1, param_2, param_3)
 }
 
 /* _gliSetAttribute @ 0x1077f0 (72 bytes) */
-int _gliSetAttribute(param_1, param_2, param_3)
+void _gliSetAttribute(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -381,7 +381,7 @@ int _gliSetAttribute(param_1, param_2, param_3)
 }
 
 /* _gliCopyAttributes @ 0x107838 (120 bytes) */
-int _gliCopyAttributes(param_1, param_2)
+void _gliCopyAttributes(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -403,7 +403,7 @@ int _gliCopyAttributes(param_1, param_2)
 }
 
 /* _gliSwitchPlugin @ 0x1078b0 (332 bytes) */
-int _gliSwitchPlugin(param_1, param_2)
+double _gliSwitchPlugin(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -463,7 +463,7 @@ int _gliSwitchPlugin(param_1, param_2)
 }
 
 /* _gliDetachRevert @ 0x1079fc (220 bytes) */
-int _gliDetachRevert(param_1)
+void _gliDetachRevert(param_1)
   int param_1;
 {
   uint uVar1;
@@ -497,7 +497,7 @@ int _gliDetachRevert(param_1)
 }
 
 /* _gliAttachDrawable @ 0x107ad8 (8 bytes) */
-int _gliAttachDrawable(param_1, param_2, param_3, param_4)
+void _gliAttachDrawable(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -544,7 +544,7 @@ void _gliSwapBuffers(int param_1,double fparam_1,double fparam_2,double fparam_3
   piVar8 = (int *)(param_1 + 0x310);
   cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
   if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-    ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
                fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
   }

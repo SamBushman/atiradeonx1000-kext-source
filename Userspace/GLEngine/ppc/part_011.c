@@ -26,7 +26,7 @@ int _glColor3s_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glColor3s_Exec @ 0x5b048 (196 bytes) */
-int _glColor3s_Exec(param_1, param_2, param_3, param_4)
+void _glColor3s_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -55,7 +55,7 @@ int _glColor3s_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glColor3s_CompExec @ 0x5b10c (72 bytes) */
-int _glColor3s_CompExec(param_1, param_2, param_3, param_4)
+void _glColor3s_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -92,7 +92,7 @@ int _glColor3sv_Comp(param_1, param_2)
 }
 
 /* _glColor3sv_Exec @ 0x5b224 (208 bytes) */
-int _glColor3sv_Exec(param_1, param_2)
+double _glColor3sv_Exec(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -119,7 +119,7 @@ int _glColor3sv_Exec(param_1, param_2)
 }
 
 /* _glColor3sv_CompExec @ 0x5b2f4 (56 bytes) */
-int _glColor3sv_CompExec(param_1, param_2)
+void _glColor3sv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -149,7 +149,7 @@ int _glColor3ub_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glColor3ub_CompExec @ 0x5b3f0 (148 bytes) */
-int _glColor3ub_CompExec(param_1, param_2, param_3, param_4)
+void _glColor3ub_CompExec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -195,7 +195,7 @@ int _glColor3ubv_Comp(param_1, param_2)
 }
 
 /* _glColor3ubv_Exec @ 0x5b4b4 (88 bytes) */
-int _glColor3ubv_Exec(param_1, param_2)
+double _glColor3ubv_Exec(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -220,7 +220,7 @@ int _glColor3ubv_Exec(param_1, param_2)
 }
 
 /* _glColor3ubv_CompExec @ 0x5b50c (56 bytes) */
-int _glColor3ubv_CompExec(param_1, param_2)
+void _glColor3ubv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -252,7 +252,7 @@ int _glColor3ui_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glColor3ui_Exec @ 0x5b5fc (176 bytes) */
-int _glColor3ui_Exec(param_1, param_2, param_3, param_4)
+void _glColor3ui_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -278,7 +278,7 @@ int _glColor3ui_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glColor3ui_CompExec @ 0x5b6ac (72 bytes) */
-int _glColor3ui_CompExec(param_1, param_2, param_3, param_4)
+void _glColor3ui_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -310,7 +310,7 @@ int _glColor3uiv_Comp(param_1, param_2)
 }
 
 /* _glColor3uiv_Exec @ 0x5b7b0 (188 bytes) */
-int _glColor3uiv_Exec(param_1, param_2)
+double _glColor3uiv_Exec(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -334,7 +334,7 @@ int _glColor3uiv_Exec(param_1, param_2)
 }
 
 /* _glColor3uiv_CompExec @ 0x5b86c (56 bytes) */
-int _glColor3uiv_CompExec(param_1, param_2)
+void _glColor3uiv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -384,7 +384,7 @@ double _glColor3us_Exec(int param_1,uint param_2,uint param_3,uint param_4,doubl
 }
 
 /* _glColor3us_CompExec @ 0x5ba1c (72 bytes) */
-int _glColor3us_CompExec(param_1, param_2, param_3, param_4)
+void _glColor3us_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -449,7 +449,7 @@ double _glColor3usv_Exec(int param_1,ushort *param_2,double fparam_1,double fpar
 }
 
 /* _glColor3usv_CompExec @ 0x5bbec (56 bytes) */
-int _glColor3usv_CompExec(param_1, param_2)
+void _glColor3usv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -499,7 +499,7 @@ int _glColor4b_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4b_Exec @ 0x5bd14 (216 bytes) */
-int _glColor4b_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glColor4b_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint param_2;
   uint param_3;
@@ -529,7 +529,7 @@ int _glColor4b_Exec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4b_CompExec @ 0x5bdec (80 bytes) */
-int _glColor4b_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glColor4b_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -569,7 +569,7 @@ int _glColor4bv_Comp(param_1, param_2)
 }
 
 /* _glColor4bv_Exec @ 0x5bf40 (248 bytes) */
-int _glColor4bv_Exec(param_1, param_2)
+double _glColor4bv_Exec(param_1, param_2)
   int param_1;
   char *param_2;
 {
@@ -596,7 +596,7 @@ int _glColor4bv_Exec(param_1, param_2)
 }
 
 /* _glColor4bv_CompExec @ 0x5c038 (56 bytes) */
-int _glColor4bv_CompExec(param_1, param_2)
+void _glColor4bv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -647,7 +647,7 @@ int _glColor4dv_Comp(param_1, param_2)
 }
 
 /* _glColor4dv_Exec @ 0x5c1b4 (76 bytes) */
-int _glColor4dv_Exec(param_1, param_2)
+double _glColor4dv_Exec(param_1, param_2)
   int param_1;
   double *param_2;
 {
@@ -672,7 +672,7 @@ int _glColor4dv_Exec(param_1, param_2)
 }
 
 /* _glColor4dv_CompExec @ 0x5c200 (56 bytes) */
-int _glColor4dv_CompExec(param_1, param_2)
+void _glColor4dv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -712,7 +712,7 @@ int _glColor4fv_Comp(param_1, param_2)
 }
 
 /* _glColor4fv_ColorMat_Exec @ 0x5c2c0 (48 bytes) */
-int _glColor4fv_ColorMat_Exec(param_1, param_2)
+double _glColor4fv_ColorMat_Exec(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -734,7 +734,7 @@ int _glColor4fv_ColorMat_Exec(param_1, param_2)
 }
 
 /* _glColor4fv_CompExec @ 0x5c2f0 (96 bytes) */
-int _glColor4fv_CompExec(param_1, param_2)
+void _glColor4fv_CompExec(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -775,7 +775,7 @@ int _glColor4i_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4i_Exec @ 0x5c440 (216 bytes) */
-int _glColor4i_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glColor4i_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint param_2;
   uint param_3;
@@ -805,7 +805,7 @@ int _glColor4i_Exec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4i_CompExec @ 0x5c518 (80 bytes) */
-int _glColor4i_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glColor4i_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -845,7 +845,7 @@ int _glColor4iv_Comp(param_1, param_2)
 }
 
 /* _glColor4iv_Exec @ 0x5c65c (232 bytes) */
-int _glColor4iv_Exec(param_1, param_2)
+double _glColor4iv_Exec(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -872,7 +872,7 @@ int _glColor4iv_Exec(param_1, param_2)
 }
 
 /* _glColor4iv_CompExec @ 0x5c744 (56 bytes) */
-int _glColor4iv_CompExec(param_1, param_2)
+void _glColor4iv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -909,7 +909,7 @@ int _glColor4s_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4s_Exec @ 0x5c86c (216 bytes) */
-int _glColor4s_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glColor4s_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint param_2;
   uint param_3;
@@ -939,7 +939,7 @@ int _glColor4s_Exec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4s_CompExec @ 0x5c944 (80 bytes) */
-int _glColor4s_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glColor4s_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -979,7 +979,7 @@ int _glColor4sv_Comp(param_1, param_2)
 }
 
 /* _glColor4sv_Exec @ 0x5ca88 (232 bytes) */
-int _glColor4sv_Exec(param_1, param_2)
+double _glColor4sv_Exec(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -1006,7 +1006,7 @@ int _glColor4sv_Exec(param_1, param_2)
 }
 
 /* _glColor4sv_CompExec @ 0x5cb70 (56 bytes) */
-int _glColor4sv_CompExec(param_1, param_2)
+void _glColor4sv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -1038,7 +1038,7 @@ int _glColor4ub_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4ub_CompExec @ 0x5cc30 (80 bytes) */
-int _glColor4ub_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glColor4ub_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1070,7 +1070,7 @@ int _glColor4ubv_Comp(param_1, param_2)
 }
 
 /* _glColor4ubv_Exec @ 0x5cd0c (96 bytes) */
-int _glColor4ubv_Exec(param_1, param_2)
+double _glColor4ubv_Exec(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -1097,7 +1097,7 @@ int _glColor4ubv_Exec(param_1, param_2)
 }
 
 /* _glColor4ubv_CompExec @ 0x5cd6c (56 bytes) */
-int _glColor4ubv_CompExec(param_1, param_2)
+void _glColor4ubv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -1131,7 +1131,7 @@ int _glColor4ui_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4ui_Exec @ 0x5ce7c (192 bytes) */
-int _glColor4ui_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glColor4ui_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1157,7 +1157,7 @@ int _glColor4ui_Exec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4ui_CompExec @ 0x5cf3c (80 bytes) */
-int _glColor4ui_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glColor4ui_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1191,7 +1191,7 @@ int _glColor4uiv_Comp(param_1, param_2)
 }
 
 /* _glColor4uiv_Exec @ 0x5d068 (208 bytes) */
-int _glColor4uiv_Exec(param_1, param_2)
+double _glColor4uiv_Exec(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {

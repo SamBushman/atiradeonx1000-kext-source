@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gleMultiVtxTextureCoordGenNormalSTR @ 0xf73b4 (88 bytes) */
-int _gleMultiVtxTextureCoordGenNormalSTR(param_1, param_2, param_3, param_4)
+void _gleMultiVtxTextureCoordGenNormalSTR(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   int param_3;
@@ -29,7 +29,7 @@ int _gleMultiVtxTextureCoordGenNormalSTR(param_1, param_2, param_3, param_4)
 }
 
 /* _gleTextureImageCopy @ 0xf7410 (260 bytes) */
-int _gleTextureImageCopy(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _gleTextureImageCopy(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -76,7 +76,7 @@ int _gleTextureImageCopy(param_1, param_2, param_3, param_4, param_5, param_6, p
 }
 
 /* _gleTextureSubImageCopy @ 0xf7514 (348 bytes) */
-int _gleTextureSubImageCopy(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+void _gleTextureSubImageCopy(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   int param_2;
   int param_3;
@@ -137,25 +137,25 @@ int _gleTextureSubImageCopy(param_1, param_2, param_3, param_4, param_5, param_6
 }
 
 /* _gleNoopFilter1 @ 0xf7670 (4 bytes) */
-int _gleNoopFilter1()
+void _gleNoopFilter1()
 {
   return;
 }
 
 /* _gleNoopFilter2 @ 0xf7674 (4 bytes) */
-int _gleNoopFilter2()
+void _gleNoopFilter2()
 {
   return;
 }
 
 /* _gleNoopFilter3 @ 0xf7678 (4 bytes) */
-int _gleNoopFilter3()
+void _gleNoopFilter3()
 {
   return;
 }
 
 /* _gleByteFilter1 @ 0xf767c (60 bytes) */
-int _gleByteFilter1(param_1, param_2, param_3, param_4)
+void _gleByteFilter1(param_1, param_2, param_3, param_4)
   int param_1;
   char *param_2;
   int param_3;
@@ -181,7 +181,7 @@ int _gleByteFilter1(param_1, param_2, param_3, param_4)
 }
 
 /* _gleByteFilter2 @ 0xf76b8 (96 bytes) */
-int _gleByteFilter2(param_1, param_2, param_3, param_4, param_5)
+void _gleByteFilter2(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -210,7 +210,7 @@ int _gleByteFilter2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gleByteFilter3 @ 0xf7718 (176 bytes) */
-int _gleByteFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gleByteFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   int param_3;
@@ -245,7 +245,7 @@ int _gleByteFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gleUbyteFilter1 @ 0xf77c8 (52 bytes) */
-int _gleUbyteFilter1(param_1, param_2, param_3, param_4)
+void _gleUbyteFilter1(param_1, param_2, param_3, param_4)
   int param_1;
   byte *param_2;
   int param_3;
@@ -271,7 +271,7 @@ int _gleUbyteFilter1(param_1, param_2, param_3, param_4)
 }
 
 /* _gleUbyteFilter2 @ 0xf77fc (80 bytes) */
-int _gleUbyteFilter2(param_1, param_2, param_3, param_4, param_5)
+void _gleUbyteFilter2(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -300,7 +300,7 @@ int _gleUbyteFilter2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gleUbyteFilter3 @ 0xf784c (144 bytes) */
-int _gleUbyteFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gleUbyteFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   int param_3;
@@ -337,7 +337,7 @@ int _gleUbyteFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gleShortFilter1 @ 0xf78dc (60 bytes) */
-int _gleShortFilter1(param_1, param_2, param_3, param_4)
+void _gleShortFilter1(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   uint param_3;
@@ -362,7 +362,7 @@ int _gleShortFilter1(param_1, param_2, param_3, param_4)
 }
 
 /* _gleShortFilter2 @ 0xf7918 (80 bytes) */
-int _gleShortFilter2(param_1, param_2, param_3, param_4, param_5)
+void _gleShortFilter2(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   uint param_3;
@@ -391,7 +391,7 @@ int _gleShortFilter2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gleShortFilter3 @ 0xf7968 (148 bytes) */
-int _gleShortFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gleShortFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   uint param_3;
@@ -428,7 +428,7 @@ int _gleShortFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gleFloatFilter1 @ 0xf7db4 (84 bytes) */
-int _gleFloatFilter1(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _gleFloatFilter1(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   int param_2;
   uint param_3;
@@ -457,7 +457,7 @@ int _gleFloatFilter1(param_1, param_2, param_3, param_4, param_5, param_6, param
 }
 
 /* _gleFloatFilter2 @ 0xf7e08 (104 bytes) */
-int _gleFloatFilter2(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _gleFloatFilter2(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   int param_2;
   uint param_3;
@@ -489,7 +489,7 @@ int _gleFloatFilter2(param_1, param_2, param_3, param_4, param_5, param_6, param
 }
 
 /* _gleFloatFilter3 @ 0xf7e70 (156 bytes) */
-int _gleFloatFilter3(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _gleFloatFilter3(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   int param_2;
   uint param_3;
@@ -529,7 +529,7 @@ int _gleFloatFilter3(param_1, param_2, param_3, param_4, param_5, param_6, param
 }
 
 /* _gleHalfFloatFilter1 @ 0xf7f0c (284 bytes) */
-int _gleHalfFloatFilter1(param_1, param_2, param_3, param_4)
+void _gleHalfFloatFilter1(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -576,7 +576,7 @@ int _gleHalfFloatFilter1(param_1, param_2, param_3, param_4)
 }
 
 /* _gleHalfFloatFilter2 @ 0xf8028 (316 bytes) */
-int _gleHalfFloatFilter2(param_1, param_2, param_3, param_4, param_5)
+void _gleHalfFloatFilter2(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -630,7 +630,7 @@ int _gleHalfFloatFilter2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gleHalfFloatFilter3 @ 0xf8164 (380 bytes) */
-int _gleHalfFloatFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gleHalfFloatFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   int param_3;
@@ -699,7 +699,7 @@ int _gleHalfFloatFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gle332Filter1 @ 0xf82e0 (72 bytes) */
-int _gle332Filter1(param_1, param_2, param_3, param_4)
+void _gle332Filter1(param_1, param_2, param_3, param_4)
   byte *param_1;
   byte *param_2;
   undefined4 param_3;
@@ -717,7 +717,7 @@ int _gle332Filter1(param_1, param_2, param_3, param_4)
 }
 
 /* _gle332Filter2 @ 0xf8328 (140 bytes) */
-int _gle332Filter2(param_1, param_2, param_3, param_4, param_5)
+void _gle332Filter2(param_1, param_2, param_3, param_4, param_5)
   byte *param_1;
   byte *param_2;
   undefined4 param_3;
@@ -740,7 +740,7 @@ int _gle332Filter2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gle332Filter3 @ 0xf83b4 (260 bytes) */
-int _gle332Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gle332Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
   byte *param_1;
   byte *param_2;
   undefined4 param_3;
@@ -775,7 +775,7 @@ int _gle332Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gle233RevFilter1 @ 0xf84b8 (72 bytes) */
-int _gle233RevFilter1(param_1, param_2, param_3, param_4)
+void _gle233RevFilter1(param_1, param_2, param_3, param_4)
   byte *param_1;
   byte *param_2;
   undefined4 param_3;
@@ -793,7 +793,7 @@ int _gle233RevFilter1(param_1, param_2, param_3, param_4)
 }
 
 /* _gle233RevFilter2 @ 0xf8500 (140 bytes) */
-int _gle233RevFilter2(param_1, param_2, param_3, param_4, param_5)
+void _gle233RevFilter2(param_1, param_2, param_3, param_4, param_5)
   byte *param_1;
   byte *param_2;
   undefined4 param_3;
@@ -816,7 +816,7 @@ int _gle233RevFilter2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gle233RevFilter3 @ 0xf858c (260 bytes) */
-int _gle233RevFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gle233RevFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
   byte *param_1;
   byte *param_2;
   undefined4 param_3;
@@ -851,7 +851,7 @@ int _gle233RevFilter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gle565Filter1 @ 0xf8690 (72 bytes) */
-int _gle565Filter1(param_1, param_2, param_3, param_4)
+void _gle565Filter1(param_1, param_2, param_3, param_4)
   ushort *param_1;
   ushort *param_2;
   undefined4 param_3;
@@ -869,7 +869,7 @@ int _gle565Filter1(param_1, param_2, param_3, param_4)
 }
 
 /* _gle565Filter2 @ 0xf86d8 (140 bytes) */
-int _gle565Filter2(param_1, param_2, param_3, param_4, param_5)
+void _gle565Filter2(param_1, param_2, param_3, param_4, param_5)
   ushort *param_1;
   ushort *param_2;
   undefined4 param_3;
@@ -894,7 +894,7 @@ int _gle565Filter2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gle565Filter3 @ 0xf8764 (260 bytes) */
-int _gle565Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gle565Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
   ushort *param_1;
   ushort *param_2;
   undefined4 param_3;
@@ -931,7 +931,7 @@ int _gle565Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gle4444Filter1 @ 0xf8868 (92 bytes) */
-int _gle4444Filter1(param_1, param_2, param_3, param_4)
+void _gle4444Filter1(param_1, param_2, param_3, param_4)
   ushort *param_1;
   ushort *param_2;
   undefined4 param_3;
@@ -950,7 +950,7 @@ int _gle4444Filter1(param_1, param_2, param_3, param_4)
 }
 
 /* _gle4444Filter2 @ 0xf88c4 (176 bytes) */
-int _gle4444Filter2(param_1, param_2, param_3, param_4, param_5)
+void _gle4444Filter2(param_1, param_2, param_3, param_4, param_5)
   ushort *param_1;
   ushort *param_2;
   undefined4 param_3;
@@ -976,7 +976,7 @@ int _gle4444Filter2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gle4444Filter3 @ 0xf8974 (328 bytes) */
-int _gle4444Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gle4444Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
   ushort *param_1;
   ushort *param_2;
   undefined4 param_3;
@@ -1015,7 +1015,7 @@ int _gle4444Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gles8s8Filter1 @ 0xfa1e8 (60 bytes) */
-int _gles8s8Filter1(param_1, param_2, param_3, param_4)
+void _gles8s8Filter1(param_1, param_2, param_3, param_4)
   ushort *param_1;
   undefined2 *param_2;
   undefined4 param_3;
@@ -1029,7 +1029,7 @@ int _gles8s8Filter1(param_1, param_2, param_3, param_4)
 }
 
 /* _gles8s8Filter2 @ 0xfa224 (112 bytes) */
-int _gles8s8Filter2(param_1, param_2, param_3, param_4, param_5)
+void _gles8s8Filter2(param_1, param_2, param_3, param_4, param_5)
   ushort *param_1;
   undefined2 *param_2;
   undefined4 param_3;
@@ -1051,7 +1051,7 @@ int _gles8s8Filter2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gles8s8Filter3 @ 0xfa294 (224 bytes) */
-int _gles8s8Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gles8s8Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
   ushort *param_1;
   undefined2 *param_2;
   undefined4 param_3;
@@ -1084,7 +1084,7 @@ int _gles8s8Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gles16s16Filter1 @ 0xfa374 (52 bytes) */
-int _gles16s16Filter1(param_1, param_2, param_3, param_4)
+void _gles16s16Filter1(param_1, param_2, param_3, param_4)
   uint *param_1;
   int *param_2;
   undefined4 param_3;
@@ -1098,7 +1098,7 @@ int _gles16s16Filter1(param_1, param_2, param_3, param_4)
 }
 
 /* _gles16s16Filter2 @ 0xfa3a8 (96 bytes) */
-int _gles16s16Filter2(param_1, param_2, param_3, param_4, param_5)
+void _gles16s16Filter2(param_1, param_2, param_3, param_4, param_5)
   uint *param_1;
   int *param_2;
   undefined4 param_3;
@@ -1116,7 +1116,7 @@ int _gles16s16Filter2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gles16s16Filter3 @ 0xfa408 (192 bytes) */
-int _gles16s16Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gles16s16Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
   uint *param_1;
   int *param_2;
   undefined4 param_3;
@@ -1145,7 +1145,7 @@ int _gles16s16Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gle1616Filter1 @ 0xfa4c8 (52 bytes) */
-int _gle1616Filter1(param_1, param_2, param_3, param_4)
+void _gle1616Filter1(param_1, param_2, param_3, param_4)
   uint *param_1;
   uint *param_2;
   undefined4 param_3;
@@ -1157,7 +1157,7 @@ int _gle1616Filter1(param_1, param_2, param_3, param_4)
 }
 
 /* _gle1616Filter2 @ 0xfa4fc (96 bytes) */
-int _gle1616Filter2(param_1, param_2, param_3, param_4, param_5)
+void _gle1616Filter2(param_1, param_2, param_3, param_4, param_5)
   uint *param_1;
   uint *param_2;
   undefined4 param_3;
@@ -1175,7 +1175,7 @@ int _gle1616Filter2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gle1616Filter3 @ 0xfa55c (192 bytes) */
-int _gle1616Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gle1616Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
   uint *param_1;
   uint *param_2;
   undefined4 param_3;
@@ -1204,7 +1204,7 @@ int _gle1616Filter3(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gleGenerateMipmapData @ 0xfa61c (5348 bytes) */
-int _gleGenerateMipmapData(param_1, param_2, param_3, param_4, param_5)
+void _gleGenerateMipmapData(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -2588,7 +2588,7 @@ LAB_000fc4a4:
 }
 
 /* _gleReclaimTextureObjectResources @ 0xfc510 (344 bytes) */
-int _gleReclaimTextureObjectResources(param_1)
+void _gleReclaimTextureObjectResources(param_1)
   int param_1;
 {
   int *piVar1;

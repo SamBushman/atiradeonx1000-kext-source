@@ -38,7 +38,7 @@ void _glRects_Exec(int param_1,undefined4 param_2,undefined4 param_3,undefined4 
 }
 
 /* _glRects_CompExec @ 0x84b1c (80 bytes) */
-int _glRects_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glRects_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -96,7 +96,7 @@ void _glRectdv_Exec(int param_1,double *param_2,double *param_3,double fparam_1,
 }
 
 /* _glRectdv_CompExec @ 0x84c9c (64 bytes) */
-int _glRectdv_CompExec(param_1, param_2, param_3)
+void _glRectdv_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -151,7 +151,7 @@ void _glRectfv_Exec(int param_1,undefined4 param_2,undefined4 param_3,double fpa
 }
 
 /* _glRectfv_CompExec @ 0x84e0c (64 bytes) */
-int _glRectfv_CompExec(param_1, param_2, param_3)
+void _glRectfv_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -206,7 +206,7 @@ void _glRectiv_Exec(int param_1,undefined4 *param_2,undefined4 *param_3,double f
 }
 
 /* _glRectiv_CompExec @ 0x84f7c (64 bytes) */
-int _glRectiv_CompExec(param_1, param_2, param_3)
+void _glRectiv_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -261,7 +261,7 @@ void _glRectsv_Exec(int param_1,short *param_2,short *param_3,double fparam_1,do
 }
 
 /* _glRectsv_CompExec @ 0x850ec (64 bytes) */
-int _glRectsv_CompExec(param_1, param_2, param_3)
+void _glRectsv_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -783,7 +783,7 @@ void _glSampleCoverage_Exec(int param_1,undefined4 param_2,int param_3,float fpa
 }
 
 /* _glSamplePass_Exec @ 0x85f10 (4 bytes) */
-int _glSamplePass_Exec()
+void _glSamplePass_Exec()
 {
   return;
 }
@@ -799,7 +799,7 @@ void _glSampleCoverage_CompExec(undefined4 param_1,undefined4 param_2,undefined4
 }
 
 /* _glSamplePass_CompExec @ 0x85f5c (56 bytes) */
-int _glSamplePass_CompExec(param_1, param_2)
+void _glSamplePass_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -859,7 +859,7 @@ int _glScissor_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glScissor_CompExec @ 0x86110 (80 bytes) */
-int _glScissor_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glScissor_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -882,7 +882,7 @@ int _glScissor_CompExec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glSelectBuffer_Exec @ 0x86160 (100 bytes) */
-int _glSelectBuffer_Exec(param_1, param_2, param_3)
+void _glSelectBuffer_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -931,7 +931,7 @@ int _glInitNames_Comp(param_1)
 }
 
 /* _glInitNames_Exec @ 0x86208 (68 bytes) */
-int _glInitNames_Exec(param_1)
+void _glInitNames_Exec(param_1)
   int param_1;
 {
   if (*(short *)(param_1 + 0x4a10) < 0) {
@@ -950,7 +950,7 @@ int _glInitNames_Exec(param_1)
 }
 
 /* _glInitNames_CompExec @ 0x8624c (48 bytes) */
-int _glInitNames_CompExec(param_1)
+void _glInitNames_CompExec(param_1)
   undefined4 param_1;
 {
   ((int (*)())_glInitNames_Comp)(param_1);
@@ -982,7 +982,7 @@ int _glPushName_Comp(param_1, param_2)
 }
 
 /* _glPushName_Exec @ 0x862f0 (108 bytes) */
-int _glPushName_Exec(param_1, param_2)
+void _glPushName_Exec(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -1016,7 +1016,7 @@ int _glPushName_Exec(param_1, param_2)
 }
 
 /* _glPushName_CompExec @ 0x8635c (56 bytes) */
-int _glPushName_CompExec(param_1, param_2)
+void _glPushName_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -1044,7 +1044,7 @@ int _glPopName_Comp(param_1)
 }
 
 /* _glPopName_Exec @ 0x863d8 (104 bytes) */
-int _glPopName_Exec(param_1)
+void _glPopName_Exec(param_1)
   int param_1;
 {
   undefined4 uVar1;
@@ -1074,7 +1074,7 @@ int _glPopName_Exec(param_1)
 }
 
 /* _glPopName_CompExec @ 0x86440 (48 bytes) */
-int _glPopName_CompExec(param_1)
+void _glPopName_CompExec(param_1)
   undefined4 param_1;
 {
   ((int (*)())_glPopName_Comp)(param_1);
@@ -1106,7 +1106,7 @@ int _glShadeModel_Comp(param_1, param_2)
 }
 
 /* _glShadeModel_CompExec @ 0x864e4 (56 bytes) */
-int _glShadeModel_CompExec(param_1, param_2)
+void _glShadeModel_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -1557,7 +1557,7 @@ int _glUseProgramObjectARB_Comp(param_1, param_2)
 }
 
 /* _glUseProgramObjectARB_CompExec @ 0x86db4 (56 bytes) */
-int _glUseProgramObjectARB_CompExec(param_1, param_2)
+void _glUseProgramObjectARB_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {

@@ -20,7 +20,7 @@ int _gleShrinkFuncCacheElem(param_1, param_2)
 }
 
 /* _glEndNoMat_Exec @ 0x1ed10 (64 bytes) */
-int _glEndNoMat_Exec(param_1)
+void _glEndNoMat_Exec(param_1)
   int param_1;
 {
   if (-1 < *(short *)(param_1 + 0x4a10)) {
@@ -72,7 +72,7 @@ void _glFlush_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,d
   piVar8 = (int *)(param_1 + 0x310);
   cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
   if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-    ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
                fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
   }
@@ -740,7 +740,7 @@ switchD_0001fcd0_default:
 }
 
 /* FUN_0001ff98 @ 0x1ff98 (572 bytes) */
-int FUN_0001ff98(param_1, param_2, param_3)
+void FUN_0001ff98(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -846,7 +846,7 @@ int FUN_0001ff98(param_1, param_2, param_3)
 }
 
 /* _gleDeleteHashNamesAndObjects @ 0x201d4 (340 bytes) */
-int _gleDeleteHashNamesAndObjects(param_1, param_2, param_3, param_4)
+void _gleDeleteHashNamesAndObjects(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   uint param_3;
@@ -955,7 +955,7 @@ int _gleRemoveHashObject(param_1, param_2)
 }
 
 /* _gleFreeTextureObject @ 0x203a0 (256 bytes) */
-int _gleFreeTextureObject(param_1, param_2)
+void _gleFreeTextureObject(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
@@ -1008,7 +1008,7 @@ int _gleFreeTextureObject(param_1, param_2)
 }
 
 /* _gleDeletePluginTexture @ 0x204a0 (120 bytes) */
-int _gleDeletePluginTexture(param_1, param_2)
+void _gleDeletePluginTexture(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1076,7 +1076,7 @@ void _glScissor_Exec(int param_1,undefined4 param_2,undefined4 param_3,int param
 }
 
 /* _gleMoveFuncCacheElem @ 0x205f0 (44 bytes) */
-int _gleMoveFuncCacheElem(param_1, param_2)
+void _gleMoveFuncCacheElem(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -1531,7 +1531,7 @@ int _gleCreateSurfaceLevel(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _glFlushRender_Exec @ 0x20fc0 (52 bytes) */
-int _glFlushRender_Exec(param_1)
+void _glFlushRender_Exec(param_1)
   int param_1;
 {
   if (*(short *)(param_1 + 0x4a10) < 0) {
@@ -1548,7 +1548,7 @@ int _glFlushRender_Exec(param_1)
 }
 
 /* _glGetFloatv_Exec @ 0x20ff4 (280 bytes) */
-int _glGetFloatv_Exec(param_1, param_2, param_3)
+void _glGetFloatv_Exec(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   float *param_3;
@@ -1614,7 +1614,7 @@ LAB_00021068:
 }
 
 /* _glGetProgramivARB_Exec @ 0x2110c (2084 bytes) */
-int _glGetProgramivARB_Exec(param_1, param_2, param_3, param_4)
+void _glGetProgramivARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -2415,7 +2415,7 @@ int _gleShareSharedState(param_1)
 }
 
 /* _gleSetEnable_DITHER @ 0x2242c (32 bytes) */
-int _gleSetEnable_DITHER(param_1, param_2, param_3)
+void _gleSetEnable_DITHER(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -2429,7 +2429,7 @@ int _gleSetEnable_DITHER(param_1, param_2, param_3)
 }
 
 /* _glStencilMask_Exec @ 0x2244c (68 bytes) */
-int _glStencilMask_Exec(param_1, param_2)
+void _glStencilMask_Exec(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -2514,7 +2514,7 @@ void _glClearColor_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3
 }
 
 /* _glMultiTexCoord4fv_Exec @ 0x225b4 (60 bytes) */
-int _glMultiTexCoord4fv_Exec(param_1, param_2, param_3)
+double _glMultiTexCoord4fv_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   undefined4 *param_3;
@@ -2537,7 +2537,7 @@ int _glMultiTexCoord4fv_Exec(param_1, param_2, param_3)
 }
 
 /* _glVertex4fv_Exec @ 0x225f0 (48 bytes) */
-int _glVertex4fv_Exec(param_1, param_2)
+void _glVertex4fv_Exec(param_1, param_2)
   int param_1;
   float *param_2;
 {
@@ -2555,7 +2555,7 @@ int _glVertex4fv_Exec(param_1, param_2)
 }
 
 /* _glGenProgramsARB_Exec @ 0x22620 (236 bytes) */
-int _glGenProgramsARB_Exec(param_1, param_2, param_3)
+void _glGenProgramsARB_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -2608,7 +2608,7 @@ int _glGenProgramsARB_Exec(param_1, param_2, param_3)
 }
 
 /* _glBindProgramARB_Exec @ 0x2270c (276 bytes) */
-int _glBindProgramARB_Exec(param_1, param_2, param_3)
+void _glBindProgramARB_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   undefined4 param_3;
@@ -2773,7 +2773,7 @@ LAB_0002299c:
 }
 
 /* _glProgramStringARB_Exec @ 0x22aa4 (796 bytes) */
-int _glProgramStringARB_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glProgramStringARB_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint param_2;
   int param_3;
@@ -2928,7 +2928,7 @@ LAB_00022bb8:
 }
 
 /* _glePPParse @ 0x22dc0 (4884 bytes) */
-int _glePPParse(param_1, param_2, param_3)
+void _glePPParse(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -3825,7 +3825,7 @@ code_r0x000248f4:
 }
 
 /* _glePPLogParameters @ 0x2496c (728 bytes) */
-int _glePPLogParameters(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glePPLogParameters(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   uint param_3;
@@ -4107,7 +4107,7 @@ LAB_00025008:
 }
 
 /* _PPEmulatorProgramSetupHandlesFromPPStream @ 0x25218 (844 bytes) */
-int _PPEmulatorProgramSetupHandlesFromPPStream(param_1, param_2, param_3)
+void _PPEmulatorProgramSetupHandlesFromPPStream(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -4185,7 +4185,7 @@ int _PPEmulatorProgramSetupHandlesFromPPStream(param_1, param_2, param_3)
 }
 
 /* _gleVPGetResultOffset @ 0x25564 (204 bytes) */
-int _gleVPGetResultOffset(param_1, param_2, param_3, param_4, param_5)
+void _gleVPGetResultOffset(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   uint param_2;
   undefined4 param_3;
@@ -4240,7 +4240,7 @@ LAB_00025630:
 }
 
 /* _gleVPGetParameterPtr @ 0x25654 (972 bytes) */
-int _gleVPGetParameterPtr(param_1, param_2, param_3, param_4, param_5)
+void _gleVPGetParameterPtr(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   uint param_2;
   undefined4 param_3;
@@ -4458,7 +4458,7 @@ LAB_00025998:
 }
 
 /* _glePPUpdateProgram @ 0x25abc (1144 bytes) */
-int _glePPUpdateProgram(param_1, param_2)
+void _glePPUpdateProgram(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
@@ -4707,7 +4707,7 @@ void _gleVPChanged(int param_1,double fparam_1,double fparam_2,double fparam_3,d
 }
 
 /* _glProgramLocalParameter4fvARB_Exec @ 0x260fc (344 bytes) */
-int _glProgramLocalParameter4fvARB_Exec(param_1, param_2, param_3, param_4)
+void _glProgramLocalParameter4fvARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -4781,7 +4781,7 @@ LAB_00026188:
 }
 
 /* _gleModifyPluginPipelineProgram @ 0x26254 (120 bytes) */
-int _gleModifyPluginPipelineProgram(param_1, param_2, param_3)
+void _gleModifyPluginPipelineProgram(param_1, param_2, param_3)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -4811,11 +4811,9 @@ int _gleModifyPluginPipelineProgram(param_1, param_2, param_3)
 }
 
 /* _gleVPDisable @ 0x262cc (140 bytes) */
-int _gleVPDisable(param_1)
+void _gleVPDisable(param_1)
   int param_1;
 {
-  undefined4 extraout_r3;
-  
   if (*(char *)(param_1 + 0x30aa) != '\0') {
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x800;
     *(bool *)(param_1 + 0x316b) = *(short *)(param_1 + 0x30a8) == -0x7e06;
@@ -4827,11 +4825,11 @@ int _gleVPDisable(param_1)
   _gleUpdateTextureTransform(param_1);
   _gleUpdatePolyMode(param_1);
   *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x400000;
-  return extraout_r3;
+  return;
 }
 
 /* _glPixelTransferi_Exec @ 0x26358 (3128 bytes) */
-int _glPixelTransferi_Exec(param_1, param_2, param_3)
+void _glPixelTransferi_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   uint param_3;
@@ -5334,7 +5332,7 @@ int _gleLookUpTexture3D(param_1, param_2)
 }
 
 /* _gleTextureImagePut_Slow @ 0x27448 (28188 bytes) */
-int _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13)
+void _gleTextureImagePut_Slow(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13)
   int param_1;
   int param_2;
   uint param_3;

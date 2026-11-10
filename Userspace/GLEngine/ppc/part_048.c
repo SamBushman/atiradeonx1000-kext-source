@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gleExtractPixel_R_Ubyte @ 0xe4090 (68 bytes) */
-int _gleExtractPixel_R_Ubyte(param_1, param_2)
+void _gleExtractPixel_R_Ubyte(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -10,7 +10,7 @@ int _gleExtractPixel_R_Ubyte(param_1, param_2)
 }
 
 /* _gleExtractPixel_R_Short @ 0xe40d4 (76 bytes) */
-int _gleExtractPixel_R_Short(param_1, param_2)
+void _gleExtractPixel_R_Short(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -21,7 +21,7 @@ int _gleExtractPixel_R_Short(param_1, param_2)
 }
 
 /* _gleExtractPixel_R_Ushort @ 0xe4120 (68 bytes) */
-int _gleExtractPixel_R_Ushort(param_1, param_2)
+void _gleExtractPixel_R_Ushort(param_1, param_2)
   int param_1;
   ushort *param_2;
 {
@@ -30,7 +30,7 @@ int _gleExtractPixel_R_Ushort(param_1, param_2)
 }
 
 /* _gleExtractPixel_R_Int @ 0xe4164 (80 bytes) */
-int _gleExtractPixel_R_Int(param_1, param_2)
+void _gleExtractPixel_R_Int(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -41,7 +41,7 @@ int _gleExtractPixel_R_Int(param_1, param_2)
 }
 
 /* _gleExtractPixel_R_Uint @ 0xe41b4 (76 bytes) */
-int _gleExtractPixel_R_Uint(param_1, param_2)
+void _gleExtractPixel_R_Uint(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -52,7 +52,7 @@ int _gleExtractPixel_R_Uint(param_1, param_2)
 }
 
 /* _gleExtractPixel_R_Float @ 0xe4200 (12 bytes) */
-int _gleExtractPixel_R_Float(param_1, param_2)
+void _gleExtractPixel_R_Float(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -61,7 +61,7 @@ int _gleExtractPixel_R_Float(param_1, param_2)
 }
 
 /* _gleExtractPixel_G_Byte @ 0xe420c (80 bytes) */
-int _gleExtractPixel_G_Byte(param_1, param_2)
+void _gleExtractPixel_G_Byte(param_1, param_2)
   int param_1;
   char *param_2;
 {
@@ -72,7 +72,7 @@ int _gleExtractPixel_G_Byte(param_1, param_2)
 }
 
 /* _gleExtractPixel_G_Ubyte @ 0xe425c (68 bytes) */
-int _gleExtractPixel_G_Ubyte(param_1, param_2)
+void _gleExtractPixel_G_Ubyte(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -81,7 +81,7 @@ int _gleExtractPixel_G_Ubyte(param_1, param_2)
 }
 
 /* _gleExtractPixel_G_Short @ 0xe42a0 (76 bytes) */
-int _gleExtractPixel_G_Short(param_1, param_2)
+void _gleExtractPixel_G_Short(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -92,7 +92,7 @@ int _gleExtractPixel_G_Short(param_1, param_2)
 }
 
 /* _gleExtractPixel_G_Ushort @ 0xe42ec (68 bytes) */
-int _gleExtractPixel_G_Ushort(param_1, param_2)
+void _gleExtractPixel_G_Ushort(param_1, param_2)
   int param_1;
   ushort *param_2;
 {
@@ -101,7 +101,7 @@ int _gleExtractPixel_G_Ushort(param_1, param_2)
 }
 
 /* _gleExtractPixel_G_Int @ 0xe4330 (80 bytes) */
-int _gleExtractPixel_G_Int(param_1, param_2)
+void _gleExtractPixel_G_Int(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -112,7 +112,7 @@ int _gleExtractPixel_G_Int(param_1, param_2)
 }
 
 /* _gleExtractPixel_G_Uint @ 0xe4380 (76 bytes) */
-int _gleExtractPixel_G_Uint(param_1, param_2)
+void _gleExtractPixel_G_Uint(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -123,7 +123,7 @@ int _gleExtractPixel_G_Uint(param_1, param_2)
 }
 
 /* _gleExtractPixel_G_Float @ 0xe43cc (12 bytes) */
-int _gleExtractPixel_G_Float(param_1, param_2)
+void _gleExtractPixel_G_Float(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -132,7 +132,7 @@ int _gleExtractPixel_G_Float(param_1, param_2)
 }
 
 /* _gleExtractPixel_B_Byte @ 0xe43d8 (80 bytes) */
-int _gleExtractPixel_B_Byte(param_1, param_2)
+void _gleExtractPixel_B_Byte(param_1, param_2)
   int param_1;
   char *param_2;
 {
@@ -143,7 +143,7 @@ int _gleExtractPixel_B_Byte(param_1, param_2)
 }
 
 /* _gleExtractPixel_B_Ubyte @ 0xe4428 (68 bytes) */
-int _gleExtractPixel_B_Ubyte(param_1, param_2)
+void _gleExtractPixel_B_Ubyte(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -152,7 +152,7 @@ int _gleExtractPixel_B_Ubyte(param_1, param_2)
 }
 
 /* _gleExtractPixel_B_Short @ 0xe446c (76 bytes) */
-int _gleExtractPixel_B_Short(param_1, param_2)
+void _gleExtractPixel_B_Short(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -163,7 +163,7 @@ int _gleExtractPixel_B_Short(param_1, param_2)
 }
 
 /* _gleExtractPixel_B_Ushort @ 0xe44b8 (68 bytes) */
-int _gleExtractPixel_B_Ushort(param_1, param_2)
+void _gleExtractPixel_B_Ushort(param_1, param_2)
   int param_1;
   ushort *param_2;
 {
@@ -172,7 +172,7 @@ int _gleExtractPixel_B_Ushort(param_1, param_2)
 }
 
 /* _gleExtractPixel_B_Int @ 0xe44fc (80 bytes) */
-int _gleExtractPixel_B_Int(param_1, param_2)
+void _gleExtractPixel_B_Int(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -183,7 +183,7 @@ int _gleExtractPixel_B_Int(param_1, param_2)
 }
 
 /* _gleExtractPixel_B_Uint @ 0xe454c (76 bytes) */
-int _gleExtractPixel_B_Uint(param_1, param_2)
+void _gleExtractPixel_B_Uint(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -194,7 +194,7 @@ int _gleExtractPixel_B_Uint(param_1, param_2)
 }
 
 /* _gleExtractPixel_B_Float @ 0xe4598 (12 bytes) */
-int _gleExtractPixel_B_Float(param_1, param_2)
+void _gleExtractPixel_B_Float(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -203,7 +203,7 @@ int _gleExtractPixel_B_Float(param_1, param_2)
 }
 
 /* _gleExtractPixel_A_Byte @ 0xe45a4 (80 bytes) */
-int _gleExtractPixel_A_Byte(param_1, param_2)
+void _gleExtractPixel_A_Byte(param_1, param_2)
   int param_1;
   char *param_2;
 {
@@ -214,7 +214,7 @@ int _gleExtractPixel_A_Byte(param_1, param_2)
 }
 
 /* _gleExtractPixel_A_Ubyte @ 0xe45f4 (68 bytes) */
-int _gleExtractPixel_A_Ubyte(param_1, param_2)
+void _gleExtractPixel_A_Ubyte(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -223,7 +223,7 @@ int _gleExtractPixel_A_Ubyte(param_1, param_2)
 }
 
 /* _gleExtractPixel_A_Short @ 0xe4638 (76 bytes) */
-int _gleExtractPixel_A_Short(param_1, param_2)
+void _gleExtractPixel_A_Short(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -234,7 +234,7 @@ int _gleExtractPixel_A_Short(param_1, param_2)
 }
 
 /* _gleExtractPixel_A_Ushort @ 0xe4684 (68 bytes) */
-int _gleExtractPixel_A_Ushort(param_1, param_2)
+void _gleExtractPixel_A_Ushort(param_1, param_2)
   int param_1;
   ushort *param_2;
 {
@@ -243,7 +243,7 @@ int _gleExtractPixel_A_Ushort(param_1, param_2)
 }
 
 /* _gleExtractPixel_A_Int @ 0xe46c8 (80 bytes) */
-int _gleExtractPixel_A_Int(param_1, param_2)
+void _gleExtractPixel_A_Int(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -254,7 +254,7 @@ int _gleExtractPixel_A_Int(param_1, param_2)
 }
 
 /* _gleExtractPixel_A_Uint @ 0xe4718 (76 bytes) */
-int _gleExtractPixel_A_Uint(param_1, param_2)
+void _gleExtractPixel_A_Uint(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -265,7 +265,7 @@ int _gleExtractPixel_A_Uint(param_1, param_2)
 }
 
 /* _gleExtractPixel_A_Float @ 0xe4764 (12 bytes) */
-int _gleExtractPixel_A_Float(param_1, param_2)
+void _gleExtractPixel_A_Float(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -274,7 +274,7 @@ int _gleExtractPixel_A_Float(param_1, param_2)
 }
 
 /* _gleExtractPixel_L_Byte @ 0xe4770 (88 bytes) */
-int _gleExtractPixel_L_Byte(param_1, param_2)
+void _gleExtractPixel_L_Byte(param_1, param_2)
   int param_1;
   char *param_2;
 {
@@ -289,7 +289,7 @@ int _gleExtractPixel_L_Byte(param_1, param_2)
 }
 
 /* _gleExtractPixel_L_Ubyte @ 0xe47c8 (76 bytes) */
-int _gleExtractPixel_L_Ubyte(param_1, param_2)
+void _gleExtractPixel_L_Ubyte(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -303,7 +303,7 @@ int _gleExtractPixel_L_Ubyte(param_1, param_2)
 }
 
 /* _gleExtractPixel_L_Short @ 0xe4814 (84 bytes) */
-int _gleExtractPixel_L_Short(param_1, param_2)
+void _gleExtractPixel_L_Short(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -318,7 +318,7 @@ int _gleExtractPixel_L_Short(param_1, param_2)
 }
 
 /* _gleExtractPixel_L_Ushort @ 0xe4868 (76 bytes) */
-int _gleExtractPixel_L_Ushort(param_1, param_2)
+void _gleExtractPixel_L_Ushort(param_1, param_2)
   int param_1;
   ushort *param_2;
 {
@@ -332,7 +332,7 @@ int _gleExtractPixel_L_Ushort(param_1, param_2)
 }
 
 /* _gleExtractPixel_L_Int @ 0xe48b4 (88 bytes) */
-int _gleExtractPixel_L_Int(param_1, param_2)
+void _gleExtractPixel_L_Int(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -347,7 +347,7 @@ int _gleExtractPixel_L_Int(param_1, param_2)
 }
 
 /* _gleExtractPixel_L_Uint @ 0xe490c (84 bytes) */
-int _gleExtractPixel_L_Uint(param_1, param_2)
+void _gleExtractPixel_L_Uint(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -362,7 +362,7 @@ int _gleExtractPixel_L_Uint(param_1, param_2)
 }
 
 /* _gleExtractPixel_L_Float @ 0xe4960 (20 bytes) */
-int _gleExtractPixel_L_Float(param_1, param_2)
+void _gleExtractPixel_L_Float(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -376,7 +376,7 @@ int _gleExtractPixel_L_Float(param_1, param_2)
 }
 
 /* _gleExtractPixel_LA_Byte @ 0xe4974 (124 bytes) */
-int _gleExtractPixel_LA_Byte(param_1, param_2)
+void _gleExtractPixel_LA_Byte(param_1, param_2)
   int param_1;
   char *param_2;
 {
@@ -397,7 +397,7 @@ int _gleExtractPixel_LA_Byte(param_1, param_2)
 }
 
 /* _gleExtractPixel_LA_Ubyte @ 0xe49f0 (112 bytes) */
-int _gleExtractPixel_LA_Ubyte(param_1, param_2)
+void _gleExtractPixel_LA_Ubyte(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -414,7 +414,7 @@ int _gleExtractPixel_LA_Ubyte(param_1, param_2)
 }
 
 /* _gleExtractPixel_LA_Short @ 0xe4a60 (116 bytes) */
-int _gleExtractPixel_LA_Short(param_1, param_2)
+void _gleExtractPixel_LA_Short(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -435,7 +435,7 @@ int _gleExtractPixel_LA_Short(param_1, param_2)
 }
 
 /* _gleExtractPixel_LA_Ushort @ 0xe4ad4 (112 bytes) */
-int _gleExtractPixel_LA_Ushort(param_1, param_2)
+void _gleExtractPixel_LA_Ushort(param_1, param_2)
   int param_1;
   ushort *param_2;
 {
@@ -452,7 +452,7 @@ int _gleExtractPixel_LA_Ushort(param_1, param_2)
 }
 
 /* _gleExtractPixel_LA_Int @ 0xe4b44 (124 bytes) */
-int _gleExtractPixel_LA_Int(param_1, param_2)
+void _gleExtractPixel_LA_Int(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -474,7 +474,7 @@ int _gleExtractPixel_LA_Int(param_1, param_2)
 }
 
 /* _gleExtractPixel_LA_Uint @ 0xe4bc0 (116 bytes) */
-int _gleExtractPixel_LA_Uint(param_1, param_2)
+void _gleExtractPixel_LA_Uint(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -495,7 +495,7 @@ int _gleExtractPixel_LA_Uint(param_1, param_2)
 }
 
 /* _gleExtractPixel_LA_Float @ 0xe4c34 (28 bytes) */
-int _gleExtractPixel_LA_Float(param_1, param_2)
+void _gleExtractPixel_LA_Float(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -510,7 +510,7 @@ int _gleExtractPixel_LA_Float(param_1, param_2)
 }
 
 /* _gleExtractPixel_Index_Byte @ 0xe4c50 (24 bytes) */
-int _gleExtractPixel_Index_Byte(param_1, param_2)
+void _gleExtractPixel_Index_Byte(param_1, param_2)
   int param_1;
   char *param_2;
 {
@@ -523,7 +523,7 @@ int _gleExtractPixel_Index_Byte(param_1, param_2)
 }
 
 /* _gleExtractPixel_Index_Ubyte @ 0xe4c68 (20 bytes) */
-int _gleExtractPixel_Index_Ubyte(param_1, param_2)
+void _gleExtractPixel_Index_Ubyte(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -536,7 +536,7 @@ int _gleExtractPixel_Index_Ubyte(param_1, param_2)
 }
 
 /* _gleExtractPixel_Index_Short @ 0xe4c7c (20 bytes) */
-int _gleExtractPixel_Index_Short(param_1, param_2)
+void _gleExtractPixel_Index_Short(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -549,7 +549,7 @@ int _gleExtractPixel_Index_Short(param_1, param_2)
 }
 
 /* _gleExtractPixel_Index_Ushort @ 0xe4c90 (20 bytes) */
-int _gleExtractPixel_Index_Ushort(param_1, param_2)
+void _gleExtractPixel_Index_Ushort(param_1, param_2)
   int param_1;
   ushort *param_2;
 {
@@ -562,7 +562,7 @@ int _gleExtractPixel_Index_Ushort(param_1, param_2)
 }
 
 /* _gleExtractPixel_Index_Int @ 0xe4ca4 (20 bytes) */
-int _gleExtractPixel_Index_Int(param_1, param_2)
+void _gleExtractPixel_Index_Int(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -575,7 +575,7 @@ int _gleExtractPixel_Index_Int(param_1, param_2)
 }
 
 /* _gleExtractPixel_Index_Uint @ 0xe4cb8 (20 bytes) */
-int _gleExtractPixel_Index_Uint(param_1, param_2)
+void _gleExtractPixel_Index_Uint(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -588,7 +588,7 @@ int _gleExtractPixel_Index_Uint(param_1, param_2)
 }
 
 /* _gleExtractPixel_Index_Float @ 0xe4ccc (128 bytes) */
-int _gleExtractPixel_Index_Float(param_1, param_2)
+void _gleExtractPixel_Index_Float(param_1, param_2)
   int param_1;
   float *param_2;
 {
@@ -606,7 +606,7 @@ int _gleExtractPixel_Index_Float(param_1, param_2)
 }
 
 /* _gleExtractPixel_Depth_Byte @ 0xe4d4c (80 bytes) */
-int _gleExtractPixel_Depth_Byte(param_1, param_2)
+void _gleExtractPixel_Depth_Byte(param_1, param_2)
   int param_1;
   char *param_2;
 {
@@ -617,7 +617,7 @@ int _gleExtractPixel_Depth_Byte(param_1, param_2)
 }
 
 /* _gleExtractPixel_Depth_Ubyte @ 0xe4d9c (68 bytes) */
-int _gleExtractPixel_Depth_Ubyte(param_1, param_2)
+void _gleExtractPixel_Depth_Ubyte(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -626,7 +626,7 @@ int _gleExtractPixel_Depth_Ubyte(param_1, param_2)
 }
 
 /* _gleExtractPixel_Depth_Short @ 0xe4de0 (76 bytes) */
-int _gleExtractPixel_Depth_Short(param_1, param_2)
+void _gleExtractPixel_Depth_Short(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -637,7 +637,7 @@ int _gleExtractPixel_Depth_Short(param_1, param_2)
 }
 
 /* _gleExtractPixel_Depth_Ushort @ 0xe4e2c (68 bytes) */
-int _gleExtractPixel_Depth_Ushort(param_1, param_2)
+void _gleExtractPixel_Depth_Ushort(param_1, param_2)
   int param_1;
   ushort *param_2;
 {
@@ -646,7 +646,7 @@ int _gleExtractPixel_Depth_Ushort(param_1, param_2)
 }
 
 /* _gleExtractPixel_Depth_Int @ 0xe4e70 (80 bytes) */
-int _gleExtractPixel_Depth_Int(param_1, param_2)
+void _gleExtractPixel_Depth_Int(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -657,7 +657,7 @@ int _gleExtractPixel_Depth_Int(param_1, param_2)
 }
 
 /* _gleExtractPixel_Depth_Uint @ 0xe4ec0 (76 bytes) */
-int _gleExtractPixel_Depth_Uint(param_1, param_2)
+void _gleExtractPixel_Depth_Uint(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -668,7 +668,7 @@ int _gleExtractPixel_Depth_Uint(param_1, param_2)
 }
 
 /* _gleExtractPixel_Depth_Float @ 0xe4f0c (12 bytes) */
-int _gleExtractPixel_Depth_Float(param_1, param_2)
+void _gleExtractPixel_Depth_Float(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -677,7 +677,7 @@ int _gleExtractPixel_Depth_Float(param_1, param_2)
 }
 
 /* _gleExtractPixel_HILO_Byte @ 0xe4f18 (116 bytes) */
-int _gleExtractPixel_HILO_Byte(param_1, param_2)
+void _gleExtractPixel_HILO_Byte(param_1, param_2)
   int param_1;
   char *param_2;
 {
@@ -695,7 +695,7 @@ int _gleExtractPixel_HILO_Byte(param_1, param_2)
 }
 
 /* _gleExtractPixel_HILO_Ubyte @ 0xe4f8c (104 bytes) */
-int _gleExtractPixel_HILO_Ubyte(param_1, param_2)
+void _gleExtractPixel_HILO_Ubyte(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -708,7 +708,7 @@ int _gleExtractPixel_HILO_Ubyte(param_1, param_2)
 }
 
 /* _gleExtractPixel_HILO_Short @ 0xe4ff4 (108 bytes) */
-int _gleExtractPixel_HILO_Short(param_1, param_2)
+void _gleExtractPixel_HILO_Short(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -726,7 +726,7 @@ int _gleExtractPixel_HILO_Short(param_1, param_2)
 }
 
 /* _gleExtractPixel_HILO_Ushort @ 0xe5060 (104 bytes) */
-int _gleExtractPixel_HILO_Ushort(param_1, param_2)
+void _gleExtractPixel_HILO_Ushort(param_1, param_2)
   int param_1;
   ushort *param_2;
 {
@@ -739,7 +739,7 @@ int _gleExtractPixel_HILO_Ushort(param_1, param_2)
 }
 
 /* _gleExtractPixel_HILO_Int @ 0xe50c8 (116 bytes) */
-int _gleExtractPixel_HILO_Int(param_1, param_2)
+void _gleExtractPixel_HILO_Int(param_1, param_2)
   int param_1;
   uint *param_2;
 {

@@ -29,7 +29,7 @@ int _gleRTCAddAChunk_c5280(param_1, param_2)
 }
 
 /* _gleSetNormalFunc @ 0xc52b0 (96 bytes) */
-int _gleSetNormalFunc(param_1, param_2, param_3)
+void _gleSetNormalFunc(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -508,7 +508,7 @@ int _gleRTCAddAChunk_c5ddc(param_1, param_2)
 }
 
 /* _gleSetProjectionFuncW1 @ 0xc5e0c (104 bytes) */
-int _gleSetProjectionFuncW1(param_1, param_2, param_3)
+void _gleSetProjectionFuncW1(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -522,7 +522,7 @@ int _gleSetProjectionFuncW1(param_1, param_2, param_3)
 }
 
 /* _gleSetProjectionFuncZ0W1 @ 0xc5e74 (104 bytes) */
-int _gleSetProjectionFuncZ0W1(param_1, param_2, param_3)
+void _gleSetProjectionFuncZ0W1(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1045,7 +1045,7 @@ LAB_000c6804:
 }
 
 /* _gleGetClientAttrib @ 0xc69d4 (460 bytes) */
-int _gleGetClientAttrib(param_1, param_2, param_3)
+void _gleGetClientAttrib(param_1, param_2, param_3)
   int param_1;
   int param_2;
   undefined4 *param_3;
@@ -1137,7 +1137,7 @@ int _gleGetClientAttrib(param_1, param_2, param_3)
 }
 
 /* _gleSetClientAttrib @ 0xc6ba0 (1172 bytes) */
-int _gleSetClientAttrib(param_1, param_2, param_3)
+void _gleSetClientAttrib(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -1295,7 +1295,7 @@ int _gleSetClientAttrib(param_1, param_2, param_3)
 }
 
 /* _gleAddClientAttribElem @ 0xc7034 (120 bytes) */
-int _gleAddClientAttribElem(param_1, param_2)
+void _gleAddClientAttribElem(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -1319,7 +1319,7 @@ int _gleAddClientAttribElem(param_1, param_2)
 }
 
 /* _gleRemoveClientAttribElem @ 0xc70ac (56 bytes) */
-int _gleRemoveClientAttribElem(param_1, param_2)
+void _gleRemoveClientAttribElem(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
@@ -1329,7 +1329,7 @@ int _gleRemoveClientAttribElem(param_1, param_2)
 }
 
 /* _gleCreatePluginBuffer @ 0xc70e4 (124 bytes) */
-int _gleCreatePluginBuffer(param_1, param_2)
+void _gleCreatePluginBuffer(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1356,13 +1356,12 @@ int _gleCreatePluginBuffer(param_1, param_2)
 }
 
 /* _gleFreeBufferObject @ 0xc7160 (168 bytes) */
-int _gleFreeBufferObject(param_1, param_2)
+void _gleFreeBufferObject(param_1, param_2)
   int param_1;
   int param_2;
 {
   int *piVar1;
   undefined4 *puVar2;
-  undefined4 extraout_r3;
   int iVar3;
   int iVar4;
   int iVar5;
@@ -1386,7 +1385,7 @@ int _gleFreeBufferObject(param_1, param_2)
                    *(vm_size_t *)(param_2 + 0x38));
   }
   _gleVecFree(param_2);
-  return extraout_r3;
+  return;
 }
 
 /* _gleCreateBufferObject @ 0xc7208 (212 bytes) */
@@ -1432,7 +1431,7 @@ int _gleCreateBufferObject(param_1, param_2)
 }
 
 /* _gleBindBufferObject @ 0xc72dc (460 bytes) */
-int _gleBindBufferObject(param_1, param_2, param_3)
+void _gleBindBufferObject(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   int param_3;
@@ -1519,7 +1518,7 @@ LAB_000c7440:
 }
 
 /* _gleOrphanBufferData @ 0xc74a8 (1088 bytes) */
-int _gleOrphanBufferData(param_1, param_2, param_3, param_4)
+void _gleOrphanBufferData(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 *param_2;
   int param_3;
@@ -1708,7 +1707,7 @@ LAB_000c7884:
 }
 
 /* _gleCleanupOrphans @ 0xc78e8 (300 bytes) */
-int _gleCleanupOrphans(param_1)
+void _gleCleanupOrphans(param_1)
   int param_1;
 {
   int *piVar1;
@@ -1765,7 +1764,7 @@ int _gleCleanupOrphans(param_1)
 }
 
 /* _gleSynchronizePluginBuffers @ 0xc7a14 (204 bytes) */
-int _gleSynchronizePluginBuffers(param_1)
+void _gleSynchronizePluginBuffers(param_1)
   int param_1;
 {
   int iVar1;
@@ -1793,7 +1792,7 @@ int _gleSynchronizePluginBuffers(param_1)
 }
 
 /* _gleSynchronizePluginBuffer @ 0xc7ae0 (160 bytes) */
-int _gleSynchronizePluginBuffer(param_1, param_2)
+double _gleSynchronizePluginBuffer(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1819,7 +1818,7 @@ int _gleSynchronizePluginBuffer(param_1, param_2)
 }
 
 /* _gleReclaimBufferObjectResources @ 0xc7b80 (248 bytes) */
-int _gleReclaimBufferObjectResources(param_1)
+void _gleReclaimBufferObjectResources(param_1)
   int param_1;
 {
   int *piVar1;
@@ -2060,7 +2059,7 @@ int _gleSwitchToRenderer(param_1, param_2)
 }
 
 /* _gleRecoverySaveState @ 0xc80d4 (280 bytes) */
-int _gleRecoverySaveState(param_1, param_2)
+double _gleRecoverySaveState(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -2182,7 +2181,7 @@ undefined4 _gleToggleScissorEnableState(int param_1,undefined4 param_2,double fp
 }
 
 /* _gleSwitchRenderersReadBuffers @ 0xc8358 (452 bytes) */
-int _gleSwitchRenderersReadBuffers(param_1, param_2, param_3)
+void _gleSwitchRenderersReadBuffers(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -2255,7 +2254,7 @@ int _gleSwitchRenderersReadBuffers(param_1, param_2, param_3)
 }
 
 /* _gleSwitchRenderersWriteBuffers @ 0xc851c (616 bytes) */
-int _gleSwitchRenderersWriteBuffers(param_1, param_2, param_3)
+void _gleSwitchRenderersWriteBuffers(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 *param_3;
@@ -2401,7 +2400,7 @@ int _gleGetMapData(param_1)
 }
 
 /* _gleReclaimContextResources @ 0xc8888 (276 bytes) */
-int _gleReclaimContextResources(param_1)
+void _gleReclaimContextResources(param_1)
   int param_1;
 {
   int *piVar1;
@@ -2443,7 +2442,7 @@ int _gleReclaimContextResources(param_1)
 }
 
 /* _gleSwitchToNonRevertRenderer @ 0xc899c (516 bytes) */
-int _gleSwitchToNonRevertRenderer(param_1)
+double _gleSwitchToNonRevertRenderer(param_1)
   int param_1;
 {
   byte bVar1;
@@ -2543,7 +2542,7 @@ int _gleSwitchToNonRevertRenderer(param_1)
 }
 
 /* _gleUpdateDispatchCodeChange @ 0xc8ba0 (528 bytes) */
-int _gleUpdateDispatchCodeChange(param_1, param_2)
+double _gleUpdateDispatchCodeChange(param_1, param_2)
   int param_1;
   uint param_2;
 {
@@ -2646,7 +2645,7 @@ int _gleUpdateDispatchCodeChange(param_1, param_2)
 }
 
 /* _gleUpdateFramebufferOperationFuncs @ 0xc8db0 (928 bytes) */
-int _gleUpdateFramebufferOperationFuncs(param_1)
+void _gleUpdateFramebufferOperationFuncs(param_1)
   int param_1;
 {
   int iVar1;
@@ -2749,13 +2748,13 @@ int _gleUpdateFramebufferOperationFuncs(param_1)
 }
 
 /* _gleReclaimDisplayListResources @ 0xc9150 (4 bytes) */
-int _gleReclaimDisplayListResources()
+void _gleReclaimDisplayListResources()
 {
   return;
 }
 
 /* _gleQuickOptimizeDisplayList @ 0xc9154 (1292 bytes) */
-int _gleQuickOptimizeDisplayList(param_1, param_2, param_3)
+void _gleQuickOptimizeDisplayList(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -2966,7 +2965,7 @@ int _gleDrawPixelsFastPickTextureType(param_1)
 }
 
 /* _gleDrawPixelsFastLoadColorTables @ 0xc96bc (232 bytes) */
-int _gleDrawPixelsFastLoadColorTables(param_1, param_2)
+void _gleDrawPixelsFastLoadColorTables(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
@@ -3096,7 +3095,7 @@ LAB_000c99b8:
 }
 
 /* _gleInitDrawPixelsShareObject @ 0xc99dc (1036 bytes) */
-int _gleInitDrawPixelsShareObject(param_1, param_2)
+void _gleInitDrawPixelsShareObject(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -3170,7 +3169,7 @@ int _gleInitDrawPixelsShareObject(param_1, param_2)
   piVar14 = (int *)(param_1 + 0x310);
   cVar3 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
   if ((iVar11 != 0) && (*(int *)(iVar11 + 0xec) != 0)) {
-    ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar11 + 0x10,in_r5,in_r6,in_r7,in_r8,uVar5,fparam_1,in_f2,in_f3,in_f4,in_f5,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar11 + 0x10,in_r5,in_r6,in_r7,in_r8,uVar5,fparam_1,in_f2,in_f3,in_f4,in_f5,
                in_f6,in_f7,in_f8);
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
   }
@@ -3414,7 +3413,7 @@ int _gleDrawPixelsSaveState(param_1, param_2)
 }
 
 /* _gleDrawPixelsRestoreState @ 0xca0dc (408 bytes) */
-int _gleDrawPixelsRestoreState(param_1, param_2, param_3)
+void _gleDrawPixelsRestoreState(param_1, param_2, param_3)
   int param_1;
   int param_2;
   uint param_3;
@@ -3915,7 +3914,7 @@ LAB_000ca704:
                 iVar30 = *(int *)(param_1 + 0x744c);
                 cVar8 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
                 if ((iVar30 != 0) && (*(int *)(iVar30 + 0xec) != 0)) {
-                  ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar30 + 0x10,piVar17,iVar16,iVar21,uVar20,iVar22,fparam_1,
+                  ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar30 + 0x10,piVar17,iVar16,iVar21,uVar20,iVar22,fparam_1,
                              fparam_2,dVar34,dVar33,in_f5,in_f6,in_f7,in_f8);
                   *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
                   fparam_1 = fparam_1;
@@ -4067,7 +4066,7 @@ LAB_000cae0c:
 }
 
 /* _gleSetEnable_TEXTURE_1D @ 0xcb104 (80 bytes) */
-int _gleSetEnable_TEXTURE_1D(param_1, param_2, param_3)
+void _gleSetEnable_TEXTURE_1D(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -4097,7 +4096,7 @@ int _gleSetEnable_TEXTURE_1D(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_TEXTURE_CUBE_MAP @ 0xcb154 (76 bytes) */
-int _gleSetEnable_TEXTURE_CUBE_MAP(param_1, param_2, param_3)
+void _gleSetEnable_TEXTURE_CUBE_MAP(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -4127,7 +4126,7 @@ int _gleSetEnable_TEXTURE_CUBE_MAP(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_SHARED_TEXTURE_PALETTE_EXT @ 0xcb1a0 (100 bytes) */
-int _gleSetEnable_SHARED_TEXTURE_PALETTE_EXT(param_1, param_2, param_3)
+void _gleSetEnable_SHARED_TEXTURE_PALETTE_EXT(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -4157,7 +4156,7 @@ int _gleSetEnable_SHARED_TEXTURE_PALETTE_EXT(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_LINE_STIPPLE @ 0xcb204 (32 bytes) */
-int _gleSetEnable_LINE_STIPPLE(param_1, param_2, param_3)
+void _gleSetEnable_LINE_STIPPLE(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -4171,7 +4170,7 @@ int _gleSetEnable_LINE_STIPPLE(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_POLYGON_STIPPLE @ 0xcb224 (32 bytes) */
-int _gleSetEnable_POLYGON_STIPPLE(param_1, param_2, param_3)
+void _gleSetEnable_POLYGON_STIPPLE(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -4185,7 +4184,7 @@ int _gleSetEnable_POLYGON_STIPPLE(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_INDEX_LOGIC_OP @ 0xcb244 (32 bytes) */
-int _gleSetEnable_INDEX_LOGIC_OP(param_1, param_2, param_3)
+void _gleSetEnable_INDEX_LOGIC_OP(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -4199,7 +4198,7 @@ int _gleSetEnable_INDEX_LOGIC_OP(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_COLOR_LOGIC_OP @ 0xcb264 (32 bytes) */
-int _gleSetEnable_COLOR_LOGIC_OP(param_1, param_2, param_3)
+void _gleSetEnable_COLOR_LOGIC_OP(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;

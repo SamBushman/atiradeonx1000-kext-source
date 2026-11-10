@@ -431,7 +431,10 @@ for a, sz, name in idx:
         i = b.index('{')
         bodies[a] = '%s %s(%s)\n' % (proto[a][0], name, proto[a][1]) + b[i:]
     else:
-        nrt = 'int' if not re.search(r'\b(longlong|ulonglong|undefined8)\b(?!\s*\*)', rt) else fix_types(rt + ' ').strip()
+        # a function Ghidra types `void` stays `void` (the stock function computes no value: with `int` and a bare `return;` the definition returned whatever the register
+        # held, and when the C returned an unassigned `extraout_r3` the rebuilt code returned garbage and could not tail-call). The post-pass below turns a `void` function into
+        # `int` / `double` again where a caller uses its result.
+        nrt = 'void' if rt.strip() == 'void' else 'int' if not re.search(r'\b(longlong|ulonglong|undefined8)\b(?!\s*\*)', rt) else fix_types(rt + ' ').strip()
         nparams = SMALL.sub('int', params)
         proto[a] = (nrt, fix_types(nparams + ' ').strip(), False)
         # rewrite the definition header
@@ -447,7 +450,7 @@ for a, sz, name in idx:
         else: bodies[a] = nrt + ' ' + name + '(' + ', '.join(names) + ')\n' + '\n'.join(decl) + ('\n' if decl else '') + b[i:]
 # A function whose own decompile returns nothing (`void`) but that a caller uses the result of (`f1 = (double)f(...)`, `if (f(...) == 0)`): Ghidra models the callee as
 # leaving a value in f1/r3 it never wrote (a passed-through argument). C cannot use a void result, so such a function is given the type its callers read it as.
-_void_names = {name for a_, (rt_, pr_, ex_) in proto.items() for a2_, sz2_, name in idx if a2_ == a_ and ex_ and rt_ == 'void'}
+_void_names = {name for a_, (rt_, pr_, ex_) in proto.items() for a2_, sz2_, name in idx if a2_ == a_ and rt_ == 'void'}
 if _void_names:
     _allb = '\n'.join(b_ for b_ in bodies.values() if b_)
     for _vn in _void_names:

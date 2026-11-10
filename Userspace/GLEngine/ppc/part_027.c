@@ -30,7 +30,7 @@ int _glStencilFuncSeparate_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glStencilFuncSeparate_Exec @ 0x90894 (212 bytes) */
-int _glStencilFuncSeparate_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glStencilFuncSeparate_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint param_2;
   int param_3;
@@ -93,7 +93,7 @@ LAB_000908d0:
 }
 
 /* _glStencilFuncSeparate_CompExec @ 0x90968 (80 bytes) */
-int _glStencilFuncSeparate_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glStencilFuncSeparate_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -131,7 +131,7 @@ int _glLineStipple_Comp(param_1, param_2, param_3)
 }
 
 /* _glLineStipple_Exec @ 0x90a38 (88 bytes) */
-int _glLineStipple_Exec(param_1, param_2, param_3)
+void _glLineStipple_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -156,7 +156,7 @@ int _glLineStipple_Exec(param_1, param_2, param_3)
 }
 
 /* _glLineStipple_CompExec @ 0x90a90 (64 bytes) */
-int _glLineStipple_CompExec(param_1, param_2, param_3)
+void _glLineStipple_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -232,7 +232,7 @@ int _glPolygonStipple_Comp(param_1, param_2)
 }
 
 /* _glPolygonStipple_Exec @ 0x90c28 (288 bytes) */
-int _glPolygonStipple_Exec(param_1, param_2)
+void _glPolygonStipple_Exec(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -278,7 +278,7 @@ LAB_00090c68:
 }
 
 /* _glPolygonStipple_CompExec @ 0x90d48 (56 bytes) */
-int _glPolygonStipple_CompExec(param_1, param_2)
+void _glPolygonStipple_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -288,7 +288,7 @@ int _glPolygonStipple_CompExec(param_1, param_2)
 }
 
 /* _glGetPolygonStipple_Exec @ 0x90d80 (284 bytes) */
-int _glGetPolygonStipple_Exec(param_1, param_2)
+void _glGetPolygonStipple_Exec(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -332,7 +332,7 @@ LAB_00090dc0:
 }
 
 /* _glSwap_RevertExec @ 0x90e9c (224 bytes) */
-int _glSwap_RevertExec(param_1)
+void _glSwap_RevertExec(param_1)
   int param_1;
 {
   byte bVar1;
@@ -519,7 +519,7 @@ int _glBindTexture_Comp(param_1, param_2, param_3)
 }
 
 /* _glBindTexture_CompExec @ 0x91244 (64 bytes) */
-int _glBindTexture_CompExec(param_1, param_2, param_3)
+void _glBindTexture_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -571,7 +571,7 @@ int _glPrioritizeTextures_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glPrioritizeTextures_CompExec @ 0x9135c (72 bytes) */
-int _glPrioritizeTextures_CompExec(param_1, param_2, param_3, param_4)
+void _glPrioritizeTextures_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -732,7 +732,7 @@ LAB_0009177c:
 }
 
 /* _glCompressedTexImage1D_Comp @ 0x91828 (76 bytes) */
-int _glCompressedTexImage1D_Comp(param_1, param_2, param_3, param_4)
+void _glCompressedTexImage1D_Comp(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -873,7 +873,7 @@ LAB_00091acc:
 }
 
 /* _glCompressedTexSubImage1D_Comp @ 0x91b7c (76 bytes) */
-int _glCompressedTexSubImage1D_Comp(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glCompressedTexSubImage1D_Comp(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1095,7 +1095,7 @@ LAB_00091f94:
 }
 
 /* _glCompressedTexImage1D_Exec @ 0x92138 (76 bytes) */
-int _glCompressedTexImage1D_Exec(param_1, param_2, param_3, param_4)
+void _glCompressedTexImage1D_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1468,7 +1468,7 @@ LAB_000927a4:
 }
 
 /* _glCompressedTexSubImage1D_Exec @ 0x92d4c (76 bytes) */
-int _glCompressedTexSubImage1D_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glCompressedTexSubImage1D_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1495,7 +1495,7 @@ int _glCompressedTexSubImage1D_Exec(param_1, param_2, param_3, param_4, param_5,
 }
 
 /* _glGetCompressedTexImage_Exec @ 0x92d98 (660 bytes) */
-int _glGetCompressedTexImage_Exec(param_1, param_2, param_3, param_4)
+void _glGetCompressedTexImage_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   uint param_3;
@@ -1628,7 +1628,7 @@ LAB_00092efc:
 }
 
 /* _glCompressedTexImage3D_CompExec @ 0x9302c (128 bytes) */
-int _glCompressedTexImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+void _glCompressedTexImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1646,7 +1646,7 @@ int _glCompressedTexImage3D_CompExec(param_1, param_2, param_3, param_4, param_5
 }
 
 /* _glCompressedTexImage2D_CompExec @ 0x930ac (116 bytes) */
-int _glCompressedTexImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+void _glCompressedTexImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1663,7 +1663,7 @@ int _glCompressedTexImage2D_CompExec(param_1, param_2, param_3, param_4, param_5
 }
 
 /* _glCompressedTexImage1D_CompExec @ 0x93120 (104 bytes) */
-int _glCompressedTexImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _glCompressedTexImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1679,7 +1679,7 @@ int _glCompressedTexImage1D_CompExec(param_1, param_2, param_3, param_4, param_5
 }
 
 /* _glCompressedTexSubImage3D_CompExec @ 0x93188 (152 bytes) */
-int _glCompressedTexSubImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
+void _glCompressedTexSubImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1701,7 +1701,7 @@ int _glCompressedTexSubImage3D_CompExec(param_1, param_2, param_3, param_4, para
 }
 
 /* _glCompressedTexSubImage2D_CompExec @ 0x93220 (128 bytes) */
-int _glCompressedTexSubImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+void _glCompressedTexSubImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1719,7 +1719,7 @@ int _glCompressedTexSubImage2D_CompExec(param_1, param_2, param_3, param_4, para
 }
 
 /* _glCompressedTexSubImage1D_CompExec @ 0x932a0 (104 bytes) */
-int _glCompressedTexSubImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _glCompressedTexSubImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1817,7 +1817,7 @@ void _glTexCoord1d_CompExec(undefined4 param_1,double fparam_1)
 }
 
 /* _glTexCoord1dv_Exec @ 0x9344c (36 bytes) */
-int _glTexCoord1dv_Exec(param_1, param_2)
+void _glTexCoord1dv_Exec(param_1, param_2)
   int param_1;
   double *param_2;
 {
@@ -1846,7 +1846,7 @@ int _glTexCoord1dv_Comp(param_1, param_2)
 }
 
 /* _glTexCoord1dv_CompExec @ 0x934c4 (56 bytes) */
-int _glTexCoord1dv_CompExec(param_1, param_2)
+void _glTexCoord1dv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -1887,7 +1887,7 @@ void _glTexCoord2d_CompExec(undefined4 param_1,double fparam_1,double fparam_2)
 }
 
 /* _glTexCoord2dv_Exec @ 0x935dc (44 bytes) */
-int _glTexCoord2dv_Exec(param_1, param_2)
+void _glTexCoord2dv_Exec(param_1, param_2)
   int param_1;
   double *param_2;
 {
@@ -1919,7 +1919,7 @@ int _glTexCoord2dv_Comp(param_1, param_2)
 }
 
 /* _glTexCoord2dv_CompExec @ 0x93668 (56 bytes) */
-int _glTexCoord2dv_CompExec(param_1, param_2)
+void _glTexCoord2dv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {

@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gleBeginLinesRenderTCLRDirty @ 0xd78f4 (60 bytes) */
-int _gleBeginLinesRenderTCLRDirty(param_1)
+void _gleBeginLinesRenderTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -17,7 +17,7 @@ int _gleBeginLinesRenderTCLRDirty(param_1)
 }
 
 /* _gleBeginLinesSelectFeedback @ 0xd7930 (76 bytes) */
-int _gleBeginLinesSelectFeedback(param_1)
+void _gleBeginLinesSelectFeedback(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -33,7 +33,7 @@ int _gleBeginLinesSelectFeedback(param_1)
 }
 
 /* _gleBeginLineStripRenderSmooth @ 0xd797c (60 bytes) */
-int _gleBeginLineStripRenderSmooth(param_1)
+void _gleBeginLineStripRenderSmooth(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -49,7 +49,7 @@ int _gleBeginLineStripRenderSmooth(param_1)
 }
 
 /* _gleBeginLineStripRenderFlat @ 0xd79b8 (60 bytes) */
-int _gleBeginLineStripRenderFlat(param_1)
+void _gleBeginLineStripRenderFlat(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -65,7 +65,7 @@ int _gleBeginLineStripRenderFlat(param_1)
 }
 
 /* _gleBeginLineStripRenderTCLRDirty @ 0xd79f4 (68 bytes) */
-int _gleBeginLineStripRenderTCLRDirty(param_1)
+void _gleBeginLineStripRenderTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -82,7 +82,7 @@ int _gleBeginLineStripRenderTCLRDirty(param_1)
 }
 
 /* _gleBeginLineStripSelectFeedback @ 0xd7a38 (76 bytes) */
-int _gleBeginLineStripSelectFeedback(param_1)
+void _gleBeginLineStripSelectFeedback(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -98,7 +98,7 @@ int _gleBeginLineStripSelectFeedback(param_1)
 }
 
 /* _gleBeginLineLoopRenderSmooth @ 0xd7a84 (60 bytes) */
-int _gleBeginLineLoopRenderSmooth(param_1)
+void _gleBeginLineLoopRenderSmooth(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -114,7 +114,7 @@ int _gleBeginLineLoopRenderSmooth(param_1)
 }
 
 /* _gleBeginLineLoopRenderFlat @ 0xd7ac0 (60 bytes) */
-int _gleBeginLineLoopRenderFlat(param_1)
+void _gleBeginLineLoopRenderFlat(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -130,7 +130,7 @@ int _gleBeginLineLoopRenderFlat(param_1)
 }
 
 /* _gleBeginLineLoopRenderTCLRDirty @ 0xd7afc (68 bytes) */
-int _gleBeginLineLoopRenderTCLRDirty(param_1)
+void _gleBeginLineLoopRenderTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -147,7 +147,7 @@ int _gleBeginLineLoopRenderTCLRDirty(param_1)
 }
 
 /* _gleBeginLineLoopSelectFeedback @ 0xd7b40 (84 bytes) */
-int _gleBeginLineLoopSelectFeedback(param_1)
+void _gleBeginLineLoopSelectFeedback(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -288,7 +288,7 @@ LAB_000d7dc4:
 }
 
 /* FUN_000d7e1c @ 0xd7e1c (776 bytes) */
-int FUN_000d7e1c(param_1, param_2, param_3)
+void FUN_000d7e1c(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -397,7 +397,7 @@ int FUN_000d7e1c(param_1, param_2, param_3)
 }
 
 /* FUN_000d811c @ 0xd811c (828 bytes) */
-int FUN_000d811c(param_1, param_2, param_3)
+void FUN_000d811c(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -560,7 +560,7 @@ int FUN_000d811c(param_1, param_2, param_3)
 }
 
 /* FUN_000d845c @ 0xd845c (932 bytes) */
-int FUN_000d845c(param_1)
+void FUN_000d845c(param_1)
   int param_1;
 {
   uint *puVar1;
@@ -748,7 +748,7 @@ int FUN_000d845c(param_1)
 }
 
 /* FUN_000d8828 @ 0xd8828 (716 bytes) */
-int FUN_000d8828(param_1)
+void FUN_000d8828(param_1)
   int param_1;
 {
   bool bVar1;
@@ -831,7 +831,7 @@ int FUN_000d8828(param_1)
 }
 
 /* FUN_000d8af8 @ 0xd8af8 (728 bytes) */
-int FUN_000d8af8(param_1)
+void FUN_000d8af8(param_1)
   int param_1;
 {
   bool bVar1;
@@ -923,7 +923,7 @@ int FUN_000d8af8(param_1)
 }
 
 /* FUN_000d8dd4 @ 0xd8dd4 (824 bytes) */
-int FUN_000d8dd4(param_1)
+void FUN_000d8dd4(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1042,7 +1042,7 @@ int FUN_000d8dd4(param_1)
 }
 
 /* FUN_000d9110 @ 0xd9110 (780 bytes) */
-int FUN_000d9110(param_1)
+void FUN_000d9110(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1127,7 +1127,7 @@ int FUN_000d9110(param_1)
 }
 
 /* FUN_000d9420 @ 0xd9420 (760 bytes) */
-int FUN_000d9420(param_1)
+void FUN_000d9420(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1221,7 +1221,7 @@ int FUN_000d9420(param_1)
 }
 
 /* FUN_000d971c @ 0xd971c (856 bytes) */
-int FUN_000d971c(param_1)
+void FUN_000d971c(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1342,7 +1342,7 @@ int FUN_000d971c(param_1)
 }
 
 /* _gleSelectLinesFunc @ 0xd9a74 (412 bytes) */
-int _gleSelectLinesFunc(param_1)
+void _gleSelectLinesFunc(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1401,7 +1401,7 @@ int _gleSelectLinesFunc(param_1)
 }
 
 /* FUN_000d9c14 @ 0xd9c14 (484 bytes) */
-int FUN_000d9c14(param_1)
+void FUN_000d9c14(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1466,7 +1466,7 @@ int FUN_000d9c14(param_1)
 }
 
 /* FUN_000d9dfc @ 0xd9dfc (588 bytes) */
-int FUN_000d9dfc(param_1)
+void FUN_000d9dfc(param_1)
   int param_1;
 {
   int iVar1;
@@ -1774,7 +1774,7 @@ LAB_000da380:
 }
 
 /* _gleFlushIndexStack @ 0xda43c (92 bytes) */
-int _gleFlushIndexStack(param_1)
+void _gleFlushIndexStack(param_1)
   int param_1;
 {
   int *piVar1;
@@ -2211,7 +2211,7 @@ LAB_000dacc0:
 }
 
 /* _gleCompileVertexArray @ 0xdad24 (20 bytes) */
-int _gleCompileVertexArray(param_1)
+double _gleCompileVertexArray(param_1)
   int param_1;
 {
   if (*(char *)(param_1 + 0x7580) != '\0') {
@@ -2223,7 +2223,7 @@ int _gleCompileVertexArray(param_1)
 }
 
 /* _gleExecuteTCLVertexArray @ 0xdad38 (352 bytes) */
-int _gleExecuteTCLVertexArray(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gleExecuteTCLVertexArray(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -2235,7 +2235,6 @@ int _gleExecuteTCLVertexArray(param_1, param_2, param_3, param_4, param_5, param
   undefined4 uVar2;
   int *piVar3;
   int *piVar4;
-  undefined4 extraout_r3;
   
   if (param_5 == 0x1403) {
 LAB_000dad94:
@@ -2243,11 +2242,11 @@ LAB_000dad94:
 LAB_000dad98:
                     
                     
-    uVar2 = (**(code **)(param_1 + 0x46e4))
-                      (*(undefined4 *)(param_1 + 0x4688),*(undefined4 *)(param_1 + 0x49a8),param_2,
-                       *(int *)(param_1 + 0x4984) - *(int *)(param_1 + 0x4994),param_4,param_5,
-                       param_6 + param_3);
-    return uVar2;
+    (**(code **)(param_1 + 0x46e4))
+              (*(undefined4 *)(param_1 + 0x4688),*(undefined4 *)(param_1 + 0x49a8),param_2,
+               *(int *)(param_1 + 0x4984) - *(int *)(param_1 + 0x4994),param_4,param_5,
+               param_6 + param_3);
+    return;
   }
   if (param_5 < 0x1404) {
     if (param_5 == 0x1401) goto LAB_000dad98;
@@ -2274,24 +2273,22 @@ LAB_000dad98:
                   (*(undefined4 *)(param_1 + 0x4688),*(undefined4 *)(param_1 + 0x49a8),param_2,
                    *(int *)(param_1 + 0x4984) - *(int *)(param_1 + 0x4994),param_4,0x1405,piVar4);
         _free(piVar4);
-        return extraout_r3;
+        return;
       }
-      iVar1 = 0;
       if (*(int *)(param_1 + 0x7574) != 0) {
-        return 0;
+        return;
       }
       uVar2 = 0x505;
       goto LAB_000dae80;
     }
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
-    return param_1;
+    return;
   }
   uVar2 = 0x500;
-  iVar1 = param_1;
 LAB_000dae80:
   *(undefined4 *)(param_1 + 0x7574) = uVar2;
-  return iVar1;
+  return;
 }
 
 /* _gleExecuteClippedVertexArray @ 0xdae98 (4556 bytes) */
@@ -2307,27 +2304,27 @@ int _gleExecuteClippedVertexArray(param_1, param_2, param_3, param_4, param_5, p
   uint uVar2;
   byte bVar4;
   uint uVar3;
-  undefined4 uVar5;
-  dword *pdVar6;
-  dword *extraout_r3;
+  undefined4 extraout_r3;
+  dword *pdVar5;
+  dword *extraout_r3_00;
+  uint uVar6;
   uint uVar7;
-  uint uVar8;
-  dword *pdVar9;
+  dword *pdVar8;
+  int iVar9;
   int iVar10;
   int iVar11;
-  int iVar12;
-  uint uVar13;
+  uint uVar12;
+  byte bVar13;
   byte bVar14;
   byte bVar15;
-  byte bVar16;
+  uint uVar16;
   uint uVar17;
-  uint uVar18;
+  int iVar18;
   int iVar19;
-  int iVar20;
-  dword *pdVar21;
+  dword *pdVar20;
+  uint *puVar21;
   uint *puVar22;
-  uint *puVar23;
-  int iVar24;
+  int iVar23;
   uint uStack0000001c;
   int iStack00000024;
   dword *pdStack0000002c;
@@ -2351,19 +2348,19 @@ int _gleExecuteClippedVertexArray(param_1, param_2, param_3, param_4, param_5, p
   iStack00000024 = param_4;
   pdStack0000002c = param_6;
   if ((undefined *)param_1[0x1420] == ((unsigned char *)0x00001101)) {
-    uVar5 = ((int (*)())_gleExecuteTCLVertexArray)(param_1,param_2,param_3,param_4,param_5,param_6);
-    return (dword *)uVar5;
+    ((int (*)())_gleExecuteTCLVertexArray)(param_1,param_2,param_3,param_4,param_5,param_6);
+    return (dword *)extraout_r3;
   }
   if ((*(short *)((int)param_1 + 0x34d6) == 0x408) && (3 < param_2)) {
     return param_1;
   }
   if (param_5 == 0x1403) {
     local_70 = 0xffff;
-    pdVar21 = (dword *)((int)param_6 + param_3 * 2 + -2);
-    iVar10 = 2;
+    pdVar20 = (dword *)((int)param_6 + param_3 * 2 + -2);
+    iVar9 = 2;
 LAB_000daf8c:
     local_6c = 0;
-    pdVar6 = param_1;
+    pdVar5 = param_1;
     pdStack0000002c = param_6;
   }
   else {
@@ -2374,687 +2371,687 @@ LAB_000db014:
           return param_1;
         }
         uVar2 = 0x500;
-        pdVar21 = param_1;
+        pdVar20 = param_1;
 LAB_000db024:
         param_1[0x1d5d] = uVar2;
-        return pdVar21;
+        return pdVar20;
       }
       local_70 = 0xff;
-      iVar10 = 1;
-      pdVar21 = (dword *)((int)param_6 + (param_3 - 3));
+      iVar9 = 1;
+      pdVar20 = (dword *)((int)param_6 + (param_3 - 3));
       goto LAB_000daf8c;
     }
     if (param_5 == 0x1405) {
-      iVar10 = 4;
-      pdVar21 = param_6 + param_3;
+      iVar9 = 4;
+      pdVar20 = param_6 + param_3;
       local_70 = 0xffffffff;
       goto LAB_000daf8c;
     }
     if (param_5 != 0x14ff) goto LAB_000db014;
     param_5 = 0x1405;
-    pdVar6 = (dword *)_malloc(param_4 << 2);
-    if (pdVar6 == (dword *)0x0) {
+    pdVar5 = (dword *)_malloc(param_4 << 2);
+    if (pdVar5 == (dword *)0x0) {
       if (param_1[0x1d5d] != 0) {
         return (dword *)0;
       }
       uVar2 = 0x505;
-      pdVar21 = (dword *)0x0;
+      pdVar20 = (dword *)0x0;
       goto LAB_000db024;
     }
     local_70 = 0xffffffff;
-    iVar10 = 4;
+    iVar9 = 4;
     local_6c = 1;
-    pdVar21 = pdVar6;
-    pdStack0000002c = pdVar6;
+    pdVar20 = pdVar5;
+    pdStack0000002c = pdVar5;
     if ((int)param_3 < (int)(param_3 + iStack00000024)) {
-      iVar11 = (param_3 + iStack00000024) - param_3;
-      pdVar9 = pdVar6;
+      iVar10 = (param_3 + iStack00000024) - param_3;
+      pdVar8 = pdVar5;
       do {
-        *pdVar9 = param_3;
+        *pdVar8 = param_3;
         param_3 = param_3 + 1;
-        pdVar9 = pdVar9 + 1;
-        iVar11 = iVar11 + -1;
-      } while (iVar11 != 0);
+        pdVar8 = pdVar8 + 1;
+        iVar10 = iVar10 + -1;
+      } while (iVar10 != 0);
     }
   }
   uVar2 = param_1[0x1261];
-  iVar12 = param_1[0x126b] - uVar2;
+  iVar11 = param_1[0x126b] - uVar2;
   local_64 = param_1[0x1269] - uVar2 * *(ushort *)(param_1 + 0x1264);
   local_60 = (param_1[0x1268] + param_1[0x1266] * 4 + param_1[0x1265] * -4) - 0x48;
-  iVar11 = uVar2 - param_1[0x1265];
-  pdVar9 = pdStack0000002c;
+  iVar10 = uVar2 - param_1[0x1265];
+  pdVar8 = pdStack0000002c;
   switch(uStack0000001c) {
   case 0:
-    iVar20 = 0;
-    iVar19 = iStack00000024;
+    iVar19 = 0;
+    iVar18 = iStack00000024;
     if (iStack00000024 < 1) goto switchD_000db0a0_default;
     do {
-      uVar2 = *pdVar21;
-      pdVar21 = (dword *)((int)pdVar21 + iVar10);
-      if (*(char *)(iVar12 + (uVar2 & local_70)) == '\0') {
-        iVar20 = iVar20 + 1;
+      uVar2 = *pdVar20;
+      pdVar20 = (dword *)((int)pdVar20 + iVar9);
+      if (*(char *)(iVar11 + (uVar2 & local_70)) == '\0') {
+        iVar19 = iVar19 + 1;
       }
-      else if (iVar20 == 0) {
-        pdVar9 = (dword *)((int)pdVar9 + iVar10);
+      else if (iVar19 == 0) {
+        pdVar8 = (dword *)((int)pdVar8 + iVar9);
       }
       else {
-        pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar11,iVar20,
-                                      param_5,pdVar9);
-        iVar24 = iVar20 + 1;
-        iVar20 = 0;
-        pdVar9 = (dword *)((int)pdVar9 + iVar24 * iVar10);
+        pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar10,iVar19,
+                                      param_5,pdVar8);
+        iVar23 = iVar19 + 1;
+        iVar19 = 0;
+        pdVar8 = (dword *)((int)pdVar8 + iVar23 * iVar9);
       }
-      iVar19 = iVar19 + -1;
-    } while (iVar19 != 0);
+      iVar18 = iVar18 + -1;
+    } while (iVar18 != 0);
     break;
   case 1:
-    iVar19 = 1;
-    iVar20 = 0;
+    iVar18 = 1;
+    iVar19 = 0;
     if (iStack00000024 < 2) goto switchD_000db0a0_default;
     do {
-      uVar13 = *pdVar21 & local_70;
-      uVar2 = *(uint *)((int)pdVar21 + iVar10) & local_70;
-      bVar16 = *(byte *)(iVar12 + uVar13);
-      bVar15 = *(byte *)(iVar12 + uVar2);
-      pdVar21 = (dword *)((int)pdVar21 + iVar10 + iVar10);
-      if (((bVar16 | bVar15) & 0xc3) == 0) {
-        iVar20 = iVar20 + 2;
+      uVar12 = *pdVar20 & local_70;
+      uVar2 = *(uint *)((int)pdVar20 + iVar9) & local_70;
+      bVar15 = *(byte *)(iVar11 + uVar12);
+      bVar14 = *(byte *)(iVar11 + uVar2);
+      pdVar20 = (dword *)((int)pdVar20 + iVar9 + iVar9);
+      if (((bVar15 | bVar14) & 0xc3) == 0) {
+        iVar19 = iVar19 + 2;
       }
       else {
-        iVar24 = iVar10 << 1;
-        if (iVar20 != 0) {
-          pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar11,iVar20
-                                        ,param_5,pdVar9);
-          iVar24 = iVar20 + 2;
-          iVar20 = 0;
-          iVar24 = iVar24 * iVar10;
+        iVar23 = iVar9 << 1;
+        if (iVar19 != 0) {
+          pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar10,iVar19
+                                        ,param_5,pdVar8);
+          iVar23 = iVar19 + 2;
+          iVar19 = 0;
+          iVar23 = iVar23 * iVar9;
         }
-        pdVar9 = (dword *)((int)pdVar9 + iVar24);
-        if ((bVar16 & bVar15 & 0x3f) == 0) {
-          local_e0 = uVar13;
+        pdVar8 = (dword *)((int)pdVar8 + iVar23);
+        if ((bVar15 & bVar14 & 0x3f) == 0) {
+          local_e0 = uVar12;
           local_dc = uVar2;
           if (local_60 <= param_1[0x1267]) {
             ((int (*)())_gleFlushIndexStack)(param_1);
           }
-          pdVar6 = (dword *)((int (*)())_gleVAClipLine)(param_1,local_64,iVar12,&local_e0);
-          if (pdVar6 != (dword *)0x0) {
-            pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar11,2,
+          pdVar5 = (dword *)((int (*)())_gleVAClipLine)(param_1,local_64,iVar11,&local_e0);
+          if (pdVar5 != (dword *)0x0) {
+            pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar10,2,
                                           0x1405,&local_e0);
           }
         }
       }
-      iVar19 = iVar19 + 2;
-    } while (iVar19 < iStack00000024);
+      iVar18 = iVar18 + 2;
+    } while (iVar18 < iStack00000024);
     break;
   case 2:
-    iVar20 = 0;
-    uVar13 = *pdVar21 & local_70;
-    bVar16 = *(byte *)(iVar12 + uVar13);
-    uVar2 = uVar13;
-    bVar15 = bVar16;
+    iVar19 = 0;
+    uVar12 = *pdVar20 & local_70;
+    bVar15 = *(byte *)(iVar11 + uVar12);
+    uVar2 = uVar12;
+    bVar14 = bVar15;
     if (1 < iStack00000024) {
-      iVar19 = iStack00000024 + -1;
-      uVar17 = uVar13;
-      bVar14 = bVar16;
+      iVar18 = iStack00000024 + -1;
+      uVar16 = uVar12;
+      bVar13 = bVar15;
       do {
-        pdVar21 = (dword *)((int)pdVar21 + iVar10);
-        uVar2 = *pdVar21 & local_70;
-        bVar15 = *(byte *)(iVar12 + uVar2);
-        if (((bVar14 | bVar15) & 0xc3) == 0) {
-          iVar20 = iVar20 + 1;
+        pdVar20 = (dword *)((int)pdVar20 + iVar9);
+        uVar2 = *pdVar20 & local_70;
+        bVar14 = *(byte *)(iVar11 + uVar2);
+        if (((bVar13 | bVar14) & 0xc3) == 0) {
+          iVar19 = iVar19 + 1;
         }
         else {
-          iVar24 = iVar10;
-          if (iVar20 != 0) {
-            iVar24 = iVar20 + 1;
-            iVar20 = 0;
-            pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],3,iVar11,iVar24,param_5,
-                                          pdVar9);
-            iVar24 = iVar24 * iVar10;
+          iVar23 = iVar9;
+          if (iVar19 != 0) {
+            iVar23 = iVar19 + 1;
+            iVar19 = 0;
+            pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],3,iVar10,iVar23,param_5,
+                                          pdVar8);
+            iVar23 = iVar23 * iVar9;
           }
-          pdVar9 = (dword *)((int)pdVar9 + iVar24);
-          if ((bVar14 & bVar15 & 0x3f) == 0) {
-            local_e0 = uVar17;
+          pdVar8 = (dword *)((int)pdVar8 + iVar23);
+          if ((bVar13 & bVar14 & 0x3f) == 0) {
+            local_e0 = uVar16;
             local_dc = uVar2;
             if (local_60 <= param_1[0x1267]) {
               ((int (*)())_gleFlushIndexStack)(param_1);
             }
-            pdVar6 = (dword *)((int (*)())_gleVAClipLine)(param_1,local_64,iVar12,&local_e0);
-            if (pdVar6 != (dword *)0x0) {
-              pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],3,iVar11,2,0x1405,
+            pdVar5 = (dword *)((int (*)())_gleVAClipLine)(param_1,local_64,iVar11,&local_e0);
+            if (pdVar5 != (dword *)0x0) {
+              pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],3,iVar10,2,0x1405,
                                             &local_e0);
             }
           }
         }
-        iVar19 = iVar19 + -1;
-        uVar17 = uVar2;
-        bVar14 = bVar15;
-      } while (iVar19 != 0);
+        iVar18 = iVar18 + -1;
+        uVar16 = uVar2;
+        bVar13 = bVar14;
+      } while (iVar18 != 0);
     }
-    if (iVar20 == iStack00000024 + -1) {
+    if (iVar19 == iStack00000024 + -1) {
       uVar2 = param_1[0x126a];
-      iVar20 = iStack00000024;
+      iVar19 = iStack00000024;
       goto LAB_000dbe34;
     }
-    if (iVar20 != 0) {
-      pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],3,iVar11,iVar20 + 1,param_5,
-                                    pdVar9);
+    if (iVar19 != 0) {
+      pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],3,iVar10,iVar19 + 1,param_5,
+                                    pdVar8);
     }
     local_e0 = uVar2;
-    local_dc = uVar13;
-    if (((bVar16 | bVar15) & 0xc3) != 0) {
-      if ((bVar16 & bVar15 & 0x3f) != 0) goto switchD_000db0a0_default;
-      iVar10 = ((int (*)())_gleVAClipLine)(param_1,local_64,iVar12,&local_e0);
-      pdVar6 = (dword *)0x0;
-      if (iVar10 == 0) goto switchD_000db0a0_default;
+    local_dc = uVar12;
+    if (((bVar15 | bVar14) & 0xc3) != 0) {
+      if ((bVar15 & bVar14 & 0x3f) != 0) goto switchD_000db0a0_default;
+      iVar9 = ((int (*)())_gleVAClipLine)(param_1,local_64,iVar11,&local_e0);
+      pdVar5 = (dword *)0x0;
+      if (iVar9 == 0) goto switchD_000db0a0_default;
     }
     uVar2 = param_1[0x126a];
-    uVar13 = 3;
-    uVar17 = param_1[0x11a2];
-    iVar20 = 2;
+    uVar12 = 3;
+    uVar16 = param_1[0x11a2];
+    iVar19 = 2;
     param_5 = 0x1405;
-    pdVar9 = &local_e0;
+    pdVar8 = &local_e0;
     goto LAB_000dbe44;
   case 3:
-    iVar20 = 0;
+    iVar19 = 0;
     if (iStack00000024 < 2) goto switchD_000db0a0_default;
-    iVar19 = iStack00000024 + -1;
-    uVar2 = *pdVar21 & local_70;
-    bVar16 = *(byte *)(iVar12 + (*pdVar21 & local_70));
+    iVar18 = iStack00000024 + -1;
+    uVar2 = *pdVar20 & local_70;
+    bVar15 = *(byte *)(iVar11 + (*pdVar20 & local_70));
     do {
-      pdVar21 = (dword *)((int)pdVar21 + iVar10);
-      uVar13 = *pdVar21 & local_70;
-      bVar15 = *(byte *)(iVar12 + uVar13);
-      if (((bVar16 | bVar15) & 0xc3) == 0) {
-        iVar20 = iVar20 + 1;
+      pdVar20 = (dword *)((int)pdVar20 + iVar9);
+      uVar12 = *pdVar20 & local_70;
+      bVar14 = *(byte *)(iVar11 + uVar12);
+      if (((bVar15 | bVar14) & 0xc3) == 0) {
+        iVar19 = iVar19 + 1;
       }
       else {
-        iVar24 = iVar10;
-        if (iVar20 != 0) {
-          iVar24 = iVar20 + 1;
-          iVar20 = 0;
-          pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar11,iVar24
-                                        ,param_5,pdVar9);
-          iVar24 = iVar24 * iVar10;
+        iVar23 = iVar9;
+        if (iVar19 != 0) {
+          iVar23 = iVar19 + 1;
+          iVar19 = 0;
+          pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar10,iVar23
+                                        ,param_5,pdVar8);
+          iVar23 = iVar23 * iVar9;
         }
-        pdVar9 = (dword *)((int)pdVar9 + iVar24);
-        if ((bVar16 & bVar15 & 0x3f) == 0) {
+        pdVar8 = (dword *)((int)pdVar8 + iVar23);
+        if ((bVar15 & bVar14 & 0x3f) == 0) {
           local_e0 = uVar2;
-          local_dc = uVar13;
+          local_dc = uVar12;
           if (local_60 <= param_1[0x1267]) {
             ((int (*)())_gleFlushIndexStack)(param_1);
           }
-          pdVar6 = (dword *)((int (*)())_gleVAClipLine)(param_1,local_64,iVar12,&local_e0);
-          if (pdVar6 != (dword *)0x0) {
-            pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar11,2,
+          pdVar5 = (dword *)((int (*)())_gleVAClipLine)(param_1,local_64,iVar11,&local_e0);
+          if (pdVar5 != (dword *)0x0) {
+            pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar10,2,
                                           0x1405,&local_e0);
           }
         }
       }
-      iVar19 = iVar19 + -1;
-      uVar2 = uVar13;
-      bVar16 = bVar15;
-    } while (iVar19 != 0);
-    if (iVar20 == 0) goto switchD_000db0a0_default;
+      iVar18 = iVar18 + -1;
+      uVar2 = uVar12;
+      bVar15 = bVar14;
+    } while (iVar18 != 0);
+    if (iVar19 == 0) goto switchD_000db0a0_default;
     uVar2 = param_1[0x126a];
-    iVar20 = iVar20 + 1;
+    iVar19 = iVar19 + 1;
     goto LAB_000dbe34;
   case 4:
     if ((param_5 == 0x1403) || (param_5 == 0x1401)) {
-      iVar19 = 2;
-      iVar20 = 0;
+      iVar18 = 2;
+      iVar19 = 0;
       if (iStack00000024 < 3) goto switchD_000db0a0_default;
       do {
-        puVar23 = (uint *)((int)pdVar21 + iVar10 + iVar10);
-        uVar17 = *pdVar21 & local_70;
-        uVar13 = *(uint *)((int)pdVar21 + iVar10) & local_70;
-        uVar2 = *puVar23 & local_70;
-        bVar16 = *(byte *)(iVar12 + uVar17);
-        bVar15 = *(byte *)(iVar12 + uVar13);
-        pdVar21 = (dword *)((int)puVar23 + iVar10);
-        bVar14 = *(byte *)(iVar12 + uVar2);
-        if (((bVar16 | bVar15 | bVar14) & 0xc3) == 0) {
-          iVar20 = iVar20 + 3;
+        puVar22 = (uint *)((int)pdVar20 + iVar9 + iVar9);
+        uVar16 = *pdVar20 & local_70;
+        uVar12 = *(uint *)((int)pdVar20 + iVar9) & local_70;
+        uVar2 = *puVar22 & local_70;
+        bVar15 = *(byte *)(iVar11 + uVar16);
+        bVar14 = *(byte *)(iVar11 + uVar12);
+        pdVar20 = (dword *)((int)puVar22 + iVar9);
+        bVar13 = *(byte *)(iVar11 + uVar2);
+        if (((bVar15 | bVar14 | bVar13) & 0xc3) == 0) {
+          iVar19 = iVar19 + 3;
         }
         else {
-          iVar24 = iVar10 * 3;
-          if (iVar20 != 0) {
-            pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar11,
-                                          iVar20,param_5,pdVar9);
-            iVar24 = iVar20 + 3;
-            iVar20 = 0;
-            iVar24 = iVar24 * iVar10;
+          iVar23 = iVar9 * 3;
+          if (iVar19 != 0) {
+            pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar10,
+                                          iVar19,param_5,pdVar8);
+            iVar23 = iVar19 + 3;
+            iVar19 = 0;
+            iVar23 = iVar23 * iVar9;
           }
-          pdVar9 = (dword *)((int)pdVar9 + iVar24);
-          if ((bVar16 & bVar15 & bVar14 & 0x3f) == 0) {
-            local_e0 = uVar17;
-            local_dc = uVar13;
+          pdVar8 = (dword *)((int)pdVar8 + iVar23);
+          if ((bVar15 & bVar14 & bVar13 & 0x3f) == 0) {
+            local_e0 = uVar16;
+            local_dc = uVar12;
             local_d8 = uVar2;
             if (local_60 <= param_1[0x1267]) {
               ((int (*)())_gleFlushIndexStack)(param_1);
             }
-            pdVar6 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar12,3,&local_e0);
-            if (pdVar6 != (dword *)0x0) {
-              pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],9,iVar11,pdVar6,0x1405,
+            pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,3,&local_e0);
+            if (pdVar5 != (dword *)0x0) {
+              pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],9,iVar10,pdVar5,0x1405,
                                             &local_e0);
             }
           }
         }
-        iVar19 = iVar19 + 3;
-      } while (iVar19 < iStack00000024);
+        iVar18 = iVar18 + 3;
+      } while (iVar18 < iStack00000024);
     }
     else {
-      iVar10 = 2;
-      iVar20 = 0;
+      iVar9 = 2;
+      iVar19 = 0;
       if (iStack00000024 < 3) goto switchD_000db0a0_default;
       do {
-        bVar16 = *(byte *)(iVar12 + *pdVar21);
-        bVar15 = *(byte *)(iVar12 + pdVar21[1]);
-        bVar14 = *(byte *)(iVar12 + pdVar21[2]);
-        if (((bVar16 | bVar15 | bVar14) & 0xc3) == 0) {
-          iVar20 = iVar20 + 3;
+        bVar15 = *(byte *)(iVar11 + *pdVar20);
+        bVar14 = *(byte *)(iVar11 + pdVar20[1]);
+        bVar13 = *(byte *)(iVar11 + pdVar20[2]);
+        if (((bVar15 | bVar14 | bVar13) & 0xc3) == 0) {
+          iVar19 = iVar19 + 3;
         }
         else {
-          if (iVar20 == 0) {
-            pdVar9 = pdVar9 + 3;
+          if (iVar19 == 0) {
+            pdVar8 = pdVar8 + 3;
           }
           else {
-            pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar11,
-                                          iVar20,param_5,pdVar9);
-            iVar19 = iVar20 + 3;
-            iVar20 = 0;
-            pdVar9 = pdVar9 + iVar19;
+            pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar10,
+                                          iVar19,param_5,pdVar8);
+            iVar18 = iVar19 + 3;
+            iVar19 = 0;
+            pdVar8 = pdVar8 + iVar18;
           }
-          if ((bVar16 & bVar15 & bVar14 & 0x3f) == 0) {
-            local_e0 = *pdVar21;
-            local_dc = pdVar21[1];
-            local_d8 = pdVar21[2];
+          if ((bVar15 & bVar14 & bVar13 & 0x3f) == 0) {
+            local_e0 = *pdVar20;
+            local_dc = pdVar20[1];
+            local_d8 = pdVar20[2];
             if (local_60 <= param_1[0x1267]) {
               ((int (*)())_gleFlushIndexStack)(param_1);
             }
-            pdVar6 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar12,3,&local_e0);
-            if (pdVar6 != (dword *)0x0) {
-              pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],9,iVar11,pdVar6,0x1405,
+            pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,3,&local_e0);
+            if (pdVar5 != (dword *)0x0) {
+              pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],9,iVar10,pdVar5,0x1405,
                                             &local_e0);
             }
           }
         }
-        iVar10 = iVar10 + 3;
-        pdVar21 = pdVar21 + 3;
-      } while (iVar10 < iStack00000024);
+        iVar9 = iVar9 + 3;
+        pdVar20 = pdVar20 + 3;
+      } while (iVar9 < iStack00000024);
     }
     break;
   case 5:
-    uVar17 = 2;
-    iVar20 = 0;
-    puVar23 = (uint *)((int)pdVar21 + iVar10);
-    bVar16 = *(byte *)(iVar12 + (*pdVar21 & local_70));
-    uVar2 = *puVar23 & local_70;
-    uVar13 = *pdVar21 & local_70;
-    bVar15 = *(byte *)(iVar12 + (*puVar23 & local_70));
+    uVar16 = 2;
+    iVar19 = 0;
+    puVar22 = (uint *)((int)pdVar20 + iVar9);
+    bVar15 = *(byte *)(iVar11 + (*pdVar20 & local_70));
+    uVar2 = *puVar22 & local_70;
+    uVar12 = *pdVar20 & local_70;
+    bVar14 = *(byte *)(iVar11 + (*puVar22 & local_70));
     if (iStack00000024 < 3) goto switchD_000db0a0_default;
     do {
       uVar3 = uVar2;
-      puVar23 = (uint *)((int)puVar23 + iVar10);
-      uVar2 = *puVar23 & local_70;
-      bVar14 = *(byte *)(iVar12 + uVar2);
-      if (((bVar16 | bVar15 | bVar14) & 0xc3) == 0) {
-        iVar20 = iVar20 + 1;
-        bVar16 = bVar15;
+      puVar22 = (uint *)((int)puVar22 + iVar9);
+      uVar2 = *puVar22 & local_70;
+      bVar13 = *(byte *)(iVar11 + uVar2);
+      if (((bVar15 | bVar14 | bVar13) & 0xc3) == 0) {
+        iVar19 = iVar19 + 1;
+        bVar15 = bVar14;
       }
       else {
-        iVar19 = iVar10;
-        if (iVar20 != 0) {
-          pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar11,
-                                        iVar20 + 2,param_5,pdVar9);
-          iVar19 = iVar20 + 1;
-          iVar20 = 0;
-          iVar19 = iVar19 * iVar10;
+        iVar18 = iVar9;
+        if (iVar19 != 0) {
+          pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar10,
+                                        iVar19 + 2,param_5,pdVar8);
+          iVar18 = iVar19 + 1;
+          iVar19 = 0;
+          iVar18 = iVar18 * iVar9;
         }
-        pdVar9 = (dword *)((int)pdVar9 + iVar19);
-        if ((uVar17 & 1) == 0) {
-          bVar15 = bVar15 | 0xc3;
+        pdVar8 = (dword *)((int)pdVar8 + iVar18);
+        if ((uVar16 & 1) == 0) {
+          bVar14 = bVar14 | 0xc3;
         }
-        bVar4 = bVar16 & bVar15;
-        bVar16 = bVar15;
-        if ((bVar4 & bVar14 & 0x3f) == 0) {
-          local_e0 = uVar13;
+        bVar4 = bVar15 & bVar14;
+        bVar15 = bVar14;
+        if ((bVar4 & bVar13 & 0x3f) == 0) {
+          local_e0 = uVar12;
           local_dc = uVar3;
           local_d8 = uVar2;
           if (local_60 <= param_1[0x1267]) {
             ((int (*)())_gleFlushIndexStack)(param_1);
           }
-          pdVar6 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar12,3,&local_e0);
-          if (pdVar6 != (dword *)0x0) {
-            pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],9,iVar11,pdVar6,0x1405,
+          pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,3,&local_e0);
+          if (pdVar5 != (dword *)0x0) {
+            pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],9,iVar10,pdVar5,0x1405,
                                           &local_e0);
           }
         }
       }
-      uVar17 = uVar17 + 1;
-      uVar13 = uVar3;
-      bVar15 = bVar14;
-    } while ((int)uVar17 < iStack00000024);
+      uVar16 = uVar16 + 1;
+      uVar12 = uVar3;
+      bVar14 = bVar13;
+    } while ((int)uVar16 < iStack00000024);
     goto LAB_000dbe1c;
   case 6:
-    uVar13 = *pdVar21 & local_70;
-    uVar2 = *(uint *)((int)pdVar21 + iVar10) & local_70;
-    bVar16 = *(byte *)(iVar12 + uVar13);
-    bVar15 = *(byte *)(iVar12 + uVar2);
-    puVar23 = (uint *)((int)pdVar21 + iVar10 + iVar10);
-    if (((bVar16 | bVar15) & 0xc3) == 0) {
-      iVar20 = 2;
-      bVar14 = 0;
-      uVar17 = 0;
+    uVar12 = *pdVar20 & local_70;
+    uVar2 = *(uint *)((int)pdVar20 + iVar9) & local_70;
+    bVar15 = *(byte *)(iVar11 + uVar12);
+    bVar14 = *(byte *)(iVar11 + uVar2);
+    puVar22 = (uint *)((int)pdVar20 + iVar9 + iVar9);
+    if (((bVar15 | bVar14) & 0xc3) == 0) {
+      iVar19 = 2;
+      bVar13 = 0;
+      uVar16 = 0;
       bVar1 = 2 < iStack00000024;
       if (bVar1) {
         do {
-          bVar14 = bVar15;
-          uVar17 = uVar2;
-          uVar2 = *puVar23;
-          bVar15 = *(byte *)(iVar12 + (uVar2 & local_70));
-          if ((bVar15 & 0xc3) != 0) break;
-          iVar20 = iVar20 + 1;
-          puVar23 = (uint *)((int)puVar23 + iVar10);
-          bVar1 = iVar20 < iStack00000024;
+          bVar13 = bVar14;
+          uVar16 = uVar2;
+          uVar2 = *puVar22;
+          bVar14 = *(byte *)(iVar11 + (uVar2 & local_70));
+          if ((bVar14 & 0xc3) != 0) break;
+          iVar19 = iVar19 + 1;
+          puVar22 = (uint *)((int)puVar22 + iVar9);
+          bVar1 = iVar19 < iStack00000024;
           uVar2 = uVar2 & local_70;
         } while (bVar1);
-        if (2 < iVar20) {
-          pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar11,iVar20
+        if (2 < iVar19) {
+          pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar10,iVar19
                                         ,param_5,pdStack0000002c);
         }
       }
     }
     else {
-      iVar20 = 2;
+      iVar19 = 2;
       bVar1 = 2 < iStack00000024;
-      uVar17 = uVar2;
-      bVar14 = bVar15;
+      uVar16 = uVar2;
+      bVar13 = bVar14;
     }
     if (bVar1) {
       do {
-        uVar3 = *puVar23;
-        iVar20 = iVar20 + 1;
-        puVar23 = (uint *)((int)puVar23 + iVar10);
+        uVar3 = *puVar22;
+        iVar19 = iVar19 + 1;
+        puVar22 = (uint *)((int)puVar22 + iVar9);
         uVar3 = uVar3 & local_70;
-        bVar15 = *(byte *)(iVar12 + uVar3);
+        bVar14 = *(byte *)(iVar11 + uVar3);
         uVar2 = uVar3;
-        if (((bVar16 | bVar14 | bVar15) & 0xc3) == 0) {
-          pdVar6 = (dword *)((int)((unsigned char *)0x0) + 3);
-          bVar1 = iVar20 < iStack00000024;
+        if (((bVar15 | bVar13 | bVar14) & 0xc3) == 0) {
+          pdVar5 = (dword *)((int)((unsigned char *)0x0) + 3);
+          bVar1 = iVar19 < iStack00000024;
           if (bVar1) {
-            puVar22 = local_84;
+            puVar21 = local_84;
             while( true ) {
-              uVar18 = *puVar23 & local_70;
-              bVar14 = *(byte *)(iVar12 + uVar18);
-              if ((bVar14 & 0xc3) != 0) break;
-              iVar20 = iVar20 + 1;
-              *puVar22 = uVar18;
-              puVar23 = (uint *)((int)puVar23 + iVar10);
-              bVar1 = iVar20 < iStack00000024;
-              puVar22 = puVar22 + 1;
-              pdVar6 = (dword *)((int)pdVar6 + 1);
-              uVar2 = uVar18;
-              bVar15 = bVar14;
-              if ((!bVar1) || (7 < (int)pdVar6)) break;
+              uVar17 = *puVar22 & local_70;
+              bVar13 = *(byte *)(iVar11 + uVar17);
+              if ((bVar13 & 0xc3) != 0) break;
+              iVar19 = iVar19 + 1;
+              *puVar21 = uVar17;
+              puVar22 = (uint *)((int)puVar22 + iVar9);
+              bVar1 = iVar19 < iStack00000024;
+              puVar21 = puVar21 + 1;
+              pdVar5 = (dword *)((int)pdVar5 + 1);
+              uVar2 = uVar17;
+              bVar14 = bVar13;
+              if ((!bVar1) || (7 < (int)pdVar5)) break;
             }
           }
-          uVar8 = param_1[0x11a2];
-          uVar7 = param_1[0x126a];
-          puVar22 = &local_90;
-          uVar18 = uStack0000001c;
-          local_90 = uVar13;
-          local_8c = uVar17;
+          uVar7 = param_1[0x11a2];
+          uVar6 = param_1[0x126a];
+          puVar21 = &local_90;
+          uVar17 = uStack0000001c;
+          local_90 = uVar12;
+          local_8c = uVar16;
           local_88 = uVar3;
 LAB_000dbb38:
-          pdVar6 = (dword *)(*local_68)(uVar8,uVar7,uVar18,iVar11,pdVar6,0x1405,puVar22);
+          pdVar5 = (dword *)(*local_68)(uVar7,uVar6,uVar17,iVar10,pdVar5,0x1405,puVar21);
           uVar3 = uVar2;
         }
         else {
-          bVar1 = iVar20 < iStack00000024;
-          if ((bVar16 & bVar14 & bVar15 & 0x3f) == 0) {
-            local_e0 = uVar13;
-            local_dc = uVar17;
+          bVar1 = iVar19 < iStack00000024;
+          if ((bVar15 & bVar13 & bVar14 & 0x3f) == 0) {
+            local_e0 = uVar12;
+            local_dc = uVar16;
             local_d8 = uVar3;
             if (local_60 <= param_1[0x1267]) {
               ((int (*)())_gleFlushIndexStack)(param_1);
             }
-            pdVar6 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar12,3,&local_e0);
-            bVar1 = iVar20 < iStack00000024;
-            if (pdVar6 != (dword *)0x0) {
-              uVar7 = param_1[0x126a];
-              uVar8 = param_1[0x11a2];
-              uVar18 = 9;
-              puVar22 = &local_e0;
+            pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,3,&local_e0);
+            bVar1 = iVar19 < iStack00000024;
+            if (pdVar5 != (dword *)0x0) {
+              uVar6 = param_1[0x126a];
+              uVar7 = param_1[0x11a2];
+              uVar17 = 9;
+              puVar21 = &local_e0;
               goto LAB_000dbb38;
             }
           }
         }
-        uVar17 = uVar3;
-        bVar14 = bVar15;
+        uVar16 = uVar3;
+        bVar13 = bVar14;
       } while (bVar1);
     }
     goto switchD_000db0a0_default;
   case 7:
-    iVar19 = 3;
-    iVar20 = 0;
+    iVar18 = 3;
+    iVar19 = 0;
     if (iStack00000024 < 4) goto switchD_000db0a0_default;
     do {
-      uVar3 = *pdVar21 & local_70;
-      puVar23 = (uint *)((int)pdVar21 + iVar10 + iVar10);
-      uVar17 = *(uint *)((int)pdVar21 + iVar10) & local_70;
-      bVar16 = *(byte *)(iVar12 + uVar3);
-      puVar22 = (uint *)((int)puVar23 + iVar10);
-      uVar13 = *puVar23 & local_70;
-      bVar15 = *(byte *)(iVar12 + uVar17);
-      uVar2 = *puVar22 & local_70;
-      bVar14 = *(byte *)(iVar12 + uVar13);
-      bVar4 = *(byte *)(iVar12 + uVar2);
-      pdVar21 = (dword *)((int)puVar22 + iVar10);
-      if (((bVar16 | bVar15 | bVar14 | bVar4) & 0xc3) == 0) {
-        iVar20 = iVar20 + 4;
+      uVar3 = *pdVar20 & local_70;
+      puVar22 = (uint *)((int)pdVar20 + iVar9 + iVar9);
+      uVar16 = *(uint *)((int)pdVar20 + iVar9) & local_70;
+      bVar15 = *(byte *)(iVar11 + uVar3);
+      puVar21 = (uint *)((int)puVar22 + iVar9);
+      uVar12 = *puVar22 & local_70;
+      bVar14 = *(byte *)(iVar11 + uVar16);
+      uVar2 = *puVar21 & local_70;
+      bVar13 = *(byte *)(iVar11 + uVar12);
+      bVar4 = *(byte *)(iVar11 + uVar2);
+      pdVar20 = (dword *)((int)puVar21 + iVar9);
+      if (((bVar15 | bVar14 | bVar13 | bVar4) & 0xc3) == 0) {
+        iVar19 = iVar19 + 4;
       }
       else {
-        iVar24 = iVar10 << 2;
-        if (iVar20 != 0) {
-          pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar11,iVar20
-                                        ,param_5,pdVar9);
-          iVar24 = iVar20 + 4;
-          iVar20 = 0;
-          iVar24 = iVar24 * iVar10;
+        iVar23 = iVar9 << 2;
+        if (iVar19 != 0) {
+          pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar10,iVar19
+                                        ,param_5,pdVar8);
+          iVar23 = iVar19 + 4;
+          iVar19 = 0;
+          iVar23 = iVar23 * iVar9;
         }
-        pdVar9 = (dword *)((int)pdVar9 + iVar24);
-        if ((bVar16 & bVar15 & bVar14 & bVar4 & 0x3f) == 0) {
+        pdVar8 = (dword *)((int)pdVar8 + iVar23);
+        if ((bVar15 & bVar14 & bVar13 & bVar4 & 0x3f) == 0) {
           local_e0 = uVar3;
-          local_dc = uVar17;
-          local_d8 = uVar13;
+          local_dc = uVar16;
+          local_d8 = uVar12;
           local_d4 = uVar2;
           if (local_60 <= param_1[0x1267]) {
             ((int (*)())_gleFlushIndexStack)(param_1);
           }
-          pdVar6 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar12,4,&local_e0);
-          if (pdVar6 != (dword *)0x0) {
-            pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],9,iVar11,pdVar6,0x1405,
+          pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,4,&local_e0);
+          if (pdVar5 != (dword *)0x0) {
+            pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],9,iVar10,pdVar5,0x1405,
                                           &local_e0);
           }
         }
       }
-      iVar19 = iVar19 + 4;
-    } while (iVar19 < iStack00000024);
+      iVar18 = iVar18 + 4;
+    } while (iVar18 < iStack00000024);
     break;
   case 8:
-    iVar19 = 3;
-    iVar20 = 0;
-    puVar23 = (uint *)((int)pdVar21 + iVar10);
+    iVar18 = 3;
+    iVar19 = 0;
+    puVar22 = (uint *)((int)pdVar20 + iVar9);
     if (iStack00000024 < 4) goto switchD_000db0a0_default;
-    local_5c = iVar10 << 1;
-    uVar2 = *puVar23 & local_70;
-    uVar13 = *pdVar21 & local_70;
-    bVar16 = *(byte *)(iVar12 + (*pdVar21 & local_70));
-    bVar15 = *(byte *)(iVar12 + (*puVar23 & local_70));
+    local_5c = iVar9 << 1;
+    uVar2 = *puVar22 & local_70;
+    uVar12 = *pdVar20 & local_70;
+    bVar15 = *(byte *)(iVar11 + (*pdVar20 & local_70));
+    bVar14 = *(byte *)(iVar11 + (*puVar22 & local_70));
     do {
-      puVar22 = (uint *)((int)puVar23 + iVar10);
-      puVar23 = (uint *)((int)puVar22 + iVar10);
-      uVar3 = *puVar22 & local_70;
-      bVar14 = *(byte *)(iVar12 + uVar3);
-      uVar17 = *puVar23 & local_70;
-      bVar4 = *(byte *)(iVar12 + uVar17);
-      if (((bVar16 | bVar15 | bVar14 | bVar4) & 0xc3) == 0) {
-        iVar20 = iVar20 + 2;
+      puVar21 = (uint *)((int)puVar22 + iVar9);
+      puVar22 = (uint *)((int)puVar21 + iVar9);
+      uVar3 = *puVar21 & local_70;
+      bVar13 = *(byte *)(iVar11 + uVar3);
+      uVar16 = *puVar22 & local_70;
+      bVar4 = *(byte *)(iVar11 + uVar16);
+      if (((bVar15 | bVar14 | bVar13 | bVar4) & 0xc3) == 0) {
+        iVar19 = iVar19 + 2;
       }
       else {
-        iVar24 = local_5c;
-        if (iVar20 != 0) {
-          iVar24 = iVar20 + 2;
-          iVar20 = 0;
-          pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar11,iVar24
-                                        ,param_5,pdVar9);
-          iVar24 = iVar24 * iVar10;
+        iVar23 = local_5c;
+        if (iVar19 != 0) {
+          iVar23 = iVar19 + 2;
+          iVar19 = 0;
+          pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar10,iVar23
+                                        ,param_5,pdVar8);
+          iVar23 = iVar23 * iVar9;
         }
-        pdVar9 = (dword *)((int)pdVar9 + iVar24);
-        if ((bVar16 & bVar15 & bVar14 & bVar4 & 0x3f) == 0) {
-          local_e0 = uVar13;
+        pdVar8 = (dword *)((int)pdVar8 + iVar23);
+        if ((bVar15 & bVar14 & bVar13 & bVar4 & 0x3f) == 0) {
+          local_e0 = uVar12;
           local_dc = uVar2;
-          local_d8 = uVar17;
+          local_d8 = uVar16;
           local_d4 = uVar3;
           if (local_60 <= param_1[0x1267]) {
             ((int (*)())_gleFlushIndexStack)(param_1);
           }
-          pdVar6 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar12,4,&local_e0);
-          if (pdVar6 != (dword *)0x0) {
-            pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],9,iVar11,pdVar6,0x1405,
+          pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,4,&local_e0);
+          if (pdVar5 != (dword *)0x0) {
+            pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],9,iVar10,pdVar5,0x1405,
                                           &local_e0);
           }
         }
       }
-      iVar19 = iVar19 + 2;
-      uVar2 = uVar17;
-      uVar13 = uVar3;
-      bVar16 = bVar14;
-      bVar15 = bVar4;
-    } while (iVar19 < iStack00000024);
+      iVar18 = iVar18 + 2;
+      uVar2 = uVar16;
+      uVar12 = uVar3;
+      bVar15 = bVar13;
+      bVar14 = bVar4;
+    } while (iVar18 < iStack00000024);
 LAB_000dbe1c:
-    if (iVar20 == 0) goto switchD_000db0a0_default;
+    if (iVar19 == 0) goto switchD_000db0a0_default;
     uVar2 = param_1[0x126a];
-    iVar20 = iVar20 + 2;
+    iVar19 = iVar19 + 2;
     goto LAB_000dbe34;
   case 9:
-    uVar13 = *pdVar21 & local_70;
-    uVar2 = *(uint *)((int)pdVar21 + iVar10) & local_70;
-    bVar16 = *(byte *)(iVar12 + uVar13);
-    bVar15 = *(byte *)(iVar12 + uVar2);
-    puVar23 = (uint *)((int)pdVar21 + iVar10 + iVar10);
-    if (((bVar16 | bVar15) & 0xc3) == 0) {
-      iVar20 = 2;
-      bVar14 = 0;
-      uVar17 = 0;
+    uVar12 = *pdVar20 & local_70;
+    uVar2 = *(uint *)((int)pdVar20 + iVar9) & local_70;
+    bVar15 = *(byte *)(iVar11 + uVar12);
+    bVar14 = *(byte *)(iVar11 + uVar2);
+    puVar22 = (uint *)((int)pdVar20 + iVar9 + iVar9);
+    if (((bVar15 | bVar14) & 0xc3) == 0) {
+      iVar19 = 2;
+      bVar13 = 0;
+      uVar16 = 0;
       bVar1 = 2 < iStack00000024;
       if (bVar1) {
         do {
-          bVar14 = bVar15;
-          uVar17 = uVar2;
-          uVar2 = *puVar23;
-          bVar15 = *(byte *)(iVar12 + (uVar2 & local_70));
-          if ((bVar15 & 0xc3) != 0) break;
-          iVar20 = iVar20 + 1;
-          puVar23 = (uint *)((int)puVar23 + iVar10);
-          bVar1 = iVar20 < iStack00000024;
+          bVar13 = bVar14;
+          uVar16 = uVar2;
+          uVar2 = *puVar22;
+          bVar14 = *(byte *)(iVar11 + (uVar2 & local_70));
+          if ((bVar14 & 0xc3) != 0) break;
+          iVar19 = iVar19 + 1;
+          puVar22 = (uint *)((int)puVar22 + iVar9);
+          bVar1 = iVar19 < iStack00000024;
           uVar2 = uVar2 & local_70;
         } while (bVar1);
-        if (2 < iVar20) {
-          pdVar6 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar11,iVar20
+        if (2 < iVar19) {
+          pdVar5 = (dword *)(*local_68)(param_1[0x11a2],param_1[0x126a],uStack0000001c,iVar10,iVar19
                                         ,param_5,pdStack0000002c);
         }
       }
     }
     else {
-      iVar20 = 2;
+      iVar19 = 2;
       bVar1 = 2 < iStack00000024;
-      uVar17 = uVar2;
-      bVar14 = bVar15;
+      uVar16 = uVar2;
+      bVar13 = bVar14;
     }
     if (bVar1) {
       do {
-        uVar3 = *puVar23;
-        iVar20 = iVar20 + 1;
-        puVar23 = (uint *)((int)puVar23 + iVar10);
+        uVar3 = *puVar22;
+        iVar19 = iVar19 + 1;
+        puVar22 = (uint *)((int)puVar22 + iVar9);
         uVar3 = uVar3 & local_70;
-        bVar15 = *(byte *)(iVar12 + uVar3);
+        bVar14 = *(byte *)(iVar11 + uVar3);
         uVar2 = uVar3;
-        if (((bVar16 | bVar14 | bVar15) & 0xc3) == 0) {
-          pdVar6 = (dword *)((int)((unsigned char *)0x0) + 3);
-          bVar1 = iVar20 < iStack00000024;
+        if (((bVar15 | bVar13 | bVar14) & 0xc3) == 0) {
+          pdVar5 = (dword *)((int)((unsigned char *)0x0) + 3);
+          bVar1 = iVar19 < iStack00000024;
           if (bVar1) {
-            puVar22 = local_84;
+            puVar21 = local_84;
             while( true ) {
-              uVar18 = *puVar23 & local_70;
-              bVar14 = *(byte *)(iVar12 + uVar18);
-              if ((bVar14 & 0xc3) != 0) break;
-              iVar20 = iVar20 + 1;
-              *puVar22 = uVar18;
-              puVar23 = (uint *)((int)puVar23 + iVar10);
-              bVar1 = iVar20 < iStack00000024;
-              puVar22 = puVar22 + 1;
-              pdVar6 = (dword *)((int)pdVar6 + 1);
-              uVar2 = uVar18;
-              bVar15 = bVar14;
-              if ((!bVar1) || (7 < (int)pdVar6)) break;
+              uVar17 = *puVar22 & local_70;
+              bVar13 = *(byte *)(iVar11 + uVar17);
+              if ((bVar13 & 0xc3) != 0) break;
+              iVar19 = iVar19 + 1;
+              *puVar21 = uVar17;
+              puVar22 = (uint *)((int)puVar22 + iVar9);
+              bVar1 = iVar19 < iStack00000024;
+              puVar21 = puVar21 + 1;
+              pdVar5 = (dword *)((int)pdVar5 + 1);
+              uVar2 = uVar17;
+              bVar14 = bVar13;
+              if ((!bVar1) || (7 < (int)pdVar5)) break;
             }
           }
-          uVar18 = param_1[0x11a2];
-          uVar8 = param_1[0x126a];
-          puVar22 = &local_90;
-          local_90 = uVar13;
-          local_8c = uVar17;
+          uVar17 = param_1[0x11a2];
+          uVar7 = param_1[0x126a];
+          puVar21 = &local_90;
+          local_90 = uVar12;
+          local_8c = uVar16;
           local_88 = uVar3;
 LAB_000dc04c:
-          pdVar6 = (dword *)(*local_68)(uVar18,uVar8,uStack0000001c,iVar11,pdVar6,0x1405,puVar22);
+          pdVar5 = (dword *)(*local_68)(uVar17,uVar7,uStack0000001c,iVar10,pdVar5,0x1405,puVar21);
           uVar3 = uVar2;
         }
         else {
-          bVar1 = iVar20 < iStack00000024;
-          if ((bVar16 & bVar14 & bVar15 & 0x3f) == 0) {
-            local_e0 = uVar13;
-            local_dc = uVar17;
+          bVar1 = iVar19 < iStack00000024;
+          if ((bVar15 & bVar13 & bVar14 & 0x3f) == 0) {
+            local_e0 = uVar12;
+            local_dc = uVar16;
             local_d8 = uVar3;
             if (local_60 <= param_1[0x1267]) {
               ((int (*)())_gleFlushIndexStack)(param_1);
             }
-            pdVar6 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar12,3,&local_e0);
-            bVar1 = iVar20 < iStack00000024;
-            if (pdVar6 != (dword *)0x0) {
-              uVar8 = param_1[0x126a];
-              uVar18 = param_1[0x11a2];
-              puVar22 = &local_e0;
+            pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,3,&local_e0);
+            bVar1 = iVar19 < iStack00000024;
+            if (pdVar5 != (dword *)0x0) {
+              uVar7 = param_1[0x126a];
+              uVar17 = param_1[0x11a2];
+              puVar21 = &local_e0;
               goto LAB_000dc04c;
             }
           }
         }
-        uVar17 = uVar3;
-        bVar14 = bVar15;
+        uVar16 = uVar3;
+        bVar13 = bVar14;
       } while (bVar1);
     }
   default:
     goto switchD_000db0a0_default;
   }
-  if (iVar20 != 0) {
+  if (iVar19 != 0) {
     uVar2 = param_1[0x126a];
 LAB_000dbe34:
-    uVar17 = param_1[0x11a2];
-    uVar13 = uStack0000001c;
+    uVar16 = param_1[0x11a2];
+    uVar12 = uStack0000001c;
 LAB_000dbe44:
-    pdVar6 = (dword *)(*local_68)(uVar17,uVar2,uVar13,iVar11,iVar20,param_5,pdVar9);
+    pdVar5 = (dword *)(*local_68)(uVar16,uVar2,uVar12,iVar10,iVar19,param_5,pdVar8);
   }
 switchD_000db0a0_default:
   if (local_6c != 0) {
     _free(pdStack0000002c);
-    pdVar6 = extraout_r3;
+    pdVar5 = extraout_r3_00;
   }
-  return pdVar6;
+  return pdVar5;
 }
 
 /* _gleExecuteVertexArray @ 0xdc08c (20 bytes) */
-int _gleExecuteVertexArray(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gleExecuteVertexArray(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -3071,7 +3068,7 @@ int _gleExecuteVertexArray(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gleLightMaterialRGBAChange_F_A @ 0xdc0a0 (184 bytes) */
-int _gleLightMaterialRGBAChange_F_A(param_1, param_2)
+void _gleLightMaterialRGBAChange_F_A(param_1, param_2)
   int param_1;
   undefined8 *param_2;
 {
@@ -3102,7 +3099,7 @@ int _gleLightMaterialRGBAChange_F_A(param_1, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_F_D @ 0xdc158 (184 bytes) */
-int _gleLightMaterialRGBAChange_F_D(param_1, param_2)
+void _gleLightMaterialRGBAChange_F_D(param_1, param_2)
   int param_1;
   undefined8 *param_2;
 {
@@ -3157,7 +3154,7 @@ void _gleLightMaterialShineChange_B(int param_1,double fparam_1)
 }
 
 /* _gleLightMaterialRGBAChange_B_E @ 0xdc2c4 (184 bytes) */
-int _gleLightMaterialRGBAChange_B_E(param_1, param_2)
+void _gleLightMaterialRGBAChange_B_E(param_1, param_2)
   int param_1;
   undefined8 *param_2;
 {
@@ -3187,7 +3184,7 @@ int _gleLightMaterialRGBAChange_B_E(param_1, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_B_A @ 0xdc37c (184 bytes) */
-int _gleLightMaterialRGBAChange_B_A(param_1, param_2)
+void _gleLightMaterialRGBAChange_B_A(param_1, param_2)
   int param_1;
   undefined8 *param_2;
 {
@@ -3218,7 +3215,7 @@ int _gleLightMaterialRGBAChange_B_A(param_1, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_B_D @ 0xdc434 (184 bytes) */
-int _gleLightMaterialRGBAChange_B_D(param_1, param_2)
+void _gleLightMaterialRGBAChange_B_D(param_1, param_2)
   int param_1;
   undefined8 *param_2;
 {
@@ -3248,7 +3245,7 @@ int _gleLightMaterialRGBAChange_B_D(param_1, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_B_S @ 0xdc4ec (184 bytes) */
-int _gleLightMaterialRGBAChange_B_S(param_1, param_2)
+void _gleLightMaterialRGBAChange_B_S(param_1, param_2)
   int param_1;
   undefined8 *param_2;
 {
@@ -3278,7 +3275,7 @@ int _gleLightMaterialRGBAChange_B_S(param_1, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_B_AD @ 0xdc5a4 (296 bytes) */
-int _gleLightMaterialRGBAChange_B_AD(param_1, param_2)
+void _gleLightMaterialRGBAChange_B_AD(param_1, param_2)
   int param_1;
   undefined8 *param_2;
 {
@@ -3324,7 +3321,7 @@ int _gleLightMaterialRGBAChange_B_AD(param_1, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_FB_E @ 0xdc6cc (224 bytes) */
-int _gleLightMaterialRGBAChange_FB_E(param_1, param_2)
+void _gleLightMaterialRGBAChange_FB_E(param_1, param_2)
   int param_1;
   undefined8 *param_2;
 {
@@ -3361,7 +3358,7 @@ int _gleLightMaterialRGBAChange_FB_E(param_1, param_2)
 }
 
 /* FUN_000dc7b8 @ 0xdc7b8 (1320 bytes) */
-int FUN_000dc7b8(param_1)
+void FUN_000dc7b8(param_1)
   int param_1;
 {
   float fVar1;
@@ -3607,7 +3604,7 @@ int _gleLoadTransposeMatrixd(param_1, param_2)
 }
 
 /* _gleGetMatrixf @ 0xdce28 (132 bytes) */
-int _gleGetMatrixf(param_1, param_2)
+void _gleGetMatrixf(param_1, param_2)
   undefined4 *param_1;
   undefined4 *param_2;
 {
@@ -3631,7 +3628,7 @@ int _gleGetMatrixf(param_1, param_2)
 }
 
 /* _gleGetTransposeMatrixf @ 0xdceac (132 bytes) */
-int _gleGetTransposeMatrixf(param_1, param_2)
+void _gleGetTransposeMatrixf(param_1, param_2)
   undefined4 *param_1;
   undefined4 *param_2;
 {
@@ -3655,7 +3652,7 @@ int _gleGetTransposeMatrixf(param_1, param_2)
 }
 
 /* _gleGetTransposeMatrixd @ 0xdcf30 (132 bytes) */
-int _gleGetTransposeMatrixd(param_1, param_2)
+void _gleGetTransposeMatrixd(param_1, param_2)
   float *param_1;
   double *param_2;
 {
@@ -3679,7 +3676,7 @@ int _gleGetTransposeMatrixd(param_1, param_2)
 }
 
 /* _gleMultTransposeMatrixf @ 0xdcfb4 (836 bytes) */
-int _gleMultTransposeMatrixf(param_1, param_2, param_3)
+void _gleMultTransposeMatrixf(param_1, param_2, param_3)
   float *param_1;
   float *param_2;
   float *param_3;
@@ -3720,7 +3717,7 @@ int _gleMultTransposeMatrixf(param_1, param_2, param_3)
 }
 
 /* _gleMultTransposeMatrixd @ 0xdd2f8 (900 bytes) */
-int _gleMultTransposeMatrixd(param_1, param_2, param_3)
+void _gleMultTransposeMatrixd(param_1, param_2, param_3)
   float *param_1;
   double *param_2;
   float *param_3;
@@ -3777,7 +3774,7 @@ int _gleMultTransposeMatrixd(param_1, param_2, param_3)
 }
 
 /* _gleMultTransposeMatrix @ 0xdd67c (836 bytes) */
-int _gleMultTransposeMatrix(param_1, param_2, param_3)
+void _gleMultTransposeMatrix(param_1, param_2, param_3)
   float *param_1;
   float *param_2;
   float *param_3;
@@ -4278,7 +4275,7 @@ void _gleEvalDomainDeriv2Coord(undefined4 param_1,int param_2,int param_3,int pa
 }
 
 /* _gleInitMap1Data @ 0xde340 (336 bytes) */
-int _gleInitMap1Data(param_1)
+void _gleInitMap1Data(param_1)
   int param_1;
 {
   undefined4 *puVar1;
@@ -4367,7 +4364,7 @@ int _gleInitMap1Data(param_1)
 }
 
 /* _gleMap1Vertex3dLoad @ 0xde490 (144 bytes) */
-double _gleMap1Vertex3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1Vertex3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   int iVar2;

@@ -339,7 +339,7 @@ void _glMapVertexAttrib2dARB_CompExec(undefined4 param_1,undefined4 param_2,unde
 }
 
 /* _glGetMapdv_Exec @ 0x72300 (3736 bytes) */
-int _glGetMapdv_Exec(param_1, param_2, param_3, param_4)
+void _glGetMapdv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -1042,7 +1042,7 @@ LAB_0007320c:
 }
 
 /* _glGetMapfv_Exec @ 0x7323c (3780 bytes) */
-int _glGetMapfv_Exec(param_1, param_2, param_3, param_4)
+void _glGetMapfv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -1744,7 +1744,7 @@ LAB_00074174:
 }
 
 /* _glGetMapiv_Exec @ 0x741a4 (5112 bytes) */
-int _glGetMapiv_Exec(param_1, param_2, param_3, param_4)
+void _glGetMapiv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -2864,7 +2864,7 @@ int _glIndexMask_Comp(param_1, param_2)
 }
 
 /* _glIndexMask_Exec @ 0x75f60 (56 bytes) */
-int _glIndexMask_Exec(param_1, param_2)
+void _glIndexMask_Exec(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -2881,7 +2881,7 @@ int _glIndexMask_Exec(param_1, param_2)
 }
 
 /* _glIndexMask_CompExec @ 0x75f98 (56 bytes) */
-int _glIndexMask_CompExec(param_1, param_2)
+void _glIndexMask_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -2923,7 +2923,7 @@ int _glStencilMask_Comp(param_1, param_2)
 }
 
 /* _glStencilMask_CompExec @ 0x7607c (56 bytes) */
-int _glStencilMask_CompExec(param_1, param_2)
+void _glStencilMask_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -2958,7 +2958,7 @@ int _glStencilMaskSeparate_Comp(param_1, param_2, param_3)
 }
 
 /* _glStencilMaskSeparate_Exec @ 0x76134 (132 bytes) */
-int _glStencilMaskSeparate_Exec(param_1, param_2, param_3)
+void _glStencilMaskSeparate_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   undefined4 param_3;
@@ -2999,7 +2999,7 @@ LAB_000761a0:
 }
 
 /* _glStencilMaskSeparate_CompExec @ 0x761b8 (64 bytes) */
-int _glStencilMaskSeparate_CompExec(param_1, param_2, param_3)
+void _glStencilMaskSeparate_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -3118,7 +3118,7 @@ LAB_000764bc:
 }
 
 /* _glMateriali_CompExec @ 0x764d4 (72 bytes) */
-int _glMateriali_CompExec(param_1, param_2, param_3, param_4)
+void _glMateriali_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -3443,7 +3443,7 @@ LAB_00076dd0:
 }
 
 /* _glMaterialiv_CompExec @ 0x76e1c (72 bytes) */
-int _glMaterialiv_CompExec(param_1, param_2, param_3, param_4)
+void _glMaterialiv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -3465,7 +3465,7 @@ int _glMaterialiv_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glGetMaterialfv_Exec @ 0x76e64 (584 bytes) */
-int _glGetMaterialfv_Exec(param_1, param_2, param_3, param_4)
+void _glGetMaterialfv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   undefined *param_3;
@@ -3556,7 +3556,7 @@ LAB_00077094:
 }
 
 /* _glGetMaterialiv_Exec @ 0x770ac (832 bytes) */
-int _glGetMaterialiv_Exec(param_1, param_2, param_3, param_4)
+void _glGetMaterialiv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   undefined *param_3;
@@ -3670,7 +3670,7 @@ int _glLoadIdentity_Comp(param_1)
 }
 
 /* _glLoadIdentity_CompExec @ 0x77430 (48 bytes) */
-int _glLoadIdentity_CompExec(param_1)
+void _glLoadIdentity_CompExec(param_1)
   undefined4 param_1;
 {
   ((int (*)())_glLoadIdentity_Comp)(param_1);
@@ -3710,7 +3710,7 @@ int _glLoadMatrixd_Comp(param_1, param_2)
 }
 
 /* _glLoadMatrixd_CompExec @ 0x774e8 (56 bytes) */
-int _glLoadMatrixd_CompExec(param_1, param_2)
+void _glLoadMatrixd_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -3751,7 +3751,7 @@ int _glLoadMatrixf_Comp(param_1, param_2)
 }
 
 /* _glLoadMatrixf_CompExec @ 0x775a8 (56 bytes) */
-int _glLoadMatrixf_CompExec(param_1, param_2)
+void _glLoadMatrixf_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {

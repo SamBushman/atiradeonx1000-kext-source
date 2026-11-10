@@ -9,7 +9,7 @@ void _glEvalCoord2dv_Exec(undefined4 param_1,double *param_2,double fparam_1,dou
 }
 
 /* _glEvalCoord2dv_CompExec @ 0x64be0 (56 bytes) */
-int _glEvalCoord2dv_CompExec(param_1, param_2)
+void _glEvalCoord2dv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -93,7 +93,7 @@ void _glEvalCoord2fv_Exec(undefined4 param_1,float *param_2,double fparam_1,doub
 }
 
 /* _glEvalCoord2fv_CompExec @ 0x64d68 (56 bytes) */
-int _glEvalCoord2fv_CompExec(param_1, param_2)
+void _glEvalCoord2fv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -199,7 +199,7 @@ LAB_00064ea8:
 }
 
 /* _glEvalMesh1_CompExec @ 0x64f58 (72 bytes) */
-int _glEvalMesh1_CompExec(param_1, param_2, param_3, param_4)
+void _glEvalMesh1_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -455,7 +455,7 @@ void _glEvalMesh2_Exec(int param_1,uint param_2,uint param_3,int param_4,uint pa
 }
 
 /* _glEvalMesh2_CompExec @ 0x65528 (88 bytes) */
-int _glEvalMesh2_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glEvalMesh2_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -520,7 +520,7 @@ void _glEvalPoint1_Exec(int param_1,uint param_2,double fparam_1)
 }
 
 /* _glEvalPoint1_CompExec @ 0x65678 (56 bytes) */
-int _glEvalPoint1_CompExec(param_1, param_2)
+void _glEvalPoint1_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -599,7 +599,7 @@ void _glEvalPoint2_Exec(int param_1,uint param_2,uint param_3,double fparam_1,do
 }
 
 /* _glEvalPoint2_CompExec @ 0x65808 (64 bytes) */
-int _glEvalPoint2_CompExec(param_1, param_2, param_3)
+void _glEvalPoint2_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -652,7 +652,7 @@ void _glPassThrough_CompExec(undefined4 param_1,double fparam_1)
 }
 
 /* _glDeleteFencesAPPLE_Exec @ 0x65904 (152 bytes) */
-int _glDeleteFencesAPPLE_Exec(param_1, param_2, param_3)
+void _glDeleteFencesAPPLE_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   undefined4 *param_3;
@@ -707,7 +707,7 @@ int _glTestFenceAPPLE_Exec(param_1, param_2)
 }
 
 /* _glFinishFenceAPPLE_Exec @ 0x659ec (48 bytes) */
-int _glFinishFenceAPPLE_Exec(param_1, param_2)
+void _glFinishFenceAPPLE_Exec(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -786,7 +786,7 @@ int _glFinishObjectAPPLE_Comp(param_1, param_2, param_3)
 }
 
 /* _glSetFenceAPPLE_CompExec @ 0x65b54 (56 bytes) */
-int _glSetFenceAPPLE_CompExec(param_1, param_2)
+void _glSetFenceAPPLE_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -796,7 +796,7 @@ int _glSetFenceAPPLE_CompExec(param_1, param_2)
 }
 
 /* _glFinishFenceAPPLE_CompExec @ 0x65b8c (56 bytes) */
-int _glFinishFenceAPPLE_CompExec(param_1, param_2)
+void _glFinishFenceAPPLE_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -806,7 +806,7 @@ int _glFinishFenceAPPLE_CompExec(param_1, param_2)
 }
 
 /* _glFinishObjectAPPLE_CompExec @ 0x65bc4 (64 bytes) */
-int _glFinishObjectAPPLE_CompExec(param_1, param_2, param_3)
+void _glFinishObjectAPPLE_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -844,7 +844,7 @@ int _glFinishObjectAPPLE_ListExec(param_1, param_2)
 }
 
 /* _glFinish_RevertExec @ 0x65c80 (308 bytes) */
-int _glFinish_RevertExec(param_1)
+void _glFinish_RevertExec(param_1)
   int param_1;
 {
   byte bVar1;
@@ -903,7 +903,7 @@ int _glFinish_RevertExec(param_1)
 }
 
 /* _glFlush_RevertExec @ 0x65db4 (224 bytes) */
-int _glFlush_RevertExec(param_1)
+void _glFlush_RevertExec(param_1)
   int param_1;
 {
   byte bVar1;
@@ -949,7 +949,7 @@ int _glFlush_RevertExec(param_1)
 }
 
 /* _glGenRenderbuffersEXT_Exec @ 0x65e94 (236 bytes) */
-int _glGenRenderbuffersEXT_Exec(param_1, param_2, param_3)
+void _glGenRenderbuffersEXT_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -1002,7 +1002,7 @@ int _glGenRenderbuffersEXT_Exec(param_1, param_2, param_3)
 }
 
 /* FUN_00065f84 @ 0x65f84 (440 bytes) */
-int FUN_00065f84(param_1, param_2, param_3)
+void FUN_00065f84(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -1081,7 +1081,7 @@ int FUN_00065f84(param_1, param_2, param_3)
 }
 
 /* _glBindRenderbufferEXT_Exec @ 0x6613c (208 bytes) */
-int _glBindRenderbufferEXT_Exec(param_1, param_2, param_3)
+void _glBindRenderbufferEXT_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -1117,7 +1117,7 @@ int _glBindRenderbufferEXT_Exec(param_1, param_2, param_3)
 }
 
 /* _glRenderbufferStorageEXT_Exec @ 0x6620c (460 bytes) */
-int _glRenderbufferStorageEXT_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glRenderbufferStorageEXT_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   uint param_3;
@@ -1220,7 +1220,7 @@ int _glIsRenderbufferEXT_Exec(param_1, param_2)
 }
 
 /* _glGetRenderbufferParameterivEXT_Exec @ 0x66480 (516 bytes) */
-int _glGetRenderbufferParameterivEXT_Exec(param_1, param_2, param_3, param_4)
+void _glGetRenderbufferParameterivEXT_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -1319,7 +1319,7 @@ LAB_000665d0:
 }
 
 /* _glGenFramebuffersEXT_Exec @ 0x666d4 (232 bytes) */
-int _glGenFramebuffersEXT_Exec(param_1, param_2, param_3)
+void _glGenFramebuffersEXT_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -1372,7 +1372,7 @@ int _glGenFramebuffersEXT_Exec(param_1, param_2, param_3)
 }
 
 /* _glDeleteFramebuffersEXT_Exec @ 0x667bc (280 bytes) */
-int _glDeleteFramebuffersEXT_Exec(param_1, param_2, param_3)
+void _glDeleteFramebuffersEXT_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -1425,7 +1425,7 @@ int _glDeleteFramebuffersEXT_Exec(param_1, param_2, param_3)
 }
 
 /* _glBindFramebufferEXT_Exec @ 0x668d4 (208 bytes) */
-int _glBindFramebufferEXT_Exec(param_1, param_2, param_3)
+void _glBindFramebufferEXT_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -1461,7 +1461,7 @@ int _glBindFramebufferEXT_Exec(param_1, param_2, param_3)
 }
 
 /* _glFramebufferTexture1DEXT_Exec @ 0x669a4 (440 bytes) */
-int _glFramebufferTexture1DEXT_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glFramebufferTexture1DEXT_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   int param_3;
@@ -1536,7 +1536,7 @@ LAB_00066af0:
 }
 
 /* _glFramebufferTexture2DEXT_Exec @ 0x66b5c (544 bytes) */
-int _glFramebufferTexture2DEXT_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glFramebufferTexture2DEXT_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   int param_3;
@@ -1628,7 +1628,7 @@ LAB_00066d14:
 }
 
 /* _glFramebufferTexture3DEXT_Exec @ 0x66d7c (460 bytes) */
-int _glFramebufferTexture3DEXT_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _glFramebufferTexture3DEXT_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   int param_2;
   int param_3;
@@ -1709,7 +1709,7 @@ LAB_00066edc:
 }
 
 /* FUN_00066f4c @ 0x66f4c (420 bytes) */
-int FUN_00066f4c(param_1, param_2, param_3, param_4, param_5)
+void FUN_00066f4c(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -1844,7 +1844,7 @@ undefined4 _glCheckFramebufferStatusEXT_Exec(int param_1,int param_2,undefined4 
 }
 
 /* _glGetFramebufferAttachmentParameterivEXT_Exec @ 0x6726c (452 bytes) */
-int _glGetFramebufferAttachmentParameterivEXT_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glGetFramebufferAttachmentParameterivEXT_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -1932,7 +1932,7 @@ LAB_00067294:
 }
 
 /* _glGenerateMipmapEXT_Exec @ 0x67430 (316 bytes) */
-int _glGenerateMipmapEXT_Exec(param_1, param_2)
+void _glGenerateMipmapEXT_Exec(param_1, param_2)
   int param_1;
   uint param_2;
 {

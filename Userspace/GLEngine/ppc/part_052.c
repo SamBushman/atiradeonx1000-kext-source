@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gleBeginQuadsRenderFlat @ 0xeb680 (52 bytes) */
-int _gleBeginQuadsRenderFlat(param_1)
+void _gleBeginQuadsRenderFlat(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -14,7 +14,7 @@ int _gleBeginQuadsRenderFlat(param_1)
 }
 
 /* _gleBeginQuadsRenderTCLRDirty @ 0xeb6b4 (60 bytes) */
-int _gleBeginQuadsRenderTCLRDirty(param_1)
+void _gleBeginQuadsRenderTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -30,7 +30,7 @@ int _gleBeginQuadsRenderTCLRDirty(param_1)
 }
 
 /* _gleBeginQuadStripRenderSmooth @ 0xeb6f0 (52 bytes) */
-int _gleBeginQuadStripRenderSmooth(param_1)
+void _gleBeginQuadStripRenderSmooth(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -43,7 +43,7 @@ int _gleBeginQuadStripRenderSmooth(param_1)
 }
 
 /* _gleBeginQuadStripRenderFlat @ 0xeb724 (52 bytes) */
-int _gleBeginQuadStripRenderFlat(param_1)
+void _gleBeginQuadStripRenderFlat(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -56,7 +56,7 @@ int _gleBeginQuadStripRenderFlat(param_1)
 }
 
 /* _gleBeginQuadStripRenderTCL @ 0xeb758 (52 bytes) */
-int _gleBeginQuadStripRenderTCL(param_1)
+void _gleBeginQuadStripRenderTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -69,7 +69,7 @@ int _gleBeginQuadStripRenderTCL(param_1)
 }
 
 /* _gleBeginQuadStripRenderTCLRDirty @ 0xeb78c (60 bytes) */
-int _gleBeginQuadStripRenderTCLRDirty(param_1)
+void _gleBeginQuadStripRenderTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -85,7 +85,7 @@ int _gleBeginQuadStripRenderTCLRDirty(param_1)
 }
 
 /* _gleBeginQuadStripSelectFeedback @ 0xeb7c8 (76 bytes) */
-int _gleBeginQuadStripSelectFeedback(param_1)
+void _gleBeginQuadStripSelectFeedback(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -101,7 +101,7 @@ int _gleBeginQuadStripSelectFeedback(param_1)
 }
 
 /* _gleBeginPolygonRenderSmooth @ 0xeb814 (60 bytes) */
-int _gleBeginPolygonRenderSmooth(param_1)
+void _gleBeginPolygonRenderSmooth(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -117,7 +117,7 @@ int _gleBeginPolygonRenderSmooth(param_1)
 }
 
 /* _gleBeginPolygonRenderFlat @ 0xeb850 (60 bytes) */
-int _gleBeginPolygonRenderFlat(param_1)
+void _gleBeginPolygonRenderFlat(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -133,7 +133,7 @@ int _gleBeginPolygonRenderFlat(param_1)
 }
 
 /* _gleBeginPolygonRenderTCLRDirty @ 0xeb88c (68 bytes) */
-int _gleBeginPolygonRenderTCLRDirty(param_1)
+void _gleBeginPolygonRenderTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -150,7 +150,7 @@ int _gleBeginPolygonRenderTCLRDirty(param_1)
 }
 
 /* _gleBeginPolygonSelectFeedback @ 0xeb8d0 (76 bytes) */
-int _gleBeginPolygonSelectFeedback(param_1)
+void _gleBeginPolygonSelectFeedback(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -436,7 +436,7 @@ int _gleCullPolygonPtrStack(param_1, param_2, param_3, param_4)
 }
 
 /* FUN_000ebeb4 @ 0xebeb4 (1112 bytes) */
-int FUN_000ebeb4(param_1)
+void FUN_000ebeb4(param_1)
   int param_1;
 {
   char cVar1;
@@ -622,7 +622,7 @@ LAB_000ec180:
 }
 
 /* FUN_000ec310 @ 0xec310 (1276 bytes) */
-int FUN_000ec310(param_1)
+void FUN_000ec310(param_1)
   int param_1;
 {
   char cVar1;
@@ -843,7 +843,7 @@ LAB_000ec7e4: ;
 }
 
 /* FUN_000ec810 @ 0xec810 (1544 bytes) */
-int FUN_000ec810(param_1)
+void FUN_000ec810(param_1)
   int param_1;
 {
   char cVar1;
@@ -1128,7 +1128,7 @@ LAB_000ecdf0:
 }
 
 /* FUN_000ece1c @ 0xece1c (1448 bytes) */
-int FUN_000ece1c(param_1)
+void FUN_000ece1c(param_1)
   int param_1;
 {
   char cVar1;
@@ -1372,7 +1372,7 @@ LAB_000ed33c:
 }
 
 /* FUN_000ed3c8 @ 0xed3c8 (1396 bytes) */
-int FUN_000ed3c8(param_1)
+void FUN_000ed3c8(param_1)
   int param_1;
 {
   char cVar1;
@@ -1616,7 +1616,7 @@ LAB_000ed8b4:
 }
 
 /* FUN_000ed940 @ 0xed940 (956 bytes) */
-int FUN_000ed940(param_1)
+void FUN_000ed940(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1783,7 +1783,7 @@ LAB_000edcd4:
 }
 
 /* FUN_000edd00 @ 0xedd00 (984 bytes) */
-int FUN_000edd00(param_1)
+void FUN_000edd00(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1947,7 +1947,7 @@ int FUN_000edd00(param_1)
 }
 
 /* FUN_000ee104 @ 0xee104 (1140 bytes) */
-int FUN_000ee104(param_1)
+void FUN_000ee104(param_1)
   int param_1;
 {
   bool bVar1;
@@ -2152,7 +2152,7 @@ LAB_000ee550:
 }
 
 /* FUN_000ee57c @ 0xee57c (1312 bytes) */
-int FUN_000ee57c(param_1)
+void FUN_000ee57c(param_1)
   int param_1;
 {
   bool bVar1;
@@ -2371,7 +2371,7 @@ LAB_000eea74: ;
 }
 
 /* FUN_000eeac8 @ 0xeeac8 (1412 bytes) */
-int FUN_000eeac8(param_1)
+void FUN_000eeac8(param_1)
   int param_1;
 {
   bool bVar1;
@@ -2641,7 +2641,7 @@ LAB_000ef024:
 }
 
 /* FUN_000ef050 @ 0xef050 (1396 bytes) */
-int FUN_000ef050(param_1)
+void FUN_000ef050(param_1)
   int param_1;
 {
   bool bVar1;
@@ -2896,7 +2896,7 @@ LAB_000ef59c:
 }
 
 /* FUN_000ef5f4 @ 0xef5f4 (1300 bytes) */
-int FUN_000ef5f4(param_1)
+void FUN_000ef5f4(param_1)
   int param_1;
 {
   bool bVar1;
@@ -3124,7 +3124,7 @@ LAB_000efab0:
 }
 
 /* FUN_000efb0c @ 0xefb0c (1244 bytes) */
-int FUN_000efb0c(param_1)
+void FUN_000efb0c(param_1)
   int param_1;
 {
   bool bVar1;
@@ -3337,7 +3337,7 @@ LAB_000effc0:
 }
 
 /* FUN_000effec @ 0xeffec (1148 bytes) */
-int FUN_000effec(param_1)
+void FUN_000effec(param_1)
   int param_1;
 {
   bool bVar1;
@@ -3544,7 +3544,7 @@ LAB_000f0440:
 }
 
 /* FUN_000f046c @ 0xf046c (1320 bytes) */
-int FUN_000f046c(param_1)
+void FUN_000f046c(param_1)
   int param_1;
 {
   bool bVar1;
@@ -3765,7 +3765,7 @@ LAB_000f096c: ;
 }
 
 /* FUN_000f09c0 @ 0xf09c0 (1256 bytes) */
-int FUN_000f09c0(param_1)
+void FUN_000f09c0(param_1)
   int param_1;
 {
   bool bVar1;
@@ -3994,7 +3994,7 @@ LAB_000f0e50:
 }
 
 /* FUN_000f0eac @ 0xf0eac (1336 bytes) */
-int FUN_000f0eac(param_1)
+void FUN_000f0eac(param_1)
   int param_1;
 {
   bool bVar1;
@@ -4217,7 +4217,7 @@ LAB_000f12f4:
 }
 
 /* FUN_000f13e8 @ 0xf13e8 (664 bytes) */
-int FUN_000f13e8(param_1)
+void FUN_000f13e8(param_1)
   int param_1;
 {
   char cVar1;
@@ -4334,7 +4334,7 @@ int FUN_000f13e8(param_1)
 }
 
 /* FUN_000f1684 @ 0xf1684 (848 bytes) */
-int FUN_000f1684(param_1)
+void FUN_000f1684(param_1)
   int param_1;
 {
   char cVar1;
@@ -4500,7 +4500,7 @@ LAB_000f19ac:
 }
 
 /* FUN_000f19d8 @ 0xf19d8 (996 bytes) */
-int FUN_000f19d8(param_1)
+void FUN_000f19d8(param_1)
   int param_1;
 {
   char cVar1;
@@ -4695,7 +4695,7 @@ LAB_000f1d94: ;
 }
 
 /* FUN_000f1dc0 @ 0xf1dc0 (860 bytes) */
-int FUN_000f1dc0(param_1)
+void FUN_000f1dc0(param_1)
   int param_1;
 {
   char cVar1;
@@ -4860,7 +4860,7 @@ LAB_000f20f4:
 }
 
 /* FUN_000f2120 @ 0xf2120 (856 bytes) */
-int FUN_000f2120(param_1)
+void FUN_000f2120(param_1)
   int param_1;
 {
   char cVar1;
@@ -5026,7 +5026,7 @@ LAB_000f2450:
 }
 
 /* FUN_000f247c @ 0xf247c (856 bytes) */
-int FUN_000f247c(param_1)
+void FUN_000f247c(param_1)
   int param_1;
 {
   char cVar1;
@@ -5190,7 +5190,7 @@ LAB_000f27ac:
 }
 
 /* _gleFlushAtomicFunc @ 0xf27d4 (64 bytes) */
-int _gleFlushAtomicFunc(param_1)
+void _gleFlushAtomicFunc(param_1)
   int param_1;
 {
   (**(code **)(param_1 + 0x4a08))(param_1);
@@ -5218,7 +5218,7 @@ void _gleFlushAtomicTCLRDirtyFunc(int param_1,double fparam_1,double fparam_2,do
 }
 
 /* _gleFlushLineLoopFunc @ 0xf28c0 (212 bytes) */
-int _gleFlushLineLoopFunc(param_1)
+void _gleFlushLineLoopFunc(param_1)
   int param_1;
 {
   int iVar1;
@@ -5263,7 +5263,7 @@ LAB_000f291c:
 }
 
 /* _gleFlushLineLoopTCLFunc @ 0xf2994 (180 bytes) */
-int _gleFlushLineLoopTCLFunc(param_1)
+void _gleFlushLineLoopTCLFunc(param_1)
   int param_1;
 {
   int iVar1;
@@ -5350,7 +5350,7 @@ void _gleFlushLineLoopTCLRDirtyFunc(int param_1,double fparam_1,double fparam_2,
 }
 
 /* _gleFlushLineStripFunc @ 0xf2b6c (140 bytes) */
-int _gleFlushLineStripFunc(param_1)
+void _gleFlushLineStripFunc(param_1)
   int param_1;
 {
   int iVar1;
@@ -5380,7 +5380,7 @@ int _gleFlushLineStripFunc(param_1)
 }
 
 /* _gleFlushLineStripTCLFunc @ 0xf2bf8 (124 bytes) */
-int _gleFlushLineStripTCLFunc(param_1)
+void _gleFlushLineStripTCLFunc(param_1)
   int param_1;
 {
   int iVar1;
@@ -5445,7 +5445,7 @@ void _gleFlushLineStripTCLRDirtyFunc(int param_1,double fparam_1,double fparam_2
 }
 
 /* _gleFlushTriQuadStripFunc @ 0xf2d60 (196 bytes) */
-int _gleFlushTriQuadStripFunc(param_1)
+void _gleFlushTriQuadStripFunc(param_1)
   int param_1;
 {
   short sVar1;
@@ -5490,7 +5490,7 @@ int _gleFlushTriQuadStripFunc(param_1)
 }
 
 /* _gleFlushTriQuadStripTCLFunc @ 0xf2e24 (120 bytes) */
-int _gleFlushTriQuadStripTCLFunc(param_1)
+void _gleFlushTriQuadStripTCLFunc(param_1)
   int param_1;
 {
   short sVar1;
@@ -5557,7 +5557,7 @@ void _gleFlushTriQuadStripTCLRDirtyFunc(int param_1,double fparam_1,double fpara
 }
 
 /* _gleFlushTriangleFanFunc @ 0xf2f84 (200 bytes) */
-int _gleFlushTriangleFanFunc(param_1)
+void _gleFlushTriangleFanFunc(param_1)
   int param_1;
 {
   short sVar1;
@@ -5602,7 +5602,7 @@ int _gleFlushTriangleFanFunc(param_1)
 }
 
 /* _gleFlushTriangleFanTCLFunc @ 0xf304c (120 bytes) */
-int _gleFlushTriangleFanTCLFunc(param_1)
+void _gleFlushTriangleFanTCLFunc(param_1)
   int param_1;
 {
   int iVar1;
@@ -5665,7 +5665,7 @@ void _gleFlushTriangleFanTCLRDirtyFunc(int param_1,double fparam_1,double fparam
 }
 
 /* _gleFlushPolygonFunc @ 0xf31ac (240 bytes) */
-int _gleFlushPolygonFunc(param_1)
+void _gleFlushPolygonFunc(param_1)
   int param_1;
 {
   short sVar1;
@@ -5719,7 +5719,7 @@ int _gleFlushPolygonFunc(param_1)
 }
 
 /* _gleFlushPolygonTCLFunc @ 0xf329c (220 bytes) */
-int _gleFlushPolygonTCLFunc(param_1)
+void _gleFlushPolygonTCLFunc(param_1)
   int param_1;
 {
   int iVar1;
@@ -5806,19 +5806,19 @@ void _gleFlushPolygonTCLRDirtyFunc(int param_1,double fparam_1,double fparam_2,d
 }
 
 /* _gleInitPrimitiveData @ 0xf34c0 (4 bytes) */
-int _gleInitPrimitiveData()
+void _gleInitPrimitiveData()
 {
   return;
 }
 
 /* _gleRenderNoop @ 0xf34c4 (4 bytes) */
-int _gleRenderNoop()
+void _gleRenderNoop()
 {
   return;
 }
 
 /* _gleFlushNoop @ 0xf34c8 (12 bytes) */
-int _gleFlushNoop(param_1)
+void _gleFlushNoop(param_1)
   int param_1;
 {
   *(undefined4 *)(param_1 + 0x4858) = *(undefined4 *)(param_1 + 0x4854);

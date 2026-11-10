@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* FUN_0009dbfc @ 0x9dbfc (1068 bytes) */
-int FUN_0009dbfc(param_1, param_2, param_3, param_4, param_5)
+void FUN_0009dbfc(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   uint param_3;
@@ -108,7 +108,7 @@ LAB_0009dd7c:
   piVar12 = (int *)(param_1 + 0x310);
   cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
   if ((iVar8 != 0) && (*(int *)(iVar8 + 0xec) != 0)) {
-    ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar8 + 0x10,uVar11,puVar9,pfVar10,in_r8,iVar5,fparam_1,in_f2,in_f3,in_f4,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar8 + 0x10,uVar11,puVar9,pfVar10,in_r8,iVar5,fparam_1,in_f2,in_f3,in_f4,
                in_f5,in_f6,in_f7,in_f8);
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
   }
@@ -300,7 +300,7 @@ void _glTexParameterf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 
 }
 
 /* _glTexParameterfv_CompExec @ 0x9e25c (72 bytes) */
-int _glTexParameterfv_CompExec(param_1, param_2, param_3, param_4)
+void _glTexParameterfv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -414,7 +414,7 @@ int _glTexParameteri_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glTexParameteri_CompExec @ 0x9e484 (72 bytes) */
-int _glTexParameteri_CompExec(param_1, param_2, param_3, param_4)
+void _glTexParameteri_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -426,7 +426,7 @@ int _glTexParameteri_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glTexParameteriv_CompExec @ 0x9e4d4 (72 bytes) */
-int _glTexParameteriv_CompExec(param_1, param_2, param_3, param_4)
+void _glTexParameteriv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -438,7 +438,7 @@ int _glTexParameteriv_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glGetTexParameterPointervAPPLE_Exec @ 0x9e51c (140 bytes) */
-int _glGetTexParameterPointervAPPLE_Exec(param_1, param_2, param_3, param_4)
+void _glGetTexParameterPointervAPPLE_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -771,7 +771,7 @@ LAB_0009ec04:
 }
 
 /* _glTexImage1D_CompExec @ 0x9edc8 (116 bytes) */
-int _glTexImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+void _glTexImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1008,7 +1008,7 @@ LAB_0009f338:
 }
 
 /* _glTexImage2D_FlushExec @ 0x9f3e4 (64 bytes) */
-int _glTexImage2D_FlushExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+void _glTexImage2D_FlushExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1036,7 +1036,7 @@ int _glTexImage2D_FlushExec(param_1, param_2, param_3, param_4, param_5, param_6
 }
 
 /* _glTexImage2D_CompExec @ 0x9f424 (128 bytes) */
-int _glTexImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+void _glTexImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1252,7 +1252,7 @@ LAB_0009f8b8:
 }
 
 /* _glTexImage3D_CompExec @ 0x9f99c (140 bytes) */
-int _glTexImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
+void _glTexImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1491,7 +1491,7 @@ LAB_0009ffa4:
 }
 
 /* _glTexSubImage1D_Exec @ 0xa003c (1600 bytes) */
-int _glTexSubImage1D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _glTexSubImage1D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -1672,7 +1672,7 @@ LAB_000a0110:
 }
 
 /* _glTexSubImage1D_CompExec @ 0xa067c (104 bytes) */
-int _glTexSubImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _glTexSubImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1919,7 +1919,7 @@ LAB_000a0ce0:
 }
 
 /* _glTexSubImage2D_FlushExec @ 0xa0d84 (64 bytes) */
-int _glTexSubImage2D_FlushExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+void _glTexSubImage2D_FlushExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1947,7 +1947,7 @@ int _glTexSubImage2D_FlushExec(param_1, param_2, param_3, param_4, param_5, para
 }
 
 /* _glTexSubImage2D_CompExec @ 0xa0dc4 (128 bytes) */
-int _glTexSubImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+void _glTexSubImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2200,7 +2200,7 @@ LAB_000a141c:
 }
 
 /* _glTexSubImage3D_Exec @ 0xa14c8 (1644 bytes) */
-int _glTexSubImage3D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
+void _glTexSubImage3D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -2397,7 +2397,7 @@ LAB_000a15b0:
 }
 
 /* _glTexSubImage3D_CompExec @ 0xa1b34 (152 bytes) */
-int _glTexSubImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
+void _glTexSubImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2471,7 +2471,7 @@ void _glVertex2d_CompExec(undefined4 param_1,double fparam_1,double fparam_2)
 }
 
 /* _glVertex2dv_Exec @ 0xa1d2c (60 bytes) */
-int _glVertex2dv_Exec(param_1, param_2)
+void _glVertex2dv_Exec(param_1, param_2)
   int param_1;
   double *param_2;
 {
@@ -2504,7 +2504,7 @@ int _glVertex2dv_Comp(param_1, param_2)
 }
 
 /* _glVertex2dv_CompExec @ 0xa1dc8 (56 bytes) */
-int _glVertex2dv_CompExec(param_1, param_2)
+void _glVertex2dv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -2514,7 +2514,7 @@ int _glVertex2dv_CompExec(param_1, param_2)
 }
 
 /* _glVertex3dv_Exec @ 0xa1e00 (64 bytes) */
-int _glVertex3dv_Exec(param_1, param_2)
+void _glVertex3dv_Exec(param_1, param_2)
   int param_1;
   double *param_2;
 {
@@ -2548,7 +2548,7 @@ int _glVertex3dv_Comp(param_1, param_2)
 }
 
 /* _glVertex3dv_CompExec @ 0xa1eac (56 bytes) */
-int _glVertex3dv_CompExec(param_1, param_2)
+void _glVertex3dv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -2598,7 +2598,7 @@ void _glVertex4d_CompExec(undefined4 param_1,double fparam_1,double fparam_2,dou
 }
 
 /* _glVertex4dv_Exec @ 0xa1fe0 (64 bytes) */
-int _glVertex4dv_Exec(param_1, param_2)
+void _glVertex4dv_Exec(param_1, param_2)
   int param_1;
   double *param_2;
 {
@@ -2633,7 +2633,7 @@ int _glVertex4dv_Comp(param_1, param_2)
 }
 
 /* _glVertex4dv_CompExec @ 0xa2098 (56 bytes) */
-int _glVertex4dv_CompExec(param_1, param_2)
+void _glVertex4dv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -2664,7 +2664,7 @@ void _glVertex2f_CompExec(undefined4 param_1,double fparam_1,double fparam_2)
 }
 
 /* _glVertex2fv_Exec @ 0xa2184 (52 bytes) */
-int _glVertex2fv_Exec(param_1, param_2)
+void _glVertex2fv_Exec(param_1, param_2)
   int param_1;
   float *param_2;
 {
@@ -2697,7 +2697,7 @@ int _glVertex2fv_Comp(param_1, param_2)
 }
 
 /* _glVertex2fv_CompExec @ 0xa2210 (56 bytes) */
-int _glVertex2fv_CompExec(param_1, param_2)
+void _glVertex2fv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -2707,7 +2707,7 @@ int _glVertex2fv_CompExec(param_1, param_2)
 }
 
 /* _glVertex3fv_Exec @ 0xa2248 (52 bytes) */
-int _glVertex3fv_Exec(param_1, param_2)
+void _glVertex3fv_Exec(param_1, param_2)
   int param_1;
   float *param_2;
 {
@@ -2741,7 +2741,7 @@ int _glVertex3fv_Comp(param_1, param_2)
 }
 
 /* _glVertex3fv_CompExec @ 0xa22dc (56 bytes) */
-int _glVertex3fv_CompExec(param_1, param_2)
+void _glVertex3fv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {

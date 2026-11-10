@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gleSetEnable_CLIP_PLANE @ 0xcb284 (108 bytes) */
-int _gleSetEnable_CLIP_PLANE(param_1, param_2, param_3, param_4)
+void _gleSetEnable_CLIP_PLANE(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -24,7 +24,7 @@ int _gleSetEnable_CLIP_PLANE(param_1, param_2, param_3, param_4)
 }
 
 /* _gleSetEnable_TEXTURE_GEN_S @ 0xcb2f0 (104 bytes) */
-int _gleSetEnable_TEXTURE_GEN_S(param_1, param_2, param_3)
+void _gleSetEnable_TEXTURE_GEN_S(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -44,7 +44,7 @@ int _gleSetEnable_TEXTURE_GEN_S(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_TEXTURE_GEN_T @ 0xcb358 (104 bytes) */
-int _gleSetEnable_TEXTURE_GEN_T(param_1, param_2, param_3)
+void _gleSetEnable_TEXTURE_GEN_T(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -64,7 +64,7 @@ int _gleSetEnable_TEXTURE_GEN_T(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_TEXTURE_GEN_R @ 0xcb3c0 (96 bytes) */
-int _gleSetEnable_TEXTURE_GEN_R(param_1, param_2, param_3)
+void _gleSetEnable_TEXTURE_GEN_R(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -83,7 +83,7 @@ int _gleSetEnable_TEXTURE_GEN_R(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_TEXTURE_GEN_Q @ 0xcb420 (96 bytes) */
-int _gleSetEnable_TEXTURE_GEN_Q(param_1, param_2, param_3)
+void _gleSetEnable_TEXTURE_GEN_Q(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -102,7 +102,7 @@ int _gleSetEnable_TEXTURE_GEN_Q(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP1_VERTEX_3 @ 0xcb480 (76 bytes) */
-int _gleSetEnable_MAP1_VERTEX_3(param_1, param_2, param_3)
+void _gleSetEnable_MAP1_VERTEX_3(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -120,7 +120,7 @@ int _gleSetEnable_MAP1_VERTEX_3(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP1_VERTEX_4 @ 0xcb4cc (76 bytes) */
-int _gleSetEnable_MAP1_VERTEX_4(param_1, param_2, param_3)
+void _gleSetEnable_MAP1_VERTEX_4(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -138,7 +138,7 @@ int _gleSetEnable_MAP1_VERTEX_4(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP1_COLOR_4 @ 0xcb518 (52 bytes) */
-int _gleSetEnable_MAP1_COLOR_4(param_1, param_2, param_3)
+void _gleSetEnable_MAP1_COLOR_4(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -150,7 +150,7 @@ int _gleSetEnable_MAP1_COLOR_4(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP1_NORMAL @ 0xcb554 (60 bytes) */
-int _gleSetEnable_MAP1_NORMAL(param_1, param_2, param_3)
+void _gleSetEnable_MAP1_NORMAL(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -168,7 +168,7 @@ int _gleSetEnable_MAP1_NORMAL(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP1_TEXTURE_COORD_1 @ 0xcb590 (100 bytes) */
-int _gleSetEnable_MAP1_TEXTURE_COORD_1(param_1, param_2, param_3)
+void _gleSetEnable_MAP1_TEXTURE_COORD_1(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -187,7 +187,7 @@ int _gleSetEnable_MAP1_TEXTURE_COORD_1(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP1_TEXTURE_COORD_2 @ 0xcb5f4 (100 bytes) */
-int _gleSetEnable_MAP1_TEXTURE_COORD_2(param_1, param_2, param_3)
+void _gleSetEnable_MAP1_TEXTURE_COORD_2(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -206,7 +206,7 @@ int _gleSetEnable_MAP1_TEXTURE_COORD_2(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP1_TEXTURE_COORD_3 @ 0xcb658 (100 bytes) */
-int _gleSetEnable_MAP1_TEXTURE_COORD_3(param_1, param_2, param_3)
+void _gleSetEnable_MAP1_TEXTURE_COORD_3(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -225,7 +225,7 @@ int _gleSetEnable_MAP1_TEXTURE_COORD_3(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP1_TEXTURE_COORD_4 @ 0xcb6bc (100 bytes) */
-int _gleSetEnable_MAP1_TEXTURE_COORD_4(param_1, param_2, param_3)
+void _gleSetEnable_MAP1_TEXTURE_COORD_4(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -244,7 +244,7 @@ int _gleSetEnable_MAP1_TEXTURE_COORD_4(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP2_VERTEX_3 @ 0xcb720 (76 bytes) */
-int _gleSetEnable_MAP2_VERTEX_3(param_1, param_2, param_3)
+void _gleSetEnable_MAP2_VERTEX_3(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -262,7 +262,7 @@ int _gleSetEnable_MAP2_VERTEX_3(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP2_VERTEX_4 @ 0xcb76c (76 bytes) */
-int _gleSetEnable_MAP2_VERTEX_4(param_1, param_2, param_3)
+void _gleSetEnable_MAP2_VERTEX_4(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -280,7 +280,7 @@ int _gleSetEnable_MAP2_VERTEX_4(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP2_COLOR_4 @ 0xcb7b8 (52 bytes) */
-int _gleSetEnable_MAP2_COLOR_4(param_1, param_2, param_3)
+void _gleSetEnable_MAP2_COLOR_4(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -292,7 +292,7 @@ int _gleSetEnable_MAP2_COLOR_4(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP2_NORMAL @ 0xcb7f4 (72 bytes) */
-int _gleSetEnable_MAP2_NORMAL(param_1, param_2, param_3)
+void _gleSetEnable_MAP2_NORMAL(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -309,7 +309,7 @@ int _gleSetEnable_MAP2_NORMAL(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP2_TEXTURE_COORD_1 @ 0xcb83c (100 bytes) */
-int _gleSetEnable_MAP2_TEXTURE_COORD_1(param_1, param_2, param_3)
+void _gleSetEnable_MAP2_TEXTURE_COORD_1(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -328,7 +328,7 @@ int _gleSetEnable_MAP2_TEXTURE_COORD_1(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP2_TEXTURE_COORD_2 @ 0xcb8a0 (100 bytes) */
-int _gleSetEnable_MAP2_TEXTURE_COORD_2(param_1, param_2, param_3)
+void _gleSetEnable_MAP2_TEXTURE_COORD_2(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -347,7 +347,7 @@ int _gleSetEnable_MAP2_TEXTURE_COORD_2(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP2_TEXTURE_COORD_3 @ 0xcb904 (100 bytes) */
-int _gleSetEnable_MAP2_TEXTURE_COORD_3(param_1, param_2, param_3)
+void _gleSetEnable_MAP2_TEXTURE_COORD_3(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -366,7 +366,7 @@ int _gleSetEnable_MAP2_TEXTURE_COORD_3(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MAP2_TEXTURE_COORD_4 @ 0xcb968 (100 bytes) */
-int _gleSetEnable_MAP2_TEXTURE_COORD_4(param_1, param_2, param_3)
+void _gleSetEnable_MAP2_TEXTURE_COORD_4(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -385,7 +385,7 @@ int _gleSetEnable_MAP2_TEXTURE_COORD_4(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_POINT_SMOOTH @ 0xcb9cc (32 bytes) */
-int _gleSetEnable_POINT_SMOOTH(param_1, param_2, param_3)
+void _gleSetEnable_POINT_SMOOTH(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -399,7 +399,7 @@ int _gleSetEnable_POINT_SMOOTH(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_COLOR_MATERIAL @ 0xcb9ec (136 bytes) */
-int _gleSetEnable_COLOR_MATERIAL(param_1, param_2, param_3)
+void _gleSetEnable_COLOR_MATERIAL(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -420,7 +420,7 @@ int _gleSetEnable_COLOR_MATERIAL(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_AUTO_NORMAL @ 0xcba74 (72 bytes) */
-int _gleSetEnable_AUTO_NORMAL(param_1, param_2, param_3)
+void _gleSetEnable_AUTO_NORMAL(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -437,7 +437,7 @@ int _gleSetEnable_AUTO_NORMAL(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_POLYGON_OFFSET_POINT @ 0xcbabc (48 bytes) */
-int _gleSetEnable_POLYGON_OFFSET_POINT(param_1, param_2, param_3)
+void _gleSetEnable_POLYGON_OFFSET_POINT(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -454,7 +454,7 @@ int _gleSetEnable_POLYGON_OFFSET_POINT(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_POLYGON_OFFSET_LINE @ 0xcbaec (48 bytes) */
-int _gleSetEnable_POLYGON_OFFSET_LINE(param_1, param_2, param_3)
+void _gleSetEnable_POLYGON_OFFSET_LINE(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -471,7 +471,7 @@ int _gleSetEnable_POLYGON_OFFSET_LINE(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_POLYGON_OFFSET_FILL @ 0xcbb1c (48 bytes) */
-int _gleSetEnable_POLYGON_OFFSET_FILL(param_1, param_2, param_3)
+void _gleSetEnable_POLYGON_OFFSET_FILL(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -488,7 +488,7 @@ int _gleSetEnable_POLYGON_OFFSET_FILL(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_REGISTER_COMBINERS_NV @ 0xcbb4c (32 bytes) */
-int _gleSetEnable_REGISTER_COMBINERS_NV(param_1, param_2, param_3)
+void _gleSetEnable_REGISTER_COMBINERS_NV(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -502,7 +502,7 @@ int _gleSetEnable_REGISTER_COMBINERS_NV(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_PER_STAGE_CONSTANTS_NV @ 0xcbb6c (32 bytes) */
-int _gleSetEnable_PER_STAGE_CONSTANTS_NV(param_1, param_2, param_3)
+void _gleSetEnable_PER_STAGE_CONSTANTS_NV(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -516,7 +516,7 @@ int _gleSetEnable_PER_STAGE_CONSTANTS_NV(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_TEXTURE_SHADER_NV @ 0xcbb8c (96 bytes) */
-int _gleSetEnable_TEXTURE_SHADER_NV(param_1, param_2, param_3)
+void _gleSetEnable_TEXTURE_SHADER_NV(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -538,7 +538,7 @@ int _gleSetEnable_TEXTURE_SHADER_NV(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_POINT_SPRITE_ARB @ 0xcbbec (32 bytes) */
-int _gleSetEnable_POINT_SPRITE_ARB(param_1, param_2, param_3)
+void _gleSetEnable_POINT_SPRITE_ARB(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -552,7 +552,7 @@ int _gleSetEnable_POINT_SPRITE_ARB(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_DEPTH_CLAMP_NV @ 0xcbc0c (32 bytes) */
-int _gleSetEnable_DEPTH_CLAMP_NV(param_1, param_2, param_3)
+void _gleSetEnable_DEPTH_CLAMP_NV(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -566,7 +566,7 @@ int _gleSetEnable_DEPTH_CLAMP_NV(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_RASTER_POSITION_UNCLIPPED_IBM @ 0xcbc2c (8 bytes) */
-int _gleSetEnable_RASTER_POSITION_UNCLIPPED_IBM(param_1, param_2, param_3)
+void _gleSetEnable_RASTER_POSITION_UNCLIPPED_IBM(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -576,7 +576,7 @@ int _gleSetEnable_RASTER_POSITION_UNCLIPPED_IBM(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_PN_TRIANGLES_ATI @ 0xcbc34 (32 bytes) */
-int _gleSetEnable_PN_TRIANGLES_ATI(param_1, param_2, param_3)
+void _gleSetEnable_PN_TRIANGLES_ATI(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -590,7 +590,7 @@ int _gleSetEnable_PN_TRIANGLES_ATI(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MULTISAMPLE @ 0xcbc54 (32 bytes) */
-int _gleSetEnable_MULTISAMPLE(param_1, param_2, param_3)
+void _gleSetEnable_MULTISAMPLE(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -604,7 +604,7 @@ int _gleSetEnable_MULTISAMPLE(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_SAMPLE_ALPHA_TO_COVERAGE @ 0xcbc74 (32 bytes) */
-int _gleSetEnable_SAMPLE_ALPHA_TO_COVERAGE(param_1, param_2, param_3)
+void _gleSetEnable_SAMPLE_ALPHA_TO_COVERAGE(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -618,7 +618,7 @@ int _gleSetEnable_SAMPLE_ALPHA_TO_COVERAGE(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_SAMPLE_ALPHA_TO_ONE @ 0xcbc94 (32 bytes) */
-int _gleSetEnable_SAMPLE_ALPHA_TO_ONE(param_1, param_2, param_3)
+void _gleSetEnable_SAMPLE_ALPHA_TO_ONE(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -632,7 +632,7 @@ int _gleSetEnable_SAMPLE_ALPHA_TO_ONE(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_SAMPLE_COVERAGE @ 0xcbcb4 (32 bytes) */
-int _gleSetEnable_SAMPLE_COVERAGE(param_1, param_2, param_3)
+void _gleSetEnable_SAMPLE_COVERAGE(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -646,7 +646,7 @@ int _gleSetEnable_SAMPLE_COVERAGE(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_VERTEX_BLEND_ARB @ 0xcbcd4 (92 bytes) */
-int _gleSetEnable_VERTEX_BLEND_ARB(param_1, param_2, param_3)
+void _gleSetEnable_VERTEX_BLEND_ARB(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -662,7 +662,7 @@ int _gleSetEnable_VERTEX_BLEND_ARB(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_WEIGHT_SUM_UNITY_ARB @ 0xcbd30 (32 bytes) */
-int _gleSetEnable_WEIGHT_SUM_UNITY_ARB(param_1, param_2, param_3)
+void _gleSetEnable_WEIGHT_SUM_UNITY_ARB(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -676,7 +676,7 @@ int _gleSetEnable_WEIGHT_SUM_UNITY_ARB(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_VERTEX_PROGRAM_POINT_SIZE_ARB @ 0xcbd50 (32 bytes) */
-int _gleSetEnable_VERTEX_PROGRAM_POINT_SIZE_ARB(param_1, param_2, param_3)
+void _gleSetEnable_VERTEX_PROGRAM_POINT_SIZE_ARB(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -690,7 +690,7 @@ int _gleSetEnable_VERTEX_PROGRAM_POINT_SIZE_ARB(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_VERTEX_PROGRAM_TWO_SIDE_ARB @ 0xcbd70 (72 bytes) */
-int _gleSetEnable_VERTEX_PROGRAM_TWO_SIDE_ARB(param_1, param_2, param_3)
+void _gleSetEnable_VERTEX_PROGRAM_TWO_SIDE_ARB(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -704,7 +704,7 @@ int _gleSetEnable_VERTEX_PROGRAM_TWO_SIDE_ARB(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_COLOR_SUM @ 0xcbdd8 (192 bytes) */
-int _gleSetEnable_COLOR_SUM(param_1, param_2, param_3)
+void _gleSetEnable_COLOR_SUM(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -741,7 +741,7 @@ int _gleSetEnable_COLOR_SUM(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_COLOR_TABLE @ 0xcbe98 (48 bytes) */
-int _gleSetEnable_COLOR_TABLE(param_1, param_2, param_3)
+void _gleSetEnable_COLOR_TABLE(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -761,7 +761,7 @@ int _gleSetEnable_COLOR_TABLE(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_POST_COLOR_MATRIX_COLOR_TABLE @ 0xcbec8 (48 bytes) */
-int _gleSetEnable_POST_COLOR_MATRIX_COLOR_TABLE(param_1, param_2, param_3)
+void _gleSetEnable_POST_COLOR_MATRIX_COLOR_TABLE(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -781,7 +781,7 @@ int _gleSetEnable_POST_COLOR_MATRIX_COLOR_TABLE(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_POST_CONVOLUTION_COLOR_TABLE @ 0xcbef8 (48 bytes) */
-int _gleSetEnable_POST_CONVOLUTION_COLOR_TABLE(param_1, param_2, param_3)
+void _gleSetEnable_POST_CONVOLUTION_COLOR_TABLE(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -801,7 +801,7 @@ int _gleSetEnable_POST_CONVOLUTION_COLOR_TABLE(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_HISTOGRAM @ 0xcbf28 (36 bytes) */
-int _gleSetEnable_HISTOGRAM(param_1, param_2, param_3)
+void _gleSetEnable_HISTOGRAM(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -820,7 +820,7 @@ int _gleSetEnable_HISTOGRAM(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_MINMAX @ 0xcbf4c (36 bytes) */
-int _gleSetEnable_MINMAX(param_1, param_2, param_3)
+void _gleSetEnable_MINMAX(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -839,7 +839,7 @@ int _gleSetEnable_MINMAX(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_CONVOLUTION_1D @ 0xcbf70 (36 bytes) */
-int _gleSetEnable_CONVOLUTION_1D(param_1, param_2, param_3)
+void _gleSetEnable_CONVOLUTION_1D(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -855,7 +855,7 @@ int _gleSetEnable_CONVOLUTION_1D(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_CONVOLUTION_2D @ 0xcbf94 (36 bytes) */
-int _gleSetEnable_CONVOLUTION_2D(param_1, param_2, param_3)
+void _gleSetEnable_CONVOLUTION_2D(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -874,7 +874,7 @@ int _gleSetEnable_CONVOLUTION_2D(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_SEPARABLE_2D @ 0xcbfb8 (36 bytes) */
-int _gleSetEnable_SEPARABLE_2D(param_1, param_2, param_3)
+void _gleSetEnable_SEPARABLE_2D(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -893,7 +893,7 @@ int _gleSetEnable_SEPARABLE_2D(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_STENCIL_TEST_TWO_SIDE_EXT @ 0xcbfdc (44 bytes) */
-int _gleSetEnable_STENCIL_TEST_TWO_SIDE_EXT(param_1, param_2, param_3)
+void _gleSetEnable_STENCIL_TEST_TWO_SIDE_EXT(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -910,7 +910,7 @@ int _gleSetEnable_STENCIL_TEST_TWO_SIDE_EXT(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_DEPTH_BOUNDS_TEST_EXT @ 0xcc008 (32 bytes) */
-int _gleSetEnable_DEPTH_BOUNDS_TEST_EXT(param_1, param_2, param_3)
+void _gleSetEnable_DEPTH_BOUNDS_TEST_EXT(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -924,7 +924,7 @@ int _gleSetEnable_DEPTH_BOUNDS_TEST_EXT(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_Error @ 0xcc028 (24 bytes) */
-int _gleSetEnable_Error(param_1)
+void _gleSetEnable_Error(param_1)
   int param_1;
 {
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -935,7 +935,7 @@ int _gleSetEnable_Error(param_1)
 }
 
 /* _gleFeedbackCopyPixels @ 0xcc040 (72 bytes) */
-int _gleFeedbackCopyPixels(param_1, param_2)
+void _gleFeedbackCopyPixels(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -945,7 +945,7 @@ int _gleFeedbackCopyPixels(param_1, param_2)
 }
 
 /* _gleFeedbackDrawPixels @ 0xcc088 (72 bytes) */
-int _gleFeedbackDrawPixels(param_1, param_2)
+void _gleFeedbackDrawPixels(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -955,7 +955,7 @@ int _gleFeedbackDrawPixels(param_1, param_2)
 }
 
 /* _gleFeedbackBitmap @ 0xcc0d0 (72 bytes) */
-int _gleFeedbackBitmap(param_1, param_2)
+void _gleFeedbackBitmap(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -965,7 +965,7 @@ int _gleFeedbackBitmap(param_1, param_2)
 }
 
 /* _gleFeedbackPoints @ 0xcc118 (112 bytes) */
-int _gleFeedbackPoints(param_1, param_2, param_3)
+void _gleFeedbackPoints(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;
@@ -981,7 +981,7 @@ int _gleFeedbackPoints(param_1, param_2, param_3)
 }
 
 /* _gleFeedbackPointsPtr @ 0xcc188 (112 bytes) */
-int _gleFeedbackPointsPtr(param_1, param_2, param_3)
+void _gleFeedbackPointsPtr(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 *param_2;
   int param_3;
@@ -997,7 +997,7 @@ int _gleFeedbackPointsPtr(param_1, param_2, param_3)
 }
 
 /* FUN_000cc204 @ 0xcc204 (116 bytes) */
-int FUN_000cc204(param_1, param_2, param_3)
+void FUN_000cc204(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;

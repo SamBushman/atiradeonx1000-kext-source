@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gleFeedbackLineStrip @ 0xcc278 (284 bytes) */
-int _gleFeedbackLineStrip(param_1, param_2, param_3, param_4)
+void _gleFeedbackLineStrip(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   int param_3;
@@ -48,7 +48,7 @@ int _gleFeedbackLineStrip(param_1, param_2, param_3, param_4)
 }
 
 /* _gleFeedbackLineLoop @ 0xcc394 (344 bytes) */
-int _gleFeedbackLineLoop(param_1, param_2, param_3, param_4)
+void _gleFeedbackLineLoop(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   int param_3;
@@ -100,7 +100,7 @@ int _gleFeedbackLineLoop(param_1, param_2, param_3, param_4)
 }
 
 /* _gleFeedbackLinesPtr @ 0xcc4ec (276 bytes) */
-int _gleFeedbackLinesPtr(param_1, param_2, param_3, param_4)
+void _gleFeedbackLinesPtr(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 *param_2;
   int param_3;
@@ -145,7 +145,7 @@ int _gleFeedbackLinesPtr(param_1, param_2, param_3, param_4)
 }
 
 /* _gleFeedbackPolygon @ 0xcc600 (480 bytes) */
-int _gleFeedbackPolygon(param_1, param_2, param_3, param_4)
+void _gleFeedbackPolygon(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   uint param_2;
   uint param_3;
@@ -279,7 +279,7 @@ double _gleFeedbackTriangles(undefined4 param_1,int param_2,int param_3,uint par
 }
 
 /* _gleFeedbackTriangleFan @ 0xcca44 (472 bytes) */
-int _gleFeedbackTriangleFan(param_1, param_2, param_3, param_4, param_5)
+double _gleFeedbackTriangleFan(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   int param_3;
@@ -345,7 +345,7 @@ int _gleFeedbackTriangleFan(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gleFeedbackTriangleStrip @ 0xccc1c (764 bytes) */
-int _gleFeedbackTriangleStrip(param_1, param_2, param_3, param_4)
+double _gleFeedbackTriangleStrip(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   int param_3;
@@ -446,7 +446,7 @@ int _gleFeedbackTriangleStrip(param_1, param_2, param_3, param_4)
 }
 
 /* _gleFeedbackQuads @ 0xccf18 (508 bytes) */
-int _gleFeedbackQuads(param_1, param_2, param_3, param_4)
+double _gleFeedbackQuads(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   int param_3;
@@ -525,7 +525,7 @@ int _gleFeedbackQuads(param_1, param_2, param_3, param_4)
 }
 
 /* _gleFeedbackQuadStrip @ 0xcd114 (552 bytes) */
-int _gleFeedbackQuadStrip(param_1, param_2, param_3, param_4)
+double _gleFeedbackQuadStrip(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   int param_3;
@@ -642,7 +642,7 @@ int _gleTestFence(param_1, param_2, param_3)
 }
 
 /* _gleFinishFence @ 0xcd410 (172 bytes) */
-int _gleFinishFence(param_1, param_2, param_3)
+void _gleFinishFence(param_1, param_2, param_3)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -683,7 +683,7 @@ int _gleFinishFence(param_1, param_2, param_3)
 }
 
 /* _gleBindRenderbuffer @ 0xcd4bc (268 bytes) */
-int _gleBindRenderbuffer(param_1, param_2)
+void _gleBindRenderbuffer(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -727,7 +727,7 @@ int _gleBindRenderbuffer(param_1, param_2)
 }
 
 /* _gleRenderbufferStorage @ 0xcd5c8 (612 bytes) */
-int _gleRenderbufferStorage(param_1, param_2, param_3, param_4, param_5)
+void _gleRenderbufferStorage(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -823,7 +823,7 @@ LAB_000cd6a0:
 }
 
 /* _gleCreatePluginFramebuffer @ 0xcd82c (132 bytes) */
-int _gleCreatePluginFramebuffer(param_1, param_2)
+void _gleCreatePluginFramebuffer(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -853,7 +853,7 @@ int _gleCreatePluginFramebuffer(param_1, param_2)
 }
 
 /* _gleDestroyPluginFramebuffer @ 0xcd8b0 (120 bytes) */
-int _gleDestroyPluginFramebuffer(param_1, param_2)
+void _gleDestroyPluginFramebuffer(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -957,7 +957,7 @@ int _gleCreateFramebufferObject(param_1, param_2)
 }
 
 /* _gleFreeFramebufferObject @ 0xcda80 (116 bytes) */
-int _gleFreeFramebufferObject(param_1, param_2)
+void _gleFreeFramebufferObject(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
@@ -983,7 +983,7 @@ int _gleFreeFramebufferObject(param_1, param_2)
 }
 
 /* _gleUpdateFramebufferDirtyBits @ 0xcdaf4 (192 bytes) */
-int _gleUpdateFramebufferDirtyBits(param_1, param_2)
+void _gleUpdateFramebufferDirtyBits(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1020,7 +1020,7 @@ int _gleUpdateFramebufferDirtyBits(param_1, param_2)
 }
 
 /* _gleBindFramebuffer @ 0xcdbb4 (1100 bytes) */
-int _gleBindFramebuffer(param_1, param_2)
+void _gleBindFramebuffer(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1196,7 +1196,7 @@ LAB_000cdca4:
 }
 
 /* _gleFramebufferTexture @ 0xce000 (852 bytes) */
-int _gleFramebufferTexture(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _gleFramebufferTexture(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -1314,7 +1314,7 @@ int _gleFramebufferTexture(param_1, param_2, param_3, param_4, param_5, param_6,
 }
 
 /* _gleCheckFramebufferAttachmentCompleteness @ 0xce354 (196 bytes) */
-int _gleCheckFramebufferAttachmentCompleteness(param_1, param_2, param_3, param_4)
+double _gleCheckFramebufferAttachmentCompleteness(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   int *param_3;
@@ -1354,46 +1354,41 @@ int _gleCheckFramebufferAttachmentCompleteness(param_1, param_2, param_3, param_
 }
 
 /* _gleUpdateFramebufferCompleteness @ 0xce418 (588 bytes) */
-int _gleUpdateFramebufferCompleteness(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gleUpdateFramebufferCompleteness(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   ushort uVar1;
   undefined4 uVar2;
   int iVar3;
   uint uVar4;
   int iVar5;
-  undefined4 extraout_r3;
-  int iVar6;
-  int *piVar7;
-  ushort *puVar8;
-  short sVar9;
-  int iVar10;
-  uint uVar11;
-  int *piVar12;
-  int iVar13;
-  double extraout_f1;
+  int *piVar6;
+  ushort *puVar7;
+  short sVar8;
+  int iVar9;
+  uint uVar10;
+  int *piVar11;
+  int iVar12;
   int local_50 [8];
   
-  sVar9 = 0;
+  sVar8 = 0;
   *(undefined1 *)(param_1 + 0x759d) = 0;
   *(undefined4 *)(param_2 + 0xdc) = 0;
   *(undefined2 *)(param_2 + 0xba) = 0;
-  iVar10 = 0;
+  iVar9 = 0;
   *(undefined2 *)(param_2 + 0xbc) = 0;
-  piVar12 = (int *)(param_2 + 0xc4);
-  iVar5 = param_1;
-  uVar11 = 0;
-  iVar13 = param_2;
+  piVar11 = (int *)(param_2 + 0xc4);
+  uVar10 = 0;
+  iVar12 = param_2;
   do {
-    iVar6 = *piVar12;
-    piVar12 = piVar12 + 1;
-    uVar4 = uVar11;
-    if (iVar6 != 0) {
-      iVar3 = iVar6 + 0x10 + *(int *)(iVar13 + 0x24) * 0x168 + *(int *)(iVar13 + 0x28) * 0x18;
-      if (*(int *)(iVar13 + 0x30) != *(int *)(iVar3 + 0xc4)) {
-        iVar5 = ((int (*)())_gleCheckFramebufferAttachmentCompleteness)(param_1,iVar6 + 0x10,iVar13 + 0x20,iVar10);
-        fparam_1 = extraout_f1;
+    iVar5 = *piVar11;
+    piVar11 = piVar11 + 1;
+    uVar4 = uVar10;
+    if (iVar5 != 0) {
+      iVar3 = iVar5 + 0x10 + *(int *)(iVar12 + 0x24) * 0x168 + *(int *)(iVar12 + 0x28) * 0x18;
+      if (*(int *)(iVar12 + 0x30) != *(int *)(iVar3 + 0xc4)) {
+        fparam_1 = (double)((int (*)())_gleCheckFramebufferAttachmentCompleteness)(param_1,iVar5 + 0x10,iVar12 + 0x20,iVar9);
       }
-      if (*(int *)(iVar13 + 0x34) != 0) {
+      if (*(int *)(iVar12 + 0x34) != 0) {
         uVar2 = 0x8cd6;
         goto LAB_000ce630;
       }
@@ -1404,64 +1399,64 @@ int _gleUpdateFramebufferCompleteness(int param_1,int param_2,undefined4 param_3
       else if ((*(short *)(param_2 + 0xba) != *(short *)(iVar3 + 200)) ||
               (*(short *)(param_2 + 0xbc) != *(short *)(iVar3 + 0xca))) {
         *(undefined4 *)(param_2 + 0xc0) = 0x8cd9;
-        return iVar5;
+        return;
       }
-      if (iVar10 < 4) {
-        if (sVar9 == 0) {
-          sVar9 = *(short *)(iVar6 + 0x88);
+      if (iVar9 < 4) {
+        if (sVar8 == 0) {
+          sVar8 = *(short *)(iVar5 + 0x88);
         }
-        else if (sVar9 != *(short *)(iVar6 + 0x88)) {
+        else if (sVar8 != *(short *)(iVar5 + 0x88)) {
           uVar2 = 0x8cda;
           goto LAB_000ce630;
         }
       }
       uVar4 = 0;
-      if (uVar11 != 0) {
-        piVar7 = local_50;
+      if (uVar10 != 0) {
+        piVar6 = local_50;
         do {
-          iVar6 = *piVar7;
-          piVar7 = piVar7 + 1;
-          if (iVar6 == iVar3 + 0xc4) {
+          iVar5 = *piVar6;
+          piVar6 = piVar6 + 1;
+          if (iVar5 == iVar3 + 0xc4) {
             uVar2 = 0x8cd8;
             goto LAB_000ce630;
           }
           uVar4 = uVar4 + 1;
-        } while (uVar4 < uVar11);
+        } while (uVar4 < uVar10);
       }
-      uVar4 = uVar11 + 1;
-      local_50[uVar11] = iVar3 + 0xc4;
+      uVar4 = uVar10 + 1;
+      local_50[uVar10] = iVar3 + 0xc4;
     }
-    iVar10 = iVar10 + 1;
-    iVar13 = iVar13 + 0x18;
-    uVar11 = uVar4;
-  } while (iVar10 < 6);
+    iVar9 = iVar9 + 1;
+    iVar12 = iVar12 + 0x18;
+    uVar10 = uVar4;
+  } while (iVar9 < 6);
   if (uVar4 == 0) {
     uVar2 = 0x8cd7;
   }
   else {
-    iVar13 = 0;
-    puVar8 = (ushort *)(param_2 + 0xb0);
+    iVar12 = 0;
+    puVar7 = (ushort *)(param_2 + 0xb0);
     do {
-      uVar1 = *puVar8;
-      puVar8 = puVar8 + 1;
+      uVar1 = *puVar7;
+      puVar7 = puVar7 + 1;
       if ((uVar1 != 0) && (*(int *)((uVar1 - 0x8ce0) * 4 + param_2 + 0xc4) == 0)) {
         uVar2 = 0x8cdb;
         goto LAB_000ce630;
       }
-      iVar13 = iVar13 + 1;
-    } while (iVar13 < 4);
+      iVar12 = iVar12 + 1;
+    } while (iVar12 < 4);
     if ((*(ushort *)(param_2 + 0xb8) == 0) ||
        (*(int *)((*(ushort *)(param_2 + 0xb8) - 0x8ce0) * 4 + param_2 + 0xc4) != 0)) {
       ((void (*)())_gleUpdateViewScissorData)(param_1,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(undefined4 *)(param_2 + 0xc0) = 0;
       *(undefined1 *)(param_1 + 0x759d) = 1;
-      return extraout_r3;
+      return;
     }
     uVar2 = 0x8cdc;
   }
 LAB_000ce630:
   *(undefined4 *)(param_2 + 0xc0) = uVar2;
-  return iVar5;
+  return;
 }
 
 /* _gleCheckFramebufferStatus @ 0xce664 (1200 bytes) */
@@ -1481,7 +1476,7 @@ int _gleCheckFramebufferStatus(int param_1,int param_2,int *param_3,undefined4 p
   double extraout_f1_03;
   
   if (*(int *)(param_2 + 0xdc) != 0) {
-    ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,fparam_1,fparam_2,fparam_3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,fparam_1,fparam_2,fparam_3,
                fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
     fparam_1 = fparam_1;
   }
@@ -1498,7 +1493,7 @@ int _gleCheckFramebufferStatus(int param_1,int param_2,int *param_3,undefined4 p
     piVar7 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar4 != 0) && (*(int *)(iVar4 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar4 + 0x10,param_3,param_4,param_5,param_6,iVar5,fparam_1,fparam_2,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar4 + 0x10,param_3,param_4,param_5,param_6,iVar5,fparam_1,fparam_2,
                  fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -1584,7 +1579,7 @@ LAB_000ce7a4:
   piVar7 = (int *)(param_1 + 0x310);
   cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
   if ((iVar4 != 0) && (*(int *)(iVar4 + 0xec) != 0)) {
-    ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar4 + 0x10,param_3,param_4,param_5,param_6,iVar5,fparam_1,fparam_2,fparam_3
+    ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar4 + 0x10,param_3,param_4,param_5,param_6,iVar5,fparam_1,fparam_2,fparam_3
                ,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
   }
@@ -1696,7 +1691,7 @@ int _gleSynchronizePluginFramebuffer(param_1)
 }
 
 /* _gleFreeFramebufferState @ 0xcebc0 (256 bytes) */
-int _gleFreeFramebufferState(param_1)
+void _gleFreeFramebufferState(param_1)
   int param_1;
 {
   int iVar1;
@@ -1736,7 +1731,7 @@ int _gleFreeFramebufferState(param_1)
 }
 
 /* _gleGenerateMipmap @ 0xcecc0 (208 bytes) */
-int _gleGenerateMipmap(param_1, param_2)
+void _gleGenerateMipmap(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -1795,7 +1790,7 @@ double _gleFogExp2(int param_1,float fparam_1)
 }
 
 /* _gleLFSParse @ 0xcedc8 (612 bytes) */
-int _gleLFSParse(param_1)
+void _gleLFSParse(param_1)
   int param_1;
 {
   uint uVar1;
@@ -1939,7 +1934,7 @@ int _LFSParserShutdown(param_1)
 }
 
 /* _LFSParserFree @ 0xcf0a0 (48 bytes) */
-int _LFSParserFree(param_1)
+void _LFSParserFree(param_1)
   undefined4 param_1;
 {
   ((int (*)())_LFSParserShutdown)(param_1);
@@ -1948,7 +1943,7 @@ int _LFSParserFree(param_1)
 }
 
 /* _LFSParserAttachStream @ 0xcf0d0 (64 bytes) */
-int _LFSParserAttachStream(param_1, param_2)
+void _LFSParserAttachStream(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -2133,7 +2128,7 @@ int _LFSParserAttachString(param_1, param_2, param_3)
 }
 
 /* _LFSParserEatWhiteSpace @ 0xcf4a4 (76 bytes) */
-int _LFSParserEatWhiteSpace(param_1)
+void _LFSParserEatWhiteSpace(param_1)
   int *param_1;
 {
   uint uVar1;
@@ -3354,7 +3349,7 @@ int _LFSParserParse(param_1)
 }
 
 /* _LFSParserBuildErrorString @ 0xd1080 (580 bytes) */
-int _LFSParserBuildErrorString(param_1, param_2)
+void _LFSParserBuildErrorString(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -3588,7 +3583,7 @@ int _LFSStreamChunkCompare(param_1, param_2)
 }
 
 /* _LFSStreamChunkOutputDebugInfo @ 0xd15a8 (684 bytes) */
-int _LFSStreamChunkOutputDebugInfo(param_1)
+void _LFSStreamChunkOutputDebugInfo(param_1)
   byte *param_1;
 {
   byte bVar1;

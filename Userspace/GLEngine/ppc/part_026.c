@@ -127,7 +127,7 @@ int _glUniform1ivARB_ListExec(param_1, param_2)
 }
 
 /* _glUniformMatrix2fvARB_Exec @ 0x8ceb4 (816 bytes) */
-int _glUniformMatrix2fvARB_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glUniformMatrix2fvARB_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -288,7 +288,7 @@ int _glUniformMatrix2fvARB_Exec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glUniformMatrix3fvARB_Exec @ 0x8d1e4 (900 bytes) */
-int _glUniformMatrix3fvARB_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glUniformMatrix3fvARB_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -462,7 +462,7 @@ int _glUniformMatrix3fvARB_Exec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glUniformMatrix4fvARB_Exec @ 0x8d568 (1004 bytes) */
-int _glUniformMatrix4fvARB_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glUniformMatrix4fvARB_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -819,7 +819,7 @@ int _glUniformMatrix4fvARB_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glUniformMatrix2fvARB_CompExec @ 0x8dd10 (80 bytes) */
-int _glUniformMatrix2fvARB_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glUniformMatrix2fvARB_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -832,7 +832,7 @@ int _glUniformMatrix2fvARB_CompExec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glUniformMatrix3fvARB_CompExec @ 0x8dd60 (80 bytes) */
-int _glUniformMatrix3fvARB_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glUniformMatrix3fvARB_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -845,7 +845,7 @@ int _glUniformMatrix3fvARB_CompExec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glUniformMatrix4fvARB_CompExec @ 0x8ddb0 (80 bytes) */
-int _glUniformMatrix4fvARB_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glUniformMatrix4fvARB_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -989,7 +989,7 @@ LAB_0008e178:
 }
 
 /* _glGetObjectParameterfvARB_Exec @ 0x8e1c8 (300 bytes) */
-int _glGetObjectParameterfvARB_Exec(param_1, param_2, param_3, param_4)
+void _glGetObjectParameterfvARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1031,7 +1031,7 @@ int _glGetObjectParameterfvARB_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glGetObjectParameterivARB_Exec @ 0x8e2f4 (256 bytes) */
-int _glGetObjectParameterivARB_Exec(param_1, param_2, param_3, param_4)
+void _glGetObjectParameterivARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1073,7 +1073,7 @@ int _glGetObjectParameterivARB_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glGetShaderiv_Exec @ 0x8e3f4 (348 bytes) */
-int _glGetShaderiv_Exec(param_1, param_2, param_3, param_4)
+void _glGetShaderiv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -1132,7 +1132,7 @@ LAB_0008e4c4:
 }
 
 /* _glGetProgramiv_Exec @ 0x8e550 (324 bytes) */
-int _glGetProgramiv_Exec(param_1, param_2, param_3, param_4)
+void _glGetProgramiv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1188,7 +1188,7 @@ LAB_0008e620:
 }
 
 /* _glGetInfoLogARB_Exec @ 0x8e694 (356 bytes) */
-int _glGetInfoLogARB_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glGetInfoLogARB_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -1246,7 +1246,7 @@ LAB_0008e778:
 }
 
 /* _glGetShaderInfoLog_Exec @ 0x8e7f8 (340 bytes) */
-int _glGetShaderInfoLog_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glGetShaderInfoLog_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -1304,7 +1304,7 @@ LAB_0008e8cc:
 }
 
 /* _glGetProgramInfoLog_Exec @ 0x8e94c (340 bytes) */
-int _glGetProgramInfoLog_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glGetProgramInfoLog_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -1428,7 +1428,7 @@ int _glIsProgram_Exec(param_1, param_2)
 }
 
 /* _glGetAttachedObjectsARB_Exec @ 0x8ec50 (364 bytes) */
-int _glGetAttachedObjectsARB_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glGetAttachedObjectsARB_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -1538,7 +1538,7 @@ LAB_0008ee94:
 }
 
 /* _glGetActiveUniformARB_Exec @ 0x8eee4 (348 bytes) */
-int _glGetActiveUniformARB_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _glGetActiveUniformARB_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -1595,7 +1595,7 @@ LAB_0008eff8:
 }
 
 /* _glGetUniformfvARB_Exec @ 0x8f040 (1316 bytes) */
-int _glGetUniformfvARB_Exec(param_1, param_2, param_3, param_4)
+void _glGetUniformfvARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -1770,7 +1770,7 @@ LAB_0008f534:
 }
 
 /* _glGetUniformivARB_Exec @ 0x8f564 (1628 bytes) */
-int _glGetUniformivARB_Exec(param_1, param_2, param_3, param_4)
+void _glGetUniformivARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -1982,7 +1982,7 @@ LAB_0008fb90:
 }
 
 /* _glGetShaderSourceARB_Exec @ 0x8fbc0 (340 bytes) */
-int _glGetShaderSourceARB_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glGetShaderSourceARB_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -2040,7 +2040,7 @@ LAB_0008fc94:
 }
 
 /* _glBindAttribLocationARB_Exec @ 0x8fd14 (360 bytes) */
-int _glBindAttribLocationARB_Exec(param_1, param_2, param_3, param_4)
+void _glBindAttribLocationARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -2141,7 +2141,7 @@ LAB_0008ff54:
 }
 
 /* _glGetActiveAttribARB_Exec @ 0x8ffa4 (348 bytes) */
-int _glGetActiveAttribARB_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _glGetActiveAttribARB_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -2198,7 +2198,7 @@ LAB_000900b8:
 }
 
 /* _glGetPointerv_Exec @ 0x90100 (404 bytes) */
-int _glGetPointerv_Exec(param_1, param_2, param_3)
+void _glGetPointerv_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   undefined4 *param_3;
@@ -2347,7 +2347,7 @@ int _glActiveStencilFace_Comp(param_1, param_2)
 }
 
 /* _glActiveStencilFace_Exec @ 0x9039c (76 bytes) */
-int _glActiveStencilFace_Exec(param_1, param_2)
+void _glActiveStencilFace_Exec(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -2374,7 +2374,7 @@ int _glActiveStencilFace_Exec(param_1, param_2)
 }
 
 /* _glActiveStencilFace_CompExec @ 0x903e8 (56 bytes) */
-int _glActiveStencilFace_CompExec(param_1, param_2)
+void _glActiveStencilFace_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -2414,7 +2414,7 @@ int _glStencilFuncSeparateATI_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glStencilFuncSeparateATI_Exec @ 0x904bc (176 bytes) */
-int _glStencilFuncSeparateATI_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glStencilFuncSeparateATI_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -2460,7 +2460,7 @@ int _glStencilFuncSeparateATI_Exec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glStencilFuncSeparateATI_CompExec @ 0x9056c (80 bytes) */
-int _glStencilFuncSeparateATI_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glStencilFuncSeparateATI_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2503,7 +2503,7 @@ int _glStencilOpSeparateATI_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glStencilOpSeparateATI_Exec @ 0x90658 (336 bytes) */
-int _glStencilOpSeparateATI_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glStencilOpSeparateATI_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint param_2;
   uint param_3;
@@ -2579,7 +2579,7 @@ LAB_000906bc:
 }
 
 /* _glStencilOpSeparateATI_CompExec @ 0x907a8 (80 bytes) */
-int _glStencilOpSeparateATI_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glStencilOpSeparateATI_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;

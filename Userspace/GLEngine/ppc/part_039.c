@@ -22,7 +22,7 @@ int _glFinalCombinerInputNV_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glCombinerParameterfvNV_CompExec @ 0xb42a0 (64 bytes) */
-int _glCombinerParameterfvNV_CompExec(param_1, param_2, param_3)
+void _glCombinerParameterfvNV_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -33,7 +33,7 @@ int _glCombinerParameterfvNV_CompExec(param_1, param_2, param_3)
 }
 
 /* _glCombinerStageParameterfvNV_CompExec @ 0xb42e0 (72 bytes) */
-int _glCombinerStageParameterfvNV_CompExec(param_1, param_2, param_3, param_4)
+void _glCombinerStageParameterfvNV_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -53,7 +53,7 @@ void _glCombinerParameterfNV_CompExec(undefined4 param_1,undefined4 param_2,doub
 }
 
 /* _glCombinerParameterivNV_CompExec @ 0xb4370 (64 bytes) */
-int _glCombinerParameterivNV_CompExec(param_1, param_2, param_3)
+void _glCombinerParameterivNV_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -75,7 +75,7 @@ int _glCombinerParameterivNV_CompExec(param_1, param_2, param_3)
 }
 
 /* _glCombinerParameteriNV_CompExec @ 0xb43b0 (64 bytes) */
-int _glCombinerParameteriNV_CompExec(param_1, param_2, param_3)
+void _glCombinerParameteriNV_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -97,7 +97,7 @@ int _glCombinerParameteriNV_CompExec(param_1, param_2, param_3)
 }
 
 /* _glCombinerInputNV_CompExec @ 0xb43f0 (96 bytes) */
-int _glCombinerInputNV_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _glCombinerInputNV_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -112,7 +112,7 @@ int _glCombinerInputNV_CompExec(param_1, param_2, param_3, param_4, param_5, par
 }
 
 /* _glCombinerOutputNV_CompExec @ 0xb4450 (140 bytes) */
-int _glCombinerOutputNV_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
+void _glCombinerOutputNV_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -135,7 +135,7 @@ int _glCombinerOutputNV_CompExec(param_1, param_2, param_3, param_4, param_5, pa
 }
 
 /* _glFinalCombinerInputNV_CompExec @ 0xb44dc (80 bytes) */
-int _glFinalCombinerInputNV_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glFinalCombinerInputNV_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -227,7 +227,7 @@ int _glFinalCombinerInputNV_ListExec(param_1, param_2)
 }
 
 /* _gleDecomposePrimitiveVertices @ 0xb46f4 (700 bytes) */
-int _gleDecomposePrimitiveVertices(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gleDecomposePrimitiveVertices(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   byte *param_2;
   uint param_3;
@@ -387,7 +387,7 @@ int _gleDecomposePrimitiveVertices(param_1, param_2, param_3, param_4, param_5, 
 }
 
 /* _gleVPSetFuncOutputDesc @ 0xb49f0 (548 bytes) */
-int _gleVPSetFuncOutputDesc(param_1, param_2, param_3, param_4)
+void _gleVPSetFuncOutputDesc(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint *param_3;
@@ -531,7 +531,7 @@ int _glePPSetFuncNeeds(param_1, param_2)
 }
 
 /* _gleSetFunctionIDFromList @ 0xb4d14 (408 bytes) */
-int _gleSetFunctionIDFromList(param_1, param_2, param_3)
+void _gleSetFunctionIDFromList(param_1, param_2, param_3)
   int param_1;
   int param_2;
   uint *param_3;
@@ -626,7 +626,7 @@ LAB_000b4e5c:
 }
 
 /* _gleSetFunctionIDToList @ 0xb4eac (508 bytes) */
-int _gleSetFunctionIDToList(param_1, param_2, param_3)
+void _gleSetFunctionIDToList(param_1, param_2, param_3)
   int param_1;
   int param_2;
   uint *param_3;
@@ -745,7 +745,7 @@ int _gleArrayElemAddPrimitiveFlushFuncCall(param_1, param_2)
 }
 
 /* _gleSetVertexEval1Func @ 0xb5140 (100 bytes) */
-int _gleSetVertexEval1Func(param_1, param_2, param_3)
+void _gleSetVertexEval1Func(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -763,7 +763,7 @@ int _gleSetVertexEval1Func(param_1, param_2, param_3)
 }
 
 /* _gleSetVertexEval2Func @ 0xb51a4 (100 bytes) */
-int _gleSetVertexEval2Func(param_1, param_2, param_3)
+void _gleSetVertexEval2Func(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;

@@ -33,7 +33,7 @@ void _glCopyTexSubImage1D_Exec(int param_1,undefined4 param_2,uint param_3,undef
       piVar13 = (int *)(param_1 + 0x310);
       cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
       if ((iVar6 != 0) && (*(int *)(iVar6 + 0xec) != 0)) {
-        ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,uVar10,uVar3,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,uVar10,uVar3,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                    fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
         *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       }
@@ -204,7 +204,7 @@ LAB_00097fbc:
 }
 
 /* _glCopyTexSubImage1D_CompExec @ 0x982cc (96 bytes) */
-int _glCopyTexSubImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _glCopyTexSubImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -262,7 +262,7 @@ void _glCopyTexSubImage1D_NoopExec(int param_1,undefined4 param_2,undefined4 par
     piVar12 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar6,uVar7,uVar8,uVar9,uVar10,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar6,uVar7,uVar8,uVar9,uVar10,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -420,7 +420,7 @@ void _glCopyTexSubImage2D_Exec(int param_1,int param_2,uint param_3,undefined4 p
       piVar14 = (int *)(param_1 + 0x310);
       cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
       if ((iVar7 != 0) && (*(int *)(iVar7 + 0xec) != 0)) {
-        ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar7 + 0x10,uVar11,uVar4,uVar8,uVar9,iVar10,fparam_1,fparam_2,fparam_3,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar7 + 0x10,uVar11,uVar4,uVar8,uVar9,iVar10,fparam_1,fparam_2,fparam_3,
                    fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
         *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       }
@@ -601,7 +601,7 @@ LAB_00098930:
 }
 
 /* _glCopyTexSubImage2D_CompExec @ 0x98c88 (116 bytes) */
-int _glCopyTexSubImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+void _glCopyTexSubImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -662,7 +662,7 @@ void _glCopyTexSubImage2D_NoopExec(int param_1,undefined4 param_2,undefined4 par
     piVar12 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar6,uVar7,uVar8,uVar9,uVar10,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar6,uVar7,uVar8,uVar9,uVar10,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -820,7 +820,7 @@ void _glCopyTexSubImage3D_Exec(int param_1,undefined4 param_2,uint param_3,undef
       piVar12 = (int *)(param_1 + 0x310);
       cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
       if ((iVar6 != 0) && (*(int *)(iVar6 + 0xec) != 0)) {
-        ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,uVar10,uVar3,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,uVar10,uVar3,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                    fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
         *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       }
@@ -997,7 +997,7 @@ LAB_0009931c:
 }
 
 /* _glCopyTexSubImage3D_CompExec @ 0x99644 (128 bytes) */
-int _glCopyTexSubImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+void _glCopyTexSubImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1058,7 +1058,7 @@ void _glCopyTexSubImage3D_NoopExec(int param_1,undefined4 param_2,undefined4 par
     piVar12 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar6,uVar7,uVar8,uVar9,uVar10,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar6,uVar7,uVar8,uVar9,uVar10,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -1327,7 +1327,7 @@ int _glTexEnvfv_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glTexEnvfv_CompExec @ 0x99d48 (72 bytes) */
-int _glTexEnvfv_CompExec(param_1, param_2, param_3, param_4)
+void _glTexEnvfv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1366,7 +1366,7 @@ int _glTexEnvi_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glTexEnvi_CompExec @ 0x99e20 (72 bytes) */
-int _glTexEnvi_CompExec(param_1, param_2, param_3, param_4)
+void _glTexEnvi_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1431,7 +1431,7 @@ int _glTexEnviv_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glTexEnviv_Exec @ 0x99fc0 (3296 bytes) */
-int _glTexEnviv_Exec(param_1, param_2, param_3, param_4)
+void _glTexEnviv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   uint param_3;
@@ -1810,7 +1810,7 @@ LAB_0009acbc:
 }
 
 /* _glTexEnviv_CompExec @ 0x9acd4 (72 bytes) */
-int _glTexEnviv_CompExec(param_1, param_2, param_3, param_4)
+void _glTexEnviv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2017,7 +2017,7 @@ LAB_0009aec4:
 }
 
 /* _glGetTexEnviv_Exec @ 0x9b230 (1232 bytes) */
-int _glGetTexEnviv_Exec(param_1, param_2, param_3, param_4)
+void _glGetTexEnviv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   uint param_3;
@@ -2596,7 +2596,7 @@ void _glTexGend_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_
 }
 
 /* _glTexGendv_Comp @ 0x9c1f0 (36 bytes) */
-int _glTexGendv_Comp(param_1, param_2, param_3, param_4)
+void _glTexGendv_Comp(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2608,7 +2608,7 @@ int _glTexGendv_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glTexGendv_CompExec @ 0x9c238 (108 bytes) */
-int _glTexGendv_CompExec(param_1, param_2, param_3, param_4)
+void _glTexGendv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2649,7 +2649,7 @@ void _glTexGenf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_
 }
 
 /* _glTexGenfv_Comp @ 0x9c318 (20 bytes) */
-int _glTexGenfv_Comp(param_1, param_2, param_3, param_4)
+void _glTexGenfv_Comp(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2661,7 +2661,7 @@ int _glTexGenfv_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glTexGenfv_CompExec @ 0x9c340 (92 bytes) */
-int _glTexGenfv_CompExec(param_1, param_2, param_3, param_4)
+void _glTexGenfv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2686,7 +2686,7 @@ double _glTexGeni_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,
 }
 
 /* _glTexGeni_Exec @ 0x9c3ec (100 bytes) */
-int _glTexGeni_Exec(param_1, param_2, param_3, param_4)
+void _glTexGeni_Exec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2702,7 +2702,7 @@ int _glTexGeni_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glTexGeni_CompExec @ 0x9c450 (72 bytes) */
-int _glTexGeni_CompExec(param_1, param_2, param_3, param_4)
+void _glTexGeni_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2731,7 +2731,7 @@ double _glTexGeniv_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3
 }
 
 /* _glTexGeniv_Exec @ 0x9c538 (160 bytes) */
-int _glTexGeniv_Exec(param_1, param_2, param_3, param_4)
+void _glTexGeniv_Exec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2750,7 +2750,7 @@ int _glTexGeniv_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glTexGeniv_CompExec @ 0x9c5d8 (72 bytes) */
-int _glTexGeniv_CompExec(param_1, param_2, param_3, param_4)
+void _glTexGeniv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2762,7 +2762,7 @@ int _glTexGeniv_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glGetTexGendv_Exec @ 0x9c620 (632 bytes) */
-int _glGetTexGendv_Exec(param_1, param_2, param_3, param_4)
+void _glGetTexGendv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -2996,7 +2996,7 @@ LAB_0009c97c:
 }
 
 /* _glGetTexGeniv_Exec @ 0x9cb04 (744 bytes) */
-int _glGetTexGeniv_Exec(param_1, param_2, param_3, param_4)
+void _glGetTexGeniv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -3182,7 +3182,7 @@ void _glCopyTexImage1D_Exec(int param_1,undefined4 param_2,uint param_3,undefine
       piVar13 = (int *)(param_1 + 0x310);
       cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
       if ((iVar8 != 0) && (*(int *)(iVar8 + 0xec) != 0)) {
-        ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar8 + 0x10,uVar12,uVar4,uVar9,uVar10,iVar11,fparam_1,fparam_2,fparam_3,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar8 + 0x10,uVar12,uVar4,uVar9,uVar10,iVar11,fparam_1,fparam_2,fparam_3,
                    fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
         *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       }
@@ -3370,7 +3370,7 @@ LAB_0009d188:
 }
 
 /* _glCopyTexImage1D_CompExec @ 0x9d4e4 (104 bytes) */
-int _glCopyTexImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _glCopyTexImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -3429,7 +3429,7 @@ void _glCopyTexImage1D_NoopExec(int param_1,undefined4 param_2,undefined4 param_
     piVar12 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar6,uVar7,uVar8,uVar9,uVar10,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar6,uVar7,uVar8,uVar9,uVar10,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -3553,7 +3553,7 @@ int _glCopyTexImage2D_Comp(param_1, param_2, param_3, param_4, param_5, param_6,
 }
 
 /* _glCopyTexImage2D_CompExec @ 0x9d8cc (116 bytes) */
-int _glCopyTexImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+void _glCopyTexImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -3613,7 +3613,7 @@ void _glCopyTexImage2D_NoopExec(int param_1,undefined4 param_2,undefined4 param_
     piVar12 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar6,uVar7,uVar8,uVar9,uVar10,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar6,uVar7,uVar8,uVar9,uVar10,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;

@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gliInitializeLibrary @ 0x13c4 (48 bytes) */
-int _gliInitializeLibrary(param_1, param_2, param_3, param_4, param_5)
+void _gliInitializeLibrary(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -244,7 +244,7 @@ LAB_000017c4:
 }
 
 /* dyld_stub_binding_helper @ 0x1988 (48 bytes) */
-int dyld_stub_binding_helper()
+void dyld_stub_binding_helper()
 {
                     
                     
@@ -385,7 +385,7 @@ LAB_00001c9c:
 }
 
 /* _glePreInitGlobals @ 0x1cc8 (212 bytes) */
-int _glePreInitGlobals()
+void _glePreInitGlobals()
 {
   double dVar1;
   float fVar2;
@@ -509,7 +509,7 @@ int _glePreInitTOC()
 }
 
 /* _glePreInitVectorTOC @ 0x1fcc (100 bytes) */
-int _glePreInitVectorTOC()
+void _glePreInitVectorTOC()
 {
   undefined4 *puVar1;
   undefined *puVar2;
@@ -556,13 +556,13 @@ int _glePreInitVectorTOC()
 }
 
 /* _glePreInitNormalize @ 0x2030 (4 bytes) */
-int _glePreInitNormalize()
+void _glePreInitNormalize()
 {
   return;
 }
 
 /* _glePreInitProjectionTransformFunc @ 0x2034 (68 bytes) */
-int _glePreInitProjectionTransformFunc()
+void _glePreInitProjectionTransformFunc()
 {
   _gleBuildProjectionTransformFunc = PTR__gleBuildProjectionTransformFuncNO_00110a14;
   if ((*(uint *)PTR__gle_processor_0011204c & 0x10) != 0) {
@@ -572,7 +572,7 @@ int _glePreInitProjectionTransformFunc()
 }
 
 /* _glePreInitModelviewTransformFunc @ 0x2078 (68 bytes) */
-int _glePreInitModelviewTransformFunc()
+void _glePreInitModelviewTransformFunc()
 {
   _gleBuildModelviewTransformFunc = PTR__gleBuildModelviewTransformFuncNO_001109fc;
   if ((*(uint *)PTR__gle_processor_0011204c & 0x10) != 0) {
@@ -582,7 +582,7 @@ int _glePreInitModelviewTransformFunc()
 }
 
 /* _glePreInitNormalTransformFunc @ 0x20bc (68 bytes) */
-int _glePreInitNormalTransformFunc()
+void _glePreInitNormalTransformFunc()
 {
   _gleBuildNormalTransformFunc = PTR__gleBuildNormalTransformFuncNO_00110a08;
   if ((*(uint *)PTR__gle_processor_0011204c & 0x10) != 0) {
@@ -592,7 +592,7 @@ int _glePreInitNormalTransformFunc()
 }
 
 /* _glePreInitVertexSubmitFunc @ 0x2100 (36 bytes) */
-int _glePreInitVertexSubmitFunc()
+void _glePreInitVertexSubmitFunc()
 {
   _gleBuildVertexFunc = PTR__gleBuildVertexFuncNO_001104f4;
   return;
@@ -605,7 +605,7 @@ int _glepGetPlugins()
 }
 
 /* _gleOptimizeDisplayListCreateHashTable @ 0x2140 (248 bytes) */
-int _gleOptimizeDisplayListCreateHashTable()
+void _gleOptimizeDisplayListCreateHashTable()
 {
   uint uVar1;
   int iVar2;
@@ -1757,7 +1757,7 @@ int _gleInitializeContext(param_1)
 }
 
 /* _gleNullMemoryPointers @ 0x3e94 (416 bytes) */
-int _gleNullMemoryPointers(param_1)
+void _gleNullMemoryPointers(param_1)
   int param_1;
 {
   undefined4 *puVar1;
@@ -1932,7 +1932,7 @@ int _gleAllocMaterials(param_1)
 }
 
 /* _gleShareEnableHashTable @ 0x4154 (32 bytes) */
-int _gleShareEnableHashTable(param_1)
+void _gleShareEnableHashTable(param_1)
   int param_1;
 {
   *(undefined4 *)(param_1 + 0x4850) = _gle_enable_hash_table;
@@ -2097,7 +2097,7 @@ int _gleAllocFunctions(param_1)
 }
 
 /* _gleInitConstants @ 0x4484 (192 bytes) */
-int _gleInitConstants(param_1)
+void _gleInitConstants(param_1)
   int param_1;
 {
   float fVar1;
@@ -2130,7 +2130,7 @@ int _gleInitConstants(param_1)
 }
 
 /* _gleInitVectorConstants @ 0x4544 (56 bytes) */
-int _gleInitVectorConstants(param_1)
+void _gleInitVectorConstants(param_1)
   int param_1;
 {
   undefined4 *puVar1;
@@ -2150,7 +2150,7 @@ int _gleInitVectorConstants(param_1)
 }
 
 /* _gleInitGLDState @ 0x457c (3076 bytes) */
-int _gleInitGLDState(param_1)
+void _gleInitGLDState(param_1)
   int param_1;
 {
   float fVar1;
@@ -2824,7 +2824,7 @@ int _gleMakeIdentityMatrix(param_1)
 }
 
 /* _gleInitGLIState @ 0x51cc (776 bytes) */
-int _gleInitGLIState(param_1)
+void _gleInitGLIState(param_1)
   int param_1;
 {
   undefined1 uVar1;
@@ -2990,7 +2990,7 @@ int _gleInitGLIState(param_1)
 }
 
 /* _gleInitDerivedState @ 0x54d4 (728 bytes) */
-int _gleInitDerivedState(param_1)
+void _gleInitDerivedState(param_1)
   int param_1;
 {
   float fVar1;
@@ -3151,7 +3151,7 @@ int _gleInitDerivedState(param_1)
 }
 
 /* _gleInitTextureState @ 0x57ac (592 bytes) */
-int _gleInitTextureState(param_1)
+void _gleInitTextureState(param_1)
   int param_1;
 {
   char cVar1;
@@ -3299,7 +3299,7 @@ int _gleCreateTextureObject(param_1, param_2)
 }
 
 /* _gleInitializeGLTexture @ 0x5a90 (832 bytes) */
-int _gleInitializeGLTexture(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _gleInitializeGLTexture(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   int param_2;
   undefined4 *param_3;
@@ -3489,7 +3489,7 @@ LAB_00005c28:
 }
 
 /* _gleCreatePluginTexture @ 0x5de4 (120 bytes) */
-int _gleCreatePluginTexture(param_1, param_2)
+void _gleCreatePluginTexture(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -3516,7 +3516,7 @@ int _gleCreatePluginTexture(param_1, param_2)
 }
 
 /* _gleInitPipelineProgramState @ 0x5e5c (624 bytes) */
-int _gleInitPipelineProgramState(param_1)
+void _gleInitPipelineProgramState(param_1)
   int param_1;
 {
   char cVar1;
@@ -3767,7 +3767,7 @@ int _gleVecAlloc(param_1)
 }
 
 /* _gleCreatePluginPipelineProgram @ 0x62b8 (120 bytes) */
-int _gleCreatePluginPipelineProgram(param_1, param_2)
+void _gleCreatePluginPipelineProgram(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -3794,7 +3794,7 @@ int _gleCreatePluginPipelineProgram(param_1, param_2)
 }
 
 /* _gleInitShaderState @ 0x6330 (16 bytes) */
-int _gleInitShaderState(param_1)
+void _gleInitShaderState(param_1)
   int param_1;
 {
   *(undefined4 *)(param_1 + 0x5438) = 0;
@@ -3803,7 +3803,7 @@ int _gleInitShaderState(param_1)
 }
 
 /* _gleInitBufferState @ 0x6340 (48 bytes) */
-int _gleInitBufferState(param_1)
+void _gleInitBufferState(param_1)
   int param_1;
 {
   undefined4 *puVar1;
@@ -3824,7 +3824,7 @@ int _gleInitBufferState(param_1)
 }
 
 /* _glePPEmulatorInitialize @ 0x6370 (48 bytes) */
-int _glePPEmulatorInitialize(param_1)
+void _glePPEmulatorInitialize(param_1)
   int param_1;
 {
   undefined4 uVar1;
@@ -3835,7 +3835,7 @@ int _glePPEmulatorInitialize(param_1)
 }
 
 /* _gleInitVertexArrayState @ 0x63a0 (148 bytes) */
-int _gleInitVertexArrayState(param_1)
+void _gleInitVertexArrayState(param_1)
   int param_1;
 {
   undefined4 uVar1;
@@ -3953,7 +3953,7 @@ int _gleCreateVertexArrayObject(param_1, param_2)
 }
 
 /* _gleCreatePluginVertexArray @ 0x65e0 (132 bytes) */
-int _gleCreatePluginVertexArray(param_1, param_2)
+void _gleCreatePluginVertexArray(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -3983,7 +3983,7 @@ int _gleCreatePluginVertexArray(param_1, param_2)
 }
 
 /* _gleInitFenceMachine @ 0x6664 (36 bytes) */
-int _gleInitFenceMachine(param_1)
+void _gleInitFenceMachine(param_1)
   int param_1;
 {
   undefined4 *puVar1;
@@ -4001,7 +4001,7 @@ int _gleInitFenceMachine(param_1)
 }
 
 /* _gleInitQueryMachine @ 0x6688 (40 bytes) */
-int _gleInitQueryMachine(param_1)
+void _gleInitQueryMachine(param_1)
   int param_1;
 {
   undefined4 *puVar1;
@@ -4020,7 +4020,7 @@ int _gleInitQueryMachine(param_1)
 }
 
 /* _gleInitDrawPixelsObject @ 0x66b0 (40 bytes) */
-int _gleInitDrawPixelsObject(param_1)
+void _gleInitDrawPixelsObject(param_1)
   int param_1;
 {
   *(undefined4 *)(0x74a4 + param_1) = 0;

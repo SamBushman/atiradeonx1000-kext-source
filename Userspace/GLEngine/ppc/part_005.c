@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gleLightMaterialRGBAChange_FB_A @ 0x32efc (224 bytes) */
-int _gleLightMaterialRGBAChange_FB_A(param_1, param_2)
+void _gleLightMaterialRGBAChange_FB_A(param_1, param_2)
   int param_1;
   undefined8 *param_2;
 {
@@ -84,7 +84,7 @@ int _glePushMaterial(param_1, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_FB_D @ 0x330e0 (224 bytes) */
-int _gleLightMaterialRGBAChange_FB_D(param_1, param_2)
+void _gleLightMaterialRGBAChange_FB_D(param_1, param_2)
   int param_1;
   undefined8 *param_2;
 {
@@ -153,7 +153,7 @@ void _gleLightMaterialShineChange_FB(int param_1,double fparam_1)
 }
 
 /* _gleLightMaterialRGBAChange_FB_S @ 0x3329c (224 bytes) */
-int _gleLightMaterialRGBAChange_FB_S(param_1, param_2)
+void _gleLightMaterialRGBAChange_FB_S(param_1, param_2)
   int param_1;
   undefined8 *param_2;
 {
@@ -280,7 +280,7 @@ double _gleModelMatInvert(int param_1)
 }
 
 /* _gleSetupInvertMatrix @ 0x33570 (80 bytes) */
-int _gleSetupInvertMatrix()
+void _gleSetupInvertMatrix()
 {
   _gleInvertMatrix = PTR__gleInvertMatrix_601_00110e80;
   if ((*(uint *)PTR__gle_processor_0011204c & 0x10) != 0) {
@@ -379,7 +379,7 @@ int _glGenLists_Exec(param_1, param_2)
 }
 
 /* _glNewList_Exec @ 0x33a00 (116 bytes) */
-int _glNewList_Exec(param_1, param_2, param_3)
+void _glNewList_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int param_3;
@@ -2475,7 +2475,7 @@ int _gleNewList(param_1, param_2, param_3)
 }
 
 /* _glCullFace_CompExec @ 0x39268 (56 bytes) */
-int _glCullFace_CompExec(param_1, param_2)
+void _glCullFace_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -2554,7 +2554,7 @@ LAB_00039364:
 }
 
 /* _glCullFace_Exec @ 0x39410 (156 bytes) */
-int _glCullFace_Exec(param_1, param_2)
+void _glCullFace_Exec(param_1, param_2)
   int param_1;
   uint param_2;
 {
@@ -2575,7 +2575,7 @@ int _glCullFace_Exec(param_1, param_2)
 }
 
 /* _glEnable_CompExec @ 0x394ac (56 bytes) */
-int _glEnable_CompExec(param_1, param_2)
+void _glEnable_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -2599,7 +2599,7 @@ int _glEnable_Comp(param_1, param_2)
 }
 
 /* _glLoadName_CompExec @ 0x39530 (56 bytes) */
-int _glLoadName_CompExec(param_1, param_2)
+void _glLoadName_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -2623,7 +2623,7 @@ int _glLoadName_Comp(param_1, param_2)
 }
 
 /* _glLoadName_Exec @ 0x395b4 (80 bytes) */
-int _glLoadName_Exec(param_1, param_2)
+void _glLoadName_Exec(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -2645,7 +2645,7 @@ int _glLoadName_Exec(param_1, param_2)
 }
 
 /* _glMaterialfv_CompExec @ 0x39604 (72 bytes) */
-int _glMaterialfv_CompExec(param_1, param_2, param_3, param_4)
+void _glMaterialfv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2725,7 +2725,7 @@ LAB_00039740:
 }
 
 /* _glDisable_CompExec @ 0x39768 (56 bytes) */
-int _glDisable_CompExec(param_1, param_2)
+void _glDisable_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -2787,7 +2787,7 @@ void _glColor4f_NoColorMat_Exec(int param_1,float fparam_1,float fparam_2,float 
 }
 
 /* _glBegin_CompExec @ 0x39900 (112 bytes) */
-int _glBegin_CompExec(param_1, param_2)
+void _glBegin_CompExec(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -2826,7 +2826,7 @@ int _glBegin_Comp(param_1, param_2)
 }
 
 /* _gleBeginLineStripRenderTCL @ 0x399bc (60 bytes) */
-int _gleBeginLineStripRenderTCL(param_1)
+void _gleBeginLineStripRenderTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2880,7 +2880,7 @@ void _glVertex3d_Exec(int param_1,double fparam_1,double fparam_2,double fparam_
 }
 
 /* _gleSetFuncOutputDesc @ 0x39b0c (1348 bytes) */
-int _gleSetFuncOutputDesc(param_1, param_2, param_3)
+void _gleSetFuncOutputDesc(param_1, param_2, param_3)
   int param_1;
   int param_2;
   uint *param_3;
@@ -3135,7 +3135,7 @@ longlong ___ashldi3(param_1, param_2, param_3)
 }
 
 /* _glEnd_CompExec @ 0x3a0b0 (48 bytes) */
-int _glEnd_CompExec(param_1)
+void _glEnd_CompExec(param_1)
   undefined4 param_1;
 {
   ((int (*)())_glEnd_Comp)(param_1);
@@ -3154,7 +3154,7 @@ int _glEnd_Comp(param_1)
 }
 
 /* _glEnd_Exec @ 0x3a100 (128 bytes) */
-int _glEnd_Exec(param_1)
+double _glEnd_Exec(param_1)
   int param_1;
 {
   if (*(short *)(param_1 + 0x4a10) < 0) {
@@ -3253,7 +3253,7 @@ void _glLineWidth_Exec(int param_1,float fparam_1)
 }
 
 /* _glClear_CompExec @ 0x3a34c (56 bytes) */
-int _glClear_CompExec(param_1, param_2)
+void _glClear_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -3286,7 +3286,7 @@ int _glClear_Comp(param_1, param_2)
 }
 
 /* _gleSetEnable_STENCIL_TEST @ 0x3a3d0 (56 bytes) */
-int _gleSetEnable_STENCIL_TEST(param_1, param_2, param_3)
+void _gleSetEnable_STENCIL_TEST(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -3305,7 +3305,7 @@ int _gleSetEnable_STENCIL_TEST(param_1, param_2, param_3)
 }
 
 /* _glStencilFunc_CompExec @ 0x3a408 (72 bytes) */
-int _glStencilFunc_CompExec(param_1, param_2, param_3, param_4)
+void _glStencilFunc_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -3335,7 +3335,7 @@ int _glStencilFunc_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glStencilFunc_Exec @ 0x3a4ac (164 bytes) */
-int _glStencilFunc_Exec(param_1, param_2, param_3, param_4)
+void _glStencilFunc_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   uint param_3;
@@ -3380,7 +3380,7 @@ int _glStencilFunc_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glStencilOp_CompExec @ 0x3a550 (72 bytes) */
-int _glStencilOp_CompExec(param_1, param_2, param_3, param_4)
+void _glStencilOp_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -3410,7 +3410,7 @@ int _glStencilOp_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glStencilOp_Exec @ 0x3a5f4 (268 bytes) */
-int _glStencilOp_Exec(param_1, param_2, param_3, param_4)
+void _glStencilOp_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -3463,7 +3463,7 @@ LAB_0003a658:
 }
 
 /* _glColorMask_CompExec @ 0x3a700 (80 bytes) */
-int _glColorMask_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glColorMask_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -3496,7 +3496,7 @@ int _glColorMask_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glDepthMask_CompExec @ 0x3a7b4 (56 bytes) */
-int _glDepthMask_CompExec(param_1, param_2)
+void _glDepthMask_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -3520,7 +3520,7 @@ int _glDepthMask_Comp(param_1, param_2)
 }
 
 /* _gleBeginQuadsRenderTCL @ 0x3a838 (52 bytes) */
-int _gleBeginQuadsRenderTCL(param_1)
+void _gleBeginQuadsRenderTCL(param_1)
   int param_1;
 {
   undefined *puVar1;

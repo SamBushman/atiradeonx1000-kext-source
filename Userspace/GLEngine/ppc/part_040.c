@@ -6330,7 +6330,7 @@ void _gleSetEyeInterpFunc(int param_1,undefined4 param_2,undefined4 param_3,unde
 }
 
 /* _gleShrinkFuncCache @ 0xc2054 (68 bytes) */
-int _gleShrinkFuncCache(param_1, param_2)
+void _gleShrinkFuncCache(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -6344,7 +6344,7 @@ int _gleShrinkFuncCache(param_1, param_2)
 }
 
 /* _gleDeleteFuncCacheElem @ 0xc2098 (24 bytes) */
-int _gleDeleteFuncCacheElem(param_1)
+void _gleDeleteFuncCacheElem(param_1)
   int *param_1;
 {
   int *piVar1;
@@ -7983,7 +7983,7 @@ int _gleRTCAddAChunk_c44b8(param_1, param_2)
 }
 
 /* _gleSetModelviewFuncAll @ 0xc44e8 (100 bytes) */
-int _gleSetModelviewFuncAll(param_1, param_2, param_3)
+void _gleSetModelviewFuncAll(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -7999,7 +7999,7 @@ int _gleSetModelviewFuncAll(param_1, param_2, param_3)
 }
 
 /* _gleSetModelviewFuncW1 @ 0xc454c (100 bytes) */
-int _gleSetModelviewFuncW1(param_1, param_2, param_3)
+void _gleSetModelviewFuncW1(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -8015,7 +8015,7 @@ int _gleSetModelviewFuncW1(param_1, param_2, param_3)
 }
 
 /* _gleSetModelviewFuncZ0W1 @ 0xc45b0 (100 bytes) */
-int _gleSetModelviewFuncZ0W1(param_1, param_2, param_3)
+void _gleSetModelviewFuncZ0W1(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -8031,7 +8031,7 @@ int _gleSetModelviewFuncZ0W1(param_1, param_2, param_3)
 }
 
 /* _gleTransformModelviewBlend @ 0xc4614 (76 bytes) */
-int _gleTransformModelviewBlend(param_1, param_2, param_3)
+void _gleTransformModelviewBlend(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;

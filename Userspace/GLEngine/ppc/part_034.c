@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _glDrawArrays_CompExec @ 0xa8624 (72 bytes) */
-int _glDrawArrays_CompExec(param_1, param_2, param_3, param_4)
+void _glDrawArrays_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -67,7 +67,7 @@ LAB_000a88bc:
     piVar9 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,in_r7,in_r8,iVar7,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,in_r7,in_r8,iVar7,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -223,7 +223,7 @@ void _glDrawElements_IMM_Exec(int param_1,undefined4 param_2,undefined4 param_3,
   }
   *(int *)(param_1 + 0x48d8) = param_5;
   *(int *)(param_1 + 0x4978) = param_5;
-  ((int (*)())_gleDrawArraysOrElements_IMM_Exec)(param_1,param_2,0,param_3,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
+  ((void (*)())_gleDrawArraysOrElements_IMM_Exec)(param_1,param_2,0,param_3,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
              fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
@@ -260,7 +260,7 @@ void _glDrawElements_VBO_Exec(int param_1,undefined4 param_2,undefined4 param_3,
   }
   *(int *)(param_1 + 0x48d8) = param_5;
   *(int *)(param_1 + 0x4978) = param_5;
-  ((int (*)())_gleDrawArraysOrElements_VBO_Exec)(param_1,param_2,0,param_3,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
+  ((void (*)())_gleDrawArraysOrElements_VBO_Exec)(param_1,param_2,0,param_3,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
              fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
@@ -297,7 +297,7 @@ void _glDrawElements_VAR_Exec(int param_1,undefined4 param_2,undefined4 param_3,
   }
   *(int *)(param_1 + 0x48d8) = param_5;
   *(int *)(param_1 + 0x4978) = param_5;
-  ((int (*)())_gleDrawArraysOrElements_VAR_Exec)(param_1,param_2,0,param_3,1,*(int *)(param_1 + 0x4a60) + 0x10,param_7,fparam_1,fparam_2
+  ((void (*)())_gleDrawArraysOrElements_VAR_Exec)(param_1,param_2,0,param_3,1,*(int *)(param_1 + 0x4a60) + 0x10,param_7,fparam_1,fparam_2
              ,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
@@ -334,13 +334,13 @@ void _glDrawElements_CVA_Exec(int param_1,undefined4 param_2,undefined4 param_3,
   }
   *(int *)(param_1 + 0x48d8) = param_5;
   *(int *)(param_1 + 0x4978) = param_5;
-  ((int (*)())_gleDrawArraysOrElements_CVA_Exec)(param_1,param_2,0,param_3,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
+  ((void (*)())_gleDrawArraysOrElements_CVA_Exec)(param_1,param_2,0,param_3,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
              fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
 
 /* _glDrawElements_STD_Exec @ 0xa8bbc (136 bytes) */
-double _glDrawElements_STD_Exec(int param_1,undefined4 param_2,undefined4 param_3,uint param_4,int param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glDrawElements_STD_Exec(int param_1,undefined4 param_2,undefined4 param_3,uint param_4,int param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   bool bVar1;
   int iVar2;
@@ -371,7 +371,7 @@ double _glDrawElements_STD_Exec(int param_1,undefined4 param_2,undefined4 param_
   }
   *(int *)(param_1 + 0x48d8) = param_5;
   *(int *)(param_1 + 0x4978) = param_5;
-  ((int (*)())_gleDrawArraysOrElements_Exec)(param_1,param_2,0,param_3,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
+  ((void (*)())_gleDrawArraysOrElements_Exec)(param_1,param_2,0,param_3,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
              fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
@@ -408,13 +408,13 @@ void _glDrawElements_Exec(int param_1,undefined4 param_2,undefined4 param_3,uint
     *(undefined4 *)(param_1 + 0x488c) = 0;
     *(undefined4 *)(param_1 + 0x4890) = 0;
   }
-  ((undefined4 (*)())_gleEvalDrawArraysOrElements_Entires_Exec)(param_1,param_2,0,param_3,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
+  ((void (*)())_gleEvalDrawArraysOrElements_Entires_Exec)(param_1,param_2,0,param_3,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
              fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
 
 /* _glDrawElements_CompExec @ 0xa8ccc (80 bytes) */
-int _glDrawElements_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glDrawElements_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -482,7 +482,7 @@ LAB_000a8f70:
     piVar10 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,in_r8,iVar8,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,in_r8,iVar8,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -629,7 +629,7 @@ LAB_000a9058:
   }
   *(int *)(param_1 + 0x4978) = param_7;
   *(int *)(param_1 + 0x48d8) = param_7;
-  ((int (*)())_gleDrawArraysOrElements_IMM_Exec)(param_1,param_2,0,param_5,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
+  ((void (*)())_gleDrawArraysOrElements_IMM_Exec)(param_1,param_2,0,param_5,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
              fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
@@ -676,7 +676,7 @@ LAB_000a9100:
   }
   *(int *)(param_1 + 0x4978) = param_7;
   *(int *)(param_1 + 0x48d8) = param_7;
-  ((int (*)())_gleDrawArraysOrElements_VBO_Exec)(param_1,param_2,0,param_5,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
+  ((void (*)())_gleDrawArraysOrElements_VBO_Exec)(param_1,param_2,0,param_5,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
              fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
@@ -723,7 +723,7 @@ LAB_000a91a8:
   }
   *(int *)(param_1 + 0x4978) = param_7;
   *(int *)(param_1 + 0x48d8) = param_7;
-  ((int (*)())_gleDrawArraysOrElements_VAR_Exec)(param_1,param_2,0,param_5,1,*(int *)(param_1 + 0x4a60) + 0x10,param_7,fparam_1,fparam_2
+  ((void (*)())_gleDrawArraysOrElements_VAR_Exec)(param_1,param_2,0,param_5,1,*(int *)(param_1 + 0x4a60) + 0x10,param_7,fparam_1,fparam_2
              ,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
@@ -770,7 +770,7 @@ LAB_000a9250:
   }
   *(int *)(param_1 + 0x4978) = param_7;
   *(int *)(param_1 + 0x48d8) = param_7;
-  ((int (*)())_gleDrawArraysOrElements_CVA_Exec)(param_1,param_2,0,param_5,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
+  ((void (*)())_gleDrawArraysOrElements_CVA_Exec)(param_1,param_2,0,param_5,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
              fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
@@ -817,13 +817,13 @@ LAB_000a92f8:
     *(undefined4 *)(param_1 + 0x488c) = 0;
     *(undefined4 *)(param_1 + 0x4890) = 0;
   }
-  ((undefined4 (*)())_gleEvalDrawArraysOrElements_Entires_Exec)(param_1,param_2,0,param_5,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
+  ((void (*)())_gleEvalDrawArraysOrElements_Entires_Exec)(param_1,param_2,0,param_5,1,*(int *)(param_1 + 0x4a60) + 0x10,fparam_1,fparam_2,
              fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
 
 /* _glDrawRangeElements_CompExec @ 0xa9348 (96 bytes) */
-int _glDrawRangeElements_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _glDrawRangeElements_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -894,7 +894,7 @@ LAB_000a9604:
     piVar11 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -1014,7 +1014,7 @@ void _glDrawRangeElementArrayAPPLE_Exec(int param_1,undefined4 param_2,uint para
 }
 
 /* _glDrawRangeElementArrayAPPLE_CompExec @ 0xa96c4 (88 bytes) */
-int _glDrawRangeElementArrayAPPLE_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glDrawRangeElementArrayAPPLE_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1084,7 +1084,7 @@ LAB_000a9974:
     piVar11 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -1205,7 +1205,7 @@ void _glMultiDrawRangeElementArrayAPPLE_Exec(int param_1,undefined4 param_2,uint
 }
 
 /* _glMultiDrawRangeElementArrayAPPLE_CompExec @ 0xa9a38 (96 bytes) */
-int _glMultiDrawRangeElementArrayAPPLE_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _glMultiDrawRangeElementArrayAPPLE_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1276,7 +1276,7 @@ LAB_000a9cf4:
     piVar11 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -1403,13 +1403,13 @@ void _glDrawElementArrayAPPLE_Exec(int param_1,undefined4 param_2,undefined4 par
     *(undefined4 *)(param_1 + 0x488c) = 0;
     *(undefined4 *)(param_1 + 0x4890) = 0;
   }
-  ((int (*)())_gleDrawArraysOrElements_Exec)(param_1,param_2,param_3,param_4,2,iVar1 + 0x10,fparam_1,fparam_2,fparam_3,fparam_4,
+  ((void (*)())_gleDrawArraysOrElements_Exec)(param_1,param_2,param_3,param_4,2,iVar1 + 0x10,fparam_1,fparam_2,fparam_3,fparam_4,
              fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
 
 /* _glDrawElementArrayAPPLE_CompExec @ 0xa9e04 (72 bytes) */
-int _glDrawElementArrayAPPLE_CompExec(param_1, param_2, param_3, param_4)
+void _glDrawElementArrayAPPLE_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1474,7 +1474,7 @@ LAB_000aa09c:
     piVar9 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,in_r7,in_r8,iVar7,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,in_r7,in_r8,iVar7,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -1630,7 +1630,7 @@ void _glMultiDrawElementArrayAPPLE_Exec(int param_1,undefined4 param_2,int param
       do {
         iVar1 = iVar2 * 4;
         iVar2 = iVar2 + 1;
-        ((int (*)())_gleDrawArraysOrElements_Exec)(param_1,param_2,*(undefined4 *)(param_3 + iVar1),*(undefined4 *)(param_4 + iVar1)
+        ((void (*)())_gleDrawArraysOrElements_Exec)(param_1,param_2,*(undefined4 *)(param_3 + iVar1),*(undefined4 *)(param_4 + iVar1)
                    ,2,iVar3 + 0x10,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
                    fparam_8);
         fparam_1 = extraout_f1;
@@ -1641,7 +1641,7 @@ void _glMultiDrawElementArrayAPPLE_Exec(int param_1,undefined4 param_2,int param
 }
 
 /* _glMultiDrawElementArrayAPPLE_CompExec @ 0xaa29c (152 bytes) */
-int _glMultiDrawElementArrayAPPLE_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glMultiDrawElementArrayAPPLE_CompExec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -1726,7 +1726,7 @@ LAB_000aa588:
     piVar10 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,in_r8,iVar8,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,in_r8,iVar8,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -1844,6 +1844,7 @@ void _glMultiDrawArrays_Exec(int param_1,undefined4 param_2,int param_3,int para
 {
   int iVar1;
   int iVar2;
+  double extraout_f1;
   
   if (param_5 < 0) {
     if (*(int *)(param_1 + 0x7574) == 0) {
@@ -1856,9 +1857,9 @@ void _glMultiDrawArrays_Exec(int param_1,undefined4 param_2,int param_3,int para
       do {
         iVar1 = iVar2 * 4;
         iVar2 = iVar2 + 1;
-        fparam_1 = (double)((double (*)())_glDrawArrays_STD_Exec)(param_1,param_2,*(undefined4 *)(param_3 + iVar1),
-                                      *(undefined4 *)(param_4 + iVar1),fparam_1,fparam_2,fparam_3,
-                                      fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+        ((void (*)())_glDrawArrays_STD_Exec)(param_1,param_2,*(undefined4 *)(param_3 + iVar1),*(undefined4 *)(param_4 + iVar1)
+                   ,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+        fparam_1 = extraout_f1;
       } while (iVar2 < param_5);
     }
   }
@@ -1866,7 +1867,7 @@ void _glMultiDrawArrays_Exec(int param_1,undefined4 param_2,int param_3,int para
 }
 
 /* _glMultiDrawArrays_CompExec @ 0xaa6f0 (80 bytes) */
-int _glMultiDrawArrays_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glMultiDrawArrays_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1934,7 +1935,7 @@ LAB_000aa994:
     piVar10 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,in_r8,iVar8,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,in_r8,iVar8,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -2052,6 +2053,7 @@ int _glMultiDrawElements_Comp(param_1, param_2, param_3, param_4, param_5, param
 void _glMultiDrawElements_Exec(int param_1,undefined4 param_2,undefined4 *param_3,undefined4 param_4,undefined4 param_5,int param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   undefined4 uVar1;
+  double extraout_f1;
   
   if (param_6 < 0) {
     if (*(int *)(param_1 + 0x7574) == 0) {
@@ -2062,16 +2064,17 @@ void _glMultiDrawElements_Exec(int param_1,undefined4 param_2,undefined4 *param_
     do {
       uVar1 = *param_3;
       param_3 = param_3 + 1;
-      fparam_1 = (double)((double (*)())_glDrawElements_STD_Exec)(param_1,param_2,uVar1,param_4,param_5,fparam_1,fparam_2,fparam_3
-                                    ,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+      ((void (*)())_glDrawElements_STD_Exec)(param_1,param_2,uVar1,param_4,param_5,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+                 fparam_6,fparam_7,fparam_8);
       param_6 = param_6 + -1;
+      fparam_1 = extraout_f1;
     } while (param_6 != 0);
   }
   return;
 }
 
 /* _glMultiDrawElements_CompExec @ 0xaab08 (88 bytes) */
-int _glMultiDrawElements_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glMultiDrawElements_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2141,7 +2144,7 @@ LAB_000aadb8:
     piVar11 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -2257,7 +2260,7 @@ LAB_000aae74:
 }
 
 /* _glWeightbvARB_Exec @ 0xaae80 (188 bytes) */
-int _glWeightbvARB_Exec(param_1, param_2, param_3)
+double _glWeightbvARB_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int param_3;
@@ -2344,7 +2347,7 @@ int _glWeightbvARB_Comp(param_1, param_2, param_3)
 }
 
 /* _glWeightbvARB_CompExec @ 0xab014 (64 bytes) */
-int _glWeightbvARB_CompExec(param_1, param_2, param_3)
+void _glWeightbvARB_CompExec(param_1, param_2, param_3)
   uint param_1;
   uint param_2;
   uint param_3;
@@ -2355,7 +2358,7 @@ int _glWeightbvARB_CompExec(param_1, param_2, param_3)
 }
 
 /* _glWeightsvARB_Exec @ 0xab054 (192 bytes) */
-int _glWeightsvARB_Exec(param_1, param_2, param_3)
+double _glWeightsvARB_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   short *param_3;
@@ -2437,7 +2440,7 @@ int _glWeightsvARB_Comp(param_1, param_2, param_3)
 }
 
 /* _glWeightsvARB_CompExec @ 0xab1ec (64 bytes) */
-int _glWeightsvARB_CompExec(param_1, param_2, param_3)
+void _glWeightsvARB_CompExec(param_1, param_2, param_3)
   uint param_1;
   uint param_2;
   uint param_3;
@@ -2448,7 +2451,7 @@ int _glWeightsvARB_CompExec(param_1, param_2, param_3)
 }
 
 /* _glWeightivARB_Exec @ 0xab22c (188 bytes) */
-int _glWeightivARB_Exec(param_1, param_2, param_3)
+double _glWeightivARB_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   uint *param_3;
@@ -2528,7 +2531,7 @@ int _glWeightivARB_Comp(param_1, param_2, param_3)
 }
 
 /* _glWeightivARB_CompExec @ 0xab3bc (64 bytes) */
-int _glWeightivARB_CompExec(param_1, param_2, param_3)
+void _glWeightivARB_CompExec(param_1, param_2, param_3)
   uint param_1;
   uint param_2;
   uint param_3;
@@ -2539,7 +2542,7 @@ int _glWeightivARB_CompExec(param_1, param_2, param_3)
 }
 
 /* _glWeightfvARB_Exec @ 0xab3fc (116 bytes) */
-int _glWeightfvARB_Exec(param_1, param_2, param_3)
+double _glWeightfvARB_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   undefined4 *param_3;
@@ -2607,7 +2610,7 @@ int _glWeightfvARB_Comp(param_1, param_2, param_3)
 }
 
 /* _glWeightfvARB_CompExec @ 0xab50c (64 bytes) */
-int _glWeightfvARB_CompExec(param_1, param_2, param_3)
+void _glWeightfvARB_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2618,7 +2621,7 @@ int _glWeightfvARB_CompExec(param_1, param_2, param_3)
 }
 
 /* _glWeightdvARB_Exec @ 0xab54c (120 bytes) */
-int _glWeightdvARB_Exec(param_1, param_2, param_3)
+double _glWeightdvARB_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   double *param_3;
@@ -2687,7 +2690,7 @@ int _glWeightdvARB_Comp(param_1, param_2, param_3)
 }
 
 /* _glWeightdvARB_CompExec @ 0xab664 (64 bytes) */
-int _glWeightdvARB_CompExec(param_1, param_2, param_3)
+void _glWeightdvARB_CompExec(param_1, param_2, param_3)
   uint param_1;
   uint param_2;
   uint param_3;
@@ -2698,7 +2701,7 @@ int _glWeightdvARB_CompExec(param_1, param_2, param_3)
 }
 
 /* _glWeightubvARB_Exec @ 0xab6a4 (172 bytes) */
-int _glWeightubvARB_Exec(param_1, param_2, param_3)
+double _glWeightubvARB_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int param_3;

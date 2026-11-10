@@ -35,7 +35,7 @@ int _glWeightubvARB_Comp(param_1, param_2, param_3)
 }
 
 /* _glWeightubvARB_CompExec @ 0xab818 (64 bytes) */
-int _glWeightubvARB_CompExec(param_1, param_2, param_3)
+void _glWeightubvARB_CompExec(param_1, param_2, param_3)
   uint param_1;
   uint param_2;
   uint param_3;
@@ -46,7 +46,7 @@ int _glWeightubvARB_CompExec(param_1, param_2, param_3)
 }
 
 /* _glWeightusvARB_Exec @ 0xab858 (176 bytes) */
-int _glWeightusvARB_Exec(param_1, param_2, param_3)
+double _glWeightusvARB_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   ushort *param_3;
@@ -119,7 +119,7 @@ int _glWeightusvARB_Comp(param_1, param_2, param_3)
 }
 
 /* _glWeightusvARB_CompExec @ 0xab9d0 (64 bytes) */
-int _glWeightusvARB_CompExec(param_1, param_2, param_3)
+void _glWeightusvARB_CompExec(param_1, param_2, param_3)
   uint param_1;
   uint param_2;
   uint param_3;
@@ -130,7 +130,7 @@ int _glWeightusvARB_CompExec(param_1, param_2, param_3)
 }
 
 /* _glWeightuivARB_Exec @ 0xaba10 (176 bytes) */
-int _glWeightuivARB_Exec(param_1, param_2, param_3)
+double _glWeightuivARB_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   undefined4 *param_3;
@@ -206,7 +206,7 @@ int _glWeightuivARB_Comp(param_1, param_2, param_3)
 }
 
 /* _glWeightuivARB_CompExec @ 0xabb88 (64 bytes) */
-int _glWeightuivARB_CompExec(param_1, param_2, param_3)
+void _glWeightuivARB_CompExec(param_1, param_2, param_3)
   uint param_1;
   uint param_2;
   uint param_3;
@@ -217,7 +217,7 @@ int _glWeightuivARB_CompExec(param_1, param_2, param_3)
 }
 
 /* _glVertexBlendARB_Exec @ 0xabbc8 (104 bytes) */
-int _glVertexBlendARB_Exec(param_1, param_2)
+void _glVertexBlendARB_Exec(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -248,7 +248,7 @@ int _glVertexBlendARB_Comp(param_1, param_2)
 }
 
 /* _glVertexBlendARB_CompExec @ 0xabc7c (56 bytes) */
-int _glVertexBlendARB_CompExec(param_1, param_2)
+void _glVertexBlendARB_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -267,7 +267,7 @@ int _glVertexBlendARB_ListExec(param_1, param_2)
 }
 
 /* _glBindVertexArrayEXT_Exec @ 0xabcdc (168 bytes) */
-int _glBindVertexArrayEXT_Exec(param_1, param_2)
+void _glBindVertexArrayEXT_Exec(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -305,7 +305,7 @@ int _glBindVertexArrayEXT_Comp(param_1, param_2)
 }
 
 /* _glBindVertexArrayEXT_CompExec @ 0xabdd0 (56 bytes) */
-int _glBindVertexArrayEXT_CompExec(param_1, param_2)
+void _glBindVertexArrayEXT_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -324,7 +324,7 @@ int _glBindVertexArrayEXT_ListExec(param_1, param_2)
 }
 
 /* _glDeleteVertexArraysEXT_Exec @ 0xabe30 (272 bytes) */
-int _glDeleteVertexArraysEXT_Exec(param_1, param_2, param_3)
+void _glDeleteVertexArraysEXT_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -372,7 +372,7 @@ int _glDeleteVertexArraysEXT_Exec(param_1, param_2, param_3)
 }
 
 /* _glGenVertexArraysEXT_Exec @ 0xabf40 (236 bytes) */
-int _glGenVertexArraysEXT_Exec(param_1, param_2, param_3)
+void _glGenVertexArraysEXT_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -454,7 +454,7 @@ int _glIsVertexArrayEXT_Exec(param_1, param_2)
 }
 
 /* _glVertexAttrib1sARB_Exec @ 0xac0d4 (236 bytes) */
-int _glVertexAttrib1sARB_Exec(param_1, param_2, param_3)
+void _glVertexAttrib1sARB_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   uint param_3;
@@ -506,7 +506,7 @@ int _glVertexAttrib1sARB_Comp(param_1, param_2, param_3)
 }
 
 /* _glVertexAttrib1sARB_CompExec @ 0xac214 (64 bytes) */
-int _glVertexAttrib1sARB_CompExec(param_1, param_2, param_3)
+void _glVertexAttrib1sARB_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -629,7 +629,7 @@ void _glVertexAttrib1dARB_CompExec(undefined4 param_1,undefined4 param_2,double 
 }
 
 /* _glVertexAttrib2sARB_Exec @ 0xac4b4 (276 bytes) */
-int _glVertexAttrib2sARB_Exec(param_1, param_2, param_3, param_4)
+void _glVertexAttrib2sARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -690,7 +690,7 @@ int _glVertexAttrib2sARB_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glVertexAttrib2sARB_CompExec @ 0xac624 (72 bytes) */
-int _glVertexAttrib2sARB_CompExec(param_1, param_2, param_3, param_4)
+void _glVertexAttrib2sARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -826,7 +826,7 @@ void _glVertexAttrib2dARB_CompExec(undefined4 param_1,undefined4 param_2,double 
 }
 
 /* _glVertexAttrib3sARB_Exec @ 0xac90c (316 bytes) */
-int _glVertexAttrib3sARB_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glVertexAttrib3sARB_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint param_2;
   uint param_3;
@@ -891,7 +891,7 @@ int _glVertexAttrib3sARB_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glVertexAttrib3sARB_CompExec @ 0xacab0 (80 bytes) */
-int _glVertexAttrib3sARB_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glVertexAttrib3sARB_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1026,7 +1026,7 @@ void _glVertexAttrib3dARB_CompExec(undefined4 param_1,undefined4 param_2,double 
 }
 
 /* _glVertexAttrib4sARB_Exec @ 0xacde8 (360 bytes) */
-int _glVertexAttrib4sARB_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glVertexAttrib4sARB_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   uint param_2;
   uint param_3;
@@ -1094,7 +1094,7 @@ int _glVertexAttrib4sARB_Comp(param_1, param_2, param_3, param_4, param_5, param
 }
 
 /* _glVertexAttrib4sARB_CompExec @ 0xacfc0 (88 bytes) */
-int _glVertexAttrib4sARB_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glVertexAttrib4sARB_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1284,7 +1284,7 @@ int _glVertexAttrib4NubARB_Comp(param_1, param_2, param_3, param_4, param_5, par
 }
 
 /* _glVertexAttrib4NubARB_CompExec @ 0xad4d0 (88 bytes) */
-int _glVertexAttrib4NubARB_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glVertexAttrib4NubARB_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1303,7 +1303,7 @@ int _glVertexAttrib4NubARB_CompExec(param_1, param_2, param_3, param_4, param_5,
 }
 
 /* _glVertexAttrib1svARB_Exec @ 0xad528 (244 bytes) */
-int _glVertexAttrib1svARB_Exec(param_1, param_2, param_3)
+double _glVertexAttrib1svARB_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   short *param_3;

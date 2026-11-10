@@ -29,7 +29,7 @@ int _glResetMinmax_Comp(param_1, param_2)
 }
 
 /* _glConvolutionFilter1D_Exec @ 0x69188 (376 bytes) */
-int _glConvolutionFilter1D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _glConvolutionFilter1D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -98,7 +98,7 @@ LAB_000692a4:
 }
 
 /* _glConvolutionFilter2D_Exec @ 0x69300 (408 bytes) */
-int _glConvolutionFilter2D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _glConvolutionFilter2D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -168,7 +168,7 @@ LAB_00069438:
 }
 
 /* _glConvolutionParameteri_Exec @ 0x69498 (176 bytes) */
-int _glConvolutionParameteri_Exec(param_1, param_2, param_3, param_4)
+void _glConvolutionParameteri_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   int param_3;
@@ -209,7 +209,7 @@ int _glConvolutionParameteri_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glConvolutionParameteriv_Exec @ 0x69548 (692 bytes) */
-int _glConvolutionParameteriv_Exec(param_1, param_2, param_3, param_4)
+void _glConvolutionParameteriv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -283,7 +283,7 @@ void _glConvolutionParameterf_Exec(undefined4 param_1,undefined4 param_2,undefin
 }
 
 /* _glConvolutionParameterfv_Exec @ 0x69828 (324 bytes) */
-int _glConvolutionParameterfv_Exec(param_1, param_2, param_3, param_4)
+void _glConvolutionParameterfv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -348,7 +348,7 @@ LAB_000698b8:
 }
 
 /* _glCopyConvolutionFilter1D_Exec @ 0x6996c (824 bytes) */
-int _glCopyConvolutionFilter1D_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glCopyConvolutionFilter1D_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -396,7 +396,7 @@ int _glCopyConvolutionFilter1D_Exec(param_1, param_2, param_3, param_4, param_5,
       piVar10 = (int *)(param_1 + 0x310);
       cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
       if ((iVar6 != 0) && (*(int *)(iVar6 + 0xec) != 0)) {
-        ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,param_3,uVar3,uVar7,uVar9,iVar8,dVar11,in_f2,in_f3,in_f4,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,param_3,uVar3,uVar7,uVar9,iVar8,dVar11,in_f2,in_f3,in_f4,
                    in_f5,in_f6,in_f7,in_f8);
         *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
         dVar11 = dVar11;
@@ -510,7 +510,7 @@ LAB_00069c40:
 }
 
 /* _glCopyConvolutionFilter2D_Exec @ 0x69ca4 (856 bytes) */
-int _glCopyConvolutionFilter2D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _glCopyConvolutionFilter2D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -560,7 +560,7 @@ int _glCopyConvolutionFilter2D_Exec(param_1, param_2, param_3, param_4, param_5,
       piVar11 = (int *)(param_1 + 0x310);
       cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
       if ((iVar6 != 0) && (*(int *)(iVar6 + 0xec) != 0)) {
-        ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,param_3,uVar3,uVar7,iVar9,iVar8,dVar12,in_f2,in_f3,in_f4,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,param_3,uVar3,uVar7,iVar9,iVar8,dVar12,in_f2,in_f3,in_f4,
                    in_f5,in_f6,in_f7,in_f8);
         *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
         dVar12 = dVar12;
@@ -674,7 +674,7 @@ LAB_00069f94:
 }
 
 /* _glGetConvolutionFilter_Exec @ 0x69ffc (340 bytes) */
-int _glGetConvolutionFilter_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glGetConvolutionFilter_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -736,7 +736,7 @@ LAB_0006a0fc:
 }
 
 /* _glGetConvolutionParameteriv_Exec @ 0x6a150 (568 bytes) */
-int _glGetConvolutionParameteriv_Exec(param_1, param_2, param_3, param_4)
+void _glGetConvolutionParameteriv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -832,7 +832,7 @@ LAB_0006a1d8:
 }
 
 /* _glGetConvolutionParameterfv_Exec @ 0x6a388 (404 bytes) */
-int _glGetConvolutionParameterfv_Exec(param_1, param_2, param_3, param_4)
+void _glGetConvolutionParameterfv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -902,7 +902,7 @@ LAB_0006a4cc:
 }
 
 /* _glGetSeparableFilter_Exec @ 0x6a51c (400 bytes) */
-int _glGetSeparableFilter_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _glGetSeparableFilter_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -969,7 +969,7 @@ LAB_0006a64c:
 }
 
 /* _glSeparableFilter2D_Exec @ 0x6a6ac (480 bytes) */
-int _glSeparableFilter2D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+void _glSeparableFilter2D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -1043,7 +1043,7 @@ LAB_0006a824:
 }
 
 /* _glGetHistogram_Exec @ 0x6a88c (332 bytes) */
-int _glGetHistogram_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glGetHistogram_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -1106,7 +1106,7 @@ LAB_0006a980:
 }
 
 /* _glGetHistogramParameterfv_Exec @ 0x6a9d8 (100 bytes) */
-int _glGetHistogramParameterfv_Exec(param_1, param_2, param_3, param_4)
+void _glGetHistogramParameterfv_Exec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1120,7 +1120,7 @@ int _glGetHistogramParameterfv_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glGetHistogramParameteriv_Exec @ 0x6aa3c (168 bytes) */
-int _glGetHistogramParameteriv_Exec(param_1, param_2, param_3, param_4)
+void _glGetHistogramParameteriv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -1171,7 +1171,7 @@ LAB_0006aa8c:
 }
 
 /* _glGetMinmax_Exec @ 0x6ab04 (292 bytes) */
-int _glGetMinmax_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glGetMinmax_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -1227,7 +1227,7 @@ LAB_0006abd0:
 }
 
 /* _glGetMinmaxParameteriv_Exec @ 0x6ac28 (128 bytes) */
-int _glGetMinmaxParameteriv_Exec(param_1, param_2, param_3, param_4)
+void _glGetMinmaxParameteriv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -1265,7 +1265,7 @@ LAB_0006aca0:
 }
 
 /* _glGetMinmaxParameterfv_Exec @ 0x6aca8 (100 bytes) */
-int _glGetMinmaxParameterfv_Exec(param_1, param_2, param_3, param_4)
+void _glGetMinmaxParameterfv_Exec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1279,7 +1279,7 @@ int _glGetMinmaxParameterfv_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glHistogram_Exec @ 0x6ad0c (280 bytes) */
-int _glHistogram_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glHistogram_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -1337,7 +1337,7 @@ int _glHistogram_Exec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glMinmax_Exec @ 0x6ae24 (120 bytes) */
-int _glMinmax_Exec(param_1, param_2, param_3, param_4)
+void _glMinmax_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -1356,7 +1356,7 @@ int _glMinmax_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glResetHistogram_Exec @ 0x6ae9c (172 bytes) */
-int _glResetHistogram_Exec(param_1, param_2)
+void _glResetHistogram_Exec(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1398,7 +1398,7 @@ int _glResetHistogram_Exec(param_1, param_2)
 }
 
 /* _glResetMinmax_Exec @ 0x6af48 (172 bytes) */
-int _glResetMinmax_Exec(param_1, param_2)
+void _glResetMinmax_Exec(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1432,7 +1432,7 @@ int _glResetMinmax_Exec(param_1, param_2)
 }
 
 /* _glConvolutionFilter1D_CompExec @ 0x6aff4 (96 bytes) */
-int _glConvolutionFilter1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _glConvolutionFilter1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1447,7 +1447,7 @@ int _glConvolutionFilter1D_CompExec(param_1, param_2, param_3, param_4, param_5,
 }
 
 /* _glConvolutionFilter2D_CompExec @ 0x6b054 (104 bytes) */
-int _glConvolutionFilter2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _glConvolutionFilter2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1471,7 +1471,7 @@ void _glConvolutionParameterf_CompExec(undefined4 param_1,undefined4 param_2,und
 }
 
 /* _glConvolutionParameterfv_CompExec @ 0x6b10c (72 bytes) */
-int _glConvolutionParameterfv_CompExec(param_1, param_2, param_3, param_4)
+void _glConvolutionParameterfv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1483,7 +1483,7 @@ int _glConvolutionParameterfv_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glConvolutionParameteri_CompExec @ 0x6b154 (72 bytes) */
-int _glConvolutionParameteri_CompExec(param_1, param_2, param_3, param_4)
+void _glConvolutionParameteri_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1495,7 +1495,7 @@ int _glConvolutionParameteri_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glConvolutionParameteriv_CompExec @ 0x6b19c (72 bytes) */
-int _glConvolutionParameteriv_CompExec(param_1, param_2, param_3, param_4)
+void _glConvolutionParameteriv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1507,7 +1507,7 @@ int _glConvolutionParameteriv_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glCopyConvolutionFilter1D_CompExec @ 0x6b1e4 (88 bytes) */
-int _glCopyConvolutionFilter1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glCopyConvolutionFilter1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1521,7 +1521,7 @@ int _glCopyConvolutionFilter1D_CompExec(param_1, param_2, param_3, param_4, para
 }
 
 /* _glCopyConvolutionFilter2D_CompExec @ 0x6b23c (96 bytes) */
-int _glCopyConvolutionFilter2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _glCopyConvolutionFilter2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1536,7 +1536,7 @@ int _glCopyConvolutionFilter2D_CompExec(param_1, param_2, param_3, param_4, para
 }
 
 /* _glSeparableFilter2D_CompExec @ 0x6b29c (116 bytes) */
-int _glSeparableFilter2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+void _glSeparableFilter2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1555,7 +1555,7 @@ int _glSeparableFilter2D_CompExec(param_1, param_2, param_3, param_4, param_5, p
 }
 
 /* _glHistogram_CompExec @ 0x6b310 (80 bytes) */
-int _glHistogram_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glHistogram_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1568,7 +1568,7 @@ int _glHistogram_CompExec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glMinmax_CompExec @ 0x6b360 (72 bytes) */
-int _glMinmax_CompExec(param_1, param_2, param_3, param_4)
+void _glMinmax_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1580,7 +1580,7 @@ int _glMinmax_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glResetHistogram_CompExec @ 0x6b3a8 (56 bytes) */
-int _glResetHistogram_CompExec(param_1, param_2)
+void _glResetHistogram_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -1590,7 +1590,7 @@ int _glResetHistogram_CompExec(param_1, param_2)
 }
 
 /* _glResetMinmax_CompExec @ 0x6b3e0 (56 bytes) */
-int _glResetMinmax_CompExec(param_1, param_2)
+void _glResetMinmax_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -1791,7 +1791,7 @@ int _glLightfv_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glLightfv_CompExec @ 0x6b90c (72 bytes) */
-int _glLightfv_CompExec(param_1, param_2, param_3, param_4)
+void _glLightfv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1957,7 +1957,7 @@ LAB_0006bcb8:
 }
 
 /* _glLighti_CompExec @ 0x6bcec (72 bytes) */
-int _glLighti_CompExec(param_1, param_2, param_3, param_4)
+void _glLighti_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2280,7 +2280,7 @@ LAB_0006c730:
 }
 
 /* _glLightiv_CompExec @ 0x6c75c (72 bytes) */
-int _glLightiv_CompExec(param_1, param_2, param_3, param_4)
+void _glLightiv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2305,7 +2305,7 @@ int _glLightiv_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glGetLightfv_Exec @ 0x6c7a4 (340 bytes) */
-int _glGetLightfv_Exec(param_1, param_2, param_3, param_4)
+void _glGetLightfv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -2387,7 +2387,7 @@ LAB_0006c890:
 }
 
 /* _glGetLightiv_Exec @ 0x6c920 (676 bytes) */
-int _glGetLightiv_Exec(param_1, param_2, param_3, param_4)
+void _glGetLightiv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   undefined4 param_3;

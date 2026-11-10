@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gleInsertPixel_A_Short @ 0xea224 (52 bytes) */
-int _gleInsertPixel_A_Short(param_1, param_2)
+void _gleInsertPixel_A_Short(param_1, param_2)
   int param_1;
   undefined2 *param_2;
 {
@@ -10,7 +10,7 @@ int _gleInsertPixel_A_Short(param_1, param_2)
 }
 
 /* _gleInsertPixel_A_Ushort @ 0xea258 (52 bytes) */
-int _gleInsertPixel_A_Ushort(param_1, param_2)
+void _gleInsertPixel_A_Ushort(param_1, param_2)
   int param_1;
   undefined2 *param_2;
 {
@@ -19,7 +19,7 @@ int _gleInsertPixel_A_Ushort(param_1, param_2)
 }
 
 /* _gleInsertPixel_A_Int @ 0xea28c (52 bytes) */
-int _gleInsertPixel_A_Int(param_1, param_2)
+void _gleInsertPixel_A_Int(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -28,7 +28,7 @@ int _gleInsertPixel_A_Int(param_1, param_2)
 }
 
 /* _gleInsertPixel_A_Uint @ 0xea2c0 (96 bytes) */
-int _gleInsertPixel_A_Uint(param_1, param_2)
+void _gleInsertPixel_A_Uint(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -47,7 +47,7 @@ int _gleInsertPixel_A_Uint(param_1, param_2)
 }
 
 /* _gleInsertPixel_A_Float @ 0xea320 (12 bytes) */
-int _gleInsertPixel_A_Float(param_1, param_2)
+void _gleInsertPixel_A_Float(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -56,7 +56,7 @@ int _gleInsertPixel_A_Float(param_1, param_2)
 }
 
 /* _gleInsertPixel_L_Byte @ 0xea32c (52 bytes) */
-int _gleInsertPixel_L_Byte(param_1, param_2)
+void _gleInsertPixel_L_Byte(param_1, param_2)
   int param_1;
   undefined1 *param_2;
 {
@@ -65,7 +65,7 @@ int _gleInsertPixel_L_Byte(param_1, param_2)
 }
 
 /* _gleInsertPixel_L_Ubyte @ 0xea360 (52 bytes) */
-int _gleInsertPixel_L_Ubyte(param_1, param_2)
+void _gleInsertPixel_L_Ubyte(param_1, param_2)
   int param_1;
   undefined1 *param_2;
 {
@@ -74,7 +74,7 @@ int _gleInsertPixel_L_Ubyte(param_1, param_2)
 }
 
 /* _gleInsertPixel_L_Short @ 0xea394 (52 bytes) */
-int _gleInsertPixel_L_Short(param_1, param_2)
+void _gleInsertPixel_L_Short(param_1, param_2)
   int param_1;
   undefined2 *param_2;
 {
@@ -83,7 +83,7 @@ int _gleInsertPixel_L_Short(param_1, param_2)
 }
 
 /* _gleInsertPixel_L_Ushort @ 0xea3c8 (52 bytes) */
-int _gleInsertPixel_L_Ushort(param_1, param_2)
+void _gleInsertPixel_L_Ushort(param_1, param_2)
   int param_1;
   undefined2 *param_2;
 {
@@ -92,7 +92,7 @@ int _gleInsertPixel_L_Ushort(param_1, param_2)
 }
 
 /* _gleInsertPixel_L_Int @ 0xea3fc (52 bytes) */
-int _gleInsertPixel_L_Int(param_1, param_2)
+void _gleInsertPixel_L_Int(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -101,7 +101,7 @@ int _gleInsertPixel_L_Int(param_1, param_2)
 }
 
 /* _gleInsertPixel_L_Uint @ 0xea430 (96 bytes) */
-int _gleInsertPixel_L_Uint(param_1, param_2)
+void _gleInsertPixel_L_Uint(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -120,7 +120,7 @@ int _gleInsertPixel_L_Uint(param_1, param_2)
 }
 
 /* _gleInsertPixel_L_Float @ 0xea490 (12 bytes) */
-int _gleInsertPixel_L_Float(param_1, param_2)
+void _gleInsertPixel_L_Float(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -129,7 +129,7 @@ int _gleInsertPixel_L_Float(param_1, param_2)
 }
 
 /* _gleInsertPixel_LA_Byte @ 0xea49c (76 bytes) */
-int _gleInsertPixel_LA_Byte(param_1, param_2)
+void _gleInsertPixel_LA_Byte(param_1, param_2)
   int param_1;
   undefined1 *param_2;
 {
@@ -142,7 +142,7 @@ int _gleInsertPixel_LA_Byte(param_1, param_2)
 }
 
 /* _gleInsertPixel_LA_Ubyte @ 0xea4e8 (76 bytes) */
-int _gleInsertPixel_LA_Ubyte(param_1, param_2)
+void _gleInsertPixel_LA_Ubyte(param_1, param_2)
   int param_1;
   undefined1 *param_2;
 {
@@ -155,7 +155,7 @@ int _gleInsertPixel_LA_Ubyte(param_1, param_2)
 }
 
 /* _gleInsertPixel_LA_Short @ 0xea534 (76 bytes) */
-int _gleInsertPixel_LA_Short(param_1, param_2)
+void _gleInsertPixel_LA_Short(param_1, param_2)
   int param_1;
   undefined2 *param_2;
 {
@@ -168,7 +168,7 @@ int _gleInsertPixel_LA_Short(param_1, param_2)
 }
 
 /* _gleInsertPixel_LA_Ushort @ 0xea580 (76 bytes) */
-int _gleInsertPixel_LA_Ushort(param_1, param_2)
+void _gleInsertPixel_LA_Ushort(param_1, param_2)
   int param_1;
   undefined2 *param_2;
 {
@@ -181,7 +181,7 @@ int _gleInsertPixel_LA_Ushort(param_1, param_2)
 }
 
 /* _gleInsertPixel_LA_Int @ 0xea5cc (76 bytes) */
-int _gleInsertPixel_LA_Int(param_1, param_2)
+void _gleInsertPixel_LA_Int(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -194,7 +194,7 @@ int _gleInsertPixel_LA_Int(param_1, param_2)
 }
 
 /* _gleInsertPixel_LA_Uint @ 0xea618 (168 bytes) */
-int _gleInsertPixel_LA_Uint(param_1, param_2)
+void _gleInsertPixel_LA_Uint(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -221,7 +221,7 @@ int _gleInsertPixel_LA_Uint(param_1, param_2)
 }
 
 /* _gleInsertPixel_LA_Float @ 0xea6c0 (20 bytes) */
-int _gleInsertPixel_LA_Float(param_1, param_2)
+void _gleInsertPixel_LA_Float(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -231,7 +231,7 @@ int _gleInsertPixel_LA_Float(param_1, param_2)
 }
 
 /* _gleInsertPixel_Index_Byte @ 0xea6d4 (12 bytes) */
-int _gleInsertPixel_Index_Byte(param_1, param_2)
+void _gleInsertPixel_Index_Byte(param_1, param_2)
   int param_1;
   undefined1 *param_2;
 {
@@ -240,7 +240,7 @@ int _gleInsertPixel_Index_Byte(param_1, param_2)
 }
 
 /* _gleInsertPixel_Index_Ubyte @ 0xea6e0 (12 bytes) */
-int _gleInsertPixel_Index_Ubyte(param_1, param_2)
+void _gleInsertPixel_Index_Ubyte(param_1, param_2)
   int param_1;
   undefined1 *param_2;
 {
@@ -249,7 +249,7 @@ int _gleInsertPixel_Index_Ubyte(param_1, param_2)
 }
 
 /* _gleInsertPixel_Index_Short @ 0xea6ec (12 bytes) */
-int _gleInsertPixel_Index_Short(param_1, param_2)
+void _gleInsertPixel_Index_Short(param_1, param_2)
   int param_1;
   undefined2 *param_2;
 {
@@ -258,7 +258,7 @@ int _gleInsertPixel_Index_Short(param_1, param_2)
 }
 
 /* _gleInsertPixel_Index_Ushort @ 0xea6f8 (12 bytes) */
-int _gleInsertPixel_Index_Ushort(param_1, param_2)
+void _gleInsertPixel_Index_Ushort(param_1, param_2)
   int param_1;
   undefined2 *param_2;
 {
@@ -267,7 +267,7 @@ int _gleInsertPixel_Index_Ushort(param_1, param_2)
 }
 
 /* _gleInsertPixel_Index_Int @ 0xea704 (12 bytes) */
-int _gleInsertPixel_Index_Int(param_1, param_2)
+void _gleInsertPixel_Index_Int(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -276,7 +276,7 @@ int _gleInsertPixel_Index_Int(param_1, param_2)
 }
 
 /* _gleInsertPixel_Index_Uint @ 0xea710 (12 bytes) */
-int _gleInsertPixel_Index_Uint(param_1, param_2)
+void _gleInsertPixel_Index_Uint(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -285,7 +285,7 @@ int _gleInsertPixel_Index_Uint(param_1, param_2)
 }
 
 /* _gleInsertPixel_Index_Float @ 0xea71c (104 bytes) */
-int _gleInsertPixel_Index_Float(param_1, param_2)
+void _gleInsertPixel_Index_Float(param_1, param_2)
   int param_1;
   float *param_2;
 {
@@ -297,7 +297,7 @@ int _gleInsertPixel_Index_Float(param_1, param_2)
 }
 
 /* _gleInsertPixel_Depth_Byte @ 0xea784 (52 bytes) */
-int _gleInsertPixel_Depth_Byte(param_1, param_2)
+void _gleInsertPixel_Depth_Byte(param_1, param_2)
   int param_1;
   undefined1 *param_2;
 {
@@ -306,7 +306,7 @@ int _gleInsertPixel_Depth_Byte(param_1, param_2)
 }
 
 /* _gleInsertPixel_Depth_Ubyte @ 0xea7b8 (52 bytes) */
-int _gleInsertPixel_Depth_Ubyte(param_1, param_2)
+void _gleInsertPixel_Depth_Ubyte(param_1, param_2)
   int param_1;
   undefined1 *param_2;
 {
@@ -315,7 +315,7 @@ int _gleInsertPixel_Depth_Ubyte(param_1, param_2)
 }
 
 /* _gleInsertPixel_Depth_Short @ 0xea7ec (52 bytes) */
-int _gleInsertPixel_Depth_Short(param_1, param_2)
+void _gleInsertPixel_Depth_Short(param_1, param_2)
   int param_1;
   undefined2 *param_2;
 {
@@ -324,7 +324,7 @@ int _gleInsertPixel_Depth_Short(param_1, param_2)
 }
 
 /* _gleInsertPixel_Depth_Ushort @ 0xea820 (52 bytes) */
-int _gleInsertPixel_Depth_Ushort(param_1, param_2)
+void _gleInsertPixel_Depth_Ushort(param_1, param_2)
   int param_1;
   undefined2 *param_2;
 {
@@ -333,7 +333,7 @@ int _gleInsertPixel_Depth_Ushort(param_1, param_2)
 }
 
 /* _gleInsertPixel_Depth_Int @ 0xea854 (52 bytes) */
-int _gleInsertPixel_Depth_Int(param_1, param_2)
+void _gleInsertPixel_Depth_Int(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -342,7 +342,7 @@ int _gleInsertPixel_Depth_Int(param_1, param_2)
 }
 
 /* _gleInsertPixel_Depth_Uint @ 0xea888 (96 bytes) */
-int _gleInsertPixel_Depth_Uint(param_1, param_2)
+void _gleInsertPixel_Depth_Uint(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -361,7 +361,7 @@ int _gleInsertPixel_Depth_Uint(param_1, param_2)
 }
 
 /* _gleInsertPixel_Depth_Float @ 0xea8e8 (12 bytes) */
-int _gleInsertPixel_Depth_Float(param_1, param_2)
+void _gleInsertPixel_Depth_Float(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -370,7 +370,7 @@ int _gleInsertPixel_Depth_Float(param_1, param_2)
 }
 
 /* _gleBeginPointsRender @ 0xea8f4 (52 bytes) */
-int _gleBeginPointsRender(param_1)
+void _gleBeginPointsRender(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -383,7 +383,7 @@ int _gleBeginPointsRender(param_1)
 }
 
 /* _gleBeginPointsRenderTCL @ 0xea928 (52 bytes) */
-int _gleBeginPointsRenderTCL(param_1)
+void _gleBeginPointsRenderTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -396,7 +396,7 @@ int _gleBeginPointsRenderTCL(param_1)
 }
 
 /* _gleBeginPointsRenderTCLRDirty @ 0xea95c (60 bytes) */
-int _gleBeginPointsRenderTCLRDirty(param_1)
+void _gleBeginPointsRenderTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -412,7 +412,7 @@ int _gleBeginPointsRenderTCLRDirty(param_1)
 }
 
 /* _gleBeginPointsSelectFeedback @ 0xea998 (76 bytes) */
-int _gleBeginPointsSelectFeedback(param_1)
+void _gleBeginPointsSelectFeedback(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -509,7 +509,7 @@ int _gleClipPointsPlane(param_1, param_2, param_3)
 }
 
 /* FUN_000eab28 @ 0xeab28 (700 bytes) */
-int FUN_000eab28(param_1, param_2, param_3)
+void FUN_000eab28(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -592,7 +592,7 @@ int FUN_000eab28(param_1, param_2, param_3)
 }
 
 /* FUN_000eae0c @ 0xeae0c (620 bytes) */
-int FUN_000eae0c(param_1)
+void FUN_000eae0c(param_1)
   int param_1;
 {
   bool bVar1;
@@ -663,7 +663,7 @@ int FUN_000eae0c(param_1)
 }
 
 /* _gleSelectPointsFunc @ 0xeb078 (352 bytes) */
-int _gleSelectPointsFunc(param_1)
+void _gleSelectPointsFunc(param_1)
   int param_1;
 {
   bool bVar1;
@@ -778,7 +778,7 @@ double _glePolyAreaPtr(undefined4 param_1,undefined4 *param_2,int param_3,undefi
 }
 
 /* _gleBeginTrianglesRenderSmooth @ 0xeb2e0 (52 bytes) */
-int _gleBeginTrianglesRenderSmooth(param_1)
+void _gleBeginTrianglesRenderSmooth(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -791,7 +791,7 @@ int _gleBeginTrianglesRenderSmooth(param_1)
 }
 
 /* _gleBeginTrianglesRenderFlat @ 0xeb314 (52 bytes) */
-int _gleBeginTrianglesRenderFlat(param_1)
+void _gleBeginTrianglesRenderFlat(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -804,7 +804,7 @@ int _gleBeginTrianglesRenderFlat(param_1)
 }
 
 /* _gleBeginTrianglesRenderTCL @ 0xeb348 (52 bytes) */
-int _gleBeginTrianglesRenderTCL(param_1)
+void _gleBeginTrianglesRenderTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -817,7 +817,7 @@ int _gleBeginTrianglesRenderTCL(param_1)
 }
 
 /* _gleBeginTrianglesRenderTCLRDirty @ 0xeb37c (60 bytes) */
-int _gleBeginTrianglesRenderTCLRDirty(param_1)
+void _gleBeginTrianglesRenderTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -833,7 +833,7 @@ int _gleBeginTrianglesRenderTCLRDirty(param_1)
 }
 
 /* _gleBeginTrianglesSelectFeedback @ 0xeb3b8 (76 bytes) */
-int _gleBeginTrianglesSelectFeedback(param_1)
+void _gleBeginTrianglesSelectFeedback(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -849,7 +849,7 @@ int _gleBeginTrianglesSelectFeedback(param_1)
 }
 
 /* _gleBeginTriangleStripRenderSmooth @ 0xeb404 (52 bytes) */
-int _gleBeginTriangleStripRenderSmooth(param_1)
+void _gleBeginTriangleStripRenderSmooth(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -862,7 +862,7 @@ int _gleBeginTriangleStripRenderSmooth(param_1)
 }
 
 /* _gleBeginTriangleStripRenderFlat @ 0xeb438 (52 bytes) */
-int _gleBeginTriangleStripRenderFlat(param_1)
+void _gleBeginTriangleStripRenderFlat(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -875,7 +875,7 @@ int _gleBeginTriangleStripRenderFlat(param_1)
 }
 
 /* _gleBeginTriangleStripRenderTCL @ 0xeb46c (52 bytes) */
-int _gleBeginTriangleStripRenderTCL(param_1)
+void _gleBeginTriangleStripRenderTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -888,7 +888,7 @@ int _gleBeginTriangleStripRenderTCL(param_1)
 }
 
 /* _gleBeginTriangleStripRenderTCLRDirty @ 0xeb4a0 (60 bytes) */
-int _gleBeginTriangleStripRenderTCLRDirty(param_1)
+void _gleBeginTriangleStripRenderTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -904,7 +904,7 @@ int _gleBeginTriangleStripRenderTCLRDirty(param_1)
 }
 
 /* _gleBeginTriangleStripSelectFeedback @ 0xeb4dc (76 bytes) */
-int _gleBeginTriangleStripSelectFeedback(param_1)
+void _gleBeginTriangleStripSelectFeedback(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -920,7 +920,7 @@ int _gleBeginTriangleStripSelectFeedback(param_1)
 }
 
 /* _gleBeginTriangleFanRenderSmooth @ 0xeb528 (52 bytes) */
-int _gleBeginTriangleFanRenderSmooth(param_1)
+void _gleBeginTriangleFanRenderSmooth(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -933,7 +933,7 @@ int _gleBeginTriangleFanRenderSmooth(param_1)
 }
 
 /* _gleBeginTriangleFanRenderFlat @ 0xeb55c (52 bytes) */
-int _gleBeginTriangleFanRenderFlat(param_1)
+void _gleBeginTriangleFanRenderFlat(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -946,7 +946,7 @@ int _gleBeginTriangleFanRenderFlat(param_1)
 }
 
 /* _gleBeginTriangleFanRenderTCL @ 0xeb590 (52 bytes) */
-int _gleBeginTriangleFanRenderTCL(param_1)
+void _gleBeginTriangleFanRenderTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -959,7 +959,7 @@ int _gleBeginTriangleFanRenderTCL(param_1)
 }
 
 /* _gleBeginTriangleFanRenderTCLRDirty @ 0xeb5c4 (60 bytes) */
-int _gleBeginTriangleFanRenderTCLRDirty(param_1)
+void _gleBeginTriangleFanRenderTCLRDirty(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -975,7 +975,7 @@ int _gleBeginTriangleFanRenderTCLRDirty(param_1)
 }
 
 /* _gleBeginTriangleFanSelectFeedback @ 0xeb600 (76 bytes) */
-int _gleBeginTriangleFanSelectFeedback(param_1)
+void _gleBeginTriangleFanSelectFeedback(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -991,7 +991,7 @@ int _gleBeginTriangleFanSelectFeedback(param_1)
 }
 
 /* _gleBeginQuadsRenderSmooth @ 0xeb64c (52 bytes) */
-int _gleBeginQuadsRenderSmooth(param_1)
+void _gleBeginQuadsRenderSmooth(param_1)
   int param_1;
 {
   undefined *puVar1;

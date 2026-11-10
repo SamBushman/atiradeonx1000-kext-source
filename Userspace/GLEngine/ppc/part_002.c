@@ -33,7 +33,7 @@ void _glAlphaFunc_Exec(int param_1,int param_2,float fparam_1)
 }
 
 /* _glDisable_Exec @ 0x164fc (108 bytes) */
-int _glDisable_Exec(param_1, param_2)
+double _glDisable_Exec(param_1, param_2)
   int param_1;
   uint param_2;
 {
@@ -67,7 +67,7 @@ int _glDisable_Exec(param_1, param_2)
 }
 
 /* _gleSetEnable_BLEND @ 0x16568 (32 bytes) */
-int _gleSetEnable_BLEND(param_1, param_2, param_3)
+void _gleSetEnable_BLEND(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -81,7 +81,7 @@ int _gleSetEnable_BLEND(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_DEPTH_TEST @ 0x16588 (32 bytes) */
-int _gleSetEnable_DEPTH_TEST(param_1, param_2, param_3)
+void _gleSetEnable_DEPTH_TEST(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -95,7 +95,7 @@ int _gleSetEnable_DEPTH_TEST(param_1, param_2, param_3)
 }
 
 /* _glDepthMask_Exec @ 0x165a8 (64 bytes) */
-int _glDepthMask_Exec(param_1, param_2)
+void _glDepthMask_Exec(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -112,7 +112,7 @@ int _glDepthMask_Exec(param_1, param_2)
 }
 
 /* _gleSetEnable_CULL_FACE @ 0x165e8 (84 bytes) */
-int _gleSetEnable_CULL_FACE(param_1, param_2, param_3)
+void _gleSetEnable_CULL_FACE(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -127,7 +127,7 @@ int _gleSetEnable_CULL_FACE(param_1, param_2, param_3)
 }
 
 /* _glActiveTexture_Exec @ 0x1663c (132 bytes) */
-int _glActiveTexture_Exec(param_1, param_2)
+void _glActiveTexture_Exec(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -163,7 +163,7 @@ int _glActiveTexture_Exec(param_1, param_2)
 }
 
 /* _glTexEnvfv_Exec @ 0x166c0 (3216 bytes) */
-int _glTexEnvfv_Exec(param_1, param_2, param_3, param_4)
+void _glTexEnvfv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   uint param_3;
@@ -600,7 +600,7 @@ LAB_0001736c:
 }
 
 /* _glHint_Exec @ 0x17384 (444 bytes) */
-int _glHint_Exec(param_1, param_2, param_3)
+void _glHint_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   int param_3;
@@ -686,7 +686,7 @@ LAB_00017518:
 }
 
 /* _glGenTextures_Exec @ 0x17540 (236 bytes) */
-int _glGenTextures_Exec(param_1, param_2, param_3)
+void _glGenTextures_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -739,7 +739,7 @@ int _glGenTextures_Exec(param_1, param_2, param_3)
 }
 
 /* _glPixelStorei_Exec @ 0x1762c (648 bytes) */
-int _glPixelStorei_Exec(param_1, param_2, param_3)
+void _glPixelStorei_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   int param_3;
@@ -896,7 +896,7 @@ LAB_000178a4:
 }
 
 /* _glBindTexture_Exec @ 0x178b4 (388 bytes) */
-int _glBindTexture_Exec(param_1, param_2, param_3)
+void _glBindTexture_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   undefined4 param_3;
@@ -961,7 +961,7 @@ LAB_000179b4:
 }
 
 /* _gleBindTexture @ 0x17a38 (420 bytes) */
-int _gleBindTexture(param_1, param_2, param_3, param_4)
+void _gleBindTexture(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   int param_3;
@@ -1135,7 +1135,7 @@ int _gleAddHashName(param_1, param_2)
 }
 
 /* _gleAddHashObject @ 0x17de0 (24 bytes) */
-int _gleAddHashObject(param_1, param_2)
+void _gleAddHashObject(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -1148,7 +1148,7 @@ int _gleAddHashObject(param_1, param_2)
 }
 
 /* _glTextureRangeAPPLE_Exec @ 0x17df8 (176 bytes) */
-int _glTextureRangeAPPLE_Exec(param_1, param_2, param_3, param_4)
+void _glTextureRangeAPPLE_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -1233,7 +1233,7 @@ LAB_00017f48:
 }
 
 /* _glTexParameteri_Exec @ 0x17f88 (40 bytes) */
-int _glTexParameteri_Exec(param_1, param_2, param_3, param_4)
+void _glTexParameteri_Exec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2248,7 +2248,7 @@ LAB_00019690:
 }
 
 /* _glePixelPackSettings @ 0x196b4 (376 bytes) */
-int _glePixelPackSettings(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
+void _glePixelPackSettings(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   undefined4 param_1;
   undefined4 param_2;
   int param_3;
@@ -3732,7 +3732,7 @@ int _glGetError_Exec(param_1)
 }
 
 /* _glBlendFunc_Exec @ 0x1b5fc (168 bytes) */
-int _glBlendFunc_Exec(param_1, param_2, param_3)
+void _glBlendFunc_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   uint param_3;
@@ -3785,7 +3785,7 @@ LAB_0001b654:
 }
 
 /* _glColorMask_Exec @ 0x1b6a4 (100 bytes) */
-int _glColorMask_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glColorMask_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -3808,7 +3808,7 @@ int _glColorMask_Exec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4ub_Exec @ 0x1b708 (80 bytes) */
-int _glColor4ub_Exec(param_1, param_2, param_3, param_4, param_5)
+void _glColor4ub_Exec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -4141,7 +4141,7 @@ LAB_0001c14c:
 }
 
 /* _glTexEnvi_Exec @ 0x1c164 (2280 bytes) */
-int _glTexEnvi_Exec(param_1, param_2, param_3, param_4)
+void _glTexEnvi_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   uint param_3;
@@ -4427,7 +4427,7 @@ LAB_0001ca64:
 }
 
 /* _gleSetEnable_TEXTURE_RECTANGLE_EXT @ 0x1ca7c (80 bytes) */
-int _gleSetEnable_TEXTURE_RECTANGLE_EXT(param_1, param_2, param_3)
+void _gleSetEnable_TEXTURE_RECTANGLE_EXT(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -4497,7 +4497,7 @@ void _glBegin_Exec(int param_1,uint param_2,double fparam_1,double fparam_2,doub
   piVar8 = (int *)(param_1 + 0x310);
   cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
   if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-    ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
                fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
   }
@@ -4587,7 +4587,7 @@ LAB_0001cd44:
 }
 
 /* _gleUpdateDrawArraysFuncs @ 0x1cd8c (916 bytes) */
-int _gleUpdateDrawArraysFuncs(param_1)
+void _gleUpdateDrawArraysFuncs(param_1)
   int param_1;
 {
   int iVar1;
@@ -4687,7 +4687,7 @@ int _gleUpdateDrawArraysFuncs(param_1)
 }
 
 /* _gleBeginPrimitiveTCLFunc @ 0x1d120 (168 bytes) */
-int _gleBeginPrimitiveTCLFunc(param_1)
+void _gleBeginPrimitiveTCLFunc(param_1)
   int param_1;
 {
   short sVar1;
@@ -4746,7 +4746,7 @@ void _glMultiTexCoord2f_Exec(int param_1,uint param_2,float fparam_1,float fpara
 }
 
 /* _glVertex2f_Exec @ 0x1d20c (44 bytes) */
-int _glVertex2f_Exec(param_1)
+void _glVertex2f_Exec(param_1)
   int param_1;
 {
   code *UNRECOVERED_JUMPTABLE;
@@ -5245,7 +5245,7 @@ LAB_0001de0c:
 }
 
 /* _gleSetFunctionIDFromCurrent @ 0x1de2c (92 bytes) */
-int _gleSetFunctionIDFromCurrent(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _gleSetFunctionIDFromCurrent(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   uint *param_2;
   undefined4 param_3;

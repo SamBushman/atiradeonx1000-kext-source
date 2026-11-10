@@ -46,7 +46,7 @@ float * _glVertex3f_Comp(undefined4 param_1,double fparam_1,double fparam_2,doub
 }
 
 /* _glVertex3f_Exec @ 0x3aa24 (40 bytes) */
-int _glVertex3f_Exec(param_1)
+void _glVertex3f_Exec(param_1)
   int param_1;
 {
   code *UNRECOVERED_JUMPTABLE;
@@ -62,7 +62,7 @@ int _glVertex3f_Exec(param_1)
 }
 
 /* _glPushMatrix_CompExec @ 0x3aa74 (48 bytes) */
-int _glPushMatrix_CompExec(param_1)
+void _glPushMatrix_CompExec(param_1)
   undefined4 param_1;
 {
   ((int (*)())_glPushMatrix_Comp)(param_1);
@@ -103,7 +103,7 @@ float * _glScalef_Comp(undefined4 param_1,double fparam_1,double fparam_2,double
 }
 
 /* _glPopMatrix_CompExec @ 0x3ab98 (48 bytes) */
-int _glPopMatrix_CompExec(param_1)
+void _glPopMatrix_CompExec(param_1)
   undefined4 param_1;
 {
   ((int (*)())_glPopMatrix_Comp)(param_1);
@@ -144,7 +144,7 @@ float * _glTranslatef_Comp(undefined4 param_1,double fparam_1,double fparam_2,do
 }
 
 /* _gleBeginLineLoopRenderTCL @ 0x3acbc (60 bytes) */
-int _gleBeginLineLoopRenderTCL(param_1)
+void _gleBeginLineLoopRenderTCL(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -160,7 +160,7 @@ int _gleBeginLineLoopRenderTCL(param_1)
 }
 
 /* _gleRenderLineLoopTCLFunc @ 0x3acf8 (180 bytes) */
-int _gleRenderLineLoopTCLFunc(param_1)
+void _gleRenderLineLoopTCLFunc(param_1)
   int param_1;
 {
   int iVar1;
@@ -219,7 +219,7 @@ int _gleRenderLineLoopTCLFunc(param_1)
 }
 
 /* _glEndList_Exec @ 0x3adac (40 bytes) */
-int _glEndList_Exec(param_1)
+void _glEndList_Exec(param_1)
   int param_1;
 {
   if (*(int *)(param_1 + 0x5408) != 0) {
@@ -234,12 +234,11 @@ int _glEndList_Exec(param_1)
 }
 
 /* _gleEndList @ 0x3add4 (380 bytes) */
-int _gleEndList(param_1)
+void _gleEndList(param_1)
   int param_1;
 {
   int iVar1;
   int iVar2;
-  undefined4 extraout_r3;
   undefined4 uVar3;
   int iVar4;
   uint uVar5;
@@ -256,7 +255,7 @@ int _gleEndList(param_1)
       if (*(int *)(param_1 + 0x7574) == 0) {
         *(undefined4 *)(param_1 + 0x7574) = 0x505;
       }
-      return extraout_r3;
+      return;
     }
     *(uint *)(param_1 + 0x53fc) = uVar5;
   }
@@ -290,8 +289,8 @@ int _gleEndList(param_1)
     _free(iVar2);
     *(undefined4 *)(iVar4 + 0x14) = 0;
   }
-  uVar3 = _gliExecDispatchTable(param_1);
-  return uVar3;
+  _gliExecDispatchTable(param_1);
+  return;
 }
 
 /* _gleIsHashName @ 0x3af50 (68 bytes) */
@@ -316,7 +315,7 @@ int _gleIsHashName(param_1, param_2)
 }
 
 /* _gleOptimizeDisplayList @ 0x3af94 (9884 bytes) */
-int _gleOptimizeDisplayList(param_1, param_2)
+void _gleOptimizeDisplayList(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -4174,7 +4173,7 @@ void _glSwap_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   piVar8 = (int *)(param_1 + 0x310);
   cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
   if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-    ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
                fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
   }
@@ -4262,7 +4261,7 @@ LAB_000435b4:
 }
 
 /* _glDeleteLists_Exec @ 0x435e8 (228 bytes) */
-int _glDeleteLists_Exec(param_1, param_2, param_3)
+void _glDeleteLists_Exec(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -4301,7 +4300,7 @@ int _glDeleteLists_Exec(param_1, param_2, param_3)
 }
 
 /* _gleFreeDisplayListObject @ 0x436cc (164 bytes) */
-int _gleFreeDisplayListObject(param_1, param_2)
+void _gleFreeDisplayListObject(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
@@ -4555,7 +4554,7 @@ int _gleAddListItemWithFree(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _CloseCurrentVAR @ 0x43d34 (228 bytes) */
-int _CloseCurrentVAR(param_1, param_2, param_3, param_4, param_5)
+void _CloseCurrentVAR(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -4594,7 +4593,7 @@ int _CloseCurrentVAR(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gleCallList @ 0x43e1c (184 bytes) */
-int _gleCallList(param_1, param_2)
+void _gleCallList(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -4862,7 +4861,7 @@ int _gleSetupAndDrawArraysOrElementsOutOfLine_ListExec(param_1, param_2)
     piVar16 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar7 != 0) && (*(int *)(iVar7 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar7 + 0x10,piVar8,in_r6,in_r7,in_r8,iVar9,fparam_1,in_f2,in_f3,in_f4,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar7 + 0x10,piVar8,in_r6,in_r7,in_r8,iVar9,fparam_1,in_f2,in_f3,in_f4,
                  in_f5,in_f6,in_f7,in_f8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -4969,7 +4968,7 @@ LAB_000444f0:
     piVar16 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar7 != 0) && (*(int *)(iVar7 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar7 + 0x10,piVar8,in_r6,in_r7,in_r8,iVar9,fparam_1,in_f2,in_f3,in_f4,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar7 + 0x10,piVar8,in_r6,in_r7,in_r8,iVar9,fparam_1,in_f2,in_f3,in_f4,
                  in_f5,in_f6,in_f7,in_f8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
     }
@@ -5077,7 +5076,7 @@ LAB_00044808:
 }
 
 /* _gleCreateDrawArraysOrElementsVertexObject @ 0x44830 (308 bytes) */
-int _gleCreateDrawArraysOrElementsVertexObject(param_1, param_2)
+double _gleCreateDrawArraysOrElementsVertexObject(param_1, param_2)
   undefined4 param_1;
   uint *param_2;
 {
@@ -5136,7 +5135,7 @@ int _gleCreateDrawArraysOrElementsVertexObject(param_1, param_2)
 }
 
 /* _gleFlushPluginVertexArray @ 0x44964 (212 bytes) */
-int _gleFlushPluginVertexArray(param_1, param_2, param_3, param_4)
+void _gleFlushPluginVertexArray(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 *param_2;
   undefined4 param_3;
@@ -5215,7 +5214,7 @@ int _gleSetCurrentVertexObject(param_1, param_2)
 }
 
 /* _gleResetVACachePointers @ 0x44ad0 (72 bytes) */
-int _gleResetVACachePointers(param_1)
+void _gleResetVACachePointers(param_1)
   int param_1;
 {
   int *piVar1;
@@ -5245,7 +5244,7 @@ int _gleResetVACachePointers(param_1)
 }
 
 /* _gleSetClientEnableFlag @ 0x44b18 (684 bytes) */
-int _gleSetClientEnableFlag(param_1, param_2, param_3)
+double _gleSetClientEnableFlag(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   uint param_3;
@@ -5353,7 +5352,7 @@ LAB_00044cf0:
 }
 
 /* _gleSetupOutOfLineDrawPointers @ 0x44dc4 (416 bytes) */
-int _gleSetupOutOfLineDrawPointers(param_1, param_2)
+double _gleSetupOutOfLineDrawPointers(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -5462,7 +5461,7 @@ int _gleExecuteVertexArrayRange(param_1, param_2, param_3, param_4, param_5, par
 }
 
 /* _gleDrawArraysSyncState @ 0x4500c (736 bytes) */
-int _gleDrawArraysSyncState(param_1, param_2)
+void _gleDrawArraysSyncState(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -5723,7 +5722,7 @@ int _gleDrawArraysOrElementsOutOfLine_ListExec(param_1, param_2)
     piVar15 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar7 != 0) && (*(int *)(iVar7 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar7 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar8,fparam_1,in_f2,in_f3,in_f4,in_f5
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar7 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar8,fparam_1,in_f2,in_f3,in_f4,in_f5
                  ,in_f6,in_f7,in_f8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -5830,7 +5829,7 @@ LAB_0004561c:
     piVar15 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar7 != 0) && (*(int *)(iVar7 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar7 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar8,fparam_1,in_f2,in_f3,in_f4,in_f5
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar7 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar8,fparam_1,in_f2,in_f3,in_f4,in_f5
                  ,in_f6,in_f7,in_f8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
     }

@@ -32,7 +32,7 @@ void _glCopyPixels_NoopExec(int param_1,undefined4 param_2,undefined4 param_3,un
     piVar11 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar4 != 0) && (*(int *)(iVar4 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar4 + 0x10,uVar5,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar4 + 0x10,uVar5,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -143,7 +143,7 @@ int _glDepthFunc_Comp(param_1, param_2)
 }
 
 /* _glDepthFunc_CompExec @ 0x62590 (56 bytes) */
-int _glDepthFunc_CompExec(param_1, param_2)
+void _glDepthFunc_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -343,7 +343,7 @@ int _glCallList_Comp(param_1, param_2)
 }
 
 /* _glCallList_CompExec @ 0x62a10 (56 bytes) */
-int _glCallList_CompExec(param_1, param_2)
+void _glCallList_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -387,7 +387,7 @@ int _glCallLists_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glCallLists_Exec @ 0x62b2c (764 bytes) */
-int _glCallLists_Exec(param_1, param_2, param_3, param_4)
+void _glCallLists_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -529,7 +529,7 @@ int _glCallLists_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glCallLists_CompExec @ 0x62e50 (72 bytes) */
-int _glCallLists_CompExec(param_1, param_2, param_3, param_4)
+void _glCallLists_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -583,7 +583,7 @@ int _glListBase_Comp(param_1, param_2)
 }
 
 /* _glListBase_Exec @ 0x62f5c (44 bytes) */
-int _glListBase_Exec(param_1, param_2)
+void _glListBase_Exec(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -599,7 +599,7 @@ int _glListBase_Exec(param_1, param_2)
 }
 
 /* _glListBase_CompExec @ 0x62f88 (56 bytes) */
-int _glListBase_CompExec(param_1, param_2)
+void _glListBase_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -637,7 +637,7 @@ int _glDrawBuffer_Comp(param_1, param_2)
 }
 
 /* _glDrawBuffer_Exec @ 0x63034 (472 bytes) */
-int _glDrawBuffer_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _glDrawBuffer_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   uint param_2;
   undefined4 param_3;
@@ -762,7 +762,7 @@ LAB_00063168:
 }
 
 /* _glDrawBuffer_CompExec @ 0x6320c (56 bytes) */
-int _glDrawBuffer_CompExec(param_1, param_2)
+void _glDrawBuffer_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -814,7 +814,7 @@ int _glDrawBuffersARB_Comp(param_1, param_2, param_3)
 }
 
 /* _glDrawBuffersARB_Exec @ 0x6330c (652 bytes) */
-int _glDrawBuffersARB_Exec(param_1, param_2, param_3)
+void _glDrawBuffersARB_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -962,7 +962,7 @@ LAB_000635a8:
 }
 
 /* _glDrawBuffersARB_CompExec @ 0x635cc (64 bytes) */
-int _glDrawBuffersARB_CompExec(param_1, param_2, param_3)
+void _glDrawBuffersARB_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1097,7 +1097,7 @@ LAB_000637ac:
         piVar11 = (int *)(param_1 + 0x310);
         cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
         if ((iVar8 != 0) && (*(int *)(iVar8 + 0xec) != 0)) {
-          ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar8 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar10,fparam_1,fparam_2,fparam_3,
+          ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar8 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar10,fparam_1,fparam_2,fparam_3,
                      fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
           *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
         }
@@ -1464,7 +1464,7 @@ LAB_00063f94:
       piVar16 = (int *)(param_1 + 0x310);
       cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
       if ((iVar8 != 0) && (*(int *)(iVar8 + 0xec) != 0)) {
-        ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar8 + 0x10,iVar11,uVar12,uVar10,iVar5,iVar9,fparam_1,fparam_2,fparam_3,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar8 + 0x10,iVar11,uVar12,uVar10,iVar5,iVar9,fparam_1,fparam_2,fparam_3,
                    fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
         *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       }
@@ -1585,7 +1585,7 @@ LAB_0006435c:
 }
 
 /* _glDrawPixels_CompExec @ 0x6437c (88 bytes) */
-int _glDrawPixels_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
+void _glDrawPixels_CompExec(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1640,7 +1640,7 @@ void _glDrawPixels_NoopExec(int param_1,undefined4 param_2,undefined4 param_3,un
     piVar11 = (int *)(param_1 + 0x310);
     cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
     if ((iVar4 != 0) && (*(int *)(iVar4 + 0xec) != 0)) {
-      ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar4 + 0x10,uVar5,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar4 + 0x10,uVar5,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -1751,7 +1751,7 @@ int _glEdgeFlag_Comp(param_1, param_2)
 }
 
 /* _glEdgeFlag_Exec @ 0x646e8 (16 bytes) */
-int _glEdgeFlag_Exec(param_1, param_2)
+double _glEdgeFlag_Exec(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1760,7 +1760,7 @@ int _glEdgeFlag_Exec(param_1, param_2)
 }
 
 /* _glEdgeFlag_CompExec @ 0x646f8 (56 bytes) */
-int _glEdgeFlag_CompExec(param_1, param_2)
+void _glEdgeFlag_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -1784,7 +1784,7 @@ int _glEdgeFlagv_Comp(param_1, param_2)
 }
 
 /* _glEdgeFlagv_Exec @ 0x64780 (20 bytes) */
-int _glEdgeFlagv_Exec(param_1, param_2)
+void _glEdgeFlagv_Exec(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -1793,7 +1793,7 @@ int _glEdgeFlagv_Exec(param_1, param_2)
 }
 
 /* _glEdgeFlagv_CompExec @ 0x64794 (56 bytes) */
-int _glEdgeFlagv_CompExec(param_1, param_2)
+void _glEdgeFlagv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -1844,7 +1844,7 @@ int _glEvalCoord1dv_Comp(param_1, param_2)
 }
 
 /* _glEvalCoord1dv_Exec @ 0x648e4 (12 bytes) */
-int _glEvalCoord1dv_Exec(param_1, param_2)
+void _glEvalCoord1dv_Exec(param_1, param_2)
   undefined4 param_1;
   double *param_2;
 {
@@ -1853,7 +1853,7 @@ int _glEvalCoord1dv_Exec(param_1, param_2)
 }
 
 /* _glEvalCoord1dv_CompExec @ 0x648f0 (56 bytes) */
-int _glEvalCoord1dv_CompExec(param_1, param_2)
+void _glEvalCoord1dv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -1906,7 +1906,7 @@ int _glEvalCoord1fv_Comp(param_1, param_2)
 }
 
 /* _glEvalCoord1fv_Exec @ 0x64a38 (8 bytes) */
-int _glEvalCoord1fv_Exec(param_1, param_2)
+void _glEvalCoord1fv_Exec(param_1, param_2)
   undefined4 param_1;
   float *param_2;
 {
@@ -1915,7 +1915,7 @@ int _glEvalCoord1fv_Exec(param_1, param_2)
 }
 
 /* _glEvalCoord1fv_CompExec @ 0x64a40 (56 bytes) */
-int _glEvalCoord1fv_CompExec(param_1, param_2)
+void _glEvalCoord1fv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {

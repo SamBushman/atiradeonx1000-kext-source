@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gleUpdatePrimitiveData @ 0x66d8 (1928 bytes) */
-int _gleUpdatePrimitiveData(param_1)
+void _gleUpdatePrimitiveData(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -282,7 +282,7 @@ LAB_00006d54:
 }
 
 /* _gleUpdateState @ 0x6e60 (480 bytes) */
-int _gleUpdateState(param_1)
+void _gleUpdateState(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -371,7 +371,7 @@ int _gleUpdateState(param_1)
 }
 
 /* _gleUpdateLightColorChangeFunc @ 0x7040 (468 bytes) */
-int _gleUpdateLightColorChangeFunc(param_1)
+void _gleUpdateLightColorChangeFunc(param_1)
   int param_1;
 {
   ushort uVar1;
@@ -456,7 +456,7 @@ LAB_000071fc:
 }
 
 /* _gleSetColorMaterialEnable @ 0x7214 (656 bytes) */
-int _gleSetColorMaterialEnable(param_1)
+void _gleSetColorMaterialEnable(param_1)
   int param_1;
 {
   int iVar1;
@@ -662,7 +662,7 @@ double _gleVectorNormalizeNO(undefined4 param_1,float *param_2,float *param_3,do
 }
 
 /* _gleUpdateLightFast @ 0x778c (152 bytes) */
-int _gleUpdateLightFast(param_1, param_2)
+void _gleUpdateLightFast(param_1, param_2)
   int param_1;
   uint param_2;
 {
@@ -692,7 +692,7 @@ int _gleUpdateLightFast(param_1, param_2)
 }
 
 /* _gleUpdateLightModelFunc @ 0x7824 (208 bytes) */
-int _gleUpdateLightModelFunc(param_1)
+void _gleUpdateLightModelFunc(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -754,7 +754,7 @@ void _gleUpdateLightDirection(int param_1,int param_2,double fparam_1)
 }
 
 /* _gleUpdateLightExponents @ 0x79d0 (424 bytes) */
-int _gleUpdateLightExponents(param_1, param_2)
+double _gleUpdateLightExponents(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -826,7 +826,7 @@ int _gleUpdateLightExponents(param_1, param_2)
 }
 
 /* _gleUpdateLightAttenuation @ 0x7b78 (280 bytes) */
-int _gleUpdateLightAttenuation(param_1, param_2)
+double _gleUpdateLightAttenuation(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -865,7 +865,7 @@ int _gleUpdateLightAttenuation(param_1, param_2)
 }
 
 /* _gleUpdateInverseNeeds @ 0x7c90 (192 bytes) */
-int _gleUpdateInverseNeeds(param_1)
+void _gleUpdateInverseNeeds(param_1)
   int param_1;
 {
   int iVar1;
@@ -903,7 +903,7 @@ int _gleUpdateInverseNeeds(param_1)
 }
 
 /* _gleUpdateLightModel @ 0x7d50 (72 bytes) */
-int _gleUpdateLightModel(param_1)
+void _gleUpdateLightModel(param_1)
   undefined4 param_1;
 {
   int iVar1;
@@ -920,7 +920,7 @@ int _gleUpdateLightModel(param_1)
 }
 
 /* _gleUpdateClipPlane @ 0x7d98 (108 bytes) */
-int _gleUpdateClipPlane(param_1, param_2, param_3, param_4)
+void _gleUpdateClipPlane(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -959,7 +959,7 @@ int _gleUpdateClipPlane(param_1, param_2, param_3, param_4)
 }
 
 /* _gleUpdateMatrixMode @ 0x7e04 (68 bytes) */
-int _gleUpdateMatrixMode(param_1)
+void _gleUpdateMatrixMode(param_1)
   int param_1;
 {
   uint uVar1;
@@ -1272,73 +1272,73 @@ int _gleApplyViewScissorTransform(param_1)
 }
 
 /* saveFP @ 0x879c (12 bytes) */
-int saveFP()
+void saveFP()
 {
   return;
 }
 
 /* FUN_000087a8 @ 0x87a8 (4 bytes) */
-int FUN_000087a8()
+void FUN_000087a8()
 {
   return;
 }
 
 /* FUN_000087ac @ 0x87ac (4 bytes) */
-int FUN_000087ac()
+void FUN_000087ac()
 {
   return;
 }
 
 /* FUN_000087b0 @ 0x87b0 (8 bytes) */
-int FUN_000087b0()
+void FUN_000087b0()
 {
   return;
 }
 
 /* FUN_000087b8 @ 0x87b8 (8 bytes) */
-int FUN_000087b8()
+void FUN_000087b8()
 {
   return;
 }
 
 /* FUN_000087c0 @ 0x87c0 (4 bytes) */
-int FUN_000087c0()
+void FUN_000087c0()
 {
   return;
 }
 
 /* FUN_000087c4 @ 0x87c4 (4 bytes) */
-int FUN_000087c4()
+void FUN_000087c4()
 {
   return;
 }
 
 /* FUN_000087c8 @ 0x87c8 (4 bytes) */
-int FUN_000087c8()
+void FUN_000087c8()
 {
   return;
 }
 
 /* FUN_000087cc @ 0x87cc (4 bytes) */
-int FUN_000087cc()
+void FUN_000087cc()
 {
   return;
 }
 
 /* FUN_000087d0 @ 0x87d0 (4 bytes) */
-int FUN_000087d0()
+void FUN_000087d0()
 {
   return;
 }
 
 /* FUN_000087d4 @ 0x87d4 (24 bytes) */
-int FUN_000087d4()
+void FUN_000087d4()
 {
   return;
 }
 
 /* _gleMultMatrix @ 0x87ec (836 bytes) */
-int _gleMultMatrix(param_1, param_2, param_3)
+void _gleMultMatrix(param_1, param_2, param_3)
   float *param_1;
   float *param_2;
   float *param_3;
@@ -1380,13 +1380,13 @@ int _gleMultMatrix(param_1, param_2, param_3)
 }
 
 /* restFP @ 0x8b30 (56 bytes) */
-int restFP()
+void restFP()
 {
   return;
 }
 
 /* FUN_00008b68 @ 0x8b68 (28 bytes) */
-int FUN_00008b68()
+void FUN_00008b68()
 {
   return;
 }
@@ -1472,7 +1472,7 @@ void _gleUpdateDepthRangeData(int param_1,double fparam_1,double fparam_2,double
 }
 
 /* _gleUpdateTextureCoordGen @ 0x8d30 (1120 bytes) */
-int _gleUpdateTextureCoordGen(param_1)
+void _gleUpdateTextureCoordGen(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1759,7 +1759,7 @@ double _gleUpdateFogData(int param_1)
 }
 
 /* _gleUpdatePolyMode @ 0x9404 (408 bytes) */
-int _gleUpdatePolyMode(param_1)
+void _gleUpdatePolyMode(param_1)
   int param_1;
 {
   char cVar1;
@@ -1828,7 +1828,7 @@ LAB_0000951c:
 }
 
 /* _gleUpdateEvalData @ 0x959c (168 bytes) */
-int _gleUpdateEvalData(param_1)
+double _gleUpdateEvalData(param_1)
   int param_1;
 {
   double dVar1;
@@ -2112,7 +2112,7 @@ void _gleUpdateViewScissorData(int param_1,double fparam_1,double fparam_2,doubl
 }
 
 /* _gleSelectVertexAddMaterialFunc @ 0x9da8 (32 bytes) */
-int _gleSelectVertexAddMaterialFunc(param_1)
+void _gleSelectVertexAddMaterialFunc(param_1)
   int param_1;
 {
   *(undefined **)(param_1 + 0x4de4) = PTR__gleSetAddVertexMaterialFunc_00110e34;
@@ -2120,7 +2120,7 @@ int _gleSelectVertexAddMaterialFunc(param_1)
 }
 
 /* _gleSelectVertexSubmitFunc @ 0x9dc8 (272 bytes) */
-int _gleSelectVertexSubmitFunc(param_1)
+void _gleSelectVertexSubmitFunc(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2171,7 +2171,7 @@ int _gleSelectVertexSubmitFunc(param_1)
 }
 
 /* _gliSetCurrentPluginDispatchTable @ 0x9ed8 (288 bytes) */
-int _gliSetCurrentPluginDispatchTable(param_1)
+void _gliSetCurrentPluginDispatchTable(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -2223,7 +2223,7 @@ int _gliSetCurrentPluginDispatchTable(param_1)
 }
 
 /* _gliInitDispatchTable @ 0x9ff8 (8072 bytes) */
-int _gliInitDispatchTable(param_1)
+void _gliInitDispatchTable(param_1)
   int param_1;
 {
   uint uVar1;
@@ -2963,7 +2963,7 @@ int _gliInitDispatchTable(param_1)
 }
 
 /* _gliExecDispatchTable @ 0xbf80 (23616 bytes) */
-int _gliExecDispatchTable(param_1)
+void _gliExecDispatchTable(param_1)
   int param_1;
 {
   int iVar1;
@@ -5483,7 +5483,7 @@ LAB_0001231c:
 }
 
 /* _glGenFencesAPPLE_Exec @ 0x12338 (164 bytes) */
-int _glGenFencesAPPLE_Exec(param_1, param_2, param_3)
+void _glGenFencesAPPLE_Exec(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -5735,7 +5735,7 @@ void _gliUpdatePluginConfig(int param_1,double fparam_1,double fparam_2,double f
 }
 
 /* _gleResetVertexArrays @ 0x1280c (128 bytes) */
-int _gleResetVertexArrays(param_1)
+void _gleResetVertexArrays(param_1)
   int param_1;
 {
   undefined4 uVar1;
@@ -5848,7 +5848,7 @@ int _gleDCBRealloc(param_1, param_2)
 }
 
 /* _glGetIntegerv_Exec @ 0x12a34 (332 bytes) */
-int _glGetIntegerv_Exec(param_1, param_2, param_3)
+void _glGetIntegerv_Exec(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int *param_3;
@@ -8452,7 +8452,7 @@ void _glViewport_Exec(int param_1,undefined4 param_2,undefined4 param_3,int para
 }
 
 /* _glMatrixMode_Exec @ 0x15ff4 (236 bytes) */
-int _glMatrixMode_Exec(param_1, param_2)
+void _glMatrixMode_Exec(param_1, param_2)
   int param_1;
   uint param_2;
 {
@@ -8627,7 +8627,7 @@ void _glOrtho_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,d
 }
 
 /* _glEnable_Exec @ 0x163f8 (108 bytes) */
-int _glEnable_Exec(param_1, param_2)
+double _glEnable_Exec(param_1, param_2)
   int param_1;
   uint param_2;
 {
@@ -8661,7 +8661,7 @@ int _glEnable_Exec(param_1, param_2)
 }
 
 /* _gleSetEnable_ALPHA_TEST @ 0x16464 (32 bytes) */
-int _gleSetEnable_ALPHA_TEST(param_1, param_2, param_3)
+void _gleSetEnable_ALPHA_TEST(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;

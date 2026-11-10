@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gleBeginRSLNoop @ 0xf34d4 (44 bytes) */
-int _gleBeginRSLNoop(param_1)
+void _gleBeginRSLNoop(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -167,7 +167,7 @@ switchD_000f37d0_caseD_0:
 }
 
 /* _gleBeginPrimitiveTCLRDirtyFunc @ 0xf38a8 (176 bytes) */
-int _gleBeginPrimitiveTCLRDirtyFunc(param_1)
+void _gleBeginPrimitiveTCLRDirtyFunc(param_1)
   int param_1;
 {
   short sVar1;
@@ -198,7 +198,7 @@ int _gleBeginPrimitiveTCLRDirtyFunc(param_1)
 }
 
 /* _gleUpdateScissorData @ 0xf3958 (44 bytes) */
-int _gleUpdateScissorData(param_1)
+void _gleUpdateScissorData(param_1)
   int param_1;
 {
   if (*(int *)(param_1 + 0x3188) < 0) {
@@ -212,7 +212,7 @@ int _gleUpdateScissorData(param_1)
 }
 
 /* _gleSelectHit @ 0xf3984 (8 bytes) */
-int _gleSelectHit(param_1, param_2)
+double _gleSelectHit(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
@@ -286,7 +286,7 @@ LAB_000f3a4c:
 }
 
 /* _gleSelectPoints @ 0xf3ae0 (84 bytes) */
-int _gleSelectPoints(param_1, param_2, param_3)
+void _gleSelectPoints(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;
@@ -301,7 +301,7 @@ int _gleSelectPoints(param_1, param_2, param_3)
 }
 
 /* _gleSelectPointsPtr @ 0xf3b34 (88 bytes) */
-int _gleSelectPointsPtr(param_1, param_2, param_3)
+void _gleSelectPointsPtr(param_1, param_2, param_3)
   undefined4 param_1;
   int *param_2;
   int param_3;
@@ -316,7 +316,7 @@ int _gleSelectPointsPtr(param_1, param_2, param_3)
 }
 
 /* _gleSelectLines @ 0xf3b8c (100 bytes) */
-int _gleSelectLines(param_1, param_2, param_3)
+void _gleSelectLines(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;
@@ -332,7 +332,7 @@ int _gleSelectLines(param_1, param_2, param_3)
 }
 
 /* _gleSelectLineStrip @ 0xf3bf0 (100 bytes) */
-int _gleSelectLineStrip(param_1, param_2, param_3)
+void _gleSelectLineStrip(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;
@@ -348,7 +348,7 @@ int _gleSelectLineStrip(param_1, param_2, param_3)
 }
 
 /* FUN_000f3c60 @ 0xf3c60 (112 bytes) */
-int FUN_000f3c60(param_1, param_2, param_3)
+void FUN_000f3c60(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;
@@ -365,7 +365,7 @@ int FUN_000f3c60(param_1, param_2, param_3)
 }
 
 /* _gleSelectLinesPtr @ 0xf3cd0 (108 bytes) */
-int _gleSelectLinesPtr(param_1, param_2, param_3)
+void _gleSelectLinesPtr(param_1, param_2, param_3)
   undefined4 param_1;
   int *param_2;
   int param_3;
@@ -381,7 +381,7 @@ int _gleSelectLinesPtr(param_1, param_2, param_3)
 }
 
 /* _gleSelectPolygon @ 0xf3d3c (84 bytes) */
-int _gleSelectPolygon(param_1, param_2, param_3)
+void _gleSelectPolygon(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;
@@ -396,7 +396,7 @@ int _gleSelectPolygon(param_1, param_2, param_3)
 }
 
 /* _gleSelectPolygonPtr @ 0xf3d90 (88 bytes) */
-int _gleSelectPolygonPtr(param_1, param_2, param_3)
+double _gleSelectPolygonPtr(param_1, param_2, param_3)
   undefined4 param_1;
   int *param_2;
   int param_3;
@@ -411,7 +411,7 @@ int _gleSelectPolygonPtr(param_1, param_2, param_3)
 }
 
 /* _gleSelectTriangles @ 0xf3de8 (116 bytes) */
-int _gleSelectTriangles(param_1, param_2, param_3)
+double _gleSelectTriangles(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;
@@ -433,7 +433,7 @@ int _gleSelectTriangles(param_1, param_2, param_3)
 }
 
 /* _gleSelectTriangleFan @ 0xf3e5c (124 bytes) */
-int _gleSelectTriangleFan(param_1, param_2, param_3, param_4)
+double _gleSelectTriangleFan(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   uint param_3;
@@ -457,7 +457,7 @@ int _gleSelectTriangleFan(param_1, param_2, param_3, param_4)
 }
 
 /* _gleSelectTriangleStrip @ 0xf3ed8 (108 bytes) */
-int _gleSelectTriangleStrip(param_1, param_2, param_3)
+double _gleSelectTriangleStrip(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;
@@ -479,7 +479,7 @@ int _gleSelectTriangleStrip(param_1, param_2, param_3)
 }
 
 /* _gleSelectQuads @ 0xf3f44 (116 bytes) */
-int _gleSelectQuads(param_1, param_2, param_3)
+double _gleSelectQuads(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;
@@ -501,7 +501,7 @@ int _gleSelectQuads(param_1, param_2, param_3)
 }
 
 /* _gleSelectQuadStrip @ 0xf3fb8 (116 bytes) */
-int _gleSelectQuadStrip(param_1, param_2, param_3)
+double _gleSelectQuadStrip(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;
@@ -523,7 +523,7 @@ int _gleSelectQuadStrip(param_1, param_2, param_3)
 }
 
 /* _gleDetachShaderObjectIterFunc @ 0xf402c (180 bytes) */
-int _gleDetachShaderObjectIterFunc(param_1, param_2)
+void _gleDetachShaderObjectIterFunc(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
@@ -564,7 +564,7 @@ int _gleDetachShaderObjectIterFunc(param_1, param_2)
 }
 
 /* _gleFreeShaderObject @ 0xf40e0 (868 bytes) */
-int _gleFreeShaderObject(param_1, param_2)
+void _gleFreeShaderObject(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -725,7 +725,7 @@ int _gleFreeShaderObject(param_1, param_2)
 }
 
 /* _gleShaderDataUpdateParams @ 0xf4444 (1020 bytes) */
-int _gleShaderDataUpdateParams(param_1)
+void _gleShaderDataUpdateParams(param_1)
   int param_1;
 {
   int iVar1;
@@ -911,7 +911,7 @@ switchD_000f44b0_caseD_0:
 }
 
 /* _gleShaderParse @ 0xf48d8 (244 bytes) */
-int _gleShaderParse(param_1, param_2)
+void _gleShaderParse(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1886,7 +1886,7 @@ double _gleSphereGenST(undefined4 param_1,undefined4 param_2,float *param_3,floa
 }
 
 /* _gleVtxTextureCoordGenObjectSlow @ 0xf5d54 (500 bytes) */
-int _gleVtxTextureCoordGenObjectSlow(param_1, param_2, param_3)
+void _gleVtxTextureCoordGenObjectSlow(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   int param_3;
@@ -2171,7 +2171,7 @@ void _gleVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,double f
 }
 
 /* _gleVtxTextureCoordGenEyeST @ 0xf6450 (140 bytes) */
-int _gleVtxTextureCoordGenEyeST(param_1, param_2, param_3)
+void _gleVtxTextureCoordGenEyeST(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   int param_3;
@@ -2215,7 +2215,7 @@ int _gleVtxTextureCoordGenEyeST(param_1, param_2, param_3)
 }
 
 /* _gleVtxTextureCoordGenObjectST @ 0xf64dc (140 bytes) */
-int _gleVtxTextureCoordGenObjectST(param_1, param_2, param_3)
+void _gleVtxTextureCoordGenObjectST(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   int param_3;
@@ -2272,7 +2272,7 @@ void _gleVtxTextureCoordGenSphereST(undefined4 param_1,uint param_2,int param_3,
 }
 
 /* _gleVtxTextureCoordGenReflectST @ 0xf65c4 (168 bytes) */
-int _gleVtxTextureCoordGenReflectST(param_1, param_2, param_3)
+void _gleVtxTextureCoordGenReflectST(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;
@@ -2323,7 +2323,7 @@ void _gleVtxTextureCoordGenReflectSTR(int param_1,uint param_2,int param_3,doubl
 }
 
 /* _gleVtxTextureCoordGenNormalST @ 0xf6728 (60 bytes) */
-int _gleVtxTextureCoordGenNormalST(param_1, param_2, param_3)
+void _gleVtxTextureCoordGenNormalST(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;
@@ -2345,7 +2345,7 @@ int _gleVtxTextureCoordGenNormalST(param_1, param_2, param_3)
 }
 
 /* _gleVtxTextureCoordGenNormalSTR @ 0xf6764 (80 bytes) */
-int _gleVtxTextureCoordGenNormalSTR(param_1, param_2, param_3)
+void _gleVtxTextureCoordGenNormalSTR(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   int param_3;
@@ -2368,7 +2368,7 @@ int _gleVtxTextureCoordGenNormalSTR(param_1, param_2, param_3)
 }
 
 /* _gleMultiVtxTextureCoordGenWrapObject @ 0xf67b8 (112 bytes) */
-int _gleMultiVtxTextureCoordGenWrapObject(param_1, param_2, param_3)
+void _gleMultiVtxTextureCoordGenWrapObject(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2389,7 +2389,7 @@ int _gleMultiVtxTextureCoordGenWrapObject(param_1, param_2, param_3)
 }
 
 /* _gleMultiVtxTextureCoordGenWrapEye @ 0xf6828 (112 bytes) */
-int _gleMultiVtxTextureCoordGenWrapEye(param_1, param_2, param_3)
+void _gleMultiVtxTextureCoordGenWrapEye(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2410,7 +2410,7 @@ int _gleMultiVtxTextureCoordGenWrapEye(param_1, param_2, param_3)
 }
 
 /* _gleMultiVtxTextureCoordGenObjectSlow @ 0xf6898 (552 bytes) */
-int _gleMultiVtxTextureCoordGenObjectSlow(param_1, param_2, param_3, param_4)
+void _gleMultiVtxTextureCoordGenObjectSlow(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   int param_3;
@@ -2770,7 +2770,7 @@ void _gleMultiVtxTextureCoordGenEyeSlow(int param_1,uint param_2,int param_3,int
 }
 
 /* _gleMultiVtxTextureCoordGenEyeST @ 0xf7040 (156 bytes) */
-int _gleMultiVtxTextureCoordGenEyeST(param_1, param_2, param_3, param_4)
+void _gleMultiVtxTextureCoordGenEyeST(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   int param_3;
@@ -2820,7 +2820,7 @@ int _gleMultiVtxTextureCoordGenEyeST(param_1, param_2, param_3, param_4)
 }
 
 /* _gleMultiVtxTextureCoordGenObjectST @ 0xf70dc (156 bytes) */
-int _gleMultiVtxTextureCoordGenObjectST(param_1, param_2, param_3, param_4)
+void _gleMultiVtxTextureCoordGenObjectST(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   int param_3;
@@ -2892,7 +2892,7 @@ void _gleMultiVtxTextureCoordGenSphereST(undefined4 param_1,uint param_2,int par
 }
 
 /* _gleMultiVtxTextureCoordGenReflectST @ 0xf71e4 (184 bytes) */
-int _gleMultiVtxTextureCoordGenReflectST(param_1, param_2, param_3, param_4)
+void _gleMultiVtxTextureCoordGenReflectST(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   uint param_2;
   int param_3;
@@ -2958,7 +2958,7 @@ void _gleMultiVtxTextureCoordGenReflectSTR(int param_1,uint param_2,int param_3,
 }
 
 /* _gleMultiVtxTextureCoordGenNormalST @ 0xf7370 (68 bytes) */
-int _gleMultiVtxTextureCoordGenNormalST(param_1, param_2, param_3, param_4)
+void _gleMultiVtxTextureCoordGenNormalST(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   uint param_2;
   int param_3;

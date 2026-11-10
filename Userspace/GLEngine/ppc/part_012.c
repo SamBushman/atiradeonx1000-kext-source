@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _glColor4uiv_CompExec @ 0x5d138 (56 bytes) */
-int _glColor4uiv_CompExec(param_1, param_2)
+void _glColor4uiv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -53,7 +53,7 @@ double _glColor4us_Exec(int param_1,uint param_2,uint param_3,uint param_4,uint 
 }
 
 /* _glColor4us_CompExec @ 0x5d320 (80 bytes) */
-int _glColor4us_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glColor4us_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -118,7 +118,7 @@ double _glColor4usv_Exec(int param_1,ushort *param_2,double fparam_1,double fpar
 }
 
 /* _glColor4usv_CompExec @ 0x5d534 (56 bytes) */
-int _glColor4usv_CompExec(param_1, param_2)
+void _glColor4usv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -141,7 +141,7 @@ int _glColor4usv_CompExec(param_1, param_2)
 }
 
 /* _gleLightMaterialChangeNoop @ 0x5d56c (4 bytes) */
-int _gleLightMaterialChangeNoop()
+void _gleLightMaterialChangeNoop()
 {
   return;
 }
@@ -197,7 +197,7 @@ int _glIndexdv_Comp(param_1, param_2)
 }
 
 /* _glIndexdv_Exec @ 0x5d6ac (44 bytes) */
-int _glIndexdv_Exec(param_1, param_2)
+void _glIndexdv_Exec(param_1, param_2)
   int param_1;
   double *param_2;
 {
@@ -206,7 +206,7 @@ int _glIndexdv_Exec(param_1, param_2)
 }
 
 /* _glIndexdv_CompExec @ 0x5d6d8 (56 bytes) */
-int _glIndexdv_CompExec(param_1, param_2)
+void _glIndexdv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -257,7 +257,7 @@ int _glIndexfv_Comp(param_1, param_2)
 }
 
 /* _glIndexfv_Exec @ 0x5d830 (40 bytes) */
-int _glIndexfv_Exec(param_1, param_2)
+void _glIndexfv_Exec(param_1, param_2)
   int param_1;
   float *param_2;
 {
@@ -266,7 +266,7 @@ int _glIndexfv_Exec(param_1, param_2)
 }
 
 /* _glIndexfv_CompExec @ 0x5d858 (56 bytes) */
-int _glIndexfv_CompExec(param_1, param_2)
+void _glIndexfv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -290,7 +290,7 @@ int _glIndexi_Comp(param_1, param_2)
 }
 
 /* _glIndexi_Exec @ 0x5d908 (68 bytes) */
-int _glIndexi_Exec(param_1, param_2)
+void _glIndexi_Exec(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -300,7 +300,7 @@ int _glIndexi_Exec(param_1, param_2)
 }
 
 /* _glIndexi_CompExec @ 0x5d94c (56 bytes) */
-int _glIndexi_CompExec(param_1, param_2)
+void _glIndexi_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -324,7 +324,7 @@ int _glIndexiv_Comp(param_1, param_2)
 }
 
 /* _glIndexiv_CompExec @ 0x5da48 (128 bytes) */
-int _glIndexiv_CompExec(param_1, param_2)
+void _glIndexiv_CompExec(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -349,7 +349,7 @@ int _glIndexs_Comp(param_1, param_2)
 }
 
 /* _glIndexs_Exec @ 0x5daf8 (68 bytes) */
-int _glIndexs_Exec(param_1, param_2)
+void _glIndexs_Exec(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -359,7 +359,7 @@ int _glIndexs_Exec(param_1, param_2)
 }
 
 /* _glIndexs_CompExec @ 0x5db3c (56 bytes) */
-int _glIndexs_CompExec(param_1, param_2)
+void _glIndexs_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -383,7 +383,7 @@ int _glIndexsv_Comp(param_1, param_2)
 }
 
 /* _glIndexsv_CompExec @ 0x5dc38 (128 bytes) */
-int _glIndexsv_CompExec(param_1, param_2)
+void _glIndexsv_CompExec(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -408,7 +408,7 @@ int _glIndexub_Comp(param_1, param_2)
 }
 
 /* _glIndexub_Exec @ 0x5dce8 (68 bytes) */
-int _glIndexub_Exec(param_1, param_2)
+void _glIndexub_Exec(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -418,7 +418,7 @@ int _glIndexub_Exec(param_1, param_2)
 }
 
 /* _glIndexub_CompExec @ 0x5dd2c (56 bytes) */
-int _glIndexub_CompExec(param_1, param_2)
+void _glIndexub_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -444,7 +444,7 @@ int _glIndexubv_Comp(param_1, param_2)
 }
 
 /* _glIndexubv_Exec @ 0x5dde0 (72 bytes) */
-int _glIndexubv_Exec(param_1, param_2)
+void _glIndexubv_Exec(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -455,7 +455,7 @@ int _glIndexubv_Exec(param_1, param_2)
 }
 
 /* _glIndexubv_CompExec @ 0x5de28 (56 bytes) */
-int _glIndexubv_CompExec(param_1, param_2)
+void _glIndexubv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -490,7 +490,7 @@ int _glColorMaterial_Comp(param_1, param_2, param_3)
 }
 
 /* _glColorMaterial_Exec @ 0x5dee0 (188 bytes) */
-int _glColorMaterial_Exec(param_1, param_2, param_3)
+void _glColorMaterial_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   uint param_3;
@@ -529,7 +529,7 @@ LAB_0005df64:
 }
 
 /* _glColorMaterial_CompExec @ 0x5df9c (64 bytes) */
-int _glColorMaterial_CompExec(param_1, param_2, param_3)
+void _glColorMaterial_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -556,7 +556,7 @@ int _glSecondaryColor3_ListExec(param_1, param_2)
 }
 
 /* _glSecondaryColor3b_Exec @ 0x5dffc (136 bytes) */
-int _glSecondaryColor3b_Exec(param_1, param_2, param_3, param_4)
+void _glSecondaryColor3b_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -603,7 +603,7 @@ int _glSecondaryColor3b_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glSecondaryColor3b_CompExec @ 0x5e150 (72 bytes) */
-int _glSecondaryColor3b_CompExec(param_1, param_2, param_3, param_4)
+void _glSecondaryColor3b_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -615,7 +615,7 @@ int _glSecondaryColor3b_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glSecondaryColor3bv_Exec @ 0x5e198 (160 bytes) */
-int _glSecondaryColor3bv_Exec(param_1, param_2)
+double _glSecondaryColor3bv_Exec(param_1, param_2)
   int param_1;
   char *param_2;
 {
@@ -660,7 +660,7 @@ int _glSecondaryColor3bv_Comp(param_1, param_2)
 }
 
 /* _glSecondaryColor3bv_CompExec @ 0x5e314 (56 bytes) */
-int _glSecondaryColor3bv_CompExec(param_1, param_2)
+void _glSecondaryColor3bv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -670,7 +670,7 @@ int _glSecondaryColor3bv_CompExec(param_1, param_2)
 }
 
 /* _glSecondaryColor3s_Exec @ 0x5e34c (136 bytes) */
-int _glSecondaryColor3s_Exec(param_1, param_2, param_3, param_4)
+void _glSecondaryColor3s_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -717,7 +717,7 @@ int _glSecondaryColor3s_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glSecondaryColor3s_CompExec @ 0x5e4a0 (72 bytes) */
-int _glSecondaryColor3s_CompExec(param_1, param_2, param_3, param_4)
+void _glSecondaryColor3s_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -729,7 +729,7 @@ int _glSecondaryColor3s_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glSecondaryColor3sv_Exec @ 0x5e4e8 (148 bytes) */
-int _glSecondaryColor3sv_Exec(param_1, param_2)
+double _glSecondaryColor3sv_Exec(param_1, param_2)
   int param_1;
   short *param_2;
 {
@@ -774,7 +774,7 @@ int _glSecondaryColor3sv_Comp(param_1, param_2)
 }
 
 /* _glSecondaryColor3sv_CompExec @ 0x5e64c (56 bytes) */
-int _glSecondaryColor3sv_CompExec(param_1, param_2)
+void _glSecondaryColor3sv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -784,7 +784,7 @@ int _glSecondaryColor3sv_CompExec(param_1, param_2)
 }
 
 /* _glSecondaryColor3i_Exec @ 0x5e684 (136 bytes) */
-int _glSecondaryColor3i_Exec(param_1, param_2, param_3, param_4)
+void _glSecondaryColor3i_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -831,7 +831,7 @@ int _glSecondaryColor3i_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glSecondaryColor3i_CompExec @ 0x5e7d8 (72 bytes) */
-int _glSecondaryColor3i_CompExec(param_1, param_2, param_3, param_4)
+void _glSecondaryColor3i_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -843,7 +843,7 @@ int _glSecondaryColor3i_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glSecondaryColor3iv_Exec @ 0x5e820 (148 bytes) */
-int _glSecondaryColor3iv_Exec(param_1, param_2)
+double _glSecondaryColor3iv_Exec(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -888,7 +888,7 @@ int _glSecondaryColor3iv_Comp(param_1, param_2)
 }
 
 /* _glSecondaryColor3iv_CompExec @ 0x5e984 (56 bytes) */
-int _glSecondaryColor3iv_CompExec(param_1, param_2)
+void _glSecondaryColor3iv_CompExec(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {

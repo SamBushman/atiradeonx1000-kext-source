@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gleMap1Vertex4dLoad @ 0xde520 (156 bytes) */
-double _gleMap1Vertex4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1Vertex4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   int iVar2;
@@ -32,7 +32,7 @@ double _gleMap1Vertex4dLoad(undefined4 param_1,undefined4 param_2,undefined4 par
 }
 
 /* _gleMap1ColordLoad @ 0xde5bc (156 bytes) */
-double _gleMap1ColordLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1ColordLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   int iVar2;
@@ -63,7 +63,7 @@ double _gleMap1ColordLoad(undefined4 param_1,undefined4 param_2,undefined4 param
 }
 
 /* _gleMap1IndexdLoad @ 0xde658 (112 bytes) */
-double _gleMap1IndexdLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1IndexdLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float *pfVar1;
   double dVar2;
@@ -88,7 +88,7 @@ double _gleMap1IndexdLoad(undefined4 param_1,undefined4 param_2,undefined4 param
 }
 
 /* _gleMap1NormaldLoad @ 0xde6c8 (144 bytes) */
-double _gleMap1NormaldLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1NormaldLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   int iVar2;
@@ -118,7 +118,7 @@ double _gleMap1NormaldLoad(undefined4 param_1,undefined4 param_2,undefined4 para
 }
 
 /* _gleMap1Texture1dLoad @ 0xde758 (112 bytes) */
-double _gleMap1Texture1dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1Texture1dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float *pfVar1;
   double dVar2;
@@ -143,7 +143,7 @@ double _gleMap1Texture1dLoad(undefined4 param_1,undefined4 param_2,undefined4 pa
 }
 
 /* _gleMap1Texture2dLoad @ 0xde7c8 (120 bytes) */
-double _gleMap1Texture2dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1Texture2dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double *pdVar1;
   double dVar2;
@@ -168,7 +168,7 @@ double _gleMap1Texture2dLoad(undefined4 param_1,undefined4 param_2,undefined4 pa
 }
 
 /* _gleMap1Texture3dLoad @ 0xde840 (144 bytes) */
-double _gleMap1Texture3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1Texture3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   int iVar2;
@@ -198,7 +198,7 @@ double _gleMap1Texture3dLoad(undefined4 param_1,undefined4 param_2,undefined4 pa
 }
 
 /* _gleMap1Texture4dLoad @ 0xde8d0 (156 bytes) */
-double _gleMap1Texture4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1Texture4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   int iVar2;
@@ -229,7 +229,7 @@ double _gleMap1Texture4dLoad(undefined4 param_1,undefined4 param_2,undefined4 pa
 }
 
 /* _gleMap1VertexAttrib1dLoad @ 0xde96c (112 bytes) */
-double _gleMap1VertexAttrib1dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib1dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float *pfVar1;
   double dVar2;
@@ -254,7 +254,7 @@ double _gleMap1VertexAttrib1dLoad(undefined4 param_1,undefined4 param_2,undefine
 }
 
 /* _gleMap1VertexAttrib2dLoad @ 0xde9dc (120 bytes) */
-double _gleMap1VertexAttrib2dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib2dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,double *param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double *pdVar1;
   double dVar2;
@@ -279,7 +279,7 @@ double _gleMap1VertexAttrib2dLoad(undefined4 param_1,undefined4 param_2,undefine
 }
 
 /* _gleMap1VertexAttrib3dLoad @ 0xdea54 (144 bytes) */
-double _gleMap1VertexAttrib3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   int iVar2;
@@ -309,7 +309,7 @@ double _gleMap1VertexAttrib3dLoad(undefined4 param_1,undefined4 param_2,undefine
 }
 
 /* _gleMap1VertexAttrib4dLoad @ 0xdeae4 (156 bytes) */
-double _gleMap1VertexAttrib4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   int iVar2;
@@ -600,7 +600,7 @@ int _gleMap1Texture4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param
 }
 
 /* _gleMap1VertexAttrib1fLoad @ 0xdef50 (92 bytes) */
-double _gleMap1VertexAttrib1fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int *param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib1fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int *param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   float fVar2;
@@ -626,7 +626,7 @@ double _gleMap1VertexAttrib1fLoad(undefined4 param_1,undefined4 param_2,undefine
 }
 
 /* _gleMap1VertexAttrib2fLoad @ 0xdefac (96 bytes) */
-double _gleMap1VertexAttrib2fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int *param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib2fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int *param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int *piVar1;
   float fVar2;
@@ -651,7 +651,7 @@ double _gleMap1VertexAttrib2fLoad(undefined4 param_1,undefined4 param_2,undefine
 }
 
 /* _gleMap1VertexAttrib3fLoad @ 0xdf00c (112 bytes) */
-double _gleMap1VertexAttrib3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   float fVar2;
@@ -681,7 +681,7 @@ double _gleMap1VertexAttrib3fLoad(undefined4 param_1,undefined4 param_2,undefine
 }
 
 /* _gleMap1VertexAttrib4fLoad @ 0xdf07c (120 bytes) */
-double _gleMap1VertexAttrib4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap1VertexAttrib4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,int param_6,int *param_7,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   float fVar2;
@@ -923,7 +923,7 @@ LAB_000df478:
 }
 
 /* _gleComputeFirstPartial @ 0xdf4bc (108 bytes) */
-int _gleComputeFirstPartial(param_1, param_2, param_3, param_4)
+void _gleComputeFirstPartial(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   float *param_2;
   float *param_3;
@@ -950,7 +950,7 @@ int _gleComputeFirstPartial(param_1, param_2, param_3, param_4)
 }
 
 /* _gleInitMap2Data @ 0xdf528 (496 bytes) */
-int _gleInitMap2Data(param_1)
+void _gleInitMap2Data(param_1)
   int param_1;
 {
   int iVar1;
@@ -1079,7 +1079,7 @@ int _gleInitMap2Data(param_1)
 }
 
 /* _gleMap2Vertex3dLoad @ 0xdf718 (244 bytes) */
-double _gleMap2Vertex3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Vertex3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double *pdVar1;
   double dVar2;
@@ -1129,7 +1129,7 @@ double _gleMap2Vertex3dLoad(undefined4 param_1,undefined4 param_2,undefined4 par
 }
 
 /* _gleMap2Vertex4dLoad @ 0xdf80c (256 bytes) */
-double _gleMap2Vertex4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Vertex4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double *pdVar1;
   double dVar2;
@@ -1180,7 +1180,7 @@ double _gleMap2Vertex4dLoad(undefined4 param_1,undefined4 param_2,undefined4 par
 }
 
 /* _gleMap2ColordLoad @ 0xdf90c (256 bytes) */
-double _gleMap2ColordLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2ColordLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double *pdVar1;
   double dVar2;
@@ -1231,7 +1231,7 @@ double _gleMap2ColordLoad(undefined4 param_1,undefined4 param_2,undefined4 param
 }
 
 /* _gleMap2IndexdLoad @ 0xdfa0c (224 bytes) */
-double _gleMap2IndexdLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2IndexdLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float *pfVar1;
   int iVar2;
@@ -1278,7 +1278,7 @@ double _gleMap2IndexdLoad(undefined4 param_1,undefined4 param_2,undefined4 param
 }
 
 /* _gleMap2NormaldLoad @ 0xdfaec (244 bytes) */
-double _gleMap2NormaldLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2NormaldLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double *pdVar1;
   double dVar2;
@@ -1328,7 +1328,7 @@ double _gleMap2NormaldLoad(undefined4 param_1,undefined4 param_2,undefined4 para
 }
 
 /* _gleMap2Texture1dLoad @ 0xdfbe0 (224 bytes) */
-double _gleMap2Texture1dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture1dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float *pfVar1;
   int iVar2;
@@ -1375,7 +1375,7 @@ double _gleMap2Texture1dLoad(undefined4 param_1,undefined4 param_2,undefined4 pa
 }
 
 /* _gleMap2Texture2dLoad @ 0xdfcc0 (252 bytes) */
-double _gleMap2Texture2dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture2dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double *pdVar1;
   int iVar2;
@@ -1431,7 +1431,7 @@ double _gleMap2Texture2dLoad(undefined4 param_1,undefined4 param_2,undefined4 pa
 }
 
 /* _gleMap2Texture3dLoad @ 0xdfdbc (244 bytes) */
-double _gleMap2Texture3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double *pdVar1;
   double dVar2;
@@ -1481,7 +1481,7 @@ double _gleMap2Texture3dLoad(undefined4 param_1,undefined4 param_2,undefined4 pa
 }
 
 /* _gleMap2Texture4dLoad @ 0xdfeb0 (256 bytes) */
-double _gleMap2Texture4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture4dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,int param_12,int param_13,int param_14,int *param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double *pdVar1;
   double dVar2;
@@ -1736,7 +1736,7 @@ void _gleMap2VertexAttrib4dLoad(undefined4 param_1,undefined4 param_2,undefined4
 }
 
 /* _gleMap2Vertex3fLoad @ 0xe0380 (204 bytes) */
-int _gleMap2Vertex3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Vertex3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int *piVar1;
   float fVar2;
@@ -1786,7 +1786,7 @@ int _gleMap2Vertex3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_
 }
 
 /* _gleMap2Vertex4fLoad @ 0xe044c (212 bytes) */
-int _gleMap2Vertex4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Vertex4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int *piVar1;
   float fVar2;
@@ -1837,7 +1837,7 @@ int _gleMap2Vertex4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_
 }
 
 /* _gleMap2ColorfLoad @ 0xe0520 (212 bytes) */
-int _gleMap2ColorfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2ColorfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int *piVar1;
   float fVar2;
@@ -1888,7 +1888,7 @@ int _gleMap2ColorfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,
 }
 
 /* _gleMap2IndexfLoad @ 0xe05f4 (192 bytes) */
-int _gleMap2IndexfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2IndexfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   float fVar2;
@@ -1936,7 +1936,7 @@ int _gleMap2IndexfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,
 }
 
 /* _gleMap2NormalfLoad @ 0xe06b4 (204 bytes) */
-int _gleMap2NormalfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2NormalfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int *piVar1;
   float fVar2;
@@ -1986,7 +1986,7 @@ int _gleMap2NormalfLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3
 }
 
 /* _gleMap2Texture1fLoad @ 0xe0780 (192 bytes) */
-int _gleMap2Texture1fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture1fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   float fVar2;
@@ -2034,7 +2034,7 @@ int _gleMap2Texture1fLoad(undefined4 param_1,undefined4 param_2,undefined4 param
 }
 
 /* _gleMap2Texture2fLoad @ 0xe0840 (216 bytes) */
-int _gleMap2Texture2fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture2fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   int *piVar2;
@@ -2091,7 +2091,7 @@ int _gleMap2Texture2fLoad(undefined4 param_1,undefined4 param_2,undefined4 param
 }
 
 /* _gleMap2Texture3fLoad @ 0xe0918 (204 bytes) */
-int _gleMap2Texture3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int *piVar1;
   float fVar2;
@@ -2141,7 +2141,7 @@ int _gleMap2Texture3fLoad(undefined4 param_1,undefined4 param_2,undefined4 param
 }
 
 /* _gleMap2Texture4fLoad @ 0xe09e4 (212 bytes) */
-int _gleMap2Texture4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleMap2Texture4fLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,int param_10,int *param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int *piVar1;
   float fVar2;
@@ -2674,7 +2674,7 @@ LAB_000e1388:
 }
 
 /* _gleFreeQueryObject @ 0xe13d0 (128 bytes) */
-int _gleFreeQueryObject(param_1, param_2)
+void _gleFreeQueryObject(param_1, param_2)
   int param_1;
   int param_2;
 {

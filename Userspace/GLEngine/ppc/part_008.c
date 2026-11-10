@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _glClientActiveTexture_Exec @ 0x4f0b0 (88 bytes) */
-int _glClientActiveTexture_Exec(param_1, param_2)
+void _glClientActiveTexture_Exec(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -68,7 +68,7 @@ int _gleLoadMatrixf(param_1, param_2)
 }
 
 /* _glDisableClientState_Exec @ 0x4f20c (44 bytes) */
-int _glDisableClientState_Exec(param_1, param_2)
+void _glDisableClientState_Exec(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -84,7 +84,7 @@ int _glDisableClientState_Exec(param_1, param_2)
 }
 
 /* _glColor4fv_NoColorMat_Exec @ 0x4f238 (36 bytes) */
-int _glColor4fv_NoColorMat_Exec(param_1, param_2)
+double _glColor4fv_NoColorMat_Exec(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -103,7 +103,7 @@ int _glColor4fv_NoColorMat_Exec(param_1, param_2)
 }
 
 /* _gleSetEnable_TEXTURE_3D @ 0x4f25c (80 bytes) */
-int _gleSetEnable_TEXTURE_3D(param_1, param_2, param_3)
+void _gleSetEnable_TEXTURE_3D(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -133,7 +133,7 @@ int _gleSetEnable_TEXTURE_3D(param_1, param_2, param_3)
 }
 
 /* _glProgramEnvParameter4fvARB_Exec @ 0x4f2ac (324 bytes) */
-int _glProgramEnvParameter4fvARB_Exec(param_1, param_2, param_3, param_4)
+void _glProgramEnvParameter4fvARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -203,7 +203,7 @@ LAB_0004f338:
 }
 
 /* _glePPRelocateAttrib @ 0x4f3f0 (184 bytes) */
-int _glePPRelocateAttrib(param_1, param_2, param_3)
+void _glePPRelocateAttrib(param_1, param_2, param_3)
   uint param_1;
   undefined4 param_2;
   int *param_3;
@@ -236,7 +236,7 @@ int _glePPRelocateAttrib(param_1, param_2, param_3)
 }
 
 /* _glePPRelocateLocal @ 0x4f4a8 (240 bytes) */
-int _glePPRelocateLocal(param_1, param_2, param_3)
+void _glePPRelocateLocal(param_1, param_2, param_3)
   uint param_1;
   undefined4 param_2;
   int *param_3;
@@ -272,7 +272,7 @@ int _glePPRelocateLocal(param_1, param_2, param_3)
 }
 
 /* _glePPRelocateParam @ 0x4f598 (264 bytes) */
-int _glePPRelocateParam(param_1, param_2, param_3, param_4)
+void _glePPRelocateParam(param_1, param_2, param_3, param_4)
   uint param_1;
   undefined4 param_2;
   int *param_3;
@@ -315,7 +315,7 @@ int _glePPRelocateParam(param_1, param_2, param_3, param_4)
 }
 
 /* _glFinishRender_Exec @ 0x4f6a0 (136 bytes) */
-int _glFinishRender_Exec(param_1)
+void _glFinishRender_Exec(param_1)
   int param_1;
 {
   int *piVar1;
@@ -343,7 +343,7 @@ int _glFinishRender_Exec(param_1)
 }
 
 /* _gleDrawArraysOrElements_VAR_Exec @ 0x4f798 (972 bytes) */
-int _gleDrawArraysOrElements_VAR_Exec(int param_1,uint param_2,undefined4 param_3,int param_4,undefined4 param_5,int param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gleDrawArraysOrElements_VAR_Exec(int param_1,uint param_2,undefined4 param_3,int param_4,undefined4 param_5,int param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   bool bVar1;
   char cVar2;
@@ -424,7 +424,7 @@ LAB_0004f820:
   piVar12 = (int *)(param_1 + 0x310);
   cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
   if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-    ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,iVar9,uVar6,iVar7,iVar8,fparam_1,fparam_2,fparam_3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,iVar9,uVar6,iVar7,iVar8,fparam_1,fparam_2,fparam_3,
                fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
     fparam_1 = fparam_1;
@@ -513,13 +513,13 @@ LAB_0004faf0:
   {
     return;
   }
-  ((int (*)())_gleDrawArraysOrElements_IMM_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,fparam_1,fparam_2,fparam_3,fparam_4,
+  ((void (*)())_gleDrawArraysOrElements_IMM_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,fparam_1,fparam_2,fparam_3,fparam_4,
              fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
 
 /* _glSetFenceAPPLE_Exec @ 0x4fb9c (712 bytes) */
-int _glSetFenceAPPLE_Exec(param_1, param_2)
+void _glSetFenceAPPLE_Exec(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -571,7 +571,7 @@ int _glSetFenceAPPLE_Exec(param_1, param_2)
   piVar8 = (int *)(param_1 + 0x310);
   cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
   if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-    ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,in_f2,in_f3,in_f4,in_f5,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,in_f2,in_f3,in_f4,in_f5,
                in_f6,in_f7,in_f8);
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
   }
@@ -677,7 +677,7 @@ int _gleCreateFenceObject(param_1)
 }
 
 /* _gleCreatePluginFence @ 0x4fed4 (112 bytes) */
-int _gleCreatePluginFence(param_1, param_2)
+void _gleCreatePluginFence(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -813,7 +813,7 @@ LAB_000500a8:
 }
 
 /* _glPrioritizeTextures_Exec @ 0x50164 (348 bytes) */
-int _glPrioritizeTextures_Exec(param_1, param_2, param_3, param_4)
+void _glPrioritizeTextures_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -900,7 +900,7 @@ void _glPassThrough_Exec(int param_1,double fparam_1)
 }
 
 /* _gleCopyPixelMapi @ 0x50358 (232 bytes) */
-int _gleCopyPixelMapi(param_1, param_2, param_3, param_4)
+void _gleCopyPixelMapi(param_1, param_2, param_3, param_4)
   int *param_1;
   undefined4 *param_2;
   int param_3;
@@ -984,7 +984,7 @@ LAB_0005050c:
 }
 
 /* _gleFreeFenceObject @ 0x50530 (52 bytes) */
-int _gleFreeFenceObject(param_1, param_2)
+void _gleFreeFenceObject(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
@@ -994,7 +994,7 @@ int _gleFreeFenceObject(param_1, param_2)
 }
 
 /* _gleDestroyPluginFence @ 0x50564 (120 bytes) */
-int _gleDestroyPluginFence(param_1, param_2)
+void _gleDestroyPluginFence(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1021,7 +1021,7 @@ int _gleDestroyPluginFence(param_1, param_2)
 }
 
 /* _glFeedbackBuffer_Exec @ 0x505dc (132 bytes) */
-int _glFeedbackBuffer_Exec(param_1, param_2, param_3, param_4)
+void _glFeedbackBuffer_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -1181,7 +1181,7 @@ void _gleFeedbackToken(int param_1,float fparam_1)
 }
 
 /* _gleBeginQuadsSelectFeedback @ 0x508b0 (76 bytes) */
-int _gleBeginQuadsSelectFeedback(param_1)
+void _gleBeginQuadsSelectFeedback(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -1197,7 +1197,7 @@ int _gleBeginQuadsSelectFeedback(param_1)
 }
 
 /* FUN_00050900 @ 0x50900 (1284 bytes) */
-int FUN_00050900(param_1)
+void FUN_00050900(param_1)
   int param_1;
 {
   char cVar1;
@@ -1419,7 +1419,7 @@ LAB_00050ddc: ;
 }
 
 /* _gleSetProjectionFuncAll @ 0x50e04 (104 bytes) */
-int _gleSetProjectionFuncAll(param_1, param_2, param_3)
+void _gleSetProjectionFuncAll(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1699,7 +1699,7 @@ void FUN_00051364(int param_1,uint param_2,int param_3,int param_4,double fparam
 }
 
 /* _gleClipPoly @ 0x5144c (432 bytes) */
-int _gleClipPoly(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+double _gleClipPoly(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   int *param_2;
   int param_3;
@@ -1813,7 +1813,7 @@ int _glePolyClipCode(param_1, param_2, param_3)
 }
 
 /* _gleSetClipInterpFunc @ 0x51648 (100 bytes) */
-int _gleSetClipInterpFunc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _gleSetClipInterpFunc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2118,7 +2118,7 @@ LAB_00051840:
 }
 
 /* _gleFeedbackPolygonPtr @ 0x51d9c (512 bytes) */
-int _gleFeedbackPolygonPtr(param_1, param_2, param_3, param_4)
+double _gleFeedbackPolygonPtr(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int *param_2;
   uint param_3;
@@ -2176,7 +2176,7 @@ int _gleFeedbackPolygonPtr(param_1, param_2, param_3, param_4)
 }
 
 /* _gleFeedbackHitRecord @ 0x51f9c (528 bytes) */
-int _gleFeedbackHitRecord(param_1, param_2)
+double _gleFeedbackHitRecord(param_1, param_2)
   int param_1;
   float *param_2;
 {
@@ -2243,7 +2243,7 @@ LAB_000520f4:
 }
 
 /* _gleMultiTextureMatTransPtr @ 0x521ac (120 bytes) */
-int _gleMultiTextureMatTransPtr(param_1, param_2, param_3)
+void _gleMultiTextureMatTransPtr(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2309,7 +2309,7 @@ int _gleLoadMatrixd(param_1, param_2)
 }
 
 /* _glGetTexParameteriv_Exec @ 0x52368 (964 bytes) */
-int _glGetTexParameteriv_Exec(param_1, param_2, param_3, param_4)
+void _glGetTexParameteriv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   undefined *param_3;
@@ -2480,7 +2480,7 @@ LAB_00052644:
 }
 
 /* _glGetTexParameterfv_Exec @ 0x5272c (916 bytes) */
-int _glGetTexParameterfv_Exec(param_1, param_2, param_3, param_4)
+void _glGetTexParameterfv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   undefined *param_3;
@@ -2661,7 +2661,7 @@ void _glColor4d_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3
 }
 
 /* _glFinishObjectAPPLE_Exec @ 0x52afc (900 bytes) */
-int _glFinishObjectAPPLE_Exec(param_1, param_2, param_3)
+void _glFinishObjectAPPLE_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   undefined4 param_3;
@@ -2843,7 +2843,7 @@ switchD_00052c3c_caseD_5:
 }
 
 /* _gleSetEnable_POLYGON_SMOOTH @ 0x52e98 (20 bytes) */
-int _gleSetEnable_POLYGON_SMOOTH(param_1, param_2, param_3)
+void _gleSetEnable_POLYGON_SMOOTH(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2869,7 +2869,7 @@ double _gleFogExp(int param_1,double fparam_1)
 }
 
 /* _glFogi_Exec @ 0x52f04 (652 bytes) */
-int _glFogi_Exec(param_1, param_2, param_3)
+void _glFogi_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   uint param_3;
@@ -2877,19 +2877,18 @@ int _glFogi_Exec(param_1, param_2, param_3)
   bool bVar1;
   byte bVar2;
   undefined4 uVar3;
-  undefined4 extraout_r3;
   undefined2 uVar4;
   int iVar5;
   int iVar6;
   
   if (-1 < *(short *)(param_1 + 0x4a10)) {
     if (*(int *)(param_1 + 0x7574) != 0) {
-      return param_1;
+      return;
     }
     uVar3 = 0x502;
 LAB_0005301c:
     *(undefined4 *)(param_1 + 0x7574) = uVar3;
-    return param_1;
+    return;
   }
   if (param_2 == 0xb64) {
     bVar1 = *(int *)(param_1 + 0x5434) == 0;
@@ -2927,7 +2926,7 @@ LAB_00053154:
     if (param_2 == 0xb62) {
       if ((int)param_3 < 0) {
         if (*(int *)(param_1 + 0x7574) != 0) {
-          return param_1;
+          return;
         }
         uVar3 = 0x501;
         goto LAB_0005301c;
@@ -2965,7 +2964,7 @@ LAB_00053154:
 LAB_00053168:
   *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x800;
   ((double (*)())_gleUpdateFogData)(param_1);
-  return extraout_r3;
+  return;
 }
 
 /* _gleFogLinear @ 0x53190 (92 bytes) */
@@ -2988,7 +2987,7 @@ double _gleFogLinear(int param_1,float fparam_1)
 }
 
 /* _glFogfv_Exec @ 0x531ec (1096 bytes) */
-int _glFogfv_Exec(param_1, param_2, param_3)
+void _glFogfv_Exec(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   float *param_3;
@@ -3304,7 +3303,7 @@ LAB_000538c8:
 }
 
 /* _gleLightMaterialRGBAChange_FB_AD @ 0x538f0 (344 bytes) */
-int _gleLightMaterialRGBAChange_FB_AD(param_1, param_2)
+void _gleLightMaterialRGBAChange_FB_AD(param_1, param_2)
   int param_1;
   undefined8 *param_2;
 {
@@ -3394,7 +3393,7 @@ void _glCopyTexImage2D_Exec(int param_1,int param_2,uint param_3,undefined4 para
       piVar17 = (int *)(param_1 + 0x310);
       cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
       if ((iVar11 != 0) && (*(int *)(iVar11 + 0xec) != 0)) {
-        ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar11 + 0x10,uVar15,uVar4,uVar12,uVar13,iVar14,fparam_1,fparam_2,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar11 + 0x10,uVar15,uVar4,uVar12,uVar13,iVar14,fparam_1,fparam_2,
                    fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
         *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
       }
@@ -3844,7 +3843,7 @@ void _glRasterPos2i_Exec(int param_1,uint param_2,uint param_3,double fparam_1,d
         piVar8 = (int *)(param_1 + 0x310);
         cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
         if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-          ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar7,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
+          ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar7,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
                      fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
           *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
         }
@@ -4216,7 +4215,7 @@ void _glBitmap_Exec(int param_1,int param_2,int param_3,undefined4 param_4,undef
             piVar10 = (int *)(param_1 + 0x310);
             cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
             if ((iVar6 != 0) && (*(int *)(iVar6 + 0xec) != 0)) {
-              ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,iVar7,param_4,param_5,param_6,iVar9,fparam_1_00,
+              ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,iVar7,param_4,param_5,param_6,iVar9,fparam_1_00,
                          fparam_2_00,fparam_3_00,fparam_4_00,fparam_5,fparam_6,fparam_7,fparam_8);
               *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
             }
@@ -4403,7 +4402,7 @@ void _glCopyPixels_Exec(int param_1,undefined4 param_2,undefined4 param_3,int pa
         piVar12 = (int *)(param_1 + 0x310);
         cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
         if ((iVar8 != 0) && (*(int *)(iVar8 + 0xec) != 0)) {
-          ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar8 + 0x10,uVar3,iVar11,iVar5,iVar9,iVar10,fparam_1,fparam_2,fparam_3
+          ((void (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar8 + 0x10,uVar3,iVar11,iVar5,iVar9,iVar10,fparam_1,fparam_2,fparam_3
                      ,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
           *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
         }

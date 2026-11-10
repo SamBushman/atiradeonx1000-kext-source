@@ -26,7 +26,7 @@ int _LFSStreamChunkListCreateFromChunkList(param_1)
 }
 
 /* _LFSStreamChunkListFree @ 0xd18c0 (80 bytes) */
-int _LFSStreamChunkListFree(param_1)
+void _LFSStreamChunkListFree(param_1)
   int *param_1;
 {
   int iVar1;
@@ -41,7 +41,7 @@ int _LFSStreamChunkListFree(param_1)
 }
 
 /* _LFSStreamChunkListAddChunk @ 0xd1910 (64 bytes) */
-int _LFSStreamChunkListAddChunk(param_1, param_2)
+void _LFSStreamChunkListAddChunk(param_1, param_2)
   int *param_1;
   int param_2;
 {
@@ -62,7 +62,7 @@ int _LFSStreamChunkListAddChunk(param_1, param_2)
 }
 
 /* _LFSStreamChunkListRemoveChunk @ 0xd1950 (120 bytes) */
-int _LFSStreamChunkListRemoveChunk(param_1, param_2)
+void _LFSStreamChunkListRemoveChunk(param_1, param_2)
   undefined4 *param_1;
   int param_2;
 {
@@ -88,7 +88,7 @@ int _LFSStreamChunkListRemoveChunk(param_1, param_2)
 }
 
 /* _LFSStreamChunkListGetStream @ 0xd19c8 (280 bytes) */
-int _LFSStreamChunkListGetStream(param_1, param_2, param_3, param_4)
+void _LFSStreamChunkListGetStream(param_1, param_2, param_3, param_4)
   int *param_1;
   int param_2;
   int *param_3;
@@ -164,7 +164,7 @@ int _LFSStreamChunkListCompare(param_1, param_2)
 }
 
 /* _LFSStreamChunkListOutputDebugInfo @ 0xd1b90 (68 bytes) */
-int _LFSStreamChunkListOutputDebugInfo(param_1)
+void _LFSStreamChunkListOutputDebugInfo(param_1)
   int *param_1;
 {
   int iVar1;
@@ -198,11 +198,9 @@ int _LFSStreamCreate()
 }
 
 /* _LFSStreamFree @ 0xd1c3c (92 bytes) */
-int _LFSStreamFree(param_1)
+void _LFSStreamFree(param_1)
   undefined4 *param_1;
 {
-  undefined4 extraout_r3;
-  
   ((int (*)())_LFSStreamChunkListFree)(*param_1);
   ((int (*)())_LFSStreamChunkListFree)(param_1[1]);
   ((int (*)())_LFSStreamChunkListFree)(param_1[2]);
@@ -210,11 +208,11 @@ int _LFSStreamFree(param_1)
   ((int (*)())_LFSStreamChunkListFree)(param_1[4]);
   ((int (*)())_LFSStreamChunkListFree)(param_1[5]);
   _free(param_1);
-  return extraout_r3;
+  return;
 }
 
 /* _LFSStreamAddConstantBinding @ 0xd1c98 (104 bytes) */
-int _LFSStreamAddConstantBinding(param_1, param_2)
+void _LFSStreamAddConstantBinding(param_1, param_2)
   undefined4 *param_1;
   undefined4 *param_2;
 {
@@ -238,7 +236,7 @@ int _LFSStreamAddConstantBinding(param_1, param_2)
 }
 
 /* _LFSStreamAddPreliminaryPassRegisterInit @ 0xd1d00 (104 bytes) */
-int _LFSStreamAddPreliminaryPassRegisterInit(param_1, param_2)
+void _LFSStreamAddPreliminaryPassRegisterInit(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -262,7 +260,7 @@ int _LFSStreamAddPreliminaryPassRegisterInit(param_1, param_2)
 }
 
 /* _LFSStreamAddPreliminaryPassOperation @ 0xd1d68 (84 bytes) */
-int _LFSStreamAddPreliminaryPassOperation(param_1, param_2)
+void _LFSStreamAddPreliminaryPassOperation(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -276,7 +274,7 @@ int _LFSStreamAddPreliminaryPassOperation(param_1, param_2)
 }
 
 /* _LFSStreamAddOutputPassRegisterInit @ 0xd1dbc (104 bytes) */
-int _LFSStreamAddOutputPassRegisterInit(param_1, param_2)
+void _LFSStreamAddOutputPassRegisterInit(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -300,7 +298,7 @@ int _LFSStreamAddOutputPassRegisterInit(param_1, param_2)
 }
 
 /* _LFSStreamAddOutputPassOperation @ 0xd1e24 (84 bytes) */
-int _LFSStreamAddOutputPassOperation(param_1, param_2)
+void _LFSStreamAddOutputPassOperation(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -314,7 +312,7 @@ int _LFSStreamAddOutputPassOperation(param_1, param_2)
 }
 
 /* _LFSStreamAddConstant @ 0xd1e78 (84 bytes) */
-int _LFSStreamAddConstant(param_1, param_2)
+void _LFSStreamAddConstant(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -328,7 +326,7 @@ int _LFSStreamAddConstant(param_1, param_2)
 }
 
 /* _LFSStreamGetStream @ 0xd1ecc (628 bytes) */
-int _LFSStreamGetStream(param_1, param_2, param_3)
+void _LFSStreamGetStream(param_1, param_2, param_3)
   int *param_1;
   uint *param_2;
   int *param_3;
@@ -413,7 +411,7 @@ int _LFSStreamCompare(param_1, param_2)
 }
 
 /* _LFSStreamOutputDebugInfo @ 0xd21ec (164 bytes) */
-int _LFSStreamOutputDebugInfo(param_1)
+void _LFSStreamOutputDebugInfo(param_1)
   undefined4 *param_1;
 {
   _puts("LFSStream {");
@@ -432,21 +430,20 @@ int _LFSStreamOutputDebugInfo(param_1)
 }
 
 /* _gleFPChanged @ 0xd2290 (76 bytes) */
-int _gleFPChanged(param_1)
+void _gleFPChanged(param_1)
   int param_1;
 {
   undefined *puVar1;
-  undefined4 extraout_r3;
   
   _gleSelectVertexSubmitFunc(param_1);
   puVar1 = PTR__gleSetClipInterpFunc_00112038;
   *(undefined **)(param_1 + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
   *(undefined **)(param_1 + 0x49cc) = puVar1;
-  return extraout_r3;
+  return;
 }
 
 /* _gleFPEnable @ 0xd22dc (64 bytes) */
-int _gleFPEnable(param_1)
+void _gleFPEnable(param_1)
   int param_1;
 {
   ((int (*)())_gleFPChanged)(param_1);
@@ -456,7 +453,7 @@ int _gleFPEnable(param_1)
 }
 
 /* _gleFPDisable @ 0xd231c (64 bytes) */
-int _gleFPDisable(param_1)
+void _gleFPDisable(param_1)
   int param_1;
 {
   ((int (*)())_gleFPChanged)(param_1);
@@ -472,7 +469,7 @@ int _zeroTargetExtractor()
 }
 
 /* _gleGetHashMachineObjectNameTargetPairs @ 0xd2364 (400 bytes) */
-int _gleGetHashMachineObjectNameTargetPairs(param_1, param_2, param_3, param_4)
+void _gleGetHashMachineObjectNameTargetPairs(param_1, param_2, param_3, param_4)
   int param_1;
   int *param_2;
   int param_3;
@@ -672,7 +669,7 @@ int _gleImagingTexFormatToInternal(param_1)
 }
 
 /* _gleImagingUnpackData @ 0xd2724 (316 bytes) */
-int _gleImagingUnpackData(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+void _gleImagingUnpackData(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -743,7 +740,7 @@ int _gleImagingUnpackData(param_1, param_2, param_3, param_4, param_5, param_6, 
 }
 
 /* _gleImagingPackData @ 0xd2860 (312 bytes) */
-int _gleImagingPackData(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+void _gleImagingPackData(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -811,7 +808,7 @@ int _gleImagingPackData(param_1, param_2, param_3, param_4, param_5, param_6, pa
 }
 
 /* _gleImagingScaleAndBias @ 0xd2998 (936 bytes) */
-int _gleImagingScaleAndBias(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _gleImagingScaleAndBias(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   float *param_2;
   int param_3;
@@ -940,7 +937,7 @@ switchD_000d2a7c_default:
 }
 
 /* _gleGetHistogram @ 0xd2d54 (3104 bytes) */
-int _gleGetHistogram(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gleGetHistogram(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -1433,7 +1430,7 @@ LAB_000d394c:
 }
 
 /* _gleGetMinmax @ 0xd3974 (628 bytes) */
-int _gleGetMinmax(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gleGetMinmax(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -1543,7 +1540,7 @@ LAB_000d3b98:
 }
 
 /* _gleConvolutionFilter1D @ 0xd3be8 (224 bytes) */
-int _gleConvolutionFilter1D(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _gleConvolutionFilter1D(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1575,7 +1572,7 @@ int _gleConvolutionFilter1D(param_1, param_2, param_3, param_4, param_5, param_6
 }
 
 /* _gleConvolutionFilter2D @ 0xd3cc8 (240 bytes) */
-int _gleConvolutionFilter2D(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _gleConvolutionFilter2D(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1608,7 +1605,7 @@ int _gleConvolutionFilter2D(param_1, param_2, param_3, param_4, param_5, param_6
 }
 
 /* _gleGetConvolutionFilter @ 0xd3db8 (100 bytes) */
-int _gleGetConvolutionFilter(param_1, param_2, param_3, param_4, param_5)
+void _gleGetConvolutionFilter(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -1630,7 +1627,7 @@ int _gleGetConvolutionFilter(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gleSeparableFilter2D @ 0xd3e1c (340 bytes) */
-int _gleSeparableFilter2D(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+void _gleSeparableFilter2D(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1669,7 +1666,7 @@ int _gleSeparableFilter2D(param_1, param_2, param_3, param_4, param_5, param_6, 
 }
 
 /* _gleGetSeparableFilter @ 0xd3f70 (164 bytes) */
-int _gleGetSeparableFilter(param_1, param_2, param_3, param_4, param_5, param_6)
+void _gleGetSeparableFilter(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1693,7 +1690,7 @@ int _gleGetSeparableFilter(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gleColorTable @ 0xd4014 (128 bytes) */
-int _gleColorTable(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _gleColorTable(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   int param_3;
@@ -1710,7 +1707,7 @@ int _gleColorTable(param_1, param_2, param_3, param_4, param_5, param_6, param_7
 }
 
 /* _gleColorSubTable @ 0xd4094 (160 bytes) */
-int _gleColorSubTable(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _gleColorSubTable(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   int param_3;
@@ -1772,13 +1769,13 @@ void _gleTransformLightDirection(int param_1,int param_2,double fparam_1,double 
 }
 
 /* _gleAddVertexMaterialNoop @ 0xd425c (4 bytes) */
-int _gleAddVertexMaterialNoop()
+void _gleAddVertexMaterialNoop()
 {
   return;
 }
 
 /* _gleAddVertexMaterial @ 0xd4260 (132 bytes) */
-int _gleAddVertexMaterial(param_1, param_2)
+void _gleAddVertexMaterial(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1819,7 +1816,7 @@ int _gleAddVertexMaterial(param_1, param_2)
 }
 
 /* _gleAddVertexMaterial2Sided @ 0xd42e4 (160 bytes) */
-int _gleAddVertexMaterial2Sided(param_1, param_2)
+void _gleAddVertexMaterial2Sided(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1870,7 +1867,7 @@ int _gleAddVertexMaterial2Sided(param_1, param_2)
 }
 
 /* _gleSetAddVertexMaterialFunc @ 0xd4384 (136 bytes) */
-int _gleSetAddVertexMaterialFunc(param_1)
+void _gleSetAddVertexMaterialFunc(param_1)
   int param_1;
 {
   char cVar1;
@@ -1899,7 +1896,7 @@ LAB_000d43fc:
 }
 
 /* _glePopMaterials @ 0xd440c (124 bytes) */
-int _glePopMaterials(param_1)
+void _glePopMaterials(param_1)
   int param_1;
 {
   int iVar1;
@@ -4619,7 +4616,7 @@ LAB_000d7840:
 }
 
 /* _gleBeginLinesRenderSmooth @ 0xd7858 (52 bytes) */
-int _gleBeginLinesRenderSmooth(param_1)
+void _gleBeginLinesRenderSmooth(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -4632,7 +4629,7 @@ int _gleBeginLinesRenderSmooth(param_1)
 }
 
 /* _gleBeginLinesRenderFlat @ 0xd788c (52 bytes) */
-int _gleBeginLinesRenderFlat(param_1)
+void _gleBeginLinesRenderFlat(param_1)
   int param_1;
 {
   undefined *puVar1;
@@ -4645,7 +4642,7 @@ int _gleBeginLinesRenderFlat(param_1)
 }
 
 /* _gleBeginLinesRenderTCL @ 0xd78c0 (52 bytes) */
-int _gleBeginLinesRenderTCL(param_1)
+void _gleBeginLinesRenderTCL(param_1)
   int param_1;
 {
   undefined *puVar1;

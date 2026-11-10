@@ -133,7 +133,7 @@ int _glBindProgramARB_Comp(param_1, param_2, param_3)
 }
 
 /* _glBindProgramARB_CompExec @ 0x79790 (64 bytes) */
-int _glBindProgramARB_CompExec(param_1, param_2, param_3)
+void _glBindProgramARB_CompExec(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -248,7 +248,7 @@ LAB_00079930:
 }
 
 /* _glProgramEnvParameter4dvARB_Exec @ 0x799e8 (340 bytes) */
-int _glProgramEnvParameter4dvARB_Exec(param_1, param_2, param_3, param_4)
+void _glProgramEnvParameter4dvARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -481,7 +481,7 @@ void _glProgramEnvParameter4dARB_CompExec(undefined4 param_1,undefined4 param_2,
 }
 
 /* _glProgramEnvParameter4dvARB_CompExec @ 0x79ec8 (72 bytes) */
-int _glProgramEnvParameter4dvARB_CompExec(param_1, param_2, param_3, param_4)
+void _glProgramEnvParameter4dvARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -501,7 +501,7 @@ void _glProgramEnvParameter4fARB_CompExec(undefined4 param_1,undefined4 param_2,
 }
 
 /* _glProgramEnvParameter4fvARB_CompExec @ 0x79f80 (72 bytes) */
-int _glProgramEnvParameter4fvARB_CompExec(param_1, param_2, param_3, param_4)
+void _glProgramEnvParameter4fvARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -591,7 +591,7 @@ LAB_0007a088:
 }
 
 /* _glProgramLocalParameter4dvARB_Exec @ 0x7a154 (360 bytes) */
-int _glProgramLocalParameter4dvARB_Exec(param_1, param_2, param_3, param_4)
+void _glProgramLocalParameter4dvARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -761,7 +761,7 @@ void _glProgramLocalParameter4dARB_CompExec(undefined4 param_1,undefined4 param_
 }
 
 /* _glProgramLocalParameter4dvARB_CompExec @ 0x7a514 (72 bytes) */
-int _glProgramLocalParameter4dvARB_CompExec(param_1, param_2, param_3, param_4)
+void _glProgramLocalParameter4dvARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -781,7 +781,7 @@ void _glProgramLocalParameter4fARB_CompExec(undefined4 param_1,undefined4 param_
 }
 
 /* _glProgramLocalParameter4fvARB_CompExec @ 0x7a5cc (72 bytes) */
-int _glProgramLocalParameter4fvARB_CompExec(param_1, param_2, param_3, param_4)
+void _glProgramLocalParameter4fvARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -847,7 +847,7 @@ int _glProgramStringARB_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glProgramStringARB_CompExec @ 0x7a730 (80 bytes) */
-int _glProgramStringARB_CompExec(param_1, param_2, param_3, param_4, param_5)
+void _glProgramStringARB_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -860,7 +860,7 @@ int _glProgramStringARB_CompExec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glGetProgramStringARB_Exec @ 0x7a780 (196 bytes) */
-int _glGetProgramStringARB_Exec(param_1, param_2, param_3, param_4)
+void _glGetProgramStringARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   int param_3;
@@ -918,7 +918,7 @@ LAB_0007a80c:
 }
 
 /* _glGetProgramEnvParameterdvARB_Exec @ 0x7a844 (212 bytes) */
-int _glGetProgramEnvParameterdvARB_Exec(param_1, param_2, param_3, param_4)
+void _glGetProgramEnvParameterdvARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -978,7 +978,7 @@ LAB_0007a8b8:
 }
 
 /* _glGetProgramEnvParameterfvARB_Exec @ 0x7a918 (212 bytes) */
-int _glGetProgramEnvParameterfvARB_Exec(param_1, param_2, param_3, param_4)
+void _glGetProgramEnvParameterfvARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -1038,7 +1038,7 @@ LAB_0007a98c:
 }
 
 /* _glGetProgramLocalParameterdvARB_Exec @ 0x7a9ec (216 bytes) */
-int _glGetProgramLocalParameterdvARB_Exec(param_1, param_2, param_3, param_4)
+void _glGetProgramLocalParameterdvARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -1098,7 +1098,7 @@ LAB_0007aa60:
 }
 
 /* _glGetProgramLocalParameterfvARB_Exec @ 0x7aac4 (216 bytes) */
-int _glGetProgramLocalParameterfvARB_Exec(param_1, param_2, param_3, param_4)
+void _glGetProgramLocalParameterfvARB_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
   uint param_3;
@@ -1213,7 +1213,7 @@ int _glPixelMapfv_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glPixelMapfv_Exec @ 0x7accc (1760 bytes) */
-int _glPixelMapfv_Exec(param_1, param_2, param_3, param_4)
+void _glPixelMapfv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -1559,7 +1559,7 @@ LAB_0007b32c:
 }
 
 /* _glPixelMapfv_CompExec @ 0x7b3d4 (72 bytes) */
-int _glPixelMapfv_CompExec(param_1, param_2, param_3, param_4)
+void _glPixelMapfv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1626,7 +1626,7 @@ int _glPixelMapuiv_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glPixelMapuiv_Exec @ 0x7b54c (1640 bytes) */
-int _glPixelMapuiv_Exec(param_1, param_2, param_3, param_4)
+void _glPixelMapuiv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -1931,7 +1931,7 @@ LAB_0007bb40:
 }
 
 /* _glPixelMapuiv_CompExec @ 0x7bbdc (72 bytes) */
-int _glPixelMapuiv_CompExec(param_1, param_2, param_3, param_4)
+void _glPixelMapuiv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1997,7 +1997,7 @@ int _glPixelMapusv_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glPixelMapusv_Exec @ 0x7bd60 (1688 bytes) */
-int _glPixelMapusv_Exec(param_1, param_2, param_3, param_4)
+void _glPixelMapusv_Exec(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -2298,7 +2298,7 @@ LAB_0007c380:
 }
 
 /* _glPixelMapusv_CompExec @ 0x7c420 (72 bytes) */
-int _glPixelMapusv_CompExec(param_1, param_2, param_3, param_4)
+void _glPixelMapusv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2310,7 +2310,7 @@ int _glPixelMapusv_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glGetPixelMapfv_Exec @ 0x7c468 (932 bytes) */
-int _glGetPixelMapfv_Exec(param_1, param_2, param_3)
+void _glGetPixelMapfv_Exec(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -2489,7 +2489,7 @@ LAB_0007c580:
 }
 
 /* _glGetPixelMapuiv_Exec @ 0x7c85c (1436 bytes) */
-int _glGetPixelMapuiv_Exec(param_1, param_2, param_3)
+void _glGetPixelMapuiv_Exec(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -2730,7 +2730,7 @@ LAB_0007c974:
 }
 
 /* _glGetPixelMapusv_Exec @ 0x7ce48 (1136 bytes) */
-int _glGetPixelMapusv_Exec(param_1, param_2, param_3)
+void _glGetPixelMapusv_Exec(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined2 *param_3;
