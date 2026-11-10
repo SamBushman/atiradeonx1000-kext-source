@@ -283,9 +283,9 @@ typedef struct { char name[96]; int na; garg_t a[8]; } gfunc_t;
 enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR };
 enum { GA_PTR = 1, GA_INT, GA_PICK, GA_RAND, GA_NULL, GA_NAME, GA_STR };
 static unsigned g_names[64]; static int g_nnames;
-typedef struct { char name[48]; char tname[32]; unsigned v[8]; int nv; char func[96]; } gret_t;
+typedef struct { char name[48]; char tname[32]; unsigned v[8]; int nv; char func[96]; int pct; } gret_t;
 typedef struct { char name[48]; char func[96]; int arg; unsigned v[8]; int nv; } gout_t; static gout_t gouts[16]; static int ngouts;   /* `out IMPORT ARG V1 V2 ..`: after the stubbed import the word its ARG-th argument points to holds one of the values (an out-parameter the library fills: a type enum) */
-static char gs_curfunc[96]; static unsigned gs_first_cnt;
+static char gs_curfunc[96]; static unsigned gs_first_cnt, gs_lg_n = 0xffffffffu, gs_lg_c, gs_lg_o;
 typedef struct { char func[96]; int kind; char name[48]; char tname[32]; unsigned a, pct; char text[96]; } gglob_t; static gglob_t gglobs[64]; static int nglobs;   /* gcopy NAME TYPE | gptr NAME TYPE PCT | gset NAME VAL | gwatch NAME WORDS | env NAME a|b|- | scandirout a|b MAXN | retcfstr IMPORT a|b|- (all function-scoped) */
 enum { GG_COPY = 1, GG_PTR, GG_SET, GG_WATCH, GG_ENV, GG_SCANDIR, GG_CFSTR };
 static char cfstr_pool[32][96]; static int ncfstr;   /* CF string stand-ins: a CFStringRef is a pointer to the characters here */
@@ -302,7 +302,7 @@ static void load_graphspec(const char *path) {
         for (char *p = strtok(line, " \t\r\n"); p && nt < 80; p = strtok(NULL, " \t\r\n")) tok[nt++] = p;
         if (!nt) continue;
         if (!strcmp(tok[0], "type") && nt >= 3) { ct = &gtypes[ngtypes++]; memset(ct, 0, sizeof *ct); snprintf(ct->name, sizeof ct->name, "%s", tok[1]); ct->size = gnum(tok[2]); cf = NULL; continue; }
-        if (!strcmp(tok[0], "ret") && nt >= 3 && ngrets < 32) { gret_t *g = &grets[ngrets++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); snprintf(g->tname, sizeof g->tname, "%s", tok[2]); if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
+        if (!strcmp(tok[0], "ret") && nt >= 3 && ngrets < 32) { gret_t *g = &grets[ngrets++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->pct = nt >= 4 ? atoi(tok[3]) : 100; if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
         if (!strcmp(tok[0], "retpick") && nt >= 3 && ngrets < 32) { gret_t *g = &grets[ngrets++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); for (int i = 2; i < nt && g->nv < 8; i++) g->v[g->nv++] = gnum(tok[i]); if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
         if (!strcmp(tok[0], "out") && nt >= 4 && ngouts < 16) { gout_t *g = &gouts[ngouts++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); g->arg = atoi(tok[2]); for (int i = 3; i < nt && g->nv < 8; i++) g->v[g->nv++] = gnum(tok[i]); if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
         { int gk = !strcmp(tok[0], "gcopy") ? GG_COPY : !strcmp(tok[0], "gptr") ? GG_PTR : !strcmp(tok[0], "gset") ? GG_SET : !strcmp(tok[0], "gwatch") ? GG_WATCH : !strcmp(tok[0], "env") ? GG_ENV : !strcmp(tok[0], "scandirout") ? GG_SCANDIR : !strcmp(tok[0], "retcfstr") ? GG_CFSTR : 0;
@@ -396,7 +396,7 @@ static int apply_graph(const char *name, unsigned *ia) {
     int nalt = 0, alt[16]; for (int i = 0; i < ngfuncs && nalt < 16; i++) if (!strcmp(gfuncs[i].name, name)) alt[nalt++] = i;   /* several `func` blocks of one name are alternatives, one is drawn per trial */
     snprintf(gs_curfunc, sizeof gs_curfunc, "%s", name);
     if (nalt) { int i = alt[nalt > 1 ? rnd32() % nalt : 0];
-        gfunc_t *f = &gfuncs[i]; gb_next = ARENA_BASE + 0x1000; g_nnames = 0; gm_next = GM_LO; gs_first_cnt = 0xffffffffu;
+        gfunc_t *f = &gfuncs[i]; gb_next = ARENA_BASE + 0x1000; g_nnames = 0; gm_next = GM_LO; gs_first_cnt = 0xffffffffu; gs_lg_n = 0xffffffffu;
         for (int k = 0; k < f->na; k++) { garg_t *a = &f->a[k]; if (a->n < 0 || a->n >= 8) continue;
             switch (a->kind) {
             case GA_PTR: ia[a->n] = (rnd32() % 100 < (unsigned)a->pct) ? gb_build(gfind_type(a->tname), 0) : 0; break;
@@ -435,6 +435,7 @@ static int gs_semantic(const char *nm, unsigned *a, unsigned *r) {
     for (int i = 0; i < ngrets; i++) if (!strcmp(grets[i].name, nm) && (!grets[i].func[0] || !strcmp(grets[i].func, gs_curfunc))) {
         if (grets[i].nv) { *r = grets[i].v[rnd32() % grets[i].nv]; return 1; }
         if (gb_next + 0x800 > GM_LO) return 0;
+        if (grets[i].pct > 0 && grets[i].pct < 100 && rnd32() % 100 >= (unsigned)grets[i].pct) { *r = 0; return 1; }   /* `ret IMPORT TYPE PCT`: the object only PCT percent of the calls, else NULL */
         *r = gb_build(gfind_type(grets[i].tname), 0); return 1; }
     if (outdone) return 1;
     for (int q = 0; q < nglobs; q++) { gglob_t *g = &gglobs[q]; if (strcmp(g->func, gs_curfunc)) continue;
@@ -454,6 +455,13 @@ static int gs_semantic(const char *nm, unsigned *a, unsigned *r) {
     if (!strcmp(nm, "CFStringGetCStringPtr") && (const char *)a[0] >= cfstr_pool[0] && (const char *)a[0] <= cfstr_pool[31]) { *r = (rnd32() % 2) ? a[0] : 0; return 1; }
     if (!strcmp(nm, "CFStringGetCString") && (const char *)a[0] >= cfstr_pool[0] && (const char *)a[0] <= cfstr_pool[31]) { size_t L = strlen((const char *)a[0]); if (a[2] > L && a[1] && rnd32() % 5) { memcpy((void *)a[1], (const void *)a[0], L + 1); *r = 1; } else *r = 0; return 1; }
     if (!strcmp(nm, "CFRelease")) { *r = 0; return 1; }
+    if (!strcmp(nm, "PPStreamGetStream")) {   /* (manager, buf, &count): the stream as pairs of words; count pairs (0, or 6..11), pair 5 = (number of entries c, first entry index), entries (type<<16 | small index, word) from pair 6 on: what _gleShaderDataUpdateParams walks */
+        if (gs_lg_n == 0xffffffffu) { gs_lg_n = 6 + rnd32() % 6; gs_lg_c = rnd32() % 4; if (gs_lg_n - gs_lg_c < 6) gs_lg_c = 0; gs_lg_o = 6 + rnd32() % (gs_lg_n - gs_lg_c - 6 + 1); }   /* never 0: with an empty stream the code (stock too) hands _gleShaderDataUpdateParams a NULL buffer and faults at +0x28, which would hide everything after it */
+        unsigned n = gs_lg_n; if (cur_img == 1 && imp_ctl && !strcmp(imp_ctl, "PPStreamGetStream")) n++;
+        unsigned *cp = (unsigned *)a[2]; if (((unsigned)cp & 3) == 0 && (((unsigned)cp >= 0xbf000000u && (unsigned)cp < 0xbffffff0u) || INARENA((unsigned)cp))) *cp = n;
+        if (a[1] >= GM_LO && n && a[1] < GM_HI - 8 * n) { unsigned *bf = (unsigned *)a[1]; bf[10] = gs_lg_c; bf[11] = gs_lg_o;
+            for (unsigned k = 6; k < n; k++) { bf[2 * k] = (1 + rnd32() % 12) << 16 | rnd32() % 8; bf[2 * k + 1] = rnd32() % 4; } }
+        *r = 0; return 1; }
     if (!strcmp(nm, "PPStreamAttachOperationsChunkList")) { if (INARENA(a[0])) *(unsigned *)(a[0] + 0x20) = a[1]; return 1; }
     if (!strcmp(nm, "PPStreamAttachParamBindingsChunkList")) { if (INARENA(a[0])) *(unsigned *)(a[0] + 0x10) = a[1]; return 1; }
     if (!strcmp(nm, "PPStreamAttachParamBindingArraysChunkList")) { if (INARENA(a[0])) *(unsigned *)(a[0] + 0x14) = a[1]; return 1; }

@@ -4,6 +4,8 @@
  *        ins  = f(block, dst): *(float *)dst = *(float *)(block + off)            (_gleInsertPixel_*_Float: same pair)
  *        rtc  = int f(int word, int count): (word & ~0xfffc) | ((count << 2) & 0xfffc)   (_gleRTCBuildABranch_*: stock rlwinm + rlwimi, rebuilt one rlwimi; the stock leaves r4 = (count << 2) & 0xfffc,
  *               dead in every stock caller, see EVIDENCE section 15)
+ *        ashl = unsigned long long f(unsigned long long v, int count): v << count (___ashldi3, the 64-bit left-shift helper: stock = Apple libgcc code, rebuilt = another compiler's; r3:r4 in, r5 = count, r3:r4 out;
+ *               every count 0..95 and -1..-3, 100000 random values + the edge values per count)
  * lfs/stfs convert a single through a double and back; the claim is that this is a bit-exact copy for EVERY 32-bit pattern (SNaN, QNaN payloads, +-Inf, denormals, -0). Run: all 65536 patterns of the top
  * halfword x 8 low halfwords, then N random 32-bit patterns; the whole block / destination and the return value must be identical. */
 #include <stdio.h>
@@ -26,6 +28,16 @@ int main(int argc, char **argv) {
     while (scanf("%15s %95s %x %x %x", kind, name, &s, &r, &off) == 5) {
         fn_t f[2] = { (fn_t)(ap[0] + (s - sa)), (fn_t)(ap[1] + (r - ra)) };
         unsigned long long n = 0, bad = 0; unsigned pat_lo[8] = { 0, 1, 0x7fff, 0x8000, 0x4000, 0xffff, 0x2aaa, 0x5555 };
+        if (!strcmp(kind, "ashl")) {
+            unsigned long long n = 0, bad = 0, cbad = 0; unsigned long long edge[8] = { 0, 1, 0x8000000000000000ULL, 0xffffffffffffffffULL, 0x00000000ffffffffULL, 0xffffffff00000000ULL, 0x123456789abcdef0ULL, 0x80000000ULL };
+            for (int cnt = -3; cnt < 96; cnt++) for (int it = 0; it < 100008; it++) {
+                unsigned long long v = it < 8 ? edge[it] : ((unsigned long long)rnd() << 32) ^ rnd() ^ ((unsigned long long)rnd() << 16);
+                unsigned long long r[2]; for (int k = 0; k < 2; k++) r[k] = ((unsigned long long (*)(unsigned long long, int))f[k])(v, cnt);
+                n++; if (r[0] != r[1]) { if (bad++ < 3) printf("DIFF %s v %016llx cnt %d: %016llx/%016llx\n", name, v, cnt, r[0], r[1]); }
+                if (cnt >= 0 && cnt < 64) { unsigned long long want = v << (cnt + (getenv("ASHL_CTL") ? 1 : 0) & 63); if (r[0] != want || r[1] != want) { if (cbad++ < 3) printf("C-SHIFT MISMATCH v %016llx cnt %d: stock %016llx rebuilt %016llx want %016llx\n", v, cnt, r[0], r[1], want); } }
+            }
+            printf("%-4s %-36s %llu cases, %llu differ stock/rebuilt, %llu differ from the C shift (counts 0..63)\n", kind, name, n, bad, cbad); total += 1; totbad += bad != 0 || cbad != 0; continue;
+        }
         unsigned long long iters = strcmp(kind, "rtc") ? 65536ULL * 8 + (unsigned)N : 1000000ULL + (unsigned)N;
         for (unsigned long long it = 0; it < iters; it++) {
             unsigned v;
