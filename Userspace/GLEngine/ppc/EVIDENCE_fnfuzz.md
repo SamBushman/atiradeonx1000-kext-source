@@ -234,3 +234,35 @@ The fuzzers and mocks see data only through the functions that read it, so every
 - 22 call a stubbed import other than `pthread_mutex_*` and are NOT covered: `_glLinkProgramARB_Exec`, `_glePPParse`, `_gleShaderParse`, `_gleFreeShaderObject`, `_glePPPrune{Attribs,Locals,Outputs,ParamArrays,Params}`, `_gleVPEmulate`, `_glepLoadRenderers`, `_glepPluginDisconnect`, `_gliGetInteger`, `_glBindAttribLocationARB_Exec`, `_glGetAttribLocationARB_Exec`, `_glCreateShaderObjectARB_Exec`, `_glDrawPixels_Comp`, `_glGet{ColorTable,CompressedTexImage,TexImage}_Exec`, `_evaluateImageUnits`, `_PPEmulatorProgramSetupHandlesFromPPStream`. Defect B was found in these functions by reading the dump, not by this harness; the fix is verified only by the C diff and the interposed run of the functions that do reach their imports.
 - 42 call only `pthread_mutex_lock/unlock` (the `_Exec` object functions, `_gle*FreeState`): covered by ctxfuzz for returns and memory, the lock arguments are not compared.
 Reaching these needs a structured object graph (shader/program objects, a PPStream, a hash table of machine objects) built per function, as for the list/RTC mocks.
+
+## 17. Object-graph mocks for the import-calling functions (Nov 10; image 2b2ed89e, harness `Tests/userspace/fnfuzz.c`, spec `Tests/userspace/gleng_graph_spec.txt`)
+
+**Why.** Section 16 left 22 import-calling functions unreached because a random arena does not contain the object graph they walk (shader objects, programs, PPStreams, plugin lists, pixel-op records). Each now gets a typed graph built per trial by `gb_build`/`apply_graph` from the spec (`type`, `ptr/list/u8/u16/u32/rand/set/pick/bits/str/hash/parr/fn/fnd/randfill`; `func` with `arg N ptr|int|pick|rand|null|name|str`, repeated `func` = alternatives; `ret`, `retpick`, `out` directives for what an import stub returns or writes through an out-pointer, scoped per function).
+
+**This supersedes the section 16 totals.** While building the graphs three harness faults were found; they affected the earlier interposer runs, so those runs were repeated in full:
+- **Stub return values were 64-bit.** A stub answering with a full 64-bit value could leave the high word where a 32-bit caller expected a clean register; stubs now return 32-bit values.
+- **Stub frames leave residue that the code under test reads.** Stub frames sit exactly where the image's next callee frames land. A function that reads an uninitialised stack slot (the stock does: `local_2c` in `_PPEmulatorProgramSetupHandlesFromPPStream`) then saw harness junk that differs with frame layout. Stubs now zero their argument copy and `scrub_below()` the stack under them, and the runs use `FNFUZZ_STACKFILL=0`.
+- **Hashing the wrong words.** `FNFUZZ_STACKREC=IMPORT:ARG:WORDS` hashes the words behind a stack-pointer argument. For `glgProcessPixels` the record is argument 1 (not 0) and 13 words (0x34 bytes) long; earlier tries hashed 28 words including unwritten residue and, for `glgConvertType`, out-arguments that are uninitialised before the call, both giving false DIFFs.
+
+**Class #20 retracted.** An intermediate `_glePPParse` mismatch had been read as "separate scalar locals instead of one frame array". It is not a defect: `link_corpus.py` `rewrites.mirror_frame` already turns every `local_*`/`xStack_*` of a function with known-size frame variables into one `ghidra_frame[]` at the stock offsets (`mirror_frames: true` in `link_config/gleng.json`), and `Tools/userspace/local_run_audit.py` confirms all 53 audit functions are mirrored. The mismatch was the stub-frame residue above. The corpus under `Userspace/GLEngine/ppc` is unchanged by this section (identical to b36c611f); an attempted corpus-level local merge was reverted because it broke the link step.
+
+**Address-dependent function.** `_gleOptimizeDisplayListCreateHashTable` picks its bucket from a code address (`& 0x7c`), so the two images legitimately differ in arena contents; it is compared with `FNFUZZ_ADDRDEP=_gleOptimizeDisplayListCreateHashTable` (arena digest excluded for that function only; calls, trace hash and returns still compared).
+
+**Result (full re-run of all 190 functions, 200 trials per function and profile, stock run twice per trial, `FNFUZZ_STACKFILL=0 FNFUZZ_STACKREC=glgProcessPixels:1:13`):**
+
+| profile | functions | trials | differ | uninformative | non-deterministic in stock | functions reaching a stubbed import |
+|---|---|---|---|---|---|---|
+| default | 190 | 38200 | **0** | 15 | 0 | 78 (was 58) |
+| graph | 190 | 38200 | **0** | 16 | 0 | 75 (was 56) |
+
+(logs `~/g5logs/gleng-fnfuzz/imp6_default.log`, `imp6_graph.log` on the G5.) Of the 22 functions section 16 listed as uncovered, **21 are now reached** in 98..192 of 200 trials each (default / graph, trial counts in the logs) except the imaging group, which reaches its imports less often: `_glGetTexImage_Exec` 8/11, `_glGetColorTable_Exec` 9/11, `_glGetCompressedTexImage_Exec` 17/22, `_gliGetInteger` 19/18 (default/graph).
+
+Controls: while building each mock the mismatch control `FNFUZZ_IMPORT_CTL=<import>` (rebuilt side's return becomes `~r^0x1234`, out-parameter words `w*7+5`) was run for the imports the function calls and produced DIFFs, except where noted below; a mock without a detecting control is not claimed.
+
+**What this still does NOT show (coverage, not a pass).**
+- `_glepLoadRenderers`: 0/200 trials reach an import. It reads image globals (`_gle_io_data`, `_glep_plugin_head`) and calls scandir/IORegistry; covering it needs a harness extension that writes per-image data (stock addresses from the Ghidra data table, rebuilt addresses from `nm`). Its class #15b void return was fixed in b36c611f and checked by the C diff only.
+- `_glLinkProgramARB_Exec`: the PP-stream block (`PPStreamGetStream`/`Duplicate`/`ProgramCreate`/`Convert`/`Linearize`, `ShGetActiveUniform`/`Attrib`) is not reached; the other paths are.
+- `_gliGetInteger`: reached in only 18-19 trials and its control detected the perturbation weakly.
+- 42 functions that call only `pthread_mutex_lock/unlock` (the `_Exec` object functions, `_gle*FreeState`) remain covered by ctxfuzz for returns and memory, not for the lock arguments (accepted by the user, Nov 10).
+- Still-uncovered gaps from section 15: `_gleBuildVertexFuncNO`, the Projection builders (control only), `_gleTextureImagePut*` structured mocks, `_gleInitVectorConstants`/`_glePreInitVectorTOC`, millicode, `___ashldi3`, `dyld_stub_binding_helper`, `_gleLightMaterialShineChange_FB`, and the weak `_glBitmap_NoopExec`/`_glRasterPos4*_Exec`/`_gleFlushAndSubmit`/`_gleSetVertexSubmitFunc`.
+- 9 `dyld: lazy symbol binding failed` lines appear in the graph log: trials where the code under test called an import that has no stub and a lazy slot unbound in the scratch process; they end in the same fault in both images and are counted as faults, not as passes.
