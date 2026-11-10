@@ -4134,7 +4134,6 @@ void _gleSetRasterPos(int param_1,float fparam_1,float fparam_2,float fparam_3,f
   }
   *(undefined1 *)(param_1 + 0x2ef) = 1;
 LAB_00054e14:
-  FUN_00008b68();
   return;
 }
 
@@ -4303,7 +4302,6 @@ LAB_00054ec8:
 LAB_00055118:
   *(undefined4 *)(param_1 + 0x7574) = uVar3;
 LAB_000551f0:
-  FUN_00008b68();
   return;
 }
 

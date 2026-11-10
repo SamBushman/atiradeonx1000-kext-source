@@ -3124,7 +3124,6 @@ void _gleVtxLightFastRGBAFront(int param_1,int param_2,int param_3,double fparam
   iVar2 = param_1;
   if (param_3 < 1) {
 LAB_000d5d60:
-    FUN_00008b68();
     return;
   }
 LAB_000d5c2c:
@@ -3220,7 +3219,6 @@ void _gleVtxLightFastRGBABack(int param_1,int param_2,int param_3,double fparam_
   iVar2 = param_1;
   if (param_3 < 1) {
 LAB_000d5ed8:
-    FUN_00008b68();
     return;
   }
 LAB_000d5da0:
@@ -4436,7 +4434,6 @@ void _gleVtxLightFastRGBAFrontPtr(int param_1,int *param_2,int param_3,double fp
   iVar2 = param_1;
   if (param_3 < 1) {
 LAB_000d76d0:
-    FUN_00008b68();
     return;
   }
 LAB_000d7598:
@@ -4534,7 +4531,6 @@ void _gleVtxLightFastRGBABackPtr(int param_1,int *param_2,int param_3,double fpa
   iVar2 = param_1;
   if (param_3 < 1) {
 LAB_000d784c:
-    FUN_00008b68();
     return;
   }
 LAB_000d7710:

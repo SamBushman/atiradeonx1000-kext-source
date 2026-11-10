@@ -891,7 +891,6 @@ void _glSetRasterPos_Comp(undefined4 param_1,float fparam_1,float fparam_2,float
     pfVar1[1] = (float)fparam_2;
     pfVar1[2] = (float)fparam_3;
   }
-  FUN_00008b68();
   return;
 }
 

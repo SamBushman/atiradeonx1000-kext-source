@@ -1151,7 +1151,6 @@ void _glVertexAttrib4fARB_Comp(undefined4 param_1,undefined4 param_2,float fpara
     puVar1[2] = (float)fparam_2;
     puVar1[3] = (float)fparam_3;
   }
-  FUN_00008b68();
   return;
 }
 
@@ -1208,7 +1207,6 @@ void _glVertexAttrib4dARB_Comp(undefined4 param_1,undefined4 param_2,double fpar
     *(double *)(puVar1 + 3) = fparam_2;
     *(double *)(puVar1 + 5) = fparam_3;
   }
-  FUN_00008b68();
   return;
 }
 

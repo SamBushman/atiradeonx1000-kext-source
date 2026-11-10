@@ -1266,7 +1266,6 @@ int _gleApplyViewScissorTransform(param_1)
        fVar3 * *(float *)(param_1 + 0x1bf4) + fVar4 * *(float *)(param_1 + 0x1bfc);
   *(undefined4 *)(param_1 + 0x27f8) = *(undefined4 *)(param_1 + 0x1bf8);
   *(undefined4 *)(param_1 + 0x27fc) = *(undefined4 *)(param_1 + 0x1bfc);
-  ((void (*)())FUN_00008b68)();
   return;
 }
 

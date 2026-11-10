@@ -707,7 +707,6 @@ void _gleTransformProjectionBlend(int param_1,float *param_2,int param_3,double 
   fVar26 = *(float *)(param_1 + 0x1b88);
   do {
     if (pfVar38 <= param_2) {
-      restFP(uVar44 << 8 | uVar39);
       return;
     }
     uVar41 = 0;
@@ -3090,7 +3089,6 @@ LAB_000c99b8:
   _glgProcessPixels(param_1 + 0x31a8,&local_e0,puVar1,puVar2,param_3,iVar3,iVar4,piVar5);
   *(float *)(param_1 + 0x31ac) = (float)(double)dVar8;
   *(undefined4 *)(param_1 + 0x31a8) = uVar6;
-  FUN_00008b68();
   return;
 }
 

@@ -2626,7 +2626,6 @@ void _glMap2d_Comp(int param_1,undefined4 param_2,undefined4 param_3,undefined4 
 LAB_00070904:
   *(undefined4 *)(param_1 + 0x7574) = uVar1;
 LAB_00070908:
-  FUN_00008b68();
   return;
 }
 
@@ -2745,7 +2744,6 @@ void _glMap2d_Exec(int param_1,int param_2,undefined4 param_3,undefined4 param_4
 LAB_00070d9c:
   *(undefined4 *)(param_1 + 0x7574) = uVar1;
 LAB_00070da0:
-  FUN_00008b68();
   return;
 }
 
@@ -2939,7 +2937,6 @@ void _glMap2f_Comp(int param_1,int param_2,undefined4 param_3,undefined4 param_4
 LAB_000713e8:
   *(undefined4 *)(param_1 + 0x7574) = uVar1;
 LAB_000713ec:
-  FUN_00008b68();
   return;
 }
 
@@ -3057,7 +3054,6 @@ void _glMap2f_Exec(int param_1,int param_2,undefined4 param_3,undefined4 param_4
 LAB_00071880:
   *(undefined4 *)(param_1 + 0x7574) = uVar2;
 LAB_00071884:
-  FUN_00008b68();
   return;
 }
 

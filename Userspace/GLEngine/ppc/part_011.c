@@ -617,7 +617,6 @@ void _glColor4d_Comp(undefined4 param_1,double fparam_1,double fparam_2,double f
     pfVar1[2] = (float)fparam_3;
     pfVar1[3] = (float)fparam_4;
   }
-  FUN_00008b68();
   return;
 }
 

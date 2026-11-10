@@ -1411,7 +1411,6 @@ void _glUniform4fARB_Exec(int param_1,int param_2,float fparam_1,float fparam_2,
       *(undefined4 *)(param_1 + 0x7574) = 0x502;
     }
   }
-  FUN_00008b68();
   return;
 }
 
@@ -3597,7 +3596,6 @@ void _glUniform4fARB_Comp(undefined4 param_1,undefined4 param_2,float fparam_1,f
     puVar1[2] = (float)fparam_2;
     puVar1[3] = (float)fparam_3;
   }
-  FUN_00008b68();
   return;
 }
 

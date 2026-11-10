@@ -102,7 +102,6 @@ void _glMultiTexCoord4f_Comp(undefined4 param_1,int param_2,float fparam_1,float
     piVar1[2] = (int)GH_F2U((float)fparam_2);
     piVar1[3] = (int)GH_F2U((float)fparam_3);
   }
-  FUN_00008b68();
   return;
 }
 

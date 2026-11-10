@@ -620,6 +620,21 @@ def fix_code_strings(b, entry):
         n += 1; return '((unsigned char *)0x%08x)%s' % (hits[0], m.group(2))
     b = re.sub(r'"((?:[^"\\\n]|\\.)*)"(\s*\+|\[)', rep, b)
     return b, n
+_MILLICODE_NOOP = r'(?:FUN_000087(?:a8|ac|b0|b8|c0|c4|c8|cc|d0|d4)|FUN_00008b68|restFP|saveFP)'
+def drop_millicode_calls(b):
+    """GLEngine's register save / restore millicode (the stfd f14..f31 chain at 0x879c..0x87d4, the lfd chain 0x8b30..0x8b80 with the lwz/mtlr/blr tail at 0x8b68):
+    the stock functions enter it to save / restore the callee-saved FPRs and lr they use; the compiled C function does that itself, so the call has no effect
+    (pipeline step 1, NopMillicode: the save-side `bl` was already patched out of the analysed copy, so no call of it is printed; the restore side is entered
+    by a tail `b` that Ghidra prints as a call to an empty function followed by `return;`: 46 x FUN_00008b68, 2 x restFP). Only a call statement that
+    stands alone in a braced block is dropped (never the body of an unbraced if/else)."""
+    n = 0
+    def rep(m):
+        nonlocal n
+        pre = b[:m.start()].rstrip()
+        if pre.endswith(')') or pre.endswith('else'): return m.group(0)
+        n += 1; return ''
+    b = re.sub(r'(?m)^[ \t]*' + _MILLICODE_NOOP + r'\([^;]*\);[ \t]*\n', rep, b)
+    return b, n
 def fix_literal_syms(b, entry):
     """`puVar5[2] = (uint)FUN_000308c0;` (GLDriver FUN_00023700 builds a packet header: `lis r2,3; ori r2,r2,0x8c0`): Ghidra names a number after the function that
     happens to live at that address, the link tree then resolves the name to the REBUILT function's address. A function symbol that is not called and whose
@@ -1081,6 +1096,7 @@ for pi in range(0, len(funcs), part):
             b, _nns = fix_neg_shift(b)
             b, _nco = fix_code_offsets(b)
             b, _nlit = fix_literal_syms(b, int(a, 16))
+            if CORPUS_SCOPE == 'gleng': b, _nmc = drop_millicode_calls(b)
             b, _ncs = fix_code_strings(b, int(a, 16))
             b, _nfa = fix_float_args(b)
             # an integer / pointer cast of a float LITERAL is its bit pattern: Ghidra inlines a read-only float constant it read with an integer load

@@ -75,7 +75,6 @@ LAB_00071b14:
   }
   *puVar1 = param_2;
 LAB_00071b28:
-  FUN_00008b68();
   return;
 }
 
@@ -147,7 +146,6 @@ LAB_00071d40:
   }
   *(undefined4 *)(param_1 + 0x7574) = uVar1;
 LAB_00071d64:
-  FUN_00008b68();
   return;
 }
 
@@ -240,7 +238,6 @@ LAB_00071ffc:
   }
   *puVar1 = param_2;
 LAB_00072010:
-  FUN_00008b68();
   return;
 }
 
@@ -317,7 +314,6 @@ LAB_00072228:
   }
   *(undefined4 *)(param_1 + 0x7574) = uVar1;
 LAB_0007224c:
-  FUN_00008b68();
   return;
 }
 
@@ -2692,7 +2688,6 @@ void _glMapGrid2f_Comp(int param_1,uint param_2,undefined4 param_3,undefined4 pa
   }
   *(undefined4 *)(param_1 + 0x7574) = uVar2;
 LAB_00075b4c:
-  FUN_00008b68();
   return;
 }
 
@@ -2782,7 +2777,6 @@ void _glMapGrid2d_Comp(int param_1,uint param_2,undefined4 param_3,undefined4 pa
   }
   *(undefined4 *)(param_1 + 0x7574) = uVar2;
 LAB_00075d9c:
-  FUN_00008b68();
   return;
 }
 

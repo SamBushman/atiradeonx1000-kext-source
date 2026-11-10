@@ -1,6 +1,6 @@
-text 1075636 bytes, uncovered 16256 (1.5%) in 357 gaps: padding 0 gaps/0 bytes, table 127 gaps/5728 bytes, other 230 gaps/10528 bytes
+text 1075636 bytes, uncovered 14764 (1.4%) in 242 gaps: padding 0 gaps/0 bytes, table 130 gaps/5832 bytes, other 112 gaps/8932 bytes
   OTHER f8abc-fa1e8 5932 bytes ['0xa0e40000', '0x54e807fe', '0x54e00428', '0x54eb0572']
-  OTHER f79fc-f7dc0 964 bytes ['0x54a5083c', '0x39600000', '0x7f8b2800', '0x4c9c0020']
-  OTHER 25024-251cc 424 bytes ['0x1a8', '0x18', '0x78', '0x184']
-  OTHER 1d670-1d7ec 380 bytes ['0x17c', '0x3c', '0x17c', '0x70']
+  OTHER f79fc-f7db4 952 bytes ['0x54a5083c', '0x39600000', '0x7f8b2800', '0x4c9c0020']
   OTHER 58b54-58c84 304 bytes ['0x7fc3f378', '0x389a0010', '0x7f65db78', '0x5726043e']
+  OTHER 1ed50-1ee38 232 bytes ['0xa923487c', '0x81634858', '0x3809ffff', '0xa8a34a12']
+  OTHER 58c8c-58d58 204 bytes ['0x2f9c0000', '0x3b000003', '0x419e001c', '0x7f84e378']

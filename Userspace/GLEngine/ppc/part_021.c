@@ -398,7 +398,6 @@ void _glProgramEnvParameter4dARB_Comp(undefined4 param_1,undefined4 param_2,unde
     puVar1[4] = (float)fparam_3;
     puVar1[5] = (float)fparam_4;
   }
-  FUN_00008b68();
   return;
 }
 
@@ -439,7 +438,6 @@ void _glProgramEnvParameter4fARB_Comp(undefined4 param_1,undefined4 param_2,unde
     puVar1[3] = (float)fparam_2;
     puVar1[4] = (float)fparam_3;
   }
-  FUN_00008b68();
   return;
 }
 
@@ -678,7 +676,6 @@ void _glProgramLocalParameter4dARB_Comp(undefined4 param_1,undefined4 param_2,un
     puVar1[4] = (float)fparam_3;
     puVar1[5] = (float)fparam_4;
   }
-  FUN_00008b68();
   return;
 }
 
@@ -719,7 +716,6 @@ void _glProgramLocalParameter4fARB_Comp(undefined4 param_1,undefined4 param_2,un
     puVar1[3] = (float)fparam_2;
     puVar1[4] = (float)fparam_3;
   }
-  FUN_00008b68();
   return;
 }
 

@@ -1567,7 +1567,6 @@ void _glBitmap_Comp(int param_1,int param_2,int param_3,undefined4 param_4,undef
     }
   }
 LAB_00057ad0:
-  FUN_00008b68();
   return;
 }
 
@@ -1702,7 +1701,6 @@ LAB_00057da4:
   if (*(int *)(param_1 + 0x7574) == 0) {
     *(undefined4 *)(param_1 + 0x7574) = 0x506;
   }
-  FUN_00008b68();
   return;
 }
 
@@ -1764,7 +1762,6 @@ void _glBlendColor_Comp(undefined4 param_1,float fparam_1,float fparam_2,float f
     pfVar1[1] = (float)fparam_2;
     pfVar1[2] = (float)fparam_3;
   }
-  FUN_00008b68();
   return;
 }
 

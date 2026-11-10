@@ -100,7 +100,6 @@ void _glTexCoord4d_Comp(undefined4 param_1,double fparam_1,double fparam_2,doubl
     pfVar1[2] = (float)fparam_3;
     pfVar1[3] = (float)fparam_4;
   }
-  FUN_00008b68();
   return;
 }
 
@@ -349,7 +348,6 @@ void _glTexCoord4f_Comp(undefined4 param_1,float fparam_1,float fparam_2,float f
     pfVar1[1] = (float)fparam_2;
     pfVar1[2] = (float)fparam_3;
   }
-  FUN_00008b68();
   return;
 }
 

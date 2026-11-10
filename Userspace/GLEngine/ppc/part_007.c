@@ -5160,7 +5160,6 @@ void _glRectd_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,d
     if (*(int *)(param_1 + 0x7574) == 0) {
       *(undefined4 *)(param_1 + 0x7574) = 0x502;
     }
-    FUN_00008b68();
     return;
   }
   ((void (*)())_glBegin_Exec)(param_1,9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);

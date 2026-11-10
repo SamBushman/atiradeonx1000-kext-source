@@ -704,7 +704,6 @@ void _glMultiTexCoord4d_Comp(undefined4 param_1,int param_2,double fparam_1,doub
     piVar1[3] = (int)GH_F2U((float)fparam_3);
     piVar1[4] = (int)GH_F2U((float)fparam_4);
   }
-  FUN_00008b68();
   return;
 }
 

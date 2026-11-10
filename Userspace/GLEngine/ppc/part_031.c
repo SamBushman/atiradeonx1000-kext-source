@@ -2243,7 +2243,6 @@ double _glTexGen_Comp(undefined4 param_1,undefined4 param_2,uint param_3,float f
       puVar1[4] = (float)fparam_3;
     }
   }
-  FUN_00008b68();
   return;
 }
 

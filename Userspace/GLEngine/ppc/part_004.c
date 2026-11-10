@@ -183,7 +183,6 @@ double _gleUpdateLightRGBASums(param_1, param_2, param_3)
     if ((uVar20 & 1 << (uVar8 & 0x3f)) == 0) {
       if (uVar20 >> (uVar8 & 0x3f) == 0) {
         *(undefined1 *)(param_2 + 0x8d) = 0;
-        FUN_00008b68();
         return;
       }
     }

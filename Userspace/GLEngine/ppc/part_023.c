@@ -1423,7 +1423,6 @@ void _glRasterPos4d_Exec(int param_1,double fparam_1,double fparam_2,double fpar
 LAB_00082b5c:
     *(undefined4 *)(param_1 + 0x7574) = uVar3;
 LAB_00082bc0:
-    FUN_00008b68();
     return;
   }
   if ((*(int *)(param_1 + 0x744c) == 0) && (-1 < *(int *)(param_1 + 0x310))) goto LAB_00082b88;
@@ -1712,7 +1711,6 @@ void _glRasterPos4f_Exec(int param_1,float fparam_1,float fparam_2,float fparam_
 LAB_000831a0:
     *(undefined4 *)(param_1 + 0x7574) = uVar3;
 LAB_00083204:
-    FUN_00008b68();
     return;
   }
   if ((*(int *)(param_1 + 0x744c) == 0) && (-1 < *(int *)(param_1 + 0x310))) goto LAB_000831cc;
@@ -2720,7 +2718,6 @@ void _glRectf_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,d
     if (*(int *)(param_1 + 0x7574) == 0) {
       *(undefined4 *)(param_1 + 0x7574) = 0x502;
     }
-    FUN_00008b68();
     return;
   }
   ((void (*)())_glBegin_Exec)(param_1,9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
