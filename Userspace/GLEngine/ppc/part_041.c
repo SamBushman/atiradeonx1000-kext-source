@@ -3507,7 +3507,7 @@ uint _pixelBoundaryTopRight(float fparam_1)
 }
 
 /* _pixelCenters @ 0xca334 (160 bytes) */
-int _pixelCenters(double fparam_1,double fparam_2,double fparam_3)
+int _pixelCenters(float fparam_1,float fparam_2,double fparam_3)
 {
   int iVar1;
   int iVar2;

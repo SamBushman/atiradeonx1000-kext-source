@@ -1057,7 +1057,7 @@ void _glClearAccum_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3
 }
 
 /* _glClearAccum_CompExec @ 0x59c0c (96 bytes) */
-void _glClearAccum_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glClearAccum_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   ((void (*)())_glClearAccum_Comp)(param_1,fparam_1,fparam_2,fparam_3,fparam_4);
   ((void (*)())_glClearAccum_Exec)(param_1,fparam_1,fparam_2,fparam_3,fparam_4);
@@ -1091,7 +1091,7 @@ void _glClearColor_Comp(undefined4 param_1,float fparam_1,float fparam_2,float f
 }
 
 /* _glClearColor_CompExec @ 0x59cfc (96 bytes) */
-void _glClearColor_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glClearColor_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   ((void (*)())_glClearColor_Exec)(param_1,fparam_1,fparam_2,fparam_3,fparam_4);
   ((void (*)())_glClearColor_Comp)(param_1,fparam_1,fparam_2,fparam_3,fparam_4);
@@ -1167,7 +1167,7 @@ void _glClearIndex_Exec(int param_1,float fparam_1)
 }
 
 /* _glClearIndex_CompExec @ 0x59ee8 (64 bytes) */
-void _glClearIndex_CompExec(undefined4 param_1,double fparam_1)
+void _glClearIndex_CompExec(undefined4 param_1,float fparam_1)
 {
   ((float * (*)())_glClearIndex_Comp)(param_1,fparam_1);
   ((void (*)())_glClearIndex_Exec)(param_1,fparam_1);

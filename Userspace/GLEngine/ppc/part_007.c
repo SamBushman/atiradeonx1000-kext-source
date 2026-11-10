@@ -3855,7 +3855,7 @@ void _gleLightMaterialRGBAChange_F_S(param_1, param_2)
 }
 
 /* _glMaterialf_Exec @ 0x4aa58 (312 bytes) */
-void _glMaterialf_Exec(int param_1,uint param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glMaterialf_Exec(int param_1,uint param_2,int param_3,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   undefined4 uVar1;
   

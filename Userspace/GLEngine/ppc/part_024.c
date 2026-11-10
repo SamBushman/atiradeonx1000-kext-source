@@ -785,7 +785,7 @@ void _glSamplePass_Exec()
 }
 
 /* _glSampleCoverage_CompExec @ 0x85f14 (72 bytes) */
-void _glSampleCoverage_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+void _glSampleCoverage_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   undefined4 extraout_r4;
   

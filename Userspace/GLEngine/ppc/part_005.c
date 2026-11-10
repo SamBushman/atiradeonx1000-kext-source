@@ -2749,7 +2749,7 @@ int _glDisable_Comp(param_1, param_2)
 }
 
 /* _glColor4f_CompExec @ 0x397ec (164 bytes) */
-void _glColor4f_CompExec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glColor4f_CompExec(int param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   ((void (*)())_glColor4f_Comp)(param_1,fparam_1,fparam_2,fparam_3,fparam_4);
   if (*(char *)(param_1 + 0x4df8) != '\0') {
@@ -3207,7 +3207,7 @@ int _glePopAndCopyMaterials(param_1)
 }
 
 /* _glLineWidth_CompExec @ 0x3a248 (64 bytes) */
-void _glLineWidth_CompExec(undefined4 param_1,double fparam_1)
+void _glLineWidth_CompExec(undefined4 param_1,float fparam_1)
 {
   ((float * (*)())_glLineWidth_Comp)(param_1,fparam_1);
   ((void (*)())_glLineWidth_Exec)(param_1,fparam_1);
@@ -3533,7 +3533,7 @@ void _gleBeginQuadsRenderTCL(param_1)
 }
 
 /* _glNormal3f_CompExec @ 0x3a86c (96 bytes) */
-void _glNormal3f_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glNormal3f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   ((float * (*)())_glNormal3f_Comp)(param_1,fparam_1,fparam_2,fparam_3);
   ((void (*)())_glNormal3f_Exec)(param_1,fparam_1,fparam_2,fparam_3);

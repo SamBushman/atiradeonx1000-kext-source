@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _glMapVertexAttrib2fARB_Comp @ 0x7192c (520 bytes) */
-void _glMapVertexAttrib2fARB_Comp(int param_1,undefined4 param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,int param_11,undefined4 param_12,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMapVertexAttrib2fARB_Comp(int param_1,undefined4 param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,int param_11,undefined4 param_12,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   undefined4 *puVar1;
   undefined4 extraout_r4;
@@ -80,7 +80,7 @@ LAB_00071b28:
 }
 
 /* _glMapVertexAttrib2fARB_Exec @ 0x71b34 (572 bytes) */
-void _glMapVertexAttrib2fARB_Exec(int param_1,uint param_2,uint param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,int param_10,int param_11,undefined4 param_12,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMapVertexAttrib2fARB_Exec(int param_1,uint param_2,uint param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,undefined4 param_9,int param_10,int param_11,undefined4 param_12,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   undefined4 uVar1;
   int iVar2;
@@ -152,7 +152,7 @@ LAB_00071d64:
 }
 
 /* _glMapVertexAttrib2fARB_CompExec @ 0x71d70 (164 bytes) */
-void _glMapVertexAttrib2fARB_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMapVertexAttrib2fARB_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   undefined4 in_stack_ffffff98;
   
@@ -2536,7 +2536,7 @@ void _glMapGrid1f_Exec(int param_1,uint param_2,float fparam_1,float fparam_2,do
 }
 
 /* _glMapGrid1f_CompExec @ 0x757e0 (88 bytes) */
-void _glMapGrid1f_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1,double fparam_2)
+void _glMapGrid1f_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1,float fparam_2)
 {
   undefined4 in_LR;
   double in_f3;
@@ -2735,7 +2735,7 @@ void _glMapGrid2f_Exec(int param_1,uint param_2,undefined4 param_3,undefined4 pa
 }
 
 /* _glMapGrid2f_CompExec @ 0x75c1c (112 bytes) */
-void _glMapGrid2f_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMapGrid2f_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   double in_f5;
   double in_f6;
@@ -3032,7 +3032,7 @@ undefined4 * _glMaterialf_Comp(undefined4 param_1,undefined4 param_2,undefined4 
 }
 
 /* _glMaterialf_CompExec @ 0x76290 (80 bytes) */
-void _glMaterialf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+void _glMaterialf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   double in_f2;
   double in_f3;

@@ -68,7 +68,7 @@ void _glPixelZoom_Exec(int param_1,float fparam_1,float fparam_2)
 }
 
 /* _glPixelZoom_CompExec @ 0x7e114 (80 bytes) */
-void _glPixelZoom_CompExec(undefined4 param_1,double fparam_1,double fparam_2)
+void _glPixelZoom_CompExec(undefined4 param_1,float fparam_1,float fparam_2)
 {
   ((float * (*)())_glPixelZoom_Comp)(param_1,fparam_1,fparam_2);
   ((void (*)())_glPixelZoom_Exec)(param_1,fparam_1,fparam_2);
@@ -308,7 +308,7 @@ undefined4 * _glPointParameterf_Comp(undefined4 param_1,undefined4 param_2,float
 }
 
 /* _glPointParameterf_CompExec @ 0x7e66c (72 bytes) */
-void _glPointParameterf_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1)
+void _glPointParameterf_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   ((undefined4 * (*)())_glPointParameterf_Comp)(param_1,param_2,fparam_1);
   ((void (*)())_glPointParameterf_Exec)(param_1,param_2,fparam_1);
@@ -775,7 +775,7 @@ float * _glPointSize_Comp(undefined4 param_1,float fparam_1)
 }
 
 /* _glPointSize_CompExec @ 0x7f16c (64 bytes) */
-void _glPointSize_CompExec(undefined4 param_1,double fparam_1)
+void _glPointSize_CompExec(undefined4 param_1,float fparam_1)
 {
   ((float * (*)())_glPointSize_Comp)(param_1,fparam_1);
   ((void (*)())_glPointSize_Exec)(param_1,fparam_1);
@@ -857,7 +857,7 @@ void _glPolygonOffset_Exec(int param_1,float fparam_1,float fparam_2)
 }
 
 /* _glPolygonOffset_CompExec @ 0x7f338 (80 bytes) */
-void _glPolygonOffset_CompExec(undefined4 param_1,double fparam_1,double fparam_2)
+void _glPolygonOffset_CompExec(undefined4 param_1,float fparam_1,float fparam_2)
 {
   ((float * (*)())_glPolygonOffset_Comp)(param_1,fparam_1,fparam_2);
   ((void (*)())_glPolygonOffset_Exec)(param_1,fparam_1,fparam_2);
@@ -1194,14 +1194,14 @@ void _glRasterPos2dv_CompExec(param_1, param_2)
 }
 
 /* _glRasterPos2f_Comp @ 0x7fac8 (36 bytes) */
-void _glRasterPos2f_Comp(undefined4 param_1,double fparam_1,double fparam_2)
+void _glRasterPos2f_Comp(undefined4 param_1,float fparam_1,float fparam_2)
 {
   ((void (*)())_glSetRasterPos_Comp)(param_1,fparam_1,fparam_2,(double)FLOAT_00108e50,(double)FLOAT_00108e54);
   return;
 }
 
 /* _glRasterPos2f_Exec @ 0x7faec (732 bytes) */
-void _glRasterPos2f_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glRasterPos2f_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   bool bVar1;
   char cVar2;
@@ -1325,7 +1325,7 @@ LAB_0007fd74:
 }
 
 /* _glRasterPos2f_CompExec @ 0x7fdc8 (80 bytes) */
-void _glRasterPos2f_CompExec(undefined4 param_1,double fparam_1,double fparam_2)
+void _glRasterPos2f_CompExec(undefined4 param_1,float fparam_1,float fparam_2)
 {
   double in_f3;
   double in_f4;

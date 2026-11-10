@@ -932,7 +932,7 @@ LAB_00056c00:
 }
 
 /* _glAccum_CompExec @ 0x56c44 (72 bytes) */
-void _glAccum_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1)
+void _glAccum_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   double in_f2;
   double in_f3;
@@ -1003,7 +1003,7 @@ undefined4 * _glAlphaFunc_Comp(undefined4 param_1,undefined4 param_2,float fpara
 }
 
 /* _glAlphaFunc_CompExec @ 0x56dc0 (72 bytes) */
-void _glAlphaFunc_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1)
+void _glAlphaFunc_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   ((undefined4 * (*)())_glAlphaFunc_Comp)(param_1,param_2,fparam_1);
   ((void (*)())_glAlphaFunc_Exec)(param_1,param_2,fparam_1);
@@ -1572,7 +1572,7 @@ LAB_00057ad0:
 }
 
 /* _glBitmap_CompExec @ 0x57adc (120 bytes) */
-void _glBitmap_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glBitmap_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   double in_f5;
   double in_f6;
@@ -1587,7 +1587,7 @@ void _glBitmap_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3
 }
 
 /* _glBitmap_NoopExec @ 0x57b54 (696 bytes) */
-void _glBitmap_NoopExec(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glBitmap_NoopExec(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   bool bVar1;
   char cVar2;
@@ -1834,7 +1834,7 @@ void _glBlendColor_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3
 }
 
 /* _glBlendColor_CompExec @ 0x58040 (96 bytes) */
-void _glBlendColor_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glBlendColor_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   ((void (*)())_glBlendColor_Comp)(param_1,fparam_1,fparam_2,fparam_3,fparam_4);
   ((void (*)())_glBlendColor_Exec)(param_1,fparam_1,fparam_2,fparam_3,fparam_4);

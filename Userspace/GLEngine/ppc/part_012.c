@@ -235,7 +235,7 @@ void _glIndexf_Exec(int param_1,float fparam_1)
 }
 
 /* _glIndexf_CompExec @ 0x5d794 (64 bytes) */
-void _glIndexf_CompExec(undefined4 param_1,double fparam_1)
+void _glIndexf_CompExec(undefined4 param_1,float fparam_1)
 {
   ((float * (*)())_glIndexf_Comp)(param_1,fparam_1);
   ((void (*)())_glIndexf_Exec)(param_1,fparam_1);

@@ -292,7 +292,7 @@ undefined4 _glTexParameterf_Comp(undefined4 param_1,undefined4 param_2,undefined
 }
 
 /* _glTexParameterf_CompExec @ 0x9e208 (80 bytes) */
-void _glTexParameterf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+void _glTexParameterf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   ((undefined4 (*)())_glTexParameterf_Comp)(param_1,param_2,param_3,fparam_1);
   ((void (*)())_glTexParameterf_Exec)(param_1,param_2,param_3,fparam_1);
@@ -2656,7 +2656,7 @@ float * _glVertex2f_Comp(undefined4 param_1,float fparam_1,float fparam_2)
 }
 
 /* _glVertex2f_CompExec @ 0xa2134 (80 bytes) */
-void _glVertex2f_CompExec(undefined4 param_1,double fparam_1,double fparam_2)
+void _glVertex2f_CompExec(undefined4 param_1,float fparam_1,float fparam_2)
 {
   ((float * (*)())_glVertex2f_Comp)(param_1,fparam_1,fparam_2);
   _glVertex2f_Exec(param_1);

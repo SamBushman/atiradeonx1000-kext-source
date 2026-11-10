@@ -27,7 +27,7 @@ void _glWindowPos3dv_CompExec(param_1, param_2)
 }
 
 /* _glWindowPos2f_Exec @ 0xb1cfc (64 bytes) */
-void _glWindowPos2f_Exec(int param_1,double fparam_1,double fparam_2)
+void _glWindowPos2f_Exec(int param_1,float fparam_1,float fparam_2)
 {
   if (*(short *)(param_1 + 0x4a10) < 0) {
     ((double (*)())_gleSetWindowPos)(param_1,fparam_1,fparam_2,(double)FLOAT_00108e50);
@@ -54,7 +54,7 @@ float * _glWindowPos2f_Comp(undefined4 param_1,float fparam_1,float fparam_2)
 }
 
 /* _glWindowPos2f_CompExec @ 0xb1da0 (80 bytes) */
-void _glWindowPos2f_CompExec(undefined4 param_1,double fparam_1,double fparam_2)
+void _glWindowPos2f_CompExec(undefined4 param_1,float fparam_1,float fparam_2)
 {
   ((float * (*)())_glWindowPos2f_Comp)(param_1,fparam_1,fparam_2);
   ((void (*)())_glWindowPos2f_Exec)(param_1,fparam_1,fparam_2);
@@ -103,7 +103,7 @@ void _glWindowPos2fv_CompExec(param_1, param_2)
 }
 
 /* _glWindowPos3f_Exec @ 0xb1ec8 (40 bytes) */
-void _glWindowPos3f_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glWindowPos3f_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3)
 {
   if (*(short *)(param_1 + 0x4a10) < 0) {
     ((double (*)())_gleSetWindowPos)(param_1,fparam_1,fparam_2,fparam_3);
@@ -131,7 +131,7 @@ float * _glWindowPos3f_Comp(undefined4 param_1,float fparam_1,float fparam_2,flo
 }
 
 /* _glWindowPos3f_CompExec @ 0xb1f64 (96 bytes) */
-void _glWindowPos3f_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glWindowPos3f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   ((float * (*)())_glWindowPos3f_Comp)(param_1,fparam_1,fparam_2,fparam_3);
   ((void (*)())_glWindowPos3f_Exec)(param_1,fparam_1,fparam_2,fparam_3);

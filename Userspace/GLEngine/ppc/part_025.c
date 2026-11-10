@@ -3952,7 +3952,7 @@ int _glUniform1ivARB_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glUniform4fARB_CompExec @ 0x8c60c (104 bytes) */
-void _glUniform4fARB_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glUniform4fARB_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   ((void (*)())_glUniform4fARB_Comp)(param_1,param_2,fparam_1,fparam_2,fparam_3,fparam_4);
   ((void (*)())_glUniform4fARB_Exec)(param_1,param_2,fparam_1,fparam_2,fparam_3,fparam_4);
@@ -3960,7 +3960,7 @@ void _glUniform4fARB_CompExec(undefined4 param_1,undefined4 param_2,double fpara
 }
 
 /* _glUniform3fARB_CompExec @ 0x8c674 (104 bytes) */
-void _glUniform3fARB_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3)
+void _glUniform3fARB_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1,float fparam_2,float fparam_3)
 {
   ((undefined4 * (*)())_glUniform3fARB_Comp)(param_1,param_2,fparam_1,fparam_2,fparam_3);
   ((void (*)())_glUniform3fARB_Exec)(param_1,param_2,fparam_1,fparam_2,fparam_3);
@@ -3968,7 +3968,7 @@ void _glUniform3fARB_CompExec(undefined4 param_1,undefined4 param_2,double fpara
 }
 
 /* _glUniform2fARB_CompExec @ 0x8c6dc (88 bytes) */
-void _glUniform2fARB_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1,double fparam_2)
+void _glUniform2fARB_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1,float fparam_2)
 {
   ((undefined4 * (*)())_glUniform2fARB_Comp)(param_1,param_2,fparam_1,fparam_2);
   ((void (*)())_glUniform2fARB_Exec)(param_1,param_2,fparam_1,fparam_2);
@@ -3976,7 +3976,7 @@ void _glUniform2fARB_CompExec(undefined4 param_1,undefined4 param_2,double fpara
 }
 
 /* _glUniform1fARB_CompExec @ 0x8c734 (72 bytes) */
-void _glUniform1fARB_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1)
+void _glUniform1fARB_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   ((undefined4 * (*)())_glUniform1fARB_Comp)(param_1,param_2,fparam_1);
   ((void (*)())_glUniform1fARB_Exec)(param_1,param_2,fparam_1);

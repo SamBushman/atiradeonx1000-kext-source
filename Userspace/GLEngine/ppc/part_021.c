@@ -493,7 +493,7 @@ void _glProgramEnvParameter4dvARB_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glProgramEnvParameter4fARB_CompExec @ 0x79f10 (112 bytes) */
-void _glProgramEnvParameter4fARB_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glProgramEnvParameter4fARB_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   ((void (*)())_glProgramEnvParameter4fARB_Comp)(param_1,param_2,param_3,fparam_1,fparam_2,fparam_3,fparam_4);
   ((void (*)())_glProgramEnvParameter4fARB_Exec)(param_1,param_2,param_3,fparam_1,fparam_2,fparam_3,fparam_4);
@@ -773,7 +773,7 @@ void _glProgramLocalParameter4dvARB_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glProgramLocalParameter4fARB_CompExec @ 0x7a55c (112 bytes) */
-void _glProgramLocalParameter4fARB_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glProgramLocalParameter4fARB_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   ((void (*)())_glProgramLocalParameter4fARB_Comp)(param_1,param_2,param_3,fparam_1,fparam_2,fparam_3,fparam_4);
   ((void (*)())_glProgramLocalParameter4fARB_Exec)(param_1,param_2,param_3,fparam_1,fparam_2,fparam_3,fparam_4);
@@ -3373,7 +3373,7 @@ LAB_0007ded0:
 }
 
 /* _glPixelTransferf_CompExec @ 0x7dee0 (72 bytes) */
-void _glPixelTransferf_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1)
+void _glPixelTransferf_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   ((undefined4 * (*)())_glPixelTransferf_Comp)(param_1,param_2,fparam_1);
   ((void (*)())_glPixelTransferf_Exec)(param_1,param_2,fparam_1);

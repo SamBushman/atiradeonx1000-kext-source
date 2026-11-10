@@ -182,7 +182,7 @@ float * _glTexCoord1f_Comp(undefined4 param_1,float fparam_1)
 }
 
 /* _glTexCoord1f_CompExec @ 0x93aec (64 bytes) */
-void _glTexCoord1f_CompExec(undefined4 param_1,double fparam_1)
+void _glTexCoord1f_CompExec(undefined4 param_1,float fparam_1)
 {
   ((float * (*)())_glTexCoord1f_Comp)(param_1,fparam_1);
   ((void (*)())_glTexCoord1f_Exec)(param_1,fparam_1);
@@ -226,7 +226,7 @@ void _glTexCoord1fv_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord2f_CompExec @ 0x93bd4 (80 bytes) */
-void _glTexCoord2f_CompExec(undefined4 param_1,double fparam_1,double fparam_2)
+void _glTexCoord2f_CompExec(undefined4 param_1,float fparam_1,float fparam_2)
 {
   ((float * (*)())_glTexCoord2f_Comp)(param_1,fparam_1,fparam_2);
   ((void (*)())_glTexCoord2f_Exec)(param_1,fparam_1,fparam_2);
@@ -273,7 +273,7 @@ float * _glTexCoord3f_Comp(undefined4 param_1,float fparam_1,float fparam_2,floa
 }
 
 /* _glTexCoord3f_CompExec @ 0x93d28 (96 bytes) */
-void _glTexCoord3f_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glTexCoord3f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   ((float * (*)())_glTexCoord3f_Comp)(param_1,fparam_1,fparam_2,fparam_3);
   ((void (*)())_glTexCoord3f_Exec)(param_1,fparam_1,fparam_2,fparam_3);
@@ -354,7 +354,7 @@ void _glTexCoord4f_Comp(undefined4 param_1,float fparam_1,float fparam_2,float f
 }
 
 /* _glTexCoord4f_CompExec @ 0x93ecc (96 bytes) */
-void _glTexCoord4f_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glTexCoord4f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   ((void (*)())_glTexCoord4f_Comp)(param_1,fparam_1,fparam_2,fparam_3,fparam_4);
   ((void (*)())_glTexCoord4f_Exec)(param_1,fparam_1,fparam_2,fparam_3,fparam_4);

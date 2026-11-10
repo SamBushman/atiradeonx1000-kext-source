@@ -24,7 +24,7 @@ void _glNormal3f_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3)
 }
 
 /* _glVertex3f_CompExec @ 0x3a950 (96 bytes) */
-void _glVertex3f_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glVertex3f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   ((float * (*)())_glVertex3f_Comp)(param_1,fparam_1,fparam_2,fparam_3);
   ((void (*)())_glVertex3f_Exec)(param_1);
@@ -81,7 +81,7 @@ int _glPushMatrix_Comp(param_1)
 }
 
 /* _glScalef_CompExec @ 0x3aac4 (96 bytes) */
-void _glScalef_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glScalef_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   ((float * (*)())_glScalef_Comp)(param_1,fparam_1,fparam_2,fparam_3);
   ((void (*)())_glScale_Exec)(param_1,fparam_1,fparam_2,fparam_3);
@@ -122,7 +122,7 @@ int _glPopMatrix_Comp(param_1)
 }
 
 /* _glTranslatef_CompExec @ 0x3abe8 (96 bytes) */
-void _glTranslatef_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glTranslatef_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   ((float * (*)())_glTranslatef_Comp)(param_1,fparam_1,fparam_2,fparam_3);
   ((void (*)())_glTranslate_Exec)(param_1,fparam_1,fparam_2,fparam_3);

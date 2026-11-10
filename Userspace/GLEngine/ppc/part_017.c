@@ -1463,7 +1463,7 @@ void _glConvolutionFilter2D_CompExec(param_1, param_2, param_3, param_4, param_5
 }
 
 /* _glConvolutionParameterf_CompExec @ 0x6b0bc (80 bytes) */
-void _glConvolutionParameterf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+void _glConvolutionParameterf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   ((undefined4 (*)())_glConvolutionParameterf_Comp)(param_1,param_2,param_3,fparam_1);
   ((void (*)())_glConvolutionParameterf_Exec)(param_1,param_2,param_3,fparam_1);
@@ -1733,7 +1733,7 @@ LAB_0006b764:
 }
 
 /* _glLightf_CompExec @ 0x6b798 (80 bytes) */
-void _glLightf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+void _glLightf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   ((undefined4 * (*)())_glLightf_Comp)(param_1,param_2,param_3,fparam_1);
   ((void (*)())_glLightf_Exec)(param_1,param_2,param_3,fparam_1);
@@ -2567,7 +2567,7 @@ LAB_0006ce38:
 }
 
 /* _glLightModelf_CompExec @ 0x6ce68 (72 bytes) */
-void _glLightModelf_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1)
+void _glLightModelf_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   ((undefined4 * (*)())_glLightModelf_Comp)(param_1,param_2,fparam_1);
   ((void (*)())_glLightModelf_Exec)(param_1,param_2,fparam_1);

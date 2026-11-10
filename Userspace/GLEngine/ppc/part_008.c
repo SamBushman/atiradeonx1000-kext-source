@@ -884,7 +884,7 @@ void _glPrioritizeTextures_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glPassThrough_Exec @ 0x502c0 (152 bytes) */
-void _glPassThrough_Exec(int param_1,double fparam_1)
+void _glPassThrough_Exec(int param_1,float fparam_1)
 {
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (*(int *)(param_1 + 0x4e1c) == 0x1c01) {

@@ -59,7 +59,7 @@ double * _glEvalCoord2f_Comp(undefined4 param_1,double fparam_1,double fparam_2)
 }
 
 /* _glEvalCoord2f_CompExec @ 0x64cb4 (84 bytes) */
-void _glEvalCoord2f_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void _glEvalCoord2f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   undefined4 in_LR;
   
@@ -644,7 +644,7 @@ float * _glPassThrough_Comp(undefined4 param_1,float fparam_1)
 }
 
 /* _glPassThrough_CompExec @ 0x658c4 (64 bytes) */
-void _glPassThrough_CompExec(undefined4 param_1,double fparam_1)
+void _glPassThrough_CompExec(undefined4 param_1,float fparam_1)
 {
   ((float * (*)())_glPassThrough_Comp)(param_1,fparam_1);
   ((void (*)())_glPassThrough_Exec)(param_1,fparam_1);

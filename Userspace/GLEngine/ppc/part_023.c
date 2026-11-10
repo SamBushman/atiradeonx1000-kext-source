@@ -444,14 +444,14 @@ void _glRasterPos3dv_CompExec(param_1, param_2)
 }
 
 /* _glRasterPos3f_Comp @ 0x81374 (28 bytes) */
-void _glRasterPos3f_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glRasterPos3f_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   ((void (*)())_glSetRasterPos_Comp)(param_1,fparam_1,fparam_2,fparam_3,(double)FLOAT_00108e54);
   return;
 }
 
 /* _glRasterPos3f_Exec @ 0x81390 (744 bytes) */
-void _glRasterPos3f_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glRasterPos3f_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   bool bVar1;
   char cVar2;
@@ -577,7 +577,7 @@ LAB_00081620:
 }
 
 /* _glRasterPos3f_CompExec @ 0x81678 (96 bytes) */
-void _glRasterPos3f_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glRasterPos3f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   double in_f4;
   double in_f5;
@@ -1686,7 +1686,7 @@ void _glRasterPos4dv_CompExec(param_1, param_2)
 }
 
 /* _glRasterPos4f_Exec @ 0x82f4c (708 bytes) */
-void _glRasterPos4f_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glRasterPos4f_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   bool bVar1;
   char cVar2;
@@ -1811,7 +1811,7 @@ LAB_000831cc:
 }
 
 /* _glRasterPos4f_CompExec @ 0x83210 (96 bytes) */
-void _glRasterPos4f_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glRasterPos4f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   double in_f5;
   double in_f6;
@@ -2700,7 +2700,7 @@ void _glRectd_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double
 }
 
 /* _glRectf_Comp @ 0x84694 (148 bytes) */
-undefined4 _glRectf_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+undefined4 _glRectf_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   undefined4 uVar1;
   
@@ -2733,7 +2733,7 @@ void _glRectf_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,d
 }
 
 /* _glRectf_CompExec @ 0x847ec (96 bytes) */
-void _glRectf_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glRectf_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   double in_f5;
   double in_f6;

@@ -14,7 +14,7 @@ undefined4 * _glFogf_Comp(undefined4 param_1,undefined4 param_2,float fparam_1)
 }
 
 /* _glFogf_CompExec @ 0x675f4 (72 bytes) */
-void _glFogf_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1)
+void _glFogf_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   ((undefined4 * (*)())_glFogf_Comp)(param_1,param_2,fparam_1);
   ((void (*)())_glFogf_Exec)(param_1,param_2,fparam_1);
@@ -379,7 +379,7 @@ double _glFogCoorddv_Exec(param_1, param_2)
 }
 
 /* _glFogCoordf_CompExec @ 0x67e94 (64 bytes) */
-void _glFogCoordf_CompExec(undefined4 param_1,double fparam_1)
+void _glFogCoordf_CompExec(undefined4 param_1,float fparam_1)
 {
   ((float * (*)())_glFogCoordf_Comp)(param_1,fparam_1);
   ((void (*)())_glFogCoordf_Exec)(param_1,fparam_1);
@@ -551,7 +551,7 @@ int _glFrustum_Comp(int param_1,double fparam_1,double fparam_2,double fparam_3,
 }
 
 /* _glFrustum_CompExec @ 0x68330 (120 bytes) */
-void _glFrustum_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glFrustum_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,float fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double in_stack_ffffff68;
   double in_stack_ffffff70;

@@ -59,36 +59,62 @@ def is_millicode(target):
     if ent is None: return False
     if ent not in _mc: _mc[ent] = _millicode(ent)
     return _mc[ent]
-# the corpus functions with double params: name -> [k]
+# the corpus functions' float-register parameters: ent -> (name, {k: 'double' | 'float'})
 sig = {}
 import glob
 for f in sorted(glob.glob(cdir + '/part_*.c')):
     for m in re.finditer(r'(?m)^/\* (\S+) @ 0x([0-9a-f]+) \(\d+ bytes\) \*/\n[^\n(]*?\b(\S+)\(([^)]*)\)', open(f, errors='replace').read()):
-        ks = [int(x) for x in re.findall(r'double fparam_(\d+)', m.group(4))]
+        ks = {int(x): t for t, x in re.findall(r'\b(double|float) fparam_(\d+)', m.group(4))}
         if ks: sig[int(m.group(2), 16)] = (m.group(1), ks)
-out = 0
-for ent, (name, ks) in sorted(sig.items()):
-    if ent not in rows: continue
+FL = {(e, k) for e, (n, ks) in sig.items() for k, t in ks.items() if t == 'float'}      # already float (earlier passes of this tool are merged into the corpus signatures)
+def target(op, arg):
+    """entry address of the in-image function a `bl` / tail-call `b` goes to, or None"""
+    if op not in ('bl', 'b'): return None
+    t = arg.strip().split(';')[0].strip()
+    ent = names.get(t) if not t.startswith('0x') else int(t, 16)
+    return ent if ent in rows else None
+def classify(ent, k):
     addrs = sorted(a for lo, hi in rows[ent] for a in range(lo, hi, 4) if a in ins)
-    res = []
-    for k in ks:
-        sp = bad = 0; first = None
-        alias = set()         # registers that hold a plain copy of the parameter (`fmr f4,f1`), from the fmr until something else writes them or a call: their reads are reads of the parameter
-        for a in addrs:
-            op, arg = ins[a]; d, u = fdefs_uses(op, arg)
-            if op == 'bl' and is_millicode(arg): continue
-            if first is None and (k in u or k in d): first = 'u' if (k in u and op not in ('bl', 'bctrl', 'blrl')) else 'd'   # a call first: unknown, left double   # the entry value must be read before anything writes the register (address order)
-            holds = {k} | alias
-            if op == 'fmr' and len(u) == 1 and next(iter(u)) in holds and first == 'u':
-                alias.add(next(iter(d)))             # a copy: its reads count (the copy itself is not a read of the format)
-                continue
-            if holds & u:
-                if op in ('bl', 'bctrl', 'blrl'): pass      # argument passing: consistent with either type
-                elif op in SP or op in SPD: sp += 1
-                elif op in NEUTRAL: pass
-                else: bad += 1
-            alias -= (d - ({k} if False else set()))       # any other write ends an alias
-            if op in ('bl', 'bctrl', 'blrl'): alias = {r for r in alias if r >= 14}      # a call clobbers f0-f13 only: the callee-saved copies (f14-f31) survive it
-        if sp and not bad and first == 'u': res.append(k)
-    if res: print('%x\t%s\t%s' % (ent, name, ','.join(map(str, res)))); out += 1
-sys.stderr.write('float_params: %d functions with float parameters (of %d with double parameters)\n' % (out, len(sig)))
+    sp = bad = 0; first = None
+    alias = set()         # registers that hold a plain copy of the parameter (`fmr f4,f1`), from the fmr until something else writes them or a call: their reads are reads of the parameter
+    live = {k}            # registers that hold the parameter's value right now (flow order = address order): a call receives it in the argument registers
+    for a in addrs:
+        op, arg = ins[a]; d, u = fdefs_uses(op, arg)
+        if op == 'bl' and is_millicode(arg): continue
+        tgt = target(op, arg)
+        if tgt == ent: tgt = None
+        if tgt is not None:
+            # a call / tail call to a known function: argument register r carries the parameter when r is live; it is a single-precision use when the callee's parameter r is a float
+            took = {r for r in (live & set(range(1, 14))) if r in sig.get(tgt, (None, {}))[1]}
+            if took:
+                if first is None and k in took: first = 'u'
+                if any((tgt, r) in FL for r in took): sp += 1          # the callee reads it single-precision: the value is a float (a double callee parameter proves nothing either way)
+        if first is None and (k in u or k in d): first = 'u' if (k in u and op not in ('bl', 'bctrl', 'blrl', 'b')) else 'd'   # a call first: unknown, left double   # the entry value must be read before anything writes the register (address order)
+        holds = {k} | alias
+        if op == 'fmr' and len(u) == 1 and next(iter(u)) in holds and first == 'u':
+            alias.add(next(iter(d)))             # a copy: its reads count (the copy itself is not a read of the format)
+            if next(iter(u)) in live: live.add(next(iter(d)))
+            else: live.discard(next(iter(d)))
+            continue
+        if holds & u:
+            if op in ('bl', 'bctrl', 'blrl', 'b'): pass      # argument passing: consistent with either type
+            elif op in SP or op in SPD: sp += 1
+            elif op in NEUTRAL: pass
+            else: bad += 1
+        alias -= d                                       # any other write ends an alias
+        live -= d
+        if op in ('bl', 'bctrl', 'blrl'): alias = {r for r in alias if r >= 14}; live = {r for r in live if r >= 14}      # a call clobbers f0-f13 only: the callee-saved copies (f14-f31) survive it
+    return bool(sp and not bad and first == 'u')
+res = {}
+changed = True
+while changed:                 # a pass-through to a callee parameter that became float in the previous round is a float use now (least fixed point)
+    changed = False
+    for ent, (name, ks) in sorted(sig.items()):
+        if ent not in rows: continue
+        for k, t in sorted(ks.items()):
+            if t != 'double' or (ent, k) in FL: continue
+            if classify(ent, k): FL.add((ent, k)); res.setdefault(ent, set()).add(k); changed = True
+out = 0
+for ent in sorted(res):
+    print('%x\t%s\t%s' % (ent, sig[ent][0], ','.join(map(str, sorted(res[ent]))))); out += 1
+sys.stderr.write('float_params: %d functions with float parameters (of %d with float-register parameters)\n' % (out, len(sig)))

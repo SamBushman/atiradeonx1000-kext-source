@@ -800,7 +800,7 @@ int * _glMultiTexCoord1f_Comp(undefined4 param_1,int param_2,float fparam_1)
 }
 
 /* _glMultiTexCoord1f_CompExec @ 0x95ec8 (72 bytes) */
-void _glMultiTexCoord1f_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1)
+void _glMultiTexCoord1f_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   ((int * (*)())_glMultiTexCoord1f_Comp)(param_1,param_2,fparam_1);
   ((void (*)())_glMultiTexCoord1f_Exec)(param_1,param_2,fparam_1);
@@ -869,7 +869,7 @@ int * _glMultiTexCoord2f_Comp(undefined4 param_1,int param_2,float fparam_1,floa
 }
 
 /* _glMultiTexCoord2f_CompExec @ 0x96048 (88 bytes) */
-void _glMultiTexCoord2f_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1,double fparam_2)
+void _glMultiTexCoord2f_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1,float fparam_2)
 {
   ((int * (*)())_glMultiTexCoord2f_Comp)(param_1,param_2,fparam_1,fparam_2);
   ((void (*)())_glMultiTexCoord2f_Exec)(param_1,param_2,fparam_1,fparam_2);

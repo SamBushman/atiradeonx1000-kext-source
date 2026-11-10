@@ -24,7 +24,7 @@ float * _glSecondaryColor3f_Comp(undefined4 param_1,float fparam_1,float fparam_
 }
 
 /* _glSecondaryColor3f_CompExec @ 0x5ea40 (96 bytes) */
-void _glSecondaryColor3f_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glSecondaryColor3f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   ((float * (*)())_glSecondaryColor3f_Comp)(param_1,fparam_1,fparam_2,fparam_3);
   ((void (*)())_glSecondaryColor3f_Exec)(param_1,fparam_1,fparam_2,fparam_3);

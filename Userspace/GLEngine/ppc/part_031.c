@@ -1266,7 +1266,7 @@ LAB_00099a94:
 }
 
 /* _glTexEnvf_CompExec @ 0x99ba0 (80 bytes) */
-void _glTexEnvf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+void _glTexEnvf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   ((undefined4 * (*)())_glTexEnvf_Comp)(param_1,param_2,param_3,fparam_1);
   ((void (*)())_glTexEnvf_Exec)(param_1,param_2,param_3,fparam_1);
@@ -2621,7 +2621,7 @@ void _glTexGendv_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glTexGenf_Comp @ 0x9c280 (36 bytes) */
-void _glTexGenf_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+void _glTexGenf_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   double fparam_2;
   
@@ -2631,7 +2631,7 @@ void _glTexGenf_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,do
 }
 
 /* _glTexGenf_Exec @ 0x9c2a4 (36 bytes) */
-void _glTexGenf_Exec(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+void _glTexGenf_Exec(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   double fparam_2;
   
@@ -2641,7 +2641,7 @@ void _glTexGenf_Exec(undefined4 param_1,undefined4 param_2,undefined4 param_3,do
 }
 
 /* _glTexGenf_CompExec @ 0x9c2c8 (80 bytes) */
-void _glTexGenf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+void _glTexGenf_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   ((void (*)())_glTexGenf_Comp)(param_1,param_2,param_3,fparam_1);
   ((void (*)())_glTexGenf_Exec)(param_1,param_2,param_3,fparam_1);

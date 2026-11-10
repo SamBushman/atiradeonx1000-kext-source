@@ -1884,7 +1884,7 @@ float * _glEvalCoord1f_Comp(undefined4 param_1,float fparam_1)
 }
 
 /* _glEvalCoord1f_CompExec @ 0x649a8 (68 bytes) */
-void _glEvalCoord1f_CompExec(undefined4 param_1,double fparam_1)
+void _glEvalCoord1f_CompExec(undefined4 param_1,float fparam_1)
 {
   ((float * (*)())_glEvalCoord1f_Comp)(param_1,fparam_1);
   ((void (*)())_gleEvalMap1)(param_1,fparam_1);

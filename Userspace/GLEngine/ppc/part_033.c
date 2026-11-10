@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _glVertex4f_CompExec @ 0xa2370 (96 bytes) */
-void _glVertex4f_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glVertex4f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   ((void (*)())_glVertex4f_Comp)(param_1,fparam_1,fparam_2,fparam_3,fparam_4);
   _glVertex4f_Exec(param_1);

@@ -45,7 +45,7 @@ void _glCombinerStageParameterfvNV_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glCombinerParameterfNV_CompExec @ 0xb4328 (72 bytes) */
-void _glCombinerParameterfNV_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1)
+void _glCombinerParameterfNV_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1)
 {
   ((undefined4 * (*)())_glCombinerParameterfNV_Comp)(param_1,param_2,fparam_1);
   ((void (*)())_glCombinerParameterfNV_Exec)(param_1,param_2,fparam_1);

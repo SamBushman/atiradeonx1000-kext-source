@@ -16,7 +16,7 @@ int * _glMultiTexCoord3f_Comp(undefined4 param_1,int param_2,float fparam_1,floa
 }
 
 /* _glMultiTexCoord3f_CompExec @ 0x96224 (104 bytes) */
-void _glMultiTexCoord3f_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3)
+void _glMultiTexCoord3f_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1,float fparam_2,float fparam_3)
 {
   ((int * (*)())_glMultiTexCoord3f_Comp)(param_1,param_2,fparam_1,fparam_2,fparam_3);
   ((void (*)())_glMultiTexCoord3f_Exec)(param_1,param_2,fparam_1,fparam_2,fparam_3);
@@ -107,7 +107,7 @@ void _glMultiTexCoord4f_Comp(undefined4 param_1,int param_2,float fparam_1,float
 }
 
 /* _glMultiTexCoord4f_CompExec @ 0x96408 (104 bytes) */
-void _glMultiTexCoord4f_CompExec(undefined4 param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMultiTexCoord4f_CompExec(undefined4 param_1,undefined4 param_2,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   ((void (*)())_glMultiTexCoord4f_Comp)(param_1,param_2,fparam_1,fparam_2,fparam_3,fparam_4);
   ((void (*)())_glMultiTexCoord4f_Exec)(param_1,param_2,fparam_1,fparam_2,fparam_3,fparam_4);
