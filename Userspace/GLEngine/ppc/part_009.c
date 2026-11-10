@@ -185,7 +185,7 @@ int _glepPluginDisconnectAll()
   piVar2 = _glep_plugin_head;
   if (_glep_plugin_head != (int *)0x0) {
     do {
-      ((int (*)())_glepPluginDisconnect)(piVar2);
+      ((void (*)())_glepPluginDisconnect)(piVar2);
       piVar2 = (int *)*piVar2;
     } while (piVar2 != (int *)0x0);
     uVar1 = ((int (*)())_glepUnloadRenderers)();
@@ -386,7 +386,7 @@ LAB_00055d78:
           }
         }
         else {
-          ((int (*)())_gleUploadPluginTextureLevel)(param_1,iVar7,iVar6 + 0xc4,uVar16,param_3,(uint)*(byte *)(param_1 + 0x85a8));
+          ((void (*)())_gleUploadPluginTextureLevel)(param_1,iVar7,iVar6 + 0xc4,uVar16,param_3,(uint)*(byte *)(param_1 + 0x85a8));
         }
         uVar16 = (uint)*(ushort *)(iVar6 + 0xca);
         puVar13 = &uStack_50;
@@ -712,7 +712,7 @@ int _glMultMatrixf_Exec(param_1, param_2)
   undefined1 auStack_50 [72];
   
   if ((*(short *)(param_1 + 0x4a10) < 0) && (*(int *)(param_1 + 0x4ff4) < 0x18)) {
-    ((int (*)())_gleMultMatrixf)(*(undefined4 *)(param_1 + 0x4fec),param_2,auStack_50);
+    ((void (*)())_gleMultMatrixf)(*(undefined4 *)(param_1 + 0x4fec),param_2,auStack_50);
     iVar1 = _gleCopyMatrix(auStack_50,*(undefined4 *)(param_1 + 0x4fec));
     *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | *(uint *)(param_1 + 0x50a8);
     *(uint *)(param_1 + 0x50b0) = *(uint *)(param_1 + 0x50b0) | *(uint *)(param_1 + 0x50a8);
@@ -1015,7 +1015,7 @@ int _glVertexArrayParameteriEXT_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glVertexArrayParameteriEXT_Exec)(param_1,*param_2,param_2[1]);
+  ((void (*)())_glVertexArrayParameteriEXT_Exec)(param_1,*param_2,param_2[1]);
   return 8;
 }
 
@@ -1100,7 +1100,7 @@ void _glVertexArrayParameteriEXT_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glVertexArrayParameteriEXT_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glVertexArrayParameteriEXT_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glVertexArrayParameteriEXT_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -1846,7 +1846,7 @@ int _glBlendEquation_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glBlendEquation_Exec)(param_1,*param_2);
+  ((void (*)())_glBlendEquation_Exec)(param_1,*param_2);
   return 4;
 }
 
@@ -1908,7 +1908,7 @@ void _glBlendEquation_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glBlendEquation_Comp)(param_1,param_2);
-  ((int (*)())_glBlendEquation_Exec)(param_1,param_2);
+  ((void (*)())_glBlendEquation_Exec)(param_1,param_2);
   return;
 }
 
@@ -1917,7 +1917,7 @@ int _glBlendFuncSeparate_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glBlendFuncSeparate_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3]);
+  ((void (*)())_glBlendFuncSeparate_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3]);
   return 0x10;
 }
 
@@ -2028,7 +2028,7 @@ void _glBlendFuncSeparate_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_5;
 {
   ((int (*)())_glBlendFuncSeparate_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((int (*)())_glBlendFuncSeparate_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glBlendFuncSeparate_Exec)(param_1,param_2,param_3,param_4,param_5);
   return;
 }
 
@@ -2037,7 +2037,7 @@ int _glBlendEquationSeparateEXT_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glBlendEquationSeparateEXT_Exec)(param_1,*param_2,param_2[1]);
+  ((void (*)())_glBlendEquationSeparateEXT_Exec)(param_1,*param_2,param_2[1]);
   return 8;
 }
 
@@ -2116,7 +2116,7 @@ void _glBlendEquationSeparateEXT_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glBlendEquationSeparateEXT_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glBlendEquationSeparateEXT_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glBlendEquationSeparateEXT_Exec)(param_1,param_2,param_3);
   return;
 }
 

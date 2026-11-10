@@ -1382,7 +1382,7 @@ int _glTexEnviv_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glTexEnviv_Exec)(param_1,*param_2,param_2[1],param_2 + 2);
+  ((void (*)())_glTexEnviv_Exec)(param_1,*param_2,param_2[1],param_2 + 2);
   return 0x18;
 }
 
@@ -1817,7 +1817,7 @@ void _glTexEnviv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glTexEnviv_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glTexEnviv_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glTexEnviv_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -2614,7 +2614,7 @@ void _glTexGendv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   double *param_4;
 {
-  ((int (*)())_glTexGendv_Comp)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glTexGendv_Comp)(param_1,param_2,param_3,param_4);
   ((void (*)())_glTexGen_Exec)(param_1,param_2,param_3,(double)(float)*param_4,(double)(float)param_4[1],
                  (double)(float)param_4[2],(double)(float)param_4[3]);
   return;
@@ -2667,7 +2667,7 @@ void _glTexGenfv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   float *param_4;
 {
-  ((int (*)())_glTexGenfv_Comp)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glTexGenfv_Comp)(param_1,param_2,param_3,param_4);
   ((void (*)())_glTexGen_Exec)(param_1,param_2,param_3,(double)*param_4,(double)param_4[1],(double)param_4[2],
                  (double)param_4[3]);
   return;
@@ -2709,7 +2709,7 @@ void _glTexGeni_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((double (*)())_glTexGeni_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glTexGeni_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glTexGeni_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -2757,7 +2757,7 @@ void _glTexGeniv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((double (*)())_glTexGeniv_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glTexGeniv_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glTexGeniv_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 

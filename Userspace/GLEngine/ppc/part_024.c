@@ -742,7 +742,7 @@ int _glSamplePass_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glSamplePass_Exec)(param_1,*param_2);
+  ((void (*)())_glSamplePass_Exec)(param_1,*param_2);
   return 4;
 }
 
@@ -804,7 +804,7 @@ void _glSamplePass_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glSamplePass_Comp)(param_1,param_2);
-  ((int (*)())_glSamplePass_Exec)(param_1,param_2);
+  ((void (*)())_glSamplePass_Exec)(param_1,param_2);
   return;
 }
 
@@ -916,7 +916,7 @@ void _glSelectBuffer_Exec(param_1, param_2, param_3)
 int _glInitNames_ListExec(param_1)
   undefined4 param_1;
 {
-  ((int (*)())_glInitNames_Exec)(param_1);
+  ((void (*)())_glInitNames_Exec)(param_1);
   return 0;
 }
 
@@ -954,7 +954,7 @@ void _glInitNames_CompExec(param_1)
   undefined4 param_1;
 {
   ((int (*)())_glInitNames_Comp)(param_1);
-  ((int (*)())_glInitNames_Exec)(param_1);
+  ((void (*)())_glInitNames_Exec)(param_1);
   return;
 }
 
@@ -963,7 +963,7 @@ int _glPushName_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glPushName_Exec)(param_1,*param_2);
+  ((void (*)())_glPushName_Exec)(param_1,*param_2);
   return 4;
 }
 
@@ -1021,7 +1021,7 @@ void _glPushName_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glPushName_Comp)(param_1,param_2);
-  ((int (*)())_glPushName_Exec)(param_1,param_2);
+  ((void (*)())_glPushName_Exec)(param_1,param_2);
   return;
 }
 
@@ -1029,7 +1029,7 @@ void _glPushName_CompExec(param_1, param_2)
 int _glPopName_ListExec(param_1)
   undefined4 param_1;
 {
-  ((int (*)())_glPopName_Exec)(param_1);
+  ((void (*)())_glPopName_Exec)(param_1);
   return 0;
 }
 
@@ -1078,7 +1078,7 @@ void _glPopName_CompExec(param_1)
   undefined4 param_1;
 {
   ((int (*)())_glPopName_Comp)(param_1);
-  ((int (*)())_glPopName_Exec)(param_1);
+  ((void (*)())_glPopName_Exec)(param_1);
   return;
 }
 

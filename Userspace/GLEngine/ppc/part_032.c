@@ -1683,7 +1683,7 @@ void _glTexSubImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, para
   undefined4 param_8;
 {
   ((int (*)())_glTexSubImage1D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())_glTexSubImage1D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  ((void (*)())_glTexSubImage1D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
   return;
 }
 
@@ -2413,7 +2413,7 @@ void _glTexSubImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, para
 {
   ((int (*)())_glTexSubImage3D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10,
              param_11,param_12);
-  ((int (*)())_glTexSubImage3D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10,
+  ((void (*)())_glTexSubImage3D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10,
              param_11,param_12);
   return;
 }
@@ -2509,7 +2509,7 @@ void _glVertex2dv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glVertex2dv_Comp)(param_1,param_2);
-  ((int (*)())_glVertex2dv_Exec)(param_1,param_2);
+  ((void (*)())_glVertex2dv_Exec)(param_1,param_2);
   return;
 }
 
@@ -2553,7 +2553,7 @@ void _glVertex3dv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glVertex3dv_Comp)(param_1,param_2);
-  ((int (*)())_glVertex3dv_Exec)(param_1,param_2);
+  ((void (*)())_glVertex3dv_Exec)(param_1,param_2);
   return;
 }
 
@@ -2638,7 +2638,7 @@ void _glVertex4dv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glVertex4dv_Comp)(param_1,param_2);
-  ((int (*)())_glVertex4dv_Exec)(param_1,param_2);
+  ((void (*)())_glVertex4dv_Exec)(param_1,param_2);
   return;
 }
 
@@ -2702,7 +2702,7 @@ void _glVertex2fv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glVertex2fv_Comp)(param_1,param_2);
-  ((int (*)())_glVertex2fv_Exec)(param_1,param_2);
+  ((void (*)())_glVertex2fv_Exec)(param_1,param_2);
   return;
 }
 
@@ -2746,7 +2746,7 @@ void _glVertex3fv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glVertex3fv_Comp)(param_1,param_2);
-  ((int (*)())_glVertex3fv_Exec)(param_1,param_2);
+  ((void (*)())_glVertex3fv_Exec)(param_1,param_2);
   return;
 }
 

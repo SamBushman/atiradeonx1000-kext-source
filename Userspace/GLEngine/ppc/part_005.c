@@ -2480,7 +2480,7 @@ void _glCullFace_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glCullFace_Comp)(param_1,param_2);
-  ((int (*)())_glCullFace_Exec)(param_1,param_2);
+  ((void (*)())_glCullFace_Exec)(param_1,param_2);
   return;
 }
 
@@ -2604,7 +2604,7 @@ void _glLoadName_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glLoadName_Comp)(param_1,param_2);
-  ((int (*)())_glLoadName_Exec)(param_1,param_2);
+  ((void (*)())_glLoadName_Exec)(param_1,param_2);
   return;
 }
 
@@ -2969,7 +2969,7 @@ void _gleSetFuncOutputDesc(param_1, param_2, param_3)
       }
       else {
         iVar14 = iVar14 + 1;
-        lVar15 = ((int (*)())___ashldi3)(0,0x1000000,uVar12);
+        lVar15 = ((longlong (*)())___ashldi3)(0,0x1000000,uVar12);
         uVar9 = uVar9 | (uint)lVar15;
       }
       uVar12 = uVar12 + 1;
@@ -3028,7 +3028,7 @@ LAB_00039e14:
   puVar11 = (ushort *)((int)param_3 + uVar9 * 2 + 4);
   uVar10 = 0x2000;
   do {
-    lVar15 = ((int (*)())___ashldi3)(0,0x1000000,uVar13);
+    lVar15 = ((longlong (*)())___ashldi3)(0,0x1000000,uVar13);
     if ((uVar6 & (uint)lVar15) == 0) {
       if ((uVar6 & -0x1000000 << (uVar13 & 0x3f) & 0xff000000) == 0) break;
     }
@@ -3044,7 +3044,7 @@ LAB_00039e14:
   puVar11 = (ushort *)((int)param_3 + uVar9 * 2 + 4);
   iVar14 = 0;
   do {
-    lVar15 = ((int (*)())___ashldi3)(0,0x20,iVar14);
+    lVar15 = ((longlong (*)())___ashldi3)(0,0x20,iVar14);
     if ((uVar6 & (uint)lVar15) != 0) {
       uVar9 = uVar9 + 1;
       *puVar11 = uVar10 | (ushort)(iVar14 * 4 + 0x74 >> 2) | 0xc0;
@@ -3139,7 +3139,7 @@ void _glEnd_CompExec(param_1)
   undefined4 param_1;
 {
   ((int (*)())_glEnd_Comp)(param_1);
-  ((int (*)())_glEnd_Exec)(param_1);
+  ((double (*)())_glEnd_Exec)(param_1);
   return;
 }
 
@@ -3312,7 +3312,7 @@ void _glStencilFunc_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glStencilFunc_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glStencilFunc_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glStencilFunc_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -3387,7 +3387,7 @@ void _glStencilOp_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glStencilOp_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glStencilOp_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glStencilOp_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 

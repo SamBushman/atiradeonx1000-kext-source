@@ -98,7 +98,7 @@ void _glWindowPos2fv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glWindowPos2fv_Comp)(param_1,param_2);
-  ((int (*)())_glWindowPos2fv_Exec)(param_1,param_2);
+  ((void (*)())_glWindowPos2fv_Exec)(param_1,param_2);
   return;
 }
 
@@ -176,7 +176,7 @@ void _glWindowPos3fv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glWindowPos3fv_Comp)(param_1,param_2);
-  ((int (*)())_glWindowPos3fv_Exec)(param_1,param_2);
+  ((void (*)())_glWindowPos3fv_Exec)(param_1,param_2);
   return;
 }
 
@@ -223,7 +223,7 @@ void _glWindowPos2i_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glWindowPos2i_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glWindowPos2i_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glWindowPos2i_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -267,7 +267,7 @@ void _glWindowPos2iv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glWindowPos2iv_Comp)(param_1,param_2);
-  ((int (*)())_glWindowPos2iv_Exec)(param_1,param_2);
+  ((void (*)())_glWindowPos2iv_Exec)(param_1,param_2);
   return;
 }
 
@@ -320,7 +320,7 @@ void _glWindowPos3i_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glWindowPos3i_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glWindowPos3i_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glWindowPos3i_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -367,7 +367,7 @@ void _glWindowPos3iv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glWindowPos3iv_Comp)(param_1,param_2);
-  ((int (*)())_glWindowPos3iv_Exec)(param_1,param_2);
+  ((void (*)())_glWindowPos3iv_Exec)(param_1,param_2);
   return;
 }
 
@@ -414,7 +414,7 @@ void _glWindowPos2s_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glWindowPos2s_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glWindowPos2s_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glWindowPos2s_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -458,7 +458,7 @@ void _glWindowPos2sv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glWindowPos2sv_Comp)(param_1,param_2);
-  ((int (*)())_glWindowPos2sv_Exec)(param_1,param_2);
+  ((void (*)())_glWindowPos2sv_Exec)(param_1,param_2);
   return;
 }
 
@@ -511,7 +511,7 @@ void _glWindowPos3s_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glWindowPos3s_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glWindowPos3s_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glWindowPos3s_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -558,7 +558,7 @@ void _glWindowPos3sv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glWindowPos3sv_Comp)(param_1,param_2);
-  ((int (*)())_glWindowPos3sv_Exec)(param_1,param_2);
+  ((void (*)())_glWindowPos3sv_Exec)(param_1,param_2);
   return;
 }
 
@@ -713,7 +713,7 @@ void _glCombinerParameterfNV_Exec(int param_1,int param_2,float fparam_1)
   
   fStack00000020 = (float)fparam_1;
   if (param_2 - 0x854eU < 2) {
-    ((int (*)())_glCombinerParameterfvNV_Exec)(param_1,param_2,&STACKARG(0x20));
+    ((void (*)())_glCombinerParameterfvNV_Exec)(param_1,param_2,&STACKARG(0x20));
   }
   else if (*(int *)(param_1 + 0x7574) == 0) {
     *(undefined4 *)(param_1 + 0x7574) = 0x500;

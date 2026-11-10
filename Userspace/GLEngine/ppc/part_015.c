@@ -801,7 +801,7 @@ void _glFinishFenceAPPLE_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glFinishFenceAPPLE_Comp)(param_1,param_2);
-  ((int (*)())_glFinishFenceAPPLE_Exec)(param_1,param_2);
+  ((void (*)())_glFinishFenceAPPLE_Exec)(param_1,param_2);
   return;
 }
 
@@ -830,7 +830,7 @@ int _glFinishFenceAPPLE_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glFinishFenceAPPLE_Exec)(param_1,*param_2);
+  ((void (*)())_glFinishFenceAPPLE_Exec)(param_1,*param_2);
   return 4;
 }
 

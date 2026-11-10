@@ -81,7 +81,7 @@ void _glVertexAttrib4dvARB_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glVertexAttrib4dvARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glVertexAttrib4dvARB_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glVertexAttrib4dvARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -90,7 +90,7 @@ int _glVertexAttrib4dvARB_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glVertexAttrib4dvARB_Exec)(param_1,*param_2,param_2 + 1);
+  ((double (*)())_glVertexAttrib4dvARB_Exec)(param_1,*param_2,param_2 + 1);
   return 0x24;
 }
 
@@ -175,7 +175,7 @@ void _glVertexAttrib4NbvARB_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glVertexAttrib4NbvARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glVertexAttrib4NbvARB_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glVertexAttrib4NbvARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -184,7 +184,7 @@ int _glVertexAttrib4NbvARB_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glVertexAttrib4NbvARB_Exec)(param_1,*param_2,param_2 + 1);
+  ((double (*)())_glVertexAttrib4NbvARB_Exec)(param_1,*param_2,param_2 + 1);
   return 8;
 }
 
@@ -269,7 +269,7 @@ void _glVertexAttrib4NsvARB_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glVertexAttrib4NsvARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glVertexAttrib4NsvARB_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glVertexAttrib4NsvARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -278,7 +278,7 @@ int _glVertexAttrib4NsvARB_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glVertexAttrib4NsvARB_Exec)(param_1,*param_2,param_2 + 1);
+  ((double (*)())_glVertexAttrib4NsvARB_Exec)(param_1,*param_2,param_2 + 1);
   return 0xc;
 }
 
@@ -360,7 +360,7 @@ void _glVertexAttrib4NivARB_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glVertexAttrib4NivARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glVertexAttrib4NivARB_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glVertexAttrib4NivARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -369,7 +369,7 @@ int _glVertexAttrib4NivARB_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glVertexAttrib4NivARB_Exec)(param_1,*param_2,param_2 + 1);
+  ((double (*)())_glVertexAttrib4NivARB_Exec)(param_1,*param_2,param_2 + 1);
   return 0x14;
 }
 
@@ -602,7 +602,7 @@ void _glVertexAttrib4NuivARB_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glVertexAttrib4NuivARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glVertexAttrib4NuivARB_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glVertexAttrib4NuivARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -611,7 +611,7 @@ int _glVertexAttrib4NuivARB_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glVertexAttrib4NuivARB_Exec)(param_1,*param_2,param_2 + 1);
+  ((double (*)())_glVertexAttrib4NuivARB_Exec)(param_1,*param_2,param_2 + 1);
   return 0x14;
 }
 
@@ -770,7 +770,7 @@ void _glEnableVertexAttribARB_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glEnableVertexAttribARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glEnableVertexAttribARB_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glEnableVertexAttribARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -779,7 +779,7 @@ int _glEnableVertexAttribARB_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glEnableVertexAttribARB_Exec)(param_1,*param_2,param_2[1]);
+  ((void (*)())_glEnableVertexAttribARB_Exec)(param_1,*param_2,param_2[1]);
   return 8;
 }
 
@@ -853,7 +853,7 @@ void _glDisableVertexAttribARB_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glDisableVertexAttribARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glDisableVertexAttribARB_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glDisableVertexAttribARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -862,7 +862,7 @@ int _glDisableVertexAttribARB_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glDisableVertexAttribARB_Exec)(param_1,*param_2,param_2[1]);
+  ((void (*)())_glDisableVertexAttribARB_Exec)(param_1,*param_2,param_2[1]);
   return 8;
 }
 
@@ -1629,7 +1629,7 @@ void _glWindowPos2dv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glWindowPos2dv_Comp)(param_1,param_2);
-  ((int (*)())_glWindowPos2dv_Exec)(param_1,param_2);
+  ((void (*)())_glWindowPos2dv_Exec)(param_1,param_2);
   return;
 }
 

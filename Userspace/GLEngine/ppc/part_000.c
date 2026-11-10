@@ -68,19 +68,19 @@ LAB_00001524:
   }
   _gle_processor = _gle_processor | 2;
 LAB_00001554:
-  ((int (*)())_glePreInitGlobals)(iVar2);
+  ((void (*)())_glePreInitGlobals)(iVar2);
   ((int (*)())_glePreInitTOC)();
-  ((int (*)())_glePreInitNormalize)();
-  ((int (*)())_glePreInitProjectionTransformFunc)();
-  ((int (*)())_glePreInitModelviewTransformFunc)();
-  ((int (*)())_glePreInitNormalTransformFunc)();
-  ((int (*)())_glePreInitVertexSubmitFunc)();
+  ((void (*)())_glePreInitNormalize)();
+  ((void (*)())_glePreInitProjectionTransformFunc)();
+  ((void (*)())_glePreInitModelviewTransformFunc)();
+  ((void (*)())_glePreInitNormalTransformFunc)();
+  ((void (*)())_glePreInitVertexSubmitFunc)();
   iVar2 = ((int (*)())_glepGetPlugins)();
   if (iVar2 != 0) {
     *param_1 = 2;
     *param_2 = 3;
     *param_3 = 0x20000;
-    ((int (*)())_gleOptimizeDisplayListCreateHashTable)(0);
+    ((void (*)())_gleOptimizeDisplayListCreateHashTable)(0);
   }
   return iVar2 != 0;
 }
@@ -502,7 +502,7 @@ int _glePreInitTOC()
   *(float *)(puVar3 + 0xdc) = fVar2;
   *(undefined8 *)(puVar3 + 0xe0) = 0x4330000080000000;
   if ((uVar4 & 0x10) != 0) {
-    ((int (*)())_glePreInitVectorTOC)();
+    ((void (*)())_glePreInitVectorTOC)();
     in_r3 = extraout_r3;
   }
   return in_r3;
@@ -1696,10 +1696,10 @@ int _gleInitializeContext(param_1)
   *(undefined1 *)(param_1 + 0x7582) = *(undefined1 *)(*(int *)(param_1 + 0x468c) + 0x25);
   *(undefined **)(param_1 + 0x4674) = puVar1;
   *(undefined4 *)(param_1 + 0x467c) = 0x3463a223;
-  ((int (*)())_gleNullMemoryPointers)(param_1);
+  ((void (*)())_gleNullMemoryPointers)(param_1);
   iVar5 = ((int (*)())_gleAllocVertexMachine)(param_1,0x24);
   if ((iVar5 == 0) && (iVar5 = ((int (*)())_gleAllocMaterials)(param_1), iVar5 == 0)) {
-    ((int (*)())_gleShareEnableHashTable)(param_1);
+    ((void (*)())_gleShareEnableHashTable)(param_1);
     iVar5 = param_1 + 0x7468;
     *(undefined4 *)(param_1 + 0x747c) = 0;
     *(undefined4 *)(param_1 + 0x7478) = 0;
@@ -1714,7 +1714,7 @@ int _gleInitializeContext(param_1)
     *(undefined4 *)(param_1 + 0x7460) = 0;
     iVar5 = ((int (*)())_gleAllocVertexArrays)(param_1);
     if ((iVar5 == 0) && (iVar5 = ((int (*)())_gleAllocFunctions)(param_1), iVar5 == 0)) {
-      ((int (*)())_gleInitConstants)(param_1);
+      ((void (*)())_gleInitConstants)(param_1);
       iVar4 = ((int (*)())_gleVecAlloc)(0x32c0);
       *(int *)(param_1 + 0x4678) = iVar4;
       if (iVar4 != 0) {
@@ -1733,18 +1733,18 @@ int _gleInitializeContext(param_1)
           puVar3 = puVar3 + 1;
           iVar5 = iVar5 + -1;
         } while (iVar5 != 0);
-        ((int (*)())_gleInitGLDState)(param_1 + 0x360);
-        ((int (*)())_gleInitGLIState)(param_1);
-        ((int (*)())_gleInitDerivedState)(param_1);
-        ((int (*)())_gleInitTextureState)(param_1);
-        ((int (*)())_gleInitPipelineProgramState)(param_1);
-        ((int (*)())_gleInitShaderState)(param_1);
-        ((int (*)())_gleInitBufferState)(param_1);
-        ((int (*)())_glePPEmulatorInitialize)(param_1);
-        ((int (*)())_gleInitVertexArrayState)(param_1);
-        ((int (*)())_gleInitFenceMachine)(param_1);
-        ((int (*)())_gleInitQueryMachine)(param_1);
-        ((int (*)())_gleInitDrawPixelsObject)(param_1);
+        ((void (*)())_gleInitGLDState)(param_1 + 0x360);
+        ((void (*)())_gleInitGLIState)(param_1);
+        ((void (*)())_gleInitDerivedState)(param_1);
+        ((void (*)())_gleInitTextureState)(param_1);
+        ((void (*)())_gleInitPipelineProgramState)(param_1);
+        ((void (*)())_gleInitShaderState)(param_1);
+        ((void (*)())_gleInitBufferState)(param_1);
+        ((void (*)())_glePPEmulatorInitialize)(param_1);
+        ((void (*)())_gleInitVertexArrayState)(param_1);
+        ((void (*)())_gleInitFenceMachine)(param_1);
+        ((void (*)())_gleInitQueryMachine)(param_1);
+        ((void (*)())_gleInitDrawPixelsObject)(param_1);
         _gleUpdatePrimitiveData(param_1);
         _gleUpdateState(param_1);
         *(undefined4 *)(param_1 + 0x7590) = 0;
@@ -2105,7 +2105,7 @@ void _gleInitConstants(param_1)
   undefined *puVar3;
   
   if ((*(uint *)PTR__gle_processor_0011204c & 0x10) != 0) {
-    ((int (*)())_gleInitVectorConstants)(param_1);
+    ((void (*)())_gleInitVectorConstants)(param_1);
   }
   puVar2 = PTR__gleFlushAndSubmit_00112050;
   *(undefined4 *)(param_1 + 0x24) = 0x3f800000;
@@ -3172,7 +3172,7 @@ void _gleInitTextureState(param_1)
   iVar12 = param_1;
   do {
     iVar3 = ((int (*)())_gleCreateTextureObject)(uVar10 | 0x1000,0);
-    ((int (*)())_gleCreatePluginTexture)(param_1,iVar3 + 0x10);
+    ((void (*)())_gleCreatePluginTexture)(param_1,iVar3 + 0x10);
     *piVar11 = iVar3;
     iVar5 = uVar10 * 4 + param_1 + 0x10000;
     piVar6 = (int *)(iVar12 + 0x5154);
@@ -3206,7 +3206,7 @@ void _gleInitTextureState(param_1)
   do {
     iVar12 = ((int (*)())_gleCreateTextureObject)(uVar10 | 0x1100,0);
     uVar10 = uVar10 + 1;
-    ((int (*)())_gleCreatePluginTexture)(param_1,iVar12 + 0x10);
+    ((void (*)())_gleCreatePluginTexture)(param_1,iVar12 + 0x10);
     *piVar11 = iVar12;
     piVar11 = piVar11 + 1;
   } while ((int)uVar10 < 5);
@@ -3216,7 +3216,7 @@ void _gleInitTextureState(param_1)
   do {
     iVar4 = ((int (*)())_gleCreateTextureObject)(iVar3 << 4 | 0x1204,0);
     puVar7 = (undefined4 *)(iVar4 + 0x10);
-    ((int (*)())_gleCreatePluginTexture)(param_1,puVar7);
+    ((void (*)())_gleCreatePluginTexture)(param_1,puVar7);
     cVar1 = *(char *)(param_1 + 0x85a4);
     iVar5 = 0;
     *piVar11 = iVar4;
@@ -3240,7 +3240,7 @@ void _gleInitTextureState(param_1)
   do {
     iVar3 = ((int (*)())_gleCreateTextureObject)(uVar10 | 0x1304,0);
     uVar10 = uVar10 + 0x10;
-    ((int (*)())_gleCreatePluginTexture)(param_1,iVar3 + 0x10);
+    ((void (*)())_gleCreatePluginTexture)(param_1,iVar3 + 0x10);
     iVar12 = iVar12 + -1;
     *piVar11 = iVar3;
     piVar11 = piVar11 + 1;
@@ -3251,7 +3251,7 @@ void _gleInitTextureState(param_1)
   do {
     iVar4 = ((int (*)())_gleCreateTextureObject)(((unsigned char *)0x00001204U),0);
     puVar7 = (undefined4 *)(iVar4 + 0x10);
-    ((int (*)())_gleCreatePluginTexture)(param_1,puVar7);
+    ((void (*)())_gleCreatePluginTexture)(param_1,puVar7);
     cVar1 = *(char *)(param_1 + 0x85a4);
     iVar5 = 0;
     *piVar11 = iVar4;
@@ -3294,7 +3294,7 @@ int _gleCreateTextureObject(param_1, param_2)
   puVar2[1] = param_2;
   puVar2[2] = 1;
   puVar2[3] = puVar1;
-  ((int (*)())_gleInitializeGLTexture)(param_1,iVar3,puVar2 + 4,in_r6,in_r7,in_r8,1);
+  ((void (*)())_gleInitializeGLTexture)(param_1,iVar3,puVar2 + 4,in_r6,in_r7,in_r8,1);
   return puVar2;
 }
 
@@ -3553,7 +3553,7 @@ void _gleInitPipelineProgramState(param_1)
   do {
     iVar21 = 0;
     iVar8 = ((int (*)())_gleCreatePipelineProgramObject)(param_1,iVar19,0);
-    ((int (*)())_gleCreatePluginPipelineProgram)(param_1,iVar8 + 0x10);
+    ((void (*)())_gleCreatePluginPipelineProgram)(param_1,iVar8 + 0x10);
     cVar1 = *(char *)(param_1 + 0x85a4);
     *(int *)(iVar18 + 0x5428) = iVar8;
     *(int *)(iVar18 + 0x5420) = iVar8;
@@ -3846,7 +3846,7 @@ void _gleInitVertexArrayState(param_1)
   
   iVar2 = ((int (*)())_gleCreateVertexArrayObject)(param_1,0);
   puVar5 = (undefined4 *)(iVar2 + 0x10);
-  ((int (*)())_gleCreatePluginVertexArray)(param_1,puVar5);
+  ((void (*)())_gleCreatePluginVertexArray)(param_1,puVar5);
   iVar4 = 0;
   *(int *)(param_1 + 0x4a64) = iVar2;
   *(int *)(param_1 + 0x4a60) = iVar2;

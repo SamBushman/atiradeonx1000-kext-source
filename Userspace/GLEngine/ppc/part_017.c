@@ -247,7 +247,7 @@ LAB_000695f0:
         pfVar3[3] = (float)((double)CONCAT44(0x43300000,param_4[3] ^ 0x80000000) - dVar1);
         return;
       }
-      ((int (*)())_glConvolutionParameteri_Exec)(param_1,param_2,param_3,*param_4);
+      ((void (*)())_glConvolutionParameteri_Exec)(param_1,param_2,param_3,*param_4);
       return;
     }
     if (param_2 < 0x8012) {
@@ -278,7 +278,7 @@ LAB_000695f0:
 /* _glConvolutionParameterf_Exec @ 0x697fc (44 bytes) */
 void _glConvolutionParameterf_Exec(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
 {
-  ((int (*)())_glConvolutionParameteri_Exec)(param_1,param_2,param_3,(int)fparam_1);
+  ((void (*)())_glConvolutionParameteri_Exec)(param_1,param_2,param_3,(int)fparam_1);
   return;
 }
 
@@ -483,7 +483,7 @@ LAB_00069ab8:
       if (param_6 < 0xc) {
         ((void (*)())_glReadPixels_Exec)(param_1,param_4,param_5,param_6,1,iVar5,0x1406,auStack_e0,dVar11,in_f2,
                            in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
-        ((int (*)())_glConvolutionFilter1D_Exec)(param_1,0x8010,iVar5,param_6,iVar5,0x1406,auStack_e0);
+        ((void (*)())_glConvolutionFilter1D_Exec)(param_1,0x8010,iVar5,param_6,iVar5,0x1406,auStack_e0);
         return;
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
@@ -647,7 +647,7 @@ LAB_00069df4:
       if (((param_6 < 0xc) && (param_7 < 0xc)) && ((-1 < param_6 && (-1 < param_7)))) {
         ((void (*)())_glReadPixels_Exec)(param_1,param_4,param_5,param_6,param_7,iVar5,0x1406,auStack_7c0,dVar12,
                            in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
-        ((int (*)())_glConvolutionFilter2D_Exec)(param_1,0x8011,iVar5,param_6,param_7,iVar5,0x1406,auStack_7c0);
+        ((void (*)())_glConvolutionFilter2D_Exec)(param_1,0x8011,iVar5,param_6,param_7,iVar5,0x1406,auStack_7c0);
         return;
       }
       if (*(int *)(param_1 + 0x7574) != 0) {
@@ -888,7 +888,7 @@ LAB_0006a434:
       fVar1 = pfVar3[3];
       goto LAB_0006a4cc;
     }
-    ((int (*)())_glGetConvolutionParameteriv_Exec)(param_1,param_2,param_3,local_18);
+    ((void (*)())_glGetConvolutionParameteriv_Exec)(param_1,param_2,param_3,local_18);
     *param_4 = (float)((double)CONCAT44(0x43300000,local_18[0] ^ 0x80000000) - DOUBLE_00108d58);
     return;
   }
@@ -1114,7 +1114,7 @@ void _glGetHistogramParameterfv_Exec(param_1, param_2, param_3, param_4)
 {
   uint local_18 [3];
   
-  ((int (*)())_glGetHistogramParameteriv_Exec)(param_1,param_2,param_3,local_18);
+  ((void (*)())_glGetHistogramParameteriv_Exec)(param_1,param_2,param_3,local_18);
   *param_4 = (float)((double)CONCAT44(0x43300000,local_18[0] ^ 0x80000000) - DOUBLE_00108d58);
   return;
 }
@@ -1273,7 +1273,7 @@ void _glGetMinmaxParameterfv_Exec(param_1, param_2, param_3, param_4)
 {
   uint local_18 [3];
   
-  ((int (*)())_glGetMinmaxParameteriv_Exec)(param_1,param_2,param_3,local_18);
+  ((void (*)())_glGetMinmaxParameteriv_Exec)(param_1,param_2,param_3,local_18);
   *param_4 = (float)((double)CONCAT44(0x43300000,local_18[0] ^ 0x80000000) - DOUBLE_00108d58);
   return;
 }
@@ -1442,7 +1442,7 @@ void _glConvolutionFilter1D_CompExec(param_1, param_2, param_3, param_4, param_5
   undefined4 param_7;
 {
   _glConvolutionFilter1D_Comp(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  ((int (*)())_glConvolutionFilter1D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
+  ((void (*)())_glConvolutionFilter1D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   return;
 }
 
@@ -1458,7 +1458,7 @@ void _glConvolutionFilter2D_CompExec(param_1, param_2, param_3, param_4, param_5
   undefined4 param_8;
 {
   _glConvolutionFilter2D_Comp(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())_glConvolutionFilter2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  ((void (*)())_glConvolutionFilter2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
   return;
 }
 
@@ -1478,7 +1478,7 @@ void _glConvolutionParameterfv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   _glConvolutionParameterfv_Comp(param_1,param_2,param_3,param_4);
-  ((int (*)())_glConvolutionParameterfv_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glConvolutionParameterfv_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -1490,7 +1490,7 @@ void _glConvolutionParameteri_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   _glConvolutionParameteri_Comp(param_1,param_2,param_3,param_4);
-  ((int (*)())_glConvolutionParameteri_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glConvolutionParameteri_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -1502,7 +1502,7 @@ void _glConvolutionParameteriv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   _glConvolutionParameteriv_Comp(param_1,param_2,param_3,param_4);
-  ((int (*)())_glConvolutionParameteriv_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glConvolutionParameteriv_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -1516,7 +1516,7 @@ void _glCopyConvolutionFilter1D_CompExec(param_1, param_2, param_3, param_4, par
   undefined4 param_6;
 {
   _glCopyConvolutionFilter1D_Comp(param_1,param_2,param_3,param_4,param_5,param_6);
-  ((int (*)())_glCopyConvolutionFilter1D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6);
+  ((void (*)())_glCopyConvolutionFilter1D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6);
   return;
 }
 
@@ -1531,7 +1531,7 @@ void _glCopyConvolutionFilter2D_CompExec(param_1, param_2, param_3, param_4, par
   undefined4 param_7;
 {
   _glCopyConvolutionFilter2D_Comp(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  ((int (*)())_glCopyConvolutionFilter2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
+  ((void (*)())_glCopyConvolutionFilter2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   return;
 }
 
@@ -1549,7 +1549,7 @@ void _glSeparableFilter2D_CompExec(param_1, param_2, param_3, param_4, param_5, 
 {
   _glSeparableFilter2D_Comp(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9)
   ;
-  ((int (*)())_glSeparableFilter2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9)
+  ((void (*)())_glSeparableFilter2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9)
   ;
   return;
 }
@@ -1563,7 +1563,7 @@ void _glHistogram_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_5;
 {
   _glHistogram_Comp(param_1,param_2,param_3,param_4,param_5);
-  ((int (*)())_glHistogram_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glHistogram_Exec)(param_1,param_2,param_3,param_4,param_5);
   return;
 }
 
@@ -1575,7 +1575,7 @@ void _glMinmax_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   _glMinmax_Comp(param_1,param_2,param_3,param_4);
-  ((int (*)())_glMinmax_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glMinmax_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -1585,7 +1585,7 @@ void _glResetHistogram_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glResetHistogram_Comp)(param_1,param_2);
-  ((int (*)())_glResetHistogram_Exec)(param_1,param_2);
+  ((void (*)())_glResetHistogram_Exec)(param_1,param_2);
   return;
 }
 
@@ -1595,7 +1595,7 @@ void _glResetMinmax_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glResetMinmax_Comp)(param_1,param_2);
-  ((int (*)())_glResetMinmax_Exec)(param_1,param_2);
+  ((void (*)())_glResetMinmax_Exec)(param_1,param_2);
   return;
 }
 

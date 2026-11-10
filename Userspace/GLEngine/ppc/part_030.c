@@ -71,7 +71,7 @@ void _glMultiTexCoord3fv_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glMultiTexCoord3fv_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glMultiTexCoord3fv_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glMultiTexCoord3fv_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -187,7 +187,7 @@ void _glMultiTexCoord1i_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glMultiTexCoord1i_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glMultiTexCoord1i_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glMultiTexCoord1i_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -234,7 +234,7 @@ void _glMultiTexCoord1iv_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glMultiTexCoord1iv_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glMultiTexCoord1iv_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glMultiTexCoord1iv_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -289,7 +289,7 @@ void _glMultiTexCoord2i_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glMultiTexCoord2i_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glMultiTexCoord2i_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glMultiTexCoord2i_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -341,7 +341,7 @@ void _glMultiTexCoord2iv_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glMultiTexCoord2iv_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glMultiTexCoord2iv_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glMultiTexCoord2iv_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -401,7 +401,7 @@ void _glMultiTexCoord3i_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_5;
 {
   ((int (*)())_glMultiTexCoord3i_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((int (*)())_glMultiTexCoord3i_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glMultiTexCoord3i_Exec)(param_1,param_2,param_3,param_4,param_5);
   return;
 }
 
@@ -455,7 +455,7 @@ void _glMultiTexCoord3iv_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glMultiTexCoord3iv_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glMultiTexCoord3iv_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glMultiTexCoord3iv_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -520,7 +520,7 @@ void _glMultiTexCoord4i_CompExec(param_1, param_2, param_3, param_4, param_5, pa
   undefined4 param_6;
 {
   ((int (*)())_glMultiTexCoord4i_Comp)(param_1,param_2,param_3,param_4,param_5,param_6);
-  ((int (*)())_glMultiTexCoord4i_Exec)(param_1,param_2,param_3,param_4,param_5,param_6);
+  ((void (*)())_glMultiTexCoord4i_Exec)(param_1,param_2,param_3,param_4,param_5,param_6);
   return;
 }
 
@@ -576,7 +576,7 @@ void _glMultiTexCoord4iv_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glMultiTexCoord4iv_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glMultiTexCoord4iv_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glMultiTexCoord4iv_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -623,7 +623,7 @@ void _glMultiTexCoord1s_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glMultiTexCoord1s_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glMultiTexCoord1s_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glMultiTexCoord1s_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -671,7 +671,7 @@ void _glMultiTexCoord1sv_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glMultiTexCoord1sv_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glMultiTexCoord1sv_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glMultiTexCoord1sv_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -726,7 +726,7 @@ void _glMultiTexCoord2s_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glMultiTexCoord2s_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glMultiTexCoord2s_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glMultiTexCoord2s_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -779,7 +779,7 @@ void _glMultiTexCoord2sv_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glMultiTexCoord2sv_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glMultiTexCoord2sv_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glMultiTexCoord2sv_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -839,7 +839,7 @@ void _glMultiTexCoord3s_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_5;
 {
   ((int (*)())_glMultiTexCoord3s_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((int (*)())_glMultiTexCoord3s_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glMultiTexCoord3s_Exec)(param_1,param_2,param_3,param_4,param_5);
   return;
 }
 
@@ -894,7 +894,7 @@ void _glMultiTexCoord3sv_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glMultiTexCoord3sv_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glMultiTexCoord3sv_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glMultiTexCoord3sv_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -959,7 +959,7 @@ void _glMultiTexCoord4s_CompExec(param_1, param_2, param_3, param_4, param_5, pa
   undefined4 param_6;
 {
   ((int (*)())_glMultiTexCoord4s_Comp)(param_1,param_2,param_3,param_4,param_5,param_6);
-  ((int (*)())_glMultiTexCoord4s_Exec)(param_1,param_2,param_3,param_4,param_5,param_6);
+  ((void (*)())_glMultiTexCoord4s_Exec)(param_1,param_2,param_3,param_4,param_5,param_6);
   return;
 }
 
@@ -1016,7 +1016,7 @@ void _glMultiTexCoord4sv_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glMultiTexCoord4sv_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glMultiTexCoord4sv_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glMultiTexCoord4sv_Exec)(param_1,param_2,param_3);
   return;
 }
 

@@ -91,7 +91,7 @@ void _gleSynchronizePluginTextures(param_1)
       iVar1 = *piVar5;
       piVar5 = piVar5 + 1;
       if (iVar1 != 0) {
-        ((int (*)())_gleSynchronizePluginTextureLevels)(param_1,iVar1 + 0x10);
+        ((void (*)())_gleSynchronizePluginTextureLevels)(param_1,iVar1 + 0x10);
       }
       iVar4 = iVar4 + -1;
     } while (-1 < iVar4);
@@ -1192,7 +1192,7 @@ void FUN_00104c10(param_1)
             } while (uVar16 <= uVar13);
             if (2 < iVar6) {
               if ((int)-(uint)bVar1 < 0) {
-                ((int (*)())_gleVPFlipColors)(param_1,uVar15,iVar6,iVar11);
+                ((double (*)())_gleVPFlipColors)(param_1,uVar15,iVar6,iVar11);
               }
               if (iVar11 == 0) {
                 uVar3 = *(ushort *)(param_1 + 0x34d0);
@@ -1247,7 +1247,7 @@ void FUN_00104c10(param_1)
               iVar6 = local_50;
               if (((int)-(uint)bVar1 < 0) && (puVar10 = puVar12, iVar8 = iVar11, 0 < iVar11)) {
                 do {
-                  ((int (*)())_gleVPFlipColors)(param_1,*puVar10,1,iVar6);
+                  ((double (*)())_gleVPFlipColors)(param_1,*puVar10,1,iVar6);
                   iVar8 = iVar8 + -1;
                   puVar10 = puVar10 + 1;
                 } while (iVar8 != 0);
@@ -1371,7 +1371,7 @@ void FUN_00104f80(param_1)
           iVar9 = iVar7 + 2;
           if (2 < iVar9) {
             if ((int)-(uint)bVar1 < 0) {
-              ((int (*)())_gleVPFlipColors)(param_1,uVar5,iVar9,iVar11);
+              ((double (*)())_gleVPFlipColors)(param_1,uVar5,iVar9,iVar11);
             }
             uVar10 = uVar5;
             if (uVar12 != 0) {
@@ -1451,7 +1451,7 @@ LAB_001051b4: ;
               iVar7 = local_50;
               if (((int)-(uint)bVar1 < 0) && (puVar14 = puVar17, iVar9 = iVar11, 0 < iVar11)) {
                 do {
-                  ((int (*)())_gleVPFlipColors)(param_1,*puVar14,1,iVar7);
+                  ((double (*)())_gleVPFlipColors)(param_1,*puVar14,1,iVar7);
                   iVar9 = iVar9 + -1;
                   puVar14 = puVar14 + 1;
                 } while (iVar9 != 0);
@@ -1561,7 +1561,7 @@ LAB_00105508:
           iVar6 = iVar6 + 1;
           if (1 < iVar6) {
             if ((int)-(uint)bVar1 < 0) {
-              ((int (*)())_gleVPFlipColors)(param_1,uVar12,iVar6,iVar11);
+              ((double (*)())_gleVPFlipColors)(param_1,uVar12,iVar6,iVar11);
             }
             if (iVar11 == 0) {
               uVar3 = *(ushort *)(param_1 + 0x34d0);
@@ -1616,7 +1616,7 @@ LAB_00105508:
               iVar6 = local_50;
               if (((int)-(uint)bVar1 < 0) && (piVar10 = piVar14, iVar8 = iVar11, 0 < iVar11)) {
                 do {
-                  ((int (*)())_gleVPFlipColors)(param_1,*piVar10,1,iVar6);
+                  ((double (*)())_gleVPFlipColors)(param_1,*piVar10,1,iVar6);
                   iVar8 = iVar8 + -1;
                   piVar10 = piVar10 + 1;
                 } while (iVar8 != 0);
@@ -1729,7 +1729,7 @@ void FUN_00105710(param_1)
             } while (uVar16 <= uVar13);
             if (3 < iVar6) {
               if ((int)-(uint)bVar1 < 0) {
-                ((int (*)())_gleVPFlipColors)(param_1,uVar15,iVar6,iVar11);
+                ((double (*)())_gleVPFlipColors)(param_1,uVar15,iVar6,iVar11);
               }
               if (iVar11 == 0) {
                 uVar3 = *(ushort *)(param_1 + 0x34d0);
@@ -1785,7 +1785,7 @@ void FUN_00105710(param_1)
               iVar6 = local_50;
               if (((int)-(uint)bVar1 < 0) && (puVar10 = puVar12, iVar8 = iVar11, 0 < iVar11)) {
                 do {
-                  ((int (*)())_gleVPFlipColors)(param_1,*puVar10,1,iVar6);
+                  ((double (*)())_gleVPFlipColors)(param_1,*puVar10,1,iVar6);
                   iVar8 = iVar8 + -1;
                   puVar10 = puVar10 + 1;
                 } while (iVar8 != 0);
@@ -1895,7 +1895,7 @@ LAB_00105bf4:
           iVar6 = iVar6 + 2;
           if (3 < iVar6) {
             if ((int)-(uint)bVar1 < 0) {
-              ((int (*)())_gleVPFlipColors)(param_1,uVar12,iVar6,iVar11);
+              ((double (*)())_gleVPFlipColors)(param_1,uVar12,iVar6,iVar11);
             }
             if (iVar11 == 0) {
               uVar3 = *(ushort *)(param_1 + 0x34d0);
@@ -1950,7 +1950,7 @@ LAB_00105bf4:
               iVar6 = local_50;
               if (((int)-(uint)bVar1 < 0) && (puVar10 = puVar13, iVar8 = iVar11, 0 < iVar11)) {
                 do {
-                  ((int (*)())_gleVPFlipColors)(param_1,*puVar10,1,iVar6);
+                  ((double (*)())_gleVPFlipColors)(param_1,*puVar10,1,iVar6);
                   iVar8 = iVar8 + -1;
                   puVar10 = puVar10 + 1;
                 } while (iVar8 != 0);
@@ -2034,7 +2034,7 @@ void _gleVPRenderPolygon(param_1)
         iVar5 = 3;
       }
       if ((int)-(uint)bVar1 < 0) {
-        ((int (*)())_gleVPFlipColors)(param_1,piVar13,uVar11,local_3c[0]);
+        ((double (*)())_gleVPFlipColors)(param_1,piVar13,uVar11,local_3c[0]);
       }
       pcVar9 = *(code **)(param_1 + 0x46c0);
     }
@@ -2095,7 +2095,7 @@ void _gleVPRenderPolygon(param_1)
       }
       if (((int)-(uint)bVar1 < 0) && (piVar4 = piVar13, uVar6 = uVar11, 0 < (int)uVar11)) {
         do {
-          ((int (*)())_gleVPFlipColors)(param_1,*piVar4,1,local_3c[0]);
+          ((double (*)())_gleVPFlipColors)(param_1,*piVar4,1,local_3c[0]);
           uVar6 = uVar6 - 1;
           piVar4 = piVar4 + 1;
         } while (uVar6 != 0);

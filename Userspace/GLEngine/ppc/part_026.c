@@ -827,7 +827,7 @@ void _glUniformMatrix2fvARB_CompExec(param_1, param_2, param_3, param_4, param_5
   undefined4 param_5;
 {
   ((int (*)())_glUniformMatrix2fvARB_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((int (*)())_glUniformMatrix2fvARB_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glUniformMatrix2fvARB_Exec)(param_1,param_2,param_3,param_4,param_5);
   return;
 }
 
@@ -840,7 +840,7 @@ void _glUniformMatrix3fvARB_CompExec(param_1, param_2, param_3, param_4, param_5
   undefined4 param_5;
 {
   ((int (*)())_glUniformMatrix3fvARB_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((int (*)())_glUniformMatrix3fvARB_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glUniformMatrix3fvARB_Exec)(param_1,param_2,param_3,param_4,param_5);
   return;
 }
 
@@ -853,7 +853,7 @@ void _glUniformMatrix4fvARB_CompExec(param_1, param_2, param_3, param_4, param_5
   undefined4 param_5;
 {
   ((int (*)())_glUniformMatrix4fvARB_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((int (*)())_glUniformMatrix4fvARB_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glUniformMatrix4fvARB_Exec)(param_1,param_2,param_3,param_4,param_5);
   return;
 }
 
@@ -862,7 +862,7 @@ int _glUniformMatrix2fvARB_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glUniformMatrix2fvARB_Exec)(param_1,*param_2,param_2[1],0,param_2 + 2);
+  ((void (*)())_glUniformMatrix2fvARB_Exec)(param_1,*param_2,param_2[1],0,param_2 + 2);
   return param_2[1] * 0x10 + 8;
 }
 
@@ -871,7 +871,7 @@ int _glUniformMatrix3fvARB_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glUniformMatrix3fvARB_Exec)(param_1,*param_2,param_2[1],0,param_2 + 2);
+  ((void (*)())_glUniformMatrix3fvARB_Exec)(param_1,*param_2,param_2[1],0,param_2 + 2);
   return param_2[1] * 0x24 + 8;
 }
 
@@ -880,7 +880,7 @@ int _glUniformMatrix4fvARB_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glUniformMatrix4fvARB_Exec)(param_1,*param_2,param_2[1],0,param_2 + 2);
+  ((void (*)())_glUniformMatrix4fvARB_Exec)(param_1,*param_2,param_2[1],0,param_2 + 2);
   return param_2[1] * 0x40 + 8;
 }
 
@@ -2379,7 +2379,7 @@ void _glActiveStencilFace_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glActiveStencilFace_Comp)(param_1,param_2);
-  ((int (*)())_glActiveStencilFace_Exec)(param_1,param_2);
+  ((void (*)())_glActiveStencilFace_Exec)(param_1,param_2);
   return;
 }
 
@@ -2388,7 +2388,7 @@ int _glStencilFuncSeparateATI_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glStencilFuncSeparateATI_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3]);
+  ((void (*)())_glStencilFuncSeparateATI_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3]);
   return 0x10;
 }
 
@@ -2468,7 +2468,7 @@ void _glStencilFuncSeparateATI_CompExec(param_1, param_2, param_3, param_4, para
   undefined4 param_5;
 {
   ((int (*)())_glStencilFuncSeparateATI_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((int (*)())_glStencilFuncSeparateATI_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glStencilFuncSeparateATI_Exec)(param_1,param_2,param_3,param_4,param_5);
   return;
 }
 
@@ -2477,7 +2477,7 @@ int _glStencilOpSeparateATI_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glStencilOpSeparateATI_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3]);
+  ((void (*)())_glStencilOpSeparateATI_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3]);
   return 0x10;
 }
 
@@ -2587,7 +2587,7 @@ void _glStencilOpSeparateATI_CompExec(param_1, param_2, param_3, param_4, param_
   undefined4 param_5;
 {
   ((int (*)())_glStencilOpSeparateATI_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((int (*)())_glStencilOpSeparateATI_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glStencilOpSeparateATI_Exec)(param_1,param_2,param_3,param_4,param_5);
   return;
 }
 

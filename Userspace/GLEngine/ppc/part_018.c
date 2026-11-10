@@ -136,7 +136,7 @@ void _glLightModelfv_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glLightModelfv_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glLightModelfv_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glLightModelfv_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -181,7 +181,7 @@ int _glLightModeliv_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glLightModeliv_Exec)(param_1,*param_2,param_2 + 1);
+  ((void (*)())_glLightModeliv_Exec)(param_1,*param_2,param_2 + 1);
   return 0x14;
 }
 
@@ -309,7 +309,7 @@ void _glLightModeliv_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glLightModeliv_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glLightModeliv_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glLightModeliv_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -398,7 +398,7 @@ int _glLogicOp_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glLogicOp_Exec)(param_1,*param_2);
+  ((void (*)())_glLogicOp_Exec)(param_1,*param_2);
   return 4;
 }
 
@@ -450,7 +450,7 @@ void _glLogicOp_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glLogicOp_Comp)(param_1,param_2);
-  ((int (*)())_glLogicOp_Exec)(param_1,param_2);
+  ((void (*)())_glLogicOp_Exec)(param_1,param_2);
   return;
 }
 

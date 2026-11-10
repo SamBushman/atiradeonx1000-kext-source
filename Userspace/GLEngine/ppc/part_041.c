@@ -1310,7 +1310,7 @@ void _gleAddClientAttribElem(param_1, param_2)
   }
   else {
     *puVar2 = param_2;
-    ((int (*)())_gleGetClientAttrib)(param_1,param_2,puVar2 + 1);
+    ((void (*)())_gleGetClientAttrib)(param_1,param_2,puVar2 + 1);
     piVar1 = *(int **)(param_1 + 0x5140);
     puVar2[0xaf] = *piVar1;
     *piVar1 = (int)puVar2;
@@ -1323,7 +1323,7 @@ void _gleRemoveClientAttribElem(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_gleSetClientAttrib)(param_1,*param_2,param_2 + 1);
+  ((void (*)())_gleSetClientAttrib)(param_1,*param_2,param_2 + 1);
   _free(param_2);
   return;
 }
@@ -1456,7 +1456,7 @@ void _gleBindBufferObject(param_1, param_2, param_3)
     bVar1 = false;
     if (iVar3 == 0) {
       iVar3 = ((int (*)())_gleCreateBufferObject)(param_1,param_3);
-      ((int (*)())_gleCreatePluginBuffer)(param_1,iVar3 + 0x10);
+      ((void (*)())_gleCreatePluginBuffer)(param_1,iVar3 + 0x10);
       _gleAddHashNameAndObject(param_1,iVar8,iVar3);
       bVar1 = iVar3 == 0;
     }
@@ -1508,10 +1508,10 @@ void _gleBindBufferObject(param_1, param_2, param_3)
   *(int *)(iVar4 + 0x358) = iVar3;
 LAB_000c7440:
   if ((!bVar1) && (*(int *)(iVar3 + 0x40) != 0)) {
-    ((int (*)())_gleSynchronizePluginBuffer)(param_1,iVar3 + 0x10);
+    ((double (*)())_gleSynchronizePluginBuffer)(param_1,iVar3 + 0x10);
   }
   if ((iVar8 != 0) && (iVar4 = *(int *)(iVar8 + 8) + -1, *(int *)(iVar8 + 8) = iVar4, iVar4 == 0)) {
-    ((int (*)())_gleFreeBufferObject)(param_1,iVar8);
+    ((void (*)())_gleFreeBufferObject)(param_1,iVar8);
     return;
   }
   return;
@@ -1700,7 +1700,7 @@ LAB_000c7884:
     }
   }
   if (0x4000000 < *(int *)(param_1 + 0x7454)) {
-    ((int (*)())_gleCleanupOrphans)(param_1);
+    ((void (*)())_gleCleanupOrphans)(param_1);
     return;
   }
   return;
@@ -1773,19 +1773,19 @@ void _gleSynchronizePluginBuffers(param_1)
   iVar1 = *(int *)(param_1 + 0x4a60);
   iVar2 = *(int *)(iVar1 + 0x358);
   if ((iVar2 != 0) && (*(int *)(iVar2 + 0x40) != 0)) {
-    ((int (*)())_gleSynchronizePluginBuffer)(param_1,iVar2 + 0x10);
+    ((double (*)())_gleSynchronizePluginBuffer)(param_1,iVar2 + 0x10);
   }
   iVar1 = *(int *)(iVar1 + 0x35c);
   if ((iVar1 != 0) && (*(int *)(iVar1 + 0x40) != 0)) {
-    ((int (*)())_gleSynchronizePluginBuffer)(param_1,iVar1 + 0x10);
+    ((double (*)())_gleSynchronizePluginBuffer)(param_1,iVar1 + 0x10);
   }
   iVar1 = *(int *)(param_1 + 0x4a68);
   if ((iVar1 != 0) && (*(int *)(iVar1 + 0x40) != 0)) {
-    ((int (*)())_gleSynchronizePluginBuffer)(param_1,iVar1 + 0x10);
+    ((double (*)())_gleSynchronizePluginBuffer)(param_1,iVar1 + 0x10);
   }
   iVar1 = *(int *)(param_1 + 0x4a6c);
   if ((iVar1 != 0) && (*(int *)(iVar1 + 0x40) != 0)) {
-    ((int (*)())_gleSynchronizePluginBuffer)(param_1,iVar1 + 0x10);
+    ((double (*)())_gleSynchronizePluginBuffer)(param_1,iVar1 + 0x10);
     return;
   }
   return;
@@ -1837,7 +1837,7 @@ void _gleReclaimBufferObjectResources(param_1)
     for (piVar6 = (int *)*piVar6; piVar6 != (int *)0x0; piVar6 = (int *)*piVar6) {
       if (piVar6[2] == 1) {
         if (piVar6[0x10] != 0) {
-          ((int (*)())_gleSynchronizePluginBuffer)(param_1,piVar6 + 4);
+          ((double (*)())_gleSynchronizePluginBuffer)(param_1,piVar6 + 4);
         }
         uVar5 = 0;
         if (*(char *)(param_1 + 0x85a4) != '\0') {
@@ -2021,7 +2021,7 @@ int _gleSwitchToRenderer(param_1, param_2)
   uVar2 = (uVar5 ^ 8) >> 3 & 1;
   if (uVar2 != *(byte *)(param_1 + 0x759d)) {
     *(char *)(param_1 + 0x759d) = (char)uVar2;
-    ((int (*)())_gleUpdateFramebufferOperationFuncs)(param_1);
+    ((void (*)())_gleUpdateFramebufferOperationFuncs)(param_1);
   }
   if ((uVar5 & 4) == 0) {
     uVar5 = uVar5 & 0xfffffffe;
@@ -2224,7 +2224,7 @@ void _gleSwitchRenderersReadBuffers(param_1, param_2, param_3)
     *(undefined1 *)(param_1 + 0x31c8) = 0;
     *(undefined1 *)(param_1 + 0x31c9) = 0;
     *(undefined1 *)(param_1 + 0x31ca) = 0;
-    ((int (*)())_gleRecoverySaveState)(param_1,auStack_90);
+    ((double (*)())_gleRecoverySaveState)(param_1,auStack_90);
     iVar3 = *(int *)(param_1 + 0x1ba8);
     param_3[1] = iVar3;
     iVar1 = *(int *)(param_1 + 0x1bac);
@@ -2301,7 +2301,7 @@ void _gleSwitchRenderersWriteBuffers(param_1, param_2, param_3)
     *(undefined1 *)(param_1 + 0x31e4) = 0;
     *(undefined1 *)(param_1 + 0x31e5) = 0;
     *(undefined1 *)(param_1 + 0x31e6) = 0;
-    dVar3 = (double)((int (*)())_gleRecoverySaveState)(param_1,auStack_a0);
+    dVar3 = (double)((double (*)())_gleRecoverySaveState)(param_1,auStack_a0);
     if (bVar1) {
       ((undefined4 (*)())_gleToggleScissorEnableState)(param_1,0,dVar3,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
     }
@@ -2369,14 +2369,14 @@ int _gleRevertSwapToPrimary(param_1)
   local_2c = 0;
   local_28 = 0;
   local_24 = 0;
-  ((int (*)())_gleSwitchRenderersReadBuffers)(param_1,(uint)*(byte *)(param_1 + 0x85a5),&local_30);
+  ((void (*)())_gleSwitchRenderersReadBuffers)(param_1,(uint)*(byte *)(param_1 + 0x85a5),&local_30);
   iVar1 = uVar3 * 0x2e0 + param_1;
   (**(code **)(*(int *)(iVar1 + 0x8884) + 0x138))
             (*(undefined4 *)(iVar1 + 0x85ac),*(undefined4 *)(param_1 + 0x484c),
              *(undefined4 *)(param_1 + 0x4848),0);
   fparam_1 = (double)((int (*)())_gleSwitchToRenderer)(param_1,uVar3);
   ((void (*)())_gleUpdateViewScissorData)(param_1,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
-  ((int (*)())_gleSwitchRenderersWriteBuffers)(param_1,uVar3,&local_30);
+  ((void (*)())_gleSwitchRenderersWriteBuffers)(param_1,uVar3,&local_30);
   uVar2 = ((int (*)())_gleFreeCopyContextData)(&local_30);
   return uVar2;
 }
@@ -2415,9 +2415,9 @@ void _gleReclaimContextResources(param_1)
   if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
     _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
   }
-  ((int (*)())_gleReclaimDisplayListResources)(param_1);
+  ((void (*)())_gleReclaimDisplayListResources)(param_1);
   _gleReclaimTextureObjectResources(param_1);
-  ((int (*)())_gleReclaimBufferObjectResources)(param_1);
+  ((void (*)())_gleReclaimBufferObjectResources)(param_1);
   _gleReclaimVertexArrayResources(param_1);
   if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
     _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
@@ -2480,7 +2480,7 @@ double _gleSwitchToNonRevertRenderer(param_1)
   if (uVar4 < 5) {
     _gleSynchronizePluginFramebuffer(param_1);
     _gleSynchronizePluginTextures(param_1);
-    ((int (*)())_gleSynchronizePluginBuffers)(param_1);
+    ((void (*)())_gleSynchronizePluginBuffers)(param_1);
     uVar4 = ((int (*)())_gleSwitchToRenderer)(param_1,uVar6);
     if ((uVar4 & 4) == 0) {
       bVar1 = *(byte *)(param_1 + 0x85a5);
@@ -2497,7 +2497,7 @@ double _gleSwitchToNonRevertRenderer(param_1)
       local_38 = 0;
       local_34 = 0;
       local_30 = 0;
-      ((int (*)())_gleSwitchRenderersReadBuffers)(param_1,(uint)*(byte *)(param_1 + 0x85a5),&local_40);
+      ((void (*)())_gleSwitchRenderersReadBuffers)(param_1,(uint)*(byte *)(param_1 + 0x85a5),&local_40);
       fparam_1 = (double)((int (*)())_gleSwitchToRenderer)(param_1,uVar6);
       *(byte *)(param_1 + 0x85a8) = bVar1;
       ((void (*)())_gleUpdateDepthRangeData)(param_1,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff88,
@@ -2517,7 +2517,7 @@ double _gleSwitchToNonRevertRenderer(param_1)
       *(undefined4 *)(param_1 + 0x488c) = 0;
       *(undefined4 *)(param_1 + 0x4890) = 0;
       *(undefined4 *)(param_1 + 0x4894) = 0;
-      ((int (*)())_gleSwitchRenderersWriteBuffers)(param_1,uVar6,&local_40);
+      ((void (*)())_gleSwitchRenderersWriteBuffers)(param_1,uVar6,&local_40);
       ((int (*)())_gleFreeCopyContextData)(&local_40);
     }
     bVar1 = (byte)uVar4;
@@ -2586,7 +2586,7 @@ double _gleUpdateDispatchCodeChange(param_1, param_2)
         local_38 = uVar3;
         local_34 = uVar3;
         local_30 = uVar3;
-        ((int (*)())_gleSwitchRenderersReadBuffers)(param_1,(uint)*(byte *)(param_1 + 0x85a6),&local_40);
+        ((void (*)())_gleSwitchRenderersReadBuffers)(param_1,(uint)*(byte *)(param_1 + 0x85a6),&local_40);
         a3 = 0;
         iVar4 = uVar5 * 0x2e0 + param_1;
         uVar3 = (**(code **)(*(int *)(iVar4 + 0x8884) + 0x138))
@@ -2594,7 +2594,7 @@ double _gleUpdateDispatchCodeChange(param_1, param_2)
                            *(undefined4 *)(param_1 + 0x4848));
         if ((uVar3 < 5) && (uVar5 != *(byte *)(param_1 + 0x85a8))) {
           _gleSynchronizePluginTextures(param_1);
-          ((int (*)())_gleSynchronizePluginBuffers)(param_1);
+          ((void (*)())_gleSynchronizePluginBuffers)(param_1);
           *(byte *)(param_1 + 0x85a8) = bVar1;
           fparam_1 = (double)((int (*)())_gleSwitchToRenderer)(param_1,(uint)*(byte *)(param_1 + 0x85a5));
           ((void (*)())_gleUpdateDepthRangeData)(param_1,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff88,
@@ -2616,7 +2616,7 @@ double _gleUpdateDispatchCodeChange(param_1, param_2)
                             (*(undefined4 *)(param_1 + 0x4688),param_1 + 0x4698,param_1 + 0x310,a3,
                              in_r7,0xffffffff,a6,uVar3);
           if ((uVar3 & 8) == 0) {
-            ((int (*)())_gleSwitchRenderersWriteBuffers)(param_1,(uint)*(byte *)(param_1 + 0x85a5),&local_40);
+            ((void (*)())_gleSwitchRenderersWriteBuffers)(param_1,(uint)*(byte *)(param_1 + 0x85a5),&local_40);
           }
           param_2 = 0;
         }
@@ -2639,7 +2639,7 @@ double _gleUpdateDispatchCodeChange(param_1, param_2)
   uVar3 = (param_2 ^ 8) >> 3 & 1;
   if (uVar3 != *(byte *)(param_1 + 0x759d)) {
     *(char *)(param_1 + 0x759d) = (char)uVar3;
-    ((int (*)())_gleUpdateFramebufferOperationFuncs)(param_1);
+    ((void (*)())_gleUpdateFramebufferOperationFuncs)(param_1);
   }
   return;
 }
@@ -3055,7 +3055,7 @@ void _CopySourceSubImageToTexture(int param_1,undefined4 param_2,undefined4 para
   }
   if ((char)param_20 != '\0') {
     local_b8 = local_b8 | 0x10000;
-    ((int (*)())_gleDrawPixelsFastLoadColorTables)(param_1,&local_e0);
+    ((void (*)())_gleDrawPixelsFastLoadColorTables)(param_1,&local_e0);
     dVar8 = (double)*(float *)(param_1 + 0x31ac);
   }
   local_ac = (float)fparam_1;
@@ -3228,11 +3228,11 @@ LAB_000c9bb8:
           uVar10 = uVar10 & 0xfffffffe;
           *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x10000000;
         }
-        ((int (*)())_gleUpdateDispatchCodeChange)(param_1,uVar10);
+        ((double (*)())_gleUpdateDispatchCodeChange)(param_1,uVar10);
       }
     }
     else {
-      ((int (*)())_gleSwitchToNonRevertRenderer)(param_1);
+      ((double (*)())_gleSwitchToNonRevertRenderer)(param_1);
     }
   }
   iVar11 = 0x13;
@@ -3720,7 +3720,7 @@ LAB_000ca634:
 LAB_000ca704:
   puVar29 = (uint *)(param_1 + 0x7488);
   if (*(int *)(param_1 + 0x74a0) == 0) {
-    ((int (*)())_gleInitDrawPixelsShareObject)(param_1,puVar29);
+    ((void (*)())_gleInitDrawPixelsShareObject)(param_1,puVar29);
   }
   uVar32 = 0;
   *(int *)(param_1 + 0x7498) = iVar19;
@@ -3974,7 +3974,7 @@ LAB_000cae0c:
                         uVar32 = uVar32 & 0xfffffffe;
                         piVar14[3] = piVar14[3] | 0x10000000;
                       }
-                      fparam_1 = (double)((int (*)())_gleUpdateDispatchCodeChange)(param_1,uVar32);
+                      fparam_1 = (double)((double (*)())_gleUpdateDispatchCodeChange)(param_1,uVar32);
                       if (*(char *)(param_1 + 0x759d) == '\0') {
                         if (*(int *)(param_1 + 0x7574) != 0) {
                           return 1;
@@ -3985,7 +3985,7 @@ LAB_000cae0c:
                     }
                   }
                   else {
-                    fparam_1 = (double)((int (*)())_gleSwitchToNonRevertRenderer)(param_1);
+                    fparam_1 = (double)((double (*)())_gleSwitchToNonRevertRenderer)(param_1);
                   }
                   iVar22 = 0x13;
                   piVar17 = piVar14;
@@ -4058,7 +4058,7 @@ LAB_000cae0c:
       local_224 = (int)fVar2;
     } while ((int)uVar26 < (int)uVar31);
   }
-  ((int (*)())_gleDrawPixelsRestoreState)(param_1,auStack_210,local_f0);
+  ((void (*)())_gleDrawPixelsRestoreState)(param_1,auStack_210,local_f0);
   if (local_ec != 0) {
     _gleVecFree(local_ec);
   }

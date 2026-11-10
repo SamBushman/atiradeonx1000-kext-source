@@ -438,7 +438,7 @@ void _glRasterPos3dv_CompExec(param_1, param_2)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos3dv_Comp)(param_1,param_2);
+  ((void (*)())_glRasterPos3dv_Comp)(param_1,param_2);
   ((void (*)())_glRasterPos3dv_Exec)(param_1,param_2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }
@@ -734,7 +734,7 @@ void _glRasterPos3fv_CompExec(param_1, param_2)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos3fv_Comp)(param_1,param_2);
+  ((void (*)())_glRasterPos3fv_Comp)(param_1,param_2);
   ((void (*)())_glRasterPos3fv_Exec)(param_1,param_2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }
@@ -898,7 +898,7 @@ void _glRasterPos3i_CompExec(param_1, param_2, param_3, param_4)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos3i_Comp)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glRasterPos3i_Comp)(param_1,param_2,param_3,param_4);
   ((void (*)())_glRasterPos3i_Exec)(param_1,param_2,param_3,param_4,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,
                       in_f8);
   return;
@@ -1058,7 +1058,7 @@ void _glRasterPos3iv_CompExec(param_1, param_2)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos3iv_Comp)(param_1,param_2);
+  ((void (*)())_glRasterPos3iv_Comp)(param_1,param_2);
   ((void (*)())_glRasterPos3iv_Exec)(param_1,param_2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }
@@ -1222,7 +1222,7 @@ void _glRasterPos3s_CompExec(param_1, param_2, param_3, param_4)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos3s_Comp)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glRasterPos3s_Comp)(param_1,param_2,param_3,param_4);
   ((void (*)())_glRasterPos3s_Exec)(param_1,param_2,param_3,param_4,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,
                       in_f8);
   return;
@@ -1383,7 +1383,7 @@ void _glRasterPos3sv_CompExec(param_1, param_2)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos3sv_Comp)(param_1,param_2);
+  ((void (*)())_glRasterPos3sv_Comp)(param_1,param_2);
   ((void (*)())_glRasterPos3sv_Exec)(param_1,param_2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }
@@ -1680,7 +1680,7 @@ void _glRasterPos4dv_CompExec(param_1, param_2)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos4dv_Comp)(param_1,param_2);
+  ((void (*)())_glRasterPos4dv_Comp)(param_1,param_2);
   ((void (*)())_glRasterPos4dv_Exec)(param_1,param_2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }
@@ -1967,7 +1967,7 @@ void _glRasterPos4fv_CompExec(param_1, param_2)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos4fv_Comp)(param_1,param_2);
+  ((void (*)())_glRasterPos4fv_Comp)(param_1,param_2);
   ((void (*)())_glRasterPos4fv_Exec)(param_1,param_2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }
@@ -2136,7 +2136,7 @@ void _glRasterPos4i_CompExec(param_1, param_2, param_3, param_4, param_5)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos4i_Comp)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glRasterPos4i_Comp)(param_1,param_2,param_3,param_4,param_5);
   ((void (*)())_glRasterPos4i_Exec)(param_1,param_2,param_3,param_4,param_5,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6
                       ,in_f7,in_f8);
   return;
@@ -2300,7 +2300,7 @@ void _glRasterPos4iv_CompExec(param_1, param_2)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos4iv_Comp)(param_1,param_2);
+  ((void (*)())_glRasterPos4iv_Comp)(param_1,param_2);
   ((void (*)())_glRasterPos4iv_Exec)(param_1,param_2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }
@@ -2469,7 +2469,7 @@ void _glRasterPos4s_CompExec(param_1, param_2, param_3, param_4, param_5)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos4s_Comp)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glRasterPos4s_Comp)(param_1,param_2,param_3,param_4,param_5);
   ((void (*)())_glRasterPos4s_Exec)(param_1,param_2,param_3,param_4,param_5,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6
                       ,in_f7,in_f8);
   return;
@@ -2634,7 +2634,7 @@ void _glRasterPos4sv_CompExec(param_1, param_2)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos4sv_Comp)(param_1,param_2);
+  ((void (*)())_glRasterPos4sv_Comp)(param_1,param_2);
   ((void (*)())_glRasterPos4sv_Exec)(param_1,param_2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }

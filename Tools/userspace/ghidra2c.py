@@ -461,6 +461,7 @@ if _void_names:
             if name_ == _vn and bodies.get(a_):
                 bodies[a_] = re.sub(r'(?m)^void(\s+)%s\b' % re.escape(_vn), r'%s\1%s' % (_nt, _vn), bodies[a_], count=1)
                 rt_, pr_, ex_ = proto[a_]; proto[a_] = (_nt, pr_, ex_)
+_rt_by_name = {name_: proto[a_][0] for a_, sz_, name_ in idx if a_ in proto}
 decls = ['#include "ghidra_c.h"', '']
 exact_fns = {name: a for a, (rt, params, exact) in [(a, proto[a]) for a in proto] for a2, sz2, name in idx if a2 == a and exact}
 for a, sz, name in idx:
@@ -1097,7 +1098,7 @@ for pi in range(0, len(funcs), part):
             for nm in ([] if (os.environ.get('NOCAST') and not os.environ.get('CASTEXACT')) else exact_fns):
                 if nm in rest_: rest_ = sub_outside_strings(r'(?<![\w.>])%s\s*\(' % re.escape(nm), '((%s (*)())%s)(' % (proto[exact_fns[nm]][0], nm), rest_)
             for nm in ([] if os.environ.get('NOCAST') else samepart):
-                if nm in rest_: rest_ = sub_outside_strings(r'(?<![\w.>])%s\s*\(' % re.escape(nm), '((int (*)())%s)(' % nm, rest_)
+                if nm in rest_: rest_ = sub_outside_strings(r'(?<![\w.>])%s\s*\(' % re.escape(nm), '((%s (*)())%s)(' % (_rt_by_name.get(nm, 'int'), nm), rest_)   # the cast type is the callee's DEFINED return type: a call through an incompatible type (`int` cast of a void function) is undefined and gcc turns it into a trap
             b = head_ + rest_
             conv = fix_arrays(fix_types(b))
             for cn_ in set(re.findall(r'(?m)^\s*code (\w+);', conv)):           # a scalar `code` local (a byte Ghidra typed as code) that is never called

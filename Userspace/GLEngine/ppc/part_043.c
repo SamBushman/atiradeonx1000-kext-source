@@ -967,7 +967,7 @@ void _gleFreeFramebufferObject(param_1, param_2)
   int *piVar4;
   
   iVar3 = 5;
-  ((int (*)())_gleDestroyPluginFramebuffer)(param_1,param_2 + 0x10);
+  ((void (*)())_gleDestroyPluginFramebuffer)(param_1,param_2 + 0x10);
   piVar4 = (int *)(param_2 + 0xd4);
   do {
     iVar2 = *piVar4;
@@ -1070,7 +1070,7 @@ void _gleBindFramebuffer(param_1, param_2)
     if (bVar1) {
       iVar4 = ((int (*)())_gleCreateFramebufferObject)(param_1,param_2);
       iVar9 = iVar4 + 0x10;
-      ((int (*)())_gleCreatePluginFramebuffer)(param_1,iVar9);
+      ((void (*)())_gleCreatePluginFramebuffer)(param_1,iVar9);
       _gleAddHashNameAndObject(param_1,uVar15,iVar4);
       bVar1 = iVar4 == 0;
     }
@@ -1150,7 +1150,7 @@ LAB_000cdca4:
         puVar7 = puVar7 + 0xb8;
       } while (uVar13 < *(byte *)(param_1 + 0x85a4));
     }
-    ((int (*)())_gleUpdateFramebufferDirtyBits)(param_1,iVar9);
+    ((void (*)())_gleUpdateFramebufferDirtyBits)(param_1,iVar9);
     *(int *)(iVar4 + 8) = *(int *)(iVar4 + 8) + 1;
   }
   iVar9 = *(int *)(param_1 + 0x744c);
@@ -1188,7 +1188,7 @@ LAB_000cdca4:
     iVar4 = *(int *)(iVar9 + 8) + -1;
     *(int *)(iVar9 + 8) = iVar4;
     if (iVar4 == 0) {
-      ((int (*)())_gleFreeFramebufferObject)(param_1,iVar9);
+      ((void (*)())_gleFreeFramebufferObject)(param_1,iVar9);
       return;
     }
   }
@@ -1386,7 +1386,7 @@ void _gleUpdateFramebufferCompleteness(int param_1,int param_2,undefined4 param_
     if (iVar5 != 0) {
       iVar3 = iVar5 + 0x10 + *(int *)(iVar12 + 0x24) * 0x168 + *(int *)(iVar12 + 0x28) * 0x18;
       if (*(int *)(iVar12 + 0x30) != *(int *)(iVar3 + 0xc4)) {
-        fparam_1 = (double)((int (*)())_gleCheckFramebufferAttachmentCompleteness)(param_1,iVar5 + 0x10,iVar12 + 0x20,iVar9);
+        fparam_1 = (double)((double (*)())_gleCheckFramebufferAttachmentCompleteness)(param_1,iVar5 + 0x10,iVar12 + 0x20,iVar9);
       }
       if (*(int *)(iVar12 + 0x34) != 0) {
         uVar2 = 0x8cd6;
@@ -1707,7 +1707,7 @@ void _gleFreeFramebufferState(param_1)
     iVar1 = *(int *)(iVar3 + 8) + -1;
     *(int *)(iVar3 + 8) = iVar1;
     if (iVar1 == 0) {
-      ((int (*)())_gleFreeFramebufferObject)(param_1,iVar3);
+      ((void (*)())_gleFreeFramebufferObject)(param_1,iVar3);
     }
     if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
@@ -1819,7 +1819,7 @@ void _gleLFSParse(param_1)
   iVar8 = ((int (*)())_LFSParserCreate)();
   ((int (*)())_LFSParserAttachString)(iVar8,uVar6,1);
   iVar3 = _LFSStreamCreate();
-  ((int (*)())_LFSParserAttachStream)(iVar8,iVar3);
+  ((void (*)())_LFSParserAttachStream)(iVar8,iVar3);
   iVar4 = ((int (*)())_LFSParserParse)(iVar8);
   if (iVar4 == 0) {
     *(undefined4 *)(iVar9 + 0x4e8) = 0;
@@ -1899,7 +1899,7 @@ LAB_000cefac:
               ,iVar8 + 0x5c);
     *(undefined4 *)(param_1 + 0x541c) = 0;
   }
-  ((int (*)())_LFSParserFree)(iVar8);
+  ((void (*)())_LFSParserFree)(iVar8);
   return;
 }
 
@@ -2257,7 +2257,7 @@ int _LFSParserGetPart(param_1, param_2)
   *(undefined4 *)(param_1 + 0x45c) = local_20;
   *(undefined4 *)(param_1 + 0x460) = local_1c;
   local_30[0] = '\0';
-  ((int (*)())_LFSParserEatWhiteSpace)(param_1);
+  ((void (*)())_LFSParserEatWhiteSpace)(param_1);
   uVar2 = 0;
   do {
     iVar1 = ((int (*)())_LFSParserGetCharacter)(param_1,local_30,0);
@@ -3343,7 +3343,7 @@ int _LFSParserParse(param_1)
     iVar1 = 0;
   }
   else {
-    ((int (*)())_LFSParserBuildErrorString)(param_1,iVar1);
+    ((void (*)())_LFSParserBuildErrorString)(param_1,iVar1);
   }
   return iVar1;
 }

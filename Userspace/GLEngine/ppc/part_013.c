@@ -69,7 +69,7 @@ void _glSecondaryColor3fv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glSecondaryColor3fv_Comp)(param_1,param_2);
-  ((int (*)())_glSecondaryColor3fv_Exec)(param_1,param_2);
+  ((double (*)())_glSecondaryColor3fv_Exec)(param_1,param_2);
   return;
 }
 
@@ -142,7 +142,7 @@ void _glSecondaryColor3dv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glSecondaryColor3dv_Comp)(param_1,param_2);
-  ((int (*)())_glSecondaryColor3dv_Exec)(param_1,param_2);
+  ((double (*)())_glSecondaryColor3dv_Exec)(param_1,param_2);
   return;
 }
 
@@ -192,7 +192,7 @@ void _glSecondaryColor3ub_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glSecondaryColor3ub_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glSecondaryColor3ub_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glSecondaryColor3ub_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -236,7 +236,7 @@ void _glSecondaryColor3ubv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glSecondaryColor3ubv_Comp)(param_1,param_2);
-  ((int (*)())_glSecondaryColor3ubv_Exec)(param_1,param_2);
+  ((double (*)())_glSecondaryColor3ubv_Exec)(param_1,param_2);
   return;
 }
 
@@ -286,7 +286,7 @@ void _glSecondaryColor3us_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glSecondaryColor3us_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glSecondaryColor3us_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glSecondaryColor3us_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -330,7 +330,7 @@ void _glSecondaryColor3usv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glSecondaryColor3usv_Comp)(param_1,param_2);
-  ((int (*)())_glSecondaryColor3usv_Exec)(param_1,param_2);
+  ((double (*)())_glSecondaryColor3usv_Exec)(param_1,param_2);
   return;
 }
 
@@ -383,7 +383,7 @@ void _glSecondaryColor3ui_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glSecondaryColor3ui_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glSecondaryColor3ui_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glSecondaryColor3ui_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -430,7 +430,7 @@ void _glSecondaryColor3uiv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glSecondaryColor3uiv_Comp)(param_1,param_2);
-  ((int (*)())_glSecondaryColor3uiv_Exec)(param_1,param_2);
+  ((double (*)())_glSecondaryColor3uiv_Exec)(param_1,param_2);
   return;
 }
 
@@ -1130,7 +1130,7 @@ void _glColorSubTable_CompExec(param_1, param_2, param_3, param_4, param_5, para
   undefined4 param_7;
 {
   ((int (*)())_glColorSubTable_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  ((int (*)())_glColorSubTable_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
+  ((void (*)())_glColorSubTable_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   return;
 }
 
@@ -1788,7 +1788,7 @@ int _glColorTableParameterfv_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glColorTableParameterfv_Exec)(param_1,*param_2,param_2[1],param_2 + 2);
+  ((void (*)())_glColorTableParameterfv_Exec)(param_1,*param_2,param_2[1],param_2 + 2);
   return 0x18;
 }
 
@@ -1883,7 +1883,7 @@ void _glColorTableParameterfv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glColorTableParameterfv_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glColorTableParameterfv_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glColorTableParameterfv_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -1892,7 +1892,7 @@ int _glColorTableParameteriv_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glColorTableParameteriv_Exec)(param_1,*param_2,param_2[1],param_2 + 2);
+  ((void (*)())_glColorTableParameteriv_Exec)(param_1,*param_2,param_2[1],param_2 + 2);
   return 0x18;
 }
 
@@ -1989,7 +1989,7 @@ void _glColorTableParameteriv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glColorTableParameteriv_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glColorTableParameteriv_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glColorTableParameteriv_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 

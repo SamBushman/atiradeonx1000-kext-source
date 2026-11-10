@@ -557,7 +557,7 @@ void _glSetFenceAPPLE_Exec(param_1, param_2)
   fparam_1 = extraout_f1;
   if (iVar4 == 0) {
     iVar4 = ((int (*)())_gleCreateFenceObject)(param_2);
-    ((int (*)())_gleCreatePluginFence)(param_1,iVar4 + 0x10);
+    ((void (*)())_gleCreatePluginFence)(param_1,iVar4 + 0x10);
     in_r5 = iVar4;
     fparam_1 = (double)_gleAddHashNameAndObject(param_1,param_1 + 0x543c,iVar4);
   }
@@ -988,7 +988,7 @@ void _gleFreeFenceObject(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
-  ((int (*)())_gleDestroyPluginFence)(param_1,param_2 + 0x10);
+  ((void (*)())_gleDestroyPluginFence)(param_1,param_2 + 0x10);
   _free(param_2);
   return;
 }
@@ -1373,7 +1373,7 @@ LAB_00050bc0:
             puVar16 = puVar7;
             puVar13 = puVar14;
             if ((uVar9 & 0xff) != 0) {
-              dVar22 = (double)((int (*)())_gleClipPoly)(param_1,puVar16,iVar20,uVar9 & 0xff,puVar14,local_4c,1);
+              dVar22 = (double)((double (*)())_gleClipPoly)(param_1,puVar16,iVar20,uVar9 & 0xff,puVar14,local_4c,1);
               if (local_4c[0] == 0) goto LAB_00050ddc;
               if (0 < local_4c[0]) {
                 puVar13 = puVar16;
@@ -1407,7 +1407,7 @@ LAB_00050d70:
               else {
                 uVar2 = *(ushort *)(param_1 + 0x34d2);
               }
-              dVar22 = (double)((int (*)())_gleFeedbackPolygonPtr)(param_1,puVar16,iVar20,uVar2 - 0x1b00);
+              dVar22 = (double)((double (*)())_gleFeedbackPolygonPtr)(param_1,puVar16,iVar20,uVar2 - 0x1b00);
             }
           }
 LAB_00050ddc: ;
@@ -2138,7 +2138,7 @@ double _gleFeedbackPolygonPtr(param_1, param_2, param_3, param_4)
       for (; param_2 < piVar4; param_2 = param_2 + 1) {
         if ((*(char *)(*param_2 + 0x7c) != '\0') && (*(char *)(*param_2 + 0x7d) == '\0')) {
           ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f28);
-          ((int (*)())_gleFeedbackHitRecord)(param_1,*param_2);
+          ((double (*)())_gleFeedbackHitRecord)(param_1,*param_2);
         }
       }
       return;
@@ -2149,7 +2149,7 @@ double _gleFeedbackPolygonPtr(param_1, param_2, param_3, param_4)
                                                DOUBLE_00108d58));
       piVar4 = param_2 + param_3;
       for (; param_2 < piVar4; param_2 = param_2 + 1) {
-        ((int (*)())_gleFeedbackHitRecord)(param_1,*param_2);
+        ((double (*)())_gleFeedbackHitRecord)(param_1,*param_2);
       }
       return;
     }
@@ -2161,16 +2161,16 @@ double _gleFeedbackPolygonPtr(param_1, param_2, param_3, param_4)
   for (piVar4 = param_2; piVar4 < param_2 + (param_3 - 1); piVar4 = piVar4 + 1) {
     if (*(char *)(*piVar4 + 0x7c) != '\0') {
       ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar3) - dVar2));
-      ((int (*)())_gleFeedbackHitRecord)(param_1,*piVar4);
-      ((int (*)())_gleFeedbackHitRecord)(param_1,piVar4[1]);
+      ((double (*)())_gleFeedbackHitRecord)(param_1,*piVar4);
+      ((double (*)())_gleFeedbackHitRecord)(param_1,piVar4[1]);
       uVar3 = 0x702;
     }
   }
   if (*(char *)(*piVar4 + 0x7c) != '\0') {
     ((void (*)())_gleFeedbackToken)(param_1,(double)(float)((double)CONCAT44(0x43300000,uVar3) - DOUBLE_00108d70))
     ;
-    ((int (*)())_gleFeedbackHitRecord)(param_1,*piVar4);
-    ((int (*)())_gleFeedbackHitRecord)(param_1,*param_2);
+    ((double (*)())_gleFeedbackHitRecord)(param_1,*piVar4);
+    ((double (*)())_gleFeedbackHitRecord)(param_1,*param_2);
   }
   return;
 }

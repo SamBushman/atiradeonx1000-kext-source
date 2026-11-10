@@ -2576,7 +2576,7 @@ int _glMultMatrixd_Exec(param_1, param_2)
   undefined1 auStack_50 [72];
   
   if ((*(short *)(param_1 + 0x4a10) < 0) && (*(int *)(param_1 + 0x4ff4) < 0x18)) {
-    ((int (*)())_gleMultMatrixd)(*(undefined4 *)(param_1 + 0x4fec),param_2,auStack_50);
+    ((void (*)())_gleMultMatrixd)(*(undefined4 *)(param_1 + 0x4fec),param_2,auStack_50);
     iVar1 = _gleCopyMatrix(auStack_50,*(undefined4 *)(param_1 + 0x4fec));
     *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | *(uint *)(param_1 + 0x50a8);
     *(uint *)(param_1 + 0x50b0) = *(uint *)(param_1 + 0x50b0) | *(uint *)(param_1 + 0x50a8);
@@ -2685,64 +2685,64 @@ void _glPushAttrib_Exec(param_1, param_2)
     if (*(int *)(param_1 + 0x50fc) < 0x10) {
       **(undefined4 **)(param_1 + 0x50f8) = 0;
       if ((param_2 & 1) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,1);
+        ((void (*)())_gleAddAttribElem)(param_1,1);
       }
       if ((param_2 & 2) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,2);
+        ((void (*)())_gleAddAttribElem)(param_1,2);
       }
       if ((param_2 & 4) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,4);
+        ((void (*)())_gleAddAttribElem)(param_1,4);
       }
       if ((param_2 & 8) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,8);
+        ((void (*)())_gleAddAttribElem)(param_1,8);
       }
       if ((param_2 & 0x10) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x10);
+        ((void (*)())_gleAddAttribElem)(param_1,0x10);
       }
       if ((param_2 & 0x20) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x20);
+        ((void (*)())_gleAddAttribElem)(param_1,0x20);
       }
       if ((param_2 & 0x40) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x40);
+        ((void (*)())_gleAddAttribElem)(param_1,0x40);
       }
       if ((param_2 & 0x80) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x80);
+        ((void (*)())_gleAddAttribElem)(param_1,0x80);
       }
       if ((param_2 & 0x100) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x100);
+        ((void (*)())_gleAddAttribElem)(param_1,0x100);
       }
       if ((param_2 & 0x200) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x200);
+        ((void (*)())_gleAddAttribElem)(param_1,0x200);
       }
       if ((param_2 & 0x400) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x400);
+        ((void (*)())_gleAddAttribElem)(param_1,0x400);
       }
       if ((param_2 & 0x800) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x800);
+        ((void (*)())_gleAddAttribElem)(param_1,0x800);
       }
       if ((param_2 & 0x1000) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x1000);
+        ((void (*)())_gleAddAttribElem)(param_1,0x1000);
       }
       if ((param_2 & 0x2000) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x2000);
+        ((void (*)())_gleAddAttribElem)(param_1,0x2000);
       }
       if ((param_2 & 0x4000) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x4000);
+        ((void (*)())_gleAddAttribElem)(param_1,0x4000);
       }
       if ((param_2 & 0x8000) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x8000);
+        ((void (*)())_gleAddAttribElem)(param_1,0x8000);
       }
       if ((param_2 & 0x10000) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x10000);
+        ((void (*)())_gleAddAttribElem)(param_1,0x10000);
       }
       if ((param_2 & 0x20000) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x20000);
+        ((void (*)())_gleAddAttribElem)(param_1,0x20000);
       }
       if ((param_2 & 0x40000) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x40000);
+        ((void (*)())_gleAddAttribElem)(param_1,0x40000);
       }
       if ((param_2 & 0x80000) != 0) {
-        ((int (*)())_gleAddAttribElem)(param_1,0x80000);
+        ((void (*)())_gleAddAttribElem)(param_1,0x80000);
       }
       *(int *)(param_1 + 0x50f8) = *(int *)(param_1 + 0x50f8) + 4;
       *(int *)(param_1 + 0x50fc) = *(int *)(param_1 + 0x50fc) + 1;
@@ -3939,7 +3939,7 @@ void _glPopAttrib_Exec(param_1)
       iVar2 = *(int *)(iVar2 + -4);
       while (iVar2 != 0) {
         iVar3 = *(int *)(iVar2 + 0x2c44);
-        ((int (*)())_gleRemoveAttribElem)(param_1,iVar2);
+        ((void (*)())_gleRemoveAttribElem)(param_1,iVar2);
         iVar2 = iVar3;
       }
       _gleUpdateState(param_1);
@@ -5939,7 +5939,7 @@ LAB_0004dc00:
       *(int *)(param_1 + 0x4890) = iVar9;
     }
     *(int *)(param_1 + 0x4a14) = param_4;
-    ((int (*)())_gleDrawArraysOrElements_Core)(param_1,param_2,param_3,param_4,uVar10,*(uint *)(param_6 + 0x324) >> 0x12 & 1,
+    ((void (*)())_gleDrawArraysOrElements_Core)(param_1,param_2,param_3,param_4,uVar10,*(uint *)(param_6 + 0x324) >> 0x12 & 1,
                param_6 + 0x20,iVar9);
     *(undefined4 *)(param_1 + 0x4a14) = 0;
     if (*(int *)(param_6 + 0x328) == 0 && *(int *)(param_6 + 0x32c) == 0) {
@@ -6834,7 +6834,7 @@ void _glVertexArrayRangeEXT_Exec(param_1, param_2, param_3)
   }
   *(undefined4 *)(iVar1 + 0x350) = *(undefined4 *)(iVar1 + 0x350);
   *(uint *)(iVar1 + 0x354) = *(uint *)(iVar1 + 0x354) | 1;
-  ((int (*)())_gleModifyPluginVertexArray)(param_1,iVar1 + 0x10);
+  ((void (*)())_gleModifyPluginVertexArray)(param_1,iVar1 + 0x10);
   return;
 }
 

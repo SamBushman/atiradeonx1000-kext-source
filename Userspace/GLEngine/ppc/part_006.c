@@ -27,7 +27,7 @@ void _glNormal3f_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3)
 void _glVertex3f_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3)
 {
   ((float * (*)())_glVertex3f_Comp)(param_1,fparam_1,fparam_2,fparam_3);
-  ((int (*)())_glVertex3f_Exec)(param_1);
+  ((void (*)())_glVertex3f_Exec)(param_1);
   return;
 }
 
@@ -223,7 +223,7 @@ void _glEndList_Exec(param_1)
   int param_1;
 {
   if (*(int *)(param_1 + 0x5408) != 0) {
-    ((int (*)())_gleEndList)(param_1);
+    ((void (*)())_gleEndList)(param_1);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -273,7 +273,7 @@ void _gleEndList(param_1)
     iVar2 = _gleRemoveHashObject(iVar4,*(undefined4 *)(iVar6 + 4));
     if ((iVar2 != 0) && (iVar1 = *(int *)(iVar2 + 8) + -1, *(int *)(iVar2 + 8) = iVar1, iVar1 == 0))
     {
-      ((int (*)())_gleFreeDisplayListObject)(param_1,iVar2);
+      ((void (*)())_gleFreeDisplayListObject)(param_1,iVar2);
     }
     _gleAddHashObject(iVar4,iVar6);
   }
@@ -281,7 +281,7 @@ void _gleEndList(param_1)
     _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
   }
   if (*(char *)(param_1 + 0x5410) != '\0') {
-    ((int (*)())_gleOptimizeDisplayList)(param_1,*(undefined4 *)(iVar6 + 4));
+    ((void (*)())_gleOptimizeDisplayList)(param_1,*(undefined4 *)(iVar6 + 4));
   }
   iVar4 = *(int *)(param_1 + 0x53e8);
   iVar2 = *(int *)(iVar4 + 0x14);
@@ -671,7 +671,7 @@ LAB_0003b3b0:
               if (local_74 < iVar11) {
                 iVar14 = 0x40;
                 if (local_78 != (uint *)0x0) {
-                  ((int (*)())_CloseCurrentVAR)(param_1,iVar12,puVar22,&local_78,&local_74);
+                  ((void (*)())_CloseCurrentVAR)(param_1,iVar12,puVar22,&local_78,&local_74);
                 }
                 piVar15 = (int *)((int (*)())_gleAddListItemWithFree)(param_1,
                                             PTR__gleSetupAndDrawArraysOrElementsOutOfLine_ListExec_00112140
@@ -1760,7 +1760,7 @@ switchD_0003b6b4_caseD_0:
                   (puVar16 == PTR__glBindVertexArrayEXT_ListExec_00112134)) ||
                  (puVar16 == PTR__glVertexArrayParameteriEXT_ListExec_00112130)) {
                 if (local_78 != (uint *)0x0) {
-                  ((int (*)())_CloseCurrentVAR)(param_1,iVar12,puVar5,&local_78,&local_74);
+                  ((void (*)())_CloseCurrentVAR)(param_1,iVar12,puVar5,&local_78,&local_74);
                   puVar16 = (undefined *)*puVar29;
                 }
                 uVar13 = *(int *)(uVar26 * 4 + iVar24) - 4;
@@ -1790,7 +1790,7 @@ switchD_0003b6b4_caseD_0:
             if (local_74 < iVar14 + 0x2c) {
               iVar11 = 0x40;
               if (local_78 != (uint *)0x0) {
-                ((int (*)())_CloseCurrentVAR)(param_1,iVar12,puVar5,&local_78,&local_74);
+                ((void (*)())_CloseCurrentVAR)(param_1,iVar12,puVar5,&local_78,&local_74);
               }
               piVar15 = (int *)((int (*)())_gleAddListItemWithFree)(param_1,
                                           PTR__gleSetupAndDrawArraysOrElementsOutOfLine_ListExec_00112140
@@ -1837,7 +1837,7 @@ LAB_0003d5cc:
         } while (uVar26 < uVar23);
       }
       if (local_78 != (uint *)0x0) {
-        ((int (*)())_CloseCurrentVAR)(param_1,iVar12,puVar22,&local_78,&local_74);
+        ((void (*)())_CloseCurrentVAR)(param_1,iVar12,puVar22,&local_78,&local_74);
       }
       iVar12 = *(int *)(param_1 + 0x5148);
       *(undefined4 *)(param_1 + 0x5408) = 0;
@@ -4833,14 +4833,14 @@ int _gleSetupAndDrawArraysOrElementsOutOfLine_ListExec(param_1, param_2)
   piVar13 = (int *)puVar15[5];
   uVar12 = puVar15[6];
   if ((*puVar15 & 3) == 2) {
-    ((int (*)())_gleCreateDrawArraysOrElementsVertexObject)(param_1,puVar15);
+    ((double (*)())_gleCreateDrawArraysOrElementsVertexObject)(param_1,puVar15);
   }
   *(undefined4 *)(param_1 + 0x5414) = *(undefined4 *)(param_1 + 0x4a60);
   uVar6 = _gleGetEnabled(param_1,0x851d);
   *(char *)(param_1 + 0x5411) = (char)uVar6;
   ((int (*)())_gleSetCurrentVertexObject)(param_1,puVar15[1]);
   piVar8 = (int *)((int)((unsigned char *)0x0) + 1);
-  ((int (*)())_gleSetClientEnableFlag)(param_1,0x851d,1);
+  ((double (*)())_gleSetClientEnableFlag)(param_1,0x851d,1);
   if ((-1 < *(short *)(param_1 + 0x4a10)) ||
      (((*(char *)(param_1 + 0x4664) != '\0' && (*(int *)(*(int *)(param_1 + 0x5420) + 0x4cc) == 0))
       || (*(char *)(param_1 + 0x759c) == '\0')))) {
@@ -4850,7 +4850,7 @@ int _gleSetupAndDrawArraysOrElementsOutOfLine_ListExec(param_1, param_2)
     uVar6 = 0x502;
     goto LAB_0004472c;
   }
-  fparam_1 = (double)((int (*)())_gleSetupOutOfLineDrawPointers)(param_1,puVar14);
+  fparam_1 = (double)((double (*)())_gleSetupOutOfLineDrawPointers)(param_1,puVar14);
   iVar9 = *(int *)(param_1 + 0x50ac);
   if (iVar9 != 0 || (*(uint *)(param_1 + 0x505c) & *(uint *)(param_1 + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(param_1);
@@ -5071,7 +5071,7 @@ LAB_00044808:
   if ((uVar12 & 4) == 0) {
     return 0x10;
   }
-  ((int (*)())_gleDrawArraysSyncState)(param_1,puVar14);
+  ((void (*)())_gleDrawArraysSyncState)(param_1,puVar14);
   return 0x10;
 }
 
@@ -5130,7 +5130,7 @@ double _gleCreateDrawArraysOrElementsVertexObject(param_1, param_2)
   *(uint **)(uVar2 + 0x344) = puVar4;
   *(undefined4 *)(uVar2 + 0x350) = *(undefined4 *)(uVar2 + 0x350);
   *(uint *)(uVar2 + 0x354) = *(uint *)(uVar2 + 0x354) | 3;
-  ((int (*)())_gleFlushPluginVertexArray)(param_1,iVar9,uVar5,puVar4);
+  ((void (*)())_gleFlushPluginVertexArray)(param_1,iVar9,uVar5,puVar4);
   return;
 }
 
@@ -5209,7 +5209,7 @@ int _gleSetCurrentVertexObject(param_1, param_2)
   *(undefined4 *)(param_1 + 0x488c) = 0;
   *(undefined4 *)(param_1 + 0x4890) = 0;
   *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x100000;
-  ((int (*)())_gleResetVACachePointers)(param_1);
+  ((void (*)())_gleResetVACachePointers)(param_1);
   return;
 }
 
@@ -5711,7 +5711,7 @@ int _gleDrawArraysOrElementsOutOfLine_ListExec(param_1, param_2)
     uVar11 = 0x502;
     goto LAB_00045858;
   }
-  fparam_1 = (double)((int (*)())_gleSetupOutOfLineDrawPointers)(param_1,iVar14);
+  fparam_1 = (double)((double (*)())_gleSetupOutOfLineDrawPointers)(param_1,iVar14);
   iVar8 = *(int *)(param_1 + 0x50ac);
   if (iVar8 != 0 || (*(uint *)(param_1 + 0x505c) & *(uint *)(param_1 + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(param_1);
@@ -5932,7 +5932,7 @@ LAB_00045934:
   if ((uVar9 & 4) == 0) {
     return 8;
   }
-  ((int (*)())_gleDrawArraysSyncState)(param_1,iVar14);
+  ((void (*)())_gleDrawArraysSyncState)(param_1,iVar14);
   return 8;
 }
 

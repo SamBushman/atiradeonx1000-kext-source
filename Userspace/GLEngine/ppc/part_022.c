@@ -80,7 +80,7 @@ int _glPNTrianglesiATIX_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glPNTrianglesiATIX_Exec)(param_1,*param_2,param_2[1]);
+  ((void (*)())_glPNTrianglesiATIX_Exec)(param_1,*param_2,param_2[1]);
   return 8;
 }
 
@@ -157,7 +157,7 @@ void _glPNTrianglesiATIX_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glPNTrianglesiATIX_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glPNTrianglesiATIX_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glPNTrianglesiATIX_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -466,7 +466,7 @@ void _glPointParameterfv_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glPointParameterfv_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glPointParameterfv_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glPointParameterfv_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -481,7 +481,7 @@ int _glPointParameterfv_ListExec(param_1, param_2)
   if (*param_2 != 0x8129) {
     iVar1 = 1;
   }
-  ((int (*)())_glPointParameterfv_Exec)(param_1,*param_2,param_2 + 1);
+  ((void (*)())_glPointParameterfv_Exec)(param_1,*param_2,param_2 + 1);
   return iVar1 * 4 + 4;
 }
 
@@ -584,7 +584,7 @@ void _glPointParameteriARB_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glPointParameteriARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glPointParameteriARB_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glPointParameteriARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -593,7 +593,7 @@ int _glPointParameteriARB_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glPointParameteriARB_Exec)(param_1,*param_2,param_2[1]);
+  ((void (*)())_glPointParameteriARB_Exec)(param_1,*param_2,param_2[1]);
   return 8;
 }
 
@@ -734,7 +734,7 @@ void _glPointParameterivARB_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glPointParameterivARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glPointParameterivARB_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glPointParameterivARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -749,7 +749,7 @@ int _glPointParameterivARB_ListExec(param_1, param_2)
   if (*param_2 != 0x8129) {
     iVar1 = 1;
   }
-  ((int (*)())_glPointParameterivARB_Exec)(param_1,*param_2,param_2 + 1);
+  ((void (*)())_glPointParameterivARB_Exec)(param_1,*param_2,param_2 + 1);
   return iVar1 * 4 + 4;
 }
 
@@ -1188,7 +1188,7 @@ void _glRasterPos2dv_CompExec(param_1, param_2)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos2dv_Comp)(param_1,param_2);
+  ((void (*)())_glRasterPos2dv_Comp)(param_1,param_2);
   ((void (*)())_glRasterPos2dv_Exec)(param_1,param_2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }
@@ -1484,7 +1484,7 @@ void _glRasterPos2fv_CompExec(param_1, param_2)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos2fv_Comp)(param_1,param_2);
+  ((void (*)())_glRasterPos2fv_Comp)(param_1,param_2);
   ((void (*)())_glRasterPos2fv_Exec)(param_1,param_2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }
@@ -1517,7 +1517,7 @@ void _glRasterPos2i_CompExec(param_1, param_2, param_3)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos2i_Comp)(param_1,param_2,param_3);
+  ((void (*)())_glRasterPos2i_Comp)(param_1,param_2,param_3);
   ((void (*)())_glRasterPos2i_Exec)(param_1,param_2,param_3,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }
@@ -1673,7 +1673,7 @@ void _glRasterPos2iv_CompExec(param_1, param_2)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos2iv_Comp)(param_1,param_2);
+  ((void (*)())_glRasterPos2iv_Comp)(param_1,param_2);
   ((void (*)())_glRasterPos2iv_Exec)(param_1,param_2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }
@@ -1831,7 +1831,7 @@ void _glRasterPos2s_CompExec(param_1, param_2, param_3)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glRasterPos2s_Comp)(param_1,param_2,param_3);
+  ((void (*)())_glRasterPos2s_Comp)(param_1,param_2,param_3);
   ((void (*)())_glRasterPos2s_Exec)(param_1,param_2,param_3,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }

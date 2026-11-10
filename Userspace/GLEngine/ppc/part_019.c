@@ -2845,7 +2845,7 @@ int _glIndexMask_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glIndexMask_Exec)(param_1,*param_2);
+  ((void (*)())_glIndexMask_Exec)(param_1,*param_2);
   return 4;
 }
 
@@ -2886,7 +2886,7 @@ void _glIndexMask_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glIndexMask_Comp)(param_1,param_2);
-  ((int (*)())_glIndexMask_Exec)(param_1,param_2);
+  ((void (*)())_glIndexMask_Exec)(param_1,param_2);
   return;
 }
 
@@ -2937,7 +2937,7 @@ int _glStencilMaskSeparate_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glStencilMaskSeparate_Exec)(param_1,*param_2,param_2[1]);
+  ((void (*)())_glStencilMaskSeparate_Exec)(param_1,*param_2,param_2[1]);
   return 8;
 }
 
@@ -3005,7 +3005,7 @@ void _glStencilMaskSeparate_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glStencilMaskSeparate_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glStencilMaskSeparate_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glStencilMaskSeparate_Exec)(param_1,param_2,param_3);
   return;
 }
 

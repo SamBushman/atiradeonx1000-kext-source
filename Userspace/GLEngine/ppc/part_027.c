@@ -5,7 +5,7 @@ int _glStencilFuncSeparate_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glStencilFuncSeparate_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3]);
+  ((void (*)())_glStencilFuncSeparate_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3]);
   return 0x10;
 }
 
@@ -101,7 +101,7 @@ void _glStencilFuncSeparate_CompExec(param_1, param_2, param_3, param_4, param_5
   undefined4 param_5;
 {
   ((int (*)())_glStencilFuncSeparate_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((int (*)())_glStencilFuncSeparate_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glStencilFuncSeparate_Exec)(param_1,param_2,param_3,param_4,param_5);
   return;
 }
 
@@ -110,7 +110,7 @@ int _glLineStipple_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glLineStipple_Exec)(param_1,*param_2,(uint)*(ushort *)(param_2 + 1));
+  ((void (*)())_glLineStipple_Exec)(param_1,*param_2,(uint)*(ushort *)(param_2 + 1));
   return 8;
 }
 
@@ -162,7 +162,7 @@ void _glLineStipple_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glLineStipple_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glLineStipple_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glLineStipple_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -283,7 +283,7 @@ void _glPolygonStipple_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glPolygonStipple_Comp)(param_1,param_2);
-  ((int (*)())_glPolygonStipple_Exec)(param_1,param_2);
+  ((void (*)())_glPolygonStipple_Exec)(param_1,param_2);
   return;
 }
 
@@ -1673,8 +1673,8 @@ void _glCompressedTexImage1D_CompExec(param_1, param_2, param_3, param_4, param_
   undefined4 param_7;
   undefined4 param_8;
 {
-  ((int (*)())_glCompressedTexImage1D_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glCompressedTexImage1D_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glCompressedTexImage1D_Comp)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glCompressedTexImage1D_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -1729,8 +1729,8 @@ void _glCompressedTexSubImage1D_CompExec(param_1, param_2, param_3, param_4, par
   undefined4 param_7;
   undefined4 param_8;
 {
-  ((int (*)())_glCompressedTexSubImage1D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6);
-  ((int (*)())_glCompressedTexSubImage1D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6);
+  ((void (*)())_glCompressedTexSubImage1D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6);
+  ((void (*)())_glCompressedTexSubImage1D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6);
   return;
 }
 
@@ -1851,7 +1851,7 @@ void _glTexCoord1dv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glTexCoord1dv_Comp)(param_1,param_2);
-  ((int (*)())_glTexCoord1dv_Exec)(param_1,param_2);
+  ((void (*)())_glTexCoord1dv_Exec)(param_1,param_2);
   return;
 }
 
@@ -1924,7 +1924,7 @@ void _glTexCoord2dv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glTexCoord2dv_Comp)(param_1,param_2);
-  ((int (*)())_glTexCoord2dv_Exec)(param_1,param_2);
+  ((void (*)())_glTexCoord2dv_Exec)(param_1,param_2);
   return;
 }
 

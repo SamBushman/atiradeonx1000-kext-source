@@ -779,7 +779,7 @@ void FUN_0001ff98(param_1, param_2, param_3)
       if (0 < param_2) {
         do {
           if (*param_3 == 0) {
-            ((int (*)())_gleDeleteHashNamesAndObjects)(param_1,iVar7,iVar9,iVar10 - iVar9);
+            ((void (*)())_gleDeleteHashNamesAndObjects)(param_1,iVar7,iVar9,iVar10 - iVar9);
             iVar9 = param_3[1];
             iVar10 = iVar9 + -1;
           }
@@ -813,7 +813,7 @@ void FUN_0001ff98(param_1, param_2, param_3)
               } while (uVar11 < 6);
             }
             if (*param_3 != iVar10) {
-              ((int (*)())_gleDeleteHashNamesAndObjects)(param_1,iVar7,iVar9,iVar10 - iVar9);
+              ((void (*)())_gleDeleteHashNamesAndObjects)(param_1,iVar7,iVar9,iVar10 - iVar9);
               iVar9 = *param_3;
               iVar10 = iVar9;
             }
@@ -823,7 +823,7 @@ void FUN_0001ff98(param_1, param_2, param_3)
           iVar10 = iVar10 + 1;
         } while (iVar8 < param_2);
       }
-      ((int (*)())_gleDeleteHashNamesAndObjects)(param_1,iVar7,iVar9,iVar10 - iVar9);
+      ((void (*)())_gleDeleteHashNamesAndObjects)(param_1,iVar7,iVar9,iVar10 - iVar9);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
         return;
       }
@@ -968,7 +968,7 @@ void _gleFreeTextureObject(param_1, param_2)
   int iVar7;
   
   iVar3 = param_2 + 0x10;
-  ((int (*)())_gleDeletePluginTexture)(param_1,iVar3);
+  ((void (*)())_gleDeletePluginTexture)(param_1,iVar3);
   uVar1 = *(ushort *)(param_2 + 0x34);
   if ((uVar1 & 0x100) == 0) {
     if ((*(int *)(param_2 + 0xd0) != 0) && ((*(byte *)(param_2 + 199) & 7) == 0)) {
@@ -2740,7 +2740,7 @@ int _gleBindPipelineProgram(param_1, param_2, param_3)
 LAB_0002299c:
   iVar9 = param_2 * 0xa30;
   if (*(int *)(iVar9 + *(int *)(param_1 + 0x5148) + 0x8a98) != *(int *)(iVar14 + 0x14)) {
-    ((int (*)())_glePPUpdateProgram)(param_1,iVar14);
+    ((void (*)())_glePPUpdateProgram)(param_1,iVar14);
     *(undefined4 *)(iVar14 + 0x14) = *(undefined4 *)(iVar9 + *(int *)(param_1 + 0x5148) + 0x8a98);
   }
   _gleUpdateInverseNeeds(param_1);
@@ -2836,7 +2836,7 @@ LAB_00022b48:
     if (bVar2) {
       iVar7 = *(int *)(iVar7 * 4 + param_1 + 0x5420);
       if (*(int *)(iVar7 + 0x14) != 0) {
-        ((int (*)())_gleModifyPluginPipelineProgram)(param_1,iVar7 + 0x10,1);
+        ((void (*)())_gleModifyPluginPipelineProgram)(param_1,iVar7 + 0x10,1);
         _free(*(undefined4 *)(iVar7 + 0x14));
       }
       *(undefined1 *)(iVar7 + 0x4c) = 1;
@@ -2856,8 +2856,8 @@ LAB_00022b48:
           iVar8 = iVar8 + 4;
           iVar9 = iVar9 + -1;
         } while (iVar9 != 0);
-        ((int (*)())_glePPParse)(param_1,iVar6,0);
-        ((int (*)())_glePPUpdateProgram)(param_1,iVar6);
+        ((void (*)())_glePPParse)(param_1,iVar6,0);
+        ((void (*)())_glePPUpdateProgram)(param_1,iVar6);
         _gleUpdateInverseNeeds(param_1);
         iVar10 = 9;
         iVar9 = 0;
@@ -2888,8 +2888,8 @@ LAB_00022b48:
           iVar6 = iVar6 + 4;
           iVar8 = iVar8 + -1;
         } while (iVar8 != 0);
-        ((int (*)())_glePPParse)(param_1,iVar7,1);
-        ((int (*)())_glePPUpdateProgram)(param_1,iVar7);
+        ((void (*)())_glePPParse)(param_1,iVar7,1);
+        ((void (*)())_glePPUpdateProgram)(param_1,iVar7);
         _gleUpdateInverseNeeds(param_1);
         iVar9 = 9;
         iVar8 = 0;
@@ -3071,7 +3071,7 @@ void _glePPParse(param_1, param_2, param_3)
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
-      ((int (*)())_glePPLogParameters)(param_1,param_2,local_60,iVar5,local_5c,iVar6);
+      ((void (*)())_glePPLogParameters)(param_1,param_2,local_60,iVar5,local_5c,iVar6);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
       }
@@ -3474,7 +3474,7 @@ void _glePPParse(param_1, param_2, param_3)
       }
       if (param_3 == 0) {
         iVar5 = _PPEmulatorProgramCreate();
-        ((int (*)())_PPEmulatorProgramSetupHandlesFromPPStream)(iVar5,param_1,iVar22);
+        ((void (*)())_PPEmulatorProgramSetupHandlesFromPPStream)(iVar5,param_1,iVar22);
         _PPEmulatorProgramConvertFromPPStream(iVar5,iVar22);
         if (param_2[0x135] != 0) {
           _PPEmulatorProgramFree();
@@ -4147,7 +4147,7 @@ void _PPEmulatorProgramSetupHandlesFromPPStream(param_1, param_2, param_3)
   iVar2 = *(int *)(param_1 + 0x8c);
   for (iVar5 = **(int **)(param_3 + 0x1c); iVar5 != 0; iVar5 = *(int *)(iVar5 + 8)) {
     _PPStreamChunkGetStream(&local_40,iVar5,param_3,auStack_30,0);
-    ((int (*)())_gleVPGetResultOffset)(param_2,local_40,local_3c,&local_2c,auStack_28);
+    ((void (*)())_gleVPGetResultOffset)(param_2,local_40,local_3c,&local_2c,auStack_28);
     *(int *)(iVar2 + (uint)*(ushort *)(iVar5 + 0x12) * 0x10) = local_2c;
     *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 4) = local_2c + 4;
     *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 8) = local_2c + 8;
@@ -4174,7 +4174,7 @@ void _PPEmulatorProgramSetupHandlesFromPPStream(param_1, param_2, param_3)
     }
     else {
       _PPStreamChunkGetStream(&local_40,iVar5,param_3,auStack_30,0);
-      ((int (*)())_gleVPGetParameterPtr)(param_2,local_40,local_3c,&local_2c,local_24);
+      ((void (*)())_gleVPGetParameterPtr)(param_2,local_40,local_3c,&local_2c,local_24);
       *(int *)(iVar2 + (uint)*(ushort *)(iVar5 + 0x12) * 0x10) = local_2c;
       *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 4) = local_2c + local_24[0];
       *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 8) = local_2c + local_24[0] * 2;
@@ -4747,7 +4747,7 @@ LAB_00026190:
       *(undefined4 *)(iVar5 + 4) = param_4[1];
       *(undefined4 *)(iVar5 + 8) = param_4[2];
       *(undefined4 *)(iVar5 + 0xc) = param_4[3];
-      ((int (*)())_gleModifyPluginPipelineProgram)(param_1,*(int *)(iVar6 + 0x5420) + 0x10,2);
+      ((void (*)())_gleModifyPluginPipelineProgram)(param_1,*(int *)(iVar6 + 0x5420) + 0x10,2);
       return;
     }
   }

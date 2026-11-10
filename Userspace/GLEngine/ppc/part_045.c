@@ -2348,7 +2348,7 @@ int _gleExecuteClippedVertexArray(param_1, param_2, param_3, param_4, param_5, p
   iStack00000024 = param_4;
   pdStack0000002c = param_6;
   if ((undefined *)param_1[0x1420] == ((unsigned char *)0x00001101)) {
-    ((int (*)())_gleExecuteTCLVertexArray)(param_1,param_2,param_3,param_4,param_5,param_6);
+    ((void (*)())_gleExecuteTCLVertexArray)(param_1,param_2,param_3,param_4,param_5,param_6);
     return (dword *)extraout_r3;
   }
   if ((*(short *)((int)param_1 + 0x34d6) == 0x408) && (3 < param_2)) {
@@ -2471,7 +2471,7 @@ LAB_000db024:
           local_e0 = uVar12;
           local_dc = uVar2;
           if (local_60 <= param_1[0x1267]) {
-            ((int (*)())_gleFlushIndexStack)(param_1);
+            ((void (*)())_gleFlushIndexStack)(param_1);
           }
           pdVar5 = (dword *)((int (*)())_gleVAClipLine)(param_1,local_64,iVar11,&local_e0);
           if (pdVar5 != (dword *)0x0) {
@@ -2514,7 +2514,7 @@ LAB_000db024:
             local_e0 = uVar16;
             local_dc = uVar2;
             if (local_60 <= param_1[0x1267]) {
-              ((int (*)())_gleFlushIndexStack)(param_1);
+              ((void (*)())_gleFlushIndexStack)(param_1);
             }
             pdVar5 = (dword *)((int (*)())_gleVAClipLine)(param_1,local_64,iVar11,&local_e0);
             if (pdVar5 != (dword *)0x0) {
@@ -2579,7 +2579,7 @@ LAB_000db024:
           local_e0 = uVar2;
           local_dc = uVar12;
           if (local_60 <= param_1[0x1267]) {
-            ((int (*)())_gleFlushIndexStack)(param_1);
+            ((void (*)())_gleFlushIndexStack)(param_1);
           }
           pdVar5 = (dword *)((int (*)())_gleVAClipLine)(param_1,local_64,iVar11,&local_e0);
           if (pdVar5 != (dword *)0x0) {
@@ -2628,7 +2628,7 @@ LAB_000db024:
             local_dc = uVar12;
             local_d8 = uVar2;
             if (local_60 <= param_1[0x1267]) {
-              ((int (*)())_gleFlushIndexStack)(param_1);
+              ((void (*)())_gleFlushIndexStack)(param_1);
             }
             pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,3,&local_e0);
             if (pdVar5 != (dword *)0x0) {
@@ -2667,7 +2667,7 @@ LAB_000db024:
             local_dc = pdVar20[1];
             local_d8 = pdVar20[2];
             if (local_60 <= param_1[0x1267]) {
-              ((int (*)())_gleFlushIndexStack)(param_1);
+              ((void (*)())_gleFlushIndexStack)(param_1);
             }
             pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,3,&local_e0);
             if (pdVar5 != (dword *)0x0) {
@@ -2719,7 +2719,7 @@ LAB_000db024:
           local_dc = uVar3;
           local_d8 = uVar2;
           if (local_60 <= param_1[0x1267]) {
-            ((int (*)())_gleFlushIndexStack)(param_1);
+            ((void (*)())_gleFlushIndexStack)(param_1);
           }
           pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,3,&local_e0);
           if (pdVar5 != (dword *)0x0) {
@@ -2814,7 +2814,7 @@ LAB_000dbb38:
             local_dc = uVar16;
             local_d8 = uVar3;
             if (local_60 <= param_1[0x1267]) {
-              ((int (*)())_gleFlushIndexStack)(param_1);
+              ((void (*)())_gleFlushIndexStack)(param_1);
             }
             pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,3,&local_e0);
             bVar1 = iVar19 < iStack00000024;
@@ -2867,7 +2867,7 @@ LAB_000dbb38:
           local_d8 = uVar12;
           local_d4 = uVar2;
           if (local_60 <= param_1[0x1267]) {
-            ((int (*)())_gleFlushIndexStack)(param_1);
+            ((void (*)())_gleFlushIndexStack)(param_1);
           }
           pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,4,&local_e0);
           if (pdVar5 != (dword *)0x0) {
@@ -2915,7 +2915,7 @@ LAB_000dbb38:
           local_d8 = uVar16;
           local_d4 = uVar3;
           if (local_60 <= param_1[0x1267]) {
-            ((int (*)())_gleFlushIndexStack)(param_1);
+            ((void (*)())_gleFlushIndexStack)(param_1);
           }
           pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,4,&local_e0);
           if (pdVar5 != (dword *)0x0) {
@@ -3015,7 +3015,7 @@ LAB_000dc04c:
             local_dc = uVar16;
             local_d8 = uVar3;
             if (local_60 <= param_1[0x1267]) {
-              ((int (*)())_gleFlushIndexStack)(param_1);
+              ((void (*)())_gleFlushIndexStack)(param_1);
             }
             pdVar5 = (dword *)((int (*)())_gleVAClipPoly)(param_1,local_64,iVar11,3,&local_e0);
             bVar1 = iVar19 < iStack00000024;
@@ -3060,7 +3060,7 @@ void _gleExecuteVertexArray(param_1, param_2, param_3, param_4, param_5, param_6
   undefined4 param_6;
 {
   if (*(char *)(param_1 + 0x7580) != '\0') {
-    ((int (*)())_gleExecuteTCLVertexArray)(param_1,param_2,param_3,param_4,param_5,param_6);
+    ((void (*)())_gleExecuteTCLVertexArray)(param_1,param_2,param_3,param_4,param_5,param_6);
     return;
   }
   ((int (*)())_gleExecuteClippedVertexArray)(param_1,param_2,param_3,param_4,param_5,param_6);

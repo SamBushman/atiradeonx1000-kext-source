@@ -20,7 +20,7 @@ int _LFSStreamChunkListCreateFromChunkList(param_1)
   uVar1 = ((int (*)())_LFSStreamChunkListCreate)();
   for (iVar3 = *param_1; iVar3 != 0; iVar3 = *(int *)(iVar3 + 0x4c)) {
     uVar2 = _LFSStreamChunkCreateFromChunk(iVar3);
-    ((int (*)())_LFSStreamChunkListAddChunk)(uVar1,uVar2);
+    ((void (*)())_LFSStreamChunkListAddChunk)(uVar1,uVar2);
   }
   return uVar1;
 }
@@ -33,7 +33,7 @@ void _LFSStreamChunkListFree(param_1)
   
   iVar1 = *param_1;
   while (iVar1 != 0) {
-    ((int (*)())_LFSStreamChunkListRemoveChunk)(param_1,iVar1);
+    ((void (*)())_LFSStreamChunkListRemoveChunk)(param_1,iVar1);
     iVar1 = *param_1;
   }
   _free(param_1);
@@ -201,12 +201,12 @@ int _LFSStreamCreate()
 void _LFSStreamFree(param_1)
   undefined4 *param_1;
 {
-  ((int (*)())_LFSStreamChunkListFree)(*param_1);
-  ((int (*)())_LFSStreamChunkListFree)(param_1[1]);
-  ((int (*)())_LFSStreamChunkListFree)(param_1[2]);
-  ((int (*)())_LFSStreamChunkListFree)(param_1[3]);
-  ((int (*)())_LFSStreamChunkListFree)(param_1[4]);
-  ((int (*)())_LFSStreamChunkListFree)(param_1[5]);
+  ((void (*)())_LFSStreamChunkListFree)(*param_1);
+  ((void (*)())_LFSStreamChunkListFree)(param_1[1]);
+  ((void (*)())_LFSStreamChunkListFree)(param_1[2]);
+  ((void (*)())_LFSStreamChunkListFree)(param_1[3]);
+  ((void (*)())_LFSStreamChunkListFree)(param_1[4]);
+  ((void (*)())_LFSStreamChunkListFree)(param_1[5]);
   _free(param_1);
   return;
 }
@@ -231,7 +231,7 @@ void _LFSStreamAddConstantBinding(param_1, param_2)
   *(undefined4 *)(puVar2 + 0xc) = uVar3;
   *(undefined4 *)(puVar2 + 0x10) = uVar4;
   *(undefined4 *)(puVar2 + 0x14) = param_2[4];
-  ((int (*)())_LFSStreamChunkListAddChunk)(*param_1,puVar2);
+  ((void (*)())_LFSStreamChunkListAddChunk)(*param_1,puVar2);
   return;
 }
 
@@ -255,7 +255,7 @@ void _LFSStreamAddPreliminaryPassRegisterInit(param_1, param_2)
   *(undefined4 *)(puVar2 + 0xc) = uVar3;
   *(undefined4 *)(puVar2 + 0x10) = uVar4;
   *(undefined4 *)(puVar2 + 0x14) = param_2[4];
-  ((int (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 4),puVar2);
+  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 4),puVar2);
   return;
 }
 
@@ -269,7 +269,7 @@ void _LFSStreamAddPreliminaryPassOperation(param_1, param_2)
   puVar1 = (undefined1 *)_LFSStreamChunkCreate();
   *puVar1 = 2;
   _memcpy(puVar1 + 4,param_2,0x44);
-  ((int (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 8),puVar1);
+  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 8),puVar1);
   return;
 }
 
@@ -293,7 +293,7 @@ void _LFSStreamAddOutputPassRegisterInit(param_1, param_2)
   *(undefined4 *)(puVar2 + 0xc) = uVar3;
   *(undefined4 *)(puVar2 + 0x10) = uVar4;
   *(undefined4 *)(puVar2 + 0x14) = param_2[4];
-  ((int (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0xc),puVar2);
+  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0xc),puVar2);
   return;
 }
 
@@ -307,7 +307,7 @@ void _LFSStreamAddOutputPassOperation(param_1, param_2)
   puVar1 = (undefined1 *)_LFSStreamChunkCreate();
   *puVar1 = 2;
   _memcpy(puVar1 + 4,param_2,0x44);
-  ((int (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0x10),puVar1);
+  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0x10),puVar1);
   return;
 }
 
@@ -321,7 +321,7 @@ void _LFSStreamAddConstant(param_1, param_2)
   puVar1 = (undefined1 *)_LFSStreamChunkCreate();
   *puVar1 = 4;
   _memmove(puVar1 + 4,param_2,0x10);
-  ((int (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0x14),puVar1);
+  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0x14),puVar1);
   return;
 }
 
@@ -337,34 +337,34 @@ void _LFSStreamGetStream(param_1, param_2, param_3)
   uint uVar4;
   int local_30 [7];
   
-  ((int (*)())_LFSStreamChunkListGetStream)(*param_1,0,local_30,param_1);
+  ((void (*)())_LFSStreamChunkListGetStream)(*param_1,0,local_30,param_1);
   iVar2 = local_30[0];
-  ((int (*)())_LFSStreamChunkListGetStream)(param_1[1],0,local_30,param_1);
+  ((void (*)())_LFSStreamChunkListGetStream)(param_1[1],0,local_30,param_1);
   iVar2 = iVar2 + local_30[0];
-  ((int (*)())_LFSStreamChunkListGetStream)(param_1[2],0,local_30,param_1);
+  ((void (*)())_LFSStreamChunkListGetStream)(param_1[2],0,local_30,param_1);
   iVar2 = iVar2 + local_30[0];
-  ((int (*)())_LFSStreamChunkListGetStream)(param_1[3],0,local_30,param_1);
+  ((void (*)())_LFSStreamChunkListGetStream)(param_1[3],0,local_30,param_1);
   iVar2 = iVar2 + local_30[0];
-  ((int (*)())_LFSStreamChunkListGetStream)(param_1[4],0,local_30,param_1);
+  ((void (*)())_LFSStreamChunkListGetStream)(param_1[4],0,local_30,param_1);
   iVar2 = iVar2 + local_30[0];
-  ((int (*)())_LFSStreamChunkListGetStream)(param_1[5],0,local_30,param_1);
+  ((void (*)())_LFSStreamChunkListGetStream)(param_1[5],0,local_30,param_1);
   iVar2 = iVar2 + local_30[0];
   *param_3 = (iVar2 - (iVar2 + 6U & 3)) + 10;
   if (param_2 != (uint *)0x0) {
     *param_2 = *(int *)(*param_1 + 8) << 0x10 | 0x10000006;
-    ((int (*)())_LFSStreamChunkListGetStream)(*param_1,param_2 + 6,local_30,param_1);
+    ((void (*)())_LFSStreamChunkListGetStream)(*param_1,param_2 + 6,local_30,param_1);
     uVar3 = local_30[0] + 6;
     param_2[1] = *(int *)(param_1[1] + 8) << 0x10 | uVar3 | 0x10000000;
-    ((int (*)())_LFSStreamChunkListGetStream)(param_1[1],param_2 + uVar3,local_30,param_1);
+    ((void (*)())_LFSStreamChunkListGetStream)(param_1[1],param_2 + uVar3,local_30,param_1);
     uVar3 = uVar3 + local_30[0];
     param_2[2] = *(int *)(param_1[2] + 8) << 0x10 | uVar3 | 0x10000000;
-    ((int (*)())_LFSStreamChunkListGetStream)(param_1[2],param_2 + uVar3,local_30,param_1);
+    ((void (*)())_LFSStreamChunkListGetStream)(param_1[2],param_2 + uVar3,local_30,param_1);
     uVar3 = uVar3 + local_30[0];
     param_2[3] = *(int *)(param_1[3] + 8) << 0x10 | uVar3 | 0x10000000;
-    ((int (*)())_LFSStreamChunkListGetStream)(param_1[3],param_2 + uVar3,local_30,param_1);
+    ((void (*)())_LFSStreamChunkListGetStream)(param_1[3],param_2 + uVar3,local_30,param_1);
     uVar3 = uVar3 + local_30[0];
     param_2[4] = *(int *)(param_1[4] + 8) << 0x10 | uVar3 | 0x10000000;
-    ((int (*)())_LFSStreamChunkListGetStream)(param_1[4],param_2 + uVar3,local_30,param_1);
+    ((void (*)())_LFSStreamChunkListGetStream)(param_1[4],param_2 + uVar3,local_30,param_1);
     uVar4 = uVar3 + local_30[0] + 1;
     param_2[uVar3 + local_30[0]] = 0;
     if ((uVar4 & 3) != 0) {
@@ -376,7 +376,7 @@ void _LFSStreamGetStream(param_1, param_2, param_3)
       } while ((uVar4 & 3) != 0);
     }
     param_2[5] = *(int *)(param_1[5] + 8) << 0x10 | uVar4 | 0x10000000;
-    ((int (*)())_LFSStreamChunkListGetStream)(param_1[5],param_2 + uVar4,local_30,param_1);
+    ((void (*)())_LFSStreamChunkListGetStream)(param_1[5],param_2 + uVar4,local_30,param_1);
   }
   return;
 }
@@ -415,16 +415,16 @@ void _LFSStreamOutputDebugInfo(param_1)
   undefined4 *param_1;
 {
   _puts("LFSStream {");
-  ((int (*)())_LFSStreamChunkListOutputDebugInfo)(*param_1);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(*param_1);
   _puts("   preliminarypass {");
-  ((int (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[1]);
-  ((int (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[2]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[1]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[2]);
   _puts("   };");
   _puts("   outputpass {");
-  ((int (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[3]);
-  ((int (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[4]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[3]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[4]);
   _puts("   };");
-  ((int (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[5]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[5]);
   _puts("};");
   return;
 }
@@ -446,7 +446,7 @@ void _gleFPChanged(param_1)
 void _gleFPEnable(param_1)
   int param_1;
 {
-  ((int (*)())_gleFPChanged)(param_1);
+  ((void (*)())_gleFPChanged)(param_1);
   _gleSelectVertexSubmitFunc(param_1);
   *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x1000000;
   return;
@@ -456,7 +456,7 @@ void _gleFPEnable(param_1)
 void _gleFPDisable(param_1)
   int param_1;
 {
-  ((int (*)())_gleFPChanged)(param_1);
+  ((void (*)())_gleFPChanged)(param_1);
   _gleSelectVertexSubmitFunc(param_1);
   *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x1000000;
   return;
@@ -1565,8 +1565,8 @@ void _gleConvolutionFilter1D(param_1, param_2, param_3, param_4, param_5, param_
   uVar2 = _malloc(param_4 * iVar1);
   *(undefined4 *)(param_1 + 0x32cc) = uVar2;
   *(short *)(param_1 + 0x32ca) = (short)param_3;
-  ((int (*)())_gleImagingUnpackData)(param_1,param_4,1,param_5,param_6,param_3,0x1406,param_7,uVar2);
-  ((int (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x32a8,*(undefined4 *)(param_1 + 0x32cc),
+  ((void (*)())_gleImagingUnpackData)(param_1,param_4,1,param_5,param_6,param_3,0x1406,param_7,uVar2);
+  ((void (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x32a8,*(undefined4 *)(param_1 + 0x32cc),
              (uint)*(ushort *)(param_1 + 0x32ca),0,param_4,0);
   return;
 }
@@ -1595,8 +1595,8 @@ void _gleConvolutionFilter2D(param_1, param_2, param_3, param_4, param_5, param_
     uVar2 = _malloc(param_4 * param_5 * iVar1);
     *(undefined4 *)(param_1 + 0x330c) = uVar2;
     *(short *)(param_1 + 0x330a) = (short)param_3;
-    ((int (*)())_gleImagingUnpackData)(param_1,param_4,param_5,param_6,param_7,param_3,0x1406,param_8,uVar2);
-    ((int (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x32e8,*(undefined4 *)(param_1 + 0x330c),
+    ((void (*)())_gleImagingUnpackData)(param_1,param_4,param_5,param_6,param_7,param_3,0x1406,param_8,uVar2);
+    ((void (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x32e8,*(undefined4 *)(param_1 + 0x330c),
                (uint)*(ushort *)(param_1 + 0x330a),0,param_4 * param_5,0);
     return;
   }
@@ -1619,7 +1619,7 @@ void _gleGetConvolutionFilter(param_1, param_2, param_3, param_4, param_5)
     iVar1 = param_1 + 0x32d8;
   }
   if (*(int *)(iVar1 + 0x34) != 0) {
-    ((int (*)())_gleImagingPackData)(param_1,*(undefined4 *)(iVar1 + 0x38),*(undefined4 *)(iVar1 + 0x3c),
+    ((void (*)())_gleImagingPackData)(param_1,*(undefined4 *)(iVar1 + 0x38),*(undefined4 *)(iVar1 + 0x3c),
                         (uint)*(ushort *)(iVar1 + 0x32),0x1406,param_3,param_4,
                         *(int *)(iVar1 + 0x34),param_5);
   }
@@ -1654,11 +1654,11 @@ void _gleSeparableFilter2D(param_1, param_2, param_3, param_4, param_5, param_6,
     *(int *)(param_1 + 0x3350) = param_4;
     *(int *)(param_1 + 0x3354) = param_5;
     iVar1 = iVar2 + param_4 * iVar1;
-    ((int (*)())_gleImagingUnpackData)(param_1,param_4,1,param_6,param_7,param_3,0x1406,param_8,iVar2);
-    ((int (*)())_gleImagingUnpackData)(param_1,param_5,1,param_6,param_7,param_3,0x1406,param_9,iVar1);
-    ((int (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x3328,*(undefined4 *)(param_1 + 0x334c),
+    ((void (*)())_gleImagingUnpackData)(param_1,param_4,1,param_6,param_7,param_3,0x1406,param_8,iVar2);
+    ((void (*)())_gleImagingUnpackData)(param_1,param_5,1,param_6,param_7,param_3,0x1406,param_9,iVar1);
+    ((void (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x3328,*(undefined4 *)(param_1 + 0x334c),
                (uint)*(ushort *)(param_1 + 0x334a),0,param_4,0);
-    ((int (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x3328,iVar1,(uint)*(ushort *)(param_1 + 0x334a),0,param_5,0);
+    ((void (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x3328,iVar1,(uint)*(ushort *)(param_1 + 0x334a),0,param_5,0);
     return;
   }
   *(undefined4 *)(param_1 + 0x334c) = 0;
@@ -1681,9 +1681,9 @@ void _gleGetSeparableFilter(param_1, param_2, param_3, param_4, param_5, param_6
   iVar1 = _glePixelBytes((uint)*(ushort *)(param_1 + 0x334a),0x1406);
   iVar2 = *(int *)(param_1 + 0x3350);
   iVar3 = *(int *)(param_1 + 0x334c);
-  ((int (*)())_gleImagingPackData)(param_1,iVar2,1,(uint)*(ushort *)(param_1 + 0x334a),0x1406,param_3,param_4,
+  ((void (*)())_gleImagingPackData)(param_1,iVar2,1,(uint)*(ushort *)(param_1 + 0x334a),0x1406,param_3,param_4,
                       iVar3,param_5);
-  ((int (*)())_gleImagingPackData)(param_1,*(undefined4 *)(param_1 + 0x3354),1,
+  ((void (*)())_gleImagingPackData)(param_1,*(undefined4 *)(param_1 + 0x3354),1,
                       (uint)*(ushort *)(param_1 + 0x334a),0x1406,param_3,param_4,
                       iVar3 + iVar2 * iVar1,param_6);
   return;
@@ -1699,9 +1699,9 @@ void _gleColorTable(param_1, param_2, param_3, param_4, param_5, param_6, param_
   undefined4 param_6;
   undefined4 param_7;
 {
-  ((int (*)())_gleImagingUnpackData)(param_1,param_4,1,param_5,param_6,(uint)*(ushort *)(param_3 + 0x10),
+  ((void (*)())_gleImagingUnpackData)(param_1,param_4,1,param_5,param_6,(uint)*(ushort *)(param_3 + 0x10),
              (uint)*(ushort *)(param_3 + 0x12),param_7,*(undefined4 *)(param_3 + 0x14));
-  ((int (*)())_gleImagingScaleAndBias)(param_1,param_2,*(undefined4 *)(param_3 + 0x14),(uint)*(ushort *)(param_3 + 0x10),0,
+  ((void (*)())_gleImagingScaleAndBias)(param_1,param_2,*(undefined4 *)(param_3 + 0x14),(uint)*(ushort *)(param_3 + 0x10),0,
              param_4,1);
   return;
 }
@@ -1720,9 +1720,9 @@ void _gleColorSubTable(param_1, param_2, param_3, param_4, param_5, param_6, par
   int iVar1;
   
   iVar1 = _glePixelBytes((uint)*(ushort *)(param_3 + 0x10),(uint)*(ushort *)(param_3 + 0x12));
-  ((int (*)())_gleImagingUnpackData)(param_1,param_5,1,param_6,param_7,(uint)*(ushort *)(param_3 + 0x10),
+  ((void (*)())_gleImagingUnpackData)(param_1,param_5,1,param_6,param_7,(uint)*(ushort *)(param_3 + 0x10),
              (uint)*(ushort *)(param_3 + 0x12),param_8,*(int *)(param_3 + 0x14) + iVar1 * param_4);
-  ((int (*)())_gleImagingScaleAndBias)(param_1,param_2,*(undefined4 *)(param_3 + 0x14),(uint)*(ushort *)(param_3 + 0x10),
+  ((void (*)())_gleImagingScaleAndBias)(param_1,param_2,*(undefined4 *)(param_3 + 0x14),(uint)*(ushort *)(param_3 + 0x10),
              param_4,param_5,1);
   return;
 }

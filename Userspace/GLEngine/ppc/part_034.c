@@ -2353,7 +2353,7 @@ void _glWeightbvARB_CompExec(param_1, param_2, param_3)
   uint param_3;
 {
   ((int (*)())_glWeightbvARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glWeightbvARB_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glWeightbvARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -2446,7 +2446,7 @@ void _glWeightsvARB_CompExec(param_1, param_2, param_3)
   uint param_3;
 {
   ((int (*)())_glWeightsvARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glWeightsvARB_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glWeightsvARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -2537,7 +2537,7 @@ void _glWeightivARB_CompExec(param_1, param_2, param_3)
   uint param_3;
 {
   ((int (*)())_glWeightivARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glWeightivARB_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glWeightivARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -2616,7 +2616,7 @@ void _glWeightfvARB_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glWeightfvARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glWeightfvARB_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glWeightfvARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -2696,7 +2696,7 @@ void _glWeightdvARB_CompExec(param_1, param_2, param_3)
   uint param_3;
 {
   ((int (*)())_glWeightdvARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glWeightdvARB_Exec)(param_1,param_2,param_3);
+  ((double (*)())_glWeightdvARB_Exec)(param_1,param_2,param_3);
   return;
 }
 

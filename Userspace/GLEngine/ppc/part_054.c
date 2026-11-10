@@ -2320,7 +2320,7 @@ int _gleGenMipmapsToLevel(param_1, param_2, param_3, param_4, param_5, param_6)
         _gleAllocateTextureLevel(param_1,param_2,iVar1 + 0xc4);
       }
       _gleSynchronizePluginTextureLevels(param_1,param_2);
-      ((int (*)())_gleGenerateMipmapData)(param_1,param_2,param_3,param_4,param_5);
+      ((void (*)())_gleGenerateMipmapData)(param_1,param_2,param_3,param_4,param_5);
     }
   }
   return 0;

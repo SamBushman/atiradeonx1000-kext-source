@@ -488,7 +488,7 @@ void _glProgramEnvParameter4dvARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glProgramEnvParameter4dvARB_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glProgramEnvParameter4dvARB_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glProgramEnvParameter4dvARB_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -768,7 +768,7 @@ void _glProgramLocalParameter4dvARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glProgramLocalParameter4dvARB_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glProgramLocalParameter4dvARB_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glProgramLocalParameter4dvARB_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -1162,7 +1162,7 @@ int _glPixelMapfv_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glPixelMapfv_Exec)(param_1,*param_2,param_2[1],param_2 + 2);
+  ((void (*)())_glPixelMapfv_Exec)(param_1,*param_2,param_2[1],param_2 + 2);
   return param_2[1] * 4 + 8;
 }
 
@@ -1566,7 +1566,7 @@ void _glPixelMapfv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glPixelMapfv_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glPixelMapfv_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glPixelMapfv_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -1575,7 +1575,7 @@ int _glPixelMapuiv_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glPixelMapuiv_Exec)(param_1,*param_2,param_2[1],param_2 + 2);
+  ((void (*)())_glPixelMapuiv_Exec)(param_1,*param_2,param_2[1],param_2 + 2);
   return param_2[1] * 4 + 8;
 }
 
@@ -1938,7 +1938,7 @@ void _glPixelMapuiv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glPixelMapuiv_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glPixelMapuiv_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glPixelMapuiv_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -1947,7 +1947,7 @@ int _glPixelMapusv_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glPixelMapusv_Exec)(param_1,*param_2,param_2[1],param_2 + 2);
+  ((void (*)())_glPixelMapusv_Exec)(param_1,*param_2,param_2[1],param_2 + 2);
   return (param_2[1] + (param_2[1] & 1)) * 2 + 8;
 }
 
@@ -2305,7 +2305,7 @@ void _glPixelMapusv_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glPixelMapusv_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glPixelMapusv_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glPixelMapusv_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 

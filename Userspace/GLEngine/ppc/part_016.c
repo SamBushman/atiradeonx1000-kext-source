@@ -92,7 +92,7 @@ void _glFogi_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   _glFogi_Exec(param_1,param_2,param_3);
-  ((int (*)())_glFogi_Comp)(param_1,param_2,param_3);
+  ((void (*)())_glFogi_Comp)(param_1,param_2,param_3);
   return;
 }
 
@@ -101,7 +101,7 @@ int _glFogiv_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glFogiv_Exec)(param_1,*param_2,param_2 + 1);
+  ((void (*)())_glFogiv_Exec)(param_1,*param_2,param_2 + 1);
   return 0x14;
 }
 
@@ -281,7 +281,7 @@ void _glFogiv_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glFogiv_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glFogiv_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glFogiv_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -392,7 +392,7 @@ void _glFogCoordfv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glFogCoordfv_Comp)(param_1,param_2);
-  ((int (*)())_glFogCoordfv_Exec)(param_1,param_2);
+  ((double (*)())_glFogCoordfv_Exec)(param_1,param_2);
   return;
 }
 
@@ -410,7 +410,7 @@ void _glFogCoorddv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glFogCoorddv_Comp)(param_1,param_2);
-  ((int (*)())_glFogCoorddv_Exec)(param_1,param_2);
+  ((double (*)())_glFogCoorddv_Exec)(param_1,param_2);
   return;
 }
 

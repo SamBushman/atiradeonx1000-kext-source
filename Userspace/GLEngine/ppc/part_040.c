@@ -6336,7 +6336,7 @@ void _gleShrinkFuncCache(param_1, param_2)
 {
   if (0 < param_2) {
     do {
-      ((int (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(param_1 + 4));
+      ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(param_1 + 4));
       param_2 = param_2 + -1;
     } while (param_2 != 0);
   }
@@ -6400,7 +6400,7 @@ int _gleBuildInterpFunc(param_1, param_2)
   }
   *(uint *)(iVar3 + 8) = param_2;
   if (*(short *)(param_1 + 0x49c2) == *(short *)(param_1 + 0x49c0)) {
-    ((int (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar3 + 4));
+    ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar3 + 4));
   }
   else {
     *(short *)(param_1 + 0x49c2) = *(short *)(param_1 + 0x49c2) + 1;
@@ -6585,7 +6585,7 @@ int _gleBuildCompileFuncTCLNO(param_1, param_2)
   }
   *(uint *)(iVar7 + 8) = param_2;
   if (*(short *)(param_1 + 0x49be) == *(short *)(param_1 + 0x49bc)) {
-    ((int (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar7 + 4));
+    ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar7 + 4));
   }
   else {
     *(short *)(param_1 + 0x49be) = *(short *)(param_1 + 0x49be) + 1;
@@ -6843,7 +6843,7 @@ int _gleBuildCompileFuncNO(param_1, param_2)
   }
   *(uint *)(iVar5 + 8) = param_2;
   if (*(short *)(param_1 + 0x49be) == *(short *)(param_1 + 0x49bc)) {
-    ((int (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar5 + 4));
+    ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar5 + 4));
   }
   else {
     *(short *)(param_1 + 0x49be) = *(short *)(param_1 + 0x49be) + 1;
@@ -7118,7 +7118,7 @@ int _gleBuildCompileFuncTCLAV(param_1, param_2)
   }
   *(uint *)(iVar7 + 8) = param_2;
   if (*(short *)(param_1 + 0x49be) == *(short *)(param_1 + 0x49bc)) {
-    ((int (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar7 + 4));
+    ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar7 + 4));
   }
   else {
     *(short *)(param_1 + 0x49be) = *(short *)(param_1 + 0x49be) + 1;
@@ -7447,7 +7447,7 @@ int _gleBuildCompileFuncAV(param_1, param_2)
   }
   *(uint *)(iVar9 + 8) = param_2;
   if (*(short *)(param_1 + 0x49be) == *(short *)(param_1 + 0x49bc)) {
-    ((int (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar9 + 4));
+    ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar9 + 4));
   }
   else {
     *(short *)(param_1 + 0x49be) = *(short *)(param_1 + 0x49be) + 1;
@@ -8117,7 +8117,7 @@ int FUN_000c4664(param_1, param_2)
   *(uint *)(iVar3 + 8) = uVar1;
   *(uint *)(iVar3 + 0xc) = uVar2;
   if (*(short *)(param_1 + 0x509a) == *(short *)(param_1 + 0x5098)) {
-    ((int (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar3 + 4));
+    ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar3 + 4));
   }
   else {
     *(short *)(param_1 + 0x509a) = *(short *)(param_1 + 0x509a) + 1;
@@ -8305,7 +8305,7 @@ int _gleBuildModelviewTransformFuncNO(param_1, param_2)
   *(uint *)(iVar4 + 8) = uVar14;
   *(uint *)(iVar4 + 0xc) = uVar3;
   if (*(short *)(param_1 + 0x509a) == *(short *)(param_1 + 0x5098)) {
-    ((int (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar4 + 4));
+    ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar4 + 4));
   }
   else {
     *(short *)(param_1 + 0x509a) = *(short *)(param_1 + 0x509a) + 1;

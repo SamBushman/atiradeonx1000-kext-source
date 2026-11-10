@@ -340,7 +340,7 @@ void _glNormal3b_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glNormal3b_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glNormal3b_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glNormal3b_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -391,7 +391,7 @@ void _glNormal3bv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glNormal3bv_Comp)(param_1,param_2);
-  ((int (*)())_glNormal3bv_Exec)(param_1,param_2);
+  ((double (*)())_glNormal3bv_Exec)(param_1,param_2);
   return;
 }
 
@@ -457,7 +457,7 @@ void _glNormal3dv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glNormal3dv_Comp)(param_1,param_2);
-  ((int (*)())_glNormal3dv_Exec)(param_1,param_2);
+  ((double (*)())_glNormal3dv_Exec)(param_1,param_2);
   return;
 }
 
@@ -499,7 +499,7 @@ void _glNormal3fv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glNormal3fv_Comp)(param_1,param_2);
-  ((int (*)())_glNormal3fv_Exec)(param_1,param_2);
+  ((double (*)())_glNormal3fv_Exec)(param_1,param_2);
   return;
 }
 
@@ -556,7 +556,7 @@ void _glNormal3i_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param
   ((void (*)())_glNormal3i_Exec)(param_1,param_2,param_3,param_4,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                    fparam_6,fparam_7,fparam_8,in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8)
   ;
-  ((int (*)())_glNormal3i_Comp)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glNormal3i_Comp)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -676,7 +676,7 @@ void _glNormal3s_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glNormal3s_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glNormal3s_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glNormal3s_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -727,7 +727,7 @@ void _glNormal3sv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glNormal3sv_Comp)(param_1,param_2);
-  ((int (*)())_glNormal3sv_Exec)(param_1,param_2);
+  ((double (*)())_glNormal3sv_Exec)(param_1,param_2);
   return;
 }
 
@@ -1149,7 +1149,7 @@ void _glBeginQuery_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glBeginQuery_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glBeginQuery_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glBeginQuery_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -1177,7 +1177,7 @@ int _glBeginQuery_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glBeginQuery_Exec)(param_1,*param_2,param_2[1]);
+  ((void (*)())_glBeginQuery_Exec)(param_1,*param_2,param_2[1]);
   return 8;
 }
 

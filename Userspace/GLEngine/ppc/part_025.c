@@ -3991,7 +3991,7 @@ void _glUniform4fvARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glUniform4fvARB_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glUniform4fvARB_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glUniform4fvARB_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -4003,7 +4003,7 @@ void _glUniform3fvARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glUniform3fvARB_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glUniform3fvARB_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glUniform3fvARB_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -4015,7 +4015,7 @@ void _glUniform2fvARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glUniform2fvARB_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glUniform2fvARB_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glUniform2fvARB_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -4027,7 +4027,7 @@ void _glUniform1fvARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glUniform1fvARB_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glUniform1fvARB_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glUniform1fvARB_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -4041,7 +4041,7 @@ void _glUniform4iARB_CompExec(param_1, param_2, param_3, param_4, param_5, param
   undefined4 param_6;
 {
   ((int (*)())_glUniform4iARB_Comp)(param_1,param_2,param_3,param_4,param_5,param_6);
-  ((int (*)())_glUniform4iARB_Exec)(param_1,param_2,param_3,param_4,param_5,param_6);
+  ((void (*)())_glUniform4iARB_Exec)(param_1,param_2,param_3,param_4,param_5,param_6);
   return;
 }
 
@@ -4054,7 +4054,7 @@ void _glUniform3iARB_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_5;
 {
   ((int (*)())_glUniform3iARB_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((int (*)())_glUniform3iARB_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glUniform3iARB_Exec)(param_1,param_2,param_3,param_4,param_5);
   return;
 }
 
@@ -4066,7 +4066,7 @@ void _glUniform2iARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glUniform2iARB_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glUniform2iARB_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glUniform2iARB_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -4077,7 +4077,7 @@ void _glUniform1iARB_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glUniform1iARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glUniform1iARB_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glUniform1iARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -4089,7 +4089,7 @@ void _glUniform4ivARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glUniform4ivARB_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glUniform4ivARB_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glUniform4ivARB_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -4101,7 +4101,7 @@ void _glUniform3ivARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glUniform3ivARB_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glUniform3ivARB_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glUniform3ivARB_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -4113,7 +4113,7 @@ void _glUniform2ivARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glUniform2ivARB_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glUniform2ivARB_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glUniform2ivARB_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -4125,7 +4125,7 @@ void _glUniform1ivARB_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glUniform1ivARB_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glUniform1ivARB_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glUniform1ivARB_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 

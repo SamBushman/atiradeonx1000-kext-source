@@ -950,12 +950,12 @@ LAB_00017994:
   uVar1 = 2;
 LAB_000179b4:
   if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) == '\0') {
-    ((int (*)())_gleBindTexture)(param_1,uVar1,param_3,*(undefined4 *)(param_1 + 0x53d4));
+    ((void (*)())_gleBindTexture)(param_1,uVar1,param_3,*(undefined4 *)(param_1 + 0x53d4));
     return;
   }
   iVar2 = *(int *)(param_1 + 0x5148) + 0x8028;
   _pthread_mutex_lock(iVar2);
-  ((int (*)())_gleBindTexture)(param_1,uVar1,param_3,*(undefined4 *)(param_1 + 0x53d4));
+  ((void (*)())_gleBindTexture)(param_1,uVar1,param_3,*(undefined4 *)(param_1 + 0x53d4));
   _pthread_mutex_unlock(iVar2);
   return;
 }
@@ -1069,7 +1069,7 @@ int _gleAddHashNameAndObject(param_1, param_2, param_3)
   undefined4 uVar1;
   
   uVar1 = ((int (*)())_gleAddHashName)(param_2,*(undefined4 *)(param_3 + 4));
-  ((int (*)())_gleAddHashObject)(param_2,param_3);
+  ((void (*)())_gleAddHashObject)(param_2,param_3);
   return uVar1;
 }
 
@@ -2190,7 +2190,7 @@ LAB_000195c0:
     else {
       bVar2 = (*(uint *)(param_1 + 0x3414) & 0xff0000) == 0;
       if ((!bVar2) || ((*(uint *)(param_1 + 0x3414) & 0xff1) != 0)) goto LAB_000195c0;
-      ((int (*)())_glePixelPackSettings)(param_1,param_9,param_10,param_5,param_6,param_1 + 0x31cc,&local_50,local_4c,
+      ((void (*)())_glePixelPackSettings)(param_1,param_9,param_10,param_5,param_6,param_1 + 0x31cc,&local_50,local_4c,
                  &local_60,auStack_5c,&local_58,auStack_54);
       if (local_60 == (local_60 / local_50) * local_50) {
         param_12 = param_12 + local_4c[0];
@@ -2499,7 +2499,7 @@ int _gleTextureImagePut_Fast(param_1, param_2, param_3, param_4, param_5, param_
   iVar4 = ((int (*)())_gleRowBytes)((uint)*(ushort *)(param_2 + 0x10),(uint)*(ushort *)(param_2 + 0x12),
                        (uint)*(ushort *)(param_2 + 0xc));
   iVar7 = *(int *)(param_2 + 0x14) + iVar3 * ((uint)*(ushort *)(param_2 + 0xc) * param_4 + param_3);
-  ((int (*)())_glePixelPackSettings)(param_1,param_7,param_8,param_5,param_6,param_9,&local_50,local_4c,&local_60,auStack_5c
+  ((void (*)())_glePixelPackSettings)(param_1,param_7,param_8,param_5,param_6,param_9,&local_50,local_4c,&local_60,auStack_5c
              ,auStack_58,auStack_54);
   iVar3 = ((int (*)())_gleComponents)(param_7);
   local_4c[0] = param_10 + local_4c[0];
@@ -4874,7 +4874,7 @@ int _gleBuildVertexFuncNO(param_1, param_2, param_3, param_4, param_5, param_6, 
     }
 LAB_0001d42c:
     if (param_2 == 0) {
-      ((int (*)())_gleSetFunctionIDFromCurrent)(param_1,&uStack_d0,param_3,param_4,param_5,param_6,param_7,param_8);
+      ((void (*)())_gleSetFunctionIDFromCurrent)(param_1,&uStack_d0,param_3,param_4,param_5,param_6,param_7,param_8);
     }
     else if (*(int *)(param_1 + 0x48ec) == 0) {
       _gleSetFunctionIDFromArray(param_1,*(int *)(param_1 + 0x4a60) + 0x30,&uStack_d0);

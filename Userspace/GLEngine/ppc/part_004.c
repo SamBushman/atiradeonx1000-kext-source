@@ -334,7 +334,7 @@ int _gliDestroyContext(param_1)
     } while (iVar5 < (int)(uint)*(byte *)(param_1 + 0x85a4));
   }
   if (iVar2 != 0) {
-    ((int (*)())_gleDestroySharedState)(param_1);
+    ((void (*)())_gleDestroySharedState)(param_1);
   }
   iVar2 = _gl_list;
   iVar4 = 0;
@@ -353,9 +353,9 @@ int _gliDestroyContext(param_1)
   _gl_list = *(int *)(param_1 + 0x85a0);
 LAB_0002fa38:
   if (_gl_list == 0) {
-    ((int (*)())_gleDestroyEnableHashTable)();
+    ((void (*)())_gleDestroyEnableHashTable)();
   }
-  ((int (*)())_gleDCBFree)(param_1);
+  ((void (*)())_gleDCBFree)(param_1);
   return iVar1;
 }
 
@@ -364,23 +364,23 @@ int _gleTerminateContext(param_1)
   int param_1;
 {
   ((int (*)())_gleFreeOrphans)(param_1);
-  ((int (*)())_gleFreeVertexMachine)(param_1);
-  ((int (*)())_gleFreePixelMap)(param_1);
-  ((int (*)())_gleFreeMaterials)(param_1);
-  ((int (*)())_gleFreeAllAttrib)(param_1);
-  ((int (*)())_gleFreeVertexArrays)(param_1);
-  ((int (*)())_gleFreeFunctions)(param_1);
-  ((int (*)())_gleFreeQueryMachine)(param_1);
-  ((int (*)())_gleFreeFenceMachine)(param_1);
-  ((int (*)())_gleFreeVertexArrayState)(param_1);
-  ((int (*)())_glePPEmulatorTerminate)(param_1);
-  ((int (*)())_gleFreeBufferState)(param_1);
-  ((int (*)())_gleFreeShaderState)(param_1);
-  ((int (*)())_gleFreePipelineProgramState)(param_1);
-  ((int (*)())_gleReclaimDrawPixelResources)(param_1);
+  ((void (*)())_gleFreeVertexMachine)(param_1);
+  ((void (*)())_gleFreePixelMap)(param_1);
+  ((void (*)())_gleFreeMaterials)(param_1);
+  ((void (*)())_gleFreeAllAttrib)(param_1);
+  ((void (*)())_gleFreeVertexArrays)(param_1);
+  ((void (*)())_gleFreeFunctions)(param_1);
+  ((void (*)())_gleFreeQueryMachine)(param_1);
+  ((void (*)())_gleFreeFenceMachine)(param_1);
+  ((void (*)())_gleFreeVertexArrayState)(param_1);
+  ((void (*)())_glePPEmulatorTerminate)(param_1);
+  ((void (*)())_gleFreeBufferState)(param_1);
+  ((void (*)())_gleFreeShaderState)(param_1);
+  ((void (*)())_gleFreePipelineProgramState)(param_1);
+  ((void (*)())_gleReclaimDrawPixelResources)(param_1);
   _gleFreeFramebufferState(param_1);
-  ((int (*)())_gleFreeMapData)(param_1);
-  ((int (*)())_gleFreeTextureState)(param_1);
+  ((void (*)())_gleFreeMapData)(param_1);
+  ((void (*)())_gleFreeTextureState)(param_1);
   _gleVecFree(*(undefined4 *)(param_1 + 0x4678));
   return 0;
 }
@@ -452,7 +452,7 @@ void _gleFreeVertexMachine(param_1)
   int param_1;
 {
   if (*(int *)(param_1 + 0x4854) != 0) {
-    ((int (*)())_gleDCBFree)(*(int *)(param_1 + 0x4854) + -0x200);
+    ((void (*)())_gleDCBFree)(*(int *)(param_1 + 0x4854) + -0x200);
     *(undefined4 *)(param_1 + 0x485c) = 0;
     *(undefined4 *)(param_1 + 0x4854) = 0;
     *(undefined4 *)(param_1 + 0x4860) = 0;
@@ -623,8 +623,8 @@ void _gleFreeVertexArrays(param_1)
   if (*(int *)(param_1 + 0x49ac) != 0) {
     _free(*(int *)(param_1 + 0x49ac));
   }
-  ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x49b4));
-  ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x49b8));
+  ((void (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x49b4));
+  ((void (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x49b8));
   return;
 }
 
@@ -639,7 +639,7 @@ void _gleFreeFuncCache(param_1)
   if (param_1 != (int *)0x0) {
     do {
       piVar2 = (int *)*piVar1;
-      ((int (*)())_gleDCBFree)(piVar1);
+      ((void (*)())_gleDCBFree)(piVar1);
       piVar1 = piVar2;
     } while (piVar2 != param_1);
   }
@@ -650,16 +650,16 @@ void _gleFreeFuncCache(param_1)
 void _gleFreeFunctions(param_1)
   int param_1;
 {
-  ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x5088));
-  ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x5094));
-  ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x50a0));
-  ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x49d0));
-  ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x49d8));
-  ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x48a0));
-  ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x48a8));
-  ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x48c0));
-  ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x48b0));
-  ((int (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x48b8));
+  ((void (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x5088));
+  ((void (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x5094));
+  ((void (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x50a0));
+  ((void (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x49d0));
+  ((void (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x49d8));
+  ((void (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x48a0));
+  ((void (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x48a8));
+  ((void (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x48c0));
+  ((void (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x48b0));
+  ((void (*)())_gleFreeFuncCache)(*(undefined4 *)(param_1 + 0x48b8));
   return;
 }
 
@@ -761,7 +761,7 @@ int _gleFreeVertexArrayObject(param_1, param_2)
   int iVar3;
   int *piVar4;
   
-  ((int (*)())_gleDestroyPluginVertexArray)(param_1,param_2 + 0x10);
+  ((void (*)())_gleDestroyPluginVertexArray)(param_1,param_2 + 0x10);
   iVar3 = *(int *)(param_2 + 0x358);
   if ((iVar3 != 0) && (iVar1 = *(int *)(iVar3 + 8) + -1, *(int *)(iVar3 + 8) = iVar1, iVar1 == 0)) {
     _gleFreeBufferObject(param_1,iVar3);
@@ -899,13 +899,13 @@ void _gleFreePipelineProgramState(param_1)
         iVar1 = *(int *)(iVar4 + 8) + -1;
         *(int *)(iVar4 + 8) = iVar1;
         if (iVar1 == 0) {
-          ((int (*)())_gleFreePipelineProgramObject)(param_1,iVar4);
+          ((void (*)())_gleFreePipelineProgramObject)(param_1,iVar4);
         }
         if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
           _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
         }
       }
-      ((int (*)())_gleFreePipelineProgramObject)(param_1,*puVar3);
+      ((void (*)())_gleFreePipelineProgramObject)(param_1,*puVar3);
     }
     iVar2 = iVar2 + -1;
     puVar3 = puVar3 + 1;
@@ -918,8 +918,8 @@ void _gleFreePipelineProgramObject(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
-  ((int (*)())_gleClearPipelineProgram)(param_1,param_2 + 0x10);
-  ((int (*)())_gleDestroyPluginPipelineProgram)(param_1,param_2 + 0x10);
+  ((void (*)())_gleClearPipelineProgram)(param_1,param_2 + 0x10);
+  ((void (*)())_gleDestroyPluginPipelineProgram)(param_1,param_2 + 0x10);
   _gleVecFree(param_2);
   return;
 }
@@ -973,7 +973,7 @@ void _gleClearPipelineProgram(param_1, param_2)
   }
   if (iVar4 != 0) {
     if (*(short *)(param_2 + 0x12e) != -0x7e00) {
-      ((int (*)())_glePPUnlogParameters)(param_1,param_2,*(undefined4 *)(iVar4 + 0x28),iVar4 + *(int *)(iVar4 + 0x2c) * 8);
+      ((void (*)())_glePPUnlogParameters)(param_1,param_2,*(undefined4 *)(iVar4 + 0x28),iVar4 + *(int *)(iVar4 + 0x2c) * 8);
     }
     _gleVecFree(iVar4);
     param_2[0x12f] = 0;
@@ -1160,7 +1160,7 @@ int _gleReleaseSharedState(param_1)
   uVar1 = 0;
   if (iVar3 < 2) {
     iVar3 = 0;
-    ((int (*)())_gleDetachShaderObjects)(param_1);
+    ((void (*)())_gleDetachShaderObjects)(param_1);
     puVar2 = puVar4;
     do {
       iVar8 = 0x3ff;
@@ -1554,7 +1554,7 @@ void _gleDestroyEnableHashTable()
     iVar2 = *piVar4;
     piVar4 = piVar4 + 4;
     if (iVar2 != 0) {
-      ((int (*)())_gleFreeEnableHashObject)(iVar2);
+      ((void (*)())_gleFreeEnableHashObject)(iVar2);
     }
     iVar3 = iVar3 + -1;
   } while (-1 < iVar3);
@@ -1568,7 +1568,7 @@ void _gleFreeEnableHashObject(param_1)
   int param_1;
 {
   if (*(int *)(param_1 + 8) != 0) {
-    ((int (*)())_gleFreeEnableHashObject)(*(int *)(param_1 + 8));
+    ((void (*)())_gleFreeEnableHashObject)(*(int *)(param_1 + 8));
   }
   _free(param_1);
   return;
@@ -2124,10 +2124,10 @@ LAB_00031f2c:
     uVar7 = *(uint *)(param_1 + 0x31c);
     if ((uVar7 & 0x15555) != 0) {
       if (*(char *)(param_1 + 0x2e54) != '\0') {
-        ((int (*)())_gleUpdateLightRGBASums)(param_1,param_1 + 0x2c20,0);
+        ((double (*)())_gleUpdateLightRGBASums)(param_1,param_1 + 0x2c20,0);
       }
       if (*(char *)(param_1 + 0x3094) != '\0') {
-        ((int (*)())_gleUpdateLightRGBASums)(param_1,param_1 + 0x2e60,1);
+        ((double (*)())_gleUpdateLightRGBASums)(param_1,param_1 + 0x2e60,1);
       }
       goto LAB_00031f2c;
     }

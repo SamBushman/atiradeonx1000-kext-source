@@ -330,8 +330,8 @@ void _gleUpdateState(param_1)
   if (iVar3 < *(int *)(param_1 + 0x1bac)) {
     *(int *)(param_1 + 0x1bac) = iVar3;
   }
-  ((int (*)())_gleUpdateLightColorChangeFunc)(param_1);
-  ((int (*)())_gleSetColorMaterialEnable)(param_1);
+  ((void (*)())_gleUpdateLightColorChangeFunc)(param_1);
+  ((void (*)())_gleSetColorMaterialEnable)(param_1);
   *(undefined1 *)(*(int *)(param_1 + 0x4dd0) + 0x234) = 0x1f;
   *(undefined1 *)(*(int *)(param_1 + 0x4dd4) + 0x234) = 0x1f;
   iVar3 = 0;
@@ -339,19 +339,19 @@ void _gleUpdateState(param_1)
   do {
     dVar5 = (double)((double (*)())_gleUpdateLightPosition)(param_1,iVar3,dVar5);
     ((void (*)())_gleUpdateLightDirection)(param_1,iVar3,dVar5);
-    ((int (*)())_gleUpdateLightExponents)(param_1,iVar3);
+    ((double (*)())_gleUpdateLightExponents)(param_1,iVar3);
     iVar4 = iVar3 + 1;
-    dVar5 = (double)((int (*)())_gleUpdateLightAttenuation)(param_1,iVar3);
+    dVar5 = (double)((double (*)())_gleUpdateLightAttenuation)(param_1,iVar3);
     iVar3 = iVar4;
   } while (iVar4 < 8);
-  ((int (*)())_gleUpdateInverseNeeds)(param_1);
-  ((int (*)())_gleUpdateLightModel)(param_1);
-  ((int (*)())_gleUpdateClipPlane)(param_1,extraout_r4,in_r5,in_r6);
-  ((int (*)())_gleUpdateMatrixMode)(param_1);
+  ((void (*)())_gleUpdateInverseNeeds)(param_1);
+  ((void (*)())_gleUpdateLightModel)(param_1);
+  ((void (*)())_gleUpdateClipPlane)(param_1,extraout_r4,in_r5,in_r6);
+  ((void (*)())_gleUpdateMatrixMode)(param_1);
   ((int (*)())_gleUpdateMatrixFunc)(param_1);
   ((void (*)())_gleUpdateDepthRangeData)(param_1,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffffb8,
              in_stack_ffffffc0,in_stack_ffffffc8,in_stack_ffffffd0,in_stack_ffffffd8);
-  ((int (*)())_gleUpdateTextureCoordGen)(param_1);
+  ((void (*)())_gleUpdateTextureCoordGen)(param_1);
   iVar3 = 0;
   do {
     iVar4 = iVar3 + 1;
@@ -359,14 +359,14 @@ void _gleUpdateState(param_1)
     iVar3 = iVar4;
   } while (iVar4 < 0x10);
   ((double (*)())_gleUpdateFogData)(param_1);
-  ((int (*)())_gleUpdatePolyMode)(param_1);
-  dVar5 = (double)((int (*)())_gleUpdateEvalData)(param_1);
+  ((void (*)())_gleUpdatePolyMode)(param_1);
+  dVar5 = (double)((double (*)())_gleUpdateEvalData)(param_1);
   ((void (*)())_gleUpdateViewScissorData)(param_1,dVar5,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   puVar1 = PTR__gleSetClipInterpFunc_00112038;
   *(undefined **)(param_1 + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
   *(undefined **)(param_1 + 0x49cc) = puVar1;
-  ((int (*)())_gleSelectVertexAddMaterialFunc)(param_1);
-  ((int (*)())_gleSelectVertexSubmitFunc)(param_1);
+  ((void (*)())_gleSelectVertexAddMaterialFunc)(param_1);
+  ((void (*)())_gleSelectVertexSubmitFunc)(param_1);
   return;
 }
 
@@ -594,8 +594,8 @@ double _gleUpdateLightPosition(int param_1,int param_2,double fparam_1)
   *(undefined4 *)(iVar7 + 0x2884) = a6;
   *(float *)(iVar7 + 0x2888) = *(float *)(iVar7 + 0x2888) + fVar2;
   (**(code **)puVar6)(param_1,iVar7 + 0x2880,iVar7 + 0x2880,in_r6,in_r7,in_r8,a6);
-  ((int (*)())_gleUpdateLightFast)(param_1,param_2);
-  ((int (*)())_gleUpdateLightModelFunc)(param_1);
+  ((void (*)())_gleUpdateLightFast)(param_1,param_2);
+  ((void (*)())_gleUpdateLightModelFunc)(param_1);
   iVar7 = *(int *)(param_1 + 0x5434);
   if (iVar7 == 0) {
     bVar1 = *(byte *)(param_2 * 7 + *(int *)(param_1 + 0x5420) + 0x25b);
@@ -820,8 +820,8 @@ double _gleUpdateLightExponents(param_1, param_2)
   else {
     *(undefined1 *)(iVar6 + 0x4ada) = 0;
   }
-  ((int (*)())_gleUpdateLightFast)(param_1,param_2);
-  ((int (*)())_gleUpdateLightModelFunc)(param_1);
+  ((void (*)())_gleUpdateLightFast)(param_1,param_2);
+  ((void (*)())_gleUpdateLightModelFunc)(param_1);
   return;
 }
 
@@ -912,10 +912,10 @@ void _gleUpdateLightModel(param_1)
   iVar1 = 0;
   do {
     iVar2 = iVar1 + 1;
-    ((int (*)())_gleUpdateLightFast)(param_1,iVar1);
+    ((void (*)())_gleUpdateLightFast)(param_1,iVar1);
     iVar1 = iVar2;
   } while (iVar2 < 8);
-  ((int (*)())_gleUpdateLightModelFunc)(param_1);
+  ((void (*)())_gleUpdateLightModelFunc)(param_1);
   return;
 }
 
@@ -1242,7 +1242,7 @@ int _gleApplyViewScissorTransform(param_1)
   fVar2 = *(float *)(param_1 + 0x4a20);
   fVar3 = *(float *)(param_1 + 0x4a24);
   fVar4 = *(float *)(param_1 + 0x4a28);
-  ((int (*)())_gleMultMatrix)(param_1 + 0x1c80,param_1 + 0x1cc0,param_1 + 0x1bc0);
+  ((void (*)())_gleMultMatrix)(param_1 + 0x1c80,param_1 + 0x1cc0,param_1 + 0x1bc0);
   *(float *)(param_1 + 0x27c0) =
        fVar1 * *(float *)(param_1 + 0x1bc0) + fVar2 * *(float *)(param_1 + 0x1bcc);
   *(float *)(param_1 + 0x27c4) =
@@ -1267,7 +1267,7 @@ int _gleApplyViewScissorTransform(param_1)
        fVar3 * *(float *)(param_1 + 0x1bf4) + fVar4 * *(float *)(param_1 + 0x1bfc);
   *(undefined4 *)(param_1 + 0x27f8) = *(undefined4 *)(param_1 + 0x1bf8);
   *(undefined4 *)(param_1 + 0x27fc) = *(undefined4 *)(param_1 + 0x1bfc);
-  ((int (*)())FUN_00008b68)();
+  ((void (*)())FUN_00008b68)();
   return;
 }
 
@@ -1655,7 +1655,7 @@ LAB_00008ef8:
       if (*(char *)(param_1 + 0x53e6) == cVar4) {
         return;
       }
-      ((int (*)())_gleUpdateInverseNeeds)(param_1);
+      ((void (*)())_gleUpdateInverseNeeds)(param_1);
       return;
     }
   } while( true );
@@ -1691,7 +1691,7 @@ int _gleUpdateTextureParams(param_1, param_2)
       *(uint *)(param_1 + 0x4980) = *(uint *)(param_1 + 0x4980) | 8 << (param_2 & 0x3f);
     }
     *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | 0x10000 << (param_2 & 0x3f);
-    ((int (*)())_gleSelectVertexSubmitFunc)(param_1);
+    ((void (*)())_gleSelectVertexSubmitFunc)(param_1);
     puVar1 = PTR__gleSetClipInterpFunc_00112038;
     *(undefined **)(param_1 + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
     *(undefined **)(param_1 + 0x49cc) = puVar1;
@@ -2208,13 +2208,13 @@ void _gliSetCurrentPluginDispatchTable(param_1)
   if ((*(int *)(param_1 + 0x48d0) != 0) || (*(int *)(param_1 + 0x48d4) != 0)) {
     *(undefined4 *)(param_1 + 0x48d0) = 0;
     *(undefined4 *)(param_1 + 0x48d4) = 0;
-    ((int (*)())_gleUpdatePrimitiveData)(param_1);
+    ((void (*)())_gleUpdatePrimitiveData)(param_1);
     uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xc) == 0);
     *(undefined **)
      ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xc) =
          PTR__glArrayElement_Exec_001120e8;
     _gleUpdateDrawArraysFuncs(param_1);
-    ((int (*)())_gleSelectVertexSubmitFunc)(param_1);
+    ((void (*)())_gleSelectVertexSubmitFunc)(param_1);
     *(undefined4 *)(param_1 + 0x488c) = 0;
     *(undefined4 *)(param_1 + 0x4890) = 0;
     *(undefined4 *)(param_1 + 0x4894) = 0;
@@ -5706,7 +5706,7 @@ LAB_00012744:
   *(undefined1 *)(param_1 + 0x4691) = uVar3;
   *(undefined4 *)(param_1 + 0x757c) = 0xffffffff;
 LAB_00012774:
-  ((int (*)())_gliSetCurrentPluginDispatchTable)(param_1);
+  ((void (*)())_gliSetCurrentPluginDispatchTable)(param_1);
   return uVar6;
 }
 
@@ -5724,13 +5724,13 @@ void _gliUpdatePluginConfig(int param_1,double fparam_1,double fparam_2,double f
   ((void (*)())_gleUpdateDepthRangeData)(param_1,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
              in_stack_ffffffb8,in_stack_ffffffc0,in_stack_ffffffc8,in_stack_ffffffd0,
              in_stack_ffffffd8);
-  ((int (*)())_gleUpdatePolyMode)(param_1);
+  ((void (*)())_gleUpdatePolyMode)(param_1);
   ((void (*)())_gleUpdateViewScissorData)(param_1,fparam_1_00,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   ((int (*)())_gleUpdateTextureTransform)(param_1);
   puVar1 = PTR__gleSetClipInterpFunc_00112038;
   *(undefined **)(param_1 + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
   *(undefined **)(param_1 + 0x49cc) = puVar1;
-  ((int (*)())_gleResetVertexArrays)(param_1);
+  ((void (*)())_gleResetVertexArrays)(param_1);
   return;
 }
 
@@ -8491,7 +8491,7 @@ void _glMatrixMode_Exec(param_1, param_2)
         iVar2 = param_2 - 0x871c;
 LAB_000160d8:
         *(int *)(param_1 + 0x4ff4) = iVar2;
-        ((int (*)())_gleUpdateMatrixMode)(param_1);
+        ((void (*)())_gleUpdateMatrixMode)(param_1);
         return;
       }
       if (param_2 - 0x88c0 < 8) {

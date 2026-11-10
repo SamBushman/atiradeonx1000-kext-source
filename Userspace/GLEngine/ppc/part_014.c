@@ -357,7 +357,7 @@ int _glCallLists_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glCallLists_Exec)(param_1,*param_2,param_2[2],param_2 + 3);
+  ((void (*)())_glCallLists_Exec)(param_1,*param_2,param_2[2],param_2 + 3);
   return param_2[1] + 0xc;
 }
 
@@ -536,7 +536,7 @@ void _glCallLists_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glCallLists_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glCallLists_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glCallLists_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -564,7 +564,7 @@ int _glListBase_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glListBase_Exec)(param_1,*param_2);
+  ((void (*)())_glListBase_Exec)(param_1,*param_2);
   return 4;
 }
 
@@ -604,7 +604,7 @@ void _glListBase_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glListBase_Comp)(param_1,param_2);
-  ((int (*)())_glListBase_Exec)(param_1,param_2);
+  ((void (*)())_glListBase_Exec)(param_1,param_2);
   return;
 }
 
@@ -618,7 +618,7 @@ int _glDrawBuffer_ListExec(param_1, param_2, param_3, param_4, param_5, param_6,
   undefined4 param_6;
   undefined4 param_7;
 {
-  ((int (*)())_glDrawBuffer_Exec)(param_1,*param_2,param_3,param_4,param_5,param_6,param_7);
+  ((void (*)())_glDrawBuffer_Exec)(param_1,*param_2,param_3,param_4,param_5,param_6,param_7);
   return 4;
 }
 
@@ -773,7 +773,7 @@ void _glDrawBuffer_CompExec(param_1, param_2)
   undefined4 in_r9;
   
   ((int (*)())_glDrawBuffer_Comp)(param_1,param_2);
-  ((int (*)())_glDrawBuffer_Exec)(param_1,param_2,in_r5,in_r6,in_r7,in_r8,in_r9);
+  ((void (*)())_glDrawBuffer_Exec)(param_1,param_2,in_r5,in_r6,in_r7,in_r8,in_r9);
   return;
 }
 
@@ -782,7 +782,7 @@ int _glDrawBuffersARB_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glDrawBuffersARB_Exec)(param_1,*param_2,param_2 + 1);
+  ((void (*)())_glDrawBuffersARB_Exec)(param_1,*param_2,param_2 + 1);
   return 0x14;
 }
 
@@ -968,7 +968,7 @@ void _glDrawBuffersARB_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glDrawBuffersARB_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glDrawBuffersARB_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glDrawBuffersARB_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -1732,7 +1732,7 @@ int _glEdgeFlag_ListExec(param_1, param_2)
   undefined4 param_1;
   byte *param_2;
 {
-  ((int (*)())_glEdgeFlag_Exec)(param_1,(uint)*param_2);
+  ((double (*)())_glEdgeFlag_Exec)(param_1,(uint)*param_2);
   return 4;
 }
 
@@ -1765,7 +1765,7 @@ void _glEdgeFlag_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glEdgeFlag_Comp)(param_1,param_2);
-  ((int (*)())_glEdgeFlag_Exec)(param_1,param_2);
+  ((double (*)())_glEdgeFlag_Exec)(param_1,param_2);
   return;
 }
 
@@ -1798,7 +1798,7 @@ void _glEdgeFlagv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glEdgeFlagv_Comp)(param_1,param_2);
-  ((int (*)())_glEdgeFlagv_Exec)(param_1,param_2);
+  ((void (*)())_glEdgeFlagv_Exec)(param_1,param_2);
   return;
 }
 
@@ -1858,7 +1858,7 @@ void _glEvalCoord1dv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glEvalCoord1dv_Comp)(param_1,param_2);
-  ((int (*)())_glEvalCoord1dv_Exec)(param_1,param_2);
+  ((void (*)())_glEvalCoord1dv_Exec)(param_1,param_2);
   return;
 }
 
@@ -1920,7 +1920,7 @@ void _glEvalCoord1fv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glEvalCoord1fv_Comp)(param_1,param_2);
-  ((int (*)())_glEvalCoord1fv_Exec)(param_1,param_2);
+  ((void (*)())_glEvalCoord1fv_Exec)(param_1,param_2);
   return;
 }
 

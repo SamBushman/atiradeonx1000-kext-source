@@ -108,7 +108,7 @@ void _glVertex2iv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glVertex2iv_Comp)(param_1,param_2);
-  ((int (*)())_glVertex2iv_Exec)(param_1,param_2);
+  ((void (*)())_glVertex2iv_Exec)(param_1,param_2);
   return;
 }
 
@@ -162,7 +162,7 @@ void _glVertex3i_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glVertex3i_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glVertex3i_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glVertex3i_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -212,7 +212,7 @@ void _glVertex3iv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glVertex3iv_Comp)(param_1,param_2);
-  ((int (*)())_glVertex3iv_Exec)(param_1,param_2);
+  ((void (*)())_glVertex3iv_Exec)(param_1,param_2);
   return;
 }
 
@@ -269,7 +269,7 @@ void _glVertex4i_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_5;
 {
   ((int (*)())_glVertex4i_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((int (*)())_glVertex4i_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glVertex4i_Exec)(param_1,param_2,param_3,param_4,param_5);
   return;
 }
 
@@ -321,7 +321,7 @@ void _glVertex4iv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glVertex4iv_Comp)(param_1,param_2);
-  ((int (*)())_glVertex4iv_Exec)(param_1,param_2);
+  ((void (*)())_glVertex4iv_Exec)(param_1,param_2);
   return;
 }
 
@@ -369,7 +369,7 @@ void _glVertex2s_CompExec(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_glVertex2s_Comp)(param_1,param_2,param_3);
-  ((int (*)())_glVertex2s_Exec)(param_1,param_2,param_3);
+  ((void (*)())_glVertex2s_Exec)(param_1,param_2,param_3);
   return;
 }
 
@@ -419,7 +419,7 @@ void _glVertex2sv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glVertex2sv_Comp)(param_1,param_2);
-  ((int (*)())_glVertex2sv_Exec)(param_1,param_2);
+  ((void (*)())_glVertex2sv_Exec)(param_1,param_2);
   return;
 }
 
@@ -473,7 +473,7 @@ void _glVertex3s_CompExec(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   ((int (*)())_glVertex3s_Comp)(param_1,param_2,param_3,param_4);
-  ((int (*)())_glVertex3s_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glVertex3s_Exec)(param_1,param_2,param_3,param_4);
   return;
 }
 
@@ -526,7 +526,7 @@ void _glVertex3sv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glVertex3sv_Comp)(param_1,param_2);
-  ((int (*)())_glVertex3sv_Exec)(param_1,param_2);
+  ((void (*)())_glVertex3sv_Exec)(param_1,param_2);
   return;
 }
 
@@ -583,7 +583,7 @@ void _glVertex4s_CompExec(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_5;
 {
   ((int (*)())_glVertex4s_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((int (*)())_glVertex4s_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((void (*)())_glVertex4s_Exec)(param_1,param_2,param_3,param_4,param_5);
   return;
 }
 
@@ -639,7 +639,7 @@ void _glVertex4sv_CompExec(param_1, param_2)
   undefined4 param_2;
 {
   ((int (*)())_glVertex4sv_Comp)(param_1,param_2);
-  ((int (*)())_glVertex4sv_Exec)(param_1,param_2);
+  ((void (*)())_glVertex4sv_Exec)(param_1,param_2);
   return;
 }
 
@@ -1811,7 +1811,7 @@ LAB_000a4f78:
   }
   if (bVar3) {
     _glEnableClientState_Exec(param_1,0x8075);
-    ((int (*)())_glNormalPointer_Exec)(param_1,0x1406,param_3,param_4 + iVar6);
+    ((void (*)())_glNormalPointer_Exec)(param_1,0x1406,param_3,param_4 + iVar6);
   }
   else {
     _glDisableClientState_Exec(param_1,0x8075);
@@ -2668,12 +2668,12 @@ LAB_000a638c:
     if (uVar2 == 3) {
       uVar2 = *(ushort *)(iVar3 + 0x38);
       if (uVar2 == 0x1404) {
-        ((int (*)())_glVertex3iv_Exec)(param_1,iVar9);
+        ((void (*)())_glVertex3iv_Exec)(param_1,iVar9);
         return;
       }
       if (uVar2 < 0x1405) {
         if (uVar2 == 0x1402) {
-          ((int (*)())_glVertex3sv_Exec)(param_1,iVar9);
+          ((void (*)())_glVertex3sv_Exec)(param_1,iVar9);
           return;
         }
       }
@@ -2692,12 +2692,12 @@ LAB_000a638c:
       if (uVar2 == 2) {
         uVar2 = *(ushort *)(iVar3 + 0x38);
         if (uVar2 == 0x1404) {
-          ((int (*)())_glVertex2iv_Exec)(param_1,iVar9);
+          ((void (*)())_glVertex2iv_Exec)(param_1,iVar9);
           return;
         }
         if (uVar2 < 0x1405) {
           if (uVar2 == 0x1402) {
-            ((int (*)())_glVertex2sv_Exec)(param_1,iVar9);
+            ((void (*)())_glVertex2sv_Exec)(param_1,iVar9);
             return;
           }
         }
@@ -2716,12 +2716,12 @@ LAB_000a638c:
     else if (uVar2 == 4) {
       uVar2 = *(ushort *)(iVar3 + 0x38);
       if (uVar2 == 0x1404) {
-        ((int (*)())_glVertex4iv_Exec)(param_1,iVar9);
+        ((void (*)())_glVertex4iv_Exec)(param_1,iVar9);
         return;
       }
       if (uVar2 < 0x1405) {
         if (uVar2 == 0x1402) {
-          ((int (*)())_glVertex4sv_Exec)(param_1,iVar9);
+          ((void (*)())_glVertex4sv_Exec)(param_1,iVar9);
           return;
         }
       }

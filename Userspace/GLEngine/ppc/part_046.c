@@ -2658,7 +2658,7 @@ LAB_000e1350:
                *(undefined4 *)(iVar13 + 0x94c),in_r7,in_r8,4,&local_70,&local_60,pfVar12,dVar21,
                dVar22,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_f9,in_f10,
                (double)*(float *)(iVar13 + 0x964),(double)*(float *)(iVar13 + 0x960),dVar23);
-    ((int (*)())_gleComputeFirstPartial)(param_1,pfVar12,&local_70,&local_60);
+    ((void (*)())_gleComputeFirstPartial)(param_1,pfVar12,&local_70,&local_60);
   }
   puVar4 = PTR__gleVectorNormalize_00112064;
   *pfVar10 = local_6c * local_58 - local_68 * local_5c;
