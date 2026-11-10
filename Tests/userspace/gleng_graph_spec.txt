@@ -400,3 +400,24 @@ func _evaluateImageUnits
   retpick ShGetUniformTypeInfo 1 1 0
   out ShGetUniformTypeInfo 3 0x8b5d 0x8b5e 0x8b5f 0x8b60 0x8b61 0x8b62 0x8b63 0x8b64 0x8b5c 0x1234
   out ShGetUniformTypeInfo 4 0x01010000 0x01000000 0x00010000 0x01010101 0
+
+# ---- _glepLoadRenderers: the plugin list builder (image globals _gle_io_data, _glep_plugin_head; imports IORegistryEntryCreateCFProperty, CFString*, scandir, free) -----------------------------
+# needs FNFUZZ_DATA (Tools/userspace/gleng_data_addrs.py _gle_io_data _glep_plugin_head). _gle_io_data: +0 count of IORegistry entries, +4 -> array of entries (0 = none), +0xc / +0x10 the two
+# function slots (both set: scandir branch; either 0: the code installs _gleDoNonSimpleFlush / _gleBindSurface and does no scan). The count reaches 40 so the 1 << (index & 0x3f) mask word
+# takes shifts past 31. _glep_plugin_head: empty, or a list of plugins (+0 next, +4 path, +0x110 mask) whose paths match the ones the entries can produce.
+type LRIOD 0x14
+  warr 0x04 0x00 0 40 0 1 0x77
+  pick 0x0c 0 fn fn fn
+  pick 0x10 0 fn fn fn
+type LRPLUG 0x208
+  istr 0x04 /System/Library/Extensions/AAA.bundle/Contents/MacOS/AAA|/System/Library/Extensions/BBB.bundle/Contents/MacOS/BBB|/System/Library/Extensions/Other.bundle/Contents/MacOS/Other
+  u32 0x110 0 0xff
+  ptr 0x00 LRPLUG 55
+func _glepLoadRenderers
+  gcopy _gle_io_data LRIOD
+  gptr _glep_plugin_head LRPLUG 50
+  gwatch _gle_io_data 5
+  gwatch _glep_plugin_head 1
+  env GL_RESOURCES /gl/|/gl|-|-
+  retcfstr IORegistryEntryCreateCFProperty AAA|BBB|CCC|AAA|-
+  scandirout GLDriver|GLRendererFloat|GLRendererFloatX|GLDriverXYZ|GLDri|Other|libGL 4
