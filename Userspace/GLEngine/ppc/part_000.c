@@ -32,7 +32,7 @@ int _gliGetVersion(param_1, param_2, param_3)
   int local_38 [3];
   size_t local_2c [5];
   
-  ((int (*)())_glepPluginConnectAll)();
+  ((void (*)())_glepPluginConnectAll)();
   local_40[0] = 0xc;
   host = _mach_host_self();
   kVar1 = _host_info(host,1,aiStack_70,local_40);
@@ -86,30 +86,29 @@ LAB_00001554:
 }
 
 /* _glepPluginConnectAll @ 0x15b4 (124 bytes) */
-int _glepPluginConnectAll()
+void _glepPluginConnectAll()
 {
-  int *in_r3;
-  int *piVar1;
+  int iVar1;
+  int *piVar2;
   
   if (_glep_plugin_head == 0) {
-    in_r3 = (int *)((int (*)())_glepLoadRenderers)();
-    piVar1 = (int *)_glep_plugin_head;
-    while (piVar1 != (int *)0x0) {
-      in_r3 = (int *)((int (*)())_glepPluginConnect)(piVar1);
-      if (in_r3 == (int *)0x0) {
-        in_r3 = (int *)_glepDeletePlugin(piVar1);
-        piVar1 = in_r3;
+    ((void (*)())_glepLoadRenderers)();
+    piVar2 = (int *)_glep_plugin_head;
+    while (piVar2 != (int *)0x0) {
+      iVar1 = ((int (*)())_glepPluginConnect)(piVar2);
+      if (iVar1 == 0) {
+        piVar2 = (int *)_glepDeletePlugin(piVar2);
       }
       else {
-        piVar1 = (int *)*piVar1;
+        piVar2 = (int *)*piVar2;
       }
     }
   }
-  return in_r3;
+  return;
 }
 
 /* _glepLoadRenderers @ 0x1630 (856 bytes) */
-int _glepLoadRenderers()
+void _glepLoadRenderers()
 {
   bool bVar1;
   bool bVar2;
@@ -117,14 +116,11 @@ int _glepLoadRenderers()
   undefined *puVar4;
   undefined *puVar5;
   uint uVar6;
-  undefined4 in_r3;
   int iVar7;
   char *pcVar8;
   int iVar9;
-  undefined4 extraout_r3;
   int iVar10;
   int iVar11;
-  undefined4 extraout_r3_00;
   char *pcVar12;
   uint uVar13;
   uint uVar14;
@@ -141,53 +137,49 @@ int _glepLoadRenderers()
   if (*(int *)PTR__gle_io_data_00112434 != 0) {
     do {
       iVar7 = *(int *)(uVar14 * 4 + *(int *)(puVar5 + 4));
-      in_r3 = 0;
-      if (iVar7 != 0) {
-        iVar7 = _IORegistryEntryCreateCFProperty(iVar7,&DAT_00113e50,*(undefined4 *)puVar4,0);
-        in_r3 = 0;
-        if (iVar7 != 0) {
-          pcVar12 = (char *)0x0;
-          pcVar8 = (char *)_CFStringGetCStringPtr(iVar7,0);
-          bVar1 = pcVar8 == (char *)0x0;
-          if (bVar1) {
-            iVar9 = _CFStringGetLength(iVar7);
-            pcVar12 = (char *)_malloc(iVar9 + 1);
-            bVar2 = pcVar12 == (char *)0x0;
-            if ((!bVar2) && (iVar9 = _CFStringGetCString(iVar7,pcVar12,iVar9 + 1,0), iVar9 != 0)) {
-              pcVar8 = pcVar12;
-              bVar1 = bVar2;
-            }
+      if ((iVar7 != 0) &&
+         (iVar7 = _IORegistryEntryCreateCFProperty(iVar7,&DAT_00113e50,*(undefined4 *)puVar4,0),
+         iVar7 != 0)) {
+        pcVar12 = (char *)0x0;
+        pcVar8 = (char *)_CFStringGetCStringPtr(iVar7,0);
+        bVar1 = pcVar8 == (char *)0x0;
+        if (bVar1) {
+          iVar9 = _CFStringGetLength(iVar7);
+          pcVar12 = (char *)_malloc(iVar9 + 1);
+          bVar2 = pcVar12 == (char *)0x0;
+          if ((!bVar2) && (iVar9 = _CFStringGetCString(iVar7,pcVar12,iVar9 + 1,0), iVar9 != 0)) {
+            pcVar8 = pcVar12;
+            bVar1 = bVar2;
           }
-          else {
-            bVar2 = true;
-          }
-          if (!bVar1) {
-            _strncpy(acStack_140,"/System/Library/Extensions/",0x100);
-            _strncat(acStack_140,pcVar8,0x100);
-            _strcat(acStack_140,".bundle/Contents/MacOS/");
-            _strncat(acStack_140,pcVar8,0x100);
-            for (piVar15 = (int *)_glep_plugin_head; piVar15 != (int *)0x0;
-                piVar15 = (int *)*piVar15) {
-              iVar9 = _strcmp(acStack_140,piVar15 + 1);
-              if (iVar9 == 0) {
-                uVar6 = piVar15[0x44] | 1 << (uVar14 & 0x3f);
-                goto LAB_000017c4;
-              }
-            }
-            piVar15 = (int *)((int (*)())_glepAddPlugin)();
-            if (piVar15 != (int *)0x0) {
-              _strcpy((int)piVar15 + 4,acStack_140);
-              uVar6 = 1 << (uVar14 & 0x3f);
-LAB_000017c4:
-              *(uint *)((int)piVar15 + 0x110) = uVar6;
-            }
-          }
-          if (!bVar2) {
-            _free(pcVar12);
-          }
-          _CFRelease(iVar7);
-          in_r3 = extraout_r3;
         }
+        else {
+          bVar2 = true;
+        }
+        if (!bVar1) {
+          _strncpy(acStack_140,"/System/Library/Extensions/",0x100);
+          _strncat(acStack_140,pcVar8,0x100);
+          _strcat(acStack_140,".bundle/Contents/MacOS/");
+          _strncat(acStack_140,pcVar8,0x100);
+          for (piVar15 = (int *)_glep_plugin_head; piVar15 != (int *)0x0; piVar15 = (int *)*piVar15)
+          {
+            iVar9 = _strcmp(acStack_140,piVar15 + 1);
+            if (iVar9 == 0) {
+              uVar6 = piVar15[0x44] | 1 << (uVar14 & 0x3f);
+              goto LAB_000017c4;
+            }
+          }
+          piVar15 = (int *)((int (*)())_glepAddPlugin)();
+          if (piVar15 != (int *)0x0) {
+            _strcpy((int)piVar15 + 4,acStack_140);
+            uVar6 = 1 << (uVar14 & 0x3f);
+LAB_000017c4:
+            *(uint *)((int)piVar15 + 0x110) = uVar6;
+          }
+        }
+        if (!bVar2) {
+          _free(pcVar12);
+        }
+        _CFRelease(iVar7);
       }
       uVar6 = uVar14 & 0x3f;
       uVar14 = uVar14 + 1;
@@ -208,7 +200,6 @@ LAB_000017c4:
       pcVar8 = pcVar12;
     }
     iVar7 = _scandir(pcVar8,local_40,0,0);
-    in_r3 = 0;
     if (iVar7 != 0) {
       iVar9 = 0;
       if (0 < iVar7) {
@@ -220,7 +211,7 @@ LAB_000017c4:
           if ((iVar10 == 0) || (iVar10 = _memcmp(iVar16,"GLRendererFloat",0xf), iVar10 == 0)) {
             iVar11 = ((int (*)())_glepAddPlugin)();
             if (iVar11 == 0) {
-              return 0;
+              return;
             }
             _strncpy(acStack_140,pcVar8,0x100);
             _strncat(acStack_140,(char *)(*(int *)(iVar3 + local_40[0]) + 8),0x100);
@@ -237,10 +228,9 @@ LAB_000017c4:
         } while (iVar9 < iVar7);
       }
       _free(local_40[0]);
-      in_r3 = extraout_r3_00;
     }
   }
-  return in_r3;
+  return;
 }
 
 /* dyld_stub_binding_helper @ 0x1988 (48 bytes) */

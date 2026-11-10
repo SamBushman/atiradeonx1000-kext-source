@@ -155,7 +155,7 @@ void _glFrontFace_Exec(param_1, param_2)
 void _gliTerminateLibrary()
 {
   ((int (*)())_gliDestroyAllContexts)();
-  ((int (*)())_glepPluginDisconnectAll)();
+  ((void (*)())_glepPluginDisconnectAll)();
   return;
 }
 
@@ -176,22 +176,20 @@ int _gliDestroyAllContexts()
 }
 
 /* _glepPluginDisconnectAll @ 0x55978 (100 bytes) */
-int _glepPluginDisconnectAll()
+void _glepPluginDisconnectAll()
 {
-  undefined4 in_r3;
-  undefined4 uVar1;
-  int *piVar2;
+  int *piVar1;
   
-  piVar2 = _glep_plugin_head;
+  piVar1 = _glep_plugin_head;
   if (_glep_plugin_head != (int *)0x0) {
     do {
-      ((void (*)())_glepPluginDisconnect)(piVar2);
-      piVar2 = (int *)*piVar2;
-    } while (piVar2 != (int *)0x0);
-    uVar1 = ((int (*)())_glepUnloadRenderers)();
-    return uVar1;
+      ((void (*)())_glepPluginDisconnect)(piVar1);
+      piVar1 = (int *)*piVar1;
+    } while (piVar1 != (int *)0x0);
+    ((void (*)())_glepUnloadRenderers)();
+    return;
   }
-  return in_r3;
+  return;
 }
 
 /* _glepPluginDisconnect @ 0x559dc (140 bytes) */
@@ -215,12 +213,10 @@ void _glepPluginDisconnect(param_1)
 }
 
 /* _glepUnloadRenderers @ 0x55a68 (116 bytes) */
-int _glepUnloadRenderers()
+void _glepUnloadRenderers()
 {
   int *piVar1;
   undefined4 *puVar2;
-  undefined4 in_r3;
-  undefined4 extraout_r3;
   int iVar3;
   
   piVar1 = (int *)_glep_plugin_head;
@@ -228,7 +224,6 @@ int _glepUnloadRenderers()
   while (PTR__gle_io_data_00112434 = (undefined *)puVar2, piVar1 != (int *)0x0) {
     iVar3 = *piVar1;
     _free(piVar1);
-    in_r3 = extraout_r3;
     piVar1 = (int *)iVar3;
     puVar2 = (undefined4 *)PTR__gle_io_data_00112434;
   }
@@ -238,7 +233,7 @@ int _glepUnloadRenderers()
   puVar2[1] = 0;
   puVar2[2] = 0;
   puVar2[3] = 0;
-  return in_r3;
+  return;
 }
 
 /* _glTexCoord3f_Exec @ 0x55adc (36 bytes) */

@@ -2,8 +2,8 @@
 
 extern void _gliInitializeLibrary();
 extern int _gliGetVersion();
-extern int _glepPluginConnectAll();
-extern int _glepLoadRenderers();
+extern void _glepPluginConnectAll();
+extern void _glepLoadRenderers();
 extern void dyld_stub_binding_helper();
 extern int _glepAddPlugin();
 extern int _glepPluginConnect();
@@ -543,9 +543,9 @@ extern void _glFinish_Exec(int param_1,double fparam_1,double fparam_2,double fp
 extern void _glFrontFace_Exec();
 extern void _gliTerminateLibrary();
 extern int _gliDestroyAllContexts();
-extern int _glepPluginDisconnectAll();
+extern void _glepPluginDisconnectAll();
 extern void _glepPluginDisconnect();
-extern int _glepUnloadRenderers();
+extern void _glepUnloadRenderers();
 extern void _glTexCoord3f_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3);
 extern void _glGetTexImage_Exec();
 extern void _gleUploadPluginTextureLevel();
