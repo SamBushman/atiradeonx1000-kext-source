@@ -1,8 +1,8 @@
 /* gleng_mock_rtcbuild.c - Phase 3 structured mock of the GLEngine RTC (run-time-compiled) function builders, stock vs rebuilt.
  *   gleng_mock_rtcbuild STOCK REBUILT ANCHOR SA RA CELLS ALLOCVA_S ALLOCVA_R ALLOCFN_S ALLOCFN_R [NTRIALS] [CTL] < spec
- *   CELLS = PROC_S,PROC_R,PUSH_S,PUSH_R  (hex image addresses of the two pointer cells: the stock cells 0x11204c / 0x112054 and the rebuilt
- *           PTR__gle_processor_0011204c / PTR__glePushInstructions_00112054; each holds the address of the global it names)
- *   spec lines: name stock_addr reb_off      (reb_off is the rebuilt FILE address; fn = anchor + (addr - anchor_addr), like fnfuzz ledgers)
+ *   CELLS = PROC_S,PROC_R,PUSH_S,PUSH_R,NOOP_R  (hex image addresses of the two pointer cells: the stock cells 0x11204c / 0x112054 and the rebuilt
+ *           PTR__gle_processor_0011204c / PTR__glePushInstructions_00112054, NOOP_R = PTR__gleRTCNoop_00112058 (stock 0x112058); each holds the address of the global it names)
+ *   spec lines: name stock_addr reb_off (also "@chunk stock reb" = _gleRTCAddAChunk clone to log, "@retfn stock reb" = function that may be returned)      (reb_off is the rebuilt FILE address; fn = anchor + (addr - anchor_addr), like fnfuzz ledgers)
  * Why a mock: fnfuzz hands the builders a garbage context; each builder starts with _gleCreateFuncCacheElem(*(ctx+0x49b8) ...) and ends with an
  * indirect call through _glePushInstructions, so on a garbage context both images fault at once and a mismatch control is NOT detected (11 of 18 blind).
  * Here every case builds its own valid context in a forked child (so the heap layout is identical in the stock and rebuilt child):
@@ -48,6 +48,7 @@ static void hook(int n, unsigned *code) {
 }
 static unsigned long long fnv(const unsigned char *p, size_t n) { unsigned long long h = 1469598103934665603ULL; while (n--) { h ^= *p++; h *= 1099511628211ULL; } return h; }
 static unsigned rs;
+static unsigned rf_s[16], rf_r[16]; static int nrf;
 static unsigned rnd(void) { rs = rs * 1664525u + 1013904223u; return rs >> 8 | rs << 24; }
 typedef struct { bfn_t b; afn_t av, af; unsigned *proc; unsigned *push; } img_t;
 static void child_run(int wfd, img_t *I, unsigned key, unsigned seed) {
@@ -90,17 +91,18 @@ int main(int argc, char **argv) {
     unsigned long ap[2] = { (unsigned long)dlsym(L[0], an), (unsigned long)dlsym(L[1], an) };
     unsigned sa = strtoul(argv[4], 0, 16), ra = strtoul(argv[5], 0, 16);
     unsigned long slide[2] = { ap[0] - sa, ap[1] - ra };
-    unsigned cell[4]; sscanf(argv[6], "%x,%x,%x,%x", &cell[0], &cell[1], &cell[2], &cell[3]);
+    unsigned cell[5] = { 0 }; sscanf(argv[6], "%x,%x,%x,%x,%x", &cell[0], &cell[1], &cell[2], &cell[3], &cell[4]);
     img_t I[2];
     I[0].proc = *(unsigned **)(slide[0] + cell[0]); I[1].proc = *(unsigned **)(slide[1] + cell[1]);
     I[0].push = *(unsigned **)(slide[0] + cell[2]); I[1].push = *(unsigned **)(slide[1] + cell[3]);
     I[0].av = (afn_t)(ap[0] + strtoul(argv[7], 0, 16) - sa); I[1].av = (afn_t)(ap[1] + strtoul(argv[8], 0, 16) - ra);
     I[0].af = (afn_t)(ap[0] + strtoul(argv[9], 0, 16) - sa); I[1].af = (afn_t)(ap[1] + strtoul(argv[10], 0, 16) - ra);
-    unsigned noop[2] = { *(unsigned *)(slide[0] + 0x112058), *(unsigned *)(slide[1] + 0x143328) };   /* PTR__gleRTCNoop cells: hold the (rebased) address of _gleRTCNoop */
+    unsigned noop[2] = { *(unsigned *)(slide[0] + 0x112058), *(unsigned *)(slide[1] + cell[4]) };   /* PTR__gleRTCNoop cells: hold the (rebased) address of _gleRTCNoop */
     int ntr = argc > 11 ? atoi(argv[11]) : 400; int ctl = argc > 12 ? atoi(argv[12]) : 0;
     fprintf(stderr, "cells: stock proc %p push %p ; rebuilt proc %p push %p\n", (void *)I[0].proc, (void *)I[0].push, (void *)I[1].proc, (void *)I[1].push);
     char nm[128]; unsigned sadr[64], radr[64]; char names[64][128]; int nf = 0;
     while (nf < 64 && scanf("%127s %x %x", nm, &sadr[nf], &radr[nf]) == 3) {
+        if (!strcmp(nm, "@retfn")) { rf_s[nrf] = sadr[nf]; rf_r[nrf] = radr[nf]; nrf++; continue; }   /* "@retfn stock reb": a function the builders may return instead of generated code (a pair from the ledger) */
         if (nm[0] == '@') { patch_entry(ap[0] + sadr[nf] - sa, (void *)chunk_hook); patch_entry(ap[1] + radr[nf] - ra, (void *)chunk_hook); continue; }   /* "@chunk stock reb": patch both images' _gleRTCAddAChunk clone */
         strcpy(names[nf], nm); nf++; }
     int total_bad = 0, total = 0;
@@ -114,6 +116,7 @@ int main(int argc, char **argv) {
             total++;
             if (a.status) died0++; if (b.status) died1++;
             int same = a.status == b.status;
+            if (!a.status) { for (int k = 0; k < nrf; k++) { if (a.ret - (unsigned)slide[0] == rf_s[k]) a.ret = 0xdead0000u + k; if (b.ret - (unsigned)slide[1] == rf_r[k]) b.ret = 0xdead0000u + k; } }
             if (!a.status) { if (a.ret == noop[0]) a.ret = 0xdeadbeef; if (b.ret == noop[1]) b.ret = 0xdeadbeef; }   /* each image returns ITS OWN _gleRTCNoop */
             if (same && !a.status) same = a.ret == b.ret && a.hooked_n == b.hooked_n && a.nw == b.nw && !memcmp(a.code, b.code, a.nw * 4) && a.dctx == b.dctx && a.dblk == b.dblk && a.hooked_p == b.hooked_p;
             if (!a.status && a.nw) { produced++; unsigned long long h = fnv((unsigned char *)a.code, a.nw * 4) ^ a.nw; int i; for (i = 0; i < ns; i++) if (seen[i] == h) break; if (i == ns && ns < 512) { seen[ns++] = h; distinct++; } }
@@ -124,7 +127,7 @@ int main(int argc, char **argv) {
                 printf("  first differing word %u of %u/%u; stock:", i, a.nw, b.nw); for (unsigned j = i > 2 ? i - 2 : 0; j < i + 10 && j < a.nw; j++) printf(" %08x", a.code[j]);
                 printf("\n                       rebuilt:"); for (unsigned j = i > 2 ? i - 2 : 0; j < i + 10 && j < b.nw; j++) printf(" %08x", b.code[j]); printf("\n");
             }
-            if (!same) { bad++; total_bad++; if (bad <= 3) printf("DIFF %s trial %d key %#x: status %d/%d ret %#x/%#x nw %u/%u code %s ctx %s blk %s\n", names[f], t, key, a.status, b.status, a.ret, b.ret, a.nw, b.nw, (a.nw == b.nw && !memcmp(a.code, b.code, a.nw * 4)) ? "same" : "DIFFER", a.dctx == b.dctx ? "same" : "DIFFER", a.dblk == b.dblk ? "same" : "DIFFER"); }
+            if (!same) { bad++; total_bad++; if (bad <= 3) printf("DIFF %s trial %d key %#x: status %d/%d ret %#x/%#x (rel %#x/%#x) nw %u/%u code %s ctx %s blk %s\n", names[f], t, key, a.status, b.status, a.ret, b.ret, a.ret - (unsigned)slide[0], b.ret - (unsigned)slide[1], a.nw, b.nw, (a.nw == b.nw && !memcmp(a.code, b.code, a.nw * 4)) ? "same" : "DIFFER", a.dctx == b.dctx ? "same" : "DIFFER", a.dblk == b.dblk ? "same" : "DIFFER"); }
         }
         printf("%-34s %4d trials, %4d differ; stock died %d rebuilt died %d; generated code in %d trials, %d distinct blocks\n", names[f], ntr, bad, died0, died1, produced, distinct);
     }

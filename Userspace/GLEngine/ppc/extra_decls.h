@@ -194,6 +194,7 @@ extern int _gleVAColorFuncCurrent;
 extern int _gleVAColorLoadCopyInt12AV;
 extern int _gleVAColorLoadCopyInt16AV;
 extern int _gleVAColorLoadCurrentAV;
+extern int _gleVACompleteFlushDataRTC_10c098;
 extern int _gleVACompleteFlushDataRTC_10d8a4;
 extern int _gleVACopyVertXYZRTC;
 extern int _gleVACopyVertXYZWRTC;

@@ -6765,7 +6765,7 @@ LAB_000c2950:
   }
   iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar11,iVar9);
   iVar9 = iVar9 + iVar6 * 4;
-  iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)("}`!.|",iVar9);
+  iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVACompleteFlushDataRTC_10c098,iVar9);
   iVar9 = iVar9 + iVar6 * 4;
 LAB_000c29e8:
   iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAEpilogNoTransRTC,iVar9);
@@ -6996,7 +6996,7 @@ LAB_000c2f20:
   }
   iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar8);
   iVar8 = iVar8 + iVar9 * 4;
-  iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)("}`!.|",iVar8);
+  iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVACompleteFlushDataRTC_10c098,iVar8);
   iVar8 = iVar8 + iVar9 * 4;
 LAB_000c2fb8:
   if ((uVar2 & 0x21) == 0x21) {
