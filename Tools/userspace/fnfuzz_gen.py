@@ -19,7 +19,8 @@ CTX = bool(os.environ.get('FNFUZZ_CTX'))
 # FNFUZZ_RZ_STORED=1: a load from the red zone (`lwz r9,0xfff4(r1)`) is the function's own when an earlier instruction of the SAME function stored to that slot (`stfd f0,0xfff0(r1)`: the
 # float->int move of a leaf function; GLEngine has 715 of them), and only a load of a slot nothing stored is a fragment of a caller's frame
 RZ_STORED = bool(os.environ.get('FNFUZZ_RZ_STORED'))
-UNSAFE = re.compile(r'^_?(NS[A-Z]|IO[A-Z]|exit$|scandir$|mach_|host_info$|sysctl$|PP[A-Z]|Sh[A-Z]|glp|pthread_(?!mutex)|fork|exec|kill|abort$|system$|open$|write$|read$|unlink$)')
+# FNFUZZ_ALLOW_EXIT=1: `exit` is not unsafe for the ledger: the harness runs every call in a forked child, so an `exit(1)` on a failed check (the RTC builders do it when their code buffer overflows) only ends that child, and both images must end alike
+UNSAFE = re.compile(r'^_?(NS[A-Z]|IO[A-Z]|' + ('' if os.environ.get('FNFUZZ_ALLOW_EXIT') else 'exit$|') + r'scandir$|mach_|host_info$|sysctl$|PP[A-Z]|Sh[A-Z]|glp|pthread_(?!mutex)|fork|exec|kill|abort$|system$|open$|write$|read$|unlink$)')
 WL = set('memcpy memset bcopy memmove memcmp strlen strcmp strncmp strcpy strncpy strcat strchr strrchr bzero sqrt sqrtf pow powf exp exp2 log log2 log10 sin cos tan atan atan2 asin acos floor ceil fabs fmod modf frexp ldexp abs labs'.split())
 seq = []; lab = {}; cur = None
 for l in open(dis, errors='replace'):
@@ -214,12 +215,15 @@ def ind_chains(ops):
             mm = re.search(r'\((r\d+)\)', o[1])
             if mm: st.pop(mm.group(1), None)
     return out
+# FNFUZZ_FORCE_RZ=name,name: functions whose red-zone loads are dead (the value is loaded into a register and only stored back to the red zone, never reaching memory the caller can see; checked by hand, EVIDENCE section 15)
+FORCE_RZ = set(x for x in os.environ.get('FNFUZZ_FORCE_RZ', '').split(',') if x)
 rows = []
 for ent, (nm, rs) in sorted(fns.items()):
     nm = BYADDR.get(ent, nm)
     if nm in IMPLICIT:
         WHY.append((ent, nm, 'implicit-register-input')); continue
     bad, badc, callees, size, ctxops, used_allowed = scan(ent, rs)
+    if bad == 'redzone' and nm in FORCE_RZ: bad = None; badc = None if badc == 'redzone' else badc
     if CTX:
         if not ((bad or ind_chains(ctxops)) and not badc and ent not in UNS):
             WHY.append((ent, nm, 'unsafe-import-reachable' if (badc or ent in UNS) else 'plain-candidate')); continue         # what the plain ledger cannot run (indirect calls, imports): unless it can reach an unsafe import, that is left for the live test
