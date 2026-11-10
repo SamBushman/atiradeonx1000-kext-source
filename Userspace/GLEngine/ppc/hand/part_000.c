@@ -13,6 +13,8 @@ typedef __vector unsigned short VS;
 typedef __vector unsigned char VB;
 
 /* _gleInvertMatrix_AltiVec @ 0x335c0 (624 bytes) */
+/* the corpus decls.h has no prototype for it (not a decompiled function), so give it the assembler label data.s (PTR__gleInvertMatrix_AltiVec_00110e84) refers to */
+void _gleInvertMatrix_AltiVec(unsigned char *ctx, unsigned int idx) __asm__("_gleInvertMatrix_AltiVec");
 void _gleInvertMatrix_AltiVec(unsigned char *ctx, unsigned int idx)
 {
     unsigned char *p = ctx + (idx << 6);
