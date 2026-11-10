@@ -1102,9 +1102,10 @@ def classify_target(t):
     if t == text_seg_addr and HEADER_SYM:
         return HEADER_SYM              # the image's own Mach header (a word the stock's crt/atexit code passes as the image handle)
     if in_code(t):
-        e = fn_symbol_for(t)
-        if e is None and t in clipped_at:
-            e = clipped_at[t]          # a clipped entry (emitted as asm next to the function it falls into): `_noop` in a glprog InputSrc record
+        # a clipped entry (a few instructions `mfcr r2; b FUN_x` emitted as asm next to the function it falls into) is checked FIRST: its address lies inside the extent of
+        # the function before it (the ledger extent of FUN_000d7e1c runs to 0xd8124, the stock `_gleFeedbackLineStripFunc` entry is 0xd8118), so fn_symbol_for would answer
+        # `FUN_000d7e1c+764`, the middle of that function's rebuilt code, for the pointer slot PTR__gleFeedbackLineStripFunc (GLEngine, found by datacmp.py)
+        e = clipped_at.get(t) or fn_symbol_for(t)      # (glprog: `_noop` in an InputSrc record)
         if e is None and any(lo == t for lo, hi in extents):
             pass                       # a raw extent starts here (code no ledger function owns): it is emitted as _raw_entry_<addr> below, whatever name the stock's nlist gives it (GLEngine: the _gle*Filter{1,2,3} pixel-conversion routines, reached only through data pointers and not defined by any corpus function)
         elif e is None and not any(sc_['name'] == '__text' and sc_['addr'] <= t < sc_['addr'] + sc_['size'] for sc_ in code_secs):
