@@ -627,7 +627,7 @@ int main(int argc, char **argv) {
             printf("IMP %-40s live %d/%d trials (%d ended in a fault in both images), %u calls, imports:%s\n", c->name, live, trials, crash2, lcalls, nm[0] ? nm : " -"); if (live) nlive++; }
         if (nd == trials * (c->rc == 'd' ? 2 : 1)) { nnondet++; continue; }
         if (diffs) { ndiff++; printf("DIFF %-40s %x (%s->%c, %d trials: %d differ, %d agree) %s\n", c->name, c->stock_addr, c->pc, c->rc, trials, diffs, good, why); }
-        else if (crash2 && good == crash2) { nuninf++; }
+        else if (crash2 && good == crash2) { nuninf++; if (getenv("FNFUZZ_LISTUNINF")) printf("UNINF %-40s %x (%s->%c) every one of %d trials ended in a signal in both images\n", c->name, c->stock_addr, c->pc, c->rc, trials); }
         nboth_crash += crash2;
     }
     if (interpose) printf("interposer: %d of %d functions reached at least one stubbed import in a trial that ended normally in both images\n", nlive, ncomp);
