@@ -2460,7 +2460,7 @@ void _gleInitGLDState(param_1)
   *(undefined2 *)(0x31b4 + param_1 + 4) = 0x207;
   *(undefined2 *)(param_1 + 0x31be) = 0x1e00;
   *(undefined1 *)(param_1 + 0x3e90) = 1;
-  ((code **)_gleNullMemoryPointers)[param_1] = (code *)0x0;
+  ((unsigned char *)0x3e94)[param_1] = 0x0;
   *(undefined2 *)(param_1 + 0x31ba) = 0x1e00;
   *(undefined2 *)(param_1 + 0x31bc) = 0x1e00;
   *(undefined4 *)(param_1 + 0x31c0) = 0;
@@ -2753,7 +2753,7 @@ void _gleInitGLDState(param_1)
     iVar10 = iVar10 + -1;
   } while (iVar10 != 0);
   *(undefined2 *)(param_1 + 0x42cc) = 0x8532;
-  ((code **)_gleAllocFunctions)[param_1] = (code *)0x1;
+  ((unsigned char *)0x42c0)[param_1] = 0x1;
   *(undefined2 *)(param_1 + 0x42f6) = 0x1906;
   iVar9 = 1;
   *(undefined2 *)(param_1 + 0x42d4) = 0xb60;

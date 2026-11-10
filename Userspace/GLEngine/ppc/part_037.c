@@ -716,7 +716,7 @@ void _glEnableVertexAttribARB_Exec(param_1, param_2, param_3)
         iVar2 = _gleGetMapData(param_1);
         *(uint *)(param_1 + 0x74d8) = *(uint *)(param_1 + 0x74d8) | 1 << (param_2 & 0x3f);
         *(char *)(param_2 + param_1 + 0x7524) =
-             (char)((code **)_gleSelectVertexAddMaterialFunc)[param_2 + iVar2] << 2;
+             (char)((unsigned char *)0x9da8)[param_2 + iVar2]<< 2;
         return;
       }
       if (param_3 == 0x8a01) {
@@ -938,7 +938,7 @@ void _glGetVertexAttribdvARB_Exec(param_1, param_2, param_3, param_4)
   }
   if (param_3 == 0x8a02) {
     iVar9 = _gleGetMapData(param_1);
-    cVar1 = ((code **)_gleSelectVertexAddMaterialFunc)[param_2 + iVar9];
+    cVar1 = ((unsigned char *)0x9da8)[param_2 + iVar9];
 LAB_000b0dcc:
     uStack_1c = (uint)(byte)cVar1;
   }
@@ -1068,7 +1068,7 @@ LAB_000b0ed8:
         iVar7 = param_2 * 0xb0 + iVar9;
         pfVar5 = (float *)(iVar7 + 0x2cb8);
         for (iVar9 = *(int *)(iVar7 + 0x2ca8) *
-                     (uint)(byte)((code **)_gleSelectVertexAddMaterialFunc)[param_2 + iVar9]; iVar9 != 0;
+                     (uint)(byte)((unsigned char *)0x9da8)[param_2 + iVar9]; iVar9 != 0;
             iVar9 = iVar9 + -1) {
           fVar2 = *pfVar5;
           pfVar5 = pfVar5 + 1;
@@ -1126,7 +1126,7 @@ void _glGetVertexAttribfvARB_Exec(param_1, param_2, param_3, param_4)
   }
   if (param_3 == 0x8a02) {
     iVar6 = _gleGetMapData(param_1);
-    cVar1 = ((code **)_gleSelectVertexAddMaterialFunc)[param_2 + iVar6];
+    cVar1 = ((unsigned char *)0x9da8)[param_2 + iVar6];
 LAB_000b1220:
     *param_4 = GH_U2F((unsigned int)(((byte)cVar1 | 0x4b000000))) - 8388608.0;
   }
@@ -1253,7 +1253,7 @@ LAB_000b1334:
           iVar6 = _gleGetMapData(param_1);
           iVar5 = param_2 * 0xb0 + iVar6;
           iVar7 = *(int *)(iVar5 + 0x2ca8) *
-                  (uint)(byte)((code **)_gleSelectVertexAddMaterialFunc)[param_2 + iVar6];
+                  (uint)(byte)((unsigned char *)0x9da8)[param_2 + iVar6];
           iVar6 = 0;
           for (; iVar7 != 0; iVar7 = iVar7 + -1) {
             param_4[iVar6] = *(float *)(iVar5 + 0x2cb8 + iVar6 * 4);
@@ -1299,7 +1299,7 @@ void _glGetVertexAttribivARB_Exec(param_1, param_2, param_3, param_4)
   if (param_2 < 0x10) {
     if (param_3 == 0x8a02) {
       iVar4 = _gleGetMapData(param_1);
-      uVar2 = (uint)(byte)((code **)_gleSelectVertexAddMaterialFunc)[param_2 + iVar4];
+      uVar2 = (uint)(byte)((unsigned char *)0x9da8)[param_2 + iVar4];
     }
     else {
       if (param_3 < 0x8a03) {
@@ -1420,7 +1420,7 @@ LAB_000b1734:
             iVar4 = _gleGetMapData(param_1);
             iVar3 = param_2 * 0xb0 + iVar4;
             iVar5 = *(int *)(iVar3 + 0x2ca8) *
-                    (uint)(byte)((code **)_gleSelectVertexAddMaterialFunc)[param_2 + iVar4];
+                    (uint)(byte)((unsigned char *)0x9da8)[param_2 + iVar4];
             iVar4 = 0;
             for (; iVar5 != 0; iVar5 = iVar5 + -1) {
               param_4[iVar4] = (int)GH_F2U(*(float *)(iVar4 * 4 + iVar3 + 0x2cb8));

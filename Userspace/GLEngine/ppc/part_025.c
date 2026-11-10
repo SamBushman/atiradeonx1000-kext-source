@@ -1132,7 +1132,7 @@ LAB_0008879c:
                 else {
                   if ((local_58[1] != 0) ||
                      (iVar6 = *(int *)(iVar18 * 4 + *(int *)(iVar9 + 0x44)),
-                     *(code **)(iVar6 + 0x20) != restFP)) {
+                     *(code **)(iVar6 + 0x20) != (code *)0x8b30)) {
                     bVar1 = false;
                     goto LAB_00088784;
                   }

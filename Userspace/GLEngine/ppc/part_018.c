@@ -782,7 +782,7 @@ int _glMap1VertexAttrib1ARB_ListExec(param_1, param_2)
   iVar6 = param_2[1];
   iVar3 = iVar2 + iVar5 * 0xb0;
   *(int *)(iVar3 + 0x2ca8) = iVar6;
-  ((code **)_gleSelectVertexAddMaterialFunc)[iVar5 + iVar2] = (code *)0x1;
+  ((unsigned char *)0x9da8)[iVar5 + iVar2] = 0x1;
   iVar2 = param_2[2];
   iVar5 = param_2[3];
   *(int *)(iVar3 + 0x2cb4) = param_2[4];
@@ -823,7 +823,7 @@ int _glMap1VertexAttrib2ARB_ListExec(param_1, param_2)
   iVar4 = iVar3 + iVar2 * 0xb0;
   *(int *)(iVar4 + 0x2ca8) = iVar6;
   iVar5 = iVar4 + 0x2ca8;
-  ((code **)_gleSelectVertexAddMaterialFunc)[iVar2 + iVar3] = (code *)0x2;
+  ((unsigned char *)0x9da8)[iVar2 + iVar3] = 0x2;
   iVar2 = param_2[3];
   iVar3 = param_2[4];
   *(int *)(iVar4 + 0x2cac) = param_2[2];
@@ -860,7 +860,7 @@ int _glMap1VertexAttrib3ARB_ListExec(param_1, param_2)
   iVar4 = iVar3 + iVar2 * 0xb0;
   *(int *)(iVar4 + 0x2ca8) = iVar6;
   iVar5 = iVar4 + 0x2ca8;
-  ((code **)_gleSelectVertexAddMaterialFunc)[iVar2 + iVar3] = (code *)0x3;
+  ((unsigned char *)0x9da8)[iVar2 + iVar3] = 0x3;
   iVar2 = param_2[3];
   iVar3 = param_2[4];
   *(int *)(iVar4 + 0x2cac) = param_2[2];
@@ -898,7 +898,7 @@ int _glMap1VertexAttrib4ARB_ListExec(param_1, param_2)
   iVar4 = param_2[1];
   iVar3 = iVar2 + iVar1 * 0xb0;
   *(int *)(iVar3 + 0x2ca8) = iVar4;
-  ((code **)_gleSelectVertexAddMaterialFunc)[iVar1 + iVar2] = (code *)0x4;
+  ((unsigned char *)0x9da8)[iVar1 + iVar2] = 0x4;
   iVar1 = param_2[3];
   iVar2 = param_2[4];
   *(int *)(iVar3 + 0x2cac) = param_2[2];
@@ -1654,7 +1654,7 @@ void _glMapVertexAttrib1fARB_Exec(int param_1,uint param_2,uint param_3,undefine
                    ,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,
                    in_stack_ffffffa0,in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8);
 LAB_0006f4c8:
-        ((code **)_gleSelectVertexAddMaterialFunc)[param_2 + iVar2] = SUB41(param_3,0);
+        ((unsigned char *)0x9da8)[param_2 + iVar2]= SUB41(param_3,0);
         return;
       }
     }
@@ -1811,7 +1811,7 @@ void _glMapVertexAttrib1dARB_Exec(int param_1,uint param_2,uint param_3,undefine
                    iVar2 + param_2 * 0xb0 + 0x2ca8,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,
                    in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
 LAB_0006f8cc:
-        ((code **)_gleSelectVertexAddMaterialFunc)[param_2 + iVar2] = SUB41(param_3,0);
+        ((unsigned char *)0x9da8)[param_2 + iVar2]= SUB41(param_3,0);
         return;
       }
     }

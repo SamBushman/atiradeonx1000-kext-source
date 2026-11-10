@@ -4616,7 +4616,7 @@ int _gleSetAttrib(param_1, param_2, param_3)
           else {
             cVar5 = '\x04';
             if (*(int *)(param_1 + 0x7450) != 0) {
-              cVar5 = (char)((code **)_gleSelectVertexAddMaterialFunc)[uVar4 + *(int *)(param_1 + 0x7450)] << 2
+              cVar5 = (char)((unsigned char *)0x9da8)[uVar4 + *(int *)(param_1 + 0x7450)]<< 2
               ;
             }
             *(char *)(param_1 + uVar4 + 0x7524) = cVar5;
@@ -4854,7 +4854,7 @@ int _gleSetAttrib(param_1, param_2, param_3)
       else {
         cVar5 = '\x04';
         if (*(int *)(param_1 + 0x7450) != 0) {
-          cVar5 = (char)((code **)_gleSelectVertexAddMaterialFunc)[uVar4 + *(int *)(param_1 + 0x7450)] << 2;
+          cVar5 = (char)((unsigned char *)0x9da8)[uVar4 + *(int *)(param_1 + 0x7450)]<< 2;
         }
         *(char *)(param_1 + uVar4 + 0x7524) = cVar5;
       }
@@ -5317,11 +5317,11 @@ LAB_0004cd60:
     goto LAB_0004cdb0;
   case 0x1404:
     iVar8 = 4;
-    param_3 = _gleUpdatePolyMode;
+    param_3 = (code *)0x9404;
     break;
   case 0x1405:
     iVar8 = 5;
-    param_3 = _gleUpdatePolyMode;
+    param_3 = (code *)0x9404;
     break;
   case 0x1406:
     iVar8 = 6;

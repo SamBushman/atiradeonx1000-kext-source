@@ -331,15 +331,18 @@ if os.environ.get('CORPUS_SLICE') and os.path.exists(os.path.join(src, 'RANGES.t
     # every 32-bit constant a function builds from immediates (`lis`+`ori`/`addi`, `li`): a function symbol Ghidra prints for one of these is the NUMBER (a PIC
     # image forms real code addresses relative to the PIC base, never with lis/ori) - see fix_literal_syms()
     _LITC = {}
+    _IMM16 = {}   # per function: every D-form 16-bit immediate / displacement field (fix_literal_syms: a NAMED function whose address is such a number)
+    _DFORM = set(range(7, 16)) | set(range(24, 30)) | set(range(32, 56))   # mulli subfic cmpli cmpi addic addic. addi addis, ori..andis., lwz..stfdu
     for _l in open(os.path.join(src, 'RANGES.tsv')):
         _f = _l.rstrip('\n').split('\t')
         if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
-            _cs = set()
+            _cs = set(); _i16 = set()
             for _r in _f[3].split(';'):
                 if not _r: continue
                 _lo, _hi = (int(x, 16) for x in _r.split('-'))
                 for x in range(_lo, _hi, 4):
                     w = _word(x)
+                    if (w >> 26) in _DFORM: _i16.add(w & 0xffff)                          # the 16-bit immediate / displacement field of any D-form instruction (cmpwi, ori, lbz, stb, ...)
                     if ((w >> 26) not in (14, 15)) or ((w >> 16) & 31) != 0: continue      # li rD,simm (14) / lis rD,imm (15): addi / addis with rA = 0
                     rd = (w >> 21) & 31
                     if (w >> 26) == 14: hi = (w & 0xffff) - (0x10000 if w & 0x8000 else 0) & 0xffffffff if not w & 0x8000 else ((w & 0xffff) | 0xffff0000)
@@ -351,7 +354,7 @@ if os.environ.get('CORPUS_SLICE') and os.path.exists(os.path.join(src, 'RANGES.t
                         if op2 == 24 and ((w2 >> 21) & 31) == rd: _cs.add(hi | (w2 & 0xffff))                 # ori rA,rD,imm
                         elif op2 == 14 and ((w2 >> 16) & 31) == rd: _cs.add((hi + ((w2 & 0xffff) - (0x10000 if w2 & 0x8000 else 0))) & 0xffffffff)   # addi rA,rD,simm
                         if op2 in (14, 15, 24, 25, 32, 33, 34, 35) and ((w2 >> 21) & 31 if op2 in (14, 15, 32, 33, 34, 35) else (w2 >> 16) & 31) == rd and y != x: break   # rD overwritten
-            _LITC[int(_f[0], 16)] = _cs
+            _LITC[int(_f[0], 16)] = _cs; _IMM16[int(_f[0], 16)] = _i16
     _FRSPCT = {}   # functions in which a `frsp` / `lfs` result is converted to an integer (`frsp fX,fY` ... `fctiwz fZ,fX`): a REAL float -> int conversion of a float value
     for _l in open(os.path.join(src, 'RANGES.tsv')):
         _f = _l.rstrip('\n').split('\t')
@@ -630,6 +633,30 @@ def fix_literal_syms(b, entry):
         n += 1; return '0x%s' % m.group(2)
     b = re.sub(r'(?<![\w.>])(&?)(?:FUN|LAB)_([0-9a-f]{8})\b(?!\s*\()', rep, b)
     b = re.sub(r'(?<![\w.>])(&)(?:DAT|UNK|PTR_DAT|PTR_LAB)_([0-9a-f]{8})\b', rep, b)     # the ADDRESS of a data object that is really a built constant
+    # a NAMED function (GLEngine's symbol table) printed for a number: `x == _glePreInitVertexSubmitFunc` is `cmpwi r28,0x2100` (GL_MODULATE), `== restFP` is
+    # `cmpwi r,0x8b30` (GL_FRAGMENT_SHADER), `param_3 = _gleUpdatePolyMode` is `ori r27,r27,0x9404`, `_gleSelectVertexAddMaterialFunc[i] = 1` is
+    # `stb r0,0x9da8(r9)` (`addis r9,r9,1; stb r0,-0x6258(r9)`). The link tree resolves the name to the REBUILT function's address, so the rebuilt code compared with /
+    # indexed from that address. This image is a PIC bundle: code addresses are formed relative to the PIC base, never as an immediate, so a function name that is not
+    # called and whose address is a 16-bit immediate / displacement (or a lis/ori constant) of THIS function is that number.
+    imm = (_IMM16.get(entry) or set()) | cs
+    named = [nm for nm, ad in fn_addr_of.items() if not nm.startswith('FUN_') and ad in imm and ad < 0x10000 and re.search(r'(?<![\w.>])%s\b' % re.escape(nm), b)]
+    if named:
+        _nrx = '|'.join(re.escape(nm) for nm in sorted(named, key=len, reverse=True))
+        # a one-byte table indexed from the symbol: the index is a plain byte offset (Ghidra's `code` is one byte wide; the `(code **)` cast scaled it by 4 and stored a pointer)
+        def _tab(m):
+            nonlocal n
+            n += 1
+            tail = ''
+            if m.group(3):
+                tail = ' = %s;' % m.group(3)
+            elif m.group(4):
+                tail = ' == %s' % m.group(4)
+            return '((unsigned char *)0x%x)[%s]%s' % (fn_addr_of[m.group(1)], m.group(2), tail)
+        b = re.sub(r'\(\(code \*\*\)(%s)\)\s*\[([^\[\]]*)\]\s*(?:=(?!=)\s*\(code \*\)(0x[0-9a-fA-F]+)\s*;|==\s*\(code \*\)(0x[0-9a-fA-F]+))?' % _nrx, _tab, b)
+        def _nm(m):
+            nonlocal n
+            n += 1; return '(code *)0x%x' % fn_addr_of[m.group(1)]
+        b = re.sub(r'(?<![\w.>&])(%s)\b(?!\s*\()(?!\s*\n\s*\()' % _nrx, _nm, b)
     return b, n
 def _operand(t, i):
     """end index of the primary expression starting at t[i] (after optional unary - * & and casts): an identifier with subscripts / member

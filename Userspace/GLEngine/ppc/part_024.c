@@ -1602,7 +1602,7 @@ LAB_00086e94:
     *(undefined4 *)(param_1 + 0x7574) = uVar2;
     return 0;
   }
-  if (param_2 == restFP) {
+  if (param_2 == (code *)0x8b30) {
     iVar3 = 0x38;
   }
   else {
@@ -1636,7 +1636,7 @@ LAB_00086e94:
     _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
   }
   _ShInitialize();
-  if (param_2 == restFP) {
+  if (param_2 == (code *)0x8b30) {
     if (puVar4 == (undefined4 *)0xffffffcc) goto LAB_00086f70;
   }
   else {

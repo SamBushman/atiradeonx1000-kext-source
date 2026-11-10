@@ -1695,7 +1695,7 @@ LAB_0009abe0:
                     bVar1 = pcVar9 == (code *)0x104;
                   }
                   else {
-                    if (pcVar9 == _glePreInitVertexSubmitFunc) goto LAB_0009a770;
+                    if (pcVar9 == (code *)0x2100) goto LAB_0009a770;
                     bVar1 = pcVar9 == (code *)0x84e7;
                   }
                   if (!bVar1) goto switchD_0009a048_caseD_86da;
@@ -1726,7 +1726,7 @@ LAB_0009a770:
                       bVar1 = pcVar9 == (code *)0x104;
                     }
                     else {
-                      bVar1 = pcVar9 == _glePreInitVertexSubmitFunc;
+                      bVar1 = pcVar9 == (code *)0x2100;
                     }
                     if (!bVar1) goto switchD_0009a048_caseD_86da;
                   }

@@ -838,7 +838,7 @@ void _glNormalPointer_Exec(param_1, param_2, param_3, param_4)
         param_2 = (code *)0x9402;
         break;
       case 0x1404:
-        param_2 = _gleUpdatePolyMode;
+        param_2 = (code *)0x9404;
       case 0x1406:
         iVar3 = 4;
         break;
