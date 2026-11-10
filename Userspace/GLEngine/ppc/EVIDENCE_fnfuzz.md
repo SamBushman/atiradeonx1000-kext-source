@@ -103,15 +103,35 @@ Verification (image 05a0a503): `image_function_diff.py` a3a6228a vs 05a0a503: 17
 `_gleVPGetParameterPtr`, `_glGetPixelMapuiv_Exec`, whose only change is a displacement that moves with the code layout (`lis r2,0x2 -> 0x3`, `addi r2,r2,0x88 -> 0x428`). All 26 `_glWeight*` functions
 (run20_weight.log): `FNFUZZ_LISTCTX=1 FNFUZZ_FLOATARGS=1` with stack fill 0, 01010101 and none, 48 trials each: 1248 trials, 0 differ, three times.
 
-## 10. Totals (images a3a6228a for run16-run19, 05a0a503 for run20)
+## 10. Void signatures (classes #15b / #15c, images 5054b4a5 and 955406de)
 
-- Plain ledger (2673 candidates): complete. run16 covered 0..844 (30 DIFF lines, sections 1-5), run18 A/B/C covered 845..2672 (A 24, B 15, C 3 DIFF lines; the partial run16 ranges from index 1000 are superseded by it).
-  Every DIFF line is explained by a section of this file: `_Comp` list compilers on a random context -> section 5 and the family run below; `_gleLookUpTexture1D`, `_gleLookUpNonProxyTexture1D`,
-  `_gleLookUpNonProxyTexture3D` -> section 2 (stock loads ctx+0x53d4 first; random ctx faults in stock only; 48 of 48 pass with `FNFUZZ_LISTCTX=1`, run19_lookup.log).
-- ctx ledger (595 candidates): complete; the tail 555..594 (run17) has 0 DIFFs.
-- `_Comp` family (966 functions) on a valid list context: run19 26 DIFFs = 14 Weight (section 9, fixed) + 12 f1-only. run20 on 05a0a503: **12 DIFFs, all f1-only, digest and r3 equal**:
-  `_glMapVertexAttrib1dARB_Comp` (f1 +1.28125 / -1.28125) and the 11 `_glRasterPos{2,3,4}{i,s,iv,sv}_Comp` (rebuilt f1 = c24bc19587859393 = the magic-double constant left in f1, stock f1 = whatever the last
-  float operation left). These stock functions are void (they end in `blr` with no value computed); the corpus declares a `double` return because Ghidra's signature comes from register liveness. Not changed (same
-  decision as section 1: a `void` return would only hide the leftover).
+Section 1 left 30 stock-void functions declared `int`/`double` because Ghidra's signature comes from register liveness; the corpus then returned an unassigned `extraout_r3` / `extraout_f1` local (uninitialised in the
+rebuilt image, a leftover register in the stock). Decision (user, Nov 9): match the stock's signatures. 78 functions are now `void` in the analysed Ghidra copy (`SetReturnType.java void:<entry>`), 2139 void definitions
+in the corpus, no `return extraout_*` left. Not reproducing the leftover register value does not change external behaviour for any direct caller (no caller reads it); an indirect dispatch-table caller that read r3/f1
+after a stock-void function would be untraceable statically, so that part is "no reader found", not proven.
+Defect #15c found by the first void build: a void definition plus an `int`-typed same-part call cast (`((int (*)())callee)(...)`) made gcc emit `trap` (419 instructions, SIGTRAP st=5 in 285 DIFF lines of run22).
+`ghidra2c.py` now casts to the callee's defined return type (`_rt_by_name`, 955406de); `grep -c "	trap"` of the image disassembly is 0 and must stay 0 after every build.
+
+## 11. Class #16: a function name printed for a number (image 866643c7)
+
+Ghidra prints a numeric constant that equals the address of a function as that function's name (non-call use); the link tree resolves the name to the REBUILT function's address. 36 corpus sites:
+`_glePreInitVertexSubmitFunc` = 0x2100 (GL_MODULATE) in 12 compares (`_glTexEnv{f,fv,i,iv}_Exec`), `restFP` = 0x8b30 (GL_FRAGMENT_SHADER) in 3 compares (`_glCreateShaderObjectARB_Exec`, `_glLinkProgramARB_Exec`),
+`_gleUpdatePolyMode` = 0x9404 in 3 assignments, and the byte tables `_gleSelectVertexAddMaterialFunc` = 0x9da8 (15 sites: the MapData per-attribute flag bytes, `stb r0,-0x6258(r9)` after `addis r9,r9,1`),
+`_gleNullMemoryPointers` = 0x3e94 and `_gleAllocFunctions` = 0x42c0 (1 each). The compares could never match the enum values; the byte tables were indexed as `code **` (index scaled by 4, word store).
+This is the cause of the stock-returns / rebuilt-SIGBUS DIFFs of `_glMap1VertexAttrib{1,2,3,4}ARB_ListExec` that run16, run22 and run23 reported and that had not been root-caused.
+Fix (`ghidra2c.py` `fix_literal_syms`): a NAMED function that is not called and whose address is a 16-bit D-form immediate/displacement (or a lis/ori constant) of the same function is that number; a
+`((code **)NAME)[i]` table with such a base becomes `((unsigned char *)0xADDR)[i]`. Exactly those 36 lines change (git diff of 866643c7). Clearing Ghidra's scalar-operand references was tried and rejected:
+3085 of the 3141 non-flow references to function entries are real lis/addi pair references.
+Verification: `gleng_mock_listexec` (valid ctx, MapData block, idx 0..15 x count 0..6 x 2 fills x 4 functions): 896 of 896 cases give identical return value, MapData block and context on 866643c7 (G5 `~/g5logs/gleng-fnfuzz/mock_listexec_866643c7.txt`);
+the previous image 955406de dies with SIGBUS (exit 138). The `0x2100` / `0x8b30` / `0x9da8` immediates of `_glTexEnvfv_Exec`, `_glCreateShaderObjectARB_Exec`, `_glMapVertexAttrib1fARB_Exec` are present in both images
+(`_glTexEnvi_Exec` / `_glTexEnviv_Exec`: stock 3 `cmpwi 0x2100`, rebuilt 2 `cmpwi` + 1 `xori r0,r6,0x2100` - gcc's equality form).
+Fuzz run24 on 866643c7 (plain 2673 + ctx 595): all DIFF names are in the set classified in sections 1-9; the four ListExec DIFFs are gone.
+
+## 12. Totals (image 866643c7, runs 24 and 25; earlier images a3a6228a, 05a0a503 for run16-run20)
+
+- Plain ledger (2673 candidates), run24: 43 DIFF lines in 2 ranges (36 + 7); ctx ledger (595 candidates): 7 DIFF lines. Every DIFF name is in the set already classified in sections 1-9 (same-name comparison against
+  the 81 names of run16-run23: 0 new names). Gone compared with run23: the four `_glMap1VertexAttrib*ARB_ListExec` (class #16, section 11), the 12 f1-only `_glRasterPos*_Comp` / `_glMapVertexAttrib1dARB_Comp`
+  (void signatures, section 10) and the `_glWeight*` functions (class #15, section 9).
+- `_Comp` family (966 functions) on a valid list context (run25): **0 DIFFs** (11616 trials, 72 uninformative); `_glWeight*` targeted with 3 stack fills: 0 differ.
 - Not covered by a differential: functions the harnesses cannot run (system calls, atomics, unsafe imports: 3385 - 2673 - 595 = 117 functions). Those need the mock harnesses (phase 3, import-reachable functions) and are open.
-
+- The sites that need a valid context rather than a random one (TexEnv compares, shader-type compares, MapVertexAttrib readers) are covered by the immediate comparison of section 11 and `gleng_mock_listexec`, not by the fuzzers.
