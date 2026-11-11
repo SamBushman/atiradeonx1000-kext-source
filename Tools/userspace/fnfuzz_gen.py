@@ -228,6 +228,7 @@ FORCE_RZ = set(x for x in os.environ.get('FNFUZZ_FORCE_RZ', '').split(',') if x)
 # a parameter register (or a register derived from it by mr / addi / addis / a single add) that is the base of a load or store is a pointer, and so is one handed to a callee at an
 # argument slot where the callee's parameter is a pointer (iterated to a fixed point over the direct calls). Such an 'n' becomes 'p'.
 MEMOPS = set('lwz lwzu lbz lbzu lhz lhzu lha lhau stw stwu stb stbu sth sthu lfs lfsu lfd lfdu stfs stfsu stfd stfdu lmw stmw'.split())
+XOPS = set('lwzx lwzux lbzx lbzux lhzx lhzux lhax lhaux stwx stwux stbx stbux sthx sthux lfsx lfsux lfdx lfdux stfsx stfsux stfdx stfdux lwbrx lhbrx stwbrx sthbrx'.split())
 def reg_letters(letters):
     """register slot -> class letter (a double or a 64-bit integer takes two GPR slots, a float one)"""
     out = {}; k = 0
@@ -244,6 +245,12 @@ def param_flow(rs):
             if op in MEMOPS and len(o) == 2:
                 mm = re.match(r'(?:0x[0-9a-f]+|-?\d+)\((r\d+)\)$', o[1])
                 if mm and mm.group(1) in st: direct |= st[mm.group(1)]
+                if op.startswith('l') and re.match(r'r\d+$', o[0]): st.pop(o[0], None)
+            elif op in XOPS and len(o) == 3:
+                # indexed form `lwzx rD,rA,rB`: the address is rA + rB, one of them the base. Exactly one parameter-derived operand is the base; two (an integer parameter used as the index of a pointer
+                # parameter, or the other way round) cannot be told apart and mark neither.
+                a1, a2 = o[1] in st, o[2] in st
+                if a1 != a2: direct |= st[o[1] if a1 else o[2]]
                 if op.startswith('l') and re.match(r'r\d+$', o[0]): st.pop(o[0], None)
             elif op == 'or' and len(o) == 3 and o[1] == o[2]:
                 if o[1] in st: st[o[0]] = set(st[o[1]])
