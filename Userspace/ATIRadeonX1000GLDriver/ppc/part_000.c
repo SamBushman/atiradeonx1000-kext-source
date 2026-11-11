@@ -973,6 +973,7 @@ int gld_clearSoftwareColorBuffer(ctx, glContext)
   uint pixelsLeftInRow;
   undefined1 clearGreen16High;
   undefined1 clearGreen16Low;
+  int clearGreen16;
   
   if (((unsigned char *)0x00003190)[glContext] == '\0') {
     if ((((*(float *)(((unsigned char *)0x00002d90) + glContext) < FLOAT_001aa0d4) ||
@@ -1054,9 +1055,9 @@ int gld_clearSoftwareColorBuffer(ctx, glContext)
     }
     else if (*(char *)(ctx + 0x141) == '\x02') {
       pixelCursor64 = (undefined8 *)(pixelOffset * 8 + *(int *)(ctx + 0x148));
-      clearGreen16High = (undefined1)
-                  ((uint)(int)(*(float *)(((unsigned char *)0x00002d94) + glContext) * FLOAT_001aa0d0) >> 8);
-      clearGreen16Low = (undefined1)(int)(*(float *)(((unsigned char *)0x00002d94) + glContext) * FLOAT_001aa0d0);
+      clearGreen16 = (int)(*(float *)(((unsigned char *)0x00002d94) + glContext) * FLOAT_001aa0d0);
+      clearGreen16High = (undefined1)((uint)clearGreen16 >> 8);
+      clearGreen16Low = (undefined1)clearGreen16;
       clearPixelRgba16 = CONCAT62(CONCAT42(CONCAT31(CONCAT21((short)(int)(*(float *)(((unsigned char *)0x00002d90) + glContext) *
                                                               FLOAT_001aa0d0),clearGreen16High),clearGreen16Low),
                                 (short)(int)(*(float *)(((unsigned char *)0x00002d98) + glContext) * FLOAT_001aa0d0)),

@@ -1198,7 +1198,6 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   int texInstructionCount;
   uint headerWord6Zero;
   undefined4 neverSetWord7c;
-  longlong convertedConstant;
   uint ******operandPtrA;
   uint *inputMaskWordsPtr;
   uint ******operandPtrB;
@@ -1818,7 +1817,6 @@ checkErrorResult:
         if ((1 << (dclRegisterIndex + maskWordIndex * -0x20 & 0x3f) & inputMaskWords[maskWordIndex]) == 0) goto callIlPushDclRecord;
         selectorSlot = ilSelectorOneToThreeOrZero(*(undefined4 *)(dclRecord + 4));
         dclRecord = ilSelectorOneToThreeOrZero(*(undefined4 *)(dclRecord + 0xc));
-        convertedConstant = (longlong)(int)dclValueTable[dclRegisterIndex * 4 + dclRecord];
         intConstTable[recordRegister * 4 + selectorSlot] = (int)dclValueTable[dclRegisterIndex * 4 + dclRecord];
       }
       else if (*(int *)(dclRecord + 8) == 0x18) {

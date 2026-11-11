@@ -4154,7 +4154,7 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
   rasterYI2dLo = (float *)(rasterY ^ 0x80000000);
   pointSizeI2dHi = 0x43300000;
   vertexCursor = (float *)(packetCursor + 2);
-  scratchUint1 = (uint)(((double)CONCAT44(0x43300000,pointSizeWord) - DOUBLE_001aa250) * DOUBLE_001aa240);
+  scratchUint1 = (uint)(int)(((double)CONCAT44(0x43300000,pointSizeWord) - DOUBLE_001aa250) * DOUBLE_001aa240);
   fctiwzSlot0 = (longlong)(int)scratchUint1;
   *packetCursor = ((unsigned char *)0x00001087U);
   packetCursor[1] = scratchUint1 << 0x10 | scratchUint1 & 0xffff;
@@ -4259,7 +4259,7 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
             vertexCursor[1] = scratchFloat18;
             pointSizeI2dLo2 = *(undefined4 *)(ctx + 0x248);
             pointSizeI2dHi2 = 0x43300000;
-            scratchUint1 = (uint)(((double)CONCAT44(0x43300000,pointSizeI2dLo2) - uintBiasD) * scratchDouble6);
+            scratchUint1 = (uint)(int)(((double)CONCAT44(0x43300000,pointSizeI2dLo2) - uintBiasD) * scratchDouble6);
             fctiwzSlot1 = (longlong)(int)scratchUint1;
             vertexCursor[5] = 9.19042e-41;
             vertexCursor[6] = windowX;
@@ -4315,7 +4315,7 @@ int gld_enterPointDrawState(ring, drawStateSave)
   *packet = ((unsigned char *)0x000010c0U);
   i2dBias = DOUBLE_001aa250;
   packet[1] = 0x80;
-  pointSizeFixed = (uint)(((double)CONCAT44(0x43300000,pointSizeWord) - i2dBias) * DOUBLE_001aa240);
+  pointSizeFixed = (uint)(int)(((double)CONCAT44(0x43300000,pointSizeWord) - i2dBias) * DOUBLE_001aa240);
   packet[2] = ((unsigned char *)0x00001087U);
   packet[4] = ((unsigned char *)0x000012f0U);
   packet[5] = 0;
