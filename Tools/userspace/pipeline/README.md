@@ -271,6 +271,14 @@ GLDriver) was made with the UNPATCHED decompiler; GLEngine's was regenerated wit
    first) can fuse different products, and the result differs in the last bit. Typical source: Ghidra's hoisted temporaries (`p = a * b;` before an `if`, `p - c*d` inside it) - write the product at its use site and keep
    a separate local for a value that is reassigned in between (`gld_updateInverseMatrix`). Detector `fma_audit.py`: per function counts of fmadds / fmsubs / fnmadds / fnmsubs (and double forms) plus fmuls / fneg, stock vs
    rebuilt `otool -tv` (watch for spill-over where a rebuilt function has no local symbol); a flipped pair in one function keeps the mix, so fuzz the function at >= 6000 plain trials (a last-bit difference shows in 0.05 - 0.1 %).
+ - Class #30 (unsigned conversion, issues #247-#249): the stock converts a float to an integer with one signed `fctiwz` (then maybe `xoris` / `addis 0x8000` for the unsigned case); Ghidra prints `(uint)(double)` which gcc-7
+   compiles as the full unsigned expansion, or drops the `+ 0x80000000`. Write `(uint)(int)(...)` where the stock has one `fctiwz` and no bias, `(int)(x - 2147483648.0) ^ 0x80000000` / `+ 0x80000000` where it has the bias.
+   Dead Ghidra locals `*Scratch = (longlong)(int)f` double a conversion: delete them. Detector `op_audit2.py KIND ...` (`fctiw`: per function fctiw / fctiwz counts, stock vs rebuilt `otool -tv`, stock size clipped to the
+   next corpus function; spill-over where the rebuilt function has no local symbol).
+ - Class #31 (decimal literal, issue #250): a float constant printed with eight digits (`2.1474836e+09`, `1.8446744e+19`, `0.999975`) is a double in C. In float arithmetic add the `f` suffix; for a power of two write the exact
+   value (`2147483648.0`, 2^64, 2^-64). Grep the corpus for `[0-9]\.[0-9]{5,}e[+-]` and for 5-9 digit decimals inside `float` expressions.
+ - Table-index artifacts: a fuzz-supplied byte indexing a table past its end (`textureFormatTable[0xff]`, `RegKind__flagBit0`, `swizzleVariantStartTable`) reads image-layout dependent data in stock and rebuilt alike and
+   differs between images. Confirm with a hardware watchpoint on the differing arena word (gdb `FNFUZZ_ONE=S|R:trial`, `watch *(int*)ADDR`): both writers read the same out-of-range table entry. The narrow profile does not show it.
  - Out-of-range indexes / hoisted loads: the stock's scheduler hoists a load above the branch that uses it (`*translator + *(*translator + 0x54) * 8`, `fragmentTranslateScalarMath*`); Ghidra prints it inside the branch. Harmless on a
    valid object but the stock faults earlier on a garbage pointer: read the dump's first loads against the prologue of the stock (gdb `FNFUZZ_ONE=S:trial` shows the stock's fault pc).
 
