@@ -10326,7 +10326,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   procDesc.procMode = 2;
   rasterXScaled = procDesc.scratchStack3ec * *(float *)(ctx + GLD_rasterScaleX);
   rasterXRounded = rasterXScaled + 0.5;
-  if (!(rasterXRounded < 0.0)) {
+  if (0.0 <= rasterXRounded) {
     ctxState = (int)rasterXRounded;
     fctiwzSlot1 = (longlong)ctxState;
   }
@@ -10339,7 +10339,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     procDesc.scratchStack3e8 = rasterPosArg[1];
     scratchFloat5 = procDesc.scratchStack3e8 * rasterYWork + 0.5;
     scratchR10 = (char *)rasterPosArg;
-    if (!(scratchFloat5 < 0.0)) {
+    if (0.0 <= scratchFloat5) {
       windowY = (uint)(int)scratchFloat5;
       fctiwzSlot5 = (longlong)(int)windowY;
     }
@@ -10353,7 +10353,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     procDesc.scratchStack3e8 = rasterPosArg[1];
     scratchFloat5 = procDesc.scratchStack3e8 * rasterYWork - 0.5;
     scratchR10 = "ret_logicalnz ";
-    if (!(scratchFloat5 < 0.0)) {
+    if (0.0 <= scratchFloat5) {
       windowY = (uint)(int)scratchFloat5;
       fctiwzSlot3 = (longlong)(int)windowY;
     }
@@ -10386,7 +10386,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   rasterYWork = rasterYWork * procDesc.scratchStack3e8;
   if (!(0.0 <= zoomXScaled)) {
     rasterXScaled = rasterXScaled - 0.5;
-    if (!(rasterXScaled < 0.0)) {
+    if (0.0 <= rasterXScaled) {
       ctxState = (int)rasterXScaled;
       fctiwzSlot9 = (longlong)ctxState;
       xDir = -1;
@@ -10397,7 +10397,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
       fctiwzSlot8 = (longlong)ctxState;
     }
   }
-  else if (!(rasterXRounded < 0.0)) {
+  else if (0.0 <= rasterXRounded) {
     ctxState = (int)rasterXRounded;
     fctiwzSlot7 = (longlong)ctxState;
     xDir = 1;
@@ -10411,7 +10411,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     scratchR9 = "ret_logicalnz ";
     if (!(0.0 <= zoomYScaled)) {
       rasterYWork = rasterYWork - 0.5;
-      if (!(rasterYWork < 0.0)) {
+      if (0.0 <= rasterYWork) {
         windowY = (uint)(int)rasterYWork;
         fctiwzSlot17 = (longlong)(int)windowY;
         scratchR10 = (char *)((int)((unsigned char *)0x0) + 1);
@@ -10429,7 +10429,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     else {
       scratchR10 = "ret_logicalnz ";
       rasterYWork = rasterYWork + 0.5;
-      if (!(rasterYWork < 0.0)) {
+      if (0.0 <= rasterYWork) {
         windowY = (uint)(int)rasterYWork;
         fctiwzSlot15 = (longlong)(int)windowY;
         yDir = 1;
@@ -10444,7 +10444,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   else if (!(0.0 <= zoomYScaled)) {
     scratchR9 = "ret_logicalnz ";
     rasterYWork = rasterYWork + 0.5;
-    if (!(rasterYWork < 0.0)) {
+    if (0.0 <= rasterYWork) {
       windowY = (uint)(int)rasterYWork;
       fctiwzSlot13 = (longlong)(int)windowY;
     }
@@ -10462,7 +10462,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   else {
     scratchR9 = "ret_logicalnz ";
     rasterYWork = rasterYWork - 0.5;
-    if (!(rasterYWork < 0.0)) {
+    if (0.0 <= rasterYWork) {
       windowY = (uint)(int)rasterYWork;
       fctiwzSlot11 = (longlong)(int)windowY;
     }
