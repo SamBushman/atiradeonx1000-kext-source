@@ -1380,6 +1380,7 @@ int fragmentTranslateScalarMath(translator, slot, ilInstr)
   int slot;
   undefined4 *ilInstr;
 {
+  int slotTableBase;
   uint negate3;
   uint negate2;
   uint select2;
@@ -1402,9 +1403,11 @@ int fragmentTranslateScalarMath(translator, slot, ilInstr)
   uint srcSwizzleWord;
   int *tokenDataPtrAddr;
   
+  /* the stock reads the instruction-table base (*translator + *(*translator + 0x54) * 8) before it tests the flag */
+  slotTableBase = *translator + *(int *)(*translator + 0x54) * 8;
   componentCount = 1;
   if ((translator[5] & 0x20000000U) != 0) {
-    componentCount = (*(uint *)(slot * 8 + *translator + *(int *)(*translator + 0x54) * 8 + 4) >> 0x1a & 3) + 1;
+    componentCount = (*(uint *)(slot * 8 + slotTableBase + 4) >> 0x1a & 3) + 1;
   }
   srcSwizzleWord = ilInstr[6];
   if (1 < componentCount) {
@@ -1662,6 +1665,7 @@ int fragmentTranslateScalarMathBody(translator, slot, ilInstr)
   int slot;
   undefined4 *ilInstr;
 {
+  int slotTableBase;
   uint negate3;
   uint negate2;
   uint select2;
@@ -1684,9 +1688,11 @@ int fragmentTranslateScalarMathBody(translator, slot, ilInstr)
   uint srcSwizzleWord;
   int *tokenDataPtrAddr;
   
+  /* the stock reads the instruction-table base (*translator + *(*translator + 0x54) * 8) before it tests the flag */
+  slotTableBase = *translator + *(int *)(*translator + 0x54) * 8;
   componentCount = 1;
   if ((translator[5] & 0x20000000U) != 0) {
-    componentCount = (*(uint *)(slot * 8 + *translator + *(int *)(*translator + 0x54) * 8 + 4) >> 0x1a & 3) + 1;
+    componentCount = (*(uint *)(slot * 8 + slotTableBase + 4) >> 0x1a & 3) + 1;
   }
   srcSwizzleWord = ilInstr[6];
   if (1 < componentCount) {
@@ -1944,6 +1950,7 @@ int fragmentTranslateScalarMath2Src(translator, slot, ilInstr)
   int slot;
   undefined4 *ilInstr;
 {
+  int slotTableBase;
   uint src1SelectComp3;
   uint src1NegateComp3;
   uint src0NegateComp2;
@@ -1979,10 +1986,11 @@ int fragmentTranslateScalarMath2Src(translator, slot, ilInstr)
   uint srcSwizzle0;
   int *tokenDataPtrAddr;
   
+  /* the stock reads the instruction-table base (*translator + *(*translator + 0x54) * 8) before it tests the flag */
+  slotTableBase = *translator + *(int *)(*translator + 0x54) * 8;
   repeatCount = 1;
   if ((translator[5] & 0x20000000U) != 0) {
-    repeatCount = (*(uint *)(slot * 8 + *translator + *(int *)(*translator + 0x54) * 8 + 4) >> 0x1a & 3) + 1
-    ;
+    repeatCount = (*(uint *)(slot * 8 + slotTableBase + 4) >> 0x1a & 3) + 1;
   }
   srcSwizzle0 = ilInstr[6];
   srcSwizzle1 = ilInstr[7];
