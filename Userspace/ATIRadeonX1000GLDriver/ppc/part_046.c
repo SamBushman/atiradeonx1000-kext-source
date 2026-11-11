@@ -2150,7 +2150,7 @@ undefined4 classifyConstantRange(double value)
   if (value == (double)FLOAT_001aa0d4) {
     return 2;
   }
-  if ((!(value < (double)FLOAT_001aa0d4)) && (!((double)FLOAT_001aa0e8 < value))) {
+  if (((double)FLOAT_001aa0d4 <= value) && (value <= (double)FLOAT_001aa0e8)) {
     return 4;
   }
   if ((double)FLOAT_001aa114 <= value) {
