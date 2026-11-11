@@ -957,6 +957,7 @@ void gldValidateViewportPolygonOffset(int glContext)
   float polyOffsetUnitScale;
   float polyOffsetFactorScaled;
   uint newPolyOffsetBits;
+  float flippedOriginY;
   float yPixelScale;
   float xPixelScale;
   float halfHeight;
@@ -995,9 +996,11 @@ void gldValidateViewportPolygonOffset(int glContext)
                          intToDoubleBias) + halfHeight;
   halfWidth = xPixelScale * (float)((double)CONCAT44(0x43300000,*(uint *)(glStateBlock + 0x1848) ^ 0x80000000) -
                          intToDoubleBias) * halfWidth;
+  /* the stock rounds this product before the branch (fmuls) and only subtracts inside it, so it must not be fused into the subtraction */
+  flippedOriginY = yPixelScale * (float)((double)CONCAT44(0x43300000,*(uint *)(glState + 0x160) ^ 0x80000000) -
+                         intToDoubleBias);
   if (*(char *)(glContext + 0x293c) != '\0') {
-    centerY = yPixelScale * (float)((double)CONCAT44(0x43300000,*(uint *)(glState + 0x160) ^ 0x80000000) -
-                           intToDoubleBias) - centerY;
+    centerY = flippedOriginY - centerY;
     halfHeight = -halfHeight;
   }
   *(float *)(glContext + 0x1c8c) = halfWidth;
@@ -3909,6 +3912,7 @@ checkX00002ddc:
 /* gldValidateViewport @ 0x520c0 (436 bytes) */
 double gldValidateViewport(int glContext)
 {
+  float flippedOriginY;
   float yPixelScale;
   float xPixelScale;
   float halfHeight;
@@ -3946,9 +3950,11 @@ double gldValidateViewport(int glContext)
                          intToDoubleBias) + halfHeight;
   halfWidth = xPixelScale * (float)((double)CONCAT44(0x43300000,*(uint *)(glStateBlock + 0x1848) ^ 0x80000000) -
                          intToDoubleBias) * halfWidth;
+  /* the stock rounds this product before the branch (fmuls) and only subtracts inside it, so it must not be fused into the subtraction */
+  flippedOriginY = yPixelScale * (float)((double)CONCAT44(0x43300000,*(uint *)(glState + 0x160) ^ 0x80000000) -
+                         intToDoubleBias);
   if (*(char *)(glContext + 0x293c) != '\0') {
-    centerY = yPixelScale * (float)((double)CONCAT44(0x43300000,*(uint *)(glState + 0x160) ^ 0x80000000) -
-                           intToDoubleBias) - centerY;
+    centerY = flippedOriginY - centerY;
     halfHeight = -halfHeight;
   }
   *(float *)(glContext + 0x1c8c) = halfWidth;
