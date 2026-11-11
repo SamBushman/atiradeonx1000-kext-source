@@ -605,9 +605,8 @@ int __ZNSsC4EmcRKSaIcE(this, n, c, allocator)
   unsigned char * allocator;
 {
   char *newData;
-  undefined3 cHigh24;
   
-  newData = (char *)std__string___S_construct(n,CONCAT31(cHigh24,c),allocator)
+  newData = (char *)std__string___S_construct(n,c,allocator)
   ;
   return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,newData,allocator);
 }

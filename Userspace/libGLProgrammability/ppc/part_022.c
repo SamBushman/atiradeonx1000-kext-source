@@ -3,7 +3,7 @@
 /* __ZNKSs5rfindEcm @ 0x97c15b28 (92 bytes) */
 int __ZNKSs5rfindEcm(this, c, pos)
   void *this;
-  int c;
+  char c;
   ulong pos;
 {
   bool wasZero;
@@ -192,7 +192,7 @@ int __ZNKSs17find_first_not_ofEPKcm(this, str, pos)
 /* __ZNKSs17find_first_not_ofEcm @ 0x97c15e2c (68 bytes) */
 int __ZNKSs17find_first_not_ofEcm(this, c, pos)
   void *this;
-  int c;
+  char c;
   ulong pos;
 {
   while( true ) {
@@ -261,7 +261,7 @@ int __ZNKSs16find_last_not_ofEPKcm(this, str, pos)
 /* __ZNKSs16find_last_not_ofEcm @ 0x97c15f4c (84 bytes) */
 int __ZNKSs16find_last_not_ofEcm(this, c, pos)
   void *this;
-  int c;
+  char c;
   ulong pos;
 {
   bool wasZero;

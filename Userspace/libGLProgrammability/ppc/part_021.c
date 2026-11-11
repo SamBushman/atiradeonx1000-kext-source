@@ -201,7 +201,6 @@ int __ZNSs6resizeEmc(this, n, c)
   uint startOff;
   uint origSize;
   char *data2;
-  undefined3 cHigh24;
   char *data;
   uint strSize;
   uint eraseLen;
@@ -216,7 +215,7 @@ int __ZNSs6resizeEmc(this, n, c)
   }
   origSize = *(uint *)(*(int *)this + -0xc);
   if (origSize < n) {
-    ((int (*)())__ZNSs6appendEmc)(this,n - origSize,CONCAT31(cHigh24,c));
+    ((int (*)())__ZNSs6appendEmc)(this,n - origSize,c);
   }
   else if (n < origSize) {
     std__string___M_check((ulong)&posIter,this,n);
@@ -388,9 +387,8 @@ int __ZNSspLEc(this, c)
   void *this;
   int c;
 {
-  undefined3 cHigh24;
   
-  return ((int (*)())__ZNSs6appendEmc)(this,1,CONCAT31(cHigh24,c));
+  return ((int (*)())__ZNSs6appendEmc)(this,1,c);
 }
 
 /* __ZNSs6appendERKSs @ 0x97c14880 (164 bytes) */
@@ -1120,19 +1118,17 @@ int __ZNKSs4findEPKcm(this, str, pos)
 /* __ZNKSs4findEcm @ 0x97c159e0 (96 bytes) */
 int __ZNKSs4findEcm(this, c, pos)
   void *this;
-  int c;
+  char c;
   ulong pos;
 {
   void *memchrResult;
   int result;
   int data;
-  char cSpill;
   
   result = -1;
   data = *(int *)this;
   if ((pos < *(uint *)(data + -0xc)) &&
-     (cSpill = c,
-     memchrResult = _memchr((void *)(data + pos),(int)c,*(uint *)(data + -0xc) - pos),
+     (memchrResult = _memchr((void *)(data + pos),(int)c,*(uint *)(data + -0xc) - pos),
      memchrResult != (void *)0x0)) {
     result = (int)memchrResult - data;
   }
