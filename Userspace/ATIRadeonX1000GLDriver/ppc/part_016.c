@@ -440,7 +440,7 @@ double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8
   uint loopIndex;
   uint glContextWord40;
   uint glContextWord38;
-  float productM03;
+  float minorK;
   float minorA;
   float scaledCofactor2;
   float minorB;
@@ -449,8 +449,7 @@ double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8
   float minorE;
   float minorF;
   float scaledMinorE;
-  float productM02;
-  float productM03B;
+  float minorL;
   float m00;
   float m11;
   float scaledCofactor3;
@@ -523,14 +522,14 @@ double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8
     m10 = *(float *)(engineState + 0x1930);
     cofactor0 = m31 * minorE + (m11 * minorF - m21 * minorC);
     minorJ = (m00 * m31 - m01 * m30);
-    fpPassThrough8 = (m10 * m31 - m11 * m30);
+    minorK = (m10 * m31 - m11 * m30);
+    fpPassThrough8 = minorK;
     minorH = (m00 * m11 - m01 * m10);
-    fpPassThrough3 = (m10 * m21 - m11 * m20);
+    minorL = (m10 * m21 - m11 * m20);
+    fpPassThrough3 = minorL;
     fpPassThrough6 = (minorJ * m23 - (minorG * m33));
     determinant = m00 * cofactor0 + (m10 * cofactor1 + (m30 * cofactor2 + m20 * cofactor3));
     minorI = (m20 * m31 - m21 * m30);
-    productM03 = fpPassThrough8 * m03;
-    productM02 = fpPassThrough8 * m02;
     fpPassThrough7 = (minorH * m22 +
                               (fpPassThrough3 * m02 - (minorG * m12)))
     ;
@@ -540,7 +539,6 @@ double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8
     fpPassThrough5 = (fpPassThrough3 * m33 +
                               (minorI * m13 - (fpPassThrough8 * m23)))
     ;
-    productM03B = fpPassThrough3 * m03;
     fpPassThrough1 = (minorG * m32 +
                               (minorI * m02 - (minorJ * m22)));
     fpPassThrough2 = -(minorI * m03 - fpPassThrough6);
@@ -578,19 +576,19 @@ double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8
            (inverseDeterminant * (m20 * minorB + (m00 * minorE - m10 * minorD)));
       *(float *)(((unsigned char *)0x00001390U) + glContext) =
            ((minorH * m33 +
-                                  (productM03 - (minorJ * m13))) *
+                                  (minorK * m03 - (minorJ * m13))) *
                   inverseDeterminant);
       *(float *)(((unsigned char *)0x00001368) + glContext) = scaledCofactor0;
       *(float *)(((unsigned char *)0x00001378) + glContext) = scaledCofactor1;
       *(float *)(((unsigned char *)0x00001394) + glContext) =
-           (-(productM02 - (minorJ * m12 -
+           (-(minorK * m02 - (minorJ * m12 -
                                                            (minorH * m32))) *
                   inverseDeterminant);
       scaledCofactor2 = (cofactor2 * inverseDeterminant);
       fpPassThrough3 = scaledCofactor2;
       *(float *)(((unsigned char *)0x00001398) + glContext) = scaledCofactor2;
       *(float *)(((unsigned char *)0x000013a0) + glContext) =
-           (-(productM03B - (minorG * m13 -
+           (-(minorL * m03 - (minorG * m13 -
                                                             (minorH * m23))) *
                   inverseDeterminant);
     }
