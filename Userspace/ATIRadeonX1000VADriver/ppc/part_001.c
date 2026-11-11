@@ -3496,9 +3496,10 @@ int ava_render_hue_saturation_pass(ctx, headerWord, enableFlag)
   sinHue = _sin((double)hueAngle);
   hueSaturationConstReg0X_0000f004 = (float)(cosHue * (double)saturation * (double)contrast);
   hueSaturationConstReg2X_0000f024 = (float)((double)contrast * ((double)saturation * -sinHue));
-  hueSaturationConstReg2Y_0000f028 = -hueSaturationConstReg2X_0000f024;
-  hueSaturationConstReg1Y_0000f018 = ((hueSaturationConstReg2X_0000f024 + (1.0 - hueSaturationConstReg0X_0000f004)) * 128.0) / 255.0;
-  hueSaturationConstReg1X_0000f014 = (((1.0 - hueSaturationConstReg0X_0000f004) - hueSaturationConstReg2X_0000f024) * 128.0) / 255.0;
+  /* the constant registers are float words (declared as integer data): read them as floats (GH_BITS_F), negate / compute in single precision like the stock (fneg, fsubs, fadds, fmuls, fdivs), store the bits */
+  hueSaturationConstReg2Y_0000f028 = GH_F2U(-GH_BITS_F(hueSaturationConstReg2X_0000f024));
+  hueSaturationConstReg1Y_0000f018 = GH_F2U(((GH_BITS_F(hueSaturationConstReg2X_0000f024) + (1.0f - GH_BITS_F(hueSaturationConstReg0X_0000f004))) * 128.0f) / 255.0f);
+  hueSaturationConstReg1X_0000f014 = GH_F2U((((1.0f - GH_BITS_F(hueSaturationConstReg0X_0000f004)) - GH_BITS_F(hueSaturationConstReg2X_0000f024)) * 128.0f) / 255.0f);
   hueSaturationConstReg0Y_0000f008 = hueSaturationConstReg0X_0000f004;
   hueSaturationConstReg0Z_0000f00c = hueSaturationConstReg0X_0000f004;
   hueSaturationConstReg0W_0000f010 = hueSaturationConstReg0X_0000f004;

@@ -222,8 +222,16 @@ def ind_chains(ops):
 # FNFUZZ_FORCE_RZ=name,name: functions whose red-zone loads are dead (the value is loaded into a register and only stored back to the red zone, never reaching memory the caller can see; checked by hand, EVIDENCE section 15)
 FORCE_RZ = set(x for x in os.environ.get('FNFUZZ_FORCE_RZ', '').split(',') if x)
 rows = []
+# FNFUZZ_ALL=1: not a fuzz ledger - one row (id name stock-address rebuilt-address size - v) for EVERY function that has a rebuilt symbol, whatever its hazards, for the static
+# audits that need the whole function list (flop_audit.py: single- vs double-precision operation counts, stock vs rebuilt)
+ALL = bool(os.environ.get('FNFUZZ_ALL'))
 for ent, (nm, rs) in sorted(fns.items()):
     nm = BYADDR.get(ent, nm)
+    if ALL:
+        size = scan(ent, rs)[3]; sym = asm.get(nm) or ('_' + nm if not nm.startswith('FUN_') and not nm.startswith('_') else nm)
+        roff = R.get(sym) if sym in R else (R.get('_' + nm) if ('_' + nm) in R else R.get(nm))
+        if roff is not None: rows.append((ent, nm, size, roff, '-', 'v', None))
+        continue
     if nm in IMPLICIT:
         WHY.append((ent, nm, 'implicit-register-input')); continue
     bad, badc, callees, size, ctxops, used_allowed = scan(ent, rs)
