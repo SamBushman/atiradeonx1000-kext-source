@@ -4141,7 +4141,8 @@ int _PPCRuntimeCompilerSetRegister(compiler, regIndex, opOffsets, opBank, opSwiz
   undefined4 recordFlag;
   undefined4 element;
 {
-  unsigned int ghidra_home[8] = { compiler, regIndex, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots), FOLLOWED BY the three stack arguments opType / opWord7 / opWord8 (entry-sp + 0x38..0x40): the stock copies nine contiguous words from opOffsets with one _memcpy, so the block must be nine words long (#258: an eight-word array made the copy read three words of whatever the rebuilt frame holds behind it) */
+  unsigned int ghidra_home[11] = { compiler, regIndex, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5, opType, opWord7, opWord8 };
   int record;
   
   if (*(int *)(compiler + 0xe4c) != 0) {
