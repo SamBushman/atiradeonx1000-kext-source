@@ -221,6 +221,80 @@ def ind_chains(ops):
     return out
 # FNFUZZ_FORCE_RZ=name,name: functions whose red-zone loads are dead (the value is loaded into a register and only stored back to the red zone, never reaching memory the caller can see; checked by hand, EVIDENCE section 15)
 FORCE_RZ = set(x for x in os.environ.get('FNFUZZ_FORCE_RZ', '').split(',') if x)
+
+# POINTER-USED 'n' PARAMETERS (issue filed Nov 11): the decompile types a parameter `int` when it saw arithmetic on it - which includes `ctx + 0x55c` on a structure pointer - and the
+# CTYPES refinement below turned every such `int` into 'n' (a definite integer that the harness never hands an arena pointer). A function whose `int ctx` is really a context was then
+# called with garbage for ctx in every trial and compared only on its fault paths (VA ava_emit_block_packet: ctx = 0x2000, an address inside the harness image). The stock code decides:
+# a parameter register (or a register derived from it by mr / addi / addis / a single add) that is the base of a load or store is a pointer, and so is one handed to a callee at an
+# argument slot where the callee's parameter is a pointer (iterated to a fixed point over the direct calls). Such an 'n' becomes 'p'.
+MEMOPS = set('lwz lwzu lbz lbzu lhz lhzu lha lhau stw stwu stb stbu sth sthu lfs lfsu lfd lfdu stfs stfsu stfd stfdu lmw stmw'.split())
+def reg_letters(letters):
+    """register slot -> class letter (a double or a 64-bit integer takes two GPR slots, a float one)"""
+    out = {}; k = 0
+    for c_ in letters:
+        out[k] = c_; k += 2 if c_ in 'dL' else 1
+    return out
+def param_flow(rs):
+    st = {'r%d' % r: {r - 3} for r in range(3, 11)}; direct = set(); calls = []
+    for lo, hi in rs:
+        for a in range(lo, hi, 4):
+            if a not in idx: continue
+            op, arg = seq[idx[a]][1:]
+            o = [x.strip() for x in arg.split(';')[0].split(',')]
+            if op in MEMOPS and len(o) == 2:
+                mm = re.match(r'(?:0x[0-9a-f]+|-?\d+)\((r\d+)\)$', o[1])
+                if mm and mm.group(1) in st: direct |= st[mm.group(1)]
+                if op.startswith('l') and re.match(r'r\d+$', o[0]): st.pop(o[0], None)
+            elif op == 'or' and len(o) == 3 and o[1] == o[2]:
+                if o[1] in st: st[o[0]] = set(st[o[1]])
+                else: st.pop(o[0], None)
+            elif op in ('addi', 'addis', 'ori', 'oris', 'subi') and len(o) == 3:
+                if o[1] in st: st[o[0]] = set(st[o[1]])
+                else: st.pop(o[0], None)
+            elif op == 'add' and len(o) == 3:
+                a1, a2 = o[1] in st, o[2] in st
+                if a1 != a2: st[o[0]] = set(st[o[1] if a1 else o[2]])
+                else: st.pop(o[0], None)
+            elif op in ('bl', 'bl+', 'bl-'):
+                mt = re.match(r'0x([0-9a-f]+)\b', arg.strip())
+                if mt:
+                    for j in range(8):
+                        if 'r%d' % (3 + j) in st: calls.append((int(mt.group(1), 16), j, set(st['r%d' % (3 + j)])))
+                for r_ in ['r0'] + ['r%d' % i for i in range(3, 13)]: st.pop(r_, None)
+            elif op in ('bctrl', 'blrl'):
+                for r_ in ['r0'] + ['r%d' % i for i in range(3, 13)]: st.pop(r_, None)
+            elif not op.startswith(('st', 'cmp', 'b', 'mt', 'tw', 'sync', 'eieio', 'isync', 'dcb', 'icb', 'nop')) and o and re.match(r'r\d+$', o[0]):
+                st.pop(o[0], None)
+    return direct, calls
+_BASESIG = {}
+def base_sig(ent):
+    """the class letters of a function as the main loop will refine them (header signature, CTYPES)"""
+    if ent in _BASESIG: return _BASESIG[ent]
+    r_ = None; sg_ = sig_of(ent)
+    if sg_ is not None:
+        nm_ = BYADDR.get(ent, fns[ent][0] if ent in fns else '')
+        ct_ = CTYPES.get(nm_)
+        letters = sg_[0]
+        if ct_ and len(ct_) == len(letters):
+            letters = ''.join(('p' if '*' in t else 'n' if re.match(r'^(u?int|u?short|u?char|byte|bool|u?long)$', t) and c == 'i' else c) for t, c in zip(ct_, letters))
+        r_ = letters
+    _BASESIG[ent] = r_
+    return r_
+PTRP = {}; _FLOW = {}
+for _e, (_nm, _rs) in fns.items():
+    _d, _c = param_flow(_rs); PTRP[_e] = set(_d); _FLOW[_e] = _c
+_ch = True
+while _ch:
+    _ch = False
+    for _e, _cs in _FLOW.items():
+        for _t, _j, _ks in _cs:
+            if _t not in fns or _t == _e: continue
+            _l = base_sig(_t)
+            if _l is None: continue
+            _cl = reg_letters(_l).get(_j)
+            if _cl == 'p' or _j in PTRP.get(_t, ()):
+                if not _ks <= PTRP[_e]: PTRP[_e] |= _ks; _ch = True
+NFLIP = 0
 rows = []
 # FNFUZZ_ALL=1: not a fuzz ledger - one row (id name stock-address rebuilt-address size - v) for EVERY function that has a rebuilt symbol, whatever its hazards, for the static
 # audits that need the whole function list (flop_audit.py: single- vs double-precision operation counts, stock vs rebuilt)
@@ -256,6 +330,12 @@ for ent, (nm, rs) in sorted(fns.items()):
     ct = CTYPES.get(nm)
     if ct and len(ct) == len(sg[0]):     # the decompile's own types refine the header's class letters
         sg = (''.join(('p' if '*' in t else 'n' if re.match(r'^(u?int|u?short|u?char|byte|bool|u?long)$', t) and c == 'i' else c) for t, c in zip(ct, sg[0])), sg[1])
+    if PTRP.get(ent) and 'n' in sg[0]:       # an 'n' the stock code uses as a pointer is a pointer (see PTRP)
+        _lst = list(sg[0]); _pos = 0; _slot = {}
+        for _i, _c in enumerate(sg[0]): _slot[_pos] = _i; _pos += 2 if _c in 'dL' else 1
+        for _k in PTRP[ent]:
+            if _k in _slot and _lst[_slot[_k]] == 'n': _lst[_slot[_k]] = 'p'; NFLIP += 1
+        sg = (''.join(_lst), sg[1])
     sym = asm.get(nm) or ('_' + nm if not nm.startswith('FUN_') and not nm.startswith('_') else nm)
     roff = R.get(sym) if sym in R else (R.get('_' + nm) if ('_' + nm) in R else R.get(nm))
     if roff is None:
@@ -273,3 +353,4 @@ print('%s: %d candidates, anchor %s' % (key, len(rows), anchor))
 if True:
     with open(out + '.why', 'w') as f:
         for e_, n_, w_ in WHY: f.write('%x\t%s\t%s\n' % (e_, n_, w_))
+print('%s: %d parameters promoted n -> p (pointer-used by the stock code)' % (key, NFLIP))
