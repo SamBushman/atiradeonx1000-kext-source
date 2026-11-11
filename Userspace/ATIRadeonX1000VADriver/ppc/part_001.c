@@ -4131,11 +4131,11 @@ loopSetI2dLo21:
       clipRight = *(short *)(ctx + 0x12a);
       i2dHi20 = 0x43300000;
       i2dLo20 = (int)clipRight ^ 0x80000000;
-      if ((float)((double)CONCAT44(0x43300000,i2dLo20) - 4503601774854144.0) <= srcRightScaled)
+      if (!(srcRightScaled < (float)((double)CONCAT44(0x43300000,i2dLo20) - 4503601774854144.0)))
       goto loopSetI2dLo21;
       clippedLeft = clipLeftOrWidthF;
       heightFOrClipRightF = srcRightScaled;
-      if (clipLeftOrWidthF <= srcWidthOrSrcLeftScaled) {
+      if (!(srcWidthOrSrcLeftScaled < clipLeftOrWidthF)) {
         clippedLeft = srcWidthOrSrcLeftScaled;
       }
     }
@@ -4143,7 +4143,7 @@ loopSetI2dLo21:
     i2dHi22 = 0x43300000;
     i2dLo22 = (int)clipTop ^ 0x80000000;
     clipLeftOrWidthF = (float)((double)CONCAT44(0x43300000,i2dLo22) - 4503601774854144.0);
-    if (!(clipLeftOrWidthF < srcBottomScaled)) goto callRestf24;
+    if (srcBottomScaled <= clipLeftOrWidthF) goto callRestf24;
     if (!(clipLeftOrWidthF < srcBottomScaled)) {
       clipBottom = *(short *)(ctx + 0x128);
 loopSetI2dLo24:
@@ -4163,11 +4163,11 @@ loopSetI2dLo24:
       clipBottom = *(short *)(ctx + 0x128);
       i2dHi23 = 0x43300000;
       i2dLo23 = (int)clipBottom ^ 0x80000000;
-      if ((float)((double)CONCAT44(0x43300000,i2dLo23) - 4503601774854144.0) <= srcBottomScaled)
+      if (!(srcBottomScaled < (float)((double)CONCAT44(0x43300000,i2dLo23) - 4503601774854144.0)))
       goto loopSetI2dLo24;
       clippedTop = clipLeftOrWidthF;
       clipBottomF = srcBottomScaled;
-      if (clipLeftOrWidthF <= srcHeightOrSrcTopScaled) {
+      if (!(srcHeightOrSrcTopScaled < clipLeftOrWidthF)) {
         clippedTop = srcHeightOrSrcTopScaled;
       }
     }
