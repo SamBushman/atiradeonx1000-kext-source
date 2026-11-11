@@ -767,3 +767,23 @@ func _glGenQueries_Exec
 func _glGenLists_Exec
   arg 0 ptr HNCTX
   arg 1 pick 0 1 2 3 4 5 0xffffffff
+
+# ---- _gleRenderLineLoopTCLFunc: a context with a vertex buffer window (+0x4854 start, +0x4858 end, +0x487c stride in bytes (short), +0x4a10 begin/end flag (short, negative = outside Begin/End),
+# +0x4a18 closed-loop byte) and the two render callbacks (+0x46b8 / +0x46bc) it tail-calls with (ctx+0x4688, start, count, flag). The callbacks record their four integer arguments (fnrec), so the
+# tail call is compared by what it hands on; the closing-vertex copy (stride/8 doublewords from start-0x100 to end) is compared through the arena digest. Start and end are two nodes, so the
+# distance (count = (end-start)/stride) is whatever the arena layout gives, the same in both images.
+type LLBUF 0x400
+  randfill 0 0x400
+type LLEND 0x400
+  randfill 0 0x400
+type LLCTX 0x4a40
+  ptr 0x4854 LLBUF
+  ptr 0x4858 LLEND
+  u16 0x487c 1 64
+  u16 0x4a10 0 65535
+  u8 0x4a18 0 1
+  fnrec 0x46b8
+  fnrec 0x46bc
+  rand 0x4688
+func _gleRenderLineLoopTCLFunc
+  arg 0 ptr LLCTX
