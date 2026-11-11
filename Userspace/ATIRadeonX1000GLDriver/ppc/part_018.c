@@ -6961,7 +6961,7 @@ double psDisasmFormatRegister(undefined4 outText,uint registerWord,undefined4 ar
           expTensDigit = '0';
         }
         else {
-          if (immediateValue < (double)FLOAT_001aa0d4) {
+          if (!((double)FLOAT_001aa0d4 <= immediateValue)) {
             immediateValue = -immediateValue;
             numberText[0] = '-';
           }

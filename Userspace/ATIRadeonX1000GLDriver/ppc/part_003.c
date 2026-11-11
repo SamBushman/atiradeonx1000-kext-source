@@ -82,7 +82,7 @@ loopCallGldSelectSampleGrid:
   newDrawableFlags = ctx[0xf] & 0xff83efff;
   ctx[0xf] = newDrawableFlags;
   if (usesPrimaryConfig) {
-    if (GH_U2F((unsigned int)(ctx[0xa95])) <= FLOAT_001aa128) {
+    if (!(FLOAT_001aa128 < GH_U2F((unsigned int)(ctx[0xa95])))) {
       if (FLOAT_001aa128 < GH_U2F((unsigned int)(ctx[0xa96]))) {
         newDrawableFlags = newDrawableFlags | 0x41000;
         ctx[0xf] = newDrawableFlags;

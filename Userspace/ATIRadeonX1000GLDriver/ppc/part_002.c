@@ -1304,7 +1304,7 @@ char * textPrintDoubleShortest(undefined4 unusedArg1,undefined4 unusedArg2,char 
   }
   picAnchor = &constPoolAnchor_001abfb4;
   scaledValue = value;
-  if (value <= DOUBLE_001aa228) {
+  if (!(DOUBLE_001aa228 < value)) {
     decimalExponent[0] = 0;
     halfTolerance = tolerance * DOUBLE_001aa240;
   }
@@ -1347,7 +1347,7 @@ char * textPrintDoubleShortest(undefined4 unusedArg1,undefined4 unusedArg2,char 
   scaledSum = _floor(scaledValue + halfTolerance);
   outPos = runStart;
   integerPartRemaining = scaledSum;
-  if (scaledSum <= tolerance) {
+  if (!(tolerance < scaledSum)) {
 loopStoreOutPos:
     *outPos = '0';
     outPos = outPos + 1;
@@ -1383,7 +1383,7 @@ loopStoreOutPos:
     }
   }
   scaledSum = (scaledValue + halfTolerance) - scaledSum;
-  if (scaledSum <= tolerance) {
+  if (!(tolerance < scaledSum)) {
     if (decimalExponent[0] == 0) {
       if ((int)outEnd - (int)outPos < 2) {
         return (char *)0x0;
@@ -9705,31 +9705,31 @@ checkCtx:
                                  DOUBLE_001aa1e0);
                 }
                 scratchFloat12 = scratchFloat10;
-                if (scratchFloat10 - scratchFloat4 < 0.0) {
+                if (!(0.0 <= scratchFloat10 - scratchFloat4)) {
                   scratchFloat12 = scratchFloat4;
                 }
                 scratchFloat13 = scratchFloat15;
-                if (scratchFloat7 - scratchFloat15 < 0.0) {
+                if (!(0.0 <= scratchFloat7 - scratchFloat15)) {
                   scratchFloat13 = scratchFloat7;
                 }
                 scratchFloat14 = scratchFloat16;
-                if (scratchFloat5 - scratchFloat16 < 0.0) {
+                if (!(0.0 <= scratchFloat5 - scratchFloat16)) {
                   scratchFloat14 = scratchFloat5;
                 }
                 scratchFloat17 = scratchFloat11;
-                if (scratchFloat11 - scratchFloat3 < 0.0) {
+                if (!(0.0 <= scratchFloat11 - scratchFloat3)) {
                   scratchFloat17 = scratchFloat3;
                 }
-                if (-(scratchFloat10 - scratchFloat4) < 0.0) {
+                if (!(0.0 <= -(scratchFloat10 - scratchFloat4))) {
                   scratchFloat4 = scratchFloat12;
                 }
-                if (-(scratchFloat7 - scratchFloat15) < 0.0) {
+                if (!(0.0 <= -(scratchFloat7 - scratchFloat15))) {
                   scratchFloat7 = scratchFloat13;
                 }
-                if (-(scratchFloat11 - scratchFloat3) < 0.0) {
+                if (!(0.0 <= -(scratchFloat11 - scratchFloat3))) {
                   scratchFloat3 = scratchFloat17;
                 }
-                if (-(scratchFloat5 - scratchFloat16) < 0.0) {
+                if (!(0.0 <= -(scratchFloat5 - scratchFloat16))) {
                   scratchFloat5 = scratchFloat14;
                 }
                 scratchFloat12 = scratchFloat7 + -scratchFloat1;
@@ -10326,7 +10326,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   procDesc.procMode = 2;
   rasterXScaled = procDesc.scratchStack3ec * *(float *)(ctx + GLD_rasterScaleX);
   rasterXRounded = rasterXScaled + 0.5;
-  if (0.0 <= rasterXRounded) {
+  if (!(rasterXRounded < 0.0)) {
     ctxState = (int)rasterXRounded;
     fctiwzSlot1 = (longlong)ctxState;
   }
@@ -10339,7 +10339,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     procDesc.scratchStack3e8 = rasterPosArg[1];
     scratchFloat5 = procDesc.scratchStack3e8 * rasterYWork + 0.5;
     scratchR10 = (char *)rasterPosArg;
-    if (0.0 <= scratchFloat5) {
+    if (!(scratchFloat5 < 0.0)) {
       windowY = (uint)(int)scratchFloat5;
       fctiwzSlot5 = (longlong)(int)windowY;
     }
@@ -10353,7 +10353,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     procDesc.scratchStack3e8 = rasterPosArg[1];
     scratchFloat5 = procDesc.scratchStack3e8 * rasterYWork - 0.5;
     scratchR10 = "ret_logicalnz ";
-    if (0.0 <= scratchFloat5) {
+    if (!(scratchFloat5 < 0.0)) {
       windowY = (uint)(int)scratchFloat5;
       fctiwzSlot3 = (longlong)(int)windowY;
     }
@@ -10384,9 +10384,9 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   }
   scratchR10 = "ret_logicalnz ";
   rasterYWork = rasterYWork * procDesc.scratchStack3e8;
-  if (zoomXScaled < 0.0) {
+  if (!(0.0 <= zoomXScaled)) {
     rasterXScaled = rasterXScaled - 0.5;
-    if (0.0 <= rasterXScaled) {
+    if (!(rasterXScaled < 0.0)) {
       ctxState = (int)rasterXScaled;
       fctiwzSlot9 = (longlong)ctxState;
       xDir = -1;
@@ -10397,7 +10397,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
       fctiwzSlot8 = (longlong)ctxState;
     }
   }
-  else if (0.0 <= rasterXRounded) {
+  else if (!(rasterXRounded < 0.0)) {
     ctxState = (int)rasterXRounded;
     fctiwzSlot7 = (longlong)ctxState;
     xDir = 1;
@@ -10409,9 +10409,9 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   }
   if (((unsigned char *)GLD_yInverted)[ctx] == '\0') {
     scratchR9 = "ret_logicalnz ";
-    if (zoomYScaled < 0.0) {
+    if (!(0.0 <= zoomYScaled)) {
       rasterYWork = rasterYWork - 0.5;
-      if (0.0 <= rasterYWork) {
+      if (!(rasterYWork < 0.0)) {
         windowY = (uint)(int)rasterYWork;
         fctiwzSlot17 = (longlong)(int)windowY;
         scratchR10 = (char *)((int)((unsigned char *)0x0) + 1);
@@ -10429,7 +10429,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     else {
       scratchR10 = "ret_logicalnz ";
       rasterYWork = rasterYWork + 0.5;
-      if (0.0 <= rasterYWork) {
+      if (!(rasterYWork < 0.0)) {
         windowY = (uint)(int)rasterYWork;
         fctiwzSlot15 = (longlong)(int)windowY;
         yDir = 1;
@@ -10441,10 +10441,10 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
       }
     }
   }
-  else if (zoomYScaled < 0.0) {
+  else if (!(0.0 <= zoomYScaled)) {
     scratchR9 = "ret_logicalnz ";
     rasterYWork = rasterYWork + 0.5;
-    if (0.0 <= rasterYWork) {
+    if (!(rasterYWork < 0.0)) {
       windowY = (uint)(int)rasterYWork;
       fctiwzSlot13 = (longlong)(int)windowY;
     }
@@ -10462,7 +10462,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   else {
     scratchR9 = "ret_logicalnz ";
     rasterYWork = rasterYWork - 0.5;
-    if (0.0 <= rasterYWork) {
+    if (!(rasterYWork < 0.0)) {
       windowY = (uint)(int)rasterYWork;
       fctiwzSlot11 = (longlong)(int)windowY;
     }

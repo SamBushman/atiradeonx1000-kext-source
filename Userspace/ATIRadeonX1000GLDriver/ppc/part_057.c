@@ -210,7 +210,7 @@ int IrLogInternal__fold(this, result, operands)
   }
   if (*(int *)(operands + 4) != 0) {
     absOperandOrLn = *(float *)(operands + 4);
-    if (absOperandOrLn < FLOAT_001aa0d4) {
+    if (!(FLOAT_001aa0d4 <= absOperandOrLn)) {
       absOperandOrLn = -absOperandOrLn;
     }
     absOperandOrLn = _logf(absOperandOrLn);
@@ -231,7 +231,7 @@ int IrRecipSqrtInternal__fold(this, result, operands)
   
   resultValue = FLOAT_001aa0e8;
   if (*(float *)(operands + 4) != FLOAT_001aa0e8) {
-    if (*(float *)(operands + 4) <= FLOAT_001aa0d4) {
+    if (!(FLOAT_001aa0d4 < *(float *)(operands + 4))) {
       return 1;
     }
     squareRoot = (double)_sqrt((double)*(float *)(operands + 4));
@@ -457,7 +457,7 @@ int IrCndGEFloat__fold(this, result, operands)
 {
   undefined4 selected;
   
-  if (*(float *)(operands + 4) < FLOAT_001aa0d4) {
+  if (!(FLOAT_001aa0d4 <= *(float *)(operands + 4))) {
     selected = *(undefined4 *)(operands + 0xc);
   }
   else {
@@ -475,7 +475,7 @@ int IrCndGTFloat__fold(this, result, operands)
 {
   undefined4 selected;
   
-  if (*(float *)(operands + 4) <= FLOAT_001aa0d4) {
+  if (!(FLOAT_001aa0d4 < *(float *)(operands + 4))) {
     selected = *(undefined4 *)(operands + 0xc);
   }
   else {
@@ -497,11 +497,11 @@ int IrSetGTFloat__fold(this, result, operands)
   
   difference = *(float *)(operands + 4) - *(float *)(operands + 8);
   positiveResult = FLOAT_001aa0e8;
-  if (difference < 0.0) {
+  if (!(0.0 <= difference)) {
     positiveResult = FLOAT_001aa0d4;
   }
   setResult = FLOAT_001aa0d4;
-  if (-difference < 0.0) {
+  if (!(0.0 <= -difference)) {
     setResult = positiveResult;
   }
   *result = setResult;

@@ -33,18 +33,18 @@ int floatToFixedSaturate(undefined4 unusedArg1,int integerBits,uint fractionBits
                          DOUBLE_001aa1e0));
   distanceToMax = (float)(maxLimit - value);
   cappedAtMax = value;
-  if (distanceToMax < 0.0) {
+  if (!(0.0 <= distanceToMax)) {
     cappedAtMax = maxLimit;
   }
-  if (-distanceToMax < 0.0) {
+  if (!(0.0 <= -distanceToMax)) {
     cappedAtMax = value;
   }
   distanceAboveMin = (float)(cappedAtMax - minLimit);
   clampedValue = cappedAtMax;
-  if (distanceAboveMin < 0.0) {
+  if (!(0.0 <= distanceAboveMin)) {
     clampedValue = minLimit;
   }
-  if (-distanceAboveMin < 0.0) {
+  if (!(0.0 <= -distanceAboveMin)) {
     clampedValue = cappedAtMax;
   }
   return (int)(clampedValue * (float)((double)CONCAT44(0x43300000,

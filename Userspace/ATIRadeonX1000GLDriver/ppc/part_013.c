@@ -3317,13 +3317,13 @@ setLightOrFace:
       augRow3Elem3 = matrixCopy15;
       workRowA = &STACKARG(0xffffffb8);
       workRowC = &STACKARG(0xffffff98);
-      if (ABS(matrixCopy[3]) <= ABS(matrixCopy[2])) {
+      if (!(ABS(matrixCopy[2]) < ABS(matrixCopy[3]))) {
         workRowA = &STACKARG(0xffffff98);
         workRowC = &STACKARG(0xffffffb8);
       }
       workRowB = augRows + 8;
       workRowAElem0 = *workRowA;
-      if (ABS(*workRowA) <= ABS(matrixCopy[1])) {
+      if (!(ABS(matrixCopy[1]) < ABS(*workRowA))) {
         workRowB = workRowA;
         workRowA = augRows + 8;
         workRowAElem0 = matrixCopy[1];

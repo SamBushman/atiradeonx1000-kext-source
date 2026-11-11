@@ -63,7 +63,7 @@ undefined4 FudoPs__encodeImmediateFloat(int this,undefined4 unused,uint *exponen
   uint loopIndex;
   int loopRemaining;
   
-  if (FLOAT_001aa0d4 < value) {
+  if (!(value <= FLOAT_001aa0d4)) {
     value32 = value;
     if (((uint)GH_F2U(value32) & 1) == 0) {
       loopIndex = (uint)GH_F2U(value32) >> 1 & 0xff;

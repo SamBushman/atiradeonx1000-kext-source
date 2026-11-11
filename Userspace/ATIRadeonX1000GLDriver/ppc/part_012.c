@@ -3176,7 +3176,7 @@ int gldLodBiasToFixed(int ctx,float texUnitLodBias,float extraBias)
   }
   if (biasSum != FLOAT_001aa174) {
     fixedResult = FLOAT_001aa17c;
-    if ((FLOAT_001aa178 <= biasSum) && (fixedResult = FLOAT_001aa184, biasSum <= FLOAT_001aa180)) {
+    if ((!(biasSum < FLOAT_001aa178)) && (fixedResult = FLOAT_001aa184,!(FLOAT_001aa180 < biasSum))) {
       fixedResult = biasSum * FLOAT_001aa0f8;
     }
     return (int)fixedResult;

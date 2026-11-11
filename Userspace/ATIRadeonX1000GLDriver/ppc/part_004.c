@@ -2870,7 +2870,7 @@ checkX1000:
   scratchFloat9 = heightF - (float)((double)CONCAT44(0x43300000,rectBottomI2dLo) - DOUBLE_001aa1e0);
   rectRightF = (float)((double)CONCAT44(0x43300000,rectRightI2dLo) - DOUBLE_001aa1e0) + FLOAT_001aa0d4;
   scratchFloat14 = rectXF;
-  if (rectXF < 0.0) {
+  if (!(0.0 <= rectXF)) {
     scratchFloat14 = FLOAT_001aa0d4;
   }
   negRectXF = (float)((double)CONCAT44(0x43300000,negRectXI2dLo) - DOUBLE_001aa1e0);
@@ -2878,7 +2878,7 @@ checkX1000:
   renderWidthOrInverse = (float)((double)CONCAT44(0x43300000,renderWidthI2dLo) - DOUBLE_001aa1e0);
   renderHeightOrInverse = (float)((double)CONCAT44(0x43300000,renderHeightI2dLo) - DOUBLE_001aa1e0);
   quadLeft = FLOAT_001aa0d4;
-  if (-rectXF < 0.0) {
+  if (!(0.0 <= -rectXF)) {
     quadLeft = scratchFloat14;
   }
   scratchFloat12 = heightF - (float)((double)CONCAT44(0x43300000,rectYI2dLo) - DOUBLE_001aa1e0);
@@ -2892,52 +2892,52 @@ checkX1000:
   scratchFloat9 = renderHeightOrInverse - scratchFloat12;
   scratchFloat18 = flippedYF + scratchFloat18;
   quadLeftMinusRectX = quadLeft + negRectXF;
-  if (scratchFloat8 < 0.0) {
+  if (!(0.0 <= scratchFloat8)) {
     rectRightF = renderWidthOrInverse;
   }
-  if (scratchFloat9 < 0.0) {
+  if (!(0.0 <= scratchFloat9)) {
     scratchFloat12 = renderHeightOrInverse;
   }
   readTopOverflow = scratchFloat18 - heightF;
   readLeft = quadLeftMinusRectX;
-  if (quadLeftMinusRectX < 0.0) {
+  if (!(0.0 <= quadLeftMinusRectX)) {
     readLeft = FLOAT_001aa0d4;
   }
   quadRight = renderWidthOrInverse;
-  if (-scratchFloat8 < 0.0) {
+  if (!(0.0 <= -scratchFloat8)) {
     quadRight = rectRightF;
   }
   scratchFloat11 = heightF;
-  if (readTopOverflow < 0.0) {
+  if (!(0.0 <= readTopOverflow)) {
     scratchFloat11 = scratchFloat18;
   }
   scratchFloat18 = renderHeightOrInverse;
-  if (-scratchFloat9 < 0.0) {
+  if (!(0.0 <= -scratchFloat9)) {
     scratchFloat18 = scratchFloat12;
   }
   scratchFloat9 = FLOAT_001aa0d4;
-  if (-quadLeftMinusRectX < 0.0) {
+  if (!(0.0 <= -quadLeftMinusRectX)) {
     scratchFloat9 = readLeft;
   }
   negRectXF = quadRight + negRectXF;
-  if (-readTopOverflow < 0.0) {
+  if (!(0.0 <= -readTopOverflow)) {
     scratchFloat11 = heightF;
   }
   flippedYF = flippedYF - scratchFloat18;
   scratchFloat2 = negRectXF - widthF;
   scratchFloat12 = flippedYF;
-  if (flippedYF < 0.0) {
+  if (!(0.0 <= flippedYF)) {
     scratchFloat12 = FLOAT_001aa0d4;
   }
   scratchFloat8 = widthF;
-  if (scratchFloat2 < 0.0) {
+  if (!(0.0 <= scratchFloat2)) {
     scratchFloat8 = negRectXF;
   }
   scratchFloat3 = FLOAT_001aa0d4;
-  if (-flippedYF < 0.0) {
+  if (!(0.0 <= -flippedYF)) {
     scratchFloat3 = scratchFloat12;
   }
-  if (-scratchFloat2 < 0.0) {
+  if (!(0.0 <= -scratchFloat2)) {
     scratchFloat8 = widthF;
   }
   if ((scratchFloat8 <= scratchFloat9) || (scratchFloat11 <= scratchFloat3)) {
@@ -4096,17 +4096,17 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
   pointSizeWord = *(undefined4 *)(ctx + 0x248);
   scratchInt9 = *(int *)(*(int *)(ctx + 0x244) + 0x10);
   stepY = FLOAT_001aa0e8;
-  if (*(float *)(((unsigned char *)0x00002e4c) + scratchInt9) < 0.0) {
+  if (!(0.0 <= *(float *)(((unsigned char *)0x00002e4c) + scratchInt9))) {
     stepY = FLOAT_001aa114;
   }
   stepX = FLOAT_001aa0e8;
-  if (*(float *)(((unsigned char *)0x00002e48) + scratchInt9) < 0.0) {
+  if (!(0.0 <= *(float *)(((unsigned char *)0x00002e48) + scratchInt9))) {
     stepX = FLOAT_001aa114;
   }
-  if (-*(float *)(((unsigned char *)0x00002e4c) + scratchInt9) < 0.0) {
+  if (!(0.0 <= -*(float *)(((unsigned char *)0x00002e4c) + scratchInt9))) {
     stepY = FLOAT_001aa0e8;
   }
-  if (-*(float *)(((unsigned char *)0x00002e48) + scratchInt9) < 0.0) {
+  if (!(0.0 <= -*(float *)(((unsigned char *)0x00002e48) + scratchInt9))) {
     stepX = FLOAT_001aa0e8;
   }
   if (format != 0x1901) {
@@ -4646,25 +4646,25 @@ callPthreadMutexLock:
     scratchFloat14 = scratchFloat2 - renderHeightF;
     negRenderHeightI2dHi = 0x43300000;
     clipRight = renderWidthF;
-    if (scratchFloat8 < 0.0) {
+    if (!(0.0 <= scratchFloat8)) {
       clipRight = scratchFloat11;
     }
     scratchFloat11 = renderHeightF;
-    if (scratchFloat14 < 0.0) {
+    if (!(0.0 <= scratchFloat14)) {
       scratchFloat11 = scratchFloat2;
     }
     scratchFloat2 = scratchFloat13;
-    if (scratchFloat13 < 0.0) {
+    if (!(0.0 <= scratchFloat13)) {
       scratchFloat2 = FLOAT_001aa0d4;
     }
-    if (-scratchFloat8 < 0.0) {
+    if (!(0.0 <= -scratchFloat8)) {
       clipRight = renderWidthF;
     }
-    if (-scratchFloat14 < 0.0) {
+    if (!(0.0 <= -scratchFloat14)) {
       scratchFloat11 = renderHeightF;
     }
     scratchFloat3 = FLOAT_001aa0d4;
-    if (-scratchFloat13 < 0.0) {
+    if (!(0.0 <= -scratchFloat13)) {
       scratchFloat3 = scratchFloat2;
     }
     scratchFloat8 = -rasterX + scratchFloat12 + FLOAT_001aa0d4;
@@ -4672,7 +4672,7 @@ callPthreadMutexLock:
     scratchFloat4 = (float)((double)CONCAT44(0x43300000,negRenderHeightI2dLo) - DOUBLE_001aa1e0);
     scratchFloat5 = -rasterY + (FLOAT_001aa0d4 - (scratchFloat11 + scratchFloat4));
     scratchFloat4 = -rasterY + (FLOAT_001aa0d4 - (scratchFloat3 + scratchFloat4));
-    if ((clipLeft < clipRight) && (scratchFloat3 < scratchFloat11)) {
+    if ((!(clipRight <= clipLeft)) && (!(scratchFloat11 <= scratchFloat3))) {
       if (((((*(int *)surfaceInfo[1] != 0) && (prepareResult = gld_prepareBufferBacking(ctx,surfaceInfo,1), prepareResult == 0))
            || ((formatTable = ptrTo_textureFormatTable_001e88c8, (int *)surfaceInfo[2] == (int *)0x0 ||
                (prepareResult = *(int *)surfaceInfo[2], prepareResult == 0)))) ||
@@ -6500,21 +6500,21 @@ void gldPackColorForSurfaceFormat(int surface,float red,float green,float blue,f
   }
   redClamped = FLOAT_001aa0d4;
   redChannelD = DOUBLE_001aa228;
-  if ((redClamped <= red) &&
+  if ((!(red < redClamped)) &&
      (redClamped = red, redChannelD = red, FLOAT_001aa0e8 < red)) {
     redClamped = FLOAT_001aa0e8;
     redChannelD = DOUBLE_001aa200;
   }
   greenClamped = FLOAT_001aa0d4;
   greenChannelD = DOUBLE_001aa228;
-  if ((greenClamped <= green) &&
+  if ((!(green < greenClamped)) &&
      (greenClamped = green, greenChannelD = green, FLOAT_001aa0e8 < green)) {
     greenClamped = FLOAT_001aa0e8;
     greenChannelD = DOUBLE_001aa200;
   }
   blueClamped = FLOAT_001aa0d4;
   blueChannelD = DOUBLE_001aa228;
-  if ((blueClamped <= blue) &&
+  if ((!(blue < blueClamped)) &&
      (blueClamped = blue, blueChannelD = blue, FLOAT_001aa0e8 < blue)) {
     blueClamped = FLOAT_001aa0e8;
     blueChannelD = DOUBLE_001aa200;
@@ -6522,7 +6522,7 @@ void gldPackColorForSurfaceFormat(int surface,float red,float green,float blue,f
   alphaD = (double)alphaF;
   alphaClamped = FLOAT_001aa0d4;
   alphaChannelD = DOUBLE_001aa228;
-  if ((alphaClamped <= alphaD) &&
+  if ((!(alphaD < alphaClamped)) &&
      (alphaClamped = alphaD, alphaChannelD = alphaD, FLOAT_001aa0e8 < alphaD)) {
     alphaClamped = FLOAT_001aa0e8;
     alphaChannelD = DOUBLE_001aa200;

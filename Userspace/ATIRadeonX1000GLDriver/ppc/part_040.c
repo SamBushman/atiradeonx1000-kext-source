@@ -558,13 +558,13 @@ int FudoPs__vslot69_shouldFlattenIf(this, ifHeader, optionSource)
         }
         elseCostScratch = (float)((double)CONCAT44(0x43300000,listCount2 ^ 0x80000000) - intToDoubleBias) - elseCostScratch;
         largerCost = thenArmCost;
-        if (thenArmCost - elseCostScratch < 0.0) {
+        if (!(0.0 <= thenArmCost - elseCostScratch)) {
           largerCost = elseCostScratch;
         }
-        if (-(thenArmCost - elseCostScratch) < 0.0) {
+        if (!(0.0 <= -(thenArmCost - elseCostScratch))) {
           elseCostScratch = largerCost;
         }
-        if (FLOAT_001aa1bc < elseCostScratch) {
+        if (!(elseCostScratch <= FLOAT_001aa1bc)) {
           return 0;
         }
       }

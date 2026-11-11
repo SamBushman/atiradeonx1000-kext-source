@@ -886,13 +886,13 @@ int _EmulateOp(compileContext, inst, hashSet)
     *destValue = 1.0;
     resultY = *src0;
     litYSave = resultY;
-    if (resultY <= 0.0) {
+    if (!(0.0 < resultY)) {
       resultY = 0.0;
       litYSave = litYSaveSlot;
     }
     litYSaveSlot = litYSave;
     *(float *)(destInfo + 0x1c) = resultY;
-    if (*src0 <= 0.0) {
+    if (!(0.0 < *src0)) {
       resultZ = 0.0;
     }
     else {
@@ -945,8 +945,8 @@ loopSetResultWBits:
     foldFailed = true;
     goto loopCheckFoldFailed;
   case 7:
-    if (*src0 <= 0.0) {
-      if (0.0 <= *src0) {
+    if (!(0.0 < *src0)) {
+      if (!(*src0 < 0.0)) {
         resultX = 0.0;
       }
       else {
@@ -957,8 +957,8 @@ loopSetResultWBits:
       resultX = 1.0;
     }
     *destValue = resultX;
-    if (src0[1] <= 0.0) {
-      if (0.0 <= src0[1]) {
+    if (!(0.0 < src0[1])) {
+      if (!(src0[1] < 0.0)) {
         resultYBits = 0;
       }
       else {
@@ -969,8 +969,8 @@ loopSetResultWBits:
       resultYBits = 0x3f800000;
     }
     *(undefined4 *)(destInfo + 0x1c) = resultYBits;
-    if (src0[2] <= 0.0) {
-      if (0.0 <= src0[2]) {
+    if (!(0.0 < src0[2])) {
+      if (!(src0[2] < 0.0)) {
         resultZBits = 0;
       }
       else {
@@ -982,7 +982,7 @@ loopSetResultWBits:
     }
     *(undefined4 *)(destInfo + 0x20) = resultZBits;
     if (0.0 < src0[3]) goto loopSetResultWBits;
-    if (0.0 <= src0[3]) goto loopSetResultWBits2;
+    if (!(src0[3] < 0.0)) goto loopSetResultWBits2;
     resultWBits = 0xbf800000;
     goto loopStoreDestInfo;
   case 8:
@@ -1056,11 +1056,11 @@ loopStoreDestInfo:
     goto storeDestInfo;
   case 0xf:
     operandComponent = src0[3];
-    if (operandComponent <= 1.8446744e+19) {
-      if (operandComponent < 5.421011e-20) {
+    if (!(1.8446744e+19 < operandComponent)) {
+      if (!(5.421011e-20 <= operandComponent)) {
         scalarResult = 1.8446744e+19;
-        if (operandComponent < 0.0) {
-          if (operandComponent <= -5.421011e-20) {
+        if (!(0.0 <= operandComponent)) {
+          if (!(-5.421011e-20 < operandComponent)) {
             scalarResult = -5.421011e-20;
             if (-1.8446744e+19 <= operandComponent) goto setScalarResult;
           }
@@ -1592,38 +1592,38 @@ storeDestInfo3:
     goto storeDestInfo4;
   case 0x32:
     resultX = 1.0;
-    if (*src0 < *src1) {
+    if (!(*src1 <= *src0)) {
       resultX = 0.0;
     }
     *destValue = resultX;
     resultYBits = 0x3f800000;
-    if (src0[1] < src1[1]) {
+    if (!(src1[1] <= src0[1])) {
       resultYBits = 0;
     }
     *(undefined4 *)(destInfo + 0x1c) = resultYBits;
     resultZBits = 0x3f800000;
-    if (src0[2] < src1[2]) {
+    if (!(src1[2] <= src0[2])) {
       resultZBits = 0;
     }
     *(undefined4 *)(destInfo + 0x20) = resultZBits;
     wCompareResult = src1[3] <= src0[3];
     goto setResultWBits;
   case 0x33:
-    if (*src0 <= *src1) {
+    if (!(*src1 < *src0)) {
       resultX = 0.0;
     }
     else {
       resultX = 1.0;
     }
     *destValue = resultX;
-    if (src0[1] <= src1[1]) {
+    if (!(src1[1] < src0[1])) {
       resultYBits = 0;
     }
     else {
       resultYBits = 0x3f800000;
     }
     *(undefined4 *)(destInfo + 0x1c) = resultYBits;
-    if (src0[2] <= src1[2]) {
+    if (!(src1[2] < src0[2])) {
       resultZBits = 0;
     }
     else {
@@ -1638,17 +1638,17 @@ loopSetResultWBits3:
     goto setResultWBits2;
   case 0x34:
     resultX = 1.0;
-    if (*src1 < *src0) {
+    if (!(*src0 <= *src1)) {
       resultX = 0.0;
     }
     *destValue = resultX;
     resultYBits = 0x3f800000;
-    if (src1[1] < src0[1]) {
+    if (!(src0[1] <= src1[1])) {
       resultYBits = 0;
     }
     *(undefined4 *)(destInfo + 0x1c) = resultYBits;
     resultZBits = 0x3f800000;
-    if (src1[2] < src0[2]) {
+    if (!(src0[2] <= src1[2])) {
       resultZBits = 0;
     }
     *(undefined4 *)(destInfo + 0x20) = resultZBits;
@@ -1658,21 +1658,21 @@ setResultWBits:
     if (!wCompareResult) goto setResultWBits2;
     goto storeDestInfo4;
   case 0x35:
-    if (*src1 <= *src0) {
+    if (!(*src0 < *src1)) {
       resultX = 0.0;
     }
     else {
       resultX = 1.0;
     }
     *destValue = resultX;
-    if (src1[1] <= src0[1]) {
+    if (!(src0[1] < src1[1])) {
       resultYBits = 0;
     }
     else {
       resultYBits = 0x3f800000;
     }
     *(undefined4 *)(destInfo + 0x1c) = resultYBits;
-    if (src1[2] <= src0[2]) {
+    if (!(src0[2] < src1[2])) {
       resultZBits = 0;
     }
     else {
@@ -1831,7 +1831,7 @@ checkFoldFailed:
       accumulator = src2[componentIndex] * src1[componentIndex] + accumulator;
       componentIndex = componentIndex + 1;
     }
-    if (0.0 <= accumulator) {
+    if (!(accumulator < 0.0)) {
       *destValue = -*src0;
       *(float *)(destInfo + 0x1c) = -src0[1];
       *(float *)(destInfo + 0x20) = -src0[2];
@@ -1896,28 +1896,28 @@ checkFoldFailed:
     }
     goto storeDestInfo6;
   case 0x3e:
-    if (0.0 <= *src0) {
+    if (!(*src0 < 0.0)) {
       resultX = *src2;
     }
     else {
       resultX = *src1;
     }
     *destValue = resultX;
-    if (0.0 <= src0[1]) {
+    if (!(src0[1] < 0.0)) {
       resultY = src2[1];
     }
     else {
       resultY = src1[1];
     }
     *(float *)(destInfo + 0x1c) = resultY;
-    if (0.0 <= src0[2]) {
+    if (!(src0[2] < 0.0)) {
       resultZ = src2[2];
     }
     else {
       resultZ = src1[2];
     }
     *(float *)(destInfo + 0x20) = resultZ;
-    if (0.0 <= src0[3]) {
+    if (!(src0[3] < 0.0)) {
       resultW = src2[3];
     }
     else {
@@ -1934,8 +1934,8 @@ storeDestInfo6:
     break;
   case 0x40:
     resultX = (*src2 - *src0) / (*src1 - *src0);
-    if ((resultX <= 0.0) || (resultX < 1.0)) {
-      if (resultX <= 0.0) {
+    if ((!(0.0 < resultX)) || (resultX < 1.0)) {
+      if (!(0.0 < resultX)) {
         resultX = 0.0;
       }
     }
@@ -1944,8 +1944,8 @@ storeDestInfo6:
     }
     *destValue = resultX * resultX * (3.0 - (resultX + resultX));
     resultY = (src2[1] - src0[1]) / (src1[1] - src0[1]);
-    if ((resultY <= 0.0) || (resultY < 1.0)) {
-      if (resultY <= 0.0) {
+    if ((!(0.0 < resultY)) || (resultY < 1.0)) {
+      if (!(0.0 < resultY)) {
         resultY = 0.0;
       }
     }
@@ -1954,8 +1954,8 @@ storeDestInfo6:
     }
     *(float *)(destInfo + 0x1c) = resultY * resultY * (3.0 - (resultY + resultY));
     resultZ = (src2[2] - src0[2]) / (src1[2] - src0[2]);
-    if ((resultZ <= 0.0) || (resultZ < 1.0)) {
-      if (resultZ <= 0.0) {
+    if ((!(0.0 < resultZ)) || (resultZ < 1.0)) {
+      if (!(0.0 < resultZ)) {
         resultZ = 0.0;
       }
     }
@@ -1964,8 +1964,8 @@ storeDestInfo6:
     }
     *(float *)(destInfo + 0x20) = resultZ * resultZ * (3.0 - (resultZ + resultZ));
     scalarResult = (src2[3] - src0[3]) / (src1[3] - src0[3]);
-    if ((scalarResult <= 0.0) || (scalarResult < 1.0)) {
-      if (scalarResult <= 0.0) {
+    if ((!(0.0 < scalarResult)) || (scalarResult < 1.0)) {
+      if (!(0.0 < scalarResult)) {
         scalarResult = 0.0;
       }
     }
@@ -1989,7 +1989,7 @@ loopSetResultKnown:
     }
     operandComponent = *src2;
     sqrtValue = (double)-(operandComponent * operandComponent * (1.0 - scalarResult * scalarResult) - 1.0);
-    if (0.0 <= sqrtValue) {
+    if (!(sqrtValue < 0.0)) {
       sqrtResult = _sqrt(sqrtValue);
       scalarResult = (float)((double)(operandComponent * scalarResult) + sqrtResult);
       *destValue = *src2 * *src0 - scalarResult * *src1;
@@ -4732,7 +4732,7 @@ setRoundedValue:
   floorResult2 = _floor(roundedValue);
   tenForFraction = DOUBLE_97c30a50;
   fraction = roundedValue - floorResult2;
-  if (fraction <= tolerance) {
+  if (!(tolerance < fraction)) {
     if (exponent[0] == 0) {
       if ((int)bufferEnd - (int)writeCursor < 2) {
         return (char *)0x0;

@@ -2095,7 +2095,7 @@ int ILReader__readFloatConst(ilReader, registerIndex, outValues, sourceToken)
           laneValue = laneValue + laneValue;
         }
         modifiedComponent = laneValue;
-        if ((((sourceToken & 0x80000) != 0) && (modifiedComponent = FLOAT_001aa114, zeroConst <= laneValue)) &&
+        if ((((sourceToken & 0x80000) != 0) && (modifiedComponent = FLOAT_001aa114, !(laneValue < zeroConst))) &&
            (modifiedComponent = FLOAT_001aa0e8, laneValue == zeroConst)) {
           modifiedComponent = FLOAT_001aa0d4;
         }

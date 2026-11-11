@@ -1836,28 +1836,28 @@ code_r0x00003264:
                                                                          (int)*accumByteCursorRet ^ 0x80000000)
                                                        - intBiasD));
                       redOut = FLOAT_001aa0d4;
-                      if (clampMinD <= scaledSampleD) {
+                      if (!(scaledSampleD < clampMinD)) {
                         redOut = (float)(scaledSampleD * channelMax255D);
                       }
                       greenOut = FLOAT_001aa0d4;
                       scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                          (int)accumByteCursorRet[1] ^
                                                                          0x80000000) - intBiasD));
-                      if (greenOut <= scaledSampleD) {
+                      if (!(scaledSampleD < greenOut)) {
                         greenOut = (double)(float)(scaledSampleD * channelMax255D);
                       }
                       blueOut = FLOAT_001aa0d4;
                       scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                          (int)accumByteCursorRet[2] ^
                                                                          0x80000000) - intBiasD));
-                      if (blueOut <= scaledSampleD) {
+                      if (!(scaledSampleD < blueOut)) {
                         blueOut = (double)(float)(scaledSampleD * channelMax255D);
                       }
                       alphaOut = FLOAT_001aa0d4;
                       scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                          (int)accumByteCursorRet[3] ^
                                                                          0x80000000) - intBiasD));
-                      if (alphaOut <= scaledSampleD) {
+                      if (!(scaledSampleD < alphaOut)) {
                         alphaOut = (double)(float)(scaledSampleD * channelMax255D);
                       }
                       if (DOUBLE_001aa1e8 <= alphaOut) {
@@ -1957,28 +1957,28 @@ code_r0x00003264:
                                                                        (int)*accumShortCursorRet ^ 0x80000000) -
                                                      intBiasD));
                     redOut = FLOAT_001aa0d4;
-                    if (clampMinD <= scaledSampleD) {
+                    if (!(scaledSampleD < clampMinD)) {
                       redOut = (float)(scaledSampleD * channelMax255D);
                     }
                     greenOut = FLOAT_001aa0d4;
                     scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                        (int)accumShortCursorRet[1] ^ 0x80000000)
                                                      - intBiasD));
-                    if (greenOut <= scaledSampleD) {
+                    if (!(scaledSampleD < greenOut)) {
                       greenOut = (double)(float)(scaledSampleD * channelMax255D);
                     }
                     blueOut = FLOAT_001aa0d4;
                     scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                        (int)accumShortCursorRet[2] ^ 0x80000000)
                                                      - intBiasD));
-                    if (blueOut <= scaledSampleD) {
+                    if (!(scaledSampleD < blueOut)) {
                       blueOut = (double)(float)(scaledSampleD * channelMax255D);
                     }
                     alphaOut = FLOAT_001aa0d4;
                     scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                        (int)accumShortCursorRet[3] ^ 0x80000000)
                                                      - intBiasD));
-                    if (alphaOut <= scaledSampleD) {
+                    if (!(scaledSampleD < alphaOut)) {
                       alphaOut = (double)(float)(scaledSampleD * channelMax255D);
                     }
                     if (redOut > FLOAT_001aa0f0) {
@@ -2141,28 +2141,28 @@ code_r0x00003264:
                       scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,(int)*accumByteCursor ^ 0x80000000
                                                               ) - intBiasD);
                       red5Out = FLOAT_001aa0d4;
-                      if (zeroF <= scaledSample) {
+                      if (!(scaledSample < zeroF)) {
                         red5Out = scaledSample * channelMax31;
                       }
                       scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,
                                                                (int)accumByteCursor[1] ^ 0x80000000) -
                                              intBiasD);
                       green5Out = FLOAT_001aa0d4;
-                      if (FLOAT_001aa0d4 <= scaledSample) {
+                      if (!(scaledSample < FLOAT_001aa0d4)) {
                         green5Out = scaledSample * channelMax31;
                       }
                       scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,
                                                                (int)accumByteCursor[2] ^ 0x80000000) -
                                              intBiasD);
                       blue5Out = FLOAT_001aa0d4;
-                      if (FLOAT_001aa0d4 <= scaledSample) {
+                      if (!(scaledSample < FLOAT_001aa0d4)) {
                         blue5Out = scaledSample * channelMax31;
                       }
                       scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,
                                                                (int)accumByteCursor[3] ^ 0x80000000) -
                                              intBiasD);
                       alpha1Out = FLOAT_001aa0d4;
-                      if (FLOAT_001aa0d4 <= scaledSample) {
+                      if (!(scaledSample < FLOAT_001aa0d4)) {
                         alpha1Out = scaledSample * alphaScale;
                       }
                       accumByteCursor = accumByteCursor + 4;
@@ -2240,25 +2240,25 @@ code_r0x00003264:
                     scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,(int)*accumShortCursor ^ 0x80000000)
                                            - intBiasD);
                     red5Out = FLOAT_001aa0d4;
-                    if (zeroF <= scaledSample) {
+                    if (!(scaledSample < zeroF)) {
                       red5Out = scaledSample * channelMax31;
                     }
                     scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,(int)accumShortCursor[1] ^ 0x80000000
                                                             ) - intBiasD);
                     green5Out = FLOAT_001aa0d4;
-                    if (FLOAT_001aa0d4 <= scaledSample) {
+                    if (!(scaledSample < FLOAT_001aa0d4)) {
                       green5Out = scaledSample * channelMax31;
                     }
                     scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,(int)accumShortCursor[2] ^ 0x80000000
                                                             ) - intBiasD);
                     blue5Out = FLOAT_001aa0d4;
-                    if (FLOAT_001aa0d4 <= scaledSample) {
+                    if (!(scaledSample < FLOAT_001aa0d4)) {
                       blue5Out = scaledSample * channelMax31;
                     }
                     scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,(int)accumShortCursor[3] ^ 0x80000000
                                                             ) - intBiasD);
                     alpha1Out = FLOAT_001aa0d4;
-                    if (FLOAT_001aa0d4 <= scaledSample) {
+                    if (!(scaledSample < FLOAT_001aa0d4)) {
                       alpha1Out = scaledSample * alphaScale;
                     }
                     if (red5Out > channelMax31) {

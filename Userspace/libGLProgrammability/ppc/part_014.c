@@ -2108,7 +2108,7 @@ alphaFuncCase7:
   }
   else {
     fragAlpha = *(float *)(fragment + 0xc);
-    if (TAllocation__guardBlockSize <= fragAlpha) {
+    if (!(fragAlpha < TAllocation__guardBlockSize)) {
       if (FLOAT_97c3acd8 < fragAlpha) {
         fragAlpha = 1.0;
       }
@@ -2116,7 +2116,7 @@ alphaFuncCase7:
     else {
       fragAlpha = 0.0;
     }
-    if (TAllocation__guardBlockSize <= alphaRef) {
+    if (!(alphaRef < TAllocation__guardBlockSize)) {
       if (FLOAT_97c3acd8 < alphaRef) {
         alphaRef = 1.0;
       }
@@ -2289,7 +2289,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
   if ((framebufferFormat & 0x8000000) == 0) {
     srcComponent2 = *srcColor;
     clampValueSelect = srcComponent2;
-    if (FLOAT_97c3acd8 <= srcComponent2) {
+    if (!(srcComponent2 < FLOAT_97c3acd8)) {
       srcComponent2 = 1.0;
       clampValueSelect = clampValueCarry;
     }
@@ -2298,7 +2298,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     *srcColor = srcComponent2;
     clampLimit2 = FLOAT_97c3acd8;
     clampValue = srcComponent3;
-    if (clampLimit1 <= srcComponent3) {
+    if (!(srcComponent3 < clampLimit1)) {
       srcComponent3 = 1.0;
       clampValue = clampValueCarry;
     }
@@ -2307,7 +2307,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     srcColor[1] = srcComponent3;
     clampUpperLimitA = FLOAT_97c3acd8;
     clampValue = srcComponent;
-    if (clampLimit2 <= srcComponent) {
+    if (!(srcComponent < clampLimit2)) {
       srcComponent = 1.0;
       clampValue = clampValueCarry;
     }
@@ -2316,7 +2316,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     srcColor[2] = srcComponent;
     clampLimit1 = TAllocation__guardBlockSize;
     clampValue = srcComponent2;
-    if (clampUpperLimitA <= srcComponent2) {
+    if (!(srcComponent2 < clampUpperLimitA)) {
       srcComponent2 = 1.0;
       clampValue = clampValueCarry;
     }
@@ -2325,7 +2325,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     srcColor[3] = srcComponent2;
     clampLimit2 = TAllocation__guardBlockSize;
     clampValue = srcComponent3;
-    if (srcComponent3 <= clampLimit1) {
+    if (!(clampLimit1 < srcComponent3)) {
       srcComponent3 = 0.0;
       clampValue = clampValueCarry;
     }
@@ -2334,7 +2334,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     *srcColor = srcComponent3;
     clampLowerLimitB = TAllocation__guardBlockSize;
     clampValue = srcComponent;
-    if (srcComponent <= clampLimit2) {
+    if (!(clampLimit2 < srcComponent)) {
       srcComponent = 0.0;
       clampValue = clampValueCarry;
     }
@@ -2343,7 +2343,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     srcColor[1] = srcComponent;
     clampLimit1 = TAllocation__guardBlockSize;
     clampValue = srcComponent2;
-    if (srcComponent2 <= clampLowerLimitB) {
+    if (!(clampLowerLimitB < srcComponent2)) {
       srcComponent2 = 0.0;
       clampValue = clampValueCarry;
     }
@@ -2351,7 +2351,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     srcComponent3 = srcColor[3];
     srcColor[2] = srcComponent2;
     clampLimit2 = srcComponent3;
-    if (srcComponent3 <= clampLimit1) {
+    if (!(clampLimit1 < srcComponent3)) {
       srcComponent3 = 0.0;
       clampLimit2 = clampValueCarry;
     }

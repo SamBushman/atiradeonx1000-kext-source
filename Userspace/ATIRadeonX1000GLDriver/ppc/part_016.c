@@ -544,7 +544,7 @@ double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8
     fpPassThrough1 = (minorG * m32 +
                               (minorI * m02 - (minorJ * m22)));
     fpPassThrough2 = -(minorI * m03 - fpPassThrough6);
-    if ((determinant < FLOAT_001aa198) || (inverseValid = 0, FLOAT_001aa19c < determinant)) {
+    if ((!(FLOAT_001aa198 <= determinant)) || (inverseValid = 0,!(determinant <= FLOAT_001aa19c))) {
       inverseValid = 1;
       inverseDeterminant = (FLOAT_001aa0e8 / determinant);
       scaledMinorA = fpPassThrough7 * inverseDeterminant;
@@ -1113,7 +1113,7 @@ int gld_commitTexEnvUnits(glContextPtr4, dirtyBitsWord10)
             *(float *)(envDst + 0x12) = envSrcFloat34;
             filterKind = 1;
             if (FLOAT_001aa128 < envSrcFloat34) {
-              filterKind = 3 - (envSrcFloat34 <= FLOAT_001aa158);
+              filterKind = 3 - (!(FLOAT_001aa158 < envSrcFloat34));
             }
             unitCombinerWords[1] = (filterKind & 3) << 0xb | unitCombinerWords[1] & 0xffffe7ff;
           }
@@ -1121,7 +1121,7 @@ int gld_commitTexEnvUnits(glContextPtr4, dirtyBitsWord10)
             *(float *)(envDst + 0x14) = envSrcFloat38;
             filterKind = 1;
             if (FLOAT_001aa128 < envSrcFloat38) {
-              filterKind = 3 - (envSrcFloat38 <= FLOAT_001aa158);
+              filterKind = 3 - (!(FLOAT_001aa158 < envSrcFloat38));
             }
             unitCombinerWords[1] = (filterKind & 3) << 0x11 | unitCombinerWords[1] & 0xfff9ffff;
           }
@@ -1187,15 +1187,15 @@ double gld_updatePointState(int glContext,int pointState)
   glContextFloat13c4 = *(float *)(((unsigned char *)0x000013c4) + glContext);
   *(float *)(glContext + 0xf4) = pointSizeMinState;
   minSizeClampTemp = pointSizeMinState;
-  if (pointSizeMinState - glContextFloat13c4 < 0.0) {
+  if (!(0.0 <= pointSizeMinState - glContextFloat13c4)) {
     minSizeClampTemp = glContextFloat13c4;
   }
   minSizeClamped = glContextFloat13c4;
-  if (-(pointSizeMinState - glContextFloat13c4) < 0.0) {
+  if (!(0.0 <= -(pointSizeMinState - glContextFloat13c4))) {
     minSizeClamped = minSizeClampTemp;
   }
   *(float *)(glContext + 0x100) = minSizeClamped;
-  if (pointSizeMinState <= (float)((double)CONCAT44(0x43300000,hwMinSizeInt) - intToDoubleBias)) {
+  if (!((float)((double)CONCAT44(0x43300000,hwMinSizeInt) - intToDoubleBias) < pointSizeMinState)) {
     *(undefined4 *)(glContext + 0x108) = hwMinSizeInt;
   }
   else {
@@ -1206,14 +1206,14 @@ double gld_updatePointState(int glContext,int pointState)
   *(float *)(glContext + 0xf8) = pointSizeMaxState;
   hwMaxSize = *(float *)(((unsigned char *)0x000013c8U) + glContext);
   maxSizeClamped = hwMaxSize;
-  if (pointSizeMaxState - hwMaxSize < 0.0) {
+  if (!(0.0 <= pointSizeMaxState - hwMaxSize)) {
     maxSizeClamped = pointSizeMaxState;
   }
-  if (-(pointSizeMaxState - hwMaxSize) < 0.0) {
+  if (!(0.0 <= -(pointSizeMaxState - hwMaxSize))) {
     maxSizeClamped = hwMaxSize;
   }
   *(float *)(glContext + 0x104) = maxSizeClamped;
-  if ((float)((double)CONCAT44(0x43300000,glContextWord13d4) - DOUBLE_001aa250) <= pointSizeMaxState) {
+  if (!(pointSizeMaxState < (float)((double)CONCAT44(0x43300000,glContextWord13d4) - DOUBLE_001aa250))) {
     *(undefined4 *)(glContext + 0x10c) = glContextWord13d4;
   }
   else {
@@ -1223,7 +1223,7 @@ double gld_updatePointState(int glContext,int pointState)
   *(undefined4 *)(glContext + 0xf0) = *(undefined4 *)(((unsigned char *)0x000030bc) + pointState);
   pointSizeState = *(float *)(((unsigned char *)0x000030bc) + pointState);
   quantizedPointSize = glContextFloat13c4;
-  if ((glContextFloat13c4 < pointSizeState) && (quantizedPointSize = hwMaxSize, pointSizeState < hwMaxSize)) {
+  if ((!(pointSizeState <= glContextFloat13c4)) && (quantizedPointSize = hwMaxSize,!(hwMaxSize <= pointSizeState))) {
     quantizedPointSize = glContextFloat13cc * (float)((double)CONCAT44(0x43300000,
                                              (int)((pointSizeState - glContextFloat13c4) / glContextFloat13cc + FLOAT_001aa10c) ^
                                              0x80000000) - DOUBLE_001aa1e0) + glContextFloat13c4;
@@ -1232,7 +1232,7 @@ double gld_updatePointState(int glContext,int pointState)
   oneF = FLOAT_001aa0e8;
   pointSizeStateInt = *(float *)(((unsigned char *)0x000030bc) + pointState);
   quantizedPointSizeInt = glContextFloat13c4;
-  if ((glContextFloat13c4 < pointSizeStateInt) && (quantizedPointSizeInt = hwMaxSize, pointSizeStateInt < hwMaxSize)) {
+  if ((!(pointSizeStateInt <= glContextFloat13c4)) && (quantizedPointSizeInt = hwMaxSize,!(hwMaxSize <= pointSizeStateInt))) {
     quantizedPointSizeInt = glContextFloat13cc * (float)((double)CONCAT44(0x43300000,
                                              (int)((pointSizeStateInt - glContextFloat13c4) / glContextFloat13cc + FLOAT_001aa10c) ^
                                              0x80000000) - DOUBLE_001aa1e0) + glContextFloat13c4;
@@ -1928,7 +1928,7 @@ checkDirtyBitsWord8:
             lightDirX = *(float *)(engineState + loopIndex);
             lightDirLengthSq = *(float *)(lightDirPtr + 8) * *(float *)(lightDirPtr + 8) +
                     lightDirX * lightDirX + *(float *)(lightDirPtr + 4) * *(float *)(lightDirPtr + 4);
-            if (0.0 < lightDirLengthSq) {
+            if (!(lightDirLengthSq <= 0.0)) {
               if (lightDirLengthSq == 1.0) {
                 *(float *)(scratchR6 + 4) = lightDirX;
                 *(undefined4 *)(scratchR6 + 8) = *(undefined4 *)(lightDirPtr + 4);
@@ -1962,7 +1962,7 @@ checkDirtyBitsWord8:
                 vecZ = *(float *)(((unsigned char *)0x000014a0) + (int)(glContext + loopIndex2 + 0xc));
                 vecXYSq = (vecX * vecX + (vecY * vecY));
                 lengthSq = (vecZ * vecZ + vecXYSq);
-                if (0.0 < lengthSq) {
+                if (!(lengthSq <= 0.0)) {
                   if (lengthSq == 1.0) {
                     fpPassThrough8 = (vecZ + 1.0);
                   }
@@ -1989,7 +1989,7 @@ checkDirtyBitsWord8:
                 *(float *)(((unsigned char *)0x000014fc) + (int)dirtyWord1) = vecZ;
                 *(float *)(((unsigned char *)0x000014f4) + (int)dirtyWord1) = vecX;
                 *(float *)(((unsigned char *)0x000014f8) + (int)dirtyWord1) = vecY;
-                if (0.0 < lengthSq) {
+                if (!(lengthSq <= 0.0)) {
                   if (lengthSq == 1.0) {
                     *(float *)(((unsigned char *)0x000014e0) + (int)(glContext + loopIndex2 + 4)) = vecX;
                     *(float *)(((unsigned char *)0x000014e0) + (int)(glContext + loopIndex2 + 0xc)) = fpPassThrough8;
@@ -2020,7 +2020,7 @@ checkDirtyBitsWord8:
               spotDirLengthSq = *(float *)(((unsigned char *)0x000014a0) + (int)(glContext + loopIndex2 + 0xc));
               spotDirY = *(float *)(((unsigned char *)0x000014a0) + (int)(glContext + loopIndex2 + 8));
               spotDirLengthSq = spotDirLengthSq * spotDirLengthSq + spotDirX * spotDirX + spotDirY * spotDirY;
-              if (0.0 < spotDirLengthSq) {
+              if (!(spotDirLengthSq <= 0.0)) {
                 if (spotDirLengthSq == 1.0) {
                   *(float *)(((unsigned char *)0x000014f0) + (int)(glContext + loopIndex2 + 4)) = spotDirX;
                   *(undefined4 *)(((unsigned char *)0x000014f0) + (int)(glContext + loopIndex2 + 8)) =
@@ -9339,10 +9339,10 @@ double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int
   intConvBias = (double)((float)((double)CONCAT44(0x43300000,*(uint *)(glContextPtr4 + 0x160) ^ 0x80000000) -
                            intConvBias) / FLOAT_001aa1b8);
   extentDiff = (float)(ratioA - intConvBias);
-  if (extentDiff < 0.0) {
+  if (!(0.0 <= extentDiff)) {
     intConvBias = ratioA;
   }
-  if (-extentDiff < 0.0) {
+  if (!(0.0 <= -extentDiff)) {
     ratioA = intConvBias;
   }
   scaledBias = (float)((double)(float)(ratioA * combinedBias) * FLOAT_001aa1a8 + ratioA);
@@ -9356,7 +9356,7 @@ double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int
     if (3 < field21Count) {
       field15Bits = 3;
       scaledBiasD = (double)(float)(biasBase * FLOAT_001aa128);
-      if ((scaledBiasD <= FLOAT_001aa158) && (field15Bits = 0, FLOAT_001aa0d4 <= scaledBiasD)) {
+      if ((!(FLOAT_001aa158 < scaledBiasD)) && (field15Bits = 0,!(scaledBiasD < FLOAT_001aa0d4))) {
         if (DOUBLE_001aa1e8 <= scaledBiasD) {
           field15Bits = (int)(scaledBiasD - DOUBLE_001aa1e8) + 0x80000000;
         }

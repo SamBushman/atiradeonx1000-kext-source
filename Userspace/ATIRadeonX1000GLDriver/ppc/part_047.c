@@ -1323,11 +1323,11 @@ int ValueKey__evalLitLane(resultOut, key, lane)
                                      *(undefined4 *)(key + 0x178));
       xValue = *loopPtr;
       clampedX = xValue;
-      if (xValue < 0.0) {
+      if (!(0.0 <= xValue)) {
         clampedX = 0.0;
       }
       laneOneResult = 0.0;
-      if (-xValue < 0.0) {
+      if (!(0.0 <= -xValue)) {
         laneOneResult = clampedX;
       }
       *resultOut = laneOneResult;
@@ -1351,13 +1351,13 @@ int ValueKey__evalLitLane(resultOut, key, lane)
                                            *(undefined4 *)(key + 0x184));
             litInputs[3] = *loopPtr;
             clampedExponent = -128.0;
-            if (-128.0 <= litInputs[3]) {
+            if (!(litInputs[3] < -128.0)) {
               clampHigh = 128.0;
-              if (litInputs[3] - 128.0 < 0.0) {
+              if (!(0.0 <= litInputs[3] - 128.0)) {
                 clampHigh = litInputs[3];
               }
               clampedExponent = litInputs[3];
-              if (-(litInputs[3] - 128.0) < 0.0) {
+              if (!(0.0 <= -(litInputs[3] - 128.0))) {
                 clampedExponent = clampHigh;
               }
             }

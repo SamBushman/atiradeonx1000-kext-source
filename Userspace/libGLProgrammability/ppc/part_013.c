@@ -2636,7 +2636,7 @@ int _InterpreterPackPixel(machine, color, pixelOut)
         }
         redScaled = *color * FLOAT_97c3acc4 + FLOAT_97c3acc0;
         greenScaled = color[1] * FLOAT_97c3acc4 + FLOAT_97c3acc0;
-        notBelowZero = TAllocation__guardBlockSize <= redScaled;
+        notBelowZero =!(redScaled < TAllocation__guardBlockSize);
         *color = redScaled;
         color[1] = greenScaled;
         color[2] = color[2] * scale31 + roundOffset5;
@@ -2652,7 +2652,7 @@ int _InterpreterPackPixel(machine, color, pixelOut)
         greenClamp5 = color[1];
         *color = redScaled;
         zeroConstC = TAllocation__guardBlockSize;
-        if (zeroConstA <= greenClamp5) {
+        if (!(greenClamp5 < zeroConstA)) {
           if (FLOAT_97c3acc4 < greenClamp5) {
             greenClamp5 = 31.0;
           }
@@ -2663,7 +2663,7 @@ int _InterpreterPackPixel(machine, color, pixelOut)
         blueClamp = color[2];
         color[1] = greenClamp5;
         convertThreshold = DOUBLE_97c30a78;
-        if (zeroConstC <= blueClamp) {
+        if (!(blueClamp < zeroConstC)) {
           if (FLOAT_97c3acc4 < blueClamp) {
             blueClamp = 31.0;
           }
@@ -2693,7 +2693,7 @@ int _InterpreterPackPixel(machine, color, pixelOut)
         else {
           blueInt = (uint)(int)color[2];
         }
-        if (FLOAT_97c3acc0 <= color[3]) {
+        if (!(color[3] < FLOAT_97c3acc0)) {
           alphaBit = 0x8000;
         }
         else {
@@ -2704,7 +2704,7 @@ int _InterpreterPackPixel(machine, color, pixelOut)
       else {
         redScaled = *color * FLOAT_97c3acbc + FLOAT_97c3acc0;
         greenScaled = color[1] * FLOAT_97c3acbc + FLOAT_97c3acc0;
-        notBelowZero = TAllocation__guardBlockSize <= redScaled;
+        notBelowZero =!(redScaled < TAllocation__guardBlockSize);
         *color = redScaled;
         color[1] = greenScaled;
         color[3] = color[3] * scale255 + roundOffset8;
@@ -2721,7 +2721,7 @@ int _InterpreterPackPixel(machine, color, pixelOut)
         greenClamp8 = color[1];
         *color = redScaled;
         zeroConstC = TAllocation__guardBlockSize;
-        if (zeroConstB <= greenClamp8) {
+        if (!(greenClamp8 < zeroConstB)) {
           if (FLOAT_97c3acbc < greenClamp8) {
             greenClamp8 = 255.0;
           }
@@ -2732,7 +2732,7 @@ int _InterpreterPackPixel(machine, color, pixelOut)
         blueClamp8 = color[2];
         color[1] = greenClamp8;
         zeroConstA = TAllocation__guardBlockSize;
-        if (zeroConstC <= blueClamp8) {
+        if (!(blueClamp8 < zeroConstC)) {
           if (FLOAT_97c3acbc < blueClamp8) {
             blueClamp8 = 255.0;
           }
@@ -2743,7 +2743,7 @@ int _InterpreterPackPixel(machine, color, pixelOut)
         alphaClamp8 = color[3];
         color[2] = blueClamp8;
         convertThreshold = DOUBLE_97c30a78;
-        if (zeroConstA <= alphaClamp8) {
+        if (!(alphaClamp8 < zeroConstA)) {
           if (FLOAT_97c3acbc < alphaClamp8) {
             alphaClamp8 = 255.0;
           }
@@ -3854,7 +3854,7 @@ opcodeCase0:
         break;
       case 1:
         opVec[0] = 1.0;
-        if (opVec[4] <= 0.0) {
+        if (!(0.0 < opVec[4])) {
           opVec[1] = 0.0;
           opVec[2] = 0.0;
         }
@@ -3907,8 +3907,8 @@ opcodeCase0:
       default:
         goto opcodeCase6;
       case 7:
-        if (opVec[4] <= 0.0) {
-          if (0.0 <= opVec[4]) {
+        if (!(0.0 < opVec[4])) {
+          if (!(opVec[4] < 0.0)) {
             opVec[0] = 0.0;
           }
           else {
@@ -3918,8 +3918,8 @@ opcodeCase0:
         else {
           opVec[0] = 1.0;
         }
-        if (opVec[5] <= 0.0) {
-          if (0.0 <= opVec[5]) {
+        if (!(0.0 < opVec[5])) {
+          if (!(opVec[5] < 0.0)) {
             opVec[1] = 0.0;
           }
           else {
@@ -3929,8 +3929,8 @@ opcodeCase0:
         else {
           opVec[1] = 1.0;
         }
-        if (opVec[6] <= 0.0) {
-          if (0.0 <= opVec[6]) {
+        if (!(0.0 < opVec[6])) {
+          if (!(opVec[6] < 0.0)) {
             opVec[2] = 0.0;
           }
           else {
@@ -3941,7 +3941,7 @@ opcodeCase0:
           opVec[2] = 1.0;
         }
         if (0.0 < opVec[7]) goto storeOpVec6;
-        if (0.0 <= opVec[7]) goto loopStoreOpVec4;
+        if (!(opVec[7] < 0.0)) goto loopStoreOpVec4;
         opVec[3] = -1.0;
         break;
       case 8:
@@ -4034,14 +4034,14 @@ loopStoreOpVec:
         opVec[3] = opVec[0];
         break;
       case 0xf:
-        if (opVec[7] <= 1.8446744e+19) {
-          if (opVec[7] < 5.421011e-20) {
+        if (!(1.8446744e+19 < opVec[7])) {
+          if (!(5.421011e-20 <= opVec[7])) {
             opVec[0] = 1.8446744e+19;
             opVec[1] = opVec[0];
             opVec[2] = opVec[0];
             opVec[3] = opVec[0];
-            if (opVec[7] < 0.0) {
-              if (opVec[7] <= -5.421011e-20) {
+            if (!(0.0 <= opVec[7])) {
+              if (!(-5.421011e-20 < opVec[7])) {
                 opVec[0] = -5.421011e-20;
                 opVec[1] = opVec[0];
                 opVec[2] = opVec[0];
@@ -4555,51 +4555,51 @@ loopStoreOpVec3:
         break;
       case 0x32:
         opVec[0] = 1.0;
-        if (opVec[4] < opVec[8]) {
+        if (!(opVec[8] <= opVec[4])) {
           opVec[0] = 0.0;
         }
         opVec[1] = 1.0;
-        if (opVec[5] < opVec[9]) {
+        if (!(opVec[9] <= opVec[5])) {
           opVec[1] = 0.0;
         }
         opVec[2] = 1.0;
-        if (opVec[6] < opVec[10]) {
+        if (!(opVec[10] <= opVec[6])) {
           opVec[2] = 0.0;
         }
         cmpResult = opVec[0xb] <= opVec[7];
         goto storeOpVec5;
       case 0x33:
-        if (opVec[4] <= opVec[8]) {
+        if (!(opVec[8] < opVec[4])) {
           opVec[0] = 0.0;
         }
         else {
           opVec[0] = 1.0;
         }
-        if (opVec[5] <= opVec[9]) {
+        if (!(opVec[9] < opVec[5])) {
           opVec[1] = 0.0;
         }
         else {
           opVec[1] = 1.0;
         }
-        if (opVec[6] <= opVec[10]) {
+        if (!(opVec[10] < opVec[6])) {
           opVec[2] = 0.0;
         }
         else {
           opVec[2] = 1.0;
         }
-        if (opVec[7] <= opVec[0xb]) goto loopStoreOpVec4;
+        if (!(opVec[0xb] < opVec[7])) goto loopStoreOpVec4;
         goto storeOpVec6;
       case 0x34:
         opVec[0] = 1.0;
-        if (opVec[8] < opVec[4]) {
+        if (!(opVec[4] <= opVec[8])) {
           opVec[0] = 0.0;
         }
         opVec[1] = 1.0;
-        if (opVec[9] < opVec[5]) {
+        if (!(opVec[5] <= opVec[9])) {
           opVec[1] = 0.0;
         }
         opVec[2] = 1.0;
-        if (opVec[10] < opVec[6]) {
+        if (!(opVec[6] <= opVec[10])) {
           opVec[2] = 0.0;
         }
         cmpResult = opVec[7] <= opVec[0xb];
@@ -4611,25 +4611,25 @@ loopStoreOpVec4:
         }
         break;
       case 0x35:
-        if (opVec[8] <= opVec[4]) {
+        if (!(opVec[4] < opVec[8])) {
           opVec[0] = 0.0;
         }
         else {
           opVec[0] = 1.0;
         }
-        if (opVec[9] <= opVec[5]) {
+        if (!(opVec[5] < opVec[9])) {
           opVec[1] = 0.0;
         }
         else {
           opVec[1] = 1.0;
         }
-        if (opVec[10] <= opVec[6]) {
+        if (!(opVec[6] < opVec[10])) {
           opVec[2] = 0.0;
         }
         else {
           opVec[2] = 1.0;
         }
-        if (opVec[0xb] <= opVec[7]) goto loopStoreOpVec4;
+        if (!(opVec[7] < opVec[0xb])) goto loopStoreOpVec4;
 storeOpVec6:
         opVec[3] = 1.0;
         break;
@@ -4770,7 +4770,7 @@ storeOpVec6:
         }
         opVec[3] = srcC[3];
         if ((operandComponent < srcC[3]) &&
-           (operandComponent = opVec[0xb], opVec[3] = opVec[7], opVec[7] <= opVec[0xb]))
+           (operandComponent = opVec[0xb], opVec[3] = opVec[7],!(opVec[0xb] < opVec[7])))
         goto loopStoreOpVec3;
         break;
       case 0x3e:
@@ -4799,8 +4799,8 @@ storeOpVec6:
         break;
       case 0x40:
         operandComponent = (srcC[0] - opVec[4]) / (opVec[8] - opVec[4]);
-        if ((operandComponent <= 0.0) || (operandComponent < 1.0)) {
-          if (operandComponent <= 0.0) {
+        if ((!(0.0 < operandComponent)) || (operandComponent < 1.0)) {
+          if (!(0.0 < operandComponent)) {
             operandComponent = 0.0;
           }
         }
@@ -4809,8 +4809,8 @@ storeOpVec6:
         }
         smoothT = (srcC[1] - opVec[5]) / (opVec[9] - opVec[5]);
         opVec[0] = operandComponent * operandComponent * (3.0 - (operandComponent + operandComponent));
-        if ((smoothT <= 0.0) || (smoothT < 1.0)) {
-          if (smoothT <= 0.0) {
+        if ((!(0.0 < smoothT)) || (smoothT < 1.0)) {
+          if (!(0.0 < smoothT)) {
             smoothT = 0.0;
           }
         }
@@ -4819,8 +4819,8 @@ storeOpVec6:
         }
         operandComponent = (srcC[2] - opVec[6]) / (opVec[10] - opVec[6]);
         opVec[1] = smoothT * smoothT * (3.0 - (smoothT + smoothT));
-        if ((operandComponent <= 0.0) || (operandComponent < 1.0)) {
-          if (operandComponent <= 0.0) {
+        if ((!(0.0 < operandComponent)) || (operandComponent < 1.0)) {
+          if (!(0.0 < operandComponent)) {
             operandComponent = 0.0;
           }
         }
@@ -4829,8 +4829,8 @@ storeOpVec6:
         }
         smoothT = (srcC[3] - opVec[7]) / (opVec[0xb] - opVec[7]);
         opVec[2] = operandComponent * operandComponent * (3.0 - (operandComponent + operandComponent));
-        if ((smoothT <= 0.0) || (smoothT < 1.0)) {
-          if (smoothT <= 0.0) {
+        if ((!(0.0 < smoothT)) || (smoothT < 1.0)) {
+          if (!(0.0 < smoothT)) {
             smoothT = 0.0;
           }
         }
@@ -5103,7 +5103,7 @@ opcodeCase6:
           } while (dimension != 0);
         }
         sqrtValue = (double)-(srcC[0] * srcC[0] * (1.0 - operandComponent * operandComponent) - 1.0);
-        if (0.0 <= sqrtValue) {
+        if (!(sqrtValue < 0.0)) {
           operandComponent = srcC[0] * operandComponent;
           sqrtResult = _sqrt(sqrtValue);
           mathTemp = (double)srcC[0];
@@ -5196,8 +5196,8 @@ storeOpVec8:
         opVec[3] = (float)powValue;
       }
       if (saturate != '\0') {
-        if (0.0 <= opVec[0]) {
-          if (opVec[0] <= 1.0) {
+        if (!(opVec[0] < 0.0)) {
+          if (!(1.0 < opVec[0])) {
             storedComponent = opVec[0];
           }
           else {
@@ -5207,8 +5207,8 @@ storeOpVec8:
         else {
           opVec[0] = 0.0;
         }
-        if (0.0 <= opVec[1]) {
-          if (opVec[1] <= 1.0) {
+        if (!(opVec[1] < 0.0)) {
+          if (!(1.0 < opVec[1])) {
             storedComponent = opVec[1];
           }
           else {
@@ -5218,8 +5218,8 @@ storeOpVec8:
         else {
           opVec[1] = 0.0;
         }
-        if (0.0 <= opVec[2]) {
-          if (opVec[2] <= 1.0) {
+        if (!(opVec[2] < 0.0)) {
+          if (!(1.0 < opVec[2])) {
             storedComponent = opVec[2];
           }
           else {
@@ -5229,8 +5229,8 @@ storeOpVec8:
         else {
           opVec[2] = 0.0;
         }
-        if (0.0 <= opVec[3]) {
-          if (opVec[3] <= 1.0) {
+        if (!(opVec[3] < 0.0)) {
+          if (!(1.0 < opVec[3])) {
             storedComponent = opVec[3];
           }
           else {
@@ -5669,7 +5669,7 @@ void _InterpreterRun(int emulator,int elementCount,double scratchF1,double scrat
       }
       vertexOutput[0x1f] = GH_U2F((unsigned int)((testFlags | 0x1000000)));
       if (testFlags == 0) {
-        if (vertexW < zero) {
+        if (!(zero <= vertexW)) {
           wSafeToDivide = vertexW <= FLOAT_97c3acf4;
         }
         else {

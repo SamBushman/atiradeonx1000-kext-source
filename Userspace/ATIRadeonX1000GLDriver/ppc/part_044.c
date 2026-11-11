@@ -742,8 +742,8 @@ int Inst__foldCompareChain_00159b58(node, allowFold, pass)
             movSourceIndex = 1;
             IRInst__applyNegateModifier(&foldedConst3,node,1,absConst3);
             chosenConst = foldedConst2;
-            if ((0.0 <= foldedConst2) || (chosenConst = foldedConst3, 0.0 <= foldedConst3)) {
-              if ((0.0 > foldedConst2) || (chosenConst = foldedConst3, foldedConst3 < 0.0)) {
+            if ((!(foldedConst2 < 0.0)) || (chosenConst = foldedConst3,!(foldedConst3 < 0.0))) {
+              if ((0.0 > foldedConst2) || (chosenConst = foldedConst3,!(0.0 <= foldedConst3))) {
                 source1Flags = *(uint *)(inst + 0xb8);
                 vcall5cResultB = (**(code **)(*chainSource + 0x5c))
                                   (chainSource,a1,movSourceIndex,absConst3,staleArg4,staleArg5,*(code **)(*chainSource + 0x5c));
@@ -782,7 +782,7 @@ int Inst__foldCompareChain_00159b58(node, allowFold, pass)
                 SelectWord__compose(&composedSelectA,operandSelect,*(undefined4 *)(operandRecord + 0x10));
                 operandRecord = IRInst__getOperandRecord(node,1);
                 *(undefined4 *)(operandRecord + 0x10) = composedSelectA;
-                if ((foldedConst2 < 0.0) || (chosenConst = foldedConst3, 0.0 <= foldedConst3)) {
+                if ((foldedConst2 < 0.0) || (chosenConst = foldedConst3,!(foldedConst3 < 0.0))) {
                   IRInst__swapOperands(node,2,3,compiler);
                 }
                 dropCounterAndDeleteIfUnusedResult = IRInst__dropCounterAndDeleteIfUnused(inst,compiler);

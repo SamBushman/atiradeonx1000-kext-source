@@ -1387,7 +1387,7 @@ int ava_set_attribute(ctx, attribute, value)
       *(float *)(ctx + 300) = -3.1415927;
     }
     hue = *(float *)(ctx + 300);
-    if (hue <= 3.1415927) {
+    if (!(3.1415927 < hue)) {
 loopSetBrightness:
       brightness = *(float *)(ctx + 0x134);
 loopSetFlags:
@@ -1408,7 +1408,7 @@ loopSetFlags:
     if (newValue < 0.0) {
       *(float *)(ctx + 0x130) = 0.0;
     }
-    if (*(float *)(ctx + 0x130) <= 3.0) {
+    if (!(3.0 < *(float *)(ctx + 0x130))) {
       hue = *(float *)(ctx + 300);
       brightness = *(float *)(ctx + 0x134);
       goto loopSetFlags;
@@ -1426,7 +1426,7 @@ loopSetFlags:
       *(float *)(ctx + 0x134) = -1.0;
     }
     brightness = 1.0;
-    if (*(float *)(ctx + 0x134) <= 1.0) {
+    if (!(1.0 < *(float *)(ctx + 0x134))) {
       hue = *(float *)(ctx + 300);
       brightness = *(float *)(ctx + 0x134);
       goto loopSetFlags;
@@ -1442,7 +1442,7 @@ loopSetFlags:
     if (newValue < 0.25) {
       *(float *)(ctx + 0x138) = 0.25;
     }
-    if (*(float *)(ctx + 0x138) <= 4.0) {
+    if (!(4.0 < *(float *)(ctx + 0x138))) {
       hue = *(float *)(ctx + 300);
       goto loopSetBrightness;
     }

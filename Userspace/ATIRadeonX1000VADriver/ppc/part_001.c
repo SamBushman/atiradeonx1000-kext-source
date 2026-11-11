@@ -4112,7 +4112,7 @@ setSrcRight:
     i2dLo11 = surfaceWidth;
     i2dLo15 = surfaceHeight;
     if (srcRightScaled <= clipLeftOrWidthF) goto callRestf24;
-    if (srcRightScaled <= clipLeftOrWidthF) {
+    if (!(clipLeftOrWidthF < srcRightScaled)) {
       clipRight = *(short *)(ctx + 0x12a);
 loopSetI2dLo21:
       i2dLo21 = (int)clipRight ^ 0x80000000;
@@ -4120,10 +4120,10 @@ loopSetI2dLo21:
       heightFOrClipRightF = (float)((double)CONCAT44(0x43300000,i2dLo21) - 4503601774854144.0);
       if (heightFOrClipRightF <= srcWidthOrSrcLeftScaled) goto callRestf24;
       clippedLeft = srcWidthOrSrcLeftScaled;
-      if (srcWidthOrSrcLeftScaled - clipLeftOrWidthF < 0.0) {
+      if (!(0.0 <= srcWidthOrSrcLeftScaled - clipLeftOrWidthF)) {
         clippedLeft = clipLeftOrWidthF;
       }
-      if (-(srcWidthOrSrcLeftScaled - clipLeftOrWidthF) < 0.0) {
+      if (!(0.0 <= -(srcWidthOrSrcLeftScaled - clipLeftOrWidthF))) {
         clippedLeft = srcWidthOrSrcLeftScaled;
       }
     }
@@ -4143,8 +4143,8 @@ loopSetI2dLo21:
     i2dHi22 = 0x43300000;
     i2dLo22 = (int)clipTop ^ 0x80000000;
     clipLeftOrWidthF = (float)((double)CONCAT44(0x43300000,i2dLo22) - 4503601774854144.0);
-    if (srcBottomScaled <= clipLeftOrWidthF) goto callRestf24;
-    if (srcBottomScaled <= clipLeftOrWidthF) {
+    if (!(clipLeftOrWidthF < srcBottomScaled)) goto callRestf24;
+    if (!(clipLeftOrWidthF < srcBottomScaled)) {
       clipBottom = *(short *)(ctx + 0x128);
 loopSetI2dLo24:
       i2dLo24 = (int)clipBottom ^ 0x80000000;
@@ -4152,10 +4152,10 @@ loopSetI2dLo24:
       clipBottomF = (float)((double)CONCAT44(0x43300000,i2dLo24) - 4503601774854144.0);
       if (clipBottomF <= srcHeightOrSrcTopScaled) goto callRestf24;
       clippedTop = srcHeightOrSrcTopScaled;
-      if (srcHeightOrSrcTopScaled - clipLeftOrWidthF < 0.0) {
+      if (!(0.0 <= srcHeightOrSrcTopScaled - clipLeftOrWidthF)) {
         clippedTop = clipLeftOrWidthF;
       }
-      if (-(srcHeightOrSrcTopScaled - clipLeftOrWidthF) < 0.0) {
+      if (!(0.0 <= -(srcHeightOrSrcTopScaled - clipLeftOrWidthF))) {
         clippedTop = srcHeightOrSrcTopScaled;
       }
     }
@@ -4205,21 +4205,21 @@ loopSetI2dLo24:
     srcCoordRight = scaleX * (heightFOrClipRightF - centerX) + centerX;
     centerX = scaleX * (clippedLeft - centerX) + centerX;
     srcCoordLeft = centerX;
-    if (centerX < 0.0) {
+    if (!(0.0 <= centerX)) {
       srcCoordLeft = 0.0;
     }
     i2dLo34 = (uint)(int)(scaleY * (clippedTop - centerY) + centerY);
     d2iScratch1 = (longlong)(int)i2dLo34;
-    if (-centerX < 0.0) {
+    if (!(0.0 <= -centerX)) {
       srcCoordLeft = centerX;
     }
     i2dLo35 = (uint)(int)(scaleY * (clipBottomF - centerY) + centerY);
     d2iScratch2 = (longlong)(int)i2dLo35;
     srcHeightOrSrcTopScaled = clipLeftOrWidthF;
-    if (srcCoordRight - clipLeftOrWidthF < 0.0) {
+    if (!(0.0 <= srcCoordRight - clipLeftOrWidthF)) {
       srcHeightOrSrcTopScaled = srcCoordRight;
     }
-    if (-(srcCoordRight - clipLeftOrWidthF) < 0.0) {
+    if (!(0.0 <= -(srcCoordRight - clipLeftOrWidthF))) {
       srcCoordRight = srcHeightOrSrcTopScaled;
     }
     i2dLo34 = i2dLo34 ^ 0x80000000;
@@ -4227,19 +4227,19 @@ loopSetI2dLo24:
     srcHeightOrSrcTopScaled = (float)((double)CONCAT44(0x43300000,i2dLo34) - 4503601774854144.0);
     srcCoordBottom = (float)((double)CONCAT44(0x43300000,i2dLo35) - 4503601774854144.0);
     srcCoordTop = srcHeightOrSrcTopScaled;
-    if (srcHeightOrSrcTopScaled < 0.0) {
+    if (!(0.0 <= srcHeightOrSrcTopScaled)) {
       srcCoordTop = 0.0;
     }
-    if (-srcHeightOrSrcTopScaled < 0.0) {
+    if (!(0.0 <= -srcHeightOrSrcTopScaled)) {
       srcCoordTop = srcHeightOrSrcTopScaled;
     }
     srcHeightOrSrcTopScaled = surfaceHeightF;
-    if (srcCoordBottom - surfaceHeightF < 0.0) {
+    if (!(0.0 <= srcCoordBottom - surfaceHeightF)) {
       srcHeightOrSrcTopScaled = srcCoordBottom;
     }
     i2dLo28 = surfaceWidth;
     i2dLo30 = surfaceHeight;
-    if (-(srcCoordBottom - surfaceHeightF) < 0.0) {
+    if (!(0.0 <= -(srcCoordBottom - surfaceHeightF))) {
       srcCoordBottom = srcHeightOrSrcTopScaled;
     }
   }

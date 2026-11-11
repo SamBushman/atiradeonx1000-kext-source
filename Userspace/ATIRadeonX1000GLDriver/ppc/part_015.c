@@ -1311,12 +1311,11 @@ uint gld_quantizePointSizeInt(int glContext,double fpPassThrough1)
   uint quantizedSize;
   
   quantizedSize = *(uint *)(((unsigned char *)0x000013e0) + glContext);
-  if ((float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e0) + glContext) ^ 0x80000000) -
-                     DOUBLE_001aa1e0) < fpPassThrough1) {
+  if (!(fpPassThrough1 <= (float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e0) + glContext) ^ 0x80000000) -
+                     DOUBLE_001aa1e0))) {
     quantizedSize = *(uint *)(((unsigned char *)0x000013e4) + glContext);
-    if (fpPassThrough1 <
-        (float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e4) + glContext) ^ 0x80000000)
-                       - DOUBLE_001aa1e0)) {
+    if (!((float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e4) + glContext) ^ 0x80000000)
+                       - DOUBLE_001aa1e0) <= fpPassThrough1)) {
       quantizedSize = (uint)(int)(fpPassThrough1 + FLOAT_001aa10c);
     }
   }
@@ -1411,7 +1410,7 @@ void gld_buildCoverageByteTable(undefined4 glContext,undefined4 unusedArgR4,uint
   char outByte;
   
   clampedSizeF = FLOAT_001aa0e8;
-  if (clampedSizeF <= fpPassThrough1) {
+  if (!(fpPassThrough1 < clampedSizeF)) {
     clampedSizeF = (float)((double)CONCAT44(0x43300000,(int)fpPassThrough1 ^ 0x80000000) -
                            DOUBLE_001aa1e0);
   }
@@ -1419,10 +1418,10 @@ void gld_buildCoverageByteTable(undefined4 glContext,undefined4 unusedArgR4,uint
   oneF = FLOAT_001aa0e8;
   halfSize = ((int)tableSize >> 1) + (uint)((int)tableSize < 0 && (tableSize & 1) != 0);
   clampScratch = oneF;
-  if ((float)(fpPassThrough1 - oneF) < 0.0) {
+  if (!(0.0 <= (float)(fpPassThrough1 - oneF))) {
     clampScratch = fpPassThrough1;
   }
-  if (-(float)(fpPassThrough1 - oneF) < 0.0) {
+  if (!(0.0 <= -(float)(fpPassThrough1 - oneF))) {
     fpPassThrough1 = clampScratch;
   }
   tableSizeF = (float)((double)CONCAT44(0x43300000,tableSize ^ 0x80000000) - DOUBLE_001aa1e0);
@@ -1435,7 +1434,7 @@ void gld_buildCoverageByteTable(undefined4 glContext,undefined4 unusedArgR4,uint
   if (0 < halfSize) {
     do {
       coverageSum = FLOAT_001aa0d4;
-      if (filterWidthF <= coverageSum) {
+      if (!(coverageSum < filterWidthF)) {
 loopSetCoverageValue:
         coverageValue = (float)(coverageSum * FLOAT_001aa0f0);
       }
@@ -1469,7 +1468,7 @@ loopSetCoverageValue:
           ;
         } while (sampleIndexF2 < filterWidthF);
         coverageValue = FLOAT_001aa0f0;
-        if (coverageSum <= FLOAT_001aa0e8) goto loopSetCoverageValue;
+        if (!(FLOAT_001aa0e8 < coverageSum)) goto loopSetCoverageValue;
       }
       outByte = (char)(int)(coverageValue + FLOAT_001aa10c);
       *(char *)(loopIndex + outTable) = outByte;
@@ -1495,17 +1494,17 @@ void gld_buildCoverageRampTable(undefined4 glContext,undefined4 unusedArgR4,uint
   intConvBias = DOUBLE_001aa1e0;
   halfF = FLOAT_001aa10c;
   clampedSizeF = FLOAT_001aa0e8;
-  if (clampedSizeF <= fpPassThrough1) {
+  if (!(fpPassThrough1 < clampedSizeF)) {
     clampedSizeF = (float)((double)CONCAT44(0x43300000,(int)fpPassThrough1 ^ 0x80000000) -
                            DOUBLE_001aa1e0);
   }
   oneF = FLOAT_001aa0e8;
   loopIndex = 0;
   clampScratch = oneF;
-  if ((float)(fpPassThrough1 - oneF) < 0.0) {
+  if (!(0.0 <= (float)(fpPassThrough1 - oneF))) {
     clampScratch = fpPassThrough1;
   }
-  if (-(float)(fpPassThrough1 - oneF) < 0.0) {
+  if (!(0.0 <= -(float)(fpPassThrough1 - oneF))) {
     fpPassThrough1 = clampScratch;
   }
   rampLengthF = (float)((double)CONCAT44(0x43300000,
@@ -2036,10 +2035,10 @@ int gld_computePointSizePixels(glContext)
      (glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0)), glContextPtr4 != 0)) {
     pixelSize = *(uint *)(((unsigned char *)0x000013e0) + glContext);
     pointSizeRequested = *(float *)(((unsigned char *)0x00002e20) + engineCaps);
-    if (((float)((double)CONCAT44(0x43300000,pixelSize ^ 0x80000000) - DOUBLE_001aa1e0) < pointSizeRequested) &&
+    if ((!(pointSizeRequested <= (float)((double)CONCAT44(0x43300000,pixelSize ^ 0x80000000) - DOUBLE_001aa1e0))) &&
        (pixelSize = *(uint *)(((unsigned char *)0x000013e4) + glContext),
-       pointSizeRequested < (float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e4) + glContext) ^ 0x80000000)
-                      - DOUBLE_001aa1e0))) {
+       !((float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e4) + glContext) ^ 0x80000000)
+                      - DOUBLE_001aa1e0) <= pointSizeRequested))) {
       pixelSize = (uint)(int)(pointSizeRequested + FLOAT_001aa10c);
     }
     pixelSize = glContextWord8 * pixelSize >> 1;
@@ -2048,8 +2047,8 @@ int gld_computePointSizePixels(glContext)
     pointSizeRequestedF = *(float *)(((unsigned char *)0x00002e20) + engineCaps);
     glContextFloat13e8 = *(float *)(((unsigned char *)0x000013e8) + glContext);
     quantizedSize = glContextFloat13e8;
-    if ((glContextFloat13e8 < pointSizeRequestedF) &&
-       (quantizedSize = *(float *)(((unsigned char *)0x000013ec) + glContext), pointSizeRequestedF < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
+    if ((!(pointSizeRequestedF <= glContextFloat13e8)) &&
+       (quantizedSize = *(float *)(((unsigned char *)0x000013ec) + glContext), !(*(float *)(((unsigned char *)0x000013ec) + glContext) <= pointSizeRequestedF))) {
       quantizedSize = *(float *)(((unsigned char *)0x000013f0) + glContext) *
               (float)((double)CONCAT44(0x43300000,
                                        (int)((pointSizeRequestedF - glContextFloat13e8) / *(float *)(((unsigned char *)0x000013f0) + glContext) +
@@ -2057,10 +2056,10 @@ int gld_computePointSizePixels(glContext)
       ;
     }
     pointSizeClamped = quantizedSize;
-    if (quantizedSize - FLOAT_001aa0e8 < 0.0) {
+    if (!(0.0 <= quantizedSize - FLOAT_001aa0e8)) {
       pointSizeClamped = FLOAT_001aa0e8;
     }
-    if (-(quantizedSize - FLOAT_001aa0e8) < 0.0) {
+    if (!(0.0 <= -(quantizedSize - FLOAT_001aa0e8))) {
       pointSizeClamped = quantizedSize;
     }
     modeScale = FLOAT_001aa0e8;
@@ -2347,8 +2346,8 @@ loopSetSizeAttenuated:
   glContextFloat13e8_2 = *(float *)(((unsigned char *)0x000013e8) + glContext);
   engineStateShort2e10 = *(short *)(((unsigned char *)0x00002e10) + engineState);
   quantizedPointSize = glContextFloat13e8_2;
-  if ((glContextFloat13e8_2 < engineStateFloat2e20) &&
-     (quantizedPointSize = *(float *)(((unsigned char *)0x000013ec) + glContext), engineStateFloat2e20 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
+  if ((!(engineStateFloat2e20 <= glContextFloat13e8_2)) &&
+     (quantizedPointSize = *(float *)(((unsigned char *)0x000013ec) + glContext),!(*(float *)(((unsigned char *)0x000013ec) + glContext) <= engineStateFloat2e20))) {
     negPointMode = "ram[";
     dirtyUnitMask = "ram[";
     i2dHi1 = 0x43300000;
@@ -2388,7 +2387,7 @@ loopSetSizeAttenuated:
          (((sizeAttenuated == '\0' && (sizeClamped == '\0')) ||
           ((((pointSizePixelsB == *(int *)(cacheEntry + 0x18) && ((engineStateShort2e10 == 0x1102) == (bool)cacheEntry[0x1c])) &&
             ((sizeAttenuated == '\0' ||
-             ((2.0 <= *(float *)(cacheEntry + 0x20) || (quantizedPointSize == *(float *)(cacheEntry + 0x20))))))) &&
+             ((!(*(float *)(cacheEntry + 0x20) < 2.0)|| (quantizedPointSize == *(float *)(cacheEntry + 0x20))))))) &&
            ((sizeClamped == '\0' || (*(short *)(cacheEntry + 0x28) == engineStateShort2e28)))))))) {
         if ((uint)engineStateShort3170 == *(uint *)(cacheEntry + 0xb4)) {
           cacheEntryWordb8 = *(uint *)(cacheEntry + 0xb8);
@@ -2440,8 +2439,8 @@ loopSetSizeAttenuated2:
   engineState2Float2e20 = *(float *)(((unsigned char *)0x00002e20) + engineState2);
   glContextFloat13e8_3 = *(float *)(((unsigned char *)0x000013e8) + glContext);
   quantizedPointSize = glContextFloat13e8_3;
-  if ((glContextFloat13e8_3 < engineState2Float2e20) &&
-     (quantizedPointSize = *(float *)(((unsigned char *)0x000013ec) + glContext), engineState2Float2e20 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
+  if ((!(engineState2Float2e20 <= glContextFloat13e8_3)) &&
+     (quantizedPointSize = *(float *)(((unsigned char *)0x000013ec) + glContext),!(*(float *)(((unsigned char *)0x000013ec) + glContext) <= engineState2Float2e20))) {
     negPointMode = "ram[";
     dirtyUnitMask = "ram[";
     i2dHi2 = 0x43300000;
@@ -2632,7 +2631,7 @@ callGldBuildCoverageByteTable:
               colCoord = firstCoord;
               do {
                 maskValue = 0xff;
-                if (entryWord4X2F * entryWord4X2F <= colCoord * colCoord + rowCoord2 * rowCoord2) {
+                if (!(colCoord * colCoord + rowCoord2 * rowCoord2 < entryWord4X2F * entryWord4X2F)) {
                   maskValue = 0;
                 }
                 *(undefined1 *)(pixelCursor + loopIndex2) = maskValue;
@@ -2658,8 +2657,8 @@ callGldBuildCoverageByteTable:
               colCoord2 = firstCoord;
               do {
                 distSq = colCoord2 * colCoord2 + rowCoord * rowCoord;
-                if (innerLimitSq <= distSq) {
-                  if (entryWord4X2F * entryWord4X2F <= distSq) {
+                if (!(distSq < innerLimitSq)) {
+                  if (!(distSq < entryWord4X2F * entryWord4X2F)) {
                     *(undefined1 *)(pixelCursor + loopIndex7) = 0;
                   }
                   else {
@@ -2729,9 +2728,9 @@ callGldBuildCoverageByteTable:
           engineFloat2e20 = *(float *)(((unsigned char *)0x00002e20) + engineCapsB);
           glContextFloat13e8 = *(float *)(((unsigned char *)0x000013e8) + glContext);
           quantizedValue = glContextFloat13e8;
-          if ((glContextFloat13e8 < engineFloat2e20) &&
+          if ((!(engineFloat2e20 <= glContextFloat13e8)) &&
              (quantizedValue = *(float *)(((unsigned char *)0x000013ec) + glContext),
-             engineFloat2e20 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
+!(*(float *)(((unsigned char *)0x000013ec) + glContext) <= engineFloat2e20))) {
             i2dHi8 = 0x43300000;
             i2dLo8 = (uint)(int)((float)((float)(engineFloat2e20 - glContextFloat13e8) /
                                       *(float *)(((unsigned char *)0x000013f0) + glContext)) + 0.5);
@@ -2748,9 +2747,9 @@ callGldBuildCoverageByteTable:
           engineFloat2e20 = *(float *)(((unsigned char *)0x00002e20) + engineCapsB);
           glContextFloat13e8 = *(float *)(((unsigned char *)0x000013e8) + glContext);
           quantizedValue = glContextFloat13e8;
-          if ((glContextFloat13e8 < engineFloat2e20) &&
+          if ((!(engineFloat2e20 <= glContextFloat13e8)) &&
              (quantizedValue = *(float *)(((unsigned char *)0x000013ec) + glContext),
-             engineFloat2e20 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
+!(*(float *)(((unsigned char *)0x000013ec) + glContext) <= engineFloat2e20))) {
             i2dHi9 = 0x43300000;
             i2dLo9 = (uint)(int)((float)((float)(engineFloat2e20 - glContextFloat13e8) /
                                       *(float *)(((unsigned char *)0x000013f0) + glContext)) + 0.5);
@@ -3707,7 +3706,7 @@ void gld_normalizeVec3(float *outVector,float *inVector)
   scale = FLOAT_001aa0d4;
   inX = *inVector;
   lengthSquared = (double)(inVector[2] * inVector[2] + inX * inX + inVector[1] * inVector[1]);
-  if (lengthSquared <= (double)FLOAT_001aa0d4) {
+  if (!((double)FLOAT_001aa0d4 < lengthSquared)) {
     outVector[2] = FLOAT_001aa0d4;
     *outVector = scale;
     outVector[1] = scale;

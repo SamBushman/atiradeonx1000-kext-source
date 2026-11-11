@@ -4910,80 +4910,80 @@ loopCallPthreadMutexUnlock:
   scratchFloat3 = (float)((double)CONCAT44(0x43300000,srcX + copyWidth ^ 0x80000000) - DOUBLE_001aa1e0);
   scratchFloat13 = scratchFloat3 - scratchFloat2;
   scratchFloat7 = scratchFloat2;
-  if (scratchFloat13 < 0.0) {
+  if (!(0.0 <= scratchFloat13)) {
     scratchFloat7 = scratchFloat3;
   }
   scratchFloat3 = (float)((double)CONCAT44(0x43300000,srcY + copyHeight ^ 0x80000000) - DOUBLE_001aa1e0);
   scratchFloat4 = (float)((double)CONCAT44(0x43300000,srcX ^ 0x80000000) - DOUBLE_001aa1e0);
-  if (-scratchFloat13 < 0.0) {
+  if (!(0.0 <= -scratchFloat13)) {
     scratchFloat7 = scratchFloat2;
   }
   scratchFloat2 = (float)((double)CONCAT44(0x43300000,*(uint *)(ctx + 0x160) ^ 0x80000000) -
                  DOUBLE_001aa1e0);
   scratchFloat13 = scratchFloat4;
-  if (scratchFloat4 < 0.0) {
+  if (!(0.0 <= scratchFloat4)) {
     scratchFloat13 = FLOAT_001aa0d4;
   }
   scratchFloat5 = (float)((double)CONCAT44(0x43300000,xOffset ^ 0x80000000) - DOUBLE_001aa1e0);
   scratchFloat15 = scratchFloat3 - scratchFloat2;
   scratchFloat6 = (float)((double)CONCAT44(0x43300000,srcY ^ 0x80000000) - DOUBLE_001aa1e0);
   scratchFloat14 = FLOAT_001aa0d4;
-  if (-scratchFloat4 < 0.0) {
+  if (!(0.0 <= -scratchFloat4)) {
     scratchFloat14 = scratchFloat13;
   }
   scratchFloat13 = scratchFloat5 + (scratchFloat7 - scratchFloat4);
   scratchFloat7 = (float)((double)CONCAT44(0x43300000,yOffset ^ 0x80000000) - DOUBLE_001aa1e0);
   scratchFloat17 = scratchFloat2;
-  if (scratchFloat15 < 0.0) {
+  if (!(0.0 <= scratchFloat15)) {
     scratchFloat17 = scratchFloat3;
   }
   scratchFloat3 = scratchFloat6;
-  if (scratchFloat6 < 0.0) {
+  if (!(0.0 <= scratchFloat6)) {
     scratchFloat3 = FLOAT_001aa0d4;
   }
-  if (-scratchFloat15 < 0.0) {
+  if (!(0.0 <= -scratchFloat15)) {
     scratchFloat17 = scratchFloat2;
   }
   scratchFloat2 = scratchFloat13 - scratchFloat1;
   scratchFloat15 = FLOAT_001aa0d4;
-  if (-scratchFloat6 < 0.0) {
+  if (!(0.0 <= -scratchFloat6)) {
     scratchFloat15 = scratchFloat3;
   }
   scratchFloat5 = (scratchFloat14 - scratchFloat4) + scratchFloat5;
   scratchFloat3 = scratchFloat1;
-  if (scratchFloat2 < 0.0) {
+  if (!(0.0 <= scratchFloat2)) {
     scratchFloat3 = scratchFloat13;
   }
   scratchFloat13 = scratchFloat5;
-  if (scratchFloat5 < 0.0) {
+  if (!(0.0 <= scratchFloat5)) {
     scratchFloat13 = FLOAT_001aa0d4;
   }
   scratchFloat4 = (float)((double)CONCAT44(0x43300000,srcX - xOffset ^ 0x80000000) - DOUBLE_001aa1e0);
   scratchFloat14 = scratchFloat7 + (scratchFloat17 - scratchFloat6);
   scratchFloat7 = (scratchFloat15 - scratchFloat6) + scratchFloat7;
-  if (-scratchFloat2 < 0.0) {
+  if (!(0.0 <= -scratchFloat2)) {
     scratchFloat3 = scratchFloat1;
   }
   scratchFloat1 = FLOAT_001aa0d4;
-  if (-scratchFloat5 < 0.0) {
+  if (!(0.0 <= -scratchFloat5)) {
     scratchFloat1 = scratchFloat13;
   }
   scratchFloat2 = scratchFloat8 - scratchFloat14;
   scratchFloat13 = scratchFloat7;
-  if (scratchFloat7 < 0.0) {
+  if (!(0.0 <= scratchFloat7)) {
     scratchFloat13 = FLOAT_001aa0d4;
   }
   scratchFloat5 = (float)((double)CONCAT44(0x43300000,srcY - yOffset ^ 0x80000000) - DOUBLE_001aa1e0);
   scratchFloat15 = scratchFloat1 + scratchFloat4;
   scratchFloat6 = scratchFloat3 + scratchFloat4;
-  if (scratchFloat2 < 0.0) {
+  if (!(0.0 <= scratchFloat2)) {
     scratchFloat14 = scratchFloat8;
   }
   scratchFloat17 = FLOAT_001aa0d4;
-  if (-scratchFloat7 < 0.0) {
+  if (!(0.0 <= -scratchFloat7)) {
     scratchFloat17 = scratchFloat13;
   }
-  if (-scratchFloat2 < 0.0) {
+  if (!(0.0 <= -scratchFloat2)) {
     scratchFloat8 = scratchFloat14;
   }
   if ((scratchFloat3 <= scratchFloat1) || (scratchFloat8 <= scratchFloat17)) {
@@ -5294,31 +5294,31 @@ checkScratchInt35:
                               DOUBLE_001aa1e0);
             }
             scratchFloat17 = scratchFloat7;
-            if (scratchFloat7 - scratchFloat3 < 0.0) {
+            if (!(0.0 <= scratchFloat7 - scratchFloat3)) {
               scratchFloat17 = scratchFloat3;
             }
             scratchFloat16 = scratchFloat15;
-            if (scratchFloat13 - scratchFloat15 < 0.0) {
+            if (!(0.0 <= scratchFloat13 - scratchFloat15)) {
               scratchFloat16 = scratchFloat13;
             }
             scratchFloat18 = scratchFloat6;
-            if (scratchFloat23 - scratchFloat6 < 0.0) {
+            if (!(0.0 <= scratchFloat23 - scratchFloat6)) {
               scratchFloat18 = scratchFloat23;
             }
             scratchFloat19 = scratchFloat14;
-            if (scratchFloat14 - scratchFloat2 < 0.0) {
+            if (!(0.0 <= scratchFloat14 - scratchFloat2)) {
               scratchFloat19 = scratchFloat2;
             }
-            if (-(scratchFloat7 - scratchFloat3) < 0.0) {
+            if (!(0.0 <= -(scratchFloat7 - scratchFloat3))) {
               scratchFloat3 = scratchFloat17;
             }
-            if (-(scratchFloat13 - scratchFloat15) < 0.0) {
+            if (!(0.0 <= -(scratchFloat13 - scratchFloat15))) {
               scratchFloat16 = scratchFloat15;
             }
-            if (-(scratchFloat14 - scratchFloat2) < 0.0) {
+            if (!(0.0 <= -(scratchFloat14 - scratchFloat2))) {
               scratchFloat2 = scratchFloat19;
             }
-            if (-(scratchFloat23 - scratchFloat6) < 0.0) {
+            if (!(0.0 <= -(scratchFloat23 - scratchFloat6))) {
               scratchFloat18 = scratchFloat6;
             }
             scratchFloat22 = scratchFloat1 * scratchFloat16 + scratchFloat1 * -scratchFloat5;
@@ -6782,17 +6782,17 @@ loopCallPthreadMutexUnlock:
   scratchFloat12 = scratchFloat14 - scratchFloat4;
   scratchFloat18 = scratchFloat17 - scratchFloat5;
   scratchFloat13 = scratchFloat4;
-  if (scratchFloat12 < 0.0) {
+  if (!(0.0 <= scratchFloat12)) {
     scratchFloat13 = scratchFloat14;
   }
   scratchFloat14 = scratchFloat5;
-  if (scratchFloat18 < 0.0) {
+  if (!(0.0 <= scratchFloat18)) {
     scratchFloat14 = scratchFloat17;
   }
-  if (-scratchFloat12 < 0.0) {
+  if (!(0.0 <= -scratchFloat12)) {
     scratchFloat13 = scratchFloat4;
   }
-  if (-scratchFloat18 < 0.0) {
+  if (!(0.0 <= -scratchFloat18)) {
     scratchFloat14 = scratchFloat5;
   }
   if ((scratchFloat13 <= scratchFloat6) || (scratchFloat14 <= scratchFloat7)) {

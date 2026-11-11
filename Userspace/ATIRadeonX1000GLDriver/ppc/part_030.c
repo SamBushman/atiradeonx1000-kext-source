@@ -907,12 +907,12 @@ int IRInst__clampOutputValue(outValue, inst, valueBits)
   float result;
   
   result = value;
-  if ((*(int *)(inst + 0x120) != 0) && (result = FLOAT_001aa0e8, value <= FLOAT_001aa0e8)) {
+  if ((*(int *)(inst + 0x120) != 0) && (result = FLOAT_001aa0e8,!(FLOAT_001aa0e8 < value))) {
     result = value;
-    if (value < 0.0) {
+    if (!(0.0 <= value)) {
       result = FLOAT_001aa0d4;
     }
-    if (-value < 0.0) {
+    if (!(0.0 <= -value)) {
       result = value;
     }
   }
