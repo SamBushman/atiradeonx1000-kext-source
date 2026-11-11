@@ -240,6 +240,34 @@ GLDriver) was made with the UNPATCHED decompiler; GLEngine's was regenerated wit
    (`EVIDENCE_fnfuzz.md` section 21). NOT yet audited with the same count method: GLDriver, GA, VADriver, libGLProgrammability (the stock/rebuilt `otool` dumps are needed). The int -> float direction
    (`lis r,0x4330` count) is too noisy to use as a detector; use the compile-time type check (`GH_UCHK`) for it.
 
+ - Class #23 for the other corpora (issue #237, applied Nov 10-11): `apply_fcmp_atoms.py` (compare-atom sequence aligner; `--positional` for functions whose operands are variables holding constants) negated 305 atoms
+   (GLDriver 183, libGLProgrammability 103, VADriver 19). Caveats found while verifying it: (a) the patched decompiler is NOT an oracle where the stock tests the unordered bit itself (`cror 30,31,28`; a patched dump
+   then prints the NaN-sound form of the compare the stock does NOT make): `0x18a40` (9 sites) and `0x159b58` had to be corrected back by reading the stock asm; (b) the aligner pairs atoms by SHAPE, so two atoms of the same shape
+   (left/right or top/bottom halves, `ae80`) can be negated crosswise: every changed function must be fuzzed in NaN mode (`FNFUZZ_NANMODE=1`) against a control image that still DIFFs; (c) libGLProgrammability cannot use the import interposer
+   (the `PP*` callees are inside the dylib), so its changed functions are checked in plain rows only.
+ - Class #26 (float association: Ghidra marks its float `+` / `*` tokens associative and prints the right-nested tree `x + (y + z)` as `x + y + z`; C reads `(x + y) + z`, which rounds differently from the stock's fused-madd
+   chains). `Tools/userspace/gs/DecompAll.java` with `DECOMP_PAREN_FLOAT=1` keeps the parentheses (GLEngine was generated that way). GLDriver, GA, VADriver, libGLProgrammability, libGL were not: re-dumped with and without it and
+   compared statement by statement, 28 functions had parenthesis-only differences (GLDriver 15, GA 5, VA 1, libGLProgrammability 7, libGL 0), about 73 real sites; `Tools/userspace/apply_paren_float.py FLAT PAREN CORPUS ADDR [--write]`
+   inserts them in the corpus (interval of operands of an arithmetic chain, aligned by order among chains of equal key; a printer artefact, a misplaced closing parenthesis in libGLProgrammability `0x97bcdd50`, is done by hand).
+   Found by `gld_normalizeVec3` (2 of 2000 plain trials). Use `DECOMP_PAREN_FLOAT=1` for every dump of these corpora.
+ - Class #27 (single vs double precision: the stock does `frsp` + `fmuls` / `fadds` on single operands, the corpus multiplied in double: `floatToFixedSaturate`, `IrLogInternal__fold`). Detect by operation counts per function
+   (`flop_audit.py`: S = fadds/fsubs/fmuls/fdivs/fsqrts/fres, fmadds-family counted twice; D = the double forms; and `frsp`), stock vs rebuilt `otool -tv`; `fnfuzz_gen.py` with `FNFUZZ_ALL=1` writes the whole function list for it.
+   The count has false positives where the rebuilt symbol table lacks a local symbol (the range runs into the next function) and where -O0 / CSE changes the number of operations; every flagged function was read.
+ - Class #28 (a float word read as an integer): a data word declared `unsigned int` / `undefined4` that the code uses as a float (the stock keeps the rounded value in a register). VADriver `ava_render_hue_saturation_pass`
+   negated and added `hueSaturationConstReg*` as integers. Fix: `GH_BITS_F(word)` for the read and `GH_F2U(expr)` for the store. Scan: a name of an integer-typed extern in arithmetic next to a float literal / cast, or negated
+   (`= -NAME_0000xxxx`); VA 92 / GA 13 / libGLProgrammability 436 integer externs, only the 3 statements of that function.
+ - Fuzz methodology for these corpora: `FNFUZZ_STACKFILL=0` (harness stack residue made a clean function differ 1 in 400), `FNFUZZ_NANCANON=1` (NaN payloads), >= 2000 plain trials for float functions (a difference in the
+   last bit shows in 0.1 - 1 % of random inputs; 400 trials missed `gld_normalizeVec3`), a ledger is valid for ONE image (regenerate with `fnfuzz_gen.py` per image: the addresses shift), and a mismatch control image that still
+   DIFFs for every change.
+ - Dropped floating-point parameters (issue #238, `ILReader__appendFloatConst`, `textPrintDoubleShortest`): Darwin PPC passes a double in f1..f13 AND reserves the GPR slots it would occupy (a double in position 3 takes r7/r8),
+   so the corrected prototype appends the doubles AFTER the integer parameters Ghidra recovered (`(a, b, char *buf, uint cap, double v, double tol)`), it does not interleave them. Ghidra recovers only GPR parameters and the
+   step "strip never-used trailing parameters" (#212) removed real FP parameters. Detect: FPR liveness at the stock function entry (`fpr_param_audit.py`, `fpr_live_audit.py`; false positives: loop accumulators that are
+   written before they are read) against the corpus signature, and the imp-ledger fuzz of every function with a `d` in the ledger signature.
+ - Harness traps found here: (a) a rebuilt libGLProgrammability / libGL must be fuzzed through `us_<sha>/sbs/` - `us_<sha>/glprog/` carries the stock's install name and dyld loads the stock for both sides (11 of 11 bogus DIFFs);
+   (b) out-of-range table indexes (`gld_buildTextureHardwareState`, format index 254) read image-layout-dependent pointers, use `FNFUZZ_PROFILE=narrow` to separate them from code differences;
+   (c) `FNFUZZ_VERBOSE=1 FNFUZZ_DUMPARENA=prefix` writes `prefix.S` / `prefix.R` (the 0x20000-byte arena of the first differing trial) for an offline word diff;
+   (d) deliberate deviations (#64 `ILReader__currentOpcode` clamp, #139 MIN_LOD clamp) are classified by building a throwaway variant image WITHOUT the deviation and showing 0 differ (EVIDENCE_fnfuzz.md section 22.5).
+
 ## Reproducibility check (GA, from scratch)
 A fresh import + FindMoreFuncs + DecompAll + DumpRanges reproduces the archived function set and RANGES exactly; 9 of 82 dump files differ only in
 stack-variable naming (`local_28` vs `uStack_28`) - Ghidra's stack analysis is not fully deterministic between sessions. The archived dump is the
