@@ -446,9 +446,9 @@ void _glCallLists_Exec(param_1, param_2, param_3, param_4)
   case 0x1404:
     if (0 < param_2) {
       do {
-        fVar5 = *param_4;
+        iVar7 = *(int *)param_4;
         param_4 = param_4 + 1;
-        _gleCallList(param_1,(int)fVar5 + *(int *)(param_1 + 0x5404));
+        _gleCallList(param_1,iVar7 + *(int *)(param_1 + 0x5404));
         param_2 = param_2 + -1;
       } while (param_2 != 0);
     }
@@ -456,9 +456,9 @@ void _glCallLists_Exec(param_1, param_2, param_3, param_4)
   case 0x1405:
     if (0 < param_2) {
       do {
-        fVar5 = *param_4;
+        iVar7 = *(int *)param_4;
         param_4 = param_4 + 1;
-        _gleCallList(param_1,(int)fVar5 + *(int *)(param_1 + 0x5404));
+        _gleCallList(param_1,iVar7 + *(int *)(param_1 + 0x5404));
         param_2 = param_2 + -1;
       } while (param_2 != 0);
     }

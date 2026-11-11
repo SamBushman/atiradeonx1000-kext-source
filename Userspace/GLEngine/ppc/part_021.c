@@ -1257,7 +1257,7 @@ LAB_0007ad34:
           do {
             iVar1 = iVar7 * 4;
             iVar7 = iVar7 + 1;
-            *(int *)(iVar1 + *(int *)(param_1 + 0x3248)) = (int)GH_F2U(*(float *)(iVar1 + param_4));
+            *(int *)(iVar1 + *(int *)(param_1 + 0x3248)) = (int)*(float *)(iVar1 + param_4);
             param_3 = param_3 - 1;
           } while (param_3 != 0);
         }
@@ -1278,7 +1278,7 @@ LAB_0007ad34:
           do {
             iVar1 = iVar7 * 4;
             iVar7 = iVar7 + 1;
-            *(int *)(iVar1 + *(int *)(param_1 + 0x326c)) = (int)GH_F2U(*(float *)(iVar1 + param_4));
+            *(int *)(iVar1 + *(int *)(param_1 + 0x326c)) = (int)*(float *)(iVar1 + param_4);
             param_3 = param_3 - 1;
           } while (param_3 != 0);
         }

@@ -419,8 +419,8 @@ LAB_000812c4:
     } while (iVar6 != 0);
   }
 LAB_000812f0:
-  ((void (*)())_gleSetRasterPos)(param_1,(double)GH_U2F((unsigned int)(*param_2)),(double)GH_U2F((unsigned int)(param_2[1])),
-                   (double)GH_U2F((unsigned int)(param_2[2])),(double)FLOAT_00108e54);
+  ((void (*)())_gleSetRasterPos)(param_1,(double)(float)(*param_2),(double)(float)(param_2[1]),
+                   (double)(float)(param_2[2]),(double)FLOAT_00108e54);
   return;
 }
 
@@ -1660,8 +1660,8 @@ LAB_00082e98:
     } while (iVar6 != 0);
   }
 LAB_00082ec4:
-  ((void (*)())_gleSetRasterPos)(param_1,(double)GH_U2F((unsigned int)(*param_2)),(double)GH_U2F((unsigned int)(param_2[1])),
-                   (double)GH_U2F((unsigned int)(param_2[2])),(double)GH_U2F((unsigned int)(param_2[3])));
+  ((void (*)())_gleSetRasterPos)(param_1,(double)(float)(*param_2),(double)(float)(param_2[1]),
+                   (double)(float)(param_2[2]),(double)(float)(param_2[3]));
   return;
 }
 

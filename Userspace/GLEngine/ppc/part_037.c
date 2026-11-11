@@ -1342,7 +1342,7 @@ LAB_000b1560:
                 iVar4 = 0;
                 do {
                   *(int *)(iVar4 + (int)param_4) =
-                       (int)GH_F2U(*(float *)(iVar4 + param_1 + param_2 * 0x10 + 0x1a0));
+                       (int)*(float *)(iVar4 + param_1 + param_2 * 0x10 + 0x1a0);
                   iVar4 = iVar4 + 4;
                   iVar5 = iVar5 + -1;
                 } while (iVar5 != 0);
@@ -1396,7 +1396,7 @@ LAB_000b1734:
                     (uint)*(byte *)(param_2 + iVar4 + 0x9db8);
             iVar4 = 0;
             for (; iVar5 != 0; iVar5 = iVar5 + -1) {
-              param_4[iVar4] = (int)GH_F2U(*(float *)(iVar4 * 4 + iVar3 + 0x37c8));
+              param_4[iVar4] = (int)*(float *)(iVar4 * 4 + iVar3 + 0x37c8);
               iVar4 = iVar4 + 1;
             }
             return;
@@ -1407,7 +1407,7 @@ LAB_000b1734:
             iVar5 = 0;
             do {
               *(int *)(iVar5 + (int)param_4) =
-                   (int)GH_F2U(*(float *)(iVar5 + iVar4 + param_2 * 0x660 + 0x37b0));
+                   (int)*(float *)(iVar5 + iVar4 + param_2 * 0x660 + 0x37b0);
               iVar5 = iVar5 + 4;
               iVar3 = iVar3 + -1;
             } while (iVar3 != 0);
@@ -1423,7 +1423,7 @@ LAB_000b1734:
                     (uint)(byte)((unsigned char *)0x9da8)[param_2 + iVar4];
             iVar4 = 0;
             for (; iVar5 != 0; iVar5 = iVar5 + -1) {
-              param_4[iVar4] = (int)GH_F2U(*(float *)(iVar4 * 4 + iVar3 + 0x2cb8));
+              param_4[iVar4] = (int)*(float *)(iVar4 * 4 + iVar3 + 0x2cb8);
               iVar4 = iVar4 + 1;
             }
             return;
@@ -1434,7 +1434,7 @@ LAB_000b1734:
           do {
             uVar2 = uVar2 + 1;
             *(int *)(iVar5 + (int)param_4) =
-                 (int)GH_F2U(*(float *)(iVar5 + iVar4 + param_2 * 0xb0 + 0x2cac));
+                 (int)*(float *)(iVar5 + iVar4 + param_2 * 0xb0 + 0x2cac);
             iVar5 = iVar5 + 4;
           } while (uVar2 < 2);
           return;

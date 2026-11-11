@@ -1168,7 +1168,7 @@ LAB_0007fa18:
     } while (iVar6 != 0);
   }
 LAB_0007fa44:
-  ((void (*)())_gleSetRasterPos)(param_1,(double)GH_U2F((unsigned int)(*param_2)),(double)GH_U2F((unsigned int)(param_2[1])),(double)FLOAT_00108e50,
+  ((void (*)())_gleSetRasterPos)(param_1,(double)(float)(*param_2),(double)(float)(param_2[1]),(double)FLOAT_00108e50,
                    (double)FLOAT_00108e54);
   return;
 }

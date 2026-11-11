@@ -231,6 +231,15 @@ GLDriver) was made with the UNPATCHED decompiler; GLEngine's was regenerated wit
    `PackState__tryPlaceInstructionSources`. Fixed in the corpus with a prototype cast `((int (*)(int *, double))slot)(this, value)`, the form `IrCos__fold` / `IrSin__fold` already use
    (stock: `lwz r3,0x30c(rX); lfs f1,..; bctrl`). The archived dump keeps the old text.
 
+ - Class #25 (float <-> integer: a value conversion printed as a bit-cast, or a bit move printed as a conversion; issue #236). Found in GLEngine by the instruction-count audit
+   (`fctiw*` per function, stock vs rebuilt `otool -arch ppc -tV`: 30 functions differed, 2 explained benign after the fixes) and by the fnfuzz differential (`_glCallLists_Exec`
+   GL_INT/GL_UNSIGNED_INT read through a `float *` and converted; `_glPixelMapfv_Exec`). Four shapes: (a) `(int)GH_F2U(*(float *)X)` where the stock has `fctiwz`; (b) `GH_U2F((unsigned int)(X))` where the stock has `frsp`
+   or the 0x43300000 magic-double idiom; (c) `undefined4` word locals assigned a float and stored as float (`_gleGetHistogram`): the conversions must be bit moves; (d) a callee Ghidra typed `double`
+   (an indirect-call tail leaving f1 / r3 as they were) whose call result was assigned to an int local: the caller grew an `fctiwz f0,f1` the stock does not have (20 sites). Root is `ghidra2c.py`
+   `fix_float_int` / `resolve_float_casts` (41 functions in `float_cast_residual.txt` are still unreconciled) plus the Ghidra types; the GLEngine sites were fixed by hand in the corpus
+   (`EVIDENCE_fnfuzz.md` section 21). NOT yet audited with the same count method: GLDriver, GA, VADriver, libGLProgrammability (the stock/rebuilt `otool` dumps are needed). The int -> float direction
+   (`lis r,0x4330` count) is too noisy to use as a detector; use the compile-time type check (`GH_UCHK`) for it.
+
 ## Reproducibility check (GA, from scratch)
 A fresh import + FindMoreFuncs + DecompAll + DumpRanges reproduces the archived function set and RANGES exactly; 9 of 82 dump files differ only in
 stack-variable naming (`local_28` vs `uStack_28`) - Ghidra's stack analysis is not fully deterministic between sessions. The archived dump is the

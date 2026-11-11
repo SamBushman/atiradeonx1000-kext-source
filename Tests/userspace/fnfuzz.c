@@ -319,7 +319,7 @@ typedef struct { unsigned off; int kind; unsigned a, b, c; int n; unsigned v[8];
 typedef struct { char name[32]; unsigned size; int nf; gfield_t f[96]; } gtype_t;
 typedef struct { int n; int kind; unsigned a, b; int pct; unsigned v[64]; int nv; char tname[32]; char text[96]; } garg_t;
 typedef struct { char name[96]; int na; garg_t a[8]; } gfunc_t;
-enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD, GF_FNREC3A, GF_FNRECA };
+enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD, GF_FNREC3A, GF_FNRECA, GF_FFILL };
 enum { GA_PTR = 1, GA_INT, GA_PICK, GA_RAND, GA_NULL, GA_NAME, GA_STR };
 static unsigned g_names[64]; static int g_nnames;
 typedef struct { char name[48]; char tname[32]; unsigned v[8]; int nv; char func[96]; int pct; } gret_t;
@@ -397,6 +397,7 @@ static void load_graphspec(const char *path) {
             else if (!strcmp(tok[0], "fnrec3")) g->kind = GF_FNREC3;
             else if (!strcmp(tok[0], "fnrec3a")) g->kind = GF_FNREC3A;
             else if (!strcmp(tok[0], "fnreca")) g->kind = GF_FNRECA;
+            else if (!strcmp(tok[0], "ffill") && nt >= 5) { g->kind = GF_FFILL; g->a = gnum(tok[2]); float lo = (float)atof(tok[3]), hi = (float)atof(tok[4]); memcpy(&g->v[0], &lo, 4); memcpy(&g->v[1], &hi, 4); }   /* ffill OFF LEN LO HI: LEN bytes of random floats in LO..HI (1 in 16 is NaN / +-inf / -0) */
             else if (!strcmp(tok[0], "randfill") && nt >= 3) { g->kind = GF_RANDFILL; g->a = gnum(tok[2]); g->b = nt >= 4 ? gnum(tok[3]) : 4096; }
             else if (!strcmp(tok[0], "istr") && nt >= 3) { g->kind = GF_ISTR; snprintf(g->text, sizeof g->text, "%s", tok[2]); }   /* the characters inline at OFF (one of a|b|c) */
             else if (!strcmp(tok[0], "warr") && nt >= 6) { g->kind = GF_WARR; g->c = gnum(tok[2]); g->a = gnum(tok[3]); g->b = gnum(tok[4]); for (int i = 5; i < nt && g->n < 8; i++) g->v[g->n++] = gnum(tok[i]); }   /* warr OFF COUNTOFF MIN MAX v..: OFF = pointer to an array of count words drawn from v, COUNTOFF = the count word */
@@ -441,6 +442,7 @@ static unsigned gb_build(gtype_t *t, int depth) {
         case GF_FNRECW: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_recw; break;
         case GF_FNRECP: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_recp; break;
         case GF_FNREC1: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_rec1; break;
+        case GF_FFILL: { float lo, hi; memcpy(&lo, &g->v[0], 4); memcpy(&hi, &g->v[1], 4); for (unsigned k = 0; k + 4 <= g->a; k += 4) { unsigned r = rnd32(), w; if ((r & 15) == 0) { static const unsigned sp[4] = { 0x7fc00000u, 0x7f800000u, 0xff800000u, 0x80000000u }; w = sp[(r >> 4) & 3]; } else { float f = lo + (hi - lo) * ((float)(rnd32() >> 8) / 16777216.0f); memcpy(&w, &f, 4); } *(unsigned *)(b + g->off + k) = w; } break; }
         case GF_RANDFILL: for (unsigned k = 0; k + 4 <= g->a; k += 4) *(unsigned *)(b + g->off + k) = rnd32() % g->b; break;   /* LEN bytes of small random words: a block of fields the code only reads */
         case GF_U8: b[g->off] = (unsigned char)grange(g->a, g->b); break;
         case GF_U16: *(unsigned short *)(b + g->off) = (unsigned short)grange(g->a, g->b); break;
@@ -455,6 +457,7 @@ static unsigned gb_build(gtype_t *t, int depth) {
         case GF_BITS: *(unsigned *)(b + g->off) = rnd32() & g->a; break;
         case GF_STR: { char txt[96]; snprintf(txt, sizeof txt, "%s", g->text); int na = 1; for (char *q = txt; *q; q++) if (*q == '|') na++;
             int pick = rnd32() % na; char *s0 = txt; for (int k = 0; k < pick; k++) { s0 = strchr(s0, '|') + 1; } char *e = strchr(s0, '|'); if (e) *e = 0;
+            { char *w = s0; for (char *r = s0; *r; r++) { if (r[0] == '\\' && r[1] == 'r') { *w++ = '\r'; r++; } else if (r[0] == '\\' && r[1] == 'n') { *w++ = '\n'; r++; } else *w++ = *r; } *w = 0; }   /* \r and \n in the text are the control characters */
             unsigned sa = gb_alloc((unsigned)strlen(s0) + 1); memcpy((void *)sa, s0, strlen(s0) + 1); *(unsigned *)(b + g->off) = sa; break; }
         }
     }

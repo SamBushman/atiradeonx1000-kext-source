@@ -335,3 +335,39 @@ Notes. `_glClear_Exec`: r5 at the tail call through ctx+0x469c is the clear-loop
 
 
 **`_gleSwitchToRenderer` and `_gleSwitchToNonRevertRenderer` (run66, binary `fnfuzz_gs24`, specs TSCTX / TSVT / TSTAB; Nov 10).** New harness recorders `fnrec3a` (r3, r4, r5 recorded, then returns r3) and `fnreca` (returns r3) cover the renderer vtable slots at TSVT+0x138 / 0x144 / 0x148 and ctx+0x4784 / 0x4788. The first version of the spec hung (a memcpy over ctx slots; fixed by pinning the TSVT slots and `set 0x5408 0`). Result: 200 trials without REPAIR, **0 differ, 0 uninformative**; with REPAIR `_gleSwitchToRenderer` 200 of 200 trials ran to the end, `_gleSwitchToNonRevertRenderer` 35 of 200 (165 needed patches), **0 differ**. Mismatch control (the two rebuilt addresses swapped with another function): `_gleSwitchToRenderer` 50 of 50 differ, `_gleSwitchToNonRevertRenderer` 26 of 50 differ (24 agree: those trials leave early on the same path in both functions). Not covered: the stage-1 branch of `_gleUpdateDispatchCodeChange` with ctx+0x85a5 != 0xff, and the `_gleSynchronizePlugin*` / `_gleSwitchRenderers{Read,Write}Buffers` callees' own bodies (they are separate ledger functions covered by the plain fuzz).
+
+## 21. Object-graph families fam1-fam3, defect class #25 (float/integer conversion vs bit move) and its fixes (Nov 10, images cls25a-c, binary `fnfuzz_gs26`)
+
+**Harness / specs added (uncommitted before this section, now in the tree).** Graph op `ffill OFF LEN LO HI` (random floats, 1 in 16 NaN / inf / -0), `\r` / `\n` escapes in `str`. Spec families in `Tests/userspace/gleng_graph_spec.txt`: shader-object wrappers behind the machine-object hash (OBUF), buffer objects and the other machine-object hash wrappers (BDATA / BUFOBJ / BCS / BVT / HOBJ / BSS / BCTX / BFBO / BCAPS / BNAMES), pixel maps (PMF / PMU / PBOOBJ / PMCTXB), `_gleGetHistogram` helpers, FUN_00087750, FUN_0001ff98, shared-state / reclaim / texture-level / VAR / TCL / program-string (SVTOK ... PSCTX), and glCallLists (CLCTX / CLSS / CLOBJ / CLINTS / CLSHORTS / CLBYTES / CLB2 / CLB34 / CLFLTS / CLFLTBIG: the shared hash of display-list objects whose command slot is a recording callback, so a call records WHICH list name was looked up).
+
+**Results before the fixes (image 92d69e0d, run68):** fam1 22 functions 0 differ (control, ids rotated: 19 of 22 differ); fam2c 32 functions, **1 DIFF: `_glPixelMapfv_Exec`**; fam3 7 functions 0 differ, 2 uninformative (`_gleCreateSharedState`, `_gleReclaimContextResources` fault in both images in every trial) and `_gleAllocateTextureLevel` never reaches an import. Weak-live import functions (run67, 97 functions, default and graph profile): **0 differ in 19400 trials each**; 72 / 79 of them still never reach a stubbed import (covered only through arena digests and recorders).
+
+**Defect class #25 (issue #236).** The DIFF was traced to `(int)GH_F2U(*(float *)X)` where the stock has `fctiwz`. An audit by instruction count (`fctiw*` per function, stock vs rebuilt `otool -arch ppc -tV`) found 30 functions that differ; every one was localised (`gcc -g -S` stabs on the linked tree; the original Ghidra dumps) and fixed in the corpus:
+
+| shape | functions |
+|---|---|
+| word read through a `float *` then converted | `_glCallLists_Exec` (GL_INT 0x1404, GL_UNSIGNED_INT 0x1405: stock `lwz`) |
+| `undefined4` word locals assigned / stored as float | `_gleGetHistogram` (stock 0 `fctiw`, rebuilt 8) |
+| value conversion printed as bit-cast, `(int)GH_F2U(*(float *)X)` | `_glPixelMapfv_Exec` (2), `_glGetVertexAttribivARB_Exec` (5) |
+| value conversion printed as bit-cast, `GH_U2F((unsigned int)(X))` (stock `frsp`) | `_glEvalCoord2dv_Exec`, `FUN_00064c1c`, `_glRasterPos2dv/3dv/4dv_Exec` (7 sites) |
+| float result stored into an int word | `_glMapGrid1f_Comp`, `_glMapGrid2f_Comp` |
+| callee typed `double`, result assigned to an int local (extra `fctiwz f0,f1` after the call; the stock ignores the result) | 20 sites of `_gleSynchronizePluginBuffer` / `_gleUpdateLightRGBASums`: `_glColorTable_Comp`, `_glColorSubTable_Comp`, `_glTexImage1D/2D/3D_Comp`, `_glTexSubImage1D/2D/3D_Comp`, 10 `_gleVtxLight*` |
+
+After the fixes (image cls25c) the audit gives **2** functions with a different `fctiw*` count, both read in both disassemblies and judged benign: `_gleExtractPixel_Index_Float` (stock 2, rebuilt 1: the compiler merged the two identical `fctiwz` tails of `if (!(C <= f)) f -= C2; (int)f`; the compare form keeps the NaN behaviour) and `_glPNTrianglesfATIX_CompExec` (stock 0, rebuilt 1: the corpus inlines the stock's tail call to `_glPNTrianglesfATIX_Exec`, whose body is the same code). The `lis r,0x4330` (int -> float magic) count is NOT usable as a detector (396 functions differ by constant materialisation).
+
+| check on cls25c (spec cur16) | result |
+|---|---|
+| `_glCallLists_Exec` (6 spec variants, 400 trials) | **0 differ**; control (image 92d69e0d, which has the bug): **DIFF, 33 of 400 trials differ** (first: type 0x1405); "live 0" is expected (no import is reached: the observable is the recorded node address in the arena digest) |
+| `_glPixelMapfv_Exec` (pm1, 400 trials) | **0 differ** (was DIFF) |
+| fam2 (32 functions, 6400 trials) | **0 differ** (was 1) |
+| fam1 (22 functions, 4400 trials) | 0 differ |
+| fam3 (6 functions, 1200 trials) | 0 differ, 2 uninformative (the same two always-fault functions) |
+| weak-live import set (live0, 97 functions, 19400 trials, default profile) | 0 differ, 14 uninformative |
+| plain27 half a (12 trials, LISTCTX, FLOATARGS; run71) | 1337 functions, 16044 trials, 3 differ (`_glePreInitTOC`, `_glGetHistogramParameterfv_Exec`, `_glGetMinmaxParameterfv_Exec`: the r3 leftovers of sections 1-9), 119 uninformative: **identical to run53 on 92d69e0d** |
+| plain27 half b | 1336 functions, 16236 trials, 0 differ, 179 uninformative: identical to run53 |
+| gap255, REPAIR + LISTCTX + FLOATARGS | 255 functions, 6144 trials, 0 differ, 88 uninformative: identical to run54 |
+| ctxfuzz (ctx30, 24 trials) | 615 functions, 14856 trials, 8 differ (`_gleUpdateMatrixFunc`, `_gleTextureImagePut_Slow`, `_glepUnloadRenderers`, `_glColor3d_CompExec`, `_gleImagingUnpackData`, `_gleImagingPackData`, `_gleConvolutionFilter2D`, `_gleGenerateMipmapData`), 58 uninformative: the same 8 names and counts as run53 |
+
+So the fixes change no result outside the intended ones; the regression sets (plain27 / gap255 / ctx30) are unchanged and the functions they fixed (`_glPixelMapfv_Exec`, `_glCallLists_Exec`) went from DIFF to 0 differ.
+
+**Gap list after this section (functions the harness still does not distinguish).** Weak-live import functions: 72 of 79 never reach a stubbed import (covered by arena digests / recorders only). Not specced: the `_gleFree*` family (circular function-cache rings), `_gleDestroyEnableHashTable`, `_glepDeletePlugin` / `_glepUnloadRenderers` / `_gliQueryRendererInfo` (global `_glep_plugin_head`), the display-list functions (`_gleNewList`, `_gleEndList`, `_gleOptimizeDisplayList`, `_gleQuickOptimizeDisplayList`, `_glDeleteLists_Exec`: addresses that depend on the image), `_gleBuild*Func` / `_gleBuildInterp*` generators, `_gleSetAttrib`, `_gleExecuteClippedVertexArray`, `_gleGetHashMachineObjectNameTargetPairs`, the LFS parser group, `_gle_dtostr`, `_gleDetachShaderObjectIterFunc`, `_gleGetMapData`. Still always-live-0 after the specs: `_glBufferSubData_Exec`, `_glMapBuffer_Exec`, `_glRenderbufferStorageEXT_Exec`, `_glBindFramebufferEXT_Exec`, `_glFramebufferTexture3DEXT_Exec`, `_glGenerateMipmapEXT_Exec`, `_glLockArraysEXT_Exec`, `_gleAllocateTextureLevel`. The REPAIR-only DIFF of `_gleForceToSoftwareTCL` (section 20) is still unexplained. Class #23 (NaN-unsound compare flip) is present in 47 functions of the committed corpora of GLDriver / GLProgrammability / VADriver and is NOT changed (decision pending). A GL / shader live test of the #24 and #25 fixes is deferred to the end of the batch.

@@ -572,7 +572,7 @@ int _glTexImage1D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, par
       }
       if (param_9 == (param_9 / iVar5) * iVar5) {
         if (*(int *)(iVar8 + 0x40) != 0) {
-          iVar5 = _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
+          _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
         }
         param_9 = param_9 + *(int *)(iVar8 + 0x30);
         goto LAB_0009e8e4;
@@ -913,7 +913,7 @@ int _glTexImage2D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, par
       }
       if (param_10 == (param_10 / iVar5) * iVar5) {
         if (*(int *)(iVar8 + 0x40) != 0) {
-          iVar5 = _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
+          _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
         }
         param_10 = param_10 + *(int *)(iVar8 + 0x30);
         goto LAB_0009f1e0;
@@ -1235,7 +1235,7 @@ LAB_0009f898:
       }
       if (param_11 == (param_11 / iVar4) * iVar4) {
         if (*(int *)(iVar8 + 0x40) != 0) {
-          iVar4 = _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
+          _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
         }
         param_11 = param_11 + *(int *)(iVar8 + 0x30);
         goto LAB_0009f7b0;
@@ -1473,7 +1473,7 @@ LAB_0009ff58:
       }
       if (param_8 == (param_8 / iVar5) * iVar5) {
         if (*(int *)(iVar8 + 0x40) != 0) {
-          iVar5 = _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
+          _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
         }
         param_8 = param_8 + *(int *)(iVar8 + 0x30);
         goto LAB_0009fe88;
@@ -1901,7 +1901,7 @@ LAB_000a0c94:
       }
       if (param_10 == (param_10 / iVar5) * iVar5) {
         if (*(int *)(iVar8 + 0x40) != 0) {
-          iVar5 = _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
+          _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
         }
         param_10 = param_10 + *(int *)(iVar8 + 0x30);
         goto LAB_000a0ba4;
@@ -2182,7 +2182,7 @@ LAB_000a13d0:
       }
       if (param_12 == (param_12 / iVar5) * iVar5) {
         if (*(int *)(iVar8 + 0x40) != 0) {
-          iVar5 = _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
+          _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
         }
         param_12 = param_12 + *(int *)(iVar8 + 0x30);
         goto LAB_000a12e8;

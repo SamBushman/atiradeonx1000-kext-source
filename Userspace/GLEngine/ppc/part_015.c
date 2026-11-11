@@ -3,7 +3,7 @@
 /* _glEvalCoord2dv_Exec @ 0x64bcc (20 bytes) */
 void _glEvalCoord2dv_Exec(undefined4 param_1,double *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
-  ((void (*)())_gleEvalMap2)(param_1,(double)GH_U2F((unsigned int)(*param_2)),(double)GH_U2F((unsigned int)(param_2[1])),fparam_3,fparam_4,fparam_5,
+  ((void (*)())_gleEvalMap2)(param_1,(double)(float)(*param_2),(double)(float)(param_2[1]),fparam_3,fparam_4,fparam_5,
                fparam_6,fparam_7,fparam_8,fparam_9,fparam_10,fparam_11,fparam_12);
   return;
 }
@@ -39,7 +39,7 @@ undefined4 FUN_00064c1c(undefined4 param_1,double *param_2,double fparam_1,doubl
   double in_stack_ffffffc8;
   double in_stack_ffffffd0;
   
-  ((void (*)())_gleEvalMap2)(param_1,(double)GH_U2F((unsigned int)(*param_2)),(double)(float)fparam_2,fparam_3,fparam_4,fparam_5,
+  ((void (*)())_gleEvalMap2)(param_1,(double)(float)(*param_2),(double)(float)fparam_2,fparam_3,fparam_4,fparam_5,
                fparam_6,fparam_7,fparam_8,in_stack_ffffffb8,in_stack_ffffffc0,in_stack_ffffffc8,
                in_stack_ffffffd0);
   return 0x10;

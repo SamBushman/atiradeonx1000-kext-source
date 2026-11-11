@@ -2479,9 +2479,9 @@ int _glMapGrid1f_Comp(int param_1,uint param_2,float fparam_1,float fparam_2)
       *puVar2 = param_2;
       puVar2[1] = (uint)GH_F2U((float)fparam_1);
       puVar2[2] = (uint)GH_F2U((float)fparam_2);
-      puVar2[3] = (uint)(int)((fparam_2 - fparam_1) /
+      puVar2[3] = (uint)GH_F2U((float)((fparam_2 - fparam_1) /
                         (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58)
-                        );
+                        ));
       return (int)puVar2;
     }
     if (*(int *)(param_1 + 0x7574) != 0) {
@@ -2672,10 +2672,10 @@ void _glMapGrid2f_Comp(int param_1,uint param_2,undefined4 param_3,undefined4 pa
         puVar3[4] = param_5;
         puVar3[5] = (uint)GH_F2U((float)fparam_3);
         puVar3[6] = (uint)GH_F2U((float)fparam_4);
-        puVar3[3] = (uint)(int)((fparam_2 - fparam_1) /
-                          (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - dVar1));
-        puVar3[7] = (uint)(int)((fparam_4 - fparam_3) /
-                          (float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - dVar1));
+        puVar3[3] = (uint)GH_F2U((float)((fparam_2 - fparam_1) /
+                          (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - dVar1)));
+        puVar3[7] = (uint)GH_F2U((float)((fparam_4 - fparam_3) /
+                          (float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - dVar1)));
       }
       goto LAB_00075b4c;
     }

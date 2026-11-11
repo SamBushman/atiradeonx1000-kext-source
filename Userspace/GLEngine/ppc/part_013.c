@@ -663,7 +663,7 @@ LAB_0005fb20:
       }
       if (param_7 == (param_7 / iVar5) * iVar5) {
         if (*(int *)(iVar8 + 0x40) != 0) {
-          iVar5 = _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
+          _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
         }
         param_7 = param_7 + *(int *)(iVar8 + 0x30);
         goto LAB_0005f94c;
@@ -1009,7 +1009,7 @@ LAB_00060374:
       }
       if (param_7 == (param_7 / iVar5) * iVar5) {
         if (*(int *)(iVar8 + 0x40) != 0) {
-          iVar5 = _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
+          _gleSynchronizePluginBuffer(param_1,iVar8 + 0x10);
         }
         param_7 = param_7 + *(int *)(iVar8 + 0x30);
         goto LAB_00060248;

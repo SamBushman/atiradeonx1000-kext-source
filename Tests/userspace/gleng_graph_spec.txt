@@ -1351,3 +1351,699 @@ func _gleSwitchToRenderer
   arg 1 int 0 1
 func _gleSwitchToNonRevertRenderer
   arg 0 ptr TSCTX
+
+# ---- shader-object wrappers behind the machine-object hash (Nov 10; the interposer graph run left them at "live 0/200": a random ctx has no valid +0x5148 shared state) --------------------------------
+# The GCTX / GPROG / GSHADER types of the shader section above; names (`arg N name`) are recorded hash names 85% of the time, output buffers are zeroed OBUF blocks.
+type OBUF 0x800
+func _glCompileShaderARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+func _glValidateProgramARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+func _glDeleteObjectARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+func _glUseProgramObjectARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+func _glAttachObjectARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 name 85
+func _glDetachObjectARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 name 85
+func _glIsShader_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+func _glIsProgram_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+func _glGetObjectParameterfvARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 pick 0x8b4e 0x8b4f 0x8b80 0x8b81 0x8b82 0x8b83 0x8b84 0x8b85 0x8b86 0x8b87 0x8b88 0x8b89 0x8b8a 0x8b30 0x8b31 0x1234
+  arg 3 ptr OBUF
+func _glGetObjectParameterivARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 pick 0x8b4e 0x8b4f 0x8b80 0x8b81 0x8b82 0x8b83 0x8b84 0x8b85 0x8b86 0x8b87 0x8b88 0x8b89 0x8b8a 0x8b30 0x8b31 0x1234
+  arg 3 ptr OBUF
+func _glGetShaderiv_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 pick 0x8b4e 0x8b4f 0x8b80 0x8b81 0x8b82 0x8b83 0x8b84 0x8b85 0x8b86 0x8b87 0x8b88 0x8b89 0x8b8a 0x8b30 0x8b31 0x1234
+  arg 3 ptr OBUF
+func _glGetProgramiv_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 pick 0x8b4e 0x8b4f 0x8b80 0x8b81 0x8b82 0x8b83 0x8b84 0x8b85 0x8b86 0x8b87 0x8b88 0x8b89 0x8b8a 0x8b30 0x8b31 0x1234
+  arg 3 ptr OBUF
+func _glGetInfoLogARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 int 0 40
+  arg 3 ptr OBUF 70
+  arg 4 ptr OBUF
+func _glGetShaderInfoLog_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 int 0 40
+  arg 3 ptr OBUF 70
+  arg 4 ptr OBUF
+func _glGetProgramInfoLog_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 int 0 40
+  arg 3 ptr OBUF 70
+  arg 4 ptr OBUF
+func _glGetShaderSourceARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 int 0 40
+  arg 3 ptr OBUF 70
+  arg 4 ptr OBUF
+func _glGetAttachedObjectsARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 int 0 6
+  arg 3 ptr OBUF 70
+  arg 4 ptr OBUF
+func _glGetUniformLocationARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 str gl_Vertex|myuni|a|u[2]|
+func _glGetActiveUniformARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 int 0 5
+  arg 3 int 0 40
+  arg 4 ptr OBUF 70
+  arg 5 ptr OBUF 70
+  arg 6 ptr OBUF 70
+  arg 7 ptr OBUF
+func _glGetActiveAttribARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 int 0 5
+  arg 3 int 0 40
+  arg 4 ptr OBUF 70
+  arg 5 ptr OBUF 70
+  arg 6 ptr OBUF 70
+  arg 7 ptr OBUF
+func _glGetUniformfvARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 int 0 20
+  arg 3 ptr OBUF
+func _glGetUniformivARB_Exec
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 int 0 20
+  arg 3 ptr OBUF
+
+# ---- buffer objects and the other machine-object hash wrappers (Nov 10) ----------------------------------------------------------------------------------------------------------------
+# ctx+0x4a60 -> client state CS (+0x358 / +0x35c the bound array / element buffer object, +0x360+4k 32 per-array buffer objects, +0x33c bit mask, +0x350 / +0x354 flags), ctx+0x4a68 / +0x4a6c the bound
+# uniform-style buffer objects (0x88eb / 0x88ec), +0x85a4 / +0x85a8 plugin count / index bytes, per-plugin vtable pointers at +0x8884 + 0x2e0 k (slot +0x1c4 called as (word, 3, id)), +0x4718 / +0x481c
+# renderer slots. A buffer object: +0 next, +4 name, +8 refcount, +0x10.. per-plugin ids, +0x30 data block, +0x34 size, +0x3e access, +0x40 sync word, +0x44 mapped byte, +0x48 flags.
+type BDATA 0x100
+  randfill 0x00 0x100 256
+type BUFOBJ 0x60
+  u32 0x04 1 6
+  u32 0x08 1 3
+  u32 0x10 0 5
+  u32 0x14 0 5
+  u32 0x18 0 5
+  ptr 0x30 BDATA 70
+  pick 0x34 0 0x10 0x100 0x400
+  u16 0x3e 0 3
+  u32 0x40 0 1
+  u8 0x44 0 1
+  u32 0x48 0 3
+type BCS 0x500
+  u32 0x338 0 3
+  bits 0x33c 0xffffffff
+  u32 0x350 0 3
+  u32 0x354 0 0x10
+  ptr 0x358 BUFOBJ 70
+  ptr 0x35c BUFOBJ 70
+  ptr 0x360 BUFOBJ 50
+  ptr 0x364 BUFOBJ 50
+  ptr 0x368 BUFOBJ 50
+  ptr 0x36c BUFOBJ 50
+  ptr 0x370 BUFOBJ 50
+  ptr 0x374 BUFOBJ 50
+  ptr 0x378 BUFOBJ 50
+  ptr 0x37c BUFOBJ 50
+type BVT 0x200
+  fnrec3 0x1c4
+type HOBJ 0x60
+  u32 0x08 1 3
+  fn 0x0c
+  u32 0x10 0 3
+type BSS 0x8100
+  u8 0x8024 0 1
+  hash 0x0000 HOBJ 0 4 4 0x3ff
+  hash 0x1004 HOBJ 0 4 4 0x3ff
+  hash 0x2008 HOBJ 0 4 4 0x3ff
+  hash 0x4010 HOBJ 0 4 4 0x3ff
+  hash 0x5014 HOBJ 0 4 4 0xff
+  hash 0x701c BUFOBJ 0 4 4 0x3ff
+type BCTX 0x9400
+  pick 0x4a10 0x80000000 0xffff0000 0xc0000000 0x80000000 0x00010000
+  pick 0x7574 0 0 0x502
+  ptr 0x5148 BSS
+  ptr 0x4a60 BCS
+  ptr 0x4a68 BUFOBJ 60
+  ptr 0x4a6c BUFOBJ 60
+  u8 0x85a4 0 3
+  u8 0x85a8 0 2
+  pick 0x4688 0 0 1 5
+  fnreca 0x4718
+  fnrec 0x481c
+  ptr 0x8884 BVT
+  ptr 0x8b64 BVT
+  ptr 0x8e44 BVT
+  rand 0x85ac
+  rand 0x888c
+  bits 0x31c 0xffffffff
+  set 0x5408 0
+  ptr 0x744c BFBO 80
+  ptr 0x7448 HOBJ 70
+  ptr 0x468c BCAPS
+  ptr 0x3384 BDATA 50
+  u32 0x3388 0 8
+  pick 0x4988 0 0 0 7
+  u32 0x4984 0 8
+  ptr 0x49ac BDATA 50
+  ptr 0x3248 BDATA 60
+  ptr 0x324c BDATA 60
+  ptr 0x3250 BDATA 60
+  ptr 0x3254 BDATA 60
+  ptr 0x3258 BDATA 60
+  ptr 0x325c BDATA 60
+  ptr 0x3260 BDATA 60
+  ptr 0x3264 BDATA 60
+  ptr 0x3268 BDATA 60
+  ptr 0x326c BDATA 60
+  u32 0x53d4 0 4
+type BFBO 0x200
+  randfill 0x00 0x200 8
+type BCAPS 0x200
+  u32 0x18 0 8
+  u16 0xbc 0 0x400
+  u16 0xc2 0 0x400
+  u32 0x88 0x20 0x80
+  randfill 0x20 0x60 8
+type BNAMES 0x40
+  randfill 0x00 0x40 8
+func _glIsBuffer_Exec
+  arg 0 ptr BCTX
+  arg 1 name 85
+func _glIsTexture_Exec
+  arg 0 ptr BCTX
+  arg 1 name 85
+func _glIsProgramARB_Exec
+  arg 0 ptr BCTX
+  arg 1 name 85
+func _glIsFramebufferEXT_Exec
+  arg 0 ptr BCTX
+  arg 1 name 85
+func _glIsVertexArrayEXT_Exec
+  arg 0 ptr BCTX
+  arg 1 name 85
+func _glBindBuffer_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0x8892 0x8893 0x88eb 0x88ec 0x1234
+  arg 2 name 70
+func _glDeleteBuffers_Exec
+  arg 0 ptr BCTX
+  arg 1 int 0 5
+  arg 2 ptr BNAMES
+func _glMapBuffer_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0x8892 0x8893 0x88eb 0x88ec 0x1234
+  arg 2 pick 35000 35001 35002 35003
+func _glBufferSubData_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0x8892 0x8893 0x88eb 0x88ec 0x1234
+  arg 2 int 0 64
+  arg 3 int 0 64
+  arg 4 ptr BDATA
+func _glBindFramebufferEXT_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0x8d40 0x8d40 0x8d40 0x1234
+  arg 2 name 70
+func _glBindRenderbufferEXT_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0x8d41 0x8d41 0x8d41 0x1234
+  arg 2 name 70
+func _glRenderbufferStorageEXT_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0x8d41 0x8d41 0x1234
+  arg 2 pick 0x8058 0x81a5 0x8d48 0x1908 0x1234
+  arg 3 int 0 64
+  arg 4 int 0 64
+func _glDeleteFramebuffersEXT_Exec
+  arg 0 ptr BCTX
+  arg 1 int 0 5
+  arg 2 ptr BNAMES
+func _glFramebufferTexture1DEXT_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0x8d40 0x8d40 0x1234
+  arg 2 pick 0x8ce0 0x8ce1 0x8ce2 0x8d00 0x8d20 0x1234
+  arg 3 pick 0xde0 0xde0 0x1234
+  arg 4 name 70
+  arg 5 int 0 4
+func _glFramebufferTexture2DEXT_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0x8d40 0x8d40 0x1234
+  arg 2 pick 0x8ce0 0x8ce1 0x8ce2 0x8d00 0x8d20 0x1234
+  arg 3 pick 0xde1 0x84f5 0x8515 0x8516 0x8517 0x8518 0x8519 0x851a 0x1234
+  arg 4 name 70
+  arg 5 int 0 4
+func _glFramebufferTexture3DEXT_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0x8d40 0x8d40 0x1234
+  arg 2 pick 0x8ce0 0x8ce1 0x8ce2 0x8d00 0x8d20 0x1234
+  arg 3 pick 0x806f 0x806f 0x1234
+  arg 4 name 70
+  arg 5 int 0 4
+  arg 6 int 0 4
+func _glGenerateMipmapEXT_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0xde1 0x806f 0x8513 0x84f5 0x1234
+func _glCheckFramebufferStatusEXT_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0x8d40 0x8d40 0x1234
+func _gleBindRenderbuffer
+  arg 0 ptr BCTX
+  arg 1 name 70
+func _gleFreeFramebufferState
+  arg 0 ptr BCTX
+# pixel maps: float / unsigned data around 0..1 (NaN, inf, -0 in 1 of 16 words); a bound unpack buffer (+0x4a6c, +0x38 size, +0x30 data) turns the data argument into a byte offset
+type PMF 0x400
+  ffill 0x00 0x400 -0.5 1.5
+type PMU 0x400
+  randfill 0x00 0x400 0xffffffff
+type PBOOBJ 0x60
+  u32 0x04 1 6
+  u32 0x08 1 3
+  ptr 0x30 BDATA 90
+  u32 0x34 0x100 0x400
+  u32 0x38 0x100 0x1000
+  u32 0x40 0 1
+type PMCTXB 0x9400
+  pick 0x4a10 0x80000000 0xffff0000 0xc0000000 0x80000000 0x00010000
+  pick 0x7574 0 0 0x502
+  ptr 0x5148 BSS
+  ptr 0x4a6c PBOOBJ
+  ptr 0x3248 BDATA 60
+  ptr 0x324c BDATA 60
+  ptr 0x3250 BDATA 60
+  ptr 0x3254 BDATA 60
+  ptr 0x3258 BDATA 60
+  ptr 0x325c BDATA 60
+  ptr 0x3260 BDATA 60
+  ptr 0x3264 BDATA 60
+  ptr 0x3268 BDATA 60
+  ptr 0x326c BDATA 60
+func _glPixelMapfv_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0xc70 0xc71 0xc72 0xc73 0xc74 0xc75 0xc76 0xc77 0xc78 0xc79 0x1234
+  arg 2 pick 1 2 4 8 16 32 64 128 256 3 5 0 300
+  arg 3 ptr PMF
+func _glPixelMapfv_Exec
+  arg 0 ptr PMCTXB
+  arg 1 pick 0xc70 0xc71 0xc72 0xc73 0xc74 0xc75 0xc76 0xc77 0xc78 0xc79 0x1234
+  arg 2 pick 1 2 4 8 16 32 64 128 256 3 5 0 300
+  arg 3 pick 0 4 8 16 32 64 3 0x1000
+func _glPixelMapuiv_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0xc70 0xc71 0xc72 0xc73 0xc74 0xc75 0xc76 0xc77 0xc78 0xc79 0x1234
+  arg 2 pick 1 2 4 8 16 32 64 128 256 3 5 0 300
+  arg 3 ptr PMU
+func _glPixelMapuiv_Exec
+  arg 0 ptr PMCTXB
+  arg 1 pick 0xc70 0xc71 0xc72 0xc73 0xc74 0xc75 0xc76 0xc77 0xc78 0xc79 0x1234
+  arg 2 pick 1 2 4 8 16 32 64 128 256 3 5 0 300
+  arg 3 pick 0 4 8 16 32 64 3 0x1000
+func _glPixelMapusv_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0xc70 0xc71 0xc72 0xc73 0xc74 0xc75 0xc76 0xc77 0xc78 0xc79 0x1234
+  arg 2 pick 1 2 4 8 16 32 64 128 256 3 5 0 300
+  arg 3 ptr PMU
+func _glPixelMapusv_Exec
+  arg 0 ptr PMCTXB
+  arg 1 pick 0xc70 0xc71 0xc72 0xc73 0xc74 0xc75 0xc76 0xc77 0xc78 0xc79 0x1234
+  arg 2 pick 1 2 4 8 16 32 64 128 256 3 5 0 300
+  arg 3 pick 0 4 8 16 32 64 3 0x1000
+func _glPrioritizeTextures_Exec
+  arg 0 ptr BCTX
+  arg 1 int 0 6
+  arg 2 ptr BNAMES
+  arg 3 ptr PMF
+func _glHistogram_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0x8024 0x8024 0x1234
+  arg 2 pick 0 1 2 4 8 16 256 0x20000 0x40000 3 -1
+  arg 3 pick 0x1906 0x1907 0x1908 0x1909 0x190a 0x8040 0x8058 0x1234
+  arg 4 pick 0 1 -1
+func _glLockArraysEXT_Exec
+  arg 0 ptr BCTX
+  arg 1 int -1 10
+  arg 2 int 0 0x70
+func _glBindTexture_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0xde1 0xde0 0x806f 0x8513 0x84f5 0x85b3 0x184f5 0x1234
+  arg 2 name 70
+func _glBindProgramARB_Exec
+  arg 0 ptr BCTX
+  arg 1 pick 0x8620 0x8200 0x8804 0x1234
+  arg 2 name 70
+func FUN_00066f4c
+  arg 0 ptr BCTX
+  arg 1 pick 0x8d40 0x8d40 0x1234
+  arg 2 pick 0x8ce0 0x8ce1 0x8ce2 0x8d00 0x8d20 0x1234
+  arg 3 pick 0x8d41 0x8d41 0x1234
+  arg 4 name 70
+func FUN_00065f84
+  arg 0 ptr BCTX
+  arg 1 int 0 5
+  arg 2 ptr BNAMES
+
+# glShaderSourceARB (FUN_00087750): (ctx, shader name, count, char **strings, int *lengths); glDeleteTextures (FUN_0001ff98): (ctx, n, names) walks the 16 x 5 binding table at ctx+0x5154 (stride 0x14 per unit)
+type SSTRS 0x40
+  str 0x00 a|bc\r\nd|void main(){}|
+  str 0x04 x\ry|gl_Position|
+  str 0x08 q|
+type SLENS 0x20
+  pick 0x00 -1 -1 0 1 2 4
+  pick 0x04 -1 -1 0 1 2 4
+  pick 0x08 -1 -1 0 1 2 4
+func FUN_00087750
+  arg 0 ptr GCTX
+  arg 1 name 85
+  arg 2 int 0 3
+  arg 3 ptr SSTRS
+  arg 4 ptr SLENS 60
+type TEXOBJ 0x60
+  u32 0x04 0 6
+  u32 0x08 1 3
+type TXCTX 0x9400
+  pick 0x4a10 0x80000000 0xffff0000 0xc0000000 0x80000000 0x00010000
+  pick 0x7574 0 0 0x502
+  ptr 0x5148 BSS
+  ptr 0x744c BFBO 60
+  ptr 0x5154 TEXOBJ
+  ptr 0x5158 TEXOBJ
+  ptr 0x515c TEXOBJ
+  ptr 0x5160 TEXOBJ
+  ptr 0x5164 TEXOBJ
+  ptr 0x5168 TEXOBJ
+  ptr 0x516c TEXOBJ
+  ptr 0x5170 TEXOBJ
+  ptr 0x5174 TEXOBJ
+  ptr 0x5178 TEXOBJ
+  ptr 0x517c TEXOBJ
+  ptr 0x5180 TEXOBJ
+  ptr 0x5184 TEXOBJ
+  ptr 0x5188 TEXOBJ
+  ptr 0x518c TEXOBJ
+  ptr 0x5190 TEXOBJ
+  ptr 0x5194 TEXOBJ
+  ptr 0x5198 TEXOBJ
+  ptr 0x519c TEXOBJ
+  ptr 0x51a0 TEXOBJ
+  ptr 0x51a4 TEXOBJ
+  ptr 0x51a8 TEXOBJ
+  ptr 0x51ac TEXOBJ
+  ptr 0x51b0 TEXOBJ
+  ptr 0x51b4 TEXOBJ
+  ptr 0x51b8 TEXOBJ
+  ptr 0x51bc TEXOBJ
+  ptr 0x51c0 TEXOBJ
+  ptr 0x51c4 TEXOBJ
+  ptr 0x51c8 TEXOBJ
+  ptr 0x51cc TEXOBJ
+  ptr 0x51d0 TEXOBJ
+  ptr 0x51d4 TEXOBJ
+  ptr 0x51d8 TEXOBJ
+  ptr 0x51dc TEXOBJ
+  ptr 0x51e0 TEXOBJ
+  ptr 0x51e4 TEXOBJ
+  ptr 0x51e8 TEXOBJ
+  ptr 0x51ec TEXOBJ
+  ptr 0x51f0 TEXOBJ
+  ptr 0x51f4 TEXOBJ
+  ptr 0x51f8 TEXOBJ
+  ptr 0x51fc TEXOBJ
+  ptr 0x5200 TEXOBJ
+  ptr 0x5204 TEXOBJ
+  ptr 0x5208 TEXOBJ
+  ptr 0x520c TEXOBJ
+  ptr 0x5210 TEXOBJ
+  ptr 0x5214 TEXOBJ
+  ptr 0x5218 TEXOBJ
+  ptr 0x521c TEXOBJ
+  ptr 0x5220 TEXOBJ
+  ptr 0x5224 TEXOBJ
+  ptr 0x5228 TEXOBJ
+  ptr 0x522c TEXOBJ
+  ptr 0x5230 TEXOBJ
+  ptr 0x5234 TEXOBJ
+  ptr 0x5238 TEXOBJ
+  ptr 0x523c TEXOBJ
+  ptr 0x5240 TEXOBJ
+  ptr 0x5244 TEXOBJ
+  ptr 0x5248 TEXOBJ
+  ptr 0x524c TEXOBJ
+  ptr 0x5250 TEXOBJ
+  ptr 0x5254 TEXOBJ
+  ptr 0x5258 TEXOBJ
+  ptr 0x525c TEXOBJ
+  ptr 0x5260 TEXOBJ
+  ptr 0x5264 TEXOBJ
+  ptr 0x5268 TEXOBJ
+  ptr 0x526c TEXOBJ
+  ptr 0x5270 TEXOBJ
+  ptr 0x5274 TEXOBJ
+  ptr 0x5278 TEXOBJ
+  ptr 0x527c TEXOBJ
+  ptr 0x5280 TEXOBJ
+  ptr 0x5284 TEXOBJ
+  ptr 0x5288 TEXOBJ
+  ptr 0x528c TEXOBJ
+  ptr 0x5290 TEXOBJ
+func FUN_0001ff98
+  arg 0 ptr TXCTX
+  arg 1 int 0 4
+  arg 2 ptr BNAMES
+
+# shared-state creation / reclaim (the plugin vtables at ctx+0x8884 + 0x2e0 k: +0x124 creates the plugin's shared part, 0 = success; the OK / BAD variants make the success and the rollback path), the rest of the Exec wrappers
+type SVTOK 0x200
+  fnrec1 0x124
+  fnrec1 0x128
+  fnrec1 0x134
+type SVTBAD 0x200
+  fnreca 0x124
+  fnrec1 0x128
+  fnrec1 0x134
+type CSSCTXA 0x9400
+  u8 0x85a4 0 3
+  ptr 0x8884 SVTOK
+  ptr 0x8b64 SVTOK
+  ptr 0x8e44 SVTOK
+type CSSCTXB 0x9400
+  u8 0x85a4 1 3
+  ptr 0x8884 SVTBAD 50
+  ptr 0x8b64 SVTOK
+  ptr 0x8e44 SVTBAD 50
+type RCTXA 0x9400
+  u8 0x85a4 0 3
+  pick 0x7484 0 0
+  ptr 0x5148 BSS
+  ptr 0x8884 SVTOK
+  ptr 0x8b64 SVTOK
+  ptr 0x8e44 SVTOK
+func _gleCreateSharedState
+  arg 0 ptr CSSCTXA
+func _gleCreateSharedState
+  arg 0 ptr CSSCTXB
+func _gleReclaimContextResources
+  arg 0 ptr RCTXA
+type TLVL 0x40
+  randfill 0x00 0x40 8
+type TEXH 0x60
+  pick 0x3e 0x85bd 0x1234
+  u32 0x08 1 3
+type ATCTX 0x9400
+  pick 0x4a10 0x80000000 0xffff0000
+  pick 0x7574 0 0 0x502
+  ptr 0x5148 BSS
+  randfill 0x468c 0x40 16
+func _gleAllocateTextureLevel
+  arg 0 ptr ATCTX
+  arg 1 ptr TEXH
+  arg 2 ptr TLVL
+type VARH 0x20
+  u32 0x08 0 0x100
+  u32 0x0c 0 0x100000
+type VWORDS 0x10
+  u32 0x00 0 0x1000
+type DLB 0x40
+  ptr 0x00 VARH
+  ptr 0x04 VARH
+  ptr 0x08 VARH
+  ptr 0x0c VARH
+type VCTX 0x5600
+  ptr 0x53e8 DLB
+func _CloseCurrentVAR
+  arg 0 ptr VCTX
+  arg 1 pick 0 4 8 12
+  arg 2 int 0 0x200000
+  arg 3 ptr VWORDS
+  arg 4 ptr VWORDS
+type TVCTX 0x7600
+  pick 0x7574 0 0 0x502
+  fnrec 0x46e4
+  pick 0x4688 0 5
+  rand 0x49a8
+  u32 0x4984 0 100
+  u32 0x4994 0 10
+func _gleExecuteTCLVertexArray
+  arg 0 ptr TVCTX
+  arg 1 int 0 9
+  arg 2 int 0 100
+  arg 3 int 0 40
+  arg 4 pick 0x1401 0x1403 0x1405 0x14ff 0x1234
+  arg 5 ptr BDATA
+type PPO 0x600
+  randfill 0x00 0x600 8
+  u8 0x4c 0 1
+type PSCTX 0x9400
+  pick 0x4a10 0x80000000 0xffff0000 0xc0000000 0x80000000 0x00010000
+  pick 0x7574 0 0 0x502
+  ptr 0x5148 BSS
+  ptr 0x5420 PPO
+  ptr 0x5424 PPO
+func _glProgramStringARB_Exec
+  arg 0 ptr PSCTX
+  arg 1 pick 0x8620 0x8200 0x8804 0x1234
+  arg 2 pick 0x8875 0x8875 0x8875 0x1234
+  arg 3 int 0 20
+  arg 4 str !!ARBvp1.0\nEND|MOV|x|!!ARBfp1.0\nEND|
+
+# ---- glCallLists: the list-name base, the shared hash of display-list objects, and the lists array (class #25: GL_INT / GL_UNSIGNED_INT read the word as a float) ----------------------------------------------
+# _glCallLists_Exec(ctx, n, type, lists) calls _gleCallList(ctx, name + ctx[0x5404]) per element; _gleCallList looks the name up in the shared hash at *(ctx+0x5148)+0x300c and runs the object's commands
+# (count at +0x10, first command slot +0x2c). The objects here carry one or two commands, the slot is the recording callback, so the call records the node address (+0x30) = WHICH name was looked up
+# (names 1..8 are the hash nodes' names). The lists arrays hold small integers (names 0..9) or small floats (1.0..9.0 with a few NaN/inf/-0).
+type CLOBJ 0x40
+  u32 0x10 1 2
+  fnrec 0x2c
+type CLSS 0x4100
+  hash 0x300c CLOBJ 4 8 4 0x3ff
+type CLCTX 0x5600
+  ptr 0x5148 CLSS
+  u32 0x5404 0 3
+  pick 0x540c 0 0 0x3e 0x3f 0x40
+type CLINTS 0x100
+  u32 0x00 0 9
+  u32 0x04 0 9
+  u32 0x08 0 9
+  u32 0x0c 0 9
+  u32 0x10 0 9
+  u32 0x14 0 9
+  u32 0x18 0 9
+  u32 0x1c 0 9
+type CLSHORTS 0x100
+  u16 0x00 0 9
+  u16 0x02 0 9
+  u16 0x04 0 9
+  u16 0x06 0 9
+  u16 0x08 0 9
+  u16 0x0a 0 9
+  u16 0x0c 0 9
+  u16 0x0e 0 9
+  u16 0x10 0 9
+  u16 0x12 0 9
+type CLBYTES 0x100
+  u8 0x00 0 9
+  u8 0x01 0 9
+  u8 0x02 0 9
+  u8 0x03 0 9
+  u8 0x04 0 9
+  u8 0x05 0 9
+  u8 0x06 0 9
+  u8 0x07 0 9
+  u8 0x08 0 9
+  u8 0x09 0 9
+  u8 0x0a 0 9
+  u8 0x0b 0 9
+type CLB2 0x100
+  u8 0x00 0 1
+  u8 0x01 0 9
+  u8 0x02 0 1
+  u8 0x03 0 9
+  u8 0x04 0 1
+  u8 0x05 0 9
+  u8 0x06 0 1
+  u8 0x07 0 9
+type CLB34 0x100
+  u8 0x00 0 0
+  u8 0x01 0 0
+  u8 0x02 0 1
+  u8 0x03 0 9
+  u8 0x04 0 0
+  u8 0x05 0 1
+  u8 0x06 0 9
+  u8 0x07 0 0
+  u8 0x08 0 0
+  u8 0x09 0 1
+  u8 0x0a 0 9
+  u8 0x0b 0 0
+  u8 0x0c 0 0
+  u8 0x0d 0 1
+  u8 0x0e 0 9
+  u8 0x0f 0 0
+type CLFLTS 0x100
+  ffill 0x00 0x20 0.0 9.0
+func _glCallLists_Exec
+  arg 0 ptr CLCTX
+  arg 1 int 0 8
+  arg 2 pick 0x1404 0x1405
+  arg 3 ptr CLINTS
+func _glCallLists_Exec
+  arg 0 ptr CLCTX
+  arg 1 int 0 8
+  arg 2 pick 0x1402 0x1403
+  arg 3 ptr CLSHORTS
+func _glCallLists_Exec
+  arg 0 ptr CLCTX
+  arg 1 int 0 8
+  arg 2 pick 0x1400 0x1401
+  arg 3 ptr CLBYTES
+func _glCallLists_Exec
+  arg 0 ptr CLCTX
+  arg 1 int 0 8
+  arg 2 pick 0x1407
+  arg 3 ptr CLB2
+func _glCallLists_Exec
+  arg 0 ptr CLCTX
+  arg 1 int 0 4
+  arg 2 pick 0x1408 0x1409
+  arg 3 ptr CLB34
+func _glCallLists_Exec
+  arg 0 ptr CLCTX
+  arg 1 int 0 8
+  arg 2 pick 0x1406
+  arg 3 ptr CLFLTS
+type CLFLTBIG 0x100
+  ffill 0x00 0x20 0.0 4000000000.0
+func _glCallLists_Exec
+  arg 0 ptr CLCTX
+  arg 1 int 0 8
+  arg 2 pick 0x1406
+  arg 3 ptr CLFLTBIG
