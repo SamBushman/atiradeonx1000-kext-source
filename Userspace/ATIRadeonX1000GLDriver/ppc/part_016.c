@@ -1978,13 +1978,14 @@ checkDirtyBitsWord8:
                 }
                 else {
                   fpPassThrough8 = 1.0;
+                  /* stock: one fmadds for the square at the join of the three paths; gcc 4.0 sinks the product into the predecessors when this path's value is the constant 1.0 and then adds unfused - the empty asm keeps the value opaque */
+                  __asm__("" : "+f"(fpPassThrough8));
                   vecXYSq = invLength;
                   vecX = invLength;
                   vecY = invLength;
                   vecZ = invLength;
                 }
-                /* stock: one fmadds at the join of the three paths; gcc-7 sinks the product into the predecessors (the 1.0 path folds to a constant) and adds unfused */
-                lengthSq = __builtin_fmaf(fpPassThrough8, fpPassThrough8, vecXYSq);
+                lengthSq = (fpPassThrough8 * fpPassThrough8 + vecXYSq);
                 *(float *)(((unsigned char *)0x000014fc) + (int)dirtyWord1) = vecZ;
                 *(float *)(((unsigned char *)0x000014f4) + (int)dirtyWord1) = vecX;
                 *(float *)(((unsigned char *)0x000014f8) + (int)dirtyWord1) = vecY;
