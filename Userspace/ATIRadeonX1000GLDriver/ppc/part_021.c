@@ -2194,12 +2194,8 @@ int ILReader__appendBoolConst(ilReader, registerIndex, value)
 }
 
 /* ILReader__appendFloatConst @ 0xe4780 (116 bytes) */
-void ILReader__appendFloatConst(int *ilReader,undefined4 registerIndex)
+void ILReader__appendFloatConst(int *ilReader,undefined4 registerIndex,double constX,double constY,double constZ,double constW)
 {
-  double constX = 0.0;
-  double constY = 0.0;
-  double constZ = 0.0;
-  double constW = 0.0;
   undefined4 *record;
   
   record = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0x18);

@@ -3695,7 +3695,7 @@ int Program__loadDefaultConstants(program, ilReader)
     constIndex = 0;
     do {
       CompileInput__readFloatConst(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,4,&defaultFloatX);
-      ((void (*)())ILReader__appendFloatConst)(ilReader,constIndex);
+      ILReader__appendFloatConst(ilReader,constIndex,(&defaultFloatX)[0],(&defaultFloatX)[1],(&defaultFloatX)[2],(&defaultFloatX)[3]);
       nextConstIndex = constIndex + 1;
       ((int (*)())Program__createConstantVReg)(program,1,constIndex,4,&defaultFloatX);
       constIndex = nextConstIndex;

@@ -1526,7 +1526,7 @@ extern int ILReader__readFloatConst();
 extern int ILReader__lookupConstComponent();
 extern int OpcodeRecord__getOperandByteB();
 extern int ILReader__appendBoolConst();
-extern void ILReader__appendFloatConst(int *param_1,undefined4 param_2);
+extern void ILReader__appendFloatConst(int *param_1,undefined4 param_2,double param_3,double param_4,double param_5,double param_6);
 extern int ILReader__topScopeOpcode();
 extern int ILReader__dtor_e4830();
 extern int ILReader__dtor_e4934();
