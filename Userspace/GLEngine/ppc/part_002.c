@@ -4728,12 +4728,9 @@ void _glMultiTexCoord2f_Exec(int param_1,uint param_2,float fparam_1,float fpara
 }
 
 /* _glVertex2f_Exec @ 0x1d20c (44 bytes) */
-void _glVertex2f_Exec(param_1)
-  int param_1;
+void _glVertex2f_Exec(int param_1,double fparam_1,double fparam_2)
 {
   code *UNRECOVERED_JUMPTABLE;
-  undefined8 in_f1;
-  undefined8 in_f2;
   
   UNRECOVERED_JUMPTABLE = *(code **)(param_1 + 0x4884);
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
@@ -4741,8 +4738,9 @@ void _glVertex2f_Exec(param_1)
   }
                     
                     
-  (*((int (*)(int,double,double,double,double))UNRECOVERED_JUMPTABLE))
-            (param_1, in_f1, in_f2, (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
+  (*UNRECOVERED_JUMPTABLE)
+            (param_1,fparam_1,fparam_2,(double)*(float *)(param_1 + 0x20),
+             (double)*(float *)(param_1 + 0x24));
   return;
 }
 

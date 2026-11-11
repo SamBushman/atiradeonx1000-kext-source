@@ -5,7 +5,7 @@ part_002 _glTexParameterF_Exec 3 parse error before '{' token | goto LAB_0001b4f
 part_003 _glePPParse 3 parse error before '{' token | local_b4 = local_10c & 0xffff;
 part_004 _glMaterialfv_Exec 3 parse error before '{' token | 
 part_005 _glStencilOp_CompExec 3 parse error before '{' token | undefined4 param_2;
-part_006 _gliCompDispatchTable 3 parse error before '{' token | uVar1 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x918) == 0);
+part_006 _gliCompDispatchTable 3 parse error before '{' token | *(undefined **)
 part_007 _gleGetAttrib 3 parse error before '{' token | iVar19 = iVar19 + 0x214;
 part_008 _glCopyTexImage2D_Exec 3 parse error before '{' token | cVar2 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
 part_009 _glBlendEquationSeparateEXT_CompExec 3 parse error before '{' token | 

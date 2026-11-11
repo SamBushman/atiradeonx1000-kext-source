@@ -2658,7 +2658,7 @@ float * _glVertex2f_Comp(undefined4 param_1,float fparam_1,float fparam_2)
 void _glVertex2f_CompExec(undefined4 param_1,float fparam_1,float fparam_2)
 {
   ((float * (*)())_glVertex2f_Comp)(param_1,fparam_1,fparam_2);
-  _glVertex2f_Exec(param_1);
+  ((void (*)())_glVertex2f_Exec)(param_1);
   return;
 }
 

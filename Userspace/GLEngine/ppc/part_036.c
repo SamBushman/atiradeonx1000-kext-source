@@ -27,17 +27,17 @@ double _glVertexAttrib1fvARB_Exec(param_1, param_2, param_3)
   float *param_3;
 {
   float fVar1;
-  undefined4 uVar2;
+  float fVar2;
   int iVar3;
   code *UNRECOVERED_JUMPTABLE;
   
   if (param_2 < 0x10) {
     fVar1 = *(float *)(param_1 + 0x20);
-    uVar2 = *(undefined4 *)(param_1 + 0x24);
+    fVar2 = *(float *)(param_1 + 0x24);
     if (param_2 != 0) {
       iVar3 = param_1 + param_2 * 0x10;
       *(float *)(iVar3 + 0x1a0) = *param_3;
-      *(undefined4 *)(iVar3 + 0x1ac) = uVar2;
+      *(float *)(iVar3 + 0x1ac) = fVar2;
       *(float *)(iVar3 + 0x1a8) = fVar1;
       *(float *)(iVar3 + 0x1a4) = fVar1;
       return;
@@ -48,7 +48,8 @@ double _glVertexAttrib1fvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(int,int,int,double,double,double))UNRECOVERED_JUMPTABLE))(param_1, param_2, param_3, (double)*param_3, (double)fVar1, (double)fVar1);
+    (*UNRECOVERED_JUMPTABLE)
+              (param_1,0,param_3,(double)*param_3,(double)fVar1,(double)fVar1,(double)fVar2);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -110,7 +111,7 @@ double _glVertexAttrib1dvARB_Exec(param_1, param_2, param_3)
     if (param_2 != 0) {
       dVar3 = *param_3;
       iVar2 = param_1 + param_2 * 0x10;
-      *(undefined4 *)(iVar2 + 0x1ac) = *(undefined4 *)(param_1 + 0x24);
+      *(float *)(iVar2 + 0x1ac) = *(float *)(param_1 + 0x24);
       *(float *)(iVar2 + 0x1a8) = fVar1;
       *(float *)(iVar2 + 0x1a0) = (float)dVar3;
       *(float *)(iVar2 + 0x1a4) = fVar1;
@@ -122,7 +123,9 @@ double _glVertexAttrib1dvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(int,int,int,double,double,double))UNRECOVERED_JUMPTABLE))(param_1, param_2, param_3, (double)(float)*param_3, (double)fVar1, (double)fVar1);
+    (*UNRECOVERED_JUMPTABLE)
+              (param_1,0,param_3,(double)(float)*param_3,(double)fVar1,(double)fVar1,
+               (double)*(float *)(param_1 + 0x24));
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -258,22 +261,22 @@ double _glVertexAttrib2fvARB_Exec(param_1, param_2, param_3)
   uint param_2;
   float *param_3;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  float fVar1;
+  float fVar2;
   float fVar3;
   int iVar4;
   code *UNRECOVERED_JUMPTABLE;
   
   if (param_2 < 0x10) {
-    uVar1 = *(undefined4 *)(param_1 + 0x20);
-    uVar2 = *(undefined4 *)(param_1 + 0x24);
+    fVar1 = *(float *)(param_1 + 0x20);
+    fVar2 = *(float *)(param_1 + 0x24);
     if (param_2 != 0) {
       iVar4 = param_1 + param_2 * 0x10;
       *(float *)(iVar4 + 0x1a0) = *param_3;
       fVar3 = param_3[1];
-      *(undefined4 *)(iVar4 + 0x1ac) = uVar2;
+      *(float *)(iVar4 + 0x1ac) = fVar2;
       *(float *)(iVar4 + 0x1a4) = fVar3;
-      *(undefined4 *)(iVar4 + 0x1a8) = uVar1;
+      *(float *)(iVar4 + 0x1a8) = fVar1;
       return;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(param_1 + 0x4884);
@@ -282,7 +285,8 @@ double _glVertexAttrib2fvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(int,int,int,double,double))UNRECOVERED_JUMPTABLE))(param_1, param_2, param_3, (double)*param_3, (double)param_3[1]);
+    (*UNRECOVERED_JUMPTABLE)
+              (param_1,0,param_3,(double)*param_3,(double)param_3[1],(double)fVar1,(double)fVar2);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -335,21 +339,21 @@ double _glVertexAttrib2dvARB_Exec(param_1, param_2, param_3)
   uint param_2;
   double *param_3;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  float fVar1;
+  float fVar2;
   int iVar3;
   code *UNRECOVERED_JUMPTABLE;
   double dVar4;
   
   if (param_2 < 0x10) {
-    uVar1 = *(undefined4 *)(param_1 + 0x20);
-    uVar2 = *(undefined4 *)(param_1 + 0x24);
+    fVar1 = *(float *)(param_1 + 0x20);
+    fVar2 = *(float *)(param_1 + 0x24);
     if (param_2 != 0) {
       iVar3 = param_1 + param_2 * 0x10;
       *(float *)(iVar3 + 0x1a0) = (float)*param_3;
       dVar4 = param_3[1];
-      *(undefined4 *)(iVar3 + 0x1ac) = uVar2;
-      *(undefined4 *)(iVar3 + 0x1a8) = uVar1;
+      *(float *)(iVar3 + 0x1ac) = fVar2;
+      *(float *)(iVar3 + 0x1a8) = fVar1;
       *(float *)(iVar3 + 0x1a4) = (float)dVar4;
       return;
     }
@@ -359,7 +363,9 @@ double _glVertexAttrib2dvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(int,int,int,double,double))UNRECOVERED_JUMPTABLE))(param_1, param_2, param_3, (double)(float)*param_3, (double)(float)param_3[1]);
+    (*UNRECOVERED_JUMPTABLE)
+              (param_1,0,param_3,(double)(float)*param_3,(double)(float)param_3[1],(double)fVar1,
+               (double)fVar2);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -499,19 +505,19 @@ double _glVertexAttrib3fvARB_Exec(param_1, param_2, param_3)
   uint param_2;
   float *param_3;
 {
-  undefined4 uVar1;
+  float fVar1;
   float fVar2;
   int iVar3;
   code *UNRECOVERED_JUMPTABLE;
   
   if (param_2 < 0x10) {
-    uVar1 = *(undefined4 *)(param_1 + 0x24);
+    fVar1 = *(float *)(param_1 + 0x24);
     if (param_2 != 0) {
       iVar3 = param_1 + param_2 * 0x10;
       *(float *)(iVar3 + 0x1a0) = *param_3;
       *(float *)(iVar3 + 0x1a4) = param_3[1];
       fVar2 = param_3[2];
-      *(undefined4 *)(iVar3 + 0x1ac) = uVar1;
+      *(float *)(iVar3 + 0x1ac) = fVar1;
       *(float *)(iVar3 + 0x1a8) = fVar2;
       return;
     }
@@ -521,7 +527,9 @@ double _glVertexAttrib3fvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(int,int,int,double,double,double))UNRECOVERED_JUMPTABLE))(param_1, param_2, param_3, (double)*param_3, (double)param_3[1], (double)param_3[2]);
+    (*UNRECOVERED_JUMPTABLE)
+              (param_1,0,param_3,(double)*param_3,(double)param_3[1],(double)param_3[2],
+               (double)fVar1);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -575,19 +583,19 @@ double _glVertexAttrib3dvARB_Exec(param_1, param_2, param_3)
   uint param_2;
   double *param_3;
 {
-  undefined4 uVar1;
+  float fVar1;
   int iVar2;
   code *UNRECOVERED_JUMPTABLE;
   double dVar3;
   
   if (param_2 < 0x10) {
-    uVar1 = *(undefined4 *)(param_1 + 0x24);
+    fVar1 = *(float *)(param_1 + 0x24);
     if (param_2 != 0) {
       iVar2 = param_1 + param_2 * 0x10;
       *(float *)(iVar2 + 0x1a0) = (float)*param_3;
       *(float *)(iVar2 + 0x1a4) = (float)param_3[1];
       dVar3 = param_3[2];
-      *(undefined4 *)(iVar2 + 0x1ac) = uVar1;
+      *(float *)(iVar2 + 0x1ac) = fVar1;
       *(float *)(iVar2 + 0x1a8) = (float)dVar3;
       return;
     }
@@ -597,8 +605,9 @@ double _glVertexAttrib3dvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(int,int,int,double,double,double))UNRECOVERED_JUMPTABLE))
-              (param_1, param_2, param_3, (double)(float)*param_3, (double)(float)param_3[1], (double)(float)param_3[2]);
+    (*UNRECOVERED_JUMPTABLE)
+              (param_1,0,param_3,(double)(float)*param_3,(double)(float)param_3[1],
+               (double)(float)param_3[2],(double)fVar1);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {

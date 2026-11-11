@@ -171,7 +171,7 @@ extern void _gleUpdateDrawArraysFuncs();
 extern void _gleBeginPrimitiveTCLFunc();
 extern void _glTexCoord2f_Exec(int param_1,float fparam_1,float fparam_2);
 extern void _glMultiTexCoord2f_Exec(int param_1,uint param_2,float fparam_1,float fparam_2);
-extern void _glVertex2f_Exec();
+extern void _glVertex2f_Exec(int param_1,double fparam_1,double fparam_2);
 extern void _gleSetVertexSubmitFunc(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _gleBuildVertexFuncNO();
 extern void _gleSetFunctionIDFromCurrent();
@@ -363,7 +363,7 @@ extern float * _glNormal3f_Comp(undefined4 param_1,float fparam_1,float fparam_2
 extern void _glNormal3f_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3);
 extern void _glVertex3f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3);
 extern float * _glVertex3f_Comp(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3);
-extern void _glVertex3f_Exec();
+extern void _glVertex3f_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3);
 extern void _glPushMatrix_CompExec();
 extern int _glPushMatrix_Comp();
 extern void _glScalef_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3);

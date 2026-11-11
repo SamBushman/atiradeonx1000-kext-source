@@ -142,10 +142,10 @@ void _glRectfv_Exec(int param_1,undefined4 param_2,undefined4 param_3,double fpa
     return;
   }
   ((void (*)())_glBegin_Exec)(param_1,9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
-  _glVertex2f_Exec(param_1);
-  _glVertex2f_Exec(param_1);
-  _glVertex2f_Exec(param_1);
-  _glVertex2f_Exec(param_1);
+  ((void (*)())_glVertex2f_Exec)(param_1);
+  ((void (*)())_glVertex2f_Exec)(param_1);
+  ((void (*)())_glVertex2f_Exec)(param_1);
+  ((void (*)())_glVertex2f_Exec)(param_1);
   _glEnd_Exec(param_1);
   return;
 }

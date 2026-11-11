@@ -46,8 +46,7 @@ float * _glVertex3f_Comp(undefined4 param_1,float fparam_1,float fparam_2,float 
 }
 
 /* _glVertex3f_Exec @ 0x3aa24 (40 bytes) */
-void _glVertex3f_Exec(param_1)
-  int param_1;
+void _glVertex3f_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3)
 {
   code *UNRECOVERED_JUMPTABLE;
   
@@ -57,7 +56,7 @@ void _glVertex3f_Exec(param_1)
   }
                     
                     
-  (*((int (*)(int))UNRECOVERED_JUMPTABLE))(param_1);
+  (*UNRECOVERED_JUMPTABLE)(param_1,fparam_1,fparam_2,fparam_3,(double)*(float *)(param_1 + 0x24));
   return;
 }
 
