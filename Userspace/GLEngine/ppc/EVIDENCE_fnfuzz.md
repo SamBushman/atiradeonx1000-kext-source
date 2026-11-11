@@ -273,4 +273,47 @@ Harness additions: image globals can be read, written and watched in both images
 
 Result: **0 differ in 200 trials, default and graph profile**; 199/200 trials reach the imports (free, malloc, scandir, CFRelease, CFStringGetCString/GetLength/GetCStringPtr, IORegistryEntryCreateCFProperty); the install-defaults branch writes `PTR__gleDoNonSimpleFlush` / `PTR__gleBindSurface`, both seen as the same table entries in both images (watch dump).
 Controls (rebuilt side perturbed, 100-200 trials, each reported as DIFF): `IORegistryEntryCreateCFProperty`, `scandir`, `CFStringGetLength`, `CFStringGetCStringPtr`, `CFStringGetCString`, `malloc` (heap +16); swapping the rebuilt addresses of the two function slots in the data table (the watch identity check) is reported (39/100 trials). `CFRelease` and `free` have no result to perturb; their arguments are in the trace (a heap pointer for `free`, which the `malloc` control moves).
-Not covered here: `_glepAddPlugin`'s `malloc` failure return (the arena heap never fails a 0x208-byte request in these trials until ~70 plugins; the path after exhaustion is exercised but its result is compared only through the same digest).
+Not covered here: the failure return of `_glepAddPlugin`'s `malloc` (the arena heap does not fail a 0x208-byte request in these trials). Whether the exhaustion at ~70 plugins reaches that return was not checked.
+
+## 18. Decompiler defect classes #20, #22, #22b, #23, #24 and the harness additions that found them (Nov 10; images 919c6d36 .. 92d69e0d)
+
+Each class was found by the differential (fnfuzz plain / NaN mode / recording callbacks), traced to the decompiled text, and fixed in the Ghidra project or the decompiler, never with a guard in the corpus. Commits: `919c6d36` (#20), `0789d949` (#22), `667913b7` (#22b and #23), `8a837391` and `92d69e0d` (#24).
+
+| class | what the decompiler printed | what the stock does | fix |
+|---|---|---|---|
+| #20 | an untyped data label (the 16 AltiVec constant words at 0x113e10) declared as a byte | 16 bytes of vector constants | data type for the label (`919c6d36`) |
+| #22 | `(float)<integer expression with a shift>` | copies the bits | `_gleVectorNormalizeNO`, `_gleSphereGenST` (`0789d949`) |
+| #22b | `(double)((ulonglong)hi << 0x20)` converted a double built from its two words (`GH_U2D`) | bit assembly | `667913b7` |
+| #23 | `!(a < b)` printed as `b <= a`: a NaN-unsound flip of a float compare | the compare plus the branch on the unordered bit | decompiler patch `Tools/userspace/ghidra_patches/decompiler_float_compare_not_flippable.patch` (the patched decompiler is installed; `decomp_src`'s `decompile.orig` is the unpatched one), `667913b7` |
+| #24 | an indirect tail call (`mtctr; bctr`, "Treating indirect jump as call") or a `bctrl` printed only the argument registers the decompiler could prove | loads f3/f4 (ctx+0x20 / +0x24) before the jump and forwards f1..f4 untouched | `gs/SetCallSigs.java` (call-site override: N integer + M double arguments) and `gs/AddDoubleParams.java`; `8a837391`, `92d69e0d` |
+
+**Class #24 detail.** `_glVertex2f_Exec(ctx, f1, f2)` and `_glVertex3f_Exec(ctx, f1, f2, f3)` tail-call the slot at ctx+0x4884 with (ctx, f1..f4); the decompile printed `(*fn)(param_1)` or forwarded `undefined8 in_f1`. The ten `_glVertexAttrib{1,2,3}{d,f}[v]ARB_Exec` entries lost the default components f3/f4. Re-dumped functions: `_glVertex2f/3f_Exec` and the VertexAttrib 1/2/3 d/f/dv/fv entries (12 in `8a837391`); `92d69e0d` added the `bctrl` sites of `_glVertexAttrib1sARB_Exec` (0xac1a8), `_glVertexAttrib1svARB_Exec` (0xad604) and `_glVertexAttrib2sARB_Exec` (0xac5b0), each (ctx, f1..f4); only those functions are merged into the archived dump. `indirect_args.py`, `OverrideIndirectCalls.java` and `ExtendIndirectCalls.java` count the integer registers of `bctrl` only, which is how both sets were missed. `Tools/userspace/indirect_setup_compare.py` lists candidate sites (argument registers written in the block before each indirect transfer, stock against rebuilt); it is noisy by design (1225 sites, 263 rows on 667913b7) and every row has to be checked by a recording callback.
+
+**Harness additions** (`Tests/userspace/fnfuzz.c`, `gleng_graph_spec.txt`):
+- `FNFUZZ_NANMODE` / `FNFUZZ_NANCANON`: NaN-valued float arguments; NANCANON makes every NaN bit pattern (either sign, any payload) equal in the arena digest, the verbose dump and f1. On 667913b7 NaN mode alone gave 92 DIFFs, all NaN sign/payload differences (`ffc00000` against `7fc00000`) or the `_Comp` family on garbage arenas; with NANCANON and LISTCTX/FLOATARGS: 0 differ in 13416 trials (run47).
+- Recording callbacks `fnrec` (r3..r6), `fnrecw` (r3, f1..f4), `fnrecp` (r3, r4), `fnrec1` (r3), `fnrecv` (r3, r4, f1..f4): the slot of the context hashes the argument registers it receives into the arena digest, so a dispatcher that tail-calls a slot is compared by what the slot receives. **r4 is not an argument of a slot taking (ctx, doubles).** The rebuilt compile writes the GPR shadow of f1 there (Darwin ABI) and the stock does not; the first spec used `fnrecv` on the vertex slots and gave 3 false DIFFs (`_glVertexAttrib1sARB/1sv/2s`, f1..f4 equal, r4 = high word of f1). The vertex slots use `fnrecw`.
+- `_gleRenderLineLoopTCLFunc` (spec types LLBUF/LLEND/LLCTX, `fnrec` at +0x46b8/+0x46bc): informative and passing.
+- Vertex-dispatcher spec (128 functions: `_glVertex*_Exec`, `*v_Exec`, `_CompExec`/`_ListExec`, ColorMat, `_glEndNoMat_Exec`, `_glVertexAttrib*ARB_Exec`).
+- `FNFUZZ_REPAIR`, `FNFUZZ_LISTUNINF`, `FNFUZZ_RECDUMP`, `FNFUZZ_GRAPHSPEC`, ledger retargeting (`Tools/userspace/gleng_ledger_retarget.py`, `retarget_all.py`).
+
+**Result on image 92d69e0d** (vertex family, spec `fnrecw`): 85 functions, 4080 trials, **0 differ, 0 uninformative, 0 nondeterministic in the stock** (run52). Image 8a837391 gave 3 DIFFs for the three `s` entries above (run50); with their call sites fixed and `fnrecv` still in the spec, r4 alone differed (run51); with `fnrecw`: pass.
+
+## 19. Regression on image 92d69e0d (runs 53 and 54, Nov 10), compared with image 667913b7
+
+Same ledgers retargeted by name (`*_n25.tsv`), binary `fnfuzz_gs22` / `ctxfuzz_g20`.
+
+| run | result | against 667913b7 |
+|---|---|---|
+| plain27 half a (12 trials, @0,1337, LISTCTX, FLOATARGS) | 1337 functions, 16044 trials, 3 differ, 119 uninformative | the same 3 names as run45 |
+| plain27 half b | 1336 functions, 16236 trials, 0 differ, 179 uninformative | 0 differ |
+| NaN + NANCANON + REPAIR, no LISTCTX | 544 functions, 13416 trials, 91 differ | run46 had 90; the one new name is `_glPointSize_Comp`, a `_Comp` compiler on a non-LISTCTX arena (stock st=11, rebuilt st=0 in 1 of 24 trials): the class of section 5, no list context |
+| NaN + NANCANON + REPAIR + LISTCTX + FLOATARGS | 544 functions, 13416 trials, **0 differ**, 24 uninformative | run47: 0 differ; `_glPointSize_Comp` runs 24/24 to the end |
+| gap255, no LISTCTX/FLOATARGS | 15 differ (not the same names as run44: `_glColor4ubv_CompExec`, `_glEvalCoord1f_CompExec`, `_glPolygonStipple_Comp`, `_glTexCoord1fv_CompExec`, `_glVertexAttrib1fvARB_CompExec`, `_gleInterpolClipNO1200`, ...) | the names are the `_Comp` family on non-list arenas and the float-argument class; see the like-for-like run |
+| gap255, REPAIR + LISTCTX + FLOATARGS (run54, **both images, same binary**) | 255 functions, 6144 trials, **0 differ, 88 uninformative on both** | identical result on 667913b7 and 92d69e0d |
+| ctxfuzz (ctx30) | 615 functions, 14856 trials, 8 differ, 58 uninformative | run48 had 7; the new name is `_gleTextureImagePut_Slow` (below) |
+| interposer, default profile | 190 functions, 38200 trials, **0 differ**, 15 uninformative | 0 differ |
+| interposer, graph profile (spec cur5) | 190 functions, 38200 trials, **0 differ**, 15 uninformative | 0 differ (the interposer logs were run without `FNFUZZ_LISTUNINF`, so the 15 uninformative names are not listed) |
+
+**`_gleTextureImagePut_Slow` (ctx run, trial 5: stock st=0, rebuilt st=10, arena digests equal).** Reproduced with 24 trials on the single function: 667913b7 passes, 8a837391 and 92d69e0d fail, deterministically. Established: the function's instructions are identical in 667913b7 and 92d69e0d after normalising addresses and symbolic names (4 residual lines are `otool` printing a stack displacement as a symbol, `dyld_stub_binding_helper` / `__dyld_func_lookup`); only its address moved (0x2c3a0 -> 0x2c1e0). Under `FNFUZZ_STACKFILL` = 0, 1, a5a5a5a5, deadbeef, ffffffff **both images agree with the stock** (0 differ): with 0, 1 and ffffffff the function ends in a signal in every trial in the stock as well (1 uninformative on both images), so it uses stack residue as a pointer. In-process (`FNFUZZ_ONE=R:5`) the rebuilt trial exits normally. Classification: stale-stack read (section 7 class), not a regression of the class #24 change; **not established**: which stack word is read.
+
+**What this does not show.** The 58 + 74 uninformative functions of the ctx / plain / gap ledgers (every trial the same signal) and the weak-live import functions remain only weakly covered; the 9 GPR `reg_supply` CHECK rows and the remaining indirect-call candidate sites of `indirect_setup_compare.py` outside the vertex family have no recording-callback spec yet; `_glVertex4d_Exec` at ctx=0x800000 differs in 1 of 400 trials and is **not established**; `_glColor3d_CompExec` also differs stock against stock (section 15).
