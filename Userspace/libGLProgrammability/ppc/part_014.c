@@ -3115,7 +3115,7 @@ int _PPCRuntimeCompilerLoadRegister(compiler, regIndex, opOffsets, opBank, opSwi
   uint scanIndex;
   uint cacheLookupIndex;
   uint *opOffsetList;
-  unsigned int ghidra_home[8] = { compiler, regIndex, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[12] = { compiler, regIndex, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5, opType, opWord7, opWord8, element };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots), FOLLOWED BY the stack arguments (entry-sp + 0x38..): the stock indexes bytes of this block (`home + 16 + element`), so it must hold the stack words the stock frame holds behind the home slots (#258) */
   byte swizzleComponent;
   uint *codeCursor;
   int containsResult;
@@ -3959,7 +3959,7 @@ int _PPCRuntimeCompilerDirtyRegistersWithData(compiler, opOffsets, opBank, opSwi
 {
   int recordOffset;
   int vectorRecordBytes;
-  unsigned int ghidra_home[8] = { compiler, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5, opType };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[11] = { compiler, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5, opType, opWord7, opWord8, element };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots), FOLLOWED BY the stack arguments (entry-sp + 0x38..): the stock indexes bytes of this block (`home + 16 + element`), so it must hold the stack words the stock frame holds behind the home slots (#258) */
   char swizzleByte;
   undefined4 elementCopy;
   int containsResult;
