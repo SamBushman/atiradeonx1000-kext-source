@@ -303,6 +303,10 @@ static void __attribute__((noinline)) fill_stack(void) { volatile unsigned buf[8
        (top level) retpick IMPORT V1 V2 ..  the stubbed import returns one of the values (an error code, a count)
        fn OFF                             +OFF = the address of a harmless harness function (a callback slot the code under test calls: same address in both images)
        fnd OFF                            same, for a callback that takes (int, double) and returns the double
+       fnrecv OFF                         same, for a slot called as (int, int, double, double, double, double): records r3, r4 and f1..f4 (the vertex dispatchers pass the float registers through)
+       fnrecw OFF                         same, for a slot called as (int, double x4): records r3 and f1..f4 (no integer argument besides the context)
+       fnrec1 OFF                         same, for a slot called as (int): records r3 only
+       fnrecp OFF                         same, for a slot called as (int, int): records r3 and r4 (the ColorMat colour entries: ctx, pointer)
        fnrec OFF                          same, for a callback that RECORDS its four integer arguments (folded into the arena digest: a tail call through a slot is compared by what it passes on)
        randfill OFF LEN [MOD]             LEN bytes at +OFF = random words below MOD (default 4096): fields the code only reads (a context's state words)
        (retpick values may be `fn` / `fnd`: the stubbed import returns the address of the harmless function)
@@ -315,7 +319,7 @@ typedef struct { unsigned off; int kind; unsigned a, b, c; int n; unsigned v[8];
 typedef struct { char name[32]; unsigned size; int nf; gfield_t f[40]; } gtype_t;
 typedef struct { int n; int kind; unsigned a, b; int pct; unsigned v[64]; int nv; char tname[32]; char text[96]; } garg_t;
 typedef struct { char name[96]; int na; garg_t a[8]; } gfunc_t;
-enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC };
+enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1 };
 enum { GA_PTR = 1, GA_INT, GA_PICK, GA_RAND, GA_NULL, GA_NAME, GA_STR };
 static unsigned g_names[64]; static int g_nnames;
 typedef struct { char name[48]; char tname[32]; unsigned v[8]; int nv; char func[96]; int pct; } gret_t;
@@ -328,9 +332,13 @@ static gret_t grets[160]; static int ngrets;
 static gtype_t gtypes[160]; static int ngtypes; static gfunc_t gfuncs[320]; static int ngfuncs; static unsigned gb_next;
 static int gs_nop(int a);
 static unsigned gs_rec_hash, gs_rec_n;   /* `fnrec`: a callback slot that records its four integer arguments; the record is part of the arena digest (what a tail call through a slot hands on is the whole behaviour of such a function) */
+static int gs_recv(int a, int b, double c, double d, double e, double f) { unsigned long long u[4]; memcpy(&u[0], &c, 8); memcpy(&u[1], &d, 8); memcpy(&u[2], &e, 8); memcpy(&u[3], &f, 8); gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)a; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)b; for (int i = 0; i < 4; i++) { if ((u[i] & 0x7ff0000000000000ULL) == 0x7ff0000000000000ULL && (u[i] & 0xfffffffffffffULL) && nancanon) u[i] = 0x7ff8000000000000ULL; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)(u[i] >> 32); gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)u[i]; } if (getenv("FNFUZZ_RECDUMP")) fprintf(stderr, "  [%s recv r3=%08x r4=%08x f1=%016llx f2=%016llx f3=%016llx f4=%016llx]\n", cur_img ? "R" : "S", (unsigned)a, (unsigned)b, u[0], u[1], u[2], u[3]); gs_rec_n++; return 0; }   /* `fnrecv`: a slot called as (int, int, double x4): the two integer and the four double argument registers */
+static int gs_recw(int a, double c, double d, double e, double f) { return gs_recv(a, 0, c, d, e, f); }   /* `fnrecw`: a slot called as (int, double x4): r3 and f1..f4 */
+static int gs_recp(int a, int b) { gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)a; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)b; if (getenv("FNFUZZ_RECDUMP")) fprintf(stderr, "  [%s recp r3=%08x r4=%08x]\n", cur_img ? "R" : "S", (unsigned)a, (unsigned)b); gs_rec_n++; return 0; }   /* `fnrecp`: a slot called as (int, int): r3 and r4 */
+static int gs_rec1(int a) { return gs_recp(a, 0); }   /* `fnrec1`: a slot called as (int): r3 only */
 static int gs_rec(int a, int b, int c, int d) { gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)a; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)b; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)c; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)d; gs_rec_n++; return 0; }
 static double gs_nopd(int a, double x) { (void)a; return x; }   /* a callback slot that returns a double: the argument back */
-static unsigned gnum(const char *s) { if (!strcmp(s, "fn")) return (unsigned)(uintptr_t)gs_nop; if (!strcmp(s, "fnd")) return (unsigned)(uintptr_t)gs_nopd; if (!strcmp(s, "fnrec")) return (unsigned)(uintptr_t)gs_rec; return (unsigned)strtoul(s, NULL, 0); }   /* `fn` / `fnd`: the address of the harmless harness function (the same in both images) */
+static unsigned gnum(const char *s) { if (!strcmp(s, "fn")) return (unsigned)(uintptr_t)gs_nop; if (!strcmp(s, "fnd")) return (unsigned)(uintptr_t)gs_nopd; if (!strcmp(s, "fnrec")) return (unsigned)(uintptr_t)gs_rec; if (!strcmp(s, "fnrecv")) return (unsigned)(uintptr_t)gs_recv; if (!strcmp(s, "fnrecw")) return (unsigned)(uintptr_t)gs_recw; if (!strcmp(s, "fnrecp")) return (unsigned)(uintptr_t)gs_recp; if (!strcmp(s, "fnrec1")) return (unsigned)(uintptr_t)gs_rec1; return (unsigned)strtoul(s, NULL, 0); }   /* `fn` / `fnd`: the address of the harmless harness function (the same in both images) */
 static void load_graphspec(const char *path) {
     FILE *f = fopen(path, "r"); if (!f) { perror(path); exit(2); }
     char line[1024]; gtype_t *ct = NULL; gfunc_t *cf = NULL;
@@ -378,6 +386,10 @@ static void load_graphspec(const char *path) {
             else if (!strcmp(tok[0], "fn")) g->kind = GF_FN;
             else if (!strcmp(tok[0], "fnd")) g->kind = GF_FND;
             else if (!strcmp(tok[0], "fnrec")) g->kind = GF_FNREC;
+            else if (!strcmp(tok[0], "fnrecv")) g->kind = GF_FNRECV;
+            else if (!strcmp(tok[0], "fnrecw")) g->kind = GF_FNRECW;
+            else if (!strcmp(tok[0], "fnrecp")) g->kind = GF_FNRECP;
+            else if (!strcmp(tok[0], "fnrec1")) g->kind = GF_FNREC1;
             else if (!strcmp(tok[0], "randfill") && nt >= 3) { g->kind = GF_RANDFILL; g->a = gnum(tok[2]); g->b = nt >= 4 ? gnum(tok[3]) : 4096; }
             else if (!strcmp(tok[0], "istr") && nt >= 3) { g->kind = GF_ISTR; snprintf(g->text, sizeof g->text, "%s", tok[2]); }   /* the characters inline at OFF (one of a|b|c) */
             else if (!strcmp(tok[0], "warr") && nt >= 6) { g->kind = GF_WARR; g->c = gnum(tok[2]); g->a = gnum(tok[3]); g->b = gnum(tok[4]); for (int i = 5; i < nt && g->n < 8; i++) g->v[g->n++] = gnum(tok[i]); }   /* warr OFF COUNTOFF MIN MAX v..: OFF = pointer to an array of count words drawn from v, COUNTOFF = the count word */
@@ -418,6 +430,10 @@ static unsigned gb_build(gtype_t *t, int depth) {
         case GF_FN: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_nop; break;
         case GF_FND: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_nopd; break;
         case GF_FNREC: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_rec; break;
+        case GF_FNRECV: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_recv; break;
+        case GF_FNRECW: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_recw; break;
+        case GF_FNRECP: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_recp; break;
+        case GF_FNREC1: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_rec1; break;
         case GF_RANDFILL: for (unsigned k = 0; k + 4 <= g->a; k += 4) *(unsigned *)(b + g->off + k) = rnd32() % g->b; break;   /* LEN bytes of small random words: a block of fields the code only reads */
         case GF_U8: b[g->off] = (unsigned char)grange(g->a, g->b); break;
         case GF_U16: *(unsigned short *)(b + g->off) = (unsigned short)grange(g->a, g->b); break;

@@ -787,3 +787,261 @@ type LLCTX 0x4a40
   rand 0x4688
 func _gleRenderLineLoopTCLFunc
   arg 0 ptr LLCTX
+
+# ---- the vertex dispatchers (_glVertex*_Exec, _glVertexAttrib*ARB_Exec, the ColorMat colour entries, _glEndNoMat_Exec) and the _glVertex*_CompExec glue: each tail-calls a slot of the
+# context (ctx+0x4884, or ctx+0x28 when ctx+0x4858 == ctx+0x485c; ctx+0x4de0 for the ColorMat colours; ctx+0x4a08 for End). The slots record the registers they are called with (fnrecw:
+# r3 + f1..f4, fnrecp: r3, r4, fnrec1: r3): the vertex dispatchers pass the float registers through untouched, and what a slot receives is the whole behaviour of such a
+# function. +0x20 / +0x24 are the current float words they append, +0x4674 the colour table of _glColor3ubv_Exec. The CompExec glue also needs the display-list block behind +0x53e8 (the shape of
+# the _glDrawPixels_Comp context). The VertexAttrib entries index +0x1a0 + 16*index (index < 16; 0 = the vertex slot); their slot is the 0x4884 one (the other, the constant
+# `_gleFlushAndSubmit`, is a real function: ctx+0x4858 and +0x485c are kept apart).
+type VXTAB 0x400
+  randfill 0 0x400 0x40000000
+type VXDATA 0x40
+  randfill 0 0x40 0x40000000
+type VXLIST 0x1000
+type VXLH 0x8000
+  u32 0x10 0 0
+  ptr 0x14 VXLIST
+  set 0x18 0x400
+type VXCTX 0x5600
+  fnrecw 0x4884
+  fnrecw 0x28
+  fnrecp 0x4de0
+  fnrec1 0x4a08
+  pick 0x4858 0x1000 0x2000
+  pick 0x485c 0x1000 0x2000
+  rand 0x20
+  rand 0x24
+  rand 0xd8
+  u8 0x4df8 0 1
+  u16 0x4a10 0 65535
+  ptr 0x4674 VXTAB
+  pick 0x7574 0 0x502
+type VXVCTX 0x5600
+  fnrecw 0x4884
+  fnrecw 0x28
+  pick 0x4858 0x1000 0x2000
+  pick 0x485c 0x1000 0x2000
+  rand 0x20
+  rand 0x24
+type VALCTX 0x5600
+  fnrecw 0x4884
+  set 0x4858 0x1000
+  set 0x485c 0x2000
+  rand 0x20
+  rand 0x24
+  pick 0x7574 0 0x501
+type VXLCTX 0x5600
+  fnrecw 0x4884
+  fnrecw 0x28
+  pick 0x4858 0x1000 0x2000
+  pick 0x485c 0x1000 0x2000
+  rand 0x20
+  rand 0x24
+  ptr 0x53e8 VXLH
+  set 0x53fc 0x8000
+  set 0x5400 0x1c
+  set 0x4a6c 0
+type VXLVCTX 0x5600
+  fnrecw 0x4884
+  fnrecw 0x28
+  pick 0x4858 0x1000 0x2000
+  pick 0x485c 0x1000 0x2000
+  rand 0x20
+  rand 0x24
+  ptr 0x53e8 VXLH
+  set 0x53fc 0x8000
+  set 0x5400 0x1c
+  set 0x4a6c 0
+func _glVertex2d_Exec
+  arg 0 ptr VXCTX
+func _glVertex2f_Exec
+  arg 0 ptr VXCTX
+func _glVertex3f_Exec
+  arg 0 ptr VXCTX
+func _glVertex4f_Exec
+  arg 0 ptr VXCTX
+func _glVertex4d_Exec
+  arg 0 ptr VXCTX
+func _glColor4f_ColorMat_Exec
+  arg 0 ptr VXCTX
+func _glEndNoMat_Exec
+  arg 0 ptr VXCTX
+func _glVertex2dv_Exec
+  arg 0 ptr VXVCTX
+  arg 1 ptr VXDATA
+func _glVertex3dv_Exec
+  arg 0 ptr VXVCTX
+  arg 1 ptr VXDATA
+func _glVertex4dv_Exec
+  arg 0 ptr VXVCTX
+  arg 1 ptr VXDATA
+func _glVertex2fv_Exec
+  arg 0 ptr VXVCTX
+  arg 1 ptr VXDATA
+func _glVertex3fv_Exec
+  arg 0 ptr VXVCTX
+  arg 1 ptr VXDATA
+func _glVertex4fv_Exec
+  arg 0 ptr VXVCTX
+  arg 1 ptr VXDATA
+func _glColor3fv_ColorMat_Exec
+  arg 0 ptr VXCTX
+  arg 1 ptr VXDATA
+func _glColor4fv_ColorMat_Exec
+  arg 0 ptr VXCTX
+  arg 1 ptr VXDATA
+func _glColor3ubv_Exec
+  arg 0 ptr VXCTX
+  arg 1 ptr VXDATA
+func _glVertex2d_CompExec
+  arg 0 ptr VXLCTX
+func _glVertex2f_CompExec
+  arg 0 ptr VXLCTX
+func _glVertex2fv_CompExec
+  arg 0 ptr VXLVCTX
+  arg 1 ptr VXDATA
+func _glVertex2i_CompExec
+  arg 0 ptr VXLCTX
+func _glVertex2iv_CompExec
+  arg 0 ptr VXLVCTX
+  arg 1 ptr VXDATA
+func _glVertex2s_CompExec
+  arg 0 ptr VXLCTX
+func _glVertex3d_CompExec
+  arg 0 ptr VXLCTX
+func _glVertex3dv_CompExec
+  arg 0 ptr VXLVCTX
+  arg 1 ptr VXDATA
+func _glVertex3f_CompExec
+  arg 0 ptr VXLCTX
+func _glVertex3fv_CompExec
+  arg 0 ptr VXLVCTX
+  arg 1 ptr VXDATA
+func _glVertex3i_CompExec
+  arg 0 ptr VXLCTX
+func _glVertex3iv_CompExec
+  arg 0 ptr VXLVCTX
+  arg 1 ptr VXDATA
+func _glVertex3s_CompExec
+  arg 0 ptr VXLCTX
+func _glVertex3sv_CompExec
+  arg 0 ptr VXLVCTX
+  arg 1 ptr VXDATA
+func _glVertex4dv_CompExec
+  arg 0 ptr VXLVCTX
+  arg 1 ptr VXDATA
+func _glVertex4fv_CompExec
+  arg 0 ptr VXLVCTX
+  arg 1 ptr VXDATA
+func _glVertex4i_CompExec
+  arg 0 ptr VXLCTX
+func _glVertex4iv_CompExec
+  arg 0 ptr VXLVCTX
+  arg 1 ptr VXDATA
+func _glVertex4s_CompExec
+  arg 0 ptr VXLCTX
+func _glVertex4sv_CompExec
+  arg 0 ptr VXLVCTX
+  arg 1 ptr VXDATA
+func _glVertexAttrib1sARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+func _glVertexAttrib1fARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+func _glVertexAttrib1dARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+func _glVertexAttrib2sARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+func _glVertexAttrib2dARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+func _glVertexAttrib3dARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+func _glVertexAttrib4dARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+func _glVertexAttrib4NubARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+func _glVertexAttrib1svARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib1fvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib1dvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib2fvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib2dvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib3fvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib3dvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib4fvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib4dvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertex2i_Exec
+  arg 0 ptr VXCTX
+func _glVertex3d_Exec
+  arg 0 ptr VXCTX
+func _glVertex3_ListExec
+  arg 0 ptr VXCTX
+  arg 1 ptr VXDATA
+func _glVertex2_ListExec
+  arg 0 ptr VXCTX
+  arg 1 ptr VXDATA
+func _glVertex4_ListExec
+  arg 0 ptr VXCTX
+  arg 1 ptr VXDATA
+func _glVertex2iv_Exec
+  arg 0 ptr VXVCTX
+  arg 1 ptr VXDATA
+func _glVertex3i_Exec
+  arg 0 ptr VXCTX
+func _glVertex3iv_Exec
+  arg 0 ptr VXVCTX
+  arg 1 ptr VXDATA
+func _glVertex4i_Exec
+  arg 0 ptr VXCTX
+func _glVertex4iv_Exec
+  arg 0 ptr VXVCTX
+  arg 1 ptr VXDATA
+func _glVertex2s_Exec
+  arg 0 ptr VXCTX
+func _glVertex2sv_Exec
+  arg 0 ptr VXVCTX
+  arg 1 ptr VXDATA
+func _glVertex3s_Exec
+  arg 0 ptr VXCTX
+func _glVertex3sv_Exec
+  arg 0 ptr VXVCTX
+  arg 1 ptr VXDATA
+func _glVertex4s_Exec
+  arg 0 ptr VXCTX
+func _glVertex4sv_Exec
+  arg 0 ptr VXVCTX
+  arg 1 ptr VXDATA
