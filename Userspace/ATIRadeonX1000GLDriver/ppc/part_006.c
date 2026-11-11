@@ -8198,8 +8198,8 @@ int gldUploadProgramState(glContext)
     fogColorPad = 0;
     fogLinearScale = -1.0 / (*(float *)(((unsigned char *)0x00002df8) + glStateBlock) - *(float *)(((unsigned char *)0x00002df4) + glStateBlock));
     fogLinearEndScaled = *(float *)(((unsigned char *)0x00002df8) + glStateBlock) * *(float *)(((unsigned char *)0x00002dfc) + glStateBlock);
-    fogExpScale = *(float *)(((unsigned char *)0x00002df0) + glStateBlock) / 0.6931472;
-    fogExp2Scale = *(float *)(((unsigned char *)0x00002df0) + glStateBlock) / 0.83255464;
+    fogExpScale = *(float *)(((unsigned char *)0x00002df0) + glStateBlock) / 0.69314718056;
+    fogExp2Scale = *(float *)(((unsigned char *)0x00002df0) + glStateBlock) / 0.832554611158;
     (**(code **)(((unsigned char *)0x00001280) + glContext))
               (glContext,0,
                *(undefined4 *)(((unsigned char *)0x00003878) + *(int *)(((unsigned char *)0x000036c0) + *(int *)(glContext + 0x1e5c)))

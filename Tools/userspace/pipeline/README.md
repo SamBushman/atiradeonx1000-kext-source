@@ -278,6 +278,14 @@ GLDriver) was made with the UNPATCHED decompiler; GLEngine's was regenerated wit
    next corpus function; spill-over where the rebuilt function has no local symbol).
  - Class #31 (decimal literal, issue #250): a float constant printed with eight digits (`2.1474836e+09`, `1.8446744e+19`, `0.999975`) is a double in C. In float arithmetic add the `f` suffix; for a power of two write the exact
    value (`2147483648.0`, 2^64, 2^-64). Grep the corpus for `[0-9]\.[0-9]{5,}e[+-]` and for 5-9 digit decimals inside `float` expressions.
+ - Class #32 (uninitialised pseudo-return variable, issue #252): Ghidra names the value a call leaves in r3 / r4 as a local (`r3Out`, `r3AfterFree`, `r4AfterFree...`) that is never assigned; the function then returns / forwards an
+   uninitialised word, so the rebuilt function returns stack garbage where the stock returns the callee's r3 (`free` returns its own status, `operator delete` returns it, `_BitSetFree`, `_FreeStringTable`, ...). Write the call as an
+   assignment (`r3Out = ((int (*)())_free)(p);`) and return that. For an r3:r4 pair use a second declaration of the same symbol with a 64-bit result (`extern undefined8 _free_r3r4() __asm__("_free");`).
+   Never call through a cast to a pointer whose return type differs from the declaration (`(uint (*)())f` of an `int` function, `(undefined8 (*)())f`): Apple gcc 4.0.1 compiles the call as an abort ("note: if this code is
+   reached, the program will abort"; the first instruction of the caller becomes `twnei r3,0`). Detector: compile every part with `gcc -S` on the host and grep for `will abort`.
+ - Class #33 (narrow-typed 32-bit words, issue #253): libgcc EH code keeps 32-bit words (context slots, LSDA header words, exception header words, the personality routine's switch value) in `uchar` / `byte` locals or reads them with
+   a `uchar *` cast, so the rebuilt code uses `lbz` / `stb` where the stock has `lwz` / `stw` (garbage in the upper bytes of a stored word). Type the words `uint`. Detectors: `op_audit2.py w` + `w_flag.py` (byte / half
+   access counts per function, stock vs rebuilt), `w_off.py` (per-offset access width), `narrow_params.py` (parameters declared narrower than the stock's register use).
  - Table-index artifacts: a fuzz-supplied byte indexing a table past its end (`textureFormatTable[0xff]`, `RegKind__flagBit0`, `swizzleVariantStartTable`) reads image-layout dependent data in stock and rebuilt alike and
    differs between images. Confirm with a hardware watchpoint on the differing arena word (gdb `FNFUZZ_ONE=S|R:trial`, `watch *(int*)ADDR`): both writers read the same out-of-range table entry. The narrow profile does not show it.
  - Out-of-range indexes / hoisted loads: the stock's scheduler hoists a load above the branch that uses it (`*translator + *(*translator + 0x54) * 8`, `fragmentTranslateScalarMath*`); Ghidra prints it inside the branch. Harmless on a
