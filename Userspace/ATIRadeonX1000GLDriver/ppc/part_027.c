@@ -18,7 +18,7 @@ int IROperand__setModifierBits(operandRecord, mask, set)
 int floatToFixedSaturate(undefined4 unusedArg1,int integerBits,uint fractionBits,float value)
 {
   float distanceAboveMin;
-  double clampedValue;
+  float clampedValue;
   float distanceToMax;
   uint halfRange;
   float maxLimit;
