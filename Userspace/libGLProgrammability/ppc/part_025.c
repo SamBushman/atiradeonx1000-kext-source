@@ -632,7 +632,7 @@ int __gxx_exception_cleanup(reasonCode, exception)
   _Unwind_Exception *exception;
 {
   _Unwind_Exception *r4Out0;
-  unsigned char * header;
+  unsigned long * header;
   
   header = &exception[-2].private_2;
   if (_URC_FOREIGN_EXCEPTION_CAUGHT < reasonCode) {
