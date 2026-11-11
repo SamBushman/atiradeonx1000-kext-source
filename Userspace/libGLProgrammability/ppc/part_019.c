@@ -1463,14 +1463,14 @@ setIntToFloatLow2:
     }
     goto storeDestInfo5;
   case 0x28:
-    scalarResult = src0[2] * src1[2] + *src0 * *src1 + src0[1] * src1[1];
+    scalarResult = src0[2] * src1[2] + (*src0 * *src1 + src0[1] * src1[1]);
     goto loopSetFoldFailed;
   case 0x29:
     scalarResult = src0[3] * src1[3] +
-            src0[2] * src1[2] + *src0 * *src1 + src0[1] * src1[1];
+            (src0[2] * src1[2] + (*src0 * *src1 + src0[1] * src1[1]));
     goto loopSetFoldFailed;
   case 0x2a:
-    scalarResult = src0[2] * src1[2] + *src0 * *src1 + src0[1] * src1[1] + src1[3];
+    scalarResult = src0[2] * src1[2] + (*src0 * *src1 + src0[1] * src1[1]) + src1[3];
 loopSetFoldFailed:
     foldFailed = true;
     *(float *)(destInfo + 0x24) = scalarResult;

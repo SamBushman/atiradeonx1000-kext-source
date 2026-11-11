@@ -2779,14 +2779,14 @@ loopSetLastHeader:
               leftTileDstRight = (uint)(int)srcRightExact;
               d2iScratch9 = (longlong)(int)leftTileDstRight;
             }
-            leftTileU0 = widthRatio * invLeftTileWidth * (float)((double)CONCAT44(0x43300000,i2dLo24) -
-                                           4503601774854144.0);
-            leftTileU1 = widthRatio * invLeftTileWidth * (float)((double)CONCAT44(0x43300000,leftTileSrcRightI2dLo) -
-                                            4503601774854144.0);
-            texV0 = heightRatio * invSrcHeight * (float)((double)CONCAT44(0x43300000,i2dLo25) -
-                                             4503601774854144.0);
-            texV1 = heightRatio * invSrcHeight * (float)((double)CONCAT44(0x43300000,i2dLo26) -
-                                             4503601774854144.0);
+            leftTileU0 = widthRatio * (invLeftTileWidth * (float)((double)CONCAT44(0x43300000,i2dLo24) -
+                                           4503601774854144.0));
+            leftTileU1 = widthRatio * (invLeftTileWidth * (float)((double)CONCAT44(0x43300000,leftTileSrcRightI2dLo) -
+                                            4503601774854144.0));
+            texV0 = heightRatio * (invSrcHeight * (float)((double)CONCAT44(0x43300000,i2dLo25) -
+                                             4503601774854144.0));
+            texV1 = heightRatio * (invSrcHeight * (float)((double)CONCAT44(0x43300000,i2dLo26) -
+                                             4503601774854144.0));
             leftTileDstTop = dstOffsetY + regionY;
             leftTileDstBottom = leftTileDstTop + (int)*(short *)((int)srcDescCopy2 + 6);
             if (needsSetupBlock) {
@@ -3031,16 +3031,16 @@ loopSetTopLeftCornerIdx:
               d2iScratch11 = (longlong)(int)rightTileDstLeft;
             }
             rightTileDstRight = regionDstLeft + (int)*(short *)(regionRect + 1);
-            rightTileU0 = widthRatio * invRightTileWidth * ((float)((double)CONCAT44(0x43300000,rightTileSrcLeftI2dLo) -
+            rightTileU0 = widthRatio * (invRightTileWidth * ((float)((double)CONCAT44(0x43300000,rightTileSrcLeftI2dLo) -
                                             4503601774854144.0) -
                                     (float)((double)CONCAT44(0x43300000,i2dLo29) -
+                                           4503601774854144.0)));
+            rightTileU1 = widthRatio * (invRightTileWidth * (float)((double)CONCAT44(0x43300000,i2dLo30) -
                                            4503601774854144.0));
-            rightTileU1 = widthRatio * invRightTileWidth * (float)((double)CONCAT44(0x43300000,i2dLo30) -
-                                           4503601774854144.0);
-            rightTileV0 = heightRatio * invSrcHeight * (float)((double)CONCAT44(0x43300000,i2dLo31) -
-                                             4503601774854144.0);
-            texV0 = heightRatio * invSrcHeight * (float)((double)CONCAT44(0x43300000,i2dLo32) -
-                                             4503601774854144.0);
+            rightTileV0 = heightRatio * (invSrcHeight * (float)((double)CONCAT44(0x43300000,i2dLo31) -
+                                             4503601774854144.0));
+            texV0 = heightRatio * (invSrcHeight * (float)((double)CONCAT44(0x43300000,i2dLo32) -
+                                             4503601774854144.0));
             rightTileDstTop = dstOffsetY + regionY;
             rightTileDstBottom = rightTileDstTop + (int)*(short *)((int)regionRect + 6);
             if (needsSetupBlock) {

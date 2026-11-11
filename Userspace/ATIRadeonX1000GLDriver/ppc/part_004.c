@@ -784,7 +784,7 @@ loopSetScratchInt23:
       scratchFloat2 = *(float *)(scratchInt23 + 0x24f4);
       scratchFloat3 = *(float *)(scratchInt23 + 0x24f0);
       vecZPlusOne = *(float *)(scratchInt23 + 0x24f8) + FLOAT_001aa0e8;
-      staleFprArg1 = _sqrt((double)(vecZPlusOne * vecZPlusOne + scratchFloat3 * scratchFloat3 + scratchFloat2 * scratchFloat2));
+      staleFprArg1 = _sqrt((double)(vecZPlusOne * vecZPlusOne + (scratchFloat3 * scratchFloat3 + scratchFloat2 * scratchFloat2)));
       vecW[0] = scratchFloat6;
       scratchFloat6 = (float)(DOUBLE_001aa200 / staleFprArg1);
       vecZ = vecZPlusOne * scratchFloat6;
@@ -4667,8 +4667,8 @@ callPthreadMutexLock:
     if (!(0.0 <= -scratchFloat13)) {
       scratchFloat3 = scratchFloat2;
     }
-    scratchFloat8 = -rasterX + scratchFloat12 + FLOAT_001aa0d4;
-    scratchFloat12 = -rasterX + clipRight + FLOAT_001aa0d4 + FLOAT_001aa0d4;
+    scratchFloat8 = -rasterX + (scratchFloat12 + FLOAT_001aa0d4);
+    scratchFloat12 = -rasterX + (clipRight + FLOAT_001aa0d4 + FLOAT_001aa0d4);
     scratchFloat4 = (float)((double)CONCAT44(0x43300000,negRenderHeightI2dLo) - DOUBLE_001aa1e0);
     scratchFloat5 = -rasterY + (FLOAT_001aa0d4 - (scratchFloat11 + scratchFloat4));
     scratchFloat4 = -rasterY + (FLOAT_001aa0d4 - (scratchFloat3 + scratchFloat4));

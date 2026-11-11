@@ -3495,7 +3495,7 @@ int ava_render_hue_saturation_pass(ctx, headerWord, enableFlag)
   cosHue = _cos((double)hueAngle);
   sinHue = _sin((double)hueAngle);
   hueSaturationConstReg0X_0000f004 = (float)(cosHue * (double)saturation * (double)contrast);
-  hueSaturationConstReg2X_0000f024 = (float)((double)contrast * (double)saturation * -sinHue);
+  hueSaturationConstReg2X_0000f024 = (float)((double)contrast * ((double)saturation * -sinHue));
   hueSaturationConstReg2Y_0000f028 = -hueSaturationConstReg2X_0000f024;
   hueSaturationConstReg1Y_0000f018 = ((hueSaturationConstReg2X_0000f024 + (1.0 - hueSaturationConstReg0X_0000f004)) * 128.0) / 255.0;
   hueSaturationConstReg1X_0000f014 = (((1.0 - hueSaturationConstReg0X_0000f004) - hueSaturationConstReg2X_0000f024) * 128.0) / 255.0;

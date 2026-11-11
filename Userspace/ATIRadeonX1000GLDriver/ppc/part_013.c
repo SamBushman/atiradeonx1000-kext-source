@@ -3087,7 +3087,7 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     outValue[1] = lightDirY;
     halfVectorZ = *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24f8) + oneF;
     outValue[2] = halfVectorZ;
-    length = _sqrt((double)(halfVectorZ * halfVectorZ + lightDirX * lightDirX + lightDirY * lightDirY));
+    length = _sqrt((double)(halfVectorZ * halfVectorZ + (lightDirX * lightDirX + lightDirY * lightDirY)));
     outValue[3] = oneF;
     oneF = oneF / (float)length;
     outValue[2] = halfVectorZ * oneF;
@@ -3755,7 +3755,7 @@ int gldDrawInternalRect(ctx, unusedArg2, passThroughArg3, rect, passThroughArg5)
   drawableHeight = (float)((double)CONCAT44(0x43300000,drawableHeightInt) - 4503599627370496.0);
   a6 = (uint)(int)(*(float *)(ctx + 0x2818) * 0.5 * drawableHeight * (rectY1 - rectY0));
   scaledHeightLL = (longlong)(int)a6;
-  scaledWidth = (int)(drawableHeight * *(float *)(ctx + 0x2814) * 0.5 * (rectX1 - rectX0));
+  scaledWidth = (int)(drawableHeight * (*(float *)(ctx + 0x2814) * 0.5) * (rectX1 - rectX0));
   scaledWidthLL = (longlong)scaledWidth;
   packet[2] = 0x82c;
   *packet = ((unsigned char *)0x00001087U);

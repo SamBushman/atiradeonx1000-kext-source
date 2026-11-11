@@ -3517,7 +3517,7 @@ int gld_emitInternalViewportPacket(glContext, dirtyMask)
     screenScale = (float)((double)CONCAT44(0x43300000,i2dLo3) - DOUBLE_001aa250);
     extentYFixed = (uint)(int)(*(float *)(glContext + 0x2818) * FLOAT_001aa10c * screenScale * (rectBottom - rectTop));
     fctiwzSlot0 = (longlong)(int)extentYFixed;
-    extentXFixed = (int)(screenScale * *(float *)(glContext + 0x2814) * FLOAT_001aa10c * (rectRight - rectLeft));
+    extentXFixed = (int)(screenScale * (*(float *)(glContext + 0x2814) * FLOAT_001aa10c) * (rectRight - rectLeft));
     fctiwzSlot1 = (longlong)extentXFixed;
     packet[2] = 0x82c;
     *packet = ((unsigned char *)0x00001087U);
@@ -3550,7 +3550,7 @@ int gld_emitInternalViewportPacket(glContext, dirtyMask)
     screenScale = (float)((double)CONCAT44(0x43300000,i2dLo4) - DOUBLE_001aa250);
     extentYFixed = (uint)(int)(*(float *)(glContext + 0x2818) * FLOAT_001aa10c * screenScale * (rectBottom - rectTop));
     fctiwzSlot2 = (longlong)(int)extentYFixed;
-    extentXFixed = (int)(screenScale * *(float *)(glContext + 0x2814) * FLOAT_001aa10c * (rectRight - rectLeft));
+    extentXFixed = (int)(screenScale * (*(float *)(glContext + 0x2814) * FLOAT_001aa10c) * (rectRight - rectLeft));
     fctiwzSlot3 = (longlong)extentXFixed;
     packet[2] = 0x82c;
     *packet = ((unsigned char *)0x00001087U);
@@ -3705,7 +3705,7 @@ void gld_normalizeVec3(float *outVector,float *inVector)
   
   scale = FLOAT_001aa0d4;
   inX = *inVector;
-  lengthSquared = (double)(inVector[2] * inVector[2] + inX * inX + inVector[1] * inVector[1]);
+  lengthSquared = (double)(inVector[2] * inVector[2] + (inX * inX + inVector[1] * inVector[1]));
   if (!((double)FLOAT_001aa0d4 < lengthSquared)) {
     outVector[2] = FLOAT_001aa0d4;
     *outVector = scale;

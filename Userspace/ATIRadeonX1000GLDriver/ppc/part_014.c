@@ -6913,49 +6913,49 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
         mvp32 = *(float *)(stateBlock + 0x1958);
         mulSlot03 = *(float *)(slotMatrix + 0x10c);
         result30 = mvp33 * mulSlot03 +
-                    mvp23 * mulSlot02 + (mvp03 * mulSlot00 + (mvp13 * mulSlot01));
+                    (mvp23 * mulSlot02 + (mvp03 * mulSlot00 + (mvp13 * mulSlot01)));
         result00 = mvp30 * mulSlot03 +
-                    mvp20 * mulSlot02 + (mvp00 * mulSlot00 + (mvp10 * mulSlot01));
+                    (mvp20 * mulSlot02 + (mvp00 * mulSlot00 + (mvp10 * mulSlot01)));
         result10 = mvp31 * mulSlot03 +
-                    mvp21 * mulSlot02 + (mvp01 * mulSlot00 + (mvp11 * mulSlot01));
+                    (mvp21 * mulSlot02 + (mvp01 * mulSlot00 + (mvp11 * mulSlot01)));
         result20 = mvp32 * mulSlot03 +
-                    mvp22 * mulSlot02 + (mvp02 * mulSlot00 + (mvp12 * mulSlot01));
+                    (mvp22 * mulSlot02 + (mvp02 * mulSlot00 + (mvp12 * mulSlot01)));
         mulSlot11 = *(float *)(slotMatrix + 0x114);
         mulSlot10 = *(float *)(slotMatrix + 0x110);
         mulSlot12 = *(float *)(slotMatrix + 0x118);
         mulSlot13 = *(float *)(slotMatrix + 0x11c);
         result31 = mvp33 * mulSlot13 +
-                    mvp23 * mulSlot12 + (mvp03 * mulSlot10 + (mvp13 * mulSlot11));
+                    (mvp23 * mulSlot12 + (mvp03 * mulSlot10 + (mvp13 * mulSlot11)));
         result01 = mvp30 * mulSlot13 +
-                    mvp20 * mulSlot12 + (mvp00 * mulSlot10 + (mvp10 * mulSlot11));
+                    (mvp20 * mulSlot12 + (mvp00 * mulSlot10 + (mvp10 * mulSlot11)));
         result11 = mvp31 * mulSlot13 +
-                    mvp21 * mulSlot12 + (mvp01 * mulSlot10 + (mvp11 * mulSlot11));
+                    (mvp21 * mulSlot12 + (mvp01 * mulSlot10 + (mvp11 * mulSlot11)));
         result21 = mvp32 * mulSlot13 +
-                    mvp22 * mulSlot12 + (mvp02 * mulSlot10 + (mvp12 * mulSlot11));
+                    (mvp22 * mulSlot12 + (mvp02 * mulSlot10 + (mvp12 * mulSlot11)));
         mulSlot21 = *(float *)(slotMatrix + 0x124);
         mulSlot20 = *(float *)(slotMatrix + 0x120);
         mulSlot22 = *(float *)(slotMatrix + 0x128);
         mulSlot23 = *(float *)(slotMatrix + 300);
         result32 = mvp33 * mulSlot23 +
-                    mvp23 * mulSlot22 + (mvp03 * mulSlot20 + (mvp13 * mulSlot21));
+                    (mvp23 * mulSlot22 + (mvp03 * mulSlot20 + (mvp13 * mulSlot21)));
         result02 = mvp30 * mulSlot23 +
-                    mvp20 * mulSlot22 + (mvp00 * mulSlot20 + (mvp10 * mulSlot21));
+                    (mvp20 * mulSlot22 + (mvp00 * mulSlot20 + (mvp10 * mulSlot21)));
         result12 = mvp31 * mulSlot23 +
-                    mvp21 * mulSlot22 + (mvp01 * mulSlot20 + (mvp11 * mulSlot21));
+                    (mvp21 * mulSlot22 + (mvp01 * mulSlot20 + (mvp11 * mulSlot21)));
         result22 = mvp32 * mulSlot23 +
-                    mvp22 * mulSlot22 + (mvp02 * mulSlot20 + (mvp12 * mulSlot21));
+                    (mvp22 * mulSlot22 + (mvp02 * mulSlot20 + (mvp12 * mulSlot21)));
         mulSlot31 = *(float *)(slotMatrix + 0x134);
         mulSlot30 = *(float *)(slotMatrix + 0x130);
         mulSlot32 = *(float *)(slotMatrix + 0x138);
         mulSlot33 = *(float *)(slotMatrix + 0x13c);
         scratchProduct = (mvp11 * mulSlot31);
         result33 = mvp33 * mulSlot33 +
-                    mvp23 * mulSlot32 + (mvp03 * mulSlot30 + (mvp13 * mulSlot31));
+                    (mvp23 * mulSlot32 + (mvp03 * mulSlot30 + (mvp13 * mulSlot31)));
         result03 = mvp30 * mulSlot33 +
-                    mvp20 * mulSlot32 + (mvp00 * mulSlot30 + (mvp10 * mulSlot31));
-        result13 = mvp31 * mulSlot33 + mvp21 * mulSlot32 + (mvp01 * mulSlot30 + scratchProduct);
+                    (mvp20 * mulSlot32 + (mvp00 * mulSlot30 + (mvp10 * mulSlot31)));
+        result13 = mvp31 * mulSlot33 + (mvp21 * mulSlot32 + (mvp01 * mulSlot30 + scratchProduct));
         result23 = mvp32 * mulSlot33 +
-                    mvp22 * mulSlot32 + (mvp02 * mulSlot30 + (mvp12 * mulSlot31));
+                    (mvp22 * mulSlot32 + (mvp02 * mulSlot30 + (mvp12 * mulSlot31)));
         constOffset = *(int *)(elementIndex * 4 + paramMapEntries) * 0x10;
         constAddr = constantBuffer + constOffset;
         if ((*(uint *)(((unsigned char *)0x000013c0) + ctx) & 4) == 0) {
@@ -7089,7 +7089,7 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
         minor10 = (invSrc00 * invSrc11 - invSrc01 * invSrc10);
         minor11 = (invSrc10 * invSrc31 - invSrc11 * invSrc30);
         minor12 = (invSrc20 * invSrc31 - invSrc21 * invSrc30);
-        determinant = invSrc00 * cofactor00 + invSrc10 * cofactor10 + invSrc30 * cofactor30 + invSrc20 * cofactor20;
+        determinant = invSrc00 * cofactor00 + (invSrc10 * cofactor10 + (invSrc30 * cofactor30 + invSrc20 * cofactor20));
         minorProduct = (minor11 * invSrc23);
         scratchProduct = (minor7 * invSrc13 - (minor10 * invSrc23));
         minor13 = minor8 * invSrc03 - scratchProduct;

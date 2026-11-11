@@ -527,7 +527,7 @@ double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8
     minorH = (m00 * m11 - m01 * m10);
     fpPassThrough3 = (m10 * m21 - m11 * m20);
     fpPassThrough6 = (minorJ * m23 - (minorG * m33));
-    determinant = m00 * cofactor0 + m10 * cofactor1 + m30 * cofactor2 + m20 * cofactor3;
+    determinant = m00 * cofactor0 + (m10 * cofactor1 + (m30 * cofactor2 + m20 * cofactor3));
     minorI = (m20 * m31 - m21 * m30);
     productM03 = fpPassThrough8 * m03;
     productM02 = fpPassThrough8 * m02;
@@ -676,42 +676,42 @@ int gld_transformClipPlanes(glContextPtr4, dirtyBitsWord8)
         if (planeW == oneF) {
           *(float *)(transformedPlanes + planeByteOffset) =
                planeZ * *(float *)(((unsigned char *)0x000015c8) + glContextPtr4) +
-               planeX * *(float *)(((unsigned char *)0x000015a8) + glContextPtr4) +
-               planeY * *(float *)(((unsigned char *)0x000015b8) + glContextPtr4) + *(float *)(((unsigned char *)0x000015d8) + glContextPtr4);
+               (planeX * *(float *)(((unsigned char *)0x000015a8) + glContextPtr4) +
+               planeY * *(float *)(((unsigned char *)0x000015b8) + glContextPtr4)) + *(float *)(((unsigned char *)0x000015d8) + glContextPtr4);
           *(float *)(transformedPlane + 4) =
                planeZ * *(float *)(((unsigned char *)0x000015cc) + glContextPtr4) +
-               planeX * *(float *)(((unsigned char *)0x000015ac) + glContextPtr4) +
-               planeY * *(float *)(((unsigned char *)0x000015bc) + glContextPtr4) + *(float *)(((unsigned char *)0x000015dc) + glContextPtr4);
+               (planeX * *(float *)(((unsigned char *)0x000015ac) + glContextPtr4) +
+               planeY * *(float *)(((unsigned char *)0x000015bc) + glContextPtr4)) + *(float *)(((unsigned char *)0x000015dc) + glContextPtr4);
           *(float *)(transformedPlane + 8) =
                planeZ * *(float *)(((unsigned char *)0x000015d0) + glContextPtr4) +
-               planeX * *(float *)(((unsigned char *)0x000015b0) + glContextPtr4) +
-               planeY * *(float *)(((unsigned char *)0x000015c0) + glContextPtr4) + *(float *)(((unsigned char *)0x000015e0) + glContextPtr4);
+               (planeX * *(float *)(((unsigned char *)0x000015b0) + glContextPtr4) +
+               planeY * *(float *)(((unsigned char *)0x000015c0) + glContextPtr4)) + *(float *)(((unsigned char *)0x000015e0) + glContextPtr4);
           *(float *)(transformedPlane + 0xc) =
                planeZ * *(float *)((int)((unsigned char *)0x000015d4) + glContextPtr4) +
-               planeX * *(float *)(((unsigned char *)0x000015b4) + glContextPtr4) +
-               planeY * *(float *)(((unsigned char *)0x000015c4) + glContextPtr4) + *(float *)(((unsigned char *)0x000015e4) + glContextPtr4);
+               (planeX * *(float *)(((unsigned char *)0x000015b4) + glContextPtr4) +
+               planeY * *(float *)(((unsigned char *)0x000015c4) + glContextPtr4)) + *(float *)(((unsigned char *)0x000015e4) + glContextPtr4);
         }
         else {
           *(float *)(transformedPlanes + planeByteOffset) =
                planeW * *(float *)(((unsigned char *)0x000015d8) + glContextPtr4) +
-               planeZ * *(float *)(((unsigned char *)0x000015c8) + glContextPtr4) +
-               planeX * *(float *)(((unsigned char *)0x000015a8) + glContextPtr4) +
-               planeY * *(float *)(((unsigned char *)0x000015b8) + glContextPtr4);
+               (planeZ * *(float *)(((unsigned char *)0x000015c8) + glContextPtr4) +
+               (planeX * *(float *)(((unsigned char *)0x000015a8) + glContextPtr4) +
+               planeY * *(float *)(((unsigned char *)0x000015b8) + glContextPtr4)));
           *(float *)(transformedPlane + 4) =
                planeW * *(float *)(((unsigned char *)0x000015dc) + glContextPtr4) +
-               planeZ * *(float *)(((unsigned char *)0x000015cc) + glContextPtr4) +
-               planeX * *(float *)(((unsigned char *)0x000015ac) + glContextPtr4) +
-               planeY * *(float *)(((unsigned char *)0x000015bc) + glContextPtr4);
+               (planeZ * *(float *)(((unsigned char *)0x000015cc) + glContextPtr4) +
+               (planeX * *(float *)(((unsigned char *)0x000015ac) + glContextPtr4) +
+               planeY * *(float *)(((unsigned char *)0x000015bc) + glContextPtr4)));
           *(float *)(transformedPlane + 8) =
                planeW * *(float *)(((unsigned char *)0x000015e0) + glContextPtr4) +
-               planeZ * *(float *)(((unsigned char *)0x000015d0) + glContextPtr4) +
-               planeX * *(float *)(((unsigned char *)0x000015b0) + glContextPtr4) +
-               planeY * *(float *)(((unsigned char *)0x000015c0) + glContextPtr4);
+               (planeZ * *(float *)(((unsigned char *)0x000015d0) + glContextPtr4) +
+               (planeX * *(float *)(((unsigned char *)0x000015b0) + glContextPtr4) +
+               planeY * *(float *)(((unsigned char *)0x000015c0) + glContextPtr4)));
           *(float *)(transformedPlane + 0xc) =
                planeW * *(float *)(((unsigned char *)0x000015e4) + glContextPtr4) +
-               planeZ * *(float *)((int)((unsigned char *)0x000015d4) + glContextPtr4) +
-               planeX * *(float *)(((unsigned char *)0x000015b4) + glContextPtr4) +
-               planeY * *(float *)(((unsigned char *)0x000015c4) + glContextPtr4);
+               (planeZ * *(float *)((int)((unsigned char *)0x000015d4) + glContextPtr4) +
+               (planeX * *(float *)(((unsigned char *)0x000015b4) + glContextPtr4) +
+               planeY * *(float *)(((unsigned char *)0x000015c4) + glContextPtr4)));
         }
       }
       *(ushort *)(glContextPtr4 + 0x276) = (ushort)planeBit | *(ushort *)(glContextPtr4 + 0x276);

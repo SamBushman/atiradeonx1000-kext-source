@@ -3485,35 +3485,31 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double unusedFloatArg1,double
         }
         else if (elementCount == 3) {
           opVec[0] = opVec[6] * opVec[10] +
-                         opVec[4] * opVec[8] + opVec[5] * opVec[9];
+                         (opVec[4] * opVec[8] + opVec[5] * opVec[9]);
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
                      inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],1,operandScratch);
           opVec[1] = opVec[6] * opVec[10] +
-                         opVec[4] * opVec[8] + opVec[5] * opVec[9];
+                         (opVec[4] * opVec[8] + opVec[5] * opVec[9]);
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
                      inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],2,operandScratch);
           opVec[2] = opVec[6] * opVec[10] +
-                         opVec[4] * opVec[8] + opVec[5] * opVec[9];
+                         (opVec[4] * opVec[8] + opVec[5] * opVec[9]);
         }
         else if (elementCount == 4) {
           opVec[0] = opVec[7] * opVec[0xb] +
-                         opVec[6] * opVec[10] +
-                         opVec[4] * opVec[8] + opVec[5] * opVec[9];
+                         (opVec[6] * opVec[10] + (opVec[4] * opVec[8] + opVec[5] * opVec[9]));
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
                      inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],1,operandScratch);
           opVec[1] = opVec[7] * opVec[0xb] +
-                         opVec[6] * opVec[10] +
-                         opVec[4] * opVec[8] + opVec[5] * opVec[9];
+                         (opVec[6] * opVec[10] + (opVec[4] * opVec[8] + opVec[5] * opVec[9]));
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
                      inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],2,operandScratch);
           opVec[2] = opVec[7] * opVec[0xb] +
-                         opVec[6] * opVec[10] +
-                         opVec[4] * opVec[8] + opVec[5] * opVec[9];
+                         (opVec[6] * opVec[10] + (opVec[4] * opVec[8] + opVec[5] * opVec[9]));
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
                      inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],3,operandScratch);
           opVec[3] = opVec[7] * opVec[0xb] +
-                         opVec[6] * opVec[10] +
-                         opVec[4] * opVec[8] + opVec[5] * opVec[9];
+                         (opVec[6] * opVec[10] + (opVec[4] * opVec[8] + opVec[5] * opVec[9]));
         }
       }
       else {
@@ -4440,22 +4436,21 @@ setI2dLo2:
         break;
       case 0x28:
         opVec[0] = opVec[6] * opVec[10] +
-                       opVec[4] * opVec[8] + opVec[5] * opVec[9];
+                       (opVec[4] * opVec[8] + opVec[5] * opVec[9]);
         opVec[1] = opVec[0];
         opVec[2] = opVec[0];
         opVec[3] = opVec[0];
         break;
       case 0x29:
         opVec[0] = opVec[7] * opVec[0xb] +
-                       opVec[6] * opVec[10] +
-                       opVec[4] * opVec[8] + opVec[5] * opVec[9];
+                       (opVec[6] * opVec[10] + (opVec[4] * opVec[8] + opVec[5] * opVec[9]));
         opVec[1] = opVec[0];
         opVec[2] = opVec[0];
         opVec[3] = opVec[0];
         break;
       case 0x2a:
         opVec[0] = opVec[6] * opVec[10] +
-                       opVec[4] * opVec[8] + opVec[5] * opVec[9] + opVec[0xb];
+                       (opVec[4] * opVec[8] + opVec[5] * opVec[9]) + opVec[0xb];
         opVec[1] = opVec[0];
         opVec[2] = opVec[0];
         opVec[3] = opVec[0];

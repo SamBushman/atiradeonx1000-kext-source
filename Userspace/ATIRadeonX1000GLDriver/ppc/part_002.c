@@ -8402,7 +8402,7 @@ void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleAr
                 vertexCursor[6] = colorB;
                 vertexCursor[7] = colorA;
                 vertexCursor[8] = centerOffsetX + pixelX;
-                vertexCursor[9] = centerOffsetY + pixelY + pixelStep;
+                vertexCursor[9] = centerOffsetY + (pixelY + pixelStep);
                 vertexCursor[10] = rasterZ;
                 vertexCursor[0xb] = 1.0;
                 vertexCursor[0xc] = colorR;
@@ -8423,7 +8423,7 @@ void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleAr
                 vertexCursor[6] = colorB;
                 vertexCursor[7] = colorA;
                 vertexCursor[8] = centerOffsetX + pixelX;
-                cornerCoord = centerOffsetY + pixelY + pixelStep;
+                cornerCoord = centerOffsetY + (pixelY + pixelStep);
                 vertexCursor[9] = cornerCoord;
                 vertexCursor[10] = rasterZ;
                 vertexCursor[0xb] = 1.0;
@@ -8432,7 +8432,7 @@ void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleAr
                 vertexCursor[0xe] = colorB;
                 vertexCursor[0xf] = colorA;
                 vertexCursor[0x11] = cornerCoord;
-                cornerCoord = centerOffsetX + pixelX + pixelStep;
+                cornerCoord = centerOffsetX + (pixelX + pixelStep);
                 vertexCursor[0x10] = cornerCoord;
                 vertexCursor[0x12] = rasterZ;
                 vertexCursor[0x13] = 1.0;

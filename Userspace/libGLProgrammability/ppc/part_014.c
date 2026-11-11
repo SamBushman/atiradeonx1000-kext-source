@@ -829,10 +829,10 @@ setTextureObject:
   sampleCoordR = texelCoordR;
   ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
   loadTexelResult = (double)((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLHr);
-  *texelOut = weightLL * texelLLr + weightLH * texelLHr + weightHH * texelHHr + weightHL * texelHLr;
-  texelOut[3] = weightLL * texelLLa + weightLH * texelLHa + weightHH * texelHHa + weightHL * texelHLa;
-  texelOut[1] = weightLL * texelLLg + weightLH * texelLHg + weightHH * texelHHg + weightHL * texelHLg;
-  texelOut[2] = weightLL * texelLLb + weightLH * texelLHb + weightHH * texelHHb + weightHL * texelHLb;
+  *texelOut = weightLL * texelLLr + (weightLH * texelLHr + (weightHH * texelHHr + weightHL * texelHLr));
+  texelOut[3] = weightLL * texelLLa + (weightLH * texelLHa + (weightHH * texelHHa + weightHL * texelHLa));
+  texelOut[1] = weightLL * texelLLg + (weightLH * texelLHg + (weightHH * texelHHg + weightHL * texelHLg));
+  texelOut[2] = weightLL * texelLLb + (weightLH * texelLHb + (weightHH * texelHHb + weightHL * texelHLb));
   return loadTexelResult;
 }
 
@@ -1078,25 +1078,25 @@ setTextureObject:
   interpreterTextureSamplerLoadTexel3DResult = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLHLr)
   ;
   *texelOut = weightLLL * texelLLLr +
-             weightLHL * texelLHLr +
-             weightHLL * texelHLLr +
-             weightHHL * texelHHLr +
-             weightLLH * texelLLHr + weightLHH * texelLHHr + weightHHH * texelHHHr + weightHLH * texelHLHr;
+             (weightLHL * texelLHLr +
+             (weightHLL * texelHLLr +
+             (weightHHL * texelHHLr +
+             (weightLLH * texelLLHr + (weightLHH * texelLHHr + (weightHHH * texelHHHr + weightHLH * texelHLHr))))));
   texelOut[1] = weightLLL * texelLLLg +
-               weightLHL * texelLHLg +
-               weightHLL * texelHLLg +
-               weightHHL * texelHHLg +
-               weightLLH * texelLLHg + weightLHH * texelLHHg + weightHHH * texelHHHg + weightHLH * texelHLHg;
+               (weightLHL * texelLHLg +
+               (weightHLL * texelHLLg +
+               (weightHHL * texelHHLg +
+               (weightLLH * texelLLHg + (weightLHH * texelLHHg + (weightHHH * texelHHHg + weightHLH * texelHLHg))))));
   texelOut[2] = weightLLL * texelLLLb +
-               weightLHL * texelLHLb +
-               weightHLL * texelHLLb +
-               weightHHL * texelHHLb +
-               weightLLH * texelLLHb + weightLHH * texelLHHb + weightHHH * texelHHHb + weightHLH * texelHLHb;
+               (weightLHL * texelLHLb +
+               (weightHLL * texelHLLb +
+               (weightHHL * texelHHLb +
+               (weightLLH * texelLLHb + (weightLHH * texelLHHb + (weightHHH * texelHHHb + weightHLH * texelHLHb))))));
   texelOut[3] = weightLLL * texelLLLa +
-               weightLHL * texelLHLa +
-               weightHLL * texelHLLa +
-               weightHHL * texelHHLa +
-               weightLLH * texelLLHa + weightLHH * texelLHHa + weightHHH * texelHHHa + weightHLH * texelHLHa;
+               (weightLHL * texelLHLa +
+               (weightHLL * texelHLLa +
+               (weightHHL * texelHHLa +
+               (weightLLH * texelLLHa + (weightLHH * texelLHHa + (weightHHH * texelHHHa + weightHLH * texelHLHa))))));
   return interpreterTextureSamplerLoadTexel3DResult;
 }
 
@@ -1251,10 +1251,10 @@ loopCheckIsLinearFilterCode:
     sampleCoordR = texelCoordR;
     ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
     ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,linearRecord,&sampleCoordS,&texelLHr);
-    *texelOut = weightLL * texelLLr + weightLH * texelLHr + weightHH * texelHHr + weightHL * texelHLr;
-    texelOut[3] = weightLL * texelLLa + weightLH * texelLHa + weightHH * texelHHa + weightHL * texelHLa;
-    texelOut[1] = weightLL * texelLLg + weightLH * texelLHg + weightHH * texelHHg + weightHL * texelHLg;
-    texelOut[2] = weightLL * texelLLb + weightLH * texelLHb + weightHH * texelHHb + weightHL * texelHLb;
+    *texelOut = weightLL * texelLLr + (weightLH * texelLHr + (weightHH * texelHHr + weightHL * texelHLr));
+    texelOut[3] = weightLL * texelLLa + (weightLH * texelLHa + (weightHH * texelHHa + weightHL * texelHLa));
+    texelOut[1] = weightLL * texelLLg + (weightLH * texelLHg + (weightHH * texelHHg + weightHL * texelHLg));
+    texelOut[2] = weightLL * texelLLb + (weightLH * texelLHb + (weightHH * texelHHb + weightHL * texelHLb));
   }
   return;
 }

@@ -9088,7 +9088,7 @@ loopSetStateConstants:
       scratchFloat7 = *(float *)(stateConstants + 0x24f4);
       scratchFloat8 = *(float *)(stateConstants + 0x24f0);
       vecZPlusOne = *(float *)(stateConstants + 0x24f8) + 1.0;
-      scratchDouble29 = _sqrt((double)(vecZPlusOne * vecZPlusOne + scratchFloat8 * scratchFloat8 + scratchFloat7 * scratchFloat7));
+      scratchDouble29 = _sqrt((double)(vecZPlusOne * vecZPlusOne + (scratchFloat8 * scratchFloat8 + scratchFloat7 * scratchFloat7)));
       outSlot[3] = 1.0;
       scratchFloat6 = (float)(1.0 / scratchDouble29);
       outSlot[2] = vecZPlusOne * scratchFloat6;
@@ -10126,7 +10126,7 @@ loopSetStateConstants:
       vecY = *(float *)(stateConstants + 0x24f4);
       vecX = *(float *)(stateConstants + 0x24f0);
       vecZPlusOne = *(float *)(stateConstants + 0x24f8) + 1.0;
-      scratchDouble36 = _sqrt((double)(vecZPlusOne * vecZPlusOne + vecX * vecX + vecY * vecY));
+      scratchDouble36 = _sqrt((double)(vecZPlusOne * vecZPlusOne + (vecX * vecX + vecY * vecY)));
       cmdCursor[6] = 1.0;
       scratchFloat6 = (float)(1.0 / scratchDouble36);
       cmdCursor[5] = vecZPlusOne * scratchFloat6;
