@@ -1251,7 +1251,7 @@ double powerOfTenDouble(int exponent,undefined4 unusedArg2,undefined4 exponentPt
 }
 
 /* textPrintDoubleShortest @ 0xbfa0 (1332 bytes) */
-char * textPrintDoubleShortest(double value,double tolerance,char *outBuffer,uint outCapacity)
+char * textPrintDoubleShortest(undefined4 unusedArg1,undefined4 unusedArg2,char *outBuffer,uint outCapacity,double value,double tolerance)
 {
   int reversalSwaps;
   int capacityLeft;
@@ -5062,8 +5062,7 @@ loadConstantVector:
           }
           outCursor = outCursor + emitLength3;
           commaSeparatorBase = 0x19f634;
-          floatTextCursor = (int)textPrintDoubleShortest((double)constantVector[0],DOUBLE_001aa248,outCursor,
-                                (outBuffer + outCapacity[0]) - (int)outCursor);
+          floatTextCursor = (int)textPrintDoubleShortest(0,0,outCursor,(outBuffer + outCapacity[0]) - (int)outCursor,(double)constantVector[0],DOUBLE_001aa248);
           curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
           separatorNotEmpty = curChar != '\0';
           if (separatorNotEmpty) {
@@ -5081,8 +5080,7 @@ loadConstantVector:
             emitLength2 = 0;
           }
           outCursor = (undefined1 *)(emitLength2 + floatTextCursor);
-          floatTextCursor = (int)textPrintDoubleShortest((double)constantVector[1],DOUBLE_001aa248,outCursor,
-                                (outBuffer + outCapacity[0]) - (int)outCursor);
+          floatTextCursor = (int)textPrintDoubleShortest(0,0,outCursor,(outBuffer + outCapacity[0]) - (int)outCursor,(double)constantVector[1],DOUBLE_001aa248);
           if (separatorNotEmpty) {
             emitLength2 = 0;
             srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -5098,8 +5096,7 @@ loadConstantVector:
             emitLength2 = 0;
           }
           outCursor = (undefined1 *)(emitLength2 + floatTextCursor);
-          floatTextCursor = (int)textPrintDoubleShortest((double)constantVector[2],DOUBLE_001aa248,outCursor,
-                                (outBuffer + outCapacity[0]) - (int)outCursor);
+          floatTextCursor = (int)textPrintDoubleShortest(0,0,outCursor,(outBuffer + outCapacity[0]) - (int)outCursor,(double)constantVector[2],DOUBLE_001aa248);
           if (separatorNotEmpty) {
             emitLength2 = 0;
             srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -5115,7 +5112,7 @@ loadConstantVector:
           }
           outCursor = (undefined1 *)(emitLength2 + floatTextCursor);
           argReg6 = (uint *)((outBuffer + outCapacity[0]) - (int)outCursor);
-          floatTextCursor = (int)textPrintDoubleShortest((double)constantVector[3],DOUBLE_001aa248,outCursor,(uint)argReg6);
+          floatTextCursor = (int)textPrintDoubleShortest(0,0,outCursor,(uint)argReg6,(double)constantVector[3],DOUBLE_001aa248);
           emitLength2 = 0;
           if (s___001a49e0[0] != '\0') {
             srcCursor = "}";
