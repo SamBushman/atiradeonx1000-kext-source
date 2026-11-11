@@ -1045,3 +1045,31 @@ func _glVertex4s_Exec
 func _glVertex4sv_Exec
   arg 0 ptr VXVCTX
   arg 1 ptr VXDATA
+func _glVertexAttrib4ubvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib4usvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib4NbvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib4NsvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib4NivARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib4NubvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
+func _glVertexAttrib4NusvARB_Exec
+  arg 0 ptr VALCTX
+  arg 1 pick 0 0 0 1 2 5 15 16
+  arg 2 ptr VXDATA
