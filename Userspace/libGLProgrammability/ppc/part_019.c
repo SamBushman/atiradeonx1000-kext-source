@@ -1056,16 +1056,16 @@ loopStoreDestInfo:
     goto storeDestInfo;
   case 0xf:
     operandComponent = src0[3];
-    if (!(1.8446744e+19 < operandComponent)) {
-      if (!(5.421011e-20 <= operandComponent)) {
-        scalarResult = 1.8446744e+19;
+    if (!(18446744073709551616.0 < operandComponent)) {
+      if (!(5.421010862427522e-20 <= operandComponent)) {
+        scalarResult = 18446744073709551616.0;
         if (!(0.0 <= operandComponent)) {
-          if (!(-5.421011e-20 < operandComponent)) {
-            scalarResult = -5.421011e-20;
-            if (-1.8446744e+19 <= operandComponent) goto setScalarResult;
+          if (!(-5.421010862427522e-20 < operandComponent)) {
+            scalarResult = -5.421010862427522e-20;
+            if (-18446744073709551616.0 <= operandComponent) goto setScalarResult;
           }
           else {
-            scalarResult = -1.8446744e+19;
+            scalarResult = -18446744073709551616.0;
           }
         }
       }
@@ -1075,7 +1075,7 @@ setScalarResult:
       }
     }
     else {
-      scalarResult = 5.421011e-20;
+      scalarResult = 5.421010862427522e-20;
     }
     goto storeDestInfo;
   case 0x10:
@@ -1732,8 +1732,8 @@ loopSetFoldFailed2:
     break;
   case 0x39:
     floatToInt = *src1;
-    if (2.1474836e+09 <= floatToInt) {
-      intComponent2 = (int)(floatToInt - 2.1474836e+09);
+    if (2147483648.0 <= floatToInt) {
+      intComponent2 = (int)(floatToInt - 2147483648.0) ^ 0x80000000;
       intPairLo = (longlong)intComponent2;
     }
     else {
@@ -1742,8 +1742,8 @@ loopSetFoldFailed2:
     }
     *destValue = src0[intComponent2];
     floatToInt = *src1;
-    if (2.1474836e+09 <= floatToInt) {
-      intComponent2 = (int)(floatToInt - 2.1474836e+09);
+    if (2147483648.0 <= floatToInt) {
+      intComponent2 = (int)(floatToInt - 2147483648.0) ^ 0x80000000;
       intPairHi = (longlong)intComponent2;
     }
     else {
@@ -1752,8 +1752,8 @@ loopSetFoldFailed2:
     }
     *(float *)(destInfo + 0x1c) = src0[intComponent2];
     floatToInt = *src1;
-    if (2.1474836e+09 <= floatToInt) {
-      intComponent2 = (int)(floatToInt - 2.1474836e+09);
+    if (2147483648.0 <= floatToInt) {
+      intComponent2 = (int)(floatToInt - 2147483648.0) ^ 0x80000000;
       intPairHi = (longlong)intComponent2;
     }
     else {
@@ -1762,8 +1762,8 @@ loopSetFoldFailed2:
     }
     *(float *)(destInfo + 0x20) = src0[intComponent2];
     floatToInt = *src1;
-    if (2.1474836e+09 <= floatToInt) {
-      intComponent2 = (int)(floatToInt - 2.1474836e+09);
+    if (2147483648.0 <= floatToInt) {
+      intComponent2 = (int)(floatToInt - 2147483648.0) ^ 0x80000000;
       intPairHi = (longlong)intComponent2;
     }
     else {
@@ -1797,8 +1797,8 @@ loopSetFoldFailed3:
     break;
   case 0x6d:
     floatToInt = *src1;
-    if (2.1474836e+09 <= floatToInt) {
-      intComponent2 = (int)(floatToInt - 2.1474836e+09);
+    if (2147483648.0 <= floatToInt) {
+      intComponent2 = (int)(floatToInt - 2147483648.0) ^ 0x80000000;
       intPairHi = (longlong)intComponent2;
     }
     else {
@@ -1806,8 +1806,8 @@ loopSetFoldFailed3:
       intPairLo = (longlong)intComponent2;
     }
     floatToInt = *src1;
-    if (2.1474836e+09 <= floatToInt) {
-      intComponent = (int)(floatToInt - 2.1474836e+09);
+    if (2147483648.0 <= floatToInt) {
+      intComponent = (int)(floatToInt - 2147483648.0) ^ 0x80000000;
       convertScratchLow = (longlong)intComponent;
     }
     else {
@@ -3146,7 +3146,6 @@ int _ConstantPropagateFold(compileContext)
   int operationChunk;
   uint lookupKeyRegister;
   uint lookupKeyBank;
-  longlong convertScratch;
   
   knownRegisters = _HashSetNew((*(uint *)(*(int *)(compileContext + 4) + 8) >> 5) + 1,regHashFunctionPtr,regEqualsFunctionPtr);
   for (operationChunk = **(int **)(compileContext + 0x20); operationChunk != 0; operationChunk = *(int *)(operationChunk + 8)) {
@@ -3160,7 +3159,6 @@ int _ConstantPropagateFold(compileContext)
           knownRegister = _HashSetGet(knownRegisters,&lookupKeyRegister);
           if ((knownRegister != 0) && (*(int *)(knownRegister + 0x14) != 0)) {
             *(uint *)(operandCursor + 0x10) = *(uint *)(operandCursor + 0x10) & 0x7fffffff;
-            convertScratch = (longlong)(int)*(float *)(knownRegister + 0x18);
             *(short *)(operandCursor + 0x16) =
                  *(short *)(operandCursor + 0x16) + (short)(int)*(float *)(knownRegister + 0x18);
           }
@@ -3190,7 +3188,6 @@ int _ConstantPropagateFold(compileContext)
       knownDestRegister = _HashSetGet(knownRegisters,&lookupKeyRegister);
       if ((knownDestRegister != 0) && (*(int *)(knownDestRegister + 0x14) != 0)) {
         *(uint *)(operationChunk + 0x18) = *(uint *)(operationChunk + 0x18) & 0x7fffffff;
-        convertScratch = (longlong)(int)*(float *)(knownDestRegister + 0x18);
         *(short *)(operationChunk + 0x1a) = *(short *)(operationChunk + 0x1a) + (short)(int)*(float *)(knownDestRegister + 0x18);
       }
     }

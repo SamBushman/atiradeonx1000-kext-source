@@ -3006,29 +3006,29 @@ int gld_emitClearColorPacket(glContext)
   
   engineCaps = *(int *)(*(int *)(glContext + 4) + 0x10);
   clearBlueScaled = *(float *)(((unsigned char *)0x00002da8) + engineCaps) * 255.0;
-  if (2.1474836e+09 <= clearBlueScaled) {
-    clearBlueByte = (int)(clearBlueScaled - 2.1474836e+09) + 0x80000000;
+  if (2147483648.0 <= clearBlueScaled) {
+    clearBlueByte = (int)(clearBlueScaled - 2147483648.0) + 0x80000000;
   }
   else {
     clearBlueByte = (uint)(int)clearBlueScaled;
   }
   clearAlphaScaled = *(float *)(((unsigned char *)0x00002dac) + engineCaps) * 255.0;
-  if (2.1474836e+09 <= clearAlphaScaled) {
-    clearAlphaByte = (int)(clearAlphaScaled - 2.1474836e+09) + -0x80000000;
+  if (2147483648.0 <= clearAlphaScaled) {
+    clearAlphaByte = (int)(clearAlphaScaled - 2147483648.0) + -0x80000000;
   }
   else {
     clearAlphaByte = (int)clearAlphaScaled;
   }
   clearRedScaled = *(float *)(((unsigned char *)0x00002da0) + engineCaps) * 255.0;
-  if (2.1474836e+09 <= clearRedScaled) {
-    clearRedByte = (int)(clearRedScaled - 2.1474836e+09) + -0x80000000;
+  if (2147483648.0 <= clearRedScaled) {
+    clearRedByte = (int)(clearRedScaled - 2147483648.0) + -0x80000000;
   }
   else {
     clearRedByte = (int)clearRedScaled;
   }
   clearGreenScaled = *(float *)(((unsigned char *)0x00002da4) + engineCaps) * 255.0;
-  if (2.1474836e+09 <= clearGreenScaled) {
-    clearGreenByte = (int)(clearGreenScaled - 2.1474836e+09) + -0x80000000;
+  if (2147483648.0 <= clearGreenScaled) {
+    clearGreenByte = (int)(clearGreenScaled - 2147483648.0) + -0x80000000;
   }
   else {
     clearGreenByte = (int)clearGreenScaled;

@@ -6859,18 +6859,18 @@ loopCallPthreadMutexUnlock:
   scratchFloat5 = (scratchFloat14 + yoffsetF) - scratchFloat16;
   scratchFloat17 = scratchFloat4 - 1.0;
   texPacket[0xa5] = *(uint *)(&textureFormatTable_field18_001d9f4c + scratchInt22) >> 0x1e | texPacket[0xa5] & 0xfffffffc;
-  if (2.1474836e+09 <= scratchFloat17) {
-    fctiwzSlot1 = (longlong)(int)(scratchFloat17 - 2.1474836e+09);
-    scratchUint24 = (int)(scratchFloat17 - 2.1474836e+09) + 0x80000000;
+  if (2147483648.0 <= scratchFloat17) {
+    fctiwzSlot1 = (longlong)(int)(scratchFloat17 - 2147483648.0);
+    scratchUint24 = (int)(scratchFloat17 - 2147483648.0) + 0x80000000;
   }
   else {
     scratchUint24 = (uint)(int)scratchFloat17;
     fctiwzSlot0 = (longlong)(int)scratchUint24;
   }
   scratchFloat17 = scratchFloat5 - 1.0;
-  if (2.1474836e+09 <= scratchFloat17) {
-    fctiwzSlot3 = (longlong)(int)(scratchFloat17 - 2.1474836e+09);
-    scratchUint35 = (int)(scratchFloat17 - 2.1474836e+09) + 0x80000000;
+  if (2147483648.0 <= scratchFloat17) {
+    fctiwzSlot3 = (longlong)(int)(scratchFloat17 - 2147483648.0);
+    scratchUint35 = (int)(scratchFloat17 - 2147483648.0) + 0x80000000;
   }
   else {
     scratchUint35 = (uint)(int)scratchFloat17;
@@ -6883,17 +6883,17 @@ loopCallPthreadMutexUnlock:
        scratchUint24 >> 7 & 0x1f | scratchUint35 >> 3 & 0x400000 | (scratchUint24 & 0x70) << 5 | (scratchUint24 & 0xe) << 0xb |
        scratchUint35 >> 0xe & 0x38000 | scratchUint35 >> 8 & 0x1c0000;
   scratchUint24 = *(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt22);
-  if (2.1474836e+09 <= scratchFloat4) {
-    fctiwzSlot5 = (longlong)(int)(scratchFloat4 - 2.1474836e+09);
-    scratchInt22 = (int)(scratchFloat4 - 2.1474836e+09) + -0x80000000;
+  if (2147483648.0 <= scratchFloat4) {
+    fctiwzSlot5 = (longlong)(int)(scratchFloat4 - 2147483648.0);
+    scratchInt22 = (int)(scratchFloat4 - 2147483648.0) + -0x80000000;
   }
   else {
     scratchInt22 = (int)scratchFloat4;
     fctiwzSlot4 = (longlong)scratchInt22;
   }
-  if (2.1474836e+09 <= scratchFloat5) {
-    fctiwzSlot7 = (longlong)(int)(scratchFloat5 - 2.1474836e+09);
-    scratchInt20 = (int)(scratchFloat5 - 2.1474836e+09) + -0x80000000;
+  if (2147483648.0 <= scratchFloat5) {
+    fctiwzSlot7 = (longlong)(int)(scratchFloat5 - 2147483648.0);
+    scratchInt20 = (int)(scratchFloat5 - 2147483648.0) + -0x80000000;
   }
   else {
     scratchInt20 = (int)scratchFloat5;

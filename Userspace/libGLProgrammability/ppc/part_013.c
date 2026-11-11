@@ -2674,21 +2674,21 @@ int _InterpreterPackPixel(machine, color, pixelOut)
         redDouble = (double)*color;
         color[2] = blueClamp;
         if (convertThreshold <= redDouble) {
-          redInt = (uint)(int)(redDouble - convertThreshold);
+          redInt = (uint)(int)(redDouble - convertThreshold) + 0x80000000;
         }
         else {
           redInt = (uint)(int)*color;
         }
         greenDouble = (double)color[1];
         if (DOUBLE_97c30a78 <= greenDouble) {
-          greenInt = (uint)(int)(greenDouble - DOUBLE_97c30a78);
+          greenInt = (uint)(int)(greenDouble - DOUBLE_97c30a78) + 0x80000000;
         }
         else {
           greenInt = (uint)(int)color[1];
         }
         blueDouble = (double)color[2];
         if (DOUBLE_97c30a78 <= blueDouble) {
-          blueInt = (uint)(int)(blueDouble - DOUBLE_97c30a78);
+          blueInt = (uint)(int)(blueDouble - DOUBLE_97c30a78) + 0x80000000;
         }
         else {
           blueInt = (uint)(int)color[2];
@@ -2754,28 +2754,28 @@ int _InterpreterPackPixel(machine, color, pixelOut)
         redDouble = (double)*color;
         color[3] = alphaClamp8;
         if (convertThreshold <= redDouble) {
-          redInt = (uint)(int)(redDouble - convertThreshold);
+          redInt = (uint)(int)(redDouble - convertThreshold) + 0x80000000;
         }
         else {
           redInt = (uint)(int)*color;
         }
         greenDouble = (double)color[1];
         if (DOUBLE_97c30a78 <= greenDouble) {
-          greenInt = (uint)(int)(greenDouble - DOUBLE_97c30a78);
+          greenInt = (uint)(int)(greenDouble - DOUBLE_97c30a78) + 0x80000000;
         }
         else {
           greenInt = (uint)(int)color[1];
         }
         blueDouble = (double)color[2];
         if (DOUBLE_97c30a78 <= blueDouble) {
-          blueInt = (uint)(int)(blueDouble - DOUBLE_97c30a78);
+          blueInt = (uint)(int)(blueDouble - DOUBLE_97c30a78) + 0x80000000;
         }
         else {
           blueInt = (uint)(int)color[2];
         }
         alphaDouble = (double)color[3];
         if (DOUBLE_97c30a78 <= alphaDouble) {
-          emulator = (int)(alphaDouble - DOUBLE_97c30a78);
+          emulator = (int)(alphaDouble - DOUBLE_97c30a78) + 0x80000000;
         }
         else {
           emulator = (int)color[3];
@@ -4030,22 +4030,22 @@ loopStoreOpVec:
         opVec[3] = opVec[0];
         break;
       case 0xf:
-        if (!(1.8446744e+19 < opVec[7])) {
-          if (!(5.421011e-20 <= opVec[7])) {
-            opVec[0] = 1.8446744e+19;
+        if (!(18446744073709551616.0 < opVec[7])) {
+          if (!(5.421010862427522e-20 <= opVec[7])) {
+            opVec[0] = 18446744073709551616.0;
             opVec[1] = opVec[0];
             opVec[2] = opVec[0];
             opVec[3] = opVec[0];
             if (!(0.0 <= opVec[7])) {
-              if (!(-5.421011e-20 < opVec[7])) {
-                opVec[0] = -5.421011e-20;
+              if (!(-5.421010862427522e-20 < opVec[7])) {
+                opVec[0] = -5.421010862427522e-20;
                 opVec[1] = opVec[0];
                 opVec[2] = opVec[0];
                 opVec[3] = opVec[0];
-                if (-1.8446744e+19 <= opVec[7]) goto storeOpVec;
+                if (-18446744073709551616.0 <= opVec[7]) goto storeOpVec;
               }
               else {
-                opVec[0] = -1.8446744e+19;
+                opVec[0] = -18446744073709551616.0;
                 opVec[1] = opVec[0];
                 opVec[2] = opVec[0];
                 opVec[3] = opVec[0];
@@ -4061,7 +4061,7 @@ storeOpVec:
           }
         }
         else {
-          opVec[0] = 5.421011e-20;
+          opVec[0] = 5.421010862427522e-20;
           opVec[1] = opVec[0];
           opVec[2] = opVec[0];
           opVec[3] = opVec[0];
@@ -4650,8 +4650,8 @@ storeOpVec6:
         powValue = _pow((double)opVec[7],scratchF2);
         goto storeOpVec8;
       case 0x39:
-        if (2.1474836e+09 <= opVec[8]) {
-          intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
+        if (2147483648.0 <= opVec[8]) {
+          intComponentI14 = (int)(opVec[8] - 2147483648.0);
           d2iScratch2 = (longlong)intComponentI14;
         }
         else {
@@ -4659,8 +4659,8 @@ storeOpVec6:
           d2iScratch1 = (longlong)intComponentI14;
         }
         opVec[0] = opVec[intComponentI14 + 4];
-        if (2.1474836e+09 <= opVec[8]) {
-          intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
+        if (2147483648.0 <= opVec[8]) {
+          intComponentI14 = (int)(opVec[8] - 2147483648.0);
           d2iScratch1 = (longlong)intComponentI14;
         }
         else {
@@ -4668,8 +4668,8 @@ storeOpVec6:
           d2iScratch2 = (longlong)intComponentI14;
         }
         opVec[1] = opVec[intComponentI14 + 4];
-        if (2.1474836e+09 <= opVec[8]) {
-          intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
+        if (2147483648.0 <= opVec[8]) {
+          intComponentI14 = (int)(opVec[8] - 2147483648.0);
           d2iScratch1 = (longlong)intComponentI14;
         }
         else {
@@ -4677,8 +4677,8 @@ storeOpVec6:
           d2iScratch2 = (longlong)intComponentI14;
         }
         opVec[2] = opVec[intComponentI14 + 4];
-        if (2.1474836e+09 <= opVec[8]) {
-          intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
+        if (2147483648.0 <= opVec[8]) {
+          intComponentI14 = (int)(opVec[8] - 2147483648.0);
           d2iScratch1 = (longlong)intComponentI14;
         }
         else {
@@ -4937,9 +4937,9 @@ setProgramInfo:
         }
         texLodBias = (double)operandComponent;
         if (*(int *)(programInfo + 0x38) - 0x8b30U < 2) {
-          if (2.1474836e+09 <= opVec[8]) {
-            d2iScratch3 = (longlong)(int)(opVec[8] - 2.1474836e+09);
-            intComponent = (int)(opVec[8] - 2.1474836e+09) ^ 0x80000000;
+          if (2147483648.0 <= opVec[8]) {
+            d2iScratch3 = (longlong)(int)(opVec[8] - 2147483648.0);
+            intComponent = (int)(opVec[8] - 2147483648.0) ^ 0x80000000;
           }
           else {
             intComponent = (uint)(int)opVec[8];
@@ -5152,16 +5152,16 @@ storeOpVec7:
         opVec[1] = srcC[1];
         opVec[2] = srcC[2];
         opVec[3] = srcC[3];
-        if (2.1474836e+09 <= opVec[8]) {
-          intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
+        if (2147483648.0 <= opVec[8]) {
+          intComponentI14 = (int)(opVec[8] - 2147483648.0);
           d2iScratch1 = (longlong)intComponentI14;
         }
         else {
           intComponentI14 = (int)opVec[8];
           d2iScratch2 = (longlong)intComponentI14;
         }
-        if (2.1474836e+09 <= opVec[8]) {
-          intComponentI26 = (int)(opVec[8] - 2.1474836e+09);
+        if (2147483648.0 <= opVec[8]) {
+          intComponentI26 = (int)(opVec[8] - 2147483648.0);
           d2iScratch4 = (longlong)intComponentI26;
         }
         else {

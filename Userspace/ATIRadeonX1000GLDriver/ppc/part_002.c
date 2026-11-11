@@ -10322,7 +10322,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     fctiwzSlot1 = (longlong)ctxState;
   }
   else {
-    ctxState = (int)(rasterXRounded - 0.999975);
+    ctxState = (int)(rasterXRounded - 0.999975f);
     fctiwzSlot0 = (longlong)ctxState;
   }
   if (((unsigned char *)GLD_yInverted)[ctx] == '\0') {
@@ -10335,7 +10335,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
       fctiwzSlot5 = (longlong)(int)windowY;
     }
     else {
-      windowY = (uint)(int)(scratchFloat5 - 0.999975);
+      windowY = (uint)(int)(scratchFloat5 - 0.999975f);
       fctiwzSlot4 = (longlong)(int)windowY;
     }
   }
@@ -10349,7 +10349,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
       fctiwzSlot3 = (longlong)(int)windowY;
     }
     else {
-      windowY = (uint)(int)(scratchFloat5 + 0.999975);
+      windowY = (uint)(int)(scratchFloat5 + 0.999975f);
       fctiwzSlot2 = (longlong)(int)windowY;
     }
   }
@@ -10384,7 +10384,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     }
     else {
       xDir = -1;
-      ctxState = (int)(rasterXScaled + 0.999975);
+      ctxState = (int)(rasterXScaled + 0.999975f);
       fctiwzSlot8 = (longlong)ctxState;
     }
   }
@@ -10395,7 +10395,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   }
   else {
     xDir = 1;
-    ctxState = (int)(rasterXRounded + 0.999975);
+    ctxState = (int)(rasterXRounded + 0.999975f);
     fctiwzSlot6 = (longlong)ctxState;
   }
   if (((unsigned char *)GLD_yInverted)[ctx] == '\0') {
@@ -10413,7 +10413,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
         scratchR9 = (char *)0x1;
         xDir = -1;
         yDir = 1;
-        windowY = (uint)(int)(rasterYWork + 0.999975);
+        windowY = (uint)(int)(rasterYWork + 0.999975f);
         fctiwzSlot16 = (longlong)(int)windowY;
       }
     }
@@ -10427,7 +10427,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
       }
       else {
         yDir = 1;
-        windowY = (uint)(int)(rasterYWork + 0.999975);
+        windowY = (uint)(int)(rasterYWork + 0.999975f);
         fctiwzSlot14 = (longlong)(int)windowY;
       }
     }
@@ -10440,7 +10440,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
       fctiwzSlot13 = (longlong)(int)windowY;
     }
     else {
-      windowY = (uint)(int)(rasterYWork + 0.999975);
+      windowY = (uint)(int)(rasterYWork + 0.999975f);
       fctiwzSlot12 = (longlong)(int)windowY;
     }
     windowYI2dLo = windowY ^ 0x80000000;
@@ -10458,7 +10458,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
       fctiwzSlot11 = (longlong)(int)windowY;
     }
     else {
-      windowY = (uint)(int)(rasterYWork + 0.999975);
+      windowY = (uint)(int)(rasterYWork + 0.999975f);
       fctiwzSlot10 = (longlong)(int)windowY;
     }
     windowYI2dLoB = windowY ^ 0x80000000;

@@ -2770,8 +2770,8 @@ loopSetLastHeader:
             }
             srcRightExact = (double)CONCAT44(0x43300000,leftTileRightBiased) - 4503601774854144.0;
             leftTileRightEdgeF = (float)srcRightExact;
-            if (2.1474836e+09 <= leftTileRightEdgeF) {
-              srcRightIntLow = (int)(leftTileRightEdgeF - 2.1474836e+09);
+            if (2147483648.0 <= leftTileRightEdgeF) {
+              srcRightIntLow = (int)(leftTileRightEdgeF - 2147483648.0);
               d2iScratch10 = (longlong)srcRightIntLow;
               leftTileDstRight = srcRightIntLow + 0x80000000;
             }
@@ -3021,8 +3021,8 @@ loopSetTopLeftCornerIdx:
             }
             srcRightExact = (double)CONCAT44(0x43300000,rightTileLeftBiased) - 4503601774854144.0;
             rightTileLeftEdgeF = (float)srcRightExact;
-            if (2.1474836e+09 <= rightTileLeftEdgeF) {
-              dstLeftIntLow = (int)(rightTileLeftEdgeF - 2.1474836e+09);
+            if (2147483648.0 <= rightTileLeftEdgeF) {
+              dstLeftIntLow = (int)(rightTileLeftEdgeF - 2147483648.0);
               d2iScratch12 = (longlong)dstLeftIntLow;
               rightTileDstLeft = dstLeftIntLow + 0x80000000;
             }

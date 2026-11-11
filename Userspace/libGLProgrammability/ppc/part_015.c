@@ -6659,8 +6659,8 @@ int _PPCRasterOpMachine_AlphaTestRTCAV(machine, codeCursor)
       *codeCursor = 0x3b000210;
       codeCursor[1] = 0x7e63c1ce;
       codeCursor[2] = 0xc123021c;
-      codeCursor[3] = (uint)(int)alphaRef >> 0x10 | 0x3de00000;
-      codeCursor[4] = (uint)(int)alphaRef & 0xffff | 0x61ef0000;
+      codeCursor[3] = GH_F2U(alphaRef) >> 0x10 | 0x3de00000;
+      codeCursor[4] = GH_F2U(alphaRef) & 0xffff | 0x61ef0000;
       codeCursor[5] = 0x91e30210;
       codeCursor[6] = 0xc1030210;
       compareWord = 0xfc094000;
@@ -6674,7 +6674,7 @@ int _PPCRasterOpMachine_AlphaTestRTCAV(machine, codeCursor)
       alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
       alphaRefScaled = (double)alphaRef;
       if (DOUBLE_97c30a78 <= alphaRefScaled) {
-        compareWord = (uint)(int)(alphaRefScaled - DOUBLE_97c30a78);
+        compareWord = (uint)(int)(alphaRefScaled - DOUBLE_97c30a78) + 0x80000000;
       }
       else {
         compareWord = (uint)(int)alphaRef;

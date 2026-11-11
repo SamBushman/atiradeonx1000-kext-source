@@ -830,7 +830,7 @@ int ValueKey__evaluateConstantInstruction(resultOut, valueKey, changedOut)
   }
   loopPtr = *(int **)(*(int *)(valueKey + 0xb0) + 0x88);
   (**(code **)(*loopPtr + 4))(loopPtr,resultOut,laneInputs,*(undefined4 *)(valueKey + 0x238));
-  if (*resultOut != 2.1474836e+09) {
+  if (*resultOut != 2147483648.0) {
     IRInst__scaleByOutputScale(&scaledResult,*(undefined4 *)(valueKey + 0xb0),*resultOut);
     *resultOut = scaledResult;
     IRInst__clampOutputValue(clampedResult,*(undefined4 *)(valueKey + 0xb0),scaledResult);
