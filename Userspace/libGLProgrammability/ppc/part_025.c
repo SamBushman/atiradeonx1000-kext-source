@@ -919,7 +919,7 @@ int parse_lsda_header(context, p, info)
     regionStart = 0;
   }
   else {
-    regionStart = ((uint (*)())__Unwind_GetRegionStart)(context);
+    regionStart = ((int (*)())__Unwind_GetRegionStart)(context);
   }
   *(uint *)info = regionStart;
   lpStartEncoding = (uint)*p;
@@ -1066,7 +1066,7 @@ int ___gxx_personality_v0(version, actions, exceptionClassLo, exceptionClassHi, 
   actionRecord = (uchar *)0x0;
   handlerSwitchValue = 0;
   infoTTypeBase = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)((uint)infoTTypeEncoding,context);
-  iP = ((uint (*)())__Unwind_GetIP)(context);
+  iP = ((int (*)())__Unwind_GetIP)(context);
   if (p < infoActionTable) {
     do {
       callSiteEncoding = (uint)infoCallSiteEncoding;

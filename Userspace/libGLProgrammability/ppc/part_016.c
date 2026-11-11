@@ -1,5 +1,9 @@
 #include "decls.h"
 
+/* _free is called here for its r3:r4 pair result (the stock reads r3 and r4 after the call): a second declaration of the same symbol with a 64-bit return type; a call through a
+   cast of a differently typed pointer is compiled by Apple gcc 4.0.1 as an abort */
+extern undefined8 _free_r3r4() __asm__("_free");
+
 /* _PPCConstantsAndScratchCreate @ 0x97be56c4 (56 bytes) */
 int _PPCConstantsAndScratchCreate()
 {
@@ -3571,7 +3575,7 @@ loopSetOutCursor2:
     } while ((int)nextTempIndex < (int)tempCount);
   }
   if (arraySizes != (int *)0x0) {
-    callResultPair = ((undefined8 (*)())_free)(arraySizes);
+    callResultPair = _free_r3r4(arraySizes);
   }
   if ((tempCount != 0) && (!isArbProgram)) {
     ch = '\n';
@@ -5058,7 +5062,7 @@ setLoopIndex:
     } while (loopIndex < (int)paramCount);
   }
   if (arraySizes != (int *)0x0) {
-    callResultPair = ((undefined8 (*)())_free)(arraySizes);
+    callResultPair = _free_r3r4(arraySizes);
   }
   ch = '\n';
   copyIndex4 = 0;
@@ -5506,7 +5510,7 @@ setLoopIndex2:
       outCursor = (int *)((int)outCursor + copyLength2 + copyEnd3);
     }
     _free(labelIds);
-    callResultPair = ((undefined8 (*)())_free)(labelValues);
+    callResultPair = _free_r3r4(labelValues);
   }
   ch = 'E';
   copyIndex4 = 0;
