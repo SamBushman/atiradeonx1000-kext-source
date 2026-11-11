@@ -215,7 +215,7 @@ int IrLogInternal__fold(this, result, operands)
     }
     absOperandOrLn = _logf(absOperandOrLn);
     lnTwo = _log(DOUBLE_001aa2a0);
-    *result = (absOperandOrLn * (DOUBLE_001aa200 / lnTwo));
+    *result = absOperandOrLn * (float)(DOUBLE_001aa200 / lnTwo);
   }
   return 1;
 }
