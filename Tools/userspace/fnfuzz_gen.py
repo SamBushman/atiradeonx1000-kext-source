@@ -109,14 +109,22 @@ def sig_of(entry):
 def _reads(arg, r):
     ops = [x.strip() for x in arg.split(';')[0].split(',')]
     return any(re.search(r'(^|[(\s])%s($|[),])' % r, o) for o in ops[1:])
+SYMADDR = {}
+for _l in open(snm):
+    _p = _l.split()
+    if len(_p) == 3 and _p[1] in ('T', 't'): SYMADDR.setdefault(_p[2], int(_p[0], 16))
 RETUSED = set()
 labs = {}
 for a_, l in [(a, None) for a in idx]: pass
 for i, (a, op, arg) in enumerate(seq):
     if op in ('bl', 'bl+', 'bl-'):
         t = arg.split()[0]
-        if not t.startswith('0x'): continue
-        ta = int(t, 16)
+        # a call to a function that has a symbol is printed `bl _name`, not `bl 0x...`: resolve it with the stock nm (T and t). Skipping those left every symbolically called
+        # function without RETUSED, class `v`, its returned r3 never compared (glprog _glpWriteSourceOperandType / Swizzle / ExtendedSwizzle: the caller _glpWriteSourceOperand returned a
+        # different cursor and no ledger noticed; #257)
+        if t.startswith('0x'): ta = int(t, 16)
+        elif t in SYMADDR: ta = SYMADDR[t]
+        else: continue
         # scan on until r3 is read (the result is used), redefined, or the straight-line code ends in a call / return / jump. The cap used to be 10 instructions: the caller
         # of VA's ava_reserve_list_words (stock 0x83e0) reads the returned write pointer 34 instructions after the call, so the function was classed `v`, its r3 was never
         # compared, and the rebuilt body that returned nothing passed fnfuzz (#233).
