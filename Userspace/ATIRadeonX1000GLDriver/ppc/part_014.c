@@ -4138,6 +4138,7 @@ int fpVariantProgramFree(ctx, program)
 int ffvpEmitFogLinear(programBuilder)
   int programBuilder;
 {
+  int fogStateBlock;
   undefined4 fogDstReg;
   undefined4 *fogMask;
   undefined4 *fogCoordSelect;
@@ -4176,6 +4177,8 @@ int ffvpEmitFogLinear(programBuilder)
   int emit7Src1Select;
   
   glCtxB = *(int *)(programBuilder + 0x3d4);
+  /* the stock loads *(*(glCtxB + 4) + 0x10) before it tests programBuilder[0x588] */
+  fogStateBlock = *(int *)(*(int *)(glCtxB + 4) + 0x10);
   if (*(int *)(programBuilder + 0x588) != -1) {
     return 0;
   }
@@ -4183,7 +4186,7 @@ int ffvpEmitFogLinear(programBuilder)
   fogParamConstReg = *(undefined4 *)(programBuilder + 0x330);
   dstFile = **(undefined4 **)(programBuilder + 0x3f0);
   constFile = fileTable[2];
-  if (*(ushort *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtxB + 4) + 0x10)) == 0x8452) {
+  if (*(ushort *)(((unsigned char *)0x00002e06) + fogStateBlock) == 0x8452) {
     fogCoordReg = *(int *)(programBuilder + 0x3f8);
     if (fogCoordReg == -1) {
       if ((*(uint *)(((unsigned char *)0x000013c0) + glCtxB) & 4) == 0) {
@@ -4346,6 +4349,7 @@ int ffvpPrepareFogLinear(programBuilder)
 int ffvpEmitFogExp(programBuilder)
   int programBuilder;
 {
+  int fogStateBlock;
   undefined4 *fogMask;
   undefined4 *fogCoordSelect;
   int stateBlock;
@@ -4375,6 +4379,8 @@ int ffvpEmitFogExp(programBuilder)
   int emit5Src1Negate;
   
   glCtxB = *(int *)(programBuilder + 0x3d4);
+  /* the stock loads *(*(glCtxB + 4) + 0x10) before it tests programBuilder[0x588] */
+  fogStateBlock = *(int *)(*(int *)(glCtxB + 4) + 0x10);
   if (*(int *)(programBuilder + 0x588) != -1) {
     return 0;
   }
@@ -4382,7 +4388,7 @@ int ffvpEmitFogExp(programBuilder)
   fogParamConstReg = *(undefined4 *)(programBuilder + 0x330);
   dstFile = **(undefined4 **)(programBuilder + 0x3f0);
   constFile = fileTable[2];
-  if (*(ushort *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtxB + 4) + 0x10)) == 0x8452) {
+  if (*(ushort *)(((unsigned char *)0x00002e06) + fogStateBlock) == 0x8452) {
     fogCoordReg = *(int *)(programBuilder + 0x3f8);
     if (fogCoordReg == -1) {
       if ((*(uint *)(((unsigned char *)0x000013c0) + glCtxB) & 4) == 0) {

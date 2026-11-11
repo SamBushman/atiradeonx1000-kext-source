@@ -5419,6 +5419,7 @@ int ffvpEmitSphereMapCoord(programBuilder)
 int ffvpEmitFogExp2(programBuilder)
   int programBuilder;
 {
+  int fogStateBlock;
   undefined4 srcTempFile;
   undefined4 fogParamConstReg;
   undefined4 *outputMask;
@@ -5444,12 +5445,14 @@ int ffvpEmitFogExp2(programBuilder)
   
   status = 0;
   glCtx = *(int *)(programBuilder + 0x3d4);
+  /* the stock loads *(*(glCtx + 4) + 0x10) before it tests programBuilder[0x588] */
+  fogStateBlock = *(int *)(*(int *)(glCtx + 4) + 0x10);
   if (*(int *)(programBuilder + 0x588) == -1) {
     fileTable = *(undefined4 **)(programBuilder + 0x3ec);
     fogParamConstReg = *(undefined4 *)(programBuilder + 0x330);
     dstFile = **(undefined4 **)(programBuilder + 0x3f0);
     constFile = fileTable[2];
-    if (*(ushort *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtx + 4) + 0x10)) == 0x8452) {
+    if (*(ushort *)(((unsigned char *)0x00002e06) + fogStateBlock) == 0x8452) {
       fogCoordReg = *(int *)(programBuilder + 0x3f8);
       if (fogCoordReg == -1) {
         if ((*(uint *)(((unsigned char *)0x000013c0) + glCtx) & 4) == 0) {
