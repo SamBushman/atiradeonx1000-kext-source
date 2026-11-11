@@ -1258,3 +1258,96 @@ func _glClear_Exec
   arg 1 pick 0 0x4000 0x100 0x400 0x4100 0x4500 0x4001 1
 func _gleForceToSoftwareTCL
   arg 0 ptr TCFCTX
+
+# ---- _gleUpdateDispatchCodeChange(ctx, flags) (direct spec, Nov 10; the REPAIR-only difference of _gleForceToSoftwareTCL was suspected to come from it): stage 1 (flags&4 against
+# ctx+0x7581) with ctx+0x85a5 = 0xff, i.e. the renderer-switch branch is NOT entered; stage 2 (flags&3 against ctx+0x7580): colour-material, primitive data, draw-array and vertex-submit
+# updates, ctx+0x48d0/+0x48d4 copied from the block at ctx+0x468c (+0x11c/+0x120); stage 3 (flags bit 3 against ctx+0x759d): _gleUpdateFramebufferOperationFuncs, which patches the
+# dispatch tables at ctx+0x4680 / +0x4684 (entries +0x28, +0xd0.. chosen by "entry == 0") - TDTAB is a zero/non-zero mix; ctx+0x5408 picks the branch of that function.
+type TDTAB 0x700
+  randfill 0 0x700
+  pick 0x10 0 0 0x1000
+  pick 0x28 0 0 0x1000
+  pick 0xd0 0 0 0x1000
+  pick 0xd4 0 0 0x1000
+  pick 0xd8 0 0 0x1000
+  pick 0xdc 0 0 0x1000
+  pick 0xe0 0 0 0x1000
+  pick 0x110 0 0 0x1000
+  pick 0x6e0 0 0 0x1000
+type TDCTX 0x8800
+  u16 0x4a10 0 65535
+  pick 0x4e1c 0x1c00 0x1c00 0x1c01 0
+  fnrecp 0x469c
+  ptr 0x468c TCBLK
+  u8 0x4691 0 1
+  u8 0x4664 0 1
+  pick 0x5430 0 0 1
+  set 0x50ac 0
+  set 0x505c 0
+  set 0x744c 0
+  u8 0x2e54 0 0
+  u8 0x3094 0 0
+  pick 0x31c 0 0 0x15555 0x1000000 0x800000 0x10000000
+  pick 0x310 0 0 1 2
+  pick 0x314 0 0 1
+  pick 0x318 0 0 1 2 3
+  pick 0x320 0 0 1
+  pick 0x324 0 0 1
+  pick 0x328 0 0 1
+  pick 0x32c 0 0 1
+  pick 0x330 0 0 1
+  pick 0x334 0 0 1
+  pick 0x338 0 0 1
+  pick 0x33c 0 0 1
+  pick 0x340 0 0 1
+  pick 0x344 0 0 1
+  pick 0x85a6 0 0 0x01000100 0x01000000
+  u8 0x7580 0 1
+  u8 0x7581 0 1
+  u8 0x759d 0 1
+  fnrec3 0x4788
+  rand 0x4688
+  rand 0x4888
+  pick 0x7574 0 0 0x501
+  ptr 0x4680 TDTAB
+  ptr 0x4684 TDTAB
+  pick 0x5408 0 0 1
+  u8 0x85a5 255 255
+func _gleUpdateDispatchCodeChange
+  arg 0 ptr TDCTX
+  arg 1 int 0 15
+
+# ---- _gleSwitchToRenderer(ctx, idx) (direct spec, Nov 10): the plugin renderer table is 0x2e0 bytes per renderer starting at ctx+0x85ac (idx 0, 1): +0x85ac the renderer's context word, +0x85b0 its
+# block (ctx+0x468c is set to it), *(ctx+0x8884+idx*0x2e0) its vtable (TSVT: 0xf4 bytes at +0x114 are copied to ctx+0x4754, which OVERWRITES the slots ctx+0x4784 / +0x4788 with vtable+0x144 / +0x148). ctx+0x4784 is called with (ctx[0x4688], ctx+0x4698, ctx+0x471c)
+# (fnrec3), ctx+0x4788 with (ctx[0x4688], ctx+0x4698, ctx+0x310, ...) and its result is tested (bits 2, 3): fnrec3a returns r3 = ctx[0x4688] (random). The dispatch tables at ctx+0x4680 / +0x4684
+# are TSTAB (entries +0x938, +0x168, +0x164 of the tables are set when they are 0).
+type TSVT 0x300
+  randfill 0 0x300
+  fnreca 0x138
+  fnrec3 0x144
+  fnrec3a 0x148
+type TSTAB 0x1000
+  randfill 0 0x1000
+  pick 0x938 0 0 0x1000
+  pick 0x168 0 0 0x1000
+  pick 0x164 0 0 0x1000
+type TSCTX 0x9000
+  set 0x5408 0
+  ptr 0x8884 TSVT
+  ptr 0x8b64 TSVT
+  fnrec3 0x4784
+  fnrec3a 0x4788
+  rand 0x4688
+  ptr 0x4680 TSTAB
+  ptr 0x4684 TSTAB
+  u8 0x759d 0 1
+  u8 0x85a5 0 1
+  u8 0x85a6 0 1
+  u8 0x85a7 0 1
+  pick 0x85ac 0 0 1 2 3 4 5 0x2720
+  pick 0x886c 0 0 1 2 3 4 5 0x2720
+func _gleSwitchToRenderer
+  arg 0 ptr TSCTX
+  arg 1 int 0 1
+func _gleSwitchToNonRevertRenderer
+  arg 0 ptr TSCTX

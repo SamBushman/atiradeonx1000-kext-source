@@ -319,7 +319,7 @@ typedef struct { unsigned off; int kind; unsigned a, b, c; int n; unsigned v[8];
 typedef struct { char name[32]; unsigned size; int nf; gfield_t f[96]; } gtype_t;
 typedef struct { int n; int kind; unsigned a, b; int pct; unsigned v[64]; int nv; char tname[32]; char text[96]; } garg_t;
 typedef struct { char name[96]; int na; garg_t a[8]; } gfunc_t;
-enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD };
+enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD, GF_FNREC3A, GF_FNRECA };
 enum { GA_PTR = 1, GA_INT, GA_PICK, GA_RAND, GA_NULL, GA_NAME, GA_STR };
 static unsigned g_names[64]; static int g_nnames;
 typedef struct { char name[48]; char tname[32]; unsigned v[8]; int nv; char func[96]; int pct; } gret_t;
@@ -337,9 +337,11 @@ static int gs_recw(int a, double c, double d, double e, double f) { return gs_re
 static int gs_recp(int a, int b) { gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)a; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)b; if (getenv("FNFUZZ_RECDUMP")) fprintf(stderr, "  [%s recp r3=%08x r4=%08x]\n", cur_img ? "R" : "S", (unsigned)a, (unsigned)b); gs_rec_n++; return 0; }   /* `fnrecp`: a slot called as (int, int): r3 and r4 */
 static int gs_rec1(int a) { return gs_recp(a, 0); }   /* `fnrec1`: a slot called as (int): r3 only */
 static int gs_rec3(int a, int b, int c) { gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)a; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)b; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)c; gs_rec_n++; return 0; }   /* fnrec3: r3, r4, r5 */
+static int gs_rec3a(int a, int b, int c) { gs_rec3(a, b, c); return a; }   /* fnrec3a: r3, r4, r5 recorded, r3 returned (a slot whose result the function tests: r3 is a field the spec controls) */
 static int gs_rec(int a, int b, int c, int d) { gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)a; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)b; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)c; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)d; gs_rec_n++; return 0; }
+static int gs_reca(int a, int b, int c, int d) { gs_rec(a, b, c, d); return a; }   /* fnreca: r3..r6 recorded, r3 returned */
 static double gs_nopd(int a, double x) { (void)a; return x; }   /* a callback slot that returns a double: the argument back */
-static unsigned gnum(const char *s) { if (!strcmp(s, "fn")) return (unsigned)(uintptr_t)gs_nop; if (!strcmp(s, "fnd")) return (unsigned)(uintptr_t)gs_nopd; if (!strcmp(s, "fnrec")) return (unsigned)(uintptr_t)gs_rec; if (!strcmp(s, "fnrecv")) return (unsigned)(uintptr_t)gs_recv; if (!strcmp(s, "fnrecw")) return (unsigned)(uintptr_t)gs_recw; if (!strcmp(s, "fnrecp")) return (unsigned)(uintptr_t)gs_recp; if (!strcmp(s, "fnrec1")) return (unsigned)(uintptr_t)gs_rec1; if (!strcmp(s, "fnrec3")) return (unsigned)(uintptr_t)gs_rec3; return (unsigned)strtoul(s, NULL, 0); }   /* `fn` / `fnd`: the address of the harmless harness function (the same in both images) */
+static unsigned gnum(const char *s) { if (!strcmp(s, "fn")) return (unsigned)(uintptr_t)gs_nop; if (!strcmp(s, "fnd")) return (unsigned)(uintptr_t)gs_nopd; if (!strcmp(s, "fnrec")) return (unsigned)(uintptr_t)gs_rec; if (!strcmp(s, "fnrecv")) return (unsigned)(uintptr_t)gs_recv; if (!strcmp(s, "fnrecw")) return (unsigned)(uintptr_t)gs_recw; if (!strcmp(s, "fnrecp")) return (unsigned)(uintptr_t)gs_recp; if (!strcmp(s, "fnrec1")) return (unsigned)(uintptr_t)gs_rec1; if (!strcmp(s, "fnrec3")) return (unsigned)(uintptr_t)gs_rec3; if (!strcmp(s, "fnrec3a")) return (unsigned)(uintptr_t)gs_rec3a; if (!strcmp(s, "fnreca")) return (unsigned)(uintptr_t)gs_reca; return (unsigned)strtoul(s, NULL, 0); }   /* `fn` / `fnd`: the address of the harmless harness function (the same in both images) */
 static void load_graphspec(const char *path) {
     FILE *f = fopen(path, "r"); if (!f) { perror(path); exit(2); }
     char line[1024]; gtype_t *ct = NULL; gfunc_t *cf = NULL;
@@ -393,6 +395,8 @@ static void load_graphspec(const char *path) {
             else if (!strcmp(tok[0], "fnrecp")) g->kind = GF_FNRECP;
             else if (!strcmp(tok[0], "fnrec1")) g->kind = GF_FNREC1;
             else if (!strcmp(tok[0], "fnrec3")) g->kind = GF_FNREC3;
+            else if (!strcmp(tok[0], "fnrec3a")) g->kind = GF_FNREC3A;
+            else if (!strcmp(tok[0], "fnreca")) g->kind = GF_FNRECA;
             else if (!strcmp(tok[0], "randfill") && nt >= 3) { g->kind = GF_RANDFILL; g->a = gnum(tok[2]); g->b = nt >= 4 ? gnum(tok[3]) : 4096; }
             else if (!strcmp(tok[0], "istr") && nt >= 3) { g->kind = GF_ISTR; snprintf(g->text, sizeof g->text, "%s", tok[2]); }   /* the characters inline at OFF (one of a|b|c) */
             else if (!strcmp(tok[0], "warr") && nt >= 6) { g->kind = GF_WARR; g->c = gnum(tok[2]); g->a = gnum(tok[3]); g->b = gnum(tok[4]); for (int i = 5; i < nt && g->n < 8; i++) g->v[g->n++] = gnum(tok[i]); }   /* warr OFF COUNTOFF MIN MAX v..: OFF = pointer to an array of count words drawn from v, COUNTOFF = the count word */
@@ -446,6 +450,8 @@ static unsigned gb_build(gtype_t *t, int depth) {
         case GF_PICK: *(unsigned *)(b + g->off) = g->v[rnd32() % g->n]; break;
         case GF_PADD: *(unsigned *)(b + g->off) = *(unsigned *)(b + g->a) + g->v[rnd32() % g->n]; break;
         case GF_FNREC3: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_rec3; break;
+        case GF_FNREC3A: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_rec3a; break;
+        case GF_FNRECA: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_reca; break;
         case GF_BITS: *(unsigned *)(b + g->off) = rnd32() & g->a; break;
         case GF_STR: { char txt[96]; snprintf(txt, sizeof txt, "%s", g->text); int na = 1; for (char *q = txt; *q; q++) if (*q == '|') na++;
             int pick = rnd32() % na; char *s0 = txt; for (int k = 0; k < pick; k++) { s0 = strchr(s0, '|') + 1; } char *e = strchr(s0, '|'); if (e) *e = 0;
