@@ -397,7 +397,7 @@ loopSetSourceDef:
           else {
             constValue = -(double)*(float *)(selectedComponentB * 0x18 + sourceDef + 0x20);
           }
-          constEncodable = (**(code **)(*hardwareInfo + 0xf0))(constValue,hardwareInfo);
+          constEncodable = ((int (*)(int *, double))*(code **)(*hardwareInfo + 0xf0))(hardwareInfo,constValue);
           if (constEncodable == 0) goto setFoldable;
         }
       }
@@ -419,8 +419,8 @@ loopSetFoldable:
             operandRecordB = IRInst__getOperandRecord(inst,operandIndex);
             selectedComponent = (uint)*(byte *)(loopCounter + operandRecordB + 0x10);
             if ((selectedComponent != 4) &&
-               (operandRecordB = (**(code **)(*hardwareInfo + 0xf0))
-                                  ((double)*(float *)(selectedComponent * 0x18 + sourceDef + 0x20),hardwareInfo),
+               (operandRecordB = ((int (*)(int *, double))*(code **)(*hardwareInfo + 0xf0))
+                                  (hardwareInfo,(double)*(float *)(selectedComponent * 0x18 + sourceDef + 0x20)),
                operandRecordB == 0)) goto setFoldable;
           }
           notLastLane = loopCounter != 3;

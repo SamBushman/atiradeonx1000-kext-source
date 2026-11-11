@@ -210,6 +210,27 @@ GLDriver, 3 GA, 3 VA; two GLDriver/GA hits are register-save millicode, r3 merel
    GLDriver functions, from glprog-pr / gld-ia).
 
 
+## Stage B4 - the patched decompiler and the other corpora (2026-11-10 audit of GLEngine's defect classes #22b / #23 / #24)
+The Ghidra decompiler binary in `Ghidra/Features/Decompiler/os/linux_x86_64/decompile` is the PATCHED one (`Tools/userspace/ghidra_patches/`: float compares are not flippable;
+md5 32a1a9b8c2a127219594179d930d0e02, the unpatched binary is b69341805caa578be4dbd57ea1c086e2). A dump made with it differs from the archived ones only where a float compare was
+printed in the NaN-unsound flipped form (`a < b` instead of `!(b <= a)`). Every archived dump of this directory (`n_*`, `p_*`, `o_*` of GA, VADriver, libGL, libGLProgrammability,
+GLDriver) was made with the UNPATCHED decompiler; GLEngine's was regenerated with the patched one (`Userspace/GLEngine/ppc/EVIDENCE_fnfuzz.md` section 18).
+ - Which functions differ: a `DecompAll.java` of the final project of each chain (gld-ext / glprog-un / r32-va-ret / r32-ga-ret / r32-libgl, i.e. the B2 projects) with the patched and
+   the unpatched binary, text-compared: GLDriver 38, libGLProgrammability 7, VADriver 2, GA 0, libGL 0 functions (`b3/float_compare_redump_{gld,glprog,va}.txt`). Classes #22b (`(double)((ulonglong)hi << 0x20)`)
+   found 0 times in any corpus.
+ - Re-dump of exactly those functions with the patched binary: `RedumpContaining.java <out> $(cat b3/float_compare_redump_<x>.txt)` on the LAST project of the chain (gld-ia, glprog-pr, va-ia).
+   Checked by also re-dumping with the unpatched binary: that re-dump equals the archived text for only 10 of the 47 functions (so the patched re-dump of those 10 IS the archived text with
+   the compare form corrected); for 31 of the 47, `diff -u unpatched-dump patched-dump` applies to the archived text with `patch -F0`, for two more with fuzz on context lines only; the others differ in local-variable numbering and in constants Ghidra now inlines instead of printing `FLOAT_001aa0d4` (the archive of those was
+   made before the later steps), so a patched re-dump is a hunk source, not a drop-in replacement.
+ - The committed corpora (`Userspace/<bin>/ppc/part_*.c`) were generated from the unpatched dumps and then renamed / edited by hand, so they still carry the flipped compare form
+   in these 47 functions; NOT yet changed (a NaN operand takes the other branch; found by the GLEngine NaN fuzz, which has no counterpart for these images).
+ - Class #24 (call-argument registers lost at an indirect call): `indirect_args.py` / `ExtendIndirectCalls.java` count the INTEGER registers of `bctrl` only. Audit of the stock
+   disassemblies (indirect `bctrl`/`bctr` sites with f1..f4 written before the call): libGL's 148 float stubs are written from a template (`fix_gl_stubs.py`) and are right; GA, VADriver, libGLProgrammability
+   have none; GLDriver had seven call lines on the object at `compiler + 0x30c` (vtable slot 0xf0, argument `this` in r3 and the float in f1) that either dropped `this` or put the double first
+   (which places `this` in r5): `IRInst__canFoldConstantSource` (2), `IRInst__allSelectsAreHwConstants`, `IRInst__foldCompareConstResult`, `ValueKey__mixLiteralSources` (2),
+   `PackState__tryPlaceInstructionSources`. Fixed in the corpus with a prototype cast `((int (*)(int *, double))slot)(this, value)`, the form `IrCos__fold` / `IrSin__fold` already use
+   (stock: `lwz r3,0x30c(rX); lfs f1,..; bctrl`). The archived dump keeps the old text.
+
 ## Reproducibility check (GA, from scratch)
 A fresh import + FindMoreFuncs + DecompAll + DumpRanges reproduces the archived function set and RANGES exactly; 9 of 82 dump files differ only in
 stack-variable naming (`local_28` vs `uStack_28`) - Ghidra's stack analysis is not fully deterministic between sessions. The archived dump is the

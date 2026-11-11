@@ -2899,8 +2899,8 @@ int ValueKey__mixLiteralSources(key)
             *(byte *)((int)literalMovTableAlias + slotOffset + 0x40) = laneSelectByte;
             if (*loopPtr5 < 0) {
               literalRecord = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),*loopPtr5);
-              movOrFlag = (**(code **)(**(int **)(*(int *)(key + 0x238) + 0x30c) + 0xf0))
-                                ((double)*literalRecord);
+              movOrFlag = ((int (*)(int *, double))*(code **)(**(int **)(*(int *)(key + 0x238) + 0x30c) + 0xf0))
+                                (*(int **)(*(int *)(key + 0x238) + 0x30c),(double)*literalRecord);
               if (movOrFlag != 0) {
                 if (*loopPtr7 == 0) {
                   movOrFlag = ((int (*)())ValueKey__insertTempCopyOfOperand)(key,operandIndex2);
@@ -2977,8 +2977,8 @@ int ValueKey__mixLiteralSources(key)
             valueNumber = *(int *)(loopIndex * 4 + operandIndex2 + 0x20);
             if (valueNumber < 0) {
               literalRecord = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),valueNumber);
-              isRepresentable = (**(code **)(**(int **)(*(int *)(key + 0x238) + 0x30c) + 0xf0))
-                                 ((double)*literalRecord);
+              isRepresentable = ((int (*)(int *, double))*(code **)(**(int **)(*(int *)(key + 0x238) + 0x30c) + 0xf0))
+                                 (*(int **)(*(int *)(key + 0x238) + 0x30c),(double)*literalRecord);
               if (isRepresentable != 0) {
                 loopPtr7 = literalMovAlias;
                 loopPtr6 = literalCountAlias;

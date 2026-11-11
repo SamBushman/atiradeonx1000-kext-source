@@ -1193,7 +1193,7 @@ int IRInst__foldCompareConstResult(outValue, inst, operandSlot, valueBits, compi
   float foldedValue;
   
   foldedValue = value;
-  (**(code **)(**(int **)(compiler + 0x30c) + 0xf0))(foldedValue,*(int **)(compiler + 0x30c));
+  ((int (*)(int *, double))*(code **)(**(int **)(compiler + 0x30c) + 0xf0))(*(int **)(compiler + 0x30c),(double)foldedValue);
   switch(*(undefined4 *)(*(int *)(inst + 0x88) + 8)) {
   case 0x12:
     break;

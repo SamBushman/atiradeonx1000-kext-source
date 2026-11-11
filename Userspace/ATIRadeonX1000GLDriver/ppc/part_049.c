@@ -4075,7 +4075,7 @@ loopSetIsMovOfNonConstant:
         a3 = &uniformKind;
         operandIndex2 = IRInst__getUniformSourceConstant(operandVReg2,1,laneMask,a3);
         if (((operandIndex2 == 0) || (uniformKind != 2)) ||
-           (operandIndex2 = (**(code **)(**(int **)(compiler + COMP_target) + 0xf0))((double)uniformValue), operandIndex2 == 0)
+           (operandIndex2 = ((int (*)(int *, double))*(code **)(**(int **)(compiler + COMP_target) + 0xf0))(*(int **)(compiler + COMP_target),(double)uniformValue), operandIndex2 == 0)
            ) {
           hasSingleUse = IRInst__hasSingleUse(operandVReg2,*(undefined4 *)(compiler + COMP_currentProgram));
           if (hasSingleUse == 0) {
