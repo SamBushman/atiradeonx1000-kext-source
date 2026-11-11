@@ -3686,7 +3686,11 @@ int extvsComputeStateKey(ctx, shader, programState)
   short fogMode;
   uint stateKey;
   uint contextFlags;
+  int rendererState;
   
+  /* the stock loads *(*(ctx + 4) + 0x10) (the renderer state the fog mode is read from) before it tests shader[0x7a] */
+  rendererState = *(int *)(*(int *)(ctx + 4) + 0x10);
+  __asm__("" : "+r"(rendererState));
   contextFlags = *(uint *)(ctx + 0x44);
   stateKey = (uint)*(byte *)(programState + 0x43) & contextFlags >> 7 & 1 |
           ((uint)*(byte *)(programState + 0x44) & contextFlags >> 6 & 1) << 1 |
@@ -3696,7 +3700,7 @@ int extvsComputeStateKey(ctx, shader, programState)
       stateKey = stateKey | contextFlags >> 9 & 8;
     }
     if ((contextFlags & 0x1000000) != 0) {
-      fogMode = *(short *)(((unsigned char *)0x00002e04) + *(int *)(*(int *)(ctx + 4) + 0x10));
+      fogMode = *(short *)(((unsigned char *)0x00002e04) + rendererState);
       if (fogMode == 0x801) {
         stateKey = stateKey | 0x30;
       }

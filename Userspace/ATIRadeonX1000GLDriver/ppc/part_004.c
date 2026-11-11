@@ -5070,12 +5070,16 @@ int gld_sumQueryCounters(ctx, queryHandle)
   int *queryPool;
   bool carry;
   int entriesLeft;
+  int pipeMode;
   
   pipeCount = *(uint *)(ctx + 0x2610);
   queryPool = *(int **)(ctx + 0x224);
   endianBits = *(uint *)(ctx + 0x154) & 0x30000;
   resultSlot = (uint *)(queryPool + *queryHandle * 8 + 0x84);
-  if ((pipeCount == 1) && (*(int *)(ctx + 0x261c) == 2)) {
+  /* the stock loads ctx[0x261c] before it tests pipeCount (it is read even when pipeCount != 1) */
+  pipeMode = *(int *)(ctx + 0x261c);
+  __asm__("" : "+r"(pipeMode));
+  if ((pipeCount == 1) && (pipeMode == 2)) {
     pipeCount = 2;
   }
   if (endianBits == 0x10000) {
