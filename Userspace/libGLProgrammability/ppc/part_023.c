@@ -4,13 +4,11 @@
 int __ZdlPv(block)
   void *block;
 {
-  undefined4 r3Out0;
   undefined4 result;
   
   result = 0;
   if (block != (void *)0x0) {
-    _free(block);
-    result = r3Out0;
+    result = ((int (*)())_free)(block);
   }
   return result;
 }

@@ -135,7 +135,7 @@ int _PPStreamChunkListRemoveChunk(chunkList, chunk)
   else {
     *(int *)(*(int *)(chunk + 8) + 4) = prev;
   }
-  _free(chunk);
+  r3Out = ((int (*)())_free)(chunk);
   chunkList[2] = chunkList[2] + -1;
   return r3Out;
 }
@@ -1650,7 +1650,7 @@ int _PPStreamFree(stream)
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 0x2c));
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 0x28));
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 0x30));
-  _free(stream);
+  r3Out = ((int (*)())_free)(stream);
   return r3Out;
 }
 
@@ -2012,13 +2012,11 @@ int _InitStringTable(stringTable)
 int _FreeStringTable(stringTable)
   int *stringTable;
 {
-  undefined4 r3Out;
   undefined4 result;
   
   result = 0;
   if (*stringTable != 0) {
-    _free(*stringTable);
-    result = r3Out;
+    result = ((int (*)())_free)(*stringTable);
   }
   stringTable[2] = 0;
   *stringTable = 0;

@@ -10757,7 +10757,6 @@ int _InlineFunctionsBranch(stream)
   undefined4 lastResult;
   int calleeRecordOffset;
   int insertedChunk;
-  undefined4 r3AfterFreeFuncInfos;
   uint opWord0;
   int opsScanned;
   uint returnWord0;
@@ -10954,8 +10953,7 @@ checkInlinedStartIndex:
         ((int (*)())_ClearJumpTable)(funcInfos[0] + funcRecordOffset);
       } while (funcInfoIndex < funcCount);
     }
-    _free(funcInfos[0]);
-    lastResult = r3AfterFreeFuncInfos;
+    lastResult = ((int (*)())_free)(funcInfos[0]);
   }
   return lastResult;
 }
@@ -12099,11 +12097,9 @@ int _BitSetClone(bitSet)
 int _BitSetFree(bitSet)
   int bitSet;
 {
-  undefined4 r3AfterFreeBitSet;
   
   _free(*(undefined4 *)(bitSet + 8));
-  _free(bitSet);
-  return r3AfterFreeBitSet;
+  return ((int (*)())_free)(bitSet);
 }
 
 /* _BitSetGetSizeInBits @ 0x97c07db4 (8 bytes) */

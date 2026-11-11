@@ -20,14 +20,14 @@ int __Unwind_FindEnclosingFunction(pc)
 int __Unwind_GetDataRelBase(context)
   unsigned char * context;
 {
-  return *(unsigned char *)(context + 0x1cc);
+  return *(uint *)(context + 0x1cc);
 }
 
 /* __Unwind_GetTextRelBase @ 0x97c1a624 (8 bytes) */
 int __Unwind_GetTextRelBase(context)
   unsigned char * context;
 {
-  return *(unsigned char *)(context + 0x1c8);
+  return *(uint *)(context + 0x1c8);
 }
 
 /* _extract_cie_info @ 0x97c1a62c (348 bytes) */
@@ -1213,16 +1213,16 @@ int __Unwind_GetGR(context, index)
   unsigned char * context;
   int index;
 {
-  return **(unsigned char **)(context + index * 4);
+  return **(uint **)(context + index * 4);
 }
 
 /* __Unwind_SetGR @ 0x97c1bedc (16 bytes) */
 int __Unwind_SetGR(context, index, new_value)
   unsigned char * context;
   int index;
-  unsigned char new_value;
+  uint new_value;
 {
-  **(unsigned char **)(context + index * 4) = new_value;
+  **(uint **)(context + index * 4) = new_value;
   return;
 }
 
@@ -1230,15 +1230,15 @@ int __Unwind_SetGR(context, index, new_value)
 int __Unwind_GetIP(context)
   unsigned char * context;
 {
-  return *(unsigned char *)(context + 0x1c0);
+  return *(uint *)(context + 0x1c0);
 }
 
 /* __Unwind_SetIP @ 0x97c1bef4 (8 bytes) */
 int __Unwind_SetIP(context, new_value)
   unsigned char * context;
-  unsigned char new_value;
+  uint new_value;
 {
-  *(unsigned char *)(context + 0x1c0) = new_value;
+  *(uint *)(context + 0x1c0) = new_value;
   return;
 }
 
@@ -1618,12 +1618,10 @@ int ___deregister_frame(fde)
   void *fde;
 {
   void *deregister_frame_infoResult;
-  undefined4 r3Out0;
   
   if (*(int *)fde != 0) {
     deregister_frame_infoResult = ___deregister_frame_info(fde);
-    _free(deregister_frame_infoResult);
-    return r3Out0;
+    return ((int (*)())_free)(deregister_frame_infoResult);
   }
   return fde;
 }
@@ -2312,7 +2310,6 @@ int _init_object(ob)
   uint objectBits;
   uint classifyResult;
   int compareResult;
-  undefined4 r3AfterFree;
   undefined4 *v2ArrayCursor;
   code *fdeCompare;
   undefined4 *v1IndexBase;
@@ -2427,8 +2424,7 @@ loopCallAbort:
         } while (i2 != 0);
         v1[1] = v1[1] + *(int *)(erraticAlias + 4);
       }
-      _free(erraticVec);
-      returnValue = r3AfterFree;
+      returnValue = ((int (*)())_free)(erraticVec);
     }
     *linearVec = *(undefined4 *)(ob + 0xc);
     *(uint *)(ob + 0x10) = *(uint *)(ob + 0x10) | 0x80000000;

@@ -2911,20 +2911,14 @@ int _glpPPDisassemble(program)
   int nextIndex3;
   int copyLength5;
   int *tempArraySizeOut;
-  undefined4 r3AfterFreeArraySizes;
-  undefined4 r3AfterFreeParamArraySizes;
   undefined4 callResultLow;
-  undefined4 r3AfterFreeLabelValues;
   void *allocation;
   undefined4 r4AfterOutBufMalloc;
   undefined4 r4AfterTempArrayPosMalloc;
   undefined4 r4AfterTempArraySizesMalloc;
-  undefined4 r4AfterFreeArraySizes;
   undefined4 r4AfterParamArrayPosMalloc;
   undefined4 r4AfterParamArraySizesMalloc;
-  undefined4 r4AfterFreeParamArraySizes;
   undefined4 r4AfterLabelValuesMemset;
-  undefined4 r4AfterFreeLabelValues;
   undefined1 *outBytePtr;
   uint instructionsLeft;
   uint highestParamRegister;
@@ -3577,8 +3571,7 @@ loopSetOutCursor2:
     } while ((int)nextTempIndex < (int)tempCount);
   }
   if (arraySizes != (int *)0x0) {
-    _free(arraySizes);
-    callResultPair = CONCAT44(r3AfterFreeArraySizes,r4AfterFreeArraySizes);
+    callResultPair = ((undefined8 (*)())_free)(arraySizes);
   }
   if ((tempCount != 0) && (!isArbProgram)) {
     ch = '\n';
@@ -5065,8 +5058,7 @@ setLoopIndex:
     } while (loopIndex < (int)paramCount);
   }
   if (arraySizes != (int *)0x0) {
-    _free(arraySizes);
-    callResultPair = CONCAT44(r3AfterFreeParamArraySizes,r4AfterFreeParamArraySizes);
+    callResultPair = ((undefined8 (*)())_free)(arraySizes);
   }
   ch = '\n';
   copyIndex4 = 0;
@@ -5514,8 +5506,7 @@ setLoopIndex2:
       outCursor = (int *)((int)outCursor + copyLength2 + copyEnd3);
     }
     _free(labelIds);
-    _free(labelValues);
-    callResultPair = CONCAT44(r3AfterFreeLabelValues,r4AfterFreeLabelValues);
+    callResultPair = ((undefined8 (*)())_free)(labelValues);
   }
   ch = 'E';
   copyIndex4 = 0;

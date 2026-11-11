@@ -628,7 +628,7 @@ int ___cxa_free_exception(thrownObject)
 
 /* __gxx_exception_cleanup @ 0x97c192b0 (88 bytes) */
 int __gxx_exception_cleanup(reasonCode, exception)
-  unsigned char reasonCode;
+  uint reasonCode;
   _Unwind_Exception *exception;
 {
   _Unwind_Exception *r4Out0;
@@ -748,11 +748,11 @@ int __Z21base_of_encoded_valuehP15_Unwind_Context(encoding, context)
   uint encoding;
   unsigned char * context;
 {
-  unsigned char dataRelBase;
-  unsigned char textRelBase;
+  uint dataRelBase;
+  uint textRelBase;
   bool isPcrelOrAligned;
   uint application;
-  unsigned char regionStart;
+  uint regionStart;
   
   if (encoding != 0xff) {
     application = encoding & 0x70;
@@ -907,7 +907,7 @@ int parse_lsda_header(context, p, info)
   unsigned char * info;
 {
   unsigned char * ttypeTable;
-  unsigned char regionStart;
+  uint regionStart;
   uint lpStartBase;
   int callSiteTable;
   uint lpStartEncoding;
@@ -919,13 +919,13 @@ int parse_lsda_header(context, p, info)
     regionStart = 0;
   }
   else {
-    regionStart = ((int (*)())__Unwind_GetRegionStart)(context);
+    regionStart = ((uint (*)())__Unwind_GetRegionStart)(context);
   }
-  *(unsigned char *)info = regionStart;
+  *(uint *)info = regionStart;
   lpStartEncoding = (uint)*p;
   lsdaCursor = (unsigned char *)(p + 1);
   if (lpStartEncoding == 0xff) {
-    *(unsigned char *)(info + 4) = regionStart;
+    *(uint *)(info + 4) = regionStart;
   }
   else {
     lpStartBase = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)(lpStartEncoding,context);
@@ -1013,7 +1013,7 @@ int ___gxx_personality_v0(version, actions, exceptionClassLo, exceptionClassHi, 
   uint actions;
   int exceptionClassLo;
   int exceptionClassHi;
-  unsigned char ueHeader;
+  int ueHeader;
   unsigned char * context;
 {
   bool sawCleanup;
@@ -1022,14 +1022,14 @@ int ___gxx_personality_v0(version, actions, exceptionClassLo, exceptionClassHi, 
   bool foundTerminate;
   uchar *languageSpecificData;
   uchar *p;
-  unsigned char iP;
+  uint iP;
   uint callSiteBase;
   uchar *pAfterCallSite;
   unsigned char * catchType;
   int adjustedOk;
   undefined4 reloadedTTypeBase;
-  unsigned char landingPad;
-  unsigned char handlerSwitchValue;
+  uint landingPad;
+  int handlerSwitchValue;
   uchar *actionRecord;
   unsigned char * throwType;
   uint callSiteEncoding;
@@ -1052,8 +1052,8 @@ int ___gxx_personality_v0(version, actions, exceptionClassLo, exceptionClassHi, 
     return 3;
   }
   if (((actions == 6) && (exceptionClassLo == 0x474e5543)) && (exceptionClassHi == 0x432b2b00)) {
-    landingPad = *(unsigned char *)(ueHeader - 0xc);
-    handlerSwitchValue = *(unsigned char *)(ueHeader - 0x18);
+    landingPad = *(uint *)(ueHeader - 0xc);
+    handlerSwitchValue = *(int *)(ueHeader - 0x18);
     foundTerminate = landingPad == 0;
     goto checkFoundTerminate;
   }
@@ -1066,7 +1066,7 @@ int ___gxx_personality_v0(version, actions, exceptionClassLo, exceptionClassHi, 
   actionRecord = (uchar *)0x0;
   handlerSwitchValue = 0;
   infoTTypeBase = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)((uint)infoTTypeEncoding,context);
-  iP = __Unwind_GetIP(context);
+  iP = ((uint (*)())__Unwind_GetIP)(context);
   if (p < infoActionTable) {
     do {
       callSiteEncoding = (uint)infoCallSiteEncoding;
@@ -1114,8 +1114,8 @@ loopSetFoundTerminate:
   if ((actions & 1) != 0) {
     if (foundType != 2) {
       if ((exceptionClassLo == 0x474e5543) && (exceptionClassHi == 0x432b2b00)) {
-        *(unsigned char *)(ueHeader - 0xc) = landingPad;
-        *(unsigned char *)(ueHeader - 0x18) = handlerSwitchValue;
+        *(uint *)(ueHeader - 0xc) = landingPad;
+        *(int *)(ueHeader - 0x18) = handlerSwitchValue;
         *(uchar **)(ueHeader - 0x14) = actionRecord;
         *(uchar **)(ueHeader - 0x10) = languageSpecificData;
         *(void **)(ueHeader - 8) = thrownPtr[0];
@@ -1129,7 +1129,7 @@ checkFoundTerminate:
     ((int (*)())___cxa_begin_catch)(ueHeader);
     ((int (*)())__cxxabiv1____terminate)(*(unsigned char **)(ueHeader - 0x24));
   }
-  if ((int)handlerSwitchValue < 0) {
+  if (handlerSwitchValue < 0) {
     ((int (*)())parse_lsda_header)(context,*(uchar **)(ueHeader - 0x10),(unsigned char *)&infoStart);
     reloadedTTypeBase = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)((uint)infoTTypeEncoding,context);
     *(undefined4 *)(ueHeader - 0xc) = reloadedTTypeBase;
@@ -1352,7 +1352,6 @@ int ___cxa_end_catch()
 {
   int *cxa_get_globals_fastResult;
   int header;
-  undefined4 r3AfterDelete;
   int handlerCount;
   
   cxa_get_globals_fastResult = (int *)((int (*)())___cxa_get_globals_fast)();
@@ -1369,8 +1368,7 @@ int ___cxa_end_catch()
     handlerCount = handlerCount + -1;
     if (handlerCount == 0) {
       *cxa_get_globals_fastResult = *(int *)(header + 0x10);
-      __Unwind_DeleteException((_Unwind_Exception *)(header + 0x30));
-      return r3AfterDelete;
+      return ((int (*)())__Unwind_DeleteException)((_Unwind_Exception *)(header + 0x30));
     }
     if (handlerCount < 0) {
                     
@@ -1528,11 +1526,11 @@ int _base_of_encoded_value(encoding, context)
   uint encoding;
   unsigned char * context;
 {
-  unsigned char dataRelBase;
-  unsigned char textRelBase;
+  uint dataRelBase;
+  uint textRelBase;
   bool isPcrelOrAligned;
   uint application;
-  unsigned char regionStart;
+  uint regionStart;
   
   if (encoding != 0xff) {
     application = encoding & 0x70;
@@ -1685,13 +1683,13 @@ storeResult:
 int __Unwind_GetLanguageSpecificData(context)
   unsigned char * context;
 {
-  return *(unsigned char *)(context + 0x1c4);
+  return *(uint *)(context + 0x1c4);
 }
 
 /* __Unwind_GetRegionStart @ 0x97c1a5dc (8 bytes) */
 int __Unwind_GetRegionStart(context)
   unsigned char * context;
 {
-  return *(unsigned char *)(context + 0x1d0);
+  return *(uint *)(context + 0x1d0);
 }
 
