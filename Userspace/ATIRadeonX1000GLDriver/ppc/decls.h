@@ -358,7 +358,7 @@ extern int _gldDestroyVertexArray();
 extern int gld_setVertexArrayAgpRefBacking();
 extern int gld_setVertexArrayNewTextureBacking();
 extern double powerOfTenDouble(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7);
-extern char * textPrintDoubleShortest(undefined4 param_1,undefined4 param_2,char *param_3,uint param_4);
+extern char * textPrintDoubleShortest(double param_1,double param_2,char *param_3,uint param_4);
 extern double parseDecimalDouble(char *param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6);
 extern int textBufferEnsureRoom();
 extern int arbIrPrintCcAndSaturateSuffix();
