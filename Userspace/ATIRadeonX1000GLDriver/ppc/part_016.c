@@ -1983,7 +1983,8 @@ checkDirtyBitsWord8:
                   vecY = invLength;
                   vecZ = invLength;
                 }
-                lengthSq = (fpPassThrough8 * fpPassThrough8 + vecXYSq);
+                /* stock: one fmadds at the join of the three paths; gcc-7 sinks the product into the predecessors (the 1.0 path folds to a constant) and adds unfused */
+                lengthSq = __builtin_fmaf(fpPassThrough8, fpPassThrough8, vecXYSq);
                 *(float *)(((unsigned char *)0x000014fc) + (int)dirtyWord1) = vecZ;
                 *(float *)(((unsigned char *)0x000014f4) + (int)dirtyWord1) = vecX;
                 *(float *)(((unsigned char *)0x000014f8) + (int)dirtyWord1) = vecY;
