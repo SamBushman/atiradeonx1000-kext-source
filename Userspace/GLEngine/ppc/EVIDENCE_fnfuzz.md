@@ -430,3 +430,41 @@ Both variants were built from throwaway commits on a deleted branch and are not 
 * Pre-existing diffs found by the first imp runs and not yet classified (own issues): `_gldAttachDrawable` 0x70d0, `fragmentTranslateScalarMathBody` 0x40374, `fragmentTranslateScalarMath2Src` 0x40ac4 (stock faults where the rebuilt returns).
 * GA (only 0x55a4 changed by #26) and libGL images were not rebuilt; the changed functions are verified by the association audit only.
 * VA: the graph spec covers hue/saturation and brightness/contrast only.
+
+### 22.7 Hoisted table-base load (issue #239), `_gldAttachDrawable` / `gld_detachDrawable` (artifact), fused multiply-add choice (issue #244) - images gld_5d0ed21b, gld_5b87ad89 (Nov 11)
+
+**Re-run of the three functions that differed in the very first imp runs** (`three9` on gld_b19d0f06, 1000 trials, plain and NaN; ledger row from `ledger9_gld_imp.tsv`):
+
+| function | plain | NaN |
+|---|---|---|
+| `fragmentTranslateScalarMathBody` 0x40374 | 41 of 1000 differ | 39 of 1000 |
+| `fragmentTranslateScalarMath2Src` 0x40ac4 | 27 of 1000 | 31 of 1000 |
+| `_gldAttachDrawable` 0x70d0 | 1 of 1000 | 1 of 1000 |
+
+*Fragment translators.* gdb on the stock (`FNFUZZ_ONE=S:60`, `gdbone.sh`): `EXC_BAD_ACCESS` at 0x9e6d4035 at stock 0x40af8, `lwz r0,0x54(r9)` with r9 = `*translator` = 0x9e6d3fe1: the stock loads `*translator + *(*translator + 0x54)*8` before the `translator[5] & 0x20000000` test, the corpus only inside it. Fixed in 5d0ed21b (`slotTableBase`). Image gld_5d0ed21b, full imp ledger (144 functions, 300 trials, plain and NaN): the two functions are **0 differ**; the whole imp ledger differs only in the two functions below.
+
+*`_gldAttachDrawable` 0x70d0 and `gld_detachDrawable` 0x7020 (imp, 1 of 300 each).* Stock faults at stock 0x706c (`lbz r2,0x98(r9)`, r9 = `*ctx + rendererLibraryState`) for `_gldAttachDrawable` with an unknown drawable type (0xe3f5b8f: stock calls `gld_detachDrawable`, which reads `rendererLibraryState[*ctx + 0x98]`); the rebuilt reads the same expression and returns 0x271a, in the other function the direction is reversed (stock st=0, rebuilt st=11). `*ctx` is a random renderer index; `state + index + 0x98` lands in mapped or unmapped memory depending on where each image placed `state`: the image-layout-dependent out-of-range index artifact of section 22.5. `FNFUZZ_PROFILE=narrow` (indexes in range), image gld_5d0ed21b, both functions, plain 3000 and NaN 3000 trials: **0 differ** (default profile, same trials: `gld_detachDrawable` 2 of 3000, `_gldAttachDrawable` 3 of 3000). Not a code difference.
+
+**Fused multiply-add choice (`gld_updateInverseMatrix`, #244).** The rz regression run on gld_5d0ed21b showed a new difference: `gld_updateInverseMatrix` 0xa8630 **2 of 3000** (plain+canon, trial 2561; the run `gld9` on another ledger row id had seen 0 in 3000). `FNFUZZ_VERBOSE=1 FNFUZZ_DUMPARENA` shows one differing arena word, glContext+0x1390: stock 1b957d46, rebuilt 1b957d45. Disassembly of both: the stock computes `fma(minorH, m33, fma(K, m03, -round(minorJ*m13)))`, the rebuilt `fma(minorH, m33, -fma(m13, minorJ, -round(K*m03)))`: the same expression, the other product fused. Cause: the corpus computed `productM03 = fpPassThrough8 * m03` before the `if`, gcc fuses a multiply only into an add in the same basic block, and fused the other product. Fixed in 5b87ad89 (locals `minorK` / `minorL` keep the values `fpPassThrough8` / `fpPassThrough3` have before the block reassigns them; the products are written at their use sites). Fused-op count stock fmadds11 fmsubs28 fnmsubs8, rebuilt before fmsubs27 fnmsubs7, after: equal (`fma_audit.py`). Image gld_5b87ad89: **0 differ in 8000 plain+canon trials, 0 in 3000 NaN trials**; control gld_5d0ed21b 2 of 3000 (the 2nd difference of the control run, a -0.0 vs +0.0 word at arena+0cd34, is gone too).
+
+**Static audit of the fused-op mix** (`fma_audit.py`: per function counts of fmadds / fmsubs / fnmadds / fnmsubs and the double forms, stock vs rebuilt `otool -tv`, the rebuilt range ends at the next symbol so functions without a local symbol show spill-over):
+
+| corpus | functions with fused ops | differing mix | result |
+|---|---|---|---|
+| GLDriver | 40 | 24 (after the fix: `gld_updateInverseMatrix` no longer listed) | the rest are spill-over or float / double forms; read candidates: `programFillStateConstants` 0x9f0b0 (fmsubs 28 -> 29, fnmsubs 8 -> 7): ctx ledger, `FNFUZZ_FLOATARGS=1`, plain **30000 trials 0 differ**, NaN 1000 trials 0 differ (1 uninformative, the function ends in a signal in NaN mode); `glDrawPixels_impl` (3 -> 1 fmadds): imp ledger 300 trials plain+NaN 0 differ; `gld_gatherProgramConstants`, `gldPackColorForSurfaceFormat`: in the 48-function rz set below, 0 differ |
+| VADriver | 1 | 0 | equal |
+| libGLProgrammability | 28 | 12 | stock `fmadds` against rebuilt `fmadd` (double) in `_InterpreterTextureSamplerSampleTexel1DFromLevel`, `_InterpreterNoiseGeneratorSmoothHermiteCurve`, `...Calculate1D/2D/3D`: rz ledger, `sbs` image, **plain 6000 trials, NaN 2000 trials, 5 functions, 0 differ**; the others (`_InterpreterEmulateOp`, `_InterpreterRun`, `_EmulateOp`, `..._AlphaTest`, `..._Blending`) are imp / ctx functions that were fuzzed in the earlier runs (0 differ) and have no static flip of the compile-order type |
+
+GA and libGL: the audit was not run (no rebuilt `otool` dump of the final corpus); only GA 0x55a4 changed.
+
+The static audit is a heuristic: a flipped product choice that leaves the op mix unchanged (two sites flipped in opposite directions) is not visible in it, and the fuzz rate of such a last-bit difference is about 0.1 %, so a clean run does not prove absence; the criterion for the remaining candidates is the trial count given above.
+
+**Final GLDriver regression on the last image (gld_5b87ad89, ledger regenerated for it, run `rz11`; the imp ledger was last run on gld_5d0ed21b, the only code change since is `gld_updateInverseMatrix` in the rz set):**
+
+| stage | functions | trials | differ | uninformative |
+|---|---|---|---|---|
+| PLAIN+CANON rz 3000 | 48 | 144000 | 2 (`gld_buildTextureHardwareState` 4, `ILReader__nextInstruction` 11: the classified #139 / #64 deviations, 22.5) | 7 |
+| NAN rz 1000 | 48 | 48000 | 2 (same two: 3 and 5) | 9 |
+| `gld_updateInverseMatrix` alone | 1 | 8000 plain + 3000 NaN | **0** | 0 |
+
+Imp ledger on gld_5d0ed21b (144 functions, 300 trials plain and NaN): differing functions `_gldAttachDrawable` and `gld_detachDrawable` only (layout artifact, narrow profile 0 differ); 27 / 29 uninformative functions (every trial ends in a signal in both images; they are listed in the gap list 22.6, plus `gld_uploadProgramStateConstants`).

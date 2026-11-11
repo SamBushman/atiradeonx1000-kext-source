@@ -267,6 +267,12 @@ GLDriver) was made with the UNPATCHED decompiler; GLEngine's was regenerated wit
    (b) out-of-range table indexes (`gld_buildTextureHardwareState`, format index 254) read image-layout-dependent pointers, use `FNFUZZ_PROFILE=narrow` to separate them from code differences;
    (c) `FNFUZZ_VERBOSE=1 FNFUZZ_DUMPARENA=prefix` writes `prefix.S` / `prefix.R` (the 0x20000-byte arena of the first differing trial) for an offline word diff;
    (d) deliberate deviations (#64 `ILReader__currentOpcode` clamp, #139 MIN_LOD clamp) are classified by building a throwaway variant image WITHOUT the deviation and showing 0 differ (EVIDENCE_fnfuzz.md section 22.5).
+ - Class #29 (fused multiply-add choice, issue #244): for `a*b - c*d` the stock (Apple gcc 4.0, fusion at RTL level after scheduling) and our gcc-7 (fusion at tree level, only inside one basic block, first multiply
+   first) can fuse different products, and the result differs in the last bit. Typical source: Ghidra's hoisted temporaries (`p = a * b;` before an `if`, `p - c*d` inside it) - write the product at its use site and keep
+   a separate local for a value that is reassigned in between (`gld_updateInverseMatrix`). Detector `fma_audit.py`: per function counts of fmadds / fmsubs / fnmadds / fnmsubs (and double forms) plus fmuls / fneg, stock vs
+   rebuilt `otool -tv` (watch for spill-over where a rebuilt function has no local symbol); a flipped pair in one function keeps the mix, so fuzz the function at >= 6000 plain trials (a last-bit difference shows in 0.05 - 0.1 %).
+ - Out-of-range indexes / hoisted loads: the stock's scheduler hoists a load above the branch that uses it (`*translator + *(*translator + 0x54) * 8`, `fragmentTranslateScalarMath*`); Ghidra prints it inside the branch. Harmless on a
+   valid object but the stock faults earlier on a garbage pointer: read the dump's first loads against the prologue of the stock (gdb `FNFUZZ_ONE=S:trial` shows the stock's fault pc).
 
 ## Reproducibility check (GA, from scratch)
 A fresh import + FindMoreFuncs + DecompAll + DumpRanges reproduces the archived function set and RANGES exactly; 9 of 82 dump files differ only in
