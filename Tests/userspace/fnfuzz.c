@@ -308,6 +308,7 @@ static void __attribute__((noinline)) fill_stack(void) { volatile unsigned buf[8
                                           (name & MASK) through its +0 word (the machine-object hash table `_gleLookupHashObject` walks); the names are recorded for `arg N name`
        (`ret`/`retpick` after a `func` line apply to that function only, before any `func` line to all) ret IMPORT TYPE          the stubbed import returns a fresh TYPE graph on every call (parser/stream/list objects: PPParserCreate, PPStreamCreate, ...)
        (top level) retpick IMPORT V1 V2 ..  the stubbed import returns one of the values (an error code, a count)
+       dptr OFF NAME                      +OFF = the address of FNFUZZ_DATA symbol NAME in the image under test (a class vtable)
        fn OFF                             +OFF = the address of a harmless harness function (a callback slot the code under test calls: same address in both images)
        fnd OFF                            same, for a callback that takes (int, double) and returns the double
        fnrecv OFF                         same, for a slot called as (int, int, double, double, double, double): records r3, r4 and f1..f4 (the vertex dispatchers pass the float registers through)
@@ -326,7 +327,7 @@ typedef struct { unsigned off; int kind; unsigned a, b, c; int n; unsigned v[8];
 typedef struct { char name[32]; unsigned size; int nf; gfield_t f[96]; } gtype_t;
 typedef struct { int n; int kind; unsigned a, b; int pct; unsigned v[64]; int nv; char tname[32]; char text[96]; } garg_t;
 typedef struct { char name[96]; int na; garg_t a[16]; } gfunc_t;
-enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD, GF_FNREC3A, GF_FNRECA, GF_FFILL };
+enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD, GF_FNREC3A, GF_FNRECA, GF_FFILL, GF_DPTR };
 enum { GA_PTR = 1, GA_INT, GA_PICK, GA_RAND, GA_NULL, GA_NAME, GA_STR };
 static unsigned g_names[64]; static int g_nnames;
 typedef struct { char name[48]; char tname[32]; unsigned v[8]; int nv; char func[96]; int pct; } gret_t;
@@ -394,6 +395,7 @@ static void load_graphspec(const char *path) {
             else if (!strcmp(tok[0], "pick")) { g->kind = GF_PICK; for (int i = 2; i < nt && g->n < 8; i++) g->v[g->n++] = gnum(tok[i]); }
             else if (!strcmp(tok[0], "hash") && nt >= 7) { g->kind = GF_HASH; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->a = gnum(tok[3]); g->b = gnum(tok[4]); g->c = gnum(tok[5]); g->n = (int)gnum(tok[6]); }
             else if (!strcmp(tok[0], "parr") && nt >= 6) { g->kind = GF_PARR; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->c = gnum(tok[3]); g->a = gnum(tok[4]); g->b = gnum(tok[5]); }
+            else if (!strcmp(tok[0], "dptr") && nt >= 3) { g->kind = GF_DPTR; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); }   /* dptr OFF NAME: +OFF = the address of the FNFUZZ_DATA symbol NAME in the image under test (a vtable pointer: the object's class vtable lives in the image data, at a different address in each image) */
             else if (!strcmp(tok[0], "fn")) g->kind = GF_FN;
             else if (!strcmp(tok[0], "fnd")) g->kind = GF_FND;
             else if (!strcmp(tok[0], "fnrec")) g->kind = GF_FNREC;
@@ -443,6 +445,7 @@ static unsigned gb_build(gtype_t *t, int depth) {
         case GF_WARR: { unsigned nn = grange(g->a, g->b); unsigned arr = gb_alloc(nn * 4 + 4); for (unsigned k = 0; k < nn; k++) *(unsigned *)(arr + k * 4) = g->v[rnd32() % g->n];
             *(unsigned *)(b + g->off) = arr; if (g->c != 0xffffffffu) *(unsigned *)(b + g->c) = nn; break; }
         case GF_FN: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_nop; break;
+        case GF_DPTR: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gaddr(g->tname); break;
         case GF_FND: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_nopd; break;
         case GF_FNREC: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_rec; break;
         case GF_FNRECV: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_recv; break;

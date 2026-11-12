@@ -72,3 +72,121 @@ func TPPStreamCompiler__getMVP
 func TPPStreamCompiler__newAddressTemp
   gptr _gPollAllocThreadData HOLDER
   arg 0 ptr PSC_NEWADDRESSTEMP
+# newReturnValue(compiler, type, str): the symbol is named by `str`; the table holds a node of that name, so FindSymbol hits
+type TTYPE 0x28
+  u32 0x04 0 3
+  u32 0x14 0 8
+  u32 0x18 0 8
+  u32 0x1c 0 8
+  u32 0x20 0 8
+  rand 0x24
+type SYM_RET 0x80
+  set 0x1c 0x14b
+  set 0x20 3
+  str 0x14 ret
+  set 0x28 0xffffffff
+  u32 0x34 0 1
+type SYMTAB_RET 0x100
+  parr 0x08 SYM_RET 0x10 1 1
+  randfill 0x40 0x40 16
+type PSC_RET 0x200
+  ptr 0x68 SYMTAB_RET
+func TPPStreamCompiler__newReturnValue
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr PSC_RET
+  arg 1 ptr TTYPE
+  arg 2 str ret
+# newTemporary(this, type): name is built from the temp index and the GL type string; no matching table node (InsertSymbol path)
+type TMPALLOC 0x40
+  set 0x04 0
+type SYMTAB_EMPTY 0x100
+  parr 0x08 SYM_RET 0x10 1 1
+  randfill 0x40 0x40 16
+type PSC_TMP 0x200
+  ptr 0x60 TMPALLOC
+  ptr 0x68 SYMTAB_EMPTY
+func TPPStreamCompiler__newTemporary
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr PSC_TMP
+  arg 1 ptr TTYPE
+# newParam(this, type, str, index): name is str_index
+type SYM_PARAM 0x80
+  set 0x1c 255
+  set 0x20 3
+  str 0x14 p_0
+  set 0x28 0xffffffff
+  u32 0x34 0 1
+type SYMTAB_PARAM 0x100
+  parr 0x08 SYM_PARAM 0x10 1 1
+  randfill 0x40 0x40 16
+type PSC_PARAM 0x200
+  ptr 0x68 SYMTAB_PARAM
+func TPPStreamCompiler__newParam
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr PSC_PARAM
+  arg 1 ptr TTYPE
+  arg 2 str p
+  arg 3 int 0 0
+# getArrayOffset(this, arrayOperand): the array symbol `arr` and its element `arr[1]` are both in the table (chain through +4); the symbols' type is a real TType (vtable pointer)
+type TTYPE_V 0x28
+  dptr 0x00 TTYPE_VT
+  u32 0x04 0 3
+  u32 0x14 0 8
+  u32 0x18 0 8
+  u32 0x1c 0 8
+  u32 0x20 0 8
+  rand 0x24
+type CHUNK 0x20
+  u8 0x00 0 4
+  u16 0x12 0 15
+type SYM_ELEM1 0x80
+  ptr 0x00 CHUNK
+  set 0x1c 558
+  set 0x20 6
+  str 0x14 arr[1]
+  set 0x28 0xffffffff
+type SYM_ARR 0x80
+  ptr 0x00 CHUNK
+  ptr 0x04 SYM_ELEM1
+  set 0x1c 325
+  set 0x20 3
+  str 0x14 arr
+  set 0x28 0xffffffff
+  ptr 0x0c TTYPE_V
+type SYMTAB_ARR 0x100
+  parr 0x08 SYM_ARR 0x10 1 1
+  randfill 0x40 0x40 16
+type PSC_ARR 0x200
+  ptr 0x68 SYMTAB_ARR
+type AOPER 0x38
+  ptr 0x00 SYM_ARR
+func TPPStreamCompiler__getArrayOffset
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr PSC_ARR
+  arg 1 ptr AOPER
+# getOperandAsDestVar / getOperandAsSourceVar (outDesc, compiler, operand, ...): operand has a symbol (+0), no indirect index (+8 = 0), swizzle bytes (+0x10/+0x14), direct indices (+0x1c/+0x20)
+type SWZ 0x10
+  u8 0x00 0 3
+  u8 0x01 0 3
+  u8 0x02 0 3
+  u8 0x03 0 3
+type OSYM 0x80
+  ptr 0x00 CHUNK
+  u16 0x2c 0x1400 0x1408
+  pick 0x2c 0x1406 0x1404 0x8b50 0x8b51 0x8b52 0x8b53 0x8b54 0x8b55 0x8b56 0x8b57 0x8b58 0x8b59 0x8b5a 0x8b5b 0x8b5c
+type OPERX 0x38
+  ptr 0x00 OSYM
+  ptr 0x10 SWZ
+  u32 0x14 0 4
+  warr 0x1c 0x20 0 4 0 1 2 3
+type OUTD 0x20
+type PSC_GEN 0x200
+  set 0x90 0x1234
+func TPPStreamCompiler__getOperandAsDestVar
+  arg 0 ptr OUTD
+  arg 1 ptr PSC_GEN
+  arg 2 ptr OPERX
+func TPPStreamCompiler__getOperandAsSourceVar
+  arg 0 ptr OUTD
+  arg 1 ptr PSC_GEN
+  arg 2 ptr OPERX
