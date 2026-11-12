@@ -1,0 +1,4 @@
+# glp_testcr_spec.txt - _InterpreterTestCR: `component` (the 11th parameter, a stack word) selects one of the four condition swizzle bytes behind conditionWord (0..3);
+# a larger value reads further stack words, which belong to the caller frame and differ between the two images
+func _InterpreterTestCR
+  arg 10 int 0 3

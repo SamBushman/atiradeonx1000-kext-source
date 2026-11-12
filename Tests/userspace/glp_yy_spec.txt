@@ -1,0 +1,4 @@
+# glp_yy_spec.txt - yy_try_NUL_trans (flex scanner): the state is one of the generated automaton's states 0..0x199 (0x19a states: yy_accept/yy_base/yy_def are indexed by it; the chain walk
+# `while (yy_chk[yy_base[s] + c] != s) s = yy_def[s]` only ends for a state of the automaton - a larger state indexes past the tables and the stock loops until SIGALRM)
+func yy_try_NUL_trans
+  arg 0 int 0 409

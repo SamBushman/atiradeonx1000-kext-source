@@ -321,7 +321,7 @@ static void __attribute__((noinline)) fill_stack(void) { volatile unsigned buf[8
 typedef struct { unsigned off; int kind; unsigned a, b, c; int n; unsigned v[8]; char tname[32]; char text[96]; } gfield_t;
 typedef struct { char name[32]; unsigned size; int nf; gfield_t f[96]; } gtype_t;
 typedef struct { int n; int kind; unsigned a, b; int pct; unsigned v[64]; int nv; char tname[32]; char text[96]; } garg_t;
-typedef struct { char name[96]; int na; garg_t a[8]; } gfunc_t;
+typedef struct { char name[96]; int na; garg_t a[16]; } gfunc_t;
 enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD, GF_FNREC3A, GF_FNRECA, GF_FFILL };
 enum { GA_PTR = 1, GA_INT, GA_PICK, GA_RAND, GA_NULL, GA_NAME, GA_STR };
 static unsigned g_names[64]; static int g_nnames;
@@ -467,22 +467,22 @@ static unsigned gb_build(gtype_t *t, int depth) {
     return a;
 }
 /* build the graph for function `name` and store the declared arguments into ia[]; returns 1 when the function has a spec */
-static int apply_graph(const char *name, unsigned *ia) {
+static int apply_graph(const char *name, unsigned *ia, unsigned *sa) {   /* `arg N` with N = 8..15 sets the caller-stack word N-8 (the 9th.. integer parameter) */
     int nalt = 0, alt[16]; for (int i = 0; i < ngfuncs && nalt < 16; i++) if (!strcmp(gfuncs[i].name, name)) alt[nalt++] = i;   /* several `func` blocks of one name are alternatives, one is drawn per trial */
     snprintf(gs_curfunc, sizeof gs_curfunc, "%s", name);
     if (nalt) { int i = alt[nalt > 1 ? rnd32() % nalt : 0];
         gfunc_t *f = &gfuncs[i]; gb_next = ARENA_BASE + 0x1000; g_nnames = 0; gm_next = GM_LO; gs_first_cnt = 0xffffffffu; gs_lg_n = 0xffffffffu;
-        for (int k = 0; k < f->na; k++) { garg_t *a = &f->a[k]; if (a->n < 0 || a->n >= 8) continue;
+        for (int k = 0; k < f->na; k++) { garg_t *a = &f->a[k]; if (a->n < 0 || a->n >= 16) continue; unsigned *slot = a->n < 8 ? &*slot : &sa[a->n - 8];
             switch (a->kind) {
-            case GA_PTR: ia[a->n] = (rnd32() % 100 < (unsigned)a->pct) ? gb_build(gfind_type(a->tname), 0) : 0; break;
-            case GA_INT: ia[a->n] = grange(a->a, a->b); break;
-            case GA_PICK: ia[a->n] = a->v[rnd32() % a->nv]; break;
-            case GA_RAND: ia[a->n] = rnd32(); break;
-            case GA_NULL: ia[a->n] = 0; break;
+            case GA_PTR: *slot = (rnd32() % 100 < (unsigned)a->pct) ? gb_build(gfind_type(a->tname), 0) : 0; break;
+            case GA_INT: *slot = grange(a->a, a->b); break;
+            case GA_PICK: *slot = a->v[rnd32() % a->nv]; break;
+            case GA_RAND: *slot = rnd32(); break;
+            case GA_NULL: *slot = 0; break;
             case GA_STR: { char txt[96]; snprintf(txt, sizeof txt, "%s", a->text); int na = 1; for (char *q = txt; *q; q++) if (*q == '|') na++;
                 int pick = rnd32() % na; char *s0 = txt; for (int q = 0; q < pick; q++) s0 = strchr(s0, '|') + 1; char *e = strchr(s0, '|'); if (e) *e = 0;
-                unsigned sa = gb_alloc((unsigned)strlen(s0) + 1); memcpy((void *)sa, s0, strlen(s0) + 1); ia[a->n] = sa; break; }
-            case GA_NAME: ia[a->n] = (g_nnames && rnd32() % 100 < (unsigned)a->pct) ? g_names[rnd32() % g_nnames] : 1 + rnd32() % 40; break;
+                unsigned sa = gb_alloc((unsigned)strlen(s0) + 1); memcpy((void *)sa, s0, strlen(s0) + 1); *slot = sa; break; }
+            case GA_NAME: *slot = (g_nnames && rnd32() % 100 < (unsigned)a->pct) ? g_names[rnd32() % g_nnames] : 1 + rnd32() % 40; break;
             } }
         ncur_watch = 0; ncfstr = 0;
         for (int q = 0; q < nglobs; q++) { gglob_t *g = &gglobs[q]; if (strcmp(g->func, name)) continue;
@@ -589,7 +589,7 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     for (int q = (j < 13 ? j : 13); q < 13; q++) da[q] = gen_double(0);
     /* the 9th..12th integer words of the call are the caller-stack words at SP+0x38..0x44 (Darwin PPC); a function with more than 8 integer parameters (or reading its caller's frame) must see defined values, not the harness's stack residue, which differs between the images */
     unsigned sa[16]; for (int q = 0; q < 16; q++) { unsigned k4 = rnd32() % 4; sa[q] = k4 == 0 ? 0 : k4 < 3 ? arena_ptr() : gen_int(); }
-    if (ngfuncs) apply_graph(c->name, ia);
+    if (ngfuncs) apply_graph(c->name, ia, sa);
     memcpy(cur_args, ia, sizeof cur_args); memcpy(cur_dargs, da, sizeof cur_dargs);
     if (getenv("FNFUZZ_LISTCTX")) {
         /* FNFUZZ_LISTCTX=1: parameter 0 is a valid display-list context (the shape gleng_mock_listitem.c builds): a zeroed 0x8000-byte ctx at arena+0x1000 whose +0x53e8 points at a list block H
