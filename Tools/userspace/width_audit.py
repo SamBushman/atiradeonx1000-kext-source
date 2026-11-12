@@ -91,7 +91,7 @@ def main():
     stock = load_stock(a[0]); ours = load_ours(a[1]); fns = corpus_functions(a[2])
     addrs = [x[0] for x in stock]
     import bisect
-    flagged = []; compared = nomatch = narrower = fewerword = 0
+    flagged = []; wider = []; compared = nomatch = narrower = fewerword = 0
     for name, addr, size, part in fns:
         if only and name != only: continue
         o = ours.get(name) or ours.get('_' + name) or ours.get(name.lstrip('_'))
@@ -107,6 +107,8 @@ def main():
         narrower += nar; fewerword += few
         if nar and few:
             flagged.append((on - sn, cs['w'] - co['w'], name, part, cs, co))
+        if '--wider' in sys.argv and co['w'] > cs['w'] and on < sn:   # the opposite error (a halfword field read as a word: gld_getTextureFormatInfo, #262)
+            wider.append((sn - on, co['w'] - cs['w'], name, part, cs, co))
     flagged.sort(key=lambda r: (-r[0], -r[1], r[2]))
     for dn, dw, name, part, cs, co in flagged[:show]:
         print('%-4s +%d byte/half, -%d word   %-40s stock b%d h%d w%d   ours b%d h%d w%d' % (part[5:9], dn, dw, name, cs['b'], cs['h'], cs['w'], co['b'], co['h'], co['w']))
@@ -121,8 +123,11 @@ def main():
             ps, po = pair_counts(s_), pair_counts(o)
             for d in sorted(set(k[1] for k in list(ps) + list(po))):
                 bs = ps[('b', d)] + ps[('h', d)]; bo = po[('b', d)] + po[('h', d)]; ws = ps[('w', d)]; wo = po[('w', d)]
+                if '--wider' in sys.argv and bo < bs and wo > ws: print('WIDERPAIR %-4s %-40s disp %-8s stock b/h %d w %d   ours b/h %d w %d' % (part[5:9], name, d, bs, ws, bo, wo))
                 if bo > bs and wo < ws: n += 1; print('PAIR %-4s %-40s disp %-8s stock b/h %d w %d   ours b/h %d w %d' % (part[5:9], name, d, bs, ws, bo, wo))
         print('PAIRS: %d (function, displacement) pairs with a byte/half excess and a word deficit' % n)
+    for dn, dw, name, part, cs, co in sorted(wider, key=lambda r: (-r[0], -r[1], r[2]))[:show]:
+        print('WIDER %-4s -%d byte/half, +%d word   %-40s stock b%d h%d w%d   ours b%d h%d w%d' % (part[5:9], dn, dw, name, cs['b'], cs['h'], cs['w'], co['b'], co['h'], co['w']))
     print('WIDTH-AUDIT: %d functions compared, %d not matched, %d have more byte/half accesses, %d fewer word accesses, %d FLAGGED (both)' % (compared, nomatch, narrower, fewerword, len(flagged)))
 
 

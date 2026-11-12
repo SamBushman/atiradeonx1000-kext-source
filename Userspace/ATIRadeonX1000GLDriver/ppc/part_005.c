@@ -2133,7 +2133,7 @@ int gld_getTextureFormatInfo(ctx, texture, face, level, formatInfoOut)
       *formatInfoOut = 0x81a6;
     }
     else {
-      *formatInfoOut = (uint)(*(unsigned int *)&textureFormatEntry41_field08_001da500);
+      *formatInfoOut = (uint)*(unsigned short *)&textureFormatEntry41_field08_001da500;
       formatInfoOut[7] = (*(unsigned int *)&textureFormatEntry41_field14_001da50c) >> 8 & 0x3f;
     }
     formatInfoOut[4] = 0;
