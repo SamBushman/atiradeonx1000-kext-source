@@ -1835,12 +1835,12 @@ int ConstKey__countPresentOperands(constInst)
   loopCounter = 4;
   do {
     if (((int)*(char *)(constInst + 0x15c) >> (loopCounterB & 0x3f) & 1U) == 0) {
-      return;
+      return loopCounterB;
     }
     loopCounterB = loopCounterB + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  return;
+  return loopCounterB;
 }
 
 /* ConstRecord__findInTable @ 0xf4d80 (92 bytes) */
