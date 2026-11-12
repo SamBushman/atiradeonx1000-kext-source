@@ -1,0 +1,99 @@
+# glp_tint_spec.txt - TIntermediate node builders (libGLProgrammability): parse-tree nodes carry their real class vtables (`dval` of a PTR_vtable_* cell + 8), nodes are allocated from the global pool.
+type POOLPAGE 0x9000
+type POOL 0x40
+  set 0x04 0x8000
+  set 0x0c 0xf
+  set 0x10 0x8
+  set 0x14 0x10
+  ptr 0x1c POOLPAGE
+type HOLDER 0x10
+  ptr 0x00 POOL
+# --- containsSampler(this, type)
+type TINTER 0x40
+type TSYM 0x70
+  dval 0x00 VT_SYMBOL 8
+  u32 0x04 0 0x70005
+type TAGG 0x80
+  dval 0x00 VT_AGGREGATE 8
+  u32 0x30 0 1
+func TIntermediate__postProcess
+  arg 0 ptr TINTER
+  arg 1 ptr TAGG 85
+func TIntermediate__addLoop
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr TINTER
+  arg 1 ptr TSYM
+  arg 2 ptr TSYM
+  arg 3 ptr TSYM
+  arg 4 pick 0 1
+  arg 5 pick 0 0x10003 0x20007
+func TIntermediate__makeAggregate
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr TINTER
+  arg 1 ptr TSYM 90
+  arg 2 pick 0 0x10003 0x20007
+type PSTRREP 0x80
+  u32 0x00 0 6
+  set 0x04 0x40
+  set 0x08 0
+  istr 0x0c abc|gl_x|v
+type PTSTR 0x10
+  ptr 0x08 PSTRREP
+  padd 0x04 0x08 0xc
+type TTYPE0 0x28
+  u32 0x04 0 3
+  u32 0x14 0 8
+  u32 0x18 0 8
+  u32 0x1c 0 8
+  u32 0x20 0 8
+  rand 0x24
+func TIntermediate__addSymbol
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr TINTER
+  arg 1 int 0 100
+  arg 2 ptr PTSTR
+  arg 3 ptr TTYPE0
+  arg 4 pick 0 0x10003 0x20007
+# a typed node (TIntermSymbol layout): +0 vtable, +4 line, +8 embedded TType {+8 vtable, +0xc array size, +0x10..0x20 fields, +0x2c bits (qualifier in the top 7 bits: 2 = const)}, +0x30 id, +0x34 allocator, +0x38 name chars
+type TYPEDN 0x80
+  dval 0x00 VT_SYMBOL 8
+  u32 0x04 0 0x70005
+  dptr 0x08 TTYPE_CFF8
+  u32 0x0c 0 3
+  u32 0x14 0 8
+  u32 0x18 0 8
+  u32 0x1c 0 8
+  u32 0x20 0 8
+  pick 0x2c 0x04000000 0x00000000 0x06082000 0x04080800 0x08000000
+  u32 0x30 0 100
+  ptr 0x40 PSTRREP
+  padd 0x38 0x40 0xc
+func TIntermediate__addComma
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr TINTER
+  arg 1 ptr TYPEDN
+  arg 2 ptr TYPEDN
+  arg 3 pick 0 0x10003 0x20007
+func TIntermediate__addIndex
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr TINTER
+  arg 1 pick 0x20 0x21 0x22 0x30
+  arg 2 ptr TYPEDN
+  arg 3 ptr TYPEDN
+  arg 4 pick 0 0x10003 0x20007
+func TIntermediate__addAssign
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr TINTER
+  arg 1 pick 0x20 0x21 0x22 0x30
+  arg 2 ptr TYPEDN
+  arg 3 ptr TYPEDN
+  arg 4 pick 0 0x10003 0x20007
+type SYMTBL 0x40
+func TIntermediate__addBinaryMath
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr TINTER
+  arg 1 pick 0x20 0x21 0x22 0x23 0x30 0x31 0x40 0x50
+  arg 2 ptr TYPEDN
+  arg 3 ptr TYPEDN
+  arg 4 pick 0 0x10003 0x20007
+  arg 5 ptr SYMTBL
