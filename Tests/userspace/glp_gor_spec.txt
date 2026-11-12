@@ -1,0 +1,16 @@
+# _PPCRuntimeCompilerGetOffsetInRegister: record = compiler + index*0x38; record[4] is the byte index into the copied descriptor tail (0x1c bytes), record[8] the table pointer
+type GORBUF 0x200
+  randfill 0x00 0x200 65536
+type GORCOMP 0x400
+  randfill 0x00 0x400 65536
+  u32 0x04 0 27
+  ptr 0x08 GORBUF
+  u32 0x3c 0 27
+  ptr 0x40 GORBUF
+  u32 0x74 0 27
+  ptr 0x78 GORBUF
+  u32 0xac 0 27
+  ptr 0xb0 GORBUF
+func _PPCRuntimeCompilerGetOffsetInRegister
+  arg 0 ptr GORCOMP
+  arg 1 int 0 3

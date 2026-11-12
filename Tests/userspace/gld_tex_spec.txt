@@ -29,3 +29,24 @@ func gld_buildTextureHardwareState
   arg 1 ptr TEXOBJ
 func gldTextureFormatLookup
   arg 0 int 0 94
+# gld_updateDrawBufferConfig / gld_applyPbufferToRenderFlags: the format-table index byte ctx[0x2b7f] stays inside textureFormatTable (0..94)
+type DBBLK 0x400
+  randfill 0x00 0x400 65536
+type DBSTATE 0x4400
+  randfill 0x00 0x4400 65536
+type DBFBO 0x400
+  randfill 0x00 0x400 65536
+  ptr 0x00 DBBLK
+type DBREND 0x400
+  randfill 0x00 0x400 65536
+  ptr 0x1a0 DBFBO 50
+type DBCTX 0x3000
+  randfill 0x00 0x3000 65536
+  ptr 0x10 DBSTATE
+  ptr 0x14 DBBLK
+  ptr 0x18 DBREND
+  u8 0x2b7f 0 94
+func gld_updateDrawBufferConfig
+  arg 0 ptr DBCTX
+func gld_applyPbufferToRenderFlags
+  arg 0 ptr DBCTX

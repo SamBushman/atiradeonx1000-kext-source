@@ -128,16 +128,24 @@ for i, (a, op, arg) in enumerate(seq):
         # scan on until r3 is read (the result is used), redefined, or the straight-line code ends in a call / return / jump. The cap used to be 10 instructions: the caller
         # of VA's ava_reserve_list_words (stock 0x83e0) reads the returned write pointer 34 instructions after the call, so the function was classed `v`, its r3 was never
         # compared, and the rebuilt body that returned nothing passed fnfuzz (#233).
-        for j in range(i + 1, min(i + 400, len(seq))):
+        j = i; steps = 0
+        while steps < 400:
+            j += 1; steps += 1
+            if j >= len(seq): break
             a2, op2, arg2 = seq[j]
             ops2 = [x.strip() for x in arg2.split(';')[0].split(',')]
+            # an unconditional `b 0xaddr` inside the function is followed (the stock caller of _glpWriteSourceOperandExtendedSwizzle jumps to the common tail that makes the next call)
+            if op2 == 'b' and arg2.split()[0].startswith('0x') and int(arg2.split()[0], 16) in idx:
+                j = idx[int(arg2.split()[0], 16)] - 1; continue
             if _reads(arg2, 'r3') or (op2.startswith(('st', 'cmp')) and ops2 and ops2[0] == 'r3'):
                 RETUSED.add(ta); break
             # r3 still holds the result when the next call starts: it is that call's first argument (glprog _glpWriteSourceOperand: the cursor the Swizzle / ExtendedSwizzle call returns goes
             # straight into _glpWriteOperandSize, no instruction reads it in between)
             if op2 in ('bl', 'bl+', 'bl-', 'bctrl'):
                 RETUSED.add(ta); break
-            if op2 in ('bl', 'bctrl', 'blr', 'b') or (ops2 and ops2[0] == 'r3' and not op2.startswith(('st', 'cmp', 'b'))): break
+            # `bctr` (a jump-table switch) ends the straight line too: scanning on into whatever code follows it reached a `bl` of another case, where r3 is set on a path this scan never saw
+            # (glprog _InterpreterLoadSource: the call at stock 0x97bd0574 is followed by the opcode switch; the class `i` it got was a generator false positive, d24 row 97bcd924)
+            if op2 in ('bl', 'bctrl', 'bctr', 'blr', 'b') or (ops2 and ops2[0] == 'r3' and not op2.startswith(('st', 'cmp', 'b'))): break
 # functions the decompile reads implicit inputs in (`in_r11`/`in_r12`: registers the caller sets outside the ABI's argument registers): not callable in isolation
 IMPLICIT = set()
 for _pf in sorted(glob.glob(os.path.join(link, 'part_*.c'))):
