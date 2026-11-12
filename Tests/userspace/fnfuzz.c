@@ -472,7 +472,7 @@ static int apply_graph(const char *name, unsigned *ia, unsigned *sa) {   /* `arg
     snprintf(gs_curfunc, sizeof gs_curfunc, "%s", name);
     if (nalt) { int i = alt[nalt > 1 ? rnd32() % nalt : 0];
         gfunc_t *f = &gfuncs[i]; gb_next = ARENA_BASE + 0x1000; g_nnames = 0; gm_next = GM_LO; gs_first_cnt = 0xffffffffu; gs_lg_n = 0xffffffffu;
-        for (int k = 0; k < f->na; k++) { garg_t *a = &f->a[k]; if (a->n < 0 || a->n >= 16) continue; unsigned *slot = a->n < 8 ? &*slot : &sa[a->n - 8];
+        for (int k = 0; k < f->na; k++) { garg_t *a = &f->a[k]; if (a->n < 0 || a->n >= 16) continue; unsigned *slot = a->n < 8 ? &ia[a->n] : &sa[a->n - 8];
             switch (a->kind) {
             case GA_PTR: *slot = (rnd32() % 100 < (unsigned)a->pct) ? gb_build(gfind_type(a->tname), 0) : 0; break;
             case GA_INT: *slot = grange(a->a, a->b); break;
