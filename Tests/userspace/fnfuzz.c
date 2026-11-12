@@ -142,6 +142,9 @@ static void collect_slots(int img, const struct mach_header *mh) {
             for (unsigned q = 0; q < sc->size / 4; q++) {
                 unsigned is = ind[sc->reserved1 + q]; if (is & 0xc0000000u) continue;
                 const char *nm = str + nl[is].n_un.n_strx; if (!stub_class(nm) || nslots[img] >= 512) continue;
+                /* a symbol the image defines itself (the stock calls its own exported functions through lazy stubs, Apple gcc -fPIC; the rebuilt image calls them directly): stubbing it in the stock only
+                   would compare the stock's stubbed result with the rebuilt's real call (glprog: 957 such slots in the stock, calls into PPStreamAddConstant, GetPPStreamTypeForGLType, ...). Not an import. */
+                { int own = 0; for (unsigned y = 0; y < st->nsyms && !own; y++) if ((nl[y].n_type & N_TYPE) == N_SECT && (nl[y].n_type & N_EXT) && !strcmp(str + nl[y].n_un.n_strx, nm)) own = 1; if (own) continue; }
                 slots[img][nslots[img]].slot = (unsigned *)(sc->addr + slide) + q; slots[img][nslots[img]].idx = stub_index(nm); nslots[img]++;
             }
         }

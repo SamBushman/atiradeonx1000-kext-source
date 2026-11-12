@@ -1,0 +1,9 @@
+# ga_tbl_spec.txt - surface descriptor for the radeon 3D setup functions: the format byte at +0x2f (low byte of the word at +0x2c) stays inside surfaceFormatInfoTable (stock 0xe018 / rebuilt 0x1d018,
+# 0x1c-byte entries; entries 0..47 have the same format word in both images, beyond that the two images hold different data behind the table)
+type DSTDESC 0x80
+  randfill 0x00 0x80 65536
+  u8 0x2f 0 47
+func _radeon3DCopySetup
+  arg 2 ptr DSTDESC
+func _radeon3DFillSetup
+  arg 1 ptr DSTDESC
