@@ -1,0 +1,48 @@
+# glp_rasterop_spec.txt - object graph for the PPC raster-op code emitters of libGLProgrammability (_PPCRasterOpMachine_*RTCAV): machine = {emulator, runtime compiler}, emulator+0xd80 = raster state
+# (+0x3c stage flags, +0x40 alpha state, +0x44 alpha reference, +0x48 stencil state, +0x4c stencil ref/mask word, +0x50 depth func, +0x58 blend state, +0x5c.., +0x70 write masks), emulator+0xd9c = framebuffer
+# description (+0x60 format flags), compiler+0xe3c = the address the generated code jumps to when the test fails (a word inside the code buffer area). The functions write PowerPC instruction words
+# through the code cursor and return the new cursor.
+type CODEBUF 0x1000
+type RCOMP 0x1000
+  randfill 0x00 0x1000 65536
+  ptr 0xe3c CODEBUF
+type FBINFO 0x100
+  randfill 0x00 0x100 65536
+  pick 0x60 0 0x4000 0x8000 0x10000 0x1c000 0x8000000 0x8004000 0x8010000 0x801c000
+type RSTATE 0x200
+  randfill 0x00 0x200 65536
+  pick 0x38 0x8804 0x8b30 0 1
+  bits 0x3c 0xffffffff
+  bits 0x40 0xffffffff
+  pick 0x44 0 0x3f000000 0x3f800000 0xbf800000 0x3e800000 0x3f4ccccd 0x40000000 0x7fc00000 0x3f7ffffc
+  bits 0x48 0xffffffff
+  bits 0x4c 0xffffffff
+  bits 0x50 0xffffffff
+  bits 0x58 0xffffffff
+  bits 0x5c 0xffffffff
+  bits 0x70 0xffffffff
+type EMU 0x1000
+  randfill 0x00 0x1000 65536
+  ptr 0xd80 RSTATE
+  ptr 0xd9c FBINFO 90
+type MACH 0x10
+  ptr 0x00 EMU
+  ptr 0x04 RCOMP
+func _PPCRasterOpMachine_AlphaTestRTCAV
+  arg 0 ptr MACH
+  arg 1 ptr CODEBUF
+func _PPCRasterOpMachine_BlendingRTCAV
+  arg 0 ptr MACH
+  arg 1 ptr CODEBUF
+func _PPCRasterOpMachine_DepthTestRTCAV
+  arg 0 ptr MACH
+  arg 1 ptr CODEBUF
+func _PPCRasterOpMachine_DepthAndStencilTestRTCAV
+  arg 0 ptr MACH
+  arg 1 ptr CODEBUF
+func _PPCRasterOpMachine_LogicOpRTCAV
+  arg 0 ptr MACH
+  arg 1 ptr CODEBUF
+func _PPCRasterOpMachine_BufferMaskRTCAV
+  arg 0 ptr MACH
+  arg 1 ptr CODEBUF
