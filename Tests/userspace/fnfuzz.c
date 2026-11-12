@@ -126,6 +126,10 @@ static int stub_class(const char *n) {
         const char *sk = getenv("FNFUZZ_INTERPOSE_SKIP");
         while (sk && *sk) { size_t L = strcspn(sk, ","); if (L && !strncmp(n, sk, L)) return 0; sk += L + (sk[L] == ',' ? 1 : 0); }
     }
+    /* The dyld runtime-linker calls (NSIsSymbolNameDefinedWithHint / NSLookupAndBindSymbolWithHint / NSAddressOfSymbol, which the stock's and the rebuilt's printf$LDBLStub use, NSLinkModule / NSLookupSymbolInModule in GLEngine) return a CODE ADDRESS that the
+       caller jumps to. A PRNG answer sent the fuzz child into random data (`_retblk`), which it then executed as code: random system calls with random registers, a UNINF verdict for every row that prints, and (Nov 12) kernel memory
+       corruption that took the G5 down 6 times. They are never stubbed: the real linker binds the real libc function for both images. */
+    if (!strncmp(n, "NSIsSymbol", 10) || !strncmp(n, "NSLookup", 8) || !strncmp(n, "NSAddressOf", 11) || !strncmp(n, "NSModule", 8) || !strncmp(n, "NSLink", 6) || !strncmp(n, "NSUnLink", 8) || !strncmp(n, "NSCreateObjectFile", 18) || !strncmp(n, "NSDestroyObjectFile", 19)) return 0;
     if (spawn_import(n)) return 1;
     for (int i = 0; pre[i]; i++) if (!strncmp(n, pre[i], strlen(pre[i]))) return 1;
     if (gs_malloc && (!strcmp(n, "malloc") || !strcmp(n, "calloc") || !strcmp(n, "realloc") || !strcmp(n, "free"))) return 1;
@@ -606,6 +610,10 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     }
     void *m = mmap((void *)ARENA_BASE, ARENA_SIZE, PROT_READ | PROT_WRITE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0);
     if (m != (void *)ARENA_BASE) _exit(9);
+    /* guard regions: a read or write just past the arena (a loop that walks 0x48-byte records until a count the fuzz made huge) must fault the same way in both images. Without them the outcome depended on where libc/dyld
+       happened to place a block after the arena in that child (psnDumpPixelShader: stock SIGSEGV, rebuilt a normal return with the identical arena digest, Nov 12). */
+    mmap((void *)(ARENA_BASE + ARENA_SIZE), 0x10000, PROT_NONE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0);
+    mmap((void *)(ARENA_BASE - 0x10000), 0x10000, PROT_NONE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0);
     rng_state = (unsigned long long)seed * 2862933555777941757ULL + c->id;
     if (interpose) { ncalls_c = 0; trace_c = 0; memset(mask_c, 0, sizeof mask_c); ret_state = (unsigned long long)seed * 0x9E3779B97F4A7C15ULL + c->id; install_stubs(cur_img); }
     unsigned *w = (unsigned *)ARENA_BASE;
@@ -654,7 +662,7 @@ static void trial_log(const cand_t *c, unsigned seed, int mode, int img) {
     char b[160]; int n = snprintf(b, sizeof b, "RUN %lu id %d seed %u mode %d img %c fill2 %d alarm %u\n", ++nrun, c->id, seed, mode, img ? 'R' : 'S', use_fill2, alarm_us);
     (void)!write(lfd, b, n);
 #ifdef F_FULLFSYNC
-    fcntl(lfd, F_FULLFSYNC, 0);
+    if (getenv("FNFUZZ_TRIALLOG_FULL")) fcntl(lfd, F_FULLFSYNC, 0);   /* the default is plain fsync: cheap, and the line still reaches the disk before the fork */
 #endif
     fsync(lfd);
 }
