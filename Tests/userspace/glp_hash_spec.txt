@@ -1,0 +1,54 @@
+# glp_hash_spec.txt - the libGLProgrammability hash set / hash table (_HashSet*, _HashTable*): {+0 bucket count, +4 buckets, +8 hash function, +0xc equality function}; a bucket {+0 entry count, +4 entry array}
+# the hash slot is `fn` (returns its first argument: the key picks the bucket); the equality slot is `fn` (non-zero: unequal) or `fnrec` (0: equal, arguments recorded)
+type PAIR 0x10
+  rand 0x00
+  rand 0x04
+type ELEM 0x10
+  rand 0x00
+type HBKT_T 0x10
+  parr 0x04 PAIR 0x00 0 3
+type HBKT_S 0x10
+  parr 0x04 ELEM 0x00 0 3
+type HSET_T 0x10
+  set 0x00 1
+  ptr 0x04 HBKT_T
+  set 0x08 fn
+  pick 0x0c fn fnrecp
+type HSET_S 0x10
+  set 0x00 1
+  ptr 0x04 HBKT_S
+  set 0x08 fn
+  pick 0x0c fn fnrecp
+type HTAB 0x10
+  ptr 0x00 HSET_T
+func _HashSetAdd
+  arg 0 ptr HSET_S
+  arg 1 ptr ELEM
+func _HashSetGet
+  arg 0 ptr HSET_S
+  arg 1 ptr ELEM
+func _HashSetRemove
+  arg 0 ptr HSET_S
+  arg 1 ptr ELEM
+func _HashSetFree
+  arg 0 ptr HSET_S
+func _HashSetNew
+  arg 0 int 1 4
+  arg 1 pick 0 fn
+  arg 2 pick 0 fnrecp
+func _HashTableAdd
+  arg 0 ptr HTAB
+  arg 1 rand
+  arg 2 rand
+func _HashTableGet
+  arg 0 ptr HTAB
+  arg 1 rand
+func _HashTableRemove
+  arg 0 ptr HTAB
+  arg 1 rand
+func _HashTableFree
+  arg 0 ptr HTAB
+func _HashTableNew
+  arg 0 int 1 4
+  arg 1 pick 0 fn
+  arg 2 pick 0 fnrecp
