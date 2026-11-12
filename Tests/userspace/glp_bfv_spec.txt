@@ -1,0 +1,5 @@
+# glp_bfv_spec.txt - _lBuildFloatValue(digits, digitCount, exponent10): ASCII digit string, count <= length, decimal exponent; returns the float in f1 (ledger class d)
+func _lBuildFloatValue
+  arg 0 str 123456789|99999999999999|1|314159265358979|00000|7
+  arg 1 int 0 14
+  arg 2 int -70 70

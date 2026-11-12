@@ -1,0 +1,63 @@
+# glp_linker2_spec.txt - TGenericLinker queries over a BindingTable {+0 bucket count, +4 request list head, +8 bucket array, +0xc attribute binding list, +0x14 uniform binding list};
+# Binding {+0 next, +8 name, +0x10 name length, +0x14 location, +0x1c actual size, +0x20 active index, +0x24 GL type (ushort), +0x34/+0x35 flag bytes}
+type BNM 0x20
+  istr 0x00 pos|color|normal|tex0
+type UA 0x40
+  randfill 0x00 0x40 65536
+  set 0x00 0
+  ptr 0x08 BNM 100
+  u32 0x10 0 20
+  u32 0x1c 1 4
+  u32 0x20 0 4
+  u16 0x24 0x8b50 0x8b5c
+type UB 0x40
+  randfill 0x00 0x40 65536
+  set 0x00 0
+  u32 0x14 0 16
+  u16 0x24 0x8b50 0x8b5c
+  u32 0x1c 1 4
+  u8 0x34 0 255
+  u8 0x35 0 255
+type BTAB3 0x40
+  randfill 0x00 0x40 65536
+  list 0x0c UA 0 5 0x00
+  list 0x14 UB 0 5 0x00
+type LNK3 0x100
+  randfill 0x00 0x100 65536
+  ptr 0x04 BTAB3
+type OUTW 0x10
+  rand 0x00
+type OUTB 0x40
+  rand 0x00
+type RQB 0x40
+  randfill 0x00 0x40 65536
+  set 0x00 0
+  set 0x04 0
+  ptr 0x08 BNM 100
+  u32 0x10 0 20
+  u32 0x14 0 16
+type RTAB 0x40
+  randfill 0x00 0x40 65536
+  set 0x04 0
+  parr 0x08 RQB 0x00 1 3
+type LNK4 0x100
+  randfill 0x00 0x100 65536
+  ptr 0x04 RTAB
+func TGenericLinker__getActiveAttrib
+  arg 0 ptr LNK3
+  arg 1 int 0 5
+  arg 2 int 0 16
+  arg 3 ptr OUTW 70
+  arg 4 ptr OUTW 70
+  arg 5 ptr OUTW 70
+  arg 6 ptr OUTB
+func TGenericLinker__getUniformTypeInfo
+  arg 0 ptr LNK3
+  arg 1 int 0 18
+  arg 2 ptr OUTW 70
+  arg 3 ptr OUTW 70
+  arg 4 ptr OUTW 70
+func TGenericLinker__attributeBindingRequest
+  arg 0 ptr LNK4
+  arg 1 int 0 16
+  arg 2 str pos|gl_Vertex|color|normal|gl_|abc
