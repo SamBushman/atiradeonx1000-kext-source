@@ -1671,11 +1671,11 @@ int __ZN7BindingC2ERKS_(this, binding)
   void *this;
   unsigned char * binding;
 {
-  bool isClientRequest;
+  int isClientRequest;
   ulong actualSize;
   int activeIndex;
   int location;
-  bool isBuiltIn;
+  int isBuiltIn;
   ushort openGLType;
   ulong decSize;
   char *name;
@@ -1689,9 +1689,9 @@ int __ZN7BindingC2ERKS_(this, binding)
   Binding__SetLocation(this,location);
   activeIndex = Binding__GetActiveIndex(binding);
   Binding__SetActiveIndex(this,activeIndex);
-  isClientRequest = (bool)((int (*)())Binding__IsClientRequest)(binding);
+  isClientRequest = ((int (*)())Binding__IsClientRequest)(binding);
   ((int (*)())Binding__SetClientRequest)(this,isClientRequest);
-  isBuiltIn = (bool)((int (*)())Binding__IsBuiltIn)(binding);
+  isBuiltIn = ((int (*)())Binding__IsBuiltIn)(binding);
   ((int (*)())Binding__SetBuiltIn)(this,isBuiltIn);
   openGLType = Binding__GetOpenGLType(binding);
   Binding__SetOpenGLType(this,openGLType);
@@ -1711,11 +1711,11 @@ int __ZN7BindingC1ERKS_(this, binding)
   void *this;
   unsigned char * binding;
 {
-  bool isClientRequest;
+  int isClientRequest;
   ulong actualSize;
   int activeIndex;
   int location;
-  bool isBuiltIn;
+  int isBuiltIn;
   ushort openGLType;
   ulong decSize;
   char *name;
@@ -1729,9 +1729,9 @@ int __ZN7BindingC1ERKS_(this, binding)
   Binding__SetLocation(this,location);
   activeIndex = Binding__GetActiveIndex(binding);
   Binding__SetActiveIndex(this,activeIndex);
-  isClientRequest = (bool)((int (*)())Binding__IsClientRequest)(binding);
+  isClientRequest = ((int (*)())Binding__IsClientRequest)(binding);
   ((int (*)())Binding__SetClientRequest)(this,isClientRequest);
-  isBuiltIn = (bool)((int (*)())Binding__IsBuiltIn)(binding);
+  isBuiltIn = ((int (*)())Binding__IsBuiltIn)(binding);
   ((int (*)())Binding__SetBuiltIn)(this,isBuiltIn);
   openGLType = Binding__GetOpenGLType(binding);
   Binding__SetOpenGLType(this,openGLType);
