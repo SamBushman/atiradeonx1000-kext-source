@@ -10159,6 +10159,20 @@ checkFileCount0:
 }
 
 /* psnReallocateTemps @ 0xc6470 (1284 bytes) */
+#define freeListBase freeListBlock.base
+#define freeListCount freeListBlock.count
+#define releaseOperandReg releaseOperand.reg
+#define releaseOperandMask releaseOperand.mask
+#define secondOperandReg secondOperand.reg
+#define secondOperandMask secondOperand.mask
+#define tempTableBank raBlock.bank
+#define tempTableSplit raBlock.split
+#define tempTablePad raBlock.tablePad
+#define zeroWordA raBlock.zeroA
+#define zeroWordB raBlock.zeroB
+#define zeroWordC raBlock.zeroC
+#define defOperand raBlock.defOp
+#define defOperandPad raBlock.defOpPad
 int psnReallocateTemps(psnState, psnProgram, useSecondBank, passThroughR6, sourceUsage, passThroughR8, unusedArgR9, scanIndex)
   int psnState;
   int psnProgram;
@@ -10193,21 +10207,14 @@ int psnReallocateTemps(psnState, psnProgram, useSecondBank, passThroughR6, sourc
   ushort zeroedOperandBlock [4];
   undefined4 zeroedOperandWord0;
   undefined4 zeroedOperandWord1;
-  undefined2 *freeListBase;
-  undefined2 freeListCount;
-  ushort releaseOperandReg;
-  undefined2 releaseOperandMask;
-  ushort secondOperandReg;
-  undefined2 secondOperandMask;
-  undefined2 *tempTableBank[2];
-  undefined2 tempTableSplit;
-  undefined4 tempTablePad;
-  undefined4 zeroWordA;
-  undefined4 zeroWordB;
-  undefined4 zeroWordC;
-  uint defOperand;
-  undefined4 defOperandPad[5];
   uint collectedRegs [519];
+  /* The callees read these blocks through the address of their first word (psnRaReleaseUse / psnRaAssignDefinition: operand {reg, mask}, bank table {bank0, bank1, split halfword} = *(ushort *)(table + 2),
+     free list {base, count halfword}; psnAccumulate*SelectRead: &defOperand with the pad words after it): the stock keeps each block contiguous in this order (frame offsets 72/76, 80, 84, 88..136),
+     so they are structures here (as separate locals gcc placed them in another order and the callees read the neighbours' bytes, #269). */
+  struct { undefined2 *base; undefined2 count; undefined2 countPad; } freeListBlock;
+  struct { undefined2 reg; undefined2 mask; } releaseOperand;
+  struct { undefined2 reg; undefined2 mask; } secondOperand;
+  struct { undefined2 *bank[2]; undefined2 split; undefined2 splitPad; undefined4 tablePad; undefined4 zeroA; undefined4 zeroB; undefined4 zeroC; uint defOp; undefined4 defOpPad[5]; } raBlock;
   
   workMask = 0xf;
   freeListBase = *(undefined2 **)(psnState + 0x1c);
@@ -10528,6 +10535,20 @@ setLoopIndex2:
   ((int (*)())psnAnalyzeProgram)(psnProgram);
   return;
 }
+#undef freeListBase
+#undef freeListCount
+#undef releaseOperandReg
+#undef releaseOperandMask
+#undef secondOperandReg
+#undef secondOperandMask
+#undef tempTableBank
+#undef tempTableSplit
+#undef tempTablePad
+#undef zeroWordA
+#undef zeroWordB
+#undef zeroWordC
+#undef defOperand
+#undef defOperandPad
 
 /* scCallbackAlloc @ 0xc6e40 (12 bytes) - issue #64 live-repro: a genuine, separate function Ghidra's
  * initial analysis never split out (no standard prologue - it's a 3-instruction tail-call right
