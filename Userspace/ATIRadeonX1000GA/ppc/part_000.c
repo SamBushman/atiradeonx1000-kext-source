@@ -1083,8 +1083,11 @@ int __QueryInterface(instance, uuidWord0, uuidWord1, uuidWord2, uuidWord3, outIn
 int __AddRef(instance)
   int instance;
 {
-  *(int *)(instance + 8) = *(int *)(instance + 8) + 1;
-  return;
+  int refCount;
+  
+  refCount = *(int *)(instance + 8) + 1;
+  *(int *)(instance + 8) = refCount;
+  return refCount;
 }
 
 /* __DecodePixelFormat @ 0x1ba0 (468 bytes) */
