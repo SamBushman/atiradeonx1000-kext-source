@@ -1,0 +1,57 @@
+# glp_std_spec.txt - libstdc++ (gcc 3.x ABI, statically linked) std::string members and the SGI allocator in libGLProgrammability.
+# A std::string object is one word, a pointer to the characters; the representation header {+0 length, +4 capacity, +8 refcount} sits 12 bytes before the characters.
+type STRREP 0x80
+  u32 0x00 8 0x30
+  set 0x04 0x40
+  pick 0x08 0 0
+  randfill 0x0c 0x40 128
+type SOBJ 0x10
+  ptr 0x08 STRREP
+  padd 0x00 0x08 0xc
+type SCRATCH 0x40
+func std__string__substr
+  arg 0 ptr SCRATCH
+  arg 1 ptr SOBJ
+  arg 2 int 0 0x30
+  arg 3 int 0 0x30
+func std__string__copy
+  arg 0 ptr SOBJ
+  arg 1 ptr SCRATCH
+  arg 2 int 0 0x30
+  arg 3 int 0 0x30
+func std__string___M_check
+  arg 0 ptr SCRATCH
+  arg 1 ptr SOBJ
+  arg 2 int 0 0x30
+func std__allocator_char___allocate
+  arg 0 ptr SCRATCH
+  arg 1 int 0 0x90
+func std__allocator_wchar_t___allocate
+  arg 0 ptr SCRATCH
+  arg 1 int 0 0x90
+type CHARS 0x80
+  randfill 0x00 0x80 128
+func std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string__
+  arg 0 ptr SOBJ
+  arg 1 rel 0 deref 0 1 2 3 4
+  arg 2 rel 0 deref 4 5 6 7 8
+  arg 3 ptr CHARS
+  arg 4 rel 3 val 0 1 2 5 9 16
+func std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__
+  arg 0 ptr SOBJ
+  arg 1 rel 0 deref 0 1 2 3 4
+  arg 2 rel 0 deref 4 5 6 7 8
+  arg 3 ptr CHARS
+  arg 4 rel 3 val 0 1 2 5 9 16
+func std__string___M_replace_safe_char__
+  arg 0 ptr SOBJ
+  arg 1 rel 0 deref 0 1 2 3 4
+  arg 2 rel 0 deref 4 5 6 7 8
+  arg 3 ptr CHARS
+  arg 4 rel 3 val 0 1 2 5 9 16
+func std__string___M_replace_safe___gnu_cxx____normal_iterator_char_const__std__string__
+  arg 0 ptr SOBJ
+  arg 1 rel 0 deref 0 1 2 3 4
+  arg 2 rel 0 deref 4 5 6 7 8
+  arg 3 ptr CHARS
+  arg 4 rel 3 val 0 1 2 5 9 16

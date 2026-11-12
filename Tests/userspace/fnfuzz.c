@@ -321,6 +321,7 @@ static void __attribute__((noinline)) fill_stack(void) { volatile unsigned buf[8
        (`out IMPORT ARG V1 V2 ..` after a `func` line: the word the import's ARG-th argument points to is set to one of the values after the call; give the import a `retpick` too)
        parr OFF TYPE COUNTOFF MIN MAX     +OFF = pointer to an array of N (MIN..MAX) pointers to fresh TYPE nodes, N stored at +COUNTOFF
      func NAME                            start a function
+       arg N rel M val|deref D1 [D2 ..]   (after the line of argument M) the value of argument M, or the word it points to, plus one of the deltas: a pointer into an object another argument holds
        arg N ptr TYPE [PCT] | arg N int LO HI | arg N pick V1 V2 ... | arg N rand | arg N null | arg N str TEXT (a NUL-terminated copy of one of the `|`-separated alternatives) | arg N name [PCT]   (name: one of the recorded hash names, else a random small one)
    Numbers are decimal or 0x hex. */
 typedef struct { unsigned off; int kind; unsigned a, b, c; int n; unsigned v[8]; char tname[32]; char text[96]; } gfield_t;
@@ -328,7 +329,7 @@ typedef struct { char name[32]; unsigned size; int nf; gfield_t f[96]; } gtype_t
 typedef struct { int n; int kind; unsigned a, b; int pct; unsigned v[64]; int nv; char tname[32]; char text[96]; } garg_t;
 typedef struct { char name[96]; int na; garg_t a[16]; } gfunc_t;
 enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD, GF_FNREC3A, GF_FNRECA, GF_FFILL, GF_DPTR };
-enum { GA_PTR = 1, GA_INT, GA_PICK, GA_RAND, GA_NULL, GA_NAME, GA_STR };
+enum { GA_PTR = 1, GA_INT, GA_PICK, GA_RAND, GA_NULL, GA_NAME, GA_STR, GA_REL };
 static unsigned g_names[64]; static int g_nnames;
 typedef struct { char name[48]; char tname[32]; unsigned v[8]; int nv; char func[96]; int pct; } gret_t;
 typedef struct { char name[48]; char func[96]; int arg; unsigned v[8]; int nv; } gout_t; static gout_t gouts[160]; static int ngouts;   /* `out IMPORT ARG V1 V2 ..`: after the stubbed import the word its ARG-th argument points to holds one of the values (an out-parameter the library fills: a type enum) */
@@ -380,6 +381,7 @@ static void load_graphspec(const char *path) {
             else if (!strcmp(tok[2], "pick")) { a->kind = GA_PICK; for (int i = 3; i < nt && a->nv < 64; i++) a->v[a->nv++] = gnum(tok[i]); }
             else if (!strcmp(tok[2], "rand")) a->kind = GA_RAND; else if (!strcmp(tok[2], "null")) a->kind = GA_NULL;
             else if (!strcmp(tok[2], "str") && nt >= 4) { a->kind = GA_STR; snprintf(a->text, sizeof a->text, "%s", tok[3]); }
+            else if (!strcmp(tok[2], "rel") && nt >= 6) { a->kind = GA_REL; a->b = (unsigned)atoi(tok[3]); a->a = !strcmp(tok[4], "deref"); for (int i = 5; i < nt && a->nv < 64; i++) a->v[a->nv++] = gnum(tok[i]); }   /* arg N rel M val|deref D1 [D2..]: the value of argument M (val) or the word it points to (deref) plus one of the deltas (an iterator / pointer into an object another argument holds); M must be an earlier line */
             else if (!strcmp(tok[2], "name")) { a->kind = GA_NAME; if (nt >= 4) a->pct = atoi(tok[3]); }
             continue;
         }
@@ -489,6 +491,7 @@ static int apply_graph(const char *name, unsigned *ia, unsigned *sa) {   /* `arg
             case GA_STR: { char txt[96]; snprintf(txt, sizeof txt, "%s", a->text); int na = 1; for (char *q = txt; *q; q++) if (*q == '|') na++;
                 int pick = rnd32() % na; char *s0 = txt; for (int q = 0; q < pick; q++) s0 = strchr(s0, '|') + 1; char *e = strchr(s0, '|'); if (e) *e = 0;
                 unsigned sa = gb_alloc((unsigned)strlen(s0) + 1); memcpy((void *)sa, s0, strlen(s0) + 1); *slot = sa; break; }
+            case GA_REL: { unsigned *ms = a->b < 8 ? &ia[a->b] : &sa[a->b - 8]; unsigned base = a->a ? *(unsigned *)(uintptr_t)*ms : *ms; *slot = base + a->v[rnd32() % a->nv]; break; }
             case GA_NAME: *slot = (g_nnames && rnd32() % 100 < (unsigned)a->pct) ? g_names[rnd32() % g_nnames] : 1 + rnd32() % 40; break;
             } }
         ncur_watch = 0; ncfstr = 0;
