@@ -1,0 +1,74 @@
+# glp_ppsc_spec.txt - TPPStreamCompiler methods (libGLProgrammability): the compiler object and the global pool allocator they allocate their parse-tree nodes from.
+# GetGlobalPoolAllocator() = **_gPollAllocThreadData: the global holds a pointer to an 8-byte holder whose first word is the TPoolAllocator; allocate() carves from the page at +0x1c.
+type POOLPAGE 0x9000
+type POOL 0x40
+  set 0x04 0x8000
+  set 0x0c 0xf
+  set 0x10 0x8
+  set 0x14 0x10
+  ptr 0x1c POOLPAGE
+type HOLDER 0x10
+  ptr 0x00 POOL
+type TEMPALLOC 0x40
+  u32 0x00 0 50
+type SYM_GETVERTEX 0x80
+  set 0x1c 944
+  set 0x20 9
+  str 0x14 gl_Vertex
+  set 0x28 0xffffffff
+  u32 0x34 0 1
+type SYMTAB_GETVERTEX 0x100
+  parr 0x08 SYM_GETVERTEX 0x10 1 1
+  randfill 0x40 0x40 16
+type PSC_GETVERTEX 0x200
+  ptr 0x64 TEMPALLOC
+  ptr 0x68 SYMTAB_GETVERTEX
+type SYM_GETPOSITION 0x80
+  set 0x1c 1159
+  set 0x20 11
+  str 0x14 gl_Position
+  set 0x28 0xffffffff
+  u32 0x34 0 1
+type SYMTAB_GETPOSITION 0x100
+  parr 0x08 SYM_GETPOSITION 0x10 1 1
+  randfill 0x40 0x40 16
+type PSC_GETPOSITION 0x200
+  ptr 0x64 TEMPALLOC
+  ptr 0x68 SYMTAB_GETPOSITION
+type SYM_GETMVP 0x80
+  set 0x1c 2896
+  set 0x20 28
+  str 0x14 gl_ModelViewProjectionMatrix
+  set 0x28 0xffffffff
+  u32 0x34 0 1
+type SYMTAB_GETMVP 0x100
+  parr 0x08 SYM_GETMVP 0x10 1 1
+  randfill 0x40 0x40 16
+type PSC_GETMVP 0x200
+  ptr 0x64 TEMPALLOC
+  ptr 0x68 SYMTAB_GETMVP
+type SYM_NEWADDRESSTEMP 0x80
+  set 0x1c 2392
+  set 0x20 24
+  str 0x14 gl__CompilerAddressTemp0
+  set 0x28 0
+type SYMTAB_NEWADDRESSTEMP 0x100
+  parr 0x08 SYM_NEWADDRESSTEMP 0x10 1 1
+  randfill 0x40 0x40 16
+type TEMPALLOC0 0x40
+  set 0x04 0
+type PSC_NEWADDRESSTEMP 0x200
+  ptr 0x64 TEMPALLOC0
+  ptr 0x68 SYMTAB_NEWADDRESSTEMP
+func TPPStreamCompiler__getVertex
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr PSC_GETVERTEX
+func TPPStreamCompiler__getPosition
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr PSC_GETPOSITION
+func TPPStreamCompiler__getMVP
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr PSC_GETMVP
+func TPPStreamCompiler__newAddressTemp
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr PSC_NEWADDRESSTEMP
