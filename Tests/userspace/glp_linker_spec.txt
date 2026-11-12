@@ -1,0 +1,76 @@
+# glp_linker_spec.txt - TGenericLinker (libGLProgrammability): linker {+4 binding table, +0x40/+0x44 remap tables, +0x84 info sink}
+type BNAME 0x40
+  randfill 0x00 0x40 65536
+# the list successor (Binding__GetNextBinding = *binding) is another binding, so every binding the walk reaches has the boolean at +0x2c
+type BKT2 0x40
+  randfill 0x00 0x40 65536
+  u32 0x00 0 0
+  u32 0x04 0 0
+  ptr 0x08 BNAME
+  u32 0x10 0 64
+  u32 0x2c 0 1
+type BIND 0x40
+  randfill 0x00 0x40 65536
+  ptr 0x00 BKT2 100
+  u32 0x04 0 0
+  ptr 0x08 BNAME
+  u32 0x10 0 64
+  u32 0x2c 0 1
+type BKT 0x40
+  randfill 0x00 0x40 65536
+  ptr 0x00 BIND
+  ptr 0x04 BIND
+  ptr 0x08 BIND
+  ptr 0x0c BIND
+type BTAB 0x40
+  randfill 0x00 0x40 65536
+  u32 0x00 0 4
+  ptr 0x04 BIND
+  ptr 0x08 BKT
+  ptr 0x0c BIND
+  ptr 0x10 BKT
+  ptr 0x14 BIND
+  ptr 0x18 BKT
+type BLINK 0x100
+  randfill 0x00 0x100 65536
+  ptr 0x04 BTAB
+type INFOREP 0x400
+  u32 0x00 0 0x20
+  pick 0x04 0x30 0x200
+  set 0x08 0
+  randfill 0x0c 0x40 128
+type INFOSINK 0x10
+  ptr 0x08 INFOREP
+  padd 0x00 0x08 0xc
+  set 0x04 4
+type BTAB2 0x40
+  randfill 0x00 0x40 65536
+  u32 0x00 0 4
+  ptr 0x04 BIND
+  ptr 0x08 BKT
+  ptr 0x0c BIND
+  ptr 0x10 BKT
+  ptr 0x14 BIND
+  ptr 0x18 BKT
+  u32 0x24 0 8
+type UTAB 0x40
+  u32 0x00 0 8
+  randfill 0x04 0x3c 65536
+type BLINK2 0x100
+  randfill 0x00 0x100 65536
+  ptr 0x04 BTAB2
+  ptr 0x40 UTAB 70
+  ptr 0x44 UTAB 70
+  ptr 0x84 INFOSINK
+func TGenericLinker__GetRemapTableString
+  arg 0 ptr BLINK2
+func TGenericLinker__GetFullTableString
+  arg 0 ptr BLINK2
+func TGenericLinker__InsertClientAttribBinding
+  arg 0 ptr BLINK2
+  arg 1 ptr BIND
+func TGenericLinker__AddAttribBinding
+  arg 0 ptr BLINK2
+  arg 1 str a|bb|cde
+  arg 2 int 0 0x8b60
+  arg 3 pick 0 1
