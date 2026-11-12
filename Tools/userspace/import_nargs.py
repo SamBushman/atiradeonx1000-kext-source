@@ -27,9 +27,18 @@ for f in sorted(glob.glob(d + '/part_*.c') + glob.glob(d + '/hand/*.c')):
                 elif t[j] == ')': depth -= 1
                 j += 1
             cnt[nm][split_args(t[i:j - 1])] += 1
+# OVERRIDES: <corpus dir>/nargs_override.tsv (name<TAB>count<TAB>reason) - an import whose real arity is known from the stock call sites (the registers set before the `bl`), where the decompile passes
+# dead-register residue as arguments (Darwin PPC: a float argument shadows GPR slots the caller never sets). GLDriver: glgConvertType 4 (r3..r6), glgPixelCenters 1 (r3, floats in f1..), glgProcessPixels 2 (r3, r4).
+import os
+over = {}
+ofile = os.path.join(d, 'nargs_override.tsv')
+if os.path.exists(ofile):
+    for l in open(ofile):
+        p = l.rstrip('\n').split('\t')
+        if len(p) >= 2 and not l.startswith('#'): over[p[0]] = int(p[1])
 rows = []
 for nm in sorted(cnt):
-    c = cnt[nm]; best = max(c); rows.append((nm, best))
+    c = cnt[nm]; best = over.get(nm, max(c)); rows.append((nm, best))
     if len(c) > 1: print('%s: %s' % (nm, dict(c)), file=sys.stderr)
 if out:
     with open(out, 'w') as o:

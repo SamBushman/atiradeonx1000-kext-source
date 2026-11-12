@@ -1,0 +1,4 @@
+# import	real argument count	why (checked against the STOCK call sites, Nov 12: the integer registers set before each `bl`)
+glgConvertType	4	r3..r6 set (format, type, &out, &out) at the only call site (stock 0x18f3c in glDrawPixels_impl)
+glgPixelCenters	1	only r3 set; the other operands are floats in f1.. (Darwin PPC: they shadow r4.. which the caller does not set)
+glgProcessPixels	2	r3 and r4 set at both call sites (0x19694, 0x196cc)
