@@ -47,13 +47,22 @@ def slots(raw, base):
 def signature(ks, gap):
     return tuple(sorted(b - a for a, b in zip(ks, ks[1:]) if b - a <= gap))
 
-def main():
-    args = [a for a in sys.argv[1:] if not a.startswith('--')]
-    gap = 16
-    if '--gap' in sys.argv:
-        gap = int(sys.argv[sys.argv.index('--gap') + 1])
-        args = [a for a in args if a != str(gap)]
-    stock, reb, ledger, nm = args[:4]
+def stock_starts(ledger):
+    """sorted start addresses of every stock function of the ledger (the ledger's size can run past the real end: a window must stop at the next function)"""
+    s = set()
+    for l in open(ledger):
+        p = l.rstrip('\n').split('\t')
+        if len(p) >= 5 and not p[0].startswith('#'):
+            s.add(int(p[2], 16))
+    return sorted(s)
+
+def next_start(starts, a):
+    import bisect
+    i = bisect.bisect_right(starts, a)
+    return starts[i] if i < len(starts) else a + 0x10000
+
+def rows(stock, reb, ledger, nm):
+    """yield (name, stock_addr, stock_size, rebuilt_addr, rebuilt_size, stock_loader, rebuilt_loader) for every ledger function whose name is unique in nm"""
     sget, rget = loader(stock), loader(reb)
     syms = []
     for l in open(nm):
@@ -66,21 +75,34 @@ def main():
         end = syms[i + 1][0] if i + 1 < len(syms) else a
         byname[n].append((a, end - a))
     seen = set()
-    nrows = nflag = nskip = 0
+    starts = stock_starts(ledger)
     for l in open(ledger):
         p = l.rstrip('\n').split('\t')
         if len(p) < 5 or p[0].startswith('#'):
             continue
-        name, sa, ssz = p[1], int(p[2], 16), int(p[4])
+        name, sa, ssz = p[1], int(p[2], 16), min(int(p[4]), next_start(starts, int(p[2], 16)) - int(p[2], 16))
         if name in seen:
             continue
         seen.add(name)
         if len(byname.get(name, ())) != 1:
-            nskip += 1
+            yield name, None, None, None, None, None, None
             continue
         ra, rsz = byname[name][0]
         # static helpers have no nm entry, so the gap to the next symbol can include other functions: cap the window
         rsz = min(rsz, ssz * 3 // 2 + 64)
+        yield name, sa, ssz, ra, rsz, sget, rget
+
+def main():
+    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    gap = 16
+    if '--gap' in sys.argv:
+        gap = int(sys.argv[sys.argv.index('--gap') + 1])
+        args = [a for a in args if a != str(gap)]
+    nrows = nflag = nskip = 0
+    for name, sa, ssz, ra, rsz, sget, rget in rows(*args[:4]):
+        if sa is None:
+            nskip += 1
+            continue
         nrows += 1
         ks, kr = slots(sget(sa, ssz), sa), slots(rget(ra, rsz), ra)
         ss, sr = signature(ks, gap), signature(kr, gap)

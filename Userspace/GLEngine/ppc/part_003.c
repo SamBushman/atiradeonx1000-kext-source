@@ -4128,6 +4128,7 @@ LAB_00025008:
       *(uint *)(iVar5 + 0x348) = *(uint *)(iVar5 + 0x348) | uVar8;
     }
     break;
+  case 5:
   case 3:
     iVar4 = param_3 * 0x518;
     sVar12 = *(short *)((iVar4 + param_7) * 2 + param_2 + 0x8874);
