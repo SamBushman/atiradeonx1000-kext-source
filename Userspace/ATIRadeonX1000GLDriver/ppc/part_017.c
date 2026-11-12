@@ -9588,7 +9588,7 @@ int psnRaReleaseUse(operand, tempTable, freeList)
   ushort bankMaskBits;
   int shiftOffset;
   uint freeCountOld;
-  short expectedPrevReg;
+  ushort expectedPrevReg;
   int tempEntry;
   uint scanCounter;
   
@@ -9675,7 +9675,7 @@ int psnRaReleaseUse(operand, tempTable, freeList)
     }
     *(ushort *)(insertByteOffset + freeListBase) = releasedReg;
     *(ushort *)(insertByteOffset + *freeList + 2) = bankMaskBits;
-    freeCount = *(short *)(freeList + 1) + 1;
+    freeCount = *(ushort *)(freeList + 1) + 1;
     *(ushort *)(freeList + 1) = freeCount;
   }
   freeCountU = (uint)freeCount;
@@ -9684,8 +9684,8 @@ int psnRaReleaseUse(operand, tempTable, freeList)
     return;
   }
   prevEntryOffset = (freeCountU - 2) * 4;
-  expectedPrevReg = *(short *)((freeCountU - 1) * 4 + freeListBaseEnd) + -1;
-  if (*(short *)(freeListBaseEnd + prevEntryOffset) != expectedPrevReg) {
+  expectedPrevReg = *(ushort *)((freeCountU - 1) * 4 + freeListBaseEnd) + -1;
+  if (*(ushort *)(freeListBaseEnd + prevEntryOffset) != expectedPrevReg) {
     return;
   }
   if (*(ushort *)(freeListBaseEnd + prevEntryOffset + 2) == 0xf) {
@@ -9699,7 +9699,7 @@ int psnRaReleaseUse(operand, tempTable, freeList)
         return;
       }
       expectedPrevReg = expectedPrevReg + -1;
-      if (*(short *)(prevEntryOffset + freeListBaseEnd) != expectedPrevReg) break;
+      if (*(ushort *)(prevEntryOffset + freeListBaseEnd) != expectedPrevReg) break;
       if (*(ushort *)(prevEntryOffset + freeListBaseEnd + 2) != 0xf) {
         return;
       }
