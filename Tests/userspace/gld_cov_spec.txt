@@ -1,0 +1,10 @@
+# gld_cov_spec.txt - gld_updateSampleCoverage: sampleCountRaw = *(*(ctx+4)+0x2a50) selects an entry of three 3-word tables (sampleCoverageTable / samplePositionTable / samplePatternTable,
+# index (raw >> 1) - 1), i.e. raw is 2, 4 or 6 (1 = no multisampling is handled before the lookup when the coverage flag is clear); any other value reads past the tables, where the stock and the rebuilt image differ.
+type COVRS 0x3000
+  randfill 0x0000 0x3000 65536
+  pick 0x2a50 1 2 4 6
+type COVCTX 0x2800
+  randfill 0x0000 0x2800 65536
+  ptr 0x04 COVRS
+func gld_updateSampleCoverage
+  arg 0 ptr COVCTX

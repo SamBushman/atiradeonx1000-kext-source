@@ -1,0 +1,28 @@
+# gld_psn_spec.txt - GLDriver pixel-shader record converters (psnDecodedToProgram ...). The swizzle table at 0x1dbf98 has 14 two-byte entries and is indexed by the halfword at entry+0x28 and entry+0x68 of a decoded
+# entry (0xa0 bytes each; stock: lhz / rlwinm 1 / lbzx): a larger value reads past the table, where the two images hold different data (rebuilt wrote 0x41 where the stock wrote 0: hardware watchpoint on the rebuilt run = `stb r0,0x40(r29)` of that lbzx).
+type PDENTS 0x400
+  randfill 0x00 0x400 65536
+  u32 0x28 0 0xdffff
+  u32 0x68 0 0xdffff
+  pick 0x8c 0 1 2
+  u32 0xc8 0 0xdffff
+  u32 0x108 0 0xdffff
+  pick 0x12c 0 1 2
+  u32 0x168 0 0xdffff
+  u32 0x1a8 0 0xdffff
+  pick 0x1cc 0 1 2
+  u32 0x208 0 0xdffff
+  u32 0x248 0 0xdffff
+  pick 0x26c 0 1 2
+  u32 0x2a8 0 0xdffff
+  u32 0x2e8 0 0xdffff
+  pick 0x30c 0 1 2
+type PDPROG 0x40
+  randfill 0x00 0x40 65536
+  u32 0x00 0 5
+  ptr 0x08 PDENTS
+type PDREC 0x800
+  randfill 0x00 0x800 65536
+func psnDecodedToProgram
+  arg 0 ptr PDPROG
+  arg 1 ptr PDREC

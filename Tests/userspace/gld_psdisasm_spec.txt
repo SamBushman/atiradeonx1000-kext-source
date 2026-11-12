@@ -1,0 +1,4 @@
+# gld_psdisasm_spec.txt - psDisasmFormatAlphaSource: componentCode (the 10th parameter, a stack word) indexes the 4-byte component-string table at 0x1dc259 (r g b a 0.0 0.5 1.0 ???: codes 0..7); a larger value
+# reads the neighbouring table (the stock's, at the image's own offset; the rebuilt image lays its data out differently).
+func psDisasmFormatAlphaSource
+  arg 9 int 0 7

@@ -16,10 +16,14 @@ int gld_buildActiveUnitList(glContext)
   int loopIndex;
   int unitShadowCursor;
   uint loopIndex2;
+  int rendererState;
   
   ctx44Word = *(uint *)(glContext + 0x44);
+  /* the stock loads *(*(glContext + 4) + 0x10) before it tests ctx[0x44] < 0 (read even when the flag is clear) */
+  rendererState = *(int *)(*(int *)(glContext + 4) + 0x10);
+  __asm__("" : "+r"(rendererState));
   if ((((int)ctx44Word < 0) &&
-      (*(ushort *)(((unsigned char *)0x00002d48) + *(int *)(*(int *)(glContext + 4) + 0x10)) == 0x81fa)) ||
+      (*(ushort *)(((unsigned char *)0x00002d48) + rendererState) == 0x81fa)) ||
      (baseCost = 0, (ctx44Word & 0xa10000) != 0)) {
     baseCost = 1;
   }

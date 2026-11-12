@@ -1375,16 +1375,22 @@ int gld_scalePointSizeToPixels(glContext, addSizeBias)
   int addSizeBias;
 {
   float sizeBias;
+  int rendererState;
+  undefined4 drawableWidth;
   
+  /* the stock loads *(*(glContext + 4) + 0x10) and glContext[8] before it tests addSizeBias (both are read on the addSizeBias == 0 path too) */
+  rendererState = *(int *)(*(int *)(glContext + 4) + 0x10);
+  drawableWidth = *(undefined4 *)(glContext + 8);
+  __asm__("" : "+r"(rendererState), "+r"(drawableWidth));
   if (addSizeBias != 0) {
     sizeBias = FLOAT_001aa0e8;
-    if (*(ushort *)(((unsigned char *)0x00002e0e) + *(int *)(*(int *)(glContext + 4) + 0x10)) == 0x1102) {
+    if (*(ushort *)(((unsigned char *)0x00002e0e) + rendererState) == 0x1102) {
       sizeBias = FLOAT_001aa108;
     }
-    return (int)((float)((double)CONCAT44(0x43300000,*(undefined4 *)(glContext + 8)) - DOUBLE_001aa250
+    return (int)((float)((double)CONCAT44(0x43300000,drawableWidth) - DOUBLE_001aa250
                         ) * FLOAT_001aa10c * (sizeBias + *(float *)(glContext + 0xe0)));
   }
-  return (int)((float)((double)CONCAT44(0x43300000,*(undefined4 *)(glContext + 8)) - DOUBLE_001aa250)
+  return (int)((float)((double)CONCAT44(0x43300000,drawableWidth) - DOUBLE_001aa250)
                * FLOAT_001aa10c * *(float *)(glContext + 0xe0));
 }
 

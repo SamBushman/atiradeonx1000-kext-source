@@ -7101,12 +7101,12 @@ extern unsigned char ilSampleOpcodeRecords_rec0_opcode_001dc660;
 extern unsigned char ilSampleOpcodeRecords_rec1_opcode_001dc66c;
 extern unsigned char arbfpKeywordTable_tokenClass_001e915c;
 extern unsigned char arbfpKeywordTable_tokenIndex_001e9160;
-extern unsigned char _psnSlotMaskLowWord_001aa7f4;
-extern unsigned char _psnSlotMaskHighWord_001aa7f8;
-extern unsigned char _laneWord00010203_001aa848;
-extern unsigned char _laneWord00000000_001aa84c;
-extern unsigned char _laneWord01010100_001af9d8;
-extern unsigned char _laneWord00010303_001b2a7c;
+extern unsigned int _psnSlotMaskLowWord_001aa7f4;
+extern unsigned int _psnSlotMaskHighWord_001aa7f8;
+extern unsigned int _laneWord00010203_001aa848;
+extern unsigned int _laneWord00000000_001aa84c;
+extern unsigned int _laneWord01010100_001af9d8;
+extern unsigned int _laneWord00010303_001b2a7c;
 /* issue #76: Ghidra "s_" string-literal symbols (the bytes AT this address ARE the string data
  * itself, not a pointer stored elsewhere) were declared as `unsigned char *` (a pointer
  * variable) throughout this file, instead of an array. Call sites that take `&NAME` explicitly

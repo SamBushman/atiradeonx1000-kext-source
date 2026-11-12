@@ -6506,6 +6506,8 @@ int psnFormatRgbSource(outBuffer, source0Register, source1Register, source2Regis
       printf_LDBLStub_1a32d0(textEnd,"%s.brg",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
       break;
     case 0x1d:
+    case 0x1e:
+    case 0x1f:
       printf_LDBLStub_1a32d0(textEnd,"%s.a:%s.bg",operandText,operandTextSecond,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
     }
   }
@@ -6627,14 +6629,19 @@ int psnFormatAlphaSource(outBuffer, source0Register, source1Register, source2Reg
     case 1:
     case 4:
     case 7:
+    case 0xd:
       printf_LDBLStub_1a32d0(textEnd,"%s.g",operandText,source2Register,alpha0Register,alpha1Register,componentJumpAddr,sourceSelectCopy);
       break;
     case 2:
     case 5:
     case 8:
+    case 0xe:
       printf_LDBLStub_1a32d0(textEnd,"%s.b",operandText,source2Register,alpha0Register,alpha1Register,componentJumpAddr,sourceSelectCopy);
       break;
     case 9:
+    case 10:
+    case 0xb:
+    case 0xf:
       printf_LDBLStub_1a32d0(textEnd,"%s.a",operandText,source2Register,alpha0Register,alpha1Register,componentJumpAddr,sourceSelectCopy);
     }
   }

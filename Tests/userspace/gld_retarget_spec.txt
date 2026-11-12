@@ -1,0 +1,5 @@
+# gld_retarget_spec.txt - recordRetargetDestination: newRegId (3rd parameter, arg 2) is a register id whose high byte (newRegId>>8) indexes the byte table registerFileByRegIdHighByte at 0x1aa764
+# in the stock image; the values written by the function's own sibling table (destRegisterFileByType, outputs 0..5) show the valid high bytes are 0..5.  A larger value reads past
+# the table (data that differs between the stock and rebuilt images; the rebuilt read can leave the mapped arena and fault, which is how the unrestricted run's trial 173 faulted).
+func recordRetargetDestination
+  arg 2 int 0 1535
