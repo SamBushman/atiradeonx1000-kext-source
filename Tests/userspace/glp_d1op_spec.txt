@@ -1,0 +1,7 @@
+# glp_d1op_spec.txt - _glpDisassemble1Op: the opcode field (instruction word 0, bits 18..25) indexes _ppstreamOpString and the switch, which cover opcodes 0..0x6b (108 entries);
+# an opcode above that reads the pointer table past its end - there the two images have different data (4 / 300 unrestricted trials: opcode 0xcc, stock text length 2, rebuilt 0x97)
+type D1INST 0x20
+  randfill 0x00 0x20 65536
+  u32 0x00 0 0x1afffff
+func _glpDisassemble1Op
+  arg 0 ptr D1INST

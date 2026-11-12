@@ -112,6 +112,10 @@ static int stub_class(const char *n) {
     static const char *pre[] = { "Sh", "PP", "glg", "glp", "NS", "CF", "IO", "host_", "mach_", "sysctl", "scandir", "pthread_mutex_", NULL };
     if (*n == '_') n++;
     { size_t L = strlen(n); if (L && n[L - 1] == '_') return 0; }   /* mach_task_self_ is a DATA symbol (the stock binds its non-lazy slot to the variable; the rebuilt through an external relocation): never overwrite a data slot with a function */
+    {   /* FNFUZZ_INTERPOSE_SKIP=NS,CF: name prefixes the interposer leaves real (the stock's own printf$LDBLStub binds through NSLookupAndBindSymbolWithHint; stubbed, it jumps to the stub's return value) */
+        const char *sk = getenv("FNFUZZ_INTERPOSE_SKIP");
+        while (sk && *sk) { size_t L = strcspn(sk, ","); if (L && !strncmp(n, sk, L)) return 0; sk += L + (sk[L] == ',' ? 1 : 0); }
+    }
     for (int i = 0; pre[i]; i++) if (!strncmp(n, pre[i], strlen(pre[i]))) return 1;
     if (gs_malloc && (!strcmp(n, "malloc") || !strcmp(n, "calloc") || !strcmp(n, "realloc") || !strcmp(n, "free"))) return 1;
     return 0;

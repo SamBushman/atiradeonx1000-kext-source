@@ -1,0 +1,48 @@
+# glp_binding_spec.txt - GetSymbolTable, Binding__GetString, BindingTable__GetString, TGenericLinker__GetBindingTableString (libGLProgrammability).
+# GetSymbolTable(languageIndex) reads a 4-slot table (the stock allocates slots 0..3: `cmpw r29,r2+0xc ; ble`), an index above 3 reads past it.
+# Binding__GetString uses the word at binding+0x2c (Binding__IsClientRequest, a boolean) as the index into the two-pointer array `formatStrings` on its own stack: a value other than 0 / 1 reads
+# whatever the frame holds there, which differs between the two images (stock: a readable pointer, rebuilt: unmapped).  A BindingTable holds bindings in lists / hash buckets (+4, +0xc, +0x14 binding lists, +8, +0x10, +0x18 bucket arrays, +0 bucket count).
+func GetSymbolTable
+  arg 0 int 0 3
+type BNAME 0x40
+  randfill 0x00 0x40 65536
+# the list successor (Binding__GetNextBinding = *binding) is another binding, so every binding the walk reaches has the boolean at +0x2c
+type BKT2 0x40
+  randfill 0x00 0x40 65536
+  u32 0x00 0 0
+  u32 0x04 0 0
+  ptr 0x08 BNAME
+  u32 0x10 0 64
+  u32 0x2c 0 1
+type BIND 0x40
+  randfill 0x00 0x40 65536
+  ptr 0x00 BKT2 100
+  u32 0x04 0 0
+  ptr 0x08 BNAME
+  u32 0x10 0 64
+  u32 0x2c 0 1
+type BKT 0x40
+  randfill 0x00 0x40 65536
+  ptr 0x00 BIND
+  ptr 0x04 BIND
+  ptr 0x08 BIND
+  ptr 0x0c BIND
+type BTAB 0x40
+  randfill 0x00 0x40 65536
+  u32 0x00 0 4
+  ptr 0x04 BIND
+  ptr 0x08 BKT
+  ptr 0x0c BIND
+  ptr 0x10 BKT
+  ptr 0x14 BIND
+  ptr 0x18 BKT
+type BLINK 0x100
+  randfill 0x00 0x100 65536
+  ptr 0x04 BTAB
+func Binding__GetString
+  arg 0 ptr BIND
+func BindingTable__GetString
+  arg 0 ptr BTAB
+  arg 1 int 0 7
+func TGenericLinker__GetBindingTableString
+  arg 0 ptr BLINK
