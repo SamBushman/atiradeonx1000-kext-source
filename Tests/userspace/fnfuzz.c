@@ -646,7 +646,20 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
 }
 
 static unsigned *last_arena[3];
+static void trial_log(const cand_t *c, unsigned seed, int mode, int img) {
+    /* FNFUZZ_TRIALLOG=file: append (and flush to disk) one line BEFORE each child is forked, so a kernel panic that takes the machine down leaves the trial, image and seed that was running as the last line */
+    static int lfd = -2; static unsigned long nrun;
+    if (lfd == -2) { const char *f = getenv("FNFUZZ_TRIALLOG"); lfd = f ? open(f, O_WRONLY | O_CREAT | O_APPEND, 0644) : -1; }
+    if (lfd < 0) return;
+    char b[160]; int n = snprintf(b, sizeof b, "RUN %lu id %d seed %u mode %d img %c fill2 %d alarm %u\n", ++nrun, c->id, seed, mode, img ? 'R' : 'S', use_fill2, alarm_us);
+    (void)!write(lfd, b, n);
+#ifdef F_FULLFSYNC
+    fcntl(lfd, F_FULLFSYNC, 0);
+#endif
+    fsync(lfd);
+}
 static int run_one(void *fn, const cand_t *c, unsigned seed, int mode, int img, result_t *out) {
+    trial_log(c, seed, mode, img);
     int fd[2]; if (pipe(fd)) return -1;
     fflush(stdout);   /* a child that calls exit() would flush the parent's pending lines a second time */
     pid_t p = fork();
