@@ -97,3 +97,55 @@ func TIntermediate__addBinaryMath
   arg 3 ptr TYPEDN
   arg 4 pick 0 0x10003 0x20007
   arg 5 ptr SYMTBL
+type INFOREP 0x400
+  u32 0x00 0 0x20
+  pick 0x04 0x30 0x200
+  set 0x08 0
+  randfill 0x0c 0x40 128
+type INFOSINK 0x10
+  ptr 0x08 INFOREP
+  padd 0x00 0x08 0xc
+  set 0x04 4
+# traversers: {+0xc/+0x10 visit callbacks (visit, node, traverser), +0x20 depth, +0x24 preVisit, +0x28 postVisit, +0x2c rightToLeft}
+type TRAV 0x40
+  fnq 0x0c 10 0 1
+  fnq 0x10 11 0 1
+  u32 0x20 0 3
+  u32 0x24 0 1
+  u32 0x28 0 1
+  u32 0x2c 0 1
+type VT_ANY 0x20
+  set 0x08 fnrecp
+type CHILDN 0x10
+  ptr 0x00 VT_ANY
+type UNODE 0x70
+  dval 0x00 VT_UNARY 8
+  u32 0x30 0 0x60
+  pick 0x30 5 6 7 8 9 12 13 0x57 0x58 0x20
+  ptr 0x34 TYPEDN
+  dptr 0x08 TTYPE_CFF8
+type UTRAV 0x70
+  ptr 0x34 CHILDN
+type STRAV 0x70
+  ptr 0x30 CHILDN
+  ptr 0x34 CHILDN 70
+  ptr 0x38 CHILDN 70
+func TIntermUnary__traverse
+  arg 0 ptr UTRAV
+  arg 1 ptr TRAV
+func TIntermSelection__traverse
+  arg 0 ptr STRAV
+  arg 1 ptr TRAV
+func TIntermUnary__promote
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr UNODE
+type SINKH 0x40
+  ptr 0x10 INFOREP
+  padd 0x08 0x10 0xc
+  set 0x0c 4
+type TINTER2 0x40
+  ptr 0x00 SINKH
+func TIntermediate__outputTree
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr TINTER2
+  arg 1 ptr TYPEDN 90
