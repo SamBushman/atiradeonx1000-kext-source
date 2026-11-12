@@ -108,6 +108,16 @@ static int gs_malloc;   /* FNFUZZ_GRAPHSPEC: malloc/calloc/realloc/free are stub
 static unsigned gm_next;
 #define GM_LO (ARENA_BASE + 0x16000u)
 #define GM_HI (ARENA_BASE + 0x1f000u)
+/* Imports that spawn, signal or wait for a PROCESS are always stubbed (answer 0 for popen, -1 for the rest: the "could not" path of the caller), whatever their name: a real `popen("ps -wwp %d")`
+   (GLDriver gld_printApplicationPath) inside a fuzz child hung the child, the watchdog's kill(child, SIGKILL) in run_one then panicked the G5's Tiger kernel (`mapping_alloc - empty mapping
+   block detected`, user PC = the harness's _kill stub, LR = the instruction after `bl _kill`; deterministic, 3 crashes, Nov 12). The call is still recorded in the trace, so both images are
+   compared on it; the code behind a successful popen (the fgets/index/rindex parse of the `ps` line) is not run by the fuzz. */
+static int spawn_import(const char *n) {
+    static const char *sp[] = { "popen", "pclose", "system", "fork", "vfork", "execve", "execv", "execvp", "execl", "execlp", "execle", "posix_spawn", "posix_spawnp", "kill", "killpg", "wait", "wait3", "wait4", "waitpid", NULL };
+    if (*n == '_') n++;
+    for (int i = 0; sp[i]; i++) if (!strcmp(n, sp[i])) return 1;
+    return 0;
+}
 static int stub_class(const char *n) {
     static const char *pre[] = { "Sh", "PP", "glg", "glp", "NS", "CF", "IO", "host_", "mach_", "sysctl", "scandir", "pthread_mutex_", NULL };
     if (*n == '_') n++;
@@ -116,6 +126,7 @@ static int stub_class(const char *n) {
         const char *sk = getenv("FNFUZZ_INTERPOSE_SKIP");
         while (sk && *sk) { size_t L = strcspn(sk, ","); if (L && !strncmp(n, sk, L)) return 0; sk += L + (sk[L] == ',' ? 1 : 0); }
     }
+    if (spawn_import(n)) return 1;
     for (int i = 0; pre[i]; i++) if (!strncmp(n, pre[i], strlen(pre[i]))) return 1;
     if (gs_malloc && (!strcmp(n, "malloc") || !strcmp(n, "calloc") || !strcmp(n, "realloc") || !strcmp(n, "free"))) return 1;
     return 0;
@@ -177,6 +188,7 @@ static unsigned stub_common(int idx, unsigned *a) {   /* 32-bit return: an `unsi
     if (strstr(stub_names[idx], "InfoLog")) r = (unsigned)(uintptr_t)(retblk + (((unsigned)(ret_state >> 16) % 0x1000) & ~3u));   /* a log string: callers strlen/strncpy it */
     int handled = gs_malloc && gs_semantic(stub_names[idx], a, &r);   /* graph-mode semantics: returned objects, list operations (declared with `ret` / `retpick` or built in) */
     int ctl = cur_img == 1 && imp_ctl && !strcmp(stub_names[idx], imp_ctl);
+    if (spawn_import(stub_names[idx])) { r = !strcmp(stub_names[idx], "popen") ? 0 : (unsigned)-1; if (ctl) r = ~r ^ 0x1234; return r; }   /* never run: see spawn_import */
     if (ctl) r = ~r ^ 0x1234;
     if (handled) return r;   /* a modelled import writes exactly what its semantics say, no generic out-parameter words */
     /* out parameters: the library writes results through pointer arguments (ShGetUniformTypeInfo(.., &type, &size)); a caller that reads them must see defined values, not stack residue. Every argument that is a
