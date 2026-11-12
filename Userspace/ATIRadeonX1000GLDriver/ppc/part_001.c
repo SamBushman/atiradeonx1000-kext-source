@@ -389,13 +389,12 @@ loopSetBitsLeft:
     scanCounter = *(uint *)(ctx + GLD_statusRegionSize) >> 6;
     _memset(wordByteOffset + scanCounter,0,scanCounter);
   } while( true );
-  while( true ) {
-    freeBitIndex = scanCounter + 1;
-    bitsLeft = bitsLeft + -1;
-    scanCounter = freeBitIndex;
-    if (bitsLeft == 0) break;
-    freeBitIndex = scanCounter;
-    if ((bitmapWord >> (scanCounter & 0x3f) & 1) == 0) goto setWordIndex;
+  for (freeBitIndex = 0; bitsLeft != 0; bitsLeft = bitsLeft + -1) {
+    if ((bitmapWord >> (freeBitIndex & 0x3f) & 1) == 0) {
+      scanCounter = freeBitIndex;
+      goto setWordIndex;
+    }
+    freeBitIndex = freeBitIndex + 1;
   }
   scanCounter = 0x20;
 setWordIndex:
@@ -2385,13 +2384,12 @@ loopCallFree:
       _memset(wordByteOffset + bitmapWord,0,bitmapWord);
     }
   } while( true );
-  while( true ) {
-    freeBitIndex = scanCounter + 1;
-    bitsLeft = bitsLeft + -1;
-    scanCounter = freeBitIndex;
-    if (bitsLeft == 0) break;
-    freeBitIndex = scanCounter;
-    if ((bitmapWord >> (scanCounter & 0x3f) & 1) == 0) goto storeBitmap;
+  for (freeBitIndex = 0; bitsLeft != 0; bitsLeft = bitsLeft + -1) {
+    if ((bitmapWord >> (freeBitIndex & 0x3f) & 1) == 0) {
+      scanCounter = freeBitIndex;
+      goto storeBitmap;
+    }
+    freeBitIndex = freeBitIndex + 1;
   }
   scanCounter = 0x20;
 storeBitmap:

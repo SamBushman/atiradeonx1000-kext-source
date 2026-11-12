@@ -188,6 +188,7 @@ static unsigned stub_common(int idx, unsigned *a) {   /* 32-bit return: an `unsi
     if (strstr(stub_names[idx], "InfoLog")) r = (unsigned)(uintptr_t)(retblk + (((unsigned)(ret_state >> 16) % 0x1000) & ~3u));   /* a log string: callers strlen/strncpy it */
     int handled = gs_malloc && gs_semantic(stub_names[idx], a, &r);   /* graph-mode semantics: returned objects, list operations (declared with `ret` / `retpick` or built in) */
     int ctl = cur_img == 1 && imp_ctl && !strcmp(stub_names[idx], imp_ctl);
+    { static int dump2 = -1; if (dump2 < 0) dump2 = getenv("FNFUZZ_IMPDUMP") != NULL; if (dump2) fprintf(stderr, "      -> %x\n", ctl ? ~r ^ 0x1234 : r); }   /* FNFUZZ_IMPDUMP: the answer the generic stub gives (a graph-mode semantic stub or a spawn_import answer may replace it) */
     if (spawn_import(stub_names[idx])) { r = !strcmp(stub_names[idx], "popen") ? 0 : (unsigned)-1; if (ctl) r = ~r ^ 0x1234; return r; }   /* never run: see spawn_import */
     if (ctl) r = ~r ^ 0x1234;
     if (handled) return r;   /* a modelled import writes exactly what its semantics say, no generic out-parameter words */

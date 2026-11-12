@@ -3307,6 +3307,11 @@ setEntryHeader4:
 }
 
 /* fragmentTranslateRfr @ 0x42e00 (4024 bytes) */
+#define entryHeader tokRec.header
+#define ilInstADst tokRec.dst
+#define ilInstADstMask tokRec.mask
+#define ilInstASrc tokRec.src
+#define ilInstASwzArray tokRec.swz
 int fragmentTranslateRfr(emitter, slot, instr)
   int emitter;
   undefined4 slot;
@@ -3322,11 +3327,13 @@ int fragmentTranslateRfr(emitter, slot, instr)
   uint *tokenWritePtr2;
   int *bufferDataPtr;
   short tempRegister;
-  undefined4 entryHeader;
-  undefined4 ilInstADst;
-  uint ilInstADstMask;
-  undefined4 ilInstASrc[3];
-  undefined *ilInstASwzArray [11];
+  struct {
+    undefined4 header;
+    undefined4 dst;
+    uint mask;
+    undefined4 src[3];
+    undefined *swz[3];
+  } tokRec;   /* one 9-word record {header, dst, mask, src[0..2], swz[0..2]}: the stock memsets it with one _memset(&record, 0, 0x24) and the emit loops read src[k] and the word 3 behind it (swz[k]) through one pointer, so the block must stay contiguous in the frame in this order (frame offsets 0x38..0x58; class #269) */
   
   _memset(&entryHeader,0,0x24);
   bufferCount = *(int *)(emitter + 0x24);
@@ -3855,6 +3862,11 @@ setEntryHeader:
   }
   return bufferCount;
 }
+#undef entryHeader
+#undef ilInstADst
+#undef ilInstADstMask
+#undef ilInstASrc
+#undef ilInstASwzArray
 
 /* fragmentTranslateFfw @ 0x43df0 (352 bytes) */
 int fragmentTranslateFfw(translator, slot, ilInstr)
