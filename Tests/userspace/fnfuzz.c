@@ -309,6 +309,8 @@ static void __attribute__((noinline)) fill_stack(void) { volatile unsigned buf[8
        (`ret`/`retpick` after a `func` line apply to that function only, before any `func` line to all) ret IMPORT TYPE          the stubbed import returns a fresh TYPE graph on every call (parser/stream/list objects: PPParserCreate, PPStreamCreate, ...)
        (top level) retpick IMPORT V1 V2 ..  the stubbed import returns one of the values (an error code, a count)
        dptr OFF NAME                      +OFF = the address of FNFUZZ_DATA symbol NAME in the image under test (a class vtable)
+       fnq OFF IDX V1 [V2..]              +OFF = callback IDX (0..15), records r3, returns one of the values (a virtual method returning a qualifier / basic type / count)
+       fnqp OFF IDX TYPE [PCT]            same, returns a pointer to a fresh TYPE node (a virtual method returning a child or a type object)
        fn OFF                             +OFF = the address of a harmless harness function (a callback slot the code under test calls: same address in both images)
        fnd OFF                            same, for a callback that takes (int, double) and returns the double
        fnrecv OFF                         same, for a slot called as (int, int, double, double, double, double): records r3, r4 and f1..f4 (the vertex dispatchers pass the float registers through)
@@ -328,7 +330,7 @@ typedef struct { unsigned off; int kind; unsigned a, b, c; int n; unsigned v[8];
 typedef struct { char name[32]; unsigned size; int nf; gfield_t f[96]; } gtype_t;
 typedef struct { int n; int kind; unsigned a, b; int pct; unsigned v[64]; int nv; char tname[32]; char text[96]; } garg_t;
 typedef struct { char name[96]; int na; garg_t a[16]; } gfunc_t;
-enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD, GF_FNREC3A, GF_FNRECA, GF_FFILL, GF_DPTR };
+enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD, GF_FNREC3A, GF_FNRECA, GF_FFILL, GF_DPTR, GF_FNQ, GF_FNQP };
 enum { GA_PTR = 1, GA_INT, GA_PICK, GA_RAND, GA_NULL, GA_NAME, GA_STR, GA_REL };
 static unsigned g_names[64]; static int g_nnames;
 typedef struct { char name[48]; char tname[32]; unsigned v[8]; int nv; char func[96]; int pct; } gret_t;
@@ -345,6 +347,10 @@ static int gs_recv(int a, int b, double c, double d, double e, double f) { unsig
 static int gs_recw(int a, double c, double d, double e, double f) { return gs_recv(a, 0, c, d, e, f); }   /* `fnrecw`: a slot called as (int, double x4): r3 and f1..f4 */
 static int gs_recp(int a, int b) { gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)a; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)b; if (getenv("FNFUZZ_RECDUMP")) fprintf(stderr, "  [%s recp r3=%08x r4=%08x]\n", cur_img ? "R" : "S", (unsigned)a, (unsigned)b); gs_rec_n++; return 0; }   /* `fnrecp`: a slot called as (int, int): r3 and r4 */
 static int gs_rec1(int a) { return gs_recp(a, 0); }   /* `fnrec1`: a slot called as (int): r3 only */
+static unsigned gs_qv[16];   /* return values of the `fnq` / `fnqp` callbacks (set while the graph is built) */
+#define GS_Q(N) static int gs_q##N(int a) { return gs_recp(a, 0) + (int)gs_qv[N]; }
+GS_Q(0) GS_Q(1) GS_Q(2) GS_Q(3) GS_Q(4) GS_Q(5) GS_Q(6) GS_Q(7) GS_Q(8) GS_Q(9) GS_Q(10) GS_Q(11) GS_Q(12) GS_Q(13) GS_Q(14) GS_Q(15)
+static int (*const gs_qtab[16])(int) = { gs_q0, gs_q1, gs_q2, gs_q3, gs_q4, gs_q5, gs_q6, gs_q7, gs_q8, gs_q9, gs_q10, gs_q11, gs_q12, gs_q13, gs_q14, gs_q15 };
 static int gs_rec3(int a, int b, int c) { gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)a; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)b; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)c; gs_rec_n++; return 0; }   /* fnrec3: r3, r4, r5 */
 static int gs_rec3a(int a, int b, int c) { gs_rec3(a, b, c); return a; }   /* fnrec3a: r3, r4, r5 recorded, r3 returned (a slot whose result the function tests: r3 is a field the spec controls) */
 static int gs_rec(int a, int b, int c, int d) { gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)a; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)b; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)c; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)d; gs_rec_n++; return 0; }
@@ -405,6 +411,8 @@ static void load_graphspec(const char *path) {
             else if (!strcmp(tok[0], "fnrecw")) g->kind = GF_FNRECW;
             else if (!strcmp(tok[0], "fnrecp")) g->kind = GF_FNRECP;
             else if (!strcmp(tok[0], "fnrec1")) g->kind = GF_FNREC1;
+            else if (!strcmp(tok[0], "fnq") && nt >= 4) { g->kind = GF_FNQ; g->c = gnum(tok[2]); for (int i = 3; i < nt && g->n < 8; i++) g->v[g->n++] = gnum(tok[i]); }   /* fnq OFF IDX V1 [V2..]: +OFF = callback number IDX (0..15; records r3, returns one of the values: a virtual method that returns a qualifier, a basic type, a count) */
+            else if (!strcmp(tok[0], "fnqp") && nt >= 4) { g->kind = GF_FNQP; g->c = gnum(tok[2]); snprintf(g->tname, sizeof g->tname, "%s", tok[3]); g->a = nt >= 5 ? gnum(tok[4]) : 100; }   /* fnqp OFF IDX TYPE [PCT]: same, the callback returns a pointer to a fresh TYPE node (a virtual method that returns a child / a type object), NULL in 100-PCT percent */
             else if (!strcmp(tok[0], "fnrec3")) g->kind = GF_FNREC3;
             else if (!strcmp(tok[0], "fnrec3a")) g->kind = GF_FNREC3A;
             else if (!strcmp(tok[0], "fnreca")) g->kind = GF_FNRECA;
@@ -427,7 +435,8 @@ static unsigned gb_alloc(unsigned size) { unsigned a = gb_next; gb_next += (size
 static unsigned grange(unsigned lo, unsigned hi) { return hi <= lo ? lo : lo + rnd32() % (hi - lo + 1); }
 static unsigned gb_build(gtype_t *t, int depth) {
     unsigned a = gb_alloc(t->size); unsigned char *b = (unsigned char *)a;
-    if (depth > 6) return a;
+    static int maxdepth = -1; if (maxdepth < 0) { const char *e = getenv("FNFUZZ_GDEPTH"); maxdepth = e ? atoi(e) : 6; }   /* FNFUZZ_GDEPTH: nesting limit of the graph builder (default 6; a node deeper than that stays zero-filled) */
+    if (depth > maxdepth) return a;
     for (int i = 0; i < t->nf; i++) {
         gfield_t *g = &t->f[i];
         switch (g->kind) {
@@ -454,6 +463,8 @@ static unsigned gb_build(gtype_t *t, int depth) {
         case GF_FNRECW: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_recw; break;
         case GF_FNRECP: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_recp; break;
         case GF_FNREC1: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_rec1; break;
+        case GF_FNQ: if (g->c < 16) { gs_qv[g->c] = g->v[rnd32() % g->n]; *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_qtab[g->c]; } break;
+        case GF_FNQP: if (g->c < 16) { gs_qv[g->c] = (rnd32() % 100 < g->a) ? gb_build(gfind_type(g->tname), depth + 1) : 0; *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_qtab[g->c]; } break;
         case GF_FFILL: { float lo, hi; memcpy(&lo, &g->v[0], 4); memcpy(&hi, &g->v[1], 4); for (unsigned k = 0; k + 4 <= g->a; k += 4) { unsigned r = rnd32(), w; if ((r & 15) == 0) { static const unsigned sp[4] = { 0x7fc00000u, 0x7f800000u, 0xff800000u, 0x80000000u }; w = sp[(r >> 4) & 3]; } else { float f = lo + (hi - lo) * ((float)(rnd32() >> 8) / 16777216.0f); memcpy(&w, &f, 4); } *(unsigned *)(b + g->off + k) = w; } break; }
         case GF_RANDFILL: for (unsigned k = 0; k + 4 <= g->a; k += 4) *(unsigned *)(b + g->off + k) = rnd32() % g->b; break;   /* LEN bytes of small random words: a block of fields the code only reads */
         case GF_U8: b[g->off] = (unsigned char)grange(g->a, g->b); break;

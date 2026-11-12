@@ -1,0 +1,136 @@
+# glp_pctx_spec.txt - TParseContext checks (libGLProgrammability): parse context {+8 info sink, +0x18 error count}, info sink {+0 std::string data pointer, +4 flags (4 = append to the string)},
+# parse-tree nodes whose virtual methods (vtable slots) are harness callbacks that return controlled values (`fnq` / `fnqp`).
+type INFOREP 0x400
+  u32 0x00 0 0x20
+  pick 0x04 0x30 0x200
+  set 0x08 0
+  randfill 0x0c 0x40 128
+type INFOSINK 0x10
+  ptr 0x08 INFOREP
+  padd 0x00 0x08 0xc
+  set 0x04 4
+type PCTX 0x100
+  ptr 0x08 INFOSINK
+  u32 0x18 0 5
+type POOLPAGE 0x9000
+type POOL 0x40
+  set 0x04 0x8000
+  set 0x0c 0xf
+  set 0x10 0x8
+  set 0x14 0x10
+  ptr 0x1c POOLPAGE
+type HOLDER 0x10
+  ptr 0x00 POOL
+# --- containsSampler(this, type)
+type VT_TOP 0x100
+  fnq 0x20 0 5 6 12 13 14 14 1 3
+type VT_LEAF 0x100
+  fnq 0x20 1 1 3 5 7 9 13
+type TY_LEAF 0x30
+  ptr 0x00 VT_LEAF
+type FLDARR 0x20
+  ptr 0x00 TY_LEAF
+  ptr 0x08 TY_LEAF
+  ptr 0x10 TY_LEAF
+type FLDLIST 0x10
+  ptr 0x04 FLDARR
+  padd 0x08 0x04 0 8 16 24
+type TY_TOP 0x30
+  ptr 0x00 VT_TOP
+  ptr 0x08 FLDLIST
+func TParseContext__containsSampler
+  arg 0 ptr PCTX
+  arg 1 ptr TY_TOP
+# --- constErrorCheck(this, typed), integerErrorCheck(this, typed, str)
+type VT_TYPED 0x100
+  fnq 0x00 2 0x10005 0x20003 0
+  fnq 0x40 4 2 2 2 3 0
+  fnq 0x44 3 2 0 1 5
+  fnq 0x48 5 1 1 2 0
+type TYPED 0x30
+  ptr 0x00 VT_TYPED
+func TParseContext__constErrorCheck
+  arg 0 ptr PCTX
+  arg 1 ptr TYPED
+func TParseContext__integerErrorCheck
+  arg 0 ptr PCTX
+  arg 1 ptr TYPED
+  arg 2 str foo|bar
+# --- assignError(this, loc, str, text1, text2): text = {+4 std::string data pointer}
+type TSTRREP 0x80
+  u32 0x00 0 0x30
+  set 0x04 0x40
+  set 0x08 0
+  randfill 0x0c 0x40 128
+type TSTR 0x10
+  ptr 0x08 TSTRREP
+  padd 0x04 0x08 0xc
+func TParseContext__assignError
+  arg 0 ptr PCTX
+  arg 1 int 0 0x70005
+  arg 2 str a|bcd
+  arg 3 ptr TSTR
+  arg 4 ptr TSTR
+# --- canNodeBeRemoved(this, node)
+type VT_CHILD 0x100
+  fnqp 0x14 8 TYPEDC
+type VT_TYPEDC 0x100
+  fnq 0x18 9 0 1
+type TYPEDC 0x30
+  ptr 0x00 VT_TYPEDC
+type CHILD 0x30
+  ptr 0x00 VT_CHILD
+type CHARR 0x20
+  ptr 0x00 CHILD
+  ptr 0x04 CHILD
+  ptr 0x08 CHILD
+  ptr 0x0c CHILD
+type SEQ 0x10
+  ptr 0x04 CHARR
+  padd 0x08 0x04 0 4 8 12 16
+type VT_OP 0x100
+  fnqp 0x64 7 SEQ
+type OPNODE 0x40
+  ptr 0x00 VT_OP
+  u32 0x30 0x60 0x76
+type VT_NODE 0x100
+  fnqp 0x1c 6 OPNODE 85
+type NODE 0x30
+  ptr 0x00 VT_NODE
+func TParseContext__canNodeBeRemoved
+  arg 0 ptr PCTX
+  arg 1 ptr NODE
+# --- paramErrorCheck(this, loc, qualifier1, qualifier2, type): type's virtual method +0x28 gets (type, qualifier2)
+type VT_PTYPE 0x100
+  set 0x28 fnrecp
+type PTYPE 0x30
+  ptr 0x00 VT_PTYPE
+func TParseContext__paramErrorCheck
+  arg 0 ptr PCTX
+  arg 1 int 0 0x70005
+  arg 2 pick 0 2 1 5 9
+  arg 3 pick 0 1 2 3 4 9 11
+  arg 4 ptr PTYPE
+# --- reservedErrorCheck(this, loc, text): this+4 -> {+0 begin, +4 end} (levels), text = std::string with a pool allocator (same layout)
+type PSTRREP 0x80
+  u32 0x00 3 6
+  set 0x04 0x40
+  set 0x08 0
+  istr 0x0c gl_abc|abc|gl_|gx_|glx
+type PSOBJ 0x10
+  ptr 0x08 PSTRREP
+  padd 0x00 0x08 0xc
+type LEVARR 0x20
+  u32 0x00 1 9
+type LEVELS 0x10
+  ptr 0x00 LEVARR
+  padd 0x04 0x00 4 8 12
+type PCTX2 0x100
+  ptr 0x04 LEVELS
+  ptr 0x08 INFOSINK
+  u32 0x18 0 5
+func TParseContext__reservedErrorCheck
+  gptr _gPollAllocThreadData HOLDER
+  arg 0 ptr PCTX2
+  arg 1 int 0 0x70005
+  arg 2 ptr PSOBJ
