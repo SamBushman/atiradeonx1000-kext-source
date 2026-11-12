@@ -1680,7 +1680,7 @@ switchComponentSelect:
 componentSelectDefault:
     loopIndex = loopIndex + 1;
     if (3 < loopIndex) {
-      return;
+      return outCursor;
     }
   } while( true );
 }

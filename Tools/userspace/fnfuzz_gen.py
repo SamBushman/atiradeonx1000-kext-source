@@ -133,6 +133,10 @@ for i, (a, op, arg) in enumerate(seq):
             ops2 = [x.strip() for x in arg2.split(';')[0].split(',')]
             if _reads(arg2, 'r3') or (op2.startswith(('st', 'cmp')) and ops2 and ops2[0] == 'r3'):
                 RETUSED.add(ta); break
+            # r3 still holds the result when the next call starts: it is that call's first argument (glprog _glpWriteSourceOperand: the cursor the Swizzle / ExtendedSwizzle call returns goes
+            # straight into _glpWriteOperandSize, no instruction reads it in between)
+            if op2 in ('bl', 'bl+', 'bl-', 'bctrl'):
+                RETUSED.add(ta); break
             if op2 in ('bl', 'bctrl', 'blr', 'b') or (ops2 and ops2[0] == 'r3' and not op2.startswith(('st', 'cmp', 'b'))): break
 # functions the decompile reads implicit inputs in (`in_r11`/`in_r12`: registers the caller sets outside the ABI's argument registers): not callable in isolation
 IMPLICIT = set()
