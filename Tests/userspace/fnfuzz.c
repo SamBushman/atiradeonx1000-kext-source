@@ -381,7 +381,10 @@ static int gs_rec(int a, int b, int c, int d) { gs_rec_hash = (gs_rec_hash * 100
 #define VT_TR 0x4f100000u
 #define VT_WORDS 0x800u
 static int vtmode;
-static int gs_vtcb(int a, int b, int c, int d) { (void)b; (void)c; (void)d; gs_rec(a, 0, 0, 0);   /* r3 only: a virtual method that takes just `this` is called with whatever the registers held (the stock reloads only r3 on a second call), recording r4..r6 would compare dead registers */ unsigned k = rnd32() % 8; return k < 3 ? 0 : k < 5 ? (int)(rnd32() % 16) : (int)arena_ptr(); }
+static unsigned obj_word(void);
+static int gs_vtcb(int a, int b, int c, int d) { (void)b; (void)c; (void)d; gs_rec(a, 0, 0, 0);   /* r3 only: a virtual method that takes just `this` is called with whatever the registers held (the stock reloads only r3 on a second call), recording r4..r6 would compare dead registers */ if (objmode) return (int)obj_word(); unsigned k = rnd32() % 8; return k < 3 ? 0 : k < 5 ? (int)(rnd32() % 16) : (int)arena_ptr(); }
+static unsigned objp = 40;   /* FNFUZZ_OBJPTR=<percent>: share of object-slot words (and of virtual-method answers) that are object pointers; the rest: 1/3 zero, 1/2 small, 1/6 below 4096 */
+static unsigned obj_word(void) { unsigned r = rnd32() % 100; if (r < objp) return arena_ptr(); r = rnd32() % 6; return r < 2 ? 0 : r < 5 ? rnd32() % 16 : rnd32() % 4096; }
 static unsigned vt_ptr(void) { return VT_BASE + 4 * (rnd32() % VT_WORDS); }
 static int gs_reca(int a, int b, int c, int d) { gs_rec(a, b, c, d); return a; }   /* fnreca: r3..r6 recorded, r3 returned */
 static double gs_nopd(int a, double x) { (void)a; return x; }   /* a callback slot that returns a double: the argument back */
@@ -637,7 +640,7 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     }
     if (interpose) { ncalls_c = 0; trace_c = 0; memset(mask_c, 0, sizeof mask_c); ret_state = (unsigned long long)seed * 0x9E3779B97F4A7C15ULL + c->id; install_stubs(cur_img); }
     unsigned *w = (unsigned *)ARENA_BASE;
-    for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned k = rnd32() % 10; w[i] = objmode ? ((i % 16 == 0) ? vt_ptr() : (k < 2 ? 0 : k < 5 ? rnd32() % 16 : k < 6 ? rnd32() % 4096 : arena_ptr())) : graph ? (k < 2 ? 0 : k < 4 ? rnd32() % 64 : (vtmode && rnd32() % 4 == 0) ? vt_ptr() : arena_ptr()) : tiny ? (k < 6 ? 0 : k < 9 ? rnd32() % 16 : arena_ptr()) : (k < 3 ? 0 : k < 6 ? rnd32() % 64 : k < 7 ? (narrow ? rnd32() % 256 : rnd32()) : arena_ptr()); }
+    for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned k = rnd32() % 10; w[i] = objmode ? ((i % 16 == 0) ? vt_ptr() : obj_word()) : graph ? (k < 2 ? 0 : k < 4 ? rnd32() % 64 : (vtmode && rnd32() % 4 == 0) ? vt_ptr() : arena_ptr()) : tiny ? (k < 6 ? 0 : k < 9 ? rnd32() % 16 : arena_ptr()) : (k < 3 ? 0 : k < 6 ? rnd32() % 64 : k < 7 ? (narrow ? rnd32() % 256 : rnd32()) : arena_ptr()); }
     if (nanmode) for (unsigned i = 0; i < ARENA_SIZE / 4; i++) if (rnd32() % 24 == 0) w[i] = nan_wrd[rnd32() % (sizeof nan_wrd / sizeof *nan_wrd)];
     unsigned ia[8]; double da[13]; int k = 0, j = 0;
     for (const char *p = c->pc; *p && *p != '-'; p++) {
@@ -719,10 +722,27 @@ static int same(const result_t *a, const result_t *b, char rc) {
     return 1;
 }
 
+static void repair_loop(void *fn0, cand_t *c, unsigned seed, int mode) {
+    ncur_patch = 0; memset(cur_apatch, 0, sizeof cur_apatch); unsigned last_pc = 0, last_ra = 0;
+    for (int it = 0; it < 16; it++) { result_t r0; run_one(fn0, c, seed, mode, 0, &r0);
+                    if (getenv("FNFUZZ_REPAIR_DEBUG")) printf("  repair %s trial %d it %d: st=%d fix=%u src=%08x arg=%u disp=%d args %x %x pc %08x word %08x ra-value %08x\n", c->name, 0, it, r0.status, r0.fix_valid, r0.fix_src, r0.fix_arg, (int)r0.fix_disp, r0.args[0], r0.args[1], r0.fault_pc, r0.fault_pc ? 0u : 0u, r0.fault_ra);
+                    if ((r0.status != 11 && r0.status != 10) || !r0.fix_valid) break;
+                    if (r0.fault_pc == last_pc && r0.fault_ra == last_ra) break;   /* the patch did not move the fault: the base is not what the backward scan found */
+                    last_pc = r0.fault_pc; last_ra = r0.fault_ra;
+                    int disp = (int)r0.fix_disp; unsigned lo = ARENA_BASE + 0x1000 + (disp < 0 ? -disp : 0), hi = ARENA_BASE + ARENA_SIZE - 0x1000 - (disp > 0 ? disp : 0) - 0x80;
+                    if (hi <= lo) break;
+                    unsigned h = (seed ^ 0x5bd1e995u) * (unsigned)(it * 2 + 3); h ^= h >> 15; h *= 0x2c1b3c6du; h ^= h >> 12;
+                    unsigned val = (lo + h % (hi - lo)) & ~15u; if (val < lo) val += 16;
+                    if (r0.fix_arg) { cur_apatch[r0.fix_arg - 1] = val; continue; }
+                    int q = 0; while (q < ncur_patch && cur_patch[q].addr != r0.fix_src) q++;
+                    if (q == ncur_patch) { if (ncur_patch >= 16) break; ncur_patch++; }
+                    cur_patch[q].addr = r0.fix_src; cur_patch[q].val = val; }
+}
+
 int main(int argc, char **argv) {
     if (argc < 4) { fprintf(stderr, "usage: fnfuzz LEDGER.tsv STOCK REBUILT [trials] [filter|@first,count]\n"); return 2; }
     nanmode = getenv("FNFUZZ_NANMODE") != NULL; nancanon = getenv("FNFUZZ_NANCANON") != NULL;
-    narrow = getenv("FNFUZZ_PROFILE") && (!strcmp(getenv("FNFUZZ_PROFILE"), "narrow") || !strcmp(getenv("FNFUZZ_PROFILE"), "tiny")); tiny = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "tiny"); graph = getenv("FNFUZZ_PROFILE") && (!strcmp(getenv("FNFUZZ_PROFILE"), "graph") || !strcmp(getenv("FNFUZZ_PROFILE"), "obj")); objmode = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "obj");
+    narrow = getenv("FNFUZZ_PROFILE") && (!strcmp(getenv("FNFUZZ_PROFILE"), "narrow") || !strcmp(getenv("FNFUZZ_PROFILE"), "tiny")); tiny = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "tiny"); graph = getenv("FNFUZZ_PROFILE") && (!strcmp(getenv("FNFUZZ_PROFILE"), "graph") || !strcmp(getenv("FNFUZZ_PROFILE"), "obj")); objmode = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "obj"); if (getenv("FNFUZZ_OBJPTR")) objp = (unsigned)atoi(getenv("FNFUZZ_OBJPTR"));
     int trials = argc > 4 ? atoi(argv[4]) : 12; const char *flt = argc > 5 ? argv[5] : NULL;
     FILE *f = fopen(argv[1], "r"); if (!f) { perror(argv[1]); return 2; }
     char line[512], anchor[96]; unsigned a_stock = 0, a_reb = 0;
@@ -749,7 +769,16 @@ int main(int argc, char **argv) {
         int img = getenv("FNFUZZ_ONE")[0] == 'R', t = atoi(getenv("FNFUZZ_ONE") + 2);
         for (int i = first; i < nc; i++) { cand_t *c = &cs[i]; if (flt && flt[0] != '@' && !strstr(c->name, flt)) continue;
             void *fnp = (void *)(ap[img] + ((img ? c->reb_off : c->stock_addr) - (img ? a_reb : a_stock)));
-            cur_img = img; nrng = 0; image_ranges(img_hdr[0]); image_ranges(img_hdr[1]); nohandlers = 1; wfd = open("/dev/null", 1);
+            cur_img = img; nrng = 0; image_ranges(img_hdr[0]); image_ranges(img_hdr[1]);
+            { unsigned sd = 0x9e3779b1u * (t + 1) + c->id * 7919u; if (getenv("FNFUZZ_REPAIR") || getenv("FNFUZZ_PATCHES") || getenv("FNFUZZ_APATCHES")) { cur_addrdep = 0; 
+                /* under gdb the forked repair children inherit gdb's Mach exception ports (their faults never reach the SIGSEGV handler), so the repair loop finds nothing there: run once WITHOUT gdb to print
+                   "patches: a=v,... apatch: ..." and give them back with FNFUZZ_PATCHES / FNFUZZ_APATCHES (hex, a:v,a:v / v,v,..) */
+                if (getenv("FNFUZZ_PATCHES") || getenv("FNFUZZ_APATCHES")) { ncur_patch = 0; memset(cur_apatch, 0, sizeof cur_apatch); const char *pp = getenv("FNFUZZ_PATCHES"); unsigned a, v; int nn;
+                    while (pp && *pp && ncur_patch < 16 && sscanf(pp, "%x:%x%n", &a, &v, &nn) == 2) { cur_patch[ncur_patch].addr = a; cur_patch[ncur_patch].val = v; ncur_patch++; pp += nn; if (*pp == ',') pp++; }
+                    pp = getenv("FNFUZZ_APATCHES"); for (int q = 0; pp && *pp && q < 8 && sscanf(pp, "%x%n", &v, &nn) == 1; q++) { cur_apatch[q] = v; pp += nn; if (*pp == ',') pp++; } }
+                else if (getenv("FNFUZZ_REPAIR")) repair_loop((void *)(ap[0] + (c->stock_addr - a_stock)), c, sd, c->rc == 'd');
+                fprintf(stderr, "repair: %d patches:", ncur_patch); for (int q = 0; q < ncur_patch; q++) fprintf(stderr, " %x:%x", cur_patch[q].addr, cur_patch[q].val); fprintf(stderr, " apatch:"); for (int q = 0; q < 8; q++) fprintf(stderr, " %x", cur_apatch[q]); fprintf(stderr, "\n"); } }
+            nohandlers = 1; wfd = open("/dev/null", 1);
             printf("%s %s at %p trial %d\n", img ? "rebuilt" : "stock", c->name, fnp, t); fflush(stdout);
             child(fnp, c, 0x9e3779b1u * (t + 1) + c->id * 7919u, c->rc == 'd'); return 0; }
     }
@@ -765,19 +794,7 @@ int main(int argc, char **argv) {
             for (int mode = 0; mode < (c->rc == 'd' ? 2 : 1); mode++) {
                 if (c->rc == 'd' && mode == 0) { /* the digest is checked in the integer-return run, f1 in the second */ }
                 ncur_patch = 0; memset(cur_apatch, 0, sizeof cur_apatch); unsigned last_pc = 0, last_ra = 0;
-                if (getenv("FNFUZZ_REPAIR")) for (int it = 0; it < 16; it++) { result_t r0; run_one(fn[0], c, seed, mode, 0, &r0);
-                    if (getenv("FNFUZZ_REPAIR_DEBUG")) printf("  repair %s trial %d it %d: st=%d fix=%u src=%08x arg=%u disp=%d args %x %x pc %08x word %08x ra-value %08x\n", c->name, t, it, r0.status, r0.fix_valid, r0.fix_src, r0.fix_arg, (int)r0.fix_disp, r0.args[0], r0.args[1], r0.fault_pc, r0.fault_pc ? 0u : 0u, r0.fault_ra);
-                    if ((r0.status != 11 && r0.status != 10) || !r0.fix_valid) break;
-                    if (r0.fault_pc == last_pc && r0.fault_ra == last_ra) break;   /* the patch did not move the fault: the base is not what the backward scan found */
-                    last_pc = r0.fault_pc; last_ra = r0.fault_ra;
-                    int disp = (int)r0.fix_disp; unsigned lo = ARENA_BASE + 0x1000 + (disp < 0 ? -disp : 0), hi = ARENA_BASE + ARENA_SIZE - 0x1000 - (disp > 0 ? disp : 0) - 0x80;
-                    if (hi <= lo) break;
-                    unsigned h = (seed ^ 0x5bd1e995u) * (unsigned)(it * 2 + 3); h ^= h >> 15; h *= 0x2c1b3c6du; h ^= h >> 12;
-                    unsigned val = (lo + h % (hi - lo)) & ~15u; if (val < lo) val += 16;
-                    if (r0.fix_arg) { cur_apatch[r0.fix_arg - 1] = val; continue; }
-                    int q = 0; while (q < ncur_patch && cur_patch[q].addr != r0.fix_src) q++;
-                    if (q == ncur_patch) { if (ncur_patch >= 16) break; ncur_patch++; }
-                    cur_patch[q].addr = r0.fix_src; cur_patch[q].val = val; }
+                if (getenv("FNFUZZ_REPAIR")) repair_loop(fn[0], c, seed, mode);
                 run_one(fn[0], c, seed, mode, 0, &a);
                 use_fill2 = 1; run_one(fn[0], c, seed, mode, 0, &a2); use_fill2 = 0;
                 run_one(fn[1], c, seed, mode, 1, &b);
