@@ -783,7 +783,7 @@ int main(int argc, char **argv) {
                 const char *mz = getenv("FNFUZZ_MAPZERO"); unsigned ma; int nn;
                 while (mz && *mz && sscanf(mz, "%x%n", &ma, &nn) == 1) { void *m = mmap((void *)(ma & ~0xfffu), 0x2000, PROT_READ | PROT_WRITE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0); fprintf(stderr, "mapzero %08x: %s\n", ma & ~0xfffu, m == MAP_FAILED ? "FAILED" : "ok"); mz += nn; if (*mz == ',') mz++; }
                 for (int im = 0; im < 2; im++) { result_t r; void *fi = (void *)(ap[im] + ((im ? c->reb_off : c->stock_addr) - (im ? a_reb : a_stock))); run_one(fi, c, sd2(t, c), c->rc == 'd', im, &r);
-                    printf("%s trial %d: status %d r3 %08x digest %08x fault_pc %08x ra %08x\n", im ? "rebuilt" : "stock", t, r.status, r.r3, r.digest, r.fault_pc, r.fault_ra); }
+                    printf("%s trial %d: status %d r3 %08x digest %08x fault_pc %08x ra %08x disp %d word@pc %08x\n", im ? "rebuilt" : "stock", t, r.status, r.r3, r.digest, r.fault_pc, r.fault_ra, (int)r.fix_disp, r.fault_pc ? *(unsigned *)r.fault_pc : 0u); }
                 return 0; }
             nohandlers = 1; wfd = open("/dev/null", 1);
             printf("%s %s at %p trial %d\n", img ? "rebuilt" : "stock", c->name, fnp, t); fflush(stdout);
