@@ -1,0 +1,1 @@
+^(Block|IfHeader|IfFooter|ContinueBlock|BreakBlock|FuncEndBlock|ExitBlock|EntryBlock|AnyBlock|BreakOrContinueBlock|PostLoopFooter|IfHeaderStatic|IfFooterStatic)__

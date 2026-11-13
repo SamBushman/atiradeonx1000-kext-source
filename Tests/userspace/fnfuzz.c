@@ -346,10 +346,10 @@ static void __attribute__((noinline)) fill_stack(void) { volatile unsigned buf[8
        arg N ptr TYPE [PCT] | arg N int LO HI | arg N pick V1 V2 ... | arg N rand | arg N null | arg N str TEXT (a NUL-terminated copy of one of the `|`-separated alternatives) | arg N name [PCT]   (name: one of the recorded hash names, else a random small one)
    Numbers are decimal or 0x hex. */
 typedef struct { unsigned off; int kind; unsigned a, b, c; int n; unsigned v[8]; char tname[32]; char text[96]; } gfield_t;
-typedef struct { char name[32]; unsigned size; int nf; gfield_t f[96]; } gtype_t;
+typedef struct { char name[32]; unsigned size; int nf; gfield_t f[96]; int share; unsigned inst; } gtype_t;   /* `type NAME SIZE [share]`: a `share` type is built once per function (every pointer to it, in any object or argument, is the same instance: the one compiler object every block of a graph points to) */
 typedef struct { int n; int kind; unsigned a, b; int pct; unsigned v[64]; int nv; char tname[32]; char text[96]; } garg_t;
 typedef struct { char name[96]; int na; garg_t a[16]; } gfunc_t;
-enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD, GF_FNREC3A, GF_FNRECA, GF_FFILL, GF_DPTR, GF_FNQ, GF_FNQP, GF_DVAL };
+enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_OBJFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD, GF_SELF, GF_FNREC3A, GF_FNRECA, GF_FFILL, GF_DPTR, GF_FNQ, GF_FNQP, GF_DVAL };
 enum { GA_PTR = 1, GA_INT, GA_PICK, GA_RAND, GA_NULL, GA_NAME, GA_STR, GA_REL };
 static unsigned g_names[64]; static int g_nnames;
 typedef struct { char name[48]; char tname[32]; unsigned v[8]; int nv; char func[96]; int pct; } gret_t;
@@ -396,7 +396,7 @@ static void load_graphspec(const char *path) {
         char *tok[80]; int nt = 0; char *h = strchr(line, '#'); if (h) *h = 0;
         for (char *p = strtok(line, " \t\r\n"); p && nt < 80; p = strtok(NULL, " \t\r\n")) tok[nt++] = p;
         if (!nt) continue;
-        if (!strcmp(tok[0], "type") && nt >= 3) { if (ngtypes >= (int)(sizeof gtypes / sizeof *gtypes)) { fprintf(stderr, "graph spec: too many types\n"); exit(2); } ct = &gtypes[ngtypes++]; memset(ct, 0, sizeof *ct); snprintf(ct->name, sizeof ct->name, "%s", tok[1]); ct->size = gnum(tok[2]); cf = NULL; continue; }
+        if (!strcmp(tok[0], "type") && nt >= 3) { if (ngtypes >= (int)(sizeof gtypes / sizeof *gtypes)) { fprintf(stderr, "graph spec: too many types\n"); exit(2); } ct = &gtypes[ngtypes++]; memset(ct, 0, sizeof *ct); snprintf(ct->name, sizeof ct->name, "%s", tok[1]); ct->size = gnum(tok[2]); ct->share = nt >= 4 && !strcmp(tok[3], "share"); cf = NULL; continue; }
         if (!strcmp(tok[0], "ret") && nt >= 3 && ngrets < 160) { gret_t *g = &grets[ngrets++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->pct = nt >= 4 ? atoi(tok[3]) : 100; if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
         if (!strcmp(tok[0], "retpick") && nt >= 3 && ngrets < 160) { gret_t *g = &grets[ngrets++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); for (int i = 2; i < nt && g->nv < 8; i++) g->v[g->nv++] = gnum(tok[i]); if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
         if (!strcmp(tok[0], "out") && nt >= 4 && ngouts < 160) { gout_t *g = &gouts[ngouts++]; memset(g, 0, sizeof *g); snprintf(g->name, sizeof g->name, "%s", tok[1]); g->arg = atoi(tok[2]); for (int i = 3; i < nt && g->nv < 8; i++) g->v[g->nv++] = gnum(tok[i]); if (cf) snprintf(g->func, sizeof g->func, "%s", cf->name); ct = NULL; continue; }
@@ -425,12 +425,13 @@ static void load_graphspec(const char *path) {
         }
         if (ct && nt >= 2 && ct->nf < 96) {
             gfield_t *g = &ct->f[ct->nf]; memset(g, 0, sizeof *g); g->off = gnum(tok[1]); g->a = 0; g->b = 0; g->c = 100;
-            if (!strcmp(tok[0], "ptr") && nt >= 3) { g->kind = GF_PTR; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); if (nt >= 4) g->c = gnum(tok[3]); }
+            if (!strcmp(tok[0], "ptr") && nt >= 3) { g->kind = GF_PTR; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); if (nt >= 4) g->c = gnum(tok[3]); if (nt >= 5) g->a = gnum(tok[4]); }   /* ptr OFF TYPE [PCT [DELTA]]: DELTA is added to the built object's address (a pointer to the element inside an allocation that has a header word) */
             else if (!strcmp(tok[0], "rlist") && nt >= 4) { g->kind = GF_RLIST; g->a = gnum(tok[2]); g->b = gnum(tok[3]); }
             else if (!strcmp(tok[0], "list") && nt >= 6) { g->kind = GF_LIST; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->a = gnum(tok[3]); g->b = gnum(tok[4]); g->c = gnum(tok[5]); }
             else if ((!strcmp(tok[0], "u8") || !strcmp(tok[0], "u16") || !strcmp(tok[0], "u32")) && nt >= 4) { g->kind = tok[0][1] == '8' ? GF_U8 : tok[0][1] == '1' ? GF_U16 : GF_U32; g->a = gnum(tok[2]); g->b = gnum(tok[3]); }
             else if (!strcmp(tok[0], "rand")) g->kind = GF_RAND;
             else if (!strcmp(tok[0], "set") && nt >= 3) { g->kind = GF_SET; g->a = gnum(tok[2]); }
+            else if (!strcmp(tok[0], "self") && nt >= 3) { g->kind = GF_SELF; g->a = gnum(tok[2]); }   /* self DST DELTA: word at DST = this object's own address + DELTA (an intrusive list head pointing at its own sentinel) */
             else if (!strcmp(tok[0], "padd") && nt >= 4) { g->kind = GF_PADD; g->a = gnum(tok[2]); for (int i = 3; i < nt && g->n < 8; i++) g->v[g->n++] = gnum(tok[i]); }   /* padd DST SRC D1 [D2..]: word at DST = word at SRC + one of the deltas (a pointer into the same buffer, e.g. an end pointer a whole number of records past the start) */
             else if (!strcmp(tok[0], "pick")) { g->kind = GF_PICK; for (int i = 2; i < nt && g->n < 8; i++) g->v[g->n++] = gnum(tok[i]); }
             else if (!strcmp(tok[0], "hash") && nt >= 7) { g->kind = GF_HASH; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->a = gnum(tok[3]); g->b = gnum(tok[4]); g->c = gnum(tok[5]); g->n = (int)gnum(tok[6]); }
@@ -450,6 +451,7 @@ static void load_graphspec(const char *path) {
             else if (!strcmp(tok[0], "fnrec3a")) g->kind = GF_FNREC3A;
             else if (!strcmp(tok[0], "fnreca")) g->kind = GF_FNRECA;
             else if (!strcmp(tok[0], "ffill") && nt >= 5) { g->kind = GF_FFILL; g->a = gnum(tok[2]); float lo = (float)atof(tok[3]), hi = (float)atof(tok[4]); memcpy(&g->v[0], &lo, 4); memcpy(&g->v[1], &hi, 4); }   /* ffill OFF LEN LO HI: LEN bytes of random floats in LO..HI (1 in 16 is NaN / +-inf / -0) */
+            else if (!strcmp(tok[0], "objfill") && nt >= 3) { g->kind = GF_OBJFILL; g->a = gnum(tok[2]); }   /* objfill OFF LEN: LEN bytes of obj-profile words (pointers to 0x40-aligned arena slots, vtable-page pointers every 16th word, else zero / small): a field block whose pointers must be dereferenceable */
             else if (!strcmp(tok[0], "randfill") && nt >= 3) { g->kind = GF_RANDFILL; g->a = gnum(tok[2]); g->b = nt >= 4 ? gnum(tok[3]) : 4096; }
             else if (!strcmp(tok[0], "istr") && nt >= 3) { g->kind = GF_ISTR; snprintf(g->text, sizeof g->text, "%s", tok[2]); }   /* the characters inline at OFF (one of a|b|c) */
             else if (!strcmp(tok[0], "warr") && nt >= 6) { g->kind = GF_WARR; g->c = gnum(tok[2]); g->a = gnum(tok[3]); g->b = gnum(tok[4]); for (int i = 5; i < nt && g->n < 8; i++) g->v[g->n++] = gnum(tok[i]); }   /* warr OFF COUNTOFF MIN MAX v..: OFF = pointer to an array of count words drawn from v, COUNTOFF = the count word */
@@ -467,13 +469,14 @@ static int gs_nop(int a) { return a; }
 static unsigned gb_alloc(unsigned size) { unsigned a = gb_next; gb_next += (size + 15) & ~15u; if (gb_next > GM_LO) _exit(9); memset((void *)a, 0, size); return a; }
 static unsigned grange(unsigned lo, unsigned hi) { return hi <= lo ? lo : lo + rnd32() % (hi - lo + 1); }
 static unsigned gb_build(gtype_t *t, int depth) {
-    unsigned a = gb_alloc(t->size); unsigned char *b = (unsigned char *)a;
+    if (t->share && t->inst) return t->inst;
+    unsigned a = gb_alloc(t->size); unsigned char *b = (unsigned char *)a; if (t->share) t->inst = a;
     static int maxdepth = -1; if (maxdepth < 0) { const char *e = getenv("FNFUZZ_GDEPTH"); maxdepth = e ? atoi(e) : 6; }   /* FNFUZZ_GDEPTH: nesting limit of the graph builder (default 6; a node deeper than that stays zero-filled) */
     if (depth > maxdepth) return a;
     for (int i = 0; i < t->nf; i++) {
         gfield_t *g = &t->f[i];
         switch (g->kind) {
-        case GF_PTR: if (rnd32() % 100 < g->c) *(unsigned *)(b + g->off) = gb_build(gfind_type(g->tname), depth + 1); break;
+        case GF_PTR: if (rnd32() % 100 < g->c) *(unsigned *)(b + g->off) = gb_build(gfind_type(g->tname), depth + 1) + g->a; break;
         case GF_RLIST: { unsigned n = grange(g->a, g->b), prev = 0, pos = 1 + rnd32() % 3; for (unsigned k = 0; k < n; k++) { unsigned e = gb_alloc(12), len = 1 + rnd32() % 4; *(unsigned *)(e + 4) = pos; *(unsigned *)(e + 8) = len; pos += len + rnd32() % 4;
                 if (prev) *(unsigned *)prev = e; else *(unsigned *)(b + g->off) = e; prev = e; } break; }
         case GF_LIST: { unsigned n = grange(g->a, g->b), prev = 0; for (unsigned k = 0; k < n; k++) { unsigned e = gb_build(gfind_type(g->tname), depth + 1); if (prev) *(unsigned *)((unsigned char *)prev + g->c) = e; else *(unsigned *)(b + g->off) = e; prev = e; } break; }
@@ -500,6 +503,7 @@ static unsigned gb_build(gtype_t *t, int depth) {
         case GF_FNQ: if (g->c < 16) { gs_qv[g->c] = g->v[rnd32() % g->n]; *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_qtab[g->c]; } break;
         case GF_FNQP: if (g->c < 16) { gs_qv[g->c] = (rnd32() % 100 < g->a) ? gb_build(gfind_type(g->tname), depth + 1) : 0; *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_qtab[g->c]; } break;
         case GF_FFILL: { float lo, hi; memcpy(&lo, &g->v[0], 4); memcpy(&hi, &g->v[1], 4); for (unsigned k = 0; k + 4 <= g->a; k += 4) { unsigned r = rnd32(), w; if ((r & 15) == 0) { static const unsigned sp[4] = { 0x7fc00000u, 0x7f800000u, 0xff800000u, 0x80000000u }; w = sp[(r >> 4) & 3]; } else { float f = lo + (hi - lo) * ((float)(rnd32() >> 8) / 16777216.0f); memcpy(&w, &f, 4); } *(unsigned *)(b + g->off + k) = w; } break; }
+        case GF_OBJFILL: for (unsigned k = 0; k + 4 <= g->a; k += 4) *(unsigned *)(b + g->off + k) = ((k / 4) % 16 == 0) ? vt_ptr() : obj_word(); break;
         case GF_RANDFILL: for (unsigned k = 0; k + 4 <= g->a; k += 4) *(unsigned *)(b + g->off + k) = rnd32() % g->b; break;   /* LEN bytes of small random words: a block of fields the code only reads */
         case GF_U8: b[g->off] = (unsigned char)grange(g->a, g->b); break;
         case GF_U16: *(unsigned short *)(b + g->off) = (unsigned short)grange(g->a, g->b); break;
@@ -507,6 +511,7 @@ static unsigned gb_build(gtype_t *t, int depth) {
         case GF_RAND: *(unsigned *)(b + g->off) = rnd32(); break;
         case GF_SET: *(unsigned *)(b + g->off) = g->a; break;
         case GF_PICK: *(unsigned *)(b + g->off) = g->v[rnd32() % g->n]; break;
+        case GF_SELF: *(unsigned *)(b + g->off) = a + g->a; break;
         case GF_PADD: *(unsigned *)(b + g->off) = *(unsigned *)(b + g->a) + g->v[rnd32() % g->n]; break;
         case GF_FNREC3: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_rec3; break;
         case GF_FNREC3A: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_rec3a; break;
@@ -525,7 +530,7 @@ static int apply_graph(const char *name, unsigned *ia, unsigned *sa) {   /* `arg
     int nalt = 0, alt[16]; for (int i = 0; i < ngfuncs && nalt < 16; i++) if (!strcmp(gfuncs[i].name, name)) alt[nalt++] = i;   /* several `func` blocks of one name are alternatives, one is drawn per trial */
     snprintf(gs_curfunc, sizeof gs_curfunc, "%s", name);
     if (nalt) { int i = alt[nalt > 1 ? rnd32() % nalt : 0];
-        gfunc_t *f = &gfuncs[i]; gb_next = ARENA_BASE + 0x1000; g_nnames = 0; gm_next = GM_LO; gs_first_cnt = 0xffffffffu; gs_lg_n = 0xffffffffu;
+        gfunc_t *f = &gfuncs[i]; for (int ti = 0; ti < ngtypes; ti++) gtypes[ti].inst = 0; gb_next = ARENA_BASE + 0x1000; g_nnames = 0; gm_next = GM_LO; gs_first_cnt = 0xffffffffu; gs_lg_n = 0xffffffffu;
         for (int k = 0; k < f->na; k++) { garg_t *a = &f->a[k]; if (a->n < 0 || a->n >= 16) continue; unsigned *slot = a->n < 8 ? &ia[a->n] : &sa[a->n - 8];
             switch (a->kind) {
             case GA_PTR: *slot = (rnd32() % 100 < (unsigned)a->pct) ? gb_build(gfind_type(a->tname), 0) : 0; break;
@@ -638,6 +643,10 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
         for (unsigned o = 0; o < 0x100; o += 16) __asm__ volatile("dcbst 0,%0\n\tsync\n\ticbi 0,%0\n\tsync\n\tisync" : : "r"((char *)tr + o) : "memory");   /* the page was written as data: flush it to the instruction cache */
         unsigned *vp = mmap((void *)VT_BASE, VT_WORDS * 4, PROT_READ | PROT_WRITE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0); if (vp != (unsigned *)VT_BASE) _exit(9); for (unsigned i = 0; i < VT_WORDS; i++) vp[i] = VT_TR; mprotect(vp, VT_WORDS * 4, PROT_READ);
     }
+    /* FNFUZZ_PRECALL=name[,name..]: ledger functions (no arguments) run first, in the image under test, in the trial's child, BEFORE the import stubs are installed (their guard/atexit imports run for real in both images; an interposed run would record 254 calls in the stock and none in the rebuilt image, whose guard/atexit calls go through slots the interposer does not see): the library's own initialisers the harness never reaches (the shader compiler's
+       opcode-info table is filled by Compiler__initStaticLocals at the first compile). Their writes to image data are identical in both images; the ledger needs a row for each. */
+    { const char *pcs = getenv("FNFUZZ_PRECALL"); while (pcs && *pcs) { char nm[96]; int k = 0; while (*pcs && *pcs != ',' && k < 95) nm[k++] = *pcs++; nm[k] = 0; if (*pcs == ',') pcs++;
+        for (int q = 0; q < g_nc; q++) if (!strcmp(g_cs[q].name, nm)) { unsigned long fa = g_ap[cur_img] + ((cur_img ? g_cs[q].reb_off : g_cs[q].stock_addr) - (cur_img ? g_areb : g_astock)); ((void (*)(void))fa)(); break; } } }
     if (interpose) { ncalls_c = 0; trace_c = 0; memset(mask_c, 0, sizeof mask_c); ret_state = (unsigned long long)seed * 0x9E3779B97F4A7C15ULL + c->id; install_stubs(cur_img); }
     unsigned *w = (unsigned *)ARENA_BASE;
     for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned k = rnd32() % 10; w[i] = objmode ? ((i % 16 == 0) ? vt_ptr() : obj_word()) : graph ? (k < 2 ? 0 : k < 4 ? rnd32() % 64 : (vtmode && rnd32() % 4 == 0) ? vt_ptr() : arena_ptr()) : tiny ? (k < 6 ? 0 : k < 9 ? rnd32() % 16 : arena_ptr()) : (k < 3 ? 0 : k < 6 ? rnd32() % 64 : k < 7 ? (narrow ? rnd32() % 256 : rnd32()) : arena_ptr()); }

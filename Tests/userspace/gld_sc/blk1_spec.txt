@@ -1,0 +1,409 @@
+# gld_sc_spec.txt - GLDriver shader-compiler object graphs: a compiler object with two real bump arenas (Arena__alloc: +8 cursor, +0x10 limit (absolute), +0x14 last), the CFG block classes.
+type ABUF 0x6000
+  randfill 0x00 0x6000 4096
+type ARENA 0x40 share
+  ptr 0x08 ABUF
+  padd 0x10 0x08 0x5800
+type ABUFB 0x3000
+  randfill 0x00 0x3000 4096
+type ARENAB 0x40
+  ptr 0x08 ABUFB
+  padd 0x10 0x08 0x2800
+type OPFLAGS 0x1000
+  randfill 0x00 0x1000 65536
+type TVT 0x800
+  randfill 0x00 0x800 4096
+  fnqp 0x16c 0 OPFLAGS
+type TARGET 0x400
+  randfill 0x00 0x400 4096
+  ptr 0x00 TVT
+type BITSET 0x100
+  randfill 0x00 0x100 65536
+  u32 0x00 2 8
+  u32 0x04 0 40
+type PROGRAM 0x800 share
+  objfill 0x00 0x800
+  ptr 0x3bc BITSET
+type COMPILER 0x800 share
+  randfill 0x00 0x800 4096
+  ptr 0x30c TARGET
+  ptr 0x6c4 PROGRAM
+  ptr 0x374 ARENA
+  ptr 0x378 ARENAB
+type VDATA 0x20
+  ptr 0x00 LEAF 100
+  ptr 0x04 LEAF 100
+type VECA 0x20
+  ptr 0x00 ARENA
+  u32 0x04 2 8
+  u32 0x08 1 2
+  ptr 0x0c VDATA
+  ptr 0x10 ARENA
+type LEAF 0x200
+  objfill 0x00 0x200
+  ptr 0xa8 COMPILER
+  ptr 0xac PROGRAM
+  self 0x98 0x9c
+  self 0xa0 0x90
+  u32 0xc4 0 0
+  u32 0xd0 0 0
+  u32 0xd4 0 0
+  u32 0xf4 0 0
+  u32 0xf8 0 0
+type BLOCK 0x400
+  objfill 0x00 0x400
+  ptr 0xa8 COMPILER
+  ptr 0xac PROGRAM
+  self 0x98 0x9c
+  self 0xa0 0x90
+  ptr 0xc4 VECA 100 4
+  ptr 0xd0 VECA 100 4
+  ptr 0xd4 VECA 100 4
+  ptr 0xf4 VECA 100 4
+  ptr 0xf8 VECA 100 4
+
+func AnyBlock__ctor_ea3c0
+  arg 0 ptr BLOCK
+  arg 1 ptr COMPILER
+
+func AnyBlock__ctor_ea478
+  arg 0 ptr BLOCK
+  arg 1 ptr COMPILER
+
+func AnyBlock__deleting_dtor
+  arg 0 ptr BLOCK
+
+func AnyBlock__dtor
+  arg 0 ptr BLOCK
+
+func Block__appendCopyForDest
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+  arg 3 ptr BLOCK
+  arg 4 ptr BLOCK
+  arg 5 ptr BLOCK
+  arg 6 ptr COMPILER
+  arg 7 ptr BLOCK
+  arg 8 ptr BLOCK
+  arg 9 ptr BLOCK
+
+func Block__bridgePredecessorToSuccessor
+  arg 0 ptr BLOCK
+
+func Block__bypass
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+
+func Block__bypassAndDetach
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+
+func Block__clone
+  arg 0 ptr BLOCK
+
+func Block__createEntryExitInsts
+  arg 0 ptr BLOCK
+
+func Block__ctor_e9d68
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func Block__ctor_e9f00
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func Block__ctor_ea020
+  arg 0 ptr BLOCK
+  arg 1 ptr COMPILER
+
+func Block__ctor_ea148
+  arg 0 ptr BLOCK
+  arg 1 ptr COMPILER
+
+func Block__deleting_dtor
+  arg 0 ptr BLOCK
+
+func Block__dtor
+  arg 0 ptr BLOCK
+
+func Block__dtor_ea270
+  arg 0 ptr BLOCK
+
+func Block__moveProducersBefore
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+  arg 3 ptr BLOCK
+
+func Block__rebuildAddMulTreesWhereProfitable
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+  arg 3 ptr BLOCK
+  arg 4 ptr BLOCK
+  arg 5 ptr BLOCK
+  arg 6 ptr BLOCK
+
+func Block__splitEdge
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+
+func Block__splitEdgeAndConnect
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+  arg 3 ptr BLOCK
+
+func BreakBlock__clone
+  arg 0 ptr BLOCK
+
+func BreakBlock__ctor_ebe70
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func BreakBlock__ctor_ebeb4
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func BreakBlock__ctor_ec070
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+  arg 3 ptr COMPILER
+
+func BreakBlock__ctor_ec0c8
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+  arg 3 ptr COMPILER
+
+func BreakBlock__deleting_dtor
+  arg 0 ptr BLOCK
+
+func BreakBlock__dtor
+  arg 0 ptr BLOCK
+
+func BreakOrContinueBlock__ctor_eac08
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func BreakOrContinueBlock__ctor_eac60
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func BreakOrContinueBlock__deleting_dtor
+  arg 0 ptr BLOCK
+
+func BreakOrContinueBlock__dtor
+  arg 0 ptr BLOCK
+
+func ContinueBlock__clone
+  arg 0 ptr BLOCK
+
+func ContinueBlock__ctor_ebf70
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func ContinueBlock__ctor_ebfb4
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func ContinueBlock__ctor_ec120
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+  arg 3 ptr COMPILER
+
+func ContinueBlock__ctor_ec178
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+  arg 3 ptr COMPILER
+
+func ContinueBlock__deleting_dtor
+  arg 0 ptr BLOCK
+
+func ContinueBlock__dtor
+  arg 0 ptr BLOCK
+
+func EntryBlock__ctor_eab70
+  arg 0 ptr BLOCK
+  arg 1 ptr COMPILER
+
+func EntryBlock__ctor_eabbc
+  arg 0 ptr BLOCK
+  arg 1 ptr COMPILER
+
+func EntryBlock__deleting_dtor
+  arg 0 ptr BLOCK
+
+func EntryBlock__dtor
+  arg 0 ptr BLOCK
+
+func ExitBlock__ctor_eaae8
+  arg 0 ptr BLOCK
+  arg 1 ptr COMPILER
+
+func ExitBlock__ctor_eab2c
+  arg 0 ptr BLOCK
+  arg 1 ptr COMPILER
+
+func ExitBlock__deleting_dtor
+  arg 0 ptr BLOCK
+
+func ExitBlock__dtor
+  arg 0 ptr BLOCK
+
+func FuncEndBlock__clone
+  arg 0 ptr BLOCK
+
+func FuncEndBlock__ctor_eb2b0
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func FuncEndBlock__ctor_eb378
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func FuncEndBlock__deleting_dtor
+  arg 0 ptr BLOCK
+
+func FuncEndBlock__dtor
+  arg 0 ptr BLOCK
+
+func IfFooter__clone
+  arg 0 ptr BLOCK
+
+func IfFooter__ctor_eb068
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func IfFooter__ctor_eb124
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func IfFooter__deleting_dtor
+  arg 0 ptr BLOCK
+
+func IfFooter__dtor_1ce270
+  arg 0 ptr BLOCK
+
+func IfFooter__dtor_1ce2fc
+  arg 0 ptr BLOCK
+
+func IfFooter__dtor_1ce320
+  arg 0 ptr BLOCK
+
+func IfFooterStatic__clone
+  arg 0 ptr BLOCK
+
+func IfFooterStatic__ctor_eb7e0
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func IfFooterStatic__ctor_eb824
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func IfHeader__clone
+  arg 0 ptr BLOCK
+
+func IfHeader__ctor_ea530
+  arg 0 ptr BLOCK
+  arg 1 ptr COMPILER
+
+func IfHeader__ctor_ea600
+  arg 0 ptr BLOCK
+  arg 1 ptr COMPILER
+
+func IfHeader__ctor_ea6d0
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+  arg 3 ptr BLOCK
+  arg 4 ptr COMPILER
+
+func IfHeader__ctor_eb168
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func IfHeader__ctor_eb248
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func IfHeader__ctor_eb688
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+  arg 3 ptr BLOCK
+  arg 4 ptr COMPILER
+
+func IfHeader__deleting_dtor
+  arg 0 ptr BLOCK
+
+func IfHeader__dtor_1ce158
+  arg 0 ptr BLOCK
+
+func IfHeader__dtor_1ce1e4
+  arg 0 ptr BLOCK
+
+func IfHeader__dtor_1ce208
+  arg 0 ptr BLOCK
+
+func IfHeaderStatic__clone
+  arg 0 ptr BLOCK
+
+func IfHeaderStatic__ctor_eb8e0
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func IfHeaderStatic__ctor_eb924
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func IfHeaderStatic__ctor_eb9e0
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+  arg 3 ptr COMPILER
+
+func IfHeaderStatic__ctor_ebac8
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+  arg 3 ptr COMPILER
+
+func PostLoopFooter__clone
+  arg 0 ptr BLOCK
+
+func PostLoopFooter__ctor_ea828
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+  arg 2 ptr BLOCK
+  arg 3 ptr BLOCK
+  arg 4 ptr COMPILER
+
+func PostLoopFooter__ctor_eacb8
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func PostLoopFooter__ctor_ead80
+  arg 0 ptr BLOCK
+  arg 1 ptr BLOCK
+
+func PostLoopFooter__ctor_eb3c8
+  arg 0 ptr BLOCK
+  arg 1 int 0 8
+  arg 2 ptr BLOCK
+  arg 3 int 0 1
+  arg 4 ptr COMPILER
+
+func PostLoopFooter__deleting_dtor
+  arg 0 ptr BLOCK
+
+func PostLoopFooter__dtor
+  arg 0 ptr BLOCK
