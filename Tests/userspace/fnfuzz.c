@@ -183,6 +183,7 @@ static struct { int idx, arg, words; } stackrec[16]; static int nstackrec;
 static unsigned stub_common(int idx, unsigned *a) {   /* 32-bit return: an `unsigned long long` is returned in r3:r4 (high word in r3), so the callers read 0 from r3 */
     unsigned h = trace_c ? trace_c : 2166136261u; h = (h ^ (unsigned)idx) * 16777619u;
     ncalls_c++; mask_c[idx >> 5] |= 1u << (idx & 31);
+    { static int bi = -1; if (bi < 0) bi = getenv("FNFUZZ_BCIMP") != NULL; if (bi) bc("I %u %s(%x %x %x %x)", ncalls_c, stub_names[idx], a[0], a[1], a[2], a[3]); }   /* FNFUZZ_BCIMP=1 (#273): every import call of the child as a UDP breadcrumb, so the last one before a hang is known */
     { static int dump = -1; if (dump < 0) dump = getenv("FNFUZZ_IMPDUMP") != NULL; if (dump) { fprintf(stderr, "  [%s call %u] %s(%x %x %x %x %x %x %x %x)\n", cur_img ? "rebuilt" : "stock", ncalls_c, stub_names[idx], a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7]); } }
     for (int i = 0; i < nargs_tab[idx]; i++) {
         unsigned v = a[i];
@@ -690,6 +691,7 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     for (int q = 0; q < ncur_patch; q++) *(unsigned *)cur_patch[q].addr = cur_patch[q].val;
     for (int q = 0; q < 8; q++) if (cur_apatch[q]) { ia[q] = cur_apatch[q]; cur_args[q] = ia[q]; }
     { const char *sf = getenv("FNFUZZ_STACKFILL"); if (use_fill2 && getenv("FNFUZZ_STACKFILL2")) sf = getenv("FNFUZZ_STACKFILL2"); if (sf) { stackfill_word = (unsigned)strtoul(sf, NULL, 16); fill_stack(); } }
+    if (getenv("FNFUZZ_BCIMP")) bc("F fn %p args %x %x %x %x %x %x %x %x npatch %d", fn, ia[0], ia[1], ia[2], ia[3], ia[4], ia[5], ia[6], ia[7], ncur_patch);
     if (mode == 0) { unsigned long long r = ((fi_t)fn)(ia[0], ia[1], ia[2], ia[3], ia[4], ia[5], ia[6], ia[7], sa[0], sa[1], sa[2], sa[3], sa[4], sa[5], sa[6], sa[7], sa[8], sa[9], sa[10], sa[11], sa[12], sa[13], sa[14], sa[15], da[0], da[1], da[2], da[3], da[4], da[5], da[6], da[7], da[8], da[9], da[10], da[11], da[12]); report(0, (unsigned)(r >> 32), (unsigned)r, 0); }
     else { double r = ((fd_t)fn)(ia[0], ia[1], ia[2], ia[3], ia[4], ia[5], ia[6], ia[7], sa[0], sa[1], sa[2], sa[3], sa[4], sa[5], sa[6], sa[7], sa[8], sa[9], sa[10], sa[11], sa[12], sa[13], sa[14], sa[15], da[0], da[1], da[2], da[3], da[4], da[5], da[6], da[7], da[8], da[9], da[10], da[11], da[12]); unsigned long long b; memcpy(&b, &r, 8); report(0, 0, 0, b); }
 }
