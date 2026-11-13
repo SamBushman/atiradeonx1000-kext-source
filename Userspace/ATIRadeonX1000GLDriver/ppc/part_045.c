@@ -868,7 +868,8 @@ int Scheduler__enqueueReadyNode(scheduler, node)
       if (((*(int *)(node + 0x58) == 0) &&
           (checkResult = IRInst__isProjectionOfClass26or3a(*(undefined4 *)(node + 0x38)), checkResult == 0)) &&
          (checkResult = IRInst__isProjectionOfClass44(*(undefined4 *)(node + 0x38)), checkResult == 0)) {
-        return ((int (*)())Scheduler__issueNode)(scheduler,node);
+        ((int (*)())Scheduler__issueNode)(scheduler,node);
+        return;
       }
       nodeInst = *(int **)(node + 0x38);
       if ((((nodeInst[5] & 0x20U) == 0) && (nodeInst[0x20] != 0)) &&
@@ -881,7 +882,8 @@ int Scheduler__enqueueReadyNode(scheduler, node)
           consumerCounterCursor = consumerCounterCursor + 4;
           componentsLeft = componentsLeft + -1;
           if (componentsLeft == 0) {
-            return ((int (*)())Scheduler__issueDeadNode)(scheduler,node);
+            ((int (*)())Scheduler__issueDeadNode)(scheduler,node);
+            return;
           }
         }
       }
@@ -892,7 +894,8 @@ int Scheduler__enqueueReadyNode(scheduler, node)
         compareResult = Scheduler__compareNodes(scheduler,node,compareNode,0);
         if (0 < compareResult) {
 loopCallDList_insertBefore:
-          return DList__insertBefore(node,compareNode);
+          DList__insertBefore(node,compareNode);
+          return;
         }
         compareNode = *(int *)(compareNode + 8);
         nextCompareNode = *(int *)(compareNode + 8);
@@ -1491,7 +1494,8 @@ loopSetIsFetchFlag:
 setIsNodeReadyResult:
   isNodeReadyResult = Scheduler__isNodeReady(scheduler,node);
   if (isNodeReadyResult != 0) {
-    return ((int (*)())Scheduler__enqueueReadyNode)(scheduler,node);
+    ((int (*)())Scheduler__enqueueReadyNode)(scheduler,node);
+    return;
   }
   return DList__pushBack(scheduler + 0x19,node);
 }

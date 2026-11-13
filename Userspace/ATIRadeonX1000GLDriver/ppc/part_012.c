@@ -4772,7 +4772,8 @@ int arbExpectToken(parser, expectedToken)
   int expectedToken;
 {
   if (*(int *)(parser + 0x14) == expectedToken) {
-    return ((int (*)())arbNextToken)(parser);
+    ((int (*)())arbNextToken)(parser);
+    return;
   }
   return ((int (*)())arbSetError)(parser,"unexpected token");
 }

@@ -4589,7 +4589,8 @@ int scDumpShaderImpl(sinkArg, shaderState, optionsArg, argR6, sinkFn, argR8)
     return;
   }
   if (*(int *)(shaderState + 0xf8) == 0) {
-    return ((int (*)())vsDisassembleVertexProgram)(sinkArg,shaderState,optionsArg,sinkFn,sinkFn,argR8,shaderState);
+    ((int (*)())vsDisassembleVertexProgram)(sinkArg,shaderState,optionsArg,sinkFn,sinkFn,argR8,shaderState);
+    return;
   }
   if (*(int *)(shaderState + 0xf8) != 1) {
     return;
@@ -4616,7 +4617,8 @@ int scDumpShaderToStringImpl(sinkArg, shaderState, sinkFn, argR6, argR7, argR8)
     return;
   }
   if (*(int *)(shaderState + 0xf8) == 0) {
-    return ((int (*)())vsDisassembleToString)(sinkArg,shaderState,sinkFn,argR6,argR7,argR8,shaderState);
+    ((int (*)())vsDisassembleToString)(sinkArg,shaderState,sinkFn,argR6,argR7,argR8,shaderState);
+    return;
   }
   if (*(int *)(shaderState + 0xf8) != 1) {
     return;
@@ -6331,7 +6333,8 @@ int psnFormatRegister(outBuffer, registerWord, unusedArg5, argR6, argR7, argR8, 
   undefined4 argR9;
 {
   if ((registerWord & 0x8000) != 0) {
-    return printf_LDBLStub_1a32d0(outBuffer,"c%02u",registerWord & 0xffff7fff,argR6,argR7,argR8,argR9,0xd0458);
+    printf_LDBLStub_1a32d0(outBuffer,"c%02u",registerWord & 0xffff7fff,argR6,argR7,argR8,argR9,0xd0458);
+    return;
   }
   return printf_LDBLStub_1a32d0(outBuffer,"r%02u",registerWord,argR6,argR7,argR8,argR9,0xd0458);
 }
