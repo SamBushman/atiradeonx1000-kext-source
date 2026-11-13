@@ -373,13 +373,14 @@ static int gs_rec3(int a, int b, int c) { gs_rec_hash = (gs_rec_hash * 1000003u)
 static int gs_rec3a(int a, int b, int c) { gs_rec3(a, b, c); return a; }   /* fnrec3a: r3, r4, r5 recorded, r3 returned (a slot whose result the function tests: r3 is a field the spec controls) */
 static int gs_rec(int a, int b, int c, int d) { gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)a; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)b; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)c; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)d; gs_rec_n++; return 0; }
 /* FNFUZZ_VT=1 (with FNFUZZ_PROFILE=graph): generic virtual-call support for functions that call through `**(obj + K)` on objects of a pointer-dense arena. A read-only page at VT_BASE holds VT_WORDS
-   words, each the address of gs_vtcb; about one in four of the pointer words the arena is filled with points into that page, so `*obj` is a "vtable" whose every slot is the callback. gs_vtcb records its four
-   integer arguments into the arena digest (what a function hands to a virtual method is part of its behaviour) and answers from the child's PRNG (0, a small count, or an arena pointer): the answers are the same
+   words, each the address of gs_vtcb; about one in four of the pointer words the arena is filled with points into that page, so `*obj` is a "vtable" whose every slot is the callback. gs_vtcb records its object
+   argument (r3) into the arena digest (what a function hands to a virtual method is part of its behaviour) and answers from the child's PRNG (0, a small count, or an arena pointer): the answers are the same
    in both images as long as both make the same calls in the same order, so a different call sequence shows up as a different digest/answer stream. The page is outside the arena (the function cannot overwrite a slot). */
 #define VT_BASE 0x4f000000u
+#define VT_TR 0x4f100000u
 #define VT_WORDS 0x800u
 static int vtmode;
-static int gs_vtcb(int a, int b, int c, int d) { gs_rec(a, b, c, d); unsigned k = rnd32() % 8; return k < 3 ? 0 : k < 5 ? (int)(rnd32() % 16) : (int)arena_ptr(); }
+static int gs_vtcb(int a, int b, int c, int d) { (void)b; (void)c; (void)d; gs_rec(a, 0, 0, 0);   /* r3 only: a virtual method that takes just `this` is called with whatever the registers held (the stock reloads only r3 on a second call), recording r4..r6 would compare dead registers */ unsigned k = rnd32() % 8; return k < 3 ? 0 : k < 5 ? (int)(rnd32() % 16) : (int)arena_ptr(); }
 static unsigned vt_ptr(void) { return VT_BASE + 4 * (rnd32() % VT_WORDS); }
 static int gs_reca(int a, int b, int c, int d) { gs_rec(a, b, c, d); return a; }   /* fnreca: r3..r6 recorded, r3 returned */
 static double gs_nopd(int a, double x) { (void)a; return x; }   /* a callback slot that returns a double: the argument back */
@@ -624,7 +625,15 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     mmap((void *)(ARENA_BASE + ARENA_SIZE), 0x10000, PROT_NONE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0);
     mmap((void *)(ARENA_BASE - 0x10000), 0x10000, PROT_NONE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0);
     rng_state = (unsigned long long)seed * 2862933555777941757ULL + c->id;
-    if (vtmode) { unsigned *vp = mmap((void *)VT_BASE, VT_WORDS * 4, PROT_READ | PROT_WRITE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0); if (vp != (unsigned *)VT_BASE) _exit(9); for (unsigned i = 0; i < VT_WORDS; i++) vp[i] = (unsigned)(uintptr_t)gs_vtcb; mprotect(vp, VT_WORDS * 4, PROT_READ); }
+    if (vtmode) {
+        /* the callback is reached through a trampoline whose leading words are data that is harmless if a stray double dereference reads them as a pointer or a function address: word 0 = `b +0x40`
+           (0x48000040: unmapped), words 1..15 = 0 (NULL), the code starts at +0x40 (lis/ori/mtctr/bctr to gs_vtcb: the words 0x3d80xxxx, 0x618cxxxx, 0x7d8903a6, 0x4e800420 are unmapped addresses too).
+           Without it a vtable-page pointer used as an OBJECT made `*(*obj + 4)` read the callback's own code bytes (`stw r0,8(r1)` = 0x90010008, an address inside libc) and call real libc code (Nov 12, Block__dtor). */
+        unsigned *tr = mmap((void *)VT_TR, 0x1000, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0); if (tr != (unsigned *)VT_TR) _exit(9);
+        unsigned fa = (unsigned)(uintptr_t)gs_vtcb; memset(tr, 0, 0x1000); tr[0] = 0x48000040u; tr[16] = 0x3d800000u | (fa >> 16); tr[17] = 0x618c0000u | (fa & 0xffff); tr[18] = 0x7d8903a6u; tr[19] = 0x4e800420u;
+        for (unsigned o = 0; o < 0x100; o += 16) __asm__ volatile("dcbst 0,%0\n\tsync\n\ticbi 0,%0\n\tsync\n\tisync" : : "r"((char *)tr + o) : "memory");   /* the page was written as data: flush it to the instruction cache */
+        unsigned *vp = mmap((void *)VT_BASE, VT_WORDS * 4, PROT_READ | PROT_WRITE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0); if (vp != (unsigned *)VT_BASE) _exit(9); for (unsigned i = 0; i < VT_WORDS; i++) vp[i] = VT_TR; mprotect(vp, VT_WORDS * 4, PROT_READ);
+    }
     if (interpose) { ncalls_c = 0; trace_c = 0; memset(mask_c, 0, sizeof mask_c); ret_state = (unsigned long long)seed * 0x9E3779B97F4A7C15ULL + c->id; install_stubs(cur_img); }
     unsigned *w = (unsigned *)ARENA_BASE;
     for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned k = rnd32() % 10; w[i] = graph ? (k < 2 ? 0 : k < 4 ? rnd32() % 64 : (vtmode && rnd32() % 4 == 0) ? vt_ptr() : arena_ptr()) : tiny ? (k < 6 ? 0 : k < 9 ? rnd32() % 16 : arena_ptr()) : (k < 3 ? 0 : k < 6 ? rnd32() % 64 : k < 7 ? (narrow ? rnd32() % 256 : rnd32()) : arena_ptr()); }
