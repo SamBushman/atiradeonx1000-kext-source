@@ -372,6 +372,15 @@ static int (*const gs_qtab[16])(int) = { gs_q0, gs_q1, gs_q2, gs_q3, gs_q4, gs_q
 static int gs_rec3(int a, int b, int c) { gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)a; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)b; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)c; gs_rec_n++; return 0; }   /* fnrec3: r3, r4, r5 */
 static int gs_rec3a(int a, int b, int c) { gs_rec3(a, b, c); return a; }   /* fnrec3a: r3, r4, r5 recorded, r3 returned (a slot whose result the function tests: r3 is a field the spec controls) */
 static int gs_rec(int a, int b, int c, int d) { gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)a; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)b; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)c; gs_rec_hash = (gs_rec_hash * 1000003u) ^ (unsigned)d; gs_rec_n++; return 0; }
+/* FNFUZZ_VT=1 (with FNFUZZ_PROFILE=graph): generic virtual-call support for functions that call through `**(obj + K)` on objects of a pointer-dense arena. A read-only page at VT_BASE holds VT_WORDS
+   words, each the address of gs_vtcb; about one in four of the pointer words the arena is filled with points into that page, so `*obj` is a "vtable" whose every slot is the callback. gs_vtcb records its four
+   integer arguments into the arena digest (what a function hands to a virtual method is part of its behaviour) and answers from the child's PRNG (0, a small count, or an arena pointer): the answers are the same
+   in both images as long as both make the same calls in the same order, so a different call sequence shows up as a different digest/answer stream. The page is outside the arena (the function cannot overwrite a slot). */
+#define VT_BASE 0x4f000000u
+#define VT_WORDS 0x800u
+static int vtmode;
+static int gs_vtcb(int a, int b, int c, int d) { gs_rec(a, b, c, d); unsigned k = rnd32() % 8; return k < 3 ? 0 : k < 5 ? (int)(rnd32() % 16) : (int)arena_ptr(); }
+static unsigned vt_ptr(void) { return VT_BASE + 4 * (rnd32() % VT_WORDS); }
 static int gs_reca(int a, int b, int c, int d) { gs_rec(a, b, c, d); return a; }   /* fnreca: r3..r6 recorded, r3 returned */
 static double gs_nopd(int a, double x) { (void)a; return x; }   /* a callback slot that returns a double: the argument back */
 static unsigned gnum(const char *s) { if (!strcmp(s, "fn")) return (unsigned)(uintptr_t)gs_nop; if (!strcmp(s, "fnd")) return (unsigned)(uintptr_t)gs_nopd; if (!strcmp(s, "fnrec")) return (unsigned)(uintptr_t)gs_rec; if (!strcmp(s, "fnrecv")) return (unsigned)(uintptr_t)gs_recv; if (!strcmp(s, "fnrecw")) return (unsigned)(uintptr_t)gs_recw; if (!strcmp(s, "fnrecp")) return (unsigned)(uintptr_t)gs_recp; if (!strcmp(s, "fnrec1")) return (unsigned)(uintptr_t)gs_rec1; if (!strcmp(s, "fnrec3")) return (unsigned)(uintptr_t)gs_rec3; if (!strcmp(s, "fnrec3a")) return (unsigned)(uintptr_t)gs_rec3a; if (!strcmp(s, "fnreca")) return (unsigned)(uintptr_t)gs_reca; return (unsigned)strtoul(s, NULL, 0); }   /* `fn` / `fnd`: the address of the harmless harness function (the same in both images) */
@@ -615,9 +624,10 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     mmap((void *)(ARENA_BASE + ARENA_SIZE), 0x10000, PROT_NONE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0);
     mmap((void *)(ARENA_BASE - 0x10000), 0x10000, PROT_NONE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0);
     rng_state = (unsigned long long)seed * 2862933555777941757ULL + c->id;
+    if (vtmode) { unsigned *vp = mmap((void *)VT_BASE, VT_WORDS * 4, PROT_READ | PROT_WRITE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0); if (vp != (unsigned *)VT_BASE) _exit(9); for (unsigned i = 0; i < VT_WORDS; i++) vp[i] = (unsigned)(uintptr_t)gs_vtcb; mprotect(vp, VT_WORDS * 4, PROT_READ); }
     if (interpose) { ncalls_c = 0; trace_c = 0; memset(mask_c, 0, sizeof mask_c); ret_state = (unsigned long long)seed * 0x9E3779B97F4A7C15ULL + c->id; install_stubs(cur_img); }
     unsigned *w = (unsigned *)ARENA_BASE;
-    for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned k = rnd32() % 10; w[i] = graph ? (k < 2 ? 0 : k < 4 ? rnd32() % 64 : arena_ptr()) : tiny ? (k < 6 ? 0 : k < 9 ? rnd32() % 16 : arena_ptr()) : (k < 3 ? 0 : k < 6 ? rnd32() % 64 : k < 7 ? (narrow ? rnd32() % 256 : rnd32()) : arena_ptr()); }
+    for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned k = rnd32() % 10; w[i] = graph ? (k < 2 ? 0 : k < 4 ? rnd32() % 64 : (vtmode && rnd32() % 4 == 0) ? vt_ptr() : arena_ptr()) : tiny ? (k < 6 ? 0 : k < 9 ? rnd32() % 16 : arena_ptr()) : (k < 3 ? 0 : k < 6 ? rnd32() % 64 : k < 7 ? (narrow ? rnd32() % 256 : rnd32()) : arena_ptr()); }
     if (nanmode) for (unsigned i = 0; i < ARENA_SIZE / 4; i++) if (rnd32() % 24 == 0) w[i] = nan_wrd[rnd32() % (sizeof nan_wrd / sizeof *nan_wrd)];
     unsigned ia[8]; double da[13]; int k = 0, j = 0;
     for (const char *p = c->pc; *p && *p != '-'; p++) {
@@ -722,7 +732,7 @@ int main(int argc, char **argv) {
     g_cs = cs; g_nc = nc; g_ap[0] = ap[0]; g_ap[1] = ap[1]; g_astock = a_stock; g_areb = a_reb;
     if (getenv("FNFUZZ_DATA")) { FILE *df = fopen(getenv("FNFUZZ_DATA"), "r"); if (!df) { perror("FNFUZZ_DATA"); return 2; } char dl[256]; while (fgets(dl, sizeof dl, df) && ngdat < 32) { if (sscanf(dl, "%47s\t%x\t%x", gdat[ngdat].name, &gdat[ngdat].st, &gdat[ngdat].rb) == 3) ngdat++; } fclose(df); }
     if (getenv("FNFUZZ_GRAPHSPEC")) { gs_malloc = 1; load_graphspec(getenv("FNFUZZ_GRAPHSPEC")); }
-    interpose = getenv("FNFUZZ_INTERPOSE") != NULL; imp_ctl = getenv("FNFUZZ_IMPORT_CTL");
+    vtmode = getenv("FNFUZZ_VT") != NULL; interpose = getenv("FNFUZZ_INTERPOSE") != NULL; imp_ctl = getenv("FNFUZZ_IMPORT_CTL");
     if (interpose) { init_retblk(); collect_slots(0, img_hdr[0]); collect_slots(1, img_hdr[1]); load_nargs(); load_stackrec(); fprintf(stderr, "interposer: %d stock slots, %d rebuilt slots, %d distinct imports\n", nslots[0], nslots[1], nstub); }
     int first = 0, count = nc; if (flt && flt[0] == '@') sscanf(flt + 1, "%d,%d", &first, &count);
     if (getenv("FNFUZZ_ONE")) {   /* FNFUZZ_ONE=S|R:trial - run the first matching function in THIS process (no handlers): for gdb. e.g. FNFUZZ_ONE=R:3 gdb --args fnfuzz ... name */
