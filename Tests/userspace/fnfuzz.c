@@ -23,6 +23,11 @@
 #include <sys/wait.h>
 #include <sys/select.h>
 #include <fcntl.h>
+#include <stdarg.h>
+#include <sys/time.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #include <mach-o/loader.h>
 #include <mach-o/nlist.h>
 
@@ -686,7 +691,25 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
 }
 
 static unsigned *last_arena[3];
+
+/* FNFUZZ_BREADCRUMB=host:port (Nov 13, #273): one small UDP datagram per event - run start, each row, each trial start (`T`), each child's first instruction (`C`, sent by the child), each trial end (`E`: how the child ended, how long it ran, whether the watchdog killed it) - with a microsecond timestamp, a sequence number and the pid. Datagrams that left the machine before a kernel panic survive it, and sending one is ~20 us with no disk I/O, so unlike FNFUZZ_TRIALLOG's fsync per fork (which dropped the fork rate from ~180/s to ~7/s and hid the Nov 12 crash) it does not change the timing of the thing being studied.
+   FNFUZZ_BREADCRUMB_NOCHILD=1 leaves out the child's `C` datagram. */
+static int bc_fd = -2, bc_child = 1; static struct sockaddr_in bc_dst; static unsigned long bc_seq;
+static void bc(const char *fmt, ...) {
+    if (bc_fd == -2) {
+        const char *e = getenv("FNFUZZ_BREADCRUMB"); bc_fd = -1; char h[64]; int pt;
+        if (e && sscanf(e, "%63[^:]:%d", h, &pt) == 2) { bc_fd = socket(AF_INET, SOCK_DGRAM, 0); memset(&bc_dst, 0, sizeof bc_dst); bc_dst.sin_family = AF_INET; bc_dst.sin_port = htons((unsigned short)pt); bc_dst.sin_addr.s_addr = inet_addr(h); }
+        if (getenv("FNFUZZ_BREADCRUMB_NOCHILD")) bc_child = 0;
+    }
+    if (bc_fd < 0) return;
+    char b[300]; struct timeval tv; gettimeofday(&tv, NULL);
+    int n = snprintf(b, sizeof b, "%lu %ld.%06d p%d ", ++bc_seq, (long)(tv.tv_sec % 100000), (int)tv.tv_usec, (int)getpid());
+    va_list ap; va_start(ap, fmt); n += vsnprintf(b + n, sizeof b - n, fmt, ap); va_end(ap);
+    if (n > (int)sizeof b - 1) n = (int)sizeof b - 1;
+    sendto(bc_fd, b, n, 0, (struct sockaddr *)&bc_dst, sizeof bc_dst);
+}
 static void trial_log(const cand_t *c, unsigned seed, int mode, int img) {
+    { static int last_id = -12345; if (c->id != last_id) { last_id = c->id; bc("ROW id %d %s", c->id, c->name); } bc("T id %d seed %u mode %d img %c", c->id, seed, mode, img ? 'R' : 'S'); }
     /* FNFUZZ_TRIALLOG=file: append (and flush to disk) one line BEFORE each child is forked, so a kernel panic that takes the machine down leaves the trial, image and seed that was running as the last line */
     static int lfd = -2; static unsigned long nrun;
     if (lfd == -2) { const char *f = getenv("FNFUZZ_TRIALLOG"); lfd = f ? open(f, O_WRONLY | O_CREAT | O_APPEND, 0644) : -1; }
@@ -702,18 +725,20 @@ static int run_one(void *fn, const cand_t *c, unsigned seed, int mode, int img, 
     trial_log(c, seed, mode, img);
     int fd[2]; if (pipe(fd)) return -1;
     fflush(stdout);   /* a child that calls exit() would flush the parent's pending lines a second time */
+    struct timeval bt0; gettimeofday(&bt0, NULL);
     pid_t p = fork();
-    if (p == 0) { close(fd[0]); wfd = fd[1]; cur_img = img; nrng = 0; image_ranges(img_hdr[0]); image_ranges(img_hdr[1]); if (getenv("FNFUZZ_RANGES")) { for (int q = 0; q < nrng; q++) fprintf(stderr, "range %08x-%08x\n", rng_lo[q], rng_hi[q]); } child(fn, c, seed, mode); _exit(8); }
+    if (p == 0) { close(fd[0]); wfd = fd[1]; cur_img = img; if (bc_child) bc("C id %d img %c", c->id, img ? 'R' : 'S'); nrng = 0; image_ranges(img_hdr[0]); image_ranges(img_hdr[1]); if (getenv("FNFUZZ_RANGES")) { for (int q = 0; q < nrng; q++) fprintf(stderr, "range %08x-%08x\n", rng_lo[q], rng_hi[q]); } child(fn, c, seed, mode); _exit(8); }
     close(fd[1]);
     int st = 0; ssize_t n;
     {   /* watchdog: a child stuck where signals cannot reach it (a mutex the random arena left locked) is killed and counted as a hang */
         fd_set rs; FD_ZERO(&rs); FD_SET(fd[0], &rs); struct timeval tv = { 1 + alarm_us / 1000000, 0 };
-        if (select(fd[0] + 1, &rs, NULL, NULL, &tv) <= 0) { kill(p, SIGKILL); waitpid(p, &st, 0); close(fd[0]); memset(out, 0, sizeof *out); out->status = 14; return 0; }
+        if (select(fd[0] + 1, &rs, NULL, NULL, &tv) <= 0) { kill(p, SIGKILL); waitpid(p, &st, 0); close(fd[0]); memset(out, 0, sizeof *out); out->status = 14; { struct timeval bt1; gettimeofday(&bt1, NULL); bc("E child %d WATCHDOG-KILL after %ld us", (int)p, (bt1.tv_sec - bt0.tv_sec) * 1000000L + (bt1.tv_usec - bt0.tv_usec)); } return 0; }
     }
     n = read(fd[0], out, sizeof *out);
     if (getenv("FNFUZZ_VERBOSE") && n == (ssize_t)sizeof *out) { static unsigned buf[3][ARENA_SIZE / 4]; unsigned *dst = buf[img]; size_t got = 0; ssize_t k; while (got < ARENA_SIZE && (k = read(fd[0], (char *)dst + got, ARENA_SIZE - got)) > 0) got += k; last_arena[img] = dst; }
     close(fd[0]); waitpid(p, &st, 0);
     if (n != (ssize_t)sizeof *out) { memset(out, 0, sizeof *out); out->status = WIFSIGNALED(st) ? WTERMSIG(st) : 99; }
+    { struct timeval bt1; gettimeofday(&bt1, NULL); bc("E child %d status %d exit %d sig %d result %s after %ld us", (int)p, out->status, WIFEXITED(st) ? WEXITSTATUS(st) : -1, WIFSIGNALED(st) ? WTERMSIG(st) : 0, n == (ssize_t)sizeof *out ? "full" : "short", (bt1.tv_sec - bt0.tv_sec) * 1000000L + (bt1.tv_usec - bt0.tv_usec)); }
     return 0;
 }
 
@@ -750,6 +775,7 @@ static void repair_loop(void *fn0, cand_t *c, unsigned seed, int mode) {
 }
 
 int main(int argc, char **argv) {
+    if (argc >= 4) bc("START rows %s stock %s image %s trials %s", argv[1], argv[2], argv[3], argc > 4 ? argv[4] : "?");
     if (argc < 4) { fprintf(stderr, "usage: fnfuzz LEDGER.tsv STOCK REBUILT [trials] [filter|@first,count]\n"); return 2; }
     nanmode = getenv("FNFUZZ_NANMODE") != NULL; nancanon = getenv("FNFUZZ_NANCANON") != NULL;
     narrow = getenv("FNFUZZ_PROFILE") && (!strcmp(getenv("FNFUZZ_PROFILE"), "narrow") || !strcmp(getenv("FNFUZZ_PROFILE"), "tiny")); tiny = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "tiny"); graph = getenv("FNFUZZ_PROFILE") && (!strcmp(getenv("FNFUZZ_PROFILE"), "graph") || !strcmp(getenv("FNFUZZ_PROFILE"), "obj")); objmode = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "obj"); if (getenv("FNFUZZ_OBJPTR")) objp = (unsigned)atoi(getenv("FNFUZZ_OBJPTR"));

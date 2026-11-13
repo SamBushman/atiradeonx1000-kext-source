@@ -23,6 +23,7 @@ type BITSET 0x100
   u32 0x04 0 40
 type PROGRAM 0x800 share
   objfill 0x00 0x800
+  ptr 0x08 COMPILER
   ptr 0x3bc BITSET
 type COMPILER 0x800 share
   randfill 0x00 0x800 4096
@@ -61,3 +62,7 @@ type BLOCK 0x400
   ptr 0xd4 VECA 100 4
   ptr 0xf4 VECA 100 4
   ptr 0xf8 VECA 100 4
+type OBJ 0x400
+  objfill 0x00 0x400
+  ptr 0xa8 COMPILER
+  ptr 0xac PROGRAM
