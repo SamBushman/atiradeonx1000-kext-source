@@ -5437,10 +5437,9 @@ int _gleExecuteVertexArrayRange(param_1, param_2, param_3, param_4, param_5, par
   (**(code **)(param_1 + 0x4888))
             (param_1,param_2,param_3,param_4,param_5,*(undefined4 *)(param_1 + 0x4854),param_7,f0,f0
              ,f0,f0);
-  (**(code **)(param_1 + 0x4708))
+  return (**(code **)(param_1 + 0x4708))
             (*(undefined4 *)(param_1 + 0x4688),param_2,param_3,param_4,param_5,param_6,param_7,
              *(undefined4 *)(param_1 + 0x4854));
-  return;
 }
 
 /* _gleDrawArraysSyncState @ 0x4500c (736 bytes) */

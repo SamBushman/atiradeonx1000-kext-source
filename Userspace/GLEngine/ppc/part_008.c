@@ -673,7 +673,7 @@ int _gleCreateFenceObject(param_1)
     puVar2 = puVar2 + 1;
     iVar4 = iVar4 + -1;
   } while (iVar4 != 0);
-  return;
+  return (int)puVar3;
 }
 
 /* _gleCreatePluginFence @ 0x4fed4 (112 bytes) */

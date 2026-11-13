@@ -1419,14 +1419,14 @@ int _gleCreateBufferObject(param_1, param_2)
   } while (iVar4 != 0);
   iVar4 = 0;
   if (*(char *)(param_1 + 0x85a4) != '\0') {
-    puVar3 = puVar3 + 0x12;
+    puVar2 = puVar3 + 0x12;
     do {
-      *puVar3 = 0xffffffff;
+      *puVar2 = 0xffffffff;
       iVar4 = iVar4 + 1;
-      puVar3 = puVar3 + 1;
+      puVar2 = puVar2 + 1;
     } while (iVar4 < (int)(uint)*(byte *)(param_1 + 0x85a4));
   }
-  return;
+  return (int)puVar3;
 }
 
 /* _gleBindBufferObject @ 0xc72dc (460 bytes) */
@@ -1944,9 +1944,8 @@ int _gleOffsetLimitImage3D(param_1, param_2, param_3, param_4, param_5, param_6,
   undefined4 param_6;
   undefined4 param_7;
 {
-  ((int (*)())_OffsetLimitImage3D)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,
+  return ((int (*)())_OffsetLimitImage3D)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,
                       *(undefined4 *)(param_1 + 0x10));
-  return;
 }
 
 /* _gleOffsetLimitImage @ 0xc7e18 (28 bytes) */
@@ -1958,8 +1957,7 @@ int _gleOffsetLimitImage(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_5;
   undefined4 param_6;
 {
-  ((int (*)())_OffsetLimitImage3D)(param_1,param_2,param_3,1,param_4,param_5,param_6,0);
-  return;
+  return ((int (*)())_OffsetLimitImage3D)(param_1,param_2,param_3,1,param_4,param_5,param_6,0);
 }
 
 /* _gleFreeCopyContextData @ 0xc7e38 (104 bytes) */

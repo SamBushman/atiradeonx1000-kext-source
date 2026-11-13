@@ -505,7 +505,7 @@ int _gleClipPointsPlane(param_1, param_2, param_3)
       param_3 = (int)piVar9 - (int)param_2 >> 2;
     } while ((iVar7 < iVar11) && (0 < param_3));
   }
-  return;
+  return param_3;
 }
 
 /* FUN_000eab28 @ 0xeab28 (700 bytes) */

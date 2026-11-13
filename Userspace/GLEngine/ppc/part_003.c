@@ -16,7 +16,7 @@ int _gleShrinkFuncCacheElem(param_1, param_2)
     *(int **)(*piVar1 + 4) = piVar1;
     *(int **)piVar1[1] = piVar1;
   }
-  return;
+  return (int)piVar1;
 }
 
 /* _glEndNoMat_Exec @ 0x1ed10 (64 bytes) */

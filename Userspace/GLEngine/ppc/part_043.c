@@ -891,8 +891,10 @@ int _gleCreateFramebufferObject(param_1, param_2)
   undefined4 *puVar5;
   int iVar6;
   int iVar7;
+  undefined4 *framebufferObject;
   
   puVar5 = (undefined4 *)_gleVecAlloc((uint)*(byte *)(param_1 + 0x85a4) * 0x20 + 0xf0);
+  framebufferObject = puVar5;
   puVar1 = PTR__gleFreeFramebufferObject_00110e20;
   puVar5[2] = 1;
   puVar5[3] = puVar1;
@@ -953,7 +955,7 @@ int _gleCreateFramebufferObject(param_1, param_2)
       puVar3 = puVar3 + 8;
     } while (iVar6 < (int)(uint)*(byte *)(param_1 + 0x85a4));
   }
-  return;
+  return (int)framebufferObject;
 }
 
 /* _gleFreeFramebufferObject @ 0xcda80 (116 bytes) */

@@ -3837,8 +3837,10 @@ int _gleCreateVertexArrayObject(param_1, param_2)
   undefined4 *puVar4;
   int iVar5;
   int iVar6;
+  undefined4 *vertexArrayObject;
   
   puVar4 = (undefined4 *)((int (*)())_gleVecAlloc)((uint)*(byte *)(param_1 + 0x85a4) * 0x8c + 0x3e0);
+  vertexArrayObject = puVar4;
   puVar1 = PTR__gleFreeVertexArrayObject_001115f8;
   iVar5 = 0x20;
   *puVar4 = 0;
@@ -3911,7 +3913,7 @@ int _gleCreateVertexArrayObject(param_1, param_2)
       puVar2 = puVar2 + 0x23;
     } while (iVar5 < (int)(uint)*(byte *)(param_1 + 0x85a4));
   }
-  return;
+  return (int)vertexArrayObject;
 }
 
 /* _gleCreatePluginVertexArray @ 0x65e0 (132 bytes) */
