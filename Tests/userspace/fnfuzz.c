@@ -40,7 +40,8 @@ typedef struct { int id; char name[96]; unsigned stock_addr, reb_off; int size; 
 static cand_t *g_cs; static int g_nc; static unsigned long g_ap[2]; static unsigned g_astock, g_areb;   /* the ledger and the image anchors: a pointer into an image's text is named by the function it points at */
 static unsigned long long rng_state;
 static unsigned rnd32(void) { rng_state = rng_state * 6364136223846793005ULL + 1442695040888963407ULL; return (unsigned)(rng_state >> 32); }
-static unsigned arena_ptr(void) { return ARENA_BASE + ARENA_PTR_LO + ((rnd32() % (ARENA_SIZE - 2 * ARENA_PTR_LO)) & ~3u); }
+static int objmode;   /* FNFUZZ_PROFILE=obj: every pointer is the address of a 0x40-byte object slot whose word 0 is a vtable pointer (implies FNFUZZ_VT): `**(obj + K)` chains and virtual calls on any pointer-typed field succeed */
+static unsigned arena_ptr(void) { if (objmode) return ARENA_BASE + ARENA_PTR_LO + 0x40 * (rnd32() % ((ARENA_SIZE - 2 * ARENA_PTR_LO) / 0x40)); return ARENA_BASE + ARENA_PTR_LO + ((rnd32() % (ARENA_SIZE - 2 * ARENA_PTR_LO)) & ~3u); }
 
 static int tiny, graph;   /* graph: the arena is mostly pointers to itself (a linked structure a function can walk two or three levels deep) */
 static int narrow;   /* FNFUZZ_PROFILE=narrow: small integers only (no wild indexes into tables), so a difference in behaviour is a difference in the code, not in an out-of-range read */
@@ -636,7 +637,7 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     }
     if (interpose) { ncalls_c = 0; trace_c = 0; memset(mask_c, 0, sizeof mask_c); ret_state = (unsigned long long)seed * 0x9E3779B97F4A7C15ULL + c->id; install_stubs(cur_img); }
     unsigned *w = (unsigned *)ARENA_BASE;
-    for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned k = rnd32() % 10; w[i] = graph ? (k < 2 ? 0 : k < 4 ? rnd32() % 64 : (vtmode && rnd32() % 4 == 0) ? vt_ptr() : arena_ptr()) : tiny ? (k < 6 ? 0 : k < 9 ? rnd32() % 16 : arena_ptr()) : (k < 3 ? 0 : k < 6 ? rnd32() % 64 : k < 7 ? (narrow ? rnd32() % 256 : rnd32()) : arena_ptr()); }
+    for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned k = rnd32() % 10; w[i] = objmode ? ((i % 16 == 0) ? vt_ptr() : (k < 2 ? 0 : k < 5 ? rnd32() % 16 : k < 6 ? rnd32() % 4096 : arena_ptr())) : graph ? (k < 2 ? 0 : k < 4 ? rnd32() % 64 : (vtmode && rnd32() % 4 == 0) ? vt_ptr() : arena_ptr()) : tiny ? (k < 6 ? 0 : k < 9 ? rnd32() % 16 : arena_ptr()) : (k < 3 ? 0 : k < 6 ? rnd32() % 64 : k < 7 ? (narrow ? rnd32() % 256 : rnd32()) : arena_ptr()); }
     if (nanmode) for (unsigned i = 0; i < ARENA_SIZE / 4; i++) if (rnd32() % 24 == 0) w[i] = nan_wrd[rnd32() % (sizeof nan_wrd / sizeof *nan_wrd)];
     unsigned ia[8]; double da[13]; int k = 0, j = 0;
     for (const char *p = c->pc; *p && *p != '-'; p++) {
@@ -721,7 +722,7 @@ static int same(const result_t *a, const result_t *b, char rc) {
 int main(int argc, char **argv) {
     if (argc < 4) { fprintf(stderr, "usage: fnfuzz LEDGER.tsv STOCK REBUILT [trials] [filter|@first,count]\n"); return 2; }
     nanmode = getenv("FNFUZZ_NANMODE") != NULL; nancanon = getenv("FNFUZZ_NANCANON") != NULL;
-    narrow = getenv("FNFUZZ_PROFILE") && (!strcmp(getenv("FNFUZZ_PROFILE"), "narrow") || !strcmp(getenv("FNFUZZ_PROFILE"), "tiny")); tiny = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "tiny"); graph = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "graph");
+    narrow = getenv("FNFUZZ_PROFILE") && (!strcmp(getenv("FNFUZZ_PROFILE"), "narrow") || !strcmp(getenv("FNFUZZ_PROFILE"), "tiny")); tiny = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "tiny"); graph = getenv("FNFUZZ_PROFILE") && (!strcmp(getenv("FNFUZZ_PROFILE"), "graph") || !strcmp(getenv("FNFUZZ_PROFILE"), "obj")); objmode = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "obj");
     int trials = argc > 4 ? atoi(argv[4]) : 12; const char *flt = argc > 5 ? argv[5] : NULL;
     FILE *f = fopen(argv[1], "r"); if (!f) { perror(argv[1]); return 2; }
     char line[512], anchor[96]; unsigned a_stock = 0, a_reb = 0;
@@ -741,7 +742,7 @@ int main(int argc, char **argv) {
     g_cs = cs; g_nc = nc; g_ap[0] = ap[0]; g_ap[1] = ap[1]; g_astock = a_stock; g_areb = a_reb;
     if (getenv("FNFUZZ_DATA")) { FILE *df = fopen(getenv("FNFUZZ_DATA"), "r"); if (!df) { perror("FNFUZZ_DATA"); return 2; } char dl[256]; while (fgets(dl, sizeof dl, df) && ngdat < 32) { if (sscanf(dl, "%47s\t%x\t%x", gdat[ngdat].name, &gdat[ngdat].st, &gdat[ngdat].rb) == 3) ngdat++; } fclose(df); }
     if (getenv("FNFUZZ_GRAPHSPEC")) { gs_malloc = 1; load_graphspec(getenv("FNFUZZ_GRAPHSPEC")); }
-    vtmode = getenv("FNFUZZ_VT") != NULL; interpose = getenv("FNFUZZ_INTERPOSE") != NULL; imp_ctl = getenv("FNFUZZ_IMPORT_CTL");
+    vtmode = getenv("FNFUZZ_VT") != NULL || objmode; interpose = getenv("FNFUZZ_INTERPOSE") != NULL; imp_ctl = getenv("FNFUZZ_IMPORT_CTL");
     if (interpose) { init_retblk(); collect_slots(0, img_hdr[0]); collect_slots(1, img_hdr[1]); load_nargs(); load_stackrec(); fprintf(stderr, "interposer: %d stock slots, %d rebuilt slots, %d distinct imports\n", nslots[0], nslots[1], nstub); }
     int first = 0, count = nc; if (flt && flt[0] == '@') sscanf(flt + 1, "%d,%d", &first, &count);
     if (getenv("FNFUZZ_ONE")) {   /* FNFUZZ_ONE=S|R:trial - run the first matching function in THIS process (no handlers): for gdb. e.g. FNFUZZ_ONE=R:3 gdb --args fnfuzz ... name */
