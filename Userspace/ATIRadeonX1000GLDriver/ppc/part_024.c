@@ -607,13 +607,11 @@ setTargetBlock:
   targetBlock = (int *)afterInst[0x56];
   isEntryLike = (**(code **)(*targetBlock + 0x2c))(targetBlock);
   if (isEntryLike != 0) {
-    Block__prependInst(targetBlock[0x55],newMov);
-    return;
+    return Block__prependInst(targetBlock[0x55],newMov);
   }
   isStoreLike = (**(code **)(*afterInst + 0x7c))(afterInst);
   if (isStoreLike != 0) {
-    Block__insertAtStart(targetBlock,newMov);
-    return;
+    return Block__insertAtStart(targetBlock,newMov);
   }
   return Block__insertInstAfter(targetBlock,afterInst,newMov);
 }

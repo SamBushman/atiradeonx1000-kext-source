@@ -3832,20 +3832,16 @@ int ildisPrintFilterName(disassembler, filterCode, passThroughR5, fmtArgR6, fmtA
   undefined4 fmtArgR9;
 {
   if (filterCode == 1) {
-    ((int (*)())ildisAppendf)(disassembler,"point",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);
-    return;
+    return ((int (*)())ildisAppendf)(disassembler,"point",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);
   }
   if (filterCode == 0) {
-    ((int (*)())ildisAppendf)(disassembler,"unknown",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);
-    return;
+    return ((int (*)())ildisAppendf)(disassembler,"unknown",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);
   }
   if (filterCode == 2) {
-    ((int (*)())ildisAppendf)(disassembler,"linear",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);
-    return;
+    return ((int (*)())ildisAppendf)(disassembler,"linear",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);
   }
   if (filterCode == 3) {
-    ((int (*)())ildisAppendf)(disassembler,"aniso",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);
-    return;
+    return ((int (*)())ildisAppendf)(disassembler,"aniso",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);
   }
   *disassembler = *disassembler + 1;
   return ((int (*)())ildisAppendf)(disassembler,"!!invalid!!",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);

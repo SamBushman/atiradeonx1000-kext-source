@@ -43,20 +43,16 @@ int ildisPrintBoundComponent(disassembler, boundCode, passThroughR5, fmtArgR6, f
   undefined4 fmtArgR9;
 {
   if (boundCode == 1) {
-    ildisAppendf(disassembler,"0",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbda8);
-    return;
+    return ildisAppendf(disassembler,"0",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbda8);
   }
   if (boundCode == 0) {
-    ildisAppendf(disassembler,"-",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbda8);
-    return;
+    return ildisAppendf(disassembler,"-",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbda8);
   }
   if (boundCode == 2) {
-    ildisAppendf(disassembler,"1",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbda8);
-    return;
+    return ildisAppendf(disassembler,"1",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbda8);
   }
   if (boundCode == 3) {
-    ildisAppendf(disassembler,"*",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbda8);
-    return;
+    return ildisAppendf(disassembler,"*",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbda8);
   }
   *disassembler = *disassembler + 1;
   return ildisAppendf(disassembler,"!!!invalid!!!",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbda8);
@@ -312,17 +308,14 @@ int ildisPrintDcldefComponent(disassembler, componentCode, passThroughR5, fmtArg
   undefined4 fmtArgR9;
 {
   if (componentCode == 1) {
-    ildisAppendf(disassembler,"0",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdc460);
-    return;
+    return ildisAppendf(disassembler,"0",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdc460);
   }
   if (componentCode != 0) {
     if (componentCode == 2) {
-      ildisAppendf(disassembler,"1",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdc460);
-      return;
+      return ildisAppendf(disassembler,"1",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdc460);
     }
     *disassembler = *disassembler + 1;
-    ildisAppendf(disassembler,"!!!invalid!!!",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdc460);
-    return;
+    return ildisAppendf(disassembler,"!!!invalid!!!",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdc460);
   }
   return ildisAppendf(disassembler,"*",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdc460);
 }
