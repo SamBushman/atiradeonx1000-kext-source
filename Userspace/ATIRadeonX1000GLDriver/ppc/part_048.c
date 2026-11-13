@@ -1247,7 +1247,7 @@ int ValueKey__replaceWithLaneConstants(ctx, laneConstants)
     loopIndex = 4;
     loopPtr2 = (float *)&negatedConstants;
     do {
-      *loopPtr2 = GH_U2F(0x7fff0000U);
+      *loopPtr2 = GH_U2F(0x7ffffffeU);
       loopPtr2 = loopPtr2 + 1;
       loopIndex = loopIndex + -1;
     } while (loopIndex != 0);
@@ -1269,14 +1269,14 @@ int ValueKey__replaceWithLaneConstants(ctx, laneConstants)
                       (hwLimits,*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),&negatedConstants,&destSelectMask
                       );
     if (loopIndex == 0) {
-      commonValue = GH_U2F(0x7fff0000U);
+      commonValue = GH_U2F(0x7ffffffeU);
       loopIndex = 0;
       loopPtr2 = laneConstants;
       do {
         loopRemaining2 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
         if (*(char *)(loopIndex + loopRemaining2 + 0x10) != '\x01') {
           Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238), *(unsigned int *)loopPtr2);
-          if ((GH_F2U(commonValue) == 0x7fff0000U)) {
+          if ((GH_F2U(commonValue) == 0x7ffffffeU)) {
             commonValue = *loopPtr2;
           }
           else if (commonValue != *loopPtr2) {
@@ -1315,7 +1315,7 @@ int ValueKey__replaceWithLaneConstants(ctx, laneConstants)
       }
       else {
         do {
-          *loopPtr2 = GH_U2F(0x7fff0000U);
+          *loopPtr2 = GH_U2F(0x7ffffffeU);
           loopPtr2 = loopPtr2 + 1;
         } while (loopPtr2 != negatedConstantsTail);
         byteOffset = 0;
@@ -1746,7 +1746,7 @@ int ValueKey__foldMulPowerOfTwoIntoOutputScale(ctx)
   loopIndex = 1;
   do {
     ValueKey__commonLaneValue(operandValue,ctx,loopIndex);
-    if ((GH_F2U(operandValue[0]) != 0x7fff0000U)) {
+    if ((GH_F2U(operandValue[0]) != 0x7ffffffeU)) {
       isPositive = -1 < (int)GH_F2U(operandValue[0]);
       if (isPositive) {
         magnitude = (double)operandValue[0];
@@ -2387,13 +2387,13 @@ int ValueKey__foldMulOfConstants(ctx)
   loopIndex = 5;
   loopPtr2 = operandConsts;
   do {
-    *loopPtr2 = GH_U2F(0x7fff0000U);
+    *loopPtr2 = GH_U2F(0x7ffffffeU);
     loopPtr2 = loopPtr2 + 1;
     loopIndex = loopIndex + -1;
   } while (loopIndex != 0);
   loopPtr2 = (float *)&laneProducts;
   do {
-    *loopPtr2 = GH_U2F(0x7fff0000U);
+    *loopPtr2 = GH_U2F(0x7ffffffeU);
     loopPtr2 = loopPtr2 + 1;
   } while (loopPtr2 != operandConsts);
   loopIndex = 0;

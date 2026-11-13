@@ -5768,7 +5768,7 @@ setSource1Flags:
   literalCursorA = literalVecA;
   literalCursor = literalVecB;
   do {
-    *literalCursor = GH_U2F(0x7fff0000U);
+    *literalCursor = GH_U2F(0x7ffffffeU);
     literalCursor = literalCursor + 1;
     countdownB = countdownB + -1;
   } while (countdownB != 0);
@@ -5858,7 +5858,7 @@ setLastOperandBufPtr:
   countdown = 4;
   literalCursor = literalCursorA;
   do {
-    *literalCursor = GH_U2F(0x7fff0000U);
+    *literalCursor = GH_U2F(0x7ffffffeU);
     literalCursor = literalCursor + 1;
     countdown = countdown + -1;
   } while (countdown != 0);

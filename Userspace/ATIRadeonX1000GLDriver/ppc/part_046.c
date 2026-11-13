@@ -2541,7 +2541,7 @@ int ValueKey__evaluateConstantInst(outValue, valueKey, outClampedFlag)
   float param_3_w;
   
   loopRemaining = 4;
-  *outValue = GH_U2F(0x7fff0000U);
+  *outValue = GH_U2F(0x7ffffffeU);
   loopPtr = operand1Values;
   do {
     *loopPtr = 0x7ffffffe;
@@ -2590,16 +2590,16 @@ int ValueKey__evaluateConstantInst(outValue, valueKey, outClampedFlag)
     loopRemaining = loopRemaining + 4;
     laneByteOffset = laneByteOffset + 4;
   } while (moreLanes);
-  *outValue = GH_U2F(0x7fff0000U);
+  *outValue = GH_U2F(0x7ffffffeU);
   opcodeInfo = *(int **)(*(int *)(valueKey + 0xb0) + 0x88);
   (**(code **)(*opcodeInfo + 8))
             (opcodeInfo,outValue,operand1Values,operand2Values,operand3Values,*(undefined4 *)(valueKey + 0x238));
   param_3_w = *outValue;
   if (param_3_w != FLOAT_001aa1d0) {
-    IRInst__scaleByOutputScale(&scaledValue,*(undefined4 *)(valueKey + 0xb0),param_3_w);
+    IRInst__scaleByOutputScale(&scaledValue,*(undefined4 *)(valueKey + 0xb0),GH_F2U(param_3_w));
     *outValue = scaledValue;
-    IRInst__clampOutputValue(&clampedValue,*(undefined4 *)(valueKey + 0xb0),scaledValue);
-    if (clampedValue != *outValue) {
+    IRInst__clampOutputValue(&clampedValue,*(undefined4 *)(valueKey + 0xb0),GH_F2U(scaledValue));
+    if (GH_F2U(clampedValue) != GH_F2U(*outValue)) {
       *outClampedFlag = 1;
       *outValue = clampedValue;
     }

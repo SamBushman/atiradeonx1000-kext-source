@@ -795,7 +795,7 @@ int ValueKey__evaluateConstantInstruction(resultOut, valueKey, changedOut)
   float clampedResult [2];
   
   loopRemaining = 5;
-  *resultOut = GH_U2F(0x7fff0000U);
+  *resultOut = GH_U2F(0x7ffffffeU);
   loopPtr2 = laneInputs;
   do {
     *loopPtr2 = 0x7ffffffe;
@@ -831,10 +831,10 @@ int ValueKey__evaluateConstantInstruction(resultOut, valueKey, changedOut)
   loopPtr = *(int **)(*(int *)(valueKey + 0xb0) + 0x88);
   (**(code **)(*loopPtr + 4))(loopPtr,resultOut,laneInputs,*(undefined4 *)(valueKey + 0x238));
   if (*resultOut != 2147483648.0) {
-    IRInst__scaleByOutputScale(&scaledResult,*(undefined4 *)(valueKey + 0xb0),*resultOut);
+    IRInst__scaleByOutputScale(&scaledResult,*(undefined4 *)(valueKey + 0xb0),GH_F2U(*resultOut));
     *resultOut = scaledResult;
-    IRInst__clampOutputValue(clampedResult,*(undefined4 *)(valueKey + 0xb0),scaledResult);
-    if (clampedResult[0] != *resultOut) {
+    IRInst__clampOutputValue(clampedResult,*(undefined4 *)(valueKey + 0xb0),GH_F2U(scaledResult));
+    if (GH_F2U(clampedResult[0]) != GH_F2U(*resultOut)) {
       *changedOut = 1;
       *resultOut = clampedResult[0];
     }
@@ -1312,11 +1312,11 @@ int ValueKey__evalLitLane(resultOut, key, lane)
   loopRemaining = 5;
   loopPtr = litInputs;
   do {
-    *loopPtr = GH_U2F(0x7fff0000U);
+    *loopPtr = GH_U2F(0x7ffffffeU);
     loopPtr = loopPtr + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
-  *resultOut = GH_U2F(0x7fff0000U);
+  *resultOut = GH_U2F(0x7ffffffeU);
   if (*(int *)(*(int *)(*(int *)(key + 0xb0) + 0x88) + 8) == 0x32) {
     if (lane == 1) {
       loopPtr = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),
@@ -2201,7 +2201,7 @@ int ValueKey__foldCompareOfFloatConstants(ctx)
   laneResults = laneConstants + 3;
   loopPtr3 = laneResults;
   do {
-    *loopPtr3 = GH_U2F(0x7fff0000U);
+    *loopPtr3 = GH_U2F(0x7ffffffeU);
     loopPtr3 = loopPtr3 + 1;
     loopIndex = loopIndex + -1;
   } while (loopIndex != 0);
@@ -2223,7 +2223,7 @@ int ValueKey__foldCompareOfFloatConstants(ctx)
     loopPtr4 = laneConstants;
     if (*(char *)(loopIndex + loopIndex2 + 0x10) != '\x01') {
       do {
-        *loopPtr4 = GH_U2F(0x7fff0000U);
+        *loopPtr4 = GH_U2F(0x7ffffffeU);
         loopPtr4 = loopPtr4 + 1;
       } while (laneResults != loopPtr4);
       valueNumberPtr = (int *)(loopRemaining + 8);

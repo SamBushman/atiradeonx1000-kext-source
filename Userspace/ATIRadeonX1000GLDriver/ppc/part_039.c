@@ -426,14 +426,14 @@ int KhanPs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, c
   lanesLeft = 4;
   fillCursor = constValues;
   do {
-    *fillCursor = GH_U2F(0x7fff0000U);
+    *fillCursor = GH_U2F(0x7ffffffeU);
     fillCursor = fillCursor + 1;
     lanesLeft = lanesLeft + -1;
   } while (lanesLeft != 0);
   lanesLeft = 4;
   fillCursor = negatedValues;
   do {
-    *fillCursor = GH_U2F(0x7fff0000U);
+    *fillCursor = GH_U2F(0x7ffffffeU);
     fillCursor = fillCursor + 1;
     lanesLeft = lanesLeft + -1;
   } while (lanesLeft != 0);

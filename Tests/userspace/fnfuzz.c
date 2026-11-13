@@ -722,6 +722,7 @@ static int same(const result_t *a, const result_t *b, char rc) {
     return 1;
 }
 
+static unsigned sd2(int t, const cand_t *c) { return 0x9e3779b1u * (t + 1) + c->id * 7919u; }
 static void repair_loop(void *fn0, cand_t *c, unsigned seed, int mode) {
     ncur_patch = 0; memset(cur_apatch, 0, sizeof cur_apatch); unsigned last_pc = 0, last_ra = 0;
     for (int it = 0; it < 16; it++) { result_t r0; run_one(fn0, c, seed, mode, 0, &r0);
@@ -778,6 +779,12 @@ int main(int argc, char **argv) {
                     pp = getenv("FNFUZZ_APATCHES"); for (int q = 0; pp && *pp && q < 8 && sscanf(pp, "%x%n", &v, &nn) == 1; q++) { cur_apatch[q] = v; pp += nn; if (*pp == ',') pp++; } }
                 else if (getenv("FNFUZZ_REPAIR")) repair_loop((void *)(ap[0] + (c->stock_addr - a_stock)), c, sd, c->rc == 'd');
                 fprintf(stderr, "repair: %d patches:", ncur_patch); for (int q = 0; q < ncur_patch; q++) fprintf(stderr, " %x:%x", cur_patch[q].addr, cur_patch[q].val); fprintf(stderr, " apatch:"); for (int q = 0; q < 8; q++) fprintf(stderr, " %x", cur_apatch[q]); fprintf(stderr, "\n"); } }
+            if (getenv("FNFUZZ_ONERUN")) {   /* run this one trial through the normal forked path (handlers, repair patches above) after mapping zero pages at the addresses in FNFUZZ_MAPZERO (hex list, page-aligned down): a wild table read that lands in unmapped memory in one image and in a neighbouring library in the other is layout luck - with the same readable bytes behind it both images must give the same result */
+                const char *mz = getenv("FNFUZZ_MAPZERO"); unsigned ma; int nn;
+                while (mz && *mz && sscanf(mz, "%x%n", &ma, &nn) == 1) { void *m = mmap((void *)(ma & ~0xfffu), 0x2000, PROT_READ | PROT_WRITE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0); fprintf(stderr, "mapzero %08x: %s\n", ma & ~0xfffu, m == MAP_FAILED ? "FAILED" : "ok"); mz += nn; if (*mz == ',') mz++; }
+                for (int im = 0; im < 2; im++) { result_t r; void *fi = (void *)(ap[im] + ((im ? c->reb_off : c->stock_addr) - (im ? a_reb : a_stock))); run_one(fi, c, sd2(t, c), c->rc == 'd', im, &r);
+                    printf("%s trial %d: status %d r3 %08x digest %08x fault_pc %08x ra %08x\n", im ? "rebuilt" : "stock", t, r.status, r.r3, r.digest, r.fault_pc, r.fault_ra); }
+                return 0; }
             nohandlers = 1; wfd = open("/dev/null", 1);
             printf("%s %s at %p trial %d\n", img ? "rebuilt" : "stock", c->name, fnp, t); fflush(stdout);
             child(fnp, c, 0x9e3779b1u * (t + 1) + c->id * 7919u, c->rc == 'd'); return 0; }
