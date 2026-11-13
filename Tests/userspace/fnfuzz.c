@@ -21,6 +21,7 @@
 #include <sys/ucontext.h>
 #include <sys/mman.h>
 #include <sys/wait.h>
+#include <sys/resource.h>
 #include <sys/select.h>
 #include <fcntl.h>
 #include <stdarg.h>
@@ -278,6 +279,8 @@ static unsigned fn_token(unsigned v) {
    it came from (rb + D2) and reports it; the parent then patches that word to a valid arena pointer (a value that keeps rb+D inside the arena) and runs again, up to 16 patches per trial. The final patch list
    is applied to the arena before the call in all three runs of the trial (stock twice, rebuilt), so the stock decides which fields must be pointers and the images are compared on a path that runs. */
 static unsigned g_fix_valid, g_fix_src, g_fix_disp, g_fix_arg, g_fault_pc, g_fault_ra;
+static void bc(const char *fmt, ...);
+static int bc_child;
 static void report(int status, unsigned r3, unsigned r4, unsigned long long f1);
 static void on_sig_info(int s, siginfo_t *si, void *ucv) {
     (void)si;
@@ -302,6 +305,7 @@ static void report(int status, unsigned r3, unsigned r4, unsigned long long f1) 
     if (gs_rec_n) { h = fnv((unsigned char *)&gs_rec_hash, 4, h); h = fnv((unsigned char *)&gs_rec_n, 4, h); }
     if (interpose) for (unsigned i = 0; i < sizeof retblk / 4; i++) { unsigned v = ((unsigned *)retblk)[i]; if (v >= (unsigned)(uintptr_t)retblk && v < (unsigned)(uintptr_t)retblk + sizeof retblk) v = 0x1A6E0003; h = fnv((unsigned char *)&v, 4, h); }
     result_t r; memset(&r, 0, sizeof r); r.ncalls = ncalls_c; r.trace = trace_c; memcpy(r.mask, mask_c, sizeof r.mask); r.fix_valid = g_fix_valid; r.fix_src = g_fix_src; r.fix_disp = g_fix_disp; r.fix_arg = g_fix_arg; r.fault_pc = g_fault_pc; r.fault_ra = g_fault_ra; r.status = status; r.r3 = in_image(r3) ? 0x1A6E0002 : r3; r.r4 = r4; if (nancanon && (f1 & 0x7ff0000000000000ULL) == 0x7ff0000000000000ULL && (f1 & 0xfffffffffffffULL)) f1 = 0x7ff8000000000000ULL; r.f1 = f1; r.digest = (unsigned)(h ^ (h >> 32)); memcpy(r.args, cur_args, sizeof r.args); memcpy(r.dargs, cur_dargs, sizeof r.dargs);
+    if (bc_child) bc("W status %d", status);
     (void)!write(wfd, &r, sizeof r);
     if (getenv("FNFUZZ_VERBOSE")) { for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned v = w[i]; if (in_image(v)) v = 0x1A6E0001; v = nan_canon_w(v); (void)!write(wfd, &v, 4); } }
     _exit(0);
@@ -735,10 +739,11 @@ static int run_one(void *fn, const cand_t *c, unsigned seed, int mode, int img, 
         if (select(fd[0] + 1, &rs, NULL, NULL, &tv) <= 0) { kill(p, SIGKILL); waitpid(p, &st, 0); close(fd[0]); memset(out, 0, sizeof *out); out->status = 14; { struct timeval bt1; gettimeofday(&bt1, NULL); bc("E child %d WATCHDOG-KILL after %ld us", (int)p, (bt1.tv_sec - bt0.tv_sec) * 1000000L + (bt1.tv_usec - bt0.tv_usec)); } return 0; }
     }
     n = read(fd[0], out, sizeof *out);
+    { struct timeval bt2; gettimeofday(&bt2, NULL); bc("R got %ld bytes after %ld us", (long)n, (bt2.tv_sec - bt0.tv_sec) * 1000000L + (bt2.tv_usec - bt0.tv_usec)); }
     if (getenv("FNFUZZ_VERBOSE") && n == (ssize_t)sizeof *out) { static unsigned buf[3][ARENA_SIZE / 4]; unsigned *dst = buf[img]; size_t got = 0; ssize_t k; while (got < ARENA_SIZE && (k = read(fd[0], (char *)dst + got, ARENA_SIZE - got)) > 0) got += k; last_arena[img] = dst; }
-    close(fd[0]); waitpid(p, &st, 0);
+    close(fd[0]); struct rusage ru; memset(&ru, 0, sizeof ru); wait4(p, &st, 0, &ru);
     if (n != (ssize_t)sizeof *out) { memset(out, 0, sizeof *out); out->status = WIFSIGNALED(st) ? WTERMSIG(st) : 99; }
-    { struct timeval bt1; gettimeofday(&bt1, NULL); bc("E child %d status %d exit %d sig %d result %s after %ld us", (int)p, out->status, WIFEXITED(st) ? WEXITSTATUS(st) : -1, WIFSIGNALED(st) ? WTERMSIG(st) : 0, n == (ssize_t)sizeof *out ? "full" : "short", (bt1.tv_sec - bt0.tv_sec) * 1000000L + (bt1.tv_usec - bt0.tv_usec)); }
+    { struct timeval bt1; gettimeofday(&bt1, NULL); bc("E child %d status %d exit %d sig %d result %s after %ld us utime %ld.%06d stime %ld.%06d maxrss %ld minflt %ld majflt %ld", (int)p, out->status, WIFEXITED(st) ? WEXITSTATUS(st) : -1, WIFSIGNALED(st) ? WTERMSIG(st) : 0, n == (ssize_t)sizeof *out ? "full" : "short", (bt1.tv_sec - bt0.tv_sec) * 1000000L + (bt1.tv_usec - bt0.tv_usec), (long)ru.ru_utime.tv_sec, (int)ru.ru_utime.tv_usec, (long)ru.ru_stime.tv_sec, (int)ru.ru_stime.tv_usec, ru.ru_maxrss, ru.ru_minflt, ru.ru_majflt); }
     return 0;
 }
 
