@@ -186,7 +186,7 @@ static struct { int idx, arg, words; } stackrec[16]; static int nstackrec;
 static unsigned stub_common(int idx, unsigned *a) {   /* 32-bit return: an `unsigned long long` is returned in r3:r4 (high word in r3), so the callers read 0 from r3 */
     unsigned h = trace_c ? trace_c : 2166136261u; h = (h ^ (unsigned)idx) * 16777619u;
     ncalls_c++; mask_c[idx >> 5] |= 1u << (idx & 31);
-    { static int bi = -1; if (bi < 0) bi = getenv("FNFUZZ_BCIMP") != NULL; if (bi) bc("I %u %s(%x %x %x %x)", ncalls_c, stub_names[idx], a[0], a[1], a[2], a[3]); }   /* FNFUZZ_BCIMP=1 (#273): every import call of the child as a UDP breadcrumb, so the last one before a hang is known */
+    { static int bi = -1; if (bi < 0) bi = getenv("FNFUZZ_BCIMP") != NULL; if (bi) bc("I %u %s(%x %x %x %x) idx %d ra %x", ncalls_c, stub_names[idx], a[0], a[1], a[2], a[3], idx, (unsigned)__builtin_return_address(1)); }   /* FNFUZZ_BCIMP=1 (#273): every import call of the child as a UDP breadcrumb, so the last one before a hang is known */
     { static int dump = -1; if (dump < 0) dump = getenv("FNFUZZ_IMPDUMP") != NULL; if (dump) { fprintf(stderr, "  [%s call %u] %s(%x %x %x %x %x %x %x %x)\n", cur_img ? "rebuilt" : "stock", ncalls_c, stub_names[idx], a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7]); } }
     for (int i = 0; i < nargs_tab[idx]; i++) {
         unsigned v = a[i];
@@ -288,6 +288,7 @@ static int bc_child;
 static void report(int status, unsigned r3, unsigned r4, unsigned long long f1);
 static void on_sig_info(int s, siginfo_t *si, void *ucv) {
     (void)si;
+    if (s != SIGSEGV && s != SIGBUS) { ucontext_t *u = (ucontext_t *)ucv; unsigned pc = u->uc_mcontext->ss.srr0, w = 0; vm_size_t got = 0; if (vm_read_overwrite(mach_task_self(), pc, 4, (vm_address_t)&w, &got) != KERN_SUCCESS || got != 4) w = 0xdeadbeef; g_fault_pc = pc; g_fault_ra = u->uc_mcontext->ss.lr; bc("W signal %d pc %x lr %x word %x r1 %x", s, pc, u->uc_mcontext->ss.lr, w, u->uc_mcontext->ss.r1); report(s, 0, 0, 0); }
     if (s == SIGSEGV || s == SIGBUS) {
         ucontext_t *u = (ucontext_t *)ucv; unsigned *R = (unsigned *)&u->uc_mcontext->ss.r0; unsigned pc = u->uc_mcontext->ss.srr0;
         /* Nov 13 (#273): a fetch fault (the function branched to a bad pointer: pc 0x140) made `*(unsigned *)pc` fault AGAIN inside this handler with SIGSEGV blocked; the kernel then re-delivered the
@@ -671,7 +672,7 @@ static void on_tick(int s, siginfo_t *si, void *ucv) {
 #define GUARD_STATUS 31
 typedef struct { unsigned addr, orig; } gsite_t;
 static gsite_t *gsites[2]; static int ngsites[2]; static unsigned gtext_lo[2], gtext_hi[2];
-static unsigned gcode_lo[2048], gcode_hi[2048]; static int ngcode, guard_state;
+static unsigned gcode_lo[2048], gcode_hi[2048]; static char gcode_x[2048]; static int ngcode, guard_state;   /* gcode_x: the harness's own text (dyld image 0): only the exact stub / callback entries are valid targets there */
 static void guard_prepare(void) {
     guard_state = getenv("FNFUZZ_GUARD") && !strcmp(getenv("FNFUZZ_GUARD"), "0") ? -1 : 1;
     if (guard_state < 0) return;
@@ -680,7 +681,7 @@ static void guard_prepare(void) {
         const struct load_command *lc = (const struct load_command *)(mh + 1);
         for (unsigned k = 0; k < mh->ncmds; k++, lc = (const struct load_command *)((const char *)lc + lc->cmdsize))
             if (lc->cmd == LC_SEGMENT) { const struct segment_command *sg = (const struct segment_command *)lc;
-                if (!strcmp(sg->segname, "__TEXT") && ngcode < 2048) { gcode_lo[ngcode] = sg->vmaddr + (unsigned)sl; gcode_hi[ngcode] = sg->vmaddr + (unsigned)sl + sg->vmsize; ngcode++; } }
+                if (!strcmp(sg->segname, "__TEXT") && ngcode < 2048) { gcode_lo[ngcode] = sg->vmaddr + (unsigned)sl; gcode_hi[ngcode] = sg->vmaddr + (unsigned)sl + sg->vmsize; gcode_x[ngcode] = i == 0; ngcode++; } }
     }
     gcode_lo[ngcode] = 0xffff8000u; gcode_hi[ngcode] = 0xffffffffu; ngcode++;   /* the comm page */
     for (int im = 0; im < 2; im++) {
@@ -699,7 +700,15 @@ static void guard_prepare(void) {
         ngsites[im] = (int)n;
     }
 }
-static int guard_code(unsigned t) { for (int i = 0; i < ngcode; i++) if (t >= gcode_lo[i] && t < gcode_hi[i]) return 1; return 0; }
+/* Nov 13 (#273 follow-up): the harness's own text is NOT code the function may branch to, except the import stubs and the fnq callbacks it hands out: a wild call to a small integer such as 0x5a1f landed mid-function in the
+   harness, and the two images then returned through different frames (stock: clean return; rebuilt: LR = a stack address, SIGILL) - a harness artifact that looked like a Scheduler__advanceCycle defect. */
+static int guard_code(unsigned t) {
+    for (int i = 0; i < ngcode; i++) if (t >= gcode_lo[i] && t < gcode_hi[i]) {
+        if (!gcode_x[i]) return 1;
+        for (int q = 0; q < MAXSTUB; q++) if (stub_fns[q] && (unsigned)(uintptr_t)stub_fns[q] == t) return 1;
+        for (int q = 0; q < 16; q++) if ((unsigned)(uintptr_t)gs_qtab[q] == t) return 1;
+        return 0; }
+    return 0; }
 static void on_guard(int s, siginfo_t *si, void *ucv) {
     ucontext_t *u = (ucontext_t *)ucv; unsigned pc = u->uc_mcontext->ss.srr0; const gsite_t *g = gsites[cur_img]; int lo = 0, hi = ngsites[cur_img] - 1, f = -1;
     while (lo <= hi) { int m = (lo + hi) / 2; if (g[m].addr == pc) { f = m; break; } if (g[m].addr < pc) lo = m + 1; else hi = m - 1; }
@@ -724,11 +733,11 @@ static int nohandlers;
 static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     if (!nohandlers) {
         ualarm(alarm_us, 0);   /* a pure function finishes in microseconds; anything longer is a hang (both images are treated alike) */
-        if (getenv("FNFUZZ_REPAIR")) { struct sigaction sa; memset(&sa, 0, sizeof sa); sa.sa_sigaction = on_sig_info; sa.sa_flags = SA_SIGINFO; sigemptyset(&sa.sa_mask); sigaction(SIGSEGV, &sa, NULL); sigaction(SIGBUS, &sa, NULL); } else { signal(SIGSEGV, on_sig); signal(SIGBUS, on_sig); } signal(SIGILL, on_sig); signal(SIGFPE, on_sig); signal(SIGTRAP, on_sig); signal(SIGABRT, on_sig); signal(SIGALRM, on_sig); signal(SIGSYS, on_sig);
+        if (getenv("FNFUZZ_REPAIR")) { struct sigaction sa; memset(&sa, 0, sizeof sa); sa.sa_sigaction = on_sig_info; sa.sa_flags = SA_SIGINFO; sigemptyset(&sa.sa_mask); sigaction(SIGSEGV, &sa, NULL); sigaction(SIGBUS, &sa, NULL); sigaction(SIGILL, &sa, NULL); } else { signal(SIGSEGV, on_sig); signal(SIGBUS, on_sig); signal(SIGILL, on_sig); } signal(SIGFPE, on_sig); signal(SIGTRAP, on_sig); signal(SIGABRT, on_sig); signal(SIGALRM, on_sig); signal(SIGSYS, on_sig);
     }
-    if (!nohandlers && getenv("FNFUZZ_TRAPAT") && cur_img == 0) { struct sigaction sa; memset(&sa, 0, sizeof sa); sa.sa_sigaction = on_trap; sa.sa_flags = SA_SIGINFO; sigemptyset(&sa.sa_mask); sigaction(SIGTRAP, &sa, NULL);
-        const char *ta = getenv("FNFUZZ_TRAPAT"); unsigned va;
-        while (ta && *ta && sscanf(ta, "%x", &va) == 1) { unsigned *tp = (unsigned *)(g_ap[0] + (va - g_astock)); unsigned long pg = (unsigned long)tp & ~0xfffUL;
+    if (!nohandlers && getenv(cur_img ? "FNFUZZ_TRAPATR" : "FNFUZZ_TRAPAT")) { struct sigaction sa; memset(&sa, 0, sizeof sa); sa.sa_sigaction = on_trap; sa.sa_flags = SA_SIGINFO; sigemptyset(&sa.sa_mask); sigaction(SIGTRAP, &sa, NULL);
+        const char *ta = getenv(cur_img ? "FNFUZZ_TRAPATR" : "FNFUZZ_TRAPAT"); unsigned va;   /* FNFUZZ_TRAPATR: the same for the REBUILT image (its file vaddrs) */
+        while (ta && *ta && sscanf(ta, "%x", &va) == 1) { unsigned *tp = (unsigned *)(g_ap[cur_img] + (va - (cur_img ? g_areb : g_astock))); unsigned long pg = (unsigned long)tp & ~0xfffUL;
             int pr = mprotect((void *)pg, 0x1000, PROT_READ | PROT_WRITE | PROT_EXEC); bc("T trapat %x -> %p mprotect %d old %x", va, (void *)tp, pr, pr == 0 ? *tp : 0);
             if (pr == 0) { *tp = 0x7fe00008u; __asm__ volatile("dcbst 0,%0\n\tsync\n\ticbi 0,%0\n\tsync\n\tisync" : : "r"(tp) : "memory"); }
             while (*ta && *ta != ',') ta++; if (*ta == ',') ta++; } }
