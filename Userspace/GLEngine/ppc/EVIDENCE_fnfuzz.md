@@ -712,3 +712,17 @@ Misses, all understood (a control that misses is information about the harness, 
 Results (clean image): `buildClassTables` 100/100 complete, `insertPendingReloads` 100/100, `insertCopyBefore` 71/100, `insertSpillCode` 24/100, `initRegisterTables` 100/100 - **0 differ** except `initRegisterTables` whose only difference is `r3` (stock and rebuilt leave different arena addresses; arena digest identical; both direct stock callers (`callers_read_r3.py`) ignore the result) -> ledger class `v`. `RegAlloc__run` is still uninformative (0/100 complete, also with a 512 KB arena + `FNFUZZ_GDEPTH=10`): it gets through initRegisterTables, the graph constructor, buildClassTables and pass_color_graph and then faults in the cleanup after the first round (`Arena__free` of the graph block); cause not established. Coverage limit: the blocks have empty instruction lists, so the pending-reload / spill-insertion loop bodies are NOT exercised (shallow paths only).
 
 Mismatch control (mutant image `gld_bc84d040` = HEAD + `Tests/userspace/gld_sc/mutants_regalloc.patch`, not installed, 5 one-line changes, same spec/flags, 100 trials): `initRegisterTables` table size `0x1000`->`0x1001` DIFF 100/100 (digest); `buildClassTables` `allocation[1] = 0x80`->`0x7f` DIFF 100/100; `insertCopyBefore` `*registerCountRef + 1`->`+ 2` DIFF 71/100 (every complete trial); `insertSpillCode` `compiler[0x39c] + 1`->`+ 2` DIFF 24/100 (every complete trial); `insertPendingReloads` `spillTempCount << 2`->`<< 3` DIFF 85/100. 5/5 detected.
+
+## Block__verify dropped dead loads (Nov 13 night, fix 3b21f30b)
+
+Found by the sra4 spec on the clean image gld_9edfa41a: `Program__rewriteAttribShaderInsts_0013da3c` 7/100 trials differ (trial 6: stock st=10, rebuilt st=0 r3=5000ca40).
+
+Cause (measured, not inferred): gdb on both images with the same trial. The rebuilt image enters `Block__verify` (0x2419bc0) and returns; the stock faults inside it with EXC_BAD_ACCESS at 0x495,
+pc = Block__verify+0xc4 (`lwzx r0,r2,r10` at 0xe85c0). The stock disassembly shows each of the two neighbour loops has a body (`lwzx r0,r2,r10` at 0xe8544 / 0xe85c0, value stored to a dead
+stack slot); the corpus had empty loop bodies because Ghidra drops a dead store. On valid blocks the two behave identically; on a block whose vector data pointer is bad, stock faults in the load.
+
+Fix: the loads are restored as `volatile int` reads (part_022.c). Scan: all 96 empty-body `for` loops of the GLDriver corpus, and the empty-body loops with memory operands in the
+GLEngine/libGL/libGLProgrammability corpora, were reviewed; the rest are capacity-doubling idioms, bit scans and trivially-destructible destroy loops with no element load. No other instance.
+
+Verification on gld_3b21f30b (ledgers retargeted with gleng_ledger_retarget.py): the row 0/100 differ; whole sra4 spec 47 functions / 4700 trials 0 differ, 15 uninformative; whole blk1 spec
+86 functions / 8600 trials 0 differ, 9 uninformative. Not yet run: GL suite on this image (deferred to the end-of-batch pass per the standing plan).
