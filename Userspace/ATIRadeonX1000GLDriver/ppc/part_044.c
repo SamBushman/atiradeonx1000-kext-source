@@ -8735,9 +8735,6 @@ int Scheduler__freeNodes(scheduler)
       }
       loopIndex = loopIndex + 1;
       node = (int *)*nodeSlot;
-      /* issue #76: same shared scheduler[0x18] array gap as elsewhere - skip a never-populated
-       * slot instead of dereferencing it. */
-      if (node == (int *)0x0) goto LAB_issue76_skip_166cfc;
       loopIndex2 = 0;
       *(undefined4 *)(node[0xe] + 0x150) = 0;
       vector = (uint *)node[0x10];
@@ -8783,7 +8780,6 @@ int Scheduler__freeNodes(scheduler)
         Arena__free(*(undefined4 *)(predVectorHeader + -4),predVectorHeader + -4);
       }
       (**(code **)(*node + 4))(node);
-LAB_issue76_skip_166cfc:
       if (nodeCount == loopIndex) break;
       vector = *(uint **)(scheduler + 0x18);
     }
@@ -8990,9 +8986,6 @@ int Scheduler__computeNodePriorities(scheduler)
         nodeSlot = (int *)Vector__elementRefGrow(allNodes,nodeIndex);
       }
       node = *nodeSlot;
-      /* issue #76: same shared-array gap as Scheduler__buildDependencyGraph/Scheduler__buildCoScheduleGroups - skip a never-populated
-       * scheduler[6] slot instead of dereferencing/passing it on as a live format object. */
-      if (node == 0) goto LAB_issue76_skip_1670fc;
       balanceEnabled = Compiler__isOptionEnabled(*scheduler,0x28);
       if (balanceEnabled == 0) {
 loopSetFlagValue:
@@ -9167,10 +9160,6 @@ loopSetNeighbourNode:
           else {
             descendantNodeSlot = (int *)Vector__elementRefGrow(allNodes,descendantNodeIndex);
           }
-          /* issue #76: same shared-array gap as elsewhere in this function - *descendantNodeSlot (the
-           * slot's own stored format pointer, not descendantNodeSlot itself) can legitimately still be an
-           * unpopulated 0. */
-          if (*descendantNodeSlot == 0) goto LAB_issue76_skip_1670fc_inner;
           if (*(int *)(*descendantNodeSlot + 0x5c) == 0) {
             edge = *(int *)(*descendantNodeSlot + 0x58);
             if (edge == 1) {
@@ -9184,7 +9173,6 @@ loopSetNeighbourNode:
             *(int *)(node + 0x20) = *(int *)(node + 0x20) + 1;
           }
         }
-LAB_issue76_skip_1670fc_inner:
         descendantNodeIndex = descendantNodeIndex + 1;
         moreBits = descendantBit != 0x1f;
         descendantByteOffset = descendantByteOffset + 4;
@@ -9193,7 +9181,6 @@ LAB_issue76_skip_1670fc_inner:
       if (maxDepth < *(int *)(node + 0x14)) {
         maxDepth = *(int *)(node + 0x14);
       }
-LAB_issue76_skip_1670fc:
       processedCount = processedCount + 1;
       nodeIndex = nodeIndex - 1;
       nodeCount = nodeCount - 1;
@@ -10497,9 +10484,6 @@ int Scheduler__packDotProductCandidates(scheduler)
         nodeSlot = (int *)Vector__elementRefGrow(allNodes,nodeIndex);
       }
       node = *nodeSlot;
-      /* issue #76: same shared-array gap as Scheduler__buildDependencyGraph/Scheduler__buildCoScheduleGroups/Scheduler__computeNodePriorities - skip a
-       * never-populated scheduler[0x18]-array slot instead of dereferencing it. */
-      if (node == 0) goto LAB_issue76_skip_169b70;
       loopIndex = 0;
       predEdges = *(uint **)(node + 0x44);
       predEdgeCount = predEdges[1];
@@ -10542,7 +10526,6 @@ checkNextSortedNode:
           DList__pushBack(candidateSentinelList,node);
         }
       }
-LAB_issue76_skip_169b70:
       nodeIndex = nodeIndex + 1;
       if (nodeCount == nodeIndex) break;
       allNodes = *(uint **)(scheduler + 0x18);
@@ -11432,29 +11415,6 @@ checkInst:
             nodeSlot = (int *)Vector__elementRefGrow(nodeVector,nodeIndex);
           }
           curNode = *nodeSlot;
-          /* issue #76: curNode is read back from scheduler[6]'s array at whatever index this
-           * iteration's format was recorded under - but that recording can legitimately still
-           * be an empty (never-populated) slot: a *different*, unrelated code path
-           * (Scheduler__addOperandDependencyEdges, cross-referencing a format's own sub-component via that
-           * component's OWN persistent [0x54] "registry index") can grow this SAME array ahead
-           * of the official sequential writer, using an index that has nothing to do with how
-           * many formats this loop has appended so far. Verified live on real hardware: the
-           * component's [0x54] value was stable and pre-existing (set before this whole
-           * CGLCreateContext call chain even began, not corrupted by anything traced this
-           * session), and every instruction from this read through the IRInst__writesTrackedRegister call below
-           * is a byte-for-byte accurate decompilation of the stock binary (checked against the
-           * real disassembly) - so this is a real, stock-shared gap between two independent
-           * writers of the same growable array, not a decompilation defect. The rest of this
-           * loop iteration exists purely to detect and register cross-format rendering quirks
-           * (building "nodeAlloc[7]=0x1010101"-tagged quirk records) for a real, populated
-           * format pair - with nothing here to compare against, there is no quirk to register,
-           * so skip straight to this iteration's own bookkeeping instead of dereferencing a
-           * format that was never actually stored. */
-          if (curNode == 0) {
-            latestSlot10Node = 0;
-            latestSlot11Node = 0;
-            goto LAB_issue76_skip_pair;
-          }
           curInst = *(int **)(curNode + 0x38);
           writesTrackedRegister = ((int (*)())IRInst__writesTrackedRegister)(curInst);
           if (writesTrackedRegister != 0) {
@@ -11824,7 +11784,6 @@ checkInst:
               listNext = *(int *)(listNextNode + 8);
             }
           }
-LAB_issue76_skip_pair:
           nodeIndex = nodeIndex - 1;
           nodeByteOffset = nodeByteOffset + -4;
           visitedCount = visitedCount + 1;
@@ -11928,12 +11887,6 @@ int Scheduler__buildCoScheduleGroups(scheduler)
         nodeSlot = (int *)Vector__elementRefGrow(allNodes,loopIndex);
       }
       node = *nodeSlot;
-      /* issue #76: same shared-array gap as Scheduler__buildDependencyGraph - scheduler[6] can have never-populated
-       * slots left behind by an unrelated code path (Scheduler__addOperandDependencyEdges) that grows this same array
-       * via a format's own persistent, pre-existing registry index, independent of how many
-       * slots this function's own sequential scan has walked. Skip an empty slot instead of
-       * dereferencing it. */
-      if (node == 0) goto LAB_issue76_skip_16bd70;
       if (((((*(int *)(node + 0x60) == 0) &&
             (nodeSlot = *(int **)(node + 0x38), nodeSlot[0x20] != 0)) &&
            (nodeScratch = RegKind__flagBit0(nodeSlot[0x26]), nodeScratch != 0)) &&
@@ -12058,7 +12011,6 @@ int Scheduler__buildCoScheduleGroups(scheduler)
           groupRecord = (uint *)0x0;
         }
       }
-LAB_issue76_skip_16bd70:
       loopIndex = loopIndex + 1;
     } while (nodeCount != loopIndex);
     if (groupRecord != (uint *)0x0) {

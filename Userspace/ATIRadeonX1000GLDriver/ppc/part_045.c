@@ -3024,9 +3024,7 @@ int Scheduler__scheduleBlock(scheduler, block)
       else {
         nodeRef2 = (int *)Vector__elementRefGrow(allNodeVector,vectorIndex2);
       }
-      /* issue #76: same shared scheduler[6] array gap as part_044.c's per-format processing -
-       * skip a never-populated slot instead of dereferencing it. */
-      if ((*nodeRef2 != 0) && (*(int *)(*nodeRef2 + 0x34) == 0)) {
+      if (*(int *)(*nodeRef2 + 0x34) == 0) {
         DList__pushBack(seedSentinelList,*nodeRef2);
       }
       vectorIndex2 = vectorIndex2 + 1;
