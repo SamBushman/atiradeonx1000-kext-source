@@ -1,0 +1,9 @@
+# gld_misc_spec.txt - rows the plain ledger runs with a wild context (Nov 14): gld_updateSampleCoverage reads *(ctx+4)+0x2a50 (the sample count, valid 1..7: three-entry tables indexed (count>>1)-1)
+type SCST 0x3000
+  randfill 0x00 0x3000 65536
+  u32 0x2a50 1 7
+type SCCTX 0x2000
+  randfill 0x00 0x2000 65536
+  ptr 0x04 SCST
+func gld_updateSampleCoverage
+  arg 0 ptr SCCTX
