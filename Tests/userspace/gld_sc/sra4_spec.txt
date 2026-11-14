@@ -584,6 +584,15 @@ type IRINST 0x400
   u32 0xe0 0 48
   ptr 0xa8 COMPILER
   ptr 0xac PROGRAM
+type IRINSTB 0x400
+  objfill 0x00 0x400
+  dval 0x00 ptrTo_IRInst__vtable_001e8b4c 8
+  u32 0x80 0 1
+  u32 0x84 0 3
+  ptr 0xa8 COMPC
+  ptr 0xac PROGC
+  ptr 0x158 CB1 100 4
+  u32 0x14 0 1
 type OBJ 0x400
   objfill 0x00 0x400
   ptr 0xa8 COMPILER
@@ -1251,9 +1260,9 @@ func Program__insertExitMarkerAndFlagBlocks
   arg 0 ptr PROGRAM
 
 func Program__insertMovAfter
-  arg 0 ptr PROGRAM
-  arg 1 ptr OBJ
-  arg 2 ptr OBJ
+  arg 0 ptr PROGC
+  arg 1 ptr IRINSTB
+  arg 2 ptr IRINSTB
   arg 3 int 0 8
   arg 4 int 0 8
   arg 5 ptr OBJ
@@ -1262,7 +1271,7 @@ func Program__orderBlocksByDfs
   arg 0 ptr PROGRAM
 
 func Program__propagateBlockFlagsFromSuccessors
-  arg 0 ptr PROGRAM
+  arg 0 ptr PROGC
 
 func Program__propagateMovThroughUses
   arg 0 ptr PROGC
