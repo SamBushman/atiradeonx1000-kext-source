@@ -1,0 +1,15 @@
+# gld_tables_spec.txt - pure table-lookup rows of the GLDriver shader compiler, index limited to a plausible in-table range (Nov 14): the plain ledger passes a random 32-bit index and reads the neighbouring data, which holds relocated pointers that differ per image
+func Program__interpSlotOfIlType
+  arg 1 int 0 23
+func Program__laneKindOfIlType
+  arg 1 int 0 23
+func Program__laneKindOfInterpSlot
+  arg 1 int 0 15
+func Table__interpolatorKindToCode
+  arg 1 int 0 11
+func RegKind__vectorWidthKind
+  arg 0 int 0 23
+func RegKind__laneCount
+  arg 0 int 0 23
+func OpcodeTemplate__tableOffsetForIlOpcode
+  arg 0 pick 0x30 0x31 0x5f 0x74 0x75 0x76 0x77 0x78 0x79 0x7a 0x7b 0x7c 0x7d 0x7e
