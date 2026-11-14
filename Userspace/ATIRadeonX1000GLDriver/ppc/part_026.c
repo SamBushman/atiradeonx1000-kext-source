@@ -5302,7 +5302,8 @@ int Program__translateILStream(program, ilReader)
   undefined4 templateModeWord;
   int pendingListHead;
   uint ****unusedTemplateMode;
-  undefined4 tempIndexCache [9];   /* the stock's 0x24-byte frame object at r1+0xcc: words 0..8 = cached temp index per template token 0x55..0x5d; word 0 doubles as the select-word scratch and word 1 (r1+0xd0) as the shared temp index, so they are one object, not separate locals */
+  /* the stock's 0x24-byte frame object at r1+0xcc: words 0..8 = cached temp index per template token 0x55..0x5d; word 0 doubles as the select-word scratch and word 1 (r1+0xd0) as the shared temp index, so they are one object, not separate locals */
+  undefined4 tempIndexCache [9];
   undefined4 composedSelectOut;
   uint ****markedSelectOut;
   undefined4 extraOperandTemp2;

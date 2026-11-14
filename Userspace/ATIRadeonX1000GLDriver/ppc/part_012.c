@@ -137,7 +137,8 @@ int ffvpBuildPassThroughProgram(ctx)
   int currentVariant;
   uint hasPointSize;
   int colorOutSlotB;
-  uint variantKey [12];   /* the 0x30-byte variant key (stock r1+0x40): [2] = output mask, [3] = flags (was `variantKey[2]` + two neighbouring locals) */
+  /* the 0x30-byte variant key (stock r1+0x40): [2] = output mask, [3] = flags (was `variantKey[2]` + two neighbouring locals) */
+  uint variantKey [12];
   
   if (*(char *)(ctx + 0x1868) == '\0') {
     _memset(variantKey,0,0x30);

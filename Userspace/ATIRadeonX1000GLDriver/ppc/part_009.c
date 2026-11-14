@@ -5526,7 +5526,8 @@ int ffvpSelectPassThroughVariant(glContext)
   int currentVariant;
   uint pointSizeOut;
   undefined4 variantKeyWord;
-  uint variantKey [12];   /* the 0x30-byte variant key (stock r1+0x40): [0] gets bit 8, [2] = output mask, [3] = lane flags; zeroed by the memset below (was `variantKey[2]` + two neighbouring locals) */
+  /* the 0x30-byte variant key (stock r1+0x40): [0] gets bit 8, [2] = output mask, [3] = lane flags; zeroed by the memset below (was `variantKey[2]` + two neighbouring locals) */
+  uint variantKey [12];
   
   _memset(variantKey,0,0x30);
   ctxFlags = *(uint *)(glContext + 0x44);

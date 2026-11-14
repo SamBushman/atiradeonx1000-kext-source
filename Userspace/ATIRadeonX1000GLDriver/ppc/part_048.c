@@ -3384,7 +3384,8 @@ int ValueKey__simplifyModifiersAndAddressing(key)
   int loopIndex3;
   double floorValue;
   uint laneMask;
-  int constVec [4];   /* one 4-word frame object: word 0 = lane 0 / first instruction, words 1..3 = the rest (two adjacent locals read across each other before) */
+  /* one 4-word frame object: word 0 = lane 0 / first instruction, words 1..3 = the rest (two adjacent locals read across each other before) */
+  int constVec [4];
   longlong roundAsInt64;
   longlong floorAsInt64;
   uint readMaskOut;

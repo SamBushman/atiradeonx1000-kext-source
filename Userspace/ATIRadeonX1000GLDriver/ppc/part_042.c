@@ -5496,7 +5496,8 @@ int PostPack__matchOperandLanes(packState, inst, inst2, resultList)
   int copyDestC;
   int copyDestD;
   undefined4 operandSelect;
-  int entryRecord [11];   /* the 0x2c-byte lane entry (stock r1 frame object, memcpy'd as a whole): +0 lane words [4], +0x10 sources [4], +0x20 components [4 bytes], +0x24/+0x28 pad */
+  /* the 0x2c-byte lane entry (stock r1 frame object, memcpy'd as a whole): +0 lane words [4], +0x10 sources [4], +0x20 components [4 bytes], +0x24/+0x28 pad */
+  int entryRecord [11];
   
   ((int (*)())PostPack__instsCompatible)(packState,inst,inst2);
   if (resultList != (int *)0x0) {
