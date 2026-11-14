@@ -603,8 +603,7 @@ int IRInst__validate(inst, compiler)
   int program;
   int laneIndex2;
   undefined4 destSelectWord;
-  undefined4 srcSelectWord;
-  undefined4 srcDestSelectWord [4];
+  undefined4 srcSelectWords [2];   /* [0] = the instruction operand's select word, [1] = the source instruction's destination select word: adjacent in the stock frame (r1+0x3c, r1+0x40), indexed as one array */
   
   if (0 < inst[0x20]) {
     loopIndex = 0;
@@ -643,15 +642,15 @@ int IRInst__validate(inst, compiler)
     if (((*(uint *)(program + 0x30) & 0x20000) != 0) && (srcLoopIndex = 1, 0 < inst[0x21])) {
       do {
         srcRecord = IRInst__getOperandRecord(inst,srcLoopIndex);
-        srcSelectWord = *(undefined4 *)(srcRecord + 0x10);
+        srcSelectWords[0] = *(undefined4 *)(srcRecord + 0x10);
         srcInst = IRInst__getOperandSource(inst,srcLoopIndex);
         if (srcInst != 0) {
           operandRecord = IRInst__getOperandRecord(srcInst,0);
           laneIndex2 = 0;
-          srcDestSelectWord[0] = *(undefined4 *)(operandRecord + 0x10);
+          srcSelectWords[1] = *(undefined4 *)(operandRecord + 0x10);
           do {
-            readComponent = (uint)*(byte *)((int)srcDestSelectWord + laneIndex2 + -4);
-            if (((readComponent != 4) && (*(char *)((int)srcDestSelectWord + readComponent) != '\0')) &&
+            readComponent = (uint)*(byte *)((int)srcSelectWords + laneIndex2);
+            if (((readComponent != 4) && (*(char *)((int)&srcSelectWords[1] + readComponent) != '\0')) &&
                ((*(uint *)(srcInst + 0x14) & 0x200) != 0)) {
               IRInst__getOperandRecord(srcInst,*(undefined4 *)(srcInst + 0x84));
             }
