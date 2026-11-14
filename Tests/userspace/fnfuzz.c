@@ -287,10 +287,12 @@ static void bc(const char *fmt, ...);
 static int bc_child;
 static void report(int status, unsigned r3, unsigned r4, unsigned long long f1);
 static void on_sig_info(int s, siginfo_t *si, void *ucv) {
-    (void)si;
     if (s != SIGSEGV && s != SIGBUS) { ucontext_t *u = (ucontext_t *)ucv; unsigned pc = u->uc_mcontext->ss.srr0, w = 0; vm_size_t got = 0; if (vm_read_overwrite(mach_task_self(), pc, 4, (vm_address_t)&w, &got) != KERN_SUCCESS || got != 4) w = 0xdeadbeef; g_fault_pc = pc; g_fault_ra = u->uc_mcontext->ss.lr; bc("W signal %d pc %x lr %x word %x r1 %x", s, pc, u->uc_mcontext->ss.lr, w, u->uc_mcontext->ss.r1); report(s, 0, 0, 0); }
     if (s == SIGSEGV || s == SIGBUS) {
         ucontext_t *u = (ucontext_t *)ucv; unsigned *R = (unsigned *)&u->uc_mcontext->ss.r0; unsigned pc = u->uc_mcontext->ss.srr0;
+        if (bc_child) { unsigned sp = u->uc_mcontext->ss.r1, bt[8]; int nb = 0; bt[nb++] = u->uc_mcontext->ss.lr;   /* #273 follow-up: fault backtrace (pc, lr, then the saved LRs up the back chain) */
+            for (int k = 0; k < 6 && sp >= 0xbf000000u && sp < 0xc0000000u && !(sp & 3); k++) { unsigned fr[3]; vm_size_t g2 = 0; if (vm_read_overwrite(mach_task_self(), sp, 12, (vm_address_t)fr, &g2) != KERN_SUCCESS || g2 != 12) break; bt[nb++] = fr[2]; sp = fr[0]; }
+            bc("W fault %d pc %x ba %x bt %x %x %x %x %x %x %x", s, pc, (unsigned)(uintptr_t)si->si_addr, bt[0], nb > 1 ? bt[1] : 0, nb > 2 ? bt[2] : 0, nb > 3 ? bt[3] : 0, nb > 4 ? bt[4] : 0, nb > 5 ? bt[5] : 0, nb > 6 ? bt[6] : 0); }
         /* Nov 13 (#273): a fetch fault (the function branched to a bad pointer: pc 0x140) made `*(unsigned *)pc` fault AGAIN inside this handler with SIGSEGV blocked; the kernel then re-delivered the
            fault in a loop (a Mach exception storm) until SIGALRM ended the trial (300 ms, sometimes 6 s with 3.4 s of system time). The faulting pc and the 64 words before it are read only after
            vm_read_overwrite says they are readable; a fetch fault has no instruction to decode, so no repair is derived from it. */
