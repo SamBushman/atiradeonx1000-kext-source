@@ -33,6 +33,7 @@ static void bc(const char *fmt, ...);
 #include <mach/mach.h>
 #include <mach-o/loader.h>
 #include <mach-o/nlist.h>
+#include <mach-o/dyld.h>
 
 #define ARENA_BASE 0x50000000u
 #define ARENA_SIZE 0x20000u
@@ -658,6 +659,67 @@ static void on_tick(int s, siginfo_t *si, void *ucv) {
     bc("P %u pc %x lr %x r1 %x ctr %x", tick_n, u->uc_mcontext->ss.srr0, u->uc_mcontext->ss.lr, u->uc_mcontext->ss.r1, u->uc_mcontext->ss.ctr);
     if (tick_n * tick_ms * 1000u >= alarm_us) report(SIGALRM, 0, 0, 0);
 }
+/* ---- indirect-branch guard (default on; FNFUZZ_GUARD=0 turns it off) -------------------------------------------------------------------------------------------------------
+   Nov 13 2026, #273: every G5 hang and kernel panic of the GLDriver fuzz runs was a fuzz child branching through a garbage function pointer into DATA and executing it: a data word with primary opcode 0 and
+   extended opcode 256 (0x00000200/0x00000201 modulo 0x800: a small integer like 0x200 or 0xa00, an image pointer like 0x01710a00) is the PPC970 `attn` instruction, and executing it takes the machine down
+   (Tools: Tests/userspace/gld_sc/attn_test.c). Tiger/PPC has no no-execute protection (nxtest.c), so a page protection cannot stop it. The guard runs in the HARNESS only, on the in-memory copy of the
+   image under test in the forked child (never on a file, never in the rebuilt corpus or the kext): every `bcctr`/`bcctrl` in the image's __text is overwritten by `tw 31,0,0`; the SIGTRAP handler
+   decodes the original instruction, evaluates its condition, and either emulates the branch (CTR is the target, LR is set for `bcctrl`) when the target lies in an executable segment of a loaded image
+   (the images under test, the harness, the system libraries, the comm page), or ends the trial with status GUARD_STATUS: the wild call is never executed. The same is done to both images, so a
+   branch that is wild in one and valid in the other still shows as a difference. Returns (`blr` with a corrupted LR) and branches inside libraries are not guarded. The child also opts out of the
+   crash reporter (task exception ports -> none, the host handler turns the exception into the signal as usual): a trap per indirect call would otherwise cost ~260 ms of crashdump each. */
+#define GUARD_STATUS 31
+typedef struct { unsigned addr, orig; } gsite_t;
+static gsite_t *gsites[2]; static int ngsites[2]; static unsigned gtext_lo[2], gtext_hi[2];
+static unsigned gcode_lo[2048], gcode_hi[2048]; static int ngcode, guard_state;
+static void guard_prepare(void) {
+    guard_state = getenv("FNFUZZ_GUARD") && !strcmp(getenv("FNFUZZ_GUARD"), "0") ? -1 : 1;
+    if (guard_state < 0) return;
+    for (unsigned i = 0; i < _dyld_image_count() && ngcode < 2048; i++) {
+        const struct mach_header *mh = _dyld_get_image_header(i); intptr_t sl = _dyld_get_image_vmaddr_slide(i);
+        const struct load_command *lc = (const struct load_command *)(mh + 1);
+        for (unsigned k = 0; k < mh->ncmds; k++, lc = (const struct load_command *)((const char *)lc + lc->cmdsize))
+            if (lc->cmd == LC_SEGMENT) { const struct segment_command *sg = (const struct segment_command *)lc;
+                if (!strcmp(sg->segname, "__TEXT") && ngcode < 2048) { gcode_lo[ngcode] = sg->vmaddr + (unsigned)sl; gcode_hi[ngcode] = sg->vmaddr + (unsigned)sl + sg->vmsize; ngcode++; } }
+    }
+    gcode_lo[ngcode] = 0xffff8000u; gcode_hi[ngcode] = 0xffffffffu; ngcode++;   /* the comm page */
+    for (int im = 0; im < 2; im++) {
+        const struct mach_header *mh = img_hdr[im]; if (!mh) continue;
+        const struct load_command *lc = (const struct load_command *)(mh + 1); unsigned tv = 0; int haveT = 0;
+        for (unsigned k = 0; k < mh->ncmds; k++, lc = (const struct load_command *)((const char *)lc + lc->cmdsize))
+            if (lc->cmd == LC_SEGMENT) { const struct segment_command *sg = (const struct segment_command *)lc; if (!strcmp(sg->segname, "__TEXT")) { tv = sg->vmaddr; haveT = 1; } }
+        unsigned slide = (unsigned)mh - (haveT ? tv : 0); lc = (const struct load_command *)(mh + 1);
+        for (unsigned k = 0; k < mh->ncmds; k++, lc = (const struct load_command *)((const char *)lc + lc->cmdsize))
+            if (lc->cmd == LC_SEGMENT) { const struct segment_command *sg = (const struct segment_command *)lc;
+                if (!strcmp(sg->segname, "__TEXT")) { const struct section *sc = (const struct section *)(sg + 1);
+                    for (unsigned q = 0; q < sg->nsects; q++, sc++) if (!strcmp(sc->sectname, "__text")) { gtext_lo[im] = sc->addr + slide; gtext_hi[im] = sc->addr + slide + sc->size; } } }
+        unsigned n = 0, cap = (gtext_hi[im] - gtext_lo[im]) / 4 + 1; gsites[im] = malloc(cap * sizeof(gsite_t));
+        for (unsigned a = gtext_lo[im]; a + 4 <= gtext_hi[im]; a += 4) { unsigned w = *(unsigned *)a;
+            if ((w & 0xfc0007feu) == 0x4c000420u && (((w >> 21) & 31) & 4)) { gsites[im][n].addr = a; gsites[im][n].orig = w; n++; } }
+        ngsites[im] = (int)n;
+    }
+}
+static int guard_code(unsigned t) { for (int i = 0; i < ngcode; i++) if (t >= gcode_lo[i] && t < gcode_hi[i]) return 1; return 0; }
+static void on_guard(int s, siginfo_t *si, void *ucv) {
+    ucontext_t *u = (ucontext_t *)ucv; unsigned pc = u->uc_mcontext->ss.srr0; const gsite_t *g = gsites[cur_img]; int lo = 0, hi = ngsites[cur_img] - 1, f = -1;
+    while (lo <= hi) { int m = (lo + hi) / 2; if (g[m].addr == pc) { f = m; break; } if (g[m].addr < pc) lo = m + 1; else hi = m - 1; }
+    if (f < 0) { on_trap(s, si, ucv); return; }   /* a trap that is not a guarded branch: whatever it was before (FNFUZZ_TRAPAT, or the code's own) */
+    unsigned w = g[f].orig, bo = (w >> 21) & 31, bi = (w >> 16) & 31, cr = u->uc_mcontext->ss.cr;
+    int taken = (bo & 0x10) || (((cr >> (31 - bi)) & 1) == ((bo >> 3) & 1));
+    if (!taken) { u->uc_mcontext->ss.srr0 = pc + 4; return; }
+    unsigned tgt = u->uc_mcontext->ss.ctr & ~3u;
+    if (!guard_code(tgt)) { if (bc_child) bc("W wild branch to %x at pc %x (cur_img %d)", tgt, pc, cur_img); report(GUARD_STATUS, tgt, 0, 0); }
+    if (w & 1) u->uc_mcontext->ss.lr = pc + 4;
+    u->uc_mcontext->ss.srr0 = tgt;
+}
+static void guard_install(int img) {
+    if (guard_state <= 0 || !gsites[img]) return;
+    struct sigaction sa; memset(&sa, 0, sizeof sa); sa.sa_sigaction = on_guard; sa.sa_flags = SA_SIGINFO; sigemptyset(&sa.sa_mask); sigaction(SIGTRAP, &sa, NULL);
+    unsigned lo = gtext_lo[img] & ~0xfffu, hi = (gtext_hi[img] + 0xfffu) & ~0xfffu;
+    if (mprotect((void *)lo, hi - lo, PROT_READ | PROT_WRITE | PROT_EXEC)) { bc("T guard mprotect failed"); return; }
+    for (int i = 0; i < ngsites[img]; i++) { unsigned *p = (unsigned *)gsites[img][i].addr; *p = 0x7fe00008u; __asm__ volatile("dcbst 0,%0\n\tsync\n\ticbi 0,%0" : : "r"(p) : "memory"); }
+    __asm__ volatile("sync\n\tisync" : : : "memory");
+}
 static int nohandlers;
 static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     if (!nohandlers) {
@@ -670,6 +732,9 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
             int pr = mprotect((void *)pg, 0x1000, PROT_READ | PROT_WRITE | PROT_EXEC); bc("T trapat %x -> %p mprotect %d old %x", va, (void *)tp, pr, pr == 0 ? *tp : 0);
             if (pr == 0) { *tp = 0x7fe00008u; __asm__ volatile("dcbst 0,%0\n\tsync\n\ticbi 0,%0\n\tsync\n\tisync" : : "r"(tp) : "memory"); }
             while (*ta && *ta != ',') ta++; if (*ta == ',') ta++; } }
+    if (!nohandlers && guard_state > 0) {
+        if (!getenv("FNFUZZ_CRASHREP")) task_set_exception_ports(mach_task_self(), EXC_MASK_ALL, MACH_PORT_NULL, EXCEPTION_DEFAULT, THREAD_STATE_NONE);
+        guard_install(cur_img); }
     if (!nohandlers && getenv("FNFUZZ_PCSAMPLE")) { tick_ms = (unsigned)atoi(getenv("FNFUZZ_PCSAMPLE")); if (tick_ms < 1) tick_ms = 10; struct sigaction sa; memset(&sa, 0, sizeof sa); sa.sa_sigaction = on_tick; sa.sa_flags = SA_SIGINFO; sigemptyset(&sa.sa_mask); sigaction(SIGALRM, &sa, NULL);
         struct itimerval it; it.it_interval.tv_sec = 0; it.it_interval.tv_usec = tick_ms * 1000; it.it_value = it.it_interval; setitimer(ITIMER_REAL, &it, NULL); }
     void *m = mmap((void *)ARENA_BASE, ARENA_SIZE, PROT_READ | PROT_WRITE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0);
@@ -764,6 +829,7 @@ static void trial_log(const cand_t *c, unsigned seed, int mode, int img) {
 }
 static int run_one(void *fn, const cand_t *c, unsigned seed, int mode, int img, result_t *out) {
     trial_log(c, seed, mode, img);
+    if (!guard_state) guard_prepare();
     int fd[2]; if (pipe(fd)) return -1;
     fflush(stdout);   /* a child that calls exit() would flush the parent's pending lines a second time */
     struct timeval bt0; gettimeofday(&bt0, NULL);

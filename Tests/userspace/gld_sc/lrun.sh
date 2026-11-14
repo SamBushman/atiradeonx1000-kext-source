@@ -7,10 +7,10 @@ sh ksnap.sh 2 > /dev/null 2>&1 &
 KP=$!
 for k in 4966 b62d; do
   I=`ls -d $HOME/rung3/gld_*$k*/gld_link/ATIRadeonX1000GLDriver_renamed | head -1`
-  echo "== $k" >> $1_gs61.log
-  ../gleng_fz/fnfuzz_gs61 $1_$k.tsv $S $I ${2:-40} $3 >> $1_gs61_$k.full 2>&1
-  egrep -a "^(DIFF|RUN|UNINF|fnfuzz|RESULT|anchor|dlopen)" $1_gs61_$k.full | cut -c1-300 >> $1_gs61.log
+  echo "== $k" >> $1_gs62.log
+  ../gleng_fz/fnfuzz_gs62 $1_$k.tsv $S $I ${2:-40} $3 >> $1_gs62_$k.full 2>&1
+  egrep -a "^(DIFF|RUN|UNINF|fnfuzz|RESULT|anchor|dlopen)" $1_gs62_$k.full | cut -c1-300 >> $1_gs62.log
 done
 kill $KP 2>/dev/null
 echo "LRUN END $1 $(date +%H:%M:%S)" | nc -u -w1 192.168.5.213 9998 2>/dev/null
-echo ALLDONE >> $1_gs61.log
+echo ALLDONE >> $1_gs62.log
