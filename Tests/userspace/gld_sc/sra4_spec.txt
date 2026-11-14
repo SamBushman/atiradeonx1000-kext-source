@@ -284,10 +284,204 @@ type OPFLAGS 0x3c00
   u32 0x3a98 1 20
 type TVT 0x800
   randfill 0x00 0x800 4096
+  fnq 0x0 12 0 1
+  fnq 0x4 12 0 1
+  fnq 0x8 12 0 1
+  fnq 0xc 12 0 1
+  fnq 0x10 12 0 1
+  fnq 0x14 12 0 1
+  fnq 0x18 12 0 1
+  fnq 0x1c 12 0 1
+  fnq 0x20 12 0 1
+  fnq 0x24 12 0 1
+  fnq 0x28 12 0 1
+  fnq 0x2c 12 0 1
+  fnq 0x30 12 0 1
+  fnq 0x34 12 0 1
+  fnq 0x38 12 0 1
+  fnq 0x3c 12 0 1
+  fnq 0x40 12 0 1
+  fnq 0x44 12 0 1
+  fnq 0x48 12 0 1
+  fnq 0x4c 12 0 1
+  fnq 0x50 12 0 1
+  fnq 0x54 12 0 1
+  fnq 0x58 12 0 1
+  fnq 0x5c 12 0 1
+  fnq 0x60 12 0 1
+  fnq 0x64 12 0 1
+  fnq 0x68 12 0 1
+  fnq 0x6c 12 0 1
+  fnq 0x70 12 0 1
+  fnq 0x74 12 0 1
+  fnq 0x78 12 0 1
+  fnq 0x7c 12 0 1
+  fnq 0x80 12 0 1
+  fnq 0x84 12 0 1
+  fnq 0x88 12 0 1
+  fnq 0x8c 12 0 1
+  fnq 0x90 12 0 1
+  fnq 0x94 12 0 1
+  fnq 0x98 12 0 1
+  fnq 0x9c 12 0 1
+  fnq 0xa0 12 0 1
+  fnq 0xa4 12 0 1
+  fnq 0xa8 12 0 1
+  fnq 0xac 12 0 1
+  fnq 0xb0 12 0 1
+  fnq 0xb4 12 0 1
+  fnq 0xb8 12 0 1
+  fnq 0xbc 12 0 1
+  fnq 0xc0 12 0 1
+  fnq 0xc4 12 0 1
+  fnq 0xc8 12 0 1
+  fnq 0xcc 12 0 1
+  fnq 0xd0 12 0 1
+  fnq 0xd8 12 0 1
+  fnq 0xdc 12 0 1
+  fnq 0xe0 12 0 1
+  fnq 0xe4 12 0 1
+  fnq 0xe8 12 0 1
+  fnq 0xec 12 0 1
+  fnq 0xf0 12 0 1
+  fnq 0xf4 12 0 1
+  fnq 0xf8 12 0 1
+  fnq 0xfc 12 0 1
+  fnq 0x100 12 0 1
+  fnq 0x104 12 0 1
+  fnq 0x108 12 0 1
+  fnq 0x10c 12 0 1
+  fnq 0x110 12 0 1
+  fnq 0x114 12 0 1
+  fnq 0x118 12 0 1
+  fnq 0x11c 12 0 1
+  fnq 0x120 12 0 1
+  fnq 0x124 12 0 1
+  fnq 0x128 12 0 1
+  fnq 0x12c 12 0 1
+  fnq 0x130 12 0 1
+  fnq 0x134 12 0 1
+  fnq 0x138 12 0 1
+  fnq 0x13c 12 0 1
+  fnq 0x140 12 0 1
+  fnq 0x144 12 0 1
+  fnq 0x148 12 0 1
+  fnq 0x14c 12 0 1
+  fnq 0x150 12 0 1
+  fnq 0x154 12 0 1
+  fnq 0x158 12 0 1
+  fnq 0x15c 12 0 1
+  fnq 0x160 12 0 1
+  fnq 0x164 12 0 1
+  fnq 0x168 12 0 1
+  fnq 0x170 12 0 1
+  fnq 0x174 12 0 1
+  fnq 0x178 12 0 1
+  fnq 0x17c 12 0 1
+  fnq 0x180 12 0 1
+  fnq 0x184 12 0 1
+  fnq 0x188 12 0 1
+  fnq 0x18c 12 0 1
+  fnq 0x190 12 0 1
+  fnq 0x194 12 0 1
+  fnq 0x198 12 0 1
+  fnq 0x19c 12 0 1
+  fnq 0x1a0 12 0 1
+  fnq 0x1a4 12 0 1
+  fnq 0x1a8 12 0 1
+  fnq 0x1ac 12 0 1
+  fnq 0x1b0 12 0 1
+  fnq 0x1b4 12 0 1
+  fnq 0x1b8 12 0 1
+  fnq 0x1bc 12 0 1
+  fnq 0x1c0 12 0 1
+  fnq 0x1c4 12 0 1
+  fnq 0x1c8 12 0 1
+  fnq 0x1cc 12 0 1
+  fnq 0x1d0 12 0 1
+  fnq 0x1d4 12 0 1
+  fnq 0x1d8 12 0 1
+  fnq 0x1dc 12 0 1
+  fnq 0x1e0 12 0 1
+  fnq 0x1e4 12 0 1
+  fnq 0x1e8 12 0 1
+  fnq 0x1ec 12 0 1
+  fnq 0x1f0 12 0 1
+  fnq 0x1f4 12 0 1
+  fnq 0x1f8 12 0 1
+  fnq 0x1fc 12 0 1
+  fnq 0xd4 10 0 1
   fnqp 0x16c 0 OPFLAGS
+type RFTAB 0x200
+  randfill 0x00 0x200 4096
+  u32 0x4 0 48
+  u32 0xc 0 48
+  u32 0x14 0 48
+  u32 0x1c 0 48
+  u32 0x24 0 48
+  u32 0x2c 0 48
+  u32 0x34 0 48
+  u32 0x3c 0 48
+  u32 0x44 0 48
+  u32 0x4c 0 48
+  u32 0x54 0 48
+  u32 0x5c 0 48
+  u32 0x64 0 48
+  u32 0x6c 0 48
+  u32 0x74 0 48
+  u32 0x7c 0 48
+  u32 0x84 0 48
+  u32 0x8c 0 48
+  u32 0x94 0 48
+  u32 0x9c 0 48
+  u32 0xa4 0 48
+  u32 0xac 0 48
+  u32 0xb4 0 48
+  u32 0xbc 0 48
+  u32 0xc4 0 48
+  u32 0xcc 0 48
+  u32 0xd4 0 48
+  u32 0xdc 0 48
+  u32 0xe4 0 48
+  u32 0xec 0 48
+  u32 0xf4 0 48
+  u32 0xfc 0 48
+  u32 0x104 0 48
+  u32 0x10c 0 48
+  u32 0x114 0 48
+  u32 0x11c 0 48
+  u32 0x124 0 48
+  u32 0x12c 0 48
+  u32 0x134 0 48
+  u32 0x13c 0 48
+  u32 0x144 0 48
+  u32 0x14c 0 48
+  u32 0x154 0 48
+  u32 0x15c 0 48
+  u32 0x164 0 48
+  u32 0x16c 0 48
+  u32 0x174 0 48
+  u32 0x17c 0 48
+  u32 0x184 0 48
+  u32 0x18c 0 48
+  u32 0x194 0 48
+  u32 0x19c 0 48
+  u32 0x1a4 0 48
+  u32 0x1ac 0 48
+  u32 0x1b4 0 48
+  u32 0x1bc 0 48
+  u32 0x1c4 0 48
+  u32 0x1cc 0 48
+  u32 0x1d4 0 48
+  u32 0x1dc 0 48
+  u32 0x1e4 0 48
+  u32 0x1ec 0 48
+  u32 0x1f4 0 48
+  u32 0x1fc 0 48
 type TARGET 0x400
   randfill 0x00 0x400 4096
   ptr 0x00 TVT
+  ptr 0x04 RFTAB
 type BITSET 0x100
   randfill 0x00 0x100 65536
   u32 0x00 2 8
@@ -297,6 +491,9 @@ type PROGRAM 0x800 share
   ptr 0x08 COMPILER
   ptr 0x3bc BITSET
   ptr 0x3ac VPOOL
+  ptr 0x384 BLOCK
+  ptr 0x3a0 BLOCK
+  ptr 0x3c4 VECA 100 4
 type COMPILER 0x800 share
   randfill 0x00 0x800 4096
   ptr 0x30c TARGET
@@ -310,6 +507,12 @@ type VECA 0x20
   ptr 0x00 ARENA
   u32 0x04 2 8
   u32 0x08 1 2
+  ptr 0x0c VDATA
+  ptr 0x10 ARENA
+type VEC0 0x20
+  ptr 0x00 ARENA
+  u32 0x04 2 8
+  set 0x08 0
   ptr 0x0c VDATA
   ptr 0x10 ARENA
 type LEAF 0x200
@@ -329,12 +532,15 @@ type DNODE 0x40
   set 0x08 0
 type BLOCK 0x400
   objfill 0x00 0x400
+  dval 0x00 ptrTo_AnyBlock__vtable_001e8b58 8
   ptr 0xa8 COMPILER
   ptr 0xac PROGRAM
   self 0x98 0x9c
   self 0xa0 0x90
   ptr 0xc4 VECA 100 4
   ptr 0xcc DNODE
+  set 0x04 0
+  ptr 0x08 PROGRAM 100 0x388
   ptr 0xd0 VECA 100 4
   ptr 0xd4 VECA 100 4
   ptr 0xf4 VECA 100 4
@@ -368,6 +574,142 @@ type OBJ 0x400
   objfill 0x00 0x400
   ptr 0xa8 COMPILER
   ptr 0xac PROGRAM
+
+type SMVT 0x100
+  fnq 0x0 11 0 1
+  fnq 0x4 11 0 1
+  fnq 0x8 11 0 1
+  fnq 0xc 11 0 1
+  fnq 0x10 1 0
+  fnq 0x14 2 0
+  fnq 0x18 3 0 1
+  fnq 0x1c 11 0 1
+  fnq 0x20 4 0 1
+  fnq 0x24 5 0 1
+  fnq 0x28 11 0 1
+  fnq 0x2c 11 0 1
+  fnq 0x30 11 0 1
+  fnq 0x34 11 0 1
+  fnq 0x38 11 0 1
+  fnq 0x3c 11 0 1
+  fnq 0x40 11 0 1
+  fnq 0x44 11 0 1
+  fnq 0x48 11 0 1
+  fnq 0x4c 6 0 1 2 3
+  fnq 0x50 7 0
+  fnq 0x54 13 0
+  fnq 0x58 11 0 1
+  fnq 0x5c 11 0 1
+  fnq 0x60 11 0 1
+  fnq 0x64 11 0 1
+  fnq 0x68 11 0 1
+  fnq 0x6c 11 0 1
+  fnq 0x70 11 0 1
+  fnq 0x74 8 0
+  fnq 0x78 11 0 1
+  fnq 0x7c 11 0 1
+  fnq 0x80 11 0 1
+  fnq 0x84 11 0 1
+  fnq 0x88 11 0 1
+  fnq 0x8c 11 0 1
+  fnq 0x90 11 0 1
+  fnq 0x94 11 0 1
+  fnq 0x98 11 0 1
+  fnq 0x9c 11 0 1
+  fnq 0xa0 11 0 1
+  fnq 0xa4 11 0 1
+  fnq 0xa8 11 0 1
+  fnq 0xac 11 0 1
+  fnq 0xb0 11 0 1
+  fnq 0xb4 11 0 1
+  fnq 0xb8 11 0 1
+  fnq 0xbc 11 0 1
+  fnq 0xc0 11 0 1
+  fnq 0xc4 11 0 1
+  fnq 0xc8 11 0 1
+  fnq 0xcc 11 0 1
+  fnq 0xd0 11 0 1
+  fnq 0xd4 11 0 1
+  fnq 0xd8 11 0 1
+  fnq 0xdc 11 0 1
+  fnq 0xe0 11 0 1
+  fnq 0xe4 11 0 1
+  fnq 0xe8 11 0 1
+  fnq 0xec 11 0 1
+  fnq 0xf0 11 0 1
+  fnq 0xf4 11 0 1
+  fnq 0xf8 11 0 1
+  fnq 0xfc 11 0 1
+type SMODEL 0x40
+  objfill 0x00 0x40
+  ptr 0x00 SMVT
+  u32 0x0c 0 4
+  u32 0x10 0 4
+  u32 0x14 0 4
+type THVT 0x100
+  fnq 0x5c 9 0 1
+type THREAD 0x40
+  objfill 0x00 0x40
+  ptr 0x00 THVT
+  u32 0x14 0 0x2000
+type SNODE 0x80
+  objfill 0x00 0x80
+  set 0x04 0
+  set 0x08 0
+  u32 0x0c 0 20
+  u32 0x14 0 20
+  u32 0x2c 0 20
+  u32 0x30 0 20
+  ptr 0x38 IRINST
+  ptr 0x40 VEC0 100 4
+  ptr 0x44 VEC0 100 4
+  u32 0x58 0 3
+  u32 0x5c 0 1
+type BUNDLE 0x40
+type SCHED 0x600
+  objfill 0x00 0x600
+  ptr 0x00 COMPILER
+  ptr 0x04 PROGRAM
+  ptr 0x08 SMODEL
+  ptr 0x0c SMODEL
+  u32 0x2c 0 50
+  ptr 0x30 BUNDLE
+  set 0x34 0
+  set 0x38 0
+  set 0x40 0
+  set 0x48 0
+  set 0x4c 0
+  set 0x50 0
+  set 0x58 0
+  set 0x60 0
+  set 0x64 0
+  set 0x68 0
+  set 0x70 0
+  set 0x78 0
+  set 0x7c 0
+  set 0x80 0
+  set 0x88 0
+  set 0x90 0
+  set 0x94 0
+  set 0x98 0
+  set 0xa0 0
+  set 0xa8 0
+  set 0xf8 0
+  set 0xfc 0
+  set 0x104 0
+  set 0x10c 0
+  self 0x3c 0x40
+  self 0x44 0x34
+  self 0x54 0x58
+  self 0x5c 0x4c
+  self 0x6c 0x70
+  self 0x74 0x64
+  self 0x84 0x88
+  self 0x8c 0x7c
+  self 0x9c 0xa0
+  self 0xa4 0x94
+  self 0x100 0x104
+  self 0x108 0xf8
 
 func Program__appendInst
   arg 0 ptr PROGRAM
@@ -544,41 +886,41 @@ func RegAlloc__run
   arg 0 ptr OBJ
 
 func Scheduler__addDataDependencyEdge
-  arg 0 ptr OBJ
-  arg 1 ptr OBJ
-  arg 2 ptr OBJ
+  arg 0 ptr SCHED
+  arg 1 ptr SNODE
+  arg 2 ptr SNODE
   arg 3 int 0 8
   arg 4 int 0 8
   arg 5 int 0 8
   arg 6 int 0 8
 
 func Scheduler__addOperandDependencyEdges
-  arg 0 ptr OBJ
-  arg 1 ptr OBJ
-  arg 2 ptr OBJ
+  arg 0 ptr SCHED
+  arg 1 ptr SNODE
+  arg 2 ptr IRINST
   arg 3 int 0 8
   arg 4 int 0 8
 
 func Scheduler__advanceCycle
-  arg 0 ptr OBJ
+  arg 0 ptr SCHED
 
 func Scheduler__computeBlockRegisterSets
-  arg 0 ptr OBJ
+  arg 0 ptr SCHED
 
 func Scheduler__computeNodePriorities
-  arg 0 ptr OBJ
+  arg 0 ptr SCHED
 
 func Scheduler__issueDeadNode
-  arg 0 ptr OBJ
-  arg 1 ptr OBJ
+  arg 0 ptr SCHED
+  arg 1 ptr SNODE
 
 func Scheduler__issueNode
-  arg 0 ptr OBJ
-  arg 1 ptr OBJ
+  arg 0 ptr SCHED
+  arg 1 ptr SNODE
 
 func Scheduler__run
   arg 0 ptr PROGRAM
 
 func Scheduler__scheduleBlock
-  arg 0 ptr OBJ
+  arg 0 ptr SCHED
   arg 1 ptr BLOCK
