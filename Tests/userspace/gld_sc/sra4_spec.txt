@@ -987,9 +987,17 @@ type ABUFZ 0x3000
 type ARENAZ 0x40
   ptr 0x08 ABUFZ
   padd 0x10 0x08 0x2800
+type TARGETC 0x400 share
+  randfill 0x00 0x400 4096
+  ptr 0x00 TVT
+  ptr 0x04 RFTAB
+  u32 0x14 1 3
+  u32 0x4c 0 3
+  ptr 0x60 SMODEL
+  ptr 0x64 THREAD
 type COMPC 0x800 share
   randfill 0x00 0x800 4096
-  ptr 0x30c TARGET
+  ptr 0x30c TARGETC
   ptr 0x6c4 PROGC
   ptr 0x374 ARENA
   ptr 0x378 ARENAZ
@@ -1130,6 +1138,7 @@ type PROGC 0x800 share
   ptr 0x3ac VPOOL
   ptr 0x384 CB1 100 4
   ptr 0x3a0 CB1 100 4
+  ptr 0x3a8 CB3 100 4
   ptr 0x3c4 VECA 100 4
   ptr 0x2c COMPC
   ptr 0x18 WORDP
@@ -1362,8 +1371,9 @@ func Scheduler__issueNode
   arg 1 ptr SNODE
 
 func Scheduler__run
-  arg 0 ptr PROGRAM
+  arg 0 ptr PROGC
 
 func Scheduler__scheduleBlock
   arg 0 ptr SCHED
-  arg 1 ptr BLOCK
+  arg 1 ptr CB2
+  arg 1 rel 1 val 4

@@ -3497,7 +3497,7 @@ setProducerCheck:
     if (((clampedValue[5] & 1U) != 0) && (srcIndexInst = 1, 0 < clampedValue[0x21])) {
       do {
         operandVReg = (int *)IRInst__getOperandSource(inst,srcIndexInst);
-        isPresub = (**(code **)(*operandVReg + 0x5c))();
+        isPresub = (**(code **)(*operandVReg + 0x5c))(operandVReg);
         if (isPresub != 0) {
           depthBasePlusOne = depthBase + 1;
           operandVReg[0x58] = depthBasePlusOne;
@@ -3645,7 +3645,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
       checkResult = (**(code **)(*node + 100))(node);
       if (checkResult == 0) {
         operandVReg = (int *)IRInst__getOperandSource(node,node[0x21]);
-        checkResult = (**(code **)(*operandVReg + 100))();
+        checkResult = (**(code **)(*operandVReg + 100))(operandVReg);
         if ((((checkResult != 0) && ((operandVReg[5] & 0x200U) == 0)) && (operandVReg[0x48] == 0)) &&
            (((operandVReg[0x49] == 0 && ((operandVReg[0x2e] & 1U) == 0)) &&
             ((zeroWord = operandVReg[0x2e] & 2, zeroWord == 0 &&

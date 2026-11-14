@@ -2506,7 +2506,7 @@ int R300SchedModel__vslot28(this, program)
         if ((inst[5] & 1U) != 0) {
           if ((*(int *)(inst[0x22] + 8) == 0x31) || (*(int *)(inst[0x22] + 8) == 0x30)) {
             operandVReg = (int *)IRInst__getOperandSource(inst,1);
-            loopIndex = (**(code **)(*operandVReg + 0x5c))();
+            loopIndex = (**(code **)(*operandVReg + 0x5c))(operandVReg);
             if ((loopIndex != 0) && ((inst[0x2e] & 2U) == 0)) {
               operandVReg = (int *)IRInst__getOperandSource(inst,1);
               loopIndex = inst[0x49];
@@ -2608,7 +2608,7 @@ code_r0x0018a910:
           for (loopIndex = 1; operandIndex = (**(code **)(*inst + 0x14))(inst), loopIndex <= operandIndex;
               loopIndex = loopIndex + 1) {
             operandVReg = (int *)IRInst__getOperandSource(inst,loopIndex);
-            operandIndex = (**(code **)(*operandVReg + 0x5c))();
+            operandIndex = (**(code **)(*operandVReg + 0x5c))(operandVReg);
             if (operandIndex != 0) {
               callResult = (int *)HashTable__find(hashSet,operandVReg);
               if (callResult == (int *)0x0) {
@@ -2682,7 +2682,7 @@ code_r0x0018aab8:
             for (; loopIndex = (**(code **)(*inst + 0x14))(inst), operandIndex <= loopIndex;
                 operandIndex = operandIndex + 1) {
               operandVReg = (int *)IRInst__getOperandSource(inst,operandIndex);
-              loopIndex = (**(code **)(*operandVReg + 0x80))();
+              loopIndex = (**(code **)(*operandVReg + 0x80))(operandVReg);
               loopIndex2 = IRInst__getOperandRecord(inst,operandIndex);
               laneMask__fromUsedLanes(&operandReadMask,*(undefined4 *)(loopIndex2 + 0x10));
               laneSelectWord = operandReadMask;
@@ -4703,14 +4703,14 @@ storeProgram:
     for (loopIndex4 = 1; loopIndex2 = (**(code **)(*inst + 0x14))(inst), loopIndex4 <= loopIndex2;
         loopIndex4 = loopIndex4 + 1) {
       operandSource = (int *)IRInst__getOperandSource(inst,loopIndex4);
-      loopIndex2 = (**(code **)(*operandSource + 0x60))();
+      loopIndex2 = (**(code **)(*operandSource + 0x60))(operandSource);
       if (loopIndex2 == 0) {
 code_r0x0018e934:
         operandSource = (int *)IRInst__getOperandSource(inst,loopIndex4);
-        loopIndex2 = (**(code **)(*operandSource + 0x48))();
+        loopIndex2 = (**(code **)(*operandSource + 0x48))(operandSource);
         if (loopIndex2 == 0) {
           operandSource = (int *)IRInst__getOperandSource(inst,loopIndex4);
-          loopIndex2 = (**(code **)(*operandSource + 0x60))();
+          loopIndex2 = (**(code **)(*operandSource + 0x60))(operandSource);
           if ((loopIndex2 == 0) &&
              ((((inst[loopIndex4 * 6 + 0x28] & 2U) == 0 && ((inst[loopIndex4 * 6 + 0x28] & 1U) == 0)) ||
               (loopIndex2 = Inst__mergeLaneProducers_00148d8c(inst,program), loopIndex2 != 0)))) goto code_r0x0018eb5c;
@@ -4927,7 +4927,7 @@ code_r0x0018eb5c: ;
   if (loopIndex4 == 0) {
     for (; loopIndex4 = (**(code **)(*targetInst + 0x14))(targetInst), program <= loopIndex4; program = program + 1) {
       candidateSource = (int *)IRInst__getOperandSource(targetInst,program);
-      loopIndex4 = (**(code **)(*candidateSource + 0x60))();
+      loopIndex4 = (**(code **)(*candidateSource + 0x60))(candidateSource);
       if (loopIndex4 != 0) {
         candidateSource = (int *)IRInst__getOperandSource(candidateSource,1);
       }

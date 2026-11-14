@@ -6270,7 +6270,7 @@ int Inst__mergeSplatSourceInsts_00151370(inst, inst2, program)
           }
           sourceDef = IRInst__getOperandSource(inst1,1);
           newSource = (int *)IRInst__cloneIfPresub(sourceDef,program,0);
-          vcall5cResult = (**(code **)(*newSource + 0x5c))();
+          vcall5cResult = (**(code **)(*newSource + 0x5c))(newSource);
           if (vcall5cResult == 0) {
             sourceDef2 = IRInst__getOperandSource(inst2,1);
             if (*(int *)(program + 0x478) < *(int *)(sourceDef2 + 0x160)) {
@@ -6290,13 +6290,13 @@ int Inst__mergeSplatSourceInsts_00151370(inst, inst2, program)
             }
           }
           operandVReg = (int *)IRInst__getOperandSource(newSrcA,1);
-          vcall60Result = (**(code **)(*operandVReg + 0x60))();
+          vcall60Result = (**(code **)(*operandVReg + 0x60))(operandVReg);
           if (vcall60Result != 0) {
             sourceDef = IRInst__getOperandSource(newSrcA,1);
             IRInst__foldConstantSourcesIntoClone(sourceDef,newSrcA,*(undefined4 *)(program + 8));
           }
           operandVReg = (int *)IRInst__getOperandSource(newSrcB,1);
-          vcall60Result = (**(code **)(*operandVReg + 0x60))();
+          vcall60Result = (**(code **)(*operandVReg + 0x60))(operandVReg);
           if (vcall60Result != 0) {
             sourceDef = IRInst__getOperandSource(newSrcB,1);
             IRInst__foldConstantSourcesIntoClone(sourceDef,newSrcB,*(undefined4 *)(program + 8));
@@ -6565,7 +6565,7 @@ int Inst__mergeSplatSourceInsts_00151a74(inst, inst2, program)
               }
               sourceDef = IRInst__getOperandSource(inst4,1);
               newSource = (int *)IRInst__cloneIfPresub(sourceDef,program,0);
-              vcall5cResult = (**(code **)(*newSource + 0x5c))();
+              vcall5cResult = (**(code **)(*newSource + 0x5c))(newSource);
               if (vcall5cResult == 0) {
                 sourceDef2 = IRInst__getOperandSource(inst2,1);
                 if (*(int *)(program + 0x478) < *(int *)(sourceDef2 + 0x160)) {
@@ -6585,13 +6585,13 @@ int Inst__mergeSplatSourceInsts_00151a74(inst, inst2, program)
                 }
               }
               operandVReg = (int *)IRInst__getOperandSource(a0,1);
-              vcall60Result = (**(code **)(*operandVReg + 0x60))();
+              vcall60Result = (**(code **)(*operandVReg + 0x60))(operandVReg);
               if (vcall60Result != 0) {
                 sourceDef = IRInst__getOperandSource(a0,1);
                 IRInst__foldConstantSourcesIntoClone(sourceDef,a0,*(undefined4 *)(program + 8));
               }
               operandVReg = (int *)IRInst__getOperandSource(newSrcB,1);
-              vcall60Result = (**(code **)(*operandVReg + 0x60))();
+              vcall60Result = (**(code **)(*operandVReg + 0x60))(operandVReg);
               if (vcall60Result != 0) {
                 sourceDef = IRInst__getOperandSource(newSrcB,1);
                 IRInst__foldConstantSourcesIntoClone(sourceDef,newSrcB,*(undefined4 *)(program + 8));
@@ -6917,13 +6917,13 @@ int Inst__mergeSplatSourceInsts_001524b8(inst, inst2, program)
                 }
               }
               operandVReg = (int *)IRInst__getOperandSource(a0,1);
-              vcall60Result = (**(code **)(*operandVReg + 0x60))();
+              vcall60Result = (**(code **)(*operandVReg + 0x60))(operandVReg);
               if (vcall60Result != 0) {
                 sourceDef2 = IRInst__getOperandSource(a0,1);
                 IRInst__foldConstantSourcesIntoClone(sourceDef2,a0,*(undefined4 *)(program + 8));
               }
               operandVReg = (int *)IRInst__getOperandSource(createWithConstantOperandsResult,1);
-              vcall60Result = (**(code **)(*operandVReg + 0x60))();
+              vcall60Result = (**(code **)(*operandVReg + 0x60))(operandVReg);
               if (vcall60Result != 0) {
                 sourceDef2 = IRInst__getOperandSource(createWithConstantOperandsResult,1);
                 IRInst__foldConstantSourcesIntoClone(sourceDef2,createWithConstantOperandsResult,*(undefined4 *)(program + 8));
@@ -8090,19 +8090,19 @@ int Inst__mergeMulWithSharedConstant_001541f0(node, inst, pass)
                     }
                   }
                   operandVReg = (int *)IRInst__getOperandSource(a0,1);
-                  vcall60Result = (**(code **)(*operandVReg + 0x60))();
+                  vcall60Result = (**(code **)(*operandVReg + 0x60))(operandVReg);
                   if (vcall60Result != 0) {
                     sourceDef = IRInst__getOperandSource(a0,1);
                     IRInst__foldConstantSourcesIntoClone(sourceDef,a0,*(undefined4 *)(pass + 8));
                   }
                   operandVReg = (int *)IRInst__getOperandSource(newSrcB,1);
-                  vcall60Result = (**(code **)(*operandVReg + 0x60))();
+                  vcall60Result = (**(code **)(*operandVReg + 0x60))(operandVReg);
                   if (vcall60Result != 0) {
                     sourceDef = IRInst__getOperandSource(newSrcB,1);
                     IRInst__foldConstantSourcesIntoClone(sourceDef,newSrcB,*(undefined4 *)(pass + 8));
                   }
                   operandVReg = (int *)IRInst__getOperandSource(newSrcC,1);
-                  vcall60Result = (**(code **)(*operandVReg + 0x60))();
+                  vcall60Result = (**(code **)(*operandVReg + 0x60))(operandVReg);
                   if (vcall60Result != 0) {
                     sourceDef = IRInst__getOperandSource(newSrcC,1);
                     IRInst__foldConstantSourcesIntoClone(sourceDef,newSrcC,*(undefined4 *)(pass + 8));
@@ -9098,10 +9098,10 @@ code_r0x001564d0:
     operandIndex5 = operandIndex4;
     if (vcall5cResult == 0) goto code_r0x00156744;
     operandVReg = (int *)IRInst__getOperandSource(inst3,1);
-    vcall5cResult = (**(code **)(*operandVReg + 0x5c))();
+    vcall5cResult = (**(code **)(*operandVReg + 0x5c))(operandVReg);
     if (vcall5cResult == 0) {
       operandVReg = (int *)IRInst__getOperandSource(inst3,2);
-      vcall5cResult = (**(code **)(*operandVReg + 0x5c))();
+      vcall5cResult = (**(code **)(*operandVReg + 0x5c))(operandVReg);
       if (vcall5cResult == 0) goto code_r0x00156744;
     }
   }
@@ -9131,18 +9131,18 @@ code_r0x001564d0:
     return result;
   }
   operandVReg2 = (int *)IRInst__getOperandSource(inst,operandIndex4);
-  vcall5cResult2 = (**(code **)(*operandVReg2 + 0x5c))();
+  vcall5cResult2 = (**(code **)(*operandVReg2 + 0x5c))(operandVReg2);
   operandIndex5 = producerOperandIdxB;
   producerOperandIdxB = operandIndex4;
   inst3 = inst1;
   if (vcall5cResult2 != 0) {
     operandVReg = (int *)IRInst__getOperandSource(inst1,1);
-    vcall5cResult3 = (**(code **)(*operandVReg + 0x5c))();
+    vcall5cResult3 = (**(code **)(*operandVReg + 0x5c))(operandVReg);
     if (vcall5cResult3 != 0) {
       return result;
     }
     operandVReg = (int *)IRInst__getOperandSource(inst1,2);
-    vcall5cResult3 = (**(code **)(*operandVReg + 0x5c))();
+    vcall5cResult3 = (**(code **)(*operandVReg + 0x5c))(operandVReg);
     if (vcall5cResult3 != 0) {
       return result;
     }
@@ -9248,7 +9248,7 @@ code_r0x00156744:
       operandLoopIdx = 1;
       do {
         operandVReg = (int *)IRInst__getOperandSource(inst3,operandLoopIdx);
-        vcall5cResult3 = (**(code **)(*operandVReg + 0x5c))();
+        vcall5cResult3 = (**(code **)(*operandVReg + 0x5c))(operandVReg);
         if (vcall5cResult3 == 0) {
           if (*(int *)(pass + 0x478) < operandVReg[0x58]) {
             operandVReg[0x58] = operandVReg[0x58] + 1;

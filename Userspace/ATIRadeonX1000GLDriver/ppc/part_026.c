@@ -4710,7 +4710,7 @@ code_r0x000fcda8:
   curTempRegisterD = curTempRegisterC;
   if (((descriptorWord & 0x400000) != 0) && (hasExtensionWord = *extensionWordPtr2 >> 0x15 & 7, hasExtensionWord != 0)) {
     extensionWordOrCompiler = (undefined1 *)**(undefined4 **)(*(int *)(program + 8) + 0x30c);
-    hwVtableCallPair = (**(code **)(extensionWordOrCompiler + 0xb4))();
+    hwVtableCallPair = (**(code **)(extensionWordOrCompiler + 0xb4))(*(undefined4 *)(*(int *)(program + 8) + 0x30c));
     r4Sink = (undefined4)hwVtableCallPair;
     if (((int)((ulonglong)hwVtableCallPair >> 0x20) == 0) ||
        ((scratchPtrOrConst = (dword *)(uint)(ushort)*tokenWords,
@@ -5791,7 +5791,7 @@ code_r0x000fed00:
       *(undefined4 *)(program + 0x3f4) = 0x24;
       argR6 = (uint ******)0x0;
       virtualRegister2 = (int *)VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),registerFile,registerIndex,0);
-      registerInfo = (**(code **)(*virtualRegister2 + 0x2c))();
+      registerInfo = (**(code **)(*virtualRegister2 + 0x2c))(virtualRegister2);
       selectWordPtr = &stagedSelectWord;
       loopCounterC = 0;
       do {
@@ -6160,7 +6160,7 @@ code_r0x000fed00:
           }
           argR6 = (uint ******)0x0;
           virtualRegister2 = (int *)VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),registerFile,declRegister,0);
-          loadInterpRecord = (**(code **)(*virtualRegister2 + 0x2c))();
+          loadInterpRecord = (**(code **)(*virtualRegister2 + 0x2c))(virtualRegister2);
           selectWordPtr = &stagedSelectWord;
           *(uint *******)(loadInterpRecord + 0x140) = declRegister;
           loopCounterD = 0;
@@ -6931,7 +6931,7 @@ joined_r0x00103afc:
       Program__insertBlockAfter(program,previousBlock,scopeEndBlock);
       chainLastBlock = (int *)Block__lastBlockOfChain_e7b9c(scopeBlock);
       chainLastBlock[0x2e] = (int)scopeLevel;
-      scopeQueryResult = (**(code **)(*chainLastBlock + 0x38))();
+      scopeQueryResult = (**(code **)(*chainLastBlock + 0x38))(chainLastBlock);
       if ((scopeQueryResult == 0) && (scopeQueryResult = (**(code **)(*chainLastBlock + 0x3c))(chainLastBlock), scopeQueryResult == 0)) {
         Block__connect(chainLastBlock,scopeEndBlock);
       }
@@ -7817,10 +7817,10 @@ code_r0x00103300:
       else {
         previousBlock = (uint *****)Block__findSimplePredecessor(scopeObjectB);
         if (*(int **)(scopeObjectB + 0x150) != (int *)0x0) {
-          (**(code **)(**(int **)(scopeObjectB + 0x150) + 4))();
+          (**(code **)(**(int **)(scopeObjectB + 0x150) + 4))(*(int **)(scopeObjectB + 0x150));
         }
         if (*(int **)(scopeObjectB + 0x154) != (int *)0x0) {
-          (**(code **)(**(int **)(scopeObjectB + 0x154) + 4))();
+          (**(code **)(**(int **)(scopeObjectB + 0x154) + 4))(*(int **)(scopeObjectB + 0x154));
         }
         Vector__removeValue(previousBlock[0x34],scopeObjectB);
         do {

@@ -3287,7 +3287,7 @@ code_r0x000f101c:
                   destKindClass = IRInst__operandKindClass(consumer,0);
                   if (destKindClass == 0) {
                     operandVReg = (int *)IRInst__getOperandSource(consumer,1);
-                    sourceIsConstant = (**(code **)(*operandVReg + 0x48))();
+                    sourceIsConstant = (**(code **)(*operandVReg + 0x48))(operandVReg);
                     if (sourceIsConstant != 0) {
                       lanesLeft = 4;
                       identityCursor = unitConstQuad;
@@ -3317,7 +3317,7 @@ code_r0x000f101c:
                 allSourcesForwardable = true;
                 do {
                   operandVReg = (int *)IRInst__getOperandSource(consumer,sourceIndex);
-                  sourceVtable0x7cResult = (**(code **)(*operandVReg + 0x7c))();
+                  sourceVtable0x7cResult = (**(code **)(*operandVReg + 0x7c))(operandVReg);
                   if ((sourceVtable0x7cResult != 0) ||
                      (sourceVtable0x7cResult = ((int (*)())IRInst__isForwardable)(operandVReg,writtenLanesSelect,*(undefined4 *)(pass + 8)),
                      sourceVtable0x7cResult == 0)) {
@@ -3444,7 +3444,7 @@ int Program__foldKind6IntoKind7Inst(program, inst, inst2)
       moveSource = (int *)IRInst__getOperandSource(inst,1);
       operandRecord2 = IRInst__getOperandRecord(inst,1);
       moveSourceSelect = *(int *)(operandRecord2 + 0x10);
-      hwFoldRejects = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xb8))();
+      hwFoldRejects = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xb8))(*(int **)(*(int *)(program + 8) + 0x30c));
       if (((hwFoldRejects == 0) && (hwFoldRejects = (**(code **)(*moveSource + 0x7c))(moveSource), hwFoldRejects == 0)) &&
          ((((hwFoldRejects = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),moveSource), hwFoldRejects != 0 &&
             ((hwFoldRejects = moveSource[0x58] - *(int *)(program + 0x478), hwFoldRejects < 0 || (hwFoldRejects < 2)))) &&
@@ -3541,7 +3541,7 @@ code_r0x000e76c4:
             composedSelectWord = destMarkedSelect;
             while ((instFlags & 0x200) != 0) {
               operandVReg2 = (int *)IRInst__getOperandSource(moveSource,moveSource[0x21]);
-              sourceCheckResult = (**(code **)(*operandVReg2 + 0x7c))();
+              sourceCheckResult = (**(code **)(*operandVReg2 + 0x7c))(operandVReg2);
               if ((((sourceCheckResult != 0) ||
                    (sourceCheckResult = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),operandVReg2), sourceCheckResult == 0)) ||
                   ((sourceCheckResult = operandVReg2[0x58] - *(int *)(program + 0x478), -1 < sourceCheckResult && (1 < sourceCheckResult))))

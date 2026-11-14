@@ -1166,7 +1166,7 @@ setLoopIndex3:
             do {
               if (loopIndex != loopIndex3) {
                 operandDefInst = (int *)IRInst__getOperandSource(cloneResult,loopIndex);
-                loopRemaining = (**(code **)(*operandDefInst + 0x5c))();
+                loopRemaining = (**(code **)(*operandDefInst + 0x5c))(operandDefInst);
                 if (loopRemaining == 0) {
                   loopIndex2 = IRInst__getOperandSource(cloneResult,loopIndex);
                   if ((int)program[PROG_useEpoch / 4] < *(int *)(loopIndex2 + 0x160)) {

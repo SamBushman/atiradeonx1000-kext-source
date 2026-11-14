@@ -3868,7 +3868,7 @@ code_r0x001816bc:
       loopPtr8 = *(int **)(key + 0xb0);
     }
     else {
-      loopRemaining = (**(code **)(**(int **)(*(int *)(key + 0x238) + 0x30c) + 0xbc))();
+      loopRemaining = (**(code **)(**(int **)(*(int *)(key + 0x238) + 0x30c) + 0xbc))(*(int **)(*(int *)(key + 0x238) + 0x30c));
       if (loopRemaining != 0) {
         loopPtr8 = *(int **)(key + 0xb0);
         goto code_r0x001813e0;

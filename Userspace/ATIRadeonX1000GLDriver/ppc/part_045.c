@@ -3282,7 +3282,7 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
     } while (wordsLeft != 0);
   }
   scheduler[0x4c] = (int)liveOutBitSet;
-  fileRegCount = (**(code **)(**(int **)(*scheduler + 0x30c) + 0x13c))();
+  fileRegCount = (**(code **)(**(int **)(*scheduler + 0x30c) + 0x13c))(*(int **)(*scheduler + 0x30c),*scheduler);
   noSecondFile = fileRegCount < 1;
   componentArrayCursor = scheduler;
   do {
@@ -3358,7 +3358,7 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
         isExport = (**(code **)(*inst + 0x68))(inst);
         if (isExport != 0) {
           operandVReg = (int *)IRInst__getOperandSource(inst,1);
-          isUndefined = (**(code **)(*operandVReg + 0x50))();
+          isUndefined = (**(code **)(*operandVReg + 0x50))(operandVReg);
           if (isUndefined != 0) goto code_r0x00171b84;
         }
         DList__unlink(inst);
@@ -3403,7 +3403,7 @@ code_r0x00171ba0:
       regIndex = regIndex2;
     } while (regIndex2 <= scheduler[0x66]);
   }
-  fileSize02 = (**(code **)(**(int **)(*scheduler + 0x30c) + 0x138))();
+  fileSize02 = (**(code **)(**(int **)(*scheduler + 0x30c) + 0x138))(*(int **)(*scheduler + 0x30c),*scheduler);
   if (-1 < scheduler[0x67]) {
     regIndex2 = 0;
     do {
@@ -3412,7 +3412,7 @@ code_r0x00171ba0:
       Program__markHwRegUsed(scheduler[1],hwRegister);
     } while (regIndex2 <= scheduler[0x67]);
   }
-  fileSize12 = (**(code **)(**(int **)(*scheduler + 0x30c) + 0x140))();
+  fileSize12 = (**(code **)(**(int **)(*scheduler + 0x30c) + 0x140))(*(int **)(*scheduler + 0x30c),*scheduler);
   if (-1 < scheduler[0x69]) {
     loopIndex = 0;
     do {

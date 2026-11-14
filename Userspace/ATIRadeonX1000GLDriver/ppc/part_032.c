@@ -890,7 +890,7 @@ setVectorAt418B:
         packEntryCount = vector[1];
       } while (vectorIndex < packEntryCount);
     }
-    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
+    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))(*(int **)(*(int *)(program + 8) + 0x30c));
     if (packingSupported == 0) {
       packEntryCount = vector[1];
       vectorIndex = 0;
@@ -1057,7 +1057,7 @@ setVectorAt418B:
       } while (groupSizeRemaining != 0);
     }
     outVector = (uint *)0x0;
-    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
+    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))(*(int **)(*(int *)(program + 8) + 0x30c));
     if (packingSupported != 0) {
       arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
       allocation = (undefined4 *)Arena__alloc(arena,0x14);
@@ -1116,7 +1116,7 @@ setVectorAt418B:
         groupSizeRemaining = groupSizeRemaining + -1;
       } while (groupSizeRemaining != 0);
     }
-    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
+    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))(*(int **)(*(int *)(program + 8) + 0x30c));
     if (packingSupported == 0) {
       outVector = vector;
     }
@@ -1545,7 +1545,7 @@ endOfLoopBody: ;
         allocationCount = allocation[2];
       } while ((int)groupIndex < (int)allocationCount);
     }
-    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
+    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))(*(int **)(*(int *)(program + 8) + 0x30c));
     if (packingSupported == 0) {
       allocationCount = allocation[2];
       outVector = (uint *)0x0;
@@ -1740,7 +1740,7 @@ code_r0x00111b80:
         allocationCount = allocation[2];
       } while (allocIndex < allocationCount);
     }
-    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
+    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))(*(int **)(*(int *)(program + 8) + 0x30c));
     if (packingSupported != 0) {
       copyCount = outVector[1];
       copyIndex = 0;
@@ -1795,7 +1795,7 @@ code_r0x00111b80:
         allocationCount = allocation[2];
       } while (allocIndex < allocationCount);
     }
-    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))();
+    packingSupported = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xc4))(*(int **)(*(int *)(program + 8) + 0x30c));
     if (packingSupported != 0) {
       copyCount = outVector[1];
       copyIndex = 0;
