@@ -8,7 +8,7 @@ KP=$!
 for k in 4966 b62d; do
   I=`ls -d $HOME/rung3/gld_*$k*/gld_link/ATIRadeonX1000GLDriver_renamed | head -1`
   echo "== $k" >> $1_gs70.log
-  ../gleng_fz/fnfuzz_gs73 $1_$k.tsv $S $I ${2:-40} $3 >> $1_gs70_$k.full 2>&1
+  ../gleng_fz/fnfuzz_gs74 $1_$k.tsv $S $I ${2:-40} $3 >> $1_gs70_$k.full 2>&1
   egrep -a "^(DIFF|RUN|UNINF|fnfuzz|RESULT|anchor|dlopen)" $1_gs70_$k.full | cut -c1-300 >> $1_gs70.log
 done
 kill $KP 2>/dev/null

@@ -1,0 +1,53 @@
+diff --git a/Userspace/ATIRadeonX1000GLDriver/ppc/part_040.c b/Userspace/ATIRadeonX1000GLDriver/ppc/part_040.c
+index 244642aa..75ef9fae 100644
+--- a/Userspace/ATIRadeonX1000GLDriver/ppc/part_040.c
++++ b/Userspace/ATIRadeonX1000GLDriver/ppc/part_040.c
+@@ -3948,7 +3948,7 @@ int RegAlloc__initRegisterTables(allocator)
+     tableEntryCount = compilerThenTotal;
+   }
+   if (tableEntryCount < 0x1000) {
+-    tableEntryCount = 0x1000;
++    tableEntryCount = 0x1001;
+   }
+   tableBytes = tableEntryCount << 2;
+   allocation = Arena__alloc(*(undefined4 *)(*(int *)(allocator + 8) + 0x374),tableBytes);
+diff --git a/Userspace/ATIRadeonX1000GLDriver/ppc/part_041.c b/Userspace/ATIRadeonX1000GLDriver/ppc/part_041.c
+index e8d4569b..ff7f126b 100644
+--- a/Userspace/ATIRadeonX1000GLDriver/ppc/part_041.c
++++ b/Userspace/ATIRadeonX1000GLDriver/ppc/part_041.c
+@@ -44,7 +44,7 @@ int RegAlloc__insertCopyBefore(allocator, inst, newSource, registerCountRef, bef
+   ((int (*)())InterferenceGraph__growNodeArray)(allocator);
+   *(undefined4 *)(*registerCountRef * 4 + *(int *)(program + 0x45c)) = 0;
+   **(int **)(allocator + 0x18) = **(int **)(allocator + 0x18) + 1;
+-  *registerCountRef = *registerCountRef + 1;
++  *registerCountRef = *registerCountRef + 2;
+   blockCursor = *(int *)(program + 900);
+   *(int *)(program + 600) = *(int *)(program + 600) + 1;
+   registerCountAfter = *registerCountRef;
+@@ -386,7 +386,7 @@ int RegAlloc__buildClassTables(program, virtualRegCount, physicalRegCount, total
+       allocation = (undefined4 *)Arena__alloc(arena,0x20c);
+       wordCountdown = 0x80;
+       *allocation = arena;
+-      allocation[1] = 0x80;
++      allocation[1] = 0x7f;
+       allocation[2] = 0x1000;
+       bitsetWordCursor = allocation + 1;
+       do {
+@@ -1231,7 +1231,7 @@ int RegAlloc__insertSpillCode(pass, copyState)
+       vecCount = 0;
+     }
+     compiler = *(int *)(pass + 8);
+-    *(int *)(compiler + 0x39c) = *(int *)(compiler + 0x39c) + 1;
++    *(int *)(compiler + 0x39c) = *(int *)(compiler + 0x39c) + 2;
+     backend = *(int **)(*(int *)(pass + 8) + 0x30c);
+     (**(code **)(*backend + 0x148))
+               (backend,copyState,*(undefined4 *)(pass + 0x46c),*(undefined4 *)(pass + 0x464),
+@@ -1707,7 +1707,7 @@ int RegAlloc__insertPendingReloads(allocator)
+           pendingCount = allocation[2];
+         } while (pendingCount != 0);
+       }
+-      ((int (*)())RegAlloc__setSpillSlotValue)(program,spillState,spillTempCount << 2);
++      ((int (*)())RegAlloc__setSpillSlotValue)(program,spillState,spillTempCount << 3);
+       return insertedReload;
+     }
+     nextInstLink = (int *)(*(int **)(block + 0x98))[2];

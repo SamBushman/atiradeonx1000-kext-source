@@ -8,7 +8,7 @@ I=`ls -d $HOME/rung3/gld_*$3*/gld_link/ATIRadeonX1000GLDriver_renamed | head -1`
 echo "ONE START $1 $2 img=$3 trial=$4 $(date +%H:%M:%S) $(uptime | sed 's/,.*//')" | nc -u -w1 192.168.5.213 9998 2>/dev/null
 sh ksnap.sh 2 > /dev/null 2>&1 &
 KP=$!
-../gleng_fz/fnfuzz_gs73 $1_$3.tsv $S $I 1 $2 > $1_one_$4.out 2>&1
+../gleng_fz/fnfuzz_gs74 $1_$3.tsv $S $I 1 $2 > $1_one_$4.out 2>&1
 kill $KP 2>/dev/null
 echo "ONE END $1 $(date +%H:%M:%S)" | nc -u -w1 192.168.5.213 9998 2>/dev/null
 echo ONEDONE >> $1_one_$4.out

@@ -36,7 +36,9 @@ static void bc(const char *fmt, ...);
 #include <mach-o/dyld.h>
 
 #define ARENA_BASE 0x50000000u
-#define ARENA_SIZE 0x20000u
+static unsigned arena_size = 0x20000u;   /* FNFUZZ_ARENA_KB=N (N >= 128, <= 512) enlarges the arena (and with it the graph pool, which ends 0xa000 below the arena end) for specs whose objects need big buffers; the default is unchanged */
+#define ARENA_SIZE arena_size
+#define ARENA_MAX 0x80000u
 #define ARENA_PTR_LO 0x1000u
 
 typedef unsigned long long (*fi_t)(unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, double, double, double, double, double, double, double, double, double, double, double, double, double);
@@ -116,8 +118,8 @@ static int nargs_tab[MAXSTUB];   /* FNFUZZ_IMPORT_NARGS=file (name<TAB>count, To
 static unsigned ncalls_c, trace_c, mask_c[5]; static unsigned long long ret_state;
 static int gs_malloc;   /* FNFUZZ_GRAPHSPEC: malloc/calloc/realloc/free are stubbed onto an arena heap (deterministic, digested, a free of a graph node is a no-op) */
 static unsigned gm_next;
-#define GM_LO (ARENA_BASE + 0x16000u)
-#define GM_HI (ARENA_BASE + 0x1f000u)
+#define GM_LO (ARENA_BASE + arena_size - 0xa000u)
+#define GM_HI (ARENA_BASE + arena_size - 0x1000u)
 /* Imports that spawn, signal or wait for a PROCESS are always stubbed (answer 0 for popen, -1 for the rest: the "could not" path of the caller), whatever their name: a real `popen("ps -wwp %d")`
    (GLDriver gld_printApplicationPath) inside a fuzz child hung the child, the watchdog's kill(child, SIGKILL) in run_one then panicked the G5's Tiger kernel (`mapping_alloc - empty mapping
    block detected`, user PC = the harness's _kill stub, LR = the instruction after `bl _kill`; deterministic, 3 crashes, Nov 12). The call is still recorded in the trace, so both images are
@@ -491,11 +493,12 @@ static void load_graphspec(const char *path) {
 static gtype_t *gfind_type(const char *n) { for (int i = 0; i < ngtypes; i++) if (!strcmp(gtypes[i].name, n)) return &gtypes[i]; fprintf(stderr, "graphspec: no type %s\n", n); exit(2); }
 static unsigned gb_build(gtype_t *t, int depth);
 static int gs_nop(int a) { return a; }
-static unsigned gb_alloc(unsigned size) { unsigned a = gb_next; gb_next += (size + 15) & ~15u; if (gb_next > GM_LO) _exit(9); memset((void *)a, 0, size); return a; }
+static unsigned gb_alloc(unsigned size) { unsigned a = gb_next; gb_next += (size + 15) & ~15u; if (gb_next > GM_LO) { static const char m[] = "graph spec: the object pool (0x15000 bytes by default, FNFUZZ_ARENA_KB enlarges it) is exhausted - shrink the types reachable from this function\n"; (void)!write(2, m, sizeof m - 1); _exit(9); } memset((void *)a, 0, size); return a; }
 static unsigned grange(unsigned lo, unsigned hi) { return hi <= lo ? lo : lo + rnd32() % (hi - lo + 1); }
 static unsigned gb_build(gtype_t *t, int depth) {
     if (t->share && t->inst) return t->inst;
     unsigned a = gb_alloc(t->size); unsigned char *b = (unsigned char *)a; if (t->share) t->inst = a;
+    if (getenv("FNFUZZ_GTRACE")) fprintf(stderr, "gb %*s%s +%x @%x\n", depth, "", t->name, t->size, a - ARENA_BASE);   /* debugging: which types a function graph allocates, in order */
     static int maxdepth = -1; if (maxdepth < 0) { const char *e = getenv("FNFUZZ_GDEPTH"); maxdepth = e ? atoi(e) : 6; }   /* FNFUZZ_GDEPTH: nesting limit of the graph builder (default 6; a node deeper than that stays zero-filled) */
     if (depth > maxdepth) return a;
     for (int i = 0; i < t->nf; i++) {
@@ -859,7 +862,7 @@ static int run_one(void *fn, const cand_t *c, unsigned seed, int mode, int img, 
     }
     n = read(fd[0], out, sizeof *out);
     { struct timeval bt2; gettimeofday(&bt2, NULL); bc("R got %ld bytes after %ld us", (long)n, (bt2.tv_sec - bt0.tv_sec) * 1000000L + (bt2.tv_usec - bt0.tv_usec)); }
-    if (getenv("FNFUZZ_VERBOSE") && n == (ssize_t)sizeof *out) { static unsigned buf[3][ARENA_SIZE / 4]; unsigned *dst = buf[img]; size_t got = 0; ssize_t k; while (got < ARENA_SIZE && (k = read(fd[0], (char *)dst + got, ARENA_SIZE - got)) > 0) got += k; last_arena[img] = dst; }
+    if (getenv("FNFUZZ_VERBOSE") && n == (ssize_t)sizeof *out) { static unsigned buf[3][ARENA_MAX / 4]; unsigned *dst = buf[img]; size_t got = 0; ssize_t k; while (got < ARENA_SIZE && (k = read(fd[0], (char *)dst + got, ARENA_SIZE - got)) > 0) got += k; last_arena[img] = dst; }
     close(fd[0]); struct rusage ru; memset(&ru, 0, sizeof ru); wait4(p, &st, 0, &ru);
     if (n != (ssize_t)sizeof *out) { memset(out, 0, sizeof *out); out->status = WIFSIGNALED(st) ? WTERMSIG(st) : 99; }
     { struct timeval bt1; gettimeofday(&bt1, NULL); bc("E child %d status %d exit %d sig %d result %s after %ld us utime %ld.%06d stime %ld.%06d maxrss %ld minflt %ld majflt %ld", (int)p, out->status, WIFEXITED(st) ? WEXITSTATUS(st) : -1, WIFSIGNALED(st) ? WTERMSIG(st) : 0, n == (ssize_t)sizeof *out ? "full" : "short", (bt1.tv_sec - bt0.tv_sec) * 1000000L + (bt1.tv_usec - bt0.tv_usec), (long)ru.ru_utime.tv_sec, (int)ru.ru_utime.tv_usec, (long)ru.ru_stime.tv_sec, (int)ru.ru_stime.tv_usec, ru.ru_maxrss, ru.ru_minflt, ru.ru_majflt); }
@@ -899,6 +902,7 @@ static void repair_loop(void *fn0, cand_t *c, unsigned seed, int mode) {
 }
 
 int main(int argc, char **argv) {
+    { const char *ak = getenv("FNFUZZ_ARENA_KB"); if (ak) { unsigned kb = (unsigned)atoi(ak); if (kb >= 128 && kb * 1024u <= ARENA_MAX) arena_size = kb * 1024u; else { fprintf(stderr, "FNFUZZ_ARENA_KB must be 128..512\n"); return 2; } } }
     if (argc >= 4) bc("START rows %s stock %s image %s trials %s", argv[1], argv[2], argv[3], argc > 4 ? argv[4] : "?");
     if (argc < 4) { fprintf(stderr, "usage: fnfuzz LEDGER.tsv STOCK REBUILT [trials] [filter|@first,count]\n"); return 2; }
     nanmode = getenv("FNFUZZ_NANMODE") != NULL; nancanon = getenv("FNFUZZ_NANCANON") != NULL;

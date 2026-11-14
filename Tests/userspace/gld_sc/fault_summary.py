@@ -3,7 +3,7 @@
 maps stock pcs (minus the stock image load base, default 0x151d000) to the corpus function that contains them, and prints the top (kind, faulting function, caller function) triples per row.
 Used to decide which object / vtable / table each uninformative row still needs in the graph spec (#273 follow-up)."""
 import re,sys,glob,os,collections,bisect
-log=sys.argv[1]; marker=sys.argv[2] if len(sys.argv)>2 else 'LRUN START'; base=int(sys.argv[3],16) if len(sys.argv)>3 else 0x151d000
+log=sys.argv[1]; marker=sys.argv[2] if len(sys.argv)>2 else 'LRUN START'; base=0x151d000 if len(sys.argv)<=3 or sys.argv[3]=='auto' else int(sys.argv[3],16)
 D=os.path.expanduser('~/atiradeonx1000-kext-source/Userspace/ATIRadeonX1000GLDriver/ppc/')
 fn=[]
 for p in glob.glob(D+'part_*.c'):
@@ -15,6 +15,21 @@ def name(pc):
     return '%x'%pc
 L=open(log,errors='replace').read().split('\n')
 st=max([i for i,l in enumerate(L) if marker in l] or [0])
+if len(sys.argv)>3 and sys.argv[3]=='auto':   # the stock image slides per run: pick the base (page step) for which the most backtrace pcs fall into the function of the row being run
+    pr=[]; rw=None
+    for l in L[st:]:
+        m=re.search(r' p(\d+) ROW id \d+ (\S+)',l)
+        if m: rw=m.group(2); continue
+        if ' W fault' in l and rw: pr.append((rw,[int(x,16) for x in l.split(' bt ')[1].split()[:6] if re.match('^[0-9a-f]+$',x)]))
+    best=(0,0x151d000)
+    for b in range(0x1000000,0x2800000,0x1000):
+        sc=0
+        for rw,q in pr:
+            for v in q:
+                a=v-b; k=bisect.bisect_right(starts,a)-1
+                if k>=0 and a<fn[k][0]+max(fn[k][1],4) and fn[k][2]==rw: sc+=1
+        if sc>best[0]: best=(sc,b)
+    base=best[1]; print('auto base %x (%d row-function hits)'%best[::-1])
 row=None; img={}; res=collections.defaultdict(collections.Counter); status=collections.defaultdict(collections.Counter)
 for l in L[st:]:
     m=re.search(r' p(\d+) ROW id \d+ (\S+)',l)

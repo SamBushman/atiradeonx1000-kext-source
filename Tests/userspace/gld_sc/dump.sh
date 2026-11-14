@@ -5,5 +5,5 @@ export FNFUZZ_PRECALL=Compiler__initStaticLocals FNFUZZ_STACKFILL=0 FNFUZZ_NANCA
 S=/Library/ATIRadeonX1000-Rebuilt/stock/gld_ATIRadeonX1000GLDriver
 K=${5:-4966}
 I=`ls -d $HOME/rung3/gld_*$K*/gld_link/ATIRadeonX1000GLDriver_renamed | head -1`
-../gleng_fz/fnfuzz_gs73 $1_$K.tsv $S $I $3 $2 > $4.out 2>&1
+../gleng_fz/fnfuzz_gs74 $1_$K.tsv $S $I $3 $2 > $4.out 2>&1
 egrep -a "^(DIFF|RUN|UNINF|fnfuzz|arena)" $4.out | cut -c1-400

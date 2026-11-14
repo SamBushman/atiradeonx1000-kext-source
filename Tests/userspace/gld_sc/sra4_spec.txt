@@ -478,10 +478,12 @@ type RFTAB 0x200
   u32 0x1ec 0 48
   u32 0x1f4 0 48
   u32 0x1fc 0 48
-type TARGET 0x400
+type TARGET 0x400 share
   randfill 0x00 0x400 4096
   ptr 0x00 TVT
   ptr 0x04 RFTAB
+  u32 0x14 1 3
+  u32 0x4c 0 3
 type BITSET 0x100
   randfill 0x00 0x100 65536
   u32 0x00 2 8
@@ -491,15 +493,26 @@ type PROGRAM 0x800 share
   ptr 0x08 COMPILER
   ptr 0x3bc BITSET
   ptr 0x3ac VPOOL
-  ptr 0x384 BLOCK
-  ptr 0x3a0 BLOCK
+  ptr 0x384 BLOCKE
+  ptr 0x3a0 BLOCKE
   ptr 0x3c4 VECA 100 4
+  ptr 0x2c COMPILER
+  ptr 0x18 WORDP
+  ptr 0x42c BITSET
+  ptr 0x430 BITSET
+  ptr 0x45c TABLE
+  set 0x390 0
+  ptr 0x434 BITSET
+  ptr 0x438 SPILLREC
+  ptr 0x8c VECAS 100 4
 type COMPILER 0x800 share
   randfill 0x00 0x800 4096
   ptr 0x30c TARGET
   ptr 0x6c4 PROGRAM
   ptr 0x374 ARENA
   ptr 0x378 ARENAB
+  u32 0x3c4 0 100
+  u32 0x67c 0 3
 type VDATA 0x20
   ptr 0x00 LEAF 100
   ptr 0x04 LEAF 100
@@ -545,6 +558,7 @@ type BLOCK 0x400
   ptr 0xd4 VECA 100 4
   ptr 0xf4 VECA 100 4
   ptr 0xf8 VECA 100 4
+  ptr 0x104 BITSETA 100 4
 type HBUCKETS 0x40
 type HTAB 0x40
   set 0x00 16
@@ -574,6 +588,231 @@ type OBJ 0x400
   objfill 0x00 0x400
   ptr 0xa8 COMPILER
   ptr 0xac PROGRAM
+
+# RegAlloc family (Nov 13). The graph pool is only 0x15000 bytes (fnfuzz GM_LO), so there are two object sets:
+#  - lean "I" set for initRegisterTables: the allocator pass object is Program-shaped (+8 compiler, +0x2c compiler); its compiler's target returns tiny register counts, and the compiler's table arena
+#    (compiler+0x374) is 0xcc00 bytes because the function takes three max(count,0x1000)*4-byte tables from it;
+#  - every other RegAlloc row uses the ordinary PROGRAM/COMPILER (PROGRAM is the allocator pass object: +0x2c compiler, +0x18 word, +0x42c/+0x430 usage bitsets, +0x45c table); TARGET +0x14 (class count) is 1..3 because buildClassTables allocates 2*count bitsets.
+type ABUFR 0x0d000
+  randfill 0x00 0x0d000 4096
+type ARENAR 0x40 share
+  ptr 0x08 ABUFR
+  padd 0x10 0x08 0xcc00
+type TVTL 0x200
+  fnq 0x134 12 0 1
+  fnq 0x138 12 0 1
+  fnq 0x13c 12 0 1
+  fnq 0x140 12 0 1
+type TARGETI 0x40
+  ptr 0x00 TVTL
+  u32 0x14 1 3
+type CMPI 0x400 share
+  randfill 0x00 0x400 4096
+  ptr 0x30c TARGETI
+  ptr 0x374 ARENAR
+  u32 0x3c4 0 100
+type RALLI 0x40 share
+  randfill 0x00 0x40 4096
+  ptr 0x08 CMPI
+  ptr 0x2c CMPI
+type RALLIB 0x500 share
+  objfill 0x00 0x500
+  ptr 0x08 CMPI
+  ptr 0x2c CMPI
+  ptr 0x42c BITSET
+type WORDP 0x10
+  u32 0x00 0 8
+  u32 0x04 0 8
+type TABLE 0x80
+  randfill 0x00 0x80 4096
+
+# InterferenceGraph (the "allocator" argument of insertCopyBefore / insertPendingReloads, copyState of insertSpillCode): [0] edge bitset (alloc header at -4), [1] node vector, [2] register count,
+# [3] node count, [4..6] class tables, [8] node array, [0xa] pass (program), [0xb] compiler.
+type BITSETA 0x110
+  ptr 0x00 ARENA
+  u32 0x04 2 8
+  u32 0x08 0 40
+  randfill 0x0c 0x100 65536
+type NBUF 0x10
+type NVEC 0x20
+  ptr 0x00 ARENA
+  u32 0x04 2 2
+  set 0x08 0
+  ptr 0x0c NBUF
+  ptr 0x10 ARENA
+type INODE 0x40
+  u32 0x00 0 8
+  u32 0x04 0 3
+  set 0x08 0
+  set 0x0c 0
+  ptr 0x10 NVEC 100 4
+type NODEDATA 0x40
+  ptr 0x00 INODE
+  ptr 0x04 INODE
+  ptr 0x08 INODE
+  ptr 0x0c INODE
+  ptr 0x10 INODE
+  ptr 0x14 INODE
+  ptr 0x18 INODE
+  ptr 0x1c INODE
+  ptr 0x20 INODE
+  ptr 0x24 INODE
+  ptr 0x28 INODE
+  ptr 0x2c INODE
+type NODEVEC 0x20
+  ptr 0x00 ARENA
+  u32 0x04 12 12
+  u32 0x08 10 10
+  ptr 0x0c NODEDATA
+  ptr 0x10 ARENA
+type PARENTS 0x80
+  set 0x00 0
+  set 0x04 1
+  set 0x08 2
+  set 0x0c 3
+  set 0x10 4
+  set 0x14 5
+  set 0x18 6
+  set 0x1c 7
+  set 0x20 8
+  set 0x24 9
+  set 0x28 10
+  set 0x2c 11
+  set 0x30 12
+  set 0x34 13
+  set 0x38 14
+  set 0x3c 15
+type IGRAPH 0x40
+  randfill 0x00 0x40 8
+  ptr 0x2c COMPILER
+  ptr 0x28 PROGRAM
+  ptr 0x00 BITSETA 100 4
+  ptr 0x04 NODEVEC 100 4
+  u32 0x08 0 8
+  u32 0x0c 1 4
+  ptr 0x10 TABLE
+  ptr 0x14 TABLE
+  ptr 0x18 TABLE
+  ptr 0x20 PARENTS
+type IRLINKED 0x400
+  objfill 0x00 0x400
+  dval 0x00 ptrTo_IRInst__vtable_001e8b4c 8
+  ptr 0x04 DNODE
+  ptr 0x08 DNODE
+  u32 0x80 0 1
+  u32 0x84 0 3
+  u32 0x98 0 48
+  u32 0xb0 0 48
+  u32 0xc8 0 48
+  u32 0xe0 0 48
+  ptr 0xa8 COMPILER
+  ptr 0xac PROGRAM
+
+# lean block for the RegAlloc argument slots (a BLOCK carries ~0x1800 bytes of vector/leaf graph; the pool is 0x15000): list links, empty instruction list, live-set bitset at +0x104
+type BLOCKR 0x400
+  objfill 0x00 0x400
+  u32 0xb8 0 0
+  set 0xa4 0
+  dval 0x00 ptrTo_AnyBlock__vtable_001e8b58 8
+  ptr 0xa8 COMPILER
+  ptr 0xac PROGRAM
+  self 0x98 0x9c
+  self 0xa0 0x90
+  set 0x04 0
+  ptr 0x08 PROGRAM 100 0x388
+  ptr 0x104 BITSETA 100 4
+
+# lean embedded block for PROGRAM's block list (Nov 13, RegAlloc rows): the same fields as BLOCK, but the vectors share ONE leaf instance (a BLOCK's 5 vectors x 2 LEAF x 0x200 made two
+# program blocks cost ~0x3300 bytes of the 0x15000 pool) and the instruction list is empty (sentinel next at +0xa4 is 0; with the random objfill word there the instruction walkers
+# followed random pointers).
+type LEAFS 0x200 share
+  objfill 0x00 0x200
+  ptr 0xa8 COMPILER
+  ptr 0xac PROGRAM
+  self 0x98 0x9c
+  self 0xa0 0x90
+  u32 0xc4 0 0
+  u32 0xd0 0 0
+  u32 0xd4 0 0
+  u32 0xf4 0 0
+  u32 0xf8 0 0
+type VDATAS 0x20
+  ptr 0x00 LEAFS
+  ptr 0x04 LEAFS
+type VECAS 0x20
+  ptr 0x00 ARENA
+  u32 0x04 2 8
+  u32 0x08 1 2
+  ptr 0x0c VDATAS
+  ptr 0x10 ARENA
+type BLOCKE 0x400
+  u32 0xb8 0 0
+  objfill 0x00 0x400
+  dval 0x00 ptrTo_AnyBlock__vtable_001e8b58 8
+  ptr 0xa8 COMPILER
+  ptr 0xac PROGRAM
+  self 0x98 0x9c
+  self 0xa0 0x90
+  ptr 0xc4 VECAS 100 4
+  ptr 0xcc DNODE
+  set 0x04 0
+  ptr 0x08 PROGRAM 100 0x388
+  ptr 0xd0 VECAS 100 4
+  ptr 0xd4 VECAS 100 4
+  ptr 0xf4 VECAS 100 4
+  ptr 0xf8 VECAS 100 4
+  ptr 0x104 BITSETA 100 4
+  set 0xa4 0
+
+# the spill-record instruction (program+0x438): slot index / counters are small
+type SPILLREC 0x400
+  objfill 0x00 0x400
+  dval 0x00 ptrTo_IRInst__vtable_001e8b4c 8
+  u32 0x80 0 1
+  u32 0x84 0 3
+  u32 0x98 0 48
+  u32 0xb0 0 48
+  u32 0xc8 0 48
+  u32 0xe0 0 48
+  ptr 0xa8 COMPILER
+  ptr 0xac PROGRAM
+  u32 0x12c 0 8
+  u32 0x130 0 6
+  u32 0x138 0 6
+  u32 0x13c 0 6
+
+# RegAlloc__run (needs FNFUZZ_ARENA_KB=512): its own compiler with one big table arena (compiler+0x374 and +0x378 are the same 0x1f800-byte bump arena), because run calls initRegisterTables (three
+# 0x4000-byte tables) and then builds the whole interference graph
+type ABUFRR 0x20000
+  randfill 0x00 0x20000 4096
+type ARENARR 0x40 share
+  ptr 0x08 ABUFRR
+  padd 0x10 0x08 0x1f800
+type RUNC 0x800 share
+  randfill 0x00 0x800 4096
+  ptr 0x30c TARGET
+  ptr 0x6c4 RUNP
+  ptr 0x374 ARENARR
+  ptr 0x378 ARENARR
+  u32 0x3c4 0 100
+  u32 0x67c 0 3
+type RUNP 0x800 share
+  objfill 0x00 0x800
+  ptr 0x08 RUNC
+  ptr 0x3bc BITSET
+  ptr 0x3ac VPOOL
+  ptr 0x384 BLOCKE
+  ptr 0x3a0 BLOCKE
+  ptr 0x3c4 VECA 100 4
+  ptr 0x2c RUNC
+  ptr 0x18 WORDP
+  ptr 0x42c BITSET
+  ptr 0x430 BITSET
+  ptr 0x45c TABLE
+  set 0x390 0
+  ptr 0x434 BITSET
+  ptr 0x438 SPILLREC
+  ptr 0x8c VECAS 100 4
 
 type SMVT 0x100
   fnq 0x0 11 0 1
@@ -875,25 +1114,25 @@ func RegAlloc__emitSpillStore
   arg 4 ptr COMPILER
 
 func RegAlloc__initRegisterTables
-  arg 0 ptr OBJ
+  arg 0 ptr RALLIB
 
 func RegAlloc__insertCopyBefore
-  arg 0 ptr OBJ
-  arg 1 ptr OBJ
-  arg 2 ptr OBJ
-  arg 3 int 0 8
-  arg 4 ptr OBJ
-  arg 5 ptr BLOCK
+  arg 0 ptr IGRAPH
+  arg 1 ptr IRINST
+  arg 2 ptr IRINST
+  arg 3 ptr WORDP
+  arg 4 ptr IRLINKED
+  arg 5 ptr BLOCKR
 
 func RegAlloc__insertPendingReloads
-  arg 0 ptr OBJ
+  arg 0 ptr IGRAPH
 
 func RegAlloc__insertSpillCode
-  arg 0 ptr OBJ
-  arg 1 ptr OBJ
+  arg 0 ptr PROGRAM
+  arg 1 ptr IGRAPH
 
 func RegAlloc__run
-  arg 0 ptr OBJ
+  arg 0 ptr RUNP
 
 func Scheduler__addDataDependencyEdge
   arg 0 ptr SCHED
