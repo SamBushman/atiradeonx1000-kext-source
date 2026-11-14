@@ -360,6 +360,8 @@ def transform(lines):
     global typed
     res = []
     for ln in lines:
+        if re.match(r'^extern\b.*;\s*/\*', ln):   # a trailing comment hides the declaration from the matches below: the asm label is attached to the wrong line (#285: _glgProcessPixels bound to the _glgPixelCenters stub)
+            sys.exit('link_corpus: declaration line with a trailing comment (move the comment to its own line): ' + ln[:120])
         mm = re.match(r'^extern (const )?(.*?)\b([A-Za-z_][A-Za-z_0-9]*)\((.*)\);\s*$', ln)
         if mm and '(*' not in ln:
             nm = mm.group(3)
