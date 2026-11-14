@@ -8291,15 +8291,15 @@ code_r0x00101d1c:
         if (sourceNumberB == (uint ******)((int)((unsigned char *)0x0) + 1U)) {
           tempIndexCache[0] = (uint ******)
                       CONCAT31((int3)((uint)destSelectWordCopy >> 8),
-                               *(undefined1 *)((int)&tempIndexCache + firstWrittenLane));
+                               *(undefined1 *)((int)tempIndexCache + firstWrittenLane));
         }
         else if (sourceNumberB == (uint ******)((int)((unsigned char *)0x0) + 2U)) {
           tempIndexCache[0] = (uint ******)
-                      CONCAT13(*(undefined1 *)((int)&tempIndexCache + firstWrittenLane),(int3)destSelectWordCopy);
+                      CONCAT13(*(undefined1 *)((int)tempIndexCache + firstWrittenLane),(int3)destSelectWordCopy);
         }
         else if (sourceNumberB == (uint ******)((int)((unsigned char *)0x0) + 3U)) {
           (*(unsigned short *)((unsigned char *)tempIndexCache + 0)) = (undefined2)((uint)destSelectWordCopy >> 0x10);
-          (*(unsigned short *)((unsigned char *)tempIndexCache + 2)) = CONCAT11(*(undefined1 *)((int)&tempIndexCache + firstWrittenLane),(char)destSelectWordCopy);
+          (*(unsigned short *)((unsigned char *)tempIndexCache + 2)) = CONCAT11(*(undefined1 *)((int)tempIndexCache + firstWrittenLane),(char)destSelectWordCopy);
         }
         destSelectWordCopy = tempIndexCache[0];
         operandRecord2 = IRInst__getOperandRecord(builtInstB,sourceNumberB);
