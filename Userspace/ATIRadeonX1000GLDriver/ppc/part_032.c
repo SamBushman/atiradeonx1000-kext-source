@@ -311,11 +311,14 @@ int Program__assignOutputExportSlots(bindContext, vector, unusedArg3, program)
       vectorElement = (int *)*vectorElementRef;
       exportInstA = *vectorElement;
       assignedSlot = outputBase + *(int *)(exportInstA + 0x140);
-      slotOwnerRegister[assignedSlot] = *(undefined4 *)(exportInstA + 0x94);
+      /* #284: the stock stores through assignedSlot unchecked into its 53-word frame table (r1+0x38..0x10c). Out-of-table slots are not recorded and do not extend slotEnd. */
+      if ((uint)assignedSlot < 53) {
+        slotOwnerRegister[assignedSlot] = *(undefined4 *)(exportInstA + 0x94);
+      }
       exportInstB = *vectorElement;
       *(undefined4 *)(exportInstB + 0x98) = 5;
       *(int *)(exportInstB + 0x94) = assignedSlot;
-      if (slotEnd < assignedSlot) {
+      if (slotEnd < assignedSlot && (uint)assignedSlot < 53) {
         slotEnd = assignedSlot;
       }
       vectorCount = vector[1];
@@ -395,7 +398,10 @@ int Program__assignSharedExportSlots(scopeId, vector, nextSlotRef, program)
       else {
 setSlotNumber:
         slotNumber = *nextSlotRef;
-        slotTable[slotNumber] = registerKey;
+        /* #284: the stock stores slotTable[*nextSlotRef] unchecked into its 52-word frame table (r1+0x38..0x108); the caller's counter still advances for a slot that does not fit */
+        if ((uint)slotNumber < 52) {
+          slotTable[slotNumber] = registerKey;
+        }
         elementRecord = *vectorElement;
         *(int *)(elementRecord + 0x94) = slotNumber;
         *(undefined4 *)(elementRecord + 0x98) = 5;
@@ -404,6 +410,9 @@ setSlotNumber:
       vectorCount = vector[1];
     } while ((int)loopIndex < (int)vectorCount);
     endSlot = *nextSlotRef;
+    if (endSlot > 52) {
+      endSlot = 52;   /* #284: Program__bindLinkRecordsToSlots scans slotTable[firstSlot..endSlot) */
+    }
   }
   return ((int (*)())Program__bindLinkRecordsToSlots)(scopeId,slotTable,firstSlot,endSlot,*(undefined4 *)(program + 0x418));
 }
