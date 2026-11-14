@@ -10482,15 +10482,15 @@ setScratchR9:
   rasterYTruncI2dLo = (int)procDesc.scratchStack3e8 ^ 0x80000000;
   procDesc.scratchStack3ec = procDesc.scratchStack3ec - (float)((double)CONCAT44(0x43300000,rasterXTruncI2dLo) - 4503601774854144.0);
   procDesc.scratchStack3e8 = procDesc.scratchStack3e8 - (float)((double)CONCAT44(0x43300000,rasterYTruncI2dLo) - 4503601774854144.0);
-  /* #285: _glgPixelCenters takes (count, start, end, scale) as (r3, f1, f2, f3); the decompile showed only r3, so the rebuilt call left f1..f3 at whatever the compiler had
+  /* #285: _glgPixelCenters takes (count, start, end, scale) as (r3, f1, f2, f3) (prototype in decls.h); the decompile showed only r3, so the rebuilt call left f1..f3 at whatever the compiler had
    * there. Stock: f1 = fractional x (the stack slot 0x84), f2 = zoomX * (float)width + f1 (fmadds), f3 = zoomX. */
-  scaledWidth = ((int (*)(int,float,float,float))_glgPixelCenters)(convResult,procDesc.scratchStack3ec,
+  scaledWidth = _glgPixelCenters(convResult,procDesc.scratchStack3ec,
                          zoomXScaled * (float)((double)CONCAT44(0x43300000,widthI2dLo) - 4503601774854144.0) + procDesc.scratchStack3ec,zoomXScaled);
   heightI2dLo = height ^ 0x80000000;
   heightI2dHi = 0x43300000;
   convRowBytes = bytesPerPixel * scaledWidth;
   /* stock: f1 = fractional y (stack slot 0x88), f2 = zoomY * (float)height + f1, f3 = zoomY */
-  scaledHeight = ((int (*)(int,float,float,float))_glgPixelCenters)(scaledWidth,procDesc.scratchStack3e8,
+  scaledHeight = _glgPixelCenters(scaledWidth,procDesc.scratchStack3e8,
                          zoomYScaled * (float)((double)CONCAT44(0x43300000,heightI2dLo) - 4503601774854144.0) + procDesc.scratchStack3e8,zoomYScaled);
   convBuffer = scaledHeight * convRowBytes;
 setConvBuffer:

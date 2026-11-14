@@ -4301,7 +4301,7 @@ extern int _fwrite();
 extern int _getenv();
 extern int _getpid();
 extern int _glgConvertType();
-extern int _glgPixelCenters();
+extern int _glgPixelCenters(int count,float fracStart,float fracEnd,float zoomScale);   /* #285: f1..f3 are arguments (an unprototyped declaration drops them) */
 extern int _glgProcessPixels();
 extern int _glpFreePPShaderLinearize();
 extern int _glpFreePPShaderToProgram();
