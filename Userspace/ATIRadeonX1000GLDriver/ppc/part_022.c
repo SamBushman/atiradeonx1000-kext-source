@@ -2456,13 +2456,18 @@ int Block__verify(this)
   uint loopIndex;
   int neighborBlock;
   uint loopIndex2;
+  int neighborLoopOffset;
+  int deadNeighborLoad;
   int *currentInst;
   
   loopCounter = 0;
   for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(this + 0xd4) + 4); loopIndex = loopIndex + 1) {
     neighborBlock = *(int *)(loopCounter + *(int *)(*(int *)(this + 0xd4) + 8));
     if (neighborBlock != 0) {
+      neighborLoopOffset = 0;
       for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(neighborBlock + 0xd0) + 4); loopIndex2 = loopIndex2 + 1) {
+        deadNeighborLoad = *(volatile int *)(*(int *)(*(int *)(neighborBlock + 0xd0) + 8) + neighborLoopOffset);
+        neighborLoopOffset = neighborLoopOffset + 4;
       }
     }
     loopCounter = loopCounter + 4;
@@ -2471,7 +2476,10 @@ int Block__verify(this)
   for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(this + 0xd0) + 4); loopIndex = loopIndex + 1) {
     neighborBlock = *(int *)(loopCounter + *(int *)(*(int *)(this + 0xd0) + 8));
     if (neighborBlock != 0) {
+      neighborLoopOffset = 0;
       for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(neighborBlock + 0xd4) + 4); loopIndex2 = loopIndex2 + 1) {
+        deadNeighborLoad = *(volatile int *)(*(int *)(*(int *)(neighborBlock + 0xd4) + 8) + neighborLoopOffset);
+        neighborLoopOffset = neighborLoopOffset + 4;
       }
     }
     loopCounter = loopCounter + 4;
