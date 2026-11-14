@@ -597,7 +597,7 @@ type SMVT 0x100
   fnq 0x48 11 0 1
   fnq 0x4c 6 0 1 2 3
   fnq 0x50 7 0
-  fnq 0x54 13 0
+  fnq 0x54 11 0 1
   fnq 0x58 11 0 1
   fnq 0x5c 11 0 1
   fnq 0x60 11 0 1
