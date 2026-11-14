@@ -1,0 +1,26 @@
+diff --git a/Userspace/ATIRadeonX1000GLDriver/ppc/part_023.c b/Userspace/ATIRadeonX1000GLDriver/ppc/part_023.c
+index c92092a3..197c0451 100644
+--- a/Userspace/ATIRadeonX1000GLDriver/ppc/part_023.c
++++ b/Userspace/ATIRadeonX1000GLDriver/ppc/part_023.c
+@@ -154,7 +154,7 @@ loopSetLoopIndex:
+       loopCounterB = 0;
+       while( true ) {
+         if (*(uint *)(*(int *)(newBlock + 0xd0) + 4) < loopIndex) {
+-          Block__appendSuccessor(newBlock,block);
++          Block__appendPredecessor(newBlock,block);
+           return;
+         }
+         newBlockSuccessorEntry = *(int *)(*(int *)(*(int *)(newBlock + 0xd0) + 8) + loopCounterB);
+diff --git a/Userspace/ATIRadeonX1000GLDriver/ppc/part_044.c b/Userspace/ATIRadeonX1000GLDriver/ppc/part_044.c
+index e77725dc..b18af075 100644
+--- a/Userspace/ATIRadeonX1000GLDriver/ppc/part_044.c
++++ b/Userspace/ATIRadeonX1000GLDriver/ppc/part_044.c
+@@ -7920,7 +7920,7 @@ int Scheduler__addDataDependencyEdge(scheduler, fromNode, toNode, operandIndex,
+   latency = ((int (*)())Scheduler__getDependencyLatency)(scheduler,*(undefined4 *)(fromNode + 0x38),a2,0,operandIndex,0);
+   edgeAlloc[5] = operandIndex;
+   edgeAlloc[4] = latency;
+-  edgeAlloc[6] = subOperandIndex;
++  edgeAlloc[6] = operandIndex;
+   edgeField = (**(code **)(*(int *)scheduler[3] + 0x20))
+                     ((int *)scheduler[3],*(undefined4 *)(fromNode + 0x38),a2,a3,edgeField,a5,a6);
+   edgeAlloc[8] = edgeField;

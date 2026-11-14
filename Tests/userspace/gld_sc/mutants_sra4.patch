@@ -1,0 +1,61 @@
+diff --git a/Userspace/ATIRadeonX1000GLDriver/ppc/part_023.c b/Userspace/ATIRadeonX1000GLDriver/ppc/part_023.c
+index c92092a3..1896911d 100644
+--- a/Userspace/ATIRadeonX1000GLDriver/ppc/part_023.c
++++ b/Userspace/ATIRadeonX1000GLDriver/ppc/part_023.c
+@@ -218,7 +218,7 @@ int Block__splitEdge(fromBlock, toBlock, newBlock)
+   else {
+     predecessorSlot = (undefined4 *)Vector__elementRefGrow(predecessorVector,predecessorIndexResult);
+   }
+-  *predecessorSlot = newBlock;
++  *predecessorSlot = fromBlock;
+   Block__appendPredecessor(newBlock,fromBlock);
+   return Block__appendSuccessor(newBlock,toBlock);
+ }
+diff --git a/Userspace/ATIRadeonX1000GLDriver/ppc/part_024.c b/Userspace/ATIRadeonX1000GLDriver/ppc/part_024.c
+index b57c7700..4fc2e6e4 100644
+--- a/Userspace/ATIRadeonX1000GLDriver/ppc/part_024.c
++++ b/Userspace/ATIRadeonX1000GLDriver/ppc/part_024.c
+@@ -3419,7 +3419,7 @@ int Program__foldKind6IntoKind7Inst(program, inst, inst2)
+   *allocation = arenaA;
+   IRInst__ctor_10502c(allocation + 1,0x93,*(undefined4 *)(program + 8));
+   *(undefined4 **)(program + 0x340) = allocation + 1;
+-  allocation[0x27] = 0x2e;
++  allocation[0x27] = 0x2d;
+   allocation[0x26] = 0;
+   *(undefined4 *)(*(int *)(program + 0x340) + 300) = 0;
+   allocPlacementEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x23);
+diff --git a/Userspace/ATIRadeonX1000GLDriver/ppc/part_040.c b/Userspace/ATIRadeonX1000GLDriver/ppc/part_040.c
+index 244642aa..1cfcc23e 100644
+--- a/Userspace/ATIRadeonX1000GLDriver/ppc/part_040.c
++++ b/Userspace/ATIRadeonX1000GLDriver/ppc/part_040.c
+@@ -3899,7 +3899,7 @@ int RegAlloc__emitSpillStore(inst, newSource, addressSource, ref, compiler)
+   *allocation = arena;
+   IRMemStore__ctor_1071fc(storeInst,0xfc,compiler);
+   spillDestRegister = *(undefined4 *)(newSource + 0x94);
+-  allocation[0x27] = 0x3b;
++  allocation[0x27] = 0x3a;
+   allocation[0x26] = spillDestRegister;
+   WriteMask__fromUsedLanes(storeWriteMask,zeroLaneSelectWord);
+   allocation[0x28] = storeWriteMask[0];
+diff --git a/Userspace/ATIRadeonX1000GLDriver/ppc/part_044.c b/Userspace/ATIRadeonX1000GLDriver/ppc/part_044.c
+index e77725dc..b74a2ba2 100644
+--- a/Userspace/ATIRadeonX1000GLDriver/ppc/part_044.c
++++ b/Userspace/ATIRadeonX1000GLDriver/ppc/part_044.c
+@@ -7903,7 +7903,7 @@ int Scheduler__addDataDependencyEdge(scheduler, fromNode, toNode, operandIndex,
+   arena = *(undefined4 *)(*scheduler + 0x378);
+   (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = componentMask;
+   edgeAlloc = (undefined4 *)Arena__alloc(arena,0x24);
+-  a6 = 0x1010101;
++  a6 = 0x1010100;
+   *edgeAlloc = arena;
+   edgeAlloc[4] = 1;
+   a3 = 0;
+@@ -9074,7 +9074,7 @@ loopSetFlagValue:
+         }
+       }
+ storeNode:
+-      *(uint *)(node + 0x10) = nodeIndex;
++      *(uint *)(node + 0x10) = nodeIndex + 1;
+       if (*(int *)(node + 0x1c) == 0) {
+         resourceSlot10Result = (**(code **)(*(int *)scheduler[2] + 0x28))
+                           ((int *)scheduler[2],*(undefined4 *)(node + 0x38));

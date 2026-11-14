@@ -1,0 +1,13 @@
+diff --git a/Userspace/ATIRadeonX1000GLDriver/ppc/part_023.c b/Userspace/ATIRadeonX1000GLDriver/ppc/part_023.c
+index c92092a3..309d43ce 100644
+--- a/Userspace/ATIRadeonX1000GLDriver/ppc/part_023.c
++++ b/Userspace/ATIRadeonX1000GLDriver/ppc/part_023.c
+@@ -336,7 +336,7 @@ int Block__ctor_e9d68(this, owner)
+   this[0x44] = ownerField0x110;
+   this[0x46] = 0xffffffff;
+   this[0x39] = 0x7fffffff;
+-  this[0x3b] = 0;
++  this[0x3b] = 1;
+   this[0x3c] = 0;
+   this[0x3f] = 0;
+   this[0x40] = 0;
