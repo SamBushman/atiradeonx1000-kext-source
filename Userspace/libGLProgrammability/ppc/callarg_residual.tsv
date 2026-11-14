@@ -1,7 +1,7 @@
 # owner entry	owner	call site	callee	register	value	class
 0x97b7d540	_PPParserParseOptionIdentifier	0x97b7d8b8	PPStreamAddOption	r4	0x7 not at argument 1 of any C call (3 C calls)	CHECK (C arg1: 0; 9)
 0x97b81994	_PPParserParseDestination	0x97b81b60	PPParserGetPart	r9	0x1 not at argument 6 of any C call (3 C calls)	BENIGN-CALLEE-IGNORES
-0x97b85418	___initialize_Cplusplus	0x97b8543c	dyld_func_lookup	r4	r1+0x38 (a stack address) not at argument 1 of any C call (1 C calls)	CHECK-indirect
+0x97b85418	___initialize_Cplusplus	0x97b8543c	dyld_func_lookup	r4	r1+0x38 (a stack address) not at argument 1 of any C call (1 C calls)	BENIGN-TOOLCHAIN-NOT-LINKED
 0x97b87010	_CPPif	0x97b870cc	eval	r6	r1+0x44 (a stack address) not at argument 3 of any C call (1 C calls)	CHECK (C arg3: piVar5)
 0x97b88ee4	_byte_scan	0x97b89a54	lFloatConst	r5	0x2e not at argument 2 of any C call (1 C calls)	CHECK (C arg2: a1)
 0x97b8a794	_ReadToken	0x97b8aac8	eprintf	r5	0x168 not at argument 2 of any C call (1 C calls)	CHECK
