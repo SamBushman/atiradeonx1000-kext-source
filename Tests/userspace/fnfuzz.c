@@ -22,6 +22,7 @@
 #include <sys/mman.h>
 #include <sys/wait.h>
 #include <sys/resource.h>
+static void bc(const char *fmt, ...);
 #include <sys/select.h>
 #include <fcntl.h>
 #include <stdarg.h>
@@ -29,6 +30,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <mach/mach.h>
 #include <mach-o/loader.h>
 #include <mach-o/nlist.h>
 
@@ -287,9 +289,14 @@ static void on_sig_info(int s, siginfo_t *si, void *ucv) {
     (void)si;
     if (s == SIGSEGV || s == SIGBUS) {
         ucontext_t *u = (ucontext_t *)ucv; unsigned *R = (unsigned *)&u->uc_mcontext->ss.r0; unsigned pc = u->uc_mcontext->ss.srr0;
-        unsigned w = *(unsigned *)pc, op = w >> 26, ra = (w >> 16) & 31; int D = (short)(w & 0xffff); g_fault_pc = pc; g_fault_ra = R[ra];
-        if (((op >= 32 && op <= 47) || (op >= 48 && op <= 55)) && ra != 0) {
-            for (int k = 1; k <= 64; k++) { unsigned pw = ((unsigned *)pc)[-k]; if (pw == 0x4e800020u) break;
+        /* Nov 13 (#273): a fetch fault (the function branched to a bad pointer: pc 0x140) made `*(unsigned *)pc` fault AGAIN inside this handler with SIGSEGV blocked; the kernel then re-delivered the
+           fault in a loop (a Mach exception storm) until SIGALRM ended the trial (300 ms, sometimes 6 s with 3.4 s of system time). The faulting pc and the 64 words before it are read only after
+           vm_read_overwrite says they are readable; a fetch fault has no instruction to decode, so no repair is derived from it. */
+        unsigned w = 0, pre[64]; vm_size_t got = 0; int pcok = vm_read_overwrite(mach_task_self(), pc, 4, (vm_address_t)&w, &got) == KERN_SUCCESS && got == 4;
+        int preok = pcok && pc >= 0x100 + sizeof pre && (got = 0, vm_read_overwrite(mach_task_self(), pc - sizeof pre, sizeof pre, (vm_address_t)pre, &got) == KERN_SUCCESS && got == sizeof pre);
+        unsigned op = w >> 26, ra = (w >> 16) & 31; int D = (short)(w & 0xffff); g_fault_pc = pc; g_fault_ra = pcok ? R[ra] : 0;
+        if (pcok && preok && ((op >= 32 && op <= 47) || (op >= 48 && op <= 55)) && ra != 0) {
+            for (int k = 1; k <= 64; k++) { unsigned pw = pre[64 - k]; if (pw == 0x4e800020u) break;
                 if ((pw >> 26) == 32 && ((pw >> 21) & 31) == ra) { unsigned rb = (pw >> 16) & 31; int D2 = (short)(pw & 0xffff);
                     if (rb != 0) { unsigned src = R[rb] + D2; if (src >= ARENA_BASE && src < ARENA_BASE + ARENA_SIZE - 3 && !(src & 3)) { g_fix_valid = 1; g_fix_src = src; g_fix_disp = (unsigned)D; }
                         else for (int k2 = 0; k2 < 8; k2++) { unsigned delta = R[rb] - cur_args[k2]; if (delta < 0x20000u) { g_fix_valid = 1; g_fix_arg = (unsigned)k2 + 1; g_fix_disp = delta + (unsigned)D2; break; } } }   /* the loaded-from address is not in the arena but is an argument plus a constant (`addi r29,r3,0x4dd0`): the argument must be a pointer */
@@ -631,12 +638,40 @@ static int gs_semantic(const char *nm, unsigned *a, unsigned *r) {
 }
 static unsigned alarm_us = 300000;
 static struct { unsigned addr, val; } cur_patch[16]; static int ncur_patch; static unsigned cur_apatch[8];   /* FNFUZZ_REPAIR: arena words the repair loop found must be pointers */
+static unsigned tick_n, tick_ms;
+/* FNFUZZ_TRAPAT=hexaddr[,hexaddr..] (#273): STOCK-image code addresses (the file vaddr, as in the .dis) are overwritten in the forked child with a `tw 31,0,0` trap before the function runs; the SIGTRAP handler sends all
+   registers as UDP breadcrumbs (`G`) and ends the trial, so the instruction is never executed: look at a value (here: the function pointer an indirect call is about to branch to) without running its consequences. */
+static void on_trap(int s, siginfo_t *si, void *ucv) {
+    (void)si; ucontext_t *u = (ucontext_t *)ucv; unsigned *R = (unsigned *)&u->uc_mcontext->ss.r0;
+    bc("G trap pc %x lr %x ctr %x srr1 %x", u->uc_mcontext->ss.srr0, u->uc_mcontext->ss.lr, u->uc_mcontext->ss.ctr, u->uc_mcontext->ss.srr1);
+    for (int q = 0; q < 32; q += 8) bc("G r%d %x %x %x %x %x %x %x %x", q, R[q], R[q+1], R[q+2], R[q+3], R[q+4], R[q+5], R[q+6], R[q+7]);
+    { const char *tr = getenv("FNFUZZ_TRAPDUMP"); unsigned ra = tr ? (unsigned)strtoul(tr, NULL, 0) : 12; unsigned a0 = R[ra & 31]; unsigned buf[16]; vm_size_t got = 0;
+      if (vm_read_overwrite(mach_task_self(), a0, sizeof buf, (vm_address_t)buf, &got) == KERN_SUCCESS && got == sizeof buf) {
+          bc("G mem@r%u=%x %x %x %x %x %x %x %x", ra, a0, buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7]); bc("G mem+20 %x %x %x %x %x %x %x %x", buf[8], buf[9], buf[10], buf[11], buf[12], buf[13], buf[14], buf[15]); }
+      else bc("G mem@r%u=%x unreadable", ra, a0); }
+    report(s, 0, 0, 0);
+}
+/* FNFUZZ_PCSAMPLE=ms (#273): in the forked child a repeating ITIMER_REAL tick (instead of the single ualarm) sends the interrupted pc/lr/sp/ctr as a UDP breadcrumb every ms milliseconds (Tiger rounds to ~10 ms),
+   so a trial that takes the machine down leaves the last place it was running; the trial still ends (SIGALRM semantics) after alarm_us. */
+static void on_tick(int s, siginfo_t *si, void *ucv) {
+    (void)s; (void)si; ucontext_t *u = (ucontext_t *)ucv; tick_n++;
+    bc("P %u pc %x lr %x r1 %x ctr %x", tick_n, u->uc_mcontext->ss.srr0, u->uc_mcontext->ss.lr, u->uc_mcontext->ss.r1, u->uc_mcontext->ss.ctr);
+    if (tick_n * tick_ms * 1000u >= alarm_us) report(SIGALRM, 0, 0, 0);
+}
 static int nohandlers;
 static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     if (!nohandlers) {
         ualarm(alarm_us, 0);   /* a pure function finishes in microseconds; anything longer is a hang (both images are treated alike) */
         if (getenv("FNFUZZ_REPAIR")) { struct sigaction sa; memset(&sa, 0, sizeof sa); sa.sa_sigaction = on_sig_info; sa.sa_flags = SA_SIGINFO; sigemptyset(&sa.sa_mask); sigaction(SIGSEGV, &sa, NULL); sigaction(SIGBUS, &sa, NULL); } else { signal(SIGSEGV, on_sig); signal(SIGBUS, on_sig); } signal(SIGILL, on_sig); signal(SIGFPE, on_sig); signal(SIGTRAP, on_sig); signal(SIGABRT, on_sig); signal(SIGALRM, on_sig); signal(SIGSYS, on_sig);
     }
+    if (!nohandlers && getenv("FNFUZZ_TRAPAT") && cur_img == 0) { struct sigaction sa; memset(&sa, 0, sizeof sa); sa.sa_sigaction = on_trap; sa.sa_flags = SA_SIGINFO; sigemptyset(&sa.sa_mask); sigaction(SIGTRAP, &sa, NULL);
+        const char *ta = getenv("FNFUZZ_TRAPAT"); unsigned va;
+        while (ta && *ta && sscanf(ta, "%x", &va) == 1) { unsigned *tp = (unsigned *)(g_ap[0] + (va - g_astock)); unsigned long pg = (unsigned long)tp & ~0xfffUL;
+            int pr = mprotect((void *)pg, 0x1000, PROT_READ | PROT_WRITE | PROT_EXEC); bc("T trapat %x -> %p mprotect %d old %x", va, (void *)tp, pr, pr == 0 ? *tp : 0);
+            if (pr == 0) { *tp = 0x7fe00008u; __asm__ volatile("dcbst 0,%0\n\tsync\n\ticbi 0,%0\n\tsync\n\tisync" : : "r"(tp) : "memory"); }
+            while (*ta && *ta != ',') ta++; if (*ta == ',') ta++; } }
+    if (!nohandlers && getenv("FNFUZZ_PCSAMPLE")) { tick_ms = (unsigned)atoi(getenv("FNFUZZ_PCSAMPLE")); if (tick_ms < 1) tick_ms = 10; struct sigaction sa; memset(&sa, 0, sizeof sa); sa.sa_sigaction = on_tick; sa.sa_flags = SA_SIGINFO; sigemptyset(&sa.sa_mask); sigaction(SIGALRM, &sa, NULL);
+        struct itimerval it; it.it_interval.tv_sec = 0; it.it_interval.tv_usec = tick_ms * 1000; it.it_value = it.it_interval; setitimer(ITIMER_REAL, &it, NULL); }
     void *m = mmap((void *)ARENA_BASE, ARENA_SIZE, PROT_READ | PROT_WRITE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0);
     if (m != (void *)ARENA_BASE) _exit(9);
     /* guard regions: a read or write just past the arena (a loop that walks 0x48-byte records until a count the fuzz made huge) must fault the same way in both images. Without them the outcome depended on where libc/dyld
@@ -824,7 +859,7 @@ int main(int argc, char **argv) {
             if (getenv("FNFUZZ_ONERUN")) {   /* run this one trial through the normal forked path (handlers, repair patches above) after mapping zero pages at the addresses in FNFUZZ_MAPZERO (hex list, page-aligned down): a wild table read that lands in unmapped memory in one image and in a neighbouring library in the other is layout luck - with the same readable bytes behind it both images must give the same result */
                 const char *mz = getenv("FNFUZZ_MAPZERO"); unsigned ma; int nn;
                 while (mz && *mz && sscanf(mz, "%x%n", &ma, &nn) == 1) { void *m = mmap((void *)(ma & ~0xfffu), 0x2000, PROT_READ | PROT_WRITE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0); fprintf(stderr, "mapzero %08x: %s\n", ma & ~0xfffu, m == MAP_FAILED ? "FAILED" : "ok"); mz += nn; if (*mz == ',') mz++; }
-                for (int im = 0; im < 2; im++) { result_t r; void *fi = (void *)(ap[im] + ((im ? c->reb_off : c->stock_addr) - (im ? a_reb : a_stock))); run_one(fi, c, sd2(t, c), c->rc == 'd', im, &r);
+                for (int im = 0; im < 2; im++) { if (im && getenv("FNFUZZ_ONERUN_S")) break; result_t r; void *fi = (void *)(ap[im] + ((im ? c->reb_off : c->stock_addr) - (im ? a_reb : a_stock))); run_one(fi, c, sd2(t, c), c->rc == 'd', im, &r);
                     printf("%s trial %d: status %d r3 %08x digest %08x fault_pc %08x ra %08x disp %d word@pc %08x\n", im ? "rebuilt" : "stock", t, r.status, r.r3, r.digest, r.fault_pc, r.fault_ra, (int)r.fix_disp, r.fault_pc ? *(unsigned *)r.fault_pc : 0u); }
                 return 0; }
             nohandlers = 1; wfd = open("/dev/null", 1);
