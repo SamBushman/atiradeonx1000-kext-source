@@ -254,11 +254,15 @@ int Program__assignExportSlotsByKind(vector, nextSlotRef, program)
         *nextSlotRef = assignedSlot + 1;
         exportInst = *vectorElement;
       }
-      slotOwnerRegister[assignedSlot] = *(undefined4 *)(exportInst + 0x94);
+      /* #283: the stock stores through assignedSlot unchecked (stwx r9,r22,r0): an index outside the 51-word frame table (r1+0x38..0x104) overwrote the saved registers
+       * (r30 at index 60) and the function returned into a clobbered caller. Out-of-table slots are not recorded and do not extend slotEnd; in-table behaviour is the stock's. */
+      if ((uint)assignedSlot < 51) {
+        slotOwnerRegister[assignedSlot] = *(undefined4 *)(exportInst + 0x94);
+      }
       exportRecordInst = *vectorElement;
       *(undefined4 *)(exportRecordInst + 0x98) = 5;
       *(int *)(exportRecordInst + 0x94) = assignedSlot;
-      if (slotEnd < assignedSlot) {
+      if (slotEnd < assignedSlot && (uint)assignedSlot < 51) {
         slotEnd = assignedSlot;
       }
       vectorCount = vector[1];
