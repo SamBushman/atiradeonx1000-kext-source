@@ -13,3 +13,19 @@ func RegKind__laneCount
   arg 0 int 0 23
 func OpcodeTemplate__tableOffsetForIlOpcode
   arg 0 pick 0x30 0x31 0x5f 0x74 0x75 0x76 0x77 0x78 0x79 0x7a 0x7b 0x7c 0x7d 0x7e
+func RegKind__laneSourceCount
+  arg 0 int 0 23
+func RegKind__flagBit7
+  arg 0 int 0 23
+func RegKind__flagBit8
+  arg 0 int 0 23
+func RegKind__flagBit0
+  arg 0 int 0 23
+func RegKind__flagBit6
+  arg 0 int 0 23
+func RegKind__flagBit1
+  arg 0 int 0 23
+func RegKind__flagBit9
+  arg 0 int 0 23
+func RegKind__byte4
+  arg 0 int 0 23
