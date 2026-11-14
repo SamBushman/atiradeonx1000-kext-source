@@ -960,6 +960,191 @@ type SCHED 0x600
   self 0x100 0x104
   self 0x108 0xf8
 
+# Program destructors (dtor_ecfac / dtor_ed124): the arena-owned members are freed with Arena__free(*(obj-4), obj-4), so each member pointer is object+4 with the arena word in front; the two vectors
+# (+0x3c4/+0x3c8) also carry data pointer +8 and arena +0xc relative to that pointer; the pass list (+0x37c) is empty (+0x384 = +0x388) so DListNode__clear walks nothing.
+type DOBJ 0x20
+  ptr 0x00 ARENA
+type DVECO 0x30
+  ptr 0x00 ARENA
+  ptr 0x10 ARENA
+type PROGD 0x800
+  objfill 0x00 0x800
+  ptr 0x08 COMPILER
+  ptr 0x430 DOBJ 100 4
+  ptr 0x42c DOBJ 100 4
+  ptr 0x3c8 DVECO 100 4
+  ptr 0x3c4 DVECO 100 4
+  set 0x3ac 0
+  self 0x384 0x388
+  set 0x390 0
+
+# Dominator rows (computeDominators / runSsaPipeline): PROGC is the Program with a real 3-block CFG on its block list (+0x384 -> CB1 -> CB2 -> CB3 -> sentinel PROGC+0x388, entry +0x3a0 = CB1).
+# Edges: CB1 -> CB2 (always), CB1 -> CB3 (50 %); CB2 -> CB3 (always); CB3 -> CB2 (50 %); predecessor vectors list CB1/CB3 for CB2 and CB1 (50 %)/CB2 for CB3; CB1 has none (the entry is never a successor:
+# dfsNumber does not stamp the root). Every block is reachable (CB1 -> CB2 -> CB3), so every vertex number is assigned. Vectors: +0 capacity, +4 count, +8 data, +0xc arena; the dominated-child / frontier
+# vectors start empty with room for 8 entries.
+# CFG rows use their own compiler whose second arena (+0x378: dominator arrays, stacks) starts zeroed like real arena memory (Arena__alloc relies on that; the random ABUFB made compress() read stale ancestors).
+type ABUFZ 0x3000
+type ARENAZ 0x40
+  ptr 0x08 ABUFZ
+  padd 0x10 0x08 0x2800
+type COMPC 0x800 share
+  randfill 0x00 0x800 4096
+  ptr 0x30c TARGET
+  ptr 0x6c4 PROGC
+  ptr 0x374 ARENA
+  ptr 0x378 ARENAZ
+  u32 0x3c4 0 100
+  u32 0x67c 0 3
+type ZD 0x40
+type SB 0x40
+  u32 0x00 0 8
+type EV 0x20
+  ptr 0x00 ARENA
+  set 0x04 8
+  set 0x08 0
+  ptr 0x0c ZD
+  ptr 0x10 ARENA
+type CE1 0x10
+  ptr 0x00 CB2 100 4
+  ptr 0x04 CB3 50 4
+type CE2 0x10
+  ptr 0x00 CB3 100 4
+type CE3 0x10
+  ptr 0x00 CB2 100 4
+type CP2 0x10
+  ptr 0x00 CB3 100 4
+  ptr 0x04 CB1 50 4
+type CP3 0x10
+  ptr 0x00 CB1 100 4
+  ptr 0x04 CB2 100 4
+type CV1 0x20
+  ptr 0x00 ARENA
+  set 0x04 4
+  set 0x08 2
+  ptr 0x0c CE1
+  ptr 0x10 ARENA
+type CV2 0x20
+  ptr 0x00 ARENA
+  set 0x04 4
+  set 0x08 1
+  ptr 0x0c CE2
+  ptr 0x10 ARENA
+type CV3 0x20
+  ptr 0x00 ARENA
+  set 0x04 4
+  set 0x08 1
+  ptr 0x0c CE3
+  ptr 0x10 ARENA
+type CW2 0x20
+  ptr 0x00 ARENA
+  set 0x04 4
+  set 0x08 2
+  ptr 0x0c CP2
+  ptr 0x10 ARENA
+type CW3 0x20
+  ptr 0x00 ARENA
+  set 0x04 4
+  set 0x08 2
+  ptr 0x0c CP3
+  ptr 0x10 ARENA
+type CB1 0x404 share
+  ptr 0x00 ARENA
+  objfill 0x04 0x400
+  ptr 0x138 CB2 100 4
+  ptr 0x13c CB3 100 4
+  u32 0x150 0 1
+  ptr 0x134 IRINST 100
+  daddr 0x04 ptrTo_Block__dtor_001e9b08 0
+  ptr 0xac COMPC
+  ptr 0xb0 PROGC 100 0
+  self 0x9c 0xa0
+  self 0xa4 0x94
+  set 0xa8 0
+  set 0xbc 0
+  ptr 0x08 PROGC 100 0x37c
+  u32 0xb8 0 400
+  ptr 0x0c CB2 100 4
+  ptr 0xd4 CV1 100 4
+  ptr 0xd8 EV 100 4
+  ptr 0xc8 EV 100 4
+  ptr 0xd0 DNODE
+  ptr 0xf8 EV 100 4
+  ptr 0xfc EV 100 4
+  ptr 0x108 BITSETA 100 4
+  set 0xe8 0
+  set 0xec 0
+  set 0xf4 0
+  set 0x11c 0
+type CB2 0x404 share
+  ptr 0x00 ARENA
+  objfill 0x04 0x400
+  daddr 0x04 ptrTo_Block__dtor_001e9b08 0
+  ptr 0xac COMPC
+  ptr 0xb0 PROGC 100 0
+  self 0x9c 0xa0
+  self 0xa4 0x94
+  set 0xa8 0
+  set 0xbc 0
+  ptr 0x08 CB1 100 4
+  u32 0xb8 0 400
+  ptr 0x0c CB3 100 4
+  ptr 0xd4 CV2 100 4
+  ptr 0xd8 CW2 100 4
+  ptr 0xc8 EV 100 4
+  ptr 0xd0 DNODE
+  ptr 0xf8 EV 100 4
+  ptr 0xfc EV 100 4
+  ptr 0x108 BITSETA 100 4
+  set 0xe8 0
+  set 0xec 0
+  set 0xf4 0
+  set 0x11c 0
+type CB3 0x404 share
+  ptr 0x00 ARENA
+  objfill 0x04 0x400
+  daddr 0x04 ptrTo_Block__dtor_001e9b08 0
+  ptr 0xac COMPC
+  ptr 0xb0 PROGC 100 0
+  self 0x9c 0xa0
+  self 0xa4 0x94
+  set 0xa8 0
+  set 0xbc 0
+  ptr 0x08 CB2 100 4
+  u32 0xb8 0 400
+  ptr 0x0c PROGC 100 0x388
+  ptr 0xd4 CV3 100 4
+  ptr 0xd8 CW3 100 4
+  ptr 0xc8 EV 100 4
+  ptr 0xd0 DNODE
+  ptr 0xf8 EV 100 4
+  ptr 0xfc EV 100 4
+  ptr 0x108 BITSETA 100 4
+  set 0xe8 0
+  set 0xec 0
+  set 0xf4 0
+  set 0x11c 0
+type PROGC 0x800 share
+  objfill 0x00 0x800
+  ptr 0x08 COMPC
+  ptr 0x3bc BITSET
+  ptr 0x3ac VPOOL
+  ptr 0x384 CB1 100 4
+  ptr 0x3a0 CB1 100 4
+  ptr 0x3c4 VECA 100 4
+  ptr 0x2c COMPC
+  ptr 0x18 WORDP
+  ptr 0x42c BITSET
+  ptr 0x430 BITSET
+  ptr 0x45c TABLE
+  set 0x390 0
+  set 0x474 0
+  set 0x398 0
+  ptr 0x38c CB3 100 4
+  ptr 0x3b0 SB
+  ptr 0x434 BITSET
+  ptr 0x438 SPILLREC
+  ptr 0x8c VECAS 100 4
+
 func Program__appendInst
   arg 0 ptr PROGRAM
   arg 1 ptr IRINST
@@ -971,7 +1156,7 @@ func Program__assignExportSlotsByKind
   arg 2 ptr PROGRAM
 
 func Program__computeDominators
-  arg 0 ptr PROGRAM
+  arg 0 ptr PROGC
 
 func Program__createConstantVReg
   arg 0 ptr PROGRAM
@@ -981,22 +1166,24 @@ func Program__createConstantVReg
   arg 4 ptr OBJ
 
 func Program__detachRegion
-  arg 0 ptr PROGRAM
-  arg 1 ptr BLOCK
-  arg 2 int 0 8
+  arg 0 ptr PROGC
+  arg 1 ptr CB3
+  arg 1 rel 1 val 4
+  arg 2 ptr CB3
+  arg 2 rel 2 val 4
 
 func Program__dtor_ecfac
-  arg 0 ptr PROGRAM
+  arg 0 ptr PROGD
 
 func Program__dtor_ed124
-  arg 0 ptr PROGRAM
+  arg 0 ptr PROGD
 
 func Program__eliminateDeadInstsAndRecountUses
   arg 0 ptr PROGRAM
   arg 1 int 0 8
 
 func Program__eliminatePhiCopies
-  arg 0 ptr OBJ
+  arg 0 ptr PROGC
 
 func Program__emitInputMerge
   arg 0 ptr PROGRAM
@@ -1025,9 +1212,11 @@ func Program__ensureVRegType13
   arg 0 ptr PROGRAM
 
 func Program__foldConstantIfRegion
-  arg 0 ptr PROGRAM
-  arg 1 ptr OBJ
-  arg 2 ptr OBJ
+  arg 0 ptr PROGC
+  arg 1 ptr CB1
+  arg 1 rel 1 val 4
+  arg 2 ptr CB3
+  arg 2 rel 2 val 4
   arg 3 ptr OBJ
   arg 4 ptr OBJ
 
@@ -1067,26 +1256,31 @@ func Program__propagateBlockFlagsFromSuccessors
   arg 0 ptr PROGRAM
 
 func Program__propagateMovThroughUses
-  arg 0 ptr OBJ
-  arg 1 ptr OBJ
-  arg 2 ptr OBJ
+  arg 0 ptr PROGC
+  arg 1 ptr IRINST
+  arg 2 ptr IRINST
 
 func Program__removeDeadRegion
-  arg 0 ptr PROGRAM
-  arg 1 ptr BLOCK
-  arg 2 int 0 8
-  arg 3 ptr BLOCK
+  arg 0 ptr PROGC
+  arg 1 ptr CB1
+  arg 1 rel 1 val 4
+  arg 2 ptr CB2
+  arg 2 rel 2 val 4
+  arg 3 ptr CB3
+  arg 3 rel 3 val 4
 
 func Program__rewriteAttribShaderInsts_0013da3c
   arg 0 ptr PROGRAM
 
 func Program__runSsaPipeline
-  arg 0 ptr PROGRAM
+  arg 0 ptr PROGC
 
 func Program__splitCriticalEdges
-  arg 0 ptr PROGRAM
-  arg 1 ptr BLOCK
-  arg 2 ptr BLOCK
+  arg 0 ptr PROGC
+  arg 1 ptr CB1
+  arg 1 rel 1 val 4
+  arg 2 ptr CB3
+  arg 2 rel 2 val 4
 
 func Program__translateILStream
   arg 0 ptr PROGRAM

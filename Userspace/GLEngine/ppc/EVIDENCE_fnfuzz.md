@@ -726,3 +726,25 @@ GLEngine/libGL/libGLProgrammability corpora, were reviewed; the rest are capacit
 
 Verification on gld_3b21f30b (ledgers retargeted with gleng_ledger_retarget.py): the row 0/100 differ; whole sra4 spec 47 functions / 4700 trials 0 differ, 15 uninformative; whole blk1 spec
 86 functions / 8600 trials 0 differ, 9 uninformative. Not yet run: GL suite on this image (deferred to the end-of-batch pass per the standing plan).
+
+## Program rows of the sra4 spec (Nov 13 night - Nov 14, image gld_3b21f30b, harness fnfuzz_gs78)
+
+New spec objects (Tests/userspace/gld_sc/sra4_spec.txt): `PROGD` (destructor-shaped Program: arena-owned members are object+4 with the arena word in front, empty pass list), and a real 3-block CFG `PROGC` / `CB1..CB3` (+ `COMPC`, a compiler whose second arena starts zeroed like real arena memory: `DominatorTree__compress` read stale ancestors from the random-filled `ABUFB`). Blocks carry the concrete `Block` vtable (`daddr` NAME = the ADDRESS of the data symbol; `ptrTo_Block__dtor_001e9b08` is the vtable itself, `*this = &ptrTo_Block__dtor_*`, unlike the `PTR_vtable` cells `dval` reads; the old spec used the abstract `AnyBlock` vtable whose slot 0x4c is null). Edges: CB1->CB2 always, CB1->CB3 50 %, CB2->CB3, CB3->CB2; pred vectors CB2 = [CB3, CB1 50 %], CB3 = [CB1, CB2]; every block reachable. Run with `FNFUZZ_ARENA_KB=512` (the CFG types do not fit the default 0x15000 pool). Block arguments are `arg N ptr CBk` followed by `arg N rel N val 4` (the block pointer is object+4).
+
+Harness changes (gs77/gs78): the FNFUZZ_DATA table held at most 32 rows and silently dropped the rest (the vt file has 324); now 512. New spec word `daddr`.
+
+Results on the clean image (0 differ in every row):
+
+| row | trials that ran to the end |
+|---|---|
+| Program__dtor_ecfac / dtor_ed124 | 100 / 100 (r3 differs: stock leaves program+0x37c, rebuilt program+0x388 - void, digest identical; ecfac's one direct caller does not read r3 (`callers_read_r3.py`), ed124 has no direct caller: indirect callers **not established**; both compared as void) |
+| Program__computeDominators | 100/100 (the whole DominatorTree family: ctor, dfsNumber, compute, compress, eval, computeDominanceFrontiers, free) |
+| Program__runSsaPipeline | 80/100 (the rest fault in trimOutputChain: the program instruction vector holds no IR instructions) |
+| Program__detachRegion (CB3, CB3), removeDeadRegion, splitCriticalEdges | 100/100 each |
+| Program__eliminatePhiCopies | 24/100 |
+
+Mismatch control (mutant image, `Tests/userspace/gld_sc/mutants_program.patch`, 7 one-line changes, 5 detected): DominatorTree__compute `<` -> `>` (computeDominators 100/100 differ, runSsaPipeline 80/100), computeDominanceFrontiers `!=` -> `==` (same rows), Program__detachRegion without `Block__connect` (52/100 differ; with args (CB2, CB3) it was NOT detected because the edge already existed - `Block__connect` is a no-op when the predecessor is already in the successor's predecessor vector), dtor_ecfac `+0x388` -> `+0x38c` (100/100), runSsaPipeline `table[2] = 0` -> `1` (runSsaPipeline). **Not detected: removeDeadRegion (`successorBlock != footerBlock` dropped) and splitCriticalEdges (`allocation[0x2f] = block[0x2e]` -> 0): their changed branches need blocks with more than two instructions / blocks whose vtable queries (+0x28/+0x34) are true; the CB blocks have empty instruction lists, so those branches are not exercised - not established for them.**
+
+Still uninformative (every trial ends in a signal), with where they stop: Program__initAndTranslate and translateILStream (need an ILReader and a token stream; IRLoadConst__ctor -> appendToVector3c8 faults), propagateMovThroughUses (IR operand records), foldConstantIfRegion (needs IfHeader/IfFooter block classes and a branch IRInst: faults in the IRInst destroy path), RegAlloc__run, Scheduler__computeBlockRegisterSets / scheduleBlock / run. Note: Program__insertMovAfter and propagateBlockFlagsFromSuccessors are informative only at the default pool (1/100 end to end each); with `FNFUZZ_ARENA_KB=512` they are uninformative (layout luck).
+
+Final run on gld_3b21f30b, whole sra4 spec at `FNFUZZ_ARENA_KB=512`: 47 functions, 4700 trials, 0 differ, 9 uninformative (the nine rows named above: propagateBlockFlagsFromSuccessors, insertMovAfter, initAndTranslate, propagateMovThroughUses, translateILStream, foldConstantIfRegion, Scheduler computeBlockRegisterSets / scheduleBlock / run). RegAlloc__run no longer appears in the uninformative list at this pool size; its cause of the earlier signal was not established.

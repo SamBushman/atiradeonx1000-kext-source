@@ -271,7 +271,7 @@ static void init_retblk(void) { unsigned *w = (unsigned *)retblk; unsigned long 
    Some functions read and write the image's own variables (`_gle_io_data`, `_glep_plugin_head`): file lines `name<TAB>stock_addr<TAB>rebuilt_addr` (hex; Tools/userspace/gleng_data_addrs.py: stock from the
    Ghidra symbol map, rebuilt from nm). Both images sit at their own slide, so an address is anchor + (address - anchor address) as for functions. After the call every watched word is folded into the
    digest; a word that points into the image's text is replaced by the id of the function it points at (the two images lay their functions out differently, but the slot must name the same function). */
-static struct { char name[48]; unsigned st, rb; } gdat[32]; static int ngdat;
+static struct { char name[48]; unsigned st, rb; } gdat[512]; static int ngdat;
 static struct { unsigned *p; int words; } cur_watch[8]; static int ncur_watch;
 static unsigned *gaddr(const char *name) { for (int i = 0; i < ngdat; i++) if (!strcmp(gdat[i].name, name)) return (unsigned *)(g_ap[cur_img] + (cur_img ? gdat[i].rb - g_areb : gdat[i].st - g_astock)); fprintf(stderr, "no data symbol %s in FNFUZZ_DATA\n", name); _exit(9); }
 static unsigned fn_token(unsigned v) {
@@ -374,7 +374,7 @@ typedef struct { unsigned off; int kind; unsigned a, b, c; int n; unsigned v[8];
 typedef struct { char name[32]; unsigned size; int nf; gfield_t f[GMAXF]; int share; unsigned inst; } gtype_t;   /* `type NAME SIZE [share]`: a `share` type is built once per function (every pointer to it, in any object or argument, is the same instance: the one compiler object every block of a graph points to) */
 typedef struct { int n; int kind; unsigned a, b; int pct; unsigned v[64]; int nv; char tname[32]; char text[96]; } garg_t;
 typedef struct { char name[96]; int na; garg_t a[16]; } gfunc_t;
-enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_OBJFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD, GF_SELF, GF_FNREC3A, GF_FNRECA, GF_FFILL, GF_DPTR, GF_FNQ, GF_FNQP, GF_DVAL };
+enum { GF_PTR = 1, GF_LIST, GF_U8, GF_U16, GF_U32, GF_RAND, GF_SET, GF_PICK, GF_BITS, GF_STR, GF_HASH, GF_PARR, GF_FN, GF_RANDFILL, GF_OBJFILL, GF_FND, GF_ISTR, GF_WARR, GF_RLIST, GF_FNREC, GF_FNRECV, GF_FNRECW, GF_FNRECP, GF_FNREC1, GF_FNREC3, GF_PADD, GF_SELF, GF_FNREC3A, GF_FNRECA, GF_FFILL, GF_DPTR, GF_FNQ, GF_FNQP, GF_DVAL, GF_DADDR };
 enum { GA_PTR = 1, GA_INT, GA_PICK, GA_RAND, GA_NULL, GA_NAME, GA_STR, GA_REL };
 static unsigned g_names[64]; static int g_nnames;
 typedef struct { char name[48]; char tname[32]; unsigned v[8]; int nv; char func[96]; int pct; } gret_t;
@@ -471,6 +471,7 @@ static void load_graphspec(const char *path) {
             else if (!strcmp(tok[0], "fnrecw")) g->kind = GF_FNRECW;
             else if (!strcmp(tok[0], "fnrecp")) g->kind = GF_FNRECP;
             else if (!strcmp(tok[0], "fnrec1")) g->kind = GF_FNREC1;
+            else if (!strcmp(tok[0], "daddr") && nt >= 3) { g->kind = GF_DADDR; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->a = nt >= 4 ? gnum(tok[3]) : 0; }   /* daddr OFF NAME [DELTA]: +OFF = the ADDRESS of the FNFUZZ_DATA symbol NAME in the image under test plus DELTA (a vtable that is itself the data symbol, e.g. `*this = &ptrTo_Block__dtor_*`) */
             else if (!strcmp(tok[0], "dval") && nt >= 3) { g->kind = GF_DVAL; snprintf(g->tname, sizeof g->tname, "%s", tok[2]); g->a = nt >= 4 ? gnum(tok[3]) : 0; }   /* dval OFF NAME [DELTA]: +OFF = the word stored at the FNFUZZ_DATA symbol NAME of the image under test, plus DELTA (the class vtable address a `PTR_vtable_*` cell holds; an object's +0 is that + 8) */
             else if (!strcmp(tok[0], "fnq") && nt >= 4) { g->kind = GF_FNQ; g->c = gnum(tok[2]); for (int i = 3; i < nt && g->n < 8; i++) g->v[g->n++] = gnum(tok[i]); }   /* fnq OFF IDX V1 [V2..]: +OFF = callback number IDX (0..15; records r3, returns one of the values: a virtual method that returns a qualifier, a basic type, a count) */
             else if (!strcmp(tok[0], "fnqp") && nt >= 4) { g->kind = GF_FNQP; g->c = gnum(tok[2]); snprintf(g->tname, sizeof g->tname, "%s", tok[3]); g->a = nt >= 5 ? gnum(tok[4]) : 100; }   /* fnqp OFF IDX TYPE [PCT]: same, the callback returns a pointer to a fresh TYPE node (a virtual method that returns a child / a type object), NULL in 100-PCT percent */
@@ -528,6 +529,7 @@ static unsigned gb_build(gtype_t *t, int depth) {
         case GF_FNRECP: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_recp; break;
         case GF_FNREC1: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_rec1; break;
         case GF_DVAL: *(unsigned *)(b + g->off) = *gaddr(g->tname) + g->a; break;
+        case GF_DADDR: *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gaddr(g->tname) + g->a; break;
         case GF_FNQ: if (g->c < 16) { gs_qv[g->c] = g->v[rnd32() % g->n]; *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_qtab[g->c]; } break;
         case GF_FNQP: if (g->c < 16) { gs_qv[g->c] = (rnd32() % 100 < g->a) ? gb_build(gfind_type(g->tname), depth + 1) : 0; *(unsigned *)(b + g->off) = (unsigned)(uintptr_t)gs_qtab[g->c]; } break;
         case GF_FFILL: { float lo, hi; memcpy(&lo, &g->v[0], 4); memcpy(&hi, &g->v[1], 4); for (unsigned k = 0; k + 4 <= g->a; k += 4) { unsigned r = rnd32(), w; if ((r & 15) == 0) { static const unsigned sp[4] = { 0x7fc00000u, 0x7f800000u, 0xff800000u, 0x80000000u }; w = sp[(r >> 4) & 3]; } else { float f = lo + (hi - lo) * ((float)(rnd32() >> 8) / 16777216.0f); memcpy(&w, &f, 4); } *(unsigned *)(b + g->off + k) = w; } break; }
@@ -924,7 +926,7 @@ int main(int argc, char **argv) {
     if (!ap[0] || !ap[1]) { fprintf(stderr, "anchor %s not found\n", an); return 2; }
     Dl_info di; dladdr((void *)ap[0], &di); img_hdr[0] = (const struct mach_header *)di.dli_fbase; dladdr((void *)ap[1], &di); img_hdr[1] = (const struct mach_header *)di.dli_fbase; bc("IMAGES stock mh %08x rebuilt mh %08x", (unsigned)img_hdr[0], (unsigned)img_hdr[1]);
     g_cs = cs; g_nc = nc; g_ap[0] = ap[0]; g_ap[1] = ap[1]; g_astock = a_stock; g_areb = a_reb;
-    if (getenv("FNFUZZ_DATA")) { FILE *df = fopen(getenv("FNFUZZ_DATA"), "r"); if (!df) { perror("FNFUZZ_DATA"); return 2; } char dl[256]; while (fgets(dl, sizeof dl, df) && ngdat < 32) { if (sscanf(dl, "%47s\t%x\t%x", gdat[ngdat].name, &gdat[ngdat].st, &gdat[ngdat].rb) == 3) ngdat++; } fclose(df); }
+    if (getenv("FNFUZZ_DATA")) { FILE *df = fopen(getenv("FNFUZZ_DATA"), "r"); if (!df) { perror("FNFUZZ_DATA"); return 2; } char dl[256]; while (fgets(dl, sizeof dl, df) && ngdat < 512) { if (sscanf(dl, "%47s\t%x\t%x", gdat[ngdat].name, &gdat[ngdat].st, &gdat[ngdat].rb) == 3) ngdat++; } fclose(df); }
     if (getenv("FNFUZZ_GRAPHSPEC")) { gs_malloc = 1; load_graphspec(getenv("FNFUZZ_GRAPHSPEC")); }
     vtmode = getenv("FNFUZZ_VT") != NULL || objmode; interpose = getenv("FNFUZZ_INTERPOSE") != NULL; imp_ctl = getenv("FNFUZZ_IMPORT_CTL");
     if (interpose) { init_retblk(); collect_slots(0, img_hdr[0]); collect_slots(1, img_hdr[1]); load_nargs(); load_stackrec(); fprintf(stderr, "interposer: %d stock slots, %d rebuilt slots, %d distinct imports\n", nslots[0], nslots[1], nstub); }

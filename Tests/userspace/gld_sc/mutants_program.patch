@@ -1,0 +1,78 @@
+diff --git a/Userspace/ATIRadeonX1000GLDriver/ppc/part_024.c b/Userspace/ATIRadeonX1000GLDriver/ppc/part_024.c
+index b57c7700..37abaf0e 100644
+--- a/Userspace/ATIRadeonX1000GLDriver/ppc/part_024.c
++++ b/Userspace/ATIRadeonX1000GLDriver/ppc/part_024.c
+@@ -684,7 +684,7 @@ int Program__dtor_ecfac(program)
+   DListNode__clear((undefined4 *)(program + 0x37c));
+   baseVtable = ptrTo_DListNode__vtable_001e8b48 + 8;
+   *(undefined4 *)(program + 0x37c) = baseVtable;
+-  *(undefined **)(program + 0x388) = baseVtable;
++  *(undefined **)(program + 0x38c) = baseVtable;
+   return;
+ }
+ 
+diff --git a/Userspace/ATIRadeonX1000GLDriver/ppc/part_026.c b/Userspace/ATIRadeonX1000GLDriver/ppc/part_026.c
+index 7e79634e..4c678fee 100644
+--- a/Userspace/ATIRadeonX1000GLDriver/ppc/part_026.c
++++ b/Userspace/ATIRadeonX1000GLDriver/ppc/part_026.c
+@@ -1653,7 +1653,7 @@ int DominatorTree__computeDominanceFrontiers(domInfo)
+       loopCounter = 0;
+       for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(block + 0xd0) + 4); loopIndex2 = loopIndex2 + 1) {
+         successor = *(int *)(loopCounter + *(int *)(*(int *)(block + 0xd0) + 8));
+-        if ((successor != 0) && (blockDfsNumber != *(int *)(*(int *)(successor + 0xe4) * 4 + *(int *)(domInfo + 8))))
++        if ((successor != 0) && (blockDfsNumber == *(int *)(*(int *)(successor + 0xe4) * 4 + *(int *)(domInfo + 8))))
+         {
+           Block__addDominanceFrontier(block,successor);
+         }
+@@ -1985,7 +1985,7 @@ int DominatorTree__compute(domInfo)
+           semiArray = domInfo[1];
+           predecessorBlock = ((int (*)())DominatorTree__eval)(domInfo,*(undefined4 *)(predecessorBlock + 0xe4));
+           predSemi = *(uint *)(predecessorBlock * 4 + semiArray);
+-          if (predSemi < *(uint *)(vertexByteOffset + domInfo[1])) {
++          if (predSemi > *(uint *)(vertexByteOffset + domInfo[1])) {
+             *(uint *)(vertexByteOffset + domInfo[1]) = predSemi;
+           }
+         }
+diff --git a/Userspace/ATIRadeonX1000GLDriver/ppc/part_037.c b/Userspace/ATIRadeonX1000GLDriver/ppc/part_037.c
+index b3e699ae..f44234b8 100644
+--- a/Userspace/ATIRadeonX1000GLDriver/ppc/part_037.c
++++ b/Userspace/ATIRadeonX1000GLDriver/ppc/part_037.c
+@@ -2856,7 +2856,7 @@ int Program__runSsaPipeline(program)
+       remaining = 1;
+     }
+     do {
+-      table[2] = 0;
++      table[2] = 1;
+       table = table + 1;
+       remaining = remaining + -1;
+     } while (remaining != 0);
+diff --git a/Userspace/ATIRadeonX1000GLDriver/ppc/part_040.c b/Userspace/ATIRadeonX1000GLDriver/ppc/part_040.c
+index 244642aa..0b1aaec8 100644
+--- a/Userspace/ATIRadeonX1000GLDriver/ppc/part_040.c
++++ b/Userspace/ATIRadeonX1000GLDriver/ppc/part_040.c
+@@ -1188,7 +1188,7 @@ int Program__removeDeadRegion(program, headerBlock, deadRegionEntry, footerBlock
+     for (successorNumber = 1; operandCountOrSuccessors = *(int *)(deadBlock + 0xd0), successorNumber <= *(uint *)(operandCountOrSuccessors + 4); successorNumber = successorNumber + 1
+         ) {
+       successorBlock = *(int **)(*(int *)(operandCountOrSuccessors + 8) + successorByteOffset);
+-      if ((((successorBlock != (int *)0x0) && (successorBlock != footerBlock)) && (successorBlock != headerBlock)) &&
++      if ((((successorBlock != (int *)0x0) && 1) && (successorBlock != headerBlock)) &&
+          (((operandCountOrSuccessors = (**(code **)(*successorBlock + 0x38))(successorBlock), operandCountOrSuccessors == 0 &&
+            (operandCountOrSuccessors = (**(code **)(*successorBlock + 0x3c))(successorBlock), operandCountOrSuccessors == 0)) &&
+           (operandCountOrSuccessors = DList__count(successorBlock + 0x24), workCountAfterCheck = vecCount, 2 < operandCountOrSuccessors)))) {
+@@ -1685,7 +1685,6 @@ int Program__detachRegion(program, currentBlock, regionEnd)
+   Vector__removeValue(*(undefined4 *)(predecessor + 0xd0),currentBlock);
+   successor = Block__getSuccessor(regionEnd,0);
+   Vector__removeValue(*(undefined4 *)(successor + 0xd4),regionEnd);
+-  Block__connect(predecessor,successor);
+   while( true ) {
+     successorByteOffset = 0;
+     for (loopIndex = 1; loopIndex <= *(uint *)(currentBlock[0x34] + 4); loopIndex = loopIndex + 1) {
+@@ -2108,7 +2107,7 @@ int Program__splitCriticalEdges(program, block, lastBlock)
+       *allocation = arena;
+       newSuccessorBlock = allocation + 1;
+       Block__ctor_ea020(newSuccessorBlock,*(undefined4 *)(program + 8));
+-      allocation[0x2f] = block[0x2e];
++      allocation[0x2f] = 0;
+       Program__insertBlockAfter(program,block,newSuccessorBlock);
+       Block__splitEdge(block,successor,newSuccessorBlock);
+     }
