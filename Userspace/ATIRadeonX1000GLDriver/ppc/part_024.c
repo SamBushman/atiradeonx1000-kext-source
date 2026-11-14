@@ -762,7 +762,7 @@ int HwLimits__vslot43_prependDefaultMov(this, inst, unusedArg3, compiler)
     destSelectBytes[0] = *(undefined4 *)(destRecord2 + 0x10);
     lanesLeft = 4;
     do {
-      *(byte *)((int)destSelectBytes + laneIndex + -4) =
+      *(byte *)((int)&unwrittenLaneMask + laneIndex) =
            (byte)(-(uint)(*(byte *)((int)destSelectBytes + laneIndex) ^ 1) >> 0x1f);
       laneIndex = laneIndex + 1;
       lanesLeft = lanesLeft + -1;

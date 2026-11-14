@@ -9830,10 +9830,10 @@ loopSetEdgeListSlot:
                     (uint)*(byte *)((int)&producerLaneMask + isExternalProducer + 2) << 0x10 |
                     (uint)*(byte *)((int)&producerLaneMask + isExternalProducer + 1) << 8 |
                    (uint)*(byte *)(isExternalProducer + (int)&producerLaneMask)) -
-                   ((uint)*(byte *)((int)edgeList + isExternalProducer + -1) << 0x18 |
-                    (uint)*(byte *)((int)edgeList + isExternalProducer + -2) << 0x10 |
-                    (uint)*(byte *)((int)edgeList + isExternalProducer + -3) << 8 |
-                   (uint)*(byte *)((int)edgeList + isExternalProducer + -4));
+                   ((uint)*(byte *)((int)&coveredLanes + isExternalProducer + 3) << 0x18 |
+                    (uint)*(byte *)((int)&coveredLanes + isExternalProducer + 2) << 0x10 |
+                    (uint)*(byte *)((int)&coveredLanes + isExternalProducer + 1) << 8 |
+                   (uint)*(byte *)((int)&coveredLanes + isExternalProducer));
           producerLaneMask = remainingLanes * 0x1000000 | (remainingLanes & 0xff00) << 8 | remainingLanes >> 8 & 0xff00 |
                      remainingLanes >> 0x18;
         }

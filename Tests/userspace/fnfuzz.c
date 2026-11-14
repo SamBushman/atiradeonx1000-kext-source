@@ -976,6 +976,9 @@ int main(int argc, char **argv) {
                 run_one(fn[0], c, seed, mode, 0, &a);
                 use_fill2 = 1; run_one(fn[0], c, seed, mode, 0, &a2); use_fill2 = 0;
                 run_one(fn[1], c, seed, mode, 1, &b);
+                int ru = 0;   /* FNFUZZ_RUNINIT=1 (with FNFUZZ_STACKFILL2): the rebuilt image runs a second time with the second fill word; a result that changes with the stack fill means the rebuilt code reads an uninitialised stack slot (two locals read across each other, a struct whose neighbour the compiler moved): a defect of the corpus even when the stock happens to agree */
+                if (getenv("FNFUZZ_RUNINIT") && getenv("FNFUZZ_STACKFILL2")) { result_t b2; use_fill2 = 1; run_one(fn[1], c, seed, mode, 1, &b2); use_fill2 = 0; ru = !same(&b, &b2, mode ? 'd' : (c->rc == 'd' ? 'v' : c->rc));
+                    if (ru && !why[0]) snprintf(why, sizeof why, "trial %d mode %d: REBUILT READS UNINITIALISED STACK (result changes with the stack fill word): st %d/%d r3 %08x/%08x dg %08x/%08x | stock st=%d r3=%08x dg=%08x | args %x %x %x %x %x", t, mode, b.status, b2.status, b.r3, b2.r3, b.digest, b2.digest, a.status, a.r3, a.digest, b.args[0], b.args[1], b.args[2], b.args[3], b.args[4]); }
                 ntrials++; if (!a.status && !b.status) nrun_ok++; if (ncur_patch || cur_apatch[0] || cur_apatch[1] || cur_apatch[2] || cur_apatch[3]) npatched++;
                 if (!same(&a, &a2, c->rc)) { nd++; continue; }
                 if ((a.status == 14) != (b.status == 14)) {   /* a hang on one side only: the -O0 rebuild is several times slower than the -O2 stock on a long loop (`_pow_10(0x5000ec80)`), and machine load adds to it - rerun both with a 6 s limit before blaming the code */
@@ -983,7 +986,7 @@ int main(int argc, char **argv) {
                 }
                 if (a.status && b.status && a.status == b.status) crash2++;
                 if (interpose && !a.status && !b.status && a.ncalls) { live++; lcalls += a.ncalls; for (int q = 0; q < 5; q++) lmask[q] |= a.mask[q]; }
-                if (same(&a, &b, mode ? 'd' : (c->rc == 'd' ? 'v' : c->rc))) good++;
+                if (!ru && same(&a, &b, mode ? 'd' : (c->rc == 'd' ? 'v' : c->rc))) good++;
                 else { diffs++;
                     /* FNFUZZ_DUMPARENA=prefix (with FNFUZZ_VERBOSE): the whole arena of the FIRST differing trial of each function, as prefix.S / prefix.R (ARENA_BASE-relative, 0x20000 bytes) - the
                        inputs are in it too (the function only changes what it writes), so the differing computation can be replayed by hand / in a script */

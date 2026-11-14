@@ -418,7 +418,7 @@ int IRInst__foldConstantSourcesIntoClone(inst, inst2, pass)
         }
         else {
           operandRecord3 = IRInst__getOperandRecord(inst,1);
-          *(undefined1 *)((int)foundSlotOut + laneIndex + -4) = *(undefined1 *)(laneSelectByte + operandRecord3 + 0x10);
+          *(undefined1 *)((int)&swizzleWord + laneIndex) = *(undefined1 *)(laneSelectByte + operandRecord3 + 0x10);
         }
       }
       rebuiltSwizzle = swizzleWord;
@@ -454,7 +454,7 @@ int IRInst__foldConstantSourcesIntoClone(inst, inst2, pass)
     inst2[0x21] = targetOperandCount + -1;
     laneIndexB = 0;
     do {
-      savedLaneSelectByte = (uint)*(byte *)((int)foundSlotOut + laneIndexB + -4);
+      savedLaneSelectByte = (uint)*(byte *)((int)&swizzleWord + laneIndexB);
       if ((savedLaneSelectByte != 4) && (0 < *(int *)(inst + 0x84))) {
         loopIndex2 = 1;
         do {
@@ -587,7 +587,7 @@ int IRInst__foldCompareResultIntoCopy(inst, pass)
       laneSelector = (uint)*(byte *)((int)&swizzleWord + laneStep);
       if (laneSelector != 4) {
         (**(code **)(*copyInst + 0x88))
-                  (copyInst,1,laneStep,(uint)*(byte *)((int)foundOperandSlots + (laneSelector - 4)),passArg,staleArg8,
+                  (copyInst,1,laneStep,(uint)*(byte *)((int)&operandSwizzle + laneSelector),passArg,staleArg8,
                    (int)&destMaskWord + laneSelector);
       }
       moreLanes = laneStep != 3;

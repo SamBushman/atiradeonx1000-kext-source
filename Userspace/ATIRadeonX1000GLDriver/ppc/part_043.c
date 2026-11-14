@@ -1089,8 +1089,8 @@ int Inst__forwardSelectToProducer_0014846c(inst, pass)
               selectScratch[0] = *(undefined4 *)(operandRecord2 + 0x10);
               countdown = 4;
               do {
-                if (*(char *)((int)selectScratch + loopIndex2 + -4) == '\x04') {
-                  *(undefined1 *)((int)selectScratch + loopIndex2 + -4) =
+                if (*(char *)((int)&operandSelect + loopIndex2) == '\x04') {
+                  *(undefined1 *)((int)&operandSelect + loopIndex2) =
                        *(undefined1 *)((int)selectScratch + loopIndex2);
                 }
                 rewrittenSelect = operandSelect;
@@ -1191,8 +1191,8 @@ int Inst__forwardSelectToProducer_001486e8(inst, pass)
               selectScratch[0] = *(undefined4 *)(operandRecord2 + 0x10);
               countdown = 4;
               do {
-                if (*(char *)((int)selectScratch + loopIndex2 + -4) == '\x04') {
-                  *(undefined1 *)((int)selectScratch + loopIndex2 + -4) =
+                if (*(char *)((int)&operandSelect + loopIndex2) == '\x04') {
+                  *(undefined1 *)((int)&operandSelect + loopIndex2) =
                        *(undefined1 *)((int)selectScratch + loopIndex2);
                 }
                 rewrittenSelect = operandSelect;
@@ -2097,7 +2097,7 @@ int Inst__tryComposeSelectWithProducer_00149de4(inst, operandIndex8, inst2, comp
               if (componentByte != 4) {
                 (**(code **)(*operandVReg2 + 0x88))
                           (operandVReg2,1,loopIndex,(uint)*(byte *)((int)selectScratch + componentByte),staleArg5,staleArg8,
-                           (int)selectScratch + (componentByte - 4));
+                           (int)&composedSelect + componentByte);
                 IRInst__getOperandRecord(inst2,0);
               }
               moreComponents = loopIndex != 3;

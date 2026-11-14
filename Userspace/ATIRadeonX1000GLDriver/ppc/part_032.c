@@ -1340,7 +1340,7 @@ loopSetLaneInstCursor:
                     candSrcOperand = IRInst__getOperandRecord(laneInst,1);
                     savedSwizzlePtr = savedSwizzleWordsAlias;
                     srcSwizzleByte = *(undefined1 *)(laneNumber + candSrcOperand + 0x10);
-                    *(undefined1 *)((int)savedSwizzleWords + laneStep + -4) = 0;
+                    *(undefined1 *)((int)&savedLaneKind + laneStep) = 0;
                     *(undefined1 *)(laneStep + (int)savedSwizzlePtr) = srcSwizzleByte;
                     entryLaneBudget = packEntry[2];
                     *(char *)entryLaneFlagCursor = '\0';
@@ -2078,7 +2078,7 @@ int Program__packPsInputs(program)
                   mergedLoad[0x58] = instBaseOffset + *(int *)(program + 0x478);
                   sourceLane = nextOutputLane;
                   do {
-                    if (*(char *)((int)gatherLaneKind + outLane + -4) == '\x01') {
+                    if (*(char *)((int)&savedDestSwizzle + outLane) == '\x01') {
                       (**(code **)(*mergedLoad + 0x88))(mergedLoad,1,outLane,4);
                       nextOutputLane = sourceLane;
                     }

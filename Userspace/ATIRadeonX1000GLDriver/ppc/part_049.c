@@ -2623,7 +2623,7 @@ code_r0x0018a910:
                 otherDestSelect = *(undefined4 *)(loopRemaining + 0x10);
                 loopRemaining = 4;
                 do {
-                  laneSelect = *(char *)((int)mergedDestSelect + loopIndex2 + -4);
+                  laneSelect = *(char *)((int)&otherDestSelect + loopIndex2);
                   if (laneSelect != '\x01') {
                     *(char *)((int)mergedDestSelect + loopIndex2) = laneSelect;
                   }

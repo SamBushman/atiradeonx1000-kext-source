@@ -2065,7 +2065,7 @@ int ValueKey__splitMadIntoMulAdd(ctx)
   tmpSelect[0] = swizzleAllUnused_001b01dc;
   loopRemaining = 4;
   do {
-    if (*(char *)((int)tmpSelect + loopIndex + -4) == '\0') {
+    if (*(char *)((int)&destSelectWord + loopIndex) == '\0') {
       *(char *)((int)tmpSelect + loopIndex) = (char)loopIndex;
     }
     loopIndex = loopIndex + 1;
@@ -3117,7 +3117,7 @@ int ValueKey__canonicalizeConstantSources(key)
         if (0.0 <= *constantRecord) {
           if ((*(uint *)(*(int *)(*(int *)(key + 0x238) + 0x30c) + 8) & 0x1000) != 0) {
             *(undefined1 *)((int)canonSelect + loopIndex) = 4;
-            *(undefined1 *)((int)canonSelect + loopIndex + -4) = 1;
+            *(undefined1 *)((int)&origSelect + loopIndex) = 1;
           }
         }
         else {
@@ -3140,7 +3140,7 @@ int ValueKey__canonicalizeConstantSources(key)
           if (*constantRecord < 0.0) {
             if (hasNegativeConstant) {
               *(undefined1 *)((int)canonSelect + loopIndex) = 4;
-              *(undefined1 *)((int)canonSelect + loopIndex + -4) = 1;
+              *(undefined1 *)((int)&origSelect + loopIndex) = 1;
             }
             hasNegativeConstant = true;
           }
@@ -3245,7 +3245,7 @@ setLoopIndex:
                 if (*loopPtr4 != '\0') {
                   if (loopIndex3 == loopIndex2) break;
                   if ((*loopPtr7 == *loopPtr6) &&
-                     (otherLaneSelect = *(char *)((int)canonSelect + loopIndex3 + -4),
+                     (otherLaneSelect = *(char *)((int)&origSelect + loopIndex3),
                      *(char *)((int)canonSelect + loopIndex2) != otherLaneSelect)) {
                     *(char *)((int)canonSelect + loopIndex2) = otherLaneSelect;
                     break;
@@ -3384,8 +3384,7 @@ int ValueKey__simplifyModifiersAndAddressing(key)
   int loopIndex3;
   double floorValue;
   uint laneMask;
-  uint constVecLane0;
-  int constVecOrInsts [3];
+  int constVec [4];   /* one 4-word frame object: word 0 = lane 0 / first instruction, words 1..3 = the rest (two adjacent locals read across each other before) */
   longlong roundAsInt64;
   longlong floorAsInt64;
   uint readMaskOut;
@@ -3608,12 +3607,12 @@ setKeyWordPtr2:
               operandRecord2 = IRInst__getOperandRecord(inst,1);
               *(undefined4 *)(operandRecord2 + 0x10) = copySelectWord;
               copyIndex = 0;
-              constVecLane0 = (uint)inst;
+              constVec[0] = (int)inst;
               laneMask = (invertedLanes << 0x18 | (invertedLanes & 0xff00) << 8 | invertedLanes >> 8 & 0xff00 |
                          invertedLanes >> 0x18) & laneMask;
               if (laneMask == 0) {
 loopSetLoopPtr82:
-                loopPtr8 = constVecOrInsts + copyIndex + -1;
+                loopPtr8 = constVec + copyIndex;
                 loopIndex5 = 0;
                 do {
                   loopIndex = *loopPtr8;
@@ -3640,7 +3639,7 @@ loopSetLoopPtr82:
                 } while (copyIndex + 1 != loopIndex5);
               }
               else {
-                loopPtr7 = constVecOrInsts;
+                loopPtr7 = constVec + 1;
                 loopIndex5 = 1;
                 inst3 = inst;
                 do {
@@ -3772,18 +3771,18 @@ code_r0x001813e0:
       if (((loopPtr8[loopIndex2 * 6 + 0x26] == 0x33) || (loopPtr8[loopIndex2 * 6 + 0x26] == 0xc)) ||
          (*(int *)(loopIndex5 + 4) == 0)) goto code_r0x001816c0;
       loopPtr6 = (char *)(loopIndex5 + 4);
-      constVecOrInsts[2] = 0;
+      constVec[3] = 0;
       loopPtr8 = (int *)(exprSlotPtr + 8);
-      constVecLane0 = 0;
+      constVec[0] = 0;
       allConstant = true;
-      constVecOrInsts[0] = 0;
+      constVec[1] = 0;
       loopRemaining = 0;
-      constVecOrInsts[1] = 0;
+      constVec[2] = 0;
       do {
         if (*loopPtr6 != '\0') {
           if (*loopPtr8 < 0) {
             loopPtr9 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),*loopPtr8);
-            *(undefined4 *)((int)constVecOrInsts + loopRemaining + -4) = *loopPtr9;
+            *(undefined4 *)((int)constVec + loopRemaining) = *loopPtr9;
           }
           else {
             allConstant = false;
@@ -3799,14 +3798,14 @@ code_r0x001813e0:
       laneMask = maskScratch[0];
       if (loopIndex != 0x7ffffffe) {
         loopPtr8 = *(int **)(*(int *)(key + 0x238) + 0x30c);
-        loopRemaining = (**(code **)(*loopPtr8 + 0x154))(loopPtr8,currentProgram,&constVecLane0,&laneMask);
+        loopRemaining = (**(code **)(*loopPtr8 + 0x154))(loopPtr8,currentProgram,constVec,&laneMask);
         if (loopRemaining == 0) {
           loopIndex3 = 4;
           loopPtr6 = (char *)(loopIndex4 + key + 0x224);
           loopRemaining = 0;
           do {
             if (*loopPtr6 != '\0') {
-              *(float *)(loopRemaining + (int)&constVecLane0) = -*(float *)(loopRemaining + (int)&constVecLane0);
+              *(float *)(loopRemaining + (int)constVec) = -*(float *)(loopRemaining + (int)constVec);
             }
             loopPtr6 = loopPtr6 + 1;
             loopRemaining = loopRemaining + 4;
@@ -3843,14 +3842,14 @@ code_r0x001815d0:
       }
       if (allConstant) {
         loopPtr8 = *(int **)(*(int *)(key + 0x238) + 0x30c);
-        loopRemaining = (**(code **)(*loopPtr8 + 0x154))(loopPtr8,currentProgram,&constVecLane0,&laneMask);
+        loopRemaining = (**(code **)(*loopPtr8 + 0x154))(loopPtr8,currentProgram,constVec,&laneMask);
         if (loopRemaining != 0) goto code_r0x001815cc;
         loopIndex3 = 4;
         loopPtr6 = (char *)(loopIndex4 + key + 0x224);
         loopRemaining = 0;
         do {
           if (*loopPtr6 != '\0') {
-            *(float *)(loopRemaining + (int)&constVecLane0) = -*(float *)(loopRemaining + (int)&constVecLane0);
+            *(float *)(loopRemaining + (int)constVec) = -*(float *)(loopRemaining + (int)constVec);
           }
           loopPtr6 = loopPtr6 + 1;
           loopRemaining = loopRemaining + 4;
@@ -3859,7 +3858,7 @@ code_r0x001815d0:
 code_r0x00181590:
         loopPtr8 = *(int **)(*(int *)(key + 0x238) + 0x30c);
         negatedPass = 1;
-        loopRemaining = (**(code **)(*loopPtr8 + 0x154))(loopPtr8,currentProgram,&constVecLane0,&laneMask);
+        loopRemaining = (**(code **)(*loopPtr8 + 0x154))(loopPtr8,currentProgram,constVec,&laneMask);
         if (loopRemaining != 0) goto code_r0x001815d0;
 code_r0x001816bc:
         loopPtr8 = *(int **)(key + 0xb0);

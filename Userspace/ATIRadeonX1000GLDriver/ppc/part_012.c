@@ -137,18 +137,16 @@ int ffvpBuildPassThroughProgram(ctx)
   int currentVariant;
   uint hasPointSize;
   int colorOutSlotB;
-  uint variantKey [2];
-  undefined4 variantKeyWord2;
-  uint variantKeyWord3;
+  uint variantKey [12];   /* the 0x30-byte variant key (stock r1+0x40): [2] = output mask, [3] = flags (was `variantKey[2]` + two neighbouring locals) */
   
   if (*(char *)(ctx + 0x1868) == '\0') {
     _memset(variantKey,0,0x30);
     ctxFlags44 = *(uint *)(ctx + 0x44);
-    variantKeyWord2 = *(undefined4 *)(ctx + 0x1804);
+    variantKey[2] = *(undefined4 *)(ctx + 0x1804);
     variantKey[0] = variantKey[0] | 8;
     if ((ctxFlags44 & 0xc00) != 0) {
       extraSlotCount = ctxFlags44 >> 9 & 2;
-      variantKeyWord3 = ctxFlags44 >> 0xb & 1 | extraSlotCount | (uint)(byte)((unsigned char *)0x000011d3)[ctx] << 2;
+      variantKey[3] = ctxFlags44 >> 0xb & 1 | extraSlotCount | (uint)(byte)((unsigned char *)0x000011d3)[ctx] << 2;
     }
     currentVariant = *(int *)(ctx + 0x14c);
     if ((currentVariant == 0) || (memcmpResult = _memcmp(currentVariant,variantKey,0x30), variant = currentVariant, memcmpResult != 0)) {

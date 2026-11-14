@@ -1034,7 +1034,7 @@ loopStoreLaneMask:
       do {
         operandRecordB = IRInst__getOperandRecord(inst,0);
         operandSelectWord = *(undefined4 *)(operandRecordB + 0x10);
-        if (*(char *)((int)operandSelectWordB + loopCounter + -4) != '\x01') {
+        if (*(char *)((int)&operandSelectWord + loopCounter) != '\x01') {
           *maskCursor = *maskCursor | 1;
         }
         notLastLane = loopCounter != 3;
@@ -1192,7 +1192,7 @@ int IRInst__computeSourceReadMask(laneMask, inst, operandIndex, destWriteMask, p
     loopCounterB = 4;
     do {
       if (*(char *)((int)maskedSelect + loopCounter) != '\x01') {
-        laneIndex = (uint)*(byte *)((int)maskedSelect + loopCounter + -4);
+        laneIndex = (uint)*(byte *)((int)&sourceSelect + loopCounter);
         *(byte *)((int)laneMask + laneIndex) = *(byte *)((int)laneMask + laneIndex) | 1;
       }
       loopCounter = loopCounter + 1;
@@ -1239,7 +1239,7 @@ resultModeCase2:
       do {
         operandRecord2 = IRInst__getOperandRecord(inst,0);
         if (*(char *)(loopCounter + operandRecord2 + 0x10) != '\x01') {
-          laneIndex = (uint)*(byte *)((int)maskedSelect + loopCounter + -4);
+          laneIndex = (uint)*(byte *)((int)&sourceSelect + loopCounter);
           *(byte *)((int)laneMask + laneIndex) = *(byte *)((int)laneMask + laneIndex) | 1;
         }
         notLastLane = loopCounter != 3;
@@ -1298,7 +1298,7 @@ resultModeCase2:
         loopCounterB = 4;
         do {
           selectBytePtr = (byte *)((int)maskedSelect + loopCounter);
-          laneIndex = (uint)*(byte *)((int)maskedSelect + loopCounter + -4);
+          laneIndex = (uint)*(byte *)((int)&sourceSelect + loopCounter);
           loopCounter = loopCounter + 1;
           *(byte *)((int)laneMask + laneIndex) =
                (byte)(-(uint)(*selectBytePtr ^ 1) >> 0x1f) | *(byte *)((int)laneMask + laneIndex);
@@ -1346,7 +1346,7 @@ resultModeCaseA:
     loopCounterB = 4;
     do {
       if ((*(char *)((int)maskedSelect + loopCounter) == '\0') &&
-         (laneIndex = (uint)*(byte *)((int)maskedSelect + loopCounter + -4), laneIndex != 4)) {
+         (laneIndex = (uint)*(byte *)((int)&sourceSelect + loopCounter), laneIndex != 4)) {
         *(byte *)((int)laneMask + laneIndex) = *(byte *)((int)laneMask + laneIndex) | 1;
       }
       loopCounter = loopCounter + 1;
@@ -1372,7 +1372,7 @@ loopStoreLaneMask2:
       loopCounterB = 4;
       do {
         if (*(char *)((int)maskedSelect + loopCounter) != '\x01') {
-          *(undefined1 *)((int)laneMask + (uint)*(byte *)((int)maskedSelect + loopCounter + -4)) = 1;
+          *(undefined1 *)((int)laneMask + (uint)*(byte *)((int)&sourceSelect + loopCounter)) = 1;
         }
         loopCounter = loopCounter + 1;
         loopCounterB = loopCounterB + -1;
@@ -1512,7 +1512,7 @@ int IRInst__mergeDestMasksIntoFirst(outMask, inst, inst2)
   inst2Select[0] = *(undefined4 *)(operandRecord2 + 0x10);
   loopCounterB = 4;
   do {
-    if ((*(char *)((int)inst2Select + loopCounter + -4) != '\x01') &&
+    if ((*(char *)((int)&instSelect + loopCounter) != '\x01') &&
        (*(char *)((int)inst2Select + loopCounter) != '\x01')) break;
     loopCounter = loopCounter + 1;
     loopCounterB = loopCounterB + -1;
@@ -1521,7 +1521,7 @@ int IRInst__mergeDestMasksIntoFirst(outMask, inst, inst2)
   loopCounterB = 4;
   do {
     if (*(char *)((int)inst2Select + loopCounter) != '\x01') {
-      *(char *)((int)inst2Select + loopCounter + -4) = *(char *)((int)inst2Select + loopCounter);
+      *(char *)((int)&instSelect + loopCounter) = *(char *)((int)inst2Select + loopCounter);
     }
     loopCounter = loopCounter + 1;
     loopCounterB = loopCounterB + -1;

@@ -1529,7 +1529,7 @@ int pass_flatten_ifs(flattenPass)
             conditionSwizzle = defaultSelectSwizzle;
             do {
               if (*(char *)((int)destMaskWord + laneByteIndex) == '\x01') {
-                *(undefined1 *)((int)destMaskWord + laneByteIndex + -4) = 4;
+                *(undefined1 *)((int)&conditionSwizzle + laneByteIndex) = 4;
               }
               laneByteIndex = laneByteIndex + 1;
               laneCountdown = laneCountdown + -1;

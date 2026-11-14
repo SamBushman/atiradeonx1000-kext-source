@@ -788,7 +788,7 @@ loopSetLoopIndex:
     loopIndex = 0;
     pairsRemaining = operandCount;
     do {
-      *(char *)((int)useCounts + loopIndex + -4) = (char)(loopIndex + 1);
+      *(char *)((int)&orderKey + loopIndex) = (char)(loopIndex + 1);
       pairsRemaining = pairsRemaining + -1;
       loopIndex = loopIndex + 1;
     } while (pairsRemaining != 0);
@@ -806,13 +806,13 @@ loopSetLoopIndex:
     while (pairsRemaining = pairsRemaining + -1, pairsRemaining != 0) {
       useCountA = *useCountCursor;
       if (useCountCursor[1] < useCountA) {
-        orderByteA = *(undefined1 *)((int)useCounts + loopIndexB + -4);
-        orderByteB = *(undefined1 *)((int)useCounts + loopIndex + -3);
+        orderByteA = *(undefined1 *)((int)&orderKey + loopIndexB);
+        orderByteB = *(undefined1 *)((int)&orderKey + loopIndex + 1);
         *useCountCursor = useCountCursor[1];
-        *(undefined1 *)((int)useCounts + loopIndexB + -4) = orderByteB;
+        *(undefined1 *)((int)&orderKey + loopIndexB) = orderByteB;
         swapped = true;
         useCountCursor[1] = useCountA;
-        *(undefined1 *)((int)useCounts + loopIndex + -3) = orderByteA;
+        *(undefined1 *)((int)&orderKey + loopIndex + 1) = orderByteA;
       }
       loopIndexB = loopIndexB + 1;
       loopIndex = loopIndex + 1;
@@ -2841,7 +2841,7 @@ int Inst__swizzleThroughProducer_0013d820(inst, pass)
       operandSelect = *(undefined4 *)(operandRecord + 0x10);
       selectScratch[0] = operandVReg[0x50];
       do {
-        laneKind = *(char *)((int)selectScratch + loopIndex + -4);
+        laneKind = *(char *)((int)&operandSelect + loopIndex);
         if (laneKind == '\0') {
           if (*(char *)((int)&operandSelectB + loopIndex) != '\0') {
             return;
@@ -3978,7 +3978,7 @@ int Inst__mergeIntoPartner_0013f3d4(inst, program)
         countdown = 4;
         do {
           if ((*(char *)((int)&destSelectWord + loopIndexB) != '\x01') &&
-             (*(char *)((int)extraSelectWord + loopIndexB + -4) != '\x01')) {
+             (*(char *)((int)&operandSelect + loopIndexB) != '\x01')) {
             return false;
           }
           loopIndexB = loopIndexB + 1;
@@ -5021,7 +5021,7 @@ int PostPack__laneSourcesMatch(packCtx, inst, laneA, inst2, laneB)
       operandSelect = *(undefined4 *)(operandRecord + 0x10);
       operandRecord = IRInst__getOperandRecord(inst2,loopIndex);
       selectScratch[0] = *(undefined4 *)(operandRecord + 0x10);
-      if (*(char *)((int)selectScratch + laneA + -4) != *(char *)((int)selectScratch + laneB)) {
+      if (*(char *)((int)&operandSelect + laneA) != *(char *)((int)selectScratch + laneB)) {
         return 0;
       }
       loopIndex = loopIndex + 1;
@@ -5099,7 +5099,7 @@ int PostPack__buildLaneMap(pass, inst, inst2, laneMap)
     countdownB = 4;
     laneMapCursor = laneMapBase;
     do {
-      if (*(char *)((int)newDestSelect + loopIndex + -4) != '\x04') {
+      if (*(char *)((int)&instOperandSelect + loopIndex) != '\x04') {
         *(byte *)((int)&operandSelectScratch + (uint)*laneMapCursor) = *laneMapCursor;
       }
       selectWordToStore = operandSelectScratch;
@@ -5182,9 +5182,9 @@ int PostPack__swapInstLanes(packCtx, inst, laneA, laneB)
   operandRecord2 = IRInst__getOperandRecord(inst,0);
   operandSelect = *(undefined4 *)(operandRecord2 + 0x10);
   instFlags = *(uint *)(inst + 0x14);
-  swapByte = *(undefined1 *)((int)selectScratch + laneA + -4);
-  *(undefined1 *)((int)selectScratch + laneA + -4) = *(undefined1 *)((int)selectScratch + laneB + -4);
-  *(undefined1 *)((int)selectScratch + laneB + -4) = swapByte;
+  swapByte = *(undefined1 *)((int)&operandSelect + laneA);
+  *(undefined1 *)((int)&operandSelect + laneA) = *(undefined1 *)((int)&operandSelect + laneB);
+  *(undefined1 *)((int)&operandSelect + laneB) = swapByte;
   extraOperandIndex = *(int *)(inst + 0x84);
   *(undefined4 *)(inst + 0x9c) = operandSelect;
   swapOperandLimit = extraOperandIndex;
@@ -5496,11 +5496,7 @@ int PostPack__matchOperandLanes(packState, inst, inst2, resultList)
   int copyDestC;
   int copyDestD;
   undefined4 operandSelect;
-  int entryRecord [4];
-  byte entrySources [16];
-  byte entryComponents [4];
-  undefined4 entryPad1;
-  undefined4 entryPad2;
+  int entryRecord [11];   /* the 0x2c-byte lane entry (stock r1 frame object, memcpy'd as a whole): +0 lane words [4], +0x10 sources [4], +0x20 components [4 bytes], +0x24/+0x28 pad */
   
   ((int (*)())PostPack__instsCompatible)(packState,inst,inst2);
   if (resultList != (int *)0x0) {
@@ -5525,7 +5521,7 @@ int PostPack__matchOperandLanes(packState, inst, inst2, resultList)
       }
       countdown = 4;
       loopIndex = 0;
-      componentPtr = entryComponents;
+      componentPtr = ((byte *)(entryRecord + 8));
       laneEntryPtrB = entryRecord;
       do {
         *componentPtr = loopIndex;
@@ -5540,9 +5536,9 @@ int PostPack__matchOperandLanes(packState, inst, inst2, resultList)
       laneIndex = 0;
       operandSelect = *(undefined4 *)(operandRecord + 0x10);
       laneEntryPtrB = entryRecord;
-      componentPtr = entryComponents;
+      componentPtr = ((byte *)(entryRecord + 8));
       do {
-        if (*(char *)((int)entryRecord + (laneIndex - 4)) != '\x04') {
+        if (*(char *)((int)&operandSelect + laneIndex) != '\x04') {
           sourceCursorA = (int *)laneEntryPtrB[4];
           if (operandVReg2 == sourceCursorA) {
             if (laneIndex == *componentPtr) {
@@ -5555,21 +5551,21 @@ loopSetSourceAPlaced:
                 sourceAPlaced = false;
                 goto setOperandRecord;
               }
-              sourceSortPtr = entrySources;
+              sourceSortPtr = ((byte *)(entryRecord + 4));
               laneEntryPtrB[4] = (int)operandVReg2;
               component2 = (uint)*componentPtr;
               *laneEntryPtrB = 1;
               *componentPtr = (byte)laneIndex;
               sourceCmpPtr = sourceSortPtr;
-              componentScanPtr = entryComponents;
+              componentScanPtr = ((byte *)(entryRecord + 8));
               do {
                 if ((sourceCursorA == *(int **)sourceCmpPtr) && (component2 == *componentScanPtr)) goto setMoreComponents;
                 sourceCmpPtr = sourceCmpPtr + 4;
                 componentScanPtr = componentScanPtr + 1;
-              } while (entryComponents != sourceCmpPtr);
+              } while (((byte *)(entryRecord + 8)) != sourceCmpPtr);
               countdown = 4;
               loopIndexE = 0;
-              componentCmpPtr = entryComponents;
+              componentCmpPtr = ((byte *)(entryRecord + 8));
               while( true ) {
                 tableSource = *(int **)sourceSortPtr;
                 if (tableSource == (int *)0x0) break;
@@ -5588,8 +5584,8 @@ loopSetSourceAPlaced:
                 countdown = countdown + -1;
                 if (countdown == 0) goto loopSetSourceAPlaced;
               }
-              entryComponents[loopIndexE] = (byte)component2;
-              *(int **)(entrySources + loopIndexE * 4) = sourceCursorA;
+              ((byte *)(entryRecord + 8))[loopIndexE] = (byte)component2;
+              *(int **)(((byte *)(entryRecord + 4)) + loopIndexE * 4) = sourceCursorA;
             }
           }
           else {
@@ -5611,9 +5607,9 @@ setOperandRecord:
       laneIndex = 0;
       operandSelect = *(undefined4 *)(operandRecord + 0x10);
       laneEntryPtr = entryRecord;
-      componentPtr = entryComponents;
+      componentPtr = ((byte *)(entryRecord + 8));
       do {
-        if (*(char *)((int)entryRecord + (laneIndex - 4)) != '\x04') {
+        if (*(char *)((int)&operandSelect + laneIndex) != '\x04') {
           laneSourceCursor = (int *)laneEntryPtr[4];
           if (operandVReg == laneSourceCursor) {
             if (*componentPtr == laneIndex) {
@@ -5627,20 +5623,20 @@ loopSetSourceBPlaced:
                 goto checkSourceAPlaced;
               }
               component2 = (uint)*componentPtr;
-              sourceSortPtr = entrySources;
+              sourceSortPtr = ((byte *)(entryRecord + 4));
               *laneEntryPtr = 1;
               laneEntryPtr[4] = (int)operandVReg;
               *componentPtr = (byte)laneIndex;
               sourceCmpPtr = sourceSortPtr;
-              componentScanPtr = entryComponents;
+              componentScanPtr = ((byte *)(entryRecord + 8));
               do {
                 if ((laneSourceCursor == *(int **)sourceCmpPtr) && (component2 == *componentScanPtr)) goto setMoreComponentsB;
                 sourceCmpPtr = sourceCmpPtr + 4;
                 componentScanPtr = componentScanPtr + 1;
-              } while (entryComponents != sourceCmpPtr);
+              } while (((byte *)(entryRecord + 8)) != sourceCmpPtr);
               countdown = 4;
               loopIndexE = 0;
-              componentCmpPtr = entryComponents;
+              componentCmpPtr = ((byte *)(entryRecord + 8));
               while( true ) {
                 sourcePtrB = *(int **)sourceSortPtr;
                 if (sourcePtrB == (int *)0x0) break;
@@ -5659,8 +5655,8 @@ loopSetSourceBPlaced:
                 countdown = countdown + -1;
                 if (countdown == 0) goto loopSetSourceBPlaced;
               }
-              entryComponents[loopIndexE] = (byte)component2;
-              *(int **)(entrySources + loopIndexE * 4) = laneSourceCursor;
+              ((byte *)(entryRecord + 8))[loopIndexE] = (byte)component2;
+              *(int **)(((byte *)(entryRecord + 4)) + loopIndexE * 4) = laneSourceCursor;
             }
           }
           else {
@@ -5720,14 +5716,14 @@ checkSourceAPlaced:
           entrySlotPtr = (int *)(loopIndexE * 0x2c + entryDataB);
           if (entrySlotPtr[9] != 0) {
             loopIndexD = 0;
-            sourceSlotPtr = entrySources;
+            sourceSlotPtr = ((byte *)(entryRecord + 4));
             do {
               if (*(int *)sourceSlotPtr != 0) {
                 countdownC = 4;
                 loopIndexB = 0;
                 scanEntry = entrySlotPtr;
                 while ((*(int *)sourceSlotPtr != scanEntry[4] ||
-                       (entryComponents[loopIndexD] != *(byte *)((int)entrySlotPtr + loopIndexB + 0x20)))) {
+                       (((byte *)(entryRecord + 8))[loopIndexD] != *(byte *)((int)entrySlotPtr + loopIndexB + 0x20)))) {
                   loopIndexB = loopIndexB + 1;
                   scanEntry = scanEntry + 1;
                   countdownC = countdownC + -1;
@@ -5784,7 +5780,7 @@ setLoopIndexF:
     }
     entrySlotPtr = (int *)(byteOffsetF + entryDataB);
     countdownB = 4;
-    componentPtr = entryComponents;
+    componentPtr = ((byte *)(entryRecord + 8));
     entryComponentPtr = (byte *)(entrySlotPtr + 8);
     scanEntry = entrySlotPtr;
     laneEntryPtrB = entryRecord;
@@ -5828,8 +5824,8 @@ setNewSize:
     *(uint *)(packState + 0x10) = newSize;
   }
   entrySlotPtr = (int *)(entryCount * 0x2c + entryDataB);
-  entryPad1 = 0;
-  entryPad2 = 0;
+  entryRecord[9] = 0;
+  entryRecord[10] = 0;
   _memcpy(entrySlotPtr,entryRecord,0x2c);
 setResultCountB:
   resultCountB = *resultList;
@@ -5867,7 +5863,7 @@ loopSetOperandVReg:
     }
     countdownD = 4;
     loopIndex = 0;
-    componentPtr = entryComponents;
+    componentPtr = ((byte *)(entryRecord + 8));
     componentClearCursor = entryRecord;
     do {
       *componentPtr = loopIndex;
@@ -5882,10 +5878,10 @@ loopSetOperandVReg:
     loopIndexB = 0;
     operandSelect = *(undefined4 *)(operandRecord2 + 0x10);
     do {
-      componentValue = (uint)*(byte *)((int)entryRecord + loopIndexB + -4);
+      componentValue = (uint)*(byte *)((int)&operandSelect + loopIndexB);
       if (componentValue != 4) {
-        sourceScanPtrB = entrySources;
-        componentSortPtr = entryComponents;
+        sourceScanPtrB = ((byte *)(entryRecord + 4));
+        componentSortPtr = ((byte *)(entryRecord + 8));
         countdownD = 4;
         sourceScanPtr = sourceScanPtrB;
         sourceCmpPtr = componentSortPtr;
@@ -5919,8 +5915,8 @@ loopSetOperandVReg:
             goto setOperandRecord2;
           }
         }
-        entryComponents[loopIndexF] = (byte)componentValue;
-        *(int **)(entrySources + loopIndexF * 4) = candidateSource;
+        ((byte *)(entryRecord + 8))[loopIndexF] = (byte)componentValue;
+        *(int **)(((byte *)(entryRecord + 4)) + loopIndexF * 4) = candidateSource;
       }
 setMoreComponents2:
       moreComponents = loopIndexB != 3;
@@ -5932,10 +5928,10 @@ setOperandRecord2:
     loopIndexB = 0;
     operandSelect = *(undefined4 *)(operandRecord2 + 0x10);
     do {
-      componentValue = (uint)*(byte *)((int)entryRecord + loopIndexB + -4);
+      componentValue = (uint)*(byte *)((int)&operandSelect + loopIndexB);
       if (componentValue != 4) {
-        sourceScanPtrB = entrySources;
-        componentSortPtr = entryComponents;
+        sourceScanPtrB = ((byte *)(entryRecord + 4));
+        componentSortPtr = ((byte *)(entryRecord + 8));
         countdownD = 4;
         sourceScanPtr = sourceScanPtrB;
         sourceCmpPtr = componentSortPtr;
@@ -5969,8 +5965,8 @@ setOperandRecord2:
             goto checkSourceAPlaced2;
           }
         }
-        entryComponents[loopIndexF] = (byte)componentValue;
-        *(int **)(entrySources + loopIndexF * 4) = scanEntry2;
+        ((byte *)(entryRecord + 8))[loopIndexF] = (byte)componentValue;
+        *(int **)(((byte *)(entryRecord + 4)) + loopIndexF * 4) = scanEntry2;
       }
 setMoreComponentsB2:
       moreComponentsB = loopIndexB != 3;
@@ -6018,14 +6014,14 @@ checkSourceAPlaced2:
         newEntry = (int *)(loopIndexE * 0x2c + entryData);
         if (newEntry[9] != 0) {
           loopIndexB = 0;
-          sourceSlotPtr = entrySources;
+          sourceSlotPtr = ((byte *)(entryRecord + 4));
           do {
             if (*(int *)sourceSlotPtr != 0) {
               countdownF = 4;
               loopIndexC = 0;
               laneEntryCursorD = newEntry;
               while ((*(int *)sourceSlotPtr != laneEntryCursorD[4] ||
-                     (entryComponents[loopIndexB] != *(byte *)((int)newEntry + loopIndexC + 0x20)))) {
+                     (((byte *)(entryRecord + 8))[loopIndexB] != *(byte *)((int)newEntry + loopIndexC + 0x20)))) {
                 loopIndexC = loopIndexC + 1;
                 laneEntryCursorD = laneEntryCursorD + 1;
                 countdownF = countdownF + -1;
@@ -6083,7 +6079,7 @@ setLoopIndexF2:
     }
     newEntry = (int *)(byteOffsetC + entryData);
     countdownC = 4;
-    componentPtr = entryComponents;
+    componentPtr = ((byte *)(entryRecord + 8));
     entryComponentPtr = (byte *)(newEntry + 8);
     laneEntryCursorD = newEntry;
     recordClearCursor = entryRecord;
@@ -6128,9 +6124,9 @@ setNewSize2:
     }
     *(uint *)(packState + 0x10) = newSize;
   }
-  entryPad1 = 0;
+  entryRecord[9] = 0;
   newEntry = (int *)(entryCount * 0x2c + entryData);
-  entryPad2 = 0;
+  entryRecord[10] = 0;
   _memcpy(newEntry,entryRecord,0x2c);
 setResultCount:
   resultCount = *resultList;
@@ -6741,7 +6737,7 @@ setMoreComponents:
   do {
     invertedNeededSwappedB = invertedNeeded << 0x18 | (invertedNeeded & 0xff00) << 8 | invertedNeeded >> 8 & 0xff00 | invertedNeeded >> 0x18;
     freeComponentsB = writeMaskB & invertedNeededSwappedB;
-    if (*(char *)((int)laneOwnerInsts + loopIndex + -4) != '\0') {
+    if (*(char *)((int)&freeComponentsB + loopIndex) != '\0') {
       loopIndexB = 0;
       do {
         if ((*(char *)((int)&laneWritten + loopIndexB) != '\0') &&
@@ -8305,7 +8301,7 @@ int pass_post_pack_insts(packCtx)
             laneCountdown = 4;
             do {
               if (*(byte *)((int)selectScratch + laneIndex) == laneIndex) {
-                *(undefined1 *)((int)selectScratch + (laneIndex - 4)) = 1;
+                *(undefined1 *)((int)&packedWriteMask + laneIndex) = 1;
               }
               laneIndex = laneIndex + 1;
               laneCountdown = laneCountdown + -1;

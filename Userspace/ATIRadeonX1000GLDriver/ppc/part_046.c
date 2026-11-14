@@ -179,7 +179,7 @@ loopSetResult:
     countdown = 4;
     do {
       if ((*(char *)((int)keyDestSelect + loopIndex) == '\0') &&
-         (*(char *)((int)keyDestSelect + loopIndex + -4) == '\x01')) goto loopSetResult;
+         (*(char *)((int)&otherDestSelect + loopIndex) == '\x01')) goto loopSetResult;
       loopIndex = loopIndex + 1;
       countdown = countdown + -1;
     } while (countdown != 0);

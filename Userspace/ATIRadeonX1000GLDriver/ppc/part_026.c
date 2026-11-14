@@ -5302,8 +5302,7 @@ int Program__translateILStream(program, ilReader)
   undefined4 templateModeWord;
   int pendingListHead;
   uint ****unusedTemplateMode;
-  undefined4 tempIndexCache;
-  int sharedTempIndex;
+  undefined4 tempIndexCache [9];   /* the stock's 0x24-byte frame object at r1+0xcc: words 0..8 = cached temp index per template token 0x55..0x5d; word 0 doubles as the select-word scratch and word 1 (r1+0xd0) as the shared temp index, so they are one object, not separate locals */
   undefined4 composedSelectOut;
   uint ****markedSelectOut;
   undefined4 extraOperandTemp2;
@@ -6542,7 +6541,7 @@ code_r0x000febe0:
     vectorStorage = Arena__alloc(compilerArenaB,8);
     vectorAllocation2[3] = vectorStorage;
     templateCursor = (int *)0x0;
-    _memcpy(&tempIndexCache,&zeroTemplate36_001aaa2c,0x24);
+    _memcpy(tempIndexCache,&zeroTemplate36_001aaa2c,0x24);
     compilerRef = *(int *)(program + 8);
     operandNumber = (uint ******)0x0;
     opcodeRecordTable = *(undefined4 *)(*(int *)(compilerRef + 0x30c) + 0xc);
@@ -6753,11 +6752,11 @@ code_r0x00103718:
       tokenModeField = (uint)*tokenWords >> 0x16 & 7;
       if (tokenModeField == 0) goto templateTokenCase1;
       createdInst0x12 = IRInst__create(0x12,*(undefined4 *)(program + 8));
-      if (sharedTempIndex == 0) {
-        sharedTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
-        *(int *)(*(int *)(program + 8) + 0x3ac) = sharedTempIndex;
+      if (tempIndexCache[1] == 0) {
+        tempIndexCache[1] = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+        *(int *)(*(int *)(program + 8) + 0x3ac) = tempIndexCache[1];
       }
-      savedRegisterIndex = sharedTempIndex;
+      savedRegisterIndex = tempIndexCache[1];
       operandRecordLast = IRInst__getOperandRecord(createdInst0x12,0);
       *(int *)(operandRecordLast + 8) = savedRegisterIndex;
       *(undefined4 *)(operandRecordLast + 0xc) = 0;
@@ -8027,11 +8026,11 @@ code_r0x00101f74:
     case 0x5b:
     case 0x5c:
     case 0x5d:
-      cachedTempIndex = (&tempIndexCache)[templateToken - 0x55];
+      cachedTempIndex = tempIndexCache[templateToken - 0x55];
       if (cachedTempIndex == 0) {
         cachedTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
         *(int *)(*(int *)(program + 8) + 0x3ac) = cachedTempIndex;
-        (&tempIndexCache)[templateToken - 0x55] = cachedTempIndex;
+        tempIndexCache[templateToken - 0x55] = cachedTempIndex;
       }
       operandRecordLast = IRInst__getOperandRecord(workInst,operandIndexC);
       *(undefined4 *)(operandRecordLast + 0xc) = 0;
@@ -8287,21 +8286,21 @@ code_r0x00101d1c:
       do {
         operandRecord2 = IRInst__getOperandRecord(builtInstB,sourceNumberB);
         destSelectWordCopy = *(uint *******)(operandRecord2 + 0x10);
-        tempIndexCache = destSelectWordCopy;
+        tempIndexCache[0] = destSelectWordCopy;
         if (sourceNumberB == (uint ******)((int)((unsigned char *)0x0) + 1U)) {
-          tempIndexCache = (uint ******)
+          tempIndexCache[0] = (uint ******)
                       CONCAT31((int3)((uint)destSelectWordCopy >> 8),
                                *(undefined1 *)((int)&tempIndexCache + firstWrittenLane));
         }
         else if (sourceNumberB == (uint ******)((int)((unsigned char *)0x0) + 2U)) {
-          tempIndexCache = (uint ******)
+          tempIndexCache[0] = (uint ******)
                       CONCAT13(*(undefined1 *)((int)&tempIndexCache + firstWrittenLane),(int3)destSelectWordCopy);
         }
         else if (sourceNumberB == (uint ******)((int)((unsigned char *)0x0) + 3U)) {
-          (*(unsigned short *)((unsigned char *)&(tempIndexCache) + 0)) = (undefined2)((uint)destSelectWordCopy >> 0x10);
-          (*(unsigned short *)((unsigned char *)&(tempIndexCache) + 2)) = CONCAT11(*(undefined1 *)((int)&tempIndexCache + firstWrittenLane),(char)destSelectWordCopy);
+          (*(unsigned short *)((unsigned char *)tempIndexCache + 0)) = (undefined2)((uint)destSelectWordCopy >> 0x10);
+          (*(unsigned short *)((unsigned char *)tempIndexCache + 2)) = CONCAT11(*(undefined1 *)((int)&tempIndexCache + firstWrittenLane),(char)destSelectWordCopy);
         }
-        destSelectWordCopy = tempIndexCache;
+        destSelectWordCopy = tempIndexCache[0];
         operandRecord2 = IRInst__getOperandRecord(builtInstB,sourceNumberB);
         sourceNumberB = (uint ******)((int)sourceNumberB + 1);
         *(uint *******)(operandRecord2 + 0x10) = destSelectWordCopy;
@@ -8328,8 +8327,8 @@ code_r0x001002dc:
     writtenLaneCount = 0;
     loopCounterC = 0;
     stagedSelectWord = *(uint *******)(operandRecord + 0x10);
-    argR8 = (uint ******)&tempIndexCache;
-    tempIndexCache = *(uint *******)(operandRecord + 0x10);
+    argR8 = (uint ******)tempIndexCache;
+    tempIndexCache[0] = *(uint *******)(operandRecord + 0x10);
     loopCounter = 4;
     argR7 = (uint ******)&stagedSelectWord;
     selectedLane = -1;
@@ -8363,7 +8362,7 @@ code_r0x001002dc:
     *(uint ******)(operandRecord + 0xc) = instWord0x98B;
     *(uint ******)(operandRecord + 8) = instWord0x94;
     instWord0x94B = builtInstB[0x25];
-    *(uint *******)((int)movFloatInst + 0x9c) = tempIndexCache;
+    *(uint *******)((int)movFloatInst + 0x9c) = tempIndexCache[0];
     instWord0x98C = builtInstB[0x26];
     operandRecord = IRInst__getOperandRecord(movFloatInst,1);
     savedExtraWord = templateModeWord;

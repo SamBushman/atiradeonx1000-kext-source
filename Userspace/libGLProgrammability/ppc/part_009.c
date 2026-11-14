@@ -3338,7 +3338,7 @@ override_jmp_97bb7c58_case_0:
         }
         if (*(int *)(compiler + 0xac) != 0) {
           mainCount[stage] = mainCount[stage] + 1;
-          *(int *)((int)fillIndex + stage * 4 + -8) = shaderIndex;
+          *(int *)((int)&mainShaderIndex + stage * 4) = shaderIndex;
         }
         r9Fwd = this + stage * 4;
         *(int *)(r9Fwd + 0x20) = *(int *)(r9Fwd + 0x20) + 1;
@@ -3356,7 +3356,7 @@ override_jmp_97bb7c58_case_0:
       shaderHandles = shaderHandles + 1;
       if ((shaderHandle != (int *)0x0) && (shaderCompiler = (**(code **)(*shaderHandle + 8))(shaderHandle), shaderCompiler != 0)) {
         stageByteOffset = (uint)(*(int *)(shaderCompiler + 8) != 0) * 4;
-        if (*(int *)((int)fillIndex + stageByteOffset + -8) == shaderCursor) {
+        if (*(int *)((int)&mainShaderIndex + stageByteOffset) == shaderCursor) {
           **(int **)(this + stageByteOffset + 8) = shaderCompiler;
           **(undefined4 **)(this + stageByteOffset + 0x10) = *(undefined4 *)(shaderCompiler + 0x68);
           **(undefined4 **)(this + stageByteOffset + 0x18) = *(undefined4 *)(shaderCompiler + 0x70);

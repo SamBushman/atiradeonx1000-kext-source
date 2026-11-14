@@ -242,7 +242,7 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
     op1Word13 = 0;
     condDestWord = condComponent << 10;
     op1Flags = condType << 0x17 | condPrecision << 0x12;
-    op1Header = (*(uint *)((int)branchTables + loopByteOffset + -8) & 0xff) << 0x12 | 0x20000000;
+    op1Header = (*(uint *)((int)&condOpcodes + loopByteOffset) & 0xff) << 0x12 | 0x20000000;
     if (condComponent == 1) {
       condDestWord = 0x4400;
     }

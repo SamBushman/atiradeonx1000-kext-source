@@ -5526,17 +5526,15 @@ int ffvpSelectPassThroughVariant(glContext)
   int currentVariant;
   uint pointSizeOut;
   undefined4 variantKeyWord;
-  uint variantKey [2];
-  undefined4 variantKeyOutputMask;
-  uint variantKeyFlags;
+  uint variantKey [12];   /* the 0x30-byte variant key (stock r1+0x40): [0] gets bit 8, [2] = output mask, [3] = lane flags; zeroed by the memset below (was `variantKey[2]` + two neighbouring locals) */
   
   _memset(variantKey,0,0x30);
   ctxFlags = *(uint *)(glContext + 0x44);
-  variantKeyOutputMask = *(undefined4 *)(glContext + 0x1804);
+  variantKey[2] = *(undefined4 *)(glContext + 0x1804);
   variantKey[0] = variantKey[0] | 8;
   if ((ctxFlags & 0xc00) != 0) {
     scratchR9 = ctxFlags >> 9 & 2;
-    variantKeyFlags = ctxFlags >> 0xb & 1 | scratchR9 | (uint)(byte)((unsigned char *)0x000011d3)[glContext] << 2;
+    variantKey[3] = ctxFlags >> 0xb & 1 | scratchR9 | (uint)(byte)((unsigned char *)0x000011d3)[glContext] << 2;
   }
   currentVariant = *(int *)(glContext + 0x14c);
   if ((currentVariant == 0) || (keyCompare = _memcmp(currentVariant,variantKey,0x30), variant = currentVariant, keyCompare != 0)) {
