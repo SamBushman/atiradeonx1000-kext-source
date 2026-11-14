@@ -922,7 +922,7 @@ int main(int argc, char **argv) {
     const char *an = anchor[0] == '_' ? anchor + 1 : anchor;
     unsigned long ap[2] = { (unsigned long)dlsym(L[0], an), (unsigned long)dlsym(L[1], an) };
     if (!ap[0] || !ap[1]) { fprintf(stderr, "anchor %s not found\n", an); return 2; }
-    Dl_info di; dladdr((void *)ap[0], &di); img_hdr[0] = (const struct mach_header *)di.dli_fbase; dladdr((void *)ap[1], &di); img_hdr[1] = (const struct mach_header *)di.dli_fbase;
+    Dl_info di; dladdr((void *)ap[0], &di); img_hdr[0] = (const struct mach_header *)di.dli_fbase; dladdr((void *)ap[1], &di); img_hdr[1] = (const struct mach_header *)di.dli_fbase; bc("IMAGES stock mh %08x rebuilt mh %08x", (unsigned)img_hdr[0], (unsigned)img_hdr[1]);
     g_cs = cs; g_nc = nc; g_ap[0] = ap[0]; g_ap[1] = ap[1]; g_astock = a_stock; g_areb = a_reb;
     if (getenv("FNFUZZ_DATA")) { FILE *df = fopen(getenv("FNFUZZ_DATA"), "r"); if (!df) { perror("FNFUZZ_DATA"); return 2; } char dl[256]; while (fgets(dl, sizeof dl, df) && ngdat < 32) { if (sscanf(dl, "%47s\t%x\t%x", gdat[ngdat].name, &gdat[ngdat].st, &gdat[ngdat].rb) == 3) ngdat++; } fclose(df); }
     if (getenv("FNFUZZ_GRAPHSPEC")) { gs_malloc = 1; load_graphspec(getenv("FNFUZZ_GRAPHSPEC")); }
