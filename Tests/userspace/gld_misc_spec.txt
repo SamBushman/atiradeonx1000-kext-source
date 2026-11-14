@@ -7,3 +7,12 @@ type SCCTX 0x2000
   ptr 0x04 SCST
 func gld_updateSampleCoverage
   arg 0 ptr SCCTX
+# gld_emitDirtyStatePackets (Nov 14): its first call is gld_updateSampleCoverage(ctx+0x240), so *(ctx+0x244) is the state object (count at state+0x2a50 in 1..7); packet is a writable buffer
+type EDCTX 0x3000
+  randfill 0x00 0x3000 65536
+  ptr 0x244 SCST
+type EDPKT 0x400
+  randfill 0x00 0x400 65536
+func gld_emitDirtyStatePackets
+  arg 0 ptr EDCTX
+  arg 1 ptr EDPKT

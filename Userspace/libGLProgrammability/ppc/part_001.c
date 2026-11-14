@@ -1963,11 +1963,12 @@ int __dyld_func_lookup()
 /* ___initialize_Cplusplus @ 0x97b85418 (88 bytes) */
 int ___initialize_Cplusplus()
 {
-  undefined4 initializerFn;
-  
-  ((int (*)())__dyld_func_lookup)();
-  if ((void *)initializerFn != (void *)0) {
-    ((int (*)())initializerFn)(PTR___mh_dylib_header_a7b7c0a0);
+  code *initializerFn;
+
+  /* stock: r3 = "__dyld_call_module_initializers_for_dylib" (0x97c23d40), r4 = &initializerFn (r1+0x38); the decompile dropped both arguments and so never set initializerFn */
+  ((int (*)())__dyld_func_lookup)("__dyld_call_module_initializers_for_dylib",&initializerFn);
+  if (initializerFn != (code *)0x0) {
+    (*initializerFn)(PTR___mh_dylib_header_a7b7c0a0);
   }
   return;
 }
