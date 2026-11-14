@@ -49,21 +49,29 @@ for n in sys.argv[1:]:
         if (w&0xfc000003)==0x48000001:
             d=w&0x03fffffc; d=d-0x4000000 if d&0x2000000 else d
             if (k*4+d)&0xffffffff==tgt: sites.append(k*4)
-    res=[]
-    for s in sites:
-        r='?'
-        a=s+4
-        for _ in range(12):
+    def walk(a,depth,seen):
+        """R = some path reads r3 before writing it, T = a path returns (blr) with r3 untouched (the caller's caller sees it), N = every path overwrites r3 or calls out first, ? = depth limit"""
+        out=set()
+        for _ in range(60):
+            if a in seen: return out
+            seen.add(a)
             i=decode(a)
-            if i is None: break
-            rd,wr=regs(i)
-            R3=1
-            if R3 in rd: r='R'; break
-            if i.mnemonic in('blr','b','bl','bctr','bctrl','blrl') or i.mnemonic.startswith('b'):
-                r='N' if i.mnemonic in('blr','bl','bctrl','blrl','b','bctr') and R3 not in wr else '?'
-                if R3 in wr: r='N'
-                break
-            if R3 in wr: r='N'; break
+            if i is None: return out|{'?'}
+            rd,wr=regs(i); m=i.mnemonic
+            if m=='blr': return out|{'T'}
+            if m.startswith('b') and m not in('bl','bctrl','blrl'):
+                if m in('bctr',): return out|{'?'}
+                # conditional or unconditional direct branch: follow the target (and the fall-through for conditionals)
+                try: tg=int(i.op_str.split(',')[-1].strip(),16)
+                except Exception: return out|{'?'}
+                if depth>0: out|=walk(tg,depth-1,set(seen))
+                else: out.add('?')
+                if m=='b': return out
+                a+=4; continue
+            if 3 in rd: return out|{'R'}
+            if m in('bl','bctrl','blrl'): return out|{'N'}
+            if 3 in wr: return out|{'N'}
             a+=4
-        res.append((s,r))
+        return out|{'?'}
+    res=[(s,''.join(sorted(walk(s+4,6,set())))) for s in sites]
     print(n,hex(tgt),len(sites),'sites:',' '.join('%x:%s'%x for x in res))
