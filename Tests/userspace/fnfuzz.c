@@ -960,7 +960,7 @@ int main(int argc, char **argv) {
             printf("%s %s at %p trial %d\n", img ? "rebuilt" : "stock", c->name, fnp, t); fflush(stdout);
             child(fnp, c, 0x9e3779b1u * (t + 1) + c->id * 7919u, c->rc == 'd'); return 0; }
     }
-    int nlive = 0, ncomp = 0, ndiff = 0, nuninf = 0, nnondet = 0, ntrials = 0, nboth_crash = 0;
+    int nlive = 0, ncomp = 0, ndiff = 0, nuninf = 0, nnondet = 0, ntrials = 0, nboth_crash = 0, nlazy_skipped = 0, lazy2 = getenv("FNFUZZ_LAZYSTOCK2") != NULL;
     for (int i = first; i < nc && i < first + count; i++) {
         cand_t *c = &cs[i]; if (flt && flt[0] != '@' && !strstr(c->name, flt)) continue;
         void *fn[2] = { (void *)(ap[0] + (c->stock_addr - a_stock)), (void *)(ap[1] + (c->reb_off - a_reb)) };
@@ -974,11 +974,13 @@ int main(int argc, char **argv) {
                 ncur_patch = 0; memset(cur_apatch, 0, sizeof cur_apatch); unsigned last_pc = 0, last_ra = 0;
                 if (getenv("FNFUZZ_REPAIR")) repair_loop(fn[0], c, seed, mode);
                 run_one(fn[0], c, seed, mode, 0, &a);
-                use_fill2 = 1; run_one(fn[0], c, seed, mode, 0, &a2); use_fill2 = 0;
+                if (!lazy2) { use_fill2 = 1; run_one(fn[0], c, seed, mode, 0, &a2); use_fill2 = 0; }
                 run_one(fn[1], c, seed, mode, 1, &b);
                 int ru = 0;   /* FNFUZZ_RUNINIT=1 (with FNFUZZ_STACKFILL2): the rebuilt image runs a second time with the second fill word; a result that changes with the stack fill means the rebuilt code reads an uninitialised stack slot (two locals read across each other, a struct whose neighbour the compiler moved): a defect of the corpus even when the stock happens to agree */
                 if (getenv("FNFUZZ_RUNINIT") && getenv("FNFUZZ_STACKFILL2")) { result_t b2; use_fill2 = 1; run_one(fn[1], c, seed, mode, 1, &b2); use_fill2 = 0; ru = !same(&b, &b2, mode ? 'd' : (c->rc == 'd' ? 'v' : c->rc));
                     if (ru && !why[0]) snprintf(why, sizeof why, "trial %d mode %d: REBUILT READS UNINITIALISED STACK (result changes with the stack fill word): st %d/%d r3 %08x/%08x dg %08x/%08x | stock st=%d r3=%08x dg=%08x | args %x %x %x %x %x", t, mode, b.status, b2.status, b.r3, b2.r3, b.digest, b2.digest, a.status, a.r3, a.digest, b.args[0], b.args[1], b.args[2], b.args[3], b.args[4]); }
+                /* FNFUZZ_LAZYSTOCK2=1 (Nov 14): the second stock run (stack fill word 2: it exposes a stock result that reads uninitialised stack and discards the trial as `nondeterministic in the stock`) only matters for a trial that would otherwise be reported - a differing result, or a result that changes with the rebuilt's own second fill. A trial where stock and rebuilt agree (and, under RUNINIT, the rebuilt is fill-independent) is counted as agreeing without it. Verdicts (DIFF rows, REBUILT READS UNINITIALISED STACK rows, RESULT line) are identical to the default; only the "nondeterministic in the stock" count can be lower and the agree count higher, and one stock run per agreeing trial is saved */
+                if (lazy2) { if (ru || !same(&a, &b, mode ? 'd' : (c->rc == 'd' ? 'v' : c->rc))) { use_fill2 = 1; run_one(fn[0], c, seed, mode, 0, &a2); use_fill2 = 0; } else { a2 = a; nlazy_skipped++; } }
                 ntrials++; if (!a.status && !b.status) nrun_ok++; if (ncur_patch || cur_apatch[0] || cur_apatch[1] || cur_apatch[2] || cur_apatch[3]) npatched++;
                 if (!same(&a, &a2, c->rc)) { nd++; continue; }
                 if ((a.status == 14) != (b.status == 14)) {   /* a hang on one side only: the -O0 rebuild is several times slower than the -O2 stock on a long loop (`_pow_10(0x5000ec80)`), and machine load adds to it - rerun both with a 6 s limit before blaming the code */
@@ -1006,6 +1008,7 @@ int main(int argc, char **argv) {
         else if (crash2 && good == crash2) { nuninf++; if (getenv("FNFUZZ_LISTUNINF")) printf("UNINF %-40s %x (%s->%c) every one of %d trials ended in a signal in both images\n", c->name, c->stock_addr, c->pc, c->rc, trials); }
         nboth_crash += crash2;
     }
+    if (lazy2) printf("lazystock2: %d second stock runs skipped (trials where stock and rebuilt agreed)\n", nlazy_skipped);
     if (interpose) printf("interposer: %d of %d functions reached at least one stubbed import in a trial that ended normally in both images\n", nlive, ncomp);
     printf("fnfuzz: %d functions, %d trials (each: stock twice + rebuilt); %d differ, %d uninformative (always the same signal), %d nondeterministic in the stock\nRESULT: %s\n",
            ncomp, ntrials, ndiff, nuninf, nnondet, ndiff == 0 ? "PASS" : "FAIL");
