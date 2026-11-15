@@ -108,3 +108,7 @@ fault_classify's "USED_LOAD" label is only a straight-line check; it does not se
   (`return table[r3]`, `lfsx f1,r3<<2,tbl`, no bound), Program__laneKindOfIlType (`lwzx r3,r4<<2,tbl`). Both images read past the table; the read stays inside the image in the stock (table lower in the image) and
   leaves the mapped image in the rebuilt (table higher). This is the same layout-dependent class as PTR_VALUE_DEP / IMAGE_DATA_DEP; whether it matters is user decision 3 (open): out of contract vs identical data layout.
 Net: no rebuilt defect among the 9. Remaining: the 84 BOTH_FAULT rows (both fault, different kind or site) have not been classified individually.
+
+### Decision 3 (user, Nov 15 14:40): out-of-range (unchecked) table-index reads are OUT OF CONTRACT
+No data-layout match with the stock is required for reads past the end of a table. IMAGE_DATA_DEP / PTR_VALUE_DEP verdicts and the rebuilt-only faults on an unchecked index are reported as OUT-OF-CONTRACT (not REVIEW)
+by census_summary.py. A row is only moved here after the unchecked index load is confirmed in the disassembly of both images (done for the rows listed above); a new row is not assumed to be this class.
