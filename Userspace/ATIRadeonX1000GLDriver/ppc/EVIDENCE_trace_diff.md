@@ -96,4 +96,15 @@ hit by the fuzz run; it remains the single FAIL of the fixed-trial census.
 `fault_classify.py` (operand-text PPC parser; capstone has no PPC regs_access) on the 93 saved FAULT_MISMATCH inputs: BOTH_FAULT 84 (both fault, different fault kind/site), one-sided 9:
 USED_LOAD stock-only: ffvpPrepareFogExp / Exp2 / Linear (stock `lwz r2,4(r11)` then `lwz r2,0x10(r2)`, rebuilt returns without it), USED_LOAD rebuilt-only: gld_applyAnisotropyOverride,
 opcodeInfoRgbHwOpcode; undetermined (control transfer before overwrite): IRInst__scaleByOutputScale, Program__laneKindOfIlType, R300/R520MachineAssembler__vslot65_declareNodeRegisters.
-NOT YET EXPLAINED: whether these 9 are real error-handling differences or hoisting; to be resolved from disassembly of both images.
+
+### The 9 one-sided FAULT_MISMATCH rows, resolved from disassembly (Nov 15 14:50)
+fault_classify's "USED_LOAD" label is only a straight-line check; it does not see that a load chain is consumed only after a branch. Each row below was resolved by reading both images.
+* **Stock-only fault, hoisted loads (3):** ffvpPrepareFogExp / ffvpPrepareFogExp2 / ffvpPrepareFogLinear. Stock (0x9b790 etc.) loads `ctx+0x3d4`, then `[+4]`, then `[+0x10]` BEFORE the early-exit
+  tests `ctx+0x330 == -1` / `ctx+0x70 == -1` (return 2); the rebuilt does the same loads after those tests. Only a bad `ctx+0x3d4` on an early-exit path differs (stock faults, rebuilt returns 2). Return values and
+  stores are identical when the pointer is valid. Scheduling/hoisting artifact; rebuilt is the safer side. Not a defect.
+* **Stock-only fault, dead load of an unused thunk argument (2):** R300/R520MachineAssembler__vslot65_declareNodeRegisters. Stock loads `this->0x5c` and forms `this+0x90` as the unused arguments of the 12-byte thunk
+  at 0x1955d0 `(node, unused1, unused2, compiler, this)` -> `ConstRecord__emitStores(node, this, compiler)`; the rebuilt calls emitStores directly with the same three live arguments. Only a NULL `this` differs.
+* **Rebuilt-only fault, unchecked table index (4):** opcodeInfoRgbHwOpcode (r4=0x800 into a ~0x30-row table of 0x38 bytes), gld_applyAnisotropyOverride (`lwzx` of a derived index<<2), IRInst__scaleByOutputScale
+  (`return table[r3]`, `lfsx f1,r3<<2,tbl`, no bound), Program__laneKindOfIlType (`lwzx r3,r4<<2,tbl`). Both images read past the table; the read stays inside the image in the stock (table lower in the image) and
+  leaves the mapped image in the rebuilt (table higher). This is the same layout-dependent class as PTR_VALUE_DEP / IMAGE_DATA_DEP; whether it matters is user decision 3 (open): out of contract vs identical data layout.
+Net: no rebuilt defect among the 9. Remaining: the 84 BOTH_FAULT rows (both fault, different kind or site) have not been classified individually.
