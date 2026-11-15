@@ -88,3 +88,12 @@ FAIL (EFFECTS, HW_STREAM = differing ring contents, UNINIT_REBUILT).
 Census (16 trials, ring-primed contexts; `trace_diff_census_16trials_ring.tsv`): PASS 2745, REVIEW 11, NO-INFO 42, FAIL 1 (`gldValidatePointSize`, deliberate #132).
 COVERAGE LIMIT, stated honestly: only 5 functions / 37 trials wrote into the ring (109 dwords: gld_signalFence, gld_emitCopyRectPacket, gld_emitUnitClearPacket, gld_emitSingleUnitBinding, gld_emitBoundUnitObjects):
 random context contents almost never satisfy the preconditions of packet-emitting paths. The hardware channel is implemented but largely UNTESTED; coverage-guided input generation is next.
+
+## Update 14:35 - coverage-guided fuzz census and fault classification (Nov 15)
+`trace_diff.py --fuzz N` (seed trials + mutation of words the function read, arg values, window zeroing; every execution compared; controls only for non-IDENTICAL). Census `fuzz150b`
+(150 executions/function, 419,850 executions): GATE FAIL 0, PASS 2696, REVIEW 102 (FAULT_MISMATCH 92, PTR_VALUE_DEP 5, IMAGE_DATA_DEP 5), NO-INFO 1. gldValidatePointSize (deliberate #132) was not
+hit by the fuzz run; it remains the single FAIL of the fixed-trial census.
+`fault_classify.py` (operand-text PPC parser; capstone has no PPC regs_access) on the 93 saved FAULT_MISMATCH inputs: BOTH_FAULT 84 (both fault, different fault kind/site), one-sided 9:
+USED_LOAD stock-only: ffvpPrepareFogExp / Exp2 / Linear (stock `lwz r2,4(r11)` then `lwz r2,0x10(r2)`, rebuilt returns without it), USED_LOAD rebuilt-only: gld_applyAnisotropyOverride,
+opcodeInfoRgbHwOpcode; undetermined (control transfer before overwrite): IRInst__scaleByOutputScale, Program__laneKindOfIlType, R300/R520MachineAssembler__vslot65_declareNodeRegisters.
+NOT YET EXPLAINED: whether these 9 are real error-handling differences or hoisting; to be resolved from disassembly of both images.

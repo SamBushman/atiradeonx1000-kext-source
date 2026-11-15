@@ -137,6 +137,7 @@ class Sim:
     nargs = None
     MATHF = {'sqrt': 0, 'sqrtf': 0, 'sin': 0, 'cos': 0, 'pow': 0, 'floor': 0, 'ceil': 0, 'log': 0, 'logf': 0, 'exp': 0, 'round': 0, 'frexp': 1}      # double arguments travel in f1..f2, not in GPRs
     LIBC = {'io_connect_method_scalarI_scalarO': 6, 'io_connect_method_scalarI_structureI': 6, 'io_connect_method_structureI_structureO': 6, 'memcpy': 3, 'memset': 3, 'memmove': 3, 'memcmp': 3, 'bzero': 2, 'strlen': 1, 'strcpy': 2, 'strcmp': 2, 'strncmp': 3, 'strncpy': 3, 'strlcpy': 3, 'strcat': 2, 'strchr': 2, 'strrchr': 2, 'malloc': 1, 'calloc': 2, 'realloc': 2, 'free': 1, 'valloc': 1, 'vfree': 1, 'Unwind_Resume': 1, 'cxa_atexit': 3, 'cxa_guard_acquire': 1, 'cxa_guard_release': 1, 'dlopen': 2, 'dlsym': 2, 'exit': 1, 'fclose': 1, 'fgets': 3, 'fopen': 2, 'fread': 4, 'fwrite': 4, 'getenv': 1, 'getpid': 0, 'index': 2, 'rindex': 2, 'pclose': 1, 'popen': 2, 'puts': 1, 'usleep': 1, 'pthread_mutexattr_init': 1, 'pthread_mutexattr_settype': 2, 'keymgr_get_and_lock_processwide_ptr': 1, 'keymgr_set_and_unlock_processwide_ptr': 2, 'ZdlPv': 1, 'ZdaPv': 1, 'Znwm': 1, 'Znwj': 1, 'Znam': 1, 'Znaj': 1, 'setjmp': 1, 'longjmp': 2, '_setjmp': 1, '_longjmp': 2, 'ecvt': 3, 'fcvt': 3}
+    FLOATARGS = set()       # further callees taking double arguments (none known among the GLDriver imports)
     DBLFIRST = {'ecvt', 'fcvt'}      # (double, int, int*, int*): the double travels in f1 (its GPR shadow is not an argument), the three others in r5..r7
     def __init__(self, img, ids, names, stackfill=0, slide=SLIDE):
         self.slide = slide; self.img = img; self.ids = ids; self.names = names
@@ -199,7 +200,7 @@ class Sim:
             if nm.lstrip('_') in self.MATHF: na = self.MATHF[nm.lstrip('_')]
             r0 = 5 if nm.lstrip('_') in self.DBLFIRST else 3
             r = [uc.reg_read(UC_PPC_REG_0 + i) for i in range(r0, r0 + min(na, 8))]
-            f = [uc.reg_read(UC_PPC_REG_FPR0 + i) for i in range(1, 5)]
+            f = [uc.reg_read(UC_PPC_REG_FPR0 + i) for i in range(1, 5)] if (nm.lstrip('_') in self.MATHF or nm.lstrip('_') in self.DBLFIRST or nm.lstrip('_') in self.FLOATARGS) else []      # f1.. are arguments only of the callees that take doubles; elsewhere they are leftovers
             r = [self.nv(x, 4) if not isinstance(x, V) else x for x in r]
             st = [self.nv(int.from_bytes(uc.mem_read(sp + 0x38 + 4 * i, 4), 'big'), 4) for i in range(max(0, na - 8))]
             if nm.lstrip('_') in self.EFFECTS and self.libc(uc, nm.lstrip('_'), [uc.reg_read(UC_PPC_REG_0 + i) for i in range(3, 6)]): return
@@ -264,7 +265,7 @@ class Sim:
     def in_stub(self): return any(lo <= self.pc - self.slide < hi for lo, hi in self.img.stubs)
 
     def on_read(self, uc, access, addr, size, value, ud):
-        if addr < NULLPAGE: self.ev.append(('F', 'read', addr)); self.status = 'FAULT'; uc.emu_stop(); return
+        if addr < NULLPAGE: self.ev.append(('F', 'read', addr)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
         if self.in_stub() or self.own_frame(addr): return
         try: v = int.from_bytes(uc.mem_read(addr, size), 'big') if size <= 8 else bytes(uc.mem_read(addr, size)).hex()
         except Exception: v = None
@@ -272,13 +273,13 @@ class Sim:
         self.ev.append(('R', self.na(addr), size, self.nv(v, size)))
 
     def on_write(self, uc, access, addr, size, value, ud):
-        if addr < NULLPAGE: self.ev.append(('F', 'write', addr)); self.status = 'FAULT'; uc.emu_stop(); return
+        if addr < NULLPAGE: self.ev.append(('F', 'write', addr)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
         if self.in_stub() or self.own_frame(addr): return
         self.pw.append((addr, size, self.pc))
 
     def on_unmapped(self, uc, access, addr, size, value, ud):
         k = {UC_MEM_READ_UNMAPPED: 'read', UC_MEM_WRITE_UNMAPPED: 'write', UC_MEM_FETCH_UNMAPPED: 'fetch'}.get(access, '?')
-        self.ev.append(('F', k, self.na(addr))); self.status = 'FAULT'; return False
+        self.ev.append(('F', k, self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; return False
 
     # ---- one run
     def run(self, entry, args, dargs, stackwords, arena, limit=400000):
@@ -295,7 +296,7 @@ class Sim:
         for i, b in enumerate(dargs[:13]): uc.reg_write(UC_PPC_REG_FPR1 + i, b)
         uc.reg_write(UC_PPC_REG_1, self.sp0); uc.reg_write(UC_PPC_REG_LR, STOP)
         self.entry_nv = [uc.reg_read(UC_PPC_REG_0 + i) for i in range(14, 32)]
-        self.ev = []; self.evpc = {}; self.pw = []; self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
+        self.fpc = None; self.ev = []; self.evpc = {}; self.pw = []; self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
         try: uc.emu_start(entry + self.slide, STOP, count=limit + 10)
         except UcError as e:
             if self.status == '?': self.status = 'UCERR'; self.ev.append(('F', 'uc', str(e)))
@@ -306,7 +307,7 @@ class Sim:
             else: self.status = 'FAULT'; self.ev.append(('F', 'fetch', self.na(pcn)))
         regs = {'r3': uc.reg_read(UC_PPC_REG_3), 'r4': uc.reg_read(UC_PPC_REG_4), 'f1': uc.reg_read(UC_PPC_REG_FPR1), 'r1': uc.reg_read(UC_PPC_REG_1) - self.sp0,
                 'nv': tuple(uc.reg_read(UC_PPC_REG_0 + i) for i in range(14, 32)), 'fnv': tuple(uc.reg_read(UC_PPC_REG_FPR0 + i) for i in range(14, 32)),
-                'cr': uc.reg_read(UC_PPC_REG_CR) & 0x00fff000}
+                'cr': uc.reg_read(UC_PPC_REG_CR) & 0x00fff000, 'fpc': getattr(self, 'fpc', None) if self.status == 'FAULT' else None}
         return self.status, self.ev, regs, self.cov
 
 # ---------------------------------------------------------------- inputs
@@ -523,6 +524,23 @@ def same_run(x, y):
     if x[0] == 'RET': return all(x[2][k] == y[2][k] for k in ('r1', 'nv', 'fnv', 'r3', 'f1'))
     return True
 
+def eval_input(row, ia, da, sw, arena, sims, ctl, full=False):
+    """one input -> (verdict, detail, stock run A, rebuilt run A).  The cheap path runs fill A only; a run that is not clean is re-run under the second fill and the slide control to classify it
+    (UNINIT_* / LAYOUT_DEP).  full=True always runs the controls."""
+    (ssA, srA), (ssB, srB) = sims['A'], sims['B']
+    aA = ssA.run(row['stock'], ia, da, sw, arena); bA = srA.run(row['reb'], ia, da, sw, arena)
+    v, det = compare(aA, bA, row['rc'])
+    if v == 'IDENTICAL' and not full: return v, det, aA, bA
+    aB = ssB.run(row['stock'], ia, da, sw, arena); bB = srB.run(row['reb'], ia, da, sw, arena)
+    us = not same_run(aA, aB); ur = not same_run(bA, bB)
+    cA = ctl.run(row['stock'], ia, da, sw, arena) if ctl else None
+    if aA[0] in ('TIMEOUT', 'UCERR') or bA[0] in ('TIMEOUT', 'UCERR'): v, det = compare(aA, bA, row['rc'])
+    elif cA is not None and not same_run(aA, cA): v, det = 'LAYOUT_DEP', 'the stock itself behaves differently at a second slide (%s vs %s)' % (aA[0], cA[0])
+    elif us and ur: v, det = 'UNINIT_BOTH', ''
+    elif ur: v, det = 'UNINIT_REBUILT', 'rebuilt differs between stack fills: ' + str(compare(bA, bB, row['rc'])[1])[:200]
+    elif us: v, det = 'UNINIT_STOCK', ''
+    return v, det, aA, bA
+
 def run_row(row, trials, S, R, sims, keep=False, ctl=None):
     """per trial: stock and rebuilt under two stack fills (A = 0, B = 0x5a5a5a5a) with identical inputs.  A run that differs between the fills read uninitialised stack:
          UNINIT_REBUILT   only the rebuilt does  -> a rebuilt defect (corpus reads a local nothing wrote)
@@ -530,28 +548,76 @@ def run_row(row, trials, S, R, sims, keep=False, ctl=None):
          UNINIT_BOTH      both do                -> not comparable
        otherwise the verdict of compare()."""
     res = {}; first = {}; stat = {}; cov = [set(), set()]
-    (ssA, srA), (ssB, srB) = sims['A'], sims['B']
     for t in range(trials):
         g = Gen(row['id'] * 100003 + t)
         arena = g.arena(); ia, da, sw = g.call(row['pc'], valid=(t % 2 == 1)); arena = prime_ring(arena, ia, row['pc'])
-        aA = ssA.run(row['stock'], ia, da, sw, arena); bA = srA.run(row['reb'], ia, da, sw, arena)
-        aB = ssB.run(row['stock'], ia, da, sw, arena); bB = srB.run(row['reb'], ia, da, sw, arena)
-        us = not same_run(aA, aB); ur = not same_run(bA, bB)
-        cA = ctl.run(row['stock'], ia, da, sw, arena) if ctl else None
-        if aA[0] in ('TIMEOUT', 'UCERR') or bA[0] in ('TIMEOUT', 'UCERR'): v, det = compare(aA, bA, row['rc'])
-        elif cA is not None and not same_run(aA, cA): v, det = 'LAYOUT_DEP', 'the stock itself behaves differently at a second slide (%s vs %s)' % (aA[0], cA[0])
-        elif us and ur: v, det = 'UNINIT_BOTH', ''
-        elif ur: v, det = 'UNINIT_REBUILT', 'rebuilt differs between stack fills: ' + str(compare(bA, bB, row['rc'])[1])[:200]
-        elif us: v, det = 'UNINIT_STOCK', ''
-        else: v, det = compare(aA, bA, row['rc'])
+        v, det, aA, bA = eval_input(row, ia, da, sw, arena, sims, ctl, full=True)
         stat[(aA[0], bA[0])] = stat.get((aA[0], bA[0]), 0) + 1
         res.setdefault(v, []).append(('A', t)); first.setdefault(v, ('A', t, det, aA if keep else (aA[0], aA[1][:40], aA[2], None), bA if keep else (bA[0], bA[1][:40], bA[2], None)))
         cov[0] |= aA[3]; cov[1] |= bA[3]
     inf = lambda c, lo, n: len([x for x in c if lo <= x < lo + n])
     return res, first, stat, (inf(cov[0], row['stock'], row['size']), inf(cov[1], row['reb'], row['size']))
 
+# ---------------------------------------------------------------- coverage-guided inputs
+INTERESTING = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 15, 16, 0x1f, 0x20, 0x40, 0x7f, 0x80, 0xff, 0x100, 0x1ff, 0x400, 0xffff, 0x10000, 0x7fffffff, 0x80000000, 0xffffffff, 0xfffffffe]
+
+def mutate(rng, ia, da, sw, arena, reads):
+    """a mutated copy of an input: set words the function READ (so a compare / mask / switch on them can go the other way), set arguments, zero a window around a pointer argument"""
+    ia = list(ia); da = list(da); sw = list(sw); a = bytearray(arena)
+    def pool():
+        k = rng.randrange(8)
+        if k < 5: return rng.choice(INTERESTING)
+        if k == 5: return ARENA + 0x1000 + (rng.randrange(ARENA_SIZE - 0x3000) & ~3)
+        if k == 6: return rng.getrandbits(32)
+        return 1 << rng.randrange(32)
+    for _ in range(rng.choice((1, 1, 2, 3))):
+        r = rng.randrange(100)
+        if r < 55 and reads:
+            addr, size = rng.choice(reads); o = (addr - ARENA) & ~3
+            if 0 <= o <= len(a) - 4:
+                v = pool()
+                if size == 1: v = (v & 0xff) << (8 * (3 - ((addr - ARENA) & 3))) | (int.from_bytes(a[o:o+4], 'big') & ~(0xff << (8 * (3 - ((addr - ARENA) & 3)))) & 0xffffffff)
+                elif size == 2: sh = 8 * (2 - ((addr - ARENA) & 2)); v = (v & 0xffff) << sh | (int.from_bytes(a[o:o+4], 'big') & ~(0xffff << sh) & 0xffffffff)
+                a[o:o+4] = struct.pack('>I', v & 0xffffffff)
+        elif r < 75: i = rng.randrange(8); ia[i] = pool()
+        elif r < 85:
+            p = ia[rng.randrange(8)] - ARENA
+            if 0 <= p <= len(a) - 0x200: n = rng.choice((0x40, 0x100, 0x200)); a[p:p+n] = bytes(n)
+        elif r < 92: da[rng.randrange(len(da))] = struct.unpack('>Q', struct.pack('>d', rng.choice((0.0, 1.0, -1.0, 0.5, 255.0, 1e30, -1e30, float('nan'), float('inf')))))[0]
+        else: sw[rng.randrange(16)] = pool()
+    return ia, da, sw, bytes(a)
+
+def fuzz_row(row, budget, S, R, sims, ctl, seed_trials=4):
+    """coverage-guided exploration: start from `seed_trials` generated inputs, keep every input that reaches an instruction (in either image) nothing before reached, derive new inputs from kept ones by mutating the
+    words the function read.  Every execution is compared.  Returns (verdict counts, first example per verdict, end-state counts, (stock cov, rebuilt cov), executions)."""
+    import random
+    rng = random.Random(row['id'] * 7919 + 13)
+    res = {}; first = {}; stat = {}; seen = [set(), set()]; corpus = []
+    def execute(ia, da, sw, arena):
+        v, det, aA, bA = eval_input(row, ia, da, sw, arena, sims, ctl)
+        stat[(aA[0], bA[0])] = stat.get((aA[0], bA[0]), 0) + 1
+        res.setdefault(v, []).append(1)
+        if v not in first:
+            first[v] = ('F', len(first), det, (aA[0], aA[1][:40], aA[2], None), (bA[0], bA[1][:40], bA[2], None))
+            if _G.get('repro') and v not in ('IDENTICAL', 'REORDERED', 'READ_SET', 'FAULT_SITE', 'LAYOUT_DEP', 'UNINIT_STOCK', 'UNINIT_BOTH'):
+                import pickle; os.makedirs(_G['repro'], exist_ok=True)
+                pickle.dump((ia, da, sw, arena), open(os.path.join(_G['repro'], '%s.%s.pkl' % (row['name'], v)), 'wb'))
+        new = (len(aA[3] - seen[0]) > 0) or (len(bA[3] - seen[1]) > 0)
+        seen[0] |= aA[3]; seen[1] |= bA[3]
+        return new, [(e[1], e[2]) for e in aA[1] if e[0] == 'R' and isinstance(e[1], int) and ARENA <= e[1] < ARENA + ARENA_SIZE]
+    for t in range(seed_trials):
+        g = Gen(row['id'] * 100003 + t); arena = g.arena(); ia, da, sw = g.call(row['pc'], valid=(t % 2 == 1)); arena = prime_ring(arena, ia, row['pc'])
+        new, reads = execute(ia, da, sw, arena); corpus.append((ia, da, sw, arena, reads))
+    for _ in range(max(0, budget - seed_trials)):
+        ia, da, sw, arena, reads = corpus[rng.randrange(len(corpus))]
+        ia2, da2, sw2, arena2 = mutate(rng, ia, da, sw, arena, reads); arena2 = prime_ring(arena2, ia2, row['pc'])
+        new, reads2 = execute(ia2, da2, sw2, arena2)
+        if new: corpus.append((ia2, da2, sw2, arena2, reads2))
+    inf = lambda c, lo, n: len([x for x in c if lo <= x < lo + n])
+    return res, first, stat, (inf(seen[0], row['stock'], row['size']), inf(seen[1], row['reb'], row['size']))
+
 _G = {}
-def _init(stock, reb, symmap, nm, ledger=None, funcs=None, nargs=None):
+def _init(stock, reb, symmap, nm, ledger=None, funcs=None, nargs=None, fuzz=0, repro=None):
     S = Img(stock, symfile=symmap); R = Img(reb, nmfile=nm); ids, names = callout_ids([S, R]); S.is_stock = True
     ts = {n: a for a, n in S.syms}
     for r in (read_ledger(ledger) if ledger else []): ts.setdefault(r['name'], r['stock'])
@@ -570,10 +636,12 @@ def _init(stock, reb, symmap, nm, ledger=None, funcs=None, nargs=None):
         for l in open(nargs):
             p = l.rstrip('\n').split('\t')
             if len(p) >= 2 and p[1].isdigit(): Sim.nargs[p[0].lstrip('_')] = int(p[1])
-    _G.update(S=S, R=R, sims={f: (Sim(S, ids, names, fv), Sim(R, ids, names, fv)) for f, fv in (('A', 0), ('B', 0x5a5a5a5a))}, ctl=Sim(S, ids, names, 0, slide=SLIDE2))
+    _G.update(fuzz=fuzz, repro=repro, S=S, R=R, sims={f: (Sim(S, ids, names, fv), Sim(R, ids, names, fv)) for f, fv in (('A', 0), ('B', 0x5a5a5a5a))}, ctl=Sim(S, ids, names, 0, slide=SLIDE2))
 def _work(job):
     row, trials = job
-    try: res, first, stat, cov = run_row(row, trials, _G['S'], _G['R'], _G['sims'], ctl=_G.get('ctl'))
+    try:
+        if _G.get('fuzz'): res, first, stat, cov = fuzz_row(row, _G['fuzz'], _G['S'], _G['R'], _G['sims'], _G.get('ctl'))
+        else: res, first, stat, cov = run_row(row, trials, _G['S'], _G['R'], _G['sims'], ctl=_G.get('ctl'))
     except Exception as e: return row, None, 'EXC %r' % (e,), None, None
     return row, res, first, stat, cov
 
@@ -584,11 +652,11 @@ def read_ledger(ledger):
         if len(p) >= 7 and p[0].isdigit(): rows.append(dict(id=int(p[0]), name=p[1], stock=int(p[2], 16), reb=int(p[3], 16), size=int(p[4]), pc=p[5], rc=p[6]))
     return rows
 
-def census(stock, reb, ledger, trials, procs, out, symmap, nm, names=None, funcs=None, nargs=None):
+def census(stock, reb, ledger, trials, procs, out, symmap, nm, names=None, funcs=None, nargs=None, fuzz=0, repro=None):
     import multiprocessing as mp
     rows = read_ledger(ledger)
     if names: rows = [r for r in rows if r['name'] in names]
-    with mp.Pool(procs, initializer=_init, initargs=(stock, reb, symmap, nm, ledger, funcs, nargs)) as pool, open(out, 'w') as f:
+    with mp.Pool(procs, initializer=_init, initargs=(stock, reb, symmap, nm, ledger, funcs, nargs, fuzz, repro)) as pool, open(out, 'w') as f:
         f.write('#id\tname\trc\tpc\tsize\tstock_cov\treb_cov\truns\tIDENTICAL\tREORDERED\tREAD_SET\tFAULT_SITE\tFAULT_MISMATCH\tEFFECTS\tEMUERR\tTIMEOUT\tUNINIT_REBUILT\tUNINIT_OTHER\tend_states\tfirst_nonidentical\tLAYOUT_DEP\tPTR_VALUE_DEP\tIMAGE_DATA_DEP\n')
         for row, res, first, stat, cov in pool.imap_unordered(_work, [(r, trials) for r in rows], chunksize=1):
             if res is None: f.write('%d\t%s\t%s\t%s\t%d\t-\t-\t0\t\t\t\t\t\t\t\t\t\t\t\t%s\n' % (row['id'], row['name'], row['rc'], row['pc'], row['size'], first)); f.flush(); continue
@@ -599,17 +667,17 @@ def census(stock, reb, ledger, trials, procs, out, symmap, nm, names=None, funcs
             f.flush()
 
 def main(argv):
-    opts = {'--symmap': None, '--nm': None, '--procs': '8', '--out': None, '--names': None, '--funcs': None, '--nargs': None}; pos = []; verbose = False; i = 0
+    opts = {'--symmap': None, '--nm': None, '--procs': '8', '--out': None, '--names': None, '--funcs': None, '--nargs': None, '--fuzz': '0', '--repro': None}; pos = []; verbose = False; i = 0
     while i < len(argv):
         if argv[i] in opts: opts[argv[i]] = argv[i + 1]; i += 2
         elif argv[i] == '-v': verbose = True; i += 1
         else: pos.append(argv[i]); i += 1
     if pos[3] == '--all' or opts['--out']:
         stock, reb, ledger = pos[:3]; trials = int(pos[4]) if len(pos) > 4 else 10
-        census(stock, reb, ledger, trials, int(opts['--procs']), opts['--out'], opts['--symmap'], opts['--nm'], set(opts['--names'].split(',')) if opts['--names'] else None, opts['--funcs'], opts['--nargs']); return
+        census(stock, reb, ledger, trials, int(opts['--procs']), opts['--out'], opts['--symmap'], opts['--nm'], set(opts['--names'].split(',')) if opts['--names'] else None, opts['--funcs'], opts['--nargs'], int(opts['--fuzz']), opts['--repro']); return
     stock, reb, ledger, name = pos[:4]; trials = int(pos[4]) if len(pos) > 4 else 50
-    _init(stock, reb, opts['--symmap'], opts['--nm'], ledger, opts['--funcs'], opts['--nargs']); row = load_row(ledger, name)
-    res, first, stat, cov = run_row(row, trials, _G['S'], _G['R'], _G['sims'], keep=True)
+    _init(stock, reb, opts['--symmap'], opts['--nm'], ledger, opts['--funcs'], opts['--nargs'], int(opts['--fuzz']), opts['--repro']); row = load_row(ledger, name)
+    res, first, stat, cov = fuzz_row(row, int(opts['--fuzz']), _G['S'], _G['R'], _G['sims'], _G['ctl']) if int(opts['--fuzz']) else run_row(row, trials, _G['S'], _G['R'], _G['sims'], keep=True, ctl=_G['ctl'])
     n = sum(len(x) for x in res.values())
     print('%s (rc %s, pc %s): %d runs: %s; function instructions covered: stock %d rebuilt %d of ~%d' % (name, row['rc'], row['pc'], n, ', '.join('%s %d' % (k, len(v)) for k, v in sorted(res.items())), cov[0], cov[1], row['size'] // 4))
     print('  end states (stock,rebuilt): ' + ', '.join('%s/%s %d' % (k[0], k[1], v) for k, v in sorted(stat.items())))
