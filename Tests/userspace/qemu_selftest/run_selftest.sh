@@ -48,6 +48,11 @@ for MODE in runinit plain; do
   grep -a '^DIFF\|^UNINF' def_$MODE.txt | cut -c1-120 > r_def; grep -a '^DIFF\|^UNINF' lazy_$MODE.txt | cut -c1-120 > r_lazy
   if cmp -s r_def r_lazy; then echo "PASS lazy==default verdict rows ($MODE): `grep -c . r_def` rows; `grep -a lazystock2 lazy_$MODE.txt | cut -c1-60`"; else echo "FAIL lazy rows differ ($MODE)"; FAIL=1; fi
 done
+# FNFUZZ_LISTDIFFS=2 (Nov 15): per-trial DT/AT lines; the number of DT lines of a row must equal its "N differ", the AT lines its "M agree", and the verdict rows must not change
+( export FNFUZZ_RUNINIT=1; ./fz_wrap.sh selftest.tsv ./stock.so ./rebuilt.so 40 > ld_off.txt 2>&1; export FNFUZZ_LISTDIFFS=2; ./fz_wrap.sh selftest.tsv ./stock.so ./rebuilt.so 40 > ld_on.txt 2>&1 )
+grep -a '^DIFF\|^UNINF' ld_off.txt | cut -c1-95 > ld_r0; grep -a '^DIFF\|^UNINF' ld_on.txt | cut -c1-95 > ld_r1
+BADLD=`awk '/^DIFF/ { n=$2; for (i=1;i<=NF;i++) { if ($i=="differ,") d[n]=$(i-1); if ($i=="agree)") a[n]=$(i-1) } } /^DT / { dt[$2]++ } /^AT / { at[$2]++ } END { for (n in d) { if (dt[n]+0 != d[n]+0) print "DT", n, dt[n]+0, d[n]; if (at[n]+0 != a[n]+0) print "AT", n, at[n]+0, a[n] } }' ld_on.txt`
+if cmp -s ld_r0 ld_r1 && [ -z "$BADLD" ] && grep -aq '^DT ' ld_on.txt && grep -aq '^AT ' ld_on.txt; then echo "PASS LISTDIFFS: per-trial DT/AT counts match the DIFF rows; verdict rows unchanged"; else echo "FAIL LISTDIFFS $BADLD"; FAIL=1; fi
 ( export FNFUZZ_RUNINIT=1 FNFUZZ_LAZYSTOCK2=1
   ./fz_wrap.sh selftest.tsv ./stock.so ./rebuilt.so 60 > direct.txt 2>&1
   sh $PAR ./fz_wrap.sh selftest.tsv ./stock.so ./rebuilt.so 60 4 2 par/ok > /dev/null 2>&1

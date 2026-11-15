@@ -988,6 +988,11 @@ int main(int argc, char **argv) {
                 }
                 if (a.status && b.status && a.status == b.status) crash2++;
                 if (interpose && !a.status && !b.status && a.ncalls) { live++; lcalls += a.ncalls; for (int q = 0; q < 5; q++) lmask[q] |= a.mask[q]; }
+                /* FNFUZZ_LISTDIFFS=1 (Nov 15): one `DT` line per differing trial (not only the first) with both results and the five integer args; =2 also one `AT` line per agreeing trial, so a
+                   classification (e.g. "differs exactly when the table index is out of range") can be checked on every trial instead of the first differing one. Output only, nothing in the trial changes. */
+                { const char *ld = getenv("FNFUZZ_LISTDIFFS");
+                  if (ld) { int dif = ru || !same(&a, &b, mode ? 'd' : (c->rc == 'd' ? 'v' : c->rc));
+                            if (dif || ld[0] == '2') printf("%s %-40s trial %d mode %d%s: stock st=%d r3=%08x dg=%08x | rebuilt st=%d r3=%08x dg=%08x | args %x %x %x %x %x\n", dif ? "DT" : "AT", c->name, t, mode, ru ? " RUNINIT" : "", a.status, a.r3, a.digest, b.status, b.r3, b.digest, a.args[0], a.args[1], a.args[2], a.args[3], a.args[4]); } }
                 if (!ru && same(&a, &b, mode ? 'd' : (c->rc == 'd' ? 'v' : c->rc))) good++;
                 else { diffs++;
                     /* FNFUZZ_DUMPARENA=prefix (with FNFUZZ_VERBOSE): the whole arena of the FIRST differing trial of each function, as prefix.S / prefix.R (ARENA_BASE-relative, 0x20000 bytes) - the
