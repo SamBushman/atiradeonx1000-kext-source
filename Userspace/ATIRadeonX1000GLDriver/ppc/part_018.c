@@ -6461,7 +6461,10 @@ int psnFormatRgbSource(outBuffer, source0Register, source1Register, source2Regis
   length = _strlen(outBuffer);
   textEnd = outBuffer + length;
   if (selectCode < 0x20) {
-    swizzleJumpAddr = ((unsigned char *)0x000d0730) + *(int *)(((unsigned char *)0x000d0730) + selectCode * 4);
+    /* issue #287: the stock computes the target of its embedded jump-table dispatch here (PC-relative, `lwzx; add; mtctr; bctr`); the switch below is the recovered
+     * dispatch and this value is only ever passed on as a dead printf vararg. The previous transcription loaded from the STOCK text address 0xd0730 + selectCode*4 (no
+     * relocation: an unmapped read in a real process). A relocatable in-image address stands in for the dead value. */
+    swizzleJumpAddr = (undefined *)psnFormatRgbSource;
                     
     switch(selectCode) {
     default:
@@ -6620,7 +6623,8 @@ int psnFormatAlphaSource(outBuffer, source0Register, source1Register, source2Reg
   length = _strlen(outBuffer);
   textEnd = outBuffer + length;
   if (selectCode < 0x10) {
-    componentJumpAddr = ((unsigned char *)0x000d0aa4) + *(int *)(((unsigned char *)0x000d0aa4) + selectCode * 4);
+    /* issue #287: as in psnFormatRgbSource - dead jump-table target; was a load from the stock text address 0xd0aa4 + selectCode*4. */
+    componentJumpAddr = (undefined *)psnFormatAlphaSource;
                     
     switch(selectCode) {
     default:
