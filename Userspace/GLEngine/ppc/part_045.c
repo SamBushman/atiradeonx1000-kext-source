@@ -3968,11 +3968,11 @@ void _gleEvalDomain1Color(undefined4 param_1,int param_2,int param_3,undefined4 
   double in_stack_ffffffb0;
   double in_stack_ffffffb8;
   
-  if (((double)_uvalue_c != fparam_1) || (_uorder_c != param_3)) {
+  if (((double)GH_U2F((unsigned int)_uvalue_c) != fparam_1) || (_uorder_c != param_3)) {
     ((void (*)())_glePreEvaluate)(param_1,param_3,param_3,&_ucoeff_c,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                     fparam_6,fparam_7,fparam_8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8
                     ,in_stack_ffffffb0,in_stack_ffffffb8);
-    _uvalue_c = (float)fparam_1;
+    _uvalue_c = GH_F2U((float)fparam_1);
     _utype_c = 2;
     _uorder_c = param_3;
   }
@@ -4016,11 +4016,11 @@ void _gleEvalDomain1Coord(undefined4 param_1,int param_2,int param_3,undefined4 
   double in_stack_ffffffb0;
   double in_stack_ffffffb8;
   
-  if (((double)_uvalue_c != fparam_1) || (_uorder_c != param_3)) {
+  if (((double)GH_U2F((unsigned int)_uvalue_c) != fparam_1) || (_uorder_c != param_3)) {
     ((void (*)())_glePreEvaluate)(param_1,param_3,param_3,&_ucoeff_c,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                     fparam_6,fparam_7,fparam_8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8
                     ,in_stack_ffffffb0,in_stack_ffffffb8);
-    _uvalue_c = (float)fparam_1;
+    _uvalue_c = GH_F2U((float)fparam_1);
     _utype_c = 2;
     _uorder_c = param_3;
   }
@@ -4069,19 +4069,19 @@ void _gleEvalDomain2Color(undefined4 param_1,int param_2,int param_3,int param_4
   
   iVar6 = param_3;
   dVar10 = fparam_2;
-  if (((double)_uvalue_c != fparam_1) || (_uorder_c != param_3)) {
+  if (((double)GH_U2F((unsigned int)_uvalue_c) != fparam_1) || (_uorder_c != param_3)) {
     ((void (*)())_glePreEvaluate)(param_1,param_3,param_3,&_ucoeff_c,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                     fparam_6,fparam_7,fparam_8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98
                     ,in_stack_ffffffa0,in_stack_ffffffa8);
-    _uvalue_c = (float)fparam_1;
+    _uvalue_c = GH_F2U((float)fparam_1);
     _utype_c = 2;
     _uorder_c = param_3;
   }
-  if (((double)_vvalue_c != fparam_2) || (_vorder_c != param_4)) {
+  if (((double)GH_U2F((unsigned int)_vvalue_c) != fparam_2) || (_vorder_c != param_4)) {
     ((void (*)())_glePreEvaluate)(param_1,param_4,iVar6,&_vcoeff_c,fparam_2,(double)dVar10,fparam_3,fparam_4,fparam_5,
                     fparam_6,fparam_7,fparam_8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98
                     ,in_stack_ffffffa0,in_stack_ffffffa8);
-    _vvalue_c = (float)fparam_2;
+    _vvalue_c = GH_F2U((float)fparam_2);
     _vtype_c = 2;
     _vorder_c = param_4;
   }
@@ -4097,7 +4097,7 @@ void _gleEvalDomain2Color(undefined4 param_1,int param_2,int param_3,int param_4
         do {
           fVar1 = *pfVar8;
           pfVar8 = pfVar8 + param_7;
-          fVar1 = _vcoeff_c * fVar1;
+          fVar1 = GH_U2F((unsigned int)_vcoeff_c) * fVar1;
           if (1 < param_4) {
             iVar9 = param_4 + -1;
             pfVar5 = &_vcoeff_c;
@@ -4142,19 +4142,19 @@ void _gleEvalDomain2Coord(undefined4 param_1,int param_2,int param_3,int param_4
   
   iVar6 = param_3;
   dVar10 = fparam_2;
-  if (((double)_uvalue_c != fparam_1) || (_uorder_c != param_3)) {
+  if (((double)GH_U2F((unsigned int)_uvalue_c) != fparam_1) || (_uorder_c != param_3)) {
     ((void (*)())_glePreEvaluate)(param_1,param_3,param_3,&_ucoeff_c,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                     fparam_6,fparam_7,fparam_8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98
                     ,in_stack_ffffffa0,in_stack_ffffffa8);
-    _uvalue_c = (float)fparam_1;
+    _uvalue_c = GH_F2U((float)fparam_1);
     _utype_c = 2;
     _uorder_c = param_3;
   }
-  if (((double)_vvalue_c != fparam_2) || (_vorder_c != param_4)) {
+  if (((double)GH_U2F((unsigned int)_vvalue_c) != fparam_2) || (_vorder_c != param_4)) {
     ((void (*)())_glePreEvaluate)(param_1,param_4,iVar6,&_vcoeff_c,fparam_2,(double)dVar10,fparam_3,fparam_4,fparam_5,
                     fparam_6,fparam_7,fparam_8,in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98
                     ,in_stack_ffffffa0,in_stack_ffffffa8);
-    _vvalue_c = (float)fparam_2;
+    _vvalue_c = GH_F2U((float)fparam_2);
     _vtype_c = 2;
     _vorder_c = param_4;
   }
@@ -4170,7 +4170,7 @@ void _gleEvalDomain2Coord(undefined4 param_1,int param_2,int param_3,int param_4
         do {
           fVar1 = *pfVar8;
           pfVar8 = pfVar8 + param_7;
-          fVar1 = _vcoeff_c * fVar1;
+          fVar1 = GH_U2F((unsigned int)_vcoeff_c) * fVar1;
           if (1 < param_4) {
             iVar9 = param_4 + -1;
             pfVar5 = &_vcoeff_c;
@@ -4218,20 +4218,20 @@ void _gleEvalDomainDeriv2Coord(undefined4 param_1,int param_2,int param_3,int pa
   
   iVar12 = param_3;
   dVar13 = fparam_2;
-  if ((((double)_uvalue_c != fparam_1) || (_utype_c != 1)) || (_uorder_c != param_3)) {
+  if ((((double)GH_U2F((unsigned int)_uvalue_c) != fparam_1) || (_utype_c != 1)) || (_uorder_c != param_3)) {
     ((void (*)())_glePreEvaluateWithDeriv)(param_1,param_3,param_3,&_ucoeff_c,&_ucoeffDeriv_c,fparam_1,fparam_2,fparam_3,
                fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff78,in_stack_ffffff80,
                in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98);
     _utype_c = 1;
-    _uvalue_c = (float)fparam_1;
+    _uvalue_c = GH_F2U((float)fparam_1);
     _uorder_c = param_3;
   }
-  if ((((double)_vvalue_c != fparam_2) || (_vtype_c != 1)) || (_vorder_c != param_4)) {
+  if ((((double)GH_U2F((unsigned int)_vvalue_c) != fparam_2) || (_vtype_c != 1)) || (_vorder_c != param_4)) {
     ((void (*)())_glePreEvaluateWithDeriv)(param_1,param_4,iVar12,&_vcoeff_c,&_vcoeffDeriv_c,fparam_2,(double)dVar13,fparam_3,fparam_4,
                fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff78,in_stack_ffffff80,
                in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98);
     _vtype_c = 1;
-    _vvalue_c = (float)fparam_2;
+    _vvalue_c = GH_F2U((float)fparam_2);
     _vorder_c = param_4;
   }
   iVar12 = 0;
@@ -4248,15 +4248,15 @@ void _gleEvalDomainDeriv2Coord(undefined4 param_1,int param_2,int param_3,int pa
           iVar10 = 1;
           fVar1 = *pfVar9;
           pfVar9 = pfVar9 + param_7;
-          fVar5 = _vcoeffDeriv_c * fVar1;
-          fVar1 = _vcoeff_c * fVar1;
+          fVar5 = GH_U2F((unsigned int)_vcoeffDeriv_c) * fVar1;
+          fVar1 = GH_U2F((unsigned int)_vcoeff_c) * fVar1;
           if (1 < param_4) {
             do {
               iVar11 = iVar10 + 1;
               fVar2 = *pfVar9;
               pfVar9 = pfVar9 + param_7;
-              fVar5 = (&_vcoeffDeriv_c)[iVar10] * fVar2 + fVar5;
-              fVar1 = (&_vcoeff_c)[iVar10] * fVar2 + fVar1;
+              fVar5 = GH_U2F((unsigned int)((&_vcoeffDeriv_c)[iVar10])) * fVar2 + fVar5;
+              fVar1 = GH_U2F((unsigned int)((&_vcoeff_c)[iVar10])) * fVar2 + fVar1;
               iVar10 = iVar11;
             } while (iVar11 < param_4);
           }

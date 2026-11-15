@@ -1,0 +1,16 @@
+# gleng_eval_spec.txt - _gleEvalDomain1Coord / _gleEvalDomain2Coord (Nov 14): the evaluator order (parameter 2, and 3 for the 2D form) is the number of floats _glePreEvaluate writes into the static _ucoeff_c / _vcoeff_c buffers; GL allows orders 1..8 (GL_MAX_EVAL_ORDER), the plain ledger passes a random int (e.g. 0x3ff) that overruns the buffer in both images
+type EVPTS 0x1000
+  randfill 0x00 0x1000 65536
+type EVOUT 0x400
+  randfill 0x00 0x400 65536
+func _gleEvalDomain1Coord
+  arg 1 ptr EVPTS
+  arg 2 int 1 8
+  arg 4 int 1 4
+  arg 5 ptr EVOUT
+func _gleEvalDomain2Coord
+  arg 1 ptr EVPTS
+  arg 2 int 1 8
+  arg 3 int 1 8
+  arg 6 int 1 4
+  arg 7 ptr EVOUT
