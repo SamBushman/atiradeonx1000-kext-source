@@ -77,3 +77,14 @@ First difference of the 1112 REORDERED-only rows (`Tools/userspace/emu/reorder_k
    stock order (the stock hoists loads: IROperand__init reads operand[5] BEFORE its first store; setThreeWords reads +8,+0,+4 while the corpus reads [2],[1],[0]), so the pin order must be derived from
    the stock trace/disassembly per function; Ghidra source order cannot be reused.
 3. Tools added: `census_union.py`, `show_order.py`, `reorder_kinds.py`.
+
+## Update 14:10 - gate relaxed by the user (Nov 15): memory order/width/dead loads no longer gate; hardware registers stay strict
+User rule: ordering of ordinary memory reads (and, by extension, the order and width of ordinary stores) is no longer required; hardware-register accesses stay strict.
+In the userspace driver the hardware is programmed by packets (register offset + value dwords) written into the kernel-mapped command ring (`gld_submitRing`: header word ring+0x1c, cursor ctx+0x1dc, limit +0x1e0,
+map +0x1e4) and handed over with IOConnectMapMemory/submit calls; nothing else is mapped to a register aperture in userspace (RAM descriptors only; VA types 4/5 not exhaustively verified).
+So the strict channel = final contents of the ring (position + value of every dword), the ordered calls with their arguments, return values, and the final values of all other stores.
+The tool now reports gate classes: PASS (IDENTICAL/REORDERED/READ_SET/FAULT_SITE - order and dead loads relaxed), REVIEW (FAULT_MISMATCH, out-of-range table-index classes), NO-INFO (layout/emulator),
+FAIL (EFFECTS, HW_STREAM = differing ring contents, UNINIT_REBUILT).
+Census (16 trials, ring-primed contexts; `trace_diff_census_16trials_ring.tsv`): PASS 2745, REVIEW 11, NO-INFO 42, FAIL 1 (`gldValidatePointSize`, deliberate #132).
+COVERAGE LIMIT, stated honestly: only 5 functions / 37 trials wrote into the ring (109 dwords: gld_signalFence, gld_emitCopyRectPacket, gld_emitUnitClearPacket, gld_emitSingleUnitBinding, gld_emitBoundUnitObjects):
+random context contents almost never satisfy the preconditions of packet-emitting paths. The hardware channel is implemented but largely UNTESTED; coverage-guided input generation is next.

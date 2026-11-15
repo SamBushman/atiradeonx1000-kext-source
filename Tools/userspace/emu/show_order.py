@@ -8,7 +8,7 @@ ext = lambda ev: [e for e in ev if not (e[0] == 'R' and isinstance(e[1], tuple))
 for name in sys.argv[8:]:
     row = T.load_row(a[2], name)
     for t in range(8):
-        g = T.Gen(row['id'] * 100003 + t); arena = g.arena(); ia, da, sw = g.call(row['pc'], valid=(t % 2 == 1))
+        g = T.Gen(row['id'] * 100003 + t); arena = g.arena(); ia, da, sw = g.call(row['pc'], valid=(t % 2 == 1)); arena = T.prime_ring(arena, ia, row['pc'])
         x = ss.run(row['stock'], ia, da, sw, arena); y = sr.run(row['reb'], ia, da, sw, arena); v, det = T.compare(x, y, row['rc'])
         if v in ('REORDERED', 'READ_SET', 'FAULT_SITE', 'EFFECTS'):
             print('==', name, 'trial', t, v, x[0], y[0]); p, q = ext(x[1]), ext(y[1])

@@ -18,7 +18,7 @@ def kind(ea, eb):
 def work(row):
     S, R = T._G['S'], T._G['R']; ss, sr = T._G['sims']['A']; out = collections.Counter()
     for t in range(trials):
-        g = T.Gen(row['id'] * 100003 + t); arena = g.arena(); ia, da, sw = g.call(row['pc'], valid=(t % 2 == 1))
+        g = T.Gen(row['id'] * 100003 + t); arena = g.arena(); ia, da, sw = g.call(row['pc'], valid=(t % 2 == 1)); arena = T.prime_ring(arena, ia, row['pc'])
         x = ss.run(row['stock'], ia, da, sw, arena); y = sr.run(row['reb'], ia, da, sw, arena)
         v, det = T.compare(x, y, row['rc'])
         if v == 'REORDERED': out[kind(x[1], y[1])] += 1

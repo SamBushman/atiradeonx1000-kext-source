@@ -23,7 +23,7 @@ def show(img, pc, lst, lab):
 for fillname in ('A',):
     ss, sr = T._G['sims'][fillname]
     for t in range(40):
-        g = T.Gen(row['id'] * 100003 + t); arena = g.arena(); ia, da, sw = g.call(row['pc'], valid=(t % 2 == 1))
+        g = T.Gen(row['id'] * 100003 + t); arena = g.arena(); ia, da, sw = g.call(row['pc'], valid=(t % 2 == 1)); arena = T.prime_ring(arena, ia, row['pc'])
         a = ss.run(row['stock'], ia, da, sw, arena); pa = dict(ss.evpc); b = sr.run(row['reb'], ia, da, sw, arena); pb = dict(sr.evpc)
         v, det = T.compare(a, b, row['rc'])
         if v not in ('EFFECTS', 'PTR_VALUE_DEP', 'IMAGE_DATA_DEP', 'IMAGE_ADDR_DEP'): continue

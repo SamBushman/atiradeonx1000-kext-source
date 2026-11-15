@@ -22,6 +22,7 @@ ARENA = 0x50000000; ARENA_SIZE = 0x80000
 STACK = 0x7f000000; STACK_SIZE = 0x100000
 STOP = 0x70000000
 CALLOUT = 0x60000000
+RING = 0x58000000; RING_SIZE = 0x10000       # the stand-in for the kernel-mapped command ring: its contents are what the hardware is programmed by (packets: register offsets + values)
 IMGMAX = 0x400000            # both images are mapped below this; values in [0x1000, IMGMAX) are treated as image pointers by the normaliser, so the generator never makes such values
 NULLPAGE = 0x1000
 SLIDE2 = 0x20000000         # the control run of the stock at a second slide: a trial whose behaviour changes with the slide depends on where the image happens to sit (an input that is an address inside the image window)
@@ -155,7 +156,7 @@ class Sim:
         for ca, nv_ in img.def_ptrs.items(): uc.mem_write(ca + slide, struct.pack('>I', (nv_ + slide) & 0xffffffff))
         for ca, nm in img.cells.items(): uc.mem_write(ca + slide, struct.pack('>I', CALLOUT + 16 * ids[nm]))
         self.snap = [(vm + slide, bytes(uc.mem_read(vm + slide, len(data)))) for name, vm, vs, data in img.segs if name != '__TEXT']
-        uc.mem_map(ARENA, ARENA_SIZE); uc.mem_map(STACK, STACK_SIZE); uc.mem_map(STOP, 0x1000); uc.mem_map(CALLOUT, 0x10000)
+        uc.mem_map(ARENA, ARENA_SIZE); uc.mem_map(RING, RING_SIZE); uc.mem_map(STACK, STACK_SIZE); uc.mem_map(STOP, 0x1000); uc.mem_map(CALLOUT, 0x10000)
         uc.hook_add(UC_HOOK_CODE, self.on_code)
         uc.hook_add(UC_HOOK_MEM_READ, self.on_read)
         uc.hook_add(UC_HOOK_MEM_WRITE, self.on_write)
@@ -284,7 +285,7 @@ class Sim:
         uc = self.uc
         for vm, b in self.snap: uc.mem_write(vm, b)
         for za, zs in self.img.zero: uc.mem_write(za + self.slide, bytes(zs))
-        uc.mem_write(ARENA, arena)
+        uc.mem_write(ARENA, arena); uc.mem_write(RING, bytes(RING_SIZE)); uc.mem_write(RING + 0x10, struct.pack('>I', RING_SIZE // 4))
         uc.mem_write(STACK, bytes([self.stackfill & 0xff]) * STACK_SIZE) if self.stackfill < 256 else uc.mem_write(STACK, struct.pack('>I', self.stackfill) * (STACK_SIZE // 4))
         self.sp0 = STACK + STACK_SIZE - 0x2000
         for i, w in enumerate(stackwords): uc.mem_write(self.sp0 + 0x38 + 4 * i, struct.pack('>I', w))
@@ -309,6 +310,16 @@ class Sim:
         return self.status, self.ev, regs, self.cov
 
 # ---------------------------------------------------------------- inputs
+def prime_ring(arena, ia, pc):
+    """make the first argument (when it is a pointer into the arena) a context whose command-stream fields point at the ring, so that packet-emitting code really writes packets: ctx+0x1d8 last header, +0x1dc write cursor,
+    +0x1e0 ring limit, +0x1e4 ring map (gld_ctx_fields.h: GLD_lastHeader / GLD_writeCursor / GLD_ringLimit / GLD_ringMap); the same patched arena goes to both images"""
+    if not pc or pc[0] != 'p': return arena
+    off = ia[0] - ARENA
+    if not (0 <= off <= len(arena) - 0x1f0): return arena
+    a = bytearray(arena)
+    for k, v in ((0x1d8, RING + 0x1c), (0x1dc, RING + 0x20), (0x1e0, RING + RING_SIZE - 0x400), (0x1e4, RING)): a[off + k:off + k + 4] = struct.pack('>I', v)
+    return bytes(a)
+
 class Gen:
     def __init__(self, seed): self.r = random.Random(seed)
     def ptr(self): return ARENA + 0x1000 + (self.r.randrange(ARENA_SIZE - 0x3000) & ~3)
@@ -487,6 +498,7 @@ def compare(a, b, ret_kind):
         d = wdiff(x[1], y[1])
         if d and x[3] != y[3]:
             if sa == 'FAULT' and i == len(sga) - 1 and fa == fb: partial = d; continue       # the segment cut short by the same fault: which stores had happened before it differs (instruction order)
+            if any(isinstance(k, int) and RING <= k < RING + RING_SIZE and x[3].get(k) != y[3].get(k) for k in set(x[3]) | set(y[3])): det.append('segment %d: command-ring contents differ: %s' % (i, d)); return 'HW_STREAM', '; '.join(det)
             det.append('segment %d: %s' % (i, d)); return classify_effect(ea, eb, det)
     if not ret_ok: return classify_effect(ea, eb, det)
     if partial: return 'FAULT_PARTIAL', 'same fault %r; stores completed before it differ: %s' % (fa[1:] if fa else None, partial)
@@ -521,7 +533,7 @@ def run_row(row, trials, S, R, sims, keep=False, ctl=None):
     (ssA, srA), (ssB, srB) = sims['A'], sims['B']
     for t in range(trials):
         g = Gen(row['id'] * 100003 + t)
-        arena = g.arena(); ia, da, sw = g.call(row['pc'], valid=(t % 2 == 1))
+        arena = g.arena(); ia, da, sw = g.call(row['pc'], valid=(t % 2 == 1)); arena = prime_ring(arena, ia, row['pc'])
         aA = ssA.run(row['stock'], ia, da, sw, arena); bA = srA.run(row['reb'], ia, da, sw, arena)
         aB = ssB.run(row['stock'], ia, da, sw, arena); bB = srB.run(row['reb'], ia, da, sw, arena)
         us = not same_run(aA, aB); ur = not same_run(bA, bB)
@@ -581,8 +593,8 @@ def census(stock, reb, ledger, trials, procs, out, symmap, nm, names=None, funcs
         for row, res, first, stat, cov in pool.imap_unordered(_work, [(r, trials) for r in rows], chunksize=1):
             if res is None: f.write('%d\t%s\t%s\t%s\t%d\t-\t-\t0\t\t\t\t\t\t\t\t\t\t\t\t%s\n' % (row['id'], row['name'], row['rc'], row['pc'], row['size'], first)); f.flush(); continue
             n = sum(len(v) for v in res.values()); c = lambda k: len(res.get(k, []))
-            worst = next((k for k in ('UNINIT_REBUILT', 'EFFECTS', 'IMAGE_ADDR_DEP', 'IMAGE_DATA_DEP', 'PTR_VALUE_DEP', 'FAULT_MISMATCH', 'FAULT_PARTIAL', 'READ_SET', 'FAULT_SITE', 'REORDERED', 'EMUERR') if k in res), '')
-            f.write('%d\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%s\t%s\t%d\t%d\t%d\n' % (row['id'], row['name'], row['rc'], row['pc'], row['size'], cov[0], cov[1], n, c('IDENTICAL'), c('REORDERED'), c('READ_SET'), c('FAULT_SITE') + c('FAULT_PARTIAL'), c('FAULT_MISMATCH'), c('EFFECTS'), c('EMUERR'), c('TIMEOUT'), c('UNINIT_REBUILT'), c('UNINIT_STOCK') + c('UNINIT_BOTH'),
+            worst = next((k for k in ('UNINIT_REBUILT', 'HW_STREAM', 'EFFECTS', 'IMAGE_ADDR_DEP', 'IMAGE_DATA_DEP', 'PTR_VALUE_DEP', 'FAULT_MISMATCH', 'FAULT_PARTIAL', 'READ_SET', 'FAULT_SITE', 'REORDERED', 'EMUERR') if k in res), '')
+            f.write('%d\t%s\t%s\t%s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%s\t%s\t%d\t%d\t%d\n' % (row['id'], row['name'], row['rc'], row['pc'], row['size'], cov[0], cov[1], n, c('IDENTICAL'), c('REORDERED'), c('READ_SET'), c('FAULT_SITE') + c('FAULT_PARTIAL'), c('FAULT_MISMATCH'), c('EFFECTS') + c('HW_STREAM'), c('EMUERR'), c('TIMEOUT'), c('UNINIT_REBUILT'), c('UNINIT_STOCK') + c('UNINIT_BOTH'),
                 ','.join('%s/%s:%d' % (k[0], k[1], v) for k, v in sorted(stat.items())), ('%s: %s' % (worst, first[worst][2][:300])) if worst else '', c('LAYOUT_DEP'), c('PTR_VALUE_DEP'), c('IMAGE_DATA_DEP') + c('IMAGE_ADDR_DEP')))
             f.flush()
 

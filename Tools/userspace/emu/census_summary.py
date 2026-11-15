@@ -23,6 +23,9 @@ def worst(r):
     if r['tmo'] == r['runs']: return 'TIMEOUT_ALL'
     return 'IDENTICAL'
 c = collections.Counter(worst(r) for r in rows)
+GATE = {'UNINIT_REBUILT': 'FAIL', 'EFFECTS': 'FAIL', 'HW_STREAM': 'FAIL', 'FAULT_MISMATCH': 'REVIEW', 'IMAGE_DATA_DEP': 'REVIEW', 'PTR_VALUE_DEP': 'REVIEW', 'LAYOUT_ALL': 'NO-INFO', 'EMUERR_ALL': 'NO-INFO', 'TIMEOUT_ALL': 'NO-INFO', 'EXC': 'NO-INFO'}
+g = collections.Counter(GATE.get(worst(r), 'PASS') for r in rows)
+print('GATE (relaxed memory order, strict calls/returns/final stores/command ring): ' + ', '.join('%s %d' % kv for kv in sorted(g.items())))
 print('%d rows; trials excluded as layout-dependent (the stock itself differs at a second slide): %d of %d' % (len(rows), sum(r['lay'] for r in rows), sum(r['runs'] for r in rows))); [print('  %-16s %d' % (k, v)) for k, v in sorted(c.items(), key=lambda x: -x[1])]
 def normal(r): return any(s.split(':')[0] == 'RET/RET' for s in r['states'].split(','))
 print('rows with at least one run where BOTH images returned normally: %d / %d' % (sum(1 for r in rows if normal(r)), len(rows)))
