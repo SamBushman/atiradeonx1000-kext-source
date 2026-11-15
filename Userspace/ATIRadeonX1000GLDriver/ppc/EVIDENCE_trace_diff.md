@@ -112,3 +112,19 @@ Net: no rebuilt defect among the 9. Remaining: the 84 BOTH_FAULT rows (both faul
 ### Decision 3 (user, Nov 15 14:40): out-of-range (unchecked) table-index reads are OUT OF CONTRACT
 No data-layout match with the stock is required for reads past the end of a table. IMAGE_DATA_DEP / PTR_VALUE_DEP verdicts and the rebuilt-only faults on an unchecked index are reported as OUT-OF-CONTRACT (not REVIEW)
 by census_summary.py. A row is only moved here after the unchecked index load is confirmed in the disassembly of both images (done for the rows listed above); a new row is not assumed to be this class.
+
+### The 84 both-image-fault rows (Nov 15 15:20)
+Classified by their normalised traces (offsets relative to the first argument; `both_fault_sig` grouping) and by reading the disassembly of one representative per group.
+* **80 rows - invalid first argument, no effect completed:** AddrIndexedSet/Block/DListNode/ExportAddress/ExportSlot/ExportValue/FixedValue/IRInst/IRPseudo/ImmedConstBuffer/Interpolator/MachineAssembler/R300*/R520*/Physical/
+  ResourceModel/Resource/SchedNode/TempValue/ThreadModel/VRegInfo/VertexRegister dtors and `OpcodeSetup__mode5/7/8`, `VRegInfo__new_127994`, plus `gldEmitInternalDrawSetupPackets` (ctx = 6) and
+  `recordClearBindingTables` (this = 0x7fffffff). In both images the first access is a load/store through the invalid pointer and no store or call completes before the fault. They differ only in which access comes first:
+  the stock reads a field of `this` (`lwz r30,0xd4(this)`) BEFORE it stores the vtable pointer, the rebuilt stores the vtable pointer first (or reads `this[-1]` first). With a valid object both do the same thing
+  (these rows are IDENTICAL/REORDERED in the other trials). `trace_diff.py` now reports this as FAULT_SITE ("different access kind; no store or call completed in either image"); 81 of the 93 saved inputs move.
+* **2 rows - stock bug:** `Program__assignOutputExportSlots` / `assignSharedExportSlots`: the unchecked export-slot index of #283/#284 (stock-driver-bug, preserved).
+* **1 row - hoisting:** `gld_emitProgramStateAndConstants`: same three reads, then one extra halfword read in the rebuilt before the same invalid-pointer fault.
+* **1 row - REAL DEFECT, #287:** `psnFormatRgbSource` (and the same construct in `psnFormatAlphaSource`). The corpus kept the dead jump-target computation of the recovered embedded switch as
+  `*(int *)((unsigned char *)0x000d0730 + selectCode * 4)`: a load from a hard-coded STOCK text address with no relocation (`addis r10,r11,0xd; lwz r2,0x730(r10)`, no local-reloc entry), i.e. an unmapped read in any
+  process on every call with `selectCode < 0x20` (`< 0x10` for the alpha variant, table 0xd0aa4). Found because the emulator image has no scattered relocations and the pair lacked a plain one. Fixed in `part_018.c`
+  (the dead value is now the function's own address); scan of the corpus for stock-range literals used as dereference bases found no other text-address site (data-section literals are rewritten to relocated symbols
+  by `link_corpus.py`, verified on psnDecDecodeHwInstruction). Verification on the rebuilt image: see the update below once the image is built.
+`census_summary.py` now carries an EXPLAINED table (row name -> class, gate) for the rows resolved by hand, so each REVIEW row that remains has no recorded explanation yet.

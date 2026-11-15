@@ -490,6 +490,9 @@ def compare(a, b, ret_kind):
     sga, fa = segments(ea); sgb, fb = segments(eb)
     if sa == 'FAULT' and fa != fb:
         if fa and fb and fa[1] == fb[1]: return 'FAULT_SITE', 'stock %r vs rebuilt %r' % (fa[1:], fb[1:])
+        noeff = lambda ev: not any(e[0] in ('W', 'WB', 'C') for e in ev)
+        if fa and fb and noeff(ea) and noeff(eb):      # both crash before any store or call completed: the same observable outcome, only the first invalid access (kind/address) differs
+            return 'FAULT_SITE', 'stock %r vs rebuilt %r (different access kind; no store or call completed in either image)' % (fa[1:], fb[1:])
         return 'FAULT_MISMATCH', 'stock %r vs rebuilt %r' % (fa, fb)
     if len(sga) != len(sgb) or any(x[0] != y[0] for x, y in zip(sga, sgb)):
         i = next((i for i, (x, y) in enumerate(zip(sga, sgb)) if x[0] != y[0]), min(len(sga), len(sgb)))

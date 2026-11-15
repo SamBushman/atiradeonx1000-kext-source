@@ -22,9 +22,19 @@ def worst(r):
     if r['emu'] == r['runs']: return 'EMUERR_ALL'
     if r['tmo'] == r['runs']: return 'TIMEOUT_ALL'
     return 'IDENTICAL'
-c = collections.Counter(worst(r) for r in rows)
+# FAULT_MISMATCH rows resolved by hand from the disassembly of both images (EVIDENCE_trace_diff.md, "The 9 one-sided FAULT_MISMATCH rows", Nov 15):
+# name -> (class, gate). Only applied while the row's worst verdict is FAULT_MISMATCH; a row that gets any worse verdict still reports it.
+EXPLAINED = {'ffvpPrepareFogExp': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogExp2': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogLinear': ('STOCK_HOISTED_LOAD', 'PASS'),
+             'R300MachineAssembler__vslot65_declareNodeRegisters': ('STOCK_DEAD_ARG_LOAD', 'PASS'), 'R520MachineAssembler__vslot65_declareNodeRegisters': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
+             'opcodeInfoRgbHwOpcode': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'gld_applyAnisotropyOverride': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
+             'IRInst__scaleByOutputScale': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'Program__laneKindOfIlType': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
+             'Program__assignOutputExportSlots': ('STOCK_BUG_284', 'PASS'), 'Program__assignSharedExportSlots': ('STOCK_BUG_284', 'PASS')}
+def worst2(r):
+    w = worst(r)
+    return EXPLAINED[r['name']][0] if w == 'FAULT_MISMATCH' and r['name'] in EXPLAINED else w
+c = collections.Counter(worst2(r) for r in rows)
 GATE = {'UNINIT_REBUILT': 'FAIL', 'EFFECTS': 'FAIL', 'HW_STREAM': 'FAIL', 'FAULT_MISMATCH': 'REVIEW', 'IMAGE_DATA_DEP': 'OUT-OF-CONTRACT', 'PTR_VALUE_DEP': 'OUT-OF-CONTRACT', 'LAYOUT_ALL': 'NO-INFO', 'EMUERR_ALL': 'NO-INFO', 'TIMEOUT_ALL': 'NO-INFO', 'EXC': 'NO-INFO'}
-g = collections.Counter(GATE.get(worst(r), 'PASS') for r in rows)
+g = collections.Counter(EXPLAINED[r['name']][1] if worst(r) == 'FAULT_MISMATCH' and r['name'] in EXPLAINED else GATE.get(worst(r), 'PASS') for r in rows)
 print('GATE (relaxed memory order, strict calls/returns/final stores/command ring; unchecked out-of-range table index = out of contract, user Nov 15): ' + ', '.join('%s %d' % kv for kv in sorted(g.items())))
 print('%d rows; trials excluded as layout-dependent (the stock itself differs at a second slide): %d of %d' % (len(rows), sum(r['lay'] for r in rows), sum(r['runs'] for r in rows))); [print('  %-16s %d' % (k, v)) for k, v in sorted(c.items(), key=lambda x: -x[1])]
 def normal(r): return any(s.split(':')[0] == 'RET/RET' for s in r['states'].split(','))
@@ -34,4 +44,4 @@ print('rows whose rebuilt image covered fewer instructions of the function than 
 if len(sys.argv) > 2:
     k = sys.argv[2]
     for r in rows:
-        if worst(r) == k: print('%s\t%s\t%s\t%s' % (r['id'], r['name'], r['states'], r['first'][:200]))
+        if worst2(r) == k: print('%s\t%s\t%s\t%s' % (r['id'], r['name'], r['states'], r['first'][:200]))
