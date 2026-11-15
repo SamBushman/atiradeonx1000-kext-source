@@ -14,3 +14,23 @@ func _gleEvalDomain2Coord
   arg 3 int 1 8
   arg 6 int 1 4
   arg 7 ptr EVOUT
+# the colour forms (same parameters as the Coord forms) and the derivative form: parameters 8, 9, 10 of _gleEvalDomainDeriv2Coord are three output buffers
+func _gleEvalDomain1Color
+  arg 1 ptr EVPTS
+  arg 2 int 1 8
+  arg 4 int 1 4
+  arg 5 ptr EVOUT
+func _gleEvalDomain2Color
+  arg 1 ptr EVPTS
+  arg 2 int 1 8
+  arg 3 int 1 8
+  arg 6 int 1 4
+  arg 7 ptr EVOUT
+func _gleEvalDomainDeriv2Coord
+  arg 1 ptr EVPTS
+  arg 2 int 1 8
+  arg 3 int 1 8
+  arg 6 int 1 4
+  arg 7 ptr EVOUT
+  arg 8 ptr EVOUT
+  arg 9 ptr EVOUT
