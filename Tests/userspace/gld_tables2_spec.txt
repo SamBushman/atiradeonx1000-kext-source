@@ -1,0 +1,14 @@
+# gld_tables2_spec.txt - further pure table-lookup rows of the GLDriver shader compiler (Nov 15), index limited to 0..0x3ff (generous: the tables are far shorter) so a row that differs shows the FIRST index at which the two images stop agreeing; the rz ledger passes a random 32-bit index and reads past the table end, where the two images hold different data (documented out-of-table index class).
+func opcodeInfoRgbHwOpcode
+  arg 1 int 0 1023
+func opcodeInfoAlphaHwOpcode
+  arg 1 int 0 1023
+func Opcode__getInfo
+  arg 0 int 0 1023
+func Table1ea904__hasFlag0x11
+  arg 0 int 0 1023
+func outputScaleFromExponent
+  arg 0 int 0 1023
+func FudoPs__vslot12_lookupTable6x
+  arg 1 int 0 63
+  arg 2 int 0 5

@@ -1,0 +1,16 @@
+# gleng_hist_spec.txt - _glGetHistogramParameterfv_Exec / _glGetMinmaxParameterfv_Exec with a VALID call (Nov 15): the plain/list-context rows only reach the error path, where the callee `_glGet{Histogram,Minmax}Parameteriv_Exec` writes nothing and the wrapper converts its own UNINITIALISED int local to float (stock and rebuilt both do; the frames differ, 0x60 vs 0xb0 bytes, so the leftover differs). With ctx+0x4a10 (lha) = -1, a valid target and a valid pname the callee stores the value (ctx+0x3388 / 0x338c / 0x338e / 0x3380 / 0x3382 or a constant) and nothing is uninitialised.
+type HCTX 0x8000
+  randfill 0x00 0x8000 65536
+  u16 0x4a10 0xffff 0xffff
+type HOUT 0x40
+  randfill 0x00 0x40 65536
+func _glGetHistogramParameterfv_Exec
+  arg 0 ptr HCTX
+  arg 1 pick 0x8024 0x8025
+  arg 2 pick 0x8026 0x8027 0x8028 0x8029 0x802a 0x802b 0x802c 0x802d
+  arg 3 ptr HOUT
+func _glGetMinmaxParameterfv_Exec
+  arg 0 ptr HCTX
+  arg 1 pick 0x802e
+  arg 2 pick 0x802f 0x8030
+  arg 3 ptr HOUT

@@ -1,0 +1,29 @@
+# gleng_p18_spec.txt - GLEngine plain27 rows whose DIFFs are all "stock faults, rebuilt returns" with a NON-context first parameter (Nov 15): the stock hoists loads from the context (ctx+0x53d4 / +0x20 / +0x3388 ...) above the target test, the rebuilt does the load only on the path that uses it, so an invalid context faults in the stock only. With a real (randomly filled, large enough) context object and every target value both images must agree.
+type GHT 0x400
+  randfill 0x00 0x400 65536
+type GCTX 0x8000
+  randfill 0x00 0x8000 65536
+  u32 0x53d4 0 3
+  u32 0x3388 0 8
+  ptr 0x3384 GHT
+type GLARG 0x40
+  randfill 0x00 0x40 65536
+  u32 0x00 0x8024 0x8026
+func _gleLookUpTexture1D
+  arg 0 ptr GCTX
+  arg 1 pick 0xde0 0x8063 0xde1 0xde2 0x806f 0x8070 0x0 0x1 0x7fff 0x8064 0x8071
+func _gleLookUpTexture3D
+  arg 0 ptr GCTX
+  arg 1 pick 0xde0 0x8063 0xde1 0xde2 0x806f 0x8070 0x0 0x1 0x7fff 0x8064 0x8071
+func _gleLookUpNonProxyTexture1D
+  arg 0 ptr GCTX
+  arg 1 pick 0xde0 0x8063 0xde1 0xde2 0x806f 0x8070 0x0 0x1 0x7fff 0x8064 0x8071
+func _gleLookUpNonProxyTexture3D
+  arg 0 ptr GCTX
+  arg 1 pick 0xde0 0x8063 0xde1 0xde2 0x806f 0x8070 0x0 0x1 0x7fff 0x8064 0x8071
+func _glResetHistogram_Exec
+  arg 0 ptr GCTX
+  arg 1 pick 0x8024 0x8025 0x1234 0x0
+func _glResetHistogram_ListExec
+  arg 0 ptr GCTX
+  arg 1 ptr GLARG
