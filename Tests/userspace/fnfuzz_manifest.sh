@@ -17,7 +17,7 @@ emit_file() { # role path
   else echo "file $1 MISSING 0 $2"; fi
 }
 header() { echo "# fnfuzz manifest v1 `date` on `uname -n` (`uname -srm`)"; echo "# cwd `pwd`"; }
-envlines() { env | grep '^FNFUZZ_' | sort | sed 's/^/env /'; }
+envlines() { env | grep '^FNFUZZ_' | grep -v '^FNFUZZ_RESUME=' | grep -v '^FNFUZZ_MANIFEST_LAYOUT=' | sort | sed 's/^/env /'; }
 
 case "$1" in
 write)
@@ -27,6 +27,9 @@ write)
     header
     emit_file harness "$FZ"; emit_file ledger "$LED"; emit_file stock "$STK"; emit_file rebuilt "$REB"
     emit_file script "$0"
+    [ -f "$FZ.c" ] && emit_file source "$FZ.c"
+    [ -f "$FZ.build" ] && { emit_file build "$FZ.build"; sed 's/^/buildinfo /' "$FZ.build"; }
+    [ -n "$FNFUZZ_MANIFEST_LAYOUT" ] && echo "layout $FNFUZZ_MANIFEST_LAYOUT"
     [ -n "$FNFUZZ_PAR_SCRIPT" ] && emit_file script "$FNFUZZ_PAR_SCRIPT"
     [ -n "$FNFUZZ_DATA" ] && emit_file data "$FNFUZZ_DATA"
     for f in "$@"; do emit_file extra "$f"; done
