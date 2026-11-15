@@ -1,0 +1,8 @@
+# gleng_hilo_spec.txt - _gleModifyPixelHILO with VALID pointers (Nov 15, closing run on 3c4e11b1): the plain ledger passes a random int as the second pointer (args 5004ee28 204178c ...); the function loads param_2+0x20 / +0x24 and stores both back, so with an unmapped r4 the rebuilt image faults (st=10) where the stock - whose own image is mapped at a different address - happens to find 0x204178c mapped. With ctx and the pixel record as real arena objects nothing depends on the image load address.
+type HICTX 0x8000
+  randfill 0x00 0x8000 65536
+type HIREC 0x80
+  randfill 0x00 0x80 65536
+func _gleModifyPixelHILO
+  arg 0 ptr HICTX
+  arg 1 ptr HIREC
