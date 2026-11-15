@@ -128,3 +128,9 @@ Classified by their normalised traces (offsets relative to the first argument; `
   (the dead value is now the function's own address); scan of the corpus for stock-range literals used as dereference bases found no other text-address site (data-section literals are rewritten to relocated symbols
   by `link_corpus.py`, verified on psnDecDecodeHwInstruction). Verification on the rebuilt image: see the update below once the image is built.
 `census_summary.py` now carries an EXPLAINED table (row name -> class, gate) for the rows resolved by hand, so each REVIEW row that remains has no recorded explanation yet.
+
+### Update 15:25 - census on the #287-fixed image (HEAD 653b1f3d, md5 of image in ~/rung3/gld_653b1f3d), coverage-guided, 150 executions/function, 419,850 executions
+`trace_diff_census_fuzz150_ring.tsv` (this directory). Gate: **FAIL 0, REVIEW 0**, PASS 2785, OUT-OF-CONTRACT 13, NO-INFO 1 (LAYOUT_ALL). Tiers: IDENTICAL 1391, REORDERED 928, FAULT_SITE 434, READ_SET 26,
+PTR_VALUE_DEP 5 + IMAGE_DATA_DEP 5 + OOB_TABLE_INDEX 3 (out of contract, user decision 3), STOCK_HOISTED_LOAD 3, STOCK_DEAD_ARG_LOAD 2, STOCK_BUG_284 1. psnFormatRgbSource: REORDERED on the formerly faulting input;
+neither psnFormatRgbSource nor psnFormatAlphaSource contains a `lis`/`addis` without a local relocation. Caveats stated honestly: gldValidatePointSize (deliberate #132, the only FAIL of the fixed-trial census) is not
+reached by the fuzz run; command-ring coverage is still tiny (5 functions); 640 rows never return normally in both images (fault-only comparison); the hand-resolved rows are in `census_summary.py` EXPLAINED.
