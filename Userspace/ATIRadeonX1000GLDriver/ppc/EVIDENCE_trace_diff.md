@@ -67,3 +67,13 @@ Reads of the image's own constants / pointer cells (the rebuilt loads addresses 
 497 rows to IDENTICAL (census t: IDENTICAL 1484, REORDERED 1112, FAULT_SITE 131, READ_SET 22, PTR/IMAGE_*_DEP 7, EFFECTS 1, LAYOUT_ALL 42; table file replaced by census t).
 First difference of the 1112 REORDERED-only rows (`Tools/userspace/emu/reorder_kinds.py`): 594 rows store form only (same bytes, different granularity / libc call vs inline copy),
 256 store/store order, 105 load/load, 79 store/load, 73 load/store, 5 other. Examples (stock order is Apple gcc's schedule, e.g. `_gldTerminateLibrary` clears six globals in the order +8,+0xc,+0x10,... vs +0,+0xc,+8,...): pure scheduling.
+
+## Update 13:55 - strict-order experiments (user: strict ordering, "do it"; corpus unchanged)
+1. Compiler flags (whole image, G5 gcc-7, census of 2799 rows x 8 trials each; functions with NO non-identical trial): current -O2 -mtune=970 1419; +-fno-schedule-insns -fno-schedule-insns2 1369;
+   +-fno-schedule-insns2 1397; +-fno-schedule-insns 1466; -mtune=7450 1413. Best-of-all per function (`census_union.py`): 1588 / 2799. Flags move functions both ways; they cannot reach strict order
+   (1211 functions are clean in none of the five images; 630 of them are <=64 bytes, 293 <=128 bytes).
+2. Source pinning with `__asm__ __volatile__("" ::: "memory")` between accesses, in the order of the STOCK trace (hand prototype, 4 functions, then reverted): Object__setThreeWords, IROperand__init and
+   ValueKey__swapSources12 became IDENTICAL in 16/16 trials; HashTableIterator__begin still differs only inside its callee HashTableIterator__advance (itself REORDERED). The corpus source order is NOT the
+   stock order (the stock hoists loads: IROperand__init reads operand[5] BEFORE its first store; setThreeWords reads +8,+0,+4 while the corpus reads [2],[1],[0]), so the pin order must be derived from
+   the stock trace/disassembly per function; Ghidra source order cannot be reused.
+3. Tools added: `census_union.py`, `show_order.py`, `reorder_kinds.py`.
