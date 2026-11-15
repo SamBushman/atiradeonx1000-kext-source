@@ -470,6 +470,8 @@ def compare(a, b, ret_kind):
         keys = ['r1', 'nv', 'fnv'] + {'i': ['r3'], 'd': ['f1'], 'L': ['r3', 'r4']}.get(ret_kind, [])
         for k in keys:
             if ra[k] != rb[k]: ret_ok = False; det.append('reg %s: %r vs %r' % (k, ra[k], rb[k]))
+    ext = lambda ev: [e for e in ev if not (e[0] == 'R' and isinstance(e[1], tuple))]        # reads of the image's own constants / pointer cells are not external behaviour
+    if ret_ok and ext(ea) == ext(eb) and ea != eb: return 'IDENTICAL', 'external trace equal; own-image constant reads differ'
     if ea == eb and ret_ok:
         if ret_kind == 'v' and sa == 'RET' and (ra['r3'] != rb['r3'] or ra['f1'] != rb['f1']): return 'IDENTICAL', 'void: r3/f1 leftovers differ (%x/%x)' % (ra['r3'], rb['r3'])
         return 'IDENTICAL', ''

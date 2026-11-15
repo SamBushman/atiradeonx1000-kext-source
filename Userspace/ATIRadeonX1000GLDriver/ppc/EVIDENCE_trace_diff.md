@@ -61,3 +61,9 @@ Each was identified from a concrete row before the tool was changed; none was as
   differences. Whether they must be eliminated is a gate decision for the user.
 * 42 rows are LAYOUT_ALL (all trials land in the image window) and the emulator has no model for 95 trials (EMUERR) / 75 (TIMEOUT): need better argument generation / more trials.
 * GLEngine, glprog, GA, VA, libGL not yet run through the tool.
+
+## Update 13:30 - strict ordering chosen by the user; own-image constant reads excluded from the ordered trace
+Reads of the image's own constants / pointer cells (the rebuilt loads addresses from its own constant pool where the stock builds them with lis/addi) are not external behaviour; excluding them moves
+497 rows to IDENTICAL (census t: IDENTICAL 1484, REORDERED 1112, FAULT_SITE 131, READ_SET 22, PTR/IMAGE_*_DEP 7, EFFECTS 1, LAYOUT_ALL 42; table file replaced by census t).
+First difference of the 1112 REORDERED-only rows (`Tools/userspace/emu/reorder_kinds.py`): 594 rows store form only (same bytes, different granularity / libc call vs inline copy),
+256 store/store order, 105 load/load, 79 store/load, 73 load/store, 5 other. Examples (stock order is Apple gcc's schedule, e.g. `_gldTerminateLibrary` clears six globals in the order +8,+0xc,+0x10,... vs +0,+0xc,+8,...): pure scheduling.
