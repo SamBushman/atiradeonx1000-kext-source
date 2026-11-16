@@ -159,7 +159,7 @@ def callout_ids(imgs):
 class Sim:
     nargs = None
     MATHF = {'sqrt': 0, 'sqrtf': 0, 'sin': 0, 'cos': 0, 'pow': 0, 'floor': 0, 'ceil': 0, 'log': 0, 'logf': 0, 'exp': 0, 'round': 0, 'roundf': 0, 'frexp': 1, 'exp2': 0, 'log2': 0, 'acos': 0, 'asin': 0, 'atan': 0, 'tan': 0, 'trunc': 0, 'atan2f': 0, 'isnanf': 0}      # double arguments travel in f1..f2, not in GPRs
-    LIBC = {'io_connect_method_scalarI_scalarO': 6, 'io_connect_method_scalarI_structureI': 6, 'io_connect_method_structureI_structureO': 6, 'memcpy': 3, 'memset': 3, 'memmove': 3, 'memcmp': 3, 'bzero': 2, 'strlen': 1, 'strcpy': 2, 'strcmp': 2, 'strncmp': 3, 'strncpy': 3, 'strlcpy': 3, 'strcat': 2, 'strchr': 2, 'strrchr': 2, 'malloc': 1, 'calloc': 2, 'realloc': 2, 'free': 1, 'valloc': 1, 'vfree': 1, 'Unwind_Resume': 1, 'cxa_atexit': 3, 'cxa_guard_acquire': 1, 'cxa_guard_release': 1, 'dlopen': 2, 'dlsym': 2, 'exit': 1, 'fclose': 1, 'fgets': 3, 'fopen': 2, 'fread': 4, 'fwrite': 4, 'getenv': 1, 'getpid': 0, 'index': 2, 'rindex': 2, 'pclose': 1, 'popen': 2, 'puts': 1, 'usleep': 1, 'pthread_mutexattr_init': 1, 'pthread_mutexattr_settype': 2, 'keymgr_get_and_lock_processwide_ptr': 1, 'keymgr_set_and_unlock_processwide_ptr': 2, 'ZdlPv': 1, 'ZdaPv': 1, 'Znwm': 1, 'Znwj': 1, 'Znam': 1, 'Znaj': 1, 'setjmp': 1, 'longjmp': 2, '_setjmp': 1, '_longjmp': 2, 'ecvt': 3, 'fcvt': 3}
+    LIBC = {'io_connect_method_scalarI_scalarO': 6, 'io_connect_method_scalarI_structureO': 6, 'io_connect_method_scalarI_structureI': 6, 'io_connect_method_structureI_structureO': 6, 'memcpy': 3, 'memset': 3, 'memmove': 3, 'memcmp': 3, 'bzero': 2, 'strlen': 1, 'strcpy': 2, 'strcmp': 2, 'strncmp': 3, 'strncpy': 3, 'strlcpy': 3, 'strcat': 2, 'strchr': 2, 'strrchr': 2, 'malloc': 1, 'calloc': 2, 'realloc': 2, 'free': 1, 'valloc': 1, 'vfree': 1, 'Unwind_Resume': 1, 'cxa_atexit': 3, 'cxa_guard_acquire': 1, 'cxa_guard_release': 1, 'dlopen': 2, 'dlsym': 2, 'exit': 1, 'fclose': 1, 'fgets': 3, 'fopen': 2, 'fread': 4, 'fwrite': 4, 'getenv': 1, 'getpid': 0, 'index': 2, 'rindex': 2, 'pclose': 1, 'popen': 2, 'puts': 1, 'usleep': 1, 'pthread_mutexattr_init': 1, 'pthread_mutexattr_settype': 2, 'keymgr_get_and_lock_processwide_ptr': 1, 'keymgr_set_and_unlock_processwide_ptr': 2, 'ZdlPv': 1, 'ZdaPv': 1, 'Znwm': 1, 'Znwj': 1, 'Znam': 1, 'Znaj': 1, 'setjmp': 1, 'longjmp': 2, '_setjmp': 1, '_longjmp': 2, 'ecvt': 3, 'fcvt': 3}
     FLOATARGS = set()       # further callees taking double arguments (none known among the GLDriver imports)
     FPRN = {'sqrt': 1, 'sqrtf': 1, 'sin': 1, 'cos': 1, 'pow': 2, 'floor': 1, 'ceil': 1, 'log': 1, 'logf': 1, 'exp': 1, 'round': 1, 'roundf': 1, 'frexp': 1, 'ecvt': 1, 'fcvt': 1, 'exp2': 1, 'log2': 1, 'acos': 1, 'asin': 1, 'atan': 1, 'tan': 1, 'trunc': 1, 'atan2f': 2, 'isnanf': 1}      # double arguments per callee (the other FPRs are leftovers)
     DBLFIRST = {'ecvt', 'fcvt'}      # (double, int, int*, int*): the double travels in f1 (its GPR shadow is not an argument), the three others in r5..r7
@@ -254,6 +254,7 @@ class Sim:
             f = [0x7ff8000000000000 if (x >> 52) & 0x7ff == 0x7ff and x & ((1 << 52) - 1) else x for x in f]      # a NaN double argument: its payload / sign is not behaviour (same rule as the NaN stores)
             r = [self.nv(x, 4) if not isinstance(x, V) else x for x in r]
             if nm.lstrip('_') in self.VPRINTF: r = self.va_canon(uc, nm.lstrip('_'), r)
+            if nm.lstrip('_') in self.IOIN: r = self.io_canon(nm.lstrip('_'), r)
             st = [self.nv(int.from_bytes(uc.mem_read(sp + 0x38 + 4 * i, 4), 'big'), 4) for i in range(max(0, na - 8))]
             if nm.lstrip('_') in self.EFFECTS and self.libc(uc, nm.lstrip('_'), [uc.reg_read(UC_PPC_REG_0 + i) for i in range(3, 6)]): return
             self.ev.append(('C', nm, tuple(r), tuple(f), tuple(st)))
@@ -276,6 +277,18 @@ class Sim:
                 except UcError: raise Sim._Fault(p)
             raise Sim._Fault(a)
     VPRINTF = {'vsnprintf': (2, 3), 'vsprintf': (1, 2), 'vfprintf': (1, 2), 'vprintf': (0, 1)}      # name: (format argument index, va_list argument index)
+    IOIN = {'io_connect_method_scalarI_scalarO': ((2, 3, 4),), 'io_connect_method_scalarI_structureO': ((2, 3, 4),), 'io_connect_method_scalarI_structureI': ((2, 3, 4), (4, 5, 1)), 'io_connect_method_structureI_structureO': ((2, 3, 1),)}
+    def io_canon(self, bn, r):
+        """IOKit method call-outs: what the kernel receives is the CONTENT of the input buffers (scalar words, or bytes for a structure), not the caller's address of them (the stock spills an argument into its caller's
+        parameter area where the rebuilt corpus uses a local: different addresses, same bytes), so each input pointer is replaced by the bytes it points at (arguments: pointer index, count index, bytes per count unit)."""
+        r = list(r)
+        for pi, ci, unit in self.IOIN[bn]:
+            if len(r) <= ci: continue
+            try:
+                n = r[ci].raw if isinstance(r[ci], V) else r[ci]; ap = r[pi].raw if isinstance(r[pi], V) else r[pi]
+                d = self._rd(ap, min(n * unit, 4096)); r[pi] = V(('IN', bytes(d)), ('IN', bytes(d)))
+            except Exception: pass
+        return r
     def va_canon(self, uc, bn, r):
         """v*printf callout: the va_list argument is a pointer into the caller's frame (the stock spills r8..r10 into its caller's parameter area, the rebuilt corpus into a local array: different
         addresses, same words).  What the callee can observe through it is the words the format consumes (integer conversions one word, `ll` and doubles two, `*` one more), so those words

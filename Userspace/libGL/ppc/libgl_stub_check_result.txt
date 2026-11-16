@@ -1,0 +1,4 @@
+NOCELL _CGLSetCurrentContext stock rebuilt
+NOCALL _CGLGetCurrentContext ('FAULT', [('C', '_pthread_getspecific', ())], 4609434218613702656, -96, [('F', 'write', 19329)]) | ('FAULT', [('C', '_pthread_getspecific', ())], 4609434218613702656, -96, [('F', 'write', 19329)])
+distinct slots reached (stock): 682
+stubs 890, identical tail-call records 888, no cell/other 2
