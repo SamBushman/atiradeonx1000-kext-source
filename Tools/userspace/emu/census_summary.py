@@ -24,7 +24,13 @@ def worst(r):
     return 'IDENTICAL'
 # FAULT_MISMATCH rows resolved by hand from the disassembly of both images (EVIDENCE_trace_diff.md, "The 9 one-sided FAULT_MISMATCH rows", Nov 15):
 # name -> (class, gate). Only applied while the row's worst verdict is FAULT_MISMATCH; a row that gets any worse verdict still reports it.
-EXPLAINED = {'_gleAllocVertexMachine': ('REBUILT_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogExp': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogExp2': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogLinear': ('STOCK_HOISTED_LOAD', 'PASS'),
+EXPLAINED = {# ILReader__decodeInstruction / nextInstruction: the stock indexes its opcode table with the unchecked 16-bit opcode (first mismatching trial: fault address 1344066140 = table base 1342201180 + 51804*36 + 16, opcode word 51804 read just before); the rebuilt carries the deliberate #64 clamp of the opcode index (see ILReader__currentOpcode)
+  'ILReader__decodeInstruction': ('DELIBERATE_64_CLAMP', 'PASS'), 'ILReader__nextInstruction': ('DELIBERATE_64_CLAMP', 'PASS'),
+  # Program__assignExportSlotsByKind: the stock stores through an unchecked slot index into a 51-word frame table (#283), the rebuilt has the deliberate bound; first mismatch: stock faults on a write at 3539435692, rebuilt stays in range
+  'Program__assignExportSlotsByKind': ('STOCK_BUG_283', 'PASS'),
+  # R300VMachineAssembler__findFoldableMovePair: the stock evaluates `lwz r3,0x88(this)` as the first argument of the helper at 0x19a538, which reads only r4 (stock 0x19a540 `lwz r2,0x88(r4)`; r3 is never used): a dead argument load
+  'R300VMachineAssembler__findFoldableMovePair': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
+'Program__interpSlotOfIlType': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'KhanPs__vslot62_lookupTableEntry': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'opcodeInfoIsVsFlagBit2': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), '_gleAllocVertexMachine': ('REBUILT_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogExp': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogExp2': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogLinear': ('STOCK_HOISTED_LOAD', 'PASS'),
              'R300MachineAssembler__vslot65_declareNodeRegisters': ('STOCK_DEAD_ARG_LOAD', 'PASS'), 'R520MachineAssembler__vslot65_declareNodeRegisters': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
              'opcodeInfoRgbHwOpcode': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'gld_applyAnisotropyOverride': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
              'IRInst__scaleByOutputScale': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'Program__laneKindOfIlType': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
@@ -53,6 +59,16 @@ EXPLAINED_ANY = {'Compiler__getOrCreateLoadConstN': ('UNINIT_REBUILT', 'OOB_LOCA
     # extended glprog census, EVIDENCE_trace_diff.md: the random format pointer 0x20000000 is the START OF THE STOCK's __DATA segment (offset 0x10000000 from its text; the rebuilt image has __DATA right after its text), so only the stock can read the string; same _vsprintf buffer/format values in both calls
     # GLDriver extended census: documented deliberate #64 clamp of the ILReader opcode index
     'ILReader__currentOpcode': ('EFFECTS', 'DELIBERATE_64_CLAMP', 'PASS'),
+    # Nov 16: WriteMask__fromSelectWord: the stock stores a word it never reads again (dead store, trial where only the stock writes); ILReader__appendFloatConst: the EFFECTS rows come from double arguments that are not single-exact (stock stfs
+    # truncates, the rebuilt rounds); with TD_FLOATEXACT=1 (what a caller of the prototyped float parameters passes) 482 runs: IDENTICAL 394, REORDERED 50, FAULT_SITE 37, no EFFECTS (v19/rows/ILReader__appendFloatConst_fe.log)
+    'WriteMask__fromSelectWord': ('EFFECTS', 'STOCK_DEAD_STORE', 'PASS'),
+    # Nov 16 (v20 image, 18-row rerun): Compiler__getOrCreateConstVectorN indexes the 5-word local lookupKeyWords[constCount] unchecked (corpus part_026.c, same as getOrCreateLoadConstN): every mismatching trial has the random constCount 29 (decision 3, out of contract)
+    'Compiler__getOrCreateConstVectorN': ('UNINIT_REBUILT', 'OOB_LOCAL_INDEX', 'OUT-OF-CONTRACT'),
+    # extvsCreateVectorSymbolChain: storageClassTable[kindArray[i]] indexes an 8-word local table (3 entries set) with an unchecked byte; the shown trials read kind 32 / 15 (v20/rows/extvsCreateVectorSymbolChain_v.log): the stock reads other frame words (0), the rebuilt its fill pattern; unchecked out-of-range local index
+    'extvsCreateVectorSymbolChain': ('UNINIT_REBUILT', 'OOB_LOCAL_INDEX', 'OUT-OF-CONTRACT'),
+    # gldValidatePointSize: the deliberate #132 GL_POINT_SIZE_MIN/MAX clamp (stock 0 vs rebuilt 63944 at the `sth` to ctx+0x1ccc); every differing store is that one, EVIDENCE_trace_diff.md; unchanged by the #297 fix (re-run Nov 16)
+    'gldValidatePointSize': ('EFFECTS', 'DELIBERATE_132_CLAMP', 'PASS'),
+    'ILReader__appendFloatConst': ('EFFECTS', 'INPUT_NOT_SINGLE_EXACT', 'PASS'),
     'TPPStreamCompiler__warning': ('EFFECTS', 'INPUT_IN_IMAGE_WINDOW', 'PASS'),
     # NO-INFO rows that return the address of an image-resident string/table (every trial layout-dependent): contents compared with Tools/userspace/emu/strret_check.py, EVIDENCE_trace_diff.md
     'GetPreprocessorBuiltinString': ('LAYOUT_ALL', 'RETURNS_IMAGE_CONTENT_VERIFIED', 'PASS'),

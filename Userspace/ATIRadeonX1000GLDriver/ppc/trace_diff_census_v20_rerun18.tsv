@@ -1,0 +1,19 @@
+#id	name	rc	pc	size	stock_cov	reb_cov	runs	IDENTICAL	REORDERED	READ_SET	FAULT_SITE	FAULT_MISMATCH	EFFECTS	EMUERR	TIMEOUT	UNINIT_REBUILT	UNINIT_OTHER	end_states	first_nonidentical	LAYOUT_DEP	PTR_VALUE_DEP	IMAGE_DATA_DEP
+388	gldValidatePolygonOffset	v	iiiiiii	476	110	116	453	235	135	59	24	0	0	0	0	0	0	FAULT/FAULT:305,RET/RET:148	FAULT_PARTIAL: same fault ('read', 1803732321); accesses completed before it differ: reads: only stock reads (1342541088, 4)	0	0	0
+389	gldValidatePointSize	v	p	692	159	163	377	0	51	37	228	0	61	0	0	0	0	FAULT/FAULT:228,RET/RET:149	EFFECTS: segment 0: write (1342327472, 2): stock [0] vs rebuilt [63944]	0	0	0
+418	extvsCreateVectorSymbolChain	v	pnppp	260	65	65	417	149	0	0	1	0	2	0	3	1	261	FAULT/FAULT:403,RET/RET:11,TIMEOUT/TIMEOUT:3	UNINIT_REBUILT: rebuilt differs between stack fills: same fault ('fetch', 0); stores completed before it differ: write (1342309584, 4): stock [0] vs rebuilt [1515870810]	0	0	0
+880	gld_quantizePointSizeInt	i	id	164	41	41	479	395	0	84	0	0	0	0	0	0	0	FAULT/FAULT:359,RET/RET:120	READ_SET: segment 0: only stock reads (1342498640, 4)	0	0	0
+231	gld_forwardToStream	v	iiiiiii	12	3	3	347	41	194	0	66	0	0	0	6	0	0	FAULT/FAULT:327,RET/RET:14,TIMEOUT/TIMEOUT:6	FAULT_PARTIAL: same fault ('read', 244); accesses completed before it differ: reads: only stock reads (1342521272, 4)	40	0	0
+427	extvsBindShader	v	pi	292	37	37	920	920	0	0	0	0	0	0	0	0	0	FAULT/FAULT:844,RET/RET:76		0	0	0
+1268	ILReader__decodeInstruction	i	ppp	1764	289	283	425	300	28	0	56	26	0	0	15	0	0	FAULT/FAULT:394,RET/RET:16,TIMEOUT/TIMEOUT:15	FAULT_MISMATCH: stock ('F', 'read', 1344267140) vs rebuilt ('F', 'write', 21)	0	0	0
+1504	Compiler__getOrCreateConstVectorN	v	iiiiiiii	532	78	72	911	121	48	0	221	274	6	0	2	217	22	FAULT/FAULT:909,TIMEOUT/FAULT:2	UNINIT_REBUILT: rebuilt differs between stack fills: stock ('read', 16) vs rebuilt ('read', 1515870826)	0	0	0
+1851	Program__assignExportSlotsByKind	v	ppp	308	67	61	1050	501	437	0	48	56	0	0	8	0	0	FAULT/FAULT:1017,RET/RET:25,TIMEOUT/TIMEOUT:8	FAULT_MISMATCH: stock ('F', 'write', 3539435692) vs rebuilt ('F', 'read', 2603409283)	0	0	0
+1853	Program__assignSharedExportSlots	v	ippp	396	87	86	933	770	132	0	1	15	0	0	15	0	0	FAULT/FAULT:916,RET/RET:2,TIMEOUT/TIMEOUT:15	FAULT_MISMATCH: stock ('F', 'write', 3207395080) vs rebuilt ('F', 'read', 148)	0	0	0
+2269	KhanPs__vslot85_findOrEncodeConstantVector	v	pppp	780	65	63	1028	458	293	0	0	0	0	0	5	0	272	FAULT/FAULT:1023,TIMEOUT/TIMEOUT:5	REORDERED: same writes/reads per segment; order differs	0	0	0
+2293	KhanVs__vslot85_findOrEncodeConstantVector	v	ippp	344	43	42	1048	339	261	0	0	0	0	0	6	0	441	FAULT/FAULT:1042,TIMEOUT/TIMEOUT:6	REORDERED: same writes/reads per segment; order differs	1	0	0
+2439	RewriteStack__pushOperandKeys	i	npi	696	147	137	315	299	11	0	0	0	0	0	1	0	4	FAULT/FAULT:258,RET/RET:56,TIMEOUT/TIMEOUT:1	REORDERED: same writes/reads per segment; order differs	0	0	0
+1273	ILReader__nextInstruction	i	p	5640	64	66	586	490	10	0	37	8	0	0	41	0	0	FAULT/FAULT:542,FAULT/TIMEOUT:2,RET/RET:3,TIMEOUT/TIMEOUT:39	FAULT_MISMATCH: stock ('F', 'read', 1344066140) vs rebuilt ('F', 'write', 0)	0	0	0
+2446	Program__runPeepholeRewrite	v	p	976	235	232	1451	113	1338	0	0	0	0	0	0	0	0	FAULT/FAULT:1449,RET/RET:2	REORDERED: same writes/reads per segment; order differs	0	0	0
+2910	FudoPs__vslot85_findOrEncodeConstantVector	v	ippp	344	64	62	953	393	233	0	0	0	0	0	10	0	317	FAULT/FAULT:943,TIMEOUT/TIMEOUT:10	REORDERED: same writes/reads per segment; order differs	0	0	0
+3065	R300VMachineAssembler__findFoldableMovePair	i	pipp	908	94	93	515	47	0	240	180	3	0	0	7	0	0	FAULT/FAULT:438,FAULT/RET:3,RET/RET:67,TIMEOUT/TIMEOUT:7	FAULT_MISMATCH: stock FAULT [('read', 138)] | rebuilt RET []	38	0	0
+1006	psnDecodedToProgram	v	ppp	1548	299	303	787	114	0	12	647	1	0	0	0	0	0	FAULT/FAULT:715,RET/RET:72	FAULT_MISMATCH: stock ('F', 'write', 1342701568) vs rebuilt ('F', 'read', 270590002)	13	0	0
