@@ -170,10 +170,10 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     do {
       if (*(char *)laneSwizzleCursor != '\x04') {
         if (noLaneSeen) {
-          splatValue = *loopPtr;
+          splatValue = *(float *)loopPtr;      /* stock lfs: the constant word is a float bit pattern, not an integer to convert */
           noLaneSeen = false;
         }
-        else if (*loopPtr != splatValue) {
+        else if (*(float *)loopPtr != splatValue) {
           allLanesEqual = 0;
         }
       }

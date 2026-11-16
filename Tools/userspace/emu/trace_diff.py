@@ -15,6 +15,8 @@ not recorded: how a compiler lays out its frame is not external.
 """
 import sys, os, struct, zlib, bisect, random, re, math
 FLOAT_EXACT = os.environ.get('TD_FLOATEXACT') == '1'
+FLOAT_EDGE = os.environ.get('TD_FLOATEDGE') == '1'       # TD_FLOATEDGE=1: the double-argument pool also holds values around 2^23..2^26 (where a single-precision add/sub differs from a double one before an integer conversion) and their halves
+EDGE_VALS = (8388608.0, 8388609.0, -8388608.0, -8388609.0, 16777215.0, 16777216.0, -16777216.0, -16777217.0, 33554432.0, -33554432.0, 67108864.0, -67108864.0, 12345678.5)
 sys.path.insert(0, os.path.expanduser('~/g5logs/fnf_237/pypkgs'))
 from unicorn import *
 from unicorn.ppc_const import *
@@ -494,6 +496,7 @@ class Gen:
     def dbl(self):
         r = self.r; k = r.randrange(12)
         v = [0.0, 1.0, -1.0, 0.5, 2.0, r.uniform(-4, 4), r.uniform(-1000, 1000), r.uniform(0, 1), 1e-3, 65536.0, r.uniform(-1e6, 1e6), -0.0][k]
+        if FLOAT_EDGE and r.randrange(4) == 0: v = r.choice(EDGE_VALS)
         if FLOAT_EXACT: v = struct.unpack('>f', struct.pack('>f', v))[0]       # TD_FLOATEXACT=1: every double argument is exactly representable as a single (what a caller of a prototyped `float` parameter passes)
         return struct.unpack('>Q', struct.pack('>d', v))[0]
     def arena(self):
@@ -811,7 +814,7 @@ def mutate(rng, ia, da, sw, arena, reads):
             p = ia[rng.randrange(8)] - ARENA
             if 0 <= p <= len(a) - 0x200: n = rng.choice((0x40, 0x100, 0x200)); a[p:p+n] = bytes(n)
         elif r < 92:
-            v = rng.choice((0.0, 1.0, -1.0, 0.5, 255.0, 1e30, -1e30, float('nan'), float('inf')))
+            v = rng.choice((0.0, 1.0, -1.0, 0.5, 255.0, 1e30, -1e30, float('nan'), float('inf')) + (EDGE_VALS if FLOAT_EDGE else ()))
             if FLOAT_EXACT: v = struct.unpack('>f', struct.pack('>f', v))[0]
             da[rng.randrange(len(da))] = struct.unpack('>Q', struct.pack('>d', v))[0]
         else: sw[rng.randrange(16)] = pool()

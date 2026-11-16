@@ -341,10 +341,10 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     do {
       if (*(char *)laneCursor != '\x04') {
         if (firstLane) {
-          uniformValue = *constantCursor;
+          uniformValue = *(float *)constantCursor;      /* stock lfs: the constant word is a float bit pattern, not an integer to convert */
           firstLane = false;
         }
-        else if (*constantCursor != uniformValue) {
+        else if (*(float *)constantCursor != uniformValue) {
           isUniform = 0;
         }
       }
@@ -1446,10 +1446,10 @@ int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     do {
       if (*(char *)laneCursor != '\x04') {
         if (firstLane) {
-          uniformValue = *constantCursor;
+          uniformValue = *(float *)constantCursor;      /* stock lfs: the constant word is a float bit pattern, not an integer to convert */
           firstLane = false;
         }
-        else if (*constantCursor != uniformValue) {
+        else if (*(float *)constantCursor != uniformValue) {
           isUniform = 0;
         }
       }
