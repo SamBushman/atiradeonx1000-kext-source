@@ -245,6 +245,13 @@ PATCHES = {
     # count ("No Client Attribute Requests", the attribute / uniform binding lists were missing: GLSL differential v_builtin_vars).
     'TGenericLinker__GetBindingTableString': _scoped('glprog', _conv_with('TGenericLinker::GetBindingTableString (0x97bb4894)', [('a5,in_stack_ffffff88);', 'a5,uVar1);')])),
 
+    # _idstr (glprog, stock 0x97b8a330): `if (*src - 0x2e < 2)` tests for '.' (0x2e) or '/' (0x2f). The stock compiles it as the unsigned range check
+    # `addi r0,r0,-0x2e; cmplwi r0,1; bgt` (found by the trace-differential census + Tools/userspace/cmp_sign_audit.py: stock 0 signed / 1 unsigned
+    # ordering compares, rebuilt 1 / 0). Ghidra printed the difference as a plain int compare, so the rebuilt `cmpwi` is also true for every char below
+    # 0x2e (the difference is negative: '-', ' ', '$', ...), which the rebuilt replaced by '_' where the stock keeps the character (non-alphanumeric
+    # path). Class: lost unsigned compare (`x - C < N`). C: the subtraction is unsigned.
+    '_idstr': _scoped('glprog', _conv_with('_idstr (0x97b8a330)', [('if (*param_1 - 0x2e < 2) {', 'if ((uint)(*param_1 - 0x2e) < 2) {')])),
+
     # --- data symbols Ghidra typed inconsistently (word index in one function, byte offset in another) -----------------------------------
     # _gPollAllocThreadData (glprog, data 0xa7b7ba1c) is a pointer to an 8-byte record { TPoolAllocator *pool; int; } (InitializeGlobalPools, stock
     # 0x97b9fe54: `bl operator new(8); stw r30,4(r3); stw r3,0(r28); stw r29,0(r3)` - word stores at +0 and +4). The corpus declares it `unsigned char *`

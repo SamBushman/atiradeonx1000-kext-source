@@ -990,7 +990,7 @@ int _idstr(srcCursor, pool)
       isAlnum = (uint)(maskruneResult != 0);
     }
     if (isAlnum == 0) {
-      if (*srcCursor - 0x2e < 2) {
+      if ((uint)(*srcCursor - 0x2e) < 2) {
         *dstCursor = 0x5f;
         goto setDstCursor;
       }
