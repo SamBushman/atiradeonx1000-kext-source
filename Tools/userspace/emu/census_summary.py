@@ -68,6 +68,13 @@ EXPLAINED_ANY = {'Compiler__getOrCreateLoadConstN': ('UNINIT_REBUILT', 'OOB_LOCA
     'extvsCreateVectorSymbolChain': ('UNINIT_REBUILT', 'OOB_LOCAL_INDEX', 'OUT-OF-CONTRACT'),
     # gldValidatePointSize: the deliberate #132 GL_POINT_SIZE_MIN/MAX clamp (stock 0 vs rebuilt 63944 at the `sth` to ctx+0x1ccc); every differing store is that one, EVIDENCE_trace_diff.md; unchanged by the #297 fix (re-run Nov 16)
     'gldValidatePointSize': ('EFFECTS', 'DELIBERATE_132_CLAMP', 'PASS'),
+    # callers that reach gldValidatePointSize inside the run: the only differing store is the same `sth` pair (stock 0x4ee50/0x4ee54, rebuilt 0x581f4/0x581f8) found by replaying the first differing trial (Nov 16, ~/g5logs/fnf_237/v20/wr_pc.py); EVIDENCE_trace_diff.md
+    'gldPrimWrapperTriangles_23a24': ('EFFECTS', 'DELIBERATE_132_CLAMP', 'PASS'),
+    'gldPrimWrapperQuadStrip_23a24': ('EFFECTS', 'DELIBERATE_132_CLAMP', 'PASS'),
+    'gldPrimWrapperLineLoop_23a24': ('EFFECTS', 'DELIBERATE_132_CLAMP', 'PASS'),
+    'gld_reserveDrawSpace': ('EFFECTS', 'DELIBERATE_132_CLAMP', 'PASS'),
+    'gld_emitStampFencePacket': ('EFFECTS', 'DELIBERATE_132_CLAMP', 'PASS'),
+    'gldPrimInlineQuadStrip': ('EFFECTS', 'DELIBERATE_132_CLAMP', 'PASS'),
     'ILReader__appendFloatConst': ('EFFECTS', 'INPUT_NOT_SINGLE_EXACT', 'PASS'),
     'TPPStreamCompiler__warning': ('EFFECTS', 'INPUT_IN_IMAGE_WINDOW', 'PASS'),
     # NO-INFO rows that return the address of an image-resident string/table (every trial layout-dependent): contents compared with Tools/userspace/emu/strret_check.py, EVIDENCE_trace_diff.md
