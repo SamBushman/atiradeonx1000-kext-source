@@ -75,6 +75,9 @@ EXPLAINED_ANY = {'Compiler__getOrCreateLoadConstN': ('UNINIT_REBUILT', 'OOB_LOCA
     'gld_reserveDrawSpace': ('EFFECTS', 'DELIBERATE_132_CLAMP', 'PASS'),
     'gld_emitStampFencePacket': ('EFFECTS', 'DELIBERATE_132_CLAMP', 'PASS'),
     'gldPrimInlineQuadStrip': ('EFFECTS', 'DELIBERATE_132_CLAMP', 'PASS'),
+    'ffvpValidateProgram': ('EFFECTS', 'DELIBERATE_132_CLAMP', 'PASS'),
+    # gld_uploadParamConstants: with a program record whose constant count is 0 the stock's alloca(0) buffer sits at the top of its frame and the callee writes 8 words there, over the saved r25-r27 slots (stock returns with r25-r27 clobbered; the rebuilt's frame layout keeps them); inconsistent record (callee writes more than the record's count says) = out of contract, whether a real program can reach it is NOT ESTABLISHED; EVIDENCE_trace_diff.md
+    'gld_uploadParamConstants': ('EFFECTS', 'ALLOCA_CALLEE_OVERFLOW_LAYOUT', 'OUT-OF-CONTRACT'),
     'ILReader__appendFloatConst': ('EFFECTS', 'INPUT_NOT_SINGLE_EXACT', 'PASS'),
     'TPPStreamCompiler__warning': ('EFFECTS', 'INPUT_IN_IMAGE_WINDOW', 'PASS'),
     # NO-INFO rows that return the address of an image-resident string/table (every trial layout-dependent): contents compared with Tools/userspace/emu/strret_check.py, EVIDENCE_trace_diff.md

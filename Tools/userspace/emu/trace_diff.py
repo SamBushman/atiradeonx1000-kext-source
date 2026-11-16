@@ -230,7 +230,7 @@ class Sim:
 
     entries = {}
     def snap_entry(self, uc, name):
-        r1 = uc.reg_read(UC_PPC_REG_1); items = []
+        r1 = uc.reg_read(UC_PPC_REG_1); items = []; pts = [uc.reg_read(UC_PPC_REG_0 + j) for j in range(3, 11)]
         for i in range(3, 11):
             p = uc.reg_read(UC_PPC_REG_0 + i)
             if not (r1 <= p < self.sp0 and p & 3 == 0): continue
@@ -239,10 +239,14 @@ class Sim:
                 q = p + 4 * k
                 if q + 4 > self.sp0 or not all(b in self.fwb for b in range(q, q + 4)): break
                 w = int.from_bytes(uc.mem_read(q, 4), 'big')
+                if STACK <= w < STACK + STACK_SIZE: ws.append(V(w, ('OWNFRAME',))); continue       # any frame address: the layout is the compiler's
                 if (w >> 23) & 0xff == 0xff and w & 0x7fffff: w = 0x7fc00000        # NaN payloads are one class (see the stores)
                 ws.append(self.nv(w, 4))
-            if ws: items.append((i - 3, tuple(ws)))
-        if items: self.ent.append((name, tuple(items)))
+            if ws:
+                tr = [p, uc.reg_read(UC_PPC_REG_LR), 0]; self.act.append(tr)
+                cap = min([(q - p) // 4 for q in pts if p < q < self.sp0] + [16])        # the next pointer argument into the frame starts another block
+                items.append((i - 3, tuple(ws), tr, cap))
+        if items: self.ent.append((name, items))
 
     def own_frame(self, a): return STACK <= a < self.sp0 + 0x38 + 4 * getattr(self, 'nstack', 0)      # incl. the incoming stack-parameter words (9th+ arguments): the callee owns them; everything below sp0 down to the stack's end is this call's frames, alloca included (gld_uploadParamConstants allocas count*16 bytes of a random count: more than the 0x40000 window the first census used) (PowerPC ABI), a store there is not an external effect
 
@@ -279,6 +283,7 @@ class Sim:
         if addr == STOP: self.status = 'RET'; uc.emu_stop(); return
         if not (CALLOUT <= addr < CALLOUT + 0x10000) and not (self.img.lo <= addr - self.slide < self.img.end) and NULLPAGE <= addr:       # a wild branch into non-code (arena / stack data): whatever executes there is arbitrary, so the run ends at the fetch
             self.ev.append(('F', 'wild', self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
+        if ENTRYARGS and self.act: self.act = [tr for tr in self.act if tr[1] != addr]
         if ENTRYARGS and self.n > 1 and (addr - self.slide) in self.entries: self.snap_entry(uc, self.entries[addr - self.slide])
         hook = STOCK_HOOKS.get(addr - self.slide) if self.img.is_stock else None
         if CALLOUT <= addr < CALLOUT + 0x10000 or hook:
@@ -422,6 +427,9 @@ class Sim:
 
     def on_read(self, uc, access, addr, size, value, ud):
         if addr < NULLPAGE: self.ev.append(('F', 'read', addr)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; self.fa = addr; uc.emu_stop(); return
+        if ENTRYARGS and self.act:
+            for tr in self.act:
+                if tr[0] <= addr < tr[0] + 64: tr[2] = max(tr[2], addr + size - tr[0])       # the extent of the record the callee (until it returns to lr) actually reads
         if self.in_stub() or self.own_frame(addr): return
         try: v = int.from_bytes(uc.mem_read(addr, size), 'big') if size <= 8 else bytes(uc.mem_read(addr, size)).hex()
         except Exception: v = None
@@ -464,7 +472,7 @@ class Sim:
         for i, b in enumerate(dargs[:13]): uc.reg_write(UC_PPC_REG_FPR1 + i, b)
         uc.reg_write(UC_PPC_REG_1, self.sp0); uc.reg_write(UC_PPC_REG_LR, STOP)
         self.entry_nv = [uc.reg_read(UC_PPC_REG_0 + i) for i in range(14, 32)]
-        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.fwb = set(); self.ent = []; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
+        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.fwb = set(); self.ent = []; self.act = []; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
         try: uc.emu_start(entry + self.slide, STOP, count=limit + 10)
         except UcError as e:
             if self.status == '?':
@@ -487,7 +495,7 @@ class Sim:
         regs = {'r3': uc.reg_read(UC_PPC_REG_3), 'r4': uc.reg_read(UC_PPC_REG_4), 'f1': uc.reg_read(UC_PPC_REG_FPR1), 'r1': uc.reg_read(UC_PPC_REG_1) - self.sp0,
                 'nv': tuple(uc.reg_read(UC_PPC_REG_0 + i) for i in range(14, 32)), 'fnv': tuple(uc.reg_read(UC_PPC_REG_FPR0 + i) for i in range(14, 32)),
                 'cr': uc.reg_read(UC_PPC_REG_CR) & 0x00fff000, 'fpc': getattr(self, 'fpc', None) if self.status == 'FAULT' else None}
-        if ENTRYARGS: regs['ent'] = self.ent
+        if ENTRYARGS: regs['ent'] = [(n, tuple((i, ws, (tr[2] + 3) // 4, cap) for i, ws, tr, cap in it)) for n, it in self.ent]
         return self.status, self.ev, regs, self.cov
 
 # ---------------------------------------------------------------- inputs
@@ -686,12 +694,12 @@ def classify_effect(ea, eb, det):
 VARARG_CALLEES = ('printf', 'sprintf', 'snprintf', 'fprintf', 'vprintf', 'vsprintf', 'vsnprintf', 'vfprintf', 'sscanf', 'scanf')
 
 def ent_match(x, y):
-    """two recorded argument sets agree: for every argument index recorded in both, the words agree over the shorter of the two runs (the words after the end of the buffer belong to a neighbouring local whose place is the compiler's choice; an argument register that holds a stale frame pointer in only one image is not an argument)"""
-    dy = dict(y)
-    for i, ws in x:
+    """two recorded argument sets agree: for every argument index recorded in both, the words agree over the extent the callee reads of the record (the larger of the two images' read extents, at least the first word), never past the shorter record and never past the next pointer argument of the same call (the words after that belong to another block or to a neighbouring local whose place is the compiler's choice); an argument register that holds a stale frame pointer in only one image is not an argument"""
+    dy = {i: (ws, ext, cap) for i, ws, ext, cap in y}
+    for i, ws, ext, cap in x:
         if i in dy:
-            n = min(len(ws), len(dy[i]))
-            if ws[:n] != dy[i][:n]: return False
+            n = min(max(1, ext, dy[i][1]), len(ws), len(dy[i][0]), cap, dy[i][2])
+            if ws[:n] != dy[i][0][:n]: return False
     return True
 
 def ent_diff(ea, eb):
