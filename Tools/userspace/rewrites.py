@@ -522,6 +522,7 @@ def rewrite_pair_results(chunk, ret64):
     # the right-hand side is parsed, not matched: Ghidra wraps a long call after its name (`uVar64 = TParseContext__addConstMatrixNode\n
     # (param_1,...)`: yyparse's constant-matrix index node came out null - `m[1]` of a `const mat2` typed as `const float`), and an indirect call
     # (`(**(code **)(*p + 0x18))(p)`, `code` returns int) is a 32-bit result too
+    code_vars = set(re.findall(r'(?m)^\s+code\s*\*\s*(\w+);', body))
     n = 0; out = []; i = 0; pair_vars = set()
     for m in re.finditer(r'(?m)(?<![\w.])(%s) = ' % '|'.join(sorted(map(re.escape, v64))), body):
         st = m.end()
@@ -539,9 +540,13 @@ def rewrite_pair_results(chunk, ret64):
                     opens.append(j)
                 d += 1
             elif c == ')':
+                if d == 0:
+                    break       # the closing parenthesis of an enclosing expression: `if (a && (x = call(..), y = ..))`
                 d -= 1
             elif c == ';' and d == 0:
                 break
+            elif c == ',' and d == 0:
+                break           # an assignment inside a comma expression ends at the comma
             j += 1
         rhs = body[st:j]
         if not rhs.rstrip().endswith(')') or len(opens) < 1:
@@ -552,6 +557,8 @@ def rewrite_pair_results(chunk, ret64):
             fn = mfn.group(1) or mfn.group(2)
             if fn in ret64 or fn.startswith(('CONCAT', 'GH_', 'SUB')):
                 continue
+        elif re.match(r'^\(\*\s*(\w+)\)$', callee) and re.match(r'^\(\*\s*(\w+)\)$', callee).group(1) in code_vars:
+            pass           # a call through a local `code *` variable (`(*ctxPtr24c)(0x90)`; `code` returns int)
         elif not re.match(r'^\(\*+\s*\((?:code|int \(\*\)\(\))\s*\*', callee):
             continue       # not a call (an expression, a cast)
         out.append(body[i:m.start()])
