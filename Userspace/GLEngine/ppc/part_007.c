@@ -4196,16 +4196,16 @@ int _gleSetAttrib(param_1, param_2, param_3)
         *(float *)(param_1 + 0x320c) = param_3[0xc];
         *(float *)(param_1 + 0x3210) = param_3[0xd];
         *(float *)(param_1 + 0x3214) = param_3[0xe];
-        _gleCopyPixelMapi(param_3 + 0xf,param_1 + 0x3248,param_3[0xa0f],param_1 + 0x3270);
-        _gleCopyPixelMapi(param_3 + 0x90f,param_1 + 0x326c,param_3[0xa10],param_1 + 0x3274);
-        _gleCopyPixelMapf(param_3 + 0x10f,param_1 + 0x324c,param_3[0xa11],param_1 + 0x3278);
-        _gleCopyPixelMapf(param_3 + 0x20f,param_1 + 0x3250,param_3[0xa12],param_1 + 0x327c);
-        _gleCopyPixelMapf(param_3 + 0x30f,param_1 + 0x3254,param_3[0xa13],param_1 + 0x3280);
-        _gleCopyPixelMapf(param_3 + 0x40f,param_1 + 0x3258,param_3[0xa14],param_1 + 0x3284);
-        _gleCopyPixelMapf(param_3 + 0x50f,param_1 + 0x325c,param_3[0xa15],param_1 + 0x3288);
-        _gleCopyPixelMapf(param_3 + 0x60f,param_1 + 0x3260,param_3[0xa16],param_1 + 0x328c);
-        _gleCopyPixelMapf(param_3 + 0x70f,param_1 + 0x3264,param_3[0xa17],param_1 + 0x3290);
-        uVar15 = _gleCopyPixelMapf(param_3 + 0x80f,param_1 + 0x3268,param_3[0xa18],param_1 + 0x3294)
+        _gleCopyPixelMapi(param_3 + 0xf,param_1 + 0x3248,*(int *)(param_3 + 0xa0f),param_1 + 0x3270);
+        _gleCopyPixelMapi(param_3 + 0x90f,param_1 + 0x326c,*(int *)(param_3 + 0xa10),param_1 + 0x3274);
+        _gleCopyPixelMapf(param_3 + 0x10f,param_1 + 0x324c,*(int *)(param_3 + 0xa11),param_1 + 0x3278);
+        _gleCopyPixelMapf(param_3 + 0x20f,param_1 + 0x3250,*(int *)(param_3 + 0xa12),param_1 + 0x327c);
+        _gleCopyPixelMapf(param_3 + 0x30f,param_1 + 0x3254,*(int *)(param_3 + 0xa13),param_1 + 0x3280);
+        _gleCopyPixelMapf(param_3 + 0x40f,param_1 + 0x3258,*(int *)(param_3 + 0xa14),param_1 + 0x3284);
+        _gleCopyPixelMapf(param_3 + 0x50f,param_1 + 0x325c,*(int *)(param_3 + 0xa15),param_1 + 0x3288);
+        _gleCopyPixelMapf(param_3 + 0x60f,param_1 + 0x3260,*(int *)(param_3 + 0xa16),param_1 + 0x328c);
+        _gleCopyPixelMapf(param_3 + 0x70f,param_1 + 0x3264,*(int *)(param_3 + 0xa17),param_1 + 0x3290);
+        uVar15 = _gleCopyPixelMapf(param_3 + 0x80f,param_1 + 0x3268,*(int *)(param_3 + 0xa18),param_1 + 0x3294)
         ;
         if (*param_3 == FLOAT_00108e54) {
           uVar4 = *(uint *)(param_1 + 0x3414) & 0xffffbfff;

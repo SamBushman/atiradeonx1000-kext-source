@@ -202,6 +202,12 @@ PATCHES = {
     # byte load/store through them is `*pcVar4` / `*pcVar7` on a function designator; C: access them as bytes. (Pointer arithmetic on `code *` is a GNU
     # extension that steps by 1, which is the stock's +1 / +4 steps as printed.)
     '_gleDrawArraysOrElements_Comp': _scoped('gleng', _conv_with('_gleDrawArraysOrElements_Comp', [('cVar1 = *pcVar4;', 'cVar1 = *(char *)pcVar4;'), ('*pcVar7 = cVar1;', '*(char *)pcVar7 = cVar1;')])),
+    # _gleSetAttrib, case 0x20 (GL_PIXEL_MODE_BIT restore; gleng, stock 0x4ad38, call setups at stock 0x4b1d8..0x4b290): each of the ten _gleCopyPixelMap{i,f} calls passes the
+    # element count `lwz r5,0x283c(r5)` .. `lwz r5,0x2860(r26)`, an INTEGER word of the saved-attribute record. Ghidra typed the record pointer `float *`, so `param_3[0xa0f]` was
+    # printed as a float read; the callee is unprototyped (K&R), so the float was promoted to double (`lfs; stfd; lwz r5; lwz r6`) and the callee read the HIGH WORD of the double as its
+    # count and the next argument (the destination pointer) from the wrong register (found by trace_diff.py, row _gleSetAttrib: rebuilt faulted in _gleCopyPixelMapi reading *(r6 = low word of
+    # the double); the stock continued to realloc). C: read the word as int, as the stock does.
+    '_gleSetAttrib': _scoped('gleng', _conv_with('_gleSetAttrib', [('param_3[0x%x]' % k, '*(int *)(param_3 + 0x%x)' % k) for k in range(0xa0f, 0xa19)])),
     # RETIRED 2026-09-25 (issue #71): yyparse (both TTypeLine _M_insert_aux sites), removeChildNode#1 (erase), removeChildNode#2 (_M_insert_aux) and the
     # two C2 -> C4 constructor aliases. Each dropped/misplaced argument was a symptom of the callee's by-value iterator / tag parameters (a
     # `__normal_iterator` struct, a 1-byte `forward_iterator_tag` with UNASSIGNED storage), which make the decompiler lose the argument registers.

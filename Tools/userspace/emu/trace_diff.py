@@ -13,7 +13,7 @@ not recorded: how a compiler lays out its frame is not external.
         --symmap F      stock symbol_map.tsv (name by address)      --nm F    rebuilt nm output
         -v              print the first differing trial in full
 """
-import sys, os, struct, zlib, bisect, random, re
+import sys, os, struct, zlib, bisect, random, re, math
 sys.path.insert(0, os.path.expanduser('~/g5logs/fnf_237/pypkgs'))
 from unicorn import *
 from unicorn.ppc_const import *
@@ -68,9 +68,26 @@ class V:
     def __hash__(self): return 0
     def __repr__(self): return repr(self.raw) if self.canon is None else '%s~%r' % (hex(self.raw) if isinstance(self.raw, int) else self.raw, self.canon)
 
+def extrels(d, symtab):
+    """external relocations of a linked image (dysymtab extrel): [(address of the word, imported symbol name)].  dyld stores the symbol's address (+ the word's own addend) there."""
+    out = []
+    ncmds = struct.unpack('>I', d[16:20])[0]; p = 28
+    for i in range(ncmds):
+        cmd, size = struct.unpack('>2I', d[p:p+8])
+        if cmd == 11 and symtab:
+            eo, ne = struct.unpack('>2I', d[p+64:p+72]); so, ns_, stro, ssz = symtab
+            for k in range(ne):
+                ra, w = struct.unpack('>2I', d[eo + 8 * k:eo + 8 * k + 8])
+                if (w >> 4) & 1:      # r_extern (big-endian bitfield: symbolnum:24 pcrel:1 length:2 extern:1 type:4): symbolnum indexes the symbol table
+                    idx = w >> 8; strx = struct.unpack('>I', d[so + 12 * idx:so + 12 * idx + 4])[0]
+                    out.append((ra, d[stro + strx:d.index(b'\0', stro + strx)].decode()))
+        p += size
+    return out
+
 class Img:
     def __init__(self, path, symfile=None, nmfile=None):
         d, self.segs, self.secs, symtab, indirect, self.locrel = macho(path)
+        self.extrel = extrels(d, symtab)
         self.path = path
         self.zero = [(a, s) for (g, sn, a, s, f, r1) in self.secs if f in (1, 0xc, 0x12)]
         self.stubs = [(a, a + s) for (g, sn, a, s, f, r1) in self.secs if 'stub' in sn]
@@ -129,15 +146,16 @@ class Img:
         return (n, addr - a)
 
 def callout_ids(imgs):
-    names = sorted(set(n for im in imgs for n in im.cells.values()))
+    names = sorted(set(n for im in imgs for n in list(im.cells.values()) + [nm for _, nm in im.extrel]))
     return {n: i for i, n in enumerate(names)}, names
 
 # ---------------------------------------------------------------- one image under emulation
 class Sim:
     nargs = None
-    MATHF = {'sqrt': 0, 'sqrtf': 0, 'sin': 0, 'cos': 0, 'pow': 0, 'floor': 0, 'ceil': 0, 'log': 0, 'logf': 0, 'exp': 0, 'round': 0, 'frexp': 1}      # double arguments travel in f1..f2, not in GPRs
+    MATHF = {'sqrt': 0, 'sqrtf': 0, 'sin': 0, 'cos': 0, 'pow': 0, 'floor': 0, 'ceil': 0, 'log': 0, 'logf': 0, 'exp': 0, 'round': 0, 'roundf': 0, 'frexp': 1}      # double arguments travel in f1..f2, not in GPRs
     LIBC = {'io_connect_method_scalarI_scalarO': 6, 'io_connect_method_scalarI_structureI': 6, 'io_connect_method_structureI_structureO': 6, 'memcpy': 3, 'memset': 3, 'memmove': 3, 'memcmp': 3, 'bzero': 2, 'strlen': 1, 'strcpy': 2, 'strcmp': 2, 'strncmp': 3, 'strncpy': 3, 'strlcpy': 3, 'strcat': 2, 'strchr': 2, 'strrchr': 2, 'malloc': 1, 'calloc': 2, 'realloc': 2, 'free': 1, 'valloc': 1, 'vfree': 1, 'Unwind_Resume': 1, 'cxa_atexit': 3, 'cxa_guard_acquire': 1, 'cxa_guard_release': 1, 'dlopen': 2, 'dlsym': 2, 'exit': 1, 'fclose': 1, 'fgets': 3, 'fopen': 2, 'fread': 4, 'fwrite': 4, 'getenv': 1, 'getpid': 0, 'index': 2, 'rindex': 2, 'pclose': 1, 'popen': 2, 'puts': 1, 'usleep': 1, 'pthread_mutexattr_init': 1, 'pthread_mutexattr_settype': 2, 'keymgr_get_and_lock_processwide_ptr': 1, 'keymgr_set_and_unlock_processwide_ptr': 2, 'ZdlPv': 1, 'ZdaPv': 1, 'Znwm': 1, 'Znwj': 1, 'Znam': 1, 'Znaj': 1, 'setjmp': 1, 'longjmp': 2, '_setjmp': 1, '_longjmp': 2, 'ecvt': 3, 'fcvt': 3}
     FLOATARGS = set()       # further callees taking double arguments (none known among the GLDriver imports)
+    FPRN = {'sqrt': 1, 'sqrtf': 1, 'sin': 1, 'cos': 1, 'pow': 2, 'floor': 1, 'ceil': 1, 'log': 1, 'logf': 1, 'exp': 1, 'round': 1, 'roundf': 1, 'frexp': 1, 'ecvt': 1, 'fcvt': 1}      # double arguments per callee (the other FPRs are leftovers)
     DBLFIRST = {'ecvt', 'fcvt'}      # (double, int, int*, int*): the double travels in f1 (its GPR shadow is not an argument), the three others in r5..r7
     def __init__(self, img, ids, names, stackfill=0, slide=SLIDE):
         self.slide = slide; self.img = img; self.ids = ids; self.names = names
@@ -156,6 +174,7 @@ class Sim:
         for ca in img.local_ptrs: uc.mem_write(ca + slide, struct.pack('>I', (struct.unpack('>I', bytes(uc.mem_read(ca + slide, 4)))[0] + slide) & 0xffffffff))
         for ca, nv_ in img.def_ptrs.items(): uc.mem_write(ca + slide, struct.pack('>I', (nv_ + slide) & 0xffffffff))
         for ca, nm in img.cells.items(): uc.mem_write(ca + slide, struct.pack('>I', CALLOUT + 16 * ids[nm]))
+        for ca, nm in img.extrel: uc.mem_write(ca + slide, struct.pack('>I', CALLOUT + 16 * ids[nm]))      # words dyld binds through an external relocation
         self.snap = [(vm + slide, bytes(uc.mem_read(vm + slide, len(data)))) for name, vm, vs, data in img.segs if name != '__TEXT']
         uc.mem_map(ARENA, ARENA_SIZE); uc.mem_map(RING, RING_SIZE); uc.mem_map(STACK, STACK_SIZE); uc.mem_map(STOP, 0x1000); uc.mem_map(CALLOUT, 0x10000)
         uc.hook_add(UC_HOOK_CODE, self.on_code)
@@ -178,15 +197,33 @@ class Sim:
             if self.sp0 - 0x40000 <= v < self.sp0: return V(v, ('OWNFRAME',))        # the address of one of the function's own locals (an out parameter): the frame layout is the compiler's
         return V(v)
 
-    def own_frame(self, a): return self.sp0 - 0x40000 <= a < self.sp0 + 0x38
+    def own_frame(self, a): return self.sp0 - 0x40000 <= a < self.sp0 + 0x38 + 4 * getattr(self, 'nstack', 0)      # incl. the incoming stack-parameter words (9th+ arguments): the callee owns them (PowerPC ABI), a store there is not an external effect
 
     def flush(self):
-        for a, s, wpc in self.pw:
+        for a, s, wpc, old in self.pw:
             self.evpc[len(self.ev)] = wpc - self.slide
             try: v = int.from_bytes(self.uc.mem_read(a, s), 'big') if s <= 8 else bytes(self.uc.mem_read(a, s)).hex()
             except Exception: continue        # the store faulted (unmapped): it never happened, the fault event says so
+            if old is not None and s <= 8 and v == int.from_bytes(old, 'big'): continue        # a silent store (the word already held that value) changes nothing: not an effect
+            if s in (4, 8) and isinstance(v, int) and self.is_fpstore(wpc):      # the payload of a NaN written by an FP store is not observable behaviour (fnfuzz NANCANON precedent): canonical quiet NaN
+                if s == 4 and (v >> 23) & 0xff == 0xff and v & 0x7fffff: v = 0x7fc00000
+                elif s == 8 and (v >> 52) & 0x7ff == 0x7ff and v & ((1 << 52) - 1) and v not in self.rd8: v = 0x7ff8000000000000      # (an 8-byte word that was read from memory is a copy, e.g. two floats moved with lfd/stfd: bit-exact on hardware)
+            if old is not None and s == 4 and isinstance(v, int) and (v >> 23) & 0xff == 0xff and v & 0x7fffff:      # a NaN word overwritten by another NaN word: one class (see bytes_of), so not an observable change
+                o = int.from_bytes(old, 'big')
+                if (o >> 23) & 0xff == 0xff and o & 0x7fffff: continue
+            nanw = s == 4 and isinstance(v, int) and (v >> 23) & 0xff == 0xff and v & 0x7fffff
+            if old is not None and s <= 8:      # bytes of a wider store that already held their value are not effects either (the other image may have stored only the changed part)
+                ob = bytes(old); nb = v.to_bytes(s, 'big')
+                sil = tuple(k for k in range(s) if ob[k] == nb[k])
+                if sil: self.ev.append(('WS', self.na(a), sil))
             self.ev.append(('W', self.na(a), s, self.nv(v, s)))
         self.pw = []
+
+    def is_fpstore(self, pc):
+        try: w = int.from_bytes(self.uc.mem_read(pc, 4), 'big')
+        except Exception: return False
+        op = w >> 26
+        return op in (52, 53, 54, 55) or (op == 31 and ((w >> 1) & 0x3ff) in (663, 695, 727, 759))      # stfs stfsu stfd stfdu / stfsx stfsux stfdx stfdux
 
     def on_code(self, uc, addr, size, ud):
         self.flush(); self.pc = addr
@@ -198,9 +235,12 @@ class Sim:
             sp = uc.reg_read(UC_PPC_REG_1)
             na = (self.nargs or {}).get(nm.lstrip('_'), self.LIBC.get(nm.lstrip('_'), 8))
             if nm.lstrip('_') in self.MATHF: na = self.MATHF[nm.lstrip('_')]
+            nf_fmt = 0
+            if nm.lstrip('_') in ('sprintf', 'printf', 'snprintf'): na, nf_fmt = self.printf_args(uc, nm.lstrip('_'), na)
             r0 = 5 if nm.lstrip('_') in self.DBLFIRST else 3
             r = [uc.reg_read(UC_PPC_REG_0 + i) for i in range(r0, r0 + min(na, 8))]
-            f = [uc.reg_read(UC_PPC_REG_FPR0 + i) for i in range(1, 5)] if (nm.lstrip('_') in self.MATHF or nm.lstrip('_') in self.DBLFIRST or nm.lstrip('_') in self.FLOATARGS) else []      # f1.. are arguments only of the callees that take doubles; elsewhere they are leftovers
+            f = [uc.reg_read(UC_PPC_REG_FPR0 + i) for i in range(1, 1 + (nf_fmt or self.FPRN.get(nm.lstrip('_'), 4)))] if (nm.lstrip('_') in self.MATHF or nm.lstrip('_') in self.DBLFIRST or nm.lstrip('_') in self.FLOATARGS or nf_fmt) else []      # f1.. are arguments only of the callees that take doubles; elsewhere they are leftovers
+            f = [0x7ff8000000000000 if (x >> 52) & 0x7ff == 0x7ff and x & ((1 << 52) - 1) else x for x in f]      # a NaN double argument: its payload / sign is not behaviour (same rule as the NaN stores)
             r = [self.nv(x, 4) if not isinstance(x, V) else x for x in r]
             st = [self.nv(int.from_bytes(uc.mem_read(sp + 0x38 + 4 * i, 4), 'big'), 4) for i in range(max(0, na - 8))]
             if nm.lstrip('_') in self.EFFECTS and self.libc(uc, nm.lstrip('_'), [uc.reg_read(UC_PPC_REG_0 + i) for i in range(3, 6)]): return
@@ -222,6 +262,19 @@ class Sim:
                 try: self.uc.mem_read(p, 1)
                 except UcError: raise Sim._Fault(p)
             raise Sim._Fault(a)
+    def printf_args(self, uc, bn, default):
+        """printf-family callout: the fixed arguments plus the ones the format string consumes (integer-class conversions take a GPR each, `ll` two, `*` one more; floating conversions take an FPR):
+        the other argument registers are leftovers of the caller and differ between compilers without being behaviour."""
+        fi = {'printf': 0, 'sprintf': 1, 'snprintf': 2}[bn]
+        try: fmt = self._cstr(uc.reg_read(UC_PPC_REG_0 + 3 + fi), 4096).decode('latin1')
+        except Exception: return default, 0
+        gpr = fi + 1; fpr = 0
+        for m in re.finditer(r'%(?:[-+ #0]*)(\*|\d+)?(?:\.(\*|\d+))?(hh|h|ll|l|L|q|j|z|t)?([diouxXcspnfFeEgGaA%])', fmt):
+            if m.group(4) == '%': continue
+            gpr += (m.group(1) == '*') + (m.group(2) == '*')
+            if m.group(4) in 'fFeEgGaA': fpr += 1
+            else: gpr += 2 if m.group(3) in ('ll', 'q') else 1
+        return min(gpr, 8), fpr
     def _cstr(self, a, cap=1 << 16):
         out = b''
         while len(out) < cap:
@@ -271,11 +324,14 @@ class Sim:
         except Exception: v = None
         self.evpc[len(self.ev)] = self.pc - self.slide
         self.ev.append(('R', self.na(addr), size, self.nv(v, size)))
+        if size == 8 and isinstance(v, int): self.rd8.add(v)
 
     def on_write(self, uc, access, addr, size, value, ud):
         if addr < NULLPAGE: self.ev.append(('F', 'write', addr)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
         if self.in_stub() or self.own_frame(addr): return
-        self.pw.append((addr, size, self.pc))
+        try: old = bytes(uc.mem_read(addr, size)) if size <= 8 and not (STACK <= addr < STACK + STACK_SIZE) else None       # silent-store detection only against input-defined memory (the stack holds the fill pattern, which differs between the two control fills)
+        except Exception: old = None
+        self.pw.append((addr, size, self.pc, old))
 
     def on_unmapped(self, uc, access, addr, size, value, ud):
         k = {UC_MEM_READ_UNMAPPED: 'read', UC_MEM_WRITE_UNMAPPED: 'write', UC_MEM_FETCH_UNMAPPED: 'fetch'}.get(access, '?')
@@ -289,6 +345,7 @@ class Sim:
         uc.mem_write(ARENA, arena); uc.mem_write(RING, bytes(RING_SIZE)); uc.mem_write(RING + 0x10, struct.pack('>I', RING_SIZE // 4))
         uc.mem_write(STACK, bytes([self.stackfill & 0xff]) * STACK_SIZE) if self.stackfill < 256 else uc.mem_write(STACK, struct.pack('>I', self.stackfill) * (STACK_SIZE // 4))
         self.sp0 = STACK + STACK_SIZE - 0x2000
+        self.nstack = len(stackwords)
         for i, w in enumerate(stackwords): uc.mem_write(self.sp0 + 0x38 + 4 * i, struct.pack('>I', w))
         for i in range(32): uc.reg_write(UC_PPC_REG_0 + i, 0x11110000 + i)       # defined garbage in every register the call does not define
         for i in range(32): uc.reg_write(UC_PPC_REG_FPR0 + i, 0x3ff0000000000000 + i)
@@ -296,7 +353,7 @@ class Sim:
         for i, b in enumerate(dargs[:13]): uc.reg_write(UC_PPC_REG_FPR1 + i, b)
         uc.reg_write(UC_PPC_REG_1, self.sp0); uc.reg_write(UC_PPC_REG_LR, STOP)
         self.entry_nv = [uc.reg_read(UC_PPC_REG_0 + i) for i in range(14, 32)]
-        self.fpc = None; self.ev = []; self.evpc = {}; self.pw = []; self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
+        self.fpc = None; self.ev = []; self.evpc = {}; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
         try: uc.emu_start(entry + self.slide, STOP, count=limit + 10)
         except UcError as e:
             if self.status == '?': self.status = 'UCERR'; self.ev.append(('F', 'uc', str(e)))
@@ -368,22 +425,40 @@ class Gen:
 # ---------------------------------------------------------------- comparison
 def is_img_read(e): return e[0] == 'R' and isinstance(e[1], tuple)
 
+class Tk:
+    """one byte of a stored image pointer: equal to another byte when the raw bytes are equal, or when both are the same byte of the same stock-space pointer (cf. V)"""
+    __slots__ = ('raw', 'canon', 'sil')
+    def __init__(self, raw, canon, sil=False): self.raw = raw; self.canon = canon; self.sil = sil       # sil: the byte already held this value (a store of it changes nothing)
+    def __eq__(self, o):
+        if isinstance(o, Tk): return self.raw == o.raw or self.canon == o.canon
+        return self.raw == o
+    def __hash__(self): return 0
+    def __repr__(self): return 'Tk(%r,%r)' % (self.raw, self.canon)
+
 def segments(ev):
     """split the trace at the calls out of the image: [(call, writes, external reads)] with writes {(addr,size): [V...] in order} and reads {(addr,size): [V...]}.  Inside one segment the
     order of independent plain-memory accesses is not observable by anything but a fault, so a segment is summarised per address."""
     segs = []; w = {}; r = {}; wb = {}; rb = set(); call = None; fault = None
-    def bytes_of(a, size, v):
+    def bytes_of(a, size, v, sil=()):
         # a store as byte tokens: raw bytes, or (canon, k) tokens when the value is a normalised image pointer
-        if isinstance(v, V) and v.canon is not None: return [('P', v.canon, k) for k in range(size)]
         iv = v.raw if isinstance(v, V) else v
+        # a NaN bit pattern: the emulator's lfs/stfs pair canonicalises NaN payloads while an integer lwz/stw copy keeps them (real hardware keeps a quiet NaN's bits either way), so NaN words compare as one class
+        if isinstance(iv, int) and size == 4 and 0 <= iv < 1 << 32 and (iv >> 23) & 0xff == 0xff and iv & 0x7fffff:
+            return [Tk(iv.to_bytes(4, 'big')[k], ('NAN32', k), k in sil) for k in range(4)]
+        if isinstance(v, V) and v.canon is not None and isinstance(iv, int) and size == 4:
+            return [Tk(iv.to_bytes(4, 'big')[k], (v.canon, k)) for k in range(size)]      # same equality as V: equal raw bytes, or the same stock-space pointer
         if isinstance(iv, int) and size <= 8: return list(iv.to_bytes(size, 'big'))
         return [('?', repr(v), k) for k in range(size)]
+    silent = ()
     for e in ev:
         if e[0] == 'C': segs.append((call, w, r, wb, rb)); call = e; w = {}; r = {}; wb = {}; rb = set()
+        elif e[0] == 'WS': silent = e[2]
         elif e[0] == 'W':
             w.setdefault((e[1], e[2]), []).append(e[3])
             if isinstance(e[1], int):
-                for k, t in enumerate(bytes_of(e[1], e[2], e[3])): wb[e[1] + k] = t
+                for k, t in enumerate(bytes_of(e[1], e[2], e[3], silent)):
+                    if k not in silent or isinstance(t, Tk): wb[e[1] + k] = t
+            silent = ()
         elif e[0] == 'R':
             if not is_img_read(e):
                 r.setdefault((e[1], e[2]), []).append(e[3])
@@ -412,6 +487,17 @@ def collapse(vs):
         if not out or not (out[-1] == v): out.append(v)
     return out
 
+def wbeq(x, y):
+    """final per-byte state of two segments equal?  A byte only one image stored is equal when that store was silent (the byte already held the value)"""
+    for k in set(x) | set(y):
+        a = x.get(k, wbeq); b = y.get(k, wbeq)
+        if a is wbeq: 
+            if not (isinstance(b, Tk) and b.sil): return False
+        elif b is wbeq:
+            if not (isinstance(a, Tk) and a.sil): return False
+        elif a != b: return False
+    return True
+
 def wdiff(x, y):
     """None if the two write maps agree, else a description of the first difference"""
     for k in sorted(set(x) | set(y), key=repr):
@@ -434,6 +520,17 @@ def ptr_value_read(ea, eb):
     ra = [e[3] for e in ea if e[0] == 'R' and isinstance(e[3], V) and e[3].canon is not None]
     rb = [e[3] for e in eb if e[0] == 'R' and isinstance(e[3], V) and e[3].canon is not None]
     return bool(ra) and bool(rb) and any(x.raw != y.raw for x in ra for y in rb)       # an image pointer was read in both (even if its canonical form is spelled differently, e.g. a function address vs a data cell)
+
+def ptr_partial_read(ea, eb):
+    """True if, in both traces, an image pointer is stored to external memory and a later read overlaps those four bytes without being the same word (an unaligned or narrower access to part of a pointer): the bytes read
+    are bits of an address, which depend on where each image's code or data sits"""
+    def hit(ev):
+        ptrs = []
+        for e in ev:
+            if e[0] == 'W' and e[2] == 4 and isinstance(e[1], int) and isinstance(e[3], V) and e[3].canon is not None: ptrs.append(e[1])
+            elif e[0] == 'R' and isinstance(e[1], int) and any(a != e[1] and a < e[1] + e[2] and e[1] < a + 4 for a in ptrs): return True
+        return False
+    return hit(ea) and hit(eb)
 
 def image_data_diff(ea, eb):
     """image-own data both traces read at the same canonical address whose plain (non-pointer) values differ: [(address, stock value, rebuilt value)].  Either the access is outside the object it was meant for
@@ -458,7 +555,7 @@ def classify_effect(ea, eb, det):
     if dd: return 'IMAGE_DATA_DEP', '; '.join(det) + ' | image data read differs at ' + ', '.join('%r stock %r rebuilt %r' % x for x in dd[:3])
     ox, oy = image_addr_diff(ea, eb)
     if ox and oy: return 'IMAGE_ADDR_DEP', '; '.join(det) + ' | image data read only by stock %r, only by rebuilt %r' % (ox[:2], oy[:2])
-    if ptr_value_read(ea, eb): return 'PTR_VALUE_DEP', '; '.join(det)
+    if ptr_value_read(ea, eb) or ptr_partial_read(ea, eb): return 'PTR_VALUE_DEP', '; '.join(det)
     return 'EFFECTS', '; '.join(det)
 
 def compare(a, b, ret_kind):
@@ -476,6 +573,11 @@ def compare(a, b, ret_kind):
     if sa != sb:
         ox, oy = image_addr_diff(ea, eb)
         if ox and oy: return 'IMAGE_ADDR_DEP', 'stock %s | rebuilt %s | image data read only by stock %r, only by rebuilt %r' % (sa, sb, ox[:2], oy[:2])
+        fe = next((e for e in (ea if sa == 'FAULT' else eb) if e[0] == 'F'), None)
+        if fe and isinstance(fe[2], int) and {sa, sb} == {'FAULT', 'RET'} and 'S' in _G:
+            lo_end, hi_end = sorted((_G['S'].end, _G['R'].end))
+            if lo_end + SLIDE <= fe[2] < hi_end + SLIDE:        # the same wild address (garbage input) is outside the smaller image and inside the larger one
+                return 'PTR_VALUE_DEP', 'wild %s at %#x (from unvalidated input) is unmapped in the smaller image (ends %#x) but inside the larger (ends %#x): %s' % (fe[1], fe[2], lo_end + SLIDE, hi_end + SLIDE, 'stock faults, rebuilt completes' if sa == 'FAULT' else 'rebuilt faults, stock completes')
         return 'FAULT_MISMATCH', 'stock %s %r | rebuilt %s %r' % (sa, [e[1:] for e in ea if e[0] == 'F'], sb, [e[1:] for e in eb if e[0] == 'F'])
     det = []; ret_ok = True
     if sa == 'RET':
@@ -493,6 +595,7 @@ def compare(a, b, ret_kind):
         noeff = lambda ev: not any(e[0] in ('W', 'WB', 'C') for e in ev)
         if fa and fb and noeff(ea) and noeff(eb):      # both crash before any store or call completed: the same observable outcome, only the first invalid access (kind/address) differs
             return 'FAULT_SITE', 'stock %r vs rebuilt %r (different access kind; no store or call completed in either image)' % (fa[1:], fb[1:])
+        if ptr_partial_read(ea, eb): return 'PTR_VALUE_DEP', 'both fault, but at different places after reading part of a stored image pointer: stock %r vs rebuilt %r' % (fa, fb)
         return 'FAULT_MISMATCH', 'stock %r vs rebuilt %r' % (fa, fb)
     if len(sga) != len(sgb) or any(x[0] != y[0] for x, y in zip(sga, sgb)):
         i = next((i for i, (x, y) in enumerate(zip(sga, sgb)) if x[0] != y[0]), min(len(sga), len(sgb)))
@@ -500,7 +603,7 @@ def compare(a, b, ret_kind):
     partial = False
     for i, (x, y) in enumerate(zip(sga, sgb)):
         d = wdiff(x[1], y[1])
-        if d and x[3] != y[3]:
+        if d and not wbeq(x[3], y[3]):
             if sa == 'FAULT' and i == len(sga) - 1 and fa == fb: partial = d; continue       # the segment cut short by the same fault: which stores had happened before it differs (instruction order)
             if any(isinstance(k, int) and RING <= k < RING + RING_SIZE and x[3].get(k) != y[3].get(k) for k in set(x[3]) | set(y[3])): det.append('segment %d: command-ring contents differ: %s' % (i, d)); return 'HW_STREAM', '; '.join(det)
             det.append('segment %d: %s' % (i, d)); return classify_effect(ea, eb, det)
@@ -527,10 +630,20 @@ def same_run(x, y):
     if x[0] == 'RET': return all(x[2][k] == y[2][k] for k in ('r1', 'nv', 'fnv', 'r3', 'f1'))
     return True
 
+def single_exact(v):
+    """a double bit pattern rounded to the nearest single (kept as double bits): what an ABI-conforming caller leaves in an FPR that carries a C float"""
+    d = struct.unpack('>d', v.to_bytes(8, 'big'))[0]
+    try: f = struct.unpack('>f', struct.pack('>f', d))[0]
+    except OverflowError: f = math.copysign(math.inf, d)
+    return int.from_bytes(struct.pack('>d', f), 'big')
+
+SINGLE_FP = re.compile(r'^_?gl[A-Za-z0-9]*[0-9]?f[v]?_[A-Za-z]+$|^_?gl[A-Za-z0-9]*f[v]?$')   # GL entry points taking C floats (glRotatef_Exec, glMaterialfv ...): stock uses single-precision ops on them
+
 def eval_input(row, ia, da, sw, arena, sims, ctl, full=False):
     """one input -> (verdict, detail, stock run A, rebuilt run A).  The cheap path runs fill A only; a run that is not clean is re-run under the second fill and the slide control to classify it
     (UNINIT_* / LAYOUT_DEP).  full=True always runs the controls."""
     (ssA, srA), (ssB, srB) = sims['A'], sims['B']
+    if SINGLE_FP.match(row['name']): da = [single_exact(v) for v in da]       # a float parameter never holds a non-single value in an ABI-conforming call: such inputs are out of contract (the corpus declares the params double; rebuilt rounds at call boundaries, stock does not)
     aA = ssA.run(row['stock'], ia, da, sw, arena); bA = srA.run(row['reb'], ia, da, sw, arena)
     v, det = compare(aA, bA, row['rc'])
     if v == 'IDENTICAL' and not full: return v, det, aA, bA
