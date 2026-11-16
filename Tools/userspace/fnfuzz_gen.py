@@ -326,6 +326,10 @@ rows = []
 # FNFUZZ_ALL=1: not a fuzz ledger - one row (id name stock-address rebuilt-address size - v) for EVERY function that has a rebuilt symbol, whatever its hazards, for the static
 # audits that need the whole function list (flop_audit.py: single- vs double-precision operation counts, stock vs rebuilt)
 ALL = bool(os.environ.get('FNFUZZ_ALL'))
+# FNFUZZ_EMU=1: the ledger for the unicorn trace differential (Tools/userspace/emu/trace_diff.py), which has none of the native harness's hazards: imports are recorded call-outs, indirect calls, atomics and
+# the red zone are emulated, a fault is an outcome. Every function with a rebuilt symbol is a row except fragments/millicode/runtime helpers and the `in_r11`-style implicit-input functions; a function
+# whose signature is unknown (variadic) gets the generic row (parameter class '-': eight random argument words) and return class 'v' (the return value is then NOT compared).
+EMU = bool(os.environ.get('FNFUZZ_EMU'))
 for ent, (nm, rs) in sorted(fns.items()):
     nm = BYADDR.get(ent, nm)
     if ALL:
@@ -336,6 +340,7 @@ for ent, (nm, rs) in sorted(fns.items()):
     if nm in IMPLICIT:
         WHY.append((ent, nm, 'implicit-register-input')); continue
     bad, badc, callees, size, ctxops, used_allowed = scan(ent, rs)
+    if EMU: bad = None; badc = None
     if IMPORTS:
         if bad != 'import': continue                   # not an import-only function (a plain candidate, or excluded for another reason)
         bad = None
@@ -348,10 +353,11 @@ for ent, (nm, rs) in sorted(fns.items()):
     if first[0] in ('stfd', 'lfd') and re.match(r'f(1[4-9]|2\d|3[01])\b', first[1]): WHY.append((ent, nm, 'millicode (register save/restore chain)')); continue      # saveFP / restFP millicode entry points (a register-save chain, not a function)
     if re.search(r'_frag_[0-9a-f]+$', nm): WHY.append((ent, nm, 'fragment (clipped piece of a function)')); continue                                              # `_frag_` = a clipped piece of a function (a switch case body that reads the parent's registers), not a function
     if key == 'glprog' and ent in (0x97b89f04, 0x97b88a90): continue                                # clipped fragments patched in patches.py (they read the parent's registers)
-    if bad or size < 16 or re.match(r'^(eh_|__Unwind|orph_|save_world|rest_world|dyld_stub|_glp?Unwind|_*(lshr|ashl|ashr|mul|div|mod|udiv|umod|cmp|ucmp|fix|float|neg|ffs|clz|ctz|popcount|parity)[a-z]*[ds]i[0-9]?$)', nm):
+    if bad or size < (4 if EMU else 16) or re.match(r'^(eh_|__Unwind|orph_|save_world|rest_world|dyld_stub|_glp?Unwind|_*(lshr|ashl|ashr|mul|div|mod|udiv|umod|cmp|ucmp|fix|float|neg|ffs|clz|ctz|popcount|parity)[a-z]*[ds]i[0-9]?$)', nm):
         WHY.append((ent, nm, ('unsafe: ' + str(bad)[:120]) if bad else ('tiny (<16 bytes)' if size < 16 else 'runtime/helper name'))); continue
     if ONLY_ALLOWED and not used_allowed: continue
     sg = sig_of(ent)
+    if sg is None and EMU: sg = ('-', 'v')
     if sg is None:
         WHY.append((ent, nm, 'no-signature: ' + SIGWHY.get(ent, '?'))); continue
     ct = CTYPES.get(nm)

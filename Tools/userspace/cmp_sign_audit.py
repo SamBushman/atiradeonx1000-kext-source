@@ -77,6 +77,12 @@ def sites(img, a, n, tag):
                     print('  %s %x  %s %s | %s %s' % (tag, i.address, i.mnemonic, i.op_str, j.mnemonic, j.op_str)); break
 import os
 SHOW = set(os.environ.get('SHOW', '').split(',')) - {''}
+def shifts(img, a, n):
+    """(arithmetic, logical) right shifts by an immediate (srawi) / (srwi, rlwinm-based): a stock srawi that became a logical shift in the rebuilt (and the reverse) is the class
+    `(uint)(a - b) >> 2` printed for a signed `(a - b) >> 2` (std::vector _M_range_insert, glprog)."""
+    ins = [i for i in md.disasm(code(img, a, n), a) if i.mnemonic != '.long']
+    return sum(1 for i in ins if i.mnemonic in ('srawi', 'sraw')), sum(1 for i in ins if i.mnemonic in ('srwi', 'srw'))
+SH = []
 rsyms = {n: a for a, n in R.syms}; raddrs = sorted(a for a, n in R.syms)
 bal = S.bal
 bad = []; pairs = []; n = 0
@@ -90,9 +96,13 @@ for l in open(ledger):
     n += 1; a = counts(S, sa, size); b = counts(R, ra, rsize)
     if name in SHOW: print('==', name, 'stock %#x rebuilt %#x' % (sa, ra)); sites(S, sa, size, 'S'); sites(R, ra, rsize, 'R')
     if a != b: bad.append((name, a, b))
+    sh_a = shifts(S, sa, size); sh_b = shifts(R, ra, rsize)
+    if sh_a[0] > sh_b[0] or sh_b[0] > sh_a[0] and sh_a[1] > sh_b[1]: SH.append((name, sh_a, sh_b))
     pa = rpairs(S, sa, size); pb = rpairs(R, ra, rsize)
     if pa[0] > pb[0] or pb[1] > pa[1]: pairs.append((name, pa, pb))
 print('%d functions compared, %d differ in (signed,unsigned) ordering-compare counts' % (n, len(bad)))
 for name, a, b in bad: print('%-50s stock s/u %s rebuilt s/u %s' % (name, a, b))
 print('\nrange-check pairs (addi+cmpli/cmpi) where stock has more unsigned or rebuilt has more signed: %d functions   [unsigned,signed]' % len(pairs))
 for name, a, b in pairs: print('%-50s stock %s rebuilt %s' % (name, a, b))
+print('\nright shifts (arithmetic, logical): stock has more arithmetic than the rebuilt: %d functions' % len(SH))
+for name, a, b in SH: print('%-50s stock %s rebuilt %s' % (name, a, b))

@@ -253,13 +253,14 @@ class Sim:
             f = [uc.reg_read(UC_PPC_REG_FPR0 + i) for i in range(1, 1 + (nf_fmt or self.FPRN.get(nm.lstrip('_'), 4)))] if (nm.lstrip('_') in self.MATHF or nm.lstrip('_') in self.DBLFIRST or nm.lstrip('_') in self.FLOATARGS or nf_fmt) else []      # f1.. are arguments only of the callees that take doubles; elsewhere they are leftovers
             f = [0x7ff8000000000000 if (x >> 52) & 0x7ff == 0x7ff and x & ((1 << 52) - 1) else x for x in f]      # a NaN double argument: its payload / sign is not behaviour (same rule as the NaN stores)
             r = [self.nv(x, 4) if not isinstance(x, V) else x for x in r]
+            if nm.lstrip('_') in self.VPRINTF: r = self.va_canon(uc, nm.lstrip('_'), r)
             st = [self.nv(int.from_bytes(uc.mem_read(sp + 0x38 + 4 * i, 4), 'big'), 4) for i in range(max(0, na - 8))]
             if nm.lstrip('_') in self.EFFECTS and self.libc(uc, nm.lstrip('_'), [uc.reg_read(UC_PPC_REG_0 + i) for i in range(3, 6)]): return
             self.ev.append(('C', nm, tuple(r), tuple(f), tuple(st)))
             self.ncalls += 1
             if nm.lstrip('_') in ('abort', 'exit', 'cxa_rethrow'): self.ev.append(('F', 'noreturn', nm)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return       # the callee never returns: nothing after the call is behaviour
             h = zlib.crc32(('%s/%d' % (nm, self.ncalls)).encode())      # a deterministic, name-keyed return value (the same in both images)
-            uc.reg_write(UC_PPC_REG_3, h & 0xffff); uc.reg_write(UC_PPC_REG_4, 0)
+            uc.reg_write(UC_PPC_REG_3, (h & 0x3f) if nm.lstrip('_') in ('sprintf', 'snprintf', 'vsprintf', 'vsnprintf', 'fprintf', 'printf', 'vfprintf', 'vprintf') else h & 0xffff); uc.reg_write(UC_PPC_REG_4, 0)      # a printf's result is a byte count: small, so `buf += sprintf(buf, ..)` stays inside the buffer
             uc.reg_write(UC_PPC_REG_PC, uc.reg_read(UC_PPC_REG_LR))
             # do not leave a stale write pending; a call out also clobbers nothing else by contract
 
@@ -274,6 +275,25 @@ class Sim:
                 try: self.uc.mem_read(p, 1)
                 except UcError: raise Sim._Fault(p)
             raise Sim._Fault(a)
+    VPRINTF = {'vsnprintf': (2, 3), 'vsprintf': (1, 2), 'vfprintf': (1, 2), 'vprintf': (0, 1)}      # name: (format argument index, va_list argument index)
+    def va_canon(self, uc, bn, r):
+        """v*printf callout: the va_list argument is a pointer into the caller's frame (the stock spills r8..r10 into its caller's parameter area, the rebuilt corpus into a local array: different
+        addresses, same words).  What the callee can observe through it is the words the format consumes (integer conversions one word, `ll` and doubles two, `*` one more), so those words
+        replace the pointer in the call record; an unreadable format means the callee faults on the format first and the va_list is not read."""
+        fi, ai = self.VPRINTF[bn]
+        if len(r) <= ai: return r
+        try:
+            fv = r[fi].raw if isinstance(r[fi], V) else r[fi]; fmt = self._cstr(fv, 4096).decode('latin1')
+        except Exception: return r[:ai] + [V(0)] + r[ai + 1:]
+        words = 0
+        for m in re.finditer(r'%(?:[-+ #0]*)(\*|\d+)?(?:\.(\*|\d+))?(hh|h|ll|l|L|q|j|z|t)?([diouxXcspnfFeEgGaA%])', fmt):
+            if m.group(4) == '%': continue
+            words += (m.group(1) == '*') + (m.group(2) == '*')
+            words += 2 if (m.group(4) in 'fFeEgGaA' or m.group(3) in ('ll', 'q')) else 1
+        ap = r[ai].raw if isinstance(r[ai], V) else r[ai]
+        try: vals = tuple(self.nv(int.from_bytes(uc.mem_read(ap + 4 * k, 4), 'big'), 4) for k in range(min(words, 16)))
+        except Exception: return r
+        return r[:ai] + [V(('VA',) + tuple(x.raw if isinstance(x, V) else x for x in vals), ('VA',) + tuple((x.canon if isinstance(x, V) and x.canon is not None else (x.raw if isinstance(x, V) else x)) for x in vals))] + r[ai + 1:]
     def printf_args(self, uc, bn, default):
         """printf-family callout: the fixed arguments plus the ones the format string consumes (integer-class conversions take a GPR each, `ll` two, `*` one more; floating conversions take an FPR):
         the other argument registers are leftovers of the caller and differ between compilers without being behaviour."""
@@ -616,8 +636,8 @@ def compare(a, b, ret_kind):
         if fa and fb and noeff(ea) and noeff(eb):      # both crash before any store or call completed: the same observable outcome, only the first invalid access (kind/address) differs
             return 'FAULT_SITE', 'stock %r vs rebuilt %r (different access kind; no store or call completed in either image)' % (fa[1:], fb[1:])
         eff = lambda ev: [e for e in ev if e[0] in ('W', 'WB', 'C')]
-        if fa and fb and eff(ea) == eff(eb) and not any(e[0] == 'C' for e in ea):       # both crash after the same ordered stores and no call: only the first invalid access (kind/address) differs
-            return 'FAULT_SITE', 'stock %r vs rebuilt %r (identical ordered stores before the fault, no call in either image)' % (fa[1:], fb[1:])
+        if fa and fb and eff(ea) == eff(eb):       # both crash after the same ordered stores and calls (arguments included): only the first invalid access (kind/address) differs
+            return 'FAULT_SITE', 'stock %r vs rebuilt %r (identical ordered stores%s before the fault)' % (fa[1:], fb[1:], ' and calls' if any(e[0] == 'C' for e in ea) else ', no call in either image')
         if ptr_partial_read(ea, eb): return 'PTR_VALUE_DEP', 'both fault, but at different places after reading part of a stored image pointer: stock %r vs rebuilt %r' % (fa, fb)
         return 'FAULT_MISMATCH', 'stock %r vs rebuilt %r' % (fa, fb)
     if len(sga) != len(sgb) or any(x[0] != y[0] for x, y in zip(sga, sgb)):

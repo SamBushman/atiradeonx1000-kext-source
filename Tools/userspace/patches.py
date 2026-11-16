@@ -259,6 +259,17 @@ PATCHES = {
     # C: the same builtin the callers of this function use (part_026.c, _Unwind_RaiseException etc.).
     '_uw_init_context_1': _scoped('glprog', _conv_with('_uw_init_context_1 (0x97c1b79c)', [('= in_LR;', '= (undefined4)__builtin_return_address(0);')])),
 
+    # _glpDCBFree (glprog, stock 0x97c10a24): `lbz r0,-1(r3); subf r3,r0,r3; b _free` - a TAIL CALL, the function returns what `free` leaves in r3. Ghidra printed
+    # `_free(...); return extraout_r3;` (extraout_r3 = the callee's r3), which the corpus turned into an unassigned local (`freeReturn`), so the rebuilt returned stack
+    # garbage (trace-differential census: r3 12133 vs 286326814). The other tail-calling free wrappers (_BitSetFree, _PPStreamFree, ...) already return the call's value.
+    '_glpDCBFree': _scoped('glprog', _raw_with('_glpDCBFree', [('_free(param_1 - (uint)*(byte *)(param_1 + -1));\n  return extraout_r3;', 'return ((int (*)())_free)(param_1 - (uint)*(byte *)(param_1 + -1));')])),
+
+    # std::vector<TIntermNode*>::_M_range_insert (glprog, stock 0x97c3186c): `if ((uint)((vec[3] - vec[2]) >> 2) < n)` - the stock subtracts the two pointers and shifts ARITHMETICALLY
+    # (`subf r0,r27,r0; srawi r0,r0,2`, 0x97c31890), then compares unsigned (`cmplw; blt`). Ghidra printed `param_1[3] - (int)pvVar7 >> 2` with param_1 an `undefined4 *`, so the C
+    # subtraction is unsigned and the shift LOGICAL (srwi): a vector whose capacity pointer is below its finish pointer (invalid) took the other branch than the stock
+    # (trace-differential census: stock memmove path vs rebuilt allocate path). C: shift the signed difference.
+    'std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gnu_cxx____normal_iterator_TIntermNode___std__vector_TIntermNode__pool_allocator_TIntermNode_____': _scoped('glprog', _raw_with('_M_range_insert (0x97c3186c)', [('(uint)(param_1[3] - (int)pvVar7 >> 2)', '(uint)((int)(param_1[3] - (int)pvVar7) >> 2)')])),
+
     # --- data symbols Ghidra typed inconsistently (word index in one function, byte offset in another) -----------------------------------
     # _gPollAllocThreadData (glprog, data 0xa7b7ba1c) is a pointer to an 8-byte record { TPoolAllocator *pool; int; } (InitializeGlobalPools, stock
     # 0x97b9fe54: `bl operator new(8); stw r30,4(r3); stw r3,0(r28); stw r29,0(r3)` - word stores at +0 and +4). The corpus declares it `unsigned char *`

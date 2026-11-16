@@ -3279,10 +3279,7 @@ int _glpDCBRealloc(block, newSize)
 int _glpDCBFree(block)
   int block;
 {
-  undefined4 freeReturn;
-  
-  _free(block - (uint)*(byte *)(block + -1));
-  return freeReturn;
+  return ((int (*)())_free)(block - (uint)*(byte *)(block + -1));
 }
 
 /* _PPParserMacroCreateFromMacro @ 0x97c10a30 (200 bytes) */

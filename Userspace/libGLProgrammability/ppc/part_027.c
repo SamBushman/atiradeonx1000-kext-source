@@ -629,7 +629,7 @@ int std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gn
     rangeBytes = (int)last - (int)first;
     oldFinish = (void *)vec[2];
     n[0] = (int)rangeBytes >> 2;
-    if ((uint)(vec[3] - (int)oldFinish >> 2) < n[0]) {
+    if ((uint)((int)(vec[3] - (int)oldFinish) >> 2) < n[0]) {
       minRef = n;
       oldSize = (int)oldFinish - vec[1] >> 2;
       if (n[0] <= oldSize) {
