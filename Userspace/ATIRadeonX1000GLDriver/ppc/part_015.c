@@ -4043,19 +4043,9 @@ int gld_initContextDispatch(ctx)
   dispatchEntry2 = ptrTo_arbfpUnbindWorkAreaChecked_001e8a88;
   *(undefined **)(((unsigned char *)0x000014bc) + ctx) = dispatchEntry;
   *(undefined **)(((unsigned char *)0x00001464) + ctx) = dispatchEntry2;
-  /* Completed (issue #64): the whole 3-call missing block (stock 0xa7178-0xa72b0ish) is now
-   * restored, in stock's real order, sizes and destinations all confirmed directly from
-   * disassembly (each call's "li r3,N" immediately precedes its bctrl; each destination is the
-   * "stw r3,OFFSET(r30)" immediately after): calloc(0xa8)->+0x116c, calloc(0x90)->+0x1154,
-   * calloc(0x14)->+0x112c, all through the same locally-installed gld_callocBytes callback already
-   * used elsewhere in this function. The middle call (+0x1154) was the one already fixed and
-   * verified to resolve the original atifsCreateShaderTable null-deref crash on this issue. The other two
-   * were left as an open follow-up at the time - re-derived and added here after a *different*,
-   * later crash (TypedValueArray__createForType, deep in the GLSL shader-compiler call chain) traced back to this
-   * same still-missing block. */
-  *(int *)(streamBase + 0x116c) = ((int (*)())gld_callocBytes)(0xa8);
-  *(int *)(streamBase + 0x1154) = ((int (*)())gld_callocBytes)(0x90);
-  *(int *)(streamBase + 0x112c) = ((int (*)())gld_callocBytes)(0x14);
+  /* Issue #293: the stock allocates the three stream-state blocks (calloc 0xa8 / 0x90 / 0x14 -> streamBase+0x116c / +0x1154 / +0x112c) exactly once, at stock 0xa7220-0xa7280; that
+   * block is the one converted above (ctx+0x13ac / +0x1394 / +0x136c = streamBase + 0x116c / +0x1154 / +0x112c). The issue #64 restoration of the same three calls here duplicated it
+   * (3 extra calls out, 3 leaked blocks, the first blocks' contents lost): removed. */
   ((int (*)())atifsCreateShaderTable)(streamBase);
   arbProgramTableInit(streamBase);
   arbfpLoadDefaultProgram(streamBase);

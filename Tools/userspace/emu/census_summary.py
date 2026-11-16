@@ -37,9 +37,14 @@ EXPLAINED = {'ffvpPrepareFogExp': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFo
              'std____default_alloc_template_true_0____S_refill': ('STOCK_BUG_225', 'PASS'),
              '__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
              # GLDriver extended census (Nov 16): stock loads this+0xa4 and never uses it; the rebuilt inlined callees do not
-             'R300MachineAssembler__classifyAluOperation': ('STOCK_DEAD_ARG_LOAD', 'PASS')}
+             'R300MachineAssembler__classifyAluOperation': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
+             # pointer-repair census (Nov 16): stock loads `*(*(builder+0x3f0)+0xc)` (stock 0x9b4f8) before the `noLights` test although only the noLights == 0 path uses it; the rebuilt loads it in that path only (all 10 trials: stock fault pc 0x9b4f8, rebuilt returns)
+             'ffvpEmitColorOutputs': ('STOCK_HOISTED_LOAD', 'PASS'),
+             # the callee Program__assignOutputExportSlots: stock stores through the unchecked export-slot index into its 53-word frame table (stwx at stock 0x10fd44, all 6 trials), the rebuilt has the deliberate #284 guard
+             'KhanVs__vslot88_assignOutputBindings': ('STOCK_BUG_284', 'PASS')}
 # Rows resolved by hand whose worst verdict is not FAULT_MISMATCH: name -> (verdict it applies to, class, gate)
-EXPLAINED_ANY = {'_PPCRuntimeCompilerGetOffsetInRegister': ('UNINIT_REBUILT', 'OOB_LOCAL_INDEX', 'OUT-OF-CONTRACT'),
+EXPLAINED_ANY = {'Compiler__getOrCreateLoadConstN': ('UNINIT_REBUILT', 'OOB_LOCAL_INDEX', 'OUT-OF-CONTRACT'),      # constCount > 4 indexes the 5-word local lookupKeyWords unchecked in both images (stock 0xf50dc-0xf50e8 `lwz r3,0x34(r1+4*n)`, rebuilt 0x1091d4-0x1091e0): decision 3
+    '_PPCRuntimeCompilerGetOffsetInRegister': ('UNINIT_REBUILT', 'OOB_LOCAL_INDEX', 'OUT-OF-CONTRACT'),
     # extended glprog census, EVIDENCE_trace_diff.md: the random format pointer 0x20000000 is the START OF THE STOCK's __DATA segment (offset 0x10000000 from its text; the rebuilt image has __DATA right after its text), so only the stock can read the string; same _vsprintf buffer/format values in both calls
     # GLDriver extended census: documented deliberate #64 clamp of the ILReader opcode index
     'ILReader__currentOpcode': ('EFFECTS', 'DELIBERATE_64_CLAMP', 'PASS'),

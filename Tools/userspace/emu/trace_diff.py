@@ -25,6 +25,8 @@ CALLOUT = 0x60000000
 RING = 0x58000000; RING_SIZE = 0x10000       # the stand-in for the kernel-mapped command ring: its contents are what the hardware is programmed by (packets: register offsets + values)
 IMGMAX = 0x400000            # both images are mapped below this; values in [0x1000, IMGMAX) are treated as image pointers by the normaliser, so the generator never makes such values
 NULLPAGE = 0x1000
+HEAP = 0x5c000000; HEAP_SIZE = 0x200000      # TD_HEAP=1: malloc/calloc/realloc/valloc return zeroed 16-byte-aligned blocks of this region (a bump allocator reset per run), the same sequence in both images; free is a no-op.  Without it an allocator returns a small hash value, so every function that uses its result faults
+HEAP_ON = os.environ.get('TD_HEAP', '0') == '1'
 # TD_STOCK_HOOKS=ADDR:NAME,...  (stock-image-relative address in hex): a statically linked library function of the STOCK binary that the rebuilt corpus calls as the library import of the same name
 # (GLDriver: the stock's own copy of `atexit` at 0x2748, built on keymgr, against the rebuilt's libSystem `atexit`): the stock function is run as a call-out of that name instead, so both images record the same call
 STOCK_HOOKS = {int(a, 16): n for a, n in (x.split(':') for x in os.environ.get('TD_STOCK_HOOKS', '').split(',') if x)}
@@ -188,7 +190,7 @@ class Sim:
         self.snap = [(vm + slide, bytes(uc.mem_read(vm + slide, len(data)))) for name, vm, vs, data in img.segs if name != '__TEXT']
         self.tx = [(vm + slide, vm + slide + vs) for name, vm, vs, data in img.segs if name == '__TEXT']        # __TEXT is r-x in a real process: a wild store into it faults (and cannot corrupt the next run, which restores only the other segments)
         for vm, vs in [(vm + slide, (vs + 0xfff) & ~0xfff) for name, vm, vs, data in img.segs if name == '__TEXT']: uc.mem_protect(vm, vs, UC_PROT_READ | UC_PROT_EXEC)
-        uc.mem_map(ARENA, ARENA_SIZE); uc.mem_map(RING, RING_SIZE); uc.mem_map(STACK, STACK_SIZE); uc.mem_map(STOP, 0x1000); uc.mem_map(CALLOUT, 0x10000)
+        uc.mem_map(ARENA, ARENA_SIZE); uc.mem_map(HEAP, HEAP_SIZE); self.heap_used = 0; uc.mem_map(RING, RING_SIZE); uc.mem_map(STACK, STACK_SIZE); uc.mem_map(STOP, 0x1000); uc.mem_map(CALLOUT, 0x10000)
         uc.hook_add(UC_HOOK_CODE, self.on_code)
         uc.hook_add(UC_HOOK_MEM_READ, self.on_read)
         uc.hook_add(UC_HOOK_MEM_WRITE, self.on_write)
@@ -268,6 +270,20 @@ class Sim:
             self.ev.append(('C', nm, tuple(r), tuple(f), tuple(st)))
             self.ncalls += 1
             if nm.lstrip('_') in ('abort', 'exit', 'cxa_rethrow'): self.ev.append(('F', 'noreturn', nm)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return       # the callee never returns: nothing after the call is behaviour
+            if HEAP_ON and nm.lstrip('_') in ('malloc', 'calloc', 'realloc', 'valloc', 'free'):
+                base = nm.lstrip('_'); rv = [x.raw if isinstance(x, V) else x for x in r]
+                if base == 'free': uc.reg_write(UC_PPC_REG_3, 0)
+                else:
+                    n = (rv[0] * rv[1] if base == 'calloc' else rv[1] if base == 'realloc' else rv[0]) & 0xffffffff
+                    if n > 0x100000 or self.heap_used + ((n + 15) & ~15) + 16 > HEAP_SIZE: p = 0
+                    else:
+                        p = HEAP + self.heap_used; self.heap_used += max(16, (n + 15) & ~15)
+                        if base == 'realloc' and rv[0]:
+                            old = self.heap_sizes.get(rv[0], 0); k = min(n, old)
+                            if k and HEAP <= rv[0] < HEAP + HEAP_SIZE: uc.mem_write(p, bytes(uc.mem_read(rv[0], k)))
+                        self.heap_sizes[p] = n
+                    uc.reg_write(UC_PPC_REG_3, p)
+                uc.reg_write(UC_PPC_REG_PC, uc.reg_read(UC_PPC_REG_LR)); return
             h = zlib.crc32(('%s/%d' % (nm, self.ncalls)).encode())      # a deterministic, name-keyed return value (the same in both images)
             uc.reg_write(UC_PPC_REG_3, (h & 0x3f) if nm.lstrip('_') in ('sprintf', 'snprintf', 'vsprintf', 'vsnprintf', 'fprintf', 'printf', 'vfprintf', 'vprintf') else h & 0xffff); uc.reg_write(UC_PPC_REG_4, 0)      # a printf's result is a byte count: small, so `buf += sprintf(buf, ..)` stays inside the buffer
             uc.reg_write(UC_PPC_REG_PC, uc.reg_read(UC_PPC_REG_LR))
@@ -371,7 +387,7 @@ class Sim:
     def in_stub(self): return any(lo <= self.pc - self.slide < hi for lo, hi in self.img.stubs)
 
     def on_read(self, uc, access, addr, size, value, ud):
-        if addr < NULLPAGE: self.ev.append(('F', 'read', addr)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
+        if addr < NULLPAGE: self.ev.append(('F', 'read', addr)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; self.fa = addr; uc.emu_stop(); return
         if self.in_stub() or self.own_frame(addr): return
         try: v = int.from_bytes(uc.mem_read(addr, size), 'big') if size <= 8 else bytes(uc.mem_read(addr, size)).hex()
         except Exception: v = None
@@ -380,8 +396,8 @@ class Sim:
         if size == 8 and isinstance(v, int): self.rd8.add(v)
 
     def on_write(self, uc, access, addr, size, value, ud):
-        if any(lo <= addr < hi for lo, hi in self.tx): self.ev.append(('F', 'write', self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
-        if addr < NULLPAGE: self.ev.append(('F', 'write', addr)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
+        if any(lo <= addr < hi for lo, hi in self.tx): self.ev.append(('F', 'write', self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; self.fa = None; uc.emu_stop(); return
+        if addr < NULLPAGE: self.ev.append(('F', 'write', addr)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; self.fa = addr; uc.emu_stop(); return
         if self.in_stub() or self.own_frame(addr): return
         try: old = bytes(uc.mem_read(addr, size)) if size <= 8 and not (STACK <= addr < STACK + STACK_SIZE) else None       # silent-store detection only against input-defined memory (the stack holds the fill pattern, which differs between the two control fills)
         except Exception: old = None
@@ -389,13 +405,15 @@ class Sim:
 
     def on_unmapped(self, uc, access, addr, size, value, ud):
         k = {UC_MEM_READ_UNMAPPED: 'read', UC_MEM_WRITE_UNMAPPED: 'write', UC_MEM_FETCH_UNMAPPED: 'fetch'}.get(access, '?')
-        self.ev.append(('F', k, self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; return False
+        self.ev.append(('F', k, self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; self.fa = addr if k != 'fetch' else None; return False
 
     # ---- one run
     def run(self, entry, args, dargs, stackwords, arena, limit=400000):
         uc = self.uc
         for vm, b in self.snap: uc.mem_write(vm, b)
         for za, zs in self.img.zero: uc.mem_write(za + self.slide, bytes(zs))
+        if self.heap_used: uc.mem_write(HEAP, bytes(self.heap_used))
+        self.heap_used = 0; self.heap_sizes = {}
         uc.mem_write(ARENA, arena); uc.mem_write(RING, bytes(RING_SIZE)); uc.mem_write(RING + 0x10, struct.pack('>I', RING_SIZE // 4))
         uc.mem_write(STACK, bytes([self.stackfill & 0xff]) * STACK_SIZE) if self.stackfill < 256 else uc.mem_write(STACK, struct.pack('>I', self.stackfill) * (STACK_SIZE // 4))
         self.sp0 = STACK + STACK_SIZE - 0x2000
@@ -407,7 +425,7 @@ class Sim:
         for i, b in enumerate(dargs[:13]): uc.reg_write(UC_PPC_REG_FPR1 + i, b)
         uc.reg_write(UC_PPC_REG_1, self.sp0); uc.reg_write(UC_PPC_REG_LR, STOP)
         self.entry_nv = [uc.reg_read(UC_PPC_REG_0 + i) for i in range(14, 32)]
-        self.fpc = None; self.ev = []; self.evpc = {}; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
+        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
         try: uc.emu_start(entry + self.slide, STOP, count=limit + 10)
         except UcError as e:
             if self.status == '?':
@@ -419,7 +437,7 @@ class Sim:
                     xo = (wx >> 1) & 0x3ff
                     if wx >> 26 == 31 and xo in (20, 150, 84, 214):      # lwarx / stwcx. / ldarx / stdcx. at an address that is not 4-aligned: the real CPU takes an alignment exception (SIGBUS); the emulator raises UC_ERR_EXCEPTION
                         ra = (wx >> 16) & 31; ea = ((uc.reg_read(UC_PPC_REG_0 + ra) if ra else 0) + uc.reg_read(UC_PPC_REG_0 + ((wx >> 11) & 31))) & 0xffffffff
-                        self.status = 'FAULT'; self.fpc = pcx - self.slide; self.ev.append(('F', 'read' if xo in (20, 84) else 'write', self.na(ea)))
+                        self.status = 'FAULT'; self.fa = None; self.fpc = pcx - self.slide; self.ev.append(('F', 'read' if xo in (20, 84) else 'write', self.na(ea)))
                     else: self.status = 'UCERR'; self.ev.append(('F', 'uc', '%s at pc %#x word %#010x' % (e, pcx - self.slide, wx)))
                 except Exception: self.status = 'UCERR'; self.ev.append(('F', 'uc', str(e)))
         self.flush()
@@ -775,13 +793,37 @@ def mutate(rng, ia, da, sw, arena, reads):
         else: sw[rng.randrange(16)] = pool()
     return ia, da, sw, bytes(a)
 
+def repair_step(sim, ia, sw, arena, rng):
+    """pointer repair (lazy object-graph materialisation).  The run just made on `sim` ended in a fault at an address that is unmapped or in the null page: the cause is almost always a pointer
+    the function loaded from the input memory (or took from an argument / stack word) that the random input did not make valid.  Find that source (the latest 4-byte read from the arena whose value is
+    within 0x8000 below the faulting address, else an argument / stack word of the same kind), point it at a fresh stretch of arena (the same distance below, so the access lands inside it) and return
+    the patched input; the sub-object's content is the arena's existing random words, so deeper pointers are repaired by the next step.  None when no source is found (the fault is a computed wild address)."""
+    fa = sim.fa
+    if fa is None or sim.status != 'FAULT': return None
+    ptr = lambda: ARENA + 0x1000 + (rng.randrange(ARENA_SIZE - 0x3000) & ~0xf) + 0x100
+    for e in reversed(sim.ev):
+        if e[0] != 'R' or e[2] != 4 or not isinstance(e[1], int) or not (ARENA <= e[1] < ARENA + ARENA_SIZE): continue
+        v = e[3].raw
+        if not isinstance(v, int) or not (0 <= fa - v < 0x8000 or 0 <= v - fa < 0x1000 and fa < NULLPAGE): continue
+        o = e[1] - ARENA
+        if o & 3: continue
+        a = bytearray(arena); a[o:o + 4] = struct.pack('>I', (ptr() - (fa - v)) & 0xffffffff)
+        return ia, sw, bytes(a)
+    for i, v in enumerate(ia):
+        if 0 <= fa - v < 0x8000 and not (ARENA <= v < ARENA + ARENA_SIZE):
+            ia = list(ia); ia[i] = ptr() - (fa - v); return ia, sw, arena
+    for i, v in enumerate(sw):
+        if 0 <= fa - v < 0x8000 and not (ARENA <= v < ARENA + ARENA_SIZE):
+            sw = list(sw); sw[i] = ptr() - (fa - v); return ia, sw, arena
+    return None
+
 def fuzz_row(row, budget, S, R, sims, ctl, seed_trials=4):
     """coverage-guided exploration: start from `seed_trials` generated inputs, keep every input that reaches an instruction (in either image) nothing before reached, derive new inputs from kept ones by mutating the
     words the function read.  Every execution is compared.  Returns (verdict counts, first example per verdict, end-state counts, (stock cov, rebuilt cov), executions)."""
     import random
     rng = random.Random(row['id'] * 7919 + 13)
     res = {}; first = {}; stat = {}; seen = [set(), set()]; corpus = []
-    def execute(ia, da, sw, arena):
+    def execute(ia, da, sw, arena, depth=0):
         v, det, aA, bA = eval_input(row, ia, da, sw, arena, sims, ctl)
         stat[(aA[0], bA[0])] = stat.get((aA[0], bA[0]), 0) + 1
         res.setdefault(v, []).append(1)
@@ -792,14 +834,21 @@ def fuzz_row(row, budget, S, R, sims, ctl, seed_trials=4):
                 pickle.dump((ia, da, sw, arena), open(os.path.join(_G['repro'], '%s.%s.pkl' % (row['name'], v)), 'wb'))
         new = (len(aA[3] - seen[0]) > 0) or (len(bA[3] - seen[1]) > 0)
         seen[0] |= aA[3]; seen[1] |= bA[3]
-        return new, [(e[1], e[2]) for e in aA[1] if e[0] == 'R' and isinstance(e[1], int) and ARENA <= e[1] < ARENA + ARENA_SIZE]
+        reads = [(e[1], e[2]) for e in aA[1] if e[0] == 'R' and isinstance(e[1], int) and ARENA <= e[1] < ARENA + ARENA_SIZE]
+        if _G.get('repair') and depth < _G['repair'] and aA[0] == 'FAULT' and bA[0] == 'FAULT':
+            rp = repair_step(sims['A'][0], ia, sw, arena, rng)
+            if rp:
+                n2, r2, ia2, sw2, ar2 = execute(rp[0], da, rp[1], rp[2], depth + 1)
+                if n2: corpus.append((ia2, da, sw2, ar2, r2))
+                new = new or n2
+        return new, reads, ia, sw, arena
     for t in range(seed_trials):
         g = Gen(row['id'] * 100003 + t); arena = g.arena(); ia, da, sw = g.call(row['pc'], valid=(t % 2 == 1)); arena = prime_ring(arena, ia, row['pc'])
-        new, reads = execute(ia, da, sw, arena); corpus.append((ia, da, sw, arena, reads))
+        new, reads = execute(ia, da, sw, arena)[:2]; corpus.append((ia, da, sw, arena, reads))
     for _ in range(max(0, budget - seed_trials)):
         ia, da, sw, arena, reads = corpus[rng.randrange(len(corpus))]
         ia2, da2, sw2, arena2 = mutate(rng, ia, da, sw, arena, reads); arena2 = prime_ring(arena2, ia2, row['pc'])
-        new, reads2 = execute(ia2, da2, sw2, arena2)
+        new, reads2 = execute(ia2, da2, sw2, arena2)[:2]
         if new: corpus.append((ia2, da2, sw2, arena2, reads2))
     inf = lambda c, lo, n: len([x for x in c if lo <= x < lo + n])
     return res, first, stat, (inf(seen[0], row['stock'], row['size']), inf(seen[1], row['reb'], row['size']))
@@ -848,7 +897,7 @@ def _init(stock, reb, symmap, nm, ledger=None, funcs=None, nargs=None, fuzz=0, r
         for l in open(nargs):
             p = l.rstrip('\n').split('\t')
             if len(p) >= 2 and p[1].isdigit(): Sim.nargs[p[0].lstrip('_')] = int(p[1])
-    _G.update(fuzz=fuzz, repro=repro, S=S, R=R, sims={f: (Sim(S, ids, names, fv), Sim(R, ids, names, fv)) for f, fv in (('A', 0), ('B', 0x5a5a5a5a))}, ctl=Sim(S, ids, names, 0, slide=SLIDE2))
+    _G.update(repair=int(os.environ.get('TD_REPAIR', '0')), fuzz=fuzz, repro=repro, S=S, R=R, sims={f: (Sim(S, ids, names, fv), Sim(R, ids, names, fv)) for f, fv in (('A', 0), ('B', 0x5a5a5a5a))}, ctl=Sim(S, ids, names, 0, slide=SLIDE2))
 def _work(job):
     row, trials = job
     try:
