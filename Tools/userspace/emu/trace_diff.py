@@ -15,6 +15,7 @@ not recorded: how a compiler lays out its frame is not external.
 """
 import sys, os, struct, zlib, bisect, random, re, math
 FLOAT_EXACT = os.environ.get('TD_FLOATEXACT') == '1'
+ENTRYARGS = os.environ.get('TD_ENTRYARGS') == '1'      # TD_ENTRYARGS=1: at every call of an in-image function (a ledger entry) the words the caller itself wrote into its own frame at the pointer arguments r3..r10 are recorded and compared per callee name (stock vs rebuilt): the content of a stack record handed to a callee, which the ordinary event stream never shows when the callee faults / returns before reading it
 FLOAT_EDGE = os.environ.get('TD_FLOATEDGE') == '1'       # TD_FLOATEDGE=1: the double-argument pool also holds values around 2^23..2^26 (where a single-precision add/sub differs from a double one before an integer conversion) and their halves
 EDGE_VALS = (8388608.0, 8388609.0, -8388608.0, -8388609.0, 16777215.0, 16777216.0, -16777216.0, -16777217.0, 33554432.0, -33554432.0, 67108864.0, -67108864.0, 12345678.5)
 sys.path.insert(0, os.path.expanduser('~/g5logs/fnf_237/pypkgs'))
@@ -227,6 +228,22 @@ class Sim:
             if self.sp0 - 0x40000 <= v < self.sp0: return V(v, ('OWNFRAME',))        # the address of one of the function's own locals (an out parameter): the frame layout is the compiler's
         return V(v)
 
+    entries = {}
+    def snap_entry(self, uc, name):
+        r1 = uc.reg_read(UC_PPC_REG_1); items = []
+        for i in range(3, 11):
+            p = uc.reg_read(UC_PPC_REG_0 + i)
+            if not (r1 <= p < self.sp0 and p & 3 == 0): continue
+            ws = []
+            for k in range(16):
+                q = p + 4 * k
+                if q + 4 > self.sp0 or not all(b in self.fwb for b in range(q, q + 4)): break
+                w = int.from_bytes(uc.mem_read(q, 4), 'big')
+                if (w >> 23) & 0xff == 0xff and w & 0x7fffff: w = 0x7fc00000        # NaN payloads are one class (see the stores)
+                ws.append(self.nv(w, 4))
+            if ws: items.append((i - 3, tuple(ws)))
+        if items: self.ent.append((name, tuple(items)))
+
     def own_frame(self, a): return STACK <= a < self.sp0 + 0x38 + 4 * getattr(self, 'nstack', 0)      # incl. the incoming stack-parameter words (9th+ arguments): the callee owns them; everything below sp0 down to the stack's end is this call's frames, alloca included (gld_uploadParamConstants allocas count*16 bytes of a random count: more than the 0x40000 window the first census used) (PowerPC ABI), a store there is not an external effect
 
     def flush(self):
@@ -262,6 +279,7 @@ class Sim:
         if addr == STOP: self.status = 'RET'; uc.emu_stop(); return
         if not (CALLOUT <= addr < CALLOUT + 0x10000) and not (self.img.lo <= addr - self.slide < self.img.end) and NULLPAGE <= addr:       # a wild branch into non-code (arena / stack data): whatever executes there is arbitrary, so the run ends at the fetch
             self.ev.append(('F', 'wild', self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
+        if ENTRYARGS and self.n > 1 and (addr - self.slide) in self.entries: self.snap_entry(uc, self.entries[addr - self.slide])
         hook = STOCK_HOOKS.get(addr - self.slide) if self.img.is_stock else None
         if CALLOUT <= addr < CALLOUT + 0x10000 or hook:
             if hook:
@@ -414,6 +432,11 @@ class Sim:
     def on_write(self, uc, access, addr, size, value, ud):
         if any(lo <= addr < hi for lo, hi in self.tx): self.ev.append(('F', 'write', self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; self.fa = None; uc.emu_stop(); return
         if addr < NULLPAGE: self.ev.append(('F', 'write', addr)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; self.fa = addr; uc.emu_stop(); return
+        if ENTRYARGS and not self.in_stub() and self.own_frame(addr):
+            r1 = uc.reg_read(UC_PPC_REG_1)
+            if size == 4 and (value & 0xffffffff) == r1 and addr < r1 and r1 - addr < 0x100000:       # stwu r1,-N(r1): a new frame starts here - whatever an earlier call left in these bytes is stale residue, not a value this function wrote (it differs between the images with the frame sizes)
+                self.fwb = {b for b in self.fwb if not addr <= b < r1}
+            self.fwb.update(range(addr, addr + size))
         if self.in_stub() or self.own_frame(addr): return
         try: old = bytes(uc.mem_read(addr, size)) if size <= 8 and not (STACK <= addr < STACK + STACK_SIZE) else None       # silent-store detection only against input-defined memory (the stack holds the fill pattern, which differs between the two control fills)
         except Exception: old = None
@@ -441,7 +464,7 @@ class Sim:
         for i, b in enumerate(dargs[:13]): uc.reg_write(UC_PPC_REG_FPR1 + i, b)
         uc.reg_write(UC_PPC_REG_1, self.sp0); uc.reg_write(UC_PPC_REG_LR, STOP)
         self.entry_nv = [uc.reg_read(UC_PPC_REG_0 + i) for i in range(14, 32)]
-        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
+        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.fwb = set(); self.ent = []; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
         try: uc.emu_start(entry + self.slide, STOP, count=limit + 10)
         except UcError as e:
             if self.status == '?':
@@ -464,6 +487,7 @@ class Sim:
         regs = {'r3': uc.reg_read(UC_PPC_REG_3), 'r4': uc.reg_read(UC_PPC_REG_4), 'f1': uc.reg_read(UC_PPC_REG_FPR1), 'r1': uc.reg_read(UC_PPC_REG_1) - self.sp0,
                 'nv': tuple(uc.reg_read(UC_PPC_REG_0 + i) for i in range(14, 32)), 'fnv': tuple(uc.reg_read(UC_PPC_REG_FPR0 + i) for i in range(14, 32)),
                 'cr': uc.reg_read(UC_PPC_REG_CR) & 0x00fff000, 'fpc': getattr(self, 'fpc', None) if self.status == 'FAULT' else None}
+        if ENTRYARGS: regs['ent'] = self.ent
         return self.status, self.ev, regs, self.cov
 
 # ---------------------------------------------------------------- inputs
@@ -659,7 +683,40 @@ def classify_effect(ea, eb, det):
     if ptr_value_read(ea, eb) or ptr_partial_read(ea, eb): return 'PTR_VALUE_DEP', '; '.join(det)
     return 'EFFECTS', '; '.join(det)
 
+VARARG_CALLEES = ('printf', 'sprintf', 'snprintf', 'fprintf', 'vprintf', 'vsprintf', 'vsnprintf', 'vfprintf', 'sscanf', 'scanf')
+
+def ent_match(x, y):
+    """two recorded argument sets agree: for every argument index recorded in both, the words agree over the shorter of the two runs (the words after the end of the buffer belong to a neighbouring local whose place is the compiler's choice; an argument register that holds a stale frame pointer in only one image is not an argument)"""
+    dy = dict(y)
+    for i, ws in x:
+        if i in dy:
+            n = min(len(ws), len(dy[i]))
+            if ws[:n] != dy[i][:n]: return False
+    return True
+
+def ent_diff(ea, eb):
+    """per callee name present in both images' run with the same number of calls: every stock argument record has a matching rebuilt record (a callee one image inlined, or a different number of calls, is not comparable and is skipped)"""
+    if not ea or not eb: return ''
+    na = {}; nb = {}
+    for n, it in ea: na.setdefault(n, []).append(it)
+    for n, it in eb: nb.setdefault(n, []).append(it)
+    for n in sorted(set(na) & set(nb)):
+        if len(na[n]) != len(nb[n]) or n.lstrip('_').startswith(VARARG_CALLEES): continue       # a varargs callee's pointer argument is the register save area: the words after the real arguments are stale volatile registers (r9/r10), not values the function wrote
+        rest = list(nb[n])
+        for it in na[n]:
+            j = next((j for j, o in enumerate(rest) if ent_match(it, o)), None)
+            if j is None: return '%s: stock record %r has no matching rebuilt record (rebuilt %r)' % (n, it, rest[0] if rest else None)
+            rest.pop(j)
+    return ''
+
 def compare(a, b, ret_kind):
+    v, det = _compare(a, b, ret_kind)
+    if ENTRYARGS and v in ('IDENTICAL', 'REORDERED', 'READ_SET', 'FAULT_SITE', 'FAULT_PARTIAL'):
+        d = ent_diff(a[2].get('ent'), b[2].get('ent'))
+        if d: return 'EFFECTS', 'callee argument record differs: ' + d[:400]
+    return v, det
+
+def _compare(a, b, ret_kind):
     """a, b = (status, ev, regs, cov).  Returns (verdict, detail), strongest first:
        IDENTICAL       the full ordered trace (reads, writes, calls, fault) and the return / callee-saved registers are equal
        REORDERED       same calls out (order + arguments), same multiset of writes and same set of external reads between consecutive calls, same fault outcome, same return value;
@@ -931,7 +988,12 @@ def _init(stock, reb, symmap, nm, ledger=None, funcs=None, nargs=None, fuzz=0, r
         for l in open(nargs):
             p = l.rstrip('\n').split('\t')
             if len(p) >= 2 and p[1].isdigit(): Sim.nargs[p[0].lstrip('_')] = int(p[1])
-    _G.update(repair=int(os.environ.get('TD_REPAIR', '0')), fuzz=fuzz, repro=repro, S=S, R=R, sims={f: (Sim(S, ids, names, fv), Sim(R, ids, names, fv)) for f, fv in (('A', 0), ('B', 0x5a5a5a5a))}, ctl=Sim(S, ids, names, 0, slide=SLIDE2))
+    _sims = {f: (Sim(S, ids, names, fv), Sim(R, ids, names, fv)) for f, fv in (('A', 0), ('B', 0x5a5a5a5a))}
+    if ENTRYARGS and ledger:
+        _rows = [r for r in read_ledger(ledger, S.bal, R.bal) if 'stub' not in r['name'].lower()]       # a library stub's argument is whatever the real callee would read: only calls into image code are compared
+        for ss, sr in _sims.values():
+            ss.entries = {r['stock']: r['name'] for r in _rows}; sr.entries = {r['reb']: r['name'] for r in _rows}
+    _G.update(repair=int(os.environ.get('TD_REPAIR', '0')), fuzz=fuzz, repro=repro, S=S, R=R, sims=_sims, ctl=Sim(S, ids, names, 0, slide=SLIDE2))
 def _work(job):
     row, trials = job
     try:
