@@ -1,0 +1,295 @@
+#id	name	rc	pc	size	stock_cov	reb_cov	runs	IDENTICAL	REORDERED	READ_SET	FAULT_SITE	FAULT_MISMATCH	EFFECTS	EMUERR	TIMEOUT	UNINIT_REBUILT	UNINIT_OTHER	end_states	first_nonidentical	LAYOUT_DEP	PTR_VALUE_DEP	IMAGE_DATA_DEP
+24	_gleDCBAlloc	i	-	68	17	17	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+4	_glepAddPlugin	i	-	136	30	28	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+6	_glepValidatePlugin	i	-	368	31	31	280	280	0	0	0	0	0	0	0	0	0	FAULT/FAULT:280		0	0	0
+158	_gleSetVertexSubmitFunc	v	-	156	17	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+154	_gleBeginPrimitiveTCLFunc	v	-	168	22	24	227	227	0	0	0	0	0	0	0	0	0	FAULT/FAULT:227		0	0	0
+99	_gleGetState	i	-	13228	94	102	493	493	0	0	0	0	0	0	0	0	0	FAULT/FAULT:343,RET/RET:150		0	0	0
+201	_glePPParse	v	-	4884	63	74	339	339	0	0	0	0	0	0	0	0	0	FAULT/FAULT:339		0	0	0
+27	_gleAddEnableHashFunc	v	-	124	31	29	265	164	101	0	0	0	0	0	0	0	0	FAULT/FAULT:116,RET/RET:149	REORDERED: same writes/reads per segment; order differs	0	0	0
+34	_gleInitFuncCache	i	-	140	35	35	150	0	150	0	0	0	0	0	0	0	0	RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+173	_gleModifyPluginTextureLevel	v	-	376	81	76	374	267	107	0	0	0	0	0	0	0	0	FAULT/FAULT:342,RET/RET:32	REORDERED: same writes/reads per segment; order differs	0	0	0
+191	_gleShareSharedState	i	-	88	22	22	567	566	0	0	0	0	0	0	0	0	0	FAULT/FAULT:528,RET/RET:39		1	0	0
+238	_gleFreeQueryMachine	v	-	136	19	22	337	337	0	0	0	0	0	0	0	0	0	FAULT/FAULT:337		0	0	0
+239	_gleFreeFenceMachine	v	-	136	19	22	362	362	0	0	0	0	0	0	0	0	0	FAULT/FAULT:362		0	0	0
+87	_gliSetCurrentPluginDispatchTable	v	-	288	58	49	404	287	99	0	0	0	0	0	0	0	0	FAULT/FAULT:401,RET/RET:3	REORDERED: same writes/reads per segment; order differs	18	0	0
+257	_glVertex2i_Exec	v	-	144	31	36	249	95	149	0	5	0	0	0	0	0	0	FAULT/FAULT:249	FAULT_SITE: stock ('read', 1342165548) vs rebuilt ('read', 1342165544)	0	0	0
+67	_gleUpdateLightDirection	v	-	220	55	54	429	85	326	0	18	0	0	0	0	0	0	FAULT/FAULT:311,RET/RET:118	FAULT_PARTIAL: same fault ('read', 1342177184); accesses completed before it differ: reads: only rebuilt reads (1342197920, 4)	0	0	0
+240	_gleFreeVertexArrayState	v	-	180	45	44	527	264	106	0	157	0	0	0	0	0	0	FAULT/FAULT:525,RET/RET:2	FAULT_PARTIAL: same fault ('read', 1809526500); accesses completed before it differ: reads: only rebuilt reads (1342532216, 4)	0	0	0
+63	_gleUpdateLightPosition	v	-	540	135	132	347	90	255	0	0	0	0	0	0	0	0	FAULT/FAULT:237,RET/RET:110	REORDERED: same writes/reads per segment; order differs	2	0	0
+263	_gleDestroyEnableHashTable	v	-	104	11	13	1407	1407	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1407		0	0	0
+298	_gleAddListItem	i	-	292	73	69	412	0	217	0	195	0	0	0	0	0	0	FAULT/FAULT:351,RET/RET:61	FAULT_SITE: stock ('read', 4261854031) vs rebuilt ('read', 4261854035)	0	0	0
+206	_glePPPruneParams	i	-	648	153	141	721	84	563	0	74	0	0	0	0	0	0	FAULT/FAULT:657,RET/RET:64	FAULT_PARTIAL: same fault ('read', 0); accesses completed before it differ: reads: only rebuilt reads (1342287744, 4)	0	0	0
+309	_glColor4f_CompExec	v	-	164	41	40	351	0	259	0	91	0	0	0	0	0	0	FAULT/FAULT:327,RET/RET:24	FAULT_PARTIAL: same fault ('write', 1342161636); accesses completed before it differ: reads: only stock reads (1342180900, 4)	1	0	0
+204	_glePPPruneOutputs	i	-	344	82	82	1212	1212	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1162,RET/RET:50		0	0	0
+367	_glRotated_CompExec	v	-	540	43	16	318	69	235	0	13	0	0	0	0	0	0	FAULT/FAULT:255,RET/RET:63	FAULT_SITE: stock ('write', 2707423360) vs rebuilt ('write', 893386880)	1	0	0
+43	_gleCreateTextureObject	i	-	148	37	33	150	0	150	0	0	0	0	0	0	0	0	RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+379	_glColor4_ListExec	v	-	92	23	23	293	45	179	0	69	0	0	0	0	0	0	FAULT/FAULT:259,RET/RET:34	FAULT_SITE: stock ('read', 12) vs rebuilt ('read', 0)	0	0	0
+373	_gleCallList	v	-	184	43	41	496	496	0	0	0	0	0	0	0	0	0	FAULT/FAULT:349,RET/RET:147		0	0	0
+372	_CloseCurrentVAR	v	-	228	50	53	532	329	132	0	0	0	0	0	0	0	71	FAULT/FAULT:532	REORDERED: same writes/reads per segment; order differs	0	0	0
+394	_gleExecuteVertexArrayRange	i	-	168	24	35	303	170	133	0	0	0	0	0	0	0	0	FAULT/FAULT:303	REORDERED: same writes/reads per segment; order differs	0	0	0
+451	_gleGetVertexArrayFunc	i	-	68	11	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+381	_glVertex3_ListExec	v	-	84	16	21	455	23	148	0	284	0	0	0	0	0	0	FAULT/FAULT:455	FAULT_SITE: stock ('read', 8) vs rebuilt ('read', 0)	0	0	0
+389	_gleFlushPluginVertexArray	v	-	212	38	40	377	205	36	0	136	0	0	0	0	0	0	FAULT/FAULT:377	FAULT_PARTIAL: same fault ('read', 3369619890); accesses completed before it differ: reads: only rebuilt reads (1342419242, 4)	0	0	0
+395	_gleDrawArraysSyncState	v	-	736	163	154	465	463	2	0	0	0	0	0	0	0	0	FAULT/FAULT:426,RET/RET:39	REORDERED: same writes/reads per segment; order differs	0	0	0
+252	_gleFreeTextureState	v	-	376	41	47	1274	1274	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1274		0	0	0
+456	_gleDrawArraysOrElements_Core	v	-	532	19	21	219	219	0	0	0	0	0	0	0	0	0	FAULT/FAULT:219		0	0	0
+457	_gleFlushAtomicTCLFunc	v	-	60	8	10	236	236	0	0	0	0	0	0	0	0	0	FAULT/FAULT:236		0	0	0
+25	_gleCreateSharedState	i	-	548	105	102	200	193	7	0	0	0	0	0	0	0	0	FAULT/FAULT:193,RET/RET:7	REORDERED: same writes/reads per segment; order differs	0	0	0
+248	_gleClearPipelineProgram	v	-	364	81	77	407	369	25	0	13	0	0	0	0	0	0	FAULT/FAULT:362,RET/RET:45	FAULT_SITE: stock ('write', 9) vs rebuilt ('write', 17)	0	0	0
+458	_gleFlushAndSubmit	v	-	116	12	12	235	234	0	0	0	0	0	0	0	0	0	FAULT/FAULT:235		1	0	0
+425	_gleAddAttribElem	v	-	120	24	24	337	324	12	0	0	0	0	0	0	0	0	FAULT/FAULT:193,RET/RET:144	REORDERED: same writes/reads per segment; order differs	1	0	0
+489	_gleSetProjectionFuncAll	v	-	104	14	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+474	_gleCreateFenceObject	i	-	112	28	28	150	0	150	0	0	0	0	0	0	0	0	RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+504	_glGetTexParameterfv_Exec	v	-	916	30	32	242	242	0	0	0	0	0	0	0	0	0	FAULT/FAULT:92,RET/RET:150		0	0	0
+460	_gleModifyPluginVertexArray	v	-	184	43	43	325	159	85	0	80	0	0	0	0	0	0	FAULT/FAULT:303,RET/RET:22	FAULT_PARTIAL: same fault ('read', 424); accesses completed before it differ: reads: only rebuilt reads (1342332600, 4)	1	0	0
+526	_glepPluginDisconnect	v	-	140	27	26	255	255	0	0	0	0	0	0	0	0	0	FAULT/FAULT:225,RET/RET:30		0	0	0
+140	_gleCreatePluginTextureLevel	v	-	1228	255	262	425	171	229	0	24	0	0	0	0	0	0	FAULT/FAULT:403,RET/RET:22	FAULT_PARTIAL: same fault ('read', 25566); accesses completed before it differ: reads: only rebuilt reads (1342304226, 4)	1	0	0
+494	_gleClipPoly	v	-	432	85	86	796	796	0	0	0	0	0	0	0	0	0	FAULT/FAULT:757,RET/RET:39		0	0	0
+254	_gleDetachShaderObjects	v	-	144	31	29	1934	1933	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1934		1	0	0
+530	_gleFlushPrimitiveTCLFunc	v	-	596	53	60	275	265	10	0	0	0	0	0	0	0	0	FAULT/FAULT:275	REORDERED: same writes/reads per segment; order differs	0	0	0
+529	_gleUploadPluginTextureLevel	v	-	420	73	72	433	365	56	0	10	0	0	0	0	0	0	FAULT/FAULT:421,RET/RET:12	FAULT_PARTIAL: same fault ('read', 628610695); accesses completed before it differ: reads: only rebuilt reads (1342303377, 4)	2	0	0
+557	_glBitmap_ListExec	v	-	976	70	74	422	393	29	0	0	0	0	0	0	0	0	FAULT/FAULT:284,RET/RET:138	REORDERED: same writes/reads per segment; order differs	0	0	0
+518	_gleSetRasterPos	v	-	1524	50	55	351	0	254	0	97	0	0	0	0	0	0	FAULT/FAULT:351	FAULT_PARTIAL: same fault ('write', 1342174859); accesses completed before it differ: reads: only stock reads (1342192128, 1)	0	0	0
+588	_glUnmapBuffer_Exec	v	-	392	46	43	311	311	0	0	0	0	0	0	0	0	0	FAULT/FAULT:168,RET/RET:143		0	0	0
+558	_glBitmap_Comp	v	-	444	87	81	398	54	337	0	7	0	0	0	0	0	0	FAULT/FAULT:346,RET/RET:52	FAULT_SITE: stock ('read', 791340758) vs rebuilt ('read', 1118676)	0	0	0
+567	_glBlendColor_CompExec	v	-	96	24	24	341	0	231	0	92	0	0	0	0	0	0	FAULT/FAULT:275,RET/RET:66	FAULT_SITE: stock ('read', 21500) vs rebuilt ('read', 21504)	18	0	0
+16	_gleOptimizeDisplayListCreateHashTable	v	-	248	62	59	150	0	0	0	0	0	0	0	0	0	0	RET/RET:150	PTR_VALUE_DEP: segment 2: only rebuilt writes (1543503872, 4) = [1543504000]	0	150	0
+596	_glClearAccum_CompExec	v	-	96	24	24	308	0	261	0	47	0	0	0	0	0	0	FAULT/FAULT:235,RET/RET:73	FAULT_SITE: stock ('read', 3168000153) vs rebuilt ('read', 3168000157)	0	0	0
+616	_glColor3_ListExec	v	-	92	23	23	287	68	150	0	69	0	0	0	0	0	0	FAULT/FAULT:252,RET/RET:35	FAULT_SITE: stock ('read', 13) vs rebuilt ('read', 5)	0	0	0
+599	_glClearColor_CompExec	v	-	96	24	24	319	56	249	0	1	0	0	0	0	0	0	FAULT/FAULT:245,RET/RET:74	FAULT_SITE: stock ('write', 1064747509) vs rebuilt ('write', 1118704117)	13	0	0
+618	_glColor3b_Exec	v	-	196	49	49	245	96	147	0	0	0	0	0	0	0	0	FAULT/FAULT:201,RET/RET:44	REORDERED: same writes/reads per segment; order differs	2	0	0
+621	_glColor3bv_Exec	v	-	220	55	55	303	0	210	0	93	0	0	0	0	0	0	FAULT/FAULT:259,RET/RET:44	FAULT_SITE: stock ('read', 0) vs rebuilt ('read', 2)	0	0	0
+480	_gleCopyPixelMapi	v	-	232	45	33	476	474	2	0	0	0	0	0	0	0	0	FAULT/FAULT:326,RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+95	_gleResetVertexArrays	v	-	128	24	26	1821	0	1677	0	125	0	0	0	0	0	0	FAULT/FAULT:1821	FAULT_SITE: stock ('read', 2880703894) vs rebuilt ('read', 2880703882)	19	0	0
+641	_glColor3s_Exec	v	-	196	49	49	341	204	137	0	0	0	0	0	0	0	0	FAULT/FAULT:297,RET/RET:44	REORDERED: same writes/reads per segment; order differs	0	0	0
+638	_glColor3iv_Exec	v	-	208	52	52	308	0	229	0	78	0	0	0	0	0	0	FAULT/FAULT:262,RET/RET:46	FAULT_SITE: stock ('read', 2608471574) vs rebuilt ('read', 2608471578)	1	0	0
+644	_glColor3sv_Exec	v	-	208	52	52	291	0	247	0	44	0	0	0	0	0	0	FAULT/FAULT:248,RET/RET:43	FAULT_SITE: stock ('read', 0) vs rebuilt ('read', 4)	0	0	0
+658	_glColor3us_Exec	v	-	184	46	34	244	98	146	0	0	0	0	0	0	0	0	FAULT/FAULT:197,RET/RET:47	REORDERED: same writes/reads per segment; order differs	0	0	0
+655	_glColor3uiv_Exec	v	-	188	47	43	314	38	275	0	0	0	0	0	0	0	0	FAULT/FAULT:274,RET/RET:40	REORDERED: same writes/reads per segment; order differs	1	0	0
+202	_glePPPruneParamArrays	i	-	300	69	63	1475	282	1193	0	0	0	0	0	0	0	0	FAULT/FAULT:1458,RET/RET:17	REORDERED: same writes/reads per segment; order differs	0	0	0
+679	_glColor4i_Exec	v	-	216	54	54	261	104	149	0	8	0	0	0	0	0	0	FAULT/FAULT:220,RET/RET:41	FAULT_SITE: stock ('write', 1342162376) vs rebuilt ('write', 1342162380)	0	0	0
+667	_glColor4bv_Exec	v	-	248	62	62	308	0	236	0	71	0	0	0	0	0	0	FAULT/FAULT:268,RET/RET:40	FAULT_SITE: stock ('read', 2) vs rebuilt ('read', 3)	1	0	0
+661	_glColor3usv_Exec	v	-	196	49	38	308	67	241	0	0	0	0	0	0	0	0	FAULT/FAULT:268,RET/RET:40	REORDERED: same writes/reads per segment; order differs	0	0	0
+852	_glDrawPixels_ListExec	v	-	1320	60	61	341	341	0	0	0	0	0	0	0	0	0	FAULT/FAULT:192,RET/RET:149		0	0	0
+682	_glColor4iv_Exec	v	-	232	58	58	453	0	384	0	69	0	0	0	0	0	0	FAULT/FAULT:406,RET/RET:47	FAULT_SITE: stock ('read', 0) vs rebuilt ('read', 4)	0	0	0
+235	_gleFreeVertexArrays	v	-	68	17	17	1900	1899	0	0	0	0	0	0	1	0	0	FAULT/FAULT:1895,RET/RET:4,TIMEOUT/TIMEOUT:1		0	0	0
+688	_glColor4sv_Exec	v	-	232	58	58	329	0	272	0	41	0	0	0	0	0	0	FAULT/FAULT:284,RET/RET:45	FAULT_SITE: stock ('read', 4194304) vs rebuilt ('read', 4194306)	16	0	0
+699	_glColor4uiv_Exec	v	-	208	52	51	450	0	411	0	39	0	0	0	0	0	0	FAULT/FAULT:392,RET/RET:58	FAULT_SITE: stock ('read', 101224298) vs rebuilt ('read', 101224302)	0	0	0
+958	_glFogCoordfv_Exec	v	-	12	3	3	384	381	3	0	0	0	0	0	0	0	0	FAULT/FAULT:234,RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+959	_glFogCoordd_Exec	v	-	12	3	3	565	565	0	0	0	0	0	0	0	0	0	FAULT/FAULT:448,RET/RET:117		0	0	0
+853	_glDrawPixels_Comp	v	-	600	142	134	411	41	355	0	0	0	0	0	0	0	0	FAULT/FAULT:327,RET/RET:84	REORDERED: same writes/reads per segment; order differs	15	0	0
+1242	_glOrtho_CompExec	v	-	120	30	30	499	162	167	0	170	0	0	0	0	0	0	FAULT/FAULT:429,RET/RET:70	FAULT_SITE: stock ('read', 21494) vs rebuilt ('read', 21498)	0	0	0
+1254	_glProgramEnvParameter4dARB_CompExec	v	-	112	28	28	315	0	260	0	53	0	0	0	0	0	0	FAULT/FAULT:253,RET/RET:62	FAULT_SITE: stock ('read', 21627) vs rebuilt ('read', 21631)	2	0	0
+1256	_glProgramEnvParameter4fARB_CompExec	v	-	112	28	28	347	0	242	0	98	0	0	0	0	0	0	FAULT/FAULT:282,RET/RET:65	FAULT_SITE: stock ('read', 21500) vs rebuilt ('read', 21504)	7	0	0
+1267	_glProgramLocalParameter4fARB_CompExec	v	-	112	28	28	317	0	236	0	72	0	0	0	0	0	1	FAULT/FAULT:239,RET/RET:78	FAULT_SITE: stock ('read', 67130363) vs rebuilt ('read', 67130367)	8	0	0
+387	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	v	-	1568	46	43	1478	215	1237	0	7	0	0	0	0	0	19	FAULT/FAULT:1443,RET/RET:35	FAULT_PARTIAL: same fault ('read', 1342702436); stores completed before it differ: only rebuilt writes (1342687264, 4) = [17]	0	0	0
+1412	_glRectd_Comp	v	-	148	37	37	420	0	220	0	69	0	0	0	0	0	0	FAULT/FAULT:376,RET/RET:44	FAULT_SITE: stock ('read', 24946) vs rebuilt ('read', 24950)	131	0	0
+160	_gleCreateFuncCacheElem	i	-	156	39	35	209	160	49	0	0	0	0	0	0	0	0	FAULT/FAULT:112,RET/RET:97	REORDERED: same writes/reads per segment; order differs	0	0	0
+1414	_glRectf_Comp	v	-	148	37	37	319	0	238	0	57	0	0	0	0	0	0	FAULT/FAULT:286,RET/RET:33	FAULT_SITE: stock ('read', 33575931) vs rebuilt ('read', 33575935)	24	0	0
+1388	_glRasterPos4d_CompExec	v	-	96	24	24	431	0	181	0	250	0	0	0	0	0	0	FAULT/FAULT:400,RET/RET:31	FAULT_PARTIAL: same fault ('read', 312); accesses completed before it differ: reads: only stock reads (1342431336, 4)	0	0	0
+295	_gleNewList	v	-	22516	5623	5623	691	289	301	0	0	0	0	0	0	0	0	FAULT/FAULT:570,RET/RET:121	REORDERED: same writes/reads per segment; order differs	101	0	0
+1442	_glRotatef_CompExec	v	-	536	42	17	318	65	248	0	4	0	0	0	0	0	0	FAULT/FAULT:248,RET/RET:70	FAULT_SITE: stock ('read', 1342704316) vs rebuilt ('read', 1342704320)	1	0	0
+1481	_glDetachObjectARB_Exec	v	-	552	57	59	329	329	0	0	0	0	0	0	0	0	0	FAULT/FAULT:204,RET/RET:125		0	0	0
+1492	_glUniform1fARB_Exec	v	-	600	52	47	280	280	0	0	0	0	0	0	0	0	0	FAULT/FAULT:135,RET/RET:145		0	0	0
+1493	_glUniform4fvARB_Exec	v	-	924	62	52	378	378	0	0	0	0	0	0	0	0	0	FAULT/FAULT:242,RET/RET:136		0	0	0
+1485	_evaluateImageUnits	i	-	1000	101	98	623	130	14	0	479	0	0	0	0	0	0	FAULT/FAULT:610,RET/RET:13	FAULT_PARTIAL: same fault ('read', 20525); accesses completed before it differ: reads: only stock reads (1342638210, 4)	0	0	0
+1568	_glGetShaderiv_Exec	v	-	348	47	42	435	435	0	0	0	0	0	0	0	0	0	FAULT/FAULT:313,RET/RET:122		0	0	0
+1521	_glUniform4fARB_CompExec	v	-	104	26	26	267	0	241	0	25	0	0	0	0	0	0	FAULT/FAULT:176,RET/RET:91	FAULT_SITE: stock ('read', 21506) vs rebuilt ('read', 21510)	1	0	0
+1577	_glGetActiveUniformARB_Exec	v	-	348	49	45	444	444	0	0	0	0	0	0	0	0	0	FAULT/FAULT:331,RET/RET:113		0	0	0
+26	_gleCreateEnableHashTable	v	-	2092	523	523	150	0	150	0	0	0	0	0	0	0	0	RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+1581	_glBindAttribLocationARB_Exec	v	-	360	59	61	314	313	0	0	0	0	0	0	0	0	0	FAULT/FAULT:193,RET/RET:121		1	0	0
+1687	_glTexCoord4f_CompExec	v	-	96	24	24	307	0	233	0	72	0	0	0	0	0	0	FAULT/FAULT:239,RET/RET:68	FAULT_SITE: stock ('read', 3896108950) vs rebuilt ('read', 3896108954)	2	0	0
+1667	_glTexCoord4d_CompExec	v	-	96	24	24	529	0	218	0	311	0	0	0	0	0	0	FAULT/FAULT:476,RET/RET:53	FAULT_SITE: stock ('read', 21497) vs rebuilt ('read', 21501)	0	0	0
+1763	_glMultiTexCoord4d_CompExec	v	-	104	26	26	449	0	230	0	219	0	0	0	0	0	0	FAULT/FAULT:377,RET/RET:72	FAULT_SITE: stock ('read', 21516) vs rebuilt ('read', 21520)	0	0	0
+1786	_glMultiTexCoord4f_CompExec	v	-	104	26	26	327	0	258	0	69	0	0	0	0	0	0	FAULT/FAULT:268,RET/RET:59	FAULT_SITE: stock ('read', 21500) vs rebuilt ('read', 21504)	0	0	0
+46	_gleInitPipelineProgramState	v	-	624	117	113	383	126	257	0	0	0	0	0	0	0	0	FAULT/FAULT:366,RET/RET:17	REORDERED: same writes/reads per segment; order differs	0	0	0
+357	_gleEndList	v	-	380	84	78	1119	89	754	0	134	0	0	0	0	0	0	FAULT/FAULT:1062,RET/RET:57	FAULT_PARTIAL: same fault ('read', 65536); accesses completed before it differ: reads: only rebuilt reads (1342236084, 4)	142	0	0
+1934	_glVertex2_ListExec	v	-	84	16	21	483	127	139	0	217	0	0	0	0	0	0	FAULT/FAULT:483	FAULT_SITE: stock ('read', 4294967286) vs rebuilt ('read', 4294967282)	0	0	0
+1935	_glVertex4_ListExec	v	-	80	15	20	467	62	147	0	258	0	0	0	0	0	0	FAULT/FAULT:467	FAULT_SITE: stock ('read', 22) vs rebuilt ('read', 10)	0	0	0
+1946	_glVertex4d_CompExec	v	-	96	24	24	327	0	235	0	77	0	0	0	0	0	0	FAULT/FAULT:327	FAULT_SITE: stock ('read', 21500) vs rebuilt ('read', 21504)	15	0	0
+1959	_glVertex4f_CompExec	v	-	96	24	12	324	0	238	0	60	0	0	0	0	0	0	FAULT/FAULT:324	FAULT_SITE: stock ('read', 21500) vs rebuilt ('read', 21504)	26	0	0
+1964	_glVertex2iv_Exec	v	-	152	33	38	430	281	148	0	0	0	0	0	0	0	0	FAULT/FAULT:430	REORDERED: same writes/reads per segment; order differs	1	0	0
+1967	_glVertex3i_Exec	v	-	160	35	40	247	247	0	0	0	0	0	0	0	0	0	FAULT/FAULT:247		0	0	0
+246	_gleFreePipelineProgramState	v	-	208	49	49	453	364	37	0	47	0	0	0	5	0	0	FAULT/FAULT:443,RET/RET:5,TIMEOUT/TIMEOUT:5	FAULT_PARTIAL: same fault ('read', 475); accesses completed before it differ: reads: only rebuilt reads (1342646372, 4)	0	0	0
+1970	_glVertex3iv_Exec	v	-	172	38	43	394	394	0	0	0	0	0	0	0	0	0	FAULT/FAULT:394		0	0	0
+1973	_glVertex4i_Exec	v	-	172	38	43	219	0	149	0	70	0	0	0	0	0	0	FAULT/FAULT:219	FAULT_SITE: stock ('read', 19032) vs rebuilt ('read', 19036)	0	0	0
+1976	_glVertex4iv_Exec	v	-	188	42	47	322	322	0	0	0	0	0	0	0	0	0	FAULT/FAULT:322		0	0	0
+1979	_glVertex2s_Exec	v	-	144	31	36	393	259	133	0	1	0	0	0	0	0	0	FAULT/FAULT:393	FAULT_SITE: stock ('read', 1342175196) vs rebuilt ('read', 1342175192)	0	0	0
+1982	_glVertex2sv_Exec	v	-	152	33	38	475	332	143	0	0	0	0	0	0	0	0	FAULT/FAULT:475	REORDERED: same writes/reads per segment; order differs	0	0	0
+1985	_glVertex3s_Exec	v	-	160	35	40	231	231	0	0	0	0	0	0	0	0	0	FAULT/FAULT:231		0	0	0
+1988	_glVertex3sv_Exec	v	-	172	38	43	391	391	0	0	0	0	0	0	0	0	0	FAULT/FAULT:391		0	0	0
+1991	_glVertex4s_Exec	v	-	172	38	43	228	0	150	0	78	0	0	0	0	0	0	FAULT/FAULT:228	FAULT_SITE: stock ('read', 18524) vs rebuilt ('read', 18528)	0	0	0
+1994	_glVertex4sv_Exec	v	-	188	42	47	432	432	0	0	0	0	0	0	0	0	0	FAULT/FAULT:432		0	0	0
+2006	_glArrayElement_ListExec	v	-	772	167	163	348	278	70	0	0	0	0	0	0	0	0	FAULT/FAULT:287,RET/RET:61	REORDERED: same writes/reads per segment; order differs	0	0	0
+2007	_glArrayElement_Comp	v	-	340	77	75	342	49	292	0	1	0	0	0	0	0	0	FAULT/FAULT:285,RET/RET:57	FAULT_SITE: stock ('write', 1301094040) vs rebuilt ('write', 1408188056)	0	0	0
+2012	_glDrawArraysOrElements_ListExec	v	-	1740	41	43	498	497	0	0	0	0	0	0	0	0	0	FAULT/FAULT:386,RET/RET:112		1	0	0
+1393	_glRasterPos4f_CompExec	v	-	96	24	24	456	0	278	0	173	0	0	0	0	0	0	FAULT/FAULT:443,RET/RET:13	FAULT_PARTIAL: same fault ('read', 338); accesses completed before it differ: reads: only stock reads (1342425512, 4)	5	0	0
+229	_gleFreeOrphans	v	-	264	55	50	536	22	368	0	128	0	0	0	18	0	0	FAULT/FAULT:515,RET/RET:3,TIMEOUT/TIMEOUT:18	FAULT_PARTIAL: same fault ('read', 921047985); accesses completed before it differ: reads: only rebuilt reads (1342444256, 4)	0	0	0
+556	_glBegin_NoopExec	v	-	668	126	149	600	108	437	0	55	0	0	0	0	0	0	FAULT/FAULT:562,RET/RET:38	FAULT_PARTIAL: same fault ('read', 1342175358); accesses completed before it differ: reads: only stock reads (1342183280, 4)	0	0	0
+800	_glCopyColorTable_Exec	v	-	1232	133	146	561	78	436	0	47	0	0	0	0	0	0	FAULT/FAULT:510,RET/RET:51	FAULT_PARTIAL: same fault ('fetch', 645913560); accesses completed before it differ: reads: only stock reads (1342647096, 4)	0	0	0
+2129	_glVertexAttrib4fARB_CompExec	v	-	104	26	26	479	0	215	0	251	0	0	0	0	0	0	FAULT/FAULT:411,RET/RET:68	FAULT_SITE: stock ('read', 21484) vs rebuilt ('read', 21488)	13	0	0
+2132	_glVertexAttrib4dARB_CompExec	v	-	104	26	26	282	0	219	0	61	0	0	0	0	0	0	FAULT/FAULT:200,RET/RET:82	FAULT_SITE: stock ('read', 21511) vs rebuilt ('read', 21515)	2	0	0
+2180	_glVertexAttrib4ivARB_Exec	v	-	388	60	35	307	307	0	0	0	0	0	0	0	0	0	FAULT/FAULT:157,RET/RET:150		0	0	0
+2204	_glVertexAttrib4NbvARB_Exec	v	-	484	119	116	281	281	0	0	0	0	0	0	0	0	0	FAULT/FAULT:198,RET/RET:83		0	0	0
+2216	_glVertexAttrib4NubvARB_Exec	v	-	432	108	102	494	296	20	0	178	0	0	0	0	0	0	FAULT/FAULT:374,RET/RET:120	FAULT_SITE: stock ('read', 0) vs rebuilt ('read', 3)	0	0	0
+2339	_gleSetVertexEval1Func	v	-	100	14	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+2340	_gleSetVertexEval2Func	v	-	100	14	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+2341	_gleGetVertexElemFunc	i	-	68	11	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+2342	_gleGetVertexToListFunc	i	-	68	11	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+1008	_glCopyConvolutionFilter1D_Exec	v	-	824	139	144	559	41	441	0	74	0	0	0	3	0	0	FAULT/FAULT:533,FAULT/TIMEOUT:3,RET/RET:23	FAULT_PARTIAL: same fault ('fetch', 4062462876); accesses completed before it differ: reads: only stock reads (1342607820, 4)	0	0	0
+2357	_gleBuildInterpFunc	i	-	876	202	181	506	0	477	0	28	0	0	0	0	0	0	FAULT/FAULT:361,RET/RET:145	FAULT_SITE: stock ('read', 18832) vs rebuilt ('read', 18060)	1	0	0
+2361	_gleBuildCompileFuncNO	i	-	1512	323	308	458	0	410	0	44	0	0	0	0	0	0	FAULT/FAULT:309,RET/RET:149	FAULT_SITE: stock ('read', 3978143647) vs rebuilt ('read', 3978142875)	4	0	0
+2360	_gleBuildCompileFuncTCLNO	i	-	1528	297	267	475	46	359	0	70	0	0	0	0	0	0	FAULT/FAULT:325,RET/RET:150	FAULT_PARTIAL: same fault ('read', 148); accesses completed before it differ: reads: only rebuilt reads (1342473120, 4)	0	0	0
+2364	_gleBuildCompileFuncTCLAV	i	-	1992	396	368	471	0	350	0	110	0	0	0	0	0	0	FAULT/FAULT:326,RET/RET:145	FAULT_PARTIAL: same fault ('read', 148); accesses completed before it differ: reads: only rebuilt reads (1342469584, 4)	11	0	0
+2369	_gleSetModelviewFuncAll	v	-	100	14	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+2365	_gleBuildCompileFuncAV	i	-	2036	397	378	450	52	331	0	67	0	0	0	0	0	0	FAULT/FAULT:302,RET/RET:148	FAULT_PARTIAL: same fault ('read', 152); accesses completed before it differ: reads: only rebuilt reads (1342686288, 4)	0	0	0
+2370	_gleSetModelviewFuncW1	v	-	100	14	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+2377	_gleSetNormalFunc	v	-	96	13	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+2371	_gleSetModelviewFuncZ0W1	v	-	100	14	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+2382	_gleSetProjectionFuncW1	v	-	104	14	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+2383	_gleSetProjectionFuncZ0W1	v	-	104	14	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+2385	_gleBuildProjectionTransformFuncNO	v	-	1544	48	45	804	311	0	0	486	0	0	0	0	0	6	FAULT/FAULT:738,RET/RET:66	FAULT_PARTIAL: same fault ('read', 12); accesses completed before it differ: reads: only stock reads (1342565044, 4)	1	0	0
+2391	_gleFreeBufferObject	v	-	168	37	35	320	74	89	0	145	0	0	0	0	0	0	FAULT/FAULT:312,RET/RET:8	FAULT_PARTIAL: same fault ('read', 17); accesses completed before it differ: reads: only stock reads (1342233892, 4)	12	0	0
+1009	_glCopyConvolutionFilter2D_Exec	v	-	856	128	130	584	50	431	0	103	0	0	0	0	0	0	FAULT/FAULT:552,RET/RET:32	FAULT_PARTIAL: same fault ('read', 312); accesses completed before it differ: reads: only stock reads (1342191064, 4)	0	0	0
+2397	_gleSynchronizePluginBuffer	v	-	160	33	38	328	328	0	0	0	0	0	0	0	0	0	FAULT/FAULT:328		0	0	0
+2394	_gleOrphanBufferData	v	-	1088	221	220	938	384	489	0	56	0	0	0	0	0	0	FAULT/FAULT:914,RET/RET:24	FAULT_PARTIAL: same fault ('read', 488); accesses completed before it differ: reads: only rebuilt reads (1342629000, 4)	9	0	0
+2403	_gleSwitchToRenderer	i	-	564	28	27	153	153	0	0	0	0	0	0	0	0	0	FAULT/FAULT:153		0	0	0
+2398	_gleReclaimBufferObjectResources	v	-	248	43	49	1631	1625	2	0	4	0	0	0	0	0	0	FAULT/FAULT:1631	FAULT_PARTIAL: same fault ('read', 480); accesses completed before it differ: reads: only rebuilt reads (1342379048, 4)	0	0	0
+2406	_gleToggleScissorEnableState	v	-	88	16	16	392	141	146	0	105	0	0	0	0	0	0	FAULT/FAULT:392	FAULT_SITE: stock ('read', 2598534118) vs rebuilt ('read', 2598534120)	0	0	0
+1416	_glRectf_CompExec	v	-	96	24	24	453	0	363	0	82	0	0	0	0	0	0	FAULT/FAULT:428,RET/RET:25	FAULT_PARTIAL: same fault ('fetch', 0); accesses completed before it differ: reads: only stock reads (1342664200, 4)	8	0	0
+2412	_gleSwitchToNonRevertRenderer	v	-	516	7	11	217	217	0	0	0	0	0	0	0	0	0	FAULT/FAULT:217		0	0	0
+2020	_glDrawArrays_NoopExec	v	-	684	125	150	487	52	358	0	77	0	0	0	0	0	0	FAULT/FAULT:420,RET/RET:67	FAULT_PARTIAL: same fault ('read', 351); accesses completed before it differ: reads: only stock reads (1342178072, 4)	0	0	0
+2416	_gleQuickOptimizeDisplayList	v	-	1292	33	27	1302	1302	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1267,RET/RET:35		0	0	0
+2419	_CopySourceSubImageToTexture	v	-	568	142	140	886	886	0	0	0	0	0	0	0	0	0	FAULT/FAULT:760,RET/RET:126		0	0	0
+2388	_gleAddClientAttribElem	v	-	120	24	24	1233	62	1171	0	0	0	0	0	0	0	0	FAULT/FAULT:1133,RET/RET:100	REORDERED: same writes/reads per segment; order differs	0	0	0
+2500	_gleBindRenderbuffer	v	-	268	65	67	786	544	240	0	0	0	0	0	0	0	0	FAULT/FAULT:733,RET/RET:53	REORDERED: same writes/reads per segment; order differs	2	0	0
+2507	_gleBindFramebuffer	v	-	1100	66	73	656	371	285	0	0	0	0	0	0	0	0	FAULT/FAULT:656	REORDERED: same writes/reads per segment; order differs	0	0	0
+2513	_gleFreeFramebufferState	v	-	256	58	58	354	354	0	0	0	0	0	0	0	0	0	FAULT/FAULT:292,RET/RET:62		0	0	0
+2514	_gleGenerateMipmap	v	-	208	7	7	1388	1388	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1388		0	0	0
+2420	_gleInitDrawPixelsShareObject	v	-	1036	105	115	860	116	661	0	81	0	0	0	0	0	0	FAULT/FAULT:860	FAULT_SITE: stock ('write', 3452842598) vs rebuilt ('write', 3452842610)	2	0	0
+2517	_LFSParserCreate	i	-	60	15	15	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+2531	_LFSParserParseRegister	i	-	356	53	43	296	83	213	0	0	0	0	0	0	0	0	FAULT/FAULT:188,RET/RET:108	REORDERED: same writes/reads per segment; order differs	0	0	0
+2557	_LFSStreamCreate	i	-	104	26	26	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+804	_glCopyColorSubTable_Exec	v	-	1044	138	152	575	47	476	0	52	0	0	0	0	0	0	FAULT/FAULT:533,RET/RET:42	FAULT_PARTIAL: same fault ('fetch', 0); accesses completed before it differ: reads: only stock reads (1342272520, 4)	0	0	0
+2572	_gleGetHashMachineObjectNameTargetPairs	v	-	400	32	35	1072	1072	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1072		0	0	0
+2574	_gleImagingUnpackData	v	-	316	79	79	270	270	0	0	0	0	0	0	0	0	0	FAULT/FAULT:121,RET/RET:149		0	0	0
+2578	_gleGetMinmax	v	-	628	84	83	650	647	3	0	0	0	0	0	0	0	0	FAULT/FAULT:500,RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+2567	_LFSStreamOutputDebugInfo	v	-	164	41	39	1473	1455	18	0	0	0	0	0	0	0	0	FAULT/FAULT:1388,RET/RET:85	REORDERED: same writes/reads per segment; order differs	0	0	0
+2595	FUN_000d4a8c	v	-	1188	30	32	474	426	0	0	0	0	0	0	0	0	48	FAULT/FAULT:426,RET/RET:48		0	0	0
+2600	_gleVtxLightSpecRGBAFrontPtr	v	-	1680	364	237	810	655	64	0	91	0	0	0	0	0	0	FAULT/FAULT:798,RET/RET:12	FAULT_SITE: stock ('read', 1770587254) vs rebuilt ('read', 4)	0	0	0
+400	_gleDrawArraysOrElementsOutOfLine_ListExec	v	-	1496	127	140	620	0	464	0	156	0	0	0	0	0	0	FAULT/FAULT:606,RET/RET:14	FAULT_PARTIAL: same fault ('read', 4045231951); accesses completed before it differ: reads: only stock reads (1342566292, 2)	0	0	0
+2599	_gleVtxLightRGBABackPtr	v	-	1200	300	271	811	550	40	0	213	0	0	0	0	0	0	FAULT/FAULT:775,RET/FAULT:8,RET/RET:28	IMAGE_ADDR_DEP: stock RET | rebuilt FAULT | image data read only by stock [('IMG', 1084904), ('IMG', 1084912)], only by rebuilt [('IMG', 1091636), ('IMG', 1092084)]	0	0	8
+1851	_glCopyTexSubImage3D_NoopExec	v	-	704	133	132	632	0	387	0	245	0	0	0	0	0	0	FAULT/FAULT:622,RET/RET:10	FAULT_PARTIAL: same fault ('read', 1641146558); accesses completed before it differ: reads: only stock reads (1342373604, 4)	0	0	0
+74	_gleUpdateMatrixFunc	v	-	2092	471	410	730	56	671	0	0	0	0	0	0	0	0	FAULT/FAULT:624,RET/RET:106	REORDERED: same writes/reads per segment; order differs	3	0	0
+2629	_gleVAClipLine	i	-	320	58	63	399	38	131	0	228	0	0	0	0	0	0	FAULT/FAULT:374,RET/RET:25	FAULT_PARTIAL: same fault ('read', 4294967291); accesses completed before it differ: reads: only rebuilt reads (1342667617, 4)	2	0	0
+2632	_gleCompileTCLVertexArray	v	-	1052	197	213	802	273	27	0	502	0	0	0	0	0	0	FAULT/FAULT:790,RET/RET:12	FAULT_PARTIAL: same fault ('read', 8); accesses completed before it differ: reads: only stock reads (1342435132, 4)	0	0	0
+856	_glDrawPixels_NoopExec	v	-	672	128	132	533	0	328	0	188	0	0	0	0	0	0	FAULT/FAULT:511,RET/RET:22	FAULT_PARTIAL: same fault ('read', 1099424612); accesses completed before it differ: reads: only stock reads (1342405408, 4)	17	0	0
+2696	_gleMap2IndexdLoad	v	-	224	51	56	616	0	172	0	444	0	0	0	0	0	0	FAULT/FAULT:582,RET/RET:34	FAULT_SITE: stock ('write', 12) vs rebuilt ('write', 20)	0	0	0
+560	_glBitmap_NoopExec	v	-	696	131	131	673	0	572	0	101	0	0	0	0	0	0	FAULT/FAULT:623,RET/RET:50	FAULT_PARTIAL: same fault ('wild', 1342206128); accesses completed before it differ: reads: only stock reads (1342585524, 4)	0	0	0
+2721	_gleCreateQueryObject	i	-	200	47	47	271	0	271	0	0	0	0	0	0	0	0	FAULT/FAULT:267,RET/RET:4	REORDERED: same writes/reads per segment; order differs	0	0	0
+2781	_gleExtractPixel_R_Float	v	-	12	3	3	380	376	4	0	0	0	0	0	0	0	0	FAULT/FAULT:232,RET/RET:148	REORDERED: same writes/reads per segment; order differs	0	0	0
+2788	_gleExtractPixel_G_Float	v	-	12	3	3	395	394	1	0	0	0	0	0	0	0	0	FAULT/FAULT:246,RET/RET:149	REORDERED: same writes/reads per segment; order differs	0	0	0
+2795	_gleExtractPixel_B_Float	v	-	12	3	3	411	409	2	0	0	0	0	0	0	0	0	FAULT/FAULT:262,RET/RET:149	REORDERED: same writes/reads per segment; order differs	0	0	0
+2802	_gleExtractPixel_A_Float	v	-	12	3	3	373	370	3	0	0	0	0	0	0	0	0	FAULT/FAULT:223,RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+2922	_gleInsertPixel_R_Float	v	-	12	3	3	424	422	2	0	0	0	0	0	0	0	0	FAULT/FAULT:276,RET/RET:148	REORDERED: same writes/reads per segment; order differs	0	0	0
+2929	_gleInsertPixel_G_Float	v	-	12	3	3	394	391	3	0	0	0	0	0	0	0	0	FAULT/FAULT:245,RET/RET:149	REORDERED: same writes/reads per segment; order differs	0	0	0
+2943	_gleInsertPixel_A_Float	v	-	12	3	3	434	432	2	0	0	0	0	0	0	0	0	FAULT/FAULT:284,RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+2950	_gleInsertPixel_L_Float	v	-	12	3	3	429	428	1	0	0	0	0	0	0	0	0	FAULT/FAULT:281,RET/RET:148	REORDERED: same writes/reads per segment; order differs	0	0	0
+2958	_gleInsertPixel_Index_Byte	v	-	12	3	3	353	353	0	0	0	0	0	0	0	0	0	FAULT/FAULT:203,RET/RET:150		0	0	0
+2960	_gleInsertPixel_Index_Short	v	-	12	3	3	381	381	0	0	0	0	0	0	0	0	0	FAULT/FAULT:232,RET/RET:149		0	0	0
+2411	_gleReclaimContextResources	v	-	276	14	16	518	43	338	0	113	0	0	0	24	0	0	FAULT/FAULT:494,TIMEOUT/TIMEOUT:24	FAULT_PARTIAL: same fault ('read', 514); accesses completed before it differ: reads: only rebuilt reads (1342532392, 4)	0	0	0
+2961	_gleInsertPixel_Index_Ushort	v	-	12	3	3	531	531	0	0	0	0	0	0	0	0	0	FAULT/FAULT:401,RET/RET:130		0	0	0
+2962	_gleInsertPixel_Index_Int	v	-	12	3	3	420	420	0	0	0	0	0	0	0	0	0	FAULT/FAULT:273,RET/RET:147		0	0	0
+3009	_gleClipPolyPlane	v	-	496	112	111	587	269	121	0	197	0	0	0	0	0	0	FAULT/FAULT:567,RET/RET:20	FAULT_PARTIAL: same fault ('read', 1343672660); accesses completed before it differ: reads: only rebuilt reads (1342460540, 4)	0	0	0
+2008	_glArrayElement_NoopExec	v	-	668	117	152	497	58	352	0	87	0	0	0	0	0	0	FAULT/FAULT:459,RET/RET:38	FAULT_PARTIAL: same fault ('read', 2844160099); accesses completed before it differ: reads: only stock reads (1342625320, 4)	0	0	0
+592	_glClear_NoopExec	v	-	640	120	131	717	0	371	0	346	0	0	0	0	0	0	FAULT/FAULT:705,RET/RET:12	FAULT_PARTIAL: same fault ('read', 4026475395); accesses completed before it differ: reads: only stock reads (1342516148, 4)	0	0	0
+868	_glEvalCoord1dv_Exec	v	-	12	3	3	429	300	76	0	0	0	0	0	53	0	0	FAULT/FAULT:348,RET/RET:28,TIMEOUT/TIMEOUT:53	REORDERED: same writes/reads per segment; order differs	0	0	0
+874	_glEvalCoord1fv_Exec	v	-	8	2	2	416	285	80	0	0	0	0	0	51	0	0	FAULT/FAULT:324,RET/RET:41,TIMEOUT/TIMEOUT:51	REORDERED: same writes/reads per segment; order differs	0	0	0
+222	_gleTextureImagePut_Slow	v	-	28188	417	354	678	574	12	0	0	0	0	0	92	0	0	FAULT/FAULT:568,RET/RET:18,TIMEOUT/TIMEOUT:92	REORDERED: same writes/reads per segment; order differs	0	0	0
+1413	_glRectd_CompExec	v	-	96	24	24	635	0	249	0	48	0	0	0	0	0	0	FAULT/FAULT:625,RET/RET:10	FAULT_PARTIAL: same fault ('read', 331); accesses completed before it differ: reads: only stock reads (1342452376, 4)	338	0	0
+496	_gleSetClipInterpFunc	v	-	100	25	24	837	148	643	0	44	0	0	0	1	0	0	FAULT/FAULT:766,FAULT/TIMEOUT:1,RET/RET:70	FAULT_PARTIAL: same fault ('read', 3569729546); accesses completed before it differ: reads: only rebuilt reads (1342582380, 4)	1	0	0
+2697	_gleMap2NormaldLoad	v	-	244	56	61	595	0	204	0	377	0	0	0	14	0	0	FAULT/FAULT:542,FAULT/TIMEOUT:14,RET/RET:39	FAULT_SITE: stock ('write', 0) vs rebuilt ('write', 8)	0	0	0
+2049	_glDrawElementArrayAPPLE_NoopExec	v	-	684	133	150	563	77	436	0	50	0	0	0	0	0	0	FAULT/FAULT:489,RET/RET:74	FAULT_PARTIAL: same fault ('fetch', 0); accesses completed before it differ: reads: only stock reads (1342356552, 4)	0	0	0
+3037	_gleFlushAtomicFunc	v	-	64	8	10	237	237	0	0	0	0	0	0	0	0	0	FAULT/FAULT:237		0	0	0
+3038	_gleFlushAtomicTCLRDirtyFunc	v	-	172	22	28	243	243	0	0	0	0	0	0	0	0	0	FAULT/FAULT:243		0	0	0
+1846	_glCopyTexSubImage2D_NoopExec	v	-	696	131	129	583	0	438	0	145	0	0	0	0	0	0	FAULT/FAULT:550,RET/RET:33	FAULT_PARTIAL: same fault ('read', 986023737); accesses completed before it differ: reads: only stock reads (1342478952, 4)	0	0	0
+3040	_gleFlushLineLoopTCLFunc	v	-	180	8	11	238	237	0	0	0	0	0	0	0	0	0	FAULT/FAULT:238		1	0	0
+3041	_gleFlushLineLoopTCLRDirtyFunc	v	-	292	26	29	244	242	2	0	0	0	0	0	0	0	0	FAULT/FAULT:244	REORDERED: same writes/reads per segment; order differs	0	0	0
+3042	_gleFlushLineStripFunc	v	-	140	21	28	232	209	3	0	20	0	0	0	0	0	0	FAULT/FAULT:232	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [0]	0	0	0
+3043	_gleFlushLineStripTCLFunc	v	-	124	8	11	233	233	0	0	0	0	0	0	0	0	0	FAULT/FAULT:233		0	0	0
+3044	_gleFlushLineStripTCLRDirtyFunc	v	-	236	25	28	259	259	0	0	0	0	0	0	0	0	0	FAULT/FAULT:259		0	0	0
+3045	_gleFlushTriQuadStripFunc	v	-	196	34	47	383	352	7	0	24	0	0	0	0	0	0	FAULT/FAULT:383	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [4288775240]	0	0	0
+3046	_gleFlushTriQuadStripTCLFunc	v	-	120	8	11	255	255	0	0	0	0	0	0	0	0	0	FAULT/FAULT:255		0	0	0
+3047	_gleFlushTriQuadStripTCLRDirtyFunc	v	-	232	25	28	254	254	0	0	0	0	0	0	0	0	0	FAULT/FAULT:254		0	0	0
+2041	_glDrawRangeElementArrayAPPLE_NoopExec	v	-	700	127	156	629	38	438	0	152	0	0	0	0	0	0	FAULT/FAULT:602,RET/RET:27	FAULT_PARTIAL: same fault ('read', 4283177979); accesses completed before it differ: reads: only stock reads (1342291432, 4)	1	0	0
+3049	_gleFlushTriangleFanTCLFunc	v	-	120	8	11	210	210	0	0	0	0	0	0	0	0	0	FAULT/FAULT:210		0	0	0
+3050	_gleFlushTriangleFanTCLRDirtyFunc	v	-	232	25	28	263	262	0	0	0	0	0	0	0	0	0	FAULT/FAULT:263		1	0	0
+3039	_gleFlushLineLoopFunc	v	-	212	39	49	384	330	33	0	21	0	0	0	0	0	0	FAULT/FAULT:384	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [1342589076]	0	0	0
+3052	_gleFlushPolygonTCLFunc	v	-	220	19	22	263	262	0	0	0	0	0	0	0	0	0	FAULT/FAULT:263		1	0	0
+3053	_gleFlushPolygonTCLRDirtyFunc	v	-	328	35	40	344	344	0	0	0	0	0	0	0	0	0	FAULT/FAULT:344		0	0	0
+3048	_gleFlushTriangleFanFunc	v	-	200	31	42	274	215	13	0	46	0	0	0	0	0	0	FAULT/FAULT:274	FAULT_PARTIAL: same fault ('read', 4294967082); stores completed before it differ: only rebuilt writes (2131746936, 4) = [0]	0	0	0
+3058	_gleFlushPrimitiveTCLRDirtyFunc	v	-	160	34	31	232	232	0	0	0	0	0	0	0	0	0	FAULT/FAULT:232		0	0	0
+3059	_gleBeginPrimitiveTCLRDirtyFunc	v	-	176	22	24	248	248	0	0	0	0	0	0	0	0	0	FAULT/FAULT:248		0	0	0
+3104	_gleMultiVtxTextureCoordGenWrapObject	v	-	112	23	27	295	295	0	0	0	0	0	0	0	0	0	FAULT/FAULT:295		0	0	0
+3105	_gleMultiVtxTextureCoordGenWrapEye	v	-	112	23	27	221	221	0	0	0	0	0	0	0	0	0	FAULT/FAULT:221		0	0	0
+2037	_glDrawRangeElements_NoopExec	v	-	708	136	174	600	102	382	12	104	0	0	0	0	0	0	FAULT/FAULT:569,RET/RET:31	FAULT_PARTIAL: same fault ('read', 334); accesses completed before it differ: reads: only stock reads (1342388184, 4)	0	0	0
+3111	_gleTextureImageCopy	v	-	260	46	38	354	210	144	0	0	0	0	0	0	0	0	FAULT/FAULT:354	REORDERED: same writes/reads per segment; order differs	0	0	0
+1894	_glCopyTexImage1D_NoopExec	v	-	688	129	122	642	0	536	10	96	0	0	0	0	0	0	FAULT/FAULT:608,RET/RET:34	FAULT_PARTIAL: same fault ('read', 1342174104); accesses completed before it differ: reads: only stock reads (1342193884, 4)	0	0	0
+3051	_gleFlushPolygonFunc	v	-	240	42	51	254	188	23	0	43	0	0	0	0	0	0	FAULT/FAULT:254	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [1342498156]	0	0	0
+3097	_gleSphereGenST	v	-	356	89	89	702	188	149	0	365	0	0	0	0	0	0	FAULT/FAULT:553,RET/RET:149	FAULT_SITE: stock ('write', 3592) vs rebuilt ('write', 3588)	0	0	0
+3112	_gleTextureSubImageCopy	v	-	348	66	61	376	238	138	0	0	0	0	0	0	0	0	FAULT/FAULT:376	REORDERED: same writes/reads per segment; order differs	0	0	0
+3176	_gleReclaimVertexArrayResources	v	-	352	39	46	1704	1665	25	0	13	0	0	0	0	0	0	FAULT/FAULT:1704	FAULT_PARTIAL: same fault ('read', 436); accesses completed before it differ: reads: only rebuilt reads (1342630920, 4)	1	0	0
+3156	_gleReclaimTextureObjectResources	v	-	344	42	49	1869	1859	7	0	3	0	0	0	0	0	0	FAULT/FAULT:1869	FAULT_PARTIAL: same fault ('read', 8560); accesses completed before it differ: reads: only rebuilt reads (1342614340, 4)	0	0	0
+886	_glEvalCoord2fv_Exec	v	-	12	3	3	423	296	51	0	0	0	0	0	74	0	0	FAULT/FAULT:325,RET/RET:24,TIMEOUT/TIMEOUT:74	REORDERED: same writes/reads per segment; order differs	2	0	0
+2426	_gleDrawPixelsFast	i	-	3376	165	189	1304	17	1286	0	1	0	0	0	0	0	0	FAULT/FAULT:1281,RET/RET:23	FAULT_PARTIAL: same fault ('read', 1342171460); accesses completed before it differ: reads: only stock reads (1342183436, 4)	0	0	0
+1898	_glCopyTexImage2D_NoopExec	v	-	696	131	122	705	0	628	0	76	0	0	0	1	0	0	FAULT/FAULT:669,RET/RET:35,TIMEOUT/TIMEOUT:1	FAULT_PARTIAL: same fault ('wild', 1342212200); accesses completed before it differ: reads: only stock reads (1342474612, 4)	0	0	0
+3173	_gleForceToSoftwareTCL	v	-	1520	183	207	549	95	373	0	41	0	0	0	17	0	0	FAULT/FAULT:532,TIMEOUT/FAULT:7,TIMEOUT/TIMEOUT:10	FAULT_PARTIAL: same fault ('read', 1342713972); accesses completed before it differ: reads: only stock reads (1342659204, 4)	23	0	0
+2409	_gleRevertSwapToPrimary	v	-	172	16	18	529	155	5	0	369	0	0	0	0	0	0	FAULT/FAULT:529	FAULT_PARTIAL: same fault ('read', 1); accesses completed before it differ: reads: only stock reads (1342635428, 4)	0	0	0
+2690	_gleEvalMap1	v	-	968	168	135	313	169	85	0	0	0	0	0	59	0	0	FAULT/FAULT:213,RET/RET:41,TIMEOUT/TIMEOUT:59	REORDERED: same writes/reads per segment; order differs	0	0	0
+3188	_gleVPFlushAtomic	v	-	60	8	10	337	336	0	0	0	0	0	0	0	0	0	FAULT/FAULT:337		1	0	0
+3189	_gleVPFlushAtomicTCL	v	-	60	8	10	222	222	0	0	0	0	0	0	0	0	0	FAULT/FAULT:222		0	0	0
+3190	_gleVPFlushAtomicTCLRDirty	v	-	132	25	28	355	355	0	0	0	0	0	0	0	0	0	FAULT/FAULT:355		0	0	0
+3177	_gleVPFlipColors	v	-	404	101	83	339	190	148	0	0	0	0	0	0	0	0	FAULT/FAULT:250,RET/RET:89	REORDERED: same writes/reads per segment; order differs	1	0	0
+3192	_gleVPFlushLineLoopTCL	v	-	180	8	11	306	306	0	0	0	0	0	0	0	0	0	FAULT/FAULT:306		0	0	0
+3022	FUN_000ee57c	v	-	1312	38	38	652	128	524	0	0	0	0	0	0	0	0	FAULT/FAULT:597,RET/RET:55	REORDERED: same writes/reads per segment; order differs	0	0	0
+3193	_gleVPFlushLineLoopTCLRDirty	v	-	252	22	25	312	312	0	0	0	0	0	0	0	0	0	FAULT/FAULT:312		0	0	0
+3195	_gleVPFlushLineStripTCL	v	-	128	8	11	355	355	0	0	0	0	0	0	0	0	0	FAULT/FAULT:355		0	0	0
+3194	_gleVPFlushLineStrip	v	-	176	24	32	449	410	3	0	36	0	0	0	0	0	0	FAULT/FAULT:449	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [1342544220]	0	0	0
+3191	_gleVPFlushLineLoop	v	-	228	38	44	327	264	30	0	33	0	0	0	0	0	0	FAULT/FAULT:327	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [1342248008]	0	0	0
+3198	_gleVPFlushTriQuadStripTCL	v	-	120	8	11	229	229	0	0	0	0	0	0	0	0	0	FAULT/FAULT:229		0	0	0
+3199	_gleVPFlushTriQuadStripTCLRDirty	v	-	192	25	28	242	242	0	0	0	0	0	0	0	0	0	FAULT/FAULT:242		0	0	0
+3197	_gleVPFlushTriQuadStrip	v	-	168	24	32	234	203	3	0	28	0	0	0	0	0	0	FAULT/FAULT:234	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [1342220944]	0	0	0
+3201	_gleVPFlushTriangleFanTCL	v	-	124	8	11	239	239	0	0	0	0	0	0	0	0	0	FAULT/FAULT:239		0	0	0
+3202	_gleVPFlushTriangleFanTCLRDirty	v	-	196	25	28	284	284	0	0	0	0	0	0	0	0	0	FAULT/FAULT:284		0	0	0
+2979	FUN_000eae0c	v	-	620	28	21	686	173	512	0	0	0	0	0	1	0	0	FAULT/FAULT:625,FAULT/TIMEOUT:1,RET/RET:60	REORDERED: same writes/reads per segment; order differs	0	0	0
+3204	_gleVPFlushPolygonTCL	v	-	196	28	31	301	301	0	0	0	0	0	0	0	0	0	FAULT/FAULT:301		0	0	0
+3205	_gleVPFlushPolygonTCLRDirty	v	-	268	45	54	303	303	0	0	0	0	0	0	0	0	0	FAULT/FAULT:303		0	0	0
+3237	_gleSetWindowPos	v	-	424	39	37	621	621	0	0	0	0	0	0	0	0	0	FAULT/FAULT:621		0	0	0
+497	_gleBuildInterpolateFunc	i	-	1776	23	23	763	188	498	0	0	0	0	0	0	0	0	FAULT/FAULT:686,RET/RET:77	REORDERED: same writes/reads per segment; order differs	77	0	0
+500	_gleMultiTextureMatTransPtr	v	-	120	30	29	711	73	638	0	0	0	0	0	0	0	0	FAULT/FAULT:655,RET/RET:56	REORDERED: same writes/reads per segment; order differs	0	0	0
+3200	_gleVPFlushTriangleFan	v	-	252	35	44	305	105	130	0	70	0	0	0	0	0	0	FAULT/FAULT:305	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [1342626008]	0	0	0
+3203	_gleVPFlushPolygon	v	-	324	48	58	308	69	167	0	72	0	0	0	0	0	0	FAULT/FAULT:308	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [4041770443]	0	0	0
+3196	_gleVPFlushLineStripTCLRDirty	v	-	200	26	29	278	258	3	0	0	0	0	0	17	0	0	FAULT/FAULT:261,TIMEOUT/TIMEOUT:17	REORDERED: same writes/reads per segment; order differs	0	0	0
+3019	FUN_000ed940	v	-	956	41	40	627	87	540	0	0	0	0	0	0	0	0	FAULT/FAULT:577,RET/RET:50	REORDERED: same writes/reads per segment; order differs	0	0	0
+3179	_gleVPRenderLines	v	-	420	66	67	691	50	545	15	76	0	0	0	5	0	0	FAULT/FAULT:670,RET/RET:16,TIMEOUT/TIMEOUT:5	READ_SET: segment 0: only stock reads (1342309240, 4)	0	0	0
+2621	FUN_000d8af8	v	-	728	28	24	850	184	666	0	0	0	0	0	0	0	0	FAULT/FAULT:801,RET/RET:49	REORDERED: same writes/reads per segment; order differs	0	0	0
+3181	_gleVPRenderLineLoop	v	-	540	76	71	705	47	586	22	50	0	0	0	0	0	0	FAULT/FAULT:665,RET/RET:40	READ_SET: segment 2: only stock reads (1342648088, 4)	0	0	0
+3030	FUN_000f0eac	v	-	1336	38	41	734	104	630	0	0	0	0	0	0	0	0	FAULT/FAULT:704,RET/RET:30	REORDERED: same writes/reads per segment; order differs	0	0	0
+3021	FUN_000ee104	v	-	1140	40	34	740	164	574	0	0	0	0	0	2	0	0	FAULT/FAULT:697,FAULT/TIMEOUT:2,RET/RET:41	REORDERED: same writes/reads per segment; order differs	0	0	0
+3029	FUN_000f09c0	v	-	1256	40	37	694	76	618	0	0	0	0	0	0	0	0	FAULT/FAULT:663,RET/RET:31	REORDERED: same writes/reads per segment; order differs	0	0	0
+3025	FUN_000ef5f4	v	-	1300	40	37	707	117	590	0	0	0	0	0	0	0	0	FAULT/FAULT:648,RET/RET:59	REORDERED: same writes/reads per segment; order differs	0	0	0
+2624	FUN_000d9420	v	-	760	28	24	675	123	552	0	0	0	0	0	0	0	0	FAULT/FAULT:640,RET/RET:35	REORDERED: same writes/reads per segment; order differs	0	0	0
+3024	FUN_000ef050	v	-	1396	39	38	750	117	633	0	0	0	0	0	0	0	0	FAULT/FAULT:732,RET/RET:18	REORDERED: same writes/reads per segment; order differs	0	0	0
+3028	FUN_000f046c	v	-	1320	38	38	681	106	574	0	0	0	0	0	0	0	0	FAULT/FAULT:652,RET/RET:29	REORDERED: same writes/reads per segment; order differs	1	0	0
+2516	_gleLFSParse	v	-	612	45	36	845	719	11	0	0	0	0	0	115	0	0	FAULT/FAULT:719,RET/RET:11,TIMEOUT/TIMEOUT:115	REORDERED: same writes/reads per segment; order differs	0	0	0
+2622	FUN_000d8dd4	v	-	824	45	39	737	96	640	0	0	0	0	0	1	0	0	FAULT/FAULT:729,FAULT/TIMEOUT:1,RET/RET:7	REORDERED: same writes/reads per segment; order differs	0	0	0
+2625	FUN_000d971c	v	-	856	45	39	728	98	626	0	0	0	0	0	0	0	0	FAULT/FAULT:723,RET/RET:5	REORDERED: same writes/reads per segment; order differs	4	0	0
+3026	FUN_000efb0c	v	-	1244	38	38	695	84	611	0	0	0	0	0	0	0	0	FAULT/FAULT:650,RET/RET:45	REORDERED: same writes/reads per segment; order differs	0	0	0
+3171	_gleMultiTextureMatTrans	v	-	120	30	29	677	106	571	0	0	0	0	0	0	0	0	FAULT/FAULT:626,RET/RET:51	REORDERED: same writes/reads per segment; order differs	0	0	0
+3178	_gleVPRenderPoints	v	-	324	55	47	805	45	667	5	88	0	0	0	0	0	0	FAULT/FAULT:783,RET/RET:22	READ_SET: segment 0: only stock reads (1342472296, 4)	0	0	0
+3180	_gleVPRenderLineStrip	v	-	436	49	39	879	126	698	11	43	0	0	0	1	0	0	FAULT/FAULT:864,FAULT/TIMEOUT:1,RET/RET:14	READ_SET: segment 0: only stock reads (1342483192, 4)	0	0	0
+3183	FUN_00104f80	v	-	1040	111	132	679	66	569	25	19	0	0	0	0	0	0	FAULT/FAULT:635,RET/RET:44	READ_SET: segment 0: only stock reads (1342593192, 4)	0	0	0
+3186	FUN_00105a88	v	-	884	72	77	998	236	628	4	127	0	0	0	0	0	0	FAULT/FAULT:957,RET/RET:41	FAULT_PARTIAL: same fault ('read', 1343464948); accesses completed before it differ: reads: only rebuilt reads (1342234028, 4)	3	0	0
+3184	FUN_00105394	v	-	888	142	168	742	66	614	10	50	0	0	0	2	0	0	FAULT/FAULT:717,RET/RET:23,TIMEOUT/TIMEOUT:2	READ_SET: segment 0: only stock reads (1342420664, 4)	0	0	0
+209	_PPEmulatorProgramSetupHandlesFromPPStream	v	-	844	192	189	1234	1220	0	0	0	0	0	0	0	0	14	FAULT/FAULT:1231,RET/RET:3		0	0	0
