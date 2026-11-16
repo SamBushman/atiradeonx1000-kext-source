@@ -208,6 +208,16 @@ PATCHES = {
     # count and the next argument (the destination pointer) from the wrong register (found by trace_diff.py, row _gleSetAttrib: rebuilt faulted in _gleCopyPixelMapi reading *(r6 = low word of
     # the double); the stock continued to realloc). C: read the word as int, as the stock does.
     '_gleSetAttrib': _scoped('gleng', _conv_with('_gleSetAttrib', [('param_3[0x%x]' % k, '*(int *)(param_3 + 0x%x)' % k) for k in range(0xa0f, 0xa19)])),
+    # Issue #295 (gleng): FUN_000d45ec (stock 0xd45ec), FUN_000d4a8c (0xd4a8c), _gleVtxLightRGBAFrontPtr (0xd5ee4), _gleVtxLightRGBABackPtr (0xd638c). In each, the first call of the
+    # function-pointer cell PTR__gleVectorNormalize_00112064 is printed `(**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0)`: Ghidra added the live f1 (a double left by
+    # _gleUpdateLightRGBASums) as a first argument of the unprototyped call, so the compiled call puts it in f1 and r3:r4 and shifts ctx / vectors to r5..r7. The stock passes exactly
+    # (ctx, vec, vec) (r3 = ctx, r4 = r5 = &local_d0; stock 0xd47e0.., 0xd4c84.., 0xd60e4.., 0xd6590..0xd65c0, no FPR argument). _gleVectorNormalize reads its input through r4, so the
+    # rebuilt call faulted at 0x80000004 (found by trace_diff.py, row _gleVtxLightRGBABackPtr). C: drop the leading `fparam_1`. A scan of all six corpora found no other indirect call
+    # with a float argument.
+    'FUN_000d45ec': _scoped('gleng', _conv_with('FUN_000d45ec', [('(**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0)', '(**(code **)puVar3)(param_1,&local_d0,&local_d0)')])),
+    'FUN_000d4a8c': _scoped('gleng', _conv_with('FUN_000d4a8c', [('(**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0)', '(**(code **)puVar3)(param_1,&local_d0,&local_d0)')])),
+    '_gleVtxLightRGBAFrontPtr': _scoped('gleng', _conv_with('_gleVtxLightRGBAFrontPtr', [('(**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0)', '(**(code **)puVar3)(param_1,&local_d0,&local_d0)')])),
+    '_gleVtxLightRGBABackPtr': _scoped('gleng', _conv_with('_gleVtxLightRGBABackPtr', [('(**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0)', '(**(code **)puVar3)(param_1,&local_d0,&local_d0)')])),
     # RETIRED 2026-09-25 (issue #71): yyparse (both TTypeLine _M_insert_aux sites), removeChildNode#1 (erase), removeChildNode#2 (_M_insert_aux) and the
     # two C2 -> C4 constructor aliases. Each dropped/misplaced argument was a symptom of the callee's by-value iterator / tag parameters (a
     # `__normal_iterator` struct, a 1-byte `forward_iterator_tag` with UNASSIGNED storage), which make the decompiler lose the argument registers.

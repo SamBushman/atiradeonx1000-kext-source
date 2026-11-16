@@ -2085,7 +2085,7 @@ LAB_000d462c:
           local_d0 = *(float *)(iVar13 + 0x4a70) - *pfVar7;
           local_cc = *(float *)(iVar13 + 0x4a74) - pfVar7[1];
           local_c8 = *(float *)(iVar13 + 0x4a78) - pfVar7[2];
-          iVar4 = (**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0);
+          iVar4 = (**(code **)puVar3)(param_1,&local_d0,&local_d0);
           if ((*(char *)(iVar13 + 0x4adb) != '\0') || (extraout_f1_00 < (double)*local_ac)) {
             dVar22 = (double)*(float *)(iVar13 + 0x4ad4);
           }
@@ -2312,7 +2312,7 @@ LAB_000d4acc:
           local_d0 = *(float *)(iVar13 + 0x4a70) - *pfVar7;
           local_cc = *(float *)(iVar13 + 0x4a74) - pfVar7[1];
           local_c8 = *(float *)(iVar13 + 0x4a78) - pfVar7[2];
-          iVar4 = (**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0);
+          iVar4 = (**(code **)puVar3)(param_1,&local_d0,&local_d0);
           if ((*(char *)(iVar13 + 0x4adb) != '\0') || (extraout_f1_00 < (double)*local_ac)) {
             dVar15 = (double)*(float *)(iVar13 + 0x4ad4);
           }
@@ -3388,7 +3388,7 @@ LAB_000d5f28:
           local_d0 = *(float *)(iVar13 + 0x4a70) - *pfVar7;
           local_cc = *(float *)(iVar13 + 0x4a74) - pfVar7[1];
           local_c8 = *(float *)(iVar13 + 0x4a78) - pfVar7[2];
-          iVar4 = (**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0);
+          iVar4 = (**(code **)puVar3)(param_1,&local_d0,&local_d0);
           if ((*(char *)(iVar13 + 0x4adb) != '\0') || (extraout_f1_00 < (double)*local_ac)) {
             dVar23 = (double)*(float *)(iVar13 + 0x4ad4);
           }
@@ -3617,7 +3617,7 @@ LAB_000d63d0:
           local_d0 = *(float *)(iVar13 + 0x4a70) - *pfVar7;
           local_cc = *(float *)(iVar13 + 0x4a74) - pfVar7[1];
           local_c8 = *(float *)(iVar13 + 0x4a78) - pfVar7[2];
-          iVar4 = (**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0);
+          iVar4 = (**(code **)puVar3)(param_1,&local_d0,&local_d0);
           if ((*(char *)(iVar13 + 0x4adb) != '\0') || (extraout_f1_00 < (double)*local_ac)) {
             dVar16 = (double)*(float *)(iVar13 + 0x4ad4);
           }
