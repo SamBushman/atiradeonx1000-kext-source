@@ -53,3 +53,8 @@ Together 864 of 1,799 corpus functions (48%) are covered; the remaining 935 stil
 ### Sign-compare audit (Tools/userspace/cmp_sign_audit.py)
 Counts signed/unsigned ordering compares and `addi+cmpli` range-check pairs per function, stock vs rebuilt (glprog: 1,197 functions compared; sign-neutral compares filtered). Leads read so far:
 `_idstr` (defect, fixed); `_InterpreterTextureSamplerSampleTexel1D/2D/3D` (`1 < ushort - 0x2700`, rebuilt signed: benign, enclosed by `(uint)(x - 0x2700) < 4` on the same field); `_byte_scan` digit checks (digit already range-limited by the loop condition: benign); `_glpPPDisassemble` (`--counter > 0`, signed in both). Not yet read: ~30 further range-pair rows. A difference is a lead, not a proof.
+
+Sign-audit extension (Nov 15 night): the same audit run over GLEngine (3,382 functions compared), GLDriver (3,936), GA (40), VA (82), libGL (896) gave no further defect. Leads outside every census row (13 GLEngine, 16 GLDriver) were read at the
+disassembly level: the rebuilt signed `addi+cmpwi` pairs there are `--counter > 0` / `x - 1 >= 0` loop and decrement tests (stock uses `addic.`), none is a `x - C < N` range test; in GLEngine/GLDriver/GA/VA/libGL no function
+has a stock unsigned range check replaced by a signed one. Functions inside the censuses were not read individually: a signed-for-unsigned flip there is exposed by the random inputs (half of them have the high bit set).
+The fprintf consumed-argument rule was added after the GLEngine/GLDriver/GA/VA/libGL censuses; it only drops unused argument registers from the comparison, so it cannot turn a PASS into a FAIL there (those censuses were not re-run).
