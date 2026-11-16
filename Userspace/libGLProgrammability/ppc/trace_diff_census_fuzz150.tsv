@@ -1,507 +1,507 @@
 #id	name	rc	pc	size	stock_cov	reb_cov	runs	IDENTICAL	REORDERED	READ_SET	FAULT_SITE	FAULT_MISMATCH	EFFECTS	EMUERR	TIMEOUT	UNINIT_REBUILT	UNINIT_OTHER	end_states	first_nonidentical	LAYOUT_DEP	PTR_VALUE_DEP	IMAGE_DATA_DEP
 0	_PPParserScopeAddMacro	v	nn	52	13	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:141,RET/RET:9		0	0	0
 6	_PPStreamChunkListAddChunk	v	pn	72	13	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-23	_PPStreamChunkListGetStream	v	pnpi	276	36	37	150	144	0	0	0	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20		6	0	0
 1	_PPParserAddScope	v	nn	60	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-26	_GetChunkAllocationSize	i	in	124	15	15	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-2	_PPParserScopeAttachStream	v	pn	36	9	9	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:141,RET/RET:9		1	0	0
-12	_PPParserScopeFindMacro	v	ni	100	25	23	150	147	0	0	0	0	0	0	0	0	0	FAULT/FAULT:146,RET/RET:4		3	0	0
 8	_PPParserReturnCharacter	v	pp	144	22	22	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:106,RET/RET:44		1	0	0
+2	_PPParserScopeAttachStream	v	pn	36	9	9	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:141,RET/RET:9		1	0	0
 15	_testAttribMatch	v	pp	300	25	20	150	143	6	0	0	0	0	0	0	0	0	FAULT/FAULT:16,RET/FAULT:1,RET/RET:133	REORDERED: same writes/reads per segment; order differs	1	0	0
-11	_PPParserScopeFindIdentifier	v	pi	100	25	23	150	146	0	0	0	0	0	0	0	0	0	FAULT/FAULT:142,RET/RET:8		4	0	0
-10	_PPParserScopeAddIdentifier	v	pp	124	31	31	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:128,RET/FAULT:1,RET/RET:21		2	0	0
-25	_PPStreamChunkListCreateFromChunkList	v	p	96	18	18	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		0	0	0
-17	_PPParserParseDestination	v	npn	604	21	23	150	99	50	0	0	0	0	0	0	0	0	FAULT/FAULT:137,RET/RET:13	REORDERED: same writes/reads per segment; order differs	1	0	0
-16	_PPParserParseOutputDeclaration	v	ni	284	19	19	150	140	10	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
 27	_PPStreamChunkListSort	v	p	156	39	35	150	79	42	0	29	0	0	0	0	0	0	FAULT/FAULT:111,RET/RET:39	FAULT_PARTIAL: same fault ('read', 2874227681); accesses completed before it differ: reads: only stock reads (1342220166, 2)	0	0	0
+11	_PPParserScopeFindIdentifier	v	pi	100	25	23	150	146	0	0	0	0	0	0	0	0	0	FAULT/FAULT:142,RET/RET:8		4	0	0
+26	_GetChunkAllocationSize	i	in	124	15	15	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+12	_PPParserScopeFindMacro	v	ni	100	25	23	150	147	0	0	0	0	0	0	0	0	0	FAULT/FAULT:146,RET/RET:4		3	0	0
+25	_PPStreamChunkListCreateFromChunkList	v	p	96	18	18	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		0	0	0
+23	_PPStreamChunkListGetStream	v	pnpi	276	36	37	150	144	0	0	0	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20		6	0	0
+10	_PPParserScopeAddIdentifier	v	pp	124	31	31	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:128,RET/FAULT:1,RET/RET:21		2	0	0
+17	_PPParserParseDestination	v	npn	604	21	23	150	99	50	0	0	0	0	0	0	0	0	FAULT/FAULT:137,RET/RET:13	REORDERED: same writes/reads per segment; order differs	1	0	0
+24	_PPStreamChunkGetStream	v	ppipn	184	29	34	150	50	98	0	2	0	0	0	0	0	0	FAULT/FAULT:51,RET/RET:99	FAULT_SITE: stock ('write', 65539) vs rebuilt ('write', 65535)	0	0	0
+16	_PPParserParseOutputDeclaration	v	ni	284	19	19	150	140	10	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+4	_PPParserGetCharacter	v	pp	144	22	22	150	0	143	0	6	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20	FAULT_SITE: stock ('read', 259) vs rebuilt ('read', 267)	1	0	0
+22	_PPStreamParamBindingIsEqual	v	pp	88	22	22	150	4	0	138	8	0	0	0	0	0	0	FAULT/FAULT:12,RET/RET:138	FAULT_PARTIAL: same fault ('read', 9); accesses completed before it differ: reads: only rebuilt reads (1342492300, 2)	0	0	0
+20	_PPStreamAttribBindingIsEqual	v	pp	88	22	22	150	5	0	143	1	0	0	0	0	0	0	FAULT/FAULT:7,RET/RET:143	FAULT_PARTIAL: same fault ('read', 68); accesses completed before it differ: reads: only rebuilt reads (1342247244, 2)	1	0	0
+21	_PPStreamOutputBindingIsEqual	v	pp	88	22	22	150	4	0	140	6	0	0	0	0	0	0	FAULT/FAULT:10,RET/RET:140	FAULT_PARTIAL: same fault ('read', 20); accesses completed before it differ: reads: only rebuilt reads (1342660024, 2)	0	0	0
 29	_PPStreamAttachParamBindingsChunkList	v	ni	56	14	14	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:146,RET/RET:4		1	0	0
 28	_PPStreamAttachOperationsChunkList	v	ni	56	14	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:147,RET/RET:3		0	0	0
-24	_PPStreamChunkGetStream	v	ppipn	184	29	34	150	50	98	0	2	0	0	0	0	0	0	FAULT/FAULT:51,RET/RET:99	FAULT_SITE: stock ('write', 65539) vs rebuilt ('write', 65535)	0	0	0
-32	_PPStreamChunkListGetMaxIndex	i	p	164	25	24	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30		2	0	0
-20	_PPStreamAttribBindingIsEqual	v	pp	88	22	22	150	5	0	143	1	0	0	0	0	0	0	FAULT/FAULT:7,RET/RET:143	FAULT_PARTIAL: same fault ('read', 68); accesses completed before it differ: reads: only rebuilt reads (1342247244, 2)	1	0	0
-4	_PPParserGetCharacter	v	pp	144	22	22	150	0	143	0	6	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20	FAULT_SITE: stock ('read', 259) vs rebuilt ('read', 267)	1	0	0
-21	_PPStreamOutputBindingIsEqual	v	pp	88	22	22	150	4	0	140	6	0	0	0	0	0	0	FAULT/FAULT:10,RET/RET:140	FAULT_PARTIAL: same fault ('read', 20); accesses completed before it differ: reads: only rebuilt reads (1342660024, 2)	0	0	0
-22	_PPStreamParamBindingIsEqual	v	pp	88	22	22	150	4	0	138	8	0	0	0	0	0	0	FAULT/FAULT:12,RET/RET:138	FAULT_PARTIAL: same fault ('read', 9); accesses completed before it differ: reads: only rebuilt reads (1342492300, 2)	0	0	0
 30	_PPStreamAttachParamBindingArraysChunkList	v	ni	56	8	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 33	_PPStreamChunkListChunkAtIndex	v	pn	152	22	20	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:35		2	0	0
-34	_PPParserFree	v	i	48	6	6	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+32	_PPStreamChunkListGetMaxIndex	i	p	164	25	24	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30		2	0	0
 36	_PPParserRemoveScope	v	nn	68	7	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 31	_PPStreamGetStream	v	ppp	964	26	36	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+34	_PPParserFree	v	i	48	6	6	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
 35	_PPParserShutdown	i	n	88	19	16	150	141	8	0	0	0	0	0	0	0	0	FAULT/FAULT:139,RET/RET:11	REORDERED: same writes/reads per segment; order differs	1	0	0
-38	_PPParserScopeRemoveIdentifier	v	pn	68	16	14	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:145,RET/RET:5		2	0	0
 9	_PPParserParseParameterDeclaration	v	n	372	21	21	150	133	17	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+38	_PPParserScopeRemoveIdentifier	v	pn	68	16	14	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:145,RET/RET:5		2	0	0
 43	_PPStreamGetTexOperationCount	v	n	60	13	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:2		0	0	0
-39	_PPParserIdentifierFree	v	i	52	13	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:78,RET/RET:72		0	0	0
 44	_PPStreamFree	i	n	140	7	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-48	_HashString	v	p	68	17	17	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:2,RET/RET:148		0	0	0
-46	_PPParserParseSwizzleCode	v	np	620	21	19	150	138	12	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7	REORDERED: same writes/reads per segment; order differs	0	0	0
-45	_PPParserMacroGetReplaceString	v	ninn	320	38	50	150	136	13	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
-52	_SetAtomValue	v	nnn	40	6	6	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+39	_PPParserIdentifierFree	v	i	52	13	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:78,RET/RET:72		0	0	0
 47	__dyld_func_lookup	i	-	32	8	8	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+48	_HashString	v	p	68	17	17	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:2,RET/RET:148		0	0	0
 49	_HashString2	v	p	64	16	16	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:3,RET/RET:147		0	0	0
 51	_AllocateAtom	i	n	120	30	30	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:146,RET/RET:4		0	0	0
-56	_LookUpAddString	v	ni	104	6	6	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-57	_GetAtomString	v	pn	144	19	15	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:25,RET/RET:125		0	0	0
-54	_IncreaseHashTableSize	v	n	192	14	15	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+52	_SetAtomValue	v	nnn	40	6	6	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+45	_PPParserMacroGetReplaceString	v	ninn	320	38	50	150	136	13	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
 50	_lReverse	v	n	64	16	16	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+57	_GetAtomString	v	pn	144	19	15	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:25,RET/RET:125		0	0	0
+46	_PPParserParseSwizzleCode	v	np	620	21	19	150	138	12	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7	REORDERED: same writes/reads per segment; order differs	0	0	0
 53	_FindHashLoc	v	pi	264	60	61	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:142,RET/RET:8		0	0	0
-58	_GetReversedAtom	v	nn	44	11	9	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:78,RET/RET:72		2	0	0
+56	_LookUpAddString	v	ni	104	6	6	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+54	_IncreaseHashTableSize	v	n	192	14	15	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
 55	_LookUpAddStringHash	i	ni	144	9	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-62	_op_logor	v	nn	28	7	6	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-61	_GetStringOfAtom	v	pn	24	6	6	150	130	0	0	0	0	0	0	0	0	0	FAULT/FAULT:89,RET/RET:61		20	0	0
-63	_op_logand	v	nn	28	7	7	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+58	_GetReversedAtom	v	nn	44	11	9	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:78,RET/RET:72		2	0	0
 60	_InitAtomTable	v	nn	368	11	11	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 59	_AddAtomFixed	v	nin	196	7	7	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-64	_op_eq	v	nn	16	4	4	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-65	_op_ne	v	nn	16	4	4	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-66	_op_ge	v	nn	20	5	5	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-70	_op_mod	v	nn	16	4	4	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+61	_GetStringOfAtom	v	pn	24	6	6	150	130	0	0	0	0	0	0	0	0	0	FAULT/FAULT:89,RET/RET:61		20	0	0
+63	_op_logand	v	nn	28	7	7	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 69	_op_lt	v	nn	20	5	4	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-73	_ResetPreprocessor	i	-	196	10	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-7	_PPParserReturnPart	v	i	132	33	31	150	120	30	0	0	0	0	0	0	0	0	FAULT/FAULT:87,RET/RET:63	REORDERED: same writes/reads per segment; order differs	0	0	0
+65	_op_ne	v	nn	16	4	4	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+64	_op_eq	v	nn	16	4	4	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+62	_op_logor	v	nn	28	7	6	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+66	_op_ge	v	nn	20	5	5	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 68	_op_gt	v	nn	20	5	4	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-67	_op_le	v	nn	20	5	5	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 71	_PopEofSrc	i	-	64	10	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 72	_ChkCorrectElseNesting	i	-	72	9	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+73	_ResetPreprocessor	i	-	196	10	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 74	_mem_AddCleanup	v	nii	112	28	28	150	130	1	0	0	0	0	0	0	0	0	FAULT/FAULT:137,RET/RET:13	REORDERED: same writes/reads per segment; order differs	19	0	0
-75	_PushScope	v	p	148	14	12	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:21,RET/RET:129		1	0	0
+67	_op_le	v	nn	20	5	5	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+70	_op_mod	v	nn	16	4	4	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 76	_PopScope	v	-	48	9	9	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-81	_RewindTokenStream	v	n	28	7	7	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14		0	0	0
+7	_PPParserReturnPart	v	i	132	33	31	150	120	30	0	0	0	0	0	0	0	0	FAULT/FAULT:87,RET/RET:63	REORDERED: same writes/reads per segment; order differs	0	0	0
+75	_PushScope	v	p	148	14	12	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:21,RET/RET:129		1	0	0
 77	_AddSymbol	v	inii	88	12	13	150	149	1	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
 78	_LookUpSymbol	v	ni	108	27	26	150	125	0	0	0	0	0	0	0	0	0	FAULT/FAULT:117,RET/RET:33		25	0	0
 79	_lAddByte	v	ni	92	15	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+81	_RewindTokenStream	v	n	28	7	7	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14		0	0	0
 80	_lReadByte	i	n	88	22	21	150	84	27	0	39	0	0	0	0	0	0	FAULT/FAULT:127,RET/RET:23	FAULT_SITE: stock ('read', 20) vs rebuilt ('read', 24)	0	0	0
-98	__ZN13TParseContext14boolErrorCheckEiRK11TPublicType	v	pnp	132	23	23	150	144	6	0	0	0	0	0	0	0	0	FAULT/FAULT:126,RET/RET:24	REORDERED: same writes/reads per segment; order differs	0	0	0
-19	_PPParserParseEnd	v	i	136	26	24	150	20	111	0	0	0	0	0	0	0	0	FAULT/FAULT:110,RET/RET:40	REORDERED: same writes/reads per segment; order differs	19	0	0
 122	_SetLineNumber	v	n	44	11	11	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-124	_GetStringNumber	i	-	32	8	8	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 123	_SetStringNumber	i	n	44	11	11	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-125	_GetLineNumber	i	-	32	8	8	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+124	_GetStringNumber	i	-	32	8	8	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+126	_IncLineNumber	v	-	52	13	13	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+98	__ZN13TParseContext14boolErrorCheckEiRK11TPublicType	v	pnp	132	23	23	150	144	6	0	0	0	0	0	0	0	0	FAULT/FAULT:126,RET/RET:24	REORDERED: same writes/reads per segment; order differs	0	0	0
 128	_HandlePragma	v	pn	576	28	23	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20		0	0	0
 127	_DecLineNumber	v	-	52	10	10	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-137	__ZeqRK7BindingS1_	v	pp	88	12	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:11,RET/RET:139		0	0	0
-126	_IncLineNumber	v	-	52	13	13	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 42	_PPParserParseDestinationMask	v	np	412	27	27	150	101	37	0	0	0	0	0	0	0	0	FAULT/FAULT:123,RET/RET:27	REORDERED: same writes/reads per segment; order differs	12	0	0
+125	_GetLineNumber	i	-	32	8	8	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 129	_GetStrfromTStr	i	-	80	11	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+137	__ZeqRK7BindingS1_	v	pp	88	12	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:11,RET/RET:139		0	0	0
 167	__ZN20AddressTempAllocatorD4Ev	v	p	16	4	4	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:12,RET/RET:138		1	0	0
-166	__ZN20AddressTempAllocatorC4Ev	v	p	16	4	4	150	61	64	0	23	0	0	0	0	0	0	FAULT/FAULT:24,RET/FAULT:1,RET/RET:125	FAULT_SITE: stock ('write', 260) vs rebuilt ('write', 256)	2	0	0
-169	__ZN18TemporaryAllocatorC4Ev	v	p	32	8	8	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:20,RET/RET:130		0	0	0
-3	_PPParserParseVersion	i	n	204	30	27	150	96	53	0	0	0	0	0	0	0	0	FAULT/FAULT:121,RET/RET:29	REORDERED: same writes/reads per segment; order differs	1	0	0
 173	__ZeqRK11ParseSymbolS1_	v	pp	148	37	34	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:15,RET/RET:135		1	0	0
 135	__ZN7BindingC4ERKS_	v	pp	224	56	56	150	111	24	0	0	0	0	0	0	0	0	FAULT/FAULT:119,RET/RET:31	REORDERED: same writes/reads per segment; order differs	15	0	0
+3	_PPParserParseVersion	i	n	204	30	27	150	96	53	0	0	0	0	0	0	0	0	FAULT/FAULT:121,RET/RET:29	REORDERED: same writes/reads per segment; order differs	1	0	0
+166	__ZN20AddressTempAllocatorC4Ev	v	p	16	4	4	150	61	64	0	23	0	0	0	0	0	0	FAULT/FAULT:24,RET/FAULT:1,RET/RET:125	FAULT_SITE: stock ('write', 260) vs rebuilt ('write', 256)	2	0	0
 134	__ZN7BindingC4Ev	v	p	76	19	19	150	17	133	0	0	0	0	0	0	0	0	FAULT/FAULT:17,RET/RET:133	REORDERED: same writes/reads per segment; order differs	0	0	0
+169	__ZN18TemporaryAllocatorC4Ev	v	p	32	8	8	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:20,RET/RET:130		0	0	0
 207	__ZN22ConstantAllocationListD4Ev	v	p	16	4	4	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:4,RET/RET:146		0	0	0
-181	__ZN12ParseOperandC4Ev	v	p	56	14	14	150	30	93	0	27	0	0	0	0	0	0	FAULT/FAULT:27,RET/RET:123	FAULT_SITE: stock ('write', 46) vs rebuilt ('write', 42)	0	0	0
-224	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_	v	ppp	88	13	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+14	_PPParserParseAttributeDeclaration	v	n	268	23	23	150	52	45	0	0	0	0	0	0	0	0	FAULT/FAULT:136,FAULT/RET:1,RET/RET:13	REORDERED: same writes/reads per segment; order differs	53	0	0
 206	__ZN22ConstantAllocationListC4Ev	v	p	16	4	4	150	91	43	0	16	0	0	0	0	0	0	FAULT/FAULT:16,RET/RET:134	FAULT_SITE: stock ('write', 35) vs rebuilt ('write', 31)	0	0	0
 41	_PPParserParseSourceSwizzle	v	npp	396	31	31	150	98	51	0	0	0	0	0	0	0	0	FAULT/FAULT:112,RET/RET:38	REORDERED: same writes/reads per segment; order differs	1	0	0
-171	__ZN11ParseSymbolC4Ev	v	p	124	31	30	150	3	126	0	20	0	0	0	0	0	0	FAULT/FAULT:21,RET/RET:129	FAULT_SITE: stock ('write', 39) vs rebuilt ('write', 35)	1	0	0
-247	_InterpreterLoadSource	v	ppnniiiniinp	796	76	61	150	146	0	0	0	0	0	0	0	0	0	FAULT/FAULT:122,RET/RET:28		4	0	0
-248	_InterpreterTestCR	v	niiiiiiinin	240	28	14	150	124	0	0	0	0	0	0	0	0	0	FAULT/FAULT:122,RET/RET:28		26	0	0
+181	__ZN12ParseOperandC4Ev	v	p	56	14	14	150	30	93	0	27	0	0	0	0	0	0	FAULT/FAULT:27,RET/RET:123	FAULT_SITE: stock ('write', 46) vs rebuilt ('write', 42)	0	0	0
+224	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_	v	ppp	88	13	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 184	__ZeqRK12ParseOperandS1_	v	pp	328	21	17	150	0	142	0	8	0	0	0	0	0	0	FAULT/FAULT:8,RET/RET:142	FAULT_PARTIAL: same fault ('read', 1104869951); accesses completed before it differ: reads: only rebuilt reads (1342244904, 4)	0	0	0
-14	_PPParserParseAttributeDeclaration	v	n	268	23	23	150	52	45	0	0	0	0	0	0	0	0	FAULT/FAULT:136,FAULT/RET:1,RET/RET:13	REORDERED: same writes/reads per segment; order differs	53	0	0
+171	__ZN11ParseSymbolC4Ev	v	p	124	31	30	150	3	126	0	20	0	0	0	0	0	0	FAULT/FAULT:21,RET/RET:129	FAULT_SITE: stock ('write', 39) vs rebuilt ('write', 35)	1	0	0
+19	_PPParserParseEnd	v	i	136	26	24	150	20	111	0	0	0	0	0	0	0	0	FAULT/FAULT:110,RET/RET:40	REORDERED: same writes/reads per segment; order differs	19	0	0
 232	__ZN13FunctionTableC4Ev	v	p	16	4	4	150	51	71	0	27	0	0	0	0	0	0	FAULT/FAULT:27,RET/FAULT:1,RET/RET:122	FAULT_SITE: stock ('write', 1073741828) vs rebuilt ('write', 1073741824)	1	0	0
-246	_InterpreterFree	v	i	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:9,RET/RET:141		0	0	0
-225	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_	v	pppp	108	16	18	150	0	124	0	25	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 2147483648); accesses completed before it differ: reads: only rebuilt reads (1342412680, 4)	1	0	0
-172	__ZN11ParseSymbolC4ERKS_	v	pp	296	67	68	150	11	134	0	4	0	0	0	0	0	0	FAULT/FAULT:129,RET/RET:21	FAULT_SITE: stock ('write', 52) vs rebuilt ('write', 24)	1	0	0
-251	_InterpreterTextureSamplerSampleTexel2D	v	iiiiiddddddddddddd	512	24	26	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-249	_InterpreterTextureSamplerInitialise	v	n	16	4	4	150	0	20	0	129	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20	FAULT_SITE: stock ('write', 735) vs rebuilt ('write', 731)	1	0	0
 250	_InterpreterTextureSamplerSampleTexel1D	v	iiiiidddddddddddd	512	24	26	150	141	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		9	0	0
+251	_InterpreterTextureSamplerSampleTexel2D	v	iiiiiddddddddddddd	512	24	26	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+246	_InterpreterFree	v	i	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:9,RET/RET:141		0	0	0
+182	__ZN12ParseOperandC4ERKS_	v	pp	232	50	50	150	8	142	0	0	0	0	0	0	0	0	FAULT/FAULT:128,RET/RET:22	REORDERED: same writes/reads per segment; order differs	0	0	0
+248	_InterpreterTestCR	v	niiiiiiinin	240	28	14	150	124	0	0	0	0	0	0	0	0	0	FAULT/FAULT:122,RET/RET:28		26	0	0
+225	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_	v	pppp	108	16	18	150	0	124	0	25	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 2147483648); accesses completed before it differ: reads: only rebuilt reads (1342412680, 4)	1	0	0
+247	_InterpreterLoadSource	v	ppnniiiniinp	796	76	61	150	146	0	0	0	0	0	0	0	0	0	FAULT/FAULT:122,RET/RET:28		4	0	0
+226	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_	v	ppppp	128	19	20	150	0	128	0	17	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 5); accesses completed before it differ: reads: only stock reads (1342217812, 4)	5	0	0
 253	_InterpreterTextureSamplerWrapCoordinate	v	np	528	52	43	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:129,RET/RET:21		0	0	0
 252	_InterpreterTextureSamplerSampleTexel3D	v	iiiiidddddddddddd	512	30	26	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:140,RET/RET:10		0	0	0
-182	__ZN12ParseOperandC4ERKS_	v	pp	232	50	50	150	8	142	0	0	0	0	0	0	0	0	FAULT/FAULT:128,RET/RET:22	REORDERED: same writes/reads per segment; order differs	0	0	0
-226	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_	v	ppppp	128	19	20	150	0	128	0	17	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 5); accesses completed before it differ: reads: only stock reads (1342217812, 4)	5	0	0
+249	_InterpreterTextureSamplerInitialise	v	n	16	4	4	150	0	20	0	129	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20	FAULT_SITE: stock ('write', 735) vs rebuilt ('write', 731)	1	0	0
 257	_InterpreterTextureSamplerSampleTexel1DFromLevel	v	iiiiiddddddddddd	876	43	33	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:137,RET/RET:13		1	0	0
-255	_InterpreterTextureSamplerCalculateLambda2D	v	iiidddddddddddd	348	18	21	150	75	0	0	51	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 2113916); accesses completed before it differ: reads: only rebuilt reads (1342262672, 4)	24	0	0
 254	_InterpreterTextureSamplerCalculateLambda1D	v	iiidddddddddddd	276	16	19	150	82	0	0	68	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 2424644); accesses completed before it differ: reads: only rebuilt reads (1342515384, 4)	0	0	0
-261	_InterpreterTextureSamplerLoadTexel1D	v	nnipp	172	26	23	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-262	_InterpreterTextureSamplerLoadTexel2D	v	nnppp	188	30	27	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-258	_InterpreterTextureSamplerSampleTexel2DFromLevel	v	iiiiiddddddddddddd	1196	48	46	150	118	17	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6	REORDERED: same writes/reads per segment; order differs	15	0	0
-256	_InterpreterTextureSamplerCalculateLambda3D	v	iiidddddddddddd	360	89	90	150	56	7	0	87	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7	FAULT_PARTIAL: same fault ('read', 2026710027); accesses completed before it differ: reads: only rebuilt reads (1342351136, 4)	0	0	0
+255	_InterpreterTextureSamplerCalculateLambda2D	v	iiidddddddddddd	348	18	21	150	75	0	0	51	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 2113916); accesses completed before it differ: reads: only rebuilt reads (1342262672, 4)	24	0	0
+172	__ZN11ParseSymbolC4ERKS_	v	pp	296	67	68	150	11	134	0	4	0	0	0	0	0	0	FAULT/FAULT:129,RET/RET:21	FAULT_SITE: stock ('write', 52) vs rebuilt ('write', 24)	1	0	0
 263	_InterpreterTextureSamplerLoadTexel3D	v	nnppp	204	25	23	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-227	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i	v	pppn	188	39	41	150	128	0	0	20	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25	FAULT_SITE: stock ('write', 4133300688) vs rebuilt ('write', 4133300600)	2	0	0
 259	_InterpreterTextureSamplerSampleTexel3DFromLevel	v	iiiiiddddddddddd	1768	53	56	150	123	27	0	0	0	0	0	0	0	0	FAULT/FAULT:137,RET/RET:13	REORDERED: same writes/reads per segment; order differs	0	0	0
+256	_InterpreterTextureSamplerCalculateLambda3D	v	iiidddddddddddd	360	89	90	150	56	7	0	87	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7	FAULT_PARTIAL: same fault ('read', 2026710027); accesses completed before it differ: reads: only rebuilt reads (1342351136, 4)	0	0	0
+258	_InterpreterTextureSamplerSampleTexel2DFromLevel	v	iiiiiddddddddddddd	1196	48	46	150	118	17	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6	REORDERED: same writes/reads per segment; order differs	15	0	0
+227	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i	v	pppn	188	39	41	150	128	0	0	20	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25	FAULT_SITE: stock ('write', 4133300688) vs rebuilt ('write', 4133300600)	2	0	0
 260	_InterpreterTextureSamplerSampleTexelRECTFromLevel	v	pnnpp	1056	45	43	150	105	0	6	37	0	0	0	0	0	0	FAULT/FAULT:140,RET/RET:10	FAULT_PARTIAL: same fault ('read', 4278500198); accesses completed before it differ: reads: only stock reads (1342632680, 4)	2	0	0
-267	_InterpreterNoiseGeneratorInterpolatedNoise2D	v	ii	544	136	136	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:79,RET/RET:71		1	0	0
+262	_InterpreterTextureSamplerLoadTexel2D	v	nnppp	188	30	27	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+261	_InterpreterTextureSamplerLoadTexel1D	v	nnipp	172	26	23	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 264	_InterpreterNoiseGeneratorSmoothHermiteCurve	v	ipp	156	39	38	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:15,RET/RET:135		0	0	0
-274	_InterpreterRasterOpMachine_DepthAndStencilTest	v	p	732	18	16	150	116	0	0	22	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 2616); accesses completed before it differ: reads: only stock reads (1342287736, 4)	12	0	0
-276	_InterpreterRasterOpMachine_BufferMask	v	pppp	128	28	24	150	116	0	12	0	0	0	0	0	0	0	FAULT/FAULT:119,RET/FAULT:19,RET/RET:12	READ_SET: segment 0: only stock reads (1342588836, 4)	22	0	0
+267	_InterpreterNoiseGeneratorInterpolatedNoise2D	v	ii	544	136	136	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:79,RET/RET:71		1	0	0
 265	_InterpreterNoiseGeneratorInterpolate	v	ipppp	100	25	25	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:21,RET/RET:129		0	0	0
-273	_InterpreterRasterOpMachine_DepthTest	v	p	236	35	31	150	68	0	24	39	0	0	0	0	0	0	FAULT/FAULT:126,RET/RET:24	FAULT_PARTIAL: same fault ('read', 80); accesses completed before it differ: reads: only rebuilt reads (1342344640, 4)	19	0	0
-278	_InterpreterRasterOpMachineUpdateStencilBuffer	v	iipi	212	36	32	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1,RET/RET:149		0	0	0
 272	_InterpreterRasterOpMachineInitialise	v	p	16	4	4	150	97	37	0	15	0	0	0	0	0	0	FAULT/FAULT:16,RET/RET:134	FAULT_SITE: stock ('write', 3960894401) vs rebuilt ('write', 3960894397)	1	0	0
-277	_InterpreterRasterOpMachineCalculateBlendingFactors	v	ipppp	664	38	44	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:11,RET/RET:139		0	0	0
-281	_PPCRuntimeCompilerSetOptionFlags	v	nn	16	4	4	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:133,RET/RET:17		0	0	0
+274	_InterpreterRasterOpMachine_DepthAndStencilTest	v	p	732	18	16	150	116	0	0	22	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 2616); accesses completed before it differ: reads: only stock reads (1342287736, 4)	12	0	0
 279	_glpRTCAddAChunk_97bd7cbc	v	pp	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:7,RET/RET:143		0	0	0
-275	_InterpreterRasterOpMachine_LogicOp	v	pppp	1208	205	213	150	101	0	41	4	0	0	0	0	0	0	FAULT/FAULT:108,RET/FAULT:1,RET/RET:41	FAULT_PARTIAL: same fault ('read', 128); accesses completed before it differ: reads: only stock reads (1342597864, 4)	4	0	0
-283	_PPCRuntimeCompilerLoadRegister	v	pnpiiininiin	2736	142	139	150	138	0	0	11	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 3223628624); accesses completed before it differ: reads: only rebuilt reads (1342260484, 4)	1	0	0
-282	_PPCRuntimeCompilerCalculateIndirectAddress	v	nnniiiii	224	56	46	150	120	8	0	22	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:2	FAULT_PARTIAL: same fault ('read', 1491162394); accesses completed before it differ: reads: only rebuilt reads (1342642472, 4)	0	0	0
-286	_PPCRuntimeCompilerDirtyRegister	v	nn	112	28	27	150	138	11	0	0	0	0	0	0	0	0	FAULT/FAULT:139,RET/RET:11	REORDERED: same writes/reads per segment; order differs	1	0	0
+273	_InterpreterRasterOpMachine_DepthTest	v	p	236	35	31	150	68	0	24	39	0	0	0	0	0	0	FAULT/FAULT:126,RET/RET:24	FAULT_PARTIAL: same fault ('read', 80); accesses completed before it differ: reads: only rebuilt reads (1342344640, 4)	19	0	0
+277	_InterpreterRasterOpMachineCalculateBlendingFactors	v	ipppp	664	38	44	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:11,RET/RET:139		0	0	0
+278	_InterpreterRasterOpMachineUpdateStencilBuffer	v	iipi	212	36	32	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1,RET/RET:149		0	0	0
+276	_InterpreterRasterOpMachine_BufferMask	v	pppp	128	28	24	150	116	0	12	0	0	0	0	0	0	0	FAULT/FAULT:119,RET/FAULT:19,RET/RET:12	READ_SET: segment 0: only stock reads (1342588836, 4)	22	0	0
+281	_PPCRuntimeCompilerSetOptionFlags	v	nn	16	4	4	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:133,RET/RET:17		0	0	0
 268	_InterpreterNoiseGeneratorInterpolatedNoise3D	v	ii	784	196	196	150	85	65	0	0	0	0	0	0	0	0	FAULT/FAULT:87,RET/RET:63	REORDERED: same writes/reads per segment; order differs	0	0	0
-289	_PPCRuntimeCompilerDirtyRegistersContainingAttributes	v	n	136	31	28	150	125	0	0	0	0	0	0	0	0	0	FAULT/FAULT:103,RET/FAULT:25,RET/RET:22		25	0	0
+286	_PPCRuntimeCompilerDirtyRegister	v	nn	112	28	27	150	138	11	0	0	0	0	0	0	0	0	FAULT/FAULT:139,RET/RET:11	REORDERED: same writes/reads per segment; order differs	1	0	0
+282	_PPCRuntimeCompilerCalculateIndirectAddress	v	nnniiiii	224	56	46	150	120	8	0	22	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:2	FAULT_PARTIAL: same fault ('read', 1491162394); accesses completed before it differ: reads: only rebuilt reads (1342642472, 4)	0	0	0
+283	_PPCRuntimeCompilerLoadRegister	v	pnpiiininiin	2736	142	139	150	138	0	0	11	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 3223628624); accesses completed before it differ: reads: only rebuilt reads (1342260484, 4)	1	0	0
 266	_InterpreterNoiseGeneratorInterpolatedNoise1D	v	ii	476	119	119	150	40	86	0	0	0	0	0	0	0	0	FAULT/FAULT:45,RET/FAULT:24,RET/RET:81	REORDERED: same writes/reads per segment; order differs	24	0	0
+275	_InterpreterRasterOpMachine_LogicOp	v	pppp	1208	205	213	150	101	0	41	4	0	0	0	0	0	0	FAULT/FAULT:108,RET/FAULT:1,RET/RET:41	FAULT_PARTIAL: same fault ('read', 128); accesses completed before it differ: reads: only stock reads (1342597864, 4)	4	0	0
 284	_PPCRuntimeCompilerBackupRegister	v	pn	2144	82	78	150	129	21	0	0	0	0	0	0	0	0	FAULT/FAULT:62,RET/RET:88	REORDERED: same writes/reads per segment; order differs	0	0	0
 287	_PPCRuntimeCompilerDirtyRegistersWithData	v	niiiiiiiiii	436	42	52	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-292	_PPCRuntimeCompilerSetRegister	v	nniiiiiiiiiii	148	37	37	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25		0	0	0
-291	_PPCRuntimeCompilerDirtyRegistersContainingParams	v	n	136	28	27	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:133,RET/RET:17		0	0	0
-294	_PPCRuntimeCompilerGetBaseIndexInRegister	v	nn	16	4	4	150	121	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		29	0	0
+289	_PPCRuntimeCompilerDirtyRegistersContainingAttributes	v	n	136	31	28	150	125	0	0	0	0	0	0	0	0	0	FAULT/FAULT:103,RET/FAULT:25,RET/RET:22		25	0	0
 293	_PPCRuntimeCompilerRegisterContainsData	v	nniiiiiniiin	560	30	33	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:137,RET/RET:13		0	0	0
-298	_PPCRuntimeCompilerFindVariableInfo	v	nniiiiii	88	20	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7		0	0	0
-296	_PPCRuntimeCompilerBuildTransferSwizzle	v	pnp	104	26	26	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:119,RET/RET:31		0	0	0
+291	_PPCRuntimeCompilerDirtyRegistersContainingParams	v	n	136	28	27	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:133,RET/RET:17		0	0	0
+292	_PPCRuntimeCompilerSetRegister	v	nniiiiiiiiiii	148	37	37	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25		0	0	0
 295	_PPCRuntimeCompilerGetOffsetInRegister	v	nn	88	17	21	150	137	0	0	10	0	0	0	0	1	2	FAULT/FAULT:150	UNINIT_REBUILT: rebuilt differs between stack fills: stock ('read', 16) vs rebuilt ('read', 376)	0	0	0
-297	_PPCRuntimeCompilerSwizzleRegisterAV	v	nnp	2444	212	244	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
 290	_PPCRuntimeCompilerDirtyRegistersContainingTemps	v	n	136	34	34	150	131	19	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30	REORDERED: same writes/reads per segment; order differs	0	0	0
-288	_PPCRuntimeCompilerDirtyRegistersWithIndirectData	v	n	136	34	33	150	123	26	0	0	0	0	0	0	0	0	FAULT/FAULT:123,RET/FAULT:1,RET/RET:26	REORDERED: same writes/reads per segment; order differs	1	0	0
-300	_PPCRuntimeCompilerLoadSourceAV	v	nniiiiiiiinn	268	40	36	150	122	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		28	0	0
+294	_PPCRuntimeCompilerGetBaseIndexInRegister	v	nn	16	4	4	150	121	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		29	0	0
+296	_PPCRuntimeCompilerBuildTransferSwizzle	v	pnp	104	26	26	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:119,RET/RET:31		0	0	0
+297	_PPCRuntimeCompilerSwizzleRegisterAV	v	nnp	2444	212	244	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+302	_PPCRuntimeCompilerTestConditionRegisterAV	v	niiiiiiin	576	30	27	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:147,RET/RET:3		0	0	0
+298	_PPCRuntimeCompilerFindVariableInfo	v	nniiiiii	88	20	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7		0	0	0
+303	_PPCRuntimeCompilerWritePrologNO	v	n	828	26	33	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 301	_PPCRuntimeCompilerWriteDestinationNO	v	nn	368	61	63	150	139	7	0	3	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 1328649329); accesses completed before it differ: reads: only rebuilt reads (1342490060, 4)	1	0	0
 306	_PPCRuntimeCompilerStride	v	n	548	15	16	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-303	_PPCRuntimeCompilerWritePrologNO	v	n	828	26	33	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-299	_PPCRuntimeCompilerLoadSourceNO	v	niiiiiiiiiin	348	48	51	150	122	26	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	2	0	0
-309	_glpRTCAddAChunk_97be1c2c	v	pp	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:12,RET/RET:138		0	0	0
-302	_PPCRuntimeCompilerTestConditionRegisterAV	v	niiiiiiin	576	30	27	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:147,RET/RET:3		0	0	0
-307	_PPCRuntimeCompilerLoop	v	n	92	21	18	150	133	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		17	0	0
-310	_PPCTextureSamplerSampleTexel2DRTCNO	v	pnp	560	87	69	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25		1	0	0
-305	_PPCRuntimeCompilerWriteEpilogAV	v	n	304	76	73	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18		1	0	0
-312	_PPCTextureSamplerWrapCoordinates1DRTCAV	v	nn	144	22	21	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+300	_PPCRuntimeCompilerLoadSourceAV	v	nniiiiiiiinn	268	40	36	150	122	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		28	0	0
+288	_PPCRuntimeCompilerDirtyRegistersWithIndirectData	v	n	136	34	33	150	123	26	0	0	0	0	0	0	0	0	FAULT/FAULT:123,RET/FAULT:1,RET/RET:26	REORDERED: same writes/reads per segment; order differs	1	0	0
 285	_PPCRuntimeCompilerSaveAllTemporariesToMemory	v	n	120	30	30	150	108	42	0	0	0	0	0	0	0	0	FAULT/FAULT:133,RET/RET:17	REORDERED: same writes/reads per segment; order differs	0	0	0
-313	_PPCTextureSamplerWrapCoordinates2DRTCAV	v	nn	212	10	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+305	_PPCRuntimeCompilerWriteEpilogAV	v	n	304	76	73	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18		1	0	0
+299	_PPCRuntimeCompilerLoadSourceNO	v	niiiiiiiiiin	348	48	51	150	122	26	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	2	0	0
+307	_PPCRuntimeCompilerLoop	v	n	92	21	18	150	133	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		17	0	0
 304	_PPCRuntimeCompilerWriteEpilogNO	v	n	352	88	82	150	138	11	0	0	0	0	0	0	0	0	FAULT/FAULT:138,RET/FAULT:1,RET/RET:11	REORDERED: same writes/reads per segment; order differs	1	0	0
-311	_PPCTextureSamplerSampleTexelRECTRTCNO	v	pnp	488	83	70	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:129,RET/RET:21		2	0	0
-315	_PPCTextureSamplerSampleTexel1DRTCAV	v	pnp	780	14	16	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-314	_PPCTextureSamplerWrapCoordinates3DRTCAV	v	nn	328	28	27	150	147	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		3	0	0
+309	_glpRTCAddAChunk_97be1c2c	v	pp	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:12,RET/RET:138		0	0	0
+310	_PPCTextureSamplerSampleTexel2DRTCNO	v	pnp	560	87	69	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25		1	0	0
 308	_PPCTextureSamplerInitialise	v	n	16	4	4	150	0	16	0	134	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16	FAULT_SITE: stock ('write', 4120) vs rebuilt ('write', 4116)	0	0	0
-321	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	v	pnp	1084	91	97	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18		1	0	0
+314	_PPCTextureSamplerWrapCoordinates3DRTCAV	v	nn	328	28	27	150	147	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		3	0	0
+312	_PPCTextureSamplerWrapCoordinates1DRTCAV	v	nn	144	22	21	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+311	_PPCTextureSamplerSampleTexelRECTRTCNO	v	pnp	488	83	70	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:129,RET/RET:21		2	0	0
+313	_PPCTextureSamplerWrapCoordinates2DRTCAV	v	nn	212	10	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 318	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	i	pnp	960	98	104	150	139	8	0	0	0	0	0	0	0	0	FAULT/FAULT:141,RET/RET:9	REORDERED: same writes/reads per segment; order differs	3	0	0
+315	_PPCTextureSamplerSampleTexel1DRTCAV	v	pnp	780	14	16	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 317	_PPCTextureSamplerSampleTexel3DRTCAV	v	pnp	780	24	26	150	135	15	0	0	0	0	0	0	0	0	FAULT/FAULT:135,RET/RET:15	REORDERED: same writes/reads per segment; order differs	0	0	0
 316	_PPCTextureSamplerSampleTexel2DRTCAV	v	pnp	780	24	26	150	139	10	0	0	0	0	0	0	0	0	FAULT/FAULT:140,RET/RET:10	REORDERED: same writes/reads per segment; order differs	1	0	0
-18	_PPParserParseSwizzleSourceVar	v	npii	460	63	64	150	91	59	0	0	0	0	0	0	0	0	FAULT/FAULT:135,RET/RET:15	REORDERED: same writes/reads per segment; order differs	0	0	0
-320	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	i	pnp	1612	109	115	150	133	17	0	0	0	0	0	0	0	0	FAULT/FAULT:126,RET/RET:24	REORDERED: same writes/reads per segment; order differs	0	0	0
 322	_glpRTCAddAChunk_97be4088	v	pp	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:10,RET/RET:140		0	0	0
+321	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	v	pnp	1084	91	97	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18		1	0	0
+320	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	i	pnp	1612	109	115	150	133	17	0	0	0	0	0	0	0	0	FAULT/FAULT:126,RET/RET:24	REORDERED: same writes/reads per segment; order differs	0	0	0
 319	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	i	pnp	1172	106	110	150	127	14	0	0	0	0	0	0	0	0	FAULT/FAULT:135,RET/RET:15	REORDERED: same writes/reads per segment; order differs	9	0	0
 327	_PPCRasterOpMachine_DepthTestRTCAV	v	pp	272	46	46	150	90	0	18	42	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18	FAULT_PARTIAL: same fault ('read', 3680); accesses completed before it differ: reads: only stock reads (1342675052, 4)	0	0	0
-330	_PPCRasterOpMachine_BufferMaskRTCAV	v	pp	208	52	42	150	108	0	39	2	0	0	0	0	0	0	FAULT/FAULT:111,RET/RET:39	FAULT_PARTIAL: same fault ('write', 4062305160); accesses completed before it differ: reads: only stock reads (1342345284, 4)	1	0	0
-331	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	v	pni	400	44	45	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:58,RET/RET:92		0	0	0
 333	_PPEmulatorGetEmulationLevel	v	n	24	6	6	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14		0	0	0
 326	_PPCRasterOpMachineInitialise	v	p	16	4	4	150	69	68	0	12	0	0	0	0	0	0	FAULT/FAULT:13,RET/RET:137	FAULT_SITE: stock ('write', 9) vs rebuilt ('write', 5)	1	0	0
-329	_PPCRasterOpMachine_LogicOpRTCAV	v	pp	520	76	76	150	113	0	11	23	0	0	0	0	0	0	FAULT/FAULT:139,RET/RET:11	FAULT_PARTIAL: same fault ('write', 1024); accesses completed before it differ: reads: only stock reads (1342658456, 4)	3	0	0
-328	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	v	pp	1172	53	43	150	101	0	0	33	0	0	0	0	0	0	FAULT/FAULT:134,RET/FAULT:16	FAULT_PARTIAL: same fault ('read', 3900); accesses completed before it differ: reads: only stock reads (1342343060, 4)	16	0	0
-335	_PPEmulatorRun	v	niiii	116	21	20	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+331	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	v	pni	400	44	45	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:58,RET/RET:92		0	0	0
+280	_PPCRuntimeCompilerInitialiseRegisterAllocator	v	n	156	39	39	150	109	41	0	0	0	0	0	0	0	0	FAULT/FAULT:109,RET/RET:41	REORDERED: same writes/reads per segment; order differs	0	0	0
 334	_PPEmulatorFramebufferFormat	i	n	24	6	6	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14		0	0	0
-336	_PPEmulatorVariableSwizzleFromMask	v	niiiiiii	108	27	25	150	142	7	0	0	0	0	0	0	0	0	FAULT/FAULT:123,RET/RET:27	REORDERED: same writes/reads per segment; order differs	1	0	0
-332	_PPCRasterOpMachineUpdateStencilBufferRTCAV	v	innnnp	468	60	68	150	90	39	0	21	0	0	0	0	0	0	FAULT/FAULT:21,RET/RET:129	FAULT_SITE: stock ('write', 5) vs rebuilt ('write', 9)	0	0	0
-337	_PPEmulatorVariableMaskFromSwizzle	v	n	68	17	17	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:127,RET/RET:23		0	0	0
+329	_PPCRasterOpMachine_LogicOpRTCAV	v	pp	520	76	76	150	113	0	11	23	0	0	0	0	0	0	FAULT/FAULT:139,RET/RET:11	FAULT_PARTIAL: same fault ('write', 1024); accesses completed before it differ: reads: only stock reads (1342658456, 4)	3	0	0
+335	_PPEmulatorRun	v	niiii	116	21	20	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+328	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	v	pp	1172	53	43	150	101	0	0	33	0	0	0	0	0	0	FAULT/FAULT:134,RET/FAULT:16	FAULT_PARTIAL: same fault ('read', 3900); accesses completed before it differ: reads: only stock reads (1342343060, 4)	16	0	0
 270	_InterpreterNoiseGeneratorCalculate2D	v	ipp	248	62	62	150	107	40	0	3	0	0	0	0	0	0	FAULT/FAULT:85,RET/RET:65	FAULT_SITE: stock ('write', 18) vs rebuilt ('write', 14)	0	0	0
+330	_PPCRasterOpMachine_BufferMaskRTCAV	v	pp	208	52	42	150	108	0	39	2	0	0	0	0	0	0	FAULT/FAULT:111,RET/RET:39	FAULT_PARTIAL: same fault ('write', 4062305160); accesses completed before it differ: reads: only stock reads (1342345284, 4)	1	0	0
+337	_PPEmulatorVariableMaskFromSwizzle	v	n	68	17	17	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:127,RET/RET:23		0	0	0
+332	_PPCRasterOpMachineUpdateStencilBufferRTCAV	v	innnnp	468	60	68	150	90	39	0	21	0	0	0	0	0	0	FAULT/FAULT:21,RET/RET:129	FAULT_SITE: stock ('write', 5) vs rebuilt ('write', 9)	0	0	0
+336	_PPEmulatorVariableSwizzleFromMask	v	niiiiiii	108	27	25	150	142	7	0	0	0	0	0	0	0	0	FAULT/FAULT:123,RET/RET:27	REORDERED: same writes/reads per segment; order differs	1	0	0
+340	_glpWritePrecision	v	nn	224	28	34	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:30,RET/RET:120		0	0	0
 339	_glpWriteSizeTypePrecision	v	nnnin	676	49	49	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:107,RET/RET:43		0	0	0
 338	_ncpy_97be5f58	v	pn	144	36	36	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:16,RET/RET:134		0	0	0
-13	_PPParserParseArray	v	ip	176	22	21	150	48	101	0	0	0	0	0	0	0	0	FAULT/FAULT:74,RET/RET:76	REORDERED: same writes/reads per segment; order differs	1	0	0
-342	_glpWriteSizeType	v	nnni	472	50	70	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:112,RET/RET:38		0	0	0
-340	_glpWritePrecision	v	nn	224	28	34	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:30,RET/RET:120		0	0	0
-343	_glpWriteClampSat	v	nnnn	216	40	32	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:149,RET/RET:1		0	0	0
 341	_glpWriteOperandSize	v	nnn	236	58	58	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:85,RET/RET:65		0	0	0
-269	_InterpreterNoiseGeneratorCalculate1D	v	ipp	240	60	60	150	50	97	0	3	0	0	0	0	0	0	FAULT/FAULT:53,RET/RET:97	FAULT_SITE: stock ('write', 43) vs rebuilt ('write', 39)	0	0	0
+343	_glpWriteClampSat	v	nnnn	216	40	32	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:149,RET/RET:1		0	0	0
+342	_glpWriteSizeType	v	nnni	472	50	70	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:112,RET/RET:38		0	0	0
 346	_glpWriteSourceOperandType	v	nnnnnnn	1476	7	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-349	_glpWriteSourceOperand_97be7fc0	v	nniiiinnn	380	37	47	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		2	0	0
-345	_glpWriteAddressOperand	v	nnnn	820	138	106	150	101	49	0	0	0	0	0	0	0	0	FAULT/FAULT:98,RET/RET:52	REORDERED: same writes/reads per segment; order differs	0	0	0
-344	_glpWriteDestinationOperand_97be6730	v	npnnnn	2384	243	195	150	116	34	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:35	REORDERED: same writes/reads per segment; order differs	0	0	0
 347	_glpWriteSourceOperandSwizzle	v	npnn	488	64	51	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:121,RET/RET:29		0	0	0
-280	_PPCRuntimeCompilerInitialiseRegisterAllocator	v	n	156	39	39	150	109	41	0	0	0	0	0	0	0	0	FAULT/FAULT:109,RET/RET:41	REORDERED: same writes/reads per segment; order differs	0	0	0
+349	_glpWriteSourceOperand_97be7fc0	v	nniiiinnn	380	37	47	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		2	0	0
+18	_PPParserParseSwizzleSourceVar	v	npii	460	63	64	150	91	59	0	0	0	0	0	0	0	0	FAULT/FAULT:135,RET/RET:15	REORDERED: same writes/reads per segment; order differs	0	0	0
+344	_glpWriteDestinationOperand_97be6730	v	npnnnn	2384	243	195	150	116	34	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:35	REORDERED: same writes/reads per segment; order differs	0	0	0
+345	_glpWriteAddressOperand	v	nnnn	820	138	106	150	101	49	0	0	0	0	0	0	0	0	FAULT/FAULT:98,RET/RET:52	REORDERED: same writes/reads per segment; order differs	0	0	0
+348	_glpWriteSourceOperandExtendedSwizzle	v	nnn	1024	201	204	150	108	0	0	0	0	0	0	0	0	0	FAULT/FAULT:110,RET/RET:40		42	0	0
 350	_glpWriteTextureOperand_97be8478	v	nniiiinn	736	32	33	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-348	_glpWriteSourceOperandExtendedSwizzle	v	nnn	1024	201	224	150	108	0	0	0	0	0	0	0	0	0	FAULT/FAULT:110,RET/RET:40		42	0	0
+356	_PPStreamChunkListInsertChunkBeforeChunk	v	pnn	84	7	7	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 354	_handleDigit_97bf0d2c	v	pn	112	28	28	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:117,RET/RET:33		1	0	0
 358	_PPStreamChunkListRemoveChunkNoFree	v	pn	88	10	7	150	142	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		8	0	0
 355	_PPStreamChunkCompare	v	pp	212	26	33	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:9,RET/RET:141		1	0	0
 357	_PPStreamChunkListInsertChunkAfterChunk	v	pnn	116	17	14	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:135,RET/FAULT:1,RET/RET:14		2	0	0
-356	_PPStreamChunkListInsertChunkBeforeChunk	v	pnn	84	7	7	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-360	_PPStreamDuplicate	v	p	636	6	6	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-363	_PPStreamRenumberOperandIndices	v	npi	332	5	9	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:149,RET/RET:1		1	0	0
 359	_PPStreamChunkListCompare	v	pp	132	16	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:8,RET/RET:142		0	0	0
 362	_PPStreamCompare	v	pp	328	16	17	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:9,RET/FAULT:1,RET/RET:140		1	0	0
-365	_renumberParamArrayIndices	v	nni	56	12	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30		0	0	0
-369	_PPStreamPackIndices	v	n	612	17	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 361	_PPStreamRemoveLabelsAtOperationIndex	v	nn	96	11	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+360	_PPStreamDuplicate	v	p	636	6	6	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+363	_PPStreamRenumberOperandIndices	v	npi	332	5	9	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:149,RET/RET:1		1	0	0
 364	_renumberTempArrayIndices	v	nni	56	12	9	150	111	0	0	0	0	0	0	0	0	0	FAULT/FAULT:121,RET/RET:29		39	0	0
+365	_renumberParamArrayIndices	v	nni	56	12	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30		0	0	0
+367	_renumberTargets	v	nnnn	148	11	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:113,RET/RET:37		0	0	0
 366	_renumberLabels	v	nnin	72	13	11	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:35		0	0	0
+369	_PPStreamPackIndices	v	n	612	17	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 368	_PPStreamChangeBranchTargets	v	nii	84	15	21	150	143	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		7	0	0
+371	_PPStreamResolveBranches	v	n	340	15	10	150	140	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		10	0	0
+13	_PPParserParseArray	v	ip	176	22	21	150	48	101	0	0	0	0	0	0	0	0	FAULT/FAULT:74,RET/RET:76	REORDERED: same writes/reads per segment; order differs	1	0	0
+374	_PPStreamRemoveOperation	v	nn	192	29	30	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
 370	_PPStreamSortParamConstants	v	n	168	7	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 372	_PPStreamGetArray	v	nnn	152	7	4	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-371	_PPStreamResolveBranches	v	n	340	15	10	150	140	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		10	0	0
-367	_renumberTargets	v	nnnn	148	11	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:113,RET/RET:37		0	0	0
 373	_PPStreamFindDuplicateChunk	v	np	240	38	36	150	138	0	0	0	0	0	0	0	0	0	FAULT/FAULT:141,RET/RET:9		12	0	0
 376	_glpSourceSign	v	nnnn	180	22	27	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:131,RET/RET:19		0	0	0
-374	_PPStreamRemoveOperation	v	nn	192	29	30	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-377	_glpSourceType	v	nnnnnnn	1080	62	62	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6		0	0	0
-351	_isTempArrayStart	v	nnp	96	24	19	150	103	0	27	20	0	0	0	0	0	0	FAULT/FAULT:107,RET/RET:43	FAULT_PARTIAL: same fault ('write', 0); accesses completed before it differ: reads: only stock reads (1342617364, 4)	0	0	0
-381	_glpWriteDestinationMask	v	nnnn	1312	48	48	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:113,RET/RET:37		0	0	0
 5	_PPParserParseOption	v	i	184	28	23	150	67	82	0	0	0	0	0	0	0	0	FAULT/FAULT:102,RET/RET:48	REORDERED: same writes/reads per segment; order differs	1	0	0
-375	_ncpy_97bf2850	v	pn	144	36	36	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:22,RET/RET:128		0	0	0
-383	_glpWriteTextureOperand_97bf37b4	v	nnnn	760	27	36	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-378	_glpSourceComponents	v	npnnn	504	113	113	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:105,RET/RET:45		0	0	0
-380	_glpWriteSourceOperand_97bf30b8	i	iiiiiiii	128	32	32	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:127,RET/RET:23		0	0	0
+351	_isTempArrayStart	v	nnp	96	24	19	150	103	0	27	20	0	0	0	0	0	0	FAULT/FAULT:107,RET/RET:43	FAULT_PARTIAL: same fault ('write', 0); accesses completed before it differ: reads: only stock reads (1342617364, 4)	0	0	0
+269	_InterpreterNoiseGeneratorCalculate1D	v	ipp	240	60	60	150	50	97	0	3	0	0	0	0	0	0	FAULT/FAULT:53,RET/RET:97	FAULT_SITE: stock ('write', 43) vs rebuilt ('write', 39)	0	0	0
 379	_glpWriteComponentsWithDestinationSwizzle	v	np	244	61	2	150	143	0	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/FAULT:7		7	0	0
-387	_glpUniformsToFloats	v	nnn	144	36	34	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:106,RET/RET:44		0	0	0
-388	_handleDigit_97c05b70	v	pn	112	28	28	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:99,RET/RET:51		2	0	0
+375	_ncpy_97bf2850	v	pn	144	36	36	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:22,RET/RET:128		0	0	0
+377	_glpSourceType	v	nnnnnnn	1080	62	62	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6		0	0	0
+378	_glpSourceComponents	v	npnnn	504	113	113	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:105,RET/RET:45		0	0	0
+381	_glpWriteDestinationMask	v	nnnn	1312	48	48	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:113,RET/RET:37		0	0	0
+380	_glpWriteSourceOperand_97bf30b8	i	iiiiiiii	128	32	32	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:127,RET/RET:23		0	0	0
+383	_glpWriteTextureOperand_97bf37b4	v	nnnn	760	27	36	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
 382	_glpWriteDestinationOperand_97bf3658	i	nnnin	348	38	46	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+387	_glpUniformsToFloats	v	nnn	144	36	34	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:106,RET/RET:44		0	0	0
 384	_glpDisassemble2Op	v	pnppiiiipni	56112	153	178	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:64,RET/RET:86		1	0	0
-390	_UpdateFunctionIndex	v	nnnn	60	10	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:121,RET/RET:29		0	0	0
-391	_RecordFunctionEdge	v	nninn	72	18	17	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:102,RET/RET:48		1	0	0
-393	_FindFunctionIndex	v	nnn	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:76,RET/RET:74		0	0	0
-395	_FindMatchingAvailableCopy	v	np	164	19	18	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:142,RET/RET:8		0	0	0
+388	_handleDigit_97c05b70	v	pn	112	28	28	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:99,RET/RET:51		2	0	0
 394	_GetStreamArray_97c06668	v	nnn	152	7	4	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+391	_RecordFunctionEdge	v	nninn	72	18	17	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:102,RET/RET:48		1	0	0
+395	_FindMatchingAvailableCopy	v	np	164	19	18	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:142,RET/RET:8		0	0	0
 396	_UpdateACUsingAvailableCopyTable	v	npi	444	28	25	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6		1	0	0
+390	_UpdateFunctionIndex	v	nnnn	60	10	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:121,RET/RET:29		0	0	0
+393	_FindFunctionIndex	v	nnn	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:76,RET/RET:74		0	0	0
+399	_ReplaceUsingAvailableCopyTable	i	pi	580	28	23	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:97,RET/RET:53		0	0	0
+353	_InsertLabel	v	pnnin	212	53	49	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		0	0	0
+403	_EmbedSamplerParamIndices	v	n	144	5	5	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:2		0	0	0
 400	_RemoveFromAvailableCopyTable	v	nii	152	38	38	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14		0	0	0
 402	_EndLocalAvailableCopyList	v	p	132	33	31	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:6,RET/RET:144		0	0	0
-403	_EmbedSamplerParamIndices	v	n	144	5	5	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:2		0	0	0
 406	_BitSetSetEquals	v	nn	88	22	22	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7		0	0	0
-405	_BitSetGetEquals	v	nn	88	13	16	150	140	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		10	0	0
-399	_ReplaceUsingAvailableCopyTable	i	pi	580	28	23	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:97,RET/RET:53		0	0	0
 407	_BitSetClearEquals	v	nn	88	13	16	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 404	_BitSetClone	v	p	64	7	9	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-408	_BitSetSetRangeEquals	v	iiii	84	21	21	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:128,RET/RET:22		0	0	0
 410	_BitSetExpandEquals	v	pn	60	15	15	150	128	0	0	0	0	0	0	0	0	0	FAULT/FAULT:89,RET/RET:61		22	0	0
-353	_InsertLabel	v	pnnin	212	53	49	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		0	0	0
-413	_BitSetAndNotEquals	v	pp	128	22	25	150	134	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		16	0	0
-414	_BitSetOrEquals	v	pp	128	22	25	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+408	_BitSetSetRangeEquals	v	iiii	84	21	21	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:128,RET/RET:22		0	0	0
+405	_BitSetGetEquals	v	nn	88	13	16	150	140	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		10	0	0
 412	_BitSetAndEquals	v	pp	128	22	25	150	132	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		18	0	0
-415	_BitSetXorEquals	v	pp	128	28	28	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		0	0	0
+414	_BitSetOrEquals	v	pp	128	22	25	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+413	_BitSetAndNotEquals	v	pp	128	22	25	150	134	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		16	0	0
 392	_UpdateFunctionTable	v	niinn	68	15	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:105,RET/RET:45		0	0	0
-416	_BitSetCopyEquals	v	pp	120	11	12	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-418	_BitSetAndTest	v	pp	136	22	16	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:149,RET/RET:1		2	0	0
+415	_BitSetXorEquals	v	pp	128	28	28	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		0	0	0
 417	_BitSetEqualsTest	v	pp	144	22	18	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:139,RET/RET:11		1	0	0
-420	_BitSetOrTest	v	pp	136	22	16	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:142,RET/RET:8		0	0	0
+418	_BitSetAndTest	v	pp	136	22	16	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:149,RET/RET:1		2	0	0
+416	_BitSetCopyEquals	v	pp	120	11	12	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
 421	_BitSetXorTest	v	pp	136	12	12	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		2	0	0
+420	_BitSetOrTest	v	pp	136	22	16	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:142,RET/RET:8		0	0	0
+271	_InterpreterNoiseGeneratorCalculate3D	v	ipp	256	64	64	150	49	100	0	1	0	0	0	0	0	0	FAULT/FAULT:50,RET/RET:100	FAULT_SITE: stock ('write', 268) vs rebuilt ('write', 264)	0	0	0
 419	_BitSetAndNotTest	v	pp	136	12	12	150	131	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		19	0	0
 424	_GetValidArgs	i	n	32	6	7	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30		0	0	0
-423	_HashSetIteratorNext	v	p	160	34	33	150	110	26	0	0	0	0	0	0	0	0	FAULT/FAULT:121,RET/RET:29	REORDERED: same writes/reads per segment; order differs	14	0	0
 422	_HashSetIteratorSetup	v	ip	24	6	6	150	121	29	0	0	0	0	0	0	0	0	FAULT/FAULT:20,RET/RET:130	REORDERED: same writes/reads per segment; order differs	0	0	0
-425	_GetStreamArray_97c08e40	v	nnnpp	164	10	6	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:18,RET/RET:132		0	0	0
-428	_RegistersReplace	v	pnp	568	41	35	150	140	0	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6		10	0	0
+423	_HashSetIteratorNext	v	p	160	34	33	150	110	26	0	0	0	0	0	0	0	0	FAULT/FAULT:121,RET/RET:29	REORDERED: same writes/reads per segment; order differs	14	0	0
 426	_GetRegisterIndicies	v	ippinnnn	168	42	39	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:8,RET/RET:142		0	0	0
 427	_GetRegister	v	ninn	160	24	20	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:56,RET/RET:94		0	0	0
+425	_GetStreamArray_97c08e40	v	nnnpp	164	10	6	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:18,RET/RET:132		0	0	0
+428	_RegistersReplace	v	pnp	568	41	35	150	140	0	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6		10	0	0
 429	_RegisterIsMergeable	v	n	40	6	5	150	123	0	0	0	0	0	0	0	0	0	FAULT/FAULT:122,RET/RET:28		27	0	0
 432	_RegisterVectorIsFixed	v	p	116	17	16	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:99,RET/RET:51		1	0	0
 430	_RegisterIsFixed	v	n	40	10	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:103,RET/RET:47		0	0	0
-271	_InterpreterNoiseGeneratorCalculate3D	v	ipp	256	64	64	150	49	100	0	1	0	0	0	0	0	0	FAULT/FAULT:50,RET/RET:100	FAULT_SITE: stock ('write', 268) vs rebuilt ('write', 264)	0	0	0
-435	_RegistersFree	v	n	124	18	20	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+437	_GetBlock	v	nn	36	9	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:137,RET/RET:13		0	0	0
 433	_RegisterFree	v	n	16	4	4	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18		0	0	0
 434	_Registerify	i	p	424	24	29	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-431	_RegisterVectorCanMerge	v	pp	136	18	18	150	18	17	0	92	0	0	0	0	0	0	FAULT/FAULT:133,RET/RET:17	FAULT_PARTIAL: same fault ('read', 16); accesses completed before it differ: reads: only rebuilt reads (1342591340, 4)	23	0	0
-437	_GetBlock	v	nn	36	9	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:137,RET/RET:13		0	0	0
-401	_CopyPropagateOperation	v	iii	80	20	20	150	128	22	0	0	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18	REORDERED: same writes/reads per segment; order differs	0	0	0
-436	_GetBlockFrom	v	nnp	84	8	8	150	136	0	0	0	0	0	0	0	0	0	FAULT/FAULT:149,RET/RET:1		14	0	0
+435	_RegistersFree	v	n	124	18	20	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 438	_Blockify	v	p	752	15	19	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		2	0	0
+431	_RegisterVectorCanMerge	v	pp	136	18	18	150	18	17	0	92	0	0	0	0	0	0	FAULT/FAULT:133,RET/RET:17	FAULT_PARTIAL: same fault ('read', 16); accesses completed before it differ: reads: only rebuilt reads (1342591340, 4)	23	0	0
+436	_GetBlockFrom	v	nnp	84	8	8	150	136	0	0	0	0	0	0	0	0	0	FAULT/FAULT:149,RET/RET:1		14	0	0
 441	_FlattenIfs	v	n	468	9	9	150	136	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		14	0	0
 439	_BlockAddPredecessor	v	ii	16	4	4	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-445	_UpdateScope	v	np	96	16	15	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:110,RET/RET:40		0	0	0
-442	_regEqualsFunction	v	pp	36	9	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:11,RET/RET:139		0	0	0
 440	_BlocksFree	v	n	124	15	17	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-447	_PPParserIdentifierCreateFromIdentifier	v	p	100	6	6	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-444	_ClearDestedRegisters	v	iinn	92	18	20	150	108	41	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
+442	_regEqualsFunction	v	pp	36	9	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:11,RET/RET:139		0	0	0
 443	_IsBadUsage	v	n	208	6	6	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+445	_UpdateScope	v	np	96	16	15	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:110,RET/RET:40		0	0	0
 449	_PPParserInherit	v	nn	44	6	6	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-448	_PPParserInitFromParent	v	nn	16	4	4	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 450	_PPParserDeclareNVAddressRegisters	v	n	92	8	8	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 446	_GetOpRegs	v	inpp	240	54	52	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:138,RET/RET:12		0	0	0
-456	_PPParserParseAddressDestination	v	np	348	20	15	150	96	34	0	0	0	0	0	0	0	0	FAULT/FAULT:149,RET/RET:1	REORDERED: same writes/reads per segment; order differs	20	0	0
+448	_PPParserInitFromParent	v	nn	16	4	4	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+444	_ClearDestedRegisters	v	iinn	92	18	20	150	108	41	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
+447	_PPParserIdentifierCreateFromIdentifier	v	p	100	6	6	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+401	_CopyPropagateOperation	v	iii	80	20	20	150	128	22	0	0	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18	REORDERED: same writes/reads per segment; order differs	0	0	0
 454	_PPParserParseIndirectArray	v	npp	620	23	11	150	88	27	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/FAULT:7	REORDERED: same writes/reads per segment; order differs	35	0	0
+456	_PPParserParseAddressDestination	v	np	348	20	15	150	96	34	0	0	0	0	0	0	0	0	FAULT/FAULT:149,RET/RET:1	REORDERED: same writes/reads per segment; order differs	20	0	0
+323	_PPCNoiseGeneratorCalculate1DAVRTC	v	ip	228	57	57	150	0	126	0	24	0	0	0	0	0	0	FAULT/FAULT:24,RET/RET:126	FAULT_SITE: stock ('write', 9) vs rebuilt ('write', 13)	0	0	0
 461	__ZNKSs7_M_iendEv	v	pp	20	5	5	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:124,RET/RET:26		2	0	0
 463	__ZNKSs7_M_foldEmm	v	nnnn	100	19	22	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-324	_PPCNoiseGeneratorCalculate2DAVRTC	v	ip	228	57	57	150	0	128	0	21	0	0	0	0	0	0	FAULT/FAULT:22,RET/RET:128	FAULT_SITE: stock ('write', 7) vs rebuilt ('write', 11)	1	0	0
-462	__ZNSs7_M_leakEv	v	p	20	5	5	150	102	47	0	0	0	0	0	0	0	0	FAULT/FAULT:140,RET/RET:10	REORDERED: same writes/reads per segment; order differs	1	0	0
 460	_glp_strtod	v	ii	824	71	58	150	82	68	0	0	0	0	0	0	0	0	FAULT/FAULT:86,RET/RET:64	REORDERED: same writes/reads per segment; order differs	0	0	0
-468	__ZNKSs4_Rep12_M_is_sharedEv	v	p	24	6	6	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:5,RET/RET:145		0	0	0
-465	__ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIS_SsEES2_	v	pnn	36	5	2	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+462	__ZNSs7_M_leakEv	v	p	20	5	5	150	102	47	0	0	0	0	0	0	0	0	FAULT/FAULT:140,RET/RET:10	REORDERED: same writes/reads per segment; order differs	1	0	0
 466	__ZNSs13_S_copy_charsEPcPKcS1_	v	ppp	36	9	2	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30		2	0	0
 467	__ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIPKcSsEES4_	v	pnn	36	9	2	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25		0	0	0
+465	__ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIS_SsEES2_	v	pnn	36	5	2	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 464	__ZNSs13_S_copy_charsEPcS_S_	v	ppp	36	9	2	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:103,RET/RET:47		1	0	0
+468	__ZNKSs4_Rep12_M_is_sharedEv	v	p	24	6	6	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:5,RET/RET:145		0	0	0
 470	__ZNSs12_S_empty_repEv	v	-	28	7	7	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 471	__ZNSsC4ERKSaIcE	v	pp	76	19	18	150	108	41	0	0	0	0	0	0	0	0	FAULT/FAULT:27,RET/RET:123	REORDERED: same writes/reads per segment; order differs	1	0	0
-472	__ZNSsC4ERKSsmm	v	ppnn	120	30	29	150	147	2	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16	REORDERED: same writes/reads per segment; order differs	1	0	0
 473	__ZNSsC4ERKSsmmRKSaIcE	v	ppnnp	124	22	21	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+472	__ZNSsC4ERKSsmm	v	ppnn	120	30	29	150	147	2	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16	REORDERED: same writes/reads per segment; order differs	1	0	0
 397	_FindInAvailableCopyTableSource	v	nnp	304	52	53	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14		0	0	0
 474	__ZNSsC4EPKcmRKSaIcE	v	ppnp	80	20	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:141,RET/RET:9		0	0	0
-476	__ZNSsC4EmcRKSaIcE	v	pnnp	76	10	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-478	__ZNSsaSEc	v	pi	96	24	23	150	116	34	0	0	0	0	0	0	0	0	FAULT/FAULT:133,RET/RET:17	REORDERED: same writes/reads per segment; order differs	0	0	0
 477	__ZNSs6assignEmc	v	pni	100	20	19	150	134	16	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+476	__ZNSsC4EmcRKSaIcE	v	pnnp	76	10	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 475	__ZNSsC4EPKcRKSaIcE	v	ppp	104	25	22	150	81	68	0	0	0	0	0	0	0	0	FAULT/FAULT:80,RET/RET:70	REORDERED: same writes/reads per segment; order differs	1	0	0
-481	__ZNKSs3endEv	v	pp	20	5	5	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:98,RET/RET:52		1	0	0
-455	_PPParserParseBranchLabel	v	iip	68	17	17	150	29	120	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30	REORDERED: same writes/reads per segment; order differs	1	0	0
-323	_PPCNoiseGeneratorCalculate1DAVRTC	v	ip	228	57	57	150	0	126	0	24	0	0	0	0	0	0	FAULT/FAULT:24,RET/RET:126	FAULT_SITE: stock ('write', 9) vs rebuilt ('write', 13)	0	0	0
-479	__ZNSs5beginEv	i	pp	64	16	16	150	96	53	0	0	0	0	0	0	0	0	FAULT/FAULT:139,RET/RET:11	REORDERED: same writes/reads per segment; order differs	1	0	0
-483	__ZNKSs6rbeginEv	v	pi	60	15	15	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:129,RET/RET:21		1	0	0
-485	__ZNKSs4rendEv	v	pi	60	15	15	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:76,RET/RET:74		0	0	0
-480	__ZNSs3endEv	i	pp	72	18	18	150	107	41	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14	REORDERED: same writes/reads per segment; order differs	2	0	0
-487	__ZNKSs5emptyEv	v	p	20	5	5	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:76,RET/RET:74		0	0	0
-482	__ZNSs6rbeginEv	v	pi	60	15	15	150	115	34	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14	REORDERED: same writes/reads per segment; order differs	1	0	0
 385	_isParamArrayStart_97c017c0	v	nnp	96	20	15	150	128	0	7	15	0	0	0	0	0	0	FAULT/FAULT:142,RET/RET:8	READ_SET: segment 0: only stock reads (1342643156, 4)	0	0	0
-488	__ZNSsixEm	v	pn	56	14	14	150	105	43	0	0	0	0	0	0	0	0	FAULT/FAULT:142,RET/RET:8	REORDERED: same writes/reads per segment; order differs	2	0	0
+478	__ZNSsaSEc	v	pi	96	24	23	150	116	34	0	0	0	0	0	0	0	0	FAULT/FAULT:133,RET/RET:17	REORDERED: same writes/reads per segment; order differs	0	0	0
+451	_PPParserParseBlock	v	n	236	36	33	150	87	62	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25	REORDERED: same writes/reads per segment; order differs	1	0	0
+481	__ZNKSs3endEv	v	pp	20	5	5	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:98,RET/RET:52		1	0	0
+480	__ZNSs3endEv	i	pp	72	18	18	150	107	41	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14	REORDERED: same writes/reads per segment; order differs	2	0	0
+483	__ZNKSs6rbeginEv	v	pi	60	15	15	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:129,RET/RET:21		1	0	0
+482	__ZNSs6rbeginEv	v	pi	60	15	15	150	115	34	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14	REORDERED: same writes/reads per segment; order differs	1	0	0
+485	__ZNKSs4rendEv	v	pi	60	15	15	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:76,RET/RET:74		0	0	0
+479	__ZNSs5beginEv	i	pp	64	16	16	150	96	53	0	0	0	0	0	0	0	0	FAULT/FAULT:139,RET/RET:11	REORDERED: same writes/reads per segment; order differs	1	0	0
 486	__ZNSs5clearEv	v	p	20	5	5	150	106	43	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14	REORDERED: same writes/reads per segment; order differs	1	0	0
 484	__ZNSs4rendEv	v	pi	60	15	15	150	95	54	0	0	0	0	0	0	0	0	FAULT/FAULT:145,RET/RET:5	REORDERED: same writes/reads per segment; order differs	1	0	0
-451	_PPParserParseBlock	v	n	236	36	33	150	87	62	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25	REORDERED: same writes/reads per segment; order differs	1	0	0
-492	__ZNSs6appendERKSsmm	v	ppnn	216	49	54	150	148	1	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
-490	__ZNSspLEPKc	v	pp	64	16	16	150	128	21	0	0	0	0	0	0	0	0	FAULT/FAULT:147,RET/RET:3	REORDERED: same writes/reads per segment; order differs	1	0	0
+487	__ZNKSs5emptyEv	v	p	20	5	5	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:76,RET/RET:74		0	0	0
 489	__ZNSs6appendEPKc	v	pp	64	16	16	150	107	35	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7	REORDERED: same writes/reads per segment; order differs	8	0	0
-493	__ZNSs6appendEPKcm	v	ppn	132	33	31	150	116	34	0	0	0	0	0	0	0	0	FAULT/FAULT:141,RET/RET:9	REORDERED: same writes/reads per segment; order differs	0	0	0
-458	_PPParserParseAddressSourceVar	v	np	140	21	19	150	97	53	0	0	0	0	0	0	0	0	FAULT/FAULT:138,RET/RET:12	REORDERED: same writes/reads per segment; order differs	0	0	0
-491	__ZNSs6appendERKSs	v	pp	164	41	39	150	0	35	0	114	0	0	0	0	0	0	FAULT/FAULT:145,RET/RET:5	FAULT_PARTIAL: same fault ('read', 1512208436); accesses completed before it differ: reads: only rebuilt reads (1342307548, 4)	1	0	0
-494	__ZNSs6appendEmc	v	pni	128	27	26	150	138	12	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
-496	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc	v	piii	16	4	4	150	114	35	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
-497	__ZNSs6insertEmPKc	v	pnp	72	18	18	150	142	7	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6	REORDERED: same writes/reads per segment; order differs	1	0	0
-499	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEc	v	ppni	148	22	23	150	133	16	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
-500	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEE	v	ppn	128	17	18	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-501	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEES2_	v	ppni	132	18	19	150	129	21	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
-506	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc	v	piii	80	20	20	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-498	__ZNSs6insertEmmc	v	pnni	92	23	23	150	86	64	0	0	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:2	REORDERED: same writes/reads per segment; order differs	0	0	0
+488	__ZNSsixEm	v	pn	56	14	14	150	105	43	0	0	0	0	0	0	0	0	FAULT/FAULT:142,RET/RET:8	REORDERED: same writes/reads per segment; order differs	2	0	0
 457	_PPParserParseBranchCondition	v	npn	972	33	28	150	119	29	0	0	0	0	0	0	0	0	FAULT/FAULT:137,RET/RET:13	REORDERED: same writes/reads per segment; order differs	2	0	0
-504	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm	v	pnnpn	96	19	19	150	136	5	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	9	0	0
-505	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_RKSs	v	pnnp	96	19	21	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-503	__ZNSs7replaceEmmmc	v	pnnni	120	25	24	150	115	33	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	2	0	0
+490	__ZNSspLEPKc	v	pp	64	16	16	150	128	21	0	0	0	0	0	0	0	0	FAULT/FAULT:147,RET/RET:3	REORDERED: same writes/reads per segment; order differs	1	0	0
+458	_PPParserParseAddressSourceVar	v	np	140	21	19	150	97	53	0	0	0	0	0	0	0	0	FAULT/FAULT:138,RET/RET:12	REORDERED: same writes/reads per segment; order differs	0	0	0
+492	__ZNSs6appendERKSsmm	v	ppnn	216	49	54	150	148	1	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
+493	__ZNSs6appendEPKcm	v	ppn	132	33	31	150	116	34	0	0	0	0	0	0	0	0	FAULT/FAULT:141,RET/RET:9	REORDERED: same writes/reads per segment; order differs	0	0	0
+494	__ZNSs6appendEmc	v	pni	128	27	26	150	138	12	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+455	_PPParserParseBranchLabel	v	iip	68	17	17	150	29	120	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30	REORDERED: same writes/reads per segment; order differs	1	0	0
+491	__ZNSs6appendERKSs	v	pp	164	41	39	150	0	35	0	114	0	0	0	0	0	0	FAULT/FAULT:145,RET/RET:5	FAULT_PARTIAL: same fault ('read', 1512208436); accesses completed before it differ: reads: only rebuilt reads (1342307548, 4)	1	0	0
+500	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEE	v	ppn	128	17	18	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+497	__ZNSs6insertEmPKc	v	pnp	72	18	18	150	142	7	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6	REORDERED: same writes/reads per segment; order differs	1	0	0
 453	_PPParserParseRangeArray	v	ipp	320	25	26	150	31	117	0	0	0	0	0	0	0	0	FAULT/FAULT:109,RET/RET:41	REORDERED: same writes/reads per segment; order differs	2	0	0
-502	__ZNSs7replaceEmmPKc	v	pnnp	80	20	20	150	102	47	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16	REORDERED: same writes/reads per segment; order differs	1	0	0
-508	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S2_S2_	v	pnnpn	96	19	19	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+496	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc	v	piii	16	4	4	150	114	35	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
+499	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEc	v	ppni	148	22	23	150	133	16	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
+501	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEES2_	v	ppni	132	18	19	150	129	21	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+498	__ZNSs6insertEmmc	v	pnni	92	23	23	150	86	64	0	0	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:2	REORDERED: same writes/reads per segment; order differs	0	0	0
+504	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm	v	pnnpn	96	19	19	150	136	5	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	9	0	0
+506	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc	v	piii	80	20	20	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
 510	__ZNSs4swapERSs	v	pp	140	35	35	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20		1	0	0
+505	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_RKSs	v	pnnp	96	19	21	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
 507	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcS4_	v	pnnpn	96	19	19	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-511	__ZNKSs5c_strEv	v	p	48	12	12	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		1	0	0
-452	_PPParserParseDefaultArray	v	ip	240	22	21	150	47	102	0	0	0	0	0	0	0	0	FAULT/FAULT:104,RET/RET:46	REORDERED: same writes/reads per segment; order differs	1	0	0
 509	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_NS0_IPKcSsEES5_	v	pnnpn	96	19	19	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-514	__ZNKSs5rfindEPKcmm	v	ppnn	148	37	37	150	146	0	0	0	0	0	0	0	0	0	FAULT/FAULT:116,RET/RET:34		4	0	0
+508	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S2_S2_	v	pnnpn	96	19	19	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+502	__ZNSs7replaceEmmPKc	v	pnnp	80	20	20	150	102	47	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16	REORDERED: same writes/reads per segment; order differs	1	0	0
+452	_PPParserParseDefaultArray	v	ip	240	22	21	150	47	102	0	0	0	0	0	0	0	0	FAULT/FAULT:104,RET/RET:46	REORDERED: same writes/reads per segment; order differs	1	0	0
+511	__ZNKSs5c_strEv	v	p	48	12	12	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		1	0	0
+503	__ZNSs7replaceEmmmc	v	pnnni	120	25	24	150	115	33	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	2	0	0
 516	__ZNKSs5rfindEcm	v	pnn	92	23	22	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:116,RET/RET:34		1	0	0
+514	__ZNKSs5rfindEPKcmm	v	ppnn	148	37	37	150	146	0	0	0	0	0	0	0	0	0	FAULT/FAULT:116,RET/RET:34		4	0	0
 518	__ZNKSs12find_last_ofEPKcm	v	ppn	72	18	18	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:108,RET/RET:42		2	0	0
 517	__ZNKSs13find_first_ofEPKcm	v	ppn	72	18	18	150	143	0	0	0	0	0	0	0	0	0	FAULT/FAULT:47,RET/RET:103		7	0	0
+522	__ZNKSs16find_last_not_ofEcm	v	pnn	84	21	21	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:101,RET/RET:49		0	0	0
+324	_PPCNoiseGeneratorCalculate2DAVRTC	v	ip	228	57	57	150	0	128	0	21	0	0	0	0	0	0	FAULT/FAULT:22,RET/RET:128	FAULT_SITE: stock ('write', 7) vs rebuilt ('write', 11)	1	0	0
+523	__ZNKSs7compareERKSs	v	pp	96	24	24	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:126,RET/RET:24		0	0	0
 520	__ZNKSs17find_first_not_ofEcm	v	pnn	68	17	17	150	139	0	0	0	0	0	0	0	0	0	FAULT/FAULT:98,RET/RET:52		11	0	0
 524	__ZNKSs7compareEPKc	v	pp	112	28	28	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:107,RET/RET:43		0	0	0
-523	__ZNKSs7compareERKSs	v	pp	96	24	24	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:126,RET/RET:24		0	0	0
-522	__ZNKSs16find_last_not_ofEcm	v	pnn	84	21	21	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:101,RET/RET:49		0	0	0
-525	__ZNSs4_Rep8_M_cloneERKSaIcEm	v	ppn	148	21	22	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 521	__ZNKSs16find_last_not_ofEPKcm	v	ppn	72	18	18	150	142	0	0	0	0	0	0	0	0	0	FAULT/FAULT:117,RET/RET:33		8	0	0
-529	__ZN9__gnu_cxxeqIPcSsEEbRKNS_17__normal_iteratorIT_T0_EES7_	i	pp	24	6	6	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:14,RET/RET:136		1	0	0
+525	__ZNSs4_Rep8_M_cloneERKSaIcEm	v	ppn	148	21	22	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 530	__ZN9__gnu_cxxeqIPKcSsEEbRKNS_17__normal_iteratorIT_T0_EES8_	i	pp	24	6	6	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:13,RET/RET:137		1	0	0
-531	__ZNSsC4IPcEET_S1_RKSaIcE	v	pppp	80	11	11	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-533	__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	v	piip	80	20	19	150	147	3	0	0	0	0	0	0	0	0	FAULT/FAULT:147,RET/RET:3	REORDERED: same writes/reads per segment; order differs	0	0	0
-541	__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev	v	p	28	7	7	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-527	__ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_ES3_RKS6_	i	ppp	108	13	13	150	47	100	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	3	0	0
-538	__ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag	i	pipppn	148	12	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-543	__ZNSaIcE9constructEPcRKc	v	ppp	20	5	5	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:12,RET/RET:138		1	0	0
-534	__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE	v	piip	80	11	11	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-540	__ZNSt24__default_alloc_templateILb1ELi0EE17_S_freelist_indexEm	v	n	16	4	4	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-532	__ZNSsC4IPKcEET_S2_RKSaIcE	v	pppp	80	11	11	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-528	__ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_ERKS6_S8_	i	ppp	68	10	10	150	83	48	0	18	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 816851296); accesses completed before it differ: reads: only stock reads (1342576784, 4)	1	0	0
+529	__ZN9__gnu_cxxeqIPcSsEEbRKNS_17__normal_iteratorIT_T0_EES7_	i	pp	24	6	6	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:14,RET/RET:136		1	0	0
 526	__ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EPKS3_RKS6_	i	ppp	164	17	17	150	42	105	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	3	0	0
-542	__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev	v	p	28	7	7	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-544	__ZNSaIwE9constructEPwRKw	v	ppp	20	5	5	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:14,RET/RET:136		0	0	0
+532	__ZNSsC4IPKcEET_S2_RKSaIcE	v	pppp	80	11	11	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+531	__ZNSsC4IPcEET_S1_RKSaIcE	v	pppp	80	11	11	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+540	__ZNSt24__default_alloc_templateILb1ELi0EE17_S_freelist_indexEm	v	n	16	4	4	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+528	__ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_ERKS6_S8_	i	ppp	68	10	10	150	83	48	0	18	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 816851296); accesses completed before it differ: reads: only stock reads (1342576784, 4)	1	0	0
+541	__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev	v	p	28	7	7	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+534	__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE	v	piip	80	11	11	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+533	__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	v	piip	80	20	19	150	147	3	0	0	0	0	0	0	0	0	FAULT/FAULT:147,RET/RET:3	REORDERED: same writes/reads per segment; order differs	0	0	0
 539	__ZSt13__destroy_auxIPSsEvT_S1_12__false_type	i	ppi	76	14	13	150	70	0	0	0	0	0	80	0	0	0	FAULT/FAULT:70,UCERR/UCERR:80	EMUERR: stock UCERR [('F', 'uc', 'Unhandled CPU exception (UC_ERR_EXCEPTION) at pc 0x98a68 word 0x3922ffff')] | rebuilt UCERR [('F', 'uc', 'Unhandled CPU exception (UC_ERR_EXCEPTION) at pc 0xb3d64 word 0x7d691214')]	0	0	0
+538	__ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag	i	pipppn	148	12	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+542	__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev	v	p	28	7	7	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+527	__ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_ES3_RKS6_	i	ppp	108	13	13	150	47	100	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	3	0	0
+543	__ZNSaIcE9constructEPcRKc	v	ppp	20	5	5	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:12,RET/RET:138		1	0	0
 547	__ZNKSt11logic_error4whatEv	v	p	48	12	12	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14		1	0	0
-552	__ZNKSt13runtime_error4whatEv	v	p	48	12	12	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18		1	0	0
-557	__ZNKSt9type_infoeqERKS_	v	pp	76	19	17	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:128,RET/RET:22		1	0	0
-556	__ZNSt9type_infoD4Ev	v	pn	44	11	11	150	115	35	0	0	0	0	0	0	0	0	FAULT/FAULT:22,RET/RET:128	REORDERED: same writes/reads per segment; order differs	0	0	0
-554	__ZNSt14overflow_errorC4ERKSs	v	pp	68	17	16	150	120	29	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:35	REORDERED: same writes/reads per segment; order differs	1	0	0
-551	__ZNSt12out_of_rangeC4ERKSs	v	pp	68	17	16	150	45	95	0	0	0	0	0	0	0	0	FAULT/FAULT:103,RET/RET:47	REORDERED: same writes/reads per segment; order differs	10	0	0
-553	__ZNSt11range_errorC4ERKSs	v	pp	68	17	16	150	74	74	0	0	0	0	0	0	0	0	FAULT/FAULT:116,RET/RET:34	REORDERED: same writes/reads per segment; order differs	2	0	0
-550	__ZNSt12length_errorC4ERKSs	v	pp	68	17	16	150	69	72	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:35	REORDERED: same writes/reads per segment; order differs	9	0	0
-549	__ZNSt16invalid_argumentC4ERKSs	v	pp	68	17	16	150	52	97	0	0	0	0	0	0	0	0	FAULT/FAULT:113,RET/RET:37	REORDERED: same writes/reads per segment; order differs	1	0	0
-558	__ZN10__cxxabiv117__class_type_infoD4Ev	v	pn	104	26	24	150	112	37	0	0	0	0	0	0	0	0	FAULT/FAULT:26,RET/RET:124	REORDERED: same writes/reads per segment; order differs	1	0	0
+544	__ZNSaIwE9constructEPwRKw	v	ppp	20	5	5	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:14,RET/RET:136		0	0	0
 409	_BitSetSetRangeEqualsInternal	v	nnnn	100	25	22	150	149	0	0	0	0	0	0	1	0	0	FAULT/FAULT:55,RET/RET:94,TIMEOUT/TIMEOUT:1		0	0	0
-555	__ZNSt15underflow_errorC4ERKSs	v	pp	68	17	16	150	71	79	0	0	0	0	0	0	0	0	FAULT/FAULT:122,RET/RET:28	REORDERED: same writes/reads per segment; order differs	0	0	0
+552	__ZNKSt13runtime_error4whatEv	v	p	48	12	12	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18		1	0	0
+554	__ZNSt14overflow_errorC4ERKSs	v	pp	68	17	16	150	120	29	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:35	REORDERED: same writes/reads per segment; order differs	1	0	0
+556	__ZNSt9type_infoD4Ev	v	pn	44	11	11	150	115	35	0	0	0	0	0	0	0	0	FAULT/FAULT:22,RET/RET:128	REORDERED: same writes/reads per segment; order differs	0	0	0
+557	__ZNKSt9type_infoeqERKS_	v	pp	76	19	17	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:128,RET/RET:22		1	0	0
 548	__ZNSt12domain_errorC4ERKSs	v	pp	68	17	16	150	46	102	0	0	0	0	0	0	0	0	FAULT/FAULT:124,RET/RET:26	REORDERED: same writes/reads per segment; order differs	2	0	0
+550	__ZNSt12length_errorC4ERKSs	v	pp	68	17	16	150	69	72	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:35	REORDERED: same writes/reads per segment; order differs	9	0	0
+553	__ZNSt11range_errorC4ERKSs	v	pp	68	17	16	150	74	74	0	0	0	0	0	0	0	0	FAULT/FAULT:116,RET/RET:34	REORDERED: same writes/reads per segment; order differs	2	0	0
+549	__ZNSt16invalid_argumentC4ERKSs	v	pp	68	17	16	150	52	97	0	0	0	0	0	0	0	0	FAULT/FAULT:113,RET/RET:37	REORDERED: same writes/reads per segment; order differs	1	0	0
+551	__ZNSt12out_of_rangeC4ERKSs	v	pp	68	17	16	150	45	95	0	0	0	0	0	0	0	0	FAULT/FAULT:103,RET/RET:47	REORDERED: same writes/reads per segment; order differs	10	0	0
+555	__ZNSt15underflow_errorC4ERKSs	v	pp	68	17	16	150	71	79	0	0	0	0	0	0	0	0	FAULT/FAULT:122,RET/RET:28	REORDERED: same writes/reads per segment; order differs	0	0	0
+558	__ZN10__cxxabiv117__class_type_infoD4Ev	v	pn	104	26	24	150	112	37	0	0	0	0	0	0	0	0	FAULT/FAULT:26,RET/RET:124	REORDERED: same writes/reads per segment; order differs	1	0	0
 559	__ZN10__cxxabiv120__si_class_type_infoD4Ev	v	pn	104	26	24	150	84	66	0	0	0	0	0	0	0	0	FAULT/FAULT:27,RET/RET:123	REORDERED: same writes/reads per segment; order differs	0	0	0
-562	__ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_	v	pnppp	20	5	5	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 561	__ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj	v	pppn	124	31	31	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:141,RET/RET:9		0	0	0
-568	__ZNKSt9exception4whatEv	v	p	16	4	4	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20		0	0	0
+562	__ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_	v	pnppp	20	5	5	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 563	__ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_	v	pnppp	136	24	25	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-560	__ZN10__cxxabiv121__vmi_class_type_infoD4Ev	v	pn	104	26	24	150	19	131	0	0	0	0	0	0	0	0	FAULT/FAULT:19,RET/RET:131	REORDERED: same writes/reads per segment; order differs	0	0	0
-570	__Z12read_sleb128PKhPi	i	pp	76	19	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:10,RET/RET:140		0	0	0
-566	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE	v	pppp	84	21	21	150	145	2	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6	REORDERED: same writes/reads per segment; order differs	3	0	0
-567	__ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE	v	pppp	116	22	23	150	140	2	0	0	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:2	REORDERED: same writes/reads per segment; order differs	8	0	0
-569	__Z12read_uleb128PKhPj	i	pp	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:14,RET/RET:136		0	0	0
 564	__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE	v	pnnpnpnp	128	18	18	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
+560	__ZN10__cxxabiv121__vmi_class_type_infoD4Ev	v	pn	104	26	24	150	19	131	0	0	0	0	0	0	0	0	FAULT/FAULT:19,RET/RET:131	REORDERED: same writes/reads per segment; order differs	0	0	0
+566	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE	v	pppp	84	21	21	150	145	2	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6	REORDERED: same writes/reads per segment; order differs	3	0	0
+568	__ZNKSt9exception4whatEv	v	p	16	4	4	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20		0	0	0
+567	__ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE	v	pppp	116	22	23	150	140	2	0	0	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:2	REORDERED: same writes/reads per segment; order differs	8	0	0
 565	__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE	v	pnnpnpnp	244	38	37	150	133	0	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6		17	0	0
-573	__Z21get_globals_init_oncev	v	-	32	8	8	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-571	__Z15get_ttype_entryP16lsda_header_infoj	v	pn	84	21	21	150	133	7	0	9	0	0	0	0	0	0	FAULT/FAULT:114,RET/RET:36	FAULT_SITE: stock ('read', 132) vs rebuilt ('read', 134)	1	0	0
-575	_read_uleb128_97c1a3ec	i	pp	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:10,RET/RET:140		0	0	0
+569	__Z12read_uleb128PKhPj	i	pp	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:14,RET/RET:136		0	0	0
+570	__Z12read_sleb128PKhPi	i	pp	76	19	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:10,RET/RET:140		0	0	0
 574	___cxa_get_globals_fast	i	-	52	10	11	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 576	_read_sleb128_97c1a41c	i	pp	76	19	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:10,RET/RET:140		0	0	0
-579	_uw_update_context	v	nn	68	7	7	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		2	0	0
+573	__Z21get_globals_init_oncev	v	-	32	8	8	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+577	_extract_cie_info	v	nin	348	19	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+571	__Z15get_ttype_entryP16lsda_header_infoj	v	pn	84	21	21	150	133	7	0	9	0	0	0	0	0	0	FAULT/FAULT:114,RET/RET:36	FAULT_SITE: stock ('read', 132) vs rebuilt ('read', 134)	1	0	0
+575	_read_uleb128_97c1a3ec	i	pp	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:10,RET/RET:140		0	0	0
+578	___frame_state_for	v	nn	236	16	16	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 581	_read_uleb128_97c1c41c	i	pp	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:9,RET/RET:141		0	0	0
 582	_read_sleb128_97c1c44c	i	pp	76	19	19	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:11,RET/RET:139		1	0	0
-577	_extract_cie_info	v	nin	348	19	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-586	_get_cie_encoding	v	n	200	15	11	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		0	0	0
-578	___frame_state_for	v	nn	236	16	16	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+579	_uw_update_context	v	nn	68	7	7	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		2	0	0
 585	___deregister_frame	i	p	72	13	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:135,RET/RET:15		0	0	0
-588	_fde_single_encoding_compare	v	nnn	152	7	11	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-589	_fde_mixed_encoding_compare	v	inn	188	7	8	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+586	_get_cie_encoding	v	n	200	15	11	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16		0	0	0
 583	___register_frame_info_bases	v	pppp	88	22	22	150	11	133	0	6	0	0	0	0	0	0	FAULT/FAULT:13,RET/RET:137	FAULT_SITE: stock ('write', 4259125578) vs rebuilt ('write', 4259125582)	0	0	0
-590	_classify_object_over_fdes	v	pp	308	71	66	150	120	26	0	0	0	0	0	0	0	0	FAULT/FAULT:127,RET/RET:23	REORDERED: same writes/reads per segment; order differs	4	0	0
-591	_add_fdes	v	npp	332	46	47	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		2	0	0
-584	___register_frame_info_table_bases	v	pppp	68	17	17	150	0	130	0	20	0	0	0	0	0	0	FAULT/FAULT:20,RET/RET:130	FAULT_SITE: stock ('write', 1) vs rebuilt ('write', 5)	0	0	0
+589	_fde_mixed_encoding_compare	v	inn	188	7	8	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+588	_fde_single_encoding_compare	v	nnn	152	7	11	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 592	_linear_search_fdes	v	npn	352	77	82	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-593	_search_object	v	pn	624	62	56	150	135	1	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7	REORDERED: same writes/reads per segment; order differs	14	0	0
+584	___register_frame_info_table_bases	v	pppp	68	17	17	150	0	130	0	20	0	0	0	0	0	0	FAULT/FAULT:20,RET/RET:130	FAULT_SITE: stock ('write', 1) vs rebuilt ('write', 5)	0	0	0
+591	_add_fdes	v	npp	332	46	47	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		2	0	0
 587	_fde_unencoded_compare	v	inn	40	3	1	150	2	0	0	139	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 116806785) vs rebuilt ('read', 8)	9	0	0
-602	__ZN5TTypeD0Ev	v	p	36	9	8	150	108	41	0	0	0	0	0	0	0	0	FAULT/FAULT:17,RET/RET:133	REORDERED: same writes/reads per segment; order differs	1	0	0
-594	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_	v	ppp	100	24	21	150	65	42	0	41	0	0	0	0	0	0	FAULT/FAULT:133,RET/RET:17	FAULT_SITE: stock ('read', 67) vs rebuilt ('read', 91)	2	0	0
-606	__ZN5TType7setTypeE10TBasicTypeibPS_	v	pnnnn	40	10	10	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:98,RET/FAULT:1,RET/RET:51		1	0	0
+590	_classify_object_over_fdes	v	pp	308	71	66	150	120	26	0	0	0	0	0	0	0	0	FAULT/FAULT:127,RET/RET:23	REORDERED: same writes/reads per segment; order differs	4	0	0
+593	_search_object	v	pn	624	62	56	150	135	1	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7	REORDERED: same writes/reads per segment; order differs	14	0	0
 601	__ZN5TTypeD1Ev	v	p	36	9	8	150	47	102	0	0	0	0	0	0	0	0	FAULT/FAULT:19,RET/RET:131	REORDERED: same writes/reads per segment; order differs	1	0	0
+602	__ZN5TTypeD0Ev	v	p	36	9	8	150	108	41	0	0	0	0	0	0	0	0	FAULT/FAULT:17,RET/RET:133	REORDERED: same writes/reads per segment; order differs	1	0	0
 605	__ZN5TType7setTypeE10TBasicTypeibbi	v	pnnnni	32	8	8	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:7,RET/RET:143		0	0	0
+594	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_	v	ppp	100	24	21	150	65	42	0	41	0	0	0	0	0	0	FAULT/FAULT:133,RET/RET:17	FAULT_SITE: stock ('read', 67) vs rebuilt ('read', 91)	2	0	0
 598	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_	i	np	172	43	39	150	77	42	0	31	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7	FAULT_SITE: stock ('read', 3613411797) vs rebuilt ('read', 3613411821)	0	0	0
-596	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m	v	ppn	148	37	34	150	20	30	0	87	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20	FAULT_SITE: stock ('read', 20) vs rebuilt ('read', 44)	13	0	0
-627	__ZN11TIntermNodeD0Ev	v	p	36	9	8	150	148	2	0	0	0	0	0	0	0	0	FAULT/FAULT:19,RET/RET:131	REORDERED: same writes/reads per segment; order differs	0	0	0
+606	__ZN5TType7setTypeE10TBasicTypeibPS_	v	pnnnn	40	10	10	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:98,RET/FAULT:1,RET/RET:51		1	0	0
 624	__ZN12TIntermTypedD1Ev	v	p	52	13	11	150	102	47	0	0	0	0	0	0	0	0	FAULT/FAULT:21,RET/RET:129	REORDERED: same writes/reads per segment; order differs	1	0	0
-515	__ZNKSs5rfindEPKcm	v	ppn	72	18	18	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:102,RET/RET:48		2	0	0
-625	__ZN12TIntermTypedD0Ev	v	p	52	13	11	150	81	67	0	0	0	0	0	0	0	0	FAULT/FAULT:25,RET/FAULT:2,RET/RET:123	REORDERED: same writes/reads per segment; order differs	2	0	0
-631	__ZN13TIntermBranchD1Ev	v	p	36	9	8	150	74	76	0	0	0	0	0	0	0	0	FAULT/FAULT:20,RET/RET:130	REORDERED: same writes/reads per segment; order differs	0	0	0
+627	__ZN11TIntermNodeD0Ev	v	p	36	9	8	150	148	2	0	0	0	0	0	0	0	0	FAULT/FAULT:19,RET/RET:131	REORDERED: same writes/reads per segment; order differs	0	0	0
+596	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m	v	ppn	148	37	34	150	20	30	0	87	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20	FAULT_SITE: stock ('read', 20) vs rebuilt ('read', 44)	13	0	0
 626	__ZN11TIntermNodeD1Ev	v	p	36	9	8	150	83	67	0	0	0	0	0	0	0	0	FAULT/FAULT:22,RET/RET:128	REORDERED: same writes/reads per segment; order differs	0	0	0
+625	__ZN12TIntermTypedD0Ev	v	p	52	13	11	150	81	67	0	0	0	0	0	0	0	0	FAULT/FAULT:25,RET/FAULT:2,RET/RET:123	REORDERED: same writes/reads per segment; order differs	2	0	0
+325	_PPCNoiseGeneratorCalculate3DAVRTC	v	ip	228	57	57	150	0	128	0	20	0	0	0	0	0	0	FAULT/FAULT:22,RET/RET:128	FAULT_SITE: stock ('write', 3) vs rebuilt ('write', 7)	2	0	0
 632	__ZN13TIntermBranchD0Ev	v	p	36	9	8	150	90	60	0	0	0	0	0	0	0	0	FAULT/FAULT:19,RET/RET:131	REORDERED: same writes/reads per segment; order differs	0	0	0
 633	__ZN11TIntermLoopD1Ev	v	p	36	9	8	150	145	5	0	0	0	0	0	0	0	0	FAULT/FAULT:17,RET/RET:133	REORDERED: same writes/reads per segment; order differs	0	0	0
+631	__ZN13TIntermBranchD1Ev	v	p	36	9	8	150	74	76	0	0	0	0	0	0	0	0	FAULT/FAULT:20,RET/RET:130	REORDERED: same writes/reads per segment; order differs	0	0	0
 634	__ZN11TIntermLoopD0Ev	v	p	36	9	8	150	141	8	0	0	0	0	0	0	0	0	FAULT/FAULT:22,RET/RET:128	REORDERED: same writes/reads per segment; order differs	1	0	0
-325	_PPCNoiseGeneratorCalculate3DAVRTC	v	ip	228	57	57	150	0	128	0	20	0	0	0	0	0	0	FAULT/FAULT:22,RET/RET:128	FAULT_SITE: stock ('write', 3) vs rebuilt ('write', 7)	2	0	0
+639	__ZN13TIntermBinaryD1Ev	v	p	52	13	11	150	79	71	0	0	0	0	0	0	0	0	FAULT/FAULT:13,RET/RET:137	REORDERED: same writes/reads per segment; order differs	0	0	0
 635	__ZN16TIntermSelectionD1Ev	v	p	52	13	11	150	76	73	0	0	0	0	0	0	0	0	FAULT/FAULT:25,RET/RET:125	REORDERED: same writes/reads per segment; order differs	1	0	0
-642	__ZN20TIntermConstantUnionD0Ev	v	p	52	13	11	150	69	80	0	0	0	0	0	0	0	0	FAULT/FAULT:19,RET/FAULT:1,RET/RET:130	REORDERED: same writes/reads per segment; order differs	1	0	0
-645	__ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc	v	pp	112	28	28	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:116,RET/RET:34		2	0	0
 644	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_mm	v	ppnn	180	28	26	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 636	__ZN16TIntermSelectionD0Ev	v	p	52	13	11	150	21	129	0	0	0	0	0	0	0	0	FAULT/FAULT:20,RET/RET:130	REORDERED: same writes/reads per segment; order differs	0	0	0
-639	__ZN13TIntermBinaryD1Ev	v	p	52	13	11	150	79	71	0	0	0	0	0	0	0	0	FAULT/FAULT:13,RET/RET:137	REORDERED: same writes/reads per segment; order differs	0	0	0
-640	__ZN13TIntermBinaryD0Ev	v	p	52	13	11	150	49	101	0	0	0	0	0	0	0	0	FAULT/FAULT:20,RET/RET:130	REORDERED: same writes/reads per segment; order differs	0	0	0
-641	__ZN20TIntermConstantUnionD1Ev	v	p	52	13	11	150	18	132	0	0	0	0	0	0	0	0	FAULT/FAULT:16,RET/RET:134	REORDERED: same writes/reads per segment; order differs	0	0	0
 638	__ZN12TIntermUnaryD0Ev	v	p	52	13	11	150	26	124	0	0	0	0	0	0	0	0	FAULT/FAULT:25,RET/RET:125	REORDERED: same writes/reads per segment; order differs	0	0	0
 637	__ZN12TIntermUnaryD1Ev	v	p	52	13	11	150	10	139	0	0	0	0	0	0	0	0	FAULT/FAULT:10,RET/FAULT:1,RET/RET:139	REORDERED: same writes/reads per segment; order differs	1	0	0
+645	__ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc	v	pp	112	28	28	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:116,RET/RET:34		2	0	0
+642	__ZN20TIntermConstantUnionD0Ev	v	p	52	13	11	150	69	80	0	0	0	0	0	0	0	0	FAULT/FAULT:19,RET/FAULT:1,RET/RET:130	REORDERED: same writes/reads per segment; order differs	1	0	0
 647	__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueESt17_Rb_tree_iteratorIS8_RS8_PS8_ERKS8_	v	pppn	568	18	21	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+640	__ZN13TIntermBinaryD0Ev	v	p	52	13	11	150	49	101	0	0	0	0	0	0	0	0	FAULT/FAULT:20,RET/RET:130	REORDERED: same writes/reads per segment; order differs	0	0	0
+641	__ZN20TIntermConstantUnionD1Ev	v	p	52	13	11	150	18	132	0	0	0	0	0	0	0	0	FAULT/FAULT:16,RET/RET:134	REORDERED: same writes/reads per segment; order differs	0	0	0
 652	__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_	v	ppn	388	23	25	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		2	0	0
 648	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm	v	ppn	112	27	26	150	87	23	0	40	0	0	0	0	0	0	FAULT/FAULT:147,RET/RET:3	FAULT_SITE: stock ('read', 838607645) vs rebuilt ('read', 838607669)	0	0	0
 650	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_	i	pnnpp	152	25	25	150	68	14	0	66	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 4294967284) vs rebuilt ('read', 4294967292)	2	0	0
 649	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendERKS3_	v	pp	116	22	25	150	0	18	0	131	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 2541981992); accesses completed before it differ: reads: only stock reads (1342642836, 4)	1	0	0
-663	__ZN7TSymbolD1Ev	v	p	36	9	8	150	88	61	0	0	0	0	0	0	0	0	FAULT/FAULT:21,RET/FAULT:1,RET/RET:128	REORDERED: same writes/reads per segment; order differs	1	0	0
 653	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcS3_EEEERS3_S8_S8_T_SA_	i	pnnpn	152	25	25	150	101	25	0	24	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 1012) vs rebuilt ('read', 1020)	0	0	0
+665	__ZN9TVariableD1Ev	v	p	52	13	11	150	42	108	0	0	0	0	0	0	0	0	FAULT/FAULT:17,RET/RET:133	REORDERED: same writes/reads per segment; order differs	0	0	0
+663	__ZN7TSymbolD1Ev	v	p	36	9	8	150	88	61	0	0	0	0	0	0	0	0	FAULT/FAULT:21,RET/FAULT:1,RET/RET:128	REORDERED: same writes/reads per segment; order differs	1	0	0
 656	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc	v	pni	108	26	25	150	111	25	0	2	0	0	0	0	0	0	FAULT/FAULT:140,RET/RET:10	FAULT_SITE: stock ('read', 2592486738) vs rebuilt ('read', 2592486762)	12	0	0
+670	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_	i	ppp	64	7	7	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 664	__ZN7TSymbolD0Ev	v	p	36	9	8	150	91	59	0	0	0	0	0	0	0	0	FAULT/FAULT:21,RET/RET:129	REORDERED: same writes/reads per segment; order differs	0	0	0
 659	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7replaceEN9__gnu_cxx17__normal_iteratorIPcS3_EES7_mc	v	pnnnn	160	27	29	150	98	35	0	2	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 1044) vs rebuilt ('read', 1068)	15	0	0
-654	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4IPKcEET_S7_RKS2_	v	pppp	76	19	19	150	95	23	0	31	0	0	0	0	0	0	FAULT/FAULT:146,RET/RET:4	FAULT_SITE: stock ('write', 1112676297) vs rebuilt ('write', 1112676301)	1	0	0
-670	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_	i	ppp	64	7	7	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-665	__ZN9TVariableD1Ev	v	p	52	13	11	150	42	108	0	0	0	0	0	0	0	0	FAULT/FAULT:17,RET/RET:133	REORDERED: same writes/reads per segment; order differs	0	0	0
 666	__ZN9TVariableD0Ev	v	p	52	13	11	150	12	138	0	0	0	0	0	0	0	0	FAULT/FAULT:12,RET/RET:138	REORDERED: same writes/reads per segment; order differs	0	0	0
+515	__ZNKSs5rfindEPKcm	v	ppn	72	18	18	150	148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:102,RET/RET:48		2	0	0
 673	__ZN13TShHandleBaseD1Ev	v	p	36	9	8	150	41	108	0	0	0	0	0	0	0	0	FAULT/FAULT:14,RET/RET:136	REORDERED: same writes/reads per segment; order differs	1	0	0
 674	__ZN13TShHandleBaseD0Ev	v	p	36	9	8	150	55	95	0	0	0	0	0	0	0	0	FAULT/FAULT:22,RET/RET:128	REORDERED: same writes/reads per segment; order differs	0	0	0
 580	_init_dwarf_reg_size_table	v	-	1192	298	298	150	0	150	0	0	0	0	0	0	0	0	RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+654	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4IPKcEET_S7_RKS2_	v	pppp	76	19	19	150	95	23	0	31	0	0	0	0	0	0	FAULT/FAULT:146,RET/RET:4	FAULT_SITE: stock ('write', 1112676297) vs rebuilt ('write', 1112676301)	1	0	0
 680	__ZNSt12length_errorD1Ev	v	p	64	16	8	150	90	16	0	0	0	0	43	0	0	0	FAULT/FAULT:55,RET/RET:52,UCERR/UCERR:43	REORDERED: same writes/reads per segment; order differs	1	0	0
-682	__ZNSt11range_errorD1Ev	v	p	64	16	8	150	87	25	0	0	0	0	38	0	0	0	FAULT/FAULT:37,RET/RET:75,UCERR/UCERR:38	REORDERED: same writes/reads per segment; order differs	0	0	0
-678	__ZNSt12domain_errorD1Ev	v	p	64	16	8	150	27	77	0	0	0	0	44	0	0	0	FAULT/FAULT:35,RET/RET:71,UCERR/UCERR:44	REORDERED: same writes/reads per segment; order differs	2	0	0
-683	__ZNSt14overflow_errorD1Ev	v	p	64	16	8	150	108	3	0	0	0	0	38	0	0	0	FAULT/FAULT:64,RET/RET:48,UCERR/UCERR:38	REORDERED: same writes/reads per segment; order differs	1	0	0
 685	__ZNSt12domain_errorD0Ev	v	p	76	19	17	150	39	64	0	0	0	0	47	0	0	0	FAULT/FAULT:64,RET/RET:39,UCERR/UCERR:47	REORDERED: same writes/reads per segment; order differs	0	0	0
-679	__ZNSt16invalid_argumentD1Ev	v	p	64	16	8	150	4	111	0	0	0	0	35	0	0	0	FAULT/FAULT:34,RET/RET:81,UCERR/UCERR:35	REORDERED: same writes/reads per segment; order differs	0	0	0
+682	__ZNSt11range_errorD1Ev	v	p	64	16	8	150	87	25	0	0	0	0	38	0	0	0	FAULT/FAULT:37,RET/RET:75,UCERR/UCERR:38	REORDERED: same writes/reads per segment; order differs	0	0	0
+683	__ZNSt14overflow_errorD1Ev	v	p	64	16	8	150	108	3	0	0	0	0	38	0	0	0	FAULT/FAULT:64,RET/RET:48,UCERR/UCERR:38	REORDERED: same writes/reads per segment; order differs	1	0	0
 681	__ZNSt12out_of_rangeD1Ev	v	p	64	16	8	150	40	65	0	0	0	0	45	0	0	0	FAULT/FAULT:52,RET/RET:53,UCERR/UCERR:45	REORDERED: same writes/reads per segment; order differs	0	0	0
 684	__ZNSt15underflow_errorD1Ev	v	p	64	16	8	150	89	29	0	0	0	0	31	0	0	0	FAULT/FAULT:36,RET/RET:83,UCERR/UCERR:31	REORDERED: same writes/reads per segment; order differs	1	0	0
-687	__ZNSt12length_errorD0Ev	v	p	76	19	17	150	79	29	0	0	0	0	42	0	0	0	FAULT/FAULT:41,RET/RET:67,UCERR/UCERR:42	REORDERED: same writes/reads per segment; order differs	0	0	0
-686	__ZNSt16invalid_argumentD0Ev	v	p	76	19	17	150	4	98	0	0	0	0	48	0	0	0	FAULT/FAULT:50,RET/RET:52,UCERR/UCERR:48	REORDERED: same writes/reads per segment; order differs	0	0	0
 688	__ZNSt12out_of_rangeD0Ev	v	p	76	19	17	150	111	24	0	0	0	0	15	0	0	0	FAULT/FAULT:41,RET/RET:94,UCERR/UCERR:15	REORDERED: same writes/reads per segment; order differs	0	0	0
-690	__ZNSt14overflow_errorD0Ev	v	p	76	19	17	150	88	24	0	0	0	0	38	0	0	0	FAULT/FAULT:43,RET/RET:69,UCERR/UCERR:38	REORDERED: same writes/reads per segment; order differs	0	0	0
-691	__ZNSt15underflow_errorD0Ev	v	p	76	19	17	150	48	47	0	0	0	0	53	0	0	0	FAULT/FAULT:56,RET/RET:41,UCERR/UCERR:53	REORDERED: same writes/reads per segment; order differs	2	0	0
+679	__ZNSt16invalid_argumentD1Ev	v	p	64	16	8	150	4	111	0	0	0	0	35	0	0	0	FAULT/FAULT:34,RET/RET:81,UCERR/UCERR:35	REORDERED: same writes/reads per segment; order differs	0	0	0
 689	__ZNSt11range_errorD0Ev	v	p	76	19	17	150	44	48	0	0	0	0	58	0	0	0	FAULT/FAULT:47,RET/RET:45,UCERR/UCERR:58	REORDERED: same writes/reads per segment; order differs	0	0	0
+687	__ZNSt12length_errorD0Ev	v	p	76	19	17	150	79	29	0	0	0	0	42	0	0	0	FAULT/FAULT:41,RET/RET:67,UCERR/UCERR:42	REORDERED: same writes/reads per segment; order differs	0	0	0
+678	__ZNSt12domain_errorD1Ev	v	p	64	16	8	150	27	77	0	0	0	0	44	0	0	0	FAULT/FAULT:35,RET/RET:71,UCERR/UCERR:44	REORDERED: same writes/reads per segment; order differs	2	0	0
+686	__ZNSt16invalid_argumentD0Ev	v	p	76	19	17	150	4	98	0	0	0	0	48	0	0	0	FAULT/FAULT:50,RET/RET:52,UCERR/UCERR:48	REORDERED: same writes/reads per segment; order differs	0	0	0
+691	__ZNSt15underflow_errorD0Ev	v	p	76	19	17	150	48	47	0	0	0	0	53	0	0	0	FAULT/FAULT:56,RET/RET:41,UCERR/UCERR:53	REORDERED: same writes/reads per segment; order differs	2	0	0
+690	__ZNSt14overflow_errorD0Ev	v	p	76	19	17	150	88	24	0	0	0	0	38	0	0	0	FAULT/FAULT:43,RET/RET:69,UCERR/UCERR:38	REORDERED: same writes/reads per segment; order differs	0	0	0
 398	_CheckRemoveAvailableCopyTable	v	nnnnpi	756	111	120	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:97,RET/RET:53		1	0	0
 389	_clearFuncInfoList	v	nn	68	16	16	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		1	0	0
-386	_glpUniformToFloat	v	nnpp	344	34	30	150	142	0	0	0	0	0	0	8	0	0	FAULT/FAULT:114,RET/RET:28,TIMEOUT/FAULT:8		0	0	0
 519	__ZNKSs17find_first_not_ofEPKcm	v	ppn	72	18	18	150	143	0	0	0	0	0	0	0	0	0	FAULT/FAULT:127,RET/RET:23		7	0	0
 352	_isParamArrayStart_97be9b80	v	nnp	96	24	19	150	125	0	11	3	0	0	0	11	0	0	FAULT/FAULT:121,RET/RET:18,TIMEOUT/FAULT:11	READ_SET: segment 0: only stock reads (1342693348, 4)	0	0	0
-40	_PPParserScopeRemoveMacro	v	nn	68	16	14	150	143	0	0	0	0	0	0	7	0	0	FAULT/FAULT:139,RET/RET:4,TIMEOUT/TIMEOUT:7		0	0	0
-102	__ZN14TPoolAllocatorC4Ebii	v	pinn	152	38	34	150	8	116	0	0	0	0	0	26	0	0	FAULT/FAULT:8,RET/RET:116,TIMEOUT/TIMEOUT:26	REORDERED: same writes/reads per segment; order differs	0	0	0
 512	__ZNKSs4findEPKcmm	v	ppnn	128	32	32	150	142	0	0	0	0	0	0	7	0	0	FAULT/FAULT:97,RET/RET:46,TIMEOUT/TIMEOUT:7		1	0	0
+386	_glpUniformToFloat	v	nnpp	344	34	30	150	142	0	0	0	0	0	0	8	0	0	FAULT/FAULT:114,RET/RET:28,TIMEOUT/FAULT:8		0	0	0
+102	__ZN14TPoolAllocatorC4Ebii	v	pinn	152	38	34	150	8	116	0	0	0	0	0	26	0	0	FAULT/FAULT:8,RET/RET:116,TIMEOUT/TIMEOUT:26	REORDERED: same writes/reads per segment; order differs	0	0	0
 37	_PPParserScopeFree	v	p	116	26	23	150	133	0	0	0	0	0	0	10	0	0	FAULT/FAULT:133,RET/RET:7,TIMEOUT/TIMEOUT:10		7	0	0
+40	_PPParserScopeRemoveMacro	v	nn	68	16	14	150	143	0	0	0	0	0	0	7	0	0	FAULT/FAULT:139,RET/RET:4,TIMEOUT/TIMEOUT:7		0	0	0
 411	_BitSetNextSetBit	v	pn	136	34	34	150	130	0	0	0	0	0	0	20	0	0	FAULT/FAULT:70,RET/RET:60,TIMEOUT/TIMEOUT:20		0	0	0
 513	__ZNKSs4findEPKcm	v	ppn	72	18	18	150	139	0	0	0	0	0	0	11	0	0	FAULT/FAULT:96,RET/RET:43,TIMEOUT/RET:8,TIMEOUT/TIMEOUT:3		0	0	0
 675	__ZN9TCompilerD1Ev	v	p	88	22	20	150	9	97	0	0	0	0	0	29	0	0	FAULT/FAULT:111,RET/RET:10,TIMEOUT/TIMEOUT:29	REORDERED: same writes/reads per segment; order differs	15	0	0
