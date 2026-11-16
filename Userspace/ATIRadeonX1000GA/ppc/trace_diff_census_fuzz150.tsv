@@ -1,0 +1,12 @@
+#id	name	rc	pc	size	stock_cov	reb_cov	runs	IDENTICAL	REORDERED	READ_SET	FAULT_SITE	FAULT_MISMATCH	EFFECTS	EMUERR	TIMEOUT	UNINIT_REBUILT	UNINIT_OTHER	end_states	first_nonidentical	LAYOUT_DEP	PTR_VALUE_DEP	IMAGE_DATA_DEP
+6	__GetCapabilities	v	nnp	156	20	20	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+4	__DecodePixelFormat	i	nppppppp	468	57	58	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:17,RET/RET:133		0	0	0
+1	__Probe	v	iiip	16	4	4	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:16,RET/RET:134		0	0	0
+2	_window_mode_to_ati_format	v	n	148	22	26	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+0	__dyld_func_lookup	v	-	32	8	8	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+3	__AddRef	v	p	20	5	5	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:5,RET/RET:145		0	0	0
+7	__GetBlitter	v	iinnp	224	36	45	150	134	16	0	0	0	0	0	0	0	0	FAULT/FAULT:20,RET/RET:130	REORDERED: same writes/reads per segment; order differs	0	0	0
+5	_fillTextureWithPattern	v	pnii	664	56	59	150	91	58	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
+8	__WaitSurface	v	pip	72	16	18	150	19	131	0	0	0	0	0	0	0	0	FAULT/FAULT:118,RET/RET:32	REORDERED: same writes/reads per segment; order differs	0	0	0
+10	_radeon3DFillSetup	i	pnnp	2020	453	500	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:17,RET/RET:133		0	0	0
+9	_radeon3DCopySetup	i	ippnnnnn	2048	486	502	150	13	109	0	0	0	0	0	0	0	0	FAULT/FAULT:54,RET/RET:96	REORDERED: same writes/reads per segment; order differs	28	0	0

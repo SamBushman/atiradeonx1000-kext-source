@@ -1,0 +1,36 @@
+#id	name	rc	pc	size	stock_cov	reb_cov	runs	IDENTICAL	REORDERED	READ_SET	FAULT_SITE	FAULT_MISMATCH	EFFECTS	EMUERR	TIMEOUT	UNINIT_REBUILT	UNINIT_OTHER	end_states	first_nonidentical	LAYOUT_DEP	PTR_VALUE_DEP	IMAGE_DATA_DEP
+0	ava_get_property	v	nnp	64	13	16	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:31,RET/RET:119		0	0	0
+11	ava_release_subpicture	v	n	136	7	9	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+4	ava_get_surface_descs	v	np	124	19	31	150	119	28	0	3	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:2	FAULT_PARTIAL: same fault ('read', 4242137400); accesses completed before it differ: reads: only rebuilt reads (1342360940, 4)	0	0	0
+8	ava_get_frame	v	nnppiiii	696	23	31	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:108,RET/RET:42		0	0	0
+12	ava_init_context_state	v	n	1196	24	77	150	131	19	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+5	ava_get_image_descs	v	np	136	20	34	150	126	24	0	0	0	0	0	0	0	0	FAULT/FAULT:146,RET/RET:4	REORDERED: same writes/reads per segment; order differs	0	0	0
+3	ava_declare_surface_images	v	npn	356	17	25	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:123,RET/RET:27		0	0	0
+9	ava_slot20_enqueue	v	ninp	192	22	38	150	141	9	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+2	ava_get_attribute	v	nnp	64	13	16	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:34,RET/RET:116		0	0	0
+10	ava_queue_display	v	nppp	296	74	74	150	131	19	0	0	0	0	0	0	0	0	FAULT/FAULT:133,RET/RET:17	REORDERED: same writes/reads per segment; order differs	0	0	0
+6	ava_new_handle	v	niip	100	25	25	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:146,RET/RET:4		0	0	0
+19	ava_push_reservation_word	v	pin	204	14	29	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:31,RET/RET:119		0	0	0
+20	ava_pad_command_lists	v	n	416	37	65	150	139	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		11	0	0
+1	ava_set_property	v	nnn	68	13	17	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:8,RET/RET:142		0	0	0
+7	ava_decode_picture	v	npp	916	15	23	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+14	ava_build_stage_program	i	npnn	2900	249	32	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:123,RET/RET:27		0	0	0
+16	ava_emit_stage_programs	i	npn	592	15	16	150	16	0	0	134	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 17755) vs rebuilt ('read', 17799)	0	0	0
+24	ava_clear_list_marker	v	n	28	7	7	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7		0	0	0
+22	ava_emit_macroblock	v	nnpni	372	17	27	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+27	ava_emit_state_preamble	i	p	96	24	24	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:19,RET/RET:131		0	0	0
+23	ava_begin_reservation	v	inpnn	344	17	16	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1,RET/RET:149		0	0	0
+26	ava_get_driver_name	v	-	28	7	7	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+34	ava_deinterlace_frame	v	niii	92	21	18	150	114	36	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7	REORDERED: same writes/reads per segment; order differs	0	0	0
+21	ava_reserve_list_words	i	nnn	300	32	40	150	121	9	0	20	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25	FAULT_PARTIAL: same fault ('read', 19); accesses completed before it differ: reads: only stock reads (1342328960, 4)	0	0	0
+33	ava_emit_deint_field_quad	i	npnnn	848	107	177	150	134	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		16	0	0
+25	ava_emit_mb_motion_vectors	v	npn	3588	5	20	150	0	0	0	150	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 1423) vs rebuilt ('read', 1399)	0	0	0
+17	ava_emit_block_table_entries	i	ipn	544	111	136	150	0	50	0	19	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 67108864) vs rebuilt ('read', 67108868)	81	0	0
+32	ava_emit_textured_quad	i	pppii	424	95	83	150	10	140	0	0	0	0	0	0	0	0	FAULT/FAULT:12,RET/RET:138	REORDERED: same writes/reads per segment; order differs	0	0	0
+15	ava_build_stage_programs	v	idddddddddd	644	140	161	150	0	75	0	75	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('write', 1342725336); accesses completed before it differ: reads: only stock reads (1342640004, 4)	0	0	0
+29	ava_emit_register_data	v	pnpn	80	20	20	150	146	0	0	0	0	0	0	4	0	0	FAULT/FAULT:17,FAULT/TIMEOUT:4,RET/RET:129		0	0	0
+31	ava_emit_shader_constants	i	pnnnni	264	66	66	150	145	0	0	0	0	0	0	5	0	0	FAULT/FAULT:129,FAULT/TIMEOUT:5,RET/RET:16		0	0	0
+28	ava_emit_shader_stage_setup	i	pn	528	123	120	150	149	0	0	0	0	0	0	1	0	0	FAULT/FAULT:49,RET/RET:100,TIMEOUT/TIMEOUT:1		0	0	0
+18	ava_emit_block_packet	v	nnnpnn	696	104	92	150	134	0	0	0	0	0	0	16	0	0	FAULT/FAULT:134,FAULT/TIMEOUT:16		0	0	0
+30	ava_emit_us_vector_data	i	piii	48	12	12	150	116	0	0	0	0	0	0	34	0	0	FAULT/FAULT:81,FAULT/TIMEOUT:34,RET/RET:35		0	0	0
+13	ava_build_block_grid	v	niiniiin	600	148	150	150	78	19	0	0	0	0	0	53	0	0	FAULT/FAULT:97,FAULT/TIMEOUT:36,TIMEOUT/TIMEOUT:17	REORDERED: same writes/reads per segment; order differs	0	0	0

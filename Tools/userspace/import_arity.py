@@ -103,7 +103,9 @@ names = [l.split('\t')[0] for l in open('/dev/stdin')] if not sys.stdin.isatty()
 for nm in names:
     if nm in KNOWN: res[nm] = KNOWN[nm]; continue
     for lib in libs:
-        if nm in lib[3]: res[nm] = arity(lib, nm); break
+        if nm in lib[3]:
+            if not (lib[1] <= lib[3][nm] < lib[4][-1]): break      # a data symbol (___sF, _DefaultRuneLocale ...), not a function: no arity
+            res[nm] = arity(lib, nm); break
     else: print('no definition of', nm, file=sys.stderr)
 with open(out, 'w') as o:
     for k in sorted(res): o.write('%s\t%d\n' % (k, res[k]))

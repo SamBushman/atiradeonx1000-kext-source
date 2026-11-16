@@ -37,7 +37,7 @@ def macho(path):
             ct, cs, o, sz, al = struct.unpack('>5I', d[8+20*i:28+20*i])
             if ct == 18: d = d[o:o+sz]; break
     magic, ct, cs, ft, ncmds, socm, flags = struct.unpack('>7I', d[:28])
-    p = 28; segs = []; secs = []; symtab = None; indirect = None; locrel = []
+    p = 28; segs = []; secs = []; symtab = None; indirect = None; locrel = []; wbase = None
     for i in range(ncmds):
         cmd, size = struct.unpack('>2I', d[p:p+8])
         if cmd == 1:
@@ -47,6 +47,7 @@ def macho(path):
                 sn = d[q:q+16].rstrip(b'\0').decode(); a, s, o, al, ro, nr, f, r1 = struct.unpack('>8I', d[q+32:q+64])
                 secs.append((name, sn, a, s, f & 0xff, r1)); q += 68
             if name != '__LINKEDIT': segs.append((name, vm, vs, d[fo:fo+fs]))
+            if ip & 2 and wbase is None and name != '__LINKEDIT': wbase = vm
         elif cmd == 2: symtab = struct.unpack('>4I', d[p+8:p+24])
         elif cmd == 11:
             indirect = struct.unpack('>2I', d[p+56:p+64]); lo, nl = struct.unpack('>2I', d[p+72:p+80])
@@ -54,7 +55,12 @@ def macho(path):
                 w0, w1 = struct.unpack('>II', d[lo + 8 * k:lo + 8 * k + 8])
                 if not (w0 & 0x80000000): locrel.append((w0, w1 & 0xf, (w1 >> 5) & 3))
         p += size
-    return d, segs, secs, symtab, indirect, locrel
+    base = min((vm for n, vm, vs, b in segs), default=0); bal = base if not any(rt in (4, 6) for ra, rt, rl in locrel) else base & ~0xffff       # a dylib linked at a preferred address (glprog 0x97b7b000): addresses are kept relative to a 64K-aligned base, so every image is placed at the same slide
+    if bal:
+        segs = [(n, vm - bal, vs, b) for n, vm, vs, b in segs]; secs = [(g, sn, a - bal, s_, f, r1) for (g, sn, a, s_, f, r1) in secs]
+    rb = (wbase if (flags & 0x20) and wbase is not None else base)           # r_address is relative to the first segment (the first writable one in a split-segment image, e.g. glprog)
+    locrel = [(ra + rb - bal, rt, rl) for ra, rt, rl in locrel]
+    return d, segs, secs, symtab, indirect, locrel, bal, rb - bal
 
 class V:
     """a value seen in the trace: the raw number and, when it is a 4-byte word that points into the image, its stock-space canonical form.  Two values are equal when the raw numbers
@@ -68,7 +74,7 @@ class V:
     def __hash__(self): return 0
     def __repr__(self): return repr(self.raw) if self.canon is None else '%s~%r' % (hex(self.raw) if isinstance(self.raw, int) else self.raw, self.canon)
 
-def extrels(d, symtab):
+def extrels(d, symtab, roff=0):
     """external relocations of a linked image (dysymtab extrel): [(address of the word, imported symbol name)].  dyld stores the symbol's address (+ the word's own addend) there."""
     out = []
     ncmds = struct.unpack('>I', d[16:20])[0]; p = 28
@@ -80,14 +86,14 @@ def extrels(d, symtab):
                 ra, w = struct.unpack('>2I', d[eo + 8 * k:eo + 8 * k + 8])
                 if (w >> 4) & 1:      # r_extern (big-endian bitfield: symbolnum:24 pcrel:1 length:2 extern:1 type:4): symbolnum indexes the symbol table
                     idx = w >> 8; strx = struct.unpack('>I', d[so + 12 * idx:so + 12 * idx + 4])[0]
-                    out.append((ra, d[stro + strx:d.index(b'\0', stro + strx)].decode()))
+                    out.append((ra + roff, d[stro + strx:d.index(b'\0', stro + strx)].decode()))
         p += size
     return out
 
 class Img:
     def __init__(self, path, symfile=None, nmfile=None):
-        d, self.segs, self.secs, symtab, indirect, self.locrel = macho(path)
-        self.extrel = extrels(d, symtab)
+        d, self.segs, self.secs, symtab, indirect, self.locrel, self.bal, roff = macho(path)
+        self.extrel = extrels(d, symtab, roff)
         self.path = path
         self.zero = [(a, s) for (g, sn, a, s, f, r1) in self.secs if f in (1, 0xc, 0x12)]
         self.stubs = [(a, a + s) for (g, sn, a, s, f, r1) in self.secs if 'stub' in sn]
@@ -105,20 +111,20 @@ class Img:
                     if idx & 0x80000000 and not idx & 0x40000000: self.local_ptrs.append(a + 4 * k); continue      # INDIRECT_SYMBOL_LOCAL: dyld adds the slide to the stored word
                     if idx >= 0x40000000 or idx >= nsyms: continue
                     nt, ns_, ndesc, nval = struct.unpack('>BBHI', d[symoff + 12 * idx + 4:symoff + 12 * idx + 12])
-                    if (nt & 0x0e) == 0x0e and nval: self.def_ptrs[a + 4 * k] = nval        # bound to a symbol this image defines
-                    if (nt & 0x0e) == 0:      # an import
+                    if (nt & 0x0e) == 0x0e and nval: self.def_ptrs[a + 4 * k] = nval - self.bal        # bound to a symbol this image defines
+                    if (nt & 0x0e) in (0, 0x0c):      # an import (N_UNDF, or N_PBUD: a prebound image, e.g. the stock glprog, records the library address in n_value)
                         strx = struct.unpack('>I', d[symoff + 12 * idx:symoff + 12 * idx + 4])[0]
                         self.cells[a + 4 * k] = d[stroff + strx:d.index(b'\0', stroff + strx)].decode()
         self.syms = []                        # (addr, name) sorted
         if symfile:
             for l in open(symfile):
                 p = l.rstrip('\n').split('\t')
-                if len(p) >= 3 and p[1].startswith('0x') and p[2] not in ('__LINKEDIT', '?'): self.syms.append((int(p[1], 16), p[0]))
-                elif len(p) == 3 and p[0].startswith('0x') and p[1] not in ('__LINKEDIT', '__TEXT'): self.syms.append((int(p[0], 16), p[2]))
+                if len(p) >= 3 and p[1].startswith('0x') and p[2] not in ('__LINKEDIT', '?'): self.syms.append((int(p[1], 16) - self.bal, p[0]))
+                elif len(p) == 3 and p[0].startswith('0x') and p[1] not in ('__LINKEDIT', '__TEXT'): self.syms.append((int(p[0], 16) - self.bal, p[2]))
         if nmfile:
             for l in open(nmfile):
                 p = l.split()
-                if len(p) == 3 and re.match('[0-9a-f]{8}$', p[0]) and p[1] in 'tTdDsSbBcC': self.syms.append((int(p[0], 16), p[2]))
+                if len(p) == 3 and re.match('[0-9a-f]{8}$', p[0]) and p[1] in 'tTdDsSbBcC': self.syms.append((int(p[0], 16) - self.bal, p[2]))
         self.syms.sort(); self.symaddrs = [a for a, n in self.syms]
     is_stock = False; to_stock = None
     stock_secs = None
@@ -152,27 +158,28 @@ def callout_ids(imgs):
 # ---------------------------------------------------------------- one image under emulation
 class Sim:
     nargs = None
-    MATHF = {'sqrt': 0, 'sqrtf': 0, 'sin': 0, 'cos': 0, 'pow': 0, 'floor': 0, 'ceil': 0, 'log': 0, 'logf': 0, 'exp': 0, 'round': 0, 'roundf': 0, 'frexp': 1}      # double arguments travel in f1..f2, not in GPRs
+    MATHF = {'sqrt': 0, 'sqrtf': 0, 'sin': 0, 'cos': 0, 'pow': 0, 'floor': 0, 'ceil': 0, 'log': 0, 'logf': 0, 'exp': 0, 'round': 0, 'roundf': 0, 'frexp': 1, 'exp2': 0, 'log2': 0, 'acos': 0, 'asin': 0, 'atan': 0, 'tan': 0, 'trunc': 0, 'atan2f': 0, 'isnanf': 0}      # double arguments travel in f1..f2, not in GPRs
     LIBC = {'io_connect_method_scalarI_scalarO': 6, 'io_connect_method_scalarI_structureI': 6, 'io_connect_method_structureI_structureO': 6, 'memcpy': 3, 'memset': 3, 'memmove': 3, 'memcmp': 3, 'bzero': 2, 'strlen': 1, 'strcpy': 2, 'strcmp': 2, 'strncmp': 3, 'strncpy': 3, 'strlcpy': 3, 'strcat': 2, 'strchr': 2, 'strrchr': 2, 'malloc': 1, 'calloc': 2, 'realloc': 2, 'free': 1, 'valloc': 1, 'vfree': 1, 'Unwind_Resume': 1, 'cxa_atexit': 3, 'cxa_guard_acquire': 1, 'cxa_guard_release': 1, 'dlopen': 2, 'dlsym': 2, 'exit': 1, 'fclose': 1, 'fgets': 3, 'fopen': 2, 'fread': 4, 'fwrite': 4, 'getenv': 1, 'getpid': 0, 'index': 2, 'rindex': 2, 'pclose': 1, 'popen': 2, 'puts': 1, 'usleep': 1, 'pthread_mutexattr_init': 1, 'pthread_mutexattr_settype': 2, 'keymgr_get_and_lock_processwide_ptr': 1, 'keymgr_set_and_unlock_processwide_ptr': 2, 'ZdlPv': 1, 'ZdaPv': 1, 'Znwm': 1, 'Znwj': 1, 'Znam': 1, 'Znaj': 1, 'setjmp': 1, 'longjmp': 2, '_setjmp': 1, '_longjmp': 2, 'ecvt': 3, 'fcvt': 3}
     FLOATARGS = set()       # further callees taking double arguments (none known among the GLDriver imports)
-    FPRN = {'sqrt': 1, 'sqrtf': 1, 'sin': 1, 'cos': 1, 'pow': 2, 'floor': 1, 'ceil': 1, 'log': 1, 'logf': 1, 'exp': 1, 'round': 1, 'roundf': 1, 'frexp': 1, 'ecvt': 1, 'fcvt': 1}      # double arguments per callee (the other FPRs are leftovers)
+    FPRN = {'sqrt': 1, 'sqrtf': 1, 'sin': 1, 'cos': 1, 'pow': 2, 'floor': 1, 'ceil': 1, 'log': 1, 'logf': 1, 'exp': 1, 'round': 1, 'roundf': 1, 'frexp': 1, 'ecvt': 1, 'fcvt': 1, 'exp2': 1, 'log2': 1, 'acos': 1, 'asin': 1, 'atan': 1, 'tan': 1, 'trunc': 1, 'atan2f': 2, 'isnanf': 1}      # double arguments per callee (the other FPRs are leftovers)
     DBLFIRST = {'ecvt', 'fcvt'}      # (double, int, int*, int*): the double travels in f1 (its GPR shadow is not an argument), the three others in r5..r7
     def __init__(self, img, ids, names, stackfill=0, slide=SLIDE):
         self.slide = slide; self.img = img; self.ids = ids; self.names = names
         uc = Uc(UC_ARCH_PPC, UC_MODE_PPC32 | UC_MODE_BIG_ENDIAN); self.uc = uc
         try: uc.ctl_set_cpu_model(UC_CPU_PPC32_7457_V1_2)
         except Exception: pass
+        dl = (slide - img.bal) & 0xffffffff       # dyld's slide of the stored absolute values
         for name, vm, vs, data in img.segs:
             data = bytearray(data)
             for (ra, rt, rl) in img.locrel:                 # dyld's slide: a pointer word moves by the slide; an lis/ha16 immediate by slide>>16 (the slide is a multiple of 0x10000, so lo16 halves stay)
                 if vm <= ra < vm + len(data):
                     o = ra - vm
-                    if rt == 0 and rl == 2: data[o:o+4] = struct.pack('>I', (struct.unpack('>I', data[o:o+4])[0] + slide) & 0xffffffff)
-                    elif rt in (4, 6): data[o+2:o+4] = struct.pack('>H', (struct.unpack('>H', data[o+2:o+4])[0] + (slide >> 16)) & 0xffff)
+                    if rt == 0 and rl == 2: data[o:o+4] = struct.pack('>I', (struct.unpack('>I', data[o:o+4])[0] + dl) & 0xffffffff)
+                    elif rt in (4, 6): data[o+2:o+4] = struct.pack('>H', (struct.unpack('>H', data[o+2:o+4])[0] + (dl >> 16)) & 0xffff)
             uc.mem_map(vm + slide, (vs + 0xfff) & ~0xfff); uc.mem_write(vm + slide, bytes(data))
         for za, zs in img.zero: uc.mem_write(za + slide, bytes(zs))
-        for ca in img.local_ptrs: uc.mem_write(ca + slide, struct.pack('>I', (struct.unpack('>I', bytes(uc.mem_read(ca + slide, 4)))[0] + slide) & 0xffffffff))
-        for ca, nv_ in img.def_ptrs.items(): uc.mem_write(ca + slide, struct.pack('>I', (nv_ + slide) & 0xffffffff))
+        for ca in img.local_ptrs: uc.mem_write(ca + slide, struct.pack('>I', (struct.unpack('>I', bytes(uc.mem_read(ca + slide, 4)))[0] + dl) & 0xffffffff))
+        for ca, nv_ in img.def_ptrs.items(): uc.mem_write(ca + slide, struct.pack('>I', (nv_ + slide) & 0xffffffff))   # nv_ is already image-relative
         for ca, nm in img.cells.items(): uc.mem_write(ca + slide, struct.pack('>I', CALLOUT + 16 * ids[nm]))
         for ca, nm in img.extrel: uc.mem_write(ca + slide, struct.pack('>I', CALLOUT + 16 * ids[nm]))      # words dyld binds through an external relocation
         self.snap = [(vm + slide, bytes(uc.mem_read(vm + slide, len(data)))) for name, vm, vs, data in img.segs if name != '__TEXT']
@@ -250,6 +257,7 @@ class Sim:
             if nm.lstrip('_') in self.EFFECTS and self.libc(uc, nm.lstrip('_'), [uc.reg_read(UC_PPC_REG_0 + i) for i in range(3, 6)]): return
             self.ev.append(('C', nm, tuple(r), tuple(f), tuple(st)))
             self.ncalls += 1
+            if nm.lstrip('_') in ('abort', 'exit', 'cxa_rethrow'): self.ev.append(('F', 'noreturn', nm)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return       # the callee never returns: nothing after the call is behaviour
             h = zlib.crc32(('%s/%d' % (nm, self.ncalls)).encode())      # a deterministic, name-keyed return value (the same in both images)
             uc.reg_write(UC_PPC_REG_3, h & 0xffff); uc.reg_write(UC_PPC_REG_4, 0)
             uc.reg_write(UC_PPC_REG_PC, uc.reg_read(UC_PPC_REG_LR))
@@ -636,7 +644,7 @@ def load_row(ledger, name):
     for l in open(ledger):
         p = l.rstrip('\n').split('\t')
         if len(p) >= 7 and p[0].isdigit() and p[1] == name:
-            return dict(id=int(p[0]), name=p[1], stock=int(p[2], 16), reb=int(p[3], 16), size=int(p[4]), pc=p[5], rc=p[6])
+            return dict(id=int(p[0]), name=p[1], stock=int(p[2], 16) - (_G['S'].bal if 'S' in _G else 0), reb=int(p[3], 16) - (_G['R'].bal if 'R' in _G else 0), size=int(p[4]), pc=p[5], rc=p[6])
     raise SystemExit('row %s not in %s' % (name, ledger))
 
 def same_run(x, y):
@@ -751,16 +759,16 @@ _G = {}
 def _init(stock, reb, symmap, nm, ledger=None, funcs=None, nargs=None, fuzz=0, repro=None):
     S = Img(stock, symfile=symmap); R = Img(reb, nmfile=nm); ids, names = callout_ids([S, R]); S.is_stock = True
     ts = {n: a for a, n in S.syms}
-    for r in (read_ledger(ledger) if ledger else []): ts.setdefault(r['name'], r['stock'])
+    for r in (read_ledger(ledger, S.bal, R.bal) if ledger else []): ts.setdefault(r['name'], r['stock'])
     for l in (open(funcs) if funcs else []):                       # the corpus ledger: every function of the stock, 'addr<TAB>size<TAB>name<TAB>part<TAB>status'
         p = l.rstrip('\n').split('\t')
-        if len(p) >= 3 and p[0].startswith('0x'): ts.setdefault(p[2], int(p[0], 16)); ts.setdefault('_' + p[2], int(p[0], 16))
+        if len(p) >= 3 and p[0].startswith('0x'): ts.setdefault(p[2], int(p[0], 16) - S.bal); ts.setdefault('_' + p[2], int(p[0], 16) - S.bal)
     class _TS(dict):
         def get(self, k, d=None):
             v = dict.get(self, k)
             if v is not None: return v
             m = re.search(r'_([0-9a-f]{5,8})$', k)
-            return int(m.group(1), 16) if m else d
+            return (int(m.group(1), 16) - S.bal) if m else d      # a name that carries its stock address (e.g. _read_sleb128_97c1c44c) holds the absolute address
     # one-instruction wrapper entries (`b target`) that the stock names only by an alias four bytes before the target (e.g. _glCallList_Exec stock 0x43e18 = `b 0x43e1c`): the stock has no symbol for them, so
     # map the rebuilt wrapper to (stock address of its target) - 4 when the stock holds a `b .+4` there
     def _word(img, a):
@@ -800,16 +808,16 @@ def _work(job):
     except Exception as e: return row, None, 'EXC %r' % (e,), None, None
     return row, res, first, stat, cov
 
-def read_ledger(ledger):
+def read_ledger(ledger, sb=0, rb=0):
     rows = []
     for l in open(ledger):
         p = l.rstrip('\n').split('\t')
-        if len(p) >= 7 and p[0].isdigit(): rows.append(dict(id=int(p[0]), name=p[1], stock=int(p[2], 16), reb=int(p[3], 16), size=int(p[4]), pc=p[5], rc=p[6]))
+        if len(p) >= 7 and p[0].isdigit(): rows.append(dict(id=int(p[0]), name=p[1], stock=int(p[2], 16) - sb, reb=int(p[3], 16) - rb, size=int(p[4]), pc=p[5], rc=p[6]))
     return rows
 
 def census(stock, reb, ledger, trials, procs, out, symmap, nm, names=None, funcs=None, nargs=None, fuzz=0, repro=None):
     import multiprocessing as mp
-    rows = read_ledger(ledger)
+    rows = read_ledger(ledger, macho(stock)[6], macho(reb)[6])
     if names: rows = [r for r in rows if r['name'] in names]
     with mp.Pool(procs, initializer=_init, initargs=(stock, reb, symmap, nm, ledger, funcs, nargs, fuzz, repro)) as pool, open(out, 'w') as f:
         f.write('#id\tname\trc\tpc\tsize\tstock_cov\treb_cov\truns\tIDENTICAL\tREORDERED\tREAD_SET\tFAULT_SITE\tFAULT_MISMATCH\tEFFECTS\tEMUERR\tTIMEOUT\tUNINIT_REBUILT\tUNINIT_OTHER\tend_states\tfirst_nonidentical\tLAYOUT_DEP\tPTR_VALUE_DEP\tIMAGE_DATA_DEP\n')

@@ -33,12 +33,19 @@ EXPLAINED = {'ffvpPrepareFogExp': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFo
              '_glActiveStencilFace_ListExec': ('STOCK_HOISTED_LOAD', 'PASS'), '_glSamplePass_ListExec': ('STOCK_HOISTED_LOAD', 'PASS'), '_glGetPixelMapuiv_Exec': ('STOCK_HOISTED_LOAD', 'PASS'),
              '_glGetPixelMapusv_Exec': ('STOCK_HOISTED_LOAD', 'PASS'), '_gleLookUpTexture1D': ('STOCK_HOISTED_LOAD', 'PASS'), '_gleLookUpTexture3D': ('STOCK_HOISTED_LOAD', 'PASS'),
              '_gleLookUpNonProxyTexture1D': ('STOCK_HOISTED_LOAD', 'PASS'), '_gleLookUpNonProxyTexture3D': ('STOCK_HOISTED_LOAD', 'PASS')}
+# Rows resolved by hand whose worst verdict is not FAULT_MISMATCH: name -> (verdict it applies to, class, gate)
+EXPLAINED_ANY = {'_PPCRuntimeCompilerGetOffsetInRegister': ('UNINIT_REBUILT', 'OOB_LOCAL_INDEX', 'OUT-OF-CONTRACT')}      # libGLProgrammability EVIDENCE_trace_diff.md: both images index a 0x24-byte local copy with an unchecked record field
 def worst2(r):
     w = worst(r)
+    if r['name'] in EXPLAINED_ANY and EXPLAINED_ANY[r['name']][0] == w: return EXPLAINED_ANY[r['name']][1]
     return EXPLAINED[r['name']][0] if w == 'FAULT_MISMATCH' and r['name'] in EXPLAINED else w
 c = collections.Counter(worst2(r) for r in rows)
 GATE = {'UNINIT_REBUILT': 'FAIL', 'EFFECTS': 'FAIL', 'HW_STREAM': 'FAIL', 'FAULT_MISMATCH': 'REVIEW', 'IMAGE_DATA_DEP': 'OUT-OF-CONTRACT', 'PTR_VALUE_DEP': 'OUT-OF-CONTRACT', 'LAYOUT_ALL': 'NO-INFO', 'EMUERR_ALL': 'NO-INFO', 'TIMEOUT_ALL': 'NO-INFO', 'EXC': 'NO-INFO'}
-g = collections.Counter(EXPLAINED[r['name']][1] if worst(r) == 'FAULT_MISMATCH' and r['name'] in EXPLAINED else GATE.get(worst(r), 'PASS') for r in rows)
+def gate(r):
+    w = worst(r)
+    if r['name'] in EXPLAINED_ANY and EXPLAINED_ANY[r['name']][0] == w: return EXPLAINED_ANY[r['name']][2]
+    return EXPLAINED[r['name']][1] if w == 'FAULT_MISMATCH' and r['name'] in EXPLAINED else GATE.get(w, 'PASS')
+g = collections.Counter(gate(r) for r in rows)
 print('GATE (relaxed memory order, strict calls/returns/final stores/command ring; unchecked out-of-range table index = out of contract, user Nov 15): ' + ', '.join('%s %d' % kv for kv in sorted(g.items())))
 print('%d rows; trials excluded as layout-dependent (the stock itself differs at a second slide): %d of %d' % (len(rows), sum(r['lay'] for r in rows), sum(r['runs'] for r in rows))); [print('  %-16s %d' % (k, v)) for k, v in sorted(c.items(), key=lambda x: -x[1])]
 def normal(r): return any(s.split(':')[0] == 'RET/RET' for s in r['states'].split(','))
