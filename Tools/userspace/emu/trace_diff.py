@@ -746,6 +746,30 @@ def _init(stock, reb, symmap, nm, ledger=None, funcs=None, nargs=None, fuzz=0, r
             if v is not None: return v
             m = re.search(r'_([0-9a-f]{5,8})$', k)
             return int(m.group(1), 16) if m else d
+    # one-instruction wrapper entries (`b target`) that the stock names only by an alias four bytes before the target (e.g. _glCallList_Exec stock 0x43e18 = `b 0x43e1c`): the stock has no symbol for them, so
+    # map the rebuilt wrapper to (stock address of its target) - 4 when the stock holds a `b .+4` there
+    def _word(img, a):
+        for nm_, vm, vs, data in img.segs:
+            if vm <= a < vm + len(data) - 3: return struct.unpack('>I', data[a - vm:a - vm + 4])[0]
+    _named = set(ts.values()); _stock_branches = {}
+    for nm_, vm, vs, data in S.segs:
+        if nm_ == '__TEXT':
+            for lo, hi in S.text:
+                for a in range(lo, min(hi, vm + len(data)) - 3, 4):
+                    w = struct.unpack('>I', data[a - vm:a - vm + 4])[0]
+                    if w >> 26 == 18 and not w & 3: _stock_branches.setdefault((a + (((w & 0x3fffffc) ^ 0x2000000) - 0x2000000)) & 0xffffffff, []).append(a)
+    for ra, rn in R.syms:
+        if rn in ts or rn.startswith(('DAT_', 'PTR_', 's_', 'lbl_', '_raw_entry')): continue
+        w = _word(R, ra)
+        if w is None or w >> 26 != 18 or w & 3: continue
+        tgt = (ra + (((w & 0x3fffffc) ^ 0x2000000) - 0x2000000)) & 0xffffffff
+        tn = R.sym(tgt)
+        if tn[1] != 0 or tn[0] not in ts: continue
+        sw = _word(S, ts[tn[0]] - 4)
+        if sw is not None and sw == 0x48000004: ts[rn] = ts[tn[0]] - 4; continue
+        # otherwise: the one unnamed stock `b <stock address of the target>` that is not a named function entry
+        cand = [a for a in _stock_branches.get(ts[tn[0]], []) if a not in _named]
+        if len(cand) == 1: ts[rn] = cand[0]
     R.to_stock = _TS(ts); R.stock_secs = {(g, sn): (a, sz) for (g, sn, a, sz, f, r1) in S.secs}
     if nargs:
         Sim.nargs = {}
