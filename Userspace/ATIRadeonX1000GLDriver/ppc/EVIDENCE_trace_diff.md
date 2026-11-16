@@ -139,3 +139,21 @@ reached by the fuzz run; command-ring coverage is still tiny (5 functions); 640 
 `__TEXT` read-only in the emulator, wild-fetch stop, partial-pointer and both-fault rules (see `Userspace/GLEngine/ppc/EVIDENCE_trace_diff.md`) applied to the GLDriver: gate FAIL 1 (`gldValidatePointSize`, deliberate #132), NO-INFO 42 (LAYOUT_ALL: functions returning image
 addresses/strings), OUT-OF-CONTRACT 7 (5 PTR_VALUE_DEP `RegKind__*`/`Table1ea904__hasFlag0x11`, 2 IMAGE_ADDR_DEP), PASS 2749. Worst verdicts: REORDERED 1368, IDENTICAL 1232, FAULT_SITE 128, LAYOUT_ALL 42, READ_SET 21, PTR_VALUE_DEP 5,
 IMAGE_DATA_DEP 2, EFFECTS 1. No new row, no FAULT_MISMATCH, no UNINIT_REBUILT, no EMUERR. Table: `~/g5logs/fnf_237/v5/census_gld_f.tsv`.
+
+## Update Nov 16: extended coverage (1115 previously uncovered rows)
+The earlier census covered 2799 rows (those with an argument model). 1115 further functions (C++ methods with `this`, destructors, ctx-taking helpers; extended ledger `fnfuzz_gen.py` with `FNFUZZ_EMU=1`, `-` signature = 8 random words) were run with the same tool, 150 inputs each (167,250 trials).
+Images: stock `gld_ATIRadeonX1000GLDriver` (md5 5d63b5e3d86e770daa6aee657bc784c2), rebuilt `ATIRadeonX1000GLDriver_renamed` (md5 bc3fdb49c112bffb3b426d374354738d, the #287-fixed corpus). Table: `trace_diff_census_emu_fuzz150.tsv`.
+Gate: PASS 1114, OUT-OF-CONTRACT 1, FAIL 0, REVIEW 0, NO-INFO 0. Tiers: IDENTICAL 772, REORDERED 162, FAULT_SITE 161, READ_SET 17 rows plus the hand-resolved rows below. 1296 of 167,250 trials excluded as layout-dependent.
+**541 rows had at least one run in which both images returned normally; 574 rows fault in every run in both images** (random words are not valid objects), so for those the comparison only proves equal behaviour up to the common fault. They are NOT verified deeper; the typed-object-graph step (next phase of the agreed plan) addresses them.
+
+Rows resolved by hand (all recorded in `census_summary.py`):
+| row | verdict | class | proof |
+|---|---|---|---|
+| `gld_uploadParamConstants` | false UNINIT_REBUILT | emulator window | the alloca area lies below the 0x40000-byte frame window; `own_frame` now spans the whole stack below the entry sp. Re-run: clean. |
+| `R300MachineAssembler__classifyAluOperation` | FAULT_MISMATCH | STOCK_DEAD_ARG_LOAD | the stock loads `this+0xa4` and never uses it; the rebuilt inlined callees do not read it (trials with arg0 0x7fffffff / 0x7f). |
+| `ILReader__currentOpcode` | EFFECTS | DELIBERATE_64_CLAMP | the documented #64 clamp of the opcode index (rebuilt clamps, stock reads out of range). |
+| `Compiler__initStaticLocals` | not comparable | emulator | the stock calls its own statically linked `atexit` (stock 0x2748); mapped by `TD_STOCK_HOOKS=2748:___cxa_atexit` to the rebuilt's `___cxa_atexit(f, 0, image-base)` call-out. Re-run: REORDERED 20/20. |
+| `gld_initContextDispatch` | PTR_VALUE_DEP, every trial faults | OUT-OF-CONTRACT, **not established** | builds its dispatch table from image addresses; nothing past the first fault is compared. |
+| 13 rows (`gld_setBufferAgpRefBacking`, `gld_setTexture*Backing`, `gld_setQuery*Backing`, `_gldModifyVertexArray`, `gld_submitRing`, ...) | EMUERR (UC_ERR_EXCEPTION) | emulator | an unaligned `lwarx` (the instruction before the reported pc; unicorn reports the pc after it). A real PPC970 raises an alignment exception on it, so both images fault identically; `trace_diff.py` now records it as a fault. After the change all 13 are IDENTICAL/FAULT_SITE. |
+Emulator rules added: `own_frame` covers the whole stack below sp0 (alloca); `TD_STOCK_HOOKS` (statically linked stock library functions mapped to call-outs); misaligned atomic = fault; `v*printf` consumed-word comparison; `io_connect_method_*` input buffers compared by content.
+Not covered / not established: the 574 fault-only rows; command-ring contents of these functions (they emit none with random inputs); instruction coverage is lower than stock in 328 rows and lower in the stock in 480 (different inlining, not a defect by itself).

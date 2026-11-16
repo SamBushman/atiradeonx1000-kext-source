@@ -35,10 +35,14 @@ EXPLAINED = {'ffvpPrepareFogExp': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFo
              '_gleLookUpNonProxyTexture1D': ('STOCK_HOISTED_LOAD', 'PASS'), '_gleLookUpNonProxyTexture3D': ('STOCK_HOISTED_LOAD', 'PASS'),
              # libGLProgrammability extended census (EVIDENCE_trace_diff.md): #225 deliberate guard of a stock out-of-table write; a dead argument load of the stock (`lwz r0,0(r4); stw r0,-0x20(r1); blr`)
              'std____default_alloc_template_true_0____S_refill': ('STOCK_BUG_225', 'PASS'),
-             '__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_': ('STOCK_DEAD_ARG_LOAD', 'PASS')}
+             '__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
+             # GLDriver extended census (Nov 16): stock loads this+0xa4 and never uses it; the rebuilt inlined callees do not
+             'R300MachineAssembler__classifyAluOperation': ('STOCK_DEAD_ARG_LOAD', 'PASS')}
 # Rows resolved by hand whose worst verdict is not FAULT_MISMATCH: name -> (verdict it applies to, class, gate)
 EXPLAINED_ANY = {'_PPCRuntimeCompilerGetOffsetInRegister': ('UNINIT_REBUILT', 'OOB_LOCAL_INDEX', 'OUT-OF-CONTRACT'),
     # extended glprog census, EVIDENCE_trace_diff.md: the random format pointer 0x20000000 is the START OF THE STOCK's __DATA segment (offset 0x10000000 from its text; the rebuilt image has __DATA right after its text), so only the stock can read the string; same _vsprintf buffer/format values in both calls
+    # GLDriver extended census: documented deliberate #64 clamp of the ILReader opcode index
+    'ILReader__currentOpcode': ('EFFECTS', 'DELIBERATE_64_CLAMP', 'PASS'),
     'TPPStreamCompiler__warning': ('EFFECTS', 'INPUT_IN_IMAGE_WINDOW', 'PASS'),
     # NO-INFO rows that return the address of an image-resident string/table (every trial layout-dependent): contents compared with Tools/userspace/emu/strret_check.py, EVIDENCE_trace_diff.md
     'GetPreprocessorBuiltinString': ('LAYOUT_ALL', 'RETURNS_IMAGE_CONTENT_VERIFIED', 'PASS'),

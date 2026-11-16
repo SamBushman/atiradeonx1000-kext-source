@@ -25,6 +25,9 @@ CALLOUT = 0x60000000
 RING = 0x58000000; RING_SIZE = 0x10000       # the stand-in for the kernel-mapped command ring: its contents are what the hardware is programmed by (packets: register offsets + values)
 IMGMAX = 0x400000            # both images are mapped below this; values in [0x1000, IMGMAX) are treated as image pointers by the normaliser, so the generator never makes such values
 NULLPAGE = 0x1000
+# TD_STOCK_HOOKS=ADDR:NAME,...  (stock-image-relative address in hex): a statically linked library function of the STOCK binary that the rebuilt corpus calls as the library import of the same name
+# (GLDriver: the stock's own copy of `atexit` at 0x2748, built on keymgr, against the rebuilt's libSystem `atexit`): the stock function is run as a call-out of that name instead, so both images record the same call
+STOCK_HOOKS = {int(a, 16): n for a, n in (x.split(':') for x in os.environ.get('TD_STOCK_HOOKS', '').split(',') if x)}
 SLIDE2 = 0x20000000         # the control run of the stock at a second slide: a trial whose behaviour changes with the slide depends on where the image happens to sit (an input that is an address inside the image window)
 SLIDE = 0x10000000          # both images are placed here (a multiple of 0x10000): everything below it is unmapped, as on the real machine
 
@@ -159,7 +162,7 @@ def callout_ids(imgs):
 class Sim:
     nargs = None
     MATHF = {'sqrt': 0, 'sqrtf': 0, 'sin': 0, 'cos': 0, 'pow': 0, 'floor': 0, 'ceil': 0, 'log': 0, 'logf': 0, 'exp': 0, 'round': 0, 'roundf': 0, 'frexp': 1, 'exp2': 0, 'log2': 0, 'acos': 0, 'asin': 0, 'atan': 0, 'tan': 0, 'trunc': 0, 'atan2f': 0, 'isnanf': 0}      # double arguments travel in f1..f2, not in GPRs
-    LIBC = {'io_connect_method_scalarI_scalarO': 6, 'io_connect_method_scalarI_structureO': 6, 'io_connect_method_scalarI_structureI': 6, 'io_connect_method_structureI_structureO': 6, 'memcpy': 3, 'memset': 3, 'memmove': 3, 'memcmp': 3, 'bzero': 2, 'strlen': 1, 'strcpy': 2, 'strcmp': 2, 'strncmp': 3, 'strncpy': 3, 'strlcpy': 3, 'strcat': 2, 'strchr': 2, 'strrchr': 2, 'malloc': 1, 'calloc': 2, 'realloc': 2, 'free': 1, 'valloc': 1, 'vfree': 1, 'Unwind_Resume': 1, 'cxa_atexit': 3, 'cxa_guard_acquire': 1, 'cxa_guard_release': 1, 'dlopen': 2, 'dlsym': 2, 'exit': 1, 'fclose': 1, 'fgets': 3, 'fopen': 2, 'fread': 4, 'fwrite': 4, 'getenv': 1, 'getpid': 0, 'index': 2, 'rindex': 2, 'pclose': 1, 'popen': 2, 'puts': 1, 'usleep': 1, 'pthread_mutexattr_init': 1, 'pthread_mutexattr_settype': 2, 'keymgr_get_and_lock_processwide_ptr': 1, 'keymgr_set_and_unlock_processwide_ptr': 2, 'ZdlPv': 1, 'ZdaPv': 1, 'Znwm': 1, 'Znwj': 1, 'Znam': 1, 'Znaj': 1, 'setjmp': 1, 'longjmp': 2, '_setjmp': 1, '_longjmp': 2, 'ecvt': 3, 'fcvt': 3}
+    LIBC = {'io_connect_method_scalarI_scalarO': 6, 'io_connect_method_scalarI_structureO': 6, 'io_connect_method_scalarI_structureI': 6, 'io_connect_method_structureI_structureO': 6, 'memcpy': 3, 'memset': 3, 'memmove': 3, 'memcmp': 3, 'bzero': 2, 'strlen': 1, 'strcpy': 2, 'strcmp': 2, 'strncmp': 3, 'strncpy': 3, 'strlcpy': 3, 'strcat': 2, 'strchr': 2, 'strrchr': 2, 'malloc': 1, 'calloc': 2, 'realloc': 2, 'free': 1, 'valloc': 1, 'vfree': 1, 'Unwind_Resume': 1, 'cxa_atexit': 3, 'cxa_guard_acquire': 1, 'cxa_guard_release': 1, 'dlopen': 2, 'dlsym': 2, 'exit': 1, 'fclose': 1, 'fgets': 3, 'fopen': 2, 'fread': 4, 'fwrite': 4, 'getenv': 1, 'getpid': 0, 'index': 2, 'rindex': 2, 'pclose': 1, 'popen': 2, 'puts': 1, 'usleep': 1, 'pthread_mutexattr_init': 1, 'pthread_mutexattr_settype': 2, 'keymgr_get_and_lock_processwide_ptr': 1, 'keymgr_set_and_unlock_processwide_ptr': 2, 'atexit': 1, 'ZdlPv': 1, 'ZdaPv': 1, 'Znwm': 1, 'Znwj': 1, 'Znam': 1, 'Znaj': 1, 'setjmp': 1, 'longjmp': 2, '_setjmp': 1, '_longjmp': 2, 'ecvt': 3, 'fcvt': 3}
     FLOATARGS = set()       # further callees taking double arguments (none known among the GLDriver imports)
     FPRN = {'sqrt': 1, 'sqrtf': 1, 'sin': 1, 'cos': 1, 'pow': 2, 'floor': 1, 'ceil': 1, 'log': 1, 'logf': 1, 'exp': 1, 'round': 1, 'roundf': 1, 'frexp': 1, 'ecvt': 1, 'fcvt': 1, 'exp2': 1, 'log2': 1, 'acos': 1, 'asin': 1, 'atan': 1, 'tan': 1, 'trunc': 1, 'atan2f': 2, 'isnanf': 1}      # double arguments per callee (the other FPRs are leftovers)
     DBLFIRST = {'ecvt', 'fcvt'}      # (double, int, int*, int*): the double travels in f1 (its GPR shadow is not an argument), the three others in r5..r7
@@ -206,7 +209,7 @@ class Sim:
             if self.sp0 - 0x40000 <= v < self.sp0: return V(v, ('OWNFRAME',))        # the address of one of the function's own locals (an out parameter): the frame layout is the compiler's
         return V(v)
 
-    def own_frame(self, a): return self.sp0 - 0x40000 <= a < self.sp0 + 0x38 + 4 * getattr(self, 'nstack', 0)      # incl. the incoming stack-parameter words (9th+ arguments): the callee owns them (PowerPC ABI), a store there is not an external effect
+    def own_frame(self, a): return STACK <= a < self.sp0 + 0x38 + 4 * getattr(self, 'nstack', 0)      # incl. the incoming stack-parameter words (9th+ arguments): the callee owns them; everything below sp0 down to the stack's end is this call's frames, alloca included (gld_uploadParamConstants allocas count*16 bytes of a random count: more than the 0x40000 window the first census used) (PowerPC ABI), a store there is not an external effect
 
     def flush(self):
         for a, s, wpc, old in self.pw:
@@ -241,8 +244,12 @@ class Sim:
         if addr == STOP: self.status = 'RET'; uc.emu_stop(); return
         if not (CALLOUT <= addr < CALLOUT + 0x10000) and not (self.img.lo <= addr - self.slide < self.img.end) and NULLPAGE <= addr:       # a wild branch into non-code (arena / stack data): whatever executes there is arbitrary, so the run ends at the fetch
             self.ev.append(('F', 'wild', self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
-        if CALLOUT <= addr < CALLOUT + 0x10000:
-            idx = (addr - CALLOUT) // 16; nm = self.names[idx]
+        hook = STOCK_HOOKS.get(addr - self.slide) if self.img.is_stock else None
+        if CALLOUT <= addr < CALLOUT + 0x10000 or hook:
+            if hook:
+                nm = hook
+                if nm.lstrip('_') == 'cxa_atexit': uc.reg_write(UC_PPC_REG_0 + 4, 0); uc.reg_write(UC_PPC_REG_0 + 5, self.slide)      # the stock's own atexit(f) is __cxa_atexit(f, 0, __dso_handle) (it reads the handle = the image base, then registers through keymgr)
+            else: idx = (addr - CALLOUT) // 16; nm = self.names[idx]
             sp = uc.reg_read(UC_PPC_REG_1)
             na = (self.nargs or {}).get(nm.lstrip('_'), self.LIBC.get(nm.lstrip('_'), 8))
             if nm.lstrip('_') in self.MATHF: na = self.MATHF[nm.lstrip('_')]
@@ -253,6 +260,7 @@ class Sim:
             f = [uc.reg_read(UC_PPC_REG_FPR0 + i) for i in range(1, 1 + (nf_fmt or self.FPRN.get(nm.lstrip('_'), 4)))] if (nm.lstrip('_') in self.MATHF or nm.lstrip('_') in self.DBLFIRST or nm.lstrip('_') in self.FLOATARGS or nf_fmt) else []      # f1.. are arguments only of the callees that take doubles; elsewhere they are leftovers
             f = [0x7ff8000000000000 if (x >> 52) & 0x7ff == 0x7ff and x & ((1 << 52) - 1) else x for x in f]      # a NaN double argument: its payload / sign is not behaviour (same rule as the NaN stores)
             r = [self.nv(x, 4) if not isinstance(x, V) else x for x in r]
+            if hook and nm.lstrip('_') == 'cxa_atexit' and len(r) > 2: r[2] = V(self.slide, ('IMG', 0))      # __dso_handle is the image base: an image address, not a slide-dependent number
             if nm.lstrip('_') in self.VPRINTF: r = self.va_canon(uc, nm.lstrip('_'), r)
             if nm.lstrip('_') in self.IOIN: r = self.io_canon(nm.lstrip('_'), r)
             st = [self.nv(int.from_bytes(uc.mem_read(sp + 0x38 + 4 * i, 4), 'big'), 4) for i in range(max(0, na - 8))]
@@ -404,8 +412,16 @@ class Sim:
         except UcError as e:
             if self.status == '?':
                 self.status = 'UCERR'
-                try: pcx = uc.reg_read(UC_PPC_REG_PC); wx = struct.unpack('>I', bytes(uc.mem_read(pcx, 4)))[0]; self.ev.append(('F', 'uc', '%s at pc %#x word %#010x' % (e, pcx - self.slide, wx)))
-                except Exception: self.ev.append(('F', 'uc', str(e)))
+                try:
+                    pcx = uc.reg_read(UC_PPC_REG_PC); wx = struct.unpack('>I', bytes(uc.mem_read(pcx, 4)))[0]
+                    wp = struct.unpack('>I', bytes(uc.mem_read(pcx - 4, 4)))[0]
+                    if wp >> 26 == 31 and ((wp >> 1) & 0x3ff) in (20, 84): wx = wp; pcx -= 4      # unicorn reports the pc after the lwarx/ldarx that raised
+                    xo = (wx >> 1) & 0x3ff
+                    if wx >> 26 == 31 and xo in (20, 150, 84, 214):      # lwarx / stwcx. / ldarx / stdcx. at an address that is not 4-aligned: the real CPU takes an alignment exception (SIGBUS); the emulator raises UC_ERR_EXCEPTION
+                        ra = (wx >> 16) & 31; ea = ((uc.reg_read(UC_PPC_REG_0 + ra) if ra else 0) + uc.reg_read(UC_PPC_REG_0 + ((wx >> 11) & 31))) & 0xffffffff
+                        self.status = 'FAULT'; self.fpc = pcx - self.slide; self.ev.append(('F', 'read' if xo in (20, 84) else 'write', self.na(ea)))
+                    else: self.status = 'UCERR'; self.ev.append(('F', 'uc', '%s at pc %#x word %#010x' % (e, pcx - self.slide, wx)))
+                except Exception: self.status = 'UCERR'; self.ev.append(('F', 'uc', str(e)))
         self.flush()
         if self.status == '?':
             pcn = uc.reg_read(UC_PPC_REG_PC)

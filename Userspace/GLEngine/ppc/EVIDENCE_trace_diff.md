@@ -42,3 +42,9 @@ identical ordered stores and no call -> FAULT_SITE; a fetch outside the image te
 ## Not covered / not established
 Rows whose every trial faults in both images (907 rows) only prove the crash behaviour equal; hardware-channel coverage for GLEngine (it emits no ring packets itself) and the import-reaching functions
 beyond the call-out arguments are not exercised by this census. glprog, GA, VA, libGL: not yet run through the trace differential.
+
+## Update Nov 16: extended coverage (683 previously uncovered rows)
+683 further GLEngine functions (all sizes; `fnfuzz_gen.py` with `FNFUZZ_EMU=1`, `-` signature = 8 random words), 150 inputs each (102,450 trials). Images as above: stock md5 02f4a2854a95be1f2853baeb99ae22b3, rebuilt `GLEngine_rebuilt_i288` md5 6fd17c4f05a80b103c01d213a99002b8. Table: `trace_diff_census_emu_fuzz150.tsv`.
+Gate: PASS 683, FAIL 0, REVIEW 0, OUT-OF-CONTRACT 0. Tiers: IDENTICAL 399, REORDERED 138, FAULT_SITE 136, READ_SET 10 (rows by worst verdict). 428 of 102,450 trials excluded as layout-dependent.
+389 rows returned normally in at least one run in both images; **294 rows fault in every run in both images** and are only proven equal up to the common fault (not verified deeper; typed inputs are the next step of the agreed plan).
+Rule changes used: `own_frame` covers the whole stack below sp0 (alloca), misaligned `lwarx` = fault (both rules only relax comparisons; the 683 rows were run before the second rule and contained no EMUERR).
