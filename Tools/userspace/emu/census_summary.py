@@ -28,7 +28,11 @@ EXPLAINED = {'ffvpPrepareFogExp': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFo
              'R300MachineAssembler__vslot65_declareNodeRegisters': ('STOCK_DEAD_ARG_LOAD', 'PASS'), 'R520MachineAssembler__vslot65_declareNodeRegisters': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
              'opcodeInfoRgbHwOpcode': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'gld_applyAnisotropyOverride': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
              'IRInst__scaleByOutputScale': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'Program__laneKindOfIlType': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
-             'Program__assignOutputExportSlots': ('STOCK_BUG_284', 'PASS'), 'Program__assignSharedExportSlots': ('STOCK_BUG_284', 'PASS')}
+             'Program__assignOutputExportSlots': ('STOCK_BUG_284', 'PASS'), 'Program__assignSharedExportSlots': ('STOCK_BUG_284', 'PASS'),
+             # GLEngine (Userspace/GLEngine/ppc/EVIDENCE_trace_diff.md, "The 8 one-sided FAULT_MISMATCH rows"): a load the stock performs early / unconditionally whose result the rebuilt reads later or not at all
+             '_glActiveStencilFace_ListExec': ('STOCK_HOISTED_LOAD', 'PASS'), '_glSamplePass_ListExec': ('STOCK_HOISTED_LOAD', 'PASS'), '_glGetPixelMapuiv_Exec': ('STOCK_HOISTED_LOAD', 'PASS'),
+             '_glGetPixelMapusv_Exec': ('STOCK_HOISTED_LOAD', 'PASS'), '_gleLookUpTexture1D': ('STOCK_HOISTED_LOAD', 'PASS'), '_gleLookUpTexture3D': ('STOCK_HOISTED_LOAD', 'PASS'),
+             '_gleLookUpNonProxyTexture1D': ('STOCK_HOISTED_LOAD', 'PASS'), '_gleLookUpNonProxyTexture3D': ('STOCK_HOISTED_LOAD', 'PASS')}
 def worst2(r):
     w = worst(r)
     return EXPLAINED[r['name']][0] if w == 'FAULT_MISMATCH' and r['name'] in EXPLAINED else w

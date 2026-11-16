@@ -176,6 +176,8 @@ class Sim:
         for ca, nm in img.cells.items(): uc.mem_write(ca + slide, struct.pack('>I', CALLOUT + 16 * ids[nm]))
         for ca, nm in img.extrel: uc.mem_write(ca + slide, struct.pack('>I', CALLOUT + 16 * ids[nm]))      # words dyld binds through an external relocation
         self.snap = [(vm + slide, bytes(uc.mem_read(vm + slide, len(data)))) for name, vm, vs, data in img.segs if name != '__TEXT']
+        self.tx = [(vm + slide, vm + slide + vs) for name, vm, vs, data in img.segs if name == '__TEXT']        # __TEXT is r-x in a real process: a wild store into it faults (and cannot corrupt the next run, which restores only the other segments)
+        for vm, vs in [(vm + slide, (vs + 0xfff) & ~0xfff) for name, vm, vs, data in img.segs if name == '__TEXT']: uc.mem_protect(vm, vs, UC_PROT_READ | UC_PROT_EXEC)
         uc.mem_map(ARENA, ARENA_SIZE); uc.mem_map(RING, RING_SIZE); uc.mem_map(STACK, STACK_SIZE); uc.mem_map(STOP, 0x1000); uc.mem_map(CALLOUT, 0x10000)
         uc.hook_add(UC_HOOK_CODE, self.on_code)
         uc.hook_add(UC_HOOK_MEM_READ, self.on_read)
@@ -230,6 +232,8 @@ class Sim:
         self.cov.add(addr - self.slide); self.n += 1
         if self.n > self.limit: self.status = 'TIMEOUT'; uc.emu_stop(); return
         if addr == STOP: self.status = 'RET'; uc.emu_stop(); return
+        if not (CALLOUT <= addr < CALLOUT + 0x10000) and not (self.img.lo <= addr - self.slide < self.img.end) and NULLPAGE <= addr:       # a wild branch into non-code (arena / stack data): whatever executes there is arbitrary, so the run ends at the fetch
+            self.ev.append(('F', 'wild', self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
         if CALLOUT <= addr < CALLOUT + 0x10000:
             idx = (addr - CALLOUT) // 16; nm = self.names[idx]
             sp = uc.reg_read(UC_PPC_REG_1)
@@ -327,6 +331,7 @@ class Sim:
         if size == 8 and isinstance(v, int): self.rd8.add(v)
 
     def on_write(self, uc, access, addr, size, value, ud):
+        if any(lo <= addr < hi for lo, hi in self.tx): self.ev.append(('F', 'write', self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
         if addr < NULLPAGE: self.ev.append(('F', 'write', addr)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
         if self.in_stub() or self.own_frame(addr): return
         try: old = bytes(uc.mem_read(addr, size)) if size <= 8 and not (STACK <= addr < STACK + STACK_SIZE) else None       # silent-store detection only against input-defined memory (the stack holds the fill pattern, which differs between the two control fills)
@@ -356,7 +361,10 @@ class Sim:
         self.fpc = None; self.ev = []; self.evpc = {}; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
         try: uc.emu_start(entry + self.slide, STOP, count=limit + 10)
         except UcError as e:
-            if self.status == '?': self.status = 'UCERR'; self.ev.append(('F', 'uc', str(e)))
+            if self.status == '?':
+                self.status = 'UCERR'
+                try: pcx = uc.reg_read(UC_PPC_REG_PC); wx = struct.unpack('>I', bytes(uc.mem_read(pcx, 4)))[0]; self.ev.append(('F', 'uc', '%s at pc %#x word %#010x' % (e, pcx - self.slide, wx)))
+                except Exception: self.ev.append(('F', 'uc', str(e)))
         self.flush()
         if self.status == '?':
             pcn = uc.reg_read(UC_PPC_REG_PC)
@@ -569,6 +577,9 @@ def compare(a, b, ret_kind):
        EFFECTS         a write, a call out, a return value differs"""
     sa, ea, ra, ca = a; sb, eb, rb, cb = b
     if sa == 'TIMEOUT' or sb == 'TIMEOUT': return 'TIMEOUT', ''
+    if sa == 'UCERR' and sb == 'UCERR':
+        fx = lambda ev: [e for e in ev if e[0] == 'F']
+        if fx(ea) == fx(eb) and fx(ea) and ea == eb: return 'IDENTICAL', 'full ordered trace equal; both end in the same unemulated exception at the same pc (wild branch into non-code)'
     if sa == 'UCERR' or sb == 'UCERR': return 'EMUERR', 'stock %s %r | rebuilt %s %r' % (sa, [e for e in ea if e[0] == 'F'], sb, [e for e in eb if e[0] == 'F'])
     if sa != sb:
         ox, oy = image_addr_diff(ea, eb)
@@ -578,6 +589,7 @@ def compare(a, b, ret_kind):
             lo_end, hi_end = sorted((_G['S'].end, _G['R'].end))
             if lo_end + SLIDE <= fe[2] < hi_end + SLIDE:        # the same wild address (garbage input) is outside the smaller image and inside the larger one
                 return 'PTR_VALUE_DEP', 'wild %s at %#x (from unvalidated input) is unmapped in the smaller image (ends %#x) but inside the larger (ends %#x): %s' % (fe[1], fe[2], lo_end + SLIDE, hi_end + SLIDE, 'stock faults, rebuilt completes' if sa == 'FAULT' else 'rebuilt faults, stock completes')
+        if ptr_partial_read(ea, eb): return 'PTR_VALUE_DEP', 'stock %s %r | rebuilt %s %r, after reading part of a stored image pointer (the accessed address is built from those address bits)' % (sa, [e[1:] for e in ea if e[0] == 'F'], sb, [e[1:] for e in eb if e[0] == 'F'])
         return 'FAULT_MISMATCH', 'stock %s %r | rebuilt %s %r' % (sa, [e[1:] for e in ea if e[0] == 'F'], sb, [e[1:] for e in eb if e[0] == 'F'])
     det = []; ret_ok = True
     if sa == 'RET':
@@ -595,6 +607,9 @@ def compare(a, b, ret_kind):
         noeff = lambda ev: not any(e[0] in ('W', 'WB', 'C') for e in ev)
         if fa and fb and noeff(ea) and noeff(eb):      # both crash before any store or call completed: the same observable outcome, only the first invalid access (kind/address) differs
             return 'FAULT_SITE', 'stock %r vs rebuilt %r (different access kind; no store or call completed in either image)' % (fa[1:], fb[1:])
+        eff = lambda ev: [e for e in ev if e[0] in ('W', 'WB', 'C')]
+        if fa and fb and eff(ea) == eff(eb) and not any(e[0] == 'C' for e in ea):       # both crash after the same ordered stores and no call: only the first invalid access (kind/address) differs
+            return 'FAULT_SITE', 'stock %r vs rebuilt %r (identical ordered stores before the fault, no call in either image)' % (fa[1:], fb[1:])
         if ptr_partial_read(ea, eb): return 'PTR_VALUE_DEP', 'both fault, but at different places after reading part of a stored image pointer: stock %r vs rebuilt %r' % (fa, fb)
         return 'FAULT_MISMATCH', 'stock %r vs rebuilt %r' % (fa, fb)
     if len(sga) != len(sgb) or any(x[0] != y[0] for x, y in zip(sga, sgb)):
