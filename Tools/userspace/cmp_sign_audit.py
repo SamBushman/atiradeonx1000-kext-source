@@ -66,6 +66,17 @@ def rpairs(img, a, n):
                     else: sg += 1
                     break
     return u, sg
+def sites(img, a, n, tag):
+    """print every addi+cmpli/cmpi pair of the function (SHOW=name,name env var selects functions)"""
+    ins = [i for i in md.disasm(code(img, a, n), a) if i.mnemonic != '.long']
+    for k, i in enumerate(ins):
+        if i.mnemonic in ('addi', 'subi', 'addic', 'addic.', 'subic') and i.op_str.count(',') == 2:
+            d = regs(i)[0]
+            for j in ins[k + 1:k + 3]:
+                if j.mnemonic in ('cmplwi', 'cmpwi') and regs(j)[1] == d:
+                    print('  %s %x  %s %s | %s %s' % (tag, i.address, i.mnemonic, i.op_str, j.mnemonic, j.op_str)); break
+import os
+SHOW = set(os.environ.get('SHOW', '').split(',')) - {''}
 rsyms = {n: a for a, n in R.syms}; raddrs = sorted(a for a, n in R.syms)
 bal = S.bal
 bad = []; pairs = []; n = 0
@@ -77,6 +88,7 @@ for l in open(ledger):
     if ra is None: continue
     i = bisect.bisect_right(raddrs, ra); rsize = (raddrs[i] - ra) if i < len(raddrs) else size
     n += 1; a = counts(S, sa, size); b = counts(R, ra, rsize)
+    if name in SHOW: print('==', name, 'stock %#x rebuilt %#x' % (sa, ra)); sites(S, sa, size, 'S'); sites(R, ra, rsize, 'R')
     if a != b: bad.append((name, a, b))
     pa = rpairs(S, sa, size); pb = rpairs(R, ra, rsize)
     if pa[0] > pb[0] or pb[1] > pa[1]: pairs.append((name, pa, pb))
