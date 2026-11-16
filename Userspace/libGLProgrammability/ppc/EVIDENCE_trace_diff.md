@@ -26,3 +26,30 @@ address space; code after `abort` executed), none to a rebuilt-code difference.
 
 ## Not covered
 The ledger holds 508 of 1,799 corpus functions (the fnfuzz-eligible ones); the other ~1,290 (C++ methods with `this`/object graphs, varargs, callback-only, tiny) have no argument model in this census.
+
+
+## Update Nov 15 (night): final image, extended ledger, two defects found
+Rebuilt image now `us_ccbfd3b2/glprog/libGLProgrammability.dylib` (commit ccbfd3b2, md5 2b20f5ef1e4e6bbb46a1f67ef1a7f0f4; G5 `~/rung3/us_ccbfd3b2`), stock unchanged. Two censuses, 150 coverage-guided inputs per row:
+* `trace_diff_census_fuzz150.tsv` - the 508-row rz ledger (as above): **PASS 507, OUT-OF-CONTRACT 1** (same row), FAIL 0.
+* `trace_diff_census_ic_fuzz150.tsv` - 356 further rows (imp/ctx ledger rows not in the rz ledger, `ledger_glprog_ic.tsv`): **PASS 349, OUT-OF-CONTRACT 2, NO-INFO 5, FAIL 0**. Rows by worst trial outcome: IDENTICAL 212, REORDERED 84, FAULT_SITE 46, READ_SET 7, LAYOUT_ALL 5, PTR_VALUE_DEP 1, IMAGE_DATA_DEP 1; EFFECTS 0; 1,647 of 53,400 trials excluded as layout-dependent.
+Together 864 of 1,799 corpus functions (48%) are covered; the remaining 935 still have no argument model.
+
+### Defects this found (both fixed, issue + checked patch + image rebuilt + row re-run IDENTICAL)
+| issue | function | stock vs corpus | fix |
+|---|---|---|---|
+| #289 | `_idstr` (0x97b8a330) | `*src - 0x2e < 2` compiled signed (`cmpwi`), stock unsigned range check (`cmplwi`): characters below 0x2e replaced by '_' | `PATCHES['_idstr']`, `(uint)` cast; row: old image EFFECTS (stock `___maskrune` call missing), fixed image IDENTICAL 340 / REORDERED 58 / LAYOUT_DEP 2 |
+| #290 | `_uw_init_context_1` (0x97c1b79c) | stored an uninitialised local as the unwind context's return address (`in_LR` lost); stock `lwz r29,8(r2)` = own saved LR | `PATCHES['_uw_init_context_1']`, `__builtin_return_address(0)`; row: 150/150 IDENTICAL after (before: store at context+0x1c0 differed on every input) |
+
+### Comparator rule added (trace_diff.py)
+`fprintf` joins `printf/sprintf/snprintf`: only the arguments the format string consumes are behaviour (the other argument registers are caller leftovers, e.g. `TInfoSinkBase::append` `fprintf(f,"%s",s)` differed only in registers 6-8); an unreadable format (callee faults on it) leaves only the fixed arguments. This cleared `__ZN13TInfoSinkBase6appendERKSs`, `...appendEic` and `___eprintf` (all previously EFFECTS, no data difference in consumed arguments; re-run IDENTICAL).
+
+### OUT-OF-CONTRACT / NO-INFO rows of the ic census
+| row | gate | evidence |
+|---|---|---|
+| `_PPCConstantsAndScratchInitialise` | OOC (IMAGE_ADDR_DEP) | only f1 at return differs (stock 2.718281828459045, rebuilt 0.36787945032...): the function is declared `double` but both call sites (`part_000.c:34`, `part_016.c:13`) discard the result; the table it fills is identical (no store differs). Leftover f1, not an observable return. |
+| `___cxa_throw` | OOC (PTR_VALUE_DEP) | stock stores its own `terminate` handler address (IMG 650764), the rebuilt the symbol `__ZSt9terminatev` (IMGR): an address of an import/function in each image, emulator mapping gap, not a value difference. |
+| `ParseBinary/Unary/Selection/Loop/Branch__errorReportTail` (5) | NO-INFO (LAYOUT_ALL) | tail fragments of larger parse functions; every trial faults in both images and the stock itself differs at a second slide. NOT established: they are only exercised through their parent functions, which are not in a ledger. |
+
+### Sign-compare audit (Tools/userspace/cmp_sign_audit.py)
+Counts signed/unsigned ordering compares and `addi+cmpli` range-check pairs per function, stock vs rebuilt (glprog: 1,197 functions compared; sign-neutral compares filtered). Leads read so far:
+`_idstr` (defect, fixed); `_InterpreterTextureSamplerSampleTexel1D/2D/3D` (`1 < ushort - 0x2700`, rebuilt signed: benign, enclosed by `(uint)(x - 0x2700) < 4` on the same field); `_byte_scan` digit checks (digit already range-limited by the loop condition: benign); `_glpPPDisassemble` (`--counter > 0`, signed in both). Not yet read: ~30 further range-pair rows. A difference is a lead, not a proof.
