@@ -252,6 +252,13 @@ PATCHES = {
     # path). Class: lost unsigned compare (`x - C < N`). C: the subtraction is unsigned.
     '_idstr': _scoped('glprog', _conv_with('_idstr (0x97b8a330)', [('if (*param_1 - 0x2e < 2) {', 'if ((uint)(*param_1 - 0x2e) < 2) {')])),
 
+    # _uw_init_context_1 (glprog, stock 0x97c1b79c, libgcc's unwinder): `context->ra = __builtin_return_address(0)` before _uw_frame_state_for reads it. The stock loads it
+    # from the frame (`lwz r2,0(r1); lwz r29,8(r2)` = this function's saved LR, stored `stw r29,0x1c0(r30)` at 0x97c1b7d4). Ghidra printed the register `in_LR` (never
+    # assigned in the function), which the corpus turned into an uninitialised local, so the rebuilt stored a stack garbage word as the context's return address and
+    # _uw_frame_state_for looked up the FDE of a wrong pc (found by the trace-differential census: write to context+0x1c0 stock 0x70000000 vs rebuilt a stack word).
+    # C: the same builtin the callers of this function use (part_026.c, _Unwind_RaiseException etc.).
+    '_uw_init_context_1': _scoped('glprog', _conv_with('_uw_init_context_1 (0x97c1b79c)', [('= in_LR;', '= (undefined4)__builtin_return_address(0);')])),
+
     # --- data symbols Ghidra typed inconsistently (word index in one function, byte offset in another) -----------------------------------
     # _gPollAllocThreadData (glprog, data 0xa7b7ba1c) is a pointer to an 8-byte record { TPoolAllocator *pool; int; } (InitializeGlobalPools, stock
     # 0x97b9fe54: `bl operator new(8); stw r30,4(r3); stw r3,0(r28); stw r29,0(r3)` - word stores at +0 and +4). The corpus declares it `unsigned char *`

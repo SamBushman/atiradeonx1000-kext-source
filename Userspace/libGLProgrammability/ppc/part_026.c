@@ -895,6 +895,7 @@ int _uw_init_context_1(context, outerCfa, outerRa)
   undefined4 fsCfaHow;
   
   _memset(context,0,0x1d8);
+  entryReturnAddress = (undefined4)__builtin_return_address(0);
   *(undefined4 *)(context + 0x1c0) = entryReturnAddress;
   fsCfaOffset = ((int (*)())_uw_frame_state_for)(context,fs);
   if (fsCfaOffset != 0) {

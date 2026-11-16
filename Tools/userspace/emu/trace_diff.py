@@ -247,7 +247,7 @@ class Sim:
             na = (self.nargs or {}).get(nm.lstrip('_'), self.LIBC.get(nm.lstrip('_'), 8))
             if nm.lstrip('_') in self.MATHF: na = self.MATHF[nm.lstrip('_')]
             nf_fmt = 0
-            if nm.lstrip('_') in ('sprintf', 'printf', 'snprintf'): na, nf_fmt = self.printf_args(uc, nm.lstrip('_'), na)
+            if nm.lstrip('_') in ('sprintf', 'printf', 'snprintf', 'fprintf'): na, nf_fmt = self.printf_args(uc, nm.lstrip('_'), na)
             r0 = 5 if nm.lstrip('_') in self.DBLFIRST else 3
             r = [uc.reg_read(UC_PPC_REG_0 + i) for i in range(r0, r0 + min(na, 8))]
             f = [uc.reg_read(UC_PPC_REG_FPR0 + i) for i in range(1, 1 + (nf_fmt or self.FPRN.get(nm.lstrip('_'), 4)))] if (nm.lstrip('_') in self.MATHF or nm.lstrip('_') in self.DBLFIRST or nm.lstrip('_') in self.FLOATARGS or nf_fmt) else []      # f1.. are arguments only of the callees that take doubles; elsewhere they are leftovers
@@ -277,9 +277,9 @@ class Sim:
     def printf_args(self, uc, bn, default):
         """printf-family callout: the fixed arguments plus the ones the format string consumes (integer-class conversions take a GPR each, `ll` two, `*` one more; floating conversions take an FPR):
         the other argument registers are leftovers of the caller and differ between compilers without being behaviour."""
-        fi = {'printf': 0, 'sprintf': 1, 'snprintf': 2}[bn]
+        fi = {'printf': 0, 'sprintf': 1, 'snprintf': 2, 'fprintf': 1}[bn]
         try: fmt = self._cstr(uc.reg_read(UC_PPC_REG_0 + 3 + fi), 4096).decode('latin1')
-        except Exception: return default, 0
+        except Exception: return fi + 1, 0      # an unreadable format: the callee faults on it, so only the fixed arguments (stream/buffer, size, format) are behaviour
         gpr = fi + 1; fpr = 0
         for m in re.finditer(r'%(?:[-+ #0]*)(\*|\d+)?(?:\.(\*|\d+))?(hh|h|ll|l|L|q|j|z|t)?([diouxXcspnfFeEgGaA%])', fmt):
             if m.group(4) == '%': continue
