@@ -11,7 +11,7 @@ from unicorn.ppc_const import *
 stock, reb, ledger, symmap, nm, funcs, nargs = sys.argv[1:8]; filt = sys.argv[8] if len(sys.argv) > 8 else None
 t._init(stock, reb, symmap, nm, ledger, funcs, nargs, 0, None)
 S, R = t._G['sims']['A']
-base_names = len(S.names); NSLOT = 0x300
+base_names = len(S.names); NSLOT = 0x300      # call-out names for ctx words 1..0x2ff (ctx words up to 0x3ff exist; a stub using a slot beyond 0x2ff would show as a differing or failing record)
 S.names.extend('SLOT_%d' % j for j in range(NSLOT))
 assert R.names is S.names or R.names.extend('SLOT_%d' % j for j in range(NSLOT)) is None
 ids = S.ids
