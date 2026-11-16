@@ -1316,7 +1316,8 @@ uint gld_quantizePointSizeInt(int glContext,double fpPassThrough1)
     quantizedSize = *(uint *)(((unsigned char *)0x000013e4) + glContext);
     if (!((float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e4) + glContext) ^ 0x80000000)
                        - DOUBLE_001aa1e0) <= fpPassThrough1)) {
-      quantizedSize = (uint)(int)(fpPassThrough1 + FLOAT_001aa10c);
+      /* the stock adds in single precision (0xa35e0 `fadds f0,f1,f0` before `fctiwz`): Ghidra prints the single-precision add without its rounding when an integer conversion consumes it; a double add differs for |f1| >= 2^23 (f1 = -33554432.0: -33554431 vs the stock's -33554432) */
+      quantizedSize = (uint)(int)(float)(fpPassThrough1 + FLOAT_001aa10c);
     }
   }
   return quantizedSize;

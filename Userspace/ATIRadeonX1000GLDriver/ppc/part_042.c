@@ -831,7 +831,8 @@ setOrderKeyToPush:
     pushSlot = (undefined4 *)Vector__elementRefGrow(vector,vectorCount);
   }
   *pushSlot = orderKeyToPush;
-  return (int)(*(unsigned char *)((unsigned char *)&(orderKey) + 0));
+  /* the stock returns the sign-extended byte (0x13a61c `lbz r0,0x38(r1)` ; 0x13a620 `extsb r2,r0`): 0xff returns -1, not 255 */
+  return (int)(signed char)(*(unsigned char *)((unsigned char *)&(orderKey) + 0));
 }
 
 /* IRInst__getUsedComponentMask @ 0x13a644 (304 bytes) */

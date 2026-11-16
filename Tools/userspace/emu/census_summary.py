@@ -24,7 +24,7 @@ def worst(r):
     return 'IDENTICAL'
 # FAULT_MISMATCH rows resolved by hand from the disassembly of both images (EVIDENCE_trace_diff.md, "The 9 one-sided FAULT_MISMATCH rows", Nov 15):
 # name -> (class, gate). Only applied while the row's worst verdict is FAULT_MISMATCH; a row that gets any worse verdict still reports it.
-EXPLAINED = {'ffvpPrepareFogExp': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogExp2': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogLinear': ('STOCK_HOISTED_LOAD', 'PASS'),
+EXPLAINED = {'_gleAllocVertexMachine': ('REBUILT_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogExp': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogExp2': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogLinear': ('STOCK_HOISTED_LOAD', 'PASS'),
              'R300MachineAssembler__vslot65_declareNodeRegisters': ('STOCK_DEAD_ARG_LOAD', 'PASS'), 'R520MachineAssembler__vslot65_declareNodeRegisters': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
              'opcodeInfoRgbHwOpcode': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'gld_applyAnisotropyOverride': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
              'IRInst__scaleByOutputScale': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'Program__laneKindOfIlType': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
@@ -45,6 +45,11 @@ EXPLAINED = {'ffvpPrepareFogExp': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFo
 # Rows resolved by hand whose worst verdict is not FAULT_MISMATCH: name -> (verdict it applies to, class, gate)
 EXPLAINED_ANY = {'Compiler__getOrCreateLoadConstN': ('UNINIT_REBUILT', 'OOB_LOCAL_INDEX', 'OUT-OF-CONTRACT'),      # constCount > 4 indexes the 5-word local lookupKeyWords unchecked in both images (stock 0xf50dc-0xf50e8 `lwz r3,0x34(r1+4*n)`, rebuilt 0x1091d4-0x1091e0): decision 3
     '_PPCRuntimeCompilerGetOffsetInRegister': ('UNINIT_REBUILT', 'OOB_LOCAL_INDEX', 'OUT-OF-CONTRACT'),
+    # Nov 16: LaneInfo__ctor_10e7b8 / _10e814 call RegKind__vectorWidthKind with a random kind: the stock and rebuilt flag tables are equal for kinds 0..59 (checked word by word, EVIDENCE_trace_diff.md); the rows differ only for a kind that indexes
+    # past the table (kind 1024 reads other image data in each layout), an unchecked out-of-range table index = out of contract
+    'LaneInfo__ctor_10e7b8': ('IMAGE_DATA_DEP', 'OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'LaneInfo__ctor_10e814': ('IMAGE_DATA_DEP', 'OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
+    # the function stores image addresses (stock 0x4c550 vs rebuilt 0x4c544 as image offsets, v13/v15 repair census) and reads image data at the layout-specific addresses: image-address dependence by construction
+    'gld_initContextDispatch': ('IMAGE_DATA_DEP', 'ORPHAN_FUNCTION_ADDRESS', 'OUT-OF-CONTRACT'),
     # extended glprog census, EVIDENCE_trace_diff.md: the random format pointer 0x20000000 is the START OF THE STOCK's __DATA segment (offset 0x10000000 from its text; the rebuilt image has __DATA right after its text), so only the stock can read the string; same _vsprintf buffer/format values in both calls
     # GLDriver extended census: documented deliberate #64 clamp of the ILReader opcode index
     'ILReader__currentOpcode': ('EFFECTS', 'DELIBERATE_64_CLAMP', 'PASS'),

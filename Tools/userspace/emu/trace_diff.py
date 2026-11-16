@@ -14,6 +14,7 @@ not recorded: how a compiler lays out its frame is not external.
         -v              print the first differing trial in full
 """
 import sys, os, struct, zlib, bisect, random, re, math
+FLOAT_EXACT = os.environ.get('TD_FLOATEXACT') == '1'
 sys.path.insert(0, os.path.expanduser('~/g5logs/fnf_237/pypkgs'))
 from unicorn import *
 from unicorn.ppc_const import *
@@ -132,6 +133,18 @@ class Img:
                 if len(p) == 3 and re.match('[0-9a-f]{8}$', p[0]) and p[1] in 'tTdDsSbBcC': self.syms.append((int(p[0], 16) - self.bal, p[2]))
         self.syms.sort(); self.symaddrs = [a for a, n in self.syms]
     is_stock = False; to_stock = None
+    def unwrap(self, a):
+        """the address of a one-instruction `b target` text entry (a wrapper the stock keeps as a separate entry, e.g. the _gli*DispatchTable slots 0x82f48 = `b 0x7f3e0`) is the address of its final target: the
+        slot holds the same code either way (a tail jump), and the stock names only some of these wrappers"""
+        for _ in range(4):
+            if not any(lo <= a < hi for lo, hi in self.text) or a & 3: break
+            w = None
+            for nm_, vm, vs, data in self.segs:
+                if vm <= a < vm + len(data) - 3: w = struct.unpack('>I', data[a - vm:a - vm + 4])[0]; break
+            if w is None or w >> 26 != 18 or w & 3: break
+            t = (a + (((w & 0x3fffffc) ^ 0x2000000) - 0x2000000)) & 0xffffffff
+            a = t
+        return a
     stock_secs = None
     def canon(self, a):
         """image address -> ('IMG', stock-space address).  Identity for the stock.  For the rebuilt image: its data sections mirror the stock's layout up to one constant shift per section
@@ -142,6 +155,7 @@ class Img:
                 for nm_, vm, vs, data in self.segs:
                     if vm <= a < vm + len(data):
                         o = a - vm; e = data.find(b'\0', o); return ('STR', bytes(data[o:e if e >= 0 else o + 64]))
+        a = self.unwrap(a)
         if self.is_stock: return ('IMG', a)
         for (g, sn, sa, ss, f, r1) in self.secs:
             if sa <= a < sa + ss and sn not in ('__text', '__cstring', '__eh_frame') and self.stock_secs and (g, sn) in self.stock_secs:
@@ -157,7 +171,7 @@ class Img:
         return (n, addr - a)
 
 def callout_ids(imgs):
-    names = sorted(set(n for im in imgs for n in list(im.cells.values()) + [nm for _, nm in im.extrel]))
+    names = sorted(set(n for im in imgs for n in list(im.cells.values()) + [nm for _, nm in im.extrel]) | {'vcb'})      # 'vcb': the stand-in for a virtual method / callback the input memory points at (see repair_step)
     return {n: i for i, n in enumerate(names)}, names
 
 # ---------------------------------------------------------------- one image under emulation
@@ -480,6 +494,7 @@ class Gen:
     def dbl(self):
         r = self.r; k = r.randrange(12)
         v = [0.0, 1.0, -1.0, 0.5, 2.0, r.uniform(-4, 4), r.uniform(-1000, 1000), r.uniform(0, 1), 1e-3, 65536.0, r.uniform(-1e6, 1e6), -0.0][k]
+        if FLOAT_EXACT: v = struct.unpack('>f', struct.pack('>f', v))[0]       # TD_FLOATEXACT=1: every double argument is exactly representable as a single (what a caller of a prototyped `float` parameter passes)
         return struct.unpack('>Q', struct.pack('>d', v))[0]
     def arena(self):
         r = self.r; out = bytearray()
@@ -651,6 +666,12 @@ def compare(a, b, ret_kind):
        FAULT_MISMATCH  one image returns where the other faults on the same input (error handling or a hoisted load differs)
        EFFECTS         a write, a call out, a return value differs"""
     sa, ea, ra, ca = a; sb, eb, rb, cb = b
+    # `vcb` (a virtual method / callback slot the input memory points at) has no known arity or argument kinds: the call-out records r3..r10, but r4.. may be leftover registers of the caller or the GPR shadow words of
+    # floating-point arguments (the rebuilt's K&R-style call passes a double in f1 AND r4/r5, the stock leaves r4/r5 alone).  Only the first VCB_ARGS words are compared (default 1: the receiver / context);
+    # the 59 L-prefixed GLDriver functions were also run with 6 (r3..r8): 25 rows differed at a vcb call only in r9 / r10; the 26th (LoopHeader__verify) differs in r5.. at a call that sets only r3 (rebuilt `mr r3,r31 ; bctrl` at 0xfac60): residue.
+    nv_ = int(os.environ.get('TD_VCB_ARGS', '1'))
+    cut = lambda ev: [(e[0], e[1], e[2][:nv_]) + tuple(e[3:]) if e[0] == 'C' and e[1] == 'vcb' else e for e in ev]
+    ea, eb = cut(ea), cut(eb)
     if sa == 'TIMEOUT' or sb == 'TIMEOUT': return 'TIMEOUT', ''
     if sa == 'UCERR' and sb == 'UCERR':
         fx = lambda ev: [e for e in ev if e[0] == 'F']
@@ -789,7 +810,10 @@ def mutate(rng, ia, da, sw, arena, reads):
         elif r < 85:
             p = ia[rng.randrange(8)] - ARENA
             if 0 <= p <= len(a) - 0x200: n = rng.choice((0x40, 0x100, 0x200)); a[p:p+n] = bytes(n)
-        elif r < 92: da[rng.randrange(len(da))] = struct.unpack('>Q', struct.pack('>d', rng.choice((0.0, 1.0, -1.0, 0.5, 255.0, 1e30, -1e30, float('nan'), float('inf')))))[0]
+        elif r < 92:
+            v = rng.choice((0.0, 1.0, -1.0, 0.5, 255.0, 1e30, -1e30, float('nan'), float('inf')))
+            if FLOAT_EXACT: v = struct.unpack('>f', struct.pack('>f', v))[0]
+            da[rng.randrange(len(da))] = struct.unpack('>Q', struct.pack('>d', v))[0]
         else: sw[rng.randrange(16)] = pool()
     return ia, da, sw, bytes(a)
 
@@ -798,6 +822,13 @@ def repair_step(sim, ia, sw, arena, rng):
     the function loaded from the input memory (or took from an argument / stack word) that the random input did not make valid.  Find that source (the latest 4-byte read from the arena whose value is
     within 0x8000 below the faulting address, else an argument / stack word of the same kind), point it at a fresh stretch of arena (the same distance below, so the access lands inside it) and return
     the patched input; the sub-object's content is the arena's existing random words, so deeper pointers are repaired by the next step.  None when no source is found (the fault is a computed wild address)."""
+    if sim.status == 'FAULT' and sim.ev and sim.ev[-1][:2] == ('F', 'wild') and isinstance(sim.ev[-1][2], int) and ARENA <= sim.ev[-1][2] < ARENA + ARENA_SIZE:
+        # a call / branch through a function pointer the input memory holds (a vtable slot): point that slot at the `vcb` call-out (a recorded call with a deterministic result, the same in both images)
+        tgt = sim.ev[-1][2]
+        for e in reversed(sim.ev):
+            if e[0] == 'R' and e[2] == 4 and isinstance(e[1], int) and ARENA <= e[1] < ARENA + ARENA_SIZE and e[3].raw == tgt and not e[1] & 3:
+                a = bytearray(arena); a[e[1] - ARENA:e[1] - ARENA + 4] = struct.pack('>I', CALLOUT + 16 * sim.ids['vcb']); return ia, sw, bytes(a)
+        return None
     fa = sim.fa
     if fa is None or sim.status != 'FAULT': return None
     ptr = lambda: ARENA + 0x1000 + (rng.randrange(ARENA_SIZE - 0x3000) & ~0xf) + 0x100
