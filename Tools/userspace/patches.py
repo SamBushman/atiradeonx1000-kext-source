@@ -57,6 +57,38 @@ def _conv_with(what, subs):
     return lambda raw, conv: _subs(conv, subs, what)
 
 
+def _light_normalize(what):
+    """Issues #295/#296: stale first argument and unassigned length variable of the indirect _gleVectorNormalize calls of a light-vertex routine (see PATCHES)."""
+    def apply(raw, conv):
+        t = conv
+        # (1) the stale double (already-fixed text has none: only count what is there, require the corrected form at the end)
+        t = re.sub(r'(\(\*\*\(code \*\*\)(?:PTR__gleVectorNormalize_00112064|puVar\d+)\)\s*)\(fparam_1,param_1,', r'\1(param_1,', t)
+        call = re.compile(r'(?:(?P<lhs>\w+) = )?\(\*\*\(code \*\*\)(?P<p>PTR__gleVectorNormalize_00112064|puVar\d+)\)\s*\(param_1,(?P<a>&local_\w+),(?P<b>&local_\w+)\);')
+        calls = list(call.finditer(t))
+        if not calls: raise PatchError('%s: no indirect _gleVectorNormalize call found' % what)
+        if 'fparam_1,param_1,&local' in t: raise PatchError('%s: a stale-argument call remains' % what)
+        # (2) the length variables
+        decl = set(re.findall(r'(?m)^\s+double (extraout_f1_\d+);', t))
+        todo = []
+        for v in sorted(decl):
+            uses = [m.start() for m in re.finditer(r'\b%s\b' % v, t) if not re.match(r'\s*;', t[m.end():m.end() + 2]) or True]
+            uses = [u for u in uses if not re.match(r'(?m)^\s+double %s;' % v, t[t.rfind('\n', 0, u) + 1:t.find('\n', u)])]
+            if re.search(r'\b%s\s*=[^=]' % v, t): raise PatchError('%s: %s is already assigned' % (what, v))
+            if not uses: continue
+            before = [c for c in calls if c.end() <= uses[0]]
+            if not before: raise PatchError('%s: no normalize call precedes the first use of %s' % (what, v))
+            todo.append((v, before[-1]))
+        if len({id(c) for _, c in todo}) != len(todo): raise PatchError('%s: two length variables map to one call' % what)
+        for v, c in sorted(todo, key=lambda x: -x[1].start()):
+            t = t[:c.start()] + '%s = ((double (*)())(*(code **)%s))(param_1,%s,%s);' % (v, c.group('p'), c.group('a'), c.group('b')) + t[c.end():]
+        # (3) f1 after _gleUpdateLightRGBASums
+        t, n = re.subn(r'(_gleUpdateLightRGBASums\([^;]*\);\n\s*)fparam_1 = extraout_f1;\n', r'\1', t)
+        if n != 1: raise PatchError('%s: expected one `fparam_1 = extraout_f1;` after _gleUpdateLightRGBASums, found %d' % (what, n))
+        if len(todo) < 1: raise PatchError('%s: no length variable rewritten' % what)
+        return t
+    return apply
+
+
 def _scoped(scope, fn):
     fn.scope = scope
     return fn
@@ -208,16 +240,25 @@ PATCHES = {
     # count and the next argument (the destination pointer) from the wrong register (found by trace_diff.py, row _gleSetAttrib: rebuilt faulted in _gleCopyPixelMapi reading *(r6 = low word of
     # the double); the stock continued to realloc). C: read the word as int, as the stock does.
     '_gleSetAttrib': _scoped('gleng', _conv_with('_gleSetAttrib', [('param_3[0x%x]' % k, '*(int *)(param_3 + 0x%x)' % k) for k in range(0xa0f, 0xa19)])),
-    # Issue #295 (gleng): FUN_000d45ec (stock 0xd45ec), FUN_000d4a8c (0xd4a8c), _gleVtxLightRGBAFrontPtr (0xd5ee4), _gleVtxLightRGBABackPtr (0xd638c). In each, the first call of the
-    # function-pointer cell PTR__gleVectorNormalize_00112064 is printed `(**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0)`: Ghidra added the live f1 (a double left by
-    # _gleUpdateLightRGBASums) as a first argument of the unprototyped call, so the compiled call puts it in f1 and r3:r4 and shifts ctx / vectors to r5..r7. The stock passes exactly
-    # (ctx, vec, vec) (r3 = ctx, r4 = r5 = &local_d0; stock 0xd47e0.., 0xd4c84.., 0xd60e4.., 0xd6590..0xd65c0, no FPR argument). _gleVectorNormalize reads its input through r4, so the
-    # rebuilt call faulted at 0x80000004 (found by trace_diff.py, row _gleVtxLightRGBABackPtr). C: drop the leading `fparam_1`. A scan of all six corpora found no other indirect call
-    # with a float argument.
-    'FUN_000d45ec': _scoped('gleng', _conv_with('FUN_000d45ec', [('(**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0)', '(**(code **)puVar3)(param_1,&local_d0,&local_d0)')])),
-    'FUN_000d4a8c': _scoped('gleng', _conv_with('FUN_000d4a8c', [('(**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0)', '(**(code **)puVar3)(param_1,&local_d0,&local_d0)')])),
-    '_gleVtxLightRGBAFrontPtr': _scoped('gleng', _conv_with('_gleVtxLightRGBAFrontPtr', [('(**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0)', '(**(code **)puVar3)(param_1,&local_d0,&local_d0)')])),
-    '_gleVtxLightRGBABackPtr': _scoped('gleng', _conv_with('_gleVtxLightRGBABackPtr', [('(**(code **)puVar3)(fparam_1,param_1,&local_d0,&local_d0)', '(**(code **)puVar3)(param_1,&local_d0,&local_d0)')])),
+    # Issues #295 + #296 (gleng): the eight light-vertex routines FUN_000d45ec (stock 0xd45ec), FUN_000d4a8c (0xd4a8c), _gleVtxLightSpecRGBA{Front,Back}{,Ptr} (0xd4f30, 0xd5590,
+    # 0xd5ee4-area), _gleVtxLightRGBA{Front,Back}Ptr (0xd5ee4, 0xd638c) call the function-pointer cell PTR__gleVectorNormalize_00112064 (and copies of it in puVarN) several times.
+    # (1) #295: the first call of each routine is printed `(fparam_1,param_1,&local,&local)`: Ghidra added the live f1 (a double) as a first argument of the unprototyped call, so the
+    #     compiled call put it in f1 and r3:r4 and shifted ctx / vectors to r5..r7. The stock passes exactly (ctx, vec, vec) (r3 = ctx, r4 = r5 = &local; stock 0xd47e0.., 0xd4c84..,
+    #     0xd60e4.., 0xd6590..0xd65c0, no FPR argument). _gleVectorNormalize reads its input through r4, so the rebuilt call faulted at 0x80000004. C: drop the leading `fparam_1`.
+    # (2) #296: _gleVectorNormalize returns the vector length in f1. Ghidra printed the call as an int-returning one and the length as `extraout_f1_NN`, a variable that is declared and
+    #     never assigned; the compiled code compared / divided by an unrelated register (trace_diff: stock compares NaN with 4.99e-06 at 0xd4828, the rebuilt 4.99e-06 with
+    #     1.0000000000000069). C: assign the call's double result to the variable (`extraout_f1_NN = ((double (*)())(*(code **)P))(param_1,v,v);`); the call's r3 result (assigned to an
+    #     iVarN that is only passed to _gleLightExponentPow / _gleMaterialShinePow, which never read their first parameter) is dropped. Each variable maps to the nearest preceding
+    #     normalize call of its first use; asserted one-to-one. `fparam_1 = extraout_f1;` after `_gleUpdateLightRGBASums(...)` stores a variable that is never assigned into a
+    #     variable that is overwritten by the next normalize result before any use; removed.
+    'FUN_000d45ec': _scoped('gleng', _light_normalize('FUN_000d45ec')),
+    'FUN_000d4a8c': _scoped('gleng', _light_normalize('FUN_000d4a8c')),
+    '_gleVtxLightRGBAFrontPtr': _scoped('gleng', _light_normalize('_gleVtxLightRGBAFrontPtr')),
+    '_gleVtxLightRGBABackPtr': _scoped('gleng', _light_normalize('_gleVtxLightRGBABackPtr')),
+    '_gleVtxLightSpecRGBAFront': _scoped('gleng', _light_normalize('_gleVtxLightSpecRGBAFront')),
+    '_gleVtxLightSpecRGBABack': _scoped('gleng', _light_normalize('_gleVtxLightSpecRGBABack')),
+    '_gleVtxLightSpecRGBAFrontPtr': _scoped('gleng', _light_normalize('_gleVtxLightSpecRGBAFrontPtr')),
+    '_gleVtxLightSpecRGBABackPtr': _scoped('gleng', _light_normalize('_gleVtxLightSpecRGBABackPtr')),
     # RETIRED 2026-09-25 (issue #71): yyparse (both TTypeLine _M_insert_aux sites), removeChildNode#1 (erase), removeChildNode#2 (_M_insert_aux) and the
     # two C2 -> C4 constructor aliases. Each dropped/misplaced argument was a symptom of the callee's by-value iterator / tag parameters (a
     # `__normal_iterator` struct, a 1-byte `forward_iterator_tag` with UNASSIGNED storage), which make the decompiler lose the argument registers.
