@@ -134,3 +134,8 @@ Classified by their normalised traces (offsets relative to the first argument; `
 PTR_VALUE_DEP 5 + IMAGE_DATA_DEP 5 + OOB_TABLE_INDEX 3 (out of contract, user decision 3), STOCK_HOISTED_LOAD 3, STOCK_DEAD_ARG_LOAD 2, STOCK_BUG_284 1. psnFormatRgbSource: REORDERED on the formerly faulting input;
 neither psnFormatRgbSource nor psnFormatAlphaSource contains a `lis`/`addis` without a local relocation. Caveats stated honestly: gldValidatePointSize (deliberate #132, the only FAIL of the fixed-trial census) is not
 reached by the fuzz run; command-ring coverage is still tiny (5 functions); 640 rows never return normally in both images (fault-only comparison); the hand-resolved rows are in `census_summary.py` EXPLAINED.
+
+## Regression rerun with the final tool (Nov 15 19:41, census f, 8 trials/row, image ffcec0a3)
+`__TEXT` read-only in the emulator, wild-fetch stop, partial-pointer and both-fault rules (see `Userspace/GLEngine/ppc/EVIDENCE_trace_diff.md`) applied to the GLDriver: gate FAIL 1 (`gldValidatePointSize`, deliberate #132), NO-INFO 42 (LAYOUT_ALL: functions returning image
+addresses/strings), OUT-OF-CONTRACT 7 (5 PTR_VALUE_DEP `RegKind__*`/`Table1ea904__hasFlag0x11`, 2 IMAGE_ADDR_DEP), PASS 2749. Worst verdicts: REORDERED 1368, IDENTICAL 1232, FAULT_SITE 128, LAYOUT_ALL 42, READ_SET 21, PTR_VALUE_DEP 5,
+IMAGE_DATA_DEP 2, EFFECTS 1. No new row, no FAULT_MISMATCH, no UNINIT_REBUILT, no EMUERR. Table: `~/g5logs/fnf_237/v5/census_gld_f.tsv`.
