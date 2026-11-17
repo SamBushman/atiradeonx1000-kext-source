@@ -589,7 +589,7 @@ def segments(ev):
         if isinstance(iv, int) and size == 4 and 0 <= iv < 1 << 32 and (iv >> 23) & 0xff == 0xff and iv & 0x7fffff:
             return [Tk(iv.to_bytes(4, 'big')[k], ('NAN32', k), k in sil) for k in range(4)]
         if isinstance(v, V) and v.canon is not None and isinstance(iv, int) and size == 4:
-            return [Tk(iv.to_bytes(4, 'big')[k], (v.canon, k)) for k in range(size)]      # same equality as V: equal raw bytes, or the same stock-space pointer
+            return [Tk(iv.to_bytes(4, 'big')[k], (v.canon, k), k in sil) for k in range(size)]      # (a byte of the stored pointer the memory already held is silent, like the NaN case above) same equality as V: equal raw bytes, or the same stock-space pointer
         if isinstance(iv, int) and size <= 8: return list(iv.to_bytes(size, 'big'))
         return [('?', repr(v), k) for k in range(size)]
     silent = ()
@@ -1012,7 +1012,12 @@ def _init(stock, reb, symmap, nm, ledger=None, funcs=None, nargs=None, fuzz=0, r
     if ENTRYARGS and ledger:
         _rows = [r for r in read_ledger(ledger, S.bal, R.bal) if 'stub' not in r['name'].lower()]       # a library stub's argument is whatever the real callee would read: only calls into image code are compared
         for ss, sr in _sims.values():
-            ng = {r['name']: (len([c for c in r['pc'] if c != 'd']) if r['pc'] != '-' else 8) for r in _rows}      # the integer-register parameters (a float parameter travels in an FPR; the GPR after the last integer parameter is a stale value)
+            _ar = {}
+            if os.environ.get('TD_ARITY_FILE'):       # name<TAB>n: the integer-register arity of a callee whose ledger row has no parameter classes ('-'); controls/arity_gen.py derives it from the corpus definition when Ghidra printed no in_rN / in_stack read (else the stale registers after the last real argument are compared)
+                for _l in open(os.environ['TD_ARITY_FILE']):
+                    _p = _l.split()
+                    if len(_p) == 2 and _p[1].isdigit(): _ar[_p[0]] = int(_p[1])
+            ng = {r['name']: (len([c for c in r['pc'] if c != 'd']) if r['pc'] != '-' else _ar.get(r['name'], 8)) for r in _rows}      # the integer-register parameters (a float parameter travels in an FPR; the GPR after the last integer parameter is a stale value)
             ss.entries = {r['stock']: (r['name'], ng[r['name']]) for r in _rows}; sr.entries = {r['reb']: (r['name'], ng[r['name']]) for r in _rows}
     _G.update(repair=int(os.environ.get('TD_REPAIR', '0')), fuzz=fuzz, repro=repro, S=S, R=R, sims=_sims, ctl=Sim(S, ids, names, 0, slide=SLIDE2))
 def _work(job):
