@@ -106,5 +106,9 @@ print('rows where no run returned normally in both (faults only): %d' % sum(1 fo
 print('rows whose rebuilt image covered fewer instructions of the function than the stock: %d; stock fewer: %d' % (sum(1 for r in rows if 0 <= r['rcov'] < r['scov']), sum(1 for r in rows if 0 <= r['scov'] < r['rcov'])))
 if len(sys.argv) > 2:
     k = sys.argv[2]
+    if k.startswith('GATE:'):
+        for r in rows:
+            if gate(r) == k[5:]: print('%s\t%s\t%s\t%s' % (r['id'], r['name'], r['states'], r['first'][:200]))
+        sys.exit(0)
     for r in rows:
         if worst2(r) == k: print('%s\t%s\t%s\t%s' % (r['id'], r['name'], r['states'], r['first'][:200]))

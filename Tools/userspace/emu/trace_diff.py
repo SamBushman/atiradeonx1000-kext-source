@@ -229,9 +229,10 @@ class Sim:
         return V(v)
 
     entries = {}
-    def snap_entry(self, uc, name):
+    def snap_entry(self, uc, ent):
+        name, ngpr = ent
         r1 = uc.reg_read(UC_PPC_REG_1); bc = int.from_bytes(uc.mem_read(r1, 4), 'big'); items = []; pts = [uc.reg_read(UC_PPC_REG_0 + j) for j in range(3, 11)]
-        for i in range(3, 11):
+        for i in range(3, min(11, 3 + ngpr)):
             p = uc.reg_read(UC_PPC_REG_0 + i)
             if not (r1 <= p < min(bc, self.sp0) and p & 3 == 0): continue       # a record in the CALLER's own frame ([r1] is the back chain = top of that frame): a pointer into a frame further up is forwarded, compared where its owner passes it
             ws = []
@@ -323,7 +324,8 @@ class Sim:
                         self.heap_sizes[p] = n
                     uc.reg_write(UC_PPC_REG_3, p)
                 uc.reg_write(UC_PPC_REG_PC, uc.reg_read(UC_PPC_REG_LR)); return
-            h = zlib.crc32(('%s/%d' % (nm, self.ncalls)).encode())      # a deterministic, name-keyed return value (the same in both images)
+            kn = self.nc_by.get(nm, 0); self.nc_by[nm] = kn + 1
+            h = zlib.crc32(('%s/%d' % (nm, kn)).encode())      # a deterministic return value keyed by the call-out's name and its own call number (the same in both images; not by the total number of call-outs: a stock that inlines a memcpy / strlen the rebuilt calls, or the reverse, would shift every later result and look like a behavioural difference, e.g. HashTable__find's hash vcb)
             uc.reg_write(UC_PPC_REG_3, (h & 0x3f) if nm.lstrip('_') in ('sprintf', 'snprintf', 'vsprintf', 'vsnprintf', 'fprintf', 'printf', 'vfprintf', 'vprintf') else h & 0xffff); uc.reg_write(UC_PPC_REG_4, 0)      # a printf's result is a byte count: small, so `buf += sprintf(buf, ..)` stays inside the buffer
             uc.reg_write(UC_PPC_REG_PC, uc.reg_read(UC_PPC_REG_LR))
             # do not leave a stale write pending; a call out also clobbers nothing else by contract
@@ -472,7 +474,7 @@ class Sim:
         for i, b in enumerate(dargs[:13]): uc.reg_write(UC_PPC_REG_FPR1 + i, b)
         uc.reg_write(UC_PPC_REG_1, self.sp0); uc.reg_write(UC_PPC_REG_LR, STOP)
         self.entry_nv = [uc.reg_read(UC_PPC_REG_0 + i) for i in range(14, 32)]
-        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.fwb = set(); self.ent = []; self.act = []; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
+        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.fwb = set(); self.ent = []; self.act = []; self.nc_by = {}; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
         try: uc.emu_start(entry + self.slide, STOP, count=limit + 10)
         except UcError as e:
             if self.status == '?':
@@ -1000,7 +1002,8 @@ def _init(stock, reb, symmap, nm, ledger=None, funcs=None, nargs=None, fuzz=0, r
     if ENTRYARGS and ledger:
         _rows = [r for r in read_ledger(ledger, S.bal, R.bal) if 'stub' not in r['name'].lower()]       # a library stub's argument is whatever the real callee would read: only calls into image code are compared
         for ss, sr in _sims.values():
-            ss.entries = {r['stock']: r['name'] for r in _rows}; sr.entries = {r['reb']: r['name'] for r in _rows}
+            ng = {r['name']: (len([c for c in r['pc'] if c != 'd']) if r['pc'] != '-' else 8) for r in _rows}      # the integer-register parameters (a float parameter travels in an FPR; the GPR after the last integer parameter is a stale value)
+            ss.entries = {r['stock']: (r['name'], ng[r['name']]) for r in _rows}; sr.entries = {r['reb']: (r['name'], ng[r['name']]) for r in _rows}
     _G.update(repair=int(os.environ.get('TD_REPAIR', '0')), fuzz=fuzz, repro=repro, S=S, R=R, sims=_sims, ctl=Sim(S, ids, names, 0, slide=SLIDE2))
 def _work(job):
     row, trials = job
