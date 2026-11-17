@@ -1,0 +1,36 @@
+functions analysed: 3382; with any FPR live-in: 397; with f1 live-in: 376
+
+== f1 sites: closure of direct callees: 129 functions
+  _gleUpdateState                          own f1 live-in: False
+  _glCheckFramebufferStatusEXT_Exec        own f1 live-in: False
+  _glCopyConvolutionFilter1D_Exec          own f1 live-in: False
+  _glCopyConvolutionFilter2D_Exec          own f1 live-in: False
+  _glMultiDrawElementArrayAPPLE_Exec       own f1 live-in: False
+  _gleInitDrawPixelsShareObject            own f1 live-in: False
+  _gleDrawPixelsSaveState                  own f1 live-in: False
+  _gleDrawPixelsRestoreState               own f1 live-in: False
+  callee-closure functions with any FPR live-in: ['_glOrtho_Exec']
+  indirect (hook) call sites in the closure: 66; with FP instructions in the argument window: 4
+     _gleExecuteVertexArrayRange 0x44fc0: ['44fac fmr f4, f1', '44fa8 fmr f3, f1', '44fa0 fmr f2, f1', '44f8c lfs f1, 0x3ee4(r2)']
+     _gleUpdateFogData 0x93a8: ['9398 lfs f1, 0x28(r29)']
+     _gleUpdateLightPosition 0x7568: ['7548 stfs f0, 4(r30)', '7544 stfs f12, 0x4a70(r2)', '7540 stfs f13, 8(r30)', '753c fmuls f0, f10, f0']
+     _gleUpdateLightPosition 0x75ac: ['75a0 stfs f13, 0x68(r28)', '7598 fadds f13, f13, f0', '7590 lfs f13, 0x68(r28)', '7588 lfs f0, 0x1988(r11)']
+
+== r3 (stock-void) functions: direct callers
+  _gleUpdateTextureParams      <- _gleUpdateState                          0x6fdc : def @6fe8 mr r3, r29
+  _gleUpdateTextureParams      <- _gleSetEnable_TEXTURE_RECTANGLE_EXT      0x1cac8 : tail call (caller must be void)
+  _gleFreeOrphans              <- _gleTerminateContext                     0x2fa7c : def @2fa80 mr r3, r29
+  _gleUpdateTextureParams      <- _gleSetEnable_TEXTURE_2D                 0x48864 : tail call (caller must be void)
+  _gleUpdateTextureParams      <- _gleSetEnable_TEXTURE_3D                 0x4f2a8 : tail call (caller must be void)
+  _gleUpdateTextureParams      <- _gleRecoverySaveState                    0xc8168 : def @c8190 mr r3, r28
+  _gleUpdateTextureParams      <- _gleRecoveryRestoreState                 0xc826c : no r3 use in next 12 instrs
+  _gleFreeOrphans              <- _gleReclaimContextResources              0xc88a8 : def @c88ac mr r3, r27
+  _gleUpdateTextureParams      <- _gleDrawPixelsSaveState                  0xc9e40 : def @c9e5c mr r3, r30
+  _gleUpdateTextureParams      <- _gleDrawPixelsRestoreState               0xca120 : def @ca130 mr r3, r30
+  _gleUpdateTextureParams      <- _gleSetEnable_TEXTURE_1D                 0xcb150 : tail call (caller must be void)
+  _gleUpdateTextureParams      <- _gleSetEnable_TEXTURE_CUBE_MAP           0xcb19c : tail call (caller must be void)
+  _gleUpdateTextureParams      <- _gleSetEnable_TEXTURE_SHADER_NV          0xcbbcc : next control transfer blr without r3 use
+  _gleExecuteClippedVertexArray <- _gleExecuteVertexArray                   0xdc09c : tail call (caller must be void)
+  raw 4-byte references to _gleUpdateTextureParams in the file: ['0x12217c'] (__DATA is 0x110000..0x114000)
+  raw 4-byte references to _gleFreeOrphans in the file: ['0x121180'] (__DATA is 0x110000..0x114000)
+  raw 4-byte references to _gleExecuteClippedVertexArray in the file: ['0x118ff0'] (__DATA is 0x110000..0x114000)
