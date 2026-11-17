@@ -238,7 +238,7 @@ class Sim:
             ws = []
             for k in range(16):
                 q = p + 4 * k
-                if q + 4 > self.sp0 or not all(b in self.fwb for b in range(q, q + 4)): break
+                if q + 4 > self.sp0 or self.fwb[q - STACK:q - STACK + 4] != b'\x01\x01\x01\x01': break
                 w = int.from_bytes(uc.mem_read(q, 4), 'big')
                 if STACK <= w < STACK + STACK_SIZE: ws.append(V(w, ('OWNFRAME',))); continue       # any frame address: the layout is the compiler's
                 if (w >> 23) & 0xff == 0xff and w & 0x7fffff: w = 0x7fc00000        # NaN payloads are one class (see the stores)
@@ -445,8 +445,8 @@ class Sim:
         if ENTRYARGS and not self.in_stub() and self.own_frame(addr):
             r1 = uc.reg_read(UC_PPC_REG_1)
             if size == 4 and (value & 0xffffffff) == r1 and addr < r1 and r1 - addr < 0x100000:       # stwu r1,-N(r1): a new frame starts here - whatever an earlier call left in these bytes is stale residue, not a value this function wrote (it differs between the images with the frame sizes)
-                self.fwb = {b for b in self.fwb if not addr <= b < r1}
-            self.fwb.update(range(addr, addr + size))
+                self.fwb[addr - STACK:r1 - STACK] = bytes(r1 - addr)
+            self.fwb[addr - STACK:addr - STACK + size] = b'\x01' * size
         if self.in_stub() or self.own_frame(addr): return
         try: old = bytes(uc.mem_read(addr, size)) if size <= 8 and not (STACK <= addr < STACK + STACK_SIZE) else None       # silent-store detection only against input-defined memory (the stack holds the fill pattern, which differs between the two control fills)
         except Exception: old = None
@@ -474,7 +474,7 @@ class Sim:
         for i, b in enumerate(dargs[:13]): uc.reg_write(UC_PPC_REG_FPR1 + i, b)
         uc.reg_write(UC_PPC_REG_1, self.sp0); uc.reg_write(UC_PPC_REG_LR, STOP)
         self.entry_nv = [uc.reg_read(UC_PPC_REG_0 + i) for i in range(14, 32)]
-        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.fwb = set(); self.ent = []; self.act = []; self.nc_by = {}; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
+        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.fwb = bytearray(STACK_SIZE) if ENTRYARGS else None; self.ent = []; self.act = []; self.nc_by = {}; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
         try: uc.emu_start(entry + self.slide, STOP, count=limit + 10)
         except UcError as e:
             if self.status == '?':
