@@ -18,18 +18,43 @@ def main(argv):
     t._init(stock, reb, opt['--symmap'], opt['--nm'], ledger, opt['--funcs'], opt['--nargs'], 0, None)
     ss, sr = t._G['sims']['A']; S, R = t._G['S'], t._G['R']
     rows = {r['name'].lstrip('_'): r for r in t.read_ledger(ledger, S.bal, R.bal)}
-    src = open(opt['--shader'], 'rb').read() + b'\0' if opt['--shader'] else b'void main() { gl_Position = ftransform(); }\0'
-    arena = bytearray(t.ARENA_SIZE)
-    SP, STR = t.ARENA + 0x1000, t.ARENA + 0x1100
-    arena[0x1000:0x1004] = struct.pack('>I', STR); arena[0x1100:0x1100 + len(src)] = src
+    shaders = {'v': b'uniform mat4 mvp; attribute vec4 pos; attribute vec2 uv; varying vec2 vuv; void main() { gl_Position = mvp * pos; vuv = uv; }',
+               'f': b'uniform sampler2D tex; uniform vec4 tint; varying vec2 vuv; void main() { gl_FragColor = texture2D(tex, vuv) * tint; }'}
+    if opt['--shader']: shaders['v'] = open(opt['--shader'], 'rb').read()
+    # arena layout (persistent across the session): 0x1000.. pointer tables, 0x2000 vertex text, 0x3000 fragment text, 0x4000 names, 0x5000 out words, 0x6000 out buffer
+    arena = bytearray(t.ARENA_SIZE); A = t.ARENA
+    def put(off, b): arena[off:off + len(b)] = b
+    put(0x2000, shaders['v'] + b'\0'); put(0x3000, shaders['f'] + b'\0'); put(0x4000, b'mvp\0'); put(0x4010, b'tex\0'); put(0x4020, b'pos\0'); put(0x4030, b'tint\0')
+    put(0x1000, struct.pack('>I', A + 0x2000)); put(0x1010, struct.pack('>I', A + 0x3000))
     arena = bytes(arena); limit = int(opt['--limit'])
-    state = {}
-    steps = [('ShInitialize', lambda: [], True),
-             ('ShConstructCompiler', lambda: [int(opt['--lang']), 0], False),
-             ('ShCompile', lambda: [state['h'], SP, 1, 0, 0], False)]
+    st = {}; OPT = int(os.environ.get('PD_OPT', '1'))
+    sh = lambda k: st[k]
+    # (label, row, args)   args are ints or callables(state); the result r3 of a step is stored under `save`
+    steps = [('ShInitialize', 'ShInitialize', lambda: [], None),
+             ('ShConstructCompiler.v', 'ShConstructCompiler', lambda: [0, 0], 'hv'),
+             ('ShCompile.v', 'ShCompile', lambda: [st['hv'], A + 0x1000, 1, OPT, 0], None),
+             ('ShConstructCompiler.f', 'ShConstructCompiler', lambda: [1, 0], 'hf'),
+             ('ShCompile.f', 'ShCompile', lambda: [st['hf'], A + 0x1010, 1, OPT, 0], None),
+             ('ConstructLinker', 'ConstructLinker', lambda: [0], 'hl'),
+             ('ShLink', 'ShLink', lambda: [st['hl'], A + 0x1020, 2, 0, 0], None),
+             ('ShGetInfoLog.l', 'ShGetInfoLog', lambda: [st['hl']], None),
+             ('ShGetInfoLog.v', 'ShGetInfoLog', lambda: [st['hv']], None),
+             ('ShGetPPStream.v', 'ShGetPPStream', lambda: [st['hv']], None),
+             ('ShGetNumActiveAttributes', 'ShGetNumActiveAttributes', lambda: [st['hl']], None),
+             ('ShGetNumActiveUniforms', 'ShGetNumActiveUniforms', lambda: [st['hl']], None),
+             ('ShGetActiveUniform.0', 'ShGetActiveUniform', lambda: [st['hl'], 0, 64, A + 0x5000, A + 0x5004, A + 0x5008, A + 0x6000], None),
+             ('ShGetActiveUniform.1', 'ShGetActiveUniform', lambda: [st['hl'], 1, 64, A + 0x5000, A + 0x5004, A + 0x5008, A + 0x6000], None),
+             ('ShGetUniformLocation.mvp', 'ShGetUniformLocation', lambda: [st['hl'], A + 0x4000], None),
+             ('ShGetUniformLocation.tex', 'ShGetUniformLocation', lambda: [st['hl'], A + 0x4010], None),
+             ('ShGetAttribLocation.pos', 'ShGetAttribLocation', lambda: [st['hl'], A + 0x4020], None),
+             ('ShGetLinkerBindingTable', 'ShGetLinkerBindingTable', lambda: [st['hl']], None),
+             ('ShGetLinkerPPStream', 'ShGetLinkerPPStream', lambda: [st['hl']], None),
+             ('ShGetCompilerPPStream.v', 'ShGetCompilerPPStream', lambda: [st['hv']], None)]
     cov = set(); allv = []
-    for name, argf, reset in steps:
-        r = rows[name]; args = argf()
+    for k_, (name, rowname, argf, save) in enumerate(steps):
+        reset = (k_ == 0); r = rows[rowname]; args = argf()
+        if name == 'ShLink':
+            for sim in (ss, sr): sim.uc.mem_write(A + 0x1020, struct.pack('>II', st['hv'], st['hf']))
         a = ss.run(r['stock'], args, [], [], arena, limit=limit, reset=reset)
         b = sr.run(r['reb'], args, [], [], arena, limit=limit, reset=reset)
         v, det = t.compare(a, b, 'i'); cov |= a[3]
@@ -58,7 +83,7 @@ def main(argv):
                     print('  SEGDIFF', name, i, 'call', (x[0] or ('start',))[:2], 'differing final bytes', [(q, x[3].get(q), y[3].get(q)) for q in ks[:6]], 'nbytes', len(ks), flush=True)
                     k += 1
                     if k >= int(os.environ['PD_SEGDIFF']): break
-        if os.environ.get('PD_WATCHABS') and name == 'ShInitialize':
+        if os.environ.get('PD_WATCHABS') and name == os.environ.get('PD_WATCHSTEP', 'ShInitialize'):
             wa = int(os.environ['PD_WATCHABS'])
             for tag, run, sim in (('stock', a, ss), ('rebuilt', b, sr)):
                 print('  WABS', tag, [(i, hex(sim.evpc.get(i, -1)), e[0], e[2], e[3] if e[0] != 'C' else None) for i, e in enumerate(run[1]) if e[0] in 'RW' and isinstance(e[1], int) and e[1] <= wa < e[1] + e[2]][:40], flush=True)
@@ -121,9 +146,53 @@ def main(argv):
                     else: rest.pop(j)
             print('  ENTALL', name, 'callees', len(set(fa) & set(fb)), 'skipped(count differs/varargs)', skipped, 'distinct mismatches', len(summ), flush=True)
             for k_, v_ in sorted(summ.items(), key=lambda x: -x[1])[:60]: print('  ENTALLROW', v_, k_, flush=True)
+        if os.environ.get('PD_CALLCTX') and name == os.environ['PD_CALLCTX'].split(':')[0]:
+            ci = int(os.environ['PD_CALLCTX'].split(':')[1])
+            for tag, run, sim in (('stock', a, ss), ('rebuilt', b, sr)):
+                cidx = [i for i, e in enumerate(run[1]) if e[0] == 'C'][ci]
+                print('  CALLCTX', tag, 'call', ci, run[1][cidx][1:3], flush=True)
+                for i in range(max(0, cidx - 14), cidx + 1): print('     ', i, hex(sim.evpc.get(i, -1)), str(run[1][i])[:120], flush=True)
+        if os.environ.get('PD_FUNSEQ') and name == os.environ['PD_FUNSEQ'].split(':')[0]:
+            c0 = int(os.environ['PD_FUNSEQ'].split(':')[1]); c1 = int(os.environ['PD_FUNSEQ'].split(':')[2])
+            import bisect
+            fl = sorted((int(l.split('\t')[0], 16) - S.bal, l.split('\t')[2]) for l in open(opt['--funcs']) if l.startswith('0x')); fk = [x[0] for x in fl]
+            def fname(tag, pc):
+                if tag == 'stock':
+                    i = bisect.bisect_right(fk, pc) - 1; return fl[i][1] if i >= 0 else '?'
+                nmn, off = R.sym(pc); sa = R.to_stock.get(nmn) if R.to_stock else None
+                if sa is not None:
+                    i = bisect.bisect_right(fk, sa) - 1; return fl[i][1]
+                return nmn
+            for tag, run, sim in (('stock', a, ss), ('rebuilt', b, sr)):
+                ci = 0; seq = []
+                for i, e in enumerate(run[1]):
+                    if e[0] == 'C': ci += 1; seq.append('CALL %s%s' % (e[1], tuple(getattr(x, 'raw', x) for x in e[2][:2]))); continue
+                    if c0 <= ci <= c1 and e[0] in 'RW':
+                        pc = sim.evpc.get(i)
+                        if pc is None or pc < 0: continue
+                        nn = fname(tag, pc)
+                        if not seq or seq[-1] != nn: seq.append(nn)
+                with open(os.path.join(os.environ['PD_DUMP'], 'funseq.%s' % tag), 'w') as f: f.write('\n'.join(seq) + '\n')
+        if os.environ.get('PD_SPRINTF') and name == os.environ['PD_SPRINTF']:
+            for tag, run in (('stock', a), ('rebuilt', b)):
+                ev = run[1]; k = 0
+                for i, e in enumerate(ev):
+                    if e[0] == 'C' and e[1] == '_sprintf':
+                        k += 1
+                        if k > 40: break
+                        print('  SPF', tag, k, [getattr(x, 'raw', x) if not hasattr(x, 'canon') else (hex(x.raw), x.canon) for x in e[2][:6]], '| next', str(ev[i + 1])[:140] if i + 1 < len(ev) else None, flush=True)
+        if os.environ.get('PD_MEMAT'):
+            for ma in os.environ['PD_MEMAT'].split(','):
+                ma = int(ma)
+                print('  MEMAT', name, ma, 'stock', bytes(ss.uc.mem_read(ma & ~15, 16)).hex(), 'rebuilt', bytes(sr.uc.mem_read(ma & ~15, 16)).hex(), flush=True)
         print('%-22s stock %s r3=%#x  rebuilt %s r3=%#x  events %d/%d  verdict %s %s' % (name, a[0], a[2]['r3'], b[0], b[2]['r3'], len(a[1]), len(b[1]), v, det[:300]), flush=True)
-        if name == 'ShConstructCompiler': state['h'] = a[2]['r3']
+        if save: st[save] = a[2]['r3']
+        if name.startswith('ShGetInfoLog') and a[2]['r3']:
+            for tag, sim in (('stock', ss), ('rebuilt', sr)):
+                try: print('  INFOLOG', name, tag, bytes(sim.uc.mem_read(a[2]['r3'] if tag == 'stock' else b[2]['r3'], 300)).split(b'\0')[0][:240], flush=True)
+                except Exception as e: print('  INFOLOG', name, tag, 'unreadable', e)
         if a[0] != 'RET' or b[0] != 'RET': break
+        if name == os.environ.get('PD_STOPAFTER'): break
     os.makedirs(opt['--out'], exist_ok=True)
     base = os.path.splitext(os.path.basename(opt['--shader'] or 'default'))[0]
     with open(os.path.join(opt['--out'], base + '.stock.cov'), 'w') as f: f.write('\n'.join('%x' % x for x in sorted(cov)) + '\n')

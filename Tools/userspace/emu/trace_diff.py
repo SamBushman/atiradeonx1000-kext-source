@@ -45,6 +45,7 @@ HEAP_ON = os.environ.get('TD_HEAP', '0') == '1'
 STOCK_HOOKS = {int(a, 16): n for a, n in (x.split(':') for x in os.environ.get('TD_STOCK_HOOKS', '').split(',') if x)}
 # TD_STOCK_ZERO_LOCAL=ADDR:SPOFF:SIZE,... (CONTROL, stock-image-relative hex address of an instruction after the function's `stwu`): before that instruction runs in the STOCK image, SIZE bytes at r1+SPOFF are set to 0. Used to prove that a stock/rebuilt difference is caused by a stock read of an uninitialised stack local (the rebuilt initialises it): with the local zeroed the row must come out identical (issue #306: ADDR=4d508 SPOFF=60 SIZE=2 for TPPStreamCompiler__getConstantAsSourceVar)
 REPAIR_FETCH = os.environ.get('TD_REPAIR_FETCH') == '1'      # TD_REPAIR_FETCH=1: pointer repair also treats a FETCH fault at a junk address loaded from the arena as a virtual-method slot (see repair_step)
+REAL_SPRINTF = os.environ.get('TD_SPRINTF') == '1'      # TD_SPRINTF=1: sprintf / snprintf write the formatted text (%d %i %u %x %X %c %s %%, width/zero pad) into the buffer instead of leaving it untouched (a pipeline that reads the text back would otherwise read uninitialised stack)
 BIND_SELF = os.environ.get('TD_BIND_SELF') == '1'      # TD_BIND_SELF=1 (pipeline_diff.py): a stock call through a dyld stub to a symbol the stock image itself defines (coalesced C++ template / inline instances) runs that definition, as dyld's flat binding does, instead of recording a call-out (the rebuilt links the same call directly)
 COV_DUMP = os.environ.get('TD_COVDUMP')          # directory: every row writes the set of stock instruction addresses (image-relative, hex) its runs executed to <name>.cov
 STOCK_ZERO_LOCAL = {int(x.split(':')[0], 16): (int(x.split(':')[1], 16), int(x.split(':')[2], 16)) for x in os.environ.get('TD_STOCK_ZERO_LOCAL', '').split(',') if x}
@@ -351,6 +352,29 @@ class Sim:
             rv3 = (h & 0x3f) if nm.lstrip('_') in ('sprintf', 'snprintf', 'vsprintf', 'vsnprintf', 'fprintf', 'printf', 'vfprintf', 'vprintf') else h & 0xffff
             if nm == 'vcb' and REPAIR_FETCH and kn < 64 and int.from_bytes(uc.mem_read(ARENA + ARENA_SIZE - 4 * (kn + 1), 4), 'big') == (0x5bcb0000 | kn): rv3 = ARENA + 0x1000 + ((h * 16) % (ARENA_SIZE - 0x3000))      # TD_REPAIR_FETCH=1: a marker word at the end of the arena (set by repair_step) makes this virtual call return a pointer to an arena object (a virtual method that returns a child / type object) instead of a small count
             if nm == 'vcb': self.vcbret.append((kn, rv3))
+            if REAL_SPRINTF and nm.lstrip('_') in ('sprintf', 'snprintf'):
+                try:
+                    fi = 1 if nm.lstrip('_') == 'sprintf' else 2
+                    gr = [uc.reg_read(UC_PPC_REG_0 + 3 + i) for i in range(8)] + [int.from_bytes(uc.mem_read(sp + 0x38 + 4 * i, 4), 'big') for i in range(8)]
+                    fmt = self._cstr(gr[fi], 4096).decode('latin1'); ai = fi + 1; out = []; pos = 0
+                    for m in re.finditer(r'%([-+ #0]*)(\d+)?(?:\.(\d+))?(hh|h|l|z|t)?([diuxXcs%])', fmt):
+                        out.append(fmt[pos:m.start()]); pos = m.end(); c = m.group(5)
+                        if c == '%': out.append('%'); continue
+                        v = gr[ai]; ai += 1
+                        if c == 's': txt = self._cstr(v, 4096).decode('latin1') if v else '(null)'
+                        elif c == 'c': txt = chr(v & 0xff)
+                        elif c in 'di': txt = str(v - (1 << 32) if v & 0x80000000 else v)
+                        elif c == 'u': txt = str(v)
+                        else: txt = ('%x' if c == 'x' else '%X') % v
+                        w = int(m.group(2) or 0)
+                        if w: txt = txt.rjust(w, '0') if ('0' in (m.group(1) or '') and c != 's') else (txt.ljust(w) if '-' in (m.group(1) or '') else txt.rjust(w))
+                        out.append(txt)
+                    out.append(fmt[pos:]); txt = ''.join(out).encode('latin1')
+                    if fi == 2: txt_w = txt[:max(0, gr[1] - 1)]
+                    else: txt_w = txt
+                    if fi == 1 or gr[1]: self._wr(gr[0], txt_w + b'\0'); self._log('WB', gr[0], txt_w + b'\0')
+                    rv3 = len(txt); uc.reg_write(UC_PPC_REG_3, rv3)
+                except Sim._Fault: pass
             uc.reg_write(UC_PPC_REG_3, rv3); uc.reg_write(UC_PPC_REG_4, 0)      # a printf's result is a byte count: small, so `buf += sprintf(buf, ..)` stays inside the buffer
             uc.reg_write(UC_PPC_REG_PC, uc.reg_read(UC_PPC_REG_LR))
             # do not leave a stale write pending; a call out also clobbers nothing else by contract
@@ -606,6 +630,14 @@ class Tk:
     def __hash__(self): return 0
     def __repr__(self): return 'Tk(%r,%r)' % (self.raw, self.canon)
 
+class Held:
+    """final value of a byte that a store left unchanged (it already held it): equal to the same value written by the other image, to nothing written, or to another Held of the same value"""
+    __slots__ = ('v',)
+    def __init__(self, v): self.v = v
+    def __eq__(self, o): return o.v == self.v if isinstance(o, Held) else self.v == o
+    def __hash__(self): return 0
+    def __repr__(self): return 'Held(%r)' % (self.v,)
+
 def segments(ev):
     """split the trace at the calls out of the image: [(call, writes, external reads)] with writes {(addr,size): [V...] in order} and reads {(addr,size): [V...]}.  Inside one segment the
     order of independent plain-memory accesses is not observable by anything but a fault, so a segment is summarised per address."""
@@ -629,6 +661,7 @@ def segments(ev):
             if isinstance(e[1], int):
                 for k, t in enumerate(bytes_of(e[1], e[2], e[3], silent)):
                     if k not in silent or isinstance(t, Tk): wb[e[1] + k] = t
+                    elif isinstance(t, int): wb.setdefault(e[1] + k, Held(t))      # a byte the store left as it was: its final value is t, whatever the image's raw bytes of the OLD word were (an old image pointer's raw bytes differ between the images, so one image can see this byte as silent and the other as written)
             silent = ()
         elif e[0] == 'R':
             if not is_img_read(e):
@@ -663,9 +696,9 @@ def wbeq(x, y):
     for k in set(x) | set(y):
         a = x.get(k, wbeq); b = y.get(k, wbeq)
         if a is wbeq: 
-            if not (isinstance(b, Tk) and b.sil): return False
+            if not ((isinstance(b, Tk) and b.sil) or isinstance(b, Held)): return False
         elif b is wbeq:
-            if not (isinstance(a, Tk) and a.sil): return False
+            if not ((isinstance(a, Tk) and a.sil) or isinstance(a, Held)): return False
         elif a != b: return False
     return True
 
