@@ -38,7 +38,7 @@ CALLOUT = 0x60000000
 RING = 0x58000000; RING_SIZE = 0x10000       # the stand-in for the kernel-mapped command ring: its contents are what the hardware is programmed by (packets: register offsets + values)
 IMGMAX = 0x400000            # both images are mapped below this; values in [0x1000, IMGMAX) are treated as image pointers by the normaliser, so the generator never makes such values
 NULLPAGE = 0x1000
-HEAP = 0x5c000000; HEAP_SIZE = 0x200000      # TD_HEAP=1: malloc/calloc/realloc/valloc return zeroed 16-byte-aligned blocks of this region (a bump allocator reset per run), the same sequence in both images; free is a no-op.  Without it an allocator returns a small hash value, so every function that uses its result faults
+HEAP = 0x5c000000; HEAP_SIZE = int(os.environ.get('TD_HEAPSIZE', '0x200000'), 0)      # TD_HEAP=1: malloc/calloc/realloc/valloc return zeroed 16-byte-aligned blocks of this region (a bump allocator reset per run), the same sequence in both images; free is a no-op.  Without it an allocator returns a small hash value, so every function that uses its result faults
 HEAP_ON = os.environ.get('TD_HEAP', '0') == '1'
 # TD_STOCK_HOOKS=ADDR:NAME,...  (stock-image-relative address in hex): a statically linked library function of the STOCK binary that the rebuilt corpus calls as the library import of the same name
 # (GLDriver: the stock's own copy of `atexit` at 0x2748, built on keymgr, against the rebuilt's libSystem `atexit`): the stock function is run as a call-out of that name instead, so both images record the same call
@@ -114,6 +114,7 @@ def extrels(d, symtab, roff=0):
         p += size
     return out
 
+ALIAS = {}      # stock-space address -> the lowest address of the byte-identical copies of the same vtable (see _init): the compiler emits one copy of TType's vtable per translation unit and the images use different copies at the same site
 class Img:
     def __init__(self, path, symfile=None, nmfile=None):
         d, self.segs, self.secs, symtab, indirect, self.locrel, self.bal, roff = macho(path)
@@ -174,13 +175,13 @@ class Img:
                     if vm <= a < vm + len(data):
                         o = a - vm; e = data.find(b'\0', o); return ('STR', bytes(data[o:e if e >= 0 else o + 64]))
         a = self.unwrap(a)
-        if self.is_stock: return ('IMG', a)
+        if self.is_stock: return ('IMG', ALIAS.get(a, a))
         for (g, sn, sa, ss, f, r1) in self.secs:
             if sa <= a < sa + ss and sn not in ('__text', '__cstring', '__eh_frame') and self.stock_secs and (g, sn) in self.stock_secs:
                 st_a, st_s = self.stock_secs[(g, sn)]
-                if st_s >= ss: return ('IMG', st_a + (a - sa))
+                if st_s >= ss: return ('IMG', ALIAS.get(st_a + (a - sa), st_a + (a - sa)))
         name, off = self.sym(a); sa = self.to_stock.get(name) if self.to_stock else None
-        return ('IMG', sa + off) if sa is not None else ('IMGR', name, off)
+        return ('IMG', ALIAS.get(sa + off, sa + off)) if sa is not None else ('IMGR', name, off)
     def sym(self, addr):
         i = bisect.bisect_right(self.symaddrs, addr) - 1
         if i < 0: return ('?', addr)
@@ -271,7 +272,9 @@ class Sim:
             self.evpc[len(self.ev)] = wpc - self.slide
             try: v = int.from_bytes(self.uc.mem_read(a, s), 'big') if s <= 8 else bytes(self.uc.mem_read(a, s)).hex()
             except Exception: continue        # the store faulted (unmapped): it never happened, the fault event says so
-            if old is not None and s <= 8 and v == int.from_bytes(old, 'big'): continue        # a silent store (the word already held that value) changes nothing: not an effect
+            if old is not None and s <= 8 and v == int.from_bytes(old, 'big'):        # a silent store (the word already held that value) changes nothing: not an effect (its final bytes are still the value held)
+                if isinstance(self.na(a), int): self.ev.append(('WH', self.na(a), bytes(old), self.nv(v, s) if s == 4 else None))      # (an old word that is an image pointer: its raw bytes differ between the images, so it is held as a pointer token)
+                continue
             if s in (4, 8) and isinstance(v, int) and self.is_fpstore(wpc):      # the payload of a NaN written by an FP store is not observable behaviour (fnfuzz NANCANON precedent): canonical quiet NaN
                 if s == 4 and (v >> 23) & 0xff == 0xff and v & 0x7fffff: v = 0x7fc00000
                 elif s == 8 and (v >> 52) & 0x7ff == 0x7ff and v & ((1 << 52) - 1) and v not in self.rd8: v = 0x7ff8000000000000      # (an 8-byte word that was read from memory is a copy, e.g. two floats moved with lfd/stfd: bit-exact on hardware)
@@ -282,7 +285,7 @@ class Sim:
             if old is not None and s <= 8:      # bytes of a wider store that already held their value are not effects either (the other image may have stored only the changed part)
                 ob = bytes(old); nb = v.to_bytes(s, 'big')
                 sil = tuple(k for k in range(s) if ob[k] == nb[k])
-                if sil: self.ev.append(('WS', self.na(a), sil))
+                if sil: self.ev.append(('WS', self.na(a), sil, self.nv(int.from_bytes(ob, 'big'), 4) if s == 4 else None))      # (the old word, when it is an image pointer: the bytes the store kept are bytes of that pointer)
             self.ev.append(('W', self.na(a), s, self.nv(v, s)))
         self.pw = []
 
@@ -352,11 +355,13 @@ class Sim:
             rv3 = (h & 0x3f) if nm.lstrip('_') in ('sprintf', 'snprintf', 'vsprintf', 'vsnprintf', 'fprintf', 'printf', 'vfprintf', 'vprintf') else h & 0xffff
             if nm == 'vcb' and REPAIR_FETCH and kn < 64 and int.from_bytes(uc.mem_read(ARENA + ARENA_SIZE - 4 * (kn + 1), 4), 'big') == (0x5bcb0000 | kn): rv3 = ARENA + 0x1000 + ((h * 16) % (ARENA_SIZE - 0x3000))      # TD_REPAIR_FETCH=1: a marker word at the end of the arena (set by repair_step) makes this virtual call return a pointer to an arena object (a virtual method that returns a child / type object) instead of a small count
             if nm == 'vcb': self.vcbret.append((kn, rv3))
-            if REAL_SPRINTF and nm.lstrip('_') in ('sprintf', 'snprintf'):
+            if REAL_SPRINTF and nm.lstrip('_') in ('sprintf', 'snprintf', 'vsprintf', 'vsnprintf'):
                 try:
-                    fi = 1 if nm.lstrip('_') == 'sprintf' else 2
+                    bn = nm.lstrip('_'); fi = 1 if bn in ('sprintf', 'vsprintf') else 2
                     gr = [uc.reg_read(UC_PPC_REG_0 + 3 + i) for i in range(8)] + [int.from_bytes(uc.mem_read(sp + 0x38 + 4 * i, 4), 'big') for i in range(8)]
                     fmt = self._cstr(gr[fi], 4096).decode('latin1'); ai = fi + 1; out = []; pos = 0
+                    if bn[0] == 'v':      # Darwin PPC32 va_list: a pointer to the argument words in the caller's parameter area
+                        ap_ = gr[fi + 1]; gr = gr[:fi + 1] + [int.from_bytes(uc.mem_read(ap_ + 4 * i, 4), 'big') for i in range(16)]
                     for m in re.finditer(r'%([-+ #0]*)(\d+)?(?:\.(\d+))?(hh|h|l|z|t)?([diuxXcs%])', fmt):
                         out.append(fmt[pos:m.start()]); pos = m.end(); c = m.group(5)
                         if c == '%': out.append('%'); continue
@@ -374,6 +379,17 @@ class Sim:
                     else: txt_w = txt
                     if fi == 1 or gr[1]: self._wr(gr[0], txt_w + b'\0'); self._log('WB', gr[0], txt_w + b'\0')
                     rv3 = len(txt); uc.reg_write(UC_PPC_REG_3, rv3)
+                except Sim._Fault: pass
+            if REAL_SPRINTF and nm.lstrip('_') in ('strtol', 'strtoul', 'atoi'):      # TD_SPRINTF=1: the numbers the shader front end parses are the real ones (a pseudo-random hash result sized an array to 40 and looped forever)
+                try:
+                    txt = self._cstr(uc.reg_read(UC_PPC_REG_3), 256).decode('latin1'); bs = 10 if nm.lstrip('_') == 'atoi' else uc.reg_read(UC_PPC_REG_5)
+                    mm = re.match(r'\s*([+-]?)(0[xX][0-9a-fA-F]+|0[0-7]*|[1-9][0-9]*)', txt) if bs == 0 else re.match(r'\s*([+-]?)(' + ('[0-9a-fA-F]+' if bs == 16 else '[0-9]+') + ')', txt)
+                    if mm:
+                        dg = mm.group(2); val = int(dg, 0 if bs == 0 else bs); val = -val if mm.group(1) == '-' else val; rv3 = val & 0xffffffff; used = mm.end()
+                    else: rv3 = 0; used = 0
+                    ep = uc.reg_read(UC_PPC_REG_4)
+                    if nm.lstrip('_') != 'atoi' and ep: self._wr(ep, (uc.reg_read(UC_PPC_REG_3) + used).to_bytes(4, 'big')); self._log('WB', ep, (uc.reg_read(UC_PPC_REG_3) + used).to_bytes(4, 'big'))
+                    uc.reg_write(UC_PPC_REG_3, rv3); uc.reg_write(UC_PPC_REG_PC, uc.reg_read(UC_PPC_REG_LR)); return
                 except Sim._Fault: pass
             uc.reg_write(UC_PPC_REG_3, rv3); uc.reg_write(UC_PPC_REG_4, 0)      # a printf's result is a byte count: small, so `buf += sprintf(buf, ..)` stays inside the buffer
             uc.reg_write(UC_PPC_REG_PC, uc.reg_read(UC_PPC_REG_LR))
@@ -481,7 +497,7 @@ class Sim:
         if ENTRYARGS and self.act:
             for tr in self.act:
                 if tr[0] <= addr < tr[0] + 64: tr[2] = max(tr[2], addr + size - tr[0])       # the extent of the record the callee (until it returns to lr) actually reads
-        if ENTRYARGS and self.fwb is not None and size <= 4 and STACK <= addr < self.sp0 and not self.in_stub() and self.fwb[addr - STACK:addr - STACK + size] != b'\x01' * size: self.uh.add(addr & ~3)
+        if ENTRYARGS and self.fwb is not None and size <= 4 and STACK <= addr < self.sp0 and not self.in_stub() and self.fwb[addr - STACK:addr - STACK + size] != b'\x01' * size: self.uh.setdefault(addr & ~3, self.n)
         if SWATCH and SWATCH[0] <= addr < SWATCH[1] and ENTRYARGS and self.fwb is not None and STACK <= addr < STACK + STACK_SIZE and self.fwb[addr - STACK:addr - STACK + min(size, 4)] != b'\x01' * min(size, 4):
             self.sw.append((self.pc - self.slide, addr, -size, int.from_bytes(uc.mem_read(addr, min(size, 4)), 'big'), len(self.ev)))      # READ of a stack word no store of this frame defined (negative size marks a read)
         if self.in_stub() or self.own_frame(addr):
@@ -503,8 +519,9 @@ class Sim:
             r1 = uc.reg_read(UC_PPC_REG_1)
             if size == 4 and (value & 0xffffffff) == r1 and addr < r1 and r1 - addr < 0x100000:       # stwu r1,-N(r1): a new frame starts here - whatever an earlier call left in these bytes is stale residue, not a value this function wrote (it differs between the images with the frame sizes)
                 self.fwb[addr - STACK:r1 - STACK] = bytes(r1 - addr)
-                if self.uh: self.uh = {q_ for q_ in self.uh if not (addr <= q_ < r1)}
+                if self.uh: self.uh = {q_: n_ for q_, n_ in self.uh.items() if not (addr <= q_ < r1)}
             self.fwb[addr - STACK:addr - STACK + size] = b'\x01' * size
+            if self.uh and size == 4 and not addr & 3 and addr in self.uh and ((value & 0xffffffff) == 0 or self.img.lo <= (value & 0xffffffff) - self.slide < self.img.end and self.img.sym((value & 0xffffffff) - self.slide)[1] in (0, 8)): del self.uh[addr]      # an uninitialised read taints a bit-field word merged back (lwz, rlwimi, stw); a store of zero (nothing of the residue survives, whatever the instruction sequence was), of the address of a named object, or of its vtable address point (+8), is a definition, not a merge of the residue (a bit-field word can look like an image address: only a symbol-exact value counts)
         if self.in_stub() or self.own_frame(addr): return
         try: old = bytes(uc.mem_read(addr, size)) if size <= 8 and not (STACK <= addr < STACK + STACK_SIZE) else None       # silent-store detection only against input-defined memory (the stack holds the fill pattern, which differs between the two control fills)
         except Exception: old = None
@@ -534,7 +551,7 @@ class Sim:
         for i, b in enumerate(dargs[:13]): uc.reg_write(UC_PPC_REG_FPR1 + i, b)
         uc.reg_write(UC_PPC_REG_1, self.sp0); uc.reg_write(UC_PPC_REG_LR, STOP)
         self.entry_nv = [uc.reg_read(UC_PPC_REG_0 + i) for i in range(14, 32)]
-        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.fwb = bytearray(STACK_SIZE) if ENTRYARGS else None; self.ent = []; self.act = []; self.sw = []; self.uh = set(); self.nc_by = {}; self.vcbret = []; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
+        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.fwb = bytearray(STACK_SIZE) if ENTRYARGS else None; self.ent = []; self.act = []; self.sw = []; self.uh = {}; self.nc_by = {}; self.vcbret = []; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
         try: uc.emu_start(entry + self.slide, STOP, count=limit + 10)
         except UcError as e:
             if self.status == '?':
@@ -652,16 +669,19 @@ def segments(ev):
             return [Tk(iv.to_bytes(4, 'big')[k], (v.canon, k), k in sil) for k in range(size)]      # (a byte of the stored pointer the memory already held is silent, like the NaN case above) same equality as V: equal raw bytes, or the same stock-space pointer
         if isinstance(iv, int) and size <= 8: return list(iv.to_bytes(size, 'big'))
         return [('?', repr(v), k) for k in range(size)]
-    silent = ()
+    silent = (); spv = None
     for e in ev:
         if e[0] == 'C': segs.append((call, w, r, wb, rb)); call = e; w = {}; r = {}; wb = {}; rb = set()
-        elif e[0] == 'WS': silent = e[2]
+        elif e[0] == 'WS': silent = e[2]; spv = e[3] if len(e) > 3 else None
+        elif e[0] == 'WH':
+            pv = e[3]; isp = isinstance(pv, V) and pv.canon is not None
+            for k, b_ in enumerate(e[2]): wb.setdefault(e[1] + k, Tk(b_, (pv.canon, k), True) if isp else Held(b_))
         elif e[0] == 'W':
             w.setdefault((e[1], e[2]), []).append(e[3])
             if isinstance(e[1], int):
                 for k, t in enumerate(bytes_of(e[1], e[2], e[3], silent)):
                     if k not in silent or isinstance(t, Tk): wb[e[1] + k] = t
-                    elif isinstance(t, int): wb.setdefault(e[1] + k, Held(t))      # a byte the store left as it was: its final value is t, whatever the image's raw bytes of the OLD word were (an old image pointer's raw bytes differ between the images, so one image can see this byte as silent and the other as written)
+                    elif isinstance(t, int): wb.setdefault(e[1] + k, Tk(t, (spv.canon, k), True) if isinstance(spv, V) and spv.canon is not None else Held(t))      # a byte the store left as it was: its final value is t, whatever the image's raw bytes of the OLD word were (an old image pointer's raw bytes differ between the images, so one image can see this byte as silent and the other as written)
             silent = ()
         elif e[0] == 'R':
             if not is_img_read(e):
@@ -700,6 +720,39 @@ def wbeq(x, y):
         elif b is wbeq:
             if not ((isinstance(a, Tk) and a.sil) or isinstance(a, Held)): return False
         elif a != b: return False
+    return True
+
+GARBAGE9 = set()      # aligned words whose bits [8:0] carry stale content that the code merely preserves (see wb_waived); persists across the steps of one pipeline session
+
+def wb_waived(x, y):
+    """final-byte differences confined to bits [8:0] of aligned words, where the code only PRESERVES those bits from the word's previous content.  Evidence required: (a) the two final words differ only in bits [8:0];
+    (b) in this segment, every store to that word in each image keeps the same bits [8:0] (a read-modify-write merge: `old & 0x1ff | new bits`), or the word was established that way in an earlier step.  The previous content is
+    stale pool memory (TPoolAllocator reuses freed pages) holding whatever the earlier object stored there, e.g. an image pointer, which differs between the images; the TType bit-field layout (notes_ttype_layout.md:
+    bits [8:0] untouched, never read: TType::operator== masks them out, 0x1fffe00) makes these bits padding.  Returns True when every differing byte is explained."""
+    _c, xw, _r, xb, _rb = x; _c2, yw, _r2, yb, _rb2 = y
+    def bv(t): return t if isinstance(t, int) else (t.v if isinstance(t, Held) else None)
+    todo = set()
+    for k in set(xb) | set(yb):
+        if xb.get(k, wbeq) is wbeq or yb.get(k, wbeq) is wbeq:
+            if xb.get(k, wbeq) is not yb.get(k, wbeq) and not (isinstance(xb.get(k), Held) or isinstance(yb.get(k), Held)): return False
+            continue
+        if xb[k] != yb[k]: todo.add(k & ~3 if isinstance(k, int) else None)
+    if None in todo: return False
+    for A in todo:
+        bytes_x = [bv(xb.get(A + i)) for i in range(4)]; bytes_y = [bv(yb.get(A + i)) for i in range(4)]
+        if any(b is None for b in bytes_x + bytes_y): return False
+        d = [bytes_x[i] ^ bytes_y[i] for i in range(4)]
+        if d[0] or d[1] or d[2] & 0xfe: return False                       # outside bits [8:0]
+        ok = A in GARBAGE9
+        if not ok:
+            def preserved(w):
+                l = w.get((A, 4))
+                if not l or len(l) < 2: return False
+                vs = [e.raw if isinstance(e, V) else e for e in l]
+                return all(isinstance(v, int) for v in vs) and len({v & 0x1ff for v in vs}) == 1
+            ok = preserved(xw) and preserved(yw)
+        if not ok: return False
+    GARBAGE9.update(todo)
     return True
 
 def wdiff(x, y):
@@ -770,8 +823,24 @@ def ent_match(x, y):
     for i, ws, ext, cap in x:
         if i in dy:
             n = min(max(1, ext, dy[i][1]), len(ws), len(dy[i][0]), cap, dy[i][2])
-            if ws[:n] != dy[i][0][:n]: return False
+            if ws[:n] != dy[i][0][:n] and not ttype_rec_eq(ws[:n], dy[i][0][:n]): return False
     return True
+
+TTYPE_CANON = [None]
+def ttype_rec_eq(a, b):
+    """two records of a TType object (word 0 = a TType vtable, canonical alias) agree when words 0-8 agree and word 9 (the bit-field word: qualifier 31:25, basic type 24:19, size 18:11, matrix 10, array 9) agrees in bits [31:9].
+    Bits [8:0] are padding: never set by a constructor, preserved by the merges (`old & 0x1ff`), masked out by every comparison (TType::operator== uses 0x1fffe00, notes_ttype_layout.md); what they hold is the residue of the stack slot
+    (an uninitialised read) or the stale pool content."""
+    if len(a) != 10 or len(b) != 10 or TTYPE_CANON[0] is None: return False
+    for w in (a[0], b[0]):
+        if not (isinstance(w, V) and w.canon == TTYPE_CANON[0]): return False
+    if a[:9] != b[:9]: return False
+    def bv(w):
+        w = w.v if isinstance(w, UW) else w
+        w = w.raw if isinstance(w, V) else w
+        return w if isinstance(w, int) else None
+    x, y = bv(a[9]), bv(b[9])
+    return x is not None and y is not None and (x ^ y) & ~0x1ff & 0xffffffff == 0
 
 def ent_diff(ea, eb):
     """per callee name present in both images' run with the same number of calls: every stock argument record has a matching rebuilt record (a callee one image inlined, or a different number of calls, is not comparable and is skipped)"""
@@ -853,7 +922,7 @@ def _compare(a, b, ret_kind):
     partial = False
     for i, (x, y) in enumerate(zip(sga, sgb)):
         d = wdiff(x[1], y[1])
-        if d and not wbeq(x[3], y[3]):
+        if d and not wbeq(x[3], y[3]) and not wb_waived(x, y):
             if sa == 'FAULT' and i == len(sga) - 1 and fa == fb: partial = d; continue       # the segment cut short by the same fault: which stores had happened before it differs (instruction order)
             if any(isinstance(k, int) and RING <= k < RING + RING_SIZE and x[3].get(k) != y[3].get(k) for k in set(x[3]) | set(y[3])): det.append('segment %d: command-ring contents differ: %s' % (i, d)); return 'HW_STREAM', '; '.join(det)
             det.append('segment %d: %s' % (i, d)); return classify_effect(ea, eb, det)
@@ -1047,6 +1116,25 @@ _G = {}
 def _init(stock, reb, symmap, nm, ledger=None, funcs=None, nargs=None, fuzz=0, repro=None):
     S = Img(stock, symfile=symmap); R = Img(reb, nmfile=nm); ids, names = callout_ids([S, R]); S.is_stock = True
     ts = {n: a for a, n in S.syms}
+    ALIAS.clear(); fam = {}
+    for a_, n_ in S.syms:
+        m_ = re.match(r'^PTR_(.+)_[0-9a-f]{8}$', n_)
+        if m_: fam.setdefault(m_.group(1), []).append(a_)
+    for stem_, addrs_ in fam.items():
+        spans = {}
+        for a_ in addrs_:
+            i_ = bisect.bisect_right(S.symaddrs, a_)
+            while i_ < len(S.symaddrs) and S.symaddrs[i_] == a_: i_ += 1
+            if i_ < len(S.symaddrs): spans[a_] = S.symaddrs[i_] - a_
+        if len(spans) < 2: continue
+        ln_ = min(spans.values()); grp = {}
+        if ln_ < 0x20: continue      # vtable-sized tables only: two small cells with equal content are distinct data objects          # the table every member starts with: as long as the shortest member's own extent (the symbol map names the objects that follow)
+        for a_ in spans:
+            for nm_, vm_, vs_, data_ in S.segs:
+                if vm_ <= a_ and a_ + ln_ <= vm_ + len(data_): grp.setdefault(bytes(data_[a_ - vm_:a_ - vm_ + ln_]), []).append(a_); break
+        for g_ in grp.values():
+            for a_ in g_: ALIAS[a_] = min(g_)
+    TTYPE_CANON[0] = next((('IMG', ALIAS.get(a_, a_)) for a_, n_ in S.syms if n_.startswith('PTR___ZN5TTypeD1Ev_')), None)
     for r in (read_ledger(ledger, S.bal, R.bal) if ledger else []):
         ts.setdefault(r['name'], r['stock'])
         rs_ = R.sym(r['reb'])

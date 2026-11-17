@@ -26,7 +26,7 @@ def main(argv):
     def put(off, b): arena[off:off + len(b)] = b
     put(0x2000, shaders['v'] + b'\0'); put(0x3000, shaders['f'] + b'\0'); put(0x4000, b'mvp\0'); put(0x4010, b'tex\0'); put(0x4020, b'pos\0'); put(0x4030, b'tint\0')
     put(0x1000, struct.pack('>I', A + 0x2000)); put(0x1010, struct.pack('>I', A + 0x3000))
-    arena = bytes(arena); limit = int(opt['--limit'])
+    limit = int(opt['--limit'])
     st = {}; OPT = int(os.environ.get('PD_OPT', '1'))
     sh = lambda k: st[k]
     # (label, row, args)   args are ints or callables(state); the result r3 of a step is stored under `save`
@@ -50,11 +50,51 @@ def main(argv):
              ('ShGetLinkerBindingTable', 'ShGetLinkerBindingTable', lambda: [st['hl']], None),
              ('ShGetLinkerPPStream', 'ShGetLinkerPPStream', lambda: [st['hl']], None),
              ('ShGetCompilerPPStream.v', 'ShGetCompilerPPStream', lambda: [st['hv']], None)]
+    # PD_SCEN=1: further sessions in the same process state (after ShInitialize): richer valid shaders (structs, arrays, loops, functions, built-ins, preprocessor, cube/projective texture,
+    # gl_FragData, matrices, discard), a shader with syntax/semantic errors (info-log text) and a link error (varying type mismatch).  (tag, vertex source, fragment source, link?)
+    SCEN = [('s1', b'struct Light { vec3 dir; vec4 color; };\nuniform Light lights[2]; uniform mat4 mvp; uniform mat3 nm; attribute vec4 pos; attribute vec3 nrm; attribute vec2 uv; varying vec4 col; varying vec2 vuv;\n'
+                   b'vec4 shade(vec3 n) { vec4 c = vec4(0.0); for (int i = 0; i < 2; i++) { float d = max(dot(n, lights[i].dir), 0.0); c += lights[i].color * d; } return c; }\n'
+                   b'void main() { vec3 n = normalize(nm * nrm); col = shade(n); vuv = uv * 2.0 - 1.0; gl_Position = mvp * pos; }',
+             b'uniform sampler2D tex; uniform float k; varying vec4 col; varying vec2 vuv;\nvoid main() { vec4 t = texture2D(tex, vuv); if (t.a < 0.5) discard; float s = pow(clamp(dot(vuv, vuv), 0.0, 1.0), k); gl_FragColor = mix(t, col, s) * (vuv.x > 0.0 ? 1.0 : 0.5); }', True),
+            ('s2', b'#define N 3\n#ifdef GL_ES\n#error no\n#endif\nuniform vec4 c[N]; uniform mat4 m; attribute vec4 pos; attribute vec3 d; varying vec3 dir; varying vec4 pj;\n'
+                   b'void main() { vec4 s = vec4(0.0); for (int i = 0; i < N; i++) s += c[i]; s.xy = s.yx; dir = d; pj = m[1] + s; gl_Position = m * pos + vec4(s.w); }',
+             b'uniform sampler2D a; uniform samplerCube b; uniform vec4 c; varying vec3 dir; varying vec4 pj;\n'
+             b'void main() { vec4 x = texture2DProj(a, pj); vec4 y = textureCube(b, dir); bvec2 m = lessThan(x.xy, y.xy); vec2 z = mix(x.zw, y.zw, vec2(m)); mat2 r = mat2(cos(z.x), sin(z.x), -sin(z.x), cos(z.x)); gl_FragData[0] = vec4(r * z, gl_FragCoord.z, length(c.xyz) > 1.0 ? 1.0 : c.w); }', True),
+            ('s3', b'uniform mat4 mvp; attribute vec4 pos; void main() { gl_Position = foo(mvp * pos; float x = ; }',
+             b'void main() { gl_FragColor = vec4(undeclared, 1, 2); int i = 1.5; }', False),
+            ('s4', b'attribute vec4 pos; varying vec2 q; void main() { q = pos.xy; gl_Position = pos; }',
+             b'varying vec3 q; void main() { gl_FragColor = vec4(q, 1.0); }', True)]
+    if os.environ.get('PD_SCEN') == '1':
+        for si, (tg, vs_, fs_, lk) in enumerate(SCEN):
+            vo, fo, to = 0x7000 + si * 0x800, 0x7400 + si * 0x800, 0x1100 + si * 0x40
+            put(vo, vs_ + b'\0'); put(fo, fs_ + b'\0'); put(to, struct.pack('>I', A + vo)); put(to + 0x10, struct.pack('>I', A + fo)); put(to + 0x20, bytes(8))
+            hv, hf, hl = 'hv_' + tg, 'hf_' + tg, 'hl_' + tg
+            steps += [('ShConstructCompiler.v.' + tg, 'ShConstructCompiler', lambda: [0, 0], hv),
+                      ('ShCompile.v.' + tg, 'ShCompile', lambda hv=hv, to=to: [st[hv], A + to, 1, OPT, 0], None),
+                      ('ShGetInfoLog.v.' + tg, 'ShGetInfoLog', lambda hv=hv: [st[hv]], None),
+                      ('ShConstructCompiler.f.' + tg, 'ShConstructCompiler', lambda: [1, 0], hf),
+                      ('ShCompile.f.' + tg, 'ShCompile', lambda hf=hf, to=to: [st[hf], A + to + 0x10, 1, OPT, 0], None),
+                      ('ShGetInfoLog.f.' + tg, 'ShGetInfoLog', lambda hf=hf: [st[hf]], None)]
+            if lk:
+                steps += [('ConstructLinker.' + tg, 'ConstructLinker', lambda: [0], hl),
+                          ('ShLink.' + tg, 'ShLink', lambda hl=hl, to=to: [st[hl], A + to + 0x20, 2, 0, 0], None),
+                          ('ShGetInfoLog.l.' + tg, 'ShGetInfoLog', lambda hl=hl: [st[hl]], None),
+                          ('ShGetNumActiveAttributes.' + tg, 'ShGetNumActiveAttributes', lambda hl=hl: [st[hl]], None),
+                          ('ShGetNumActiveUniforms.' + tg, 'ShGetNumActiveUniforms', lambda hl=hl: [st[hl]], None),
+                          ('ShGetActiveUniform.0.' + tg, 'ShGetActiveUniform', lambda hl=hl: [st[hl], 0, 64, A + 0x5000, A + 0x5004, A + 0x5008, A + 0x6000], None),
+                          ('ShGetActiveUniform.1.' + tg, 'ShGetActiveUniform', lambda hl=hl: [st[hl], 1, 64, A + 0x5000, A + 0x5004, A + 0x5008, A + 0x6000], None),
+                          ('ShGetLinkerBindingTable.' + tg, 'ShGetLinkerBindingTable', lambda hl=hl: [st[hl]], None),
+                          ('ShGetLinkerPPStream.' + tg, 'ShGetLinkerPPStream', lambda hl=hl: [st[hl]], None),
+                          ('ShGetCompilerPPStream.v.' + tg, 'ShGetCompilerPPStream', lambda hv=hv: [st[hv]], None)]
+    link_tab = {('ShLink.' + tg): (A + 0x1100 + si * 0x40 + 0x20, 'hv_' + tg, 'hf_' + tg) for si, (tg, _a, _b, _c) in enumerate(SCEN)}
     cov = set(); allv = []
+    arena = bytes(arena)
     for k_, (name, rowname, argf, save) in enumerate(steps):
         reset = (k_ == 0); r = rows[rowname]; args = argf()
         if name == 'ShLink':
             for sim in (ss, sr): sim.uc.mem_write(A + 0x1020, struct.pack('>II', st['hv'], st['hf']))
+        if name in link_tab:
+            for sim in (ss, sr): sim.uc.mem_write(link_tab[name][0], struct.pack('>II', st[link_tab[name][1]], st[link_tab[name][2]]))
         a = ss.run(r['stock'], args, [], [], arena, limit=limit, reset=reset)
         b = sr.run(r['reb'], args, [], [], arena, limit=limit, reset=reset)
         v, det = t.compare(a, b, 'i'); cov |= a[3]
@@ -78,15 +118,27 @@ def main(argv):
             print('  SEGDIFF', name, 'segments', len(sga), len(sgb), flush=True)
             for i, (x, y) in enumerate(zip(sga, sgb)):
                 d = t.wdiff(x[1], y[1])
-                if d and not t.wbeq(x[3], y[3]):
+                if d and not t.wbeq(x[3], y[3]) and not t.wb_waived(x, y):
                     ks = sorted((q for q in set(x[3]) | set(y[3]) if x[3].get(q) != y[3].get(q)), key=repr)
                     print('  SEGDIFF', name, i, 'call', (x[0] or ('start',))[:2], 'differing final bytes', [(q, x[3].get(q), y[3].get(q)) for q in ks[:6]], 'nbytes', len(ks), flush=True)
                     k += 1
                     if k >= int(os.environ['PD_SEGDIFF']): break
-        if os.environ.get('PD_WATCHABS') and name == os.environ.get('PD_WATCHSTEP', 'ShInitialize'):
+        if os.environ.get('PD_WATCHABS') and os.environ.get('PD_WATCHSTEP', 'ShInitialize') in (name, '*'):
             wa = int(os.environ['PD_WATCHABS'])
             for tag, run, sim in (('stock', a, ss), ('rebuilt', b, sr)):
-                print('  WABS', tag, [(i, hex(sim.evpc.get(i, -1)), e[0], e[2], e[3] if e[0] != 'C' else None) for i, e in enumerate(run[1]) if e[0] in 'RW' and isinstance(e[1], int) and e[1] <= wa < e[1] + e[2]][:40], flush=True)
+                if os.environ.get('PD_WATCHSTEP') == '*' and not any(e[0] in 'RW' and isinstance(e[1], int) and e[1] <= wa < e[1] + e[2] for e in run[1]): continue
+                print('  WABS', name, tag, [(i, hex(sim.evpc.get(i, -1)), e[0], e[2], e[3] if e[0] != 'C' else None) for i, e in enumerate(run[1]) if e[0] in 'RW' and isinstance(e[1], int) and e[1] <= wa < e[1] + e[2]][:40], flush=True)
+        if os.environ.get('PD_EVCTX') and name == os.environ.get('PD_WATCHSTEP', 'ShInitialize'):      # PD_EVCTX=stock_event_index,rebuilt_event_index: the 24 events before each with their pcs
+            for (tag, run, sim), ix in zip((('stock', a, ss), ('rebuilt', b, sr)), os.environ['PD_EVCTX'].split(',')):
+                for i in range(int(ix) - 24, int(ix) + 3): print('  EVC', tag, i, hex(sim.evpc.get(i, -1)), str(run[1][i])[:150], flush=True)
+        if v == 'READ_SET' and os.environ.get('PD_RDDIFF'):      # every read the one image makes in the differing segment that the other does not, with the other image's overlapping reads
+            import re as _re
+            sg = int(_re.search(r'segment (\d+)', det).group(1)); sga, _f1 = t.segments(a[1]); sgb, _f2 = t.segments(b[1])
+            xr, yr = sga[sg][2], sgb[sg][2]
+            def ov(r, k): return [q for q in r if isinstance(q[0], int) and isinstance(k[0], int) and q[0] < k[0] + k[1] and k[0] < q[0] + q[1]]
+            for tag, r1, r2 in (('stock-only', xr, yr), ('rebuilt-only', yr, xr)):
+                for k in sorted((q for q in r1 if q not in r2), key=repr)[:12]:
+                    print('  RD', name, tag, k, 'values', [getattr(w, 'raw', w) for w in r1[k]][:3], 'other image overlapping', [(q, [getattr(w, 'raw', w) for w in r2[q]][:2]) for q in ov(r2, k)], flush=True)
         if os.environ.get('PD_WATCHVAL') and name == 'ShInitialize':
             vals = {int(x) for x in os.environ['PD_WATCHVAL'].split(',')}
             for tag, run, sim in (('stock', a, ss), ('rebuilt', b, sr)):
@@ -187,6 +239,7 @@ def main(argv):
                 print('  MEMAT', name, ma, 'stock', bytes(ss.uc.mem_read(ma & ~15, 16)).hex(), 'rebuilt', bytes(sr.uc.mem_read(ma & ~15, 16)).hex(), flush=True)
         print('%-22s stock %s r3=%#x  rebuilt %s r3=%#x  events %d/%d  verdict %s %s' % (name, a[0], a[2]['r3'], b[0], b[2]['r3'], len(a[1]), len(b[1]), v, det[:300]), flush=True)
         if save: st[save] = a[2]['r3']
+        if name.startswith('ShGetCompilerPPStream.v'): print('  COV after', name, len(cov), flush=True)
         if name.startswith('ShGetInfoLog') and a[2]['r3']:
             for tag, sim in (('stock', ss), ('rebuilt', sr)):
                 try: print('  INFOLOG', name, tag, bytes(sim.uc.mem_read(a[2]['r3'] if tag == 'stock' else b[2]['r3'], 300)).split(b'\0')[0][:240], flush=True)
