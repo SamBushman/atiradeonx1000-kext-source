@@ -43,6 +43,8 @@ EXPLAINED = {# ILReader__decodeInstruction / nextInstruction: the stock indexes 
              '_glActiveStencilFace_ListExec': ('STOCK_HOISTED_LOAD', 'PASS'), '_glSamplePass_ListExec': ('STOCK_HOISTED_LOAD', 'PASS'), '_glGetPixelMapuiv_Exec': ('STOCK_HOISTED_LOAD', 'PASS'),
              '_glGetPixelMapusv_Exec': ('STOCK_HOISTED_LOAD', 'PASS'), '_gleLookUpTexture1D': ('STOCK_HOISTED_LOAD', 'PASS'), '_gleLookUpTexture3D': ('STOCK_HOISTED_LOAD', 'PASS'),
              '_gleLookUpNonProxyTexture1D': ('STOCK_HOISTED_LOAD', 'PASS'), '_gleLookUpNonProxyTexture3D': ('STOCK_HOISTED_LOAD', 'PASS'),
+             # GLEngine ENTRYARGS census (Nov 16): _glResetHistogram_Exec / _ListExec: stock 0x6ae9c `lfs f?,0x20(ctx)` is unconditional, the rebuilt reads the field after the test; _glGetPixelMapfv_Exec: stock 0x7c4a4 `lwz r?,0x38(r29)` precedes the range check (disassembly of both, EVIDENCE_trace_diff.md ENTRYARGS section)
+             '_glResetHistogram_Exec': ('STOCK_HOISTED_LOAD', 'PASS'), '_glResetHistogram_ListExec': ('STOCK_HOISTED_LOAD', 'PASS'), '_glGetPixelMapfv_Exec': ('STOCK_HOISTED_LOAD', 'PASS'),
              # libGLProgrammability extended census (EVIDENCE_trace_diff.md): #225 deliberate guard of a stock out-of-table write; a dead argument load of the stock (`lwz r0,0(r4); stw r0,-0x20(r1); blr`)
              'std____default_alloc_template_true_0____S_refill': ('STOCK_BUG_225', 'PASS'),
              '__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
@@ -91,6 +93,10 @@ EXPLAINED_ANY = {'Compiler__getOrCreateLoadConstN': ('UNINIT_REBUILT', 'OOB_LOCA
     'GetResources': ('LAYOUT_ALL', 'RETURNS_IMAGE_CONTENT_VERIFIED', 'PASS'),
     'GetGLStringForType': ('LAYOUT_ALL', 'RETURNS_IMAGE_CONTENT_VERIFIED', 'PASS'),
     'vsdisFlowOpcodeName': ('LAYOUT_ALL', 'RETURNS_IMAGE_CONTENT_VERIFIED', 'PASS'),      # GLDriver: returns a string literal; the C strings returned for flowOpcode -2..299 (incl. 8, 9, 0x35, 0x3e, 0x53) are equal in both images (302 inputs, 0 differ)
+    # GLEngine: returns the function address stored in one of ~104 pointer cells (layout-dependent in every trial); controls/sel_ptr_ret.py: 728 (format,type) pairs, the named function returned is equal in both images, 0 differ
+    '_gleSelectPixelExtractFunc': ('LAYOUT_ALL', 'RETURNS_IMAGE_CONTENT_VERIFIED', 'PASS'),
+    # GLEngine: _LFSParserAttachString has no return value in either image (corpus body `return;`, declared int); the r3 at exit is a register residue (stock 0, rebuilt 4 in the shown trial). Its callers are _LFSParserShutdown (tail call, returns the residue) and one call whose result is unused; _LFSParserFree ignores Shutdown's result (corpus part_043.c)
+    '_LFSParserAttachString': ('EFFECTS', 'RESIDUE_R3_RETURN', 'PASS'),
     'getQualifierString': ('LAYOUT_ALL', 'RETURNS_IMAGE_CONTENT_VERIFIED', 'PASS')}      # libGLProgrammability EVIDENCE_trace_diff.md: both images index a 0x24-byte local copy with an unchecked record field
 def worst2(r):
     w = worst(r)

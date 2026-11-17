@@ -436,7 +436,11 @@ class Sim:
         if ENTRYARGS and self.act:
             for tr in self.act:
                 if tr[0] <= addr < tr[0] + 64: tr[2] = max(tr[2], addr + size - tr[0])       # the extent of the record the callee (until it returns to lr) actually reads
-        if self.in_stub() or self.own_frame(addr): return
+        if self.in_stub() or self.own_frame(addr):
+            if size == 8 and not self.in_stub():      # an 8-byte load from the function's own frame is a source of a later lfd/stfd copy too (found: _gleCopyMatrix copying a temp float matrix as doubles in the stock, as words in the rebuilt: the stock's NaN pair was canonicalised, the rebuilt's words were not; the final memory is equal)
+                try: self.rd8.add(int.from_bytes(uc.mem_read(addr, 8), 'big'))
+                except Exception: pass
+            return
         try: v = int.from_bytes(uc.mem_read(addr, size), 'big') if size <= 8 else bytes(uc.mem_read(addr, size)).hex()
         except Exception: v = None
         self.evpc[len(self.ev)] = self.pc - self.slide
