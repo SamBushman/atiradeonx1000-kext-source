@@ -3941,6 +3941,13 @@ int TPPStreamCompiler__getOperandAsSourceVar(outDesc, compiler, operand, unusedA
       valueByteOffset = valueByteOffset + 4;
     }
     logicalSize = ParseOperand__GetLogicalSize(operand);
+    /* issue #307 (stock bug): only the first 4 lanes are copied into constantWords[4] (the loop above reports an error for every further lane and goes on), but the stock passes the
+       full logical size (16 for a mat4 constant) as valueCount. getConstantAsSourceVar / getNewConstantSourceVar then read valueCount words from the 4-word array and
+       getNewConstantSourceVar copies them into its own 4-word local (stock 0x4d4.. `stfsx f0,r11,r0`, r11 = sp+0x40, frame 0xa0): the copy runs over the neighbouring locals and its saved r21-r23
+       (sp+0x74..0x7c). The shader is rejected in any case (the error above); hand the callee the lanes that exist. */
+    if ((uint)logicalSize > 4) {
+      logicalSize = 4;
+    }
     if (*(int *)operand == 0) {
       operandGlType = *(ushort *)(operand + 0x18);
     }

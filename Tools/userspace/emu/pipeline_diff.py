@@ -63,7 +63,21 @@ def main(argv):
             ('s3', b'uniform mat4 mvp; attribute vec4 pos; void main() { gl_Position = foo(mvp * pos; float x = ; }',
              b'void main() { gl_FragColor = vec4(undeclared, 1, 2); int i = 1.5; }', False),
             ('s4', b'attribute vec4 pos; varying vec2 q; void main() { q = pos.xy; gl_Position = pos; }',
-             b'varying vec3 q; void main() { gl_FragColor = vec4(q, 1.0); }', True)]
+             b'varying vec3 q; void main() { gl_FragColor = vec4(q, 1.0); }', True),
+            # s5: valid preprocessor directives (#version, #pragma, #extension, #line, #define with arguments, #undef, #if/#elif/#else, defined()); s6: erroring directives (active #error, unknown #extension, #if without #endif)
+            ('s5', b'#version 110\n#pragma optimize(on)\n#pragma debug(off)\n#extension all : warn\n#line 20\n#define SC(x) ((x) * 2.0)\n#define K 3\n#undef K\n#define K 4\n'
+                   b'#if defined(K) && (K + 1 == 5)\nuniform float u;\n#elif K == 2\nuniform float v;\n#else\nuniform float w;\n#endif\nattribute vec4 pos; varying float f;\n'
+                   b'void main() { f = SC(u); gl_Position = pos; }',
+             b'#extension GL_ARB_texture_rectangle : enable\n#ifdef GL_ARB_texture_rectangle\nuniform vec4 c;\n#endif\nvarying float f; void main() { gl_FragColor = c * f; }', True),
+            ('s6', b'#define Q\n#ifdef Q\n#error vertex stop\n#endif\n#extension GL_NOT_REAL : require\nattribute vec4 pos; void main() { gl_Position = pos; }\n#if 1\n',
+             b'#line 0\n#pragma unknown(on)\n#extension GL_NOT_REAL : enable\n#if 1 +\n#endif\n#elif\n#else\n#endif\nvoid main() { gl_FragColor = vec4(1.0); }', False),
+            # s7: constant folding (matrix/vector constants, constructors, comma, conversions, constant-index, unary/binary on constants), prototypes
+            ('s7', b'const mat2 M = mat2(1.0, 2.0, 3.0, 4.0); const vec3 V = vec3(1.0) + vec3(2.0, 3.0, 4.0); const float F = 2.0 * 3.0 - 1.0; const int I = int(2.5) + 3; const bool B = !true || (I > 2);\n'
+                   b'const vec4 W = vec4(M[0], V.xy * F); const mat3 D = mat3(2.0); const mat4 E = mat4(vec4(1.0), vec4(2.0), vec4(3.0), vec4(4.0));\n'
+                   b'float f2(float a, float b); float f2(vec2 a, float b);\nfloat f2(float a, float b) { return a * b; }\nfloat f2(vec2 a, float b) { return a.x * b; }\n'
+                   b'uniform float u; attribute vec4 pos; varying vec4 col;\n'
+                   b'void main() { float c = (u, 1.0); vec3 q = -V; float z = B ? F : float(I); mat2 N = M * M; col = W + vec4(D[1], E[2][1]) + vec4(f2(u, z), f2(q.xy, c), N[1]); gl_Position = pos * E; }',
+             b'const mat3 R = mat3(vec3(1.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0), vec3(0.0, 0.0, 1.0)); const vec2 K = vec2(0.5) * vec2(2.0, 4.0);\nvarying vec4 col; void main() { vec3 t = R * col.xyz; gl_FragColor = vec4(t, K.y) + vec4(float(true), float(3), 0.0, 1.0); }', True)]
     if os.environ.get('PD_SCEN') == '1':
         for si, (tg, vs_, fs_, lk) in enumerate(SCEN):
             vo, fo, to = 0x7000 + si * 0x800, 0x7400 + si * 0x800, 0x1100 + si * 0x40
@@ -130,7 +144,8 @@ def main(argv):
                 print('  WABS', name, tag, [(i, hex(sim.evpc.get(i, -1)), e[0], e[2], e[3] if e[0] != 'C' else None) for i, e in enumerate(run[1]) if e[0] in 'RW' and isinstance(e[1], int) and e[1] <= wa < e[1] + e[2]][:40], flush=True)
         if os.environ.get('PD_EVCTX') and name == os.environ.get('PD_WATCHSTEP', 'ShInitialize'):      # PD_EVCTX=stock_event_index,rebuilt_event_index: the 24 events before each with their pcs
             for (tag, run, sim), ix in zip((('stock', a, ss), ('rebuilt', b, sr)), os.environ['PD_EVCTX'].split(',')):
-                for i in range(int(ix) - 24, int(ix) + 3): print('  EVC', tag, i, hex(sim.evpc.get(i, -1)), str(run[1][i])[:150], flush=True)
+                if ix.startswith('@'): ix = next(i + 12 for i, e in enumerate(run[1]) if e[0] in 'RW' and e[1] == int(ix[1:]))      # '@ADDR': 12 events after the first access of that address
+                for i in range(int(ix) - int(os.environ.get('PD_EVWIN', '24')), int(ix) + 3): print('  EVC', tag, i, hex(sim.evpc.get(i, -1)), str(run[1][i])[:150], flush=True)
         if v == 'READ_SET' and os.environ.get('PD_RDDIFF'):      # every read the one image makes in the differing segment that the other does not, with the other image's overlapping reads
             import re as _re
             sg = int(_re.search(r'segment (\d+)', det).group(1)); sga, _f1 = t.segments(a[1]); sgb, _f2 = t.segments(b[1])
@@ -139,6 +154,14 @@ def main(argv):
             for tag, r1, r2 in (('stock-only', xr, yr), ('rebuilt-only', yr, xr)):
                 for k in sorted((q for q in r1 if q not in r2), key=repr)[:12]:
                     print('  RD', name, tag, k, 'values', [getattr(w, 'raw', w) for w in r1[k]][:3], 'other image overlapping', [(q, [getattr(w, 'raw', w) for w in r2[q]][:2]) for q in ov(r2, k)], flush=True)
+        if v == 'IMAGE_DATA_DEP' and os.environ.get('PD_IDDIFF'):      # PD_IDDIFF=1: for an IMAGE_DATA_DEP step, the pcs/values of the first reads of each differing image-data key in both images, and every event with the segment's differing store address
+            ik = [x[0] for x in t.image_data_diff(a[1], b[1])][:6]
+            for tag, run, sim in (('stock', a, ss), ('rebuilt', b, sr)):
+                print('  ID', name, tag, [(k, [(i, hex(sim.evpc.get(i, -1)), run[1][i][2], getattr(run[1][i][3], 'raw', run[1][i][3])) for i, e in enumerate(run[1]) if e[0] == 'R' and e[1] == k][:4]) for k in ik], flush=True)
+        if os.environ.get('PD_SEGSHOW') and name == os.environ.get('PD_WATCHSTEP', 'ShInitialize'):      # PD_SEGSHOW=n: segment n of both images (opening call-out, writes, reads)
+            sga, _f1 = t.segments(a[1]); sgb, _f2 = t.segments(b[1]); n_ = int(os.environ['PD_SEGSHOW'])
+            for tag, sg in (('stock', sga), ('rebuilt', sgb)):
+                x = sg[n_]; print('  SEG', tag, n_, 'call', str(x[0])[:200], 'writes', str(x[1])[:900], 'final', str(x[3])[:600], flush=True)
         if os.environ.get('PD_WATCHVAL') and name == 'ShInitialize':
             vals = {int(x) for x in os.environ['PD_WATCHVAL'].split(',')}
             for tag, run, sim in (('stock', a, ss), ('rebuilt', b, sr)):
