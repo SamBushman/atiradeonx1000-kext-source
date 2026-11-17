@@ -24,6 +24,15 @@ from unicorn.ppc_const import *
 
 ARENA = 0x50000000; ARENA_SIZE = 0x80000
 STACK = 0x7f000000; STACK_SIZE = 0x100000
+class UW:
+    """a stack word the function read BEFORE any store of its own frame defined it (an uninitialised local: its value is the residue of earlier calls, which depends on the frame layout of the image) and stored back merged with defined bits.
+    Two records agree at a UW word when both images have one there: the same logical uninitialised read happened in both, only the residue differs."""
+    def __init__(self, v): self.v = v
+    def __eq__(self, o): return isinstance(o, UW)
+    def __ne__(self, o): return not isinstance(o, UW)
+    def __hash__(self): return 1
+    def __repr__(self): return 'UW(%r)' % (getattr(self.v, 'raw', self.v),)
+SWATCH = tuple(int(x, 0) for x in os.environ['TD_SWATCH'].split(',')) if os.environ.get('TD_SWATCH') else None
 STOP = 0x70000000
 CALLOUT = 0x60000000
 RING = 0x58000000; RING_SIZE = 0x10000       # the stand-in for the kernel-mapped command ring: its contents are what the hardware is programmed by (packets: register offsets + values)
@@ -36,6 +45,7 @@ HEAP_ON = os.environ.get('TD_HEAP', '0') == '1'
 STOCK_HOOKS = {int(a, 16): n for a, n in (x.split(':') for x in os.environ.get('TD_STOCK_HOOKS', '').split(',') if x)}
 # TD_STOCK_ZERO_LOCAL=ADDR:SPOFF:SIZE,... (CONTROL, stock-image-relative hex address of an instruction after the function's `stwu`): before that instruction runs in the STOCK image, SIZE bytes at r1+SPOFF are set to 0. Used to prove that a stock/rebuilt difference is caused by a stock read of an uninitialised stack local (the rebuilt initialises it): with the local zeroed the row must come out identical (issue #306: ADDR=4d508 SPOFF=60 SIZE=2 for TPPStreamCompiler__getConstantAsSourceVar)
 REPAIR_FETCH = os.environ.get('TD_REPAIR_FETCH') == '1'      # TD_REPAIR_FETCH=1: pointer repair also treats a FETCH fault at a junk address loaded from the arena as a virtual-method slot (see repair_step)
+BIND_SELF = os.environ.get('TD_BIND_SELF') == '1'      # TD_BIND_SELF=1 (pipeline_diff.py): a stock call through a dyld stub to a symbol the stock image itself defines (coalesced C++ template / inline instances) runs that definition, as dyld's flat binding does, instead of recording a call-out (the rebuilt links the same call directly)
 COV_DUMP = os.environ.get('TD_COVDUMP')          # directory: every row writes the set of stock instruction addresses (image-relative, hex) its runs executed to <name>.cov
 STOCK_ZERO_LOCAL = {int(x.split(':')[0], 16): (int(x.split(':')[1], 16), int(x.split(':')[2], 16)) for x in os.environ.get('TD_STOCK_ZERO_LOCAL', '').split(',') if x}
 SLIDE2 = 0x20000000         # the control run of the stock at a second slide: a trial whose behaviour changes with the slide depends on where the image happens to sit (an input that is an address inside the image window)
@@ -246,7 +256,7 @@ class Sim:
                 w = int.from_bytes(uc.mem_read(q, 4), 'big')
                 if STACK <= w < STACK + STACK_SIZE: ws.append(V(w, ('OWNFRAME',))); continue       # any frame address: the layout is the compiler's
                 if (w >> 23) & 0xff == 0xff and w & 0x7fffff: w = 0x7fc00000        # NaN payloads are one class (see the stores)
-                ws.append(self.nv(w, 4))
+                ws.append(UW(self.nv(w, 4)) if q in self.uh else self.nv(w, 4))
             if ws:
                 tr = [p, uc.reg_read(UC_PPC_REG_LR), 0]; self.act.append(tr)
                 cap = min([(q - p) // 4 for q in pts if p < q < self.sp0] + [16])        # the next pointer argument into the frame starts another block
@@ -302,6 +312,8 @@ class Sim:
                 if idx >= len(self.names):          # a wild branch into the call-out window past the last registered stub (found: ValueKey__setOperandFromValueKey): no such function, the same as any other wild branch into non-code
                     self.ev.append(('F', 'wild', self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
                 nm = self.names[idx]
+                if BIND_SELF and self.img.is_stock and nm in _G.get('bind', {}):
+                    uc.reg_write(UC_PPC_REG_PC, _G['bind'][nm] + self.slide); return
             sp = uc.reg_read(UC_PPC_REG_1)
             na = (self.nargs or {}).get(nm.lstrip('_'), self.LIBC.get(nm.lstrip('_'), 8))
             if nm.lstrip('_') in self.MATHF: na = self.MATHF[nm.lstrip('_')]
@@ -445,6 +457,9 @@ class Sim:
         if ENTRYARGS and self.act:
             for tr in self.act:
                 if tr[0] <= addr < tr[0] + 64: tr[2] = max(tr[2], addr + size - tr[0])       # the extent of the record the callee (until it returns to lr) actually reads
+        if ENTRYARGS and self.fwb is not None and size <= 4 and STACK <= addr < self.sp0 and not self.in_stub() and self.fwb[addr - STACK:addr - STACK + size] != b'\x01' * size: self.uh.add(addr & ~3)
+        if SWATCH and SWATCH[0] <= addr < SWATCH[1] and ENTRYARGS and self.fwb is not None and STACK <= addr < STACK + STACK_SIZE and self.fwb[addr - STACK:addr - STACK + min(size, 4)] != b'\x01' * min(size, 4):
+            self.sw.append((self.pc - self.slide, addr, -size, int.from_bytes(uc.mem_read(addr, min(size, 4)), 'big'), len(self.ev)))      # READ of a stack word no store of this frame defined (negative size marks a read)
         if self.in_stub() or self.own_frame(addr):
             if size == 8 and not self.in_stub():      # an 8-byte load from the function's own frame is a source of a later lfd/stfd copy too (found: _gleCopyMatrix copying a temp float matrix as doubles in the stock, as words in the rebuilt: the stock's NaN pair was canonicalised, the rebuilt's words were not; the final memory is equal)
                 try: self.rd8.add(int.from_bytes(uc.mem_read(addr, 8), 'big'))
@@ -459,10 +474,12 @@ class Sim:
     def on_write(self, uc, access, addr, size, value, ud):
         if any(lo <= addr < hi for lo, hi in self.tx): self.ev.append(('F', 'write', self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; self.fa = None; uc.emu_stop(); return
         if addr < NULLPAGE: self.ev.append(('F', 'write', addr)); self.fpc = self.pc - self.slide; self.status = 'FAULT'; self.fa = addr; uc.emu_stop(); return
+        if SWATCH and SWATCH[0] <= addr < SWATCH[1]: self.sw.append((self.pc - self.slide, addr, size, value & 0xffffffff, len(self.ev)))
         if ENTRYARGS and not self.in_stub() and self.own_frame(addr):
             r1 = uc.reg_read(UC_PPC_REG_1)
             if size == 4 and (value & 0xffffffff) == r1 and addr < r1 and r1 - addr < 0x100000:       # stwu r1,-N(r1): a new frame starts here - whatever an earlier call left in these bytes is stale residue, not a value this function wrote (it differs between the images with the frame sizes)
                 self.fwb[addr - STACK:r1 - STACK] = bytes(r1 - addr)
+                if self.uh: self.uh = {q_ for q_ in self.uh if not (addr <= q_ < r1)}
             self.fwb[addr - STACK:addr - STACK + size] = b'\x01' * size
         if self.in_stub() or self.own_frame(addr): return
         try: old = bytes(uc.mem_read(addr, size)) if size <= 8 and not (STACK <= addr < STACK + STACK_SIZE) else None       # silent-store detection only against input-defined memory (the stack holds the fill pattern, which differs between the two control fills)
@@ -474,14 +491,16 @@ class Sim:
         self.ev.append(('F', k, self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; self.fa = addr if k != 'fetch' else None; return False
 
     # ---- one run
-    def run(self, entry, args, dargs, stackwords, arena, limit=400000):
+    def run(self, entry, args, dargs, stackwords, arena, limit=400000, reset=True):
+        """reset=False: a further call in the same process state (pipeline_diff.py): the image data, heap, arena, ring and stack memory are kept, only the registers, the event lists and the counters start afresh"""
         uc = self.uc
-        for vm, b in self.snap: uc.mem_write(vm, b)
-        for za, zs in self.img.zero: uc.mem_write(za + self.slide, bytes(zs))
-        if self.heap_used: uc.mem_write(HEAP, bytes(self.heap_used))
-        self.heap_used = 0; self.heap_sizes = {}
-        uc.mem_write(ARENA, arena); uc.mem_write(RING, bytes(RING_SIZE)); uc.mem_write(RING + 0x10, struct.pack('>I', RING_SIZE // 4))
-        uc.mem_write(STACK, bytes([self.stackfill & 0xff]) * STACK_SIZE) if self.stackfill < 256 else uc.mem_write(STACK, struct.pack('>I', self.stackfill) * (STACK_SIZE // 4))
+        if reset:
+            for vm, b in self.snap: uc.mem_write(vm, b)
+            for za, zs in self.img.zero: uc.mem_write(za + self.slide, bytes(zs))
+            if self.heap_used: uc.mem_write(HEAP, bytes(self.heap_used))
+            self.heap_used = 0; self.heap_sizes = {}
+            uc.mem_write(ARENA, arena); uc.mem_write(RING, bytes(RING_SIZE)); uc.mem_write(RING + 0x10, struct.pack('>I', RING_SIZE // 4))
+            uc.mem_write(STACK, bytes([self.stackfill & 0xff]) * STACK_SIZE) if self.stackfill < 256 else uc.mem_write(STACK, struct.pack('>I', self.stackfill) * (STACK_SIZE // 4))
         self.sp0 = STACK + STACK_SIZE - 0x2000
         self.nstack = len(stackwords)
         for i, w in enumerate(stackwords): uc.mem_write(self.sp0 + 0x38 + 4 * i, struct.pack('>I', w))
@@ -491,7 +510,7 @@ class Sim:
         for i, b in enumerate(dargs[:13]): uc.reg_write(UC_PPC_REG_FPR1 + i, b)
         uc.reg_write(UC_PPC_REG_1, self.sp0); uc.reg_write(UC_PPC_REG_LR, STOP)
         self.entry_nv = [uc.reg_read(UC_PPC_REG_0 + i) for i in range(14, 32)]
-        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.fwb = bytearray(STACK_SIZE) if ENTRYARGS else None; self.ent = []; self.act = []; self.nc_by = {}; self.vcbret = []; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
+        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.fwb = bytearray(STACK_SIZE) if ENTRYARGS else None; self.ent = []; self.act = []; self.sw = []; self.uh = set(); self.nc_by = {}; self.vcbret = []; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
         try: uc.emu_start(entry + self.slide, STOP, count=limit + 10)
         except UcError as e:
             if self.status == '?':
@@ -995,7 +1014,10 @@ _G = {}
 def _init(stock, reb, symmap, nm, ledger=None, funcs=None, nargs=None, fuzz=0, repro=None):
     S = Img(stock, symfile=symmap); R = Img(reb, nmfile=nm); ids, names = callout_ids([S, R]); S.is_stock = True
     ts = {n: a for a, n in S.syms}
-    for r in (read_ledger(ledger, S.bal, R.bal) if ledger else []): ts.setdefault(r['name'], r['stock'])
+    for r in (read_ledger(ledger, S.bal, R.bal) if ledger else []):
+        ts.setdefault(r['name'], r['stock'])
+        rs_ = R.sym(r['reb'])
+        if rs_[1] == 0 and rs_[0] != '?': ts.setdefault(rs_[0], r['stock'])      # the rebuilt symbol AT the row's rebuilt address (a C++-mangled name differs from the corpus name)
     for l in (open(funcs) if funcs else []):                       # the corpus ledger: every function of the stock, 'addr<TAB>size<TAB>name<TAB>part<TAB>status'
         p = l.rstrip('\n').split('\t')
         if len(p) >= 3 and p[0].startswith('0x'): ts.setdefault(p[2], int(p[0], 16) - S.bal); ts.setdefault('_' + p[2], int(p[0], 16) - S.bal)
@@ -1029,6 +1051,22 @@ def _init(stock, reb, symmap, nm, ledger=None, funcs=None, nargs=None, fuzz=0, r
         # otherwise: the one unnamed stock `b <stock address of the target>` that is not a named function entry
         cand = [a for a in _stock_branches.get(ts[tn[0]], []) if a not in _named]
         if len(cand) == 1: ts[rn] = cand[0]
+    # data symbols the stock image only reaches through a pointer cell (C++ vtables, typeinfo): the symbol map row `pointer -> NAME` names the cell, the stock word in it is NAME's stock address
+    if symmap:
+        for l in open(symmap):
+            q = l.rstrip('\n').split('\t')
+            if len(q) >= 7 and q[3] == 'pointer' and q[6].startswith('pointer -> '):
+                nm_ = q[6][11:].strip()
+                if nm_ and nm_ not in ts:
+                    w_ = _word(S, int(q[1], 16) - S.bal)
+                    if w_ is not None and w_: ts[nm_] = w_ - S.bal
+    # fall-in entry of a split function: rebuilt `X` (entry) + `X__body`; the stock has the one-instruction entry directly before the body
+    import re as _re
+    _rn_all = {n_ for _a, n_ in R.syms}
+    for ra, rn in R.syms:
+        m_ = _re.match(r'^(.*?)(__body|_body_[0-9a-f]+)$', rn)
+        if m_ and rn in ts and m_.group(1) in _rn_all and m_.group(1) not in ts:
+            ts[m_.group(1)] = ts[rn] - 4
     R.to_stock = _TS(ts); R.stock_secs = {(g, sn): (a, sz) for (g, sn, a, sz, f, r1) in S.secs}
     if nargs:
         Sim.nargs = {}
@@ -1046,6 +1084,9 @@ def _init(stock, reb, symmap, nm, ledger=None, funcs=None, nargs=None, fuzz=0, r
                     if len(_p) == 2 and _p[1].isdigit(): _ar[_p[0]] = int(_p[1])
             ng = {r['name']: (len([c for c in r['pc'] if c != 'd']) if r['pc'] != '-' else _ar.get(r['name'], 8)) for r in _rows}      # the integer-register parameters (a float parameter travels in an FPR; the GPR after the last integer parameter is a stale value)
             ss.entries = {r['stock']: (r['name'], ng[r['name']]) for r in _rows}; sr.entries = {r['reb']: (r['name'], ng[r['name']]) for r in _rows}
+    if BIND_SELF and ledger:       # a name the rebuilt image defines (an exported weak / coalesced symbol) -> the stock address of the same function (ledger row: rebuilt address <-> stock address)
+        _by_reb = {r['reb']: r['stock'] for r in read_ledger(ledger, S.bal, R.bal)}
+        _G['bind'] = {rn: _by_reb[ra] for ra, rn in R.syms if ra in _by_reb and not rn.startswith(('DAT_', 'PTR_', 's_', 'lbl_'))}
     _G.update(repair=int(os.environ.get('TD_REPAIR', '0')), fuzz=fuzz, repro=repro, S=S, R=R, sims=_sims, ctl=Sim(S, ids, names, 0, slide=SLIDE2))
 def _work(job):
     row, trials = job
