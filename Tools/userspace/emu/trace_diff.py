@@ -35,6 +35,8 @@ HEAP_ON = os.environ.get('TD_HEAP', '0') == '1'
 # (GLDriver: the stock's own copy of `atexit` at 0x2748, built on keymgr, against the rebuilt's libSystem `atexit`): the stock function is run as a call-out of that name instead, so both images record the same call
 STOCK_HOOKS = {int(a, 16): n for a, n in (x.split(':') for x in os.environ.get('TD_STOCK_HOOKS', '').split(',') if x)}
 # TD_STOCK_ZERO_LOCAL=ADDR:SPOFF:SIZE,... (CONTROL, stock-image-relative hex address of an instruction after the function's `stwu`): before that instruction runs in the STOCK image, SIZE bytes at r1+SPOFF are set to 0. Used to prove that a stock/rebuilt difference is caused by a stock read of an uninitialised stack local (the rebuilt initialises it): with the local zeroed the row must come out identical (issue #306: ADDR=4d508 SPOFF=60 SIZE=2 for TPPStreamCompiler__getConstantAsSourceVar)
+REPAIR_FETCH = os.environ.get('TD_REPAIR_FETCH') == '1'      # TD_REPAIR_FETCH=1: pointer repair also treats a FETCH fault at a junk address loaded from the arena as a virtual-method slot (see repair_step)
+COV_DUMP = os.environ.get('TD_COVDUMP')          # directory: every row writes the set of stock instruction addresses (image-relative, hex) its runs executed to <name>.cov
 STOCK_ZERO_LOCAL = {int(x.split(':')[0], 16): (int(x.split(':')[1], 16), int(x.split(':')[2], 16)) for x in os.environ.get('TD_STOCK_ZERO_LOCAL', '').split(',') if x}
 SLIDE2 = 0x20000000         # the control run of the stock at a second slide: a trial whose behaviour changes with the slide depends on where the image happens to sit (an input that is an address inside the image window)
 SLIDE = 0x10000000          # both images are placed here (a multiple of 0x10000): everything below it is unmapped, as on the real machine
@@ -334,7 +336,10 @@ class Sim:
                 uc.reg_write(UC_PPC_REG_PC, uc.reg_read(UC_PPC_REG_LR)); return
             kn = self.nc_by.get(nm, 0); self.nc_by[nm] = kn + 1
             h = zlib.crc32(('%s/%d' % (nm, kn)).encode())      # a deterministic return value keyed by the call-out's name and its own call number (the same in both images; not by the total number of call-outs: a stock that inlines a memcpy / strlen the rebuilt calls, or the reverse, would shift every later result and look like a behavioural difference, e.g. HashTable__find's hash vcb)
-            uc.reg_write(UC_PPC_REG_3, (h & 0x3f) if nm.lstrip('_') in ('sprintf', 'snprintf', 'vsprintf', 'vsnprintf', 'fprintf', 'printf', 'vfprintf', 'vprintf') else h & 0xffff); uc.reg_write(UC_PPC_REG_4, 0)      # a printf's result is a byte count: small, so `buf += sprintf(buf, ..)` stays inside the buffer
+            rv3 = (h & 0x3f) if nm.lstrip('_') in ('sprintf', 'snprintf', 'vsprintf', 'vsnprintf', 'fprintf', 'printf', 'vfprintf', 'vprintf') else h & 0xffff
+            if nm == 'vcb' and REPAIR_FETCH and kn < 64 and int.from_bytes(uc.mem_read(ARENA + ARENA_SIZE - 4 * (kn + 1), 4), 'big') == (0x5bcb0000 | kn): rv3 = ARENA + 0x1000 + ((h * 16) % (ARENA_SIZE - 0x3000))      # TD_REPAIR_FETCH=1: a marker word at the end of the arena (set by repair_step) makes this virtual call return a pointer to an arena object (a virtual method that returns a child / type object) instead of a small count
+            if nm == 'vcb': self.vcbret.append((kn, rv3))
+            uc.reg_write(UC_PPC_REG_3, rv3); uc.reg_write(UC_PPC_REG_4, 0)      # a printf's result is a byte count: small, so `buf += sprintf(buf, ..)` stays inside the buffer
             uc.reg_write(UC_PPC_REG_PC, uc.reg_read(UC_PPC_REG_LR))
             # do not leave a stale write pending; a call out also clobbers nothing else by contract
 
@@ -486,7 +491,7 @@ class Sim:
         for i, b in enumerate(dargs[:13]): uc.reg_write(UC_PPC_REG_FPR1 + i, b)
         uc.reg_write(UC_PPC_REG_1, self.sp0); uc.reg_write(UC_PPC_REG_LR, STOP)
         self.entry_nv = [uc.reg_read(UC_PPC_REG_0 + i) for i in range(14, 32)]
-        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.fwb = bytearray(STACK_SIZE) if ENTRYARGS else None; self.ent = []; self.act = []; self.nc_by = {}; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
+        self.fpc = None; self.fa = None; self.ev = []; self.evpc = {}; self.fwb = bytearray(STACK_SIZE) if ENTRYARGS else None; self.ent = []; self.act = []; self.nc_by = {}; self.vcbret = []; self.pw = []; self.rd8 = set(); self.cov = set(); self.n = 0; self.limit = limit; self.status = '?'; self.ncalls = 0; self.pc = entry + self.slide
         try: uc.emu_start(entry + self.slide, STOP, count=limit + 10)
         except UcError as e:
             if self.status == '?':
@@ -852,6 +857,10 @@ def eval_input(row, ia, da, sw, arena, sims, ctl, full=False):
     elif us: v, det = 'UNINIT_STOCK', ''
     return v, det, aA, bA
 
+def _dump_cov(row, cov):
+    if COV_DUMP:
+        with open(os.path.join(COV_DUMP, row['name'] + '.cov'), 'w') as f: f.write('\n'.join('%x' % a for a in sorted(cov)) + '\n')
+
 def run_row(row, trials, S, R, sims, keep=False, ctl=None):
     """per trial: stock and rebuilt under two stack fills (A = 0, B = 0x5a5a5a5a) with identical inputs.  A run that differs between the fills read uninitialised stack:
          UNINIT_REBUILT   only the rebuilt does  -> a rebuilt defect (corpus reads a local nothing wrote)
@@ -867,6 +876,7 @@ def run_row(row, trials, S, R, sims, keep=False, ctl=None):
         res.setdefault(v, []).append(('A', t)); first.setdefault(v, ('A', t, det, aA if keep else (aA[0], aA[1][:40], aA[2], None), bA if keep else (bA[0], bA[1][:40], bA[2], None)))
         cov[0] |= aA[3]; cov[1] |= bA[3]
     inf = lambda c, lo, n: len([x for x in c if lo <= x < lo + n])
+    _dump_cov(row, cov[0])
     return res, first, stat, (inf(cov[0], row['stock'], row['size']), inf(cov[1], row['reb'], row['size']))
 
 # ---------------------------------------------------------------- coverage-guided inputs
@@ -913,6 +923,14 @@ def repair_step(sim, ia, sw, arena, rng):
             if e[0] == 'R' and e[2] == 4 and isinstance(e[1], int) and ARENA <= e[1] < ARENA + ARENA_SIZE and e[3].raw == tgt and not e[1] & 3:
                 a = bytearray(arena); a[e[1] - ARENA:e[1] - ARENA + 4] = struct.pack('>I', CALLOUT + 16 * sim.ids['vcb']); return ia, sw, bytes(a)
         return None
+    if REPAIR_FETCH and sim.status == 'FAULT' and sim.ev and sim.ev[-1][:2] == ('F', 'fetch'):
+        # TD_REPAIR_FETCH=1: the same for an instruction fetch at an address that is neither in the arena nor mapped (a random word the code loaded as a function pointer: `lwz r12,off(r2); mtctr r12; bctrl` through a vtable
+        # the random input filled with junk): the latest aligned 4-byte arena read whose raw value is the fetched address is the slot; point it at the `vcb` call-out
+        tgt = sim.uc.reg_read(UC_PPC_REG_PC)
+        for e in reversed(sim.ev):
+            if e[0] == 'R' and e[2] == 4 and isinstance(e[1], int) and ARENA <= e[1] < ARENA + ARENA_SIZE and not e[1] & 3 and ((e[3].raw if isinstance(e[3], V) else e[3]) & ~3) == tgt:      # (bctr drops the two low bits of CTR)
+                a = bytearray(arena); a[e[1] - ARENA:e[1] - ARENA + 4] = struct.pack('>I', CALLOUT + 16 * sim.ids['vcb']); return ia, sw, bytes(a)
+        return None
     fa = sim.fa
     if fa is None or sim.status != 'FAULT': return None
     ptr = lambda: ARENA + 0x1000 + (rng.randrange(ARENA_SIZE - 0x3000) & ~0xf) + 0x100
@@ -924,6 +942,10 @@ def repair_step(sim, ia, sw, arena, rng):
         if o & 3: continue
         a = bytearray(arena); a[o:o + 4] = struct.pack('>I', (ptr() - (fa - v)) & 0xffffffff)
         return ia, sw, bytes(a)
+    if REPAIR_FETCH:
+        for kn, v in reversed(sim.vcbret):
+            if kn < 64 and not (ARENA <= v < ARENA + ARENA_SIZE) and 0 <= fa - v < 0x8000 and int.from_bytes(arena[ARENA_SIZE - 4 * (kn + 1):ARENA_SIZE - 4 * kn], 'big') != (0x5bcb0000 | kn):
+                a = bytearray(arena); a[ARENA_SIZE - 4 * (kn + 1):ARENA_SIZE - 4 * kn] = struct.pack('>I', 0x5bcb0000 | kn); return ia, sw, bytes(a)      # the fault dereferences the result of virtual call #kn (a small count the mock returned): make that call return an arena pointer
     for i, v in enumerate(ia):
         if 0 <= fa - v < 0x8000 and not (ARENA <= v < ARENA + ARENA_SIZE):
             ia = list(ia); ia[i] = ptr() - (fa - v); return ia, sw, arena
@@ -966,6 +988,7 @@ def fuzz_row(row, budget, S, R, sims, ctl, seed_trials=4):
         new, reads2 = execute(ia2, da2, sw2, arena2)[:2]
         if new: corpus.append((ia2, da2, sw2, arena2, reads2))
     inf = lambda c, lo, n: len([x for x in c if lo <= x < lo + n])
+    _dump_cov(row, seen[0])
     return res, first, stat, (inf(seen[0], row['stock'], row['size']), inf(seen[1], row['reb'], row['size']))
 
 _G = {}

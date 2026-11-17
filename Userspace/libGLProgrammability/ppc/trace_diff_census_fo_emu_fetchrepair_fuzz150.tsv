@@ -1,0 +1,256 @@
+#id	name	rc	pc	size	stock_cov	reb_cov	runs	IDENTICAL	REORDERED	READ_SET	FAULT_SITE	FAULT_MISMATCH	EFFECTS	EMUERR	TIMEOUT	UNINIT_REBUILT	UNINIT_OTHER	end_states	first_nonidentical	LAYOUT_DEP	PTR_VALUE_DEP	IMAGE_DATA_DEP
+95	__dyld_func_lookup	i	-	32	8	8	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+171	_InitScanner	v	p	116	8	8	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+96	___initialize_Cplusplus	v	-	88	10	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+121	_InitCPP	i	-	812	13	15	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+160	_ChkCorrectElseNesting	i	-	72	9	10	1742	1742	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1742		0	0	0
+162	_ResetPreprocessor	i	-	196	10	10	1679	1679	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1679		0	0	0
+156	_PopEofSrc	i	-	64	10	14	1743	1743	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1743		0	0	0
+152	_readCPPline	v	p	972	13	14	1207	1207	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1207		0	0	0
+146	_CPPifdef	i	np	348	12	13	1739	1739	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1739		0	0	0
+147	_CPPline	i	p	268	12	13	1285	1285	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1285		0	0	0
+123	_FinalCPP	v	-	84	10	11	1454	1454	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1454		0	0	0
+148	_CPPerror	i	p	232	12	13	1414	1414	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1414		0	0	0
+125	_CPPundef	i	p	208	12	13	1514	1514	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1514		0	0	0
+66	_PPStreamGetStream	v	ppp	964	40	50	1932	1926	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1932		6	0	0
+176	_byte_scan	v	ipiiii	236	17	24	1393	1393	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1393		0	0	0
+124	_CPPdefine	i	p	940	18	22	1509	1509	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1509		0	0	0
+145	_CPPif	i	i	308	12	15	1607	1607	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1607		0	0	0
+144	_eval	i	nnppp	860	30	30	1345	1345	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1345		0	0	0
+151	_CPPextension	i	p	348	12	13	1504	1504	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1504		0	0	0
+126	_CPPelse	i	npiiiin	740	13	18	1689	1689	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1689		0	0	0
+177	_yylex_CPP	v	in	452	18	24	1501	1501	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1501		0	0	0
+155	_PushEofSrc	i	-	120	23	27	1527	0	0	0	1527	0	0	0	0	0	0	FAULT/FAULT:1527	FAULT_PARTIAL: same fault ('read', 32); stores completed before it differ: write (1543503884, 4): stock [0x1000ccdc~('IMG', 52444)] vs rebuilt [0x1000ba98~('IMGR', '_noop', 0)]	0	0	0
+149	_CPPpragma	i	p	528	14	17	1704	1704	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1704		0	0	0
+150	_CPPversion	i	p	256	12	13	1727	1727	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1727		0	0	0
+198	_reget_token__body	v	pi	96	17	21	973	972	0	0	0	0	0	0	0	0	0	FAULT/FAULT:973		1	0	0
+173	_ScanFromString	i	i	148	30	35	1646	0	0	0	1646	0	0	0	0	0	0	FAULT/FAULT:1646	FAULT_PARTIAL: same fault ('read', 32); stores completed before it differ: write (1543503884, 4): stock [0x1000da8c~('IMG', 55948)] vs rebuilt [0x1000baa8~('IMGR', '_str_ungetch', 0)]	0	0	0
+197	_ReadFromTokenStream	v	iii	172	27	31	1461	1461	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1461		0	0	0
+227	TIntermediate__addSwizzle	v	ppn	744	10	12	1041	1041	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1041		0	0	0
+222	TIntermediate__makeAggregate	v	ppn	632	12	21	731	731	0	0	0	0	0	0	0	0	0	FAULT/FAULT:731		0	0	0
+214	TIntermediate__addSymbol	v	pnppn	376	11	12	1062	1062	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1062		0	0	0
+226	TIntermediate__addConstantUnion	i	pppn	300	10	10	925	925	0	0	0	0	0	0	0	0	0	FAULT/FAULT:925		0	0	0
+228	TIntermediate__addLoop	v	ppppin	140	12	12	825	825	0	0	0	0	0	0	0	0	0	FAULT/FAULT:825		0	0	0
+230	__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi	v	piii	124	10	10	869	869	0	0	0	0	0	0	0	0	0	FAULT/FAULT:869		0	0	0
+238	TIntermConstantUnion__fold	v	pnppnin	276	28	19	1071	1043	1	0	0	0	0	0	0	0	0	FAULT/FAULT:1017,RET/RET:54	IMAGE_ADDR_DEP: segment 9: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)] | image data read only by stock [('IMG', 103796)], only by rebuilt [('IMG', 786712), ('IMG', 786760)]	13	0	14
+221	TIntermediate__growAggregate	i	pppn	760	60	75	1042	1038	0	0	0	0	0	0	0	0	0	FAULT/FAULT:931,RET/RET:111		4	0	0
+216	TIntermediate__addAssign	v	pnppn	640	12	13	1191	1191	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1191		0	0	0
+218	TIntermediate__addUnaryMath	v	pnpnpin	104	17	21	2336	2333	0	0	0	0	0	0	0	0	0	FAULT/FAULT:2336		3	0	0
+118	_PrintAtomTable	v	p	208	32	39	1858	1445	413	0	0	0	0	0	0	0	0	FAULT/FAULT:1858	REORDERED: same writes/reads per segment; order differs	0	0	0
+217	TIntermediate__addIndex	v	pnipn	460	11	11	1265	1265	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1265		0	0	0
+215	TIntermediate__addBinaryMath	v	pnppnp	2288	53	53	1101	1096	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1101		5	0	0
+223	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	v	ppppi	516	50	57	1166	1159	0	0	0	0	0	1	0	0	0	FAULT/FAULT:1019,RET/RET:146,UCERR/FAULT:1	EMUERR: stock UCERR [('F', 'uc', 'Unhandled CPU exception (UC_ERR_EXCEPTION) at pc 0x10000010 word 0x1000ccd4')] | rebuilt FAULT [('F', 'fetch', 536870912)]	6	0	0
+245	TIntermAggregate__addToPragmaTable	v	pp	184	23	23	173	173	0	0	0	0	0	0	0	0	0	FAULT/FAULT:173		0	0	0
+219	TIntermediate__setAggregateOperator	v	ppin	1132	25	38	1333	1332	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1333		1	0	0
+229	__ZN13TIntermediate9addBranchE9TOperatori	v	pii	12	3	3	1232	1232	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1232		0	0	0
+267	ParseBinary__errorReportTail	v	-	240	5	8	150	0	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		150	0	0
+225	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	v	ppppn	628	70	59	1229	1224	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1084,RET/RET:145		5	0	0
+239	TIntermediate__changeAggrToTempConst	i	pppn	484	22	26	1432	1428	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1432		4	0	0
+199	_UngetToken	v	ii	156	26	29	793	91	0	0	702	0	0	0	0	0	0	FAULT/FAULT:793	FAULT_PARTIAL: same fault ('read', 32); stores completed before it differ: write (1543503876, 4): stock [0x1000fcb0~('IMG', 64688)] vs rebuilt [0x1000f738~('IMGR', '_reget_token', 0)]	0	0	0
+269	ParseUnary__errorReportTail	v	-	248	5	8	150	0	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		150	0	0
+272	ParseSelection__errorReportTail	v	-	248	5	8	150	0	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		150	0	0
+275	ParseLoop__errorReportTail	v	-	248	5	8	150	0	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		150	0	0
+242	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	v	pppppp	824	39	40	552	195	152	0	196	0	0	0	0	0	0	FAULT/FAULT:552	FAULT_SITE: stock ('read', 44312) vs rebuilt ('read', 44308)	9	0	0
+246	TType__getCompleteString	i	pp	276	58	62	730	730	0	0	0	0	0	0	0	0	0	FAULT/FAULT:730		0	0	0
+277	ParseBranch__errorReportTail	v	-	248	5	8	150	0	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		150	0	0
+241	TIntermediate__promoteConstantUnion	v	pnp	436	29	31	1374	5	1277	0	86	0	0	0	0	0	0	FAULT/FAULT:1374	FAULT_PARTIAL: same fault ('read', 56); accesses completed before it differ: reads: only rebuilt reads (1342199668, 4)	6	0	0
+283	TParseContext__error__tail	v	-	324	5	10	237	86	0	0	0	0	0	0	0	0	0	FAULT/FAULT:237		151	0	0
+224	TIntermediate__addComma	v	pppn	348	40	45	1791	1782	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1791		9	0	0
+308	TParseContext__canNodeBeRemoved	i	pp	204	23	16	525	523	0	0	0	0	0	0	0	0	0	FAULT/FAULT:375,RET/RET:150		2	0	0
+300	TParseContext__insertBuiltInArrayAtGlobalLevel	v	p	740	8	8	1022	1022	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1022		0	0	0
+270	ParseAggregate	v	nppiii	232	21	24	1003	1003	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1003		0	0	0
+268	ParseUnary	v	npp	196	12	13	1240	1239	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1240		1	0	0
+303	TParseContext__nonInitErrorCheck	v	pnpp	1008	18	19	932	930	0	0	0	0	0	0	0	0	0	FAULT/FAULT:932		2	0	0
+266	ParseBinary	v	npp	248	24	22	1278	1274	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1278		4	0	0
+305	TParseContext__extensionErrorCheck	v	pnp	532	10	12	1198	1198	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1198		0	0	0
+307	TParseContext__executeInitializer	v	pnpppp	3572	27	28	943	943	0	0	0	0	0	0	0	0	0	FAULT/FAULT:943		0	0	0
+306	TParseContext__findFunction	v	pnppii	356	69	60	666	185	410	0	49	0	0	0	0	0	1	FAULT/FAULT:665,RET/RET:1	FAULT_SITE: stock ('read', 36) vs rebuilt ('read', 32)	21	0	0
+287	TParseContext__lValueErrorCheck	i	pnppiini	536	34	31	803	658	4	0	0	0	0	0	0	0	18	FAULT/FAULT:724,RET/RET:79	IMAGE_ADDR_DEP: segment 6: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)] | image data read only by stock [('IMG', 129076)], only by rebuilt [('IMG', 786712), ('IMG', 786760)]	3	0	120
+318	GetGlobalPoolAllocator	i	-	32	7	8	1009	1009	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1009		0	0	0
+315	TParseContext__initializeExtensionBehavior	v	p	380	8	9	1208	1208	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1208		0	0	0
+347	_ShDestruct	v	p	200	32	32	730	722	0	0	0	0	0	0	0	0	0	FAULT/FAULT:584,RET/RET:146		8	0	0
+319	SetGlobalPoolAllocatorPtr	v	p	32	7	8	1292	1292	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1292		0	0	0
+207	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	v	np	5284	22	23	1685	1640	0	0	0	0	0	0	1	0	0	FAULT/FAULT:1684,TIMEOUT/TIMEOUT:1		44	0	0
+302	TParseContext__arraySetMaxSize	v	pppnnn	600	84	89	763	8	501	0	217	0	0	0	0	0	0	FAULT/FAULT:762,RET/RET:1	FAULT_PARTIAL: same fault ('read', 3749875816); accesses completed before it differ: reads: only rebuilt reads (1342529424, 4)	37	0	0
+359	_ShGetNumActiveAttributes	v	p	104	26	23	521	517	0	0	0	0	0	0	0	0	0	FAULT/FAULT:373,RET/RET:148		4	0	0
+314	TParseContext__addConstStruct	v	pppnii	848	38	46	1853	1845	0	0	0	0	0	1	0	0	0	FAULT/FAULT:1852,UCERR/FAULT:1	EMUERR: stock UCERR [('F', 'uc', 'Unhandled CPU exception (UC_ERR_EXCEPTION) at pc 0x10000010 word 0x1000ccd4')] | rebuilt FAULT [('F', 'fetch', 536870912)]	7	0	0
+355	_ShGetPPStream	v	p	96	24	22	695	675	0	0	0	0	0	0	0	0	0	FAULT/FAULT:555,RET/RET:140		20	0	0
+360	_ShGetNumActiveUniforms	v	p	104	26	21	638	632	0	0	0	0	0	0	0	0	0	FAULT/FAULT:494,RET/FAULT:2,RET/RET:142		6	0	0
+350	initializeSymbolTable	v	pnpii	548	27	35	715	660	0	0	0	0	0	0	0	0	0	FAULT/FAULT:715		55	0	0
+349	generateBuiltInSymbolTable	v	pppi	112	16	17	942	942	0	0	0	0	0	0	0	0	0	FAULT/FAULT:942		0	0	0
+354	_ShGetInfoLog	v	p	244	41	43	948	810	0	0	0	0	0	0	0	0	0	FAULT/FAULT:948		138	0	0
+361	_ShGetActiveUserUniformsSize	v	p	104	26	21	579	577	0	0	0	0	0	0	0	0	0	FAULT/FAULT:430,RET/RET:149		2	0	0
+313	TParseContext__addConstMatrixNode	v	pnpn	904	81	93	1896	1677	0	0	0	0	0	0	0	0	31	FAULT/FAULT:1896	IMAGE_ADDR_DEP: segment 7: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)] | image data read only by stock [('IMG', 129076)], only by rebuilt [('IMG', 786476), ('IMG', 786712)]	10	0	178
+363	_ShGetMaxUniformLength	v	p	104	26	23	548	542	0	0	0	0	0	0	0	0	0	FAULT/FAULT:406,RET/FAULT:1,RET/RET:141		6	0	0
+362	_ShGetMaxAttributeLength	v	p	104	26	21	561	556	0	0	0	0	0	0	0	0	0	FAULT/FAULT:417,RET/RET:144		5	0	0
+196	_scan_token	v	piiiii	248	15	21	5078	114	4894	0	59	0	0	0	0	0	0	FAULT/FAULT:5078	FAULT_SITE: stock ('read', 15) vs rebuilt ('read', 19)	11	0	0
+370	_ShGetLinkerStats	v	p	84	21	18	560	559	0	0	0	0	0	0	0	0	0	FAULT/FAULT:413,RET/RET:147		1	0	0
+369	_ShGetPPStreamManager	v	pi	92	23	20	456	450	0	0	0	0	0	0	0	0	0	FAULT/FAULT:309,RET/RET:147		6	0	0
+365	_ShGetUniformTypeInfo	v	pnppp	116	29	26	714	706	0	0	0	0	0	1	0	0	0	FAULT/FAULT:572,RET/RET:141,UCERR/FAULT:1	EMUERR: stock UCERR [('F', 'uc', 'Unhandled CPU exception (UC_ERR_EXCEPTION) at pc 0x10000010 word 0x1000ccd4')] | rebuilt FAULT [('F', 'fetch', 536870912)]	7	0	0
+373	_ShGetCompilerPPStream	v	p	96	24	22	661	655	0	0	0	0	0	0	0	0	0	FAULT/FAULT:512,RET/RET:149		6	0	0
+312	TParseContext__addConstVectorNode	v	pppnii	148	37	33	1778	736	1	0	1027	0	0	0	0	0	6	FAULT/FAULT:1737,RET/RET:41	IMAGE_ADDR_DEP: segment 5: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)] | image data read only by stock [('IMG', 147928)], only by rebuilt [('IMG', 786712), ('IMG', 786760)]	4	0	4
+364	_ShGetActiveUniform	v	pnnpppp	132	33	30	1079	1005	0	0	0	0	0	0	0	0	0	FAULT/FAULT:930,RET/FAULT:2,RET/RET:147		74	0	0
+371	_ShGetCompilerStats	v	p	96	24	22	772	746	0	0	0	0	0	0	0	0	0	FAULT/FAULT:628,RET/RET:144		26	0	0
+377	_ShGetCompilerSymbolTable	v	p	96	24	22	672	667	0	0	0	0	0	0	0	0	0	FAULT/FAULT:527,RET/RET:145		5	0	0
+351	_ShCompile	v	ppnnn	1016	31	31	1798	824	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1796,RET/RET:2		974	0	0
+311	TParseContext__constructStruct	i	pppnnn	392	87	85	971	323	130	0	0	0	0	0	0	0	507	FAULT/FAULT:857,RET/FAULT:1,RET/RET:113	REORDERED: same writes/reads per segment; order differs	11	0	0
+374	_ShGetLinkerShaderToProgramString	v	p	84	21	18	2159	2148	0	0	0	0	0	0	0	0	0	FAULT/FAULT:2153,RET/RET:6		11	0	0
+375	_ShGetCompilerShaderToProgramString	v	p	96	24	22	1112	597	0	0	0	0	0	0	0	0	0	FAULT/FAULT:981,RET/RET:131		515	0	0
+378	TType__buildMangledName	v	pp	160	30	30	530	268	131	0	30	0	0	0	0	0	14	FAULT/FAULT:516,RET/RET:14	PTR_VALUE_DEP: segment 4: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	3	84	0
+380	TFunction__dump	v	pp	216	43	44	372	298	58	0	0	0	0	0	0	0	0	FAULT/FAULT:372	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	1	15	0
+358	_ShAttributeBindingRequest	v	pnp	104	21	22	1084	175	832	0	28	0	0	0	0	0	0	FAULT/FAULT:944,RET/FAULT:1,RET/RET:139	FAULT_PARTIAL: same fault ('read', 44308); accesses completed before it differ: reads: only stock reads (1543503884, 4)	49	0	0
+372	_ShGetLinkerPPStream	v	p	84	14	18	2908	2893	0	0	0	0	0	0	0	0	0	FAULT/FAULT:2908		15	0	0
+368	_ShGetUniformLocation	v	pp	112	28	27	908	267	588	0	7	0	0	1	0	0	0	FAULT/FAULT:831,RET/RET:76,UCERR/FAULT:1	FAULT_PARTIAL: same fault ('read', 40); accesses completed before it differ: reads: only stock reads (1543503884, 4)	45	0	0
+391	__ZN7TSymbolC2ERKS_	i	pp	4	1	1	366	285	74	0	0	0	0	0	0	0	0	FAULT/FAULT:366	REORDERED: same writes/reads per segment; order differs	7	0	0
+261	TIntermAggregate__traverse	v	pp	292	65	70	5346	5255	0	0	0	0	0	0	0	0	0	FAULT/FAULT:5341,RET/RET:5		91	0	0
+392	__ZN7TSymbolC1ERKS_	v	pp	4	1	1	378	219	154	0	0	0	0	0	0	0	0	FAULT/FAULT:378	REORDERED: same writes/reads per segment; order differs	5	0	0
+393	__ZN7TSymbolC4ERKS_	v	pp	164	21	21	365	273	85	0	0	0	0	0	0	0	0	FAULT/FAULT:365	REORDERED: same writes/reads per segment; order differs	7	0	0
+395	__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	v	ppp	4	1	1	379	133	241	0	0	0	0	0	0	0	0	FAULT/FAULT:379	REORDERED: same writes/reads per segment; order differs	5	0	0
+394	__ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	v	ppp	4	1	1	337	246	77	0	0	0	0	0	0	0	0	FAULT/FAULT:337	REORDERED: same writes/reads per segment; order differs	14	0	0
+396	__ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	v	ppp	432	10	10	388	336	44	0	0	0	0	0	0	0	0	FAULT/FAULT:388	REORDERED: same writes/reads per segment; order differs	8	0	0
+398	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	v	ppp	4	1	1	354	281	67	0	0	0	0	0	0	0	0	FAULT/FAULT:354	REORDERED: same writes/reads per segment; order differs	6	0	0
+399	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	v	ppp	4	1	1	381	353	24	0	0	0	0	0	0	0	0	FAULT/FAULT:381	REORDERED: same writes/reads per segment; order differs	4	0	0
+397	TVariable__clone	v	pp	76	7	7	1187	1187	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1187		0	0	0
+400	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	v	ppp	492	10	14	327	260	63	0	0	0	0	0	0	0	0	FAULT/FAULT:327	REORDERED: same writes/reads per segment; order differs	4	0	0
+401	TFunction__clone	v	pp	76	7	7	1358	1358	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1358		0	0	0
+390	TSymbolTableLevel__relateToOperator	v	ppi	168	37	39	1630	1585	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1630		45	0	0
+402	TSymbolTableLevel__clone	i	pp	352	7	9	1100	1100	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1100		0	0	0
+89	_PPStreamFree	i	p	140	35	35	5798	5637	0	0	0	0	0	0	0	0	0	FAULT/FAULT:5787,RET/RET:11		161	0	0
+406	yy_get_next_buffer	i	-	656	13	21	1476	1476	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1476		0	0	0
+420	yy_fatal_error	v	p	60	15	15	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+425	yyerror	v	piiiiiii	184	11	15	1266	1266	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1266		0	0	0
+409	yyinput	i	-	272	13	15	1427	1427	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1427		0	0	0
+412	yy_load_buffer_state	v	-	88	9	12	1444	1444	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1444		0	0	0
+426	PaReservedWord	v	-	108	15	22	1774	1774	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1774		0	0	0
+428	PaParseComment	i	pp	228	12	11	1105	1105	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1105		0	0	0
+430	_CPPWarningToInfoLog	v	p	316	16	17	1387	1387	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1387		0	0	0
+243	__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate	v	pppp	496	70	67	6082	6076	0	0	0	0	0	0	0	0	0	FAULT/FAULT:6082		6	0	0
+424	PaParseStrings	v	ppnnp	452	16	15	1638	7	0	0	1622	0	0	0	0	0	0	FAULT/FAULT:1638	FAULT_PARTIAL: same fault ('read', 32); stores completed before it differ: write (1543503884, 4): stock [0x1000da8c~('IMG', 55948)] vs rebuilt [0x1000baa8~('IMGR', '_str_ungetch', 0)]	9	0	0
+429	_CPPDebugLogMsg	v	p	92	11	12	1853	1853	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1853		0	0	0
+432	_CPPErrorToInfoLog	v	iiiiiii	104	15	20	1547	1547	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1547		0	0	0
+441	_GetStrfromTStr	i	-	80	11	13	1522	1522	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1522		0	0	0
+431	_CPPShInfoLogMsg	v	iiiiiii	100	15	19	1292	1292	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1292		0	0	0
+444	_updateExtensionBehavior	v	pi	1124	10	9	554	554	0	0	0	0	0	0	0	0	0	FAULT/FAULT:554		0	0	0
+443	_GetBehavior	i	p	484	40	39	893	893	0	0	0	0	0	0	0	0	0	FAULT/FAULT:893		0	0	0
+440	_StoreStr	i	p	448	16	17	1239	1239	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1239		0	0	0
+685	TIntermSymbol__compileNode	v	ppiiii	304	42	56	651	647	0	0	0	0	0	0	0	0	0	FAULT/FAULT:651		4	0	0
+442	_ResetTString	i	-	252	13	14	1506	1506	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1506		0	0	0
+688	TIntermUnary__compileNode	v	ppiiin	260	65	65	1680	1669	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1680		11	0	0
+693	TIntermSymbol__indirectNode	v	ppiiii	312	50	57	636	629	0	0	0	0	0	2	0	0	0	FAULT/FAULT:583,RET/RET:51,UCERR/FAULT:2	EMUERR: stock UCERR [('F', 'uc', 'Unhandled CPU exception (UC_ERR_EXCEPTION) at pc 0xa9754 word 0x76656332')] | rebuilt FAULT [('F', 'read', 536871008)]	5	0	0
+696	TIntermUnary__indirectNode	v	ppiiii	112	28	28	902	900	0	0	0	0	0	0	0	0	0	FAULT/FAULT:752,RET/RET:150		2	0	0
+405	yylex	v	pp	4128	137	185	1334	0	1334	0	0	0	0	0	0	0	0	FAULT/FAULT:1334	REORDERED: same writes/reads per segment; order differs	0	0	0
+388	__ZN17TSymbolTableLevelD1Ev	v	p	8	2	2	5979	5802	0	0	0	0	0	0	0	0	0	FAULT/FAULT:5979		177	0	0
+736	TPPStreamCompiler__getVertex	v	p	244	8	8	846	846	0	0	0	0	0	0	0	0	0	FAULT/FAULT:846		0	0	0
+404	yyparse	v	pipppipn	656	36	65	1358	0	1358	0	0	0	0	0	0	0	0	FAULT/FAULT:1358	REORDERED: same writes/reads per segment; order differs	0	0	0
+737	TPPStreamCompiler__getPosition	i	p	240	8	8	1115	1115	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1115		0	0	0
+738	TPPStreamCompiler__getMVP	v	p	248	8	8	1158	1158	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1158		0	0	0
+740	TPPStreamCompiler__newTemporary	i	pp	400	9	9	893	893	0	0	0	0	0	0	0	0	0	FAULT/FAULT:893		0	0	0
+741	TPPStreamCompiler__newAddressTemp	v	p	272	8	9	1094	1094	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1094		0	0	0
+742	TPPStreamCompiler__newReturnValue	v	ppp	352	10	10	735	735	0	0	0	0	0	0	0	0	0	FAULT/FAULT:735		0	0	0
+743	TPPStreamCompiler__newParam	v	pppn	408	11	11	1239	1239	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1239		0	0	0
+689	TIntermAggregate__compileNode	v	pppnii	1004	86	83	1746	0	1653	0	66	0	0	0	4	0	0	FAULT/FAULT:1742,TIMEOUT/TIMEOUT:4	FAULT_PARTIAL: same fault ('read', 0); accesses completed before it differ: reads: only rebuilt reads (1342227404, 4)	23	0	0
+747	TPPStreamCompiler__assignOperands	v	pppn	1892	78	84	2832	2794	18	0	0	0	0	0	0	0	0	FAULT/FAULT:2832	REORDERED: same writes/reads per segment; order differs	20	0	0
+387	__ZN17TSymbolTableLevelD2Ev	v	p	8	2	2	5771	5574	0	0	0	0	0	0	3	0	0	FAULT/FAULT:5768,TIMEOUT/TIMEOUT:3		194	0	0
+750	TPPStreamCompiler__constructDiagonal	i	ppni	1452	13	15	2047	2028	0	0	0	0	0	0	0	0	0	FAULT/FAULT:2047		19	0	0
+749	TPPStreamCompiler__constructReplicate	i	ppni	640	38	36	2382	2351	7	0	0	0	0	0	2	0	0	FAULT/FAULT:2380,TIMEOUT/TIMEOUT:2	REORDERED: same writes/reads per segment; order differs	22	0	0
+753	TPPStreamCompiler__construct	v	pppn	296	8	8	1053	1053	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1053		0	0	0
+745	TPPStreamCompiler__equalOperands	i	ppppn	2416	17	19	2286	0	2248	0	16	0	0	0	0	0	0	FAULT/FAULT:2286	FAULT_PARTIAL: same fault ('read', 15); accesses completed before it differ: reads: only stock reads (1342610212, 4)	22	0	0
+751	TPPStreamCompiler__constructElement	i	pppn	1744	20	24	2405	2377	0	0	0	0	0	1	0	0	0	FAULT/FAULT:2404,UCERR/FAULT:1	EMUERR: stock UCERR [('F', 'uc', 'Unhandled CPU exception (UC_ERR_EXCEPTION) at pc 0x10000010 word 0x1000ccd4')] | rebuilt FAULT [('F', 'fetch', 536870912)]	27	0	0
+687	TIntermBinary__compileNode	v	ppipii	3444	104	129	1989	1890	4	11	0	0	0	0	11	0	0	FAULT/FAULT:1978,TIMEOUT/TIMEOUT:11	READ_SET: segment 5: only stock reads (1342233892, 4)	73	0	0
+389	__ZN17TSymbolTableLevelD4Ev	v	pi	184	27	38	5973	5772	0	0	0	0	0	0	1	0	0	FAULT/FAULT:5972,TIMEOUT/TIMEOUT:1		200	0	0
+759	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_	v	pppp	108	16	18	2356	0	2295	0	15	0	0	0	0	0	0	FAULT/FAULT:2356	FAULT_PARTIAL: same fault ('read', 0); accesses completed before it differ: reads: only stock reads (1342202720, 4)	46	0	0
+760	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_	v	ppppp	128	19	20	2592	0	2507	0	35	0	0	0	0	0	0	FAULT/FAULT:2592	FAULT_PARTIAL: same fault ('read', 8); accesses completed before it differ: reads: only rebuilt reads (1342547288, 4)	50	0	0
+366	_ShGetActiveAttrib	v	pnnpppp	132	33	30	919	905	0	0	0	0	0	1	0	0	0	FAULT/FAULT:774,RET/RET:144,UCERR/FAULT:1	EMUERR: stock UCERR [('F', 'uc', 'Unhandled CPU exception (UC_ERR_EXCEPTION) at pc 0x10000010 word 0x1000ccd4')] | rebuilt FAULT [('F', 'fetch', 536870912)]	13	0	0
+887	_PPCRuntimeCompilerDirtyRegistersWithData	v	piiiiiiiiii	436	63	72	159	159	0	0	0	0	0	0	0	0	0	FAULT/FAULT:159		0	0	0
+895	_PPCRuntimeCompilerGetOffsetInRegister	i	pn	88	17	21	198	99	0	0	87	0	0	0	0	0	11	FAULT/FAULT:198	FAULT_SITE: stock ('read', 234281691) vs rebuilt ('read', 234281619)	1	0	0
+899	_PPCRuntimeCompilerLoadSourceNO	v	piiiiiiiiiin	348	42	46	157	156	0	0	0	0	0	0	0	0	0	FAULT/FAULT:157		1	0	0
+381	TSymbolTableLevel__dump	v	pp	112	23	28	5938	5761	0	0	0	0	0	0	3	0	0	FAULT/FAULT:5935,TIMEOUT/TIMEOUT:3		174	0	0
+998	_PPStreamAddLabel	v	pip	128	22	23	953	951	0	0	0	0	0	0	0	0	0	FAULT/FAULT:953		2	0	0
+697	TIntermAggregate__indirectNode	v	ppiiii	232	34	41	4273	5	4060	0	33	0	0	0	0	0	0	FAULT/FAULT:4273	FAULT_PARTIAL: same fault ('read', 0); accesses completed before it differ: reads: only rebuilt reads (1342377616, 4)	175	0	0
+301	TParseContext__arrayErrorCheck	v	pppnnnnnpip	2552	98	67	5997	4	4947	0	750	0	0	0	0	0	0	FAULT/FAULT:5997	FAULT_SITE: stock ('read', 2050701243) vs rebuilt ('read', 2050701247)	296	0	0
+383	__ZN9TFunctionD2Ev	v	p	8	2	1	5993	3	5487	0	0	0	0	0	0	0	0	FAULT/FAULT:5993	REORDERED: same writes/reads per segment; order differs	503	0	0
+386	__ZN9TFunctionD4Ev	v	p	236	54	50	5904	7	5613	0	0	0	0	0	0	0	0	FAULT/FAULT:5903,RET/RET:1	REORDERED: same writes/reads per segment; order differs	284	0	0
+769	TPPStreamCompiler__parseIntermediateTree	i	pp	480	111	106	4441	8	4194	0	0	0	0	0	0	0	0	FAULT/FAULT:4404,RET/RET:37	REORDERED: same writes/reads per segment; order differs	239	0	0
+384	__ZN9TFunctionD1Ev	v	p	8	2	1	5922	3	5656	0	0	0	0	1	0	0	0	FAULT/FAULT:5921,UCERR/FAULT:1	REORDERED: same writes/reads per segment; order differs	262	0	0
+1174	std____throw_bad_exception	v	-	68	17	17	1896	0	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1896	PTR_VALUE_DEP: segment 1: write (1543503880, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	1896	0
+1176	std____throw_bad_cast	v	-	68	17	17	1563	0	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1563	PTR_VALUE_DEP: segment 1: write (1543503880, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	1563	0
+1175	std____throw_bad_alloc	v	-	68	17	17	1968	0	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1968	PTR_VALUE_DEP: segment 1: write (1543503880, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	1968	0
+1177	std____throw_bad_typeid	v	-	68	17	17	1476	0	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1476	PTR_VALUE_DEP: segment 1: write (1543503880, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	1476	0
+1178	std____throw_logic_error	v	p	108	24	25	1425	16	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1425	PTR_VALUE_DEP: segment 1: write (1543503880, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	1409	0
+1179	std____throw_domain_error	v	p	108	24	25	1584	17	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1584	PTR_VALUE_DEP: segment 3: write (1543503912, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	1567	0
+352	_ShLink	v	ppnii	200	35	35	4998	159	4574	0	0	0	0	0	1	0	2	FAULT/FAULT:4997,TIMEOUT/TIMEOUT:1	REORDERED: same writes/reads per segment; order differs	262	0	0
+690	TIntermSelection__compileNode	v	ppiiipii	2232	179	207	1341	1149	0	0	0	0	0	0	44	0	95	FAULT/FAULT:1221,FAULT/TIMEOUT:1,RET/RET:76,TIMEOUT/TIMEOUT:43		53	0	0
+1180	std____throw_invalid_argument	v	p	108	24	25	1540	19	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1540	PTR_VALUE_DEP: segment 1: write (1543503880, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	1521	0
+1181	std____throw_length_error	v	p	108	24	25	1697	17	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1697	PTR_VALUE_DEP: segment 1: write (1543503880, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	15	1665	0
+376	_ShGetLinkerBindingTable	v	p	84	21	18	564	459	0	0	0	0	0	0	10	0	0	FAULT/FAULT:498,RET/RET:56,TIMEOUT/TIMEOUT:10		95	0	0
+1198	__ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIS_SsEES2_	v	pnn	36	5	2	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+1199	__ZNSs13_S_copy_charsEPcPKcS1_	v	ppp	36	5	2	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+1200	__ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIPKcSsEES4_	v	pnn	36	5	2	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+1184	std____throw_range_error	v	p	108	24	25	1403	22	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1403	PTR_VALUE_DEP: segment 3: write (1543503912, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	1381	0
+1182	std____throw_out_of_range	v	p	108	24	25	1386	21	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1386	PTR_VALUE_DEP: segment 3: write (1543503912, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	1365	0
+1186	std____throw_underflow_error	v	p	108	24	25	1452	23	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1452	PTR_VALUE_DEP: segment 3: write (1543503912, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	1429	0
+1185	std____throw_overflow_error	v	p	108	24	25	1388	13	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1388	PTR_VALUE_DEP: segment 3: write (1543503896, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	1375	0
+1207	__ZNSs9_M_mutateEmmm	v	pnnn	260	44	50	990	9	64	0	52	0	0	0	0	0	0	FAULT/FAULT:990	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	1	864	0
+1183	std____throw_runtime_error	v	p	108	24	25	1752	17	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1752	PTR_VALUE_DEP: segment 3: write (1543503912, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	1735	0
+1284	__ZNSs6insertEmRKSsmm	v	pnpnn	388	67	67	868	139	30	0	0	0	0	0	0	0	0	FAULT/FAULT:868	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	1	698	0
+1295	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm	v	pnnpn	96	19	19	835	137	26	0	0	0	0	0	0	0	0	FAULT/FAULT:835	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	1	671	0
+1288	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEc	v	ppni	148	22	23	842	104	20	0	0	0	0	0	0	0	0	FAULT/FAULT:842	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	1	717	0
+1285	__ZNSs6insertEmRKSs	v	pnp	332	60	54	834	145	16	0	0	0	0	0	0	0	0	FAULT/FAULT:831,RET/RET:3	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	4	669	0
+1298	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc	v	pnnni	180	32	32	573	135	29	0	0	0	0	0	0	0	0	FAULT/FAULT:573	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	5	404	0
+1289	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEE	v	ppn	128	17	18	748	151	15	0	0	0	0	0	0	0	0	FAULT/FAULT:748	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	1	581	0
+1371	__ZSt13__destroy_auxIPSsEvT_S1_12__false_type	i	ppi	76	14	13	336	335	0	0	0	0	0	0	0	0	0	FAULT/FAULT:336		1	0	0
+1373	___cxa_pure_virtual	v	-	48	12	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+1494	__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE	v	pnnpnpnp	244	14	14	168	165	0	0	1	0	0	0	0	0	0	FAULT/FAULT:168	FAULT_SITE: stock ('read', 4194304) vs rebuilt ('read', 536870912)	2	0	0
+1300	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S2_S2_	v	pnnpn	96	19	19	985	115	11	0	0	0	0	0	0	0	0	FAULT/FAULT:985	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	859	0
+1528	___cxa_call_unexpected_97c19d00	v	p	232	8	8	1606	1606	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1606		0	0	0
+1529	__cxxabiv1____terminate	i	p	28	6	7	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+1530	std__terminate	i	-	56	14	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+1531	__cxxabiv1____unexpected	i	p	28	6	7	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+1532	std__unexpected	v	-	56	14	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+1365	std__string___M_replace_safe_char__	i	pnnnn	164	28	27	738	12	69	0	76	0	0	0	0	0	0	FAULT/FAULT:738	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	581	0
+250	OutputUnary	v	npp	224	26	28	800	435	0	0	0	0	0	0	42	0	268	FAULT/FAULT:758,TIMEOUT/TIMEOUT:42		55	0	0
+1363	__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_	i	pnnnn	168	29	28	844	4	38	0	75	0	0	0	0	0	0	FAULT/FAULT:844	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	727	0
+1535	___cxa_begin_catch	i	p	108	8	9	1831	1830	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1831		1	0	0
+1541	___eprintf	v	piii	76	19	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+1551	___frame_state_for	v	np	236	16	16	1623	1623	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1623		0	0	0
+1517	___cxa_throw	i	pii	216	30	33	1502	42	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1502	PTR_VALUE_DEP: segment 0: write (1342487232, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	1460	0
+1536	___cxa_end_catch	i	-	144	7	6	1979	1979	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1979		0	0	0
+1537	__ZSt18uncaught_exceptionv	v	-	44	5	6	1920	1920	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1920		0	0	0
+1554	_uw_init_context_1	v	pii	132	16	17	1391	1391	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1391		0	0	0
+1584	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_	v	pp	4	1	1	1159	1159	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1159		0	0	0
+1580	_examine_objects	i	ipn	556	20	29	1393	1393	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1393		0	0	0
+1585	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_	v	pp	148	8	9	856	856	0	0	0	0	0	0	0	0	0	FAULT/FAULT:856		0	0	0
+1603	TType__setTypeName	v	pp	132	15	16	295	293	0	0	0	0	0	0	0	0	0	FAULT/FAULT:295		2	0	0
+1550	_uw_frame_state_for	i	pp	328	17	18	1428	40	1388	0	0	0	0	0	0	0	0	FAULT/FAULT:1428	REORDERED: same writes/reads per segment; order differs	0	0	0
+1604	TType__setFieldName	v	pp	132	15	16	259	257	0	0	0	0	0	0	0	0	0	FAULT/FAULT:259		2	0	0
+1691	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_	i	ppp	340	20	22	910	910	0	0	0	0	0	0	0	0	0	FAULT/FAULT:910		0	0	0
+1590	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert	v	ppppp	356	22	25	1125	9	1048	0	67	0	0	0	0	0	0	FAULT/FAULT:1125	FAULT_SITE: stock ('read', 1103677732) vs rebuilt ('read', 1103677756)	1	0	0
+1699	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_St18input_iterator_tag	i	pippp	172	10	10	905	905	0	0	0	0	0	0	0	0	0	FAULT/FAULT:905		0	0	0
+1366	__ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_	i	pnnpp	164	28	27	1194	4	31	0	40	0	0	0	0	0	0	FAULT/FAULT:1194	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	2	1117	0
+1689	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_mm	v	ppnn	180	28	26	1140	823	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1140	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	1	316	0
+1688	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_mm	v	ppnn	4	1	1	766	435	0	0	0	0	0	0	0	0	0	FAULT/FAULT:766	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	331	0
+1700	std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert	v	ppppp	356	22	25	892	6	800	0	86	0	0	0	0	0	0	FAULT/FAULT:892	FAULT_SITE: stock ('read', 905445260) vs rebuilt ('read', 905445284)	0	0	0
+1618	std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy	v	iiiiiiippp	280	15	18	1129	30	1021	0	75	0	0	0	0	0	0	FAULT/FAULT:1129	FAULT_SITE: stock ('read', 20) vs rebuilt ('read', 44)	3	0	0
+1731	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_	i	ppp	64	7	7	1164	1164	0	0	0	0	0	0	0	0	0	FAULT/FAULT:1164		0	0	0
+1698	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_	i	pnnpp	152	25	25	765	3	54	0	63	0	0	0	0	0	0	FAULT/FAULT:765	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	9	636	0
+1714	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7replaceEN9__gnu_cxx17__normal_iteratorIPcS3_EES7_mc	v	pnnnn	160	27	29	789	77	68	0	19	0	0	0	0	0	0	FAULT/FAULT:789	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	5	620	0
+1702	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcS3_EEEERS3_S8_S8_T_SA_	i	pnnpn	152	25	25	870	3	39	0	86	0	0	0	0	0	0	FAULT/FAULT:870	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	0	742	0
+1361	std__string___M_replace_char__	i	piipp	148	26	25	930	5	31	0	74	0	0	0	0	0	0	FAULT/FAULT:930	PTR_VALUE_DEP: segment 3: write (1543503928, 4): stock [0x1009ee0c~('IMG', 650764)] vs rebuilt [0x100ba3c0~('IMGR', '__ZSt9terminatev', 0)]	5	815	0
+744	TPPStreamCompiler__newIndirectOperandFromConstant	v	ppp	2092	188	334	1797	1687	0	0	94	0	0	0	0	0	0	FAULT/FAULT:1797	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: write (2131746936, 4): stock [1, 61] vs rebuilt [1, 1342371176]	16	0	0
+783	TPPStreamCompiler__compile	v	pp	332	36	43	5034	4	4756	0	0	0	0	0	0	0	6	FAULT/FAULT:5034	REORDERED: same writes/reads per segment; order differs	268	0	0
+252	OutputSelection	v	npp	516	24	29	1467	568	0	0	0	0	0	0	53	0	844	FAULT/FAULT:1414,TIMEOUT/TIMEOUT:53		2	0	0
+1056	_glpPPShaderLinearizeStreamMgr	v	in	320	66	62	4674	475	0	0	0	0	0	0	3	0	3197	FAULT/FAULT:4668,RET/RET:3,TIMEOUT/TIMEOUT:3	IMAGE_DATA_DEP: segment 1: write (1543503880, 4): stock [0x100904a4~('IMG', 591012)] vs rebuilt [0x100a63e0~('IMGR', '_regHashFunction', 0)] | image data read differs at ('IMG', 36388) stock 68 rebuilt 56	207	173	619
+175	_lFloatConst	v	pnnp	588	44	25	530	529	0	0	0	0	0	0	0	0	0	FAULT/FAULT:530		1	0	0
+1707	std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TPoolAllocator__tAllocState__std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState______gnu_cxx____normal_iterator_TPoolAllocator__tAllocState__std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState____	i	pppn	92	23	18	5750	7	0	0	5733	0	0	0	10	0	0	FAULT/FAULT:5740,TIMEOUT/TIMEOUT:10	FAULT_SITE: stock ('write', 2463783797) vs rebuilt ('write', 2463783793)	0	0	0
+248	OutputSymbol	v	ppiiii	268	16	22	774	432	0	0	0	0	0	0	79	0	260	FAULT/FAULT:695,TIMEOUT/FAULT:7,TIMEOUT/TIMEOUT:72		3	0	0
+249	OutputBinary	v	npp	248	29	30	663	491	0	0	0	0	0	0	69	0	65	FAULT/FAULT:594,TIMEOUT/TIMEOUT:69		38	0	0
+1028	_glpPPShaderToProgram	v	pii	472	34	35	215	48	0	97	23	0	0	0	40	0	0	FAULT/FAULT:175,TIMEOUT/TIMEOUT:40	IMAGE_ADDR_DEP: segment 3: only rebuilt writes (1543524420, 1) = [48] | image data read only by stock [('IMG', 552232), ('IMG', 552236)], only by rebuilt [('IMG', 552464), ('IMG', 552468)]	3	0	4
+961	_PPEmulatorBuild	v	piiiii	576	87	89	906	87	511	251	5	0	0	0	50	0	0	FAULT/FAULT:849,RET/RET:7,TIMEOUT/TIMEOUT:50	READ_SET: segment 4: only stock reads (1543507460, 4)	2	0	0
+774	__ZN17TPPStreamCompilerD1Ev	v	p	8	2	2	6074	5383	501	0	0	0	0	0	1	0	0	FAULT/FAULT:6073,TIMEOUT/TIMEOUT:1	REORDERED: same writes/reads per segment; order differs	189	0	0
+544	TGenericLinker__GetFullTableString	i	p	152	11	38	373	206	0	0	0	0	0	0	41	0	0	FAULT/FAULT:324,FAULT/RET:8,TIMEOUT/TIMEOUT:41		126	0	0
+773	__ZN17TPPStreamCompilerD2Ev	v	p	8	2	2	5915	89	5485	0	0	0	0	0	4	0	1	FAULT/FAULT:5911,TIMEOUT/TIMEOUT:4	REORDERED: same writes/reads per segment; order differs	336	0	0
+775	__ZN17TPPStreamCompilerD0Ev	v	p	8	2	2	6144	47	5777	0	0	0	0	0	1	0	0	FAULT/FAULT:6143,TIMEOUT/TIMEOUT:1	REORDERED: same writes/reads per segment; order differs	319	0	0
+1135	_FlattenIf	v	ppnn	3384	469	558	6142	3	980	0	0	0	0	0	1	0	4858	FAULT/FAULT:6141,TIMEOUT/TIMEOUT:1	REORDERED: same writes/reads per segment; order differs	300	0	0
+345	_ShInitialize	v	-	360	54	62	150	0	0	0	0	0	0	0	150	0	0	TIMEOUT/TIMEOUT:150		0	0	0
+776	__ZN17TPPStreamCompilerD4Ev	v	pn	536	82	85	6077	5342	583	0	0	0	0	0	1	0	0	FAULT/FAULT:6076,TIMEOUT/TIMEOUT:1	REORDERED: same writes/reads per segment; order differs	151	0	0
+1138	_ClearDestedRegisters	v	iipn	92	18	20	2205	28	2060	0	0	0	0	0	45	0	0	FAULT/FAULT:2160,TIMEOUT/TIMEOUT:45	REORDERED: same writes/reads per segment; order differs	72	0	0
