@@ -2585,6 +2585,12 @@ loopSetLastHeader:
           cmdWrite[regionQuadRectBRIdx] = topMasked | (dstRectBottomClamped & 0x1fff) << 0xd;
           cmdWrite[regionQuadDrawHeaderIdx] = 0xc00c3500;
           cmdWrite[regionQuadVertexFormatIdx] = 0x4003d;
+          /* The stock spills the four texture coordinates (stfs 0x6e5c..0x6e68) BEFORE the quad words that read them back through scratchWord*Ptr;
+             Ghidra moved the spill below those reads (it cannot see the pointer alias), so the quad read stale / uninitialised slots. */
+          scratchWord0 = (uint)GH_F2U((float)(texBottomV));
+          scratchWord1 = (uint)GH_F2U((float)(texTopV));
+          scratchWord2 = (uint)GH_F2U((float)(texLeftU));
+          scratchWord3 = (uint)GH_F2U((float)(texRightU));
           cmdWrite[regionQuadVtx0PosIdx] = dstRectLeft | dstRectBottomClamped << 0x10;
           scratchWord2Copy = *scratchWord2Ptr;
           cmdWrite[regionQuadVtx0UIdx] = scratchWord2Copy;
@@ -2609,10 +2615,6 @@ loopSetLastHeader:
           needsSetupBlock = false;
           cmdWrite = cmdWrite + regionQuadPacketWordsIdx;
           rectBottomY = (int)*rectYPtr + (int)*rectHeightPtr;
-          scratchWord0 = (uint)GH_F2U((float)(texBottomV));
-          scratchWord1 = (uint)GH_F2U((float)(texTopV));
-          scratchWord2 = (uint)GH_F2U((float)(texLeftU));
-          scratchWord3 = (uint)GH_F2U((float)(texRightU));
           if (0xfff < rectBottomY) {
             i2dHi23 = 0x43300000;
             overflowBoundaryY = dstOffsetY + 0x1000;
