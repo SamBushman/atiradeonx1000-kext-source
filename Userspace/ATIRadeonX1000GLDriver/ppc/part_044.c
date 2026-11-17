@@ -11356,17 +11356,10 @@ setSourceDef:
         }
         else {
 checkInst:
-          if ((inst[0x20] != 0) &&
-             (flagBit0Result = RegKind__flagBit0(inst[0x26]), flagBit0Result != 0) &&
-             ((inst[5] & 2U) == 0) &&
-             (isUndefined = (**(code **)(*inst + 0x50))(inst), isUndefined == 0) &&
-             ((inst[5] & 0x40U) == 0) &&
-             (((inst[5] & 0x20U) != 0) ||
-              (schedulerAllocRegEnabled = Compiler__isOptionEnabled(*scheduler,0x25), schedulerAllocRegEnabled == 0))) {
-            newVirtualReg = *(int *)(*scheduler + 0x3c4) + 1;
-            *(int *)(*scheduler + 0x3c4) = newVirtualReg;
-            inst[0x25] = newVirtualReg;
-          }
+          /* The stock skips straight to the loop advance (0x16b038 `lwz r2,8(r28)`) when the instruction is an entry/exit
+           * (vslot 0x34 / 0x38 nonzero) and when the new-virtual-register tests above fail; its only inst[0x25] store is at
+           * 0x16a6d0 on the path that passed them. A second copy of the tests with the allocation here made the rebuilt number
+           * entry/exit instructions the stock leaves alone (found by trace_diff.py, row Scheduler__scheduleBlock). */
           nextInst = (int *)inst[2];
         }
       }

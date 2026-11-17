@@ -291,7 +291,11 @@ class Sim:
             if hook:
                 nm = hook
                 if nm.lstrip('_') == 'cxa_atexit': uc.reg_write(UC_PPC_REG_0 + 4, 0); uc.reg_write(UC_PPC_REG_0 + 5, self.slide)      # the stock's own atexit(f) is __cxa_atexit(f, 0, __dso_handle) (it reads the handle = the image base, then registers through keymgr)
-            else: idx = (addr - CALLOUT) // 16; nm = self.names[idx]
+            else:
+                idx = (addr - CALLOUT) // 16
+                if idx >= len(self.names):          # a wild branch into the call-out window past the last registered stub (found: ValueKey__setOperandFromValueKey): no such function, the same as any other wild branch into non-code
+                    self.ev.append(('F', 'wild', self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
+                nm = self.names[idx]
             sp = uc.reg_read(UC_PPC_REG_1)
             na = (self.nargs or {}).get(nm.lstrip('_'), self.LIBC.get(nm.lstrip('_'), 8))
             if nm.lstrip('_') in self.MATHF: na = self.MATHF[nm.lstrip('_')]
@@ -807,7 +811,9 @@ def load_row(ledger, name):
 
 def same_run(x, y):
     """is run x indistinguishable from run y (same status, events, return registers)?  Used to detect a dependence on uninitialised stack: the two stack fills must give the same run."""
-    if x[0] != y[0] or x[1] != y[1]: return False
+    nv_ = int(os.environ.get('TD_VCB_ARGS', '1'))       # the same vcb argument rule as compare(): words beyond the first TD_VCB_ARGS of a call-out are leftover registers (found: Program__applySourceTokenToOperand, r6 of a vcb call differed between stack fills while every compared field was equal)
+    cut = lambda ev: [(e[0], e[1], e[2][:nv_]) + tuple(e[3:]) if e[0] == 'C' and e[1] == 'vcb' else e for e in ev]
+    if x[0] != y[0] or cut(x[1]) != cut(y[1]): return False
     if x[0] == 'RET': return all(x[2][k] == y[2][k] for k in ('r1', 'nv', 'fnv', 'r3', 'f1'))
     return True
 

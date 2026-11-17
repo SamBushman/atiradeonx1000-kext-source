@@ -30,6 +30,8 @@ EXPLAINED = {# ILReader__decodeInstruction / nextInstruction: the stock indexes 
   'Program__assignExportSlotsByKind': ('STOCK_BUG_283', 'PASS'),
   # R300VMachineAssembler__findFoldableMovePair: the stock evaluates `lwz r3,0x88(this)` as the first argument of the helper at 0x19a538, which reads only r4 (stock 0x19a540 `lwz r2,0x88(r4)`; r3 is never used): a dead argument load
   'R300VMachineAssembler__findFoldableMovePair': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
+  # gld_reserveVertexBufferSpace: its callee chain reaches gld_setPrimitiveInputRegisters with primitiveMode 0xffff (the stored vertex limit) and reads primitiveInputRegisterTable_001aa7a8[mode*4] unchecked: stock reads image offset 0x1aa7a8+0x3fffc = 2008996 (mapped), the rebuilt 0x101d2950+0x3fffc = 0x1021294c (past its image; fault 270608716)
+  'gld_reserveVertexBufferSpace': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
 'Program__interpSlotOfIlType': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'KhanPs__vslot62_lookupTableEntry': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'opcodeInfoIsVsFlagBit2': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), '_gleAllocVertexMachine': ('REBUILT_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogExp': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogExp2': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogLinear': ('STOCK_HOISTED_LOAD', 'PASS'),
              'R300MachineAssembler__vslot65_declareNodeRegisters': ('STOCK_DEAD_ARG_LOAD', 'PASS'), 'R520MachineAssembler__vslot65_declareNodeRegisters': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
              'opcodeInfoRgbHwOpcode': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'gld_applyAnisotropyOverride': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
@@ -86,6 +88,7 @@ EXPLAINED_ANY = {'Compiler__getOrCreateLoadConstN': ('UNINIT_REBUILT', 'OOB_LOCA
     'GetPreprocessorBuiltinString': ('LAYOUT_ALL', 'RETURNS_IMAGE_CONTENT_VERIFIED', 'PASS'),
     'GetResources': ('LAYOUT_ALL', 'RETURNS_IMAGE_CONTENT_VERIFIED', 'PASS'),
     'GetGLStringForType': ('LAYOUT_ALL', 'RETURNS_IMAGE_CONTENT_VERIFIED', 'PASS'),
+    'vsdisFlowOpcodeName': ('LAYOUT_ALL', 'RETURNS_IMAGE_CONTENT_VERIFIED', 'PASS'),      # GLDriver: returns a string literal; the C strings returned for flowOpcode -2..299 (incl. 8, 9, 0x35, 0x3e, 0x53) are equal in both images (302 inputs, 0 differ)
     'getQualifierString': ('LAYOUT_ALL', 'RETURNS_IMAGE_CONTENT_VERIFIED', 'PASS')}      # libGLProgrammability EVIDENCE_trace_diff.md: both images index a 0x24-byte local copy with an unchecked record field
 def worst2(r):
     w = worst(r)
