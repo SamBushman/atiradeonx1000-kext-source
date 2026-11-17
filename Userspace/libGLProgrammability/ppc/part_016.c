@@ -2967,7 +2967,6 @@ int _glpPPDisassemble(program)
   int labelCount;
   int nextLabelNumber;
   uint printOptions;
-  char *dataBase;
   int cr0Image;
   int cr0Image2;
   
@@ -3061,7 +3060,6 @@ loopSetCh:
   loopIndex = 0;
   optionsOffset = program[0x13];
   if (0 < (int)optionCount) {
-    dataBase = "o intialize the Preprocessor";
     do {
       ch = 'O';
       copyIndex2 = 0;
@@ -3219,11 +3217,11 @@ loopSetCh:
       outBytePtr = outBytePtr + copyLength2;
 programDefault:
       copyIndex5 = 0;
-      ch = dataBase[0x3bbc];
+      ch = ';';  /* stock reads this string at (address of the cstring "o intialize the Preprocessor") + 0x3bbc = ";\n" (stock cstring 0xaed3c + 0x3bbc); the rebuilt image lays the literals out differently */
       while (ch != '\0') {
         outBytePtr[copyIndex5] = ch;
         copyIndex5 = copyIndex5 + 1;
-        ch = (dataBase + 0x3bbc)[copyIndex5];
+        ch = ";\n"[copyIndex5];
       }
       outCursor = (int *)(outBytePtr + copyIndex5);
       callResultPair = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
@@ -3545,7 +3543,6 @@ loopSetOutCursor2:
       }
       else {
         if (tempTable[loopIndex10 * 2 + 2] >> 0x1d != tempPrecisionClass) {
-          dataBase = "o intialize the Preprocessor";
           ch = ';';
           copyIndex4 = 0;
           do {
@@ -5526,7 +5523,6 @@ setLoopIndex2:
   outCursor = (int *)((int)outCursor + copyLength3);
   loopIndex5 = 0;
   if (0 < (int)stateCount) {
-    dataBase = "o intialize the Preprocessor";
     do {
       ch = 'S';
       rasterStateWord0 = program[stateOffset * 2 + loopIndex5 * 2];
@@ -7179,11 +7175,11 @@ programDefault9:
       outCursor = (int *)((int)outCursor + nextIndex);
 rasterStateWord0Default:
       copyIndex6 = 0;
-      ch = dataBase[0x3bbc];
+      ch = ';';  /* see programDefault above: the stock string at (cstring "o intialize the Preprocessor") + 0x3bbc is ";\n" */
       while (ch != '\0') {
         *(char *)((int)outCursor + copyIndex6) = ch;
         copyIndex6 = copyIndex6 + 1;
-        ch = (dataBase + 0x3bbc)[copyIndex6];
+        ch = ";\n"[copyIndex6];
       }
       outCursor = (int *)((int)outCursor + copyIndex6);
       callResultPair = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
