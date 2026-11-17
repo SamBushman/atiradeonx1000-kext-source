@@ -3620,6 +3620,9 @@ int TPPStreamCompiler__getConstantAsSourceVar(outDesc, compiler, values, valueCo
   ushort usageGlTypes [8];
   int mergedLaneFlags [5];
   
+  /* issue #306 (stock bug): usageGlTypes is written only by ConstantAllocationList__getConstantUsage, which runs only when the compiler mode (+0xc4) is 3, but the chunk loops compare
+     usageGlTypes[0] with glType in every mode (stock 0x4d634 `lhz r0,0x60(r1)` with no store on the other paths): the comparison reads stale stack. Start from 0 (no usage reported). */
+  usageGlTypes[0] = 0;
   if (*(int *)(compiler + 0xc4) != 1) {
     exactMatchFound = false;
     laneUsed[1] = laneUsedInit1_97c39254;
