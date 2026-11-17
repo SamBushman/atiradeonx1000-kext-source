@@ -15,7 +15,7 @@ Tool changes this needed (`trace_diff.py`): `io_connect_method_scalarI_structure
 buffers (scalar words / structure bytes) instead of the caller's address of them: the stock spills an argument into its caller's parameter area and passes that address, the rebuilt corpus passes a local (`__WaitComplete`: same word, different address).
 
 ## Update Nov 17: ENTRYARGS + heap/repair census, defect #302, image ga_i302
-Mode: `TD_ENTRYARGS=1 TD_HEAP=1 TD_REPAIR=12 TD_ARITY_FILE=arity_ga.tsv` (`controls/arity_gen.py` on this corpus), the same 35-row ledger, 150 coverage-guided inputs per row. `TD_HEAP=1 TD_REPAIR=12` lets the inputs reach deeper paths (each pointer argument gets a repaired, valid object; 12 retries after a fault in the stock):
+Mode: `TD_ENTRYARGS=1 TD_HEAP=1 TD_REPAIR=12 TD_ARITY_FILE=arity_ga.tsv` (`controls/arity_gen.py` on this corpus), the same 35-row ledger, 150 coverage-guided inputs per row. `TD_HEAP=1` makes malloc/calloc/realloc return zeroed blocks of a bump heap (same sequence in both images), `TD_REPAIR=12` re-runs a trial up to 12 times after both images fault on a null/unmapped pointer, with the pointer's source in the input patched to a sub-object (lazy object-graph materialisation); the inputs reach deeper paths:
 `_radeonCopyRegionBody` goes from 17 to 138 RET/RET trials, which is how the defect below was reached. The first run on the image of 17d835a2^ (`ga_rebuilt`, corpus unchanged since Nov 12) gave gate FAIL 1, PASS 34.
 
 ### Defect found: #302 (fixed)
