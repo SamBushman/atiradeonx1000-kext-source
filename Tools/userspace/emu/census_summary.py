@@ -49,6 +49,14 @@ EXPLAINED = {# ILReader__decodeInstruction / nextInstruction: the stock indexes 
              '_glResetHistogram_Exec': ('STOCK_HOISTED_LOAD', 'PASS'), '_glResetHistogram_ListExec': ('STOCK_HOISTED_LOAD', 'PASS'), '_glGetPixelMapfv_Exec': ('STOCK_HOISTED_LOAD', 'PASS'),
              # libGLProgrammability extended census (EVIDENCE_trace_diff.md): #225 deliberate guard of a stock out-of-table write; a dead argument load of the stock (`lwz r0,0(r4); stw r0,-0x20(r1); blr`)
              'std____default_alloc_template_true_0____S_refill': ('STOCK_BUG_225', 'PASS'),
+    # libGLProgrammability ENTRYARGS census (Nov 17), EVIDENCE_trace_diff.md "ENTRYARGS census": _PPParserGetPart overruns its 260-byte replaceBuf in the stock for a replacement >= 260 bytes (issue #305, rebuilt sizes the buffer from the length-only call); stock then faults on the smashed frame where the rebuilt returns
+    '_PPParserGetPart': ('STOCK_BUG_305', 'PASS'), '_PPParserParseOperation': ('STOCK_BUG_305', 'PASS'),
+    # the stock reads the uninitialised halfword usageGlTypes[0] (0x60(r1)) in getConstantAsSourceVar (issue #306); with TD_STOCK_ZERO_LOCAL=4d508:60:2 (stock local zeroed = the rebuilt's initialisation) the row is identical
+    'TPPStreamCompiler__constructElement': ('STOCK_BUG_306', 'PASS'),
+    # the stock hoists `lfs 4(r6)` / `lfs 0(r6)` (the coordinate pointer) above the sampler-type switch; on the path that leaves without using them the load is dead (stock 0x5a168/0x5a16c, exit 0x5a524): relaxed gate (dead ordinary load)
+    '_InterpreterTextureSamplerSampleTexelRECTFromLevel': ('STOCK_HOISTED_LOAD', 'PASS'),
+    # both images load the same invalid pointer (0x19, from the same global slot 0xe28(r30) / 0(r17)) and fault on it: the stock with `stw r0,0x118(r2)` (address 305), the rebuilt with the earlier `lwz r26,0(r2)` (address 25); order of two ordinary accesses to the same bad pointer
+    '_PPCRuntimeCompilerCompileAV': ('SAME_INVALID_POINTER_ACCESS_ORDER', 'PASS'),
              '__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
              # GLDriver extended census (Nov 16): stock loads this+0xa4 and never uses it; the rebuilt inlined callees do not
              'R300MachineAssembler__classifyAluOperation': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
@@ -89,6 +97,15 @@ EXPLAINED_ANY = {'Compiler__getOrCreateLoadConstN': ('UNINIT_REBUILT', 'OOB_LOCA
     # Program__buildBlockArrayByKey: the loop count *(*(compiler+0x30c)+0x4c) is a random 0x7ffffff.. in the trial; the stock stores one pointer per bucket into a 69-word local (r1+0x38) and walks past it up the stack, the rebuilt's array sits elsewhere, so the same stack address receives a different element (stock element 0 vs rebuilt element 24); out-of-bounds local index = out of contract (a real program's bucket count is bounded by the key kinds: NOT ESTABLISHED statically); EVIDENCE_trace_diff.md
     'Program__buildBlockArrayByKey': ('EFFECTS', 'OOB_LOCAL_INDEX', 'OUT-OF-CONTRACT'),
     'ILReader__appendFloatConst': ('EFFECTS', 'INPUT_NOT_SINGLE_EXACT', 'PASS'),
+    # libGLProgrammability ENTRYARGS census (Nov 17), EVIDENCE_trace_diff.md: rows of the census image (v11) that are fixed or classified; the fixes were re-run on later images (rows files trace_diff_rows_v28.tsv)
+    '_PPParserParseOperation': ('EFFECTS', 'STOCK_BUG_305', 'PASS'), '_PPParserGetScalars': ('EFFECTS', 'STOCK_BUG_305', 'PASS'), '_PPParserGetInteger': ('EFFECTS', 'STOCK_BUG_305', 'PASS'),      # stock calloc(255,1)/calloc(1290,1) of the overrun case vs the rebuilt's malloc(len+1) for the replacement text (#305)
+    'TPPStreamCompiler__getConstantAsSourceVar': ('EFFECTS', 'OOB_LOCAL_INDEX', 'OUT-OF-CONTRACT'),      # valueCount (4th argument, a vector size 1..4) indexes the 4-word local constantValues / laneUsed arrays unchecked in both images; trials differ only for valueCount >= 0x14 (0..0x10 give no EFFECTS / FAULT_MISMATCH on 4 input sets); decision 3
+    'TPPStreamCompiler__getNewConstantSourceVar': ('EFFECTS', 'OOB_LOCAL_INDEX', 'OUT-OF-CONTRACT'),      # same: constantValues[4] / laneUsedFlags[4] written valueCount times; first differing valueCount 0x10
+    '_InterpreterTextureSamplerAttachDerivatives': ('EFFECTS', 'INPUT_NOT_SINGLE_EXACT', 'PASS'), '_PPCTextureSamplerAttachDerivatives': ('EFFECTS', 'INPUT_NOT_SINGLE_EXACT', 'PASS'),      # 1-ulp float store difference for double arguments that are not exact singles; EFFECTS 0 with TD_FLOATEXACT=1 (v25/gp_fe_emu.tsv)
+    'TPPStreamCompiler__getPPStreamString': ('EFFECTS', 'FIXED_303', 'PASS'), '_glpPPDisassemble': ('EFFECTS', 'FIXED_303', 'PASS'),      # #303 (string literal base + 0x3bbc read): fixed in e8698f41, re-run clean
+    'std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gnu_cxx____normal_iterator_TIntermNode___std__vector_TIntermNode__pool_allocator_TIntermNode_____': ('EFFECTS', 'FIXED_304', 'PASS'),      # #304 (size() as unsigned shift): fixed in 8a0eba79, re-run EFFECTS 0
+    'std____default_alloc_template_true_0____S_refill': ('EFFECTS', 'DELIBERATE_225_GUARD', 'PASS'),      # n == 0 or n > 128 (first trial n = 256: stock malloc(10240) = 2*256*20): the rebuilt returns 0 where the stock writes outside the 16-entry free-list table (#225)
+    '_ShInitialize': ('TIMEOUT_ALL', 'LONG_RUN_IMAGE_DATA_DEP', 'PASS'),      # both images exceed the 400,000-instruction limit; at 20,000,000 both return and the only difference is the image address stored (&_unlinkScope, stock 0x97b89f00 vs rebuilt symbol), IMAGE_DATA_DEP
     'TPPStreamCompiler__warning': ('EFFECTS', 'INPUT_IN_IMAGE_WINDOW', 'PASS'),
     # NO-INFO rows that return the address of an image-resident string/table (every trial layout-dependent): contents compared with Tools/userspace/emu/strret_check.py, EVIDENCE_trace_diff.md
     'GetPreprocessorBuiltinString': ('LAYOUT_ALL', 'RETURNS_IMAGE_CONTENT_VERIFIED', 'PASS'),

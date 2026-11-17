@@ -1,0 +1,2 @@
+#id	name	rc	pc	size	stock_cov	reb_cov	runs	IDENTICAL	REORDERED	READ_SET	FAULT_SITE	FAULT_MISMATCH	EFFECTS	EMUERR	TIMEOUT	UNINIT_REBUILT	UNINIT_OTHER	end_states	first_nonidentical	LAYOUT_DEP	PTR_VALUE_DEP	IMAGE_DATA_DEP
+38	_PPParserGetInteger	i	ip	112	27	28	357	24	279	0	0	0	1	0	0	0	0	FAULT/FAULT:303,RET/RET:54	EFFECTS: calls differ at #1: stock ('C', '_calloc', (1342277678, 1), (), ()) vs rebuilt ('C', '_malloc', (457,), (), ())	53	0	0

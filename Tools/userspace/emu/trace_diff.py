@@ -34,6 +34,8 @@ HEAP_ON = os.environ.get('TD_HEAP', '0') == '1'
 # TD_STOCK_HOOKS=ADDR:NAME,...  (stock-image-relative address in hex): a statically linked library function of the STOCK binary that the rebuilt corpus calls as the library import of the same name
 # (GLDriver: the stock's own copy of `atexit` at 0x2748, built on keymgr, against the rebuilt's libSystem `atexit`): the stock function is run as a call-out of that name instead, so both images record the same call
 STOCK_HOOKS = {int(a, 16): n for a, n in (x.split(':') for x in os.environ.get('TD_STOCK_HOOKS', '').split(',') if x)}
+# TD_STOCK_ZERO_LOCAL=ADDR:SPOFF:SIZE,... (CONTROL, stock-image-relative hex address of an instruction after the function's `stwu`): before that instruction runs in the STOCK image, SIZE bytes at r1+SPOFF are set to 0. Used to prove that a stock/rebuilt difference is caused by a stock read of an uninitialised stack local (the rebuilt initialises it): with the local zeroed the row must come out identical (issue #306: ADDR=4d508 SPOFF=60 SIZE=2 for TPPStreamCompiler__getConstantAsSourceVar)
+STOCK_ZERO_LOCAL = {int(x.split(':')[0], 16): (int(x.split(':')[1], 16), int(x.split(':')[2], 16)) for x in os.environ.get('TD_STOCK_ZERO_LOCAL', '').split(',') if x}
 SLIDE2 = 0x20000000         # the control run of the stock at a second slide: a trial whose behaviour changes with the slide depends on where the image happens to sit (an input that is an address inside the image window)
 SLIDE = 0x10000000          # both images are placed here (a multiple of 0x10000): everything below it is unmapped, as on the real machine
 
@@ -286,6 +288,8 @@ class Sim:
             self.ev.append(('F', 'wild', self.na(addr))); self.fpc = self.pc - self.slide; self.status = 'FAULT'; uc.emu_stop(); return
         if ENTRYARGS and self.act: self.act = [tr for tr in self.act if tr[1] != addr]
         if ENTRYARGS and self.n > 1 and (addr - self.slide) in self.entries: self.snap_entry(uc, self.entries[addr - self.slide])
+        if STOCK_ZERO_LOCAL and self.img.is_stock and (addr - self.slide) in STOCK_ZERO_LOCAL:
+            zo, zs = STOCK_ZERO_LOCAL[addr - self.slide]; uc.mem_write(uc.reg_read(UC_PPC_REG_1) + zo, bytes(zs))
         hook = STOCK_HOOKS.get(addr - self.slide) if self.img.is_stock else None
         if CALLOUT <= addr < CALLOUT + 0x10000 or hook:
             if hook:
