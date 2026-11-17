@@ -230,10 +230,10 @@ class Sim:
 
     entries = {}
     def snap_entry(self, uc, name):
-        r1 = uc.reg_read(UC_PPC_REG_1); items = []; pts = [uc.reg_read(UC_PPC_REG_0 + j) for j in range(3, 11)]
+        r1 = uc.reg_read(UC_PPC_REG_1); bc = int.from_bytes(uc.mem_read(r1, 4), 'big'); items = []; pts = [uc.reg_read(UC_PPC_REG_0 + j) for j in range(3, 11)]
         for i in range(3, 11):
             p = uc.reg_read(UC_PPC_REG_0 + i)
-            if not (r1 <= p < self.sp0 and p & 3 == 0): continue
+            if not (r1 <= p < min(bc, self.sp0) and p & 3 == 0): continue       # a record in the CALLER's own frame ([r1] is the back chain = top of that frame): a pointer into a frame further up is forwarded, compared where its owner passes it
             ws = []
             for k in range(16):
                 q = p + 4 * k
