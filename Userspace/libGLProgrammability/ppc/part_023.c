@@ -483,7 +483,7 @@ loopSetResult:
       _S_start_free = (undefined4 *)((int)_S_start_free + size * (bytesLeft / size));
       return result;
     }
-    bytesToGet = totalBytes * 2 + ((_S_heap_size >> 4) + 7 & 0xfffffff8);
+    bytesToGet = totalBytes * 2 + (((uint)_S_heap_size >> 4) + 7 & 0xfffffff8);  /* stock 0x9c9a8 srwi: _S_heap_size is a size_t (logical shift) */
     if (bytesLeft != 0) {
       freeListOffset = bytesLeft + 7 >> 1 & 0x7ffffffc;
       *_S_start_free = *(undefined4 *)(&emptyStringRepData_freeListBase_a7b7bf90 + freeListOffset);

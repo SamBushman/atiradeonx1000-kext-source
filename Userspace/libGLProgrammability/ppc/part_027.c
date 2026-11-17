@@ -631,7 +631,7 @@ int std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gn
     n[0] = (int)rangeBytes >> 2;
     if ((uint)((int)(vec[3] - (int)oldFinish) >> 2) < n[0]) {
       minRef = n;
-      oldSize = (int)oldFinish - vec[1] >> 2;
+      oldSize = (int)((int)oldFinish - (int)vec[1]) >> 2;  /* stock srawi (0xb6980): size() is a signed pointer difference / 4 */
       if (n[0] <= oldSize) {
         minRef = &oldSize;
       }
