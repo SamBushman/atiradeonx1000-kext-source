@@ -1,0 +1,36 @@
+#id	name	rc	pc	size	stock_cov	reb_cov	runs	IDENTICAL	REORDERED	READ_SET	FAULT_SITE	FAULT_MISMATCH	EFFECTS	EMUERR	TIMEOUT	UNINIT_REBUILT	UNINIT_OTHER	end_states	first_nonidentical	LAYOUT_DEP	PTR_VALUE_DEP	IMAGE_DATA_DEP
+0	__dyld_func_lookup	v	-	32	8	8	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+2	__SetDestination	i	ini	8	2	2	386	346	40	0	0	0	0	0	0	0	0	FAULT/FAULT:254,RET/RET:132	REORDERED: same writes/reads per segment; order differs	0	0	0
+3	__LockSurface	v	nnpp	160	31	40	289	31	258	0	0	0	0	0	0	0	0	FAULT/FAULT:141,RET/RET:148	REORDERED: same writes/reads per segment; order differs	0	0	0
+1	__SetSurface	v	pnp	184	35	46	257	75	181	0	0	0	0	0	0	0	0	FAULT/FAULT:112,RET/RET:145	REORDERED: same writes/reads per segment; order differs	1	0	0
+4	__UnlockSurface	v	pipp	144	33	36	266	31	234	0	0	0	0	0	0	0	0	FAULT/FAULT:122,RET/RET:144	REORDERED: same writes/reads per segment; order differs	1	0	0
+7	_window_mode_to_ati_format	v	n	148	20	26	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+5	__SwapSurface	v	nipp	128	29	32	320	320	0	0	0	0	0	0	0	0	0	FAULT/FAULT:171,RET/RET:149		0	0	0
+6	__Probe	v	iiip	16	4	4	173	173	0	0	0	0	0	0	0	0	0	FAULT/FAULT:23,RET/RET:150		0	0	0
+9	__AddRef	v	p	20	5	5	168	168	0	0	0	0	0	0	0	0	0	FAULT/FAULT:19,RET/RET:149		0	0	0
+10	__DecodePixelFormat	i	nppppppp	468	71	73	176	176	0	0	0	0	0	0	0	0	0	FAULT/FAULT:26,RET/RET:150		0	0	0
+12	__GetCapabilities	v	nnp	156	20	20	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+8	__QueryInterface	v	piiiip	340	56	64	342	342	0	0	0	0	0	0	0	0	0	FAULT/FAULT:281,RET/RET:61		0	0	0
+13	__GetBlitter	v	iinnp	224	33	41	206	191	15	0	0	0	0	0	0	0	0	FAULT/FAULT:56,RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+14	__Synchronize	v	-	8	2	2	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+15	__GetBeamPosition	v	pip	104	26	26	169	0	161	0	8	0	0	0	0	0	0	FAULT/FAULT:19,RET/RET:150	FAULT_SITE: stock ('read', 139) vs rebuilt ('read', 271)	0	0	0
+18	__Release	v	p	100	25	25	166	166	0	0	0	0	0	0	0	0	0	FAULT/FAULT:17,RET/RET:149		0	0	0
+17	_ATIRadeonX1000GAFactory	v	ii	324	81	81	150	0	150	0	0	0	0	0	0	0	0	RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+16	__WaitSurface	v	pip	72	16	18	244	10	233	0	0	0	0	0	0	0	0	FAULT/FAULT:94,RET/RET:150	REORDERED: same writes/reads per segment; order differs	1	0	0
+20	__Start	v	piiiiiii	140	13	28	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
+21	__AllocateSurface	i	pnpi	396	24	99	164	125	39	0	0	0	0	0	0	0	0	FAULT/FAULT:14,RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+19	__Reset	i	p	360	64	53	266	5	261	0	0	0	0	0	0	0	0	FAULT/FAULT:116,RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+23	_radeon3DFillSetup	i	pnnp	2020	503	505	160	160	0	0	0	0	0	0	0	0	0	FAULT/FAULT:48,RET/RET:112		0	0	0
+22	_radeon3DCopySetup	i	ippnnnnn	2048	487	502	159	14	123	0	0	0	0	0	0	0	0	FAULT/FAULT:73,RET/RET:86	REORDERED: same writes/reads per segment; order differs	22	0	0
+11	_fillTextureWithPattern	v	pnii	664	56	59	1421	126	1295	0	0	0	0	0	0	0	0	FAULT/FAULT:1421	REORDERED: same writes/reads per segment; order differs	0	0	0
+24	__Flush	v	pn	288	69	72	376	0	364	0	12	0	0	0	0	0	0	FAULT/FAULT:227,RET/RET:149	FAULT_SITE: stock ('read', 152) vs rebuilt ('read', 256)	0	0	0
+25	__WaitComplete	v	pi	140	35	35	300	5	294	0	0	0	0	0	0	0	0	FAULT/FAULT:150,RET/RET:150	REORDERED: same writes/reads per segment; order differs	1	0	0
+27	_createTextureBuffer	i	pnnn	260	22	25	154	1	153	0	0	0	0	0	0	0	0	FAULT/FAULT:4,RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+26	__FreeSurface	v	pnp	224	47	53	422	114	308	0	0	0	0	0	0	0	0	FAULT/FAULT:278,RET/RET:144	REORDERED: same writes/reads per segment; order differs	0	0	0
+28	_createOffscreenBuffer	i	ppn	236	14	15	164	16	148	0	0	0	0	0	0	0	0	FAULT/FAULT:15,RET/RET:149	REORDERED: same writes/reads per segment; order differs	0	0	0
+29	__Stop	v	p	248	39	18	440	0	414	0	16	0	0	0	0	0	0	FAULT/FAULT:292,RET/RET:148	FAULT_SITE: stock ('read', 26) vs rebuilt ('read', 130)	10	0	0
+30	_radeonCopy	v	piiin	1700	31	77	402	3	177	0	222	0	0	0	0	0	0	FAULT/FAULT:252,RET/RET:150	FAULT_PARTIAL: same fault ('read', 2405198340); accesses completed before it differ: reads: only stock reads (1342619592, 4)	0	0	0
+32	_radeonFill	v	ninnpi	1048	14	66	466	364	102	0	0	0	0	0	0	0	0	FAULT/FAULT:332,RET/RET:134	REORDERED: same writes/reads per segment; order differs	0	0	0
+33	_radeonHighlight	v	piiipn	860	24	62	262	108	143	0	0	0	0	0	0	0	0	FAULT/FAULT:116,RET/RET:146	REORDERED: same writes/reads per segment; order differs	11	0	0
+34	_radeonSolidScanlines	v	niinpi	3560	27	54	374	250	124	0	0	0	0	0	0	0	0	FAULT/FAULT:226,RET/RET:148	REORDERED: same writes/reads per segment; order differs	0	0	0
+31	_radeonCopyRegionBody	v	iiiiiidddddddd	776	129	143	476	413	52	0	0	0	0	0	11	0	0	FAULT/FAULT:327,FAULT/TIMEOUT:11,RET/RET:138	REORDERED: same writes/reads per segment; order differs	0	0	0
