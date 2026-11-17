@@ -896,6 +896,8 @@ int _PPParserGetPart(parser, partBuf, expandMacros)
   int replaceLength;
   int newText;
   uint tokenLength;
+  int replaceText;
+  int replaceHeap;
   undefined1 replaceBuf [260];
   
   savedPos = parser[3];
@@ -912,12 +914,28 @@ int _PPParserGetPart(parser, partBuf, expandMacros)
   }
   else if (((expandMacros != 0) && (macro = ((int (*)())_PPParserScopeFindMacro)(parser[0x113],partBuf), macro != 0))
           && (*(int *)(macro + 8) == 0)) {
-    replaceLength = _PPParserMacroGetReplaceString(macro,parser[0x123],0,replaceBuf);
+    /* issue #305 (stock bug): the stock formats the replacement text straight into the 260-byte local replaceBuf, so a macro whose text is 260 bytes or longer overruns the buffer
+       (stock 0x2330 addi r27,r1,0x50 ... bl; a 324-byte text overwrites the saved LR at r1+0x178). _PPParserMacroGetReplaceString returns the length alone when outBuf is 0
+       (as its other caller, the macro-argument expansion, uses it): size the buffer from that. A text that fits keeps the stock's buffer. */
+    replaceLength = _PPParserMacroGetReplaceString(macro,parser[0x123],0,0);
+    replaceText = (int)replaceBuf;
+    replaceHeap = 0;
+    if (replaceLength >= 0x104) {
+      replaceHeap = (int)_malloc(replaceLength + 1);
+      if (replaceHeap == 0) {
+        return tokenLength;
+      }
+      replaceText = replaceHeap;
+    }
+    replaceLength = _PPParserMacroGetReplaceString(macro,parser[0x123],0,replaceText);
     newTextLength = (parser[1] + replaceLength) - tokenLength;
     newText = _calloc(newTextLength,1);
     _memmove(newText,*parser,savedPos);
-    _memmove(newText + savedPos,replaceBuf,replaceLength);
+    _memmove(newText + savedPos,replaceText,replaceLength);
     _memmove(newText + savedPos + replaceLength,*parser + parser[3],parser[1] - parser[3]);
+    if (replaceHeap != 0) {
+      _free((void *)replaceHeap);
+    }
     _free(*parser);
     parser[1] = newTextLength + -1;
     *parser = newText;
