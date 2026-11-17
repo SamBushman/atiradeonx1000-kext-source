@@ -32,6 +32,8 @@ EXPLAINED = {# ILReader__decodeInstruction / nextInstruction: the stock indexes 
   'R300VMachineAssembler__findFoldableMovePair': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
   # gld_reserveVertexBufferSpace: its callee chain reaches gld_setPrimitiveInputRegisters with primitiveMode 0xffff (the stored vertex limit) and reads primitiveInputRegisterTable_001aa7a8[mode*4] unchecked: stock reads image offset 0x1aa7a8+0x3fffc = 2008996 (mapped), the rebuilt 0x101d2950+0x3fffc = 0x1021294c (past its image; fault 270608716)
   'gld_reserveVertexBufferSpace': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
+  # psnDecodedToProgram: both images read the same 16-bit index (0xfc1d = 64541 at arena 1342335372; stock event 7328, rebuilt 7260) and index a byte table with it unchecked; stock's lbzx lands in its own image data (offset 2078674, value 0), the rebuilt's past the end of its image (fault 270590002); decision 3
+  'psnDecodedToProgram': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
 'Program__interpSlotOfIlType': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'KhanPs__vslot62_lookupTableEntry': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'opcodeInfoIsVsFlagBit2': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), '_gleAllocVertexMachine': ('REBUILT_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogExp': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogExp2': ('STOCK_HOISTED_LOAD', 'PASS'), 'ffvpPrepareFogLinear': ('STOCK_HOISTED_LOAD', 'PASS'),
              'R300MachineAssembler__vslot65_declareNodeRegisters': ('STOCK_DEAD_ARG_LOAD', 'PASS'), 'R520MachineAssembler__vslot65_declareNodeRegisters': ('STOCK_DEAD_ARG_LOAD', 'PASS'),
              'opcodeInfoRgbHwOpcode': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'), 'gld_applyAnisotropyOverride': ('OOB_TABLE_INDEX', 'OUT-OF-CONTRACT'),
