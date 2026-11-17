@@ -27,7 +27,7 @@ void _glNormal3f_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3)
 void _glVertex3f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   ((float * (*)())_glVertex3f_Comp)(param_1,fparam_1,fparam_2,fparam_3);
-  ((void (*)())_glVertex3f_Exec)(param_1);
+  ((void (*)())_glVertex3f_Exec)(param_1,fparam_1,fparam_2,fparam_3);
   return;
 }
 

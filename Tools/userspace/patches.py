@@ -53,6 +53,18 @@ def _raw_with(what, subs):
     return lambda raw, conv: _subs(raw, subs, what)
 
 
+def _seq_subs(what, old, news):
+    """Replace the occurrences of `old` (exactly len(news) of them) one by one, in order, by news[i]."""
+    def apply(raw, conv):
+        if conv.count(old) != len(news):
+            raise PatchError('%s: pattern %r found %d time(s), expected %d' % (what, old[:100], conv.count(old), len(news)))
+        t = conv
+        for n in news:
+            t = t.replace(old, n, 1)
+        return t
+    return apply
+
+
 def _conv_with(what, subs):
     return lambda raw, conv: _subs(conv, subs, what)
 
@@ -240,6 +252,23 @@ PATCHES = {
     # count and the next argument (the destination pointer) from the wrong register (found by trace_diff.py, row _gleSetAttrib: rebuilt faulted in _gleCopyPixelMapi reading *(r6 = low word of
     # the double); the stock continued to realloc). C: read the word as int, as the stock does.
     '_gleSetAttrib': _scoped('gleng', _conv_with('_gleSetAttrib', [('param_3[0x%x]' % k, '*(int *)(param_3 + 0x%x)' % k) for k in range(0xa0f, 0xa19)])),
+    # Issue #301 (gleng): ten calls of _glVertex2f_Exec / _glVertex3f_Exec are printed `((void (*)())_glVertex2f_Exec)(param_1);` - the float arguments (f1, f2[, f3]) are missing. The
+    # callee (declared `(int ctx, double, double[, double])`) takes the coordinates in f1..f3 (stock 0x1d20c: `lfs f3,0x20(r2); lfs f4,0x24(r2); bctr`, f1/f2 passed through), so the rebuilt
+    # call sites passed whatever the preceding call left in the FPRs. Stock call setups: _glVertex3f_CompExec 0x3a984..0x3a998 (`fmr f1,f31; fmr f2,f30; fmr f3,f29` -> 0x3aa24),
+    # _glVertex2f_CompExec 0xa2160..0xa2180 (`fmr f1,f31; fmr f2,f30` -> 0x1d20c), _glRectf_Exec 0x84778..0x847b4 (f1=x1 f2=y1 / f3 y1 / f3 y2 / x1 y2 : (fparam_1,fparam_2), (fparam_3,
+    # fparam_2), (fparam_3,fparam_4), (fparam_1,fparam_4)), _glRectfv_Exec 0x84d9c..0x84ddc (`lfs f1,0(r28); lfs f2,4(r28)` ... : (v1[0],v1[1]), (v2[0],v1[1]), (v2[0],v2[1]), (v1[0],v2[1])).
+    # Found by trace_diff.py ENTRYARGS census, row _glRectfv_Exec: the stock reads param_2 (NULL in the trial, read fault), the rebuilt never reads it. Corpus-wide scan of every call site
+    # (cast or direct) against the callee's definition parameter count (v23/argcount_scan2.py, 3382 definitions): these ten are the only calls with fewer arguments than parameters.
+    '_glVertex3f_CompExec': _scoped('gleng', _conv_with('_glVertex3f_CompExec', [('((void (*)())_glVertex3f_Exec)(param_1);', '((void (*)())_glVertex3f_Exec)(param_1,fparam_1,fparam_2,fparam_3);')])),
+    '_glVertex2f_CompExec': _scoped('gleng', _conv_with('_glVertex2f_CompExec', [('((void (*)())_glVertex2f_Exec)(param_1);', '((void (*)())_glVertex2f_Exec)(param_1,fparam_1,fparam_2);')])),
+    '_glRectf_Exec': _scoped('gleng', _seq_subs('_glRectf_Exec', '((void (*)())_glVertex2f_Exec)(param_1);', [
+        '((void (*)())_glVertex2f_Exec)(param_1,fparam_1,fparam_2);', '((void (*)())_glVertex2f_Exec)(param_1,fparam_3,fparam_2);',
+        '((void (*)())_glVertex2f_Exec)(param_1,fparam_3,fparam_4);', '((void (*)())_glVertex2f_Exec)(param_1,fparam_1,fparam_4);'])),
+    '_glRectfv_Exec': _scoped('gleng', _seq_subs('_glRectfv_Exec', '((void (*)())_glVertex2f_Exec)(param_1);', [
+        '((void (*)())_glVertex2f_Exec)(param_1,(double)*(float *)param_2,(double)((float *)param_2)[1]);',
+        '((void (*)())_glVertex2f_Exec)(param_1,(double)*(float *)param_3,(double)((float *)param_2)[1]);',
+        '((void (*)())_glVertex2f_Exec)(param_1,(double)*(float *)param_3,(double)((float *)param_3)[1]);',
+        '((void (*)())_glVertex2f_Exec)(param_1,(double)*(float *)param_2,(double)((float *)param_3)[1]);'])),
     # Issues #295 + #296 (gleng): the eight light-vertex routines FUN_000d45ec (stock 0xd45ec), FUN_000d4a8c (0xd4a8c), _gleVtxLightSpecRGBA{Front,Back}{,Ptr} (0xd4f30, 0xd5590,
     # 0xd5ee4-area), _gleVtxLightRGBA{Front,Back}Ptr (0xd5ee4, 0xd638c) call the function-pointer cell PTR__gleVectorNormalize_00112064 (and copies of it in puVarN) several times.
     # (1) #295: the first call of each routine is printed `(fparam_1,param_1,&local,&local)`: Ghidra added the live f1 (a double) as a first argument of the unprototyped call, so the
