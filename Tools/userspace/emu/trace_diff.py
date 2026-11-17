@@ -730,7 +730,7 @@ def wb_waived(x, y):
     stale pool memory (TPoolAllocator reuses freed pages) holding whatever the earlier object stored there, e.g. an image pointer, which differs between the images; the TType bit-field layout (notes_ttype_layout.md:
     bits [8:0] untouched, never read: TType::operator== masks them out, 0x1fffe00) makes these bits padding.  Returns True when every differing byte is explained."""
     _c, xw, _r, xb, _rb = x; _c2, yw, _r2, yb, _rb2 = y
-    def bv(t): return t if isinstance(t, int) else (t.v if isinstance(t, Held) else None)
+    def bv(t): return t if isinstance(t, int) else (t.v if isinstance(t, Held) else (t.raw if isinstance(t, Tk) else None))      # a Tk byte: a stale value that LOOKS like an image pointer (the stock's slid image range contains bit-field words such as 0x1a082040); its raw byte is compared like any other
     todo = set()
     for k in set(xb) | set(yb):
         if xb.get(k, wbeq) is wbeq or yb.get(k, wbeq) is wbeq:

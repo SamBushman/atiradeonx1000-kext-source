@@ -77,7 +77,12 @@ def main(argv):
                    b'float f2(float a, float b); float f2(vec2 a, float b);\nfloat f2(float a, float b) { return a * b; }\nfloat f2(vec2 a, float b) { return a.x * b; }\n'
                    b'uniform float u; attribute vec4 pos; varying vec4 col;\n'
                    b'void main() { float c = (u, 1.0); vec3 q = -V; float z = B ? F : float(I); mat2 N = M * M; col = W + vec4(D[1], E[2][1]) + vec4(f2(u, z), f2(q.xy, c), N[1]); gl_Position = pos * E; }',
-             b'const mat3 R = mat3(vec3(1.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0), vec3(0.0, 0.0, 1.0)); const vec2 K = vec2(0.5) * vec2(2.0, 4.0);\nvarying vec4 col; void main() { vec3 t = R * col.xyz; gl_FragColor = vec4(t, K.y) + vec4(float(true), float(3), 0.0, 1.0); }', True)]
+             b'const mat3 R = mat3(vec3(1.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0), vec3(0.0, 0.0, 1.0)); const vec2 K = vec2(0.5) * vec2(2.0, 4.0);\nvarying vec4 col; void main() { vec3 t = R * col.xyz; gl_FragColor = vec4(t, K.y) + vec4(float(true), float(3), 0.0, 1.0); }', True),
+            # s8: built-in matrices/ftransform, dynamic indexing (indirect addressing), diagonal matrix constructors from a non-constant scalar, struct constructors, comments, dead code / unused expressions
+            ('s8', b'/* block comment */ // line comment\nstruct Lt { vec3 d; vec4 c; };\nuniform vec4 arr[8]; uniform float u; uniform Lt lt; uniform mat4 pm[2]; attribute float idx; attribute vec4 a0; varying vec4 vc; varying vec3 vd;\n'
+                   b'void main() { int i = int(idx); vec4 x = arr[i] + arr[i + 1]; mat3 m3 = mat3(u); mat4 m4 = mat4(u); mat2 m2 = mat2(u); Lt l2 = Lt(vec3(u), vec4(0.5)); 1.0; if (false) { x = vec4(9.0); }\n'
+                   b'  vc = x * m4[1] + l2.c + lt.c + vec4(m3[2], m2[1].x) + pm[i] * a0; vd = gl_NormalMatrix * gl_Normal; gl_Position = ftransform() + gl_ModelViewProjectionMatrix * gl_Vertex; gl_FrontColor = gl_Color; }',
+             b'uniform float u; uniform vec2 w; varying vec4 vc; varying vec3 vd;\nvoid main() { mat2 r = mat2(u); vec2 q = r * w + dFdx(w) + dFdy(w) * fwidth(u); float d = dot(normalize(vd), vec3(0.0, 0.0, 1.0)); vec4 c = vc; c.xy += q; c.z = max(c.z, min(d, 1.0)); c.w = clamp(abs(sign(d)) + floor(u) - fract(u) + step(0.5, u) + smoothstep(0.0, 1.0, d), 0.0, 1.0) + mod(u, 2.0) + sqrt(d * d) + exp(d) + log(abs(d) + 1.0) + exp2(u) + inversesqrt(u * u + 1.0); gl_FragColor = c * gl_Color; }', True)]
     if os.environ.get('PD_SCEN') == '1':
         for si, (tg, vs_, fs_, lk) in enumerate(SCEN):
             vo, fo, to = 0x7000 + si * 0x800, 0x7400 + si * 0x800, 0x1100 + si * 0x40
