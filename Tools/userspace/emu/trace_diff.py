@@ -940,7 +940,7 @@ def fuzz_row(row, budget, S, R, sims, ctl, seed_trials=4):
         res.setdefault(v, []).append(1)
         if v not in first:
             first[v] = ('F', len(first), det, (aA[0], aA[1][:40], aA[2], None), (bA[0], bA[1][:40], bA[2], None))
-            if _G.get('repro') and v not in ('IDENTICAL', 'REORDERED', 'READ_SET', 'FAULT_SITE', 'LAYOUT_DEP', 'UNINIT_STOCK', 'UNINIT_BOTH'):
+            if _G.get('repro') and (os.environ.get('TD_REPRO_ALL') == '1' and v != 'IDENTICAL' or v not in ('IDENTICAL', 'REORDERED', 'READ_SET', 'FAULT_SITE', 'LAYOUT_DEP', 'UNINIT_STOCK', 'UNINIT_BOTH')):
                 import pickle; os.makedirs(_G['repro'], exist_ok=True)
                 pickle.dump((ia, da, sw, arena), open(os.path.join(_G['repro'], '%s.%s.pkl' % (row['name'], v)), 'wb'))
         new = (len(aA[3] - seen[0]) > 0) or (len(bA[3] - seen[1]) > 0)
