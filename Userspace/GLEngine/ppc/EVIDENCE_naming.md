@@ -76,3 +76,6 @@ Placeholder occurrences left (ph.py): 32,838 in 1,451 functions (from 205,663 in
 
 ## State after round 5 (main, Nov 18 06:30)
 Placeholder occurrences left (ph.py, whole corpus): 16,986 in 368 functions (from 205,663 in 3,345 at the start of the params/locals layer); 1,422 of them are incomingStack_/extraout_/in_/FUN_ (out of scope for variable naming). Per-function lists: ~/g5logs/fnf_237/vn/ph_all7.txt; reasons for each remainder in notes_unsplittable_hybrids_{D..O}.md.
+
+## Triage of agent-reported suspicions (Nov 18)
+- O: 0x8200 / 0x8804 second-target compare in _glGetProgramStringARB_Exec/_glGetProgramEnvParameterfvARB_Exec/_glBindProgramARB_Exec (part_021.c): the `target < 0x8621 ? 0x8200 : 0x8804` select reads as the "accept GL_TEXT_FRAGMENT_SHADER_ATI (0x8200) or GL_FRAGMENT_PROGRAM_ARB (0x8804)" idiom compiled branch-free; part_000.c registers both as enable-hash targets (_gleAddEnableHashFunc(..., 0x8804 / 0x8200, ...)). Judged NOT a defect from the corpus text only (not compared against the stock disassembly: "not established" until that is done).
