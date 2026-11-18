@@ -1,0 +1,50 @@
+use	_gleDrawArraysOrElements_VBO_Exec	uVar11	consumedDirtyLo	CONFIRMED	arrayStateRecord+0x340, taken and cleared, then OR-ed into word +4 of every per-renderer record (stride 0x8c from +0x450)	^\s*uVar11\ =\ \*\(uint\ \*\)\(param_6\ \+\ 0x340\);$	+1
+use	_gleDrawArraysOrElements_VBO_Exec	uVar11	consumedDirtyLo	CONFIRMED	arrayStateRecord+0x340, taken and cleared, then OR-ed into word +4 of every per-renderer record (stride 0x8c from +0x450)	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 4\)\ =\ \*\(uint\ \*\)\(iVar10\ \+\ 4\)\ \|\ uVar11;$	+1
+use	_gleDrawArraysOrElements_VBO_Exec	uVar12	consumedDirtyHi	CONFIRMED	arrayStateRecord+0x344, taken and cleared, then OR-ed into word +8 of every per-renderer record	^\s*uVar12\ =\ \*\(uint\ \*\)\(param_6\ \+\ 0x344\);$	+1
+use	_gleDrawArraysOrElements_VBO_Exec	uVar12	consumedDirtyHi	CONFIRMED	arrayStateRecord+0x344, taken and cleared, then OR-ed into word +8 of every per-renderer record	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 8\)\ =\ \*\(uint\ \*\)\(iVar10\ \+\ 8\)\ \|\ uVar12;$	+1
+use	_gleDrawArraysOrElements_VBO_Exec	iVar10	rendererRecord	CONFIRMED	per-renderer record cursor: arrayStateRecord+0x450 advanced by 0x8c for each of ctx+0x85a4 renderers	^\s*iVar10\ =\ param_6\ \+\ 0x450;$	+1
+use	_gleDrawArraysOrElements_VBO_Exec	iVar10	rendererRecord	CONFIRMED	per-renderer record cursor: arrayStateRecord+0x450 advanced by 0x8c for each of ctx+0x85a4 renderers	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 4\)\ =\ \*\(uint\ \*\)\(iVar10\ \+\ 4\)\ \|\ uVar11;$	+3
+use	_gleDrawArraysOrElements_VBO_Exec	iVar10	dirtyWord	CONFIRMED	word read from the ctx+0x324 dirty array; the first non-zero word sets bit 0x800000 of ctx+0x31c	^\s*iVar10\ =\ \*piVar5;$	+1
+use	_gleDrawArraysOrElements_VBO_Exec	iVar10	dirtyWord	CONFIRMED	word read from the ctx+0x324 dirty array; the first non-zero word sets bit 0x800000 of ctx+0x31c	^\s*if\ \(iVar10\ !=\ 0\)\ \{$	+1
+use	_gleDrawArraysOrElements_VBO_Exec	iVar13	dirtyWordSecondPath	CONFIRMED	word read from the ctx+0x324 dirty array in the second (duplicate) state-validation path; the first non-zero word sets bit 0x800000 of ctx+0x31c	^\s*iVar13\ =\ \*piVar6;$	+1
+use	_gleDrawArraysOrElements_VBO_Exec	iVar13	dirtyWordSecondPath	CONFIRMED	word read from the ctx+0x324 dirty array in the second (duplicate) state-validation path; the first non-zero word sets bit 0x800000 of ctx+0x31c	^\s*if\ \(iVar13\ !=\ 0\)\ \{$@2	+1
+use	_glLinkProgramARB_Exec	iVar14	stageIndex	CONFIRMED	loop 0..1 over the two stages	^\s*iVar14\ =\ 0;$	+1
+use	_glLinkProgramARB_Exec	iVar14	stageIndex	CONFIRMED	loop 0..1 over the two stages	^\s*if\ \(iVar14\ ==\ 0\)\ \{$	+1
+use	_glLinkProgramARB_Exec	iVar14	stageIndex	CONFIRMED	loop 0..1 over the two stages	^\s*iVar14\ =\ iVar14\ \+\ 1;$	+2
+use	_glLinkProgramARB_Exec	iVar14	stageIndex	CONFIRMED	loop 0..1 over the two stages	^\s*iVar14\ =\ 0;$@3	+1
+use	_glLinkProgramARB_Exec	iVar14	stageIndex	CONFIRMED	loop 0..1 over the two stages	^\s*bVar1\ =\ iVar14\ !=\ 0;$	+1
+use	_glLinkProgramARB_Exec	iVar14	stageIndex	CONFIRMED	loop 0..1 over the two stages	^\s*iVar14\ =\ iVar14\ \+\ 1;$@3	+2
+use	_glLinkProgramARB_Exec	iVar14	stageIndex	CONFIRMED	loop 0..1 over the two stages	^\s*iVar14\ =\ 0;$@4	+1
+use	_glLinkProgramARB_Exec	iVar14	stageIndex	CONFIRMED	loop 0..1 over the two stages	^\s*if\ \(iVar14\ ==\ 0\)\ \{$@2	+1
+use	_glLinkProgramARB_Exec	iVar14	stageIndex	CONFIRMED	loop 0..1 over the two stages	^\s*if\ \(\(\*pcVar10\ !=\ '\\0'\)\ \&\&\ \(local_58\[iVar14\]\ !=\ 0\)\)\ \{$	+1
+use	_glLinkProgramARB_Exec	iVar14	stageIndex	CONFIRMED	loop 0..1 over the two stages	^\s*pcVar16\ =\ \*\(char\ \*\*\)\(local_58\[iVar14\]\ \+\ 0x2c\);$	+1
+use	_glLinkProgramARB_Exec	iVar14	stageIndex	CONFIRMED	loop 0..1 over the two stages	^\s*iVar14\ =\ iVar14\ \+\ 1;$@4	+2
+use	_glLinkProgramARB_Exec	iVar14	attachIndex	CONFIRMED	loop counter over attached shaders	^\s*iVar14\ =\ 0;$@2	+1
+use	_glLinkProgramARB_Exec	iVar14	attachIndex	CONFIRMED	loop counter over attached shaders	^\s*iVar14\ =\ iVar14\ \+\ 1;$@2	+2
+use	_glLinkProgramARB_Exec	iVar14	shaderHandles	CONFIRMED	malloc(attachedCount*4) array of shader link handles (shader+0x30) passed to _ShLink	^\s*iVar14\ =\ _malloc\(iVar18\ <<\ 2\);$	+1
+use	_glLinkProgramARB_Exec	iVar14	shaderHandles	CONFIRMED	malloc(attachedCount*4) array of shader link handles (shader+0x30) passed to _ShLink	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ iVar14\)\ =$	+1
+use	_glLinkProgramARB_Exec	iVar14	shaderHandles	CONFIRMED	malloc(attachedCount*4) array of shader link handles (shader+0x30) passed to _ShLink	^\s*uVar12\ =\ _ShLink\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),iVar14,iVar18,$	+2
+use	_glLinkProgramARB_Exec	iVar14	shaderHandles	CONFIRMED	malloc(attachedCount*4) array of shader link handles (shader+0x30) passed to _ShLink	^\s*_free\(iVar14\);$	+1
+use	_glLinkProgramARB_Exec	iVar14	vertexStage	CONFIRMED	*stageRecordSlots, the vertex stage record	^\s*iVar14\ =\ \*piVar15;$	+1
+use	_glLinkProgramARB_Exec	iVar14	vertexStage	CONFIRMED	*stageRecordSlots, the vertex stage record	^\s*\*\(undefined4\ \*\)\(iVar14\ \+\ 0x4e0\)\ =\ uVar4;$	+1
+use	_glLinkProgramARB_Exec	iVar14	vertexStage	CONFIRMED	*stageRecordSlots, the vertex stage record	^\s*iVar14\ =\ \*piVar15;$@2	+1
+use	_glLinkProgramARB_Exec	iVar14	vertexStage	CONFIRMED	*stageRecordSlots, the vertex stage record	^\s*\*\(int\ \*\)\(iVar14\ \+\ 0x51c\)\ =\ iVar6;$	+1
+use	_glLinkProgramARB_Exec	iVar14	fragmentStage	CONFIRMED	programObj+0x24, the fragment stage record	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x24\);$	+1
+use	_glLinkProgramARB_Exec	iVar14	fragmentStage	CONFIRMED	programObj+0x24, the fragment stage record	^\s*\*\(undefined4\ \*\)\(iVar14\ \+\ 0x4e0\)\ =\ uVar4;$@2	+1
+use	_glLinkProgramARB_Exec	iVar14	fragmentStage	CONFIRMED	programObj+0x24, the fragment stage record	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x24\);$@2	+1
+use	_glLinkProgramARB_Exec	iVar14	fragmentStage	CONFIRMED	programObj+0x24, the fragment stage record	^\s*\*\(int\ \*\)\(iVar14\ \+\ 0x51c\)\ =\ iVar6;$@2	+1
+use	_glLinkProgramARB_Exec	iVar14	uniformStore	CONFIRMED	_gleVecAlloc(userUniformsSize<<4) stored to programObj+0x4c	^\s*iVar14\ =\ _gleVecAlloc\(\*\(int\ \*\)\(iVar9\ \+\ 0x30\)\ <<\ 4\);$	+2
+use	_glLinkProgramARB_Exec	iVar14	uniformStore	CONFIRMED	_gleVecAlloc(userUniformsSize<<4) stored to programObj+0x4c	^\s*iVar7\ =\ iVar18\ \+\ iVar14;$	+2
+use	_glLinkProgramARB_Exec	iVar14	localParamOffset	CONFIRMED	loop counter*0x10 byte offset	^\s*iVar14\ =\ iVar7\ \*\ 0x10;$	+1
+use	_glLinkProgramARB_Exec	iVar14	localParamOffset	CONFIRMED	loop counter*0x10 byte offset	^\s*iVar8\ =\ iVar14\ \+\ iVar6;$	+2
+use	_glLinkProgramARB_Exec	iVar14	localParamOffset	CONFIRMED	loop counter*0x10 byte offset	^\s*iVar14\ =\ iVar7\ \*\ 0x10;$@2	+1
+use	_glLinkProgramARB_Exec	iVar14	localParamOffset	CONFIRMED	loop counter*0x10 byte offset	^\s*iVar8\ =\ iVar14\ \+\ iVar6;$@2	+2
+use	_glLinkProgramARB_Exec	iVar14	attachedCountCopy	CONFIRMED	programObj+0x48 attached shader count	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x48\);$	+2
+use	_glLinkProgramARB_Exec	iVar14	attachedCountCopy	CONFIRMED	programObj+0x48 attached shader count	^\s*if\ \(iVar14\ <\ 1\)\ \{$	+1
+use	_glLinkProgramARB_Exec	iVar14	attachedCountCopy	CONFIRMED	programObj+0x48 attached shader count	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x48\);$@2	+1
+use	_glLinkProgramARB_Exec	iVar14	attachedCountCopy	CONFIRMED	programObj+0x48 attached shader count	^\s*if\ \(iVar14\ <=\ iVar18\)\ goto\ LAB_0008879c;$	+1
+use	_glLinkProgramARB_Exec	iVar14	infoLogBuffer	CONFIRMED	malloc(infoLogLength+1) stored at programObj+0x18	^\s*iVar14\ =\ _malloc\(\*\(int\ \*\)\(iVar9\ \+\ 0x1c\)\ \+\ 1\);$	+2
+use	_glLinkProgramARB_Exec	iVar14	infoLogBuffer	CONFIRMED	malloc(infoLogLength+1) stored at programObj+0x18	^\s*if\ \(iVar14\ !=\ 0\)\ \{$	+1
+use	_glLinkProgramARB_Exec	iVar14	unitIndex	CONFIRMED	loop counter bounded by ctx+0x85a4 byte	^\s*iVar14\ =\ 0;$@5	+1
+use	_glLinkProgramARB_Exec	iVar14	unitIndex	CONFIRMED	loop counter bounded by ctx+0x85a4 byte	^\s*iVar6\ =\ iVar14\ \*\ 4;$	+2
+use	_glLinkProgramARB_Exec	iVar14	unitIndex	CONFIRMED	loop counter bounded by ctx+0x85a4 byte	^\s*\}\ while\ \(iVar14\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1

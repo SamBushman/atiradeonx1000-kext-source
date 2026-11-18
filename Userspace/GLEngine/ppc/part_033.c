@@ -3698,14 +3698,16 @@ void _gleDrawArraysOrElements_VBO_Exec(int glContext,int *mode,int *first,int *c
   int vertexArrayFunc;
   int remaining;
   int loopIndex;
-  int iVar10;
+  int rendererRecord;
+  int dirtyWord;
   int framebufferObject;
   uint uVar11;
+  uint consumedDirtyLo;
   uint dispatchFlags;
   uint dirtyWord3ThenMasked;
-  uint uVar12;
+  uint consumedDirtyHi;
   uint enabledArrayMask;
-  int iVar13;
+  int dirtyWordSecondPath;
   int vertexArrayRangeResult;
   int matrixFuncDirty;
   int remaining2;
@@ -3757,18 +3759,18 @@ LAB_000a7a68:
   if ((*(uint *)(arrayStateRecord + 800) == (*(uint *)(arrayStateRecord + 0x328) & *(uint *)(arrayStateRecord + 800))) &&
      (*(uint *)(arrayStateRecord + 0x324) == (*(uint *)(arrayStateRecord + 0x32c) & *(uint *)(arrayStateRecord + 0x324)))) {
     if (*(int *)(arrayStateRecord + 0x340) != 0 || *(int *)(arrayStateRecord + 0x344) != 0) {
-      uVar11 = *(uint *)(arrayStateRecord + 0x340);
-      uVar12 = *(uint *)(arrayStateRecord + 0x344);
+      consumedDirtyLo = *(uint *)(arrayStateRecord + 0x340);
+      consumedDirtyHi = *(uint *)(arrayStateRecord + 0x344);
       *(undefined4 *)(arrayStateRecord + 0x340) = 0;
       *(undefined4 *)(arrayStateRecord + 0x344) = 0;
       loopIndex2 = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
-        iVar10 = arrayStateRecord + 0x450;
+        rendererRecord = arrayStateRecord + 0x450;
         do {
           loopIndex2 = loopIndex2 + 1;
-          *(uint *)(iVar10 + 4) = *(uint *)(iVar10 + 4) | uVar11;
-          *(uint *)(iVar10 + 8) = *(uint *)(iVar10 + 8) | uVar12;
-          iVar10 = iVar10 + 0x8c;
+          *(uint *)(rendererRecord + 4) = *(uint *)(rendererRecord + 4) | consumedDirtyLo;
+          *(uint *)(rendererRecord + 8) = *(uint *)(rendererRecord + 8) | consumedDirtyHi;
+          rendererRecord = rendererRecord + 0x8c;
         } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
       }
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
@@ -3812,9 +3814,9 @@ LAB_000a7c38:
       loopIndex2 = 0;
       srcCursor = (int *)(glContext + 0x324);
       do {
-        iVar10 = *srcCursor;
+        dirtyWord = *srcCursor;
         srcCursor = srcCursor + 1;
-        if (iVar10 != 0) {
+        if (dirtyWord != 0) {
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
           break;
         }
@@ -3906,9 +3908,9 @@ LAB_000a7e80:
     loopIndex = 0;
     srcCursor2 = (int *)(glContext + 0x324);
     do {
-      iVar13 = *srcCursor2;
+      dirtyWordSecondPath = *srcCursor2;
       srcCursor2 = srcCursor2 + 1;
-      if (iVar13 != 0) {
+      if (dirtyWordSecondPath != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
