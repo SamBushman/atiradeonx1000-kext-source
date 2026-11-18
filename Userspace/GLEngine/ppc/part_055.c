@@ -2396,29 +2396,30 @@ void _gleVPFlushLineStripTCLRDirty(int glContext,double floatArg1,double floatAr
 void _gleVPFlushTriQuadStrip(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  undefined8 local_210 [64];
+  int carriedBytes;
+  int copyIndex;
+  int oldWriteCursor;
+  int carriedWordCountThenRemaining;
+  int copyCountdown;
+  int bufferStart;
+  undefined8 carriedWords [64];
   
-  iVar4 = (int)*(short *)(glContext + 0x487c) >> 2;
-  iVar3 = *(int *)(glContext + 0x4858);
-  iVar1 = iVar4 * 8;
-  iVar2 = 0;
-  for (iVar5 = iVar4; iVar5 != 0; iVar5 = iVar5 + -1) {
-    local_210[iVar2] = *(undefined8 *)(iVar3 + iVar4 * -8 + iVar2 * 8);
-    iVar2 = iVar2 + 1;
+  carriedWordCountThenRemaining = (int)*(short *)(glContext + 0x487c) >> 2;
+  oldWriteCursor = *(int *)(glContext + 0x4858);
+  carriedBytes = carriedWordCountThenRemaining * 8;
+  copyIndex = 0;
+  for (copyCountdown = carriedWordCountThenRemaining; copyCountdown != 0; copyCountdown = copyCountdown + -1) {
+    carriedWords[copyIndex] = *(undefined8 *)(oldWriteCursor + carriedWordCountThenRemaining * -8 + copyIndex * 8);
+    copyIndex = copyIndex + 1;
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar5 = *(int *)(glContext + 0x4854);
-  iVar2 = 0;
-  for (; iVar4 != 0; iVar4 = iVar4 + -1) {
-    *(undefined8 *)(iVar5 + iVar2 * 8) = local_210[iVar2];
-    iVar2 = iVar2 + 1;
+  bufferStart = *(int *)(glContext + 0x4854);
+  copyIndex = 0;
+  for (; carriedWordCountThenRemaining != 0; carriedWordCountThenRemaining = carriedWordCountThenRemaining + -1) {
+    *(undefined8 *)(bufferStart + copyIndex * 8) = carriedWords[copyIndex];
+    copyIndex = copyIndex + 1;
   }
-  *(int *)(glContext + 0x4858) = iVar5 + iVar1;
+  *(int *)(glContext + 0x4858) = bufferStart + carriedBytes;
   return;
 }
 

@@ -23,17 +23,17 @@ void _glDrawArrays_CompExec(glContext, mode, first, count)
 }
 
 /* _glDrawArrays_NoopExec @ 0xa866c (684 bytes) */
-void _glDrawArrays_NoopExec(int glContext,undefined4 forwardedArg2,undefined4 first,undefined4 count,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glDrawArrays_NoopExec(int glContext,undefined4 forwardedArg2,undefined4 first,undefined4 count,double forwardedF1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool rendererInfoByte79IsZero;
   bool stateClean;
-  char cVar2;
-  undefined4 uVar3;
+  char rendererInfoByte79;
+  undefined4 savedFirst;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyBitArrayWord;
   int framebufferObject;
-  undefined4 uVar6;
+  undefined4 savedCount;
   undefined4 incomingR7;
   undefined4 incomingR8;
   int matrixFuncDirty;
@@ -42,9 +42,9 @@ void _glDrawArrays_NoopExec(int glContext,undefined4 forwardedArg2,undefined4 fi
   uint dirtyWord3ThenMasked;
   uint dispatchFlags;
   int *dirtyFlagWords;
-  double extraout_f1;
-  double extraout_f1_00;
-  double extraout_f1_01;
+  double f1AfterCall;
+  double f1AfterCall1;
+  double f1AfterCall2;
   
   if (*(char *)(glContext + 0x759c) == '\0') {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -54,16 +54,16 @@ void _glDrawArrays_NoopExec(int glContext,undefined4 forwardedArg2,undefined4 fi
     goto LAB_000a88d8;
   }
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
-  uVar3 = first;
-  uVar6 = count;
+  savedFirst = first;
+  savedCount = count;
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1;
+    forwardedF1 = f1AfterCall;
   }
   if (*(char *)(glContext + 0x4691) == '\0') {
 LAB_000a88bc:
     if (*(char *)(glContext + 0x759d) != '\0') {
-      ((void (*)())_glDrawArrays_Exec)(glContext,forwardedArg2,first,count,fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
+      ((void (*)())_glDrawArrays_Exec)(glContext,forwardedArg2,first,count,forwardedF1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
                          forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       return;
     }
@@ -71,12 +71,12 @@ LAB_000a88bc:
   else {
     framebufferObject = *(int *)(glContext + 0x744c);
     dirtyFlagWords = (int *)(glContext + 0x310);
-    cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+    rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar3,uVar6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,savedFirst,savedCount,incomingR7,incomingR8,matrixFuncDirty,forwardedF1,forwardedFloatArg2,forwardedFloatArg3,
                  forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
-      fparam_1 = fparam_1;
+      forwardedF1 = forwardedF1;
     }
     if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_000a87a8:
@@ -86,9 +86,9 @@ LAB_000a87a8:
       loopIndex = 0;
       srcCursor = (int *)(glContext + 0x324);
       do {
-        iVar5 = *srcCursor;
+        dirtyBitArrayWord = *srcCursor;
         srcCursor = srcCursor + 1;
-        if (iVar5 != 0) {
+        if (dirtyBitArrayWord != 0) {
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
           break;
         }
@@ -97,22 +97,22 @@ LAB_000a87a8:
       dirtyWord3ThenMasked = *(uint *)(glContext + 0x31c);
       if ((dirtyWord3ThenMasked & 0x15555) != 0) {
         if (*(char *)(glContext + 0x2e54) != '\0') {
-          fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
+          forwardedF1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
         }
         if (*(char *)(glContext + 0x3094) != '\0') {
-          fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
+          forwardedF1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
         }
         goto LAB_000a87a8;
       }
     }
-    bVar1 = cVar2 == '\0';
-    if (bVar1) {
+    rendererInfoByte79IsZero = rendererInfoByte79 == '\0';
+    if (rendererInfoByte79IsZero) {
       dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
     }
     else {
       dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
     }
-    if (bVar1) {
+    if (rendererInfoByte79IsZero) {
       stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
               *(int *)(glContext + 800) == 0;
     }
@@ -123,7 +123,7 @@ LAB_000a87a8:
     }
     if (stateClean) goto LAB_000a88bc;
     if (*(char *)(glContext + 0x85a8) != *(char *)(glContext + 0x85a6)) {
-      fparam_1 = (double)_gleSwitchToNonRevertRenderer(glContext);
+      forwardedF1 = (double)_gleSwitchToNonRevertRenderer(glContext);
 LAB_000a88a0:
       remaining = 0x13;
       do {
@@ -137,13 +137,13 @@ LAB_000a88a0:
                       (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,dirtyFlagWords);
     if ((((dispatchFlags & 3) == (uint)*(byte *)(glContext + 0x7580)) &&
         ((dispatchFlags & 4) == (uint)*(byte *)(glContext + 0x7581))) &&
-       (fparam_1 = extraout_f1_01, (dispatchFlags & 8) == (uint)(*(char *)(glContext + 0x759d) == '\0')))
+       (forwardedF1 = f1AfterCall2, (dispatchFlags & 8) == (uint)(*(char *)(glContext + 0x759d) == '\0')))
     goto LAB_000a88a0;
     if ((dispatchFlags & 4) == 0) {
       dispatchFlags = dispatchFlags & 0xfffffffe;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
     }
-    fparam_1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
+    forwardedF1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
     if (*(char *)(glContext + 0x759d) != '\0') goto LAB_000a88a0;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -1720,18 +1720,18 @@ void _glMultiDrawElementArrayAPPLE_CompExec(glContext, mode, first, count, primc
 }
 
 /* _glMultiDrawElementArrayAPPLE_NoopExec @ 0xaa334 (692 bytes) */
-void _glMultiDrawElementArrayAPPLE_NoopExec(int glContext,undefined4 forwardedArg2,undefined4 first,undefined4 count,undefined4 primcount,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glMultiDrawElementArrayAPPLE_NoopExec(int glContext,undefined4 forwardedArg2,undefined4 first,undefined4 count,undefined4 primcount,double forwardedF1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool rendererInfoByte79IsZero;
   bool stateClean;
-  char cVar2;
-  undefined4 uVar3;
+  char rendererInfoByte79;
+  undefined4 savedFirst;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyBitArrayWord;
   int framebufferObject;
-  undefined4 uVar6;
-  undefined4 uVar7;
+  undefined4 savedCount;
+  undefined4 savedPrimcount;
   undefined4 incomingR8;
   int matrixFuncDirty;
   int remaining;
@@ -1739,9 +1739,9 @@ void _glMultiDrawElementArrayAPPLE_NoopExec(int glContext,undefined4 forwardedAr
   uint dirtyWord3ThenMasked;
   uint dispatchFlags;
   int *dirtyFlagWords;
-  double extraout_f1;
-  double extraout_f1_00;
-  double extraout_f1_01;
+  double f1AfterCall;
+  double f1AfterCall1;
+  double f1AfterCall2;
   
   if (*(char *)(glContext + 0x759c) == '\0') {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1751,17 +1751,17 @@ void _glMultiDrawElementArrayAPPLE_NoopExec(int glContext,undefined4 forwardedAr
     goto LAB_000aa5a4;
   }
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
-  uVar3 = first;
-  uVar6 = count;
-  uVar7 = primcount;
+  savedFirst = first;
+  savedCount = count;
+  savedPrimcount = primcount;
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1;
+    forwardedF1 = f1AfterCall;
   }
   if (*(char *)(glContext + 0x4691) == '\0') {
 LAB_000aa588:
     if (*(char *)(glContext + 0x759d) != '\0') {
-      ((void (*)())_glMultiDrawElementArrayAPPLE_Exec)(glContext,forwardedArg2,first,count,primcount,fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
+      ((void (*)())_glMultiDrawElementArrayAPPLE_Exec)(glContext,forwardedArg2,first,count,primcount,forwardedF1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
                  forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       return;
     }
@@ -1769,12 +1769,12 @@ LAB_000aa588:
   else {
     framebufferObject = *(int *)(glContext + 0x744c);
     dirtyFlagWords = (int *)(glContext + 0x310);
-    cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+    rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar3,uVar6,uVar7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,savedFirst,savedCount,savedPrimcount,incomingR8,matrixFuncDirty,forwardedF1,forwardedFloatArg2,forwardedFloatArg3,
                  forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
-      fparam_1 = fparam_1;
+      forwardedF1 = forwardedF1;
     }
     if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_000aa474:
@@ -1784,9 +1784,9 @@ LAB_000aa474:
       loopIndex = 0;
       srcCursor = (int *)(glContext + 0x324);
       do {
-        iVar5 = *srcCursor;
+        dirtyBitArrayWord = *srcCursor;
         srcCursor = srcCursor + 1;
-        if (iVar5 != 0) {
+        if (dirtyBitArrayWord != 0) {
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
           break;
         }
@@ -1795,22 +1795,22 @@ LAB_000aa474:
       dirtyWord3ThenMasked = *(uint *)(glContext + 0x31c);
       if ((dirtyWord3ThenMasked & 0x15555) != 0) {
         if (*(char *)(glContext + 0x2e54) != '\0') {
-          fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
+          forwardedF1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
         }
         if (*(char *)(glContext + 0x3094) != '\0') {
-          fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
+          forwardedF1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
         }
         goto LAB_000aa474;
       }
     }
-    bVar1 = cVar2 == '\0';
-    if (bVar1) {
+    rendererInfoByte79IsZero = rendererInfoByte79 == '\0';
+    if (rendererInfoByte79IsZero) {
       dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
     }
     else {
       dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
     }
-    if (bVar1) {
+    if (rendererInfoByte79IsZero) {
       stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
               *(int *)(glContext + 800) == 0;
     }
@@ -1821,7 +1821,7 @@ LAB_000aa474:
     }
     if (stateClean) goto LAB_000aa588;
     if (*(char *)(glContext + 0x85a8) != *(char *)(glContext + 0x85a6)) {
-      fparam_1 = (double)_gleSwitchToNonRevertRenderer(glContext);
+      forwardedF1 = (double)_gleSwitchToNonRevertRenderer(glContext);
 LAB_000aa56c:
       remaining = 0x13;
       do {
@@ -1835,13 +1835,13 @@ LAB_000aa56c:
                       (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,dirtyFlagWords);
     if ((((dispatchFlags & 3) == (uint)*(byte *)(glContext + 0x7580)) &&
         ((dispatchFlags & 4) == (uint)*(byte *)(glContext + 0x7581))) &&
-       (fparam_1 = extraout_f1_01, (dispatchFlags & 8) == (uint)(*(char *)(glContext + 0x759d) == '\0')))
+       (forwardedF1 = f1AfterCall2, (dispatchFlags & 8) == (uint)(*(char *)(glContext + 0x759d) == '\0')))
     goto LAB_000aa56c;
     if ((dispatchFlags & 4) == 0) {
       dispatchFlags = dispatchFlags & 0xfffffffe;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
     }
-    fparam_1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
+    forwardedF1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
     if (*(char *)(glContext + 0x759d) != '\0') goto LAB_000aa56c;
   }
   if (*(int *)(glContext + 0x7574) != 0) {

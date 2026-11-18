@@ -204,33 +204,33 @@ LAB_0004f338:
 }
 
 /* _glePPRelocateAttrib @ 0x4f3f0 (184 bytes) */
-void _glePPRelocateAttrib(param_1, param_2, param_3)
-  uint param_1;
-  undefined4 param_2;
-  int *param_3;
+void _glePPRelocateAttrib(oldAttribIndex, newAttribIndex, instructionList)
+  uint oldAttribIndex;
+  undefined4 newAttribIndex;
+  int *instructionList;
 {
-  int iVar1;
-  uint uVar2;
+  int instruction;
+  uint instructionHeader;
   
-  iVar1 = *param_3;
-  if (iVar1 != 0) {
+  instruction = *instructionList;
+  if (instruction != 0) {
     do {
-      if ((((*(uint *)(iVar1 + 0xc) >> 0x1d != 0) &&
-           ((*(uint *)(iVar1 + 0xc) >> 0x12 & 0xff) != 0x4a)) &&
-          ((*(uint *)(iVar1 + 0x1c) & 0x3800000) == 0)) && (*(ushort *)(iVar1 + 0x22) == param_1)) {
-        *(undefined2 *)(iVar1 + 0x22) = (*(unsigned short *)((unsigned char *)&(param_2) + 2));
+      if ((((*(uint *)(instruction + 0xc) >> 0x1d != 0) &&
+           ((*(uint *)(instruction + 0xc) >> 0x12 & 0xff) != 0x4a)) &&
+          ((*(uint *)(instruction + 0x1c) & 0x3800000) == 0)) && (*(ushort *)(instruction + 0x22) == oldAttribIndex)) {
+        *(undefined2 *)(instruction + 0x22) = (*(unsigned short *)((unsigned char *)&(newAttribIndex) + 2));
       }
-      uVar2 = *(uint *)(iVar1 + 0xc);
-      if (((1 < uVar2 >> 0x1d) && (3 < (uVar2 >> 0x12 & 0xff) - 0x41)) &&
-         (((*(uint *)(iVar1 + 0x24) & 0x3800000) == 0 && (*(ushort *)(iVar1 + 0x2a) == param_1)))) {
-        *(undefined2 *)(iVar1 + 0x2a) = (*(unsigned short *)((unsigned char *)&(param_2) + 2));
+      instructionHeader = *(uint *)(instruction + 0xc);
+      if (((1 < instructionHeader >> 0x1d) && (3 < (instructionHeader >> 0x12 & 0xff) - 0x41)) &&
+         (((*(uint *)(instruction + 0x24) & 0x3800000) == 0 && (*(ushort *)(instruction + 0x2a) == oldAttribIndex)))) {
+        *(undefined2 *)(instruction + 0x2a) = (*(unsigned short *)((unsigned char *)&(newAttribIndex) + 2));
       }
-      if (((2 < uVar2 >> 0x1d) && ((*(uint *)(iVar1 + 0x2c) & 0x3800000) == 0)) &&
-         (*(ushort *)(iVar1 + 0x32) == param_1)) {
-        *(undefined2 *)(iVar1 + 0x32) = (*(unsigned short *)((unsigned char *)&(param_2) + 2));
+      if (((2 < instructionHeader >> 0x1d) && ((*(uint *)(instruction + 0x2c) & 0x3800000) == 0)) &&
+         (*(ushort *)(instruction + 0x32) == oldAttribIndex)) {
+        *(undefined2 *)(instruction + 0x32) = (*(unsigned short *)((unsigned char *)&(newAttribIndex) + 2));
       }
-      iVar1 = *(int *)(iVar1 + 8);
-    } while (iVar1 != 0);
+      instruction = *(int *)(instruction + 8);
+    } while (instruction != 0);
     return;
   }
   return;
@@ -953,42 +953,42 @@ LAB_0005041c:
 }
 
 /* _gleCopyPixelMapf @ 0x50440 (240 bytes) */
-int _gleCopyPixelMapf(param_1, param_2, param_3, param_4)
-  float *param_1;
-  undefined4 *param_2;
-  int param_3;
-  int *param_4;
+int _gleCopyPixelMapf(srcMap, dstMapPtr, mapEntryCountThenRemaining, dstMapSizePtr)
+  float *srcMap;
+  undefined4 *dstMapPtr;
+  int mapEntryCountThenRemaining;
+  int *dstMapSizePtr;
 {
   int loopIndex;
-  undefined *puVar2;
+  undefined *dstMap;
   
-  puVar2 = (undefined *)*param_2;
-  if ((param_3 == 1) && (*param_1 == FLOAT_00108e50)) {
-    if (puVar2 == PTR__gle_default_pix_map_f_00112040) {
+  dstMap = (undefined *)*dstMapPtr;
+  if ((mapEntryCountThenRemaining == 1) && (*srcMap == FLOAT_00108e50)) {
+    if (dstMap == PTR__gle_default_pix_map_f_00112040) {
       return;
     }
-    _free(puVar2);
+    _free(dstMap);
 LAB_0005050c:
-    *param_2 = PTR__gle_default_pix_map_f_00112040;
-    *param_4 = 1;
+    *dstMapPtr = PTR__gle_default_pix_map_f_00112040;
+    *dstMapSizePtr = 1;
   }
   else {
-    if ((param_3 != *param_4) || (puVar2 == PTR__gle_default_pix_map_f_00112040)) {
-      if (puVar2 == PTR__gle_default_pix_map_f_00112040) {
-        puVar2 = (undefined *)0x0;
+    if ((mapEntryCountThenRemaining != *dstMapSizePtr) || (dstMap == PTR__gle_default_pix_map_f_00112040)) {
+      if (dstMap == PTR__gle_default_pix_map_f_00112040) {
+        dstMap = (undefined *)0x0;
       }
-      puVar2 = (undefined *)_realloc(puVar2,param_3 << 2);
-      if (puVar2 == (undefined *)0x0) goto LAB_0005050c;
-      *param_2 = puVar2;
-      *param_4 = param_3;
+      dstMap = (undefined *)_realloc(dstMap,mapEntryCountThenRemaining << 2);
+      if (dstMap == (undefined *)0x0) goto LAB_0005050c;
+      *dstMapPtr = dstMap;
+      *dstMapSizePtr = mapEntryCountThenRemaining;
     }
     loopIndex = 0;
-    if (0 < param_3) {
+    if (0 < mapEntryCountThenRemaining) {
       do {
-        *(float *)(puVar2 + loopIndex * 4) = param_1[loopIndex];
-        param_3 = param_3 + -1;
+        *(float *)(dstMap + loopIndex * 4) = srcMap[loopIndex];
+        mapEntryCountThenRemaining = mapEntryCountThenRemaining + -1;
         loopIndex = loopIndex + 1;
-      } while (param_3 != 0);
+      } while (mapEntryCountThenRemaining != 0);
     }
   }
   return;

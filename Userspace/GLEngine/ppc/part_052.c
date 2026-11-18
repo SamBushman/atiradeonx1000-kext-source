@@ -5876,14 +5876,14 @@ void _gleFlushPolygonTCLFunc(glContext)
 /* _gleFlushPolygonTCLRDirtyFunc @ 0xf3378 (328 bytes) */
 void _gleFlushPolygonTCLRDirtyFunc(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
-  int iVar1;
-  int iVar2;
-  undefined1 uVar3;
-  int iVar4;
-  int iVar5;
-  uint uVar6;
+  int copyOffset;
+  int bufferStartThenCopyDest;
+  undefined1 savedRecordByte;
+  int carriedByteCount;
+  int carriedStart;
+  uint copyChunksRemaining;
   
-  uVar3 = 0;
+  savedRecordByte = 0;
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
      ((*(char *)(glContext + 0x4664) == '\0' && (*(int *)(glContext + 0x5434) == 0)))) {
@@ -5893,31 +5893,31 @@ void _gleFlushPolygonTCLRDirtyFunc(int glContext,double floatArg1,double floatAr
     (**(code **)(glContext + 0x4a0c))(glContext);
     return;
   }
-  iVar4 = (int)*(short *)(glContext + 0x487c);
-  iVar5 = *(int *)(glContext + 0x4858) - iVar4;
+  carriedByteCount = (int)*(short *)(glContext + 0x487c);
+  carriedStart = *(int *)(glContext + 0x4858) - carriedByteCount;
   if ((*(short *)(glContext + 0x34d2) == 0x1b01) || (*(short *)(glContext + 0x34d0) == 0x1b01)) {
-    uVar3 = *(undefined1 *)(iVar5 + *(short *)(glContext + 0x487e));
-    *(undefined1 *)(iVar5 + *(short *)(glContext + 0x487e)) = 0;
+    savedRecordByte = *(undefined1 *)(carriedStart + *(short *)(glContext + 0x487e));
+    *(undefined1 *)(carriedStart + *(short *)(glContext + 0x487e)) = 0;
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar2 = *(int *)(glContext + 0x4854);
+  bufferStartThenCopyDest = *(int *)(glContext + 0x4854);
   *(undefined1 *)(glContext + 0x4a18) = 1;
   if ((*(short *)(glContext + 0x34d2) == 0x1b01) || (*(short *)(glContext + 0x34d0) == 0x1b01)) {
-    *(undefined1 *)(iVar5 + *(short *)(glContext + 0x487e)) = uVar3;
-    *(undefined1 *)(iVar2 + *(short *)(glContext + 0x487e)) = 0;
+    *(undefined1 *)(carriedStart + *(short *)(glContext + 0x487e)) = savedRecordByte;
+    *(undefined1 *)(bufferStartThenCopyDest + *(short *)(glContext + 0x487e)) = 0;
   }
-  iVar1 = 0;
-  iVar2 = iVar2 + iVar4;
-  if (0 < iVar4) {
-    uVar6 = iVar4 + 7U >> 3;
+  copyOffset = 0;
+  bufferStartThenCopyDest = bufferStartThenCopyDest + carriedByteCount;
+  if (0 < carriedByteCount) {
+    copyChunksRemaining = carriedByteCount + 7U >> 3;
     do {
-      *(undefined8 *)(iVar2 + iVar1) = *(undefined8 *)(iVar5 + iVar1);
-      iVar1 = iVar1 + 8;
-      uVar6 = uVar6 - 1;
-    } while (uVar6 != 0);
+      *(undefined8 *)(bufferStartThenCopyDest + copyOffset) = *(undefined8 *)(carriedStart + copyOffset);
+      copyOffset = copyOffset + 8;
+      copyChunksRemaining = copyChunksRemaining - 1;
+    } while (copyChunksRemaining != 0);
   }
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(int *)(glContext + 0x4858) = iVar2 + iVar4;
+  *(int *)(glContext + 0x4858) = bufferStartThenCopyDest + carriedByteCount;
   return;
 }
 

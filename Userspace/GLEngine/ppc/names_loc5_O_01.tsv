@@ -1,0 +1,120 @@
+local	_gleFreeTextureObject	param_2	textureObject	CONFIRMED	argument of _gleFreeTextureObject: the texture object being freed (callers pass ctx texture objects; _free(param_2) at the end)
+local	_gleFreeTextureObject	uVar1	textureFlags	INFERRED	ushort at texture object +0x34 tested with bit masks 0x100/0x200/0x2000/0xf to decide the face count and whether the levels are freed
+local	_gleFreeTextureObject	iVar2	faceCount	INFERRED	1 or 6 (cube map) outer loop count: each iteration walks one 0x168-byte (15 x 0x18) array of level records
+local	_gleFreeTextureObject	iVar3	pluginTextureHandles	CONFIRMED	texture object + 0x10 passed to _gleDeletePluginTexture, which reads one handle per renderer plugin from it, deletes each and zeroes it
+local	_gleFreeTextureObject	iVar7	levelRecord	CONFIRMED	pointer into the 15-entry (stride 0x18) level record array, passed to _gleFreeTextureLevel as its level argument
+local	_glePPRelocateAttrib	param_1	oldAttribIndex	CONFIRMED	compared with the ushort attribute index at +0x22/+0x2a/+0x32 of every instruction; callers pass the chunk's old index (*(ushort*)(chunk+0x12))
+local	_glePPRelocateAttrib	param_2	newAttribIndex	CONFIRMED	low halfword stored over each matching index; callers pass the new running index (loopIndex) of the chunk
+local	_glePPRelocateAttrib	param_3	instructionList	CONFIRMED	callers pass instructionList (list head, nodes linked through +8)
+local	_glePPRelocateAttrib	iVar1	instruction	CONFIRMED	list node walked through +8 starting at *instructionList (callers use the same layout on iVar4 over *instructionList)
+local	_glePPRelocateAttrib	uVar2	instructionHeader	CONFIRMED	*(uint*)(instruction+0xc), named instructionHeader in the caller with the same >>0x1d / >>0x12 tests
+local	_gleCopyPixelMapf	param_1	srcMap	CONFIRMED	float array read element by element and copied to the destination map
+local	_gleCopyPixelMapf	param_2	dstMapPtr	CONFIRMED	address of the destination map pointer (*param_2 is the current map, replaced by realloc or by _gle_default_pix_map_f); callers pass glContext+0x324c.. one per pixel map
+local	_gleCopyPixelMapf	param_3	mapEntryCountThenRemaining	CONFIRMED	map entry count (compared with 1 and *param_4, realloc size param_3<<2), then decremented as the copy loop counter
+local	_gleCopyPixelMapf	param_4	dstMapSizePtr	CONFIRMED	address of the stored map size (*param_4 compared with the new count, set to the count or 1); callers pass glContext+0x3278..
+local	_gleCopyPixelMapf	puVar2	dstMap	CONFIRMED	current destination map: *param_2 first, replaced by the realloc result, written by the copy loop
+local	_gleDetachShaderObjectIterFunc	param_2	objectRecord	INFERRED	object table entry; +0x10 == 0x8b40 (GL_PROGRAM_OBJECT_ARB) selects program objects, +8 is a reference count decremented here
+local	_gleDetachShaderObjectIterFunc	iVar1	attachedCount	INFERRED	int at +0x48 of a program object, the loop bound over the pointer array at +0x44 that is freed afterwards
+local	_gleDetachShaderObjectIterFunc	piVar2	attachedObjects	INFERRED	pointer array at program object +0x44 (iterated, then _free'd and cleared)
+local	_gleDetachShaderObjectIterFunc	iVar3	attachedObject	INFERRED	element of the attached array, its reference count at +8 is decremented
+local	_gleDetachShaderObjectIterFunc	iVar4	loopIndex	CONFIRMED	counter incremented to attachedCount
+local	_gleDetachShaderObjectIterFunc	piVar5	attachedCursor	CONFIRMED	walks the attachedObjects array one element per iteration
+local	_gleVPFlushTriQuadStrip	iVar1	carriedBytes	CONFIRMED	iVar4 * 8: the byte offset the vertex cursor is advanced by after the carried words are copied back
+local	_gleVPFlushTriQuadStrip	iVar2	copyIndex	CONFIRMED	index into the saved array, reset to 0 before each of the two copy loops
+local	_gleVPFlushTriQuadStrip	iVar3	oldWriteCursor	CONFIRMED	the word at glContext+0x4858 read before the flush callback runs; the saved words are read just below it
+local	_gleVPFlushTriQuadStrip	iVar4	carriedWordCountThenRemaining	CONFIRMED	(short at +0x487c) >> 2 = number of 8-byte words carried over, then used as the countdown of the second copy loop
+use	_gleVPFlushTriQuadStrip	iVar5	copyCountdown	CONFIRMED	countdown of the first copy loop, initialised from iVar4	^\s*for\ \(iVar5\ =\ iVar4;\ iVar5\ !=\ 0;\ iVar5\ =\ iVar5\ \+\ \-1\)\ \{$	+1
+use	_gleVPFlushTriQuadStrip	iVar5	bufferStart	CONFIRMED	word at glContext+0x4854 read after the flush callback ran; the carried words are copied back to it and the cursor at +0x4858 is set to bufferStart + carriedBytes	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4854\);$	+1
+use	_gleVPFlushTriQuadStrip	iVar5	bufferStart	CONFIRMED	word at glContext+0x4854 read after the flush callback ran; the carried words are copied back to it and the cursor at +0x4858 is set to bufferStart + carriedBytes	^\s*\*\(undefined8\ \*\)\(iVar5\ \+\ iVar2\ \*\ 8\)\ =\ local_210\[iVar2\];$	+1
+use	_gleVPFlushTriQuadStrip	iVar5	bufferStart	CONFIRMED	word at glContext+0x4854 read after the flush callback ran; the carried words are copied back to it and the cursor at +0x4858 is set to bufferStart + carriedBytes	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x4858\)\ =\ iVar5\ \+\ iVar1;$	+1
+local	_gleVPFlushTriQuadStrip	local_210	carriedWords	CONFIRMED	8-byte words saved from before the cursor and written back to the start of the buffer after the flush callback
+use	_gleUpdateFogData	fVar1	fogEndMinusStart	CONFIRMED	ctx+0x3158 (glFogfv pname 0xb64 GL_FOG_END) minus ctx+0x3154 (0xb63 GL_FOG_START), see _glFogfv_Exec	^\s*fVar1\ =\ \*\(float\ \*\)\(param_1\ \+\ 0x3158\)\ \-\ \*\(float\ \*\)\(param_1\ \+\ 0x3154\);$	+5
+use	_gleUpdateFogData	fVar1	fogInput	INFERRED	float read from the record at ctx+0x4854 (-0x1a4 when the fog coordinate source ctx+0x3166 == 0x8451 GL_FOG_COORDINATE_EXT, else -0x1d8) and passed to the selected fog function	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar5\ \+\ \-0x1a4\);$	+1
+use	_gleUpdateFogData	fVar1	fogInput	INFERRED	float read from the record at ctx+0x4854 (-0x1a4 when the fog coordinate source ctx+0x3166 == 0x8451 GL_FOG_COORDINATE_EXT, else -0x1d8) and passed to the selected fog function	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar5\ \+\ \-0x1d8\);$	+1
+use	_gleUpdateFogData	fVar1	fogInput	INFERRED	float read from the record at ctx+0x4854 (-0x1a4 when the fog coordinate source ctx+0x3166 == 0x8451 GL_FOG_COORDINATE_EXT, else -0x1d8) and passed to the selected fog function	^\s*in_f1\ =\ \(double\)\(\*\*\(double\ \(\ \*\*\)\(int,double\)\)\(param_1\ \+\ 0x4fe4\)\)\(param_1,\ \(double\)fVar1\);$	+1
+local	_gleUpdateFogData	fVar2	fogScale	INFERRED	stored to ctx+0x315c: FLOAT_00108e54 (1.0) / (end - start), or 200000.0 when the range is tiny; ctx+0x315c is the factor of the linear fog term (end + z) * ctx+0x315c in the vertex fog path
+local	_gleUpdateFogData	uVar4	fogModeCode	INFERRED	8 for GL_EXP (0x800), 4 for GL_LINEAR (0x2601), 0xc otherwise (GL_EXP2), stored to the short at ctx+0x4fe8 together with the selected fog function pointer at +0x4fe4
+local	_gleUpdateFogData	uVar3	flagsWord4980	CONFIRMED	ctx+0x4980 with bit 2 cleared (fog off) or set (fog on), stored back to ctx+0x4980
+local	_gleUpdateFogData	puVar6	fogFunc	CONFIRMED	function pointer (_gleFogExp / _gleFogLinear / _gleFogExp2) stored at ctx+0x4fe4 and called as (**(ctx+0x4fe4))(ctx, fogInput)
+local	_gleUpdateFogData	bVar7	fogRangeBelowEpsilon	INFERRED	end-start compared with FLOAT_00108e80 (4.99999987e-06)
+local	_gleUpdateFogData	in_f1	fogFuncResultOrIncomingF1	CONFIRMED	f1 result of the fog function call (stored to the record at ctx+0x4854 -0x1b4) or, when fog is disabled, the unchanged incoming f1; returned either way
+local	_glProgramEnvParameter4dARB_Exec	bVar1	dirtyBitNumber	CONFIRMED	byte from the per-parameter table (+0x158 + index): bit number set in the dirty bit array words at ctx+0x324 (via iVar6) and ctx+0x348 (via iVar4), same idiom as _glFogfv_Exec
+use	_glProgramEnvParameter4dARB_Exec	uVar2	changeWord3	CONFIRMED	ctx+0x31c | 0x800000 / 0x2000000, stored back to ctx+0x31c (pending state-change word 3)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x31c\)\ \|\ 0x800000;$	+1
+use	_glProgramEnvParameter4dARB_Exec	uVar2	changeWord3	CONFIRMED	ctx+0x31c | 0x800000 / 0x2000000, stored back to ctx+0x31c (pending state-change word 3)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x31c\)\ =\ uVar2;$	+1
+use	_glProgramEnvParameter4dARB_Exec	uVar2	changeWord3	CONFIRMED	ctx+0x31c | 0x800000 / 0x2000000, stored back to ctx+0x31c (pending state-change word 3)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x31c\)\ \|\ 0x2000000;$	+1
+use	_glProgramEnvParameter4dARB_Exec	uVar2	expectedTarget	CONFIRMED	0x8200 or 0x8804 compared with target when target is not 0x8620	^\s*uVar2\ =\ 0x8200;$	+1
+use	_glProgramEnvParameter4dARB_Exec	uVar2	expectedTarget	CONFIRMED	0x8200 or 0x8804 compared with target when target is not 0x8620	^\s*uVar2\ =\ 0x8804;$	+1
+use	_glProgramEnvParameter4dARB_Exec	uVar2	expectedTarget	CONFIRMED	0x8200 or 0x8804 compared with target when target is not 0x8620	^\s*if\ \(param_2\ !=\ uVar2\)\ \{$	+1
+use	_glProgramEnvParameter4dARB_Exec	iVar4	glContextPtr5424	CONFIRMED	ctx+0x5424 pointer, indexed by index+0x158 for the second dirty bit number (same idiom as _glFogfv_Exec)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x5424\);$	+1
+use	_glProgramEnvParameter4dARB_Exec	iVar4	glContextPtr5424	CONFIRMED	ctx+0x5424 pointer, indexed by index+0x158 for the second dirty bit number (same idiom as _glFogfv_Exec)	^\s*bVar1\ =\ \*\(byte\ \*\)\(param_3\ \+\ iVar4\ \+\ 0x158\);$	+1
+use	_glProgramEnvParameter4dARB_Exec	iVar4	dirtyWordAddress348	CONFIRMED	address of the dirty bit array word at ctx+0x348 (bit number >> 3 & 0x1c)	^\s*iVar4\ =\ \(bVar1\ >>\ 3\ \&\ 0x1c\)\ \+\ param_1;$	+2
+use	_glProgramEnvParameter4dARB_Exec	iVar4	envParameterArray	CONFIRMED	array of float4 program environment parameters selected by programTypeIndex (ctx+0x4668 + type*8); record index*0x10 receives x,y,z,w	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar5\ \*\ 8\ \+\ param_1\ \+\ 0x4668\);$	+3
+use	_glProgramEnvParameter4dARB_Exec	iVar5	programTypeIndex	CONFIRMED	0 for target 0x8620 (GL_VERTEX_PROGRAM_ARB), 1 for 0x8804 (GL_FRAGMENT_PROGRAM_ARB): selects the entry of the environment parameter table at ctx+0x4668	^\s*iVar5\ =\ 0;$	+1
+use	_glProgramEnvParameter4dARB_Exec	iVar5	programTypeIndex	CONFIRMED	0 for target 0x8620 (GL_VERTEX_PROGRAM_ARB), 1 for 0x8804 (GL_FRAGMENT_PROGRAM_ARB): selects the entry of the environment parameter table at ctx+0x4668	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar5\ \*\ 8\ \+\ param_1\ \+\ 0x4668\);$	+1
+use	_glProgramEnvParameter4dARB_Exec	iVar5	programTypeIndex	CONFIRMED	0 for target 0x8620 (GL_VERTEX_PROGRAM_ARB), 1 for 0x8804 (GL_FRAGMENT_PROGRAM_ARB): selects the entry of the environment parameter table at ctx+0x4668	^\s*iVar5\ =\ 1;$	+1
+use	_glProgramEnvParameter4dARB_Exec	iVar5	envParameter	CONFIRMED	address of the float4 record index*0x10 inside envParameterArray, +0xc = w, +4 = y, +8 = z	^\s*iVar5\ =\ iVar4\ \+\ param_3\ \*\ 0x10;$	+1
+use	_glProgramEnvParameter4dARB_Exec	iVar5	envParameter	CONFIRMED	address of the float4 record index*0x10 inside envParameterArray, +0xc = w, +4 = y, +8 = z	^\s*\*\(float\ \*\)\(iVar5\ \+\ 0xc\)\ =\ \(float\)fparam_4;$	+3
+local	_glProgramEnvParameter4dARB_Exec	iVar6	dirtyWordAddress324	CONFIRMED	address of the dirty bit array word at ctx+0x324 (bit number >> 3 & 0x1c)
+use	_glFogCoordPointer_Exec	uVar1	pluginBufferHandle	INFERRED	word copied from the buffer object's per-renderer handle array (buffer+0x10) to the client state (clientState+0x3ec, stride 0x23 words), one per renderer (count byte ctx+0x85a4)	^\s*uVar1\ =\ \*puVar4;$	+1
+use	_glFogCoordPointer_Exec	uVar1	pluginBufferHandle	INFERRED	word copied from the buffer object's per-renderer handle array (buffer+0x10) to the client state (clientState+0x3ec, stride 0x23 words), one per renderer (count byte ctx+0x85a4)	^\s*\*puVar6\ =\ uVar1;$	+1
+local	_glFogCoordPointer_Exec	iVar2	bufferRefCount	CONFIRMED	reference count at buffer object +8 after the decrement, freed with _gleFreeBufferObject at zero
+use	_glFogCoordPointer_Exec	iVar3	previousBuffer	INFERRED	buffer object the client state held before (clientState+0x36c), its reference count is decremented	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x36c\);$	+5
+use	_glFogCoordPointer_Exec	iVar3	elementSize	CONFIRMED	4 for GL_FLOAT (0x1406), 8 for GL_DOUBLE (0x140a): stored as the byte at clientState+0x84 and substituted for a zero stride	^\s*iVar3\ =\ 4;$	+1
+use	_glFogCoordPointer_Exec	iVar3	elementSize	CONFIRMED	4 for GL_FLOAT (0x1406), 8 for GL_DOUBLE (0x140a): stored as the byte at clientState+0x84 and substituted for a zero stride	^\s*iVar3\ =\ 8;$	+1
+use	_glFogCoordPointer_Exec	iVar3	elementSize	CONFIRMED	4 for GL_FLOAT (0x1406), 8 for GL_DOUBLE (0x140a): stored as the byte at clientState+0x84 and substituted for a zero stride	^\s*\*\(char\ \*\)\(iVar5\ \+\ 0x84\)\ =\ \(char\)iVar3;$	+1
+use	_glFogCoordPointer_Exec	iVar3	elementSize	CONFIRMED	4 for GL_FLOAT (0x1406), 8 for GL_DOUBLE (0x140a): stored as the byte at clientState+0x84 and substituted for a zero stride	^\s*param_3\ =\ iVar3;$	+1
+use	_glFogCoordPointer_Exec	uVar7	strideTypeKey	CONFIRMED	stride << 7 | type & 0xf, compared with and stored to clientState+0x8c	^\s*uVar7\ =\ param_3\ <<\ 7\ \|\ param_2\ \&\ 0xf;$	+1
+use	_glFogCoordPointer_Exec	uVar7	strideTypeKey	CONFIRMED	stride << 7 | type & 0xf, compared with and stored to clientState+0x8c	^\s*if\ \(\*\(uint\ \*\)\(iVar5\ \+\ 0x8c\)\ ==\ uVar7\)\ \{$	+1
+use	_glFogCoordPointer_Exec	uVar7	strideTypeKey	CONFIRMED	stride << 7 | type & 0xf, compared with and stored to clientState+0x8c	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x8c\)\ =\ uVar7;$	+1
+use	_glFogCoordPointer_Exec	uVar7	dispatchSlotMask	CONFIRMED	-(ctx+0x4684 slot +0xc == 0): selects between ctx+0x4680 and ctx+0x4684 (dispatch slot idiom)	^\s*uVar7\ =\ \-\(uint\)\(\*\(int\ \*\)\(\*\(uint\ \*\)\(param_1\ \+\ 0x4684\)\ \+\ 0xc\)\ ==\ 0\);$	+1
+use	_glFogCoordPointer_Exec	uVar7	dispatchSlotMask	CONFIRMED	-(ctx+0x4684 slot +0xc == 0): selects between ctx+0x4680 and ctx+0x4684 (dispatch slot idiom)	^\s*\(\(\*\(uint\ \*\)\(param_1\ \+\ 0x4680\)\ \&\ uVar7\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x4684\)\ \&\ \~uVar7\)\ \+\ 0xc\)\ =$	+1
+local	_glFogCoordPointer_Exec	iVar8	boundBuffer	INFERRED	buffer object from clientState+0x358 (its data pointer at +0x30 is added to pointer, +8 reference count, +0x10 per-renderer handles)
+local	_gleFlushPolygonTCLRDirtyFunc	uVar3	savedRecordByte	CONFIRMED	byte at carriedStart + short(ctx+0x487e), saved and zeroed around the flush when polygon mode (ctx+0x34d0/0x34d2) is GL_LINE (0x1b01), then restored
+local	_gleFlushPolygonTCLRDirtyFunc	iVar4	carriedByteCount	INFERRED	short at ctx+0x487c: number of bytes of the open primitive copied back after the flush (8 bytes per loop iteration, (n+7)>>3 iterations)
+local	_gleFlushPolygonTCLRDirtyFunc	iVar5	carriedStart	CONFIRMED	ctx+0x4858 minus carriedByteCount: where the carried bytes are read from after the flush callback has reset the buffer
+local	_gleFlushPolygonTCLRDirtyFunc	iVar2	bufferStartThenCopyDest	CONFIRMED	ctx+0x4854 read after the flush callback ran (used to zero a byte), then advanced by carriedByteCount to be the destination of the copy
+local	_gleFlushPolygonTCLRDirtyFunc	iVar1	copyOffset	CONFIRMED	byte offset of the 8-byte copy loop (0, 8, 16, ...)
+local	_gleFlushPolygonTCLRDirtyFunc	uVar6	copyChunksRemaining	CONFIRMED	(carriedByteCount + 7) >> 3, decremented per 8-byte chunk copied
+local	_glMultiDrawElementArrayAPPLE_NoopExec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask and the all-clean test
+local	_glMultiDrawElementArrayAPPLE_NoopExec	cVar2	rendererInfoByte79	CONFIRMED	byte at +0x79 of the record at ctx+0x468c (convention of the _NoopExec family)
+local	_glMultiDrawElementArrayAPPLE_NoopExec	uVar3	savedFirst	CONFIRMED	copy of parameter first made before _gleUpdateMatrixFunc and passed on as the stale r5 argument of _gleUpdateFramebufferCompleteness
+local	_glMultiDrawElementArrayAPPLE_NoopExec	uVar6	savedCount	CONFIRMED	copy of parameter count made before _gleUpdateMatrixFunc and passed on as the stale r6 argument of _gleUpdateFramebufferCompleteness
+local	_glMultiDrawElementArrayAPPLE_NoopExec	uVar7	savedPrimcount	CONFIRMED	copy of parameter primcount made before _gleUpdateMatrixFunc and passed on as the stale r7 argument of _gleUpdateFramebufferCompleteness
+local	_glMultiDrawElementArrayAPPLE_NoopExec	iVar5	dirtyBitArrayWord	CONFIRMED	word *srcCursor of the dirty bit array at ctx+0x324 (9 words), nonzero sets 0x800000 in change word 3
+local	_glMultiDrawElementArrayAPPLE_NoopExec	fparam_1	forwardedF1	CONFIRMED	FPR argument f1 forwarded to the callees; reloaded from the f1 result of the calls it follows
+local	_glMultiDrawElementArrayAPPLE_NoopExec	extraout_f1	f1AfterCall	INFERRED	f1 left behind by _gleUpdateMatrixFunc (Ghidra extraout), forwarded unchanged
+local	_glMultiDrawElementArrayAPPLE_NoopExec	extraout_f1_00	f1AfterCall1	INFERRED	f1 left behind by a later call (Ghidra extraout), forwarded unchanged
+local	_glMultiDrawElementArrayAPPLE_NoopExec	extraout_f1_01	f1AfterCall2	INFERRED	f1 left behind by the renderer update callback path (Ghidra extraout), forwarded unchanged
+local	_glDrawArrays_NoopExec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask and the all-clean test
+local	_glDrawArrays_NoopExec	cVar2	rendererInfoByte79	CONFIRMED	byte at +0x79 of the record at ctx+0x468c (convention of the _NoopExec family)
+local	_glDrawArrays_NoopExec	uVar3	savedFirst	CONFIRMED	copy of parameter first made before _gleUpdateMatrixFunc and passed on as the stale r5 argument of _gleUpdateFramebufferCompleteness
+local	_glDrawArrays_NoopExec	uVar6	savedCount	CONFIRMED	copy of parameter count made before _gleUpdateMatrixFunc and passed on as the stale r6 argument of _gleUpdateFramebufferCompleteness
+local	_glDrawArrays_NoopExec	iVar5	dirtyBitArrayWord	CONFIRMED	word *srcCursor of the dirty bit array at ctx+0x324 (9 words), nonzero sets 0x800000 in change word 3
+local	_glDrawArrays_NoopExec	fparam_1	forwardedF1	CONFIRMED	FPR argument f1 forwarded to the callees; reloaded from the f1 result of the calls it follows
+local	_glDrawArrays_NoopExec	extraout_f1	f1AfterCall	INFERRED	f1 left behind by _gleUpdateMatrixFunc (Ghidra extraout), forwarded unchanged
+local	_glDrawArrays_NoopExec	extraout_f1_00	f1AfterCall1	INFERRED	f1 left behind by a later call (Ghidra extraout), forwarded unchanged
+local	_glDrawArrays_NoopExec	extraout_f1_01	f1AfterCall2	INFERRED	f1 left behind by the renderer update callback path (Ghidra extraout), forwarded unchanged
+local	_glCopyPixels_NoopExec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask and the all-clean test
+local	_glCopyPixels_NoopExec	iVar4	dirtyBitArrayWord	CONFIRMED	word *srcCursor of the dirty bit array at ctx+0x324 (9 words), nonzero sets 0x800000 in change word 3
+local	_glCopyPixels_NoopExec	uVar5	savedY	CONFIRMED	copy of parameter y made before _gleUpdateMatrixFunc and passed on as the stale r5 argument of _gleUpdateFramebufferCompleteness
+local	_glCopyPixels_NoopExec	uVar6	savedWidth	CONFIRMED	copy of parameter width made before _gleUpdateMatrixFunc and passed on as the stale r6 argument of _gleUpdateFramebufferCompleteness
+local	_glCopyPixels_NoopExec	uVar7	savedHeight	CONFIRMED	copy of parameter height made before _gleUpdateMatrixFunc and passed on as the stale r7 argument of _gleUpdateFramebufferCompleteness
+local	_glCopyPixels_NoopExec	uVar8	savedType	CONFIRMED	copy of parameter type made before _gleUpdateMatrixFunc and passed on as the stale r8 argument of _gleUpdateFramebufferCompleteness
+local	_glCopyPixels_NoopExec	fparam_1	forwardedF1	CONFIRMED	FPR argument f1 forwarded to the callees; reloaded from the f1 result of the calls it follows
+local	_glCopyPixels_NoopExec	extraout_f1	f1AfterCall	INFERRED	f1 left behind by _gleUpdateMatrixFunc (Ghidra extraout), forwarded unchanged
+local	_glCopyPixels_NoopExec	extraout_f1_00	f1AfterCall1	INFERRED	f1 left behind by a later call (Ghidra extraout), forwarded unchanged
+local	_glCopyPixels_NoopExec	extraout_f1_01	f1AfterCall2	INFERRED	f1 left behind by the renderer update callback path (Ghidra extraout), forwarded unchanged
+use	_glBitmap_NoopExec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask	^\s*bVar1\ =\ cVar2\ ==\ '\\0';$	+2
+use	_glBitmap_NoopExec	bVar1	rendererInfoByte79IsZero	CONFIRMED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff change-word mask	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	_glBitmap_NoopExec	bVar1	noStateChangePending	CONFIRMED	true when the change words (ctx+0x310, +0x314, +0x318 & ~2, masked +0x31c, +0x320) are all zero	^\s*bVar1\ =\ \(\(\*piVar9\ ==\ 0\ \&\&\ \*\(int\ \*\)\(param_1\ \+\ 0x314\)\ ==\ 0\)\ \&\&\ uVar8\ ==\ 0\)\ \&\&\ uVar7\ ==\ 0;$	+1
+use	_glBitmap_NoopExec	bVar1	noStateChangePending	CONFIRMED	true when the change words (ctx+0x310, +0x314, +0x318 & ~2, masked +0x31c, +0x320) are all zero	^\s*bVar1\ =\ \(\(\(\*piVar9\ ==\ 0\ \&\&\ \*\(int\ \*\)\(param_1\ \+\ 0x314\)\ ==\ 0\)\ \&\&$	+2
+use	_glBitmap_NoopExec	bVar1	noStateChangePending	CONFIRMED	true when the change words (ctx+0x310, +0x314, +0x318 & ~2, masked +0x31c, +0x320) are all zero	^\s*if\ \(!bVar1\)\ \{$	+1
+local	_glBitmap_NoopExec	iVar3	dirtyBitArrayWord	CONFIRMED	word *srcCursor of the dirty bit array at ctx+0x324 (9 words), nonzero sets 0x800000 in change word 3
+local	_glBitmap_NoopExec	uVar6	savedHeight	CONFIRMED	copy of parameter height made before _gleUpdateMatrixFunc and passed on as the stale r5 argument of _gleUpdateFramebufferCompleteness
+local	_glBitmap_NoopExec	extraout_f1	f1AfterCall	INFERRED	f1 left behind by _gleUpdateMatrixFunc (Ghidra extraout), forwarded unchanged
+use	_glFrustum_Exec	fVar1	rightMinusLeft	CONFIRMED	right - left, the denominator of A = (right + left) / (right - left) and of 2n / (right - left) of the glFrustum matrix	^\s*fVar1\ =\ \(float\)\(fparam_2\ \-\ fparam_1\);$	^\s*fVar1\ =\ \(float\)\(\(double\)dVar13\ \*\ \(double\)\(1\.0\ /\ fVar1\)\);$	all	rhs
+use	_glFrustum_Exec	fVar1	frustumXScale	CONFIRMED	2 * zNear / (right - left): the matrix element that scales column x (currentMatrix[0..3] *= it)	^\s*fVar1\ =\ \(float\)\(\(double\)dVar13\ \*\ \(double\)\(1\.0\ /\ fVar1\)\);$	^\s*pfVar12\[0xf\]\ =\ fVar10\ \*\ fVar3;$	lhs	none
+use	_glFrustum_Exec	fVar2	topMinusBottom	CONFIRMED	top - bottom, the denominator of B = (top + bottom) / (top - bottom) and of 2n / (top - bottom)	^\s*fVar2\ =\ \(float\)\(fparam_4\ \-\ fparam_3\);$	^\s*fVar2\ =\ \(float\)\(\(double\)dVar13\ \*\ \(double\)\(1\.0\ /\ fVar2\)\);$	all	rhs
+use	_glFrustum_Exec	fVar2	frustumYScale	CONFIRMED	2 * zNear / (top - bottom): the matrix element that scales column y (currentMatrix[4..7] *= it)	^\s*fVar2\ =\ \(float\)\(\(double\)dVar13\ \*\ \(double\)\(1\.0\ /\ fVar2\)\);$	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x50ac\)\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x50ac\)\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x50a8\);$	lhs	none
+use	_glFrustum_Exec	fVar3	nearMinusFar	CONFIRMED	zNear - zFar, the denominator of C = (zFar + zNear) / (zNear - zFar) and of D	^\s*fVar3\ =\ \(float\)\(fparam_5\ \-\ fparam_6\);$	^\s*fVar3\ =\ \(float\)\(fparam_6\ \*\ \(double\)dVar13\ \*\ \(double\)\(1\.0\ /\ fVar3\)\);$	all	rhs
+use	_glFrustum_Exec	fVar3	frustumD	CONFIRMED	D = zFar * 2 * zNear / (zNear - zFar): multiplied into column 2 to form the translation column currentMatrix[12..15]	^\s*fVar3\ =\ \(float\)\(fparam_6\ \*\ \(double\)dVar13\ \*\ \(double\)\(1\.0\ /\ fVar3\)\);$	^\s*pfVar12\[7\]\ =\ pfVar12\[7\]\ \*\ fVar2;$	lhs	none

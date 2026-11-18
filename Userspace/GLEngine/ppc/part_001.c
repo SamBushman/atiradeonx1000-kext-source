@@ -1720,58 +1720,59 @@ int _gleUpdateTextureParams(glContext, param_2)
 /* _gleUpdateFogData @ 0x92a8 (348 bytes) */
 double _gleUpdateFogData(int glContext)
 {
-  float fVar1;
-  float fVar2;
-  undefined2 uVar4;
-  uint uVar3;
+  float fogEndMinusStart;
+  float fogInput;
+  float fogScale;
+  undefined2 fogModeCode;
+  uint flagsWord4980;
   int glContextPtr4854;
-  undefined *puVar6;
-  bool bVar7;
-  double in_f1;
+  undefined *fogFunc;
+  bool fogRangeBelowEpsilon;
+  double fogFuncResultOrIncomingF1;
   
-  fVar1 = *(float *)(glContext + 0x3158) - *(float *)(glContext + 0x3154);
-  bVar7 = fVar1 < FLOAT_00108e80;
-  *(float *)(glContext + 0x315c) = fVar1;
-  if ((!bVar7) || (fVar2 = FLOAT_00108eb4, !(FLOAT_00108f3c < fVar1))) {
-    fVar2 = FLOAT_00108e54 / fVar1;
+  fogEndMinusStart = *(float *)(glContext + 0x3158) - *(float *)(glContext + 0x3154);
+  fogRangeBelowEpsilon = fogEndMinusStart < FLOAT_00108e80;
+  *(float *)(glContext + 0x315c) = fogEndMinusStart;
+  if ((!fogRangeBelowEpsilon) || (fogScale = FLOAT_00108eb4, !(FLOAT_00108f3c < fogEndMinusStart))) {
+    fogScale = FLOAT_00108e54 / fogEndMinusStart;
   }
-  *(float *)(glContext + 0x315c) = fVar2;
-  puVar6 = PTR__gleFogExp_00110e28;
+  *(float *)(glContext + 0x315c) = fogScale;
+  fogFunc = PTR__gleFogExp_00110e28;
   if (*(char *)(glContext + 0x316a) == '\0') {
-    uVar3 = *(uint *)(glContext + 0x4980) & 0xfffffffb;
+    flagsWord4980 = *(uint *)(glContext + 0x4980) & 0xfffffffb;
     *(undefined2 *)(glContext + 0x4fe8) = 0;
-    *(undefined **)(glContext + 0x4fe4) = puVar6;
+    *(undefined **)(glContext + 0x4fe4) = fogFunc;
   }
   else {
     glContextPtr4854 = *(int *)(glContext + 0x4854);
     if (*(short *)(glContext + 0x3164) == 0x800) {
-      uVar4 = 8;
+      fogModeCode = 8;
     }
     else if (*(short *)(glContext + 0x3164) == 0x2601) {
-      uVar4 = 4;
-      puVar6 = PTR__gleFogLinear_00110e2c;
+      fogModeCode = 4;
+      fogFunc = PTR__gleFogLinear_00110e2c;
     }
     else {
-      uVar4 = 0xc;
-      puVar6 = PTR__gleFogExp2_00110e24;
+      fogModeCode = 0xc;
+      fogFunc = PTR__gleFogExp2_00110e24;
     }
-    *(undefined **)(glContext + 0x4fe4) = puVar6;
-    *(undefined2 *)(glContext + 0x4fe8) = uVar4;
+    *(undefined **)(glContext + 0x4fe4) = fogFunc;
+    *(undefined2 *)(glContext + 0x4fe8) = fogModeCode;
     if (*(short *)(glContext + 0x3166) == -0x7baf) {
       *(ushort *)(glContext + 0x4fe8) = *(ushort *)(glContext + 0x4fe8) | 0x10;
-      fVar1 = *(float *)(glContextPtr4854 + -0x1a4);
+      fogInput = *(float *)(glContextPtr4854 + -0x1a4);
     }
     else {
-      fVar1 = *(float *)(glContextPtr4854 + -0x1d8);
+      fogInput = *(float *)(glContextPtr4854 + -0x1d8);
     }
-    in_f1 = (double)(**(double ( **)(int,double))(glContext + 0x4fe4))(glContext, (double)fVar1);
-    *(float *)(glContextPtr4854 + -0x1b4) = (float)in_f1;
-    uVar3 = *(uint *)(glContext + 0x4980) | 4;
+    fogFuncResultOrIncomingF1 = (double)(**(double ( **)(int,double))(glContext + 0x4fe4))(glContext, (double)fogInput);
+    *(float *)(glContextPtr4854 + -0x1b4) = (float)fogFuncResultOrIncomingF1;
+    flagsWord4980 = *(uint *)(glContext + 0x4980) | 4;
   }
-  *(uint *)(glContext + 0x4980) = uVar3;
+  *(uint *)(glContext + 0x4980) = flagsWord4980;
   *(uint *)(glContext + 0x497c) = *(uint *)(glContext + 0x497c) | 4;
   *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 1;
-  return in_f1;
+  return fogFuncResultOrIncomingF1;
 }
 
 /* _gleUpdatePolyMode @ 0x9404 (408 bytes) */

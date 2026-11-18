@@ -526,42 +526,42 @@ double _gleSelectQuadStrip(glContext, param_2, param_3)
 }
 
 /* _gleDetachShaderObjectIterFunc @ 0xf402c (180 bytes) */
-void _gleDetachShaderObjectIterFunc(unusedArg1, param_2)
+void _gleDetachShaderObjectIterFunc(unusedArg1, objectRecord)
   undefined4 unusedArg1;
-  int param_2;
+  int objectRecord;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
-  int *piVar5;
+  int attachedCount;
+  int *attachedObjects;
+  int attachedObject;
+  int loopIndex;
+  int *attachedCursor;
   
-  if (*(int *)(param_2 + 0x10) == 0x8b40) {
-    iVar1 = *(int *)(param_2 + 0x48);
-    iVar4 = 0;
-    if (iVar1 < 1) {
-      piVar2 = *(int **)(param_2 + 0x44);
+  if (*(int *)(objectRecord + 0x10) == 0x8b40) {
+    attachedCount = *(int *)(objectRecord + 0x48);
+    loopIndex = 0;
+    if (attachedCount < 1) {
+      attachedObjects = *(int **)(objectRecord + 0x44);
     }
     else {
-      piVar2 = *(int **)(param_2 + 0x44);
-      piVar5 = piVar2;
+      attachedObjects = *(int **)(objectRecord + 0x44);
+      attachedCursor = attachedObjects;
       do {
-        iVar3 = *piVar5;
-        if (iVar3 != 0) {
-          *(int *)(iVar3 + 8) = *(int *)(iVar3 + 8) + -1;
+        attachedObject = *attachedCursor;
+        if (attachedObject != 0) {
+          *(int *)(attachedObject + 8) = *(int *)(attachedObject + 8) + -1;
         }
-        iVar4 = iVar4 + 1;
-        piVar5 = piVar5 + 1;
-      } while (iVar4 < iVar1);
+        loopIndex = loopIndex + 1;
+        attachedCursor = attachedCursor + 1;
+      } while (loopIndex < attachedCount);
     }
-    if (piVar2 != (int *)0x0) {
-      _free(piVar2);
+    if (attachedObjects != (int *)0x0) {
+      _free(attachedObjects);
     }
-    *(undefined4 *)(param_2 + 0x48) = 0;
-    *(undefined4 *)(param_2 + 0x44) = 0;
+    *(undefined4 *)(objectRecord + 0x48) = 0;
+    *(undefined4 *)(objectRecord + 0x44) = 0;
   }
-  if (*(char *)(param_2 + 0x14) == '\0') {
-    *(int *)(param_2 + 8) = *(int *)(param_2 + 8) + -1;
+  if (*(char *)(objectRecord + 0x14) == '\0') {
+    *(int *)(objectRecord + 8) = *(int *)(objectRecord + 8) + -1;
   }
   return;
 }

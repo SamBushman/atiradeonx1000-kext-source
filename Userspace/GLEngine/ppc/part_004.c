@@ -1652,9 +1652,12 @@ void _glVertex4f_Exec(glContext)
 /* _glFrustum_Exec @ 0x31220 (660 bytes) */
 void _glFrustum_Exec(int glContext,double left,double right,double bottom,double top,float zNear,double zFar,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
+  float rightMinusLeft;
+  float frustumXScale;
+  float topMinusBottom;
+  float frustumYScale;
+  float nearMinusFar;
+  float frustumD;
   float frustumB;
   float absExtent;
   float frustumA;
@@ -1670,52 +1673,52 @@ void _glFrustum_Exec(int glContext,double left,double right,double bottom,double
   currentMatrix = *(float **)(glContext + 0x4fec);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
     if ((!(zNear <= DOUBLE_00108d60)) && (!(zFar <= DOUBLE_00108d60))) {
-      fVar1 = (float)(right - left);
-      fVar2 = (float)(top - bottom);
-      fVar3 = (float)(zNear - zFar);
-      absExtent = fVar1;
-      if (!(0.0 <= fVar1)) {
-        absExtent = -fVar1;
+      rightMinusLeft = (float)(right - left);
+      topMinusBottom = (float)(top - bottom);
+      nearMinusFar = (float)(zNear - zFar);
+      absExtent = rightMinusLeft;
+      if (!(0.0 <= rightMinusLeft)) {
+        absExtent = -rightMinusLeft;
       }
       if (!(absExtent < FLOAT_00108e80)) {
-        absExtent = fVar2;
-        if (!(FLOAT_00108e50 <= fVar2)) {
-          absExtent = -fVar2;
+        absExtent = topMinusBottom;
+        if (!(FLOAT_00108e50 <= topMinusBottom)) {
+          absExtent = -topMinusBottom;
         }
         if (!(absExtent < FLOAT_00108e80)) {
-          absExtent = fVar3;
-          if (!(FLOAT_00108e50 <= fVar3)) {
-            absExtent = -fVar3;
+          absExtent = nearMinusFar;
+          if (!(FLOAT_00108e50 <= nearMinusFar)) {
+            absExtent = -nearMinusFar;
           }
           if (!(absExtent < FLOAT_00108e80)) {
             column2X = currentMatrix[8];
             column2Y = currentMatrix[9];
             column2Z = currentMatrix[10];
             column2W = currentMatrix[0xb];
-            frustumB = (float)((top + bottom) * (double)(1.0 / fVar2));
-            frustumA = (float)((right + left) * (double)(1.0 / fVar1));
-            frustumC = (float)((zFar + zNear) * (double)(1.0 / fVar3));
+            frustumB = (float)((top + bottom) * (double)(1.0 / topMinusBottom));
+            frustumA = (float)((right + left) * (double)(1.0 / rightMinusLeft));
+            frustumC = (float)((zFar + zNear) * (double)(1.0 / nearMinusFar));
             twoNear = (double)(zNear + zNear);
-            fVar1 = (float)((double)twoNear * (double)(1.0 / fVar1));
+            frustumXScale = (float)((double)twoNear * (double)(1.0 / rightMinusLeft));
             currentMatrix[8] = (column2X * frustumC + (*currentMatrix * frustumA + currentMatrix[4] * frustumB)) - currentMatrix[0xc];
-            fVar3 = (float)(zFar * (double)twoNear * (double)(1.0 / fVar3));
-            fVar2 = (float)((double)twoNear * (double)(1.0 / fVar2));
+            frustumD = (float)(zFar * (double)twoNear * (double)(1.0 / nearMinusFar));
+            frustumYScale = (float)((double)twoNear * (double)(1.0 / topMinusBottom));
             currentMatrix[9] = (column2Y * frustumC + (currentMatrix[1] * frustumA + currentMatrix[5] * frustumB)) - currentMatrix[0xd];
             currentMatrix[10] = (column2Z * frustumC + (currentMatrix[2] * frustumA + currentMatrix[6] * frustumB)) - currentMatrix[0xe];
             currentMatrix[0xb] = (column2W * frustumC + (currentMatrix[3] * frustumA + currentMatrix[7] * frustumB)) - currentMatrix[0xf]
             ;
-            currentMatrix[3] = currentMatrix[3] * fVar1;
-            currentMatrix[4] = currentMatrix[4] * fVar2;
-            *currentMatrix = *currentMatrix * fVar1;
-            currentMatrix[5] = currentMatrix[5] * fVar2;
-            currentMatrix[1] = currentMatrix[1] * fVar1;
-            currentMatrix[6] = currentMatrix[6] * fVar2;
-            currentMatrix[2] = currentMatrix[2] * fVar1;
-            currentMatrix[0xf] = column2W * fVar3;
-            currentMatrix[0xc] = column2X * fVar3;
-            currentMatrix[0xd] = column2Y * fVar3;
-            currentMatrix[0xe] = column2Z * fVar3;
-            currentMatrix[7] = currentMatrix[7] * fVar2;
+            currentMatrix[3] = currentMatrix[3] * frustumXScale;
+            currentMatrix[4] = currentMatrix[4] * frustumYScale;
+            *currentMatrix = *currentMatrix * frustumXScale;
+            currentMatrix[5] = currentMatrix[5] * frustumYScale;
+            currentMatrix[1] = currentMatrix[1] * frustumXScale;
+            currentMatrix[6] = currentMatrix[6] * frustumYScale;
+            currentMatrix[2] = currentMatrix[2] * frustumXScale;
+            currentMatrix[0xf] = column2W * frustumD;
+            currentMatrix[0xc] = column2X * frustumD;
+            currentMatrix[0xd] = column2Y * frustumD;
+            currentMatrix[0xe] = column2Z * frustumD;
+            currentMatrix[7] = currentMatrix[7] * frustumYScale;
             *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | *(uint *)(glContext + 0x50a8);
             *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | *(uint *)(glContext + 0x50a8);
             return;

@@ -973,55 +973,55 @@ int _gleRemoveHashObject(param_1, param_2)
 }
 
 /* _gleFreeTextureObject @ 0x203a0 (256 bytes) */
-void _gleFreeTextureObject(glContext, param_2)
+void _gleFreeTextureObject(glContext, textureObject)
   undefined4 glContext;
-  int param_2;
+  int textureObject;
 {
-  ushort uVar1;
-  int iVar2;
-  int iVar3;
+  ushort textureFlags;
+  int faceCount;
+  int pluginTextureHandles;
   int loopIndex;
   int loopIndex2;
   int remaining;
-  int iVar7;
+  int levelRecord;
   
-  iVar3 = param_2 + 0x10;
-  ((void (*)())_gleDeletePluginTexture)(glContext,iVar3);
-  uVar1 = *(ushort *)(param_2 + 0x34);
-  if ((uVar1 & 0x100) == 0) {
-    if ((*(int *)(param_2 + 0xd0) != 0) && ((*(byte *)(param_2 + 199) & 7) == 0)) {
-      _gleFreeTextureLevel(glContext,iVar3,param_2 + 0xbc);
-      uVar1 = *(ushort *)(param_2 + 0x34);
+  pluginTextureHandles = textureObject + 0x10;
+  ((void (*)())_gleDeletePluginTexture)(glContext,pluginTextureHandles);
+  textureFlags = *(ushort *)(textureObject + 0x34);
+  if ((textureFlags & 0x100) == 0) {
+    if ((*(int *)(textureObject + 0xd0) != 0) && ((*(byte *)(textureObject + 199) & 7) == 0)) {
+      _gleFreeTextureLevel(glContext,pluginTextureHandles,textureObject + 0xbc);
+      textureFlags = *(ushort *)(textureObject + 0x34);
     }
-    iVar2 = 0;
-    if ((uVar1 & 0x200) == 0) {
-      iVar2 = 1;
-      if ((uVar1 & 0x2000) == 0) {
-        iVar2 = 6;
-        if ((uVar1 & 0xf) != 0) {
-          iVar2 = 1;
+    faceCount = 0;
+    if ((textureFlags & 0x200) == 0) {
+      faceCount = 1;
+      if ((textureFlags & 0x2000) == 0) {
+        faceCount = 6;
+        if ((textureFlags & 0xf) != 0) {
+          faceCount = 1;
         }
       }
     }
     loopIndex = 0;
-    if (iVar2 != 0) {
+    if (faceCount != 0) {
       loopIndex2 = 0;
       do {
         remaining = 0xe;
-        iVar7 = param_2 + loopIndex2 + 0xd4;
+        levelRecord = textureObject + loopIndex2 + 0xd4;
         do {
-          if ((*(int *)(iVar7 + 0x14) != 0) && ((*(byte *)(iVar7 + 0xb) & 7) == 0)) {
-            _gleFreeTextureLevel(glContext,iVar3,iVar7);
+          if ((*(int *)(levelRecord + 0x14) != 0) && ((*(byte *)(levelRecord + 0xb) & 7) == 0)) {
+            _gleFreeTextureLevel(glContext,pluginTextureHandles,levelRecord);
           }
           remaining = remaining + -1;
-          iVar7 = iVar7 + 0x18;
+          levelRecord = levelRecord + 0x18;
         } while (-1 < remaining);
         loopIndex = loopIndex + 1;
         loopIndex2 = loopIndex2 + 0x168;
-      } while (loopIndex < iVar2);
+      } while (loopIndex < faceCount);
     }
   }
-  _free(param_2);
+  _free(textureObject);
   return;
 }
 
