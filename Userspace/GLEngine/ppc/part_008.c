@@ -911,42 +911,42 @@ void _glPassThrough_Exec(int glContext,float token)
 }
 
 /* _gleCopyPixelMapi @ 0x50358 (232 bytes) */
-void _gleCopyPixelMapi(param_1, param_2, param_3, param_4)
-  int *param_1;
-  undefined4 *param_2;
-  int param_3;
-  int *param_4;
+void _gleCopyPixelMapi(srcValues, mapStorageSlot, entryCount, capacitySlot)
+  int *srcValues;
+  undefined4 *mapStorageSlot;
+  int entryCount;
+  int *capacitySlot;
 {
-  undefined *puVar1;
+  undefined *mapStorage;
   int loopIndex;
   
-  puVar1 = (undefined *)*param_2;
-  if ((param_3 == 1) && (*param_1 == 0)) {
-    if (puVar1 == PTR__gle_default_pix_map_i_00112044) {
+  mapStorage = (undefined *)*mapStorageSlot;
+  if ((entryCount == 1) && (*srcValues == 0)) {
+    if (mapStorage == PTR__gle_default_pix_map_i_00112044) {
       return;
     }
-    _free(puVar1);
+    _free(mapStorage);
 LAB_0005041c:
-    *param_2 = PTR__gle_default_pix_map_i_00112044;
-    *param_4 = 1;
+    *mapStorageSlot = PTR__gle_default_pix_map_i_00112044;
+    *capacitySlot = 1;
   }
   else {
-    if ((param_3 != *param_4) || (puVar1 == PTR__gle_default_pix_map_i_00112044)) {
-      if (puVar1 == PTR__gle_default_pix_map_i_00112044) {
-        puVar1 = (undefined *)0x0;
+    if ((entryCount != *capacitySlot) || (mapStorage == PTR__gle_default_pix_map_i_00112044)) {
+      if (mapStorage == PTR__gle_default_pix_map_i_00112044) {
+        mapStorage = (undefined *)0x0;
       }
-      puVar1 = (undefined *)_realloc(puVar1,param_3 << 2);
-      if (puVar1 == (undefined *)0x0) goto LAB_0005041c;
-      *param_2 = puVar1;
-      *param_4 = param_3;
+      mapStorage = (undefined *)_realloc(mapStorage,entryCount << 2);
+      if (mapStorage == (undefined *)0x0) goto LAB_0005041c;
+      *mapStorageSlot = mapStorage;
+      *capacitySlot = entryCount;
     }
     loopIndex = 0;
-    if (0 < param_3) {
+    if (0 < entryCount) {
       do {
-        *(int *)(puVar1 + loopIndex * 4) = param_1[loopIndex];
-        param_3 = param_3 + -1;
+        *(int *)(mapStorage + loopIndex * 4) = srcValues[loopIndex];
+        entryCount = entryCount + -1;
         loopIndex = loopIndex + 1;
-      } while (param_3 != 0);
+      } while (entryCount != 0);
     }
   }
   return;

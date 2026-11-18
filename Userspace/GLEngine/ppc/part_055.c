@@ -847,46 +847,46 @@ double _gleVPFlipColors(glContext, vertexCursor, vertexCount, facing)
 void _gleVPRenderPoints(glContext)
   int glContext;
 {
-  int iVar1;
-  uint uVar2;
+  int texEnableBits;
+  uint clipCodes;
   code *UNRECOVERED_JUMPTABLE;
-  undefined4 uVar3;
-  uint uVar4;
-  undefined4 uVar5;
+  undefined4 drawVertexList;
+  uint vertexCountThenClippedCount;
+  undefined4 vertexList;
   
-  iVar1 = ((int (*)())_gleTexEnableBits)(glContext);
+  texEnableBits = ((int (*)())_gleTexEnableBits)(glContext);
   if ((((int)*(short *)(glContext + 0x487c) == 0) ||
-      (uVar4 = (uint)(*(int *)(glContext + 0x4858) - *(int *)(glContext + 0x4854)) /
-               (uint)(int)*(short *)(glContext + 0x487c), (int)uVar4 < 1)) ||
-     (uVar2 = _gleVPEmulate(glContext,uVar4), (uVar2 & 0xff00) != 0)) {
+      (vertexCountThenClippedCount = (uint)(*(int *)(glContext + 0x4858) - *(int *)(glContext + 0x4854)) /
+               (uint)(int)*(short *)(glContext + 0x487c), (int)vertexCountThenClippedCount < 1)) ||
+     (clipCodes = _gleVPEmulate(glContext,vertexCountThenClippedCount), (clipCodes & 0xff00) != 0)) {
     return;
   }
-  uVar5 = *(undefined4 *)(glContext + 0x4864);
-  if (((uVar2 & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
-    if (iVar1 != 0) {
-      (**(code **)(glContext + 0x506c))(glContext,uVar5,uVar4,0);
+  vertexList = *(undefined4 *)(glContext + 0x4864);
+  if (((clipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
+    if (texEnableBits != 0) {
+      (**(code **)(glContext + 0x506c))(glContext,vertexList,vertexCountThenClippedCount,0);
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46b0);
-    uVar3 = uVar5;
+    drawVertexList = vertexList;
   }
   else {
-    if (iVar1 != 0) {
-      (**(code **)(glContext + 0x5074))(glContext,uVar5,uVar4,0);
+    if (texEnableBits != 0) {
+      (**(code **)(glContext + 0x5074))(glContext,vertexList,vertexCountThenClippedCount,0);
     }
-    uVar3 = *(undefined4 *)(glContext + 0x4870);
-    uVar4 = _gleClipPoints(glContext,uVar5,uVar4,uVar3);
-    if (uVar4 == 0) {
+    drawVertexList = *(undefined4 *)(glContext + 0x4870);
+    vertexCountThenClippedCount = _gleClipPoints(glContext,vertexList,vertexCountThenClippedCount,drawVertexList);
+    if (vertexCountThenClippedCount == 0) {
       return;
     }
     if ((*(char *)(glContext + 0x4e18) != '\0') &&
-       (uVar4 = _gleClipPointsPlane(glContext,uVar3,uVar4), uVar4 == 0)) {
+       (vertexCountThenClippedCount = _gleClipPointsPlane(glContext,drawVertexList,vertexCountThenClippedCount), vertexCountThenClippedCount == 0)) {
       return;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46d8);
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(*(undefined4 *)(glContext + 0x4688),uVar3,uVar4);
+  (*UNRECOVERED_JUMPTABLE)(*(undefined4 *)(glContext + 0x4688),drawVertexList,vertexCountThenClippedCount);
   return;
 }
 

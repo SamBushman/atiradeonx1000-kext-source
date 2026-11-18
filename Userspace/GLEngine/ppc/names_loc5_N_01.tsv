@@ -1,0 +1,89 @@
+local	_checkFastPath	param_2	textureLevel	CONFIRMED	every caller passes its textureLevel; +0xc/+0xe/+0x14 are the level width/height/data pointer used in the offset formula
+local	_checkFastPath	param_5	zoffset	CONFIRMED	callers pass zoffset (0 for 1D/2D); the formula width*(height*param_5+yoffset)+xoffset indexes the 3D slice
+local	_checkFastPath	uVar1	levelHeight	INFERRED	ushort at textureLevel+0xe, multiplied by the slice index in the texel offset formula (height*zoffset+yoffset)
+local	_checkFastPath	uVar2	levelWidth	CONFIRMED	ushort at textureLevel+0xc, the third argument of _gleRowBytes(format,type,width) and the row multiplier in the offset formula
+local	_checkFastPath	iVar5	levelData	INFERRED	textureLevel+0x14, compared with pixels plus the byte offset of the sub-rectangle: the level's texel data pointer
+local	_checkFastPath	auStack_40	packPixelBytes	CONFIRMED	7th arg of _glePixelPackSettings = pixelBytesOut
+local	_checkFastPath	local_3c	packStartOffset	CONFIRMED	8th arg of _glePixelPackSettings = startOffsetOut; added to pixels in the comparison
+local	_checkFastPath	local_50	packRowBytes	CONFIRMED	9th arg of _glePixelPackSettings = rowBytesOut; compared with the level rowBytes
+local	_checkFastPath	auStack_4c	packRowPadding	CONFIRMED	10th arg of _glePixelPackSettings = rowPaddingOut
+local	_checkFastPath	auStack_48	packImageBytes	CONFIRMED	11th arg of _glePixelPackSettings = imageBytesOut
+local	_checkFastPath	auStack_44	packImagePadding	CONFIRMED	12th arg of _glePixelPackSettings = imagePaddingOut
+local	_gleGetMatrixd	param_1	srcMatrix	CONFIRMED	16 floats read, converted to double and stored in param_2 (function name: GetMatrixd)
+local	_gleGetMatrixd	param_2	dstMatrix	CONFIRMED	16 doubles written from the float matrix param_1; the caller (glGetDoublev) passes its values array
+local	_gleDrawPixelsFastLoadColorTables	iVar1	colorTable	CONFIRMED	result of _gleLookUpColorTable(glContext, 0x80d0 / 0x80d2 / 0x80d1) three times: always a color table object whose +0xc0 data, +0xbc/+0xbe/+0xb0 fields are copied
+local	_gleDrawPixelsFastLoadColorTables	param_2	pixelProcessRecord	INFERRED	caller _CopySourceSubImageToTexture passes &local_e0, the record it later hands to _glgProcessPixels
+local	_gleCopyPixelMapi	param_1	srcValues	CONFIRMED	int array copied element by element into the map storage
+local	_gleCopyPixelMapi	param_2	mapStorageSlot	CONFIRMED	slot holding the pointer to the map storage: reset to _gle_default_pix_map_i or set to the realloc result
+local	_gleCopyPixelMapi	param_3	entryCount	CONFIRMED	number of ints copied; realloc size is param_3<<2
+local	_gleCopyPixelMapi	param_4	capacitySlot	INFERRED	receives param_3 (or 1 for the default map) after the (re)allocation: the stored map size
+local	_gleCopyPixelMapi	puVar1	mapStorage	CONFIRMED	current map array: the shared default map, or the malloc/realloc block the values are copied into
+local	_glMap2f_Exec	uVar4	mapTypeIndex	CONFIRMED	target - 0xdb0 (GL_MAP2_COLOR_4): bounds checked against 8 and used as the switch selector over the 9 map types
+local	_glMap2f_Exec	iVar1	mapTypeIndexTimes4	CONFIRMED	uVar4 * 4, forwarded to the Map2*Load callee as an argument it ignores
+local	_glMap2f_Exec	iVar5	uorderCopy	CONFIRMED	copy of uorder taken at function entry, forwarded to the Map2*Load callee
+local	_gliGetVersion	kVar1	hostInfoStatus	CONFIRMED	kern_return_t of _host_info; nonzero returns 0
+local	_gliGetVersion	aiStack_70	hostBasicInfo	CONFIRMED	buffer filled by _host_info(host, HOST_BASIC_INFO=1, ...)
+local	_gliGetVersion	local_64	hostCpuType	CONFIRMED	offset 12 of host_basic_info (cpu_type); compared with 0x12 = CPU_TYPE_POWERPC
+local	_gliGetVersion	local_60	hostCpuSubtype	CONFIRMED	offset 16 of host_basic_info (cpu_subtype); compared with the PowerPC subtypes 9/10/11/100 to set the _gle_processor bits
+local	_gliGetVersion	local_40	hostInfoCount	CONFIRMED	in/out count of _host_info: set to 0xc = HOST_BASIC_INFO_COUNT
+local	_gliGetVersion	local_38	sysctlMibAndVectorUnit	INFERRED	words 0-1 = sysctl mib {CTL_HW=6, 0xd}, word 2 receives the value tested for AltiVec
+local	_gliGetVersion	local_2c	sysctlResultLength	CONFIRMED	size_t length argument of _sysctl: set to 4
+local	_glProgramEnvParameter4dvARB_Exec	bVar1	dirtyBitIndex	CONFIRMED	byte read from the per-parameter table: bits >>3 &0x1c select the dirty word and &0x1f the bit set in it
+local	_glProgramEnvParameter4dvARB_Exec	iVar6	dirtyWordPtr324	CONFIRMED	ctx + (bit>>3 & 0x1c): word in the dirty bit array at ctx+0x324 that gets the bit OR-ed in
+local	_glProgramEnvParameter4dvARB_Exec	iVar5	programKindThenParamArrayThenRecord	CONFIRMED	0 (vertex, target 0x8620) or 1 (fragment) selects ctx+kind*8+0x4668 (the env parameter array), which is then advanced by index*0x10 to the parameter record that is written
+local	_glProgramEnvParameter4dvARB_Exec	iVar4	paramTable5424ThenDirtyWordPtr348	CONFIRMED	first ctx+0x5424 (table whose byte at index+0x158 is read), then ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348
+local	_glProgramEnvParameter4dvARB_Exec	uVar2	dirtyFlagsOrExpectedTarget	0x800000 or	either the new ctx+0x31c dirty word (
+local	_gleFreeTextureState	iVar6	textureObject	CONFIRMED	entry read from the per-unit texture binding slots (ctx+0x5154 ...): its +8 field is decremented and it is passed to _gleFreeTextureObject
+local	_gleFreeTextureState	iVar1	refCount	CONFIRMED	*(textureObject+8) - 1, stored back and tested for 0 before _gleFreeTextureObject: the object's reference count after release
+local	_glLightModelfv_Exec	bVar1	dirtyBitIndex	CONFIRMED	byte read from the renderer table: bits >>3 &0x1c select the dirty word and &0x1f the bit OR-ed in
+local	_glLightModelfv_Exec	iVar7	dirtyWordPtr324	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x324 that gets the bit set
+local	_glLightModelfv_Exec	iVar6	dirtyWordPtr348	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348 that gets the bit set
+local	_glLightModelfv_Exec	fVar2	paramValue	CONFIRMED	*params (the single float of the pname 0x81f8 case), converted to uint with the 2^31 bias idiom
+local	_glLightModelfv_Exec	uVar4	paramEnum	CONFIRMED	(uint) of *params, checked against GL_SINGLE_COLOR/GL_SEPARATE_SPECULAR_COLOR (0x81f9/0x81fa) via uVar4-0x81f9 < 2
+local	_glLightModelfv_Exec	uVar5	colorControl	CONFIRMED	16-bit enum value stored at ctx+0x30a8 (GL_LIGHT_MODEL_COLOR_CONTROL 0x81f8 state)
+local	_gleRecoveryRestoreState	param_2	savedState	INFERRED	record of saved GL state values re-applied here (enable flags, per-unit values, program object at word 0x11), function name RestoreState
+local	_gleRecoveryRestoreState	iVar2	rendererInfo	INFERRED	ctx+0x468c; its ushort +0xb4 bounds the per-unit loop
+local	_gleRecoveryRestoreState	piVar4	savedUnitCursor	INFERRED	cursor over the first words of savedState, one per unit; compared with the per-unit ctx value
+local	_gleRecoveryRestoreState	iVar1	savedUnitValue	INFERRED	word read through savedUnitCursor, stored into the per-unit ctx record (+4) when different, followed by _gleUpdateTextureParams(ctx, unit)
+local	_gleRecoveryRestoreState	iVar5	unitStateCursor	INFERRED	ctx+0x3530 advanced by 0x7c per loop iteration: per-unit record whose word +4 is compared and updated
+local	_gleCreateColorTableLevel	param_2	colorTableObject	CONFIRMED	callers pass colorTable / textureObject; forwarded as the object argument of _gleAllocateTextureLevel
+local	_gleCreateColorTableLevel	param_3	textureLevel	CONFIRMED	callers pass textureLevel; fields +4..+0x14 (width, height, depth, flags, internal format, type, data) of the level record are initialised
+local	_gleCreateColorTableLevel	param_8	pixelsOrAllocFlag	CONFIRMED	callers pass pixels / table (or the constant 0x1000); only tested against 0 to decide whether the level storage is allocated
+local	_gleCreateColorTableLevel	uVar2	levelInternalFormat	CONFIRMED	result of _gleImagingTexFormatToInternal(internalformat), stored at level+0x10
+local	_gleCreateColorTableLevel	iVar1	allocated	CONFIRMED	result of _gleAllocateTextureLevel: nonzero sets the 0x10 flag in level+0xb, zero falls into the clear-the-level path
+local	_glMap2VertexAttrib3ARB_ListExec	iVar6	vorderThenPointCount	CONFIRMED	listRecord[2] (vorder, stored at attribMap+0x37ac), then vorder*uorder = number of control points copied
+local	_glMap2VertexAttrib3ARB_ListExec	iVar8	attribMap	CONFIRMED	mapData + attribIndex*0x660: the per-attribute 2D map record that receives uorder/vorder/u/v range and the control points
+local	_glMap2VertexAttrib3ARB_ListExec	iVar10	controlPointDest	CONFIRMED	cursor into the attribute map's control point array (attribMap+0x37a8+0x20), advanced by 0xc (3 words) per point
+local	_glMap2VertexAttrib3ARB_ListExec	piVar1	pointXPtr	CONFIRMED	address of the first of the 3 words of the current control point in the list record
+local	_glMap2VertexAttrib3ARB_ListExec	iVar5	pointYBits	CONFIRMED	second word of the current control point (float bits copied unchanged)
+local	_glMap2VertexAttrib3ARB_ListExec	iVar9	pointZBits	CONFIRMED	third word of the current control point (float bits copied unchanged)
+local	_glDrawElements_NoopExec	bVar1	rendererInfoByte79Clear	CONFIRMED	cVar2 == 0: byte 0x79 of the renderer info (ctx+0x468c) is clear; selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glDrawElements_NoopExec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79
+local	_glDrawElements_NoopExec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glDrawElements_NoopExec	uVar3	countCopy	CONFIRMED	copy of the count parameter forwarded to _gleUpdateFramebufferCompleteness as a stale argument
+local	_glDrawElements_NoopExec	uVar6	typeCopy	CONFIRMED	copy of the type parameter forwarded to _gleUpdateFramebufferCompleteness as a stale argument
+local	_glDrawElements_NoopExec	uVar7	indicesCopy	CONFIRMED	copy of the indices parameter forwarded to _gleUpdateFramebufferCompleteness as a stale argument
+local	_gleModifyPixelRGB	uVar1	redScaledIndex	CONFIRMED	red * (redMapSize-1) + 0.5 converted to int: unclamped index into the red map
+local	_gleModifyPixelRGB	uVar9	redMapIndex	CONFIRMED	ctx+0x3288 - 1 (largest red map index), then replaced by the clamped red index used to read the map at ctx+0x325c
+local	_gleModifyPixelRGB	uVar3	blueScaledIndex	CONFIRMED	blue * (blueMapSize-1) + 0.5 converted to int: unclamped index into the blue map
+local	_gleModifyPixelRGB	uVar8	blueMapIndex	CONFIRMED	ctx+0x3290 - 1 (largest blue map index), then replaced by the clamped blue index used to read the map at ctx+0x3264
+local	_gleModifyPixelRGB	fVar7	clampBound	CONFIRMED	0.0 or 1.0 constant the out-of-range component is clamped to
+local	_gleCheckCompressedTexImage2DArgs	uVar2	textureKind	INFERRED	low nibble of texture+0x24: selects which size limit and power-of-two rule applies (0 square limit +0xc2, 2 limit +0xc0, 3 pow2 limit +0xbc, 1 no check)
+local	_gleCheckCompressedTexImage2DArgs	uVar3	maxTextureSize	CONFIRMED	ushort limit read from the renderer info (ctx+0x468c: +0xc0 or +0xbc); both innerWidth and innerHeight are bounded by it
+local	_gleCheckCompressedTexImage2DArgs	iVar5	argsValid	CONFIRMED	result of _gleCheckCompressedTexImageArgs: nonzero returns the texture
+local	_gleCheckCompressedTexImage2DArgs	uVar6	innerHeight	CONFIRMED	height - 2*border: image height without the border
+local	_gleCheckCompressedTexImage2DArgs	uVar7	innerWidth	CONFIRMED	width - 2*border: image width without the border
+local	_gliQueryRendererInfo	param_1	rendererInfoListOut	CONFIRMED	out parameter: set to 0 at entry (and on failure) and finally to the malloc'ed array of 0x38-byte renderer info records
+local	_gliQueryRendererInfo	piVar1	pluginCountCursor	CONFIRMED	walks the plugin linked list from _glepGetPlugins (piVar1 = *piVar1) to count plugins; loopIndex*0x38 sizes the malloc
+local	_gliQueryRendererInfo	puVar2	pluginCursor	CONFIRMED	walks the plugin linked list a second time; each plugin's function at word 0x48 fills one renderer info record
+local	_gliQueryRendererInfo	piVar3	resultList	CONFIRMED	the allocated record array on success, 0 after the free on failure; stored to *param_1
+local	_gliQueryRendererInfo	iVar4	pluginStatus	CONFIRMED	return value of the plugin query function (0 = ok, 0x2719 = skip this plugin) and the function's return value
+local	_glColorTable_Comp	uVar2	expectedTargetOrPaddedDataBytes	CONFIRMED	either the target constant 0x8070/0x84f7 compared with target, or the 4-byte padded data size pixelBytes*width+3 & ~3 of the list record
+local	_glColorTable_Comp	uVar3	calleeResult	CONFIRMED	return value of _glColorTable_Exec or _gleFillImage, returned unchanged
+local	_glColorTable_Comp	iVar5	glContextCopyThenBytesPerElement	CONFIRMED	initialised to glContext (returned as the stale r3 on the error paths), later the integer bytes-per-element of type used for the unpack offset alignment check
+local	_glColorTable_Comp	iVar7	unpackBufferSize	CONFIRMED	*(pixelUnpackBuffer+0x38): size of the bound unpack buffer, compared with imageEndOffset
+local	_gleVPRenderPoints	iVar1	texEnableBits	CONFIRMED	result of _gleTexEnableBits(glContext), tested before the texture callbacks
+local	_gleVPRenderPoints	uVar2	clipCodes	CONFIRMED	result of _gleVPEmulate: bits 0xff00 stop drawing, bits 0xff select the clipping path
+local	_gleVPRenderPoints	uVar4	vertexCountThenClippedCount	CONFIRMED	(ctx+0x4858 - ctx+0x4854)/ctx+0x487c = number of vertices, later the number of points left after _gleClipPoints / _gleClipPointsPlane
+local	_gleVPRenderPoints	uVar5	vertexList	INFERRED	ctx+0x4864: the vertex array start passed to the texture callbacks and _gleClipPoints
+local	_gleVPRenderPoints	uVar3	drawVertexList	CONFIRMED	the list handed to the draw callback: vertexList itself, or the clip output list ctx+0x4870

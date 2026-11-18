@@ -23,41 +23,41 @@ int _gliGetVersion(majorVersion, minorVersion, param_3)
   undefined4 *param_3;
 {
   mach_port_t host;
-  kern_return_t kVar1;
+  kern_return_t hostInfoStatus;
   int iVar2;
-  integer_t aiStack_70 [3];
-  int local_64;
-  int local_60;
-  mach_msg_type_number_t local_40 [2];
-  int local_38 [3];
-  size_t local_2c [5];
+  integer_t hostBasicInfo [3];
+  int hostCpuType;
+  int hostCpuSubtype;
+  mach_msg_type_number_t hostInfoCount [2];
+  int sysctlMibAndVectorUnit [3];
+  size_t sysctlResultLength [5];
   
   ((void (*)())_glepPluginConnectAll)();
-  local_40[0] = 0xc;
+  hostInfoCount[0] = 0xc;
   host = _mach_host_self();
-  kVar1 = _host_info(host,1,aiStack_70,local_40);
+  hostInfoStatus = _host_info(host,1,hostBasicInfo,hostInfoCount);
   _mach_port_deallocate(*(ipc_space_t *)PTR_00112034,host);
   iVar2 = 0;
-  if (kVar1 != 0) {
+  if (hostInfoStatus != 0) {
     return 0;
   }
-  if (local_64 != 0x12) goto LAB_00001554;
-  local_38[0] = 6;
-  local_2c[0] = 4;
-  local_38[1] = 0xd;
-  iVar2 = _sysctl(local_38,2,local_38 + 2,local_2c,(void *)0x0,0);
-  if (local_38[2] != 0) {
+  if (hostCpuType != 0x12) goto LAB_00001554;
+  sysctlMibAndVectorUnit[0] = 6;
+  sysctlResultLength[0] = 4;
+  sysctlMibAndVectorUnit[1] = 0xd;
+  iVar2 = _sysctl(sysctlMibAndVectorUnit,2,sysctlMibAndVectorUnit + 2,sysctlResultLength,(void *)0x0,0);
+  if (sysctlMibAndVectorUnit[2] != 0) {
     _gle_processor = _gle_processor | 0x30;
   }
   if ((*(uint *)PTR_00113e0c & 0x10) != 0) {
     _gle_processor = _gle_processor | 0x40;
   }
-  if (local_60 < 9) {
-    if (2 < local_60) goto LAB_00001524;
-    if (local_60 < 0) goto LAB_00001544;
+  if (hostCpuSubtype < 9) {
+    if (2 < hostCpuSubtype) goto LAB_00001524;
+    if (hostCpuSubtype < 0) goto LAB_00001544;
   }
   else {
-    if ((0xb < local_60) && (local_60 != 100)) {
+    if ((0xb < hostCpuSubtype) && (hostCpuSubtype != 100)) {
 LAB_00001544:
       _gle_processor = _gle_processor | 0xb;
       goto LAB_00001554;
@@ -1016,71 +1016,71 @@ int _gliChoosePixelFormat(pixelFormatListOut, attributes)
 }
 
 /* _gliQueryRendererInfo @ 0x2aa8 (292 bytes) */
-int _gliQueryRendererInfo(param_1, forwardedArg2)
-  int *param_1;
+int _gliQueryRendererInfo(rendererInfoListOut, forwardedArg2)
+  int *rendererInfoListOut;
   undefined4 forwardedArg2;
 {
   int *allocatedBlock;
   int *cursor;
   int loopIndex2;
-  int *piVar1;
-  undefined4 *puVar2;
-  int *piVar3;
-  int iVar4;
+  int *pluginCountCursor;
+  undefined4 *pluginCursor;
+  int *resultList;
+  int pluginStatus;
   int *cursor2;
   int loopIndex;
   
-  iVar4 = 0;
+  pluginStatus = 0;
   loopIndex = 0;
-  if (param_1 == (int *)0x0) {
+  if (rendererInfoListOut == (int *)0x0) {
     return 0x271e;
   }
-  *param_1 = 0;
-  piVar1 = (int *)((int (*)())_glepGetPlugins)();
-  if (piVar1 == (int *)0x0) {
+  *rendererInfoListOut = 0;
+  pluginCountCursor = (int *)((int (*)())_glepGetPlugins)();
+  if (pluginCountCursor == (int *)0x0) {
     return 0x271f;
   }
   do {
-    piVar1 = (int *)*piVar1;
+    pluginCountCursor = (int *)*pluginCountCursor;
     loopIndex = loopIndex + 1;
-  } while (piVar1 != (int *)0x0);
+  } while (pluginCountCursor != (int *)0x0);
   allocatedBlock = (int *)_malloc(loopIndex * 0x38);
   if (allocatedBlock == (int *)0x0) {
     return 0x2720;
   }
-  puVar2 = (undefined4 *)((int (*)())_glepGetPlugins)();
+  pluginCursor = (undefined4 *)((int (*)())_glepGetPlugins)();
   loopIndex2 = 0;
-  if (puVar2 != (undefined4 *)0x0) {
+  if (pluginCursor != (undefined4 *)0x0) {
     cursor2 = allocatedBlock + 0xe;
     cursor = allocatedBlock;
     do {
-      iVar4 = (*(code *)puVar2[0x48])(cursor,forwardedArg2);
-      if (iVar4 == 0) {
+      pluginStatus = (*(code *)pluginCursor[0x48])(cursor,forwardedArg2);
+      if (pluginStatus == 0) {
         loopIndex2 = loopIndex2 + 1;
         *cursor = (int)cursor2;
         cursor[1] = cursor[1] | 0x20000;
         cursor[2] = cursor[2] | 0x8000;
         cursor2 = cursor2 + 0xe;
         cursor = cursor + 0xe;
-        puVar2 = (undefined4 *)*puVar2;
+        pluginCursor = (undefined4 *)*pluginCursor;
       }
       else {
-        if (iVar4 != 0x2719) break;
-        puVar2 = (undefined4 *)*puVar2;
-        iVar4 = 0;
+        if (pluginStatus != 0x2719) break;
+        pluginCursor = (undefined4 *)*pluginCursor;
+        pluginStatus = 0;
       }
-    } while (puVar2 != (undefined4 *)0x0);
-    if ((loopIndex2 != 0) && (iVar4 == 0)) {
+    } while (pluginCursor != (undefined4 *)0x0);
+    if ((loopIndex2 != 0) && (pluginStatus == 0)) {
       allocatedBlock[loopIndex2 * 0xe + -0xe] = 0;
-      piVar3 = allocatedBlock;
+      resultList = allocatedBlock;
       goto LAB_00002bb0;
     }
   }
-  piVar3 = (int *)0x0;
+  resultList = (int *)0x0;
   _free(allocatedBlock);
 LAB_00002bb0:
-  *param_1 = (int)piVar3;
-  return iVar4;
+  *rendererInfoListOut = (int)resultList;
+  return pluginStatus;
 }
 
 /* _gliDestroyRendererInfo @ 0x2bcc (52 bytes) */

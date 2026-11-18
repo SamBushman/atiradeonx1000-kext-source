@@ -533,18 +533,18 @@ int _glColorTable_Comp(glContext, target, internalformat, width, format, type, t
 {
   undefined4 glErrorCode;
   bool bVar1;
-  uint uVar2;
-  undefined4 uVar3;
+  uint expectedTargetOrPaddedDataBytes;
+  undefined4 calleeResult;
   int imageEndOffset;
-  int iVar5;
+  int glContextCopyThenBytesPerElement;
   int pixelBytes;
   uint *listRecord;
-  int iVar7;
+  int unpackBufferSize;
   int pixelUnpackBuffer;
   double bytesPerElement;
   
   pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
-  iVar5 = glContext;
+  glContextCopyThenBytesPerElement = glContext;
   if (pixelUnpackBuffer == 0) {
 LAB_0005f94c:
     if (target < 0x80d3) {
@@ -554,12 +554,12 @@ LAB_0005f94c:
           if (1 < target - 0xde0) goto LAB_0005fb20;
         }
         else if (target != 0x806f) {
-          uVar2 = 0x8070;
+          expectedTargetOrPaddedDataBytes = 0x8070;
 LAB_0005f9ec:
-          if (target == uVar2) {
+          if (target == expectedTargetOrPaddedDataBytes) {
 LAB_0005fa24:
-            uVar3 = ((int (*)())_glColorTable_Exec)(glContext,target,internalformat,width,format,type,table);
-            return uVar3;
+            calleeResult = ((int (*)())_glColorTable_Exec)(glContext,target,internalformat,width,format,type,table);
+            return calleeResult;
           }
           goto LAB_0005fb20;
         }
@@ -567,7 +567,7 @@ LAB_0005fa24:
 LAB_0005fa48:
       if ((int)width < 0) {
         if (*(int *)(glContext + 0x7574) != 0) {
-          return iVar5;
+          return glContextCopyThenBytesPerElement;
         }
         glErrorCode = 0x501;
         goto LAB_0005fb30;
@@ -584,26 +584,26 @@ LAB_0005fb38:
             if ((int)(pixelBytes * width) < 1) {
               return pixelBytes;
             }
-            uVar2 = pixelBytes * width + 3 & 0xfffffffc;
+            expectedTargetOrPaddedDataBytes = pixelBytes * width + 3 & 0xfffffffc;
             listRecord = (uint *)_gleAddListItem(glContext,PTR__glColorTable_ListExec_00110074,
-                                             uVar2 + 0x18);
+                                             expectedTargetOrPaddedDataBytes + 0x18);
             if (listRecord == (uint *)0x0) {
               return 0;
             }
             *listRecord = target;
             listRecord[1] = internalformat;
-            listRecord[5] = uVar2;
+            listRecord[5] = expectedTargetOrPaddedDataBytes;
             listRecord[2] = width;
             listRecord[3] = format;
             listRecord[4] = type;
-            if ((int)uVar2 < 1) {
+            if ((int)expectedTargetOrPaddedDataBytes < 1) {
               return (int)listRecord;
             }
             if (table == 0) {
               return (int)listRecord;
             }
-            uVar3 = _gleFillImage(glContext,width,1,1,format,type,table,listRecord + 6);
-            return uVar3;
+            calleeResult = _gleFillImage(glContext,width,1,1,format,type,table,listRecord + 6);
+            return calleeResult;
           }
           goto LAB_0005fb0c;
         }
@@ -636,7 +636,7 @@ LAB_0005faec:
       if (0x84f5 < target) {
         if (target != 0x8513) {
           if (target < 0x8514) {
-            uVar2 = 0x84f7;
+            expectedTargetOrPaddedDataBytes = 0x84f7;
             goto LAB_0005f9ec;
           }
           if (target == 0x851b) goto LAB_0005fa24;
@@ -650,20 +650,20 @@ LAB_0005faec:
     }
 LAB_0005fb20:
     if (*(int *)(glContext + 0x7574) != 0) {
-      return iVar5;
+      return glContextCopyThenBytesPerElement;
     }
     glErrorCode = 0x500;
   }
   else {
     imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,table);
-    iVar7 = *(int *)(pixelUnpackBuffer + 0x38);
+    unpackBufferSize = *(int *)(pixelUnpackBuffer + 0x38);
     bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar5 = (int)bytesPerElement;
-    if (imageEndOffset <= iVar7) {
-      if (iVar5 == 0) {
-        iVar5 = _glePixelBytes(format,type);
+    glContextCopyThenBytesPerElement = (int)bytesPerElement;
+    if (imageEndOffset <= unpackBufferSize) {
+      if (glContextCopyThenBytesPerElement == 0) {
+        glContextCopyThenBytesPerElement = _glePixelBytes(format,type);
       }
-      if (table == (table / iVar5) * iVar5) {
+      if (table == (table / glContextCopyThenBytesPerElement) * glContextCopyThenBytesPerElement) {
         if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
           _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
         }
@@ -673,13 +673,13 @@ LAB_0005fb20:
     }
 LAB_0005fb0c:
     if (*(int *)(glContext + 0x7574) != 0) {
-      return iVar5;
+      return glContextCopyThenBytesPerElement;
     }
     glErrorCode = 0x502;
   }
 LAB_0005fb30:
   *(undefined4 *)(glContext + 0x7574) = glErrorCode;
-  return iVar5;
+  return glContextCopyThenBytesPerElement;
 }
 
 /* _glColorTable_Exec @ 0x5fbd0 (860 bytes) */

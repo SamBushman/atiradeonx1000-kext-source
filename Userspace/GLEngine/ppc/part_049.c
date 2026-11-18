@@ -993,56 +993,56 @@ void _gleModifyPixelRGB(glContext, pixel)
   int glContext;
   int pixel;
 {
-  uint uVar1;
+  uint redScaledIndex;
   uint greenScaledIndex;
-  uint uVar3;
+  uint blueScaledIndex;
   float red;
   float green;
   float blue;
-  float fVar7;
-  uint uVar8;
-  uint uVar9;
+  float clampBound;
+  uint blueMapIndex;
+  uint redMapIndex;
   uint greenMapIndex;
   
   red = *(float *)(pixel + 4) * *(float *)(glContext + 0x31ec) + *(float *)(glContext + 0x31e8);
   green = *(float *)(pixel + 8) * *(float *)(glContext + 0x31f4) + *(float *)(glContext + 0x31f0);
   blue = *(float *)(pixel + 0xc) * *(float *)(glContext + 0x31fc) + *(float *)(glContext + 0x31f8);
   if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
-    fVar7 = FLOAT_00108e50;
-    if ((red < FLOAT_00108e50) || (fVar7 = FLOAT_00108e54, FLOAT_00108e54 < red)) {
-      red = fVar7;
+    clampBound = FLOAT_00108e50;
+    if ((red < FLOAT_00108e50) || (clampBound = FLOAT_00108e54, FLOAT_00108e54 < red)) {
+      red = clampBound;
     }
-    fVar7 = FLOAT_00108e50;
-    if ((green < FLOAT_00108e50) || (fVar7 = FLOAT_00108e54, FLOAT_00108e54 < green)) {
-      green = fVar7;
+    clampBound = FLOAT_00108e50;
+    if ((green < FLOAT_00108e50) || (clampBound = FLOAT_00108e54, FLOAT_00108e54 < green)) {
+      green = clampBound;
     }
-    fVar7 = FLOAT_00108e50;
-    if ((blue < FLOAT_00108e50) || (fVar7 = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
-      blue = fVar7;
+    clampBound = FLOAT_00108e50;
+    if ((blue < FLOAT_00108e50) || (clampBound = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
+      blue = clampBound;
     }
   }
   else {
-    uVar9 = *(int *)(glContext + 0x3288) - 1;
+    redMapIndex = *(int *)(glContext + 0x3288) - 1;
     greenMapIndex = *(int *)(glContext + 0x328c) - 1;
-    uVar8 = *(int *)(glContext + 0x3290) - 1;
-    uVar1 = (uint)(int)(red * (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - DOUBLE_00108d58
+    blueMapIndex = *(int *)(glContext + 0x3290) - 1;
+    redScaledIndex = (uint)(int)(red * (float)((double)CONCAT44(0x43300000,redMapIndex ^ 0x80000000) - DOUBLE_00108d58
                                   ) + FLOAT_00108e90);
     greenScaledIndex = (uint)(int)(green * (float)((double)CONCAT44(0x43300000,greenMapIndex ^ 0x80000000) -
                                   DOUBLE_00108d58) + FLOAT_00108e90);
-    uVar3 = (uint)(int)(blue * (float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - DOUBLE_00108d58
+    blueScaledIndex = (uint)(int)(blue * (float)((double)CONCAT44(0x43300000,blueMapIndex ^ 0x80000000) - DOUBLE_00108d58
                                   ) + FLOAT_00108e90);
-    if (((int)uVar1 <= (int)uVar9) && (uVar9 = uVar1, (int)uVar1 < 0)) {
-      uVar9 = 0;
+    if (((int)redScaledIndex <= (int)redMapIndex) && (redMapIndex = redScaledIndex, (int)redScaledIndex < 0)) {
+      redMapIndex = 0;
     }
     if (((int)greenScaledIndex <= (int)greenMapIndex) && (greenMapIndex = greenScaledIndex, (int)greenScaledIndex < 0)) {
       greenMapIndex = 0;
     }
-    if (((int)uVar3 <= (int)uVar8) && (uVar8 = uVar3, (int)uVar3 < 0)) {
-      uVar8 = 0;
+    if (((int)blueScaledIndex <= (int)blueMapIndex) && (blueMapIndex = blueScaledIndex, (int)blueScaledIndex < 0)) {
+      blueMapIndex = 0;
     }
-    red = *(float *)(uVar9 * 4 + *(int *)(glContext + 0x325c));
+    red = *(float *)(redMapIndex * 4 + *(int *)(glContext + 0x325c));
     green = *(float *)(greenMapIndex * 4 + *(int *)(glContext + 0x3260));
-    blue = *(float *)(uVar8 * 4 + *(int *)(glContext + 0x3264));
+    blue = *(float *)(blueMapIndex * 4 + *(int *)(glContext + 0x3264));
   }
   *(float *)(pixel + 0xc) = blue;
   *(float *)(pixel + 4) = red;

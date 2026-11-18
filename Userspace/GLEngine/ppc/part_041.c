@@ -2175,49 +2175,49 @@ double _gleRecoverySaveState(glContext, param_2)
 }
 
 /* _gleRecoveryRestoreState @ 0xc81ec (276 bytes) */
-void _gleRecoveryRestoreState(int glContext,int *param_2,double fparam_1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
+void _gleRecoveryRestoreState(int glContext,int *savedState,double fparam_1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
-  int iVar1;
-  int iVar2;
+  int savedUnitValue;
+  int rendererInfo;
   int loopIndex;
-  int *piVar4;
-  int iVar5;
+  int *savedUnitCursor;
+  int unitStateCursor;
   double f1AfterCall;
   
-  if (*(char *)(param_2 + 0x12) != '\0') {
+  if (*(char *)(savedState + 0x12) != '\0') {
     fparam_1 = (double)_glEnable_Exec(glContext,0xb71);
   }
-  if (*(char *)((int)param_2 + 0x4a) != '\0') {
+  if (*(char *)((int)savedState + 0x4a) != '\0') {
     fparam_1 = (double)_glEnable_Exec(glContext,0xbc0);
   }
-  iVar2 = *(int *)(glContext + 0x468c);
+  rendererInfo = *(int *)(glContext + 0x468c);
   loopIndex = 0;
-  if (*(short *)(iVar2 + 0xb4) != 0) {
-    iVar5 = glContext + 0x3530;
-    piVar4 = param_2;
+  if (*(short *)(rendererInfo + 0xb4) != 0) {
+    unitStateCursor = glContext + 0x3530;
+    savedUnitCursor = savedState;
     do {
-      iVar1 = *piVar4;
-      piVar4 = piVar4 + 1;
-      if (iVar1 != *(int *)(iVar5 + 4)) {
-        *(int *)(iVar5 + 4) = iVar1;
+      savedUnitValue = *savedUnitCursor;
+      savedUnitCursor = savedUnitCursor + 1;
+      if (savedUnitValue != *(int *)(unitStateCursor + 4)) {
+        *(int *)(unitStateCursor + 4) = savedUnitValue;
         _gleUpdateTextureParams(glContext,loopIndex);
-        iVar2 = *(int *)(glContext + 0x468c);
+        rendererInfo = *(int *)(glContext + 0x468c);
         fparam_1 = f1AfterCall;
       }
       loopIndex = loopIndex + 1;
-      iVar5 = iVar5 + 0x7c;
-    } while (loopIndex < (int)(uint)*(ushort *)(iVar2 + 0xb4));
+      unitStateCursor = unitStateCursor + 0x7c;
+    } while (loopIndex < (int)(uint)*(ushort *)(rendererInfo + 0xb4));
   }
-  if (param_2[0x10] != (uint)*(byte *)(glContext + 0x466c)) {
-    if (param_2[0x10] == 0) {
+  if (savedState[0x10] != (uint)*(byte *)(glContext + 0x466c)) {
+    if (savedState[0x10] == 0) {
       fparam_1 = (double)_glDisable_Exec(glContext,0x8804);
     }
     else {
       fparam_1 = (double)_glEnable_Exec(glContext,0x8804);
     }
   }
-  if (param_2[0x11] != 0) {
-    ((void (*)())_glUseProgramObjectARB_Exec)(glContext,param_2[0x11],fparam_1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
+  if (savedState[0x11] != 0) {
+    ((void (*)())_glUseProgramObjectARB_Exec)(glContext,savedState[0x11],fparam_1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
                floatArg8);
   }
                     
@@ -3032,32 +3032,32 @@ int _gleDrawPixelsFastPickTextureType(param_1)
 }
 
 /* _gleDrawPixelsFastLoadColorTables @ 0xc96bc (232 bytes) */
-void _gleDrawPixelsFastLoadColorTables(glContext, param_2)
+void _gleDrawPixelsFastLoadColorTables(glContext, pixelProcessRecord)
   undefined4 glContext;
-  int param_2;
+  int pixelProcessRecord;
 {
-  int iVar1;
+  int colorTable;
   
-  iVar1 = _gleLookUpColorTable(glContext,0x80d0);
-  if ((iVar1 != 0) && (iVar1 != -0xac)) {
-    *(undefined4 *)(param_2 + 0x48) = *(undefined4 *)(iVar1 + 0xc0);
-    *(uint *)(param_2 + 0x3c) = (uint)*(ushort *)(iVar1 + 0xbc);
-    *(uint *)(param_2 + 0x40) = (uint)*(ushort *)(iVar1 + 0xbe);
-    *(uint *)(param_2 + 0x44) = (uint)*(ushort *)(iVar1 + 0xb0);
+  colorTable = _gleLookUpColorTable(glContext,0x80d0);
+  if ((colorTable != 0) && (colorTable != -0xac)) {
+    *(undefined4 *)(pixelProcessRecord + 0x48) = *(undefined4 *)(colorTable + 0xc0);
+    *(uint *)(pixelProcessRecord + 0x3c) = (uint)*(ushort *)(colorTable + 0xbc);
+    *(uint *)(pixelProcessRecord + 0x40) = (uint)*(ushort *)(colorTable + 0xbe);
+    *(uint *)(pixelProcessRecord + 0x44) = (uint)*(ushort *)(colorTable + 0xb0);
   }
-  iVar1 = _gleLookUpColorTable(glContext,0x80d2);
-  if ((iVar1 != 0) && (iVar1 != -0xac)) {
-    *(undefined4 *)(param_2 + 0x58) = *(undefined4 *)(iVar1 + 0xc0);
-    *(uint *)(param_2 + 0x4c) = (uint)*(ushort *)(iVar1 + 0xbc);
-    *(uint *)(param_2 + 0x50) = (uint)*(ushort *)(iVar1 + 0xbe);
-    *(uint *)(param_2 + 0x54) = (uint)*(ushort *)(iVar1 + 0xb0);
+  colorTable = _gleLookUpColorTable(glContext,0x80d2);
+  if ((colorTable != 0) && (colorTable != -0xac)) {
+    *(undefined4 *)(pixelProcessRecord + 0x58) = *(undefined4 *)(colorTable + 0xc0);
+    *(uint *)(pixelProcessRecord + 0x4c) = (uint)*(ushort *)(colorTable + 0xbc);
+    *(uint *)(pixelProcessRecord + 0x50) = (uint)*(ushort *)(colorTable + 0xbe);
+    *(uint *)(pixelProcessRecord + 0x54) = (uint)*(ushort *)(colorTable + 0xb0);
   }
-  iVar1 = _gleLookUpColorTable(glContext,0x80d1);
-  if ((iVar1 != 0) && (iVar1 != -0xac)) {
-    *(undefined4 *)(param_2 + 0x68) = *(undefined4 *)(iVar1 + 0xc0);
-    *(uint *)(param_2 + 0x5c) = (uint)*(ushort *)(iVar1 + 0xbc);
-    *(uint *)(param_2 + 0x60) = (uint)*(ushort *)(iVar1 + 0xbe);
-    *(uint *)(param_2 + 100) = (uint)*(ushort *)(iVar1 + 0xb0);
+  colorTable = _gleLookUpColorTable(glContext,0x80d1);
+  if ((colorTable != 0) && (colorTable != -0xac)) {
+    *(undefined4 *)(pixelProcessRecord + 0x68) = *(undefined4 *)(colorTable + 0xc0);
+    *(uint *)(pixelProcessRecord + 0x5c) = (uint)*(ushort *)(colorTable + 0xbc);
+    *(uint *)(pixelProcessRecord + 0x60) = (uint)*(ushort *)(colorTable + 0xbe);
+    *(uint *)(pixelProcessRecord + 100) = (uint)*(ushort *)(colorTable + 0xb0);
   }
   return;
 }

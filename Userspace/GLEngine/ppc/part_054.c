@@ -8633,48 +8633,48 @@ int _gleTextureImagePut_FastUint(unusedArg1, width, height, src, dst, srcRowStri
 }
 
 /* _gleCreateColorTableLevel @ 0x103454 (224 bytes) */
-int _gleCreateColorTableLevel(glContext, param_2, param_3, internalformat, width, unusedArg6, unusedArg7, param_8)
+int _gleCreateColorTableLevel(glContext, colorTableObject, textureLevel, internalformat, width, unusedArg6, unusedArg7, pixelsOrAllocFlag)
   undefined4 glContext;
-  undefined4 param_2;
-  int param_3;
+  undefined4 colorTableObject;
+  int textureLevel;
   undefined4 internalformat;
   int width;
   undefined4 unusedArg6;
   undefined4 unusedArg7;
-  int param_8;
+  int pixelsOrAllocFlag;
 {
-  undefined2 uVar2;
-  int iVar1;
+  undefined2 levelInternalFormat;
+  int allocated;
   
-  *(undefined1 *)(param_3 + 10) = 0;
-  *(undefined4 *)(param_3 + 0x14) = 0;
+  *(undefined1 *)(textureLevel + 10) = 0;
+  *(undefined4 *)(textureLevel + 0x14) = 0;
   if (width != 0) {
-    *(undefined1 *)(param_3 + 0xb) = 0x20;
-    *(short *)(param_3 + 4) = (short)width;
-    *(undefined2 *)(param_3 + 6) = 1;
-    *(undefined2 *)(param_3 + 8) = 1;
-    uVar2 = _gleImagingTexFormatToInternal(internalformat);
-    *(undefined2 *)(param_3 + 0x10) = uVar2;
-    *(undefined2 *)(param_3 + 0x12) = 0x1406;
-    *(short *)(param_3 + 0xc) = (short)width;
-    *(undefined2 *)(param_3 + 0xe) = 1;
-    if (param_8 == 0) {
+    *(undefined1 *)(textureLevel + 0xb) = 0x20;
+    *(short *)(textureLevel + 4) = (short)width;
+    *(undefined2 *)(textureLevel + 6) = 1;
+    *(undefined2 *)(textureLevel + 8) = 1;
+    levelInternalFormat = _gleImagingTexFormatToInternal(internalformat);
+    *(undefined2 *)(textureLevel + 0x10) = levelInternalFormat;
+    *(undefined2 *)(textureLevel + 0x12) = 0x1406;
+    *(short *)(textureLevel + 0xc) = (short)width;
+    *(undefined2 *)(textureLevel + 0xe) = 1;
+    if (pixelsOrAllocFlag == 0) {
       return 1;
     }
-    iVar1 = _gleAllocateTextureLevel(glContext,param_2,param_3);
-    if (iVar1 != 0) {
-      *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) | 0x10;
+    allocated = _gleAllocateTextureLevel(glContext,colorTableObject,textureLevel);
+    if (allocated != 0) {
+      *(byte *)(textureLevel + 0xb) = *(byte *)(textureLevel + 0xb) | 0x10;
       return 1;
     }
   }
-  *(undefined2 *)(param_3 + 0xe) = 0;
-  *(undefined2 *)(param_3 + 4) = 0;
-  *(undefined2 *)(param_3 + 6) = 0;
-  *(undefined2 *)(param_3 + 8) = 0;
-  *(undefined1 *)(param_3 + 0xb) = 0;
-  *(undefined2 *)(param_3 + 0x10) = 0;
-  *(undefined2 *)(param_3 + 0x12) = 0;
-  *(undefined2 *)(param_3 + 0xc) = 0;
+  *(undefined2 *)(textureLevel + 0xe) = 0;
+  *(undefined2 *)(textureLevel + 4) = 0;
+  *(undefined2 *)(textureLevel + 6) = 0;
+  *(undefined2 *)(textureLevel + 8) = 0;
+  *(undefined1 *)(textureLevel + 0xb) = 0;
+  *(undefined2 *)(textureLevel + 0x10) = 0;
+  *(undefined2 *)(textureLevel + 0x12) = 0;
+  *(undefined2 *)(textureLevel + 0xc) = 0;
   return 0;
 }
 

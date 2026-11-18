@@ -1126,12 +1126,12 @@ void _gleFreeTextureState(glContext)
   int remaining2;
   int remaining;
   int loopIndex;
-  int iVar1;
+  int refCount;
   int iVar2;
   int iVar3;
   int remaining3;
   int *srcCursor;
-  int iVar6;
+  int textureObject;
   
   loopIndex = 0;
   iVar3 = glContext;
@@ -1139,16 +1139,16 @@ void _gleFreeTextureState(glContext)
     srcCursor = (int *)(iVar3 + 0x5154);
     remaining3 = 4;
     do {
-      iVar6 = *srcCursor;
+      textureObject = *srcCursor;
       srcCursor = srcCursor + 1;
-      if ((iVar6 != 0) && (*(int *)(iVar6 + 4) != 0)) {
+      if ((textureObject != 0) && (*(int *)(textureObject + 4) != 0)) {
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
           _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
         }
-        iVar1 = *(int *)(iVar6 + 8) + -1;
-        *(int *)(iVar6 + 8) = iVar1;
-        if (iVar1 == 0) {
-          _gleFreeTextureObject(glContext,iVar6);
+        refCount = *(int *)(textureObject + 8) + -1;
+        *(int *)(textureObject + 8) = refCount;
+        if (refCount == 0) {
+          _gleFreeTextureObject(glContext,textureObject);
         }
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
           _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);

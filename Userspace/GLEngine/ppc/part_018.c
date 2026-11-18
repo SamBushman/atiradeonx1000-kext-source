@@ -38,14 +38,14 @@ void _glLightModelfv_Exec(glContext, pname, params)
   uint pname;
   float *params;
 {
-  byte bVar1;
-  float fVar2;
+  byte dirtyBitIndex;
+  float paramValue;
   undefined4 glErrorCode;
-  uint uVar4;
-  undefined2 uVar5;
-  int iVar6;
+  uint paramEnum;
+  undefined2 colorControl;
+  int dirtyWordPtr348;
   int glContextPtr5424;
-  int iVar7;
+  int dirtyWordPtr324;
   float dVar8;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -59,17 +59,17 @@ void _glLightModelfv_Exec(glContext, pname, params)
       *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) =
            *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) | 0x1e;
       if (*(int *)(glContext + 0x5434) == 0) {
-        bVar1 = *(byte *)(*(int *)(glContext + 0x5420) + 0x324);
+        dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x324);
       }
       else {
-        bVar1 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x358);
+        dirtyBitIndex = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x358);
       }
-      iVar7 = (bVar1 >> 3 & 0x1c) + glContext;
+      dirtyWordPtr324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
       glContextPtr5424 = *(int *)(glContext + 0x5424);
-      *(uint *)(iVar7 + 0x324) = *(uint *)(iVar7 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(glContextPtr5424 + 0x324);
-      iVar6 = (bVar1 >> 3 & 0x1c) + glContext;
-      *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (bVar1 & 0x1f);
+      *(uint *)(dirtyWordPtr324 + 0x324) = *(uint *)(dirtyWordPtr324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+      dirtyBitIndex = *(byte *)(glContextPtr5424 + 0x324);
+      dirtyWordPtr348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+      *(uint *)(dirtyWordPtr348 + 0x348) = *(uint *)(dirtyWordPtr348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
     }
     else if (pname < 0xb54) {
       if (pname == 0xb51) {
@@ -84,22 +84,22 @@ void _glLightModelfv_Exec(glContext, pname, params)
       }
     }
     else if (pname == 0x81f8) {
-      fVar2 = *params;
-      dVar8 = (double)fVar2;
+      paramValue = *params;
+      dVar8 = (double)paramValue;
       if (DOUBLE_00108d80 <= (double)dVar8) {
-        uVar4 = (int)((double)dVar8 - DOUBLE_00108d80) ^ 0x80000000;
+        paramEnum = (int)((double)dVar8 - DOUBLE_00108d80) ^ 0x80000000;
       }
       else {
-        uVar4 = (uint)(int)fVar2;
+        paramEnum = (uint)(int)paramValue;
       }
-      if (1 < uVar4 - 0x81f9) goto LAB_0006d214;
+      if (1 < paramEnum - 0x81f9) goto LAB_0006d214;
       if (DOUBLE_00108d80 <= (double)dVar8) {
-        uVar5 = (undefined2)(int)((double)dVar8 - DOUBLE_00108d80);
+        colorControl = (undefined2)(int)((double)dVar8 - DOUBLE_00108d80);
       }
       else {
-        uVar5 = (undefined2)(int)fVar2;
+        colorControl = (undefined2)(int)paramValue;
       }
-      *(undefined2 *)(glContext + 0x30a8) = uVar5;
+      *(undefined2 *)(glContext + 0x30a8) = colorControl;
       if ((*(char *)(glContext + 0x30aa) != '\0') && (*(char *)(glContext + 0x4664) == '\0')) {
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800;
         *(bool *)(glContext + 0x316b) = *(short *)(glContext + 0x30a8) == -0x7e06;
@@ -2442,56 +2442,56 @@ int _glMap2VertexAttrib3ARB_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int *piVar1;
+  int *pointXPtr;
   int v2Bits;
   int invVDeltaBits;
   int attribIndex;
   int u2Bits;
   int remaining;
-  int iVar5;
+  int pointYBits;
   int invUDeltaBits;
   int mapData;
-  int iVar6;
+  int vorderThenPointCount;
   int *srcCursor;
-  int iVar8;
-  int iVar9;
+  int attribMap;
+  int pointZBits;
   int v1Bits;
-  int iVar10;
+  int controlPointDest;
   int uorder;
   
   mapData = _gleGetMapData(glContext);
   attribIndex = *listRecord;
   srcCursor = listRecord + 1;
   uorder = listRecord[1];
-  iVar6 = listRecord[2];
-  iVar8 = mapData + attribIndex * 0x660;
-  iVar10 = iVar8 + 0x37a8;
-  *(int *)(iVar8 + 0x37a8) = uorder;
-  *(int *)(iVar8 + 0x37ac) = iVar6;
+  vorderThenPointCount = listRecord[2];
+  attribMap = mapData + attribIndex * 0x660;
+  controlPointDest = attribMap + 0x37a8;
+  *(int *)(attribMap + 0x37a8) = uorder;
+  *(int *)(attribMap + 0x37ac) = vorderThenPointCount;
   *(undefined1 *)(attribIndex + mapData + 0x9db8) = 3;
   u2Bits = listRecord[4];
   invUDeltaBits = listRecord[7];
   v1Bits = listRecord[5];
   v2Bits = listRecord[6];
   invVDeltaBits = listRecord[8];
-  *(int *)(iVar8 + 0x37b0) = listRecord[3];
-  *(int *)(iVar8 + 0x37b4) = u2Bits;
-  *(int *)(iVar8 + 0x37c0) = invUDeltaBits;
-  *(int *)(iVar8 + 0x37b8) = v1Bits;
-  *(int *)(iVar8 + 0x37bc) = v2Bits;
-  *(int *)(iVar8 + 0x37c4) = invVDeltaBits;
-  iVar6 = iVar6 * uorder;
-  for (remaining = iVar6; remaining != 0; remaining = remaining + -1) {
-    piVar1 = srcCursor + 8;
-    iVar5 = srcCursor[9];
-    iVar9 = srcCursor[10];
+  *(int *)(attribMap + 0x37b0) = listRecord[3];
+  *(int *)(attribMap + 0x37b4) = u2Bits;
+  *(int *)(attribMap + 0x37c0) = invUDeltaBits;
+  *(int *)(attribMap + 0x37b8) = v1Bits;
+  *(int *)(attribMap + 0x37bc) = v2Bits;
+  *(int *)(attribMap + 0x37c4) = invVDeltaBits;
+  vorderThenPointCount = vorderThenPointCount * uorder;
+  for (remaining = vorderThenPointCount; remaining != 0; remaining = remaining + -1) {
+    pointXPtr = srcCursor + 8;
+    pointYBits = srcCursor[9];
+    pointZBits = srcCursor[10];
     srcCursor = srcCursor + 3;
-    *(int *)(iVar10 + 0x20) = *piVar1;
-    *(int *)(iVar10 + 0x24) = iVar5;
-    *(int *)(iVar10 + 0x28) = iVar9;
-    iVar10 = iVar10 + 0xc;
+    *(int *)(controlPointDest + 0x20) = *pointXPtr;
+    *(int *)(controlPointDest + 0x24) = pointYBits;
+    *(int *)(controlPointDest + 0x28) = pointZBits;
+    controlPointDest = controlPointDest + 0xc;
   }
-  return (100 - iVar6) * -0xc + 0x4d4;
+  return (100 - vorderThenPointCount) * -0xc + 0x4d4;
 }
 
 /* _glMap2VertexAttrib4ARB_ListExec @ 0x70278 (236 bytes) */
@@ -3043,11 +3043,11 @@ LAB_000713ec:
 /* _glMap2f_Exec @ 0x713f8 (1140 bytes) */
 void _glMap2f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Shadow,int ustride,int uorder,undefined4 v1Shadow,undefined4 v2Shadow,int vstride,int vorder,undefined4 points,float u1,float u2,float v1,float v2)
 {
-  int iVar1;
+  int mapTypeIndexTimes4;
   undefined4 glErrorCode;
   int mapData;
-  uint uVar4;
-  int iVar5;
+  uint mapTypeIndex;
+  int uorderCopy;
   double incomingFpr5;
   double incomingFpr6;
   double incomingFpr7;
@@ -3058,22 +3058,22 @@ void _glMap2f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
   double incomingFpr12;
   double incomingFpr13;
   
-  iVar5 = uorder;
+  uorderCopy = uorder;
   mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((((u1 != u2) && (v1 != v2)) && (uorder - 1U < 10)) &&
        ((0 < vorder && (vorder < 0xb)))) {
-      uVar4 = target - 0xdb0;
-      if (8 < uVar4) {
+      mapTypeIndex = target - 0xdb0;
+      if (8 < mapTypeIndex) {
         if (*(int *)(glContext + 0x7574) != 0) goto LAB_00071884;
         glErrorCode = 0x500;
         goto LAB_00071880;
       }
-      iVar1 = uVar4 * 4;
-      switch(uVar4) {
+      mapTypeIndexTimes4 = mapTypeIndex * 4;
+      switch(mapTypeIndex) {
       case 0:
         if ((3 < ustride) && (3 < vstride)) {
-          ((void (*)())_gleMap2ColorfLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,
+          ((void (*)())_gleMap2ColorfLoad)(glContext,mapTypeIndex,u1Shadow,ustride,uorder,uorderCopy,mapTypeIndexTimes4,vstride,vorder,
                              points,mapData + 0x1478,u1,u2,v1,v2,incomingFpr5,incomingFpr6
                              ,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -3081,7 +3081,7 @@ void _glMap2f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 1:
         if ((0 < ustride) && (0 < vstride)) {
-          ((void (*)())_gleMap2IndexfLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,
+          ((void (*)())_gleMap2IndexfLoad)(glContext,mapTypeIndex,u1Shadow,ustride,uorder,uorderCopy,mapTypeIndexTimes4,vstride,vorder,
                              points,mapData + 0x1ad8,u1,u2,v1,v2,incomingFpr5,incomingFpr6
                              ,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -3089,7 +3089,7 @@ void _glMap2f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 2:
         if ((2 < ustride) && (2 < vstride)) {
-          ((void (*)())_gleMap2NormalfLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,
+          ((void (*)())_gleMap2NormalfLoad)(glContext,mapTypeIndex,u1Shadow,ustride,uorder,uorderCopy,mapTypeIndexTimes4,vstride,vorder,
                               points,mapData + 0xfa8,u1,u2,v1,v2,incomingFpr5,incomingFpr6
                               ,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -3097,7 +3097,7 @@ void _glMap2f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 3:
         if ((0 < ustride) && (0 < vstride)) {
-          ((void (*)())_gleMap2Texture1fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
+          ((void (*)())_gleMap2Texture1fLoad)(glContext,mapTypeIndex,u1Shadow,ustride,uorder,uorderCopy,mapTypeIndexTimes4,vstride,vorder,points,
                      mapData + 0x1c88,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                      incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -3105,7 +3105,7 @@ void _glMap2f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 4:
         if ((1 < ustride) && (1 < vstride)) {
-          ((void (*)())_gleMap2Texture2fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
+          ((void (*)())_gleMap2Texture2fLoad)(glContext,mapTypeIndex,u1Shadow,ustride,uorder,uorderCopy,mapTypeIndexTimes4,vstride,vorder,points,
                      mapData + 0x1e38,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                      incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -3113,7 +3113,7 @@ void _glMap2f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 5:
         if ((2 < ustride) && (2 < vstride)) {
-          ((void (*)())_gleMap2Texture3fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
+          ((void (*)())_gleMap2Texture3fLoad)(glContext,mapTypeIndex,u1Shadow,ustride,uorder,uorderCopy,mapTypeIndexTimes4,vstride,vorder,points,
                      mapData + 0x2178,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                      incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -3121,7 +3121,7 @@ void _glMap2f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 6:
         if ((3 < ustride) && (3 < vstride)) {
-          ((void (*)())_gleMap2Texture4fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
+          ((void (*)())_gleMap2Texture4fLoad)(glContext,mapTypeIndex,u1Shadow,ustride,uorder,uorderCopy,mapTypeIndexTimes4,vstride,vorder,points,
                      mapData + 0x2648,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                      incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -3129,7 +3129,7 @@ void _glMap2f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 7:
         if ((2 < ustride) && (2 < vstride)) {
-          ((void (*)())_gleMap2Vertex3fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
+          ((void (*)())_gleMap2Vertex3fLoad)(glContext,mapTypeIndex,u1Shadow,ustride,uorder,uorderCopy,mapTypeIndexTimes4,vstride,vorder,points,
                      mapData + 0x478,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9
                      ,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -3137,7 +3137,7 @@ void _glMap2f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 8:
         if ((3 < ustride) && (3 < vstride)) {
-          ((void (*)())_gleMap2Vertex4fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
+          ((void (*)())_gleMap2Vertex4fLoad)(glContext,mapTypeIndex,u1Shadow,ustride,uorder,uorderCopy,mapTypeIndexTimes4,vstride,vorder,points,
                      mapData + 0x948,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9
                      ,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;

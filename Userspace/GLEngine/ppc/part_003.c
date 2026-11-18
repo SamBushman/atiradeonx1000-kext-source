@@ -454,43 +454,43 @@ int _gleCheckTexSubImageRange(glContext, param_2, param_3, param_4, param_5)
 }
 
 /* _checkFastPath @ 0x1f8d8 (260 bytes) */
-int _checkFastPath(glContext, param_2, xoffset, yoffset, param_5, width, height, format, type, pixels)
+int _checkFastPath(glContext, textureLevel, xoffset, yoffset, zoffset, width, height, format, type, pixels)
   int glContext;
-  int param_2;
+  int textureLevel;
   int xoffset;
   int yoffset;
-  int param_5;
+  int zoffset;
   undefined4 width;
   undefined4 height;
   undefined4 format;
   undefined4 type;
   int pixels;
 {
-  ushort uVar1;
-  ushort uVar2;
+  ushort levelHeight;
+  ushort levelWidth;
   int pixelBytes;
   int rowBytes;
-  int iVar5;
-  int local_50;
-  undefined1 auStack_4c [4];
-  undefined1 auStack_48 [4];
-  undefined1 auStack_44 [4];
-  undefined1 auStack_40 [4];
-  int local_3c [4];
+  int levelData;
+  int packRowBytes;
+  undefined1 packRowPadding [4];
+  undefined1 packImageBytes [4];
+  undefined1 packImagePadding [4];
+  undefined1 packPixelBytes [4];
+  int packStartOffset [4];
   
-  if ((*(byte *)(param_2 + 0xb) & 1) != 0) {
-    pixelBytes = _glePixelBytes((uint)*(ushort *)(param_2 + 0x10),(uint)*(ushort *)(param_2 + 0x12));
-    rowBytes = _gleRowBytes((uint)*(ushort *)(param_2 + 0x10),(uint)*(ushort *)(param_2 + 0x12),
-                         (uint)*(ushort *)(param_2 + 0xc));
-    uVar1 = *(ushort *)(param_2 + 0xe);
-    uVar2 = *(ushort *)(param_2 + 0xc);
-    iVar5 = *(int *)(param_2 + 0x14);
+  if ((*(byte *)(textureLevel + 0xb) & 1) != 0) {
+    pixelBytes = _glePixelBytes((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12));
+    rowBytes = _gleRowBytes((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12),
+                         (uint)*(ushort *)(textureLevel + 0xc));
+    levelHeight = *(ushort *)(textureLevel + 0xe);
+    levelWidth = *(ushort *)(textureLevel + 0xc);
+    levelData = *(int *)(textureLevel + 0x14);
     _glePixelPackSettings
-              (glContext,format,type,width,height,glContext + 0x31cc,auStack_40,local_3c,
-               &local_50,auStack_4c,auStack_48,auStack_44);
-    if ((pixels + local_3c[0] ==
-         iVar5 + pixelBytes * ((uint)uVar2 * ((uint)uVar1 * param_5 + yoffset) + xoffset)) &&
-       (local_50 == rowBytes)) {
+              (glContext,format,type,width,height,glContext + 0x31cc,packPixelBytes,packStartOffset,
+               &packRowBytes,packRowPadding,packImageBytes,packImagePadding);
+    if ((pixels + packStartOffset[0] ==
+         levelData + pixelBytes * ((uint)levelWidth * ((uint)levelHeight * zoffset + yoffset) + xoffset)) &&
+       (packRowBytes == rowBytes)) {
       return 0;
     }
   }

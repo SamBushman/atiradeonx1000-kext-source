@@ -1223,12 +1223,12 @@ int _gleCheckCompressedTexImage2DArgs(glContext, target, level, internalformat, 
   undefined4 imageSize;
 {
   undefined4 errorCode;
-  ushort uVar2;
-  uint uVar3;
+  ushort textureKind;
+  uint maxTextureSize;
   int texture;
-  int iVar5;
-  uint uVar6;
-  uint uVar7;
+  int argsValid;
+  uint innerHeight;
+  uint innerWidth;
   
   texture = _gleLookUpTexture2D(glContext,target);
   if (texture == 0) {
@@ -1238,18 +1238,18 @@ int _gleCheckCompressedTexImage2DArgs(glContext, target, level, internalformat, 
     errorCode = 0x500;
     goto LAB_000f4f94;
   }
-  uVar6 = height + border * -2;
-  uVar7 = width + border * -2;
-  uVar2 = *(ushort *)(texture + 0x24) & 0xf;
-  if (uVar2 == 2) {
-    if (((-1 < (int)uVar7) &&
-        (uVar3 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc0), (int)uVar7 <= (int)uVar3)) &&
-       (-1 < (int)uVar6)) {
+  innerHeight = height + border * -2;
+  innerWidth = width + border * -2;
+  textureKind = *(ushort *)(texture + 0x24) & 0xf;
+  if (textureKind == 2) {
+    if (((-1 < (int)innerWidth) &&
+        (maxTextureSize = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc0), (int)innerWidth <= (int)maxTextureSize)) &&
+       (-1 < (int)innerHeight)) {
 LAB_000f4f80:
-      if ((int)uVar6 <= (int)uVar3) {
+      if ((int)innerHeight <= (int)maxTextureSize) {
 LAB_000f4fa0:
-        iVar5 = ((int (*)())_gleCheckCompressedTexImageArgs)(glContext,level,internalformat,border,uVar7,uVar6,1,imageSize);
-        if (iVar5 != 0) {
+        argsValid = ((int (*)())_gleCheckCompressedTexImageArgs)(glContext,level,internalformat,border,innerWidth,innerHeight,1,imageSize);
+        if (argsValid != 0) {
           return texture;
         }
         return 0;
@@ -1257,17 +1257,17 @@ LAB_000f4fa0:
     }
   }
   else {
-    if (uVar2 < 3) {
+    if (textureKind < 3) {
       if ((*(ushort *)(texture + 0x24) & 0xf) != 0) goto LAB_000f4fa0;
-      if ((uVar7 != uVar6) ||
-         ((int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc2) < (int)uVar6))
+      if ((innerWidth != innerHeight) ||
+         ((int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc2) < (int)innerHeight))
       goto LAB_000f4f84;
     }
-    else if (uVar2 != 3) goto LAB_000f4fa0;
-    if (((-1 < (int)uVar7) &&
-        ((((uVar7 & uVar7 - 1) == 0 &&
-          (uVar3 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xbc), (int)uVar7 <= (int)uVar3))
-         && (-1 < (int)uVar6)))) && ((uVar6 & uVar6 - 1) == 0)) goto LAB_000f4f80;
+    else if (textureKind != 3) goto LAB_000f4fa0;
+    if (((-1 < (int)innerWidth) &&
+        ((((innerWidth & innerWidth - 1) == 0 &&
+          (maxTextureSize = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xbc), (int)innerWidth <= (int)maxTextureSize))
+         && (-1 < (int)innerHeight)))) && ((innerHeight & innerHeight - 1) == 0)) goto LAB_000f4f80;
   }
 LAB_000f4f84:
   if (*(int *)(glContext + 0x7574) != 0) {
