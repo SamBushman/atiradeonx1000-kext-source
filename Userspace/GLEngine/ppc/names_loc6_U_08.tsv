@@ -1,0 +1,45 @@
+local	_CheckNVShaderOperation	param_2	shaderOperation	CONFIRMED	function is _CheckNVShaderOperation: the enum validated by the switch (returns 0 valid, 0x500 invalid enum, 0x502 invalid operation); values include texture targets 0xde0/0xde1/0x806f/0x8513 and the NV texture shader operations 0x86e5..0x86f3/0x8850..
+local	_CheckNVShaderOperation	uVar2	activeTextureUnit	CONFIRMED	*(ctx+0x53d4), the active texture index (_gleGetState returns it +0x84c0 as GL_ACTIVE_TEXTURE); compared with 1/2 and with the unit limit ushort at *(ctx+0x468c)+0xb4 (GL_MAX_TEXTURE_UNITS in _gleGetState)
+local	_gleEvalDrawArraysOrElements_Entires_Exec	uVar1	dispatchSelectMaskThenTable	CONFIRMED	-(slot==0) mask used in the (ctx+0x4680 & mask | ctx+0x4684 & ~mask) selection of the dispatch table before each entry (+0x104 DrawArrays, +0x10c DrawElements, +0x654 DrawRangeElements) is written; in the VAR branch it finally holds the selected table pointer itself, which is passed on as an extra argument
+local	_glCopyTexSubImage2D_NoopExec	fparam_1	forwardedFloatArg1ThenCalleeResult	CONFIRMED	first float argument forwarded to the final _Exec call; reassigned to the f1 result of each helper callee (_gleUpdateLightRGBASums, _gleUpdateDispatchCodeChange, _gleSwitchToNonRevertRenderer); same role as forwardedFloatArg1ThenCalleeResult in _glColor3us_Exec/_glArrayElement_NoopExec
+local	_glCopyTexSubImage2D_NoopExec	bVar1	rendererInfoByte79Clear	CONFIRMED	cVar2==0, i.e. byte +0x79 of the renderer info at *(ctx+0x468c) is zero; selects the dirty-word masks (0x17000000 vs 0x17ffffff) as in _glArrayElement_NoopExec
+local	_glCopyTexSubImage2D_NoopExec	cVar2	rendererInfoByte79	CONFIRMED	*(char*)(*(ctx+0x468c)+0x79)
+local	_glCopyTexSubImage2D_NoopExec	iVar3	dirtyBitArrayWord	CONFIRMED	*srcCursor in the scan of the nine dirty bit-array words starting at ctx+0x324; the first nonzero one sets bit 0x800000 in ctx+0x31c
+local	_glCopyTexSubImage2D_NoopExec	uVar6	incomingR5	CONFIRMED	copy of the incoming register r5 (level) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glCopyTexSubImage2D_NoopExec	uVar7	incomingR6	CONFIRMED	copy of the incoming register r6 (xoffset) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glCopyTexSubImage2D_NoopExec	uVar8	incomingR7	CONFIRMED	copy of the incoming register r7 (yoffset) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glCopyTexSubImage2D_NoopExec	uVar9	incomingR8	CONFIRMED	copy of the incoming register r8 (x) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glCopyTexSubImage2D_NoopExec	uVar10	incomingR9	CONFIRMED	copy of the incoming register r9 (y) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glCopyTexSubImage2D_NoopExec	extraout_f1	updateMatrixCalleeF1	CONFIRMED	f1 return value after _gleUpdateMatrixFunc, assigned to fparam_1
+local	_glCopyTexSubImage2D_NoopExec	extraout_f1_01	dispatchCallbackF1	CONFIRMED	f1 value after the ctx+0x4788 dispatch callback, assigned to fparam_1 in the flag test
+local	_glCopyTexImage1D_NoopExec	fparam_1	forwardedFloatArg1ThenCalleeResult	CONFIRMED	first float argument forwarded to the final _Exec call; reassigned to the f1 result of each helper callee (_gleUpdateLightRGBASums, _gleUpdateDispatchCodeChange, _gleSwitchToNonRevertRenderer); same role as forwardedFloatArg1ThenCalleeResult in _glColor3us_Exec/_glArrayElement_NoopExec
+local	_glCopyTexImage1D_NoopExec	bVar1	rendererInfoByte79Clear	CONFIRMED	cVar2==0, i.e. byte +0x79 of the renderer info at *(ctx+0x468c) is zero; selects the dirty-word masks (0x17000000 vs 0x17ffffff) as in _glArrayElement_NoopExec
+local	_glCopyTexImage1D_NoopExec	cVar2	rendererInfoByte79	CONFIRMED	*(char*)(*(ctx+0x468c)+0x79)
+local	_glCopyTexImage1D_NoopExec	iVar3	dirtyBitArrayWord	CONFIRMED	*srcCursor in the scan of the nine dirty bit-array words starting at ctx+0x324; the first nonzero one sets bit 0x800000 in ctx+0x31c
+local	_glCopyTexImage1D_NoopExec	uVar6	incomingR5	CONFIRMED	copy of the incoming register r5 (level) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glCopyTexImage1D_NoopExec	uVar7	incomingR6	CONFIRMED	copy of the incoming register r6 (internalformat) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glCopyTexImage1D_NoopExec	uVar8	incomingR7	CONFIRMED	copy of the incoming register r7 (x) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glCopyTexImage1D_NoopExec	uVar9	incomingR8	CONFIRMED	copy of the incoming register r8 (y) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glCopyTexImage1D_NoopExec	uVar10	incomingR9	CONFIRMED	copy of the incoming register r9 (width) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glCopyTexImage1D_NoopExec	extraout_f1	updateMatrixCalleeF1	CONFIRMED	f1 return value after _gleUpdateMatrixFunc, assigned to fparam_1
+local	_glCopyTexImage1D_NoopExec	extraout_f1_01	dispatchCallbackF1	CONFIRMED	f1 value after the ctx+0x4788 dispatch callback, assigned to fparam_1 in the flag test
+local	_glMultiDrawElements_NoopExec	fparam_1	forwardedFloatArg1ThenCalleeResult	CONFIRMED	first float argument forwarded to the final _Exec call; reassigned to the f1 result of each helper callee (_gleUpdateLightRGBASums, _gleUpdateDispatchCodeChange, _gleSwitchToNonRevertRenderer); same role as forwardedFloatArg1ThenCalleeResult in _glColor3us_Exec/_glArrayElement_NoopExec
+local	_glMultiDrawElements_NoopExec	bVar1	rendererInfoByte79Clear	CONFIRMED	cVar2==0, i.e. byte +0x79 of the renderer info at *(ctx+0x468c) is zero; selects the dirty-word masks (0x17000000 vs 0x17ffffff) as in _glArrayElement_NoopExec
+local	_glMultiDrawElements_NoopExec	cVar2	rendererInfoByte79	CONFIRMED	*(char*)(*(ctx+0x468c)+0x79)
+local	_glMultiDrawElements_NoopExec	iVar5	dirtyBitArrayWord	CONFIRMED	*srcCursor in the scan of the nine dirty bit-array words starting at ctx+0x324; the first nonzero one sets bit 0x800000 in ctx+0x31c
+local	_glMultiDrawElements_NoopExec	uVar3	incomingR5	CONFIRMED	copy of the incoming register r5 (count) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glMultiDrawElements_NoopExec	uVar6	incomingR6	CONFIRMED	copy of the incoming register r6 (type) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glMultiDrawElements_NoopExec	uVar7	incomingR7	CONFIRMED	copy of the incoming register r7 (indices) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glMultiDrawElements_NoopExec	uVar8	incomingR8	CONFIRMED	copy of the incoming register r8 (primcount) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glMultiDrawElements_NoopExec	extraout_f1	updateMatrixCalleeF1	CONFIRMED	f1 return value after _gleUpdateMatrixFunc, assigned to fparam_1
+local	_glMultiDrawElements_NoopExec	extraout_f1_01	dispatchCallbackF1	CONFIRMED	f1 value after the ctx+0x4788 dispatch callback, assigned to fparam_1 in the flag test
+local	_glDrawRangeElementArrayAPPLE_NoopExec	fparam_1	forwardedFloatArg1ThenCalleeResult	CONFIRMED	first float argument forwarded to the final _Exec call; reassigned to the f1 result of each helper callee (_gleUpdateLightRGBASums, _gleUpdateDispatchCodeChange, _gleSwitchToNonRevertRenderer); same role as forwardedFloatArg1ThenCalleeResult in _glColor3us_Exec/_glArrayElement_NoopExec
+local	_glDrawRangeElementArrayAPPLE_NoopExec	bVar1	rendererInfoByte79Clear	CONFIRMED	cVar2==0, i.e. byte +0x79 of the renderer info at *(ctx+0x468c) is zero; selects the dirty-word masks (0x17000000 vs 0x17ffffff) as in _glArrayElement_NoopExec
+local	_glDrawRangeElementArrayAPPLE_NoopExec	cVar2	rendererInfoByte79	CONFIRMED	*(char*)(*(ctx+0x468c)+0x79)
+local	_glDrawRangeElementArrayAPPLE_NoopExec	iVar5	dirtyBitArrayWord	CONFIRMED	*srcCursor in the scan of the nine dirty bit-array words starting at ctx+0x324; the first nonzero one sets bit 0x800000 in ctx+0x31c
+local	_glDrawRangeElementArrayAPPLE_NoopExec	uVar3	incomingR5	CONFIRMED	copy of the incoming register r5 (start) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glDrawRangeElementArrayAPPLE_NoopExec	uVar6	incomingR6	CONFIRMED	copy of the incoming register r6 (end) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glDrawRangeElementArrayAPPLE_NoopExec	uVar7	incomingR7	CONFIRMED	copy of the incoming register r7 (first) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glDrawRangeElementArrayAPPLE_NoopExec	uVar8	incomingR8	CONFIRMED	copy of the incoming register r8 (count) kept as the pass-through argument of _gleUpdateFramebufferCompleteness
+local	_glDrawRangeElementArrayAPPLE_NoopExec	extraout_f1	updateMatrixCalleeF1	CONFIRMED	f1 return value after _gleUpdateMatrixFunc, assigned to fparam_1
+local	_glDrawRangeElementArrayAPPLE_NoopExec	extraout_f1_01	dispatchCallbackF1	CONFIRMED	f1 value after the ctx+0x4788 dispatch callback, assigned to fparam_1 in the flag test
