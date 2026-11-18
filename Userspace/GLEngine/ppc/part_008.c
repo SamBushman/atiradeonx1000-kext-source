@@ -1806,29 +1806,29 @@ LAB_000514a0:
 }
 
 /* _glePolyClipCode @ 0x515fc (76 bytes) */
-int _glePolyClipCode(glContext, param_2, param_3)
+int _glePolyClipCode(glContext, vertexList, vertexCount)
   undefined4 glContext;
-  int *param_2;
-  int param_3;
+  int *vertexList;
+  int vertexCount;
 {
-  int iVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  int vertex;
+  uint clipCodeAnd;
+  uint clipCodeOr;
+  uint remaining;
   
-  uVar3 = 0;
-  uVar2 = 0xff;
-  if (param_2 < param_2 + param_3) {
-    uVar4 = (uint)((int)(param_2 + param_3) + (3 - (int)param_2)) >> 2;
+  clipCodeOr = 0;
+  clipCodeAnd = 0xff;
+  if (vertexList < vertexList + vertexCount) {
+    remaining = (uint)((int)(vertexList + vertexCount) + (3 - (int)vertexList)) >> 2;
     do {
-      iVar1 = *param_2;
-      param_2 = param_2 + 1;
-      uVar2 = uVar2 & *(byte *)(iVar1 + 0x7f);
-      uVar3 = uVar3 | *(byte *)(iVar1 + 0x7f);
-      uVar4 = uVar4 - 1;
-    } while (uVar4 != 0);
+      vertex = *vertexList;
+      vertexList = vertexList + 1;
+      clipCodeAnd = clipCodeAnd & *(byte *)(vertex + 0x7f);
+      clipCodeOr = clipCodeOr | *(byte *)(vertex + 0x7f);
+      remaining = remaining - 1;
+    } while (remaining != 0);
   }
-  return uVar2 << 8 | uVar3;
+  return clipCodeAnd << 8 | clipCodeOr;
 }
 
 /* _gleSetClipInterpFunc @ 0x51648 (100 bytes) */

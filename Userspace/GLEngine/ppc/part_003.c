@@ -3719,46 +3719,48 @@ int _glePPPruneLocals(param_1)
 {
   uint loopIndex;
   uint instructionHeader;
-  int iVar2;
+  int chunkCursor;
+  int nextChunk;
+  int instruction;
   int *instructionList;
   int *localList;
   int localChunk;
   
   localList = *(int **)(*(int *)(param_1 + 0x1c) + 4);
   instructionList = *(int **)(*(int *)(param_1 + 0x1c) + 0x20);
-  iVar2 = 0;
+  chunkCursor = 0;
   localChunk = *localList;
   if (*localList != 0) {
     do {
-      for (iVar2 = *instructionList; iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
-        if (((((((*(uint *)(iVar2 + 0xc) >> 0x12 & 0xff) < 0x4b) &&
-               ((*(uint *)(iVar2 + 0x14) >> 0x11 & 7) == 1)) &&
-              (*(short *)(iVar2 + 0x1a) == *(short *)(localChunk + 0x12))) ||
-             (((instructionHeader = *(uint *)(iVar2 + 0xc), instructionHeader >> 0x1d != 0 &&
+      for (instruction = *instructionList; instruction != 0; instruction = *(int *)(instruction + 8)) {
+        if (((((((*(uint *)(instruction + 0xc) >> 0x12 & 0xff) < 0x4b) &&
+               ((*(uint *)(instruction + 0x14) >> 0x11 & 7) == 1)) &&
+              (*(short *)(instruction + 0x1a) == *(short *)(localChunk + 0x12))) ||
+             (((instructionHeader = *(uint *)(instruction + 0xc), instructionHeader >> 0x1d != 0 &&
                ((instructionHeader >> 0x12 & 0xff) != 0x4a)) &&
-              (((*(uint *)(iVar2 + 0x1c) >> 0x17 & 7) == 1 &&
-               (*(short *)(iVar2 + 0x22) == *(short *)(localChunk + 0x12))))))) ||
+              (((*(uint *)(instruction + 0x1c) >> 0x17 & 7) == 1 &&
+               (*(short *)(instruction + 0x22) == *(short *)(localChunk + 0x12))))))) ||
             (((1 < instructionHeader >> 0x1d && (3 < (instructionHeader >> 0x12 & 0xff) - 0x41)) &&
-             (((*(uint *)(iVar2 + 0x24) >> 0x17 & 7) == 1 &&
-              (*(short *)(iVar2 + 0x2a) == *(short *)(localChunk + 0x12))))))) ||
-           (((2 < instructionHeader >> 0x1d && ((*(uint *)(iVar2 + 0x2c) >> 0x17 & 7) == 1)) &&
-            (*(short *)(iVar2 + 0x32) == *(short *)(localChunk + 0x12))))) {
-          iVar2 = *(int *)(localChunk + 8);
+             (((*(uint *)(instruction + 0x24) >> 0x17 & 7) == 1 &&
+              (*(short *)(instruction + 0x2a) == *(short *)(localChunk + 0x12))))))) ||
+           (((2 < instructionHeader >> 0x1d && ((*(uint *)(instruction + 0x2c) >> 0x17 & 7) == 1)) &&
+            (*(short *)(instruction + 0x32) == *(short *)(localChunk + 0x12))))) {
+          nextChunk = *(int *)(localChunk + 8);
           goto LAB_00024684;
         }
       }
-      iVar2 = *(int *)(localChunk + 8);
+      nextChunk = *(int *)(localChunk + 8);
       _PPStreamChunkListRemoveChunk(localList,localChunk);
 LAB_00024684:
-      localChunk = iVar2;
-    } while (iVar2 != 0);
-    iVar2 = *localList;
+      localChunk = nextChunk;
+    } while (nextChunk != 0);
+    chunkCursor = *localList;
   }
   loopIndex = 0;
-  for (; iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
-    if (loopIndex != *(ushort *)(iVar2 + 0x12)) {
-      _glePPRelocateLocal((uint)*(ushort *)(iVar2 + 0x12),loopIndex,instructionList);
-      *(short *)(iVar2 + 0x12) = (short)loopIndex;
+  for (; chunkCursor != 0; chunkCursor = *(int *)(chunkCursor + 8)) {
+    if (loopIndex != *(ushort *)(chunkCursor + 0x12)) {
+      _glePPRelocateLocal((uint)*(ushort *)(chunkCursor + 0x12),loopIndex,instructionList);
+      *(short *)(chunkCursor + 0x12) = (short)loopIndex;
     }
     loopIndex = loopIndex + 1;
   }

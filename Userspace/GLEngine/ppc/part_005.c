@@ -156,39 +156,40 @@ void _gleLightMaterialShineChange_FB(int glContext,float fparam_1)
 }
 
 /* _gleLightMaterialRGBAChange_FB_S @ 0x3329c (224 bytes) */
-void _gleLightMaterialRGBAChange_FB_S(glContext, param_2)
+void _gleLightMaterialRGBAChange_FB_S(glContext, rgba)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *rgba;
 {
-  byte bVar1;
-  int iVar2;
+  byte dirtyBitIndex;
+  int material;
+  int dirtyWordAddress348;
   int glContextWord5424;
-  int iVar3;
-  int iVar4;
+  int dirtyBitTableOffset;
+  int dirtyWordAddress324;
   int loopIndex;
-  undefined8 uVar6;
+  undefined8 rgbaBlueAlpha;
   
   loopIndex = 0;
   do {
-    iVar2 = ((int (*)())_glePushMaterial)(glContext,loopIndex);
-    *(undefined8 *)(iVar2 + 0x20) = *param_2;
-    uVar6 = param_2[1];
-    *(ushort *)(iVar2 + 0x234) = *(ushort *)(iVar2 + 0x234) | 0x1010;
-    *(undefined8 *)(iVar2 + 0x28) = uVar6;
+    material = ((int (*)())_glePushMaterial)(glContext,loopIndex);
+    *(undefined8 *)(material + 0x20) = *rgba;
+    rgbaBlueAlpha = rgba[1];
+    *(ushort *)(material + 0x234) = *(ushort *)(material + 0x234) | 0x1010;
+    *(undefined8 *)(material + 0x28) = rgbaBlueAlpha;
     if (*(int *)(glContext + 0x5434) == 0) {
-      bVar1 = *(byte *)(loopIndex * 6 + *(int *)(glContext + 0x5420) + 0x2c2);
+      dirtyBitIndex = *(byte *)(loopIndex * 6 + *(int *)(glContext + 0x5420) + 0x2c2);
     }
     else {
-      bVar1 = *(byte *)(loopIndex * 6 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f6);
+      dirtyBitIndex = *(byte *)(loopIndex * 6 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f6);
     }
-    iVar3 = loopIndex * 6;
-    iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
+    dirtyBitTableOffset = loopIndex * 6;
+    dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
     loopIndex = loopIndex + 1;
     glContextWord5424 = *(int *)(glContext + 0x5424);
-    *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar1 & 0x1f);
-    bVar1 = *(byte *)(iVar3 + glContextWord5424 + 0x2c2);
-    iVar2 = (bVar1 >> 3 & 0x1c) + glContext;
-    *(uint *)(iVar2 + 0x348) = *(uint *)(iVar2 + 0x348) | 1 << (bVar1 & 0x1f);
+    *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+    dirtyBitIndex = *(byte *)(dirtyBitTableOffset + glContextWord5424 + 0x2c2);
+    dirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+    *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
   } while (loopIndex < 2);
   return;
 }

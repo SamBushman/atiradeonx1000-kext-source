@@ -647,35 +647,35 @@ void _gleFinishFence(glContext, param_2, fence)
   int param_2;
   undefined4 fence;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iVar5;
-  uint uVar6;
-  undefined4 *puVar7;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  int fenceObject;
+  undefined4 rendererFenceHandle;
+  int rendererRecordCursor;
+  uint loopIndex;
+  undefined4 *fenceHandleCursor;
   
   if (param_2 == 0) {
-    iVar3 = _gleLookupHashObject(glContext + 0x543c,fence);
-    if (iVar3 == 0) {
+    fenceObject = _gleLookupHashObject(glContext + 0x543c,fence);
+    if (fenceObject == 0) {
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x502;
       }
     }
     else {
-      iVar5 = glContext + 0x10000;
-      uVar6 = 0;
+      rendererRecordCursor = glContext + 0x10000;
+      loopIndex = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
-        puVar7 = (undefined4 *)(iVar3 + 0x10);
+        fenceHandleCursor = (undefined4 *)(fenceObject + 0x10);
         do {
-          piVar1 = (int *)(iVar5 + -0x777c);
-          uVar4 = *puVar7;
-          uVar6 = uVar6 + 1;
-          puVar7 = puVar7 + 1;
-          puVar2 = (undefined4 *)(iVar5 + -0x7a54);
-          iVar5 = iVar5 + 0x2e0;
-          (**(code **)(*piVar1 + 0x1c4))(*puVar2,0,uVar4);
-        } while (uVar6 < *(byte *)(glContext + 0x85a4));
+          rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+          rendererFenceHandle = *fenceHandleCursor;
+          loopIndex = loopIndex + 1;
+          fenceHandleCursor = fenceHandleCursor + 1;
+          rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+          rendererRecordCursor = rendererRecordCursor + 0x2e0;
+          (**(code **)(*rendererCallbacks + 0x1c4))(*rendererHandlePtr,0,rendererFenceHandle);
+        } while (loopIndex < *(byte *)(glContext + 0x85a4));
       }
     }
   }

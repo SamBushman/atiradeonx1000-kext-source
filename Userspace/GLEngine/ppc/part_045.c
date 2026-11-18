@@ -3275,32 +3275,34 @@ void _gleLightMaterialRGBAChange_B_D(glContext, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_B_S @ 0xdc4ec (184 bytes) */
-void _gleLightMaterialRGBAChange_B_S(glContext, param_2)
+void _gleLightMaterialRGBAChange_B_S(glContext, rgba)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *rgba;
 {
-  byte bVar1;
-  int iVar2;
-  int iVar3;
-  undefined8 uVar4;
+  byte dirtyBitIndex;
+  int material;
+  int dirtyWordAddress348;
+  int glContextPtr5424;
+  int dirtyWordAddress324;
+  undefined8 rgbaBlueAlpha;
   
-  iVar2 = _glePushMaterial(glContext,1);
-  *(undefined8 *)(iVar2 + 0x20) = *param_2;
-  uVar4 = param_2[1];
-  *(ushort *)(iVar2 + 0x234) = *(ushort *)(iVar2 + 0x234) | 0x1010;
-  *(undefined8 *)(iVar2 + 0x28) = uVar4;
+  material = _glePushMaterial(glContext,1);
+  *(undefined8 *)(material + 0x20) = *rgba;
+  rgbaBlueAlpha = rgba[1];
+  *(ushort *)(material + 0x234) = *(ushort *)(material + 0x234) | 0x1010;
+  *(undefined8 *)(material + 0x28) = rgbaBlueAlpha;
   if (*(int *)(glContext + 0x5434) == 0) {
-    bVar1 = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c8);
+    dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c8);
   }
   else {
-    bVar1 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2fc);
+    dirtyBitIndex = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2fc);
   }
-  iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
-  iVar2 = *(int *)(glContext + 0x5424);
-  *(uint *)(iVar3 + 0x324) = *(uint *)(iVar3 + 0x324) | 1 << (bVar1 & 0x1f);
-  bVar1 = *(byte *)(iVar2 + 0x2c8);
-  iVar2 = (bVar1 >> 3 & 0x1c) + glContext;
-  *(uint *)(iVar2 + 0x348) = *(uint *)(iVar2 + 0x348) | 1 << (bVar1 & 0x1f);
+  dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  glContextPtr5424 = *(int *)(glContext + 0x5424);
+  *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+  dirtyBitIndex = *(byte *)(glContextPtr5424 + 0x2c8);
+  dirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
   return;
 }
 
@@ -3852,43 +3854,44 @@ void _gleMultTransposeMatrix(leftMatrix, rightMatrix, productMatrix)
 void _glePreEvaluate(undefined4 unusedArg1,int order,undefined4 unusedArg3,float *coeffs,float u,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   double newCoeff;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  float dVar6;
+  int remaining;
+  int newCoeffIndex;
+  int coeffIndex;
+  int currentDegree;
+  float one;
+  float carry;
   float oneMinusU;
   
   if (order == 1) {
     *coeffs = 1.0;
     return;
   }
-  dVar6 = (double)FLOAT_00108e54;
+  one = (double)FLOAT_00108e54;
   coeffs[1] = (float)u;
-  oneMinusU = (double)(dVar6 - u);
-  *coeffs = (dVar6 - u);
+  oneMinusU = (double)(one - u);
+  *coeffs = (one - u);
   if (order != 2) {
-    iVar5 = 2;
+    currentDegree = 2;
     if (2 < order) {
       do {
-        iVar3 = 1;
-        dVar6 = (double)(*coeffs * u);
+        newCoeffIndex = 1;
+        carry = (double)(*coeffs * u);
         *coeffs = (oneMinusU * *coeffs);
-        if (1 < iVar5) {
-          iVar2 = iVar5 + -1;
-          iVar4 = iVar3;
+        if (1 < currentDegree) {
+          remaining = currentDegree + -1;
+          coeffIndex = newCoeffIndex;
           do {
-            iVar3 = iVar4 + 1;
-            newCoeff = (double)oneMinusU * (double)coeffs[iVar4] + (double)dVar6;
-            dVar6 = (double)(coeffs[iVar4] * u);
-            coeffs[iVar4] = (float)newCoeff;
-            iVar2 = iVar2 + -1;
-            iVar4 = iVar3;
-          } while (iVar2 != 0);
+            newCoeffIndex = coeffIndex + 1;
+            newCoeff = (double)oneMinusU * (double)coeffs[coeffIndex] + (double)carry;
+            carry = (double)(coeffs[coeffIndex] * u);
+            coeffs[coeffIndex] = (float)newCoeff;
+            remaining = remaining + -1;
+            coeffIndex = newCoeffIndex;
+          } while (remaining != 0);
         }
-        iVar5 = iVar5 + 1;
-        coeffs[iVar3] = (float)(double)dVar6;
-      } while (iVar5 < order);
+        currentDegree = currentDegree + 1;
+        coeffs[newCoeffIndex] = (float)(double)carry;
+      } while (currentDegree < order);
       return;
     }
     return;

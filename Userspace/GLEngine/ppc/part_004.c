@@ -2481,7 +2481,7 @@ void _glRotateZ_Exec(int glContext,float sinAngle,float cosAngle,double unusedFl
 }
 
 /* _glRotateY_Exec @ 0x32638 (372 bytes) */
-void _glRotateY_Exec(int glContext,float fparam_1,float fparam_2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+void _glRotateY_Exec(int glContext,float sinValue,float cosValue,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float savedElement8;
   float savedElement10;
@@ -2497,16 +2497,16 @@ void _glRotateY_Exec(int glContext,float fparam_1,float fparam_2,double unusedFl
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
     savedElement8 = currentMatrix[8];
     savedElement1 = currentMatrix[1];
-    currentMatrix[8] = (savedElement8 * fparam_2 + (*currentMatrix * fparam_1));
-    *currentMatrix = (*currentMatrix * fparam_2 - (savedElement8 * fparam_1));
+    currentMatrix[8] = (savedElement8 * cosValue + (*currentMatrix * sinValue));
+    *currentMatrix = (*currentMatrix * cosValue - (savedElement8 * sinValue));
     savedElement10 = currentMatrix[10];
-    currentMatrix[1] = (savedElement1 * fparam_2 - (currentMatrix[9] * fparam_1));
-    currentMatrix[9] = (currentMatrix[9] * fparam_2 + (savedElement1 * fparam_1));
+    currentMatrix[1] = (savedElement1 * cosValue - (currentMatrix[9] * sinValue));
+    currentMatrix[9] = (currentMatrix[9] * cosValue + (savedElement1 * sinValue));
     savedElement3 = currentMatrix[3];
-    currentMatrix[10] = (savedElement10 * fparam_2 + (currentMatrix[2] * fparam_1));
-    currentMatrix[2] = (currentMatrix[2] * fparam_2 - (savedElement10 * fparam_1));
-    currentMatrix[3] = (savedElement3 * fparam_2 - (currentMatrix[0xb] * fparam_1));
-    currentMatrix[0xb] = (currentMatrix[0xb] * fparam_2 + (savedElement3 * fparam_1));
+    currentMatrix[10] = (savedElement10 * cosValue + (currentMatrix[2] * sinValue));
+    currentMatrix[2] = (currentMatrix[2] * cosValue - (savedElement10 * sinValue));
+    currentMatrix[3] = (savedElement3 * cosValue - (currentMatrix[0xb] * sinValue));
+    currentMatrix[0xb] = (currentMatrix[0xb] * cosValue + (savedElement3 * sinValue));
     glContextWord50b0 = *(uint *)(glContext + 0x50b0);
     *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | matrixDirtyBits;
     if ((matrixDirtyBits & ~glContextWord50b0 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
@@ -2514,17 +2514,17 @@ void _glRotateY_Exec(int glContext,float fparam_1,float fparam_2,double unusedFl
       matrixDirtyBits = matrixDirtyBits & 0xff000003;
       savedElement8 = currentInverseMatrix[8];
       savedElement1 = currentInverseMatrix[1];
-      currentInverseMatrix[8] = (savedElement8 * fparam_2 + (*currentInverseMatrix * fparam_1));
-      *currentInverseMatrix = (*currentInverseMatrix * fparam_2 - (savedElement8 * fparam_1));
+      currentInverseMatrix[8] = (savedElement8 * cosValue + (*currentInverseMatrix * sinValue));
+      *currentInverseMatrix = (*currentInverseMatrix * cosValue - (savedElement8 * sinValue));
       savedElement10 = currentInverseMatrix[10];
-      currentInverseMatrix[1] = (savedElement1 * fparam_2 - (currentInverseMatrix[9] * fparam_1));
-      currentInverseMatrix[9] = (currentInverseMatrix[9] * fparam_2 + (savedElement1 * fparam_1));
+      currentInverseMatrix[1] = (savedElement1 * cosValue - (currentInverseMatrix[9] * sinValue));
+      currentInverseMatrix[9] = (currentInverseMatrix[9] * cosValue + (savedElement1 * sinValue));
       savedElement3 = currentInverseMatrix[3];
-      currentInverseMatrix[10] = (savedElement10 * fparam_2 + (currentInverseMatrix[2] * fparam_1))
+      currentInverseMatrix[10] = (savedElement10 * cosValue + (currentInverseMatrix[2] * sinValue))
       ;
-      currentInverseMatrix[2] = (currentInverseMatrix[2] * fparam_2 - (savedElement10 * fparam_1));
-      currentInverseMatrix[3] = (savedElement3 * fparam_2 - (currentInverseMatrix[0xb] * fparam_1));
-      currentInverseMatrix[0xb] = (currentInverseMatrix[0xb] * fparam_2 + (savedElement3 * fparam_1));
+      currentInverseMatrix[2] = (currentInverseMatrix[2] * cosValue - (savedElement10 * sinValue));
+      currentInverseMatrix[3] = (savedElement3 * cosValue - (currentInverseMatrix[0xb] * sinValue));
+      currentInverseMatrix[0xb] = (currentInverseMatrix[0xb] * cosValue + (savedElement3 * sinValue));
       glContextWord50b0 = *(uint *)(glContext + 0x50b0);
     }
     *(uint *)(glContext + 0x50b0) = glContextWord50b0 | matrixDirtyBits;

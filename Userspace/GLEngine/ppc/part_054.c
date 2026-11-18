@@ -29,32 +29,32 @@ void _gleMultiVtxTextureCoordGenNormalSTR(param_1, vertexCursor, vertexCount, pa
 }
 
 /* _gleTextureImageCopy @ 0xf7410 (260 bytes) */
-void _gleTextureImageCopy(glContext, param_2, unusedArg3, param_4, y, width, height)
+void _gleTextureImageCopy(glContext, levelRecord, unusedArg3, x, y, width, height)
   int glContext;
-  int param_2;
+  int levelRecord;
   undefined4 unusedArg3;
-  undefined4 param_4;
+  undefined4 x;
   undefined4 y;
   undefined4 width;
   undefined4 height;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
+  undefined4 savedWord31c4;
+  undefined4 savedWord31bc;
+  undefined4 savedWord31c0;
+  undefined4 savedWord31c8;
+  undefined4 savedWord31b0;
+  undefined4 savedWord31b4;
+  undefined4 savedWord31b8;
   
-  uVar5 = *(undefined4 *)(glContext + 0x31b0);
-  *(uint *)(glContext + 0x31b0) = (uint)*(ushort *)(param_2 + 0xc);
-  uVar4 = *(undefined4 *)(glContext + 0x31c8);
-  uVar3 = *(undefined4 *)(glContext + 0x31c0);
-  uVar6 = *(undefined4 *)(0x31b4 + glContext);
-  uVar7 = *(undefined4 *)(glContext + 0x31b8);
-  *(uint *)(0x31b4 + glContext) = (uint)*(ushort *)(param_2 + 0xe);
-  uVar2 = *(undefined4 *)(glContext + 0x31bc);
-  uVar1 = *(undefined4 *)(glContext + 0x31c4);
+  savedWord31b0 = *(undefined4 *)(glContext + 0x31b0);
+  *(uint *)(glContext + 0x31b0) = (uint)*(ushort *)(levelRecord + 0xc);
+  savedWord31c8 = *(undefined4 *)(glContext + 0x31c8);
+  savedWord31c0 = *(undefined4 *)(glContext + 0x31c0);
+  savedWord31b4 = *(undefined4 *)(0x31b4 + glContext);
+  savedWord31b8 = *(undefined4 *)(glContext + 0x31b8);
+  *(uint *)(0x31b4 + glContext) = (uint)*(ushort *)(levelRecord + 0xe);
+  savedWord31bc = *(undefined4 *)(glContext + 0x31bc);
+  savedWord31c4 = *(undefined4 *)(glContext + 0x31c4);
   *(undefined1 *)(glContext + 0x31c8) = 0;
   *(undefined1 *)(glContext + 0x31c9) = 0;
   *(undefined4 *)(glContext + 0x31b8) = 0;
@@ -62,16 +62,16 @@ void _gleTextureImageCopy(glContext, param_2, unusedArg3, param_4, y, width, hei
   *(undefined4 *)(glContext + 0x31c0) = 0;
   *(undefined4 *)(glContext + 0x31c4) = 1;
   (**(code **)(glContext + 0x46a0))
-            (*(undefined4 *)(glContext + 0x4688),param_4,y,width,height,
-             *(undefined2 *)(param_2 + 0x10),*(undefined2 *)(param_2 + 0x12),
-             *(undefined4 *)(param_2 + 0x14));
-  *(undefined4 *)(glContext + 0x31b0) = uVar5;
-  *(undefined4 *)(glContext + 0x31c8) = uVar4;
-  *(undefined4 *)(0x31b4 + glContext) = uVar6;
-  *(undefined4 *)(glContext + 0x31b8) = uVar7;
-  *(undefined4 *)(glContext + 0x31bc) = uVar2;
-  *(undefined4 *)(glContext + 0x31c0) = uVar3;
-  *(undefined4 *)(glContext + 0x31c4) = uVar1;
+            (*(undefined4 *)(glContext + 0x4688),x,y,width,height,
+             *(undefined2 *)(levelRecord + 0x10),*(undefined2 *)(levelRecord + 0x12),
+             *(undefined4 *)(levelRecord + 0x14));
+  *(undefined4 *)(glContext + 0x31b0) = savedWord31b0;
+  *(undefined4 *)(glContext + 0x31c8) = savedWord31c8;
+  *(undefined4 *)(0x31b4 + glContext) = savedWord31b4;
+  *(undefined4 *)(glContext + 0x31b8) = savedWord31b8;
+  *(undefined4 *)(glContext + 0x31bc) = savedWord31bc;
+  *(undefined4 *)(glContext + 0x31c0) = savedWord31c0;
+  *(undefined4 *)(glContext + 0x31c4) = savedWord31c4;
   return;
 }
 
@@ -535,40 +535,40 @@ void _gleHalfFloatFilter1(dst, src, count, offsetA)
   int count;
   int offsetA;
 {
-  float fVar1;
-  uint uVar2;
+  float average;
+  uint floatExponentBits;
   float weight;
-  ushort uVar4;
+  ushort halfBits;
   int byteOffset;
-  double dVar6;
-  double dVar7;
+  double firstSample;
+  double secondSample;
   
   weight = FLOAT_00108e90;
   byteOffset = 0;
   if (0 < count << 1) {
     do {
-      dVar6 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset));
-      dVar7 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset + offsetA));
-      fVar1 = (float)(dVar6 + dVar7) * weight;
-      uVar2 = (uint)GH_F2U(fVar1) & 0x7f800000;
-      uVar4 = (ushort)((uint)GH_F2U(fVar1) >> 0x10) & 0x8000;
-      if (uVar2 < 0x47800000) {
-        if (uVar2 < 0x38000001) {
-          uVar4 = uVar4 | (ushort)(((uint)GH_F2U(fVar1) & 0x7fffff | 0x800000) >>
-                                  ((0x38000000 - uVar2 >> 0x17) + 0xe & 0x3f));
+      firstSample = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset));
+      secondSample = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset + offsetA));
+      average = (float)(firstSample + secondSample) * weight;
+      floatExponentBits = (uint)GH_F2U(average) & 0x7f800000;
+      halfBits = (ushort)((uint)GH_F2U(average) >> 0x10) & 0x8000;
+      if (floatExponentBits < 0x47800000) {
+        if (floatExponentBits < 0x38000001) {
+          halfBits = halfBits | (ushort)(((uint)GH_F2U(average) & 0x7fffff | 0x800000) >>
+                                  ((0x38000000 - floatExponentBits >> 0x17) + 0xe & 0x3f));
         }
         else {
-          uVar4 = uVar4 | (ushort)(uVar2 + 0xc8000000 >> 0xd) |
-                  (ushort)(((uint)GH_F2U(fVar1) & 0x7fffff) >> 0xd);
+          halfBits = halfBits | (ushort)(floatExponentBits + 0xc8000000 >> 0xd) |
+                  (ushort)(((uint)GH_F2U(average) & 0x7fffff) >> 0xd);
         }
       }
-      else if ((uVar2 == 0x7f800000) && (((uint)GH_F2U(fVar1) & 1) != 0)) {
-        uVar4 = uVar4 | 0x7fff;
+      else if ((floatExponentBits == 0x7f800000) && (((uint)GH_F2U(average) & 1) != 0)) {
+        halfBits = halfBits | 0x7fff;
       }
       else {
-        uVar4 = uVar4 | 0x7c00;
+        halfBits = halfBits | 0x7c00;
       }
-      *(ushort *)(dst + byteOffset) = uVar4;
+      *(ushort *)(dst + byteOffset) = halfBits;
       byteOffset = byteOffset + 2;
     } while (byteOffset < count << 1);
   }

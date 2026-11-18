@@ -830,17 +830,18 @@ void _glDrawBuffersARB_Exec(glContext, n, bufs)
 {
   int loopIndex2;
   int loopIndex;
-  undefined2 uVar1;
-  int iVar2;
+  undefined2 bufferEnumLow16;
+  int framebufferZeroOffset;
   undefined4 glErrorCode;
   int *cursor;
   undefined2 *dstCursor;
   undefined2 *srcCursor;
   undefined2 *srcCursor2;
   uint loopIndex3;
-  int iVar8;
-  uint uVar9;
-  int iVar10;
+  int dupCheckIndexThenRendererInfo;
+  int contextZeroOffset;
+  uint colorAttachmentIndex;
+  int fillIndex;
   int remaining;
   int framebufferObject;
   
@@ -859,14 +860,14 @@ LAB_000634a0:
   if (0 < n) {
     do {
       if (bufs[loopIndex] == 0) goto LAB_000634c4;
-      iVar8 = 0;
+      dupCheckIndexThenRendererInfo = 0;
       cursor = bufs;
       if (0 < loopIndex) {
         do {
           if (bufs[loopIndex] == *cursor) goto LAB_000635b8;
-          iVar8 = iVar8 + 1;
+          dupCheckIndexThenRendererInfo = dupCheckIndexThenRendererInfo + 1;
           cursor = cursor + 1;
-        } while (iVar8 < loopIndex);
+        } while (dupCheckIndexThenRendererInfo < loopIndex);
       }
       switch(bufs[loopIndex]) {
       case 0x400:
@@ -884,27 +885,27 @@ LAB_000634a0:
         if ((*(int *)(glContext + 0x744c) != 0) || (*(char *)(glContext + 0x7582) == '\0'))
         goto LAB_000635b8;
 LAB_00063408:
-        iVar8 = *(int *)(glContext + 0x468c);
+        dupCheckIndexThenRendererInfo = *(int *)(glContext + 0x468c);
         break;
       case 0x403:
         if ((*(int *)(glContext + 0x744c) != 0) || (*(char *)(glContext + 0x7582) == '\0'))
         goto LAB_000635b8;
 LAB_00063438:
-        iVar8 = *(int *)(glContext + 0x468c);
-        if (*(char *)(iVar8 + 0x26) == '\0') goto LAB_000635b8;
+        dupCheckIndexThenRendererInfo = *(int *)(glContext + 0x468c);
+        if (*(char *)(dupCheckIndexThenRendererInfo + 0x26) == '\0') goto LAB_000635b8;
         break;
       case 0x409:
       case 0x40a:
       case 0x40b:
       case 0x40c:
         if ((*(int *)(glContext + 0x744c) != 0) ||
-           (iVar8 = *(int *)(glContext + 0x468c),
-           *(int *)(iVar8 + 0x54) + 0x409U <= (uint)bufs[loopIndex])) goto LAB_000635b8;
+           (dupCheckIndexThenRendererInfo = *(int *)(glContext + 0x468c),
+           *(int *)(dupCheckIndexThenRendererInfo + 0x54) + 0x409U <= (uint)bufs[loopIndex])) goto LAB_000635b8;
         break;
       default:
-        uVar9 = bufs[loopIndex] - 0x8ce0;
-        if (((int)uVar9 < 0) ||
-           (iVar8 = *(int *)(glContext + 0x468c), *(uint *)(iVar8 + 0x18) <= uVar9)) {
+        colorAttachmentIndex = bufs[loopIndex] - 0x8ce0;
+        if (((int)colorAttachmentIndex < 0) ||
+           (dupCheckIndexThenRendererInfo = *(int *)(glContext + 0x468c), *(uint *)(dupCheckIndexThenRendererInfo + 0x18) <= colorAttachmentIndex)) {
           if (*(int *)(glContext + 0x7574) != 0) {
             return;
           }
@@ -914,42 +915,42 @@ LAB_00063438:
         if (*(int *)(glContext + 0x744c) == 0) goto LAB_000635b8;
         loopIndex3 = loopIndex3 + 1;
       }
-      if (*(uint *)(iVar8 + 0x14) <= loopIndex3) goto LAB_000635b8;
+      if (*(uint *)(dupCheckIndexThenRendererInfo + 0x14) <= loopIndex3) goto LAB_000635b8;
 LAB_000634c4:
       loopIndex = loopIndex + 1;
     } while (loopIndex < n);
   }
   framebufferObject = *(int *)(glContext + 0x744c);
   if (framebufferObject == 0) {
-    iVar10 = 0;
+    fillIndex = 0;
     if (0 < n) {
       srcCursor2 = (undefined2 *)((int)bufs + 2);
       dstCursor = (undefined2 *)(glContext + 0x311a);
       remaining = n;
       do {
-        uVar1 = *srcCursor2;
+        bufferEnumLow16 = *srcCursor2;
         srcCursor2 = srcCursor2 + 2;
-        *dstCursor = uVar1;
+        *dstCursor = bufferEnumLow16;
         dstCursor = dstCursor + 1;
         remaining = remaining + -1;
       } while (remaining != 0);
-      iVar10 = n;
+      fillIndex = n;
       if (3 < n) goto LAB_000635a8;
     }
     do {
-      iVar8 = iVar10 * 2;
-      iVar10 = iVar10 + 1;
-      *(undefined2 *)(iVar8 + glContext + 0x311a) = 0;
-    } while (iVar10 < 4);
+      contextZeroOffset = fillIndex * 2;
+      fillIndex = fillIndex + 1;
+      *(undefined2 *)(contextZeroOffset + glContext + 0x311a) = 0;
+    } while (fillIndex < 4);
     goto LAB_000635a8;
   }
   loopIndex2 = 0;
   if (n < 1) {
 LAB_00063528:
     while( true ) {
-      iVar2 = loopIndex2 * 2;
+      framebufferZeroOffset = loopIndex2 * 2;
       loopIndex2 = loopIndex2 + 1;
-      *(undefined2 *)(iVar2 + framebufferObject + 0xc0) = 0;
+      *(undefined2 *)(framebufferZeroOffset + framebufferObject + 0xc0) = 0;
       if (3 < loopIndex2) break;
       framebufferObject = *(int *)(glContext + 0x744c);
     }
@@ -958,9 +959,9 @@ LAB_00063528:
   else {
     srcCursor = (undefined2 *)((int)bufs + 2);
     while( true ) {
-      uVar1 = *srcCursor;
+      bufferEnumLow16 = *srcCursor;
       srcCursor = srcCursor + 2;
-      *(undefined2 *)(loopIndex2 * 2 + framebufferObject + 0xc0) = uVar1;
+      *(undefined2 *)(loopIndex2 * 2 + framebufferObject + 0xc0) = bufferEnumLow16;
       loopIndex2 = loopIndex2 + 1;
       n = n + -1;
       if (n == 0) break;

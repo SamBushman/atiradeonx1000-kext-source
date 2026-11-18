@@ -311,44 +311,44 @@ double _gleSetWindowPos(int glContext,float floatArg1,float floatArg2,double flo
 }
 
 /* _glepDeletePlugin @ 0x107740 (164 bytes) */
-int _glepDeletePlugin(param_1)
-  int *param_1;
+int _glepDeletePlugin(plugin)
+  int *plugin;
 {
-  bool bVar1;
-  int *piVar2;
-  int *piVar3;
-  int *piVar4;
+  bool listEmpty;
+  int *node;
+  int *previousNode;
+  int *nextNode;
   
-  if (param_1 == (int *)0x0) {
+  if (plugin == (int *)0x0) {
     return (int *)0x0;
   }
-  if (param_1 == _glep_plugin_head) {
-    piVar4 = (int *)*_glep_plugin_head;
-    _glep_plugin_head = piVar4;
+  if (plugin == _glep_plugin_head) {
+    nextNode = (int *)*_glep_plugin_head;
+    _glep_plugin_head = nextNode;
 LAB_001077c4:
-    _free(param_1);
+    _free(plugin);
   }
   else {
-    bVar1 = _glep_plugin_head == (int *)0x0;
-    if (!bVar1) {
-      piVar4 = (int *)*_glep_plugin_head;
-      piVar3 = _glep_plugin_head;
-      while (piVar2 = piVar4, param_1 != piVar2) {
-        if (piVar2 == (int *)0x0) goto LAB_001077b0;
-        bVar1 = false;
-        piVar3 = piVar2;
-        piVar4 = (int *)*piVar2;
+    listEmpty = _glep_plugin_head == (int *)0x0;
+    if (!listEmpty) {
+      nextNode = (int *)*_glep_plugin_head;
+      previousNode = _glep_plugin_head;
+      while (node = nextNode, plugin != node) {
+        if (node == (int *)0x0) goto LAB_001077b0;
+        listEmpty = false;
+        previousNode = node;
+        nextNode = (int *)*node;
       }
-      if (!bVar1) {
-        piVar4 = (int *)*param_1;
-        *piVar3 = (int)piVar4;
+      if (!listEmpty) {
+        nextNode = (int *)*plugin;
+        *previousNode = (int)nextNode;
         goto LAB_001077c4;
       }
     }
 LAB_001077b0:
-    piVar4 = (int *)0x0;
+    nextNode = (int *)0x0;
   }
-  return piVar4;
+  return nextNode;
 }
 
 /* _gliGetAttribute @ 0x1077e4 (12 bytes) */

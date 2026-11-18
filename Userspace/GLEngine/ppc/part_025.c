@@ -64,21 +64,23 @@ void _glAttachObjectARB_Exec(glContext, containerObj, obj)
   undefined4 obj;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int attachedObject;
+  int byteOffset;
   int *srcCursor;
-  int iVar4;
+  int sharedStateThenContainerObject;
   int hashObject;
-  int iVar6;
+  int attachedCount;
+  int newAttachedObjects;
   int loopIndex;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar4 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar4 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar4 + 0x8028);
-      iVar4 = *(int *)(glContext + 0x5148);
+    sharedStateThenContainerObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenContainerObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenContainerObject + 0x8028);
+      sharedStateThenContainerObject = *(int *)(glContext + 0x5148);
     }
-    iVar4 = _gleLookupHashObject(iVar4 + 0x6018,containerObj);
-    if (iVar4 == 0) {
+    sharedStateThenContainerObject = _gleLookupHashObject(sharedStateThenContainerObject + 0x6018,containerObj);
+    if (sharedStateThenContainerObject == 0) {
 LAB_00087368:
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -89,36 +91,36 @@ LAB_00087368:
       glErrorCode = 0x501;
       goto LAB_000873fc;
     }
-    if (*(int *)(iVar4 + 0x10) == 0x8b40) {
+    if (*(int *)(sharedStateThenContainerObject + 0x10) == 0x8b40) {
       hashObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x6018,obj);
       if (hashObject == 0) goto LAB_00087368;
       if (*(int *)(hashObject + 0x10) == 0x8b48) {
-        iVar6 = *(int *)(iVar4 + 0x48);
+        attachedCount = *(int *)(sharedStateThenContainerObject + 0x48);
         loopIndex = 0;
-        if (0 < iVar6) {
-          srcCursor = *(int **)(iVar4 + 0x44);
+        if (0 < attachedCount) {
+          srcCursor = *(int **)(sharedStateThenContainerObject + 0x44);
           do {
-            iVar2 = *srcCursor;
+            attachedObject = *srcCursor;
             srcCursor = srcCursor + 1;
-            if (iVar2 == hashObject) goto LAB_000873d0;
+            if (attachedObject == hashObject) goto LAB_000873d0;
             loopIndex = loopIndex + 1;
-          } while (loopIndex < iVar6);
+          } while (loopIndex < attachedCount);
         }
-        iVar6 = _malloc(iVar6 * 4 + 4);
+        newAttachedObjects = _malloc(attachedCount * 4 + 4);
         loopIndex = 0;
-        if (0 < *(int *)(iVar4 + 0x48)) {
+        if (0 < *(int *)(sharedStateThenContainerObject + 0x48)) {
           do {
-            iVar2 = loopIndex * 4;
+            byteOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
-            *(undefined4 *)(iVar2 + iVar6) = *(undefined4 *)(iVar2 + *(int *)(iVar4 + 0x44));
-          } while (loopIndex < *(int *)(iVar4 + 0x48));
+            *(undefined4 *)(byteOffset + newAttachedObjects) = *(undefined4 *)(byteOffset + *(int *)(sharedStateThenContainerObject + 0x44));
+          } while (loopIndex < *(int *)(sharedStateThenContainerObject + 0x48));
         }
-        *(int *)(iVar6 + loopIndex * 4) = hashObject;
-        *(int *)(iVar4 + 0x48) = *(int *)(iVar4 + 0x48) + 1;
-        if (*(int *)(iVar4 + 0x44) != 0) {
-          _free(*(int *)(iVar4 + 0x44));
+        *(int *)(newAttachedObjects + loopIndex * 4) = hashObject;
+        *(int *)(sharedStateThenContainerObject + 0x48) = *(int *)(sharedStateThenContainerObject + 0x48) + 1;
+        if (*(int *)(sharedStateThenContainerObject + 0x44) != 0) {
+          _free(*(int *)(sharedStateThenContainerObject + 0x44));
         }
-        *(int *)(iVar4 + 0x44) = iVar6;
+        *(int *)(sharedStateThenContainerObject + 0x44) = newAttachedObjects;
         *(int *)(hashObject + 8) = *(int *)(hashObject + 8) + 1;
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
           return;

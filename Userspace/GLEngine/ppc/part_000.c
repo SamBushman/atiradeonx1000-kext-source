@@ -2849,11 +2849,13 @@ void _gleInitGLIState(glContext)
   int remaining2;
   int loopIndex;
   int remaining;
-  undefined1 uVar1;
+  undefined1 rendererInfoByte79;
   float float257;
   undefined4 *dstCursor;
   int iVar4;
   int iVar5;
+  int currentVertexAttrib;
+  int currentTexCoord;
   int glContextPtr4854;
   int remaining4;
   
@@ -2889,13 +2891,13 @@ void _gleInitGLIState(glContext)
   *(undefined4 *)(glContextPtr4854 + -0x1cc) = 0x3f800000;
   *(undefined4 *)(glContextPtr4854 + -0x1c8) = 0x3f800000;
   *(undefined4 *)(glContextPtr4854 + -0x1c4) = 0x3f800000;
-  iVar5 = glContext;
+  currentTexCoord = glContext;
   do {
-    *(undefined4 *)(iVar5 + 0x120) = 0;
-    *(undefined4 *)(iVar5 + 0x124) = 0;
-    *(undefined4 *)(iVar5 + 0x128) = 0;
-    *(undefined4 *)(iVar5 + 300) = 0x3f800000;
-    iVar5 = iVar5 + 0x10;
+    *(undefined4 *)(currentTexCoord + 0x120) = 0;
+    *(undefined4 *)(currentTexCoord + 0x124) = 0;
+    *(undefined4 *)(currentTexCoord + 0x128) = 0;
+    *(undefined4 *)(currentTexCoord + 300) = 0x3f800000;
+    currentTexCoord = currentTexCoord + 0x10;
     *(undefined4 *)(iVar4 + 0x80) = 0;
     *(undefined4 *)(iVar4 + 0x84) = 0;
     *(undefined4 *)(iVar4 + 0x88) = 0;
@@ -2904,13 +2906,13 @@ void _gleInitGLIState(glContext)
     remaining4 = remaining4 + -1;
   } while (remaining4 != 0);
   remaining = 0x10;
-  iVar5 = glContext;
+  currentVertexAttrib = glContext;
   do {
-    *(undefined4 *)(iVar5 + 0x1a0) = 0;
-    *(undefined4 *)(iVar5 + 0x1a4) = 0;
-    *(undefined4 *)(iVar5 + 0x1a8) = 0;
-    *(undefined4 *)(iVar5 + 0x1ac) = 0x3f800000;
-    iVar5 = iVar5 + 0x10;
+    *(undefined4 *)(currentVertexAttrib + 0x1a0) = 0;
+    *(undefined4 *)(currentVertexAttrib + 0x1a4) = 0;
+    *(undefined4 *)(currentVertexAttrib + 0x1a8) = 0;
+    *(undefined4 *)(currentVertexAttrib + 0x1ac) = 0x3f800000;
+    currentVertexAttrib = currentVertexAttrib + 0x10;
     remaining = remaining + -1;
   } while (remaining != 0);
   *(undefined4 *)(glContext + 0x2d0) = 0x3f800000;
@@ -3001,9 +3003,9 @@ void _gleInitGLIState(glContext)
   *(undefined2 *)(glContext + 0x48ea) = 0;
   *(undefined4 *)(glContext + 0x7574) = 0;
   *(undefined1 *)(glContext + 0x7583) = 0;
-  uVar1 = *(undefined1 *)(*(int *)(glContext + 0x468c) + 0x79);
+  rendererInfoByte79 = *(undefined1 *)(*(int *)(glContext + 0x468c) + 0x79);
   *(undefined1 *)(glContext + 0x759d) = 1;
-  *(undefined1 *)(glContext + 0x7580) = uVar1;
+  *(undefined1 *)(glContext + 0x7580) = rendererInfoByte79;
   *(undefined1 *)(glContext + 0x4fea) = 0;
   *(undefined1 *)(glContext + 0x7581) = *(undefined1 *)(glContext + 0x7580);
   *(undefined4 *)(glContext + 0x7594) = 3;

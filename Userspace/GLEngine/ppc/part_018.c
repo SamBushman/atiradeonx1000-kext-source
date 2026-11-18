@@ -2499,16 +2499,17 @@ int _glMap2VertexAttrib4ARB_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int attribMap;
   int u2Bits;
   int remaining;
   int mapData;
-  int iVar3;
-  int iVar4;
+  int vorder;
+  int pointCount;
+  int controlPointDst;
   int uorder;
   int v1Bits;
   int pointComponent2;
-  int iVar6;
+  int pointIndex;
   int invUDeltaBits;
   int attribIndex;
   int v2Bits;
@@ -2519,36 +2520,36 @@ int _glMap2VertexAttrib4ARB_ListExec(glContext, listRecord)
   mapData = _gleGetMapData(glContext);
   attribIndex = *listRecord;
   uorder = listRecord[1];
-  iVar3 = listRecord[2];
-  iVar1 = mapData + attribIndex * 0x660;
-  *(int *)(iVar1 + 0x37a8) = uorder;
-  *(int *)(iVar1 + 0x37ac) = iVar3;
+  vorder = listRecord[2];
+  attribMap = mapData + attribIndex * 0x660;
+  *(int *)(attribMap + 0x37a8) = uorder;
+  *(int *)(attribMap + 0x37ac) = vorder;
   *(undefined1 *)(attribIndex + mapData + 0x9db8) = 4;
   u2Bits = listRecord[4];
   invUDeltaBits = listRecord[7];
   v1Bits = listRecord[5];
   v2Bits = listRecord[6];
   invVDeltaBits = listRecord[8];
-  *(int *)(iVar1 + 0x37b0) = listRecord[3];
-  *(int *)(iVar1 + 0x37b4) = u2Bits;
-  *(int *)(iVar1 + 0x37c0) = invUDeltaBits;
-  *(int *)(iVar1 + 0x37b8) = v1Bits;
-  *(int *)(iVar1 + 0x37bc) = v2Bits;
-  *(int *)(iVar1 + 0x37c4) = invVDeltaBits;
-  iVar3 = iVar3 * uorder;
-  iVar6 = 0;
-  for (remaining = iVar3; remaining != 0; remaining = remaining + -1) {
-    iVar4 = iVar6 * 0x10 + iVar1 + 0x37a8;
-    pointComponent3 = listRecord[iVar6 * 4 + 0xc];
-    pointComponent1 = listRecord[iVar6 * 4 + 10];
-    pointComponent2 = listRecord[iVar6 * 4 + 0xb];
-    *(int *)(iVar4 + 0x20) = listRecord[iVar6 * 4 + 9];
-    *(int *)(iVar4 + 0x2c) = pointComponent3;
-    *(int *)(iVar4 + 0x24) = pointComponent1;
-    *(int *)(iVar4 + 0x28) = pointComponent2;
-    iVar6 = iVar6 + 1;
+  *(int *)(attribMap + 0x37b0) = listRecord[3];
+  *(int *)(attribMap + 0x37b4) = u2Bits;
+  *(int *)(attribMap + 0x37c0) = invUDeltaBits;
+  *(int *)(attribMap + 0x37b8) = v1Bits;
+  *(int *)(attribMap + 0x37bc) = v2Bits;
+  *(int *)(attribMap + 0x37c4) = invVDeltaBits;
+  pointCount = vorder * uorder;
+  pointIndex = 0;
+  for (remaining = pointCount; remaining != 0; remaining = remaining + -1) {
+    controlPointDst = pointIndex * 0x10 + attribMap + 0x37a8;
+    pointComponent3 = listRecord[pointIndex * 4 + 0xc];
+    pointComponent1 = listRecord[pointIndex * 4 + 10];
+    pointComponent2 = listRecord[pointIndex * 4 + 0xb];
+    *(int *)(controlPointDst + 0x20) = listRecord[pointIndex * 4 + 9];
+    *(int *)(controlPointDst + 0x2c) = pointComponent3;
+    *(int *)(controlPointDst + 0x24) = pointComponent1;
+    *(int *)(controlPointDst + 0x28) = pointComponent2;
+    pointIndex = pointIndex + 1;
   }
-  return (100 - iVar3) * -0x10 + 0x664;
+  return (100 - pointCount) * -0x10 + 0x664;
 }
 
 /* _glMap2d_Comp @ 0x70364 (1420 bytes) */

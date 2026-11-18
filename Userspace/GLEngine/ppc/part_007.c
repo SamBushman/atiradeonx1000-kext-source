@@ -3866,33 +3866,34 @@ void _gleLightMaterialRGBAChange_F_AD(glContext, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_F_E @ 0x4a8e8 (184 bytes) */
-void _gleLightMaterialRGBAChange_F_E(glContext, param_2)
+void _gleLightMaterialRGBAChange_F_E(glContext, rgba)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *rgba;
 {
-  byte bVar1;
-  int iVar2;
+  byte dirtyBitIndex;
+  int material;
+  int dirtyWordAddress348;
   int glContextPtr5424;
-  int iVar3;
-  undefined8 uVar4;
+  int dirtyWordAddress324;
+  undefined8 rgbaBlueAlpha;
   
-  iVar2 = _glePushMaterial(glContext,0);
-  *(undefined8 *)(iVar2 + 0x30) = *param_2;
-  uVar4 = param_2[1];
-  *(ushort *)(iVar2 + 0x234) = *(ushort *)(iVar2 + 0x234) | 0x202;
-  *(undefined8 *)(iVar2 + 0x38) = uVar4;
+  material = _glePushMaterial(glContext,0);
+  *(undefined8 *)(material + 0x30) = *rgba;
+  rgbaBlueAlpha = rgba[1];
+  *(ushort *)(material + 0x234) = *(ushort *)(material + 0x234) | 0x202;
+  *(undefined8 *)(material + 0x38) = rgbaBlueAlpha;
   if (*(int *)(glContext + 0x5434) == 0) {
-    bVar1 = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c3);
+    dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c3);
   }
   else {
-    bVar1 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f7);
+    dirtyBitIndex = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f7);
   }
-  iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
+  dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
   glContextPtr5424 = *(int *)(glContext + 0x5424);
-  *(uint *)(iVar3 + 0x324) = *(uint *)(iVar3 + 0x324) | 1 << (bVar1 & 0x1f);
-  bVar1 = *(byte *)(glContextPtr5424 + 0x2c3);
-  iVar2 = (bVar1 >> 3 & 0x1c) + glContext;
-  *(uint *)(iVar2 + 0x348) = *(uint *)(iVar2 + 0x348) | 1 << (bVar1 & 0x1f);
+  *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+  dirtyBitIndex = *(byte *)(glContextPtr5424 + 0x2c3);
+  dirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
   return;
 }
 
