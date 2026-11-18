@@ -3229,11 +3229,11 @@ void _gleVtxLightFastRGBABack(int glContext,int vertex,int vertexCount,double un
   float colorB;
   float colorG;
   float colorR;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
-  double incomingStack_ffffff88;
-  double incomingStack_ffffff90;
-  double incomingStack_ffffff98;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
+  double incomingStackWord_ffffff88;
+  double incomingStackWord_ffffff90;
+  double incomingStackWord_ffffff98;
   
   vertexIndex = 0;
   enabledLightMask = *(uint *)(glContext + 0x30a0);
@@ -3278,8 +3278,8 @@ LAB_000d5da0:
           colorB = -(double)(normalDotLight * *(float *)(lightProducts + 0x18) - colorB);
           if (zeroThenShineFactor < fparam_1_00) {
             zeroThenShineFactor = ((double (*)())_gleMaterialShinePow)(glContextCopy,material + 0x1e8,fparam_1_00,floatArg2,floatArg3,floatArg4,floatArg5,
-                                floatArg6,zeroThenShineFactor,fparam_8_00,incomingStack_ffffff78,incomingStack_ffffff80,
-                                incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
+                                floatArg6,zeroThenShineFactor,fparam_8_00,incomingStackWord_ffffff78,incomingStackWord_ffffff80,
+                                incomingStackWord_ffffff88,incomingStackWord_ffffff90,incomingStackWord_ffffff98);
             colorR = (double)(float)(zeroThenShineFactor * (double)*(float *)(lightProducts + 0x20) + (double)colorR);
             colorG = (double)(float)(zeroThenShineFactor * (double)*(float *)(lightProducts + 0x24) + (double)colorG);
             colorB = (double)(float)(zeroThenShineFactor * (double)*(float *)(lightProducts + 0x28) + (double)colorB);
@@ -3578,11 +3578,11 @@ void _gleVtxLightRGBABackPtr(int glContext,int *vertexPtrCursor,int vertexCount,
   float colorG;
   float colorR;
   int iStack00000020;
-  double incomingStack_fffffee8;
-  double incomingStack_fffffef0;
-  double incomingStack_fffffef8;
-  double incomingStack_ffffff00;
-  double incomingStack_ffffff08;
+  double incomingStackWord_fffffee8;
+  double incomingStackWord_fffffef0;
+  double incomingStackWord_fffffef8;
+  double incomingStackWord_ffffff00;
+  double incomingStackWord_ffffff08;
   float eyeX;
   float eyeY;
   float eyeZ;
@@ -3664,8 +3664,8 @@ LAB_000d63d0:
                               toLightY * *(float *)(lightRecord + 0x4a8c)));
           if (floatArg1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d67f8;
           spotFactor = ((double (*)())_gleLightExponentPow)(glContextForCalls,lightRecord + 0x4a70,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,
-                              floatArg6,floatArg7,floatArg8,incomingStack_fffffee8,incomingStack_fffffef0,
-                              incomingStack_fffffef8,incomingStack_ffffff00,incomingStack_ffffff08);
+                              floatArg6,floatArg7,floatArg8,incomingStackWord_fffffee8,incomingStackWord_fffffef0,
+                              incomingStackWord_fffffef8,incomingStackWord_ffffff00,incomingStackWord_ffffff08);
           lightAttenuation = (double)(float)((double)lightAttenuation * spotFactor);
         }
         if (localViewer == 0) {
@@ -3743,8 +3743,8 @@ LAB_000d63d0:
           colorB = -(double)(normalDotDirection * *(float *)(lightProducts + 0x68) - colorB);
           if (floatArg7 < floatArg1) {
             floatArg1 = ((double (*)())_gleMaterialShinePow)(glContextForCalls,material + 0x1e8,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,
-                                  floatArg6,floatArg7,floatArg8,incomingStack_fffffee8,incomingStack_fffffef0,
-                                  incomingStack_fffffef8,incomingStack_ffffff00,incomingStack_ffffff08);
+                                  floatArg6,floatArg7,floatArg8,incomingStackWord_fffffee8,incomingStackWord_fffffef0,
+                                  incomingStackWord_fffffef8,incomingStackWord_ffffff00,incomingStackWord_ffffff08);
             colorB = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
             colorR = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
             colorG = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
@@ -4157,11 +4157,11 @@ void _gleVtxLightSpecRGBABackPtr(int glContext,int vertexArray,int vertexCount,d
   float colorR;
   int iStack0000001c;
   int iStack00000020;
-  double incomingStack_fffffea8;
-  double incomingStack_fffffeb0;
-  double incomingStack_fffffeb8;
-  double incomingStack_fffffec0;
-  double incomingStack_fffffec8;
+  double incomingStackWord_fffffea8;
+  double incomingStackWord_fffffeb0;
+  double incomingStackWord_fffffeb8;
+  double incomingStackWord_fffffec0;
+  double incomingStackWord_fffffec8;
   float eyeX;
   float eyeY;
   float eyeZ;
@@ -4271,8 +4271,8 @@ LAB_000d6f10:
                               toLightY * *(float *)(lightRecord + 0x4a8c)));
           if (floatArg1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d74f0;
           floatArg1 = ((double (*)())_gleLightExponentPow)(glContextForCalls,lightRecord + 0x4a70,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,
-                                floatArg6,floatArg7,floatArg8,incomingStack_fffffea8,incomingStack_fffffeb0,
-                                incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
+                                floatArg6,floatArg7,floatArg8,incomingStackWord_fffffea8,incomingStackWord_fffffeb0,
+                                incomingStackWord_fffffeb8,incomingStackWord_fffffec0,incomingStackWord_fffffec8);
           lightAttenuation = (double)(float)((double)lightAttenuation * floatArg1);
           glContextForCalls = glContextForCalls;
         }
@@ -4402,8 +4402,8 @@ LAB_000d74a4:
           }
           if ((double)floatZero < floatArg1) {
             floatArg1 = ((double (*)())_gleMaterialShinePow)(glContextForCalls,material + 0x1e8,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,
-                                  floatArg6,floatArg7,floatArg8,incomingStack_fffffea8,incomingStack_fffffeb0,
-                                  incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
+                                  floatArg6,floatArg7,floatArg8,incomingStackWord_fffffea8,incomingStackWord_fffffeb0,
+                                  incomingStackWord_fffffeb8,incomingStackWord_fffffec0,incomingStackWord_fffffec8);
             colorB = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
             colorR = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
             colorG = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);

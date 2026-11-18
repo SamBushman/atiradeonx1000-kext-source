@@ -1862,8 +1862,8 @@ void _glLightfv_Exec(int glContext,int light,undefined4 pname,float *params,doub
   int dirtyWord324Ptr;
   uint lightIndex;
   double cosValue;
-  double incomingStack_ffffffa8;
-  double incomingStack_ffffffb0;
+  double incomingStackWord_ffffffa8;
+  double incomingStackWord_ffffffb0;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1975,7 +1975,7 @@ switchD_000316d0_default:
     *(float *)(lightRecord + 0x2864) = params[1];
     *(float *)(lightRecord + 0x2868) = params[2];
     ((void (*)())_gleTransformLightDirection)(glContext,lightIndex,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
-               forwardedFloatArg8,incomingStack_ffffffa8,incomingStack_ffffffb0);
+               forwardedFloatArg8,incomingStackWord_ffffffa8,incomingStackWord_ffffffb0);
     goto LAB_00031c08;
   case 0x1205:
     spotExponentValue = *params;

@@ -814,13 +814,13 @@ LAB_000b32e4:
 void _glCombinerParameteriNV_Exec(int glContext,int pname,undefined4 param,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
   undefined4 uStack00000020;
-  double incomingStack_ffffffb8;
-  double incomingStack_ffffffc0;
+  double incomingStackWord_ffffffb8;
+  double incomingStackWord_ffffffc0;
   
   if (pname - 0x854eU < 2) {
     uStack00000020 = param;
     ((void (*)())_glCombinerParameterivNV_Exec)(glContext,pname,&STACKARG(0x20),forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,
-               forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0);
+               forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStackWord_ffffffb8,incomingStackWord_ffffffc0);
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
     *(undefined4 *)(glContext + 0x7574) = 0x500;

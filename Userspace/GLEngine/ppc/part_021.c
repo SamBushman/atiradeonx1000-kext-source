@@ -102,15 +102,15 @@ int _glOrtho_Comp(int glContext,double left,double right,double bottom,double to
 /* _glOrtho_CompExec @ 0x796c4 (120 bytes) */
 void _glOrtho_CompExec(undefined4 glContext,double left,double right,double bottom,double top,double zNear,double zFar,double forwardedFloatArg7,double forwardedFloatArg8,double forwardedFloatArg9,double forwardedFloatArg10,double forwardedFloatArg11,double forwardedFloatArg12,double forwardedFloatArg13)
 {
-  double incomingStack_ffffff68;
-  double incomingStack_ffffff70;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
-  double incomingStack_ffffff88;
+  double incomingStackWord_ffffff68;
+  double incomingStackWord_ffffff70;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
+  double incomingStackWord_ffffff88;
   
   ((int (*)())_glOrtho_Comp)(glContext,left,right,bottom,top,zNear,zFar,forwardedFloatArg7,forwardedFloatArg8,
-                incomingStack_ffffff68,incomingStack_ffffff70,incomingStack_ffffff78,incomingStack_ffffff80,
-                incomingStack_ffffff88);
+                incomingStackWord_ffffff68,incomingStackWord_ffffff70,incomingStackWord_ffffff78,incomingStackWord_ffffff80,
+                incomingStackWord_ffffff88);
   ((void (*)())_glOrtho_Exec)(glContext,left,right,bottom,top,zNear,zFar,forwardedFloatArg7,forwardedFloatArg8,
                 forwardedFloatArg9,forwardedFloatArg10,forwardedFloatArg11,forwardedFloatArg12,forwardedFloatArg13);
   return;

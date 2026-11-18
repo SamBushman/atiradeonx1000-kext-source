@@ -470,8 +470,8 @@ void _gleFeedbackPolygonFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff88;
-  double incomingStack_ffffff90;
+  double incomingStackWord_ffffff88;
+  double incomingStackWord_ffffff90;
   uint clippedCount;
   int backFacing [5];
   
@@ -575,7 +575,7 @@ LAB_000ec290:
   listCursorThenClipDestThenFlipCursor = spareList;
   if (*(char *)(glContext + 0x4e18) != '\0') {
     ((double (*)())_gleClipPolyPlane)(glContext,polygonList,vertexCountThenClippedCount,spareList,&clippedCount,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
-                      incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90);
+                      incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,incomingStackWord_ffffff90);
     if (clippedCount == 0) {
       return;
     }
@@ -900,8 +900,8 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
   int backFacing;
   int clippedCount [3];
   
@@ -969,8 +969,8 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
             while (uVar21 = stripParity, vertexCursor <= lastTriangleStart) {
               nextVertex = vertexCursor + 0x100;
               iVar13 = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,nextVertex,vertexCursor + 0x200,stripParity,&backFacing,dVar27
-                                        ,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78
-                                        ,incomingStack_ffffff80);
+                                        ,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff78
+                                        ,incomingStackWord_ffffff80);
               dVar27 = f1AfterCall;
               if (iVar13 == 0) {
                 if (previousFacing != backFacing) {
@@ -1077,7 +1077,7 @@ LAB_000ecbb8: ;
             if ((*(char *)(glContext + 0x4e18) == '\0') ||
                (dVar27 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonVertexList,3,spareList,clippedCount,dVar27,incomingFpr2,
                                                    incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                   incomingStack_ffffff78,incomingStack_ffffff80),
+                                                   incomingStackWord_ffffff78,incomingStackWord_ffffff80),
                puVar15 = polygonVertexList, polygonVertexCount = clippedCount[0], puVar9 = spareList, clippedCount[0] != 0)) {
               polygonVertexList = puVar9;
               spareList = puVar15;
@@ -1188,8 +1188,8 @@ void _gleFeedbackTriangleFanFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff68;
-  double incomingStack_ffffff70;
+  double incomingStackWord_ffffff68;
+  double incomingStackWord_ffffff70;
   int backFacing;
   int clipCount [6];
   
@@ -1265,7 +1265,7 @@ joined_r0x000ed1dc:
         } while ((*(char *)(glContext + 0x4e18) != '\0') &&
                 (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clipCount,forwardedFloatArg1,incomingFpr2,
                                                     incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                    incomingStack_ffffff68,incomingStack_ffffff70),
+                                                    incomingStackWord_ffffff68,incomingStackWord_ffffff70),
                 oldPolygonList = polygonList, polygonVertexCount = clipCount[0], newPolygonList = spareList, clipCount[0] == 0));
         spareList = oldPolygonList;
         polygonList = newPolygonList;
@@ -1293,8 +1293,8 @@ joined_r0x000ed1dc:
               if (lastTriangleLimit < fanCursor) goto LAB_000ed0b0;
               nextFanVertex = fanCursor + 0x100;
               cullResult = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,fanCursor,nextFanVertex,0,&backFacing,forwardedFloatArg1,incomingFpr2,incomingFpr3,
-                                       incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff68,
-                                       incomingStack_ffffff70);
+                                       incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff68,
+                                       incomingStackWord_ffffff70);
               forwardedFloatArg1 = f1AfterCall;
               if (cullResult != 0) break;
               if (previousBackFacing != backFacing) {
@@ -2017,8 +2017,8 @@ void _gleRenderSmoothTrianglesFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff88;
-  double incomingStack_ffffff90;
+  double incomingStackWord_ffffff88;
+  double incomingStackWord_ffffff90;
   int backFacing;
   int clipCount [3];
   
@@ -2083,7 +2083,7 @@ LAB_000ee23c:
           do {
             cullResult = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x200,0,&backFacing,
                                       forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                      incomingStack_ffffff88,incomingStack_ffffff90);
+                                      incomingStackWord_ffffff88,incomingStackWord_ffffff90);
             forwardedFloatArg1 = forwardedFloatArg1;
             if (cullResult == 0) {
               if (previousBackFacingThenPolygonVertexCount != backFacing) {
@@ -2144,8 +2144,8 @@ LAB_000ee37c:
         previousBackFacingThenPolygonVertexCount = 3;
         if ((*(char *)(glContext + 0x4e18) == '\0') ||
            (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clipCount,forwardedFloatArg1,incomingFpr2,incomingFpr3
-                                               ,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,
-                                               incomingStack_ffffff90), oldPolygonList = polygonList,
+                                               ,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,
+                                               incomingStackWord_ffffff90), oldPolygonList = polygonList,
            newPolygonList = spareList, previousBackFacingThenPolygonVertexCount = clipCount[0], clipCount[0] != 0)) {
           polygonList = newPolygonList;
           spareList = oldPolygonList;
@@ -2740,8 +2740,8 @@ void _gleRenderFlatTriangleStripFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
   int backFacing;
   int clippedVertexCount [5];
   
@@ -2809,8 +2809,8 @@ void _gleRenderFlatTriangleStripFunc_body(glContext)
           while (carriedParity = stripParity, vertexCursor <= lastTriangleStart) {
             nextVertexCursor = vertexCursor + 0x100;
             cullResult = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,nextVertexCursor,vertexCursor + 0x200,stripParity,&backFacing,lastCalleeF1,
-                                      incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
-                                      incomingStack_ffffff80);
+                                      incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff78,
+                                      incomingStackWord_ffffff80);
             lastCalleeF1 = f1AfterCall1;
             if (cullResult == 0) {
               if (iVar14 != backFacing) {
@@ -2910,7 +2910,7 @@ LAB_000ef3cc: ;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (lastCalleeF1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clippedVertexCount,lastCalleeF1,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                 incomingStack_ffffff78,incomingStack_ffffff80),
+                                                 incomingStackWord_ffffff78,incomingStackWord_ffffff80),
              nextSpareList = polygonList, nextPolygonList = spareList, polygonVertexCount = clippedVertexCount[0], clippedVertexCount[0] != 0)) {
             polygonList = nextPolygonList;
             spareList = nextSpareList;
@@ -4123,9 +4123,9 @@ void _gleRenderFlatQuadStripFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
-  double incomingStack_ffffff88;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
+  double incomingStackWord_ffffff88;
   int backFacing;
   int clippedVertexCount [5];
   
@@ -4185,7 +4185,7 @@ joined_r0x000f1240:
       } while ((*(char *)(glContext + 0x4e18) != '\0') &&
               (dVar21 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clippedVertexCount,dVar21,incomingFpr2,
                                                   incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                  incomingStack_ffffff78,incomingStack_ffffff80),
+                                                  incomingStackWord_ffffff78,incomingStackWord_ffffff80),
               nextSpareList = polygonList, nextPolygonList = spareList, polygonVertexCount = clippedVertexCount[0], clippedVertexCount[0] == 0));
       spareList = nextSpareList;
       polygonList = nextPolygonList;
@@ -4226,8 +4226,8 @@ joined_r0x000f1240:
             if (lastQuadStart < vertexCursor) goto LAB_000f1138;
             uVar17 = vertexCursor + 0x200;
             cullResult = ((undefined4 (*)())_gleCullQuad)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x300,uVar17,&backFacing,
-                                  dVar21,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78
-                                  ,incomingStack_ffffff80,incomingStack_ffffff88);
+                                  dVar21,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff78
+                                  ,incomingStackWord_ffffff80,incomingStackWord_ffffff88);
             dVar21 = f1AfterCall1;
             if (cullResult != 0) break;
             if (iVar10 != backFacing) {
@@ -4839,8 +4839,8 @@ void _gleSelectTriangleFanFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
   int backFacing;
   int local_4c [5];
   
@@ -4886,8 +4886,8 @@ void _gleSelectTriangleFanFunc_body(glContext)
               if (uVar15 < uVar7) goto LAB_000f1f60;
               uVar17 = uVar7 + 0x100;
               iVar8 = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,uVar7,uVar17,0,&backFacing,dVar18,incomingFpr2,incomingFpr3,
-                                       incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
-                                       incomingStack_ffffff80);
+                                       incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff78,
+                                       incomingStackWord_ffffff80);
               dVar18 = f1AfterCall1;
               if (iVar8 != 0) break;
               if (iVar9 != backFacing) {
@@ -4936,7 +4936,7 @@ LAB_000f1f60:
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (dVar18 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,local_4c,dVar18,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                 incomingStack_ffffff78,incomingStack_ffffff80),
+                                                 incomingStackWord_ffffff78,incomingStackWord_ffffff80),
              piVar11 = polygonList, piVar5 = spareList, polygonVertexCount = local_4c[0], local_4c[0] != 0)) {
             polygonList = piVar5;
             spareList = piVar11;
@@ -5005,9 +5005,9 @@ void _gleSelectQuadsFunc_body(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
-  double incomingStack_ffffff88;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
+  double incomingStackWord_ffffff88;
   int backFacing;
   int clipCount [6];
   
@@ -5051,7 +5051,7 @@ void _gleSelectQuadsFunc_body(glContext)
             do {
               cullResultThenFlipCount = ((undefined4 (*)())_gleCullQuad)(glContext,vertexCursor,vertexCursor + 0x100,vertexCursor + 0x200,vertexCursor + 0x300,
                                    &backFacing,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                   incomingStack_ffffff78,incomingStack_ffffff80,incomingStack_ffffff88);
+                                   incomingStackWord_ffffff78,incomingStackWord_ffffff80,incomingStackWord_ffffff88);
               forwardedFloatArg1 = forwardedFloatArg1;
               if (cullResultThenFlipCount == 0) {
                 if (iVar9 != backFacing) {
@@ -5104,7 +5104,7 @@ void _gleSelectQuadsFunc_body(glContext)
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clipCount,forwardedFloatArg1,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
-                                                 incomingStack_ffffff78,incomingStack_ffffff80),
+                                                 incomingStackWord_ffffff78,incomingStackWord_ffffff80),
              oldPolygonListThenVertexPtrCursor = polygonList, polygonVertexCount = clipCount[0], newPolygonList = spareList, clipCount[0] != 0)) {
             polygonList = newPolygonList;
             spareList = oldPolygonListThenVertexPtrCursor;

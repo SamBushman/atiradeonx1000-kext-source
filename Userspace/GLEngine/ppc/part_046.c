@@ -745,11 +745,11 @@ void _gleEvalMap1(int glContext,float floatArg1)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff88;
-  double incomingStack_ffffff90;
-  double incomingStack_ffffff98;
-  double incomingStack_ffffffa0;
-  double incomingStack_ffffffa8;
+  double incomingStackWord_ffffff88;
+  double incomingStackWord_ffffff90;
+  double incomingStackWord_ffffff98;
+  double incomingStackWord_ffffffa0;
+  double incomingStackWord_ffffffa8;
   
   mapDataThenPoints = (undefined4 *)_gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -766,14 +766,14 @@ void _gleEvalMap1(int glContext,float floatArg1)
     out = outStart + 0xc;
     ((void (*)())_gleEvalDomain1Coord)(glContext,mapDataThenPoints + 0x52,mapDataThenPoints[0x4e],incomingR6,3,outStart,
                (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(mapDataThenPoints[0x4f]))) * GH_U2F((unsigned int)(mapDataThenPoints[0x51]))),incomingFpr2
-               ,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,
-               incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
+               ,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,incomingStackWord_ffffff90,
+               incomingStackWord_ffffff98,incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
   }
   if (*(char *)(glContext + 0x7516) != '\0') {
     ((void (*)())_gleEvalDomain1Color)(glContext,mapDataThenPoints + 0x74,mapDataThenPoints[0x70],incomingR6,4,out,
                (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(mapDataThenPoints[0x71]))) * GH_U2F((unsigned int)(mapDataThenPoints[0x73]))),incomingFpr2
-               ,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,
-               incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
+               ,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,incomingStackWord_ffffff90,
+               incomingStackWord_ffffff98,incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
     if (*(char *)(glContext + 0x4df8) != '\0') {
       (**(code **)(glContext + 0x4de0))(glContext,out);
     }
@@ -790,8 +790,8 @@ void _gleEvalMap1(int glContext,float floatArg1)
 LAB_000df2c8:
     ((void (*)())_gleEvalDomain1Coord)(glContext,controlPoints,order,incomingR6,components,out,
                (double)((floatArg1 - domainStart) * domainScale2),incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
-               incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98,incomingStack_ffffffa0,
-               incomingStack_ffffffa8);
+               incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,incomingStackWord_ffffff90,incomingStackWord_ffffff98,incomingStackWord_ffffffa0,
+               incomingStackWord_ffffffa8);
     out = nextOut;
   }
   else if (attribByteSize < 9) {
@@ -810,8 +810,8 @@ LAB_000df2c8:
       nextOut = out + 0xc;
       ((void (*)())_gleEvalDomain1Coord)(glContext,mapDataThenPoints + 0xd4,mapDataThenPoints[0xd0],incomingR6,3,out,
                  (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(mapDataThenPoints[0xd1]))) * GH_U2F((unsigned int)(mapDataThenPoints[0xd3]))),
-                 incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,
-                 incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
+                 incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,incomingStackWord_ffffff90,
+                 incomingStackWord_ffffff98,incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
       flagsUpdated = *(uint *)(glContext + 0x486c) | 1;
     }
     else {
@@ -819,8 +819,8 @@ LAB_000df2c8:
       nextOut = out + 0x10;
       ((void (*)())_gleEvalDomain1Coord)(glContext,mapDataThenPoints + 0xf6,mapDataThenPoints[0xf2],incomingR6,4,out,
                  (double)((float)(floatArg1 - (double)GH_U2F((unsigned int)(mapDataThenPoints[0xf3]))) * GH_U2F((unsigned int)(mapDataThenPoints[0xf5]))),
-                 incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,
-                 incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
+                 incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,incomingStackWord_ffffff90,
+                 incomingStackWord_ffffff98,incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
       flagsUpdated = *(uint *)(glContext + 0x486c) | 3;
     }
     *(uint *)(glContext + 0x486c) = flagsUpdated;
@@ -847,8 +847,8 @@ LAB_000df2d0:
         selectedPoints = puVar13;
 LAB_000df3c0:
         ((void (*)())_gleEvalDomain1Coord)(glContext,selectedPoints,order,incomingR6,components,out,(double)(offsetFromStart * domainScale),incomingFpr2,incomingFpr3,incomingFpr4
-                   ,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98,
-                   incomingStack_ffffffa0,incomingStack_ffffffa8);
+                   ,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,incomingStackWord_ffffff90,incomingStackWord_ffffff98,
+                   incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
         out = nextOut;
       }
       else {
@@ -918,8 +918,8 @@ LAB_000df3c8:
   }
   ((void (*)())_gleEvalDomain1Coord)(glContext,mapDataThenPoints,order,incomingR6,components,out,
              (double)((floatArg1 - domainStart) * domainScale2),incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
-             ,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98,incomingStack_ffffffa0,
-             incomingStack_ffffffa8);
+             ,incomingFpr8,incomingStackWord_ffffff88,incomingStackWord_ffffff90,incomingStackWord_ffffff98,incomingStackWord_ffffffa0,
+             incomingStackWord_ffffffa8);
 LAB_000df478:
   *(int *)(glContext + 0x48ec) = glContext + 0x7508;
   hookResult = (**(code **)(glContext + 0x4898))(glContext,*(undefined4 *)(glContext + 0x4860),vertexWritePos);
@@ -2440,11 +2440,11 @@ void _gleEvalMap2(int glContext,float floatArg1,float floatArg2,double floatArg3
   double incomingFpr10;
   float lastVOffset3;
   float lastVOffset4;
-  double incomingStack_ffffff48;
-  double incomingStack_ffffff50;
-  double incomingStack_ffffff58;
-  double incomingStack_ffffff60;
-  double incomingStack_ffffff68;
+  double incomingStackWord_ffffff48;
+  double incomingStackWord_ffffff50;
+  double incomingStackWord_ffffff58;
+  double incomingStackWord_ffffff60;
+  double incomingStackWord_ffffff68;
   float deriv1X;
   float deriv1Y;
   float deriv1Z;
@@ -2471,8 +2471,8 @@ void _gleEvalMap2(int glContext,float floatArg1,float floatArg2,double floatArg3
                          *(float *)(mapDataThenPoints + 0xfc0)),
                  (double)((floatArg2 - *(float *)(mapDataThenPoints + 0xfb8)) *
                          *(float *)(mapDataThenPoints + 0xfc4)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
-                 floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,
-                 incomingStack_ffffff68);
+                 floatArg8,incomingStackWord_ffffff48,incomingStackWord_ffffff50,incomingStackWord_ffffff58,incomingStackWord_ffffff60,
+                 incomingStackWord_ffffff68);
     }
     out = outStart + 3;
   }
@@ -2483,8 +2483,8 @@ void _gleEvalMap2(int glContext,float floatArg1,float floatArg2,double floatArg3
                        *(float *)(mapDataThenPoints + 0x1490)),
                (double)((floatArg2 - *(float *)(mapDataThenPoints + 0x1488)) *
                        *(float *)(mapDataThenPoints + 0x1494)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
-               floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,
-               incomingStack_ffffff68);
+               floatArg8,incomingStackWord_ffffff48,incomingStackWord_ffffff50,incomingStackWord_ffffff58,incomingStackWord_ffffff60,
+               incomingStackWord_ffffff68);
     if (*(char *)(glContext + 0x4df8) != '\0') {
       (**(code **)(glContext + 0x4de0))(glContext,out);
     }
@@ -2501,8 +2501,8 @@ void _gleEvalMap2(int glContext,float floatArg1,float floatArg2,double floatArg3
     nextOut = out + 2;
 LAB_000e105c:
     ((void (*)())_gleEvalDomain2Coord)(glContext,controlPointsThenSlotPointsFor4Components,uorder,vorder,incomingR7,incomingR8,components,out,(double)uNormalized,(double)vNormalized,
-               floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff48,
-               incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,incomingStack_ffffff68);
+               floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStackWord_ffffff48,
+               incomingStackWord_ffffff50,incomingStackWord_ffffff58,incomingStackWord_ffffff60,incomingStackWord_ffffff68);
     out = nextOut;
   }
   else if (attribByteSize < 9) {
@@ -2526,8 +2526,8 @@ LAB_000e105c:
                          *(float *)(mapDataThenPoints + 0x2190)),
                  (double)((floatArg2 - *(float *)(mapDataThenPoints + 0x2188)) *
                          *(float *)(mapDataThenPoints + 0x2194)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
-                 floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,
-                 incomingStack_ffffff68);
+                 floatArg8,incomingStackWord_ffffff48,incomingStackWord_ffffff50,incomingStackWord_ffffff58,incomingStackWord_ffffff60,
+                 incomingStackWord_ffffff68);
       flagsUpdated = *(uint *)(glContext + 0x486c) | 1;
     }
     else {
@@ -2539,8 +2539,8 @@ LAB_000e105c:
                          *(float *)(mapDataThenPoints + 0x2660)),
                  (double)((floatArg2 - *(float *)(mapDataThenPoints + 0x2658)) *
                          *(float *)(mapDataThenPoints + 0x2664)),floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,
-                 floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60,
-                 incomingStack_ffffff68);
+                 floatArg8,incomingStackWord_ffffff48,incomingStackWord_ffffff50,incomingStackWord_ffffff58,incomingStackWord_ffffff60,
+                 incomingStackWord_ffffff68);
       flagsUpdated = *(uint *)(glContext + 0x486c) | 3;
     }
     *(uint *)(glContext + 0x486c) = flagsUpdated;
@@ -2570,8 +2570,8 @@ LAB_000e1060:
         selectedPoints = slotPointsFor2Components;
 LAB_000e11b0:
         ((void (*)())_gleEvalDomain2Coord)(glContext,selectedPoints,uorder,vorder,incomingR7,incomingR8,components,out,(double)slotUNormalized,(double)slotVNormalized,floatArg3,
-                   floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,
-                   incomingStack_ffffff58,incomingStack_ffffff60,incomingStack_ffffff68);
+                   floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStackWord_ffffff48,incomingStackWord_ffffff50,
+                   incomingStackWord_ffffff58,incomingStackWord_ffffff60,incomingStackWord_ffffff68);
         out = nextOut;
       }
       else {
@@ -2634,8 +2634,8 @@ LAB_000e11b4:
       components = 3;
 LAB_000e1350:
       ((void (*)())_gleEvalDomain2Coord)(glContext,mapDataThenPoints,uorder,vorder,incomingR7,incomingR8,components,out,(double)lastUNormalized,(double)lastVNormalized,floatArg3,
-                 floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff48,incomingStack_ffffff50,
-                 incomingStack_ffffff58,incomingStack_ffffff60,incomingStack_ffffff68);
+                 floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStackWord_ffffff48,incomingStackWord_ffffff50,
+                 incomingStackWord_ffffff58,incomingStackWord_ffffff60,incomingStackWord_ffffff68);
       goto LAB_000e1388;
     }
     ((void (*)())_gleEvalDomainDeriv2Coord)(glContext,mapDataThenPoints + 0x498,*(undefined4 *)(mapDataThenPoints + 0x478),

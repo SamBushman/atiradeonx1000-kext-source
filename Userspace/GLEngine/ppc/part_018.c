@@ -1573,11 +1573,11 @@ void _glMapVertexAttrib1fARB_Comp(int glContext,undefined4 index,uint size,undef
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffff98;
-  double incomingStack_ffffffa0;
-  double incomingStack_ffffffa8;
-  double incomingStack_ffffffb0;
-  double incomingStack_ffffffb8;
+  double incomingStackWord_ffffff98;
+  double incomingStackWord_ffffffa0;
+  double incomingStackWord_ffffffa8;
+  double incomingStackWord_ffffffb0;
+  double incomingStackWord_ffffffb8;
   
   if (size == 2) {
     recordSize = (10 - order) * -8 + 100;
@@ -1587,8 +1587,8 @@ void _glMapVertexAttrib1fARB_Comp(int glContext,undefined4 index,uint size,undef
       return;
     }
     ((void (*)())_gleMap1VertexAttrib2fLoad)(glContext,extraout_r4_00,recordSize,stride,order,points,listRecord + 1,u1,u2,
-               incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,
-               incomingStack_ffffffa8,incomingStack_ffffffb0,incomingStack_ffffffb8);
+               incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff98,incomingStackWord_ffffffa0,
+               incomingStackWord_ffffffa8,incomingStackWord_ffffffb0,incomingStackWord_ffffffb8);
   }
   else if (size < 3) {
     if (size != 1) {
@@ -1606,8 +1606,8 @@ LAB_0006f31c:
       return;
     }
     ((void (*)())_gleMap1VertexAttrib1fLoad)(glContext,extraout_r4,recordSize,stride,order,points,listRecord + 1,u1,u2,incomingFpr3,
-               incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8,
-               incomingStack_ffffffb0,incomingStack_ffffffb8);
+               incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff98,incomingStackWord_ffffffa0,incomingStackWord_ffffffa8,
+               incomingStackWord_ffffffb0,incomingStackWord_ffffffb8);
   }
   else if (size == 3) {
     recordSize = (10 - order) * -0xc + 0x8c;
@@ -1617,8 +1617,8 @@ LAB_0006f31c:
       return;
     }
     ((void (*)())_gleMap1VertexAttrib3fLoad)(glContext,extraout_r4_01,recordSize,stride,order,points,listRecord + 1,u1,u2,
-               incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,
-               incomingStack_ffffffa8,incomingStack_ffffffb0,incomingStack_ffffffb8);
+               incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff98,incomingStackWord_ffffffa0,
+               incomingStackWord_ffffffa8,incomingStackWord_ffffffb0,incomingStackWord_ffffffb8);
   }
   else {
     if (size != 4) goto LAB_0006f31c;
@@ -1629,8 +1629,8 @@ LAB_0006f31c:
       return;
     }
     ((void (*)())_gleMap1VertexAttrib4fLoad)(glContext,extraout_r4_02,recordSize,stride,order,points,listRecord + 1,u1,u2,
-               incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,
-               incomingStack_ffffffa8,incomingStack_ffffffb0,incomingStack_ffffffb8);
+               incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffff98,incomingStackWord_ffffffa0,
+               incomingStackWord_ffffffa8,incomingStackWord_ffffffb0,incomingStackWord_ffffffb8);
   }
   *listRecord = index;
   return;
