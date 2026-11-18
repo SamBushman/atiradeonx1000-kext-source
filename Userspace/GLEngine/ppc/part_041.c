@@ -140,8 +140,8 @@ void _gleTransformNormalBlend(int param_1,uint param_2,int param_3,double fparam
   return;
 }
 
-/* FUN_000c54e8 @ 0xc54e8 (852 bytes) */
-int FUN_000c54e8(param_1)
+/* _gleBuildNormalTransformFuncAV_body @ 0xc54e8 (852 bytes) */
+int _gleBuildNormalTransformFuncAV_body(param_1)
   int param_1;
 {
   uint uVar1;
@@ -251,8 +251,8 @@ int FUN_000c54e8(param_1)
   return piVar13;
 }
 
-/* FUN_000c5840 @ 0xc5840 (1424 bytes) */
-int FUN_000c5840(param_1)
+/* _gleBuildNormalTransformFuncNO_body @ 0xc5840 (1424 bytes) */
+int _gleBuildNormalTransformFuncNO_body(param_1)
   int param_1;
 {
   bool bVar1;

@@ -378,8 +378,8 @@ void _gleSetEnable_NORMALIZE(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_00046198 @ 0x46198 (1032 bytes) */
-void FUN_00046198(param_1, param_2, param_3, param_4, param_5)
+/* _glGetTexLevelParameteriv_Exec_body @ 0x46198 (1032 bytes) */
+void _glGetTexLevelParameteriv_Exec_body(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   uint param_3;

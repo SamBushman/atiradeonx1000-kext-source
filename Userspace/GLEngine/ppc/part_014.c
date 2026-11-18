@@ -1800,8 +1800,8 @@ void _glEdgeFlagv_CompExec(param_1, param_2)
   return;
 }
 
-/* FUN_000647d0 @ 0x647d0 (40 bytes) */
-undefined4 FUN_000647d0(undefined4 param_1,double fparam_1)
+/* _glEvalCoord1d_ListExec_body @ 0x647d0 (40 bytes) */
+undefined4 _glEvalCoord1d_ListExec_body(undefined4 param_1,double fparam_1)
 {
   ((void (*)())_gleEvalMap1)(param_1,(double)(float)fparam_1);
   return 8;

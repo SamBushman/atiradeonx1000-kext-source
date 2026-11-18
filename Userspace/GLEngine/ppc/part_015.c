@@ -31,8 +31,8 @@ void _glEvalCoord2dv_CompExec(param_1, param_2)
   return;
 }
 
-/* FUN_00064c1c @ 0x64c1c (48 bytes) */
-undefined4 FUN_00064c1c(undefined4 param_1,double *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+/* _glEvalCoord2f_ListExec_body @ 0x64c1c (48 bytes) */
+undefined4 _glEvalCoord2f_ListExec_body(undefined4 param_1,double *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   double in_stack_ffffffb8;
   double in_stack_ffffffc0;
@@ -1001,8 +1001,8 @@ void _glGenRenderbuffersEXT_Exec(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_00065f84 @ 0x65f84 (440 bytes) */
-void FUN_00065f84(param_1, param_2, param_3)
+/* _glDeleteRenderbuffersEXT_Exec_body @ 0x65f84 (440 bytes) */
+void _glDeleteRenderbuffersEXT_Exec_body(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -1708,8 +1708,8 @@ LAB_00066edc:
   return;
 }
 
-/* FUN_00066f4c @ 0x66f4c (420 bytes) */
-void FUN_00066f4c(param_1, param_2, param_3, param_4, param_5)
+/* _glFramebufferRenderbufferEXT_Exec_body @ 0x66f4c (420 bytes) */
+void _glFramebufferRenderbufferEXT_Exec_body(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;

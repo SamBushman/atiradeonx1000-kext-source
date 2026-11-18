@@ -1987,8 +1987,8 @@ double _gleLightExponentPow(undefined4 param_1,int param_2,float fparam_1,double
                  (dVar5 * *(float *)(iVar3 + 0x3c)));
 }
 
-/* FUN_000d45ec @ 0xd45ec (1180 bytes) */
-void FUN_000d45ec(int param_1,int param_2,int param_3,double fparam_1)
+/* _gleVtxLightRGBAFront_body @ 0xd45ec (1180 bytes) */
+void _gleVtxLightRGBAFront_body(int param_1,int param_2,int param_3,double fparam_1)
 {
   float fVar1;
   undefined4 uVar2;
@@ -2220,8 +2220,8 @@ LAB_000d4a6c:
   goto LAB_000d462c;
 }
 
-/* FUN_000d4a8c @ 0xd4a8c (1188 bytes) */
-void FUN_000d4a8c(int param_1,int param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+/* _gleVtxLightRGBABack_body @ 0xd4a8c (1188 bytes) */
+void _gleVtxLightRGBABack_body(int param_1,int param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   float fVar1;
   undefined4 uVar2;

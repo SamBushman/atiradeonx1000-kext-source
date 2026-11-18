@@ -1167,8 +1167,8 @@ LAB_000b3a68:
   return;
 }
 
-/* FUN_000b3a84 @ 0xb3a84 (364 bytes) */
-void FUN_000b3a84(int param_1,int param_2,int param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _glGetCombinerOutputParameterfvNV_Exec_body @ 0xb3a84 (364 bytes) */
+void _glGetCombinerOutputParameterfvNV_Exec_body(int param_1,int param_2,int param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   uint uVar2;
@@ -1222,8 +1222,8 @@ switchD_000b3af0_default:
   return;
 }
 
-/* FUN_000b3c14 @ 0xb3c14 (332 bytes) */
-void FUN_000b3c14(param_1, param_2, param_3, param_4, param_5)
+/* _glGetCombinerOutputParameterivNV_Exec_body @ 0xb3c14 (332 bytes) */
+void _glGetCombinerOutputParameterivNV_Exec_body(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;

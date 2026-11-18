@@ -176,7 +176,7 @@
 2574	_gleImagingUnpackData	v	-	316	79	79	270	270	0	0	0	0	0	0	0	0	0	FAULT/FAULT:121,RET/RET:149		0	0	0
 2578	_gleGetMinmax	v	-	628	84	83	650	647	3	0	0	0	0	0	0	0	0	FAULT/FAULT:500,RET/RET:150	REORDERED: same writes/reads per segment; order differs	0	0	0
 2567	_LFSStreamOutputDebugInfo	v	-	164	41	39	1473	1455	18	0	0	0	0	0	0	0	0	FAULT/FAULT:1388,RET/RET:85	REORDERED: same writes/reads per segment; order differs	0	0	0
-2595	FUN_000d4a8c	v	-	1188	30	32	474	426	0	0	0	0	0	0	0	0	48	FAULT/FAULT:426,RET/RET:48		0	0	0
+2595	_gleVtxLightRGBABack_body	v	-	1188	30	32	474	426	0	0	0	0	0	0	0	0	48	FAULT/FAULT:426,RET/RET:48		0	0	0
 2600	_gleVtxLightSpecRGBAFrontPtr	v	-	1680	364	237	810	655	64	0	91	0	0	0	0	0	0	FAULT/FAULT:798,RET/RET:12	FAULT_SITE: stock ('read', 1770587254) vs rebuilt ('read', 4)	0	0	0
 400	_gleDrawArraysOrElementsOutOfLine_ListExec	v	-	1496	127	140	620	0	464	0	156	0	0	0	0	0	0	FAULT/FAULT:606,RET/RET:14	FAULT_PARTIAL: same fault ('read', 4045231951); accesses completed before it differ: reads: only stock reads (1342566292, 2)	0	0	0
 2599	_gleVtxLightRGBABackPtr	v	-	1200	300	271	811	550	40	0	213	0	0	0	0	0	0	FAULT/FAULT:775,RET/FAULT:8,RET/RET:28	IMAGE_ADDR_DEP: stock RET | rebuilt FAULT | image data read only by stock [('IMG', 1084904), ('IMG', 1084912)], only by rebuilt [('IMG', 1091636), ('IMG', 1092084)]	0	0	8
@@ -252,7 +252,7 @@
 3190	_gleVPFlushAtomicTCLRDirty	v	-	132	25	28	355	355	0	0	0	0	0	0	0	0	0	FAULT/FAULT:355		0	0	0
 3177	_gleVPFlipColors	v	-	404	101	83	339	190	148	0	0	0	0	0	0	0	0	FAULT/FAULT:250,RET/RET:89	REORDERED: same writes/reads per segment; order differs	1	0	0
 3192	_gleVPFlushLineLoopTCL	v	-	180	8	11	306	306	0	0	0	0	0	0	0	0	0	FAULT/FAULT:306		0	0	0
-3022	FUN_000ee57c	v	-	1312	38	38	652	128	524	0	0	0	0	0	0	0	0	FAULT/FAULT:597,RET/RET:55	REORDERED: same writes/reads per segment; order differs	0	0	0
+3022	_gleRenderFlatTrianglesFunc_body	v	-	1312	38	38	652	128	524	0	0	0	0	0	0	0	0	FAULT/FAULT:597,RET/RET:55	REORDERED: same writes/reads per segment; order differs	0	0	0
 3193	_gleVPFlushLineLoopTCLRDirty	v	-	252	22	25	312	312	0	0	0	0	0	0	0	0	0	FAULT/FAULT:312		0	0	0
 3195	_gleVPFlushLineStripTCL	v	-	128	8	11	355	355	0	0	0	0	0	0	0	0	0	FAULT/FAULT:355		0	0	0
 3194	_gleVPFlushLineStrip	v	-	176	24	32	449	410	3	0	36	0	0	0	0	0	0	FAULT/FAULT:449	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [1342544220]	0	0	0
@@ -262,7 +262,7 @@
 3197	_gleVPFlushTriQuadStrip	v	-	168	24	32	234	203	3	0	28	0	0	0	0	0	0	FAULT/FAULT:234	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [1342220944]	0	0	0
 3201	_gleVPFlushTriangleFanTCL	v	-	124	8	11	239	239	0	0	0	0	0	0	0	0	0	FAULT/FAULT:239		0	0	0
 3202	_gleVPFlushTriangleFanTCLRDirty	v	-	196	25	28	284	284	0	0	0	0	0	0	0	0	0	FAULT/FAULT:284		0	0	0
-2979	FUN_000eae0c	v	-	620	28	21	686	173	512	0	0	0	0	0	1	0	0	FAULT/FAULT:625,FAULT/TIMEOUT:1,RET/RET:60	REORDERED: same writes/reads per segment; order differs	0	0	0
+2979	_gleRenderPointsFunc_body	v	-	620	28	21	686	173	512	0	0	0	0	0	1	0	0	FAULT/FAULT:625,FAULT/TIMEOUT:1,RET/RET:60	REORDERED: same writes/reads per segment; order differs	0	0	0
 3204	_gleVPFlushPolygonTCL	v	-	196	28	31	301	301	0	0	0	0	0	0	0	0	0	FAULT/FAULT:301		0	0	0
 3205	_gleVPFlushPolygonTCLRDirty	v	-	268	45	54	303	303	0	0	0	0	0	0	0	0	0	FAULT/FAULT:303		0	0	0
 3237	_gleSetWindowPos	v	-	424	39	37	621	621	0	0	0	0	0	0	0	0	0	FAULT/FAULT:621		0	0	0
@@ -271,25 +271,25 @@
 3200	_gleVPFlushTriangleFan	v	-	252	35	44	305	105	130	0	70	0	0	0	0	0	0	FAULT/FAULT:305	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [1342626008]	0	0	0
 3203	_gleVPFlushPolygon	v	-	324	48	58	308	69	167	0	72	0	0	0	0	0	0	FAULT/FAULT:308	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [4041770443]	0	0	0
 3196	_gleVPFlushLineStripTCLRDirty	v	-	200	26	29	278	258	3	0	0	0	0	0	17	0	0	FAULT/FAULT:261,TIMEOUT/TIMEOUT:17	REORDERED: same writes/reads per segment; order differs	0	0	0
-3019	FUN_000ed940	v	-	956	41	40	627	87	540	0	0	0	0	0	0	0	0	FAULT/FAULT:577,RET/RET:50	REORDERED: same writes/reads per segment; order differs	0	0	0
+3019	_gleRenderSmoothPolygonFunc_body	v	-	956	41	40	627	87	540	0	0	0	0	0	0	0	0	FAULT/FAULT:577,RET/RET:50	REORDERED: same writes/reads per segment; order differs	0	0	0
 3179	_gleVPRenderLines	v	-	420	66	67	691	50	545	15	76	0	0	0	5	0	0	FAULT/FAULT:670,RET/RET:16,TIMEOUT/TIMEOUT:5	READ_SET: segment 0: only stock reads (1342309240, 4)	0	0	0
-2621	FUN_000d8af8	v	-	728	28	24	850	184	666	0	0	0	0	0	0	0	0	FAULT/FAULT:801,RET/RET:49	REORDERED: same writes/reads per segment; order differs	0	0	0
+2621	_gleRenderSmoothLineStripFunc_body	v	-	728	28	24	850	184	666	0	0	0	0	0	0	0	0	FAULT/FAULT:801,RET/RET:49	REORDERED: same writes/reads per segment; order differs	0	0	0
 3181	_gleVPRenderLineLoop	v	-	540	76	71	705	47	586	22	50	0	0	0	0	0	0	FAULT/FAULT:665,RET/RET:40	READ_SET: segment 2: only stock reads (1342648088, 4)	0	0	0
-3030	FUN_000f0eac	v	-	1336	38	41	734	104	630	0	0	0	0	0	0	0	0	FAULT/FAULT:704,RET/RET:30	REORDERED: same writes/reads per segment; order differs	0	0	0
-3021	FUN_000ee104	v	-	1140	40	34	740	164	574	0	0	0	0	0	2	0	0	FAULT/FAULT:697,FAULT/TIMEOUT:2,RET/RET:41	REORDERED: same writes/reads per segment; order differs	0	0	0
-3029	FUN_000f09c0	v	-	1256	40	37	694	76	618	0	0	0	0	0	0	0	0	FAULT/FAULT:663,RET/RET:31	REORDERED: same writes/reads per segment; order differs	0	0	0
-3025	FUN_000ef5f4	v	-	1300	40	37	707	117	590	0	0	0	0	0	0	0	0	FAULT/FAULT:648,RET/RET:59	REORDERED: same writes/reads per segment; order differs	0	0	0
-2624	FUN_000d9420	v	-	760	28	24	675	123	552	0	0	0	0	0	0	0	0	FAULT/FAULT:640,RET/RET:35	REORDERED: same writes/reads per segment; order differs	0	0	0
-3024	FUN_000ef050	v	-	1396	39	38	750	117	633	0	0	0	0	0	0	0	0	FAULT/FAULT:732,RET/RET:18	REORDERED: same writes/reads per segment; order differs	0	0	0
-3028	FUN_000f046c	v	-	1320	38	38	681	106	574	0	0	0	0	0	0	0	0	FAULT/FAULT:652,RET/RET:29	REORDERED: same writes/reads per segment; order differs	1	0	0
+3030	_gleRenderFlatQuadStripFunc_body	v	-	1336	38	41	734	104	630	0	0	0	0	0	0	0	0	FAULT/FAULT:704,RET/RET:30	REORDERED: same writes/reads per segment; order differs	0	0	0
+3021	_gleRenderSmoothTrianglesFunc_body	v	-	1140	40	34	740	164	574	0	0	0	0	0	2	0	0	FAULT/FAULT:697,FAULT/TIMEOUT:2,RET/RET:41	REORDERED: same writes/reads per segment; order differs	0	0	0
+3029	_gleRenderSmoothQuadStripFunc_body	v	-	1256	40	37	694	76	618	0	0	0	0	0	0	0	0	FAULT/FAULT:663,RET/RET:31	REORDERED: same writes/reads per segment; order differs	0	0	0
+3025	_gleRenderSmoothTriangleFanFunc_body	v	-	1300	40	37	707	117	590	0	0	0	0	0	0	0	0	FAULT/FAULT:648,RET/RET:59	REORDERED: same writes/reads per segment; order differs	0	0	0
+2624	_gleRenderFlatLineStripFunc_body	v	-	760	28	24	675	123	552	0	0	0	0	0	0	0	0	FAULT/FAULT:640,RET/RET:35	REORDERED: same writes/reads per segment; order differs	0	0	0
+3024	_gleRenderFlatTriangleStripFunc_body	v	-	1396	39	38	750	117	633	0	0	0	0	0	0	0	0	FAULT/FAULT:732,RET/RET:18	REORDERED: same writes/reads per segment; order differs	0	0	0
+3028	_gleRenderFlatQuadsFunc_body	v	-	1320	38	38	681	106	574	0	0	0	0	0	0	0	0	FAULT/FAULT:652,RET/RET:29	REORDERED: same writes/reads per segment; order differs	1	0	0
 2516	_gleLFSParse	v	-	612	45	36	845	719	11	0	0	0	0	0	115	0	0	FAULT/FAULT:719,RET/RET:11,TIMEOUT/TIMEOUT:115	REORDERED: same writes/reads per segment; order differs	0	0	0
-2622	FUN_000d8dd4	v	-	824	45	39	737	96	640	0	0	0	0	0	1	0	0	FAULT/FAULT:729,FAULT/TIMEOUT:1,RET/RET:7	REORDERED: same writes/reads per segment; order differs	0	0	0
-2625	FUN_000d971c	v	-	856	45	39	728	98	626	0	0	0	0	0	0	0	0	FAULT/FAULT:723,RET/RET:5	REORDERED: same writes/reads per segment; order differs	4	0	0
-3026	FUN_000efb0c	v	-	1244	38	38	695	84	611	0	0	0	0	0	0	0	0	FAULT/FAULT:650,RET/RET:45	REORDERED: same writes/reads per segment; order differs	0	0	0
+2622	_gleRenderSmoothLineLoopFunc_body	v	-	824	45	39	737	96	640	0	0	0	0	0	1	0	0	FAULT/FAULT:729,FAULT/TIMEOUT:1,RET/RET:7	REORDERED: same writes/reads per segment; order differs	0	0	0
+2625	_gleRenderFlatLineLoopFunc_body	v	-	856	45	39	728	98	626	0	0	0	0	0	0	0	0	FAULT/FAULT:723,RET/RET:5	REORDERED: same writes/reads per segment; order differs	4	0	0
+3026	_gleRenderFlatTriangleFanFunc_body	v	-	1244	38	38	695	84	611	0	0	0	0	0	0	0	0	FAULT/FAULT:650,RET/RET:45	REORDERED: same writes/reads per segment; order differs	0	0	0
 3171	_gleMultiTextureMatTrans	v	-	120	30	29	677	106	571	0	0	0	0	0	0	0	0	FAULT/FAULT:626,RET/RET:51	REORDERED: same writes/reads per segment; order differs	0	0	0
 3178	_gleVPRenderPoints	v	-	324	55	47	805	45	667	5	88	0	0	0	0	0	0	FAULT/FAULT:783,RET/RET:22	READ_SET: segment 0: only stock reads (1342472296, 4)	0	0	0
 3180	_gleVPRenderLineStrip	v	-	436	49	39	879	126	698	11	43	0	0	0	1	0	0	FAULT/FAULT:864,FAULT/TIMEOUT:1,RET/RET:14	READ_SET: segment 0: only stock reads (1342483192, 4)	0	0	0
-3183	FUN_00104f80	v	-	1040	111	132	679	66	569	25	19	0	0	0	0	0	0	FAULT/FAULT:635,RET/RET:44	READ_SET: segment 0: only stock reads (1342593192, 4)	0	0	0
-3186	FUN_00105a88	v	-	884	72	77	998	236	628	4	127	0	0	0	0	0	0	FAULT/FAULT:957,RET/RET:41	FAULT_PARTIAL: same fault ('read', 1343464948); accesses completed before it differ: reads: only rebuilt reads (1342234028, 4)	3	0	0
-3184	FUN_00105394	v	-	888	142	168	742	66	614	10	50	0	0	0	2	0	0	FAULT/FAULT:717,RET/RET:23,TIMEOUT/TIMEOUT:2	READ_SET: segment 0: only stock reads (1342420664, 4)	0	0	0
+3183	_gleVPRenderTriangleStrip_body	v	-	1040	111	132	679	66	569	25	19	0	0	0	0	0	0	FAULT/FAULT:635,RET/RET:44	READ_SET: segment 0: only stock reads (1342593192, 4)	0	0	0
+3186	_gleVPRenderQuadStrip_body	v	-	884	72	77	998	236	628	4	127	0	0	0	0	0	0	FAULT/FAULT:957,RET/RET:41	FAULT_PARTIAL: same fault ('read', 1343464948); accesses completed before it differ: reads: only rebuilt reads (1342234028, 4)	3	0	0
+3184	_gleVPRenderTriangleFan_body	v	-	888	142	168	742	66	614	10	50	0	0	0	2	0	0	FAULT/FAULT:717,RET/RET:23,TIMEOUT/TIMEOUT:2	READ_SET: segment 0: only stock reads (1342420664, 4)	0	0	0
 209	_PPEmulatorProgramSetupHandlesFromPPStream	v	-	844	192	189	1234	1220	0	0	0	0	0	0	0	0	14	FAULT/FAULT:1231,RET/RET:3		0	0	0

@@ -508,8 +508,8 @@ int _gleClipPointsPlane(param_1, param_2, param_3)
   return param_3;
 }
 
-/* FUN_000eab28 @ 0xeab28 (700 bytes) */
-void FUN_000eab28(param_1, param_2, param_3)
+/* _gleFeedbackPointsFunc_body @ 0xeab28 (700 bytes) */
+void _gleFeedbackPointsFunc_body(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -591,8 +591,8 @@ void FUN_000eab28(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000eae0c @ 0xeae0c (620 bytes) */
-void FUN_000eae0c(param_1)
+/* _gleRenderPointsFunc_body @ 0xeae0c (620 bytes) */
+void _gleRenderPointsFunc_body(param_1)
   int param_1;
 {
   bool bVar1;

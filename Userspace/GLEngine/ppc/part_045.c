@@ -289,8 +289,8 @@ LAB_000d7dd0:
   return iVar10;
 }
 
-/* FUN_000d7e1c @ 0xd7e1c (776 bytes) */
-void FUN_000d7e1c(param_1, param_2, param_3)
+/* _gleFeedbackLinesFunc_body @ 0xd7e1c (776 bytes) */
+void _gleFeedbackLinesFunc_body(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -398,8 +398,8 @@ void FUN_000d7e1c(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000d811c @ 0xd811c (828 bytes) */
-void FUN_000d811c(param_1, param_2, param_3)
+/* _gleFeedbackLineStripFunc_body @ 0xd811c (828 bytes) */
+void _gleFeedbackLineStripFunc_body(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -561,8 +561,8 @@ void FUN_000d811c(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000d845c @ 0xd845c (932 bytes) */
-void FUN_000d845c(param_1)
+/* _gleFeedbackLineLoopFunc_body @ 0xd845c (932 bytes) */
+void _gleFeedbackLineLoopFunc_body(param_1)
   int param_1;
 {
   uint *puVar1;
@@ -749,8 +749,8 @@ void FUN_000d845c(param_1)
   return;
 }
 
-/* FUN_000d8828 @ 0xd8828 (716 bytes) */
-void FUN_000d8828(param_1)
+/* _gleRenderSmoothLinesFunc_body @ 0xd8828 (716 bytes) */
+void _gleRenderSmoothLinesFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -832,8 +832,8 @@ void FUN_000d8828(param_1)
   return;
 }
 
-/* FUN_000d8af8 @ 0xd8af8 (728 bytes) */
-void FUN_000d8af8(param_1)
+/* _gleRenderSmoothLineStripFunc_body @ 0xd8af8 (728 bytes) */
+void _gleRenderSmoothLineStripFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -924,8 +924,8 @@ void FUN_000d8af8(param_1)
   return;
 }
 
-/* FUN_000d8dd4 @ 0xd8dd4 (824 bytes) */
-void FUN_000d8dd4(param_1)
+/* _gleRenderSmoothLineLoopFunc_body @ 0xd8dd4 (824 bytes) */
+void _gleRenderSmoothLineLoopFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1043,8 +1043,8 @@ void FUN_000d8dd4(param_1)
   return;
 }
 
-/* FUN_000d9110 @ 0xd9110 (780 bytes) */
-void FUN_000d9110(param_1)
+/* _gleRenderFlatLinesFunc_body @ 0xd9110 (780 bytes) */
+void _gleRenderFlatLinesFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1128,8 +1128,8 @@ void FUN_000d9110(param_1)
   return;
 }
 
-/* FUN_000d9420 @ 0xd9420 (760 bytes) */
-void FUN_000d9420(param_1)
+/* _gleRenderFlatLineStripFunc_body @ 0xd9420 (760 bytes) */
+void _gleRenderFlatLineStripFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1222,8 +1222,8 @@ void FUN_000d9420(param_1)
   return;
 }
 
-/* FUN_000d971c @ 0xd971c (856 bytes) */
-void FUN_000d971c(param_1)
+/* _gleRenderFlatLineLoopFunc_body @ 0xd971c (856 bytes) */
+void _gleRenderFlatLineLoopFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1402,8 +1402,8 @@ void _gleSelectLinesFunc(param_1)
   return;
 }
 
-/* FUN_000d9c14 @ 0xd9c14 (484 bytes) */
-void FUN_000d9c14(param_1)
+/* _gleSelectLineStripFunc_body @ 0xd9c14 (484 bytes) */
+void _gleSelectLineStripFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1467,8 +1467,8 @@ void FUN_000d9c14(param_1)
   return;
 }
 
-/* FUN_000d9dfc @ 0xd9dfc (588 bytes) */
-void FUN_000d9dfc(param_1)
+/* _gleSelectLineLoopFunc_body @ 0xd9dfc (588 bytes) */
+void _gleSelectLineLoopFunc_body(param_1)
   int param_1;
 {
   int iVar1;
@@ -3359,8 +3359,8 @@ void _gleLightMaterialRGBAChange_FB_E(param_1, param_2)
   return;
 }
 
-/* FUN_000dc7b8 @ 0xdc7b8 (1320 bytes) */
-void FUN_000dc7b8(param_1)
+/* _gleInvertMatrix_601_body @ 0xdc7b8 (1320 bytes) */
+void _gleInvertMatrix_601_body(param_1)
   int param_1;
 {
   float fVar1;

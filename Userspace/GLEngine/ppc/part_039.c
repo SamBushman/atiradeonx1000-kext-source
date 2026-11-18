@@ -2465,8 +2465,8 @@ void _gleInterpolEyeNO1011(int param_1,float *param_2,int param_3,float *param_4
   return;
 }
 
-/* FUN_000b71d8 @ 0xb71d8 (636 bytes) */
-void FUN_000b71d8(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,float fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _gleInterpolEyeNO1100_body @ 0xb71d8 (636 bytes) */
+void _gleInterpolEyeNO1100_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,float fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -2602,8 +2602,8 @@ void FUN_000b71d8(int param_1,int param_2,int param_3,float *param_4,float fpara
   return;
 }
 
-/* FUN_000b7458 @ 0xb7458 (548 bytes) */
-void FUN_000b7458(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _gleInterpolEyeNO1100w_body @ 0xb7458 (548 bytes) */
+void _gleInterpolEyeNO1100w_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2957,8 +2957,8 @@ void _gleInterpolEyeNO1101w(int param_1,float *param_2,int param_3,float *param_
   return;
 }
 
-/* FUN_000b7b38 @ 0xb7b38 (656 bytes) */
-void FUN_000b7b38(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,float fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _gleInterpolEyeNO1110_body @ 0xb7b38 (656 bytes) */
+void _gleInterpolEyeNO1110_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,float fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -3098,8 +3098,8 @@ void FUN_000b7b38(int param_1,int param_2,int param_3,float *param_4,float fpara
   return;
 }
 
-/* FUN_000b7dcc @ 0xb7dcc (568 bytes) */
-void FUN_000b7dcc(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _gleInterpolEyeNO1110w_body @ 0xb7dcc (568 bytes) */
+void _gleInterpolEyeNO1110w_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -3461,8 +3461,8 @@ void _gleInterpolEyeNO1111w(int param_1,float *param_2,int param_3,float *param_
   return;
 }
 
-/* FUN_000b84e8 @ 0xb84e8 (688 bytes) */
-void FUN_000b84e8(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _gleInterpolEyeNO1200_body @ 0xb84e8 (688 bytes) */
+void _gleInterpolEyeNO1200_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -3616,8 +3616,8 @@ void FUN_000b84e8(int param_1,int param_2,int param_3,float *param_4,float fpara
   } while( true );
 }
 
-/* FUN_000b879c @ 0xb879c (600 bytes) */
-void FUN_000b879c(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,float fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _gleInterpolEyeNO1200w_body @ 0xb879c (600 bytes) */
+void _gleInterpolEyeNO1200w_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,float fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -4022,8 +4022,8 @@ void _gleInterpolEyeNO1201w(int param_1,float *param_2,int param_3,float *param_
   } while( true );
 }
 
-/* FUN_000b8f20 @ 0xb8f20 (708 bytes) */
-void FUN_000b8f20(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _gleInterpolEyeNO1210_body @ 0xb8f20 (708 bytes) */
+void _gleInterpolEyeNO1210_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -4181,8 +4181,8 @@ void FUN_000b8f20(int param_1,int param_2,int param_3,float *param_4,float fpara
   } while( true );
 }
 
-/* FUN_000b91e8 @ 0xb91e8 (620 bytes) */
-void FUN_000b91e8(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,float fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _gleInterpolEyeNO1210w_body @ 0xb91e8 (620 bytes) */
+void _gleInterpolEyeNO1210w_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,float fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;

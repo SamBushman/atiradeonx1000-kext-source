@@ -8025,8 +8025,8 @@ void _gleTransformModelviewBlend(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000c4664 @ 0xc4664 (1236 bytes) */
-int FUN_000c4664(param_1, param_2)
+/* _gleBuildModelviewTransformFuncAV_body @ 0xc4664 (1236 bytes) */
+int _gleBuildModelviewTransformFuncAV_body(param_1, param_2)
   int param_1;
   uint param_2;
 {

@@ -347,8 +347,8 @@ void _gleSelectLineStrip(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000f3c60 @ 0xf3c60 (112 bytes) */
-void FUN_000f3c60(param_1, param_2, param_3)
+/* _gleSelectLineLoop_body @ 0xf3c60 (112 bytes) */
+void _gleSelectLineLoop_body(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;

@@ -47,7 +47,7 @@
 158	_gleSetVertexSubmitFunc	v	-	156	17	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 140	_gleCreatePluginTextureLevel	v	-	1228	9	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 173	_gleModifyPluginTextureLevel	v	-	376	28	29	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-176	FUN_0001ff98	v	-	572	25	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:138,RET/RET:12		0	0	0
+176	_glDeleteTextures_Exec_body	v	-	572	25	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:138,RET/RET:12		0	0	0
 95	_gleResetVertexArrays	v	-	128	12	13	150	0	37	0	91	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 2880703894) vs rebuilt ('read', 2880703882)	22	0	0
 175	_gleTestObject	v	-	760	24	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:13,RET/RET:137		0	0	0
 177	_gleDeleteHashNamesAndObjects	v	-	340	37	39	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:139,RET/RET:11		0	0	0
@@ -113,7 +113,7 @@
 395	_gleDrawArraysSyncState	v	-	736	15	11	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 383	_glEndRDirty_Exec	v	-	200	40	37	150	98	52	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14	REORDERED: same writes/reads per segment; order differs	0	0	0
 309	_glColor4f_CompExec	v	-	164	10	10	150	0	0	0	150	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 21510) vs rebuilt ('read', 21514)	0	0	0
-407	FUN_00046198	v	-	1032	36	34	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:118,RET/RET:32		0	0	0
+407	_glGetTexLevelParameteriv_Exec_body	v	-	1032	36	34	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:118,RET/RET:32		0	0	0
 410	_gleAllocateTextureLevel	i	-	196	38	33	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:91,RET/RET:59		0	0	0
 405	_glReadPixels_Exec	v	-	1436	41	39	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:83,RET/RET:67		0	0	0
 357	_gleEndList	v	-	380	39	48	150	1	31	0	118	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 21500) vs rebuilt ('write', 21512) (different access kind; no store or call completed in either image)	0	0	0
@@ -138,7 +138,7 @@
 481	_gleCopyPixelMapf	v	-	240	34	25	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25		0	0	0
 471	_glFinishRender_Exec	v	-	136	18	15	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:141,RET/RET:9		0	0	0
 472	_gleDrawArraysOrElements_VAR_Exec	v	-	972	36	46	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:108,RET/RET:42		0	0	0
-488	FUN_00050900	v	-	1284	41	40	150	134	0	0	16	0	0	0	0	0	0	FAULT/FAULT:102,RET/RET:48	FAULT_SITE: stock ('read', 3339089199) vs rebuilt ('read', 3339089135)	0	0	0
+488	_gleFeedbackQuadsFunc_body	v	-	1284	41	40	150	134	0	0	16	0	0	0	0	0	0	FAULT/FAULT:102,RET/RET:48	FAULT_SITE: stock ('read', 3339089199) vs rebuilt ('read', 3339089135)	0	0	0
 489	_gleSetProjectionFuncAll	v	-	104	14	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 473	_glSetFenceAPPLE_Exec	v	-	712	6	13	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:147,RET/RET:3		0	0	0
 494	_gleClipPoly	v	-	432	37	36	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
@@ -214,12 +214,12 @@
 926	_glIsRenderbufferEXT_Exec	v	-	168	42	41	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:105,RET/RET:45		0	0	0
 928	_glGenFramebuffersEXT_Exec	v	-	232	37	34	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:140,RET/RET:10		0	0	0
 442	_glRectd_Exec	v	-	196	23	21	150	110	40	0	0	0	0	0	0	0	0	FAULT/FAULT:113,RET/RET:37	REORDERED: same writes/reads per segment; order differs	0	0	0
-923	FUN_00065f84	v	-	440	37	28	150	142	0	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30		8	0	0
+923	_glDeleteRenderbuffersEXT_Exec_body	v	-	440	37	28	150	142	0	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30		8	0	0
 929	_glDeleteFramebuffersEXT_Exec	v	-	280	36	31	150	149	0	0	0	0	0	0	0	0	0	FAULT/FAULT:113,RET/RET:37		1	0	0
 931	_glFramebufferTexture1DEXT_Exec	v	-	440	27	28	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:103,RET/RET:47		0	0	0
 933	_glFramebufferTexture3DEXT_Exec	v	-	460	21	19	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:146,RET/RET:4		0	0	0
 932	_glFramebufferTexture2DEXT_Exec	v	-	544	30	26	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:103,RET/RET:47		0	0	0
-934	FUN_00066f4c	v	-	420	29	30	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:102,RET/RET:48		0	0	0
+934	_glFramebufferRenderbufferEXT_Exec_body	v	-	420	29	30	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:102,RET/RET:48		0	0	0
 930	_glBindFramebufferEXT_Exec	v	-	208	29	27	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:98,RET/RET:52		0	0	0
 935	_glIsFramebufferEXT_Exec	v	-	164	24	17	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:138,RET/RET:12		0	0	0
 936	_glCheckFramebufferStatusEXT_Exec	v	-	216	29	24	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:96,RET/RET:54		0	0	0
@@ -295,7 +295,7 @@
 560	_glBitmap_NoopExec	v	-	696	29	42	150	0	56	0	94	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 20656) vs rebuilt ('read', 20652)	0	0	0
 1484	_glCompileShaderARB_Exec	v	-	252	28	27	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:126,RET/RET:24		0	0	0
 1369	_glRasterPos3f_Exec	v	-	744	58	37	150	67	83	0	0	0	0	0	0	0	0	FAULT/FAULT:141,RET/RET:9	REORDERED: same writes/reads per segment; order differs	0	0	0
-1483	FUN_00087750	v	-	716	36	31	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:111,RET/RET:39		0	0	0
+1483	_glShaderSourceARB_Exec_body	v	-	716	36	31	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:111,RET/RET:39		0	0	0
 1487	_glLinkProgramARB_Exec	v	-	2600	42	42	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25		0	0	0
 1414	_glRectf_Comp	v	-	148	11	11	150	0	99	0	51	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 33575931) vs rebuilt ('read', 33575935)	0	0	0
 1491	_glUniform2fARB_Exec	v	-	668	54	50	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:114,RET/RET:36		0	0	0
@@ -353,7 +353,7 @@
 856	_glDrawPixels_NoopExec	v	-	672	27	37	150	0	66	0	84	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 784937710) vs rebuilt ('read', 784937706)	0	0	0
 1922	_glTexSubImage1D_ListExec	v	-	920	30	32	150	143	0	7	0	0	0	0	0	0	0	FAULT/FAULT:121,RET/RET:29	READ_SET: segment 0: only stock reads (1342339744, 4)	0	0	0
 1667	_glTexCoord4d_CompExec	v	-	96	10	10	150	0	64	0	86	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 21497) vs rebuilt ('read', 21501)	0	0	0
-1899	FUN_0009dbfc	v	-	1068	32	29	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:74,RET/RET:76		0	0	0
+1899	_glGetTexLevelParameterfv_Exec_body	v	-	1068	32	29	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:74,RET/RET:76		0	0	0
 1924	_glTexSubImage1D_Exec	v	-	1600	53	52	150	143	2	5	0	0	0	0	0	0	0	FAULT/FAULT:118,RET/RET:32	READ_SET: segment 0: only stock reads (1342332624, 4)	0	0	0
 1763	_glMultiTexCoord4d_CompExec	v	-	104	11	11	150	0	60	0	90	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 21516) vs rebuilt ('read', 21520)	0	0	0
 1687	_glTexCoord4f_CompExec	v	-	96	10	10	150	0	42	0	107	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 3896108950) vs rebuilt ('read', 3896108954)	1	0	0
@@ -437,13 +437,13 @@
 2361	_gleBuildCompileFuncNO	i	-	1512	15	12	150	0	18	0	132	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_SITE: stock ('read', 3978143647) vs rebuilt ('read', 3978142875)	0	0	0
 2365	_gleBuildCompileFuncAV	i	-	2036	28	26	150	96	27	0	27	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 148410194); accesses completed before it differ: reads: only rebuilt reads (1342513256, 4)	0	0	0
 2369	_gleSetModelviewFuncAll	v	-	100	14	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-2373	FUN_000c4664	v	-	1236	58	53	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:116,RET/RET:34		0	0	0
+2373	_gleBuildModelviewTransformFuncAV_body	v	-	1236	58	53	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:116,RET/RET:34		0	0	0
 2374	_gleBuildModelviewTransformFuncNO	v	-	1852	56	61	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:129,RET/RET:21		0	0	0
 2375	_gleRTCBuildABranch_c5274	v	-	12	3	2	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 2364	_gleBuildCompileFuncTCLAV	i	-	1992	43	42	150	0	18	0	132	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 202); accesses completed before it differ: reads: only rebuilt reads (1342348412, 4)	0	0	0
 2377	_gleSetNormalFunc	v	-	96	13	14	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 2380	_gleRTCBuildABranch_c5dd0	v	-	12	3	2	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
-2378	FUN_000c54e8	v	-	852	40	36	150	121	29	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25	REORDERED: same writes/reads per segment; order differs	0	0	0
+2378	_gleBuildNormalTransformFuncAV_body	v	-	852	40	36	150	121	29	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25	REORDERED: same writes/reads per segment; order differs	0	0	0
 2385	_gleBuildProjectionTransformFuncNO	v	-	1544	7	8	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 1839	_glCopyTexSubImage1D_Exec	v	-	1428	53	55	150	92	49	9	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14	READ_SET: segment 0: only stock reads (1342539708, 4)	0	0	0
 2020	_glDrawArrays_NoopExec	v	-	684	18	23	150	122	28	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
@@ -459,7 +459,7 @@
 2395	_gleCleanupOrphans	v	-	300	56	58	150	108	26	0	16	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20	FAULT_PARTIAL: same fault ('read', 504); accesses completed before it differ: reads: only rebuilt reads (1342385028, 4)	0	0	0
 2402	_gleFreeCopyContextData	v	-	104	26	26	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:110,RET/RET:40		0	0	0
 2400	_gleOffsetLimitImage3D	i	-	8	2	2	150	129	21	0	0	0	0	0	0	0	0	FAULT/FAULT:129,RET/RET:21	REORDERED: same writes/reads per segment; order differs	0	0	0
-2379	FUN_000c5840	v	-	1424	46	36	150	126	0	0	24	0	0	0	0	0	0	FAULT/FAULT:139,RET/RET:11	FAULT_PARTIAL: same fault ('read', 19); accesses completed before it differ: reads: only stock reads (1342443564, 4)	0	0	0
+2379	_gleBuildNormalTransformFuncNO_body	v	-	1424	46	36	150	126	0	0	24	0	0	0	0	0	0	FAULT/FAULT:139,RET/RET:11	FAULT_PARTIAL: same fault ('read', 19); accesses completed before it differ: reads: only stock reads (1342443564, 4)	0	0	0
 2403	_gleSwitchToRenderer	i	-	564	28	27	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 1844	_glCopyTexSubImage2D_Exec	v	-	1508	40	37	150	91	59	0	0	0	0	0	0	0	0	FAULT/FAULT:119,RET/RET:31	REORDERED: same writes/reads per segment; order differs	0	0	0
 2416	_gleQuickOptimizeDisplayList	v	-	1292	28	27	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
@@ -503,11 +503,11 @@
 2575	_gleImagingPackData	v	-	312	78	78	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:101,RET/RET:49		0	0	0
 2587	_gleAddVertexMaterialNoop	v	-	4	1	1	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 2548	_LFSStreamChunkOutputDebugInfo	v	-	684	171	167	150	137	13	0	0	0	0	0	0	0	0	FAULT/FAULT:63,RET/RET:87	REORDERED: same writes/reads per segment; order differs	0	0	0
-2595	FUN_000d4a8c	v	-	1188	17	25	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
+2595	_gleVtxLightRGBABack_body	v	-	1188	17	25	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 2578	_gleGetMinmax	v	-	628	35	40	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 2582	_gleSeparableFilter2D	v	-	340	85	82	150	139	11	0	0	0	0	0	0	0	0	FAULT/FAULT:128,RET/RET:22	REORDERED: same writes/reads per segment; order differs	0	0	0
 2597	_gleVtxLightSpecRGBABack	v	-	1640	21	28	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:2		0	0	0
-2594	FUN_000d45ec	v	-	1180	205	111	150	127	6	0	3	0	0	0	0	0	14	FAULT/FAULT:136,RET/RET:14	FAULT_SITE: stock ('read', 612) vs rebuilt ('read', 4)	0	0	0
+2594	_gleVtxLightRGBAFront_body	v	-	1180	205	111	150	127	6	0	3	0	0	0	0	0	14	FAULT/FAULT:136,RET/RET:14	FAULT_SITE: stock ('read', 612) vs rebuilt ('read', 4)	0	0	0
 2598	_gleVtxLightRGBAFrontPtr	v	-	1192	21	20	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:118,RET/RET:32		0	0	0
 2549	_LFSStreamChunkListCreate	i	-	12	3	3	150	150	0	0	0	0	0	0	0	0	0	RET/RET:150		0	0	0
 2600	_gleVtxLightSpecRGBAFrontPtr	v	-	1680	20	29	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
@@ -516,21 +516,21 @@
 2601	_gleVtxLightSpecRGBABackPtr	v	-	1688	30	39	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:131,RET/RET:19		0	0	0
 1892	_glCopyTexImage1D_Exec	v	-	1592	36	35	150	120	30	0	0	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16	REORDERED: same writes/reads per segment; order differs	0	0	0
 2599	_gleVtxLightRGBABackPtr	v	-	1200	30	36	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-2618	FUN_000d811c	v	-	832	35	33	150	125	25	0	0	0	0	0	0	0	0	FAULT/FAULT:127,RET/RET:23	REORDERED: same writes/reads per segment; order differs	0	0	0
+2618	_gleFeedbackLineStripFunc_body	v	-	832	35	33	150	125	25	0	0	0	0	0	0	0	0	FAULT/FAULT:127,RET/RET:23	REORDERED: same writes/reads per segment; order differs	0	0	0
 2616	_gleClipLinesPlane	i	-	360	41	38	150	80	66	0	4	0	0	0	0	0	0	FAULT/FAULT:101,RET/RET:49	FAULT_SITE: stock ('read', 1134114308) vs rebuilt ('read', 1134114316)	0	0	0
-2621	FUN_000d8af8	v	-	728	7	10	150	114	36	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
-2620	FUN_000d8828	v	-	716	28	23	150	108	42	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6	REORDERED: same writes/reads per segment; order differs	0	0	0
-2619	FUN_000d845c	v	-	932	64	61	150	93	26	0	31	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16	FAULT_SITE: stock ('read', 3147385645) vs rebuilt ('read', 3147385581)	0	0	0
+2621	_gleRenderSmoothLineStripFunc_body	v	-	728	7	10	150	114	36	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+2620	_gleRenderSmoothLinesFunc_body	v	-	716	28	23	150	108	42	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6	REORDERED: same writes/reads per segment; order differs	0	0	0
+2619	_gleFeedbackLineLoopFunc_body	v	-	932	64	61	150	93	26	0	31	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16	FAULT_SITE: stock ('read', 3147385645) vs rebuilt ('read', 3147385581)	0	0	0
 2626	_gleSelectLinesFunc	v	-	412	33	31	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:129,RET/RET:21		0	0	0
 2029	_glDrawElements_NoopExec	v	-	692	31	30	150	107	43	0	0	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30	REORDERED: same writes/reads per segment; order differs	0	0	0
-2624	FUN_000d9420	v	-	760	7	10	150	133	17	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
-2617	FUN_000d7e1c	v	-	780	35	31	150	119	29	0	2	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16	FAULT_SITE: stock ('write', 3484) vs rebuilt ('write', 3500)	0	0	0
-2628	FUN_000d9dfc	v	-	588	39	36	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18		0	0	0
-2625	FUN_000d971c	v	-	856	7	10	150	100	9	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	41	0	0
-2627	FUN_000d9c14	v	-	484	36	34	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:35		0	0	0
+2624	_gleRenderFlatLineStripFunc_body	v	-	760	7	10	150	133	17	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+2617	_gleFeedbackLinesFunc_body	v	-	780	35	31	150	119	29	0	2	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16	FAULT_SITE: stock ('write', 3484) vs rebuilt ('write', 3500)	0	0	0
+2628	_gleSelectLineLoopFunc_body	v	-	588	39	36	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18		0	0	0
+2625	_gleRenderFlatLineLoopFunc_body	v	-	856	7	10	150	100	9	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	41	0	0
+2627	_gleSelectLineStripFunc_body	v	-	484	36	34	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:35		0	0	0
 2052	_glMultiDrawElementArrayAPPLE_NoopExec	v	-	692	47	66	150	108	42	0	0	0	0	0	0	0	0	FAULT/FAULT:133,RET/RET:17	REORDERED: same writes/reads per segment; order differs	0	0	0
 2632	_gleCompileTCLVertexArray	v	-	1052	54	70	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-2622	FUN_000d8dd4	v	-	824	7	10	150	117	33	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+2622	_gleRenderSmoothLineLoopFunc_body	v	-	824	7	10	150	117	33	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
 2633	_gleCompileClippedVertexArray	v	-	1136	37	32	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:144,RET/RET:6		0	0	0
 2635	_gleExecuteTCLVertexArray	v	-	352	31	25	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:119,RET/RET:31		0	0	0
 2636	_gleExecuteClippedVertexArray	v	-	524	40	39	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:113,RET/RET:37		0	0	0
@@ -564,31 +564,31 @@
 2971	_gleInsertPixel_Depth_Float	v	-	12	3	3	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:137,RET/RET:13		0	0	0
 2543	_LFSParserBuildErrorString	v	-	580	38	36	150	0	37	0	113	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20	FAULT_SITE: stock ('read', 1116) vs rebuilt ('read', 12)	0	0	0
 3009	_gleClipPolyPlane	v	-	496	5	12	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-2979	FUN_000eae0c	v	-	620	7	8	150	131	8	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	11	0	0
+2979	_gleRenderPointsFunc_body	v	-	620	7	8	150	131	8	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	11	0	0
 2980	_gleSelectPointsFunc	v	-	352	33	31	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:131,RET/RET:19		0	0	0
-2978	FUN_000eab28	v	-	724	35	30	150	131	10	0	9	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30	FAULT_SITE: stock ('read', 1354) vs rebuilt ('read', 1290)	0	0	0
-3014	FUN_000ebeb4	v	-	1112	43	42	150	119	31	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25	REORDERED: same writes/reads per segment; order differs	0	0	0
-3015	FUN_000ec310	v	-	1276	41	40	150	126	3	0	21	0	0	0	0	0	0	FAULT/FAULT:128,RET/RET:22	FAULT_SITE: stock ('read', 1349) vs rebuilt ('read', 1285)	0	0	0
-3019	FUN_000ed940	v	-	956	9	11	150	112	37	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
-3018	FUN_000ed3c8	v	-	1396	60	61	150	135	4	0	11	0	0	0	0	0	0	FAULT/FAULT:85,RET/RET:65	FAULT_SITE: stock ('write', 2055973800) vs rebuilt ('write', 2055973816)	0	0	0
-3016	FUN_000ec810	v	-	1544	42	39	150	103	19	0	28	0	0	0	0	0	0	FAULT/FAULT:138,RET/RET:12	FAULT_SITE: stock ('read', 1294) vs rebuilt ('read', 1298)	0	0	0
-3024	FUN_000ef050	v	-	1396	8	9	150	118	32	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
-3025	FUN_000ef5f4	v	-	1300	8	9	150	143	7	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
-3022	FUN_000ee57c	v	-	1312	8	9	150	133	16	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
-3021	FUN_000ee104	v	-	1140	8	9	150	90	47	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	13	0	0
-3023	FUN_000eeac8	v	-	1412	34	27	150	91	59	0	0	0	0	0	0	0	0	FAULT/FAULT:145,RET/RET:5	REORDERED: same writes/reads per segment; order differs	0	0	0
-3020	FUN_000edd00	v	-	984	39	39	150	119	31	0	0	0	0	0	0	0	0	FAULT/FAULT:140,RET/RET:10	REORDERED: same writes/reads per segment; order differs	0	0	0
-3017	FUN_000ece1c	v	-	1448	41	40	150	119	31	0	0	0	0	0	0	0	0	FAULT/FAULT:119,RET/RET:31	REORDERED: same writes/reads per segment; order differs	0	0	0
-3028	FUN_000f046c	v	-	1320	8	9	150	120	30	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
-3026	FUN_000efb0c	v	-	1244	8	9	150	91	41	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	18	0	0
-3029	FUN_000f09c0	v	-	1256	8	9	150	118	32	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
-3033	FUN_000f19d8	v	-	996	43	39	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7		0	0	0
-3032	FUN_000f1684	v	-	848	45	44	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14		0	0	0
-3035	FUN_000f2120	v	-	856	45	44	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20		0	0	0
-3031	FUN_000f13e8	v	-	664	46	39	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:103,RET/RET:47		0	0	0
-3036	FUN_000f247c	v	-	856	45	44	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:117,RET/RET:33		0	0	0
-3030	FUN_000f0eac	v	-	1336	8	9	150	108	42	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
-3034	FUN_000f1dc0	v	-	860	42	39	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:129,RET/RET:21		0	0	0
+2978	_gleFeedbackPointsFunc_body	v	-	724	35	30	150	131	10	0	9	0	0	0	0	0	0	FAULT/FAULT:120,RET/RET:30	FAULT_SITE: stock ('read', 1354) vs rebuilt ('read', 1290)	0	0	0
+3014	_gleFeedbackPolygonFunc_body	v	-	1112	43	42	150	119	31	0	0	0	0	0	0	0	0	FAULT/FAULT:125,RET/RET:25	REORDERED: same writes/reads per segment; order differs	0	0	0
+3015	_gleFeedbackTrianglesFunc_body	v	-	1276	41	40	150	126	3	0	21	0	0	0	0	0	0	FAULT/FAULT:128,RET/RET:22	FAULT_SITE: stock ('read', 1349) vs rebuilt ('read', 1285)	0	0	0
+3019	_gleRenderSmoothPolygonFunc_body	v	-	956	9	11	150	112	37	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
+3018	_gleFeedbackQuadStripFunc_body	v	-	1396	60	61	150	135	4	0	11	0	0	0	0	0	0	FAULT/FAULT:85,RET/RET:65	FAULT_SITE: stock ('write', 2055973800) vs rebuilt ('write', 2055973816)	0	0	0
+3016	_gleFeedbackTriangleStripFunc_body	v	-	1544	42	39	150	103	19	0	28	0	0	0	0	0	0	FAULT/FAULT:138,RET/RET:12	FAULT_SITE: stock ('read', 1294) vs rebuilt ('read', 1298)	0	0	0
+3024	_gleRenderFlatTriangleStripFunc_body	v	-	1396	8	9	150	118	32	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+3025	_gleRenderSmoothTriangleFanFunc_body	v	-	1300	8	9	150	143	7	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+3022	_gleRenderFlatTrianglesFunc_body	v	-	1312	8	9	150	133	16	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
+3021	_gleRenderSmoothTrianglesFunc_body	v	-	1140	8	9	150	90	47	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	13	0	0
+3023	_gleRenderSmoothTriangleStripFunc_body	v	-	1412	34	27	150	91	59	0	0	0	0	0	0	0	0	FAULT/FAULT:145,RET/RET:5	REORDERED: same writes/reads per segment; order differs	0	0	0
+3020	_gleRenderFlatPolygonFunc_body	v	-	984	39	39	150	119	31	0	0	0	0	0	0	0	0	FAULT/FAULT:140,RET/RET:10	REORDERED: same writes/reads per segment; order differs	0	0	0
+3017	_gleFeedbackTriangleFanFunc_body	v	-	1448	41	40	150	119	31	0	0	0	0	0	0	0	0	FAULT/FAULT:119,RET/RET:31	REORDERED: same writes/reads per segment; order differs	0	0	0
+3028	_gleRenderFlatQuadsFunc_body	v	-	1320	8	9	150	120	30	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+3026	_gleRenderFlatTriangleFanFunc_body	v	-	1244	8	9	150	91	41	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	18	0	0
+3029	_gleRenderSmoothQuadStripFunc_body	v	-	1256	8	9	150	118	32	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+3033	_gleSelectTriangleStripFunc_body	v	-	996	43	39	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:143,RET/RET:7		0	0	0
+3032	_gleSelectTrianglesFunc_body	v	-	848	45	44	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:136,RET/RET:14		0	0	0
+3035	_gleSelectQuadsFunc_body	v	-	856	45	44	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:130,RET/RET:20		0	0	0
+3031	_gleSelectPolygonFunc_body	v	-	664	46	39	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:103,RET/RET:47		0	0	0
+3036	_gleSelectQuadStripFunc_body	v	-	856	45	44	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:117,RET/RET:33		0	0	0
+3030	_gleRenderFlatQuadStripFunc_body	v	-	1336	8	9	150	108	42	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
+3034	_gleSelectTriangleFanFunc_body	v	-	860	42	39	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:129,RET/RET:21		0	0	0
 3037	_gleFlushAtomicFunc	v	-	64	8	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 2698	_gleMap2Texture1dLoad	v	-	224	51	56	150	0	108	0	41	0	0	0	1	0	0	FAULT/FAULT:79,RET/RET:70,TIMEOUT/TIMEOUT:1	FAULT_SITE: stock ('write', 0) vs rebuilt ('write', 8)	0	0	0
 3040	_gleFlushLineLoopTCLFunc	v	-	180	6	8	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
@@ -633,15 +633,15 @@
 3176	_gleReclaimVertexArrayResources	v	-	352	32	34	150	148	0	0	2	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('read', 827774653); accesses completed before it differ: reads: only stock reads (1342535552, 4)	0	0	0
 3178	_gleVPRenderPoints	v	-	324	6	6	150	87	63	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
 3148	_gleGenMipmapsToLevel	i	-	384	42	37	150	106	43	0	1	0	0	0	0	0	0	FAULT/FAULT:134,RET/RET:16	FAULT_PARTIAL: same fault ('read', 352); accesses completed before it differ: reads: only rebuilt reads (1342540264, 4)	0	0	0
-3183	FUN_00104f80	v	-	1040	8	9	150	135	10	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	5	0	0
+3183	_gleVPRenderTriangleStrip_body	v	-	1040	8	9	150	135	10	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	5	0	0
 3179	_gleVPRenderLines	v	-	420	6	9	150	99	51	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
-3182	FUN_00104c10	v	-	876	24	16	150	101	42	2	0	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:2	READ_SET: segment 0: only stock reads (1342601420, 4)	5	0	0
+3182	_gleVPRenderTriangles_body	v	-	876	24	16	150	101	42	2	0	0	0	0	0	0	0	FAULT/FAULT:148,RET/RET:2	READ_SET: segment 0: only stock reads (1342601420, 4)	5	0	0
 3180	_gleVPRenderLineStrip	v	-	436	6	9	150	135	15	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
 3181	_gleVPRenderLineLoop	v	-	540	6	10	150	80	70	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
 3189	_gleVPFlushAtomicTCL	v	-	60	8	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
-3186	FUN_00105a88	v	-	884	8	9	150	117	32	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
-3184	FUN_00105394	v	-	888	8	9	150	132	17	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
-3185	FUN_00105710	v	-	884	24	16	150	110	21	18	0	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18	READ_SET: segment 0: only stock reads (1342676208, 4)	1	0	0
+3186	_gleVPRenderQuadStrip_body	v	-	884	8	9	150	117	32	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
+3184	_gleVPRenderTriangleFan_body	v	-	888	8	9	150	132	17	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	1	0	0
+3185	_gleVPRenderQuads_body	v	-	884	24	16	150	110	21	18	0	0	0	0	0	0	0	FAULT/FAULT:132,RET/RET:18	READ_SET: segment 0: only stock reads (1342676208, 4)	1	0	0
 3187	_gleVPRenderPolygon	v	-	728	30	30	150	115	26	2	7	0	0	0	0	0	0	FAULT/FAULT:140,RET/RET:10	READ_SET: segment 0: only stock reads (1342631660, 4)	0	0	0
 3190	_gleVPFlushAtomicTCLRDirty	v	-	132	22	25	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
 3188	_gleVPFlushAtomic	v	-	60	8	10	150	150	0	0	0	0	0	0	0	0	0	FAULT/FAULT:150		0	0	0
@@ -670,8 +670,8 @@
 2705	_gleMap2VertexAttrib4dLoad	v	-	256	59	64	150	0	78	0	72	0	0	0	0	0	0	FAULT/FAULT:119,RET/RET:31	FAULT_SITE: stock ('write', 0) vs rebuilt ('write', 8)	0	0	0
 3197	_gleVPFlushTriQuadStrip	v	-	168	20	27	150	114	0	0	36	0	0	0	0	0	0	FAULT/FAULT:150	FAULT_PARTIAL: same fault ('write', 2131755008); stores completed before it differ: only rebuilt writes (2131746936, 4) = [1342220944]	0	0	0
 3039	_gleFlushLineLoopFunc	v	-	212	35	41	150	134	16	0	0	0	0	0	0	0	0	FAULT/FAULT:150	REORDERED: same writes/reads per segment; order differs	0	0	0
-3027	FUN_000effec	v	-	1148	30	23	150	84	66	0	0	0	0	0	0	0	0	FAULT/FAULT:140,RET/RET:10	REORDERED: same writes/reads per segment; order differs	0	0	0
-2623	FUN_000d9110	v	-	780	22	16	150	80	70	0	0	0	0	0	0	0	0	FAULT/FAULT:126,RET/RET:24	REORDERED: same writes/reads per segment; order differs	0	0	0
+3027	_gleRenderSmoothQuadsFunc_body	v	-	1148	30	23	150	84	66	0	0	0	0	0	0	0	0	FAULT/FAULT:140,RET/RET:10	REORDERED: same writes/reads per segment; order differs	0	0	0
+2623	_gleRenderFlatLinesFunc_body	v	-	780	22	16	150	80	70	0	0	0	0	0	0	0	0	FAULT/FAULT:126,RET/RET:24	REORDERED: same writes/reads per segment; order differs	0	0	0
 2580	_gleConvolutionFilter2D	v	-	240	60	57	150	118	15	0	0	0	0	0	17	0	0	FAULT/FAULT:99,RET/RET:34,TIMEOUT/TIMEOUT:17	REORDERED: same writes/reads per segment; order differs	0	0	0
 1485	_evaluateImageUnits	i	-	1000	91	112	150	93	0	0	45	0	0	0	12	0	0	FAULT/FAULT:138,TIMEOUT/TIMEOUT:12	FAULT_PARTIAL: same fault ('read', 97); accesses completed before it differ: reads: only stock reads (1342385152, 4)	0	0	0
 2693	_gleMap2Vertex3dLoad	v	-	244	61	61	150	0	51	0	65	0	0	0	34	0	0	FAULT/FAULT:99,RET/RET:17,TIMEOUT/TIMEOUT:34	FAULT_SITE: stock ('write', 0) vs rebuilt ('write', 8)	0	0	0

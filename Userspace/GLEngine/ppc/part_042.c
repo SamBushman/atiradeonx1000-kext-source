@@ -996,8 +996,8 @@ void _gleFeedbackPointsPtr(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000cc204 @ 0xcc204 (116 bytes) */
-void FUN_000cc204(param_1, param_2, param_3)
+/* _gleFeedbackLines_body @ 0xcc204 (116 bytes) */
+void _gleFeedbackLines_body(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   int param_3;

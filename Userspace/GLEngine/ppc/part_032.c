@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_0009dbfc @ 0x9dbfc (1068 bytes) */
-void FUN_0009dbfc(param_1, param_2, param_3, param_4, param_5)
+/* _glGetTexLevelParameterfv_Exec_body @ 0x9dbfc (1068 bytes) */
+void _glGetTexLevelParameterfv_Exec_body(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   uint param_3;

@@ -437,8 +437,8 @@ int _gleCullPolygonPtrStack(param_1, param_2, param_3, param_4)
   return 0;
 }
 
-/* FUN_000ebeb4 @ 0xebeb4 (1112 bytes) */
-void FUN_000ebeb4(param_1)
+/* _gleFeedbackPolygonFunc_body @ 0xebeb4 (1112 bytes) */
+void _gleFeedbackPolygonFunc_body(param_1)
   int param_1;
 {
   char cVar1;
@@ -623,8 +623,8 @@ LAB_000ec180:
   return;
 }
 
-/* FUN_000ec310 @ 0xec310 (1276 bytes) */
-void FUN_000ec310(param_1)
+/* _gleFeedbackTrianglesFunc_body @ 0xec310 (1276 bytes) */
+void _gleFeedbackTrianglesFunc_body(param_1)
   int param_1;
 {
   char cVar1;
@@ -844,8 +844,8 @@ LAB_000ec7e4: ;
   return;
 }
 
-/* FUN_000ec810 @ 0xec810 (1544 bytes) */
-void FUN_000ec810(param_1)
+/* _gleFeedbackTriangleStripFunc_body @ 0xec810 (1544 bytes) */
+void _gleFeedbackTriangleStripFunc_body(param_1)
   int param_1;
 {
   char cVar1;
@@ -1129,8 +1129,8 @@ LAB_000ecdf0:
   return;
 }
 
-/* FUN_000ece1c @ 0xece1c (1448 bytes) */
-void FUN_000ece1c(param_1)
+/* _gleFeedbackTriangleFanFunc_body @ 0xece1c (1448 bytes) */
+void _gleFeedbackTriangleFanFunc_body(param_1)
   int param_1;
 {
   char cVar1;
@@ -1373,8 +1373,8 @@ LAB_000ed33c:
   goto joined_r0x000ed1dc;
 }
 
-/* FUN_000ed3c8 @ 0xed3c8 (1396 bytes) */
-void FUN_000ed3c8(param_1)
+/* _gleFeedbackQuadStripFunc_body @ 0xed3c8 (1396 bytes) */
+void _gleFeedbackQuadStripFunc_body(param_1)
   int param_1;
 {
   char cVar1;
@@ -1617,8 +1617,8 @@ LAB_000ed8b4:
   goto joined_r0x000ed748;
 }
 
-/* FUN_000ed940 @ 0xed940 (956 bytes) */
-void FUN_000ed940(param_1)
+/* _gleRenderSmoothPolygonFunc_body @ 0xed940 (956 bytes) */
+void _gleRenderSmoothPolygonFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1784,8 +1784,8 @@ LAB_000edcd4:
   return;
 }
 
-/* FUN_000edd00 @ 0xedd00 (984 bytes) */
-void FUN_000edd00(param_1)
+/* _gleRenderFlatPolygonFunc_body @ 0xedd00 (984 bytes) */
+void _gleRenderFlatPolygonFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1948,8 +1948,8 @@ void FUN_000edd00(param_1)
   return;
 }
 
-/* FUN_000ee104 @ 0xee104 (1140 bytes) */
-void FUN_000ee104(param_1)
+/* _gleRenderSmoothTrianglesFunc_body @ 0xee104 (1140 bytes) */
+void _gleRenderSmoothTrianglesFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -2153,8 +2153,8 @@ LAB_000ee550:
   return;
 }
 
-/* FUN_000ee57c @ 0xee57c (1312 bytes) */
-void FUN_000ee57c(param_1)
+/* _gleRenderFlatTrianglesFunc_body @ 0xee57c (1312 bytes) */
+void _gleRenderFlatTrianglesFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -2372,8 +2372,8 @@ LAB_000eea74: ;
   return;
 }
 
-/* FUN_000eeac8 @ 0xeeac8 (1412 bytes) */
-void FUN_000eeac8(param_1)
+/* _gleRenderSmoothTriangleStripFunc_body @ 0xeeac8 (1412 bytes) */
+void _gleRenderSmoothTriangleStripFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -2642,8 +2642,8 @@ LAB_000ef024:
   return;
 }
 
-/* FUN_000ef050 @ 0xef050 (1396 bytes) */
-void FUN_000ef050(param_1)
+/* _gleRenderFlatTriangleStripFunc_body @ 0xef050 (1396 bytes) */
+void _gleRenderFlatTriangleStripFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -2897,8 +2897,8 @@ LAB_000ef59c:
   return;
 }
 
-/* FUN_000ef5f4 @ 0xef5f4 (1300 bytes) */
-void FUN_000ef5f4(param_1)
+/* _gleRenderSmoothTriangleFanFunc_body @ 0xef5f4 (1300 bytes) */
+void _gleRenderSmoothTriangleFanFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -3125,8 +3125,8 @@ LAB_000efab0:
   goto joined_r0x000ef960;
 }
 
-/* FUN_000efb0c @ 0xefb0c (1244 bytes) */
-void FUN_000efb0c(param_1)
+/* _gleRenderFlatTriangleFanFunc_body @ 0xefb0c (1244 bytes) */
+void _gleRenderFlatTriangleFanFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -3338,8 +3338,8 @@ LAB_000effc0:
   return;
 }
 
-/* FUN_000effec @ 0xeffec (1148 bytes) */
-void FUN_000effec(param_1)
+/* _gleRenderSmoothQuadsFunc_body @ 0xeffec (1148 bytes) */
+void _gleRenderSmoothQuadsFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -3545,8 +3545,8 @@ LAB_000f0440:
   return;
 }
 
-/* FUN_000f046c @ 0xf046c (1320 bytes) */
-void FUN_000f046c(param_1)
+/* _gleRenderFlatQuadsFunc_body @ 0xf046c (1320 bytes) */
+void _gleRenderFlatQuadsFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -3766,8 +3766,8 @@ LAB_000f096c: ;
   return;
 }
 
-/* FUN_000f09c0 @ 0xf09c0 (1256 bytes) */
-void FUN_000f09c0(param_1)
+/* _gleRenderSmoothQuadStripFunc_body @ 0xf09c0 (1256 bytes) */
+void _gleRenderSmoothQuadStripFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -3995,8 +3995,8 @@ LAB_000f0e50:
   goto joined_r0x000f0cf4;
 }
 
-/* FUN_000f0eac @ 0xf0eac (1336 bytes) */
-void FUN_000f0eac(param_1)
+/* _gleRenderFlatQuadStripFunc_body @ 0xf0eac (1336 bytes) */
+void _gleRenderFlatQuadStripFunc_body(param_1)
   int param_1;
 {
   bool bVar1;
@@ -4218,8 +4218,8 @@ LAB_000f12f4:
   goto joined_r0x000f1240;
 }
 
-/* FUN_000f13e8 @ 0xf13e8 (664 bytes) */
-void FUN_000f13e8(param_1)
+/* _gleSelectPolygonFunc_body @ 0xf13e8 (664 bytes) */
+void _gleSelectPolygonFunc_body(param_1)
   int param_1;
 {
   char cVar1;
@@ -4335,8 +4335,8 @@ void FUN_000f13e8(param_1)
   return;
 }
 
-/* FUN_000f1684 @ 0xf1684 (848 bytes) */
-void FUN_000f1684(param_1)
+/* _gleSelectTrianglesFunc_body @ 0xf1684 (848 bytes) */
+void _gleSelectTrianglesFunc_body(param_1)
   int param_1;
 {
   char cVar1;
@@ -4501,8 +4501,8 @@ LAB_000f19ac:
   return;
 }
 
-/* FUN_000f19d8 @ 0xf19d8 (996 bytes) */
-void FUN_000f19d8(param_1)
+/* _gleSelectTriangleStripFunc_body @ 0xf19d8 (996 bytes) */
+void _gleSelectTriangleStripFunc_body(param_1)
   int param_1;
 {
   char cVar1;
@@ -4696,8 +4696,8 @@ LAB_000f1d94: ;
   return;
 }
 
-/* FUN_000f1dc0 @ 0xf1dc0 (860 bytes) */
-void FUN_000f1dc0(param_1)
+/* _gleSelectTriangleFanFunc_body @ 0xf1dc0 (860 bytes) */
+void _gleSelectTriangleFanFunc_body(param_1)
   int param_1;
 {
   char cVar1;
@@ -4861,8 +4861,8 @@ LAB_000f20f4:
   return;
 }
 
-/* FUN_000f2120 @ 0xf2120 (856 bytes) */
-void FUN_000f2120(param_1)
+/* _gleSelectQuadsFunc_body @ 0xf2120 (856 bytes) */
+void _gleSelectQuadsFunc_body(param_1)
   int param_1;
 {
   char cVar1;
@@ -5027,8 +5027,8 @@ LAB_000f2450:
   return;
 }
 
-/* FUN_000f247c @ 0xf247c (856 bytes) */
-void FUN_000f247c(param_1)
+/* _gleSelectQuadStripFunc_body @ 0xf247c (856 bytes) */
+void _gleSelectQuadStripFunc_body(param_1)
   int param_1;
 {
   char cVar1;

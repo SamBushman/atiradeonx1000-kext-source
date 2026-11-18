@@ -234,8 +234,8 @@ int _glIsBuffer_Exec(param_1, param_2)
   return bVar2;
 }
 
-/* FUN_00058a1c @ 0x58a1c (304 bytes) */
-void FUN_00058a1c(param_1, param_2, param_3, param_4, param_5)
+/* _glBufferData_Exec_body @ 0x58a1c (304 bytes) */
+void _glBufferData_Exec_body(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint param_2;
   int param_3;

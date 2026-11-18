@@ -739,8 +739,8 @@ switchD_0001fcd0_default:
   return iVar2;
 }
 
-/* FUN_0001ff98 @ 0x1ff98 (572 bytes) */
-void FUN_0001ff98(param_1, param_2, param_3)
+/* _glDeleteTextures_Exec_body @ 0x1ff98 (572 bytes) */
+void _glDeleteTextures_Exec_body(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;

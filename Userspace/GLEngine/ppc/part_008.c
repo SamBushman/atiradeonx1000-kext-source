@@ -1194,8 +1194,8 @@ void _gleBeginQuadsSelectFeedback(param_1)
   return;
 }
 
-/* FUN_00050900 @ 0x50900 (1284 bytes) */
-void FUN_00050900(param_1)
+/* _gleFeedbackQuadsFunc_body @ 0x50900 (1284 bytes) */
+void _gleFeedbackQuadsFunc_body(param_1)
   int param_1;
 {
   char cVar1;
@@ -1630,8 +1630,8 @@ int _gleRTCBuildABranch_51354(param_1, param_2)
   return (param_2 & 0x3fff) << 2 | param_1 & 0xffff0003;
 }
 
-/* FUN_00051364 @ 0x51364 (232 bytes) */
-void FUN_00051364(int param_1,uint param_2,int param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+/* _gleTextureMatTrans_body @ 0x51364 (232 bytes) */
+void _gleTextureMatTrans_body(int param_1,uint param_2,int param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   float fVar1;
   float fVar2;

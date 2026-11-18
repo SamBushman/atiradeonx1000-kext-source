@@ -278,8 +278,8 @@ int _glGetHandleARB_Exec(param_1, param_2)
   return 0;
 }
 
-/* FUN_00087750 @ 0x87750 (716 bytes) */
-void FUN_00087750(param_1, param_2, param_3, param_4, param_5)
+/* _glShaderSourceARB_Exec_body @ 0x87750 (716 bytes) */
+void _glShaderSourceARB_Exec_body(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
   int param_3;

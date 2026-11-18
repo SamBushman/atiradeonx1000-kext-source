@@ -161,8 +161,8 @@ int _gleTexEnableBits(param_1)
   return uVar4;
 }
 
-/* FUN_00103860 @ 0x103860 (252 bytes) */
-void FUN_00103860(int param_1,uint param_2,int param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
+/* _gleTextureMatTransDivW_body @ 0x103860 (252 bytes) */
+void _gleTextureMatTransDivW_body(int param_1,uint param_2,int param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
 {
   float fVar1;
   float fVar2;
@@ -229,8 +229,8 @@ void FUN_00103860(int param_1,uint param_2,int param_3,int param_4,double fparam
   return;
 }
 
-/* FUN_00103960 @ 0x103960 (264 bytes) */
-void FUN_00103960(int param_1,uint param_2,int param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
+/* _gleTextureMatTransPtrDivW_body @ 0x103960 (264 bytes) */
+void _gleTextureMatTransPtrDivW_body(int param_1,uint param_2,int param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
 {
   float fVar1;
   float fVar2;
@@ -1104,8 +1104,8 @@ void _gleVPRenderLineLoop(param_1)
   return;
 }
 
-/* FUN_00104c10 @ 0x104c10 (876 bytes) */
-void FUN_00104c10(param_1)
+/* _gleVPRenderTriangles_body @ 0x104c10 (876 bytes) */
+void _gleVPRenderTriangles_body(param_1)
   int param_1;
 {
   byte bVar1;
@@ -1271,8 +1271,8 @@ LAB_00104f54:
   return;
 }
 
-/* FUN_00104f80 @ 0x104f80 (1040 bytes) */
-void FUN_00104f80(param_1)
+/* _gleVPRenderTriangleStrip_body @ 0x104f80 (1040 bytes) */
+void _gleVPRenderTriangleStrip_body(param_1)
   int param_1;
 {
   byte bVar1;
@@ -1474,8 +1474,8 @@ LAB_00105368: ;
   return;
 }
 
-/* FUN_00105394 @ 0x105394 (888 bytes) */
-void FUN_00105394(param_1)
+/* _gleVPRenderTriangleFan_body @ 0x105394 (888 bytes) */
+void _gleVPRenderTriangleFan_body(param_1)
   int param_1;
 {
   byte bVar1;
@@ -1640,8 +1640,8 @@ LAB_001056e4:
   return;
 }
 
-/* FUN_00105710 @ 0x105710 (884 bytes) */
-void FUN_00105710(param_1)
+/* _gleVPRenderQuads_body @ 0x105710 (884 bytes) */
+void _gleVPRenderQuads_body(param_1)
   int param_1;
 {
   byte bVar1;
@@ -1809,8 +1809,8 @@ LAB_00105a5c:
   return;
 }
 
-/* FUN_00105a88 @ 0x105a88 (884 bytes) */
-void FUN_00105a88(param_1)
+/* _gleVPRenderQuadStrip_body @ 0x105a88 (884 bytes) */
+void _gleVPRenderQuadStrip_body(param_1)
   int param_1;
 {
   byte bVar1;
