@@ -4588,6 +4588,7 @@ void _gleSelectTriangleStripFunc_body(glContext)
   uint uVar16;
   uint vertexCount;
   int iVar17;
+  int runTriangleCount;
   uint *polygonVertexList;
   uint nextVertex;
   uint uVar20;
@@ -4644,7 +4645,7 @@ void _gleSelectTriangleStripFunc_body(glContext)
         uVar16 = 0;
         do {
           facingChanged = false;
-          iVar17 = 0;
+          runTriangleCount = 0;
           uVar20 = uVar16;
           runStart = vertexCursor;
           while (uVar16 = uVar20, vertexCursor <= uVar8) {
@@ -4657,11 +4658,11 @@ void _gleSelectTriangleStripFunc_body(glContext)
               if (iVar10 != backFacing) {
                 facingChanged = true;
               }
-              if ((facingChanged) && (0 < iVar17)) break;
-              if (iVar17 == 0) {
+              if ((facingChanged) && (0 < runTriangleCount)) break;
+              if (runTriangleCount == 0) {
                 uVar11 = uVar20;
               }
-              iVar17 = iVar17 + 1;
+              runTriangleCount = runTriangleCount + 1;
               iVar10 = backFacing;
               newRunStart = runStart;
             }
@@ -4669,13 +4670,13 @@ void _gleSelectTriangleStripFunc_body(glContext)
               newRunStart = nextVertex;
               uVar16 = uVar20 ^ 1;
               vertexCursor = nextVertex;
-              if (0 < iVar17) break;
+              if (0 < runTriangleCount) break;
             }
             uVar20 = uVar20 ^ 1;
             vertexCursor = nextVertex;
             runStart = newRunStart;
           }
-          iVar9 = iVar17 + 2;
+          iVar9 = runTriangleCount + 2;
           if (2 < iVar9) {
             if ((!noVertexProgram) && (vertexProgramTwoSide)) {
               _gleVPFlipColors(glContext,runStart,iVar9,iVar10);
@@ -4684,7 +4685,7 @@ void _gleSelectTriangleStripFunc_body(glContext)
             if (uVar11 != 0) {
               uVar20 = runStart + 0x100;
               triangleVertexList[2] = runStart;
-              iVar9 = iVar17 + 1;
+              iVar9 = runTriangleCount + 1;
               *triangleVertexList = runStart + 0x200;
               triangleVertexList[1] = uVar20;
               dVar22 = (double)_gleSelectPolygonPtr(glContext,triangleVertexList,3);

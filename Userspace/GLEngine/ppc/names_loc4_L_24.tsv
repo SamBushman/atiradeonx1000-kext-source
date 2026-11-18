@@ -1,0 +1,11 @@
+use	_gleVPRenderTriangleFan_body	iVar8	cullResult	CONFIRMED	_gleCullTriangle result: 0 means the triangle is not culled	^\s*iVar8\ =\ \(\(undefined4\ \(\*\)\(\)\)_gleCullTriangle\)\(param_1,iVar13,uVar7,uVar16,0,\&local_50,dVar17,in_f2,in_f3,$	+3
+use	_gleVPRenderTriangleFan_body	iVar8	cullResult	CONFIRMED	_gleCullTriangle result: 0 means the triangle is not culled	^\s*if\ \(iVar8\ !=\ 0\)\ break;$	+1
+use	_gleVPRenderTriangleFan_body	iVar8	remaining	CONFIRMED	countdown over the polygon vertices in the colour-flip loop	^\s*if\ \(\(\(int\)\-\(uint\)bVar1\ <\ 0\)\ \&\&\ \(piVar10\ =\ piVar14,\ iVar8\ =\ iVar11,\ 0\ <\ iVar11\)\)\ \{$	+1
+use	_gleVPRenderTriangleFan_body	iVar8	remaining	CONFIRMED	countdown over the polygon vertices in the colour-flip loop	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+1
+use	_gleVPRenderTriangleFan_body	iVar8	remaining	CONFIRMED	countdown over the polygon vertices in the colour-flip loop	^\s*\}\ while\ \(iVar8\ !=\ 0\);$	+1
+use	_gleSelectTriangleStripFunc_body	iVar17	runTriangleCount	CONFIRMED	triangles in the current run; run vertex count = count + 2	^\s*iVar17\ =\ 0;$	+1
+use	_gleSelectTriangleStripFunc_body	iVar17	runTriangleCount	CONFIRMED	triangles in the current run; run vertex count = count + 2	^\s*if\ \(\(bVar3\)\ \&\&\ \(0\ <\ iVar17\)\)\ break;$	+2
+use	_gleSelectTriangleStripFunc_body	iVar17	runTriangleCount	CONFIRMED	triangles in the current run; run vertex count = count + 2	^\s*iVar17\ =\ iVar17\ \+\ 1;$	+1
+use	_gleSelectTriangleStripFunc_body	iVar17	runTriangleCount	CONFIRMED	triangles in the current run; run vertex count = count + 2	^\s*if\ \(0\ <\ iVar17\)\ break;$	+1
+use	_gleSelectTriangleStripFunc_body	iVar17	runTriangleCount	CONFIRMED	triangles in the current run; run vertex count = count + 2	^\s*iVar9\ =\ iVar17\ \+\ 2;$	+1
+use	_gleSelectTriangleStripFunc_body	iVar17	runTriangleCount	CONFIRMED	triangles in the current run; run vertex count = count + 2	^\s*iVar9\ =\ iVar17\ \+\ 1;$	+1

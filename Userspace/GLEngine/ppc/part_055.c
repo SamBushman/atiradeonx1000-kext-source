@@ -1512,7 +1512,8 @@ void _gleVPRenderTriangleFan_body(glContext)
   int runTriangleCount;
   uint uVar7;
   uint batchClipCodes;
-  int iVar8;
+  int cullResult;
+  int remaining;
   int *spareList;
   int *piVar10;
   int *flipCursor;
@@ -1570,11 +1571,11 @@ void _gleVPRenderTriangleFan_body(glContext)
               uVar12 = uVar16;
               if (vertexCountThenLastVertex < uVar7) goto LAB_00105508;
               uVar16 = uVar7 + 0x100;
-              iVar8 = ((undefined4 (*)())_gleCullTriangle)(glContext,fanCenter,uVar7,uVar16,0,&backFacing,dVar17,incomingFpr2,incomingFpr3,
+              cullResult = ((undefined4 (*)())_gleCullTriangle)(glContext,fanCenter,uVar7,uVar16,0,&backFacing,dVar17,incomingFpr2,incomingFpr3,
                                        incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
                                        incomingStack_ffffff80);
               dVar17 = f1AfterCall1;
-              if (iVar8 != 0) break;
+              if (cullResult != 0) break;
               if (iVar11 != backFacing) {
                 facingChanged = true;
               }
@@ -1643,12 +1644,12 @@ LAB_00105508:
                (iVar6 = _gleCullPolygonPtrStack(glContext,polygonList,polygonVertexCount,&backFacing),
                dVar17 = f1AfterCall2, iVar6 == 0)) {
               iVar6 = backFacing;
-              if (((int)-(uint)vertexProgramTwoSide < 0) && (flipCursor = polygonList, iVar8 = polygonVertexCount, 0 < polygonVertexCount)) {
+              if (((int)-(uint)vertexProgramTwoSide < 0) && (flipCursor = polygonList, remaining = polygonVertexCount, 0 < polygonVertexCount)) {
                 do {
                   ((double (*)())_gleVPFlipColors)(glContext,*flipCursor,1,iVar6);
-                  iVar8 = iVar8 + -1;
+                  remaining = remaining + -1;
                   flipCursor = flipCursor + 1;
-                } while (iVar8 != 0);
+                } while (remaining != 0);
               }
               if (iVar6 == 0) {
                 facePolygonMode = *(ushort *)(glContext + 0x34d0);
