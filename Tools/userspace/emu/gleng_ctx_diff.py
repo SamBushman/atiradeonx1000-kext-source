@@ -44,11 +44,14 @@ def main(argv):
     put(PL + 0x104, struct.pack('>I', 0x400))
     for o in range(0x114, 0x114 + 0xf4, 4): put(PL + o, struct.pack('>I', FREE))
     put(PF, struct.pack('>III', 0, 0x00020400, 0x40))
+    if os.environ.get('GC_PTRFILL'):      # GC_PTRFILL=1: every word of the six argument objects (A+0x4000+0x800*k) points at the next argument object, so a NULL field read from one is a valid object
+        for k in range(6):
+            for o in range(0, 0x800, 4): put(0x4000 + 0x800 * k + o, struct.pack('>I', A + 0x4000 + 0x800 * ((k + 1) % 6) + (o & 0x3f0)))
     arena = bytes(arena)
     limit = int(opt['--limit'])
-    def run2(name, args, reset):
+    def run2(name, args, reset, sw=()):
         s = fl[name][0]; r = nm[name]
-        return ss.run(s, args, [], [], arena, limit=limit, reset=reset), sr.run(r, args, [], [], arena, limit=limit, reset=reset)
+        return ss.run(s, args, [], list(sw), arena, limit=limit, reset=reset), sr.run(r, args, [], list(sw), arena, limit=limit, reset=reset)
     for name in names:
         if name not in fl or name not in nm: print('%-40s MISSING stock=%s rebuilt=%s' % (name, name in fl, name in nm), flush=True); continue
         a, b = run2('_gleDCBFree', [0], True)                                        # state reset (trivial call)
@@ -64,9 +67,15 @@ def main(argv):
         ctx = int.from_bytes(ss.uc.mem_read(A + OUT, 4), 'big'); ctx_r = int.from_bytes(sr.uc.mem_read(A + OUT, 4), 'big')
         if not ctx or ctx != ctx_r: print('%-40s NOCTX stock=%x rebuilt=%x (%s)' % (name, ctx, ctx_r, v0), flush=True); continue
         n = nargs.get(name.lstrip('_'), 1)
-        if os.environ.get('GC_PTRARGS'): n = max(n, 3)      # GC_PTRARGS=1: arguments 2.. are zeroed arena objects (functions taking a second struct pointer fault on a junk value otherwise)
+        if os.environ.get('GC_PTRARGS'): n = 8 if os.environ['GC_PTRARGS'] == '2' else max(n, 3)      # GC_PTRARGS=2: all eight argument registers      # GC_PTRARGS=1: arguments 2.. are zeroed arena objects (functions taking a second struct pointer fault on a junk value otherwise)
         args = [ctx] + [(A + 0x4000 + 0x800 * k) if os.environ.get('GC_PTRARGS') else 0 for k in range(max(0, min(n, 8) - 1))]
-        a, b = run2(name, args, False)
+        if os.environ.get('GC_SMALL') and any(x in name for x in os.environ['GC_SMALL'].split(',')): args = [ctx, 10, 20, 30, 40, 50, 60, 70]      # GC_SMALL=sub,sub: rows whose scalar arguments are bytes/small counts (an arena address as a GLubyte is out of contract)
+        for spec in os.environ.get('GC_ROWARGS', '').split(';'):      # GC_ROWARGS='name=P,1,2;name2=...': explicit arguments after the context (P/Q/R = zeroed argument objects, otherwise decimal)
+            if spec.startswith(name + '='): args = [ctx] + [{'P': A + 0x4000, 'Q': A + 0x4800, 'R': A + 0x5000}.get(x, None) if x in 'PQR' else int(x) for x in spec.split('=', 1)[1].split(',')]
+        sw = ()
+        for spec in os.environ.get('GC_ROWSTACK', '').split(';'):      # GC_ROWSTACK='name=P,0;...': the stack words (9th argument on) of a row
+            if spec.startswith(name + '='): sw = tuple({'P': A + 0x4000, 'Q': A + 0x4800, 'R': A + 0x5000}[x] if x in 'PQR' else int(x) for x in spec.split('=', 1)[1].split(','))
+        a, b = run2(name, args, False, sw)
         v, det = t.compare(a, b, 'i')
         print('%-40s %-14s stock %s rebuilt %s events %d/%d cov %d  %s' % (name, v, a[0] if not isinstance(a[0], int) else hex(a[0]), b[0] if not isinstance(b[0], int) else hex(b[0]), len(a[1]), len(b[1]), len(a[3]), det[:200]), flush=True)
         if os.environ.get('GC_RDDIFF') and v in ('READ_SET', 'FAULT_PARTIAL'):      # GC_RDDIFF=1: every one-sided read of each segment, in the format rd_check.py classifies (load-width class)
@@ -79,7 +88,10 @@ def main(argv):
                         print('  RD', name, tag, k, 'values', [getattr(w, 'raw', w) for w in r1[k]][:3], 'other image overlapping', [(q, [getattr(w, 'raw', w) for w in r2[q]][:2]) for q in ov(r2, k)], flush=True)
         if os.environ.get('GC_EVCTX'):      # GC_EVCTX=name:ADDR (decimal): the events around every access of ADDR in both images, with pcs (stock pcs are image offsets, rebuilt pcs are image addresses)
             nn, ad = os.environ['GC_EVCTX'].split(':'); ad = int(ad)
-            if nn == name:
+            if nn == name and ad == -1:      # ADDR -1: the last 14 events of both images with pcs (fault sites)
+                for tag, run, sim in (('stock', a, ss), ('rebuilt', b, sr)):
+                    for j in range(max(0, len(run[1]) - 14), len(run[1])): print('  EVC', tag, j, hex(sim.evpc.get(j, -1)), str(run[1][j])[:140], flush=True)
+            elif nn == name:
                 for tag, run, sim in (('stock', a, ss), ('rebuilt', b, sr)):
                     for i, e in enumerate(run[1]):
                         if e[0] in 'RW' and isinstance(e[1], int) and e[1] <= ad < e[1] + e[2]:
