@@ -1643,11 +1643,11 @@ int _gleRTCAddAChunk_51324(param_1, param_2)
 }
 
 /* _gleRTCBuildABranch_51354 @ 0x51354 (12 bytes) */
-int _gleRTCBuildABranch_51354(param_1, param_2)
-  uint param_1;
-  uint param_2;
+int _gleRTCBuildABranch_51354(branchTemplate, branchDisplacementWords)
+  uint branchTemplate;
+  uint branchDisplacementWords;
 {
-  return (param_2 & 0x3fff) << 2 | param_1 & 0xffff0003;
+  return (branchDisplacementWords & 0x3fff) << 2 | branchTemplate & 0xffff0003;
 }
 
 /* _gleTextureMatTrans_body @ 0x51364 (232 bytes) */

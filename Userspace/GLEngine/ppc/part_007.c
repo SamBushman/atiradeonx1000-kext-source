@@ -6306,11 +6306,11 @@ LAB_0004e12c:
 }
 
 /* _gleLoadDataElementNO @ 0x4e138 (2516 bytes) */
-int _gleLoadDataElementNO(instrCursor, componentCount, dataType, param_4, byteReversed)
+int _gleLoadDataElementNO(instrCursor, componentCount, dataType, componentBytes, byteReversed)
   uint *instrCursor;
   int componentCount;
   undefined4 dataType;
-  int param_4;
+  int componentBytes;
   int byteReversed;
 {
   uint instrWord;
@@ -6319,7 +6319,7 @@ int _gleLoadDataElementNO(instrCursor, componentCount, dataType, param_4, byteRe
   int chunkWordCount;
   uint *wordCursor;
   
-  if (param_4 == 1) {
+  if (componentBytes == 1) {
     if (byteReversed == 0) {
       if (componentCount == 2) {
 LAB_0004e33c:
@@ -6379,7 +6379,7 @@ LAB_0004e1e4:
 LAB_0004e368:
     return instrCursor + 1;
   }
-  if (param_4 == 2) {
+  if (componentBytes == 2) {
     if (byteReversed == 0) {
       if (componentCount != 2) {
         if (componentCount < 3) {
@@ -6612,7 +6612,7 @@ LAB_0004e344:
     break;
   case 6:
     if (componentCount == 2) {
-      if (param_4 == 4) {
+      if (componentBytes == 4) {
         instrWord = 0xc8270000;
         goto LAB_0004e7c4;
       }
@@ -6635,7 +6635,7 @@ LAB_0004e7c4:
     }
     else {
       if (componentCount == 3) {
-        if (param_4 == 4) {
+        if (componentBytes == 4) {
           *instrCursor = 0xc8270000;
         }
         else {
@@ -6648,7 +6648,7 @@ LAB_0004e7c4:
         goto LAB_0004e7c4;
       }
       if (componentCount == 4) {
-        if (param_4 == 4) {
+        if (componentBytes == 4) {
           instrWord = 0xc8270000;
           nextInstrWord = 0xc8670008;
           goto LAB_0004e828;

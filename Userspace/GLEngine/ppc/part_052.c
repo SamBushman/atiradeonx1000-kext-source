@@ -153,14 +153,14 @@ void _gleBeginPolygonRenderTCLRDirty(glContext)
 void _gleBeginPolygonSelectFeedback(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *feedbackOrSelectFunc;
   
   *(undefined **)(glContext + 0x4a0c) = PTR__gleFlushPolygonFunc_00112260;
-  puVar1 = PTR__gleFeedbackPolygonFunc_00112244;
+  feedbackOrSelectFunc = PTR__gleFeedbackPolygonFunc_00112244;
   if (*(int *)(glContext + 0x4e1c) == 0x1c02) {
-    puVar1 = PTR__gleSelectPolygonFunc_00112248;
+    feedbackOrSelectFunc = PTR__gleSelectPolygonFunc_00112248;
   }
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = feedbackOrSelectFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }

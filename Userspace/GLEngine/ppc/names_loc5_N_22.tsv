@@ -1,0 +1,9 @@
+local	_gleInsertPixel_BGRA_EXT_Int	param_1	srcPixel	CONFIRMED	pixel record whose float channels at +4,+8,+0xc,+0x10 are scaled and converted to ints
+local	_gleInsertPixel_BGRA_EXT_Int	param_2	dstPixel	CONFIRMED	output int array: [2],[1],[0],[3] receive the scaled channels at +4,+8,+0xc,+0x10 of the source
+local	_gleInsertPixel_BGR_EXT_Int	param_1	srcPixel	CONFIRMED	pixel record whose float channels at +4,+8,+0xc are scaled and converted to ints
+local	_gleInsertPixel_BGR_EXT_Int	param_2	dstPixel	CONFIRMED	output int array: [2],[1],[0] receive the scaled channels at +4,+8,+0xc of the source
+local	_gleDCBAlloc	param_1	requestedSize	CONFIRMED	byte count rounded up (+0x3f, &~0x1f) for _malloc
+local	_gleDCBAlloc	uVar2	alignedBlock	CONFIRMED	32-byte aligned address inside the malloc block (allocatedBlock+0x20 &~0x1f), zero when _malloc fails; the byte before it stores the offset back to the block
+local	_gleUpdateInverseNeeds	iVar1	inverseNeedsMask	CONFIRMED	inverse-transform needs mask chosen from the vertex program / fixed function state and stored at ctx+0x505c
+local	_gleModifyPixelSignedRGB_UnsignedA	fVar9	clampBound	CONFIRMED	lower or upper clamp constant (FLOAT_00108e58/e50 or FLOAT_00108e54) that replaces an out-of-range channel
+local	_gleLoadDataElementNO	param_4	componentBytes	INFERRED	compared with 1, 2 and 4 to choose the load instruction width for each component

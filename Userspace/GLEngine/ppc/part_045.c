@@ -85,14 +85,14 @@ void _gleBeginLineStripRenderTCLRDirty(glContext)
 void _gleBeginLineStripSelectFeedback(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *feedbackOrSelectFunc;
   
   *(undefined **)(glContext + 0x4a0c) = PTR__gleFlushLineStripFunc_00112204;
-  puVar1 = PTR__gleFeedbackLineStripFunc_001121e8;
+  feedbackOrSelectFunc = PTR__gleFeedbackLineStripFunc_001121e8;
   if (*(int *)(glContext + 0x4e1c) == 0x1c02) {
-    puVar1 = PTR__gleSelectLineStripFunc_001121ec;
+    feedbackOrSelectFunc = PTR__gleSelectLineStripFunc_001121ec;
   }
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = feedbackOrSelectFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -150,16 +150,16 @@ void _gleBeginLineLoopRenderTCLRDirty(glContext)
 void _gleBeginLineLoopSelectFeedback(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushFuncThenFeedbackOrSelectFunc;
   
-  puVar1 = PTR__gleFlushLineLoopFunc_001121e4;
+  flushFuncThenFeedbackOrSelectFunc = PTR__gleFlushLineLoopFunc_001121e4;
   *(undefined1 *)(glContext + 0x4a18) = 0;
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
-  puVar1 = PTR__gleFeedbackLineLoopFunc_001121c8;
+  *(undefined **)(glContext + 0x4a0c) = flushFuncThenFeedbackOrSelectFunc;
+  flushFuncThenFeedbackOrSelectFunc = PTR__gleFeedbackLineLoopFunc_001121c8;
   if (*(int *)(glContext + 0x4e1c) == 0x1c02) {
-    puVar1 = PTR__gleSelectLineLoopFunc_001121cc;
+    flushFuncThenFeedbackOrSelectFunc = PTR__gleSelectLineLoopFunc_001121cc;
   }
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = flushFuncThenFeedbackOrSelectFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }
@@ -4318,7 +4318,7 @@ void _gleInitMap1Data(glContext)
   int glContext;
 {
   undefined4 *map1Cursor;
-  undefined4 *puVar2;
+  undefined4 *componentCountCursor;
   int remaining;
   
   map1Cursor = *(undefined4 **)(glContext + 0x7450);
@@ -4326,7 +4326,7 @@ void _gleInitMap1Data(glContext)
   *map1Cursor = 1;
   map1Cursor[1] = 0;
   map1Cursor[2] = 0x3f800000;
-  puVar2 = map1Cursor + 0x276a;
+  componentCountCursor = map1Cursor + 0x276a;
   map1Cursor[3] = 0x3f800000;
   map1Cursor[4] = 0;
   map1Cursor[5] = 0;
@@ -4386,8 +4386,8 @@ void _gleInitMap1Data(glContext)
   map1Cursor[0xf8] = 0;
   map1Cursor[0xf9] = 0x3f800000;
   do {
-    *(undefined1 *)puVar2 = 4;
-    puVar2 = (undefined4 *)((int)puVar2 + 1);
+    *(undefined1 *)componentCountCursor = 4;
+    componentCountCursor = (undefined4 *)((int)componentCountCursor + 1);
     map1Cursor[0xb2a] = 1;
     map1Cursor[0xb2b] = 0;
     map1Cursor[0xb2c] = 0x3f800000;

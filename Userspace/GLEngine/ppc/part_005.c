@@ -3544,11 +3544,11 @@ int _glDepthMask_Comp(glContext, flag)
 void _gleBeginQuadsRenderTCL(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *flushFunc;
   
-  puVar1 = PTR__gleFlushAtomicTCLFunc_00112218;
+  flushFunc = PTR__gleFlushAtomicTCLFunc_00112218;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
-  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a0c) = flushFunc;
   *(undefined **)(glContext + 0x4a08) = PTR__gleRenderQuadsTCLFunc_00112280;
   return;
 }

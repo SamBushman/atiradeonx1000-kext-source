@@ -1380,19 +1380,19 @@ LAB_00003108:
 }
 
 /* _gleDCBAlloc @ 0x3170 (68 bytes) */
-int _gleDCBAlloc(param_1)
-  int param_1;
+int _gleDCBAlloc(requestedSize)
+  int requestedSize;
 {
   int allocatedBlock;
-  uint uVar2;
+  uint alignedBlock;
   
-  allocatedBlock = _malloc(param_1 + 0x3fU & 0xffffffe0);
-  uVar2 = 0;
+  allocatedBlock = _malloc(requestedSize + 0x3fU & 0xffffffe0);
+  alignedBlock = 0;
   if (allocatedBlock != 0) {
-    uVar2 = allocatedBlock + 0x20U & 0xffffffe0;
-    *(char *)(uVar2 - 1) = (char)uVar2 - (char)allocatedBlock;
+    alignedBlock = allocatedBlock + 0x20U & 0xffffffe0;
+    *(char *)(alignedBlock - 1) = (char)alignedBlock - (char)allocatedBlock;
   }
-  return uVar2;
+  return alignedBlock;
 }
 
 /* _gleCreateSharedState @ 0x31b4 (548 bytes) */

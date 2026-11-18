@@ -980,14 +980,14 @@ void _gleBeginTriangleFanRenderTCLRDirty(glContext)
 void _gleBeginTriangleFanSelectFeedback(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *feedbackOrSelectFunc;
   
   *(undefined **)(glContext + 0x4a0c) = PTR__gleFlushTriangleFanFunc_001122a8;
-  puVar1 = PTR__gleFeedbackTriangleFanFunc_0011228c;
+  feedbackOrSelectFunc = PTR__gleFeedbackTriangleFanFunc_0011228c;
   if (*(int *)(glContext + 0x4e1c) == 0x1c02) {
-    puVar1 = PTR__gleSelectTriangleFanFunc_00112290;
+    feedbackOrSelectFunc = PTR__gleSelectTriangleFanFunc_00112290;
   }
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = feedbackOrSelectFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }

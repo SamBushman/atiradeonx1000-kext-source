@@ -1,0 +1,18 @@
+local	_gleBeginLineLoopSelectFeedback	puVar1	flushFuncThenFeedbackOrSelectFunc	CONFIRMED	first the flush function stored at ctx+0x4a0c, then the feedback or select (render-mode 0x1c02) line-loop function stored at ctx+0x4a08
+local	_gleBeginTriangleFanSelectFeedback	puVar1	feedbackOrSelectFunc	CONFIRMED	feedback triangle-fan function, replaced by the select one when ctx+0x4e1c is 0x1c02; stored at ctx+0x4a08
+local	_gleBeginPolygonSelectFeedback	puVar1	feedbackOrSelectFunc	CONFIRMED	feedback polygon function, replaced by the select one when ctx+0x4e1c is 0x1c02; stored at ctx+0x4a08
+local	_gleBeginLineStripSelectFeedback	puVar1	feedbackOrSelectFunc	CONFIRMED	feedback line-strip function, replaced by the select one when ctx+0x4e1c is 0x1c02; stored at ctx+0x4a08
+local	_gleBeginQuadsRenderTCL	puVar1	flushFunc	CONFIRMED	PTR__gleFlushAtomicTCLFunc stored at ctx+0x4a0c
+local	_gleInitMap1Data	puVar2	componentCountCursor	INFERRED	byte cursor over the table at map base +0x9da8 (read by _glEnableVertexAttribARB_Exec and scaled by 4) that receives 4 for each of the 16 vertex attributes
+local	_gleUpdateLightDirection	param_2	lightIndex	INFERRED	index scaling the per-light records (0x80 for the direction vectors at +0x2860, 0x6c at +0x4a88, 7 for the dirty-bit table)
+local	_gleRTCBuildABranch_51354	param_1	branchTemplate	(param_1&0xffff0003) merges a 14-bit word displacement into it	instruction word whose low 2 bits and top 16 bits are kept: ((param_2&0x3fff)<<2)
+local	_gleRTCBuildABranch_51354	param_2	branchDisplacementWords	INFERRED	14-bit displacement field value placed at bits 2..15 of the branch instruction
+local	_gleGetVertexElemFunc	puVar1	vertexFuncSlot	CONFIRMED	pointer returned by _gleBuildVertexFunc(arg,4); the function pointer is read from it
+local	_gleSetVertexSubmitFunc	puVar1	vertexFuncSlot	CONFIRMED	pointer returned by _gleBuildVertexFunc(ctx,0); the function pointer is read from it and stored at ctx+0x4888
+local	_gleToggleScissorEnableState	param_2	scissorEnable	INFERRED	stored to the scissor enable byte ctx+0x34f0 before _gleUpdateViewScissorData
+local	_gleCheckCompressedTexImageArgs	iVar2	blockSizeShift	CONFIRMED	log2 of the compressed block size: 3 (8 bytes) for 0x83f0/0x83f1, 4 (16 bytes) for 0x83f2.. and 0x8837
+local	_glGetUniformivARB_Exec	auStack_38	uniformSize	CONFIRMED	size out parameter of _ShGetUniformTypeInfo (same slot as uniformSize in _glUniform1iARB_Exec)
+local	_glCopyTexSubImage3D_Exec	iVar6	dirtyWord	CONFIRMED	word read from the dirty-word array scanned from ctx+0x324; non-zero sets flag 0x800000
+local	_glGetBooleanv_Exec	iVar3	intValue	CONFIRMED	current state value reinterpreted as int; boolean is 1 - (value == 0)
+local	_glGetBooleanv_Exec	dVar7	doubleValue	CONFIRMED	current state value read as double; boolean is value != 0.0
+local	_glGetBooleanv_Exec	local_a0	stateValues	CONFIRMED	buffer of 16 doubles that _gleGetState fills and the loops read through cursor

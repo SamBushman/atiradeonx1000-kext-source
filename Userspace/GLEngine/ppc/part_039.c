@@ -789,10 +789,10 @@ void _gleSetVertexEval2Func(glContext, forwardedArg2, forwardedArg3)
 int _gleGetVertexElemFunc(forwardedArg1)
   undefined4 forwardedArg1;
 {
-  undefined4 *puVar1;
+  undefined4 *vertexFuncSlot;
   
-  puVar1 = (undefined4 *)(*_gleBuildVertexFunc)(forwardedArg1,4);
-  return *puVar1;
+  vertexFuncSlot = (undefined4 *)(*_gleBuildVertexFunc)(forwardedArg1,4);
+  return *vertexFuncSlot;
 }
 
 /* _gleGetVertexToListFunc @ 0xb524c (68 bytes) */

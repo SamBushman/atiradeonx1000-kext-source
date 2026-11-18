@@ -2228,9 +2228,9 @@ void _gleRecoveryRestoreState(int glContext,int *savedState,double fparam_1,doub
 }
 
 /* _gleToggleScissorEnableState @ 0xc8300 (88 bytes) */
-undefined4 _gleToggleScissorEnableState(int glContext,undefined4 param_2,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
+undefined4 _gleToggleScissorEnableState(int glContext,undefined4 scissorEnable,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
-  *(undefined1 *)(glContext + 0x34f0) = (undefined1)param_2;
+  *(undefined1 *)(glContext + 0x34f0) = (undefined1)scissorEnable;
   ((void (*)())_gleUpdateViewScissorData)(glContext,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x4000000;
   (**(code **)(glContext + 0x4788))

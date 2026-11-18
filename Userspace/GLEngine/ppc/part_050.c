@@ -144,15 +144,15 @@ void _gleInsertPixel_BGRA_EXT_Ushort(pixel, dst)
 }
 
 /* _gleInsertPixel_BGRA_EXT_Int @ 0xe8e1c (124 bytes) */
-void _gleInsertPixel_BGRA_EXT_Int(int param_1,int *param_2,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+void _gleInsertPixel_BGRA_EXT_Int(int srcPixel,int *dstPixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   double scaledChannel;
   
   scaledChannel = DOUBLE_00108d90;
-  param_2[2] = (int)((double)*(float *)(param_1 + 4) * DOUBLE_00108d90);
-  param_2[1] = (int)((double)*(float *)(param_1 + 8) * scaledChannel);
-  *param_2 = (int)((double)*(float *)(param_1 + 0xc) * scaledChannel);
-  param_2[3] = (int)((double)*(float *)(param_1 + 0x10) * scaledChannel);
+  dstPixel[2] = (int)((double)*(float *)(srcPixel + 4) * DOUBLE_00108d90);
+  dstPixel[1] = (int)((double)*(float *)(srcPixel + 8) * scaledChannel);
+  *dstPixel = (int)((double)*(float *)(srcPixel + 0xc) * scaledChannel);
+  dstPixel[3] = (int)((double)*(float *)(srcPixel + 0x10) * scaledChannel);
   return;
 }
 
@@ -432,14 +432,14 @@ void _gleInsertPixel_BGR_EXT_Ushort(pixel, dst)
 }
 
 /* _gleInsertPixel_BGR_EXT_Int @ 0xe973c (100 bytes) */
-void _gleInsertPixel_BGR_EXT_Int(int param_1,int *param_2,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+void _gleInsertPixel_BGR_EXT_Int(int srcPixel,int *dstPixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   double scaledChannel;
   
   scaledChannel = DOUBLE_00108d90;
-  param_2[2] = (int)((double)*(float *)(param_1 + 4) * DOUBLE_00108d90);
-  param_2[1] = (int)((double)*(float *)(param_1 + 8) * scaledChannel);
-  *param_2 = (int)((double)*(float *)(param_1 + 0xc) * scaledChannel);
+  dstPixel[2] = (int)((double)*(float *)(srcPixel + 4) * DOUBLE_00108d90);
+  dstPixel[1] = (int)((double)*(float *)(srcPixel + 8) * scaledChannel);
+  *dstPixel = (int)((double)*(float *)(srcPixel + 0xc) * scaledChannel);
   return;
 }
 

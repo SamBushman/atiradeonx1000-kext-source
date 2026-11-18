@@ -972,12 +972,12 @@ int _gleCheckCompressedTexImageArgs(glContext, unusedArg2, internalformat, borde
   int imageSize;
 {
   undefined4 errorCode;
-  int iVar2;
+  int blockSizeShift;
   
   if (internalformat < 0x83f4) {
     if (0x83f1 < internalformat) goto LAB_000f4a24;
     if (internalformat < 0x83f0) goto LAB_000f4a2c;
-    iVar2 = 3;
+    blockSizeShift = 3;
   }
   else {
     if (internalformat != 0x8837) {
@@ -989,10 +989,10 @@ LAB_000f4a2c:
       goto LAB_000f4a94;
     }
 LAB_000f4a24:
-    iVar2 = 4;
+    blockSizeShift = 4;
   }
   if (border == 0) {
-    if (imageSize == (width + 3 >> 2) * (height + 3 >> 2) * depth << iVar2) {
+    if (imageSize == (width + 3 >> 2) * (height + 3 >> 2) * depth << blockSizeShift) {
       return 1;
     }
     if (*(int *)(glContext + 0x7574) != 0) {

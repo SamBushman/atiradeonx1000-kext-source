@@ -1806,7 +1806,7 @@ void _glGetUniformivARB_Exec(glContext, programObj, location, params)
   int typeInfoFound;
   int *uniformValue;
   float roundedComponent;
-  undefined1 auStack_38 [4];
+  undefined1 uniformSize [4];
   uint uniformType;
   undefined2 uniformStageUse [14];
   
@@ -1841,7 +1841,7 @@ LAB_0008f680:
       (*(int *)(programObject + 0x30) <= location)) ||
      ((location == -1 ||
       (typeInfoFound = _ShGetUniformTypeInfo
-                         (*(undefined4 *)(programObject + 0x40),location,auStack_38,&uniformType,uniformStageUse),
+                         (*(undefined4 *)(programObject + 0x40),location,uniformSize,&uniformType,uniformStageUse),
       typeInfoFound == 0)))) {
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);

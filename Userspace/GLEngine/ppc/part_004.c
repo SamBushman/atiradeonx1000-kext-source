@@ -1357,17 +1357,17 @@ void _glGetBooleanv_Exec(glContext, pname, params)
   int loopIndex2;
   double doubleZero;
   undefined4 glErrorCode;
-  int iVar3;
+  int intValue;
   int remaining;
   double *cursor;
   int loopIndex;
-  double dVar7;
+  double doubleValue;
   undefined1 auStack_b0 [16];
-  double local_a0 [16];
+  double stateValues [16];
   int valueType [4];
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    cursor = local_a0;
+    cursor = stateValues;
     remaining = _gleGetState(glContext,pname,cursor,valueType,auStack_b0);
     doubleZero = DOUBLE_00108d60;
     if (remaining == 0) {
@@ -1384,9 +1384,9 @@ void _glGetBooleanv_Exec(glContext, pname, params)
           return;
         }
         do {
-          dVar7 = *cursor;
+          doubleValue = *cursor;
           cursor = cursor + 1;
-          *(bool *)(params + loopIndex) = dVar7 != doubleZero;
+          *(bool *)(params + loopIndex) = doubleValue != doubleZero;
           loopIndex = loopIndex + 1;
           remaining = remaining + -1;
         } while (remaining != 0);
@@ -1397,9 +1397,9 @@ void _glGetBooleanv_Exec(glContext, pname, params)
         return;
       }
       do {
-        iVar3 = *(int *)cursor;
+        intValue = *(int *)cursor;
         cursor = cursor + 1;
-        *(char *)(params + loopIndex2) = '\x01' - (iVar3 == 0);
+        *(char *)(params + loopIndex2) = '\x01' - (intValue == 0);
         loopIndex2 = loopIndex2 + 1;
         remaining = remaining + -1;
       } while (remaining != 0);

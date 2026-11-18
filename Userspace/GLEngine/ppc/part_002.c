@@ -4806,11 +4806,11 @@ void _glVertex2f_Exec(int glContext,double x,double y)
 /* _gleSetVertexSubmitFunc @ 0x1d238 (156 bytes) */
 void _gleSetVertexSubmitFunc(int glContext,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4)
 {
-  undefined4 *puVar1;
+  undefined4 *vertexFuncSlot;
   code *UNRECOVERED_JUMPTABLE;
   
-  puVar1 = (undefined4 *)(*_gleBuildVertexFunc)(glContext,0);
-  UNRECOVERED_JUMPTABLE = (code *)*puVar1;
+  vertexFuncSlot = (undefined4 *)(*_gleBuildVertexFunc)(glContext,0);
+  UNRECOVERED_JUMPTABLE = (code *)*vertexFuncSlot;
   *(code **)(glContext + 0x4888) = UNRECOVERED_JUMPTABLE;
   if (-1 < *(short *)(glContext + 0x4a10)) {
     *(code **)(glContext + 0x4884) = UNRECOVERED_JUMPTABLE;

@@ -737,7 +737,7 @@ void _gleUpdateLightModelFunc(glContext)
 }
 
 /* _gleUpdateLightDirection @ 0x78f4 (220 bytes) */
-void _gleUpdateLightDirection(int glContext,int param_2,double unusedFloatArg1)
+void _gleUpdateLightDirection(int glContext,int lightIndex,double unusedFloatArg1)
 {
   byte dirtyBitIndex;
   int dirtyWordAddress348;
@@ -746,17 +746,17 @@ void _gleUpdateLightDirection(int glContext,int param_2,double unusedFloatArg1)
   int dirtyWordAddress324;
   
   (**(code **)PTR__gleVectorNormalize_00112064)
-            (glContext,glContext + param_2 * 0x80 + 0x2860,glContext + param_2 * 0x6c + 0x4a88,incomingR6);
+            (glContext,glContext + lightIndex * 0x80 + 0x2860,glContext + lightIndex * 0x6c + 0x4a88,incomingR6);
   if (*(int *)(glContext + 0x5434) == 0) {
-    dirtyBitIndex = *(byte *)(param_2 * 7 + *(int *)(glContext + 0x5420) + 0x25c);
+    dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(glContext + 0x5420) + 0x25c);
   }
   else {
-    dirtyBitIndex = *(byte *)(param_2 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x290);
+    dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x290);
   }
   dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
   glContextWord5424 = *(int *)(glContext + 0x5424);
   *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
-  dirtyBitIndex = *(byte *)(param_2 * 7 + glContextWord5424 + 0x25c);
+  dirtyBitIndex = *(byte *)(lightIndex * 7 + glContextWord5424 + 0x25c);
   dirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
   *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
   return;
@@ -879,28 +879,28 @@ double _gleUpdateLightAttenuation(glContext, param_2)
 void _gleUpdateInverseNeeds(glContext)
   int glContext;
 {
-  int iVar1;
+  int inverseNeedsMask;
   
   if (*(char *)(glContext + 0x4664) == '\0') {
     if (*(int *)(glContext + 0x5434) == 0) {
-      if ((*(char *)(glContext + 0x30aa) != '\0') || (iVar1 = 0, *(char *)(glContext + 0x53e6) != '\0'))
+      if ((*(char *)(glContext + 0x30aa) != '\0') || (inverseNeedsMask = 0, *(char *)(glContext + 0x53e6) != '\0'))
       {
         if (*(char *)(glContext + 0x4661) == '\0') {
-          iVar1 = 0x10;
+          inverseNeedsMask = 0x10;
         }
         else {
-          iVar1 = (0xffffffffU >> (0x20 - *(byte *)(glContext + 0x4660) & 0x3f)) << 4;
+          inverseNeedsMask = (0xffffffffU >> (0x20 - *(byte *)(glContext + 0x4660) & 0x3f)) << 4;
         }
       }
     }
     else {
-      iVar1 = *(int *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 4);
+      inverseNeedsMask = *(int *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 4);
     }
   }
   else {
-    iVar1 = *(int *)(*(int *)(glContext + 0x5420) + 0x20);
+    inverseNeedsMask = *(int *)(*(int *)(glContext + 0x5420) + 0x20);
   }
-  *(int *)(glContext + 0x505c) = iVar1;
+  *(int *)(glContext + 0x505c) = inverseNeedsMask;
   if (*(char *)(glContext + 0x466c) != '\0') {
     *(uint *)(glContext + 0x505c) =
          *(uint *)(glContext + 0x505c) | *(uint *)(*(int *)(glContext + 0x5424) + 0x20);

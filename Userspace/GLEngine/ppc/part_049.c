@@ -1329,7 +1329,7 @@ void _gleModifyPixelSignedRGB_UnsignedA(glContext, pixel)
   float green;
   float blue;
   float alpha;
-  float fVar9;
+  float clampBound;
   uint alphaMapIndex;
   uint blueMapIndex;
   uint greenMapIndex;
@@ -1340,21 +1340,21 @@ void _gleModifyPixelSignedRGB_UnsignedA(glContext, pixel)
   blue = *(float *)(pixel + 0xc) * *(float *)(glContext + 0x31fc) + *(float *)(glContext + 0x31f8);
   alpha = *(float *)(pixel + 0x10) * *(float *)(glContext + 0x3204) + *(float *)(glContext + 0x3200);
   if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
-    fVar9 = FLOAT_00108e58;
-    if ((red < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < red)) {
-      red = fVar9;
+    clampBound = FLOAT_00108e58;
+    if ((red < FLOAT_00108e58) || (clampBound = FLOAT_00108e54, FLOAT_00108e54 < red)) {
+      red = clampBound;
     }
-    fVar9 = FLOAT_00108e58;
-    if ((green < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < green)) {
-      green = fVar9;
+    clampBound = FLOAT_00108e58;
+    if ((green < FLOAT_00108e58) || (clampBound = FLOAT_00108e54, FLOAT_00108e54 < green)) {
+      green = clampBound;
     }
-    fVar9 = FLOAT_00108e58;
-    if ((blue < FLOAT_00108e58) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
-      blue = fVar9;
+    clampBound = FLOAT_00108e58;
+    if ((blue < FLOAT_00108e58) || (clampBound = FLOAT_00108e54, FLOAT_00108e54 < blue)) {
+      blue = clampBound;
     }
-    fVar9 = FLOAT_00108e50;
-    if ((alpha < FLOAT_00108e50) || (fVar9 = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
-      alpha = fVar9;
+    clampBound = FLOAT_00108e50;
+    if ((alpha < FLOAT_00108e50) || (clampBound = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
+      alpha = clampBound;
     }
   }
   else {
