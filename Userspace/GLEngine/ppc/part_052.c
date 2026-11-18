@@ -796,7 +796,7 @@ LAB_000ec5d0:
           }
           *(undefined4 *)(glContext + 0x4858) = bufferEnd;
           oldPolygonListThenVertexPtrCursor = spareList;
-          iVar20 = 3;
+          polygonVertexCount = 3;
           newPolygonList = polygonList;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clipCount,forwardedFloatArg1,incomingFpr2,
@@ -1071,7 +1071,7 @@ LAB_000ecbb8: ;
             }
             *(undefined4 *)(glContext + 0x4858) = batchEndReset;
             puVar15 = spareList;
-            iVar13 = 3;
+            polygonVertexCount = 3;
             puVar9 = polygonVertexList;
             iVar23 = previousFacing;
             if ((*(char *)(glContext + 0x4e18) == '\0') ||
@@ -1506,7 +1506,7 @@ joined_r0x000ed748:
           }
           *(undefined4 *)(glContext + 0x4858) = bufferEnd;
           oldPolygonListThenVertexPtrCursor = spareList;
-          iVar17 = 4;
+          polygonVertexCount = 4;
           newPolygonList = polygonList;
           quadStartThenRunStart = nextQuadStart;
         } while ((*(char *)(glContext + 0x4e18) != '\0') &&
@@ -2906,7 +2906,7 @@ LAB_000ef3cc: ;
           *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x485c);
           nextSpareList = spareList;
           nextPolygonList = polygonList;
-          iVar14 = 3;
+          polygonVertexCount = 3;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (lastCalleeF1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clippedVertexCount,lastCalleeF1,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
@@ -3361,7 +3361,7 @@ LAB_000efd88:
           *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x485c);
           nextSpareList = spareList;
           nextPolygonList = polygonList;
-          iVar10 = 3;
+          polygonVertexCount = 3;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (dVar20 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clippedVertexCount,dVar20,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
@@ -4181,7 +4181,7 @@ joined_r0x000f1240:
         *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x485c);
         nextSpareList = spareList;
         nextPolygonList = polygonList;
-        iVar10 = 4;
+        polygonVertexCount = 4;
       } while ((*(char *)(glContext + 0x4e18) != '\0') &&
               (dVar21 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clippedVertexCount,dVar21,incomingFpr2,
                                                   incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
@@ -4562,7 +4562,7 @@ void _gleSelectTrianglesFunc_body(glContext)
           *(undefined4 *)(glContext + 0x4858) = vertexEndValue;
           nextSpareList = spareList;
           nextPolygonList = polygonList;
-          iVar9 = 3;
+          polygonVertexCount = 3;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (f1AfterHookCall = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clippedVertexCount,f1AfterHookCall,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
@@ -4765,7 +4765,7 @@ LAB_000f1c00: ;
           }
           *(undefined4 *)(glContext + 0x4858) = batchEndReset;
           puVar13 = spareList;
-          iVar10 = 3;
+          polygonVertexCount = 3;
           puVar6 = polygonVertexList;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (dVar22 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonVertexList,3,spareList,clippedCount,dVar22,incomingFpr2,
@@ -4932,7 +4932,7 @@ LAB_000f1f60:
           *(undefined4 *)(glContext + 0x4858) = batchEndReset;
           piVar11 = spareList;
           piVar5 = polygonList;
-          iVar9 = 3;
+          polygonVertexCount = 3;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (dVar18 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,local_4c,dVar18,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
@@ -5099,7 +5099,7 @@ void _gleSelectQuadsFunc_body(glContext)
           }
           *(undefined4 *)(glContext + 0x4858) = bufferEnd;
           oldPolygonListThenVertexPtrCursor = spareList;
-          iVar9 = 4;
+          polygonVertexCount = 4;
           newPolygonList = polygonList;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clipCount,forwardedFloatArg1,incomingFpr2,
@@ -5265,7 +5265,7 @@ LAB_000f2614:
           }
           *(undefined4 *)(glContext + 0x4858) = bufferEnd;
           oldPolygonListThenVertexPtrCursor = spareList;
-          iVar9 = 4;
+          polygonVertexCount = 4;
           newPolygonList = polygonList;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clipCount,forwardedFloatArg1,incomingFpr2,

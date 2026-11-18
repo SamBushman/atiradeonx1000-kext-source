@@ -1248,7 +1248,7 @@ void _gleVPRenderTriangles_body(glContext)
           *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
           nextSpareList = spareList;
           nextPolygonList = polygonList;
-          iVar11 = 3;
+          polygonVertexCount = 3;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (dVar17 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clippedVertexCount,dVar17,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
@@ -1458,7 +1458,7 @@ LAB_001051b4: ;
           *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
           puVar14 = spareList;
           puVar6 = polygonVertexList;
-          iVar11 = 3;
+          polygonVertexCount = 3;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (dVar21 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonVertexList,3,spareList,clippedCount,dVar21,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
@@ -1628,7 +1628,7 @@ LAB_00105508:
           *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
           piVar10 = spareList;
           piVar5 = polygonList;
-          iVar11 = 3;
+          polygonVertexCount = 3;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (dVar17 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,3,spareList,clippedCount,dVar17,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
@@ -1799,7 +1799,7 @@ void _gleVPRenderQuads_body(glContext)
           *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
           oldPolygonListThenVertexPtrCursor = spareList;
           newPolygonList = polygonList;
-          iVar11 = 4;
+          polygonVertexCount = 4;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (forwardedFloatArg1 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clipCount,forwardedFloatArg1,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
@@ -1970,7 +1970,7 @@ LAB_00105bf4:
           *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
           nextSpareList = spareList;
           nextPolygonList = polygonList;
-          iVar11 = 4;
+          polygonVertexCount = 4;
           if ((*(char *)(glContext + 0x4e18) == '\0') ||
              (dVar16 = (double)((double (*)())_gleClipPolyPlane)(glContext,polygonList,4,spareList,clippedVertexCount,dVar16,incomingFpr2,
                                                  incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
