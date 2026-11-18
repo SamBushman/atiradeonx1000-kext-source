@@ -626,8 +626,8 @@ int _glCompressedTexSubImage2D_ListExec(glContext, listRecord)
 }
 
 /* _glCompressedTexImage3D_Comp @ 0x9153c (344 bytes) */
-int _glCompressedTexImage3D_Comp(glContext, target, level, internalformat, width, height, depth, border, imageSize, data)
-  int *glContext;
+int _glCompressedTexImage3D_Comp(glContextThenListRecord, target, level, internalformat, width, height, depth, border, imageSize, data)
+  int *glContextThenListRecord;
   int target;
   int level;
   uint internalformat;
@@ -638,47 +638,47 @@ int _glCompressedTexImage3D_Comp(glContext, target, level, internalformat, width
   int imageSize;
   int data;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 callResult;
+  int pixelUnpackBuffer;
   
   if (target == 0x8070) {
-    uVar1 = ((int (*)())_glCompressedTexImage3D_Exec)(glContext,0x8070,level,internalformat,width,height,depth,border,imageSize,
+    callResult = ((int (*)())_glCompressedTexImage3D_Exec)(glContextThenListRecord,0x8070,level,internalformat,width,height,depth,border,imageSize,
                        data);
-    return uVar1;
+    return callResult;
   }
   if ((internalformat < 0x83f0) || (((0x83f3 < internalformat && (internalformat != 0x8837)) || (imageSize < 1)))) {
 LAB_000915e4:
-    if (glContext[0x1d5d] == 0) {
-      glContext[0x1d5d] = 0x502;
+    if (glContextThenListRecord[0x1d5d] == 0) {
+      glContextThenListRecord[0x1d5d] = 0x502;
     }
   }
   else {
-    iVar2 = glContext[0x129b];
-    if (iVar2 != 0) {
-      if (*(int *)(iVar2 + 0x38) < imageSize + data) goto LAB_000915e4;
-      if (*(int *)(iVar2 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar2 + 0x10);
+    pixelUnpackBuffer = glContextThenListRecord[0x129b];
+    if (pixelUnpackBuffer != 0) {
+      if (*(int *)(pixelUnpackBuffer + 0x38) < imageSize + data) goto LAB_000915e4;
+      if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContextThenListRecord,pixelUnpackBuffer + 0x10);
       }
-      data = data + *(int *)(iVar2 + 0x30);
+      data = data + *(int *)(pixelUnpackBuffer + 0x30);
     }
-    glContext = (int *)_gleAddListItem(glContext,PTR__glCompressedTexImage3D_ListExec_001103a0,
+    glContextThenListRecord = (int *)_gleAddListItem(glContextThenListRecord,PTR__glCompressedTexImage3D_ListExec_001103a0,
                                      imageSize + 0x20);
-    if (glContext != (int *)0x0) {
-      *glContext = target;
-      glContext[1] = level;
-      glContext[2] = internalformat;
-      glContext[6] = border;
-      glContext[3] = width;
-      glContext[4] = height;
-      glContext[5] = depth;
-      glContext[7] = imageSize;
+    if (glContextThenListRecord != (int *)0x0) {
+      *glContextThenListRecord = target;
+      glContextThenListRecord[1] = level;
+      glContextThenListRecord[2] = internalformat;
+      glContextThenListRecord[6] = border;
+      glContextThenListRecord[3] = width;
+      glContextThenListRecord[4] = height;
+      glContextThenListRecord[5] = depth;
+      glContextThenListRecord[7] = imageSize;
       if (data != 0) {
-        uVar1 = _memcpy(glContext + 8,data,imageSize);
-        return uVar1;
+        callResult = _memcpy(glContextThenListRecord + 8,data,imageSize);
+        return callResult;
       }
     }
   }
-  return glContext;
+  return glContextThenListRecord;
 }
 
 /* _glCompressedTexImage2D_Comp @ 0x91694 (404 bytes) */

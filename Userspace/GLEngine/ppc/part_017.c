@@ -1003,8 +1003,8 @@ void _glSeparableFilter2D_Exec(glContext, target, internalformat, width, height,
   int pixelUnpackBuffer;
   int imageEndOffset;
   int imageEndOffset2;
-  int iVar6;
-  int iVar7;
+  int elementSize;
+  int unpackBufferSize;
   double bytesPerElement;
   
   internalFormat = _gleImagingTexFormatToInternal(internalformat);
@@ -1033,14 +1033,14 @@ LAB_0006a850:
       }
       imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,row);
       imageEndOffset2 = _gleOffsetLimitImage(glContext + 0x31cc,height,1,format,type,column);
-      iVar7 = *(int *)(pixelUnpackBuffer + 0x38);
+      unpackBufferSize = *(int *)(pixelUnpackBuffer + 0x38);
       bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-      iVar6 = (int)bytesPerElement;
-      if ((imageEndOffset <= iVar7) && (imageEndOffset2 <= iVar7)) {
-        if (iVar6 == 0) {
-          iVar6 = _glePixelBytes(format,type);
+      elementSize = (int)bytesPerElement;
+      if ((imageEndOffset <= unpackBufferSize) && (imageEndOffset2 <= unpackBufferSize)) {
+        if (elementSize == 0) {
+          elementSize = _glePixelBytes(format,type);
         }
-        if ((row == (row / iVar6) * iVar6) && (column == (column / iVar6) * iVar6)) {
+        if ((row == (row / elementSize) * elementSize) && (column == (column / elementSize) * elementSize)) {
           if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
             _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
           }
@@ -1306,14 +1306,14 @@ void _glHistogram_Exec(glContext, target, width, internalformat, sink)
   int sink;
 {
   undefined4 allocatedBlock;
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 glErrorCode;
+  int internalFormatCheck;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (((width & width - 1) == 0) && (-1 < (int)width)) {
       if ((int)width < 0x20001) {
-        iVar2 = _CheckInternalFormat(internalformat);
-        if (iVar2 != 0) {
+        internalFormatCheck = _CheckInternalFormat(internalformat);
+        if (internalFormatCheck != 0) {
           *(short *)(glContext + 0x338c) = (short)internalformat;
           *(byte *)(glContext + 0x338e) = (byte)((uint)-sink >> 0x1f);
           *(uint *)(glContext + 0x3388) = width;
@@ -1330,29 +1330,29 @@ void _glHistogram_Exec(glContext, target, width, internalformat, sink)
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
-        uVar1 = 0x500;
+        glErrorCode = 0x500;
       }
       else {
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
-        uVar1 = 0x8031;
+        glErrorCode = 0x8031;
       }
     }
     else {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
-      uVar1 = 0x501;
+      glErrorCode = 0x501;
     }
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 

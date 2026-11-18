@@ -2654,7 +2654,7 @@ void _glUniform3iARB_Exec(glContext, location, v0, v1, v2)
   undefined4 *rendererHandlePtr;
   undefined4 uniformWord1;
   int currentProgram;
-  int iVar5;
+  int uniformValueBase;
   int rendererSlotOffset;
   int registerIndexThenOffset;
   int typeInfoFound;
@@ -2662,7 +2662,7 @@ void _glUniform3iARB_Exec(glContext, location, v0, v1, v2)
   int locationValueOffset;
   undefined4 uniformWord3;
   int constantRegisterFile;
-  int iVar9;
+  int uniformValueAddress;
   int constantRegister;
   int stage0Record;
   int uniformValueSlot;
@@ -2685,31 +2685,31 @@ void _glUniform3iARB_Exec(glContext, location, v0, v1, v2)
                            (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
         typeInfoFound != 0 && ((uniformType == 0x8b54 || (uniformType == 0x8b58)))))) {
       locationValueOffset = location * 0x10;
-      iVar5 = *(int *)(currentProgram + 0x4c);
-      iVar9 = iVar5 + locationValueOffset;
+      uniformValueBase = *(int *)(currentProgram + 0x4c);
+      uniformValueAddress = uniformValueBase + locationValueOffset;
       if (uniformType == 0x8b54) {
-        *(int *)(iVar5 + locationValueOffset) = v0;
-        *(int *)(iVar9 + 8) = v2;
-        *(int *)(iVar9 + 4) = v1;
+        *(int *)(uniformValueBase + locationValueOffset) = v0;
+        *(int *)(uniformValueAddress + 8) = v2;
+        *(int *)(uniformValueAddress + 4) = v1;
       }
       else {
         if (v0 == 0) {
-          *(undefined4 *)(iVar5 + locationValueOffset) = 0;
+          *(undefined4 *)(uniformValueBase + locationValueOffset) = 0;
         }
         else {
-          *(undefined4 *)(iVar5 + locationValueOffset) = 1;
+          *(undefined4 *)(uniformValueBase + locationValueOffset) = 1;
         }
         if (v1 == 0) {
-          *(undefined4 *)(iVar9 + 4) = 0;
+          *(undefined4 *)(uniformValueAddress + 4) = 0;
         }
         else {
-          *(undefined4 *)(iVar9 + 4) = 1;
+          *(undefined4 *)(uniformValueAddress + 4) = 1;
         }
         if (v2 == 0) {
-          *(undefined4 *)(iVar9 + 8) = 0;
+          *(undefined4 *)(uniformValueAddress + 8) = 0;
         }
         else {
-          *(undefined4 *)(iVar9 + 8) = 1;
+          *(undefined4 *)(uniformValueAddress + 8) = 1;
         }
       }
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
@@ -2914,12 +2914,12 @@ void _glUniform1iARB_Exec(glContext, location, v0)
   int typeInfoFound;
   int rendererSlotOffset;
   int locationValueOffset;
-  int iVar5;
+  int previousValue;
   int rendererSlotOffset2;
   int registerIndexThenOffset;
   undefined4 uniformWord3;
   int constantRegisterFile;
-  int iVar8;
+  int uniformValueBase;
   int constantRegister;
   int stage0Record;
   int uniformValueSlot;
@@ -2965,26 +2965,26 @@ void _glUniform1iARB_Exec(glContext, location, v0)
     *(undefined4 *)(glContext + 0x7574) = 0x502;
     return;
   }
-  iVar8 = *(int *)(currentProgram + 0x4c);
+  uniformValueBase = *(int *)(currentProgram + 0x4c);
   locationValueOffset = location * 0x10;
-  iVar5 = *(int *)(iVar8 + locationValueOffset);
-  if (iVar5 == v0) {
+  previousValue = *(int *)(uniformValueBase + locationValueOffset);
+  if (previousValue == v0) {
     return;
   }
   if (uniformType != 0x1404) {
     if (uniformType - 0x8b5dU < 8) {
-      *(int *)(iVar8 + locationValueOffset) = v0;
+      *(int *)(uniformValueBase + locationValueOffset) = v0;
       uVar11 = 6;
-      ((double (*)())_setImageUnit)(glContext,currentProgram,v0,iVar5,uniformStageUse,uniformType,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+      ((double (*)())_setImageUnit)(glContext,currentProgram,v0,previousValue,uniformStageUse,uniformType,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
                     incomingFpr6,incomingFpr7,incomingFpr8);
       goto LAB_0008af2c;
     }
     if (v0 != 0) {
-      *(undefined4 *)(iVar8 + locationValueOffset) = 1;
+      *(undefined4 *)(uniformValueBase + locationValueOffset) = 1;
       goto LAB_0008af2c;
     }
   }
-  *(int *)(iVar8 + locationValueOffset) = v0;
+  *(int *)(uniformValueBase + locationValueOffset) = v0;
 LAB_0008af2c:
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
   stage0Record = *(int *)(currentProgram + 0x20);
@@ -3844,26 +3844,26 @@ int _glUniform3fvARB_Comp(glContext, location, count, value)
   undefined4 *value;
 {
   int loopIndex;
-  undefined4 *puVar2;
+  undefined4 *listRecordThenDstCursor;
   
-  puVar2 = (undefined4 *)
+  listRecordThenDstCursor = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform3fvARB_ListExec_001102ec,count * 0xc + 8);
-  if (puVar2 != (undefined4 *)0x0) {
-    puVar2[1] = count;
+  if (listRecordThenDstCursor != (undefined4 *)0x0) {
+    listRecordThenDstCursor[1] = count;
     loopIndex = 0;
-    *puVar2 = location;
-    puVar2 = puVar2 + 2;
+    *listRecordThenDstCursor = location;
+    listRecordThenDstCursor = listRecordThenDstCursor + 2;
     while( true ) {
-      *puVar2 = *value;
-      puVar2[1] = value[1];
-      puVar2[2] = value[2];
+      *listRecordThenDstCursor = *value;
+      listRecordThenDstCursor[1] = value[1];
+      listRecordThenDstCursor[2] = value[2];
       if (loopIndex == count + -1) break;
-      puVar2 = puVar2 + 3;
+      listRecordThenDstCursor = listRecordThenDstCursor + 3;
       value = value + 3;
       loopIndex = loopIndex + 1;
     }
   }
-  return puVar2;
+  return listRecordThenDstCursor;
 }
 
 /* _glUniform2fvARB_Comp @ 0x8c124 (144 bytes) */
@@ -4097,20 +4097,20 @@ int _glUniform1ivARB_Comp(glContext, location, count, value)
   undefined4 *value;
 {
   int loopIndex;
-  undefined4 *puVar2;
+  undefined4 *listRecordThenDstCursor;
   
-  puVar2 = (undefined4 *)
+  listRecordThenDstCursor = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform1ivARB_ListExec_001102c4,count * 4 + 8);
-  if (puVar2 != (undefined4 *)0x0) {
-    puVar2[1] = count;
-    *puVar2 = location;
-    puVar2 = puVar2 + 2;
-    for (loopIndex = 0; *puVar2 = *value, loopIndex != count + -1; loopIndex = loopIndex + 1) {
-      puVar2 = puVar2 + 1;
+  if (listRecordThenDstCursor != (undefined4 *)0x0) {
+    listRecordThenDstCursor[1] = count;
+    *listRecordThenDstCursor = location;
+    listRecordThenDstCursor = listRecordThenDstCursor + 2;
+    for (loopIndex = 0; *listRecordThenDstCursor = *value, loopIndex != count + -1; loopIndex = loopIndex + 1) {
+      listRecordThenDstCursor = listRecordThenDstCursor + 1;
       value = value + 1;
     }
   }
-  return puVar2;
+  return listRecordThenDstCursor;
 }
 
 /* _glUniform4fARB_CompExec @ 0x8c60c (104 bytes) */

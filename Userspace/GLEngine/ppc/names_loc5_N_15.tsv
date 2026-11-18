@@ -1,0 +1,68 @@
+local	_gleSetEnable_ALPHA_TEST	param_1	glContext	CONFIRMED	first argument of every GLEngine enable handler; context state at +0x30c6 and +0x310 is written through it
+local	_gleSetEnable_ALPHA_TEST	param_3	enable	CONFIRMED	the enable flag stored as a byte at ctx+0x30c6 (the third argument of every _gleSetEnable_* handler, see _gleSetEnable_COLOR_SUM)
+local	_gleSetEnable_DITHER	param_1	glContext	CONFIRMED	first argument of every GLEngine enable handler; context state at +0x313c and +0x310 is written through it
+local	_gleSetEnable_DITHER	param_3	enable	CONFIRMED	the enable flag stored as a byte at ctx+0x313c (the third argument of every _gleSetEnable_* handler, see _gleSetEnable_COLOR_SUM)
+local	_gleSetEnable_NORMALIZE	param_3	enable	CONFIRMED	the enable flag stored as a byte at ctx+0x280d (the third argument of every _gleSetEnable_* handler, see _gleSetEnable_COLOR_SUM)
+local	_gleSetEnable_SCISSOR_TEST	param_3	enable	CONFIRMED	the enable flag stored as a byte at ctx+0x34f0 (the third argument of every _gleSetEnable_* handler, see _gleSetEnable_COLOR_SUM)
+local	_gleSelectLines	param_2	vertexCursor	CONFIRMED	first vertex record (0x100 bytes each) of the line vertices, advanced two vertices per segment; the z at +8 of each is passed to _gleSelectHitRecord
+local	_gleSelectLines	param_3	vertexCount	CONFIRMED	number of vertex records: the end is param_2 + count*0x100
+local	_gleSelectLines	iVar1	vertexEnd	CONFIRMED	param_2 + count*0x100: address one past the last vertex record
+local	_gleSelectPolygon	param_2	vertexCursor	CONFIRMED	first vertex record (0x100 bytes each), advanced one vertex per iteration; the z at +8 of each is passed to _gleSelectHitRecord
+local	_gleSelectPolygon	param_3	vertexCount	CONFIRMED	number of vertex records: the end is param_2 + count*0x100
+local	_gleSelectPolygon	uVar1	vertexEnd	CONFIRMED	param_2 + count*0x100: address one past the last vertex record
+local	_gleSelectHit	param_2	vertex	CONFIRMED	vertex record whose z (+8) is passed to _gleSelectHitRecord
+local	_gleFeedbackPointsPtr	param_2	vertexPtrCursor	CONFIRMED	array of vertex record pointers, advanced one pointer per iteration; each is passed to _gleFeedbackHitRecord after a point token
+local	_gleFeedbackPointsPtr	param_3	vertexCount	CONFIRMED	number of vertex pointers in the array
+local	_gleFeedbackPointsPtr	puVar1	vertexPtrEnd	CONFIRMED	param_2 + count: the end of the pointer array
+local	_gleFeedbackCopyPixels	param_2	vertex	CONFIRMED	raster position vertex record (ctx+0x4854 - 0x200) passed to _gleFeedbackHitRecord after the copy-pixel token
+local	_gleFeedbackLines_body	param_2	vertexCursor	CONFIRMED	first vertex record (0x100 bytes each) of the line vertices, advanced two vertices per segment; each pair follows a line token
+local	_gleFeedbackLines_body	param_3	vertexEnd	CONFIRMED	address one past the last vertex record (compared directly with the vertex cursor)
+local	_gleDrawPixelsFastPickTextureType	param_1	type	INFERRED	packed pixel type enum (0x8032, 0x8034, 0x8362, 0x8366) mapped to the texture type 0x8366 or 0x8367
+local	_gleDrawPixelsFastPickTextureType	uVar1	comparisonType	CONFIRMED	the second accepted packed type (0x8032 below 0x8035, else 0x8366) that param_1 is compared with
+local	_gleOptimizedListFreeFunc	param_2	optimizedList	INFERRED	record whose first word points at the block being freed
+local	_gleOptimizedListFreeFunc	puVar1	listBlock	CONFIRMED	block at *optimizedList: flag word at +0 (bit 0 = a vertex array object was created, id at +4) and the byte size at +0xc passed to _vm_deallocate
+local	_gleFreeFenceObject	param_2	fenceObject	CONFIRMED	fence object whose plugin fence (+0x10) is destroyed before the object is freed
+local	_gleSetCurrentVertexObject	param_2	vertexObject	CONFIRMED	vertex array object that becomes current (stored to ctx+0x4a60)
+local	_gleSetCurrentVertexObject	uVar1	rendererHandle	CONFIRMED	per-renderer handle at vertexObject+0x10+4*i copied into the record of renderer i (+0x8874)
+local	_gleShrinkFuncCache	param_1	funcCache	INFERRED	function cache whose element at +4 is deleted by _gleDeleteFuncCacheElem
+local	_gleShrinkFuncCache	param_2	deleteCount	CONFIRMED	number of elements deleted: counted down to zero by the loop
+local	_gleAddHashNameAndObject	param_3	hashObject	CONFIRMED	object whose name (+4) is added to the table by _gleAddHashName and which is then added by _gleAddHashObject
+local	_LFSParserShutdown	param_1	parser	CONFIRMED	parser forwarded to _LFSParserAttachString(parser, 0, 0), which detaches the source text
+local	_LFSParserShutdown	uVar1	attachResult	CONFIRMED	result of _LFSParserAttachString, returned
+local	_LFSParserFree	param_1	parser	CONFIRMED	parser shut down by _LFSParserShutdown and then freed
+local	_LFSParserAttachStream	param_1	parser	CONFIRMED	parser whose stream field (+0x14) is replaced
+local	_LFSParserAttachStream	param_2	stream	CONFIRMED	new stream stored at parser+0x14 after the old one is released with _LFSStreamFree
+local	_LFSStreamChunkListOutputDebugInfo	param_1	chunkList	CONFIRMED	chunk list whose first word (*chunkList) is the head chunk; chunks are linked through +0x4c
+local	_LFSStreamChunkListOutputDebugInfo	iVar1	chunk	CONFIRMED	chunk walked from the head along the +0x4c links and passed to _LFSStreamChunkOutputDebugInfo
+local	_LFSStreamAddOutputPassOperation	param_1	stream	CONFIRMED	stream whose chunk list (+0x10) receives the new chunk
+local	_LFSStreamAddOutputPassOperation	param_2	operation	CONFIRMED	0x44 bytes copied into the new chunk at +4
+local	_LFSStreamAddOutputPassOperation	puVar1	chunk	CONFIRMED	chunk from _LFSStreamChunkCreate: kind byte 2 at +0, the operation at +4, added with _LFSStreamChunkListAddChunk
+local	_gliSwitchPlugin	param_2	rendererIndex	CONFIRMED	renderer to switch to: stored as the current renderer byte at ctx+0x85a8 and scaled by the 0x2e0 renderer record stride
+local	_gliSwitchPlugin	iVar4	rendererRecord	CONFIRMED	record of the renderer rendererIndex (param_2*0x2e0 + ctx): handle at +0x85ac, renderer info at +0x85b0
+local	_gliSwitchPlugin	uVar3	rendererHandle	CONFIRMED	handle at rendererRecord+0x85ac stored to ctx+0x4688
+local	_gliSwitchPlugin	uVar1	slotEmptyMask	INFERRED	all ones when the function slot at +0xc of the table at ctx+0x4684 is 0, else 0: selects which of ctx+0x4680 / ctx+0x4684 receives the _glArrayElement_Exec entry
+local	_gliSwitchPlugin	fparam_1_00	incomingFpr1	CONFIRMED	stale FPR value (never written in this function) read as an argument of the forwarded call: the established incomingFprN convention
+local	_gliAttachDrawable	param_2	forwardedArg2	CONFIRMED	only passed unchanged to _gliAttachDrawableWithOptions
+local	_gliAttachDrawable	param_3	forwardedArg3	CONFIRMED	only passed unchanged to _gliAttachDrawableWithOptions
+local	_gliAttachDrawable	param_4	forwardedArg4	CONFIRMED	only passed unchanged to _gliAttachDrawableWithOptions
+local	_gliInitializeLibrary	param_1	initArg1	CONFIRMED	stored to the global gliInitLibraryArg1
+local	_gliInitializeLibrary	param_2	initArg2	CONFIRMED	stored to the global gliInitLibraryArg2
+local	_gliInitializeLibrary	param_3	ioData	CONFIRMED	stored to the global _gle_io_data
+local	_gliInitializeLibrary	param_4	initArg4	CONFIRMED	stored to the global gliInitLibraryArg4
+local	_gliInitializeLibrary	param_5	initArg5	CONFIRMED	stored to the global gliInitLibraryArg5
+local	_gliGetVersion	param_3	outValue3	INFERRED	third out parameter written *param_3 = 0x20000 together with the major (2) and minor (3) versions; its meaning is not established (position name only)
+local	_gliGetVersion	iVar2	sysctlStatusThenPluginResult	INFERRED	0 or the _sysctl result forwarded to _glePreInitGlobals, then reassigned the _glepGetPlugins result that decides success
+local	_gleLightMaterialRGBAChange_F_A	param_2	rgba	CONFIRMED	pointer to the 4 floats (r,g,b,a) of the new material colour, copied as two 8-byte halves into the pushed material record
+local	_gleLightMaterialRGBAChange_F_A	puVar2	material	CONFIRMED	material record returned by _glePushMaterial: the colour is stored into it and the change flags at +0x234 are updated
+local	_gleLightMaterialRGBAChange_F_A	uVar5	rgbaBlueAlpha	CONFIRMED	second 8-byte half of the colour (rgba[1], blue and alpha) read before the flags store and written into the material record
+local	_gleLightMaterialRGBAChange_B_A	param_2	rgba	CONFIRMED	pointer to the 4 floats (r,g,b,a) of the new material colour, copied as two 8-byte halves into the pushed material record
+local	_gleLightMaterialRGBAChange_B_A	puVar2	material	CONFIRMED	material record returned by _glePushMaterial: the colour is stored into it and the change flags at +0x234 are updated
+local	_gleLightMaterialRGBAChange_B_A	uVar5	rgbaBlueAlpha	CONFIRMED	second 8-byte half of the colour (rgba[1], blue and alpha) read before the flags store and written into the material record
+local	_gleLightMaterialRGBAChange_F_D	param_2	rgba	CONFIRMED	pointer to the 4 floats (r,g,b,a) of the new material colour, copied as two 8-byte halves into the pushed material record
+local	_gleLightMaterialRGBAChange_F_D	uVar4	rgbaBlueAlpha	CONFIRMED	second 8-byte half of the colour (rgba[1], blue and alpha) read before the flags store and written into the material record
+local	_gleLightMaterialRGBAChange_B_D	param_2	rgba	CONFIRMED	pointer to the 4 floats (r,g,b,a) of the new material colour, copied as two 8-byte halves into the pushed material record
+local	_gleLightMaterialRGBAChange_B_D	uVar4	rgbaBlueAlpha	CONFIRMED	second 8-byte half of the colour (rgba[1], blue and alpha) read before the flags store and written into the material record
+local	_gleLightMaterialRGBAChange_F_S	param_2	rgba	CONFIRMED	pointer to the 4 floats (r,g,b,a) of the new material colour, copied as two 8-byte halves into the pushed material record
+local	_gleLightMaterialRGBAChange_F_S	uVar4	rgbaBlueAlpha	CONFIRMED	second 8-byte half of the colour (rgba[1], blue and alpha) read before the flags store and written into the material record
+local	_gleLightMaterialShineChange_FB	fparam_1	shininess	CONFIRMED	incoming f1: the new shininess stored at material+0x40 for each face
+local	_gleLightMaterialRGBAChange_B_AD	uVar6	rgbaBlueAlpha	CONFIRMED	second 8-byte half of the colour (rgba[1], blue and alpha) read before the flags store and written into the material record

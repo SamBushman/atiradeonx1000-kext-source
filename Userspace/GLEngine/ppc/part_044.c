@@ -164,13 +164,13 @@ int _LFSStreamChunkListCompare(param_1, param_2)
 }
 
 /* _LFSStreamChunkListOutputDebugInfo @ 0xd1b90 (68 bytes) */
-void _LFSStreamChunkListOutputDebugInfo(param_1)
-  int *param_1;
+void _LFSStreamChunkListOutputDebugInfo(chunkList)
+  int *chunkList;
 {
-  int iVar1;
+  int chunk;
   
-  for (iVar1 = *param_1; iVar1 != 0; iVar1 = *(int *)(iVar1 + 0x4c)) {
-    _LFSStreamChunkOutputDebugInfo(iVar1);
+  for (chunk = *chunkList; chunk != 0; chunk = *(int *)(chunk + 0x4c)) {
+    _LFSStreamChunkOutputDebugInfo(chunk);
   }
   return;
 }
@@ -298,16 +298,16 @@ void _LFSStreamAddOutputPassRegisterInit(param_1, param_2)
 }
 
 /* _LFSStreamAddOutputPassOperation @ 0xd1e24 (84 bytes) */
-void _LFSStreamAddOutputPassOperation(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+void _LFSStreamAddOutputPassOperation(stream, operation)
+  int stream;
+  undefined4 operation;
 {
-  undefined1 *puVar1;
+  undefined1 *chunk;
   
-  puVar1 = (undefined1 *)_LFSStreamChunkCreate();
-  *puVar1 = 2;
-  _memcpy(puVar1 + 4,param_2,0x44);
-  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0x10),puVar1);
+  chunk = (undefined1 *)_LFSStreamChunkCreate();
+  *chunk = 2;
+  _memcpy(chunk + 4,operation,0x44);
+  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(stream + 0x10),chunk);
   return;
 }
 

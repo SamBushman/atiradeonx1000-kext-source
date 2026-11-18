@@ -1073,15 +1073,15 @@ int _gleLookupHashObject(param_1, param_2)
 }
 
 /* _gleAddHashNameAndObject @ 0x17c54 (76 bytes) */
-int _gleAddHashNameAndObject(glContext, forwardedArg2, param_3)
+int _gleAddHashNameAndObject(glContext, forwardedArg2, hashObject)
   undefined4 glContext;
   undefined4 forwardedArg2;
-  int param_3;
+  int hashObject;
 {
   undefined4 uVar1;
   
-  uVar1 = ((int (*)())_gleAddHashName)(forwardedArg2,*(undefined4 *)(param_3 + 4));
-  ((void (*)())_gleAddHashObject)(forwardedArg2,param_3);
+  uVar1 = ((int (*)())_gleAddHashName)(forwardedArg2,*(undefined4 *)(hashObject + 4));
+  ((void (*)())_gleAddHashObject)(forwardedArg2,hashObject);
   return uVar1;
 }
 
@@ -2451,7 +2451,7 @@ int _gleRowBytes(format, type, param_3)
 }
 
 /* _gleTextureImagePut @ 0x19a28 (300 bytes) */
-int _gleTextureImagePut(glContext, textureLevel, xoffset, yoffset, zoffset, width, height, depth, format, type, param_11, param_12, pixels)
+int _gleTextureImagePut(glContext, textureLevel, xoffset, yoffset, zoffset, width, height, depth, format, type, param_11, unpackState, pixels)
   int glContext;
   int textureLevel;
   undefined4 xoffset;
@@ -2463,7 +2463,7 @@ int _gleTextureImagePut(glContext, textureLevel, xoffset, yoffset, zoffset, widt
   int format;
   int type;
   uint param_11;
-  int param_12;
+  int unpackState;
   undefined4 pixels;
 {
   int iVar1;
@@ -2474,9 +2474,9 @@ int _gleTextureImagePut(glContext, textureLevel, xoffset, yoffset, zoffset, widt
         if (((*(uint *)(glContext + 0x3410) & 0x1ff) != 0) ||
            ((*(uint *)(glContext + 0x3414) & 0xff0000) != 0)) goto LAB_00019af8;
       }
-      if (((param_12 == 0) || (*(char *)(param_12 + 0x18) == '\0')) &&
+      if (((unpackState == 0) || (*(char *)(unpackState + 0x18) == '\0')) &&
          ((depth == 1 && (zoffset == 0)))) {
-        iVar1 = ((int (*)())_gleTextureImagePut_Fast)(glContext,textureLevel,xoffset,yoffset,width,height,format,type,param_12
+        iVar1 = ((int (*)())_gleTextureImagePut_Fast)(glContext,textureLevel,xoffset,yoffset,width,height,format,type,unpackState
                            ,pixels);
         if (iVar1 != 0) {
           return;
@@ -2487,7 +2487,7 @@ int _gleTextureImagePut(glContext, textureLevel, xoffset, yoffset, zoffset, widt
 LAB_00019af8:
   _gleTextureImagePut_Slow
             (glContext,textureLevel,xoffset,yoffset,zoffset,width,height,depth,format,type,
-             param_11 & 0xff,param_12,pixels);
+             param_11 & 0xff,unpackState,pixels);
   return;
 }
 

@@ -4581,12 +4581,12 @@ int _gleAddListItemWithFree(glContext, forwardedArg2, forwardedArg3, param_4, pa
 }
 
 /* _CloseCurrentVAR @ 0x43d34 (228 bytes) */
-void _CloseCurrentVAR(glContext, blockTableOffset, param_3, param_4, param_5)
+void _CloseCurrentVAR(glContext, blockTableOffset, varWriteCursor, varBlockBasePtr, varBytesRemainingPtr)
   int glContext;
   int blockTableOffset;
-  int param_3;
-  int *param_4;
-  undefined4 *param_5;
+  int varWriteCursor;
+  int *varBlockBasePtr;
+  undefined4 *varBytesRemainingPtr;
 {
   uint size;
   undefined4 *listRecord;
@@ -4600,8 +4600,8 @@ void _CloseCurrentVAR(glContext, blockTableOffset, param_3, param_4, param_5)
   glContextPtr53e8 = *(int *)(glContext + 0x53e8);
   source_address = *(vm_address_t *)(glContextPtr53e8 + blockTableOffset);
   size_00 = *(uint *)(source_address + 0xc);
-  size = (param_3 - *param_4) + 0xfffU & 0xfffff000;
-  *(int *)(source_address + 8) = (param_3 - *param_4) + -0x40;
+  size = (varWriteCursor - *varBlockBasePtr) + 0xfffU & 0xfffff000;
+  *(int *)(source_address + 8) = (varWriteCursor - *varBlockBasePtr) + -0x40;
   if (size < size_00) {
     target_task = *(vm_map_t *)PTR_00112034;
     *(uint *)(*(int *)(glContextPtr53e8 + blockTableOffset) + 0xc) = size;
@@ -4614,8 +4614,8 @@ void _CloseCurrentVAR(glContext, blockTableOffset, param_3, param_4, param_5)
   listRecord = (undefined4 *)
            _gleAddListItem(glContext,PTR__gleEndDrawArraysOrElementsOutOfLine_ListExec_00112148,4);
   *listRecord = blockAddress;
-  *param_4 = 0;
-  *param_5 = 0;
+  *varBlockBasePtr = 0;
+  *varBytesRemainingPtr = 0;
   return;
 }
 
@@ -5221,28 +5221,28 @@ void _gleFlushPluginVertexArray(glContext, param_2, forwardedArg3, forwardedArg4
 }
 
 /* _gleSetCurrentVertexObject @ 0x44a38 (152 bytes) */
-int _gleSetCurrentVertexObject(glContext, param_2)
+int _gleSetCurrentVertexObject(glContext, vertexObject)
   int glContext;
-  int param_2;
+  int vertexObject;
 {
-  undefined4 uVar1;
+  undefined4 rendererHandle;
   undefined4 *srcCursor;
   undefined4 *dstCursor;
   int loopIndex;
   
-  if (param_2 != *(int *)(glContext + 0x4a60)) {
+  if (vertexObject != *(int *)(glContext + 0x4a60)) {
     _gleUpdateDrawArraysFuncs(glContext);
   }
   loopIndex = 0;
-  *(int *)(glContext + 0x4a60) = param_2;
+  *(int *)(glContext + 0x4a60) = vertexObject;
   if (*(char *)(glContext + 0x85a4) != '\0') {
-    srcCursor = (undefined4 *)(param_2 + 0x10);
+    srcCursor = (undefined4 *)(vertexObject + 0x10);
     dstCursor = (undefined4 *)(glContext + 0x8874);
     do {
-      uVar1 = *srcCursor;
+      rendererHandle = *srcCursor;
       loopIndex = loopIndex + 1;
       srcCursor = srcCursor + 1;
-      *dstCursor = uVar1;
+      *dstCursor = rendererHandle;
       dstCursor = dstCursor + 0xb8;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }

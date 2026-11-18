@@ -1,0 +1,20 @@
+local	_glColor3us_Exec	fVar1	redComponent	CONFIRMED	(unsigned short red converted to float) * channelScale, stored to ctx+0x2a0 (current red)
+local	_glColor3us_Exec	fVar2	blueComponent	CONFIRMED	(unsigned short blue converted to float) * channelScale, stored to ctx+0x2a8 (current blue)
+local	_glColor3us_Exec	fparam_1	forwardedFloatArg1ThenCalleeResult	CONFIRMED	incoming f1 (first FPR argument, unused by this function) returned unchanged, or overwritten by the result of the ctx+0x4de0 callback
+local	_glBlendColor_Exec	dVar3	zeroAsDouble	CONFIRMED	(double) FLOAT_00108e50 (0.0): lower clamp bound the red/green/blue/alpha arguments are compared with
+local	_glBlendColor_Exec	dVar4	oneAsDouble	CONFIRMED	(double) FLOAT_00108e54 (1.0): upper clamp bound the red/green/blue/alpha arguments are compared with
+local	_glSeparableFilter2D_Exec	iVar6	elementSize	CONFIRMED	int of _gleBytesPerElement(type), or _glePixelBytes(format,type) when that is 0; the row and column unpack offsets must be multiples of it
+local	_glSeparableFilter2D_Exec	iVar7	unpackBufferSize	CONFIRMED	pixelUnpackBuffer+0x38 (buffer size) compared with both image end offsets
+local	_glHistogram_Exec	uVar1	glErrorCode	CONFIRMED	error constant (0x500, 0x501, 0x502, 0x8031) stored to ctx+0x7574
+local	_glHistogram_Exec	iVar2	internalFormatCheck	CONFIRMED	result of _CheckInternalFormat(internalformat); 0 raises GL_INVALID_ENUM
+local	_glRenderbufferStorageEXT_Exec	iVar3	sharedStateMutex	CONFIRMED	shared state (ctx+0x5148) + 0x8028: the mutex held around _gleRenderbufferStorage
+local	_glStencilFunc_Exec	uVar2	maxStencilRef	CONFIRMED	0xffffffff >> (32 - stencil bits at rendererInfo+0x40): the largest reference value, which ref is clamped to
+local	_glStencilFunc_Exec	iVar3	stencilStateRecord	CONFIRMED	glContext + (byte at ctx+0x7583)*0x10: the record receiving mask (+0x34f8), ref (+0x34fc) and func (+0x3500)
+local	_glUniform3iARB_Exec	iVar5	uniformValueBase	CONFIRMED	program (ctx+0x5430) +0x4c: base of the uniform value records (0x10 bytes per location)
+local	_glUniform3iARB_Exec	iVar9	uniformValueAddress	CONFIRMED	uniformValueBase + location*0x10: the value record of the uniform being set (components at +0, +4, +8)
+local	_glFramebufferTexture3DEXT_Exec	uVar1	maxTexture3DSizeThenAttachmentIndex	CONFIRMED	rendererInfo+0xbe (GL_MAX_3D_TEXTURE_SIZE) bounding level and zoffset, then reassigned the attachment slot index (4 for depth 0x8d00, 5 for stencil 0x8d20, attachment - 0x8ce0 for colour) passed to _gleFramebufferTexture
+local	_glFramebufferTexture3DEXT_Exec	uVar3	hasTextureObject	INFERRED	0 for texture name 0, 1 when a texture object was found: forwarded to _gleFramebufferTexture beside textureObject
+local	_glUniform3fvARB_Comp	puVar2	listRecordThenDstCursor	CONFIRMED	list record from _gleAddListItem, then advanced by 2 words to the destination of the copied vec3 values
+local	_glUnmapBuffer_Exec	iVar2	boundBuffer	CONFIRMED	buffer object bound for target (client state +0x35c/+0x358, ctx+0x4a68, ctx+0x4a6c); tested for the mapped flag at +0x44
+local	_glUniform1iARB_Exec	iVar5	previousValue	CONFIRMED	uniform value read from the value record before it is overwritten; equal to v0 returns early, otherwise passed to _setImageUnit as the old unit
+local	_glUniform1iARB_Exec	iVar8	uniformValueBase	CONFIRMED	program (currentProgram) +0x4c: base of the uniform value records (0x10 bytes per location)

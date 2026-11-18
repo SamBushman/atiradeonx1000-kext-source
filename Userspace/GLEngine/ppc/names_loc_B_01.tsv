@@ -1464,7 +1464,7 @@ local	_glPrioritizeTextures_CompExec	param_1	glContext	CONFIRMED	implicit GL con
 local	_glPrioritizeTextures_CompExec	param_2	n	CONFIRMED	glPrioritizeTextures prototype parameter 1 of 3 (GLsizei n) in Tiger gl.h/glext.h; arity and PPC32 argument slots match
 local	_glPrioritizeTextures_CompExec	param_3	textures	CONFIRMED	glPrioritizeTextures prototype parameter 2 of 3 (GLuint * textures) in Tiger gl.h/glext.h; arity and PPC32 argument slots match
 local	_glPrioritizeTextures_CompExec	param_4	priorities	CONFIRMED	glPrioritizeTextures prototype parameter 3 of 3 (GLclampf * priorities) in Tiger gl.h/glext.h; arity and PPC32 argument slots match
-local	_glCompressedTexImage3D_Comp	param_1	glContext	CONFIRMED	implicit GL context argument: GL prototype glCompressedTexImage3D(...) has no context parameter and the GLEngine entry points take the context first (the Comp/CompExec/Exec set forwards it unchanged)
+local	_glCompressedTexImage3D_Comp	param_1	glContextThenListRecord	CONFIRMED	implicit GL context argument: GL calls reach the context through it; the same variable is overwritten by the list record from _gleAddListItem once the context is no longer needed and is then filled and returned
 local	_glCompressedTexImage3D_Comp	param_2	target	CONFIRMED	glCompressedTexImage3D prototype parameter 1 of 9 (GLenum target) in Tiger gl.h/glext.h; arity and PPC32 argument slots match
 local	_glCompressedTexImage3D_Comp	param_3	level	CONFIRMED	glCompressedTexImage3D prototype parameter 2 of 9 (GLint level) in Tiger gl.h/glext.h; arity and PPC32 argument slots match
 local	_glCompressedTexImage3D_Comp	param_4	internalformat	CONFIRMED	glCompressedTexImage3D prototype parameter 3 of 9 (GLenum internalformat) in Tiger gl.h/glext.h; arity and PPC32 argument slots match

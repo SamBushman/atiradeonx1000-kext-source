@@ -8742,16 +8742,16 @@ double _glEnable_Exec(glContext, cap)
 }
 
 /* _gleSetEnable_ALPHA_TEST @ 0x16464 (32 bytes) */
-void _gleSetEnable_ALPHA_TEST(param_1, unusedArg2, param_3)
-  int param_1;
+void _gleSetEnable_ALPHA_TEST(glContext, unusedArg2, enable)
+  int glContext;
   undefined4 unusedArg2;
-  uint param_3;
+  uint enable;
 {
-  if (*(byte *)(param_1 + 0x30c6) == param_3) {
+  if (*(byte *)(glContext + 0x30c6) == enable) {
     return;
   }
-  *(char *)(param_1 + 0x30c6) = (char)param_3;
-  *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 1;
+  *(char *)(glContext + 0x30c6) = (char)enable;
+  *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 1;
   return;
 }
 

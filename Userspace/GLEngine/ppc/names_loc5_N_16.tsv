@@ -1,0 +1,26 @@
+local	_gleTextureImagePut	param_12	unpackState	INFERRED	callers pass 0 or glContext+0x31cc (the pixel unpack state also given to _gleOffsetLimitImage); a byte at +0x18 of it is tested and it is forwarded to the Fast/Slow variants
+local	_gleCheckCopyTexImage1DArgs	iVar2	rendererInfoThenArgsCheckResult	CONFIRMED	rendererInfo (ctx+0x468c: +0xbc maximum 1D size, +0x124 capability flags), then reassigned the result of _gleCheckCopyTexImageArgs
+local	_gleCheckCopyTexImage1DArgs	uVar4	innerWidth	CONFIRMED	width - 2*border
+local	_gleCheckCopyTexSubImage1DArgs	bVar1	levelInRange	CONFIRMED	true unless level > 0xe, in which case GL_INVALID_VALUE is set and the function returns 0
+local	_gleCheckCopyTexSubImage1DArgs	iVar3	levelSlotThenRangeResult	CONFIRMED	texture+level*0x18 (level slot), then reassigned the result of _gleCheckTexSubImageRange
+local	_glCompressedTexImage3D_Comp	uVar1	callResult	CONFIRMED	result of _glCompressedTexImage3D_Exec or _memcpy, returned
+local	_glCompressedTexImage3D_Comp	iVar2	pixelUnpackBuffer	CONFIRMED	ctx+0x4a6c (word 0x129b): the bound pixel unpack buffer; its size (+0x38), sync flag (+0x40) and data pointer (+0x30) are used
+local	_glUniform1ivARB_Comp	puVar2	listRecordThenDstCursor	CONFIRMED	list record from _gleAddListItem, then advanced by 2 words to the destination of the copied values
+local	_glEvalMesh1_Exec	dVar6	stepIndexAsFloat	CONFIRMED	(double)(float) of the loop index i, scaled by the step to give the evaluation parameter
+local	_glEvalMesh1_Exec	dVar7	gridSegmentsAsDouble	INFERRED	the segment count at ctx+0x74a8 converted from int to double, compared with the loop index to select the end parameter
+local	_glEvalMesh1_Exec	fparam_1_00	evalParameter	CONFIRMED	u value passed to _gleEvalMap1: u1 for i = 0, u2 for i = n, else i*step + u1
+local	_glEvalMesh1_Exec	uVar5	beginMode	CONFIRMED	0 (GL_POINTS) for GL_POINT or 3 (GL_LINE_STRIP) for GL_LINE, passed to _glBegin_Exec
+local	_getIndexForGLSLSamplerType	param_1	samplerType	CONFIRMED	GLSL sampler uniform type enum (0x8b5d..0x8b64) switched on
+local	_getIndexForGLSLSamplerType	uVar1	textureTypeIndex	INFERRED	index (0..4) of the texture target kind for the sampler type, returned
+local	_gleSetProjectionFuncZ0W1	param_2	forwardedArg2	CONFIRMED	only passed unchanged to the built projection function and to _gleBuildProjectionTransformFunc
+local	_gleSetProjectionFuncZ0W1	param_3	forwardedArg3	CONFIRMED	only passed unchanged to the built projection function and to _gleBuildProjectionTransformFunc
+local	_gleSetProjectionFuncZ0W1	pcVar1	projectionFunc	CONFIRMED	function returned by _gleBuildProjectionTransformFunc, stored at ctx+0x5060 and called immediately
+local	_gleFreeAllAttrib	piVar4	listHeadCursor	CONFIRMED	pointer into an array of list-head pointers (ctx+0x50b8, then ctx+0x5100), each list freed block by block and its head cleared
+local	_gleFreePipelineProgramState	iVar1	newRefCount	CONFIRMED	object+8 reference count after decrement; the object is freed when it reaches 0
+local	_gleFreePipelineProgramState	iVar4	programObject	CONFIRMED	program object srcCursor[-2] of the slot pair being released
+local	_CloseCurrentVAR	param_3	varWriteCursor	CONFIRMED	callers pass varWriteCursor: the current end of the VAR block data
+local	_CloseCurrentVAR	param_4	varBlockBasePtr	CONFIRMED	callers pass &varBlockBase: the start of the block, read for the used size and cleared at the end
+local	_CloseCurrentVAR	param_5	varBytesRemainingPtr	CONFIRMED	callers pass varBytesRemaining: cleared at the end
+local	_gleReclaimContextResources	piVar1	rendererCallbacks	CONFIRMED	renderer record field at ctx+0x10000-0x777c: the table whose entry +0x134 is called with the renderer handle
+local	_gleReclaimContextResources	puVar2	rendererHandlePtr	CONFIRMED	renderer record field at ctx+0x10000-0x7a54: the handle passed to the callback
+local	_gleReclaimContextResources	iVar3	rendererRecordCursor	CONFIRMED	ctx+0x10000 stepped by 0x2e0 per renderer

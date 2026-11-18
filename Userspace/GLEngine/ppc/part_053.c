@@ -212,11 +212,11 @@ void _gleUpdateScissorData(param_1)
 }
 
 /* _gleSelectHit @ 0xf3984 (8 bytes) */
-double _gleSelectHit(glContext, param_2)
+double _gleSelectHit(glContext, vertex)
   undefined4 glContext;
-  int param_2;
+  int vertex;
 {
-  ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 8));
+  ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(vertex + 8));
   return;
 }
 
@@ -319,17 +319,17 @@ void _gleSelectPointsPtr(glContext, param_2, param_3)
 }
 
 /* _gleSelectLines @ 0xf3b8c (100 bytes) */
-void _gleSelectLines(glContext, param_2, param_3)
+void _gleSelectLines(glContext, vertexCursor, vertexCount)
   undefined4 glContext;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
-  int iVar1;
+  int vertexEnd;
   
-  iVar1 = param_2 + param_3 * 0x100;
-  for (; param_2 < iVar1 - 0x100U; param_2 = param_2 + 0x200) {
-    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 8));
-    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 0x108));
+  vertexEnd = vertexCursor + vertexCount * 0x100;
+  for (; vertexCursor < vertexEnd - 0x100U; vertexCursor = vertexCursor + 0x200) {
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(vertexCursor + 8));
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(vertexCursor + 0x108));
   }
   return;
 }
@@ -384,16 +384,16 @@ void _gleSelectLinesPtr(glContext, param_2, param_3)
 }
 
 /* _gleSelectPolygon @ 0xf3d3c (84 bytes) */
-void _gleSelectPolygon(glContext, param_2, param_3)
+void _gleSelectPolygon(glContext, vertexCursor, vertexCount)
   undefined4 glContext;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
-  uint uVar1;
+  uint vertexEnd;
   
-  uVar1 = param_2 + param_3 * 0x100;
-  for (; param_2 < uVar1; param_2 = param_2 + 0x100) {
-    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(param_2 + 8));
+  vertexEnd = vertexCursor + vertexCount * 0x100;
+  for (; vertexCursor < vertexEnd; vertexCursor = vertexCursor + 0x100) {
+    ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(vertexCursor + 8));
   }
   return;
 }
@@ -1075,9 +1075,9 @@ int _gleCheckCopyTexImage1DArgs(glContext, target, level, internalformat, width,
   int border;
 {
   undefined4 errorCode;
-  int iVar2;
+  int rendererInfoThenArgsCheckResult;
   int texture;
-  uint uVar4;
+  uint innerWidth;
   
   texture = _gleLookUpNonProxyTexture1D(glContext,target);
   if (texture == 0) {
@@ -1090,18 +1090,18 @@ int _gleCheckCopyTexImage1DArgs(glContext, target, level, internalformat, width,
   if (((*(uint *)(glContext + 0x3410) & 1) != 0) && (*(short *)(glContext + 13000) == -0x7fea)) {
     width = (width - *(int *)(glContext + 0x32d0)) + 1;
   }
-  uVar4 = width + border * -2;
-  if (-1 < (int)uVar4) {
-    if ((uVar4 & uVar4 - 1) == 0) {
-      iVar2 = *(int *)(glContext + 0x468c);
+  innerWidth = width + border * -2;
+  if (-1 < (int)innerWidth) {
+    if ((innerWidth & innerWidth - 1) == 0) {
+      rendererInfoThenArgsCheckResult = *(int *)(glContext + 0x468c);
     }
     else {
-      iVar2 = *(int *)(glContext + 0x468c);
-      if ((*(uint *)(iVar2 + 0x124) & 0x80000) == 0) goto LAB_000f4c6c;
+      rendererInfoThenArgsCheckResult = *(int *)(glContext + 0x468c);
+      if ((*(uint *)(rendererInfoThenArgsCheckResult + 0x124) & 0x80000) == 0) goto LAB_000f4c6c;
     }
-    if ((int)uVar4 <= (int)(uint)*(ushort *)(iVar2 + 0xbc)) {
-      iVar2 = _gleCheckCopyTexImageArgs(glContext,level,internalformat,border,1,1);
-      if (iVar2 != 0) {
+    if ((int)innerWidth <= (int)(uint)*(ushort *)(rendererInfoThenArgsCheckResult + 0xbc)) {
+      rendererInfoThenArgsCheckResult = _gleCheckCopyTexImageArgs(glContext,level,internalformat,border,1,1);
+      if (rendererInfoThenArgsCheckResult != 0) {
         return texture;
       }
       return 0;
@@ -1409,9 +1409,9 @@ int _gleCheckCopyTexSubImage1DArgs(glContext, target, level, xoffset, width)
   undefined4 xoffset;
   int width;
 {
-  bool bVar1;
+  bool levelInRange;
   undefined4 errorCode;
-  int iVar3;
+  int levelSlotThenRangeResult;
   int texture;
   
   texture = _gleLookUpNonProxyTexture1D(glContext,target);
@@ -1422,24 +1422,24 @@ int _gleCheckCopyTexSubImage1DArgs(glContext, target, level, xoffset, width)
     errorCode = 0x500;
   }
   else {
-    bVar1 = true;
+    levelInRange = true;
     if (0xe < level) {
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x501;
       }
-      bVar1 = false;
+      levelInRange = false;
     }
-    if (!bVar1) {
+    if (!levelInRange) {
       return 0;
     }
-    iVar3 = texture + level * 0x18;
-    if ((*(byte *)(iVar3 + 0xcf) & 0x20) != 0) {
+    levelSlotThenRangeResult = texture + level * 0x18;
+    if ((*(byte *)(levelSlotThenRangeResult + 0xcf) & 0x20) != 0) {
       if (((*(uint *)(glContext + 0x3410) & 1) != 0) && (*(short *)(glContext + 13000) == -0x7fea)) {
         width = (width - *(int *)(glContext + 0x32d0)) + 1;
       }
-      iVar3 = _gleCheckTexSubImageRange
-                        (glContext,iVar3 + 0xc4,xoffset,width,(uint)*(ushort *)(iVar3 + 200));
-      if (iVar3 != 0) {
+      levelSlotThenRangeResult = _gleCheckTexSubImageRange
+                        (glContext,levelSlotThenRangeResult + 0xc4,xoffset,width,(uint)*(ushort *)(levelSlotThenRangeResult + 200));
+      if (levelSlotThenRangeResult != 0) {
         return texture;
       }
       return 0;

@@ -1,30 +1,30 @@
 #include "decls.h"
 
 /* _gliInitializeLibrary @ 0x13c4 (48 bytes) */
-void _gliInitializeLibrary(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+void _gliInitializeLibrary(initArg1, initArg2, ioData, initArg4, initArg5)
+  undefined4 initArg1;
+  undefined4 initArg2;
+  undefined4 ioData;
+  undefined4 initArg4;
+  undefined4 initArg5;
 {
-  gliInitLibraryArg5 = param_5;
-  _gle_io_data = param_3;
-  gliInitLibraryArg1 = param_1;
-  gliInitLibraryArg2 = param_2;
-  gliInitLibraryArg4 = param_4;
+  gliInitLibraryArg5 = initArg5;
+  _gle_io_data = ioData;
+  gliInitLibraryArg1 = initArg1;
+  gliInitLibraryArg2 = initArg2;
+  gliInitLibraryArg4 = initArg4;
   return;
 }
 
 /* _gliGetVersion @ 0x13f4 (448 bytes) */
-int _gliGetVersion(majorVersion, minorVersion, param_3)
+int _gliGetVersion(majorVersion, minorVersion, outValue3)
   undefined4 *majorVersion;
   undefined4 *minorVersion;
-  undefined4 *param_3;
+  undefined4 *outValue3;
 {
   mach_port_t host;
   kern_return_t hostInfoStatus;
-  int iVar2;
+  int sysctlStatusThenPluginResult;
   integer_t hostBasicInfo [3];
   int hostCpuType;
   int hostCpuSubtype;
@@ -37,7 +37,7 @@ int _gliGetVersion(majorVersion, minorVersion, param_3)
   host = _mach_host_self();
   hostInfoStatus = _host_info(host,1,hostBasicInfo,hostInfoCount);
   _mach_port_deallocate(*(ipc_space_t *)PTR_00112034,host);
-  iVar2 = 0;
+  sysctlStatusThenPluginResult = 0;
   if (hostInfoStatus != 0) {
     return 0;
   }
@@ -45,7 +45,7 @@ int _gliGetVersion(majorVersion, minorVersion, param_3)
   sysctlMibAndVectorUnit[0] = 6;
   sysctlResultLength[0] = 4;
   sysctlMibAndVectorUnit[1] = 0xd;
-  iVar2 = _sysctl(sysctlMibAndVectorUnit,2,sysctlMibAndVectorUnit + 2,sysctlResultLength,(void *)0x0,0);
+  sysctlStatusThenPluginResult = _sysctl(sysctlMibAndVectorUnit,2,sysctlMibAndVectorUnit + 2,sysctlResultLength,(void *)0x0,0);
   if (sysctlMibAndVectorUnit[2] != 0) {
     _gle_processor = _gle_processor | 0x30;
   }
@@ -68,21 +68,21 @@ LAB_00001524:
   }
   _gle_processor = _gle_processor | 2;
 LAB_00001554:
-  ((void (*)())_glePreInitGlobals)(iVar2);
+  ((void (*)())_glePreInitGlobals)(sysctlStatusThenPluginResult);
   ((int (*)())_glePreInitTOC)();
   ((void (*)())_glePreInitNormalize)();
   ((void (*)())_glePreInitProjectionTransformFunc)();
   ((void (*)())_glePreInitModelviewTransformFunc)();
   ((void (*)())_glePreInitNormalTransformFunc)();
   ((void (*)())_glePreInitVertexSubmitFunc)();
-  iVar2 = ((int (*)())_glepGetPlugins)();
-  if (iVar2 != 0) {
+  sysctlStatusThenPluginResult = ((int (*)())_glepGetPlugins)();
+  if (sysctlStatusThenPluginResult != 0) {
     *majorVersion = 2;
     *minorVersion = 3;
-    *param_3 = 0x20000;
+    *outValue3 = 0x20000;
     ((void (*)())_gleOptimizeDisplayListCreateHashTable)(0);
   }
-  return iVar2 != 0;
+  return sysctlStatusThenPluginResult != 0;
 }
 
 /* _glepPluginConnectAll @ 0x15b4 (124 bytes) */

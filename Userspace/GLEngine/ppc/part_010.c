@@ -674,12 +674,12 @@ int _glUnmapBuffer_Exec(glContext, target)
   uint target;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int boundBuffer;
   int clientState;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8893) {
-      iVar2 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+      boundBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
     }
     else if (target < 0x8894) {
       if (target != 0x8892) {
@@ -690,23 +690,23 @@ LAB_000594c4:
         glErrorCode = 0x500;
         goto LAB_000594fc;
       }
-      iVar2 = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
+      boundBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
     }
     else if (target == 0x88eb) {
-      iVar2 = *(int *)(glContext + 0x4a68);
+      boundBuffer = *(int *)(glContext + 0x4a68);
     }
     else {
       if (target != 0x88ec) goto LAB_000594c4;
-      iVar2 = *(int *)(glContext + 0x4a6c);
+      boundBuffer = *(int *)(glContext + 0x4a6c);
     }
-    if ((iVar2 != 0) && (*(char *)(iVar2 + 0x44) != '\0')) {
-      *(undefined1 *)(iVar2 + 0x44) = 0;
-      if ((1 < *(int *)(iVar2 + 8)) &&
+    if ((boundBuffer != 0) && (*(char *)(boundBuffer + 0x44) != '\0')) {
+      *(undefined1 *)(boundBuffer + 0x44) = 0;
+      if ((1 < *(int *)(boundBuffer + 8)) &&
          (((**(code **)(glContext + 0x481c))
                      (*(undefined4 *)(glContext + 0x4688),
-                      *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar2 + 0x10),
-                      *(undefined4 *)(iVar2 + 0x30),*(undefined4 *)(iVar2 + 0x38)),
-          *(int *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar2 + 0x48) != 0 &&
+                      *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + boundBuffer + 0x10),
+                      *(undefined4 *)(boundBuffer + 0x30),*(undefined4 *)(boundBuffer + 0x38)),
+          *(int *)((uint)*(byte *)(glContext + 0x85a8) * 4 + boundBuffer + 0x48) != 0 &&
           (target - 0x8892 < 2)))) {
         clientState = *(int *)(glContext + 0x4a60);
         *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);

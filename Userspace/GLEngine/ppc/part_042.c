@@ -935,12 +935,12 @@ void _gleSetEnable_Error(glContext)
 }
 
 /* _gleFeedbackCopyPixels @ 0xcc040 (72 bytes) */
-void _gleFeedbackCopyPixels(glContext, param_2)
+void _gleFeedbackCopyPixels(glContext, vertex)
   undefined4 glContext;
-  undefined4 param_2;
+  undefined4 vertex;
 {
   ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f1c);
-  _gleFeedbackHitRecord(glContext,param_2);
+  _gleFeedbackHitRecord(glContext,vertex);
   return;
 }
 
@@ -981,31 +981,31 @@ void _gleFeedbackPoints(glContext, param_2, param_3)
 }
 
 /* _gleFeedbackPointsPtr @ 0xcc188 (112 bytes) */
-void _gleFeedbackPointsPtr(glContext, param_2, param_3)
+void _gleFeedbackPointsPtr(glContext, vertexPtrCursor, vertexCount)
   undefined4 glContext;
-  undefined4 *param_2;
-  int param_3;
+  undefined4 *vertexPtrCursor;
+  int vertexCount;
 {
-  undefined4 *puVar1;
+  undefined4 *vertexPtrEnd;
   
-  puVar1 = param_2 + param_3;
-  for (; param_2 < puVar1; param_2 = param_2 + 1) {
+  vertexPtrEnd = vertexPtrCursor + vertexCount;
+  for (; vertexPtrCursor < vertexPtrEnd; vertexPtrCursor = vertexPtrCursor + 1) {
     ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-    _gleFeedbackHitRecord(glContext,*param_2);
+    _gleFeedbackHitRecord(glContext,*vertexPtrCursor);
   }
   return;
 }
 
 /* _gleFeedbackLines_body @ 0xcc204 (116 bytes) */
-void _gleFeedbackLines_body(glContext, param_2, param_3)
+void _gleFeedbackLines_body(glContext, vertexCursor, vertexEnd)
   undefined4 glContext;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexEnd;
 {
-  for (; param_2 < param_3 - 0x100U; param_2 = param_2 + 0x200) {
+  for (; vertexCursor < vertexEnd - 0x100U; vertexCursor = vertexCursor + 0x200) {
     ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f2c);
-    _gleFeedbackHitRecord(glContext,param_2);
-    _gleFeedbackHitRecord(glContext,param_2 + 0x100);
+    _gleFeedbackHitRecord(glContext,vertexCursor);
+    _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
   }
   return;
 }

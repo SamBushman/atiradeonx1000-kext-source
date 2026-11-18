@@ -19,21 +19,21 @@ int _gleEndDrawArraysOrElementsOutOfLine_ListExec(glContext)
 }
 
 /* _gleOptimizedListFreeFunc @ 0x459cc (108 bytes) */
-void _gleOptimizedListFreeFunc(glContext, param_2)
+void _gleOptimizedListFreeFunc(glContext, optimizedList)
   undefined4 glContext;
-  undefined4 *param_2;
+  undefined4 *optimizedList;
 {
-  uint *puVar1;
+  uint *listBlock;
   uint *address;
   
-  puVar1 = (uint *)*param_2;
-  address = puVar1;
-  if ((*puVar1 & 1) != 0) {
-    _gleFreeVertexArrayObject(glContext,puVar1[1]);
-    *puVar1 = 0;
-    address = (uint *)*param_2;
+  listBlock = (uint *)*optimizedList;
+  address = listBlock;
+  if ((*listBlock & 1) != 0) {
+    _gleFreeVertexArrayObject(glContext,listBlock[1]);
+    *listBlock = 0;
+    address = (uint *)*optimizedList;
   }
-  _vm_deallocate(*(vm_map_t *)PTR_00112034,(vm_address_t)address,puVar1[3]);
+  _vm_deallocate(*(vm_map_t *)PTR_00112034,(vm_address_t)address,listBlock[3]);
   return;
 }
 
@@ -373,15 +373,15 @@ LAB_00046050:
 }
 
 /* _gleSetEnable_NORMALIZE @ 0x46168 (44 bytes) */
-void _gleSetEnable_NORMALIZE(glContext, unusedArg2, param_3)
+void _gleSetEnable_NORMALIZE(glContext, unusedArg2, enable)
   int glContext;
   undefined4 unusedArg2;
-  uint param_3;
+  uint enable;
 {
-  if (*(byte *)(glContext + 0x280d) == param_3) {
+  if (*(byte *)(glContext + 0x280d) == enable) {
     return;
   }
-  *(char *)(glContext + 0x280d) = (char)param_3;
+  *(char *)(glContext + 0x280d) = (char)enable;
   *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 1;
   *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 0x40000000;
   return;
@@ -3897,21 +3897,21 @@ void _gleLightMaterialRGBAChange_F_E(glContext, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_F_S @ 0x4a9a0 (184 bytes) */
-void _gleLightMaterialRGBAChange_F_S(glContext, param_2)
+void _gleLightMaterialRGBAChange_F_S(glContext, rgba)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *rgba;
 {
   byte dirtyBitIndex;
   int materialThenDirtyWordAddress348;
   int glContextPtr5424;
   int dirtyWordAddress324;
-  undefined8 uVar4;
+  undefined8 rgbaBlueAlpha;
   
   materialThenDirtyWordAddress348 = _glePushMaterial(glContext,0);
-  *(undefined8 *)(materialThenDirtyWordAddress348 + 0x20) = *param_2;
-  uVar4 = param_2[1];
+  *(undefined8 *)(materialThenDirtyWordAddress348 + 0x20) = *rgba;
+  rgbaBlueAlpha = rgba[1];
   *(ushort *)(materialThenDirtyWordAddress348 + 0x234) = *(ushort *)(materialThenDirtyWordAddress348 + 0x234) | 0x1010;
-  *(undefined8 *)(materialThenDirtyWordAddress348 + 0x28) = uVar4;
+  *(undefined8 *)(materialThenDirtyWordAddress348 + 0x28) = rgbaBlueAlpha;
   if (*(int *)(glContext + 0x5434) == 0) {
     dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c2);
   }

@@ -1809,8 +1809,8 @@ void _glBlendColor_Exec(int glContext,float red,float green,float blue,float alp
 {
   float floatZero;
   float floatOne;
-  float dVar3;
-  float dVar4;
+  float zeroAsDouble;
+  float oneAsDouble;
   
   floatOne = FLOAT_00108e54;
   floatZero = FLOAT_00108e50;
@@ -1821,41 +1821,41 @@ void _glBlendColor_Exec(int glContext,float red,float green,float blue,float alp
     *(undefined4 *)(glContext + 0x7574) = 0x502;
     return;
   }
-  dVar3 = (double)FLOAT_00108e50;
-  dVar4 = (double)FLOAT_00108e54;
+  zeroAsDouble = (double)FLOAT_00108e50;
+  oneAsDouble = (double)FLOAT_00108e54;
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 4;
-  if (red < (double)dVar3) {
+  if (red < (double)zeroAsDouble) {
     *(float *)(glContext + 0x30d0) = floatZero;
   }
-  else if ((double)dVar4 < red) {
+  else if ((double)oneAsDouble < red) {
     *(float *)(glContext + 0x30d0) = floatOne;
   }
   else {
     *(float *)(glContext + 0x30d0) = (float)red;
   }
-  if (green < (double)dVar3) {
+  if (green < (double)zeroAsDouble) {
     *(float *)(glContext + 0x30d4) = floatZero;
   }
-  else if ((double)dVar4 < green) {
+  else if ((double)oneAsDouble < green) {
     *(float *)(glContext + 0x30d4) = floatOne;
   }
   else {
     *(float *)(glContext + 0x30d4) = (float)green;
   }
-  if (blue < (double)dVar3) {
+  if (blue < (double)zeroAsDouble) {
     *(float *)(glContext + 0x30d8) = floatZero;
   }
-  else if ((double)dVar4 < blue) {
+  else if ((double)oneAsDouble < blue) {
     *(float *)(glContext + 0x30d8) = floatOne;
   }
   else {
     *(float *)(glContext + 0x30d8) = (float)blue;
   }
-  if (alpha < (double)dVar3) {
+  if (alpha < (double)zeroAsDouble) {
     *(float *)(glContext + 0x30dc) = floatZero;
     return;
   }
-  if ((double)dVar4 < alpha) {
+  if ((double)oneAsDouble < alpha) {
     *(float *)(glContext + 0x30dc) = floatOne;
     return;
   }

@@ -1965,33 +1965,33 @@ int _LFSParserInit(param_1)
 }
 
 /* _LFSParserShutdown @ 0xcf094 (12 bytes) */
-int _LFSParserShutdown(param_1)
-  undefined4 param_1;
+int _LFSParserShutdown(parser)
+  undefined4 parser;
 {
-  undefined4 uVar1;
+  undefined4 attachResult;
   
-  uVar1 = ((int (*)())_LFSParserAttachString)(param_1,0,0);
-  return uVar1;
+  attachResult = ((int (*)())_LFSParserAttachString)(parser,0,0);
+  return attachResult;
 }
 
 /* _LFSParserFree @ 0xcf0a0 (48 bytes) */
-void _LFSParserFree(param_1)
-  undefined4 param_1;
+void _LFSParserFree(parser)
+  undefined4 parser;
 {
-  ((int (*)())_LFSParserShutdown)(param_1);
-  _free(param_1);
+  ((int (*)())_LFSParserShutdown)(parser);
+  _free(parser);
   return;
 }
 
 /* _LFSParserAttachStream @ 0xcf0d0 (64 bytes) */
-void _LFSParserAttachStream(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+void _LFSParserAttachStream(parser, stream)
+  int parser;
+  undefined4 stream;
 {
-  if (*(int *)(param_1 + 0x14) != 0) {
-    _LFSStreamFree(*(int *)(param_1 + 0x14));
+  if (*(int *)(parser + 0x14) != 0) {
+    _LFSStreamFree(*(int *)(parser + 0x14));
   }
-  *(undefined4 *)(param_1 + 0x14) = param_2;
+  *(undefined4 *)(parser + 0x14) = stream;
   return;
 }
 

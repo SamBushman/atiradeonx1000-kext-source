@@ -149,14 +149,14 @@ void _glEvalMesh1_Exec(int glContext,int mode,uint i1,int i2,double forwardedFlo
   float glContextFloat74ac;
   float glContextFloat74b0;
   double intToDoubleMagic;
-  undefined4 uVar5;
-  double dVar6;
-  double fparam_1_00;
-  double dVar7;
+  undefined4 beginMode;
+  double stepIndexAsFloat;
+  double evalParameter;
+  double gridSegmentsAsDouble;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (mode == 0x1b00) {
-      uVar5 = 0;
+      beginMode = 0;
     }
     else {
       if (mode != 0x1b01) {
@@ -166,25 +166,25 @@ void _glEvalMesh1_Exec(int glContext,int mode,uint i1,int i2,double forwardedFlo
         glErrorCode = 0x500;
         goto LAB_00064ea8;
       }
-      uVar5 = 3;
+      beginMode = 3;
     }
-    ((void (*)())_glBegin_Exec)(glContext,uVar5,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
+    ((void (*)())_glBegin_Exec)(glContext,beginMode,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
                   forwardedFloatArg8);
     intToDoubleMagic = DOUBLE_00108d58;
     glContextFloat74b4 = *(float *)(glContext + 0x74b4);
-    dVar7 = (double)CONCAT44(0x43300000,
+    gridSegmentsAsDouble = (double)CONCAT44(0x43300000,
                              *(uint *)(0x74a4 + glContext + 4) ^ 0x80000000) -
             DOUBLE_00108d58;
     glContextFloat74ac = *(float *)(glContext + 0x74ac);
     glContextFloat74b0 = *(float *)(glContext + 0x74b0);
     for (; (int)i1 <= i2; i1 = i1 + 1) {
-      fparam_1_00 = (double)glContextFloat74ac;
+      evalParameter = (double)glContextFloat74ac;
       if ((i1 != 0) &&
-         (dVar6 = (double)(float)((double)CONCAT44(0x43300000,i1 ^ 0x80000000) - intToDoubleMagic),
-         fparam_1_00 = (double)glContextFloat74b0, dVar6 != (double)(float)dVar7)) {
-        fparam_1_00 = (double)(float)(dVar6 * (double)glContextFloat74b4 + (double)glContextFloat74ac);
+         (stepIndexAsFloat = (double)(float)((double)CONCAT44(0x43300000,i1 ^ 0x80000000) - intToDoubleMagic),
+         evalParameter = (double)glContextFloat74b0, stepIndexAsFloat != (double)(float)gridSegmentsAsDouble)) {
+        evalParameter = (double)(float)(stepIndexAsFloat * (double)glContextFloat74b4 + (double)glContextFloat74ac);
       }
-      ((void (*)())_gleEvalMap1)(glContext,fparam_1_00);
+      ((void (*)())_gleEvalMap1)(glContext,evalParameter);
     }
     _glEnd_Exec(glContext);
   }
@@ -1134,7 +1134,7 @@ void _glRenderbufferStorageEXT_Exec(glContext, target, internalformat, width, he
 {
   bool bVar1;
   undefined4 glErrorCode;
-  int iVar3;
+  int sharedStateMutex;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target != 0x8d41) goto LAB_00066334;
@@ -1174,10 +1174,10 @@ LAB_0006634c:
             _gleRenderbufferStorage(glContext,0x8d41,internalformat,width,height);
             return;
           }
-          iVar3 = *(int *)(glContext + 0x5148) + 0x8028;
-          _pthread_mutex_lock(iVar3);
+          sharedStateMutex = *(int *)(glContext + 0x5148) + 0x8028;
+          _pthread_mutex_lock(sharedStateMutex);
           _gleRenderbufferStorage(glContext,0x8d41,internalformat,width,height);
-          _pthread_mutex_unlock(iVar3);
+          _pthread_mutex_unlock(sharedStateMutex);
           return;
         }
       }
@@ -1648,35 +1648,35 @@ void _glFramebufferTexture3DEXT_Exec(glContext, target, attachment, textarget, t
   int zoffset;
 {
   undefined4 glErrorCode;
-  uint uVar1;
+  uint maxTexture3DSizeThenAttachmentIndex;
   int textureObject;
-  undefined4 uVar3;
+  undefined4 hasTextureObject;
   
   textureObject = 0;
-  uVar3 = 0;
+  hasTextureObject = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8d40) {
       if (*(int *)(glContext + 0x744c) == 0) goto LAB_00066ecc;
       if (textarget == 0x806f) {
         if (-1 < (int)level) {
-          uVar1 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xbe);
-          if ((level <= 0x1fU - LZCOUNT(uVar1)) && (zoffset < (int)uVar1)) {
+          maxTexture3DSizeThenAttachmentIndex = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xbe);
+          if ((level <= 0x1fU - LZCOUNT(maxTexture3DSizeThenAttachmentIndex)) && (zoffset < (int)maxTexture3DSizeThenAttachmentIndex)) {
             if (attachment == 0x8d00) {
-              uVar1 = 4;
+              maxTexture3DSizeThenAttachmentIndex = 4;
             }
             else if (attachment == 0x8d20) {
-              uVar1 = 5;
+              maxTexture3DSizeThenAttachmentIndex = 5;
             }
             else {
-              uVar1 = attachment - 0x8ce0;
-              if (*(uint *)(*(int *)(glContext + 0x468c) + 0x18) <= uVar1) goto LAB_00066e60;
+              maxTexture3DSizeThenAttachmentIndex = attachment - 0x8ce0;
+              if (*(uint *)(*(int *)(glContext + 0x468c) + 0x18) <= maxTexture3DSizeThenAttachmentIndex) goto LAB_00066e60;
             }
             if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
               _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
             }
             if (texture == 0) {
 LAB_00066ee8:
-              _gleFramebufferTexture(glContext,uVar1,uVar3,textureObject,0,level,zoffset);
+              _gleFramebufferTexture(glContext,maxTexture3DSizeThenAttachmentIndex,hasTextureObject,textureObject,0,level,zoffset);
               if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
                 return;
               }
@@ -1685,7 +1685,7 @@ LAB_00066ee8:
             }
             textureObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,texture);
             if (textureObject != 0) {
-              uVar3 = 1;
+              hasTextureObject = 1;
               goto LAB_00066ee8;
             }
             if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {

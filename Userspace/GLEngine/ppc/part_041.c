@@ -527,16 +527,16 @@ void _gleSetProjectionFuncW1(glContext, param_2, param_3)
 }
 
 /* _gleSetProjectionFuncZ0W1 @ 0xc5e74 (104 bytes) */
-void _gleSetProjectionFuncZ0W1(glContext, param_2, param_3)
+void _gleSetProjectionFuncZ0W1(glContext, forwardedArg2, forwardedArg3)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 forwardedArg2;
+  undefined4 forwardedArg3;
 {
-  code *pcVar1;
+  code *projectionFunc;
   
-  pcVar1 = (code *)(*_gleBuildProjectionTransformFunc)(glContext,3,param_3);
-  *(code **)(glContext + 0x5060) = pcVar1;
-  (*pcVar1)(glContext,param_2,param_3);
+  projectionFunc = (code *)(*_gleBuildProjectionTransformFunc)(glContext,3,forwardedArg3);
+  *(code **)(glContext + 0x5060) = projectionFunc;
+  (*projectionFunc)(glContext,forwardedArg2,forwardedArg3);
   return;
 }
 
@@ -2462,9 +2462,9 @@ int _gleGetMapData(param_1)
 void _gleReclaimContextResources(glContext)
   int glContext;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  int rendererRecordCursor;
   uint loopIndex;
   
   if (*(int *)(glContext + 0x7484) != 0) {
@@ -2481,15 +2481,15 @@ void _gleReclaimContextResources(glContext)
   if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
     _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
   }
-  iVar3 = glContext + 0x10000;
+  rendererRecordCursor = glContext + 0x10000;
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      piVar1 = (int *)(iVar3 + -0x777c);
+      rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
       loopIndex = loopIndex + 1;
-      puVar2 = (undefined4 *)(iVar3 + -0x7a54);
-      iVar3 = iVar3 + 0x2e0;
-      (**(code **)(*piVar1 + 0x134))(*puVar2);
+      rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+      rendererRecordCursor = rendererRecordCursor + 0x2e0;
+      (**(code **)(*rendererCallbacks + 0x134))(*rendererHandlePtr);
     } while (loopIndex < *(byte *)(glContext + 0x85a4));
   }
   *(undefined4 *)(glContext + 800) = 0xffffffff;
@@ -3009,22 +3009,22 @@ LAB_000c9558:
 }
 
 /* _gleDrawPixelsFastPickTextureType @ 0xc9660 (92 bytes) */
-int _gleDrawPixelsFastPickTextureType(param_1)
-  uint param_1;
+int _gleDrawPixelsFastPickTextureType(type)
+  uint type;
 {
-  uint uVar1;
+  uint comparisonType;
   
-  if (param_1 != 0x8034) {
-    if (param_1 < 0x8035) {
-      uVar1 = 0x8032;
+  if (type != 0x8034) {
+    if (type < 0x8035) {
+      comparisonType = 0x8032;
     }
     else {
-      if (param_1 == 0x8362) {
+      if (type == 0x8362) {
         return 0x8366;
       }
-      uVar1 = 0x8366;
+      comparisonType = 0x8366;
     }
-    if (param_1 != uVar1) {
+    if (type != comparisonType) {
       return 0x8367;
     }
   }

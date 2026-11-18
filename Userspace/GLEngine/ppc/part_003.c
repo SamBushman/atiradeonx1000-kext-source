@@ -1053,10 +1053,10 @@ void _gleDeletePluginTexture(glContext, param_2)
 }
 
 /* _gleSetEnable_SCISSOR_TEST @ 0x20518 (72 bytes) */
-void _gleSetEnable_SCISSOR_TEST(int glContext,undefined4 unusedArg2,uint param_3,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _gleSetEnable_SCISSOR_TEST(int glContext,undefined4 unusedArg2,uint enable,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  if (*(byte *)(glContext + 0x34f0) != param_3) {
-    *(char *)(glContext + 0x34f0) = (char)param_3;
+  if (*(byte *)(glContext + 0x34f0) != enable) {
+    *(char *)(glContext + 0x34f0) = (char)enable;
     ((void (*)())_gleUpdateViewScissorData)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x4000000;
   }
@@ -2449,16 +2449,16 @@ int _gleShareSharedState(param_1)
 }
 
 /* _gleSetEnable_DITHER @ 0x2242c (32 bytes) */
-void _gleSetEnable_DITHER(param_1, unusedArg2, param_3)
-  int param_1;
+void _gleSetEnable_DITHER(glContext, unusedArg2, enable)
+  int glContext;
   undefined4 unusedArg2;
-  uint param_3;
+  uint enable;
 {
-  if (*(byte *)(param_1 + 0x313c) == param_3) {
+  if (*(byte *)(glContext + 0x313c) == enable) {
     return;
   }
-  *(char *)(param_1 + 0x313c) = (char)param_3;
-  *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x400;
+  *(char *)(glContext + 0x313c) = (char)enable;
+  *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x400;
   return;
 }
 

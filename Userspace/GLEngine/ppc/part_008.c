@@ -995,12 +995,12 @@ LAB_0005050c:
 }
 
 /* _gleFreeFenceObject @ 0x50530 (52 bytes) */
-void _gleFreeFenceObject(glContext, param_2)
+void _gleFreeFenceObject(glContext, fenceObject)
   undefined4 glContext;
-  int param_2;
+  int fenceObject;
 {
-  ((void (*)())_gleDestroyPluginFence)(glContext,param_2 + 0x10);
-  _free(param_2);
+  ((void (*)())_gleDestroyPluginFence)(glContext,fenceObject + 0x10);
+  _free(fenceObject);
   return;
 }
 

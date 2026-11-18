@@ -1151,32 +1151,32 @@ void _glShadeModel_CompExec(glContext, mode)
 }
 
 /* _getIndexForGLSLSamplerType @ 0x8651c (108 bytes) */
-int _getIndexForGLSLSamplerType(param_1)
-  undefined4 param_1;
+int _getIndexForGLSLSamplerType(samplerType)
+  undefined4 samplerType;
 {
-  undefined4 uVar1;
+  undefined4 textureTypeIndex;
   
-  uVar1 = 0;
-  switch(param_1) {
+  textureTypeIndex = 0;
+  switch(samplerType) {
   case 0x8b5d:
   case 0x8b61:
-    uVar1 = 4;
+    textureTypeIndex = 4;
     break;
   case 0x8b5e:
   case 0x8b62:
-    uVar1 = 3;
+    textureTypeIndex = 3;
     break;
   case 0x8b5f:
-    uVar1 = 1;
+    textureTypeIndex = 1;
     break;
   case 0x8b60:
-    uVar1 = 0;
+    textureTypeIndex = 0;
     break;
   case 0x8b63:
   case 0x8b64:
-    uVar1 = 2;
+    textureTypeIndex = 2;
   }
-  return uVar1;
+  return textureTypeIndex;
 }
 
 /* _updateShaderState @ 0x865a8 (660 bytes) */

@@ -614,15 +614,15 @@ void _gleFreeAllAttrib(glContext)
   int glContextWord50fc;
   int blockCursor;
   int loopIndex;
-  int *piVar4;
+  int *listHeadCursor;
   
   loopIndex = 0;
   glContextWord50fc = *(int *)(glContext + 0x50fc);
   if (0 < glContextWord50fc) {
-    piVar4 = (int *)(glContext + 0x50b8);
+    listHeadCursor = (int *)(glContext + 0x50b8);
     do {
-      blockCursor = *piVar4;
-      if (*piVar4 != 0) {
+      blockCursor = *listHeadCursor;
+      if (*listHeadCursor != 0) {
         do {
           nextBlock = *(int *)(blockCursor + 0x2c44);
           _free(blockCursor);
@@ -631,17 +631,17 @@ void _gleFreeAllAttrib(glContext)
         glContextWord50fc = *(int *)(glContext + 0x50fc);
       }
       loopIndex = loopIndex + 1;
-      *piVar4 = 0;
-      piVar4 = piVar4 + 1;
+      *listHeadCursor = 0;
+      listHeadCursor = listHeadCursor + 1;
     } while (loopIndex < glContextWord50fc);
   }
   glContextWord5144 = *(int *)(glContext + 0x5144);
   loopIndex2 = 0;
   if (0 < glContextWord5144) {
-    piVar4 = (int *)(glContext + 0x5100);
+    listHeadCursor = (int *)(glContext + 0x5100);
     do {
-      blockCursor = *piVar4;
-      if (*piVar4 != 0) {
+      blockCursor = *listHeadCursor;
+      if (*listHeadCursor != 0) {
         do {
           nextBlock = *(int *)(blockCursor + 700);
           _free(blockCursor);
@@ -650,8 +650,8 @@ void _gleFreeAllAttrib(glContext)
         glContextWord5144 = *(int *)(glContext + 0x5144);
       }
       loopIndex2 = loopIndex2 + 1;
-      *piVar4 = 0;
-      piVar4 = piVar4 + 1;
+      *listHeadCursor = 0;
+      listHeadCursor = listHeadCursor + 1;
     } while (loopIndex2 < glContextWord5144);
   }
   *(int *)(glContext + 0x5140) = glContext + 0x5100;
@@ -930,10 +930,10 @@ void _gleFreeShaderState(glContext)
 void _gleFreePipelineProgramState(glContext)
   int glContext;
 {
-  int iVar1;
+  int newRefCount;
   int remaining;
   undefined4 *srcCursor;
-  int iVar4;
+  int programObject;
   
   if (*(int *)(glContext + 0x5418) != 0) {
     _free(*(int *)(glContext + 0x5418));
@@ -942,16 +942,16 @@ void _gleFreePipelineProgramState(glContext)
   srcCursor = (undefined4 *)(glContext + 0x5428);
   remaining = 1;
   do {
-    iVar4 = srcCursor[-2];
-    if (iVar4 != 0) {
-      if (*(int *)(iVar4 + 4) != 0) {
+    programObject = srcCursor[-2];
+    if (programObject != 0) {
+      if (*(int *)(programObject + 4) != 0) {
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
           _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
         }
-        iVar1 = *(int *)(iVar4 + 8) + -1;
-        *(int *)(iVar4 + 8) = iVar1;
-        if (iVar1 == 0) {
-          ((void (*)())_gleFreePipelineProgramObject)(glContext,iVar4);
+        newRefCount = *(int *)(programObject + 8) + -1;
+        *(int *)(programObject + 8) = newRefCount;
+        if (newRefCount == 0) {
+          ((void (*)())_gleFreePipelineProgramObject)(glContext,programObject);
         }
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
           _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);

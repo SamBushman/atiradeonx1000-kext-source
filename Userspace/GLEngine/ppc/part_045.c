@@ -3098,21 +3098,21 @@ void _gleExecuteVertexArray(glContext, param_2, param_3, param_4, param_5, param
 }
 
 /* _gleLightMaterialRGBAChange_F_A @ 0xdc0a0 (184 bytes) */
-void _gleLightMaterialRGBAChange_F_A(glContext, param_2)
+void _gleLightMaterialRGBAChange_F_A(glContext, rgba)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *rgba;
 {
   byte dirtyBitIndex;
-  undefined8 *puVar2;
+  undefined8 *material;
   int glContextPtr5424ThenDirtyWordAddress348;
   int dirtyWordAddress324;
-  undefined8 uVar5;
+  undefined8 rgbaBlueAlpha;
   
-  puVar2 = (undefined8 *)_glePushMaterial(glContext,0);
-  *puVar2 = *param_2;
-  uVar5 = param_2[1];
-  *(ushort *)((int)puVar2 + 0x234) = *(ushort *)((int)puVar2 + 0x234) | 0x404;
-  puVar2[1] = uVar5;
+  material = (undefined8 *)_glePushMaterial(glContext,0);
+  *material = *rgba;
+  rgbaBlueAlpha = rgba[1];
+  *(ushort *)((int)material + 0x234) = *(ushort *)((int)material + 0x234) | 0x404;
+  material[1] = rgbaBlueAlpha;
   if (*(int *)(glContext + 0x5434) == 0) {
     dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c0);
   }
@@ -3129,20 +3129,20 @@ void _gleLightMaterialRGBAChange_F_A(glContext, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_F_D @ 0xdc158 (184 bytes) */
-void _gleLightMaterialRGBAChange_F_D(glContext, param_2)
+void _gleLightMaterialRGBAChange_F_D(glContext, rgba)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *rgba;
 {
   byte dirtyBitIndex;
   int materialThenGlContextPtr5424ThenDirtyWordAddress348;
   int dirtyWordAddress324;
-  undefined8 uVar4;
+  undefined8 rgbaBlueAlpha;
   
   materialThenGlContextPtr5424ThenDirtyWordAddress348 = _glePushMaterial(glContext,0);
-  *(undefined8 *)(materialThenGlContextPtr5424ThenDirtyWordAddress348 + 0x10) = *param_2;
-  uVar4 = param_2[1];
+  *(undefined8 *)(materialThenGlContextPtr5424ThenDirtyWordAddress348 + 0x10) = *rgba;
+  rgbaBlueAlpha = rgba[1];
   *(ushort *)(materialThenGlContextPtr5424ThenDirtyWordAddress348 + 0x234) = *(ushort *)(materialThenGlContextPtr5424ThenDirtyWordAddress348 + 0x234) | 0x808;
-  *(undefined8 *)(materialThenGlContextPtr5424ThenDirtyWordAddress348 + 0x18) = uVar4;
+  *(undefined8 *)(materialThenGlContextPtr5424ThenDirtyWordAddress348 + 0x18) = rgbaBlueAlpha;
   if (*(int *)(glContext + 0x5434) == 0) {
     dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c1);
   }
@@ -3214,21 +3214,21 @@ void _gleLightMaterialRGBAChange_B_E(glContext, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_B_A @ 0xdc37c (184 bytes) */
-void _gleLightMaterialRGBAChange_B_A(glContext, param_2)
+void _gleLightMaterialRGBAChange_B_A(glContext, rgba)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *rgba;
 {
   byte dirtyBitIndex;
-  undefined8 *puVar2;
+  undefined8 *material;
   int glContextPtr5424ThenDirtyWordAddress348;
   int dirtyWordAddress324;
-  undefined8 uVar5;
+  undefined8 rgbaBlueAlpha;
   
-  puVar2 = (undefined8 *)_glePushMaterial(glContext,1);
-  *puVar2 = *param_2;
-  uVar5 = param_2[1];
-  *(ushort *)((int)puVar2 + 0x234) = *(ushort *)((int)puVar2 + 0x234) | 0x404;
-  puVar2[1] = uVar5;
+  material = (undefined8 *)_glePushMaterial(glContext,1);
+  *material = *rgba;
+  rgbaBlueAlpha = rgba[1];
+  *(ushort *)((int)material + 0x234) = *(ushort *)((int)material + 0x234) | 0x404;
+  material[1] = rgbaBlueAlpha;
   if (*(int *)(glContext + 0x5434) == 0) {
     dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c6);
   }
@@ -3245,20 +3245,20 @@ void _gleLightMaterialRGBAChange_B_A(glContext, param_2)
 }
 
 /* _gleLightMaterialRGBAChange_B_D @ 0xdc434 (184 bytes) */
-void _gleLightMaterialRGBAChange_B_D(glContext, param_2)
+void _gleLightMaterialRGBAChange_B_D(glContext, rgba)
   int glContext;
-  undefined8 *param_2;
+  undefined8 *rgba;
 {
   byte dirtyBitIndex;
   int materialThenGlContextPtr5424ThenDirtyWordAddress348;
   int dirtyWordAddress324;
-  undefined8 uVar4;
+  undefined8 rgbaBlueAlpha;
   
   materialThenGlContextPtr5424ThenDirtyWordAddress348 = _glePushMaterial(glContext,1);
-  *(undefined8 *)(materialThenGlContextPtr5424ThenDirtyWordAddress348 + 0x10) = *param_2;
-  uVar4 = param_2[1];
+  *(undefined8 *)(materialThenGlContextPtr5424ThenDirtyWordAddress348 + 0x10) = *rgba;
+  rgbaBlueAlpha = rgba[1];
   *(ushort *)(materialThenGlContextPtr5424ThenDirtyWordAddress348 + 0x234) = *(ushort *)(materialThenGlContextPtr5424ThenDirtyWordAddress348 + 0x234) | 0x808;
-  *(undefined8 *)(materialThenGlContextPtr5424ThenDirtyWordAddress348 + 0x18) = uVar4;
+  *(undefined8 *)(materialThenGlContextPtr5424ThenDirtyWordAddress348 + 0x18) = rgbaBlueAlpha;
   if (*(int *)(glContext + 0x5434) == 0) {
     dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c7);
   }
@@ -3314,15 +3314,15 @@ void _gleLightMaterialRGBAChange_B_AD(glContext, rgba)
   int glContextPtr5424;
   int glContextWord5434ThenDirtyWordAddress;
   int dirtyWordAddress;
-  undefined8 uVar6;
+  undefined8 rgbaBlueAlpha;
   
   material = (undefined8 *)_glePushMaterial(glContext,1);
   *material = *rgba;
   material[1] = rgba[1];
   material[2] = *rgba;
-  uVar6 = rgba[1];
+  rgbaBlueAlpha = rgba[1];
   *(ushort *)((int)material + 0x234) = *(ushort *)((int)material + 0x234) | 0xc0c;
-  material[3] = uVar6;
+  material[3] = rgbaBlueAlpha;
   glContextWord5434ThenDirtyWordAddress = *(int *)(glContext + 0x5434);
   if (glContextWord5434ThenDirtyWordAddress == 0) {
     dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c6);

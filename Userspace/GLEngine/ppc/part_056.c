@@ -401,16 +401,16 @@ void _gliCopyAttributes(glContext, glContext2)
 }
 
 /* _gliSwitchPlugin @ 0x1078b0 (332 bytes) */
-double _gliSwitchPlugin(glContext, param_2)
+double _gliSwitchPlugin(glContext, rendererIndex)
   int glContext;
-  int param_2;
+  int rendererIndex;
 {
-  uint uVar1;
+  uint slotEmptyMask;
   undefined *setClipInterpFunc;
-  undefined4 uVar3;
-  int iVar4;
+  undefined4 rendererHandle;
+  int rendererRecord;
   double floatArg1;
-  double fparam_1_00;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -427,12 +427,12 @@ double _gliSwitchPlugin(glContext, param_2)
   _gleSynchronizePluginFramebuffer(glContext);
   _gleSynchronizePluginTextures(glContext);
   _gleSynchronizePluginBuffers(glContext);
-  *(char *)(glContext + 0x85a8) = (char)param_2;
-  iVar4 = param_2 * 0x2e0 + glContext;
-  uVar3 = *(undefined4 *)(iVar4 + 0x85ac);
-  *(int *)(glContext + 0x468c) = iVar4 + 0x85b0;
-  *(undefined4 *)(glContext + 0x4688) = uVar3;
-  _memcpy(glContext + 0x4754,*(int *)(iVar4 + 0x8884) + 0x114,0xf4);
+  *(char *)(glContext + 0x85a8) = (char)rendererIndex;
+  rendererRecord = rendererIndex * 0x2e0 + glContext;
+  rendererHandle = *(undefined4 *)(rendererRecord + 0x85ac);
+  *(int *)(glContext + 0x468c) = rendererRecord + 0x85b0;
+  *(undefined4 *)(glContext + 0x4688) = rendererHandle;
+  _memcpy(glContext + 0x4754,*(int *)(rendererRecord + 0x8884) + 0x114,0xf4);
   *(undefined4 *)(glContext + 800) = 0xffffffff;
   *(undefined4 *)(glContext + 0x310) = 0xffffffff;
   *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x3ffffff;
@@ -441,15 +441,15 @@ double _gliSwitchPlugin(glContext, param_2)
   ((void (*)())_gleUpdateDepthRangeData)(glContext,floatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
              incomingStack_ffffffc0,incomingStack_ffffffc8,incomingStack_ffffffd0,incomingStack_ffffffd8);
   _gleUpdatePolyMode(glContext);
-  ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_gleUpdateViewScissorData)(glContext,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   _gleUpdateTextureTransform(glContext);
   setClipInterpFunc = PTR__gleSetClipInterpFunc_00112038;
   *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
   *(undefined **)(glContext + 0x49cc) = setClipInterpFunc;
   _gleUpdatePrimitiveData(glContext);
-  uVar1 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
+  slotEmptyMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
   *(undefined **)
-   ((*(uint *)(glContext + 0x4680) & uVar1 | *(uint *)(glContext + 0x4684) & ~uVar1) + 0xc) =
+   ((*(uint *)(glContext + 0x4680) & slotEmptyMask | *(uint *)(glContext + 0x4684) & ~slotEmptyMask) + 0xc) =
        PTR__glArrayElement_Exec_001120e8;
   _gleUpdateDrawArraysFuncs(glContext);
   _gleSelectVertexSubmitFunc(glContext);
@@ -495,13 +495,13 @@ void _gliDetachRevert(glContext)
 }
 
 /* _gliAttachDrawable @ 0x107ad8 (8 bytes) */
-void _gliAttachDrawable(glContext, param_2, param_3, param_4)
+void _gliAttachDrawable(glContext, forwardedArg2, forwardedArg3, forwardedArg4)
   undefined4 glContext;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 forwardedArg2;
+  undefined4 forwardedArg3;
+  undefined4 forwardedArg4;
 {
-  _gliAttachDrawableWithOptions(glContext,param_2,param_3,param_4,0);
+  _gliAttachDrawableWithOptions(glContext,forwardedArg2,forwardedArg3,forwardedArg4,0);
   return;
 }
 

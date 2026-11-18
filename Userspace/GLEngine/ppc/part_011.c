@@ -364,23 +364,23 @@ int _glColor3us_Comp(glContext, red, green, blue)
 }
 
 /* _glColor3us_Exec @ 0x5b964 (184 bytes) */
-double _glColor3us_Exec(int glContext,uint red,uint green,uint blue,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+double _glColor3us_Exec(int glContext,uint red,uint green,uint blue,double forwardedFloatArg1ThenCalleeResult,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
+  float redComponent;
+  float blueComponent;
   float channelScale;
   
   channelScale = FLOAT_00108e74;
-  fVar1 = (GH_U2F((unsigned int)((red | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  fVar2 = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  redComponent = (GH_U2F((unsigned int)((red | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  blueComponent = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
-  *(float *)(glContext + 0x2a0) = fVar1;
-  *(float *)(glContext + 0x2a8) = fVar2;
+  *(float *)(glContext + 0x2a0) = redComponent;
+  *(float *)(glContext + 0x2a8) = blueComponent;
   *(float *)(glContext + 0x2a4) = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * channelScale;
   if (*(char *)(glContext + 0x4df8) != '\0') {
-    fparam_1 = (double)(**(double ( **)(int,int))(glContext + 0x4de0))(glContext, glContext + 0x2a0);
+    forwardedFloatArg1ThenCalleeResult = (double)(**(double ( **)(int,int))(glContext + 0x4de0))(glContext, glContext + 0x2a0);
   }
-  return fparam_1;
+  return forwardedFloatArg1ThenCalleeResult;
 }
 
 /* _glColor3us_CompExec @ 0x5ba1c (72 bytes) */

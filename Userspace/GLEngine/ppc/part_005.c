@@ -123,7 +123,7 @@ void _gleLightMaterialRGBAChange_FB_D(glContext, param_2)
 }
 
 /* _gleLightMaterialShineChange_FB @ 0x331c0 (220 bytes) */
-void _gleLightMaterialShineChange_FB(int glContext,float fparam_1)
+void _gleLightMaterialShineChange_FB(int glContext,float shininess)
 {
   byte dirtyBitIndex;
   int materialThenDirtyWordAddress348;
@@ -135,7 +135,7 @@ void _gleLightMaterialShineChange_FB(int glContext,float fparam_1)
   loopIndex = 0;
   do {
     materialThenDirtyWordAddress348 = ((int (*)())_glePushMaterial)(glContext,loopIndex);
-    *(float *)(materialThenDirtyWordAddress348 + 0x40) = (float)fparam_1;
+    *(float *)(materialThenDirtyWordAddress348 + 0x40) = (float)shininess;
     *(ushort *)(materialThenDirtyWordAddress348 + 0x234) = *(ushort *)(materialThenDirtyWordAddress348 + 0x234) | 0x101;
     if (*(int *)(glContext + 0x5434) == 0) {
       dirtyBitIndex = *(byte *)(loopIndex * 6 + *(int *)(glContext + 0x5420) + 0x2c4);
@@ -3363,8 +3363,8 @@ void _glStencilFunc_Exec(glContext, func, ref, mask)
   undefined4 mask;
 {
   undefined4 glErrorCode;
-  uint uVar2;
-  int iVar3;
+  uint maxStencilRef;
+  int stencilStateRecord;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (func - 0x200U < 8) {
@@ -3372,15 +3372,15 @@ void _glStencilFunc_Exec(glContext, func, ref, mask)
         ref = 0;
       }
       else {
-        uVar2 = 0xffffffff >> (0x20U - *(int *)(*(int *)(glContext + 0x468c) + 0x40) & 0x3f);
-        if (uVar2 < ref) {
-          ref = uVar2;
+        maxStencilRef = 0xffffffff >> (0x20U - *(int *)(*(int *)(glContext + 0x468c) + 0x40) & 0x3f);
+        if (maxStencilRef < ref) {
+          ref = maxStencilRef;
         }
       }
-      iVar3 = (uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext;
-      *(undefined4 *)(iVar3 + 0x34f8) = mask;
-      *(uint *)(iVar3 + 0x34fc) = ref;
-      *(short *)(iVar3 + 0x3500) = (short)func;
+      stencilStateRecord = (uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext;
+      *(undefined4 *)(stencilStateRecord + 0x34f8) = mask;
+      *(uint *)(stencilStateRecord + 0x34fc) = ref;
+      *(short *)(stencilStateRecord + 0x3500) = (short)func;
       *(short *)(glContext + 0x3518) = (short)func;
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x10000000;
       return;

@@ -6929,15 +6929,15 @@ void _gleSetEyeInterpFunc(int glContext,undefined4 forwardedArg2,undefined4 forw
 }
 
 /* _gleShrinkFuncCache @ 0xc2054 (68 bytes) */
-void _gleShrinkFuncCache(param_1, param_2)
-  int param_1;
-  int param_2;
+void _gleShrinkFuncCache(funcCache, deleteCount)
+  int funcCache;
+  int deleteCount;
 {
-  if (0 < param_2) {
+  if (0 < deleteCount) {
     do {
-      ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(param_1 + 4));
-      param_2 = param_2 + -1;
-    } while (param_2 != 0);
+      ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(funcCache + 4));
+      deleteCount = deleteCount + -1;
+    } while (deleteCount != 0);
   }
   return;
 }
