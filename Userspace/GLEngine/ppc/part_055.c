@@ -1307,6 +1307,7 @@ void _gleVPRenderTriangleStrip_body(glContext)
   uint uVar8;
   uint batchClipCodes;
   int iVar9;
+  int cullResult;
   uint uVar10;
   int iVar11;
   int polygonVertexCount;
@@ -1367,11 +1368,11 @@ void _gleVPRenderTriangleStrip_body(glContext)
           runStart = vertexCursor;
           while (uVar8 = uVar10, vertexCursor <= vertexCountThenLastTriangle) {
             nextVertex = vertexCursor + 0x100;
-            iVar9 = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,nextVertex,vertexCursor + 0x200,uVar10,&backFacing,dVar21,
+            cullResult = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,nextVertex,vertexCursor + 0x200,uVar10,&backFacing,dVar21,
                                      incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
                                      incomingStack_ffffff80);
             dVar21 = f1AfterCall1;
-            if (iVar9 == 0) {
+            if (cullResult == 0) {
               if (iVar11 != backFacing) {
                 facingChanged = true;
               }

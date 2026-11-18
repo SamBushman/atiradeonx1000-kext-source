@@ -2194,6 +2194,7 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
   bool twoSidedLighting;
   uint *puVar6;
   int iVar7;
+  int texEnableBits;
   uint uVar8;
   uint batchClipCodes;
   int runLightVertex;
@@ -2226,7 +2227,7 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
   int clippedCount [6];
   
   iVar10 = -1;
-  iVar7 = _gleTexEnableBits(glContext);
+  texEnableBits = _gleTexEnableBits(glContext);
   lightingPending = *(char *)(glContext + 0x30aa);
   twoSidedLighting = false;
   lightingEnabled = lightingPending != '\0';
@@ -2238,7 +2239,7 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
   vertexCount = (int)(*(int *)(glContext + 0x4858) - triangleCursor) >> 8;
   if ((2 < vertexCount) &&
      (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,triangleCursor,vertexCount), (batchClipCodes & 0xff00) == 0)) {
-    texturingEnabled = iVar7 != 0;
+    texturingEnabled = texEnableBits != 0;
     dVar20 = f1AfterCall;
     if ((texturingEnabled) && (*(char *)(glContext + 0x53e4) != '\0')) {
       dVar20 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, triangleCursor, vertexCount);
