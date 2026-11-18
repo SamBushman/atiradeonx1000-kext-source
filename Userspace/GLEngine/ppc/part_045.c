@@ -4002,16 +4002,16 @@ void _gleEvalDomain1Color(undefined4 glContext,int points,int order,undefined4 u
   float *coeffPtr;
   int component;
   int pointsRemaining;
-  double incomingStack_ffffff98;
-  double incomingStack_ffffffa0;
-  double incomingStack_ffffffa8;
-  double incomingStack_ffffffb0;
-  double incomingStack_ffffffb8;
+  double incomingStackWord_ffffff98;
+  double incomingStackWord_ffffffa0;
+  double incomingStackWord_ffffffa8;
+  double incomingStackWord_ffffffb0;
+  double incomingStackWord_ffffffb8;
   
   if (((double)GH_U2F((unsigned int)_uvalue_c) != u) || (_uorder_c != order)) {
     ((void (*)())_glePreEvaluate)(glContext,order,order,&_ucoeff_c,u,floatArg2,floatArg3,floatArg4,floatArg5,
-                    floatArg6,floatArg7,floatArg8,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8
-                    ,incomingStack_ffffffb0,incomingStack_ffffffb8);
+                    floatArg6,floatArg7,floatArg8,incomingStackWord_ffffff98,incomingStackWord_ffffffa0,incomingStackWord_ffffffa8
+                    ,incomingStackWord_ffffffb0,incomingStackWord_ffffffb8);
     _uvalue_c = GH_F2U((float)u);
     _utype_c = 2;
     _uorder_c = order;
@@ -4254,26 +4254,26 @@ void _gleEvalDomainDeriv2Coord(undefined4 glContext,int controlPoints,int uOrder
   int savedUOrder;
   int componentIndex;
   float savedFloatArg2;
-  double incomingStack_ffffff78;
-  double incomingStack_ffffff80;
-  double incomingStack_ffffff88;
-  double incomingStack_ffffff90;
-  double incomingStack_ffffff98;
+  double incomingStackWord_ffffff78;
+  double incomingStackWord_ffffff80;
+  double incomingStackWord_ffffff88;
+  double incomingStackWord_ffffff90;
+  double incomingStackWord_ffffff98;
   
   savedUOrder = uOrder;
   savedFloatArg2 = floatArg2;
   if ((((double)GH_U2F((unsigned int)_uvalue_c) != floatArg1) || (_utype_c != 1)) || (_uorder_c != uOrder)) {
     ((void (*)())_glePreEvaluateWithDeriv)(glContext,uOrder,uOrder,&_ucoeff_c,&_ucoeffDeriv_c,floatArg1,floatArg2,floatArg3,
-               floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff78,incomingStack_ffffff80,
-               incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
+               floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStackWord_ffffff78,incomingStackWord_ffffff80,
+               incomingStackWord_ffffff88,incomingStackWord_ffffff90,incomingStackWord_ffffff98);
     _utype_c = 1;
     _uvalue_c = GH_F2U((float)floatArg1);
     _uorder_c = uOrder;
   }
   if ((((double)GH_U2F((unsigned int)_vvalue_c) != floatArg2) || (_vtype_c != 1)) || (_vorder_c != vOrder)) {
     ((void (*)())_glePreEvaluateWithDeriv)(glContext,vOrder,savedUOrder,&_vcoeff_c,&_vcoeffDeriv_c,floatArg2,(double)savedFloatArg2,floatArg3,floatArg4,
-               floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff78,incomingStack_ffffff80,
-               incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
+               floatArg5,floatArg6,floatArg7,floatArg8,incomingStackWord_ffffff78,incomingStackWord_ffffff80,
+               incomingStackWord_ffffff88,incomingStackWord_ffffff90,incomingStackWord_ffffff98);
     _vtype_c = 1;
     _vvalue_c = GH_F2U((float)floatArg2);
     _vorder_c = vOrder;

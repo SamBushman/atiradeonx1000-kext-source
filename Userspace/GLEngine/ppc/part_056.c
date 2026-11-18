@@ -418,11 +418,11 @@ double _gliSwitchPlugin(glContext, rendererIndex)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffffb8;
-  double incomingStack_ffffffc0;
-  double incomingStack_ffffffc8;
-  double incomingStack_ffffffd0;
-  double incomingStack_ffffffd8;
+  double incomingStackWord_ffffffb8;
+  double incomingStackWord_ffffffc0;
+  double incomingStackWord_ffffffc8;
+  double incomingStackWord_ffffffd0;
+  double incomingStackWord_ffffffd8;
   
   _gleSynchronizePluginFramebuffer(glContext);
   _gleSynchronizePluginTextures(glContext);
@@ -438,8 +438,8 @@ double _gliSwitchPlugin(glContext, rendererIndex)
   *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x3ffffff;
   *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 0xfffffffd;
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x7ffffff;
-  ((void (*)())_gleUpdateDepthRangeData)(glContext,floatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
-             incomingStack_ffffffc0,incomingStack_ffffffc8,incomingStack_ffffffd0,incomingStack_ffffffd8);
+  ((void (*)())_gleUpdateDepthRangeData)(glContext,floatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffffb8,
+             incomingStackWord_ffffffc0,incomingStackWord_ffffffc8,incomingStackWord_ffffffd0,incomingStackWord_ffffffd8);
   _gleUpdatePolyMode(glContext);
   ((void (*)())_gleUpdateViewScissorData)(glContext,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   _gleUpdateTextureTransform(glContext);

@@ -34,14 +34,14 @@ void _glEvalCoord2dv_CompExec(glContext, u)
 /* _glEvalCoord2f_ListExec_body @ 0x64c1c (48 bytes) */
 undefined4 _glEvalCoord2f_ListExec_body(undefined4 glContext,double *recordedArgs,double unusedFloatArg1,double v,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
-  double incomingStack_ffffffb8;
-  double incomingStack_ffffffc0;
-  double incomingStack_ffffffc8;
-  double incomingStack_ffffffd0;
+  double incomingStackWord_ffffffb8;
+  double incomingStackWord_ffffffc0;
+  double incomingStackWord_ffffffc8;
+  double incomingStackWord_ffffffd0;
   
   ((void (*)())_gleEvalMap2)(glContext,(double)(float)(*recordedArgs),(double)(float)v,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,
-               forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8,
-               incomingStack_ffffffd0);
+               forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStackWord_ffffffb8,incomingStackWord_ffffffc0,incomingStackWord_ffffffc8,
+               incomingStackWord_ffffffd0);
   return 0x10;
 }
 
@@ -272,10 +272,10 @@ void _glEvalMesh2_Exec(int glContext,uint mode,uint i1,int i2,uint j1,int j2,dou
   double uCoord;
   double lineUCoord;
   double fparam_1_00;
-  double incomingStack_ffffff48;
-  double incomingStack_ffffff50;
-  double incomingStack_ffffff58;
-  double incomingStack_ffffff60;
+  double incomingStackWord_ffffff48;
+  double incomingStackWord_ffffff50;
+  double incomingStackWord_ffffff58;
+  double incomingStackWord_ffffff60;
   
   intToDoubleMagic2 = DOUBLE_00108d58;
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -313,7 +313,7 @@ void _glEvalMesh2_Exec(int glContext,uint mode,uint i1,int i2,uint j1,int j2,dou
           }
           fparam_2 = vCoord;
           ((void (*)())_gleEvalMap2)(glContext,uCoord,vCoord,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,
-                       incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60);
+                       incomingStackWord_ffffff48,incomingStackWord_ffffff50,incomingStackWord_ffffff58,incomingStackWord_ffffff60);
         }
         vIndex = vIndex + 1;
         fparam_1 = (double)_glEnd_Exec(glContext);
@@ -349,7 +349,7 @@ void _glEvalMesh2_Exec(int glContext,uint mode,uint i1,int i2,uint j1,int j2,dou
           }
           vIndex = vIndex + 1;
           ((void (*)())_gleEvalMap2)(glContext,lineUCoord,fparam_2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8
-                       ,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60);
+                       ,incomingStackWord_ffffff48,incomingStackWord_ffffff50,incomingStackWord_ffffff58,incomingStackWord_ffffff60);
           vIndexInRange = (int)vIndex <= j2;
         }
         fparam_1 = (double)_glEnd_Exec(glContext);
@@ -386,7 +386,7 @@ void _glEvalMesh2_Exec(int glContext,uint mode,uint i1,int i2,uint j1,int j2,dou
                                 glContextPtr74c4 + *(float *)(glContext + 0x74bc));
             }
             ((void (*)())_gleEvalMap2)(glContext,uCoord,pointVCoord,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,
-                         incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60);
+                         incomingStackWord_ffffff48,incomingStackWord_ffffff50,incomingStackWord_ffffff58,incomingStackWord_ffffff60);
           }
           intToDoubleMagic2 = DOUBLE_00108d58;
         }
@@ -435,12 +435,12 @@ void _glEvalMesh2_Exec(int glContext,uint mode,uint i1,int i2,uint j1,int j2,dou
                                    * glContextPtr74c4 + *(float *)(glContext + 0x74bc));
           }
           ((void (*)())_gleEvalMap2)(glContext,fparam_1_00,vCoord,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
-                       forwardedFloatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,
-                       incomingStack_ffffff60);
+                       forwardedFloatArg8,incomingStackWord_ffffff48,incomingStackWord_ffffff50,incomingStackWord_ffffff58,
+                       incomingStackWord_ffffff60);
           fparam_2 = nextVCoord;
           ((void (*)())_gleEvalMap2)(glContext,fparam_1_00,nextVCoord,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
-                       forwardedFloatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,
-                       incomingStack_ffffff60);
+                       forwardedFloatArg8,incomingStackWord_ffffff48,incomingStackWord_ffffff50,incomingStackWord_ffffff58,
+                       incomingStackWord_ffffff60);
         }
         fparam_1 = (double)_glEnd_Exec(glContext);
       }
@@ -868,11 +868,11 @@ void _glFinish_RevertExec(glContext)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  double incomingStack_ffffffa8;
-  double incomingStack_ffffffb0;
-  double incomingStack_ffffffb8;
-  double incomingStack_ffffffc0;
-  double incomingStack_ffffffc8;
+  double incomingStackWord_ffffffa8;
+  double incomingStackWord_ffffffb0;
+  double incomingStackWord_ffffffb8;
+  double incomingStackWord_ffffffc0;
+  double incomingStackWord_ffffffc8;
   
   rendererRecordCursorThenCurrentRendererRecord = glContext + 0x10000;
   glContextByte85a5 = *(byte *)(glContext + 0x85a5);
@@ -895,8 +895,8 @@ void _glFinish_RevertExec(glContext)
               (*(undefined4 *)(rendererRecordCursorThenCurrentRendererRecord + 0x85ac),*(undefined4 *)(glContext + 0x484c),
                *(undefined4 *)(glContext + 0x4848),0);
     f1AfterCall = (double)_gleSwitchToRenderer(glContext,(uint)glContextByte85a5);
-    ((void (*)())_gleUpdateDepthRangeData)(glContext,f1AfterCall,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffa8,
-               incomingStack_ffffffb0,incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8);
+    ((void (*)())_gleUpdateDepthRangeData)(glContext,f1AfterCall,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStackWord_ffffffa8,
+               incomingStackWord_ffffffb0,incomingStackWord_ffffffb8,incomingStackWord_ffffffc0,incomingStackWord_ffffffc8);
     _gleUpdatePolyMode(glContext);
     ((void (*)())_gleUpdateViewScissorData)(glContext,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     _gleUpdateTextureTransform(glContext);

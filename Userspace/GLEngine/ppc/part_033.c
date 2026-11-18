@@ -2264,11 +2264,11 @@ void _glArrayElement_Exec(int glContext,int i,double forwardedFloatArg1,double f
   int normalPtr;
   uint pendingTexUnitMask;
   uint enabledAttribMask;
-  double incomingStack_ffffff98;
-  double incomingStack_ffffffa0;
-  double incomingStack_ffffffa8;
-  double incomingStack_ffffffb0;
-  double incomingStack_ffffffb8;
+  double incomingStackWord_ffffff98;
+  double incomingStackWord_ffffffa0;
+  double incomingStackWord_ffffffa8;
+  double incomingStackWord_ffffffb0;
+  double incomingStackWord_ffffffb8;
   
   clientState = *(int *)(glContext + 0x4a60);
   texCoordArray = clientState + 0x10;
@@ -2413,8 +2413,8 @@ LAB_000a5ab8:
     }
     else if (normalType == 0x9404) {
       forwardedFloatArg1 = (double)((double (*)())_glNormal3iv_Exec)(glContext,normalPtr,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
-                                           forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffff98,
-                                           incomingStack_ffffffa0,incomingStack_ffffffa8);
+                                           forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStackWord_ffffff98,
+                                           incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
     }
   }
   if ((enabledArrayMask & 0x40000) != 0) {
@@ -2444,9 +2444,9 @@ LAB_000a5ab8:
       }
       else if (colorType == 0x9403) {
         forwardedFloatArg1 = (double)((double (*)())_glColor3usv_Exec)(glContext,colorPtr,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
-                                             forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffff98,
-                                             incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,
-                                             incomingStack_ffffffb8);
+                                             forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStackWord_ffffff98,
+                                             incomingStackWord_ffffffa0,incomingStackWord_ffffffa8,incomingStackWord_ffffffb0,
+                                             incomingStackWord_ffffffb8);
       }
       else if (colorType < 0x9403) {
         forwardedFloatArg1 = (double)_glColor3sv_Exec(glContext,colorPtr);
@@ -2483,9 +2483,9 @@ LAB_000a5ab8:
       }
       else if (colorType == 0x9403) {
         forwardedFloatArg1 = (double)((double (*)())_glColor4usv_Exec)(glContext,colorPtr,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
-                                             forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffff98,
-                                             incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,
-                                             incomingStack_ffffffb8);
+                                             forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStackWord_ffffff98,
+                                             incomingStackWord_ffffffa0,incomingStackWord_ffffffa8,incomingStackWord_ffffffb0,
+                                             incomingStackWord_ffffffb8);
       }
       else if (colorType < 0x9403) {
         forwardedFloatArg1 = (double)_glColor4sv_Exec(glContext,colorPtr);

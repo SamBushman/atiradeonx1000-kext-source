@@ -188,11 +188,11 @@ undefined4 _glCombinerParameterivNV_ListExec(undefined4 glContext,undefined4 *li
 /* _glCombinerParameteriNV_ListExec @ 0xb45ec (44 bytes) */
 undefined4 _glCombinerParameteriNV_ListExec(undefined4 glContext,undefined4 *listRecord,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
-  double incomingStack_ffffffb8;
-  double incomingStack_ffffffc0;
+  double incomingStackWord_ffffffb8;
+  double incomingStackWord_ffffffc0;
   
   ((void (*)())_glCombinerParameteriNV_Exec)(glContext,*listRecord,listRecord[1],forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
-             forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0);
+             forwardedFloatArg7,forwardedFloatArg8,incomingStackWord_ffffffb8,incomingStackWord_ffffffc0);
   return 8;
 }
 
