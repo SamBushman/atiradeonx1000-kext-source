@@ -1,0 +1,7 @@
+local	_LFSParserBuildErrorString	param_1	parser	CONFIRMED	the LFS parser state: callers elsewhere (_LFSParserGetCharacter, _LFSParserAttachString) name the same first argument parser; the function writes the message to parser+0x5c
+local	_LFSParserBuildErrorString	param_2	errorCode	CONFIRMED	the switch selector 1..0x1f mapped to the message strings ("end of stream", "missing semicolon", ...)
+local	_LFSParserBuildErrorString	pcVar2	errorMessage	CONFIRMED	the message string chosen by the switch, formatted into parser+0x5c by _sprintf
+local	_LFSParserBuildErrorString	iVar1	hintPartFound	CONFIRMED	result of _LFSParserGetPart: zero selects the plain "%s" format, non-zero the "%s (hint: '%s')" format with the extracted part
+local	_LFSParserBuildErrorString	auStack_120	hintBuffer	CONFIRMED	the 256-byte buffer _LFSParserGetPart fills, printed as the hint text
+local	_LFSParserBuildErrorString	local_20	savedParserWord0c	CONFIRMED	parser+0xc saved before it is replaced by parser+0x45c and restored after _LFSParserGetPart
+local	_LFSParserBuildErrorString	local_1c	savedParserWord10	CONFIRMED	parser+0x10 saved before it is replaced by parser+0x460 and restored after _LFSParserGetPart

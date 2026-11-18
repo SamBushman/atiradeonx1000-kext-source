@@ -75,11 +75,11 @@ use	_glClearColor_Exec	fVar2	floatOne	INFERRED	every definition of the web loads
 use	_glClearColor_Exec	fVar2	floatOne	INFERRED	every definition of the web loads the literal-pool constant FLOAT_00108e54 = 1.0: a register holding that constant for the compares/arithmetic that follow	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x3104\)\ =\ fVar2;$	+1
 use	_glClearColor_Exec	fVar2	floatOne	INFERRED	every definition of the web loads the literal-pool constant FLOAT_00108e54 = 1.0: a register holding that constant for the compares/arithmetic that follow	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x3108\)\ =\ fVar2;$	+1
 use	_glClearColor_Exec	fVar2	floatOne	INFERRED	every definition of the web loads the literal-pool constant FLOAT_00108e54 = 1.0: a register holding that constant for the compares/arithmetic that follow	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x310c\)\ =\ fVar2;$	+1
-use	_glProgramStringARB_Exec	iVar6	allocatedBlock	INFERRED	every definition of the web is the result of malloc(...)	^\s*iVar6\ =\ _malloc\(param_4\ \+\ 1\);$	+1
-use	_glProgramStringARB_Exec	iVar6	allocatedBlock	INFERRED	every definition of the web is the result of malloc(...)	^\s*\*\(char\ \*\)\(iVar6\ \+\ iVar8\)\ =\ \*\(char\ \*\)\(param_5\ \+\ iVar8\);$	+1
-use	_glProgramStringARB_Exec	iVar6	allocatedBlock	INFERRED	every definition of the web is the result of malloc(...)	^\s*\*\(undefined1\ \*\)\(iVar6\ \+\ iVar8\)\ =\ 0;$	+1
-use	_glProgramStringARB_Exec	iVar6	allocatedBlock	INFERRED	every definition of the web is the result of malloc(...)	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x14\)\ =\ iVar6;$	+1
-use	_glProgramStringARB_Exec	iVar6	allocatedBlock	INFERRED	every definition of the web is the result of malloc(...)	^\s*_free\(iVar6\);$	+1
+use	_glProgramStringARB_Exec	iVar6	allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor	INFERRED	every definition of the web is the result of malloc(...)	^\s*iVar6\ =\ _malloc\(param_4\ \+\ 1\);$	+1
+use	_glProgramStringARB_Exec	iVar6	allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor	INFERRED	every definition of the web is the result of malloc(...)	^\s*\*\(char\ \*\)\(iVar6\ \+\ iVar8\)\ =\ \*\(char\ \*\)\(param_5\ \+\ iVar8\);$	+1
+use	_glProgramStringARB_Exec	iVar6	allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor	INFERRED	every definition of the web is the result of malloc(...)	^\s*\*\(undefined1\ \*\)\(iVar6\ \+\ iVar8\)\ =\ 0;$	+1
+use	_glProgramStringARB_Exec	iVar6	allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor	INFERRED	every definition of the web is the result of malloc(...)	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x14\)\ =\ iVar6;$	+1
+use	_glProgramStringARB_Exec	iVar6	allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor	INFERRED	every definition of the web is the result of malloc(...)	^\s*_free\(iVar6\);$	+1
 use	_glePPParse	iVar5	allocatedBlock	INFERRED	every definition of the web is the result of calloc(...)	^\s*iVar5\ =\ _calloc\(local_60,8\);$	+1
 use	_glePPParse	iVar5	allocatedBlock	INFERRED	every definition of the web is the result of calloc(...)	^\s*_PPStreamChunkListGetStream\(piVar20,iVar5,\&local_60,iVar22\);$	+1
 use	_glePPParse	iVar5	allocatedBlock	INFERRED	every definition of the web is the result of calloc(...)	^\s*\(\(void\ \(\*\)\(\)\)_glePPLogParameters\)\(param_1,param_2,local_60,iVar5,local_5c,iVar6\);$	+1

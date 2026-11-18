@@ -1,4 +1,4 @@
 use	_gleVPRenderTriangleStrip_body	iVar9	cullResult	CONFIRMED	_gleCullTriangle result: 0 means the triangle is not culled	^\s*iVar9\ =\ \(\(undefined4\ \(\*\)\(\)\)_gleCullTriangle\)\(param_1,uVar20,uVar19,uVar20\ \+\ 0x200,uVar10,\&local_50,dVar21,$	+3
 use	_gleVPRenderTriangleStrip_body	iVar9	cullResult	CONFIRMED	_gleCullTriangle result: 0 means the triangle is not culled	^\s*if\ \(iVar9\ ==\ 0\)\ \{$	+1
-use	_gleRenderFlatTrianglesFunc_body	iVar7	texEnableBits	CONFIRMED	_gleTexEnableBits result, tested for texturing	^\s*iVar7\ =\ _gleTexEnableBits\(param_1\);$	+1
-use	_gleRenderFlatTrianglesFunc_body	iVar7	texEnableBits	CONFIRMED	_gleTexEnableBits result, tested for texturing	^\s*bVar2\ =\ iVar7\ !=\ 0;$	+1
+use	_gleRenderFlatTrianglesFunc_body	iVar7	texEnableBitsThenLightVertexThenRunVertexCountThenPolygonVertexCount	CONFIRMED	_gleTexEnableBits result, tested for texturing	^\s*iVar7\ =\ _gleTexEnableBits\(param_1\);$	+1
+use	_gleRenderFlatTrianglesFunc_body	iVar7	texEnableBitsThenLightVertexThenRunVertexCountThenPolygonVertexCount	CONFIRMED	_gleTexEnableBits result, tested for texturing	^\s*bVar2\ =\ iVar7\ !=\ 0;$	+1

@@ -490,18 +490,18 @@ use	_gleBindPipelineProgram	iVar9	loopIndex2	INFERRED	only ever set to a start v
 use	_gleBindPipelineProgram	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar9\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
 use	_glProgramStringARB_Exec	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 9;$	+1
 use	_glProgramStringARB_Exec	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
-use	_glProgramStringARB_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
-use	_glProgramStringARB_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(\(int\)local_60\ \+\ iVar6\)\ =\ uVar3;$	+2
-use	_glProgramStringARB_Exec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
-use	_glProgramStringARB_Exec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\*\(char\ \*\)\(param_5\ \+\ iVar8\)\ ==\ '\\0'\)\ break;$	+5
-use	_glProgramStringARB_Exec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined1\ \*\)\(iVar6\ \+\ iVar8\)\ =\ 0;$	+1
-use	_glProgramStringARB_Exec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x18\)\ =\ iVar8;$	+1
-use	_glProgramStringARB_Exec	iVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$@2	+1
-use	_glProgramStringARB_Exec	iVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(\(int\)local_60\ \+\ iVar8\)\ =\ uVar3;$	+2
-use	_glProgramStringARB_Exec	iVar8	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 5;$	+1
-use	_glProgramStringARB_Exec	iVar8	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
-use	_glProgramStringARB_Exec	iVar8	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$@3	+1
-use	_glProgramStringARB_Exec	iVar8	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar1\ =\ \(uint\ \*\)\(\(int\)local_60\ \+\ iVar8\);$	+2
+use	_glProgramStringARB_Exec	iVar6	allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glProgramStringARB_Exec	iVar6	allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(\(int\)local_60\ \+\ iVar6\)\ =\ uVar3;$	+2
+use	_glProgramStringARB_Exec	iVar8	stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
+use	_glProgramStringARB_Exec	iVar8	stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\*\(char\ \*\)\(param_5\ \+\ iVar8\)\ ==\ '\\0'\)\ break;$	+5
+use	_glProgramStringARB_Exec	iVar8	stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined1\ \*\)\(iVar6\ \+\ iVar8\)\ =\ 0;$	+1
+use	_glProgramStringARB_Exec	iVar8	stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x18\)\ =\ iVar8;$	+1
+use	_glProgramStringARB_Exec	iVar8	stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$@2	+1
+use	_glProgramStringARB_Exec	iVar8	stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(\(int\)local_60\ \+\ iVar8\)\ =\ uVar3;$	+2
+use	_glProgramStringARB_Exec	iVar8	stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 5;$	+1
+use	_glProgramStringARB_Exec	iVar8	stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
+use	_glProgramStringARB_Exec	iVar8	stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$@3	+1
+use	_glProgramStringARB_Exec	iVar8	stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar1\ =\ \(uint\ \*\)\(\(int\)local_60\ \+\ iVar8\);$	+2
 use	_glProgramStringARB_Exec	iVar9	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ 9;$	+1
 use	_glProgramStringARB_Exec	iVar9	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
 use	_glProgramStringARB_Exec	iVar9	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1

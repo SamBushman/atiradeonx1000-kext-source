@@ -3366,14 +3366,14 @@ LAB_000c9cc0:
 }
 
 /* _gleDrawPixelsSaveState @ 0xc9de8 (756 bytes) */
-int _gleDrawPixelsSaveState(glContext, param_2)
+int _gleDrawPixelsSaveState(glContext, savedStateRecord)
   int glContext;
-  uint *param_2;
+  uint *savedStateRecord;
 {
-  uint uVar1;
-  uint uVar2;
-  int iVar3;
-  byte bVar4;
+  uint drawableWidthThenDrawableHeight;
+  uint drawableHeight;
+  int framebufferObject;
+  byte savedFieldMask;
   double f1AfterCall;
   double f1AfterCall1;
   double f1AfterCall2;
@@ -3392,9 +3392,9 @@ int _gleDrawPixelsSaveState(glContext, param_2)
   double incomingStackWord_ffffffa0;
   double incomingStackWord_ffffffa8;
   
-  bVar4 = *(ushort *)(glContext + 0x3538) != 0x1e01;
-  if ((bool)bVar4) {
-    *param_2 = (uint)*(ushort *)(glContext + 0x3538);
+  savedFieldMask = *(ushort *)(glContext + 0x3538) != 0x1e01;
+  if ((bool)savedFieldMask) {
+    *savedStateRecord = (uint)*(ushort *)(glContext + 0x3538);
     *(undefined2 *)(glContext + 0x3538) = 0x1e01;
     *(uint *)(glContext + 800) = *(uint *)(glContext + 800) | 1;
   }
@@ -3402,96 +3402,96 @@ int _gleDrawPixelsSaveState(glContext, param_2)
   _gleUpdateTextureParams(glContext,0);
   fparam_1 = f1AfterCall;
   if (*(byte *)(glContext + 0x34da) != 0) {
-    param_2[1] = (uint)*(byte *)(glContext + 0x34da);
+    savedStateRecord[1] = (uint)*(byte *)(glContext + 0x34da);
     *(undefined1 *)(glContext + 0x34da) = 0;
     _gleUpdatePolyMode(glContext);
-    bVar4 = bVar4 | 2;
+    savedFieldMask = savedFieldMask | 2;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800000;
     fparam_1 = f1AfterCall1;
   }
   if (*(byte *)(glContext + 0x34d8) != 0) {
-    param_2[2] = (uint)*(byte *)(glContext + 0x34d8);
-    bVar4 = bVar4 | 4;
+    savedStateRecord[2] = (uint)*(byte *)(glContext + 0x34d8);
+    savedFieldMask = savedFieldMask | 4;
     *(undefined1 *)(glContext + 0x34d8) = 0;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x2000000;
   }
   if (*(byte *)(glContext + 0x34dd) != 0) {
-    param_2[3] = (uint)*(byte *)(glContext + 0x34dd);
-    bVar4 = bVar4 | 8;
+    savedStateRecord[3] = (uint)*(byte *)(glContext + 0x34dd);
+    savedFieldMask = savedFieldMask | 8;
     *(undefined1 *)(glContext + 0x34dd) = 0;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800000;
   }
   if (*(byte *)(glContext + 0x34d9) != 0) {
-    param_2[4] = (uint)*(byte *)(glContext + 0x34d9);
-    bVar4 = bVar4 | 0x10;
+    savedStateRecord[4] = (uint)*(byte *)(glContext + 0x34d9);
+    savedFieldMask = savedFieldMask | 0x10;
     *(undefined1 *)(glContext + 0x34d9) = 0;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800000;
   }
   if (*(byte *)(glContext + 0x4664) != 0) {
-    param_2[6] = (uint)*(byte *)(glContext + 0x4664);
+    savedStateRecord[6] = (uint)*(byte *)(glContext + 0x4664);
     *(undefined1 *)(glContext + 0x4664) = 0;
-    bVar4 = bVar4 | 0x40;
+    savedFieldMask = savedFieldMask | 0x40;
     _gleVPDisable(glContext);
     fparam_1 = f1AfterCall2;
   }
   if (*(uint *)(glContext + 0x5430) != 0) {
-    param_2[7] = *(uint *)(glContext + 0x5430);
+    savedStateRecord[7] = *(uint *)(glContext + 0x5430);
     *(undefined4 *)(glContext + 0x5430) = 0;
-    bVar4 = bVar4 | 0x80;
+    savedFieldMask = savedFieldMask | 0x80;
     _gleVPDisable(glContext);
     fparam_1 = f1AfterCall3;
   }
-  param_2[5] = *(uint *)(glContext + 0x4ff4);
-  param_2[8] = *(uint *)(glContext + 0x1ba0);
-  param_2[9] = *(uint *)(glContext + 0x1ba4);
-  param_2[10] = *(uint *)(glContext + 0x1ba8);
-  param_2[0xb] = *(uint *)(glContext + 0x1bac);
-  iVar3 = *(int *)(glContext + 0x744c);
+  savedStateRecord[5] = *(uint *)(glContext + 0x4ff4);
+  savedStateRecord[8] = *(uint *)(glContext + 0x1ba0);
+  savedStateRecord[9] = *(uint *)(glContext + 0x1ba4);
+  savedStateRecord[10] = *(uint *)(glContext + 0x1ba8);
+  savedStateRecord[0xb] = *(uint *)(glContext + 0x1bac);
+  framebufferObject = *(int *)(glContext + 0x744c);
   *(undefined4 *)(glContext + 0x1ba4) = 0;
   *(undefined4 *)(glContext + 0x1ba0) = 0;
-  if (iVar3 == 0) {
-    uVar1 = *(uint *)(glContext + 0x471c);
+  if (framebufferObject == 0) {
+    drawableWidthThenDrawableHeight = *(uint *)(glContext + 0x471c);
   }
   else {
-    uVar1 = (uint)*(ushort *)(iVar3 + 0xca);
+    drawableWidthThenDrawableHeight = (uint)*(ushort *)(framebufferObject + 0xca);
   }
-  *(uint *)(glContext + 0x1ba8) = uVar1;
-  if (iVar3 == 0) {
-    uVar1 = *(uint *)(glContext + 0x4720);
+  *(uint *)(glContext + 0x1ba8) = drawableWidthThenDrawableHeight;
+  if (framebufferObject == 0) {
+    drawableWidthThenDrawableHeight = *(uint *)(glContext + 0x4720);
   }
   else {
-    uVar1 = (uint)*(ushort *)(iVar3 + 0xcc);
+    drawableWidthThenDrawableHeight = (uint)*(ushort *)(framebufferObject + 0xcc);
   }
-  *(uint *)(glContext + 0x1bac) = uVar1;
+  *(uint *)(glContext + 0x1bac) = drawableWidthThenDrawableHeight;
   ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
-  _gleCopyMatrix(glContext + 0x1c80,param_2 + 0xc);
-  _gleCopyMatrix(glContext + 0x1cc0,param_2 + 0x1c);
-  _gleCopyMatrix(glContext + *(int *)(glContext + 0x53d4) * 0x40 + 0x1fc0,param_2 + 0x2c);
+  _gleCopyMatrix(glContext + 0x1c80,savedStateRecord + 0xc);
+  _gleCopyMatrix(glContext + 0x1cc0,savedStateRecord + 0x1c);
+  _gleCopyMatrix(glContext + *(int *)(glContext + 0x53d4) * 0x40 + 0x1fc0,savedStateRecord + 0x2c);
   _glMatrixMode_Exec(glContext,0x1701);
   _glLoadIdentity_Exec(glContext);
-  iVar3 = *(int *)(glContext + 0x744c);
-  if (iVar3 == 0) {
-    uVar1 = *(uint *)(glContext + 0x471c);
+  framebufferObject = *(int *)(glContext + 0x744c);
+  if (framebufferObject == 0) {
+    drawableWidthThenDrawableHeight = *(uint *)(glContext + 0x471c);
   }
   else {
-    uVar1 = (uint)*(ushort *)(iVar3 + 0xca);
+    drawableWidthThenDrawableHeight = (uint)*(ushort *)(framebufferObject + 0xca);
   }
-  if (iVar3 == 0) {
-    uVar2 = *(uint *)(glContext + 0x4720);
+  if (framebufferObject == 0) {
+    drawableHeight = *(uint *)(glContext + 0x4720);
   }
   else {
-    uVar2 = (uint)*(ushort *)(iVar3 + 0xcc);
+    drawableHeight = (uint)*(ushort *)(framebufferObject + 0xcc);
   }
   ((void (*)())_glOrtho_Exec)(glContext,DOUBLE_00108d60,
-                (double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58,DOUBLE_00108d60,
-                (double)CONCAT44(0x43300000,uVar2 ^ 0x80000000) - DOUBLE_00108d58,DOUBLE_00108d60,
+                (double)CONCAT44(0x43300000,drawableWidthThenDrawableHeight ^ 0x80000000) - DOUBLE_00108d58,DOUBLE_00108d60,
+                (double)CONCAT44(0x43300000,drawableHeight ^ 0x80000000) - DOUBLE_00108d58,DOUBLE_00108d60,
                 DOUBLE_00108dc8,incomingFpr7,incomingFpr8,incomingStackWord_ffffff88,incomingStackWord_ffffff90,incomingStackWord_ffffff98,
                 incomingStackWord_ffffffa0,incomingStackWord_ffffffa8);
   _glMatrixMode_Exec(glContext,0x1700);
   _glLoadIdentity_Exec(glContext);
   _glMatrixMode_Exec(glContext,0x1702);
   _glLoadIdentity_Exec(glContext);
-  return bVar4;
+  return savedFieldMask;
 }
 
 /* _gleDrawPixelsRestoreState @ 0xca0dc (408 bytes) */

@@ -106,10 +106,10 @@ use	_glGenProgramsARB_Exec	uVar1	glErrorCode	INFERRED	role read off the defining
 use	_glBindProgramARB_Exec	uVar1	glErrorCode	INFERRED	role read off the defining expressions of the web	^\s*uVar1\ =\ 0x502;$	+1
 use	_glBindProgramARB_Exec	uVar1	glErrorCode	INFERRED	role read off the defining expressions of the web	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x7574\)\ =\ uVar1;$	+1
 use	_glBindProgramARB_Exec	uVar1	glErrorCode	INFERRED	role read off the defining expressions of the web	^\s*uVar1\ =\ 0x500;$	+1
-use	_glProgramStringARB_Exec	uVar3	glErrorCode	INFERRED	role read off the defining expressions of the web	^\s*uVar3\ =\ 0x502;$	+1
-use	_glProgramStringARB_Exec	uVar3	glErrorCode	INFERRED	role read off the defining expressions of the web	^\s*uVar3\ =\ 0x500;$	+1
-use	_glProgramStringARB_Exec	uVar3	glErrorCode	INFERRED	role read off the defining expressions of the web	^\s*uVar3\ =\ 0x501;$	+1
-use	_glProgramStringARB_Exec	uVar3	glErrorCode	INFERRED	role read off the defining expressions of the web	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x7574\)\ =\ uVar3;$	+1
+use	_glProgramStringARB_Exec	uVar3	glErrorCodeThenCopiedWord	INFERRED	role read off the defining expressions of the web	^\s*uVar3\ =\ 0x502;$	+1
+use	_glProgramStringARB_Exec	uVar3	glErrorCodeThenCopiedWord	INFERRED	role read off the defining expressions of the web	^\s*uVar3\ =\ 0x500;$	+1
+use	_glProgramStringARB_Exec	uVar3	glErrorCodeThenCopiedWord	INFERRED	role read off the defining expressions of the web	^\s*uVar3\ =\ 0x501;$	+1
+use	_glProgramStringARB_Exec	uVar3	glErrorCodeThenCopiedWord	INFERRED	role read off the defining expressions of the web	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x7574\)\ =\ uVar3;$	+1
 use	_glProgramLocalParameter4fvARB_Exec	uVar3	glErrorCode	INFERRED	role read off the defining expressions of the web	^\s*uVar3\ =\ 0x500;$	+1
 use	_glProgramLocalParameter4fvARB_Exec	uVar3	glErrorCode	INFERRED	role read off the defining expressions of the web	^\s*uVar3\ =\ 0x501;$	+1
 use	_glProgramLocalParameter4fvARB_Exec	uVar3	glErrorCode	INFERRED	role read off the defining expressions of the web	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x7574\)\ =\ uVar3;$	+1

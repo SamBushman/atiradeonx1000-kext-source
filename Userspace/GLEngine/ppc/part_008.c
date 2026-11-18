@@ -1729,12 +1729,12 @@ double _gleClipPoly(glContext, vertexList, vertexCount, clipPlaneMask, outputLis
   int *outCount;
   int computeClipCodes;
 {
-  int iVar1;
-  uint uVar2;
+  int nextFreeVertexThenOutCountResult;
+  uint planeBitThenPolyClipCodes;
   uint newVertexClipCode;
   int loopIndex;
-  int iVar5;
-  int *piVar6;
+  int outputVertexCountThenCurrentVertex;
+  int *outputListThisPass;
   int *cursor;
   int *inputEnd;
   int *cursor2;
@@ -1742,67 +1742,67 @@ double _gleClipPoly(glContext, vertexList, vertexCount, clipPlaneMask, outputLis
   
   if (computeClipCodes == 0) {
 LAB_000514ac:
-    iVar1 = *(int *)(glContext + 0x4858);
+    nextFreeVertexThenOutCountResult = *(int *)(glContext + 0x4858);
     inputEnd = vertexList + vertexCount;
-    iVar5 = 0;
-    uVar2 = 1;
-    piVar6 = outputList;
+    outputVertexCountThenCurrentVertex = 0;
+    planeBitThenPolyClipCodes = 1;
+    outputListThisPass = outputList;
     do {
-      cursor = piVar6;
-      if ((clipPlaneMask & uVar2) != 0) {
+      cursor = outputListThisPass;
+      if ((clipPlaneMask & planeBitThenPolyClipCodes) != 0) {
         *inputEnd = *vertexList;
         for (cursor2 = vertexList; cursor2 < inputEnd; cursor2 = cursor2 + 1) {
-          iVar5 = *cursor2;
-          if ((uVar2 & *(byte *)(iVar5 + 0x7f)) == 0) {
-            *cursor = iVar5;
+          outputVertexCountThenCurrentVertex = *cursor2;
+          if ((planeBitThenPolyClipCodes & *(byte *)(outputVertexCountThenCurrentVertex + 0x7f)) == 0) {
+            *cursor = outputVertexCountThenCurrentVertex;
             cursor = cursor + 1;
-            if ((uVar2 & *(byte *)(cursor2[1] + 0x7f)) != 0) {
-              newVertexClipCode = (**(code **)(glContext + 0x49cc))(glContext,cursor2[1],*cursor2,iVar1,uVar2);
-              *(undefined1 *)(iVar1 + 0x7c) = 0;
-              *cursor = iVar1;
+            if ((planeBitThenPolyClipCodes & *(byte *)(cursor2[1] + 0x7f)) != 0) {
+              newVertexClipCode = (**(code **)(glContext + 0x49cc))(glContext,cursor2[1],*cursor2,nextFreeVertexThenOutCountResult,planeBitThenPolyClipCodes);
+              *(undefined1 *)(nextFreeVertexThenOutCountResult + 0x7c) = 0;
+              *cursor = nextFreeVertexThenOutCountResult;
               goto LAB_0005156c;
             }
           }
-          else if ((uVar2 & *(byte *)(cursor2[1] + 0x7f)) == 0) {
-            newVertexClipCode = (**(code **)(glContext + 0x49cc))(glContext,iVar5,cursor2[1],iVar1,uVar2);
-            *cursor = iVar1;
+          else if ((planeBitThenPolyClipCodes & *(byte *)(cursor2[1] + 0x7f)) == 0) {
+            newVertexClipCode = (**(code **)(glContext + 0x49cc))(glContext,outputVertexCountThenCurrentVertex,cursor2[1],nextFreeVertexThenOutCountResult,planeBitThenPolyClipCodes);
+            *cursor = nextFreeVertexThenOutCountResult;
 LAB_0005156c:
             clipPlaneMask = (clipPlaneMask | newVertexClipCode) & 0xff;
-            iVar1 = iVar1 + 0x100;
+            nextFreeVertexThenOutCountResult = nextFreeVertexThenOutCountResult + 0x100;
             cursor = cursor + 1;
           }
         }
-        iVar5 = (int)cursor - (int)piVar6 >> 2;
-        if (iVar5 < 3) goto LAB_000514a0;
-        inputEnd = piVar6 + iVar5;
+        outputVertexCountThenCurrentVertex = (int)cursor - (int)outputListThisPass >> 2;
+        if (outputVertexCountThenCurrentVertex < 3) goto LAB_000514a0;
+        inputEnd = outputListThisPass + outputVertexCountThenCurrentVertex;
         cursor = vertexList;
-        vertexList = piVar6;
+        vertexList = outputListThisPass;
       }
-      uVar2 = (uVar2 & 0x7f) << 1;
-      piVar6 = cursor;
-    } while (uVar2 < 0x21);
-    if ((vertexList != outputList) && (loopIndex = 0, remaining = iVar5, 0 < iVar5)) {
+      planeBitThenPolyClipCodes = (planeBitThenPolyClipCodes & 0x7f) << 1;
+      outputListThisPass = cursor;
+    } while (planeBitThenPolyClipCodes < 0x21);
+    if ((vertexList != outputList) && (loopIndex = 0, remaining = outputVertexCountThenCurrentVertex, 0 < outputVertexCountThenCurrentVertex)) {
       do {
         outputList[loopIndex] = vertexList[loopIndex];
         remaining = remaining + -1;
         loopIndex = loopIndex + 1;
       } while (remaining != 0);
     }
-    *outCount = iVar5;
-    *(int *)(glContext + 0x4858) = iVar1;
+    *outCount = outputVertexCountThenCurrentVertex;
+    *(int *)(glContext + 0x4858) = nextFreeVertexThenOutCountResult;
   }
   else {
-    uVar2 = ((int (*)())_glePolyClipCode)(glContext,vertexList,vertexCount);
-    if ((uVar2 & 0xff) == 0) {
-      iVar1 = -1;
+    planeBitThenPolyClipCodes = ((int (*)())_glePolyClipCode)(glContext,vertexList,vertexCount);
+    if ((planeBitThenPolyClipCodes & 0xff) == 0) {
+      nextFreeVertexThenOutCountResult = -1;
     }
     else {
-      clipPlaneMask = uVar2 & 0xff;
-      if ((uVar2 & 0xff00) == 0) goto LAB_000514ac;
+      clipPlaneMask = planeBitThenPolyClipCodes & 0xff;
+      if ((planeBitThenPolyClipCodes & 0xff00) == 0) goto LAB_000514ac;
 LAB_000514a0:
-      iVar1 = 0;
+      nextFreeVertexThenOutCountResult = 0;
     }
-    *outCount = iVar1;
+    *outCount = nextFreeVertexThenOutCountResult;
   }
   return;
 }

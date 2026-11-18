@@ -2812,32 +2812,25 @@ void _glProgramStringARB_Exec(glContext, target, format, len, string)
   int len;
   int string;
 {
-  int allocatedBlock;
+  int allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor;
   int remaining4;
   int loopIndex5;
-  int loopIndex4;
-  int remaining2;
-  int loopIndex3;
-  int loopIndex2;
-  int loopIndex;
-  undefined4 glErrorCode;
-  uint *puVar1;
-  bool bVar2;
-  undefined4 uVar3;
-  uint uVar4;
+  int stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount;
+  undefined4 glErrorCodeThenCopiedWord;
+  uint *copyWordPtrThenBodyWordPtr;
+  bool stringHasNoEarlyNul;
+  uint expectedTargetThenNewDirtyWord;
   undefined4 *srcCursor;
-  int iVar6;
-  int iVar7;
-  int iVar8;
+  int programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor;
   int remaining3;
   int remaining;
-  uint local_60 [15];
+  uint savedRecordWords28 [15];
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    glErrorCode = 0x502;
+    glErrorCodeThenCopiedWord = 0x502;
     goto LAB_00022bb8;
   }
   if (-1 < len) {
@@ -2846,104 +2839,104 @@ LAB_00022b48:
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
-      glErrorCode = 0x500;
+      glErrorCodeThenCopiedWord = 0x500;
       goto LAB_00022bb8;
     }
     if (target == 0x8620) {
-      iVar7 = 0;
+      programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor = 0;
     }
     else {
       if (target < 0x8621) {
-        uVar4 = 0x8200;
+        expectedTargetThenNewDirtyWord = 0x8200;
       }
       else {
-        uVar4 = 0x8804;
+        expectedTargetThenNewDirtyWord = 0x8804;
       }
-      if (target != uVar4) goto LAB_00022b48;
-      iVar7 = 1;
+      if (target != expectedTargetThenNewDirtyWord) goto LAB_00022b48;
+      programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor = 1;
     }
-    loopIndex2 = 0;
-    allocatedBlock = _malloc(len + 1);
-    bVar2 = len == 0;
+    stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = 0;
+    allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = _malloc(len + 1);
+    stringHasNoEarlyNul = len == 0;
     if (0 < len) {
       do {
-        if (*(char *)(string + loopIndex2) == '\0') break;
-        *(char *)(allocatedBlock + loopIndex2) = *(char *)(string + loopIndex2);
-        loopIndex2 = loopIndex2 + 1;
-        bVar2 = loopIndex2 == len;
-      } while (loopIndex2 < len);
+        if (*(char *)(string + stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount) == '\0') break;
+        *(char *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount) = *(char *)(string + stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount);
+        stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 1;
+        stringHasNoEarlyNul = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount == len;
+      } while (stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount < len);
     }
-    *(undefined1 *)(allocatedBlock + loopIndex2) = 0;
-    if (bVar2) {
-      iVar7 = *(int *)(iVar7 * 4 + glContext + 0x5420);
-      if (*(int *)(iVar7 + 0x14) != 0) {
-        ((void (*)())_gleModifyPluginPipelineProgram)(glContext,iVar7 + 0x10,1);
-        _free(*(undefined4 *)(iVar7 + 0x14));
+    *(undefined1 *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount) = 0;
+    if (stringHasNoEarlyNul) {
+      programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor = *(int *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor * 4 + glContext + 0x5420);
+      if (*(int *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x14) != 0) {
+        ((void (*)())_gleModifyPluginPipelineProgram)(glContext,programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x10,1);
+        _free(*(undefined4 *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x14));
       }
-      *(undefined1 *)(iVar7 + 0x4c) = 1;
-      *(undefined4 *)(iVar7 + 0x1c) = 0x8875;
-      *(int *)(iVar7 + 0x18) = loopIndex2;
-      *(int *)(iVar7 + 0x14) = allocatedBlock;
-      *(short *)(iVar7 + 0x4c8) = (short)target;
+      *(undefined1 *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x4c) = 1;
+      *(undefined4 *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x1c) = 0x8875;
+      *(int *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x18) = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount;
+      *(int *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x14) = allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor;
+      *(short *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x4c8) = (short)target;
       if (target == 0x8620) {
-        iVar6 = iVar7 + 0x10;
+        allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x10;
         remaining3 = 9;
-        srcCursor = (undefined4 *)(iVar7 + 0x28);
-        loopIndex3 = 0;
+        srcCursor = (undefined4 *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x28);
+        stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = 0;
         do {
-          uVar3 = *srcCursor;
+          glErrorCodeThenCopiedWord = *srcCursor;
           srcCursor = srcCursor + 1;
-          *(undefined4 *)((int)local_60 + loopIndex3) = uVar3;
-          loopIndex3 = loopIndex3 + 4;
+          *(undefined4 *)((int)savedRecordWords28 + stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount) = glErrorCodeThenCopiedWord;
+          stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 4;
           remaining3 = remaining3 + -1;
         } while (remaining3 != 0);
-        ((void (*)())_glePPParse)(glContext,iVar6,0);
-        ((void (*)())_glePPUpdateProgram)(glContext,iVar6);
+        ((void (*)())_glePPParse)(glContext,allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor,0);
+        ((void (*)())_glePPUpdateProgram)(glContext,allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor);
         _gleUpdateInverseNeeds(glContext);
         remaining = 9;
         loopIndex5 = 0;
-        iVar8 = glContext;
+        stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = glContext;
         do {
-          puVar1 = (uint *)((int)local_60 + loopIndex5);
+          copyWordPtrThenBodyWordPtr = (uint *)((int)savedRecordWords28 + loopIndex5);
           loopIndex5 = loopIndex5 + 4;
-          uVar4 = *(uint *)(iVar8 + 0x324) | *(uint *)(iVar6 + 0x18) & ~*puVar1;
-          *(uint *)(iVar8 + 0x324) = uVar4;
-          puVar1 = (uint *)(iVar6 + 0x18);
-          iVar6 = iVar6 + 4;
-          *(uint *)(iVar8 + 0x324) = uVar4 & *puVar1;
-          iVar8 = iVar8 + 4;
+          expectedTargetThenNewDirtyWord = *(uint *)(stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 0x324) | *(uint *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 0x18) & ~*copyWordPtrThenBodyWordPtr;
+          *(uint *)(stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 0x324) = expectedTargetThenNewDirtyWord;
+          copyWordPtrThenBodyWordPtr = (uint *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 0x18);
+          allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 4;
+          *(uint *)(stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 0x324) = expectedTargetThenNewDirtyWord & *copyWordPtrThenBodyWordPtr;
+          stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 4;
           remaining = remaining + -1;
         } while (remaining != 0);
         _gleSelectVertexSubmitFunc(glContext);
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x400000;
       }
       if (target == 0x8804) {
-        srcCursor = (undefined4 *)(iVar7 + 0x28);
-        remaining2 = 5;
-        iVar7 = iVar7 + 0x10;
-        loopIndex = 0;
+        srcCursor = (undefined4 *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x28);
+        stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = 5;
+        programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor = programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x10;
+        allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = 0;
         do {
-          uVar3 = *srcCursor;
+          glErrorCodeThenCopiedWord = *srcCursor;
           srcCursor = srcCursor + 1;
-          *(undefined4 *)((int)local_60 + loopIndex) = uVar3;
-          loopIndex = loopIndex + 4;
-          remaining2 = remaining2 + -1;
-        } while (remaining2 != 0);
-        ((void (*)())_glePPParse)(glContext,iVar7,1);
-        ((void (*)())_glePPUpdateProgram)(glContext,iVar7);
+          *(undefined4 *)((int)savedRecordWords28 + allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor) = glErrorCodeThenCopiedWord;
+          allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 4;
+          stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + -1;
+        } while (stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount != 0);
+        ((void (*)())_glePPParse)(glContext,programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor,1);
+        ((void (*)())_glePPUpdateProgram)(glContext,programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor);
         _gleUpdateInverseNeeds(glContext);
         remaining4 = 9;
-        loopIndex4 = 0;
-        iVar6 = glContext;
+        stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = 0;
+        allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = glContext;
         do {
-          puVar1 = (uint *)((int)local_60 + loopIndex4);
-          loopIndex4 = loopIndex4 + 4;
-          uVar4 = *(uint *)(iVar6 + 0x348) | *(uint *)(iVar7 + 0x18) & ~*puVar1;
-          *(uint *)(iVar6 + 0x348) = uVar4;
-          puVar1 = (uint *)(iVar7 + 0x18);
-          iVar7 = iVar7 + 4;
-          *(uint *)(iVar6 + 0x348) = uVar4 & *puVar1;
-          iVar6 = iVar6 + 4;
+          copyWordPtrThenBodyWordPtr = (uint *)((int)savedRecordWords28 + stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount);
+          stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount = stringIndexThenCopyOffsetThenDirtyWordCursorThenRemainingWordCount + 4;
+          expectedTargetThenNewDirtyWord = *(uint *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 0x348) | *(uint *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x18) & ~*copyWordPtrThenBodyWordPtr;
+          *(uint *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 0x348) = expectedTargetThenNewDirtyWord;
+          copyWordPtrThenBodyWordPtr = (uint *)(programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 0x18);
+          programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor = programSlotThenProgramRecordThenProgramBodyThenBodyWordCursor + 4;
+          *(uint *)(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 0x348) = expectedTargetThenNewDirtyWord & *copyWordPtrThenBodyWordPtr;
+          allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor = allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor + 4;
           remaining4 = remaining4 + -1;
         } while (remaining4 != 0);
         _gleSelectVertexSubmitFunc(glContext);
@@ -2957,14 +2950,14 @@ LAB_00022b48:
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x1000000;
       return;
     }
-    _free(allocatedBlock);
+    _free(allocatedBlockThenProgramBodyThenCopyOffsetThenDirtyWordCursor);
   }
   if (*(int *)(glContext + 0x7574) != 0) {
     return;
   }
-  glErrorCode = 0x501;
+  glErrorCodeThenCopiedWord = 0x501;
 LAB_00022bb8:
-  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCodeThenCopiedWord;
   return;
 }
 

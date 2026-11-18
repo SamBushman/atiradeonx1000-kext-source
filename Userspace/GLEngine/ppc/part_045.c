@@ -755,78 +755,78 @@ void _gleRenderSmoothLinesFunc_body(glContext)
   int glContext;
 {
   bool texturingEnabled;
-  uint uVar2;
+  uint vertexEndThenRemainingVertices;
   int texEnableBits;
   uint batchClipCodes;
-  uint *puVar5;
+  uint *polygonListCursor;
   uint vertexCursor;
   uint *polygonList;
-  int iVar8;
+  int vertexCountThenClippedVertexCount;
   double f1AfterCall;
   double fparam_1;
   
   texEnableBits = _gleTexEnableBits(glContext);
   vertexCursor = *(uint *)(glContext + 0x4854);
-  iVar8 = (int)(*(int *)(glContext + 0x4858) - vertexCursor) >> 8;
-  if ((1 < iVar8) &&
-     (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,iVar8), (batchClipCodes & 0xff00) == 0)) {
+  vertexCountThenClippedVertexCount = (int)(*(int *)(glContext + 0x4858) - vertexCursor) >> 8;
+  if ((1 < vertexCountThenClippedVertexCount) &&
+     (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,vertexCountThenClippedVertexCount), (batchClipCodes & 0xff00) == 0)) {
     texturingEnabled = texEnableBits != 0;
     fparam_1 = f1AfterCall;
     if ((texturingEnabled) && (*(char *)(glContext + 0x53e4) != '\0')) {
-      fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, vertexCursor, iVar8);
+      fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, vertexCursor, vertexCountThenClippedVertexCount);
     }
     if (*(char *)(glContext + 0x50b4) != '\0') {
-      fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, iVar8);
+      fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, vertexCountThenClippedVertexCount);
     }
     if ((*(char *)(glContext + 0x30aa) != '\0') || ((texturingEnabled && (*(char *)(glContext + 0x53e6) != '\0'))))
     {
-      fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x5068))(glContext, vertexCursor, iVar8);
+      fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x5068))(glContext, vertexCursor, vertexCountThenClippedVertexCount);
     }
     if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
       if (texturingEnabled) {
         if (*(char *)(glContext + 0x53e5) != '\0') {
-          (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,iVar8);
+          (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,vertexCountThenClippedVertexCount);
         }
-        (**(code **)(glContext + 0x506c))(glContext,vertexCursor,iVar8,0);
+        (**(code **)(glContext + 0x506c))(glContext,vertexCursor,vertexCountThenClippedVertexCount,0);
       }
       if (*(char *)(glContext + 0x30aa) != '\0') {
-        (**(code **)(glContext + 0x4de8))(glContext,vertexCursor,iVar8);
+        (**(code **)(glContext + 0x4de8))(glContext,vertexCursor,vertexCountThenClippedVertexCount);
       }
                     
                     
-      (**(code **)(glContext + 0x46b4))(*(undefined4 *)(glContext + 0x4688),vertexCursor,iVar8);
+      (**(code **)(glContext + 0x46b4))(*(undefined4 *)(glContext + 0x4688),vertexCursor,vertexCountThenClippedVertexCount);
       return;
     }
     if (texturingEnabled) {
       if (*(char *)(glContext + 0x53e5) != '\0') {
-        (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,iVar8);
+        (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,vertexCountThenClippedVertexCount);
       }
-      fparam_1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexCursor, iVar8, 0);
+      fparam_1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, vertexCursor, vertexCountThenClippedVertexCount, 0);
     }
-    uVar2 = vertexCursor + iVar8 * 0x100;
+    vertexEndThenRemainingVertices = vertexCursor + vertexCountThenClippedVertexCount * 0x100;
     polygonList = *(uint **)(glContext + 0x4870);
-    if (vertexCursor < uVar2) {
-      uVar2 = (uVar2 - vertexCursor) + 0xff >> 8;
-      puVar5 = polygonList;
+    if (vertexCursor < vertexEndThenRemainingVertices) {
+      vertexEndThenRemainingVertices = (vertexEndThenRemainingVertices - vertexCursor) + 0xff >> 8;
+      polygonListCursor = polygonList;
       do {
-        *puVar5 = vertexCursor;
+        *polygonListCursor = vertexCursor;
         vertexCursor = vertexCursor + 0x100;
-        puVar5 = puVar5 + 1;
-        uVar2 = uVar2 - 1;
-      } while (uVar2 != 0);
+        polygonListCursor = polygonListCursor + 1;
+        vertexEndThenRemainingVertices = vertexEndThenRemainingVertices - 1;
+      } while (vertexEndThenRemainingVertices != 0);
     }
     if ((*(char *)(glContext + 0x4e18) != '\0') &&
-       (iVar8 = ((int (*)())_gleClipLinesPlane)(glContext,polygonList,iVar8,fparam_1), iVar8 == 0)) {
+       (vertexCountThenClippedVertexCount = ((int (*)())_gleClipLinesPlane)(glContext,polygonList,vertexCountThenClippedVertexCount,fparam_1), vertexCountThenClippedVertexCount == 0)) {
       return;
     }
     if (((batchClipCodes & 0xff) == 0) ||
-       (iVar8 = ((int (*)())_gleClipLines)(glContext,polygonList,iVar8,batchClipCodes & 0xff), iVar8 != 0)) {
+       (vertexCountThenClippedVertexCount = ((int (*)())_gleClipLines)(glContext,polygonList,vertexCountThenClippedVertexCount,batchClipCodes & 0xff), vertexCountThenClippedVertexCount != 0)) {
       if (*(char *)(glContext + 0x30aa) != '\0') {
-        (**(code **)(glContext + 0x4df0))(glContext,polygonList,iVar8);
+        (**(code **)(glContext + 0x4df0))(glContext,polygonList,vertexCountThenClippedVertexCount);
       }
                     
                     
-      (**(code **)(glContext + 0x46dc))(*(undefined4 *)(glContext + 0x4688),polygonList,iVar8,2);
+      (**(code **)(glContext + 0x46dc))(*(undefined4 *)(glContext + 0x4688),polygonList,vertexCountThenClippedVertexCount,2);
       return;
     }
   }
@@ -1648,13 +1648,13 @@ int _gleVAClipPoly(glContext, forwardedArg2, clipCodes, indexCount, indices)
   byte newCode;
   uint vertexIndex;
   uint newVertex;
-  byte bVar3;
+  byte andCodesThenPlaneBit;
   int resultCount;
   uint firstGeneratedIndex;
   uint *dstPoly;
-  uint *puVar7;
+  uint *nextDstPolyThenEdgeCursor;
   uint *srcPoly;
-  uint *puVar9;
+  uint *indexScanCursorThenGeneratedIndexCursor;
   int planeIndex;
   int copyIndex;
   byte orCodes;
@@ -1665,97 +1665,97 @@ int _gleVAClipPoly(glContext, forwardedArg2, clipCodes, indexCount, indices)
   uint edgeVertexIndex;
   int copyRemaining;
   undefined4 uStack0000001c;
-  uint local_f0 [20];
-  uint local_a0 [21];
+  uint scratchPolyIndices [20];
+  uint generatedVertexIndices [21];
   
   firstGeneratedIndex = *(int *)(glContext + 0x4988) + *(int *)(glContext + 0x4984);
   orCodes = 0;
-  bVar3 = 0xff;
+  andCodesThenPlaneBit = 0xff;
   freeIndexCursor = *(uint **)(glContext + 0x499c);
   if (indices < indices + indexCount) {
     remaining = (uint)((int)(indices + indexCount) + (3 - (int)indices)) >> 2;
-    puVar9 = indices;
+    indexScanCursorThenGeneratedIndexCursor = indices;
     do {
-      vertexIndex = *puVar9;
-      puVar9 = puVar9 + 1;
-      bVar3 = bVar3 & *(byte *)(clipCodes + vertexIndex);
+      vertexIndex = *indexScanCursorThenGeneratedIndexCursor;
+      indexScanCursorThenGeneratedIndexCursor = indexScanCursorThenGeneratedIndexCursor + 1;
+      andCodesThenPlaneBit = andCodesThenPlaneBit & *(byte *)(clipCodes + vertexIndex);
       orCodes = orCodes | *(byte *)(clipCodes + vertexIndex);
       remaining = remaining - 1;
     } while (remaining != 0);
   }
   resultCount = 0;
-  if (((bVar3 & 0x3f) == 0) && (resultCount = indexCount, (orCodes & 0xc3) != 0)) {
+  if (((andCodesThenPlaneBit & 0x3f) == 0) && (resultCount = indexCount, (orCodes & 0xc3) != 0)) {
     srcEnd = indices + indexCount;
     resultCount = 0;
     planeIndex = 0;
-    bVar3 = 1;
-    dstPoly = local_f0;
+    andCodesThenPlaneBit = 1;
+    dstPoly = scratchPolyIndices;
     srcPoly = indices;
-    puVar9 = local_a0;
+    indexScanCursorThenGeneratedIndexCursor = generatedVertexIndices;
     uStack0000001c = forwardedArg2;
     do {
-      puVar7 = dstPoly;
-      if ((orCodes & bVar3) != 0) {
+      nextDstPolyThenEdgeCursor = dstPoly;
+      if ((orCodes & andCodesThenPlaneBit) != 0) {
         *srcEnd = *srcPoly;
-        puVar7 = srcPoly + 1;
-        srcEnd[1] = *puVar7;
+        nextDstPolyThenEdgeCursor = srcPoly + 1;
+        srcEnd[1] = *nextDstPolyThenEdgeCursor;
         dstCursor = dstPoly;
-        for (; puVar7 <= srcEnd; puVar7 = puVar7 + 1) {
-          edgeVertexIndex = *puVar7;
+        for (; nextDstPolyThenEdgeCursor <= srcEnd; nextDstPolyThenEdgeCursor = nextDstPolyThenEdgeCursor + 1) {
+          edgeVertexIndex = *nextDstPolyThenEdgeCursor;
           if (((&_out_codes)[planeIndex] & ~*(byte *)(clipCodes + edgeVertexIndex)) == 0) {
-            if ((bVar3 & *(byte *)(clipCodes + puVar7[1])) == 0) {
+            if ((andCodesThenPlaneBit & *(byte *)(clipCodes + nextDstPolyThenEdgeCursor[1])) == 0) {
               newVertex = *freeIndexCursor;
               freeIndexCursor = freeIndexCursor + 1;
               (**(code **)(glContext + 0x49c4))
-                        (glContext,uStack0000001c,clipCodes,edgeVertexIndex,puVar7[1],newVertex,bVar3);
+                        (glContext,uStack0000001c,clipCodes,edgeVertexIndex,nextDstPolyThenEdgeCursor[1],newVertex,andCodesThenPlaneBit);
               newCode = *(byte *)(clipCodes + newVertex);
               *dstCursor = newVertex;
               dstCursor = dstCursor + 1;
-              edgeVertexIndex = *puVar7;
+              edgeVertexIndex = *nextDstPolyThenEdgeCursor;
               orCodes = orCodes | newCode;
             }
             if (firstGeneratedIndex <= edgeVertexIndex) {
-              *puVar9 = edgeVertexIndex;
+              *indexScanCursorThenGeneratedIndexCursor = edgeVertexIndex;
 LAB_000da318:
-              puVar9 = puVar9 + 1;
+              indexScanCursorThenGeneratedIndexCursor = indexScanCursorThenGeneratedIndexCursor + 1;
             }
           }
-          else if ((bVar3 & *(byte *)(clipCodes + edgeVertexIndex)) == 0) {
+          else if ((andCodesThenPlaneBit & *(byte *)(clipCodes + edgeVertexIndex)) == 0) {
             *dstCursor = edgeVertexIndex;
             dstCursor = dstCursor + 1;
-            edgeVertexIndex = puVar7[1];
+            edgeVertexIndex = nextDstPolyThenEdgeCursor[1];
             if (((&_out_codes)[planeIndex] & ~*(byte *)(clipCodes + edgeVertexIndex)) == 0) {
               newVertex = *freeIndexCursor;
               freeIndexCursor = freeIndexCursor + 1;
               (**(code **)(glContext + 0x49c4))
-                        (glContext,uStack0000001c,clipCodes,edgeVertexIndex,*puVar7,newVertex,bVar3);
+                        (glContext,uStack0000001c,clipCodes,edgeVertexIndex,*nextDstPolyThenEdgeCursor,newVertex,andCodesThenPlaneBit);
               newCode = *(byte *)(clipCodes + newVertex);
               *dstCursor = newVertex;
               orCodes = orCodes | newCode;
 LAB_000da384:
               dstCursor = dstCursor + 1;
             }
-            else if ((bVar3 & *(byte *)(clipCodes + edgeVertexIndex)) != 0) goto LAB_000da380;
+            else if ((andCodesThenPlaneBit & *(byte *)(clipCodes + edgeVertexIndex)) != 0) goto LAB_000da380;
           }
-          else if ((bVar3 & *(byte *)(clipCodes + puVar7[-1])) != 0) {
-            if ((bVar3 & *(byte *)(clipCodes + puVar7[1])) == 0) {
+          else if ((andCodesThenPlaneBit & *(byte *)(clipCodes + nextDstPolyThenEdgeCursor[-1])) != 0) {
+            if ((andCodesThenPlaneBit & *(byte *)(clipCodes + nextDstPolyThenEdgeCursor[1])) == 0) {
 LAB_000da380:
               *dstCursor = edgeVertexIndex;
               goto LAB_000da384;
             }
             if (firstGeneratedIndex <= edgeVertexIndex) {
-              *puVar9 = edgeVertexIndex;
+              *indexScanCursorThenGeneratedIndexCursor = edgeVertexIndex;
               goto LAB_000da318;
             }
           }
         }
         resultCount = (int)dstCursor - (int)dstPoly >> 2;
-        if (local_a0 < puVar9) {
-          remaining = (uint)((int)puVar9 + (3 - (int)local_a0)) >> 2;
+        if (generatedVertexIndices < indexScanCursorThenGeneratedIndexCursor) {
+          remaining = (uint)((int)indexScanCursorThenGeneratedIndexCursor + (3 - (int)generatedVertexIndices)) >> 2;
           do {
-            puVar9 = puVar9 + -1;
+            indexScanCursorThenGeneratedIndexCursor = indexScanCursorThenGeneratedIndexCursor + -1;
             freeIndexCursor = freeIndexCursor + -1;
-            *freeIndexCursor = *puVar9;
+            *freeIndexCursor = *indexScanCursorThenGeneratedIndexCursor;
             remaining = remaining - 1;
           } while (remaining != 0);
         }
@@ -1763,12 +1763,12 @@ LAB_000da380:
           return 0;
         }
         srcEnd = dstPoly + resultCount;
-        puVar7 = srcPoly;
+        nextDstPolyThenEdgeCursor = srcPoly;
         srcPoly = dstPoly;
       }
       planeIndex = planeIndex + 1;
-      bVar3 = bVar3 << 1;
-      dstPoly = puVar7;
+      andCodesThenPlaneBit = andCodesThenPlaneBit << 1;
+      dstPoly = nextDstPolyThenEdgeCursor;
     } while (planeIndex < 6);
     if ((srcPoly != indices) && (copyIndex = 0, copyRemaining = resultCount, 0 < resultCount)) {
       do {
