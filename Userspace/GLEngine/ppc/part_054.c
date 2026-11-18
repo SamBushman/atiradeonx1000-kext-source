@@ -76,63 +76,63 @@ void _gleTextureImageCopy(glContext, levelRecord, unusedArg3, x, y, width, heigh
 }
 
 /* _gleTextureSubImageCopy @ 0xf7514 (348 bytes) */
-void _gleTextureSubImageCopy(glContext, param_2, param_3, yoffset, zoffset, param_6, y, width, height)
+void _gleTextureSubImageCopy(glContext, textureLevel, xoffset, yoffset, zoffset, x, y, width, height)
   int glContext;
-  int param_2;
-  int param_3;
+  int textureLevel;
+  int xoffset;
   int yoffset;
   int zoffset;
-  undefined4 param_6;
+  undefined4 x;
   undefined4 y;
   undefined4 width;
   undefined4 height;
 {
-  byte bVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
+  byte borderWidth;
+  undefined4 savedPackSkipPixels;
+  undefined4 savedPackSkipImages;
+  undefined4 savedPackSkipRows;
+  undefined4 savedPackSwapAndLsbBytes;
+  undefined4 savedPackAlignment;
+  undefined4 savedPackRowLength;
+  undefined4 savedPackImageHeight;
   
-  uVar7 = *(undefined4 *)(glContext + 0x31b0);
-  *(uint *)(glContext + 0x31b0) = (uint)*(ushort *)(param_2 + 0xc);
-  uVar8 = *(undefined4 *)(0x31b4 + glContext);
-  *(uint *)(0x31b4 + glContext) = (uint)*(ushort *)(param_2 + 0xe);
-  uVar4 = *(undefined4 *)(glContext + 0x31b8);
-  uVar5 = *(undefined4 *)(glContext + 0x31c8);
-  uVar2 = *(undefined4 *)(glContext + 0x31bc);
-  uVar3 = *(undefined4 *)(glContext + 0x31c0);
-  uVar6 = *(undefined4 *)(glContext + 0x31c4);
-  if ((*(ushort *)(param_2 + 8) < 2) && (zoffset == 0)) {
+  savedPackRowLength = *(undefined4 *)(glContext + 0x31b0);
+  *(uint *)(glContext + 0x31b0) = (uint)*(ushort *)(textureLevel + 0xc);
+  savedPackImageHeight = *(undefined4 *)(0x31b4 + glContext);
+  *(uint *)(0x31b4 + glContext) = (uint)*(ushort *)(textureLevel + 0xe);
+  savedPackSkipRows = *(undefined4 *)(glContext + 0x31b8);
+  savedPackSwapAndLsbBytes = *(undefined4 *)(glContext + 0x31c8);
+  savedPackSkipPixels = *(undefined4 *)(glContext + 0x31bc);
+  savedPackSkipImages = *(undefined4 *)(glContext + 0x31c0);
+  savedPackAlignment = *(undefined4 *)(glContext + 0x31c4);
+  if ((*(ushort *)(textureLevel + 8) < 2) && (zoffset == 0)) {
     *(undefined4 *)(glContext + 0x31c0) = 0;
   }
   else {
-    *(uint *)(glContext + 0x31c0) = zoffset + (uint)*(byte *)(param_2 + 10);
+    *(uint *)(glContext + 0x31c0) = zoffset + (uint)*(byte *)(textureLevel + 10);
   }
-  if ((*(ushort *)(param_2 + 6) < 2) && (yoffset == 0)) {
+  if ((*(ushort *)(textureLevel + 6) < 2) && (yoffset == 0)) {
     *(undefined4 *)(glContext + 0x31b8) = 0;
   }
   else {
-    *(uint *)(glContext + 0x31b8) = yoffset + (uint)*(byte *)(param_2 + 10);
+    *(uint *)(glContext + 0x31b8) = yoffset + (uint)*(byte *)(textureLevel + 10);
   }
-  bVar1 = *(byte *)(param_2 + 10);
+  borderWidth = *(byte *)(textureLevel + 10);
   *(undefined4 *)(glContext + 0x31c4) = 1;
   *(undefined1 *)(glContext + 0x31c9) = 0;
-  *(uint *)(glContext + 0x31bc) = param_3 + (uint)bVar1;
+  *(uint *)(glContext + 0x31bc) = xoffset + (uint)borderWidth;
   *(undefined1 *)(glContext + 0x31c8) = 0;
   (**(code **)(glContext + 0x46a0))
-            (*(undefined4 *)(glContext + 0x4688),param_6,y,width,height,
-             *(undefined2 *)(param_2 + 0x10),*(undefined2 *)(param_2 + 0x12),
-             *(undefined4 *)(param_2 + 0x14));
-  *(undefined4 *)(glContext + 0x31b0) = uVar7;
-  *(undefined4 *)(glContext + 0x31c8) = uVar5;
-  *(undefined4 *)(0x31b4 + glContext) = uVar8;
-  *(undefined4 *)(glContext + 0x31b8) = uVar4;
-  *(undefined4 *)(glContext + 0x31bc) = uVar2;
-  *(undefined4 *)(glContext + 0x31c0) = uVar3;
-  *(undefined4 *)(glContext + 0x31c4) = uVar6;
+            (*(undefined4 *)(glContext + 0x4688),x,y,width,height,
+             *(undefined2 *)(textureLevel + 0x10),*(undefined2 *)(textureLevel + 0x12),
+             *(undefined4 *)(textureLevel + 0x14));
+  *(undefined4 *)(glContext + 0x31b0) = savedPackRowLength;
+  *(undefined4 *)(glContext + 0x31c8) = savedPackSwapAndLsbBytes;
+  *(undefined4 *)(0x31b4 + glContext) = savedPackImageHeight;
+  *(undefined4 *)(glContext + 0x31b8) = savedPackSkipRows;
+  *(undefined4 *)(glContext + 0x31bc) = savedPackSkipPixels;
+  *(undefined4 *)(glContext + 0x31c0) = savedPackSkipImages;
+  *(undefined4 *)(glContext + 0x31c4) = savedPackAlignment;
   return;
 }
 

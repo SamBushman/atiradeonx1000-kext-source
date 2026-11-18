@@ -1,0 +1,82 @@
+local	_gleClipLinesPlane	iVar8	keptVertex	INFERRED	the vertex of the segment that stays unchanged: second argument of the clip-interpolation callee ctx+0x49c8(ctx, clippedVertex, keptVertex, clippedVertex, t)
+local	_gleClipLinesPlane	iVar9	clippedVertex	INFERRED	the segment end that lies outside the plane: first (destination) and third (source) argument of the clip-interpolation callee ctx+0x49c8, so it is replaced in place by the intersection
+local	_gleClipLinesPlane	fVar5	endDistanceThenClipParameter	INFERRED	signed distance of the segment end vertex to the clip plane (x*planeX+y*planeY+z*planeZ+w*planeW from vertex words +0x20..+0x2c); when the segment crosses the plane it is overwritten with the interpolation parameter distanceA/(distanceA-distanceB) passed to the callee
+local	_gleClipLinesPlane	fVar7	zeroDistance	INFERRED	FLOAT_00108e50 loaded once: the 0.0f the vertex-to-plane distances are compared against (the same constant the fabs tests in _glOrtho_Comp compare with)
+local	_glOrtho_Comp	fVar1	rightMinusLeft	CONFIRMED	(float)(right - left): zero-width test and the divisor of the x scale and offset in the glOrtho matrix
+local	_glOrtho_Comp	fVar2	nearMinusFar	CONFIRMED	(float)(zNear - zFar): zero-depth test and the divisor of the z scale ((zFar+zNear)/(zNear-zFar) offset)
+local	_glOrtho_Comp	fVar3	topMinusBottom	CONFIRMED	(float)(top - bottom): zero-height test and the divisor of the y scale and offset
+local	_glOrtho_Comp	fVar4	absRange	INFERRED	absolute value of the range currently tested against FLOAT_00108e80 (the minimum accepted magnitude)
+local	_glOrtho_Comp	dVar6	inverseNearMinusFar	CONFIRMED	1.0/(zNear-zFar): listRecord[2]=2*it and listRecord[5]=(zFar+zNear)*it
+local	_glOrtho_Comp	dVar7	inverseTopMinusBottom	CONFIRMED	1.0/(top-bottom): listRecord[1]=2*it and listRecord[4]=-(top+bottom)*it
+local	_glOrtho_Comp	dVar8	inverseRightMinusLeft	CONFIRMED	1.0/(right-left): listRecord[0]=2*it and listRecord[3]=-(right+left)*it
+local	_gleUpdateLightAttenuation	param_2	lightIndex	INFERRED	scales the light parameter block (0x80 per light at ctx+0x2870..) and the derived light record (0x6c per light at ctx+0x4ad4..) and indexes the program parameter tables (7 per light)
+local	_gleUpdateLightAttenuation	bVar1	dirtyBitIndex	INFERRED	byte looked up from the program's per-light table: bit>>3&0x1c selects the dirty word and bit&0x1f the bit set in the +0x324/+0x348 dirty arrays
+local	_glColorTable_Exec	bVar1	tablePresent	CONFIRMED	table != 0: the glColorTable data pointer is non-null (so data is copied after the level is created)
+local	_glColorTable_Exec	bVar2	levelFlags	INFERRED	level flags byte (+0xb7 of the colorTable level slot) read, cleared of 0x10 and stored back (same role as levelFlags in _glTexImage2D_Exec)
+local	_glColorTable_Exec	uVar3	textureTargetBits	INFERRED	ushort at colorTable+0x24 tested with 0x3c00/0xc00 and or-ed with 0x1000 (same role as textureTargetBits in _glTexImage2D_Exec)
+local	_glColorTable_Exec	iVar7	textureLevel	CONFIRMED	colorTable+0xac: the level slot passed as the textureLevel argument of _gleCreatePluginTextureLevel/_gleDeletePluginTextureLevel/_gleFreeTextureLevel and as the destination of the create/put calls
+local	_gleAddEnableHashFunc	param_1	hashTable	INFERRED	array of 0x10-byte buckets indexed by (key & 0x3ff)*0x10: word 0 key, +4 value, +8 pointer to the chained overflow entry
+local	_gleAddEnableHashFunc	param_2	key	INFERRED	stored in word 0 of the bucket; its low 10 bits (& 0x3ff) select the bucket
+local	_gleAddEnableHashFunc	param_3	value	INFERRED	stored in word 1 (+4) of the bucket for the key
+local	_gleAddEnableHashFunc	iVar6	bucketOffset	CONFIRMED	(key & 0x3ff)*0x10 byte offset of the bucket
+local	_gleAddEnableHashFunc	iVar5	bucket	CONFIRMED	hashTable+bucketOffset: the bucket entry
+local	_gleAddEnableHashFunc	uVar1	oldKey	CONFIRMED	bucket word 0 before it is overwritten by the new key; copied to word 0 of the allocated overflow block
+local	_gleAddEnableHashFunc	uVar2	oldValue	CONFIRMED	bucket word +4 before it is overwritten by the new value; copied to word 1 of the allocated overflow block
+local	_gleAddEnableHashFunc	uVar4	oldChain	CONFIRMED	bucket word +8 (chain pointer) before the bucket points at the new overflow block; copied to word 2 of that block
+local	_gleFlushPluginVertexArray	piVar1	rendererFuncs	INFERRED	address ctx+0x8884+k*0x2e0 holding the renderer function table (same role as rendererFuncs in _gleReclaimVertexArrayResources); entry +0x1ac is called per renderer
+local	_gleFlushPluginVertexArray	puVar2	rendererContext	INFERRED	address ctx+0x85ac+k*0x2e0 holding the renderer handle passed first to the callback (same role as rendererContext in _gleReclaimVertexArrayResources)
+local	_gleFlushPluginVertexArray	iVar6	rendererBase	INFERRED	ctx+0x10000 stepped by the 0x2e0 renderer stride (same role as rendererBase in _gleReclaimVertexArrayResources)
+local	_gleFlushPluginVertexArray	uVar8	pendingDirtyWord0	INFERRED	param_2[0xd0] taken and cleared: or-ed into word +4 of every per-renderer record
+local	_gleFlushPluginVertexArray	uVar9	pendingDirtyWord1	INFERRED	param_2[0xd1] taken and cleared: or-ed into word +8 of every per-renderer record
+local	_gleFlushPluginVertexArray	uVar4	rendererVertexArrayHandle	INFERRED	the per-renderer handle word read through param_2 (stepped by one word per renderer) and passed as the second argument of the renderer callback +0x1ac
+local	_gleFlushPluginVertexArray	iVar3	callbackResult	INFERRED	result of the renderer callback +0x1ac; the value 1 selects the 0 flag for the following renderers
+local	_gleBuildModelviewTransformFuncNO	piVar12	funcCacheHead	CONFIRMED	ctx+0x5094: head of the circular function cache list; the lookup loop walks it, _gleMoveFuncCacheElem(head, hit) promotes a hit and ctx+0x5094 is set to the hit
+local	_gleBuildModelviewTransformFuncNO	iVar4	funcCacheElem	CONFIRMED	result of _gleCreateFuncCacheElem(...,0x60): the new cache element, keyed by +8/+0xc and whose generated code starts at +0x20
+local	_gleBuildModelviewTransformFuncNO	puVar16	codeWritePtr	INFERRED	starts at funcCacheElem+0x20 (the generated code area) and is advanced by one word per emitted instruction and by the chunk word counts returned by _gleRTCAddAChunk_c44b8
+local	_gleBuildModelviewTransformFuncNO	bVar1	needsMatrixLoadChunk	INFERRED	set when at least one matrix element register was assigned; gates the _gleLoadMatrixPtrRTC chunk emission
+local	_gleBuildModelviewTransformFuncNO	local_70	elementRegisters	INFERRED	per-element register number table (iVar8 starts at 8/0xc/0xe and increments per assigned element); read back (<<0x15) as the register field of the emitted instruction words
+local	_gleBuildModelviewTransformFuncNO	uVar14	matrixKey	CONFIRMED	derived from the _gleGenerateMatrixIdentifier result (ctx+0x5090) and modified by the param_2 and ctx+0x50b4 conditions; it is the key compared with cache element +8 and stored there on creation
+local	_gleBuildModelviewTransformFuncNO	uVar3	matrixIdThenFlagsThenLoopIndex	CONFIRMED	first the _gleGenerateMatrixIdentifier result stored at ctx+0x5090; then param_2|ctx+0x4fe8 flags (compared with cache element +0xc and stored there; bits 1/0x10/0x20/0xc tested); at the end reused as the zeroed loop index of the final 16-element store loop
+local	_gleBuildModelviewTransformFuncNO	uVar11	fogModeThenStoreOffset	CONFIRMED	first flags&0xc selecting the fog chunks (4 _gleFogLinear*RTC, 8 _gleFogExp*RTC, 0xc _gleFogExp2*RTC); at the end zeroed and decremented by 8 per word as the store offset of the 0xc8010000 instruction words
+local	_gleAllocVertexMachine	param_2	vertexCapacity	INFERRED	stored at ctx+0x4878; the record count is param_2*2+0xc and the second half of the records starts param_2*0x100 bytes after the first (0x100 is the vertex record stride)
+local	_gleAllocVertexMachine	iVar8	totalRecordCount	CONFIRMED	param_2*2+0xc; the allocation holds iVar8 records of 0x100 bytes (iVar8*0x100 + 0x200 header) plus iVar8*4+iVar8*8 bytes of side tables
+local	_gleAllocVertexMachine	iVar3	recordBase	CONFIRMED	allocation+0x200: stored at ctx+0x4854 and ctx+0x4858 (vertex buffer base and write cursor)
+local	_gleAllocVertexMachine	iVar5	recordsEnd	CONFIRMED	recordBase+totalRecordCount*0x100: stored at ctx+0x4870 and the base of the two side tables stored at ctx+0x4874/0x30b0
+local	_gleAllocVertexMachine	iVar7	secondHalfBase	CONFIRMED	recordBase+param_2*0x100: stored at ctx+0x485c and ctx+0x4860
+local	_gleAllocVertexMachine	uVar4	allocationBaseThenInitCursor	CONFIRMED	the _gleDCBAlloc result, then advanced by 0x100 per record in the init loop that stores the two context words at +0x20..+0x2c of each record
+local	_gleAllocVertexMachine	uVar6	allocationEndThenInitRecordCount	CONFIRMED	first allocation+totalRecordCount*0x100+0x200 (end of the record area); then (end-start+0xff)>>8, the number of records the init loop counts down
+local	_gleDrawArraysSyncState	puVar11	lastVertexFieldCursor	CONFIRMED	starts at arrayBatch+0x2c+stride(+8)*(count(+4)-1), the last vertex of the batch, and is advanced past each present component (normal, color, fog coord, secondary color, fog or weight, edge flag, texcoords) while its values are copied into the current-state words of ctx
+local	_gleBuildCompileFuncAV	param_2	funcKey	CONFIRMED	stored at cache element +8 as its key; its bit fields (>>0x10, >>0x12, >>0x18&0xc, >>0x13...) select the RTC chunks emitted
+local	_gleBuildCompileFuncAV	iVar9	funcCacheElem	CONFIRMED	_gleCreateFuncCacheElem(ctx+0x49b4,0x310) result: key at +8, generated code from +0x20, later passed to _gleShrinkFuncCacheElem and its +0x20 returned as the function
+local	_gleBuildCompileFuncAV	bVar1	noByteSwap	CONFIRMED	(ctx+0x498c bit 15)==0; true selects the plain _gleVAFogStoreAV/_gleVAStoreColor16AV chunks, false the Swap variants (_gleVAFogSwapAV, _gleVASwapStoreColor16AV, _gleVALoadSwapVectAVRTC emitted when bit set)
+local	_gleBuildCompileFuncAV	ppuVar8	colorStoreTable	CONFIRMED	selects _color_func_store_16av or _color_func_swap_store_16av, then indexed by the same color selector as _color_func_array_av
+local	_gleBuildCompileFuncAV	puVar15	loopBranchWord	CONFIRMED	last emitted code word (cursor-4) whose branch is rewritten by _gleRTCBuildABranch to the loop start recorded after the _gleVAStartLoopAVRTC chunk
+local	_gleBuildCompileFuncAV	uVar14	loopBranchInstruction	CONFIRMED	result of _gleRTCBuildABranch(*loopBranchWord, wordDistance) stored back into loopBranchWord
+local	_gleBuildCompileFuncNO	param_2	funcKey	CONFIRMED	stored at cache element +8 as its key; its bit fields (>>0x10, >>0x11, >>0x13, >>0x14, >>4) select the RTC chunks emitted
+local	_gleBuildCompileFuncNO	iVar5	funcCacheElem	CONFIRMED	_gleCreateFuncCacheElem(ctx+0x49b4,0x180) result: key at +8, generated code from +0x20, later passed to _gleShrinkFuncCacheElem and its +0x20 returned as the function
+local	_gleBuildCompileFuncNO	bVar4	noByteSwap	CONFIRMED	(ctx+0x498c bit 15)==0 (uVar12 before it is reused for selector fields); chooses between the plain and Swap chunk variants of each store
+local	_gleBuildCompileFuncNO	bVar1	singleFlushSetup	CONFIRMED	cVar11==1, which selects _gleVASingleFlushSetupRTC (cVar11==2 selects _gleVADoubleFlushSetupRTC)
+local	_gleBuildCompileFuncNO	cVar11	flushSetupKind	CONFIRMED	(*(ctx+0x468c)+0x94 &3)==1, doubled to 2 when ctx+0x4990 > 0x20; 1 emits _gleVASingleFlushSetupRTC, 2 emits _gleVADoubleFlushSetupRTC
+local	_gleBuildCompileFuncNO	puVar13	loopBranchWord	CONFIRMED	last emitted code word (cursor-4) whose branch is rewritten by _gleRTCBuildABranch to the loop start
+local	_gleBuildCompileFuncNO	uVar10	loopBranchInstruction	CONFIRMED	result of _gleRTCBuildABranch(*loopBranchWord, wordDistance) stored back into loopBranchWord
+local	_gleBuildProjectionTransformFuncAV	puVar10	clipCode0ToLoopStartWord	CONFIRMED	code word 8 bytes before the end of the _gleCalcClipCode0*AVRTC chunk; its branch is rewritten by _gleRTCBuildABranch to the cursor recorded right after the prolog chunk
+local	_gleBuildProjectionTransformFuncAV	puVar12	clipCode1ToLoopStartWord	CONFIRMED	code word 8 bytes before the end of the _gleCalcClipCode1*AVRTC chunk; its branch is rewritten to the cursor recorded right after the prolog chunk
+local	_gleBuildProjectionTransformFuncAV	puVar15	clipCode2ToLoopStartWord	CONFIRMED	code word 8 bytes before the end of the _gleCalcClipCode2*AVRTC chunk; its branch is rewritten to the cursor recorded right after the prolog chunk
+local	_gleBuildProjectionTransformFuncAV	puVar9	clipCode1ToClipEndWord	CONFIRMED	last code word of the _gleCalcClipCode1*AVRTC chunk; its branch is rewritten to the cursor after the _gleCalcClipCode3AVRTC chunk
+local	_gleBuildProjectionTransformFuncAV	puVar11	clipCode2ToClipEndWord	CONFIRMED	last code word of the _gleCalcClipCode2*AVRTC chunk; its branch is rewritten to the cursor after the _gleCalcClipCode3AVRTC chunk
+local	_gleTextureSubImageCopy	param_2	textureLevel	CONFIRMED	level record: +0xc/+0xe ushort width/height, +6/+8 extents, +10 border byte (glTexImage2D_Exec stores its border argument at textureLevel+10), +0x10/+0x12/+0x14 passed on to the readback callback
+local	_gleTextureSubImageCopy	param_3	xoffset	CONFIRMED	added to the level border and stored into ctx+0x31bc, the pack skip-pixels word (glPixelStorei pname 0xd04 writes +0x31bc); yoffset/zoffset do the same for +0x31b8/+0x31c0
+local	_gleTextureSubImageCopy	param_6	x	CONFIRMED	first of the x,y,width,height rectangle passed to the readback callback at ctx+0x46a0 (the following parameters are already named y,width,height)
+local	_gleTextureSubImageCopy	bVar1	borderWidth	CONFIRMED	*(byte*)(textureLevel+10), the level border byte stored by glTexImage2D_Exec; added to the xoffset for the pack skip pixels word
+local	_gleTextureSubImageCopy	uVar7	savedPackRowLength	INFERRED	old ctx+0x31b0, overwritten with the level width (ushort +0xc) for the readback and restored afterwards; +0x31b8/+0x31bc/+0x31c0/+0x31c8 are the pack skip rows/skip pixels/skip images/swap bytes words (glPixelStorei pnames 0xd03/0xd04/0x806b/0xd00)
+local	_gleTextureSubImageCopy	uVar8	savedPackImageHeight	CONFIRMED	old ctx+0x31b4, which glPixelStorei writes for pname 0x806c (GL_PACK_IMAGE_HEIGHT); overwritten with the level height (ushort +0xe) and restored afterwards
+local	_gleTextureSubImageCopy	uVar4	savedPackSkipRows	CONFIRMED	old ctx+0x31b8, written by glPixelStorei for pname 0xd03 (GL_PACK_SKIP_ROWS); restored after the readback
+local	_gleTextureSubImageCopy	uVar2	savedPackSkipPixels	CONFIRMED	old ctx+0x31bc, written by glPixelStorei for pname 0xd04 (GL_PACK_SKIP_PIXELS); restored after the readback
+local	_gleTextureSubImageCopy	uVar3	savedPackSkipImages	CONFIRMED	old ctx+0x31c0, written by glPixelStorei for pname 0x806b (GL_PACK_SKIP_IMAGES); restored after the readback
+local	_gleTextureSubImageCopy	uVar6	savedPackAlignment	INFERRED	old ctx+0x31c4, set to 1 for the readback and restored afterwards (the word between skip images and swap bytes)
+local	_gleTextureSubImageCopy	uVar5	savedPackSwapAndLsbBytes	CONFIRMED	old word at ctx+0x31c8: the swap-bytes byte (glPixelStorei pname 0xd00 writes +0x31c8) and the lsb-first byte at +0x31c9, both cleared for the readback and restored afterwards
+local	_gleLightMaterialRGBAChange_FB_E	iVar5	faceIndex	CONFIRMED	loop counter 0..1 passed to _glePushMaterial(glContext,faceIndex) and used as the *6 stride into the per-face tables (front then back)
+local	_gleLightMaterialRGBAChange_FB_E	param_2	color	INFERRED	pointer to 16 bytes (two 8-byte words) copied into the material record +0x30/+0x38; the function name says RGBA change
+local	_gleLightMaterialRGBAChange_FB_E	bVar1	dirtyBitId	CONFIRMED	byte read from the per-face table (+0x2c3 / +0x2f7 entries): >>3&0x1c selects the dirty word, &0x1f the bit set in ctx+0x324 and, for the second lookup, ctx+0x348
+local	_gleLightMaterialRGBAChange_FB_E	iVar3	faceTableOffset	CONFIRMED	faceIndex*6, the byte offset of this face's entry in the ctx+0x5424 table
+local	_gleLightMaterialRGBAChange_FB_E	iVar4	dirtyWordPointer	CONFIRMED	ctx + (dirtyBitId>>3&0x1c): the dirty word at +0x324 that receives 1<<(dirtyBitId&0x1f)

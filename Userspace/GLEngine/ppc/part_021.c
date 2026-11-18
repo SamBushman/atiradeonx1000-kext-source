@@ -49,46 +49,46 @@ undefined4 _glOrtho_ListExec(int glContext,float *listRecord,double unusedFloatA
 /* _glOrtho_Comp @ 0x79558 (364 bytes) */
 int _glOrtho_Comp(int glContext,double left,double right,double bottom,double top,double zNear,double zFar,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
+  float rightMinusLeft;
+  float nearMinusFar;
+  float topMinusBottom;
+  float absRange;
   float *listRecord;
-  double dVar6;
-  double dVar7;
-  double dVar8;
+  double inverseNearMinusFar;
+  double inverseTopMinusBottom;
+  double inverseRightMinusLeft;
   
-  fVar1 = (float)(right - left);
-  fVar2 = (float)(zNear - zFar);
-  fVar3 = (float)(top - bottom);
-  fVar4 = fVar1;
-  if (!(FLOAT_00108e50 <= fVar1)) {
-    fVar4 = -fVar1;
+  rightMinusLeft = (float)(right - left);
+  nearMinusFar = (float)(zNear - zFar);
+  topMinusBottom = (float)(top - bottom);
+  absRange = rightMinusLeft;
+  if (!(FLOAT_00108e50 <= rightMinusLeft)) {
+    absRange = -rightMinusLeft;
   }
-  if (!(fVar4 < FLOAT_00108e80)) {
-    fVar4 = fVar3;
-    if (!(FLOAT_00108e50 <= fVar3)) {
-      fVar4 = -fVar3;
+  if (!(absRange < FLOAT_00108e80)) {
+    absRange = topMinusBottom;
+    if (!(FLOAT_00108e50 <= topMinusBottom)) {
+      absRange = -topMinusBottom;
     }
-    if (!(fVar4 < FLOAT_00108e80)) {
-      fVar4 = fVar2;
-      if (!(FLOAT_00108e50 <= fVar2)) {
-        fVar4 = -fVar2;
+    if (!(absRange < FLOAT_00108e80)) {
+      absRange = nearMinusFar;
+      if (!(FLOAT_00108e50 <= nearMinusFar)) {
+        absRange = -nearMinusFar;
       }
-      if (!(fVar4 < FLOAT_00108e80)) {
+      if (!(absRange < FLOAT_00108e80)) {
         listRecord = (float *)_gleAddListItem(glContext,PTR__glOrtho_ListExec_00110230,0x18);
         if (listRecord == (float *)0x0) {
           return 0;
         }
-        dVar6 = (double)(1.0 / fVar2);
-        dVar8 = (double)(1.0 / fVar1);
-        dVar7 = (double)(1.0 / fVar3);
-        listRecord[5] = (float)((zFar + zNear) * dVar6);
-        listRecord[4] = (float)(-(top + bottom) * dVar7);
-        *listRecord = (float)(dVar8 + dVar8);
-        listRecord[3] = (float)(-(right + left) * dVar8);
-        listRecord[1] = (float)(dVar7 + dVar7);
-        listRecord[2] = (float)(dVar6 + dVar6);
+        inverseNearMinusFar = (double)(1.0 / nearMinusFar);
+        inverseRightMinusLeft = (double)(1.0 / rightMinusLeft);
+        inverseTopMinusBottom = (double)(1.0 / topMinusBottom);
+        listRecord[5] = (float)((zFar + zNear) * inverseNearMinusFar);
+        listRecord[4] = (float)(-(top + bottom) * inverseTopMinusBottom);
+        *listRecord = (float)(inverseRightMinusLeft + inverseRightMinusLeft);
+        listRecord[3] = (float)(-(right + left) * inverseRightMinusLeft);
+        listRecord[1] = (float)(inverseTopMinusBottom + inverseTopMinusBottom);
+        listRecord[2] = (float)(inverseNearMinusFar + inverseNearMinusFar);
         return (int)listRecord;
       }
     }

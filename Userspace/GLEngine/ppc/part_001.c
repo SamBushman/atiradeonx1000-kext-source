@@ -836,18 +836,18 @@ double _gleUpdateLightExponents(glContext, lightIndex)
 }
 
 /* _gleUpdateLightAttenuation @ 0x7b78 (280 bytes) */
-double _gleUpdateLightAttenuation(glContext, param_2)
+double _gleUpdateLightAttenuation(glContext, lightIndex)
   int glContext;
-  int param_2;
+  int lightIndex;
 {
-  byte bVar1;
+  byte dirtyBitIndex;
   undefined1 uVar2;
   int iVar3;
   int glContextWord5424;
   int iVar4;
   
-  iVar3 = glContext + param_2 * 0x80;
-  iVar4 = glContext + param_2 * 0x6c;
+  iVar3 = glContext + lightIndex * 0x80;
+  iVar4 = glContext + lightIndex * 0x6c;
   if ((*(float *)(iVar3 + 0x2870) < FLOAT_00108e80) && (FLOAT_00108f3c < *(float *)(iVar3 + 0x2870))
      ) {
     *(undefined1 *)(iVar4 + 0x4adb) = 0;
@@ -861,17 +861,17 @@ double _gleUpdateLightAttenuation(glContext, param_2)
     *(float *)(iVar4 + 0x4ad4) = FLOAT_00108e54 / *(float *)(iVar3 + 0x2870);
   }
   if (*(int *)(glContext + 0x5434) == 0) {
-    bVar1 = *(byte *)(param_2 * 7 + *(int *)(glContext + 0x5420) + 0x25d);
+    dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(glContext + 0x5420) + 0x25d);
   }
   else {
-    bVar1 = *(byte *)(param_2 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x291);
+    dirtyBitIndex = *(byte *)(lightIndex * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x291);
   }
-  iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
+  iVar4 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
   glContextWord5424 = *(int *)(glContext + 0x5424);
-  *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar1 & 0x1f);
-  bVar1 = *(byte *)(param_2 * 7 + glContextWord5424 + 0x25d);
-  iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
-  *(uint *)(iVar3 + 0x348) = *(uint *)(iVar3 + 0x348) | 1 << (bVar1 & 0x1f);
+  *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+  dirtyBitIndex = *(byte *)(lightIndex * 7 + glContextWord5424 + 0x25d);
+  iVar3 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  *(uint *)(iVar3 + 0x348) = *(uint *)(iVar3 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
   return;
 }
 

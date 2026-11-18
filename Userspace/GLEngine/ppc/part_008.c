@@ -1467,13 +1467,13 @@ int _gleBuildProjectionTransformFuncAV(glContext, optionBits)
   int chunkWordCountThenCodeCursor3;
   int chunkWordCount3;
   undefined4 branchInstruction;
-  undefined4 *puVar9;
-  undefined4 *puVar10;
-  undefined4 *puVar11;
-  undefined4 *puVar12;
+  undefined4 *clipCode1ToClipEndWord;
+  undefined4 *clipCode0ToLoopStartWord;
+  undefined4 *clipCode2ToClipEndWord;
+  undefined4 *clipCode1ToLoopStartWord;
   int *cacheListHead;
   int *piVar14;
-  undefined4 *puVar15;
+  undefined4 *clipCode2ToLoopStartWord;
   undefined4 *puVar16;
   
   piVar14 = (int *)PTR__gleTransformProjectionBlend_00110a10;
@@ -1570,28 +1570,28 @@ int _gleBuildProjectionTransformFuncAV(glContext, optionBits)
           chunkWordCountThenCodeCursor3 = chunkWordCountThenCodeCursor2 + chunkWordCountThenCodeCursor3 * 4;
           codeChunk = &_gleCalcClipCode2W1AVRTC;
         }
-        puVar10 = (undefined4 *)(chunkWordCountThenCodeCursor2 + -8);
+        clipCode0ToLoopStartWord = (undefined4 *)(chunkWordCountThenCodeCursor2 + -8);
         puVar16 = (undefined4 *)(chunkWordCountThenCodeCursor2 + -4);
-        puVar12 = (undefined4 *)(chunkWordCountThenCodeCursor3 + -8);
+        clipCode1ToLoopStartWord = (undefined4 *)(chunkWordCountThenCodeCursor3 + -8);
         chunkWordCount2 = _gleRTCAddAChunk_c5ddc(codeChunk,chunkWordCountThenCodeCursor3);
-        puVar9 = (undefined4 *)(chunkWordCountThenCodeCursor3 + -4);
+        clipCode1ToClipEndWord = (undefined4 *)(chunkWordCountThenCodeCursor3 + -4);
         chunkWordCountThenCodeCursor3 = chunkWordCountThenCodeCursor3 + chunkWordCount2 * 4;
-        puVar15 = (undefined4 *)(chunkWordCountThenCodeCursor3 + -8);
-        puVar11 = (undefined4 *)(chunkWordCountThenCodeCursor3 + -4);
+        clipCode2ToLoopStartWord = (undefined4 *)(chunkWordCountThenCodeCursor3 + -8);
+        clipCode2ToClipEndWord = (undefined4 *)(chunkWordCountThenCodeCursor3 + -4);
         chunkWordCountThenCodeCursor2 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode3AVRTC,chunkWordCountThenCodeCursor3);
         chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor3 + chunkWordCountThenCodeCursor2 * 4;
-        branchInstruction = _gleRTCBuildABranch_c5dd0(*puVar10,chunkWordCountThenCodeCursor - (int)puVar10 >> 2);
-        *puVar10 = branchInstruction;
-        branchInstruction = _gleRTCBuildABranch_c5dd0(*puVar12,chunkWordCountThenCodeCursor - (int)puVar12 >> 2);
-        *puVar12 = branchInstruction;
-        branchInstruction = _gleRTCBuildABranch_c5dd0(*puVar15,chunkWordCountThenCodeCursor - (int)puVar15 >> 2);
-        *puVar15 = branchInstruction;
+        branchInstruction = _gleRTCBuildABranch_c5dd0(*clipCode0ToLoopStartWord,chunkWordCountThenCodeCursor - (int)clipCode0ToLoopStartWord >> 2);
+        *clipCode0ToLoopStartWord = branchInstruction;
+        branchInstruction = _gleRTCBuildABranch_c5dd0(*clipCode1ToLoopStartWord,chunkWordCountThenCodeCursor - (int)clipCode1ToLoopStartWord >> 2);
+        *clipCode1ToLoopStartWord = branchInstruction;
+        branchInstruction = _gleRTCBuildABranch_c5dd0(*clipCode2ToLoopStartWord,chunkWordCountThenCodeCursor - (int)clipCode2ToLoopStartWord >> 2);
+        *clipCode2ToLoopStartWord = branchInstruction;
         branchInstruction = _gleRTCBuildABranch_c5dd0(*puVar16,chunkWordCountThenCodeCursor2 - (int)puVar16 >> 2);
         *puVar16 = branchInstruction;
-        branchInstruction = _gleRTCBuildABranch_c5dd0(*puVar9,chunkWordCountThenCodeCursor2 - (int)puVar9 >> 2);
-        *puVar9 = branchInstruction;
-        branchInstruction = _gleRTCBuildABranch_c5dd0(*puVar11,chunkWordCountThenCodeCursor2 - (int)puVar11 >> 2);
-        *puVar11 = branchInstruction;
+        branchInstruction = _gleRTCBuildABranch_c5dd0(*clipCode1ToClipEndWord,chunkWordCountThenCodeCursor2 - (int)clipCode1ToClipEndWord >> 2);
+        *clipCode1ToClipEndWord = branchInstruction;
+        branchInstruction = _gleRTCBuildABranch_c5dd0(*clipCode2ToClipEndWord,chunkWordCountThenCodeCursor2 - (int)clipCode2ToClipEndWord >> 2);
+        *clipCode2ToClipEndWord = branchInstruction;
       }
       else {
         if ((optionBits & 4) == 0) {
