@@ -655,15 +655,11 @@ void _glCombinerStageParameterfvNV_Exec(glContext, stage, pname, params)
   int pname;
   float *params;
 {
-  float fVar1;
-  float floatZero;
+  float redThenClampedGreen;
   float alpha;
-  float fVar3;
-  float floatZero2;
-  float fVar4;
-  float floatZero3;
-  float fVar5;
-  float floatZero4;
+  float blueThenClampedAlpha;
+  float greenThenClampedBlue;
+  float clampedRed;
   undefined4 glErrorCode;
   int stageIndexThenConstantColorRecord;
   
@@ -671,31 +667,31 @@ void _glCombinerStageParameterfvNV_Exec(glContext, stage, pname, params)
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (((-1 < stageIndexThenConstantColorRecord) && (stageIndexThenConstantColorRecord < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) &&
        (pname - 0x852aU < 2)) {
-      fVar1 = *params;
+      redThenClampedGreen = *params;
       alpha = params[3];
-      fVar3 = params[2];
-      fVar4 = params[1];
-      floatZero4 = FLOAT_00108e50;
-      if ((!(fVar1 < 0.0)) && (fVar5 = fVar1, 1.0 < fVar1)) {
-        fVar5 = FLOAT_00108e54;
+      blueThenClampedAlpha = params[2];
+      greenThenClampedBlue = params[1];
+      clampedRed = FLOAT_00108e50;
+      if ((!(redThenClampedGreen < 0.0)) && (clampedRed = redThenClampedGreen, 1.0 < redThenClampedGreen)) {
+        clampedRed = FLOAT_00108e54;
       }
-      floatZero = FLOAT_00108e50;
-      if ((!(fVar4 < 0.0)) && (fVar1 = fVar4, 1.0 < fVar4)) {
-        fVar1 = FLOAT_00108e54;
+      redThenClampedGreen = FLOAT_00108e50;
+      if ((!(greenThenClampedBlue < 0.0)) && (redThenClampedGreen = greenThenClampedBlue, 1.0 < greenThenClampedBlue)) {
+        redThenClampedGreen = FLOAT_00108e54;
       }
-      floatZero3 = FLOAT_00108e50;
-      if ((!(fVar3 < 0.0)) && (fVar4 = fVar3, 1.0 < fVar3)) {
-        fVar4 = FLOAT_00108e54;
+      greenThenClampedBlue = FLOAT_00108e50;
+      if ((!(blueThenClampedAlpha < 0.0)) && (greenThenClampedBlue = blueThenClampedAlpha, 1.0 < blueThenClampedAlpha)) {
+        greenThenClampedBlue = FLOAT_00108e54;
       }
-      floatZero2 = FLOAT_00108e50;
-      if ((!(alpha < 0.0)) && (fVar3 = alpha, 1.0 < alpha)) {
-        fVar3 = FLOAT_00108e54;
+      blueThenClampedAlpha = FLOAT_00108e50;
+      if ((!(alpha < 0.0)) && (blueThenClampedAlpha = alpha, 1.0 < alpha)) {
+        blueThenClampedAlpha = FLOAT_00108e54;
       }
       stageIndexThenConstantColorRecord = (stageIndexThenConstantColorRecord * 8 + (pname - 0x852aU)) * 0x10 + glContext;
-      *(float *)(stageIndexThenConstantColorRecord + 0x428c) = fVar3;
-      *(float *)(stageIndexThenConstantColorRecord + 0x4280) = fVar5;
-      *(float *)(stageIndexThenConstantColorRecord + 0x4284) = fVar1;
-      *(float *)(stageIndexThenConstantColorRecord + 0x4288) = fVar4;
+      *(float *)(stageIndexThenConstantColorRecord + 0x428c) = blueThenClampedAlpha;
+      *(float *)(stageIndexThenConstantColorRecord + 0x4280) = clampedRed;
+      *(float *)(stageIndexThenConstantColorRecord + 0x4284) = redThenClampedGreen;
+      *(float *)(stageIndexThenConstantColorRecord + 0x4288) = greenThenClampedBlue;
       *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x1000000;
       return;
     }
@@ -732,15 +728,11 @@ void _glCombinerParameterfNV_Exec(int glContext,int pname,float param)
 /* _glCombinerParameterivNV_Exec @ 0xb30a4 (592 bytes) */
 void _glCombinerParameterivNV_Exec(int glContext,uint pname,uint *params,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
-  float fVar1;
-  float floatZero;
-  float fVar2;
-  float floatZero2;
-  float fVar3;
-  float floatZero3;
+  float redFloatThenClampedGreen;
+  float greenFloatThenClampedBlue;
+  float blueFloatThenClampedAlpha;
   float alphaFloat;
-  float fVar5;
-  float floatZero4;
+  float clampedRed;
   undefined4 glErrorCode;
   int constantColorBase;
   uint generalCombinerCount;
@@ -760,31 +752,31 @@ void _glCombinerParameterivNV_Exec(int glContext,uint pname,uint *params,double 
     else {
       if (pname < 0x854f) {
         if (pname - 0x852a < 2) {
-          fVar1 = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
-          fVar2 = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58);
-          fVar3 = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58);
+          redFloatThenClampedGreen = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
+          greenFloatThenClampedBlue = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58);
+          blueFloatThenClampedAlpha = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58);
           alphaFloat = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - DOUBLE_00108d58);
-          floatZero4 = FLOAT_00108e50;
-          if ((!(fVar1 < 0.0)) && (fVar5 = fVar1, 1.0 < fVar1)) {
-            fVar5 = FLOAT_00108e54;
+          clampedRed = FLOAT_00108e50;
+          if ((!(redFloatThenClampedGreen < 0.0)) && (clampedRed = redFloatThenClampedGreen, 1.0 < redFloatThenClampedGreen)) {
+            clampedRed = FLOAT_00108e54;
           }
-          floatZero = FLOAT_00108e50;
-          if ((!(fVar2 < 0.0)) && (fVar1 = fVar2, 1.0 < fVar2)) {
-            fVar1 = FLOAT_00108e54;
+          redFloatThenClampedGreen = FLOAT_00108e50;
+          if ((!(greenFloatThenClampedBlue < 0.0)) && (redFloatThenClampedGreen = greenFloatThenClampedBlue, 1.0 < greenFloatThenClampedBlue)) {
+            redFloatThenClampedGreen = FLOAT_00108e54;
           }
-          floatZero2 = FLOAT_00108e50;
-          if ((!(fVar3 < 0.0)) && (fVar2 = fVar3, 1.0 < fVar3)) {
-            fVar2 = FLOAT_00108e54;
+          greenFloatThenClampedBlue = FLOAT_00108e50;
+          if ((!(blueFloatThenClampedAlpha < 0.0)) && (greenFloatThenClampedBlue = blueFloatThenClampedAlpha, 1.0 < blueFloatThenClampedAlpha)) {
+            greenFloatThenClampedBlue = FLOAT_00108e54;
           }
-          floatZero3 = FLOAT_00108e50;
-          if ((!(alphaFloat < 0.0)) && (fVar3 = alphaFloat, 1.0 < alphaFloat)) {
-            fVar3 = FLOAT_00108e54;
+          blueFloatThenClampedAlpha = FLOAT_00108e50;
+          if ((!(alphaFloat < 0.0)) && (blueFloatThenClampedAlpha = alphaFloat, 1.0 < alphaFloat)) {
+            blueFloatThenClampedAlpha = FLOAT_00108e54;
           }
           constantColorBase = (pname - 0x852a) * 0x10 + glContext;
-          *(float *)(constantColorBase + 0x420c) = fVar3;
-          *(float *)(constantColorBase + 0x4200) = fVar5;
-          *(float *)(constantColorBase + 0x4204) = fVar1;
-          *(float *)(constantColorBase + 0x4208) = fVar2;
+          *(float *)(constantColorBase + 0x420c) = blueFloatThenClampedAlpha;
+          *(float *)(constantColorBase + 0x4200) = clampedRed;
+          *(float *)(constantColorBase + 0x4204) = redFloatThenClampedGreen;
+          *(float *)(constantColorBase + 0x4208) = greenFloatThenClampedBlue;
 LAB_000b32e4:
           *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x1000000;
           return;

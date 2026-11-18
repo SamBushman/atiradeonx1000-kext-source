@@ -902,29 +902,27 @@ int _glTexImage2D_Comp(glContext, target, level, internalformat, width, height, 
   int pixels;
 {
   bool formatMatchesType;
-  undefined4 uVar2;
-  undefined4 glErrorCode;
-  uint uVar3;
+  undefined4 glErrorCodeThenExecResultThenFillImageResult;
+  uint expectedFormatThenAlignedImageSize;
   int requiredBufferExtent;
-  int iVar5;
-  int imageSize;
+  int glContextThenBytesPerElementThenImageSize;
   int *listRecord;
   int unpackBufferSize;
   int unpackBuffer;
   double bytesPerElementResult;
   
   unpackBuffer = *(int *)(glContext + 0x4a6c);
-  iVar5 = glContext;
+  glContextThenBytesPerElementThenImageSize = glContext;
   if (unpackBuffer != 0) {
     requiredBufferExtent = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,pixels);
     unpackBufferSize = *(int *)(unpackBuffer + 0x38);
     bytesPerElementResult = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar5 = (int)bytesPerElementResult;
+    glContextThenBytesPerElementThenImageSize = (int)bytesPerElementResult;
     if (requiredBufferExtent <= unpackBufferSize) {
-      if (iVar5 == 0) {
-        iVar5 = _glePixelBytes(format,type);
+      if (glContextThenBytesPerElementThenImageSize == 0) {
+        glContextThenBytesPerElementThenImageSize = _glePixelBytes(format,type);
       }
-      if (pixels == (pixels / iVar5) * iVar5) {
+      if (pixels == (pixels / glContextThenBytesPerElementThenImageSize) * glContextThenBytesPerElementThenImageSize) {
         if (*(int *)(unpackBuffer + 0x40) != 0) {
           _gleSynchronizePluginBuffer(glContext,unpackBuffer + 0x10);
         }
@@ -933,16 +931,16 @@ int _glTexImage2D_Comp(glContext, target, level, internalformat, width, height, 
       }
     }
     if (*(int *)(glContext + 0x7574) != 0) {
-      return iVar5;
+      return glContextThenBytesPerElementThenImageSize;
     }
-    glErrorCode = 0x502;
+    glErrorCodeThenExecResultThenFillImageResult = 0x502;
     goto LAB_0009f338;
   }
 LAB_0009f1e0:
   if (((target == 0x8064) || (target == 0x851b)) || (target == 0x84f7)) {
-    uVar2 = _glTexImage2D_Exec(glContext,target,level,internalformat,width,height,border,format,
+    glErrorCodeThenExecResultThenFillImageResult = _glTexImage2D_Exec(glContext,target,level,internalformat,width,height,border,format,
                                type,pixels);
-    return uVar2;
+    return glErrorCodeThenExecResultThenFillImageResult;
   }
   if (type < 0x8037) {
     if (type < 0x8033) {
@@ -966,19 +964,19 @@ LAB_0009f320:
     else {
 LAB_0009f308:
       if (format == 0x1908) goto LAB_0009f340;
-      uVar3 = 0x80e1;
+      expectedFormatThenAlignedImageSize = 0x80e1;
 LAB_0009f318:
-      formatMatchesType = format == uVar3;
+      formatMatchesType = format == expectedFormatThenAlignedImageSize;
     }
 LAB_0009f324:
     if (formatMatchesType) {
 LAB_0009f340:
-      imageSize = _gleImageSize(format,type,width,height);
-      if (imageSize < 1) {
-        return imageSize;
+      glContextThenBytesPerElementThenImageSize = _gleImageSize(format,type,width,height);
+      if (glContextThenBytesPerElementThenImageSize < 1) {
+        return glContextThenBytesPerElementThenImageSize;
       }
-      uVar3 = imageSize + 3U & 0xfffffffc;
-      listRecord = (int *)_gleAddListItem(glContext,PTR__glTexImage2D_ListExec_001103f8,uVar3 + 0x24);
+      expectedFormatThenAlignedImageSize = glContextThenBytesPerElementThenImageSize + 3U & 0xfffffffc;
+      listRecord = (int *)_gleAddListItem(glContext,PTR__glTexImage2D_ListExec_001103f8,expectedFormatThenAlignedImageSize + 0x24);
       if (listRecord == (int *)0x0) {
         return 0;
       }
@@ -986,7 +984,7 @@ LAB_0009f340:
       listRecord[1] = level;
       listRecord[2] = internalformat;
       listRecord[5] = border;
-      listRecord[8] = uVar3;
+      listRecord[8] = expectedFormatThenAlignedImageSize;
       listRecord[3] = width;
       listRecord[4] = height;
       listRecord[6] = format;
@@ -994,8 +992,8 @@ LAB_0009f340:
       if (pixels == 0) {
         return (int)listRecord;
       }
-      uVar2 = _gleFillImage(glContext,width,height,1,format,type,pixels,listRecord + 9);
-      return uVar2;
+      glErrorCodeThenExecResultThenFillImageResult = _gleFillImage(glContext,width,height,1,format,type,pixels,listRecord + 9);
+      return glErrorCodeThenExecResultThenFillImageResult;
     }
   }
   else if (type < 0x8369) {
@@ -1007,17 +1005,17 @@ LAB_0009f2f4:
     }
   }
   else if (type - 0x85ba < 2) {
-    uVar3 = 0x85b9;
+    expectedFormatThenAlignedImageSize = 0x85b9;
     goto LAB_0009f318;
   }
 LAB_0009f328:
   if (*(int *)(glContext + 0x7574) != 0) {
-    return iVar5;
+    return glContextThenBytesPerElementThenImageSize;
   }
-  glErrorCode = 0x500;
+  glErrorCodeThenExecResultThenFillImageResult = 0x500;
 LAB_0009f338:
-  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
-  return iVar5;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCodeThenExecResultThenFillImageResult;
+  return glContextThenBytesPerElementThenImageSize;
 }
 
 /* _glTexImage2D_FlushExec @ 0x9f3e4 (64 bytes) */
@@ -1827,29 +1825,27 @@ int _glTexSubImage2D_Comp(glContext, target, level, xoffset, yoffset, width, hei
 {
   bool formatMatchesType;
   uint alignedImageSize;
-  undefined4 uVar3;
-  undefined4 glErrorCode;
+  undefined4 glErrorCodeThenFillImageResult;
   int requiredBufferExtent;
-  int iVar5;
-  int imageSize;
+  int glContextThenBytesPerElementThenImageSize;
   uint *listRecord;
   int unpackBufferSize;
   int unpackBuffer;
   double bytesPerElementResult;
   
   unpackBuffer = *(int *)(glContext + 0x4a6c);
-  iVar5 = glContext;
+  glContextThenBytesPerElementThenImageSize = glContext;
   if (unpackBuffer == 0) {
 LAB_000a0ba4:
     if (pixels == 0) {
-      return iVar5;
+      return glContextThenBytesPerElementThenImageSize;
     }
     if ((target == 0xde1) || ((0xde0 < target && (target - 0x8515 < 6)))) {
       if (((int)width < 0) || ((int)height < 0)) {
         if (*(int *)(glContext + 0x7574) != 0) {
-          return iVar5;
+          return glContextThenBytesPerElementThenImageSize;
         }
-        glErrorCode = 0x501;
+        glErrorCodeThenFillImageResult = 0x501;
         goto LAB_000a0ce0;
       }
       if (type < 0x8037) {
@@ -1860,11 +1856,11 @@ LAB_000a0c9c:
 LAB_000a0cb0:
           if (formatMatchesType) {
 LAB_000a0ce8:
-            imageSize = _gleImageSize(format,type,width,height);
-            if (imageSize < 1) {
-              return imageSize;
+            glContextThenBytesPerElementThenImageSize = _gleImageSize(format,type,width,height);
+            if (glContextThenBytesPerElementThenImageSize < 1) {
+              return glContextThenBytesPerElementThenImageSize;
             }
-            alignedImageSize = imageSize + 3U & 0xfffffffc;
+            alignedImageSize = glContextThenBytesPerElementThenImageSize + 3U & 0xfffffffc;
             listRecord = (uint *)_gleAddListItem(glContext,PTR__glTexSubImage2D_ListExec_00110404,
                                              alignedImageSize + 0x24);
             if (listRecord == (uint *)0x0) {
@@ -1879,8 +1875,8 @@ LAB_000a0ce8:
             listRecord[5] = height;
             listRecord[6] = format;
             listRecord[7] = type;
-            uVar3 = _gleFillImage(glContext,width,height,1,format,type,pixels,listRecord + 9);
-            return uVar3;
+            glErrorCodeThenFillImageResult = _gleFillImage(glContext,width,height,1,format,type,pixels,listRecord + 9);
+            return glErrorCodeThenFillImageResult;
           }
           goto LAB_000a0cb4;
         }
@@ -1911,20 +1907,20 @@ LAB_000a0c94:
       }
     }
     if (*(int *)(glContext + 0x7574) != 0) {
-      return iVar5;
+      return glContextThenBytesPerElementThenImageSize;
     }
-    glErrorCode = 0x500;
+    glErrorCodeThenFillImageResult = 0x500;
   }
   else {
     requiredBufferExtent = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,pixels);
     unpackBufferSize = *(int *)(unpackBuffer + 0x38);
     bytesPerElementResult = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar5 = (int)bytesPerElementResult;
+    glContextThenBytesPerElementThenImageSize = (int)bytesPerElementResult;
     if (requiredBufferExtent <= unpackBufferSize) {
-      if (iVar5 == 0) {
-        iVar5 = _glePixelBytes(format,type);
+      if (glContextThenBytesPerElementThenImageSize == 0) {
+        glContextThenBytesPerElementThenImageSize = _glePixelBytes(format,type);
       }
-      if (pixels == (pixels / iVar5) * iVar5) {
+      if (pixels == (pixels / glContextThenBytesPerElementThenImageSize) * glContextThenBytesPerElementThenImageSize) {
         if (*(int *)(unpackBuffer + 0x40) != 0) {
           _gleSynchronizePluginBuffer(glContext,unpackBuffer + 0x10);
         }
@@ -1934,13 +1930,13 @@ LAB_000a0c94:
     }
 LAB_000a0cb4:
     if (*(int *)(glContext + 0x7574) != 0) {
-      return iVar5;
+      return glContextThenBytesPerElementThenImageSize;
     }
-    glErrorCode = 0x502;
+    glErrorCodeThenFillImageResult = 0x502;
   }
 LAB_000a0ce0:
-  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
-  return iVar5;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCodeThenFillImageResult;
+  return glContextThenBytesPerElementThenImageSize;
 }
 
 /* _glTexSubImage2D_FlushExec @ 0xa0d84 (64 bytes) */

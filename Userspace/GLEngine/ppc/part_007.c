@@ -5951,15 +5951,13 @@ void _gleDrawArraysOrElements_IMM_Exec(int glContext,uint mode,undefined4 first,
   int framebufferObject;
   int matrixChangeBits;
   int countArgCopyThenVertexArrayFunc;
-  uint uVar10;
-  uint dispatchFlags;
-  uint changeWord3;
+  uint changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags;
   uint glContextWord514c;
   uint loopIndex2;
   int *changeWordCursor;
   short *srcCursor2;
   double f1AfterCall;
-  longlong lVar15;
+  longlong arrayEnableBit64;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
 LAB_0004d920:
@@ -6010,7 +6008,7 @@ LAB_0004d920:
   }
   if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_0004da50:
-    changeWord3 = *(uint *)(glContext + 0x31c);
+    changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags = *(uint *)(glContext + 0x31c);
   }
   else {
     loopIndex = 0;
@@ -6024,8 +6022,8 @@ LAB_0004da50:
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex < 9);
-    changeWord3 = *(uint *)(glContext + 0x31c);
-    if ((changeWord3 & 0x15555) != 0) {
+    changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags = *(uint *)(glContext + 0x31c);
+    if ((changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags & 0x15555) != 0) {
       if (*(char *)(glContext + 0x2e54) != '\0') {
         _gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
       }
@@ -6037,32 +6035,32 @@ LAB_0004da50:
   }
   rendererInfoByte79Zero = rendererInfoByte79 == '\0';
   if (rendererInfoByte79Zero) {
-    changeWord3 = changeWord3 & 0x17000000;
+    changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags = changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags & 0x17000000;
   }
   else {
-    changeWord3 = changeWord3 & 0x17ffffff;
+    changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags = changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags & 0x17ffffff;
   }
   if (rendererInfoByte79Zero) {
-    noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
+    noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags == 0) &&
             *(int *)(glContext + 800) == 0;
   }
   else {
     noStateChangePending = (((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) &&
-             (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && changeWord3 == 0) &&
+             (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags == 0) &&
             *(int *)(glContext + 800) == 0;
   }
   if (!noStateChangePending) {
     if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
-      dispatchFlags = (**(code **)(glContext + 0x4788))
+      changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags = (**(code **)(glContext + 0x4788))
                          (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,changeWordCursor);
-      if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
-          ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-         ((dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
-        if ((dispatchFlags & 4) == 0) {
-          dispatchFlags = dispatchFlags & 0xfffffffe;
+      if ((((changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
+          ((changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
+         ((changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
+        if ((changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags & 4) == 0) {
+          changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags = changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags & 0xfffffffe;
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
         }
-        _gleUpdateDispatchCodeChange(glContext,dispatchFlags);
+        _gleUpdateDispatchCodeChange(glContext,changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags);
         if (*(char *)(glContext + 0x759d) == '\0') {
           if (*(int *)(glContext + 0x7574) != 0) {
             return;
@@ -6085,7 +6083,7 @@ LAB_0004db4c:
     } while (remaining != 0);
   }
 LAB_0004db78:
-  uVar10 = 0;
+  changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags = 0;
   if (*(char *)(glContext + 0x7580) != '\0') {
 LAB_0004dc00:
     countArgCopyThenVertexArrayFunc = *(int *)(glContext + 0x4890);
@@ -6094,7 +6092,7 @@ LAB_0004dc00:
       *(int *)(glContext + 0x4890) = countArgCopyThenVertexArrayFunc;
     }
     *(int *)(glContext + 0x4a14) = count;
-    ((void (*)())_gleDrawArraysOrElements_Core)(glContext,mode,first,count,uVar10,*(uint *)(arrayStateRecord + 0x324) >> 0x12 & 1,
+    ((void (*)())_gleDrawArraysOrElements_Core)(glContext,mode,first,count,changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags,*(uint *)(arrayStateRecord + 0x324) >> 0x12 & 1,
                arrayStateRecord + 0x20,countArgCopyThenVertexArrayFunc);
     *(undefined4 *)(glContext + 0x4a14) = 0;
     if (*(int *)(arrayStateRecord + 0x328) == 0 && *(int *)(arrayStateRecord + 0x32c) == 0) {
@@ -6112,14 +6110,14 @@ LAB_0004dc00:
       if (shiftedEnabledBits == 0) goto LAB_0004dc00;
     }
     else {
-      lVar15 = ___ashldi3(0,0x1000000,loopIndex2);
-      if ((*(uint *)(arrayStateRecord + 800) & (uint)((ulonglong)lVar15 >> 0x20)) != 0 ||
-          (*(uint *)(arrayStateRecord + 0x324) & (uint)lVar15) != 0) {
+      arrayEnableBit64 = ___ashldi3(0,0x1000000,loopIndex2);
+      if ((*(uint *)(arrayStateRecord + 800) & (uint)((ulonglong)arrayEnableBit64 >> 0x20)) != 0 ||
+          (*(uint *)(arrayStateRecord + 0x324) & (uint)arrayEnableBit64) != 0) {
         if (*srcCursor2 == 4) {
-          uVar10 = 3;
+          changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags = 3;
         }
         else if (*srcCursor2 == 3) {
-          uVar10 = uVar10 | 1;
+          changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags = changeWord3ThenDispatchFlagsThenEnabledArraySizeFlags | 1;
         }
       }
     }

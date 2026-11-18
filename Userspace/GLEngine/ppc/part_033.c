@@ -4029,16 +4029,14 @@ void _gleDrawArraysOrElements_CVA_Exec(int glContext,uint mode,undefined4 first,
   undefined4 glErrorCode;
   int arrayStateRecordCopyThenDirtyWord;
   int *srcCursor;
-  uint uVar6;
+  uint glContextWord497c;
   int framebufferObject;
   undefined4 forwardedArg5Copy;
   int matrixFuncDirty;
   int countArgCopy;
   int remaining;
   int loopIndex;
-  uint uVar11;
-  uint dispatchFlags;
-  uint dirtyWord3ThenMasked;
+  uint dirtyWord3ThenDispatchFlagsThenGlContextWord4980;
   int *dirtyFlagWords;
   double f1AfterCall;
   double f1AfterCall1;
@@ -4095,7 +4093,7 @@ LAB_000a815c:
     }
     if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_000a828c:
-      dirtyWord3ThenMasked = *(uint *)(glContext + 0x31c);
+      dirtyWord3ThenDispatchFlagsThenGlContextWord4980 = *(uint *)(glContext + 0x31c);
     }
     else {
       loopIndex = 0;
@@ -4109,8 +4107,8 @@ LAB_000a828c:
         }
         loopIndex = loopIndex + 1;
       } while (loopIndex < 9);
-      dirtyWord3ThenMasked = *(uint *)(glContext + 0x31c);
-      if ((dirtyWord3ThenMasked & 0x15555) != 0) {
+      dirtyWord3ThenDispatchFlagsThenGlContextWord4980 = *(uint *)(glContext + 0x31c);
+      if ((dirtyWord3ThenDispatchFlagsThenGlContextWord4980 & 0x15555) != 0) {
         if (*(char *)(glContext + 0x2e54) != '\0') {
           forwardedFloatArg1ThenF1AfterCall = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
         }
@@ -4122,33 +4120,33 @@ LAB_000a828c:
     }
     rendererInfoByte79Zero = rendererInfoByte79 == '\0';
     if (rendererInfoByte79Zero) {
-      dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
+      dirtyWord3ThenDispatchFlagsThenGlContextWord4980 = dirtyWord3ThenDispatchFlagsThenGlContextWord4980 & 0x17000000;
     }
     else {
-      dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
+      dirtyWord3ThenDispatchFlagsThenGlContextWord4980 = dirtyWord3ThenDispatchFlagsThenGlContextWord4980 & 0x17ffffff;
     }
     if (rendererInfoByte79Zero) {
-      stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
+      stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenDispatchFlagsThenGlContextWord4980 == 0) &&
               *(int *)(glContext + 800) == 0;
     }
     else {
       stateClean = (((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) &&
-               (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && dirtyWord3ThenMasked == 0) &&
+               (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && dirtyWord3ThenDispatchFlagsThenGlContextWord4980 == 0) &&
               *(int *)(glContext + 800) == 0;
     }
     if (!stateClean) {
       if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
-        dispatchFlags = (**(code **)(glContext + 0x4788))
+        dirtyWord3ThenDispatchFlagsThenGlContextWord4980 = (**(code **)(glContext + 0x4788))
                            (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,dirtyFlagWords);
-        if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
-            ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-           (forwardedFloatArg1ThenF1AfterCall = f1AfterCall2, (dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0')))
+        if ((((dirtyWord3ThenDispatchFlagsThenGlContextWord4980 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
+            ((dirtyWord3ThenDispatchFlagsThenGlContextWord4980 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
+           (forwardedFloatArg1ThenF1AfterCall = f1AfterCall2, (dirtyWord3ThenDispatchFlagsThenGlContextWord4980 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0')))
         {
-          if ((dispatchFlags & 4) == 0) {
-            dispatchFlags = dispatchFlags & 0xfffffffe;
+          if ((dirtyWord3ThenDispatchFlagsThenGlContextWord4980 & 4) == 0) {
+            dirtyWord3ThenDispatchFlagsThenGlContextWord4980 = dirtyWord3ThenDispatchFlagsThenGlContextWord4980 & 0xfffffffe;
             *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
           }
-          forwardedFloatArg1ThenF1AfterCall = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
+          forwardedFloatArg1ThenF1AfterCall = (double)_gleUpdateDispatchCodeChange(glContext,dirtyWord3ThenDispatchFlagsThenGlContextWord4980);
           if (*(char *)(glContext + 0x759d) == '\0') {
             if (*(int *)(glContext + 0x7574) != 0) {
               return;
@@ -4189,17 +4187,17 @@ LAB_000a8388:
   }
   else if (*(char *)(glContext + 0x53e6) != '\0') goto LAB_000a850c;
   if (*(ushort *)(glContext + 0x4992) == (ushort)*(byte *)(glContext + 0x7580)) {
-    uVar6 = *(uint *)(glContext + 0x497c);
-    uVar11 = *(uint *)(glContext + 0x4980);
-    if ((uVar6 & uVar11) != 0) goto LAB_000a84c8;
+    glContextWord497c = *(uint *)(glContext + 0x497c);
+    dirtyWord3ThenDispatchFlagsThenGlContextWord4980 = *(uint *)(glContext + 0x4980);
+    if ((glContextWord497c & dirtyWord3ThenDispatchFlagsThenGlContextWord4980) != 0) goto LAB_000a84c8;
   }
   else {
 LAB_000a84c8:
     forwardedFloatArg1ThenF1AfterCall = (double)_gleCompileVertexArray(glContext);
-    uVar6 = *(uint *)(glContext + 0x497c);
-    uVar11 = *(uint *)(glContext + 0x4980);
+    glContextWord497c = *(uint *)(glContext + 0x497c);
+    dirtyWord3ThenDispatchFlagsThenGlContextWord4980 = *(uint *)(glContext + 0x4980);
   }
-  if ((uVar6 & uVar11) == 0) {
+  if ((glContextWord497c & dirtyWord3ThenDispatchFlagsThenGlContextWord4980) == 0) {
     _gleExecuteVertexArray
               (glContext,mode,first,count,*(undefined4 *)(glContext + 0x48dc),
                *(undefined4 *)(glContext + 0x4978));
