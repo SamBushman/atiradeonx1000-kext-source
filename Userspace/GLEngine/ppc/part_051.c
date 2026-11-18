@@ -515,75 +515,75 @@ void _gleFeedbackPointsFunc_body(glContext, unusedArg2, unusedArg3)
   undefined4 unusedArg2;
   undefined4 unusedArg3;
 {
-  bool bVar1;
-  uint uVar2;
-  int iVar3;
-  undefined4 *puVar4;
-  undefined4 *puVar5;
-  uint uVar6;
-  uint uVar7;
+  bool fixedFunctionPath;
+  uint batchClipCodes;
+  int pointCount;
+  undefined4 *pointListCursor;
+  undefined4 *pointListEnd;
+  uint vertexCursor;
+  uint vertexCountThenEnd;
   
-  bVar1 = false;
+  fixedFunctionPath = false;
   if ((*(char *)(glContext + 0x4664) != '\0') || (*(int *)(glContext + 0x5434) != 0)) {
-    bVar1 = true;
+    fixedFunctionPath = true;
   }
-  uVar6 = *(uint *)(glContext + 0x4854);
+  vertexCursor = *(uint *)(glContext + 0x4854);
   if (((int)*(short *)(glContext + 0x487c) != 0) &&
-     (uVar7 = (*(int *)(glContext + 0x4858) - uVar6) / (uint)(int)*(short *)(glContext + 0x487c),
-     0 < (int)uVar7)) {
-    bVar1 = !bVar1;
-    if (bVar1) {
-      uVar2 = (**(code **)(glContext + 0x5060))(glContext,uVar6,uVar7);
+     (vertexCountThenEnd = (*(int *)(glContext + 0x4858) - vertexCursor) / (uint)(int)*(short *)(glContext + 0x487c),
+     0 < (int)vertexCountThenEnd)) {
+    fixedFunctionPath = !fixedFunctionPath;
+    if (fixedFunctionPath) {
+      batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,vertexCountThenEnd);
     }
     else {
-      uVar2 = _gleVPEmulate(glContext,uVar7);
+      batchClipCodes = _gleVPEmulate(glContext,vertexCountThenEnd);
     }
-    if ((uVar2 & 0xff00) == 0) {
-      if (bVar1) {
+    if ((batchClipCodes & 0xff00) == 0) {
+      if (fixedFunctionPath) {
         if (*(char *)(glContext + 0x53e4) != '\0') {
-          (**(code **)(glContext + 0x53dc))(glContext,uVar6,uVar7);
+          (**(code **)(glContext + 0x53dc))(glContext,vertexCursor,vertexCountThenEnd);
         }
         if (*(char *)(glContext + 0x50b4) != '\0') {
-          (**(code **)(glContext + 0x5064))(glContext,uVar6,uVar7);
+          (**(code **)(glContext + 0x5064))(glContext,vertexCursor,vertexCountThenEnd);
         }
         if ((*(char *)(glContext + 0x30aa) != '\0') || (*(char *)(glContext + 0x53e6) != '\0')) {
-          (**(code **)(glContext + 0x5068))(glContext,uVar6,uVar7);
+          (**(code **)(glContext + 0x5068))(glContext,vertexCursor,vertexCountThenEnd);
         }
       }
       else {
-        uVar6 = *(uint *)(glContext + 0x4864);
+        vertexCursor = *(uint *)(glContext + 0x4864);
       }
-      if (((uVar2 & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
-        if ((bVar1) && (*(char *)(glContext + 0x53e5) != '\0')) {
-          (**(code **)(glContext + 0x53e0))(glContext,uVar6,uVar7);
+      if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
+        if ((fixedFunctionPath) && (*(char *)(glContext + 0x53e5) != '\0')) {
+          (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,vertexCountThenEnd);
         }
-        (**(code **)(glContext + 0x506c))(glContext,uVar6,uVar7,0);
-        if ((bVar1) && (*(char *)(glContext + 0x30aa) != '\0')) {
-          (**(code **)(glContext + 0x4de8))(glContext,uVar6,uVar7);
+        (**(code **)(glContext + 0x506c))(glContext,vertexCursor,vertexCountThenEnd,0);
+        if ((fixedFunctionPath) && (*(char *)(glContext + 0x30aa) != '\0')) {
+          (**(code **)(glContext + 0x4de8))(glContext,vertexCursor,vertexCountThenEnd);
         }
-        uVar7 = uVar6 + uVar7 * 0x100;
-        for (; uVar6 < uVar7; uVar6 = uVar6 + 0x100) {
+        vertexCountThenEnd = vertexCursor + vertexCountThenEnd * 0x100;
+        for (; vertexCursor < vertexCountThenEnd; vertexCursor = vertexCursor + 0x100) {
           ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-          _gleFeedbackHitRecord(glContext,uVar6);
+          _gleFeedbackHitRecord(glContext,vertexCursor);
         }
         return;
       }
-      if ((bVar1) && (*(char *)(glContext + 0x53e5) != '\0')) {
-        (**(code **)(glContext + 0x53e0))(glContext,uVar6,uVar7);
+      if ((fixedFunctionPath) && (*(char *)(glContext + 0x53e5) != '\0')) {
+        (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,vertexCountThenEnd);
       }
-      (**(code **)(glContext + 0x5074))(glContext,uVar6,uVar7,0);
-      puVar4 = *(undefined4 **)(glContext + 0x4870);
-      iVar3 = ((int (*)())_gleClipPoints)(glContext,uVar6,uVar7,puVar4);
-      if ((iVar3 != 0) &&
+      (**(code **)(glContext + 0x5074))(glContext,vertexCursor,vertexCountThenEnd,0);
+      pointListCursor = *(undefined4 **)(glContext + 0x4870);
+      pointCount = ((int (*)())_gleClipPoints)(glContext,vertexCursor,vertexCountThenEnd,pointListCursor);
+      if ((pointCount != 0) &&
          ((*(char *)(glContext + 0x4e18) == '\0' ||
-          (iVar3 = ((int (*)())_gleClipPointsPlane)(glContext,puVar4,iVar3), iVar3 != 0)))) {
-        if ((bVar1) && (*(char *)(glContext + 0x30aa) != '\0')) {
-          (**(code **)(glContext + 0x4df0))(glContext,puVar4,iVar3);
+          (pointCount = ((int (*)())_gleClipPointsPlane)(glContext,pointListCursor,pointCount), pointCount != 0)))) {
+        if ((fixedFunctionPath) && (*(char *)(glContext + 0x30aa) != '\0')) {
+          (**(code **)(glContext + 0x4df0))(glContext,pointListCursor,pointCount);
         }
-        puVar5 = puVar4 + iVar3;
-        for (; puVar4 < puVar5; puVar4 = puVar4 + 1) {
+        pointListEnd = pointListCursor + pointCount;
+        for (; pointListCursor < pointListEnd; pointListCursor = pointListCursor + 1) {
           ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-          _gleFeedbackHitRecord(glContext,*puVar4);
+          _gleFeedbackHitRecord(glContext,*pointListCursor);
         }
         return;
       }

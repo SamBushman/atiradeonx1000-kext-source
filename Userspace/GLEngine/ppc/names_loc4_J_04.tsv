@@ -1,0 +1,32 @@
+local	_gleGenHashNames	param_1	hashTable	CONFIRMED	+0x1000 holds the head of the sorted used-name range list {next,first,count}, the same list _gleAddHashName and _gleDeleteHashNamesAndObjects edit
+local	_gleGenHashNames	puVar7	rangeNode	CONFIRMED	current used-name range node: starts at the list head, then follows next (+0)
+local	_gleGenHashNames	puVar4	previousRangeNode	CONFIRMED	node examined in the previous iteration (puVar7 before it advanced); its count (+8) is grown when the new names are appended to it
+local	_gleGenHashNames	iVar5	previousRangeCount	CONFIRMED	previousRangeNode[2], the number of names in that range
+local	_gleGenHashNames	uVar6	candidateFirstName	CONFIRMED	first free name after the previous range (its first name + count): the start of the run being returned
+local	_gleGenHashNames	uVar3	candidateEndName	CONFIRMED	candidateFirstName + listRange, compared with the next range first name to see whether the run fits (wrap-around check against candidateFirstName)
+local	_gleGenHashNames	iVar2	nextRangeCount	CONFIRMED	rangeNode[2] of the range merged into the previous one when the new run closes the gap
+local	_gleAddHashName	param_1	hashTable	CONFIRMED	+0x1000 holds the head of the sorted used-name range list {next,first,count}
+local	_gleAddHashName	param_2	hashName	CONFIRMED	the name inserted into the used-name ranges (extends a neighbouring range by one or creates a one-name node)
+local	_gleAddHashName	piVar6	nextRangeNode	CONFIRMED	range node to examine next: the list head at entry, then currentRangeNode->next
+local	_gleAddHashName	piVar7	currentRangeNode	CONFIRMED	range node being examined in the loop body (piVar7 = piVar6 at the loop head)
+local	_gleAddHashName	uVar3	rangeFirstName	CONFIRMED	nextRangeNode[1], the first name of the range being compared with hashName
+local	_gleAddHashName	iVar5	rangeCount	CONFIRMED	currentRangeNode[2], the number of names in the range; hashName == rangeFirstName + rangeCount extends it
+local	_gleAddHashName	iVar2	followingRangeCount	CONFIRMED	count of the next range, merged into currentRangeNode when hashName closes the gap between them
+local	_gleAddHashName	uVar1	oldListHead	CONFIRMED	previous value of hashTable+0x1000, stored as the next link of the new head node
+local	_gleDeleteHashNamesAndObjects	param_2	hashTable	CONFIRMED	+0x1000 is the used-name range list head; _gleRemoveHashObject(hashTable,name) is called per name
+local	_gleDeleteHashNamesAndObjects	uVar6	deleteEnd	CONFIRMED	list + listRange: one past the last name being deleted
+local	_gleDeleteHashNamesAndObjects	piVar5	previousLink	CONFIRMED	address of the link that points at the current range node: the list head slot hashTable+0x1000, then the previous node
+local	_gleDeleteHashNamesAndObjects	piVar2	nextRangeNode	CONFIRMED	range node to examine next (list head, then node->next, or *previousLink after the node was unlinked)
+local	_gleDeleteHashNamesAndObjects	piVar11	rangeNode	CONFIRMED	used-name range {next,first,count} being trimmed or removed
+local	_gleDeleteHashNamesAndObjects	uVar9	rangeFirstName	CONFIRMED	rangeNode[1]
+local	_gleDeleteHashNamesAndObjects	uVar8	rangeEndName	CONFIRMED	rangeFirstName + rangeNode[2]: one past the last name of the range
+local	_gleDeleteHashNamesAndObjects	uVar7	overlapStart	CONFIRMED	max(list, rangeFirstName): first deleted name inside this range
+local	_gleDeleteHashNamesAndObjects	uVar10	overlapEnd	CONFIRMED	min(deleteEnd, rangeEndName): one past the last deleted name inside this range
+local	_gleDeleteHashNamesAndObjects	uVar1	hashName	CONFIRMED	loop counter over overlapStart..overlapEnd, passed to _gleRemoveHashObject
+local	_gleDeleteHashNamesAndObjects	iVar4	hashObject	CONFIRMED	result of _gleRemoveHashObject: object with refcount at +8 and destructor at +0xc, called when the count reaches 0
+local	_gleDeleteHashNamesAndObjects	iVar3	referenceCount	CONFIRMED	hashObject[2] after the decrement; 0 calls the destructor (+0xc)
+local	_gleGetHashMachineObjectNameTargetPairs	param_2	hashBuckets	CONFIRMED	array of 0x400 chain heads; each chain node is {next(+0), name(+4)}, walked bucket by bucket up to param_2 + 0x3ff
+local	_gleGetHashMachineObjectNameTargetPairs	param_3	objectType	INFERRED	2 selects _gleTextureTargetExtractor, 4 selects _glePipelineProgramTargetExtactor, anything else the zero extractor
+local	_gleGetHashMachineObjectNameTargetPairs	pcVar5	targetExtractor	CONFIRMED	function pointer (glContext, node, ...) returning the target stored after each name
+local	_gleGetHashMachineObjectNameTargetPairs	piVar4	nextBucket	CONFIRMED	piVar2 + 1 taken before walking the chain: the next bucket head
+local	_gleGetHashMachineObjectNameTargetPairs	uVar3	objectTarget	CONFIRMED	result of targetExtractor(glContext, node, ...), stored as the second word of each (name,target) pair

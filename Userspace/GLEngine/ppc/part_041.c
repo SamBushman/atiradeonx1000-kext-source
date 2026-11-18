@@ -1159,13 +1159,16 @@ void _gleSetClientAttrib(glContext, clientAttribBit, savedState)
   int clientAttribBit;
   int *savedState;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int unitBufferName;
+  int nextAttribIndex;
+  int vertexArrayState;
+  int pointerBufferName;
+  int attribIndex;
   int loopIndex;
-  int iVar4;
-  int *piVar5;
-  int *piVar6;
+  int boundArrayBuffer;
+  int boundElementBuffer;
+  int *bufferNameCursor;
+  int *pointerStateCursor;
   
   if (clientAttribBit == 1) {
     *(int *)(glContext + 0x31b0) = *savedState;
@@ -1187,117 +1190,117 @@ void _gleSetClientAttrib(glContext, clientAttribBit, savedState)
     *(int *)(glContext + 0x31dc) = savedState[0xb];
   }
   else {
-    iVar2 = *(int *)(glContext + 0x4a60);
-    if (*(int *)(iVar2 + 4) != *savedState) {
+    vertexArrayState = *(int *)(glContext + 0x4a60);
+    if (*(int *)(vertexArrayState + 4) != *savedState) {
       _gleBindVertexArray(glContext,*savedState);
-      iVar2 = *(int *)(glContext + 0x4a60);
+      vertexArrayState = *(int *)(glContext + 0x4a60);
     }
-    iVar4 = 0;
-    if (*(int *)(iVar2 + 0x358) != 0) {
-      iVar4 = *(int *)(*(int *)(iVar2 + 0x358) + 4);
+    boundArrayBuffer = 0;
+    if (*(int *)(vertexArrayState + 0x358) != 0) {
+      boundArrayBuffer = *(int *)(*(int *)(vertexArrayState + 0x358) + 4);
     }
     *(undefined2 *)(glContext + 0x48ea) = *(undefined2 *)((int)savedState + 0x206);
-    iVar3 = savedState[0xa7];
-    *(undefined4 *)(iVar2 + 0x330) = 0;
-    *(int *)(iVar2 + 0x334) = iVar3;
-    *(int *)(iVar2 + 0x330) = savedState[0xa8];
-    *(int *)(iVar2 + 0x334) = iVar3;
-    iVar3 = savedState[0x86];
-    if (iVar4 != iVar3) {
-      _glBindBuffer_Exec(glContext,0x8892,iVar3);
-      iVar4 = iVar3;
+    pointerBufferName = savedState[0xa7];
+    *(undefined4 *)(vertexArrayState + 0x330) = 0;
+    *(int *)(vertexArrayState + 0x334) = pointerBufferName;
+    *(int *)(vertexArrayState + 0x330) = savedState[0xa8];
+    *(int *)(vertexArrayState + 0x334) = pointerBufferName;
+    pointerBufferName = savedState[0x86];
+    if (boundArrayBuffer != pointerBufferName) {
+      _glBindBuffer_Exec(glContext,0x8892,pointerBufferName);
+      boundArrayBuffer = pointerBufferName;
     }
     _glVertexPointer_Exec(glContext,savedState[1],savedState[2],savedState[3],savedState[4]);
-    iVar3 = savedState[0x87];
-    if (iVar4 != iVar3) {
-      _glBindBuffer_Exec(glContext,0x8892,iVar3);
-      iVar4 = iVar3;
+    pointerBufferName = savedState[0x87];
+    if (boundArrayBuffer != pointerBufferName) {
+      _glBindBuffer_Exec(glContext,0x8892,pointerBufferName);
+      boundArrayBuffer = pointerBufferName;
     }
     _glNormalPointer_Exec(glContext,savedState[6] & 0xffff7fff,savedState[7],savedState[8]);
-    iVar3 = savedState[0x88];
-    if (iVar4 != iVar3) {
-      _glBindBuffer_Exec(glContext,0x8892,iVar3);
-      iVar4 = iVar3;
+    pointerBufferName = savedState[0x88];
+    if (boundArrayBuffer != pointerBufferName) {
+      _glBindBuffer_Exec(glContext,0x8892,pointerBufferName);
+      boundArrayBuffer = pointerBufferName;
     }
     _glColorPointer_Exec(glContext,savedState[9],savedState[10] & 0xffff7fff,savedState[0xb],savedState[0xc]);
-    iVar3 = savedState[0x8a];
-    if (iVar4 != iVar3) {
-      _glBindBuffer_Exec(glContext,0x8892,iVar3);
-      iVar4 = iVar3;
+    pointerBufferName = savedState[0x8a];
+    if (boundArrayBuffer != pointerBufferName) {
+      _glBindBuffer_Exec(glContext,0x8892,pointerBufferName);
+      boundArrayBuffer = pointerBufferName;
     }
     _glFogCoordPointer_Exec(glContext,savedState[0xe],savedState[0xf],savedState[0x10]);
-    iVar3 = savedState[0x8b];
-    if (iVar4 != iVar3) {
-      _glBindBuffer_Exec(glContext,0x8892,iVar3);
-      iVar4 = iVar3;
+    pointerBufferName = savedState[0x8b];
+    if (boundArrayBuffer != pointerBufferName) {
+      _glBindBuffer_Exec(glContext,0x8892,pointerBufferName);
+      boundArrayBuffer = pointerBufferName;
     }
     _glSecondaryColorPointer_Exec
               (glContext,savedState[0x11],savedState[0x12] & 0xffff7fff,savedState[0x13],savedState[0x14]);
-    iVar3 = savedState[0x89];
-    if (iVar4 != iVar3) {
-      _glBindBuffer_Exec(glContext,0x8892,iVar3);
-      iVar4 = iVar3;
+    pointerBufferName = savedState[0x89];
+    if (boundArrayBuffer != pointerBufferName) {
+      _glBindBuffer_Exec(glContext,0x8892,pointerBufferName);
+      boundArrayBuffer = pointerBufferName;
     }
     _glWeightPointerARB_Exec
               (glContext,savedState[0x15],savedState[0x16] & 0xffff7fff,savedState[0x17],savedState[0x18]);
-    iVar3 = savedState[0x8c];
-    if (iVar4 != iVar3) {
-      _glBindBuffer_Exec(glContext,0x8892,iVar3);
-      iVar4 = iVar3;
+    pointerBufferName = savedState[0x8c];
+    if (boundArrayBuffer != pointerBufferName) {
+      _glBindBuffer_Exec(glContext,0x8892,pointerBufferName);
+      boundArrayBuffer = pointerBufferName;
     }
     _glEdgeFlagPointer_Exec(glContext,savedState[0x1b],savedState[0x1c]);
-    iVar3 = savedState[0x8d];
-    if (iVar4 != iVar3) {
-      _glBindBuffer_Exec(glContext,0x8892,iVar3);
-      iVar4 = iVar3;
+    pointerBufferName = savedState[0x8d];
+    if (boundArrayBuffer != pointerBufferName) {
+      _glBindBuffer_Exec(glContext,0x8892,pointerBufferName);
+      boundArrayBuffer = pointerBufferName;
     }
     loopIndex = 0;
-    piVar5 = savedState + 0x8e;
+    bufferNameCursor = savedState + 0x8e;
     _glElementPointerAPPLE_Exec(glContext,savedState[0x1e],savedState[0x20]);
-    piVar6 = savedState;
+    pointerStateCursor = savedState;
     do {
-      iVar1 = *piVar5;
-      piVar5 = piVar5 + 1;
-      if (iVar4 != iVar1) {
-        _glBindBuffer_Exec(glContext,0x8892,iVar1);
-        iVar4 = iVar1;
+      unitBufferName = *bufferNameCursor;
+      bufferNameCursor = bufferNameCursor + 1;
+      if (boundArrayBuffer != unitBufferName) {
+        _glBindBuffer_Exec(glContext,0x8892,unitBufferName);
+        boundArrayBuffer = unitBufferName;
       }
       *(int *)(glContext + 0x53d8) = loopIndex;
       loopIndex = loopIndex + 1;
-      _glTexCoordPointer_Exec(glContext,piVar6[0x21],piVar6[0x22],piVar6[0x23],piVar6[0x24]);
-      piVar6 = piVar6 + 4;
+      _glTexCoordPointer_Exec(glContext,pointerStateCursor[0x21],pointerStateCursor[0x22],pointerStateCursor[0x23],pointerStateCursor[0x24]);
+      pointerStateCursor = pointerStateCursor + 4;
     } while (loopIndex < 8);
-    piVar5 = savedState + 0x96;
-    iVar3 = 0;
-    piVar6 = savedState;
+    bufferNameCursor = savedState + 0x96;
+    attribIndex = 0;
+    pointerStateCursor = savedState;
     do {
-      iVar1 = *piVar5;
-      piVar5 = piVar5 + 1;
-      if (iVar4 != iVar1) {
-        _glBindBuffer_Exec(glContext,0x8892,iVar1);
-        iVar4 = iVar1;
+      unitBufferName = *bufferNameCursor;
+      bufferNameCursor = bufferNameCursor + 1;
+      if (boundArrayBuffer != unitBufferName) {
+        _glBindBuffer_Exec(glContext,0x8892,unitBufferName);
+        boundArrayBuffer = unitBufferName;
       }
-      iVar1 = iVar3 + 1;
+      nextAttribIndex = attribIndex + 1;
       _glVertexAttribPointerARB_Exec
-                (glContext,iVar3,piVar6[0x41],piVar6[0x42] & 0xffff7fff,(uint)piVar6[0x42] >> 0xf & 1,
-                 piVar6[0x43],piVar6[0x44]);
-      piVar6 = piVar6 + 4;
-      iVar3 = iVar1;
-    } while (iVar1 < 0x10);
-    iVar3 = savedState[0xa6];
-    if (iVar4 != iVar3) {
-      _glBindBuffer_Exec(glContext,0x8892,iVar3);
-      iVar4 = iVar3;
+                (glContext,attribIndex,pointerStateCursor[0x41],pointerStateCursor[0x42] & 0xffff7fff,(uint)pointerStateCursor[0x42] >> 0xf & 1,
+                 pointerStateCursor[0x43],pointerStateCursor[0x44]);
+      pointerStateCursor = pointerStateCursor + 4;
+      attribIndex = nextAttribIndex;
+    } while (nextAttribIndex < 0x10);
+    pointerBufferName = savedState[0xa6];
+    if (boundArrayBuffer != pointerBufferName) {
+      _glBindBuffer_Exec(glContext,0x8892,pointerBufferName);
+      boundArrayBuffer = pointerBufferName;
     }
     _glIndexPointer_Exec(glContext,(uint)*(ushort *)(savedState + 0x81),savedState[0x82],savedState[0x83]);
-    if (iVar4 != savedState[0x84]) {
+    if (boundArrayBuffer != savedState[0x84]) {
       _glBindBuffer_Exec(glContext,0x8892,savedState[0x84]);
     }
-    iVar4 = 0;
-    if (*(int *)(iVar2 + 0x35c) != 0) {
-      iVar4 = *(int *)(*(int *)(iVar2 + 0x35c) + 4);
+    boundElementBuffer = 0;
+    if (*(int *)(vertexArrayState + 0x35c) != 0) {
+      boundElementBuffer = *(int *)(*(int *)(vertexArrayState + 0x35c) + 4);
     }
-    if (iVar4 != savedState[0x85]) {
+    if (boundElementBuffer != savedState[0x85]) {
       _glBindBuffer_Exec(glContext,0x8893,savedState[0x85]);
     }
     _glVertexArrayRangeEXT_Exec(glContext,savedState[0xa9],savedState[0xaa]);

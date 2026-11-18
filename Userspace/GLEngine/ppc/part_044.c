@@ -469,39 +469,39 @@ int _zeroTargetExtractor()
 }
 
 /* _gleGetHashMachineObjectNameTargetPairs @ 0xd2364 (400 bytes) */
-void _gleGetHashMachineObjectNameTargetPairs(glContext, param_2, param_3, valuePtr)
+void _gleGetHashMachineObjectNameTargetPairs(glContext, hashBuckets, objectType, valuePtr)
   int glContext;
-  int *param_2;
-  int param_3;
+  int *hashBuckets;
+  int objectType;
   int *valuePtr;
 {
   undefined *zeroTargetExtractor;
   int *piVar2;
-  undefined4 uVar3;
+  undefined4 objectTarget;
   int a2;
   int *a3;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  int *piVar4;
+  int *nextBucket;
   int a6;
-  code *pcVar5;
+  code *targetExtractor;
   int iVar6;
   
   zeroTargetExtractor = PTR__zeroTargetExtractor_00110e30;
   iVar6 = 0;
-  a2 = param_3;
+  a2 = objectType;
   a3 = valuePtr;
   if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
     _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
   }
-  piVar2 = param_2;
+  piVar2 = hashBuckets;
   do {
-    piVar4 = piVar2 + 1;
+    nextBucket = piVar2 + 1;
     for (piVar2 = (int *)*piVar2; piVar2 != (int *)0x0; piVar2 = (int *)*piVar2) {
       iVar6 = iVar6 + 1;
     }
-    piVar2 = piVar4;
-  } while (piVar4 <= param_2 + 0x3ff);
+    piVar2 = nextBucket;
+  } while (nextBucket <= hashBuckets + 0x3ff);
   if (iVar6 == 0) {
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -512,24 +512,24 @@ void _gleGetHashMachineObjectNameTargetPairs(glContext, param_2, param_3, valueP
     piVar2 = (int *)_malloc(iVar6 * 8 + 4);
     *piVar2 = iVar6;
     *valuePtr = (int)piVar2;
-    pcVar5 = (code *)PTR__gleTextureTargetExtractor_0011215c;
-    if ((param_3 != 2) &&
-       (pcVar5 = (code *)PTR__glePipelineProgramTargetExtactor_00112158, param_3 != 4)) {
-      pcVar5 = (code *)zeroTargetExtractor;
+    targetExtractor = (code *)PTR__gleTextureTargetExtractor_0011215c;
+    if ((objectType != 2) &&
+       (targetExtractor = (code *)PTR__glePipelineProgramTargetExtactor_00112158, objectType != 4)) {
+      targetExtractor = (code *)zeroTargetExtractor;
     }
     iVar6 = 0;
-    piVar2 = param_2;
+    piVar2 = hashBuckets;
     do {
-      piVar4 = piVar2 + 1;
+      nextBucket = piVar2 + 1;
       for (piVar2 = (int *)*piVar2; piVar2 != (int *)0x0; piVar2 = (int *)*piVar2) {
         a6 = *valuePtr;
         *(int *)((iVar6 + 1) * 4 + a6) = piVar2[1];
         iVar6 = iVar6 + 2;
-        uVar3 = (*pcVar5)(glContext,piVar2,a2,a3,incomingR7,incomingR8,a6);
-        *(undefined4 *)(iVar6 * 4 + *valuePtr) = uVar3;
+        objectTarget = (*targetExtractor)(glContext,piVar2,a2,a3,incomingR7,incomingR8,a6);
+        *(undefined4 *)(iVar6 * 4 + *valuePtr) = objectTarget;
       }
-      piVar2 = piVar4;
-    } while (piVar4 <= param_2 + 0x3ff);
+      piVar2 = nextBucket;
+    } while (nextBucket <= hashBuckets + 0x3ff);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       return;

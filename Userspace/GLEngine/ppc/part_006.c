@@ -323,44 +323,65 @@ void _gleOptimizeDisplayList(glContext, list)
 {
   undefined4 *cursor;
   int remaining;
-  bool bVar1;
-  bool bVar2;
-  char cVar3;
-  int *piVar4;
-  uint *puVar5;
+  bool isTriangles;
+  bool isVariableLengthCommand;
+  bool attribIndexIsZero;
+  bool vertexCountNotMultiple;
+  bool noVerticesLeft;
+  char attribBytes;
+  int *chainEntryPtr;
+  uint *scanEntry;
+  uint *varRecordStart;
   float fVar6;
   uint uVar7;
   float fVar8;
   float fVar9;
   float fVar10;
   int iVar11;
-  int iVar12;
+  int attribOffset;
+  int isHashName;
+  int varRecordOffset;
+  int removedObject;
   int sharedState;
   int hashObject;
-  uint uVar13;
+  uint payloadBytes;
+  uint vmBlockSize;
+  uint vertexCount;
   int iVar14;
+  int texCoordCommandType;
+  int recordHeaderBytes;
+  int copyIndexNext;
+  int arrayDataBytes;
   int listRecord;
-  int *piVar15;
+  int *commandEntryPtr;
+  int *varListRecord;
   int *srcCursor2;
   int *listRecord2;
-  undefined *puVar16;
-  uint *puVar17;
-  undefined4 *puVar18;
+  undefined *commandFunc;
+  uint *operands;
+  undefined4 *formatCompareCursor;
   undefined4 *dstCursor;
   byte *srcCursor;
   uint uVar20;
-  uint uVar21;
-  uint *puVar22;
-  uint uVar23;
-  int iVar24;
+  uint primitiveMode;
+  uint *varWriteCursor;
+  uint commandCount;
+  int commandSizeTable;
+  int displayListHashTable;
   uint uVar25;
+  uint nextVertexIndex;
   uint loopIndex;
-  int iVar27;
+  int commandEntry;
+  int vertexRecord;
   int glContextPtr53e8;
-  int iVar28;
-  uint *puVar29;
+  int vertexDataBytes;
+  uint *commandCursor;
   uint uVar30;
+  uint vmAllocSize;
+  uint positionSize;
+  uint attribIndex;
   uint uVar31;
+  uint vertexIndex;
   byte in_xer_so = 0;
   byte in_cr1;
   byte bVar32;
@@ -369,280 +390,280 @@ void _gleOptimizeDisplayList(glContext, list)
   byte in_cr5;
   byte in_cr6;
   byte bVar33;
-  undefined4 local_2f0;
-  undefined4 local_2ec;
-  undefined4 local_2e8;
-  undefined4 local_2e4;
-  undefined4 local_2e0;
-  undefined4 local_2dc;
-  undefined4 local_2d8;
-  undefined1 local_2d4 [4];
-  undefined4 local_2d0;
-  undefined4 local_2cc;
-  uint local_2c8;
-  int local_2c0;
-  int local_2bc [7];
-  int local_2a0 [8];
-  int aiStack_280 [15];
-  int local_244;
-  uint local_240;
-  uint local_23c;
-  uint local_238;
-  uint local_234;
-  uint local_230;
-  uint local_22c;
-  uint local_228;
-  uint local_224;
-  uint local_220;
-  uint local_21c;
-  uint local_218;
-  uint local_210;
-  undefined4 local_20c;
-  undefined4 local_208;
-  undefined4 local_204;
-  float local_200;
-  undefined4 local_1fc;
-  undefined4 local_1f8;
-  undefined4 local_1f4;
-  undefined4 local_1f0;
-  uint uStack_1ec;
-  float local_1e0;
-  undefined4 local_1dc;
-  undefined4 local_1d8;
-  undefined4 local_1d4;
-  uint local_1d0;
-  float local_1cc;
-  undefined4 local_1c8;
-  undefined4 local_1c4;
-  float local_1c0;
-  float local_1bc;
-  undefined4 local_1b8;
-  undefined4 local_1b4;
-  float local_1b0;
-  float local_1ac;
-  undefined4 local_1a8;
-  undefined4 local_1a4;
-  float local_1a0;
-  float local_19c;
-  float local_198;
-  undefined4 local_194;
-  float local_190;
-  float local_18c;
-  float local_188;
-  undefined4 local_184;
-  float local_180;
-  float local_17c;
-  float local_178;
-  undefined4 local_174;
-  float local_170;
-  float local_16c;
-  float local_168;
-  float local_164;
-  undefined4 local_160;
-  undefined4 local_15c;
-  float local_150;
-  float local_14c;
-  float local_148;
-  float local_144;
-  float local_140;
-  float local_13c;
-  float local_138;
-  float local_134;
-  float local_130;
-  float local_12c;
-  float local_128;
-  float local_124;
-  float local_120;
-  float local_11c;
-  float local_118;
-  float local_114;
-  float local_110;
-  float local_10c;
-  float local_108;
-  float local_104;
-  float local_100;
-  float local_fc;
-  float local_f8;
-  float local_f4;
-  float local_f0;
-  float local_ec;
-  float local_e8;
-  float local_e4;
-  float local_e0;
-  float local_dc;
-  float local_d8;
-  float local_d4;
-  float local_d0;
-  float local_cc;
-  float local_c8;
-  float local_c4;
-  float local_c0;
-  float local_bc;
-  float local_b8;
-  float local_b4;
-  float local_b0;
-  float local_ac;
-  float local_a8;
-  float local_a4;
-  float local_a0;
-  float local_9c;
-  float local_98;
-  float local_94;
-  float local_90;
-  float local_8c;
-  float local_88;
-  float local_84;
-  int local_80;
-  uint *local_7c;
-  uint *local_78;
-  int local_74;
-  int local_70;
-  uint local_6c;
-  float local_60;
+  undefined4 vertexFormatWord0;
+  undefined4 vertexFormatWord1;
+  undefined4 vertexFormatWord2;
+  undefined4 positionNormalColorFogSizes;
+  undefined4 secondaryColorSizeWord;
+  undefined4 texCoordSizes0to3;
+  undefined4 texCoordSizes4to7;
+  undefined1 attribSizes [4];
+  undefined4 attribSizes4to7;
+  undefined4 attribSizes8to11;
+  uint attribSizes12to15;
+  int positionOffset;
+  int fixedAttribOffsets [7];
+  int texCoordOffsets [8];
+  int attribOffsets [15];
+  int attrib15Offset;
+  uint nextFormatWord0ThenTexCoordS;
+  uint nextFormatWord1ThenTexCoordT;
+  uint nextFormatWord2ThenTexCoordR;
+  uint nextFormatWord3ThenTexCoordQ;
+  uint nextFormatWord4ThenMultiTexCoordS;
+  uint nextFormatWord5ThenMultiTexCoordT;
+  uint nextFormatWord6ThenMultiTexCoordR;
+  uint nextFormatWord7ThenMultiTexCoordQ;
+  uint nextFormatWord8;
+  uint nextFormatWord9;
+  uint nextFormatWord10;
+  uint attrib1fvX;
+  undefined4 attrib1fvY;
+  undefined4 attrib1fvZ;
+  undefined4 attrib1fvW;
+  float attrib1svX;
+  undefined4 attrib1svY;
+  undefined4 attrib1svZ;
+  undefined4 attrib1svW;
+  undefined4 intToDoubleHigh;
+  uint intToDoubleLow;
+  float attrib1dvX;
+  undefined4 attrib1dvY;
+  undefined4 attrib1dvZ;
+  undefined4 attrib1dvW;
+  uint attrib2fvX;
+  float attrib2fvY;
+  undefined4 attrib2fvZ;
+  undefined4 attrib2fvW;
+  float attrib2svX;
+  float attrib2svY;
+  undefined4 attrib2svZ;
+  undefined4 attrib2svW;
+  float attrib2dvX;
+  float attrib2dvY;
+  undefined4 attrib2dvZ;
+  undefined4 attrib2dvW;
+  float attrib3fvX;
+  float attrib3fvY;
+  float attrib3fvZ;
+  undefined4 attrib3fvW;
+  float attrib3svX;
+  float attrib3svY;
+  float attrib3svZ;
+  undefined4 attrib3svW;
+  float attrib3dvX;
+  float attrib3dvY;
+  float attrib3dvZ;
+  undefined4 attrib3dvW;
+  float attrib4ubvX;
+  float attrib4ubvY;
+  float attrib4ubvZ;
+  float attrib4ubvW;
+  undefined4 uintToFloatMagicA;
+  undefined4 uintToFloatMagicB;
+  float attrib4NubvX;
+  float attrib4NubvY;
+  float attrib4NubvZ;
+  float attrib4NubvW;
+  float attrib4ivX;
+  float attrib4ivY;
+  float attrib4ivZ;
+  float attrib4ivW;
+  float attrib4NivX;
+  float attrib4NivY;
+  float attrib4NivZ;
+  float attrib4NivW;
+  float attrib4bvX;
+  float attrib4bvY;
+  float attrib4bvZ;
+  float attrib4bvW;
+  float attrib4NbvX;
+  float attrib4NbvY;
+  float attrib4NbvZ;
+  float attrib4NbvW;
+  float attrib4usvX;
+  float attrib4usvY;
+  float attrib4usvZ;
+  float attrib4usvW;
+  float attrib4NusvX;
+  float attrib4NusvY;
+  float attrib4NusvZ;
+  float attrib4NusvW;
+  float attrib4uivX;
+  float attrib4uivY;
+  float attrib4uivZ;
+  float attrib4uivW;
+  float attrib4NuivX;
+  float attrib4NuivY;
+  float attrib4NuivZ;
+  float attrib4NuivW;
+  float attrib4fvX;
+  float attrib4fvY;
+  float attrib4fvZ;
+  float attrib4fvW;
+  float attrib4svX;
+  float attrib4svY;
+  float attrib4svZ;
+  float attrib4svW;
+  float attrib4NsvX;
+  float attrib4NsvY;
+  float attrib4NsvZ;
+  float attrib4NsvW;
+  float attrib4dvX;
+  float attrib4dvY;
+  float attrib4dvZ;
+  float attrib4dvW;
+  int endCommandIndex;
+  uint *scanCommandPtr;
+  uint *varBlockBase;
+  int varBytesRemaining;
+  int carryVertexCopy;
+  uint savedConditionBits;
+  float uintToFloatScratch;
   
   hashObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x300c,list);
   if (hashObject != 0) {
-    uVar23 = *(uint *)(hashObject + 0x10);
-    if (uVar23 < 0x10) {
+    commandCount = *(uint *)(hashObject + 0x10);
+    if (commandCount < 0x10) {
       _gleQuickOptimizeDisplayList(glContext,list,hashObject);
     }
     else {
-      puVar22 = (uint *)0x0;
-      puVar29 = (uint *)(hashObject + 0x2c);
-      iVar24 = *(int *)(hashObject + 0x14);
+      varWriteCursor = (uint *)0x0;
+      commandCursor = (uint *)(hashObject + 0x2c);
+      commandSizeTable = *(int *)(hashObject + 0x14);
       _gleNewList(glContext,list,((unsigned char *)0x00001300U));
-      local_74 = 0;
-      local_78 = (uint *)0x0;
-      iVar12 = 0;
+      varBytesRemaining = 0;
+      varBlockBase = (uint *)0x0;
+      varRecordOffset = 0;
       loopIndex = 0;
-      puVar5 = puVar22;
-      if (uVar23 != 0) {
+      varRecordStart = varWriteCursor;
+      if (commandCount != 0) {
         do {
-          puVar16 = (undefined *)*puVar29;
-          iVar27 = 0;
-          iVar11 = *(int *)(((uint)puVar16 & 0x7c) + _gleDisplayListFunctionHash);
-          while ((iVar11 != 0 && (iVar27 = iVar11, puVar16 != *(undefined **)(iVar11 + 4)))) {
-            iVar27 = *(int *)(iVar11 + 0xc);
-            iVar11 = iVar27;
+          commandFunc = (undefined *)*commandCursor;
+          commandEntry = 0;
+          iVar11 = *(int *)(((uint)commandFunc & 0x7c) + _gleDisplayListFunctionHash);
+          while ((iVar11 != 0 && (commandEntry = iVar11, commandFunc != *(undefined **)(iVar11 + 4)))) {
+            commandEntry = *(int *)(iVar11 + 0xc);
+            iVar11 = commandEntry;
           }
-          puVar22 = puVar5;
-          if (puVar16 == PTR__glBegin_ListExec_00112150) {
-            uVar21 = puVar29[1];
-            local_2c8 = 0;
-            local_2f0 = 0;
-            local_2ec = 0;
-            local_2e8 = 0;
-            local_2e4 = 0;
-            local_2e0 = 0;
-            local_2dc = 0;
-            local_2d8 = 0;
-            *(unsigned int *)local_2d4 = (unsigned int)0x0;
-            local_2d0 = 0;
-            local_2cc = 0;
-            uVar13 = ((int (*)())_EstablishVertexFormat)(&local_2f0,puVar29,uVar23,loopIndex,iVar24,&local_80,&local_7c);
-            if (((int)uVar13 < 0x1a) || (9 < uVar21)) {
-              uVar13 = *(int *)(loopIndex * 4 + iVar24) - 4;
-              listRecord = _gleAddListItem(glContext,*puVar29,uVar13);
+          varWriteCursor = varRecordStart;
+          if (commandFunc == PTR__glBegin_ListExec_00112150) {
+            primitiveMode = commandCursor[1];
+            attribSizes12to15 = 0;
+            vertexFormatWord0 = 0;
+            vertexFormatWord1 = 0;
+            vertexFormatWord2 = 0;
+            positionNormalColorFogSizes = 0;
+            secondaryColorSizeWord = 0;
+            texCoordSizes0to3 = 0;
+            texCoordSizes4to7 = 0;
+            *(unsigned int *)attribSizes = (unsigned int)0x0;
+            attribSizes4to7 = 0;
+            attribSizes8to11 = 0;
+            vertexCount = ((int (*)())_EstablishVertexFormat)(&vertexFormatWord0,commandCursor,commandCount,loopIndex,commandSizeTable,&endCommandIndex,&scanCommandPtr);
+            if (((int)vertexCount < 0x1a) || (9 < primitiveMode)) {
+              payloadBytes = *(int *)(loopIndex * 4 + commandSizeTable) - 4;
+              listRecord = _gleAddListItem(glContext,*commandCursor,payloadBytes);
               iVar11 = 0;
-              for (uVar13 = uVar13 >> 2; uVar13 != 0; uVar13 = uVar13 - 1) {
-                *(uint *)(listRecord + iVar11 * 4) = puVar29[iVar11 + 1];
+              for (payloadBytes = payloadBytes >> 2; payloadBytes != 0; payloadBytes = payloadBytes - 1) {
+                *(uint *)(listRecord + iVar11 * 4) = commandCursor[iVar11 + 1];
                 iVar11 = iVar11 + 1;
               }
 LAB_0003d534:
-              if (iVar27 != 0) {
-                bVar1 = *(undefined **)(iVar27 + 4) == PTR__glWeightARB_ListExec_0011214c;
+              if (commandEntry != 0) {
+                isVariableLengthCommand = *(undefined **)(commandEntry + 4) == PTR__glWeightARB_ListExec_0011214c;
 LAB_0003d5ac:
-                if (bVar1) goto LAB_0003d5b0;
+                if (isVariableLengthCommand) goto LAB_0003d5b0;
               }
 LAB_0003d5c4:
-              puVar29 = (uint *)((int)puVar29 + *(int *)(loopIndex * 4 + iVar24));
+              commandCursor = (uint *)((int)commandCursor + *(int *)(loopIndex * 4 + commandSizeTable));
               goto LAB_0003d5cc;
             }
-            bVar1 = uVar21 == 4;
-            bVar32 = ((int)uVar21 < 4) << 3 | (4 < (int)uVar21) << 2 | bVar1 << 1 | in_xer_so & 1;
-            iVar27 = 0;
-            local_70 = 0;
-            if ((((bVar1) || (uVar21 == 1)) || (uVar21 == 0)) || (uVar21 == 7)) {
-              bVar2 = false;
-              uVar31 = loopIndex + local_80 + 1;
-              if (bVar1) {
-                if (uVar13 == ((int)uVar13 / 3) * 3) goto LAB_0003b1c4;
+            isTriangles = primitiveMode == 4;
+            bVar32 = ((int)primitiveMode < 4) << 3 | (4 < (int)primitiveMode) << 2 | isTriangles << 1 | in_xer_so & 1;
+            vertexRecord = 0;
+            carryVertexCopy = 0;
+            if ((((isTriangles) || (primitiveMode == 1)) || (primitiveMode == 0)) || (primitiveMode == 7)) {
+              vertexCountNotMultiple = false;
+              uVar31 = loopIndex + endCommandIndex + 1;
+              if (isTriangles) {
+                if (vertexCount == ((int)vertexCount / 3) * 3) goto LAB_0003b1c4;
 LAB_0003b1c0:
-                bVar2 = true;
+                vertexCountNotMultiple = true;
               }
-              else if (uVar21 < 5) {
-                if (uVar21 == 1) {
-                  uVar7 = uVar13 & 1;
+              else if (primitiveMode < 5) {
+                if (primitiveMode == 1) {
+                  uVar7 = vertexCount & 1;
 LAB_0003b1bc:
                   if (uVar7 != 0) goto LAB_0003b1c0;
                 }
               }
-              else if (uVar21 == 7) {
-                uVar7 = uVar13 & 3;
+              else if (primitiveMode == 7) {
+                uVar7 = vertexCount & 3;
                 goto LAB_0003b1bc;
               }
 LAB_0003b1c4:
-              unaff_cr4 = bVar2 << 2 | !bVar2 << 1 | in_xer_so & 1;
-              if ((!bVar2) && (uVar31 < uVar23)) {
+              unaff_cr4 = vertexCountNotMultiple << 2 | !vertexCountNotMultiple << 1 | in_xer_so & 1;
+              if ((!vertexCountNotMultiple) && (uVar31 < commandCount)) {
                 do {
                   if (PTR__glEnd_ListExec_00110a3c == PTR__glWeightARB_ListExec_0011214c) {
-                    local_7c = local_7c + local_7c[1] + 2;
+                    scanCommandPtr = scanCommandPtr + scanCommandPtr[1] + 2;
                   }
                   else {
-                    local_7c = (uint *)((int)local_7c + *(int *)(iVar24 + (loopIndex + local_80) * 4));
+                    scanCommandPtr = (uint *)((int)scanCommandPtr + *(int *)(commandSizeTable + (loopIndex + endCommandIndex) * 4));
                   }
-                  puVar5 = *(uint **)((*local_7c & 0x7c) + _gleDisplayListFunctionHash);
-                  if (puVar5 == (uint *)0x0) {
+                  scanEntry = *(uint **)((*scanCommandPtr & 0x7c) + _gleDisplayListFunctionHash);
+                  if (scanEntry == (uint *)0x0) {
 LAB_0003b2e8:
                     unaff_cr4 = in_xer_so & 1 | 4;
                   }
                   else {
                     do {
-                      if (*local_7c == puVar5[1]) break;
-                      puVar5 = (uint *)puVar5[3];
-                    } while (puVar5 != (uint *)0x0);
-                    if (((puVar5 == (uint *)0x0) || (uVar7 = *puVar5, uVar7 != 0)) ||
-                       ((uVar21 != local_7c[1] ||
-                        (local_240 = uVar7, local_23c = uVar7, local_238 = uVar7, local_234 = uVar7,
-                        local_230 = uVar7, local_22c = uVar7, local_228 = uVar7, local_224 = uVar7,
-                        local_220 = uVar7, local_21c = uVar7, local_218 = uVar7,
-                        uVar7 = ((int (*)())_EstablishVertexFormat)(&local_240,local_7c,uVar23,loopIndex + local_80 + 1,iVar24,
-                                           &local_80,&local_7c), uVar7 == 0)))) goto LAB_0003b2e8;
-                    if (bVar1) {
+                      if (*scanCommandPtr == scanEntry[1]) break;
+                      scanEntry = (uint *)scanEntry[3];
+                    } while (scanEntry != (uint *)0x0);
+                    if (((scanEntry == (uint *)0x0) || (uVar7 = *scanEntry, uVar7 != 0)) ||
+                       ((primitiveMode != scanCommandPtr[1] ||
+                        (nextFormatWord0ThenTexCoordS = uVar7, nextFormatWord1ThenTexCoordT = uVar7, nextFormatWord2ThenTexCoordR = uVar7, nextFormatWord3ThenTexCoordQ = uVar7,
+                        nextFormatWord4ThenMultiTexCoordS = uVar7, nextFormatWord5ThenMultiTexCoordT = uVar7, nextFormatWord6ThenMultiTexCoordR = uVar7, nextFormatWord7ThenMultiTexCoordQ = uVar7,
+                        nextFormatWord8 = uVar7, nextFormatWord9 = uVar7, nextFormatWord10 = uVar7,
+                        uVar7 = ((int (*)())_EstablishVertexFormat)(&nextFormatWord0ThenTexCoordS,scanCommandPtr,commandCount,loopIndex + endCommandIndex + 1,commandSizeTable,
+                                           &endCommandIndex,&scanCommandPtr), uVar7 == 0)))) goto LAB_0003b2e8;
+                    if (isTriangles) {
                       if (uVar7 != (uVar7 / 3) * 3) {
 LAB_0003b350:
                         unaff_cr4 = in_xer_so & 1 | 4;
                       }
                     }
-                    else if (uVar21 < 5) {
-                      if ((uVar21 == 1) && ((uVar7 & 1) != 0)) {
+                    else if (primitiveMode < 5) {
+                      if ((primitiveMode == 1) && ((uVar7 & 1) != 0)) {
                         unaff_cr4 = in_xer_so & 1 | 4;
                       }
                     }
-                    else if ((uVar21 == 7) && ((uVar7 & 3) != 0)) goto LAB_0003b350;
+                    else if ((primitiveMode == 7) && ((uVar7 & 3) != 0)) goto LAB_0003b350;
                     if (!(bool)(unaff_cr4 >> 1 & 1)) break;
-                    puVar18 = &local_2f0;
+                    formatCompareCursor = &vertexFormatWord0;
                     while( true ) {
-                      if (*(char *)(puVar18 + 3) != *(char *)(puVar18 + 0x2f)) {
+                      if (*(char *)(formatCompareCursor + 3) != *(char *)(formatCompareCursor + 0x2f)) {
                         unaff_cr4 = in_xer_so & 1 | 4;
                       }
-                      puVar18 = (undefined4 *)((int)puVar18 + 1);
-                      if (local_2d4 + 3 < puVar18) break;
+                      formatCompareCursor = (undefined4 *)((int)formatCompareCursor + 1);
+                      if (attribSizes + 3 < formatCompareCursor) break;
                       if (!(bool)(unaff_cr4 >> 1 & 1)) goto LAB_0003b3b0;
                     }
                     if (!(bool)(unaff_cr4 >> 1 & 1)) break;
-                    uVar13 = uVar13 + uVar7;
-                    uVar31 = uVar31 + local_80 + 1;
+                    vertexCount = vertexCount + uVar7;
+                    uVar31 = uVar31 + endCommandIndex + 1;
                   }
-                  if ((!(bool)(unaff_cr4 >> 1 & 1)) || (uVar23 <= uVar31)) break;
+                  if ((!(bool)(unaff_cr4 >> 1 & 1)) || (commandCount <= uVar31)) break;
                 } while( true );
               }
             }
 LAB_0003b3b0:
-            _memset(&local_2c0,0,0x80);
+            _memset(&positionOffset,0,0x80);
             remaining = 0x1e;
-            cursor = &local_2ec;
-            srcCursor = (byte *)((int)&local_2e4 + 1);
+            cursor = &vertexFormatWord1;
+            srcCursor = (byte *)((int)&positionNormalColorFogSizes + 1);
             do {
               bVar33 = *srcCursor;
               srcCursor = srcCursor + 1;
@@ -650,77 +671,77 @@ LAB_0003b3b0:
               cursor = cursor + 1;
               remaining = remaining + -1;
             } while (remaining != 0);
-            bVar2 = uVar13 == 0;
-            local_6c = (uint)(byte)((local_70 < 0) << 3 | (0 < local_70) << 2 | (local_70 == 0) << 1
+            noVerticesLeft = vertexCount == 0;
+            savedConditionBits = (uint)(byte)((carryVertexCopy < 0) << 3 | (0 < carryVertexCopy) << 2 | (carryVertexCopy == 0) << 1
                                    | in_xer_so & 1) << 0x1c | (uint)(in_cr1 & 0xf) << 0x18 |
                        (uint)bVar32 << 0x14 | (uint)(unaff_cr3 & 0xf) << 0x10 |
                        (uint)(unaff_cr4 & 0xf) << 0xc | (uint)(in_cr5 & 0xf) << 8 |
                        (uint)(in_cr6 & 0xf) << 4 |
-                       (uint)(byte)(((int)uVar13 < 0) << 3 | (0 < (int)uVar13) << 2 | bVar2 << 1 |
+                       (uint)(byte)(((int)vertexCount < 0) << 3 | (0 < (int)vertexCount) << 2 | noVerticesLeft << 1 |
                                    in_xer_so & 1);
-            local_2c0 = local_244 + (local_2c8 & 0xff);
-            while (!bVar2) {
-              uVar31 = 0;
-              uVar7 = uVar13;
-              if (0xffff < uVar13) {
-                if (uVar21 == 1) {
+            positionOffset = attrib15Offset + (attribSizes12to15 & 0xff);
+            while (!noVerticesLeft) {
+              vertexIndex = 0;
+              uVar7 = vertexCount;
+              if (0xffff < vertexCount) {
+                if (primitiveMode == 1) {
                   uVar7 = 0xfffe;
                 }
-                else if ((uVar21 == 0) || (bVar1)) {
+                else if ((primitiveMode == 0) || (isTriangles)) {
                   uVar7 = 0xffff;
                 }
-                else if (uVar21 == 7) {
+                else if (primitiveMode == 7) {
                   uVar7 = 0xfffc;
                 }
               }
-              uVar13 = uVar13 - uVar7;
-              iVar14 = 0x2c;
-              iVar28 = uVar7 * (local_2c0 + (local_2e4 >> 0x18));
-              iVar11 = iVar28 + 0x2c;
-              bVar33 = (iVar11 < local_74) << 3 | (local_74 < iVar11) << 2 |
-                       (iVar11 == local_74) << 1 | in_xer_so & 1;
-              if (local_74 < iVar11) {
-                iVar14 = 0x40;
-                if (local_78 != (uint *)0x0) {
-                  ((void (*)())_CloseCurrentVAR)(glContext,iVar12,puVar22,&local_78,&local_74);
+              vertexCount = vertexCount - uVar7;
+              recordHeaderBytes = 0x2c;
+              vertexDataBytes = uVar7 * (positionOffset + (positionNormalColorFogSizes >> 0x18));
+              iVar11 = vertexDataBytes + 0x2c;
+              bVar33 = (iVar11 < varBytesRemaining) << 3 | (varBytesRemaining < iVar11) << 2 |
+                       (iVar11 == varBytesRemaining) << 1 | in_xer_so & 1;
+              if (varBytesRemaining < iVar11) {
+                recordHeaderBytes = 0x40;
+                if (varBlockBase != (uint *)0x0) {
+                  ((void (*)())_CloseCurrentVAR)(glContext,varRecordOffset,varWriteCursor,&varBlockBase,&varBytesRemaining);
                 }
-                piVar15 = (int *)((int (*)())_gleAddListItemWithFree)(glContext,
+                varListRecord = (int *)((int (*)())_gleAddListItemWithFree)(glContext,
                                             PTR__gleSetupAndDrawArraysOrElementsOutOfLine_ListExec_00112140
                                             ,0x10,PTR__gleOptimizedListFreeFunc_00110ccc,4);
-                local_74 = iVar28 + 0x40;
-                bVar33 = (local_74 < 0x100000) << 3 | (0x100000 < local_74) << 2 |
-                         (local_74 == 0x100000) << 1 | in_xer_so & 1;
-                iVar12 = (int)piVar15 - *(int *)(glContext + 0x53e8);
-                if (0x100000 < local_74) {
-                  uVar30 = (uint)(((unsigned char *)0x0000103f) + iVar28) & 0xfffff000;
+                varBytesRemaining = vertexDataBytes + 0x40;
+                bVar33 = (varBytesRemaining < 0x100000) << 3 | (0x100000 < varBytesRemaining) << 2 |
+                         (varBytesRemaining == 0x100000) << 1 | in_xer_so & 1;
+                varRecordOffset = (int)varListRecord - *(int *)(glContext + 0x53e8);
+                if (0x100000 < varBytesRemaining) {
+                  vmAllocSize = (uint)(((unsigned char *)0x0000103f) + vertexDataBytes) & 0xfffff000;
                 }
                 else {
-                  local_74 = 0x100000;
-                  uVar30 = 0x100000;
+                  varBytesRemaining = 0x100000;
+                  vmAllocSize = 0x100000;
                 }
-                _vm_allocate(*(vm_map_t *)PTR_00112034,(vm_address_t *)&local_78,uVar30,1);
-                *piVar15 = (int)local_78;
-                local_78[3] = uVar30;
-                *(undefined4 *)*piVar15 = 4;
-                *(uint *)*piVar15 = *(uint *)*piVar15 | 2;
-                puVar22 = local_78;
-                puVar5 = (uint *)(*piVar15 + 0x14);
+                _vm_allocate(*(vm_map_t *)PTR_00112034,(vm_address_t *)&varBlockBase,vmAllocSize,1);
+                *varListRecord = (int)varBlockBase;
+                varBlockBase[3] = vmAllocSize;
+                *(undefined4 *)*varListRecord = 4;
+                *(uint *)*varListRecord = *(uint *)*varListRecord | 2;
+                varWriteCursor = varBlockBase;
+                varRecordStart = (uint *)(*varListRecord + 0x14);
               }
               else {
                 listRecord2 = (int *)_gleAddListItem(glContext,
                                                  PTR__gleDrawArraysOrElementsOutOfLine_ListExec_0011213c
                                                  ,8);
-                *listRecord2 = (int)listRecord2 + (-iVar12 - *(int *)(glContext + 0x53e8));
-                listRecord2[1] = (int)puVar22 - (int)local_78;
-                puVar5 = puVar22;
+                *listRecord2 = (int)listRecord2 + (-varRecordOffset - *(int *)(glContext + 0x53e8));
+                listRecord2[1] = (int)varWriteCursor - (int)varBlockBase;
+                varRecordStart = varWriteCursor;
               }
-              if ((bool)((byte)(local_6c >> 0x1d) & 1)) {
-                unaff_cr3 = ((int)uVar13 < 0) << 3 | (0 < (int)uVar13) << 2 | (uVar13 == 0) << 1 |
+              if ((bool)((byte)(savedConditionBits >> 0x1d) & 1)) {
+                unaff_cr3 = ((int)vertexCount < 0) << 3 | (0 < (int)vertexCount) << 2 | (vertexCount == 0) << 1 |
                             in_xer_so & 1;
-                if (uVar13 != 0) {
-                  local_70 = _malloc(local_2c0 + (local_2e4 >> 0x18));
-                  local_6c = (uint)(byte)((local_70 < 0) << 3 | (0 < local_70) << 2 |
-                                          (local_70 == 0) << 1 | in_xer_so & 1) << 0x1c |
+                if (vertexCount != 0) {
+                  carryVertexCopy = _malloc(positionOffset + (positionNormalColorFogSizes >> 0x18));
+                  savedConditionBits = (uint)(byte)((carryVertexCopy < 0) << 3 | (0 < carryVertexCopy) << 2 |
+                                          (carryVertexCopy == 0) << 1 | in_xer_so & 1) << 0x1c |
                              (uint)(in_cr1 & 0xf) << 0x18 | (uint)bVar32 << 0x14 |
                              (uint)unaff_cr3 << 0x10 | (uint)(unaff_cr4 & 0xf) << 0xc |
                              (uint)(in_cr5 & 0xf) << 8 | (uint)(in_cr6 & 0xf) << 4 |
@@ -728,32 +749,32 @@ LAB_0003b3b0:
                 }
               }
               else {
-                iVar27 = (int)puVar22 + iVar14;
-                unaff_cr3 = ((int)uVar13 < 0) << 3 | (0 < (int)uVar13) << 2 | (uVar13 == 0) << 1 |
+                vertexRecord = (int)varWriteCursor + recordHeaderBytes;
+                unaff_cr3 = ((int)vertexCount < 0) << 3 | (0 < (int)vertexCount) << 2 | (vertexCount == 0) << 1 |
                             in_xer_so & 1;
-                _memcpy(iVar27,local_70,local_2c0);
+                _memcpy(vertexRecord,carryVertexCopy,positionOffset);
               }
-              local_74 = local_74 - (iVar28 + iVar14);
-              puVar22 = (uint *)((int)puVar22 + iVar28 + iVar14);
+              varBytesRemaining = varBytesRemaining - (vertexDataBytes + recordHeaderBytes);
+              varWriteCursor = (uint *)((int)varWriteCursor + vertexDataBytes + recordHeaderBytes);
               unaff_cr4 = (0 < (int)uVar7) << 3 | ((int)uVar7 < 0) << 2 | (uVar7 == 0) << 1 |
                           in_xer_so & 1;
-              _memcpy(puVar5,&local_2f0,0x2c);
-              *puVar5 = uVar21;
-              puVar5[1] = uVar7;
-              uVar30 = local_2e4 >> 0x18;
-              puVar5[2] = local_2c0 + uVar30;
+              _memcpy(varRecordStart,&vertexFormatWord0,0x2c);
+              *varRecordStart = primitiveMode;
+              varRecordStart[1] = uVar7;
+              positionSize = positionNormalColorFogSizes >> 0x18;
+              varRecordStart[2] = positionOffset + positionSize;
               if (0 < (int)uVar7) {
                 do {
-                  piVar15 = (int *)0x0;
-                  piVar4 = *(int **)((*puVar29 & 0x7c) + _gleDisplayListFunctionHash);
-                  while ((piVar4 != (int *)0x0 && (piVar15 = piVar4, *puVar29 != piVar4[1]))) {
-                    piVar15 = (int *)piVar4[3];
-                    piVar4 = piVar15;
+                  commandEntryPtr = (int *)0x0;
+                  chainEntryPtr = *(int **)((*commandCursor & 0x7c) + _gleDisplayListFunctionHash);
+                  while ((chainEntryPtr != (int *)0x0 && (commandEntryPtr = chainEntryPtr, *commandCursor != chainEntryPtr[1]))) {
+                    commandEntryPtr = (int *)chainEntryPtr[3];
+                    chainEntryPtr = commandEntryPtr;
                   }
-                  puVar17 = puVar29 + 1;
-                  iVar11 = *piVar15;
-                  iVar27 = (int)puVar5 + uVar31 * (local_2c0 + uVar30) + 0x2c;
-                  uVar25 = uVar31;
+                  operands = commandCursor + 1;
+                  iVar11 = *commandEntryPtr;
+                  vertexRecord = (int)varRecordStart + vertexIndex * (positionOffset + positionSize) + 0x2c;
+                  nextVertexIndex = vertexIndex;
                   switch(iVar11) {
                   default:
                     goto switchD_0003b6b4_caseD_0;
@@ -761,259 +782,259 @@ LAB_0003b3b0:
                   case 3:
                   case 4:
                     if (iVar11 == 2) {
-                      uVar30 = *puVar17;
-                      *(uint *)(iVar27 + local_2c0 + 4) = puVar29[2];
-                      *(uint *)(iVar27 + local_2c0) = uVar30;
-                      if (0xb < (*(unsigned char *)((unsigned char *)&(local_2e4) + 0))) {
-                        *(undefined4 *)(iVar27 + local_2c0 + 8) = 0;
+                      uVar30 = *operands;
+                      *(uint *)(vertexRecord + positionOffset + 4) = commandCursor[2];
+                      *(uint *)(vertexRecord + positionOffset) = uVar30;
+                      if (0xb < (*(unsigned char *)((unsigned char *)&(positionNormalColorFogSizes) + 0))) {
+                        *(undefined4 *)(vertexRecord + positionOffset + 8) = 0;
                       }
 LAB_0003b7c0:
-                      if (0xf < (*(unsigned char *)((unsigned char *)&(local_2e4) + 0))) {
-                        *(undefined4 *)(iVar27 + local_2c0 + 0xc) = 0x3f800000;
+                      if (0xf < (*(unsigned char *)((unsigned char *)&(positionNormalColorFogSizes) + 0))) {
+                        *(undefined4 *)(vertexRecord + positionOffset + 0xc) = 0x3f800000;
                       }
                     }
                     else {
                       if (iVar11 == 3) {
-                        uVar30 = puVar29[3];
-                        uVar25 = puVar29[2];
-                        *(uint *)(iVar27 + local_2c0) = *puVar17;
-                        *(uint *)(iVar27 + local_2c0 + 4) = uVar25;
-                        *(uint *)(iVar27 + local_2c0 + 8) = uVar30;
+                        uVar30 = commandCursor[3];
+                        uVar25 = commandCursor[2];
+                        *(uint *)(vertexRecord + positionOffset) = *operands;
+                        *(uint *)(vertexRecord + positionOffset + 4) = uVar25;
+                        *(uint *)(vertexRecord + positionOffset + 8) = uVar30;
                         goto LAB_0003b7c0;
                       }
-                      uVar30 = puVar29[4];
-                      uVar25 = puVar29[2];
-                      uVar20 = puVar29[3];
-                      *(uint *)(iVar27 + local_2c0) = *puVar17;
-                      *(uint *)(iVar27 + local_2c0 + 0xc) = uVar30;
-                      *(uint *)(iVar27 + local_2c0 + 4) = uVar25;
-                      *(uint *)(iVar27 + local_2c0 + 8) = uVar20;
+                      uVar30 = commandCursor[4];
+                      uVar25 = commandCursor[2];
+                      uVar20 = commandCursor[3];
+                      *(uint *)(vertexRecord + positionOffset) = *operands;
+                      *(uint *)(vertexRecord + positionOffset + 0xc) = uVar30;
+                      *(uint *)(vertexRecord + positionOffset + 4) = uVar25;
+                      *(uint *)(vertexRecord + positionOffset + 8) = uVar20;
                     }
-                    uVar25 = uVar31 + 1;
-                    unaff_cr4 = ((int)uVar25 < (int)uVar7) << 3 | ((int)uVar7 < (int)uVar25) << 2 |
-                                (uVar25 == uVar7) << 1 | in_xer_so & 1;
-                    if ((int)uVar25 >= (int)uVar7) goto switchD_0003b6b4_caseD_0;
+                    nextVertexIndex = vertexIndex + 1;
+                    unaff_cr4 = ((int)nextVertexIndex < (int)uVar7) << 3 | ((int)uVar7 < (int)nextVertexIndex) << 2 |
+                                (nextVertexIndex == uVar7) << 1 | in_xer_so & 1;
+                    if ((int)nextVertexIndex >= (int)uVar7) goto switchD_0003b6b4_caseD_0;
                     goto LAB_0003d09c;
                   case 5:
-                    uVar31 = puVar29[3];
-                    uVar30 = puVar29[2];
-                    *(uint *)(iVar27 + local_2bc[1]) = *puVar17;
-                    *(uint *)(iVar27 + local_2bc[1] + 8) = uVar31;
-                    *(uint *)(iVar27 + local_2bc[1] + 4) = uVar30;
-                    if ((*(unsigned char *)((unsigned char *)&(local_2e4) + 2)) == '\x10') {
-                      puVar29[4] = 0x3f800000;
+                    uVar31 = commandCursor[3];
+                    uVar30 = commandCursor[2];
+                    *(uint *)(vertexRecord + fixedAttribOffsets[1]) = *operands;
+                    *(uint *)(vertexRecord + fixedAttribOffsets[1] + 8) = uVar31;
+                    *(uint *)(vertexRecord + fixedAttribOffsets[1] + 4) = uVar30;
+                    if ((*(unsigned char *)((unsigned char *)&(positionNormalColorFogSizes) + 2)) == '\x10') {
+                      commandCursor[4] = 0x3f800000;
                     }
                     goto switchD_0003b6b4_caseD_0;
                   case 6:
-                    uVar31 = puVar29[4];
-                    uVar20 = puVar29[2];
-                    uVar30 = puVar29[3];
-                    *(uint *)(iVar27 + local_2bc[1]) = *puVar17;
-                    *(uint *)(iVar27 + local_2bc[1] + 0xc) = uVar31;
-                    *(uint *)(iVar27 + local_2bc[1] + 4) = uVar20;
-                    *(uint *)(iVar27 + local_2bc[1] + 8) = uVar30;
+                    uVar31 = commandCursor[4];
+                    uVar20 = commandCursor[2];
+                    uVar30 = commandCursor[3];
+                    *(uint *)(vertexRecord + fixedAttribOffsets[1]) = *operands;
+                    *(uint *)(vertexRecord + fixedAttribOffsets[1] + 0xc) = uVar31;
+                    *(uint *)(vertexRecord + fixedAttribOffsets[1] + 4) = uVar20;
+                    *(uint *)(vertexRecord + fixedAttribOffsets[1] + 8) = uVar30;
                     goto switchD_0003b6b4_caseD_0;
                   case 7:
-                    iVar11 = local_2bc[0];
+                    iVar11 = fixedAttribOffsets[0];
                     goto LAB_0003d134;
                   case 8:
                   case 9:
                   case 10:
                   case 0xb:
-                    local_238 = 0;
-                    local_234 = 0x3f800000;
-                    local_23c = 0;
-                    local_240 = *puVar17;
-                    iVar11 = *piVar15;
+                    nextFormatWord2ThenTexCoordR = 0;
+                    nextFormatWord3ThenTexCoordQ = 0x3f800000;
+                    nextFormatWord1ThenTexCoordT = 0;
+                    nextFormatWord0ThenTexCoordS = *operands;
+                    iVar11 = *commandEntryPtr;
                     if (8 < iVar11) {
-                      local_23c = puVar29[2];
-                      iVar11 = *piVar15;
+                      nextFormatWord1ThenTexCoordT = commandCursor[2];
+                      iVar11 = *commandEntryPtr;
                     }
                     if (9 < iVar11) {
-                      local_238 = puVar29[3];
-                      iVar11 = *piVar15;
+                      nextFormatWord2ThenTexCoordR = commandCursor[3];
+                      iVar11 = *commandEntryPtr;
                     }
                     if (10 < iVar11) {
-                      local_234 = puVar29[4];
+                      nextFormatWord3ThenTexCoordQ = commandCursor[4];
                     }
-                    if ((*(unsigned char *)((unsigned char *)&(local_2dc) + 0)) == '\x04') {
-                      *(uint *)(iVar27 + local_2a0[0]) = local_240;
+                    if ((*(unsigned char *)((unsigned char *)&(texCoordSizes0to3) + 0)) == '\x04') {
+                      *(uint *)(vertexRecord + texCoordOffsets[0]) = nextFormatWord0ThenTexCoordS;
                     }
-                    else if ((*(unsigned char *)((unsigned char *)&(local_2dc) + 0)) == '\b') {
-                      *(uint *)(iVar27 + local_2a0[0]) = local_240;
-                      *(uint *)(iVar27 + local_2a0[0] + 4) = local_23c;
+                    else if ((*(unsigned char *)((unsigned char *)&(texCoordSizes0to3) + 0)) == '\b') {
+                      *(uint *)(vertexRecord + texCoordOffsets[0]) = nextFormatWord0ThenTexCoordS;
+                      *(uint *)(vertexRecord + texCoordOffsets[0] + 4) = nextFormatWord1ThenTexCoordT;
                     }
-                    else if ((*(unsigned char *)((unsigned char *)&(local_2dc) + 0)) == '\f') {
-                      *(uint *)(iVar27 + local_2a0[0]) = local_240;
-                      *(uint *)(iVar27 + local_2a0[0] + 8) = local_238;
-                      *(uint *)(iVar27 + local_2a0[0] + 4) = local_23c;
+                    else if ((*(unsigned char *)((unsigned char *)&(texCoordSizes0to3) + 0)) == '\f') {
+                      *(uint *)(vertexRecord + texCoordOffsets[0]) = nextFormatWord0ThenTexCoordS;
+                      *(uint *)(vertexRecord + texCoordOffsets[0] + 8) = nextFormatWord2ThenTexCoordR;
+                      *(uint *)(vertexRecord + texCoordOffsets[0] + 4) = nextFormatWord1ThenTexCoordT;
                     }
-                    else if ((*(unsigned char *)((unsigned char *)&(local_2dc) + 0)) == '\x10') {
-                      *(uint *)(iVar27 + local_2a0[0]) = local_240;
-                      *(uint *)(iVar27 + local_2a0[0] + 0xc) = local_234;
-                      *(uint *)(iVar27 + local_2a0[0] + 4) = local_23c;
-                      *(uint *)(iVar27 + local_2a0[0] + 8) = local_238;
+                    else if ((*(unsigned char *)((unsigned char *)&(texCoordSizes0to3) + 0)) == '\x10') {
+                      *(uint *)(vertexRecord + texCoordOffsets[0]) = nextFormatWord0ThenTexCoordS;
+                      *(uint *)(vertexRecord + texCoordOffsets[0] + 0xc) = nextFormatWord3ThenTexCoordQ;
+                      *(uint *)(vertexRecord + texCoordOffsets[0] + 4) = nextFormatWord1ThenTexCoordT;
+                      *(uint *)(vertexRecord + texCoordOffsets[0] + 8) = nextFormatWord2ThenTexCoordR;
                     }
                     goto switchD_0003b6b4_caseD_0;
                   case 0xc:
                   case 0xd:
                   case 0xe:
-                    local_228 = 0;
-                    local_224 = 0x3f800000;
-                    local_230 = puVar29[2];
-                    local_22c = puVar29[3];
-                    iVar14 = *piVar15;
-                    iVar11 = local_2a0[*puVar17];
-                    if (0xc < iVar14) {
-                      local_228 = puVar29[4];
-                      iVar14 = *piVar15;
+                    nextFormatWord6ThenMultiTexCoordR = 0;
+                    nextFormatWord7ThenMultiTexCoordQ = 0x3f800000;
+                    nextFormatWord4ThenMultiTexCoordS = commandCursor[2];
+                    nextFormatWord5ThenMultiTexCoordT = commandCursor[3];
+                    texCoordCommandType = *commandEntryPtr;
+                    iVar11 = texCoordOffsets[*operands];
+                    if (0xc < texCoordCommandType) {
+                      nextFormatWord6ThenMultiTexCoordR = commandCursor[4];
+                      texCoordCommandType = *commandEntryPtr;
                     }
-                    if (0xd < iVar14) {
-                      local_224 = puVar29[5];
+                    if (0xd < texCoordCommandType) {
+                      nextFormatWord7ThenMultiTexCoordQ = commandCursor[5];
                     }
-                    cVar3 = *(char *)((int)&local_2dc + *puVar17);
-                    if (cVar3 == '\b') {
-                      *(uint *)(iVar27 + iVar11) = local_230;
-                      *(uint *)(iVar27 + iVar11 + 4) = local_22c;
+                    attribBytes = *(char *)((int)&texCoordSizes0to3 + *operands);
+                    if (attribBytes == '\b') {
+                      *(uint *)(vertexRecord + iVar11) = nextFormatWord4ThenMultiTexCoordS;
+                      *(uint *)(vertexRecord + iVar11 + 4) = nextFormatWord5ThenMultiTexCoordT;
                     }
-                    else if (cVar3 == '\f') {
-                      *(uint *)(iVar27 + iVar11) = local_230;
-                      *(uint *)(iVar27 + iVar11 + 8) = local_228;
-                      *(uint *)(iVar27 + iVar11 + 4) = local_22c;
+                    else if (attribBytes == '\f') {
+                      *(uint *)(vertexRecord + iVar11) = nextFormatWord4ThenMultiTexCoordS;
+                      *(uint *)(vertexRecord + iVar11 + 8) = nextFormatWord6ThenMultiTexCoordR;
+                      *(uint *)(vertexRecord + iVar11 + 4) = nextFormatWord5ThenMultiTexCoordT;
                     }
-                    else if (cVar3 == '\x10') {
-                      *(uint *)(iVar27 + iVar11) = local_230;
-                      *(uint *)(iVar27 + iVar11 + 0xc) = local_224;
-                      *(uint *)(iVar27 + iVar11 + 4) = local_22c;
-                      *(uint *)(iVar27 + iVar11 + 8) = local_228;
+                    else if (attribBytes == '\x10') {
+                      *(uint *)(vertexRecord + iVar11) = nextFormatWord4ThenMultiTexCoordS;
+                      *(uint *)(vertexRecord + iVar11 + 0xc) = nextFormatWord7ThenMultiTexCoordQ;
+                      *(uint *)(vertexRecord + iVar11 + 4) = nextFormatWord5ThenMultiTexCoordT;
+                      *(uint *)(vertexRecord + iVar11 + 8) = nextFormatWord6ThenMultiTexCoordR;
                     }
                     goto switchD_0003b6b4_caseD_0;
                   case 0xf:
-                    local_210 = 0;
-                    local_204 = 0x3f800000;
-                    local_20c = 0;
-                    local_208 = 0;
-                    uVar30 = *puVar17;
-                    local_210 = puVar29[2];
-                    cVar3 = local_2d4[uVar30];
-                    iVar11 = aiStack_280[uVar30];
-                    if (cVar3 == '\x04') {
-                      *(uint *)(iVar27 + iVar11) = local_210;
+                    attrib1fvX = 0;
+                    attrib1fvW = 0x3f800000;
+                    attrib1fvY = 0;
+                    attrib1fvZ = 0;
+                    attribIndex = *operands;
+                    attrib1fvX = commandCursor[2];
+                    attribBytes = attribSizes[attribIndex];
+                    attribOffset = attribOffsets[attribIndex];
+                    if (attribBytes == '\x04') {
+                      *(uint *)(vertexRecord + attribOffset) = attrib1fvX;
                     }
                     else {
-                      if (cVar3 == '\b') {
-                        *(uint *)(iVar27 + iVar11) = local_210;
+                      if (attribBytes == '\b') {
+                        *(uint *)(vertexRecord + attribOffset) = attrib1fvX;
                       }
                       else {
-                        if (cVar3 == '\f') {
-                          *(uint *)(iVar27 + iVar11) = local_210;
+                        if (attribBytes == '\f') {
+                          *(uint *)(vertexRecord + attribOffset) = attrib1fvX;
                         }
                         else {
-                          if (cVar3 != '\x10') break;
-                          *(uint *)(iVar27 + iVar11) = local_210;
-                          *(undefined4 *)(iVar27 + iVar11 + 0xc) = 0x3f800000;
+                          if (attribBytes != '\x10') break;
+                          *(uint *)(vertexRecord + attribOffset) = attrib1fvX;
+                          *(undefined4 *)(vertexRecord + attribOffset + 0xc) = 0x3f800000;
                         }
-                        *(undefined4 *)(iVar27 + iVar11 + 8) = 0;
+                        *(undefined4 *)(vertexRecord + attribOffset + 8) = 0;
                       }
-                      *(undefined4 *)(iVar27 + iVar11 + 4) = 0;
+                      *(undefined4 *)(vertexRecord + attribOffset + 4) = 0;
                     }
                     break;
                   case 0x10:
-                    local_1f4 = 0x3f800000;
-                    local_200 = 0.0;
-                    local_1fc = 0;
-                    local_1f8 = 0;
-                    uVar30 = *puVar17;
-                    iVar11 = aiStack_280[uVar30];
-                    cVar3 = local_2d4[uVar30];
-                    uStack_1ec = (int)*(short *)(puVar29 + 2) ^ 0x80000000U;
-                    local_1f0 = 0x43300000;
+                    attrib1svW = 0x3f800000;
+                    attrib1svX = 0.0;
+                    attrib1svY = 0;
+                    attrib1svZ = 0;
+                    attribIndex = *operands;
+                    attribOffset = attribOffsets[attribIndex];
+                    attribBytes = attribSizes[attribIndex];
+                    intToDoubleLow = (int)*(short *)(commandCursor + 2) ^ 0x80000000U;
+                    intToDoubleHigh = 0x43300000;
                     fVar6 = (float)((double)CONCAT44(0x43300000,
-                                                     (int)*(short *)(puVar29 + 2) ^ 0x80000000U) -
+                                                     (int)*(short *)(commandCursor + 2) ^ 0x80000000U) -
                                    DOUBLE_00108d58);
-                    local_200 = fVar6;
-                    if (cVar3 == '\x04') {
+                    attrib1svX = fVar6;
+                    if (attribBytes == '\x04') {
 LAB_0003ccbc:
-                      *(float *)(iVar27 + iVar11) = fVar6;
+                      *(float *)(vertexRecord + attribOffset) = fVar6;
                     }
                     else {
-                      if (cVar3 == '\b') {
-                        *(float *)(iVar27 + iVar11) = fVar6;
+                      if (attribBytes == '\b') {
+                        *(float *)(vertexRecord + attribOffset) = fVar6;
                       }
                       else {
-                        if (cVar3 == '\f') {
-                          *(float *)(iVar27 + iVar11) = fVar6;
+                        if (attribBytes == '\f') {
+                          *(float *)(vertexRecord + attribOffset) = fVar6;
                         }
                         else {
-                          if (cVar3 != '\x10') break;
-                          *(float *)(iVar27 + iVar11) = fVar6;
-                          *(undefined4 *)(iVar27 + iVar11 + 0xc) = 0x3f800000;
+                          if (attribBytes != '\x10') break;
+                          *(float *)(vertexRecord + attribOffset) = fVar6;
+                          *(undefined4 *)(vertexRecord + attribOffset + 0xc) = 0x3f800000;
                         }
-                        *(undefined4 *)(iVar27 + iVar11 + 8) = 0;
+                        *(undefined4 *)(vertexRecord + attribOffset + 8) = 0;
                       }
-                      *(undefined4 *)(iVar27 + iVar11 + 4) = 0;
+                      *(undefined4 *)(vertexRecord + attribOffset + 4) = 0;
                     }
                     break;
                   case 0x11:
-                    local_1d4 = 0x3f800000;
-                    local_1e0 = 0.0;
-                    local_1dc = 0;
-                    local_1d8 = 0;
-                    uVar30 = *puVar17;
-                    cVar3 = local_2d4[uVar30];
-                    local_1e0 = (float)*(double *)(puVar29 + 2);
-                    iVar11 = aiStack_280[uVar30];
-                    if (cVar3 == '\x04') {
-                      *(float *)(iVar27 + iVar11) = local_1e0;
+                    attrib1dvW = 0x3f800000;
+                    attrib1dvX = 0.0;
+                    attrib1dvY = 0;
+                    attrib1dvZ = 0;
+                    attribIndex = *operands;
+                    attribBytes = attribSizes[attribIndex];
+                    attrib1dvX = (float)*(double *)(commandCursor + 2);
+                    attribOffset = attribOffsets[attribIndex];
+                    if (attribBytes == '\x04') {
+                      *(float *)(vertexRecord + attribOffset) = attrib1dvX;
                     }
                     else {
-                      if (cVar3 == '\b') {
-                        *(float *)(iVar27 + iVar11) = local_1e0;
+                      if (attribBytes == '\b') {
+                        *(float *)(vertexRecord + attribOffset) = attrib1dvX;
                       }
                       else {
-                        if (cVar3 == '\f') {
-                          *(float *)(iVar27 + iVar11) = local_1e0;
+                        if (attribBytes == '\f') {
+                          *(float *)(vertexRecord + attribOffset) = attrib1dvX;
                         }
                         else {
-                          if (cVar3 != '\x10') goto LAB_0003cf8c;
-                          *(float *)(iVar27 + iVar11) = local_1e0;
-                          *(undefined4 *)(iVar27 + iVar11 + 0xc) = 0x3f800000;
+                          if (attribBytes != '\x10') goto LAB_0003cf8c;
+                          *(float *)(vertexRecord + attribOffset) = attrib1dvX;
+                          *(undefined4 *)(vertexRecord + attribOffset + 0xc) = 0x3f800000;
                         }
-                        *(undefined4 *)(iVar27 + iVar11 + 8) = 0;
+                        *(undefined4 *)(vertexRecord + attribOffset + 8) = 0;
                       }
-                      *(undefined4 *)(iVar27 + iVar11 + 4) = 0;
+                      *(undefined4 *)(vertexRecord + attribOffset + 4) = 0;
                     }
                     goto LAB_0003cf8c;
                   case 0x12:
-                    local_1c4 = 0x3f800000;
-                    local_1d0 = 0;
-                    local_1cc = 0.0;
-                    local_1c8 = 0;
-                    uVar30 = *puVar17;
-                    local_1d0 = puVar29[2];
-                    cVar3 = local_2d4[uVar30];
-                    iVar11 = aiStack_280[uVar30];
-                    fVar6 = GH_U2F((unsigned int)(puVar29[3]));
-                    iVar14 = iVar27 + iVar11;
-                    local_1cc = fVar6;
-                    if (cVar3 == '\x04') {
-                      *(uint *)(iVar27 + iVar11) = local_1d0;
+                    attrib2fvW = 0x3f800000;
+                    attrib2fvX = 0;
+                    attrib2fvY = 0.0;
+                    attrib2fvZ = 0;
+                    attribIndex = *operands;
+                    attrib2fvX = commandCursor[2];
+                    attribBytes = attribSizes[attribIndex];
+                    attribOffset = attribOffsets[attribIndex];
+                    fVar6 = GH_U2F((unsigned int)(commandCursor[3]));
+                    iVar14 = vertexRecord + attribOffset;
+                    attrib2fvY = fVar6;
+                    if (attribBytes == '\x04') {
+                      *(uint *)(vertexRecord + attribOffset) = attrib2fvX;
                     }
                     else {
-                      if (cVar3 == '\b') {
-                        *(uint *)(iVar27 + iVar11) = local_1d0;
+                      if (attribBytes == '\b') {
+                        *(uint *)(vertexRecord + attribOffset) = attrib2fvX;
                       }
                       else {
-                        if (cVar3 != '\f') {
-                          if (cVar3 == '\x10') {
-                            *(uint *)(iVar27 + iVar11) = local_1d0;
+                        if (attribBytes != '\f') {
+                          if (attribBytes == '\x10') {
+                            *(uint *)(vertexRecord + attribOffset) = attrib2fvX;
                             *(undefined4 *)(iVar14 + 0xc) = 0x3f800000;
                             *(float *)(iVar14 + 4) = fVar6;
                             *(undefined4 *)(iVar14 + 8) = 0;
                           }
                           goto LAB_0003ce40;
                         }
-                        *(uint *)(iVar27 + iVar11) = local_1d0;
+                        *(uint *)(vertexRecord + attribOffset) = attrib2fvX;
                         *(undefined4 *)(iVar14 + 8) = 0;
                       }
 LAB_0003bcd0:
@@ -1021,107 +1042,107 @@ LAB_0003bcd0:
                     }
                     goto LAB_0003ce40;
                   case 0x13:
-                    local_1c0 = 0.0;
-                    local_1bc = 0.0;
-                    local_1b4 = 0x3f800000;
-                    local_1b8 = 0;
-                    uVar30 = *puVar17;
-                    iVar14 = aiStack_280[uVar30];
-                    cVar3 = local_2d4[uVar30];
-                    local_1f0 = 0x43300000;
+                    attrib2svX = 0.0;
+                    attrib2svY = 0.0;
+                    attrib2svW = 0x3f800000;
+                    attrib2svZ = 0;
+                    attribIndex = *operands;
+                    iVar14 = attribOffsets[attribIndex];
+                    attribBytes = attribSizes[attribIndex];
+                    intToDoubleHigh = 0x43300000;
                     fVar8 = (float)((double)CONCAT44(0x43300000,
-                                                     (int)*(short *)(puVar29 + 2) ^ 0x80000000) -
+                                                     (int)*(short *)(commandCursor + 2) ^ 0x80000000) -
                                    DOUBLE_00108d58);
-                    local_1c0 = fVar8;
-                    uStack_1ec = (int)*(short *)((int)puVar29 + 10) ^ 0x80000000;
-                    local_1bc = (float)((double)CONCAT44(0x43300000,uStack_1ec) - DOUBLE_00108d58);
-                    if (cVar3 == '\x04') {
+                    attrib2svX = fVar8;
+                    intToDoubleLow = (int)*(short *)((int)commandCursor + 10) ^ 0x80000000;
+                    attrib2svY = (float)((double)CONCAT44(0x43300000,intToDoubleLow) - DOUBLE_00108d58);
+                    if (attribBytes == '\x04') {
 LAB_0003c004:
-                      local_1f0 = 0x43300000;
-                      *(float *)(iVar27 + iVar14) = fVar8;
+                      intToDoubleHigh = 0x43300000;
+                      *(float *)(vertexRecord + iVar14) = fVar8;
                     }
                     else {
-                      if (cVar3 == '\b') {
-                        *(float *)(iVar27 + iVar14) = fVar8;
+                      if (attribBytes == '\b') {
+                        *(float *)(vertexRecord + iVar14) = fVar8;
                       }
                       else {
-                        if (cVar3 != '\f') {
-                          if (cVar3 == '\x10') {
-                            *(float *)(iVar27 + iVar14) = fVar8;
-                            *(undefined4 *)(iVar27 + iVar14 + 0xc) = 0x3f800000;
-                            *(float *)(iVar27 + iVar14 + 4) = local_1bc;
-                            *(undefined4 *)(iVar27 + iVar14 + 8) = 0;
+                        if (attribBytes != '\f') {
+                          if (attribBytes == '\x10') {
+                            *(float *)(vertexRecord + iVar14) = fVar8;
+                            *(undefined4 *)(vertexRecord + iVar14 + 0xc) = 0x3f800000;
+                            *(float *)(vertexRecord + iVar14 + 4) = attrib2svY;
+                            *(undefined4 *)(vertexRecord + iVar14 + 8) = 0;
                           }
                           goto LAB_0003cf8c;
                         }
-                        *(float *)(iVar27 + iVar14) = fVar8;
-                        *(undefined4 *)(iVar27 + iVar14 + 8) = 0;
+                        *(float *)(vertexRecord + iVar14) = fVar8;
+                        *(undefined4 *)(vertexRecord + iVar14 + 8) = 0;
                       }
-                      *(float *)(iVar27 + iVar14 + 4) = local_1bc;
+                      *(float *)(vertexRecord + iVar14 + 4) = attrib2svY;
                     }
                     goto LAB_0003cf8c;
                   case 0x14:
-                    local_1a4 = 0x3f800000;
-                    local_1b0 = 0.0;
-                    local_1ac = 0.0;
-                    local_1a8 = 0;
-                    uVar30 = *puVar17;
-                    local_1b0 = (float)*(double *)(puVar29 + 2);
-                    cVar3 = local_2d4[uVar30];
-                    iVar11 = aiStack_280[uVar30];
-                    local_1ac = (float)*(double *)(puVar29 + 4);
-                    if (cVar3 == '\x04') {
-                      *(float *)(iVar27 + iVar11) = local_1b0;
+                    attrib2dvW = 0x3f800000;
+                    attrib2dvX = 0.0;
+                    attrib2dvY = 0.0;
+                    attrib2dvZ = 0;
+                    attribIndex = *operands;
+                    attrib2dvX = (float)*(double *)(commandCursor + 2);
+                    attribBytes = attribSizes[attribIndex];
+                    attribOffset = attribOffsets[attribIndex];
+                    attrib2dvY = (float)*(double *)(commandCursor + 4);
+                    if (attribBytes == '\x04') {
+                      *(float *)(vertexRecord + attribOffset) = attrib2dvX;
                     }
                     else {
-                      if (cVar3 == '\b') {
-                        *(float *)(iVar27 + iVar11) = local_1b0;
+                      if (attribBytes == '\b') {
+                        *(float *)(vertexRecord + attribOffset) = attrib2dvX;
                       }
                       else {
-                        if (cVar3 != '\f') {
-                          if (cVar3 == '\x10') {
-                            *(float *)(iVar27 + iVar11) = local_1b0;
-                            *(undefined4 *)(iVar27 + iVar11 + 0xc) = 0x3f800000;
-                            *(float *)(iVar27 + iVar11 + 4) = local_1ac;
-                            *(undefined4 *)(iVar27 + iVar11 + 8) = 0;
+                        if (attribBytes != '\f') {
+                          if (attribBytes == '\x10') {
+                            *(float *)(vertexRecord + attribOffset) = attrib2dvX;
+                            *(undefined4 *)(vertexRecord + attribOffset + 0xc) = 0x3f800000;
+                            *(float *)(vertexRecord + attribOffset + 4) = attrib2dvY;
+                            *(undefined4 *)(vertexRecord + attribOffset + 8) = 0;
                           }
                           goto LAB_0003cf8c;
                         }
-                        *(float *)(iVar27 + iVar11) = local_1b0;
-                        *(undefined4 *)(iVar27 + iVar11 + 8) = 0;
+                        *(float *)(vertexRecord + attribOffset) = attrib2dvX;
+                        *(undefined4 *)(vertexRecord + attribOffset + 8) = 0;
                       }
-                      *(float *)(iVar27 + iVar11 + 4) = local_1ac;
+                      *(float *)(vertexRecord + attribOffset + 4) = attrib2dvY;
                     }
                     goto LAB_0003cf8c;
                   case 0x15:
-                    local_198 = 0.0;
-                    local_19c = 0.0;
-                    local_194 = 0x3f800000;
-                    uVar30 = *puVar17;
-                    fVar8 = GH_U2F((unsigned int)(puVar29[2]));
-                    local_1a0 = fVar8;
-                    cVar3 = local_2d4[uVar30];
-                    fVar6 = GH_U2F((unsigned int)(puVar29[3]));
-                    iVar14 = aiStack_280[uVar30];
-                    local_19c = fVar6;
-                    fVar9 = GH_U2F((unsigned int)(puVar29[4]));
-                    iVar11 = iVar27 + iVar14;
-                    local_198 = fVar9;
-                    if (cVar3 == '\x04') {
-                      *(float *)(iVar27 + iVar14) = fVar8;
+                    attrib3fvZ = 0.0;
+                    attrib3fvY = 0.0;
+                    attrib3fvW = 0x3f800000;
+                    attribIndex = *operands;
+                    fVar8 = GH_U2F((unsigned int)(commandCursor[2]));
+                    attrib3fvX = fVar8;
+                    attribBytes = attribSizes[attribIndex];
+                    fVar6 = GH_U2F((unsigned int)(commandCursor[3]));
+                    iVar14 = attribOffsets[attribIndex];
+                    attrib3fvY = fVar6;
+                    fVar9 = GH_U2F((unsigned int)(commandCursor[4]));
+                    iVar11 = vertexRecord + iVar14;
+                    attrib3fvZ = fVar9;
+                    if (attribBytes == '\x04') {
+                      *(float *)(vertexRecord + iVar14) = fVar8;
                     }
-                    else if (cVar3 == '\b') {
+                    else if (attribBytes == '\b') {
 LAB_0003c01c:
-                      *(float *)(iVar27 + iVar14) = fVar8;
+                      *(float *)(vertexRecord + iVar14) = fVar8;
 LAB_0003cf38:
                       *(float *)(iVar11 + 4) = fVar6;
                     }
                     else {
-                      if (cVar3 == '\f') goto LAB_0003c038;
+                      if (attribBytes == '\f') goto LAB_0003c038;
 joined_r0x0003c044:
-                      if (cVar3 == '\x10') {
+                      if (attribBytes == '\x10') {
                         fVar10 = 1.0;
-                        *(float *)(iVar27 + iVar14) = fVar8;
+                        *(float *)(vertexRecord + iVar14) = fVar8;
 LAB_0003cf80:
                         *(float *)(iVar11 + 0xc) = fVar10;
                         *(float *)(iVar11 + 4) = fVar6;
@@ -1130,68 +1151,68 @@ LAB_0003cf80:
                     }
                     goto LAB_0003cf8c;
                   case 0x16:
-                    local_188 = 0.0;
-                    local_190 = 0.0;
-                    local_18c = 0.0;
-                    local_184 = 0x3f800000;
-                    uVar30 = *puVar17;
-                    iVar14 = aiStack_280[uVar30];
-                    cVar3 = local_2d4[uVar30];
-                    local_1f0 = 0x43300000;
-                    iVar11 = iVar27 + iVar14;
+                    attrib3svZ = 0.0;
+                    attrib3svX = 0.0;
+                    attrib3svY = 0.0;
+                    attrib3svW = 0x3f800000;
+                    attribIndex = *operands;
+                    iVar14 = attribOffsets[attribIndex];
+                    attribBytes = attribSizes[attribIndex];
+                    intToDoubleHigh = 0x43300000;
+                    iVar11 = vertexRecord + iVar14;
                     fVar8 = (float)((double)CONCAT44(0x43300000,
-                                                     (int)*(short *)(puVar29 + 2) ^ 0x80000000) -
+                                                     (int)*(short *)(commandCursor + 2) ^ 0x80000000) -
                                    DOUBLE_00108d58);
-                    local_190 = fVar8;
+                    attrib3svX = fVar8;
                     fVar6 = (float)((double)CONCAT44(0x43300000,
-                                                     (int)*(short *)((int)puVar29 + 10) ^ 0x80000000
+                                                     (int)*(short *)((int)commandCursor + 10) ^ 0x80000000
                                                     ) - DOUBLE_00108d58);
-                    local_18c = fVar6;
-                    uStack_1ec = (int)*(short *)(puVar29 + 3) ^ 0x80000000U;
+                    attrib3svY = fVar6;
+                    intToDoubleLow = (int)*(short *)(commandCursor + 3) ^ 0x80000000U;
                     fVar9 = (float)((double)CONCAT44(0x43300000,
-                                                     (int)*(short *)(puVar29 + 3) ^ 0x80000000U) -
+                                                     (int)*(short *)(commandCursor + 3) ^ 0x80000000U) -
                                    DOUBLE_00108d58);
-                    local_188 = fVar9;
-                    if (cVar3 == '\x04') goto LAB_0003c004;
-                    if (cVar3 == '\b') goto LAB_0003c01c;
-                    if (cVar3 != '\f') goto joined_r0x0003c044;
+                    attrib3svZ = fVar9;
+                    if (attribBytes == '\x04') goto LAB_0003c004;
+                    if (attribBytes == '\b') goto LAB_0003c01c;
+                    if (attribBytes != '\f') goto joined_r0x0003c044;
 LAB_0003c038:
-                    *(float *)(iVar27 + iVar14) = fVar8;
+                    *(float *)(vertexRecord + iVar14) = fVar8;
 LAB_0003cf58:
                     *(float *)(iVar11 + 8) = fVar9;
                     *(float *)(iVar11 + 4) = fVar6;
                     goto LAB_0003cf8c;
                   case 0x17:
-                    local_178 = 0.0;
-                    local_180 = 0.0;
-                    local_17c = 0.0;
-                    local_174 = 0x3f800000;
-                    uVar30 = *puVar17;
-                    fVar6 = (float)*(double *)(puVar29 + 2);
-                    cVar3 = local_2d4[uVar30];
-                    local_180 = fVar6;
-                    iVar11 = aiStack_280[uVar30];
-                    fVar9 = (float)*(double *)(puVar29 + 4);
-                    iVar14 = iVar27 + iVar11;
-                    local_17c = fVar9;
-                    fVar10 = (float)*(double *)(puVar29 + 6);
-                    local_178 = fVar10;
-                    if (cVar3 == '\x04') {
+                    attrib3dvZ = 0.0;
+                    attrib3dvX = 0.0;
+                    attrib3dvY = 0.0;
+                    attrib3dvW = 0x3f800000;
+                    attribIndex = *operands;
+                    fVar6 = (float)*(double *)(commandCursor + 2);
+                    attribBytes = attribSizes[attribIndex];
+                    attrib3dvX = fVar6;
+                    attribOffset = attribOffsets[attribIndex];
+                    fVar9 = (float)*(double *)(commandCursor + 4);
+                    iVar14 = vertexRecord + attribOffset;
+                    attrib3dvY = fVar9;
+                    fVar10 = (float)*(double *)(commandCursor + 6);
+                    attrib3dvZ = fVar10;
+                    if (attribBytes == '\x04') {
 LAB_0003d00c:
-                      *(float *)(iVar27 + iVar11) = fVar6;
+                      *(float *)(vertexRecord + attribOffset) = fVar6;
                     }
-                    else if (cVar3 == '\b') {
+                    else if (attribBytes == '\b') {
 LAB_0003d024:
-                      *(float *)(iVar27 + iVar11) = fVar6;
+                      *(float *)(vertexRecord + attribOffset) = fVar6;
 LAB_0003d028:
                       *(float *)(iVar14 + 4) = fVar9;
                     }
                     else {
-                      if (cVar3 == '\f') goto LAB_0003d044;
-                      if (cVar3 == '\x10') {
+                      if (attribBytes == '\f') goto LAB_0003d044;
+                      if (attribBytes == '\x10') {
                         fVar8 = 1.0;
 LAB_0003d06c:
-                        *(float *)(iVar27 + iVar11) = fVar6;
+                        *(float *)(vertexRecord + attribOffset) = fVar6;
 LAB_0003d070:
                         *(float *)(iVar14 + 0xc) = fVar8;
                         *(float *)(iVar14 + 4) = fVar9;
@@ -1200,391 +1221,391 @@ LAB_0003d070:
                     }
                     break;
                   case 0x18:
-                    local_168 = 0.0;
-                    local_164 = 1.0;
-                    local_170 = 0.0;
-                    local_16c = 0.0;
-                    uVar30 = *puVar17;
-                    iVar11 = aiStack_280[uVar30];
-                    cVar3 = local_2d4[uVar30];
-                    iVar14 = iVar27 + iVar11;
-                    local_160 = 0x4b000000;
-                    local_15c = 0x4b000000;
-                    fVar6 = GH_U2F((unsigned int)((*(byte *)(puVar29 + 2) | 0x4b000000))) - 8388608.0;
-                    local_170 = fVar6;
-                    fVar9 = GH_U2F((unsigned int)((*(byte *)((int)puVar29 + 9) | 0x4b000000))) - 8388608.0;
-                    local_16c = fVar9;
-                    fVar10 = GH_U2F((unsigned int)((*(byte *)((int)puVar29 + 10) | 0x4b000000))) - 8388608.0;
-                    local_168 = fVar10;
-                    local_60 = GH_U2F((unsigned int)((*(byte *)((int)puVar29 + 0xb) | 0x4b000000)));
-                    fVar8 = local_60 - 8388608.0;
-                    local_164 = fVar8;
-                    if (cVar3 == '\x04') goto LAB_0003c8b8;
-                    if (cVar3 == '\b') {
+                    attrib4ubvZ = 0.0;
+                    attrib4ubvW = 1.0;
+                    attrib4ubvX = 0.0;
+                    attrib4ubvY = 0.0;
+                    attribIndex = *operands;
+                    attribOffset = attribOffsets[attribIndex];
+                    attribBytes = attribSizes[attribIndex];
+                    iVar14 = vertexRecord + attribOffset;
+                    uintToFloatMagicA = 0x4b000000;
+                    uintToFloatMagicB = 0x4b000000;
+                    fVar6 = GH_U2F((unsigned int)((*(byte *)(commandCursor + 2) | 0x4b000000))) - 8388608.0;
+                    attrib4ubvX = fVar6;
+                    fVar9 = GH_U2F((unsigned int)((*(byte *)((int)commandCursor + 9) | 0x4b000000))) - 8388608.0;
+                    attrib4ubvY = fVar9;
+                    fVar10 = GH_U2F((unsigned int)((*(byte *)((int)commandCursor + 10) | 0x4b000000))) - 8388608.0;
+                    attrib4ubvZ = fVar10;
+                    uintToFloatScratch = GH_U2F((unsigned int)((*(byte *)((int)commandCursor + 0xb) | 0x4b000000)));
+                    fVar8 = uintToFloatScratch - 8388608.0;
+                    attrib4ubvW = fVar8;
+                    if (attribBytes == '\x04') goto LAB_0003c8b8;
+                    if (attribBytes == '\b') {
 LAB_0003c9f0:
-                      local_15c = 0x4b000000;
-                      local_160 = 0x4b000000;
-                      *(float *)(iVar27 + iVar11) = fVar6;
+                      uintToFloatMagicB = 0x4b000000;
+                      uintToFloatMagicA = 0x4b000000;
+                      *(float *)(vertexRecord + attribOffset) = fVar6;
                       *(float *)(iVar14 + 4) = fVar9;
                     }
                     else {
-                      if (cVar3 != '\f') goto joined_r0x0003ca24;
+                      if (attribBytes != '\f') goto joined_r0x0003ca24;
 LAB_0003ca10:
-                      local_15c = 0x4b000000;
-                      local_160 = 0x4b000000;
-                      *(float *)(iVar27 + iVar11) = fVar6;
+                      uintToFloatMagicB = 0x4b000000;
+                      uintToFloatMagicA = 0x4b000000;
+                      *(float *)(vertexRecord + attribOffset) = fVar6;
                       *(float *)(iVar14 + 8) = fVar10;
                       *(float *)(iVar14 + 4) = fVar9;
                     }
                     break;
                   case 0x19:
-                    local_148 = 0.0;
-                    local_144 = 1.0;
-                    local_150 = 0.0;
-                    local_14c = 0.0;
-                    uVar30 = *puVar17;
-                    iVar11 = aiStack_280[uVar30];
-                    cVar3 = local_2d4[uVar30];
-                    local_160 = 0x4b000000;
-                    local_15c = 0x4b000000;
-                    fVar6 = (GH_U2F((unsigned int)((*(byte *)(puVar29 + 2) | 0x4b000000))) - 8388608.0) *
+                    attrib4NubvZ = 0.0;
+                    attrib4NubvW = 1.0;
+                    attrib4NubvX = 0.0;
+                    attrib4NubvY = 0.0;
+                    attribIndex = *operands;
+                    attribOffset = attribOffsets[attribIndex];
+                    attribBytes = attribSizes[attribIndex];
+                    uintToFloatMagicA = 0x4b000000;
+                    uintToFloatMagicB = 0x4b000000;
+                    fVar6 = (GH_U2F((unsigned int)((*(byte *)(commandCursor + 2) | 0x4b000000))) - 8388608.0) *
                             FLOAT_00108e78;
-                    local_150 = fVar6;
-                    fVar9 = (GH_U2F((unsigned int)((*(byte *)((int)puVar29 + 9) | 0x4b000000))) - 8388608.0) *
+                    attrib4NubvX = fVar6;
+                    fVar9 = (GH_U2F((unsigned int)((*(byte *)((int)commandCursor + 9) | 0x4b000000))) - 8388608.0) *
                             FLOAT_00108e78;
-                    local_14c = fVar9;
-                    fVar10 = (GH_U2F((unsigned int)((*(byte *)((int)puVar29 + 10) | 0x4b000000))) - 8388608.0) *
+                    attrib4NubvY = fVar9;
+                    fVar10 = (GH_U2F((unsigned int)((*(byte *)((int)commandCursor + 10) | 0x4b000000))) - 8388608.0) *
                              FLOAT_00108e78;
-                    local_148 = fVar10;
-                    local_60 = GH_U2F((unsigned int)((*(byte *)((int)puVar29 + 0xb) | 0x4b000000)));
-                    fVar8 = (local_60 - 8388608.0) * FLOAT_00108e78;
-                    local_144 = fVar8;
-                    if (cVar3 == '\x04') goto LAB_0003c9d8;
+                    attrib4NubvZ = fVar10;
+                    uintToFloatScratch = GH_U2F((unsigned int)((*(byte *)((int)commandCursor + 0xb) | 0x4b000000)));
+                    fVar8 = (uintToFloatScratch - 8388608.0) * FLOAT_00108e78;
+                    attrib4NubvW = fVar8;
+                    if (attribBytes == '\x04') goto LAB_0003c9d8;
 joined_r0x0003c9e4:
-                    iVar14 = iVar27 + iVar11;
-                    if (cVar3 == '\b') goto LAB_0003c9f0;
-                    if (cVar3 == '\f') goto LAB_0003ca10;
+                    iVar14 = vertexRecord + attribOffset;
+                    if (attribBytes == '\b') goto LAB_0003c9f0;
+                    if (attribBytes == '\f') goto LAB_0003ca10;
 joined_r0x0003ca24:
-                    local_15c = 0x4b000000;
-                    local_160 = 0x4b000000;
-                    if (cVar3 == '\x10') {
-                      local_15c = 0x4b000000;
-                      local_160 = 0x4b000000;
-                      *(float *)(iVar27 + iVar11) = fVar6;
+                    uintToFloatMagicB = 0x4b000000;
+                    uintToFloatMagicA = 0x4b000000;
+                    if (attribBytes == '\x10') {
+                      uintToFloatMagicB = 0x4b000000;
+                      uintToFloatMagicA = 0x4b000000;
+                      *(float *)(vertexRecord + attribOffset) = fVar6;
                       *(float *)(iVar14 + 0xc) = fVar8;
                       *(float *)(iVar14 + 4) = fVar9;
                       *(float *)(iVar14 + 8) = fVar10;
                     }
                     break;
                   case 0x1a:
-                    local_138 = 0.0;
-                    local_140 = 0.0;
-                    local_13c = 0.0;
-                    local_134 = 1.0;
-                    uVar30 = *puVar17;
-                    iVar11 = aiStack_280[uVar30];
-                    cVar3 = local_2d4[uVar30];
-                    local_1f0 = 0x43300000;
-                    iVar14 = iVar27 + iVar11;
-                    fVar8 = (float)((double)CONCAT44(0x43300000,puVar29[2] ^ 0x80000000) -
+                    attrib4ivZ = 0.0;
+                    attrib4ivX = 0.0;
+                    attrib4ivY = 0.0;
+                    attrib4ivW = 1.0;
+                    attribIndex = *operands;
+                    attribOffset = attribOffsets[attribIndex];
+                    attribBytes = attribSizes[attribIndex];
+                    intToDoubleHigh = 0x43300000;
+                    iVar14 = vertexRecord + attribOffset;
+                    fVar8 = (float)((double)CONCAT44(0x43300000,commandCursor[2] ^ 0x80000000) -
                                    DOUBLE_00108d58);
-                    local_140 = fVar8;
-                    fVar6 = (float)((double)CONCAT44(0x43300000,puVar29[3] ^ 0x80000000) -
+                    attrib4ivX = fVar8;
+                    fVar6 = (float)((double)CONCAT44(0x43300000,commandCursor[3] ^ 0x80000000) -
                                    DOUBLE_00108d58);
-                    local_13c = fVar6;
-                    fVar9 = (float)((double)CONCAT44(0x43300000,puVar29[4] ^ 0x80000000) -
+                    attrib4ivY = fVar6;
+                    fVar9 = (float)((double)CONCAT44(0x43300000,commandCursor[4] ^ 0x80000000) -
                                    DOUBLE_00108d58);
-                    local_138 = fVar9;
-                    uStack_1ec = puVar29[5] ^ 0x80000000;
-                    fVar10 = (float)((double)CONCAT44(0x43300000,puVar29[5] ^ 0x80000000) -
+                    attrib4ivZ = fVar9;
+                    intToDoubleLow = commandCursor[5] ^ 0x80000000;
+                    fVar10 = (float)((double)CONCAT44(0x43300000,commandCursor[5] ^ 0x80000000) -
                                     DOUBLE_00108d58);
-                    local_134 = fVar10;
-                    if (cVar3 == '\x04') goto LAB_0003cdd0;
-                    if (cVar3 == '\b') goto LAB_0003cde8;
-                    if (cVar3 == '\f') goto LAB_0003ce08;
+                    attrib4ivW = fVar10;
+                    if (attribBytes == '\x04') goto LAB_0003cdd0;
+                    if (attribBytes == '\b') goto LAB_0003cde8;
+                    if (attribBytes == '\f') goto LAB_0003ce08;
                     goto joined_r0x0003ce1c;
                   case 0x1b:
-                    local_128 = 0.0;
-                    local_130 = 0.0;
-                    local_12c = 0.0;
-                    local_124 = 1.0;
-                    uVar30 = *puVar17;
-                    iVar11 = aiStack_280[uVar30];
-                    cVar3 = local_2d4[uVar30];
-                    local_1f0 = 0x43300000;
-                    iVar14 = iVar27 + iVar11;
-                    local_130 = (float)((double)CONCAT44(0x43300000,puVar29[2] ^ 0x80000000) -
+                    attrib4NivZ = 0.0;
+                    attrib4NivX = 0.0;
+                    attrib4NivY = 0.0;
+                    attrib4NivW = 1.0;
+                    attribIndex = *operands;
+                    attribOffset = attribOffsets[attribIndex];
+                    attribBytes = attribSizes[attribIndex];
+                    intToDoubleHigh = 0x43300000;
+                    iVar14 = vertexRecord + attribOffset;
+                    attrib4NivX = (float)((double)CONCAT44(0x43300000,commandCursor[2] ^ 0x80000000) -
                                        DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c;
-                    local_12c = (float)((double)CONCAT44(0x43300000,puVar29[3] ^ 0x80000000) -
+                    attrib4NivY = (float)((double)CONCAT44(0x43300000,commandCursor[3] ^ 0x80000000) -
                                        DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c;
-                    local_128 = (float)((double)CONCAT44(0x43300000,puVar29[4] ^ 0x80000000) -
+                    attrib4NivZ = (float)((double)CONCAT44(0x43300000,commandCursor[4] ^ 0x80000000) -
                                        DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c;
-                    uStack_1ec = puVar29[5] ^ 0x80000000;
-                    local_124 = (float)((double)CONCAT44(0x43300000,puVar29[5] ^ 0x80000000) -
+                    intToDoubleLow = commandCursor[5] ^ 0x80000000;
+                    attrib4NivW = (float)((double)CONCAT44(0x43300000,commandCursor[5] ^ 0x80000000) -
                                        DOUBLE_00108d58) * FLOAT_00108e68 + FLOAT_00108e6c;
-                    if (cVar3 == '\x04') {
-                      *(float *)(iVar27 + iVar11) = local_130;
+                    if (attribBytes == '\x04') {
+                      *(float *)(vertexRecord + attribOffset) = attrib4NivX;
                     }
                     else {
-                      if (cVar3 == '\b') {
-                        *(float *)(iVar27 + iVar11) = local_130;
-                        fVar6 = local_12c;
+                      if (attribBytes == '\b') {
+                        *(float *)(vertexRecord + attribOffset) = attrib4NivX;
+                        fVar6 = attrib4NivY;
                         goto LAB_0003bcd0;
                       }
-                      if (cVar3 == '\f') {
-                        *(float *)(iVar27 + iVar11) = local_130;
-                        *(float *)(iVar14 + 8) = local_128;
-                        *(float *)(iVar14 + 4) = local_12c;
+                      if (attribBytes == '\f') {
+                        *(float *)(vertexRecord + attribOffset) = attrib4NivX;
+                        *(float *)(iVar14 + 8) = attrib4NivZ;
+                        *(float *)(iVar14 + 4) = attrib4NivY;
                       }
-                      else if (cVar3 == '\x10') {
-                        *(float *)(iVar27 + iVar11) = local_130;
-                        *(float *)(iVar14 + 0xc) = local_124;
-                        *(float *)(iVar14 + 4) = local_12c;
-                        *(float *)(iVar14 + 8) = local_128;
+                      else if (attribBytes == '\x10') {
+                        *(float *)(vertexRecord + attribOffset) = attrib4NivX;
+                        *(float *)(iVar14 + 0xc) = attrib4NivW;
+                        *(float *)(iVar14 + 4) = attrib4NivY;
+                        *(float *)(iVar14 + 8) = attrib4NivZ;
                       }
                     }
                     goto LAB_0003ce40;
                   case 0x1c:
-                    local_118 = 0.0;
-                    local_120 = 0.0;
-                    local_11c = 0.0;
-                    local_114 = 1.0;
-                    uVar30 = *puVar17;
-                    iVar11 = aiStack_280[uVar30];
-                    cVar3 = local_2d4[uVar30];
-                    local_1f0 = 0x43300000;
+                    attrib4bvZ = 0.0;
+                    attrib4bvX = 0.0;
+                    attrib4bvY = 0.0;
+                    attrib4bvW = 1.0;
+                    attribIndex = *operands;
+                    attribOffset = attribOffsets[attribIndex];
+                    attribBytes = attribSizes[attribIndex];
+                    intToDoubleHigh = 0x43300000;
                     fVar8 = (float)((double)CONCAT44(0x43300000,
-                                                     (int)*(char *)(puVar29 + 2) ^ 0x80000000) -
+                                                     (int)*(char *)(commandCursor + 2) ^ 0x80000000) -
                                    DOUBLE_00108d58);
-                    local_120 = fVar8;
+                    attrib4bvX = fVar8;
                     fVar6 = (float)((double)CONCAT44(0x43300000,
-                                                     (int)*(char *)((int)puVar29 + 9) ^ 0x80000000)
+                                                     (int)*(char *)((int)commandCursor + 9) ^ 0x80000000)
                                    - DOUBLE_00108d58);
-                    local_11c = fVar6;
+                    attrib4bvY = fVar6;
                     fVar9 = (float)((double)CONCAT44(0x43300000,
-                                                     (int)*(char *)((int)puVar29 + 10) ^ 0x80000000)
+                                                     (int)*(char *)((int)commandCursor + 10) ^ 0x80000000)
                                    - DOUBLE_00108d58);
-                    local_118 = fVar9;
-                    uStack_1ec = (int)*(char *)((int)puVar29 + 0xb) ^ 0x80000000;
-                    fVar10 = (float)((double)CONCAT44(0x43300000,uStack_1ec) - DOUBLE_00108d58);
-                    local_114 = fVar10;
-                    if (cVar3 == '\x04') goto LAB_0003cdd0;
+                    attrib4bvZ = fVar9;
+                    intToDoubleLow = (int)*(char *)((int)commandCursor + 0xb) ^ 0x80000000;
+                    fVar10 = (float)((double)CONCAT44(0x43300000,intToDoubleLow) - DOUBLE_00108d58);
+                    attrib4bvW = fVar10;
+                    if (attribBytes == '\x04') goto LAB_0003cdd0;
                     goto joined_r0x0003cddc;
                   case 0x1d:
-                    local_108 = 0.0;
-                    local_110 = 0.0;
-                    local_10c = 0.0;
-                    local_104 = 1.0;
-                    uVar30 = *puVar17;
-                    iVar11 = aiStack_280[uVar30];
-                    cVar3 = local_2d4[uVar30];
-                    local_1f0 = 0x43300000;
-                    iVar14 = iVar27 + iVar11;
-                    local_110 = (float)((double)CONCAT44(0x43300000,
-                                                         (int)*(char *)(puVar29 + 2) ^ 0x80000000) -
+                    attrib4NbvZ = 0.0;
+                    attrib4NbvX = 0.0;
+                    attrib4NbvY = 0.0;
+                    attrib4NbvW = 1.0;
+                    attribIndex = *operands;
+                    attribOffset = attribOffsets[attribIndex];
+                    attribBytes = attribSizes[attribIndex];
+                    intToDoubleHigh = 0x43300000;
+                    iVar14 = vertexRecord + attribOffset;
+                    attrib4NbvX = (float)((double)CONCAT44(0x43300000,
+                                                         (int)*(char *)(commandCursor + 2) ^ 0x80000000) -
                                        DOUBLE_00108d58) * FLOAT_00108e60 + FLOAT_00108e64;
                     fVar9 = (float)((double)CONCAT44(0x43300000,
-                                                     (int)*(char *)((int)puVar29 + 9) ^ 0x80000000)
+                                                     (int)*(char *)((int)commandCursor + 9) ^ 0x80000000)
                                    - DOUBLE_00108d58) * FLOAT_00108e60 + FLOAT_00108e64;
-                    local_10c = fVar9;
+                    attrib4NbvY = fVar9;
                     fVar10 = (float)((double)CONCAT44(0x43300000,
-                                                      (int)*(char *)((int)puVar29 + 10) ^ 0x80000000
+                                                      (int)*(char *)((int)commandCursor + 10) ^ 0x80000000
                                                      ) - DOUBLE_00108d58) * FLOAT_00108e60 +
                              FLOAT_00108e64;
-                    local_108 = fVar10;
-                    uStack_1ec = (int)*(char *)((int)puVar29 + 0xb) ^ 0x80000000;
-                    fVar8 = (float)((double)CONCAT44(0x43300000,uStack_1ec) - DOUBLE_00108d58) *
+                    attrib4NbvZ = fVar10;
+                    intToDoubleLow = (int)*(char *)((int)commandCursor + 0xb) ^ 0x80000000;
+                    fVar8 = (float)((double)CONCAT44(0x43300000,intToDoubleLow) - DOUBLE_00108d58) *
                             FLOAT_00108e60 + FLOAT_00108e64;
-                    local_104 = fVar8;
-                    if (cVar3 == '\x04') {
-                      *(float *)(iVar27 + iVar11) = local_110;
+                    attrib4NbvW = fVar8;
+                    if (attribBytes == '\x04') {
+                      *(float *)(vertexRecord + attribOffset) = attrib4NbvX;
                     }
                     else {
-                      if (cVar3 == '\b') {
-                        *(float *)(iVar27 + iVar11) = local_110;
+                      if (attribBytes == '\b') {
+                        *(float *)(vertexRecord + attribOffset) = attrib4NbvX;
                         goto LAB_0003d028;
                       }
-                      if (cVar3 == '\f') {
-                        *(float *)(iVar27 + iVar11) = local_110;
+                      if (attribBytes == '\f') {
+                        *(float *)(vertexRecord + attribOffset) = attrib4NbvX;
                         goto LAB_0003d048;
                       }
-                      if (cVar3 == '\x10') {
-                        *(float *)(iVar27 + iVar11) = local_110;
+                      if (attribBytes == '\x10') {
+                        *(float *)(vertexRecord + attribOffset) = attrib4NbvX;
                         goto LAB_0003d070;
                       }
                     }
                     break;
                   case 0x1e:
-                    local_f8 = 0.0;
-                    local_f4 = 1.0;
-                    local_100 = 0.0;
-                    local_fc = 0.0;
-                    uVar30 = *puVar17;
-                    iVar11 = aiStack_280[uVar30];
-                    cVar3 = local_2d4[uVar30];
-                    local_160 = 0x4b000000;
-                    local_15c = 0x4b000000;
-                    fVar6 = GH_U2F((unsigned int)((*(ushort *)(puVar29 + 2) | 0x4b000000))) - 8388608.0;
-                    local_100 = fVar6;
-                    fVar9 = GH_U2F((unsigned int)((*(ushort *)((int)puVar29 + 10) | 0x4b000000))) - 8388608.0;
-                    local_fc = fVar9;
-                    fVar10 = GH_U2F((unsigned int)((*(ushort *)(puVar29 + 3) | 0x4b000000))) - 8388608.0;
-                    local_f8 = fVar10;
-                    local_60 = GH_U2F((unsigned int)((*(ushort *)((int)puVar29 + 0xe) | 0x4b000000)));
-                    fVar8 = local_60 - 8388608.0;
-                    local_f4 = fVar8;
-                    if (cVar3 != '\x04') goto joined_r0x0003c9e4;
+                    attrib4usvZ = 0.0;
+                    attrib4usvW = 1.0;
+                    attrib4usvX = 0.0;
+                    attrib4usvY = 0.0;
+                    attribIndex = *operands;
+                    attribOffset = attribOffsets[attribIndex];
+                    attribBytes = attribSizes[attribIndex];
+                    uintToFloatMagicA = 0x4b000000;
+                    uintToFloatMagicB = 0x4b000000;
+                    fVar6 = GH_U2F((unsigned int)((*(ushort *)(commandCursor + 2) | 0x4b000000))) - 8388608.0;
+                    attrib4usvX = fVar6;
+                    fVar9 = GH_U2F((unsigned int)((*(ushort *)((int)commandCursor + 10) | 0x4b000000))) - 8388608.0;
+                    attrib4usvY = fVar9;
+                    fVar10 = GH_U2F((unsigned int)((*(ushort *)(commandCursor + 3) | 0x4b000000))) - 8388608.0;
+                    attrib4usvZ = fVar10;
+                    uintToFloatScratch = GH_U2F((unsigned int)((*(ushort *)((int)commandCursor + 0xe) | 0x4b000000)));
+                    fVar8 = uintToFloatScratch - 8388608.0;
+                    attrib4usvW = fVar8;
+                    if (attribBytes != '\x04') goto joined_r0x0003c9e4;
 LAB_0003c8b8:
-                    local_15c = 0x4b000000;
-                    local_160 = 0x4b000000;
-                    *(float *)(iVar27 + iVar11) = fVar6;
+                    uintToFloatMagicB = 0x4b000000;
+                    uintToFloatMagicA = 0x4b000000;
+                    *(float *)(vertexRecord + attribOffset) = fVar6;
                     break;
                   case 0x1f:
-                    local_e8 = 0.0;
-                    local_e4 = 1.0;
-                    local_f0 = 0.0;
-                    local_ec = 0.0;
-                    uVar30 = *puVar17;
-                    iVar11 = aiStack_280[uVar30];
-                    cVar3 = local_2d4[uVar30];
-                    local_160 = 0x4b000000;
-                    local_15c = 0x4b000000;
-                    fVar6 = (GH_U2F((unsigned int)((*(ushort *)(puVar29 + 2) | 0x4b000000))) - 8388608.0) *
+                    attrib4NusvZ = 0.0;
+                    attrib4NusvW = 1.0;
+                    attrib4NusvX = 0.0;
+                    attrib4NusvY = 0.0;
+                    attribIndex = *operands;
+                    attribOffset = attribOffsets[attribIndex];
+                    attribBytes = attribSizes[attribIndex];
+                    uintToFloatMagicA = 0x4b000000;
+                    uintToFloatMagicB = 0x4b000000;
+                    fVar6 = (GH_U2F((unsigned int)((*(ushort *)(commandCursor + 2) | 0x4b000000))) - 8388608.0) *
                             FLOAT_00108e74;
-                    local_f0 = fVar6;
-                    fVar9 = (GH_U2F((unsigned int)((*(ushort *)((int)puVar29 + 10) | 0x4b000000))) - 8388608.0) *
+                    attrib4NusvX = fVar6;
+                    fVar9 = (GH_U2F((unsigned int)((*(ushort *)((int)commandCursor + 10) | 0x4b000000))) - 8388608.0) *
                             FLOAT_00108e74;
-                    local_ec = fVar9;
-                    fVar10 = (GH_U2F((unsigned int)((*(ushort *)(puVar29 + 3) | 0x4b000000))) - 8388608.0) *
+                    attrib4NusvY = fVar9;
+                    fVar10 = (GH_U2F((unsigned int)((*(ushort *)(commandCursor + 3) | 0x4b000000))) - 8388608.0) *
                              FLOAT_00108e74;
-                    local_e8 = fVar10;
-                    local_60 = GH_U2F((unsigned int)((*(ushort *)((int)puVar29 + 0xe) | 0x4b000000)));
-                    local_e4 = (local_60 - 8388608.0) * FLOAT_00108e74;
-                    fVar8 = local_e4;
-                    if (cVar3 != '\x04') goto joined_r0x0003c9e4;
+                    attrib4NusvZ = fVar10;
+                    uintToFloatScratch = GH_U2F((unsigned int)((*(ushort *)((int)commandCursor + 0xe) | 0x4b000000)));
+                    attrib4NusvW = (uintToFloatScratch - 8388608.0) * FLOAT_00108e74;
+                    fVar8 = attrib4NusvW;
+                    if (attribBytes != '\x04') goto joined_r0x0003c9e4;
 LAB_0003c9d8:
-                    local_15c = 0x4b000000;
-                    local_160 = 0x4b000000;
-                    *(float *)(iVar27 + iVar11) = fVar6;
+                    uintToFloatMagicB = 0x4b000000;
+                    uintToFloatMagicA = 0x4b000000;
+                    *(float *)(vertexRecord + attribOffset) = fVar6;
                     break;
                   case 0x20:
-                    local_d8 = 0.0;
-                    local_e0 = 0.0;
-                    local_dc = 0.0;
-                    local_d4 = 1.0;
-                    uVar30 = *puVar17;
-                    cVar3 = local_2d4[uVar30];
-                    iVar11 = aiStack_280[uVar30];
-                    local_1f0 = 0x43300000;
-                    fVar8 = (float)((double)CONCAT44(0x43300000,puVar29[2]) - DOUBLE_00108d70);
-                    local_e0 = fVar8;
-                    fVar6 = (float)((double)CONCAT44(0x43300000,puVar29[3]) - DOUBLE_00108d70);
-                    local_dc = fVar6;
-                    fVar9 = (float)((double)CONCAT44(0x43300000,puVar29[4]) - DOUBLE_00108d70);
-                    local_d8 = fVar9;
-                    uStack_1ec = puVar29[5];
-                    fVar10 = (float)((double)CONCAT44(0x43300000,puVar29[5]) - DOUBLE_00108d70);
-                    local_d4 = fVar10;
+                    attrib4uivZ = 0.0;
+                    attrib4uivX = 0.0;
+                    attrib4uivY = 0.0;
+                    attrib4uivW = 1.0;
+                    attribIndex = *operands;
+                    attribBytes = attribSizes[attribIndex];
+                    attribOffset = attribOffsets[attribIndex];
+                    intToDoubleHigh = 0x43300000;
+                    fVar8 = (float)((double)CONCAT44(0x43300000,commandCursor[2]) - DOUBLE_00108d70);
+                    attrib4uivX = fVar8;
+                    fVar6 = (float)((double)CONCAT44(0x43300000,commandCursor[3]) - DOUBLE_00108d70);
+                    attrib4uivY = fVar6;
+                    fVar9 = (float)((double)CONCAT44(0x43300000,commandCursor[4]) - DOUBLE_00108d70);
+                    attrib4uivZ = fVar9;
+                    intToDoubleLow = commandCursor[5];
+                    fVar10 = (float)((double)CONCAT44(0x43300000,commandCursor[5]) - DOUBLE_00108d70);
+                    attrib4uivW = fVar10;
                     goto joined_r0x0003cdcc;
                   case 0x21:
-                    local_c8 = 0.0;
-                    local_d0 = 0.0;
-                    local_cc = 0.0;
-                    local_c4 = 1.0;
-                    uVar30 = *puVar17;
-                    cVar3 = local_2d4[uVar30];
-                    iVar11 = aiStack_280[uVar30];
-                    local_1f0 = 0x43300000;
-                    fVar8 = (float)((double)CONCAT44(0x43300000,puVar29[2]) - DOUBLE_00108d70) *
+                    attrib4NuivZ = 0.0;
+                    attrib4NuivX = 0.0;
+                    attrib4NuivY = 0.0;
+                    attrib4NuivW = 1.0;
+                    attribIndex = *operands;
+                    attribBytes = attribSizes[attribIndex];
+                    attribOffset = attribOffsets[attribIndex];
+                    intToDoubleHigh = 0x43300000;
+                    fVar8 = (float)((double)CONCAT44(0x43300000,commandCursor[2]) - DOUBLE_00108d70) *
                             FLOAT_00108e6c;
-                    local_d0 = fVar8;
-                    fVar6 = (float)((double)CONCAT44(0x43300000,puVar29[3]) - DOUBLE_00108d70) *
+                    attrib4NuivX = fVar8;
+                    fVar6 = (float)((double)CONCAT44(0x43300000,commandCursor[3]) - DOUBLE_00108d70) *
                             FLOAT_00108e6c;
-                    local_cc = fVar6;
-                    fVar9 = (float)((double)CONCAT44(0x43300000,puVar29[4]) - DOUBLE_00108d70) *
+                    attrib4NuivY = fVar6;
+                    fVar9 = (float)((double)CONCAT44(0x43300000,commandCursor[4]) - DOUBLE_00108d70) *
                             FLOAT_00108e6c;
-                    local_c8 = fVar9;
-                    uStack_1ec = puVar29[5];
-                    fVar10 = (float)((double)CONCAT44(0x43300000,puVar29[5]) - DOUBLE_00108d70) *
+                    attrib4NuivZ = fVar9;
+                    intToDoubleLow = commandCursor[5];
+                    fVar10 = (float)((double)CONCAT44(0x43300000,commandCursor[5]) - DOUBLE_00108d70) *
                              FLOAT_00108e6c;
-                    local_c4 = fVar10;
-                    if (cVar3 != '\x04') goto joined_r0x0003cddc;
-                    *(float *)(iVar27 + iVar11) = fVar8;
+                    attrib4NuivW = fVar10;
+                    if (attribBytes != '\x04') goto joined_r0x0003cddc;
+                    *(float *)(vertexRecord + attribOffset) = fVar8;
                     goto LAB_0003ce40;
                   case 0x22:
-                    local_b8 = 0.0;
-                    local_b4 = 1.0;
-                    local_bc = 0.0;
-                    fVar6 = GH_U2F((unsigned int)(puVar29[2]));
-                    uVar30 = *puVar17;
-                    local_c0 = fVar6;
-                    fVar9 = GH_U2F((unsigned int)(puVar29[3]));
-                    cVar3 = local_2d4[uVar30];
-                    local_bc = fVar9;
-                    fVar10 = GH_U2F((unsigned int)(puVar29[4]));
-                    iVar11 = aiStack_280[uVar30];
-                    local_b8 = fVar10;
-                    fVar8 = GH_U2F((unsigned int)(puVar29[5]));
-                    iVar14 = iVar27 + iVar11;
-                    local_b4 = fVar8;
-                    if (cVar3 == '\x04') goto LAB_0003ccbc;
-                    if (cVar3 == '\b') goto LAB_0003d024;
-                    if (cVar3 == '\f') goto LAB_0003d044;
+                    attrib4fvZ = 0.0;
+                    attrib4fvW = 1.0;
+                    attrib4fvY = 0.0;
+                    fVar6 = GH_U2F((unsigned int)(commandCursor[2]));
+                    attribIndex = *operands;
+                    attrib4fvX = fVar6;
+                    fVar9 = GH_U2F((unsigned int)(commandCursor[3]));
+                    attribBytes = attribSizes[attribIndex];
+                    attrib4fvY = fVar9;
+                    fVar10 = GH_U2F((unsigned int)(commandCursor[4]));
+                    attribOffset = attribOffsets[attribIndex];
+                    attrib4fvZ = fVar10;
+                    fVar8 = GH_U2F((unsigned int)(commandCursor[5]));
+                    iVar14 = vertexRecord + attribOffset;
+                    attrib4fvW = fVar8;
+                    if (attribBytes == '\x04') goto LAB_0003ccbc;
+                    if (attribBytes == '\b') goto LAB_0003d024;
+                    if (attribBytes == '\f') goto LAB_0003d044;
 joined_r0x0003d058:
-                    if (cVar3 == '\x10') goto LAB_0003d06c;
+                    if (attribBytes == '\x10') goto LAB_0003d06c;
                     break;
                   case 0x23:
-                    local_a8 = 0.0;
-                    local_b0 = 0.0;
-                    local_ac = 0.0;
-                    local_a4 = 1.0;
-                    uVar30 = *puVar17;
-                    iVar11 = aiStack_280[uVar30];
-                    cVar3 = local_2d4[uVar30];
-                    local_1f0 = 0x43300000;
+                    attrib4svZ = 0.0;
+                    attrib4svX = 0.0;
+                    attrib4svY = 0.0;
+                    attrib4svW = 1.0;
+                    attribIndex = *operands;
+                    attribOffset = attribOffsets[attribIndex];
+                    attribBytes = attribSizes[attribIndex];
+                    intToDoubleHigh = 0x43300000;
                     fVar8 = (float)((double)CONCAT44(0x43300000,
-                                                     (int)*(short *)(puVar29 + 2) ^ 0x80000000) -
+                                                     (int)*(short *)(commandCursor + 2) ^ 0x80000000) -
                                    DOUBLE_00108d58);
-                    local_b0 = fVar8;
+                    attrib4svX = fVar8;
                     fVar6 = (float)((double)CONCAT44(0x43300000,
-                                                     (int)*(short *)((int)puVar29 + 10) ^ 0x80000000
+                                                     (int)*(short *)((int)commandCursor + 10) ^ 0x80000000
                                                     ) - DOUBLE_00108d58);
-                    local_ac = fVar6;
+                    attrib4svY = fVar6;
                     fVar9 = (float)((double)CONCAT44(0x43300000,
-                                                     (int)*(short *)(puVar29 + 3) ^ 0x80000000) -
+                                                     (int)*(short *)(commandCursor + 3) ^ 0x80000000) -
                                    DOUBLE_00108d58);
-                    local_a8 = fVar9;
-                    uStack_1ec = (int)*(short *)((int)puVar29 + 0xe) ^ 0x80000000;
-                    fVar10 = (float)((double)CONCAT44(0x43300000,uStack_1ec) - DOUBLE_00108d58);
-                    local_a4 = fVar10;
+                    attrib4svZ = fVar9;
+                    intToDoubleLow = (int)*(short *)((int)commandCursor + 0xe) ^ 0x80000000;
+                    fVar10 = (float)((double)CONCAT44(0x43300000,intToDoubleLow) - DOUBLE_00108d58);
+                    attrib4svW = fVar10;
 joined_r0x0003cdcc:
-                    if (cVar3 == '\x04') {
+                    if (attribBytes == '\x04') {
 LAB_0003cdd0:
-                      local_1f0 = 0x43300000;
-                      *(float *)(iVar27 + iVar11) = fVar8;
+                      intToDoubleHigh = 0x43300000;
+                      *(float *)(vertexRecord + attribOffset) = fVar8;
                     }
                     else {
 joined_r0x0003cddc:
-                      iVar14 = iVar27 + iVar11;
-                      if (cVar3 == '\b') {
+                      iVar14 = vertexRecord + attribOffset;
+                      if (attribBytes == '\b') {
 LAB_0003cde8:
-                        local_1f0 = 0x43300000;
-                        *(float *)(iVar27 + iVar11) = fVar8;
+                        intToDoubleHigh = 0x43300000;
+                        *(float *)(vertexRecord + attribOffset) = fVar8;
                         *(float *)(iVar14 + 4) = fVar6;
                       }
-                      else if (cVar3 == '\f') {
+                      else if (attribBytes == '\f') {
 LAB_0003ce08:
-                        local_1f0 = 0x43300000;
-                        *(float *)(iVar27 + iVar11) = fVar8;
+                        intToDoubleHigh = 0x43300000;
+                        *(float *)(vertexRecord + attribOffset) = fVar8;
                         *(float *)(iVar14 + 8) = fVar9;
                         *(float *)(iVar14 + 4) = fVar6;
                       }
                       else {
 joined_r0x0003ce1c:
-                        local_1f0 = 0x43300000;
-                        if (cVar3 == '\x10') {
-                          local_1f0 = 0x43300000;
-                          *(float *)(iVar27 + iVar11) = fVar8;
+                        intToDoubleHigh = 0x43300000;
+                        if (attribBytes == '\x10') {
+                          intToDoubleHigh = 0x43300000;
+                          *(float *)(vertexRecord + attribOffset) = fVar8;
                           *(float *)(iVar14 + 0xc) = fVar10;
                           *(float *)(iVar14 + 4) = fVar6;
                           *(float *)(iVar14 + 8) = fVar9;
@@ -1592,285 +1613,285 @@ joined_r0x0003ce1c:
                       }
                     }
 LAB_0003ce40:
-                    bVar2 = uVar30 == 0;
+                    attribIndexIsZero = attribIndex == 0;
                     goto LAB_0003d080;
                   case 0x24:
-                    local_98 = 0.0;
-                    local_a0 = 0.0;
-                    local_9c = 0.0;
-                    local_94 = 1.0;
-                    uVar30 = *puVar17;
-                    iVar14 = aiStack_280[uVar30];
-                    cVar3 = local_2d4[uVar30];
-                    local_1f0 = 0x43300000;
-                    iVar11 = iVar27 + iVar14;
-                    local_a0 = (float)((double)CONCAT44(0x43300000,puVar29[2]) - DOUBLE_00108d70) *
+                    attrib4NsvZ = 0.0;
+                    attrib4NsvX = 0.0;
+                    attrib4NsvY = 0.0;
+                    attrib4NsvW = 1.0;
+                    attribIndex = *operands;
+                    iVar14 = attribOffsets[attribIndex];
+                    attribBytes = attribSizes[attribIndex];
+                    intToDoubleHigh = 0x43300000;
+                    iVar11 = vertexRecord + iVar14;
+                    attrib4NsvX = (float)((double)CONCAT44(0x43300000,commandCursor[2]) - DOUBLE_00108d70) *
                                FLOAT_00108e70 + FLOAT_00108e74;
-                    fVar6 = (float)((double)CONCAT44(0x43300000,puVar29[3]) - DOUBLE_00108d70) *
+                    fVar6 = (float)((double)CONCAT44(0x43300000,commandCursor[3]) - DOUBLE_00108d70) *
                             FLOAT_00108e70 + FLOAT_00108e74;
-                    local_9c = fVar6;
-                    fVar9 = (float)((double)CONCAT44(0x43300000,puVar29[4]) - DOUBLE_00108d70) *
+                    attrib4NsvY = fVar6;
+                    fVar9 = (float)((double)CONCAT44(0x43300000,commandCursor[4]) - DOUBLE_00108d70) *
                             FLOAT_00108e70 + FLOAT_00108e74;
-                    local_98 = fVar9;
-                    uStack_1ec = puVar29[5];
-                    fVar10 = (float)((double)CONCAT44(0x43300000,puVar29[5]) - DOUBLE_00108d70) *
+                    attrib4NsvZ = fVar9;
+                    intToDoubleLow = commandCursor[5];
+                    fVar10 = (float)((double)CONCAT44(0x43300000,commandCursor[5]) - DOUBLE_00108d70) *
                              FLOAT_00108e70 + FLOAT_00108e74;
-                    local_94 = fVar10;
-                    if (cVar3 == '\x04') {
-                      *(float *)(iVar27 + iVar14) = local_a0;
+                    attrib4NsvW = fVar10;
+                    if (attribBytes == '\x04') {
+                      *(float *)(vertexRecord + iVar14) = attrib4NsvX;
                     }
                     else {
-                      if (cVar3 == '\b') {
-                        *(float *)(iVar27 + iVar14) = local_a0;
+                      if (attribBytes == '\b') {
+                        *(float *)(vertexRecord + iVar14) = attrib4NsvX;
                         goto LAB_0003cf38;
                       }
-                      if (cVar3 == '\f') {
-                        *(float *)(iVar27 + iVar14) = local_a0;
+                      if (attribBytes == '\f') {
+                        *(float *)(vertexRecord + iVar14) = attrib4NsvX;
                         goto LAB_0003cf58;
                       }
-                      if (cVar3 == '\x10') {
-                        *(float *)(iVar27 + iVar14) = local_a0;
+                      if (attribBytes == '\x10') {
+                        *(float *)(vertexRecord + iVar14) = attrib4NsvX;
                         goto LAB_0003cf80;
                       }
                     }
 LAB_0003cf8c:
-                    bVar2 = uVar30 == 0;
+                    attribIndexIsZero = attribIndex == 0;
                     goto LAB_0003d080;
                   case 0x25:
-                    local_88 = 0.0;
-                    local_84 = 1.0;
-                    local_90 = 0.0;
-                    local_8c = 0.0;
-                    uVar30 = *puVar17;
-                    fVar6 = (float)*(double *)(puVar29 + 2);
-                    cVar3 = local_2d4[uVar30];
-                    local_90 = fVar6;
-                    iVar11 = aiStack_280[uVar30];
-                    fVar9 = (float)*(double *)(puVar29 + 4);
-                    iVar14 = iVar27 + iVar11;
-                    local_8c = fVar9;
-                    fVar10 = (float)*(double *)(puVar29 + 6);
-                    local_88 = fVar10;
-                    fVar8 = (float)*(double *)(puVar29 + 8);
-                    local_84 = fVar8;
-                    if (cVar3 == '\x04') goto LAB_0003d00c;
-                    if (cVar3 == '\b') goto LAB_0003d024;
-                    if (cVar3 != '\f') goto joined_r0x0003d058;
+                    attrib4dvZ = 0.0;
+                    attrib4dvW = 1.0;
+                    attrib4dvX = 0.0;
+                    attrib4dvY = 0.0;
+                    attribIndex = *operands;
+                    fVar6 = (float)*(double *)(commandCursor + 2);
+                    attribBytes = attribSizes[attribIndex];
+                    attrib4dvX = fVar6;
+                    attribOffset = attribOffsets[attribIndex];
+                    fVar9 = (float)*(double *)(commandCursor + 4);
+                    iVar14 = vertexRecord + attribOffset;
+                    attrib4dvY = fVar9;
+                    fVar10 = (float)*(double *)(commandCursor + 6);
+                    attrib4dvZ = fVar10;
+                    fVar8 = (float)*(double *)(commandCursor + 8);
+                    attrib4dvW = fVar8;
+                    if (attribBytes == '\x04') goto LAB_0003d00c;
+                    if (attribBytes == '\b') goto LAB_0003d024;
+                    if (attribBytes != '\f') goto joined_r0x0003d058;
 LAB_0003d044:
-                    *(float *)(iVar27 + iVar11) = fVar6;
+                    *(float *)(vertexRecord + attribOffset) = fVar6;
 LAB_0003d048:
                     *(float *)(iVar14 + 8) = fVar10;
                     *(float *)(iVar14 + 4) = fVar9;
                     break;
                   case 0x26:
-                    uVar31 = *puVar17;
+                    uVar31 = *operands;
                     iVar11 = 0;
                     if (0 < (int)uVar31) {
                       do {
-                        iVar14 = iVar11 + 1;
-                        *(uint *)(iVar27 + iVar11 * 4 + local_2bc[4]) = puVar29[iVar11 + 2];
-                        uVar31 = *puVar17;
-                        iVar11 = iVar14;
-                      } while (iVar14 < (int)uVar31);
+                        copyIndexNext = iVar11 + 1;
+                        *(uint *)(vertexRecord + iVar11 * 4 + fixedAttribOffsets[4]) = commandCursor[iVar11 + 2];
+                        uVar31 = *operands;
+                        iVar11 = copyIndexNext;
+                      } while (copyIndexNext < (int)uVar31);
                     }
-                    if ((int)uVar31 < (int)(uint)(local_2d4[0] >> 2)) {
-                      dstCursor = (undefined4 *)(iVar27 + uVar31 * 4 + local_2bc[4]);
+                    if ((int)uVar31 < (int)(uint)(attribSizes[0] >> 2)) {
+                      dstCursor = (undefined4 *)(vertexRecord + uVar31 * 4 + fixedAttribOffsets[4]);
                       do {
                         *dstCursor = 0;
                         uVar31 = uVar31 + 1;
                         dstCursor = dstCursor + 1;
-                      } while ((int)uVar31 < (int)(uint)(local_2d4[0] >> 2));
+                      } while ((int)uVar31 < (int)(uint)(attribSizes[0] >> 2));
                     }
                     goto switchD_0003b6b4_caseD_0;
                   case 0x27:
-                    *(uint *)(iVar27 + local_2bc[2]) = *puVar17;
+                    *(uint *)(vertexRecord + fixedAttribOffsets[2]) = *operands;
                     goto switchD_0003b6b4_caseD_0;
                   case 0x28:
-                    iVar11 = local_2bc[3];
+                    iVar11 = fixedAttribOffsets[3];
 LAB_0003d134:
-                    uVar31 = puVar29[3];
-                    uVar30 = puVar29[2];
-                    *(uint *)(iVar27 + iVar11) = *puVar17;
-                    *(uint *)(iVar27 + iVar11 + 8) = uVar31;
-                    *(uint *)(iVar27 + iVar11 + 4) = uVar30;
+                    uVar31 = commandCursor[3];
+                    uVar30 = commandCursor[2];
+                    *(uint *)(vertexRecord + iVar11) = *operands;
+                    *(uint *)(vertexRecord + iVar11 + 8) = uVar31;
+                    *(uint *)(vertexRecord + iVar11 + 4) = uVar30;
                     goto switchD_0003b6b4_caseD_0;
                   }
-                  bVar2 = uVar30 == 0;
+                  attribIndexIsZero = attribIndex == 0;
 LAB_0003d080:
-                  if (bVar2) {
-                    uVar30 = uVar31 + 1;
+                  if (attribIndexIsZero) {
+                    uVar30 = vertexIndex + 1;
                     unaff_cr4 = ((int)uVar30 < (int)uVar7) << 3 | ((int)uVar7 < (int)uVar30) << 2 |
                                 (uVar30 == uVar7) << 1 | in_xer_so & 1;
 LAB_0003d09c:
-                    _memcpy(iVar27 + local_2c0 + (uint)(*(unsigned char *)((unsigned char *)&(local_2e4) + 0)),iVar27,local_2c0);
-                    uVar25 = uVar31 + 1;
+                    _memcpy(vertexRecord + positionOffset + (uint)(*(unsigned char *)((unsigned char *)&(positionNormalColorFogSizes) + 0)),vertexRecord,positionOffset);
+                    nextVertexIndex = vertexIndex + 1;
                   }
 switchD_0003b6b4_caseD_0:
-                  if ((undefined *)piVar15[1] == PTR__glWeightARB_ListExec_0011214c) {
-                    puVar29 = puVar29 + puVar29[1] + 2;
+                  if ((undefined *)commandEntryPtr[1] == PTR__glWeightARB_ListExec_0011214c) {
+                    commandCursor = commandCursor + commandCursor[1] + 2;
                   }
                   else {
-                    puVar29 = (uint *)((int)puVar29 + *(int *)(iVar24 + loopIndex * 4));
+                    commandCursor = (uint *)((int)commandCursor + *(int *)(commandSizeTable + loopIndex * 4));
                   }
                   loopIndex = loopIndex + 1;
                   if (!(bool)(unaff_cr4 >> 3)) break;
-                  uVar30 = local_2e4 >> 0x18;
-                  uVar31 = uVar25;
+                  positionSize = positionNormalColorFogSizes >> 0x18;
+                  vertexIndex = nextVertexIndex;
                 } while( true );
               }
-              if (!(bool)((byte)(local_6c >> 0x1d) & 1)) {
-                _memcpy(local_70,iVar27,local_2c0);
+              if (!(bool)((byte)(savedConditionBits >> 0x1d) & 1)) {
+                _memcpy(carryVertexCopy,vertexRecord,positionOffset);
               }
-              bVar2 = (bool)((unaff_cr3 & 2) >> 1);
+              noVerticesLeft = (bool)((unaff_cr3 & 2) >> 1);
             }
-            puVar16 = (undefined *)*puVar29;
-            iVar27 = 0;
-            iVar11 = *(int *)(((uint)puVar16 & 0x7c) + _gleDisplayListFunctionHash);
-            while ((iVar11 != 0 && (iVar27 = iVar11, puVar16 != *(undefined **)(iVar11 + 4)))) {
-              iVar27 = *(int *)(iVar11 + 0xc);
-              iVar11 = iVar27;
+            commandFunc = (undefined *)*commandCursor;
+            commandEntry = 0;
+            iVar11 = *(int *)(((uint)commandFunc & 0x7c) + _gleDisplayListFunctionHash);
+            while ((iVar11 != 0 && (commandEntry = iVar11, commandFunc != *(undefined **)(iVar11 + 4)))) {
+              commandEntry = *(int *)(iVar11 + 0xc);
+              iVar11 = commandEntry;
             }
-            if ((puVar16 != PTR__glEnd_ListExec_0011212c) && (loopIndex < uVar23)) {
-              srcCursor2 = (int *)(loopIndex * 4 + iVar24);
+            if ((commandFunc != PTR__glEnd_ListExec_0011212c) && (loopIndex < commandCount)) {
+              srcCursor2 = (int *)(loopIndex * 4 + commandSizeTable);
               do {
-                if ((iVar27 == 0) ||
-                   (*(undefined **)(iVar27 + 4) != PTR__glWeightARB_ListExec_0011214c)) {
-                  puVar29 = (uint *)((int)puVar29 + *srcCursor2);
+                if ((commandEntry == 0) ||
+                   (*(undefined **)(commandEntry + 4) != PTR__glWeightARB_ListExec_0011214c)) {
+                  commandCursor = (uint *)((int)commandCursor + *srcCursor2);
                 }
                 else {
-                  puVar29 = puVar29 + puVar29[1] + 2;
+                  commandCursor = commandCursor + commandCursor[1] + 2;
                 }
-                puVar16 = (undefined *)*puVar29;
-                iVar27 = 0;
-                iVar11 = *(int *)(((uint)puVar16 & 0x7c) + _gleDisplayListFunctionHash);
-                while ((iVar11 != 0 && (iVar27 = iVar11, puVar16 != *(undefined **)(iVar11 + 4)))) {
-                  iVar27 = *(int *)(iVar11 + 0xc);
-                  iVar11 = iVar27;
+                commandFunc = (undefined *)*commandCursor;
+                commandEntry = 0;
+                iVar11 = *(int *)(((uint)commandFunc & 0x7c) + _gleDisplayListFunctionHash);
+                while ((iVar11 != 0 && (commandEntry = iVar11, commandFunc != *(undefined **)(iVar11 + 4)))) {
+                  commandEntry = *(int *)(iVar11 + 0xc);
+                  iVar11 = commandEntry;
                 }
                 loopIndex = loopIndex + 1;
                 srcCursor2 = srcCursor2 + 1;
-              } while ((puVar16 != PTR__glEnd_ListExec_0011212c) && (loopIndex < uVar23));
+              } while ((commandFunc != PTR__glEnd_ListExec_0011212c) && (loopIndex < commandCount));
             }
-            if ((puVar16 == PTR__glEnd_ListExec_0011212c) && (loopIndex < uVar23)) {
-              if ((iVar27 == 0) ||
-                 (*(undefined **)(iVar27 + 4) != PTR__glWeightARB_ListExec_0011214c)) {
-                puVar29 = (uint *)((int)puVar29 + *(int *)(iVar24 + loopIndex * 4));
+            if ((commandFunc == PTR__glEnd_ListExec_0011212c) && (loopIndex < commandCount)) {
+              if ((commandEntry == 0) ||
+                 (*(undefined **)(commandEntry + 4) != PTR__glWeightARB_ListExec_0011214c)) {
+                commandCursor = (uint *)((int)commandCursor + *(int *)(commandSizeTable + loopIndex * 4));
               }
               else {
-                puVar29 = puVar29 + puVar29[1] + 2;
+                commandCursor = commandCursor + commandCursor[1] + 2;
               }
               loopIndex = loopIndex + 1;
             }
-            if (!(bool)((byte)(local_6c >> 0x1d) & 1)) {
-              _free(local_70);
+            if (!(bool)((byte)(savedConditionBits >> 0x1d) & 1)) {
+              _free(carryVertexCopy);
             }
           }
           else {
-            if (puVar16 != PTR__glDrawArraysOrElements_ListExec_00112144) {
-              if (((puVar16 == PTR__glCallList_ListExec_00112138) ||
-                  (puVar16 == PTR__glBindVertexArrayEXT_ListExec_00112134)) ||
-                 (puVar16 == PTR__glVertexArrayParameteriEXT_ListExec_00112130)) {
-                if (local_78 != (uint *)0x0) {
-                  ((void (*)())_CloseCurrentVAR)(glContext,iVar12,puVar5,&local_78,&local_74);
-                  puVar16 = (undefined *)*puVar29;
+            if (commandFunc != PTR__glDrawArraysOrElements_ListExec_00112144) {
+              if (((commandFunc == PTR__glCallList_ListExec_00112138) ||
+                  (commandFunc == PTR__glBindVertexArrayEXT_ListExec_00112134)) ||
+                 (commandFunc == PTR__glVertexArrayParameteriEXT_ListExec_00112130)) {
+                if (varBlockBase != (uint *)0x0) {
+                  ((void (*)())_CloseCurrentVAR)(glContext,varRecordOffset,varRecordStart,&varBlockBase,&varBytesRemaining);
+                  commandFunc = (undefined *)*commandCursor;
                 }
-                uVar13 = *(int *)(loopIndex * 4 + iVar24) - 4;
-                listRecord = _gleAddListItem(glContext,puVar16,uVar13);
+                payloadBytes = *(int *)(loopIndex * 4 + commandSizeTable) - 4;
+                listRecord = _gleAddListItem(glContext,commandFunc,payloadBytes);
                 iVar11 = 0;
-                for (uVar13 = uVar13 >> 2; uVar13 != 0; uVar13 = uVar13 - 1) {
-                  *(uint *)(listRecord + iVar11 * 4) = puVar29[iVar11 + 1];
+                for (payloadBytes = payloadBytes >> 2; payloadBytes != 0; payloadBytes = payloadBytes - 1) {
+                  *(uint *)(listRecord + iVar11 * 4) = commandCursor[iVar11 + 1];
                   iVar11 = iVar11 + 1;
                 }
                 goto LAB_0003d534;
               }
-              uVar13 = *(int *)(loopIndex * 4 + iVar24) - 4;
-              listRecord = _gleAddListItem(glContext,puVar16,uVar13);
+              payloadBytes = *(int *)(loopIndex * 4 + commandSizeTable) - 4;
+              listRecord = _gleAddListItem(glContext,commandFunc,payloadBytes);
               iVar11 = 0;
-              for (uVar13 = uVar13 >> 2; uVar13 != 0; uVar13 = uVar13 - 1) {
-                *(uint *)(listRecord + iVar11 * 4) = puVar29[iVar11 + 1];
+              for (payloadBytes = payloadBytes >> 2; payloadBytes != 0; payloadBytes = payloadBytes - 1) {
+                *(uint *)(listRecord + iVar11 * 4) = commandCursor[iVar11 + 1];
                 iVar11 = iVar11 + 1;
               }
-              if (iVar27 != 0) {
-                bVar1 = *(undefined **)(iVar27 + 4) == PTR__glWeightARB_ListExec_0011214c;
+              if (commandEntry != 0) {
+                isVariableLengthCommand = *(undefined **)(commandEntry + 4) == PTR__glWeightARB_ListExec_0011214c;
                 goto LAB_0003d5ac;
               }
               goto LAB_0003d5c4;
             }
             iVar11 = 0x2c;
-            iVar14 = puVar29[7] * puVar29[8];
-            if (local_74 < iVar14 + 0x2c) {
+            arrayDataBytes = commandCursor[7] * commandCursor[8];
+            if (varBytesRemaining < arrayDataBytes + 0x2c) {
               iVar11 = 0x40;
-              if (local_78 != (uint *)0x0) {
-                ((void (*)())_CloseCurrentVAR)(glContext,iVar12,puVar5,&local_78,&local_74);
+              if (varBlockBase != (uint *)0x0) {
+                ((void (*)())_CloseCurrentVAR)(glContext,varRecordOffset,varRecordStart,&varBlockBase,&varBytesRemaining);
               }
-              piVar15 = (int *)((int (*)())_gleAddListItemWithFree)(glContext,
+              varListRecord = (int *)((int (*)())_gleAddListItemWithFree)(glContext,
                                           PTR__gleSetupAndDrawArraysOrElementsOutOfLine_ListExec_00112140
                                           ,0x10,PTR__gleOptimizedListFreeFunc_00110ccc,4);
-              local_74 = iVar14 + 0x40;
-              iVar12 = (int)piVar15 - *(int *)(glContext + 0x53e8);
-              if (local_74 < 0x100001) {
-                local_74 = 0x100000;
-                uVar13 = 0x100000;
+              varBytesRemaining = arrayDataBytes + 0x40;
+              varRecordOffset = (int)varListRecord - *(int *)(glContext + 0x53e8);
+              if (varBytesRemaining < 0x100001) {
+                varBytesRemaining = 0x100000;
+                vmBlockSize = 0x100000;
               }
               else {
-                uVar13 = (uint)(((unsigned char *)0x0000103f) + iVar14) & 0xfffff000;
+                vmBlockSize = (uint)(((unsigned char *)0x0000103f) + arrayDataBytes) & 0xfffff000;
               }
-              _vm_allocate(*(vm_map_t *)PTR_00112034,(vm_address_t *)&local_78,uVar13,1);
-              *piVar15 = (int)local_78;
-              local_78[3] = uVar13;
-              *(undefined4 *)*piVar15 = 4;
-              *(uint *)*piVar15 = *(uint *)*piVar15 | 2;
-              puVar5 = (uint *)(*piVar15 + 0x14);
-              puVar22 = local_78;
+              _vm_allocate(*(vm_map_t *)PTR_00112034,(vm_address_t *)&varBlockBase,vmBlockSize,1);
+              *varListRecord = (int)varBlockBase;
+              varBlockBase[3] = vmBlockSize;
+              *(undefined4 *)*varListRecord = 4;
+              *(uint *)*varListRecord = *(uint *)*varListRecord | 2;
+              varRecordStart = (uint *)(*varListRecord + 0x14);
+              varWriteCursor = varBlockBase;
             }
             else {
               listRecord2 = (int *)_gleAddListItem(glContext,
                                                PTR__gleDrawArraysOrElementsOutOfLine_ListExec_0011213c
                                                ,8);
-              *listRecord2 = (int)listRecord2 + (-iVar12 - *(int *)(glContext + 0x53e8));
-              listRecord2[1] = (int)puVar5 - (int)local_78;
+              *listRecord2 = (int)listRecord2 + (-varRecordOffset - *(int *)(glContext + 0x53e8));
+              listRecord2[1] = (int)varRecordStart - (int)varBlockBase;
             }
-            local_74 = local_74 - (iVar14 + iVar11);
-            puVar22 = (uint *)((int)puVar22 + iVar14 + iVar11);
-            _memcpy(puVar5,puVar29 + 6,iVar14 + 0x2c);
-            if ((iVar27 == 0) || (*(undefined **)(iVar27 + 4) != PTR__glWeightARB_ListExec_0011214c)
+            varBytesRemaining = varBytesRemaining - (arrayDataBytes + iVar11);
+            varWriteCursor = (uint *)((int)varWriteCursor + arrayDataBytes + iVar11);
+            _memcpy(varRecordStart,commandCursor + 6,arrayDataBytes + 0x2c);
+            if ((commandEntry == 0) || (*(undefined **)(commandEntry + 4) != PTR__glWeightARB_ListExec_0011214c)
                ) {
-              puVar29 = (uint *)((int)puVar29 + *(int *)(iVar24 + loopIndex * 4));
+              commandCursor = (uint *)((int)commandCursor + *(int *)(commandSizeTable + loopIndex * 4));
             }
             else {
 LAB_0003d5b0:
-              puVar29 = puVar29 + puVar29[1] + 2;
+              commandCursor = commandCursor + commandCursor[1] + 2;
             }
 LAB_0003d5cc:
             loopIndex = loopIndex + 1;
           }
-          puVar5 = puVar22;
-        } while (loopIndex < uVar23);
+          varRecordStart = varWriteCursor;
+        } while (loopIndex < commandCount);
       }
-      if (local_78 != (uint *)0x0) {
-        ((void (*)())_CloseCurrentVAR)(glContext,iVar12,puVar22,&local_78,&local_74);
+      if (varBlockBase != (uint *)0x0) {
+        ((void (*)())_CloseCurrentVAR)(glContext,varRecordOffset,varWriteCursor,&varBlockBase,&varBytesRemaining);
       }
       sharedState = *(int *)(glContext + 0x5148);
       *(undefined4 *)(glContext + 0x5408) = 0;
-      iVar24 = sharedState + 0x300c;
+      displayListHashTable = sharedState + 0x300c;
       if (*(char *)(sharedState + 0x8024) != '\0') {
         _pthread_mutex_lock(sharedState + 0x8028);
       }
       glContextPtr53e8 = *(int *)(glContext + 0x53e8);
-      iVar12 = ((int (*)())_gleIsHashName)(iVar24,*(undefined4 *)(glContextPtr53e8 + 4));
-      if (iVar12 == 0) {
-        _gleAddHashNameAndObject(glContext,iVar24,glContextPtr53e8);
+      isHashName = ((int (*)())_gleIsHashName)(displayListHashTable,*(undefined4 *)(glContextPtr53e8 + 4));
+      if (isHashName == 0) {
+        _gleAddHashNameAndObject(glContext,displayListHashTable,glContextPtr53e8);
       }
       else {
-        iVar12 = _gleRemoveHashObject(iVar24,*(undefined4 *)(glContextPtr53e8 + 4));
-        if ((iVar12 != 0) &&
-           (iVar11 = *(int *)(iVar12 + 8) + -1, *(int *)(iVar12 + 8) = iVar11, iVar11 == 0)) {
-          if (*(int *)(iVar12 + 0x14) != 0) {
-            _free(*(int *)(iVar12 + 0x14));
+        removedObject = _gleRemoveHashObject(displayListHashTable,*(undefined4 *)(glContextPtr53e8 + 4));
+        if ((removedObject != 0) &&
+           (iVar11 = *(int *)(removedObject + 8) + -1, *(int *)(removedObject + 8) = iVar11, iVar11 == 0)) {
+          if (*(int *)(removedObject + 0x14) != 0) {
+            _free(*(int *)(removedObject + 0x14));
           }
-          _free(iVar12);
+          _free(removedObject);
         }
-        _gleAddHashObject(iVar24,glContextPtr53e8);
+        _gleAddHashObject(displayListHashTable,glContextPtr53e8);
       }
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -5371,86 +5392,87 @@ LAB_00044cf0:
 }
 
 /* _gleSetupOutOfLineDrawPointers @ 0x44dc4 (416 bytes) */
-double _gleSetupOutOfLineDrawPointers(glContext, param_2)
+double _gleSetupOutOfLineDrawPointers(glContext, drawRecord)
   int glContext;
-  int param_2;
+  int drawRecord;
 {
   int loopIndex;
-  byte bVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
-  undefined4 uVar9;
-  int iVar10;
-  uint uVar11;
-  uint uVar12;
-  int iVar13;
-  int iVar14;
+  byte componentCount;
+  int attribData;
+  int attribTableOffset;
+  int vertexArrayState;
+  int attribPointerEntry;
+  uint previousMask2High;
+  uint previousMask2Low;
+  uint previousEnableMaskHigh;
+  uint previousEnableMaskLow;
+  undefined4 vertexStride;
+  int dataOffsetThenEnd;
+  uint attribMaskHigh;
+  uint attribMaskLow;
+  int attribPointerTable;
+  int attribSizeEntry;
   int *dstCursor;
   int loopIndex2;
-  longlong lVar17;
+  longlong attribBit64;
   
-  iVar3 = *(int *)(glContext + 0x4a60);
-  uVar9 = *(undefined4 *)(param_2 + 8);
-  uVar11 = 0;
-  iVar13 = iVar3 + 0x10;
-  uVar12 = 0x10000;
-  iVar10 = 0;
+  vertexArrayState = *(int *)(glContext + 0x4a60);
+  vertexStride = *(undefined4 *)(drawRecord + 8);
+  attribMaskHigh = 0;
+  attribPointerTable = vertexArrayState + 0x10;
+  attribMaskLow = 0x10000;
+  dataOffsetThenEnd = 0;
   loopIndex2 = 1;
   dstCursor = (int *)(glContext + 0x48fc);
   do {
-    iVar14 = param_2 + loopIndex2;
-    bVar1 = *(byte *)(iVar14 + 0xc) >> 2;
-    if (bVar1 == 0) {
+    attribSizeEntry = drawRecord + loopIndex2;
+    componentCount = *(byte *)(attribSizeEntry + 0xc) >> 2;
+    if (componentCount == 0) {
       *dstCursor = 0;
-      *(undefined4 *)(loopIndex2 * 0x18 + iVar13 + 0x20) = 0;
+      *(undefined4 *)(loopIndex2 * 0x18 + attribPointerTable + 0x20) = 0;
     }
     else {
-      iVar2 = param_2 + 0x2c + iVar10;
-      *dstCursor = iVar2;
-      iVar4 = loopIndex2 * 0x18 + iVar13;
-      *(int *)(iVar4 + 0x20) = iVar2;
-      *(ushort *)(iVar4 + 0x2a) = (ushort)bVar1;
-      *(undefined2 *)(iVar4 + 0x28) = 0x1406;
-      *(undefined4 *)(iVar4 + 0x24) = uVar9;
-      lVar17 = ___ashldi3(0,0x10000,loopIndex2);
-      uVar11 = uVar11 | (uint)((ulonglong)lVar17 >> 0x20);
-      uVar12 = uVar12 | (uint)lVar17;
+      attribData = drawRecord + 0x2c + dataOffsetThenEnd;
+      *dstCursor = attribData;
+      attribPointerEntry = loopIndex2 * 0x18 + attribPointerTable;
+      *(int *)(attribPointerEntry + 0x20) = attribData;
+      *(ushort *)(attribPointerEntry + 0x2a) = (ushort)componentCount;
+      *(undefined2 *)(attribPointerEntry + 0x28) = 0x1406;
+      *(undefined4 *)(attribPointerEntry + 0x24) = vertexStride;
+      attribBit64 = ___ashldi3(0,0x10000,loopIndex2);
+      attribMaskHigh = attribMaskHigh | (uint)((ulonglong)attribBit64 >> 0x20);
+      attribMaskLow = attribMaskLow | (uint)attribBit64;
     }
-    iVar2 = loopIndex2 * 0x18;
+    attribTableOffset = loopIndex2 * 0x18;
     loopIndex2 = loopIndex2 + 1;
-    *(undefined4 *)(iVar2 + iVar13 + 0x34) = 0;
+    *(undefined4 *)(attribTableOffset + attribPointerTable + 0x34) = 0;
     dstCursor = dstCursor + 1;
-    iVar10 = iVar10 + (uint)*(byte *)(iVar14 + 0xc);
+    dataOffsetThenEnd = dataOffsetThenEnd + (uint)*(byte *)(attribSizeEntry + 0xc);
   } while (loopIndex2 < 0x20);
-  iVar10 = param_2 + 0x2c + iVar10;
-  *(int *)(glContext + 0x48f8) = iVar10;
-  *(int *)(iVar3 + 0x30) = iVar10;
+  dataOffsetThenEnd = drawRecord + 0x2c + dataOffsetThenEnd;
+  *(int *)(glContext + 0x48f8) = dataOffsetThenEnd;
+  *(int *)(vertexArrayState + 0x30) = dataOffsetThenEnd;
   loopIndex = 0;
-  *(undefined4 *)(iVar3 + 0x34) = uVar9;
-  *(ushort *)(iVar3 + 0x3a) = (ushort)(*(byte *)(param_2 + 0xc) >> 2);
+  *(undefined4 *)(vertexArrayState + 0x34) = vertexStride;
+  *(ushort *)(vertexArrayState + 0x3a) = (ushort)(*(byte *)(drawRecord + 0xc) >> 2);
   *(undefined4 *)(glContext + 0x488c) = 0;
   *(undefined4 *)(glContext + 0x4890) = 0;
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
-  uVar7 = *(uint *)(iVar3 + 0x330);
-  uVar8 = *(uint *)(iVar3 + 0x334);
-  uVar5 = *(uint *)(iVar3 + 0x350);
-  uVar6 = *(uint *)(iVar3 + 0x354);
-  *(uint *)(iVar3 + 0x330) = uVar11;
-  *(uint *)(iVar3 + 0x334) = uVar12;
-  *(undefined4 *)(iVar3 + 0x350) = 0;
-  *(undefined4 *)(iVar3 + 0x354) = 0;
+  previousEnableMaskHigh = *(uint *)(vertexArrayState + 0x330);
+  previousEnableMaskLow = *(uint *)(vertexArrayState + 0x334);
+  previousMask2High = *(uint *)(vertexArrayState + 0x350);
+  previousMask2Low = *(uint *)(vertexArrayState + 0x354);
+  *(uint *)(vertexArrayState + 0x330) = attribMaskHigh;
+  *(uint *)(vertexArrayState + 0x334) = attribMaskLow;
+  *(undefined4 *)(vertexArrayState + 0x350) = 0;
+  *(undefined4 *)(vertexArrayState + 0x354) = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
-    iVar3 = iVar3 + 0x460;
+    vertexArrayState = vertexArrayState + 0x460;
     do {
       loopIndex = loopIndex + 1;
-      *(uint *)(iVar3 + 4) = *(uint *)(iVar3 + 4) | uVar5 | uVar11 | uVar11 ^ uVar7;
-      *(uint *)(iVar3 + 8) = *(uint *)(iVar3 + 8) | uVar6 | uVar12 | uVar12 ^ uVar8;
-      iVar3 = iVar3 + 0x8c;
+      *(uint *)(vertexArrayState + 4) = *(uint *)(vertexArrayState + 4) | previousMask2High | attribMaskHigh | attribMaskHigh ^ previousEnableMaskHigh;
+      *(uint *)(vertexArrayState + 8) = *(uint *)(vertexArrayState + 8) | previousMask2Low | attribMaskLow | attribMaskLow ^ previousEnableMaskLow;
+      vertexArrayState = vertexArrayState + 0x8c;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;

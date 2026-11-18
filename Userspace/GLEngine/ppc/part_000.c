@@ -3334,10 +3334,10 @@ int _gleCreateTextureObject(param_1, texture)
 }
 
 /* _gleInitializeGLTexture @ 0x5a90 (832 bytes) */
-void _gleInitializeGLTexture(param_1, param_2, param_3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
-  undefined4 param_1;
-  int param_2;
-  undefined4 *param_3;
+void _gleInitializeGLTexture(textureTypeFlags, faceCount, textureObject, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+  undefined4 textureTypeFlags;
+  int faceCount;
+  undefined4 *textureObject;
   undefined4 unusedArg4;
   undefined4 unusedArg5;
   undefined4 unusedArg6;
@@ -3345,181 +3345,181 @@ void _gleInitializeGLTexture(param_1, param_2, param_3, unusedArg4, unusedArg5, 
 {
   int loopIndex2;
   undefined1 uVar2;
-  undefined2 uVar1;
+  undefined2 defaultMinFilter;
   undefined1 uVar6;
-  undefined2 uVar5;
+  undefined2 defaultWrapMode;
   undefined4 *cursor;
-  int iVar4;
+  int levelRecord;
   int loopIndex;
   int remaining;
   int remaining2;
   
-  *(undefined2 *)((int)param_3 + 0x32) = 0;
-  *(undefined2 *)(param_3 + 0xc) = 0x404;
-  param_3[8] = 0;
-  *(ushort *)(param_3 + 9) = (*(unsigned short *)((unsigned char *)&(param_1) + 2));
-  *(undefined2 *)((int)param_3 + 0x26) = 0;
-  param_3[10] = 0x3f800000;
-  param_3[0xb] = 0;
-  if (((*(unsigned short *)((unsigned char *)&(param_1) + 2)) & 0x200) == 0) {
-    *(undefined2 *)(param_3 + 0x1e) = 0;
+  *(undefined2 *)((int)textureObject + 0x32) = 0;
+  *(undefined2 *)(textureObject + 0xc) = 0x404;
+  textureObject[8] = 0;
+  *(ushort *)(textureObject + 9) = (*(unsigned short *)((unsigned char *)&(textureTypeFlags) + 2));
+  *(undefined2 *)((int)textureObject + 0x26) = 0;
+  textureObject[10] = 0x3f800000;
+  textureObject[0xb] = 0;
+  if (((*(unsigned short *)((unsigned char *)&(textureTypeFlags) + 2)) & 0x200) == 0) {
+    *(undefined2 *)(textureObject + 0x1e) = 0;
   }
   else {
-    *(undefined2 *)(param_3 + 0x1e) = 0x80e2;
+    *(undefined2 *)(textureObject + 0x1e) = 0x80e2;
   }
-  *(undefined2 *)((int)param_3 + 0x7a) = 0;
-  if (((*(unsigned short *)((unsigned char *)&(param_1) + 2)) & 0x2000) != 0) {
-    *(undefined1 *)(param_3 + 0x24) = 1;
-    *(undefined1 *)((int)param_3 + 0x92) = 2;
-    *(undefined1 *)((int)param_3 + 0x93) = 0;
-    *(undefined2 *)(param_3 + 0xe) = 0x812f;
-    *(undefined2 *)((int)param_3 + 0x3a) = 0x2600;
-    *(undefined1 *)((int)param_3 + 0x91) = 0;
-    *(undefined2 *)(param_3 + 0xd) = 0x812f;
-    *(undefined2 *)((int)param_3 + 0x36) = 0x812f;
+  *(undefined2 *)((int)textureObject + 0x7a) = 0;
+  if (((*(unsigned short *)((unsigned char *)&(textureTypeFlags) + 2)) & 0x2000) != 0) {
+    *(undefined1 *)(textureObject + 0x24) = 1;
+    *(undefined1 *)((int)textureObject + 0x92) = 2;
+    *(undefined1 *)((int)textureObject + 0x93) = 0;
+    *(undefined2 *)(textureObject + 0xe) = 0x812f;
+    *(undefined2 *)((int)textureObject + 0x3a) = 0x2600;
+    *(undefined1 *)((int)textureObject + 0x91) = 0;
+    *(undefined2 *)(textureObject + 0xd) = 0x812f;
+    *(undefined2 *)((int)textureObject + 0x36) = 0x812f;
     goto LAB_00005c28;
   }
-  switch((*(unsigned short *)((unsigned char *)&(param_1) + 2)) & 0xf) {
+  switch((*(unsigned short *)((unsigned char *)&(textureTypeFlags) + 2)) & 0xf) {
   case 0:
     uVar6 = 6;
     goto LAB_00005bb8;
   case 1:
-    *(undefined1 *)((int)param_3 + 0x91) = 0;
-    *(undefined1 *)(param_3 + 0x24) = 1;
-    *(undefined1 *)((int)param_3 + 0x93) = 2;
-    *(undefined1 *)((int)param_3 + 0x92) = 2;
+    *(undefined1 *)((int)textureObject + 0x91) = 0;
+    *(undefined1 *)(textureObject + 0x24) = 1;
+    *(undefined1 *)((int)textureObject + 0x93) = 2;
+    *(undefined1 *)((int)textureObject + 0x92) = 2;
     break;
   case 2:
     uVar2 = 1;
-    *(undefined1 *)(param_3 + 0x24) = 1;
-    *(undefined1 *)((int)param_3 + 0x92) = 2;
-    *(undefined1 *)((int)param_3 + 0x93) = 0;
+    *(undefined1 *)(textureObject + 0x24) = 1;
+    *(undefined1 *)((int)textureObject + 0x92) = 2;
+    *(undefined1 *)((int)textureObject + 0x93) = 0;
     goto LAB_00005bc8;
   case 3:
     uVar6 = 1;
 LAB_00005bb8:
     uVar2 = 0;
-    *(undefined1 *)(param_3 + 0x24) = uVar6;
-    *(undefined1 *)((int)param_3 + 0x92) = 2;
-    *(undefined1 *)((int)param_3 + 0x93) = 0;
+    *(undefined1 *)(textureObject + 0x24) = uVar6;
+    *(undefined1 *)((int)textureObject + 0x92) = 2;
+    *(undefined1 *)((int)textureObject + 0x93) = 0;
 LAB_00005bc8:
-    *(undefined1 *)((int)param_3 + 0x91) = uVar2;
+    *(undefined1 *)((int)textureObject + 0x91) = uVar2;
     break;
   case 4:
-    *(undefined1 *)(param_3 + 0x24) = 1;
-    *(undefined1 *)((int)param_3 + 0x93) = 0;
-    *(undefined1 *)((int)param_3 + 0x91) = 0;
-    *(undefined1 *)((int)param_3 + 0x92) = 0;
+    *(undefined1 *)(textureObject + 0x24) = 1;
+    *(undefined1 *)((int)textureObject + 0x93) = 0;
+    *(undefined1 *)((int)textureObject + 0x91) = 0;
+    *(undefined1 *)((int)textureObject + 0x92) = 0;
     break;
   default:
-    *(undefined1 *)((int)param_3 + 0x93) = 0;
-    *(undefined1 *)((int)param_3 + 0x91) = 0;
-    *(undefined1 *)(param_3 + 0x24) = 0;
-    *(undefined1 *)((int)param_3 + 0x92) = 0;
+    *(undefined1 *)((int)textureObject + 0x93) = 0;
+    *(undefined1 *)((int)textureObject + 0x91) = 0;
+    *(undefined1 *)(textureObject + 0x24) = 0;
+    *(undefined1 *)((int)textureObject + 0x92) = 0;
   }
-  if (((*(unsigned short *)((unsigned char *)&(param_1) + 2)) & 0xf) == 2) {
-    uVar5 = 0x812f;
-    uVar1 = 0x2601;
+  if (((*(unsigned short *)((unsigned char *)&(textureTypeFlags) + 2)) & 0xf) == 2) {
+    defaultWrapMode = 0x812f;
+    defaultMinFilter = 0x2601;
   }
   else {
-    uVar5 = 0x2901;
-    uVar1 = 0x2702;
+    defaultWrapMode = 0x2901;
+    defaultMinFilter = 0x2702;
   }
-  *(undefined2 *)(param_3 + 0xe) = uVar5;
-  *(undefined2 *)((int)param_3 + 0x3a) = uVar1;
-  *(undefined2 *)(param_3 + 0xd) = uVar5;
-  *(undefined2 *)((int)param_3 + 0x36) = uVar5;
+  *(undefined2 *)(textureObject + 0xe) = defaultWrapMode;
+  *(undefined2 *)((int)textureObject + 0x3a) = defaultMinFilter;
+  *(undefined2 *)(textureObject + 0xd) = defaultWrapMode;
+  *(undefined2 *)((int)textureObject + 0x36) = defaultWrapMode;
 LAB_00005c28:
-  *(undefined2 *)(param_3 + 0xf) = 0x2601;
-  *(undefined2 *)((int)param_3 + 0x3e) = 0x85bd;
-  *(undefined2 *)(param_3 + 0x1f) = 0;
-  *(undefined2 *)((int)param_3 + 0x7e) = 0;
-  *(undefined2 *)(param_3 + 0x20) = 0;
-  *(undefined1 *)((int)param_3 + 0x82) = 0;
+  *(undefined2 *)(textureObject + 0xf) = 0x2601;
+  *(undefined2 *)((int)textureObject + 0x3e) = 0x85bd;
+  *(undefined2 *)(textureObject + 0x1f) = 0;
+  *(undefined2 *)((int)textureObject + 0x7e) = 0;
+  *(undefined2 *)(textureObject + 0x20) = 0;
+  *(undefined1 *)((int)textureObject + 0x82) = 0;
   remaining = 8;
-  *(undefined1 *)((int)param_3 + 0x83) = 0;
-  *(undefined1 *)(param_3 + 0x21) = 0;
-  *(undefined1 *)((int)param_3 + 0x85) = 0;
-  *(undefined1 *)((int)param_3 + 0x86) = 0;
-  *(undefined1 *)((int)param_3 + 0x87) = 0;
-  *(undefined1 *)(param_3 + 0x22) = 0;
-  *(undefined1 *)((int)param_3 + 0x89) = 0;
-  *(undefined1 *)((int)param_3 + 0x8a) = 0;
-  *(undefined1 *)((int)param_3 + 0x8b) = 0;
-  *(undefined1 *)(param_3 + 0x23) = 0;
-  *(undefined1 *)((int)param_3 + 0x8d) = 0;
-  *(undefined1 *)((int)param_3 + 0x8e) = 0;
-  *(undefined1 *)((int)param_3 + 0x8f) = 0;
-  *(undefined2 *)(param_3 + 0x25) = 0;
-  *(undefined2 *)((int)param_3 + 0x96) = 0;
-  *(undefined2 *)(param_3 + 0x26) = 0;
-  *(undefined2 *)((int)param_3 + 0x9a) = 0;
-  *(undefined2 *)(param_3 + 0x27) = 0;
-  *(undefined2 *)((int)param_3 + 0x9e) = 0;
-  *(undefined2 *)(param_3 + 0x28) = 0;
-  *(undefined2 *)((int)param_3 + 0xa2) = 0;
-  *(undefined2 *)(param_3 + 0x29) = 0;
-  *(undefined2 *)((int)param_3 + 0xa6) = 0;
-  *(undefined2 *)(param_3 + 0x2a) = 0;
-  *(undefined2 *)((int)param_3 + 0xaa) = 0;
-  param_3[0x10] = 0;
-  param_3[0x11] = 0;
-  param_3[0x12] = 0;
-  *(undefined2 *)(param_3 + 0x1b) = 0x1909;
-  param_3[0x15] = 0xc47a0000;
-  *(undefined2 *)((int)param_3 + 0x62) = 1000;
-  *(undefined2 *)(param_3 + 0x19) = 0x203;
-  param_3[0x14] = 0x3f800000;
-  param_3[0x16] = 0x447a0000;
-  *(undefined2 *)((int)param_3 + 0x66) = 0;
-  param_3[0x1a] = 0;
-  param_3[0x1b] = param_3[0x1b] & 0xffff7f3f;
-  param_3[0x1d] = 0;
-  param_3[0x13] = 0;
-  param_3[0x17] = 0;
-  *(undefined2 *)(param_3 + 0x18) = 0;
-  param_3[0x1c] = 0;
-  cursor = param_3;
+  *(undefined1 *)((int)textureObject + 0x83) = 0;
+  *(undefined1 *)(textureObject + 0x21) = 0;
+  *(undefined1 *)((int)textureObject + 0x85) = 0;
+  *(undefined1 *)((int)textureObject + 0x86) = 0;
+  *(undefined1 *)((int)textureObject + 0x87) = 0;
+  *(undefined1 *)(textureObject + 0x22) = 0;
+  *(undefined1 *)((int)textureObject + 0x89) = 0;
+  *(undefined1 *)((int)textureObject + 0x8a) = 0;
+  *(undefined1 *)((int)textureObject + 0x8b) = 0;
+  *(undefined1 *)(textureObject + 0x23) = 0;
+  *(undefined1 *)((int)textureObject + 0x8d) = 0;
+  *(undefined1 *)((int)textureObject + 0x8e) = 0;
+  *(undefined1 *)((int)textureObject + 0x8f) = 0;
+  *(undefined2 *)(textureObject + 0x25) = 0;
+  *(undefined2 *)((int)textureObject + 0x96) = 0;
+  *(undefined2 *)(textureObject + 0x26) = 0;
+  *(undefined2 *)((int)textureObject + 0x9a) = 0;
+  *(undefined2 *)(textureObject + 0x27) = 0;
+  *(undefined2 *)((int)textureObject + 0x9e) = 0;
+  *(undefined2 *)(textureObject + 0x28) = 0;
+  *(undefined2 *)((int)textureObject + 0xa2) = 0;
+  *(undefined2 *)(textureObject + 0x29) = 0;
+  *(undefined2 *)((int)textureObject + 0xa6) = 0;
+  *(undefined2 *)(textureObject + 0x2a) = 0;
+  *(undefined2 *)((int)textureObject + 0xaa) = 0;
+  textureObject[0x10] = 0;
+  textureObject[0x11] = 0;
+  textureObject[0x12] = 0;
+  *(undefined2 *)(textureObject + 0x1b) = 0x1909;
+  textureObject[0x15] = 0xc47a0000;
+  *(undefined2 *)((int)textureObject + 0x62) = 1000;
+  *(undefined2 *)(textureObject + 0x19) = 0x203;
+  textureObject[0x14] = 0x3f800000;
+  textureObject[0x16] = 0x447a0000;
+  *(undefined2 *)((int)textureObject + 0x66) = 0;
+  textureObject[0x1a] = 0;
+  textureObject[0x1b] = textureObject[0x1b] & 0xffff7f3f;
+  textureObject[0x1d] = 0;
+  textureObject[0x13] = 0;
+  textureObject[0x17] = 0;
+  *(undefined2 *)(textureObject + 0x18) = 0;
+  textureObject[0x1c] = 0;
+  cursor = textureObject;
   do {
     *cursor = 0;
     cursor = cursor + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
   loopIndex2 = 0;
-  *(undefined1 *)((int)param_3 + 0xb7) = 0;
-  *(undefined2 *)(param_3 + 0x2f) = 0x1908;
-  *(undefined2 *)((int)param_3 + 0xbe) = 0x1401;
-  param_3[0x2b] = 0;
-  *(undefined2 *)(param_3 + 0x2c) = 0;
-  *(undefined2 *)((int)param_3 + 0xb2) = 0;
-  *(undefined2 *)(param_3 + 0x2d) = 0;
-  *(undefined1 *)((int)param_3 + 0xb6) = 0;
-  *(undefined2 *)(param_3 + 0x2e) = 0;
-  *(undefined2 *)((int)param_3 + 0xba) = 0;
-  param_3[0x30] = 0;
-  if (0 < param_2) {
+  *(undefined1 *)((int)textureObject + 0xb7) = 0;
+  *(undefined2 *)(textureObject + 0x2f) = 0x1908;
+  *(undefined2 *)((int)textureObject + 0xbe) = 0x1401;
+  textureObject[0x2b] = 0;
+  *(undefined2 *)(textureObject + 0x2c) = 0;
+  *(undefined2 *)((int)textureObject + 0xb2) = 0;
+  *(undefined2 *)(textureObject + 0x2d) = 0;
+  *(undefined1 *)((int)textureObject + 0xb6) = 0;
+  *(undefined2 *)(textureObject + 0x2e) = 0;
+  *(undefined2 *)((int)textureObject + 0xba) = 0;
+  textureObject[0x30] = 0;
+  if (0 < faceCount) {
     loopIndex = 0;
     do {
-      iVar4 = (int)param_3 + loopIndex;
+      levelRecord = (int)textureObject + loopIndex;
       remaining2 = 0xf;
       do {
-        *(undefined2 *)(iVar4 + 200) = 0;
-        *(undefined2 *)(iVar4 + 0xca) = 0;
-        *(undefined2 *)(iVar4 + 0xcc) = 0;
-        *(undefined1 *)(iVar4 + 0xce) = 0;
-        *(undefined2 *)(iVar4 + 0xd0) = 0;
-        *(undefined2 *)(iVar4 + 0xd2) = 0;
-        *(undefined2 *)(iVar4 + 0xd4) = 0x1908;
-        *(undefined2 *)(iVar4 + 0xd6) = 0x1401;
-        *(undefined4 *)(iVar4 + 0xd8) = 0;
-        *(undefined1 *)(iVar4 + 0xcf) = 0;
-        *(undefined4 *)(iVar4 + 0xc4) = 0;
-        iVar4 = iVar4 + 0x18;
+        *(undefined2 *)(levelRecord + 200) = 0;
+        *(undefined2 *)(levelRecord + 0xca) = 0;
+        *(undefined2 *)(levelRecord + 0xcc) = 0;
+        *(undefined1 *)(levelRecord + 0xce) = 0;
+        *(undefined2 *)(levelRecord + 0xd0) = 0;
+        *(undefined2 *)(levelRecord + 0xd2) = 0;
+        *(undefined2 *)(levelRecord + 0xd4) = 0x1908;
+        *(undefined2 *)(levelRecord + 0xd6) = 0x1401;
+        *(undefined4 *)(levelRecord + 0xd8) = 0;
+        *(undefined1 *)(levelRecord + 0xcf) = 0;
+        *(undefined4 *)(levelRecord + 0xc4) = 0;
+        levelRecord = levelRecord + 0x18;
         remaining2 = remaining2 + -1;
       } while (remaining2 != 0);
       loopIndex2 = loopIndex2 + 1;
       loopIndex = loopIndex + 0x168;
-    } while (loopIndex2 < param_2);
+    } while (loopIndex2 < faceCount);
   }
   return;
 }

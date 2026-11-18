@@ -1853,18 +1853,23 @@ int _glArrayElement_ListExec(glContext, listRecord)
   int glContext;
   char *listRecord;
 {
-  float *pfVar1;
-  byte bVar2;
-  char cVar3;
+  float *secondaryColorBluePtr;
+  byte normalSize;
+  byte secondaryColorSize;
+  char edgeFlagValue;
+  char positionSize;
   float fVar4;
-  undefined4 uVar5;
-  float fVar6;
-  int iVar7;
-  int iVar8;
+  float positionW;
+  undefined4 missingComponentFill;
+  float positionZ;
+  int texCoordCurrent;
+  int texUnitIndex;
   byte *srcCursor;
-  code *pcVar10;
-  float *pfVar11;
+  code *vertexFunc;
+  float *attribDataCursor;
   uint uVar12;
+  uint texCoordSize;
+  uint colorSize;
   int remaining;
   
   if (*(char *)(glContext + 0x759c) == '\0') {
@@ -1873,21 +1878,21 @@ int _glArrayElement_ListExec(glContext, listRecord)
     }
     goto LAB_000a53a0;
   }
-  bVar2 = listRecord[1];
-  pfVar11 = (float *)(listRecord + 0x24);
-  if (bVar2 != 0) {
+  normalSize = listRecord[1];
+  attribDataCursor = (float *)(listRecord + 0x24);
+  if (normalSize != 0) {
     *(undefined4 *)(glContext + 0x2b0) = *(undefined4 *)(listRecord + 0x24);
     *(undefined4 *)(glContext + 0x2b4) = *(undefined4 *)(listRecord + 0x28);
-    pfVar11 = (float *)((int)pfVar11 + (uint)bVar2);
+    attribDataCursor = (float *)((int)attribDataCursor + (uint)normalSize);
     *(undefined4 *)(glContext + 0x2b8) = *(undefined4 *)(listRecord + 0x2c);
   }
-  uVar12 = (uint)(byte)listRecord[2];
-  if (uVar12 != 0) {
-    *(float *)(glContext + 0x2a0) = *pfVar11;
-    *(float *)(glContext + 0x2a4) = pfVar11[1];
-    *(float *)(glContext + 0x2a8) = pfVar11[2];
-    if (uVar12 == 0x10) {
-      *(float *)(glContext + 0x2ac) = pfVar11[3];
+  colorSize = (uint)(byte)listRecord[2];
+  if (colorSize != 0) {
+    *(float *)(glContext + 0x2a0) = *attribDataCursor;
+    *(float *)(glContext + 0x2a4) = attribDataCursor[1];
+    *(float *)(glContext + 0x2a8) = attribDataCursor[2];
+    if (colorSize == 0x10) {
+      *(float *)(glContext + 0x2ac) = attribDataCursor[3];
     }
     else {
       *(undefined4 *)(glContext + 0x2ac) = 0x3f800000;
@@ -1895,30 +1900,30 @@ int _glArrayElement_ListExec(glContext, listRecord)
     if (*(char *)(glContext + 0x4df8) != '\0') {
       (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
     }
-    pfVar11 = (float *)((int)pfVar11 + uVar12);
+    attribDataCursor = (float *)((int)attribDataCursor + colorSize);
   }
   if ((byte)listRecord[3] != 0) {
-    fVar4 = *pfVar11;
-    pfVar11 = (float *)((int)pfVar11 + (uint)(byte)listRecord[3]);
+    fVar4 = *attribDataCursor;
+    attribDataCursor = (float *)((int)attribDataCursor + (uint)(byte)listRecord[3]);
     *(float *)(glContext + 0x2cc) = fVar4;
   }
-  bVar2 = listRecord[4];
-  if (bVar2 != 0) {
-    *(float *)(glContext + 0x2c0) = *pfVar11;
-    *(float *)(glContext + 0x2c4) = pfVar11[1];
-    pfVar1 = pfVar11 + 2;
-    pfVar11 = (float *)((int)pfVar11 + (uint)bVar2);
-    *(float *)(glContext + 0x2c8) = *pfVar1;
+  secondaryColorSize = listRecord[4];
+  if (secondaryColorSize != 0) {
+    *(float *)(glContext + 0x2c0) = *attribDataCursor;
+    *(float *)(glContext + 0x2c4) = attribDataCursor[1];
+    secondaryColorBluePtr = attribDataCursor + 2;
+    attribDataCursor = (float *)((int)attribDataCursor + (uint)secondaryColorSize);
+    *(float *)(glContext + 0x2c8) = *secondaryColorBluePtr;
   }
   uVar12 = (uint)(byte)listRecord[5];
   if (uVar12 != 0) {
     if (uVar12 == 0x10) {
-      fVar4 = pfVar11[3];
+      fVar4 = attribDataCursor[3];
 LAB_000a51f4:
       *(float *)(glContext + 0x2dc) = fVar4;
-      *(float *)(glContext + 0x2d8) = pfVar11[2];
+      *(float *)(glContext + 0x2d8) = attribDataCursor[2];
 LAB_000a5218:
-      *(float *)(glContext + 0x2d4) = pfVar11[1];
+      *(float *)(glContext + 0x2d4) = attribDataCursor[1];
     }
     else {
       if (uVar12 == 0xc) {
@@ -1930,83 +1935,83 @@ LAB_000a5218:
         *(undefined4 *)(glContext + 0x2dc) = *(undefined4 *)(glContext + 0x20);
         goto LAB_000a5218;
       }
-      uVar5 = *(undefined4 *)(glContext + 0x20);
-      *(undefined4 *)(glContext + 0x2d4) = uVar5;
-      *(undefined4 *)(glContext + 0x2dc) = uVar5;
-      *(undefined4 *)(glContext + 0x2d8) = uVar5;
+      missingComponentFill = *(undefined4 *)(glContext + 0x20);
+      *(undefined4 *)(glContext + 0x2d4) = missingComponentFill;
+      *(undefined4 *)(glContext + 0x2dc) = missingComponentFill;
+      *(undefined4 *)(glContext + 0x2d8) = missingComponentFill;
     }
-    fVar4 = *pfVar11;
-    pfVar11 = (float *)((int)pfVar11 + uVar12);
+    fVar4 = *attribDataCursor;
+    attribDataCursor = (float *)((int)attribDataCursor + uVar12);
     *(float *)(glContext + 0x2d0) = fVar4;
   }
   if ((byte)listRecord[6] != 0) {
-    cVar3 = *(char *)pfVar11;
-    pfVar11 = (float *)((int)pfVar11 + (uint)(byte)listRecord[6]);
-    *(char *)(glContext + 0x2ec) = cVar3;
+    edgeFlagValue = *(char *)attribDataCursor;
+    attribDataCursor = (float *)((int)attribDataCursor + (uint)(byte)listRecord[6]);
+    *(char *)(glContext + 0x2ec) = edgeFlagValue;
   }
-  iVar8 = 0;
+  texUnitIndex = 0;
   remaining = 8;
   srcCursor = (byte *)(listRecord + 8);
   do {
-    uVar12 = (uint)*srcCursor;
+    texCoordSize = (uint)*srcCursor;
     srcCursor = srcCursor + 1;
-    if (uVar12 != 0) {
-      if (uVar12 == 0x10) {
+    if (texCoordSize != 0) {
+      if (texCoordSize == 0x10) {
         *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
-        fVar4 = pfVar11[3];
+        fVar4 = attribDataCursor[3];
 LAB_000a52c4:
-        iVar7 = iVar8 * 0x10 + glContext;
-        *(float *)(iVar7 + 300) = fVar4;
-        fVar4 = pfVar11[2];
+        texCoordCurrent = texUnitIndex * 0x10 + glContext;
+        *(float *)(texCoordCurrent + 300) = fVar4;
+        fVar4 = attribDataCursor[2];
 LAB_000a52cc:
-        *(float *)(iVar7 + 0x128) = fVar4;
-        fVar4 = pfVar11[1];
+        *(float *)(texCoordCurrent + 0x128) = fVar4;
+        fVar4 = attribDataCursor[1];
       }
       else {
-        if (uVar12 == 0xc) {
+        if (texCoordSize == 0xc) {
           fVar4 = *(float *)(glContext + 0x24);
           *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
           goto LAB_000a52c4;
         }
-        if (uVar12 == 8) {
-          iVar7 = iVar8 * 0x10 + glContext;
-          *(undefined4 *)(iVar7 + 300) = *(undefined4 *)(glContext + 0x24);
+        if (texCoordSize == 8) {
+          texCoordCurrent = texUnitIndex * 0x10 + glContext;
+          *(undefined4 *)(texCoordCurrent + 300) = *(undefined4 *)(glContext + 0x24);
           fVar4 = *(float *)(glContext + 0x20);
           goto LAB_000a52cc;
         }
-        iVar7 = iVar8 * 0x10 + glContext;
-        *(undefined4 *)(iVar7 + 300) = *(undefined4 *)(glContext + 0x24);
-        *(undefined4 *)(iVar7 + 0x128) = *(undefined4 *)(glContext + 0x20);
+        texCoordCurrent = texUnitIndex * 0x10 + glContext;
+        *(undefined4 *)(texCoordCurrent + 300) = *(undefined4 *)(glContext + 0x24);
+        *(undefined4 *)(texCoordCurrent + 0x128) = *(undefined4 *)(glContext + 0x20);
         fVar4 = *(float *)(glContext + 0x20);
       }
-      *(float *)(iVar7 + 0x124) = fVar4;
-      fVar4 = *pfVar11;
-      pfVar11 = (float *)((int)pfVar11 + uVar12);
-      *(float *)(iVar8 * 0x10 + glContext + 0x120) = fVar4;
+      *(float *)(texCoordCurrent + 0x124) = fVar4;
+      fVar4 = *attribDataCursor;
+      attribDataCursor = (float *)((int)attribDataCursor + texCoordSize);
+      *(float *)(texUnitIndex * 0x10 + glContext + 0x120) = fVar4;
     }
-    iVar8 = iVar8 + 1;
+    texUnitIndex = texUnitIndex + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
-  cVar3 = *listRecord;
-  if (cVar3 == '\0') goto LAB_000a53a0;
-  pcVar10 = *(code **)(glContext + 0x4884);
+  positionSize = *listRecord;
+  if (positionSize == '\0') goto LAB_000a53a0;
+  vertexFunc = *(code **)(glContext + 0x4884);
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-    pcVar10 = (code *)PTR__gleFlushAndSubmit_00112050;
+    vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
   }
-  if (cVar3 == '\x10') {
-    fVar4 = pfVar11[3];
+  if (positionSize == '\x10') {
+    positionW = attribDataCursor[3];
 LAB_000a537c:
-    fVar6 = pfVar11[2];
+    positionZ = attribDataCursor[2];
   }
   else {
-    if (cVar3 == '\f') {
-      fVar4 = *(float *)(glContext + 0x24);
+    if (positionSize == '\f') {
+      positionW = *(float *)(glContext + 0x24);
       goto LAB_000a537c;
     }
-    fVar4 = *(float *)(glContext + 0x24);
-    fVar6 = *(float *)(glContext + 0x20);
+    positionW = *(float *)(glContext + 0x24);
+    positionZ = *(float *)(glContext + 0x20);
   }
-  (*((int (*)(int,double,double,double,double))pcVar10))(glContext, (double)*pfVar11, (double)pfVar11[1], (double)fVar6, (double)fVar4);
+  (*((int (*)(int,double,double,double,double))vertexFunc))(glContext, (double)*attribDataCursor, (double)attribDataCursor[1], (double)positionZ, (double)positionW);
 LAB_000a53a0:
   return *(int *)(listRecord + 0x20) + 0x24;
 }

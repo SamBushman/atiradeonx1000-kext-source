@@ -1,0 +1,9 @@
+local	_glFogfv_Exec	bVar1	glContextWord5434IsZero	INFERRED	glContext+0x5434 == 0 (positional name, no field row): selects the state table at +0x5420 (zero) or +0x5430->+0x20 (non-zero) to read the dirty bit number from
+local	_glFogfv_Exec	bVar2	dirtyBitNumber	CONFIRMED	byte read from the state table (+0x323 / +0x357, +0x322 / +0x356): bit number set in the context dirty bitmaps: word (bit >> 3 & 0x1c) at +0x324, mask 1 << (bit & 0x1f), and again at +0x348
+local	_glFogfv_Exec	fVar3	fogColorComponent	CONFIRMED	params[i] clamped to [0,1] and stored to glContext+0x3140..0x314c (the fog color, pname 0xb66 GL_FOG_COLOR)
+local	_glFogfv_Exec	fVar4	enumParamAsFloat	CONFIRMED	*params for the enum-valued pnames 0x8450 (fog coordinate source) and 0x855a (fog distance mode): converted to an unsigned int and compared against the legal enums
+local	_glFogfv_Exec	uVar7	enumValue16	CONFIRMED	the enum parameter truncated to 16 bits, stored to glContext+0x3166 (pname 0x8450) or +0x3168 (pname 0x855a)
+local	_glFogfv_Exec	uVar8	enumValue	CONFIRMED	the enum parameter converted to an unsigned int (float to uint conversion via the 2^31 constant): fog mode 0x800/0x801/0x2601, coordinate source 0x8451/0x8452, distance mode 0x2502/0x855b/0x855c
+local	_glFogfv_Exec	iVar9	dirtyWordAddress348	CONFIRMED	glContext + (bit >> 3 & 0x1c): address of the dirty bitmap word at +0x348 that receives the 1 << (bit & 0x1f) mask
+local	_glFogfv_Exec	iVar10	dirtyWordAddress324	CONFIRMED	glContext + (bit >> 3 & 0x1c): address of the dirty bitmap word at +0x324 that receives the 1 << (bit & 0x1f) mask
+local	_glFogfv_Exec	dVar11	paramAsDouble	CONFIRMED	(double)*params, compared with the 2^31 constant DOUBLE_00108d80 for the float to unsigned conversion

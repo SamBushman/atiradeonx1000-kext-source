@@ -1086,63 +1086,63 @@ int _gleAddHashNameAndObject(glContext, forwardedArg2, param_3)
 }
 
 /* _gleAddHashName @ 0x17ca0 (320 bytes) */
-int _gleAddHashName(param_1, param_2)
-  int param_1;
-  uint param_2;
+int _gleAddHashName(hashTable, hashName)
+  int hashTable;
+  uint hashName;
 {
-  undefined4 uVar1;
-  int iVar2;
-  uint uVar3;
+  undefined4 oldListHead;
+  int followingRangeCount;
+  uint rangeFirstName;
   undefined4 *allocatedBlock2;
-  int iVar5;
-  int *piVar6;
+  int rangeCount;
+  int *nextRangeNode;
   int *allocatedBlock;
-  int *piVar7;
+  int *currentRangeNode;
   
-  piVar6 = *(int **)(param_1 + 0x1000);
-  if ((piVar6 == (int *)0x0) || (uVar3 = piVar6[1], param_2 < uVar3 - 1)) {
+  nextRangeNode = *(int **)(hashTable + 0x1000);
+  if ((nextRangeNode == (int *)0x0) || (rangeFirstName = nextRangeNode[1], hashName < rangeFirstName - 1)) {
     allocatedBlock2 = (undefined4 *)_malloc(0xc);
-    uVar1 = *(undefined4 *)(param_1 + 0x1000);
-    allocatedBlock2[1] = param_2;
-    *allocatedBlock2 = uVar1;
+    oldListHead = *(undefined4 *)(hashTable + 0x1000);
+    allocatedBlock2[1] = hashName;
+    *allocatedBlock2 = oldListHead;
     allocatedBlock2[2] = 1;
-    *(undefined4 **)(param_1 + 0x1000) = allocatedBlock2;
+    *(undefined4 **)(hashTable + 0x1000) = allocatedBlock2;
   }
   else {
     do {
-      piVar7 = piVar6;
-      iVar5 = piVar7[2];
-      if (param_2 == uVar3 - 1) {
-        piVar7[1] = param_2;
-        piVar7[2] = iVar5 + 1;
+      currentRangeNode = nextRangeNode;
+      rangeCount = currentRangeNode[2];
+      if (hashName == rangeFirstName - 1) {
+        currentRangeNode[1] = hashName;
+        currentRangeNode[2] = rangeCount + 1;
         return 1;
       }
-      if ((uVar3 <= param_2) && (param_2 < uVar3 + iVar5)) {
+      if ((rangeFirstName <= hashName) && (hashName < rangeFirstName + rangeCount)) {
         return 0;
       }
-      if (param_2 == uVar3 + iVar5) {
-        piVar6 = (int *)*piVar7;
-        piVar7[2] = iVar5 + 1;
-        if (piVar6 == (int *)0x0) {
+      if (hashName == rangeFirstName + rangeCount) {
+        nextRangeNode = (int *)*currentRangeNode;
+        currentRangeNode[2] = rangeCount + 1;
+        if (nextRangeNode == (int *)0x0) {
           return 1;
         }
-        if (param_2 + 1 != piVar6[1]) {
+        if (hashName + 1 != nextRangeNode[1]) {
           return 1;
         }
-        iVar2 = piVar6[2];
-        *piVar7 = *piVar6;
-        piVar7[2] = iVar5 + 1 + iVar2;
-        _free(piVar6);
+        followingRangeCount = nextRangeNode[2];
+        *currentRangeNode = *nextRangeNode;
+        currentRangeNode[2] = rangeCount + 1 + followingRangeCount;
+        _free(nextRangeNode);
         return 1;
       }
-      piVar6 = (int *)*piVar7;
-    } while ((piVar6 != (int *)0x0) && (uVar3 = piVar6[1], uVar3 - 1 <= param_2));
+      nextRangeNode = (int *)*currentRangeNode;
+    } while ((nextRangeNode != (int *)0x0) && (rangeFirstName = nextRangeNode[1], rangeFirstName - 1 <= hashName));
     allocatedBlock = (int *)_malloc(0xc);
-    iVar5 = *piVar7;
-    allocatedBlock[1] = param_2;
-    *allocatedBlock = iVar5;
+    rangeCount = *currentRangeNode;
+    allocatedBlock[1] = hashName;
+    *allocatedBlock = rangeCount;
     allocatedBlock[2] = 1;
-    *piVar7 = (int)allocatedBlock;
+    *currentRangeNode = (int)allocatedBlock;
   }
   return 1;
 }

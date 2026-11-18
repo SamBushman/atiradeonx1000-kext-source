@@ -3218,160 +3218,160 @@ void _glMaterialiv_Exec(int glContext,uint face,undefined *pname,uint *params,do
 {
   int remaining;
   undefined4 glErrorCode;
-  uint uVar3;
-  int iVar4;
-  uint uVar5;
-  double dVar6;
-  double dVar7;
-  double dVar8;
-  float local_40;
-  float local_3c;
-  float local_38;
-  float local_34;
-  undefined4 local_30;
-  uint uStack_2c;
+  uint firstFaceIndex;
+  int faceMaterialEntry;
+  uint lastFaceIndex;
+  double specularIndexAsDouble;
+  double ambientIndexAsDouble;
+  double diffuseIndexAsDouble;
+  float materialRed;
+  float materialGreen;
+  float materialBlue;
+  float materialAlpha;
+  undefined4 intToDoubleHigh;
+  uint intToDoubleLow;
   
   if (((*(char *)(glContext + 0x7580) != '\0') && (-1 < *(short *)(glContext + 0x4a10))) &&
      (*(char *)(glContext + 0x4664) == '\0')) {
     ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
   }
   if (pname == (undefined *)0x1600) {
-    local_30 = 0x43300000;
-    uStack_2c = params[3] ^ 0x80000000;
-    local_40 = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58) *
+    intToDoubleHigh = 0x43300000;
+    intToDoubleLow = params[3] ^ 0x80000000;
+    materialRed = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58) *
                FLOAT_00108e68 + FLOAT_00108e6c;
-    local_3c = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58) *
+    materialGreen = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58) *
                FLOAT_00108e68 + FLOAT_00108e6c;
-    local_34 = (float)((double)CONCAT44(0x43300000,uStack_2c) - DOUBLE_00108d58) * FLOAT_00108e68 +
+    materialAlpha = (float)((double)CONCAT44(0x43300000,intToDoubleLow) - DOUBLE_00108d58) * FLOAT_00108e68 +
                FLOAT_00108e6c;
-    local_38 = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58) *
+    materialBlue = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58) *
                FLOAT_00108e68 + FLOAT_00108e6c;
     if (face == 0x405) {
-      _gleLightMaterialRGBAChange_B_E(glContext,&local_40);
+      _gleLightMaterialRGBAChange_B_E(glContext,&materialRed);
       goto LAB_00076dd8;
     }
     if (face < 0x406) {
       if (face == 0x404) {
-        _gleLightMaterialRGBAChange_F_E(glContext,&local_40);
+        _gleLightMaterialRGBAChange_F_E(glContext,&materialRed);
         goto LAB_00076dd8;
       }
     }
     else if (face == 0x408) {
-      _gleLightMaterialRGBAChange_FB_E(glContext,&local_40);
+      _gleLightMaterialRGBAChange_FB_E(glContext,&materialRed);
       goto LAB_00076dd8;
     }
   }
   else if (pname < (undefined *)0x1601) {
     if (pname == ((unsigned char *)0x00001201)) {
-      local_30 = 0x43300000;
-      uStack_2c = params[3] ^ 0x80000000;
-      local_40 = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58) *
+      intToDoubleHigh = 0x43300000;
+      intToDoubleLow = params[3] ^ 0x80000000;
+      materialRed = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58) *
                  FLOAT_00108e68 + FLOAT_00108e6c;
-      local_3c = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58) *
+      materialGreen = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58) *
                  FLOAT_00108e68 + FLOAT_00108e6c;
-      local_34 = (float)((double)CONCAT44(0x43300000,uStack_2c) - DOUBLE_00108d58) * FLOAT_00108e68
+      materialAlpha = (float)((double)CONCAT44(0x43300000,intToDoubleLow) - DOUBLE_00108d58) * FLOAT_00108e68
                  + FLOAT_00108e6c;
-      local_38 = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58) *
+      materialBlue = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58) *
                  FLOAT_00108e68 + FLOAT_00108e6c;
       if (face == 0x405) {
-        _gleLightMaterialRGBAChange_B_D(glContext,&local_40);
+        _gleLightMaterialRGBAChange_B_D(glContext,&materialRed);
         goto LAB_00076dd8;
       }
       if (face < 0x406) {
         if (face == 0x404) {
-          _gleLightMaterialRGBAChange_F_D(glContext,&local_40);
+          _gleLightMaterialRGBAChange_F_D(glContext,&materialRed);
           goto LAB_00076dd8;
         }
       }
       else if (face == 0x408) {
-        _gleLightMaterialRGBAChange_FB_D(glContext,&local_40);
+        _gleLightMaterialRGBAChange_FB_D(glContext,&materialRed);
         goto LAB_00076dd8;
       }
     }
     else if (((unsigned char *)0x00001201) < pname) {
       if (pname == ((unsigned char *)0x00001202)) {
-        local_30 = 0x43300000;
-        uStack_2c = params[3] ^ 0x80000000;
-        local_40 = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58) *
+        intToDoubleHigh = 0x43300000;
+        intToDoubleLow = params[3] ^ 0x80000000;
+        materialRed = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58) *
                    FLOAT_00108e68 + FLOAT_00108e6c;
-        local_3c = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58) *
+        materialGreen = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58) *
                    FLOAT_00108e68 + FLOAT_00108e6c;
-        local_34 = (float)((double)CONCAT44(0x43300000,uStack_2c) - DOUBLE_00108d58) *
+        materialAlpha = (float)((double)CONCAT44(0x43300000,intToDoubleLow) - DOUBLE_00108d58) *
                    FLOAT_00108e68 + FLOAT_00108e6c;
-        local_38 = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58) *
+        materialBlue = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58) *
                    FLOAT_00108e68 + FLOAT_00108e6c;
         if (face == 0x405) {
-          _gleLightMaterialRGBAChange_B_S(glContext,&local_40);
+          _gleLightMaterialRGBAChange_B_S(glContext,&materialRed);
           goto LAB_00076dd8;
         }
         if (face < 0x406) {
           if (face == 0x404) {
-            _gleLightMaterialRGBAChange_F_S(glContext,&local_40);
+            _gleLightMaterialRGBAChange_F_S(glContext,&materialRed);
             goto LAB_00076dd8;
           }
         }
         else if (face == 0x408) {
-          _gleLightMaterialRGBAChange_FB_S(glContext,&local_40);
+          _gleLightMaterialRGBAChange_FB_S(glContext,&materialRed);
           goto LAB_00076dd8;
         }
       }
     }
     else if (pname == ((unsigned char *)0x00001200)) {
-      local_30 = 0x43300000;
-      uStack_2c = params[3] ^ 0x80000000;
-      local_40 = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58) *
+      intToDoubleHigh = 0x43300000;
+      intToDoubleLow = params[3] ^ 0x80000000;
+      materialRed = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58) *
                  FLOAT_00108e68 + FLOAT_00108e6c;
-      local_3c = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58) *
+      materialGreen = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58) *
                  FLOAT_00108e68 + FLOAT_00108e6c;
-      local_34 = (float)((double)CONCAT44(0x43300000,uStack_2c) - DOUBLE_00108d58) * FLOAT_00108e68
+      materialAlpha = (float)((double)CONCAT44(0x43300000,intToDoubleLow) - DOUBLE_00108d58) * FLOAT_00108e68
                  + FLOAT_00108e6c;
-      local_38 = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58) *
+      materialBlue = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58) *
                  FLOAT_00108e68 + FLOAT_00108e6c;
       if (face == 0x405) {
-        _gleLightMaterialRGBAChange_B_A(glContext,&local_40);
+        _gleLightMaterialRGBAChange_B_A(glContext,&materialRed);
         goto LAB_00076dd8;
       }
       if (face < 0x406) {
         if (face == 0x404) {
-          _gleLightMaterialRGBAChange_F_A(glContext,&local_40);
+          _gleLightMaterialRGBAChange_F_A(glContext,&materialRed);
           goto LAB_00076dd8;
         }
       }
       else if (face == 0x408) {
-        _gleLightMaterialRGBAChange_FB_A(glContext,&local_40);
+        _gleLightMaterialRGBAChange_FB_A(glContext,&materialRed);
         goto LAB_00076dd8;
       }
     }
   }
   else if (pname == (undefined *)0x1602) {
-    local_30 = 0x43300000;
-    uStack_2c = params[3] ^ 0x80000000;
-    local_40 = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58) *
+    intToDoubleHigh = 0x43300000;
+    intToDoubleLow = params[3] ^ 0x80000000;
+    materialRed = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58) *
                FLOAT_00108e68 + FLOAT_00108e6c;
-    local_3c = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58) *
+    materialGreen = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58) *
                FLOAT_00108e68 + FLOAT_00108e6c;
-    local_34 = (float)((double)CONCAT44(0x43300000,uStack_2c) - DOUBLE_00108d58) * FLOAT_00108e68 +
+    materialAlpha = (float)((double)CONCAT44(0x43300000,intToDoubleLow) - DOUBLE_00108d58) * FLOAT_00108e68 +
                FLOAT_00108e6c;
-    local_38 = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58) *
+    materialBlue = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58) *
                FLOAT_00108e68 + FLOAT_00108e6c;
     if (face == 0x405) {
-      _gleLightMaterialRGBAChange_B_AD(glContext,&local_40);
+      _gleLightMaterialRGBAChange_B_AD(glContext,&materialRed);
       goto LAB_00076dd8;
     }
     if (face < 0x406) {
       if (face == 0x404) {
-        _gleLightMaterialRGBAChange_F_AD(glContext,&local_40);
+        _gleLightMaterialRGBAChange_F_AD(glContext,&materialRed);
         goto LAB_00076dd8;
       }
     }
     else if (face == 0x408) {
-      _gleLightMaterialRGBAChange_FB_AD(glContext,&local_40);
+      _gleLightMaterialRGBAChange_FB_AD(glContext,&materialRed);
       goto LAB_00076dd8;
     }
   }
   else if (pname < (undefined *)0x1602) {
-    uStack_2c = *params;
-    if (((int)uStack_2c < 0) || (*(int *)(*(int *)(glContext + 0x468c) + 0xa0) < (int)uStack_2c)) {
+    intToDoubleLow = *params;
+    if (((int)intToDoubleLow < 0) || (*(int *)(*(int *)(glContext + 0x468c) + 0xa0) < (int)intToDoubleLow)) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -3379,45 +3379,45 @@ void _glMaterialiv_Exec(int glContext,uint face,undefined *pname,uint *params,do
       goto LAB_00076dd0;
     }
     if (face == 0x405) {
-      uStack_2c = uStack_2c ^ 0x80000000;
-      local_30 = 0x43300000;
-      ((void (*)())_gleLightMaterialShineChange_B)(glContext,(double)(float)((double)CONCAT44(0x43300000,uStack_2c) - DOUBLE_00108d58));
+      intToDoubleLow = intToDoubleLow ^ 0x80000000;
+      intToDoubleHigh = 0x43300000;
+      ((void (*)())_gleLightMaterialShineChange_B)(glContext,(double)(float)((double)CONCAT44(0x43300000,intToDoubleLow) - DOUBLE_00108d58));
       goto LAB_00076dd8;
     }
     if (face < 0x406) {
       if (face == 0x404) {
-        uStack_2c = uStack_2c ^ 0x80000000;
-        local_30 = 0x43300000;
-        ((void (*)())_gleLightMaterialShineChange_F)(glContext,(double)(float)((double)CONCAT44(0x43300000,uStack_2c) - DOUBLE_00108d58)
+        intToDoubleLow = intToDoubleLow ^ 0x80000000;
+        intToDoubleHigh = 0x43300000;
+        ((void (*)())_gleLightMaterialShineChange_F)(glContext,(double)(float)((double)CONCAT44(0x43300000,intToDoubleLow) - DOUBLE_00108d58)
                   );
         goto LAB_00076dd8;
       }
     }
     else if (face == 0x408) {
-      uStack_2c = uStack_2c ^ 0x80000000;
-      local_30 = 0x43300000;
-      ((void (*)())_gleLightMaterialShineChange_FB)(glContext,(double)(float)((double)CONCAT44(0x43300000,uStack_2c) - DOUBLE_00108d58));
+      intToDoubleLow = intToDoubleLow ^ 0x80000000;
+      intToDoubleHigh = 0x43300000;
+      ((void (*)())_gleLightMaterialShineChange_FB)(glContext,(double)(float)((double)CONCAT44(0x43300000,intToDoubleLow) - DOUBLE_00108d58));
       goto LAB_00076dd8;
     }
   }
   else if (pname == (undefined *)0x1603) {
-    local_30 = 0x43300000;
-    uStack_2c = params[2] * 0x101 ^ 0x80000000;
-    dVar7 = (double)CONCAT44(0x43300000,*params * 0x101 ^ 0x80000000) - DOUBLE_00108d58;
-    dVar6 = (double)CONCAT44(0x43300000,uStack_2c) - DOUBLE_00108d58;
-    dVar8 = (double)CONCAT44(0x43300000,params[1] * 0x101 ^ 0x80000000) - DOUBLE_00108d58;
+    intToDoubleHigh = 0x43300000;
+    intToDoubleLow = params[2] * 0x101 ^ 0x80000000;
+    ambientIndexAsDouble = (double)CONCAT44(0x43300000,*params * 0x101 ^ 0x80000000) - DOUBLE_00108d58;
+    specularIndexAsDouble = (double)CONCAT44(0x43300000,intToDoubleLow) - DOUBLE_00108d58;
+    diffuseIndexAsDouble = (double)CONCAT44(0x43300000,params[1] * 0x101 ^ 0x80000000) - DOUBLE_00108d58;
     if (face == 0x405) {
-      uVar5 = 1;
-      uVar3 = 1;
+      lastFaceIndex = 1;
+      firstFaceIndex = 1;
 LAB_00076d88:
-      if (uVar3 <= uVar5) {
-        remaining = (uVar5 + 1) - uVar3;
-        iVar4 = uVar3 * 0x10 + glContext;
+      if (firstFaceIndex <= lastFaceIndex) {
+        remaining = (lastFaceIndex + 1) - firstFaceIndex;
+        faceMaterialEntry = firstFaceIndex * 0x10 + glContext;
         do {
-          *(float *)(iVar4 + 0x2f0) = (float)dVar7;
-          *(float *)(iVar4 + 0x2f4) = (float)dVar8;
-          *(float *)(iVar4 + 0x2f8) = (float)dVar6;
-          iVar4 = iVar4 + 0x10;
+          *(float *)(faceMaterialEntry + 0x2f0) = (float)ambientIndexAsDouble;
+          *(float *)(faceMaterialEntry + 0x2f4) = (float)diffuseIndexAsDouble;
+          *(float *)(faceMaterialEntry + 0x2f8) = (float)specularIndexAsDouble;
+          faceMaterialEntry = faceMaterialEntry + 0x10;
           remaining = remaining + -1;
         } while (remaining != 0);
       }
@@ -3430,14 +3430,14 @@ LAB_00076dd8:
     }
     if (face < 0x406) {
       if (face == 0x404) {
-        uVar5 = 0;
-        uVar3 = 0;
+        lastFaceIndex = 0;
+        firstFaceIndex = 0;
         goto LAB_00076d88;
       }
     }
     else if (face == 0x408) {
-      uVar3 = 0;
-      uVar5 = 1;
+      firstFaceIndex = 0;
+      lastFaceIndex = 1;
       goto LAB_00076d88;
     }
   }

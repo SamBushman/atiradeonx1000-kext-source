@@ -1,0 +1,56 @@
+local	_gleTextureMatTrans_body	param_1	glContext	CONFIRMED	the GL context: +0x1fc0 + unit*0x40 holds the unit texture matrix
+local	_gleTextureMatTrans_body	param_2	vertexCursor	CONFIRMED	first vertex record, advanced by 0x100 per vertex in the loop
+local	_gleTextureMatTrans_body	param_3	vertexBytes	CONFIRMED	byte length of the vertex records: the loop runs (bytes + 0xff) >> 8 times
+local	_gleTextureMatTrans_body	param_4	texUnit	CONFIRMED	texture unit index: selects the matrix (*0x40) and the texture coordinates in the vertex record (*0x10)
+local	_gleTextureMatTrans_body	fVar1	texMatrixElem0	CONFIRMED	glContext + unit*0x40 + 0x1fc0: element 0 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar3	texMatrixElem1	CONFIRMED	glContext + unit*0x40 + 0x1fc4: element 1 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar14	texMatrixElem2	CONFIRMED	glContext + unit*0x40 + 0x1fc8: element 2 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar4	texMatrixElem3	CONFIRMED	glContext + unit*0x40 + 0x1fcc: element 3 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar5	texMatrixElem4	CONFIRMED	glContext + unit*0x40 + 0x1fd0: element 4 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar6	texMatrixElem5	CONFIRMED	glContext + unit*0x40 + 0x1fd4: element 5 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar15	texMatrixElem6	CONFIRMED	glContext + unit*0x40 + 0x1fd8: element 6 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar7	texMatrixElem7	CONFIRMED	glContext + unit*0x40 + 0x1fdc: element 7 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar8	texMatrixElem8	CONFIRMED	glContext + unit*0x40 + 0x1fe0: element 8 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar9	texMatrixElem9	CONFIRMED	glContext + unit*0x40 + 0x1fe4: element 9 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar16	texMatrixElem10	CONFIRMED	glContext + unit*0x40 + 0x1fe8: element 10 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar10	texMatrixElem11	CONFIRMED	glContext + unit*0x40 + 0x1fec: element 11 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar11	texMatrixElem12	CONFIRMED	glContext + unit*0x40 + 0x1ff0: element 12 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar12	texMatrixElem13	CONFIRMED	glContext + unit*0x40 + 0x1ff4: element 13 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar2	texMatrixElem14	CONFIRMED	glContext + unit*0x40 + 0x1ff8: element 14 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar13	texMatrixElem15	CONFIRMED	glContext + unit*0x40 + 0x1ffc: element 15 of the unit's 4x4 texture matrix (column-major, loaded once before the vertex loop)
+local	_gleTextureMatTrans_body	fVar17	texCoordS	CONFIRMED	texture coordinate component of the vertex record (record + unit*0x10 +0x80) read before the transform and overwritten with the transformed value
+local	_gleTextureMatTrans_body	fVar18	texCoordT	CONFIRMED	texture coordinate component of the vertex record (record + unit*0x10 +0x84) read before the transform and overwritten with the transformed value
+local	_gleTextureMatTrans_body	fVar19	texCoordR	CONFIRMED	texture coordinate component of the vertex record (record + unit*0x10 +0x88) read before the transform and overwritten with the transformed value
+local	_gleTextureMatTrans_body	fVar20	texCoordQ	CONFIRMED	texture coordinate component of the vertex record (record + unit*0x10 +0x8c) read before the transform and overwritten with the transformed value
+use	_gleTextureMatTrans_body	iVar21	texMatrixBase	CONFIRMED	param_1 + texUnit*0x40: base of the unit's texture matrix block (matrix at +0x1fc0)	^\s*iVar21\ =\ param_1\ \+\ param_4\ \*\ 0x40;$	+17
+use	_gleTextureMatTrans_body	iVar21	texCoordRecord	CONFIRMED	vertex record + texUnit*0x10: the unit's texture coordinates at +0x80..+0x8c	^\s*iVar21\ =\ param_2\ \+\ param_4\ \*\ 0x10;$	+1
+use	_gleTextureMatTrans_body	iVar21	texCoordRecord	CONFIRMED	vertex record + texUnit*0x10: the unit's texture coordinates at +0x80..+0x8c	^\s*fVar17\ =\ \*\(float\ \*\)\(iVar21\ \+\ 0x80\);$	+5
+use	_gleTextureMatTrans_body	iVar21	texCoordRecord	CONFIRMED	vertex record + texUnit*0x10: the unit's texture coordinates at +0x80..+0x8c	^\s*\*\(float\ \*\)\(iVar21\ \+\ 0x80\)\ =\ fVar20\ \*\ fVar11\ \+\ \(fVar19\ \*\ fVar8\ \+\ \(fVar17\ \*\ fVar1\ \+\ fVar18\ \*\ fVar5\)\)$	+1
+use	_gleTextureMatTrans_body	iVar21	texCoordRecord	CONFIRMED	vertex record + texUnit*0x10: the unit's texture coordinates at +0x80..+0x8c	^\s*\*\(float\ \*\)\(iVar21\ \+\ 0x84\)\ =\ fVar20\ \*\ fVar12\ \+\ \(fVar19\ \*\ fVar9\ \+\ \(fVar17\ \*\ fVar3\ \+\ fVar18\ \*\ fVar6\)\)$	+1
+use	_gleTextureMatTrans_body	iVar21	texCoordRecord	CONFIRMED	vertex record + texUnit*0x10: the unit's texture coordinates at +0x80..+0x8c	^\s*\*\(float\ \*\)\(iVar21\ \+\ 0x88\)\ =$	+1
+local	_gleTextureMatTrans_body	uVar22	remaining	CONFIRMED	vertex record count ((byte length + 0xff) >> 8), countdown per vertex
+local	_gleEvalDomainDeriv2Coord	param_2	controlPoints	CONFIRMED	control point array: element (u,v,component) at controlPoints[component + (u*vOrder+v)*componentCount], read with stride param_7 floats per control point
+local	_gleEvalDomainDeriv2Coord	param_3	uOrder	CONFIRMED	order of the patch in u: compared with the cached _uorder_c and bounds the u loop
+local	_gleEvalDomainDeriv2Coord	param_4	vOrder	CONFIRMED	order of the patch in v: compared with the cached _vorder_c and bounds the v loop
+local	_gleEvalDomainDeriv2Coord	param_7	componentCount	CONFIRMED	number of components of each control point (outer loop bound) and the float stride between control points
+local	_gleEvalDomainDeriv2Coord	param_8	outDerivU	CONFIRMED	output array receiving the u derivative per component (sum of ucoeffDeriv * v sum), stored at component*4
+local	_gleEvalDomainDeriv2Coord	param_9	outDerivV	CONFIRMED	output array receiving the v derivative per component (sum of ucoeff * v derivative sum), stored at component*4
+local	_gleEvalDomainDeriv2Coord	param_10	outValue	CONFIRMED	output array receiving the evaluated surface value per component (sum of ucoeff * v sum), stored at component*4
+local	_gleEvalDomainDeriv2Coord	iVar3	componentByteOffset	CONFIRMED	componentIndex * 4: byte offset of the component in the output arrays and the control point array
+local	_gleEvalDomainDeriv2Coord	fVar4	derivVSum	CONFIRMED	accumulates ucoeff[u] * vDerivRowSum: the v derivative of the component, stored to outDerivV
+local	_gleEvalDomainDeriv2Coord	fVar5	vDerivRowSum	CONFIRMED	sum over v of vcoeffDeriv[v] * control point for the current u row
+local	_gleEvalDomainDeriv2Coord	fVar6	valueSum	CONFIRMED	accumulates ucoeff[u] * v row sum: the surface value of the component, stored to outValue
+local	_gleEvalDomainDeriv2Coord	fVar7	derivUSum	CONFIRMED	accumulates ucoeffDeriv[u] * v row sum: the u derivative of the component, stored to outDerivU
+local	_gleEvalDomainDeriv2Coord	iVar8	uIndex	CONFIRMED	0..uOrder-1: index into _ucoeff_c / _ucoeffDeriv_c
+local	_gleEvalDomainDeriv2Coord	pfVar9	controlPointCursor	CONFIRMED	starts at the component of the first control point and advances componentCount floats per control point
+local	_gleEvalDomainDeriv2Coord	fVar2	controlPointValue	CONFIRMED	control point value of the component (second and later v rows), multiplied by the v coefficients
+local	_gleEvalDomainDeriv2Coord	iVar11	nextVIndex	CONFIRMED	vIndex + 1: loop increment and bound of the v loop
+use	_gleEvalDomainDeriv2Coord	iVar10	vIndex	CONFIRMED	1..vOrder-1: index into _vcoeff_c / _vcoeffDeriv_c (the first row coefficient is read at index 0)	^\s*iVar10\ =\ 1;$	+1
+use	_gleEvalDomainDeriv2Coord	iVar10	vIndex	CONFIRMED	1..vOrder-1: index into _vcoeff_c / _vcoeffDeriv_c (the first row coefficient is read at index 0)	^\s*iVar11\ =\ iVar10\ \+\ 1;$	+1
+use	_gleEvalDomainDeriv2Coord	iVar10	vIndex	CONFIRMED	1..vOrder-1: index into _vcoeff_c / _vcoeffDeriv_c (the first row coefficient is read at index 0)	^\s*fVar5\ =\ GH_U2F\(\(unsigned\ int\)\(\(\&_vcoeffDeriv_c\)\[iVar10\]\)\)\ \*\ fVar2\ \+\ fVar5;$	+3
+use	_gleEvalDomainDeriv2Coord	iVar10	nextUIndex	CONFIRMED	uIndex + 1: loop increment and bound of the u loop	^\s*iVar10\ =\ iVar8\ \+\ 1;$	+1
+use	_gleEvalDomainDeriv2Coord	iVar10	nextUIndex	CONFIRMED	uIndex + 1: loop increment and bound of the u loop	^\s*iVar8\ =\ iVar10;$	+2
+use	_gleEvalDomainDeriv2Coord	iVar12	componentIndex	CONFIRMED	0..componentCount-1: component being evaluated	^\s*iVar12\ =\ 0;$	+1
+use	_gleEvalDomainDeriv2Coord	iVar12	componentIndex	CONFIRMED	0..componentCount-1: component being evaluated	^\s*iVar3\ =\ iVar12\ \*\ 4;$	+1
+use	_gleEvalDomainDeriv2Coord	iVar12	componentIndex	CONFIRMED	0..componentCount-1: component being evaluated	^\s*iVar12\ =\ iVar12\ \+\ 1;$	+1
+use	_gleEvalDomainDeriv2Coord	iVar12	componentIndex	CONFIRMED	0..componentCount-1: component being evaluated	^\s*\}\ while\ \(iVar12\ <\ param_7\);$	+1

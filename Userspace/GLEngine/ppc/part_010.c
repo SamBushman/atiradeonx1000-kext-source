@@ -1264,61 +1264,62 @@ void _glClipPlane_Exec(glContext, plane, equation)
   int plane;
   double *equation;
 {
-  byte bVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
+  byte dirtyBitNumber;
+  float planeB;
+  float planeA;
+  float planeC;
+  float planeD;
   undefined4 glErrorCode;
-  int iVar7;
-  uint uVar8;
-  int iVar9;
+  int dirtyWordAddress324;
+  uint clipPlaneIndex;
+  int clipPlaneEquation;
+  int dirtyWordAddress348;
   int glContextWord5424;
   
-  uVar8 = plane - 0x3000;
+  clipPlaneIndex = plane - 0x3000;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (uVar8 < 6) {
-      iVar9 = glContext + uVar8 * 0x10;
-      *(float *)(iVar9 + 0x418c) = (float)*equation;
-      *(float *)(iVar9 + 0x4190) = (float)equation[1];
-      *(float *)(iVar9 + 0x4194) = (float)equation[2];
-      *(float *)(iVar9 + 0x4198) = (float)equation[3];
+    if (clipPlaneIndex < 6) {
+      clipPlaneEquation = glContext + clipPlaneIndex * 0x10;
+      *(float *)(clipPlaneEquation + 0x418c) = (float)*equation;
+      *(float *)(clipPlaneEquation + 0x4190) = (float)equation[1];
+      *(float *)(clipPlaneEquation + 0x4194) = (float)equation[2];
+      *(float *)(clipPlaneEquation + 0x4198) = (float)equation[3];
       if ((*(uint *)(glContext + 0x50b0) & 0x10) != 0) {
         ((double (*)())_gleModelMatInvert)(glContext);
       }
-      fVar2 = *(float *)(iVar9 + 0x4190);
-      fVar3 = *(float *)(iVar9 + 0x418c);
-      fVar4 = *(float *)(iVar9 + 0x4194);
-      fVar5 = *(float *)(iVar9 + 0x4198);
-      *(float *)(iVar9 + 0x418c) =
-           fVar5 * *(float *)(glContext + 0x22f0) +
-           (fVar4 * *(float *)(glContext + 0x22e0) +
-           (fVar3 * *(float *)(glContext + 0x22c0) + fVar2 * *(float *)(glContext + 0x22d0)));
-      *(float *)(iVar9 + 0x4190) =
-           fVar5 * *(float *)(glContext + 0x22f4) +
-           (fVar4 * *(float *)(glContext + 0x22e4) +
-           (fVar3 * *(float *)(glContext + 0x22c4) + fVar2 * *(float *)(glContext + 0x22d4)));
-      *(float *)(iVar9 + 0x4194) =
-           fVar5 * *(float *)(glContext + 0x22f8) +
-           (fVar4 * *(float *)(glContext + 0x22e8) +
-           (fVar3 * *(float *)(glContext + 0x22c8) + fVar2 * *(float *)(glContext + 0x22d8)));
-      *(float *)(iVar9 + 0x4198) =
-           fVar5 * *(float *)(glContext + 0x22fc) +
-           (fVar4 * *(float *)(glContext + 0x22ec) +
-           (fVar3 * *(float *)(glContext + 0x22cc) + fVar2 * *(float *)(glContext + 0x22dc)));
+      planeB = *(float *)(clipPlaneEquation + 0x4190);
+      planeA = *(float *)(clipPlaneEquation + 0x418c);
+      planeC = *(float *)(clipPlaneEquation + 0x4194);
+      planeD = *(float *)(clipPlaneEquation + 0x4198);
+      *(float *)(clipPlaneEquation + 0x418c) =
+           planeD * *(float *)(glContext + 0x22f0) +
+           (planeC * *(float *)(glContext + 0x22e0) +
+           (planeA * *(float *)(glContext + 0x22c0) + planeB * *(float *)(glContext + 0x22d0)));
+      *(float *)(clipPlaneEquation + 0x4190) =
+           planeD * *(float *)(glContext + 0x22f4) +
+           (planeC * *(float *)(glContext + 0x22e4) +
+           (planeA * *(float *)(glContext + 0x22c4) + planeB * *(float *)(glContext + 0x22d4)));
+      *(float *)(clipPlaneEquation + 0x4194) =
+           planeD * *(float *)(glContext + 0x22f8) +
+           (planeC * *(float *)(glContext + 0x22e8) +
+           (planeA * *(float *)(glContext + 0x22c8) + planeB * *(float *)(glContext + 0x22d8)));
+      *(float *)(clipPlaneEquation + 0x4198) =
+           planeD * *(float *)(glContext + 0x22fc) +
+           (planeC * *(float *)(glContext + 0x22ec) +
+           (planeA * *(float *)(glContext + 0x22cc) + planeB * *(float *)(glContext + 0x22dc)));
       if (*(int *)(glContext + 0x5434) == 0) {
-        bVar1 = *(byte *)(uVar8 + *(int *)(glContext + 0x5420) + 0x31c);
+        dirtyBitNumber = *(byte *)(clipPlaneIndex + *(int *)(glContext + 0x5420) + 0x31c);
       }
       else {
-        bVar1 = *(byte *)(uVar8 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x350);
+        dirtyBitNumber = *(byte *)(clipPlaneIndex + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x350);
       }
-      iVar7 = (bVar1 >> 3 & 0x1c) + glContext;
+      dirtyWordAddress324 = (dirtyBitNumber >> 3 & 0x1c) + glContext;
       glContextWord5424 = *(int *)(glContext + 0x5424);
-      *(uint *)(iVar7 + 0x324) = *(uint *)(iVar7 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(uVar8 + glContextWord5424 + 0x31c);
-      iVar9 = (bVar1 >> 3 & 0x1c) + glContext;
-      *(uint *)(iVar9 + 0x348) = *(uint *)(iVar9 + 0x348) | 1 << (bVar1 & 0x1f);
-      *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 0x1000000 << (uVar8 & 0x3f);
+      *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitNumber & 0x1f);
+      dirtyBitNumber = *(byte *)(clipPlaneIndex + glContextWord5424 + 0x31c);
+      dirtyWordAddress348 = (dirtyBitNumber >> 3 & 0x1c) + glContext;
+      *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitNumber & 0x1f);
+      *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 0x1000000 << (clipPlaneIndex & 0x3f);
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {

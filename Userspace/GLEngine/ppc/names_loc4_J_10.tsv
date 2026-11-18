@@ -1,0 +1,103 @@
+local	_gleVPRenderLineStrip	cVar1	glContextByte4a18	INFERRED	glContext+0x4a18 (positional name, no field row): (byte == 0) is the last argument of the draw callback
+local	_gleVPRenderLineStrip	puVar2	lineStart	CONFIRMED	vertex record of the start of the line being built, advanced 0x100 bytes per segment; its successor is copied into the scratch slot
+local	_gleVPRenderLineStrip	iVar3	texEnableBits	CONFIRMED	_gleTexEnableBits(glContext) result, tested != 0 for texturing
+local	_gleVPRenderLineStrip	uVar4	batchClipCodes	CONFIRMED	_gleVPEmulate result: bits 8-15 non-zero reject the batch, bits 0-7 are the plane mask passed to _gleClipLines
+local	_gleVPRenderLineStrip	puVar5	drawVertices	CONFIRMED	vertex array (vertex-program vertices) or the line list at ctx+0x4870: second argument of the draw callback
+local	_gleVPRenderLineStrip	puVar6	lineListCursor	CONFIRMED	write cursor over the line list (two entries per segment: start vertex and its copied end vertex)
+local	_gleVPRenderLineStrip	uVar7	drawVertexCount	CONFIRMED	vertex count ((end - start) / ctx+0x487c), replaced by the list entry count and the clipped count: third argument of the draw callback
+local	_gleVPRenderLineStrip	uVar8	endVertexCopy	CONFIRMED	scratch vertex slot (starting at ctx+0x4854, +0x100 per segment) that receives a copy of the segment end vertex; its address is the second entry of the line
+local	_gleVPRenderLineStrip	puVar9	vertexArrayStart	INFERRED	glContext+0x4864: vertex array of the vertex-program path, end of the _gleVPEmulate output
+local	_gleVPRenderLines	iVar2	texEnableBits	CONFIRMED	_gleTexEnableBits(glContext) result, tested != 0 for texturing
+local	_gleVPRenderLines	uVar3	batchClipCodes	CONFIRMED	_gleVPEmulate result: bits 8-15 non-zero reject the batch, bits 0-7 are the plane mask passed to _gleClipLines
+local	_gleVPRenderLines	uVar5	drawVertexCount	CONFIRMED	vertex count ((end - start) / ctx+0x487c), replaced by the clipped count: third argument of the draw callback
+local	_gleVPRenderLines	uVar6	vertexCursor	CONFIRMED	starts at glContext+0x4864 (vertex array of the vertex-program path), advanced 0x100 per vertex while the line list is filled
+local	_gleVPRenderLines	puVar7	lineList	CONFIRMED	list at ctx+0x4870 of pointers to the vertex records, passed to the clippers and the draw callback
+local	_gleVPRenderLines	puVar4	lineListCursor	CONFIRMED	write cursor over lineList
+local	_gleVPRenderLines	uVar1	vertexEndThenRemaining	CONFIRMED	vertexCursor + count*0x100 (end of the vertices), then replaced by the number of vertex records left to list (countdown, -1 per step)
+local	_gleInitMap1Data	param_1	glContext	CONFIRMED	the GL context: +0x7450 holds the map1 data block
+local	_gleInitMap1Data	puVar1	map1Cursor	CONFIRMED	starts at *(glContext+0x7450) (the map1 evaluator data block, default maps written at fixed word offsets), then advanced 0x2c words per iteration of the loop that initializes the 16 per-attribute maps (order 1, u range 0..1, 1.0 defaults)
+local	_gleInitMap1Data	iVar3	remaining	CONFIRMED	loop countdown: starts at 0x10 and decrements per initialized map
+local	_gleFeedbackPointsFunc_body	bVar1	fixedFunctionPath	INFERRED	!(ctx+0x4664 != 0 || ctx+0x5434 != 0) after the negation: false selects the vertex-program path (_gleVPEmulate for the clip codes, ctx+0x4864 vertex array)
+local	_gleFeedbackPointsFunc_body	uVar2	batchClipCodes	CONFIRMED	clip code word returned by the ctx+0x5060 callback / _gleVPEmulate: bits 8-15 non-zero reject the batch, bits 0-7 are the plane mask
+local	_gleFeedbackPointsFunc_body	iVar3	pointCount	CONFIRMED	_gleClipPoints result (points kept), then the _gleClipPointsPlane result: number of entries of the point list to emit
+local	_gleFeedbackPointsFunc_body	puVar4	pointListCursor	CONFIRMED	starts at the point list ctx+0x4870 (the clip output), advanced one entry per emitted point
+local	_gleFeedbackPointsFunc_body	puVar5	pointListEnd	CONFIRMED	pointList + pointCount: loop bound of the emit loop
+local	_gleFeedbackPointsFunc_body	uVar6	vertexCursor	CONFIRMED	starts at ctx+0x4854 (ctx+0x4864 on the vertex-program path), advanced 0x100 per emitted point
+local	_gleFeedbackPointsFunc_body	uVar7	vertexCountThenEnd	CONFIRMED	vertex count ((ctx+0x4858 - ctx+0x4854) / ctx+0x487c), then vertexCursor + count*0x100 = end of the vertices, loop bound of the emit loop
+local	_gleClipLines	param_2	lineList	CONFIRMED	list of line segments as pairs of vertex pointers (start, end), compacted in place with the segments that survive each plane
+local	_gleClipLines	param_3	entryCount	CONFIRMED	number of entries (2 per line) of lineList; replaced by the compacted count after each plane and returned
+local	_gleClipLines	param_4	planeMask	INFERRED	bits 0-7 of the batch clip codes: the clip planes to process (bit tested against planeBit); the clip callback result is OR-ed into its low byte
+local	_gleClipLines	bVar1	clipResult	CONFIRMED	result of the ctx+0x49cc line clip callback (clips one endpoint against the plane), OR-ed into the plane mask byte
+local	_gleClipLines	bVar2	planeBit	CONFIRMED	1, shifted left per iteration up to 0x20: the clip plane being processed, tested against param_4 and against each vertex clip code byte (+0x7f)
+local	_gleClipLines	iVar3	lineStartVertex	CONFIRMED	first vertex pointer of the segment (*inputCursor)
+local	_gleClipLines	iVar6	lineEndVertex	CONFIRMED	second vertex pointer of the segment (inputCursor[1])
+local	_gleClipLines	piVar4	outputCursor	CONFIRMED	write cursor of the compacted list: surviving segments are stored two entries at a time
+local	_gleClipLines	piVar5	inputCursor	CONFIRMED	read cursor over the segments of lineList, advanced two entries per step
+local	_gleCullPolygonStack	param_2	vertexRecords	CONFIRMED	array of 0x100-byte vertex records (x at +0, y at +4) read at stride 0x40 floats: the polygon vertices
+local	_gleCullPolygonStack	param_3	vertexCount	CONFIRMED	number of polygon vertices: loop bound of the area accumulation
+local	_gleCullPolygonStack	param_4	windingFlip	INFERRED	XORed into the sign of the signed area before it is compared with the front-face setting (ctx+0x4fe1)
+local	_gleCullPolygonStack	param_5	backFacing	CONFIRMED	out parameter: receives orientation ^ 1 when the polygon is culled (returns 0), the orientation seen by the caller
+local	_gleCullPolygonStack	fVar1	firstX	CONFIRMED	x of the first vertex (*param_2), used to close the polygon
+local	_gleCullPolygonStack	fVar2	firstY	CONFIRMED	y of the first vertex (param_2[1]), used to close the polygon
+local	_gleCullPolygonStack	fVar3	lastY	CONFIRMED	y of the most recent vertex (starts as firstY), multiplied by the next x and by firstX when closing
+local	_gleCullPolygonStack	fVar4	lastX	CONFIRMED	x of the most recent vertex (starts as firstX), multiplied by firstY when closing
+local	_gleCullPolygonStack	fVar6	lastXTimesPreviousY	CONFIRMED	x of the current vertex times the y of the previous vertex: the subtracted term of the shoelace sum
+local	_gleCullPolygonStack	fVar7	previousX	CONFIRMED	x of the previous vertex, multiplied by the current y in the shoelace sum
+local	_gleCullPolygonStack	fVar8	signedAreaSum	CONFIRMED	running sum of previousX*currentY - currentX*previousY, starts at 0.0; its sign (with the closing edge) is the polygon winding
+local	_gleCullPolygonStack	iVar9	remaining	CONFIRMED	loop countdown: starts at vertexCount - 1, -1 per edge
+local	_gleCullPolygonStack	iVar10	vertexIndex	CONFIRMED	index of the current vertex (1 .. vertexCount-1), scaled by 0x40 floats
+local	_gleCullPolygonStack	uVar5	orientation	INFERRED	0/1 winding of the polygon: (ctx+0x4fe1 == (area > 0)) ^ windingFlip, compared with the cull-face selector byte ctx+0x4fe3
+use	_glOrtho_Exec	fVar1	rightMinusLeft	CONFIRMED	(float)(right - left): width of the volume, must not be ~0	^\s*fVar1\ =\ \(float\)\(fparam_2\ \-\ fparam_1\);$	+1
+use	_glOrtho_Exec	fVar1	rightMinusLeft	CONFIRMED	(float)(right - left): width of the volume, must not be ~0	^\s*fVar4\ =\ fVar1;$	+3
+use	_glOrtho_Exec	fVar1	rightMinusLeft	CONFIRMED	(float)(right - left): width of the volume, must not be ~0	^\s*dVar11\ =\ \(double\)\(1\.0\ /\ fVar1\);$	+1
+use	_glOrtho_Exec	fVar1	scaleZ	CONFIRMED	2 / (zNear - zFar): z scale factor of the orthographic matrix	^\s*fVar1\ =\ \(float\)\(dVar9\ \+\ dVar9\);$	+1
+use	_glOrtho_Exec	fVar1	scaleZ	CONFIRMED	2 / (zNear - zFar): z scale factor of the orthographic matrix	^\s*pfVar8\[0xb\]\ =\ pfVar8\[0xb\]\ \*\ fVar1;$	+1
+use	_glOrtho_Exec	fVar1	scaleZ	CONFIRMED	2 / (zNear - zFar): z scale factor of the orthographic matrix	^\s*pfVar8\[8\]\ =\ pfVar8\[8\]\ \*\ fVar1;$	+3
+use	_glOrtho_Exec	fVar2	topMinusBottom	CONFIRMED	(float)(top - bottom): height of the volume, must not be ~0	^\s*fVar2\ =\ \(float\)\(fparam_4\ \-\ fparam_3\);$	+1
+use	_glOrtho_Exec	fVar2	topMinusBottom	CONFIRMED	(float)(top - bottom): height of the volume, must not be ~0	^\s*fVar4\ =\ fVar2;$	+3
+use	_glOrtho_Exec	fVar2	topMinusBottom	CONFIRMED	(float)(top - bottom): height of the volume, must not be ~0	^\s*dVar10\ =\ \(double\)\(1\.0\ /\ fVar2\);$	+1
+use	_glOrtho_Exec	fVar2	scaleX	CONFIRMED	2 / (right - left): x scale factor of the orthographic matrix	^\s*fVar2\ =\ \(float\)\(dVar11\ \+\ dVar11\);$	+1
+use	_glOrtho_Exec	fVar2	scaleX	CONFIRMED	2 / (right - left): x scale factor of the orthographic matrix	^\s*pfVar8\[3\]\ =\ pfVar8\[3\]\ \*\ fVar2;$	+1
+use	_glOrtho_Exec	fVar2	scaleX	CONFIRMED	2 / (right - left): x scale factor of the orthographic matrix	^\s*\*pfVar8\ =\ \*pfVar8\ \*\ fVar2;$	+3
+use	_glOrtho_Exec	fVar3	nearMinusFar	CONFIRMED	(float)(zNear - zFar): depth of the volume, must not be ~0	^\s*fVar3\ =\ \(float\)\(fparam_5\ \-\ fparam_6\);$	+1
+use	_glOrtho_Exec	fVar3	nearMinusFar	CONFIRMED	(float)(zNear - zFar): depth of the volume, must not be ~0	^\s*fVar4\ =\ fVar3;$	+3
+use	_glOrtho_Exec	fVar3	nearMinusFar	CONFIRMED	(float)(zNear - zFar): depth of the volume, must not be ~0	^\s*dVar9\ =\ \(double\)\(1\.0\ /\ fVar3\);$	+1
+use	_glOrtho_Exec	fVar3	scaleY	CONFIRMED	2 / (top - bottom): y scale factor of the orthographic matrix	^\s*fVar3\ =\ \(float\)\(dVar10\ \+\ dVar10\);$	+1
+use	_glOrtho_Exec	fVar3	scaleY	CONFIRMED	2 / (top - bottom): y scale factor of the orthographic matrix	^\s*pfVar8\[7\]\ =\ pfVar8\[7\]\ \*\ fVar3;$	+1
+use	_glOrtho_Exec	fVar3	scaleY	CONFIRMED	2 / (top - bottom): y scale factor of the orthographic matrix	^\s*pfVar8\[4\]\ =\ pfVar8\[4\]\ \*\ fVar3;$	+3
+use	_glOrtho_Exec	fVar4	absRightMinusLeft	CONFIRMED	|right - left| compared with the epsilon FLOAT_00108e80 (GL_INVALID_VALUE when too small)	^\s*fVar4\ =\ fVar1;$	+1
+use	_glOrtho_Exec	fVar4	absRightMinusLeft	CONFIRMED	|right - left| compared with the epsilon FLOAT_00108e80 (GL_INVALID_VALUE when too small)	^\s*fVar4\ =\ \-fVar1;$	+1
+use	_glOrtho_Exec	fVar4	absRightMinusLeft	CONFIRMED	|right - left| compared with the epsilon FLOAT_00108e80 (GL_INVALID_VALUE when too small)	^\s*if\ \(!\(fVar4\ <\ FLOAT_00108e80\)\)\ \{$	+1
+use	_glOrtho_Exec	fVar4	absTopMinusBottom	CONFIRMED	|top - bottom| compared with the epsilon FLOAT_00108e80	^\s*fVar4\ =\ fVar2;$	+1
+use	_glOrtho_Exec	fVar4	absTopMinusBottom	CONFIRMED	|top - bottom| compared with the epsilon FLOAT_00108e80	^\s*fVar4\ =\ \-fVar2;$	+1
+use	_glOrtho_Exec	fVar4	absTopMinusBottom	CONFIRMED	|top - bottom| compared with the epsilon FLOAT_00108e80	^\s*if\ \(!\(fVar4\ <\ FLOAT_00108e80\)\)\ \{$@2	+1
+use	_glOrtho_Exec	fVar4	absNearMinusFar	CONFIRMED	|zNear - zFar| compared with the epsilon FLOAT_00108e80	^\s*fVar4\ =\ fVar3;$	+1
+use	_glOrtho_Exec	fVar4	absNearMinusFar	CONFIRMED	|zNear - zFar| compared with the epsilon FLOAT_00108e80	^\s*fVar4\ =\ \-fVar3;$	+1
+use	_glOrtho_Exec	fVar4	absNearMinusFar	CONFIRMED	|zNear - zFar| compared with the epsilon FLOAT_00108e80	^\s*if\ \(!\(fVar4\ <\ FLOAT_00108e80\)\)\ \{$@3	+1
+use	_glOrtho_Exec	fVar4	translateZ	CONFIRMED	(zFar + zNear) / (zNear - zFar): z translation of the orthographic matrix	^\s*fVar4\ =\ \(float\)\(\(fparam_6\ \+\ fparam_5\)\ \*\ dVar9\);$	+1
+use	_glOrtho_Exec	fVar4	translateZ	CONFIRMED	(zFar + zNear) / (zNear - zFar): z translation of the orthographic matrix	^\s*pfVar8\[0xc\]\ =\ pfVar8\[0xc\]\ \+\ \(pfVar8\[8\]\ \*\ fVar4\ \+\ \(\*pfVar8\ \*\ fVar5\ \+\ pfVar8\[4\]\ \*\ fVar6\)\);$	+4
+local	_glOrtho_Exec	fVar5	translateX	CONFIRMED	-(right + left) / (right - left): x translation of the orthographic matrix
+local	_glOrtho_Exec	fVar6	translateY	CONFIRMED	-(top + bottom) / (top - bottom): y translation of the orthographic matrix
+local	_glOrtho_Exec	dVar9	inverseNearMinusFar	CONFIRMED	1.0 / nearMinusFar
+local	_glOrtho_Exec	dVar10	inverseTopMinusBottom	CONFIRMED	1.0 / topMinusBottom
+local	_glOrtho_Exec	dVar11	inverseRightMinusLeft	CONFIRMED	1.0 / rightMinusLeft
+local	_glOrtho_ListExec	fVar1	translateY	CONFIRMED	listRecord[4]: y translation (the matrix is multiplied by translate * scale)
+local	_glOrtho_ListExec	fVar2	translateX	CONFIRMED	listRecord[3]: x translation
+local	_glOrtho_ListExec	fVar3	column0W	CONFIRMED	currentMatrix[3] (4th element of column 0) loaded before the multiply, used for the x terms of the last row after it was scaled
+local	_glOrtho_ListExec	fVar4	translateZ	CONFIRMED	listRecord[5]: z translation
+local	_glOrtho_ListExec	fVar5	scaleX	CONFIRMED	listRecord[0]: x scale, multiplies column 0 of the matrix
+local	_glOrtho_ListExec	fVar6	scaleZ	CONFIRMED	listRecord[2]: z scale, multiplies column 2 of the matrix
+local	_glOrtho_ListExec	fVar7	scaleY	CONFIRMED	listRecord[1]: y scale, multiplies column 1 of the matrix
+local	_glOrtho_ListExec	pfVar8	currentMatrix	CONFIRMED	*(glContext+0x4fec): the current 4x4 matrix being multiplied in place
+local	_glMaterialiv_Exec	local_40	materialRed	CONFIRMED	first of the four consecutive floats (r,g,b,a) built from params[0..3]: (int * FLOAT_00108e68 + FLOAT_00108e6c); its address is passed to _gleLightMaterialRGBAChange_*
+local	_glMaterialiv_Exec	local_3c	materialGreen	CONFIRMED	second of the four consecutive color floats, from params[1]
+local	_glMaterialiv_Exec	local_38	materialBlue	CONFIRMED	third of the four consecutive color floats, from params[2]
+local	_glMaterialiv_Exec	local_34	materialAlpha	CONFIRMED	fourth of the four consecutive color floats, from params[3]
+local	_glMaterialiv_Exec	local_30	intToDoubleHigh	CONFIRMED	high word 0x43300000 of the CONCAT44(0x43300000, x) integer-to-double conversion
+local	_glMaterialiv_Exec	uStack_2c	intToDoubleLow	CONFIRMED	low word x (value ^ 0x80000000) of the CONCAT44(0x43300000, x) integer-to-double conversion
+local	_glMaterialiv_Exec	uVar3	firstFaceIndex	CONFIRMED	first face of the range written for GL_COLOR_INDEXES: 0 for GL_FRONT (0x404) and GL_FRONT_AND_BACK (0x408), 1 for GL_BACK (0x405)
+local	_glMaterialiv_Exec	uVar5	lastFaceIndex	CONFIRMED	last face of the range written for GL_COLOR_INDEXES: 0 for GL_FRONT, 1 for GL_BACK and GL_FRONT_AND_BACK
+local	_glMaterialiv_Exec	iVar4	faceMaterialEntry	CONFIRMED	glContext + face*0x10: per-face material entry, receives the three color indexes at +0x2f0/+0x2f4/+0x2f8
+local	_glMaterialiv_Exec	dVar7	ambientIndexAsDouble	CONFIRMED	(double)(params[0] * 0x101) via the integer-to-double conversion: ambient color index, stored to +0x2f0
+local	_glMaterialiv_Exec	dVar8	diffuseIndexAsDouble	CONFIRMED	(double)(params[1] * 0x101): diffuse color index, stored to +0x2f4
+local	_glMaterialiv_Exec	dVar6	specularIndexAsDouble	CONFIRMED	(double)(params[2] * 0x101): specular color index, stored to +0x2f8

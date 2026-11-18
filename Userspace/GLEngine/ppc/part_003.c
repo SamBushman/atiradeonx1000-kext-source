@@ -863,81 +863,81 @@ void _glDeleteTextures_Exec_body(glContext, n, textures)
 }
 
 /* _gleDeleteHashNamesAndObjects @ 0x201d4 (340 bytes) */
-void _gleDeleteHashNamesAndObjects(glContext, param_2, list, listRange)
+void _gleDeleteHashNamesAndObjects(glContext, hashTable, list, listRange)
   undefined4 glContext;
-  int param_2;
+  int hashTable;
   uint list;
   int listRange;
 {
-  uint uVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
-  int *piVar5;
+  uint hashName;
+  int *nextRangeNode;
+  int referenceCount;
+  int hashObject;
+  int *previousLink;
   int *allocatedBlock;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
-  uint uVar9;
-  uint uVar10;
-  int *piVar11;
+  uint deleteEnd;
+  uint overlapStart;
+  uint rangeEndName;
+  uint rangeFirstName;
+  uint overlapEnd;
+  int *rangeNode;
   
-  uVar6 = list + listRange;
-  piVar2 = (int *)*(int *)(param_2 + 0x1000);
-  piVar5 = (int *)(param_2 + 0x1000);
+  deleteEnd = list + listRange;
+  nextRangeNode = (int *)*(int *)(hashTable + 0x1000);
+  previousLink = (int *)(hashTable + 0x1000);
   do {
     while( true ) {
-      piVar11 = piVar2;
-      if (piVar11 == (int *)0x0) {
+      rangeNode = nextRangeNode;
+      if (rangeNode == (int *)0x0) {
         return;
       }
-      uVar9 = piVar11[1];
-      uVar8 = uVar9 + piVar11[2];
-      if (uVar6 <= uVar9) {
+      rangeFirstName = rangeNode[1];
+      rangeEndName = rangeFirstName + rangeNode[2];
+      if (deleteEnd <= rangeFirstName) {
         return;
       }
-      if (list < uVar8) break;
+      if (list < rangeEndName) break;
 LAB_00020304:
-      piVar2 = (int *)*piVar11;
-      piVar5 = piVar11;
+      nextRangeNode = (int *)*rangeNode;
+      previousLink = rangeNode;
     }
-    uVar7 = list;
-    if (list < uVar9) {
-      uVar7 = uVar9;
+    overlapStart = list;
+    if (list < rangeFirstName) {
+      overlapStart = rangeFirstName;
     }
-    uVar1 = uVar7;
-    uVar10 = uVar6;
-    if (uVar8 < uVar6) {
-      uVar10 = uVar8;
+    hashName = overlapStart;
+    overlapEnd = deleteEnd;
+    if (rangeEndName < deleteEnd) {
+      overlapEnd = rangeEndName;
     }
-    for (; uVar1 < uVar10; uVar1 = uVar1 + 1) {
-      iVar4 = ((int (*)())_gleRemoveHashObject)(param_2,uVar1);
-      if ((iVar4 != 0) &&
-         (iVar3 = *(int *)(iVar4 + 8) + -1, *(int *)(iVar4 + 8) = iVar3, iVar3 == 0)) {
-        (**(code **)(iVar4 + 0xc))(glContext);
+    for (; hashName < overlapEnd; hashName = hashName + 1) {
+      hashObject = ((int (*)())_gleRemoveHashObject)(hashTable,hashName);
+      if ((hashObject != 0) &&
+         (referenceCount = *(int *)(hashObject + 8) + -1, *(int *)(hashObject + 8) = referenceCount, referenceCount == 0)) {
+        (**(code **)(hashObject + 0xc))(glContext);
       }
     }
-    if (uVar9 < uVar7) {
-      piVar11[2] = uVar7 - uVar9;
-      if (uVar10 < uVar8) {
+    if (rangeFirstName < overlapStart) {
+      rangeNode[2] = overlapStart - rangeFirstName;
+      if (overlapEnd < rangeEndName) {
         allocatedBlock = (int *)_malloc(0xc);
-        iVar4 = *piVar11;
-        allocatedBlock[1] = uVar10;
-        *allocatedBlock = iVar4;
-        allocatedBlock[2] = uVar8 - uVar10;
-        *piVar11 = (int)allocatedBlock;
-        piVar11 = allocatedBlock;
+        hashObject = *rangeNode;
+        allocatedBlock[1] = overlapEnd;
+        *allocatedBlock = hashObject;
+        allocatedBlock[2] = rangeEndName - overlapEnd;
+        *rangeNode = (int)allocatedBlock;
+        rangeNode = allocatedBlock;
       }
       goto LAB_00020304;
     }
-    if (uVar10 < uVar8) {
-      piVar11[1] = uVar10;
-      piVar11[2] = uVar8 - uVar10;
+    if (overlapEnd < rangeEndName) {
+      rangeNode[1] = overlapEnd;
+      rangeNode[2] = rangeEndName - overlapEnd;
       goto LAB_00020304;
     }
-    *piVar5 = *piVar11;
-    _free(piVar11);
-    piVar2 = (int *)*piVar5;
+    *previousLink = *rangeNode;
+    _free(rangeNode);
+    nextRangeNode = (int *)*previousLink;
   } while( true );
 }
 

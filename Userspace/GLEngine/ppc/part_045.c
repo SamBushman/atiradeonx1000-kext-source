@@ -165,52 +165,52 @@ void _gleBeginLineLoopSelectFeedback(glContext)
 }
 
 /* _gleClipLines @ 0xd7b94 (284 bytes) */
-int _gleClipLines(glContext, param_2, param_3, param_4)
+int _gleClipLines(glContext, lineList, entryCount, planeMask)
   int glContext;
-  int *param_2;
-  int param_3;
-  undefined4 param_4;
+  int *lineList;
+  int entryCount;
+  undefined4 planeMask;
 {
-  byte bVar1;
-  byte bVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
-  int iVar6;
+  byte clipResult;
+  byte planeBit;
+  int lineStartVertex;
+  int *outputCursor;
+  int *inputCursor;
+  int lineEndVertex;
   
-  bVar2 = 1;
+  planeBit = 1;
   do {
-    if (((byte)param_4 & bVar2) != 0) {
-      piVar4 = param_2;
-      for (piVar5 = param_2; piVar5 < param_2 + param_3 + -1; piVar5 = piVar5 + 2) {
-        iVar3 = *piVar5;
-        iVar6 = piVar5[1];
-        if ((bVar2 & *(byte *)(iVar3 + 0x7f)) == 0) {
-          if ((bVar2 & *(byte *)(iVar6 + 0x7f)) != 0) {
-            bVar1 = (**(code **)(glContext + 0x49cc))(glContext,iVar6,iVar3,iVar6,bVar2);
-            (*(unsigned char *)((unsigned char *)&(param_4) + 3)) = (byte)param_4 | bVar1;
+    if (((byte)planeMask & planeBit) != 0) {
+      outputCursor = lineList;
+      for (inputCursor = lineList; inputCursor < lineList + entryCount + -1; inputCursor = inputCursor + 2) {
+        lineStartVertex = *inputCursor;
+        lineEndVertex = inputCursor[1];
+        if ((planeBit & *(byte *)(lineStartVertex + 0x7f)) == 0) {
+          if ((planeBit & *(byte *)(lineEndVertex + 0x7f)) != 0) {
+            clipResult = (**(code **)(glContext + 0x49cc))(glContext,lineEndVertex,lineStartVertex,lineEndVertex,planeBit);
+            (*(unsigned char *)((unsigned char *)&(planeMask) + 3)) = (byte)planeMask | clipResult;
           }
-          *piVar4 = iVar3;
-          piVar4[1] = iVar6;
+          *outputCursor = lineStartVertex;
+          outputCursor[1] = lineEndVertex;
 LAB_000d7c68:
-          piVar4 = piVar4 + 2;
+          outputCursor = outputCursor + 2;
         }
-        else if ((bVar2 & *(byte *)(iVar6 + 0x7f)) == 0) {
-          bVar1 = (**(code **)(glContext + 0x49cc))(glContext,iVar3,iVar6,iVar3,bVar2);
-          *piVar4 = iVar3;
-          (*(unsigned char *)((unsigned char *)&(param_4) + 3)) = (byte)param_4 | bVar1;
-          piVar4[1] = iVar6;
+        else if ((planeBit & *(byte *)(lineEndVertex + 0x7f)) == 0) {
+          clipResult = (**(code **)(glContext + 0x49cc))(glContext,lineStartVertex,lineEndVertex,lineStartVertex,planeBit);
+          *outputCursor = lineStartVertex;
+          (*(unsigned char *)((unsigned char *)&(planeMask) + 3)) = (byte)planeMask | clipResult;
+          outputCursor[1] = lineEndVertex;
           goto LAB_000d7c68;
         }
       }
-      param_3 = (int)piVar4 - (int)param_2 >> 2;
-      if (param_3 < 2) {
+      entryCount = (int)outputCursor - (int)lineList >> 2;
+      if (entryCount < 2) {
         return 0;
       }
     }
-    bVar2 = bVar2 << 1;
-    if (0x20 < bVar2) {
-      return param_3;
+    planeBit = planeBit << 1;
+    if (0x20 < planeBit) {
+      return entryCount;
     }
   } while( true );
 }
@@ -4230,20 +4230,22 @@ void _gleEvalDomain2Coord(undefined4 glContext,int points,int uorder,int vorder,
 }
 
 /* _gleEvalDomainDeriv2Coord @ 0xde104 (572 bytes) */
-void _gleEvalDomainDeriv2Coord(undefined4 glContext,int param_2,int param_3,int param_4,undefined4 unusedArg5,undefined4 unusedArg6,int param_7,int param_8,int param_9,int param_10,float floatArg1,float floatArg2,double floatArg3,double floatArg4,float floatArg5,float floatArg6,float floatArg7,float floatArg8,float unusedFloatArg9,float unusedFloatArg10,float unusedFloatArg11,float unusedFloatArg12,float unusedFloatArg13)
+void _gleEvalDomainDeriv2Coord(undefined4 glContext,int controlPoints,int uOrder,int vOrder,undefined4 unusedArg5,undefined4 unusedArg6,int componentCount,int outDerivU,int outDerivV,int outValue,float floatArg1,float floatArg2,double floatArg3,double floatArg4,float floatArg5,float floatArg6,float floatArg7,float floatArg8,float unusedFloatArg9,float unusedFloatArg10,float unusedFloatArg11,float unusedFloatArg12,float unusedFloatArg13)
 {
   float fVar1;
-  float fVar2;
-  int iVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  int iVar8;
-  float *pfVar9;
-  int iVar10;
-  int iVar11;
+  float controlPointValue;
+  int componentByteOffset;
+  float derivVSum;
+  float vDerivRowSum;
+  float valueSum;
+  float derivUSum;
+  int uIndex;
+  float *controlPointCursor;
+  int vIndex;
+  int nextUIndex;
+  int nextVIndex;
   int iVar12;
+  int componentIndex;
   float dVar13;
   double incomingStack_ffffff78;
   double incomingStack_ffffff80;
@@ -4251,152 +4253,152 @@ void _gleEvalDomainDeriv2Coord(undefined4 glContext,int param_2,int param_3,int 
   double incomingStack_ffffff90;
   double incomingStack_ffffff98;
   
-  iVar12 = param_3;
+  iVar12 = uOrder;
   dVar13 = floatArg2;
-  if ((((double)GH_U2F((unsigned int)_uvalue_c) != floatArg1) || (_utype_c != 1)) || (_uorder_c != param_3)) {
-    ((void (*)())_glePreEvaluateWithDeriv)(glContext,param_3,param_3,&_ucoeff_c,&_ucoeffDeriv_c,floatArg1,floatArg2,floatArg3,
+  if ((((double)GH_U2F((unsigned int)_uvalue_c) != floatArg1) || (_utype_c != 1)) || (_uorder_c != uOrder)) {
+    ((void (*)())_glePreEvaluateWithDeriv)(glContext,uOrder,uOrder,&_ucoeff_c,&_ucoeffDeriv_c,floatArg1,floatArg2,floatArg3,
                floatArg4,floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff78,incomingStack_ffffff80,
                incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
     _utype_c = 1;
     _uvalue_c = GH_F2U((float)floatArg1);
-    _uorder_c = param_3;
+    _uorder_c = uOrder;
   }
-  if ((((double)GH_U2F((unsigned int)_vvalue_c) != floatArg2) || (_vtype_c != 1)) || (_vorder_c != param_4)) {
-    ((void (*)())_glePreEvaluateWithDeriv)(glContext,param_4,iVar12,&_vcoeff_c,&_vcoeffDeriv_c,floatArg2,(double)dVar13,floatArg3,floatArg4,
+  if ((((double)GH_U2F((unsigned int)_vvalue_c) != floatArg2) || (_vtype_c != 1)) || (_vorder_c != vOrder)) {
+    ((void (*)())_glePreEvaluateWithDeriv)(glContext,vOrder,iVar12,&_vcoeff_c,&_vcoeffDeriv_c,floatArg2,(double)dVar13,floatArg3,floatArg4,
                floatArg5,floatArg6,floatArg7,floatArg8,incomingStack_ffffff78,incomingStack_ffffff80,
                incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
     _vtype_c = 1;
     _vvalue_c = GH_F2U((float)floatArg2);
-    _vorder_c = param_4;
+    _vorder_c = vOrder;
   }
-  iVar12 = 0;
-  if (0 < param_7) {
+  componentIndex = 0;
+  if (0 < componentCount) {
     do {
-      iVar8 = 0;
-      iVar3 = iVar12 * 4;
-      pfVar9 = (float *)(param_2 + iVar3);
-      fVar4 = FLOAT_00108e50;
-      fVar6 = FLOAT_00108e50;
-      fVar7 = FLOAT_00108e50;
-      if (0 < param_3) {
+      uIndex = 0;
+      componentByteOffset = componentIndex * 4;
+      controlPointCursor = (float *)(controlPoints + componentByteOffset);
+      derivVSum = FLOAT_00108e50;
+      valueSum = FLOAT_00108e50;
+      derivUSum = FLOAT_00108e50;
+      if (0 < uOrder) {
         do {
-          iVar10 = 1;
-          fVar1 = *pfVar9;
-          pfVar9 = pfVar9 + param_7;
-          fVar5 = GH_U2F((unsigned int)_vcoeffDeriv_c) * fVar1;
+          vIndex = 1;
+          fVar1 = *controlPointCursor;
+          controlPointCursor = controlPointCursor + componentCount;
+          vDerivRowSum = GH_U2F((unsigned int)_vcoeffDeriv_c) * fVar1;
           fVar1 = GH_U2F((unsigned int)_vcoeff_c) * fVar1;
-          if (1 < param_4) {
+          if (1 < vOrder) {
             do {
-              iVar11 = iVar10 + 1;
-              fVar2 = *pfVar9;
-              pfVar9 = pfVar9 + param_7;
-              fVar5 = GH_U2F((unsigned int)((&_vcoeffDeriv_c)[iVar10])) * fVar2 + fVar5;
-              fVar1 = GH_U2F((unsigned int)((&_vcoeff_c)[iVar10])) * fVar2 + fVar1;
-              iVar10 = iVar11;
-            } while (iVar11 < param_4);
+              nextVIndex = vIndex + 1;
+              controlPointValue = *controlPointCursor;
+              controlPointCursor = controlPointCursor + componentCount;
+              vDerivRowSum = GH_U2F((unsigned int)((&_vcoeffDeriv_c)[vIndex])) * controlPointValue + vDerivRowSum;
+              fVar1 = GH_U2F((unsigned int)((&_vcoeff_c)[vIndex])) * controlPointValue + fVar1;
+              vIndex = nextVIndex;
+            } while (nextVIndex < vOrder);
           }
-          iVar10 = iVar8 + 1;
-          fVar4 = GH_U2F((unsigned int)((&_ucoeff_c)[iVar8])) * fVar5 + fVar4;
-          fVar7 = GH_U2F((unsigned int)((&_ucoeffDeriv_c)[iVar8])) * fVar1 + fVar7;
-          fVar6 = GH_U2F((unsigned int)((&_ucoeff_c)[iVar8])) * fVar1 + fVar6;
-          iVar8 = iVar10;
-        } while (iVar10 < param_3);
+          nextUIndex = uIndex + 1;
+          derivVSum = GH_U2F((unsigned int)((&_ucoeff_c)[uIndex])) * vDerivRowSum + derivVSum;
+          derivUSum = GH_U2F((unsigned int)((&_ucoeffDeriv_c)[uIndex])) * fVar1 + derivUSum;
+          valueSum = GH_U2F((unsigned int)((&_ucoeff_c)[uIndex])) * fVar1 + valueSum;
+          uIndex = nextUIndex;
+        } while (nextUIndex < uOrder);
       }
-      iVar12 = iVar12 + 1;
-      *(float *)(iVar3 + param_10) = fVar6;
-      *(float *)(iVar3 + param_8) = fVar7;
-      *(float *)(iVar3 + param_9) = fVar4;
-    } while (iVar12 < param_7);
+      componentIndex = componentIndex + 1;
+      *(float *)(componentByteOffset + outValue) = valueSum;
+      *(float *)(componentByteOffset + outDerivU) = derivUSum;
+      *(float *)(componentByteOffset + outDerivV) = derivVSum;
+    } while (componentIndex < componentCount);
   }
   return;
 }
 
 /* _gleInitMap1Data @ 0xde340 (336 bytes) */
-void _gleInitMap1Data(param_1)
-  int param_1;
+void _gleInitMap1Data(glContext)
+  int glContext;
 {
-  undefined4 *puVar1;
+  undefined4 *map1Cursor;
   undefined4 *puVar2;
-  int iVar3;
+  int remaining;
   
-  puVar1 = *(undefined4 **)(param_1 + 0x7450);
-  iVar3 = 0x10;
-  *puVar1 = 1;
-  puVar1[1] = 0;
-  puVar1[2] = 0x3f800000;
-  puVar2 = puVar1 + 0x276a;
-  puVar1[3] = 0x3f800000;
-  puVar1[4] = 0;
-  puVar1[5] = 0;
-  puVar1[6] = 0;
-  puVar1[0x22] = 1;
-  puVar1[0x23] = 0;
-  puVar1[0x24] = 0x3f800000;
-  puVar1[0x25] = 0x3f800000;
-  puVar1[0x26] = 0;
-  puVar1[0x27] = 0;
-  puVar1[0x28] = 0;
-  puVar1[0x29] = 0x3f800000;
-  puVar1[0x4e] = 1;
-  puVar1[0x4f] = 0;
-  puVar1[0x50] = 0x3f800000;
-  puVar1[0x51] = 0x3f800000;
-  puVar1[0x52] = 0;
-  puVar1[0x53] = 0;
-  puVar1[0x54] = 0x3f800000;
-  puVar1[0x70] = 1;
-  puVar1[0x71] = 0;
-  puVar1[0x72] = 0x3f800000;
-  puVar1[0x73] = 0x3f800000;
-  puVar1[0x74] = 0x3f800000;
-  puVar1[0x75] = 0x3f800000;
-  puVar1[0x76] = 0x3f800000;
-  puVar1[0x77] = 0x3f800000;
-  puVar1[0x9c] = 1;
-  puVar1[0x9d] = 0;
-  puVar1[0x9e] = 0x3f800000;
-  puVar1[0xf2] = 1;
-  puVar1[0x9f] = 0x3f800000;
-  puVar1[0xa0] = 0x3f800000;
-  puVar1[0xaa] = 1;
-  puVar1[0xab] = 0;
-  puVar1[0xac] = 0x3f800000;
-  puVar1[0xad] = 0x3f800000;
-  puVar1[0xae] = 0;
-  puVar1[0xb8] = 1;
-  puVar1[0xb9] = 0;
-  puVar1[0xba] = 0x3f800000;
-  puVar1[0xbb] = 0x3f800000;
-  puVar1[0xbc] = 0;
-  puVar1[0xbd] = 0;
-  puVar1[0xd0] = 1;
-  puVar1[0xd1] = 0;
-  puVar1[0xd2] = 0x3f800000;
-  puVar1[0xd3] = 0x3f800000;
-  puVar1[0xd4] = 0;
-  puVar1[0xd5] = 0;
-  puVar1[0xd6] = 0;
-  puVar1[0xf3] = 0;
-  puVar1[0xf4] = 0x3f800000;
-  puVar1[0xf5] = 0x3f800000;
-  puVar1[0xf6] = 0;
-  puVar1[0xf7] = 0;
-  puVar1[0xf8] = 0;
-  puVar1[0xf9] = 0x3f800000;
+  map1Cursor = *(undefined4 **)(glContext + 0x7450);
+  remaining = 0x10;
+  *map1Cursor = 1;
+  map1Cursor[1] = 0;
+  map1Cursor[2] = 0x3f800000;
+  puVar2 = map1Cursor + 0x276a;
+  map1Cursor[3] = 0x3f800000;
+  map1Cursor[4] = 0;
+  map1Cursor[5] = 0;
+  map1Cursor[6] = 0;
+  map1Cursor[0x22] = 1;
+  map1Cursor[0x23] = 0;
+  map1Cursor[0x24] = 0x3f800000;
+  map1Cursor[0x25] = 0x3f800000;
+  map1Cursor[0x26] = 0;
+  map1Cursor[0x27] = 0;
+  map1Cursor[0x28] = 0;
+  map1Cursor[0x29] = 0x3f800000;
+  map1Cursor[0x4e] = 1;
+  map1Cursor[0x4f] = 0;
+  map1Cursor[0x50] = 0x3f800000;
+  map1Cursor[0x51] = 0x3f800000;
+  map1Cursor[0x52] = 0;
+  map1Cursor[0x53] = 0;
+  map1Cursor[0x54] = 0x3f800000;
+  map1Cursor[0x70] = 1;
+  map1Cursor[0x71] = 0;
+  map1Cursor[0x72] = 0x3f800000;
+  map1Cursor[0x73] = 0x3f800000;
+  map1Cursor[0x74] = 0x3f800000;
+  map1Cursor[0x75] = 0x3f800000;
+  map1Cursor[0x76] = 0x3f800000;
+  map1Cursor[0x77] = 0x3f800000;
+  map1Cursor[0x9c] = 1;
+  map1Cursor[0x9d] = 0;
+  map1Cursor[0x9e] = 0x3f800000;
+  map1Cursor[0xf2] = 1;
+  map1Cursor[0x9f] = 0x3f800000;
+  map1Cursor[0xa0] = 0x3f800000;
+  map1Cursor[0xaa] = 1;
+  map1Cursor[0xab] = 0;
+  map1Cursor[0xac] = 0x3f800000;
+  map1Cursor[0xad] = 0x3f800000;
+  map1Cursor[0xae] = 0;
+  map1Cursor[0xb8] = 1;
+  map1Cursor[0xb9] = 0;
+  map1Cursor[0xba] = 0x3f800000;
+  map1Cursor[0xbb] = 0x3f800000;
+  map1Cursor[0xbc] = 0;
+  map1Cursor[0xbd] = 0;
+  map1Cursor[0xd0] = 1;
+  map1Cursor[0xd1] = 0;
+  map1Cursor[0xd2] = 0x3f800000;
+  map1Cursor[0xd3] = 0x3f800000;
+  map1Cursor[0xd4] = 0;
+  map1Cursor[0xd5] = 0;
+  map1Cursor[0xd6] = 0;
+  map1Cursor[0xf3] = 0;
+  map1Cursor[0xf4] = 0x3f800000;
+  map1Cursor[0xf5] = 0x3f800000;
+  map1Cursor[0xf6] = 0;
+  map1Cursor[0xf7] = 0;
+  map1Cursor[0xf8] = 0;
+  map1Cursor[0xf9] = 0x3f800000;
   do {
     *(undefined1 *)puVar2 = 4;
     puVar2 = (undefined4 *)((int)puVar2 + 1);
-    puVar1[0xb2a] = 1;
-    puVar1[0xb2b] = 0;
-    puVar1[0xb2c] = 0x3f800000;
-    puVar1[0xb2d] = 0x3f800000;
-    puVar1[0xb2e] = 0;
-    puVar1[0xb2f] = 0;
-    puVar1[0xb30] = 0;
-    puVar1[0xb31] = 0x3f800000;
-    puVar1 = puVar1 + 0x2c;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    map1Cursor[0xb2a] = 1;
+    map1Cursor[0xb2b] = 0;
+    map1Cursor[0xb2c] = 0x3f800000;
+    map1Cursor[0xb2d] = 0x3f800000;
+    map1Cursor[0xb2e] = 0;
+    map1Cursor[0xb2f] = 0;
+    map1Cursor[0xb30] = 0;
+    map1Cursor[0xb31] = 0x3f800000;
+    map1Cursor = map1Cursor + 0x2c;
+    remaining = remaining + -1;
+  } while (remaining != 0);
   return;
 }
 

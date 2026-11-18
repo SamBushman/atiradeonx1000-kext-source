@@ -3,40 +3,40 @@
 /* _glOrtho_ListExec @ 0x793f0 (360 bytes) */
 undefined4 _glOrtho_ListExec(int glContext,float *listRecord,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float *pfVar8;
+  float translateY;
+  float translateX;
+  float column0W;
+  float translateZ;
+  float scaleX;
+  float scaleZ;
+  float scaleY;
+  float *currentMatrix;
   
-  pfVar8 = *(float **)(glContext + 0x4fec);
+  currentMatrix = *(float **)(glContext + 0x4fec);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    fVar1 = listRecord[4];
-    fVar2 = listRecord[3];
-    fVar3 = pfVar8[3];
-    fVar4 = listRecord[5];
-    fVar5 = *listRecord;
-    fVar6 = listRecord[2];
-    fVar7 = listRecord[1];
-    pfVar8[0xc] = pfVar8[0xc] + (pfVar8[8] * fVar4 + (*pfVar8 * fVar2 + pfVar8[4] * fVar1));
-    pfVar8[3] = fVar3 * fVar5;
-    pfVar8[0xd] = pfVar8[0xd] + (pfVar8[9] * fVar4 + (pfVar8[1] * fVar2 + pfVar8[5] * fVar1));
-    pfVar8[0xe] = pfVar8[0xe] + (pfVar8[10] * fVar4 + (pfVar8[2] * fVar2 + pfVar8[6] * fVar1));
-    pfVar8[0xf] = pfVar8[0xf] + (pfVar8[0xb] * fVar4 + (fVar3 * fVar2 + pfVar8[7] * fVar1));
-    *pfVar8 = *pfVar8 * fVar5;
-    pfVar8[1] = pfVar8[1] * fVar5;
-    pfVar8[2] = pfVar8[2] * fVar5;
-    pfVar8[4] = pfVar8[4] * fVar7;
-    pfVar8[5] = pfVar8[5] * fVar7;
-    pfVar8[6] = pfVar8[6] * fVar7;
-    pfVar8[7] = pfVar8[7] * fVar7;
-    pfVar8[0xb] = pfVar8[0xb] * fVar6;
-    pfVar8[8] = pfVar8[8] * fVar6;
-    pfVar8[9] = pfVar8[9] * fVar6;
-    pfVar8[10] = pfVar8[10] * fVar6;
+    translateY = listRecord[4];
+    translateX = listRecord[3];
+    column0W = currentMatrix[3];
+    translateZ = listRecord[5];
+    scaleX = *listRecord;
+    scaleZ = listRecord[2];
+    scaleY = listRecord[1];
+    currentMatrix[0xc] = currentMatrix[0xc] + (currentMatrix[8] * translateZ + (*currentMatrix * translateX + currentMatrix[4] * translateY));
+    currentMatrix[3] = column0W * scaleX;
+    currentMatrix[0xd] = currentMatrix[0xd] + (currentMatrix[9] * translateZ + (currentMatrix[1] * translateX + currentMatrix[5] * translateY));
+    currentMatrix[0xe] = currentMatrix[0xe] + (currentMatrix[10] * translateZ + (currentMatrix[2] * translateX + currentMatrix[6] * translateY));
+    currentMatrix[0xf] = currentMatrix[0xf] + (currentMatrix[0xb] * translateZ + (column0W * translateX + currentMatrix[7] * translateY));
+    *currentMatrix = *currentMatrix * scaleX;
+    currentMatrix[1] = currentMatrix[1] * scaleX;
+    currentMatrix[2] = currentMatrix[2] * scaleX;
+    currentMatrix[4] = currentMatrix[4] * scaleY;
+    currentMatrix[5] = currentMatrix[5] * scaleY;
+    currentMatrix[6] = currentMatrix[6] * scaleY;
+    currentMatrix[7] = currentMatrix[7] * scaleY;
+    currentMatrix[0xb] = currentMatrix[0xb] * scaleZ;
+    currentMatrix[8] = currentMatrix[8] * scaleZ;
+    currentMatrix[9] = currentMatrix[9] * scaleZ;
+    currentMatrix[10] = currentMatrix[10] * scaleZ;
     *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | *(uint *)(glContext + 0x50a8);
     *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | *(uint *)(glContext + 0x50a8);
   }
