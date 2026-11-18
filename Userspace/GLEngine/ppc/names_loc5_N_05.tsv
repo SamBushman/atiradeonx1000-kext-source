@@ -1,0 +1,33 @@
+local	_glColor4ub_Exec	uVar1	alphaBits	CONFIRMED	float bits read from the ubyte-to-float table at ctx+0x4674 indexed by alpha, stored at ctx+0x2ac (current alpha)
+local	_glColor4ub_Exec	uVar2	greenBits	CONFIRMED	float bits read from the ubyte-to-float table at ctx+0x4674 indexed by green, stored at ctx+0x2a4 (current green)
+local	_glColor4ub_Exec	uVar3	blueBits	CONFIRMED	float bits read from the ubyte-to-float table at ctx+0x4674 indexed by blue, stored at ctx+0x2a8 (current blue)
+local	_glColor3ubv_Exec	uVar1	blueBits	CONFIRMED	float bits read from the ubyte-to-float table at ctx+0x4674 indexed by v[2], stored at ctx+0x2a8 (current blue)
+local	_glColor3ubv_Exec	uVar2	greenBits	CONFIRMED	float bits read from the ubyte-to-float table at ctx+0x4674 indexed by v[1], stored at ctx+0x2a4 (current green)
+local	_glColor4iv_Exec	fVar2	greenFloat	CONFIRMED	v[1] converted from int, scaled and biased, stored at ctx+0x2a4 (current green)
+local	_glColor4iv_Exec	fVar3	alphaFloat	CONFIRMED	v[3] converted from int, scaled and biased, stored at ctx+0x2ac (current alpha)
+local	_glColor4iv_Exec	fVar1	blueFloat	CONFIRMED	v[2] converted from int, scaled and biased, stored at ctx+0x2a8 (current blue)
+local	_glColor4fv_ColorMat_Exec	uVar1	alphaBits	CONFIRMED	v[3] (alpha float bits copied unchanged to ctx+0x2ac)
+local	_glColor4fv_ColorMat_Exec	uVar2	greenBits	CONFIRMED	v[1] (green float bits copied unchanged to ctx+0x2a4)
+local	_glColor4fv_ColorMat_Exec	uVar3	blueBits	CONFIRMED	v[2] (blue float bits copied unchanged to ctx+0x2a8)
+local	_glSecondaryColor3ub_Exec	fVar1	blueFloat	CONFIRMED	blue converted from ubyte and scaled, stored at ctx+0x2c8 (current secondary blue)
+local	_glSecondaryColor3ub_Exec	fVar2	greenFloat	CONFIRMED	green converted from ubyte and scaled, stored at ctx+0x2c4 (current secondary green)
+local	_glSecondaryColor3dv_Exec	dVar1	redDouble	CONFIRMED	v[0], stored as float at ctx+0x2c0 (current secondary red)
+local	_glSecondaryColor3dv_Exec	dVar2	greenDouble	CONFIRMED	v[1], stored as float at ctx+0x2c4 (current secondary green)
+local	_glNormal3i_Exec	dVar2	nzScaled	CONFIRMED	nz converted from int and scaled by DOUBLE_00108d88, stored as float at ctx+0x2b8 (current normal z)
+local	_glNormal3i_Exec	dVar1	nxScaled	CONFIRMED	nx converted from int and scaled by DOUBLE_00108d88, stored as float at ctx+0x2b0 (current normal x)
+local	_glSecondaryColor3iv_Exec	fVar2	blueFloat	CONFIRMED	v[2] converted from int, scaled and biased, stored at ctx+0x2c8 (current secondary blue)
+local	_glSecondaryColor3iv_Exec	fVar1	greenFloat	CONFIRMED	v[1] converted from int, scaled and biased, stored at ctx+0x2c4 (current secondary green)
+local	_glSecondaryColor3uiv_Exec	fVar1	blueFloat	CONFIRMED	v[2] converted from uint and scaled, stored at ctx+0x2c8 (current secondary blue)
+local	_glSecondaryColor3uiv_Exec	fVar2	greenFloat	CONFIRMED	v[1] converted from uint and scaled, stored at ctx+0x2c4 (current secondary green)
+local	_glNormal3sv_Exec	fVar1	nxFloat	CONFIRMED	v[0] converted from short and scaled, stored at ctx+0x2b0 (current normal x)
+local	_glNormal3sv_Exec	fVar2	nzFloat	CONFIRMED	v[2] converted from short and scaled, stored at ctx+0x2b8 (current normal z)
+local	_glNormal3dv_Exec	dVar1	nyDouble	CONFIRMED	v[1], stored as float at ctx+0x2b4 (current normal y)
+local	_glNormal3dv_Exec	dVar2	nzDouble	CONFIRMED	v[2], stored as float at ctx+0x2b8 (current normal z)
+local	_glMultiTexCoord2f_Exec	iVar3	unitTexCoord	CONFIRMED	ctx + (target & 7)*0x10: the current texture coordinate record of the unit (+0x120..+0x12c), same expression named unitTexCoord in the sibling MultiTexCoord functions
+local	_glColor3fv_ColorMat_Exec	uVar1	blueBits	CONFIRMED	v[2] (blue float bits copied unchanged to ctx+0x2a8)
+local	_glColor3fv_ColorMat_Exec	uVar2	greenBits	CONFIRMED	v[1] (green float bits copied unchanged to ctx+0x2a4)
+local	_glVertex4s_Exec	pcVar1	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or the flush/submit function from ctx+0x28 / _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertex4_ListExec	pcVar1	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or the flush/submit function from ctx+0x28 / _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertex3iv_Exec	pcVar1	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or the flush/submit function from ctx+0x28 / _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertex2sv_Exec	pcVar1	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or the flush/submit function from ctx+0x28 / _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertex2i_Exec	pcVar1	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or the flush/submit function from ctx+0x28 / _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec

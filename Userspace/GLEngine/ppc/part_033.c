@@ -174,13 +174,13 @@ void _glVertex3iv_Exec(glContext, v)
   undefined4 incomingR5;
   undefined4 incomingR6;
   undefined4 incomingR7;
-  code *pcVar1;
+  code *vertexFunc;
   
-  pcVar1 = *(code **)(glContext + 0x4884);
+  vertexFunc = *(code **)(glContext + 0x4884);
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-    pcVar1 = *(code **)(glContext + 0x28);
+    vertexFunc = *(code **)(glContext + 0x28);
   }
-  (*pcVar1)(glContext,v,incomingR5,incomingR6,incomingR7,*(int *)(glContext + 0x4858),v[1] ^ 0x80000000,
+  (*vertexFunc)(glContext,v,incomingR5,incomingR6,incomingR7,*(int *)(glContext + 0x4858),v[1] ^ 0x80000000,
             (double)(float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58),
             (double)(float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - DOUBLE_00108d58),
             (double)(float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58),
@@ -381,13 +381,13 @@ void _glVertex2sv_Exec(glContext, v)
   undefined4 incomingR5;
   undefined4 incomingR6;
   undefined4 incomingR7;
-  code *pcVar1;
+  code *vertexFunc;
   
-  pcVar1 = *(code **)(glContext + 0x4884);
+  vertexFunc = *(code **)(glContext + 0x4884);
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-    pcVar1 = *(code **)(glContext + 0x28);
+    vertexFunc = *(code **)(glContext + 0x28);
   }
-  (*pcVar1)(glContext,v,incomingR5,incomingR6,incomingR7,*(int *)(glContext + 0x4858),0x43300000,
+  (*vertexFunc)(glContext,v,incomingR5,incomingR6,incomingR7,*(int *)(glContext + 0x4858),0x43300000,
             (double)(float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) -
                            DOUBLE_00108d58),
             (double)(float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) -
@@ -538,13 +538,13 @@ void _glVertex4s_Exec(glContext, x, y, z, w)
   uint z;
   uint w;
 {
-  code *pcVar1;
+  code *vertexFunc;
   
-  pcVar1 = *(code **)(glContext + 0x4884);
+  vertexFunc = *(code **)(glContext + 0x4884);
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-    pcVar1 = *(code **)(glContext + 0x28);
+    vertexFunc = *(code **)(glContext + 0x28);
   }
-  (*pcVar1)(glContext,x,y,z,w,*(int *)(glContext + 0x4858),z ^ 0x80000000,
+  (*vertexFunc)(glContext,x,y,z,w,*(int *)(glContext + 0x4858),z ^ 0x80000000,
             (double)(float)((double)CONCAT44(0x43300000,x ^ 0x80000000) - DOUBLE_00108d58),
             (double)(float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - DOUBLE_00108d58),
             (double)(float)((double)CONCAT44(0x43300000,z ^ 0x80000000) - DOUBLE_00108d58),

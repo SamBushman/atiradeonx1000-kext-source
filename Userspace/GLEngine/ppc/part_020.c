@@ -440,14 +440,14 @@ double _glNormal3dv_Exec(glContext, v)
   int glContext;
   double *v;
 {
-  double dVar1;
-  double dVar2;
+  double nyDouble;
+  double nzDouble;
   
-  dVar1 = v[1];
-  dVar2 = v[2];
+  nyDouble = v[1];
+  nzDouble = v[2];
   *(float *)(glContext + 0x2b0) = (float)*v;
-  *(float *)(glContext + 0x2b4) = (float)dVar1;
-  *(float *)(glContext + 0x2b8) = (float)dVar2;
+  *(float *)(glContext + 0x2b4) = (float)nyDouble;
+  *(float *)(glContext + 0x2b8) = (float)nzDouble;
   return;
 }
 
@@ -531,18 +531,18 @@ void _glNormal3i_Comp(glContext, nx, ny, nz)
 /* _glNormal3i_Exec @ 0x7832c (144 bytes) */
 void _glNormal3i_Exec(int glContext,uint nx,uint ny,uint nz,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
-  double dVar1;
-  double dVar2;
+  double nxScaled;
+  double nzScaled;
   
-  dVar2 = (double)(float)((double)CONCAT44(0x43300000,nz ^ 0x80000000) - DOUBLE_00108d58) *
+  nzScaled = (double)(float)((double)CONCAT44(0x43300000,nz ^ 0x80000000) - DOUBLE_00108d58) *
           DOUBLE_00108d88;
-  dVar1 = (double)(float)((double)CONCAT44(0x43300000,nx ^ 0x80000000) - DOUBLE_00108d58) *
+  nxScaled = (double)(float)((double)CONCAT44(0x43300000,nx ^ 0x80000000) - DOUBLE_00108d58) *
           DOUBLE_00108d88;
   *(float *)(glContext + 0x2b4) =
        (float)((double)(float)((double)CONCAT44(0x43300000,ny ^ 0x80000000) - DOUBLE_00108d58)
               * DOUBLE_00108d88);
-  *(float *)(glContext + 0x2b8) = (float)dVar2;
-  *(float *)(glContext + 0x2b0) = (float)dVar1;
+  *(float *)(glContext + 0x2b8) = (float)nzScaled;
+  *(float *)(glContext + 0x2b0) = (float)nxScaled;
   return;
 }
 
@@ -706,18 +706,18 @@ double _glNormal3sv_Exec(glContext, v)
   int glContext;
   short *v;
 {
-  float fVar1;
-  float fVar2;
+  float nxFloat;
+  float nzFloat;
   
-  fVar1 = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
+  nxFloat = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e9c;
-  fVar2 = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - DOUBLE_00108d58) *
+  nzFloat = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e9c;
   *(float *)(glContext + 0x2b4) =
        (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e9c;
-  *(float *)(glContext + 0x2b0) = fVar1;
-  *(float *)(glContext + 0x2b8) = fVar2;
+  *(float *)(glContext + 0x2b0) = nxFloat;
+  *(float *)(glContext + 0x2b8) = nzFloat;
   return;
 }
 

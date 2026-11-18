@@ -2288,33 +2288,33 @@ int _glWeightARB_ListExec(glContext, listRecord)
   int glContext;
   int *listRecord;
 {
-  int iVar1;
+  int slotByteOffset;
   int *dstCursor;
-  int iVar3;
-  int iVar4;
+  int weightCount;
+  int nextSlot;
   int remaining;
   
-  iVar3 = *listRecord;
-  iVar4 = 0;
-  if (0 < iVar3) {
+  weightCount = *listRecord;
+  nextSlot = 0;
+  if (0 < weightCount) {
     dstCursor = (int *)(glContext + 0x2d0);
-    remaining = iVar3;
+    remaining = weightCount;
     do {
       listRecord = listRecord + 1;
       *dstCursor = *listRecord;
       dstCursor = dstCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);
-    iVar4 = iVar3;
-    if (3 < iVar3) goto LAB_000aae74;
+    nextSlot = weightCount;
+    if (3 < weightCount) goto LAB_000aae74;
   }
   do {
-    iVar1 = iVar4 * 4;
-    iVar4 = iVar4 + 1;
-    *(undefined4 *)(iVar1 + glContext + 0x2d0) = 0;
-  } while (iVar4 < 4);
+    slotByteOffset = nextSlot * 4;
+    nextSlot = nextSlot + 1;
+    *(undefined4 *)(slotByteOffset + glContext + 0x2d0) = 0;
+  } while (nextSlot < 4);
 LAB_000aae74:
-  return iVar3 * 4 + 4;
+  return weightCount * 4 + 4;
 }
 
 /* _glWeightbvARB_Exec @ 0xaae80 (188 bytes) */

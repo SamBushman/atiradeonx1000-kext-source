@@ -2547,19 +2547,19 @@ double _glMultiTexCoord4fv_Exec(glContext, target, v)
   uint target;
   undefined4 *v;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  int iVar4;
+  undefined4 texCoordQ;
+  undefined4 texCoordT;
+  undefined4 texCoordR;
+  int unitTexCoord;
   
-  uVar1 = v[3];
-  iVar4 = glContext + (target & 7) * 0x10;
-  uVar2 = v[1];
-  uVar3 = v[2];
-  *(undefined4 *)(iVar4 + 0x120) = *v;
-  *(undefined4 *)(iVar4 + 300) = uVar1;
-  *(undefined4 *)(iVar4 + 0x124) = uVar2;
-  *(undefined4 *)(iVar4 + 0x128) = uVar3;
+  texCoordQ = v[3];
+  unitTexCoord = glContext + (target & 7) * 0x10;
+  texCoordT = v[1];
+  texCoordR = v[2];
+  *(undefined4 *)(unitTexCoord + 0x120) = *v;
+  *(undefined4 *)(unitTexCoord + 300) = texCoordQ;
+  *(undefined4 *)(unitTexCoord + 0x124) = texCoordT;
+  *(undefined4 *)(unitTexCoord + 0x128) = texCoordR;
   *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
   return;
 }

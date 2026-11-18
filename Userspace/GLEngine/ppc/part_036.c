@@ -418,23 +418,23 @@ double _glVertexAttrib3svARB_Exec(glContext, index, v)
   uint index;
   short *v;
 {
-  undefined4 uVar1;
+  undefined4 oneBits;
   short sVar2;
   double intToDoubleBias;
-  int iVar4;
+  int attribRecord;
   undefined4 incomingR6;
   undefined4 incomingR7;
-  code *pcVar5;
+  code *vertexFunc;
   
   intToDoubleBias = DOUBLE_00108d58;
   if (index < 0x10) {
-    uVar1 = *(undefined4 *)(glContext + 0x24);
+    oneBits = *(undefined4 *)(glContext + 0x24);
     if (index == 0) {
-      pcVar5 = *(code **)(glContext + 0x4884);
+      vertexFunc = *(code **)(glContext + 0x4884);
       if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-        pcVar5 = (code *)PTR__gleFlushAndSubmit_00112050;
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar5)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),
+      (*vertexFunc)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),
                 (int)v[1] ^ 0x80000000U,
                 (double)(float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) -
                                DOUBLE_00108d58),
@@ -444,14 +444,14 @@ double _glVertexAttrib3svARB_Exec(glContext, index, v)
                                DOUBLE_00108d58));
     }
     else {
-      iVar4 = glContext + index * 0x10;
-      *(float *)(iVar4 + 0x1a0) =
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) =
            (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58);
-      *(float *)(iVar4 + 0x1a4) =
+      *(float *)(attribRecord + 0x1a4) =
            (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleBias);
       sVar2 = v[2];
-      *(undefined4 *)(iVar4 + 0x1ac) = uVar1;
-      *(float *)(iVar4 + 0x1a8) =
+      *(undefined4 *)(attribRecord + 0x1ac) = oneBits;
+      *(float *)(attribRecord + 0x1a8) =
            (float)((double)CONCAT44(0x43300000,(int)sVar2 ^ 0x80000000) - intToDoubleBias);
     }
   }
@@ -920,16 +920,16 @@ double _glVertexAttrib4ubvARB_Exec(int glContext,uint index,byte *v,double unuse
 {
   int iVar1;
   undefined4 incomingR6;
-  code *pcVar2;
+  code *vertexFunc;
   
   if (index < 0x10) {
     if (index == 0) {
       iVar1 = *(int *)(glContext + 0x4858);
-      pcVar2 = *(code **)(glContext + 0x4884);
+      vertexFunc = *(code **)(glContext + 0x4884);
       if (iVar1 == *(int *)(glContext + 0x485c)) {
-        pcVar2 = (code *)PTR__gleFlushAndSubmit_00112050;
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar2)(glContext,0,v,incomingR6,iVar1,iVar1,(uint)v[2],v[1] | 0x4b000000,
+      (*vertexFunc)(glContext,0,v,incomingR6,iVar1,iVar1,(uint)v[2],v[1] | 0x4b000000,
                 (double)(GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0),
                 (double)(GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0),
                 (double)(GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0),
@@ -1151,25 +1151,25 @@ double _glVertexAttrib4fvARB_Exec(glContext, index, v)
   uint index;
   float *v;
 {
-  int iVar1;
-  code *UNRECOVERED_JUMPTABLE;
+  int attribRecord;
+  code *vertexFunc;
   
   if (index < 0x10) {
     if (index != 0) {
-      iVar1 = glContext + index * 0x10;
-      *(float *)(iVar1 + 0x1a0) = *v;
-      *(float *)(iVar1 + 0x1a4) = v[1];
-      *(float *)(iVar1 + 0x1a8) = v[2];
-      *(float *)(iVar1 + 0x1ac) = v[3];
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) = *v;
+      *(float *)(attribRecord + 0x1a4) = v[1];
+      *(float *)(attribRecord + 0x1a8) = v[2];
+      *(float *)(attribRecord + 0x1ac) = v[3];
       return;
     }
-    UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x4884);
+    vertexFunc = *(code **)(glContext + 0x4884);
     if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-      UNRECOVERED_JUMPTABLE = (code *)PTR__gleFlushAndSubmit_00112050;
+      vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
     }
                     
                     
-    (*((int (*)(int,int,int,double,double,double,double))UNRECOVERED_JUMPTABLE))
+    (*((int (*)(int,int,int,double,double,double,double))vertexFunc))
               (glContext, index, v, (double)*v, (double)v[1], (double)v[2], (double)v[3]);
     return;
   }

@@ -109,14 +109,14 @@ double _glSecondaryColor3dv_Exec(glContext, v)
   int glContext;
   double *v;
 {
-  double dVar1;
-  double dVar2;
+  double redDouble;
+  double greenDouble;
   
-  dVar1 = *v;
-  dVar2 = v[1];
+  redDouble = *v;
+  greenDouble = v[1];
   *(float *)(glContext + 0x2c8) = (float)v[2];
-  *(float *)(glContext + 0x2c0) = (float)dVar1;
-  *(float *)(glContext + 0x2c4) = (float)dVar2;
+  *(float *)(glContext + 0x2c0) = (float)redDouble;
+  *(float *)(glContext + 0x2c4) = (float)greenDouble;
   return;
 }
 
@@ -153,14 +153,14 @@ void _glSecondaryColor3ub_Exec(glContext, red, green, blue)
   uint green;
   uint blue;
 {
-  float fVar1;
-  float fVar2;
+  float blueFloat;
+  float greenFloat;
   
-  fVar1 = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-  fVar2 = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+  blueFloat = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+  greenFloat = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
   *(float *)(glContext + 0x2c0) = (GH_U2F((unsigned int)((red | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-  *(float *)(glContext + 0x2c8) = fVar1;
-  *(float *)(glContext + 0x2c4) = fVar2;
+  *(float *)(glContext + 0x2c8) = blueFloat;
+  *(float *)(glContext + 0x2c4) = greenFloat;
   return;
 }
 
@@ -392,15 +392,15 @@ double _glSecondaryColor3uiv_Exec(glContext, v)
   int glContext;
   undefined4 *v;
 {
-  float fVar1;
-  float fVar2;
+  float blueFloat;
+  float greenFloat;
   
-  fVar1 = (float)((double)CONCAT44(0x43300000,v[2]) - DOUBLE_00108d70) * FLOAT_00108e6c;
-  fVar2 = (float)((double)CONCAT44(0x43300000,v[1]) - DOUBLE_00108d70) * FLOAT_00108e6c;
+  blueFloat = (float)((double)CONCAT44(0x43300000,v[2]) - DOUBLE_00108d70) * FLOAT_00108e6c;
+  greenFloat = (float)((double)CONCAT44(0x43300000,v[1]) - DOUBLE_00108d70) * FLOAT_00108e6c;
   *(float *)(glContext + 0x2c0) =
        (float)((double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70) * FLOAT_00108e6c;
-  *(float *)(glContext + 0x2c8) = fVar1;
-  *(float *)(glContext + 0x2c4) = fVar2;
+  *(float *)(glContext + 0x2c8) = blueFloat;
+  *(float *)(glContext + 0x2c4) = greenFloat;
   return;
 }
 

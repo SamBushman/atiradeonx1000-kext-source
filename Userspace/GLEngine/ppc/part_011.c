@@ -199,16 +199,16 @@ double _glColor3ubv_Exec(glContext, v)
   int glContext;
   byte *v;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 blueBits;
+  undefined4 greenBits;
   int glContextPtr4674;
   
   glContextPtr4674 = *(int *)(glContext + 0x4674);
-  uVar1 = *(undefined4 *)(glContextPtr4674 + (uint)v[2] * 4);
-  uVar2 = *(undefined4 *)((uint)v[1] * 4 + glContextPtr4674);
+  blueBits = *(undefined4 *)(glContextPtr4674 + (uint)v[2] * 4);
+  greenBits = *(undefined4 *)((uint)v[1] * 4 + glContextPtr4674);
   *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)((uint)*v * 4 + glContextPtr4674);
-  *(undefined4 *)(glContext + 0x2a4) = uVar2;
-  *(undefined4 *)(glContext + 0x2a8) = uVar1;
+  *(undefined4 *)(glContext + 0x2a4) = greenBits;
+  *(undefined4 *)(glContext + 0x2a8) = blueBits;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
   if (*(char *)(glContext + 0x4df8) == '\0') {
     return;
@@ -258,19 +258,19 @@ void _glColor3ui_Exec(glContext, red, green, blue)
   undefined4 green;
   undefined4 blue;
 {
-  float fVar1;
-  double dVar2;
-  double dVar3;
-  double dVar4;
+  float channelScale;
+  double redDouble;
+  double greenDouble;
+  double blueDouble;
   
-  fVar1 = FLOAT_00108e6c;
-  dVar2 = (double)CONCAT44(0x43300000,red) - DOUBLE_00108d70;
-  dVar4 = (double)CONCAT44(0x43300000,blue) - DOUBLE_00108d70;
-  dVar3 = (double)CONCAT44(0x43300000,green) - DOUBLE_00108d70;
+  channelScale = FLOAT_00108e6c;
+  redDouble = (double)CONCAT44(0x43300000,red) - DOUBLE_00108d70;
+  blueDouble = (double)CONCAT44(0x43300000,blue) - DOUBLE_00108d70;
+  greenDouble = (double)CONCAT44(0x43300000,green) - DOUBLE_00108d70;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
-  *(float *)(glContext + 0x2a0) = (float)dVar2 * fVar1;
-  *(float *)(glContext + 0x2a8) = (float)dVar4 * fVar1;
-  *(float *)(glContext + 0x2a4) = (float)dVar3 * fVar1;
+  *(float *)(glContext + 0x2a0) = (float)redDouble * channelScale;
+  *(float *)(glContext + 0x2a8) = (float)blueDouble * channelScale;
+  *(float *)(glContext + 0x2a4) = (float)greenDouble * channelScale;
   if (*(char *)(glContext + 0x4df8) != '\0') {
     (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
   }
@@ -506,22 +506,22 @@ void _glColor4b_Exec(glContext, red, green, blue, alpha)
   uint blue;
   uint alpha;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
+  float blueFloat;
+  float greenFloat;
+  float alphaFloat;
   
-  fVar2 = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - DOUBLE_00108d58) *
+  greenFloat = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e60 + FLOAT_00108e64;
-  fVar3 = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - DOUBLE_00108d58) *
+  alphaFloat = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e60 + FLOAT_00108e64;
-  fVar1 = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - DOUBLE_00108d58) *
+  blueFloat = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e60 + FLOAT_00108e64;
   *(float *)(glContext + 0x2a0) =
        (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e60
        + FLOAT_00108e64;
-  *(float *)(glContext + 0x2a4) = fVar2;
-  *(float *)(glContext + 0x2ac) = fVar3;
-  *(float *)(glContext + 0x2a8) = fVar1;
+  *(float *)(glContext + 0x2a4) = greenFloat;
+  *(float *)(glContext + 0x2ac) = alphaFloat;
+  *(float *)(glContext + 0x2a8) = blueFloat;
   if (*(char *)(glContext + 0x4df8) != '\0') {
     (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
   }
@@ -715,17 +715,17 @@ double _glColor4fv_ColorMat_Exec(glContext, v)
   int glContext;
   undefined4 *v;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
+  undefined4 alphaBits;
+  undefined4 greenBits;
+  undefined4 blueBits;
   
-  uVar1 = v[3];
-  uVar2 = v[1];
-  uVar3 = v[2];
+  alphaBits = v[3];
+  greenBits = v[1];
+  blueBits = v[2];
   *(undefined4 *)(glContext + 0x2a0) = *v;
-  *(undefined4 *)(glContext + 0x2a4) = uVar2;
-  *(undefined4 *)(glContext + 0x2a8) = uVar3;
-  *(undefined4 *)(glContext + 0x2ac) = uVar1;
+  *(undefined4 *)(glContext + 0x2a4) = greenBits;
+  *(undefined4 *)(glContext + 0x2a8) = blueBits;
+  *(undefined4 *)(glContext + 0x2ac) = alphaBits;
                     
                     
   (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
@@ -848,22 +848,22 @@ double _glColor4iv_Exec(glContext, v)
   int glContext;
   uint *v;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
+  float blueFloat;
+  float greenFloat;
+  float alphaFloat;
   
-  fVar2 = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - DOUBLE_00108d58) *
+  greenFloat = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e68 + FLOAT_00108e6c;
-  fVar3 = (float)((double)CONCAT44(0x43300000,v[3] ^ 0x80000000) - DOUBLE_00108d58) *
+  alphaFloat = (float)((double)CONCAT44(0x43300000,v[3] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e68 + FLOAT_00108e6c;
-  fVar1 = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58) *
+  blueFloat = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e68 + FLOAT_00108e6c;
   *(float *)(glContext + 0x2a0) =
        (float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e68 + FLOAT_00108e6c;
-  *(float *)(glContext + 0x2a4) = fVar2;
-  *(float *)(glContext + 0x2ac) = fVar3;
-  *(float *)(glContext + 0x2a8) = fVar1;
+  *(float *)(glContext + 0x2a4) = greenFloat;
+  *(float *)(glContext + 0x2ac) = alphaFloat;
+  *(float *)(glContext + 0x2a8) = blueFloat;
   if (*(char *)(glContext + 0x4df8) != '\0') {
     (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
   }

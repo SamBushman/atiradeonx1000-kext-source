@@ -102,22 +102,22 @@ double _glVertexAttrib4NbvARB_Exec(glContext, index, v)
 {
   double intToDoubleBias;
   float channelScale;
-  float fVar3;
-  int iVar4;
+  float channelBias;
+  int attribRecord;
   undefined4 incomingR6;
   undefined4 incomingR7;
-  code *pcVar5;
+  code *vertexFunc;
   
-  fVar3 = FLOAT_00108e64;
+  channelBias = FLOAT_00108e64;
   channelScale = FLOAT_00108e60;
   intToDoubleBias = DOUBLE_00108d58;
   if (index < 0x10) {
     if (index == 0) {
-      pcVar5 = *(code **)(glContext + 0x4884);
+      vertexFunc = *(code **)(glContext + 0x4884);
       if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-        pcVar5 = (code *)PTR__gleFlushAndSubmit_00112050;
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar5)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),&DAT_0010f52c,0x43300000,
+      (*vertexFunc)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),&DAT_0010f52c,0x43300000,
                 (double)((float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) -
                                 DOUBLE_00108d58) * FLOAT_00108e60 + FLOAT_00108e64),
                 (double)((float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) -
@@ -128,19 +128,19 @@ double _glVertexAttrib4NbvARB_Exec(glContext, index, v)
                                 DOUBLE_00108d58) * FLOAT_00108e60 + FLOAT_00108e64));
     }
     else {
-      iVar4 = glContext + index * 0x10;
-      *(float *)(iVar4 + 0x1a0) =
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) =
            (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
            FLOAT_00108e60 + FLOAT_00108e64;
-      *(float *)(iVar4 + 0x1a4) =
+      *(float *)(attribRecord + 0x1a4) =
            (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleBias) * channelScale +
-           fVar3;
-      *(float *)(iVar4 + 0x1a8) =
+           channelBias;
+      *(float *)(attribRecord + 0x1a8) =
            (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleBias) * channelScale +
-           fVar3;
-      *(float *)(iVar4 + 0x1ac) =
+           channelBias;
+      *(float *)(attribRecord + 0x1ac) =
            (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - intToDoubleBias) * channelScale +
-           fVar3;
+           channelBias;
     }
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
@@ -537,20 +537,20 @@ double _glVertexAttrib4NuivARB_Exec(glContext, index, v)
 {
   double intToDoubleBias;
   float channelScale;
-  int iVar3;
+  int attribRecord;
   undefined4 incomingR6;
   undefined4 incomingR7;
-  code *pcVar4;
+  code *vertexFunc;
   
   channelScale = FLOAT_00108e6c;
   intToDoubleBias = DOUBLE_00108d70;
   if (index < 0x10) {
     if (index == 0) {
-      pcVar4 = *(code **)(glContext + 0x4884);
+      vertexFunc = *(code **)(glContext + 0x4884);
       if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-        pcVar4 = (code *)PTR__gleFlushAndSubmit_00112050;
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar4)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),v[1],
+      (*vertexFunc)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),v[1],
                 (double)((float)((double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70) *
                         FLOAT_00108e6c),
                 (double)((float)((double)CONCAT44(0x43300000,v[1]) - DOUBLE_00108d70) *
@@ -561,12 +561,12 @@ double _glVertexAttrib4NuivARB_Exec(glContext, index, v)
                         FLOAT_00108e6c));
     }
     else {
-      iVar3 = glContext + index * 0x10;
-      *(float *)(iVar3 + 0x1a0) =
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) =
            (float)((double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70) * FLOAT_00108e6c;
-      *(float *)(iVar3 + 0x1a4) = (float)((double)CONCAT44(0x43300000,v[1]) - intToDoubleBias) * channelScale;
-      *(float *)(iVar3 + 0x1a8) = (float)((double)CONCAT44(0x43300000,v[2]) - intToDoubleBias) * channelScale;
-      *(float *)(iVar3 + 0x1ac) = (float)((double)CONCAT44(0x43300000,v[3]) - intToDoubleBias) * channelScale;
+      *(float *)(attribRecord + 0x1a4) = (float)((double)CONCAT44(0x43300000,v[1]) - intToDoubleBias) * channelScale;
+      *(float *)(attribRecord + 0x1a8) = (float)((double)CONCAT44(0x43300000,v[2]) - intToDoubleBias) * channelScale;
+      *(float *)(attribRecord + 0x1ac) = (float)((double)CONCAT44(0x43300000,v[3]) - intToDoubleBias) * channelScale;
     }
   }
   else if (*(int *)(glContext + 0x7574) == 0) {

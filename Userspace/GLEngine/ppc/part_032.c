@@ -2472,13 +2472,13 @@ int _glVertex4_ListExec(glContext, listRecord)
   int glContext;
   float *listRecord;
 {
-  code *pcVar1;
+  code *vertexFunc;
   
-  pcVar1 = *(code **)(glContext + 0x4884);
+  vertexFunc = *(code **)(glContext + 0x4884);
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-    pcVar1 = *(code **)(glContext + 0x28);
+    vertexFunc = *(code **)(glContext + 0x28);
   }
-  (*pcVar1)(glContext,(double)*listRecord,(double)listRecord[1],(double)listRecord[2],(double)listRecord[3]);
+  (*vertexFunc)(glContext,(double)*listRecord,(double)listRecord[1],(double)listRecord[2],(double)listRecord[3]);
   return 0x10;
 }
 

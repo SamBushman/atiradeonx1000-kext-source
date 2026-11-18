@@ -3843,19 +3843,19 @@ void _glColor4ub_Exec(glContext, red, green, blue, alpha)
   int blue;
   int alpha;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
+  undefined4 alphaBits;
+  undefined4 greenBits;
+  undefined4 blueBits;
   int glContextWord4674;
   
   glContextWord4674 = *(int *)(glContext + 0x4674);
-  uVar1 = *(undefined4 *)(alpha * 4 + glContextWord4674);
-  uVar2 = *(undefined4 *)(green * 4 + glContextWord4674);
-  uVar3 = *(undefined4 *)(blue * 4 + glContextWord4674);
+  alphaBits = *(undefined4 *)(alpha * 4 + glContextWord4674);
+  greenBits = *(undefined4 *)(green * 4 + glContextWord4674);
+  blueBits = *(undefined4 *)(blue * 4 + glContextWord4674);
   *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)(red * 4 + glContextWord4674);
-  *(undefined4 *)(glContext + 0x2a4) = uVar2;
-  *(undefined4 *)(glContext + 0x2a8) = uVar3;
-  *(undefined4 *)(glContext + 0x2ac) = uVar1;
+  *(undefined4 *)(glContext + 0x2a4) = greenBits;
+  *(undefined4 *)(glContext + 0x2a8) = blueBits;
+  *(undefined4 *)(glContext + 0x2ac) = alphaBits;
   if (*(char *)(glContext + 0x4df8) == '\0') {
     return;
   }
@@ -4774,15 +4774,15 @@ void _glMultiTexCoord2f_Exec(int glContext,uint target,float sCoord,float tCoord
 {
   undefined4 glContextWord24;
   undefined4 glContextWord20;
-  int iVar3;
+  int unitTexCoord;
   
   glContextWord24 = *(undefined4 *)(glContext + 0x24);
   glContextWord20 = *(undefined4 *)(glContext + 0x20);
-  iVar3 = glContext + (target & 7) * 0x10;
-  *(float *)(iVar3 + 0x120) = (float)sCoord;
-  *(undefined4 *)(iVar3 + 300) = glContextWord24;
-  *(float *)(iVar3 + 0x124) = (float)tCoord;
-  *(undefined4 *)(iVar3 + 0x128) = glContextWord20;
+  unitTexCoord = glContext + (target & 7) * 0x10;
+  *(float *)(unitTexCoord + 0x120) = (float)sCoord;
+  *(undefined4 *)(unitTexCoord + 300) = glContextWord24;
+  *(float *)(unitTexCoord + 0x124) = (float)tCoord;
+  *(undefined4 *)(unitTexCoord + 0x128) = glContextWord20;
   return;
 }
 

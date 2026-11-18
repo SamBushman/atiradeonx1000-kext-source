@@ -1,0 +1,59 @@
+local	_glVertexAttrib1svARB_Exec	iVar2	attribRecord	CONFIRMED	ctx + index*0x10: the current generic attribute record (components at +0x1a0..+0x1ac) for attribute index
+local	_glVertexAttrib1svARB_Exec	fVar1	zero	CONFIRMED	ctx+0x20 float used as the default value of the missing y/z components (GL spec: glVertexAttrib1 gives (x,0,0,1))
+local	_glVertexAttrib1svARB_Exec	pcVar3	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertexAttrib3svARB_Exec	iVar4	attribRecord	CONFIRMED	ctx + index*0x10: the current generic attribute record (components at +0x1a0..+0x1ac) for attribute index
+local	_glVertexAttrib3svARB_Exec	uVar1	oneBits	CONFIRMED	ctx+0x24 (the float 1.0 used as default w component) copied as raw bits into the attribute record +0x1ac
+local	_glVertexAttrib3svARB_Exec	pcVar5	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertexAttrib1dARB_Exec	iVar3	attribRecord	CONFIRMED	ctx + index*0x10: the current generic attribute record (components at +0x1a0..+0x1ac) for attribute index
+local	_glVertexAttrib1dARB_Exec	fVar1	zero	CONFIRMED	ctx+0x20 float used as the default value of the missing y/z components (GL spec: glVertexAttrib1 gives (x,0,0,1))
+local	_glVertexAttrib1dARB_Exec	fVar2	one	CONFIRMED	ctx+0x24 float used as the default w component (GL spec: missing w is 1)
+local	_glVertexAttrib1dARB_Exec	UNRECOVERED_JUMPTABLE	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertexAttrib4NbvARB_Exec	iVar4	attribRecord	CONFIRMED	ctx + index*0x10: the current generic attribute record (components at +0x1a0..+0x1ac) for attribute index
+local	_glVertexAttrib4NbvARB_Exec	pcVar5	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertexAttrib4ubvARB_Exec	pcVar2	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertexAttrib2dARB_Exec	iVar3	attribRecord	CONFIRMED	ctx + index*0x10: the current generic attribute record (components at +0x1a0..+0x1ac) for attribute index
+local	_glVertexAttrib2dARB_Exec	fVar1	zero	CONFIRMED	ctx+0x20 float used as the default value of the missing y/z components (GL spec: glVertexAttrib1 gives (x,0,0,1))
+local	_glVertexAttrib2dARB_Exec	fVar2	one	CONFIRMED	ctx+0x24 float used as the default w component (GL spec: missing w is 1)
+local	_glVertexAttrib2dARB_Exec	UNRECOVERED_JUMPTABLE	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertexAttrib3sARB_Exec	iVar3	attribRecord	CONFIRMED	ctx + index*0x10: the current generic attribute record (components at +0x1a0..+0x1ac) for attribute index
+local	_glVertexAttrib3sARB_Exec	uVar1	oneBits	CONFIRMED	ctx+0x24 (the float 1.0 used as default w component) copied as raw bits into the attribute record +0x1ac
+local	_glVertexAttrib3sARB_Exec	pcVar4	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertexAttrib2fARB_Exec	iVar3	attribRecord	CONFIRMED	ctx + index*0x10: the current generic attribute record (components at +0x1a0..+0x1ac) for attribute index
+local	_glVertexAttrib2fARB_Exec	uVar1	zeroBits	CONFIRMED	ctx+0x20 (the float 0.0 used as default y/z component) copied as raw bits into the attribute record
+local	_glVertexAttrib2fARB_Exec	uVar2	oneBits	CONFIRMED	ctx+0x24 (the float 1.0 used as default w component) copied as raw bits into the attribute record +0x1ac
+local	_glVertexAttrib2fARB_Exec	UNRECOVERED_JUMPTABLE	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertexAttrib4sARB_Exec	iVar2	attribRecord	CONFIRMED	ctx + index*0x10: the current generic attribute record (components at +0x1a0..+0x1ac) for attribute index
+local	_glVertexAttrib4sARB_Exec	pcVar3	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertexAttrib4NuivARB_Exec	iVar3	attribRecord	CONFIRMED	ctx + index*0x10: the current generic attribute record (components at +0x1a0..+0x1ac) for attribute index
+local	_glVertexAttrib4NuivARB_Exec	pcVar4	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertexAttrib4fvARB_Exec	iVar1	attribRecord	CONFIRMED	ctx + index*0x10: the current generic attribute record (components at +0x1a0..+0x1ac) for attribute index
+local	_glVertexAttrib4fvARB_Exec	UNRECOVERED_JUMPTABLE	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glVertexAttrib4dARB_Exec	iVar1	attribRecord	CONFIRMED	ctx + index*0x10: the current generic attribute record (components at +0x1a0..+0x1ac) for attribute index
+local	_glVertexAttrib4dARB_Exec	UNRECOVERED_JUMPTABLE	vertexFunc	CONFIRMED	vertex submit callback ctx+0x4884 (or _gleFlushAndSubmit when the vertex buffer is empty), called with (glContext, x, y, z, w); same role as vertexFunc in _glArrayElement_ListExec
+local	_glMultiTexCoord4fv_Exec	uVar1	texCoordQ	CONFIRMED	v[3] (the q component), stored at unitTexCoord+0xc
+local	_glMultiTexCoord4fv_Exec	uVar2	texCoordT	CONFIRMED	v[1] (the t component), stored at unitTexCoord+4
+local	_glMultiTexCoord4fv_Exec	uVar3	texCoordR	CONFIRMED	v[2] (the r component), stored at unitTexCoord+8
+local	_glMultiTexCoord4fv_Exec	iVar4	unitTexCoord	CONFIRMED	ctx + (target & 7)*0x10: the current texture coordinate record of the unit (+0x120..+0x12c), same expression named unitTexCoord in the sibling MultiTexCoord functions
+local	_glSecondaryColor3iv_Comp	fVar2	channelScale	CONFIRMED	FLOAT_00108e68: multiplier of every converted signed int component
+local	_glSecondaryColor3iv_Comp	fVar3	channelBias	CONFIRMED	FLOAT_00108e6c: addend of every converted signed int component (c*scale + bias)
+local	_glColor3i_Exec	fVar3	channelScale	CONFIRMED	FLOAT_00108e68: multiplier of the converted signed int components
+local	_glColor3i_Exec	fVar4	channelBias	CONFIRMED	FLOAT_00108e6c: addend of the converted signed int components (c*scale + bias)
+local	_glColor3i_Exec	fVar1	redFloat	CONFIRMED	(float)(red converted from int) * scale + bias, stored at ctx+0x2a0 (current red)
+local	_glColor3i_Exec	fVar2	blueFloat	CONFIRMED	(float)(blue converted from int) * scale + bias, stored at ctx+0x2a8 (current blue)
+local	_glColor3i_Exec	dVar5	greenDouble	CONFIRMED	green converted to double with the 0x43300000 magic-number idiom, before scale and bias; the float is stored at ctx+0x2a4 (current green)
+local	_glColor3ui_Exec	fVar1	channelScale	CONFIRMED	FLOAT_00108e6c: multiplier of the converted unsigned int components (no bias term)
+local	_glColor3ui_Exec	dVar2	redDouble	CONFIRMED	red converted from uint to double with the 0x43300000 magic-number idiom; stored as float at ctx+0x2a0
+local	_glColor3ui_Exec	dVar3	greenDouble	CONFIRMED	green converted from uint to double with the 0x43300000 magic-number idiom; stored as float at ctx+0x2a4
+local	_glColor3ui_Exec	dVar4	blueDouble	CONFIRMED	blue converted from uint to double with the 0x43300000 magic-number idiom; stored as float at ctx+0x2a8
+local	_glColor4b_Exec	fVar1	blueFloat	CONFIRMED	blue converted from signed byte, scaled, stored at ctx+0x2a8 (current blue)
+local	_glColor4b_Exec	fVar2	greenFloat	CONFIRMED	green converted from signed byte, scaled, stored at ctx+0x2a4 (current green)
+local	_glColor4b_Exec	fVar3	alphaFloat	CONFIRMED	alpha converted from signed byte, scaled, stored at ctx+0x2ac (current alpha)
+local	_glColor3bv_Exec	fVar2	channelScale	CONFIRMED	FLOAT_00108e60: multiplier of the converted signed byte components
+local	_glColor3bv_Exec	fVar3	channelBias	CONFIRMED	FLOAT_00108e64: addend of the converted signed byte components (c*scale + bias)
+local	_glColor3bv_Exec	fVar1	redFloat	CONFIRMED	(float)(v[0] converted) * scale + bias, stored at ctx+0x2a0 (current red)
+local	_glColor3bv_Exec	dVar4	greenDouble	CONFIRMED	v[1] converted to double with the magic-number idiom; scaled and stored at ctx+0x2a4 (current green)
+local	_glColor3bv_Exec	dVar5	blueDouble	CONFIRMED	v[2] converted to double with the magic-number idiom; scaled and stored at ctx+0x2a8 (current blue)
+local	_glWeightARB_ListExec	iVar3	weightCount	CONFIRMED	listRecord[0]: number of weights copied to ctx+0x2d0; the record size returned is weightCount*4+4
+local	_glWeightARB_ListExec	iVar4	nextSlot	CONFIRMED	index of the first weight slot (of 4 at ctx+0x2d0) that is zero-filled: 0, or weightCount after the copy, then counted up
+local	_glWeightARB_ListExec	iVar1	slotByteOffset	CONFIRMED	nextSlot*4, byte offset of the slot being zeroed
+local	_glVertexAttrib4NbvARB_Exec	fVar3	channelBias	CONFIRMED	FLOAT_00108e64: addend of the converted signed byte components (c*scale + bias)
