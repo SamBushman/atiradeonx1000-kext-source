@@ -41,7 +41,7 @@ void _glConvolutionFilter1D_Exec(glContext, target, internalformat, width, forma
   undefined4 glErrorCode;
   int iVar2;
   int iVar3;
-  int glContextPtr4a6c;
+  int pixelUnpackBuffer;
   int iVar4;
   int iVar5;
   int iVar6;
@@ -65,14 +65,14 @@ void _glConvolutionFilter1D_Exec(glContext, target, internalformat, width, forma
         glErrorCode = 0x501;
         goto LAB_000692a4;
       }
-      glContextPtr4a6c = *(int *)(glContext + 0x4a6c);
-      if (glContextPtr4a6c == 0) {
+      pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+      if (pixelUnpackBuffer == 0) {
 LAB_000692cc:
         _gleConvolutionFilter1D(glContext,0x8010,iVar2,width,format,type,image);
         return;
       }
       iVar4 = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,image);
-      iVar6 = *(int *)(glContextPtr4a6c + 0x38);
+      iVar6 = *(int *)(pixelUnpackBuffer + 0x38);
       dVar7 = (double)((double (*)())_gleBytesPerElement)(type);
       iVar5 = (int)dVar7;
       if (iVar4 <= iVar6) {
@@ -80,10 +80,10 @@ LAB_000692cc:
           iVar5 = _glePixelBytes(format,type);
         }
         if (image == (image / iVar5) * iVar5) {
-          if (*(int *)(glContextPtr4a6c + 0x40) != 0) {
-            _gleSynchronizePluginBuffer(glContext,glContextPtr4a6c + 0x10);
+          if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+            _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
           }
-          image = image + *(int *)(glContextPtr4a6c + 0x30);
+          image = image + *(int *)(pixelUnpackBuffer + 0x30);
           goto LAB_000692cc;
         }
       }
@@ -112,7 +112,7 @@ void _glConvolutionFilter2D_Exec(glContext, target, internalformat, width, heigh
   undefined4 glErrorCode;
   int iVar2;
   int iVar3;
-  int glContextPtr4a6c;
+  int pixelUnpackBuffer;
   int iVar4;
   int iVar5;
   int iVar6;
@@ -136,14 +136,14 @@ void _glConvolutionFilter2D_Exec(glContext, target, internalformat, width, heigh
         glErrorCode = 0x501;
         goto LAB_00069438;
       }
-      glContextPtr4a6c = *(int *)(glContext + 0x4a6c);
-      if (glContextPtr4a6c == 0) {
+      pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+      if (pixelUnpackBuffer == 0) {
 LAB_00069460:
         _gleConvolutionFilter2D(glContext,0x8011,iVar2,width,height,format,type,image);
         return;
       }
       iVar4 = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,image);
-      iVar6 = *(int *)(glContextPtr4a6c + 0x38);
+      iVar6 = *(int *)(pixelUnpackBuffer + 0x38);
       dVar7 = (double)((double (*)())_gleBytesPerElement)(type);
       iVar5 = (int)dVar7;
       if (iVar4 <= iVar6) {
@@ -151,10 +151,10 @@ LAB_00069460:
           iVar5 = _glePixelBytes(format,type);
         }
         if (image == (image / iVar5) * iVar5) {
-          if (*(int *)(glContextPtr4a6c + 0x40) != 0) {
-            _gleSynchronizePluginBuffer(glContext,glContextPtr4a6c + 0x10);
+          if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+            _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
           }
-          image = image + *(int *)(glContextPtr4a6c + 0x30);
+          image = image + *(int *)(pixelUnpackBuffer + 0x30);
           goto LAB_00069460;
         }
       }
@@ -369,7 +369,7 @@ void _glCopyConvolutionFilter1D_Exec(glContext, target, internalformat, x, y, wi
   int iVar6;
   int framebufferObject;
   undefined4 uVar7;
-  int glContextWord50ac;
+  int matrixChangeBits;
   uint uVar9;
   int *piVar10;
   double extraout_f1;
@@ -392,8 +392,8 @@ void _glCopyConvolutionFilter1D_Exec(glContext, target, internalformat, x, y, wi
   iVar5 = _gleImagingTexFormatToInternal(internalformat);
   dVar11 = extraout_f1;
   if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
-    glContextWord50ac = *(int *)(glContext + 0x50ac);
-    if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+    matrixChangeBits = *(int *)(glContext + 0x50ac);
+    if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
       _gleUpdateMatrixFunc(glContext);
       dVar11 = extraout_f1_00;
     }
@@ -402,7 +402,7 @@ void _glCopyConvolutionFilter1D_Exec(glContext, target, internalformat, x, y, wi
       piVar10 = (int *)(glContext + 0x310);
       cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,internalformat,uVar3,uVar7,uVar9,glContextWord50ac,dVar11,incomingFpr2,incomingFpr3,incomingFpr4,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,internalformat,uVar3,uVar7,uVar9,matrixChangeBits,dVar11,incomingFpr2,incomingFpr3,incomingFpr4,
                    incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         dVar11 = dVar11;
@@ -536,7 +536,7 @@ void _glCopyConvolutionFilter2D_Exec(glContext, target, internalformat, x, y, wi
   int framebufferObject;
   undefined4 uVar7;
   int iVar8;
-  int glContextWord50ac;
+  int matrixChangeBits;
   int iVar9;
   uint uVar10;
   int *piVar11;
@@ -560,8 +560,8 @@ void _glCopyConvolutionFilter2D_Exec(glContext, target, internalformat, x, y, wi
   iVar5 = _gleImagingTexFormatToInternal(internalformat);
   dVar12 = extraout_f1;
   if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
-    glContextWord50ac = *(int *)(glContext + 0x50ac);
-    if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+    matrixChangeBits = *(int *)(glContext + 0x50ac);
+    if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
       _gleUpdateMatrixFunc(glContext);
       dVar12 = extraout_f1_00;
     }
@@ -570,7 +570,7 @@ void _glCopyConvolutionFilter2D_Exec(glContext, target, internalformat, x, y, wi
       piVar11 = (int *)(glContext + 0x310);
       cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,internalformat,uVar3,uVar7,iVar9,glContextWord50ac,dVar12,incomingFpr2,incomingFpr3,incomingFpr4,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,internalformat,uVar3,uVar7,iVar9,matrixChangeBits,dVar12,incomingFpr2,incomingFpr3,incomingFpr4,
                    incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         dVar12 = dVar12;
@@ -694,7 +694,7 @@ void _glGetConvolutionFilter_Exec(glContext, target, format, type, image)
   undefined4 glErrorCode;
   int iVar2;
   int iVar3;
-  int glContextPtr4a68;
+  int pixelPackBuffer;
   int iVar4;
   double dVar5;
   
@@ -708,8 +708,8 @@ void _glGetConvolutionFilter_Exec(glContext, target, format, type, image)
     }
     iVar3 = _CheckTypeFormat(format,type);
     if (iVar3 != 0) {
-      glContextPtr4a68 = *(int *)(glContext + 0x4a68);
-      if (glContextPtr4a68 == 0) {
+      pixelPackBuffer = *(int *)(glContext + 0x4a68);
+      if (pixelPackBuffer == 0) {
 LAB_0006a124:
         _gleGetConvolutionFilter(glContext,target,format,type,image);
         return;
@@ -723,15 +723,15 @@ LAB_0006a124:
       iVar2 = _gleOffsetLimitImage
                         (glContext + 0x31b0,*(undefined4 *)(iVar2 + 0x38),
                          *(undefined4 *)(iVar2 + 0x3c),format,type,image);
-      if (iVar2 <= *(int *)(glContextPtr4a68 + 0x38)) {
+      if (iVar2 <= *(int *)(pixelPackBuffer + 0x38)) {
         if (iVar4 == 0) {
           iVar4 = _glePixelBytes(format,type);
         }
         if (image == (image / iVar4) * iVar4) {
-          if (*(int *)(glContextPtr4a68 + 0x40) != 0) {
-            _gleSynchronizePluginBuffer(glContext,glContextPtr4a68 + 0x10);
+          if (*(int *)(pixelPackBuffer + 0x40) != 0) {
+            _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
           }
-          image = image + *(int *)(glContextPtr4a68 + 0x30);
+          image = image + *(int *)(pixelPackBuffer + 0x30);
           goto LAB_0006a124;
         }
       }
@@ -924,7 +924,7 @@ void _glGetSeparableFilter_Exec(glContext, target, format, type, row, column, sp
 {
   undefined4 glErrorCode;
   int iVar2;
-  int glContextPtr4a68;
+  int pixelPackBuffer;
   int iVar3;
   int iVar4;
   int iVar5;
@@ -941,8 +941,8 @@ void _glGetSeparableFilter_Exec(glContext, target, format, type, row, column, sp
     }
     iVar2 = _CheckTypeFormat(type,format);
     if (iVar2 != 0) {
-      glContextPtr4a68 = *(int *)(glContext + 0x4a68);
-      if (glContextPtr4a68 == 0) {
+      pixelPackBuffer = *(int *)(glContext + 0x4a68);
+      if (pixelPackBuffer == 0) {
 LAB_0006a678:
         _gleGetSeparableFilter(glContext,0x8012,format,type,row,column);
         return;
@@ -953,7 +953,7 @@ LAB_0006a678:
       iVar4 = _gleOffsetLimitImage
                         (glContext + 0x31b0,*(undefined4 *)(glContext + 0x3354),1,format,type,
                          column);
-      iVar6 = *(int *)(glContextPtr4a68 + 0x38);
+      iVar6 = *(int *)(pixelPackBuffer + 0x38);
       dVar7 = (double)((double (*)())_gleBytesPerElement)(type);
       iVar5 = (int)dVar7;
       if ((iVar3 <= iVar6) && (iVar4 <= iVar6)) {
@@ -961,11 +961,11 @@ LAB_0006a678:
           iVar5 = _glePixelBytes(format,type);
         }
         if ((row == (row / iVar5) * iVar5) && (column == (column / iVar5) * iVar5)) {
-          if (*(int *)(glContextPtr4a68 + 0x40) != 0) {
-            _gleSynchronizePluginBuffer(glContext,glContextPtr4a68 + 0x10);
+          if (*(int *)(pixelPackBuffer + 0x40) != 0) {
+            _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
           }
-          column = column + *(int *)(glContextPtr4a68 + 0x30);
-          row = row + *(int *)(glContextPtr4a68 + 0x30);
+          column = column + *(int *)(pixelPackBuffer + 0x30);
+          row = row + *(int *)(pixelPackBuffer + 0x30);
           goto LAB_0006a678;
         }
       }
@@ -995,7 +995,7 @@ void _glSeparableFilter2D_Exec(glContext, target, internalformat, width, height,
   undefined4 glErrorCode;
   int iVar2;
   int iVar3;
-  int glContextPtr4a6c;
+  int pixelUnpackBuffer;
   int iVar4;
   int iVar5;
   int iVar6;
@@ -1020,15 +1020,15 @@ void _glSeparableFilter2D_Exec(glContext, target, internalformat, width, height,
         glErrorCode = 0x501;
         goto LAB_0006a824;
       }
-      glContextPtr4a6c = *(int *)(glContext + 0x4a6c);
-      if (glContextPtr4a6c == 0) {
+      pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+      if (pixelUnpackBuffer == 0) {
 LAB_0006a850:
         _gleSeparableFilter2D(glContext,0x8012,iVar2,width,height,format,type,row,column);
         return;
       }
       iVar4 = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,row);
       iVar5 = _gleOffsetLimitImage(glContext + 0x31cc,height,1,format,type,column);
-      iVar7 = *(int *)(glContextPtr4a6c + 0x38);
+      iVar7 = *(int *)(pixelUnpackBuffer + 0x38);
       dVar8 = (double)((double (*)())_gleBytesPerElement)(type);
       iVar6 = (int)dVar8;
       if ((iVar4 <= iVar7) && (iVar5 <= iVar7)) {
@@ -1036,11 +1036,11 @@ LAB_0006a850:
           iVar6 = _glePixelBytes(format,type);
         }
         if ((row == (row / iVar6) * iVar6) && (column == (column / iVar6) * iVar6)) {
-          if (*(int *)(glContextPtr4a6c + 0x40) != 0) {
-            _gleSynchronizePluginBuffer(glContext,glContextPtr4a6c + 0x10);
+          if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+            _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
           }
-          column = column + *(int *)(glContextPtr4a6c + 0x30);
-          row = row + *(int *)(glContextPtr4a6c + 0x30);
+          column = column + *(int *)(pixelUnpackBuffer + 0x30);
+          row = row + *(int *)(pixelUnpackBuffer + 0x30);
           goto LAB_0006a850;
         }
       }
@@ -1066,7 +1066,7 @@ void _glGetHistogram_Exec(glContext, target, reset, format, type, values)
 {
   undefined4 glErrorCode;
   int iVar2;
-  int glContextPtr4a68;
+  int pixelPackBuffer;
   int iVar3;
   int iVar4;
   int iVar5;
@@ -1085,15 +1085,15 @@ void _glGetHistogram_Exec(glContext, target, reset, format, type, values)
       if (*(int *)(glContext + 0x3388) < 1) {
         return;
       }
-      glContextPtr4a68 = *(int *)(glContext + 0x4a68);
-      if (glContextPtr4a68 == 0) {
+      pixelPackBuffer = *(int *)(glContext + 0x4a68);
+      if (pixelPackBuffer == 0) {
 LAB_0006a9a8:
         _gleGetHistogram(glContext,0x8024,reset,format,type,values);
         return;
       }
       iVar3 = _gleOffsetLimitImage
                         (glContext + 0x31b0,*(int *)(glContext + 0x3388),1,format,type,values);
-      iVar5 = *(int *)(glContextPtr4a68 + 0x38);
+      iVar5 = *(int *)(pixelPackBuffer + 0x38);
       dVar6 = (double)((double (*)())_gleBytesPerElement)(type);
       iVar4 = (int)dVar6;
       if (iVar3 <= iVar5) {
@@ -1101,10 +1101,10 @@ LAB_0006a9a8:
           iVar4 = _glePixelBytes(format,type);
         }
         if (values == (values / iVar4) * iVar4) {
-          if (*(int *)(glContextPtr4a68 + 0x40) != 0) {
-            _gleSynchronizePluginBuffer(glContext,glContextPtr4a68 + 0x10);
+          if (*(int *)(pixelPackBuffer + 0x40) != 0) {
+            _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
           }
-          values = values + *(int *)(glContextPtr4a68 + 0x30);
+          values = values + *(int *)(pixelPackBuffer + 0x30);
           goto LAB_0006a9a8;
         }
       }
@@ -1196,7 +1196,7 @@ void _glGetMinmax_Exec(glContext, target, reset, format, type, values)
   undefined4 glErrorCode;
   int iVar2;
   int iVar3;
-  int glContextPtr4a68;
+  int pixelPackBuffer;
   int iVar5;
   double dVar6;
   
@@ -1208,14 +1208,14 @@ void _glGetMinmax_Exec(glContext, target, reset, format, type, values)
       glErrorCode = 0x500;
       goto LAB_0006abd0;
     }
-    glContextPtr4a68 = *(int *)(glContext + 0x4a68);
-    if (glContextPtr4a68 == 0) {
+    pixelPackBuffer = *(int *)(glContext + 0x4a68);
+    if (pixelPackBuffer == 0) {
 LAB_0006abf8:
       _gleGetMinmax(glContext,0x802e,reset,format,type,values);
       return;
     }
     iVar2 = _gleOffsetLimitImage(glContext + 0x31b0,2,1,format,type,values);
-    iVar5 = *(int *)(glContextPtr4a68 + 0x38);
+    iVar5 = *(int *)(pixelPackBuffer + 0x38);
     dVar6 = (double)((double (*)())_gleBytesPerElement)(type);
     iVar3 = (int)dVar6;
     if (iVar2 <= iVar5) {
@@ -1223,10 +1223,10 @@ LAB_0006abf8:
         iVar3 = _glePixelBytes(format,type);
       }
       if (values == (values / iVar3) * iVar3) {
-        if (*(int *)(glContextPtr4a68 + 0x40) != 0) {
-          _gleSynchronizePluginBuffer(glContext,glContextPtr4a68 + 0x10);
+        if (*(int *)(pixelPackBuffer + 0x40) != 0) {
+          _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
         }
-        values = values + *(int *)(glContextPtr4a68 + 0x30);
+        values = values + *(int *)(pixelPackBuffer + 0x30);
         goto LAB_0006abf8;
       }
     }

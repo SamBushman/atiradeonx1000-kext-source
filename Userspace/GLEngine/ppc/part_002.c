@@ -1646,9 +1646,9 @@ int _glTexImage2D_Exec(glContext, target, level, internalformat, width, height, 
   int iVar5;
   int iVar6;
   int iVar7;
-  int glContextPtr4a6c;
+  int pixelUnpackBuffer;
   int iVar8;
-  int iVar9;
+  int textureLevel;
   double dVar10;
   
   iVar6 = glContext;
@@ -1660,10 +1660,10 @@ int _glTexImage2D_Exec(glContext, target, level, internalformat, width, height, 
     glErrorCode = 0x501;
     goto LAB_00018a9c;
   }
-  glContextPtr4a6c = *(int *)(glContext + 0x4a6c);
-  if (glContextPtr4a6c != 0) {
+  pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+  if (pixelUnpackBuffer != 0) {
     iVar5 = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,pixels);
-    iVar8 = *(int *)(glContextPtr4a6c + 0x38);
+    iVar8 = *(int *)(pixelUnpackBuffer + 0x38);
     dVar10 = (double)((double (*)())_gleBytesPerElement)(type);
     iVar6 = (int)dVar10;
     if (iVar5 <= iVar8) {
@@ -1671,10 +1671,10 @@ int _glTexImage2D_Exec(glContext, target, level, internalformat, width, height, 
         iVar6 = ((int (*)())_glePixelBytes)(format,type);
       }
       if (pixels == (pixels / iVar6) * iVar6) {
-        if (*(int *)(glContextPtr4a6c + 0x40) != 0) {
-          _gleSynchronizePluginBuffer(glContext,glContextPtr4a6c + 0x10);
+        if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+          _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
         }
-        pixels = pixels + *(int *)(glContextPtr4a6c + 0x30);
+        pixels = pixels + *(int *)(pixelUnpackBuffer + 0x30);
         goto LAB_00018a2c;
       }
     }
@@ -1720,13 +1720,13 @@ LAB_00018b08:
     uVar4 = 0;
   }
   iVar8 = iVar6 + uVar4 * 0x168 + level * 0x18;
-  iVar9 = iVar8 + 0xc4;
+  textureLevel = iVar8 + 0xc4;
   if ((*(byte *)(iVar8 + 0xcf) & 0x20) != 0) {
-    _gleDeletePluginTextureLevel(glContext,iVar6,iVar9,uVar4,level);
+    _gleDeletePluginTextureLevel(glContext,iVar6,textureLevel,uVar4,level);
     if (*(int *)(iVar8 + 0xd8) != 0) {
       bVar1 = *(byte *)(iVar8 + 0xcf);
       if ((bVar1 & 1) == 0) {
-        _gleFreeTextureLevel(glContext,iVar6,iVar9);
+        _gleFreeTextureLevel(glContext,iVar6,textureLevel);
         bVar1 = *(byte *)(iVar8 + 0xcf);
       }
       else {
@@ -1736,13 +1736,13 @@ LAB_00018b08:
     }
     *(byte *)(iVar8 + 0xcf) = *(byte *)(iVar8 + 0xcf) & 0xdf;
   }
-  iVar8 = ((int (*)())_gleCreateTextureLevel)(glContext,iVar6,iVar9,internalformat,iVar5,iVar7,1,border,format,type,1,pixels);
+  iVar8 = ((int (*)())_gleCreateTextureLevel)(glContext,iVar6,textureLevel,internalformat,iVar5,iVar7,1,border,format,type,1,pixels);
   if ((iVar8 != 0) && (pixels != 0)) {
-    iVar8 = ((int (*)())_gleTextureImagePut)(glContext,iVar9,0,0,0,width,height,1,format,type,1,
+    iVar8 = ((int (*)())_gleTextureImagePut)(glContext,textureLevel,0,0,0,width,height,1,format,type,1,
                                 glContext + 0x31cc,pixels);
   }
   if ((((iVar5 != 0) && (iVar7 != 0)) &&
-      (iVar8 = ((int (*)())_gleCreatePluginTextureLevel)(glContext,iVar6,iVar9,uVar4,level,internalformat),
+      (iVar8 = ((int (*)())_gleCreatePluginTextureLevel)(glContext,iVar6,textureLevel,uVar4,level,internalformat),
       (*(uint *)(iVar6 + 0x6c) & 0x8000) != 0)) &&
      ((*(short *)(iVar6 + 0x60) == level &&
       (iVar6 = _gleGenMipmapsToLevel(glContext,iVar6,uVar4,level,0xf,1), iVar8 = 0, iVar6 != 0)))) {
@@ -4437,19 +4437,19 @@ void _gleSetEnable_TEXTURE_RECTANGLE_EXT(glContext, unusedArg2, param_3)
 {
   uint uVar1;
   int iVar2;
-  uint glContextWord53d4;
+  uint texUnit;
   uint uVar4;
   
-  glContextWord53d4 = *(uint *)(glContext + 0x53d4);
-  if (glContextWord53d4 < 8) {
-    iVar2 = glContextWord53d4 * 0x7c + glContext;
+  texUnit = *(uint *)(glContext + 0x53d4);
+  if (texUnit < 8) {
+    iVar2 = texUnit * 0x7c + glContext;
     uVar4 = *(uint *)(iVar2 + 0x3534);
     uVar1 = uVar4 & 0xfffffffb | param_3 << 2;
     if (uVar4 == uVar1) {
       return;
     }
     *(uint *)(iVar2 + 0x3534) = uVar1;
-    _gleUpdateTextureParams(glContext,glContextWord53d4);
+    _gleUpdateTextureParams(glContext,texUnit);
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -4474,7 +4474,7 @@ void _glBegin_Exec(int glContext,uint mode,double fparam_1,double forwardedFloat
   undefined4 incomingR6;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  int glContextWord50ac;
+  int matrixChangeBits;
   uint uVar7;
   int *piVar8;
   double extraout_f1;
@@ -4493,8 +4493,8 @@ void _glBegin_Exec(int glContext,uint mode,double fparam_1,double forwardedFloat
     glErrorCode = 0x500;
     goto LAB_0001cd18;
   }
-  glContextWord50ac = *(int *)(glContext + 0x50ac);
-  if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+  matrixChangeBits = *(int *)(glContext + 0x50ac);
+  if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
     fparam_1 = extraout_f1;
   }
@@ -4503,7 +4503,7 @@ void _glBegin_Exec(int glContext,uint mode,double fparam_1,double forwardedFloat
   piVar8 = (int *)(glContext + 0x310);
   cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,glContextWord50ac,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -4810,7 +4810,7 @@ int _gleBuildVertexFuncNO(glContext, param_2, param_3, param_4, forwardedArg5, f
   uint *srcCursor;
   uint uVar9;
   uint *puVar10;
-  uint *puVar11;
+  uint *instrCursor;
   int iVar12;
   uint uVar13;
   undefined4 uVar14;
@@ -5062,51 +5062,51 @@ code_r0x0001d73c:
     puVar20 = &uStack_d0;
     srcCursor3 = (ushort *)((int)auStack_cc + uVar25 * 2);
     uVar24 = 0;
-    puVar11 = puVar10;
+    instrCursor = puVar10;
     do {
       uVar2 = *(ushort *)(puVar20 + 1);
       uVar7 = (uint)(uVar2 >> 10);
       uVar13 = uVar24;
       if (uVar7 == 6) {
-        puVar10 = puVar11;
+        puVar10 = instrCursor;
         if ((uVar9 & 0x40) == 0) {
           if ((*srcCursor3 >> 10 & 0xf) == 0xe) {
             uVar7 = 0x892302ec;
 LAB_0001d970:
-            *puVar11 = uVar7;
+            *instrCursor = uVar7;
             uVar13 = uVar24;
           }
           else {
             uVar13 = *srcCursor3 & 0x3ff;
             if ((uVar6 == 0) && (param_2 != 2)) {
-              puVar11 = (uint *)_gleSetArrayLoadAddressNO(puVar11,puVar15,0x4910,uVar13);
+              instrCursor = (uint *)_gleSetArrayLoadAddressNO(instrCursor,puVar15,0x4910,uVar13);
               uVar7 = 0x89270000;
               goto LAB_0001d970;
             }
-            *puVar11 = uVar13 - uVar24 & 0xffff | 0x38e70000;
-            puVar11 = puVar11 + 1;
-            *puVar11 = 0x81270000;
+            *instrCursor = uVar13 - uVar24 & 0xffff | 0x38e70000;
+            instrCursor = instrCursor + 1;
+            *instrCursor = 0x81270000;
           }
           uVar2 = *(ushort *)(puVar20 + 1);
-          puVar11 = puVar11 + 1;
+          instrCursor = instrCursor + 1;
           uVar3 = uVar2 >> 6 & 3;
           if (uVar3 == 1) {
             uVar24 = (uVar2 & 0x3f) << 2 | 0x99250000;
 LAB_0001d9b8:
-            *puVar11 = uVar24;
+            *instrCursor = uVar24;
             uVar24 = uVar13;
 LAB_0001dcc8:
-            puVar11 = puVar11 + 1;
+            instrCursor = instrCursor + 1;
             uVar13 = uVar24;
-            puVar10 = puVar11;
+            puVar10 = instrCursor;
           }
           else {
-            puVar10 = puVar11;
+            puVar10 = instrCursor;
             if (uVar3 < 2) {
               if (uVar3 == 0) {
-                iVar26 = _gleRTCAddAChunk_b50a8(&_gleSetEdgeBitRTC,puVar11);
-                puVar11 = puVar11 + iVar26;
-                puVar10 = puVar11;
+                iVar26 = _gleRTCAddAChunk_b50a8(&_gleSetEdgeBitRTC,instrCursor);
+                instrCursor = instrCursor + iVar26;
+                puVar10 = instrCursor;
               }
             }
             else if (uVar3 == 3) {
@@ -5134,19 +5134,19 @@ LAB_0001dcc8:
             else {
               uVar27 = uStack_d0 >> 0x13 & 4;
               uVar13 = 6;
-              puVar11 = (uint *)((int (*)())_gleLoadDataElementFromCtxNO)(puVar11,iVar26,uVar27,iVar12);
+              instrCursor = (uint *)((int (*)())_gleLoadDataElementFromCtxNO)(instrCursor,iVar26,uVar27,iVar12);
             }
           }
           else {
             uVar27 = uVar3 & 0x3ff;
             if ((uVar6 != 0) || (param_2 == 2)) {
               uVar14 = 0;
-              *puVar11 = uVar27 - uVar24 & 0xffff | 0x38e70000;
-              puVar11 = puVar11 + 1;
+              *instrCursor = uVar27 - uVar24 & 0xffff | 0x38e70000;
+              instrCursor = instrCursor + 1;
               uVar24 = uVar27;
             }
             else {
-              puVar11 = (uint *)_gleSetArrayLoadAddressNO(puVar11,puVar15,uVar7 * 4 + 0x48f8,uVar27)
+              instrCursor = (uint *)_gleSetArrayLoadAddressNO(instrCursor,puVar15,uVar7 * 4 + 0x48f8,uVar27)
               ;
               uVar14 = 0;
               if (((uStack_d0 & 0x800000) != 0) && ((uVar3 & 3) == 0)) {
@@ -5162,7 +5162,7 @@ LAB_0001dcc8:
                 ((uVar13 != 6 || (uVar27 = 4, (uStack_d0 & 0x200000) == 0)))))) {
               uVar27 = 0;
             }
-            puVar11 = (uint *)_gleLoadDataElementNO(puVar11,iVar26,uVar13,uVar27,uVar14);
+            instrCursor = (uint *)_gleLoadDataElementNO(instrCursor,iVar26,uVar13,uVar27,uVar14);
           }
           uVar2 = *(ushort *)(puVar20 + 1);
           uVar7 = uStack_d0;
@@ -5171,18 +5171,18 @@ LAB_0001dcc8:
           if (0x29 < uVar7) {
             if (uVar7 < 0x2c) {
               if ((uStack_d0 >> 0x10 & 0xf) == 6) {
-                *puVar11 = 0x39200001;
-                puVar11[1] = (uVar7 - 0x1f) * 0x10000 | 0x912001e0;
-                puVar11 = puVar11 + 2;
+                *instrCursor = 0x39200001;
+                instrCursor[1] = (uVar7 - 0x1f) * 0x10000 | 0x912001e0;
+                instrCursor = instrCursor + 2;
                 uVar2 = *(ushort *)(puVar20 + 1);
               }
-              *puVar11 = (uVar7 - 0x1f) * 0x200000 | (uVar2 & 0x3f) << 2 | 0x90050000;
-              puVar10 = puVar11 + 1;
+              *instrCursor = (uVar7 - 0x1f) * 0x200000 | (uVar2 & 0x3f) << 2 | 0x90050000;
+              puVar10 = instrCursor + 1;
               goto LAB_0001dcd0;
             }
-            *puVar11 = 0x812302ec;
-            puVar11 = puVar11 + 1;
-            *puVar11 = (*(ushort *)(puVar20 + 1) & 0x3f) << 2 | 0x91250000;
+            *instrCursor = 0x812302ec;
+            instrCursor = instrCursor + 1;
+            *instrCursor = (*(ushort *)(puVar20 + 1) & 0x3f) << 2 | 0x91250000;
             goto LAB_0001dcc8;
           }
           uVar14 = 0;
@@ -5193,12 +5193,12 @@ LAB_0001dcc8:
             uVar14 = 0x40;
           }
           uVar27 = uStack_d0 >> 0x13 & 4;
-          puVar11 = (uint *)_gleLoadDataElementFromMatNO(puVar11,iVar26,uVar27,uVar14,uVar7 & 1);
+          instrCursor = (uint *)_gleLoadDataElementFromMatNO(instrCursor,iVar26,uVar27,uVar14,uVar7 & 1);
           uVar2 = *(ushort *)(puVar20 + 1);
           uVar7 = uStack_d0 >> 0x15 & 1;
           uVar13 = 6;
         }
-        puVar10 = (uint *)((int (*)())_gleStoreDataElementNO)(puVar11,(uVar2 & 0x3f) << 2,iVar26,uVar13,uVar27,iVar18,uVar7);
+        puVar10 = (uint *)((int (*)())_gleStoreDataElementNO)(instrCursor,(uVar2 & 0x3f) << 2,iVar26,uVar13,uVar27,iVar18,uVar7);
         uVar13 = uVar24;
       }
 LAB_0001dcd0:
@@ -5206,8 +5206,8 @@ LAB_0001dcd0:
       puVar20 = (uint *)((int)puVar20 + 2);
       srcCursor3 = srcCursor3 + 1;
       uVar24 = uVar13;
-      puVar15 = puVar11;
-      puVar11 = puVar10;
+      puVar15 = instrCursor;
+      instrCursor = puVar10;
     } while (uVar25 != 0);
   }
   uVar25 = uStack_d0 >> 6 & 0x3fc;

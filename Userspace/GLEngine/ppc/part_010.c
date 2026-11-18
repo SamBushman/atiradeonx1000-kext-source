@@ -877,15 +877,15 @@ void _glClear_NoopExec(int glContext,undefined4 mask,double fparam_1,double forw
   undefined4 incomingR6;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  int glContextWord50ac;
+  int matrixChangeBits;
   uint uVar6;
   int *piVar7;
   double extraout_f1;
   double extraout_f1_00;
   double extraout_f1_01;
   
-  glContextWord50ac = *(int *)(glContext + 0x50ac);
-  if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+  matrixChangeBits = *(int *)(glContext + 0x50ac);
+  if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
     fparam_1 = extraout_f1;
   }
@@ -894,7 +894,7 @@ void _glClear_NoopExec(int glContext,undefined4 mask,double fparam_1,double forw
     piVar7 = (int *)(glContext + 0x310);
     cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,glContextWord50ac,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                  forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       fparam_1 = fparam_1;

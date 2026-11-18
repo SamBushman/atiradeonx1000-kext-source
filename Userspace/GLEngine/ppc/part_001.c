@@ -1002,10 +1002,10 @@ int _gleUpdateMatrixFunc(glContext)
   int glContextWord5434;
   int iVar7;
   uint uVar8;
-  uint glContextWord50ac;
+  uint matrixChangeBits;
   int remaining;
   
-  glContextWord50ac = *(uint *)(glContext + 0x50ac);
+  matrixChangeBits = *(uint *)(glContext + 0x50ac);
   bVar5 = 0;
   uVar8 = *(uint *)(glContext + 0x50b0);
   if ((*(char *)(glContext + 0x4e18) != '\0') ||
@@ -1015,7 +1015,7 @@ int _gleUpdateMatrixFunc(glContext)
   }
   *(byte *)(glContext + 0x50b4) =
        bVar5 | *(char *)(glContext + 0x316a) << 1 | *(char *)(glContext + 0x4661) << 2;
-  if (((glContextWord50ac & 0x18) != 0) || (iVar3 = glContext, (*(uint *)(glContext + 0x318) & 1) != 0)) {
+  if (((matrixChangeBits & 0x18) != 0) || (iVar3 = glContext, (*(uint *)(glContext + 0x318) & 1) != 0)) {
     iVar3 = ((int (*)())_gleApplyViewScissorTransform)(glContext);
   }
   uVar8 = uVar8 & *(uint *)(glContext + 0x505c);
@@ -1025,16 +1025,16 @@ int _gleUpdateMatrixFunc(glContext)
   puVar1 = PTR__gleSetModelviewFuncAll_0011222c;
   *(undefined **)(glContext + 0x5068) = PTR__gleSetNormalFunc_00112230;
   *(undefined **)(glContext + 0x5064) = puVar1;
-  if ((glContextWord50ac & 0x18) == 0) {
+  if ((matrixChangeBits & 0x18) == 0) {
     if (((*(uint *)(glContext + 0x318) & 1) == 0) && ((*(uint *)(glContext + 0x31c) & 0x200000) == 0))
     goto LAB_00007f38;
   }
   *(undefined **)(glContext + 0x5060) = PTR__gleSetProjectionFuncAll_00112228;
 LAB_00007f38:
-  if ((glContextWord50ac & 0xff0000) != 0) {
+  if ((matrixChangeBits & 0xff0000) != 0) {
     iVar3 = ((int (*)())_gleUpdateTextureTransform)(glContext);
   }
-  if ((glContextWord50ac & 4) != 0) {
+  if ((matrixChangeBits & 4) != 0) {
     iVar3 = (**(code **)PTR__gleGenerateMatrixIdentifier_00112060)(glContext,glContext + 0x1c40);
     if (iVar3 == -0x40100402) {
       uVar2 = *(uint *)(glContext + 0x3410) & 0xfffffeff;
@@ -1044,7 +1044,7 @@ LAB_00007f38:
     }
     *(uint *)(glContext + 0x3410) = uVar2;
   }
-  uVar8 = (glContextWord50ac | uVar8) & 0xfffffc;
+  uVar8 = (matrixChangeBits | uVar8) & 0xfffffc;
   *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | uVar8;
   if ((*(char *)(glContext + 0x4664) != '\0') || (*(int *)(glContext + 0x5434) != 0)) {
     loopIndex = 0;
@@ -5782,22 +5782,22 @@ void _gleResetVertexArrays(glContext)
 }
 
 /* _gleReinitFuncCache @ 0x1288c (168 bytes) */
-int _gleReinitFuncCache(param_1)
-  int *param_1;
+int _gleReinitFuncCache(glContext)
+  int *glContext;
 {
   int *piVar1;
   int iVar2;
   int *piVar3;
   
   iVar2 = 0;
-  if (param_1 != (int *)0x0) {
-    piVar1 = (int *)*param_1;
-    while (piVar1 != param_1) {
+  if (glContext != (int *)0x0) {
+    piVar1 = (int *)*glContext;
+    while (piVar1 != glContext) {
       piVar3 = (int *)*piVar1;
       _gleDCBFree(piVar1);
       piVar1 = piVar3;
     }
-    iVar2 = ((int (*)())_gleDCBRealloc)(param_1,0x24);
+    iVar2 = ((int (*)())_gleDCBRealloc)(glContext,0x24);
     *(undefined4 *)(iVar2 + 0x14) = 0xffffffff;
     *(undefined4 *)(iVar2 + 0x20) = 0x4e800020;
     *(undefined4 *)(iVar2 + 8) = 0xffffffff;
@@ -5887,11 +5887,11 @@ void _glGetIntegerv_Exec(glContext, pname, params)
   char local_b0 [16];
   double local_a0 [16];
   longlong local_20;
-  int local_18 [2];
+  int valueType [2];
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     cursor = local_a0;
-    remaining = ((int (*)())_gleGetState)(glContext,pname,cursor,local_18,local_b0);
+    remaining = ((int (*)())_gleGetState)(glContext,pname,cursor,valueType,local_b0);
     dVar6 = DOUBLE_00108d90;
     if (remaining == 0) {
       if (*(int *)(glContext + 0x7574) != 0) {
@@ -5901,7 +5901,7 @@ void _glGetIntegerv_Exec(glContext, pname, params)
       goto LAB_00012aa8;
     }
     if (remaining != -1) {
-      if (local_18[0] == 0x1404) {
+      if (valueType[0] == 0x1404) {
         if (remaining < 1) {
           return;
         }

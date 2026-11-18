@@ -847,8 +847,8 @@ void _gleFreeBufferState(glContext)
 {
   int iVar1;
   int glContextPtr48f4;
-  int glContextPtr4a6c;
-  int glContextPtr4a68;
+  int pixelUnpackBuffer;
+  int pixelPackBuffer;
   
   glContextPtr48f4 = *(int *)(glContext + 0x48f4);
   if (glContextPtr48f4 != 0) {
@@ -859,14 +859,14 @@ void _gleFreeBufferState(glContext)
     }
     *(undefined4 *)(glContext + 0x48f4) = 0;
   }
-  glContextPtr4a68 = *(int *)(glContext + 0x4a68);
-  if ((glContextPtr4a68 != 0) && (iVar1 = *(int *)(glContextPtr4a68 + 8) + -1, *(int *)(glContextPtr4a68 + 8) = iVar1, iVar1 == 0)) {
-    _gleFreeBufferObject(glContext,glContextPtr4a68);
+  pixelPackBuffer = *(int *)(glContext + 0x4a68);
+  if ((pixelPackBuffer != 0) && (iVar1 = *(int *)(pixelPackBuffer + 8) + -1, *(int *)(pixelPackBuffer + 8) = iVar1, iVar1 == 0)) {
+    _gleFreeBufferObject(glContext,pixelPackBuffer);
   }
-  glContextPtr4a6c = *(int *)(glContext + 0x4a6c);
+  pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
   *(undefined4 *)(glContext + 0x4a68) = 0;
-  if ((glContextPtr4a6c != 0) && (iVar1 = *(int *)(glContextPtr4a6c + 8) + -1, *(int *)(glContextPtr4a6c + 8) = iVar1, iVar1 == 0)) {
-    _gleFreeBufferObject(glContext,glContextPtr4a6c);
+  if ((pixelUnpackBuffer != 0) && (iVar1 = *(int *)(pixelUnpackBuffer + 8) + -1, *(int *)(pixelUnpackBuffer + 8) = iVar1, iVar1 == 0)) {
+    _gleFreeBufferObject(glContext,pixelUnpackBuffer);
   }
   *(undefined4 *)(glContext + 0x4a6c) = 0;
   return;
@@ -1335,11 +1335,11 @@ void _glGetBooleanv_Exec(glContext, pname, params)
   double dVar7;
   undefined1 auStack_b0 [16];
   double local_a0 [16];
-  int local_20 [4];
+  int valueType [4];
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     cursor = local_a0;
-    remaining = _gleGetState(glContext,pname,cursor,local_20,auStack_b0);
+    remaining = _gleGetState(glContext,pname,cursor,valueType,auStack_b0);
     doubleZero = DOUBLE_00108d60;
     if (remaining == 0) {
       if (*(int *)(glContext + 0x7574) != 0) {
@@ -1349,7 +1349,7 @@ void _glGetBooleanv_Exec(glContext, pname, params)
       goto LAB_00030d30;
     }
     if (remaining != -1) {
-      if (local_20[0] != 0x1404) {
+      if (valueType[0] != 0x1404) {
         loopIndex = 0;
         if (remaining < 1) {
           return;
@@ -2102,7 +2102,7 @@ void _glClear_Exec(int glContext,uint mask,double fparam_1,double forwardedFloat
   undefined4 incomingR6;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  int glContextWord50ac;
+  int matrixChangeBits;
   uint uVar7;
   int *piVar8;
   double extraout_f1;
@@ -2124,8 +2124,8 @@ void _glClear_Exec(int glContext,uint mask,double fparam_1,double forwardedFloat
   if (*(int *)(glContext + 0x4e1c) != 0x1c00) {
     return;
   }
-  glContextWord50ac = *(int *)(glContext + 0x50ac);
-  if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+  matrixChangeBits = *(int *)(glContext + 0x50ac);
+  if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
     fparam_1 = extraout_f1;
   }
@@ -2134,7 +2134,7 @@ void _glClear_Exec(int glContext,uint mask,double fparam_1,double forwardedFloat
   piVar8 = (int *)(glContext + 0x310);
   cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,glContextWord50ac,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }

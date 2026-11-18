@@ -563,7 +563,7 @@ local	_glRasterPos2i_Exec	fparam_5	forwardedFloatArg5	CONFIRMED	only used as an 
 local	_glRasterPos2i_Exec	fparam_6	forwardedFloatArg6	CONFIRMED	only used as an unchanged argument of calls (1 occurrences): never otherwise read by this function
 local	_glRasterPos2i_Exec	fparam_7	forwardedFloatArg7	CONFIRMED	only used as an unchanged argument of calls (1 occurrences): never otherwise read by this function
 local	_glRasterPos2i_Exec	fparam_8	forwardedFloatArg8	CONFIRMED	only used as an unchanged argument of calls (1 occurrences): never otherwise read by this function
-local	_glBitmap_Exec	param_7	unusedArg7	CONFIRMED	never read in the function body (declared in the signature only; unused argument)
+local	_glBitmap_Exec	param_7	ymoveShadow	CONFIRMED	PPC32 Darwin ABI: ymove is passed in an FPR and its GPR slot is reserved (argument slots after the context: width r4, height r5, xorig r6, yorig r7, xmove r8, ymove r9, bitmap r10); this is the unused GPR shadow of the ymove parameter of glBitmap
 local	_glBitmap_Exec	fparam_5	forwardedFloatArg5	CONFIRMED	only used as an unchanged argument of calls (1 occurrences): never otherwise read by this function
 local	_glBitmap_Exec	fparam_6	forwardedFloatArg6	CONFIRMED	only used as an unchanged argument of calls (1 occurrences): never otherwise read by this function
 local	_glBitmap_Exec	fparam_7	forwardedFloatArg7	CONFIRMED	only used as an unchanged argument of calls (1 occurrences): never otherwise read by this function
@@ -635,21 +635,21 @@ local	_glBitmap_ListExec	fparam_5	forwardedFloatArg5	CONFIRMED	only used as an u
 local	_glBitmap_ListExec	fparam_6	forwardedFloatArg6	CONFIRMED	only used as an unchanged argument of calls (1 occurrences): never otherwise read by this function
 local	_glBitmap_ListExec	fparam_7	forwardedFloatArg7	CONFIRMED	only used as an unchanged argument of calls (1 occurrences): never otherwise read by this function
 local	_glBitmap_ListExec	fparam_8	forwardedFloatArg8	CONFIRMED	only used as an unchanged argument of calls (1 occurrences): never otherwise read by this function
-local	_glBitmap_Comp	param_5	unusedArg5	CONFIRMED	never read in the function body (declared in the signature only; unused argument)
-local	_glBitmap_Comp	param_6	unusedArg6	CONFIRMED	never read in the function body (declared in the signature only; unused argument)
-local	_glBitmap_Comp	param_7	unusedArg7	CONFIRMED	never read in the function body (declared in the signature only; unused argument)
+local	_glBitmap_Comp	param_5	yorigShadow	CONFIRMED	PPC32 Darwin ABI: yorig is passed in an FPR and its GPR slot is reserved (argument slots after the context: width r4, height r5, xorig r6, yorig r7, xmove r8, ymove r9, bitmap r10); this is the unused GPR shadow of the yorig parameter of glBitmap
+local	_glBitmap_Comp	param_6	xmoveShadow	CONFIRMED	PPC32 Darwin ABI: xmove is passed in an FPR and its GPR slot is reserved (argument slots after the context: width r4, height r5, xorig r6, yorig r7, xmove r8, ymove r9, bitmap r10); this is the unused GPR shadow of the xmove parameter of glBitmap
+local	_glBitmap_Comp	param_7	ymoveShadow	CONFIRMED	PPC32 Darwin ABI: ymove is passed in an FPR and its GPR slot is reserved (argument slots after the context: width r4, height r5, xorig r6, yorig r7, xmove r8, ymove r9, bitmap r10); this is the unused GPR shadow of the ymove parameter of glBitmap
 local	_glBitmap_CompExec	in_f5	incomingFpr5	INFERRED	Ghidra pseudo-register in_f5: the value f5 held on entry (read without being written in this function)
 local	_glBitmap_CompExec	in_f6	incomingFpr6	INFERRED	Ghidra pseudo-register in_f6: the value f6 held on entry (read without being written in this function)
 local	_glBitmap_CompExec	in_f7	incomingFpr7	INFERRED	Ghidra pseudo-register in_f7: the value f7 held on entry (read without being written in this function)
 local	_glBitmap_CompExec	in_f8	incomingFpr8	INFERRED	Ghidra pseudo-register in_f8: the value f8 held on entry (read without being written in this function)
-local	_glBitmap_CompExec	param_5	forwardedArg5	CONFIRMED	only used as an unchanged argument of calls (2 occurrences): never otherwise read by this function
-local	_glBitmap_CompExec	param_6	forwardedArg6	CONFIRMED	only used as an unchanged argument of calls (2 occurrences): never otherwise read by this function
-local	_glBitmap_CompExec	param_7	forwardedArg7	CONFIRMED	only used as an unchanged argument of calls (2 occurrences): never otherwise read by this function
-local	_glBitmap_CompExec	param_8	forwardedArg8	CONFIRMED	only used as an unchanged argument of calls (2 occurrences): never otherwise read by this function
-local	_glBitmap_NoopExec	param_5	forwardedArg5	CONFIRMED	only used as an unchanged argument of calls (2 occurrences): never otherwise read by this function
-local	_glBitmap_NoopExec	param_6	forwardedArg6	CONFIRMED	only used as an unchanged argument of calls (2 occurrences): never otherwise read by this function
-local	_glBitmap_NoopExec	param_7	unusedArg7	CONFIRMED	never read in the function body (declared in the signature only; unused argument)
-local	_glBitmap_NoopExec	param_8	forwardedArg8	CONFIRMED	only used as an unchanged argument of calls (1 occurrences): never otherwise read by this function
+local	_glBitmap_CompExec	param_5	yorigShadow	CONFIRMED	PPC32 Darwin ABI: yorig is passed in an FPR and its GPR slot is reserved (argument slots after the context: width r4, height r5, xorig r6, yorig r7, xmove r8, ymove r9, bitmap r10); this is the unused GPR shadow of the yorig parameter of glBitmap
+local	_glBitmap_CompExec	param_6	xmoveShadow	CONFIRMED	PPC32 Darwin ABI: xmove is passed in an FPR and its GPR slot is reserved (argument slots after the context: width r4, height r5, xorig r6, yorig r7, xmove r8, ymove r9, bitmap r10); this is the unused GPR shadow of the xmove parameter of glBitmap
+local	_glBitmap_CompExec	param_7	ymoveShadow	CONFIRMED	PPC32 Darwin ABI: ymove is passed in an FPR and its GPR slot is reserved (argument slots after the context: width r4, height r5, xorig r6, yorig r7, xmove r8, ymove r9, bitmap r10); this is the unused GPR shadow of the ymove parameter of glBitmap
+local	_glBitmap_CompExec	param_8	bitmap	CONFIRMED	GL prototype glBitmap(width, height, xorig, yorig, xmove, ymove, bitmap): the bitmap pointer is the 7th API argument, in r10 after the four float arguments' reserved GPR slots r6..r9 (PPC32 Darwin ABI); forwarded unchanged to _glBitmap_Comp/_glBitmap_Exec
+local	_glBitmap_NoopExec	param_5	yorigShadow	CONFIRMED	PPC32 Darwin ABI: yorig is passed in an FPR and its GPR slot is reserved (argument slots after the context: width r4, height r5, xorig r6, yorig r7, xmove r8, ymove r9, bitmap r10); this is the unused GPR shadow of the yorig parameter of glBitmap
+local	_glBitmap_NoopExec	param_6	xmoveShadow	CONFIRMED	PPC32 Darwin ABI: xmove is passed in an FPR and its GPR slot is reserved (argument slots after the context: width r4, height r5, xorig r6, yorig r7, xmove r8, ymove r9, bitmap r10); this is the unused GPR shadow of the xmove parameter of glBitmap
+local	_glBitmap_NoopExec	param_7	ymoveShadow	CONFIRMED	PPC32 Darwin ABI: ymove is passed in an FPR and its GPR slot is reserved (argument slots after the context: width r4, height r5, xorig r6, yorig r7, xmove r8, ymove r9, bitmap r10); this is the unused GPR shadow of the ymove parameter of glBitmap
+local	_glBitmap_NoopExec	param_8	bitmap	CONFIRMED	GL prototype glBitmap(width, height, xorig, yorig, xmove, ymove, bitmap): the bitmap pointer is the 7th API argument, in r10 after the four float arguments' reserved GPR slots r6..r9 (PPC32 Darwin ABI)
 local	_glBitmap_NoopExec	fparam_5	forwardedFloatArg5	CONFIRMED	only used as an unchanged argument of calls (2 occurrences): never otherwise read by this function
 local	_glBitmap_NoopExec	fparam_6	forwardedFloatArg6	CONFIRMED	only used as an unchanged argument of calls (2 occurrences): never otherwise read by this function
 local	_glBitmap_NoopExec	fparam_7	forwardedFloatArg7	CONFIRMED	only used as an unchanged argument of calls (2 occurrences): never otherwise read by this function

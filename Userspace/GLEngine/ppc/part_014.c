@@ -14,19 +14,19 @@ void _glCopyPixels_NoopExec(int glContext,undefined4 x,undefined4 y,undefined4 w
   undefined4 uVar6;
   undefined4 uVar7;
   undefined4 uVar8;
-  int glContextWord50ac;
+  int matrixChangeBits;
   uint uVar10;
   int *piVar11;
   double extraout_f1;
   double extraout_f1_00;
   double extraout_f1_01;
   
-  glContextWord50ac = *(int *)(glContext + 0x50ac);
+  matrixChangeBits = *(int *)(glContext + 0x50ac);
   uVar5 = y;
   uVar6 = width;
   uVar7 = height;
   uVar8 = type;
-  if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+  if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
     fparam_1 = extraout_f1;
   }
@@ -35,7 +35,7 @@ void _glCopyPixels_NoopExec(int glContext,undefined4 x,undefined4 y,undefined4 w
     piVar11 = (int *)(glContext + 0x310);
     cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar5,uVar6,uVar7,uVar8,glContextWord50ac,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar5,uVar6,uVar7,uVar8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                  forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -1004,7 +1004,7 @@ int _glDrawPixels_ListExec(int glContext,uint *recordedArgs,double fparam_1,doub
   undefined4 incomingR7;
   undefined4 incomingR8;
   uint uVar9;
-  int glContextWord50ac;
+  int matrixChangeBits;
   int *piVar11;
   int iVar12;
   float *pfVar13;
@@ -1103,8 +1103,8 @@ LAB_000637ac:
         if (recordedArgs[1] == 0) {
           return iVar12;
         }
-        glContextWord50ac = *(int *)(glContext + 0x50ac);
-        if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+        matrixChangeBits = *(int *)(glContext + 0x50ac);
+        if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
           _gleUpdateMatrixFunc(glContext);
           fparam_1 = extraout_f1;
         }
@@ -1113,7 +1113,7 @@ LAB_000637ac:
         piVar11 = (int *)(glContext + 0x310);
         cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
         if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,glContextWord50ac,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                      forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         }
@@ -1236,7 +1236,7 @@ int _glDrawPixels_Comp(glContext, width, height, format, type, pixels)
   int iVar2;
   int rowBytes;
   int iVar3;
-  int glContextPtr4a6c;
+  int pixelUnpackBuffer;
   undefined4 *listRecord;
   undefined4 *puVar5;
   undefined4 *puVar6;
@@ -1328,9 +1328,9 @@ LAB_00063c10:
         iVar3 = _glePixelBytes(format,type);
       }
       if (pixels == (pixels / iVar3) * iVar3) {
-        glContextPtr4a6c = *(int *)(glContext + 0x4a6c);
-        if ((glContextPtr4a6c != 0) && (*(int *)(glContextPtr4a6c + 0x40) != 0)) {
-          _gleSynchronizePluginBuffer(glContext,glContextPtr4a6c + 0x10);
+        pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+        if ((pixelUnpackBuffer != 0) && (*(int *)(pixelUnpackBuffer + 0x40) != 0)) {
+          _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
         }
         pixels = pixels + *(int *)(glContextPtr4a6c2 + 0x30);
         goto LAB_00063c10;
@@ -1358,11 +1358,11 @@ void _glDrawPixels_Exec(int glContext,uint width,int height,uint format,uint typ
   int iVar8;
   int framebufferObject;
   int iVar9;
-  int glContextWord50ac;
+  int matrixChangeBits;
   uint uVar10;
   int iVar11;
   uint uVar12;
-  int glContextPtr4a6c;
+  int pixelUnpackBuffer;
   float *pfVar14;
   int iVar15;
   int *piVar16;
@@ -1424,14 +1424,14 @@ LAB_00063ed4:
     if ((format != 0x85b9) || ((width & 1) != 0)) goto LAB_00063f78;
   }
 LAB_00063f08:
-  glContextPtr4a6c = *(int *)(glContext + 0x4a6c);
+  pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
   iVar11 = height;
   uVar12 = format;
   uVar10 = type;
   iVar5 = pixels;
-  if (glContextPtr4a6c != 0) {
+  if (pixelUnpackBuffer != 0) {
     iVar8 = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,pixels);
-    iVar15 = *(int *)(glContextPtr4a6c + 0x38);
+    iVar15 = *(int *)(pixelUnpackBuffer + 0x38);
     fparam_1 = (double)((double (*)())_gleBytesPerElement)(type);
     iVar9 = (int)fparam_1;
     if (iVar8 <= iVar15) {
@@ -1440,7 +1440,7 @@ LAB_00063f08:
         fparam_1 = extraout_f1;
       }
       if (pixels == (pixels / iVar9) * iVar9) {
-        pixels = pixels + *(int *)(glContextPtr4a6c + 0x30);
+        pixels = pixels + *(int *)(pixelUnpackBuffer + 0x30);
         goto LAB_00063f94;
       }
     }
@@ -1477,8 +1477,8 @@ LAB_00063f94:
       if (height == 0) {
         return;
       }
-      glContextWord50ac = *(int *)(glContext + 0x50ac);
-      if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+      matrixChangeBits = *(int *)(glContext + 0x50ac);
+      if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
         _gleUpdateMatrixFunc(glContext);
         fparam_1 = extraout_f1_00;
       }
@@ -1487,7 +1487,7 @@ LAB_00063f94:
       piVar16 = (int *)(glContext + 0x310);
       cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,iVar11,uVar12,uVar10,iVar5,glContextWord50ac,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,iVar11,uVar12,uVar10,iVar5,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                    forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       }
@@ -1572,15 +1572,15 @@ LAB_00064218:
            *(float *)(glContext + 0x4a4c) * *(float *)(glContext + 0x2e4) + *(float *)(glContext + 0x4a50)
       ;
       *(float *)(iVar6 + -0x1f8) = *(float *)(glContext + 0x4a54) * *(float *)(glContext + 0x2e8);
-      if (glContextPtr4a6c != 0) {
+      if (pixelUnpackBuffer != 0) {
         iVar6 = (**(code **)(glContext + 0x46a4))
                           (*(undefined4 *)(glContext + 0x4688),pfVar14,width,height,format,type
                            ,pixels,0);
         if (iVar6 != 0) {
           return;
         }
-        if (*(int *)(glContextPtr4a6c + 0x40) != 0) {
-          _gleSynchronizePluginBuffer(glContext,glContextPtr4a6c + 0x10);
+        if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+          _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
         }
       }
       if ((*(char *)(*(int *)(glContext + 0x468c) + 0x7b) != '\0') &&
@@ -1645,19 +1645,19 @@ void _glDrawPixels_NoopExec(int glContext,undefined4 width,undefined4 height,und
   undefined4 uVar6;
   undefined4 uVar7;
   undefined4 uVar8;
-  int glContextWord50ac;
+  int matrixChangeBits;
   uint uVar10;
   int *piVar11;
   double extraout_f1;
   double extraout_f1_00;
   double extraout_f1_01;
   
-  glContextWord50ac = *(int *)(glContext + 0x50ac);
+  matrixChangeBits = *(int *)(glContext + 0x50ac);
   uVar5 = height;
   uVar6 = format;
   uVar7 = type;
   uVar8 = pixels;
-  if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+  if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
     fparam_1 = extraout_f1;
   }
@@ -1666,7 +1666,7 @@ void _glDrawPixels_NoopExec(int glContext,undefined4 width,undefined4 height,und
     piVar11 = (int *)(glContext + 0x310);
     cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar5,uVar6,uVar7,uVar8,glContextWord50ac,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar5,uVar6,uVar7,uVar8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                  forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       fparam_1 = fparam_1;

@@ -4165,7 +4165,7 @@ void _glSwap_Exec(int glContext,double fparam_1,double forwardedFloatArg2,double
   undefined4 incomingR6;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  int glContextWord50ac;
+  int matrixChangeBits;
   uint uVar7;
   int *piVar8;
   double extraout_f1;
@@ -4177,8 +4177,8 @@ void _glSwap_Exec(int glContext,double fparam_1,double forwardedFloatArg2,double
     glErrorCode = 0x502;
     goto LAB_00043588;
   }
-  glContextWord50ac = *(int *)(glContext + 0x50ac);
-  if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+  matrixChangeBits = *(int *)(glContext + 0x50ac);
+  if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
     fparam_1 = extraout_f1;
   }
@@ -4187,7 +4187,7 @@ void _glSwap_Exec(int glContext,double fparam_1,double forwardedFloatArg2,double
   piVar8 = (int *)(glContext + 0x310);
   cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,glContextWord50ac,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -4599,8 +4599,8 @@ void _gleCallList(glContext, forwardedArg2)
 {
   int iVar1;
   int hashObject;
-  undefined4 glContextWord4a68;
-  undefined4 glContextWord4a6c;
+  undefined4 pixelPackBuffer;
+  undefined4 pixelUnpackBuffer;
   uint uVar4;
   uint loopIndex;
   undefined4 *puVar6;
@@ -4609,8 +4609,8 @@ void _gleCallList(glContext, forwardedArg2)
     *(int *)(glContext + 0x540c) = *(int *)(glContext + 0x540c) + 1;
     hashObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x300c,forwardedArg2);
     if (hashObject != 0) {
-      glContextWord4a68 = *(undefined4 *)(glContext + 0x4a68);
-      glContextWord4a6c = *(undefined4 *)(glContext + 0x4a6c);
+      pixelPackBuffer = *(undefined4 *)(glContext + 0x4a68);
+      pixelUnpackBuffer = *(undefined4 *)(glContext + 0x4a6c);
       loopIndex = 0;
       *(undefined4 *)(glContext + 0x4a68) = 0;
       puVar6 = (undefined4 *)(hashObject + 0x2c);
@@ -4623,8 +4623,8 @@ void _gleCallList(glContext, forwardedArg2)
           puVar6 = (undefined4 *)((int)(puVar6 + 1) + iVar1);
         } while (loopIndex < uVar4);
       }
-      *(undefined4 *)(glContext + 0x4a68) = glContextWord4a68;
-      *(undefined4 *)(glContext + 0x4a6c) = glContextWord4a6c;
+      *(undefined4 *)(glContext + 0x4a68) = pixelPackBuffer;
+      *(undefined4 *)(glContext + 0x4a6c) = pixelUnpackBuffer;
     }
     *(int *)(glContext + 0x540c) = *(int *)(glContext + 0x540c) + -1;
   }
@@ -4815,7 +4815,7 @@ int _gleSetupAndDrawArraysOrElementsOutOfLine_ListExec(glContext, recordedArgs)
   uint in_r7;
   undefined4 in_r8;
   int iVar9;
-  int glContextWord50ac;
+  int matrixChangeBits;
   uint uVar10;
   uint loopIndex3;
   uint uVar12;
@@ -4861,8 +4861,8 @@ int _gleSetupAndDrawArraysOrElementsOutOfLine_ListExec(glContext, recordedArgs)
     goto LAB_0004472c;
   }
   fparam_1 = (double)((double (*)())_gleSetupOutOfLineDrawPointers)(glContext,puVar14);
-  glContextWord50ac = *(int *)(glContext + 0x50ac);
-  if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+  matrixChangeBits = *(int *)(glContext + 0x50ac);
+  if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
     fparam_1 = extraout_f1;
   }
@@ -4871,7 +4871,7 @@ int _gleSetupAndDrawArraysOrElementsOutOfLine_ListExec(glContext, recordedArgs)
     pendingChangeWords = (int *)(glContext + 0x310);
     cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,dstCursor,in_r6,in_r7,in_r8,glContextWord50ac,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,dstCursor,in_r6,in_r7,in_r8,matrixChangeBits,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,
                  incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -4968,8 +4968,8 @@ LAB_000444f0:
       goto LAB_00044808;
     }
   }
-  glContextWord50ac = *(int *)(glContext + 0x50ac);
-  if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+  matrixChangeBits = *(int *)(glContext + 0x50ac);
+  if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
     fparam_1 = extraout_f1_03;
   }
@@ -4978,7 +4978,7 @@ LAB_000444f0:
     piVar16 = (int *)(glContext + 0x310);
     cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,dstCursor,in_r6,in_r7,in_r8,glContextWord50ac,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,dstCursor,in_r6,in_r7,in_r8,matrixChangeBits,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,
                  incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
     }
@@ -5696,7 +5696,7 @@ int _gleDrawArraysOrElementsOutOfLine_ListExec(glContext, recordedArgs)
   undefined4 in_r7;
   undefined4 in_r8;
   int iVar8;
-  int glContextWord50ac;
+  int matrixChangeBits;
   uint uVar9;
   uint loopIndex3;
   undefined4 uVar11;
@@ -5733,8 +5733,8 @@ int _gleDrawArraysOrElementsOutOfLine_ListExec(glContext, recordedArgs)
     goto LAB_00045858;
   }
   fparam_1 = (double)((double (*)())_gleSetupOutOfLineDrawPointers)(glContext,iVar14);
-  glContextWord50ac = *(int *)(glContext + 0x50ac);
-  if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+  matrixChangeBits = *(int *)(glContext + 0x50ac);
+  if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
     fparam_1 = extraout_f1;
   }
@@ -5743,7 +5743,7 @@ int _gleDrawArraysOrElementsOutOfLine_ListExec(glContext, recordedArgs)
     pendingChangeWords = (int *)(glContext + 0x310);
     cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,in_r5,in_r6,in_r7,in_r8,glContextWord50ac,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,in_r5,in_r6,in_r7,in_r8,matrixChangeBits,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5
                  ,incomingFpr6,incomingFpr7,incomingFpr8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -5840,8 +5840,8 @@ LAB_0004561c:
       goto LAB_00045934;
     }
   }
-  glContextWord50ac = *(int *)(glContext + 0x50ac);
-  if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+  matrixChangeBits = *(int *)(glContext + 0x50ac);
+  if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
     fparam_1 = extraout_f1_03;
   }
@@ -5850,7 +5850,7 @@ LAB_0004561c:
     piVar15 = (int *)(glContext + 0x310);
     cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,in_r5,in_r6,in_r7,in_r8,glContextWord50ac,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,in_r5,in_r6,in_r7,in_r8,matrixChangeBits,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5
                  ,incomingFpr6,incomingFpr7,incomingFpr8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
     }

@@ -1476,11 +1476,11 @@ void _glFramebufferTexture1DEXT_Exec(glContext, target, attachment, textarget, t
   uint level;
 {
   undefined4 glErrorCode;
-  uint uVar1;
-  int iVar2;
+  uint attachmentIndex;
+  int textureObject;
   undefined4 uVar3;
   
-  iVar2 = 0;
+  textureObject = 0;
   uVar3 = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target != 0x8d40) {
@@ -1502,29 +1502,29 @@ LAB_00066a74:
         goto LAB_00066af0;
       }
       if (attachment == 0x8d00) {
-        uVar1 = 4;
+        attachmentIndex = 4;
       }
       else if (attachment == 0x8d20) {
-        uVar1 = 5;
+        attachmentIndex = 5;
       }
       else {
-        uVar1 = attachment - 0x8ce0;
-        if (*(uint *)(*(int *)(glContext + 0x468c) + 0x18) <= uVar1) goto LAB_00066a74;
+        attachmentIndex = attachment - 0x8ce0;
+        if (*(uint *)(*(int *)(glContext + 0x468c) + 0x18) <= attachmentIndex) goto LAB_00066a74;
       }
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
       }
       if (texture == 0) {
 LAB_00066afc:
-        _gleFramebufferTexture(glContext,uVar1,uVar3,iVar2,0,level,0);
+        _gleFramebufferTexture(glContext,attachmentIndex,uVar3,textureObject,0,level,0);
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
           return;
         }
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
         return;
       }
-      iVar2 = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,texture);
-      if (iVar2 != 0) {
+      textureObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,texture);
+      if (textureObject != 0) {
         uVar3 = 4;
         goto LAB_00066afc;
       }
@@ -1553,25 +1553,25 @@ void _glFramebufferTexture2DEXT_Exec(glContext, target, attachment, textarget, t
 {
   undefined4 glErrorCode;
   undefined4 uVar1;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
+  uint attachmentIndex;
+  int textureObject;
+  int face;
   
-  iVar3 = 0;
-  iVar4 = 0;
+  textureObject = 0;
+  face = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target != 0x8d40) goto LAB_00066c98;
     if (*(int *)(glContext + 0x744c) != 0) {
       if (-1 < (int)level) {
         if (attachment == 0x8d00) {
-          uVar2 = 4;
+          attachmentIndex = 4;
         }
         else if (attachment == 0x8d20) {
-          uVar2 = 5;
+          attachmentIndex = 5;
         }
         else {
-          uVar2 = attachment - 0x8ce0;
-          if (*(uint *)(*(int *)(glContext + 0x468c) + 0x18) <= uVar2) goto LAB_00066c98;
+          attachmentIndex = attachment - 0x8ce0;
+          if (*(uint *)(*(int *)(glContext + 0x468c) + 0x18) <= attachmentIndex) goto LAB_00066c98;
         }
         if (textarget == 0x84f5) {
           if (level == 0) {
@@ -1581,9 +1581,9 @@ LAB_00066cac:
               _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
             }
             if ((texture == 0) ||
-               (iVar3 = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,texture),
-               iVar3 != 0)) {
-              _gleFramebufferTexture(glContext,uVar2,uVar1,iVar3,iVar4,level,0);
+               (textureObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,texture),
+               textureObject != 0)) {
+              _gleFramebufferTexture(glContext,attachmentIndex,uVar1,textureObject,face,level,0);
               if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
                 return;
               }
@@ -1612,7 +1612,7 @@ LAB_00066c98:
         else {
           if (5 < textarget - 0x8515) goto LAB_00066c98;
           if (level <= 0x1fU - LZCOUNT((uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc2))) {
-            iVar4 = textarget - 0x8515;
+            face = textarget - 0x8515;
             uVar1 = 0;
             goto LAB_00066cac;
           }
@@ -1647,10 +1647,10 @@ void _glFramebufferTexture3DEXT_Exec(glContext, target, attachment, textarget, t
 {
   undefined4 glErrorCode;
   uint uVar1;
-  int iVar2;
+  int textureObject;
   undefined4 uVar3;
   
-  iVar2 = 0;
+  textureObject = 0;
   uVar3 = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8d40) {
@@ -1674,15 +1674,15 @@ void _glFramebufferTexture3DEXT_Exec(glContext, target, attachment, textarget, t
             }
             if (texture == 0) {
 LAB_00066ee8:
-              _gleFramebufferTexture(glContext,uVar1,uVar3,iVar2,0,level,zoffset);
+              _gleFramebufferTexture(glContext,uVar1,uVar3,textureObject,0,level,zoffset);
               if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
                 return;
               }
               _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
               return;
             }
-            iVar2 = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,texture);
-            if (iVar2 != 0) {
+            textureObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,texture);
+            if (textureObject != 0) {
               uVar3 = 1;
               goto LAB_00066ee8;
             }
@@ -1726,11 +1726,11 @@ void _glFramebufferRenderbufferEXT_Exec_body(glContext, target, attachment, rend
   int renderbuffer;
 {
   undefined4 glErrorCode;
-  uint uVar1;
-  int iVar2;
+  uint attachmentIndex;
+  int textureObject;
   undefined4 uVar3;
   
-  iVar2 = 0;
+  textureObject = 0;
   uVar3 = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((target != 0x8d40) || ((renderbuffer != 0 && (renderbuffertarget != 0x8d41)))) {
@@ -1743,29 +1743,29 @@ LAB_00066ffc:
     }
     if (*(int *)(glContext + 0x744c) != 0) {
       if (attachment == 0x8d00) {
-        uVar1 = 4;
+        attachmentIndex = 4;
       }
       else if (attachment == 0x8d20) {
-        uVar1 = 5;
+        attachmentIndex = 5;
       }
       else {
-        uVar1 = attachment - 0x8ce0;
-        if (*(uint *)(*(int *)(glContext + 0x468c) + 0x18) <= uVar1) goto LAB_00066ffc;
+        attachmentIndex = attachment - 0x8ce0;
+        if (*(uint *)(*(int *)(glContext + 0x468c) + 0x18) <= attachmentIndex) goto LAB_00066ffc;
       }
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
       }
       if (renderbuffer == 0) {
 LAB_00067080:
-        _gleFramebufferTexture(glContext,uVar1,uVar3,iVar2,0,0,0);
+        _gleFramebufferTexture(glContext,attachmentIndex,uVar3,textureObject,0,0,0);
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
           return;
         }
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
         return;
       }
-      iVar2 = _gleLookupHashObject(((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148),renderbuffer);
-      if (iVar2 != 0) {
+      textureObject = _gleLookupHashObject(((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148),renderbuffer);
+      if (textureObject != 0) {
         uVar3 = 0x2000;
         goto LAB_00067080;
       }
