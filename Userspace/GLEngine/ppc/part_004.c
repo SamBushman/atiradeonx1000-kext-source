@@ -778,7 +778,7 @@ void _gleFreeFenceMachine(glContext)
 void _gleFreeVertexArrayState(glContext)
   int glContext;
 {
-  int iVar1;
+  int refCount;
   int clientState;
   
   clientState = *(int *)(glContext + 0x4a60);
@@ -787,9 +787,9 @@ void _gleFreeVertexArrayState(glContext)
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      iVar1 = *(int *)(clientState + 8) + -1;
-      *(int *)(clientState + 8) = iVar1;
-      if (iVar1 == 0) {
+      refCount = *(int *)(clientState + 8) + -1;
+      *(int *)(clientState + 8) = refCount;
+      if (refCount == 0) {
         ((int (*)())_gleFreeVertexArrayObject)(glContext,clientState);
       }
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {

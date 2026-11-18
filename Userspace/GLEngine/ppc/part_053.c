@@ -739,7 +739,7 @@ void _gleShaderDataUpdateParams(shaderData)
   int parameterBlock;
   uint parameterWord;
   uint updatedMaskWord;
-  int iVar7;
+  int parameterMaskBase;
   uint parameterIndex;
   undefined1 parameterIndexByte;
   uint parameterSlot;
@@ -908,8 +908,8 @@ LAB_000f48a0:
       updatedMaskWord = *(uint *)(shaderData + 4) | 0x10;
       goto LAB_000f48a0;
     }
-    iVar7 = ((int)parameterIndex >> 5) * 4 + shaderData;
-    *(uint *)(iVar7 + 8) = *(uint *)(iVar7 + 8) | 1 << (parameterIndex & 0x1f);
+    parameterMaskBase = ((int)parameterIndex >> 5) * 4 + shaderData;
+    *(uint *)(parameterMaskBase + 8) = *(uint *)(parameterMaskBase + 8) | 1 << (parameterIndex & 0x1f);
 switchD_000f44b0_caseD_0:
     parameterIndex = parameterIndex + 1;
     if (parameterCount <= (int)parameterIndex) {

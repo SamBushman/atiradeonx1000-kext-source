@@ -4554,30 +4554,30 @@ int _gleAddListItemWithFree(glContext, forwardedArg2, forwardedArg3, freeFunctio
   undefined4 freeFunction;
   int recordSize;
 {
-  int iVar1;
-  int iVar2;
+  int resultThenTrailerOffset;
+  int previousTrailer;
   int listRecord;
   int trailer;
   int glContextWord53e8;
   
   listRecord = _gleAddListItem(glContext,forwardedArg2,forwardedArg3);
-  iVar1 = 0;
+  resultThenTrailerOffset = 0;
   if (listRecord != 0) {
     glContextWord53e8 = *(int *)(glContext + 0x53e8);
     trailer = listRecord + recordSize;
     *(undefined4 *)(listRecord + recordSize) = freeFunction;
     *(undefined4 *)(trailer + 8) = 0;
     *(int *)(trailer + 4) = listRecord - glContextWord53e8;
-    iVar1 = *(int *)(*(int *)(glContext + 0x53e8) + 0x28);
-    iVar2 = *(int *)(glContext + 0x53e8) + 0x1c;
-    if (iVar1 != 0) {
-      iVar2 = glContextWord53e8 + iVar1;
+    resultThenTrailerOffset = *(int *)(*(int *)(glContext + 0x53e8) + 0x28);
+    previousTrailer = *(int *)(glContext + 0x53e8) + 0x1c;
+    if (resultThenTrailerOffset != 0) {
+      previousTrailer = glContextWord53e8 + resultThenTrailerOffset;
     }
-    *(int *)(iVar2 + 8) = trailer - glContextWord53e8;
+    *(int *)(previousTrailer + 8) = trailer - glContextWord53e8;
     *(int *)(*(int *)(glContext + 0x53e8) + 0x28) = trailer - glContextWord53e8;
-    iVar1 = listRecord;
+    resultThenTrailerOffset = listRecord;
   }
-  return iVar1;
+  return resultThenTrailerOffset;
 }
 
 /* _CloseCurrentVAR @ 0x43d34 (228 bytes) */

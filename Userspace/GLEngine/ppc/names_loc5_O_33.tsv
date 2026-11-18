@@ -1,0 +1,11 @@
+local	_gliUpdatePluginConfig	puVar1	setClipInterpFunc	CONFIRMED	only assigned PTR__gleSetClipInterpFunc: holds the address of that function, stored to ctx+0x49cc
+local	_gleShaderDataUpdateParams	iVar7	parameterMaskBase	INFERRED	shaderData + (parameterIndex >> 5) * 4: the mask word at +8 gets bit (parameterIndex & 31) set
+local	_glGetUniformfvARB_Exec	auStack_38	uniformSize	CONFIRMED	size out parameter of _ShGetUniformTypeInfo (same role as uniformSize in _glUniform2iARB_Exec)
+local	_gleInitTextureState	iVar5	rendererHandleBase	INFERRED	ctx+0x10000 + 4*unit, advanced by 0x14 per target: base of the per-renderer copies (stride 0x2e0) of each texture's renderer handle at -0x7920
+local	_gleAddListItemWithFree	iVar1	resultThenTrailerOffset	CONFIRMED	0 for a null result, then the offset of the previous trailer from the list object (+0x28), finally listRecord, which is returned
+local	_gleAddListItemWithFree	iVar2	previousTrailer	CONFIRMED	address of the previous trailer record (object+0x1c for the first one) whose +8 link receives the new trailer's offset
+local	_glePPPruneLocals	param_1	program	INFERRED	object whose +0x1c state holds the local list (+4) and the instruction list (+0x20) pruned here
+local	_glCompressedTexImage2D_Exec	iVar5	levelCreated	CONFIRMED	result of _gleCreateTextureLevel: nonzero when the level exists, data is then uploaded with _gleCompressedTextureImagePut
+local	_glCopyTexSubImage2D_Exec	iVar7	dirtyBitArrayWord	CONFIRMED	word read from the dirty bit array at ctx+0x324 by the scan loop (same idiom as _glBitmap_NoopExec)
+local	_gleBuildModelviewTransformFuncAV_body	puVar5	pushInstructionsSlot	CONFIRMED	PTR__glePushInstructions: import slot dereferenced and called to push the generated instruction words
+local	_gleFreeVertexArrayState	iVar1	refCount	CONFIRMED	reference count at clientState+8 after the decrement; the object is freed when it reaches zero

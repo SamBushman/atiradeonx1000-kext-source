@@ -3715,8 +3715,8 @@ code_r0x000244e8:
 }
 
 /* _glePPPruneLocals @ 0x24548 (412 bytes) */
-int _glePPPruneLocals(param_1)
-  int param_1;
+int _glePPPruneLocals(program)
+  int program;
 {
   uint loopIndex;
   uint instructionHeader;
@@ -3727,8 +3727,8 @@ int _glePPPruneLocals(param_1)
   int *localList;
   int localChunk;
   
-  localList = *(int **)(*(int *)(param_1 + 0x1c) + 4);
-  instructionList = *(int **)(*(int *)(param_1 + 0x1c) + 0x20);
+  localList = *(int **)(*(int *)(program + 0x1c) + 4);
+  instructionList = *(int **)(*(int *)(program + 0x1c) + 0x20);
   chunkCursor = 0;
   localChunk = *localList;
   if (*localList != 0) {

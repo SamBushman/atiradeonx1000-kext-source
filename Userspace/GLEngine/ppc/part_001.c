@@ -5758,7 +5758,7 @@ LAB_00012774:
 /* _gliUpdatePluginConfig @ 0x127a4 (104 bytes) */
 void _gliUpdatePluginConfig(int glContext,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  undefined *puVar1;
+  undefined *setClipInterpFunc;
   double fparam_1_00;
   double incomingStack_ffffffb8;
   double incomingStack_ffffffc0;
@@ -5772,9 +5772,9 @@ void _gliUpdatePluginConfig(int glContext,double forwardedFloatArg1,double forwa
   ((void (*)())_gleUpdatePolyMode)(glContext);
   ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
   ((int (*)())_gleUpdateTextureTransform)(glContext);
-  puVar1 = PTR__gleSetClipInterpFunc_00112038;
+  setClipInterpFunc = PTR__gleSetClipInterpFunc_00112038;
   *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-  *(undefined **)(glContext + 0x49cc) = puVar1;
+  *(undefined **)(glContext + 0x49cc) = setClipInterpFunc;
   ((void (*)())_gleResetVertexArrays)(glContext);
   return;
 }

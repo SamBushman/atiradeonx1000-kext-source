@@ -408,7 +408,7 @@ void _glCopyTexSubImage2D_Exec(int glContext,int target,uint level,undefined4 xo
   undefined4 glErrorCode;
   int *srcCursor;
   int pluginResult;
-  int iVar7;
+  int dirtyBitArrayWord;
   int levelImageCursor;
   int levelRecord;
   int framebufferObject;
@@ -455,9 +455,9 @@ LAB_000987f0:
         loopIndex = 0;
         srcCursor = (int *)(glContext + 0x324);
         do {
-          iVar7 = *srcCursor;
+          dirtyBitArrayWord = *srcCursor;
           srcCursor = srcCursor + 1;
-          if (iVar7 != 0) {
+          if (dirtyBitArrayWord != 0) {
             *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
             break;
           }

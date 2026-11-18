@@ -1628,7 +1628,7 @@ void _glGetUniformfvARB_Exec(glContext, programObj, location, params)
   int uniformValues;
   int typeInfoFound;
   uint *uniformValue;
-  undefined1 auStack_38 [4];
+  undefined1 uniformSize [4];
   uint uniformType;
   undefined2 uniformStageUse [14];
   
@@ -1663,7 +1663,7 @@ LAB_0008f164:
       (*(int *)(sharedStateThenProgramObject + 0x30) <= location)) ||
      ((location == -1 ||
       (typeInfoFound = _ShGetUniformTypeInfo
-                         (*(undefined4 *)(sharedStateThenProgramObject + 0x40),location,auStack_38,&uniformType,uniformStageUse),
+                         (*(undefined4 *)(sharedStateThenProgramObject + 0x40),location,uniformSize,&uniformType,uniformStageUse),
       intToDoubleBias = DOUBLE_00108d58, typeInfoFound == 0)))) {
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);

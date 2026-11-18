@@ -3200,7 +3200,7 @@ void _gleInitTextureState(glContext)
   undefined4 copiedWord;
   int textureObject;
   int textureObject2;
-  int iVar5;
+  int rendererHandleBase;
   int *dstCursor;
   undefined4 *srcCursor;
   int loopIndex5;
@@ -3217,7 +3217,7 @@ void _gleInitTextureState(glContext)
     textureObject = ((int (*)())_gleCreateTextureObject)(loopIndex6 | 0x1000,0);
     ((void (*)())_gleCreatePluginTexture)(glContext,textureObject + 0x10);
     *dstCursor3 = textureObject;
-    iVar5 = loopIndex6 * 4 + glContext + 0x10000;
+    rendererHandleBase = loopIndex6 * 4 + glContext + 0x10000;
     dstCursor = (int *)(glContextPlusIndex4 + 0x5154);
     remaining2 = 0xf;
     do {
@@ -3226,7 +3226,7 @@ void _gleInitTextureState(glContext)
       *dstCursor = textureObject;
       dstCursor = dstCursor + 5;
       if (glContextByte85a4 != '\0') {
-        dstCursor2 = (undefined4 *)(iVar5 + -0x7920);
+        dstCursor2 = (undefined4 *)(rendererHandleBase + -0x7920);
         srcCursor = (undefined4 *)(textureObject + 0x10);
         do {
           copiedWord = *srcCursor;
@@ -3237,7 +3237,7 @@ void _gleInitTextureState(glContext)
         } while (loopIndex5 < (int)(uint)*(byte *)(glContext + 0x85a4));
       }
       remaining2 = remaining2 + -1;
-      iVar5 = iVar5 + 0x14;
+      rendererHandleBase = rendererHandleBase + 0x14;
     } while (-1 < remaining2);
     loopIndex6 = loopIndex6 + 1;
     glContextPlusIndex4 = glContextPlusIndex4 + 4;

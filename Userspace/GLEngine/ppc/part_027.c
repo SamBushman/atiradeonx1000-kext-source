@@ -1022,7 +1022,7 @@ int _glCompressedTexImage2D_Exec(glContext, target, level, internalformat, width
   ushort textureTargetBits;
   undefined4 glErrorCode;
   uint faceIndex;
-  int iVar5;
+  int levelCreated;
   int levelSlot;
   int unpackBuffer;
   int textureObject;
@@ -1073,9 +1073,9 @@ LAB_00091f9c:
         }
         *(byte *)(levelSlot + 0xcf) = *(byte *)(levelSlot + 0xcf) & 0xdf;
       }
-      iVar5 = _gleCreateTextureLevel
+      levelCreated = _gleCreateTextureLevel
                         (glContext,textureObject,textureLevel,internalformat,width,height,1,border,internalformat,0,1,data);
-      if ((iVar5 != 0) && (data != 0)) {
+      if ((levelCreated != 0) && (data != 0)) {
         _gleCompressedTextureImagePut(glContext,textureLevel,0,0,0,width,height,1,internalformat,imageSize,data)
         ;
       }
