@@ -586,11 +586,11 @@ int _glDrawRangeElements_Comp(glContext, mode, start, end, count, type, indices)
   undefined4 type;
   undefined4 indices;
 {
-  undefined4 uVar1;
+  undefined4 drawElementsResult;
   
   if (start <= end) {
-    uVar1 = ((int (*)())_glDrawElements_Comp)(glContext,mode,count,type,indices);
-    return uVar1;
+    drawElementsResult = ((int (*)())_glDrawElements_Comp)(glContext,mode,count,type,indices);
+    return drawElementsResult;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
     return glContext;
@@ -1200,11 +1200,11 @@ int _glMultiDrawRangeElementArrayAPPLE_Comp(glContext, mode, start, end, first, 
   undefined4 count;
   undefined4 primcount;
 {
-  undefined4 uVar1;
+  undefined4 multiDrawResult;
   
   if (start <= end) {
-    uVar1 = ((int (*)())_glMultiDrawElementArrayAPPLE_Comp)(glContext,mode,first,count,primcount);
-    return uVar1;
+    multiDrawResult = ((int (*)())_glMultiDrawElementArrayAPPLE_Comp)(glContext,mode,first,count,primcount);
+    return multiDrawResult;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
     return glContext;
@@ -2647,16 +2647,16 @@ int _glWeightfvARB_Comp(glContext, size, weights)
   int size;
   int *weights;
 {
-  int iVar1;
+  int weight;
   
   if (size < 5) {
     glContext = (int *)_gleAddListItem(glContext,PTR__glWeightARB_ListExec_0011045c,size * 4 + 4);
     if ((glContext != (int *)0x0) && (*glContext = size, 0 < size)) {
       glContext = glContext + 1;
       do {
-        iVar1 = *weights;
+        weight = *weights;
         weights = weights + 1;
-        *glContext = iVar1;
+        *glContext = weight;
         glContext = glContext + 1;
         size = size + -1;
       } while (size != 0);
@@ -2766,8 +2766,8 @@ double _glWeightubvARB_Exec(glContext, size, weights)
   int size;
   int weights;
 {
-  byte *pbVar1;
-  int iVar2;
+  byte *weightPtr;
+  int slotByteOffset;
   float channelScale;
   float *dstCursor;
   int loopIndex;
@@ -2784,9 +2784,9 @@ double _glWeightubvARB_Exec(glContext, size, weights)
   if (0 < size) {
     dstCursor = (float *)(glContext + 0x2d0);
     do {
-      pbVar1 = (byte *)(weights + loopIndex);
+      weightPtr = (byte *)(weights + loopIndex);
       loopIndex = loopIndex + 1;
-      *dstCursor = (GH_U2F((unsigned int)((*pbVar1 | 0x4b000000))) - 8388608.0) * channelScale;
+      *dstCursor = (GH_U2F((unsigned int)((*weightPtr | 0x4b000000))) - 8388608.0) * channelScale;
       dstCursor = dstCursor + 1;
       size = size + -1;
     } while (size != 0);
@@ -2795,9 +2795,9 @@ double _glWeightubvARB_Exec(glContext, size, weights)
     }
   }
   do {
-    iVar2 = loopIndex * 4;
+    slotByteOffset = loopIndex * 4;
     loopIndex = loopIndex + 1;
-    *(undefined4 *)(iVar2 + glContext + 0x2d0) = 0;
+    *(undefined4 *)(slotByteOffset + glContext + 0x2d0) = 0;
   } while (loopIndex < 4);
   return;
 }

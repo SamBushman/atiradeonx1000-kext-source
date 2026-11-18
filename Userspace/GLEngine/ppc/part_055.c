@@ -102,11 +102,11 @@ void _gleSynchronizePluginTextures(glContext)
 }
 
 /* _gleTextureTargetExtractor @ 0x103714 (116 bytes) */
-int _gleTextureTargetExtractor(unusedArg1, param_2)
+int _gleTextureTargetExtractor(unusedArg1, textureObject)
   undefined4 unusedArg1;
-  int param_2;
+  int textureObject;
 {
-  switch(*(ushort *)(param_2 + 0x34) & 0xf) {
+  switch(*(ushort *)(textureObject + 0x34) & 0xf) {
   case 0:
     return 0x8513;
   case 1:

@@ -272,7 +272,7 @@ void _glBindVertexArrayEXT_Exec(glContext, id)
   int glContext;
   undefined4 id;
 {
-  int iVar1;
+  int sharedStateMutex;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) == 0) {
@@ -284,10 +284,10 @@ void _glBindVertexArrayEXT_Exec(glContext, id)
     _gleBindVertexArray(glContext,id);
     return;
   }
-  iVar1 = *(int *)(glContext + 0x5148) + 0x8028;
-  _pthread_mutex_lock(iVar1);
+  sharedStateMutex = *(int *)(glContext + 0x5148) + 0x8028;
+  _pthread_mutex_lock(sharedStateMutex);
   _gleBindVertexArray(glContext,id);
-  _pthread_mutex_unlock(iVar1);
+  _pthread_mutex_unlock(sharedStateMutex);
   return;
 }
 

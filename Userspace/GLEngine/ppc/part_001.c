@@ -5783,14 +5783,14 @@ void _gliUpdatePluginConfig(int glContext,double forwardedFloatArg1,double forwa
 void _gleResetVertexArrays(glContext)
   int glContext;
 {
-  undefined4 uVar1;
+  undefined4 reinitializedCache;
   int glContextWord49a8;
   
   glContextWord49a8 = *(int *)(glContext + 0x49a8);
-  uVar1 = ((int (*)())_gleReinitFuncCache)(*(undefined4 *)(glContext + 0x49b4));
-  *(undefined4 *)(glContext + 0x49b4) = uVar1;
-  uVar1 = ((int (*)())_gleReinitFuncCache)(*(undefined4 *)(glContext + 0x49b8));
-  *(undefined4 *)(glContext + 0x49b8) = uVar1;
+  reinitializedCache = ((int (*)())_gleReinitFuncCache)(*(undefined4 *)(glContext + 0x49b4));
+  *(undefined4 *)(glContext + 0x49b4) = reinitializedCache;
+  reinitializedCache = ((int (*)())_gleReinitFuncCache)(*(undefined4 *)(glContext + 0x49b8));
+  *(undefined4 *)(glContext + 0x49b8) = reinitializedCache;
   *(undefined2 *)(glContext + 0x49c2) = 1;
   *(undefined4 *)(glContext + 0x49c4) = 0;
   *(undefined2 *)(glContext + 0x49be) = 1;
@@ -8487,24 +8487,24 @@ LAB_00015f48:
 /* _glViewport_Exec @ 0x15f6c (136 bytes) */
 void _glViewport_Exec(int glContext,undefined4 x,undefined4 y,int width,int height,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  int iVar1;
+  int maxViewportWidth;
   undefined4 glErrorCode;
-  int iVar3;
+  int maxViewportHeight;
   
-  iVar3 = *(int *)(*(int *)(glContext + 0x468c) + 0x10);
-  iVar1 = *(int *)(*(int *)(glContext + 0x468c) + 0xc);
+  maxViewportHeight = *(int *)(*(int *)(glContext + 0x468c) + 0x10);
+  maxViewportWidth = *(int *)(*(int *)(glContext + 0x468c) + 0xc);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((-1 < width) && (-1 < height)) {
       *(undefined4 *)(glContext + 0x1ba0) = x;
       *(undefined4 *)(glContext + 0x1ba4) = y;
-      if (iVar1 < width) {
-        *(int *)(glContext + 0x1ba8) = iVar1;
+      if (maxViewportWidth < width) {
+        *(int *)(glContext + 0x1ba8) = maxViewportWidth;
       }
       else {
         *(int *)(glContext + 0x1ba8) = width;
       }
-      if (iVar3 < height) {
-        *(int *)(glContext + 0x1bac) = iVar3;
+      if (maxViewportHeight < height) {
+        *(int *)(glContext + 0x1bac) = maxViewportHeight;
       }
       else {
         *(int *)(glContext + 0x1bac) = height;
@@ -8595,17 +8595,17 @@ int _glLoadIdentity_Exec(glContext)
   int glContext;
 {
   uint inverseSlotBits;
-  int iVar2;
+  int lastCallResultOrContext;
   uint matrixDirtyBits;
   undefined4 currentMatrix;
   
   currentMatrix = *(undefined4 *)(glContext + 0x4fec);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    iVar2 = _gleMakeIdentityMatrix(currentMatrix);
+    lastCallResultOrContext = _gleMakeIdentityMatrix(currentMatrix);
     matrixDirtyBits = *(uint *)(glContext + 0x50a8);
     *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | matrixDirtyBits;
     if ((matrixDirtyBits & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
-      iVar2 = _gleCopyMatrix(currentMatrix,*(undefined4 *)(glContext + 0x4ff0));
+      lastCallResultOrContext = _gleCopyMatrix(currentMatrix,*(undefined4 *)(glContext + 0x4ff0));
       inverseSlotBits = matrixDirtyBits & 0xfffffc;
       matrixDirtyBits = matrixDirtyBits & 0xff000003;
       *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) & ~inverseSlotBits;
@@ -8613,12 +8613,12 @@ int _glLoadIdentity_Exec(glContext)
     *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | matrixDirtyBits;
   }
   else {
-    iVar2 = glContext;
+    lastCallResultOrContext = glContext;
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
   }
-  return iVar2;
+  return lastCallResultOrContext;
 }
 
 /* _glOrtho_Exec @ 0x16190 (616 bytes) */

@@ -155,17 +155,17 @@ void _glColor3ub_CompExec(glContext, red, green, blue)
   int green;
   int blue;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 blueValue;
+  undefined4 greenValue;
   int glContextWord4674;
   
   ((int (*)())_glColor3ub_Comp)(glContext,red,green,blue);
   glContextWord4674 = *(int *)(glContext + 0x4674);
-  uVar1 = *(undefined4 *)(blue * 4 + glContextWord4674);
-  uVar2 = *(undefined4 *)(green * 4 + glContextWord4674);
+  blueValue = *(undefined4 *)(blue * 4 + glContextWord4674);
+  greenValue = *(undefined4 *)(green * 4 + glContextWord4674);
   *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)(red * 4 + glContextWord4674);
-  *(undefined4 *)(glContext + 0x2a4) = uVar2;
-  *(undefined4 *)(glContext + 0x2a8) = uVar1;
+  *(undefined4 *)(glContext + 0x2a4) = greenValue;
+  *(undefined4 *)(glContext + 0x2a8) = blueValue;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
   if (*(char *)(glContext + 0x4df8) == '\0') {
     return;

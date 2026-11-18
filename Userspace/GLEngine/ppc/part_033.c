@@ -4218,7 +4218,7 @@ int _glDrawArrays_Comp(glContext, mode, first, count)
   undefined4 first;
   undefined4 count;
 {
-  undefined4 uVar1;
+  undefined4 drawArraysOrElementsResult;
   
   if (*(int *)(glContext + 0x48dc) != 0x14ff) {
     *(undefined4 *)(glContext + 0x488c) = 0;
@@ -4227,8 +4227,8 @@ int _glDrawArrays_Comp(glContext, mode, first, count)
     *(undefined4 *)(glContext + 0x4978) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  uVar1 = ((int (*)())_gleDrawArraysOrElements_Comp)(glContext,mode,first,count);
-  return uVar1;
+  drawArraysOrElementsResult = ((int (*)())_gleDrawArraysOrElements_Comp)(glContext,mode,first,count);
+  return drawArraysOrElementsResult;
 }
 
 /* _glDrawArrays_STD_Exec @ 0xa85ec (56 bytes) */

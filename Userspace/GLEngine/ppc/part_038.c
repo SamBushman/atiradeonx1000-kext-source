@@ -1297,12 +1297,12 @@ switchD_000b3c80_default:
 /* _glGetFinalCombinerInputParameterfvNV_Exec @ 0xb3d80 (188 bytes) */
 void _glGetFinalCombinerInputParameterfvNV_Exec(int glContext,int variable,uint pname,float *params,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  uint uVar1;
+  uint variableIndexThenParamValue;
   
-  uVar1 = variable - 0x8523;
-  if (6 < uVar1) goto LAB_000b3e24;
+  variableIndexThenParamValue = variable - 0x8523;
+  if (6 < variableIndexThenParamValue) goto LAB_000b3e24;
   if (pname == 0x8543) {
-    uVar1 = (uint)*(ushort *)(uVar1 * 8 + glContext + 0x4628);
+    variableIndexThenParamValue = (uint)*(ushort *)(variableIndexThenParamValue * 8 + glContext + 0x4628);
   }
   else if (pname < 0x8544) {
     if (pname != 0x8542) {
@@ -1313,13 +1313,13 @@ LAB_000b3e24:
       }
       return;
     }
-    uVar1 = (uint)*(ushort *)(uVar1 * 8 + glContext + 0x4624);
+    variableIndexThenParamValue = (uint)*(ushort *)(variableIndexThenParamValue * 8 + glContext + 0x4624);
   }
   else {
     if (pname != 0x8544) goto LAB_000b3e24;
-    uVar1 = (uint)*(ushort *)(uVar1 * 8 + glContext + 0x4626);
+    variableIndexThenParamValue = (uint)*(ushort *)(variableIndexThenParamValue * 8 + glContext + 0x4626);
   }
-  *params = GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0;
+  *params = GH_U2F((unsigned int)((variableIndexThenParamValue | 0x4b000000))) - 8388608.0;
   return;
 }
 

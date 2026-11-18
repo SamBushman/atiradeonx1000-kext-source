@@ -1588,10 +1588,10 @@ void _glGetFloatv_Exec(glContext, pname, params)
 {
   double intToDoubleMagic;
   undefined4 glErrorCode;
-  uint uVar2;
+  uint intValue;
   double *cursor;
   int remaining;
-  double dVar5;
+  double stateValue;
   undefined1 stateFlagBytes [16];
   double stateValueBuffer [16];
   undefined4 intToDoubleHighWord;
@@ -1615,9 +1615,9 @@ void _glGetFloatv_Exec(glContext, pname, params)
           return;
         }
         do {
-          dVar5 = *cursor;
+          stateValue = *cursor;
           cursor = cursor + 1;
-          *params = (float)dVar5;
+          *params = (float)stateValue;
           params = params + 1;
           remaining = remaining + -1;
         } while (remaining != 0);
@@ -1627,11 +1627,11 @@ void _glGetFloatv_Exec(glContext, pname, params)
         return;
       }
       do {
-        uVar2 = *(uint *)cursor;
+        intValue = *(uint *)cursor;
         cursor = cursor + 1;
         intToDoubleHighWord = 0x43300000;
-        intToDoubleLowWord = uVar2 ^ 0x80000000;
-        *params = (float)((double)CONCAT44(0x43300000,uVar2 ^ 0x80000000) - intToDoubleMagic);
+        intToDoubleLowWord = intValue ^ 0x80000000;
+        *params = (float)((double)CONCAT44(0x43300000,intValue ^ 0x80000000) - intToDoubleMagic);
         params = params + 1;
         remaining = remaining + -1;
       } while (remaining != 0);
@@ -1982,18 +1982,18 @@ int _glIsEnabled_Exec(glContext, cap)
   int glContext;
   undefined4 cap;
 {
-  undefined4 uVar1;
+  undefined4 enabled;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    uVar1 = ((int (*)())_gleGetEnabled)(glContext,cap);
+    enabled = ((int (*)())_gleGetEnabled)(glContext,cap);
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    uVar1 = 0;
+    enabled = 0;
   }
-  return uVar1;
+  return enabled;
 }
 
 /* _gleGetEnabled @ 0x21978 (2652 bytes) */
@@ -2644,7 +2644,7 @@ void _glBindProgramARB_Exec(glContext, target, program)
 {
   undefined4 glErrorCode;
   undefined4 pipelineStageIndex;
-  uint uVar2;
+  uint acceptedFragmentTarget;
   int sharedStateMutex;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -2661,12 +2661,12 @@ LAB_0002279c:
   }
   else {
     if (target < 0x8621) {
-      uVar2 = 0x8200;
+      acceptedFragmentTarget = 0x8200;
     }
     else {
-      uVar2 = 0x8804;
+      acceptedFragmentTarget = 0x8804;
     }
-    if (target != uVar2) {
+    if (target != acceptedFragmentTarget) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }

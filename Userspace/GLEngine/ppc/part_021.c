@@ -818,23 +818,23 @@ int _glProgramStringARB_Comp(glContext, target, format, len, string)
   int len;
   undefined4 string;
 {
-  uint uVar1;
+  uint paddedLength;
   int remaining;
   undefined1 *dstCursor;
   undefined4 *listRecord;
-  undefined4 uVar5;
+  undefined4 copyResult;
   
-  uVar1 = len + 3U & 0xfffffffc;
+  paddedLength = len + 3U & 0xfffffffc;
   listRecord = (undefined4 *)
-           _gleAddListItem(glContext,PTR__glProgramStringARB_ListExec_00110234,uVar1 + 0xc);
-  uVar5 = 0;
+           _gleAddListItem(glContext,PTR__glProgramStringARB_ListExec_00110234,paddedLength + 0xc);
+  copyResult = 0;
   if (listRecord != (undefined4 *)0x0) {
     *listRecord = target;
     listRecord[1] = format;
-    listRecord[2] = uVar1;
-    uVar5 = _memcpy(listRecord + 3,string,len);
-    if (len <= (int)uVar1) {
-      remaining = (uVar1 + 1) - len;
+    listRecord[2] = paddedLength;
+    copyResult = _memcpy(listRecord + 3,string,len);
+    if (len <= (int)paddedLength) {
+      remaining = (paddedLength + 1) - len;
       dstCursor = (undefined1 *)((int)listRecord + len + 0xc);
       do {
         *dstCursor = 0x20;
@@ -843,7 +843,7 @@ int _glProgramStringARB_Comp(glContext, target, format, len, string)
       } while (remaining != 0);
     }
   }
-  return uVar5;
+  return copyResult;
 }
 
 /* _glProgramStringARB_CompExec @ 0x7a730 (80 bytes) */
@@ -867,7 +867,7 @@ void _glGetProgramStringARB_Exec(glContext, target, pname, string)
   int string;
 {
   undefined4 glErrorCode;
-  uint uVar2;
+  uint acceptedFragmentTarget;
   int programSlot;
   int remaining;
   int programThenSourceText;
@@ -893,12 +893,12 @@ LAB_0007a80c:
         return;
       }
       if (target < 0x8621) {
-        uVar2 = 0x8200;
+        acceptedFragmentTarget = 0x8200;
       }
       else {
-        uVar2 = 0x8804;
+        acceptedFragmentTarget = 0x8804;
       }
-      if (target == uVar2) {
+      if (target == acceptedFragmentTarget) {
         programSlot = 1;
         goto LAB_0007a80c;
       }
@@ -987,7 +987,7 @@ void _glGetProgramEnvParameterfvARB_Exec(glContext, target, index, params)
 {
   bool indexOutOfRange;
   undefined4 glErrorCode;
-  uint uVar3;
+  uint acceptedFragmentTarget;
   int targetSlotThenEnvParamArray;
   int envParamAddress;
   
@@ -998,12 +998,12 @@ void _glGetProgramEnvParameterfvARB_Exec(glContext, target, index, params)
     }
     else {
       if (target < 0x8621) {
-        uVar3 = 0x8200;
+        acceptedFragmentTarget = 0x8200;
       }
       else {
-        uVar3 = 0x8804;
+        acceptedFragmentTarget = 0x8804;
       }
-      if (target != uVar3) {
+      if (target != acceptedFragmentTarget) {
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }

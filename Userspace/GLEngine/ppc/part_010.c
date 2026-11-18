@@ -7,15 +7,15 @@ void _glBindBuffer_Exec(glContext, target, buffer)
   undefined4 buffer;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int sharedStateMutex;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((0x8891 < target) && ((target < 0x8894 || (target - 0x88eb < 2)))) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
-        iVar2 = *(int *)(glContext + 0x5148) + 0x8028;
-        _pthread_mutex_lock(iVar2);
+        sharedStateMutex = *(int *)(glContext + 0x5148) + 0x8028;
+        _pthread_mutex_lock(sharedStateMutex);
         _gleBindBufferObject(glContext,target,buffer);
-        _pthread_mutex_unlock(iVar2);
+        _pthread_mutex_unlock(sharedStateMutex);
         return;
       }
       _gleBindBufferObject(glContext,target,buffer);
@@ -168,14 +168,14 @@ void _glGenBuffers_Exec(glContext, n, buffers)
   int *buffers;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int bufferName;
   int loopIndex;
-  int iVar4;
+  int firstBufferName;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
-      iVar4 = _gleGenHashNames(*(int *)(glContext + 0x5148) + 0x701c,n);
-      if (iVar4 == 0) {
+      firstBufferName = _gleGenHashNames(*(int *)(glContext + 0x5148) + 0x701c,n);
+      if (firstBufferName == 0) {
         return;
       }
       loopIndex = 0;
@@ -183,9 +183,9 @@ void _glGenBuffers_Exec(glContext, n, buffers)
         return;
       }
       do {
-        iVar2 = loopIndex + iVar4;
+        bufferName = loopIndex + firstBufferName;
         loopIndex = loopIndex + 1;
-        *buffers = iVar2;
+        *buffers = bufferName;
         buffers = buffers + 1;
         n = n + -1;
       } while (n != 0);

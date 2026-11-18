@@ -4,13 +4,13 @@
 void _glAlphaFunc_Exec(int glContext,int func,float ref)
 {
   undefined4 glErrorCode;
-  double dVar2;
+  double clampBound;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (func - 0x200U < 8) {
-      dVar2 = (double)*(float *)(glContext + 0x24);
-      if ((dVar2 < ref) || (dVar2 = (double)*(float *)(glContext + 0x20), ref < dVar2)) {
-        ref = dVar2;
+      clampBound = (double)*(float *)(glContext + 0x24);
+      if ((clampBound < ref) || (clampBound = (double)*(float *)(glContext + 0x20), ref < clampBound)) {
+        ref = clampBound;
       }
       *(float *)(glContext + 0x30c0) = (float)ref;
       *(short *)(glContext + 0x30c4) = (short)func;

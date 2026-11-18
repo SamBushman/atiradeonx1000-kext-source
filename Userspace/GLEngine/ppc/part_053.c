@@ -198,16 +198,16 @@ void _gleBeginPrimitiveTCLRDirtyFunc(glContext)
 }
 
 /* _gleUpdateScissorData @ 0xf3958 (44 bytes) */
-void _gleUpdateScissorData(param_1)
-  int param_1;
+void _gleUpdateScissorData(glContext)
+  int glContext;
 {
-  if (*(int *)(param_1 + 0x3188) < 0) {
-    *(undefined4 *)(param_1 + 0x3188) = 0;
+  if (*(int *)(glContext + 0x3188) < 0) {
+    *(undefined4 *)(glContext + 0x3188) = 0;
   }
-  if (-1 < *(int *)(param_1 + 0x318c)) {
+  if (-1 < *(int *)(glContext + 0x318c)) {
     return;
   }
-  *(undefined4 *)(param_1 + 0x318c) = 0;
+  *(undefined4 *)(glContext + 0x318c) = 0;
   return;
 }
 

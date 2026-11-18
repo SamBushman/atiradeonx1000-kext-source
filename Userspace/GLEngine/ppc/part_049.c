@@ -463,10 +463,10 @@ int _gleImageSize(format, type, width, height)
   undefined4 width;
   int height;
 {
-  int iVar1;
+  int rowBytes;
   
-  iVar1 = _gleRowBytes(format,type,width);
-  return iVar1 * height;
+  rowBytes = _gleRowBytes(format,type,width);
+  return rowBytes * height;
 }
 
 /* _gleFillImage @ 0xe5e24 (732 bytes) */

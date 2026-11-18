@@ -413,11 +413,11 @@ int _glTexParameteri_Comp(glContext, target, pname, param)
   undefined4 param;
 {
   unsigned int ghidra_home[8] = { glContext, target, pname, param, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  undefined4 uVar1;
+  undefined4 texParameterResult;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param;
-  uVar1 = ((int (*)())_glTexParameterI_Comp)(glContext,target,pname,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
-  return uVar1;
+  texParameterResult = ((int (*)())_glTexParameterI_Comp)(glContext,target,pname,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
+  return texParameterResult;
 }
 
 /* _glTexParameteri_CompExec @ 0x9e484 (72 bytes) */

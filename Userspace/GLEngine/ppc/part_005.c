@@ -354,7 +354,7 @@ int _glGenLists_Exec(glContext, listRange)
   int listRange;
 {
   undefined4 glErrorCode;
-  undefined4 uVar1;
+  undefined4 firstListName;
   int sharedState;
   
   if (listRange < 0) {
@@ -370,12 +370,12 @@ int _glGenLists_Exec(glContext, listRange)
         _pthread_mutex_lock(sharedState + 0x8028);
         sharedState = *(int *)(glContext + 0x5148);
       }
-      uVar1 = _gleGenHashNames(sharedState + 0x300c,listRange);
+      firstListName = _gleGenHashNames(sharedState + 0x300c,listRange);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
-        return uVar1;
+        return firstListName;
       }
-      return uVar1;
+      return firstListName;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return 0;

@@ -8,15 +8,15 @@ int _glRects_Comp(glContext, x1, y1, x2, y2)
   undefined4 x2;
   undefined4 y2;
 {
-  undefined4 uVar1;
+  undefined4 endResult;
   
   _glBegin_Comp(glContext,9);
   _glVertex2s_Comp(glContext,x1,y1);
   _glVertex2s_Comp(glContext,x2,y1);
   _glVertex2s_Comp(glContext,x2,y2);
   _glVertex2s_Comp(glContext,x1,y2);
-  uVar1 = _glEnd_Comp(glContext);
-  return uVar1;
+  endResult = _glEnd_Comp(glContext);
+  return endResult;
 }
 
 /* _glRects_Exec @ 0x84a60 (188 bytes) */
@@ -121,15 +121,15 @@ int _glRectfv_Comp(glContext, v1, v2)
   float *v1;
   float *v2;
 {
-  undefined4 uVar1;
+  undefined4 endResult;
   
   _glBegin_Comp(glContext,9);
   ((float * (*)())_glVertex2f_Comp)(glContext,(double)*v1,(double)v1[1]);
   ((float * (*)())_glVertex2f_Comp)(glContext,(double)*v2,(double)v1[1]);
   ((float * (*)())_glVertex2f_Comp)(glContext,(double)*v2,(double)v2[1]);
   ((float * (*)())_glVertex2f_Comp)(glContext,(double)*v1,(double)v2[1]);
-  uVar1 = _glEnd_Comp(glContext);
-  return uVar1;
+  endResult = _glEnd_Comp(glContext);
+  return endResult;
 }
 
 /* _glRectfv_Exec @ 0x84d58 (180 bytes) */
@@ -1022,17 +1022,17 @@ void _glPushName_Exec(glContext, name)
   undefined4 name;
 {
   undefined4 glErrorCode;
-  undefined4 *puVar2;
+  undefined4 *nameStackPointer;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (*(int *)(glContext + 0x4e1c) != 0x1c02) {
       return;
     }
-    puVar2 = *(undefined4 **)(glContext + 0x4fbc);
-    if (puVar2 < (undefined4 *)(glContext + 0x4fbcU)) {
-      *puVar2 = name;
+    nameStackPointer = *(undefined4 **)(glContext + 0x4fbc);
+    if (nameStackPointer < (undefined4 *)(glContext + 0x4fbcU)) {
+      *nameStackPointer = name;
       *(undefined1 *)(glContext + 0x4fc8) = 0;
-      *(undefined4 **)(glContext + 0x4fbc) = puVar2 + 1;
+      *(undefined4 **)(glContext + 0x4fbc) = nameStackPointer + 1;
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {

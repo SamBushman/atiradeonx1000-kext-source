@@ -259,22 +259,22 @@ int _glMultTransposeMatrixf_Exec(glContext, m)
   int glContext;
   undefined4 m;
 {
-  int iVar1;
-  undefined1 auStack_50 [72];
+  int copyResultOrContext;
+  undefined1 productMatrix [72];
   
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    _gleMultTransposeMatrixf(*(undefined4 *)(glContext + 0x4fec),m,auStack_50);
-    iVar1 = _gleCopyMatrix(auStack_50,*(undefined4 *)(glContext + 0x4fec));
+    _gleMultTransposeMatrixf(*(undefined4 *)(glContext + 0x4fec),m,productMatrix);
+    copyResultOrContext = _gleCopyMatrix(productMatrix,*(undefined4 *)(glContext + 0x4fec));
     *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | *(uint *)(glContext + 0x50a8);
     *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | *(uint *)(glContext + 0x50a8);
   }
   else {
-    iVar1 = glContext;
+    copyResultOrContext = glContext;
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
   }
-  return iVar1;
+  return copyResultOrContext;
 }
 
 /* _glMultTransposeMatrixf_CompExec @ 0x77c78 (56 bytes) */
@@ -1107,18 +1107,18 @@ int _glIsQuery_Exec(glContext, id)
   int glContext;
   undefined4 id;
 {
-  undefined4 uVar1;
+  undefined4 isQuery;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    uVar1 = _gleIsHashName(glContext + 0x6440,id);
+    isQuery = _gleIsHashName(glContext + 0x6440,id);
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    uVar1 = 0;
+    isQuery = 0;
   }
-  return uVar1;
+  return isQuery;
 }
 
 /* _glBeginQuery_Comp @ 0x79054 (84 bytes) */
@@ -1205,15 +1205,15 @@ void _glGetQueryiv_Exec(glContext, target, pname, params)
   int pname;
   undefined4 *params;
 {
-  undefined4 uVar1;
+  undefined4 queryValue;
   undefined4 glErrorCode;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8914) {
       if (pname == 0x8864) {
-        uVar1 = *(undefined4 *)(*(int *)(glContext + 0x468c) + 0xa8);
+        queryValue = *(undefined4 *)(*(int *)(glContext + 0x468c) + 0xa8);
 LAB_00079248:
-        *params = uVar1;
+        *params = queryValue;
         return;
       }
       if (pname == 0x8865) {
@@ -1221,7 +1221,7 @@ LAB_00079248:
           *params = 0;
           return;
         }
-        uVar1 = *(undefined4 *)(*(int *)(glContext + 0x7444) + 4);
+        queryValue = *(undefined4 *)(*(int *)(glContext + 0x7444) + 4);
         goto LAB_00079248;
       }
     }

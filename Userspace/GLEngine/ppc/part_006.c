@@ -5259,8 +5259,8 @@ void _gleResetVACachePointers(glContext)
 {
   int *srcCursor;
   int *dstCursor;
-  int iVar3;
-  int iVar4;
+  int arrayPointer;
+  int bufferObject;
   int *srcCursor2;
   int remaining;
   
@@ -5269,14 +5269,14 @@ void _gleResetVACachePointers(glContext)
   srcCursor2 = (int *)(*(int *)(glContext + 0x4a60) + 0x30);
   srcCursor = (int *)(*(int *)(glContext + 0x4a60) + 0x360);
   do {
-    iVar4 = *srcCursor;
+    bufferObject = *srcCursor;
     srcCursor = srcCursor + 1;
-    iVar3 = *srcCursor2;
+    arrayPointer = *srcCursor2;
     srcCursor2 = srcCursor2 + 6;
-    if (iVar4 != 0) {
-      iVar3 = iVar3 + *(int *)(iVar4 + 0x30);
+    if (bufferObject != 0) {
+      arrayPointer = arrayPointer + *(int *)(bufferObject + 0x30);
     }
-    *dstCursor = iVar3;
+    *dstCursor = arrayPointer;
     dstCursor = dstCursor + 1;
     remaining = remaining + -1;
   } while (remaining != 0);

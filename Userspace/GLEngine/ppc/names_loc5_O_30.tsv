@@ -1,0 +1,27 @@
+local	_glMultMatrixd_Exec	iVar1	copyResultOrContext	INFERRED	result of _gleCopyMatrix (copy of the product into the current matrix), or the context pointer left in r3 on the error path; returned
+local	_glMultMatrixd_Exec	auStack_50	productMatrix	CONFIRMED	72-byte buffer receiving the product of the current matrix and m, then copied back by _gleCopyMatrix to the current matrix at ctx+0x4fec
+local	_glMultTransposeMatrixf_Exec	iVar1	copyResultOrContext	INFERRED	result of _gleCopyMatrix (copy of the product into the current matrix), or the context pointer left in r3 on the error path; returned
+local	_glMultTransposeMatrixf_Exec	auStack_50	productMatrix	CONFIRMED	72-byte buffer receiving the product of the current matrix and m, then copied back by _gleCopyMatrix to the current matrix at ctx+0x4fec
+local	_glGetFloatv_Exec	uVar2	intValue	CONFIRMED	integer state word read from the state buffer and converted to float through the 0x43300000 magic number
+local	_glGetFloatv_Exec	dVar5	stateValue	CONFIRMED	double read from the state buffer and stored as float to params
+local	_glCallLists_Comp	uVar1	paddedBytes	CONFIRMED	n * typeSize rounded up to a multiple of 4: payload size of the list record, stored at listRecord[1]
+local	_glCallLists_Comp	uVar4	copyResult	CONFIRMED	value returned by _gleCopy of the list names into the record, returned
+local	_glPushName_Exec	puVar2	nameStackPointer	CONFIRMED	*(ctx+0x4fbc): next free slot of the name stack; the slot is only used while below ctx+0x4fbc (the end of the stack array), otherwise GL_STACK_OVERFLOW (0x503)
+local	_glLoadIdentity_Exec	iVar2	lastCallResultOrContext	INFERRED	result of the last matrix call (_gleMakeIdentityMatrix, _gleCopyMatrix) or the context pointer on the error path; returned and otherwise unused
+local	_glRects_Comp	uVar1	endResult	CONFIRMED	value returned by _glEnd_Comp, returned unchanged
+local	_glRectfv_Comp	uVar1	endResult	CONFIRMED	value returned by _glEnd_Comp, returned unchanged
+local	_glRectd_Comp	uVar1	endResult	CONFIRMED	value returned by _glEnd_Comp, returned unchanged
+local	_glDrawArrays_Comp	uVar1	drawArraysOrElementsResult	CONFIRMED	return value of _gleDrawArraysOrElements_Comp, returned unchanged
+local	_glTexParameteri_Comp	uVar1	texParameterResult	CONFIRMED	return value of _glTexParameterI_Comp, returned unchanged
+local	_glDrawRangeElements_Comp	uVar1	drawElementsResult	CONFIRMED	return value of _glDrawElements_Comp, returned unchanged
+local	_glMultiDrawRangeElementArrayAPPLE_Comp	uVar1	multiDrawResult	CONFIRMED	return value of _glMultiDrawElementArrayAPPLE_Comp, returned unchanged
+local	_glProgramStringARB_Comp	uVar1	paddedLength	CONFIRMED	len rounded up to a multiple of 4: payload size of the list record, stored at listRecord[2]; the tail is filled with spaces (0x20)
+local	_glProgramStringARB_Comp	uVar5	copyResult	CONFIRMED	value returned by _memcpy of the program string into the record, 0 when the list item could not be allocated; returned
+local	_glWeightfvARB_Comp	iVar1	weight	CONFIRMED	weight word copied from weights to the list record
+local	_glColor3ub_CompExec	uVar1	blueValue	CONFIRMED	float value looked up from the table at ctx+0x4674 for the blue ubyte, stored to ctx+0x2a8
+local	_glColor3ub_CompExec	uVar2	greenValue	CONFIRMED	float value looked up from the table at ctx+0x4674 for the green ubyte, stored to ctx+0x2a4
+local	_glWeightubvARB_Exec	pbVar1	weightPtr	CONFIRMED	address of the current ubyte weight, converted to float with the 0x4b000000 magic number and the scale 1/255 (FLOAT_00108e78)
+local	_glWeightubvARB_Exec	iVar2	slotByteOffset	CONFIRMED	loopIndex * 4: byte offset of the weight slot at ctx+0x2d0 cleared by the zero-fill loop
+local	_glGetFinalCombinerInputParameterfvNV_Exec	uVar1	variableIndexThenParamValue	CONFIRMED	variable - 0x8523 (index into the 8-byte input records at ctx+0x4624), then replaced by the 16-bit value for pname; converted to float with the magic number
+local	_glPointParameterivARB_ListExec	iVar1	paramCount	CONFIRMED	number of ints in the record: 3 for pname 0x8129 (GL_POINT_DISTANCE_ATTENUATION), else 1; returned as the record size (count*4 + 4)
+local	_gleResetVertexArrays	uVar1	reinitializedCache	CONFIRMED	function cache returned by _gleReinitFuncCache, stored back to ctx+0x49b4 / +0x49b8

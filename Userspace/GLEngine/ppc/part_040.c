@@ -6946,11 +6946,11 @@ void _gleShrinkFuncCache(param_1, param_2)
 void _gleDeleteFuncCacheElem(glContext)
   int *glContext;
 {
-  int *piVar1;
+  int *previousElem;
   
-  piVar1 = (int *)glContext[1];
-  *piVar1 = *glContext;
-  *(int **)(*glContext + 4) = piVar1;
+  previousElem = (int *)glContext[1];
+  *previousElem = *glContext;
+  *(int **)(*glContext + 4) = previousElem;
   _gleDCBFree(glContext);
   return;
 }

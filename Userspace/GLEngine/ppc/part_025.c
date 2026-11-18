@@ -2789,7 +2789,7 @@ void _glUniform2iARB_Exec(glContext, location, v0, v1)
   undefined4 *rendererHandlePtr;
   undefined4 uniformWord1;
   int currentProgram;
-  int iVar5;
+  int uniformValues;
   int rendererSlotOffset;
   int registerIndexThenOffset;
   int typeInfoFound;
@@ -2827,23 +2827,23 @@ void _glUniform2iARB_Exec(glContext, location, v0, v1)
     return;
   }
   locationValueOffset = location * 0x10;
-  iVar5 = *(int *)(currentProgram + 0x4c);
+  uniformValues = *(int *)(currentProgram + 0x4c);
   if (uniformType == 0x8b53) {
-    *(int *)(iVar5 + locationValueOffset) = v0;
+    *(int *)(uniformValues + locationValueOffset) = v0;
   }
   else {
     if (v0 == 0) {
-      *(undefined4 *)(iVar5 + locationValueOffset) = 0;
+      *(undefined4 *)(uniformValues + locationValueOffset) = 0;
     }
     else {
-      *(undefined4 *)(iVar5 + locationValueOffset) = 1;
+      *(undefined4 *)(uniformValues + locationValueOffset) = 1;
     }
     if (v1 != 0) {
-      *(undefined4 *)(iVar5 + locationValueOffset + 4) = 1;
+      *(undefined4 *)(uniformValues + locationValueOffset + 4) = 1;
       goto LAB_0008ac38;
     }
   }
-  *(int *)(iVar5 + locationValueOffset + 4) = v1;
+  *(int *)(uniformValues + locationValueOffset + 4) = v1;
 LAB_0008ac38:
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
   stage0Record = *(int *)(currentProgram + 0x20);

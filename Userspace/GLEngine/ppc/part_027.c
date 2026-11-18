@@ -237,9 +237,9 @@ void _glPolygonStipple_Exec(glContext, mask)
   int glContext;
   int mask;
 {
-  uint uVar1;
+  uint skipPixels;
   int byteOffset;
-  int iVar3;
+  int skipRows;
   int pixelUnpackBuffer;
   int remaining;
   
@@ -252,15 +252,15 @@ void _glPolygonStipple_Exec(glContext, mask)
       }
       mask = mask + *(int *)(pixelUnpackBuffer + 0x30);
     }
-    uVar1 = *(uint *)(glContext + 0x31d8);
-    iVar3 = *(int *)(glContext + 0x31d4);
+    skipPixels = *(uint *)(glContext + 0x31d8);
+    skipRows = *(int *)(glContext + 0x31d4);
     if ((((*(char *)(glContext + 0x31e5) == '\0') && (*(int *)(glContext + 0x31cc) == 0)) &&
-        (*(int *)(glContext + 0x31e0) < 5)) && ((uVar1 & 7) == 0)) {
+        (*(int *)(glContext + 0x31e0) < 5)) && ((skipPixels & 7) == 0)) {
       remaining = 0x10;
       byteOffset = 0;
       do {
         *(undefined8 *)(byteOffset + glContext + 0x3448) =
-             *(undefined8 *)(byteOffset + mask + iVar3 * 4 + ((int)uVar1 >> 3));
+             *(undefined8 *)(byteOffset + mask + skipRows * 4 + ((int)skipPixels >> 3));
         byteOffset = byteOffset + 8;
         remaining = remaining + -1;
       } while (remaining != 0);
@@ -294,9 +294,9 @@ void _glGetPolygonStipple_Exec(glContext, mask)
   int glContext;
   int mask;
 {
-  uint uVar1;
+  uint skipPixels;
   int byteOffset;
-  int iVar3;
+  int skipRows;
   int pixelPackBuffer;
   int remaining;
   
@@ -309,17 +309,17 @@ void _glGetPolygonStipple_Exec(glContext, mask)
       }
       mask = mask + *(int *)(pixelPackBuffer + 0x30);
     }
-    uVar1 = *(uint *)(glContext + 0x31bc);
-    iVar3 = *(int *)(0x31b4 + glContext + 4);
+    skipPixels = *(uint *)(glContext + 0x31bc);
+    skipRows = *(int *)(0x31b4 + glContext + 4);
     if ((((*(char *)(glContext + 0x31c9) != '\0') || (*(int *)(glContext + 0x31b0) != 0)) ||
-        (4 < *(int *)(glContext + 0x31c4))) || ((uVar1 & 7) != 0)) {
+        (4 < *(int *)(glContext + 0x31c4))) || ((skipPixels & 7) != 0)) {
       _gleEmptyImage(glContext,0x20,0x20,0x1900,0x1a00,glContext + 0x3448,mask);
       return;
     }
     remaining = 0x10;
     byteOffset = 0;
     do {
-      *(undefined8 *)(byteOffset + mask + iVar3 * 4 + ((int)uVar1 >> 3)) =
+      *(undefined8 *)(byteOffset + mask + skipRows * 4 + ((int)skipPixels >> 3)) =
            *(undefined8 *)(byteOffset + glContext + 0x3448);
       byteOffset = byteOffset + 8;
       remaining = remaining + -1;

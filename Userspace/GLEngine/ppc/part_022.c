@@ -36,7 +36,7 @@ float * _glPixelZoom_Comp(undefined4 glContext,float xfactor,float yfactor)
 /* _glPixelZoom_Exec @ 0x7e078 (156 bytes) */
 void _glPixelZoom_Exec(int glContext,float xfactor,float yfactor)
 {
-  uint uVar1;
+  uint transferFlags;
   float doubleOne;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -44,19 +44,19 @@ void _glPixelZoom_Exec(int glContext,float xfactor,float yfactor)
     doubleOne = (double)FLOAT_00108e54;
     *(float *)(glContext + 0x31ac) = (float)yfactor;
     if (xfactor == (double)doubleOne) {
-      uVar1 = *(uint *)(glContext + 0x3414) & 0xffffbfff;
+      transferFlags = *(uint *)(glContext + 0x3414) & 0xffffbfff;
     }
     else {
-      uVar1 = *(uint *)(glContext + 0x3414) | 0x4000;
+      transferFlags = *(uint *)(glContext + 0x3414) | 0x4000;
     }
-    *(uint *)(glContext + 0x3414) = uVar1;
+    *(uint *)(glContext + 0x3414) = transferFlags;
     if (yfactor == (double)FLOAT_00108e54) {
-      uVar1 = *(uint *)(glContext + 0x3414) & 0xffff7fff;
+      transferFlags = *(uint *)(glContext + 0x3414) & 0xffff7fff;
     }
     else {
-      uVar1 = *(uint *)(glContext + 0x3414) | 0x8000;
+      transferFlags = *(uint *)(glContext + 0x3414) | 0x8000;
     }
-    *(uint *)(glContext + 0x3414) = uVar1;
+    *(uint *)(glContext + 0x3414) = transferFlags;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x200000;
     return;
   }
@@ -745,14 +745,14 @@ int _glPointParameterivARB_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int paramCount;
   
-  iVar1 = 3;
+  paramCount = 3;
   if (*listRecord != 0x8129) {
-    iVar1 = 1;
+    paramCount = 1;
   }
   ((void (*)())_glPointParameterivARB_Exec)(glContext,*listRecord,listRecord + 1);
-  return iVar1 * 4 + 4;
+  return paramCount * 4 + 4;
 }
 
 /* _glPointSize_ListExec @ 0x7f0f0 (40 bytes) */

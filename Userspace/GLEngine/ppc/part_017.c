@@ -1146,7 +1146,7 @@ void _glGetHistogramParameteriv_Exec(glContext, target, pname, params)
   uint *params;
 {
   undefined4 glErrorCode;
-  uint uVar2;
+  uint parameterValue;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1167,25 +1167,25 @@ LAB_0006aa8c:
   }
   switch(pname) {
   case 0x8026:
-    uVar2 = *(uint *)(glContext + 0x3388);
+    parameterValue = *(uint *)(glContext + 0x3388);
     break;
   case 0x8027:
-    uVar2 = (uint)*(ushort *)(glContext + 0x338c);
+    parameterValue = (uint)*(ushort *)(glContext + 0x338c);
     break;
   case 0x8028:
   case 0x8029:
   case 0x802a:
   case 0x802b:
   case 0x802c:
-    uVar2 = 0x20;
+    parameterValue = 0x20;
     break;
   case 0x802d:
-    uVar2 = (uint)*(byte *)(glContext + 0x338e);
+    parameterValue = (uint)*(byte *)(glContext + 0x338e);
     break;
   default:
     goto switchD_0006aabc_default;
   }
-  *params = uVar2;
+  *params = parameterValue;
   return;
 }
 
@@ -1200,9 +1200,9 @@ void _glGetMinmax_Exec(glContext, target, reset, format, type, values)
 {
   undefined4 glErrorCode;
   int imageEndOffset;
-  int iVar3;
+  int elementBytes;
   int pixelPackBuffer;
-  int iVar5;
+  int packBufferSize;
   double bytesPerElement;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -1220,14 +1220,14 @@ LAB_0006abf8:
       return;
     }
     imageEndOffset = _gleOffsetLimitImage(glContext + 0x31b0,2,1,format,type,values);
-    iVar5 = *(int *)(pixelPackBuffer + 0x38);
+    packBufferSize = *(int *)(pixelPackBuffer + 0x38);
     bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar3 = (int)bytesPerElement;
-    if (imageEndOffset <= iVar5) {
-      if (iVar3 == 0) {
-        iVar3 = _glePixelBytes(format,type);
+    elementBytes = (int)bytesPerElement;
+    if (imageEndOffset <= packBufferSize) {
+      if (elementBytes == 0) {
+        elementBytes = _glePixelBytes(format,type);
       }
-      if (values == (values / iVar3) * iVar3) {
+      if (values == (values / elementBytes) * elementBytes) {
         if (*(int *)(pixelPackBuffer + 0x40) != 0) {
           _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
         }
@@ -1381,7 +1381,7 @@ void _glResetHistogram_Exec(glContext, target)
   int target;
 {
   int glContextFloat20;
-  int iVar2;
+  int binByteOffset;
   undefined4 glErrorCode;
   int loopIndex;
   
@@ -1391,12 +1391,12 @@ void _glResetHistogram_Exec(glContext, target)
       if (0 < *(int *)(glContext + 0x3388)) {
         glContextFloat20 = (int)*(float *)(glContext + 0x20);
         do {
-          iVar2 = loopIndex * 0x10;
+          binByteOffset = loopIndex * 0x10;
           loopIndex = loopIndex + 1;
-          *(int *)(iVar2 + *(int *)(glContext + 0x3384)) = glContextFloat20;
-          *(int *)(iVar2 + *(int *)(glContext + 0x3384) + 4) = glContextFloat20;
-          *(int *)(iVar2 + *(int *)(glContext + 0x3384) + 8) = glContextFloat20;
-          *(int *)(iVar2 + *(int *)(glContext + 0x3384) + 0xc) = glContextFloat20;
+          *(int *)(binByteOffset + *(int *)(glContext + 0x3384)) = glContextFloat20;
+          *(int *)(binByteOffset + *(int *)(glContext + 0x3384) + 4) = glContextFloat20;
+          *(int *)(binByteOffset + *(int *)(glContext + 0x3384) + 8) = glContextFloat20;
+          *(int *)(binByteOffset + *(int *)(glContext + 0x3384) + 0xc) = glContextFloat20;
         } while (loopIndex < *(int *)(glContext + 0x3388));
         return;
       }

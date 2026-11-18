@@ -373,20 +373,20 @@ int _glCallLists_Comp(glContext, n, type, lists)
   int type;
   undefined4 lists;
 {
-  uint uVar1;
+  uint paddedBytes;
   int typeSize;
   int *listRecord;
-  undefined4 uVar4;
+  undefined4 copyResult;
   
   typeSize = _gleTypeSize(glContext,type);
-  uVar1 = n * typeSize + 3U & 0xfffffffc;
-  listRecord = (int *)_gleAddListItem(glContext,PTR__glCallLists_ListExec_00110098,uVar1 + 0xc);
+  paddedBytes = n * typeSize + 3U & 0xfffffffc;
+  listRecord = (int *)_gleAddListItem(glContext,PTR__glCallLists_ListExec_00110098,paddedBytes + 0xc);
   if (listRecord != (int *)0x0) {
     *listRecord = n;
     listRecord[2] = type;
-    listRecord[1] = uVar1;
-    uVar4 = _gleCopy(lists,listRecord + 3,n * typeSize,1,0,0);
-    return uVar4;
+    listRecord[1] = paddedBytes;
+    copyResult = _gleCopy(lists,listRecord + 3,n * typeSize,1,0,0);
+    return copyResult;
   }
   return 0;
 }

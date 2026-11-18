@@ -2020,17 +2020,17 @@ int _gleOffsetLimitImage(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gleFreeCopyContextData @ 0xc7e38 (104 bytes) */
-int _gleFreeCopyContextData(param_1)
-  int param_1;
+int _gleFreeCopyContextData(copyContextData)
+  int copyContextData;
 {
-  if (*(int *)(param_1 + 8) != 0) {
-    _free(*(int *)(param_1 + 8));
+  if (*(int *)(copyContextData + 8) != 0) {
+    _free(*(int *)(copyContextData + 8));
   }
-  if (*(int *)(param_1 + 0xc) != 0) {
-    _free(*(int *)(param_1 + 0xc));
+  if (*(int *)(copyContextData + 0xc) != 0) {
+    _free(*(int *)(copyContextData + 0xc));
   }
-  if (*(int *)(param_1 + 0x10) != 0) {
-    _free(*(int *)(param_1 + 0x10));
+  if (*(int *)(copyContextData + 0x10) != 0) {
+    _free(*(int *)(copyContextData + 0x10));
     return;
   }
   return;
