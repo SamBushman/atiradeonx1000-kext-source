@@ -403,7 +403,7 @@ int _gleLookUpNonProxyTexture2D(glContext, target)
   int glContext;
   uint target;
 {
-  uint uVar1;
+  uint targetCompareConstant;
   int textureUnitThenTextureObject;
   
   textureUnitThenTextureObject = *(int *)(glContext + 0x53d4);
@@ -417,16 +417,16 @@ LAB_0001f860:
         textureUnitThenTextureObject = *(int *)(textureUnitThenTextureObject * 0x14 + glContext + 0x5160);
         goto LAB_0001f86c;
       }
-      uVar1 = 0x84f5;
+      targetCompareConstant = 0x84f5;
     }
     else {
       if (target < 0x8515) {
         return 0;
       }
       if (target < 0x851b) goto LAB_0001f860;
-      uVar1 = 0x85b3;
+      targetCompareConstant = 0x85b3;
     }
-    if (target != uVar1) {
+    if (target != targetCompareConstant) {
       return 0;
     }
     textureUnitThenTextureObject = *(int *)(textureUnitThenTextureObject * 0x14 + glContext + 0x515c);

@@ -334,7 +334,7 @@ int _glTexParameterI_Comp(glContext, target, pname, params)
   undefined *pname;
   undefined4 *params;
 {
-  undefined *puVar1;
+  undefined *pnameCheckValue;
   undefined4 *listRecord;
   
   listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glTexParameteri_ListExec_001103ec,0x18);
@@ -358,17 +358,17 @@ LAB_0009e428:
       if (pname < ((unsigned char *)0x00001004)) {
         return listRecord;
       }
-      puVar1 = pname + -0x2800;
+      pnameCheckValue = pname + -0x2800;
     }
     else {
       if (pname == (undefined *)0x80bf) goto LAB_0009e41c;
       if (pname < (undefined *)0x80c0) {
-        puVar1 = (undefined *)0x8072;
+        pnameCheckValue = (undefined *)0x8072;
         goto LAB_0009e414;
       }
-      puVar1 = pname + -0x813a;
+      pnameCheckValue = pname + -0x813a;
     }
-    if ((undefined *)0x3 < puVar1) {
+    if ((undefined *)0x3 < pnameCheckValue) {
       return listRecord;
     }
   }
@@ -377,10 +377,10 @@ LAB_0009e428:
     if (pname < (undefined *)0x85bd) {
       if (pname == (undefined *)0x8501) goto LAB_0009e41c;
       if (pname < (undefined *)0x8502) {
-        puVar1 = (undefined *)0x84fe;
+        pnameCheckValue = (undefined *)0x84fe;
       }
       else {
-        puVar1 = (undefined *)0x85b6;
+        pnameCheckValue = (undefined *)0x85b6;
       }
     }
     else {
@@ -393,10 +393,10 @@ LAB_0009e428:
         }
         goto LAB_0009e41c;
       }
-      puVar1 = (undefined *)0x8a7f;
+      pnameCheckValue = (undefined *)0x8a7f;
     }
 LAB_0009e414:
-    if (pname != puVar1) {
+    if (pname != pnameCheckValue) {
       return listRecord;
     }
   }

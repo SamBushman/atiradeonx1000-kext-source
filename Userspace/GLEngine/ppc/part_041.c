@@ -3174,7 +3174,7 @@ void _gleInitDrawPixelsShareObject(glContext, shareObject)
   int textureAddress;
   int dataStride;
   int dirtyBitArrayWord;
-  uint uVar5;
+  uint changeWord1ThenChangeWord4ThenRendererIndexThenDispatchBit;
   uint textureCount;
   int *dirtyBitArrayCursor;
   int dataBlock;
@@ -3235,9 +3235,9 @@ void _gleInitDrawPixelsShareObject(glContext, shareObject)
   dataBlockHandle = _gleVecAlloc(textureCount * shareObject[1]);
   shareObject[7] = dataBlockHandle;
   *(undefined1 *)(glContext + 0x31e6) = 1;
-  uVar5 = *(uint *)(glContext + 0x314) | 1;
+  changeWord1ThenChangeWord4ThenRendererIndexThenDispatchBit = *(uint *)(glContext + 0x314) | 1;
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x200000;
-  *(uint *)(glContext + 0x314) = uVar5;
+  *(uint *)(glContext + 0x314) = changeWord1ThenChangeWord4ThenRendererIndexThenDispatchBit;
   forwardedFloatArg1 = f1AfterCall;
   if (*(int *)(glContext + 0x50ac) != 0 ||
       (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
@@ -3249,7 +3249,7 @@ void _gleInitDrawPixelsShareObject(glContext, shareObject)
   dirtyFlagWords = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,uVar5,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,changeWord1ThenChangeWord4ThenRendererIndexThenDispatchBit,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
                incomingFpr6,incomingFpr7,incomingFpr8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -3287,24 +3287,24 @@ LAB_000c9bb8:
   else {
     dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
   }
-  uVar5 = *(uint *)(glContext + 800);
+  changeWord1ThenChangeWord4ThenRendererIndexThenDispatchBit = *(uint *)(glContext + 800);
   if (rendererInfoByte79Clear) {
-    stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) && uVar5 == 0;
+    stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) && changeWord1ThenChangeWord4ThenRendererIndexThenDispatchBit == 0;
   }
   else {
     stateClean = (((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) &&
-             (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && dirtyWord3ThenMasked == 0) && uVar5 == 0;
+             (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && dirtyWord3ThenMasked == 0) && changeWord1ThenChangeWord4ThenRendererIndexThenDispatchBit == 0;
   }
   if (!stateClean) {
-    uVar5 = (uint)*(byte *)(glContext + 0x85a6);
-    if (*(byte *)(glContext + 0x85a8) == uVar5) {
+    changeWord1ThenChangeWord4ThenRendererIndexThenDispatchBit = (uint)*(byte *)(glContext + 0x85a6);
+    if (*(byte *)(glContext + 0x85a8) == changeWord1ThenChangeWord4ThenRendererIndexThenDispatchBit) {
       dispatchFlags = (**(code **)(glContext + 0x4788))
                          (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,dirtyFlagWords);
-      uVar5 = dispatchFlags & 4;
+      changeWord1ThenChangeWord4ThenRendererIndexThenDispatchBit = dispatchFlags & 4;
       if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
-          (uVar5 != *(byte *)(glContext + 0x7581))) ||
+          (changeWord1ThenChangeWord4ThenRendererIndexThenDispatchBit != *(byte *)(glContext + 0x7581))) ||
          ((dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
-        if (uVar5 == 0) {
+        if (changeWord1ThenChangeWord4ThenRendererIndexThenDispatchBit == 0) {
           dispatchFlags = dispatchFlags & 0xfffffffe;
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
         }
@@ -3327,7 +3327,7 @@ LAB_000c9cc0:
     do {
       slotByteOffset = loopIndex2 * 4;
       textureObject = *(int *)(slotByteOffset + shareObject[6]);
-      _gleInitializeGLTexture(2,1,textureObject,incomingR6,incomingR7,incomingR8,uVar5);
+      _gleInitializeGLTexture(2,1,textureObject,incomingR6,incomingR7,incomingR8,changeWord1ThenChangeWord4ThenRendererIndexThenDispatchBit);
       *(undefined2 *)(textureObject + 0x3e) = 0x85be;
       *(undefined2 *)(textureObject + 0x34) = 0x812f;
       *(undefined2 *)(textureObject + 0x36) = 0x812f;
