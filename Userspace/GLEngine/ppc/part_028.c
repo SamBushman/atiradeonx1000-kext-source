@@ -38,15 +38,15 @@ void _glTexCoord3dv_Exec(glContext, v)
   int glContext;
   double *v;
 {
-  double dVar1;
-  double dVar2;
+  double texCoordS;
+  double texCoordT;
   
-  dVar1 = *v;
-  dVar2 = v[1];
+  texCoordS = *v;
+  texCoordT = v[1];
   *(float *)(glContext + 0x128) = (float)v[2];
   *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
-  *(float *)(glContext + 0x120) = (float)dVar1;
-  *(float *)(glContext + 0x124) = (float)dVar2;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
+  *(float *)(glContext + 0x124) = (float)texCoordT;
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   return;
 }
@@ -116,18 +116,18 @@ void _glTexCoord4dv_Exec(glContext, v)
   int glContext;
   double *v;
 {
-  double dVar1;
-  double dVar2;
-  double dVar3;
+  double texCoordS;
+  double texCoordR;
+  double texCoordT;
   
-  dVar1 = *v;
-  dVar3 = v[1];
-  dVar2 = v[2];
+  texCoordS = *v;
+  texCoordT = v[1];
+  texCoordR = v[2];
   *(float *)(glContext + 300) = (float)v[3];
-  *(float *)(glContext + 0x120) = (float)dVar1;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
   *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
-  *(float *)(glContext + 0x124) = (float)dVar3;
-  *(float *)(glContext + 0x128) = (float)dVar2;
+  *(float *)(glContext + 0x124) = (float)texCoordT;
+  *(float *)(glContext + 0x128) = (float)texCoordR;
   return;
 }
 
@@ -284,17 +284,17 @@ void _glTexCoord3fv_Exec(glContext, v)
   int glContext;
   undefined4 *v;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
+  undefined4 texCoordR;
+  undefined4 texCoordS;
+  undefined4 texCoordT;
   
-  uVar1 = v[2];
-  uVar2 = *v;
-  uVar3 = v[1];
+  texCoordR = v[2];
+  texCoordS = *v;
+  texCoordT = v[1];
   *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
-  *(undefined4 *)(glContext + 0x120) = uVar2;
-  *(undefined4 *)(glContext + 0x124) = uVar3;
-  *(undefined4 *)(glContext + 0x128) = uVar1;
+  *(undefined4 *)(glContext + 0x120) = texCoordS;
+  *(undefined4 *)(glContext + 0x124) = texCoordT;
+  *(undefined4 *)(glContext + 0x128) = texCoordR;
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   return;
 }
@@ -364,20 +364,20 @@ void _glTexCoord4fv_Exec(glContext, v)
   int glContext;
   undefined4 *v;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  undefined4 texCoordQ;
+  undefined4 texCoordS;
+  undefined4 texCoordT;
+  undefined4 texCoordR;
   
-  uVar1 = v[3];
-  uVar2 = *v;
-  uVar3 = v[1];
-  uVar4 = v[2];
+  texCoordQ = v[3];
+  texCoordS = *v;
+  texCoordT = v[1];
+  texCoordR = v[2];
   *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
-  *(undefined4 *)(glContext + 0x120) = uVar2;
-  *(undefined4 *)(glContext + 0x124) = uVar3;
-  *(undefined4 *)(glContext + 0x128) = uVar4;
-  *(undefined4 *)(glContext + 300) = uVar1;
+  *(undefined4 *)(glContext + 0x120) = texCoordS;
+  *(undefined4 *)(glContext + 0x124) = texCoordT;
+  *(undefined4 *)(glContext + 0x128) = texCoordR;
+  *(undefined4 *)(glContext + 300) = texCoordQ;
   return;
 }
 
@@ -413,13 +413,13 @@ void _glTexCoord1i_Exec(glContext, sCoord)
   int glContext;
   uint sCoord;
 {
-  double dVar1;
+  double texCoordS;
   
-  dVar1 = (double)CONCAT44(0x43300000,sCoord ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordS = (double)CONCAT44(0x43300000,sCoord ^ 0x80000000) - DOUBLE_00108d58;
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   *(undefined4 *)(glContext + 0x124) = *(undefined4 *)(glContext + 0x20);
-  *(float *)(glContext + 0x120) = (float)dVar1;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
   return;
 }
 
@@ -452,13 +452,13 @@ void _glTexCoord1iv_Exec(glContext, v)
   int glContext;
   uint *v;
 {
-  double dVar1;
+  double texCoordS;
   
-  dVar1 = (double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordS = (double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58;
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   *(undefined4 *)(glContext + 0x124) = *(undefined4 *)(glContext + 0x20);
-  *(float *)(glContext + 0x120) = (float)dVar1;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
   return;
 }
 
@@ -492,15 +492,15 @@ void _glTexCoord2i_Exec(glContext, sCoord, t)
   uint sCoord;
   uint t;
 {
-  double dVar1;
-  double dVar2;
+  double texCoordT;
+  double texCoordS;
   
-  dVar2 = (double)CONCAT44(0x43300000,sCoord ^ 0x80000000) - DOUBLE_00108d58;
-  dVar1 = (double)CONCAT44(0x43300000,t ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordS = (double)CONCAT44(0x43300000,sCoord ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordT = (double)CONCAT44(0x43300000,t ^ 0x80000000) - DOUBLE_00108d58;
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
-  *(float *)(glContext + 0x120) = (float)dVar2;
-  *(float *)(glContext + 0x124) = (float)dVar1;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
+  *(float *)(glContext + 0x124) = (float)texCoordT;
   return;
 }
 
@@ -510,14 +510,14 @@ int _glTexCoord2i_Comp(glContext, sCoord, t)
   uint sCoord;
   uint t;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glTexCoord2_ListExec_001103bc,8);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,sCoord ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,t ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,t ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -538,15 +538,15 @@ void _glTexCoord2iv_Exec(glContext, v)
   int glContext;
   uint *v;
 {
-  double dVar1;
-  double dVar2;
+  double texCoordT;
+  double texCoordS;
   
-  dVar2 = (double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58;
-  dVar1 = (double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordS = (double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordT = (double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - DOUBLE_00108d58;
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
-  *(float *)(glContext + 0x120) = (float)dVar2;
-  *(float *)(glContext + 0x124) = (float)dVar1;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
+  *(float *)(glContext + 0x124) = (float)texCoordT;
   return;
 }
 
@@ -555,14 +555,14 @@ int _glTexCoord2iv_Comp(glContext, v)
   undefined4 glContext;
   uint *v;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glTexCoord2_ListExec_001103bc,8);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -584,18 +584,18 @@ void _glTexCoord3i_Exec(glContext, sCoord, t, r)
   uint t;
   uint r;
 {
-  double dVar1;
-  double dVar2;
-  double dVar3;
+  double texCoordS;
+  double texCoordT;
+  double texCoordR;
   
-  dVar1 = (double)CONCAT44(0x43300000,sCoord ^ 0x80000000) - DOUBLE_00108d58;
-  dVar3 = (double)CONCAT44(0x43300000,r ^ 0x80000000) - DOUBLE_00108d58;
-  dVar2 = (double)CONCAT44(0x43300000,t ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordS = (double)CONCAT44(0x43300000,sCoord ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordR = (double)CONCAT44(0x43300000,r ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordT = (double)CONCAT44(0x43300000,t ^ 0x80000000) - DOUBLE_00108d58;
   *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
-  *(float *)(glContext + 0x120) = (float)dVar1;
-  *(float *)(glContext + 0x128) = (float)dVar3;
-  *(float *)(glContext + 0x124) = (float)dVar2;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
+  *(float *)(glContext + 0x128) = (float)texCoordR;
+  *(float *)(glContext + 0x124) = (float)texCoordT;
   return;
 }
 
@@ -606,15 +606,15 @@ int _glTexCoord3i_Comp(glContext, sCoord, t, r)
   uint t;
   uint r;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glTexCoord3_ListExec_001103b8,0xc);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,sCoord ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,t ^ 0x80000000) - dVar1);
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,r ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,t ^ 0x80000000) - intToDoubleBias);
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,r ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -636,18 +636,18 @@ void _glTexCoord3iv_Exec(glContext, v)
   int glContext;
   uint *v;
 {
-  double dVar1;
-  double dVar2;
-  double dVar3;
+  double texCoordS;
+  double texCoordT;
+  double texCoordR;
   
-  dVar1 = (double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58;
-  dVar3 = (double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58;
-  dVar2 = (double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordS = (double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordR = (double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordT = (double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - DOUBLE_00108d58;
   *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
-  *(float *)(glContext + 0x120) = (float)dVar1;
-  *(float *)(glContext + 0x128) = (float)dVar3;
-  *(float *)(glContext + 0x124) = (float)dVar2;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
+  *(float *)(glContext + 0x128) = (float)texCoordR;
+  *(float *)(glContext + 0x124) = (float)texCoordT;
   return;
 }
 
@@ -656,15 +656,15 @@ int _glTexCoord3iv_Comp(glContext, v)
   undefined4 glContext;
   uint *v;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glTexCoord3_ListExec_001103b8,0xc);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - dVar1);
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - intToDoubleBias);
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -687,20 +687,20 @@ void _glTexCoord4i_Exec(glContext, sCoord, t, r, q)
   uint r;
   uint q;
 {
-  double dVar1;
-  double dVar2;
-  double dVar3;
-  double dVar4;
+  double texCoordS;
+  double texCoordT;
+  double texCoordR;
+  double texCoordQ;
   
-  dVar1 = (double)CONCAT44(0x43300000,sCoord ^ 0x80000000) - DOUBLE_00108d58;
-  dVar4 = (double)CONCAT44(0x43300000,q ^ 0x80000000) - DOUBLE_00108d58;
-  dVar2 = (double)CONCAT44(0x43300000,t ^ 0x80000000) - DOUBLE_00108d58;
-  dVar3 = (double)CONCAT44(0x43300000,r ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordS = (double)CONCAT44(0x43300000,sCoord ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordQ = (double)CONCAT44(0x43300000,q ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordT = (double)CONCAT44(0x43300000,t ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordR = (double)CONCAT44(0x43300000,r ^ 0x80000000) - DOUBLE_00108d58;
   *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
-  *(float *)(glContext + 0x120) = (float)dVar1;
-  *(float *)(glContext + 0x124) = (float)dVar2;
-  *(float *)(glContext + 0x128) = (float)dVar3;
-  *(float *)(glContext + 300) = (float)dVar4;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
+  *(float *)(glContext + 0x124) = (float)texCoordT;
+  *(float *)(glContext + 0x128) = (float)texCoordR;
+  *(float *)(glContext + 300) = (float)texCoordQ;
   return;
 }
 
@@ -712,16 +712,16 @@ int _glTexCoord4i_Comp(glContext, sCoord, t, r, q)
   uint r;
   uint q;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glTexCoord4_ListExec_001103b4,0x10);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,sCoord ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,t ^ 0x80000000) - dVar1);
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,r ^ 0x80000000) - dVar1);
-    listRecord[3] = (float)((double)CONCAT44(0x43300000,q ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,t ^ 0x80000000) - intToDoubleBias);
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,r ^ 0x80000000) - intToDoubleBias);
+    listRecord[3] = (float)((double)CONCAT44(0x43300000,q ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -744,20 +744,20 @@ void _glTexCoord4iv_Exec(glContext, v)
   int glContext;
   uint *v;
 {
-  double dVar1;
-  double dVar2;
-  double dVar3;
-  double dVar4;
+  double texCoordS;
+  double texCoordT;
+  double texCoordR;
+  double texCoordQ;
   
-  dVar1 = (double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58;
-  dVar4 = (double)CONCAT44(0x43300000,v[3] ^ 0x80000000) - DOUBLE_00108d58;
-  dVar2 = (double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - DOUBLE_00108d58;
-  dVar3 = (double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordS = (double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordQ = (double)CONCAT44(0x43300000,v[3] ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordT = (double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordR = (double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58;
   *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
-  *(float *)(glContext + 0x120) = (float)dVar1;
-  *(float *)(glContext + 0x124) = (float)dVar2;
-  *(float *)(glContext + 0x128) = (float)dVar3;
-  *(float *)(glContext + 300) = (float)dVar4;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
+  *(float *)(glContext + 0x124) = (float)texCoordT;
+  *(float *)(glContext + 0x128) = (float)texCoordR;
+  *(float *)(glContext + 300) = (float)texCoordQ;
   return;
 }
 
@@ -766,16 +766,16 @@ int _glTexCoord4iv_Comp(glContext, v)
   undefined4 glContext;
   uint *v;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glTexCoord4_ListExec_001103b4,0x10);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - dVar1);
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - dVar1);
-    listRecord[3] = (float)((double)CONCAT44(0x43300000,v[3] ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - intToDoubleBias);
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - intToDoubleBias);
+    listRecord[3] = (float)((double)CONCAT44(0x43300000,v[3] ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -795,13 +795,13 @@ void _glTexCoord1s_Exec(glContext, sCoord)
   int glContext;
   uint sCoord;
 {
-  double dVar1;
+  double texCoordS;
   
-  dVar1 = (double)CONCAT44(0x43300000,sCoord ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordS = (double)CONCAT44(0x43300000,sCoord ^ 0x80000000) - DOUBLE_00108d58;
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   *(undefined4 *)(glContext + 0x124) = *(undefined4 *)(glContext + 0x20);
-  *(float *)(glContext + 0x120) = (float)dVar1;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
   return;
 }
 
@@ -834,13 +834,13 @@ void _glTexCoord1sv_Exec(glContext, v)
   int glContext;
   short *v;
 {
-  double dVar1;
+  double texCoordS;
   
-  dVar1 = (double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58;
+  texCoordS = (double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58;
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   *(undefined4 *)(glContext + 0x124) = *(undefined4 *)(glContext + 0x20);
-  *(float *)(glContext + 0x120) = (float)dVar1;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
   return;
 }
 

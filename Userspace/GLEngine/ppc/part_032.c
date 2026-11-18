@@ -1,18 +1,20 @@
 #include "decls.h"
 
 /* _glGetTexLevelParameterfv_Exec_body @ 0x9dbfc (1068 bytes) */
-void _glGetTexLevelParameterfv_Exec_body(glContext, param_2, param_3, param_4, param_5)
+void _glGetTexLevelParameterfv_Exec_body(glContext, target, param_3, param_4, param_5)
   int glContext;
-  int param_2;
+  int target;
   uint param_3;
   undefined *param_4;
   float *param_5;
 {
   bool bVar1;
+  bool stateClean;
   char cVar2;
   undefined4 glErrorCode;
   uint uVar4;
   int iVar5;
+  int matrixFuncDirty;
   int remaining;
   int loopIndex;
   int *srcCursor;
@@ -21,25 +23,27 @@ void _glGetTexLevelParameterfv_Exec_body(glContext, param_2, param_3, param_4, p
   int framebufferObject;
   undefined *puVar9;
   float *pfVar10;
-  undefined4 in_r8;
+  undefined4 incomingR8;
   uint uVar11;
-  int *piVar12;
+  uint dispatchFlags;
+  uint dirtyWord3ThenMasked;
+  int *dirtyFlagWords;
   double extraout_f1;
   double extraout_f1_00;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   uint local_38 [5];
   
   uVar11 = param_3;
   puVar9 = param_4;
   pfVar10 = param_5;
-  iVar7 = _gleLookUpTexture(glContext,param_2);
+  iVar7 = _gleLookUpTexture(glContext,target);
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -55,7 +59,7 @@ void _glGetTexLevelParameterfv_Exec_body(glContext, param_2, param_3, param_4, p
     glErrorCode = 0x501;
     goto LAB_0009dd64;
   }
-  uVar4 = param_2 - 0x8515;
+  uVar4 = target - 0x8515;
   if (5 < uVar4) {
     uVar4 = 0;
   }
@@ -100,24 +104,24 @@ LAB_0009dd64:
   local_38[0] = (uint)*(ushort *)(iVar5 + 0xca);
 LAB_0009dd7c:
   if ((*(ushort *)(iVar7 + 0x24) & 0x100) == 0) goto LAB_0009df84;
-  iVar5 = *(int *)(glContext + 0x50ac);
+  matrixFuncDirty = *(int *)(glContext + 0x50ac);
   fparam_1 = extraout_f1;
-  if (iVar5 != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+  if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
     fparam_1 = extraout_f1_00;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_0009df84;
   framebufferObject = *(int *)(glContext + 0x744c);
-  piVar12 = (int *)(glContext + 0x310);
+  dirtyFlagWords = (int *)(glContext + 0x310);
   cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar11,puVar9,pfVar10,in_r8,iVar5,fparam_1,in_f2,in_f3,in_f4,
-               in_f5,in_f6,in_f7,in_f8);
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar11,puVar9,pfVar10,incomingR8,matrixFuncDirty,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,
+               incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
   if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_0009de7c:
-    uVar11 = *(uint *)(glContext + 0x31c);
+    dirtyWord3ThenMasked = *(uint *)(glContext + 0x31c);
   }
   else {
     loopIndex = 0;
@@ -131,8 +135,8 @@ LAB_0009de7c:
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex < 9);
-    uVar11 = *(uint *)(glContext + 0x31c);
-    if ((uVar11 & 0x15555) != 0) {
+    dirtyWord3ThenMasked = *(uint *)(glContext + 0x31c);
+    if ((dirtyWord3ThenMasked & 0x15555) != 0) {
       if (*(char *)(glContext + 0x2e54) != '\0') {
         _gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
       }
@@ -144,32 +148,32 @@ LAB_0009de7c:
   }
   bVar1 = cVar2 == '\0';
   if (bVar1) {
-    uVar11 = uVar11 & 0x17000000;
+    dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
   }
   else {
-    uVar11 = uVar11 & 0x17ffffff;
+    dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
   }
   if (bVar1) {
-    bVar1 = ((*piVar12 == 0 && *(int *)(glContext + 0x314) == 0) && uVar11 == 0) &&
+    stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
             *(int *)(glContext + 800) == 0;
   }
   else {
-    bVar1 = (((*piVar12 == 0 && *(int *)(glContext + 0x314) == 0) &&
-             (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && uVar11 == 0) &&
+    stateClean = (((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) &&
+             (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && dirtyWord3ThenMasked == 0) &&
             *(int *)(glContext + 800) == 0;
   }
-  if (!bVar1) {
+  if (!stateClean) {
     if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
-      uVar11 = (**(code **)(glContext + 0x4788))
-                         (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,piVar12);
-      if ((((uVar11 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
-          ((uVar11 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-         ((uVar11 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
-        if ((uVar11 & 4) == 0) {
-          uVar11 = uVar11 & 0xfffffffe;
+      dispatchFlags = (**(code **)(glContext + 0x4788))
+                         (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,dirtyFlagWords);
+      if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
+          ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
+         ((dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
+        if ((dispatchFlags & 4) == 0) {
+          dispatchFlags = dispatchFlags & 0xfffffffe;
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
         }
-        _gleUpdateDispatchCodeChange(glContext,uVar11);
+        _gleUpdateDispatchCodeChange(glContext,dispatchFlags);
       }
     }
     else {
@@ -178,8 +182,8 @@ LAB_0009de7c:
   }
   remaining = 0x13;
   do {
-    *piVar12 = 0;
-    piVar12 = piVar12 + 1;
+    *dirtyFlagWords = 0;
+    dirtyFlagWords = dirtyFlagWords + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
 LAB_0009df84:
@@ -206,10 +210,10 @@ int _glTexParameterf_ListExec(glContext, listRecord)
 }
 
 /* _glTexParameterF_Comp @ 0x9e05c (388 bytes) */
-int _glTexParameterF_Comp(glContext, param_2, param_3, param_4)
+int _glTexParameterF_Comp(glContext, target, pname, param_4)
   undefined4 glContext;
-  undefined4 param_2;
-  undefined *param_3;
+  undefined4 target;
+  undefined *pname;
   undefined4 *param_4;
 {
   undefined *puVar1;
@@ -219,13 +223,13 @@ int _glTexParameterF_Comp(glContext, param_2, param_3, param_4)
   if (listRecord == (undefined4 *)0x0) {
     return listRecord;
   }
-  *listRecord = param_2;
-  listRecord[1] = param_3;
-  if (param_3 == (undefined *)0x8191) goto LAB_0009e1a0;
-  if (param_3 < (undefined *)0x8192) {
-    if (param_3 == (undefined *)0x8066) goto LAB_0009e1a0;
-    if (param_3 < (undefined *)0x8067) {
-      if (param_3 == ((unsigned char *)0x00001004)) {
+  *listRecord = target;
+  listRecord[1] = pname;
+  if (pname == (undefined *)0x8191) goto LAB_0009e1a0;
+  if (pname < (undefined *)0x8192) {
+    if (pname == (undefined *)0x8066) goto LAB_0009e1a0;
+    if (pname < (undefined *)0x8067) {
+      if (pname == ((unsigned char *)0x00001004)) {
 LAB_0009e1ac:
         listRecord[2] = *param_4;
         listRecord[3] = param_4[1];
@@ -233,28 +237,28 @@ LAB_0009e1ac:
         listRecord[5] = param_4[3];
         return listRecord;
       }
-      if (param_3 < ((unsigned char *)0x00001004)) {
+      if (pname < ((unsigned char *)0x00001004)) {
         return listRecord;
       }
-      puVar1 = param_3 + -0x2800;
+      puVar1 = pname + -0x2800;
     }
     else {
-      if (param_3 == (undefined *)0x80bf) goto LAB_0009e1a0;
-      if (param_3 < (undefined *)0x80c0) {
+      if (pname == (undefined *)0x80bf) goto LAB_0009e1a0;
+      if (pname < (undefined *)0x80c0) {
         puVar1 = (undefined *)0x8072;
         goto LAB_0009e198;
       }
-      puVar1 = param_3 + -0x813a;
+      puVar1 = pname + -0x813a;
     }
     if ((undefined *)0x3 < puVar1) {
       return listRecord;
     }
   }
   else {
-    if (param_3 == (undefined *)0x85bc) goto LAB_0009e1a0;
-    if (param_3 < (undefined *)0x85bd) {
-      if (param_3 == (undefined *)0x8501) goto LAB_0009e1a0;
-      if (param_3 < (undefined *)0x8502) {
+    if (pname == (undefined *)0x85bc) goto LAB_0009e1a0;
+    if (pname < (undefined *)0x85bd) {
+      if (pname == (undefined *)0x8501) goto LAB_0009e1a0;
+      if (pname < (undefined *)0x8502) {
         puVar1 = (undefined *)0x84fe;
       }
       else {
@@ -262,9 +266,9 @@ LAB_0009e1ac:
       }
     }
     else {
-      if (param_3 < (undefined *)0x884e) {
-        if (param_3 < (undefined *)0x884b) {
-          if (param_3 != (undefined *)0x871a) {
+      if (pname < (undefined *)0x884e) {
+        if (pname < (undefined *)0x884b) {
+          if (pname != (undefined *)0x871a) {
             return listRecord;
           }
           goto LAB_0009e1ac;
@@ -274,7 +278,7 @@ LAB_0009e1ac:
       puVar1 = (undefined *)0x8a7f;
     }
 LAB_0009e198:
-    if (param_3 != puVar1) {
+    if (pname != puVar1) {
       return listRecord;
     }
   }
@@ -324,10 +328,10 @@ int _glTexParameteri_ListExec(glContext, listRecord)
 }
 
 /* _glTexParameterI_Comp @ 0x9e2d8 (388 bytes) */
-int _glTexParameterI_Comp(glContext, param_2, param_3, param_4)
+int _glTexParameterI_Comp(glContext, target, pname, param_4)
   undefined4 glContext;
-  undefined4 param_2;
-  undefined *param_3;
+  undefined4 target;
+  undefined *pname;
   undefined4 *param_4;
 {
   undefined *puVar1;
@@ -337,13 +341,13 @@ int _glTexParameterI_Comp(glContext, param_2, param_3, param_4)
   if (listRecord == (undefined4 *)0x0) {
     return listRecord;
   }
-  *listRecord = param_2;
-  listRecord[1] = param_3;
-  if (param_3 == (undefined *)0x8191) goto LAB_0009e41c;
-  if (param_3 < (undefined *)0x8192) {
-    if (param_3 == (undefined *)0x8066) goto LAB_0009e41c;
-    if (param_3 < (undefined *)0x8067) {
-      if (param_3 == ((unsigned char *)0x00001004)) {
+  *listRecord = target;
+  listRecord[1] = pname;
+  if (pname == (undefined *)0x8191) goto LAB_0009e41c;
+  if (pname < (undefined *)0x8192) {
+    if (pname == (undefined *)0x8066) goto LAB_0009e41c;
+    if (pname < (undefined *)0x8067) {
+      if (pname == ((unsigned char *)0x00001004)) {
 LAB_0009e428:
         listRecord[2] = *param_4;
         listRecord[3] = param_4[1];
@@ -351,28 +355,28 @@ LAB_0009e428:
         listRecord[5] = param_4[3];
         return listRecord;
       }
-      if (param_3 < ((unsigned char *)0x00001004)) {
+      if (pname < ((unsigned char *)0x00001004)) {
         return listRecord;
       }
-      puVar1 = param_3 + -0x2800;
+      puVar1 = pname + -0x2800;
     }
     else {
-      if (param_3 == (undefined *)0x80bf) goto LAB_0009e41c;
-      if (param_3 < (undefined *)0x80c0) {
+      if (pname == (undefined *)0x80bf) goto LAB_0009e41c;
+      if (pname < (undefined *)0x80c0) {
         puVar1 = (undefined *)0x8072;
         goto LAB_0009e414;
       }
-      puVar1 = param_3 + -0x813a;
+      puVar1 = pname + -0x813a;
     }
     if ((undefined *)0x3 < puVar1) {
       return listRecord;
     }
   }
   else {
-    if (param_3 == (undefined *)0x85bc) goto LAB_0009e41c;
-    if (param_3 < (undefined *)0x85bd) {
-      if (param_3 == (undefined *)0x8501) goto LAB_0009e41c;
-      if (param_3 < (undefined *)0x8502) {
+    if (pname == (undefined *)0x85bc) goto LAB_0009e41c;
+    if (pname < (undefined *)0x85bd) {
+      if (pname == (undefined *)0x8501) goto LAB_0009e41c;
+      if (pname < (undefined *)0x8502) {
         puVar1 = (undefined *)0x84fe;
       }
       else {
@@ -380,9 +384,9 @@ LAB_0009e428:
       }
     }
     else {
-      if (param_3 < (undefined *)0x884e) {
-        if (param_3 < (undefined *)0x884b) {
-          if (param_3 != (undefined *)0x871a) {
+      if (pname < (undefined *)0x884e) {
+        if (pname < (undefined *)0x884b) {
+          if (pname != (undefined *)0x871a) {
             return listRecord;
           }
           goto LAB_0009e428;
@@ -392,7 +396,7 @@ LAB_0009e428:
       puVar1 = (undefined *)0x8a7f;
     }
 LAB_0009e414:
-    if (param_3 != puVar1) {
+    if (pname != puVar1) {
       return listRecord;
     }
   }
@@ -472,9 +476,9 @@ void _glGetTexParameterPointervAPPLE_Exec(glContext, target, pname, params)
 }
 
 /* _glTexImage1D_ListExec @ 0x9e5a8 (604 bytes) */
-int _glTexImage1D_ListExec(glContext, param_2)
+int _glTexImage1D_ListExec(glContext, listRecord)
   int glContext;
-  undefined4 *param_2;
+  undefined4 *listRecord;
 {
   byte bVar1;
   ushort uVar2;
@@ -485,11 +489,11 @@ int _glTexImage1D_ListExec(glContext, param_2)
   int iVar7;
   int iVar8;
   
-  iVar7 = param_2[3];
-  iVar6 = param_2[1];
-  iVar5 = param_2[7] + 0x20;
+  iVar7 = listRecord[3];
+  iVar6 = listRecord[1];
+  iVar5 = listRecord[7] + 0x20;
   iVar4 = _gleCheckTexImage1DArgs
-                    (glContext,*param_2,iVar6,param_2[2],iVar7,param_2[4],param_2[5],param_2[6]);
+                    (glContext,*listRecord,iVar6,listRecord[2],iVar7,listRecord[4],listRecord[5],listRecord[6]);
   if (iVar4 != 0) {
     uVar2 = *(ushort *)(iVar4 + 0x24);
     if ((uVar2 & 0x3c00) != 0x1000) {
@@ -525,12 +529,12 @@ int _glTexImage1D_ListExec(glContext, param_2)
       *(byte *)(iVar3 + 0xcf) = *(byte *)(iVar3 + 0xcf) & 0xdf;
     }
     iVar7 = _gleCreateTextureLevel
-                      (glContext,iVar4,iVar8,param_2[2],iVar7,1,1,param_2[4],param_2[5],param_2[6],0,
-                       param_2 + 8);
+                      (glContext,iVar4,iVar8,listRecord[2],iVar7,1,1,listRecord[4],listRecord[5],listRecord[6],0,
+                       listRecord + 8);
     if (iVar7 != 0) {
-      _gleTextureImagePut(glContext,iVar8,0,0,0,param_2[3],1,1,param_2[5],param_2[6],1,0,param_2 + 8);
+      _gleTextureImagePut(glContext,iVar8,0,0,0,listRecord[3],1,1,listRecord[5],listRecord[6],1,0,listRecord + 8);
     }
-    _gleCreatePluginTextureLevel(glContext,iVar4,iVar8,0,iVar6,param_2[2]);
+    _gleCreatePluginTextureLevel(glContext,iVar4,iVar8,0,iVar6,listRecord[2]);
     if ((((*(uint *)(iVar4 + 0x6c) & 0x8000) == 0) || (*(short *)(iVar4 + 0x60) != iVar6)) ||
        (iVar4 = _gleGenMipmapsToLevel(glContext,iVar4,0,iVar6,0xf,1), iVar4 == 0)) {
       *(uint *)(glContext + 0x314) =
@@ -793,9 +797,9 @@ void _glTexImage1D_CompExec(glContext, target, level, internalformat, width, bor
 }
 
 /* _glTexImage2D_ListExec @ 0x9ee3c (704 bytes) */
-int _glTexImage2D_ListExec(glContext, param_2)
+int _glTexImage2D_ListExec(glContext, listRecord)
   int glContext;
-  int *param_2;
+  int *listRecord;
 {
   byte bVar1;
   ushort uVar2;
@@ -808,12 +812,12 @@ int _glTexImage2D_ListExec(glContext, param_2)
   int iVar9;
   int iVar10;
   
-  iVar9 = param_2[3];
-  iVar10 = param_2[4];
-  iVar8 = param_2[1];
-  iVar7 = param_2[8] + 0x24;
+  iVar9 = listRecord[3];
+  iVar10 = listRecord[4];
+  iVar8 = listRecord[1];
+  iVar7 = listRecord[8] + 0x24;
   iVar5 = _gleCheckTexImage2DArgs
-                    (glContext,*param_2,iVar8,param_2[2],iVar9,iVar10,param_2[5],param_2[6],param_2[7]
+                    (glContext,*listRecord,iVar8,listRecord[2],iVar9,iVar10,listRecord[5],listRecord[6],listRecord[7]
                     );
   if (iVar5 == 0) {
     return iVar7;
@@ -845,7 +849,7 @@ int _glTexImage2D_ListExec(glContext, param_2)
   iVar9 = (iVar9 - iVar3) + 1;
   iVar10 = (iVar10 - iVar6) + 1;
 LAB_0009ef44:
-  uVar4 = *param_2 - 0x8515;
+  uVar4 = *listRecord - 0x8515;
   if (5 < uVar4) {
     uVar4 = 0;
   }
@@ -867,13 +871,13 @@ LAB_0009ef44:
     *(byte *)(iVar3 + 0xcf) = *(byte *)(iVar3 + 0xcf) & 0xdf;
   }
   iVar9 = _gleCreateTextureLevel
-                    (glContext,iVar5,iVar6,param_2[2],iVar9,iVar10,1,param_2[5],param_2[6],param_2[7],
-                     0,param_2 + 9);
+                    (glContext,iVar5,iVar6,listRecord[2],iVar9,iVar10,1,listRecord[5],listRecord[6],listRecord[7],
+                     0,listRecord + 9);
   if (iVar9 != 0) {
-    _gleTextureImagePut(glContext,iVar6,0,0,0,param_2[3],param_2[4],1,param_2[6],param_2[7],1,0,
-                        param_2 + 9);
+    _gleTextureImagePut(glContext,iVar6,0,0,0,listRecord[3],listRecord[4],1,listRecord[6],listRecord[7],1,0,
+                        listRecord + 9);
   }
-  _gleCreatePluginTextureLevel(glContext,iVar5,iVar6,uVar4,iVar8,param_2[2]);
+  _gleCreatePluginTextureLevel(glContext,iVar5,iVar6,uVar4,iVar8,listRecord[2]);
   if ((((*(uint *)(iVar5 + 0x6c) & 0x8000) == 0) || (*(short *)(iVar5 + 0x60) != iVar8)) ||
      (iVar5 = _gleGenMipmapsToLevel(glContext,iVar5,uVar4,iVar8,0xf,1), iVar5 == 0)) {
     *(uint *)(glContext + 0x314) =
@@ -1028,17 +1032,17 @@ void _glTexImage2D_FlushExec(forwardedArg1, forwardedArg2, forwardedArg3, forwar
   undefined4 forwardedArg10;
 {
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   _glTexImage2D_Exec(forwardedArg1,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedArg8,forwardedArg9,
                      forwardedArg10);
-  ((void (*)())_glFlush_Exec)(forwardedArg1,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_glFlush_Exec)(forwardedArg1,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -1063,9 +1067,9 @@ void _glTexImage2D_CompExec(glContext, target, level, internalformat, width, hei
 }
 
 /* _glTexImage3D_ListExec @ 0x9f4a4 (564 bytes) */
-int _glTexImage3D_ListExec(glContext, param_2)
+int _glTexImage3D_ListExec(glContext, listRecord)
   int glContext;
-  undefined4 *param_2;
+  undefined4 *listRecord;
 {
   byte bVar1;
   ushort uVar2;
@@ -1075,11 +1079,11 @@ int _glTexImage3D_ListExec(glContext, param_2)
   int iVar6;
   int iVar7;
   
-  iVar6 = param_2[1];
-  iVar5 = param_2[9] + 0x28;
+  iVar6 = listRecord[1];
+  iVar5 = listRecord[9] + 0x28;
   iVar4 = _gleCheckTexImage3DArgs
-                    (glContext,*param_2,iVar6,param_2[2],param_2[3],param_2[4],param_2[5],param_2[6],
-                     param_2[7],param_2[8]);
+                    (glContext,*listRecord,iVar6,listRecord[2],listRecord[3],listRecord[4],listRecord[5],listRecord[6],
+                     listRecord[7],listRecord[8]);
   if (iVar4 != 0) {
     uVar2 = *(ushort *)(iVar4 + 0x24);
     if ((uVar2 & 0x3c00) != 0x1000) {
@@ -1112,13 +1116,13 @@ int _glTexImage3D_ListExec(glContext, param_2)
       *(byte *)(iVar3 + 0xcf) = *(byte *)(iVar3 + 0xcf) & 0xdf;
     }
     iVar3 = _gleCreateTextureLevel
-                      (glContext,iVar4,iVar7,param_2[2],param_2[3],param_2[4],param_2[5],param_2[6],
-                       param_2[7],param_2[8],0,param_2 + 10);
+                      (glContext,iVar4,iVar7,listRecord[2],listRecord[3],listRecord[4],listRecord[5],listRecord[6],
+                       listRecord[7],listRecord[8],0,listRecord + 10);
     if (iVar3 != 0) {
-      _gleTextureImagePut(glContext,iVar7,0,0,0,param_2[3],param_2[4],param_2[5],param_2[7],param_2[8]
-                          ,0,0,param_2 + 10);
+      _gleTextureImagePut(glContext,iVar7,0,0,0,listRecord[3],listRecord[4],listRecord[5],listRecord[7],listRecord[8]
+                          ,0,0,listRecord + 10);
     }
-    _gleCreatePluginTextureLevel(glContext,iVar4,iVar7,0,iVar6,param_2[2]);
+    _gleCreatePluginTextureLevel(glContext,iVar4,iVar7,0,iVar6,listRecord[2]);
     if ((((*(uint *)(iVar4 + 0x6c) & 0x8000) == 0) || (*(short *)(iVar4 + 0x60) != iVar6)) ||
        (iVar4 = _gleGenMipmapsToLevel(glContext,iVar4,0,iVar6,0xf,1), iVar4 == 0)) {
       *(uint *)(glContext + 0x314) =
@@ -1282,9 +1286,9 @@ void _glTexImage3D_CompExec(glContext, target, level, internalformat, width, hei
 }
 
 /* _glTexSubImage1D_ListExec @ 0x9fa28 (920 bytes) */
-int _glTexSubImage1D_ListExec(glContext, param_2)
+int _glTexSubImage1D_ListExec(glContext, listRecord)
   int glContext;
-  undefined4 *param_2;
+  undefined4 *listRecord;
 {
   int iVar1;
   int iVar2;
@@ -1294,11 +1298,11 @@ int _glTexSubImage1D_ListExec(glContext, param_2)
   uint uVar6;
   int iVar7;
   
-  iVar1 = param_2[6];
+  iVar1 = listRecord[6];
   if (*(short *)(glContext + 0x4a10) < 0) {
-    uVar6 = param_2[1];
+    uVar6 = listRecord[1];
     iVar3 = _gleCheckTexSubImage1DArgs
-                      (glContext,*param_2,uVar6,param_2[2],param_2[3],param_2[4],param_2[5]);
+                      (glContext,*listRecord,uVar6,listRecord[2],listRecord[3],listRecord[4],listRecord[5]);
     if (iVar3 != 0) {
       iVar2 = iVar3 + uVar6 * 0x18;
       iVar7 = iVar2 + 0xc4;
@@ -1308,7 +1312,7 @@ int _glTexSubImage1D_ListExec(glContext, param_2)
          (iVar4 = (**(code **)(glContext + 0x4710))
                             (*(undefined4 *)(glContext + 0x4688),
                              *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4),0,uVar6,
-                             param_2[2],0,0,param_2[3]), iVar4 == 0)) {
+                             listRecord[2],0,0,listRecord[3]), iVar4 == 0)) {
         bVar5 = *(byte *)(iVar2 + 0xcf);
         if ((bVar5 & 0x10) == 0) {
           if ((bVar5 & 0x40) == 0) {
@@ -1323,9 +1327,9 @@ int _glTexSubImage1D_ListExec(glContext, param_2)
                       (glContext,iVar3,iVar7,0,uVar6,(uint)*(byte *)(glContext + 0x85a8));
           }
         }
-        _gleModifyPluginTextureLevel(glContext,iVar3,iVar7,0,uVar6,param_2[2],0,0,param_2[3],1,1);
-        _gleTextureImagePut(glContext,iVar7,param_2[2] + (uint)*(byte *)(iVar2 + 0xce),0,0,param_2[3],
-                            1,1,param_2[4],param_2[5],1,0,param_2 + 7);
+        _gleModifyPluginTextureLevel(glContext,iVar3,iVar7,0,uVar6,listRecord[2],0,0,listRecord[3],1,1);
+        _gleTextureImagePut(glContext,iVar7,listRecord[2] + (uint)*(byte *)(iVar2 + 0xce),0,0,listRecord[3],
+                            1,1,listRecord[4],listRecord[5],1,0,listRecord + 7);
         if ((((*(uint *)(iVar3 + 0x6c) & 0x8000) == 0) || ((int)*(short *)(iVar3 + 0x60) != uVar6))
            || (iVar3 = _gleGenMipmapsToLevel(glContext,iVar3,0,uVar6,0xf,1), iVar3 == 0)) {
           *(uint *)(glContext + 0x314) =
@@ -1699,9 +1703,9 @@ void _glTexSubImage1D_CompExec(glContext, target, level, xoffset, width, format,
 }
 
 /* _glTexSubImage2D_ListExec @ 0xa06e4 (1008 bytes) */
-int _glTexSubImage2D_ListExec(glContext, param_2)
+int _glTexSubImage2D_ListExec(glContext, listRecord)
   int glContext;
-  int *param_2;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
@@ -1713,14 +1717,14 @@ int _glTexSubImage2D_ListExec(glContext, param_2)
   uint uVar8;
   int iVar9;
   
-  iVar2 = param_2[8];
+  iVar2 = listRecord[8];
   if (*(short *)(glContext + 0x4a10) < 0) {
-    uVar8 = param_2[1];
+    uVar8 = listRecord[1];
     iVar5 = _gleCheckTexSubImage2DArgs
-                      (glContext,*param_2,uVar8,param_2[2],param_2[3],param_2[4],param_2[5],param_2[6]
-                       ,param_2[7]);
+                      (glContext,*listRecord,uVar8,listRecord[2],listRecord[3],listRecord[4],listRecord[5],listRecord[6]
+                       ,listRecord[7]);
     if (iVar5 != 0) {
-      uVar3 = *param_2 - 0x8515;
+      uVar3 = *listRecord - 0x8515;
       if (5 < uVar3) {
         uVar3 = 0;
       }
@@ -1732,7 +1736,7 @@ int _glTexSubImage2D_ListExec(glContext, param_2)
          (iVar6 = (**(code **)(glContext + 0x4710))
                             (*(undefined4 *)(glContext + 0x4688),
                              *(undefined4 *)(iVar5 + (uint)*(byte *)(glContext + 0x85a8) * 4),uVar3,
-                             uVar8,param_2[2],param_2[3],0,param_2[4]), iVar6 == 0)) {
+                             uVar8,listRecord[2],listRecord[3],0,listRecord[4]), iVar6 == 0)) {
         bVar7 = *(byte *)(iVar4 + 0xcf);
         if ((bVar7 & 0x10) == 0) {
           if ((bVar7 & 0x40) == 0) {
@@ -1748,10 +1752,10 @@ int _glTexSubImage2D_ListExec(glContext, param_2)
           }
         }
         _gleModifyPluginTextureLevel
-                  (glContext,iVar5,iVar9,uVar3,uVar8,param_2[2],param_2[3],0,param_2[4],param_2[5],1);
-        _gleTextureImagePut(glContext,iVar9,param_2[2] + (uint)*(byte *)(iVar4 + 0xce),
-                            param_2[3] + (uint)*(byte *)(iVar4 + 0xce),0,param_2[4],param_2[5],1,
-                            param_2[6],param_2[7],1,0,param_2 + 9);
+                  (glContext,iVar5,iVar9,uVar3,uVar8,listRecord[2],listRecord[3],0,listRecord[4],listRecord[5],1);
+        _gleTextureImagePut(glContext,iVar9,listRecord[2] + (uint)*(byte *)(iVar4 + 0xce),
+                            listRecord[3] + (uint)*(byte *)(iVar4 + 0xce),0,listRecord[4],listRecord[5],1,
+                            listRecord[6],listRecord[7],1,0,listRecord + 9);
         if ((((*(uint *)(iVar5 + 0x6c) & 0x8000) == 0) || ((int)*(short *)(iVar5 + 0x60) != uVar8))
            || (iVar5 = _gleGenMipmapsToLevel(glContext,iVar5,uVar3,uVar8,0xf,1), iVar5 == 0)) {
           *(uint *)(glContext + 0x314) =
@@ -1945,17 +1949,17 @@ void _glTexSubImage2D_FlushExec(forwardedArg1, forwardedArg2, forwardedArg3, for
   undefined4 forwardedArg10;
 {
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   _glTexSubImage2D_Exec
             (forwardedArg1,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedArg8,forwardedArg9,forwardedArg10);
-  ((void (*)())_glFlush_Exec)(forwardedArg1,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_glFlush_Exec)(forwardedArg1,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -1979,9 +1983,9 @@ void _glTexSubImage2D_CompExec(glContext, target, level, xoffset, yoffset, width
 }
 
 /* _glTexSubImage3D_ListExec @ 0xa0e44 (968 bytes) */
-int _glTexSubImage3D_ListExec(glContext, param_2)
+int _glTexSubImage3D_ListExec(glContext, listRecord)
   int glContext;
-  undefined4 *param_2;
+  undefined4 *listRecord;
 {
   uint uVar1;
   int iVar2;
@@ -1992,12 +1996,12 @@ int _glTexSubImage3D_ListExec(glContext, param_2)
   uint uVar7;
   int iVar8;
   
-  iVar2 = param_2[10];
+  iVar2 = listRecord[10];
   if (*(short *)(glContext + 0x4a10) < 0) {
-    uVar7 = param_2[1];
+    uVar7 = listRecord[1];
     iVar4 = _gleCheckTexSubImage3DArgs
-                      (glContext,*param_2,uVar7,param_2[2],param_2[3],param_2[4],param_2[5],param_2[6]
-                       ,param_2[7],param_2[8],param_2[9]);
+                      (glContext,*listRecord,uVar7,listRecord[2],listRecord[3],listRecord[4],listRecord[5],listRecord[6]
+                       ,listRecord[7],listRecord[8],listRecord[9]);
     if (iVar4 != 0) {
       iVar3 = iVar4 + uVar7 * 0x18;
       iVar8 = iVar3 + 0xc4;
@@ -2007,7 +2011,7 @@ int _glTexSubImage3D_ListExec(glContext, param_2)
          (iVar5 = (**(code **)(glContext + 0x4710))
                             (*(undefined4 *)(glContext + 0x4688),
                              *(undefined4 *)(iVar4 + (uint)*(byte *)(glContext + 0x85a8) * 4),0,uVar7,
-                             param_2[2],param_2[3],param_2[4],param_2[5]), iVar5 == 0)) {
+                             listRecord[2],listRecord[3],listRecord[4],listRecord[5]), iVar5 == 0)) {
         bVar6 = *(byte *)(iVar3 + 0xcf);
         if ((bVar6 & 0x10) == 0) {
           if ((bVar6 & 0x40) == 0) {
@@ -2023,11 +2027,11 @@ int _glTexSubImage3D_ListExec(glContext, param_2)
           }
         }
         _gleModifyPluginTextureLevel
-                  (glContext,iVar4,iVar8,0,uVar7,param_2[2],param_2[3],param_2[4],param_2[5],
-                   param_2[6],param_2[7]);
+                  (glContext,iVar4,iVar8,0,uVar7,listRecord[2],listRecord[3],listRecord[4],listRecord[5],
+                   listRecord[6],listRecord[7]);
         uVar1 = (uint)*(byte *)(iVar3 + 0xce);
-        _gleTextureImagePut(glContext,iVar8,param_2[2] + uVar1,param_2[3] + uVar1,param_2[4] + uVar1,
-                            param_2[5],param_2[6],param_2[7],param_2[8],param_2[9],0,0,param_2 + 0xb
+        _gleTextureImagePut(glContext,iVar8,listRecord[2] + uVar1,listRecord[3] + uVar1,listRecord[4] + uVar1,
+                            listRecord[5],listRecord[6],listRecord[7],listRecord[8],listRecord[9],0,0,listRecord + 0xb
                            );
         if ((((*(uint *)(iVar4 + 0x6c) & 0x8000) == 0) || ((int)*(short *)(iVar4 + 0x60) != uVar7))
            || (iVar4 = _gleGenMipmapsToLevel(glContext,iVar4,0,uVar7,0xf,1), iVar4 == 0)) {
@@ -2434,9 +2438,9 @@ void _glTexSubImage3D_CompExec(glContext, target, level, xoffset, yoffset, zoffs
 }
 
 /* _glVertex2_ListExec @ 0xa1bcc (84 bytes) */
-int _glVertex2_ListExec(glContext, param_2)
+int _glVertex2_ListExec(glContext, listRecord)
   int glContext;
-  float *param_2;
+  float *listRecord;
 {
   code *pcVar1;
   
@@ -2444,15 +2448,15 @@ int _glVertex2_ListExec(glContext, param_2)
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
     pcVar1 = *(code **)(glContext + 0x28);
   }
-  (*pcVar1)(glContext,(double)*param_2,(double)param_2[1],(double)*(float *)(glContext + 0x20),
+  (*pcVar1)(glContext,(double)*listRecord,(double)listRecord[1],(double)*(float *)(glContext + 0x20),
             (double)*(float *)(glContext + 0x24));
   return 8;
 }
 
 /* _glVertex4_ListExec @ 0xa1c20 (80 bytes) */
-int _glVertex4_ListExec(glContext, param_2)
+int _glVertex4_ListExec(glContext, listRecord)
   int glContext;
-  float *param_2;
+  float *listRecord;
 {
   code *pcVar1;
   
@@ -2460,7 +2464,7 @@ int _glVertex4_ListExec(glContext, param_2)
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
     pcVar1 = *(code **)(glContext + 0x28);
   }
-  (*pcVar1)(glContext,(double)*param_2,(double)param_2[1],(double)param_2[2],(double)param_2[3]);
+  (*pcVar1)(glContext,(double)*listRecord,(double)listRecord[1],(double)listRecord[2],(double)listRecord[3]);
   return 0x10;
 }
 

@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _glOrtho_ListExec @ 0x793f0 (360 bytes) */
-undefined4 _glOrtho_ListExec(int glContext,float *param_2,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
+undefined4 _glOrtho_ListExec(int glContext,float *listRecord,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
   float fVar1;
   float fVar2;
@@ -14,13 +14,13 @@ undefined4 _glOrtho_ListExec(int glContext,float *param_2,double unusedFloatArg1
   
   pfVar8 = *(float **)(glContext + 0x4fec);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    fVar1 = param_2[4];
-    fVar2 = param_2[3];
+    fVar1 = listRecord[4];
+    fVar2 = listRecord[3];
     fVar3 = pfVar8[3];
-    fVar4 = param_2[5];
-    fVar5 = *param_2;
-    fVar6 = param_2[2];
-    fVar7 = param_2[1];
+    fVar4 = listRecord[5];
+    fVar5 = *listRecord;
+    fVar6 = listRecord[2];
+    fVar7 = listRecord[1];
     pfVar8[0xc] = pfVar8[0xc] + (pfVar8[8] * fVar4 + (*pfVar8 * fVar2 + pfVar8[4] * fVar1));
     pfVar8[3] = fVar3 * fVar5;
     pfVar8[0xd] = pfVar8[0xd] + (pfVar8[9] * fVar4 + (pfVar8[1] * fVar2 + pfVar8[5] * fVar1));
@@ -102,15 +102,15 @@ int _glOrtho_Comp(int glContext,double left,double right,double bottom,double to
 /* _glOrtho_CompExec @ 0x796c4 (120 bytes) */
 void _glOrtho_CompExec(undefined4 glContext,double left,double right,double bottom,double top,double zNear,double zFar,double forwardedFloatArg7,double forwardedFloatArg8,double forwardedFloatArg9,double forwardedFloatArg10,double forwardedFloatArg11,double forwardedFloatArg12,double forwardedFloatArg13)
 {
-  double in_stack_ffffff68;
-  double in_stack_ffffff70;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
-  double in_stack_ffffff88;
+  double incomingStack_ffffff68;
+  double incomingStack_ffffff70;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
+  double incomingStack_ffffff88;
   
   ((int (*)())_glOrtho_Comp)(glContext,left,right,bottom,top,zNear,zFar,forwardedFloatArg7,forwardedFloatArg8,
-                in_stack_ffffff68,in_stack_ffffff70,in_stack_ffffff78,in_stack_ffffff80,
-                in_stack_ffffff88);
+                incomingStack_ffffff68,incomingStack_ffffff70,incomingStack_ffffff78,incomingStack_ffffff80,
+                incomingStack_ffffff88);
   ((void (*)())_glOrtho_Exec)(glContext,left,right,bottom,top,zNear,zFar,forwardedFloatArg7,forwardedFloatArg8,
                 forwardedFloatArg9,forwardedFloatArg10,forwardedFloatArg11,forwardedFloatArg12,forwardedFloatArg13);
   return;
@@ -466,13 +466,13 @@ int _glProgramEnvParameter4fvARB_Comp(glContext, target, index, params)
 /* _glProgramEnvParameter4dARB_CompExec @ 0x79e58 (112 bytes) */
 void _glProgramEnvParameter4dARB_CompExec(undefined4 glContext,undefined4 target,undefined4 index,double x,double y,double z,double w)
 {
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((void (*)())_glProgramEnvParameter4dARB_Comp)(glContext,target,index,x,y,z,w);
-  ((void (*)())_glProgramEnvParameter4dARB_Exec)(glContext,target,index,x,y,z,w,in_f5,in_f6,in_f7,in_f8,
+  ((void (*)())_glProgramEnvParameter4dARB_Exec)(glContext,target,index,x,y,z,w,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),
              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
   return;
@@ -744,13 +744,13 @@ int _glProgramLocalParameter4fvARB_Comp(glContext, target, index, params)
 /* _glProgramLocalParameter4dARB_CompExec @ 0x7a4a4 (112 bytes) */
 void _glProgramLocalParameter4dARB_CompExec(undefined4 glContext,undefined4 target,undefined4 index,double x,double y,double z,double w)
 {
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((void (*)())_glProgramLocalParameter4dARB_Comp)(glContext,target,index,x,y,z,w);
-  ((void (*)())_glProgramLocalParameter4dARB_Exec)(glContext,target,index,x,y,z,w,in_f5,in_f6,in_f7,in_f8,
+  ((void (*)())_glProgramLocalParameter4dARB_Exec)(glContext,target,index,x,y,z,w,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),
              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
   return;
@@ -1216,13 +1216,15 @@ void _glPixelMapfv_Exec(glContext, map, mapsize, values)
   uint mapsize;
   uint values;
 {
-  int iVar1;
-  float fVar2;
-  float fVar3;
+  int byteOffset;
+  float floatZero;
+  float floatOne;
   undefined4 glErrorCode;
-  float fVar5;
-  uint uVar6;
-  int iVar7;
+  float mapValue;
+  uint mapsizeMinusOne;
+  int pixelUnpackBuffer;
+  int loopIndex;
+  int mapStorage;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
 LAB_0007ad34:
@@ -1232,33 +1234,33 @@ LAB_0007ad34:
     glErrorCode = 0x502;
     goto LAB_0007b32c;
   }
-  uVar6 = mapsize - 1;
-  if (uVar6 < 0x100) {
-    iVar7 = *(int *)(glContext + 0x4a6c);
-    if (iVar7 != 0) {
-      if ((*(int *)(iVar7 + 0x38) < (int)(mapsize * 4 + values)) || ((values & 3) != 0))
+  mapsizeMinusOne = mapsize - 1;
+  if (mapsizeMinusOne < 0x100) {
+    pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+    if (pixelUnpackBuffer != 0) {
+      if ((*(int *)(pixelUnpackBuffer + 0x38) < (int)(mapsize * 4 + values)) || ((values & 3) != 0))
       goto LAB_0007ad34;
-      if (*(int *)(iVar7 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar7 + 0x10);
+      if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
       }
-      values = values + *(int *)(iVar7 + 0x30);
+      values = values + *(int *)(pixelUnpackBuffer + 0x30);
     }
     switch(map) {
     case 0xc70:
-      if ((mapsize & uVar6) != 0) goto LAB_0007b07c;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007b07c;
       if (*(undefined **)(glContext + 0x3248) != PTR__gle_default_pix_map_i_00112044) {
         _free(*(undefined **)(glContext + 0x3248));
       }
-      iVar7 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3248) = iVar7;
-      if (iVar7 != 0) {
-        iVar7 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3248) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3270) = mapsize;
         if (0 < (int)mapsize) {
           do {
-            iVar1 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
-            *(int *)(iVar1 + *(int *)(glContext + 0x3248)) = (int)*(float *)(iVar1 + values);
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(int *)(byteOffset + *(int *)(glContext + 0x3248)) = (int)*(float *)(byteOffset + values);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1266,20 +1268,20 @@ LAB_0007ad34:
       }
       break;
     case 0xc71:
-      if ((mapsize & uVar6) != 0) goto LAB_0007b07c;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007b07c;
       if (*(undefined **)(glContext + 0x326c) != PTR__gle_default_pix_map_i_00112044) {
         _free(*(undefined **)(glContext + 0x326c));
       }
-      iVar7 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x326c) = iVar7;
-      if (iVar7 != 0) {
-        iVar7 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x326c) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3274) = mapsize;
         if (0 < (int)mapsize) {
           do {
-            iVar1 = iVar7 * 4;
-            iVar7 = iVar7 + 1;
-            *(int *)(iVar1 + *(int *)(glContext + 0x326c)) = (int)*(float *)(iVar1 + values);
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(int *)(byteOffset + *(int *)(glContext + 0x326c)) = (int)*(float *)(byteOffset + values);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1287,28 +1289,28 @@ LAB_0007ad34:
       }
       break;
     case 0xc72:
-      if ((mapsize & uVar6) != 0) goto LAB_0007b07c;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007b07c;
       if (*(undefined **)(glContext + 0x324c) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x324c));
       }
-      iVar7 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x324c) = iVar7;
-      if (iVar7 != 0) {
-        iVar7 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x324c) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3278) = mapsize;
-        fVar3 = FLOAT_00108e54;
-        fVar2 = FLOAT_00108e50;
+        floatOne = FLOAT_00108e54;
+        floatZero = FLOAT_00108e50;
         if (0 < (int)mapsize) {
           do {
-            fVar5 = *(float *)(values + iVar7 * 4);
-            if (fVar5 < fVar2) {
-              fVar5 = 0.0;
+            mapValue = *(float *)(values + loopIndex * 4);
+            if (mapValue < floatZero) {
+              mapValue = 0.0;
             }
-            else if (fVar3 < fVar5) {
-              fVar5 = 1.0;
+            else if (floatOne < mapValue) {
+              mapValue = 1.0;
             }
-            *(float *)(iVar7 * 4 + *(int *)(glContext + 0x324c)) = fVar5;
-            iVar7 = iVar7 + 1;
+            *(float *)(loopIndex * 4 + *(int *)(glContext + 0x324c)) = mapValue;
+            loopIndex = loopIndex + 1;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1316,28 +1318,28 @@ LAB_0007ad34:
       }
       break;
     case 0xc73:
-      if ((mapsize & uVar6) != 0) goto LAB_0007b07c;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007b07c;
       if (*(undefined **)(glContext + 0x3250) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3250));
       }
-      iVar7 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3250) = iVar7;
-      if (iVar7 != 0) {
-        iVar7 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3250) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x327c) = mapsize;
-        fVar3 = FLOAT_00108e54;
-        fVar2 = FLOAT_00108e50;
+        floatOne = FLOAT_00108e54;
+        floatZero = FLOAT_00108e50;
         if (0 < (int)mapsize) {
           do {
-            fVar5 = *(float *)(values + iVar7 * 4);
-            if (fVar5 < fVar2) {
-              fVar5 = 0.0;
+            mapValue = *(float *)(values + loopIndex * 4);
+            if (mapValue < floatZero) {
+              mapValue = 0.0;
             }
-            else if (fVar3 < fVar5) {
-              fVar5 = 1.0;
+            else if (floatOne < mapValue) {
+              mapValue = 1.0;
             }
-            *(float *)(iVar7 * 4 + *(int *)(glContext + 0x3250)) = fVar5;
-            iVar7 = iVar7 + 1;
+            *(float *)(loopIndex * 4 + *(int *)(glContext + 0x3250)) = mapValue;
+            loopIndex = loopIndex + 1;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1345,28 +1347,28 @@ LAB_0007ad34:
       }
       break;
     case 0xc74:
-      if ((mapsize & uVar6) != 0) goto LAB_0007b07c;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007b07c;
       if (*(undefined **)(glContext + 0x3254) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3254));
       }
-      iVar7 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3254) = iVar7;
-      if (iVar7 != 0) {
-        iVar7 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3254) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3280) = mapsize;
-        fVar3 = FLOAT_00108e54;
-        fVar2 = FLOAT_00108e50;
+        floatOne = FLOAT_00108e54;
+        floatZero = FLOAT_00108e50;
         if (0 < (int)mapsize) {
           do {
-            fVar5 = *(float *)(values + iVar7 * 4);
-            if (fVar5 < fVar2) {
-              fVar5 = 0.0;
+            mapValue = *(float *)(values + loopIndex * 4);
+            if (mapValue < floatZero) {
+              mapValue = 0.0;
             }
-            else if (fVar3 < fVar5) {
-              fVar5 = 1.0;
+            else if (floatOne < mapValue) {
+              mapValue = 1.0;
             }
-            *(float *)(iVar7 * 4 + *(int *)(glContext + 0x3254)) = fVar5;
-            iVar7 = iVar7 + 1;
+            *(float *)(loopIndex * 4 + *(int *)(glContext + 0x3254)) = mapValue;
+            loopIndex = loopIndex + 1;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1374,28 +1376,28 @@ LAB_0007ad34:
       }
       break;
     case 0xc75:
-      if ((mapsize & uVar6) != 0) goto LAB_0007b07c;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007b07c;
       if (*(undefined **)(glContext + 0x3258) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3258));
       }
-      iVar7 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3258) = iVar7;
-      if (iVar7 != 0) {
-        iVar7 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3258) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3284) = mapsize;
-        fVar3 = FLOAT_00108e54;
-        fVar2 = FLOAT_00108e50;
+        floatOne = FLOAT_00108e54;
+        floatZero = FLOAT_00108e50;
         if (0 < (int)mapsize) {
           do {
-            fVar5 = *(float *)(values + iVar7 * 4);
-            if (fVar5 < fVar2) {
-              fVar5 = 0.0;
+            mapValue = *(float *)(values + loopIndex * 4);
+            if (mapValue < floatZero) {
+              mapValue = 0.0;
             }
-            else if (fVar3 < fVar5) {
-              fVar5 = 1.0;
+            else if (floatOne < mapValue) {
+              mapValue = 1.0;
             }
-            *(float *)(iVar7 * 4 + *(int *)(glContext + 0x3258)) = fVar5;
-            iVar7 = iVar7 + 1;
+            *(float *)(loopIndex * 4 + *(int *)(glContext + 0x3258)) = mapValue;
+            loopIndex = loopIndex + 1;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1406,24 +1408,24 @@ LAB_0007ad34:
       if (*(undefined **)(glContext + 0x325c) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x325c));
       }
-      iVar7 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x325c) = iVar7;
-      if (iVar7 != 0) {
-        iVar7 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x325c) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3288) = mapsize;
-        fVar3 = FLOAT_00108e54;
-        fVar2 = FLOAT_00108e50;
+        floatOne = FLOAT_00108e54;
+        floatZero = FLOAT_00108e50;
         if (0 < (int)mapsize) {
           do {
-            fVar5 = *(float *)(values + iVar7 * 4);
-            if (fVar5 < fVar2) {
-              fVar5 = 0.0;
+            mapValue = *(float *)(values + loopIndex * 4);
+            if (mapValue < floatZero) {
+              mapValue = 0.0;
             }
-            else if (fVar3 < fVar5) {
-              fVar5 = 1.0;
+            else if (floatOne < mapValue) {
+              mapValue = 1.0;
             }
-            *(float *)(iVar7 * 4 + *(int *)(glContext + 0x325c)) = fVar5;
-            iVar7 = iVar7 + 1;
+            *(float *)(loopIndex * 4 + *(int *)(glContext + 0x325c)) = mapValue;
+            loopIndex = loopIndex + 1;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1434,24 +1436,24 @@ LAB_0007ad34:
       if (*(undefined **)(glContext + 0x3260) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3260));
       }
-      iVar7 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3260) = iVar7;
-      if (iVar7 != 0) {
-        iVar7 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3260) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x328c) = mapsize;
-        fVar3 = FLOAT_00108e54;
-        fVar2 = FLOAT_00108e50;
+        floatOne = FLOAT_00108e54;
+        floatZero = FLOAT_00108e50;
         if (0 < (int)mapsize) {
           do {
-            fVar5 = *(float *)(values + iVar7 * 4);
-            if (fVar5 < fVar2) {
-              fVar5 = 0.0;
+            mapValue = *(float *)(values + loopIndex * 4);
+            if (mapValue < floatZero) {
+              mapValue = 0.0;
             }
-            else if (fVar3 < fVar5) {
-              fVar5 = 1.0;
+            else if (floatOne < mapValue) {
+              mapValue = 1.0;
             }
-            *(float *)(iVar7 * 4 + *(int *)(glContext + 0x3260)) = fVar5;
-            iVar7 = iVar7 + 1;
+            *(float *)(loopIndex * 4 + *(int *)(glContext + 0x3260)) = mapValue;
+            loopIndex = loopIndex + 1;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1462,24 +1464,24 @@ LAB_0007ad34:
       if (*(undefined **)(glContext + 0x3264) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3264));
       }
-      iVar7 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3264) = iVar7;
-      if (iVar7 != 0) {
-        iVar7 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3264) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3290) = mapsize;
-        fVar3 = FLOAT_00108e54;
-        fVar2 = FLOAT_00108e50;
+        floatOne = FLOAT_00108e54;
+        floatZero = FLOAT_00108e50;
         if (0 < (int)mapsize) {
           do {
-            fVar5 = *(float *)(values + iVar7 * 4);
-            if (fVar5 < fVar2) {
-              fVar5 = 0.0;
+            mapValue = *(float *)(values + loopIndex * 4);
+            if (mapValue < floatZero) {
+              mapValue = 0.0;
             }
-            else if (fVar3 < fVar5) {
-              fVar5 = 1.0;
+            else if (floatOne < mapValue) {
+              mapValue = 1.0;
             }
-            *(float *)(iVar7 * 4 + *(int *)(glContext + 0x3264)) = fVar5;
-            iVar7 = iVar7 + 1;
+            *(float *)(loopIndex * 4 + *(int *)(glContext + 0x3264)) = mapValue;
+            loopIndex = loopIndex + 1;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1490,24 +1492,24 @@ LAB_0007ad34:
       if (*(undefined **)(glContext + 0x3268) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3268));
       }
-      iVar7 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3268) = iVar7;
-      if (iVar7 != 0) {
-        iVar7 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3268) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3294) = mapsize;
-        fVar3 = FLOAT_00108e54;
-        fVar2 = FLOAT_00108e50;
+        floatOne = FLOAT_00108e54;
+        floatZero = FLOAT_00108e50;
         if (0 < (int)mapsize) {
           do {
-            fVar5 = *(float *)(values + iVar7 * 4);
-            if (fVar5 < fVar2) {
-              fVar5 = 0.0;
+            mapValue = *(float *)(values + loopIndex * 4);
+            if (mapValue < floatZero) {
+              mapValue = 0.0;
             }
-            else if (fVar3 < fVar5) {
-              fVar5 = 1.0;
+            else if (floatOne < mapValue) {
+              mapValue = 1.0;
             }
-            *(float *)(iVar7 * 4 + *(int *)(glContext + 0x3268)) = fVar5;
-            iVar7 = iVar7 + 1;
+            *(float *)(loopIndex * 4 + *(int *)(glContext + 0x3268)) = mapValue;
+            loopIndex = loopIndex + 1;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1613,12 +1615,14 @@ void _glPixelMapuiv_Exec(glContext, map, mapsize, values)
   uint mapsize;
   uint values;
 {
-  int iVar1;
+  int byteOffset;
   double dVar2;
-  double dVar3;
+  double channelScale;
   undefined4 glErrorCode;
-  uint uVar5;
-  int iVar6;
+  uint mapsizeMinusOne;
+  int pixelUnpackBuffer;
+  int loopIndex;
+  int mapStorage;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
 LAB_0007b5b4:
@@ -1628,33 +1632,33 @@ LAB_0007b5b4:
     glErrorCode = 0x502;
     goto LAB_0007bb40;
   }
-  uVar5 = mapsize - 1;
-  if (uVar5 < 0x100) {
-    iVar6 = *(int *)(glContext + 0x4a6c);
-    if (iVar6 != 0) {
-      if ((*(int *)(iVar6 + 0x38) < (int)(mapsize * 4 + values)) || ((values & 3) != 0))
+  mapsizeMinusOne = mapsize - 1;
+  if (mapsizeMinusOne < 0x100) {
+    pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+    if (pixelUnpackBuffer != 0) {
+      if ((*(int *)(pixelUnpackBuffer + 0x38) < (int)(mapsize * 4 + values)) || ((values & 3) != 0))
       goto LAB_0007b5b4;
-      if (*(int *)(iVar6 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar6 + 0x10);
+      if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
       }
-      values = values + *(int *)(iVar6 + 0x30);
+      values = values + *(int *)(pixelUnpackBuffer + 0x30);
     }
     switch(map) {
     case 0xc70:
-      if ((mapsize & uVar5) != 0) goto LAB_0007b8c0;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007b8c0;
       if (*(undefined **)(glContext + 0x3248) != PTR__gle_default_pix_map_i_00112044) {
         _free(*(undefined **)(glContext + 0x3248));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3248) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3248) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3270) = mapsize;
         if (0 < (int)mapsize) {
           do {
-            iVar1 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(undefined4 *)(iVar1 + *(int *)(glContext + 0x3248)) = *(undefined4 *)(iVar1 + values);
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(undefined4 *)(byteOffset + *(int *)(glContext + 0x3248)) = *(undefined4 *)(byteOffset + values);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1662,20 +1666,20 @@ LAB_0007b5b4:
       }
       break;
     case 0xc71:
-      if ((mapsize & uVar5) != 0) goto LAB_0007b8c0;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007b8c0;
       if (*(undefined **)(glContext + 0x326c) != PTR__gle_default_pix_map_i_00112044) {
         _free(*(undefined **)(glContext + 0x326c));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x326c) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x326c) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3274) = mapsize;
         if (0 < (int)mapsize) {
           do {
-            iVar1 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(undefined4 *)(iVar1 + *(int *)(glContext + 0x326c)) = *(undefined4 *)(iVar1 + values);
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(undefined4 *)(byteOffset + *(int *)(glContext + 0x326c)) = *(undefined4 *)(byteOffset + values);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1683,25 +1687,25 @@ LAB_0007b5b4:
       }
       break;
     case 0xc72:
-      if ((mapsize & uVar5) != 0) goto LAB_0007b8c0;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007b8c0;
       if (*(undefined **)(glContext + 0x324c) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x324c));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x324c) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x324c) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3278) = mapsize;
-        dVar3 = DOUBLE_00108da0;
+        channelScale = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
-            iVar1 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar1 + *(int *)(glContext + 0x324c)) =
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x324c)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(iVar1 + values)) - dVar2)
-                        * dVar3);
+                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                        * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1709,25 +1713,25 @@ LAB_0007b5b4:
       }
       break;
     case 0xc73:
-      if ((mapsize & uVar5) != 0) goto LAB_0007b8c0;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007b8c0;
       if (*(undefined **)(glContext + 0x3250) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3250));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3250) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3250) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x327c) = mapsize;
-        dVar3 = DOUBLE_00108da0;
+        channelScale = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
-            iVar1 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar1 + *(int *)(glContext + 0x3250)) =
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x3250)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(iVar1 + values)) - dVar2)
-                        * dVar3);
+                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                        * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1735,25 +1739,25 @@ LAB_0007b5b4:
       }
       break;
     case 0xc74:
-      if ((mapsize & uVar5) != 0) goto LAB_0007b8c0;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007b8c0;
       if (*(undefined **)(glContext + 0x3254) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3254));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3254) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3254) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3280) = mapsize;
-        dVar3 = DOUBLE_00108da0;
+        channelScale = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
-            iVar1 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar1 + *(int *)(glContext + 0x3254)) =
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x3254)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(iVar1 + values)) - dVar2)
-                        * dVar3);
+                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                        * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1761,25 +1765,25 @@ LAB_0007b5b4:
       }
       break;
     case 0xc75:
-      if ((mapsize & uVar5) != 0) goto LAB_0007b8c0;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007b8c0;
       if (*(undefined **)(glContext + 0x3258) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3258));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3258) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3258) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3284) = mapsize;
-        dVar3 = DOUBLE_00108da0;
+        channelScale = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
-            iVar1 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar1 + *(int *)(glContext + 0x3258)) =
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x3258)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(iVar1 + values)) - dVar2)
-                        * dVar3);
+                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                        * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1790,21 +1794,21 @@ LAB_0007b5b4:
       if (*(undefined **)(glContext + 0x325c) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x325c));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x325c) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x325c) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3288) = mapsize;
-        dVar3 = DOUBLE_00108da0;
+        channelScale = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
-            iVar1 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar1 + *(int *)(glContext + 0x325c)) =
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x325c)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(iVar1 + values)) - dVar2)
-                        * dVar3);
+                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                        * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1815,21 +1819,21 @@ LAB_0007b5b4:
       if (*(undefined **)(glContext + 0x3260) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3260));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3260) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3260) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x328c) = mapsize;
-        dVar3 = DOUBLE_00108da0;
+        channelScale = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
-            iVar1 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar1 + *(int *)(glContext + 0x3260)) =
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x3260)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(iVar1 + values)) - dVar2)
-                        * dVar3);
+                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                        * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1840,21 +1844,21 @@ LAB_0007b5b4:
       if (*(undefined **)(glContext + 0x3264) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3264));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3264) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3264) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3290) = mapsize;
-        dVar3 = DOUBLE_00108da0;
+        channelScale = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
-            iVar1 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar1 + *(int *)(glContext + 0x3264)) =
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x3264)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(iVar1 + values)) - dVar2)
-                        * dVar3);
+                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                        * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1865,21 +1869,21 @@ LAB_0007b5b4:
       if (*(undefined **)(glContext + 0x3268) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3268));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3268) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3268) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3294) = mapsize;
-        dVar3 = DOUBLE_00108da0;
+        channelScale = DOUBLE_00108da0;
         dVar2 = DOUBLE_00108d70;
         if (0 < (int)mapsize) {
           do {
-            iVar1 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar1 + *(int *)(glContext + 0x3268)) =
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x3268)) =
                  (float)((double)(float)((double)CONCAT44(0x43300000,
-                                                          *(undefined4 *)(iVar1 + values)) - dVar2)
-                        * dVar3);
+                                                          *(undefined4 *)(byteOffset + values)) - dVar2)
+                        * channelScale);
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -1984,12 +1988,14 @@ void _glPixelMapusv_Exec(glContext, map, mapsize, values)
   uint mapsize;
   ushort *values;
 {
-  ushort uVar1;
-  int iVar2;
-  float fVar3;
+  ushort mapValue;
+  int byteOffset;
+  float channelScale;
   undefined4 glErrorCode;
-  uint uVar5;
-  int iVar6;
+  uint mapsizeMinusOne;
+  int pixelUnpackBuffer;
+  int loopIndex;
+  int mapStorage;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
 LAB_0007bdc8:
@@ -1999,35 +2005,35 @@ LAB_0007bdc8:
     glErrorCode = 0x502;
     goto LAB_0007c380;
   }
-  uVar5 = mapsize - 1;
-  if (uVar5 < 0x100) {
-    iVar6 = *(int *)(glContext + 0x4a6c);
-    if (iVar6 != 0) {
-      if ((*(int *)(iVar6 + 0x38) < (int)(values + mapsize)) || (((uint)values & 1) != 0))
+  mapsizeMinusOne = mapsize - 1;
+  if (mapsizeMinusOne < 0x100) {
+    pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+    if (pixelUnpackBuffer != 0) {
+      if ((*(int *)(pixelUnpackBuffer + 0x38) < (int)(values + mapsize)) || (((uint)values & 1) != 0))
       goto LAB_0007bdc8;
-      if (*(int *)(iVar6 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar6 + 0x10);
+      if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
       }
-      values = (ushort *)((int)values + *(int *)(iVar6 + 0x30));
+      values = (ushort *)((int)values + *(int *)(pixelUnpackBuffer + 0x30));
     }
     switch(map) {
     case 0xc70:
-      if ((mapsize & uVar5) != 0) goto LAB_0007c0f0;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007c0f0;
       if (*(undefined **)(glContext + 0x3248) != PTR__gle_default_pix_map_i_00112044) {
         _free(*(undefined **)(glContext + 0x3248));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3248) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3248) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3270) = mapsize;
         if (0 < (int)mapsize) {
           do {
-            uVar1 = *values;
-            iVar2 = iVar6 * 4;
+            mapValue = *values;
+            byteOffset = loopIndex * 4;
             values = values + 1;
-            iVar6 = iVar6 + 1;
-            *(uint *)(iVar2 + *(int *)(glContext + 0x3248)) = (uint)uVar1;
+            loopIndex = loopIndex + 1;
+            *(uint *)(byteOffset + *(int *)(glContext + 0x3248)) = (uint)mapValue;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -2035,22 +2041,22 @@ LAB_0007bdc8:
       }
       break;
     case 0xc71:
-      if ((mapsize & uVar5) != 0) goto LAB_0007c0f0;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007c0f0;
       if (*(undefined **)(glContext + 0x326c) != PTR__gle_default_pix_map_i_00112044) {
         _free(*(undefined **)(glContext + 0x326c));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x326c) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x326c) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3274) = mapsize;
         if (0 < (int)mapsize) {
           do {
-            uVar1 = *values;
-            iVar2 = iVar6 * 4;
+            mapValue = *values;
+            byteOffset = loopIndex * 4;
             values = values + 1;
-            iVar6 = iVar6 + 1;
-            *(uint *)(iVar2 + *(int *)(glContext + 0x326c)) = (uint)uVar1;
+            loopIndex = loopIndex + 1;
+            *(uint *)(byteOffset + *(int *)(glContext + 0x326c)) = (uint)mapValue;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -2058,24 +2064,24 @@ LAB_0007bdc8:
       }
       break;
     case 0xc72:
-      if ((mapsize & uVar5) != 0) goto LAB_0007c0f0;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007c0f0;
       if (*(undefined **)(glContext + 0x324c) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x324c));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x324c) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x324c) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3278) = mapsize;
-        fVar3 = FLOAT_00108e74;
+        channelScale = FLOAT_00108e74;
         if (0 < (int)mapsize) {
           do {
-            uVar1 = *values;
+            mapValue = *values;
             values = values + 1;
-            iVar2 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar2 + *(int *)(glContext + 0x324c)) =
-                 (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x324c)) =
+                 (GH_U2F((unsigned int)((mapValue | 0x4b000000))) - 8388608.0) * channelScale;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -2083,24 +2089,24 @@ LAB_0007bdc8:
       }
       break;
     case 0xc73:
-      if ((mapsize & uVar5) != 0) goto LAB_0007c0f0;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007c0f0;
       if (*(undefined **)(glContext + 0x3250) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3250));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3250) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3250) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x327c) = mapsize;
-        fVar3 = FLOAT_00108e74;
+        channelScale = FLOAT_00108e74;
         if (0 < (int)mapsize) {
           do {
-            uVar1 = *values;
+            mapValue = *values;
             values = values + 1;
-            iVar2 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar2 + *(int *)(glContext + 0x3250)) =
-                 (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x3250)) =
+                 (GH_U2F((unsigned int)((mapValue | 0x4b000000))) - 8388608.0) * channelScale;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -2108,24 +2114,24 @@ LAB_0007bdc8:
       }
       break;
     case 0xc74:
-      if ((mapsize & uVar5) != 0) goto LAB_0007c0f0;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007c0f0;
       if (*(undefined **)(glContext + 0x3254) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3254));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3254) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3254) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3280) = mapsize;
-        fVar3 = FLOAT_00108e74;
+        channelScale = FLOAT_00108e74;
         if (0 < (int)mapsize) {
           do {
-            uVar1 = *values;
+            mapValue = *values;
             values = values + 1;
-            iVar2 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar2 + *(int *)(glContext + 0x3254)) =
-                 (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x3254)) =
+                 (GH_U2F((unsigned int)((mapValue | 0x4b000000))) - 8388608.0) * channelScale;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -2133,24 +2139,24 @@ LAB_0007bdc8:
       }
       break;
     case 0xc75:
-      if ((mapsize & uVar5) != 0) goto LAB_0007c0f0;
+      if ((mapsize & mapsizeMinusOne) != 0) goto LAB_0007c0f0;
       if (*(undefined **)(glContext + 0x3258) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3258));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3258) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3258) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3284) = mapsize;
-        fVar3 = FLOAT_00108e74;
+        channelScale = FLOAT_00108e74;
         if (0 < (int)mapsize) {
           do {
-            uVar1 = *values;
+            mapValue = *values;
             values = values + 1;
-            iVar2 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar2 + *(int *)(glContext + 0x3258)) =
-                 (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x3258)) =
+                 (GH_U2F((unsigned int)((mapValue | 0x4b000000))) - 8388608.0) * channelScale;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -2161,20 +2167,20 @@ LAB_0007bdc8:
       if (*(undefined **)(glContext + 0x325c) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x325c));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x325c) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x325c) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3288) = mapsize;
-        fVar3 = FLOAT_00108e74;
+        channelScale = FLOAT_00108e74;
         if (0 < (int)mapsize) {
           do {
-            uVar1 = *values;
+            mapValue = *values;
             values = values + 1;
-            iVar2 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar2 + *(int *)(glContext + 0x325c)) =
-                 (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x325c)) =
+                 (GH_U2F((unsigned int)((mapValue | 0x4b000000))) - 8388608.0) * channelScale;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -2185,20 +2191,20 @@ LAB_0007bdc8:
       if (*(undefined **)(glContext + 0x3260) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3260));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3260) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3260) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x328c) = mapsize;
-        fVar3 = FLOAT_00108e74;
+        channelScale = FLOAT_00108e74;
         if (0 < (int)mapsize) {
           do {
-            uVar1 = *values;
+            mapValue = *values;
             values = values + 1;
-            iVar2 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar2 + *(int *)(glContext + 0x3260)) =
-                 (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x3260)) =
+                 (GH_U2F((unsigned int)((mapValue | 0x4b000000))) - 8388608.0) * channelScale;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -2209,20 +2215,20 @@ LAB_0007bdc8:
       if (*(undefined **)(glContext + 0x3264) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3264));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3264) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3264) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3290) = mapsize;
-        fVar3 = FLOAT_00108e74;
+        channelScale = FLOAT_00108e74;
         if (0 < (int)mapsize) {
           do {
-            uVar1 = *values;
+            mapValue = *values;
             values = values + 1;
-            iVar2 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar2 + *(int *)(glContext + 0x3264)) =
-                 (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x3264)) =
+                 (GH_U2F((unsigned int)((mapValue | 0x4b000000))) - 8388608.0) * channelScale;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -2233,20 +2239,20 @@ LAB_0007bdc8:
       if (*(undefined **)(glContext + 0x3268) != PTR__gle_default_pix_map_f_00112040) {
         _free(*(undefined **)(glContext + 0x3268));
       }
-      iVar6 = _malloc(mapsize << 2);
-      *(int *)(glContext + 0x3268) = iVar6;
-      if (iVar6 != 0) {
-        iVar6 = 0;
+      mapStorage = _malloc(mapsize << 2);
+      *(int *)(glContext + 0x3268) = mapStorage;
+      if (mapStorage != 0) {
+        loopIndex = 0;
         *(uint *)(glContext + 0x3294) = mapsize;
-        fVar3 = FLOAT_00108e74;
+        channelScale = FLOAT_00108e74;
         if (0 < (int)mapsize) {
           do {
-            uVar1 = *values;
+            mapValue = *values;
             values = values + 1;
-            iVar2 = iVar6 * 4;
-            iVar6 = iVar6 + 1;
-            *(float *)(iVar2 + *(int *)(glContext + 0x3268)) =
-                 (GH_U2F((unsigned int)((uVar1 | 0x4b000000))) - 8388608.0) * fVar3;
+            byteOffset = loopIndex * 4;
+            loopIndex = loopIndex + 1;
+            *(float *)(byteOffset + *(int *)(glContext + 0x3268)) =
+                 (GH_U2F((unsigned int)((mapValue | 0x4b000000))) - 8388608.0) * channelScale;
             mapsize = mapsize - 1;
           } while (mapsize != 0);
         }
@@ -2297,44 +2303,45 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
   uint values;
 {
   double dVar1;
-  int iVar2;
+  int mapSize;
+  int byteOffset;
   undefined4 glErrorCode;
-  int iVar4;
+  int pixelPackBuffer;
   int loopIndex;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar4 = *(int *)(glContext + 0x4a68);
-    if (iVar4 != 0) {
+    pixelPackBuffer = *(int *)(glContext + 0x4a68);
+    if (pixelPackBuffer != 0) {
       switch(map) {
       case 0xc70:
-        iVar2 = *(int *)(glContext + 0x3270);
+        mapSize = *(int *)(glContext + 0x3270);
         break;
       case 0xc71:
-        iVar2 = *(int *)(glContext + 0x3274);
+        mapSize = *(int *)(glContext + 0x3274);
         break;
       case 0xc72:
-        iVar2 = *(int *)(glContext + 0x3278);
+        mapSize = *(int *)(glContext + 0x3278);
         break;
       case 0xc73:
-        iVar2 = *(int *)(glContext + 0x327c);
+        mapSize = *(int *)(glContext + 0x327c);
         break;
       case 0xc74:
-        iVar2 = *(int *)(glContext + 0x3280);
+        mapSize = *(int *)(glContext + 0x3280);
         break;
       case 0xc75:
-        iVar2 = *(int *)(glContext + 0x3284);
+        mapSize = *(int *)(glContext + 0x3284);
         break;
       case 0xc76:
-        iVar2 = *(int *)(glContext + 0x3288);
+        mapSize = *(int *)(glContext + 0x3288);
         break;
       case 0xc77:
-        iVar2 = *(int *)(glContext + 0x328c);
+        mapSize = *(int *)(glContext + 0x328c);
         break;
       case 0xc78:
-        iVar2 = *(int *)(glContext + 0x3290);
+        mapSize = *(int *)(glContext + 0x3290);
         break;
       case 0xc79:
-        iVar2 = *(int *)(glContext + 0x3294);
+        mapSize = *(int *)(glContext + 0x3294);
         break;
       default:
         if (*(int *)(glContext + 0x7574) != 0) {
@@ -2343,12 +2350,12 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
         glErrorCode = 0x500;
         goto LAB_0007c580;
       }
-      if ((*(int *)(iVar4 + 0x38) < (int)(iVar2 * 4 + values)) || ((values & 3) != 0))
+      if ((*(int *)(pixelPackBuffer + 0x38) < (int)(mapSize * 4 + values)) || ((values & 3) != 0))
       goto LAB_0007c570;
-      if (*(int *)(iVar4 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar4 + 0x10);
+      if (*(int *)(pixelPackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
       }
-      values = values + *(int *)(iVar4 + 0x30);
+      values = values + *(int *)(pixelPackBuffer + 0x30);
     }
     dVar1 = DOUBLE_00108d58;
     switch(map) {
@@ -2356,11 +2363,11 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3270)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *(float *)(iVar2 + values) =
+          *(float *)(byteOffset + values) =
                (float)((double)CONCAT44(0x43300000,
-                                        *(uint *)(iVar2 + *(int *)(glContext + 0x3248)) ^ 0x80000000)
+                                        *(uint *)(byteOffset + *(int *)(glContext + 0x3248)) ^ 0x80000000)
                       - dVar1);
         } while (loopIndex < *(int *)(glContext + 0x3270));
       }
@@ -2369,11 +2376,11 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3274)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *(float *)(iVar2 + values) =
+          *(float *)(byteOffset + values) =
                (float)((double)CONCAT44(0x43300000,
-                                        *(uint *)(iVar2 + *(int *)(glContext + 0x326c)) ^ 0x80000000)
+                                        *(uint *)(byteOffset + *(int *)(glContext + 0x326c)) ^ 0x80000000)
                       - dVar1);
         } while (loopIndex < *(int *)(glContext + 0x3274));
       }
@@ -2382,9 +2389,9 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3278)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *(undefined4 *)(iVar2 + values) = *(undefined4 *)(iVar2 + *(int *)(glContext + 0x324c));
+          *(undefined4 *)(byteOffset + values) = *(undefined4 *)(byteOffset + *(int *)(glContext + 0x324c));
         } while (loopIndex < *(int *)(glContext + 0x3278));
       }
       break;
@@ -2392,9 +2399,9 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x327c)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *(undefined4 *)(iVar2 + values) = *(undefined4 *)(iVar2 + *(int *)(glContext + 0x3250));
+          *(undefined4 *)(byteOffset + values) = *(undefined4 *)(byteOffset + *(int *)(glContext + 0x3250));
         } while (loopIndex < *(int *)(glContext + 0x327c));
       }
       break;
@@ -2402,9 +2409,9 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3280)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *(undefined4 *)(iVar2 + values) = *(undefined4 *)(iVar2 + *(int *)(glContext + 0x3254));
+          *(undefined4 *)(byteOffset + values) = *(undefined4 *)(byteOffset + *(int *)(glContext + 0x3254));
         } while (loopIndex < *(int *)(glContext + 0x3280));
       }
       break;
@@ -2412,9 +2419,9 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3284)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *(undefined4 *)(iVar2 + values) = *(undefined4 *)(iVar2 + *(int *)(glContext + 0x3258));
+          *(undefined4 *)(byteOffset + values) = *(undefined4 *)(byteOffset + *(int *)(glContext + 0x3258));
         } while (loopIndex < *(int *)(glContext + 0x3284));
       }
       break;
@@ -2422,9 +2429,9 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3288)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *(undefined4 *)(iVar2 + values) = *(undefined4 *)(iVar2 + *(int *)(glContext + 0x325c));
+          *(undefined4 *)(byteOffset + values) = *(undefined4 *)(byteOffset + *(int *)(glContext + 0x325c));
         } while (loopIndex < *(int *)(glContext + 0x3288));
       }
       break;
@@ -2432,9 +2439,9 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x328c)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *(undefined4 *)(iVar2 + values) = *(undefined4 *)(iVar2 + *(int *)(glContext + 0x3260));
+          *(undefined4 *)(byteOffset + values) = *(undefined4 *)(byteOffset + *(int *)(glContext + 0x3260));
         } while (loopIndex < *(int *)(glContext + 0x328c));
       }
       break;
@@ -2442,9 +2449,9 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3290)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *(undefined4 *)(iVar2 + values) = *(undefined4 *)(iVar2 + *(int *)(glContext + 0x3264));
+          *(undefined4 *)(byteOffset + values) = *(undefined4 *)(byteOffset + *(int *)(glContext + 0x3264));
         } while (loopIndex < *(int *)(glContext + 0x3290));
       }
       break;
@@ -2452,9 +2459,9 @@ void _glGetPixelMapfv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3294)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *(undefined4 *)(iVar2 + values) = *(undefined4 *)(iVar2 + *(int *)(glContext + 0x3268));
+          *(undefined4 *)(byteOffset + values) = *(undefined4 *)(byteOffset + *(int *)(glContext + 0x3268));
         } while (loopIndex < *(int *)(glContext + 0x3294));
       }
     }
@@ -2476,9 +2483,10 @@ void _glGetPixelMapuiv_Exec(glContext, map, values)
   undefined4 map;
   uint values;
 {
-  double dVar1;
-  double dVar2;
+  double twoPow31;
+  double uint32MaxAsDouble;
   int iVar3;
+  int byteOffset;
   undefined4 glErrorCode;
   uint uVar5;
   int iVar6;
@@ -2533,8 +2541,8 @@ void _glGetPixelMapuiv_Exec(glContext, map, values)
       }
       values = values + *(int *)(iVar6 + 0x30);
     }
-    dVar2 = DOUBLE_00108da8;
-    dVar1 = DOUBLE_00108d80;
+    uint32MaxAsDouble = DOUBLE_00108da8;
+    twoPow31 = DOUBLE_00108d80;
     switch(map) {
     case 0xc70:
       loopIndex = 0;
@@ -2559,144 +2567,144 @@ void _glGetPixelMapuiv_Exec(glContext, map, values)
     case 0xc72:
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3278)) {
-        iVar3 = 0;
+        byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(iVar3 + *(int *)(glContext + 0x324c)) * dVar2;
-          if (dVar1 <= dVar7) {
-            uVar5 = (int)(dVar7 - dVar1) ^ 0x80000000;
+          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x324c)) * uint32MaxAsDouble;
+          if (twoPow31 <= dVar7) {
+            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
           }
           else {
             uVar5 = (uint)(int)dVar7;
           }
-          *(uint *)(iVar3 + values) = uVar5;
+          *(uint *)(byteOffset + values) = uVar5;
           loopIndex = loopIndex + 1;
-          iVar3 = iVar3 + 4;
+          byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x3278));
       }
       break;
     case 0xc73:
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x327c)) {
-        iVar3 = 0;
+        byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(iVar3 + *(int *)(glContext + 0x3250)) * dVar2;
-          if (dVar1 <= dVar7) {
-            uVar5 = (int)(dVar7 - dVar1) ^ 0x80000000;
+          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3250)) * uint32MaxAsDouble;
+          if (twoPow31 <= dVar7) {
+            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
           }
           else {
             uVar5 = (uint)(int)dVar7;
           }
-          *(uint *)(iVar3 + values) = uVar5;
+          *(uint *)(byteOffset + values) = uVar5;
           loopIndex = loopIndex + 1;
-          iVar3 = iVar3 + 4;
+          byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x327c));
       }
       break;
     case 0xc74:
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3280)) {
-        iVar3 = 0;
+        byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(iVar3 + *(int *)(glContext + 0x3254)) * dVar2;
-          if (dVar1 <= dVar7) {
-            uVar5 = (int)(dVar7 - dVar1) ^ 0x80000000;
+          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3254)) * uint32MaxAsDouble;
+          if (twoPow31 <= dVar7) {
+            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
           }
           else {
             uVar5 = (uint)(int)dVar7;
           }
-          *(uint *)(iVar3 + values) = uVar5;
+          *(uint *)(byteOffset + values) = uVar5;
           loopIndex = loopIndex + 1;
-          iVar3 = iVar3 + 4;
+          byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x3280));
       }
       break;
     case 0xc75:
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3284)) {
-        iVar3 = 0;
+        byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(iVar3 + *(int *)(glContext + 0x3258)) * dVar2;
-          if (dVar1 <= dVar7) {
-            uVar5 = (int)(dVar7 - dVar1) ^ 0x80000000;
+          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3258)) * uint32MaxAsDouble;
+          if (twoPow31 <= dVar7) {
+            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
           }
           else {
             uVar5 = (uint)(int)dVar7;
           }
-          *(uint *)(iVar3 + values) = uVar5;
+          *(uint *)(byteOffset + values) = uVar5;
           loopIndex = loopIndex + 1;
-          iVar3 = iVar3 + 4;
+          byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x3284));
       }
       break;
     case 0xc76:
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3288)) {
-        iVar3 = 0;
+        byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(iVar3 + *(int *)(glContext + 0x325c)) * dVar2;
-          if (dVar1 <= dVar7) {
-            uVar5 = (int)(dVar7 - dVar1) ^ 0x80000000;
+          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x325c)) * uint32MaxAsDouble;
+          if (twoPow31 <= dVar7) {
+            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
           }
           else {
             uVar5 = (uint)(int)dVar7;
           }
-          *(uint *)(iVar3 + values) = uVar5;
+          *(uint *)(byteOffset + values) = uVar5;
           loopIndex = loopIndex + 1;
-          iVar3 = iVar3 + 4;
+          byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x3288));
       }
       break;
     case 0xc77:
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x328c)) {
-        iVar3 = 0;
+        byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(iVar3 + *(int *)(glContext + 0x3260)) * dVar2;
-          if (dVar1 <= dVar7) {
-            uVar5 = (int)(dVar7 - dVar1) ^ 0x80000000;
+          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3260)) * uint32MaxAsDouble;
+          if (twoPow31 <= dVar7) {
+            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
           }
           else {
             uVar5 = (uint)(int)dVar7;
           }
-          *(uint *)(iVar3 + values) = uVar5;
+          *(uint *)(byteOffset + values) = uVar5;
           loopIndex = loopIndex + 1;
-          iVar3 = iVar3 + 4;
+          byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x328c));
       }
       break;
     case 0xc78:
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3290)) {
-        iVar3 = 0;
+        byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(iVar3 + *(int *)(glContext + 0x3264)) * dVar2;
-          if (dVar1 <= dVar7) {
-            uVar5 = (int)(dVar7 - dVar1) ^ 0x80000000;
+          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3264)) * uint32MaxAsDouble;
+          if (twoPow31 <= dVar7) {
+            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
           }
           else {
             uVar5 = (uint)(int)dVar7;
           }
-          *(uint *)(iVar3 + values) = uVar5;
+          *(uint *)(byteOffset + values) = uVar5;
           loopIndex = loopIndex + 1;
-          iVar3 = iVar3 + 4;
+          byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x3290));
       }
       break;
     case 0xc79:
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3294)) {
-        iVar3 = 0;
+        byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(iVar3 + *(int *)(glContext + 0x3268)) * dVar2;
-          if (dVar1 <= dVar7) {
-            uVar5 = (int)(dVar7 - dVar1) ^ 0x80000000;
+          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3268)) * uint32MaxAsDouble;
+          if (twoPow31 <= dVar7) {
+            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
           }
           else {
             uVar5 = (uint)(int)dVar7;
           }
-          *(uint *)(iVar3 + values) = uVar5;
+          *(uint *)(byteOffset + values) = uVar5;
           loopIndex = loopIndex + 1;
-          iVar3 = iVar3 + 4;
+          byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x3294));
       }
     }
@@ -2718,65 +2726,66 @@ void _glGetPixelMapusv_Exec(glContext, map, values)
   undefined4 map;
   undefined2 *values;
 {
-  float fVar1;
-  int iVar2;
+  float float65535;
+  int mapSize;
+  int byteOffset;
   undefined4 glErrorCode;
-  int iVar4;
+  int pixelPackBuffer;
   int loopIndex;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar4 = *(int *)(glContext + 0x4a68);
-    if (iVar4 != 0) {
+    pixelPackBuffer = *(int *)(glContext + 0x4a68);
+    if (pixelPackBuffer != 0) {
       switch(map) {
       case 0xc70:
-        iVar2 = *(int *)(glContext + 0x3270);
+        mapSize = *(int *)(glContext + 0x3270);
         break;
       case 0xc71:
-        iVar2 = *(int *)(glContext + 0x3274);
+        mapSize = *(int *)(glContext + 0x3274);
         break;
       case 0xc72:
-        iVar2 = *(int *)(glContext + 0x3278);
+        mapSize = *(int *)(glContext + 0x3278);
         break;
       case 0xc73:
-        iVar2 = *(int *)(glContext + 0x327c);
+        mapSize = *(int *)(glContext + 0x327c);
         break;
       case 0xc74:
-        iVar2 = *(int *)(glContext + 0x3280);
+        mapSize = *(int *)(glContext + 0x3280);
         break;
       case 0xc75:
-        iVar2 = *(int *)(glContext + 0x3284);
+        mapSize = *(int *)(glContext + 0x3284);
         break;
       case 0xc76:
-        iVar2 = *(int *)(glContext + 0x3288);
+        mapSize = *(int *)(glContext + 0x3288);
         break;
       case 0xc77:
-        iVar2 = *(int *)(glContext + 0x328c);
+        mapSize = *(int *)(glContext + 0x328c);
         break;
       case 0xc78:
-        iVar2 = *(int *)(glContext + 0x3290);
+        mapSize = *(int *)(glContext + 0x3290);
         break;
       case 0xc79:
-        iVar2 = *(int *)(glContext + 0x3294);
+        mapSize = *(int *)(glContext + 0x3294);
         break;
       default:
         goto switchD_0007cea8_default;
       }
-      if ((*(int *)(iVar4 + 0x38) < (int)(values + iVar2)) || (((uint)values & 1) != 0))
+      if ((*(int *)(pixelPackBuffer + 0x38) < (int)(values + mapSize)) || (((uint)values & 1) != 0))
       goto LAB_0007cf38;
-      if (*(int *)(iVar4 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar4 + 0x10);
+      if (*(int *)(pixelPackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
       }
-      values = (undefined2 *)((int)values + *(int *)(iVar4 + 0x30));
+      values = (undefined2 *)((int)values + *(int *)(pixelPackBuffer + 0x30));
     }
-    fVar1 = FLOAT_00108ea0;
+    float65535 = FLOAT_00108ea0;
     switch(map) {
     case 0xc70:
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3270)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *values = *(undefined2 *)(iVar2 + *(int *)(glContext + 0x3248) + 2);
+          *values = *(undefined2 *)(byteOffset + *(int *)(glContext + 0x3248) + 2);
           values = values + 1;
         } while (loopIndex < *(int *)(glContext + 0x3270));
       }
@@ -2785,9 +2794,9 @@ void _glGetPixelMapusv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3274)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *values = *(undefined2 *)(iVar2 + *(int *)(glContext + 0x326c) + 2);
+          *values = *(undefined2 *)(byteOffset + *(int *)(glContext + 0x326c) + 2);
           values = values + 1;
         } while (loopIndex < *(int *)(glContext + 0x3274));
       }
@@ -2796,9 +2805,9 @@ void _glGetPixelMapusv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3278)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *values = (short)(int)(*(float *)(iVar2 + *(int *)(glContext + 0x324c)) * fVar1);
+          *values = (short)(int)(*(float *)(byteOffset + *(int *)(glContext + 0x324c)) * float65535);
           values = values + 1;
         } while (loopIndex < *(int *)(glContext + 0x3278));
       }
@@ -2807,9 +2816,9 @@ void _glGetPixelMapusv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x327c)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *values = (short)(int)(*(float *)(iVar2 + *(int *)(glContext + 0x3250)) * fVar1);
+          *values = (short)(int)(*(float *)(byteOffset + *(int *)(glContext + 0x3250)) * float65535);
           values = values + 1;
         } while (loopIndex < *(int *)(glContext + 0x327c));
       }
@@ -2818,9 +2827,9 @@ void _glGetPixelMapusv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3280)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *values = (short)(int)(*(float *)(iVar2 + *(int *)(glContext + 0x3254)) * fVar1);
+          *values = (short)(int)(*(float *)(byteOffset + *(int *)(glContext + 0x3254)) * float65535);
           values = values + 1;
         } while (loopIndex < *(int *)(glContext + 0x3280));
       }
@@ -2829,9 +2838,9 @@ void _glGetPixelMapusv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3284)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *values = (short)(int)(*(float *)(iVar2 + *(int *)(glContext + 0x3258)) * fVar1);
+          *values = (short)(int)(*(float *)(byteOffset + *(int *)(glContext + 0x3258)) * float65535);
           values = values + 1;
         } while (loopIndex < *(int *)(glContext + 0x3284));
       }
@@ -2840,9 +2849,9 @@ void _glGetPixelMapusv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3288)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *values = (short)(int)(*(float *)(iVar2 + *(int *)(glContext + 0x325c)) * fVar1);
+          *values = (short)(int)(*(float *)(byteOffset + *(int *)(glContext + 0x325c)) * float65535);
           values = values + 1;
         } while (loopIndex < *(int *)(glContext + 0x3288));
       }
@@ -2851,9 +2860,9 @@ void _glGetPixelMapusv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x328c)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *values = (short)(int)(*(float *)(iVar2 + *(int *)(glContext + 0x3260)) * fVar1);
+          *values = (short)(int)(*(float *)(byteOffset + *(int *)(glContext + 0x3260)) * float65535);
           values = values + 1;
         } while (loopIndex < *(int *)(glContext + 0x328c));
       }
@@ -2862,9 +2871,9 @@ void _glGetPixelMapusv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3290)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *values = (short)(int)(*(float *)(iVar2 + *(int *)(glContext + 0x3264)) * fVar1);
+          *values = (short)(int)(*(float *)(byteOffset + *(int *)(glContext + 0x3264)) * float65535);
           values = values + 1;
         } while (loopIndex < *(int *)(glContext + 0x3290));
       }
@@ -2873,9 +2882,9 @@ void _glGetPixelMapusv_Exec(glContext, map, values)
       loopIndex = 0;
       if (0 < *(int *)(glContext + 0x3294)) {
         do {
-          iVar2 = loopIndex * 4;
+          byteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *values = (short)(int)(*(float *)(iVar2 + *(int *)(glContext + 0x3268)) * fVar1);
+          *values = (short)(int)(*(float *)(byteOffset + *(int *)(glContext + 0x3268)) * float65535);
           values = values + 1;
         } while (loopIndex < *(int *)(glContext + 0x3294));
       }

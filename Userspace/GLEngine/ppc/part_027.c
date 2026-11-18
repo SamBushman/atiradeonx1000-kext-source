@@ -167,18 +167,18 @@ void _glLineStipple_CompExec(glContext, factor, pattern)
 }
 
 /* _glPolygonStipple_ListExec @ 0x90ad0 (40 bytes) */
-int _glPolygonStipple_ListExec(param_1, param_2)
-  int param_1;
-  int param_2;
+int _glPolygonStipple_ListExec(glContext, listRecord)
+  int glContext;
+  int listRecord;
 {
-  int iVar1;
+  int byteOffset;
   int remaining;
   
   remaining = 0x10;
-  iVar1 = 0;
+  byteOffset = 0;
   do {
-    *(undefined8 *)(iVar1 + param_1 + 0x3448) = *(undefined8 *)(iVar1 + param_2);
-    iVar1 = iVar1 + 8;
+    *(undefined8 *)(byteOffset + glContext + 0x3448) = *(undefined8 *)(byteOffset + listRecord);
+    byteOffset = byteOffset + 8;
     remaining = remaining + -1;
   } while (remaining != 0);
   return 0x80;
@@ -192,7 +192,7 @@ int _glPolygonStipple_Comp(glContext, mask)
   uint uVar1;
   undefined4 uVar2;
   int iVar3;
-  int iVar4;
+  int byteOffset;
   int iVar5;
   int listRecord;
   int remaining;
@@ -220,12 +220,12 @@ int _glPolygonStipple_Comp(glContext, mask)
       uVar2 = _gleFillImage(glContext,0x20,0x20,1,0x1900,0x1a00,mask,listRecord);
       return uVar2;
     }
-    iVar4 = 0;
+    byteOffset = 0;
     remaining = 0x10;
     do {
-      *(undefined8 *)(iVar4 + listRecord) =
-           *(undefined8 *)(iVar4 + mask + iVar3 * 4 + ((int)uVar1 >> 3));
-      iVar4 = iVar4 + 8;
+      *(undefined8 *)(byteOffset + listRecord) =
+           *(undefined8 *)(byteOffset + mask + iVar3 * 4 + ((int)uVar1 >> 3));
+      byteOffset = byteOffset + 8;
       remaining = remaining + -1;
     } while (remaining != 0);
   }
@@ -238,7 +238,7 @@ void _glPolygonStipple_Exec(glContext, mask)
   int mask;
 {
   uint uVar1;
-  int iVar2;
+  int byteOffset;
   int iVar3;
   int remaining;
   
@@ -256,11 +256,11 @@ void _glPolygonStipple_Exec(glContext, mask)
     if ((((*(char *)(glContext + 0x31e5) == '\0') && (*(int *)(glContext + 0x31cc) == 0)) &&
         (*(int *)(glContext + 0x31e0) < 5)) && ((uVar1 & 7) == 0)) {
       remaining = 0x10;
-      iVar2 = 0;
+      byteOffset = 0;
       do {
-        *(undefined8 *)(iVar2 + glContext + 0x3448) =
-             *(undefined8 *)(iVar2 + mask + iVar3 * 4 + ((int)uVar1 >> 3));
-        iVar2 = iVar2 + 8;
+        *(undefined8 *)(byteOffset + glContext + 0x3448) =
+             *(undefined8 *)(byteOffset + mask + iVar3 * 4 + ((int)uVar1 >> 3));
+        byteOffset = byteOffset + 8;
         remaining = remaining + -1;
       } while (remaining != 0);
     }
@@ -294,7 +294,7 @@ void _glGetPolygonStipple_Exec(glContext, mask)
   int mask;
 {
   uint uVar1;
-  int iVar2;
+  int byteOffset;
   int iVar3;
   int remaining;
   
@@ -315,11 +315,11 @@ void _glGetPolygonStipple_Exec(glContext, mask)
       return;
     }
     remaining = 0x10;
-    iVar2 = 0;
+    byteOffset = 0;
     do {
-      *(undefined8 *)(iVar2 + mask + iVar3 * 4 + ((int)uVar1 >> 3)) =
-           *(undefined8 *)(iVar2 + glContext + 0x3448);
-      iVar2 = iVar2 + 8;
+      *(undefined8 *)(byteOffset + mask + iVar3 * 4 + ((int)uVar1 >> 3)) =
+           *(undefined8 *)(byteOffset + glContext + 0x3448);
+      byteOffset = byteOffset + 8;
       remaining = remaining + -1;
     } while (remaining != 0);
   }
@@ -341,18 +341,18 @@ void _glSwap_RevertExec(glContext)
   int iVar3;
   double fparam_1;
   double fparam_1_00;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
-  double in_stack_ffffffc8;
-  double in_stack_ffffffd0;
-  double in_stack_ffffffd8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffffb8;
+  double incomingStack_ffffffc0;
+  double incomingStack_ffffffc8;
+  double incomingStack_ffffffd0;
+  double incomingStack_ffffffd8;
   
   bVar1 = *(byte *)(glContext + 0x85a5);
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -363,10 +363,10 @@ void _glSwap_RevertExec(glContext)
               (*(undefined4 *)(iVar3 + 0x85ac),*(undefined4 *)(glContext + 0x484c),
                *(undefined4 *)(glContext + 0x4848),0);
     fparam_1 = (double)_gleSwitchToRenderer(glContext,(uint)bVar1);
-    ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffffb8,
-               in_stack_ffffffc0,in_stack_ffffffc8,in_stack_ffffffd0,in_stack_ffffffd8);
+    ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
+               incomingStack_ffffffc0,incomingStack_ffffffc8,incomingStack_ffffffd0,incomingStack_ffffffd8);
     _gleUpdatePolyMode(glContext);
-    ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+    ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     _gleUpdateTextureTransform(glContext);
     puVar2 = PTR__gleSetClipInterpFunc_00112038;
     *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
@@ -1740,11 +1740,11 @@ void _glCompressedTexSubImage1D_CompExec(glContext, target, level, xoffset, widt
 }
 
 /* _glTexCoord1_ListExec @ 0x93308 (36 bytes) */
-int _glTexCoord1_ListExec(glContext, param_2)
+int _glTexCoord1_ListExec(glContext, listRecord)
   int glContext;
-  undefined4 *param_2;
+  undefined4 *listRecord;
 {
-  *(undefined4 *)(glContext + 0x120) = *param_2;
+  *(undefined4 *)(glContext + 0x120) = *listRecord;
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
   *(undefined4 *)(glContext + 0x124) = *(undefined4 *)(glContext + 0x20);
@@ -1752,42 +1752,42 @@ int _glTexCoord1_ListExec(glContext, param_2)
 }
 
 /* _glTexCoord3_ListExec @ 0x9332c (52 bytes) */
-int _glTexCoord3_ListExec(glContext, param_2)
+int _glTexCoord3_ListExec(glContext, listRecord)
   int glContext;
-  undefined4 *param_2;
+  undefined4 *listRecord;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
+  undefined4 texCoordR;
+  undefined4 texCoordS;
+  undefined4 texCoordT;
   
-  uVar1 = param_2[2];
-  uVar2 = *param_2;
-  uVar3 = param_2[1];
+  texCoordR = listRecord[2];
+  texCoordS = *listRecord;
+  texCoordT = listRecord[1];
   *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
-  *(undefined4 *)(glContext + 0x120) = uVar2;
-  *(undefined4 *)(glContext + 0x124) = uVar3;
-  *(undefined4 *)(glContext + 0x128) = uVar1;
+  *(undefined4 *)(glContext + 0x120) = texCoordS;
+  *(undefined4 *)(glContext + 0x124) = texCoordT;
+  *(undefined4 *)(glContext + 0x128) = texCoordR;
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   return 0xc;
 }
 
 /* _glTexCoord4_ListExec @ 0x93360 (52 bytes) */
-int _glTexCoord4_ListExec(glContext, param_2)
+int _glTexCoord4_ListExec(glContext, listRecord)
   int glContext;
-  undefined4 *param_2;
+  undefined4 *listRecord;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
+  undefined4 texCoordQ;
+  undefined4 texCoordT;
+  undefined4 texCoordR;
   
-  uVar1 = param_2[3];
-  uVar2 = param_2[1];
-  uVar3 = param_2[2];
-  *(undefined4 *)(glContext + 0x120) = *param_2;
+  texCoordQ = listRecord[3];
+  texCoordT = listRecord[1];
+  texCoordR = listRecord[2];
+  *(undefined4 *)(glContext + 0x120) = *listRecord;
   *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
-  *(undefined4 *)(glContext + 0x124) = uVar2;
-  *(undefined4 *)(glContext + 0x128) = uVar3;
-  *(undefined4 *)(glContext + 300) = uVar1;
+  *(undefined4 *)(glContext + 0x124) = texCoordT;
+  *(undefined4 *)(glContext + 0x128) = texCoordR;
+  *(undefined4 *)(glContext + 300) = texCoordQ;
   return 0x10;
 }
 
@@ -1826,12 +1826,12 @@ void _glTexCoord1dv_Exec(glContext, v)
   int glContext;
   double *v;
 {
-  double dVar1;
+  double texCoordS;
   
-  dVar1 = *v;
+  texCoordS = *v;
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
-  *(float *)(glContext + 0x120) = (float)dVar1;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
   *(undefined4 *)(glContext + 0x124) = *(undefined4 *)(glContext + 0x20);
   return;
 }
@@ -1896,15 +1896,15 @@ void _glTexCoord2dv_Exec(glContext, v)
   int glContext;
   double *v;
 {
-  double dVar1;
-  double dVar2;
+  double texCoordS;
+  double texCoordT;
   
-  dVar2 = v[1];
-  dVar1 = *v;
+  texCoordT = v[1];
+  texCoordS = *v;
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
-  *(float *)(glContext + 0x120) = (float)dVar1;
-  *(float *)(glContext + 0x124) = (float)dVar2;
+  *(float *)(glContext + 0x120) = (float)texCoordS;
+  *(float *)(glContext + 0x124) = (float)texCoordT;
   return;
 }
 

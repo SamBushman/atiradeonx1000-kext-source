@@ -204,14 +204,14 @@ int _glWindowPos2i_Comp(glContext, x, y)
   uint x;
   uint y;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glWindowPos2_ListExec_001104d0,8);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,x ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -249,14 +249,14 @@ int _glWindowPos2iv_Comp(glContext, v)
   undefined4 glContext;
   uint *v;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glWindowPos2_ListExec_001104d0,8);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -299,15 +299,15 @@ int _glWindowPos3i_Comp(glContext, x, y, z)
   uint y;
   uint z;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glWindowPos3_ListExec_001104cc,0xc);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,x ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - dVar1);
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,z ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - intToDoubleBias);
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,z ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -348,15 +348,15 @@ int _glWindowPos3iv_Comp(glContext, v)
   undefined4 glContext;
   uint *v;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glWindowPos3_ListExec_001104cc,0xc);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - dVar1);
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - intToDoubleBias);
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -395,14 +395,14 @@ int _glWindowPos2s_Comp(glContext, x, y)
   uint x;
   uint y;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glWindowPos2_ListExec_001104d0,8);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,x ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -440,14 +440,14 @@ int _glWindowPos2sv_Comp(glContext, v)
   undefined4 glContext;
   short *v;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glWindowPos2_ListExec_001104d0,8);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -490,15 +490,15 @@ int _glWindowPos3s_Comp(glContext, x, y, z)
   uint y;
   uint z;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glWindowPos3_ListExec_001104cc,0xc);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,x ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - dVar1);
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,z ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - intToDoubleBias);
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,z ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -539,15 +539,15 @@ int _glWindowPos3sv_Comp(glContext, v)
   undefined4 glContext;
   short *v;
 {
-  double dVar1;
+  double intToDoubleBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glWindowPos3_ListExec_001104cc,0xc);
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleBias = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58);
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - dVar1);
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - dVar1);
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleBias);
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleBias);
   }
   return listRecord;
 }
@@ -569,10 +569,14 @@ void _glCombinerParameterfvNV_Exec(glContext, pname, params)
   float *params;
 {
   float fVar1;
+  float floatZero;
   float fVar2;
   float fVar3;
+  float floatZero2;
   float fVar4;
+  float floatZero3;
   float fVar5;
+  float floatZero4;
   undefined4 glErrorCode;
   int iVar7;
   
@@ -598,19 +602,19 @@ void _glCombinerParameterfvNV_Exec(glContext, pname, params)
           fVar2 = params[3];
           fVar3 = params[1];
           fVar4 = params[2];
-          fVar5 = FLOAT_00108e50;
+          floatZero4 = FLOAT_00108e50;
           if ((!(fVar1 < 0.0)) && (fVar5 = fVar1, 1.0 < fVar1)) {
             fVar5 = FLOAT_00108e54;
           }
-          fVar1 = FLOAT_00108e50;
+          floatZero = FLOAT_00108e50;
           if ((!(fVar3 < 0.0)) && (fVar1 = fVar3, 1.0 < fVar3)) {
             fVar1 = FLOAT_00108e54;
           }
-          fVar3 = FLOAT_00108e50;
+          floatZero2 = FLOAT_00108e50;
           if ((!(fVar4 < 0.0)) && (fVar3 = fVar4, 1.0 < fVar4)) {
             fVar3 = FLOAT_00108e54;
           }
-          fVar4 = FLOAT_00108e50;
+          floatZero3 = FLOAT_00108e50;
           if ((!(fVar2 < 0.0)) && (fVar4 = fVar2, 1.0 < fVar2)) {
             fVar4 = FLOAT_00108e54;
           }
@@ -652,10 +656,14 @@ void _glCombinerStageParameterfvNV_Exec(glContext, stage, pname, params)
   float *params;
 {
   float fVar1;
+  float floatZero;
   float fVar2;
   float fVar3;
+  float floatZero2;
   float fVar4;
+  float floatZero3;
   float fVar5;
+  float floatZero4;
   undefined4 glErrorCode;
   int iVar7;
   
@@ -667,19 +675,19 @@ void _glCombinerStageParameterfvNV_Exec(glContext, stage, pname, params)
       fVar2 = params[3];
       fVar3 = params[2];
       fVar4 = params[1];
-      fVar5 = FLOAT_00108e50;
+      floatZero4 = FLOAT_00108e50;
       if ((!(fVar1 < 0.0)) && (fVar5 = fVar1, 1.0 < fVar1)) {
         fVar5 = FLOAT_00108e54;
       }
-      fVar1 = FLOAT_00108e50;
+      floatZero = FLOAT_00108e50;
       if ((!(fVar4 < 0.0)) && (fVar1 = fVar4, 1.0 < fVar4)) {
         fVar1 = FLOAT_00108e54;
       }
-      fVar4 = FLOAT_00108e50;
+      floatZero3 = FLOAT_00108e50;
       if ((!(fVar3 < 0.0)) && (fVar4 = fVar3, 1.0 < fVar3)) {
         fVar4 = FLOAT_00108e54;
       }
-      fVar3 = FLOAT_00108e50;
+      floatZero2 = FLOAT_00108e50;
       if ((!(fVar2 < 0.0)) && (fVar3 = fVar2, 1.0 < fVar2)) {
         fVar3 = FLOAT_00108e54;
       }
@@ -725,10 +733,14 @@ void _glCombinerParameterfNV_Exec(int glContext,int pname,float param)
 void _glCombinerParameterivNV_Exec(int glContext,uint pname,uint *params,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
   float fVar1;
+  float floatZero;
   float fVar2;
+  float floatZero2;
   float fVar3;
+  float floatZero3;
   float fVar4;
   float fVar5;
+  float floatZero4;
   undefined4 glErrorCode;
   int iVar7;
   uint uVar8;
@@ -752,19 +764,19 @@ void _glCombinerParameterivNV_Exec(int glContext,uint pname,uint *params,double 
           fVar2 = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58);
           fVar3 = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58);
           fVar4 = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - DOUBLE_00108d58);
-          fVar5 = FLOAT_00108e50;
+          floatZero4 = FLOAT_00108e50;
           if ((!(fVar1 < 0.0)) && (fVar5 = fVar1, 1.0 < fVar1)) {
             fVar5 = FLOAT_00108e54;
           }
-          fVar1 = FLOAT_00108e50;
+          floatZero = FLOAT_00108e50;
           if ((!(fVar2 < 0.0)) && (fVar1 = fVar2, 1.0 < fVar2)) {
             fVar1 = FLOAT_00108e54;
           }
-          fVar2 = FLOAT_00108e50;
+          floatZero2 = FLOAT_00108e50;
           if ((!(fVar3 < 0.0)) && (fVar2 = fVar3, 1.0 < fVar3)) {
             fVar2 = FLOAT_00108e54;
           }
-          fVar3 = FLOAT_00108e50;
+          floatZero3 = FLOAT_00108e50;
           if ((!(fVar4 < 0.0)) && (fVar3 = fVar4, 1.0 < fVar4)) {
             fVar3 = FLOAT_00108e54;
           }
@@ -802,13 +814,13 @@ LAB_000b32e4:
 void _glCombinerParameteriNV_Exec(int glContext,int pname,undefined4 param,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
   undefined4 uStack00000020;
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
+  double incomingStack_ffffffb8;
+  double incomingStack_ffffffc0;
   
   if (pname - 0x854eU < 2) {
     uStack00000020 = param;
     ((void (*)())_glCombinerParameterivNV_Exec)(glContext,pname,&STACKARG(0x20),forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,
-               forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,in_stack_ffffffb8,in_stack_ffffffc0);
+               forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0);
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
     *(undefined4 *)(glContext + 0x7574) = 0x500;

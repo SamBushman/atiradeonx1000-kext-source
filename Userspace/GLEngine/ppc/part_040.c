@@ -3,29 +3,30 @@
 /* _gleInterpolEyeAllFlatw @ 0xb9c7c (640 bytes) */
 void _gleInterpolEyeAllFlatw(int glContext,float *startVertex,int endVertex,float *outVertex,float edgeT,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
+  float clipWThenInvW;
   float startTexCoordQ;
   float startWord16;
   float startWord13;
-  float fVar2;
+  float clipYThenNdcY;
   float startTexCoordR;
   float windowBiasZ;
   float endWord0b;
-  float fVar3;
+  float clipZThenNdcZ;
+  float endTexCoordQ;
   float startWord09;
-  float fVar4;
+  float endTexCoordT;
   float startWord0a;
-  float fVar5;
+  float endTexCoordR;
   float endWord09;
   float endWord0a;
   float startClipX;
   float endClipZ;
-  float fVar8;
+  float negClipW;
   float endClipX;
   float endClipY;
   float startClipZ;
-  uint uVar11;
-  float fVar12;
+  uint texMaskRemaining;
+  float clipXThenNdcX;
   float startTexCoordT;
   float startWord1e;
   float endWord13;
@@ -33,8 +34,8 @@ void _gleInterpolEyeAllFlatw(int glContext,float *startVertex,int endVertex,floa
   float startWord0b;
   uint clipOutcode;
   uint texEnableMask;
-  uint uVar14;
-  int iVar15;
+  uint texUnit;
+  int endVertexAtUnit;
   
   startWord0b = startVertex[0xb];
   endWord0b = *(float *)(endVertex + 0x2c);
@@ -45,59 +46,59 @@ void _gleInterpolEyeAllFlatw(int glContext,float *startVertex,int endVertex,floa
   endWord0a = *(float *)(endVertex + 0x28);
   startClipX = startVertex[4];
   endClipX = *(float *)(endVertex + 0x10);
-  fVar1 = (edgeT * (*(float *)(endVertex + 0x1c) - startVertex[7]) + startVertex[7]);
+  clipWThenInvW = (edgeT * (*(float *)(endVertex + 0x1c) - startVertex[7]) + startVertex[7]);
   outVertex[8] = (edgeT * (*(float *)(endVertex + 0x20) - startVertex[8]) + startVertex[8]);
   outVertex[0xb] = (edgeT * (endWord0b - startWord0b) + startWord0b);
-  fVar2 = startVertex[5];
+  clipYThenNdcY = startVertex[5];
   endClipY = *(float *)(endVertex + 0x14);
   startClipZ = startVertex[6];
-  fVar12 = (edgeT * (endClipX - startClipX) + startClipX);
+  clipXThenNdcX = (edgeT * (endClipX - startClipX) + startClipX);
   endClipZ = *(float *)(endVertex + 0x18);
-  fVar8 = -fVar1;
+  negClipW = -clipWThenInvW;
   outVertex[9] = (edgeT * (endWord09 - startWord09) + startWord09);
   outVertex[10] = (edgeT * (endWord0a - startWord0a) + startWord0a);
-  outVertex[4] = fVar12;
-  fVar2 = (edgeT * (endClipY - fVar2) + fVar2);
-  outVertex[7] = fVar1;
-  fVar3 = (edgeT * (endClipZ - startClipZ) + startClipZ);
-  outVertex[5] = fVar2;
-  outVertex[6] = fVar3;
-  if (fVar12 < fVar8) {
+  outVertex[4] = clipXThenNdcX;
+  clipYThenNdcY = (edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY);
+  outVertex[7] = clipWThenInvW;
+  clipZThenNdcZ = (edgeT * (endClipZ - startClipZ) + startClipZ);
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  if (clipXThenNdcX < negClipW) {
     clipOutcode = 0x10;
   }
-  if (fVar1 <= fVar12) {
+  if (clipWThenInvW <= clipXThenNdcX) {
     clipOutcode = clipOutcode | 0x20;
   }
-  if (fVar2 < fVar8) {
+  if (clipYThenNdcY < negClipW) {
     clipOutcode = clipOutcode | 4;
   }
-  if (fVar1 <= fVar2) {
+  if (clipWThenInvW <= clipYThenNdcY) {
     clipOutcode = clipOutcode | 8;
   }
-  if (fVar3 < fVar8) {
+  if (clipZThenNdcZ < negClipW) {
     clipOutcode = clipOutcode | 1;
   }
-  if (fVar1 < fVar3) {
+  if (clipWThenInvW < clipZThenNdcZ) {
     clipOutcode = clipOutcode | 2;
   }
   outVertex[0x1f] =
        GH_U2F((unsigned int)(((uint)*(byte *)(startVertex + 0x1f) << 0x18 | (uint)*(byte *)((int)startVertex + 0x7e) << 8 |
                clipOutcode | 0x10000)));
   if (clipOutcode == 0) {
-    if (fVar1 != FLOAT_00108e54) {
-      fVar1 = FLOAT_00108e54 / fVar1;
-      fVar12 = fVar12 * fVar1;
-      fVar2 = fVar2 * fVar1;
-      fVar3 = fVar3 * fVar1;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar12 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar2 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar1;
-    outVertex[2] = windowScaleZ * fVar3 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar14 = 0;
+  texUnit = 0;
   startWord13 = startVertex[0x13];
   endWord13 = *(float *)(endVertex + 0x4c);
   outVertex[0x17] =
@@ -106,9 +107,9 @@ void _gleInterpolEyeAllFlatw(int glContext,float *startVertex,int endVertex,floa
        (edgeT * (endWord13 - startWord13) + startWord13);
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar11 = texEnableMask >> (uVar14 & 0x3f);
-    if ((uVar11 & 1) == 0) {
-      if (uVar11 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         if (startVertex == outVertex) {
           return;
         }
@@ -126,47 +127,51 @@ void _gleInterpolEyeAllFlatw(int glContext,float *startVertex,int endVertex,floa
       }
     }
     else {
-      iVar15 = uVar14 * 0x10 + endVertex;
-      startTexCoordQ = startVertex[uVar14 * 4 + 0x23];
-      startTexCoordT = startVertex[uVar14 * 4 + 0x21];
-      startTexCoordR = startVertex[uVar14 * 4 + 0x22];
-      fVar3 = *(float *)(iVar15 + 0x8c);
-      fVar4 = *(float *)(iVar15 + 0x84);
-      fVar5 = *(float *)(iVar15 + 0x88);
-      outVertex[uVar14 * 4 + 0x20] =
-           (edgeT * (*(float *)(iVar15 + 0x80) - startVertex[uVar14 * 4 + 0x20]) + startVertex[uVar14 * 4 + 0x20]);
-      outVertex[uVar14 * 4 + 0x21] =
-           (edgeT * (fVar4 - startTexCoordT) + startTexCoordT);
-      outVertex[uVar14 * 4 + 0x22] =
-           (edgeT * (fVar5 - startTexCoordR) + startTexCoordR);
-      outVertex[uVar14 * 4 + 0x23] =
-           (edgeT * (fVar3 - startTexCoordQ) + startTexCoordQ);
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      startTexCoordQ = startVertex[texUnit * 4 + 0x23];
+      startTexCoordT = startVertex[texUnit * 4 + 0x21];
+      startTexCoordR = startVertex[texUnit * 4 + 0x22];
+      endTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
+      outVertex[texUnit * 4 + 0x20] =
+           (edgeT * (*(float *)(endVertexAtUnit + 0x80) - startVertex[texUnit * 4 + 0x20]) + startVertex[texUnit * 4 + 0x20]);
+      outVertex[texUnit * 4 + 0x21] =
+           (edgeT * (endTexCoordT - startTexCoordT) + startTexCoordT);
+      outVertex[texUnit * 4 + 0x22] =
+           (edgeT * (endTexCoordR - startTexCoordR) + startTexCoordR);
+      outVertex[texUnit * 4 + 0x23] =
+           (edgeT * (endTexCoordQ - startTexCoordQ) + startTexCoordQ);
     }
-    uVar14 = uVar14 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
 /* _gleInterpolEyeAllSmooth @ 0xb9efc (892 bytes) */
 void _gleInterpolEyeAllSmooth(int glContext,float *startVertex,int endVertex,float *outVertex,float edgeT,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
+  float clipWThenInvW;
+  float outTexCoordS;
   float startWord10;
   float endWord0d;
   float startWord13;
-  char cVar2;
-  float fVar3;
+  char startFlagByte7f;
+  float clipXThenNdcX;
+  float outTexCoordT;
   float startWord11;
   float endWord0e;
   float endWord13;
   float windowScaleZ;
   float startWord0b;
-  float fVar4;
+  float clipYThenNdcY;
+  float outTexCoordR;
   float endWord10;
   float startWord15;
   float startWord0c;
   float windowBiasZ;
   float endWord0b;
-  float fVar5;
+  float clipZThenNdcZ;
+  float outTexCoordQ;
   float endWord11;
   float endWord15;
   float endWord0c;
@@ -181,7 +186,7 @@ void _gleInterpolEyeAllSmooth(int glContext,float *startVertex,int endVertex,flo
   float startClipX;
   float endWord0f;
   float endClipZ;
-  float fVar10;
+  float negClipW;
   float startWord14;
   float endClipX;
   float endClipY;
@@ -189,20 +194,21 @@ void _gleInterpolEyeAllSmooth(int glContext,float *startVertex,int endVertex,flo
   float startClipZ;
   float startWord16;
   float endWord16;
-  uint uVar14;
-  int iVar15;
+  uint texMaskRemaining;
+  int endVertexAtUnit;
   uint texEnableMask;
   uint clipOutcode;
-  uint uVar18;
-  float dVar19;
-  float dVar20;
-  float dVar21;
-  float dVar22;
-  float dVar23;
-  float dVar24;
-  float dVar25;
-  float dVar26;
-  float dVar27;
+  uint texUnit;
+  float startClipW;
+  float endTexCoordT;
+  float endClipW;
+  float startTexCoordS;
+  float startTexCoordR;
+  float startTexCoordT;
+  float endTexCoordQ;
+  float endTexCoordS;
+  float endTexCoordR;
+  float startTexCoordQ;
   
   startWord0b = startVertex[0xb];
   endWord0b = *(float *)(endVertex + 0x2c);
@@ -213,61 +219,61 @@ void _gleInterpolEyeAllSmooth(int glContext,float *startVertex,int endVertex,flo
   clipOutcode = 0;
   startClipX = startVertex[4];
   endClipX = *(float *)(endVertex + 0x10);
-  fVar1 = (edgeT * (*(float *)(endVertex + 0x1c) - startVertex[7]) + startVertex[7]);
+  clipWThenInvW = (edgeT * (*(float *)(endVertex + 0x1c) - startVertex[7]) + startVertex[7]);
   outVertex[8] = (edgeT * (*(float *)(endVertex + 0x20) - startVertex[8]) + startVertex[8]);
   outVertex[0xb] = (edgeT * (endWord0b - startWord0b) + startWord0b);
-  fVar4 = startVertex[5];
+  clipYThenNdcY = startVertex[5];
   endClipY = *(float *)(endVertex + 0x14);
   startClipZ = startVertex[6];
-  fVar3 = (edgeT * (endClipX - startClipX) + startClipX);
+  clipXThenNdcX = (edgeT * (endClipX - startClipX) + startClipX);
   endClipZ = *(float *)(endVertex + 0x18);
-  fVar10 = -fVar1;
+  negClipW = -clipWThenInvW;
   outVertex[9] = (edgeT * (endWord09 - startWord09) + startWord09);
   outVertex[10] = (edgeT * (endWord0a - startWord0a) + startWord0a);
-  outVertex[4] = fVar3;
-  fVar4 = (edgeT * (endClipY - fVar4) + fVar4);
-  outVertex[7] = fVar1;
-  fVar5 = (edgeT * (endClipZ - startClipZ) + startClipZ);
-  cVar2 = *(char *)((int)startVertex + 0x7f);
-  outVertex[5] = fVar4;
-  outVertex[6] = fVar5;
-  if (fVar3 < fVar10) {
+  outVertex[4] = clipXThenNdcX;
+  clipYThenNdcY = (edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY);
+  outVertex[7] = clipWThenInvW;
+  clipZThenNdcZ = (edgeT * (endClipZ - startClipZ) + startClipZ);
+  startFlagByte7f = *(char *)((int)startVertex + 0x7f);
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  if (clipXThenNdcX < negClipW) {
     clipOutcode = 0x10;
   }
-  if (fVar1 <= fVar3) {
+  if (clipWThenInvW <= clipXThenNdcX) {
     clipOutcode = clipOutcode | 0x20;
   }
-  if (fVar4 < fVar10) {
+  if (clipYThenNdcY < negClipW) {
     clipOutcode = clipOutcode | 4;
   }
-  if (fVar1 <= fVar4) {
+  if (clipWThenInvW <= clipYThenNdcY) {
     clipOutcode = clipOutcode | 8;
   }
-  if (fVar5 < fVar10) {
+  if (clipZThenNdcZ < negClipW) {
     clipOutcode = clipOutcode | 1;
   }
-  if (fVar1 < fVar5) {
+  if (clipWThenInvW < clipZThenNdcZ) {
     clipOutcode = clipOutcode | 2;
   }
   outVertex[0x1f] =
        GH_U2F((unsigned int)(((uint)*(byte *)(startVertex + 0x1f) << 0x18 | (uint)*(byte *)((int)startVertex + 0x7e) << 8 |
                clipOutcode | 0x10000)));
   if (clipOutcode == 0) {
-    if (fVar1 != FLOAT_00108e54) {
-      fVar1 = FLOAT_00108e54 / fVar1;
-      fVar3 = fVar3 * fVar1;
-      fVar4 = fVar4 * fVar1;
-      fVar5 = fVar5 * fVar1;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar3 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar4 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar1;
-    outVertex[2] = windowScaleZ * fVar5 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
   startWord13 = startVertex[0x13];
-  uVar18 = 0;
+  texUnit = 0;
   endWord13 = *(float *)(endVertex + 0x4c);
   startWord0c = startVertex[0xc];
   endWord0c = *(float *)(endVertex + 0x30);
@@ -299,9 +305,9 @@ void _gleInterpolEyeAllSmooth(int glContext,float *startVertex,int endVertex,flo
        (edgeT * (endWord16 - startWord16) + startWord16);
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar14 = texEnableMask >> (uVar18 & 0x3f);
-    if ((uVar14 & 1) == 0) {
-      if (uVar14 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         startWord10 = startVertex[0x10];
         startWord11 = startVertex[0x11];
         endWord10 = *(float *)(endVertex + 0x40);
@@ -320,80 +326,81 @@ void _gleInterpolEyeAllSmooth(int glContext,float *startVertex,int endVertex,flo
       }
     }
     else {
-      dVar27 = (double)startVertex[uVar18 * 4 + 0x23];
-      dVar21 = (double)startVertex[uVar18 * 4 + 0x20];
-      dVar23 = (double)startVertex[uVar18 * 4 + 0x21];
-      dVar22 = (double)startVertex[uVar18 * 4 + 0x22];
-      if (cVar2 == '\0') {
-        dVar19 = (double)startVertex[7];
-        dVar27 = (double)(dVar27 * dVar19);
-        dVar21 = (double)(dVar21 * dVar19);
-        dVar23 = (double)(dVar23 * dVar19);
-        dVar22 = (double)(dVar22 * dVar19);
+      startTexCoordQ = (double)startVertex[texUnit * 4 + 0x23];
+      startTexCoordS = (double)startVertex[texUnit * 4 + 0x20];
+      startTexCoordT = (double)startVertex[texUnit * 4 + 0x21];
+      startTexCoordR = (double)startVertex[texUnit * 4 + 0x22];
+      if (startFlagByte7f == '\0') {
+        startClipW = (double)startVertex[7];
+        startTexCoordQ = (double)(startTexCoordQ * startClipW);
+        startTexCoordS = (double)(startTexCoordS * startClipW);
+        startTexCoordT = (double)(startTexCoordT * startClipW);
+        startTexCoordR = (double)(startTexCoordR * startClipW);
       }
-      iVar15 = uVar18 * 0x10 + endVertex;
-      dVar24 = (double)*(float *)(iVar15 + 0x8c);
-      dVar25 = (double)*(float *)(iVar15 + 0x80);
-      dVar19 = (double)*(float *)(iVar15 + 0x84);
-      dVar26 = (double)*(float *)(iVar15 + 0x88);
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      endTexCoordQ = (double)*(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordS = (double)*(float *)(endVertexAtUnit + 0x80);
+      endTexCoordT = (double)*(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = (double)*(float *)(endVertexAtUnit + 0x88);
       if (*(char *)(endVertex + 0x7f) == '\0') {
-        dVar20 = (double)*(float *)(endVertex + 0x1c);
-        dVar24 = (double)(dVar24 * dVar20);
-        dVar25 = (double)(dVar25 * dVar20);
-        dVar19 = (double)(dVar19 * dVar20);
-        dVar26 = (double)(dVar26 * dVar20);
+        endClipW = (double)*(float *)(endVertex + 0x1c);
+        endTexCoordQ = (double)(endTexCoordQ * endClipW);
+        endTexCoordS = (double)(endTexCoordS * endClipW);
+        endTexCoordT = (double)(endTexCoordT * endClipW);
+        endTexCoordR = (double)(endTexCoordR * endClipW);
       }
-      fVar1 = (edgeT * (dVar25 - dVar21) + dVar21);
-      fVar3 = (edgeT * (dVar19 - dVar23) + dVar23);
-      fVar4 = (edgeT * (dVar26 - dVar22) + dVar22);
-      fVar5 = (edgeT * (dVar24 - dVar27) + dVar27);
+      outTexCoordS = (edgeT * (endTexCoordS - startTexCoordS) + startTexCoordS);
+      outTexCoordT = (edgeT * (endTexCoordT - startTexCoordT) + startTexCoordT);
+      outTexCoordR = (edgeT * (endTexCoordR - startTexCoordR) + startTexCoordR);
+      outTexCoordQ = (edgeT * (endTexCoordQ - startTexCoordQ) + startTexCoordQ);
       if (clipOutcode == 0) {
         outInvW = outVertex[3];
-        fVar5 = fVar5 * outInvW;
-        fVar1 = fVar1 * outInvW;
-        fVar3 = fVar3 * outInvW;
-        fVar4 = fVar4 * outInvW;
+        outTexCoordQ = outTexCoordQ * outInvW;
+        outTexCoordS = outTexCoordS * outInvW;
+        outTexCoordT = outTexCoordT * outInvW;
+        outTexCoordR = outTexCoordR * outInvW;
       }
-      outVertex[uVar18 * 4 + 0x23] = fVar5;
-      outVertex[uVar18 * 4 + 0x20] = fVar1;
-      outVertex[uVar18 * 4 + 0x21] = fVar3;
-      outVertex[uVar18 * 4 + 0x22] = fVar4;
+      outVertex[texUnit * 4 + 0x23] = outTexCoordQ;
+      outVertex[texUnit * 4 + 0x20] = outTexCoordS;
+      outVertex[texUnit * 4 + 0x21] = outTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = outTexCoordR;
     }
-    uVar18 = uVar18 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
 /* _gleInterpolEyeAllSmoothw @ 0xba278 (804 bytes) */
 void _gleInterpolEyeAllSmoothw(int glContext,float *startVertex,int endVertex,float *outVertex,float edgeT,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
+  float clipWThenInvW;
   float startTexCoordQ;
   float startWord10;
   float endWord0d;
   float startWord13;
-  float fVar2;
+  float clipXThenNdcX;
   float startTexCoordT;
   float startWord11;
   float endWord0e;
   float endWord13;
   float windowScaleZ;
   float startWord0b;
-  float fVar3;
+  float clipYThenNdcY;
   float startTexCoordR;
   float endWord10;
   float startWord15;
   float startWord0c;
   float windowBiasZ;
   float endWord0b;
-  float fVar4;
+  float clipZThenNdcZ;
+  float endTexCoordQ;
   float endWord11;
   float endWord15;
   float endWord0c;
   float startWord09;
-  float fVar5;
+  float endTexCoordT;
   float startWord0f;
   float startWord0a;
-  float fVar6;
+  float endTexCoordR;
   float startWord0e;
   float endWord09;
   float endWord0a;
@@ -401,7 +408,7 @@ void _gleInterpolEyeAllSmoothw(int glContext,float *startVertex,int endVertex,fl
   float startClipX;
   float endWord0f;
   float endClipZ;
-  float fVar9;
+  float negClipW;
   float startWord14;
   float endClipX;
   float endClipY;
@@ -409,11 +416,11 @@ void _gleInterpolEyeAllSmoothw(int glContext,float *startVertex,int endVertex,fl
   float startClipZ;
   float startWord16;
   float endWord16;
-  uint uVar13;
+  uint texMaskRemaining;
   uint clipOutcode;
   uint texEnableMask;
-  uint uVar15;
-  int iVar16;
+  uint texUnit;
+  int endVertexAtUnit;
   
   startWord0b = startVertex[0xb];
   endWord0b = *(float *)(endVertex + 0x2c);
@@ -424,59 +431,59 @@ void _gleInterpolEyeAllSmoothw(int glContext,float *startVertex,int endVertex,fl
   clipOutcode = 0;
   startClipX = startVertex[4];
   endClipX = *(float *)(endVertex + 0x10);
-  fVar1 = (edgeT * (*(float *)(endVertex + 0x1c) - startVertex[7]) + startVertex[7]);
+  clipWThenInvW = (edgeT * (*(float *)(endVertex + 0x1c) - startVertex[7]) + startVertex[7]);
   outVertex[8] = (edgeT * (*(float *)(endVertex + 0x20) - startVertex[8]) + startVertex[8]);
   outVertex[0xb] = (edgeT * (endWord0b - startWord0b) + startWord0b);
-  fVar3 = startVertex[5];
+  clipYThenNdcY = startVertex[5];
   endClipY = *(float *)(endVertex + 0x14);
   startClipZ = startVertex[6];
-  fVar2 = (edgeT * (endClipX - startClipX) + startClipX);
+  clipXThenNdcX = (edgeT * (endClipX - startClipX) + startClipX);
   endClipZ = *(float *)(endVertex + 0x18);
-  fVar9 = -fVar1;
+  negClipW = -clipWThenInvW;
   outVertex[9] = (edgeT * (endWord09 - startWord09) + startWord09);
   outVertex[10] = (edgeT * (endWord0a - startWord0a) + startWord0a);
-  outVertex[4] = fVar2;
-  fVar3 = (edgeT * (endClipY - fVar3) + fVar3);
-  outVertex[7] = fVar1;
-  fVar4 = (edgeT * (endClipZ - startClipZ) + startClipZ);
-  outVertex[5] = fVar3;
-  outVertex[6] = fVar4;
-  if (fVar2 < fVar9) {
+  outVertex[4] = clipXThenNdcX;
+  clipYThenNdcY = (edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY);
+  outVertex[7] = clipWThenInvW;
+  clipZThenNdcZ = (edgeT * (endClipZ - startClipZ) + startClipZ);
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  if (clipXThenNdcX < negClipW) {
     clipOutcode = 0x10;
   }
-  if (fVar1 <= fVar2) {
+  if (clipWThenInvW <= clipXThenNdcX) {
     clipOutcode = clipOutcode | 0x20;
   }
-  if (fVar3 < fVar9) {
+  if (clipYThenNdcY < negClipW) {
     clipOutcode = clipOutcode | 4;
   }
-  if (fVar1 <= fVar3) {
+  if (clipWThenInvW <= clipYThenNdcY) {
     clipOutcode = clipOutcode | 8;
   }
-  if (fVar4 < fVar9) {
+  if (clipZThenNdcZ < negClipW) {
     clipOutcode = clipOutcode | 1;
   }
-  if (fVar1 < fVar4) {
+  if (clipWThenInvW < clipZThenNdcZ) {
     clipOutcode = clipOutcode | 2;
   }
   outVertex[0x1f] =
        GH_U2F((unsigned int)(((uint)*(byte *)(startVertex + 0x1f) << 0x18 | (uint)*(byte *)((int)startVertex + 0x7e) << 8 |
                clipOutcode | 0x10000)));
   if (clipOutcode == 0) {
-    if (fVar1 != FLOAT_00108e54) {
-      fVar1 = FLOAT_00108e54 / fVar1;
-      fVar2 = fVar2 * fVar1;
-      fVar3 = fVar3 * fVar1;
-      fVar4 = fVar4 * fVar1;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar1;
-    outVertex[2] = windowScaleZ * fVar4 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar15 = 0;
+  texUnit = 0;
   startWord13 = startVertex[0x13];
   endWord13 = *(float *)(endVertex + 0x4c);
   startWord0c = startVertex[0xc];
@@ -509,9 +516,9 @@ void _gleInterpolEyeAllSmoothw(int glContext,float *startVertex,int endVertex,fl
        (edgeT * (endWord16 - startWord16) + startWord16);
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar13 = texEnableMask >> (uVar15 & 0x3f);
-    if ((uVar13 & 1) == 0) {
-      if (uVar13 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         startWord10 = startVertex[0x10];
         startWord11 = startVertex[0x11];
         endWord10 = *(float *)(endVertex + 0x40);
@@ -530,37 +537,37 @@ void _gleInterpolEyeAllSmoothw(int glContext,float *startVertex,int endVertex,fl
       }
     }
     else {
-      iVar16 = uVar15 * 0x10 + endVertex;
-      startTexCoordQ = startVertex[uVar15 * 4 + 0x23];
-      startTexCoordT = startVertex[uVar15 * 4 + 0x21];
-      startTexCoordR = startVertex[uVar15 * 4 + 0x22];
-      fVar4 = *(float *)(iVar16 + 0x8c);
-      fVar5 = *(float *)(iVar16 + 0x84);
-      fVar6 = *(float *)(iVar16 + 0x88);
-      outVertex[uVar15 * 4 + 0x20] =
-           (edgeT * (*(float *)(iVar16 + 0x80) - startVertex[uVar15 * 4 + 0x20]) + startVertex[uVar15 * 4 + 0x20]);
-      outVertex[uVar15 * 4 + 0x21] =
-           (edgeT * (fVar5 - startTexCoordT) + startTexCoordT);
-      outVertex[uVar15 * 4 + 0x22] =
-           (edgeT * (fVar6 - startTexCoordR) + startTexCoordR);
-      outVertex[uVar15 * 4 + 0x23] =
-           (edgeT * (fVar4 - startTexCoordQ) + startTexCoordQ);
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      startTexCoordQ = startVertex[texUnit * 4 + 0x23];
+      startTexCoordT = startVertex[texUnit * 4 + 0x21];
+      startTexCoordR = startVertex[texUnit * 4 + 0x22];
+      endTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
+      outVertex[texUnit * 4 + 0x20] =
+           (edgeT * (*(float *)(endVertexAtUnit + 0x80) - startVertex[texUnit * 4 + 0x20]) + startVertex[texUnit * 4 + 0x20]);
+      outVertex[texUnit * 4 + 0x21] =
+           (edgeT * (endTexCoordT - startTexCoordT) + startTexCoordT);
+      outVertex[texUnit * 4 + 0x22] =
+           (edgeT * (endTexCoordR - startTexCoordR) + startTexCoordR);
+      outVertex[texUnit * 4 + 0x23] =
+           (edgeT * (endTexCoordQ - startTexCoordQ) + startTexCoordQ);
     }
-    uVar15 = uVar15 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
 /* _gleInterpolClipNO0000 @ 0xba59c (732 bytes) */
 uint _gleInterpolClipNO0000(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  bool bVar1;
+  bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
   float fVar4;
   float startWord12;
-  float fVar5;
+  float clipYThenNdcY;
   float windowScaleZ;
-  float fVar6;
+  float clipZThenNdcZ;
   float fVar7;
   float endClipX;
   float fVar9;
@@ -568,985 +575,22 @@ uint _gleInterpolClipNO0000(int glContext,float *startVertex,int endVertex,float
   float fVar11;
   float startWord1e;
   float windowBiasZ;
-  uint uVar12;
+  uint clipOutcode;
   
   fVar4 = *(float *)(endVertex + 0x1c);
   fVar11 = startVertex[4];
-  fVar5 = startVertex[5];
-  fVar6 = startVertex[6];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
   fVar7 = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   fVar9 = *(float *)(endVertex + 0x14);
   fVar10 = *(float *)(endVertex + 0x18);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      fVar10 = (fVar7 + fVar6) / ((fVar7 + fVar6) - (fVar4 + fVar10));
+      fVar10 = (fVar7 + clipZThenNdcZ) / ((fVar7 + clipZThenNdcZ) - (fVar4 + fVar10));
       fVar4 = fVar10 * (fVar4 - fVar7) + fVar7;
-      fVar6 = -fVar4;
+      clipZThenNdcZ = -fVar4;
       if (fVar4 < FLOAT_00108e50) {
-        uVar12 = 2;
-      }
-      else {
-        uVar12 = 0;
-      }
-    }
-    else {
-      uVar12 = 0;
-      fVar10 = (fVar7 - fVar6) / ((fVar7 - fVar6) - (fVar4 - fVar10));
-      fVar4 = fVar10 * (fVar4 - fVar7) + fVar7;
-      fVar6 = fVar4;
-    }
-    bVar1 = uVar12 == 0;
-    fVar7 = fVar10 * (endClipX - fVar11) + fVar11;
-    fVar5 = fVar10 * (fVar9 - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000ba7a0;
-    fVar11 = -fVar4;
-    if (fVar5 < fVar11) {
-      uVar12 = 4;
-    }
-    else {
-      if (!(fVar4 <= fVar5)) goto LAB_000ba700;
-      uVar12 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        fVar11 = (fVar7 + fVar11) / ((fVar7 + fVar11) - (fVar4 + endClipX));
-        fVar4 = fVar11 * (fVar4 - fVar7) + fVar7;
-        fVar7 = -fVar4;
-        uVar12 = (uint)(fVar4 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar12 = 0;
-        fVar11 = (fVar7 - fVar11) / ((fVar7 - fVar11) - (fVar4 - endClipX));
-        fVar7 = fVar11 * (fVar4 - fVar7) + fVar7;
-        fVar4 = fVar7;
-      }
-      bVar1 = uVar12 == 0;
-      fVar5 = fVar11 * (fVar9 - fVar5) + fVar5;
-      fVar6 = fVar11 * (fVar10 - fVar6) + fVar6;
-      goto LAB_000ba7a0;
-    }
-    if (clipPlane == 4) {
-      fVar9 = (fVar7 + fVar5) / ((fVar7 + fVar5) - (fVar4 + fVar9));
-      fVar4 = fVar9 * (fVar4 - fVar7) + fVar7;
-      fVar5 = -fVar4;
-      uVar12 = (uint)(fVar4 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar12 = 0;
-      fVar9 = (fVar7 - fVar5) / ((fVar7 - fVar5) - (fVar4 - fVar9));
-      fVar5 = fVar9 * (fVar4 - fVar7) + fVar7;
-      fVar4 = fVar5;
-    }
-    bVar1 = uVar12 == 0;
-    fVar7 = fVar9 * (endClipX - fVar11) + fVar11;
-    fVar6 = fVar9 * (fVar10 - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000ba7a0;
-    fVar11 = -fVar4;
-LAB_000ba700:
-    if (fVar7 < fVar11) {
-      uVar12 = 0x10;
-    }
-    else {
-      if (!(fVar4 <= fVar7)) goto LAB_000ba7a0;
-      uVar12 = 0x20;
-    }
-  }
-  bVar1 = uVar12 == 0;
-LAB_000ba7a0:
-  startFlagByte7c = *(byte *)(startVertex + 0x1f);
-  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar7;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar4;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | uVar12 | 0x10000)));
-  if (bVar1) {
-    if (fVar4 != FLOAT_00108e54) {
-      fVar4 = FLOAT_00108e54 / fVar4;
-      fVar7 = fVar7 * fVar4;
-      fVar5 = fVar5 * fVar4;
-      fVar6 = fVar6 * fVar4;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar7 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar4;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
-  }
-  if (startVertex != outVertex) {
-    *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
-    *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
-    *(undefined8 *)(outVertex + 0xc) = *(undefined8 *)(startVertex + 0xc);
-    *(undefined8 *)(outVertex + 0xe) = *(undefined8 *)(startVertex + 0xe);
-    *(undefined8 *)(outVertex + 0x10) = *(undefined8 *)(startVertex + 0x10);
-    startWord12 = startVertex[0x12];
-    outVertex[0x1d] = startVertex[0x1d];
-    startWord1e = startVertex[0x1e];
-    outVertex[0x12] = startWord12;
-    outVertex[0x1e] = startWord1e;
-  }
-  return uVar12;
-}
-
-/* _gleInterpolClipNO0010 @ 0xba878 (752 bytes) */
-uint _gleInterpolClipNO0010(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
-  bool bVar1;
-  byte startFlagByte7c;
-  byte startFlagByte7e;
-  float fVar4;
-  float startWord12;
-  float windowBiasZ;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float endClipX;
-  float endClipY;
-  float endClipZ;
-  float endClipW;
-  float edgeT;
-  float fVar12;
-  float startWord1e;
-  float windowScaleZ;
-  uint uVar13;
-  
-  fVar4 = startVertex[4];
-  fVar12 = startVertex[5];
-  fVar5 = startVertex[6];
-  fVar6 = startVertex[7];
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar6 + fVar5) / ((fVar6 + fVar5) - (endClipW + endClipZ));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar5 = -fVar6;
-      if (fVar6 < FLOAT_00108e50) {
-        uVar13 = 2;
-      }
-      else {
-        uVar13 = 0;
-      }
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar6 - fVar5) / ((fVar6 - fVar5) - (endClipW - endClipZ));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar5 = fVar6;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar12 = edgeT * (endClipY - fVar12) + fVar12;
-    if (!bVar1) goto LAB_000baa7c;
-    fVar7 = -fVar6;
-    if (fVar12 < fVar7) {
-      uVar13 = 4;
-    }
-    else {
-      if (!(fVar6 <= fVar12)) goto LAB_000ba9dc;
-      uVar13 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        edgeT = (fVar6 + fVar4) / ((fVar6 + fVar4) - (endClipW + endClipX));
-        fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-        fVar4 = -fVar6;
-        uVar13 = (uint)(fVar6 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar13 = 0;
-        edgeT = (fVar6 - fVar4) / ((fVar6 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar6) + fVar6;
-        fVar6 = fVar4;
-      }
-      bVar1 = uVar13 == 0;
-      fVar12 = edgeT * (endClipY - fVar12) + fVar12;
-      fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
-      goto LAB_000baa7c;
-    }
-    if (clipPlane == 4) {
-      edgeT = (fVar6 + fVar12) / ((fVar6 + fVar12) - (endClipW + endClipY));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar12 = -fVar6;
-      uVar13 = (uint)(fVar6 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar6 - fVar12) / ((fVar6 - fVar12) - (endClipW - endClipY));
-      fVar12 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar6 = fVar12;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000baa7c;
-    fVar7 = -fVar6;
-LAB_000ba9dc:
-    if (fVar4 < fVar7) {
-      uVar13 = 0x10;
-    }
-    else {
-      if (!(fVar6 <= fVar4)) goto LAB_000baa7c;
-      uVar13 = 0x20;
-    }
-  }
-  bVar1 = uVar13 == 0;
-LAB_000baa7c:
-  startFlagByte7c = *(byte *)(startVertex + 0x1f);
-  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar12;
-  outVertex[6] = fVar5;
-  outVertex[7] = fVar6;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | uVar13 | 0x10000)));
-  if (bVar1) {
-    if (fVar6 != FLOAT_00108e54) {
-      fVar6 = FLOAT_00108e54 / fVar6;
-      fVar4 = fVar4 * fVar6;
-      fVar12 = fVar12 * fVar6;
-      fVar5 = fVar5 * fVar6;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar12 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar6;
-    outVertex[2] = windowScaleZ * fVar5 + windowBiasZ;
-  }
-  outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
-  if (startVertex != outVertex) {
-    *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
-    *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
-    *(undefined8 *)(outVertex + 0xc) = *(undefined8 *)(startVertex + 0xc);
-    *(undefined8 *)(outVertex + 0xe) = *(undefined8 *)(startVertex + 0xe);
-    *(undefined8 *)(outVertex + 0x10) = *(undefined8 *)(startVertex + 0x10);
-    startWord12 = startVertex[0x12];
-    outVertex[0x1d] = startVertex[0x1d];
-    startWord1e = startVertex[0x1e];
-    outVertex[0x12] = startWord12;
-    outVertex[0x1e] = startWord1e;
-  }
-  return uVar13;
-}
-
-/* _gleInterpolClipNO0100 @ 0xbab68 (868 bytes) */
-uint _gleInterpolClipNO0100(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
-  bool bVar1;
-  byte startFlagByte7c;
-  byte startFlagByte7e;
-  float fVar4;
-  float startWord12;
-  float windowBiasZ;
-  float fVar5;
-  float outInvW;
-  float fVar6;
-  float fVar7;
-  float endClipW;
-  float endClipX;
-  float endClipY;
-  float endClipZ;
-  float endClipW2;
-  float edgeT;
-  float fVar12;
-  float startWord1e;
-  float windowScaleZ;
-  uint uVar13;
-  
-  fVar4 = startVertex[4];
-  fVar12 = startVertex[5];
-  fVar5 = startVertex[6];
-  fVar6 = startVertex[7];
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW2 = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar6 + fVar5) / ((fVar6 + fVar5) - (endClipW2 + endClipZ));
-      fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar5 = -fVar6;
-      if (fVar6 < FLOAT_00108e50) {
-        uVar13 = 2;
-      }
-      else {
-        uVar13 = 0;
-      }
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar6 - fVar5) / ((fVar6 - fVar5) - (endClipW2 - endClipZ));
-      fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar5 = fVar6;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar12 = edgeT * (endClipY - fVar12) + fVar12;
-    if (!bVar1) goto LAB_000bad6c;
-    fVar7 = -fVar6;
-    if (fVar12 < fVar7) {
-      uVar13 = 4;
-    }
-    else {
-      if (!(fVar6 <= fVar12)) goto LAB_000baccc;
-      uVar13 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        edgeT = (fVar6 + fVar4) / ((fVar6 + fVar4) - (endClipW2 + endClipX));
-        fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-        fVar4 = -fVar6;
-        uVar13 = (uint)(fVar6 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar13 = 0;
-        edgeT = (fVar6 - fVar4) / ((fVar6 - fVar4) - (endClipW2 - endClipX));
-        fVar4 = edgeT * (endClipW2 - fVar6) + fVar6;
-        fVar6 = fVar4;
-      }
-      bVar1 = uVar13 == 0;
-      fVar12 = edgeT * (endClipY - fVar12) + fVar12;
-      fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
-      goto LAB_000bad6c;
-    }
-    if (clipPlane == 4) {
-      edgeT = (fVar6 + fVar12) / ((fVar6 + fVar12) - (endClipW2 + endClipY));
-      fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar12 = -fVar6;
-      uVar13 = (uint)(fVar6 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar6 - fVar12) / ((fVar6 - fVar12) - (endClipW2 - endClipY));
-      fVar12 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar6 = fVar12;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000bad6c;
-    fVar7 = -fVar6;
-LAB_000baccc:
-    if (fVar4 < fVar7) {
-      uVar13 = 0x10;
-    }
-    else {
-      if (!(fVar6 <= fVar4)) goto LAB_000bad6c;
-      uVar13 = 0x20;
-    }
-  }
-  bVar1 = uVar13 == 0;
-LAB_000bad6c:
-  startFlagByte7c = *(byte *)(startVertex + 0x1f);
-  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar12;
-  outVertex[6] = fVar5;
-  outVertex[7] = fVar6;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | uVar13 | 0x10000)));
-  if (bVar1) {
-    if (fVar6 != FLOAT_00108e54) {
-      fVar6 = FLOAT_00108e54 / fVar6;
-      fVar4 = fVar4 * fVar6;
-      fVar12 = fVar12 * fVar6;
-      fVar5 = fVar5 * fVar6;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar12 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar6;
-    outVertex[2] = windowScaleZ * fVar5 + windowBiasZ;
-  }
-  fVar4 = *(float *)(endVertex + 0x80);
-  fVar12 = *(float *)(endVertex + 0x84);
-  fVar5 = *(float *)(endVertex + 0x88);
-  fVar6 = *(float *)(endVertex + 0x8c);
-  if (*(char *)(endVertex + 0x7f) == '\0') {
-    endClipW = *(float *)(endVertex + 0x1c);
-    fVar6 = fVar6 * endClipW;
-    fVar4 = fVar4 * endClipW;
-    fVar12 = fVar12 * endClipW;
-    fVar5 = fVar5 * endClipW;
-  }
-  fVar7 = edgeT * (fVar4 - startVertex[0x20]) + startVertex[0x20];
-  fVar12 = edgeT * (fVar12 - startVertex[0x21]) + startVertex[0x21];
-  fVar6 = edgeT * (fVar6 - startVertex[0x23]) + startVertex[0x23];
-  fVar4 = edgeT * (fVar5 - startVertex[0x22]) + startVertex[0x22];
-  if (bVar1) {
-    outInvW = outVertex[3];
-    fVar6 = fVar6 * outInvW;
-    fVar7 = fVar7 * outInvW;
-    fVar12 = fVar12 * outInvW;
-    fVar4 = fVar4 * outInvW;
-  }
-  outVertex[0x20] = fVar7;
-  outVertex[0x21] = fVar12;
-  outVertex[0x22] = fVar4;
-  outVertex[0x23] = fVar6;
-  if (startVertex != outVertex) {
-    *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
-    *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
-    *(undefined8 *)(outVertex + 0xc) = *(undefined8 *)(startVertex + 0xc);
-    *(undefined8 *)(outVertex + 0xe) = *(undefined8 *)(startVertex + 0xe);
-    *(undefined8 *)(outVertex + 0x10) = *(undefined8 *)(startVertex + 0x10);
-    startWord12 = startVertex[0x12];
-    outVertex[0x1d] = startVertex[0x1d];
-    startWord1e = startVertex[0x1e];
-    outVertex[0x12] = startWord12;
-    outVertex[0x1e] = startWord1e;
-  }
-  return uVar13;
-}
-
-/* _gleInterpolClipNO0100w @ 0xbaecc (812 bytes) */
-uint _gleInterpolClipNO0100w(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
-  bool bVar1;
-  byte startFlagByte7c;
-  byte startFlagByte7e;
-  float fVar4;
-  float startWord12;
-  float startWord21;
-  float windowBiasZ;
-  float fVar5;
-  float startWord23;
-  float fVar6;
-  float endWord23;
-  float fVar7;
-  float endWord21;
-  float endClipX;
-  float endClipY;
-  float endWord22;
-  float endClipZ;
-  float endClipW;
-  float edgeT;
-  float fVar12;
-  float startWord1e;
-  float startWord22;
-  float windowScaleZ;
-  uint uVar13;
-  
-  fVar4 = startVertex[4];
-  fVar12 = startVertex[5];
-  fVar5 = startVertex[6];
-  fVar6 = startVertex[7];
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar6 + fVar5) / ((fVar6 + fVar5) - (endClipW + endClipZ));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar5 = -fVar6;
-      if (fVar6 < FLOAT_00108e50) {
-        uVar13 = 2;
-      }
-      else {
-        uVar13 = 0;
-      }
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar6 - fVar5) / ((fVar6 - fVar5) - (endClipW - endClipZ));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar5 = fVar6;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar12 = edgeT * (endClipY - fVar12) + fVar12;
-    if (!bVar1) goto LAB_000bb0d0;
-    fVar7 = -fVar6;
-    if (fVar12 < fVar7) {
-      uVar13 = 4;
-    }
-    else {
-      if (!(fVar6 <= fVar12)) goto LAB_000bb030;
-      uVar13 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        edgeT = (fVar6 + fVar4) / ((fVar6 + fVar4) - (endClipW + endClipX));
-        fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-        fVar4 = -fVar6;
-        uVar13 = (uint)(fVar6 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar13 = 0;
-        edgeT = (fVar6 - fVar4) / ((fVar6 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar6) + fVar6;
-        fVar6 = fVar4;
-      }
-      bVar1 = uVar13 == 0;
-      fVar12 = edgeT * (endClipY - fVar12) + fVar12;
-      fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
-      goto LAB_000bb0d0;
-    }
-    if (clipPlane == 4) {
-      edgeT = (fVar6 + fVar12) / ((fVar6 + fVar12) - (endClipW + endClipY));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar12 = -fVar6;
-      uVar13 = (uint)(fVar6 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar6 - fVar12) / ((fVar6 - fVar12) - (endClipW - endClipY));
-      fVar12 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar6 = fVar12;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000bb0d0;
-    fVar7 = -fVar6;
-LAB_000bb030:
-    if (fVar4 < fVar7) {
-      uVar13 = 0x10;
-    }
-    else {
-      if (!(fVar6 <= fVar4)) goto LAB_000bb0d0;
-      uVar13 = 0x20;
-    }
-  }
-  bVar1 = uVar13 == 0;
-LAB_000bb0d0:
-  startFlagByte7c = *(byte *)(startVertex + 0x1f);
-  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar12;
-  outVertex[6] = fVar5;
-  outVertex[7] = fVar6;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | uVar13 | 0x10000)));
-  if (bVar1) {
-    if (fVar6 != FLOAT_00108e54) {
-      fVar6 = FLOAT_00108e54 / fVar6;
-      fVar4 = fVar4 * fVar6;
-      fVar12 = fVar12 * fVar6;
-      fVar5 = fVar5 * fVar6;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar12 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar6;
-    outVertex[2] = windowScaleZ * fVar5 + windowBiasZ;
-  }
-  startWord21 = startVertex[0x21];
-  startWord22 = startVertex[0x22];
-  startWord23 = startVertex[0x23];
-  endWord23 = *(float *)(endVertex + 0x8c);
-  endWord21 = *(float *)(endVertex + 0x84);
-  endWord22 = *(float *)(endVertex + 0x88);
-  outVertex[0x20] = edgeT * (*(float *)(endVertex + 0x80) - startVertex[0x20]) + startVertex[0x20];
-  outVertex[0x23] = edgeT * (endWord23 - startWord23) + startWord23;
-  outVertex[0x21] = edgeT * (endWord21 - startWord21) + startWord21;
-  outVertex[0x22] = edgeT * (endWord22 - startWord22) + startWord22;
-  if (startVertex != outVertex) {
-    *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
-    *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
-    *(undefined8 *)(outVertex + 0xc) = *(undefined8 *)(startVertex + 0xc);
-    *(undefined8 *)(outVertex + 0xe) = *(undefined8 *)(startVertex + 0xe);
-    *(undefined8 *)(outVertex + 0x10) = *(undefined8 *)(startVertex + 0x10);
-    startWord12 = startVertex[0x12];
-    outVertex[0x1d] = startVertex[0x1d];
-    startWord1e = startVertex[0x1e];
-    outVertex[0x12] = startWord12;
-    outVertex[0x1e] = startWord1e;
-  }
-  return uVar13;
-}
-
-/* _gleInterpolClipNO0110 @ 0xbb1f8 (888 bytes) */
-uint _gleInterpolClipNO0110(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
-  bool bVar1;
-  byte startFlagByte7c;
-  byte startFlagByte7e;
-  char cVar4;
-  float fVar5;
-  float startWord12;
-  float windowBiasZ;
-  float fVar6;
-  float outInvW;
-  float fVar7;
-  float fVar8;
-  float endClipW;
-  float endClipX;
-  float endClipY;
-  float endClipZ;
-  float endClipW2;
-  float edgeT;
-  float fVar13;
-  float startWord1e;
-  float windowScaleZ;
-  uint uVar14;
-  
-  fVar5 = startVertex[4];
-  fVar13 = startVertex[5];
-  fVar6 = startVertex[6];
-  fVar7 = startVertex[7];
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW2 = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW2 + endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
-        uVar14 = 2;
-      }
-      else {
-        uVar14 = 0;
-      }
-    }
-    else {
-      uVar14 = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW2 - endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = fVar7;
-    }
-    bVar1 = uVar14 == 0;
-    fVar5 = edgeT * (endClipX - fVar5) + fVar5;
-    fVar13 = edgeT * (endClipY - fVar13) + fVar13;
-    if (!bVar1) goto LAB_000bb3fc;
-    fVar8 = -fVar7;
-    if (fVar13 < fVar8) {
-      uVar14 = 4;
-    }
-    else {
-      if (!(fVar7 <= fVar13)) goto LAB_000bb35c;
-      uVar14 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW2 + endClipX));
-        fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar5 = -fVar7;
-        uVar14 = (uint)(fVar7 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar14 = 0;
-        edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW2 - endClipX));
-        fVar5 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar7 = fVar5;
-      }
-      bVar1 = uVar14 == 0;
-      fVar13 = edgeT * (endClipY - fVar13) + fVar13;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-      goto LAB_000bb3fc;
-    }
-    if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar13) / ((fVar7 + fVar13) - (endClipW2 + endClipY));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar13 = -fVar7;
-      uVar14 = (uint)(fVar7 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar14 = 0;
-      edgeT = (fVar7 - fVar13) / ((fVar7 - fVar13) - (endClipW2 - endClipY));
-      fVar13 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar7 = fVar13;
-    }
-    bVar1 = uVar14 == 0;
-    fVar5 = edgeT * (endClipX - fVar5) + fVar5;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000bb3fc;
-    fVar8 = -fVar7;
-LAB_000bb35c:
-    if (fVar5 < fVar8) {
-      uVar14 = 0x10;
-    }
-    else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bb3fc;
-      uVar14 = 0x20;
-    }
-  }
-  bVar1 = uVar14 == 0;
-LAB_000bb3fc:
-  startFlagByte7c = *(byte *)(startVertex + 0x1f);
-  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar5;
-  outVertex[5] = fVar13;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | uVar14 | 0x10000)));
-  if (bVar1) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar13 = fVar13 * fVar7;
-      fVar6 = fVar6 * fVar7;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar5 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
-  }
-  cVar4 = *(char *)(endVertex + 0x7f);
-  outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
-  fVar5 = *(float *)(endVertex + 0x80);
-  fVar13 = *(float *)(endVertex + 0x84);
-  fVar6 = *(float *)(endVertex + 0x88);
-  fVar7 = *(float *)(endVertex + 0x8c);
-  if (cVar4 == '\0') {
-    endClipW = *(float *)(endVertex + 0x1c);
-    fVar7 = fVar7 * endClipW;
-    fVar5 = fVar5 * endClipW;
-    fVar13 = fVar13 * endClipW;
-    fVar6 = fVar6 * endClipW;
-  }
-  fVar8 = edgeT * (fVar5 - startVertex[0x20]) + startVertex[0x20];
-  fVar13 = edgeT * (fVar13 - startVertex[0x21]) + startVertex[0x21];
-  fVar7 = edgeT * (fVar7 - startVertex[0x23]) + startVertex[0x23];
-  fVar5 = edgeT * (fVar6 - startVertex[0x22]) + startVertex[0x22];
-  if (bVar1) {
-    outInvW = outVertex[3];
-    fVar7 = fVar7 * outInvW;
-    fVar8 = fVar8 * outInvW;
-    fVar13 = fVar13 * outInvW;
-    fVar5 = fVar5 * outInvW;
-  }
-  outVertex[0x20] = fVar8;
-  outVertex[0x21] = fVar13;
-  outVertex[0x22] = fVar5;
-  outVertex[0x23] = fVar7;
-  if (startVertex != outVertex) {
-    *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
-    *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
-    *(undefined8 *)(outVertex + 0xc) = *(undefined8 *)(startVertex + 0xc);
-    *(undefined8 *)(outVertex + 0xe) = *(undefined8 *)(startVertex + 0xe);
-    *(undefined8 *)(outVertex + 0x10) = *(undefined8 *)(startVertex + 0x10);
-    startWord12 = startVertex[0x12];
-    outVertex[0x1d] = startVertex[0x1d];
-    startWord1e = startVertex[0x1e];
-    outVertex[0x12] = startWord12;
-    outVertex[0x1e] = startWord1e;
-  }
-  return uVar14;
-}
-
-/* _gleInterpolClipNO0110w @ 0xbb570 (832 bytes) */
-uint _gleInterpolClipNO0110w(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
-  bool bVar1;
-  byte startFlagByte7c;
-  byte startFlagByte7e;
-  float fVar4;
-  float startWord12;
-  float startWord21;
-  float windowBiasZ;
-  float fVar5;
-  float startWord23;
-  float fVar6;
-  float endWord23;
-  float fVar7;
-  float endWord21;
-  float endClipX;
-  float endClipY;
-  float endWord22;
-  float endClipZ;
-  float endClipW;
-  float edgeT;
-  float fVar12;
-  float startWord1e;
-  float startWord22;
-  float windowScaleZ;
-  uint uVar13;
-  
-  fVar4 = startVertex[4];
-  fVar12 = startVertex[5];
-  fVar5 = startVertex[6];
-  fVar6 = startVertex[7];
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar6 + fVar5) / ((fVar6 + fVar5) - (endClipW + endClipZ));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar5 = -fVar6;
-      if (fVar6 < FLOAT_00108e50) {
-        uVar13 = 2;
-      }
-      else {
-        uVar13 = 0;
-      }
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar6 - fVar5) / ((fVar6 - fVar5) - (endClipW - endClipZ));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar5 = fVar6;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar12 = edgeT * (endClipY - fVar12) + fVar12;
-    if (!bVar1) goto LAB_000bb774;
-    fVar7 = -fVar6;
-    if (fVar12 < fVar7) {
-      uVar13 = 4;
-    }
-    else {
-      if (!(fVar6 <= fVar12)) goto LAB_000bb6d4;
-      uVar13 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        edgeT = (fVar6 + fVar4) / ((fVar6 + fVar4) - (endClipW + endClipX));
-        fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-        fVar4 = -fVar6;
-        uVar13 = (uint)(fVar6 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar13 = 0;
-        edgeT = (fVar6 - fVar4) / ((fVar6 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar6) + fVar6;
-        fVar6 = fVar4;
-      }
-      bVar1 = uVar13 == 0;
-      fVar12 = edgeT * (endClipY - fVar12) + fVar12;
-      fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
-      goto LAB_000bb774;
-    }
-    if (clipPlane == 4) {
-      edgeT = (fVar6 + fVar12) / ((fVar6 + fVar12) - (endClipW + endClipY));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar12 = -fVar6;
-      uVar13 = (uint)(fVar6 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar6 - fVar12) / ((fVar6 - fVar12) - (endClipW - endClipY));
-      fVar12 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar6 = fVar12;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000bb774;
-    fVar7 = -fVar6;
-LAB_000bb6d4:
-    if (fVar4 < fVar7) {
-      uVar13 = 0x10;
-    }
-    else {
-      if (!(fVar6 <= fVar4)) goto LAB_000bb774;
-      uVar13 = 0x20;
-    }
-  }
-  bVar1 = uVar13 == 0;
-LAB_000bb774:
-  startFlagByte7c = *(byte *)(startVertex + 0x1f);
-  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar12;
-  outVertex[6] = fVar5;
-  outVertex[7] = fVar6;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | uVar13 | 0x10000)));
-  if (bVar1) {
-    if (fVar6 != FLOAT_00108e54) {
-      fVar6 = FLOAT_00108e54 / fVar6;
-      fVar4 = fVar4 * fVar6;
-      fVar12 = fVar12 * fVar6;
-      fVar5 = fVar5 * fVar6;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar12 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar6;
-    outVertex[2] = windowScaleZ * fVar5 + windowBiasZ;
-  }
-  outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
-  startWord21 = startVertex[0x21];
-  startWord22 = startVertex[0x22];
-  startWord23 = startVertex[0x23];
-  endWord23 = *(float *)(endVertex + 0x8c);
-  endWord21 = *(float *)(endVertex + 0x84);
-  endWord22 = *(float *)(endVertex + 0x88);
-  outVertex[0x20] = edgeT * (*(float *)(endVertex + 0x80) - startVertex[0x20]) + startVertex[0x20];
-  outVertex[0x21] = edgeT * (endWord21 - startWord21) + startWord21;
-  outVertex[0x23] = edgeT * (endWord23 - startWord23) + startWord23;
-  outVertex[0x22] = edgeT * (endWord22 - startWord22) + startWord22;
-  if (startVertex != outVertex) {
-    *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
-    *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
-    *(undefined8 *)(outVertex + 0xc) = *(undefined8 *)(startVertex + 0xc);
-    *(undefined8 *)(outVertex + 0xe) = *(undefined8 *)(startVertex + 0xe);
-    *(undefined8 *)(outVertex + 0x10) = *(undefined8 *)(startVertex + 0x10);
-    startWord12 = startVertex[0x12];
-    outVertex[0x1d] = startVertex[0x1d];
-    startWord1e = startVertex[0x1e];
-    outVertex[0x12] = startWord12;
-    outVertex[0x1e] = startWord1e;
-  }
-  return uVar13;
-}
-
-/* _gleInterpolClipNO0200 @ 0xbb8b0 (924 bytes) */
-uint _gleInterpolClipNO0200(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
-  bool insideFrustum;
-  byte startFlagByte7c;
-  byte startFlagByte7e;
-  float fVar4;
-  float startWord12;
-  float windowScaleZ;
-  float fVar5;
-  float fVar6;
-  float outInvW;
-  float fVar7;
-  float endClipW;
-  float endClipX;
-  float endClipY;
-  float endClipZ;
-  float endClipW2;
-  float edgeT;
-  uint uVar12;
-  float fVar13;
-  float startWord1e;
-  float windowBiasZ;
-  uint texEnableMask;
-  uint clipOutcode;
-  int iVar16;
-  uint uVar17;
-  
-  fVar4 = startVertex[4];
-  fVar13 = startVertex[5];
-  fVar5 = startVertex[6];
-  fVar6 = startVertex[7];
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW2 = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar6 + fVar5) / ((fVar6 + fVar5) - (endClipW2 + endClipZ));
-      fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar5 = -fVar6;
-      if (fVar6 < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -1555,65 +599,1046 @@ uint _gleInterpolClipNO0200(int glContext,float *startVertex,int endVertex,float
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar6 - fVar5) / ((fVar6 - fVar5) - (endClipW2 - endClipZ));
-      fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar5 = fVar6;
+      fVar10 = (fVar7 - clipZThenNdcZ) / ((fVar7 - clipZThenNdcZ) - (fVar4 - fVar10));
+      fVar4 = fVar10 * (fVar4 - fVar7) + fVar7;
+      clipZThenNdcZ = fVar4;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar13 = edgeT * (endClipY - fVar13) + fVar13;
-    if (!insideFrustum) goto LAB_000bbab4;
-    fVar7 = -fVar6;
-    if (fVar13 < fVar7) {
+    fVar7 = fVar10 * (endClipX - fVar11) + fVar11;
+    clipYThenNdcY = fVar10 * (fVar9 - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000ba7a0;
+    fVar11 = -fVar4;
+    if (clipYThenNdcY < fVar11) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar6 <= fVar13)) goto LAB_000bba14;
+      if (!(fVar4 <= clipYThenNdcY)) goto LAB_000ba700;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar6 + fVar4) / ((fVar6 + fVar4) - (endClipW2 + endClipX));
-        fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-        fVar4 = -fVar6;
-        clipOutcode = (uint)(fVar6 <= FLOAT_00108e50) << 5;
+        fVar11 = (fVar7 + fVar11) / ((fVar7 + fVar11) - (fVar4 + endClipX));
+        fVar4 = fVar11 * (fVar4 - fVar7) + fVar7;
+        fVar7 = -fVar4;
+        clipOutcode = (uint)(fVar4 <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar6 - fVar4) / ((fVar6 - fVar4) - (endClipW2 - endClipX));
-        fVar4 = edgeT * (endClipW2 - fVar6) + fVar6;
-        fVar6 = fVar4;
+        fVar11 = (fVar7 - fVar11) / ((fVar7 - fVar11) - (fVar4 - endClipX));
+        fVar7 = fVar11 * (fVar4 - fVar7) + fVar7;
+        fVar4 = fVar7;
       }
       insideFrustum = clipOutcode == 0;
-      fVar13 = edgeT * (endClipY - fVar13) + fVar13;
-      fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
-      goto LAB_000bbab4;
+      clipYThenNdcY = fVar11 * (fVar9 - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = fVar11 * (fVar10 - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000ba7a0;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar6 + fVar13) / ((fVar6 + fVar13) - (endClipW2 + endClipY));
-      fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar13 = -fVar6;
-      clipOutcode = (uint)(fVar6 <= FLOAT_00108e50) << 3;
+      fVar9 = (fVar7 + clipYThenNdcY) / ((fVar7 + clipYThenNdcY) - (fVar4 + fVar9));
+      fVar4 = fVar9 * (fVar4 - fVar7) + fVar7;
+      clipYThenNdcY = -fVar4;
+      clipOutcode = (uint)(fVar4 <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar6 - fVar13) / ((fVar6 - fVar13) - (endClipW2 - endClipY));
-      fVar13 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar6 = fVar13;
+      fVar9 = (fVar7 - clipYThenNdcY) / ((fVar7 - clipYThenNdcY) - (fVar4 - fVar9));
+      clipYThenNdcY = fVar9 * (fVar4 - fVar7) + fVar7;
+      fVar4 = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
-    if (!insideFrustum) goto LAB_000bbab4;
-    fVar7 = -fVar6;
-LAB_000bba14:
-    if (fVar4 < fVar7) {
+    fVar7 = fVar9 * (endClipX - fVar11) + fVar11;
+    clipZThenNdcZ = fVar9 * (fVar10 - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000ba7a0;
+    fVar11 = -fVar4;
+LAB_000ba700:
+    if (fVar7 < fVar11) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar6 <= fVar4)) goto LAB_000bbab4;
+      if (!(fVar4 <= fVar7)) goto LAB_000ba7a0;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000ba7a0:
+  startFlagByte7c = *(byte *)(startVertex + 0x1f);
+  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
+  outVertex[4] = fVar7;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = fVar4;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (fVar4 != FLOAT_00108e54) {
+      fVar4 = FLOAT_00108e54 / fVar4;
+      fVar7 = fVar7 * fVar4;
+      clipYThenNdcY = clipYThenNdcY * fVar4;
+      clipZThenNdcZ = clipZThenNdcZ * fVar4;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * fVar7 + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = fVar4;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  if (startVertex != outVertex) {
+    *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
+    *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
+    *(undefined8 *)(outVertex + 0xc) = *(undefined8 *)(startVertex + 0xc);
+    *(undefined8 *)(outVertex + 0xe) = *(undefined8 *)(startVertex + 0xe);
+    *(undefined8 *)(outVertex + 0x10) = *(undefined8 *)(startVertex + 0x10);
+    startWord12 = startVertex[0x12];
+    outVertex[0x1d] = startVertex[0x1d];
+    startWord1e = startVertex[0x1e];
+    outVertex[0x12] = startWord12;
+    outVertex[0x1e] = startWord1e;
+  }
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO0010 @ 0xba878 (752 bytes) */
+uint _gleInterpolClipNO0010(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float startWord12;
+  float windowBiasZ;
+  float clipZThenNdcZ;
+  float clipWThenInvW;
+  float negClipW;
+  float endClipX;
+  float endClipY;
+  float endClipZ;
+  float endClipW;
+  float edgeT;
+  float clipYThenNdcY;
+  float startWord1e;
+  float windowScaleZ;
+  uint clipOutcode;
+  
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000baa7c;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000ba9dc;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000baa7c;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000baa7c;
+    negClipW = -clipWThenInvW;
+LAB_000ba9dc:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000baa7c;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000baa7c:
+  startFlagByte7c = *(byte *)(startVertex + 0x1f);
+  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
+  if (startVertex != outVertex) {
+    *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
+    *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
+    *(undefined8 *)(outVertex + 0xc) = *(undefined8 *)(startVertex + 0xc);
+    *(undefined8 *)(outVertex + 0xe) = *(undefined8 *)(startVertex + 0xe);
+    *(undefined8 *)(outVertex + 0x10) = *(undefined8 *)(startVertex + 0x10);
+    startWord12 = startVertex[0x12];
+    outVertex[0x1d] = startVertex[0x1d];
+    startWord1e = startVertex[0x1e];
+    outVertex[0x12] = startWord12;
+    outVertex[0x1e] = startWord1e;
+  }
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO0100 @ 0xbab68 (868 bytes) */
+uint _gleInterpolClipNO0100(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float outTexCoordR;
+  float endTexCoordS;
+  float startWord12;
+  float windowBiasZ;
+  float clipZThenNdcZ;
+  float endTexCoordR;
+  float outInvW;
+  float clipWThenInvW;
+  float endToOutTexCoordQ;
+  float negClipW;
+  float outTexCoordS;
+  float endClipW;
+  float endClipX;
+  float endClipY;
+  float endClipZ;
+  float endClipW2;
+  float edgeT;
+  float clipYThenNdcY;
+  float endToOutTexCoordT;
+  float startWord1e;
+  float windowScaleZ;
+  uint clipOutcode;
+  
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW2 = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bad6c;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000baccc;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000bad6c;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bad6c;
+    negClipW = -clipWThenInvW;
+LAB_000baccc:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bad6c;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000bad6c:
+  startFlagByte7c = *(byte *)(startVertex + 0x1f);
+  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  endTexCoordS = *(float *)(endVertex + 0x80);
+  endToOutTexCoordT = *(float *)(endVertex + 0x84);
+  endTexCoordR = *(float *)(endVertex + 0x88);
+  endToOutTexCoordQ = *(float *)(endVertex + 0x8c);
+  if (*(char *)(endVertex + 0x7f) == '\0') {
+    endClipW = *(float *)(endVertex + 0x1c);
+    endToOutTexCoordQ = endToOutTexCoordQ * endClipW;
+    endTexCoordS = endTexCoordS * endClipW;
+    endToOutTexCoordT = endToOutTexCoordT * endClipW;
+    endTexCoordR = endTexCoordR * endClipW;
+  }
+  outTexCoordS = edgeT * (endTexCoordS - startVertex[0x20]) + startVertex[0x20];
+  endToOutTexCoordT = edgeT * (endToOutTexCoordT - startVertex[0x21]) + startVertex[0x21];
+  endToOutTexCoordQ = edgeT * (endToOutTexCoordQ - startVertex[0x23]) + startVertex[0x23];
+  outTexCoordR = edgeT * (endTexCoordR - startVertex[0x22]) + startVertex[0x22];
+  if (insideFrustum) {
+    outInvW = outVertex[3];
+    endToOutTexCoordQ = endToOutTexCoordQ * outInvW;
+    outTexCoordS = outTexCoordS * outInvW;
+    endToOutTexCoordT = endToOutTexCoordT * outInvW;
+    outTexCoordR = outTexCoordR * outInvW;
+  }
+  outVertex[0x20] = outTexCoordS;
+  outVertex[0x21] = endToOutTexCoordT;
+  outVertex[0x22] = outTexCoordR;
+  outVertex[0x23] = endToOutTexCoordQ;
+  if (startVertex != outVertex) {
+    *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
+    *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
+    *(undefined8 *)(outVertex + 0xc) = *(undefined8 *)(startVertex + 0xc);
+    *(undefined8 *)(outVertex + 0xe) = *(undefined8 *)(startVertex + 0xe);
+    *(undefined8 *)(outVertex + 0x10) = *(undefined8 *)(startVertex + 0x10);
+    startWord12 = startVertex[0x12];
+    outVertex[0x1d] = startVertex[0x1d];
+    startWord1e = startVertex[0x1e];
+    outVertex[0x12] = startWord12;
+    outVertex[0x1e] = startWord1e;
+  }
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO0100w @ 0xbaecc (812 bytes) */
+uint _gleInterpolClipNO0100w(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float startWord12;
+  float startWord21;
+  float windowBiasZ;
+  float clipZThenNdcZ;
+  float startWord23;
+  float clipWThenInvW;
+  float endWord23;
+  float negClipW;
+  float endWord21;
+  float endClipX;
+  float endClipY;
+  float endWord22;
+  float endClipZ;
+  float endClipW;
+  float edgeT;
+  float clipYThenNdcY;
+  float startWord1e;
+  float startWord22;
+  float windowScaleZ;
+  uint clipOutcode;
+  
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bb0d0;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bb030;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000bb0d0;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bb0d0;
+    negClipW = -clipWThenInvW;
+LAB_000bb030:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bb0d0;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000bb0d0:
+  startFlagByte7c = *(byte *)(startVertex + 0x1f);
+  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  startWord21 = startVertex[0x21];
+  startWord22 = startVertex[0x22];
+  startWord23 = startVertex[0x23];
+  endWord23 = *(float *)(endVertex + 0x8c);
+  endWord21 = *(float *)(endVertex + 0x84);
+  endWord22 = *(float *)(endVertex + 0x88);
+  outVertex[0x20] = edgeT * (*(float *)(endVertex + 0x80) - startVertex[0x20]) + startVertex[0x20];
+  outVertex[0x23] = edgeT * (endWord23 - startWord23) + startWord23;
+  outVertex[0x21] = edgeT * (endWord21 - startWord21) + startWord21;
+  outVertex[0x22] = edgeT * (endWord22 - startWord22) + startWord22;
+  if (startVertex != outVertex) {
+    *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
+    *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
+    *(undefined8 *)(outVertex + 0xc) = *(undefined8 *)(startVertex + 0xc);
+    *(undefined8 *)(outVertex + 0xe) = *(undefined8 *)(startVertex + 0xe);
+    *(undefined8 *)(outVertex + 0x10) = *(undefined8 *)(startVertex + 0x10);
+    startWord12 = startVertex[0x12];
+    outVertex[0x1d] = startVertex[0x1d];
+    startWord1e = startVertex[0x1e];
+    outVertex[0x12] = startWord12;
+    outVertex[0x1e] = startWord1e;
+  }
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO0110 @ 0xbb1f8 (888 bytes) */
+uint _gleInterpolClipNO0110(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  char endFlagByte7f;
+  float clipXThenNdcX;
+  float outTexCoordR;
+  float endTexCoordS;
+  float startWord12;
+  float windowBiasZ;
+  float clipZThenNdcZ;
+  float endTexCoordR;
+  float outInvW;
+  float clipWThenInvW;
+  float endToOutTexCoordQ;
+  float negClipW;
+  float outTexCoordS;
+  float endClipW;
+  float endClipX;
+  float endClipY;
+  float endClipZ;
+  float endClipW2;
+  float edgeT;
+  float clipYThenNdcY;
+  float endToOutTexCoordT;
+  float startWord1e;
+  float windowScaleZ;
+  uint clipOutcode;
+  
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW2 = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bb3fc;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bb35c;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000bb3fc;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bb3fc;
+    negClipW = -clipWThenInvW;
+LAB_000bb35c:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bb3fc;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000bb3fc:
+  startFlagByte7c = *(byte *)(startVertex + 0x1f);
+  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  endFlagByte7f = *(char *)(endVertex + 0x7f);
+  outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
+  endTexCoordS = *(float *)(endVertex + 0x80);
+  endToOutTexCoordT = *(float *)(endVertex + 0x84);
+  endTexCoordR = *(float *)(endVertex + 0x88);
+  endToOutTexCoordQ = *(float *)(endVertex + 0x8c);
+  if (endFlagByte7f == '\0') {
+    endClipW = *(float *)(endVertex + 0x1c);
+    endToOutTexCoordQ = endToOutTexCoordQ * endClipW;
+    endTexCoordS = endTexCoordS * endClipW;
+    endToOutTexCoordT = endToOutTexCoordT * endClipW;
+    endTexCoordR = endTexCoordR * endClipW;
+  }
+  outTexCoordS = edgeT * (endTexCoordS - startVertex[0x20]) + startVertex[0x20];
+  endToOutTexCoordT = edgeT * (endToOutTexCoordT - startVertex[0x21]) + startVertex[0x21];
+  endToOutTexCoordQ = edgeT * (endToOutTexCoordQ - startVertex[0x23]) + startVertex[0x23];
+  outTexCoordR = edgeT * (endTexCoordR - startVertex[0x22]) + startVertex[0x22];
+  if (insideFrustum) {
+    outInvW = outVertex[3];
+    endToOutTexCoordQ = endToOutTexCoordQ * outInvW;
+    outTexCoordS = outTexCoordS * outInvW;
+    endToOutTexCoordT = endToOutTexCoordT * outInvW;
+    outTexCoordR = outTexCoordR * outInvW;
+  }
+  outVertex[0x20] = outTexCoordS;
+  outVertex[0x21] = endToOutTexCoordT;
+  outVertex[0x22] = outTexCoordR;
+  outVertex[0x23] = endToOutTexCoordQ;
+  if (startVertex != outVertex) {
+    *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
+    *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
+    *(undefined8 *)(outVertex + 0xc) = *(undefined8 *)(startVertex + 0xc);
+    *(undefined8 *)(outVertex + 0xe) = *(undefined8 *)(startVertex + 0xe);
+    *(undefined8 *)(outVertex + 0x10) = *(undefined8 *)(startVertex + 0x10);
+    startWord12 = startVertex[0x12];
+    outVertex[0x1d] = startVertex[0x1d];
+    startWord1e = startVertex[0x1e];
+    outVertex[0x12] = startWord12;
+    outVertex[0x1e] = startWord1e;
+  }
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO0110w @ 0xbb570 (832 bytes) */
+uint _gleInterpolClipNO0110w(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float startWord12;
+  float startWord21;
+  float windowBiasZ;
+  float clipZThenNdcZ;
+  float startWord23;
+  float clipWThenInvW;
+  float endWord23;
+  float negClipW;
+  float endWord21;
+  float endClipX;
+  float endClipY;
+  float endWord22;
+  float endClipZ;
+  float endClipW;
+  float edgeT;
+  float clipYThenNdcY;
+  float startWord1e;
+  float startWord22;
+  float windowScaleZ;
+  uint clipOutcode;
+  
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bb774;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bb6d4;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000bb774;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bb774;
+    negClipW = -clipWThenInvW;
+LAB_000bb6d4:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bb774;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000bb774:
+  startFlagByte7c = *(byte *)(startVertex + 0x1f);
+  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
+  startWord21 = startVertex[0x21];
+  startWord22 = startVertex[0x22];
+  startWord23 = startVertex[0x23];
+  endWord23 = *(float *)(endVertex + 0x8c);
+  endWord21 = *(float *)(endVertex + 0x84);
+  endWord22 = *(float *)(endVertex + 0x88);
+  outVertex[0x20] = edgeT * (*(float *)(endVertex + 0x80) - startVertex[0x20]) + startVertex[0x20];
+  outVertex[0x21] = edgeT * (endWord21 - startWord21) + startWord21;
+  outVertex[0x23] = edgeT * (endWord23 - startWord23) + startWord23;
+  outVertex[0x22] = edgeT * (endWord22 - startWord22) + startWord22;
+  if (startVertex != outVertex) {
+    *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
+    *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
+    *(undefined8 *)(outVertex + 0xc) = *(undefined8 *)(startVertex + 0xc);
+    *(undefined8 *)(outVertex + 0xe) = *(undefined8 *)(startVertex + 0xe);
+    *(undefined8 *)(outVertex + 0x10) = *(undefined8 *)(startVertex + 0x10);
+    startWord12 = startVertex[0x12];
+    outVertex[0x1d] = startVertex[0x1d];
+    startWord1e = startVertex[0x1e];
+    outVertex[0x12] = startWord12;
+    outVertex[0x1e] = startWord1e;
+  }
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO0200 @ 0xbb8b0 (924 bytes) */
+uint _gleInterpolClipNO0200(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float endToOutTexCoordQ;
+  float startWord12;
+  float windowScaleZ;
+  float clipZThenNdcZ;
+  float endToOutTexCoordT;
+  float clipWThenInvW;
+  float endTexCoordR;
+  float outInvW;
+  float negClipW;
+  float outTexCoordS;
+  float endClipW;
+  float endClipX;
+  float endClipY;
+  float endClipZ;
+  float endClipW2;
+  float edgeT;
+  uint texMaskRemaining;
+  float clipYThenNdcY;
+  float outTexCoordR;
+  float endTexCoordS;
+  float startWord1e;
+  float windowBiasZ;
+  uint texEnableMask;
+  uint clipOutcode;
+  int endVertexAtUnit;
+  uint texUnit;
+  
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW2 = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bbab4;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bba14;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000bbab4;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bbab4;
+    negClipW = -clipWThenInvW;
+LAB_000bba14:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bbab4;
       clipOutcode = 0x20;
     }
   }
@@ -1621,31 +1646,31 @@ LAB_000bba14:
 LAB_000bbab4:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar13;
-  outVertex[6] = fVar5;
-  outVertex[7] = fVar6;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
   outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar6 != FLOAT_00108e54) {
-      fVar6 = FLOAT_00108e54 / fVar6;
-      fVar4 = fVar4 * fVar6;
-      fVar13 = fVar13 * fVar6;
-      fVar5 = fVar5 * fVar6;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar6;
-    outVertex[2] = windowScaleZ * fVar5 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
   texEnableMask = *(uint *)(glContext + 0x5150);
-  uVar17 = 0;
+  texUnit = 0;
   do {
-    uVar12 = texEnableMask >> (uVar17 & 0x3f);
-    if ((uVar12 & 1) == 0) {
-      if (uVar12 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         if (startVertex != outVertex) {
           *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
           *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
@@ -1662,35 +1687,35 @@ LAB_000bbab4:
       }
     }
     else {
-      iVar16 = uVar17 * 0x10 + endVertex;
-      fVar4 = *(float *)(iVar16 + 0x8c);
-      fVar13 = *(float *)(iVar16 + 0x80);
-      fVar5 = *(float *)(iVar16 + 0x84);
-      fVar6 = *(float *)(iVar16 + 0x88);
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      endToOutTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordS = *(float *)(endVertexAtUnit + 0x80);
+      endToOutTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
       if (*(char *)(endVertex + 0x7f) == '\0') {
         endClipW = *(float *)(endVertex + 0x1c);
-        fVar4 = fVar4 * endClipW;
-        fVar13 = fVar13 * endClipW;
-        fVar5 = fVar5 * endClipW;
-        fVar6 = fVar6 * endClipW;
+        endToOutTexCoordQ = endToOutTexCoordQ * endClipW;
+        endTexCoordS = endTexCoordS * endClipW;
+        endToOutTexCoordT = endToOutTexCoordT * endClipW;
+        endTexCoordR = endTexCoordR * endClipW;
       }
-      fVar7 = edgeT * (fVar13 - startVertex[uVar17 * 4 + 0x20]) + startVertex[uVar17 * 4 + 0x20];
-      fVar5 = edgeT * (fVar5 - startVertex[uVar17 * 4 + 0x21]) + startVertex[uVar17 * 4 + 0x21];
-      fVar13 = edgeT * (fVar6 - startVertex[uVar17 * 4 + 0x22]) + startVertex[uVar17 * 4 + 0x22];
-      fVar4 = edgeT * (fVar4 - startVertex[uVar17 * 4 + 0x23]) + startVertex[uVar17 * 4 + 0x23];
+      outTexCoordS = edgeT * (endTexCoordS - startVertex[texUnit * 4 + 0x20]) + startVertex[texUnit * 4 + 0x20];
+      endToOutTexCoordT = edgeT * (endToOutTexCoordT - startVertex[texUnit * 4 + 0x21]) + startVertex[texUnit * 4 + 0x21];
+      outTexCoordR = edgeT * (endTexCoordR - startVertex[texUnit * 4 + 0x22]) + startVertex[texUnit * 4 + 0x22];
+      endToOutTexCoordQ = edgeT * (endToOutTexCoordQ - startVertex[texUnit * 4 + 0x23]) + startVertex[texUnit * 4 + 0x23];
       if (insideFrustum) {
         outInvW = outVertex[3];
-        fVar4 = fVar4 * outInvW;
-        fVar7 = fVar7 * outInvW;
-        fVar5 = fVar5 * outInvW;
-        fVar13 = fVar13 * outInvW;
+        endToOutTexCoordQ = endToOutTexCoordQ * outInvW;
+        outTexCoordS = outTexCoordS * outInvW;
+        endToOutTexCoordT = endToOutTexCoordT * outInvW;
+        outTexCoordR = outTexCoordR * outInvW;
       }
-      outVertex[uVar17 * 4 + 0x23] = fVar4;
-      outVertex[uVar17 * 4 + 0x20] = fVar7;
-      outVertex[uVar17 * 4 + 0x21] = fVar5;
-      outVertex[uVar17 * 4 + 0x22] = fVar13;
+      outVertex[texUnit * 4 + 0x23] = endToOutTexCoordQ;
+      outVertex[texUnit * 4 + 0x20] = outTexCoordS;
+      outVertex[texUnit * 4 + 0x21] = endToOutTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = outTexCoordR;
     }
-    uVar17 = uVar17 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -1700,44 +1725,46 @@ uint _gleInterpolClipNO0200w(int glContext,float *startVertex,int endVertex,floa
   bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
-  float fVar4;
+  float clipXThenNdcX;
   float startTexCoordQ;
   float startWord12;
   float windowScaleZ;
-  float fVar5;
+  float clipZThenNdcZ;
   float startTexCoordR;
-  float fVar6;
-  float fVar7;
+  float clipWThenInvW;
+  float endTexCoordQ;
+  float negClipW;
+  float endTexCoordT;
   float endClipX;
-  float fVar8;
+  float endTexCoordR;
   float endClipY;
   float endClipZ;
   float endClipW;
   float edgeT;
-  uint uVar12;
-  float fVar13;
+  uint texMaskRemaining;
+  float clipYThenNdcY;
   float startTexCoordT;
   float startWord1e;
   float windowBiasZ;
   uint texEnableMask;
   uint clipOutcode;
-  uint uVar16;
-  int iVar17;
+  uint texUnit;
+  int endVertexAtUnit;
   
-  fVar4 = startVertex[4];
-  fVar13 = startVertex[5];
-  fVar5 = startVertex[6];
-  fVar6 = startVertex[7];
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar6 + fVar5) / ((fVar6 + fVar5) - (endClipW + endClipZ));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar5 = -fVar6;
-      if (fVar6 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -1746,65 +1773,65 @@ uint _gleInterpolClipNO0200w(int glContext,float *startVertex,int endVertex,floa
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar6 - fVar5) / ((fVar6 - fVar5) - (endClipW - endClipZ));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar5 = fVar6;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar13 = edgeT * (endClipY - fVar13) + fVar13;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000bbe50;
-    fVar7 = -fVar6;
-    if (fVar13 < fVar7) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar6 <= fVar13)) goto LAB_000bbdb0;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bbdb0;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar6 + fVar4) / ((fVar6 + fVar4) - (endClipW + endClipX));
-        fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-        fVar4 = -fVar6;
-        clipOutcode = (uint)(fVar6 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar6 - fVar4) / ((fVar6 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar6) + fVar6;
-        fVar6 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar13 = edgeT * (endClipY - fVar13) + fVar13;
-      fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000bbe50;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar6 + fVar13) / ((fVar6 + fVar13) - (endClipW + endClipY));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar13 = -fVar6;
-      clipOutcode = (uint)(fVar6 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar6 - fVar13) / ((fVar6 - fVar13) - (endClipW - endClipY));
-      fVar13 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar6 = fVar13;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000bbe50;
-    fVar7 = -fVar6;
+    negClipW = -clipWThenInvW;
 LAB_000bbdb0:
-    if (fVar4 < fVar7) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar6 <= fVar4)) goto LAB_000bbe50;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bbe50;
       clipOutcode = 0x20;
     }
   }
@@ -1812,31 +1839,31 @@ LAB_000bbdb0:
 LAB_000bbe50:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar13;
-  outVertex[6] = fVar5;
-  outVertex[7] = fVar6;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
   outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar6 != FLOAT_00108e54) {
-      fVar6 = FLOAT_00108e54 / fVar6;
-      fVar4 = fVar4 * fVar6;
-      fVar13 = fVar13 * fVar6;
-      fVar5 = fVar5 * fVar6;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar6;
-    outVertex[2] = windowScaleZ * fVar5 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
   texEnableMask = *(uint *)(glContext + 0x5150);
-  uVar16 = 0;
+  texUnit = 0;
   do {
-    uVar12 = texEnableMask >> (uVar16 & 0x3f);
-    if ((uVar12 & 1) == 0) {
-      if (uVar12 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         if (startVertex != outVertex) {
           *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
           *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
@@ -1853,21 +1880,21 @@ LAB_000bbe50:
       }
     }
     else {
-      iVar17 = uVar16 * 0x10 + endVertex;
-      startTexCoordQ = startVertex[uVar16 * 4 + 0x23];
-      startTexCoordT = startVertex[uVar16 * 4 + 0x21];
-      startTexCoordR = startVertex[uVar16 * 4 + 0x22];
-      fVar6 = *(float *)(iVar17 + 0x8c);
-      fVar7 = *(float *)(iVar17 + 0x84);
-      fVar8 = *(float *)(iVar17 + 0x88);
-      outVertex[uVar16 * 4 + 0x20] =
-           edgeT * (*(float *)(iVar17 + 0x80) - startVertex[uVar16 * 4 + 0x20]) +
-           startVertex[uVar16 * 4 + 0x20];
-      outVertex[uVar16 * 4 + 0x21] = edgeT * (fVar7 - startTexCoordT) + startTexCoordT;
-      outVertex[uVar16 * 4 + 0x22] = edgeT * (fVar8 - startTexCoordR) + startTexCoordR;
-      outVertex[uVar16 * 4 + 0x23] = edgeT * (fVar6 - startTexCoordQ) + startTexCoordQ;
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      startTexCoordQ = startVertex[texUnit * 4 + 0x23];
+      startTexCoordT = startVertex[texUnit * 4 + 0x21];
+      startTexCoordR = startVertex[texUnit * 4 + 0x22];
+      endTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
+      outVertex[texUnit * 4 + 0x20] =
+           edgeT * (*(float *)(endVertexAtUnit + 0x80) - startVertex[texUnit * 4 + 0x20]) +
+           startVertex[texUnit * 4 + 0x20];
+      outVertex[texUnit * 4 + 0x21] = edgeT * (endTexCoordT - startTexCoordT) + startTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = edgeT * (endTexCoordR - startTexCoordR) + startTexCoordR;
+      outVertex[texUnit * 4 + 0x23] = edgeT * (endTexCoordQ - startTexCoordQ) + startTexCoordQ;
     }
-    uVar16 = uVar16 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -1877,42 +1904,48 @@ uint _gleInterpolClipNO0210(int glContext,float *startVertex,int endVertex,float
   bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
-  float fVar4;
+  float clipXThenNdcX;
+  float endToOutTexCoordQ;
   float startWord12;
   float windowScaleZ;
-  float fVar5;
-  float fVar6;
+  float clipZThenNdcZ;
+  float endToOutTexCoordT;
+  float clipWThenInvW;
+  float endTexCoordR;
   float outInvW;
-  float fVar7;
+  float negClipW;
+  float outTexCoordS;
   float endClipW;
   float endClipX;
   float endClipY;
   float endClipZ;
   float endClipW2;
   float edgeT;
-  uint uVar12;
-  float fVar13;
+  uint texMaskRemaining;
+  float clipYThenNdcY;
+  float outTexCoordR;
+  float endTexCoordS;
   float startWord1e;
   float windowBiasZ;
   uint texEnableMask;
   uint clipOutcode;
-  int iVar16;
-  uint uVar17;
+  int endVertexAtUnit;
+  uint texUnit;
   
-  fVar4 = startVertex[4];
-  fVar13 = startVertex[5];
-  fVar5 = startVertex[6];
-  fVar6 = startVertex[7];
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW2 = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar6 + fVar5) / ((fVar6 + fVar5) - (endClipW2 + endClipZ));
-      fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar5 = -fVar6;
-      if (fVar6 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -1921,65 +1954,65 @@ uint _gleInterpolClipNO0210(int glContext,float *startVertex,int endVertex,float
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar6 - fVar5) / ((fVar6 - fVar5) - (endClipW2 - endClipZ));
-      fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar5 = fVar6;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar13 = edgeT * (endClipY - fVar13) + fVar13;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000bc1b4;
-    fVar7 = -fVar6;
-    if (fVar13 < fVar7) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar6 <= fVar13)) goto LAB_000bc114;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bc114;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar6 + fVar4) / ((fVar6 + fVar4) - (endClipW2 + endClipX));
-        fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-        fVar4 = -fVar6;
-        clipOutcode = (uint)(fVar6 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar6 - fVar4) / ((fVar6 - fVar4) - (endClipW2 - endClipX));
-        fVar4 = edgeT * (endClipW2 - fVar6) + fVar6;
-        fVar6 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar13 = edgeT * (endClipY - fVar13) + fVar13;
-      fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000bc1b4;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar6 + fVar13) / ((fVar6 + fVar13) - (endClipW2 + endClipY));
-      fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar13 = -fVar6;
-      clipOutcode = (uint)(fVar6 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar6 - fVar13) / ((fVar6 - fVar13) - (endClipW2 - endClipY));
-      fVar13 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar6 = fVar13;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000bc1b4;
-    fVar7 = -fVar6;
+    negClipW = -clipWThenInvW;
 LAB_000bc114:
-    if (fVar4 < fVar7) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar6 <= fVar4)) goto LAB_000bc1b4;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bc1b4;
       clipOutcode = 0x20;
     }
   }
@@ -1987,32 +2020,32 @@ LAB_000bc114:
 LAB_000bc1b4:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar13;
-  outVertex[6] = fVar5;
-  outVertex[7] = fVar6;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
   outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar6 != FLOAT_00108e54) {
-      fVar6 = FLOAT_00108e54 / fVar6;
-      fVar4 = fVar4 * fVar6;
-      fVar13 = fVar13 * fVar6;
-      fVar5 = fVar5 * fVar6;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar6;
-    outVertex[2] = windowScaleZ * fVar5 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar17 = 0;
+  texUnit = 0;
   outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar12 = texEnableMask >> (uVar17 & 0x3f);
-    if ((uVar12 & 1) == 0) {
-      if (uVar12 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         if (startVertex != outVertex) {
           *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
           *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
@@ -2029,35 +2062,35 @@ LAB_000bc1b4:
       }
     }
     else {
-      iVar16 = uVar17 * 0x10 + endVertex;
-      fVar4 = *(float *)(iVar16 + 0x8c);
-      fVar13 = *(float *)(iVar16 + 0x80);
-      fVar5 = *(float *)(iVar16 + 0x84);
-      fVar6 = *(float *)(iVar16 + 0x88);
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      endToOutTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordS = *(float *)(endVertexAtUnit + 0x80);
+      endToOutTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
       if (*(char *)(endVertex + 0x7f) == '\0') {
         endClipW = *(float *)(endVertex + 0x1c);
-        fVar4 = fVar4 * endClipW;
-        fVar13 = fVar13 * endClipW;
-        fVar5 = fVar5 * endClipW;
-        fVar6 = fVar6 * endClipW;
+        endToOutTexCoordQ = endToOutTexCoordQ * endClipW;
+        endTexCoordS = endTexCoordS * endClipW;
+        endToOutTexCoordT = endToOutTexCoordT * endClipW;
+        endTexCoordR = endTexCoordR * endClipW;
       }
-      fVar7 = edgeT * (fVar13 - startVertex[uVar17 * 4 + 0x20]) + startVertex[uVar17 * 4 + 0x20];
-      fVar5 = edgeT * (fVar5 - startVertex[uVar17 * 4 + 0x21]) + startVertex[uVar17 * 4 + 0x21];
-      fVar13 = edgeT * (fVar6 - startVertex[uVar17 * 4 + 0x22]) + startVertex[uVar17 * 4 + 0x22];
-      fVar4 = edgeT * (fVar4 - startVertex[uVar17 * 4 + 0x23]) + startVertex[uVar17 * 4 + 0x23];
+      outTexCoordS = edgeT * (endTexCoordS - startVertex[texUnit * 4 + 0x20]) + startVertex[texUnit * 4 + 0x20];
+      endToOutTexCoordT = edgeT * (endToOutTexCoordT - startVertex[texUnit * 4 + 0x21]) + startVertex[texUnit * 4 + 0x21];
+      outTexCoordR = edgeT * (endTexCoordR - startVertex[texUnit * 4 + 0x22]) + startVertex[texUnit * 4 + 0x22];
+      endToOutTexCoordQ = edgeT * (endToOutTexCoordQ - startVertex[texUnit * 4 + 0x23]) + startVertex[texUnit * 4 + 0x23];
       if (insideFrustum) {
         outInvW = outVertex[3];
-        fVar4 = fVar4 * outInvW;
-        fVar7 = fVar7 * outInvW;
-        fVar5 = fVar5 * outInvW;
-        fVar13 = fVar13 * outInvW;
+        endToOutTexCoordQ = endToOutTexCoordQ * outInvW;
+        outTexCoordS = outTexCoordS * outInvW;
+        endToOutTexCoordT = endToOutTexCoordT * outInvW;
+        outTexCoordR = outTexCoordR * outInvW;
       }
-      outVertex[uVar17 * 4 + 0x23] = fVar4;
-      outVertex[uVar17 * 4 + 0x20] = fVar7;
-      outVertex[uVar17 * 4 + 0x21] = fVar5;
-      outVertex[uVar17 * 4 + 0x22] = fVar13;
+      outVertex[texUnit * 4 + 0x23] = endToOutTexCoordQ;
+      outVertex[texUnit * 4 + 0x20] = outTexCoordS;
+      outVertex[texUnit * 4 + 0x21] = endToOutTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = outTexCoordR;
     }
-    uVar17 = uVar17 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -2067,44 +2100,46 @@ uint _gleInterpolClipNO0210w(int glContext,float *startVertex,int endVertex,floa
   bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
-  float fVar4;
+  float clipXThenNdcX;
   float startTexCoordQ;
   float startWord12;
   float windowScaleZ;
-  float fVar5;
+  float clipZThenNdcZ;
   float startTexCoordR;
-  float fVar6;
-  float fVar7;
+  float clipWThenInvW;
+  float endTexCoordQ;
+  float negClipW;
+  float endTexCoordT;
   float endClipX;
-  float fVar8;
+  float endTexCoordR;
   float endClipY;
   float endClipZ;
   float endClipW;
   float edgeT;
-  uint uVar12;
-  float fVar13;
+  uint texMaskRemaining;
+  float clipYThenNdcY;
   float startTexCoordT;
   float startWord1e;
   float windowBiasZ;
   uint texEnableMask;
   uint clipOutcode;
-  uint uVar16;
-  int iVar17;
+  uint texUnit;
+  int endVertexAtUnit;
   
-  fVar4 = startVertex[4];
-  fVar13 = startVertex[5];
-  fVar5 = startVertex[6];
-  fVar6 = startVertex[7];
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar6 + fVar5) / ((fVar6 + fVar5) - (endClipW + endClipZ));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar5 = -fVar6;
-      if (fVar6 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -2113,65 +2148,65 @@ uint _gleInterpolClipNO0210w(int glContext,float *startVertex,int endVertex,floa
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar6 - fVar5) / ((fVar6 - fVar5) - (endClipW - endClipZ));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar5 = fVar6;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar13 = edgeT * (endClipY - fVar13) + fVar13;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000bc564;
-    fVar7 = -fVar6;
-    if (fVar13 < fVar7) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar6 <= fVar13)) goto LAB_000bc4c4;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bc4c4;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar6 + fVar4) / ((fVar6 + fVar4) - (endClipW + endClipX));
-        fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-        fVar4 = -fVar6;
-        clipOutcode = (uint)(fVar6 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar6 - fVar4) / ((fVar6 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar6) + fVar6;
-        fVar6 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar13 = edgeT * (endClipY - fVar13) + fVar13;
-      fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000bc564;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar6 + fVar13) / ((fVar6 + fVar13) - (endClipW + endClipY));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar13 = -fVar6;
-      clipOutcode = (uint)(fVar6 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar6 - fVar13) / ((fVar6 - fVar13) - (endClipW - endClipY));
-      fVar13 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar6 = fVar13;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000bc564;
-    fVar7 = -fVar6;
+    negClipW = -clipWThenInvW;
 LAB_000bc4c4:
-    if (fVar4 < fVar7) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar6 <= fVar4)) goto LAB_000bc564;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bc564;
       clipOutcode = 0x20;
     }
   }
@@ -2179,32 +2214,32 @@ LAB_000bc4c4:
 LAB_000bc564:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar13;
-  outVertex[6] = fVar5;
-  outVertex[7] = fVar6;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
   outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar6 != FLOAT_00108e54) {
-      fVar6 = FLOAT_00108e54 / fVar6;
-      fVar4 = fVar4 * fVar6;
-      fVar13 = fVar13 * fVar6;
-      fVar5 = fVar5 * fVar6;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar6;
-    outVertex[2] = windowScaleZ * fVar5 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar16 = 0;
+  texUnit = 0;
   outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar12 = texEnableMask >> (uVar16 & 0x3f);
-    if ((uVar12 & 1) == 0) {
-      if (uVar12 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         if (startVertex != outVertex) {
           *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
           *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
@@ -2221,41 +2256,41 @@ LAB_000bc564:
       }
     }
     else {
-      iVar17 = uVar16 * 0x10 + endVertex;
-      startTexCoordQ = startVertex[uVar16 * 4 + 0x23];
-      startTexCoordT = startVertex[uVar16 * 4 + 0x21];
-      startTexCoordR = startVertex[uVar16 * 4 + 0x22];
-      fVar6 = *(float *)(iVar17 + 0x8c);
-      fVar7 = *(float *)(iVar17 + 0x84);
-      fVar8 = *(float *)(iVar17 + 0x88);
-      outVertex[uVar16 * 4 + 0x20] =
-           edgeT * (*(float *)(iVar17 + 0x80) - startVertex[uVar16 * 4 + 0x20]) +
-           startVertex[uVar16 * 4 + 0x20];
-      outVertex[uVar16 * 4 + 0x21] = edgeT * (fVar7 - startTexCoordT) + startTexCoordT;
-      outVertex[uVar16 * 4 + 0x22] = edgeT * (fVar8 - startTexCoordR) + startTexCoordR;
-      outVertex[uVar16 * 4 + 0x23] = edgeT * (fVar6 - startTexCoordQ) + startTexCoordQ;
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      startTexCoordQ = startVertex[texUnit * 4 + 0x23];
+      startTexCoordT = startVertex[texUnit * 4 + 0x21];
+      startTexCoordR = startVertex[texUnit * 4 + 0x22];
+      endTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
+      outVertex[texUnit * 4 + 0x20] =
+           edgeT * (*(float *)(endVertexAtUnit + 0x80) - startVertex[texUnit * 4 + 0x20]) +
+           startVertex[texUnit * 4 + 0x20];
+      outVertex[texUnit * 4 + 0x21] = edgeT * (endTexCoordT - startTexCoordT) + startTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = edgeT * (endTexCoordR - startTexCoordR) + startTexCoordR;
+      outVertex[texUnit * 4 + 0x23] = edgeT * (endTexCoordQ - startTexCoordQ) + startTexCoordQ;
     }
-    uVar16 = uVar16 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
 /* _gleInterpolClipNO1000 @ 0xbc6d8 (740 bytes) */
 uint _gleInterpolClipNO1000(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  bool bVar1;
-  byte bVar2;
-  byte bVar3;
-  float fVar4;
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
   float startWord0f;
   float windowBiasZ;
-  float fVar5;
+  float clipYThenNdcY;
   float startWord0d;
   float windowScaleZ;
-  float fVar6;
+  float clipZThenNdcZ;
   float startWord0e;
-  float fVar7;
+  float clipWThenInvW;
   float endWord0f;
-  float fVar8;
+  float negClipW;
   float endWord0d;
   float endClipX;
   float endClipY;
@@ -2263,114 +2298,114 @@ uint _gleInterpolClipNO1000(int glContext,int startVertex,int endVertex,float *o
   float endClipZ;
   float endClipW;
   float edgeT;
-  uint uVar13;
+  uint clipOutcode;
   
-  fVar4 = *(float *)(startVertex + 0x10);
-  fVar5 = *(float *)(startVertex + 0x14);
-  fVar6 = *(float *)(startVertex + 0x18);
-  fVar7 = *(float *)(startVertex + 0x1c);
+  clipXThenNdcX = *(float *)(startVertex + 0x10);
+  clipYThenNdcY = *(float *)(startVertex + 0x14);
+  clipZThenNdcZ = *(float *)(startVertex + 0x18);
+  clipWThenInvW = *(float *)(startVertex + 0x1c);
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW + endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
-        uVar13 = 2;
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
       }
       else {
-        uVar13 = 0;
+        clipOutcode = 0;
       }
     }
     else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW - endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = fVar7;
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000bc8dc;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
-      uVar13 = 4;
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bc8dc;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bc83c;
-      uVar13 = 8;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bc83c;
+      clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW + endClipX));
-        fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
-        uVar13 = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar7 = fVar4;
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
-      bVar1 = uVar13 == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000bc8dc;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW + endClipY));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW - endClipY));
-      fVar5 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar7 = fVar5;
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000bc8dc;
-    fVar8 = -fVar7;
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bc8dc;
+    negClipW = -clipWThenInvW;
 LAB_000bc83c:
-    if (fVar4 < fVar8) {
-      uVar13 = 0x10;
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000bc8dc;
-      uVar13 = 0x20;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bc8dc;
+      clipOutcode = 0x20;
     }
   }
-  bVar1 = uVar13 == 0;
+  insideFrustum = clipOutcode == 0;
 LAB_000bc8dc:
-  bVar2 = *(byte *)(startVertex + 0x7c);
-  bVar3 = *(byte *)(startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)bVar2 << 0x18 | (uint)bVar3 << 8 | uVar13 | 0x10000)));
-  if (bVar1) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+  startFlagByte7c = *(byte *)(startVertex + 0x7c);
+  startFlagByte7e = *(byte *)(startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowBiasZ = *(float *)(glContext + 0x1b88);
     windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
   startWord0f = *(float *)(startVertex + 0x3c);
   startWord0d = *(float *)(startVertex + 0x34);
@@ -2383,30 +2418,30 @@ LAB_000bc8dc:
   outVertex[0xf] = edgeT * (endWord0f - startWord0f) + startWord0f;
   outVertex[0xd] = edgeT * (endWord0d - startWord0d) + startWord0d;
   outVertex[0xe] = edgeT * (endWord0e - startWord0e) + startWord0e;
-  return uVar13;
+  return clipOutcode;
 }
 
 /* _gleInterpolClipNO1001 @ 0xbc9bc (824 bytes) */
 uint _gleInterpolClipNO1001(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  bool bVar1;
+  bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
-  float fVar4;
+  float clipXThenNdcX;
   float startWord0b;
   float startWord11;
   float windowBiasZ;
-  float fVar5;
+  float clipYThenNdcY;
   float startWord09;
   float startWord12;
   float windowScaleZ;
-  float fVar6;
+  float clipZThenNdcZ;
   float startWord0a;
   float endWord11;
-  float fVar7;
+  float clipWThenInvW;
   float endWord0b;
   float endWord12;
-  float fVar8;
+  float negClipW;
   float endWord09;
   float endClipX;
   float endClipY;
@@ -2414,114 +2449,114 @@ uint _gleInterpolClipNO1001(int glContext,float *startVertex,int endVertex,float
   float endClipZ;
   float endClipW;
   float edgeT;
-  uint uVar13;
+  uint clipOutcode;
   
-  fVar4 = startVertex[4];
-  fVar5 = startVertex[5];
-  fVar6 = startVertex[6];
-  fVar7 = startVertex[7];
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW + endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
-        uVar13 = 2;
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
       }
       else {
-        uVar13 = 0;
+        clipOutcode = 0;
       }
     }
     else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW - endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = fVar7;
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000bcbc0;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
-      uVar13 = 4;
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bcbc0;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bcb20;
-      uVar13 = 8;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bcb20;
+      clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW + endClipX));
-        fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
-        uVar13 = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar7 = fVar4;
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
-      bVar1 = uVar13 == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000bcbc0;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW + endClipY));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW - endClipY));
-      fVar5 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar7 = fVar5;
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000bcbc0;
-    fVar8 = -fVar7;
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bcbc0;
+    negClipW = -clipWThenInvW;
 LAB_000bcb20:
-    if (fVar4 < fVar8) {
-      uVar13 = 0x10;
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000bcbc0;
-      uVar13 = 0x20;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bcbc0;
+      clipOutcode = 0x20;
     }
   }
-  bVar1 = uVar13 == 0;
+  insideFrustum = clipOutcode == 0;
 LAB_000bcbc0:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | uVar13 | 0x10000)));
-  if (bVar1) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowBiasZ = *(float *)(glContext + 0x1b88);
     windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
   startWord11 = startVertex[0x11];
   startWord12 = startVertex[0x12];
@@ -2544,26 +2579,26 @@ LAB_000bcbc0:
   outVertex[0xb] = edgeT * (endWord0b - startWord0b) + startWord0b;
   outVertex[9] = edgeT * (endWord09 - startWord09) + startWord09;
   outVertex[10] = edgeT * (endWord0a - startWord0a) + startWord0a;
-  return uVar13;
+  return clipOutcode;
 }
 
 /* _gleInterpolClipNO1010 @ 0xbccf4 (760 bytes) */
 uint _gleInterpolClipNO1010(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  bool bVar1;
-  byte bVar2;
-  byte bVar3;
-  float fVar4;
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
   float startWord0f;
   float windowBiasZ;
-  float fVar5;
+  float clipYThenNdcY;
   float startWord0c;
   float windowScaleZ;
-  float fVar6;
+  float clipZThenNdcZ;
   float startWord0d;
-  float fVar7;
+  float clipWThenInvW;
   float endWord0f;
-  float fVar8;
+  float negClipW;
   float endWord0c;
   float endClipX;
   float endClipY;
@@ -2573,114 +2608,114 @@ uint _gleInterpolClipNO1010(int glContext,int startVertex,int endVertex,float *o
   float endClipW;
   float endWord0e;
   float edgeT;
-  uint uVar13;
+  uint clipOutcode;
   
-  fVar4 = *(float *)(startVertex + 0x10);
-  fVar5 = *(float *)(startVertex + 0x14);
-  fVar6 = *(float *)(startVertex + 0x18);
-  fVar7 = *(float *)(startVertex + 0x1c);
+  clipXThenNdcX = *(float *)(startVertex + 0x10);
+  clipYThenNdcY = *(float *)(startVertex + 0x14);
+  clipZThenNdcZ = *(float *)(startVertex + 0x18);
+  clipWThenInvW = *(float *)(startVertex + 0x1c);
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW + endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
-        uVar13 = 2;
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
       }
       else {
-        uVar13 = 0;
+        clipOutcode = 0;
       }
     }
     else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW - endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = fVar7;
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000bcef8;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
-      uVar13 = 4;
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bcef8;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bce58;
-      uVar13 = 8;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bce58;
+      clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW + endClipX));
-        fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
-        uVar13 = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar7 = fVar4;
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
-      bVar1 = uVar13 == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000bcef8;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW + endClipY));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW - endClipY));
-      fVar5 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar7 = fVar5;
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000bcef8;
-    fVar8 = -fVar7;
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bcef8;
+    negClipW = -clipWThenInvW;
 LAB_000bce58:
-    if (fVar4 < fVar8) {
-      uVar13 = 0x10;
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000bcef8;
-      uVar13 = 0x20;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bcef8;
+      clipOutcode = 0x20;
     }
   }
-  bVar1 = uVar13 == 0;
+  insideFrustum = clipOutcode == 0;
 LAB_000bcef8:
-  bVar2 = *(byte *)(startVertex + 0x7c);
-  bVar3 = *(byte *)(startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)bVar2 << 0x18 | (uint)bVar3 << 8 | uVar13 | 0x10000)));
-  if (bVar1) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+  startFlagByte7c = *(byte *)(startVertex + 0x7c);
+  startFlagByte7e = *(byte *)(startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowBiasZ = *(float *)(glContext + 0x1b88);
     windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
   startWord0f = *(float *)(startVertex + 0x3c);
   startWord0c = *(float *)(startVertex + 0x30);
@@ -2697,30 +2732,30 @@ LAB_000bcef8:
   outVertex[0xf] = edgeT * (endWord0f - startWord0f) + startWord0f;
   outVertex[0xd] = edgeT * (endWord0d - startWord0d) + startWord0d;
   outVertex[0xe] = edgeT * (endWord0e - startWord0e) + startWord0e;
-  return uVar13;
+  return clipOutcode;
 }
 
 /* _gleInterpolClipNO1011 @ 0xbcfec (844 bytes) */
 uint _gleInterpolClipNO1011(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  bool bVar1;
+  bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
-  float fVar4;
+  float clipXThenNdcX;
   float startWord0b;
   float startWord10;
   float windowBiasZ;
-  float fVar5;
+  float clipYThenNdcY;
   float startWord09;
   float startWord11;
   float windowScaleZ;
-  float fVar6;
+  float clipZThenNdcZ;
   float startWord0a;
   float endWord10;
-  float fVar7;
+  float clipWThenInvW;
   float endWord0b;
   float endWord11;
-  float fVar8;
+  float negClipW;
   float endWord09;
   float startWord12;
   float endClipX;
@@ -2730,114 +2765,114 @@ uint _gleInterpolClipNO1011(int glContext,float *startVertex,int endVertex,float
   float endClipZ;
   float endClipW;
   float edgeT;
-  uint uVar13;
+  uint clipOutcode;
   
-  fVar4 = startVertex[4];
-  fVar5 = startVertex[5];
-  fVar6 = startVertex[6];
-  fVar7 = startVertex[7];
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW + endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
-        uVar13 = 2;
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
       }
       else {
-        uVar13 = 0;
+        clipOutcode = 0;
       }
     }
     else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW - endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = fVar7;
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000bd1f0;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
-      uVar13 = 4;
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bd1f0;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bd150;
-      uVar13 = 8;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bd150;
+      clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW + endClipX));
-        fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
-        uVar13 = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar7 = fVar4;
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
-      bVar1 = uVar13 == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000bd1f0;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW + endClipY));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW - endClipY));
-      fVar5 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar7 = fVar5;
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000bd1f0;
-    fVar8 = -fVar7;
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bd1f0;
+    negClipW = -clipWThenInvW;
 LAB_000bd150:
-    if (fVar4 < fVar8) {
-      uVar13 = 0x10;
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000bd1f0;
-      uVar13 = 0x20;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bd1f0;
+      clipOutcode = 0x20;
     }
   }
-  bVar1 = uVar13 == 0;
+  insideFrustum = clipOutcode == 0;
 LAB_000bd1f0:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | uVar13 | 0x10000)));
-  if (bVar1) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowBiasZ = *(float *)(glContext + 0x1b88);
     windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
   startWord10 = startVertex[0x10];
   startWord11 = startVertex[0x11];
@@ -2863,1461 +2898,34 @@ LAB_000bd1f0:
   outVertex[0xb] = edgeT * (endWord0b - startWord0b) + startWord0b;
   outVertex[9] = edgeT * (endWord09 - startWord09) + startWord09;
   outVertex[10] = edgeT * (endWord0a - startWord0a) + startWord0a;
-  return uVar13;
+  return clipOutcode;
 }
 
 /* _gleInterpolClipNO1100 @ 0xbd338 (876 bytes) */
 uint _gleInterpolClipNO1100(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  bool bVar1;
-  byte bVar2;
-  byte bVar3;
-  char cVar4;
-  float fVar5;
-  float startWord0d;
-  float windowBiasZ;
-  float fVar6;
-  float startWord0e;
-  float windowScaleZ;
-  float fVar7;
-  float outInvW;
-  float startWord0f;
-  float fVar8;
-  float endWord0d;
-  float fVar9;
-  float endClipW;
-  float endWord0e;
-  float endClipX;
-  float endClipY;
-  float endWord0f;
-  float endClipZ;
-  float endClipW2;
-  float edgeT;
-  uint uVar14;
-  
-  fVar5 = *(float *)(startVertex + 0x10);
-  fVar6 = *(float *)(startVertex + 0x14);
-  fVar7 = *(float *)(startVertex + 0x18);
-  fVar8 = *(float *)(startVertex + 0x1c);
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW2 = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar8 + fVar7) / ((fVar8 + fVar7) - (endClipW2 + endClipZ));
-      fVar8 = edgeT * (endClipW2 - fVar8) + fVar8;
-      fVar7 = -fVar8;
-      if (fVar8 < FLOAT_00108e50) {
-        uVar14 = 2;
-      }
-      else {
-        uVar14 = 0;
-      }
-    }
-    else {
-      uVar14 = 0;
-      edgeT = (fVar8 - fVar7) / ((fVar8 - fVar7) - (endClipW2 - endClipZ));
-      fVar8 = edgeT * (endClipW2 - fVar8) + fVar8;
-      fVar7 = fVar8;
-    }
-    bVar1 = uVar14 == 0;
-    fVar5 = edgeT * (endClipX - fVar5) + fVar5;
-    fVar6 = edgeT * (endClipY - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000bd53c;
-    fVar9 = -fVar8;
-    if (fVar6 < fVar9) {
-      uVar14 = 4;
-    }
-    else {
-      if (!(fVar8 <= fVar6)) goto LAB_000bd49c;
-      uVar14 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        edgeT = (fVar8 + fVar5) / ((fVar8 + fVar5) - (endClipW2 + endClipX));
-        fVar8 = edgeT * (endClipW2 - fVar8) + fVar8;
-        fVar5 = -fVar8;
-        uVar14 = (uint)(fVar8 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar14 = 0;
-        edgeT = (fVar8 - fVar5) / ((fVar8 - fVar5) - (endClipW2 - endClipX));
-        fVar5 = edgeT * (endClipW2 - fVar8) + fVar8;
-        fVar8 = fVar5;
-      }
-      bVar1 = uVar14 == 0;
-      fVar6 = edgeT * (endClipY - fVar6) + fVar6;
-      fVar7 = edgeT * (endClipZ - fVar7) + fVar7;
-      goto LAB_000bd53c;
-    }
-    if (clipPlane == 4) {
-      edgeT = (fVar8 + fVar6) / ((fVar8 + fVar6) - (endClipW2 + endClipY));
-      fVar8 = edgeT * (endClipW2 - fVar8) + fVar8;
-      fVar6 = -fVar8;
-      uVar14 = (uint)(fVar8 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar14 = 0;
-      edgeT = (fVar8 - fVar6) / ((fVar8 - fVar6) - (endClipW2 - endClipY));
-      fVar6 = edgeT * (endClipW2 - fVar8) + fVar8;
-      fVar8 = fVar6;
-    }
-    bVar1 = uVar14 == 0;
-    fVar5 = edgeT * (endClipX - fVar5) + fVar5;
-    fVar7 = edgeT * (endClipZ - fVar7) + fVar7;
-    if (!bVar1) goto LAB_000bd53c;
-    fVar9 = -fVar8;
-LAB_000bd49c:
-    if (fVar5 < fVar9) {
-      uVar14 = 0x10;
-    }
-    else {
-      if (!(fVar8 <= fVar5)) goto LAB_000bd53c;
-      uVar14 = 0x20;
-    }
-  }
-  bVar1 = uVar14 == 0;
-LAB_000bd53c:
-  bVar2 = *(byte *)(startVertex + 0x7c);
-  bVar3 = *(byte *)(startVertex + 0x7e);
-  outVertex[4] = fVar5;
-  outVertex[5] = fVar6;
-  outVertex[6] = fVar7;
-  outVertex[7] = fVar8;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)bVar2 << 0x18 | (uint)bVar3 << 8 | uVar14 | 0x10000)));
-  if (bVar1) {
-    if (fVar8 != FLOAT_00108e54) {
-      fVar8 = FLOAT_00108e54 / fVar8;
-      fVar5 = fVar5 * fVar8;
-      fVar6 = fVar6 * fVar8;
-      fVar7 = fVar7 * fVar8;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar5 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar6 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar8;
-    outVertex[2] = windowScaleZ * fVar7 + windowBiasZ;
-  }
-  startWord0d = *(float *)(startVertex + 0x34);
-  startWord0e = *(float *)(startVertex + 0x38);
-  startWord0f = *(float *)(startVertex + 0x3c);
-  endWord0d = *(float *)(endVertex + 0x34);
-  endWord0e = *(float *)(endVertex + 0x38);
-  endWord0f = *(float *)(endVertex + 0x3c);
-  cVar4 = *(char *)(endVertex + 0x7f);
-  outVertex[0xc] = edgeT * (*(float *)(endVertex + 0x30) - *(float *)(startVertex + 0x30)) +
-                 *(float *)(startVertex + 0x30);
-  outVertex[0xe] = edgeT * (endWord0e - startWord0e) + startWord0e;
-  outVertex[0xd] = edgeT * (endWord0d - startWord0d) + startWord0d;
-  outVertex[0xf] = edgeT * (endWord0f - startWord0f) + startWord0f;
-  fVar5 = *(float *)(endVertex + 0x80);
-  fVar6 = *(float *)(endVertex + 0x84);
-  fVar7 = *(float *)(endVertex + 0x88);
-  fVar8 = *(float *)(endVertex + 0x8c);
-  if (cVar4 == '\0') {
-    endClipW = *(float *)(endVertex + 0x1c);
-    fVar8 = fVar8 * endClipW;
-    fVar5 = fVar5 * endClipW;
-    fVar6 = fVar6 * endClipW;
-    fVar7 = fVar7 * endClipW;
-  }
-  fVar9 = edgeT * (fVar5 - *(float *)(startVertex + 0x80)) + *(float *)(startVertex + 0x80);
-  fVar6 = edgeT * (fVar6 - *(float *)(startVertex + 0x84)) + *(float *)(startVertex + 0x84);
-  fVar8 = edgeT * (fVar8 - *(float *)(startVertex + 0x8c)) + *(float *)(startVertex + 0x8c);
-  fVar5 = edgeT * (fVar7 - *(float *)(startVertex + 0x88)) + *(float *)(startVertex + 0x88);
-  if (bVar1) {
-    outInvW = outVertex[3];
-    fVar8 = fVar8 * outInvW;
-    fVar9 = fVar9 * outInvW;
-    fVar6 = fVar6 * outInvW;
-    fVar5 = fVar5 * outInvW;
-  }
-  outVertex[0x23] = fVar8;
-  outVertex[0x20] = fVar9;
-  outVertex[0x21] = fVar6;
-  outVertex[0x22] = fVar5;
-  return uVar14;
-}
-
-/* _gleInterpolClipNO1100w @ 0xbd6a4 (820 bytes) */
-uint _gleInterpolClipNO1100w(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
-  bool bVar1;
-  byte bVar2;
-  byte bVar3;
-  float fVar4;
-  float startWord23;
-  float startWord0d;
-  float windowBiasZ;
-  float fVar5;
-  float startWord21;
-  float startWord0e;
-  float windowScaleZ;
-  float fVar6;
-  float startWord22;
-  float startWord0f;
-  float fVar7;
-  float endWord23;
-  float endWord0d;
-  float fVar8;
-  float endWord21;
-  float endWord0e;
-  float endClipX;
-  float endClipY;
-  float endWord22;
-  float endWord0f;
-  float endClipZ;
-  float endClipW;
-  float edgeT;
-  uint uVar13;
-  
-  fVar4 = *(float *)(startVertex + 0x10);
-  fVar5 = *(float *)(startVertex + 0x14);
-  fVar6 = *(float *)(startVertex + 0x18);
-  fVar7 = *(float *)(startVertex + 0x1c);
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW + endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
-        uVar13 = 2;
-      }
-      else {
-        uVar13 = 0;
-      }
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW - endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = fVar7;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000bd8a8;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
-      uVar13 = 4;
-    }
-    else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bd808;
-      uVar13 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW + endClipX));
-        fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar13 = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar7 = fVar4;
-      }
-      bVar1 = uVar13 == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-      goto LAB_000bd8a8;
-    }
-    if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW + endClipY));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW - endClipY));
-      fVar5 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar7 = fVar5;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000bd8a8;
-    fVar8 = -fVar7;
-LAB_000bd808:
-    if (fVar4 < fVar8) {
-      uVar13 = 0x10;
-    }
-    else {
-      if (!(fVar7 <= fVar4)) goto LAB_000bd8a8;
-      uVar13 = 0x20;
-    }
-  }
-  bVar1 = uVar13 == 0;
-LAB_000bd8a8:
-  bVar2 = *(byte *)(startVertex + 0x7c);
-  bVar3 = *(byte *)(startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)bVar2 << 0x18 | (uint)bVar3 << 8 | uVar13 | 0x10000)));
-  if (bVar1) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
-  }
-  startWord0d = *(float *)(startVertex + 0x34);
-  startWord0e = *(float *)(startVertex + 0x38);
-  startWord0f = *(float *)(startVertex + 0x3c);
-  endWord0d = *(float *)(endVertex + 0x34);
-  endWord0e = *(float *)(endVertex + 0x38);
-  endWord0f = *(float *)(endVertex + 0x3c);
-  outVertex[0xc] = edgeT * (*(float *)(endVertex + 0x30) - *(float *)(startVertex + 0x30)) +
-                 *(float *)(startVertex + 0x30);
-  outVertex[0xd] = edgeT * (endWord0d - startWord0d) + startWord0d;
-  outVertex[0xe] = edgeT * (endWord0e - startWord0e) + startWord0e;
-  outVertex[0xf] = edgeT * (endWord0f - startWord0f) + startWord0f;
-  startWord23 = *(float *)(startVertex + 0x8c);
-  startWord21 = *(float *)(startVertex + 0x84);
-  startWord22 = *(float *)(startVertex + 0x88);
-  endWord23 = *(float *)(endVertex + 0x8c);
-  endWord21 = *(float *)(endVertex + 0x84);
-  endWord22 = *(float *)(endVertex + 0x88);
-  outVertex[0x20] =
-       edgeT * (*(float *)(endVertex + 0x80) - *(float *)(startVertex + 0x80)) +
-       *(float *)(startVertex + 0x80);
-  outVertex[0x21] = edgeT * (endWord21 - startWord21) + startWord21;
-  outVertex[0x23] = edgeT * (endWord23 - startWord23) + startWord23;
-  outVertex[0x22] = edgeT * (endWord22 - startWord22) + startWord22;
-  return uVar13;
-}
-
-/* _gleInterpolClipNO1101 @ 0xbd9d8 (960 bytes) */
-uint _gleInterpolClipNO1101(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
-  bool bVar1;
-  byte startFlagByte7c;
-  byte startFlagByte7e;
-  float fVar4;
-  float startWord0b;
-  float startWord11;
-  float windowBiasZ;
-  float fVar5;
-  float startWord09;
-  float startWord12;
-  float windowScaleZ;
-  float fVar6;
-  float startWord0a;
-  float endWord11;
-  float outInvW;
-  float fVar7;
-  float endWord0b;
-  float endWord12;
-  float fVar8;
-  float endWord09;
-  float endClipW;
-  float endClipX;
-  float fVar9;
-  float endWord0a;
-  float endClipY;
-  float endClipZ;
-  float endClipW2;
-  float edgeT;
-  uint uVar13;
-  
-  fVar4 = startVertex[4];
-  fVar5 = startVertex[5];
-  fVar6 = startVertex[6];
-  fVar7 = startVertex[7];
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW2 = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW2 + endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
-        uVar13 = 2;
-      }
-      else {
-        uVar13 = 0;
-      }
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW2 - endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = fVar7;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000bdbdc;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
-      uVar13 = 4;
-    }
-    else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bdb3c;
-      uVar13 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW2 + endClipX));
-        fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar13 = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW2 - endClipX));
-        fVar4 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar7 = fVar4;
-      }
-      bVar1 = uVar13 == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-      goto LAB_000bdbdc;
-    }
-    if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW2 + endClipY));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW2 - endClipY));
-      fVar5 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar7 = fVar5;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000bdbdc;
-    fVar8 = -fVar7;
-LAB_000bdb3c:
-    if (fVar4 < fVar8) {
-      uVar13 = 0x10;
-    }
-    else {
-      if (!(fVar7 <= fVar4)) goto LAB_000bdbdc;
-      uVar13 = 0x20;
-    }
-  }
-  bVar1 = uVar13 == 0;
-LAB_000bdbdc:
-  startFlagByte7c = *(byte *)(startVertex + 0x1f);
-  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | uVar13 | 0x10000)));
-  if (bVar1) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
-  }
-  fVar4 = *(float *)(endVertex + 0x80);
-  fVar5 = *(float *)(endVertex + 0x84);
-  fVar6 = *(float *)(endVertex + 0x88);
-  fVar7 = *(float *)(endVertex + 0x8c);
-  if (*(char *)(endVertex + 0x7f) == '\0') {
-    endClipW = *(float *)(endVertex + 0x1c);
-    fVar7 = fVar7 * endClipW;
-    fVar4 = fVar4 * endClipW;
-    fVar5 = fVar5 * endClipW;
-    fVar6 = fVar6 * endClipW;
-  }
-  fVar9 = edgeT * (fVar4 - startVertex[0x20]) + startVertex[0x20];
-  fVar8 = edgeT * (fVar5 - startVertex[0x21]) + startVertex[0x21];
-  fVar5 = edgeT * (fVar6 - startVertex[0x22]) + startVertex[0x22];
-  fVar4 = edgeT * (fVar7 - startVertex[0x23]) + startVertex[0x23];
-  if (bVar1) {
-    outInvW = outVertex[3];
-    fVar4 = fVar4 * outInvW;
-    fVar9 = fVar9 * outInvW;
-    fVar8 = fVar8 * outInvW;
-    fVar5 = fVar5 * outInvW;
-  }
-  outVertex[0x20] = fVar9;
-  outVertex[0x21] = fVar8;
-  outVertex[0x22] = fVar5;
-  outVertex[0x23] = fVar4;
-  startWord11 = startVertex[0x11];
-  startWord12 = startVertex[0x12];
-  endWord11 = *(float *)(endVertex + 0x44);
-  endWord12 = *(float *)(endVertex + 0x48);
-  outVertex[0x10] = edgeT * (*(float *)(endVertex + 0x40) - startVertex[0x10]) + startVertex[0x10];
-  outVertex[0x11] = edgeT * (endWord11 - startWord11) + startWord11;
-  outVertex[0x12] = edgeT * (endWord12 - startWord12) + startWord12;
-  if (startVertex != outVertex) {
-    outVertex[0x1d] = startVertex[0x1d];
-    outVertex[0x1e] = startVertex[0x1e];
-  }
-  startWord0b = startVertex[0xb];
-  startWord09 = startVertex[9];
-  startWord0a = startVertex[10];
-  endWord0b = *(float *)(endVertex + 0x2c);
-  endWord09 = *(float *)(endVertex + 0x24);
-  endWord0a = *(float *)(endVertex + 0x28);
-  outVertex[8] = edgeT * (*(float *)(endVertex + 0x20) - startVertex[8]) + startVertex[8];
-  outVertex[9] = edgeT * (endWord09 - startWord09) + startWord09;
-  outVertex[0xb] = edgeT * (endWord0b - startWord0b) + startWord0b;
-  outVertex[10] = edgeT * (endWord0a - startWord0a) + startWord0a;
-  return uVar13;
-}
-
-/* _gleInterpolClipNO1101w @ 0xbdd98 (904 bytes) */
-uint _gleInterpolClipNO1101w(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
-  bool bVar1;
-  byte startFlagByte7c;
-  byte startFlagByte7e;
-  float fVar4;
-  float startWord0b;
-  float startWord11;
-  float startWord21;
-  float windowBiasZ;
-  float fVar5;
-  float startWord09;
-  float startWord12;
-  float startWord22;
-  float windowScaleZ;
-  float fVar6;
-  float startWord0a;
-  float endWord11;
-  float startWord23;
-  float fVar7;
-  float endWord0b;
-  float endWord12;
-  float endWord21;
-  float fVar8;
-  float endWord09;
-  float endWord22;
-  float endClipX;
-  float endClipY;
-  float endWord0a;
-  float endWord23;
-  float endClipZ;
-  float endClipW;
-  float edgeT;
-  uint uVar13;
-  
-  fVar4 = startVertex[4];
-  fVar5 = startVertex[5];
-  fVar6 = startVertex[6];
-  fVar7 = startVertex[7];
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW + endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
-        uVar13 = 2;
-      }
-      else {
-        uVar13 = 0;
-      }
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW - endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = fVar7;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000bdf9c;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
-      uVar13 = 4;
-    }
-    else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bdefc;
-      uVar13 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW + endClipX));
-        fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar13 = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar7 = fVar4;
-      }
-      bVar1 = uVar13 == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-      goto LAB_000bdf9c;
-    }
-    if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW + endClipY));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW - endClipY));
-      fVar5 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar7 = fVar5;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000bdf9c;
-    fVar8 = -fVar7;
-LAB_000bdefc:
-    if (fVar4 < fVar8) {
-      uVar13 = 0x10;
-    }
-    else {
-      if (!(fVar7 <= fVar4)) goto LAB_000bdf9c;
-      uVar13 = 0x20;
-    }
-  }
-  bVar1 = uVar13 == 0;
-LAB_000bdf9c:
-  startFlagByte7c = *(byte *)(startVertex + 0x1f);
-  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | uVar13 | 0x10000)));
-  if (bVar1) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
-  }
-  startWord21 = startVertex[0x21];
-  startWord22 = startVertex[0x22];
-  startWord23 = startVertex[0x23];
-  endWord21 = *(float *)(endVertex + 0x84);
-  endWord22 = *(float *)(endVertex + 0x88);
-  endWord23 = *(float *)(endVertex + 0x8c);
-  outVertex[0x20] = edgeT * (*(float *)(endVertex + 0x80) - startVertex[0x20]) + startVertex[0x20];
-  outVertex[0x21] = edgeT * (endWord21 - startWord21) + startWord21;
-  outVertex[0x22] = edgeT * (endWord22 - startWord22) + startWord22;
-  outVertex[0x23] = edgeT * (endWord23 - startWord23) + startWord23;
-  startWord11 = startVertex[0x11];
-  startWord12 = startVertex[0x12];
-  endWord11 = *(float *)(endVertex + 0x44);
-  endWord12 = *(float *)(endVertex + 0x48);
-  outVertex[0x10] = edgeT * (*(float *)(endVertex + 0x40) - startVertex[0x10]) + startVertex[0x10];
-  outVertex[0x11] = edgeT * (endWord11 - startWord11) + startWord11;
-  outVertex[0x12] = edgeT * (endWord12 - startWord12) + startWord12;
-  if (startVertex != outVertex) {
-    outVertex[0x1d] = startVertex[0x1d];
-    outVertex[0x1e] = startVertex[0x1e];
-  }
-  startWord0b = startVertex[0xb];
-  startWord09 = startVertex[9];
-  startWord0a = startVertex[10];
-  endWord0b = *(float *)(endVertex + 0x2c);
-  endWord09 = *(float *)(endVertex + 0x24);
-  endWord0a = *(float *)(endVertex + 0x28);
-  outVertex[8] = edgeT * (*(float *)(endVertex + 0x20) - startVertex[8]) + startVertex[8];
-  outVertex[0xb] = edgeT * (endWord0b - startWord0b) + startWord0b;
-  outVertex[9] = edgeT * (endWord09 - startWord09) + startWord09;
-  outVertex[10] = edgeT * (endWord0a - startWord0a) + startWord0a;
-  return uVar13;
-}
-
-/* _gleInterpolClipNO1110 @ 0xbe120 (896 bytes) */
-uint _gleInterpolClipNO1110(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
-  bool bVar1;
-  byte bVar2;
-  byte bVar3;
-  char cVar4;
-  float fVar5;
-  float startWord0c;
-  float windowBiasZ;
-  float fVar6;
-  float startWord0d;
-  float windowScaleZ;
-  float fVar7;
-  float outInvW;
-  float startWord0f;
-  float fVar8;
-  float endWord0c;
-  float fVar9;
-  float endClipW;
-  float endWord0d;
-  float endClipX;
-  float endClipY;
-  float startWord0e;
-  float endClipZ;
-  float endWord0f;
-  float endClipW2;
-  float endWord0e;
-  float edgeT;
-  uint uVar14;
-  
-  fVar5 = *(float *)(startVertex + 0x10);
-  fVar6 = *(float *)(startVertex + 0x14);
-  fVar7 = *(float *)(startVertex + 0x18);
-  fVar8 = *(float *)(startVertex + 0x1c);
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW2 = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar8 + fVar7) / ((fVar8 + fVar7) - (endClipW2 + endClipZ));
-      fVar8 = edgeT * (endClipW2 - fVar8) + fVar8;
-      fVar7 = -fVar8;
-      if (fVar8 < FLOAT_00108e50) {
-        uVar14 = 2;
-      }
-      else {
-        uVar14 = 0;
-      }
-    }
-    else {
-      uVar14 = 0;
-      edgeT = (fVar8 - fVar7) / ((fVar8 - fVar7) - (endClipW2 - endClipZ));
-      fVar8 = edgeT * (endClipW2 - fVar8) + fVar8;
-      fVar7 = fVar8;
-    }
-    bVar1 = uVar14 == 0;
-    fVar5 = edgeT * (endClipX - fVar5) + fVar5;
-    fVar6 = edgeT * (endClipY - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000be324;
-    fVar9 = -fVar8;
-    if (fVar6 < fVar9) {
-      uVar14 = 4;
-    }
-    else {
-      if (!(fVar8 <= fVar6)) goto LAB_000be284;
-      uVar14 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        edgeT = (fVar8 + fVar5) / ((fVar8 + fVar5) - (endClipW2 + endClipX));
-        fVar8 = edgeT * (endClipW2 - fVar8) + fVar8;
-        fVar5 = -fVar8;
-        uVar14 = (uint)(fVar8 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar14 = 0;
-        edgeT = (fVar8 - fVar5) / ((fVar8 - fVar5) - (endClipW2 - endClipX));
-        fVar5 = edgeT * (endClipW2 - fVar8) + fVar8;
-        fVar8 = fVar5;
-      }
-      bVar1 = uVar14 == 0;
-      fVar6 = edgeT * (endClipY - fVar6) + fVar6;
-      fVar7 = edgeT * (endClipZ - fVar7) + fVar7;
-      goto LAB_000be324;
-    }
-    if (clipPlane == 4) {
-      edgeT = (fVar8 + fVar6) / ((fVar8 + fVar6) - (endClipW2 + endClipY));
-      fVar8 = edgeT * (endClipW2 - fVar8) + fVar8;
-      fVar6 = -fVar8;
-      uVar14 = (uint)(fVar8 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar14 = 0;
-      edgeT = (fVar8 - fVar6) / ((fVar8 - fVar6) - (endClipW2 - endClipY));
-      fVar6 = edgeT * (endClipW2 - fVar8) + fVar8;
-      fVar8 = fVar6;
-    }
-    bVar1 = uVar14 == 0;
-    fVar5 = edgeT * (endClipX - fVar5) + fVar5;
-    fVar7 = edgeT * (endClipZ - fVar7) + fVar7;
-    if (!bVar1) goto LAB_000be324;
-    fVar9 = -fVar8;
-LAB_000be284:
-    if (fVar5 < fVar9) {
-      uVar14 = 0x10;
-    }
-    else {
-      if (!(fVar8 <= fVar5)) goto LAB_000be324;
-      uVar14 = 0x20;
-    }
-  }
-  bVar1 = uVar14 == 0;
-LAB_000be324:
-  bVar2 = *(byte *)(startVertex + 0x7c);
-  bVar3 = *(byte *)(startVertex + 0x7e);
-  outVertex[4] = fVar5;
-  outVertex[5] = fVar6;
-  outVertex[6] = fVar7;
-  outVertex[7] = fVar8;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)bVar2 << 0x18 | (uint)bVar3 << 8 | uVar14 | 0x10000)));
-  if (bVar1) {
-    if (fVar8 != FLOAT_00108e54) {
-      fVar8 = FLOAT_00108e54 / fVar8;
-      fVar5 = fVar5 * fVar8;
-      fVar6 = fVar6 * fVar8;
-      fVar7 = fVar7 * fVar8;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar5 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar6 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar8;
-    outVertex[2] = windowScaleZ * fVar7 + windowBiasZ;
-  }
-  startWord0c = *(float *)(startVertex + 0x30);
-  startWord0d = *(float *)(startVertex + 0x34);
-  startWord0f = *(float *)(startVertex + 0x3c);
-  endWord0c = *(float *)(endVertex + 0x30);
-  endWord0d = *(float *)(endVertex + 0x34);
-  startWord0e = *(float *)(startVertex + 0x38);
-  endWord0f = *(float *)(endVertex + 0x3c);
-  outVertex[0x13] =
-       edgeT * (*(float *)(endVertex + 0x4c) - *(float *)(startVertex + 0x4c)) +
-       *(float *)(startVertex + 0x4c);
-  endWord0e = *(float *)(endVertex + 0x38);
-  cVar4 = *(char *)(endVertex + 0x7f);
-  outVertex[0xc] = edgeT * (endWord0c - startWord0c) + startWord0c;
-  outVertex[0xd] = edgeT * (endWord0d - startWord0d) + startWord0d;
-  outVertex[0xf] = edgeT * (endWord0f - startWord0f) + startWord0f;
-  outVertex[0xe] = edgeT * (endWord0e - startWord0e) + startWord0e;
-  fVar5 = *(float *)(endVertex + 0x80);
-  fVar6 = *(float *)(endVertex + 0x84);
-  fVar7 = *(float *)(endVertex + 0x88);
-  fVar8 = *(float *)(endVertex + 0x8c);
-  if (cVar4 == '\0') {
-    endClipW = *(float *)(endVertex + 0x1c);
-    fVar8 = fVar8 * endClipW;
-    fVar5 = fVar5 * endClipW;
-    fVar6 = fVar6 * endClipW;
-    fVar7 = fVar7 * endClipW;
-  }
-  fVar9 = edgeT * (fVar5 - *(float *)(startVertex + 0x80)) + *(float *)(startVertex + 0x80);
-  fVar6 = edgeT * (fVar6 - *(float *)(startVertex + 0x84)) + *(float *)(startVertex + 0x84);
-  fVar8 = edgeT * (fVar8 - *(float *)(startVertex + 0x8c)) + *(float *)(startVertex + 0x8c);
-  fVar5 = edgeT * (fVar7 - *(float *)(startVertex + 0x88)) + *(float *)(startVertex + 0x88);
-  if (bVar1) {
-    outInvW = outVertex[3];
-    fVar8 = fVar8 * outInvW;
-    fVar9 = fVar9 * outInvW;
-    fVar6 = fVar6 * outInvW;
-    fVar5 = fVar5 * outInvW;
-  }
-  outVertex[0x23] = fVar8;
-  outVertex[0x20] = fVar9;
-  outVertex[0x21] = fVar6;
-  outVertex[0x22] = fVar5;
-  return uVar14;
-}
-
-/* _gleInterpolClipNO1110w @ 0xbe4a0 (840 bytes) */
-uint _gleInterpolClipNO1110w(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
-  bool bVar1;
-  byte bVar2;
-  byte bVar3;
-  float fVar4;
-  float startWord23;
-  float startWord0c;
-  float windowBiasZ;
-  float fVar5;
-  float startWord21;
-  float startWord0d;
-  float windowScaleZ;
-  float fVar6;
-  float startWord22;
-  float startWord0f;
-  float fVar7;
-  float endWord23;
-  float endWord0c;
-  float fVar8;
-  float endWord21;
-  float endWord0d;
-  float endClipX;
-  float endClipY;
-  float endWord22;
-  float startWord0e;
-  float endClipZ;
-  float endWord0f;
-  float endClipW;
-  float endWord0e;
-  float edgeT;
-  uint uVar13;
-  
-  fVar4 = *(float *)(startVertex + 0x10);
-  fVar5 = *(float *)(startVertex + 0x14);
-  fVar6 = *(float *)(startVertex + 0x18);
-  fVar7 = *(float *)(startVertex + 0x1c);
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW + endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
-        uVar13 = 2;
-      }
-      else {
-        uVar13 = 0;
-      }
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW - endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = fVar7;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000be6a4;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
-      uVar13 = 4;
-    }
-    else {
-      if (!(fVar7 <= fVar5)) goto LAB_000be604;
-      uVar13 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW + endClipX));
-        fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar13 = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar7 = fVar4;
-      }
-      bVar1 = uVar13 == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-      goto LAB_000be6a4;
-    }
-    if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW + endClipY));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW - endClipY));
-      fVar5 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar7 = fVar5;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000be6a4;
-    fVar8 = -fVar7;
-LAB_000be604:
-    if (fVar4 < fVar8) {
-      uVar13 = 0x10;
-    }
-    else {
-      if (!(fVar7 <= fVar4)) goto LAB_000be6a4;
-      uVar13 = 0x20;
-    }
-  }
-  bVar1 = uVar13 == 0;
-LAB_000be6a4:
-  bVar2 = *(byte *)(startVertex + 0x7c);
-  bVar3 = *(byte *)(startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)bVar2 << 0x18 | (uint)bVar3 << 8 | uVar13 | 0x10000)));
-  if (bVar1) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
-  }
-  startWord0c = *(float *)(startVertex + 0x30);
-  startWord0d = *(float *)(startVertex + 0x34);
-  startWord0f = *(float *)(startVertex + 0x3c);
-  endWord0c = *(float *)(endVertex + 0x30);
-  endWord0d = *(float *)(endVertex + 0x34);
-  startWord0e = *(float *)(startVertex + 0x38);
-  endWord0f = *(float *)(endVertex + 0x3c);
-  outVertex[0x13] =
-       edgeT * (*(float *)(endVertex + 0x4c) - *(float *)(startVertex + 0x4c)) +
-       *(float *)(startVertex + 0x4c);
-  endWord0e = *(float *)(endVertex + 0x38);
-  outVertex[0xc] = edgeT * (endWord0c - startWord0c) + startWord0c;
-  outVertex[0xd] = edgeT * (endWord0d - startWord0d) + startWord0d;
-  outVertex[0xf] = edgeT * (endWord0f - startWord0f) + startWord0f;
-  outVertex[0xe] = edgeT * (endWord0e - startWord0e) + startWord0e;
-  startWord23 = *(float *)(startVertex + 0x8c);
-  startWord21 = *(float *)(startVertex + 0x84);
-  startWord22 = *(float *)(startVertex + 0x88);
-  endWord23 = *(float *)(endVertex + 0x8c);
-  endWord21 = *(float *)(endVertex + 0x84);
-  endWord22 = *(float *)(endVertex + 0x88);
-  outVertex[0x20] =
-       edgeT * (*(float *)(endVertex + 0x80) - *(float *)(startVertex + 0x80)) +
-       *(float *)(startVertex + 0x80);
-  outVertex[0x21] = edgeT * (endWord21 - startWord21) + startWord21;
-  outVertex[0x23] = edgeT * (endWord23 - startWord23) + startWord23;
-  outVertex[0x22] = edgeT * (endWord22 - startWord22) + startWord22;
-  return uVar13;
-}
-
-/* _gleInterpolClipNO1111 @ 0xbe7e8 (980 bytes) */
-uint _gleInterpolClipNO1111(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
-  bool bVar1;
-  byte startFlagByte7c;
-  byte startFlagByte7e;
-  char cVar4;
-  float fVar5;
-  float startWord0b;
-  float startWord11;
-  float windowBiasZ;
-  float fVar6;
-  float startWord09;
-  float startWord12;
-  float windowScaleZ;
-  float fVar7;
-  float startWord0a;
-  float endWord11;
-  float outInvW;
-  float fVar8;
-  float endWord0b;
-  float endWord12;
-  float fVar9;
-  float endWord09;
-  float endClipW;
-  float endClipX;
-  float fVar10;
-  float endWord0a;
-  float endClipY;
-  float endClipZ;
-  float endClipW2;
-  float edgeT;
-  uint uVar14;
-  
-  fVar5 = startVertex[4];
-  fVar6 = startVertex[5];
-  fVar7 = startVertex[6];
-  fVar8 = startVertex[7];
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW2 = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar8 + fVar7) / ((fVar8 + fVar7) - (endClipW2 + endClipZ));
-      fVar8 = edgeT * (endClipW2 - fVar8) + fVar8;
-      fVar7 = -fVar8;
-      if (fVar8 < FLOAT_00108e50) {
-        uVar14 = 2;
-      }
-      else {
-        uVar14 = 0;
-      }
-    }
-    else {
-      uVar14 = 0;
-      edgeT = (fVar8 - fVar7) / ((fVar8 - fVar7) - (endClipW2 - endClipZ));
-      fVar8 = edgeT * (endClipW2 - fVar8) + fVar8;
-      fVar7 = fVar8;
-    }
-    bVar1 = uVar14 == 0;
-    fVar5 = edgeT * (endClipX - fVar5) + fVar5;
-    fVar6 = edgeT * (endClipY - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000be9ec;
-    fVar9 = -fVar8;
-    if (fVar6 < fVar9) {
-      uVar14 = 4;
-    }
-    else {
-      if (!(fVar8 <= fVar6)) goto LAB_000be94c;
-      uVar14 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        edgeT = (fVar8 + fVar5) / ((fVar8 + fVar5) - (endClipW2 + endClipX));
-        fVar8 = edgeT * (endClipW2 - fVar8) + fVar8;
-        fVar5 = -fVar8;
-        uVar14 = (uint)(fVar8 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar14 = 0;
-        edgeT = (fVar8 - fVar5) / ((fVar8 - fVar5) - (endClipW2 - endClipX));
-        fVar5 = edgeT * (endClipW2 - fVar8) + fVar8;
-        fVar8 = fVar5;
-      }
-      bVar1 = uVar14 == 0;
-      fVar6 = edgeT * (endClipY - fVar6) + fVar6;
-      fVar7 = edgeT * (endClipZ - fVar7) + fVar7;
-      goto LAB_000be9ec;
-    }
-    if (clipPlane == 4) {
-      edgeT = (fVar8 + fVar6) / ((fVar8 + fVar6) - (endClipW2 + endClipY));
-      fVar8 = edgeT * (endClipW2 - fVar8) + fVar8;
-      fVar6 = -fVar8;
-      uVar14 = (uint)(fVar8 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar14 = 0;
-      edgeT = (fVar8 - fVar6) / ((fVar8 - fVar6) - (endClipW2 - endClipY));
-      fVar6 = edgeT * (endClipW2 - fVar8) + fVar8;
-      fVar8 = fVar6;
-    }
-    bVar1 = uVar14 == 0;
-    fVar5 = edgeT * (endClipX - fVar5) + fVar5;
-    fVar7 = edgeT * (endClipZ - fVar7) + fVar7;
-    if (!bVar1) goto LAB_000be9ec;
-    fVar9 = -fVar8;
-LAB_000be94c:
-    if (fVar5 < fVar9) {
-      uVar14 = 0x10;
-    }
-    else {
-      if (!(fVar8 <= fVar5)) goto LAB_000be9ec;
-      uVar14 = 0x20;
-    }
-  }
-  bVar1 = uVar14 == 0;
-LAB_000be9ec:
-  startFlagByte7c = *(byte *)(startVertex + 0x1f);
-  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar5;
-  outVertex[5] = fVar6;
-  outVertex[6] = fVar7;
-  outVertex[7] = fVar8;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | uVar14 | 0x10000)));
-  if (bVar1) {
-    if (fVar8 != FLOAT_00108e54) {
-      fVar8 = FLOAT_00108e54 / fVar8;
-      fVar5 = fVar5 * fVar8;
-      fVar6 = fVar6 * fVar8;
-      fVar7 = fVar7 * fVar8;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar5 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar6 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar8;
-    outVertex[2] = windowScaleZ * fVar7 + windowBiasZ;
-  }
-  cVar4 = *(char *)(endVertex + 0x7f);
-  outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
-  fVar5 = *(float *)(endVertex + 0x80);
-  fVar6 = *(float *)(endVertex + 0x84);
-  fVar7 = *(float *)(endVertex + 0x88);
-  fVar8 = *(float *)(endVertex + 0x8c);
-  if (cVar4 == '\0') {
-    endClipW = *(float *)(endVertex + 0x1c);
-    fVar8 = fVar8 * endClipW;
-    fVar5 = fVar5 * endClipW;
-    fVar6 = fVar6 * endClipW;
-    fVar7 = fVar7 * endClipW;
-  }
-  fVar10 = edgeT * (fVar5 - startVertex[0x20]) + startVertex[0x20];
-  fVar9 = edgeT * (fVar6 - startVertex[0x21]) + startVertex[0x21];
-  fVar6 = edgeT * (fVar7 - startVertex[0x22]) + startVertex[0x22];
-  fVar5 = edgeT * (fVar8 - startVertex[0x23]) + startVertex[0x23];
-  if (bVar1) {
-    outInvW = outVertex[3];
-    fVar5 = fVar5 * outInvW;
-    fVar10 = fVar10 * outInvW;
-    fVar9 = fVar9 * outInvW;
-    fVar6 = fVar6 * outInvW;
-  }
-  outVertex[0x20] = fVar10;
-  outVertex[0x21] = fVar9;
-  outVertex[0x22] = fVar6;
-  outVertex[0x23] = fVar5;
-  startWord11 = startVertex[0x11];
-  startWord12 = startVertex[0x12];
-  endWord11 = *(float *)(endVertex + 0x44);
-  endWord12 = *(float *)(endVertex + 0x48);
-  outVertex[0x10] = edgeT * (*(float *)(endVertex + 0x40) - startVertex[0x10]) + startVertex[0x10];
-  outVertex[0x11] = edgeT * (endWord11 - startWord11) + startWord11;
-  outVertex[0x12] = edgeT * (endWord12 - startWord12) + startWord12;
-  if (startVertex != outVertex) {
-    outVertex[0x1d] = startVertex[0x1d];
-    outVertex[0x1e] = startVertex[0x1e];
-  }
-  startWord0b = startVertex[0xb];
-  startWord09 = startVertex[9];
-  startWord0a = startVertex[10];
-  endWord0b = *(float *)(endVertex + 0x2c);
-  endWord09 = *(float *)(endVertex + 0x24);
-  endWord0a = *(float *)(endVertex + 0x28);
-  outVertex[8] = edgeT * (*(float *)(endVertex + 0x20) - startVertex[8]) + startVertex[8];
-  outVertex[9] = edgeT * (endWord09 - startWord09) + startWord09;
-  outVertex[0xb] = edgeT * (endWord0b - startWord0b) + startWord0b;
-  outVertex[10] = edgeT * (endWord0a - startWord0a) + startWord0a;
-  return uVar14;
-}
-
-/* _gleInterpolClipNO1111w @ 0xbebbc (924 bytes) */
-uint _gleInterpolClipNO1111w(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
-  bool bVar1;
-  byte startFlagByte7c;
-  byte startFlagByte7e;
-  float fVar4;
-  float startWord0b;
-  float startWord11;
-  float startWord21;
-  float windowBiasZ;
-  float fVar5;
-  float startWord09;
-  float startWord12;
-  float startWord22;
-  float windowScaleZ;
-  float fVar6;
-  float startWord0a;
-  float endWord11;
-  float startWord23;
-  float fVar7;
-  float endWord0b;
-  float endWord12;
-  float endWord21;
-  float fVar8;
-  float endWord09;
-  float endWord22;
-  float endClipX;
-  float endClipY;
-  float endWord0a;
-  float endWord23;
-  float endClipZ;
-  float endClipW;
-  float edgeT;
-  uint uVar13;
-  
-  fVar4 = startVertex[4];
-  fVar5 = startVertex[5];
-  fVar6 = startVertex[6];
-  fVar7 = startVertex[7];
-  endClipX = *(float *)(endVertex + 0x10);
-  endClipY = *(float *)(endVertex + 0x14);
-  endClipZ = *(float *)(endVertex + 0x18);
-  endClipW = *(float *)(endVertex + 0x1c);
-  if (clipPlane < 3) {
-    if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW + endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
-        uVar13 = 2;
-      }
-      else {
-        uVar13 = 0;
-      }
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW - endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = fVar7;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-    if (!bVar1) goto LAB_000bedc0;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
-      uVar13 = 4;
-    }
-    else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bed20;
-      uVar13 = 8;
-    }
-  }
-  else {
-    if (8 < clipPlane) {
-      if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW + endClipX));
-        fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 5;
-      }
-      else {
-        uVar13 = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar7 = fVar4;
-      }
-      bVar1 = uVar13 == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-      goto LAB_000bedc0;
-    }
-    if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW + endClipY));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      uVar13 = (uint)(fVar7 <= FLOAT_00108e50) << 3;
-    }
-    else {
-      uVar13 = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW - endClipY));
-      fVar5 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar7 = fVar5;
-    }
-    bVar1 = uVar13 == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-    if (!bVar1) goto LAB_000bedc0;
-    fVar8 = -fVar7;
-LAB_000bed20:
-    if (fVar4 < fVar8) {
-      uVar13 = 0x10;
-    }
-    else {
-      if (!(fVar7 <= fVar4)) goto LAB_000bedc0;
-      uVar13 = 0x20;
-    }
-  }
-  bVar1 = uVar13 == 0;
-LAB_000bedc0:
-  startFlagByte7c = *(byte *)(startVertex + 0x1f);
-  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | uVar13 | 0x10000)));
-  if (bVar1) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
-    }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
-    windowBiasZ = *(float *)(glContext + 0x1b88);
-    windowScaleZ = *(float *)(glContext + 0x1b78);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
-  }
-  outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
-  startWord21 = startVertex[0x21];
-  startWord22 = startVertex[0x22];
-  startWord23 = startVertex[0x23];
-  endWord21 = *(float *)(endVertex + 0x84);
-  endWord22 = *(float *)(endVertex + 0x88);
-  endWord23 = *(float *)(endVertex + 0x8c);
-  outVertex[0x20] = edgeT * (*(float *)(endVertex + 0x80) - startVertex[0x20]) + startVertex[0x20];
-  outVertex[0x21] = edgeT * (endWord21 - startWord21) + startWord21;
-  outVertex[0x22] = edgeT * (endWord22 - startWord22) + startWord22;
-  outVertex[0x23] = edgeT * (endWord23 - startWord23) + startWord23;
-  startWord11 = startVertex[0x11];
-  startWord12 = startVertex[0x12];
-  endWord11 = *(float *)(endVertex + 0x44);
-  endWord12 = *(float *)(endVertex + 0x48);
-  outVertex[0x10] = edgeT * (*(float *)(endVertex + 0x40) - startVertex[0x10]) + startVertex[0x10];
-  outVertex[0x11] = edgeT * (endWord11 - startWord11) + startWord11;
-  outVertex[0x12] = edgeT * (endWord12 - startWord12) + startWord12;
-  if (startVertex != outVertex) {
-    outVertex[0x1d] = startVertex[0x1d];
-    outVertex[0x1e] = startVertex[0x1e];
-  }
-  startWord0b = startVertex[0xb];
-  startWord09 = startVertex[9];
-  startWord0a = startVertex[10];
-  endWord0b = *(float *)(endVertex + 0x2c);
-  endWord09 = *(float *)(endVertex + 0x24);
-  endWord0a = *(float *)(endVertex + 0x28);
-  outVertex[8] = edgeT * (*(float *)(endVertex + 0x20) - startVertex[8]) + startVertex[8];
-  outVertex[0xb] = edgeT * (endWord0b - startWord0b) + startWord0b;
-  outVertex[9] = edgeT * (endWord09 - startWord09) + startWord09;
-  outVertex[10] = edgeT * (endWord0a - startWord0a) + startWord0a;
-  return uVar13;
-}
-
-/* _gleInterpolClipNO1200 @ 0xbef58 (932 bytes) */
-uint _gleInterpolClipNO1200(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
-{
   bool insideFrustum;
-  byte bVar2;
-  byte bVar3;
-  float fVar4;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  char endFlagByte7f;
+  float clipXThenNdcX;
+  float outTexCoordR;
+  float endTexCoordS;
   float startWord0d;
-  float windowScaleZ;
-  float fVar5;
-  float startWord0e;
   float windowBiasZ;
-  float fVar6;
-  float startWord0f;
-  float fVar7;
+  float clipYThenNdcY;
+  float endToOutTexCoordT;
+  float startWord0e;
+  float windowScaleZ;
+  float clipZThenNdcZ;
+  float endTexCoordR;
   float outInvW;
+  float startWord0f;
+  float clipWThenInvW;
+  float endToOutTexCoordQ;
   float endWord0d;
-  float fVar8;
+  float negClipW;
+  float outTexCoordS;
   float endClipW;
   float endWord0e;
   float endClipX;
@@ -4326,27 +2934,22 @@ uint _gleInterpolClipNO1200(int glContext,int startVertex,int endVertex,float *o
   float endClipZ;
   float endClipW2;
   float edgeT;
-  uint uVar13;
-  int iVar14;
-  uint texEnableMask;
   uint clipOutcode;
-  int iVar17;
-  uint uVar18;
   
-  fVar4 = *(float *)(startVertex + 0x10);
-  fVar5 = *(float *)(startVertex + 0x14);
-  fVar6 = *(float *)(startVertex + 0x18);
-  fVar7 = *(float *)(startVertex + 0x1c);
+  clipXThenNdcX = *(float *)(startVertex + 0x10);
+  clipYThenNdcY = *(float *)(startVertex + 0x14);
+  clipZThenNdcZ = *(float *)(startVertex + 0x18);
+  clipWThenInvW = *(float *)(startVertex + 0x1c);
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW2 = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW2 + endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -4355,92 +2958,1556 @@ uint _gleInterpolClipNO1200(int glContext,int startVertex,int endVertex,float *o
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW2 - endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = fVar7;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-    if (!insideFrustum) goto LAB_000bf15c;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bd53c;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bf0bc;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bd49c;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW2 + endClipX));
-        fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW2 - endClipX));
-        fVar4 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar7 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-      goto LAB_000bf15c;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000bd53c;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW2 + endClipY));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW2 - endClipY));
-      fVar5 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar7 = fVar5;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
-    if (!insideFrustum) goto LAB_000bf15c;
-    fVar8 = -fVar7;
-LAB_000bf0bc:
-    if (fVar4 < fVar8) {
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bd53c;
+    negClipW = -clipWThenInvW;
+LAB_000bd49c:
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000bf15c;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bd53c;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000bd53c:
+  startFlagByte7c = *(byte *)(startVertex + 0x7c);
+  startFlagByte7e = *(byte *)(startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  startWord0d = *(float *)(startVertex + 0x34);
+  startWord0e = *(float *)(startVertex + 0x38);
+  startWord0f = *(float *)(startVertex + 0x3c);
+  endWord0d = *(float *)(endVertex + 0x34);
+  endWord0e = *(float *)(endVertex + 0x38);
+  endWord0f = *(float *)(endVertex + 0x3c);
+  endFlagByte7f = *(char *)(endVertex + 0x7f);
+  outVertex[0xc] = edgeT * (*(float *)(endVertex + 0x30) - *(float *)(startVertex + 0x30)) +
+                 *(float *)(startVertex + 0x30);
+  outVertex[0xe] = edgeT * (endWord0e - startWord0e) + startWord0e;
+  outVertex[0xd] = edgeT * (endWord0d - startWord0d) + startWord0d;
+  outVertex[0xf] = edgeT * (endWord0f - startWord0f) + startWord0f;
+  endTexCoordS = *(float *)(endVertex + 0x80);
+  endToOutTexCoordT = *(float *)(endVertex + 0x84);
+  endTexCoordR = *(float *)(endVertex + 0x88);
+  endToOutTexCoordQ = *(float *)(endVertex + 0x8c);
+  if (endFlagByte7f == '\0') {
+    endClipW = *(float *)(endVertex + 0x1c);
+    endToOutTexCoordQ = endToOutTexCoordQ * endClipW;
+    endTexCoordS = endTexCoordS * endClipW;
+    endToOutTexCoordT = endToOutTexCoordT * endClipW;
+    endTexCoordR = endTexCoordR * endClipW;
+  }
+  outTexCoordS = edgeT * (endTexCoordS - *(float *)(startVertex + 0x80)) + *(float *)(startVertex + 0x80);
+  endToOutTexCoordT = edgeT * (endToOutTexCoordT - *(float *)(startVertex + 0x84)) + *(float *)(startVertex + 0x84);
+  endToOutTexCoordQ = edgeT * (endToOutTexCoordQ - *(float *)(startVertex + 0x8c)) + *(float *)(startVertex + 0x8c);
+  outTexCoordR = edgeT * (endTexCoordR - *(float *)(startVertex + 0x88)) + *(float *)(startVertex + 0x88);
+  if (insideFrustum) {
+    outInvW = outVertex[3];
+    endToOutTexCoordQ = endToOutTexCoordQ * outInvW;
+    outTexCoordS = outTexCoordS * outInvW;
+    endToOutTexCoordT = endToOutTexCoordT * outInvW;
+    outTexCoordR = outTexCoordR * outInvW;
+  }
+  outVertex[0x23] = endToOutTexCoordQ;
+  outVertex[0x20] = outTexCoordS;
+  outVertex[0x21] = endToOutTexCoordT;
+  outVertex[0x22] = outTexCoordR;
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO1100w @ 0xbd6a4 (820 bytes) */
+uint _gleInterpolClipNO1100w(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float startWord23;
+  float startWord0d;
+  float windowBiasZ;
+  float clipYThenNdcY;
+  float startWord21;
+  float startWord0e;
+  float windowScaleZ;
+  float clipZThenNdcZ;
+  float startWord22;
+  float startWord0f;
+  float clipWThenInvW;
+  float endWord23;
+  float endWord0d;
+  float negClipW;
+  float endWord21;
+  float endWord0e;
+  float endClipX;
+  float endClipY;
+  float endWord22;
+  float endWord0f;
+  float endClipZ;
+  float endClipW;
+  float edgeT;
+  uint clipOutcode;
+  
+  clipXThenNdcX = *(float *)(startVertex + 0x10);
+  clipYThenNdcY = *(float *)(startVertex + 0x14);
+  clipZThenNdcZ = *(float *)(startVertex + 0x18);
+  clipWThenInvW = *(float *)(startVertex + 0x1c);
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bd8a8;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bd808;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000bd8a8;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bd8a8;
+    negClipW = -clipWThenInvW;
+LAB_000bd808:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bd8a8;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000bd8a8:
+  startFlagByte7c = *(byte *)(startVertex + 0x7c);
+  startFlagByte7e = *(byte *)(startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  startWord0d = *(float *)(startVertex + 0x34);
+  startWord0e = *(float *)(startVertex + 0x38);
+  startWord0f = *(float *)(startVertex + 0x3c);
+  endWord0d = *(float *)(endVertex + 0x34);
+  endWord0e = *(float *)(endVertex + 0x38);
+  endWord0f = *(float *)(endVertex + 0x3c);
+  outVertex[0xc] = edgeT * (*(float *)(endVertex + 0x30) - *(float *)(startVertex + 0x30)) +
+                 *(float *)(startVertex + 0x30);
+  outVertex[0xd] = edgeT * (endWord0d - startWord0d) + startWord0d;
+  outVertex[0xe] = edgeT * (endWord0e - startWord0e) + startWord0e;
+  outVertex[0xf] = edgeT * (endWord0f - startWord0f) + startWord0f;
+  startWord23 = *(float *)(startVertex + 0x8c);
+  startWord21 = *(float *)(startVertex + 0x84);
+  startWord22 = *(float *)(startVertex + 0x88);
+  endWord23 = *(float *)(endVertex + 0x8c);
+  endWord21 = *(float *)(endVertex + 0x84);
+  endWord22 = *(float *)(endVertex + 0x88);
+  outVertex[0x20] =
+       edgeT * (*(float *)(endVertex + 0x80) - *(float *)(startVertex + 0x80)) +
+       *(float *)(startVertex + 0x80);
+  outVertex[0x21] = edgeT * (endWord21 - startWord21) + startWord21;
+  outVertex[0x23] = edgeT * (endWord23 - startWord23) + startWord23;
+  outVertex[0x22] = edgeT * (endWord22 - startWord22) + startWord22;
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO1101 @ 0xbd9d8 (960 bytes) */
+uint _gleInterpolClipNO1101(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float outTexCoordQ;
+  float endTexCoordS;
+  float startWord0b;
+  float startWord11;
+  float windowBiasZ;
+  float clipYThenNdcY;
+  float outTexCoordR;
+  float endTexCoordT;
+  float startWord09;
+  float startWord12;
+  float windowScaleZ;
+  float clipZThenNdcZ;
+  float endTexCoordR;
+  float startWord0a;
+  float endWord11;
+  float outInvW;
+  float clipWThenInvW;
+  float endTexCoordQ;
+  float endWord0b;
+  float endWord12;
+  float negClipW;
+  float outTexCoordT;
+  float endWord09;
+  float endClipW;
+  float endClipX;
+  float outTexCoordS;
+  float endWord0a;
+  float endClipY;
+  float endClipZ;
+  float endClipW2;
+  float edgeT;
+  uint clipOutcode;
+  
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW2 = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bdbdc;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bdb3c;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000bdbdc;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bdbdc;
+    negClipW = -clipWThenInvW;
+LAB_000bdb3c:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bdbdc;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000bdbdc:
+  startFlagByte7c = *(byte *)(startVertex + 0x1f);
+  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  endTexCoordS = *(float *)(endVertex + 0x80);
+  endTexCoordT = *(float *)(endVertex + 0x84);
+  endTexCoordR = *(float *)(endVertex + 0x88);
+  endTexCoordQ = *(float *)(endVertex + 0x8c);
+  if (*(char *)(endVertex + 0x7f) == '\0') {
+    endClipW = *(float *)(endVertex + 0x1c);
+    endTexCoordQ = endTexCoordQ * endClipW;
+    endTexCoordS = endTexCoordS * endClipW;
+    endTexCoordT = endTexCoordT * endClipW;
+    endTexCoordR = endTexCoordR * endClipW;
+  }
+  outTexCoordS = edgeT * (endTexCoordS - startVertex[0x20]) + startVertex[0x20];
+  outTexCoordT = edgeT * (endTexCoordT - startVertex[0x21]) + startVertex[0x21];
+  outTexCoordR = edgeT * (endTexCoordR - startVertex[0x22]) + startVertex[0x22];
+  outTexCoordQ = edgeT * (endTexCoordQ - startVertex[0x23]) + startVertex[0x23];
+  if (insideFrustum) {
+    outInvW = outVertex[3];
+    outTexCoordQ = outTexCoordQ * outInvW;
+    outTexCoordS = outTexCoordS * outInvW;
+    outTexCoordT = outTexCoordT * outInvW;
+    outTexCoordR = outTexCoordR * outInvW;
+  }
+  outVertex[0x20] = outTexCoordS;
+  outVertex[0x21] = outTexCoordT;
+  outVertex[0x22] = outTexCoordR;
+  outVertex[0x23] = outTexCoordQ;
+  startWord11 = startVertex[0x11];
+  startWord12 = startVertex[0x12];
+  endWord11 = *(float *)(endVertex + 0x44);
+  endWord12 = *(float *)(endVertex + 0x48);
+  outVertex[0x10] = edgeT * (*(float *)(endVertex + 0x40) - startVertex[0x10]) + startVertex[0x10];
+  outVertex[0x11] = edgeT * (endWord11 - startWord11) + startWord11;
+  outVertex[0x12] = edgeT * (endWord12 - startWord12) + startWord12;
+  if (startVertex != outVertex) {
+    outVertex[0x1d] = startVertex[0x1d];
+    outVertex[0x1e] = startVertex[0x1e];
+  }
+  startWord0b = startVertex[0xb];
+  startWord09 = startVertex[9];
+  startWord0a = startVertex[10];
+  endWord0b = *(float *)(endVertex + 0x2c);
+  endWord09 = *(float *)(endVertex + 0x24);
+  endWord0a = *(float *)(endVertex + 0x28);
+  outVertex[8] = edgeT * (*(float *)(endVertex + 0x20) - startVertex[8]) + startVertex[8];
+  outVertex[9] = edgeT * (endWord09 - startWord09) + startWord09;
+  outVertex[0xb] = edgeT * (endWord0b - startWord0b) + startWord0b;
+  outVertex[10] = edgeT * (endWord0a - startWord0a) + startWord0a;
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO1101w @ 0xbdd98 (904 bytes) */
+uint _gleInterpolClipNO1101w(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float startWord0b;
+  float startWord11;
+  float startWord21;
+  float windowBiasZ;
+  float clipYThenNdcY;
+  float startWord09;
+  float startWord12;
+  float startWord22;
+  float windowScaleZ;
+  float clipZThenNdcZ;
+  float startWord0a;
+  float endWord11;
+  float startWord23;
+  float clipWThenInvW;
+  float endWord0b;
+  float endWord12;
+  float endWord21;
+  float negClipW;
+  float endWord09;
+  float endWord22;
+  float endClipX;
+  float endClipY;
+  float endWord0a;
+  float endWord23;
+  float endClipZ;
+  float endClipW;
+  float edgeT;
+  uint clipOutcode;
+  
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bdf9c;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bdefc;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000bdf9c;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bdf9c;
+    negClipW = -clipWThenInvW;
+LAB_000bdefc:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bdf9c;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000bdf9c:
+  startFlagByte7c = *(byte *)(startVertex + 0x1f);
+  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  startWord21 = startVertex[0x21];
+  startWord22 = startVertex[0x22];
+  startWord23 = startVertex[0x23];
+  endWord21 = *(float *)(endVertex + 0x84);
+  endWord22 = *(float *)(endVertex + 0x88);
+  endWord23 = *(float *)(endVertex + 0x8c);
+  outVertex[0x20] = edgeT * (*(float *)(endVertex + 0x80) - startVertex[0x20]) + startVertex[0x20];
+  outVertex[0x21] = edgeT * (endWord21 - startWord21) + startWord21;
+  outVertex[0x22] = edgeT * (endWord22 - startWord22) + startWord22;
+  outVertex[0x23] = edgeT * (endWord23 - startWord23) + startWord23;
+  startWord11 = startVertex[0x11];
+  startWord12 = startVertex[0x12];
+  endWord11 = *(float *)(endVertex + 0x44);
+  endWord12 = *(float *)(endVertex + 0x48);
+  outVertex[0x10] = edgeT * (*(float *)(endVertex + 0x40) - startVertex[0x10]) + startVertex[0x10];
+  outVertex[0x11] = edgeT * (endWord11 - startWord11) + startWord11;
+  outVertex[0x12] = edgeT * (endWord12 - startWord12) + startWord12;
+  if (startVertex != outVertex) {
+    outVertex[0x1d] = startVertex[0x1d];
+    outVertex[0x1e] = startVertex[0x1e];
+  }
+  startWord0b = startVertex[0xb];
+  startWord09 = startVertex[9];
+  startWord0a = startVertex[10];
+  endWord0b = *(float *)(endVertex + 0x2c);
+  endWord09 = *(float *)(endVertex + 0x24);
+  endWord0a = *(float *)(endVertex + 0x28);
+  outVertex[8] = edgeT * (*(float *)(endVertex + 0x20) - startVertex[8]) + startVertex[8];
+  outVertex[0xb] = edgeT * (endWord0b - startWord0b) + startWord0b;
+  outVertex[9] = edgeT * (endWord09 - startWord09) + startWord09;
+  outVertex[10] = edgeT * (endWord0a - startWord0a) + startWord0a;
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO1110 @ 0xbe120 (896 bytes) */
+uint _gleInterpolClipNO1110(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  char endFlagByte7f;
+  float clipXThenNdcX;
+  float outTexCoordR;
+  float endTexCoordS;
+  float startWord0c;
+  float windowBiasZ;
+  float clipYThenNdcY;
+  float endToOutTexCoordT;
+  float startWord0d;
+  float windowScaleZ;
+  float clipZThenNdcZ;
+  float endTexCoordR;
+  float outInvW;
+  float startWord0f;
+  float clipWThenInvW;
+  float endToOutTexCoordQ;
+  float endWord0c;
+  float negClipW;
+  float outTexCoordS;
+  float endClipW;
+  float endWord0d;
+  float endClipX;
+  float endClipY;
+  float startWord0e;
+  float endClipZ;
+  float endWord0f;
+  float endClipW2;
+  float endWord0e;
+  float edgeT;
+  uint clipOutcode;
+  
+  clipXThenNdcX = *(float *)(startVertex + 0x10);
+  clipYThenNdcY = *(float *)(startVertex + 0x14);
+  clipZThenNdcZ = *(float *)(startVertex + 0x18);
+  clipWThenInvW = *(float *)(startVertex + 0x1c);
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW2 = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000be324;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000be284;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000be324;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000be324;
+    negClipW = -clipWThenInvW;
+LAB_000be284:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000be324;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000be324:
+  startFlagByte7c = *(byte *)(startVertex + 0x7c);
+  startFlagByte7e = *(byte *)(startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  startWord0c = *(float *)(startVertex + 0x30);
+  startWord0d = *(float *)(startVertex + 0x34);
+  startWord0f = *(float *)(startVertex + 0x3c);
+  endWord0c = *(float *)(endVertex + 0x30);
+  endWord0d = *(float *)(endVertex + 0x34);
+  startWord0e = *(float *)(startVertex + 0x38);
+  endWord0f = *(float *)(endVertex + 0x3c);
+  outVertex[0x13] =
+       edgeT * (*(float *)(endVertex + 0x4c) - *(float *)(startVertex + 0x4c)) +
+       *(float *)(startVertex + 0x4c);
+  endWord0e = *(float *)(endVertex + 0x38);
+  endFlagByte7f = *(char *)(endVertex + 0x7f);
+  outVertex[0xc] = edgeT * (endWord0c - startWord0c) + startWord0c;
+  outVertex[0xd] = edgeT * (endWord0d - startWord0d) + startWord0d;
+  outVertex[0xf] = edgeT * (endWord0f - startWord0f) + startWord0f;
+  outVertex[0xe] = edgeT * (endWord0e - startWord0e) + startWord0e;
+  endTexCoordS = *(float *)(endVertex + 0x80);
+  endToOutTexCoordT = *(float *)(endVertex + 0x84);
+  endTexCoordR = *(float *)(endVertex + 0x88);
+  endToOutTexCoordQ = *(float *)(endVertex + 0x8c);
+  if (endFlagByte7f == '\0') {
+    endClipW = *(float *)(endVertex + 0x1c);
+    endToOutTexCoordQ = endToOutTexCoordQ * endClipW;
+    endTexCoordS = endTexCoordS * endClipW;
+    endToOutTexCoordT = endToOutTexCoordT * endClipW;
+    endTexCoordR = endTexCoordR * endClipW;
+  }
+  outTexCoordS = edgeT * (endTexCoordS - *(float *)(startVertex + 0x80)) + *(float *)(startVertex + 0x80);
+  endToOutTexCoordT = edgeT * (endToOutTexCoordT - *(float *)(startVertex + 0x84)) + *(float *)(startVertex + 0x84);
+  endToOutTexCoordQ = edgeT * (endToOutTexCoordQ - *(float *)(startVertex + 0x8c)) + *(float *)(startVertex + 0x8c);
+  outTexCoordR = edgeT * (endTexCoordR - *(float *)(startVertex + 0x88)) + *(float *)(startVertex + 0x88);
+  if (insideFrustum) {
+    outInvW = outVertex[3];
+    endToOutTexCoordQ = endToOutTexCoordQ * outInvW;
+    outTexCoordS = outTexCoordS * outInvW;
+    endToOutTexCoordT = endToOutTexCoordT * outInvW;
+    outTexCoordR = outTexCoordR * outInvW;
+  }
+  outVertex[0x23] = endToOutTexCoordQ;
+  outVertex[0x20] = outTexCoordS;
+  outVertex[0x21] = endToOutTexCoordT;
+  outVertex[0x22] = outTexCoordR;
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO1110w @ 0xbe4a0 (840 bytes) */
+uint _gleInterpolClipNO1110w(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float startWord23;
+  float startWord0c;
+  float windowBiasZ;
+  float clipYThenNdcY;
+  float startWord21;
+  float startWord0d;
+  float windowScaleZ;
+  float clipZThenNdcZ;
+  float startWord22;
+  float startWord0f;
+  float clipWThenInvW;
+  float endWord23;
+  float endWord0c;
+  float negClipW;
+  float endWord21;
+  float endWord0d;
+  float endClipX;
+  float endClipY;
+  float endWord22;
+  float startWord0e;
+  float endClipZ;
+  float endWord0f;
+  float endClipW;
+  float endWord0e;
+  float edgeT;
+  uint clipOutcode;
+  
+  clipXThenNdcX = *(float *)(startVertex + 0x10);
+  clipYThenNdcY = *(float *)(startVertex + 0x14);
+  clipZThenNdcZ = *(float *)(startVertex + 0x18);
+  clipWThenInvW = *(float *)(startVertex + 0x1c);
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000be6a4;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000be604;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000be6a4;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000be6a4;
+    negClipW = -clipWThenInvW;
+LAB_000be604:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000be6a4;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000be6a4:
+  startFlagByte7c = *(byte *)(startVertex + 0x7c);
+  startFlagByte7e = *(byte *)(startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  startWord0c = *(float *)(startVertex + 0x30);
+  startWord0d = *(float *)(startVertex + 0x34);
+  startWord0f = *(float *)(startVertex + 0x3c);
+  endWord0c = *(float *)(endVertex + 0x30);
+  endWord0d = *(float *)(endVertex + 0x34);
+  startWord0e = *(float *)(startVertex + 0x38);
+  endWord0f = *(float *)(endVertex + 0x3c);
+  outVertex[0x13] =
+       edgeT * (*(float *)(endVertex + 0x4c) - *(float *)(startVertex + 0x4c)) +
+       *(float *)(startVertex + 0x4c);
+  endWord0e = *(float *)(endVertex + 0x38);
+  outVertex[0xc] = edgeT * (endWord0c - startWord0c) + startWord0c;
+  outVertex[0xd] = edgeT * (endWord0d - startWord0d) + startWord0d;
+  outVertex[0xf] = edgeT * (endWord0f - startWord0f) + startWord0f;
+  outVertex[0xe] = edgeT * (endWord0e - startWord0e) + startWord0e;
+  startWord23 = *(float *)(startVertex + 0x8c);
+  startWord21 = *(float *)(startVertex + 0x84);
+  startWord22 = *(float *)(startVertex + 0x88);
+  endWord23 = *(float *)(endVertex + 0x8c);
+  endWord21 = *(float *)(endVertex + 0x84);
+  endWord22 = *(float *)(endVertex + 0x88);
+  outVertex[0x20] =
+       edgeT * (*(float *)(endVertex + 0x80) - *(float *)(startVertex + 0x80)) +
+       *(float *)(startVertex + 0x80);
+  outVertex[0x21] = edgeT * (endWord21 - startWord21) + startWord21;
+  outVertex[0x23] = edgeT * (endWord23 - startWord23) + startWord23;
+  outVertex[0x22] = edgeT * (endWord22 - startWord22) + startWord22;
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO1111 @ 0xbe7e8 (980 bytes) */
+uint _gleInterpolClipNO1111(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  char endFlagByte7f;
+  float clipXThenNdcX;
+  float outTexCoordQ;
+  float endTexCoordS;
+  float startWord0b;
+  float startWord11;
+  float windowBiasZ;
+  float clipYThenNdcY;
+  float outTexCoordR;
+  float endTexCoordT;
+  float startWord09;
+  float startWord12;
+  float windowScaleZ;
+  float clipZThenNdcZ;
+  float endTexCoordR;
+  float startWord0a;
+  float endWord11;
+  float outInvW;
+  float clipWThenInvW;
+  float endTexCoordQ;
+  float endWord0b;
+  float endWord12;
+  float negClipW;
+  float outTexCoordT;
+  float endWord09;
+  float endClipW;
+  float endClipX;
+  float outTexCoordS;
+  float endWord0a;
+  float endClipY;
+  float endClipZ;
+  float endClipW2;
+  float edgeT;
+  uint clipOutcode;
+  
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW2 = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000be9ec;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000be94c;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000be9ec;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000be9ec;
+    negClipW = -clipWThenInvW;
+LAB_000be94c:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000be9ec;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000be9ec:
+  startFlagByte7c = *(byte *)(startVertex + 0x1f);
+  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  endFlagByte7f = *(char *)(endVertex + 0x7f);
+  outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
+  endTexCoordS = *(float *)(endVertex + 0x80);
+  endTexCoordT = *(float *)(endVertex + 0x84);
+  endTexCoordR = *(float *)(endVertex + 0x88);
+  endTexCoordQ = *(float *)(endVertex + 0x8c);
+  if (endFlagByte7f == '\0') {
+    endClipW = *(float *)(endVertex + 0x1c);
+    endTexCoordQ = endTexCoordQ * endClipW;
+    endTexCoordS = endTexCoordS * endClipW;
+    endTexCoordT = endTexCoordT * endClipW;
+    endTexCoordR = endTexCoordR * endClipW;
+  }
+  outTexCoordS = edgeT * (endTexCoordS - startVertex[0x20]) + startVertex[0x20];
+  outTexCoordT = edgeT * (endTexCoordT - startVertex[0x21]) + startVertex[0x21];
+  outTexCoordR = edgeT * (endTexCoordR - startVertex[0x22]) + startVertex[0x22];
+  outTexCoordQ = edgeT * (endTexCoordQ - startVertex[0x23]) + startVertex[0x23];
+  if (insideFrustum) {
+    outInvW = outVertex[3];
+    outTexCoordQ = outTexCoordQ * outInvW;
+    outTexCoordS = outTexCoordS * outInvW;
+    outTexCoordT = outTexCoordT * outInvW;
+    outTexCoordR = outTexCoordR * outInvW;
+  }
+  outVertex[0x20] = outTexCoordS;
+  outVertex[0x21] = outTexCoordT;
+  outVertex[0x22] = outTexCoordR;
+  outVertex[0x23] = outTexCoordQ;
+  startWord11 = startVertex[0x11];
+  startWord12 = startVertex[0x12];
+  endWord11 = *(float *)(endVertex + 0x44);
+  endWord12 = *(float *)(endVertex + 0x48);
+  outVertex[0x10] = edgeT * (*(float *)(endVertex + 0x40) - startVertex[0x10]) + startVertex[0x10];
+  outVertex[0x11] = edgeT * (endWord11 - startWord11) + startWord11;
+  outVertex[0x12] = edgeT * (endWord12 - startWord12) + startWord12;
+  if (startVertex != outVertex) {
+    outVertex[0x1d] = startVertex[0x1d];
+    outVertex[0x1e] = startVertex[0x1e];
+  }
+  startWord0b = startVertex[0xb];
+  startWord09 = startVertex[9];
+  startWord0a = startVertex[10];
+  endWord0b = *(float *)(endVertex + 0x2c);
+  endWord09 = *(float *)(endVertex + 0x24);
+  endWord0a = *(float *)(endVertex + 0x28);
+  outVertex[8] = edgeT * (*(float *)(endVertex + 0x20) - startVertex[8]) + startVertex[8];
+  outVertex[9] = edgeT * (endWord09 - startWord09) + startWord09;
+  outVertex[0xb] = edgeT * (endWord0b - startWord0b) + startWord0b;
+  outVertex[10] = edgeT * (endWord0a - startWord0a) + startWord0a;
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO1111w @ 0xbebbc (924 bytes) */
+uint _gleInterpolClipNO1111w(int glContext,float *startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float startWord0b;
+  float startWord11;
+  float startWord21;
+  float windowBiasZ;
+  float clipYThenNdcY;
+  float startWord09;
+  float startWord12;
+  float startWord22;
+  float windowScaleZ;
+  float clipZThenNdcZ;
+  float startWord0a;
+  float endWord11;
+  float startWord23;
+  float clipWThenInvW;
+  float endWord0b;
+  float endWord12;
+  float endWord21;
+  float negClipW;
+  float endWord09;
+  float endWord22;
+  float endClipX;
+  float endClipY;
+  float endWord0a;
+  float endWord23;
+  float endClipZ;
+  float endClipW;
+  float edgeT;
+  uint clipOutcode;
+  
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bedc0;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bed20;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000bedc0;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bedc0;
+    negClipW = -clipWThenInvW;
+LAB_000bed20:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bedc0;
+      clipOutcode = 0x20;
+    }
+  }
+  insideFrustum = clipOutcode == 0;
+LAB_000bedc0:
+  startFlagByte7c = *(byte *)(startVertex + 0x1f);
+  startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
+  if (insideFrustum) {
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
+    }
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
+    windowBiasZ = *(float *)(glContext + 0x1b88);
+    windowScaleZ = *(float *)(glContext + 0x1b78);
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
+  }
+  outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
+  startWord21 = startVertex[0x21];
+  startWord22 = startVertex[0x22];
+  startWord23 = startVertex[0x23];
+  endWord21 = *(float *)(endVertex + 0x84);
+  endWord22 = *(float *)(endVertex + 0x88);
+  endWord23 = *(float *)(endVertex + 0x8c);
+  outVertex[0x20] = edgeT * (*(float *)(endVertex + 0x80) - startVertex[0x20]) + startVertex[0x20];
+  outVertex[0x21] = edgeT * (endWord21 - startWord21) + startWord21;
+  outVertex[0x22] = edgeT * (endWord22 - startWord22) + startWord22;
+  outVertex[0x23] = edgeT * (endWord23 - startWord23) + startWord23;
+  startWord11 = startVertex[0x11];
+  startWord12 = startVertex[0x12];
+  endWord11 = *(float *)(endVertex + 0x44);
+  endWord12 = *(float *)(endVertex + 0x48);
+  outVertex[0x10] = edgeT * (*(float *)(endVertex + 0x40) - startVertex[0x10]) + startVertex[0x10];
+  outVertex[0x11] = edgeT * (endWord11 - startWord11) + startWord11;
+  outVertex[0x12] = edgeT * (endWord12 - startWord12) + startWord12;
+  if (startVertex != outVertex) {
+    outVertex[0x1d] = startVertex[0x1d];
+    outVertex[0x1e] = startVertex[0x1e];
+  }
+  startWord0b = startVertex[0xb];
+  startWord09 = startVertex[9];
+  startWord0a = startVertex[10];
+  endWord0b = *(float *)(endVertex + 0x2c);
+  endWord09 = *(float *)(endVertex + 0x24);
+  endWord0a = *(float *)(endVertex + 0x28);
+  outVertex[8] = edgeT * (*(float *)(endVertex + 0x20) - startVertex[8]) + startVertex[8];
+  outVertex[0xb] = edgeT * (endWord0b - startWord0b) + startWord0b;
+  outVertex[9] = edgeT * (endWord09 - startWord09) + startWord09;
+  outVertex[10] = edgeT * (endWord0a - startWord0a) + startWord0a;
+  return clipOutcode;
+}
+
+/* _gleInterpolClipNO1200 @ 0xbef58 (932 bytes) */
+uint _gleInterpolClipNO1200(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+{
+  bool insideFrustum;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float endToOutTexCoordQ;
+  float startWord0d;
+  float windowScaleZ;
+  float clipYThenNdcY;
+  float outTexCoordR;
+  float endTexCoordS;
+  float startWord0e;
+  float windowBiasZ;
+  float clipZThenNdcZ;
+  float endToOutTexCoordT;
+  float startWord0f;
+  float clipWThenInvW;
+  float endTexCoordR;
+  float outInvW;
+  float endWord0d;
+  float negClipW;
+  float outTexCoordS;
+  float endClipW;
+  float endWord0e;
+  float endClipX;
+  float endClipY;
+  float endWord0f;
+  float endClipZ;
+  float endClipW2;
+  float edgeT;
+  uint texMaskRemaining;
+  int startVertexAtUnit;
+  uint texEnableMask;
+  uint clipOutcode;
+  int endVertexAtUnit;
+  uint texUnit;
+  
+  clipXThenNdcX = *(float *)(startVertex + 0x10);
+  clipYThenNdcY = *(float *)(startVertex + 0x14);
+  clipZThenNdcZ = *(float *)(startVertex + 0x18);
+  clipWThenInvW = *(float *)(startVertex + 0x1c);
+  endClipX = *(float *)(endVertex + 0x10);
+  endClipY = *(float *)(endVertex + 0x14);
+  endClipZ = *(float *)(endVertex + 0x18);
+  endClipW2 = *(float *)(endVertex + 0x1c);
+  if (clipPlane < 3) {
+    if (clipPlane == 1) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
+        clipOutcode = 2;
+      }
+      else {
+        clipOutcode = 0;
+      }
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+    if (!insideFrustum) goto LAB_000bf15c;
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
+      clipOutcode = 4;
+    }
+    else {
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bf0bc;
+      clipOutcode = 8;
+    }
+  }
+  else {
+    if (8 < clipPlane) {
+      if (clipPlane == 0x10) {
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
+      }
+      else {
+        clipOutcode = 0;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
+      }
+      insideFrustum = clipOutcode == 0;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+      goto LAB_000bf15c;
+    }
+    if (clipPlane == 4) {
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
+    }
+    else {
+      clipOutcode = 0;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
+    }
+    insideFrustum = clipOutcode == 0;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
+    if (!insideFrustum) goto LAB_000bf15c;
+    negClipW = -clipWThenInvW;
+LAB_000bf0bc:
+    if (clipXThenNdcX < negClipW) {
+      clipOutcode = 0x10;
+    }
+    else {
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bf15c;
       clipOutcode = 0x20;
     }
   }
   insideFrustum = clipOutcode == 0;
 LAB_000bf15c:
-  bVar2 = *(byte *)(startVertex + 0x7c);
-  bVar3 = *(byte *)(startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)bVar2 << 0x18 | (uint)bVar3 << 8 | clipOutcode | 0x10000)));
+  startFlagByte7c = *(byte *)(startVertex + 0x7c);
+  startFlagByte7e = *(byte *)(startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar18 = 0;
+  texUnit = 0;
   startWord0d = *(float *)(startVertex + 0x34);
   startWord0e = *(float *)(startVertex + 0x38);
   startWord0f = *(float *)(startVertex + 0x3c);
@@ -4454,43 +4521,43 @@ LAB_000bf15c:
   outVertex[0xf] = edgeT * (endWord0f - startWord0f) + startWord0f;
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar13 = texEnableMask >> (uVar18 & 0x3f);
-    if ((uVar13 & 1) == 0) {
-      if (uVar13 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         return clipOutcode;
       }
     }
     else {
-      iVar14 = uVar18 * 0x10 + startVertex;
-      iVar17 = uVar18 * 0x10 + endVertex;
-      fVar4 = *(float *)(iVar17 + 0x8c);
-      fVar5 = *(float *)(iVar17 + 0x80);
-      fVar6 = *(float *)(iVar17 + 0x84);
-      fVar7 = *(float *)(iVar17 + 0x88);
+      startVertexAtUnit = texUnit * 0x10 + startVertex;
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      endToOutTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordS = *(float *)(endVertexAtUnit + 0x80);
+      endToOutTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
       if (*(char *)(endVertex + 0x7f) == '\0') {
         endClipW = *(float *)(endVertex + 0x1c);
-        fVar4 = fVar4 * endClipW;
-        fVar5 = fVar5 * endClipW;
-        fVar6 = fVar6 * endClipW;
-        fVar7 = fVar7 * endClipW;
+        endToOutTexCoordQ = endToOutTexCoordQ * endClipW;
+        endTexCoordS = endTexCoordS * endClipW;
+        endToOutTexCoordT = endToOutTexCoordT * endClipW;
+        endTexCoordR = endTexCoordR * endClipW;
       }
-      fVar8 = edgeT * (fVar5 - *(float *)(iVar14 + 0x80)) + *(float *)(iVar14 + 0x80);
-      fVar6 = edgeT * (fVar6 - *(float *)(iVar14 + 0x84)) + *(float *)(iVar14 + 0x84);
-      fVar5 = edgeT * (fVar7 - *(float *)(iVar14 + 0x88)) + *(float *)(iVar14 + 0x88);
-      fVar4 = edgeT * (fVar4 - *(float *)(iVar14 + 0x8c)) + *(float *)(iVar14 + 0x8c);
+      outTexCoordS = edgeT * (endTexCoordS - *(float *)(startVertexAtUnit + 0x80)) + *(float *)(startVertexAtUnit + 0x80);
+      endToOutTexCoordT = edgeT * (endToOutTexCoordT - *(float *)(startVertexAtUnit + 0x84)) + *(float *)(startVertexAtUnit + 0x84);
+      outTexCoordR = edgeT * (endTexCoordR - *(float *)(startVertexAtUnit + 0x88)) + *(float *)(startVertexAtUnit + 0x88);
+      endToOutTexCoordQ = edgeT * (endToOutTexCoordQ - *(float *)(startVertexAtUnit + 0x8c)) + *(float *)(startVertexAtUnit + 0x8c);
       if (insideFrustum) {
         outInvW = outVertex[3];
-        fVar4 = fVar4 * outInvW;
-        fVar8 = fVar8 * outInvW;
-        fVar6 = fVar6 * outInvW;
-        fVar5 = fVar5 * outInvW;
+        endToOutTexCoordQ = endToOutTexCoordQ * outInvW;
+        outTexCoordS = outTexCoordS * outInvW;
+        endToOutTexCoordT = endToOutTexCoordT * outInvW;
+        outTexCoordR = outTexCoordR * outInvW;
       }
-      outVertex[uVar18 * 4 + 0x23] = fVar4;
-      outVertex[uVar18 * 4 + 0x20] = fVar8;
-      outVertex[uVar18 * 4 + 0x21] = fVar6;
-      outVertex[uVar18 * 4 + 0x22] = fVar5;
+      outVertex[texUnit * 4 + 0x23] = endToOutTexCoordQ;
+      outVertex[texUnit * 4 + 0x20] = outTexCoordS;
+      outVertex[texUnit * 4 + 0x21] = endToOutTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = outTexCoordR;
     }
-    uVar18 = uVar18 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -4498,48 +4565,53 @@ LAB_000bf15c:
 uint _gleInterpolClipNO1200w(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   bool insideFrustum;
-  byte bVar2;
-  byte bVar3;
-  float fVar4;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float startTexCoordQ;
   float startWord0d;
   float windowScaleZ;
-  float fVar5;
+  float clipYThenNdcY;
+  float startTexCoordT;
   float startWord0e;
   float windowBiasZ;
-  float fVar6;
+  float clipZThenNdcZ;
+  float startTexCoordR;
   float startWord0f;
-  float fVar7;
+  float clipWThenInvW;
+  float endTexCoordQ;
   float endWord0d;
-  float fVar8;
+  float negClipW;
+  float endTexCoordT;
   float endWord0e;
   float endClipX;
-  float fVar9;
+  float endTexCoordR;
   float endWord0f;
   float endClipY;
   float endClipZ;
   float endClipW;
   float edgeT;
-  uint uVar13;
+  uint texMaskRemaining;
   uint texEnableMask;
   uint clipOutcode;
-  int iVar16;
-  uint uVar17;
-  int iVar18;
+  int startVertexAtUnit;
+  uint texUnit;
+  int endVertexAtUnit;
   
-  fVar4 = *(float *)(startVertex + 0x10);
-  fVar5 = *(float *)(startVertex + 0x14);
-  fVar6 = *(float *)(startVertex + 0x18);
-  fVar7 = *(float *)(startVertex + 0x1c);
+  clipXThenNdcX = *(float *)(startVertex + 0x10);
+  clipYThenNdcY = *(float *)(startVertex + 0x14);
+  clipZThenNdcZ = *(float *)(startVertex + 0x18);
+  clipWThenInvW = *(float *)(startVertex + 0x1c);
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW + endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -4548,92 +4620,92 @@ uint _gleInterpolClipNO1200w(int glContext,int startVertex,int endVertex,float *
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW - endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = fVar7;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000bf500;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bf460;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bf460;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW + endClipX));
-        fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar7 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000bf500;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW + endClipY));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW - endClipY));
-      fVar5 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar7 = fVar5;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000bf500;
-    fVar8 = -fVar7;
+    negClipW = -clipWThenInvW;
 LAB_000bf460:
-    if (fVar4 < fVar8) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000bf500;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bf500;
       clipOutcode = 0x20;
     }
   }
   insideFrustum = clipOutcode == 0;
 LAB_000bf500:
-  bVar2 = *(byte *)(startVertex + 0x7c);
-  bVar3 = *(byte *)(startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)bVar2 << 0x18 | (uint)bVar3 << 8 | clipOutcode | 0x10000)));
+  startFlagByte7c = *(byte *)(startVertex + 0x7c);
+  startFlagByte7e = *(byte *)(startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar17 = 0;
+  texUnit = 0;
   startWord0d = *(float *)(startVertex + 0x34);
   startWord0e = *(float *)(startVertex + 0x38);
   startWord0f = *(float *)(startVertex + 0x3c);
@@ -4647,29 +4719,29 @@ LAB_000bf500:
   outVertex[0xf] = edgeT * (endWord0f - startWord0f) + startWord0f;
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar13 = texEnableMask >> (uVar17 & 0x3f);
-    if ((uVar13 & 1) == 0) {
-      if (uVar13 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         return clipOutcode;
       }
     }
     else {
-      iVar16 = uVar17 * 0x10 + startVertex;
-      iVar18 = uVar17 * 0x10 + endVertex;
-      fVar4 = *(float *)(iVar16 + 0x8c);
-      fVar5 = *(float *)(iVar16 + 0x84);
-      fVar6 = *(float *)(iVar16 + 0x88);
-      fVar7 = *(float *)(iVar18 + 0x8c);
-      fVar8 = *(float *)(iVar18 + 0x84);
-      fVar9 = *(float *)(iVar18 + 0x88);
-      outVertex[uVar17 * 4 + 0x20] =
-           edgeT * (*(float *)(iVar18 + 0x80) - *(float *)(iVar16 + 0x80)) +
-           *(float *)(iVar16 + 0x80);
-      outVertex[uVar17 * 4 + 0x21] = edgeT * (fVar8 - fVar5) + fVar5;
-      outVertex[uVar17 * 4 + 0x22] = edgeT * (fVar9 - fVar6) + fVar6;
-      outVertex[uVar17 * 4 + 0x23] = edgeT * (fVar7 - fVar4) + fVar4;
+      startVertexAtUnit = texUnit * 0x10 + startVertex;
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      startTexCoordQ = *(float *)(startVertexAtUnit + 0x8c);
+      startTexCoordT = *(float *)(startVertexAtUnit + 0x84);
+      startTexCoordR = *(float *)(startVertexAtUnit + 0x88);
+      endTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
+      outVertex[texUnit * 4 + 0x20] =
+           edgeT * (*(float *)(endVertexAtUnit + 0x80) - *(float *)(startVertexAtUnit + 0x80)) +
+           *(float *)(startVertexAtUnit + 0x80);
+      outVertex[texUnit * 4 + 0x21] = edgeT * (endTexCoordT - startTexCoordT) + startTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = edgeT * (endTexCoordR - startTexCoordR) + startTexCoordR;
+      outVertex[texUnit * 4 + 0x23] = edgeT * (endTexCoordQ - startTexCoordQ) + startTexCoordQ;
     }
-    uVar17 = uVar17 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -4679,22 +4751,28 @@ uint _gleInterpolClipNO1201(int glContext,float *startVertex,int endVertex,float
   bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
-  float fVar4;
+  float clipXThenNdcX;
+  float endToOutTexCoordQ;
   float startWord0b;
   float startWord11;
   float windowScaleZ;
-  float fVar5;
+  float clipYThenNdcY;
+  float outTexCoordR;
+  float endTexCoordS;
   float startWord09;
   float startWord12;
   float windowBiasZ;
-  float fVar6;
+  float clipZThenNdcZ;
+  float endToOutTexCoordT;
   float startWord0a;
   float endWord11;
-  float fVar7;
+  float clipWThenInvW;
+  float endTexCoordR;
   float outInvW;
   float endWord0b;
   float endWord12;
-  float fVar8;
+  float negClipW;
+  float outTexCoordS;
   float endClipW;
   float endWord09;
   float endClipX;
@@ -4703,26 +4781,26 @@ uint _gleInterpolClipNO1201(int glContext,float *startVertex,int endVertex,float
   float endClipZ;
   float endClipW2;
   float edgeT;
-  uint uVar13;
+  uint texMaskRemaining;
   uint texEnableMask;
   uint clipOutcode;
-  int iVar16;
-  uint uVar17;
+  int endVertexAtUnit;
+  uint texUnit;
   
-  fVar4 = startVertex[4];
-  fVar5 = startVertex[5];
-  fVar6 = startVertex[6];
-  fVar7 = startVertex[7];
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW2 = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW2 + endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -4731,65 +4809,65 @@ uint _gleInterpolClipNO1201(int glContext,float *startVertex,int endVertex,float
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW2 - endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = fVar7;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000bf86c;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bf7cc;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bf7cc;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW2 + endClipX));
-        fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW2 - endClipX));
-        fVar4 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar7 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000bf86c;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW2 + endClipY));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW2 - endClipY));
-      fVar5 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar7 = fVar5;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000bf86c;
-    fVar8 = -fVar7;
+    negClipW = -clipWThenInvW;
 LAB_000bf7cc:
-    if (fVar4 < fVar8) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000bf86c;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bf86c;
       clipOutcode = 0x20;
     }
   }
@@ -4797,31 +4875,31 @@ LAB_000bf7cc:
 LAB_000bf86c:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
   outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
   texEnableMask = *(uint *)(glContext + 0x5150);
-  uVar17 = 0;
+  texUnit = 0;
   do {
-    uVar13 = texEnableMask >> (uVar17 & 0x3f);
-    if ((uVar13 & 1) == 0) {
-      if (uVar13 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         startWord11 = startVertex[0x11];
         startWord12 = startVertex[0x12];
         endWord11 = *(float *)(endVertex + 0x44);
@@ -4847,35 +4925,35 @@ LAB_000bf86c:
       }
     }
     else {
-      iVar16 = uVar17 * 0x10 + endVertex;
-      fVar4 = *(float *)(iVar16 + 0x8c);
-      fVar5 = *(float *)(iVar16 + 0x80);
-      fVar6 = *(float *)(iVar16 + 0x84);
-      fVar7 = *(float *)(iVar16 + 0x88);
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      endToOutTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordS = *(float *)(endVertexAtUnit + 0x80);
+      endToOutTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
       if (*(char *)(endVertex + 0x7f) == '\0') {
         endClipW = *(float *)(endVertex + 0x1c);
-        fVar4 = fVar4 * endClipW;
-        fVar5 = fVar5 * endClipW;
-        fVar6 = fVar6 * endClipW;
-        fVar7 = fVar7 * endClipW;
+        endToOutTexCoordQ = endToOutTexCoordQ * endClipW;
+        endTexCoordS = endTexCoordS * endClipW;
+        endToOutTexCoordT = endToOutTexCoordT * endClipW;
+        endTexCoordR = endTexCoordR * endClipW;
       }
-      fVar8 = edgeT * (fVar5 - startVertex[uVar17 * 4 + 0x20]) + startVertex[uVar17 * 4 + 0x20];
-      fVar6 = edgeT * (fVar6 - startVertex[uVar17 * 4 + 0x21]) + startVertex[uVar17 * 4 + 0x21];
-      fVar5 = edgeT * (fVar7 - startVertex[uVar17 * 4 + 0x22]) + startVertex[uVar17 * 4 + 0x22];
-      fVar4 = edgeT * (fVar4 - startVertex[uVar17 * 4 + 0x23]) + startVertex[uVar17 * 4 + 0x23];
+      outTexCoordS = edgeT * (endTexCoordS - startVertex[texUnit * 4 + 0x20]) + startVertex[texUnit * 4 + 0x20];
+      endToOutTexCoordT = edgeT * (endToOutTexCoordT - startVertex[texUnit * 4 + 0x21]) + startVertex[texUnit * 4 + 0x21];
+      outTexCoordR = edgeT * (endTexCoordR - startVertex[texUnit * 4 + 0x22]) + startVertex[texUnit * 4 + 0x22];
+      endToOutTexCoordQ = edgeT * (endToOutTexCoordQ - startVertex[texUnit * 4 + 0x23]) + startVertex[texUnit * 4 + 0x23];
       if (insideFrustum) {
         outInvW = outVertex[3];
-        fVar4 = fVar4 * outInvW;
-        fVar8 = fVar8 * outInvW;
-        fVar6 = fVar6 * outInvW;
-        fVar5 = fVar5 * outInvW;
+        endToOutTexCoordQ = endToOutTexCoordQ * outInvW;
+        outTexCoordS = outTexCoordS * outInvW;
+        endToOutTexCoordT = endToOutTexCoordT * outInvW;
+        outTexCoordR = outTexCoordR * outInvW;
       }
-      outVertex[uVar17 * 4 + 0x23] = fVar4;
-      outVertex[uVar17 * 4 + 0x20] = fVar8;
-      outVertex[uVar17 * 4 + 0x21] = fVar6;
-      outVertex[uVar17 * 4 + 0x22] = fVar5;
+      outVertex[texUnit * 4 + 0x23] = endToOutTexCoordQ;
+      outVertex[texUnit * 4 + 0x20] = outTexCoordS;
+      outVertex[texUnit * 4 + 0x21] = endToOutTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = outTexCoordR;
     }
-    uVar17 = uVar17 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -4885,52 +4963,54 @@ uint _gleInterpolClipNO1201w(int glContext,float *startVertex,int endVertex,floa
   bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
-  float fVar4;
+  float clipXThenNdcX;
   float startTexCoordQ;
   float startWord0b;
   float startWord11;
   float windowScaleZ;
-  float fVar5;
+  float clipYThenNdcY;
   float startTexCoordT;
   float startWord09;
   float startWord12;
   float windowBiasZ;
-  float fVar6;
+  float clipZThenNdcZ;
   float startTexCoordR;
   float startWord0a;
   float endWord11;
-  float fVar7;
+  float clipWThenInvW;
+  float endTexCoordQ;
   float endWord0b;
   float endWord12;
-  float fVar8;
+  float negClipW;
+  float endTexCoordT;
   float endWord09;
   float endClipX;
-  float fVar9;
+  float endTexCoordR;
   float endWord0a;
   float endClipY;
   float endClipZ;
   float endClipW;
   float edgeT;
-  uint uVar13;
+  uint texMaskRemaining;
   uint texEnableMask;
   uint clipOutcode;
-  uint uVar16;
-  int iVar17;
+  uint texUnit;
+  int endVertexAtUnit;
   
-  fVar4 = startVertex[4];
-  fVar5 = startVertex[5];
-  fVar6 = startVertex[6];
-  fVar7 = startVertex[7];
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW + endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -4939,65 +5019,65 @@ uint _gleInterpolClipNO1201w(int glContext,float *startVertex,int endVertex,floa
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW - endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = fVar7;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000bfc64;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bfbc4;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bfbc4;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW + endClipX));
-        fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar7 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000bfc64;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW + endClipY));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW - endClipY));
-      fVar5 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar7 = fVar5;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000bfc64;
-    fVar8 = -fVar7;
+    negClipW = -clipWThenInvW;
 LAB_000bfbc4:
-    if (fVar4 < fVar8) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000bfc64;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000bfc64;
       clipOutcode = 0x20;
     }
   }
@@ -5005,31 +5085,31 @@ LAB_000bfbc4:
 LAB_000bfc64:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
   outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
   texEnableMask = *(uint *)(glContext + 0x5150);
-  uVar16 = 0;
+  texUnit = 0;
   do {
-    uVar13 = texEnableMask >> (uVar16 & 0x3f);
-    if ((uVar13 & 1) == 0) {
-      if (uVar13 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         startWord11 = startVertex[0x11];
         startWord12 = startVertex[0x12];
         endWord11 = *(float *)(endVertex + 0x44);
@@ -5055,21 +5135,21 @@ LAB_000bfc64:
       }
     }
     else {
-      iVar17 = uVar16 * 0x10 + endVertex;
-      startTexCoordQ = startVertex[uVar16 * 4 + 0x23];
-      startTexCoordT = startVertex[uVar16 * 4 + 0x21];
-      startTexCoordR = startVertex[uVar16 * 4 + 0x22];
-      fVar7 = *(float *)(iVar17 + 0x8c);
-      fVar8 = *(float *)(iVar17 + 0x84);
-      fVar9 = *(float *)(iVar17 + 0x88);
-      outVertex[uVar16 * 4 + 0x20] =
-           edgeT * (*(float *)(iVar17 + 0x80) - startVertex[uVar16 * 4 + 0x20]) +
-           startVertex[uVar16 * 4 + 0x20];
-      outVertex[uVar16 * 4 + 0x21] = edgeT * (fVar8 - startTexCoordT) + startTexCoordT;
-      outVertex[uVar16 * 4 + 0x22] = edgeT * (fVar9 - startTexCoordR) + startTexCoordR;
-      outVertex[uVar16 * 4 + 0x23] = edgeT * (fVar7 - startTexCoordQ) + startTexCoordQ;
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      startTexCoordQ = startVertex[texUnit * 4 + 0x23];
+      startTexCoordT = startVertex[texUnit * 4 + 0x21];
+      startTexCoordR = startVertex[texUnit * 4 + 0x22];
+      endTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
+      outVertex[texUnit * 4 + 0x20] =
+           edgeT * (*(float *)(endVertexAtUnit + 0x80) - startVertex[texUnit * 4 + 0x20]) +
+           startVertex[texUnit * 4 + 0x20];
+      outVertex[texUnit * 4 + 0x21] = edgeT * (endTexCoordT - startTexCoordT) + startTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = edgeT * (endTexCoordR - startTexCoordR) + startTexCoordR;
+      outVertex[texUnit * 4 + 0x23] = edgeT * (endTexCoordQ - startTexCoordQ) + startTexCoordQ;
     }
-    uVar16 = uVar16 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -5077,20 +5157,26 @@ LAB_000bfc64:
 uint _gleInterpolClipNO1210(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   bool insideFrustum;
-  byte bVar2;
-  byte bVar3;
-  float fVar4;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float endToOutTexCoordQ;
   float startWord0c;
   float windowScaleZ;
-  float fVar5;
+  float clipYThenNdcY;
+  float outTexCoordR;
+  float endTexCoordS;
   float startWord0d;
   float windowBiasZ;
-  float fVar6;
+  float clipZThenNdcZ;
+  float endToOutTexCoordT;
   float startWord0f;
-  float fVar7;
+  float clipWThenInvW;
+  float endTexCoordR;
   float outInvW;
   float endWord0c;
-  float fVar8;
+  float negClipW;
+  float outTexCoordS;
   float endClipW;
   float endWord0d;
   float endClipX;
@@ -5101,27 +5187,27 @@ uint _gleInterpolClipNO1210(int glContext,int startVertex,int endVertex,float *o
   float endClipW2;
   float endWord0e;
   float edgeT;
-  uint uVar13;
-  int iVar14;
+  uint texMaskRemaining;
+  int startVertexAtUnit;
   uint texEnableMask;
   uint clipOutcode;
-  int iVar17;
-  uint uVar18;
+  int endVertexAtUnit;
+  uint texUnit;
   
-  fVar4 = *(float *)(startVertex + 0x10);
-  fVar5 = *(float *)(startVertex + 0x14);
-  fVar6 = *(float *)(startVertex + 0x18);
-  fVar7 = *(float *)(startVertex + 0x1c);
+  clipXThenNdcX = *(float *)(startVertex + 0x10);
+  clipYThenNdcY = *(float *)(startVertex + 0x14);
+  clipZThenNdcZ = *(float *)(startVertex + 0x18);
+  clipWThenInvW = *(float *)(startVertex + 0x1c);
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW2 = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW2 + endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -5130,92 +5216,92 @@ uint _gleInterpolClipNO1210(int glContext,int startVertex,int endVertex,float *o
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW2 - endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = fVar7;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000c0024;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000bff84;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000bff84;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW2 + endClipX));
-        fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW2 - endClipX));
-        fVar4 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar7 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000c0024;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW2 + endClipY));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW2 - endClipY));
-      fVar5 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar7 = fVar5;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000c0024;
-    fVar8 = -fVar7;
+    negClipW = -clipWThenInvW;
 LAB_000bff84:
-    if (fVar4 < fVar8) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000c0024;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000c0024;
       clipOutcode = 0x20;
     }
   }
   insideFrustum = clipOutcode == 0;
 LAB_000c0024:
-  bVar2 = *(byte *)(startVertex + 0x7c);
-  bVar3 = *(byte *)(startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)bVar2 << 0x18 | (uint)bVar3 << 8 | clipOutcode | 0x10000)));
+  startFlagByte7c = *(byte *)(startVertex + 0x7c);
+  startFlagByte7e = *(byte *)(startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar18 = 0;
+  texUnit = 0;
   startWord0c = *(float *)(startVertex + 0x30);
   startWord0d = *(float *)(startVertex + 0x34);
   startWord0f = *(float *)(startVertex + 0x3c);
@@ -5233,43 +5319,43 @@ LAB_000c0024:
   outVertex[0xe] = edgeT * (endWord0e - startWord0e) + startWord0e;
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar13 = texEnableMask >> (uVar18 & 0x3f);
-    if ((uVar13 & 1) == 0) {
-      if (uVar13 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         return clipOutcode;
       }
     }
     else {
-      iVar14 = uVar18 * 0x10 + startVertex;
-      iVar17 = uVar18 * 0x10 + endVertex;
-      fVar4 = *(float *)(iVar17 + 0x8c);
-      fVar5 = *(float *)(iVar17 + 0x80);
-      fVar6 = *(float *)(iVar17 + 0x84);
-      fVar7 = *(float *)(iVar17 + 0x88);
+      startVertexAtUnit = texUnit * 0x10 + startVertex;
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      endToOutTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordS = *(float *)(endVertexAtUnit + 0x80);
+      endToOutTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
       if (*(char *)(endVertex + 0x7f) == '\0') {
         endClipW = *(float *)(endVertex + 0x1c);
-        fVar4 = fVar4 * endClipW;
-        fVar5 = fVar5 * endClipW;
-        fVar6 = fVar6 * endClipW;
-        fVar7 = fVar7 * endClipW;
+        endToOutTexCoordQ = endToOutTexCoordQ * endClipW;
+        endTexCoordS = endTexCoordS * endClipW;
+        endToOutTexCoordT = endToOutTexCoordT * endClipW;
+        endTexCoordR = endTexCoordR * endClipW;
       }
-      fVar8 = edgeT * (fVar5 - *(float *)(iVar14 + 0x80)) + *(float *)(iVar14 + 0x80);
-      fVar6 = edgeT * (fVar6 - *(float *)(iVar14 + 0x84)) + *(float *)(iVar14 + 0x84);
-      fVar5 = edgeT * (fVar7 - *(float *)(iVar14 + 0x88)) + *(float *)(iVar14 + 0x88);
-      fVar4 = edgeT * (fVar4 - *(float *)(iVar14 + 0x8c)) + *(float *)(iVar14 + 0x8c);
+      outTexCoordS = edgeT * (endTexCoordS - *(float *)(startVertexAtUnit + 0x80)) + *(float *)(startVertexAtUnit + 0x80);
+      endToOutTexCoordT = edgeT * (endToOutTexCoordT - *(float *)(startVertexAtUnit + 0x84)) + *(float *)(startVertexAtUnit + 0x84);
+      outTexCoordR = edgeT * (endTexCoordR - *(float *)(startVertexAtUnit + 0x88)) + *(float *)(startVertexAtUnit + 0x88);
+      endToOutTexCoordQ = edgeT * (endToOutTexCoordQ - *(float *)(startVertexAtUnit + 0x8c)) + *(float *)(startVertexAtUnit + 0x8c);
       if (insideFrustum) {
         outInvW = outVertex[3];
-        fVar4 = fVar4 * outInvW;
-        fVar8 = fVar8 * outInvW;
-        fVar6 = fVar6 * outInvW;
-        fVar5 = fVar5 * outInvW;
+        endToOutTexCoordQ = endToOutTexCoordQ * outInvW;
+        outTexCoordS = outTexCoordS * outInvW;
+        endToOutTexCoordT = endToOutTexCoordT * outInvW;
+        outTexCoordR = outTexCoordR * outInvW;
       }
-      outVertex[uVar18 * 4 + 0x23] = fVar4;
-      outVertex[uVar18 * 4 + 0x20] = fVar8;
-      outVertex[uVar18 * 4 + 0x21] = fVar6;
-      outVertex[uVar18 * 4 + 0x22] = fVar5;
+      outVertex[texUnit * 4 + 0x23] = endToOutTexCoordQ;
+      outVertex[texUnit * 4 + 0x20] = outTexCoordS;
+      outVertex[texUnit * 4 + 0x21] = endToOutTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = outTexCoordR;
     }
-    uVar18 = uVar18 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -5277,22 +5363,27 @@ LAB_000c0024:
 uint _gleInterpolClipNO1210w(int glContext,int startVertex,int endVertex,float *outVertex,uint clipPlane,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   bool insideFrustum;
-  byte bVar2;
-  byte bVar3;
-  float fVar4;
+  byte startFlagByte7c;
+  byte startFlagByte7e;
+  float clipXThenNdcX;
+  float startTexCoordQ;
   float startWord0c;
   float windowScaleZ;
-  float fVar5;
+  float clipYThenNdcY;
+  float startTexCoordT;
   float startWord0d;
   float windowBiasZ;
-  float fVar6;
+  float clipZThenNdcZ;
+  float startTexCoordR;
   float startWord0f;
-  float fVar7;
+  float clipWThenInvW;
+  float endTexCoordQ;
   float endWord0c;
-  float fVar8;
+  float negClipW;
+  float endTexCoordT;
   float endWord0d;
   float endClipX;
-  float fVar9;
+  float endTexCoordR;
   float startWord0e;
   float endClipY;
   float endClipZ;
@@ -5300,27 +5391,27 @@ uint _gleInterpolClipNO1210w(int glContext,int startVertex,int endVertex,float *
   float endClipW;
   float endWord0e;
   float edgeT;
-  uint uVar13;
+  uint texMaskRemaining;
   uint texEnableMask;
   uint clipOutcode;
-  int iVar16;
-  uint uVar17;
-  int iVar18;
+  int startVertexAtUnit;
+  uint texUnit;
+  int endVertexAtUnit;
   
-  fVar4 = *(float *)(startVertex + 0x10);
-  fVar5 = *(float *)(startVertex + 0x14);
-  fVar6 = *(float *)(startVertex + 0x18);
-  fVar7 = *(float *)(startVertex + 0x1c);
+  clipXThenNdcX = *(float *)(startVertex + 0x10);
+  clipYThenNdcY = *(float *)(startVertex + 0x14);
+  clipZThenNdcZ = *(float *)(startVertex + 0x18);
+  clipWThenInvW = *(float *)(startVertex + 0x1c);
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW + endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -5329,92 +5420,92 @@ uint _gleInterpolClipNO1210w(int glContext,int startVertex,int endVertex,float *
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW - endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = fVar7;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000c03dc;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000c033c;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000c033c;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW + endClipX));
-        fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar7 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000c03dc;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW + endClipY));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW - endClipY));
-      fVar5 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar7 = fVar5;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000c03dc;
-    fVar8 = -fVar7;
+    negClipW = -clipWThenInvW;
 LAB_000c033c:
-    if (fVar4 < fVar8) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000c03dc;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000c03dc;
       clipOutcode = 0x20;
     }
   }
   insideFrustum = clipOutcode == 0;
 LAB_000c03dc:
-  bVar2 = *(byte *)(startVertex + 0x7c);
-  bVar3 = *(byte *)(startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
-  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)bVar2 << 0x18 | (uint)bVar3 << 8 | clipOutcode | 0x10000)));
+  startFlagByte7c = *(byte *)(startVertex + 0x7c);
+  startFlagByte7e = *(byte *)(startVertex + 0x7e);
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
+  outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar17 = 0;
+  texUnit = 0;
   startWord0c = *(float *)(startVertex + 0x30);
   startWord0d = *(float *)(startVertex + 0x34);
   startWord0f = *(float *)(startVertex + 0x3c);
@@ -5432,29 +5523,29 @@ LAB_000c03dc:
   outVertex[0xe] = edgeT * (endWord0e - startWord0e) + startWord0e;
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar13 = texEnableMask >> (uVar17 & 0x3f);
-    if ((uVar13 & 1) == 0) {
-      if (uVar13 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         return clipOutcode;
       }
     }
     else {
-      iVar16 = uVar17 * 0x10 + startVertex;
-      iVar18 = uVar17 * 0x10 + endVertex;
-      fVar4 = *(float *)(iVar16 + 0x8c);
-      fVar5 = *(float *)(iVar16 + 0x84);
-      fVar6 = *(float *)(iVar16 + 0x88);
-      fVar7 = *(float *)(iVar18 + 0x8c);
-      fVar8 = *(float *)(iVar18 + 0x84);
-      fVar9 = *(float *)(iVar18 + 0x88);
-      outVertex[uVar17 * 4 + 0x20] =
-           edgeT * (*(float *)(iVar18 + 0x80) - *(float *)(iVar16 + 0x80)) +
-           *(float *)(iVar16 + 0x80);
-      outVertex[uVar17 * 4 + 0x21] = edgeT * (fVar8 - fVar5) + fVar5;
-      outVertex[uVar17 * 4 + 0x22] = edgeT * (fVar9 - fVar6) + fVar6;
-      outVertex[uVar17 * 4 + 0x23] = edgeT * (fVar7 - fVar4) + fVar4;
+      startVertexAtUnit = texUnit * 0x10 + startVertex;
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      startTexCoordQ = *(float *)(startVertexAtUnit + 0x8c);
+      startTexCoordT = *(float *)(startVertexAtUnit + 0x84);
+      startTexCoordR = *(float *)(startVertexAtUnit + 0x88);
+      endTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
+      outVertex[texUnit * 4 + 0x20] =
+           edgeT * (*(float *)(endVertexAtUnit + 0x80) - *(float *)(startVertexAtUnit + 0x80)) +
+           *(float *)(startVertexAtUnit + 0x80);
+      outVertex[texUnit * 4 + 0x21] = edgeT * (endTexCoordT - startTexCoordT) + startTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = edgeT * (endTexCoordR - startTexCoordR) + startTexCoordR;
+      outVertex[texUnit * 4 + 0x23] = edgeT * (endTexCoordQ - startTexCoordQ) + startTexCoordQ;
     }
-    uVar17 = uVar17 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -5464,22 +5555,28 @@ uint _gleInterpolClipNO1211(int glContext,float *startVertex,int endVertex,float
   bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
-  float fVar4;
+  float clipXThenNdcX;
+  float endToOutTexCoordQ;
   float startWord0b;
   float startWord11;
   float windowScaleZ;
-  float fVar5;
+  float clipYThenNdcY;
+  float outTexCoordR;
+  float endTexCoordS;
   float startWord09;
   float startWord12;
   float windowBiasZ;
-  float fVar6;
+  float clipZThenNdcZ;
+  float endToOutTexCoordT;
   float startWord0a;
   float endWord11;
-  float fVar7;
+  float clipWThenInvW;
+  float endTexCoordR;
   float outInvW;
   float endWord0b;
   float endWord12;
-  float fVar8;
+  float negClipW;
+  float outTexCoordS;
   float endClipW;
   float endWord09;
   float endClipX;
@@ -5488,26 +5585,26 @@ uint _gleInterpolClipNO1211(int glContext,float *startVertex,int endVertex,float
   float endClipZ;
   float endClipW2;
   float edgeT;
-  uint uVar13;
+  uint texMaskRemaining;
   uint texEnableMask;
   uint clipOutcode;
-  int iVar16;
-  uint uVar17;
+  int endVertexAtUnit;
+  uint texUnit;
   
-  fVar4 = startVertex[4];
-  fVar5 = startVertex[5];
-  fVar6 = startVertex[6];
-  fVar7 = startVertex[7];
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW2 = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW2 + endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -5516,65 +5613,65 @@ uint _gleInterpolClipNO1211(int glContext,float *startVertex,int endVertex,float
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW2 - endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = fVar7;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000c075c;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000c06bc;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000c06bc;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW2 + endClipX));
-        fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW2 - endClipX));
-        fVar4 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar7 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000c075c;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW2 + endClipY));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW2 - endClipY));
-      fVar5 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar7 = fVar5;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000c075c;
-    fVar8 = -fVar7;
+    negClipW = -clipWThenInvW;
 LAB_000c06bc:
-    if (fVar4 < fVar8) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000c075c;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000c075c;
       clipOutcode = 0x20;
     }
   }
@@ -5582,32 +5679,32 @@ LAB_000c06bc:
 LAB_000c075c:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
   outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar17 = 0;
+  texUnit = 0;
   outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar13 = texEnableMask >> (uVar17 & 0x3f);
-    if ((uVar13 & 1) == 0) {
-      if (uVar13 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         startWord11 = startVertex[0x11];
         startWord12 = startVertex[0x12];
         endWord11 = *(float *)(endVertex + 0x44);
@@ -5633,35 +5730,35 @@ LAB_000c075c:
       }
     }
     else {
-      iVar16 = uVar17 * 0x10 + endVertex;
-      fVar4 = *(float *)(iVar16 + 0x8c);
-      fVar5 = *(float *)(iVar16 + 0x80);
-      fVar6 = *(float *)(iVar16 + 0x84);
-      fVar7 = *(float *)(iVar16 + 0x88);
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      endToOutTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordS = *(float *)(endVertexAtUnit + 0x80);
+      endToOutTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
       if (*(char *)(endVertex + 0x7f) == '\0') {
         endClipW = *(float *)(endVertex + 0x1c);
-        fVar4 = fVar4 * endClipW;
-        fVar5 = fVar5 * endClipW;
-        fVar6 = fVar6 * endClipW;
-        fVar7 = fVar7 * endClipW;
+        endToOutTexCoordQ = endToOutTexCoordQ * endClipW;
+        endTexCoordS = endTexCoordS * endClipW;
+        endToOutTexCoordT = endToOutTexCoordT * endClipW;
+        endTexCoordR = endTexCoordR * endClipW;
       }
-      fVar8 = edgeT * (fVar5 - startVertex[uVar17 * 4 + 0x20]) + startVertex[uVar17 * 4 + 0x20];
-      fVar6 = edgeT * (fVar6 - startVertex[uVar17 * 4 + 0x21]) + startVertex[uVar17 * 4 + 0x21];
-      fVar5 = edgeT * (fVar7 - startVertex[uVar17 * 4 + 0x22]) + startVertex[uVar17 * 4 + 0x22];
-      fVar4 = edgeT * (fVar4 - startVertex[uVar17 * 4 + 0x23]) + startVertex[uVar17 * 4 + 0x23];
+      outTexCoordS = edgeT * (endTexCoordS - startVertex[texUnit * 4 + 0x20]) + startVertex[texUnit * 4 + 0x20];
+      endToOutTexCoordT = edgeT * (endToOutTexCoordT - startVertex[texUnit * 4 + 0x21]) + startVertex[texUnit * 4 + 0x21];
+      outTexCoordR = edgeT * (endTexCoordR - startVertex[texUnit * 4 + 0x22]) + startVertex[texUnit * 4 + 0x22];
+      endToOutTexCoordQ = edgeT * (endToOutTexCoordQ - startVertex[texUnit * 4 + 0x23]) + startVertex[texUnit * 4 + 0x23];
       if (insideFrustum) {
         outInvW = outVertex[3];
-        fVar4 = fVar4 * outInvW;
-        fVar8 = fVar8 * outInvW;
-        fVar6 = fVar6 * outInvW;
-        fVar5 = fVar5 * outInvW;
+        endToOutTexCoordQ = endToOutTexCoordQ * outInvW;
+        outTexCoordS = outTexCoordS * outInvW;
+        endToOutTexCoordT = endToOutTexCoordT * outInvW;
+        outTexCoordR = outTexCoordR * outInvW;
       }
-      outVertex[uVar17 * 4 + 0x23] = fVar4;
-      outVertex[uVar17 * 4 + 0x20] = fVar8;
-      outVertex[uVar17 * 4 + 0x21] = fVar6;
-      outVertex[uVar17 * 4 + 0x22] = fVar5;
+      outVertex[texUnit * 4 + 0x23] = endToOutTexCoordQ;
+      outVertex[texUnit * 4 + 0x20] = outTexCoordS;
+      outVertex[texUnit * 4 + 0x21] = endToOutTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = outTexCoordR;
     }
-    uVar17 = uVar17 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -5671,52 +5768,54 @@ uint _gleInterpolClipNO1211w(int glContext,float *startVertex,int endVertex,floa
   bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
-  float fVar4;
+  float clipXThenNdcX;
   float startTexCoordQ;
   float startWord0b;
   float startWord11;
   float windowScaleZ;
-  float fVar5;
+  float clipYThenNdcY;
   float startTexCoordT;
   float startWord09;
   float startWord12;
   float windowBiasZ;
-  float fVar6;
+  float clipZThenNdcZ;
   float startTexCoordR;
   float startWord0a;
   float endWord11;
-  float fVar7;
+  float clipWThenInvW;
+  float endTexCoordQ;
   float endWord0b;
   float endWord12;
-  float fVar8;
+  float negClipW;
+  float endTexCoordT;
   float endWord09;
   float endClipX;
-  float fVar9;
+  float endTexCoordR;
   float endWord0a;
   float endClipY;
   float endClipZ;
   float endClipW;
   float edgeT;
-  uint uVar13;
+  uint texMaskRemaining;
   uint texEnableMask;
   uint clipOutcode;
-  uint uVar16;
-  int iVar17;
+  uint texUnit;
+  int endVertexAtUnit;
   
-  fVar4 = startVertex[4];
-  fVar5 = startVertex[5];
-  fVar6 = startVertex[6];
-  fVar7 = startVertex[7];
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW + endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -5725,65 +5824,65 @@ uint _gleInterpolClipNO1211w(int glContext,float *startVertex,int endVertex,floa
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW - endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = fVar7;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000c0b68;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000c0ac8;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000c0ac8;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW + endClipX));
-        fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar7 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000c0b68;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW + endClipY));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW - endClipY));
-      fVar5 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar7 = fVar5;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000c0b68;
-    fVar8 = -fVar7;
+    negClipW = -clipWThenInvW;
 LAB_000c0ac8:
-    if (fVar4 < fVar8) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000c0b68;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000c0b68;
       clipOutcode = 0x20;
     }
   }
@@ -5791,32 +5890,32 @@ LAB_000c0ac8:
 LAB_000c0b68:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
   outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar16 = 0;
+  texUnit = 0;
   outVertex[0x13] = edgeT * (*(float *)(endVertex + 0x4c) - startVertex[0x13]) + startVertex[0x13];
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar13 = texEnableMask >> (uVar16 & 0x3f);
-    if ((uVar13 & 1) == 0) {
-      if (uVar13 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         startWord11 = startVertex[0x11];
         startWord12 = startVertex[0x12];
         endWord11 = *(float *)(endVertex + 0x44);
@@ -5842,21 +5941,21 @@ LAB_000c0b68:
       }
     }
     else {
-      iVar17 = uVar16 * 0x10 + endVertex;
-      startTexCoordQ = startVertex[uVar16 * 4 + 0x23];
-      startTexCoordT = startVertex[uVar16 * 4 + 0x21];
-      startTexCoordR = startVertex[uVar16 * 4 + 0x22];
-      fVar7 = *(float *)(iVar17 + 0x8c);
-      fVar8 = *(float *)(iVar17 + 0x84);
-      fVar9 = *(float *)(iVar17 + 0x88);
-      outVertex[uVar16 * 4 + 0x20] =
-           edgeT * (*(float *)(iVar17 + 0x80) - startVertex[uVar16 * 4 + 0x20]) +
-           startVertex[uVar16 * 4 + 0x20];
-      outVertex[uVar16 * 4 + 0x21] = edgeT * (fVar8 - startTexCoordT) + startTexCoordT;
-      outVertex[uVar16 * 4 + 0x22] = edgeT * (fVar9 - startTexCoordR) + startTexCoordR;
-      outVertex[uVar16 * 4 + 0x23] = edgeT * (fVar7 - startTexCoordQ) + startTexCoordQ;
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      startTexCoordQ = startVertex[texUnit * 4 + 0x23];
+      startTexCoordT = startVertex[texUnit * 4 + 0x21];
+      startTexCoordR = startVertex[texUnit * 4 + 0x22];
+      endTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
+      outVertex[texUnit * 4 + 0x20] =
+           edgeT * (*(float *)(endVertexAtUnit + 0x80) - startVertex[texUnit * 4 + 0x20]) +
+           startVertex[texUnit * 4 + 0x20];
+      outVertex[texUnit * 4 + 0x21] = edgeT * (endTexCoordT - startTexCoordT) + startTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = edgeT * (endTexCoordR - startTexCoordR) + startTexCoordR;
+      outVertex[texUnit * 4 + 0x23] = edgeT * (endTexCoordQ - startTexCoordQ) + startTexCoordQ;
     }
-    uVar16 = uVar16 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -5866,44 +5965,50 @@ uint _gleInterpolClipAllFlat(int glContext,float *startVertex,int endVertex,floa
   bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
-  float fVar4;
+  float clipXThenNdcX;
+  float endToOutTexCoordQ;
   float startWord16;
   float startWord13;
   float windowScaleZ;
-  float fVar5;
-  float fVar6;
+  float clipZThenNdcZ;
+  float endToOutTexCoordT;
+  float clipWThenInvW;
+  float endTexCoordR;
   float outInvW;
-  float fVar7;
+  float negClipW;
+  float outTexCoordS;
   float endClipW;
   float endClipX;
   float endClipY;
   float endClipZ;
   float endClipW2;
   float edgeT;
-  uint uVar12;
-  float fVar13;
+  uint texMaskRemaining;
+  float clipYThenNdcY;
+  float outTexCoordR;
+  float endTexCoordS;
   float startWord1e;
   float endWord13;
   float windowBiasZ;
   uint texEnableMask;
   uint clipOutcode;
-  int iVar16;
-  uint uVar17;
+  int endVertexAtUnit;
+  uint texUnit;
   
-  fVar4 = startVertex[4];
-  fVar13 = startVertex[5];
-  fVar5 = startVertex[6];
-  fVar6 = startVertex[7];
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW2 = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar6 + fVar5) / ((fVar6 + fVar5) - (endClipW2 + endClipZ));
-      fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar5 = -fVar6;
-      if (fVar6 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -5912,65 +6017,65 @@ uint _gleInterpolClipAllFlat(int glContext,float *startVertex,int endVertex,floa
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar6 - fVar5) / ((fVar6 - fVar5) - (endClipW2 - endClipZ));
-      fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar5 = fVar6;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar13 = edgeT * (endClipY - fVar13) + fVar13;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000c0f3c;
-    fVar7 = -fVar6;
-    if (fVar13 < fVar7) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar6 <= fVar13)) goto LAB_000c0e9c;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000c0e9c;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar6 + fVar4) / ((fVar6 + fVar4) - (endClipW2 + endClipX));
-        fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-        fVar4 = -fVar6;
-        clipOutcode = (uint)(fVar6 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar6 - fVar4) / ((fVar6 - fVar4) - (endClipW2 - endClipX));
-        fVar4 = edgeT * (endClipW2 - fVar6) + fVar6;
-        fVar6 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar13 = edgeT * (endClipY - fVar13) + fVar13;
-      fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000c0f3c;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar6 + fVar13) / ((fVar6 + fVar13) - (endClipW2 + endClipY));
-      fVar6 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar13 = -fVar6;
-      clipOutcode = (uint)(fVar6 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar6 - fVar13) / ((fVar6 - fVar13) - (endClipW2 - endClipY));
-      fVar13 = edgeT * (endClipW2 - fVar6) + fVar6;
-      fVar6 = fVar13;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000c0f3c;
-    fVar7 = -fVar6;
+    negClipW = -clipWThenInvW;
 LAB_000c0e9c:
-    if (fVar4 < fVar7) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar6 <= fVar4)) goto LAB_000c0f3c;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000c0f3c;
       clipOutcode = 0x20;
     }
   }
@@ -5978,35 +6083,35 @@ LAB_000c0e9c:
 LAB_000c0f3c:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar13;
-  outVertex[6] = fVar5;
-  outVertex[7] = fVar6;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
   outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar6 != FLOAT_00108e54) {
-      fVar6 = FLOAT_00108e54 / fVar6;
-      fVar4 = fVar4 * fVar6;
-      fVar13 = fVar13 * fVar6;
-      fVar5 = fVar5 * fVar6;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar6;
-    outVertex[2] = windowScaleZ * fVar5 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar17 = 0;
+  texUnit = 0;
   startWord13 = startVertex[0x13];
   endWord13 = *(float *)(endVertex + 0x4c);
   outVertex[0x17] = edgeT * (*(float *)(endVertex + 0x5c) - startVertex[0x17]) + startVertex[0x17];
   outVertex[0x13] = edgeT * (endWord13 - startWord13) + startWord13;
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar12 = texEnableMask >> (uVar17 & 0x3f);
-    if ((uVar12 & 1) == 0) {
-      if (uVar12 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         if (startVertex != outVertex) {
           *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
           *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
@@ -6025,35 +6130,35 @@ LAB_000c0f3c:
       }
     }
     else {
-      iVar16 = uVar17 * 0x10 + endVertex;
-      fVar4 = *(float *)(iVar16 + 0x8c);
-      fVar13 = *(float *)(iVar16 + 0x80);
-      fVar5 = *(float *)(iVar16 + 0x84);
-      fVar6 = *(float *)(iVar16 + 0x88);
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      endToOutTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordS = *(float *)(endVertexAtUnit + 0x80);
+      endToOutTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
       if (*(char *)(endVertex + 0x7f) == '\0') {
         endClipW = *(float *)(endVertex + 0x1c);
-        fVar4 = fVar4 * endClipW;
-        fVar13 = fVar13 * endClipW;
-        fVar5 = fVar5 * endClipW;
-        fVar6 = fVar6 * endClipW;
+        endToOutTexCoordQ = endToOutTexCoordQ * endClipW;
+        endTexCoordS = endTexCoordS * endClipW;
+        endToOutTexCoordT = endToOutTexCoordT * endClipW;
+        endTexCoordR = endTexCoordR * endClipW;
       }
-      fVar7 = edgeT * (fVar13 - startVertex[uVar17 * 4 + 0x20]) + startVertex[uVar17 * 4 + 0x20];
-      fVar5 = edgeT * (fVar5 - startVertex[uVar17 * 4 + 0x21]) + startVertex[uVar17 * 4 + 0x21];
-      fVar13 = edgeT * (fVar6 - startVertex[uVar17 * 4 + 0x22]) + startVertex[uVar17 * 4 + 0x22];
-      fVar4 = edgeT * (fVar4 - startVertex[uVar17 * 4 + 0x23]) + startVertex[uVar17 * 4 + 0x23];
+      outTexCoordS = edgeT * (endTexCoordS - startVertex[texUnit * 4 + 0x20]) + startVertex[texUnit * 4 + 0x20];
+      endToOutTexCoordT = edgeT * (endToOutTexCoordT - startVertex[texUnit * 4 + 0x21]) + startVertex[texUnit * 4 + 0x21];
+      outTexCoordR = edgeT * (endTexCoordR - startVertex[texUnit * 4 + 0x22]) + startVertex[texUnit * 4 + 0x22];
+      endToOutTexCoordQ = edgeT * (endToOutTexCoordQ - startVertex[texUnit * 4 + 0x23]) + startVertex[texUnit * 4 + 0x23];
       if (insideFrustum) {
         outInvW = outVertex[3];
-        fVar4 = fVar4 * outInvW;
-        fVar7 = fVar7 * outInvW;
-        fVar5 = fVar5 * outInvW;
-        fVar13 = fVar13 * outInvW;
+        endToOutTexCoordQ = endToOutTexCoordQ * outInvW;
+        outTexCoordS = outTexCoordS * outInvW;
+        endToOutTexCoordT = endToOutTexCoordT * outInvW;
+        outTexCoordR = outTexCoordR * outInvW;
       }
-      outVertex[uVar17 * 4 + 0x23] = fVar4;
-      outVertex[uVar17 * 4 + 0x20] = fVar7;
-      outVertex[uVar17 * 4 + 0x21] = fVar5;
-      outVertex[uVar17 * 4 + 0x22] = fVar13;
+      outVertex[texUnit * 4 + 0x23] = endToOutTexCoordQ;
+      outVertex[texUnit * 4 + 0x20] = outTexCoordS;
+      outVertex[texUnit * 4 + 0x21] = endToOutTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = outTexCoordR;
     }
-    uVar17 = uVar17 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -6063,46 +6168,48 @@ uint _gleInterpolClipAllFlatw(int glContext,float *startVertex,int endVertex,flo
   bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
-  float fVar4;
+  float clipXThenNdcX;
   float startTexCoordQ;
   float startWord16;
   float startWord13;
   float windowScaleZ;
-  float fVar5;
+  float clipZThenNdcZ;
   float startTexCoordR;
-  float fVar6;
-  float fVar7;
+  float clipWThenInvW;
+  float endTexCoordQ;
+  float negClipW;
+  float endTexCoordT;
   float endClipX;
-  float fVar8;
+  float endTexCoordR;
   float endClipY;
   float endClipZ;
   float endClipW;
   float edgeT;
-  uint uVar12;
-  float fVar13;
+  uint texMaskRemaining;
+  float clipYThenNdcY;
   float startTexCoordT;
   float startWord1e;
   float endWord13;
   float windowBiasZ;
   uint texEnableMask;
   uint clipOutcode;
-  uint uVar16;
-  int iVar17;
+  uint texUnit;
+  int endVertexAtUnit;
   
-  fVar4 = startVertex[4];
-  fVar13 = startVertex[5];
-  fVar5 = startVertex[6];
-  fVar6 = startVertex[7];
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar6 + fVar5) / ((fVar6 + fVar5) - (endClipW + endClipZ));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar5 = -fVar6;
-      if (fVar6 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -6111,65 +6218,65 @@ uint _gleInterpolClipAllFlatw(int glContext,float *startVertex,int endVertex,flo
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar6 - fVar5) / ((fVar6 - fVar5) - (endClipW - endClipZ));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar5 = fVar6;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar13 = edgeT * (endClipY - fVar13) + fVar13;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000c1310;
-    fVar7 = -fVar6;
-    if (fVar13 < fVar7) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar6 <= fVar13)) goto LAB_000c1270;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000c1270;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar6 + fVar4) / ((fVar6 + fVar4) - (endClipW + endClipX));
-        fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-        fVar4 = -fVar6;
-        clipOutcode = (uint)(fVar6 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar6 - fVar4) / ((fVar6 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar6) + fVar6;
-        fVar6 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar13 = edgeT * (endClipY - fVar13) + fVar13;
-      fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000c1310;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar6 + fVar13) / ((fVar6 + fVar13) - (endClipW + endClipY));
-      fVar6 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar13 = -fVar6;
-      clipOutcode = (uint)(fVar6 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar6 - fVar13) / ((fVar6 - fVar13) - (endClipW - endClipY));
-      fVar13 = edgeT * (endClipW - fVar6) + fVar6;
-      fVar6 = fVar13;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipZ - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000c1310;
-    fVar7 = -fVar6;
+    negClipW = -clipWThenInvW;
 LAB_000c1270:
-    if (fVar4 < fVar7) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar6 <= fVar4)) goto LAB_000c1310;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000c1310;
       clipOutcode = 0x20;
     }
   }
@@ -6177,35 +6284,35 @@ LAB_000c1270:
 LAB_000c1310:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar13;
-  outVertex[6] = fVar5;
-  outVertex[7] = fVar6;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
   outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar6 != FLOAT_00108e54) {
-      fVar6 = FLOAT_00108e54 / fVar6;
-      fVar4 = fVar4 * fVar6;
-      fVar13 = fVar13 * fVar6;
-      fVar5 = fVar5 * fVar6;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar6;
-    outVertex[2] = windowScaleZ * fVar5 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar16 = 0;
+  texUnit = 0;
   startWord13 = startVertex[0x13];
   endWord13 = *(float *)(endVertex + 0x4c);
   outVertex[0x17] = edgeT * (*(float *)(endVertex + 0x5c) - startVertex[0x17]) + startVertex[0x17];
   outVertex[0x13] = edgeT * (endWord13 - startWord13) + startWord13;
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar12 = texEnableMask >> (uVar16 & 0x3f);
-    if ((uVar12 & 1) == 0) {
-      if (uVar12 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         if (startVertex != outVertex) {
           *(undefined8 *)(outVertex + 8) = *(undefined8 *)(startVertex + 8);
           *(undefined8 *)(outVertex + 10) = *(undefined8 *)(startVertex + 10);
@@ -6224,21 +6331,21 @@ LAB_000c1310:
       }
     }
     else {
-      iVar17 = uVar16 * 0x10 + endVertex;
-      startTexCoordQ = startVertex[uVar16 * 4 + 0x23];
-      startTexCoordT = startVertex[uVar16 * 4 + 0x21];
-      startTexCoordR = startVertex[uVar16 * 4 + 0x22];
-      fVar6 = *(float *)(iVar17 + 0x8c);
-      fVar7 = *(float *)(iVar17 + 0x84);
-      fVar8 = *(float *)(iVar17 + 0x88);
-      outVertex[uVar16 * 4 + 0x20] =
-           edgeT * (*(float *)(iVar17 + 0x80) - startVertex[uVar16 * 4 + 0x20]) +
-           startVertex[uVar16 * 4 + 0x20];
-      outVertex[uVar16 * 4 + 0x21] = edgeT * (fVar7 - startTexCoordT) + startTexCoordT;
-      outVertex[uVar16 * 4 + 0x22] = edgeT * (fVar8 - startTexCoordR) + startTexCoordR;
-      outVertex[uVar16 * 4 + 0x23] = edgeT * (fVar6 - startTexCoordQ) + startTexCoordQ;
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      startTexCoordQ = startVertex[texUnit * 4 + 0x23];
+      startTexCoordT = startVertex[texUnit * 4 + 0x21];
+      startTexCoordR = startVertex[texUnit * 4 + 0x22];
+      endTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
+      outVertex[texUnit * 4 + 0x20] =
+           edgeT * (*(float *)(endVertexAtUnit + 0x80) - startVertex[texUnit * 4 + 0x20]) +
+           startVertex[texUnit * 4 + 0x20];
+      outVertex[texUnit * 4 + 0x21] = edgeT * (endTexCoordT - startTexCoordT) + startTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = edgeT * (endTexCoordR - startTexCoordR) + startTexCoordR;
+      outVertex[texUnit * 4 + 0x23] = edgeT * (endTexCoordQ - startTexCoordQ) + startTexCoordQ;
     }
-    uVar16 = uVar16 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -6248,30 +6355,36 @@ uint _gleInterpolClipAllSmooth(int glContext,float *startVertex,int endVertex,fl
   bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
-  float fVar4;
+  float clipXThenNdcX;
+  float endToOutTexCoordQ;
   float startWord0b;
   float startWord11;
   float endWord0d;
   float startWord13;
   float windowScaleZ;
-  float fVar5;
+  float clipYThenNdcY;
+  float outTexCoordR;
+  float endTexCoordS;
   float startWord09;
   float startWord12;
   float endWord0e;
   float endWord13;
   float windowBiasZ;
-  float fVar6;
+  float clipZThenNdcZ;
+  float endToOutTexCoordT;
   float startWord0a;
   float endWord11;
   float startWord15;
   float startWord0c;
-  float fVar7;
+  float clipWThenInvW;
+  float endTexCoordR;
   float outInvW;
   float endWord0b;
   float endWord12;
   float endWord15;
   float endWord0c;
-  float fVar8;
+  float negClipW;
+  float outTexCoordS;
   float endClipW;
   float endWord09;
   float startWord0f;
@@ -6288,26 +6401,26 @@ uint _gleInterpolClipAllSmooth(int glContext,float *startVertex,int endVertex,fl
   float startWord16;
   float endWord16;
   float edgeT;
-  uint uVar17;
+  uint texMaskRemaining;
   uint texEnableMask;
   uint clipOutcode;
-  int iVar20;
-  uint uVar21;
+  int endVertexAtUnit;
+  uint texUnit;
   
-  fVar4 = startVertex[4];
-  fVar5 = startVertex[5];
-  fVar6 = startVertex[6];
-  fVar7 = startVertex[7];
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW2 = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW2 + endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW2 + endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -6316,65 +6429,65 @@ uint _gleInterpolClipAllSmooth(int glContext,float *startVertex,int endVertex,fl
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW2 - endClipZ));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar6 = fVar7;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW2 - endClipZ));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000c16ac;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000c160c;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000c160c;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW2 + endClipX));
-        fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW2 + endClipX));
+        clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW2 - endClipX));
-        fVar4 = edgeT * (endClipW2 - fVar7) + fVar7;
-        fVar7 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW2 - endClipX));
+        clipXThenNdcX = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000c16ac;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW2 + endClipY));
-      fVar7 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW2 + endClipY));
+      clipWThenInvW = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW2 - endClipY));
-      fVar5 = edgeT * (endClipW2 - fVar7) + fVar7;
-      fVar7 = fVar5;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW2 - endClipY));
+      clipYThenNdcY = edgeT * (endClipW2 - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000c16ac;
-    fVar8 = -fVar7;
+    negClipW = -clipWThenInvW;
 LAB_000c160c:
-    if (fVar4 < fVar8) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000c16ac;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000c16ac;
       clipOutcode = 0x20;
     }
   }
@@ -6382,26 +6495,26 @@ LAB_000c160c:
 LAB_000c16ac:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
   outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar21 = 0;
+  texUnit = 0;
   startWord13 = startVertex[0x13];
   endWord13 = *(float *)(endVertex + 0x4c);
   startWord0c = startVertex[0xc];
@@ -6429,9 +6542,9 @@ LAB_000c16ac:
   outVertex[0x16] = edgeT * (endWord16 - startWord16) + startWord16;
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar17 = texEnableMask >> (uVar21 & 0x3f);
-    if ((uVar17 & 1) == 0) {
-      if (uVar17 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         startWord11 = startVertex[0x11];
         startWord12 = startVertex[0x12];
         endWord11 = *(float *)(endVertex + 0x44);
@@ -6457,35 +6570,35 @@ LAB_000c16ac:
       }
     }
     else {
-      iVar20 = uVar21 * 0x10 + endVertex;
-      fVar4 = *(float *)(iVar20 + 0x8c);
-      fVar5 = *(float *)(iVar20 + 0x80);
-      fVar6 = *(float *)(iVar20 + 0x84);
-      fVar7 = *(float *)(iVar20 + 0x88);
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      endToOutTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordS = *(float *)(endVertexAtUnit + 0x80);
+      endToOutTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
       if (*(char *)(endVertex + 0x7f) == '\0') {
         endClipW = *(float *)(endVertex + 0x1c);
-        fVar4 = fVar4 * endClipW;
-        fVar5 = fVar5 * endClipW;
-        fVar6 = fVar6 * endClipW;
-        fVar7 = fVar7 * endClipW;
+        endToOutTexCoordQ = endToOutTexCoordQ * endClipW;
+        endTexCoordS = endTexCoordS * endClipW;
+        endToOutTexCoordT = endToOutTexCoordT * endClipW;
+        endTexCoordR = endTexCoordR * endClipW;
       }
-      fVar8 = edgeT * (fVar5 - startVertex[uVar21 * 4 + 0x20]) + startVertex[uVar21 * 4 + 0x20];
-      fVar6 = edgeT * (fVar6 - startVertex[uVar21 * 4 + 0x21]) + startVertex[uVar21 * 4 + 0x21];
-      fVar5 = edgeT * (fVar7 - startVertex[uVar21 * 4 + 0x22]) + startVertex[uVar21 * 4 + 0x22];
-      fVar4 = edgeT * (fVar4 - startVertex[uVar21 * 4 + 0x23]) + startVertex[uVar21 * 4 + 0x23];
+      outTexCoordS = edgeT * (endTexCoordS - startVertex[texUnit * 4 + 0x20]) + startVertex[texUnit * 4 + 0x20];
+      endToOutTexCoordT = edgeT * (endToOutTexCoordT - startVertex[texUnit * 4 + 0x21]) + startVertex[texUnit * 4 + 0x21];
+      outTexCoordR = edgeT * (endTexCoordR - startVertex[texUnit * 4 + 0x22]) + startVertex[texUnit * 4 + 0x22];
+      endToOutTexCoordQ = edgeT * (endToOutTexCoordQ - startVertex[texUnit * 4 + 0x23]) + startVertex[texUnit * 4 + 0x23];
       if (insideFrustum) {
         outInvW = outVertex[3];
-        fVar4 = fVar4 * outInvW;
-        fVar8 = fVar8 * outInvW;
-        fVar6 = fVar6 * outInvW;
-        fVar5 = fVar5 * outInvW;
+        endToOutTexCoordQ = endToOutTexCoordQ * outInvW;
+        outTexCoordS = outTexCoordS * outInvW;
+        endToOutTexCoordT = endToOutTexCoordT * outInvW;
+        outTexCoordR = outTexCoordR * outInvW;
       }
-      outVertex[uVar21 * 4 + 0x23] = fVar4;
-      outVertex[uVar21 * 4 + 0x20] = fVar8;
-      outVertex[uVar21 * 4 + 0x21] = fVar6;
-      outVertex[uVar21 * 4 + 0x22] = fVar5;
+      outVertex[texUnit * 4 + 0x23] = endToOutTexCoordQ;
+      outVertex[texUnit * 4 + 0x20] = outTexCoordS;
+      outVertex[texUnit * 4 + 0x21] = endToOutTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = outTexCoordR;
     }
-    uVar21 = uVar21 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -6495,36 +6608,38 @@ uint _gleInterpolClipAllSmoothw(int glContext,float *startVertex,int endVertex,f
   bool insideFrustum;
   byte startFlagByte7c;
   byte startFlagByte7e;
-  float fVar4;
+  float clipXThenNdcX;
   float startTexCoordQ;
   float startWord0b;
   float startWord11;
   float endWord0d;
   float startWord13;
   float windowScaleZ;
-  float fVar5;
+  float clipYThenNdcY;
   float startTexCoordT;
   float startWord09;
   float startWord12;
   float endWord0e;
   float endWord13;
   float windowBiasZ;
-  float fVar6;
+  float clipZThenNdcZ;
   float startTexCoordR;
   float startWord0a;
   float endWord11;
   float startWord15;
   float startWord0c;
-  float fVar7;
+  float clipWThenInvW;
+  float endTexCoordQ;
   float endWord0b;
   float endWord12;
   float endWord15;
   float endWord0c;
-  float fVar8;
+  float negClipW;
+  float endTexCoordT;
   float endWord09;
   float startWord0f;
   float endClipX;
-  float fVar9;
+  float endTexCoordR;
   float endWord0a;
   float startWord0e;
   float endClipY;
@@ -6537,26 +6652,26 @@ uint _gleInterpolClipAllSmoothw(int glContext,float *startVertex,int endVertex,f
   float startWord16;
   float endWord16;
   float edgeT;
-  uint uVar17;
+  uint texMaskRemaining;
   uint texEnableMask;
   uint clipOutcode;
-  uint uVar20;
-  int iVar21;
+  uint texUnit;
+  int endVertexAtUnit;
   
-  fVar4 = startVertex[4];
-  fVar5 = startVertex[5];
-  fVar6 = startVertex[6];
-  fVar7 = startVertex[7];
+  clipXThenNdcX = startVertex[4];
+  clipYThenNdcY = startVertex[5];
+  clipZThenNdcZ = startVertex[6];
+  clipWThenInvW = startVertex[7];
   endClipX = *(float *)(endVertex + 0x10);
   endClipY = *(float *)(endVertex + 0x14);
   endClipZ = *(float *)(endVertex + 0x18);
   endClipW = *(float *)(endVertex + 0x1c);
   if (clipPlane < 3) {
     if (clipPlane == 1) {
-      edgeT = (fVar7 + fVar6) / ((fVar7 + fVar6) - (endClipW + endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = -fVar7;
-      if (fVar7 < FLOAT_00108e50) {
+      edgeT = (clipWThenInvW + clipZThenNdcZ) / ((clipWThenInvW + clipZThenNdcZ) - (endClipW + endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = -clipWThenInvW;
+      if (clipWThenInvW < FLOAT_00108e50) {
         clipOutcode = 2;
       }
       else {
@@ -6565,65 +6680,65 @@ uint _gleInterpolClipAllSmoothw(int glContext,float *startVertex,int endVertex,f
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar6) / ((fVar7 - fVar6) - (endClipW - endClipZ));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar6 = fVar7;
+      edgeT = (clipWThenInvW - clipZThenNdcZ) / ((clipWThenInvW - clipZThenNdcZ) - (endClipW - endClipZ));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipZThenNdcZ = clipWThenInvW;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar5 = edgeT * (endClipY - fVar5) + fVar5;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
     if (!insideFrustum) goto LAB_000c1b58;
-    fVar8 = -fVar7;
-    if (fVar5 < fVar8) {
+    negClipW = -clipWThenInvW;
+    if (clipYThenNdcY < negClipW) {
       clipOutcode = 4;
     }
     else {
-      if (!(fVar7 <= fVar5)) goto LAB_000c1ab8;
+      if (!(clipWThenInvW <= clipYThenNdcY)) goto LAB_000c1ab8;
       clipOutcode = 8;
     }
   }
   else {
     if (8 < clipPlane) {
       if (clipPlane == 0x10) {
-        edgeT = (fVar7 + fVar4) / ((fVar7 + fVar4) - (endClipW + endClipX));
-        fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar4 = -fVar7;
-        clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 5;
+        edgeT = (clipWThenInvW + clipXThenNdcX) / ((clipWThenInvW + clipXThenNdcX) - (endClipW + endClipX));
+        clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipXThenNdcX = -clipWThenInvW;
+        clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 5;
       }
       else {
         clipOutcode = 0;
-        edgeT = (fVar7 - fVar4) / ((fVar7 - fVar4) - (endClipW - endClipX));
-        fVar4 = edgeT * (endClipW - fVar7) + fVar7;
-        fVar7 = fVar4;
+        edgeT = (clipWThenInvW - clipXThenNdcX) / ((clipWThenInvW - clipXThenNdcX) - (endClipW - endClipX));
+        clipXThenNdcX = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+        clipWThenInvW = clipXThenNdcX;
       }
       insideFrustum = clipOutcode == 0;
-      fVar5 = edgeT * (endClipY - fVar5) + fVar5;
-      fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+      clipYThenNdcY = edgeT * (endClipY - clipYThenNdcY) + clipYThenNdcY;
+      clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
       goto LAB_000c1b58;
     }
     if (clipPlane == 4) {
-      edgeT = (fVar7 + fVar5) / ((fVar7 + fVar5) - (endClipW + endClipY));
-      fVar7 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar5 = -fVar7;
-      clipOutcode = (uint)(fVar7 <= FLOAT_00108e50) << 3;
+      edgeT = (clipWThenInvW + clipYThenNdcY) / ((clipWThenInvW + clipYThenNdcY) - (endClipW + endClipY));
+      clipWThenInvW = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipYThenNdcY = -clipWThenInvW;
+      clipOutcode = (uint)(clipWThenInvW <= FLOAT_00108e50) << 3;
     }
     else {
       clipOutcode = 0;
-      edgeT = (fVar7 - fVar5) / ((fVar7 - fVar5) - (endClipW - endClipY));
-      fVar5 = edgeT * (endClipW - fVar7) + fVar7;
-      fVar7 = fVar5;
+      edgeT = (clipWThenInvW - clipYThenNdcY) / ((clipWThenInvW - clipYThenNdcY) - (endClipW - endClipY));
+      clipYThenNdcY = edgeT * (endClipW - clipWThenInvW) + clipWThenInvW;
+      clipWThenInvW = clipYThenNdcY;
     }
     insideFrustum = clipOutcode == 0;
-    fVar4 = edgeT * (endClipX - fVar4) + fVar4;
-    fVar6 = edgeT * (endClipZ - fVar6) + fVar6;
+    clipXThenNdcX = edgeT * (endClipX - clipXThenNdcX) + clipXThenNdcX;
+    clipZThenNdcZ = edgeT * (endClipZ - clipZThenNdcZ) + clipZThenNdcZ;
     if (!insideFrustum) goto LAB_000c1b58;
-    fVar8 = -fVar7;
+    negClipW = -clipWThenInvW;
 LAB_000c1ab8:
-    if (fVar4 < fVar8) {
+    if (clipXThenNdcX < negClipW) {
       clipOutcode = 0x10;
     }
     else {
-      if (!(fVar7 <= fVar4)) goto LAB_000c1b58;
+      if (!(clipWThenInvW <= clipXThenNdcX)) goto LAB_000c1b58;
       clipOutcode = 0x20;
     }
   }
@@ -6631,26 +6746,26 @@ LAB_000c1ab8:
 LAB_000c1b58:
   startFlagByte7c = *(byte *)(startVertex + 0x1f);
   startFlagByte7e = *(byte *)((int)startVertex + 0x7e);
-  outVertex[4] = fVar4;
-  outVertex[5] = fVar5;
-  outVertex[6] = fVar6;
-  outVertex[7] = fVar7;
+  outVertex[4] = clipXThenNdcX;
+  outVertex[5] = clipYThenNdcY;
+  outVertex[6] = clipZThenNdcZ;
+  outVertex[7] = clipWThenInvW;
   outVertex[0x1f] = GH_U2F((unsigned int)(((uint)startFlagByte7c << 0x18 | (uint)startFlagByte7e << 8 | clipOutcode | 0x10000)));
   if (insideFrustum) {
-    if (fVar7 != FLOAT_00108e54) {
-      fVar7 = FLOAT_00108e54 / fVar7;
-      fVar4 = fVar4 * fVar7;
-      fVar5 = fVar5 * fVar7;
-      fVar6 = fVar6 * fVar7;
+    if (clipWThenInvW != FLOAT_00108e54) {
+      clipWThenInvW = FLOAT_00108e54 / clipWThenInvW;
+      clipXThenNdcX = clipXThenNdcX * clipWThenInvW;
+      clipYThenNdcY = clipYThenNdcY * clipWThenInvW;
+      clipZThenNdcZ = clipZThenNdcZ * clipWThenInvW;
     }
-    *outVertex = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
-    outVertex[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    *outVertex = *(float *)(glContext + 0x1b70) * clipXThenNdcX + *(float *)(glContext + 0x1b80);
+    outVertex[1] = *(float *)(glContext + 0x1b74) * clipYThenNdcY + *(float *)(glContext + 0x1b84);
     windowScaleZ = *(float *)(glContext + 0x1b78);
     windowBiasZ = *(float *)(glContext + 0x1b88);
-    outVertex[3] = fVar7;
-    outVertex[2] = windowScaleZ * fVar6 + windowBiasZ;
+    outVertex[3] = clipWThenInvW;
+    outVertex[2] = windowScaleZ * clipZThenNdcZ + windowBiasZ;
   }
-  uVar20 = 0;
+  texUnit = 0;
   startWord13 = startVertex[0x13];
   endWord13 = *(float *)(endVertex + 0x4c);
   startWord0c = startVertex[0xc];
@@ -6678,9 +6793,9 @@ LAB_000c1b58:
   outVertex[0x16] = edgeT * (endWord16 - startWord16) + startWord16;
   texEnableMask = *(uint *)(glContext + 0x5150);
   do {
-    uVar17 = texEnableMask >> (uVar20 & 0x3f);
-    if ((uVar17 & 1) == 0) {
-      if (uVar17 == 0) {
+    texMaskRemaining = texEnableMask >> (texUnit & 0x3f);
+    if ((texMaskRemaining & 1) == 0) {
+      if (texMaskRemaining == 0) {
         startWord11 = startVertex[0x11];
         startWord12 = startVertex[0x12];
         endWord11 = *(float *)(endVertex + 0x44);
@@ -6706,21 +6821,21 @@ LAB_000c1b58:
       }
     }
     else {
-      iVar21 = uVar20 * 0x10 + endVertex;
-      startTexCoordQ = startVertex[uVar20 * 4 + 0x23];
-      startTexCoordT = startVertex[uVar20 * 4 + 0x21];
-      startTexCoordR = startVertex[uVar20 * 4 + 0x22];
-      fVar7 = *(float *)(iVar21 + 0x8c);
-      fVar8 = *(float *)(iVar21 + 0x84);
-      fVar9 = *(float *)(iVar21 + 0x88);
-      outVertex[uVar20 * 4 + 0x20] =
-           edgeT * (*(float *)(iVar21 + 0x80) - startVertex[uVar20 * 4 + 0x20]) +
-           startVertex[uVar20 * 4 + 0x20];
-      outVertex[uVar20 * 4 + 0x21] = edgeT * (fVar8 - startTexCoordT) + startTexCoordT;
-      outVertex[uVar20 * 4 + 0x22] = edgeT * (fVar9 - startTexCoordR) + startTexCoordR;
-      outVertex[uVar20 * 4 + 0x23] = edgeT * (fVar7 - startTexCoordQ) + startTexCoordQ;
+      endVertexAtUnit = texUnit * 0x10 + endVertex;
+      startTexCoordQ = startVertex[texUnit * 4 + 0x23];
+      startTexCoordT = startVertex[texUnit * 4 + 0x21];
+      startTexCoordR = startVertex[texUnit * 4 + 0x22];
+      endTexCoordQ = *(float *)(endVertexAtUnit + 0x8c);
+      endTexCoordT = *(float *)(endVertexAtUnit + 0x84);
+      endTexCoordR = *(float *)(endVertexAtUnit + 0x88);
+      outVertex[texUnit * 4 + 0x20] =
+           edgeT * (*(float *)(endVertexAtUnit + 0x80) - startVertex[texUnit * 4 + 0x20]) +
+           startVertex[texUnit * 4 + 0x20];
+      outVertex[texUnit * 4 + 0x21] = edgeT * (endTexCoordT - startTexCoordT) + startTexCoordT;
+      outVertex[texUnit * 4 + 0x22] = edgeT * (endTexCoordR - startTexCoordR) + startTexCoordR;
+      outVertex[texUnit * 4 + 0x23] = edgeT * (endTexCoordQ - startTexCoordQ) + startTexCoordQ;
     }
-    uVar20 = uVar20 + 1;
+    texUnit = texUnit + 1;
   } while( true );
 }
 
@@ -6800,16 +6915,16 @@ int _gleSelectArrayInterpFunc(glContext, param_2)
 }
 
 /* _gleSetEyeInterpFunc @ 0xc1fe8 (104 bytes) */
-void _gleSetEyeInterpFunc(int param_1,undefined4 forwardedArg2,undefined4 forwardedArg3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,undefined4 forwardedArg8,double forwardedFloatArg1)
+void _gleSetEyeInterpFunc(int glContext,undefined4 forwardedArg2,undefined4 forwardedArg3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,undefined4 forwardedArg8,double forwardedFloatArg1)
 {
   code *UNRECOVERED_JUMPTABLE;
   
   UNRECOVERED_JUMPTABLE =
-       (code *)_gleBuildInterpolateFunc(param_1,0,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedArg8);
-  *(code **)(param_1 + 0x49c8) = UNRECOVERED_JUMPTABLE;
+       (code *)_gleBuildInterpolateFunc(glContext,0,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedArg8);
+  *(code **)(glContext + 0x49c8) = UNRECOVERED_JUMPTABLE;
                     
                     
-  (*((int (*)(int,int,int,int,double))UNRECOVERED_JUMPTABLE))(param_1, forwardedArg2, forwardedArg3, forwardedArg4, forwardedFloatArg1);
+  (*((int (*)(int,int,int,int,double))UNRECOVERED_JUMPTABLE))(glContext, forwardedArg2, forwardedArg3, forwardedArg4, forwardedFloatArg1);
   return;
 }
 
@@ -6828,181 +6943,182 @@ void _gleShrinkFuncCache(param_1, param_2)
 }
 
 /* _gleDeleteFuncCacheElem @ 0xc2098 (24 bytes) */
-void _gleDeleteFuncCacheElem(param_1)
-  int *param_1;
+void _gleDeleteFuncCacheElem(glContext)
+  int *glContext;
 {
   int *piVar1;
   
-  piVar1 = (int *)param_1[1];
-  *piVar1 = *param_1;
-  *(int **)(*param_1 + 4) = piVar1;
-  _gleDCBFree(param_1);
+  piVar1 = (int *)glContext[1];
+  *piVar1 = *glContext;
+  *(int **)(*glContext + 4) = piVar1;
+  _gleDCBFree(glContext);
   return;
 }
 
 /* _gleRTCAddAChunk_c20b0 @ 0xc20b0 (48 bytes) */
-int _gleRTCAddAChunk_c20b0(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int _gleRTCAddAChunk_c20b0(srcCursor, dstCursor)
+  int *srcCursor;
+  int *dstCursor;
 {
-  int iVar1;
-  int iVar2;
+  int word;
+  int copiedWords;
   
-  iVar2 = 0;
-  iVar1 = *param_1;
-  while (iVar1 != 0) {
-    *param_2 = iVar1;
-    iVar2 = iVar2 + 1;
-    param_1 = param_1 + 1;
-    param_2 = param_2 + 1;
-    iVar1 = *param_1;
+  copiedWords = 0;
+  word = *srcCursor;
+  while (word != 0) {
+    *dstCursor = word;
+    copiedWords = copiedWords + 1;
+    srcCursor = srcCursor + 1;
+    dstCursor = dstCursor + 1;
+    word = *srcCursor;
   }
-  return iVar2;
+  return copiedWords;
 }
 
 /* _gleBuildInterpFunc @ 0xc20e0 (876 bytes) */
-int _gleBuildInterpFunc(param_1, param_2)
-  int param_1;
+int _gleBuildInterpFunc(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   bool bVar1;
   uint uVar2;
   int iVar3;
   undefined *puVar4;
+  undefined *codeChunk;
   int iVar5;
-  int iVar6;
+  int chunkWordCount;
   char cVar7;
   
-  uVar2 = *(uint *)(param_1 + 0x498c);
-  cVar7 = (*(uint *)(*(int *)(param_1 + 0x468c) + 0x94) & 3) == 1;
-  if (0x20 < *(ushort *)(param_1 + 0x4990)) {
+  uVar2 = *(uint *)(glContext + 0x498c);
+  cVar7 = (*(uint *)(*(int *)(glContext + 0x468c) + 0x94) & 3) == 1;
+  if (0x20 < *(ushort *)(glContext + 0x4990)) {
     cVar7 = cVar7 << 1;
   }
-  iVar3 = _gleCreateFuncCacheElem(*(undefined4 *)(param_1 + 0x49b8),0x130);
+  iVar3 = _gleCreateFuncCacheElem(*(undefined4 *)(glContext + 0x49b8),0x130);
   if (iVar3 == 0) {
     return PTR__gleRTCNoop_00112058;
   }
   *(uint *)(iVar3 + 8) = param_2;
-  if (*(short *)(param_1 + 0x49c2) == *(short *)(param_1 + 0x49c0)) {
+  if (*(short *)(glContext + 0x49c2) == *(short *)(glContext + 0x49c0)) {
     ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar3 + 4));
   }
   else {
-    *(short *)(param_1 + 0x49c2) = *(short *)(param_1 + 0x49c2) + 1;
+    *(short *)(glContext + 0x49c2) = *(short *)(glContext + 0x49c2) + 1;
   }
   bVar1 = (uVar2 >> 0xf & 1) == 0;
   if (bVar1) {
-    puVar4 = &_gleVAPrologRTC_10b2d0;
+    codeChunk = &_gleVAPrologRTC_10b2d0;
   }
   else {
-    puVar4 = &_gleVASwapPrologRTC;
+    codeChunk = &_gleVASwapPrologRTC;
   }
-  iVar5 = ((int (*)())_gleRTCAddAChunk_c20b0)(puVar4,iVar3 + 0x20);
+  iVar5 = ((int (*)())_gleRTCAddAChunk_c20b0)(codeChunk,iVar3 + 0x20);
   iVar5 = iVar3 + 0x20 + iVar5 * 4;
   if ((param_2 & 0x10) == 0) {
     if ((param_2 & 8) == 0) {
       if ((param_2 & 4) == 0) {
-        puVar4 = &_gleVASetOffsetsGr;
+        codeChunk = &_gleVASetOffsetsGr;
       }
       else {
-        puVar4 = &_gleVASetOffsetsFogGr;
+        codeChunk = &_gleVASetOffsetsFogGr;
       }
     }
     else if ((param_2 & 4) == 0) {
-      puVar4 = &_gleVASetOffsetsTex;
+      codeChunk = &_gleVASetOffsetsTex;
     }
     else {
-      puVar4 = &_gleVASetOffsetsFogTex;
+      codeChunk = &_gleVASetOffsetsFogTex;
     }
   }
   else if ((param_2 & 4) == 0) {
-    puVar4 = &_gleVASetOffsetsTex2;
+    codeChunk = &_gleVASetOffsetsTex2;
   }
   else {
-    puVar4 = &_gleVASetOffsetsFogTex2;
+    codeChunk = &_gleVASetOffsetsFogTex2;
   }
-  iVar6 = ((int (*)())_gleRTCAddAChunk_c20b0)(puVar4,iVar5);
-  iVar5 = iVar5 + iVar6 * 4;
+  chunkWordCount = ((int (*)())_gleRTCAddAChunk_c20b0)(codeChunk,iVar5);
+  iVar5 = iVar5 + chunkWordCount * 4;
   if (bVar1) {
-    puVar4 = &_gleVALoadVertices;
+    codeChunk = &_gleVALoadVertices;
   }
   else {
-    puVar4 = &_gleVASwapLoadVertices;
+    codeChunk = &_gleVASwapLoadVertices;
   }
-  iVar6 = ((int (*)())_gleRTCAddAChunk_c20b0)(puVar4,iVar5);
-  iVar5 = iVar5 + iVar6 * 4;
+  chunkWordCount = ((int (*)())_gleRTCAddAChunk_c20b0)(codeChunk,iVar5);
+  iVar5 = iVar5 + chunkWordCount * 4;
   if ((*(uint *)PTR__gle_processor_0011204c & 0x10) == 0) {
-    puVar4 = &_gleVAInterpVertex;
+    codeChunk = &_gleVAInterpVertex;
   }
   else {
-    puVar4 = &_gleVAInterpVertexAV;
+    codeChunk = &_gleVAInterpVertexAV;
   }
-  iVar6 = ((int (*)())_gleRTCAddAChunk_c20b0)(puVar4,iVar5);
-  iVar5 = iVar5 + iVar6 * 4;
+  chunkWordCount = ((int (*)())_gleRTCAddAChunk_c20b0)(codeChunk,iVar5);
+  iVar5 = iVar5 + chunkWordCount * 4;
   if (bVar1) {
-    puVar4 = &_gleVAStoreVertex;
+    codeChunk = &_gleVAStoreVertex;
   }
   else {
-    puVar4 = &_gleVASwapStoreVertex;
+    codeChunk = &_gleVASwapStoreVertex;
   }
-  iVar6 = ((int (*)())_gleRTCAddAChunk_c20b0)(puVar4,iVar5);
-  iVar5 = iVar5 + iVar6 * 4;
+  chunkWordCount = ((int (*)())_gleRTCAddAChunk_c20b0)(codeChunk,iVar5);
+  iVar5 = iVar5 + chunkWordCount * 4;
   if ((param_2 & 2) != 0) {
-    iVar6 = ((int (*)())_gleRTCAddAChunk_c20b0)(&_gleVAInterpColor,iVar5);
-    iVar5 = iVar5 + iVar6 * 4;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c20b0)(&_gleVAInterpColor,iVar5);
+    iVar5 = iVar5 + chunkWordCount * 4;
   }
   if ((param_2 & 4) == 0) {
-    puVar4 = &_gleVANoFog;
+    codeChunk = &_gleVANoFog;
   }
   else if (bVar1) {
-    puVar4 = &_gleVAInterpFog;
+    codeChunk = &_gleVAInterpFog;
   }
   else {
-    puVar4 = &_gleVASwapInterpFog;
+    codeChunk = &_gleVASwapInterpFog;
   }
-  iVar6 = ((int (*)())_gleRTCAddAChunk_c20b0)(puVar4,iVar5);
-  iVar5 = iVar5 + iVar6 * 4;
+  chunkWordCount = ((int (*)())_gleRTCAddAChunk_c20b0)(codeChunk,iVar5);
+  iVar5 = iVar5 + chunkWordCount * 4;
   if ((param_2 & 8) != 0) {
     if (bVar1) {
-      puVar4 = &_gleVAInterpTexCoord0;
+      codeChunk = &_gleVAInterpTexCoord0;
     }
     else {
-      puVar4 = &_gleVASwapInterpTexCoord0;
+      codeChunk = &_gleVASwapInterpTexCoord0;
     }
-    iVar6 = ((int (*)())_gleRTCAddAChunk_c20b0)(puVar4,iVar5);
-    iVar5 = iVar5 + iVar6 * 4;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c20b0)(codeChunk,iVar5);
+    iVar5 = iVar5 + chunkWordCount * 4;
   }
   if ((param_2 & 0x10) != 0) {
     if (bVar1) {
-      puVar4 = &_gleVAInterpTexCoord1;
+      codeChunk = &_gleVAInterpTexCoord1;
     }
     else {
-      puVar4 = &_gleVASwapInterpTexCoord1;
+      codeChunk = &_gleVASwapInterpTexCoord1;
     }
-    iVar6 = ((int (*)())_gleRTCAddAChunk_c20b0)(puVar4,iVar5);
-    iVar5 = iVar5 + iVar6 * 4;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c20b0)(codeChunk,iVar5);
+    iVar5 = iVar5 + chunkWordCount * 4;
   }
   if (cVar7 == '\x01') {
-    puVar4 = &_gleVASingleFlushDataRTC_10b2f0;
+    codeChunk = &_gleVASingleFlushDataRTC_10b2f0;
   }
   else {
     if (cVar7 != '\x02') goto LAB_000c23b8;
-    puVar4 = &_gleVADoubleFlushDataRTC_10b318;
+    codeChunk = &_gleVADoubleFlushDataRTC_10b318;
   }
-  iVar6 = ((int (*)())_gleRTCAddAChunk_c20b0)(puVar4,iVar5);
-  iVar5 = iVar5 + iVar6 * 4;
+  chunkWordCount = ((int (*)())_gleRTCAddAChunk_c20b0)(codeChunk,iVar5);
+  iVar5 = iVar5 + chunkWordCount * 4;
 LAB_000c23b8:
   if (bVar1) {
-    puVar4 = &_gleVAEpilogRTC_10b348;
+    codeChunk = &_gleVAEpilogRTC_10b348;
   }
   else {
-    puVar4 = &_gleVASwapEpilogRTC;
+    codeChunk = &_gleVASwapEpilogRTC;
   }
-  iVar6 = ((int (*)())_gleRTCAddAChunk_c20b0)(puVar4,iVar5);
-  iVar5 = ((iVar5 + iVar6 * 4) - iVar3) + -0x20 >> 2;
+  chunkWordCount = ((int (*)())_gleRTCAddAChunk_c20b0)(codeChunk,iVar5);
+  iVar5 = ((iVar5 + chunkWordCount * 4) - iVar3) + -0x20 >> 2;
   if (iVar5 < 0x131) {
     iVar3 = _gleShrinkFuncCacheElem(iVar3,iVar5);
     puVar4 = PTR__glePushInstructions_00112054;
-    *(int *)(param_1 + 0x49b8) = iVar3;
+    *(int *)(glContext + 0x49b8) = iVar3;
     (**(code **)puVar4)(iVar5,(undefined *)(iVar3 + 0x20));
     return (undefined *)(iVar3 + 0x20);
   }
@@ -7011,36 +7127,36 @@ LAB_000c23b8:
 }
 
 /* _gleRTCBuildABranch_c244c @ 0xc244c (12 bytes) */
-int _gleRTCBuildABranch_c244c(param_1, param_2)
-  uint param_1;
-  uint param_2;
+int _gleRTCBuildABranch_c244c(branchInstruction, branchWordOffset)
+  uint branchInstruction;
+  uint branchWordOffset;
 {
-  return (param_2 & 0x3fff) << 2 | param_1 & 0xffff0003;
+  return (branchWordOffset & 0x3fff) << 2 | branchInstruction & 0xffff0003;
 }
 
 /* _gleRTCAddAChunk_c2458 @ 0xc2458 (48 bytes) */
-int _gleRTCAddAChunk_c2458(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int _gleRTCAddAChunk_c2458(srcCursor, dstCursor)
+  int *srcCursor;
+  int *dstCursor;
 {
-  int iVar1;
-  int iVar2;
+  int word;
+  int copiedWords;
   
-  iVar2 = 0;
-  iVar1 = *param_1;
-  while (iVar1 != 0) {
-    *param_2 = iVar1;
-    iVar2 = iVar2 + 1;
-    param_1 = param_1 + 1;
-    param_2 = param_2 + 1;
-    iVar1 = *param_1;
+  copiedWords = 0;
+  word = *srcCursor;
+  while (word != 0) {
+    *dstCursor = word;
+    copiedWords = copiedWords + 1;
+    srcCursor = srcCursor + 1;
+    dstCursor = dstCursor + 1;
+    word = *srcCursor;
   }
-  return iVar2;
+  return copiedWords;
 }
 
 /* _gleBuildCompileFuncTCLNO @ 0xc2488 (1528 bytes) */
-int _gleBuildCompileFuncTCLNO(param_1, param_2)
-  int param_1;
+int _gleBuildCompileFuncTCLNO(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   bool bVar1;
@@ -7049,84 +7165,87 @@ int _gleBuildCompileFuncTCLNO(param_1, param_2)
   bool bVar4;
   bool bVar5;
   int iVar6;
+  int chunkWordCount2;
   int iVar7;
-  int iVar8;
-  int iVar9;
-  int iVar10;
+  int chunkWordCountThenCodeCursor;
+  int chunkWordCount3;
+  int chunkWordCountThenCodeCursor2;
+  int chunkWordCount;
   undefined *puVar11;
+  undefined *codeChunk;
   undefined4 uVar12;
   uint uVar13;
   undefined4 *puVar14;
   
   bVar2 = false;
   iVar6 = -(param_2 >> 0x12 & 0x21);
-  uVar13 = *(uint *)(param_1 + 0x498c) >> 0xf & 1;
-  uVar3 = (uint)((*(uint *)(*(int *)(param_1 + 0x468c) + 0x94) & 3) == 1) *
-          ((int)(*(ushort *)(param_1 + 0x4990) + 0x1f) >> 5) & 0xff;
-  iVar7 = _gleCreateFuncCacheElem(*(undefined4 *)(param_1 + 0x49b4),0x180);
+  uVar13 = *(uint *)(glContext + 0x498c) >> 0xf & 1;
+  uVar3 = (uint)((*(uint *)(*(int *)(glContext + 0x468c) + 0x94) & 3) == 1) *
+          ((int)(*(ushort *)(glContext + 0x4990) + 0x1f) >> 5) & 0xff;
+  iVar7 = _gleCreateFuncCacheElem(*(undefined4 *)(glContext + 0x49b4),0x180);
   if (iVar7 == 0) {
     return PTR__gleRTCNoop_00112058;
   }
   *(uint *)(iVar7 + 8) = param_2;
-  if (*(short *)(param_1 + 0x49be) == *(short *)(param_1 + 0x49bc)) {
+  if (*(short *)(glContext + 0x49be) == *(short *)(glContext + 0x49bc)) {
     ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar7 + 4));
   }
   else {
-    *(short *)(param_1 + 0x49be) = *(short *)(param_1 + 0x49be) + 1;
+    *(short *)(glContext + 0x49be) = *(short *)(glContext + 0x49be) + 1;
   }
   bVar1 = uVar3 == 1;
-  iVar8 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAPrologNoTransRTC,iVar7 + 0x20);
-  iVar8 = iVar7 + 0x20 + iVar8 * 4;
+  chunkWordCountThenCodeCursor = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAPrologNoTransRTC,iVar7 + 0x20);
+  chunkWordCountThenCodeCursor = iVar7 + 0x20 + chunkWordCountThenCodeCursor * 4;
   if (bVar1) {
-    puVar11 = &_gleVASingleFlushSetupRTC;
+    codeChunk = &_gleVASingleFlushSetupRTC;
 LAB_000c2584:
-    iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar11,iVar8);
-    iVar8 = iVar8 + iVar9 * 4;
+    chunkWordCount3 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount3 * 4;
   }
   else if (uVar3 == 2) {
-    puVar11 = &_gleVADoubleFlushSetupRTC;
+    codeChunk = &_gleVADoubleFlushSetupRTC;
     goto LAB_000c2584;
   }
   if ((param_2 >> 0x10 & 0x21) == 0x21) {
-    iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)((&_vertex_load_array)[param_2 >> 0xc & 0xf],iVar8);
-    iVar9 = iVar8 + iVar9 * 4;
+    chunkWordCountThenCodeCursor2 = ((int (*)())_gleRTCAddAChunk_c2458)((&_vertex_load_array)[param_2 >> 0xc & 0xf],chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor + chunkWordCountThenCodeCursor2 * 4;
     if (iVar6 < 0) {
-      iVar10 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreVertXYZWRTC,iVar9);
-      iVar9 = iVar9 + iVar10 * 4;
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreVertXYZWRTC,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount * 4;
       if (uVar13 != 0) {
-        puVar11 = &_gleVASwapStoreVertXYZWRTC;
+        codeChunk = &_gleVASwapStoreVertXYZWRTC;
         goto LAB_000c2674;
       }
     }
     else {
-      iVar10 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreVertXYZRTC,iVar9);
-      iVar9 = iVar9 + iVar10 * 4;
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreVertXYZRTC,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount * 4;
       if (uVar13 != 0) {
-        puVar11 = &_gleVASwapStoreVertXYZRTC;
+        codeChunk = &_gleVASwapStoreVertXYZRTC;
         goto LAB_000c2674;
       }
     }
   }
   else {
     bVar2 = true;
-    iVar9 = iVar8;
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor;
     if (iVar6 < 0) {
       if (uVar13 == 0) {
-        puVar11 = &_gleVACopyVertXYZWRTC;
+        codeChunk = &_gleVACopyVertXYZWRTC;
       }
       else {
-        puVar11 = &_gleVASwapCopyVertXYZWRTC;
+        codeChunk = &_gleVASwapCopyVertXYZWRTC;
       }
     }
     else if (uVar13 == 0) {
-      puVar11 = &_gleVACopyVertXYZRTC;
+      codeChunk = &_gleVACopyVertXYZRTC;
     }
     else {
-      puVar11 = &_gleVASwapCopyVertXYZRTC;
+      codeChunk = &_gleVASwapCopyVertXYZRTC;
     }
 LAB_000c2674:
-    iVar10 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar11,iVar9);
-    iVar9 = iVar9 + iVar10 * 4;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount * 4;
   }
   bVar5 = uVar13 == 0;
   bVar4 = -1 < iVar6;
@@ -7134,161 +7253,161 @@ LAB_000c2674:
   if (uVar13 == 0x20) {
     bVar2 = true;
     if (bVar4) {
-      puVar11 = &_gleVAColorFuncCopy12;
+      codeChunk = &_gleVAColorFuncCopy12;
     }
     else {
-      puVar11 = &_gleVAColorFuncCopy16;
+      codeChunk = &_gleVAColorFuncCopy16;
     }
 LAB_000c2734:
-    iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar11,iVar9);
-    iVar9 = iVar9 + iVar6 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
   else if (uVar13 < 0x21) {
     if (uVar13 == 1) {
-      puVar11 = &_gleVAColorFuncCurrent;
+      codeChunk = &_gleVAColorFuncCurrent;
 LAB_000c26ec:
-      iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar11,iVar9);
-      iVar9 = iVar9 + iVar6 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
       if (bVar4) {
         if (bVar5) {
-          puVar11 = &_gleVAStoreColor12;
+          codeChunk = &_gleVAStoreColor12;
         }
         else {
-          puVar11 = &_gleVASwapColor12;
+          codeChunk = &_gleVASwapColor12;
         }
       }
       else if (bVar5) {
-        puVar11 = &_gleVAStoreColor16;
+        codeChunk = &_gleVAStoreColor16;
       }
       else {
-        puVar11 = &_gleVASwapColor16;
+        codeChunk = &_gleVASwapColor16;
       }
       goto LAB_000c2734;
     }
   }
   else if (uVar13 == 0x21) {
-    puVar11 = *(undefined **)((int)&_color_func_array + (param_2 >> 6 & 0x3c));
+    codeChunk = *(undefined **)((int)&_color_func_array + (param_2 >> 6 & 0x3c));
     goto LAB_000c26ec;
   }
   uVar13 = param_2 >> 0x13 & 0x21;
   if (uVar13 == 0x20) {
     bVar2 = true;
     if (bVar4) {
-      puVar11 = &_gleVATex0FuncCopyST16;
+      codeChunk = &_gleVATex0FuncCopyST16;
     }
     else {
-      puVar11 = &_gleVATex0FuncCopySTQ20;
+      codeChunk = &_gleVATex0FuncCopySTQ20;
     }
     goto LAB_000c280c;
   }
   if (uVar13 < 0x21) {
     if (uVar13 == 1) {
-      puVar11 = &_gleVATex0LoadCurrent;
+      codeChunk = &_gleVATex0LoadCurrent;
 LAB_000c27ac:
-      iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar11,iVar9);
-      iVar9 = iVar9 + iVar6 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
       if (bVar4) {
-        iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreTex0ST16,iVar9);
-        iVar9 = iVar9 + iVar6 * 4;
+        chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreTex0ST16,chunkWordCountThenCodeCursor2);
+        chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
         if (!bVar5) {
-          puVar11 = &_gleVASwapTex0ST16;
+          codeChunk = &_gleVASwapTex0ST16;
           goto LAB_000c280c;
         }
       }
       else {
-        iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreTex0STQ20,iVar9);
-        iVar9 = iVar9 + iVar6 * 4;
+        chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreTex0STQ20,chunkWordCountThenCodeCursor2);
+        chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
         if (!bVar5) {
-          puVar11 = &_gleVASwapTex0STQ20;
+          codeChunk = &_gleVASwapTex0STQ20;
 LAB_000c280c:
-          iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar11,iVar9);
-          iVar9 = iVar9 + iVar6 * 4;
+          chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+          chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
         }
       }
     }
   }
   else if (uVar13 == 0x21) {
-    puVar11 = *(undefined **)((int)&_tex0_func_array + (param_2 >> 2 & 0x3c));
+    codeChunk = *(undefined **)((int)&_tex0_func_array + (param_2 >> 2 & 0x3c));
     goto LAB_000c27ac;
   }
   uVar13 = param_2 >> 0x14 & 0x21;
   if (uVar13 == 0x20) {
     bVar2 = true;
     if (bVar4) {
-      puVar11 = &_gleVATex1FuncCopyST24;
+      codeChunk = &_gleVATex1FuncCopyST24;
     }
     else {
-      puVar11 = &_gleVATex1FuncCopySTQ32;
+      codeChunk = &_gleVATex1FuncCopySTQ32;
     }
 LAB_000c291c:
-    iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar11,iVar9);
-    iVar9 = iVar9 + iVar6 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
   else if (uVar13 < 0x21) {
     if (uVar13 == 1) {
-      iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVATex1LoadCurrent,iVar9);
-      iVar9 = iVar9 + iVar6 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVATex1LoadCurrent,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
       if (!bVar4) goto LAB_000c28d0;
 LAB_000c28f8:
-      iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreTex1ST24,iVar9);
-      iVar9 = iVar9 + iVar6 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreTex1ST24,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
       if (!bVar5) {
-        puVar11 = &_gleVASwapTex1ST24;
+        codeChunk = &_gleVASwapTex1ST24;
         goto LAB_000c291c;
       }
     }
   }
   else if (uVar13 == 0x21) {
-    iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)((&_tex1_func_array)[param_2 & 0xf],iVar9);
-    iVar9 = iVar9 + iVar6 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)((&_tex1_func_array)[param_2 & 0xf],chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
     if (bVar4) goto LAB_000c28f8;
-    iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(*(undefined4 *)((int)&_tex1_tcl_array + (param_2 & 0xc)),iVar9);
-    iVar9 = iVar9 + iVar6 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(*(undefined4 *)((int)&_tex1_tcl_array + (param_2 & 0xc)),chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
 LAB_000c28d0:
-    iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreTex1STQ32,iVar9);
-    iVar9 = iVar9 + iVar6 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreTex1STQ32,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
     if (!bVar5) {
-      puVar11 = &_gleVASwapTex1STQ32;
+      codeChunk = &_gleVASwapTex1STQ32;
       goto LAB_000c291c;
     }
   }
   if (bVar1) {
-    puVar11 = &_gleVASingleFlushDataRTC_10c068;
+    codeChunk = &_gleVASingleFlushDataRTC_10c068;
 LAB_000c2950:
-    iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar11,iVar9);
-    iVar9 = iVar9 + iVar6 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
   else if (uVar3 == 2) {
-    puVar11 = &_gleVADoubleFlushDataRTC_10c070;
+    codeChunk = &_gleVADoubleFlushDataRTC_10c070;
     goto LAB_000c2950;
   }
   if (bVar2) {
-    iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAIncOldDataRTC,iVar9);
-    iVar9 = iVar9 + iVar6 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAIncOldDataRTC,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
-  iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAEndLoopRTC,iVar9);
-  iVar9 = iVar9 + iVar6 * 4;
-  puVar14 = (undefined4 *)(iVar9 + -4);
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAEndLoopRTC,chunkWordCountThenCodeCursor2);
+  chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
+  puVar14 = (undefined4 *)(chunkWordCountThenCodeCursor2 + -4);
   if (bVar1) {
-    puVar11 = &_gleVASingleFlushDataRTC_10c068;
+    codeChunk = &_gleVASingleFlushDataRTC_10c068;
   }
   else {
     if (uVar3 != 2) goto LAB_000c29e8;
-    puVar11 = &_gleVADoubleCompleteDataRTC;
+    codeChunk = &_gleVADoubleCompleteDataRTC;
   }
-  iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar11,iVar9);
-  iVar9 = iVar9 + iVar6 * 4;
-  iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVACompleteFlushDataRTC_10c098,iVar9);
-  iVar9 = iVar9 + iVar6 * 4;
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+  chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVACompleteFlushDataRTC_10c098,chunkWordCountThenCodeCursor2);
+  chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
 LAB_000c29e8:
-  iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAEpilogNoTransRTC,iVar9);
-  uVar12 = ((int (*)())_gleRTCBuildABranch_c244c)(*puVar14,iVar8 - (int)puVar14 >> 2);
+  iVar6 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAEpilogNoTransRTC,chunkWordCountThenCodeCursor2);
+  uVar12 = ((int (*)())_gleRTCBuildABranch_c244c)(*puVar14,chunkWordCountThenCodeCursor - (int)puVar14 >> 2);
   *puVar14 = uVar12;
-  iVar6 = ((iVar9 + iVar6 * 4) - iVar7) + -0x20 >> 2;
+  iVar6 = ((chunkWordCountThenCodeCursor2 + iVar6 * 4) - iVar7) + -0x20 >> 2;
   if (iVar6 < 0x181) {
     iVar7 = _gleShrinkFuncCacheElem(iVar7,iVar6);
     puVar11 = PTR__glePushInstructions_00112054;
-    *(int *)(param_1 + 0x49b4) = iVar7;
+    *(int *)(glContext + 0x49b4) = iVar7;
     (**(code **)puVar11)(iVar6,(undefined *)(iVar7 + 0x20));
     return (undefined *)(iVar7 + 0x20);
   }
@@ -7297,8 +7416,8 @@ LAB_000c29e8:
 }
 
 /* _gleBuildCompileFuncNO @ 0xc2a80 (1512 bytes) */
-int _gleBuildCompileFuncNO(param_1, param_2)
-  int param_1;
+int _gleBuildCompileFuncNO(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   bool bVar1;
@@ -7307,226 +7426,229 @@ int _gleBuildCompileFuncNO(param_1, param_2)
   bool bVar4;
   int iVar5;
   undefined *puVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
+  undefined *codeChunk;
+  int chunkWordCountThenCodeCursor;
+  int emittedWordCount;
+  int chunkWordCount;
+  int chunkWordCountThenCodeCursor2;
+  int chunkWordCount2;
   undefined4 uVar10;
   char cVar11;
   uint uVar12;
   undefined4 *puVar13;
   
   bVar3 = false;
-  uVar12 = *(uint *)(param_1 + 0x498c) >> 0xf & 1;
-  cVar11 = (*(uint *)(*(int *)(param_1 + 0x468c) + 0x94) & 3) == 1;
-  if (0x20 < *(ushort *)(param_1 + 0x4990)) {
+  uVar12 = *(uint *)(glContext + 0x498c) >> 0xf & 1;
+  cVar11 = (*(uint *)(*(int *)(glContext + 0x468c) + 0x94) & 3) == 1;
+  if (0x20 < *(ushort *)(glContext + 0x4990)) {
     cVar11 = cVar11 << 1;
   }
-  iVar5 = _gleCreateFuncCacheElem(*(undefined4 *)(param_1 + 0x49b4),0x180);
+  iVar5 = _gleCreateFuncCacheElem(*(undefined4 *)(glContext + 0x49b4),0x180);
   if (iVar5 == 0) {
     return PTR__gleRTCNoop_00112058;
   }
   *(uint *)(iVar5 + 8) = param_2;
-  if (*(short *)(param_1 + 0x49be) == *(short *)(param_1 + 0x49bc)) {
+  if (*(short *)(glContext + 0x49be) == *(short *)(glContext + 0x49bc)) {
     ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar5 + 4));
   }
   else {
-    *(short *)(param_1 + 0x49be) = *(short *)(param_1 + 0x49be) + 1;
+    *(short *)(glContext + 0x49be) = *(short *)(glContext + 0x49be) + 1;
   }
   uVar2 = param_2 >> 0x10;
   if ((uVar2 & 0x21) == 0x21) {
-    puVar6 = &_gleVAPrologRTC_10bb18;
+    codeChunk = &_gleVAPrologRTC_10bb18;
   }
   else {
-    puVar6 = &_gleVAPrologNoTransRTC;
+    codeChunk = &_gleVAPrologNoTransRTC;
   }
   bVar1 = cVar11 == '\x01';
-  iVar7 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar5 + 0x20);
-  iVar7 = iVar5 + 0x20 + iVar7 * 4;
+  chunkWordCountThenCodeCursor = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,iVar5 + 0x20);
+  chunkWordCountThenCodeCursor = iVar5 + 0x20 + chunkWordCountThenCodeCursor * 4;
   if (bVar1) {
-    puVar6 = &_gleVASingleFlushSetupRTC;
+    codeChunk = &_gleVASingleFlushSetupRTC;
 LAB_000c2b8c:
-    iVar8 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar7);
-    iVar7 = iVar7 + iVar8 * 4;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount * 4;
   }
   else if (cVar11 == '\x02') {
-    puVar6 = &_gleVADoubleFlushSetupRTC;
+    codeChunk = &_gleVADoubleFlushSetupRTC;
     goto LAB_000c2b8c;
   }
   if ((uVar2 & 0x21) == 0x21) {
-    iVar8 = ((int (*)())_gleRTCAddAChunk_c2458)(*(undefined4 *)((int)&_vertex_func_array + (param_2 >> 10 & 0x3c)),iVar7);
-    iVar8 = iVar7 + iVar8 * 4;
+    chunkWordCountThenCodeCursor2 = ((int (*)())_gleRTCAddAChunk_c2458)(*(undefined4 *)((int)&_vertex_func_array + (param_2 >> 10 & 0x3c)),chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor + chunkWordCountThenCodeCursor2 * 4;
     if ((param_2 & 0x10000000) == 0) {
-      puVar6 = &_gleVALoadClipVertRTC;
+      codeChunk = &_gleVALoadClipVertRTC;
     }
     else {
-      puVar6 = &_gleVALoadVertRTC;
+      codeChunk = &_gleVALoadVertRTC;
     }
-    iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar8);
-    iVar8 = iVar8 + iVar9 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
     if (uVar12 != 0) {
-      puVar6 = &_gleVASwapStoreVertXYZWRTC;
+      codeChunk = &_gleVASwapStoreVertXYZWRTC;
       goto LAB_000c2c2c;
     }
   }
   else {
     bVar3 = true;
-    iVar8 = iVar7;
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor;
     if (uVar12 == 0) {
-      puVar6 = &_gleVACopyVertXYZWRTC;
+      codeChunk = &_gleVACopyVertXYZWRTC;
     }
     else {
-      puVar6 = &_gleVASwapCopyVertXYZWRTC;
+      codeChunk = &_gleVASwapCopyVertXYZWRTC;
     }
 LAB_000c2c2c:
-    iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar8);
-    iVar8 = iVar8 + iVar9 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
   bVar4 = uVar12 == 0;
   uVar12 = param_2 >> 0x11 & 0x21;
   if (uVar12 == 0x20) {
-    puVar6 = &_gleVAColorFuncCopy16;
+    codeChunk = &_gleVAColorFuncCopy16;
     bVar3 = true;
 LAB_000c2cc4:
-    iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar8);
-    iVar8 = iVar8 + iVar9 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
   else if (uVar12 < 0x21) {
     if (uVar12 == 1) {
-      puVar6 = &_gleVAColorFuncCurrent;
+      codeChunk = &_gleVAColorFuncCurrent;
 LAB_000c2c98:
-      iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar8);
-      iVar8 = iVar8 + iVar9 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
       if (bVar4) {
-        puVar6 = &_gleVAStoreColor16;
+        codeChunk = &_gleVAStoreColor16;
       }
       else {
-        puVar6 = &_gleVASwapColor16;
+        codeChunk = &_gleVASwapColor16;
       }
       goto LAB_000c2cc4;
     }
   }
   else if (uVar12 == 0x21) {
-    puVar6 = *(undefined **)((int)&_color_func_array + (param_2 >> 6 & 0x3c));
+    codeChunk = *(undefined **)((int)&_color_func_array + (param_2 >> 6 & 0x3c));
     goto LAB_000c2c98;
   }
   uVar12 = param_2 >> 0x13 & 0x21;
   if (uVar12 == 0x20) {
-    puVar6 = &_gleVATex0FuncCopyST;
+    codeChunk = &_gleVATex0FuncCopyST;
     bVar3 = true;
 LAB_000c2e14:
-    iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar8);
-    iVar8 = iVar8 + iVar9 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
   else if (uVar12 < 0x21) {
     if (uVar12 == 1) {
-      iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVATex0LoadCurrent,iVar8);
-      iVar8 = iVar8 + iVar9 * 4;
-      iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVATexWDivideSTQ,iVar8);
-      iVar8 = iVar8 + iVar9 * 4;
-      iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreTex0STQ,iVar8);
-      iVar8 = iVar8 + iVar9 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVATex0LoadCurrent,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVATexWDivideSTQ,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreTex0STQ,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
       if (!bVar4) {
-        iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVASwapTex0ST,iVar8);
-        iVar8 = iVar8 + iVar9 * 4;
+        chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVASwapTex0ST,chunkWordCountThenCodeCursor2);
+        chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
 LAB_000c2e08:
-        puVar6 = &_gleVASwapTex0Q;
+        codeChunk = &_gleVASwapTex0Q;
         goto LAB_000c2e14;
       }
     }
   }
   else if (uVar12 == 0x21) {
     uVar12 = param_2 >> 4 & 0xf;
-    iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)((&_tex0_func_array)[uVar12],iVar8);
-    iVar8 = iVar8 + iVar9 * 4;
-    iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(*(undefined4 *)((int)&_tex0_divide_array + (param_2 >> 4 & 0xc)),iVar8);
-    iVar8 = iVar8 + iVar9 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)((&_tex0_func_array)[uVar12],chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(*(undefined4 *)((int)&_tex0_divide_array + (param_2 >> 4 & 0xc)),chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
     if (uVar12 < 0xc) {
-      puVar6 = &_gleVAStoreTex0ST;
+      codeChunk = &_gleVAStoreTex0ST;
     }
     else {
-      puVar6 = &_gleVAStoreTex0STQ;
+      codeChunk = &_gleVAStoreTex0STQ;
     }
-    iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar8);
-    iVar8 = iVar8 + iVar9 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
     if (!bVar4) {
-      iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVASwapTex0ST,iVar8);
-      iVar8 = iVar8 + iVar9 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVASwapTex0ST,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
       if (uVar12 >= 0xc) goto LAB_000c2e08;
     }
   }
   uVar12 = param_2 >> 0x14 & 0x21;
   if (uVar12 == 0x20) {
-    puVar6 = &_gleVATex1FuncCopySTQ;
+    codeChunk = &_gleVATex1FuncCopySTQ;
     bVar3 = true;
 LAB_000c2ef0:
-    iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar8);
-    iVar8 = iVar8 + iVar9 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
   else if (uVar12 < 0x21) {
     if (uVar12 == 1) {
-      iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVATex1LoadCurrent,iVar8);
-      puVar6 = &_gleVATexWDivideSTQ;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVATex1LoadCurrent,chunkWordCountThenCodeCursor2);
+      codeChunk = &_gleVATexWDivideSTQ;
 LAB_000c2eb8:
-      iVar8 = iVar8 + iVar9 * 4;
-      iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar8);
-      iVar8 = iVar8 + iVar9 * 4;
-      iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreTex1STQ,iVar8);
-      iVar8 = iVar8 + iVar9 * 4;
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAStoreTex1STQ,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
       if (!bVar4) {
-        puVar6 = &_gleVASwapTex1STQ;
+        codeChunk = &_gleVASwapTex1STQ;
         goto LAB_000c2ef0;
       }
     }
   }
   else if (uVar12 == 0x21) {
-    iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)((&_tex1_func_array)[param_2 & 0xf],iVar8);
-    puVar6 = *(undefined **)((int)&_tex1_divide_array + (param_2 & 0xc));
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)((&_tex1_func_array)[param_2 & 0xf],chunkWordCountThenCodeCursor2);
+    codeChunk = *(undefined **)((int)&_tex1_divide_array + (param_2 & 0xc));
     goto LAB_000c2eb8;
   }
   if (bVar1) {
-    puVar6 = &_gleVASingleFlushDataRTC_10c068;
+    codeChunk = &_gleVASingleFlushDataRTC_10c068;
 LAB_000c2f20:
-    iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar8);
-    iVar8 = iVar8 + iVar9 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
   else if (cVar11 == '\x02') {
-    puVar6 = &_gleVADoubleFlushDataRTC_10c070;
+    codeChunk = &_gleVADoubleFlushDataRTC_10c070;
     goto LAB_000c2f20;
   }
   if (bVar3) {
-    iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAIncOldDataRTC,iVar8);
-    iVar8 = iVar8 + iVar9 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAIncOldDataRTC,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
-  iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAEndLoopRTC,iVar8);
-  iVar8 = iVar8 + iVar9 * 4;
-  puVar13 = (undefined4 *)(iVar8 + -4);
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVAEndLoopRTC,chunkWordCountThenCodeCursor2);
+  chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
+  puVar13 = (undefined4 *)(chunkWordCountThenCodeCursor2 + -4);
   if (bVar1) {
-    puVar6 = &_gleVASingleFlushDataRTC_10c068;
+    codeChunk = &_gleVASingleFlushDataRTC_10c068;
   }
   else {
     if (cVar11 != '\x02') goto LAB_000c2fb8;
-    puVar6 = &_gleVADoubleCompleteDataRTC;
+    codeChunk = &_gleVADoubleCompleteDataRTC;
   }
-  iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar8);
-  iVar8 = iVar8 + iVar9 * 4;
-  iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVACompleteFlushDataRTC_10c098,iVar8);
-  iVar8 = iVar8 + iVar9 * 4;
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+  chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(&_gleVACompleteFlushDataRTC_10c098,chunkWordCountThenCodeCursor2);
+  chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
 LAB_000c2fb8:
   if ((uVar2 & 0x21) == 0x21) {
-    puVar6 = &_gleVAEpilogRTC_10bd34;
+    codeChunk = &_gleVAEpilogRTC_10bd34;
   }
   else {
-    puVar6 = &_gleVAEpilogNoTransRTC;
+    codeChunk = &_gleVAEpilogNoTransRTC;
   }
-  iVar9 = ((int (*)())_gleRTCAddAChunk_c2458)(puVar6,iVar8);
-  uVar10 = ((int (*)())_gleRTCBuildABranch_c244c)(*puVar13,iVar7 - (int)puVar13 >> 2);
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c2458)(codeChunk,chunkWordCountThenCodeCursor2);
+  uVar10 = ((int (*)())_gleRTCBuildABranch_c244c)(*puVar13,chunkWordCountThenCodeCursor - (int)puVar13 >> 2);
   *puVar13 = uVar10;
-  iVar7 = ((iVar8 + iVar9 * 4) - iVar5) + -0x20 >> 2;
-  if (iVar7 < 0x181) {
-    iVar5 = _gleShrinkFuncCacheElem(iVar5,iVar7);
+  emittedWordCount = ((chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4) - iVar5) + -0x20 >> 2;
+  if (emittedWordCount < 0x181) {
+    iVar5 = _gleShrinkFuncCacheElem(iVar5,emittedWordCount);
     puVar6 = PTR__glePushInstructions_00112054;
-    *(int *)(param_1 + 0x49b4) = iVar5;
-    (**(code **)puVar6)(iVar7,(undefined *)(iVar5 + 0x20));
+    *(int *)(glContext + 0x49b4) = iVar5;
+    (**(code **)puVar6)(emittedWordCount,(undefined *)(iVar5 + 0x20));
     return (undefined *)(iVar5 + 0x20);
   }
                     
@@ -7534,36 +7656,36 @@ LAB_000c2fb8:
 }
 
 /* _gleRTCBuildABranch_c3068 @ 0xc3068 (12 bytes) */
-int _gleRTCBuildABranch_c3068(param_1, param_2)
-  uint param_1;
-  uint param_2;
+int _gleRTCBuildABranch_c3068(branchInstruction, branchWordOffset)
+  uint branchInstruction;
+  uint branchWordOffset;
 {
-  return (param_2 & 0x3fff) << 2 | param_1 & 0xffff0003;
+  return (branchWordOffset & 0x3fff) << 2 | branchInstruction & 0xffff0003;
 }
 
 /* _gleRTCAddAChunk_c3074 @ 0xc3074 (48 bytes) */
-int _gleRTCAddAChunk_c3074(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int _gleRTCAddAChunk_c3074(srcCursor, dstCursor)
+  int *srcCursor;
+  int *dstCursor;
 {
-  int iVar1;
-  int iVar2;
+  int word;
+  int copiedWords;
   
-  iVar2 = 0;
-  iVar1 = *param_1;
-  while (iVar1 != 0) {
-    *param_2 = iVar1;
-    iVar2 = iVar2 + 1;
-    param_1 = param_1 + 1;
-    param_2 = param_2 + 1;
-    iVar1 = *param_1;
+  copiedWords = 0;
+  word = *srcCursor;
+  while (word != 0) {
+    *dstCursor = word;
+    copiedWords = copiedWords + 1;
+    srcCursor = srcCursor + 1;
+    dstCursor = dstCursor + 1;
+    word = *srcCursor;
   }
-  return iVar2;
+  return copiedWords;
 }
 
 /* _gleBuildCompileFuncTCLAV @ 0xc30a4 (1992 bytes) */
-int _gleBuildCompileFuncTCLAV(param_1, param_2)
-  int param_1;
+int _gleBuildCompileFuncTCLAV(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   bool bVar1;
@@ -7574,18 +7696,21 @@ int _gleBuildCompileFuncTCLAV(param_1, param_2)
   undefined **ppuVar6;
   int iVar7;
   undefined *puVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
+  undefined *codeChunk;
+  int chunkWordCountThenCodeCursor2;
+  int emittedWordCount;
+  int chunkWordCount;
+  int chunkWordCountThenCodeCursor;
+  int chunkWordCount2;
   undefined4 uVar12;
   uint uVar13;
   uint uVar14;
   undefined4 *puVar15;
   
   bVar4 = false;
-  uVar14 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x94);
-  iVar7 = (uint)*(ushort *)(param_1 + 0x4990) * 2;
-  uVar13 = *(uint *)(param_1 + 0x498c);
+  uVar14 = *(uint *)(*(int *)(glContext + 0x468c) + 0x94);
+  iVar7 = (uint)*(ushort *)(glContext + 0x4990) * 2;
+  uVar13 = *(uint *)(glContext + 0x498c);
   uVar5 = iVar7 + 0x1fU >> 5;
   if ((*(uint *)PTR__gle_processor_0011204c & 0x40) != 0) {
     uVar5 = iVar7 + 0x7fU >> 7;
@@ -7596,97 +7721,97 @@ int _gleBuildCompileFuncTCLAV(param_1, param_2)
   if ((!bVar1) && ((uVar14 & 8) != 0)) {
     bVar3 = true;
   }
-  iVar7 = _gleCreateFuncCacheElem(*(undefined4 *)(param_1 + 0x49b4),0x310);
+  iVar7 = _gleCreateFuncCacheElem(*(undefined4 *)(glContext + 0x49b4),0x310);
   if (iVar7 == 0) {
     return PTR__gleRTCNoop_00112058;
   }
   *(uint *)(iVar7 + 8) = param_2;
-  if (*(short *)(param_1 + 0x49be) == *(short *)(param_1 + 0x49bc)) {
+  if (*(short *)(glContext + 0x49be) == *(short *)(glContext + 0x49bc)) {
     ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar7 + 4));
   }
   else {
-    *(short *)(param_1 + 0x49be) = *(short *)(param_1 + 0x49be) + 1;
+    *(short *)(glContext + 0x49be) = *(short *)(glContext + 0x49be) + 1;
   }
   if ((*(uint *)PTR__gle_processor_0011204c & 0x40) == 0) {
-    puVar8 = &_gleVAPrologNoTransAVRTC;
+    codeChunk = &_gleVAPrologNoTransAVRTC;
   }
   else {
-    puVar8 = &_gleVAPrologNoTransAVRTC_128;
+    codeChunk = &_gleVAPrologNoTransAVRTC_128;
   }
   bVar2 = (uVar13 >> 0xf & 1) == 0;
-  iVar9 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar8,iVar7 + 0x20);
-  iVar9 = iVar7 + 0x20 + iVar9 * 4;
+  chunkWordCountThenCodeCursor2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,iVar7 + 0x20);
+  chunkWordCountThenCodeCursor2 = iVar7 + 0x20 + chunkWordCountThenCodeCursor2 * 4;
   if (!bVar2) {
-    iVar10 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVALoadSwapVectAVRTC,iVar9);
-    iVar9 = iVar9 + iVar10 * 4;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVALoadSwapVectAVRTC,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount * 4;
   }
-  iVar10 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAStartLoopAVRTC,iVar9);
-  iVar10 = iVar9 + iVar10 * 4;
+  chunkWordCountThenCodeCursor = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAStartLoopAVRTC,chunkWordCountThenCodeCursor2);
+  chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor2 + chunkWordCountThenCodeCursor * 4;
   if ((param_2 >> 0x10 & 0x21) == 0x21) {
     uVar13 = param_2 >> 0xc & 0xf;
-    iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)((&_vertex_load_array_av)[uVar13],iVar10);
-    iVar10 = iVar10 + iVar11 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)((&_vertex_load_array_av)[uVar13],chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     if (bVar1) {
       if (uVar13 < 4) {
-        puVar8 = &_gleVAVertFillZAV;
+        codeChunk = &_gleVAVertFillZAV;
         goto LAB_000c3264;
       }
     }
     else {
-      puVar8 = *(undefined **)((int)&_vertex_fill_array_av + (param_2 >> 0xc & 0xc));
+      codeChunk = *(undefined **)((int)&_vertex_fill_array_av + (param_2 >> 0xc & 0xc));
 LAB_000c3264:
-      iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar8,iVar10);
-      iVar10 = iVar10 + iVar11 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     }
     if ((*(uint *)PTR__gle_processor_0011204c & 0x40) == 0) {
-      puVar8 = &_gleVAIncVertAVRTC;
+      codeChunk = &_gleVAIncVertAVRTC;
     }
     else {
-      puVar8 = &_gleVAIncVertAVRTC_128;
+      codeChunk = &_gleVAIncVertAVRTC_128;
     }
-    iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar8,iVar10);
-    iVar10 = iVar10 + iVar11 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     if (!bVar2) {
-      puVar8 = &_gleVASwapVertAVRTC;
+      codeChunk = &_gleVASwapVertAVRTC;
       goto LAB_000c32cc;
     }
   }
   else {
-    puVar8 = &_gleVALoadOldVertAVRTC;
+    codeChunk = &_gleVALoadOldVertAVRTC;
     bVar4 = true;
 LAB_000c32cc:
-    iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar8,iVar10);
-    iVar10 = iVar10 + iVar11 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
   }
   if (bVar1) {
-    puVar8 = &_gleVAStoreVertXYZAVRTC;
+    codeChunk = &_gleVAStoreVertXYZAVRTC;
   }
   else {
-    puVar8 = &_gleVAStoreVertXYZWAVRTC;
+    codeChunk = &_gleVAStoreVertXYZWAVRTC;
   }
-  iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar8,iVar10);
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor);
   uVar13 = param_2 >> 0x11 & 0x21;
-  iVar10 = iVar10 + iVar11 * 4;
+  chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
   if (uVar13 == 0x20) {
     bVar4 = true;
     if (bVar1) {
-      iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAColorLoadCopyInt12AV,iVar10);
-      iVar10 = iVar10 + iVar11 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAColorLoadCopyInt12AV,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
       puVar8 = &_gleVAStoreColorInt12AV;
     }
     else {
-      iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAColorLoadCopyInt16AV,iVar10);
-      iVar10 = iVar10 + iVar11 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAColorLoadCopyInt16AV,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
       puVar8 = &_gleVAStoreColorInt16AV;
     }
 LAB_000c342c:
-    iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar8,iVar10);
-    iVar10 = iVar10 + iVar11 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar8,chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
   }
   else if (uVar13 < 0x21) {
     if (uVar13 == 1) {
-      iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAColorLoadCurrentAV,iVar10);
-      iVar10 = iVar10 + iVar11 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAColorLoadCurrentAV,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
       if (bVar2) {
         if (bVar1) {
           puVar8 = &_gleVAStoreColor12AV;
@@ -7706,8 +7831,8 @@ LAB_000c342c:
   }
   else if (uVar13 == 0x21) {
     uVar13 = param_2 >> 6 & 0x3c;
-    iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(*(undefined4 *)((int)&_color_func_array_av + uVar13),iVar10);
-    iVar10 = iVar10 + iVar11 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(*(undefined4 *)((int)&_color_func_array_av + uVar13),chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     if (bVar2) {
       if (bVar1) {
         ppuVar6 = &_color_func_store_12av;
@@ -7729,171 +7854,171 @@ LAB_000c342c:
   if (uVar13 == 0x20) {
     bVar4 = true;
     if (bVar3) {
-      puVar8 = &_gleVATex0FuncCopySTRQ20AV;
+      codeChunk = &_gleVATex0FuncCopySTRQ20AV;
     }
     else if (bVar1) {
-      puVar8 = &_gleVATex0FuncCopyST16AV;
+      codeChunk = &_gleVATex0FuncCopyST16AV;
     }
     else {
-      puVar8 = &_gleVATex0FuncCopySTQ20AV;
+      codeChunk = &_gleVATex0FuncCopySTQ20AV;
     }
 LAB_000c3584:
-    iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar8,iVar10);
-    iVar10 = iVar10 + iVar11 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
   }
   else if (uVar13 < 0x21) {
     if (uVar13 == 1) {
-      iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVATex0LoadCurrentAV,iVar10);
-      iVar10 = iVar10 + iVar11 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVATex0LoadCurrentAV,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
       if (!bVar2) {
-        iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,iVar10);
-        iVar10 = iVar10 + iVar11 * 4;
+        chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,chunkWordCountThenCodeCursor);
+        chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
       }
       if (bVar3) goto LAB_000c3560;
 LAB_000c356c:
       if (bVar1) {
-        puVar8 = &_gleVAStoreTex0ST16AV;
+        codeChunk = &_gleVAStoreTex0ST16AV;
       }
       else {
-        puVar8 = &_gleVAStoreTex0STQ20AV;
+        codeChunk = &_gleVAStoreTex0STQ20AV;
       }
       goto LAB_000c3584;
     }
   }
   else if (uVar13 == 0x21) {
     uVar13 = param_2 >> 4 & 0xf;
-    iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)((&_tex0_func_array_av)[uVar13],iVar10);
-    iVar10 = iVar10 + iVar11 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)((&_tex0_func_array_av)[uVar13],chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     if (!bVar3) {
       if (!bVar1) goto LAB_000c34ac;
     }
     else {
       if (uVar13 < 8) {
-        puVar8 = &_gleVATexSetRTo0AndQTo1AV;
+        codeChunk = &_gleVATexSetRTo0AndQTo1AV;
       }
       else {
 LAB_000c34ac:
         if (0xb < uVar13) goto LAB_000c34cc;
-        puVar8 = &_gleVATexSetQTo1AV;
+        codeChunk = &_gleVATexSetQTo1AV;
       }
-      iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar8,iVar10);
-      iVar10 = iVar10 + iVar11 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     }
 LAB_000c34cc:
     if (!bVar2) {
-      iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,iVar10);
-      iVar10 = iVar10 + iVar11 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     }
     if (!bVar3) goto LAB_000c356c;
 LAB_000c3560:
-    puVar8 = &_gleVAStoreTex0STRQ20AV;
+    codeChunk = &_gleVAStoreTex0STRQ20AV;
     goto LAB_000c3584;
   }
   uVar13 = param_2 >> 0x14 & 0x21;
   if (uVar13 == 0x20) {
     bVar4 = true;
     if (bVar3) {
-      puVar8 = &_gleVATex1FuncCopySTRQ36AV;
+      codeChunk = &_gleVATex1FuncCopySTRQ36AV;
     }
     else if (bVar1) {
-      puVar8 = &_gleVATex1FuncCopyST24AV;
+      codeChunk = &_gleVATex1FuncCopyST24AV;
     }
     else {
-      puVar8 = &_gleVATex1FuncCopySTQ32AV;
+      codeChunk = &_gleVATex1FuncCopySTQ32AV;
     }
 LAB_000c36dc:
-    iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar8,iVar10);
-    iVar10 = iVar10 + iVar11 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
   }
   else if (uVar13 < 0x21) {
     if (uVar13 == 1) {
-      iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVATex1FuncCurrentAV,iVar10);
-      iVar10 = iVar10 + iVar11 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVATex1FuncCurrentAV,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
       if (!bVar2) {
-        iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,iVar10);
-        iVar10 = iVar10 + iVar11 * 4;
+        chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,chunkWordCountThenCodeCursor);
+        chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
       }
       if (bVar3) goto LAB_000c36b8;
 LAB_000c36c4:
       if (bVar1) {
-        puVar8 = &_gleVAStoreTex1ST24AV;
+        codeChunk = &_gleVAStoreTex1ST24AV;
       }
       else {
-        puVar8 = &_gleVAStoreTex1STQ32AV;
+        codeChunk = &_gleVAStoreTex1STQ32AV;
       }
       goto LAB_000c36dc;
     }
   }
   else if (uVar13 == 0x21) {
     uVar13 = param_2 & 0xf;
-    iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)((&_tex1_func_array_av)[uVar13],iVar10);
-    iVar10 = iVar10 + iVar11 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)((&_tex1_func_array_av)[uVar13],chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     if (!bVar3) {
       if (!bVar1) goto LAB_000c3604;
     }
     else {
       if (uVar13 < 8) {
-        puVar8 = &_gleVATexSetRTo0AndQTo1AV;
+        codeChunk = &_gleVATexSetRTo0AndQTo1AV;
       }
       else {
 LAB_000c3604:
         if (0xb < uVar13) goto LAB_000c3624;
-        puVar8 = &_gleVATexSetQTo1AV;
+        codeChunk = &_gleVATexSetQTo1AV;
       }
-      iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar8,iVar10);
-      iVar10 = iVar10 + iVar11 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     }
 LAB_000c3624:
     if (!bVar2) {
-      iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,iVar10);
-      iVar10 = iVar10 + iVar11 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     }
     if (!bVar3) goto LAB_000c36c4;
 LAB_000c36b8:
-    puVar8 = &_gleVAStoreTex1STRQ36AV;
+    codeChunk = &_gleVAStoreTex1STRQ36AV;
     goto LAB_000c36dc;
   }
-  iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAIncDataAVRTC,iVar10);
-  iVar10 = iVar10 + iVar11 * 4;
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAIncDataAVRTC,chunkWordCountThenCodeCursor);
+  chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
   if (uVar5 == 2) {
-    puVar8 = &_gleVADoubleFlushDataAVRTC;
+    codeChunk = &_gleVADoubleFlushDataAVRTC;
   }
   else if (uVar5 < 3) {
     if (uVar5 != 1) goto LAB_000c3774;
     if ((*(uint *)PTR__gle_processor_0011204c & 0x40) == 0) {
-      puVar8 = &_gleVASingleFlushDataAVRTC;
+      codeChunk = &_gleVASingleFlushDataAVRTC;
     }
     else {
-      puVar8 = &_gleVASingleFlushDataAVRTC_128;
+      codeChunk = &_gleVASingleFlushDataAVRTC_128;
     }
   }
   else {
     if (uVar5 != 3) goto LAB_000c3774;
-    puVar8 = &_gleVATripleFlushDataAVRTC;
+    codeChunk = &_gleVATripleFlushDataAVRTC;
   }
-  iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar8,iVar10);
-  iVar10 = iVar10 + iVar11 * 4;
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor);
+  chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
 LAB_000c3774:
   if (bVar4) {
-    iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAIncOldDataAVRTC,iVar10);
-    iVar10 = iVar10 + iVar11 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAIncOldDataAVRTC,chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
   }
-  iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAEndLoopAVRTC,iVar10);
-  iVar10 = iVar10 + iVar11 * 4;
-  puVar15 = (undefined4 *)(iVar10 + -4);
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAEndLoopAVRTC,chunkWordCountThenCodeCursor);
+  chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
+  puVar15 = (undefined4 *)(chunkWordCountThenCodeCursor + -4);
   if (uVar5 - 1 < 3) {
-    iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVACompleteFlushDataRTC_10d8a4,iVar10);
-    iVar10 = iVar10 + iVar11 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVACompleteFlushDataRTC_10d8a4,chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
   }
-  iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAEpilogNoTransAVRTC,iVar10);
-  uVar12 = ((int (*)())_gleRTCBuildABranch_c3068)(*puVar15,iVar9 - (int)puVar15 >> 2);
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAEpilogNoTransAVRTC,chunkWordCountThenCodeCursor);
+  uVar12 = ((int (*)())_gleRTCBuildABranch_c3068)(*puVar15,chunkWordCountThenCodeCursor2 - (int)puVar15 >> 2);
   *puVar15 = uVar12;
-  iVar9 = ((iVar10 + iVar11 * 4) - iVar7) + -0x20 >> 2;
-  if (iVar9 < 0x311) {
-    iVar7 = _gleShrinkFuncCacheElem(iVar7,iVar9);
+  emittedWordCount = ((chunkWordCountThenCodeCursor + chunkWordCount2 * 4) - iVar7) + -0x20 >> 2;
+  if (emittedWordCount < 0x311) {
+    iVar7 = _gleShrinkFuncCacheElem(iVar7,emittedWordCount);
     puVar8 = PTR__glePushInstructions_00112054;
-    *(int *)(param_1 + 0x49b4) = iVar7;
-    (**(code **)puVar8)(iVar9,(undefined *)(iVar7 + 0x20));
+    *(int *)(glContext + 0x49b4) = iVar7;
+    (**(code **)puVar8)(emittedWordCount,(undefined *)(iVar7 + 0x20));
     return (undefined *)(iVar7 + 0x20);
   }
                     
@@ -7901,8 +8026,8 @@ LAB_000c3774:
 }
 
 /* _gleBuildCompileFuncAV @ 0xc386c (2036 bytes) */
-int _gleBuildCompileFuncAV(param_1, param_2)
-  int param_1;
+int _gleBuildCompileFuncAV(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   bool bVar1;
@@ -7912,156 +8037,160 @@ int _gleBuildCompileFuncAV(param_1, param_2)
   uint uVar5;
   uint uVar6;
   int iVar7;
+  int chunkWordCount3;
   undefined **ppuVar8;
   int iVar9;
   undefined *puVar10;
-  int iVar11;
-  int iVar12;
+  undefined *codeChunk;
+  int chunkWordCountThenCodeCursor;
+  int chunkWordCount;
+  int chunkWordCountThenCodeCursor2;
   int iVar13;
+  int chunkWordCount2;
   undefined4 uVar14;
   undefined4 *puVar15;
   
   bVar4 = false;
-  iVar7 = (uint)((*(uint *)(*(int *)(param_1 + 0x468c) + 0x94) & 3) == 1) *
-          ((uint)*(ushort *)(param_1 + 0x4990) * 2 + 0x1f >> 5 & 0xff);
-  uVar5 = *(uint *)(param_1 + 0x498c);
-  iVar9 = _gleCreateFuncCacheElem(*(undefined4 *)(param_1 + 0x49b4),0x310);
+  iVar7 = (uint)((*(uint *)(*(int *)(glContext + 0x468c) + 0x94) & 3) == 1) *
+          ((uint)*(ushort *)(glContext + 0x4990) * 2 + 0x1f >> 5 & 0xff);
+  uVar5 = *(uint *)(glContext + 0x498c);
+  iVar9 = _gleCreateFuncCacheElem(*(undefined4 *)(glContext + 0x49b4),0x310);
   if (iVar9 == 0) {
     return PTR__gleRTCNoop_00112058;
   }
   *(uint *)(iVar9 + 8) = param_2;
-  if (*(short *)(param_1 + 0x49be) == *(short *)(param_1 + 0x49bc)) {
+  if (*(short *)(glContext + 0x49be) == *(short *)(glContext + 0x49bc)) {
     ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar9 + 4));
   }
   else {
-    *(short *)(param_1 + 0x49be) = *(short *)(param_1 + 0x49be) + 1;
+    *(short *)(glContext + 0x49be) = *(short *)(glContext + 0x49be) + 1;
   }
   uVar2 = param_2 >> 0x10;
   if ((uVar2 & 0x21) == 0x21) {
-    puVar10 = &_gleVAPrologAVRTC;
+    codeChunk = &_gleVAPrologAVRTC;
   }
   else {
-    puVar10 = &_gleVAPrologNoTransAVRTC;
+    codeChunk = &_gleVAPrologNoTransAVRTC;
   }
   uVar3 = param_2 >> 0x12;
-  iVar11 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar10,iVar9 + 0x20);
+  chunkWordCountThenCodeCursor = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,iVar9 + 0x20);
   uVar6 = uVar3 & 0x21;
-  iVar11 = iVar9 + 0x20 + iVar11 * 4;
+  chunkWordCountThenCodeCursor = iVar9 + 0x20 + chunkWordCountThenCodeCursor * 4;
   if (((uVar6 != 0x20) && (0x20 < uVar6)) && (uVar6 == 0x21)) {
     uVar6 = param_2 >> 0x18 & 0xc;
     if (uVar6 == 8) {
-      puVar10 = &_gleVAFogExpInitAVRTC;
+      codeChunk = &_gleVAFogExpInitAVRTC;
 LAB_000c39bc:
-      iVar12 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar10,iVar11);
-      iVar11 = iVar11 + iVar12 * 4;
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount * 4;
     }
     else if (uVar6 < 9) {
       if (uVar6 == 4) {
-        puVar10 = &_gleVAFogLinearInitAVRTC;
+        codeChunk = &_gleVAFogLinearInitAVRTC;
         goto LAB_000c39bc;
       }
     }
     else if (uVar6 == 0xc) {
-      puVar10 = &_gleVAFogExp2InitAVRTC;
+      codeChunk = &_gleVAFogExp2InitAVRTC;
       goto LAB_000c39bc;
     }
-    iVar12 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAFogAllInitAVRTC,iVar11);
-    iVar11 = iVar11 + iVar12 * 4;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAFogAllInitAVRTC,chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount * 4;
   }
   bVar1 = (uVar5 >> 0xf & 1) == 0;
   if (!bVar1) {
-    iVar12 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVALoadSwapVectAVRTC,iVar11);
-    iVar11 = iVar11 + iVar12 * 4;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVALoadSwapVectAVRTC,chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount * 4;
   }
-  iVar12 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAStartLoopAVRTC,iVar11);
-  iVar12 = iVar11 + iVar12 * 4;
+  chunkWordCountThenCodeCursor2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAStartLoopAVRTC,chunkWordCountThenCodeCursor);
+  chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor + chunkWordCountThenCodeCursor2 * 4;
   if (((uVar2 & 0x21) == 0x21) || ((uVar3 & 0x21) == 0x21)) {
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(*(undefined4 *)((int)&_vertex_load_array_av + (param_2 >> 10 & 0x3c)),iVar12
+    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(*(undefined4 *)((int)&_vertex_load_array_av + (param_2 >> 10 & 0x3c)),chunkWordCountThenCodeCursor2
                        );
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + iVar13 * 4;
   }
   if ((uVar3 & 0x21) == 0x20) {
-    puVar10 = &_gleVAFogFuncCopyAV;
+    codeChunk = &_gleVAFogFuncCopyAV;
 LAB_000c3b0c:
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar10,iVar12);
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
   else if ((uVar3 & 0x21) == 0x21) {
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(*(undefined4 *)((int)&_vertex_fill_array_av + (param_2 >> 0xc & 0xc)),iVar12
+    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(*(undefined4 *)((int)&_vertex_fill_array_av + (param_2 >> 0xc & 0xc)),chunkWordCountThenCodeCursor2
                        );
     uVar5 = param_2 >> 0x18 & 0xc;
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + iVar13 * 4;
     if (uVar5 == 8) {
-      puVar10 = &_gleVAFogExpCalcAVRTC;
+      codeChunk = &_gleVAFogExpCalcAVRTC;
 LAB_000c3ad8:
-      iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar10,iVar12);
-      iVar12 = iVar12 + iVar13 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
     }
     else if (uVar5 < 9) {
       if (uVar5 == 4) {
-        puVar10 = &_gleVAFogLinearCalcAVRTC;
+        codeChunk = &_gleVAFogLinearCalcAVRTC;
         goto LAB_000c3ad8;
       }
     }
     else if (uVar5 == 0xc) {
-      puVar10 = &_gleVAFogExp2CalcAVRTC;
+      codeChunk = &_gleVAFogExp2CalcAVRTC;
       goto LAB_000c3ad8;
     }
     if (bVar1) {
-      puVar10 = &_gleVAFogStoreAV;
+      codeChunk = &_gleVAFogStoreAV;
     }
     else {
-      puVar10 = &_gleVAFogSwapAV;
+      codeChunk = &_gleVAFogSwapAV;
     }
     goto LAB_000c3b0c;
   }
   if ((uVar2 & 0x21) == 0x21) {
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(*(undefined4 *)((int)&_vertex_func_array_av + (param_2 >> 0xc & 0xc)),iVar12
+    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(*(undefined4 *)((int)&_vertex_func_array_av + (param_2 >> 0xc & 0xc)),chunkWordCountThenCodeCursor2
                        );
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + iVar13 * 4;
     if ((param_2 & 0x10000000) == 0) {
-      puVar10 = &_gleVALoadClipVertAVRTC;
+      codeChunk = &_gleVALoadClipVertAVRTC;
     }
     else {
-      puVar10 = &_gleVALoadVertAVRTC;
+      codeChunk = &_gleVALoadVertAVRTC;
     }
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar10,iVar12);
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
     if (!bVar1) {
-      puVar10 = &_gleVASwapVertAVRTC;
+      codeChunk = &_gleVASwapVertAVRTC;
       goto LAB_000c3bb8;
     }
   }
   else {
     bVar4 = true;
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVALoadOldVertAVRTC,iVar12);
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVALoadOldVertAVRTC,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
     if (bVar1) {
-      puVar10 = &_gleVASplatOOWAVRTC;
+      codeChunk = &_gleVASplatOOWAVRTC;
     }
     else {
-      puVar10 = &_gleVASplatSwapOOWAVRTC;
+      codeChunk = &_gleVASplatSwapOOWAVRTC;
     }
 LAB_000c3bb8:
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar10,iVar12);
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
-  iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAStoreVertXYZWAVRTC,iVar12);
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAStoreVertXYZWAVRTC,chunkWordCountThenCodeCursor2);
   uVar5 = param_2 >> 0x11 & 0x21;
-  iVar12 = iVar12 + iVar13 * 4;
+  chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   if (uVar5 == 0x20) {
     bVar4 = true;
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAColorLoadCopyInt16AV,iVar12);
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAColorLoadCopyInt16AV,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
     puVar10 = &_gleVAStoreColorInt16AV;
 LAB_000c3cac:
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar10,iVar12);
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar10,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
   else if (uVar5 < 0x21) {
     if (uVar5 == 1) {
-      iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAColorLoadCurrentAV,iVar12);
-      iVar12 = iVar12 + iVar13 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAColorLoadCurrentAV,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
       if (bVar1) {
         puVar10 = &_gleVAStoreColor16AV;
       }
@@ -8073,8 +8202,8 @@ LAB_000c3cac:
   }
   else if (uVar5 == 0x21) {
     uVar5 = param_2 >> 6 & 0x3c;
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(*(undefined4 *)((int)&_color_func_array_av + uVar5),iVar12);
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(*(undefined4 *)((int)&_color_func_array_av + uVar5),chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
     if (bVar1) {
       ppuVar8 = &_color_func_store_16av;
     }
@@ -8088,51 +8217,51 @@ LAB_000c3cac:
   if (uVar5 == 0x20) {
     bVar4 = true;
     if ((uVar3 & 0x21) == 0) {
-      puVar10 = &_gleVATex0FuncCopyST20AV;
+      codeChunk = &_gleVATex0FuncCopyST20AV;
     }
     else {
-      puVar10 = &_gleVATex0FuncCopyST24AV;
+      codeChunk = &_gleVATex0FuncCopyST24AV;
     }
 LAB_000c3df0:
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar10,iVar12);
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
   else if (uVar5 < 0x21) {
     if (uVar5 == 1) {
-      iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVATex0LoadCurrentAV,iVar12);
-      iVar12 = iVar12 + iVar13 * 4;
-      iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVATexWDivideAV,iVar12);
-      iVar12 = iVar12 + iVar13 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVATex0LoadCurrentAV,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVATexWDivideAV,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
       if (!bVar1) {
-        iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,iVar12);
-        iVar12 = iVar12 + iVar13 * 4;
+        chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,chunkWordCountThenCodeCursor2);
+        chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
       }
 LAB_000c3dd4:
       if ((uVar3 & 0x21) == 0) {
-        puVar10 = &_gleVAStoreTex0AndQW20AV;
+        codeChunk = &_gleVAStoreTex0AndQW20AV;
       }
       else {
-        puVar10 = &_gleVAStoreTex0AndQW24AV;
+        codeChunk = &_gleVAStoreTex0AndQW24AV;
       }
       goto LAB_000c3df0;
     }
   }
   else if (uVar5 == 0x21) {
     uVar5 = param_2 >> 4 & 0xf;
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)((&_tex0_func_array_av)[uVar5],iVar12);
-    iVar12 = iVar12 + iVar13 * 4;
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVATexWDivideAV,iVar12);
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)((&_tex0_func_array_av)[uVar5],chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVATexWDivideAV,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
     if (!bVar1) {
-      iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,iVar12);
-      iVar12 = iVar12 + iVar13 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
     }
     if (0xb < uVar5) goto LAB_000c3dd4;
     if ((uVar3 & 0x21) == 0) {
-      puVar10 = &_gleVAStoreTex0ST20AV;
+      codeChunk = &_gleVAStoreTex0ST20AV;
     }
     else {
-      puVar10 = &_gleVAStoreTex0ST24AV;
+      codeChunk = &_gleVAStoreTex0ST24AV;
     }
     goto LAB_000c3df0;
   }
@@ -8140,83 +8269,83 @@ LAB_000c3dd4:
   if (uVar5 == 0x20) {
     bVar4 = true;
     if ((uVar3 & 0x21) == 0) {
-      puVar10 = &_gleVATex1FuncCopySTQ28AV;
+      codeChunk = &_gleVATex1FuncCopySTQ28AV;
     }
     else {
-      puVar10 = &_gleVATex1FuncCopySTQ32AV;
+      codeChunk = &_gleVATex1FuncCopySTQ32AV;
     }
 LAB_000c3ef0:
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar10,iVar12);
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
   else if (uVar5 < 0x21) {
     if (uVar5 == 1) {
-      puVar10 = &_gleVATex1FuncCurrentAV;
+      codeChunk = &_gleVATex1FuncCurrentAV;
 LAB_000c3e90:
-      iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar10,iVar12);
-      iVar12 = iVar12 + iVar13 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
 LAB_000c3ea0:
-      iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVATexWDivideAV,iVar12);
-      iVar12 = iVar12 + iVar13 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVATexWDivideAV,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
       if (!bVar1) {
-        iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,iVar12);
-        iVar12 = iVar12 + iVar13 * 4;
+        chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVASwapTexAV,chunkWordCountThenCodeCursor2);
+        chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
       }
       if ((uVar3 & 0x21) == 0) {
-        puVar10 = &_gleVAStoreTex1STQ28AV;
+        codeChunk = &_gleVAStoreTex1STQ28AV;
       }
       else {
-        puVar10 = &_gleVAStoreTex1STQ32AV;
+        codeChunk = &_gleVAStoreTex1STQ32AV;
       }
       goto LAB_000c3ef0;
     }
   }
   else if (uVar5 == 0x21) {
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)((&_tex1_func_array_av)[param_2 & 0xf],iVar12);
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)((&_tex1_func_array_av)[param_2 & 0xf],chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
     if ((param_2 & 0xf) < 0xc) {
-      puVar10 = &_gleVATexSetQTo1AV;
+      codeChunk = &_gleVATexSetQTo1AV;
       goto LAB_000c3e90;
     }
     goto LAB_000c3ea0;
   }
-  iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAIncDataAVRTC,iVar12);
-  iVar12 = iVar12 + iVar13 * 4;
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAIncDataAVRTC,chunkWordCountThenCodeCursor2);
+  chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   if (iVar7 == 2) {
-    puVar10 = &_gleVADoubleFlushDataAVRTC;
+    codeChunk = &_gleVADoubleFlushDataAVRTC;
   }
   else {
     if (iVar7 != 3) goto LAB_000c3f50;
-    puVar10 = &_gleVATripleFlushDataAVRTC;
+    codeChunk = &_gleVATripleFlushDataAVRTC;
   }
-  iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar10,iVar12);
-  iVar12 = iVar12 + iVar13 * 4;
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor2);
+  chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
 LAB_000c3f50:
   if (bVar4) {
-    iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAIncOldDataAVRTC,iVar12);
-    iVar12 = iVar12 + iVar13 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAIncOldDataAVRTC,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
   }
-  iVar13 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAEndLoopAVRTC,iVar12);
-  iVar12 = iVar12 + iVar13 * 4;
-  puVar15 = (undefined4 *)(iVar12 + -4);
+  chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVAEndLoopAVRTC,chunkWordCountThenCodeCursor2);
+  chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount2 * 4;
+  puVar15 = (undefined4 *)(chunkWordCountThenCodeCursor2 + -4);
   if (iVar7 - 2U < 2) {
-    iVar7 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVACompleteFlushDataRTC_10d8a4,iVar12);
-    iVar12 = iVar12 + iVar7 * 4;
+    chunkWordCount3 = ((int (*)())_gleRTCAddAChunk_c3074)(&_gleVACompleteFlushDataRTC_10d8a4,chunkWordCountThenCodeCursor2);
+    chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount3 * 4;
   }
   if ((uVar2 & 0x21) == 0x21) {
-    puVar10 = &_gleVAEpilogAVRTC;
+    codeChunk = &_gleVAEpilogAVRTC;
   }
   else {
-    puVar10 = &_gleVAEpilogNoTransAVRTC;
+    codeChunk = &_gleVAEpilogNoTransAVRTC;
   }
-  iVar7 = ((int (*)())_gleRTCAddAChunk_c3074)(puVar10,iVar12);
-  uVar14 = ((int (*)())_gleRTCBuildABranch_c3068)(*puVar15,iVar11 - (int)puVar15 >> 2);
+  iVar7 = ((int (*)())_gleRTCAddAChunk_c3074)(codeChunk,chunkWordCountThenCodeCursor2);
+  uVar14 = ((int (*)())_gleRTCBuildABranch_c3068)(*puVar15,chunkWordCountThenCodeCursor - (int)puVar15 >> 2);
   *puVar15 = uVar14;
-  iVar7 = ((iVar12 + iVar7 * 4) - iVar9) + -0x20 >> 2;
+  iVar7 = ((chunkWordCountThenCodeCursor2 + iVar7 * 4) - iVar9) + -0x20 >> 2;
   if (iVar7 < 0x311) {
     iVar9 = _gleShrinkFuncCacheElem(iVar9,iVar7);
     puVar10 = PTR__glePushInstructions_00112054;
-    *(int *)(param_1 + 0x49b4) = iVar9;
+    *(int *)(glContext + 0x49b4) = iVar9;
     (**(code **)puVar10)(iVar7,(undefined *)(iVar9 + 0x20));
     return (undefined *)(iVar9 + 0x20);
   }
@@ -8440,78 +8569,78 @@ LAB_000c42a8:
 }
 
 /* _gleRTCBuildABranch_c44ac @ 0xc44ac (12 bytes) */
-int _gleRTCBuildABranch_c44ac(param_1, param_2)
-  uint param_1;
-  uint param_2;
+int _gleRTCBuildABranch_c44ac(branchInstruction, branchWordOffset)
+  uint branchInstruction;
+  uint branchWordOffset;
 {
-  return (param_2 & 0x3fff) << 2 | param_1 & 0xffff0003;
+  return (branchWordOffset & 0x3fff) << 2 | branchInstruction & 0xffff0003;
 }
 
 /* _gleRTCAddAChunk_c44b8 @ 0xc44b8 (48 bytes) */
-int _gleRTCAddAChunk_c44b8(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int _gleRTCAddAChunk_c44b8(srcCursor, dstCursor)
+  int *srcCursor;
+  int *dstCursor;
 {
-  int iVar1;
-  int iVar2;
+  int word;
+  int copiedWords;
   
-  iVar2 = 0;
-  iVar1 = *param_1;
-  while (iVar1 != 0) {
-    *param_2 = iVar1;
-    iVar2 = iVar2 + 1;
-    param_1 = param_1 + 1;
-    param_2 = param_2 + 1;
-    iVar1 = *param_1;
+  copiedWords = 0;
+  word = *srcCursor;
+  while (word != 0) {
+    *dstCursor = word;
+    copiedWords = copiedWords + 1;
+    srcCursor = srcCursor + 1;
+    dstCursor = dstCursor + 1;
+    word = *srcCursor;
   }
-  return iVar2;
+  return copiedWords;
 }
 
 /* _gleSetModelviewFuncAll @ 0xc44e8 (100 bytes) */
-void _gleSetModelviewFuncAll(param_1, forwardedArg2, forwardedArg3)
-  int param_1;
+void _gleSetModelviewFuncAll(glContext, forwardedArg2, forwardedArg3)
+  int glContext;
   undefined4 forwardedArg2;
   undefined4 forwardedArg3;
 {
   code *UNRECOVERED_JUMPTABLE;
   
-  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildModelviewTransformFunc)(param_1,0,forwardedArg3);
-  *(code **)(param_1 + 0x5064) = UNRECOVERED_JUMPTABLE;
+  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildModelviewTransformFunc)(glContext,0,forwardedArg3);
+  *(code **)(glContext + 0x5064) = UNRECOVERED_JUMPTABLE;
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1,forwardedArg2,forwardedArg3);
+  (*UNRECOVERED_JUMPTABLE)(glContext,forwardedArg2,forwardedArg3);
   return;
 }
 
 /* _gleSetModelviewFuncW1 @ 0xc454c (100 bytes) */
-void _gleSetModelviewFuncW1(param_1, forwardedArg2, forwardedArg3)
-  int param_1;
+void _gleSetModelviewFuncW1(glContext, forwardedArg2, forwardedArg3)
+  int glContext;
   undefined4 forwardedArg2;
   undefined4 forwardedArg3;
 {
   code *UNRECOVERED_JUMPTABLE;
   
-  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildModelviewTransformFunc)(param_1,1,forwardedArg3);
-  *(code **)(param_1 + 0x5064) = UNRECOVERED_JUMPTABLE;
+  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildModelviewTransformFunc)(glContext,1,forwardedArg3);
+  *(code **)(glContext + 0x5064) = UNRECOVERED_JUMPTABLE;
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1,forwardedArg2,forwardedArg3);
+  (*UNRECOVERED_JUMPTABLE)(glContext,forwardedArg2,forwardedArg3);
   return;
 }
 
 /* _gleSetModelviewFuncZ0W1 @ 0xc45b0 (100 bytes) */
-void _gleSetModelviewFuncZ0W1(param_1, forwardedArg2, forwardedArg3)
-  int param_1;
+void _gleSetModelviewFuncZ0W1(glContext, forwardedArg2, forwardedArg3)
+  int glContext;
   undefined4 forwardedArg2;
   undefined4 forwardedArg3;
 {
   code *UNRECOVERED_JUMPTABLE;
   
-  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildModelviewTransformFunc)(param_1,3,forwardedArg3);
-  *(code **)(param_1 + 0x5064) = UNRECOVERED_JUMPTABLE;
+  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildModelviewTransformFunc)(glContext,3,forwardedArg3);
+  *(code **)(glContext + 0x5064) = UNRECOVERED_JUMPTABLE;
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1,forwardedArg2,forwardedArg3);
+  (*UNRECOVERED_JUMPTABLE)(glContext,forwardedArg2,forwardedArg3);
   return;
 }
 
@@ -8540,38 +8669,41 @@ void _gleTransformModelviewBlend(unusedArg1, param_2, param_3)
 }
 
 /* _gleBuildModelviewTransformFuncAV_body @ 0xc4664 (1236 bytes) */
-int _gleBuildModelviewTransformFuncAV_body(param_1, param_2)
-  int param_1;
+int _gleBuildModelviewTransformFuncAV_body(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   uint uVar1;
   uint uVar2;
   int iVar3;
   int iVar4;
+  int chunkWordCount;
   undefined *puVar5;
-  int iVar6;
+  undefined *codeChunk;
+  int chunkWordCount2;
   undefined4 uVar7;
   undefined4 *puVar8;
   undefined4 *puVar9;
+  undefined4 *codeCursor;
   undefined4 *puVar10;
   uint uVar11;
   int *piVar12;
   int *piVar13;
   
-  if (*(char *)(param_1 + 0x4661) != '\0') {
+  if (*(char *)(glContext + 0x4661) != '\0') {
     return (int *)PTR__gleTransformModelviewBlend_001109f8;
   }
-  uVar2 = (**(code **)PTR__gleGenerateMatrixIdentifier_00112060)(param_1,param_1 + 0x1cc0);
-  *(uint *)(param_1 + 0x5090) = uVar2;
+  uVar2 = (**(code **)PTR__gleGenerateMatrixIdentifier_00112060)(glContext,glContext + 0x1cc0);
+  *(uint *)(glContext + 0x5090) = uVar2;
   uVar11 = uVar2;
   if (((param_2 & 2) != 0) && (uVar11 = uVar2 | 0xff00, (uVar2 & 0xc0c000c) == 0xc0c000c)) {
     uVar11 = uVar2 & 0xffff00ff | 0xfb00;
   }
-  uVar2 = param_2 | *(ushort *)(param_1 + 0x4fe8);
-  if (*(short *)(0x3170 + param_1 + 4) == 0x1102) {
+  uVar2 = param_2 | *(ushort *)(glContext + 0x4fe8);
+  if (*(short *)(0x3170 + glContext + 4) == 0x1102) {
     uVar2 = uVar2 | 0x20;
   }
-  if ((*(byte *)(param_1 + 0x50b4) & 1) == 0) {
+  if ((*(byte *)(glContext + 0x50b4) & 1) == 0) {
     if ((uVar2 & 0x10) == 0) {
       uVar11 = uVar11 & 0xc0c0c0c | 0xb3e3f3f2;
     }
@@ -8583,13 +8715,13 @@ int _gleBuildModelviewTransformFuncAV_body(param_1, param_2)
   if ((uVar11 != 0xbfeffbfe) && (uVar1 = 0x3fcff3fc, (uVar11 & 0x3fcff3fc) != 0x3fcff3fc)) {
     uVar1 = 0;
   }
-  piVar12 = *(int **)(param_1 + 0x5094);
+  piVar12 = *(int **)(glContext + 0x5094);
   piVar13 = piVar12;
   do {
     if (uVar1 == piVar13[2] && uVar2 == piVar13[3]) {
       if (piVar13 != piVar12) {
         _gleMoveFuncCacheElem(piVar12,piVar13);
-        *(int **)(param_1 + 0x5094) = piVar13;
+        *(int **)(glContext + 0x5094) = piVar13;
       }
       return piVar13 + 8;
     }
@@ -8601,113 +8733,113 @@ int _gleBuildModelviewTransformFuncAV_body(param_1, param_2)
   }
   *(uint *)(iVar3 + 8) = uVar1;
   *(uint *)(iVar3 + 0xc) = uVar2;
-  if (*(short *)(param_1 + 0x509a) == *(short *)(param_1 + 0x5098)) {
+  if (*(short *)(glContext + 0x509a) == *(short *)(glContext + 0x5098)) {
     ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar3 + 4));
   }
   else {
-    *(short *)(param_1 + 0x509a) = *(short *)(param_1 + 0x509a) + 1;
+    *(short *)(glContext + 0x509a) = *(short *)(glContext + 0x509a) + 1;
   }
   puVar9 = (undefined4 *)(iVar3 + 0x20);
   if ((uVar1 == 0xbfeffbfe) && ((uVar2 & 0xc) == 0)) goto LAB_000c4ac0;
   uVar11 = uVar2 & 0xc;
-  iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_glePrologAVRTC_10f1c8,puVar9);
-  puVar8 = puVar9 + iVar4;
+  chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_glePrologAVRTC_10f1c8,puVar9);
+  puVar8 = puVar9 + chunkWordCount;
   if (uVar1 != 0xbfeffbfe) {
-    iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadMatrixPtrRTC_10f0a4,puVar8);
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadMatrixPtrRTC_10f0a4,puVar8);
     if ((uVar2 & 2) == 0) {
-      puVar5 = &_gleLoadMatrixVectorsRTC_10f20c;
+      codeChunk = &_gleLoadMatrixVectorsRTC_10f20c;
     }
     else {
-      puVar5 = &_gleLoadMatrixVectorsZ0RTC_10f22c;
+      codeChunk = &_gleLoadMatrixVectorsZ0RTC_10f22c;
     }
-    iVar6 = ((int (*)())_gleRTCAddAChunk_c44b8)(puVar5,puVar8 + iVar4);
-    puVar8 = puVar8 + iVar4 + iVar6;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c44b8)(codeChunk,puVar8 + chunkWordCount);
+    puVar8 = puVar8 + chunkWordCount + chunkWordCount2;
   }
   if (uVar11 == 8) {
-    puVar5 = &_gleFogExpInitAVRTC;
+    codeChunk = &_gleFogExpInitAVRTC;
 LAB_000c48cc:
-    iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(puVar5,puVar8);
-    puVar8 = puVar8 + iVar4;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(codeChunk,puVar8);
+    puVar8 = puVar8 + chunkWordCount;
   }
   else if (uVar11 < 9) {
     if (uVar11 == 4) {
-      puVar5 = &_gleFogLinearInitAVRTC;
+      codeChunk = &_gleFogLinearInitAVRTC;
       goto LAB_000c48cc;
     }
   }
   else if (uVar11 == 0xc) {
-    puVar5 = &_gleFogExp2InitAVRTC;
+    codeChunk = &_gleFogExp2InitAVRTC;
     goto LAB_000c48cc;
   }
   if (uVar1 == 0) {
-    iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadVectorsRTC_10f248,puVar8);
-    puVar9 = puVar8 + iVar4;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadVectorsRTC_10f248,puVar8);
+    codeCursor = puVar8 + chunkWordCount;
     if ((uVar2 & 1) == 0) {
       if ((uVar2 & 2) == 0) {
-        puVar5 = &_gleFullMatrixMultRTC_10f274;
+        codeChunk = &_gleFullMatrixMultRTC_10f274;
       }
       else {
-        puVar5 = &_gleFullMatrixMultZ0RTC_10f2b8;
+        codeChunk = &_gleFullMatrixMultZ0RTC_10f2b8;
       }
     }
     else if ((uVar2 & 2) == 0) {
-      puVar5 = &_gleFullMatrixMultW1RTC_10f2ec;
+      codeChunk = &_gleFullMatrixMultW1RTC_10f2ec;
     }
     else {
-      puVar5 = &_gleFullMatrixMultZ0W1RTC_10f320;
+      codeChunk = &_gleFullMatrixMultZ0W1RTC_10f320;
     }
 LAB_000c4998:
-    iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(puVar5,puVar9);
-    iVar6 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleStoreVectorsRTC_10f260,puVar9 + iVar4);
-    puVar10 = puVar9 + iVar4 + iVar6;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(codeChunk,codeCursor);
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleStoreVectorsRTC_10f260,codeCursor + chunkWordCount);
+    puVar10 = codeCursor + chunkWordCount + chunkWordCount2;
   }
   else {
     puVar10 = puVar8;
     if (uVar1 == 0x3fcff3fc) {
-      iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleDiagMatrixSetupRTC_10f344,puVar8);
-      puVar8 = puVar8 + iVar4;
-      iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadVectorsRTC_10f248,puVar8);
-      puVar9 = puVar8 + iVar4;
-      puVar5 = &_gleDiagMatrixMultRTC_10f35c;
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleDiagMatrixSetupRTC_10f344,puVar8);
+      puVar8 = puVar8 + chunkWordCount;
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadVectorsRTC_10f248,puVar8);
+      codeCursor = puVar8 + chunkWordCount;
+      codeChunk = &_gleDiagMatrixMultRTC_10f35c;
       goto LAB_000c4998;
     }
   }
   if (uVar11 != 0) {
     if ((uVar2 & 0x10) == 0) {
       if (uVar1 == 0xbfeffbfe) {
-        iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadVectorsToDstRTC,puVar10);
-        puVar10 = puVar10 + iVar4;
+        chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadVectorsToDstRTC,puVar10);
+        puVar10 = puVar10 + chunkWordCount;
       }
       if ((uVar2 & 0x20) == 0) goto LAB_000c4a24;
-      puVar5 = &_gleFogStoreCoordAVRTC;
+      codeChunk = &_gleFogStoreCoordAVRTC;
     }
     else {
-      puVar5 = &_gleFogLoadCoordAVRTC;
+      codeChunk = &_gleFogLoadCoordAVRTC;
     }
-    iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(puVar5,puVar10);
-    puVar10 = puVar10 + iVar4;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(codeChunk,puVar10);
+    puVar10 = puVar10 + chunkWordCount;
   }
 LAB_000c4a24:
   if (uVar11 == 8) {
-    puVar5 = &_gleFogExpAVRTC;
+    codeChunk = &_gleFogExpAVRTC;
 LAB_000c4a68:
-    iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(puVar5,puVar10);
-    puVar10 = puVar10 + iVar4;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(codeChunk,puVar10);
+    puVar10 = puVar10 + chunkWordCount;
   }
   else if (uVar11 < 9) {
     if (uVar11 == 4) {
-      puVar5 = &_gleFogLinearAVRTC;
+      codeChunk = &_gleFogLinearAVRTC;
       goto LAB_000c4a68;
     }
   }
   else if (uVar11 == 0xc) {
-    puVar5 = &_gleFogExp2AVRTC;
+    codeChunk = &_gleFogExp2AVRTC;
     goto LAB_000c4a68;
   }
-  iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleIncVertex2PtrRTC,puVar10);
-  puVar10 = puVar10 + iVar4;
-  iVar4 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleEpilogAVRTC_10f1fc,puVar10);
-  puVar9 = puVar10 + iVar4;
+  chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleIncVertex2PtrRTC,puVar10);
+  puVar10 = puVar10 + chunkWordCount;
+  chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleEpilogAVRTC_10f1fc,puVar10);
+  puVar9 = puVar10 + chunkWordCount;
   uVar7 = ((int (*)())_gleRTCBuildABranch_c44ac)(*puVar10,(int)puVar8 - (int)puVar10 >> 2);
   *puVar10 = uVar7;
 LAB_000c4ac0:
@@ -8716,7 +8848,7 @@ LAB_000c4ac0:
   if (iVar4 < 0x71) {
     iVar3 = _gleShrinkFuncCacheElem(iVar3,iVar4);
     puVar5 = PTR__glePushInstructions_00112054;
-    *(int *)(param_1 + 0x5094) = iVar3;
+    *(int *)(glContext + 0x5094) = iVar3;
     (**(code **)puVar5)(iVar4,(int *)(iVar3 + 0x20));
     return (int *)(iVar3 + 0x20);
   }
@@ -8725,8 +8857,8 @@ LAB_000c4ac0:
 }
 
 /* _gleBuildModelviewTransformFuncNO @ 0xc4b38 (1852 bytes) */
-int _gleBuildModelviewTransformFuncNO(param_1, param_2)
-  int param_1;
+int _gleBuildModelviewTransformFuncNO(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   bool bVar1;
@@ -8734,9 +8866,11 @@ int _gleBuildModelviewTransformFuncNO(param_1, param_2)
   uint uVar3;
   int iVar4;
   undefined *puVar5;
+  undefined *codeChunk;
   uint uVar6;
   uint uVar7;
   int iVar8;
+  int chunkWordCount;
   uint uVar9;
   uint uVar10;
   uint uVar11;
@@ -8745,25 +8879,25 @@ int _gleBuildModelviewTransformFuncNO(param_1, param_2)
   uint uVar14;
   uint *puVar15;
   uint *puVar16;
-  uint *puVar17;
+  uint *codeCursor;
   int iVar18;
   int local_70 [15];
   int local_34;
   
-  if (*(char *)(param_1 + 0x4661) != '\0') {
+  if (*(char *)(glContext + 0x4661) != '\0') {
     return (int *)PTR__gleTransformModelviewBlend_001109f8;
   }
-  uVar3 = (**(code **)PTR__gleGenerateMatrixIdentifier_00112060)(param_1,param_1 + 0x1cc0);
-  *(uint *)(param_1 + 0x5090) = uVar3;
+  uVar3 = (**(code **)PTR__gleGenerateMatrixIdentifier_00112060)(glContext,glContext + 0x1cc0);
+  *(uint *)(glContext + 0x5090) = uVar3;
   uVar14 = uVar3;
   if (((param_2 & 2) != 0) && (uVar14 = uVar3 | 0xff00, (uVar3 & 0xc0c000c) == 0xc0c000c)) {
     uVar14 = uVar3 & 0xffff00ff | 0xfb00;
   }
-  uVar3 = param_2 | *(ushort *)(param_1 + 0x4fe8);
-  if (*(short *)(0x3170 + param_1 + 4) == 0x1102) {
+  uVar3 = param_2 | *(ushort *)(glContext + 0x4fe8);
+  if (*(short *)(0x3170 + glContext + 4) == 0x1102) {
     uVar3 = uVar3 | 0x20;
   }
-  if ((*(byte *)(param_1 + 0x50b4) & 1) == 0) {
+  if ((*(byte *)(glContext + 0x50b4) & 1) == 0) {
     if ((uVar3 & 0x10) == 0) {
       uVar14 = uVar14 & 0xc0c0c0c | 0xb3e3f3f2;
     }
@@ -8771,13 +8905,13 @@ int _gleBuildModelviewTransformFuncNO(param_1, param_2)
       uVar14 = 0xbfeffbfe;
     }
   }
-  piVar12 = *(int **)(param_1 + 0x5094);
+  piVar12 = *(int **)(glContext + 0x5094);
   piVar13 = piVar12;
   do {
     if (uVar14 == piVar13[2] && uVar3 == piVar13[3]) {
       if (piVar13 != piVar12) {
         _gleMoveFuncCacheElem(piVar12,piVar13);
-        *(int **)(param_1 + 0x5094) = piVar13;
+        *(int **)(glContext + 0x5094) = piVar13;
       }
       return piVar13 + 8;
     }
@@ -8789,11 +8923,11 @@ int _gleBuildModelviewTransformFuncNO(param_1, param_2)
   }
   *(uint *)(iVar4 + 8) = uVar14;
   *(uint *)(iVar4 + 0xc) = uVar3;
-  if (*(short *)(param_1 + 0x509a) == *(short *)(param_1 + 0x5098)) {
+  if (*(short *)(glContext + 0x509a) == *(short *)(glContext + 0x5098)) {
     ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(iVar4 + 4));
   }
   else {
-    *(short *)(param_1 + 0x509a) = *(short *)(param_1 + 0x509a) + 1;
+    *(short *)(glContext + 0x509a) = *(short *)(glContext + 0x509a) + 1;
   }
   puVar16 = (uint *)(iVar4 + 0x20);
   if ((uVar14 == 0xbfeffbfe) && ((uVar3 & 0xc) == 0)) goto LAB_000c5204;
@@ -8830,18 +8964,18 @@ LAB_000c4cfc:
     iVar18 = iVar18 + -1;
   } while (iVar18 != 0);
   if (bVar1) {
-    iVar8 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadMatrixPtrRTC_10f0a4,puVar16);
-    puVar16 = puVar16 + iVar8;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadMatrixPtrRTC_10f0a4,puVar16);
+    puVar16 = puVar16 + chunkWordCount;
   }
-  iVar8 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadCounterRTC_10f0ac,puVar16);
-  puVar17 = puVar16 + iVar8;
+  chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadCounterRTC_10f0ac,puVar16);
+  codeCursor = puVar16 + chunkWordCount;
   uVar10 = 0;
   uVar6 = 0;
   iVar8 = 0x10;
   do {
     if ((uVar14 << (uVar6 & 0x3f) & 0xc0000000) == 0) {
-      *puVar17 = *(int *)((int)local_70 + uVar10) << 0x15 | uVar10 & 0xffff | 0xc0060000;
-      puVar17 = puVar17 + 1;
+      *codeCursor = *(int *)((int)local_70 + uVar10) << 0x15 | uVar10 & 0xffff | 0xc0060000;
+      codeCursor = codeCursor + 1;
     }
     uVar6 = uVar6 + 2;
     uVar10 = uVar10 + 4;
@@ -8860,8 +8994,8 @@ LAB_000c4cfc:
       else {
         uVar2 = uVar10 | (uVar6 + 4) * 0x800 | 0xfc000090;
       }
-      *puVar17 = uVar2;
-      puVar17 = puVar17 + 1;
+      *codeCursor = uVar2;
+      codeCursor = codeCursor + 1;
     }
     uVar7 = uVar7 - 1;
     uVar10 = uVar10 - 0x200000;
@@ -8879,25 +9013,25 @@ LAB_000c4ee8:
       uVar6 = uVar14 | 0x3030303;
     }
     else if (uVar10 == 0x3030301) {
-      *puVar17 = 0xc064002c;
-      puVar17[1] = 0xfce01850;
+      *codeCursor = 0xc064002c;
+      codeCursor[1] = 0xfce01850;
       uVar7 = 4;
-      puVar17 = puVar17 + 2;
+      codeCursor = codeCursor + 2;
       uVar6 = uVar14 | 0x3030303;
     }
     else {
       uVar7 = 0;
       if (uVar10 == 0x3030300) {
-        *puVar17 = local_34 << 0xb | 0xfce00090;
-        puVar17 = puVar17 + 1;
+        *codeCursor = local_34 << 0xb | 0xfce00090;
+        codeCursor = codeCursor + 1;
         goto LAB_000c4ee8;
       }
     }
     if (uVar7 < 4) {
       do {
         if ((uVar6 >> ((uVar7 & 0x1f) << 1) & 3) - 1 < 2) {
-          *puVar17 = 0xc064002c;
-          puVar17 = puVar17 + 1;
+          *codeCursor = 0xc064002c;
+          codeCursor = codeCursor + 1;
           break;
         }
         uVar7 = uVar7 + 1;
@@ -8907,21 +9041,21 @@ LAB_000c4ee8:
   }
   if (uVar11 == 8) {
 LAB_000c4f70:
-    puVar5 = &_gleFogExpInitRTC;
+    codeChunk = &_gleFogExpInitRTC;
 LAB_000c4f78:
-    iVar8 = ((int (*)())_gleRTCAddAChunk_c44b8)(puVar5,puVar17);
-    puVar17 = puVar17 + iVar8;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(codeChunk,codeCursor);
+    codeCursor = codeCursor + chunkWordCount;
   }
   else if (uVar11 < 9) {
     if (uVar11 == 4) {
-      puVar5 = &_gleFogLinearInitRTC;
+      codeChunk = &_gleFogLinearInitRTC;
       goto LAB_000c4f78;
     }
   }
   else if (uVar11 == 0xc) goto LAB_000c4f70;
   uVar2 = uVar10 * 10;
   uVar7 = uVar10 * 4 + 0x20;
-  puVar16 = puVar17;
+  puVar16 = codeCursor;
   do {
     uVar9 = 0xc0c0c0c0 >> ((uVar10 & 0x1f) << 1);
     if (((uVar6 & uVar9) == (uVar9 & ~(0x40000000 >> (uVar2 & 0x3f)))) &&
@@ -8957,46 +9091,46 @@ LAB_000c4f78:
   } while (iVar8 != 0);
   if ((uVar3 & 0x10) == 0) {
     if ((uVar3 & 0x20) != 0) {
-      puVar5 = &_gleFogStoreCoordRTC;
+      codeChunk = &_gleFogStoreCoordRTC;
       goto LAB_000c50d8;
     }
   }
   else {
-    puVar5 = &_gleFogLoadCoordRTC;
+    codeChunk = &_gleFogLoadCoordRTC;
 LAB_000c50d8:
-    iVar8 = ((int (*)())_gleRTCAddAChunk_c44b8)(puVar5,puVar16);
-    puVar16 = puVar16 + iVar8;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(codeChunk,puVar16);
+    puVar16 = puVar16 + chunkWordCount;
   }
   if (uVar11 == 8) {
     if ((*(uint *)PTR__gle_processor_0011204c & 1) == 0) {
-      puVar5 = &_gleFogExpNORTC;
+      codeChunk = &_gleFogExpNORTC;
     }
     else {
-      puVar5 = &_gleFogExpGRRTC;
+      codeChunk = &_gleFogExpGRRTC;
     }
 LAB_000c516c:
-    iVar8 = ((int (*)())_gleRTCAddAChunk_c44b8)(puVar5,puVar16);
-    puVar16 = puVar16 + iVar8;
+    chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(codeChunk,puVar16);
+    puVar16 = puVar16 + chunkWordCount;
   }
   else if (uVar11 < 9) {
     if (uVar11 == 4) {
-      puVar5 = &_gleFogLinearNORTC;
+      codeChunk = &_gleFogLinearNORTC;
       goto LAB_000c516c;
     }
   }
   else if (uVar11 == 0xc) {
     if ((*(uint *)PTR__gle_processor_0011204c & 1) == 0) {
-      puVar5 = &_gleFogExp2NORTC;
+      codeChunk = &_gleFogExp2NORTC;
     }
     else {
-      puVar5 = &_gleFogExp2GRRTC;
+      codeChunk = &_gleFogExp2GRRTC;
     }
     goto LAB_000c516c;
   }
   uVar11 = 0;
-  iVar8 = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleEndLoopRTC_10f0b4,puVar16);
+  chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleEndLoopRTC_10f0b4,puVar16);
   uVar3 = 0;
-  puVar16 = puVar16 + iVar8;
+  puVar16 = puVar16 + chunkWordCount;
   piVar13 = local_70;
   puVar15 = puVar16 + -1;
   iVar8 = 0x10;
@@ -9010,7 +9144,7 @@ LAB_000c516c:
     piVar13 = piVar13 + 1;
     iVar8 = iVar8 + -1;
   } while (iVar8 != 0);
-  uVar14 = ((int (*)())_gleRTCBuildABranch_c44ac)(*puVar15,(int)puVar17 - (int)puVar15 >> 2);
+  uVar14 = ((int (*)())_gleRTCBuildABranch_c44ac)(*puVar15,(int)codeCursor - (int)puVar15 >> 2);
   *puVar15 = uVar14;
 LAB_000c5204:
   iVar8 = (int)puVar16 + (-0x1c - iVar4) >> 2;
@@ -9018,7 +9152,7 @@ LAB_000c5204:
   if (iVar8 < 0x61) {
     iVar4 = _gleShrinkFuncCacheElem(iVar4,iVar8);
     puVar5 = PTR__glePushInstructions_00112054;
-    *(int *)(param_1 + 0x5094) = iVar4;
+    *(int *)(glContext + 0x5094) = iVar4;
     (**(code **)puVar5)(iVar8,(int *)(iVar4 + 0x20));
     return (int *)(iVar4 + 0x20);
   }

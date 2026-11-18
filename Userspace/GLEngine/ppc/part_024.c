@@ -46,17 +46,17 @@ void _glRects_CompExec(glContext, x1, y1, x2, y2)
   undefined4 y2;
 {
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glRects_Comp)(glContext,x1,y1,x2,y2);
-  ((void (*)())_glRects_Exec)(glContext,x1,y1,x2,y2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7
-                ,in_f8);
+  ((void (*)())_glRects_Exec)(glContext,x1,y1,x2,y2,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
+                ,incomingFpr8);
   return;
 }
 
@@ -102,16 +102,16 @@ void _glRectdv_CompExec(glContext, v1, v2)
   undefined4 v2;
 {
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glRectdv_Comp)(glContext,v1,v2);
-  ((void (*)())_glRectdv_Exec)(glContext,v1,v2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_glRectdv_Exec)(glContext,v1,v2,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -157,16 +157,16 @@ void _glRectfv_CompExec(glContext, v1, v2)
   undefined4 v2;
 {
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glRectfv_Comp)(glContext,v1,v2);
-  ((void (*)())_glRectfv_Exec)(glContext,v1,v2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_glRectfv_Exec)(glContext,v1,v2,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -212,16 +212,16 @@ void _glRectiv_CompExec(glContext, v1, v2)
   undefined4 v2;
 {
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glRectiv_Comp)(glContext,v1,v2);
-  ((void (*)())_glRectiv_Exec)(glContext,v1,v2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_glRectiv_Exec)(glContext,v1,v2,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -267,124 +267,140 @@ void _glRectsv_CompExec(glContext, v1, v2)
   undefined4 v2;
 {
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glRectsv_Comp)(glContext,v1,v2);
-  ((void (*)())_glRectsv_Exec)(glContext,v1,v2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_glRectsv_Exec)(glContext,v1,v2,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
 /* _glRotateZ_ListExec @ 0x8512c (44 bytes) */
 undefined4 _glRotateZ_ListExec(undefined4 glContext,float *listRecord,double unusedFloatArg1,double unusedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
-  double in_stack_ffffffc8;
-  double in_stack_ffffffd0;
-  double in_stack_ffffffd8;
+  double incomingStack_ffffffb8;
+  double incomingStack_ffffffc0;
+  double incomingStack_ffffffc8;
+  double incomingStack_ffffffd0;
+  double incomingStack_ffffffd8;
   
   ((void (*)())_glRotateZ_Exec)(glContext,(double)*listRecord,(double)listRecord[1],forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
-                  forwardedFloatArg7,forwardedFloatArg8,in_stack_ffffffb8,in_stack_ffffffc0,in_stack_ffffffc8,
-                  in_stack_ffffffd0,in_stack_ffffffd8);
+                  forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8,
+                  incomingStack_ffffffd0,incomingStack_ffffffd8);
   return 8;
 }
 
 /* _glRotateXYZ_ListExec @ 0x85158 (644 bytes) */
-undefined4 _glRotateXYZ_ListExec(int glContext,float *param_2,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+undefined4 _glRotateXYZ_ListExec(int glContext,float *listRecord,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  float fVar10;
-  float fVar11;
-  float fVar12;
-  float fVar13;
-  float fVar14;
-  float fVar15;
-  float fVar16;
-  float fVar17;
-  float fVar18;
-  float *pfVar19;
+  float rotElem1;
+  float rotElem4;
+  float rotElem7;
+  float matrixElem4;
+  float secondMatrixElem3;
+  float secondMatrixElem4;
+  float matrixElem3;
+  float rotElem0;
+  float rotElem3;
+  float rotElem6;
+  float matrixElem5;
+  float secondMatrixElem10;
+  float secondMatrixElem0;
+  float matrixElem11;
+  float matrixElem0;
+  float secondMatrixElem11;
+  float secondMatrixElem8;
+  float matrixElem10;
+  float rotElem8;
+  float rotElem2;
+  float matrixElem6;
+  float secondMatrixElem5;
+  float rotElem5;
+  float matrixElem8;
+  float secondMatrixElem6;
+  float matrixElem1;
+  float secondMatrixElem1;
+  float matrixElem7;
+  float secondMatrixElem7;
+  float matrixElem2;
+  float secondMatrixElem2;
+  float matrixElem9;
+  float secondMatrixElem9;
+  float *currentMatrix;
+  float *secondMatrix;
   uint uVar20;
   uint uVar21;
   
-  pfVar19 = *(float **)(glContext + 0x4fec);
+  currentMatrix = *(float **)(glContext + 0x4fec);
   uVar21 = *(uint *)(glContext + 0x50a8);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    fVar1 = param_2[1];
-    fVar2 = param_2[4];
-    fVar3 = param_2[7];
-    fVar4 = pfVar19[4];
-    fVar5 = *param_2;
-    fVar6 = param_2[3];
-    fVar7 = param_2[6];
-    fVar8 = pfVar19[5];
-    fVar9 = *pfVar19;
-    fVar10 = param_2[8];
-    fVar11 = param_2[2];
-    fVar12 = pfVar19[6];
-    fVar13 = param_2[5];
-    fVar14 = pfVar19[8];
-    fVar15 = pfVar19[1];
-    fVar16 = pfVar19[7];
-    fVar17 = pfVar19[2];
-    fVar18 = pfVar19[9];
-    pfVar19[8] = fVar14 * fVar10 + (fVar9 * fVar7 + fVar4 * fVar3);
-    *pfVar19 = fVar14 * fVar11 + (fVar9 * fVar5 + fVar4 * fVar1);
-    pfVar19[4] = fVar14 * fVar13 + (fVar9 * fVar6 + fVar4 * fVar2);
-    fVar4 = pfVar19[3];
-    fVar9 = pfVar19[10];
-    pfVar19[9] = fVar18 * fVar10 + (fVar15 * fVar7 + fVar8 * fVar3);
-    pfVar19[1] = fVar18 * fVar11 + (fVar15 * fVar5 + fVar8 * fVar1);
-    pfVar19[5] = fVar18 * fVar13 + (fVar15 * fVar6 + fVar8 * fVar2);
-    fVar8 = pfVar19[0xb];
-    pfVar19[10] = fVar9 * fVar10 + (fVar17 * fVar7 + fVar12 * fVar3);
-    pfVar19[2] = fVar9 * fVar11 + (fVar17 * fVar5 + fVar12 * fVar1);
-    pfVar19[6] = fVar9 * fVar13 + (fVar17 * fVar6 + fVar12 * fVar2);
-    pfVar19[0xb] = fVar8 * fVar10 + (fVar4 * fVar7 + fVar16 * fVar3);
-    pfVar19[3] = fVar8 * fVar11 + (fVar4 * fVar5 + fVar16 * fVar1);
-    pfVar19[7] = fVar8 * fVar13 + (fVar4 * fVar6 + fVar16 * fVar2);
+    rotElem1 = listRecord[1];
+    rotElem4 = listRecord[4];
+    rotElem7 = listRecord[7];
+    matrixElem4 = currentMatrix[4];
+    rotElem0 = *listRecord;
+    rotElem3 = listRecord[3];
+    rotElem6 = listRecord[6];
+    matrixElem5 = currentMatrix[5];
+    matrixElem0 = *currentMatrix;
+    rotElem8 = listRecord[8];
+    rotElem2 = listRecord[2];
+    matrixElem6 = currentMatrix[6];
+    rotElem5 = listRecord[5];
+    matrixElem8 = currentMatrix[8];
+    matrixElem1 = currentMatrix[1];
+    matrixElem7 = currentMatrix[7];
+    matrixElem2 = currentMatrix[2];
+    matrixElem9 = currentMatrix[9];
+    currentMatrix[8] = matrixElem8 * rotElem8 + (matrixElem0 * rotElem6 + matrixElem4 * rotElem7);
+    *currentMatrix = matrixElem8 * rotElem2 + (matrixElem0 * rotElem0 + matrixElem4 * rotElem1);
+    currentMatrix[4] = matrixElem8 * rotElem5 + (matrixElem0 * rotElem3 + matrixElem4 * rotElem4);
+    matrixElem3 = currentMatrix[3];
+    matrixElem10 = currentMatrix[10];
+    currentMatrix[9] = matrixElem9 * rotElem8 + (matrixElem1 * rotElem6 + matrixElem5 * rotElem7);
+    currentMatrix[1] = matrixElem9 * rotElem2 + (matrixElem1 * rotElem0 + matrixElem5 * rotElem1);
+    currentMatrix[5] = matrixElem9 * rotElem5 + (matrixElem1 * rotElem3 + matrixElem5 * rotElem4);
+    matrixElem11 = currentMatrix[0xb];
+    currentMatrix[10] = matrixElem10 * rotElem8 + (matrixElem2 * rotElem6 + matrixElem6 * rotElem7);
+    currentMatrix[2] = matrixElem10 * rotElem2 + (matrixElem2 * rotElem0 + matrixElem6 * rotElem1);
+    currentMatrix[6] = matrixElem10 * rotElem5 + (matrixElem2 * rotElem3 + matrixElem6 * rotElem4);
+    currentMatrix[0xb] = matrixElem11 * rotElem8 + (matrixElem3 * rotElem6 + matrixElem7 * rotElem7);
+    currentMatrix[3] = matrixElem11 * rotElem2 + (matrixElem3 * rotElem0 + matrixElem7 * rotElem1);
+    currentMatrix[7] = matrixElem11 * rotElem5 + (matrixElem3 * rotElem3 + matrixElem7 * rotElem4);
     *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | uVar21;
     uVar20 = *(uint *)(glContext + 0x50b0);
     if ((uVar21 & ~uVar20 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
-      pfVar19 = *(float **)(glContext + 0x4ff0);
+      secondMatrix = *(float **)(glContext + 0x4ff0);
       uVar21 = uVar21 & 0xff000003;
-      fVar4 = pfVar19[4];
-      fVar8 = *pfVar19;
-      fVar9 = pfVar19[8];
-      fVar12 = pfVar19[5];
-      fVar14 = pfVar19[6];
-      fVar15 = pfVar19[1];
-      fVar16 = pfVar19[7];
-      fVar17 = pfVar19[2];
-      fVar18 = pfVar19[9];
-      pfVar19[8] = fVar9 * fVar10 + (fVar8 * fVar7 + fVar4 * fVar3);
-      *pfVar19 = fVar9 * fVar11 + (fVar8 * fVar5 + fVar4 * fVar1);
-      pfVar19[4] = fVar9 * fVar13 + (fVar8 * fVar6 + fVar4 * fVar2);
-      fVar4 = pfVar19[3];
-      fVar8 = pfVar19[10];
-      pfVar19[9] = fVar18 * fVar10 + (fVar15 * fVar7 + fVar12 * fVar3);
-      pfVar19[1] = fVar18 * fVar11 + (fVar15 * fVar5 + fVar12 * fVar1);
-      pfVar19[5] = fVar18 * fVar13 + (fVar15 * fVar6 + fVar12 * fVar2);
-      fVar9 = pfVar19[0xb];
-      pfVar19[10] = fVar8 * fVar10 + (fVar17 * fVar7 + fVar14 * fVar3);
-      pfVar19[2] = fVar8 * fVar11 + (fVar17 * fVar5 + fVar14 * fVar1);
-      pfVar19[6] = fVar8 * fVar13 + (fVar17 * fVar6 + fVar14 * fVar2);
-      pfVar19[0xb] = fVar9 * fVar10 + (fVar4 * fVar7 + fVar16 * fVar3);
-      pfVar19[3] = fVar9 * fVar11 + (fVar4 * fVar5 + fVar16 * fVar1);
-      pfVar19[7] = fVar9 * fVar13 + (fVar4 * fVar6 + fVar16 * fVar2);
+      secondMatrixElem4 = secondMatrix[4];
+      secondMatrixElem0 = *secondMatrix;
+      secondMatrixElem8 = secondMatrix[8];
+      secondMatrixElem5 = secondMatrix[5];
+      secondMatrixElem6 = secondMatrix[6];
+      secondMatrixElem1 = secondMatrix[1];
+      secondMatrixElem7 = secondMatrix[7];
+      secondMatrixElem2 = secondMatrix[2];
+      secondMatrixElem9 = secondMatrix[9];
+      secondMatrix[8] = secondMatrixElem8 * rotElem8 + (secondMatrixElem0 * rotElem6 + secondMatrixElem4 * rotElem7);
+      *secondMatrix = secondMatrixElem8 * rotElem2 + (secondMatrixElem0 * rotElem0 + secondMatrixElem4 * rotElem1);
+      secondMatrix[4] = secondMatrixElem8 * rotElem5 + (secondMatrixElem0 * rotElem3 + secondMatrixElem4 * rotElem4);
+      secondMatrixElem3 = secondMatrix[3];
+      secondMatrixElem10 = secondMatrix[10];
+      secondMatrix[9] = secondMatrixElem9 * rotElem8 + (secondMatrixElem1 * rotElem6 + secondMatrixElem5 * rotElem7);
+      secondMatrix[1] = secondMatrixElem9 * rotElem2 + (secondMatrixElem1 * rotElem0 + secondMatrixElem5 * rotElem1);
+      secondMatrix[5] = secondMatrixElem9 * rotElem5 + (secondMatrixElem1 * rotElem3 + secondMatrixElem5 * rotElem4);
+      secondMatrixElem11 = secondMatrix[0xb];
+      secondMatrix[10] = secondMatrixElem10 * rotElem8 + (secondMatrixElem2 * rotElem6 + secondMatrixElem6 * rotElem7);
+      secondMatrix[2] = secondMatrixElem10 * rotElem2 + (secondMatrixElem2 * rotElem0 + secondMatrixElem6 * rotElem1);
+      secondMatrix[6] = secondMatrixElem10 * rotElem5 + (secondMatrixElem2 * rotElem3 + secondMatrixElem6 * rotElem4);
+      secondMatrix[0xb] = secondMatrixElem11 * rotElem8 + (secondMatrixElem3 * rotElem6 + secondMatrixElem7 * rotElem7);
+      secondMatrix[3] = secondMatrixElem11 * rotElem2 + (secondMatrixElem3 * rotElem0 + secondMatrixElem7 * rotElem1);
+      secondMatrix[7] = secondMatrixElem11 * rotElem5 + (secondMatrixElem3 * rotElem3 + secondMatrixElem7 * rotElem4);
       uVar20 = *(uint *)(glContext + 0x50b0);
     }
     *(uint *)(glContext + 0x50b0) = uVar20 | uVar21;
@@ -409,159 +425,180 @@ void _glRotateZ_Comp(undefined4 glContext,float fparam_1,float fparam_2)
 }
 
 /* _glRotateXYZ_Comp @ 0x85440 (292 bytes) */
-void _glRotateXYZ_Comp(int glContext,double fparam_1,float fparam_2,float fparam_3,float fparam_4)
+void _glRotateXYZ_Comp(int glContext,double angle,float x,float y,float z)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
+  float unitAxisZ;
+  float unitAxisX;
+  float unitAxisY;
+  float sinAngle;
+  float cosAngle;
+  float one;
   float fVar7;
-  float fVar8;
-  float fVar9;
+  float xyOneMinusCos;
+  float yzOneMinusCos;
   float *listRecord;
   double dVar11;
   double sinValue;
   
-  fVar6 = *(float *)(glContext + 0x24);
+  one = *(float *)(glContext + 0x24);
   listRecord = (float *)_gleAddListItem(glContext,PTR__glRotateXYZ_ListExec_00110284,0x24);
   if (listRecord != (float *)0x0) {
     dVar11 = (double)FLOAT_00108e84;
-    sinValue = _sin((double)(float)(fparam_1 * dVar11));
-    fVar4 = (float)sinValue;
-    dVar11 = _cos((double)(float)(fparam_1 * dVar11));
-    fVar5 = (float)dVar11;
-    dVar11 = _sqrt((double)(fparam_4 * fparam_4 + (fparam_2 * fparam_2 + (fparam_3 * fparam_3))));
-    fVar7 = fVar6 - fVar5;
-    dVar11 = (double)(fVar6 / (float)dVar11);
-    fVar1 = (float)(fparam_4 * dVar11);
-    fVar2 = (float)(fparam_2 * dVar11);
-    fVar3 = (float)(fparam_3 * dVar11);
-    fVar8 = fVar2 * fVar3 * fVar7;
-    fVar9 = fVar3 * fVar1 * fVar7;
-    fVar7 = fVar1 * fVar2 * fVar7;
-    listRecord[8] = fVar5 * (fVar6 - fVar1 * fVar1) + fVar1 * fVar1;
-    *listRecord = fVar5 * (fVar6 - fVar2 * fVar2) + fVar2 * fVar2;
-    listRecord[3] = fVar8 - fVar1 * fVar4;
-    listRecord[4] = fVar5 * (fVar6 - fVar3 * fVar3) + fVar3 * fVar3;
-    listRecord[6] = fVar7 + fVar3 * fVar4;
-    listRecord[7] = fVar9 - fVar2 * fVar4;
-    listRecord[1] = fVar8 + fVar1 * fVar4;
-    listRecord[2] = fVar7 - fVar3 * fVar4;
-    listRecord[5] = fVar9 + fVar2 * fVar4;
+    sinValue = _sin((double)(float)(angle * dVar11));
+    sinAngle = (float)sinValue;
+    dVar11 = _cos((double)(float)(angle * dVar11));
+    cosAngle = (float)dVar11;
+    dVar11 = _sqrt((double)(z * z + (x * x + (y * y))));
+    fVar7 = one - cosAngle;
+    dVar11 = (double)(one / (float)dVar11);
+    unitAxisZ = (float)(z * dVar11);
+    unitAxisX = (float)(x * dVar11);
+    unitAxisY = (float)(y * dVar11);
+    xyOneMinusCos = unitAxisX * unitAxisY * fVar7;
+    yzOneMinusCos = unitAxisY * unitAxisZ * fVar7;
+    fVar7 = unitAxisZ * unitAxisX * fVar7;
+    listRecord[8] = cosAngle * (one - unitAxisZ * unitAxisZ) + unitAxisZ * unitAxisZ;
+    *listRecord = cosAngle * (one - unitAxisX * unitAxisX) + unitAxisX * unitAxisX;
+    listRecord[3] = xyOneMinusCos - unitAxisZ * sinAngle;
+    listRecord[4] = cosAngle * (one - unitAxisY * unitAxisY) + unitAxisY * unitAxisY;
+    listRecord[6] = fVar7 + unitAxisY * sinAngle;
+    listRecord[7] = yzOneMinusCos - unitAxisX * sinAngle;
+    listRecord[1] = xyOneMinusCos + unitAxisZ * sinAngle;
+    listRecord[2] = fVar7 - unitAxisY * sinAngle;
+    listRecord[5] = yzOneMinusCos + unitAxisX * sinAngle;
   }
   return;
 }
 
 /* _glRotateXYZ_Exec @ 0x85564 (824 bytes) */
-void _glRotateXYZ_Exec(int glContext,double fparam_1,float fparam_2,float fparam_3,float fparam_4)
+void _glRotateXYZ_Exec(int glContext,double angle,float x,float y,float z)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  float fVar10;
+  float unitAxisZ;
+  float secondMatrixElem10;
+  float secondMatrixElem0;
+  float matrixElem11;
+  float matrixElem1;
+  float unitAxisX;
+  float secondMatrixElem11;
+  float secondMatrixElem8;
+  float matrixElem7;
+  float unitAxisY;
+  float secondMatrixElem5;
+  float matrixElem2;
+  float sinAngle;
+  float secondMatrixElem6;
+  float matrixElem9;
+  float cosAngle;
+  float secondMatrixElem1;
+  float matrixElem3;
+  float one;
+  float secondMatrixElem3;
+  float secondMatrixElem4;
+  float matrixElem6;
+  float matrixElem4;
+  float secondMatrixElem7;
+  float matrixElem10;
+  float matrixElem0;
+  float secondMatrixElem2;
+  float matrixElem8;
+  float secondMatrixElem9;
+  float matrixElem5;
   float fVar11;
-  float fVar12;
-  float fVar13;
-  float fVar14;
+  float rotElem8;
+  float rotElem0;
+  float rotElem4;
   float fVar15;
   float fVar16;
-  float fVar17;
-  float fVar18;
-  float fVar19;
+  float rotElem1;
+  float rotElem7;
+  float rotElem6;
   uint uVar20;
   uint uVar21;
-  float *pfVar22;
+  float *currentMatrix;
+  float *secondMatrix;
   double dVar23;
   double sinValue;
   
   uVar21 = *(uint *)(glContext + 0x50a8);
-  pfVar22 = *(float **)(glContext + 0x4fec);
-  fVar6 = *(float *)(glContext + 0x24);
+  currentMatrix = *(float **)(glContext + 0x4fec);
+  one = *(float *)(glContext + 0x24);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
     dVar23 = (double)FLOAT_00108e84;
-    sinValue = _sin((double)(float)(fparam_1 * dVar23));
-    fVar4 = (float)sinValue;
-    dVar23 = _cos((double)(float)(fparam_1 * dVar23));
-    fVar5 = (float)dVar23;
-    dVar23 = _sqrt((double)(fparam_4 * fparam_4 + (fparam_2 * fparam_2 + (fparam_3 * fparam_3))));
-    fVar11 = fVar6 - fVar5;
-    fVar7 = pfVar22[4];
-    fVar8 = *pfVar22;
-    fVar9 = pfVar22[8];
-    dVar23 = (double)(fVar6 / (float)dVar23);
-    fVar1 = (float)(fparam_4 * dVar23);
-    fVar2 = (float)(fparam_2 * dVar23);
-    fVar3 = (float)(fparam_3 * dVar23);
-    fVar15 = fVar2 * fVar3 * fVar11;
-    fVar16 = fVar3 * fVar1 * fVar11;
-    fVar14 = fVar5 * (fVar6 - fVar3 * fVar3) + fVar3 * fVar3;
-    fVar18 = fVar16 - fVar2 * fVar4;
-    fVar11 = fVar1 * fVar2 * fVar11;
-    fVar17 = fVar15 + fVar1 * fVar4;
-    fVar15 = fVar15 - fVar1 * fVar4;
-    fVar13 = fVar5 * (fVar6 - fVar2 * fVar2) + fVar2 * fVar2;
-    fVar19 = fVar11 + fVar3 * fVar4;
-    fVar10 = pfVar22[5];
-    fVar12 = fVar5 * (fVar6 - fVar1 * fVar1) + fVar1 * fVar1;
-    fVar6 = pfVar22[6];
-    fVar11 = fVar11 - fVar3 * fVar4;
-    fVar16 = fVar16 + fVar2 * fVar4;
-    fVar1 = pfVar22[1];
-    fVar2 = pfVar22[7];
-    fVar3 = pfVar22[2];
-    fVar4 = pfVar22[9];
-    pfVar22[8] = fVar9 * fVar12 + (fVar8 * fVar19 + fVar7 * fVar18);
-    *pfVar22 = fVar9 * fVar11 + (fVar8 * fVar13 + fVar7 * fVar17);
-    pfVar22[4] = fVar9 * fVar16 + (fVar8 * fVar15 + fVar7 * fVar14);
-    fVar5 = pfVar22[3];
-    fVar7 = pfVar22[10];
-    pfVar22[9] = fVar4 * fVar12 + (fVar1 * fVar19 + fVar10 * fVar18);
-    pfVar22[1] = fVar4 * fVar11 + (fVar1 * fVar13 + fVar10 * fVar17);
-    pfVar22[5] = fVar4 * fVar16 + (fVar1 * fVar15 + fVar10 * fVar14);
-    fVar1 = pfVar22[0xb];
-    pfVar22[10] = fVar7 * fVar12 + (fVar3 * fVar19 + fVar6 * fVar18);
-    pfVar22[2] = fVar7 * fVar11 + (fVar3 * fVar13 + fVar6 * fVar17);
-    pfVar22[6] = fVar7 * fVar16 + (fVar3 * fVar15 + fVar6 * fVar14);
-    pfVar22[0xb] = fVar1 * fVar12 + (fVar5 * fVar19 + fVar2 * fVar18);
-    pfVar22[3] = fVar1 * fVar11 + (fVar5 * fVar13 + fVar2 * fVar17);
-    pfVar22[7] = fVar1 * fVar16 + (fVar5 * fVar15 + fVar2 * fVar14);
+    sinValue = _sin((double)(float)(angle * dVar23));
+    sinAngle = (float)sinValue;
+    dVar23 = _cos((double)(float)(angle * dVar23));
+    cosAngle = (float)dVar23;
+    dVar23 = _sqrt((double)(z * z + (x * x + (y * y))));
+    fVar11 = one - cosAngle;
+    matrixElem4 = currentMatrix[4];
+    matrixElem0 = *currentMatrix;
+    matrixElem8 = currentMatrix[8];
+    dVar23 = (double)(one / (float)dVar23);
+    unitAxisZ = (float)(z * dVar23);
+    unitAxisX = (float)(x * dVar23);
+    unitAxisY = (float)(y * dVar23);
+    fVar15 = unitAxisX * unitAxisY * fVar11;
+    fVar16 = unitAxisY * unitAxisZ * fVar11;
+    rotElem4 = cosAngle * (one - unitAxisY * unitAxisY) + unitAxisY * unitAxisY;
+    rotElem7 = fVar16 - unitAxisX * sinAngle;
+    fVar11 = unitAxisZ * unitAxisX * fVar11;
+    rotElem1 = fVar15 + unitAxisZ * sinAngle;
+    fVar15 = fVar15 - unitAxisZ * sinAngle;
+    rotElem0 = cosAngle * (one - unitAxisX * unitAxisX) + unitAxisX * unitAxisX;
+    rotElem6 = fVar11 + unitAxisY * sinAngle;
+    matrixElem5 = currentMatrix[5];
+    rotElem8 = cosAngle * (one - unitAxisZ * unitAxisZ) + unitAxisZ * unitAxisZ;
+    matrixElem6 = currentMatrix[6];
+    fVar11 = fVar11 - unitAxisY * sinAngle;
+    fVar16 = fVar16 + unitAxisX * sinAngle;
+    matrixElem1 = currentMatrix[1];
+    matrixElem7 = currentMatrix[7];
+    matrixElem2 = currentMatrix[2];
+    matrixElem9 = currentMatrix[9];
+    currentMatrix[8] = matrixElem8 * rotElem8 + (matrixElem0 * rotElem6 + matrixElem4 * rotElem7);
+    *currentMatrix = matrixElem8 * fVar11 + (matrixElem0 * rotElem0 + matrixElem4 * rotElem1);
+    currentMatrix[4] = matrixElem8 * fVar16 + (matrixElem0 * fVar15 + matrixElem4 * rotElem4);
+    matrixElem3 = currentMatrix[3];
+    matrixElem10 = currentMatrix[10];
+    currentMatrix[9] = matrixElem9 * rotElem8 + (matrixElem1 * rotElem6 + matrixElem5 * rotElem7);
+    currentMatrix[1] = matrixElem9 * fVar11 + (matrixElem1 * rotElem0 + matrixElem5 * rotElem1);
+    currentMatrix[5] = matrixElem9 * fVar16 + (matrixElem1 * fVar15 + matrixElem5 * rotElem4);
+    matrixElem11 = currentMatrix[0xb];
+    currentMatrix[10] = matrixElem10 * rotElem8 + (matrixElem2 * rotElem6 + matrixElem6 * rotElem7);
+    currentMatrix[2] = matrixElem10 * fVar11 + (matrixElem2 * rotElem0 + matrixElem6 * rotElem1);
+    currentMatrix[6] = matrixElem10 * fVar16 + (matrixElem2 * fVar15 + matrixElem6 * rotElem4);
+    currentMatrix[0xb] = matrixElem11 * rotElem8 + (matrixElem3 * rotElem6 + matrixElem7 * rotElem7);
+    currentMatrix[3] = matrixElem11 * fVar11 + (matrixElem3 * rotElem0 + matrixElem7 * rotElem1);
+    currentMatrix[7] = matrixElem11 * fVar16 + (matrixElem3 * fVar15 + matrixElem7 * rotElem4);
     uVar20 = *(uint *)(glContext + 0x50b0);
     *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | uVar21;
     if ((uVar21 & ~uVar20 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
-      pfVar22 = *(float **)(glContext + 0x4ff0);
+      secondMatrix = *(float **)(glContext + 0x4ff0);
       uVar21 = uVar21 & 0xff000003;
-      fVar6 = pfVar22[4];
-      fVar1 = *pfVar22;
-      fVar2 = pfVar22[8];
-      fVar3 = pfVar22[5];
-      fVar4 = pfVar22[6];
-      fVar5 = pfVar22[1];
-      fVar7 = pfVar22[7];
-      fVar8 = pfVar22[2];
-      fVar9 = pfVar22[9];
-      pfVar22[8] = fVar2 * fVar12 + (fVar1 * fVar19 + fVar6 * fVar18);
-      *pfVar22 = fVar2 * fVar11 + (fVar1 * fVar13 + fVar6 * fVar17);
-      pfVar22[4] = fVar2 * fVar16 + (fVar1 * fVar15 + fVar6 * fVar14);
-      fVar6 = pfVar22[3];
-      fVar1 = pfVar22[10];
-      pfVar22[9] = fVar9 * fVar12 + (fVar5 * fVar19 + fVar3 * fVar18);
-      pfVar22[1] = fVar9 * fVar11 + (fVar5 * fVar13 + fVar3 * fVar17);
-      pfVar22[5] = fVar9 * fVar16 + (fVar5 * fVar15 + fVar3 * fVar14);
-      fVar2 = pfVar22[0xb];
-      pfVar22[10] = fVar1 * fVar12 + (fVar8 * fVar19 + fVar4 * fVar18);
-      pfVar22[2] = fVar1 * fVar11 + (fVar8 * fVar13 + fVar4 * fVar17);
-      pfVar22[6] = fVar1 * fVar16 + (fVar8 * fVar15 + fVar4 * fVar14);
-      pfVar22[0xb] = fVar2 * fVar12 + (fVar6 * fVar19 + fVar7 * fVar18);
-      pfVar22[3] = fVar2 * fVar11 + (fVar6 * fVar13 + fVar7 * fVar17);
-      pfVar22[7] = fVar2 * fVar16 + (fVar6 * fVar15 + fVar7 * fVar14);
+      secondMatrixElem4 = secondMatrix[4];
+      secondMatrixElem0 = *secondMatrix;
+      secondMatrixElem8 = secondMatrix[8];
+      secondMatrixElem5 = secondMatrix[5];
+      secondMatrixElem6 = secondMatrix[6];
+      secondMatrixElem1 = secondMatrix[1];
+      secondMatrixElem7 = secondMatrix[7];
+      secondMatrixElem2 = secondMatrix[2];
+      secondMatrixElem9 = secondMatrix[9];
+      secondMatrix[8] = secondMatrixElem8 * rotElem8 + (secondMatrixElem0 * rotElem6 + secondMatrixElem4 * rotElem7);
+      *secondMatrix = secondMatrixElem8 * fVar11 + (secondMatrixElem0 * rotElem0 + secondMatrixElem4 * rotElem1);
+      secondMatrix[4] = secondMatrixElem8 * fVar16 + (secondMatrixElem0 * fVar15 + secondMatrixElem4 * rotElem4);
+      secondMatrixElem3 = secondMatrix[3];
+      secondMatrixElem10 = secondMatrix[10];
+      secondMatrix[9] = secondMatrixElem9 * rotElem8 + (secondMatrixElem1 * rotElem6 + secondMatrixElem5 * rotElem7);
+      secondMatrix[1] = secondMatrixElem9 * fVar11 + (secondMatrixElem1 * rotElem0 + secondMatrixElem5 * rotElem1);
+      secondMatrix[5] = secondMatrixElem9 * fVar16 + (secondMatrixElem1 * fVar15 + secondMatrixElem5 * rotElem4);
+      secondMatrixElem11 = secondMatrix[0xb];
+      secondMatrix[10] = secondMatrixElem10 * rotElem8 + (secondMatrixElem2 * rotElem6 + secondMatrixElem6 * rotElem7);
+      secondMatrix[2] = secondMatrixElem10 * fVar11 + (secondMatrixElem2 * rotElem0 + secondMatrixElem6 * rotElem1);
+      secondMatrix[6] = secondMatrixElem10 * fVar16 + (secondMatrixElem2 * fVar15 + secondMatrixElem6 * rotElem4);
+      secondMatrix[0xb] = secondMatrixElem11 * rotElem8 + (secondMatrixElem3 * rotElem6 + secondMatrixElem7 * rotElem7);
+      secondMatrix[3] = secondMatrixElem11 * fVar11 + (secondMatrixElem3 * rotElem0 + secondMatrixElem7 * rotElem1);
+      secondMatrix[7] = secondMatrixElem11 * fVar16 + (secondMatrixElem3 * fVar15 + secondMatrixElem7 * rotElem4);
       uVar20 = *(uint *)(glContext + 0x50b0);
     }
     *(uint *)(glContext + 0x50b0) = uVar20 | uVar21;
@@ -622,10 +659,10 @@ void _glRotated_Exec(int glContext,double angle,double x,double y,double z)
   double dVar1;
   double sinValue;
   double dVar2;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   dVar1 = (double)*(float *)(glContext + 0x20);
   if ((y == dVar1) && (z == dVar1)) {
@@ -635,8 +672,8 @@ void _glRotated_Exec(int glContext,double angle,double x,double y,double z)
     }
     sinValue = _sin(angle * dVar2);
     dVar2 = _cos(angle * dVar2);
-    ((void (*)())_glRotateX_Exec)(glContext,(double)(float)sinValue,(double)(float)dVar2,y,z,in_f5,in_f6,
-                    in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
+    ((void (*)())_glRotateX_Exec)(glContext,(double)(float)sinValue,(double)(float)dVar2,y,z,incomingFpr5,incomingFpr6,
+                    incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
@@ -647,8 +684,8 @@ void _glRotated_Exec(int glContext,double angle,double x,double y,double z)
     }
     sinValue = _sin(angle * dVar2);
     dVar2 = _cos(angle * dVar2);
-    ((void (*)())_glRotateY_Exec)(glContext,(double)(float)sinValue,(double)(float)dVar2,y,z,in_f5,in_f6,
-                    in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
+    ((void (*)())_glRotateY_Exec)(glContext,(double)(float)sinValue,(double)(float)dVar2,y,z,incomingFpr5,incomingFpr6,
+                    incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
@@ -659,8 +696,8 @@ void _glRotated_Exec(int glContext,double angle,double x,double y,double z)
     }
     sinValue = _sin(angle * dVar2);
     dVar2 = _cos(angle * dVar2);
-    ((void (*)())_glRotateZ_Exec)(glContext,(double)(float)sinValue,(double)(float)dVar2,y,z,in_f5,in_f6,
-                    in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
+    ((void (*)())_glRotateZ_Exec)(glContext,(double)(float)sinValue,(double)(float)dVar2,y,z,incomingFpr5,incomingFpr6,
+                    incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
@@ -676,10 +713,10 @@ void _glRotatef_CompExec(int glContext,double angle,double x,double y,double z)
   double sinValue;
   double cosValue;
   double fparam_3_00;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   fparam_3_00 = (double)*(float *)(glContext + 0x20);
   if ((y == fparam_3_00) && (z == fparam_3_00)) {
@@ -690,8 +727,8 @@ void _glRotatef_CompExec(int glContext,double angle,double x,double y,double z)
     sinValue = _sin((double)(float)(angle * (double)fVar1));
     cosValue = _cos((double)(float)(angle * (double)fVar1));
     ((void (*)())_glRotateX_Comp)(glContext,(double)(float)sinValue,(double)(float)cosValue);
-    ((void (*)())_glRotateX_Exec)(glContext,(double)(float)sinValue,(double)(float)cosValue,fparam_3_00,z,in_f5,
-                    in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
+    ((void (*)())_glRotateX_Exec)(glContext,(double)(float)sinValue,(double)(float)cosValue,fparam_3_00,z,incomingFpr5,
+                    incomingFpr6,incomingFpr7,incomingFpr8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
@@ -703,8 +740,8 @@ void _glRotatef_CompExec(int glContext,double angle,double x,double y,double z)
     sinValue = _sin((double)(float)(angle * (double)fVar1));
     cosValue = _cos((double)(float)(angle * (double)fVar1));
     ((void (*)())_glRotateY_Comp)(glContext,(double)(float)sinValue,(double)(float)cosValue);
-    ((void (*)())_glRotateY_Exec)(glContext,(double)(float)sinValue,(double)(float)cosValue,fparam_3_00,z,in_f5,
-                    in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
+    ((void (*)())_glRotateY_Exec)(glContext,(double)(float)sinValue,(double)(float)cosValue,fparam_3_00,z,incomingFpr5,
+                    incomingFpr6,incomingFpr7,incomingFpr8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
@@ -716,8 +753,8 @@ void _glRotatef_CompExec(int glContext,double angle,double x,double y,double z)
     sinValue = _sin((double)(float)(angle * (double)fVar1));
     cosValue = _cos((double)(float)(angle * (double)fVar1));
     ((void (*)())_glRotateZ_Comp)(glContext,(double)(float)sinValue,(double)(float)cosValue);
-    ((void (*)())_glRotateZ_Exec)(glContext,(double)(float)sinValue,(double)(float)cosValue,fparam_3_00,z,in_f5,
-                    in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
+    ((void (*)())_glRotateZ_Exec)(glContext,(double)(float)sinValue,(double)(float)cosValue,fparam_3_00,z,incomingFpr5,
+                    incomingFpr6,incomingFpr7,incomingFpr8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
@@ -865,17 +902,17 @@ void _glScissor_CompExec(glContext, x, y, width, height)
   undefined4 height;
 {
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glScissor_Comp)(glContext,x,y,width,height);
-  ((void (*)())_glScissor_Exec)(glContext,x,y,width,height,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,
-                  in_f7,in_f8);
+  ((void (*)())_glScissor_Exec)(glContext,x,y,width,height,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
+                  incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -1564,16 +1601,16 @@ void _glUseProgramObjectARB_CompExec(glContext, programObj)
   undefined4 programObj;
 {
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glUseProgramObjectARB_Comp)(glContext,programObj);
-  ((void (*)())_glUseProgramObjectARB_Exec)(glContext,programObj,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_glUseProgramObjectARB_Exec)(glContext,programObj,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 

@@ -134,153 +134,157 @@ void _glUniformMatrix2fvARB_Exec(glContext, location, count, transpose, value)
   int transpose;
   undefined4 *value;
 {
-  undefined4 *puVar1;
-  int *piVar2;
-  bool bVar3;
-  bool bVar4;
-  undefined4 uVar5;
+  undefined4 *srcLastElement;
+  int *rendererCallbacks;
+  bool stage0Updated;
+  bool stage1Updated;
+  undefined4 uniformWord1;
   int currentProgram;
-  undefined4 *puVar7;
-  int iVar8;
+  undefined4 *dstCursor;
+  undefined4 *rendererHandlePtr;
+  int typeInfoFound;
+  int rendererRecordCursor;
   int loopIndex2;
-  int iVar9;
-  int iVar10;
+  int elementMapOffset;
+  int rendererSlotOffset;
+  int elementValueOffset;
   int loopIndex3;
-  undefined4 uVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
-  undefined4 uVar15;
-  int iVar16;
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int registerIndexThenOffset;
   int loopIndex;
-  int local_40;
-  int local_3c;
-  undefined2 local_38 [10];
+  int uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [10];
   
-  local_3c = 0;
-  local_38[0] = 0;
-  local_40 = 0;
-  bVar3 = false;
-  bVar4 = false;
+  uniformType = 0;
+  uniformStageUse[0] = 0;
+  uniformSize = 0;
+  stage0Updated = false;
+  stage1Updated = false;
   if (location != -1) {
     currentProgram = *(int *)(glContext + 0x5430);
     if ((((currentProgram == 0) || (*(int *)(currentProgram + 0x30) <= location)) || (count < 0)) ||
-       ((iVar8 = _ShGetUniformTypeInfo
-                           (*(undefined4 *)(currentProgram + 0x40),location,&local_40,&local_3c,local_38),
-        iVar8 == 0 || (local_3c != 0x8b5a)))) {
+       ((typeInfoFound = _ShGetUniformTypeInfo
+                           (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+        typeInfoFound == 0 || (uniformType != 0x8b5a)))) {
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x502;
       }
     }
     else if (count != 0) {
-      puVar7 = (undefined4 *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-      if (count < local_40) {
-        local_40 = count;
+      dstCursor = (undefined4 *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
+      if (count < uniformSize) {
+        uniformSize = count;
       }
       if (transpose == 0) {
         loopIndex2 = 0;
-        if (0 < local_40) {
+        if (0 < uniformSize) {
           do {
             loopIndex2 = loopIndex2 + 1;
-            *puVar7 = *value;
-            puVar7[1] = value[1];
-            puVar7[4] = value[2];
-            puVar1 = value + 3;
+            *dstCursor = *value;
+            dstCursor[1] = value[1];
+            dstCursor[4] = value[2];
+            srcLastElement = value + 3;
             value = value + 4;
-            puVar7[5] = *puVar1;
-            puVar7 = puVar7 + 8;
-          } while (loopIndex2 < local_40);
+            dstCursor[5] = *srcLastElement;
+            dstCursor = dstCursor + 8;
+          } while (loopIndex2 < uniformSize);
         }
       }
       else {
         loopIndex2 = 0;
-        if (0 < local_40) {
+        if (0 < uniformSize) {
           do {
             loopIndex2 = loopIndex2 + 1;
-            *puVar7 = *value;
-            puVar7[4] = value[1];
-            puVar7[1] = value[2];
-            puVar1 = value + 3;
+            *dstCursor = *value;
+            dstCursor[4] = value[1];
+            dstCursor[1] = value[2];
+            srcLastElement = value + 3;
             value = value + 4;
-            puVar7[5] = *puVar1;
-            puVar7 = puVar7 + 8;
-          } while (loopIndex2 < local_40);
+            dstCursor[5] = *srcLastElement;
+            dstCursor = dstCursor + 8;
+          } while (loopIndex2 < uniformSize);
         }
       }
       loopIndex2 = 0;
-      if (0 < local_40) {
+      if (0 < uniformSize) {
         do {
           loopIndex = 0;
-          iVar10 = location << 4;
-          iVar9 = location << 2;
+          elementValueOffset = location << 4;
+          elementMapOffset = location << 2;
           do {
-            iVar13 = *(int *)(currentProgram + 0x20);
-            iVar16 = *(int *)(iVar9 + *(int *)(iVar13 + 0x4e0));
-            if (iVar16 != -1) {
-              iVar16 = iVar16 * 0x10;
-              iVar12 = *(int *)(iVar13 + 0x51c);
-              bVar3 = true;
-              iVar14 = iVar10 + *(int *)(currentProgram + 0x4c);
-              uVar11 = *(undefined4 *)(iVar14 + 0xc);
-              iVar13 = iVar16 + iVar12;
-              uVar5 = *(undefined4 *)(iVar14 + 4);
-              uVar15 = *(undefined4 *)(iVar14 + 8);
-              *(undefined4 *)(iVar16 + iVar12) = *(undefined4 *)(iVar10 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar13 + 0xc) = uVar11;
-              *(undefined4 *)(iVar13 + 4) = uVar5;
-              *(undefined4 *)(iVar13 + 8) = uVar15;
+            stage0Record = *(int *)(currentProgram + 0x20);
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(stage0Record + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(stage0Record + 0x51c);
+              stage0Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
-            iVar16 = *(int *)(iVar9 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-            if (iVar16 != -1) {
-              iVar16 = iVar16 * 0x10;
-              iVar12 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-              bVar4 = true;
-              iVar14 = iVar10 + *(int *)(currentProgram + 0x4c);
-              uVar11 = *(undefined4 *)(iVar14 + 0xc);
-              iVar13 = iVar16 + iVar12;
-              uVar5 = *(undefined4 *)(iVar14 + 4);
-              uVar15 = *(undefined4 *)(iVar14 + 8);
-              *(undefined4 *)(iVar16 + iVar12) = *(undefined4 *)(iVar10 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar13 + 0xc) = uVar11;
-              *(undefined4 *)(iVar13 + 4) = uVar5;
-              *(undefined4 *)(iVar13 + 8) = uVar15;
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+              stage1Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
             loopIndex = loopIndex + 1;
-            iVar9 = iVar9 + 4;
-            iVar10 = iVar10 + 0x10;
+            elementMapOffset = elementMapOffset + 4;
+            elementValueOffset = elementValueOffset + 0x10;
           } while (loopIndex < 2);
           loopIndex2 = loopIndex2 + 1;
           location = location + 2;
-        } while (loopIndex2 < local_40);
+        } while (loopIndex2 < uniformSize);
       }
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-      if (bVar3) {
-        iVar8 = glContext + 0x10000;
+      if (stage0Updated) {
+        rendererRecordCursor = glContext + 0x10000;
         loopIndex3 = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar2 = (int *)(iVar8 + -0x777c);
-            iVar9 = loopIndex3 * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+            rendererSlotOffset = loopIndex3 * 4;
             loopIndex3 = loopIndex3 + 1;
-            puVar7 = (undefined4 *)(iVar8 + -0x7a54);
-            iVar8 = iVar8 + 0x2e0;
-            (**(code **)(*piVar2 + 0x194))
-                      (*puVar7,*(undefined4 *)(iVar9 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+            rendererRecordCursor = rendererRecordCursor + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
           } while (loopIndex3 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      if (bVar4) {
-        iVar8 = glContext + 0x10000;
+      if (stage1Updated) {
+        rendererRecordCursor = glContext + 0x10000;
         loopIndex3 = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar2 = (int *)(iVar8 + -0x777c);
-            iVar9 = loopIndex3 * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+            rendererSlotOffset = loopIndex3 * 4;
             loopIndex3 = loopIndex3 + 1;
-            puVar7 = (undefined4 *)(iVar8 + -0x7a54);
-            iVar8 = iVar8 + 0x2e0;
-            (**(code **)(*piVar2 + 0x194))
-                      (*puVar7,*(undefined4 *)(iVar9 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+            rendererRecordCursor = rendererRecordCursor + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
           } while (loopIndex3 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
@@ -297,166 +301,170 @@ void _glUniformMatrix3fvARB_Exec(glContext, location, count, transpose, value)
   int transpose;
   undefined4 *value;
 {
-  undefined4 *puVar1;
-  int *piVar2;
-  bool bVar3;
-  bool bVar4;
-  undefined4 uVar5;
+  undefined4 *srcLastElement;
+  int *rendererCallbacks;
+  bool stage0Updated;
+  bool stage1Updated;
+  undefined4 uniformWord1;
   int currentProgram;
-  undefined4 *puVar7;
-  int iVar8;
+  undefined4 *dstCursor;
+  undefined4 *rendererHandlePtr;
+  int typeInfoFound;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar9;
+  int elementMapOffset;
+  int rendererSlotOffset;
   int iVar10;
   int loopIndex2;
   int iVar11;
-  undefined4 uVar12;
-  int iVar13;
-  int iVar14;
-  int iVar15;
-  undefined4 uVar16;
-  int iVar17;
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int registerIndexThenOffset;
   int remaining;
-  int local_40;
-  int local_3c;
-  undefined2 local_38 [10];
+  int uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [10];
   
-  local_3c = 0;
-  local_38[0] = 0;
-  local_40 = 0;
-  bVar3 = false;
-  bVar4 = false;
+  uniformType = 0;
+  uniformStageUse[0] = 0;
+  uniformSize = 0;
+  stage0Updated = false;
+  stage1Updated = false;
   if (location != -1) {
     currentProgram = *(int *)(glContext + 0x5430);
     if ((((currentProgram == 0) || (*(int *)(currentProgram + 0x30) <= location)) || (count < 0)) ||
-       ((iVar8 = _ShGetUniformTypeInfo
-                           (*(undefined4 *)(currentProgram + 0x40),location,&local_40,&local_3c,local_38),
-        iVar8 == 0 || (local_3c != 0x8b5b)))) {
+       ((typeInfoFound = _ShGetUniformTypeInfo
+                           (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+        typeInfoFound == 0 || (uniformType != 0x8b5b)))) {
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x502;
       }
     }
     else if (count != 0) {
-      puVar7 = (undefined4 *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-      if (count < local_40) {
-        local_40 = count;
+      dstCursor = (undefined4 *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
+      if (count < uniformSize) {
+        uniformSize = count;
       }
       if (transpose == 0) {
         loopIndex = 0;
-        if (0 < local_40) {
+        if (0 < uniformSize) {
           do {
             loopIndex = loopIndex + 1;
-            *puVar7 = *value;
-            puVar7[1] = value[1];
-            puVar7[2] = value[2];
-            puVar7[4] = value[3];
-            puVar7[5] = value[4];
-            puVar7[6] = value[5];
-            puVar7[8] = value[6];
-            puVar7[9] = value[7];
-            puVar1 = value + 8;
+            *dstCursor = *value;
+            dstCursor[1] = value[1];
+            dstCursor[2] = value[2];
+            dstCursor[4] = value[3];
+            dstCursor[5] = value[4];
+            dstCursor[6] = value[5];
+            dstCursor[8] = value[6];
+            dstCursor[9] = value[7];
+            srcLastElement = value + 8;
             value = value + 9;
-            puVar7[10] = *puVar1;
-            puVar7 = puVar7 + 0xc;
-          } while (loopIndex < local_40);
+            dstCursor[10] = *srcLastElement;
+            dstCursor = dstCursor + 0xc;
+          } while (loopIndex < uniformSize);
         }
       }
       else {
         loopIndex = 0;
-        if (0 < local_40) {
+        if (0 < uniformSize) {
           do {
             loopIndex = loopIndex + 1;
-            *puVar7 = *value;
-            puVar7[4] = value[1];
-            puVar7[8] = value[2];
-            puVar7[1] = value[3];
-            puVar7[5] = value[4];
-            puVar7[9] = value[5];
-            puVar7[2] = value[6];
-            puVar7[6] = value[7];
-            puVar1 = value + 8;
+            *dstCursor = *value;
+            dstCursor[4] = value[1];
+            dstCursor[8] = value[2];
+            dstCursor[1] = value[3];
+            dstCursor[5] = value[4];
+            dstCursor[9] = value[5];
+            dstCursor[2] = value[6];
+            dstCursor[6] = value[7];
+            srcLastElement = value + 8;
             value = value + 9;
-            puVar7[10] = *puVar1;
-            puVar7 = puVar7 + 0xc;
-          } while (loopIndex < local_40);
+            dstCursor[10] = *srcLastElement;
+            dstCursor = dstCursor + 0xc;
+          } while (loopIndex < uniformSize);
         }
       }
       loopIndex = 0;
-      if (0 < local_40) {
+      if (0 < uniformSize) {
         iVar10 = location << 4;
         do {
           remaining = 3;
-          iVar9 = location << 2;
+          elementMapOffset = location << 2;
           iVar11 = iVar10;
           do {
-            iVar14 = *(int *)(currentProgram + 0x20);
-            iVar17 = *(int *)(iVar9 + *(int *)(iVar14 + 0x4e0));
-            if (iVar17 != -1) {
-              iVar17 = iVar17 * 0x10;
-              iVar13 = *(int *)(iVar14 + 0x51c);
-              bVar3 = true;
-              iVar15 = iVar11 + *(int *)(currentProgram + 0x4c);
-              uVar12 = *(undefined4 *)(iVar15 + 0xc);
-              iVar14 = iVar17 + iVar13;
-              uVar5 = *(undefined4 *)(iVar15 + 4);
-              uVar16 = *(undefined4 *)(iVar15 + 8);
-              *(undefined4 *)(iVar17 + iVar13) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar14 + 0xc) = uVar12;
-              *(undefined4 *)(iVar14 + 4) = uVar5;
-              *(undefined4 *)(iVar14 + 8) = uVar16;
+            stage0Record = *(int *)(currentProgram + 0x20);
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(stage0Record + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(stage0Record + 0x51c);
+              stage0Updated = true;
+              uniformValueSlot = iVar11 + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
-            iVar17 = *(int *)(iVar9 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-            if (iVar17 != -1) {
-              iVar17 = iVar17 * 0x10;
-              iVar13 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-              bVar4 = true;
-              iVar15 = iVar11 + *(int *)(currentProgram + 0x4c);
-              uVar12 = *(undefined4 *)(iVar15 + 0xc);
-              iVar14 = iVar17 + iVar13;
-              uVar5 = *(undefined4 *)(iVar15 + 4);
-              uVar16 = *(undefined4 *)(iVar15 + 8);
-              *(undefined4 *)(iVar17 + iVar13) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar14 + 0xc) = uVar12;
-              *(undefined4 *)(iVar14 + 4) = uVar5;
-              *(undefined4 *)(iVar14 + 8) = uVar16;
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+              stage1Updated = true;
+              uniformValueSlot = iVar11 + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
-            iVar9 = iVar9 + 4;
+            elementMapOffset = elementMapOffset + 4;
             iVar11 = iVar11 + 0x10;
             remaining = remaining + -1;
           } while (remaining != 0);
           loopIndex = loopIndex + 1;
           location = location + 3;
           iVar10 = iVar10 + 0x30;
-        } while (loopIndex < local_40);
+        } while (loopIndex < uniformSize);
       }
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-      if (bVar3) {
-        iVar8 = glContext + 0x10000;
+      if (stage0Updated) {
+        rendererRecordCursor = glContext + 0x10000;
         loopIndex2 = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar2 = (int *)(iVar8 + -0x777c);
-            iVar9 = loopIndex2 * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+            rendererSlotOffset = loopIndex2 * 4;
             loopIndex2 = loopIndex2 + 1;
-            puVar7 = (undefined4 *)(iVar8 + -0x7a54);
-            iVar8 = iVar8 + 0x2e0;
-            (**(code **)(*piVar2 + 0x194))
-                      (*puVar7,*(undefined4 *)(iVar9 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+            rendererRecordCursor = rendererRecordCursor + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
           } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      if (bVar4) {
-        iVar8 = glContext + 0x10000;
+      if (stage1Updated) {
+        rendererRecordCursor = glContext + 0x10000;
         loopIndex2 = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar2 = (int *)(iVar8 + -0x777c);
-            iVar9 = loopIndex2 * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+            rendererSlotOffset = loopIndex2 * 4;
             loopIndex2 = loopIndex2 + 1;
-            puVar7 = (undefined4 *)(iVar8 + -0x7a54);
-            iVar8 = iVar8 + 0x2e0;
-            (**(code **)(*piVar2 + 0x194))
-                      (*puVar7,*(undefined4 *)(iVar9 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+            rendererRecordCursor = rendererRecordCursor + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
           } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
@@ -473,177 +481,181 @@ void _glUniformMatrix4fvARB_Exec(glContext, location, count, transpose, value)
   int transpose;
   undefined4 *value;
 {
-  undefined4 *puVar1;
-  int *piVar2;
-  bool bVar3;
-  bool bVar4;
-  undefined4 uVar5;
+  undefined4 *srcLastElement;
+  int *rendererCallbacks;
+  bool stage0Updated;
+  bool stage1Updated;
+  undefined4 uniformWord1;
   int currentProgram;
-  undefined4 *puVar7;
-  int iVar8;
+  undefined4 *dstCursor;
+  undefined4 *rendererHandlePtr;
+  int typeInfoFound;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar9;
-  int iVar10;
+  int elementMapOffset;
+  int rendererSlotOffset;
+  int elementValueOffset;
   int loopIndex2;
-  undefined4 uVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
-  undefined4 uVar15;
-  int iVar16;
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int registerIndexThenOffset;
   int remaining;
-  int local_40;
-  int local_3c;
-  undefined2 local_38 [10];
+  int uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [10];
   
-  local_3c = 0;
-  local_38[0] = 0;
-  local_40 = 0;
-  bVar3 = false;
-  bVar4 = false;
+  uniformType = 0;
+  uniformStageUse[0] = 0;
+  uniformSize = 0;
+  stage0Updated = false;
+  stage1Updated = false;
   if (location != -1) {
     currentProgram = *(int *)(glContext + 0x5430);
     if ((((currentProgram == 0) || (*(int *)(currentProgram + 0x30) <= location)) || (count < 0)) ||
-       ((iVar8 = _ShGetUniformTypeInfo
-                           (*(undefined4 *)(currentProgram + 0x40),location,&local_40,&local_3c,local_38),
-        iVar8 == 0 || (local_3c != 0x8b5c)))) {
+       ((typeInfoFound = _ShGetUniformTypeInfo
+                           (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+        typeInfoFound == 0 || (uniformType != 0x8b5c)))) {
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x502;
       }
     }
     else if (count != 0) {
-      puVar7 = (undefined4 *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-      if (count < local_40) {
-        local_40 = count;
+      dstCursor = (undefined4 *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
+      if (count < uniformSize) {
+        uniformSize = count;
       }
       if (transpose == 0) {
         loopIndex = 0;
-        if (0 < local_40) {
+        if (0 < uniformSize) {
           do {
             loopIndex = loopIndex + 1;
-            *puVar7 = *value;
-            puVar7[1] = value[1];
-            puVar7[2] = value[2];
-            puVar7[3] = value[3];
-            puVar7[4] = value[4];
-            puVar7[5] = value[5];
-            puVar7[6] = value[6];
-            puVar7[7] = value[7];
-            puVar7[8] = value[8];
-            puVar7[9] = value[9];
-            puVar7[10] = value[10];
-            puVar7[0xb] = value[0xb];
-            puVar7[0xc] = value[0xc];
-            puVar7[0xd] = value[0xd];
-            puVar7[0xe] = value[0xe];
-            puVar1 = value + 0xf;
+            *dstCursor = *value;
+            dstCursor[1] = value[1];
+            dstCursor[2] = value[2];
+            dstCursor[3] = value[3];
+            dstCursor[4] = value[4];
+            dstCursor[5] = value[5];
+            dstCursor[6] = value[6];
+            dstCursor[7] = value[7];
+            dstCursor[8] = value[8];
+            dstCursor[9] = value[9];
+            dstCursor[10] = value[10];
+            dstCursor[0xb] = value[0xb];
+            dstCursor[0xc] = value[0xc];
+            dstCursor[0xd] = value[0xd];
+            dstCursor[0xe] = value[0xe];
+            srcLastElement = value + 0xf;
             value = value + 0x10;
-            puVar7[0xf] = *puVar1;
-            puVar7 = puVar7 + 0x10;
-          } while (loopIndex < local_40);
+            dstCursor[0xf] = *srcLastElement;
+            dstCursor = dstCursor + 0x10;
+          } while (loopIndex < uniformSize);
         }
       }
       else {
         loopIndex = 0;
-        if (0 < local_40) {
+        if (0 < uniformSize) {
           do {
             loopIndex = loopIndex + 1;
-            *puVar7 = *value;
-            puVar7[4] = value[1];
-            puVar7[8] = value[2];
-            puVar7[0xc] = value[3];
-            puVar7[1] = value[4];
-            puVar7[5] = value[5];
-            puVar7[9] = value[6];
-            puVar7[0xd] = value[7];
-            puVar7[2] = value[8];
-            puVar7[6] = value[9];
-            puVar7[10] = value[10];
-            puVar7[0xe] = value[0xb];
-            puVar7[3] = value[0xc];
-            puVar7[7] = value[0xd];
-            puVar7[0xb] = value[0xe];
-            puVar1 = value + 0xf;
+            *dstCursor = *value;
+            dstCursor[4] = value[1];
+            dstCursor[8] = value[2];
+            dstCursor[0xc] = value[3];
+            dstCursor[1] = value[4];
+            dstCursor[5] = value[5];
+            dstCursor[9] = value[6];
+            dstCursor[0xd] = value[7];
+            dstCursor[2] = value[8];
+            dstCursor[6] = value[9];
+            dstCursor[10] = value[10];
+            dstCursor[0xe] = value[0xb];
+            dstCursor[3] = value[0xc];
+            dstCursor[7] = value[0xd];
+            dstCursor[0xb] = value[0xe];
+            srcLastElement = value + 0xf;
             value = value + 0x10;
-            puVar7[0xf] = *puVar1;
-            puVar7 = puVar7 + 0x10;
-          } while (loopIndex < local_40);
+            dstCursor[0xf] = *srcLastElement;
+            dstCursor = dstCursor + 0x10;
+          } while (loopIndex < uniformSize);
         }
       }
       loopIndex = 0;
-      if (0 < local_40) {
+      if (0 < uniformSize) {
         do {
-          iVar10 = location << 4;
+          elementValueOffset = location << 4;
           remaining = 4;
-          iVar9 = location << 2;
+          elementMapOffset = location << 2;
           do {
-            iVar13 = *(int *)(currentProgram + 0x20);
-            iVar16 = *(int *)(iVar9 + *(int *)(iVar13 + 0x4e0));
-            if (iVar16 != -1) {
-              iVar16 = iVar16 * 0x10;
-              iVar12 = *(int *)(iVar13 + 0x51c);
-              bVar3 = true;
-              iVar14 = iVar10 + *(int *)(currentProgram + 0x4c);
-              uVar11 = *(undefined4 *)(iVar14 + 0xc);
-              iVar13 = iVar16 + iVar12;
-              uVar5 = *(undefined4 *)(iVar14 + 4);
-              uVar15 = *(undefined4 *)(iVar14 + 8);
-              *(undefined4 *)(iVar16 + iVar12) = *(undefined4 *)(iVar10 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar13 + 0xc) = uVar11;
-              *(undefined4 *)(iVar13 + 4) = uVar5;
-              *(undefined4 *)(iVar13 + 8) = uVar15;
+            stage0Record = *(int *)(currentProgram + 0x20);
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(stage0Record + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(stage0Record + 0x51c);
+              stage0Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
-            iVar16 = *(int *)(iVar9 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-            if (iVar16 != -1) {
-              iVar16 = iVar16 * 0x10;
-              iVar12 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-              bVar4 = true;
-              iVar14 = iVar10 + *(int *)(currentProgram + 0x4c);
-              uVar11 = *(undefined4 *)(iVar14 + 0xc);
-              iVar13 = iVar16 + iVar12;
-              uVar5 = *(undefined4 *)(iVar14 + 4);
-              uVar15 = *(undefined4 *)(iVar14 + 8);
-              *(undefined4 *)(iVar16 + iVar12) = *(undefined4 *)(iVar10 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar13 + 0xc) = uVar11;
-              *(undefined4 *)(iVar13 + 4) = uVar5;
-              *(undefined4 *)(iVar13 + 8) = uVar15;
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+              stage1Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
-            iVar9 = iVar9 + 4;
-            iVar10 = iVar10 + 0x10;
+            elementMapOffset = elementMapOffset + 4;
+            elementValueOffset = elementValueOffset + 0x10;
             remaining = remaining + -1;
           } while (remaining != 0);
           loopIndex = loopIndex + 1;
           location = location + 4;
-        } while (loopIndex < local_40);
+        } while (loopIndex < uniformSize);
       }
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-      if (bVar3) {
-        iVar8 = glContext + 0x10000;
+      if (stage0Updated) {
+        rendererRecordCursor = glContext + 0x10000;
         loopIndex2 = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar2 = (int *)(iVar8 + -0x777c);
-            iVar9 = loopIndex2 * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+            rendererSlotOffset = loopIndex2 * 4;
             loopIndex2 = loopIndex2 + 1;
-            puVar7 = (undefined4 *)(iVar8 + -0x7a54);
-            iVar8 = iVar8 + 0x2e0;
-            (**(code **)(*piVar2 + 0x194))
-                      (*puVar7,*(undefined4 *)(iVar9 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+            rendererRecordCursor = rendererRecordCursor + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
           } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      if (bVar4) {
-        iVar8 = glContext + 0x10000;
+      if (stage1Updated) {
+        rendererRecordCursor = glContext + 0x10000;
         loopIndex2 = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar2 = (int *)(iVar8 + -0x777c);
-            iVar9 = loopIndex2 * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+            rendererSlotOffset = loopIndex2 * 4;
             loopIndex2 = loopIndex2 + 1;
-            puVar7 = (undefined4 *)(iVar8 + -0x7a54);
-            iVar8 = iVar8 + 0x2e0;
-            (**(code **)(*piVar2 + 0x194))
-                      (*puVar7,*(undefined4 *)(iVar9 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+            rendererRecordCursor = rendererRecordCursor + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
           } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
@@ -1612,13 +1624,15 @@ void _glGetUniformfvARB_Exec(glContext, programObj, location, params)
   double dVar2;
   undefined4 glErrorCode;
   int iVar4;
+  int locationValueOffset;
   int iVar5;
+  int typeInfoFound;
   uint *puVar6;
   undefined1 auStack_38 [4];
-  uint local_34;
-  undefined2 local_30 [14];
+  uint uniformType;
+  undefined2 uniformStageUse [14];
   
-  local_30[0] = 0;
+  uniformStageUse[0] = 0;
   if (-1 < *(short *)(glContext + 0x4a10)) {
 LAB_0008f154:
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1648,25 +1662,25 @@ LAB_0008f164:
   if ((((*(int *)(iVar4 + 0x10) != 0x8b40) || (*(char *)(iVar4 + 0x3c) != '\x01')) ||
       (*(int *)(iVar4 + 0x30) <= location)) ||
      ((location == -1 ||
-      (iVar5 = _ShGetUniformTypeInfo
-                         (*(undefined4 *)(iVar4 + 0x40),location,auStack_38,&local_34,local_30),
-      dVar2 = DOUBLE_00108d58, iVar5 == 0)))) {
+      (typeInfoFound = _ShGetUniformTypeInfo
+                         (*(undefined4 *)(iVar4 + 0x40),location,auStack_38,&uniformType,uniformStageUse),
+      dVar2 = DOUBLE_00108d58, typeInfoFound == 0)))) {
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
     goto LAB_0008f154;
   }
   iVar5 = *(int *)(iVar4 + 0x4c);
-  iVar4 = location * 0x10;
-  puVar6 = (uint *)(iVar5 + iVar4);
-  if (local_34 == 0x8b56) {
+  locationValueOffset = location * 0x10;
+  puVar6 = (uint *)(iVar5 + locationValueOffset);
+  if (uniformType == 0x8b56) {
 LAB_0008f414:
     fVar1 = (float)((double)CONCAT44(0x43300000,*puVar6 ^ 0x80000000) - DOUBLE_00108d58);
   }
   else {
-    if (0x8b56 < local_34) {
-      if (local_34 == 0x8b5a) {
-        *params = *(float *)(iVar5 + iVar4);
+    if (0x8b56 < uniformType) {
+      if (uniformType == 0x8b5a) {
+        *params = *(float *)(iVar5 + locationValueOffset);
         params[1] = GH_U2F((unsigned int)(puVar6[1]));
         params[2] = GH_U2F((unsigned int)(puVar6[4]));
         fVar1 = GH_U2F((unsigned int)(puVar6[5]));
@@ -1674,9 +1688,9 @@ LAB_0008f460:
         params[3] = fVar1;
         goto LAB_0008f534;
       }
-      if (local_34 < 0x8b5b) {
-        if (local_34 != 0x8b58) {
-          if (0x8b58 < local_34) {
+      if (uniformType < 0x8b5b) {
+        if (uniformType != 0x8b58) {
+          if (0x8b58 < uniformType) {
 LAB_0008f290:
             *params = (float)((double)CONCAT44(0x43300000,*puVar6 ^ 0x80000000) - DOUBLE_00108d58);
             params[1] = (float)((double)CONCAT44(0x43300000,puVar6[1] ^ 0x80000000) - dVar2);
@@ -1692,8 +1706,8 @@ LAB_0008f338:
         fVar1 = (float)((double)CONCAT44(0x43300000,puVar6[2] ^ 0x80000000) - dVar2);
         goto LAB_0008f3a0;
       }
-      if (local_34 == 0x8b5c) {
-        *params = *(float *)(iVar5 + iVar4);
+      if (uniformType == 0x8b5c) {
+        *params = *(float *)(iVar5 + locationValueOffset);
         params[1] = GH_U2F((unsigned int)(puVar6[1]));
         params[2] = GH_U2F((unsigned int)(puVar6[2]));
         params[3] = GH_U2F((unsigned int)(puVar6[3]));
@@ -1711,8 +1725,8 @@ LAB_0008f338:
         params[0xf] = GH_U2F((unsigned int)(puVar6[0xf]));
         goto LAB_0008f534;
       }
-      if (local_34 < 0x8b5c) {
-        *params = *(float *)(iVar5 + iVar4);
+      if (uniformType < 0x8b5c) {
+        *params = *(float *)(iVar5 + locationValueOffset);
         params[1] = GH_U2F((unsigned int)(puVar6[1]));
         params[2] = GH_U2F((unsigned int)(puVar6[2]));
         params[3] = GH_U2F((unsigned int)(puVar6[4]));
@@ -1723,49 +1737,49 @@ LAB_0008f338:
         params[8] = GH_U2F((unsigned int)(puVar6[10]));
         goto LAB_0008f534;
       }
-      if (0x8b64 < local_34) goto LAB_0008f534;
+      if (0x8b64 < uniformType) goto LAB_0008f534;
       goto LAB_0008f414;
     }
-    if (local_34 == 0x8b51) {
-      *params = *(float *)(iVar5 + iVar4);
+    if (uniformType == 0x8b51) {
+      *params = *(float *)(iVar5 + locationValueOffset);
       params[1] = GH_U2F((unsigned int)(puVar6[1]));
       fVar1 = GH_U2F((unsigned int)(puVar6[2]));
 LAB_0008f3a0:
       params[2] = fVar1;
       goto LAB_0008f534;
     }
-    if (0x8b51 < local_34) {
-      if (local_34 == 0x8b53) {
+    if (0x8b51 < uniformType) {
+      if (uniformType == 0x8b53) {
 LAB_0008f3bc:
         *params = (float)((double)CONCAT44(0x43300000,*puVar6 ^ 0x80000000) - DOUBLE_00108d58);
         params[1] = (float)((double)CONCAT44(0x43300000,puVar6[1] ^ 0x80000000) - dVar2);
         goto LAB_0008f534;
       }
-      if (0x8b52 < local_34) {
-        if (local_34 != 0x8b54) {
-          if (local_34 != 0x8b55) goto LAB_0008f534;
+      if (0x8b52 < uniformType) {
+        if (uniformType != 0x8b54) {
+          if (uniformType != 0x8b55) goto LAB_0008f534;
           goto LAB_0008f290;
         }
         goto LAB_0008f338;
       }
-      *params = *(float *)(iVar5 + iVar4);
+      *params = *(float *)(iVar5 + locationValueOffset);
       params[1] = GH_U2F((unsigned int)(puVar6[1]));
       params[2] = GH_U2F((unsigned int)(puVar6[2]));
       fVar1 = GH_U2F((unsigned int)(puVar6[3]));
       goto LAB_0008f460;
     }
-    if (local_34 != 0x1406) {
-      if (0x1406 < local_34) {
-        if (local_34 == 0x8b50) {
-          *params = *(float *)(iVar5 + iVar4);
+    if (uniformType != 0x1406) {
+      if (0x1406 < uniformType) {
+        if (uniformType == 0x8b50) {
+          *params = *(float *)(iVar5 + locationValueOffset);
           params[1] = GH_U2F((unsigned int)(puVar6[1]));
         }
         goto LAB_0008f534;
       }
-      if (local_34 != 0x1404) goto LAB_0008f534;
+      if (uniformType != 0x1404) goto LAB_0008f534;
       goto LAB_0008f414;
     }
-    fVar1 = *(float *)(iVar5 + iVar4);
+    fVar1 = *(float *)(iVar5 + locationValueOffset);
   }
   *params = fVar1;
 LAB_0008f534:
@@ -1785,14 +1799,16 @@ void _glGetUniformivARB_Exec(glContext, programObj, location, params)
 {
   undefined4 glErrorCode;
   int iVar2;
+  int locationValueOffset;
   int iVar3;
+  int typeInfoFound;
   int *piVar4;
   float fVar5;
   undefined1 auStack_38 [4];
-  uint local_34;
-  undefined2 local_30 [14];
+  uint uniformType;
+  undefined2 uniformStageUse [14];
   
-  local_30[0] = 0;
+  uniformStageUse[0] = 0;
   if (-1 < *(short *)(glContext + 0x4a10)) {
 LAB_0008f670:
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1822,25 +1838,25 @@ LAB_0008f680:
   if ((((*(int *)(iVar2 + 0x10) != 0x8b40) || (*(char *)(iVar2 + 0x3c) != '\x01')) ||
       (*(int *)(iVar2 + 0x30) <= location)) ||
      ((location == -1 ||
-      (iVar3 = _ShGetUniformTypeInfo
-                         (*(undefined4 *)(iVar2 + 0x40),location,auStack_38,&local_34,local_30),
-      iVar3 == 0)))) {
+      (typeInfoFound = _ShGetUniformTypeInfo
+                         (*(undefined4 *)(iVar2 + 0x40),location,auStack_38,&uniformType,uniformStageUse),
+      typeInfoFound == 0)))) {
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
     goto LAB_0008f670;
   }
   iVar3 = *(int *)(iVar2 + 0x4c);
-  iVar2 = location * 0x10;
-  piVar4 = (int *)(iVar3 + iVar2);
-  if (local_34 == 0x8b56) {
+  locationValueOffset = location * 0x10;
+  piVar4 = (int *)(iVar3 + locationValueOffset);
+  if (uniformType == 0x8b56) {
 LAB_0008f8c4:
     iVar2 = *piVar4;
   }
   else {
-    if (0x8b56 < local_34) {
-      if (local_34 == 0x8b5a) {
-        fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+    if (0x8b56 < uniformType) {
+      if (uniformType == 0x8b5a) {
+        fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
         *params = (int)fVar5;
         fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
         params[1] = (int)fVar5;
@@ -1852,9 +1868,9 @@ LAB_0008f91c:
         params[3] = (int)fVar5;
         goto LAB_0008fb90;
       }
-      if (local_34 < 0x8b5b) {
-        if (local_34 != 0x8b58) {
-          if (0x8b58 < local_34) {
+      if (uniformType < 0x8b5b) {
+        if (uniformType != 0x8b58) {
+          if (0x8b58 < uniformType) {
 LAB_0008f7dc:
             *params = *piVar4;
             params[1] = piVar4[1];
@@ -1870,8 +1886,8 @@ LAB_0008f848:
         iVar2 = piVar4[2];
         goto LAB_0008f85c;
       }
-      if (local_34 == 0x8b5c) {
-        fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+      if (uniformType == 0x8b5c) {
+        fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
         *params = (int)fVar5;
         fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
         params[1] = (int)fVar5;
@@ -1905,8 +1921,8 @@ LAB_0008f848:
         params[0xf] = (int)fVar5;
         goto LAB_0008fb90;
       }
-      if (local_34 < 0x8b5c) {
-        fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+      if (uniformType < 0x8b5c) {
+        fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
         *params = (int)fVar5;
         fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
         params[1] = (int)fVar5;
@@ -1926,11 +1942,11 @@ LAB_0008f848:
         params[8] = (int)fVar5;
         goto LAB_0008fb90;
       }
-      if (0x8b64 < local_34) goto LAB_0008fb90;
+      if (0x8b64 < uniformType) goto LAB_0008fb90;
       goto LAB_0008f8c4;
     }
-    if (local_34 == 0x8b51) {
-      fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+    if (uniformType == 0x8b51) {
+      fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
       *params = (int)fVar5;
       fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
       params[1] = (int)fVar5;
@@ -1940,21 +1956,21 @@ LAB_0008f85c:
       params[2] = iVar2;
       goto LAB_0008fb90;
     }
-    if (0x8b51 < local_34) {
-      if (local_34 == 0x8b53) {
+    if (0x8b51 < uniformType) {
+      if (uniformType == 0x8b53) {
 LAB_0008f898:
         *params = *piVar4;
         params[1] = piVar4[1];
         goto LAB_0008fb90;
       }
-      if (0x8b52 < local_34) {
-        if (local_34 != 0x8b54) {
-          if (local_34 != 0x8b55) goto LAB_0008fb90;
+      if (0x8b52 < uniformType) {
+        if (uniformType != 0x8b54) {
+          if (uniformType != 0x8b55) goto LAB_0008fb90;
           goto LAB_0008f7dc;
         }
         goto LAB_0008f848;
       }
-      fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+      fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
       *params = (int)fVar5;
       fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
       params[1] = (int)fVar5;
@@ -1963,20 +1979,20 @@ LAB_0008f898:
       fVar5 = GH_U2F((unsigned int)(piVar4[3]));
       goto LAB_0008f91c;
     }
-    if (local_34 != 0x1406) {
-      if (0x1406 < local_34) {
-        if (local_34 == 0x8b50) {
-          fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+    if (uniformType != 0x1406) {
+      if (0x1406 < uniformType) {
+        if (uniformType == 0x8b50) {
+          fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
           *params = (int)fVar5;
           fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
           params[1] = (int)fVar5;
         }
         goto LAB_0008fb90;
       }
-      if (local_34 != 0x1404) goto LAB_0008fb90;
+      if (uniformType != 0x1404) goto LAB_0008fb90;
       goto LAB_0008f8c4;
     }
-    fVar5 = _roundf(*(float *)(iVar3 + iVar2));
+    fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
     iVar2 = (int)fVar5;
   }
   *params = iVar2;
@@ -2315,15 +2331,15 @@ int _glStencilOp_ListExec(glContext, listRecord)
 }
 
 /* _glActiveStencilFace_ListExec @ 0x902fc (80 bytes) */
-int _glActiveStencilFace_ListExec(glContext, param_2)
+int _glActiveStencilFace_ListExec(glContext, listRecord)
   int glContext;
-  uint *param_2;
+  uint *listRecord;
 {
   undefined4 glErrorCode;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (*param_2 < 2) {
-      *(char *)(glContext + 0x7583) = (char)*param_2;
+    if (*listRecord < 2) {
+      *(char *)(glContext + 0x7583) = (char)*listRecord;
       return 4;
     }
     if (*(int *)(glContext + 0x7574) != 0) {

@@ -6278,7 +6278,7 @@ int _gleLoadDataElementNO(instrCursor, param_2, param_3, param_4, param_5)
 {
   uint uVar1;
   uint uVar2;
-  undefined *puVar3;
+  undefined *codeChunk;
   int chunkWordCount;
   uint *puVar5;
   
@@ -6411,166 +6411,166 @@ LAB_0004e344:
   case 8:
     if (param_5 == 0) {
       if (param_2 == 2) {
-        puVar3 = &_gleLoadByte2RTC;
+        codeChunk = &_gleLoadByte2RTC;
       }
       else if (param_2 < 3) {
         if (param_2 != 1) goto switchD_0004e390_default;
-        puVar3 = &_gleLoadByte1RTC;
+        codeChunk = &_gleLoadByte1RTC;
       }
       else if (param_2 == 3) {
-        puVar3 = &_gleLoadByte3RTC;
+        codeChunk = &_gleLoadByte3RTC;
       }
       else {
         if (param_2 != 4) goto switchD_0004e390_default;
-        puVar3 = &_gleLoadByte4RTC;
+        codeChunk = &_gleLoadByte4RTC;
       }
     }
     else if (param_2 == 2) {
-      puVar3 = &_gleLoadByte2RevRTC;
+      codeChunk = &_gleLoadByte2RevRTC;
     }
     else if (param_2 < 3) {
       if (param_2 != 1) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadByte1RevRTC;
+      codeChunk = &_gleLoadByte1RevRTC;
     }
     else if (param_2 == 3) {
-      puVar3 = &_gleLoadByte3RevRTC;
+      codeChunk = &_gleLoadByte3RevRTC;
     }
     else {
       if (param_2 != 4) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadByte4RevRTC;
+      codeChunk = &_gleLoadByte4RevRTC;
     }
     break;
   case 1:
   case 9:
     if (param_5 == 0) {
       if (param_2 == 2) {
-        puVar3 = &_gleLoadUByte2RTC;
+        codeChunk = &_gleLoadUByte2RTC;
       }
       else if (param_2 < 3) {
         if (param_2 != 1) goto switchD_0004e390_default;
-        puVar3 = &_gleLoadUByte1RTC;
+        codeChunk = &_gleLoadUByte1RTC;
       }
       else if (param_2 == 3) {
-        puVar3 = &_gleLoadUByte3RTC;
+        codeChunk = &_gleLoadUByte3RTC;
       }
       else {
         if (param_2 != 4) goto switchD_0004e390_default;
-        puVar3 = &_gleLoadUByte4RTC;
+        codeChunk = &_gleLoadUByte4RTC;
       }
     }
     else if (param_2 == 2) {
-      puVar3 = &_gleLoadUByte2RevRTC;
+      codeChunk = &_gleLoadUByte2RevRTC;
     }
     else if (param_2 < 3) {
       if (param_2 != 1) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadUByte1RevRTC;
+      codeChunk = &_gleLoadUByte1RevRTC;
     }
     else if (param_2 == 3) {
-      puVar3 = &_gleLoadUByte3RevRTC;
+      codeChunk = &_gleLoadUByte3RevRTC;
     }
     else {
       if (param_2 != 4) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadUByte4RevRTC;
+      codeChunk = &_gleLoadUByte4RevRTC;
     }
     break;
   case 2:
   case 10:
     if (param_5 == 0) {
       if (param_2 == 2) {
-        puVar3 = &_gleLoadShort2RTC;
+        codeChunk = &_gleLoadShort2RTC;
       }
       else if (param_2 < 3) {
         if (param_2 != 1) goto switchD_0004e390_default;
-        puVar3 = &_gleLoadShort1RTC;
+        codeChunk = &_gleLoadShort1RTC;
       }
       else if (param_2 == 3) {
-        puVar3 = &_gleLoadShort3RTC;
+        codeChunk = &_gleLoadShort3RTC;
       }
       else {
         if (param_2 != 4) goto switchD_0004e390_default;
-        puVar3 = &_gleLoadShort4RTC;
+        codeChunk = &_gleLoadShort4RTC;
       }
     }
     else if (param_2 == 2) {
-      puVar3 = &_gleLoadShort2RevRTC;
+      codeChunk = &_gleLoadShort2RevRTC;
     }
     else if (param_2 < 3) {
       if (param_2 != 1) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadShort1RevRTC;
+      codeChunk = &_gleLoadShort1RevRTC;
     }
     else if (param_2 == 3) {
-      puVar3 = &_gleLoadShort3RevRTC;
+      codeChunk = &_gleLoadShort3RevRTC;
     }
     else {
       if (param_2 != 4) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadShort4RevRTC;
+      codeChunk = &_gleLoadShort4RevRTC;
     }
     break;
   case 3:
   case 0xb:
     if (param_5 == 0) {
       if (param_2 == 2) {
-        puVar3 = &_gleLoadUShort2RTC;
+        codeChunk = &_gleLoadUShort2RTC;
       }
       else if (param_2 < 3) {
         if (param_2 != 1) goto switchD_0004e390_default;
-        puVar3 = &_gleLoadUShort1RTC;
+        codeChunk = &_gleLoadUShort1RTC;
       }
       else if (param_2 == 3) {
-        puVar3 = &_gleLoadUShort3RTC;
+        codeChunk = &_gleLoadUShort3RTC;
       }
       else {
         if (param_2 != 4) goto switchD_0004e390_default;
-        puVar3 = &_gleLoadUShort4RTC;
+        codeChunk = &_gleLoadUShort4RTC;
       }
     }
     else if (param_2 == 2) {
-      puVar3 = &_gleLoadUShort2RevRTC;
+      codeChunk = &_gleLoadUShort2RevRTC;
     }
     else if (param_2 < 3) {
       if (param_2 != 1) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadUShort1RevRTC;
+      codeChunk = &_gleLoadUShort1RevRTC;
     }
     else if (param_2 == 3) {
-      puVar3 = &_gleLoadUShort3RevRTC;
+      codeChunk = &_gleLoadUShort3RevRTC;
     }
     else {
       if (param_2 != 4) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadUShort4RevRTC;
+      codeChunk = &_gleLoadUShort4RevRTC;
     }
     break;
   case 4:
   case 0xc:
     if (param_2 == 2) {
-      puVar3 = &_gleLoadInt2RTC;
+      codeChunk = &_gleLoadInt2RTC;
     }
     else if (param_2 < 3) {
       if (param_2 != 1) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadInt1RTC;
+      codeChunk = &_gleLoadInt1RTC;
     }
     else if (param_2 == 3) {
-      puVar3 = &_gleLoadInt3RTC;
+      codeChunk = &_gleLoadInt3RTC;
     }
     else {
       if (param_2 != 4) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadInt4RTC;
+      codeChunk = &_gleLoadInt4RTC;
     }
     break;
   case 5:
   case 0xd:
     if (param_2 == 2) {
-      puVar3 = &_gleLoadUInt2RTC;
+      codeChunk = &_gleLoadUInt2RTC;
     }
     else if (param_2 < 3) {
       if (param_2 != 1) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadUInt1RTC;
+      codeChunk = &_gleLoadUInt1RTC;
     }
     else if (param_2 == 3) {
-      puVar3 = &_gleLoadUInt3RTC;
+      codeChunk = &_gleLoadUInt3RTC;
     }
     else {
       if (param_2 != 4) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadUInt4RTC;
+      codeChunk = &_gleLoadUInt4RTC;
     }
     break;
   case 6:
@@ -6627,151 +6627,151 @@ LAB_0004e7c4:
     goto switchD_0004e390_default;
   case 7:
     if (param_2 == 2) {
-      puVar3 = &_gleLoadDouble2RTC;
+      codeChunk = &_gleLoadDouble2RTC;
     }
     else if (param_2 < 3) {
       if (param_2 != 1) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadDouble1RTC;
+      codeChunk = &_gleLoadDouble1RTC;
     }
     else if (param_2 == 3) {
-      puVar3 = &_gleLoadDouble3RTC;
+      codeChunk = &_gleLoadDouble3RTC;
     }
     else {
       if (param_2 != 4) goto switchD_0004e390_default;
-      puVar3 = &_gleLoadDouble4RTC;
+      codeChunk = &_gleLoadDouble4RTC;
     }
     break;
   default:
     goto switchD_0004e390_default;
   }
-  chunkWordCount = _gleRTCAddAChunk_b50a8(puVar3,instrCursor);
+  chunkWordCount = _gleRTCAddAChunk_b50a8(codeChunk,instrCursor);
   instrCursor = instrCursor + chunkWordCount;
 switchD_0004e390_default:
   switch(param_3) {
   case 8:
     if (param_2 == 2) {
-      puVar3 = &_gleNormalizeByte2RTC;
+      codeChunk = &_gleNormalizeByte2RTC;
     }
     else if (param_2 < 3) {
       if (param_2 != 1) {
         return instrCursor;
       }
-      puVar3 = &_gleNormalizeByte1RTC;
+      codeChunk = &_gleNormalizeByte1RTC;
     }
     else if (param_2 == 3) {
-      puVar3 = &_gleNormalizeByte3RTC;
+      codeChunk = &_gleNormalizeByte3RTC;
     }
     else {
       if (param_2 != 4) {
         return instrCursor;
       }
-      puVar3 = &_gleNormalizeByte4RTC;
+      codeChunk = &_gleNormalizeByte4RTC;
     }
     break;
   case 9:
     if (param_2 == 2) {
-      puVar3 = &_gleNormalizeUByte2RTC;
+      codeChunk = &_gleNormalizeUByte2RTC;
     }
     else if (param_2 < 3) {
       if (param_2 != 1) {
         return instrCursor;
       }
-      puVar3 = &_gleNormalizeUByte1RTC;
+      codeChunk = &_gleNormalizeUByte1RTC;
     }
     else if (param_2 == 3) {
-      puVar3 = &_gleNormalizeUByte3RTC;
+      codeChunk = &_gleNormalizeUByte3RTC;
     }
     else {
       if (param_2 != 4) {
         return instrCursor;
       }
-      puVar3 = &_gleNormalizeUByte4RTC;
+      codeChunk = &_gleNormalizeUByte4RTC;
     }
     break;
   case 10:
     if (param_2 == 2) {
-      puVar3 = &_gleNormalizeShort2RTC;
+      codeChunk = &_gleNormalizeShort2RTC;
     }
     else if (param_2 < 3) {
       if (param_2 != 1) {
         return instrCursor;
       }
-      puVar3 = &_gleNormalizeShort1RTC;
+      codeChunk = &_gleNormalizeShort1RTC;
     }
     else if (param_2 == 3) {
-      puVar3 = &_gleNormalizeShort3RTC;
+      codeChunk = &_gleNormalizeShort3RTC;
     }
     else {
       if (param_2 != 4) {
         return instrCursor;
       }
-      puVar3 = &_gleNormalizeShort4RTC;
+      codeChunk = &_gleNormalizeShort4RTC;
     }
     break;
   case 0xb:
     if (param_2 == 2) {
-      puVar3 = &_gleNormalizeUShort2RTC;
+      codeChunk = &_gleNormalizeUShort2RTC;
     }
     else if (param_2 < 3) {
       if (param_2 != 1) {
         return instrCursor;
       }
-      puVar3 = &_gleNormalizeUShort1RTC;
+      codeChunk = &_gleNormalizeUShort1RTC;
     }
     else if (param_2 == 3) {
-      puVar3 = &_gleNormalizeUShort3RTC;
+      codeChunk = &_gleNormalizeUShort3RTC;
     }
     else {
       if (param_2 != 4) {
         return instrCursor;
       }
-      puVar3 = &_gleNormalizeUShort4RTC;
+      codeChunk = &_gleNormalizeUShort4RTC;
     }
     break;
   case 0xc:
     if (param_2 == 2) {
-      puVar3 = &_gleNormalizeInt2RTC;
+      codeChunk = &_gleNormalizeInt2RTC;
     }
     else if (param_2 < 3) {
       if (param_2 != 1) {
         return instrCursor;
       }
-      puVar3 = &_gleNormalizeInt1RTC;
+      codeChunk = &_gleNormalizeInt1RTC;
     }
     else if (param_2 == 3) {
-      puVar3 = &_gleNormalizeInt3RTC;
+      codeChunk = &_gleNormalizeInt3RTC;
     }
     else {
       if (param_2 != 4) {
         return instrCursor;
       }
-      puVar3 = &_gleNormalizeInt4RTC;
+      codeChunk = &_gleNormalizeInt4RTC;
     }
     break;
   case 0xd:
     if (param_2 == 2) {
-      puVar3 = &_gleNormalizeUInt2RTC;
+      codeChunk = &_gleNormalizeUInt2RTC;
     }
     else if (param_2 < 3) {
       if (param_2 != 1) {
         return instrCursor;
       }
-      puVar3 = &_gleNormalizeUInt1RTC;
+      codeChunk = &_gleNormalizeUInt1RTC;
     }
     else if (param_2 == 3) {
-      puVar3 = &_gleNormalizeUInt3RTC;
+      codeChunk = &_gleNormalizeUInt3RTC;
     }
     else {
       if (param_2 != 4) {
         return instrCursor;
       }
-      puVar3 = &_gleNormalizeUInt4RTC;
+      codeChunk = &_gleNormalizeUInt4RTC;
     }
     break;
   default:
     goto switchD_0004e8f4_default;
   }
-  chunkWordCount = _gleRTCAddAChunk_b50a8(puVar3,instrCursor);
+  chunkWordCount = _gleRTCAddAChunk_b50a8(codeChunk,instrCursor);
   instrCursor = instrCursor + chunkWordCount;
 switchD_0004e8f4_default:
   return instrCursor;

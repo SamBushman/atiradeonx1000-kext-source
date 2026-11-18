@@ -1454,11 +1454,13 @@ int _gleBuildProjectionTransformFuncAV(param_1, param_2)
   uint uVar2;
   int iVar3;
   int iVar4;
+  int chunkWordCountThenCodeCursor;
   int chunkWordCount;
-  int iVar5;
+  int chunkWordCountThenCodeCursor2;
   int chunkWordCount2;
   undefined *puVar6;
-  int iVar7;
+  undefined *codeChunk;
+  int chunkWordCountThenCodeCursor3;
   int chunkWordCount3;
   undefined4 uVar8;
   undefined4 *puVar9;
@@ -1507,103 +1509,103 @@ int _gleBuildProjectionTransformFuncAV(param_1, param_2)
       else {
         *(short *)(param_1 + 0x508e) = *(short *)(param_1 + 0x508e) + 1;
       }
-      iVar4 = _gleRTCAddAChunk_c5ddc(&_glePrologAVRTC_10f938,iVar3 + 0x20);
-      iVar4 = iVar3 + 0x20 + iVar4 * 4;
+      chunkWordCountThenCodeCursor = _gleRTCAddAChunk_c5ddc(&_glePrologAVRTC_10f938,iVar3 + 0x20);
+      chunkWordCountThenCodeCursor = iVar3 + 0x20 + chunkWordCountThenCodeCursor * 4;
       if (uVar2 != 0xbfeffbfe) {
-        chunkWordCount2 = _gleRTCAddAChunk_c5ddc(&_gleLoadMatrixPtrRTC_10f758,iVar4);
-        iVar4 = iVar4 + chunkWordCount2 * 4;
+        chunkWordCount2 = _gleRTCAddAChunk_c5ddc(&_gleLoadMatrixPtrRTC_10f758,chunkWordCountThenCodeCursor);
+        chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
         if ((param_2 & 2) == 0) {
-          puVar6 = &_gleLoadMatrixVectorsRTC_10f9d0;
+          codeChunk = &_gleLoadMatrixVectorsRTC_10f9d0;
         }
         else {
-          puVar6 = &_gleLoadMatrixVectorsZ0RTC_10f9f0;
+          codeChunk = &_gleLoadMatrixVectorsZ0RTC_10f9f0;
         }
-        chunkWordCount2 = _gleRTCAddAChunk_c5ddc(puVar6,iVar4);
-        iVar4 = iVar4 + chunkWordCount2 * 4;
+        chunkWordCount2 = _gleRTCAddAChunk_c5ddc(codeChunk,chunkWordCountThenCodeCursor);
+        chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
       }
-      chunkWordCount2 = _gleRTCAddAChunk_c5ddc(&_gleLoadModelOffsetRTC,iVar4);
-      iVar4 = iVar4 + chunkWordCount2 * 4;
+      chunkWordCount2 = _gleRTCAddAChunk_c5ddc(&_gleLoadModelOffsetRTC,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
       if (uVar2 == 0) {
         if ((param_2 & 1) == 0) {
           if ((param_2 & 2) == 0) {
-            puVar6 = &_gleFullMatrixMultRTC_10fa18;
+            codeChunk = &_gleFullMatrixMultRTC_10fa18;
           }
           else {
-            puVar6 = &_gleFullMatrixMultZ0RTC_10fa64;
+            codeChunk = &_gleFullMatrixMultZ0RTC_10fa64;
           }
         }
         else if ((param_2 & 2) == 0) {
-          puVar6 = &_gleFullMatrixMultW1RTC_10faa0;
+          codeChunk = &_gleFullMatrixMultW1RTC_10faa0;
         }
         else {
-          puVar6 = &_gleFullMatrixMultZ0W1RTC_10fadc;
+          codeChunk = &_gleFullMatrixMultZ0W1RTC_10fadc;
         }
       }
       else if (uVar2 == 0x3fcff3fc) {
-        chunkWordCount2 = _gleRTCAddAChunk_c5ddc(&_gleDiagMatrixSetupRTC_10fb08,iVar4);
-        iVar4 = iVar4 + chunkWordCount2 * 4;
-        puVar6 = &_gleDiagMatrixMultRTC_10fb20;
+        chunkWordCount2 = _gleRTCAddAChunk_c5ddc(&_gleDiagMatrixSetupRTC_10fb08,chunkWordCountThenCodeCursor);
+        chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
+        codeChunk = &_gleDiagMatrixMultRTC_10fb20;
       }
       else {
-        puVar6 = &_gleIdentityMatrixMultRTC_10fb34;
+        codeChunk = &_gleIdentityMatrixMultRTC_10fb34;
       }
-      iVar5 = _gleRTCAddAChunk_c5ddc(puVar6,iVar4);
-      iVar5 = iVar4 + iVar5 * 4;
+      chunkWordCountThenCodeCursor2 = _gleRTCAddAChunk_c5ddc(codeChunk,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor + chunkWordCountThenCodeCursor2 * 4;
       if ((param_2 & 8) == 0) {
         if ((param_2 & 4) == 0) {
-          chunkWordCount3 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode0AVRTC,iVar5);
-          iVar5 = iVar5 + chunkWordCount3 * 4;
-          iVar7 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode1AVRTC,iVar5);
-          iVar7 = iVar5 + iVar7 * 4;
-          puVar6 = &_gleCalcClipCode2AVRTC;
+          chunkWordCount3 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode0AVRTC,chunkWordCountThenCodeCursor2);
+          chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount3 * 4;
+          chunkWordCountThenCodeCursor3 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode1AVRTC,chunkWordCountThenCodeCursor2);
+          chunkWordCountThenCodeCursor3 = chunkWordCountThenCodeCursor2 + chunkWordCountThenCodeCursor3 * 4;
+          codeChunk = &_gleCalcClipCode2AVRTC;
         }
         else {
-          chunkWordCount3 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode0W1AVRTC,iVar5);
-          iVar5 = iVar5 + chunkWordCount3 * 4;
-          iVar7 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode1W1AVRTC,iVar5);
-          iVar7 = iVar5 + iVar7 * 4;
-          puVar6 = &_gleCalcClipCode2W1AVRTC;
+          chunkWordCount3 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode0W1AVRTC,chunkWordCountThenCodeCursor2);
+          chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount3 * 4;
+          chunkWordCountThenCodeCursor3 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode1W1AVRTC,chunkWordCountThenCodeCursor2);
+          chunkWordCountThenCodeCursor3 = chunkWordCountThenCodeCursor2 + chunkWordCountThenCodeCursor3 * 4;
+          codeChunk = &_gleCalcClipCode2W1AVRTC;
         }
-        puVar10 = (undefined4 *)(iVar5 + -8);
-        puVar16 = (undefined4 *)(iVar5 + -4);
-        puVar12 = (undefined4 *)(iVar7 + -8);
-        chunkWordCount2 = _gleRTCAddAChunk_c5ddc(puVar6,iVar7);
-        puVar9 = (undefined4 *)(iVar7 + -4);
-        iVar7 = iVar7 + chunkWordCount2 * 4;
-        puVar15 = (undefined4 *)(iVar7 + -8);
-        puVar11 = (undefined4 *)(iVar7 + -4);
-        iVar5 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode3AVRTC,iVar7);
-        iVar5 = iVar7 + iVar5 * 4;
-        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar10,iVar4 - (int)puVar10 >> 2);
+        puVar10 = (undefined4 *)(chunkWordCountThenCodeCursor2 + -8);
+        puVar16 = (undefined4 *)(chunkWordCountThenCodeCursor2 + -4);
+        puVar12 = (undefined4 *)(chunkWordCountThenCodeCursor3 + -8);
+        chunkWordCount2 = _gleRTCAddAChunk_c5ddc(codeChunk,chunkWordCountThenCodeCursor3);
+        puVar9 = (undefined4 *)(chunkWordCountThenCodeCursor3 + -4);
+        chunkWordCountThenCodeCursor3 = chunkWordCountThenCodeCursor3 + chunkWordCount2 * 4;
+        puVar15 = (undefined4 *)(chunkWordCountThenCodeCursor3 + -8);
+        puVar11 = (undefined4 *)(chunkWordCountThenCodeCursor3 + -4);
+        chunkWordCountThenCodeCursor2 = _gleRTCAddAChunk_c5ddc(&_gleCalcClipCode3AVRTC,chunkWordCountThenCodeCursor3);
+        chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor3 + chunkWordCountThenCodeCursor2 * 4;
+        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar10,chunkWordCountThenCodeCursor - (int)puVar10 >> 2);
         *puVar10 = uVar8;
-        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar12,iVar4 - (int)puVar12 >> 2);
+        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar12,chunkWordCountThenCodeCursor - (int)puVar12 >> 2);
         *puVar12 = uVar8;
-        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar15,iVar4 - (int)puVar15 >> 2);
+        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar15,chunkWordCountThenCodeCursor - (int)puVar15 >> 2);
         *puVar15 = uVar8;
-        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar16,iVar5 - (int)puVar16 >> 2);
+        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar16,chunkWordCountThenCodeCursor2 - (int)puVar16 >> 2);
         *puVar16 = uVar8;
-        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar9,iVar5 - (int)puVar9 >> 2);
+        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar9,chunkWordCountThenCodeCursor2 - (int)puVar9 >> 2);
         *puVar9 = uVar8;
-        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar11,iVar5 - (int)puVar11 >> 2);
+        uVar8 = _gleRTCBuildABranch_c5dd0(*puVar11,chunkWordCountThenCodeCursor2 - (int)puVar11 >> 2);
         *puVar11 = uVar8;
       }
       else {
         if ((param_2 & 4) == 0) {
-          puVar6 = &_gleNoClipCodeAVRTC;
+          codeChunk = &_gleNoClipCodeAVRTC;
         }
         else {
-          puVar6 = &_gleNoClipCodeW1AVRTC;
+          codeChunk = &_gleNoClipCodeW1AVRTC;
         }
-        chunkWordCount3 = _gleRTCAddAChunk_c5ddc(puVar6,iVar5);
-        iVar5 = iVar5 + chunkWordCount3 * 4;
+        chunkWordCount3 = _gleRTCAddAChunk_c5ddc(codeChunk,chunkWordCountThenCodeCursor2);
+        chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount3 * 4;
       }
-      puVar16 = (undefined4 *)(iVar5 + -4);
-      uVar8 = _gleRTCBuildABranch_c5dd0(*puVar16,iVar4 - (int)puVar16 >> 2);
+      puVar16 = (undefined4 *)(chunkWordCountThenCodeCursor2 + -4);
+      uVar8 = _gleRTCBuildABranch_c5dd0(*puVar16,chunkWordCountThenCodeCursor - (int)puVar16 >> 2);
       *puVar16 = uVar8;
-      chunkWordCount = _gleRTCAddAChunk_c5ddc(&_gleCombineClipSumsAVRTC,iVar5);
-      iVar5 = iVar5 + chunkWordCount * 4;
-      chunkWordCount = _gleRTCAddAChunk_c5ddc(&_gleEpilogAVRTC_10f9c4,iVar5);
-      puVar16 = (undefined4 *)(iVar5 + chunkWordCount * 4);
+      chunkWordCount = _gleRTCAddAChunk_c5ddc(&_gleCombineClipSumsAVRTC,chunkWordCountThenCodeCursor2);
+      chunkWordCountThenCodeCursor2 = chunkWordCountThenCodeCursor2 + chunkWordCount * 4;
+      chunkWordCount = _gleRTCAddAChunk_c5ddc(&_gleEpilogAVRTC_10f9c4,chunkWordCountThenCodeCursor2);
+      puVar16 = (undefined4 *)(chunkWordCountThenCodeCursor2 + chunkWordCount * 4);
       *puVar16 = 0x4e800020;
       iVar4 = (int)puVar16 + (-0x1c - iVar3) >> 2;
       if (0xb8 < iVar4) {
@@ -1868,10 +1870,12 @@ int _gleBuildInterpolateFunc(glContext, param_2, unusedArg3, unusedArg4, unusedA
   int remaining;
   uint uVar4;
   int iVar5;
+  int chunkWordCountThenCodeCursor;
   int chunkWordCount;
   int *piVar6;
   int chunkWordCount2;
   undefined *puVar8;
+  undefined *codeChunk;
   uint *puVar9;
   uint *srcCursor;
   uint *puVar10;
@@ -1992,21 +1996,21 @@ LAB_00051840:
       *(short *)((int)piVar6 + 6) = *(short *)((int)piVar6 + 6) + 1;
     }
     uVar11 = uVar12 & 1;
-    iVar5 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleStartAVRTC,iVar3 + 0x20);
-    iVar5 = iVar3 + 0x20 + iVar5 * 4;
+    chunkWordCountThenCodeCursor = ((int (*)())_gleRTCAddAChunk_51324)(&_gleStartAVRTC,iVar3 + 0x20);
+    chunkWordCountThenCodeCursor = iVar3 + 0x20 + chunkWordCountThenCodeCursor * 4;
     if (uVar11 != 0) {
-      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleCalculateTAVRTC,iVar5);
-      iVar5 = iVar5 + chunkWordCount2 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleCalculateTAVRTC,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     }
-    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleInterpClip1AVRTC,iVar5);
-    iVar5 = iVar5 + chunkWordCount2 * 4;
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleInterpClip1AVRTC,chunkWordCountThenCodeCursor);
+    chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     if (uVar11 != 0) {
-      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleClipExactWAVRTC,iVar5);
-      iVar5 = iVar5 + chunkWordCount2 * 4;
+      chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleClipExactWAVRTC,chunkWordCountThenCodeCursor);
+      chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     }
     bVar1 = true;
-    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleInterpClip2AVRTC,iVar5);
-    puVar9 = (uint *)(iVar5 + chunkWordCount2 * 4);
+    chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleInterpClip2AVRTC,chunkWordCountThenCodeCursor);
+    puVar9 = (uint *)(chunkWordCountThenCodeCursor + chunkWordCount2 * 4);
     if ((uVar12 & 0x10) != 0) {
       *puVar9 = 0x39200020;
       puVar9 = puVar9 + 1;
@@ -2015,13 +2019,13 @@ LAB_00051840:
         puVar9 = puVar9 + chunkWordCount;
         puVar10 = puVar9 + -1;
         bVar1 = puVar10 == (uint *)0x0;
-        puVar8 = &_gleCopyVecAVRTC;
+        codeChunk = &_gleCopyVecAVRTC;
       }
       else {
-        puVar8 = &_gleInterpVecAVRTC;
+        codeChunk = &_gleInterpVecAVRTC;
         bVar1 = true;
       }
-      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(puVar8,puVar9);
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,puVar9);
       puVar9 = puVar9 + chunkWordCount;
     }
     if ((uVar12 & 0x20) != 0) {
@@ -2034,12 +2038,12 @@ LAB_00051840:
           puVar10 = puVar9 + -1;
           bVar1 = puVar10 == (uint *)0x0;
         }
-        puVar8 = &_gleCopyVecAVRTC;
+        codeChunk = &_gleCopyVecAVRTC;
       }
       else {
-        puVar8 = &_gleInterpVecAVRTC;
+        codeChunk = &_gleInterpVecAVRTC;
       }
-      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(puVar8,puVar9);
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,puVar9);
       puVar9 = puVar9 + chunkWordCount;
     }
     if ((uVar12 & 0x40) != 0) {
@@ -2052,12 +2056,12 @@ LAB_00051840:
           puVar10 = puVar9 + -1;
           bVar1 = puVar10 == (uint *)0x0;
         }
-        puVar8 = &_gleCopyVecAVRTC;
+        codeChunk = &_gleCopyVecAVRTC;
       }
       else {
-        puVar8 = &_gleInterpVecAVRTC;
+        codeChunk = &_gleInterpVecAVRTC;
       }
-      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(puVar8,puVar9);
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,puVar9);
       puVar9 = puVar9 + chunkWordCount;
     }
     if ((uVar12 & 0x100) != 0) {
@@ -2070,12 +2074,12 @@ LAB_00051840:
           puVar10 = puVar9 + -1;
           bVar1 = puVar10 == (uint *)0x0;
         }
-        puVar8 = &_gleCopyVecAVRTC;
+        codeChunk = &_gleCopyVecAVRTC;
       }
       else {
-        puVar8 = &_gleInterpVecAVRTC;
+        codeChunk = &_gleInterpVecAVRTC;
       }
-      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(puVar8,puVar9);
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,puVar9);
       puVar9 = puVar9 + chunkWordCount;
     }
     if ((uVar12 & 0x400) != 0) {
@@ -2103,15 +2107,15 @@ LAB_00051840:
         if ((uVar12 & 0x10000 << (loopIndex2 & 0x3f)) != 0) {
           *puVar15 = loopIndex2 * 0x10 + 0x80 & 0xffff | 0x39200000;
           if ((uVar12 & 4) == 0) {
-            puVar8 = &_gleInterpTexNoDivAVRTC;
+            codeChunk = &_gleInterpTexNoDivAVRTC;
           }
           else if (uVar11 == 0) {
-            puVar8 = &_gleInterpTexTestAVRTC;
+            codeChunk = &_gleInterpTexTestAVRTC;
           }
           else {
-            puVar8 = &_gleInterpTexAVRTC;
+            codeChunk = &_gleInterpTexAVRTC;
           }
-          chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(puVar8,puVar15 + 1);
+          chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,puVar15 + 1);
           puVar15 = puVar15 + 1 + chunkWordCount;
         }
       } while (((int)(loopIndex2 + 1) < 8) &&

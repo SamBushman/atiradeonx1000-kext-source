@@ -1316,103 +1316,107 @@ LAB_00088c48:
 /* _glUniform4fARB_Exec @ 0x88dcc (716 bytes) */
 void _glUniform4fARB_Exec(int glContext,int location,float v0,float v1,float v2,float v3)
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  undefined4 uniformWord1;
   int currentProgram;
-  int iVar5;
-  undefined4 uVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
-  undefined4 uVar10;
-  int iVar11;
-  int iVar12;
+  int typeInfoFound;
+  int rendererSlotOffset;
+  int registerIndexThenOffset;
+  int uniformValueSlot;
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot2;
+  undefined4 uniformWord2;
+  int locationValueOffset;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar13;
+  int rendererRecordCursor2;
   int loopIndex2;
-  undefined4 local_50;
-  int local_4c;
-  undefined2 local_48 [4];
+  undefined4 uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [4];
   
-  local_48[0] = 0;
-  local_4c = 0;
-  local_50 = 0;
+  uniformStageUse[0] = 0;
+  uniformType = 0;
+  uniformSize = 0;
   if (location != -1) {
     if ((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0)) &&
         (location < *(int *)(currentProgram + 0x30))) &&
-       ((iVar5 = _ShGetUniformTypeInfo
-                           (*(undefined4 *)(currentProgram + 0x40),location,&local_50,&local_4c,local_48),
-        iVar5 != 0 && ((local_4c == 0x8b52 || (local_4c == 0x8b59)))))) {
-      if (local_4c == 0x8b52) {
-        iVar5 = *(int *)(currentProgram + 0x4c) + location * 0x10;
+       ((typeInfoFound = _ShGetUniformTypeInfo
+                           (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+        typeInfoFound != 0 && ((uniformType == 0x8b52 || (uniformType == 0x8b59)))))) {
+      if (uniformType == 0x8b52) {
+        uniformValueSlot = *(int *)(currentProgram + 0x4c) + location * 0x10;
         *(float *)(*(int *)(currentProgram + 0x4c) + location * 0x10) = (float)v0;
-        *(float *)(iVar5 + 0xc) = (float)v3;
-        *(float *)(iVar5 + 4) = (float)v1;
-        *(float *)(iVar5 + 8) = (float)v2;
+        *(float *)(uniformValueSlot + 0xc) = (float)v3;
+        *(float *)(uniformValueSlot + 4) = (float)v1;
+        *(float *)(uniformValueSlot + 8) = (float)v2;
       }
       else {
-        iVar5 = *(int *)(currentProgram + 0x4c) + location * 0x10;
+        uniformValueSlot = *(int *)(currentProgram + 0x4c) + location * 0x10;
         *(uint *)(*(int *)(currentProgram + 0x4c) + location * 0x10) =
              (uint)(v0 != (double)FLOAT_00108e50);
-        *(uint *)(iVar5 + 4) = (uint)(v1 != (double)FLOAT_00108e50);
-        *(uint *)(iVar5 + 8) = (uint)(v2 != (double)FLOAT_00108e50);
-        *(uint *)(iVar5 + 0xc) = (uint)(v3 != (double)FLOAT_00108e50);
+        *(uint *)(uniformValueSlot + 4) = (uint)(v1 != (double)FLOAT_00108e50);
+        *(uint *)(uniformValueSlot + 8) = (uint)(v2 != (double)FLOAT_00108e50);
+        *(uint *)(uniformValueSlot + 0xc) = (uint)(v3 != (double)FLOAT_00108e50);
       }
-      iVar11 = location * 0x10;
+      locationValueOffset = location * 0x10;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-      iVar8 = *(int *)(currentProgram + 0x20);
-      iVar5 = *(int *)(location * 4 + *(int *)(iVar8 + 0x4e0));
-      if (iVar5 != -1) {
-        iVar5 = iVar5 * 0x10;
-        iVar7 = *(int *)(iVar8 + 0x51c);
-        iVar12 = glContext + 0x10000;
-        iVar9 = iVar11 + *(int *)(currentProgram + 0x4c);
-        uVar3 = *(undefined4 *)(iVar9 + 4);
-        iVar8 = iVar5 + iVar7;
-        uVar6 = *(undefined4 *)(iVar9 + 0xc);
+      stage0Record = *(int *)(currentProgram + 0x20);
+      registerIndexThenOffset = *(int *)(location * 4 + *(int *)(stage0Record + 0x4e0));
+      if (registerIndexThenOffset != -1) {
+        registerIndexThenOffset = registerIndexThenOffset * 0x10;
+        constantRegisterFile = *(int *)(stage0Record + 0x51c);
+        rendererRecordCursor = glContext + 0x10000;
+        uniformValueSlot2 = locationValueOffset + *(int *)(currentProgram + 0x4c);
+        uniformWord1 = *(undefined4 *)(uniformValueSlot2 + 4);
+        constantRegister = registerIndexThenOffset + constantRegisterFile;
+        uniformWord3 = *(undefined4 *)(uniformValueSlot2 + 0xc);
         loopIndex2 = 0;
-        uVar10 = *(undefined4 *)(iVar9 + 8);
-        *(undefined4 *)(iVar5 + iVar7) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-        *(undefined4 *)(iVar8 + 0xc) = uVar6;
-        *(undefined4 *)(iVar8 + 4) = uVar3;
-        *(undefined4 *)(iVar8 + 8) = uVar10;
+        uniformWord2 = *(undefined4 *)(uniformValueSlot2 + 8);
+        *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+        *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+        *(undefined4 *)(constantRegister + 4) = uniformWord1;
+        *(undefined4 *)(constantRegister + 8) = uniformWord2;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar1 = (int *)(iVar12 + -0x777c);
-            iVar5 = loopIndex2 * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+            rendererSlotOffset = loopIndex2 * 4;
             loopIndex2 = loopIndex2 + 1;
-            puVar2 = (undefined4 *)(iVar12 + -0x7a54);
-            iVar12 = iVar12 + 0x2e0;
-            (**(code **)(*piVar1 + 0x194))
-                      (*puVar2,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+            rendererRecordCursor = rendererRecordCursor + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
           } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      iVar5 = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-      if (iVar5 != -1) {
-        iVar5 = iVar5 * 0x10;
-        iVar7 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-        iVar13 = glContext + 0x10000;
-        iVar9 = iVar11 + *(int *)(currentProgram + 0x4c);
-        uVar3 = *(undefined4 *)(iVar9 + 4);
-        iVar8 = iVar5 + iVar7;
-        uVar6 = *(undefined4 *)(iVar9 + 0xc);
+      registerIndexThenOffset = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+      if (registerIndexThenOffset != -1) {
+        registerIndexThenOffset = registerIndexThenOffset * 0x10;
+        constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+        rendererRecordCursor2 = glContext + 0x10000;
+        uniformValueSlot2 = locationValueOffset + *(int *)(currentProgram + 0x4c);
+        uniformWord1 = *(undefined4 *)(uniformValueSlot2 + 4);
+        constantRegister = registerIndexThenOffset + constantRegisterFile;
+        uniformWord3 = *(undefined4 *)(uniformValueSlot2 + 0xc);
         loopIndex = 0;
-        uVar10 = *(undefined4 *)(iVar9 + 8);
-        *(undefined4 *)(iVar5 + iVar7) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-        *(undefined4 *)(iVar8 + 0xc) = uVar6;
-        *(undefined4 *)(iVar8 + 4) = uVar3;
-        *(undefined4 *)(iVar8 + 8) = uVar10;
+        uniformWord2 = *(undefined4 *)(uniformValueSlot2 + 8);
+        *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+        *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+        *(undefined4 *)(constantRegister + 4) = uniformWord1;
+        *(undefined4 *)(constantRegister + 8) = uniformWord2;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar1 = (int *)(iVar13 + -0x777c);
-            iVar5 = loopIndex * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor2 + -0x777c);
+            rendererSlotOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
-            puVar2 = (undefined4 *)(iVar13 + -0x7a54);
-            iVar13 = iVar13 + 0x2e0;
-            (**(code **)(*piVar1 + 0x194))
-                      (*puVar2,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor2 + -0x7a54);
+            rendererRecordCursor2 = rendererRecordCursor2 + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
@@ -1427,101 +1431,105 @@ void _glUniform4fARB_Exec(int glContext,int location,float v0,float v1,float v2,
 /* _glUniform3fARB_Exec @ 0x89098 (712 bytes) */
 void _glUniform3fARB_Exec(int glContext,int location,float v0,float v1,float v2)
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  undefined4 uniformWord1;
   int currentProgram;
-  int iVar5;
-  undefined4 uVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
-  undefined4 uVar10;
-  int iVar11;
-  int iVar12;
+  int typeInfoFound;
+  int rendererSlotOffset;
+  int registerIndexThenOffset;
+  int uniformValueSlot;
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot2;
+  undefined4 uniformWord2;
+  int locationValueOffset;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar13;
+  int rendererRecordCursor2;
   int loopIndex2;
-  undefined4 local_50;
-  int local_4c;
-  undefined2 local_48 [8];
+  undefined4 uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [8];
   
-  local_48[0] = 0;
-  local_4c = 0;
-  local_50 = 0;
+  uniformStageUse[0] = 0;
+  uniformType = 0;
+  uniformSize = 0;
   if (location != -1) {
     if ((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0)) &&
         (location < *(int *)(currentProgram + 0x30))) &&
-       ((iVar5 = _ShGetUniformTypeInfo
-                           (*(undefined4 *)(currentProgram + 0x40),location,&local_50,&local_4c,local_48),
-        iVar5 != 0 && ((local_4c == 0x8b51 || (local_4c == 0x8b58)))))) {
-      if (local_4c == 0x8b51) {
-        iVar5 = *(int *)(currentProgram + 0x4c) + location * 0x10;
+       ((typeInfoFound = _ShGetUniformTypeInfo
+                           (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+        typeInfoFound != 0 && ((uniformType == 0x8b51 || (uniformType == 0x8b58)))))) {
+      if (uniformType == 0x8b51) {
+        uniformValueSlot = *(int *)(currentProgram + 0x4c) + location * 0x10;
         *(float *)(*(int *)(currentProgram + 0x4c) + location * 0x10) = (float)v0;
-        *(float *)(iVar5 + 8) = (float)v2;
-        *(float *)(iVar5 + 4) = (float)v1;
+        *(float *)(uniformValueSlot + 8) = (float)v2;
+        *(float *)(uniformValueSlot + 4) = (float)v1;
       }
       else {
-        iVar5 = *(int *)(currentProgram + 0x4c) + location * 0x10;
+        uniformValueSlot = *(int *)(currentProgram + 0x4c) + location * 0x10;
         *(uint *)(*(int *)(currentProgram + 0x4c) + location * 0x10) =
              (uint)(v0 != (double)FLOAT_00108e50);
-        *(uint *)(iVar5 + 4) = (uint)(v1 != (double)FLOAT_00108e50);
-        *(uint *)(iVar5 + 8) = (uint)(v2 != (double)FLOAT_00108e50);
+        *(uint *)(uniformValueSlot + 4) = (uint)(v1 != (double)FLOAT_00108e50);
+        *(uint *)(uniformValueSlot + 8) = (uint)(v2 != (double)FLOAT_00108e50);
       }
-      iVar11 = location * 0x10;
+      locationValueOffset = location * 0x10;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-      iVar8 = *(int *)(currentProgram + 0x20);
-      iVar5 = *(int *)(location * 4 + *(int *)(iVar8 + 0x4e0));
-      if (iVar5 != -1) {
-        iVar5 = iVar5 * 0x10;
-        iVar7 = *(int *)(iVar8 + 0x51c);
-        iVar12 = glContext + 0x10000;
-        iVar9 = iVar11 + *(int *)(currentProgram + 0x4c);
-        uVar3 = *(undefined4 *)(iVar9 + 4);
-        iVar8 = iVar5 + iVar7;
-        uVar6 = *(undefined4 *)(iVar9 + 0xc);
+      stage0Record = *(int *)(currentProgram + 0x20);
+      registerIndexThenOffset = *(int *)(location * 4 + *(int *)(stage0Record + 0x4e0));
+      if (registerIndexThenOffset != -1) {
+        registerIndexThenOffset = registerIndexThenOffset * 0x10;
+        constantRegisterFile = *(int *)(stage0Record + 0x51c);
+        rendererRecordCursor = glContext + 0x10000;
+        uniformValueSlot2 = locationValueOffset + *(int *)(currentProgram + 0x4c);
+        uniformWord1 = *(undefined4 *)(uniformValueSlot2 + 4);
+        constantRegister = registerIndexThenOffset + constantRegisterFile;
+        uniformWord3 = *(undefined4 *)(uniformValueSlot2 + 0xc);
         loopIndex2 = 0;
-        uVar10 = *(undefined4 *)(iVar9 + 8);
-        *(undefined4 *)(iVar5 + iVar7) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-        *(undefined4 *)(iVar8 + 0xc) = uVar6;
-        *(undefined4 *)(iVar8 + 4) = uVar3;
-        *(undefined4 *)(iVar8 + 8) = uVar10;
+        uniformWord2 = *(undefined4 *)(uniformValueSlot2 + 8);
+        *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+        *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+        *(undefined4 *)(constantRegister + 4) = uniformWord1;
+        *(undefined4 *)(constantRegister + 8) = uniformWord2;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar1 = (int *)(iVar12 + -0x777c);
-            iVar5 = loopIndex2 * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+            rendererSlotOffset = loopIndex2 * 4;
             loopIndex2 = loopIndex2 + 1;
-            puVar2 = (undefined4 *)(iVar12 + -0x7a54);
-            iVar12 = iVar12 + 0x2e0;
-            (**(code **)(*piVar1 + 0x194))
-                      (*puVar2,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+            rendererRecordCursor = rendererRecordCursor + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
           } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      iVar5 = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-      if (iVar5 != -1) {
-        iVar5 = iVar5 * 0x10;
-        iVar7 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-        iVar13 = glContext + 0x10000;
-        iVar9 = iVar11 + *(int *)(currentProgram + 0x4c);
-        uVar3 = *(undefined4 *)(iVar9 + 4);
-        iVar8 = iVar5 + iVar7;
-        uVar6 = *(undefined4 *)(iVar9 + 0xc);
+      registerIndexThenOffset = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+      if (registerIndexThenOffset != -1) {
+        registerIndexThenOffset = registerIndexThenOffset * 0x10;
+        constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+        rendererRecordCursor2 = glContext + 0x10000;
+        uniformValueSlot2 = locationValueOffset + *(int *)(currentProgram + 0x4c);
+        uniformWord1 = *(undefined4 *)(uniformValueSlot2 + 4);
+        constantRegister = registerIndexThenOffset + constantRegisterFile;
+        uniformWord3 = *(undefined4 *)(uniformValueSlot2 + 0xc);
         loopIndex = 0;
-        uVar10 = *(undefined4 *)(iVar9 + 8);
-        *(undefined4 *)(iVar5 + iVar7) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-        *(undefined4 *)(iVar8 + 0xc) = uVar6;
-        *(undefined4 *)(iVar8 + 4) = uVar3;
-        *(undefined4 *)(iVar8 + 8) = uVar10;
+        uniformWord2 = *(undefined4 *)(uniformValueSlot2 + 8);
+        *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+        *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+        *(undefined4 *)(constantRegister + 4) = uniformWord1;
+        *(undefined4 *)(constantRegister + 8) = uniformWord2;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar1 = (int *)(iVar13 + -0x777c);
-            iVar5 = loopIndex * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor2 + -0x777c);
+            rendererSlotOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
-            puVar2 = (undefined4 *)(iVar13 + -0x7a54);
-            iVar13 = iVar13 + 0x2e0;
-            (**(code **)(*piVar1 + 0x194))
-                      (*puVar2,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor2 + -0x7a54);
+            rendererRecordCursor2 = rendererRecordCursor2 + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
@@ -1536,35 +1544,39 @@ void _glUniform3fARB_Exec(int glContext,int location,float v0,float v1,float v2)
 /* _glUniform2fARB_Exec @ 0x89360 (668 bytes) */
 void _glUniform2fARB_Exec(int glContext,int location,float v0,float v1)
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  undefined4 uniformWord1;
   int currentProgram;
   int iVar5;
-  undefined4 uVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
-  undefined4 uVar10;
-  int iVar11;
-  int iVar12;
+  int rendererSlotOffset;
+  int registerIndexThenOffset;
+  int typeInfoFound;
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int locationValueOffset;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar13;
+  int rendererRecordCursor2;
   int loopIndex2;
-  undefined4 local_40;
-  int local_3c;
-  undefined2 local_38 [4];
+  undefined4 uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [4];
   
-  local_38[0] = 0;
-  local_3c = 0;
-  local_40 = 0;
+  uniformStageUse[0] = 0;
+  uniformType = 0;
+  uniformSize = 0;
   if (location != -1) {
     if ((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0)) &&
         (location < *(int *)(currentProgram + 0x30))) &&
-       ((iVar5 = _ShGetUniformTypeInfo
-                           (*(undefined4 *)(currentProgram + 0x40),location,&local_40,&local_3c,local_38),
-        iVar5 != 0 && ((local_3c == 0x8b50 || (local_3c == 0x8b57)))))) {
-      if (local_3c == 0x8b50) {
+       ((typeInfoFound = _ShGetUniformTypeInfo
+                           (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+        typeInfoFound != 0 && ((uniformType == 0x8b50 || (uniformType == 0x8b57)))))) {
+      if (uniformType == 0x8b50) {
         iVar5 = *(int *)(currentProgram + 0x4c);
         *(float *)(iVar5 + location * 0x10) = (float)v0;
         *(float *)(iVar5 + location * 0x10 + 4) = (float)v1;
@@ -1574,60 +1586,60 @@ void _glUniform2fARB_Exec(int glContext,int location,float v0,float v1)
         *(uint *)(iVar5 + location * 0x10) = (uint)(v0 != (double)FLOAT_00108e50);
         *(uint *)(iVar5 + location * 0x10 + 4) = (uint)(v1 != (double)FLOAT_00108e50);
       }
-      iVar11 = location * 0x10;
+      locationValueOffset = location * 0x10;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-      iVar8 = *(int *)(currentProgram + 0x20);
-      iVar5 = *(int *)(location * 4 + *(int *)(iVar8 + 0x4e0));
-      if (iVar5 != -1) {
-        iVar5 = iVar5 * 0x10;
-        iVar7 = *(int *)(iVar8 + 0x51c);
-        iVar12 = glContext + 0x10000;
-        iVar9 = iVar11 + *(int *)(currentProgram + 0x4c);
-        uVar3 = *(undefined4 *)(iVar9 + 4);
-        iVar8 = iVar5 + iVar7;
-        uVar6 = *(undefined4 *)(iVar9 + 0xc);
+      stage0Record = *(int *)(currentProgram + 0x20);
+      registerIndexThenOffset = *(int *)(location * 4 + *(int *)(stage0Record + 0x4e0));
+      if (registerIndexThenOffset != -1) {
+        registerIndexThenOffset = registerIndexThenOffset * 0x10;
+        constantRegisterFile = *(int *)(stage0Record + 0x51c);
+        rendererRecordCursor = glContext + 0x10000;
+        uniformValueSlot = locationValueOffset + *(int *)(currentProgram + 0x4c);
+        uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+        constantRegister = registerIndexThenOffset + constantRegisterFile;
+        uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
         loopIndex2 = 0;
-        uVar10 = *(undefined4 *)(iVar9 + 8);
-        *(undefined4 *)(iVar5 + iVar7) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-        *(undefined4 *)(iVar8 + 0xc) = uVar6;
-        *(undefined4 *)(iVar8 + 4) = uVar3;
-        *(undefined4 *)(iVar8 + 8) = uVar10;
+        uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+        *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+        *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+        *(undefined4 *)(constantRegister + 4) = uniformWord1;
+        *(undefined4 *)(constantRegister + 8) = uniformWord2;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar1 = (int *)(iVar12 + -0x777c);
-            iVar5 = loopIndex2 * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+            rendererSlotOffset = loopIndex2 * 4;
             loopIndex2 = loopIndex2 + 1;
-            puVar2 = (undefined4 *)(iVar12 + -0x7a54);
-            iVar12 = iVar12 + 0x2e0;
-            (**(code **)(*piVar1 + 0x194))
-                      (*puVar2,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+            rendererRecordCursor = rendererRecordCursor + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
           } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      iVar5 = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-      if (iVar5 != -1) {
-        iVar5 = iVar5 * 0x10;
-        iVar7 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-        iVar13 = glContext + 0x10000;
-        iVar9 = iVar11 + *(int *)(currentProgram + 0x4c);
-        uVar3 = *(undefined4 *)(iVar9 + 4);
-        iVar8 = iVar5 + iVar7;
-        uVar6 = *(undefined4 *)(iVar9 + 0xc);
+      registerIndexThenOffset = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+      if (registerIndexThenOffset != -1) {
+        registerIndexThenOffset = registerIndexThenOffset * 0x10;
+        constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+        rendererRecordCursor2 = glContext + 0x10000;
+        uniformValueSlot = locationValueOffset + *(int *)(currentProgram + 0x4c);
+        uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+        constantRegister = registerIndexThenOffset + constantRegisterFile;
+        uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
         loopIndex = 0;
-        uVar10 = *(undefined4 *)(iVar9 + 8);
-        *(undefined4 *)(iVar5 + iVar7) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-        *(undefined4 *)(iVar8 + 0xc) = uVar6;
-        *(undefined4 *)(iVar8 + 4) = uVar3;
-        *(undefined4 *)(iVar8 + 8) = uVar10;
+        uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+        *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+        *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+        *(undefined4 *)(constantRegister + 4) = uniformWord1;
+        *(undefined4 *)(constantRegister + 8) = uniformWord2;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar1 = (int *)(iVar13 + -0x777c);
-            iVar5 = loopIndex * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor2 + -0x777c);
+            rendererSlotOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
-            puVar2 = (undefined4 *)(iVar13 + -0x7a54);
-            iVar13 = iVar13 + 0x2e0;
-            (**(code **)(*piVar1 + 0x194))
-                      (*puVar2,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor2 + -0x7a54);
+            rendererRecordCursor2 = rendererRecordCursor2 + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
@@ -1642,95 +1654,98 @@ void _glUniform2fARB_Exec(int glContext,int location,float v0,float v1)
 /* _glUniform1fARB_Exec @ 0x895fc (600 bytes) */
 void _glUniform1fARB_Exec(int glContext,int location,float v0)
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  undefined4 uniformWord1;
   int currentProgram;
-  int iVar5;
-  undefined4 uVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
-  undefined4 uVar10;
-  int iVar11;
-  int iVar12;
+  int typeInfoFound;
+  int rendererSlotOffset;
+  int registerIndexThenOffset;
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int locationValueOffset;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar13;
+  int rendererRecordCursor2;
   int loopIndex2;
-  undefined4 local_40;
-  int local_3c;
-  undefined2 local_38 [8];
+  undefined4 uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [8];
   
-  local_38[0] = 0;
-  local_3c = 0;
-  local_40 = 0;
+  uniformStageUse[0] = 0;
+  uniformType = 0;
+  uniformSize = 0;
   if (location != -1) {
     if ((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0)) &&
         (location < *(int *)(currentProgram + 0x30))) &&
-       ((iVar5 = _ShGetUniformTypeInfo
-                           (*(undefined4 *)(currentProgram + 0x40),location,&local_40,&local_3c,local_38),
-        iVar5 != 0 && ((local_3c == 0x1406 || (local_3c == 0x8b56)))))) {
-      if (local_3c == 0x1406) {
+       ((typeInfoFound = _ShGetUniformTypeInfo
+                           (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+        typeInfoFound != 0 && ((uniformType == 0x1406 || (uniformType == 0x8b56)))))) {
+      if (uniformType == 0x1406) {
         *(float *)(*(int *)(currentProgram + 0x4c) + location * 0x10) = (float)v0;
       }
       else {
         *(uint *)(*(int *)(currentProgram + 0x4c) + location * 0x10) =
              (uint)(v0 != (double)FLOAT_00108e50);
       }
-      iVar11 = location * 0x10;
+      locationValueOffset = location * 0x10;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-      iVar8 = *(int *)(currentProgram + 0x20);
-      iVar5 = *(int *)(location * 4 + *(int *)(iVar8 + 0x4e0));
-      if (iVar5 != -1) {
-        iVar5 = iVar5 * 0x10;
-        iVar7 = *(int *)(iVar8 + 0x51c);
-        iVar12 = glContext + 0x10000;
-        iVar9 = iVar11 + *(int *)(currentProgram + 0x4c);
-        uVar3 = *(undefined4 *)(iVar9 + 4);
-        iVar8 = iVar5 + iVar7;
-        uVar6 = *(undefined4 *)(iVar9 + 0xc);
+      stage0Record = *(int *)(currentProgram + 0x20);
+      registerIndexThenOffset = *(int *)(location * 4 + *(int *)(stage0Record + 0x4e0));
+      if (registerIndexThenOffset != -1) {
+        registerIndexThenOffset = registerIndexThenOffset * 0x10;
+        constantRegisterFile = *(int *)(stage0Record + 0x51c);
+        rendererRecordCursor = glContext + 0x10000;
+        uniformValueSlot = locationValueOffset + *(int *)(currentProgram + 0x4c);
+        uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+        constantRegister = registerIndexThenOffset + constantRegisterFile;
+        uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
         loopIndex2 = 0;
-        uVar10 = *(undefined4 *)(iVar9 + 8);
-        *(undefined4 *)(iVar5 + iVar7) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-        *(undefined4 *)(iVar8 + 0xc) = uVar6;
-        *(undefined4 *)(iVar8 + 4) = uVar3;
-        *(undefined4 *)(iVar8 + 8) = uVar10;
+        uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+        *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+        *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+        *(undefined4 *)(constantRegister + 4) = uniformWord1;
+        *(undefined4 *)(constantRegister + 8) = uniformWord2;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar1 = (int *)(iVar12 + -0x777c);
-            iVar5 = loopIndex2 * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+            rendererSlotOffset = loopIndex2 * 4;
             loopIndex2 = loopIndex2 + 1;
-            puVar2 = (undefined4 *)(iVar12 + -0x7a54);
-            iVar12 = iVar12 + 0x2e0;
-            (**(code **)(*piVar1 + 0x194))
-                      (*puVar2,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+            rendererRecordCursor = rendererRecordCursor + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
           } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      iVar5 = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-      if (iVar5 != -1) {
-        iVar5 = iVar5 * 0x10;
-        iVar7 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-        iVar13 = glContext + 0x10000;
-        iVar9 = iVar11 + *(int *)(currentProgram + 0x4c);
-        uVar3 = *(undefined4 *)(iVar9 + 4);
-        iVar8 = iVar5 + iVar7;
-        uVar6 = *(undefined4 *)(iVar9 + 0xc);
+      registerIndexThenOffset = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+      if (registerIndexThenOffset != -1) {
+        registerIndexThenOffset = registerIndexThenOffset * 0x10;
+        constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+        rendererRecordCursor2 = glContext + 0x10000;
+        uniformValueSlot = locationValueOffset + *(int *)(currentProgram + 0x4c);
+        uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+        constantRegister = registerIndexThenOffset + constantRegisterFile;
+        uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
         loopIndex = 0;
-        uVar10 = *(undefined4 *)(iVar9 + 8);
-        *(undefined4 *)(iVar5 + iVar7) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-        *(undefined4 *)(iVar8 + 0xc) = uVar6;
-        *(undefined4 *)(iVar8 + 4) = uVar3;
-        *(undefined4 *)(iVar8 + 8) = uVar10;
+        uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+        *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+        *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+        *(undefined4 *)(constantRegister + 4) = uniformWord1;
+        *(undefined4 *)(constantRegister + 8) = uniformWord2;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar1 = (int *)(iVar13 + -0x777c);
-            iVar5 = loopIndex * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor2 + -0x777c);
+            rendererSlotOffset = loopIndex * 4;
             loopIndex = loopIndex + 1;
-            puVar2 = (undefined4 *)(iVar13 + -0x7a54);
-            iVar13 = iVar13 + 0x2e0;
-            (**(code **)(*piVar1 + 0x194))
-                      (*puVar2,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor2 + -0x7a54);
+            rendererRecordCursor2 = rendererRecordCursor2 + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
@@ -1749,167 +1764,171 @@ void _glUniform4fvARB_Exec(glContext, location, count, value)
   int count;
   float *value;
 {
-  float *pfVar1;
-  int *piVar2;
-  bool bVar3;
-  bool bVar4;
-  float fVar5;
-  undefined4 uVar6;
+  float *srcLastElement;
+  int *rendererCallbacks;
+  bool stage0Updated;
+  bool stage1Updated;
+  float floatZero;
+  undefined4 uniformWord1;
   int currentProgram;
-  float *pfVar8;
-  undefined4 *puVar9;
-  int iVar10;
+  float *dstCursor;
+  undefined4 *dstCursor2;
+  undefined4 *rendererHandlePtr;
+  int typeInfoFound;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar11;
-  int iVar12;
+  int elementValueOffset;
+  int rendererSlotOffset;
+  int elementMapOffset;
   int loopIndex2;
-  undefined4 uVar13;
-  int iVar14;
-  int iVar15;
-  int iVar16;
-  undefined4 uVar17;
-  int iVar18;
-  int local_30;
-  int local_2c;
-  undefined2 local_28 [4];
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int registerIndexThenOffset;
+  int uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [4];
   
-  local_2c = 0;
-  local_28[0] = 0;
-  local_30 = 0;
-  bVar3 = false;
-  bVar4 = false;
+  uniformType = 0;
+  uniformStageUse[0] = 0;
+  uniformSize = 0;
+  stage0Updated = false;
+  stage1Updated = false;
   if (location != -1) {
     if ((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0)) &&
         (location < *(int *)(currentProgram + 0x30))) &&
        (((-1 < count &&
-         (iVar10 = _ShGetUniformTypeInfo
-                             (*(undefined4 *)(currentProgram + 0x40),location,&local_30,&local_2c,local_28),
-         fVar5 = FLOAT_00108e50, iVar10 != 0)) && ((local_2c == 0x8b52 || (local_2c == 0x8b59))))))
+         (typeInfoFound = _ShGetUniformTypeInfo
+                             (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+         floatZero = FLOAT_00108e50, typeInfoFound != 0)) && ((uniformType == 0x8b52 || (uniformType == 0x8b59))))))
     {
       if (count != 0) {
-        if (count < local_30) {
-          local_30 = count;
+        if (count < uniformSize) {
+          uniformSize = count;
         }
-        if (local_2c == 0x8b52) {
+        if (uniformType == 0x8b52) {
           loopIndex = 0;
-          pfVar8 = (float *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-          if (0 < local_30) {
+          dstCursor = (float *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
+          if (0 < uniformSize) {
             do {
               loopIndex = loopIndex + 1;
-              *pfVar8 = *value;
-              pfVar8[1] = value[1];
-              pfVar8[2] = value[2];
-              pfVar1 = value + 3;
+              *dstCursor = *value;
+              dstCursor[1] = value[1];
+              dstCursor[2] = value[2];
+              srcLastElement = value + 3;
               value = value + 4;
-              pfVar8[3] = *pfVar1;
-              pfVar8 = pfVar8 + 4;
-            } while (loopIndex < local_30);
+              dstCursor[3] = *srcLastElement;
+              dstCursor = dstCursor + 4;
+            } while (loopIndex < uniformSize);
           }
         }
         else {
           loopIndex = 0;
-          puVar9 = (undefined4 *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-          if (0 < local_30) {
+          dstCursor2 = (undefined4 *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
+          if (0 < uniformSize) {
             do {
-              if (*value == fVar5) {
-                *puVar9 = 0;
+              if (*value == floatZero) {
+                *dstCursor2 = 0;
               }
               else {
-                *puVar9 = 1;
+                *dstCursor2 = 1;
               }
-              if (value[1] == fVar5) {
-                puVar9[1] = 0;
-              }
-              else {
-                puVar9[1] = 1;
-              }
-              if (value[2] == fVar5) {
-                puVar9[2] = 0;
+              if (value[1] == floatZero) {
+                dstCursor2[1] = 0;
               }
               else {
-                puVar9[2] = 1;
+                dstCursor2[1] = 1;
               }
-              if (value[3] == fVar5) {
-                puVar9[3] = 0;
+              if (value[2] == floatZero) {
+                dstCursor2[2] = 0;
               }
               else {
-                puVar9[3] = 1;
+                dstCursor2[2] = 1;
+              }
+              if (value[3] == floatZero) {
+                dstCursor2[3] = 0;
+              }
+              else {
+                dstCursor2[3] = 1;
               }
               loopIndex = loopIndex + 1;
-              puVar9 = puVar9 + 4;
+              dstCursor2 = dstCursor2 + 4;
               value = value + 4;
-            } while (loopIndex < local_30);
+            } while (loopIndex < uniformSize);
           }
         }
         loopIndex = 0;
-        if (0 < local_30) {
-          iVar12 = location << 2;
-          iVar11 = location << 4;
+        if (0 < uniformSize) {
+          elementMapOffset = location << 2;
+          elementValueOffset = location << 4;
           do {
-            iVar15 = *(int *)(currentProgram + 0x20);
-            iVar18 = *(int *)(iVar12 + *(int *)(iVar15 + 0x4e0));
-            if (iVar18 != -1) {
-              iVar18 = iVar18 * 0x10;
-              iVar14 = *(int *)(iVar15 + 0x51c);
-              bVar3 = true;
-              iVar16 = iVar11 + *(int *)(currentProgram + 0x4c);
-              uVar13 = *(undefined4 *)(iVar16 + 0xc);
-              iVar15 = iVar18 + iVar14;
-              uVar6 = *(undefined4 *)(iVar16 + 4);
-              uVar17 = *(undefined4 *)(iVar16 + 8);
-              *(undefined4 *)(iVar18 + iVar14) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar15 + 0xc) = uVar13;
-              *(undefined4 *)(iVar15 + 4) = uVar6;
-              *(undefined4 *)(iVar15 + 8) = uVar17;
+            stage0Record = *(int *)(currentProgram + 0x20);
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(stage0Record + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(stage0Record + 0x51c);
+              stage0Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
-            iVar18 = *(int *)(iVar12 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-            if (iVar18 != -1) {
-              iVar18 = iVar18 * 0x10;
-              iVar14 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-              bVar4 = true;
-              iVar16 = iVar11 + *(int *)(currentProgram + 0x4c);
-              uVar13 = *(undefined4 *)(iVar16 + 0xc);
-              iVar15 = iVar18 + iVar14;
-              uVar6 = *(undefined4 *)(iVar16 + 4);
-              uVar17 = *(undefined4 *)(iVar16 + 8);
-              *(undefined4 *)(iVar18 + iVar14) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar15 + 0xc) = uVar13;
-              *(undefined4 *)(iVar15 + 4) = uVar6;
-              *(undefined4 *)(iVar15 + 8) = uVar17;
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+              stage1Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
             loopIndex = loopIndex + 1;
-            iVar12 = iVar12 + 4;
-            iVar11 = iVar11 + 0x10;
-          } while (loopIndex < local_30);
+            elementMapOffset = elementMapOffset + 4;
+            elementValueOffset = elementValueOffset + 0x10;
+          } while (loopIndex < uniformSize);
         }
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-        if (bVar3) {
-          iVar10 = glContext + 0x10000;
+        if (stage0Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex2 = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar2 = (int *)(iVar10 + -0x777c);
-              iVar11 = loopIndex2 * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex2 * 4;
               loopIndex2 = loopIndex2 + 1;
-              puVar9 = (undefined4 *)(iVar10 + -0x7a54);
-              iVar10 = iVar10 + 0x2e0;
-              (**(code **)(*piVar2 + 0x194))
-                        (*puVar9,*(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
             } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
-        if (bVar4) {
-          iVar10 = glContext + 0x10000;
+        if (stage1Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex2 = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar2 = (int *)(iVar10 + -0x777c);
-              iVar11 = loopIndex2 * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex2 * 4;
               loopIndex2 = loopIndex2 + 1;
-              puVar9 = (undefined4 *)(iVar10 + -0x7a54);
-              iVar10 = iVar10 + 0x2e0;
-              (**(code **)(*piVar2 + 0x194))
-                        (*puVar9,*(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
             } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
@@ -1929,160 +1948,164 @@ void _glUniform3fvARB_Exec(glContext, location, count, value)
   int count;
   float *value;
 {
-  float *pfVar1;
-  int *piVar2;
-  bool bVar3;
-  bool bVar4;
-  float fVar5;
-  undefined4 uVar6;
+  float *srcLastElement;
+  int *rendererCallbacks;
+  bool stage0Updated;
+  bool stage1Updated;
+  float floatZero;
+  undefined4 uniformWord1;
   int currentProgram;
-  float *pfVar8;
-  undefined4 *puVar9;
-  int iVar10;
+  float *dstCursor;
+  undefined4 *dstCursor2;
+  undefined4 *rendererHandlePtr;
+  int typeInfoFound;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar11;
-  int iVar12;
+  int elementValueOffset;
+  int rendererSlotOffset;
+  int elementMapOffset;
   int loopIndex2;
-  undefined4 uVar13;
-  int iVar14;
-  int iVar15;
-  int iVar16;
-  undefined4 uVar17;
-  int iVar18;
-  int local_30;
-  int local_2c;
-  undefined2 local_28 [4];
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int registerIndexThenOffset;
+  int uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [4];
   
-  local_2c = 0;
-  local_28[0] = 0;
-  local_30 = 0;
-  bVar3 = false;
-  bVar4 = false;
+  uniformType = 0;
+  uniformStageUse[0] = 0;
+  uniformSize = 0;
+  stage0Updated = false;
+  stage1Updated = false;
   if (location != -1) {
     if ((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0)) &&
         (location < *(int *)(currentProgram + 0x30))) &&
        (((-1 < count &&
-         (iVar10 = _ShGetUniformTypeInfo
-                             (*(undefined4 *)(currentProgram + 0x40),location,&local_30,&local_2c,local_28),
-         fVar5 = FLOAT_00108e50, iVar10 != 0)) && ((local_2c == 0x8b51 || (local_2c == 0x8b58))))))
+         (typeInfoFound = _ShGetUniformTypeInfo
+                             (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+         floatZero = FLOAT_00108e50, typeInfoFound != 0)) && ((uniformType == 0x8b51 || (uniformType == 0x8b58))))))
     {
       if (count != 0) {
-        if (count < local_30) {
-          local_30 = count;
+        if (count < uniformSize) {
+          uniformSize = count;
         }
-        if (local_2c == 0x8b51) {
+        if (uniformType == 0x8b51) {
           loopIndex = 0;
-          pfVar8 = (float *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-          if (0 < local_30) {
+          dstCursor = (float *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
+          if (0 < uniformSize) {
             do {
               loopIndex = loopIndex + 1;
-              *pfVar8 = *value;
-              pfVar8[1] = value[1];
-              pfVar1 = value + 2;
+              *dstCursor = *value;
+              dstCursor[1] = value[1];
+              srcLastElement = value + 2;
               value = value + 3;
-              pfVar8[2] = *pfVar1;
-              pfVar8 = pfVar8 + 4;
-            } while (loopIndex < local_30);
+              dstCursor[2] = *srcLastElement;
+              dstCursor = dstCursor + 4;
+            } while (loopIndex < uniformSize);
           }
         }
         else {
           loopIndex = 0;
-          puVar9 = (undefined4 *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-          if (0 < local_30) {
+          dstCursor2 = (undefined4 *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
+          if (0 < uniformSize) {
             do {
-              if (*value == fVar5) {
-                *puVar9 = 0;
+              if (*value == floatZero) {
+                *dstCursor2 = 0;
               }
               else {
-                *puVar9 = 1;
+                *dstCursor2 = 1;
               }
-              if (value[1] == fVar5) {
-                puVar9[1] = 0;
-              }
-              else {
-                puVar9[1] = 1;
-              }
-              if (value[2] == fVar5) {
-                puVar9[2] = 0;
+              if (value[1] == floatZero) {
+                dstCursor2[1] = 0;
               }
               else {
-                puVar9[2] = 1;
+                dstCursor2[1] = 1;
+              }
+              if (value[2] == floatZero) {
+                dstCursor2[2] = 0;
+              }
+              else {
+                dstCursor2[2] = 1;
               }
               loopIndex = loopIndex + 1;
-              puVar9 = puVar9 + 4;
+              dstCursor2 = dstCursor2 + 4;
               value = value + 3;
-            } while (loopIndex < local_30);
+            } while (loopIndex < uniformSize);
           }
         }
         loopIndex = 0;
-        if (0 < local_30) {
-          iVar12 = location << 2;
-          iVar11 = location << 4;
+        if (0 < uniformSize) {
+          elementMapOffset = location << 2;
+          elementValueOffset = location << 4;
           do {
-            iVar15 = *(int *)(currentProgram + 0x20);
-            iVar18 = *(int *)(iVar12 + *(int *)(iVar15 + 0x4e0));
-            if (iVar18 != -1) {
-              iVar18 = iVar18 * 0x10;
-              iVar14 = *(int *)(iVar15 + 0x51c);
-              bVar3 = true;
-              iVar16 = iVar11 + *(int *)(currentProgram + 0x4c);
-              uVar13 = *(undefined4 *)(iVar16 + 0xc);
-              iVar15 = iVar18 + iVar14;
-              uVar6 = *(undefined4 *)(iVar16 + 4);
-              uVar17 = *(undefined4 *)(iVar16 + 8);
-              *(undefined4 *)(iVar18 + iVar14) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar15 + 0xc) = uVar13;
-              *(undefined4 *)(iVar15 + 4) = uVar6;
-              *(undefined4 *)(iVar15 + 8) = uVar17;
+            stage0Record = *(int *)(currentProgram + 0x20);
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(stage0Record + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(stage0Record + 0x51c);
+              stage0Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
-            iVar18 = *(int *)(iVar12 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-            if (iVar18 != -1) {
-              iVar18 = iVar18 * 0x10;
-              iVar14 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-              bVar4 = true;
-              iVar16 = iVar11 + *(int *)(currentProgram + 0x4c);
-              uVar13 = *(undefined4 *)(iVar16 + 0xc);
-              iVar15 = iVar18 + iVar14;
-              uVar6 = *(undefined4 *)(iVar16 + 4);
-              uVar17 = *(undefined4 *)(iVar16 + 8);
-              *(undefined4 *)(iVar18 + iVar14) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar15 + 0xc) = uVar13;
-              *(undefined4 *)(iVar15 + 4) = uVar6;
-              *(undefined4 *)(iVar15 + 8) = uVar17;
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+              stage1Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
             loopIndex = loopIndex + 1;
-            iVar12 = iVar12 + 4;
-            iVar11 = iVar11 + 0x10;
-          } while (loopIndex < local_30);
+            elementMapOffset = elementMapOffset + 4;
+            elementValueOffset = elementValueOffset + 0x10;
+          } while (loopIndex < uniformSize);
         }
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-        if (bVar3) {
-          iVar10 = glContext + 0x10000;
+        if (stage0Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex2 = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar2 = (int *)(iVar10 + -0x777c);
-              iVar11 = loopIndex2 * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex2 * 4;
               loopIndex2 = loopIndex2 + 1;
-              puVar9 = (undefined4 *)(iVar10 + -0x7a54);
-              iVar10 = iVar10 + 0x2e0;
-              (**(code **)(*piVar2 + 0x194))
-                        (*puVar9,*(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
             } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
-        if (bVar4) {
-          iVar10 = glContext + 0x10000;
+        if (stage1Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex2 = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar2 = (int *)(iVar10 + -0x777c);
-              iVar11 = loopIndex2 * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex2 * 4;
               loopIndex2 = loopIndex2 + 1;
-              puVar9 = (undefined4 *)(iVar10 + -0x7a54);
-              iVar10 = iVar10 + 0x2e0;
-              (**(code **)(*piVar2 + 0x194))
-                        (*puVar9,*(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
             } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
@@ -2102,153 +2125,157 @@ void _glUniform2fvARB_Exec(glContext, location, count, value)
   int count;
   float *value;
 {
-  float *pfVar1;
-  int *piVar2;
-  bool bVar3;
-  bool bVar4;
-  float fVar5;
-  undefined4 uVar6;
+  float *srcLastElement;
+  int *rendererCallbacks;
+  bool stage0Updated;
+  bool stage1Updated;
+  float floatZero;
+  undefined4 uniformWord1;
   int currentProgram;
-  float *pfVar8;
-  undefined4 *puVar9;
-  int iVar10;
+  float *dstCursor;
+  undefined4 *dstCursor2;
+  undefined4 *rendererHandlePtr;
+  int typeInfoFound;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar11;
-  int iVar12;
+  int elementValueOffset;
+  int rendererSlotOffset;
+  int elementMapOffset;
   int loopIndex2;
-  undefined4 uVar13;
-  int iVar14;
-  int iVar15;
-  int iVar16;
-  undefined4 uVar17;
-  int iVar18;
-  int local_30;
-  int local_2c;
-  undefined2 local_28 [4];
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int registerIndexThenOffset;
+  int uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [4];
   
-  local_2c = 0;
-  local_28[0] = 0;
-  local_30 = 0;
-  bVar3 = false;
-  bVar4 = false;
+  uniformType = 0;
+  uniformStageUse[0] = 0;
+  uniformSize = 0;
+  stage0Updated = false;
+  stage1Updated = false;
   if (location != -1) {
     if ((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0)) &&
         (location < *(int *)(currentProgram + 0x30))) &&
        (((-1 < count &&
-         (iVar10 = _ShGetUniformTypeInfo
-                             (*(undefined4 *)(currentProgram + 0x40),location,&local_30,&local_2c,local_28),
-         fVar5 = FLOAT_00108e50, iVar10 != 0)) && ((local_2c == 0x8b50 || (local_2c == 0x8b57))))))
+         (typeInfoFound = _ShGetUniformTypeInfo
+                             (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+         floatZero = FLOAT_00108e50, typeInfoFound != 0)) && ((uniformType == 0x8b50 || (uniformType == 0x8b57))))))
     {
       if (count != 0) {
-        if (count < local_30) {
-          local_30 = count;
+        if (count < uniformSize) {
+          uniformSize = count;
         }
-        if (local_2c == 0x8b50) {
+        if (uniformType == 0x8b50) {
           loopIndex = 0;
-          pfVar8 = (float *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-          if (0 < local_30) {
+          dstCursor = (float *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
+          if (0 < uniformSize) {
             do {
               loopIndex = loopIndex + 1;
-              *pfVar8 = *value;
-              pfVar1 = value + 1;
+              *dstCursor = *value;
+              srcLastElement = value + 1;
               value = value + 2;
-              pfVar8[1] = *pfVar1;
-              pfVar8 = pfVar8 + 4;
-            } while (loopIndex < local_30);
+              dstCursor[1] = *srcLastElement;
+              dstCursor = dstCursor + 4;
+            } while (loopIndex < uniformSize);
           }
         }
         else {
           loopIndex = 0;
-          puVar9 = (undefined4 *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-          if (0 < local_30) {
+          dstCursor2 = (undefined4 *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
+          if (0 < uniformSize) {
             do {
-              if (*value == fVar5) {
-                *puVar9 = 0;
+              if (*value == floatZero) {
+                *dstCursor2 = 0;
               }
               else {
-                *puVar9 = 1;
+                *dstCursor2 = 1;
               }
-              if (value[1] == fVar5) {
-                puVar9[1] = 0;
+              if (value[1] == floatZero) {
+                dstCursor2[1] = 0;
               }
               else {
-                puVar9[1] = 1;
+                dstCursor2[1] = 1;
               }
               loopIndex = loopIndex + 1;
-              puVar9 = puVar9 + 4;
+              dstCursor2 = dstCursor2 + 4;
               value = value + 2;
-            } while (loopIndex < local_30);
+            } while (loopIndex < uniformSize);
           }
         }
         loopIndex = 0;
-        if (0 < local_30) {
-          iVar12 = location << 2;
-          iVar11 = location << 4;
+        if (0 < uniformSize) {
+          elementMapOffset = location << 2;
+          elementValueOffset = location << 4;
           do {
-            iVar15 = *(int *)(currentProgram + 0x20);
-            iVar18 = *(int *)(iVar12 + *(int *)(iVar15 + 0x4e0));
-            if (iVar18 != -1) {
-              iVar18 = iVar18 * 0x10;
-              iVar14 = *(int *)(iVar15 + 0x51c);
-              bVar3 = true;
-              iVar16 = iVar11 + *(int *)(currentProgram + 0x4c);
-              uVar13 = *(undefined4 *)(iVar16 + 0xc);
-              iVar15 = iVar18 + iVar14;
-              uVar6 = *(undefined4 *)(iVar16 + 4);
-              uVar17 = *(undefined4 *)(iVar16 + 8);
-              *(undefined4 *)(iVar18 + iVar14) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar15 + 0xc) = uVar13;
-              *(undefined4 *)(iVar15 + 4) = uVar6;
-              *(undefined4 *)(iVar15 + 8) = uVar17;
+            stage0Record = *(int *)(currentProgram + 0x20);
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(stage0Record + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(stage0Record + 0x51c);
+              stage0Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
-            iVar18 = *(int *)(iVar12 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-            if (iVar18 != -1) {
-              iVar18 = iVar18 * 0x10;
-              iVar14 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-              bVar4 = true;
-              iVar16 = iVar11 + *(int *)(currentProgram + 0x4c);
-              uVar13 = *(undefined4 *)(iVar16 + 0xc);
-              iVar15 = iVar18 + iVar14;
-              uVar6 = *(undefined4 *)(iVar16 + 4);
-              uVar17 = *(undefined4 *)(iVar16 + 8);
-              *(undefined4 *)(iVar18 + iVar14) = *(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar15 + 0xc) = uVar13;
-              *(undefined4 *)(iVar15 + 4) = uVar6;
-              *(undefined4 *)(iVar15 + 8) = uVar17;
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+              stage1Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
             loopIndex = loopIndex + 1;
-            iVar12 = iVar12 + 4;
-            iVar11 = iVar11 + 0x10;
-          } while (loopIndex < local_30);
+            elementMapOffset = elementMapOffset + 4;
+            elementValueOffset = elementValueOffset + 0x10;
+          } while (loopIndex < uniformSize);
         }
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-        if (bVar3) {
-          iVar10 = glContext + 0x10000;
+        if (stage0Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex2 = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar2 = (int *)(iVar10 + -0x777c);
-              iVar11 = loopIndex2 * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex2 * 4;
               loopIndex2 = loopIndex2 + 1;
-              puVar9 = (undefined4 *)(iVar10 + -0x7a54);
-              iVar10 = iVar10 + 0x2e0;
-              (**(code **)(*piVar2 + 0x194))
-                        (*puVar9,*(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
             } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
-        if (bVar4) {
-          iVar10 = glContext + 0x10000;
+        if (stage1Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex2 = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar2 = (int *)(iVar10 + -0x777c);
-              iVar11 = loopIndex2 * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex2 * 4;
               loopIndex2 = loopIndex2 + 1;
-              puVar9 = (undefined4 *)(iVar10 + -0x7a54);
-              iVar10 = iVar10 + 0x2e0;
-              (**(code **)(*piVar2 + 0x194))
-                        (*puVar9,*(undefined4 *)(iVar11 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
             } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
@@ -2268,64 +2295,68 @@ void _glUniform1fvARB_Exec(glContext, location, count, value)
   int count;
   float *value;
 {
-  int *piVar1;
+  int *rendererCallbacks;
   float fVar2;
-  bool bVar3;
-  bool bVar4;
-  undefined4 uVar5;
+  float floatZero;
+  bool stage0Updated;
+  bool stage1Updated;
+  undefined4 uniformWord1;
   int currentProgram;
   float *dstCursor;
-  undefined4 *puVar8;
+  undefined4 *rendererHandlePtr;
   undefined4 *dstCursor2;
-  int iVar9;
+  int typeInfoFound;
   int loopIndex;
-  int iVar10;
-  int iVar11;
-  undefined4 uVar12;
-  int iVar13;
-  int iVar14;
-  int iVar15;
-  undefined4 uVar16;
-  int iVar17;
-  int local_40;
-  int local_3c;
-  undefined2 local_38 [10];
+  int elementValueOffset;
+  int rendererSlotOffset;
+  int elementMapOffset;
+  int rendererRecordCursor;
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int registerIndexThenOffset;
+  int uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [10];
   
-  local_3c = 0;
-  local_38[0] = 0;
-  local_40 = 0;
-  bVar3 = false;
-  bVar4 = false;
+  uniformType = 0;
+  uniformStageUse[0] = 0;
+  uniformSize = 0;
+  stage0Updated = false;
+  stage1Updated = false;
   if (location != -1) {
     if ((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0)) &&
         (location < *(int *)(currentProgram + 0x30))) &&
        (((-1 < count &&
-         (iVar9 = _ShGetUniformTypeInfo
-                            (*(undefined4 *)(currentProgram + 0x40),location,&local_40,&local_3c,local_38),
-         fVar2 = FLOAT_00108e50, iVar9 != 0)) && ((local_3c == 0x1406 || (local_3c == 0x8b56)))))) {
+         (typeInfoFound = _ShGetUniformTypeInfo
+                            (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+         floatZero = FLOAT_00108e50, typeInfoFound != 0)) && ((uniformType == 0x1406 || (uniformType == 0x8b56)))))) {
       if (count != 0) {
-        if (count < local_40) {
-          local_40 = count;
+        if (count < uniformSize) {
+          uniformSize = count;
         }
-        if (local_3c == 0x1406) {
+        if (uniformType == 0x1406) {
           loopIndex = 0;
           dstCursor = (float *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-          if (0 < local_40) {
+          if (0 < uniformSize) {
             do {
               fVar2 = *value;
               loopIndex = loopIndex + 1;
               value = value + 1;
               *dstCursor = fVar2;
               dstCursor = dstCursor + 4;
-            } while (loopIndex < local_40);
+            } while (loopIndex < uniformSize);
           }
         }
         else {
           loopIndex = 0;
           dstCursor2 = (undefined4 *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-          if (0 < local_40) {
+          if (0 < uniformSize) {
             do {
-              if (*value == fVar2) {
+              if (*value == floatZero) {
                 *dstCursor2 = 0;
               }
               else {
@@ -2334,78 +2365,78 @@ void _glUniform1fvARB_Exec(glContext, location, count, value)
               loopIndex = loopIndex + 1;
               dstCursor2 = dstCursor2 + 4;
               value = value + 1;
-            } while (loopIndex < local_40);
+            } while (loopIndex < uniformSize);
           }
         }
         loopIndex = 0;
-        if (0 < local_40) {
-          iVar11 = location << 2;
-          iVar10 = location << 4;
+        if (0 < uniformSize) {
+          elementMapOffset = location << 2;
+          elementValueOffset = location << 4;
           do {
-            iVar14 = *(int *)(currentProgram + 0x20);
-            iVar17 = *(int *)(iVar11 + *(int *)(iVar14 + 0x4e0));
-            if (iVar17 != -1) {
-              iVar17 = iVar17 * 0x10;
-              iVar13 = *(int *)(iVar14 + 0x51c);
-              bVar3 = true;
-              iVar15 = iVar10 + *(int *)(currentProgram + 0x4c);
-              uVar12 = *(undefined4 *)(iVar15 + 0xc);
-              iVar14 = iVar17 + iVar13;
-              uVar5 = *(undefined4 *)(iVar15 + 4);
-              uVar16 = *(undefined4 *)(iVar15 + 8);
-              *(undefined4 *)(iVar17 + iVar13) = *(undefined4 *)(iVar10 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar14 + 0xc) = uVar12;
-              *(undefined4 *)(iVar14 + 4) = uVar5;
-              *(undefined4 *)(iVar14 + 8) = uVar16;
+            stage0Record = *(int *)(currentProgram + 0x20);
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(stage0Record + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(stage0Record + 0x51c);
+              stage0Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
-            iVar17 = *(int *)(iVar11 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-            if (iVar17 != -1) {
-              iVar17 = iVar17 * 0x10;
-              iVar13 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-              bVar4 = true;
-              iVar15 = iVar10 + *(int *)(currentProgram + 0x4c);
-              uVar12 = *(undefined4 *)(iVar15 + 0xc);
-              iVar14 = iVar17 + iVar13;
-              uVar5 = *(undefined4 *)(iVar15 + 4);
-              uVar16 = *(undefined4 *)(iVar15 + 8);
-              *(undefined4 *)(iVar17 + iVar13) = *(undefined4 *)(iVar10 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar14 + 0xc) = uVar12;
-              *(undefined4 *)(iVar14 + 4) = uVar5;
-              *(undefined4 *)(iVar14 + 8) = uVar16;
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+              stage1Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
             loopIndex = loopIndex + 1;
-            iVar11 = iVar11 + 4;
-            iVar10 = iVar10 + 0x10;
-          } while (loopIndex < local_40);
+            elementMapOffset = elementMapOffset + 4;
+            elementValueOffset = elementValueOffset + 0x10;
+          } while (loopIndex < uniformSize);
         }
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-        if (bVar3) {
-          iVar11 = glContext + 0x10000;
+        if (stage0Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar1 = (int *)(iVar11 + -0x777c);
-              iVar10 = loopIndex * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex * 4;
               loopIndex = loopIndex + 1;
-              puVar8 = (undefined4 *)(iVar11 + -0x7a54);
-              iVar11 = iVar11 + 0x2e0;
-              (**(code **)(*piVar1 + 0x194))
-                        (*puVar8,*(undefined4 *)(iVar10 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
             } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
-        if (bVar4) {
-          iVar11 = glContext + 0x10000;
+        if (stage1Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar1 = (int *)(iVar11 + -0x777c);
-              iVar10 = loopIndex * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex * 4;
               loopIndex = loopIndex + 1;
-              puVar8 = (undefined4 *)(iVar11 + -0x7a54);
-              iVar11 = iVar11 + 0x2e0;
-              (**(code **)(*piVar1 + 0x194))
-                        (*puVar8,*(undefined4 *)(iVar10 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
             } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
@@ -2427,122 +2458,127 @@ void _glUniform4iARB_Exec(glContext, location, v0, v1, v2, v3)
   int v2;
   int v3;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  undefined4 uniformWord1;
   int currentProgram;
   int iVar5;
-  int iVar6;
-  undefined4 uVar7;
-  int iVar8;
-  int iVar9;
-  int iVar10;
-  undefined4 uVar11;
-  int iVar12;
+  int rendererSlotOffset;
+  int registerIndexThenOffset;
+  int typeInfoFound;
+  int rendererSlotOffset2;
+  int locationValueOffset;
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int constantRegister;
+  int stage0Record;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar13;
+  int rendererRecordCursor2;
   int loopIndex2;
-  undefined4 local_40;
-  int local_3c;
-  undefined2 local_38 [10];
+  undefined4 uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [10];
   
-  local_38[0] = 0;
-  local_3c = 0;
-  local_40 = 0;
+  uniformStageUse[0] = 0;
+  uniformType = 0;
+  uniformSize = 0;
   if (location != -1) {
     if ((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0)) &&
         (location < *(int *)(currentProgram + 0x30))) &&
-       ((iVar6 = _ShGetUniformTypeInfo
-                           (*(undefined4 *)(currentProgram + 0x40),location,&local_40,&local_3c,local_38),
-        iVar6 != 0 && ((local_3c == 0x8b55 || (local_3c == 0x8b59)))))) {
-      iVar6 = location * 0x10;
+       ((typeInfoFound = _ShGetUniformTypeInfo
+                           (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+        typeInfoFound != 0 && ((uniformType == 0x8b55 || (uniformType == 0x8b59)))))) {
+      locationValueOffset = location * 0x10;
       iVar5 = *(int *)(currentProgram + 0x4c);
-      iVar9 = iVar5 + iVar6;
-      if (local_3c == 0x8b55) {
-        *(int *)(iVar5 + iVar6) = v0;
-        *(int *)(iVar9 + 0xc) = v3;
-        *(int *)(iVar9 + 4) = v1;
-        *(int *)(iVar9 + 8) = v2;
+      constantRegister = iVar5 + locationValueOffset;
+      if (uniformType == 0x8b55) {
+        *(int *)(iVar5 + locationValueOffset) = v0;
+        *(int *)(constantRegister + 0xc) = v3;
+        *(int *)(constantRegister + 4) = v1;
+        *(int *)(constantRegister + 8) = v2;
       }
       else {
         if (v0 == 0) {
-          *(undefined4 *)(iVar5 + iVar6) = 0;
+          *(undefined4 *)(iVar5 + locationValueOffset) = 0;
         }
         else {
-          *(undefined4 *)(iVar5 + iVar6) = 1;
+          *(undefined4 *)(iVar5 + locationValueOffset) = 1;
         }
         if (v1 == 0) {
-          *(undefined4 *)(iVar9 + 4) = 0;
+          *(undefined4 *)(constantRegister + 4) = 0;
         }
         else {
-          *(undefined4 *)(iVar9 + 4) = 1;
+          *(undefined4 *)(constantRegister + 4) = 1;
         }
         if (v2 == 0) {
-          *(undefined4 *)(iVar9 + 8) = 0;
+          *(undefined4 *)(constantRegister + 8) = 0;
         }
         else {
-          *(undefined4 *)(iVar9 + 8) = 1;
+          *(undefined4 *)(constantRegister + 8) = 1;
         }
         if (v3 == 0) {
-          *(undefined4 *)(iVar9 + 0xc) = 0;
+          *(undefined4 *)(constantRegister + 0xc) = 0;
         }
         else {
-          *(undefined4 *)(iVar9 + 0xc) = 1;
+          *(undefined4 *)(constantRegister + 0xc) = 1;
         }
       }
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-      iVar9 = *(int *)(currentProgram + 0x20);
-      iVar5 = *(int *)(location * 4 + *(int *)(iVar9 + 0x4e0));
-      if (iVar5 != -1) {
-        iVar5 = iVar5 * 0x10;
-        iVar8 = *(int *)(iVar9 + 0x51c);
-        iVar12 = glContext + 0x10000;
-        iVar10 = iVar6 + *(int *)(currentProgram + 0x4c);
-        uVar3 = *(undefined4 *)(iVar10 + 4);
-        iVar9 = iVar5 + iVar8;
-        uVar7 = *(undefined4 *)(iVar10 + 0xc);
+      stage0Record = *(int *)(currentProgram + 0x20);
+      registerIndexThenOffset = *(int *)(location * 4 + *(int *)(stage0Record + 0x4e0));
+      if (registerIndexThenOffset != -1) {
+        registerIndexThenOffset = registerIndexThenOffset * 0x10;
+        constantRegisterFile = *(int *)(stage0Record + 0x51c);
+        rendererRecordCursor = glContext + 0x10000;
+        uniformValueSlot = locationValueOffset + *(int *)(currentProgram + 0x4c);
+        uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+        constantRegister = registerIndexThenOffset + constantRegisterFile;
+        uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
         loopIndex2 = 0;
-        uVar11 = *(undefined4 *)(iVar10 + 8);
-        *(undefined4 *)(iVar5 + iVar8) = *(undefined4 *)(iVar6 + *(int *)(currentProgram + 0x4c));
-        *(undefined4 *)(iVar9 + 0xc) = uVar7;
-        *(undefined4 *)(iVar9 + 4) = uVar3;
-        *(undefined4 *)(iVar9 + 8) = uVar11;
+        uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+        *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+        *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+        *(undefined4 *)(constantRegister + 4) = uniformWord1;
+        *(undefined4 *)(constantRegister + 8) = uniformWord2;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar1 = (int *)(iVar12 + -0x777c);
-            iVar5 = loopIndex2 * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+            rendererSlotOffset = loopIndex2 * 4;
             loopIndex2 = loopIndex2 + 1;
-            puVar2 = (undefined4 *)(iVar12 + -0x7a54);
-            iVar12 = iVar12 + 0x2e0;
-            (**(code **)(*piVar1 + 0x194))
-                      (*puVar2,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+            rendererRecordCursor = rendererRecordCursor + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
           } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      iVar5 = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-      if (iVar5 != -1) {
-        iVar5 = iVar5 * 0x10;
-        iVar8 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-        iVar13 = glContext + 0x10000;
-        iVar10 = iVar6 + *(int *)(currentProgram + 0x4c);
-        uVar3 = *(undefined4 *)(iVar10 + 4);
-        iVar9 = iVar5 + iVar8;
-        uVar7 = *(undefined4 *)(iVar10 + 0xc);
+      registerIndexThenOffset = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+      if (registerIndexThenOffset != -1) {
+        registerIndexThenOffset = registerIndexThenOffset * 0x10;
+        constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+        rendererRecordCursor2 = glContext + 0x10000;
+        uniformValueSlot = locationValueOffset + *(int *)(currentProgram + 0x4c);
+        uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+        constantRegister = registerIndexThenOffset + constantRegisterFile;
+        uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
         loopIndex = 0;
-        uVar11 = *(undefined4 *)(iVar10 + 8);
-        *(undefined4 *)(iVar5 + iVar8) = *(undefined4 *)(iVar6 + *(int *)(currentProgram + 0x4c));
-        *(undefined4 *)(iVar9 + 0xc) = uVar7;
-        *(undefined4 *)(iVar9 + 4) = uVar3;
-        *(undefined4 *)(iVar9 + 8) = uVar11;
+        uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+        *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+        *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+        *(undefined4 *)(constantRegister + 4) = uniformWord1;
+        *(undefined4 *)(constantRegister + 8) = uniformWord2;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar1 = (int *)(iVar13 + -0x777c);
-            iVar6 = loopIndex * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor2 + -0x777c);
+            rendererSlotOffset2 = loopIndex * 4;
             loopIndex = loopIndex + 1;
-            puVar2 = (undefined4 *)(iVar13 + -0x7a54);
-            iVar13 = iVar13 + 0x2e0;
-            (**(code **)(*piVar1 + 0x194))
-                      (*puVar2,*(undefined4 *)(iVar6 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor2 + -0x7a54);
+            rendererRecordCursor2 = rendererRecordCursor2 + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset2 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
@@ -2562,48 +2598,54 @@ void _glUniform3iARB_Exec(glContext, location, v0, v1, v2)
   int v1;
   int v2;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  undefined4 uniformWord1;
   int currentProgram;
   int iVar5;
-  int iVar6;
-  undefined4 uVar7;
-  int iVar8;
+  int rendererSlotOffset;
+  int registerIndexThenOffset;
+  int typeInfoFound;
+  int rendererSlotOffset2;
+  int locationValueOffset;
+  undefined4 uniformWord3;
+  int constantRegisterFile;
   int iVar9;
-  int iVar10;
-  undefined4 uVar11;
-  int iVar12;
+  int constantRegister;
+  int stage0Record;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar13;
+  int rendererRecordCursor2;
   int loopIndex2;
-  undefined4 local_30;
-  int local_2c;
-  undefined2 local_28 [4];
+  undefined4 uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [4];
   
-  local_28[0] = 0;
-  local_2c = 0;
-  local_30 = 0;
+  uniformStageUse[0] = 0;
+  uniformType = 0;
+  uniformSize = 0;
   if (location != -1) {
     if ((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0)) &&
         (location < *(int *)(currentProgram + 0x30))) &&
-       ((iVar6 = _ShGetUniformTypeInfo
-                           (*(undefined4 *)(currentProgram + 0x40),location,&local_30,&local_2c,local_28),
-        iVar6 != 0 && ((local_2c == 0x8b54 || (local_2c == 0x8b58)))))) {
-      iVar6 = location * 0x10;
+       ((typeInfoFound = _ShGetUniformTypeInfo
+                           (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+        typeInfoFound != 0 && ((uniformType == 0x8b54 || (uniformType == 0x8b58)))))) {
+      locationValueOffset = location * 0x10;
       iVar5 = *(int *)(currentProgram + 0x4c);
-      iVar9 = iVar5 + iVar6;
-      if (local_2c == 0x8b54) {
-        *(int *)(iVar5 + iVar6) = v0;
+      iVar9 = iVar5 + locationValueOffset;
+      if (uniformType == 0x8b54) {
+        *(int *)(iVar5 + locationValueOffset) = v0;
         *(int *)(iVar9 + 8) = v2;
         *(int *)(iVar9 + 4) = v1;
       }
       else {
         if (v0 == 0) {
-          *(undefined4 *)(iVar5 + iVar6) = 0;
+          *(undefined4 *)(iVar5 + locationValueOffset) = 0;
         }
         else {
-          *(undefined4 *)(iVar5 + iVar6) = 1;
+          *(undefined4 *)(iVar5 + locationValueOffset) = 1;
         }
         if (v1 == 0) {
           *(undefined4 *)(iVar9 + 4) = 0;
@@ -2619,58 +2661,58 @@ void _glUniform3iARB_Exec(glContext, location, v0, v1, v2)
         }
       }
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-      iVar9 = *(int *)(currentProgram + 0x20);
-      iVar5 = *(int *)(location * 4 + *(int *)(iVar9 + 0x4e0));
-      if (iVar5 != -1) {
-        iVar5 = iVar5 * 0x10;
-        iVar8 = *(int *)(iVar9 + 0x51c);
-        iVar12 = glContext + 0x10000;
-        iVar10 = iVar6 + *(int *)(currentProgram + 0x4c);
-        uVar3 = *(undefined4 *)(iVar10 + 4);
-        iVar9 = iVar5 + iVar8;
-        uVar7 = *(undefined4 *)(iVar10 + 0xc);
+      stage0Record = *(int *)(currentProgram + 0x20);
+      registerIndexThenOffset = *(int *)(location * 4 + *(int *)(stage0Record + 0x4e0));
+      if (registerIndexThenOffset != -1) {
+        registerIndexThenOffset = registerIndexThenOffset * 0x10;
+        constantRegisterFile = *(int *)(stage0Record + 0x51c);
+        rendererRecordCursor = glContext + 0x10000;
+        uniformValueSlot = locationValueOffset + *(int *)(currentProgram + 0x4c);
+        uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+        constantRegister = registerIndexThenOffset + constantRegisterFile;
+        uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
         loopIndex2 = 0;
-        uVar11 = *(undefined4 *)(iVar10 + 8);
-        *(undefined4 *)(iVar5 + iVar8) = *(undefined4 *)(iVar6 + *(int *)(currentProgram + 0x4c));
-        *(undefined4 *)(iVar9 + 0xc) = uVar7;
-        *(undefined4 *)(iVar9 + 4) = uVar3;
-        *(undefined4 *)(iVar9 + 8) = uVar11;
+        uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+        *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+        *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+        *(undefined4 *)(constantRegister + 4) = uniformWord1;
+        *(undefined4 *)(constantRegister + 8) = uniformWord2;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar1 = (int *)(iVar12 + -0x777c);
-            iVar5 = loopIndex2 * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+            rendererSlotOffset = loopIndex2 * 4;
             loopIndex2 = loopIndex2 + 1;
-            puVar2 = (undefined4 *)(iVar12 + -0x7a54);
-            iVar12 = iVar12 + 0x2e0;
-            (**(code **)(*piVar1 + 0x194))
-                      (*puVar2,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+            rendererRecordCursor = rendererRecordCursor + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
           } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      iVar5 = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-      if (iVar5 != -1) {
-        iVar5 = iVar5 * 0x10;
-        iVar8 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-        iVar13 = glContext + 0x10000;
-        iVar10 = iVar6 + *(int *)(currentProgram + 0x4c);
-        uVar3 = *(undefined4 *)(iVar10 + 4);
-        iVar9 = iVar5 + iVar8;
-        uVar7 = *(undefined4 *)(iVar10 + 0xc);
+      registerIndexThenOffset = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+      if (registerIndexThenOffset != -1) {
+        registerIndexThenOffset = registerIndexThenOffset * 0x10;
+        constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+        rendererRecordCursor2 = glContext + 0x10000;
+        uniformValueSlot = locationValueOffset + *(int *)(currentProgram + 0x4c);
+        uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+        constantRegister = registerIndexThenOffset + constantRegisterFile;
+        uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
         loopIndex = 0;
-        uVar11 = *(undefined4 *)(iVar10 + 8);
-        *(undefined4 *)(iVar5 + iVar8) = *(undefined4 *)(iVar6 + *(int *)(currentProgram + 0x4c));
-        *(undefined4 *)(iVar9 + 0xc) = uVar7;
-        *(undefined4 *)(iVar9 + 4) = uVar3;
-        *(undefined4 *)(iVar9 + 8) = uVar11;
+        uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+        *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+        *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+        *(undefined4 *)(constantRegister + 4) = uniformWord1;
+        *(undefined4 *)(constantRegister + 8) = uniformWord2;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           do {
-            piVar1 = (int *)(iVar13 + -0x777c);
-            iVar6 = loopIndex * 4;
+            rendererCallbacks = (int *)(rendererRecordCursor2 + -0x777c);
+            rendererSlotOffset2 = loopIndex * 4;
             loopIndex = loopIndex + 1;
-            puVar2 = (undefined4 *)(iVar13 + -0x7a54);
-            iVar13 = iVar13 + 0x2e0;
-            (**(code **)(*piVar1 + 0x194))
-                      (*puVar2,*(undefined4 *)(iVar6 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+            rendererHandlePtr = (undefined4 *)(rendererRecordCursor2 + -0x7a54);
+            rendererRecordCursor2 = rendererRecordCursor2 + 0x2e0;
+            (**(code **)(*rendererCallbacks + 0x194))
+                      (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset2 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
@@ -2689,114 +2731,119 @@ void _glUniform2iARB_Exec(glContext, location, v0, v1)
   int v0;
   int v1;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  undefined4 uniformWord1;
   int currentProgram;
   int iVar5;
-  int iVar6;
-  undefined4 uVar7;
-  int iVar8;
-  int iVar9;
-  int iVar10;
-  undefined4 uVar11;
-  int iVar12;
+  int rendererSlotOffset;
+  int registerIndexThenOffset;
+  int typeInfoFound;
+  int rendererSlotOffset2;
+  int locationValueOffset;
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar13;
+  int rendererRecordCursor2;
   int loopIndex2;
-  undefined4 local_30;
-  int local_2c;
-  undefined2 local_28 [4];
+  undefined4 uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [4];
   
-  local_28[0] = 0;
-  local_2c = 0;
-  local_30 = 0;
+  uniformStageUse[0] = 0;
+  uniformType = 0;
+  uniformSize = 0;
   if (location == -1) {
     return;
   }
   if ((((-1 < *(short *)(glContext + 0x4a10)) || (currentProgram = *(int *)(glContext + 0x5430), currentProgram == 0)) ||
       (*(int *)(currentProgram + 0x30) <= location)) ||
-     ((iVar6 = _ShGetUniformTypeInfo
-                         (*(undefined4 *)(currentProgram + 0x40),location,&local_30,&local_2c,local_28),
-      iVar6 == 0 || ((local_2c != 0x8b53 && (local_2c != 0x8b57)))))) {
+     ((typeInfoFound = _ShGetUniformTypeInfo
+                         (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+      typeInfoFound == 0 || ((uniformType != 0x8b53 && (uniformType != 0x8b57)))))) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
     *(undefined4 *)(glContext + 0x7574) = 0x502;
     return;
   }
-  iVar6 = location * 0x10;
+  locationValueOffset = location * 0x10;
   iVar5 = *(int *)(currentProgram + 0x4c);
-  if (local_2c == 0x8b53) {
-    *(int *)(iVar5 + iVar6) = v0;
+  if (uniformType == 0x8b53) {
+    *(int *)(iVar5 + locationValueOffset) = v0;
   }
   else {
     if (v0 == 0) {
-      *(undefined4 *)(iVar5 + iVar6) = 0;
+      *(undefined4 *)(iVar5 + locationValueOffset) = 0;
     }
     else {
-      *(undefined4 *)(iVar5 + iVar6) = 1;
+      *(undefined4 *)(iVar5 + locationValueOffset) = 1;
     }
     if (v1 != 0) {
-      *(undefined4 *)(iVar5 + iVar6 + 4) = 1;
+      *(undefined4 *)(iVar5 + locationValueOffset + 4) = 1;
       goto LAB_0008ac38;
     }
   }
-  *(int *)(iVar5 + iVar6 + 4) = v1;
+  *(int *)(iVar5 + locationValueOffset + 4) = v1;
 LAB_0008ac38:
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-  iVar9 = *(int *)(currentProgram + 0x20);
-  iVar5 = *(int *)(location * 4 + *(int *)(iVar9 + 0x4e0));
-  if (iVar5 != -1) {
-    iVar5 = iVar5 * 0x10;
-    iVar8 = *(int *)(iVar9 + 0x51c);
-    iVar12 = glContext + 0x10000;
-    iVar10 = iVar6 + *(int *)(currentProgram + 0x4c);
-    uVar3 = *(undefined4 *)(iVar10 + 4);
-    iVar9 = iVar5 + iVar8;
-    uVar7 = *(undefined4 *)(iVar10 + 0xc);
+  stage0Record = *(int *)(currentProgram + 0x20);
+  registerIndexThenOffset = *(int *)(location * 4 + *(int *)(stage0Record + 0x4e0));
+  if (registerIndexThenOffset != -1) {
+    registerIndexThenOffset = registerIndexThenOffset * 0x10;
+    constantRegisterFile = *(int *)(stage0Record + 0x51c);
+    rendererRecordCursor = glContext + 0x10000;
+    uniformValueSlot = locationValueOffset + *(int *)(currentProgram + 0x4c);
+    uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+    constantRegister = registerIndexThenOffset + constantRegisterFile;
+    uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
     loopIndex2 = 0;
-    uVar11 = *(undefined4 *)(iVar10 + 8);
-    *(undefined4 *)(iVar5 + iVar8) = *(undefined4 *)(iVar6 + *(int *)(currentProgram + 0x4c));
-    *(undefined4 *)(iVar9 + 0xc) = uVar7;
-    *(undefined4 *)(iVar9 + 4) = uVar3;
-    *(undefined4 *)(iVar9 + 8) = uVar11;
+    uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+    *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+    *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+    *(undefined4 *)(constantRegister + 4) = uniformWord1;
+    *(undefined4 *)(constantRegister + 8) = uniformWord2;
     if (*(char *)(glContext + 0x85a4) != '\0') {
       do {
-        piVar1 = (int *)(iVar12 + -0x777c);
-        iVar5 = loopIndex2 * 4;
+        rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+        rendererSlotOffset = loopIndex2 * 4;
         loopIndex2 = loopIndex2 + 1;
-        puVar2 = (undefined4 *)(iVar12 + -0x7a54);
-        iVar12 = iVar12 + 0x2e0;
-        (**(code **)(*piVar1 + 0x194))
-                  (*puVar2,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+        rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+        rendererRecordCursor = rendererRecordCursor + 0x2e0;
+        (**(code **)(*rendererCallbacks + 0x194))
+                  (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
       } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
   }
-  iVar5 = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-  if (iVar5 != -1) {
-    iVar5 = iVar5 * 0x10;
-    iVar8 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-    iVar13 = glContext + 0x10000;
-    iVar10 = iVar6 + *(int *)(currentProgram + 0x4c);
-    uVar3 = *(undefined4 *)(iVar10 + 4);
-    iVar9 = iVar5 + iVar8;
-    uVar7 = *(undefined4 *)(iVar10 + 0xc);
+  registerIndexThenOffset = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+  if (registerIndexThenOffset != -1) {
+    registerIndexThenOffset = registerIndexThenOffset * 0x10;
+    constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+    rendererRecordCursor2 = glContext + 0x10000;
+    uniformValueSlot = locationValueOffset + *(int *)(currentProgram + 0x4c);
+    uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+    constantRegister = registerIndexThenOffset + constantRegisterFile;
+    uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
     loopIndex = 0;
-    uVar11 = *(undefined4 *)(iVar10 + 8);
-    *(undefined4 *)(iVar5 + iVar8) = *(undefined4 *)(iVar6 + *(int *)(currentProgram + 0x4c));
-    *(undefined4 *)(iVar9 + 0xc) = uVar7;
-    *(undefined4 *)(iVar9 + 4) = uVar3;
-    *(undefined4 *)(iVar9 + 8) = uVar11;
+    uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+    *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+    *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+    *(undefined4 *)(constantRegister + 4) = uniformWord1;
+    *(undefined4 *)(constantRegister + 8) = uniformWord2;
     if (*(char *)(glContext + 0x85a4) != '\0') {
       do {
-        piVar1 = (int *)(iVar13 + -0x777c);
-        iVar6 = loopIndex * 4;
+        rendererCallbacks = (int *)(rendererRecordCursor2 + -0x777c);
+        rendererSlotOffset2 = loopIndex * 4;
         loopIndex = loopIndex + 1;
-        puVar2 = (undefined4 *)(iVar13 + -0x7a54);
-        iVar13 = iVar13 + 0x2e0;
-        (**(code **)(*piVar1 + 0x194))
-                  (*puVar2,*(undefined4 *)(iVar6 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+        rendererHandlePtr = (undefined4 *)(rendererRecordCursor2 + -0x7a54);
+        rendererRecordCursor2 = rendererRecordCursor2 + 0x2e0;
+        (**(code **)(*rendererCallbacks + 0x194))
+                  (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset2 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
       } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
   }
@@ -2809,51 +2856,57 @@ void _glUniform1iARB_Exec(glContext, location, v0)
   int location;
   int v0;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
-  int iVar4;
+  int *rendererCallbacks;
+  undefined4 *rendererHandlePtr;
+  undefined4 uniformWord1;
+  int typeInfoFound;
+  int rendererSlotOffset;
+  int locationValueOffset;
   int iVar5;
-  undefined4 uVar6;
-  int iVar7;
+  int rendererSlotOffset2;
+  int registerIndexThenOffset;
+  undefined4 uniformWord3;
+  int constantRegisterFile;
   int iVar8;
-  int iVar9;
-  undefined4 uVar10;
+  int constantRegister;
+  int stage0Record;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
   undefined4 uVar11;
   int currentProgram;
-  int iVar13;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar14;
+  int rendererRecordCursor2;
   int loopIndex2;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  undefined4 local_40;
-  int local_3c;
-  undefined2 local_38 [10];
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  undefined4 uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [10];
   
-  local_38[0] = 0;
-  local_3c = 0;
+  uniformStageUse[0] = 0;
+  uniformType = 0;
   uVar11 = 2;
-  local_40 = 0;
+  uniformSize = 0;
   if (location == -1) {
     return;
   }
   if (((((-1 < *(short *)(glContext + 0x4a10)) || (currentProgram = *(int *)(glContext + 0x5430), currentProgram == 0))
        || (*(int *)(currentProgram + 0x30) <= location)) ||
-      (iVar4 = _ShGetUniformTypeInfo
-                         (*(undefined4 *)(currentProgram + 0x40),location,&local_40,&local_3c,local_38),
-      iVar4 == 0)) ||
-     ((((local_3c != 0x1404 && (local_3c != 0x8b56)) &&
-       ((local_3c != 0x8b5d && ((local_3c != 0x8b5e && (local_3c != 0x8b5f)))))) &&
-      ((local_3c != 0x8b60 &&
-       ((((local_3c != 0x8b61 && (local_3c != 0x8b62)) && (local_3c != 0x8b63)) &&
-        (local_3c != 0x8b64)))))))) {
+      (typeInfoFound = _ShGetUniformTypeInfo
+                         (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+      typeInfoFound == 0)) ||
+     ((((uniformType != 0x1404 && (uniformType != 0x8b56)) &&
+       ((uniformType != 0x8b5d && ((uniformType != 0x8b5e && (uniformType != 0x8b5f)))))) &&
+      ((uniformType != 0x8b60 &&
+       ((((uniformType != 0x8b61 && (uniformType != 0x8b62)) && (uniformType != 0x8b63)) &&
+        (uniformType != 0x8b64)))))))) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
@@ -2861,79 +2914,79 @@ void _glUniform1iARB_Exec(glContext, location, v0)
     return;
   }
   iVar8 = *(int *)(currentProgram + 0x4c);
-  iVar4 = location * 0x10;
-  iVar5 = *(int *)(iVar8 + iVar4);
+  locationValueOffset = location * 0x10;
+  iVar5 = *(int *)(iVar8 + locationValueOffset);
   if (iVar5 == v0) {
     return;
   }
-  if (local_3c != 0x1404) {
-    if (local_3c - 0x8b5dU < 8) {
-      *(int *)(iVar8 + iVar4) = v0;
+  if (uniformType != 0x1404) {
+    if (uniformType - 0x8b5dU < 8) {
+      *(int *)(iVar8 + locationValueOffset) = v0;
       uVar11 = 6;
-      ((double (*)())_setImageUnit)(glContext,currentProgram,v0,iVar5,local_38,local_3c,fparam_1,in_f2,in_f3,in_f4,in_f5,
-                    in_f6,in_f7,in_f8);
+      ((double (*)())_setImageUnit)(glContext,currentProgram,v0,iVar5,uniformStageUse,uniformType,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+                    incomingFpr6,incomingFpr7,incomingFpr8);
       goto LAB_0008af2c;
     }
     if (v0 != 0) {
-      *(undefined4 *)(iVar8 + iVar4) = 1;
+      *(undefined4 *)(iVar8 + locationValueOffset) = 1;
       goto LAB_0008af2c;
     }
   }
-  *(int *)(iVar8 + iVar4) = v0;
+  *(int *)(iVar8 + locationValueOffset) = v0;
 LAB_0008af2c:
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-  iVar8 = *(int *)(currentProgram + 0x20);
-  iVar5 = *(int *)(location * 4 + *(int *)(iVar8 + 0x4e0));
-  if (iVar5 != -1) {
-    iVar5 = iVar5 * 0x10;
-    iVar7 = *(int *)(iVar8 + 0x51c);
-    iVar13 = glContext + 0x10000;
-    iVar9 = iVar4 + *(int *)(currentProgram + 0x4c);
-    uVar3 = *(undefined4 *)(iVar9 + 4);
-    iVar8 = iVar5 + iVar7;
-    uVar6 = *(undefined4 *)(iVar9 + 0xc);
+  stage0Record = *(int *)(currentProgram + 0x20);
+  registerIndexThenOffset = *(int *)(location * 4 + *(int *)(stage0Record + 0x4e0));
+  if (registerIndexThenOffset != -1) {
+    registerIndexThenOffset = registerIndexThenOffset * 0x10;
+    constantRegisterFile = *(int *)(stage0Record + 0x51c);
+    rendererRecordCursor = glContext + 0x10000;
+    uniformValueSlot = locationValueOffset + *(int *)(currentProgram + 0x4c);
+    uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+    constantRegister = registerIndexThenOffset + constantRegisterFile;
+    uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
     loopIndex2 = 0;
-    uVar10 = *(undefined4 *)(iVar9 + 8);
-    *(undefined4 *)(iVar5 + iVar7) = *(undefined4 *)(iVar4 + *(int *)(currentProgram + 0x4c));
-    *(undefined4 *)(iVar8 + 0xc) = uVar6;
-    *(undefined4 *)(iVar8 + 4) = uVar3;
-    *(undefined4 *)(iVar8 + 8) = uVar10;
+    uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+    *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+    *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+    *(undefined4 *)(constantRegister + 4) = uniformWord1;
+    *(undefined4 *)(constantRegister + 8) = uniformWord2;
     if (*(char *)(glContext + 0x85a4) != '\0') {
       do {
-        piVar1 = (int *)(iVar13 + -0x777c);
-        iVar5 = loopIndex2 * 4;
+        rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+        rendererSlotOffset2 = loopIndex2 * 4;
         loopIndex2 = loopIndex2 + 1;
-        puVar2 = (undefined4 *)(iVar13 + -0x7a54);
-        iVar13 = iVar13 + 0x2e0;
-        (**(code **)(*piVar1 + 0x194))
-                  (*puVar2,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x20) + 0x4e4),uVar11);
+        rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+        rendererRecordCursor = rendererRecordCursor + 0x2e0;
+        (**(code **)(*rendererCallbacks + 0x194))
+                  (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset2 + *(int *)(currentProgram + 0x20) + 0x4e4),uVar11);
       } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
   }
-  iVar5 = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-  if (iVar5 != -1) {
-    iVar5 = iVar5 * 0x10;
-    iVar7 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-    iVar14 = glContext + 0x10000;
-    iVar9 = iVar4 + *(int *)(currentProgram + 0x4c);
-    uVar3 = *(undefined4 *)(iVar9 + 4);
-    iVar8 = iVar5 + iVar7;
-    uVar6 = *(undefined4 *)(iVar9 + 0xc);
+  registerIndexThenOffset = *(int *)(location * 4 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+  if (registerIndexThenOffset != -1) {
+    registerIndexThenOffset = registerIndexThenOffset * 0x10;
+    constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+    rendererRecordCursor2 = glContext + 0x10000;
+    uniformValueSlot = locationValueOffset + *(int *)(currentProgram + 0x4c);
+    uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+    constantRegister = registerIndexThenOffset + constantRegisterFile;
+    uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
     loopIndex = 0;
-    uVar10 = *(undefined4 *)(iVar9 + 8);
-    *(undefined4 *)(iVar5 + iVar7) = *(undefined4 *)(iVar4 + *(int *)(currentProgram + 0x4c));
-    *(undefined4 *)(iVar8 + 0xc) = uVar6;
-    *(undefined4 *)(iVar8 + 4) = uVar3;
-    *(undefined4 *)(iVar8 + 8) = uVar10;
+    uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+    *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(locationValueOffset + *(int *)(currentProgram + 0x4c));
+    *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+    *(undefined4 *)(constantRegister + 4) = uniformWord1;
+    *(undefined4 *)(constantRegister + 8) = uniformWord2;
     if (*(char *)(glContext + 0x85a4) != '\0') {
       do {
-        piVar1 = (int *)(iVar14 + -0x777c);
-        iVar4 = loopIndex * 4;
+        rendererCallbacks = (int *)(rendererRecordCursor2 + -0x777c);
+        rendererSlotOffset = loopIndex * 4;
         loopIndex = loopIndex + 1;
-        puVar2 = (undefined4 *)(iVar14 + -0x7a54);
-        iVar14 = iVar14 + 0x2e0;
-        (**(code **)(*piVar1 + 0x194))
-                  (*puVar2,*(undefined4 *)(iVar4 + *(int *)(currentProgram + 0x24) + 0x4e4),uVar11);
+        rendererHandlePtr = (undefined4 *)(rendererRecordCursor2 + -0x7a54);
+        rendererRecordCursor2 = rendererRecordCursor2 + 0x2e0;
+        (**(code **)(*rendererCallbacks + 0x194))
+                  (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),uVar11);
       } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
   }
@@ -2947,163 +3000,167 @@ void _glUniform4ivARB_Exec(glContext, location, count, value)
   int count;
   int *value;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  bool bVar3;
-  bool bVar4;
-  undefined4 uVar5;
+  int *srcLastElement;
+  undefined4 *rendererHandlePtr;
+  bool stage0Updated;
+  bool stage1Updated;
+  undefined4 uniformWord1;
   int currentProgram;
-  int iVar7;
+  int typeInfoFound;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar8;
-  int iVar9;
+  int elementValueOffset;
+  int rendererSlotOffset;
+  int elementMapOffset;
   int loopIndex2;
-  undefined4 uVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
-  undefined4 uVar14;
-  int *piVar15;
-  int iVar16;
-  int local_30;
-  int local_2c;
-  undefined2 local_28 [4];
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int *dstCursor;
+  int *rendererCallbacks;
+  int registerIndexThenOffset;
+  int uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [4];
   
-  local_2c = 0;
-  local_28[0] = 0;
-  local_30 = 0;
-  bVar3 = false;
-  bVar4 = false;
+  uniformType = 0;
+  uniformStageUse[0] = 0;
+  uniformSize = 0;
+  stage0Updated = false;
+  stage1Updated = false;
   if (location != -1) {
     if ((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0)) &&
         (location < *(int *)(currentProgram + 0x30))) &&
        (((-1 < count &&
-         (iVar7 = _ShGetUniformTypeInfo
-                            (*(undefined4 *)(currentProgram + 0x40),location,&local_30,&local_2c,local_28),
-         iVar7 != 0)) && ((local_2c == 0x8b55 || (local_2c == 0x8b59)))))) {
+         (typeInfoFound = _ShGetUniformTypeInfo
+                            (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+         typeInfoFound != 0)) && ((uniformType == 0x8b55 || (uniformType == 0x8b59)))))) {
       if (count != 0) {
-        if (count < local_30) {
-          local_30 = count;
+        if (count < uniformSize) {
+          uniformSize = count;
         }
-        piVar15 = (int *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-        if (local_2c == 0x8b55) {
+        dstCursor = (int *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
+        if (uniformType == 0x8b55) {
           loopIndex = 0;
-          if (0 < local_30) {
+          if (0 < uniformSize) {
             do {
               loopIndex = loopIndex + 1;
-              *piVar15 = *value;
-              piVar15[1] = value[1];
-              piVar15[2] = value[2];
-              piVar1 = value + 3;
+              *dstCursor = *value;
+              dstCursor[1] = value[1];
+              dstCursor[2] = value[2];
+              srcLastElement = value + 3;
               value = value + 4;
-              piVar15[3] = *piVar1;
-              piVar15 = piVar15 + 4;
-            } while (loopIndex < local_30);
+              dstCursor[3] = *srcLastElement;
+              dstCursor = dstCursor + 4;
+            } while (loopIndex < uniformSize);
           }
         }
         else {
           loopIndex = 0;
-          if (0 < local_30) {
+          if (0 < uniformSize) {
             do {
               if (*value == 0) {
-                *piVar15 = 0;
+                *dstCursor = 0;
               }
               else {
-                *piVar15 = 1;
+                *dstCursor = 1;
               }
               if (value[1] == 0) {
-                piVar15[1] = 0;
+                dstCursor[1] = 0;
               }
               else {
-                piVar15[1] = 1;
+                dstCursor[1] = 1;
               }
               if (value[2] == 0) {
-                piVar15[2] = 0;
+                dstCursor[2] = 0;
               }
               else {
-                piVar15[2] = 1;
+                dstCursor[2] = 1;
               }
               if (value[3] == 0) {
-                piVar15[3] = 0;
+                dstCursor[3] = 0;
               }
               else {
-                piVar15[3] = 1;
+                dstCursor[3] = 1;
               }
               loopIndex = loopIndex + 1;
-              piVar15 = piVar15 + 4;
+              dstCursor = dstCursor + 4;
               value = value + 4;
-            } while (loopIndex < local_30);
+            } while (loopIndex < uniformSize);
           }
         }
         loopIndex = 0;
-        if (0 < local_30) {
-          iVar9 = location << 2;
-          iVar8 = location << 4;
+        if (0 < uniformSize) {
+          elementMapOffset = location << 2;
+          elementValueOffset = location << 4;
           do {
-            iVar12 = *(int *)(currentProgram + 0x20);
-            iVar16 = *(int *)(iVar9 + *(int *)(iVar12 + 0x4e0));
-            if (iVar16 != -1) {
-              iVar16 = iVar16 * 0x10;
-              iVar11 = *(int *)(iVar12 + 0x51c);
-              bVar3 = true;
-              iVar13 = iVar8 + *(int *)(currentProgram + 0x4c);
-              uVar10 = *(undefined4 *)(iVar13 + 0xc);
-              iVar12 = iVar16 + iVar11;
-              uVar5 = *(undefined4 *)(iVar13 + 4);
-              uVar14 = *(undefined4 *)(iVar13 + 8);
-              *(undefined4 *)(iVar16 + iVar11) = *(undefined4 *)(iVar8 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar12 + 0xc) = uVar10;
-              *(undefined4 *)(iVar12 + 4) = uVar5;
-              *(undefined4 *)(iVar12 + 8) = uVar14;
+            stage0Record = *(int *)(currentProgram + 0x20);
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(stage0Record + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(stage0Record + 0x51c);
+              stage0Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
-            iVar16 = *(int *)(iVar9 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-            if (iVar16 != -1) {
-              iVar16 = iVar16 * 0x10;
-              iVar11 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-              bVar4 = true;
-              iVar13 = iVar8 + *(int *)(currentProgram + 0x4c);
-              uVar10 = *(undefined4 *)(iVar13 + 0xc);
-              iVar12 = iVar16 + iVar11;
-              uVar5 = *(undefined4 *)(iVar13 + 4);
-              uVar14 = *(undefined4 *)(iVar13 + 8);
-              *(undefined4 *)(iVar16 + iVar11) = *(undefined4 *)(iVar8 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar12 + 0xc) = uVar10;
-              *(undefined4 *)(iVar12 + 4) = uVar5;
-              *(undefined4 *)(iVar12 + 8) = uVar14;
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+              stage1Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
             loopIndex = loopIndex + 1;
-            iVar9 = iVar9 + 4;
-            iVar8 = iVar8 + 0x10;
-          } while (loopIndex < local_30);
+            elementMapOffset = elementMapOffset + 4;
+            elementValueOffset = elementValueOffset + 0x10;
+          } while (loopIndex < uniformSize);
         }
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-        if (bVar3) {
-          iVar7 = glContext + 0x10000;
+        if (stage0Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex2 = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar15 = (int *)(iVar7 + -0x777c);
-              iVar8 = loopIndex2 * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex2 * 4;
               loopIndex2 = loopIndex2 + 1;
-              puVar2 = (undefined4 *)(iVar7 + -0x7a54);
-              iVar7 = iVar7 + 0x2e0;
-              (**(code **)(*piVar15 + 0x194))
-                        (*puVar2,*(undefined4 *)(iVar8 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
             } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
-        if (bVar4) {
-          iVar7 = glContext + 0x10000;
+        if (stage1Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex2 = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar15 = (int *)(iVar7 + -0x777c);
-              iVar8 = loopIndex2 * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex2 * 4;
               loopIndex2 = loopIndex2 + 1;
-              puVar2 = (undefined4 *)(iVar7 + -0x7a54);
-              iVar7 = iVar7 + 0x2e0;
-              (**(code **)(*piVar15 + 0x194))
-                        (*puVar2,*(undefined4 *)(iVar8 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
             } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
@@ -3123,156 +3180,160 @@ void _glUniform3ivARB_Exec(glContext, location, count, value)
   int count;
   int *value;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  bool bVar3;
-  bool bVar4;
-  undefined4 uVar5;
+  int *srcLastElement;
+  undefined4 *rendererHandlePtr;
+  bool stage0Updated;
+  bool stage1Updated;
+  undefined4 uniformWord1;
   int currentProgram;
-  int iVar7;
+  int typeInfoFound;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar8;
-  int iVar9;
+  int elementValueOffset;
+  int rendererSlotOffset;
+  int elementMapOffset;
   int loopIndex2;
-  undefined4 uVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
-  undefined4 uVar14;
-  int *piVar15;
-  int iVar16;
-  int local_30;
-  int local_2c;
-  undefined2 local_28 [4];
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int *dstCursor;
+  int *rendererCallbacks;
+  int registerIndexThenOffset;
+  int uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [4];
   
-  local_2c = 0;
-  local_28[0] = 0;
-  local_30 = 0;
-  bVar3 = false;
-  bVar4 = false;
+  uniformType = 0;
+  uniformStageUse[0] = 0;
+  uniformSize = 0;
+  stage0Updated = false;
+  stage1Updated = false;
   if (location != -1) {
     if ((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0)) &&
         (location < *(int *)(currentProgram + 0x30))) &&
        (((-1 < count &&
-         (iVar7 = _ShGetUniformTypeInfo
-                            (*(undefined4 *)(currentProgram + 0x40),location,&local_30,&local_2c,local_28),
-         iVar7 != 0)) && ((local_2c == 0x8b54 || (local_2c == 0x8b58)))))) {
+         (typeInfoFound = _ShGetUniformTypeInfo
+                            (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+         typeInfoFound != 0)) && ((uniformType == 0x8b54 || (uniformType == 0x8b58)))))) {
       if (count != 0) {
-        if (count < local_30) {
-          local_30 = count;
+        if (count < uniformSize) {
+          uniformSize = count;
         }
-        piVar15 = (int *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-        if (local_2c == 0x8b54) {
+        dstCursor = (int *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
+        if (uniformType == 0x8b54) {
           loopIndex = 0;
-          if (0 < local_30) {
+          if (0 < uniformSize) {
             do {
               loopIndex = loopIndex + 1;
-              *piVar15 = *value;
-              piVar15[1] = value[1];
-              piVar1 = value + 2;
+              *dstCursor = *value;
+              dstCursor[1] = value[1];
+              srcLastElement = value + 2;
               value = value + 3;
-              piVar15[2] = *piVar1;
-              piVar15 = piVar15 + 4;
-            } while (loopIndex < local_30);
+              dstCursor[2] = *srcLastElement;
+              dstCursor = dstCursor + 4;
+            } while (loopIndex < uniformSize);
           }
         }
         else {
           loopIndex = 0;
-          if (0 < local_30) {
+          if (0 < uniformSize) {
             do {
               if (*value == 0) {
-                *piVar15 = 0;
+                *dstCursor = 0;
               }
               else {
-                *piVar15 = 1;
+                *dstCursor = 1;
               }
               if (value[1] == 0) {
-                piVar15[1] = 0;
+                dstCursor[1] = 0;
               }
               else {
-                piVar15[1] = 1;
+                dstCursor[1] = 1;
               }
               if (value[2] == 0) {
-                piVar15[2] = 0;
+                dstCursor[2] = 0;
               }
               else {
-                piVar15[2] = 1;
+                dstCursor[2] = 1;
               }
               loopIndex = loopIndex + 1;
-              piVar15 = piVar15 + 4;
+              dstCursor = dstCursor + 4;
               value = value + 3;
-            } while (loopIndex < local_30);
+            } while (loopIndex < uniformSize);
           }
         }
         loopIndex = 0;
-        if (0 < local_30) {
-          iVar9 = location << 2;
-          iVar8 = location << 4;
+        if (0 < uniformSize) {
+          elementMapOffset = location << 2;
+          elementValueOffset = location << 4;
           do {
-            iVar12 = *(int *)(currentProgram + 0x20);
-            iVar16 = *(int *)(iVar9 + *(int *)(iVar12 + 0x4e0));
-            if (iVar16 != -1) {
-              iVar16 = iVar16 * 0x10;
-              iVar11 = *(int *)(iVar12 + 0x51c);
-              bVar3 = true;
-              iVar13 = iVar8 + *(int *)(currentProgram + 0x4c);
-              uVar10 = *(undefined4 *)(iVar13 + 0xc);
-              iVar12 = iVar16 + iVar11;
-              uVar5 = *(undefined4 *)(iVar13 + 4);
-              uVar14 = *(undefined4 *)(iVar13 + 8);
-              *(undefined4 *)(iVar16 + iVar11) = *(undefined4 *)(iVar8 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar12 + 0xc) = uVar10;
-              *(undefined4 *)(iVar12 + 4) = uVar5;
-              *(undefined4 *)(iVar12 + 8) = uVar14;
+            stage0Record = *(int *)(currentProgram + 0x20);
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(stage0Record + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(stage0Record + 0x51c);
+              stage0Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
-            iVar16 = *(int *)(iVar9 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-            if (iVar16 != -1) {
-              iVar16 = iVar16 * 0x10;
-              iVar11 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-              bVar4 = true;
-              iVar13 = iVar8 + *(int *)(currentProgram + 0x4c);
-              uVar10 = *(undefined4 *)(iVar13 + 0xc);
-              iVar12 = iVar16 + iVar11;
-              uVar5 = *(undefined4 *)(iVar13 + 4);
-              uVar14 = *(undefined4 *)(iVar13 + 8);
-              *(undefined4 *)(iVar16 + iVar11) = *(undefined4 *)(iVar8 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar12 + 0xc) = uVar10;
-              *(undefined4 *)(iVar12 + 4) = uVar5;
-              *(undefined4 *)(iVar12 + 8) = uVar14;
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+              stage1Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
             loopIndex = loopIndex + 1;
-            iVar9 = iVar9 + 4;
-            iVar8 = iVar8 + 0x10;
-          } while (loopIndex < local_30);
+            elementMapOffset = elementMapOffset + 4;
+            elementValueOffset = elementValueOffset + 0x10;
+          } while (loopIndex < uniformSize);
         }
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-        if (bVar3) {
-          iVar7 = glContext + 0x10000;
+        if (stage0Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex2 = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar15 = (int *)(iVar7 + -0x777c);
-              iVar8 = loopIndex2 * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex2 * 4;
               loopIndex2 = loopIndex2 + 1;
-              puVar2 = (undefined4 *)(iVar7 + -0x7a54);
-              iVar7 = iVar7 + 0x2e0;
-              (**(code **)(*piVar15 + 0x194))
-                        (*puVar2,*(undefined4 *)(iVar8 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
             } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
-        if (bVar4) {
-          iVar7 = glContext + 0x10000;
+        if (stage1Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex2 = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar15 = (int *)(iVar7 + -0x777c);
-              iVar8 = loopIndex2 * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex2 * 4;
               loopIndex2 = loopIndex2 + 1;
-              puVar2 = (undefined4 *)(iVar7 + -0x7a54);
-              iVar7 = iVar7 + 0x2e0;
-              (**(code **)(*piVar15 + 0x194))
-                        (*puVar2,*(undefined4 *)(iVar8 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
             } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
@@ -3292,149 +3353,153 @@ void _glUniform2ivARB_Exec(glContext, location, count, value)
   int count;
   int *value;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  bool bVar3;
-  bool bVar4;
-  undefined4 uVar5;
+  int *srcLastElement;
+  undefined4 *rendererHandlePtr;
+  bool stage0Updated;
+  bool stage1Updated;
+  undefined4 uniformWord1;
   int currentProgram;
-  int iVar7;
+  int typeInfoFound;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar8;
-  int iVar9;
+  int elementValueOffset;
+  int rendererSlotOffset;
+  int elementMapOffset;
   int loopIndex2;
-  undefined4 uVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
-  undefined4 uVar14;
-  int *piVar15;
-  int iVar16;
-  int local_30;
-  int local_2c;
-  undefined2 local_28 [4];
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int *dstCursor;
+  int *rendererCallbacks;
+  int registerIndexThenOffset;
+  int uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [4];
   
-  local_2c = 0;
-  local_28[0] = 0;
-  local_30 = 0;
-  bVar3 = false;
-  bVar4 = false;
+  uniformType = 0;
+  uniformStageUse[0] = 0;
+  uniformSize = 0;
+  stage0Updated = false;
+  stage1Updated = false;
   if (location != -1) {
     if ((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0)) &&
         (location < *(int *)(currentProgram + 0x30))) &&
        (((-1 < count &&
-         (iVar7 = _ShGetUniformTypeInfo
-                            (*(undefined4 *)(currentProgram + 0x40),location,&local_30,&local_2c,local_28),
-         iVar7 != 0)) && ((local_2c == 0x8b53 || (local_2c == 0x8b57)))))) {
+         (typeInfoFound = _ShGetUniformTypeInfo
+                            (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+         typeInfoFound != 0)) && ((uniformType == 0x8b53 || (uniformType == 0x8b57)))))) {
       if (count != 0) {
-        if (count < local_30) {
-          local_30 = count;
+        if (count < uniformSize) {
+          uniformSize = count;
         }
-        piVar15 = (int *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-        if (local_2c == 0x8b53) {
+        dstCursor = (int *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
+        if (uniformType == 0x8b53) {
           loopIndex = 0;
-          if (0 < local_30) {
+          if (0 < uniformSize) {
             do {
               loopIndex = loopIndex + 1;
-              *piVar15 = *value;
-              piVar1 = value + 1;
+              *dstCursor = *value;
+              srcLastElement = value + 1;
               value = value + 2;
-              piVar15[1] = *piVar1;
-              piVar15 = piVar15 + 4;
-            } while (loopIndex < local_30);
+              dstCursor[1] = *srcLastElement;
+              dstCursor = dstCursor + 4;
+            } while (loopIndex < uniformSize);
           }
         }
         else {
           loopIndex = 0;
-          if (0 < local_30) {
+          if (0 < uniformSize) {
             do {
               if (*value == 0) {
-                *piVar15 = 0;
+                *dstCursor = 0;
               }
               else {
-                *piVar15 = 1;
+                *dstCursor = 1;
               }
               if (value[1] == 0) {
-                piVar15[1] = 0;
+                dstCursor[1] = 0;
               }
               else {
-                piVar15[1] = 1;
+                dstCursor[1] = 1;
               }
               loopIndex = loopIndex + 1;
-              piVar15 = piVar15 + 4;
+              dstCursor = dstCursor + 4;
               value = value + 2;
-            } while (loopIndex < local_30);
+            } while (loopIndex < uniformSize);
           }
         }
         loopIndex = 0;
-        if (0 < local_30) {
-          iVar9 = location << 2;
-          iVar8 = location << 4;
+        if (0 < uniformSize) {
+          elementMapOffset = location << 2;
+          elementValueOffset = location << 4;
           do {
-            iVar12 = *(int *)(currentProgram + 0x20);
-            iVar16 = *(int *)(iVar9 + *(int *)(iVar12 + 0x4e0));
-            if (iVar16 != -1) {
-              iVar16 = iVar16 * 0x10;
-              iVar11 = *(int *)(iVar12 + 0x51c);
-              bVar3 = true;
-              iVar13 = iVar8 + *(int *)(currentProgram + 0x4c);
-              uVar10 = *(undefined4 *)(iVar13 + 0xc);
-              iVar12 = iVar16 + iVar11;
-              uVar5 = *(undefined4 *)(iVar13 + 4);
-              uVar14 = *(undefined4 *)(iVar13 + 8);
-              *(undefined4 *)(iVar16 + iVar11) = *(undefined4 *)(iVar8 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar12 + 0xc) = uVar10;
-              *(undefined4 *)(iVar12 + 4) = uVar5;
-              *(undefined4 *)(iVar12 + 8) = uVar14;
+            stage0Record = *(int *)(currentProgram + 0x20);
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(stage0Record + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(stage0Record + 0x51c);
+              stage0Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
-            iVar16 = *(int *)(iVar9 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-            if (iVar16 != -1) {
-              iVar16 = iVar16 * 0x10;
-              iVar11 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-              bVar4 = true;
-              iVar13 = iVar8 + *(int *)(currentProgram + 0x4c);
-              uVar10 = *(undefined4 *)(iVar13 + 0xc);
-              iVar12 = iVar16 + iVar11;
-              uVar5 = *(undefined4 *)(iVar13 + 4);
-              uVar14 = *(undefined4 *)(iVar13 + 8);
-              *(undefined4 *)(iVar16 + iVar11) = *(undefined4 *)(iVar8 + *(int *)(currentProgram + 0x4c));
-              *(undefined4 *)(iVar12 + 0xc) = uVar10;
-              *(undefined4 *)(iVar12 + 4) = uVar5;
-              *(undefined4 *)(iVar12 + 8) = uVar14;
+            registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+            if (registerIndexThenOffset != -1) {
+              registerIndexThenOffset = registerIndexThenOffset * 0x10;
+              constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+              stage1Updated = true;
+              uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+              uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+              constantRegister = registerIndexThenOffset + constantRegisterFile;
+              uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+              uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+              *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c));
+              *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+              *(undefined4 *)(constantRegister + 4) = uniformWord1;
+              *(undefined4 *)(constantRegister + 8) = uniformWord2;
             }
             loopIndex = loopIndex + 1;
-            iVar9 = iVar9 + 4;
-            iVar8 = iVar8 + 0x10;
-          } while (loopIndex < local_30);
+            elementMapOffset = elementMapOffset + 4;
+            elementValueOffset = elementValueOffset + 0x10;
+          } while (loopIndex < uniformSize);
         }
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-        if (bVar3) {
-          iVar7 = glContext + 0x10000;
+        if (stage0Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex2 = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar15 = (int *)(iVar7 + -0x777c);
-              iVar8 = loopIndex2 * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex2 * 4;
               loopIndex2 = loopIndex2 + 1;
-              puVar2 = (undefined4 *)(iVar7 + -0x7a54);
-              iVar7 = iVar7 + 0x2e0;
-              (**(code **)(*piVar15 + 0x194))
-                        (*puVar2,*(undefined4 *)(iVar8 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
             } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
-        if (bVar4) {
-          iVar7 = glContext + 0x10000;
+        if (stage1Updated) {
+          rendererRecordCursor = glContext + 0x10000;
           loopIndex2 = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar15 = (int *)(iVar7 + -0x777c);
-              iVar8 = loopIndex2 * 4;
+              rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+              rendererSlotOffset = loopIndex2 * 4;
               loopIndex2 = loopIndex2 + 1;
-              puVar2 = (undefined4 *)(iVar7 + -0x7a54);
-              iVar7 = iVar7 + 0x2e0;
-              (**(code **)(*piVar15 + 0x194))
-                        (*puVar2,*(undefined4 *)(iVar8 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+              rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+              rendererRecordCursor = rendererRecordCursor + 0x2e0;
+              (**(code **)(*rendererCallbacks + 0x194))
+                        (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
             } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
         }
@@ -3454,161 +3519,168 @@ void _glUniform1ivARB_Exec(glContext, location, count, value)
   int count;
   int *value;
 {
-  undefined4 *puVar1;
-  bool bVar2;
-  bool bVar3;
-  bool bVar4;
+  undefined4 *rendererHandlePtr;
+  bool stage0Updated;
+  bool stage0Updated2;
+  bool stage1Updated;
   int iVar5;
-  undefined4 uVar6;
+  int rendererSlotOffset;
+  int elementValueOffset;
+  undefined4 uniformWord1;
   int iVar7;
+  int elementMapOffset;
+  int typeInfoFound;
   int loopIndex;
   int iVar8;
-  undefined4 uVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  undefined4 uVar13;
-  int iVar14;
+  int registerIndexThenOffset;
+  undefined4 uniformWord3;
+  int constantRegisterFile;
+  int stage0Record;
+  int constantRegister;
+  int uniformValueSlot;
+  undefined4 uniformWord2;
+  int rendererRecordCursor;
   int loopIndex2;
   int currentProgram;
-  int *piVar16;
+  int *dstCursor;
+  int *rendererCallbacks;
   double extraout_f1;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  int local_40;
-  int local_3c;
-  undefined2 local_38 [6];
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  int uniformSize;
+  int uniformType;
+  undefined2 uniformStageUse [6];
   
-  local_3c = 0;
-  local_38[0] = 0;
-  local_40 = 0;
-  bVar3 = false;
-  bVar4 = false;
-  bVar2 = false;
+  uniformType = 0;
+  uniformStageUse[0] = 0;
+  uniformSize = 0;
+  stage0Updated2 = false;
+  stage1Updated = false;
+  stage0Updated = false;
   if (location != -1) {
     if (((((*(short *)(glContext + 0x4a10) < 0) && (currentProgram = *(int *)(glContext + 0x5430), currentProgram != 0))
          && (location < *(int *)(currentProgram + 0x30))) &&
         ((-1 < count &&
-         (iVar7 = _ShGetUniformTypeInfo
-                            (*(undefined4 *)(currentProgram + 0x40),location,&local_40,&local_3c,local_38),
-         iVar7 != 0)))) &&
-       ((((local_3c == 0x1404 || ((local_3c == 0x8b56 || (local_3c == 0x8b5d)))) ||
-         ((local_3c == 0x8b5e ||
-          ((((local_3c == 0x8b5f || (local_3c == 0x8b60)) || (local_3c == 0x8b61)) ||
-           ((local_3c == 0x8b62 || (local_3c == 0x8b63)))))))) || (local_3c == 0x8b64)))) {
+         (typeInfoFound = _ShGetUniformTypeInfo
+                            (*(undefined4 *)(currentProgram + 0x40),location,&uniformSize,&uniformType,uniformStageUse),
+         typeInfoFound != 0)))) &&
+       ((((uniformType == 0x1404 || ((uniformType == 0x8b56 || (uniformType == 0x8b5d)))) ||
+         ((uniformType == 0x8b5e ||
+          ((((uniformType == 0x8b5f || (uniformType == 0x8b60)) || (uniformType == 0x8b61)) ||
+           ((uniformType == 0x8b62 || (uniformType == 0x8b63)))))))) || (uniformType == 0x8b64)))) {
       if (count != 0) {
-        if (count < local_40) {
-          local_40 = count;
+        if (count < uniformSize) {
+          uniformSize = count;
         }
         loopIndex2 = 0;
-        piVar16 = (int *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-        iVar7 = local_40;
+        dstCursor = (int *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
+        iVar7 = uniformSize;
         fparam_1 = extraout_f1;
-        if (0 < local_40) {
+        if (0 < uniformSize) {
           do {
-            iVar8 = *piVar16;
+            iVar8 = *dstCursor;
             iVar5 = *value;
             if (iVar8 != iVar5) {
-              bVar2 = true;
-              iVar7 = local_40;
-              if (local_3c == 0x1404) {
+              stage0Updated = true;
+              iVar7 = uniformSize;
+              if (uniformType == 0x1404) {
 LAB_0008bc7c:
-                *piVar16 = iVar5;
+                *dstCursor = iVar5;
               }
-              else if (local_3c - 0x8b5dU < 8) {
-                *piVar16 = iVar5;
-                fparam_1 = (double)((double (*)())_setImageUnit)(glContext,currentProgram,*value,iVar8,local_38,local_3c,
-                                                 fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8)
+              else if (uniformType - 0x8b5dU < 8) {
+                *dstCursor = iVar5;
+                fparam_1 = (double)((double (*)())_setImageUnit)(glContext,currentProgram,*value,iVar8,uniformStageUse,uniformType,
+                                                 fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8)
                 ;
-                iVar7 = local_40;
+                iVar7 = uniformSize;
               }
               else {
                 if (iVar5 == 0) goto LAB_0008bc7c;
-                *piVar16 = 1;
+                *dstCursor = 1;
               }
             }
             loopIndex2 = loopIndex2 + 1;
-            piVar16 = piVar16 + 4;
+            dstCursor = dstCursor + 4;
             value = value + 1;
           } while (loopIndex2 < iVar7);
-          if (bVar2) {
+          if (stage0Updated) {
             loopIndex2 = 0;
             if (0 < iVar7) {
-              iVar7 = location << 2;
-              iVar5 = location << 4;
+              elementMapOffset = location << 2;
+              elementValueOffset = location << 4;
               do {
-                iVar11 = *(int *)(currentProgram + 0x20);
-                iVar8 = *(int *)(iVar7 + *(int *)(iVar11 + 0x4e0));
-                if (iVar8 != -1) {
-                  iVar8 = iVar8 * 0x10;
-                  iVar10 = *(int *)(iVar11 + 0x51c);
-                  bVar3 = true;
-                  iVar12 = iVar5 + *(int *)(currentProgram + 0x4c);
-                  uVar9 = *(undefined4 *)(iVar12 + 0xc);
-                  iVar11 = iVar8 + iVar10;
-                  uVar6 = *(undefined4 *)(iVar12 + 4);
-                  uVar13 = *(undefined4 *)(iVar12 + 8);
-                  *(undefined4 *)(iVar8 + iVar10) = *(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x4c))
+                stage0Record = *(int *)(currentProgram + 0x20);
+                registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(stage0Record + 0x4e0));
+                if (registerIndexThenOffset != -1) {
+                  registerIndexThenOffset = registerIndexThenOffset * 0x10;
+                  constantRegisterFile = *(int *)(stage0Record + 0x51c);
+                  stage0Updated2 = true;
+                  uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+                  uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+                  constantRegister = registerIndexThenOffset + constantRegisterFile;
+                  uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+                  uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+                  *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c))
                   ;
-                  *(undefined4 *)(iVar11 + 0xc) = uVar9;
-                  *(undefined4 *)(iVar11 + 4) = uVar6;
-                  *(undefined4 *)(iVar11 + 8) = uVar13;
+                  *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+                  *(undefined4 *)(constantRegister + 4) = uniformWord1;
+                  *(undefined4 *)(constantRegister + 8) = uniformWord2;
                 }
-                iVar8 = *(int *)(iVar7 + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
-                if (iVar8 != -1) {
-                  iVar8 = iVar8 * 0x10;
-                  iVar10 = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
-                  bVar4 = true;
-                  iVar12 = iVar5 + *(int *)(currentProgram + 0x4c);
-                  uVar9 = *(undefined4 *)(iVar12 + 0xc);
-                  iVar11 = iVar8 + iVar10;
-                  uVar6 = *(undefined4 *)(iVar12 + 4);
-                  uVar13 = *(undefined4 *)(iVar12 + 8);
-                  *(undefined4 *)(iVar8 + iVar10) = *(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x4c))
+                registerIndexThenOffset = *(int *)(elementMapOffset + *(int *)(*(int *)(currentProgram + 0x24) + 0x4e0));
+                if (registerIndexThenOffset != -1) {
+                  registerIndexThenOffset = registerIndexThenOffset * 0x10;
+                  constantRegisterFile = *(int *)(*(int *)(currentProgram + 0x24) + 0x51c);
+                  stage1Updated = true;
+                  uniformValueSlot = elementValueOffset + *(int *)(currentProgram + 0x4c);
+                  uniformWord3 = *(undefined4 *)(uniformValueSlot + 0xc);
+                  constantRegister = registerIndexThenOffset + constantRegisterFile;
+                  uniformWord1 = *(undefined4 *)(uniformValueSlot + 4);
+                  uniformWord2 = *(undefined4 *)(uniformValueSlot + 8);
+                  *(undefined4 *)(registerIndexThenOffset + constantRegisterFile) = *(undefined4 *)(elementValueOffset + *(int *)(currentProgram + 0x4c))
                   ;
-                  *(undefined4 *)(iVar11 + 0xc) = uVar9;
-                  *(undefined4 *)(iVar11 + 4) = uVar6;
-                  *(undefined4 *)(iVar11 + 8) = uVar13;
+                  *(undefined4 *)(constantRegister + 0xc) = uniformWord3;
+                  *(undefined4 *)(constantRegister + 4) = uniformWord1;
+                  *(undefined4 *)(constantRegister + 8) = uniformWord2;
                 }
                 loopIndex2 = loopIndex2 + 1;
-                iVar7 = iVar7 + 4;
-                iVar5 = iVar5 + 0x10;
-              } while (loopIndex2 < local_40);
+                elementMapOffset = elementMapOffset + 4;
+                elementValueOffset = elementValueOffset + 0x10;
+              } while (loopIndex2 < uniformSize);
             }
             *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x4000000;
-            if (bVar3) {
-              iVar14 = glContext + 0x10000;
+            if (stage0Updated2) {
+              rendererRecordCursor = glContext + 0x10000;
               loopIndex = 0;
               if (*(char *)(glContext + 0x85a4) != '\0') {
                 do {
-                  piVar16 = (int *)(iVar14 + -0x777c);
-                  iVar5 = loopIndex * 4;
+                  rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+                  rendererSlotOffset = loopIndex * 4;
                   loopIndex = loopIndex + 1;
-                  puVar1 = (undefined4 *)(iVar14 + -0x7a54);
-                  iVar14 = iVar14 + 0x2e0;
-                  (**(code **)(*piVar16 + 0x194))
-                            (*puVar1,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x20) + 0x4e4),2);
+                  rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+                  rendererRecordCursor = rendererRecordCursor + 0x2e0;
+                  (**(code **)(*rendererCallbacks + 0x194))
+                            (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x20) + 0x4e4),2);
                 } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
               }
             }
-            if (bVar4) {
-              iVar14 = glContext + 0x10000;
+            if (stage1Updated) {
+              rendererRecordCursor = glContext + 0x10000;
               loopIndex = 0;
               if (*(char *)(glContext + 0x85a4) != '\0') {
                 do {
-                  piVar16 = (int *)(iVar14 + -0x777c);
-                  iVar5 = loopIndex * 4;
+                  rendererCallbacks = (int *)(rendererRecordCursor + -0x777c);
+                  rendererSlotOffset = loopIndex * 4;
                   loopIndex = loopIndex + 1;
-                  puVar1 = (undefined4 *)(iVar14 + -0x7a54);
-                  iVar14 = iVar14 + 0x2e0;
-                  (**(code **)(*piVar16 + 0x194))
-                            (*puVar1,*(undefined4 *)(iVar5 + *(int *)(currentProgram + 0x24) + 0x4e4),2);
+                  rendererHandlePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+                  rendererRecordCursor = rendererRecordCursor + 0x2e0;
+                  (**(code **)(*rendererCallbacks + 0x194))
+                            (*rendererHandlePtr,*(undefined4 *)(rendererSlotOffset + *(int *)(currentProgram + 0x24) + 0x4e4),2);
                 } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
               }
             }
