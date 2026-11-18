@@ -359,11 +359,14 @@ def main():
             body = '\n'.join(lines[s:e])
             rws = byfn.pop(key)
             uses = [r for r in rws if len(r) == 10]
-            for (f, n, fn, old, new, tier) in [r for r in rws if len(r) == 6]:
+            for r in [r for r in rws if len(r) == 6]:
+                (f, n, fn, old, new, tier) = r
                 code = strip_strings(body)
                 ids = set(IDENT.findall(code))
                 if old not in ids:
                     if new in ids: applied += 1; continue
+                    # a CHAINED rename: a later row of this function renamed `new` again (in_stack_X -> incomingStack_X -> incomingStackWord_X); link_corpus resolves the chain
+                    if any(r2[3] == new for r2 in rws if len(r2) == 6 and r2 is not r): applied += 1; continue
                     print('%s:%d: %s: neither %s nor %s present' % (f, n, fn, old, new)); errors += 1; continue
                 if new in ids or new in decl:
                     print('%s:%d: %s: new name %s collides' % (f, n, fn, new)); errors += 1; continue
