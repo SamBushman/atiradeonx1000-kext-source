@@ -991,122 +991,124 @@ int _glDrawPixels_ListExec(int glContext,uint *recordedArgs,double fparam_1,doub
 {
   int remaining;
   int loopIndex;
-  bool bVar1;
+  bool formatInvalid;
+  bool rendererByte79Clear;
   bool noStateChangePending;
   char rendererInfoByte79;
   undefined4 glErrorCode;
-  uint uVar4;
-  int iVar5;
-  uint uVar6;
+  uint requiredFormat;
+  int rasterScratchEndThenFastResult;
+  uint type;
+  uint format;
   uint glContextWord4e1c;
   int *srcCursor;
-  int iVar8;
+  int dirtyWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  uint uVar9;
+  uint width;
   uint dispatchFlags;
   uint changeWord3;
   int matrixChangeBits;
   int *changeWordCursor;
-  int iVar12;
-  float *pfVar13;
+  int recordSize;
+  float *rasterPos;
   double extraout_f1;
   
-  iVar5 = *(int *)(glContext + 0x4854);
-  pfVar13 = (float *)(iVar5 + -0x200);
-  iVar12 = recordedArgs[4] + 0x14;
+  rasterScratchEndThenFastResult = *(int *)(glContext + 0x4854);
+  rasterPos = (float *)(rasterScratchEndThenFastResult + -0x200);
+  recordSize = recordedArgs[4] + 0x14;
   if (-1 < *(short *)(glContext + 0x4a10)) {
 LAB_00063798:
     if (*(int *)(glContext + 0x7574) != 0) {
-      return iVar12;
+      return recordSize;
     }
     glErrorCode = 0x502;
     goto LAB_00063b18;
   }
-  uVar9 = *recordedArgs;
-  if (((int)uVar9 < 0) || ((int)recordedArgs[1] < 0)) {
+  width = *recordedArgs;
+  if (((int)width < 0) || ((int)recordedArgs[1] < 0)) {
     if (*(int *)(glContext + 0x7574) != 0) {
-      return iVar12;
+      return recordSize;
     }
     glErrorCode = 0x501;
     goto LAB_00063b18;
   }
-  uVar6 = recordedArgs[3];
-  if (uVar6 < 0x8037) {
-    if (0x8032 < uVar6) {
+  type = recordedArgs[3];
+  if (type < 0x8037) {
+    if (0x8032 < type) {
 LAB_00063748:
-      uVar6 = recordedArgs[2];
-      if (uVar6 != 0x1908) {
-        uVar4 = 0x80e1;
+      format = recordedArgs[2];
+      if (format != 0x1908) {
+        requiredFormat = 0x80e1;
         goto LAB_0006375c;
       }
       goto LAB_000637ac;
     }
-    if (uVar6 == 0x140b) {
+    if (type == 0x140b) {
 LAB_000636f4:
-      uVar6 = recordedArgs[2];
-      if (uVar6 != 0x8000) {
-        if (uVar6 < 0x8001) {
-          bVar1 = 10 < uVar6 - 0x1900;
+      format = recordedArgs[2];
+      if (format != 0x8000) {
+        if (format < 0x8001) {
+          formatInvalid = 10 < format - 0x1900;
         }
         else {
-          bVar1 = 1 < uVar6 - 0x80e0;
+          formatInvalid = 1 < format - 0x80e0;
         }
-        if (bVar1) goto LAB_00063798;
+        if (formatInvalid) goto LAB_00063798;
       }
       goto LAB_000637ac;
     }
-    if (uVar6 < 0x140c) {
-      if (uVar6 - 0x1400 < 7) goto LAB_000636f4;
+    if (type < 0x140c) {
+      if (type - 0x1400 < 7) goto LAB_000636f4;
     }
-    else if (uVar6 == 0x1a00) {
+    else if (type == 0x1a00) {
       if (recordedArgs[2] - 0x1900 < 2) goto LAB_000637ac;
     }
-    else if (uVar6 == 0x8032) goto LAB_00063730;
+    else if (type == 0x8032) goto LAB_00063730;
   }
   else {
-    if (uVar6 < 0x8369) {
-      if (0x8364 < uVar6) goto LAB_00063748;
-      if (uVar6 < 0x8362) goto LAB_00063b08;
+    if (type < 0x8369) {
+      if (0x8364 < type) goto LAB_00063748;
+      if (type < 0x8362) goto LAB_00063b08;
 LAB_00063730:
-      uVar6 = recordedArgs[2];
-      if (uVar6 == 0x1907) goto LAB_000637ac;
-      uVar4 = 0x80e0;
+      format = recordedArgs[2];
+      if (format == 0x1907) goto LAB_000637ac;
+      requiredFormat = 0x80e0;
 LAB_0006375c:
-      if (uVar6 != uVar4) goto LAB_00063798;
+      if (format != requiredFormat) goto LAB_00063798;
     }
     else {
-      if (1 < uVar6 - 0x85ba) goto LAB_00063b08;
-      if ((recordedArgs[2] != 0x85b9) || ((uVar9 & 1) != 0)) goto LAB_00063798;
+      if (1 < type - 0x85ba) goto LAB_00063b08;
+      if ((recordedArgs[2] != 0x85b9) || ((width & 1) != 0)) goto LAB_00063798;
     }
 LAB_000637ac:
     if (*(char *)(glContext + 0x2ef) == '\0') {
-      return iVar12;
+      return recordSize;
     }
     glContextWord4e1c = *(uint *)(glContext + 0x4e1c);
     if (glContextWord4e1c == 0x1c01) {
-      *pfVar13 = *(float *)(glContext + 0x2e0);
-      *(undefined4 *)(iVar5 + -0x1fc) = *(undefined4 *)(glContext + 0x2e4);
-      *(undefined4 *)(iVar5 + -0x1f8) = *(undefined4 *)(glContext + 0x2e8);
-      _gleFeedbackDrawPixels(glContext,pfVar13);
-      return iVar12;
+      *rasterPos = *(float *)(glContext + 0x2e0);
+      *(undefined4 *)(rasterScratchEndThenFastResult + -0x1fc) = *(undefined4 *)(glContext + 0x2e4);
+      *(undefined4 *)(rasterScratchEndThenFastResult + -0x1f8) = *(undefined4 *)(glContext + 0x2e8);
+      _gleFeedbackDrawPixels(glContext,rasterPos);
+      return recordSize;
     }
     if (glContextWord4e1c < 0x1c02) {
       if (glContextWord4e1c == 0x1c00) {
         if (*(float *)(glContext + 0x31a8) == FLOAT_00108e50) {
-          return iVar12;
+          return recordSize;
         }
         if (*(float *)(glContext + 0x31ac) == FLOAT_00108e50) {
-          return iVar12;
+          return recordSize;
         }
-        if (uVar9 == 0) {
-          return iVar12;
+        if (width == 0) {
+          return recordSize;
         }
         if (recordedArgs[1] == 0) {
-          return iVar12;
+          return recordSize;
         }
         matrixChangeBits = *(int *)(glContext + 0x50ac);
         if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
@@ -1130,9 +1132,9 @@ LAB_00063918:
           loopIndex = 0;
           srcCursor = (int *)(glContext + 0x324);
           do {
-            iVar8 = *srcCursor;
+            dirtyWord = *srcCursor;
             srcCursor = srcCursor + 1;
-            if (iVar8 != 0) {
+            if (dirtyWord != 0) {
               *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
               break;
             }
@@ -1149,14 +1151,14 @@ LAB_00063918:
             goto LAB_00063918;
           }
         }
-        bVar1 = rendererInfoByte79 == '\0';
-        if (bVar1) {
+        rendererByte79Clear = rendererInfoByte79 == '\0';
+        if (rendererByte79Clear) {
           changeWord3 = changeWord3 & 0x17000000;
         }
         else {
           changeWord3 = changeWord3 & 0x17ffffff;
         }
-        if (bVar1) {
+        if (rendererByte79Clear) {
           noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
                   *(int *)(glContext + 800) == 0;
         }
@@ -1179,7 +1181,7 @@ LAB_00063918:
               _gleUpdateDispatchCodeChange(glContext,dispatchFlags);
               if (*(char *)(glContext + 0x759d) == '\0') {
                 if (*(int *)(glContext + 0x7574) != 0) {
-                  return iVar12;
+                  return recordSize;
                 }
                 glErrorCode = 0x506;
                 goto LAB_00063b18;
@@ -1197,35 +1199,35 @@ LAB_00063918:
           } while (remaining != 0);
         }
 LAB_00063a3c:
-        *pfVar13 = *(float *)(glContext + 0x4a44) * *(float *)(glContext + 0x2e0) +
+        *rasterPos = *(float *)(glContext + 0x4a44) * *(float *)(glContext + 0x2e0) +
                    *(float *)(glContext + 0x4a48);
-        *(float *)(iVar5 + -0x1fc) =
+        *(float *)(rasterScratchEndThenFastResult + -0x1fc) =
              *(float *)(glContext + 0x4a4c) * *(float *)(glContext + 0x2e4) +
              *(float *)(glContext + 0x4a50);
-        *(float *)(iVar5 + -0x1f8) = *(float *)(glContext + 0x4a54) * *(float *)(glContext + 0x2e8);
+        *(float *)(rasterScratchEndThenFastResult + -0x1f8) = *(float *)(glContext + 0x4a54) * *(float *)(glContext + 0x2e8);
         if ((*(char *)(*(int *)(glContext + 0x468c) + 0x7b) != '\0') &&
-           (iVar5 = _gleDrawPixelsFast(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs + 5
-                                      ), iVar5 != 0)) {
-          return iVar12;
+           (rasterScratchEndThenFastResult = _gleDrawPixelsFast(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs + 5
+                                      ), rasterScratchEndThenFastResult != 0)) {
+          return recordSize;
         }
         (**(code **)(glContext + 0x46a4))
-                  (*(undefined4 *)(glContext + 0x4688),pfVar13,*recordedArgs,recordedArgs[1],recordedArgs[2],
+                  (*(undefined4 *)(glContext + 0x4688),rasterPos,*recordedArgs,recordedArgs[1],recordedArgs[2],
                    recordedArgs[3],recordedArgs + 5,1);
-        return iVar12;
+        return recordSize;
       }
     }
     else if (glContextWord4e1c == 0x1c02) {
-      return iVar12;
+      return recordSize;
     }
   }
 LAB_00063b08:
   if (*(int *)(glContext + 0x7574) != 0) {
-    return iVar12;
+    return recordSize;
   }
   glErrorCode = 0x500;
 LAB_00063b18:
   *(undefined4 *)(glContext + 0x7574) = glErrorCode;
-  return iVar12;
+  return recordSize;
 }
 
 /* _glDrawPixels_Comp @ 0x63b34 (600 bytes) */
@@ -1237,102 +1239,103 @@ int _glDrawPixels_Comp(glContext, width, height, format, type, pixels)
   undefined4 type;
   int pixels;
 {
-  uint uVar1;
+  uint recordDataSize;
   int imageEndOffset;
   int rowBytes;
-  int iVar3;
+  int resultThenElementSize;
   int pixelUnpackBuffer;
   undefined4 *listRecord;
-  undefined4 *puVar5;
-  undefined4 *puVar6;
-  undefined1 *puVar7;
-  int *piVar8;
-  int iVar9;
-  int iVar10;
+  undefined4 *dstConvertDescPtrA;
+  undefined4 *dstConvertDescPtrB;
+  undefined1 *packPixelBytesPtr;
+  int *packOffsetPtr;
+  int unpackSettings;
+  int unpackBufferSize;
+  int forwardedArg5;
   int glContextPtr4a6c2;
   double bytesPerElement;
-  int local_c0;
-  undefined4 local_bc;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined4 *local_b0;
-  int local_ac;
-  undefined4 local_a8;
-  undefined4 local_a4;
-  undefined4 local_a0;
-  uint local_9c;
-  undefined4 local_98;
-  undefined4 local_94;
-  int local_90;
-  undefined1 local_54;
-  undefined4 local_50;
-  undefined1 auStack_4c [4];
-  undefined1 auStack_48 [4];
-  undefined1 auStack_44 [4];
-  undefined1 auStack_40 [4];
-  int local_3c;
-  undefined4 local_38;
-  undefined4 local_34 [2];
+  int srcImagePtr;
+  undefined4 srcRowBytes;
+  undefined4 srcConvertDescA;
+  undefined4 srcConvertDescB;
+  undefined4 *dstImagePtr;
+  int dstRowBytes;
+  undefined4 dstConvertDescA;
+  undefined4 dstConvertDescB;
+  undefined4 unitCount;
+  uint copyFlags;
+  undefined4 pixelOpFlags;
+  undefined4 imageWidth;
+  int imageHeight;
+  undefined1 processReserved;
+  undefined4 packedRowBytes;
+  undefined1 rowPadding [4];
+  undefined1 imageBytes [4];
+  undefined1 imagePadding [4];
+  undefined1 packPixelBytes [4];
+  int packOffset;
+  undefined4 convertDescAOut;
+  undefined4 convertDescBOut [2];
   
   glContextPtr4a6c2 = *(int *)(glContext + 0x4a6c);
   if (glContextPtr4a6c2 == 0) {
 LAB_00063c10:
-    iVar9 = glContext + 0x31cc;
-    puVar7 = auStack_40;
-    piVar8 = &local_3c;
-    iVar10 = height;
+    unpackSettings = glContext + 0x31cc;
+    packPixelBytesPtr = packPixelBytes;
+    packOffsetPtr = &packOffset;
+    forwardedArg5 = height;
     _glePixelPackSettings
-              (glContext,format,type,width,height,iVar9,puVar7,piVar8,&local_50,auStack_4c,
-               auStack_48,auStack_44);
+              (glContext,format,type,width,height,unpackSettings,packPixelBytesPtr,packOffsetPtr,&packedRowBytes,rowPadding,
+               imageBytes,imagePadding);
     rowBytes = _gleRowBytes(format,type,width);
-    uVar1 = rowBytes * height + 3U & 0xfffffffc;
-    listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glDrawPixels_ListExec_001100a8,uVar1 + 0x14)
+    recordDataSize = rowBytes * height + 3U & 0xfffffffc;
+    listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glDrawPixels_ListExec_001100a8,recordDataSize + 0x14)
     ;
-    iVar3 = 0;
+    resultThenElementSize = 0;
     if (listRecord != (undefined4 *)0x0) {
-      listRecord[4] = uVar1;
+      listRecord[4] = recordDataSize;
       *listRecord = width;
       listRecord[1] = height;
       listRecord[2] = format;
       listRecord[3] = type;
       if ((*(uint *)(glContext + 0x31e4) & 0xffff0000) == 0) {
-        iVar3 = _gleCopy(pixels + local_3c,listRecord + 5,rowBytes,height,local_50,rowBytes);
+        resultThenElementSize = _gleCopy(pixels + packOffset,listRecord + 5,rowBytes,height,packedRowBytes,rowBytes);
       }
       else {
-        puVar5 = &local_38;
-        puVar6 = local_34;
-        _glgConvertType(format,type,puVar5,puVar6,iVar10,iVar9,puVar7,piVar8);
-        local_bc = local_50;
-        local_a8 = local_38;
-        local_a4 = local_34[0];
-        local_a0 = 2;
-        local_98 = 5;
-        local_54 = 0;
-        local_b8 = local_38;
-        local_b4 = local_34[0];
-        local_9c = (uint)(*(char *)(glContext + 0x31e4) != '\0');
+        dstConvertDescPtrA = &convertDescAOut;
+        dstConvertDescPtrB = convertDescBOut;
+        _glgConvertType(format,type,dstConvertDescPtrA,dstConvertDescPtrB,forwardedArg5,unpackSettings,packPixelBytesPtr,packOffsetPtr);
+        srcRowBytes = packedRowBytes;
+        dstConvertDescA = convertDescAOut;
+        dstConvertDescB = convertDescBOut[0];
+        unitCount = 2;
+        pixelOpFlags = 5;
+        processReserved = 0;
+        srcConvertDescA = convertDescAOut;
+        srcConvertDescB = convertDescBOut[0];
+        copyFlags = (uint)(*(char *)(glContext + 0x31e4) != '\0');
         if (*(char *)(glContext + 0x31e5) != '\0') {
-          local_9c = local_9c | 4;
+          copyFlags = copyFlags | 4;
         }
-        local_c0 = pixels + local_3c;
-        local_b0 = listRecord + 5;
-        local_ac = rowBytes;
-        local_94 = width;
-        local_90 = height;
-        iVar3 = _glgProcessPixels(0,&local_c0,puVar5,puVar6,iVar10,iVar9,local_34[0],local_38);
+        srcImagePtr = pixels + packOffset;
+        dstImagePtr = listRecord + 5;
+        dstRowBytes = rowBytes;
+        imageWidth = width;
+        imageHeight = height;
+        resultThenElementSize = _glgProcessPixels(0,&srcImagePtr,dstConvertDescPtrA,dstConvertDescPtrB,forwardedArg5,unpackSettings,convertDescBOut[0],convertDescAOut);
       }
     }
   }
   else {
     imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,pixels);
-    iVar9 = *(int *)(glContextPtr4a6c2 + 0x38);
+    unpackBufferSize = *(int *)(glContextPtr4a6c2 + 0x38);
     bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar3 = (int)bytesPerElement;
-    if (imageEndOffset <= iVar9) {
-      if (iVar3 == 0) {
-        iVar3 = _glePixelBytes(format,type);
+    resultThenElementSize = (int)bytesPerElement;
+    if (imageEndOffset <= unpackBufferSize) {
+      if (resultThenElementSize == 0) {
+        resultThenElementSize = _glePixelBytes(format,type);
       }
-      if (pixels == (pixels / iVar3) * iVar3) {
+      if (pixels == (pixels / resultThenElementSize) * resultThenElementSize) {
         pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
         if ((pixelUnpackBuffer != 0) && (*(int *)(pixelUnpackBuffer + 0x40) != 0)) {
           _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
@@ -1345,7 +1348,7 @@ LAB_00063c10:
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
   }
-  return iVar3;
+  return resultThenElementSize;
 }
 
 /* _glDrawPixels_Exec @ 0x63d8c (1520 bytes) */

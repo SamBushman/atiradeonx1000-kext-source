@@ -88,51 +88,51 @@ void _LFSStreamChunkListRemoveChunk(param_1, param_2)
 }
 
 /* _LFSStreamChunkListGetStream @ 0xd19c8 (280 bytes) */
-void _LFSStreamChunkListGetStream(param_1, param_2, param_3, forwardedArg4)
-  int *param_1;
-  int param_2;
-  int *param_3;
+void _LFSStreamChunkListGetStream(chunkList, outStream, outCount, forwardedArg4)
+  int *chunkList;
+  int outStream;
+  int *outCount;
   undefined4 forwardedArg4;
 {
-  undefined4 uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
-  undefined4 *puVar6;
-  uint local_30;
-  undefined1 auStack_2c [12];
+  undefined4 streamWord;
+  int wordIndex;
+  int byteOffset;
+  int chunk;
+  uint subIndex;
+  undefined4 *dstCursor;
+  uint chunkWordCount;
+  undefined1 scratchCount [12];
   
-  iVar2 = 0;
-  *param_3 = 0;
-  for (iVar4 = *param_1; iVar4 != 0; iVar4 = *(int *)(iVar4 + 0x4c)) {
-    _LFSStreamChunkGetStream(iVar4,forwardedArg4,&local_30,0);
-    *param_3 = *param_3 + local_30;
+  wordIndex = 0;
+  *outCount = 0;
+  for (chunk = *chunkList; chunk != 0; chunk = *(int *)(chunk + 0x4c)) {
+    _LFSStreamChunkGetStream(chunk,forwardedArg4,&chunkWordCount,0);
+    *outCount = *outCount + chunkWordCount;
   }
-  if ((param_2 != 0) && (iVar4 = *param_1, iVar4 != 0)) {
-    iVar3 = 0;
+  if ((outStream != 0) && (chunk = *chunkList, chunk != 0)) {
+    byteOffset = 0;
     do {
-      uVar1 = _LFSStreamChunkGetStream(iVar4,forwardedArg4,&local_30,0);
-      iVar2 = iVar2 + 1;
-      *(undefined4 *)(iVar3 + param_2) = uVar1;
-      iVar3 = iVar3 + 4;
-      if (1 < local_30) {
-        local_30 = local_30 - 1;
-        uVar5 = 0;
-        if (local_30 != 0) {
-          puVar6 = (undefined4 *)(iVar2 * 4 + param_2);
+      streamWord = _LFSStreamChunkGetStream(chunk,forwardedArg4,&chunkWordCount,0);
+      wordIndex = wordIndex + 1;
+      *(undefined4 *)(byteOffset + outStream) = streamWord;
+      byteOffset = byteOffset + 4;
+      if (1 < chunkWordCount) {
+        chunkWordCount = chunkWordCount - 1;
+        subIndex = 0;
+        if (chunkWordCount != 0) {
+          dstCursor = (undefined4 *)(wordIndex * 4 + outStream);
           do {
-            uVar5 = uVar5 + 1;
-            iVar2 = iVar2 + 1;
-            uVar1 = _LFSStreamChunkGetStream(iVar4,forwardedArg4,auStack_2c,uVar5);
-            iVar3 = iVar3 + 4;
-            *puVar6 = uVar1;
-            puVar6 = puVar6 + 1;
-          } while (uVar5 < local_30);
+            subIndex = subIndex + 1;
+            wordIndex = wordIndex + 1;
+            streamWord = _LFSStreamChunkGetStream(chunk,forwardedArg4,scratchCount,subIndex);
+            byteOffset = byteOffset + 4;
+            *dstCursor = streamWord;
+            dstCursor = dstCursor + 1;
+          } while (subIndex < chunkWordCount);
         }
       }
-      iVar4 = *(int *)(iVar4 + 0x4c);
-    } while (iVar4 != 0);
+      chunk = *(int *)(chunk + 0x4c);
+    } while (chunk != 0);
   }
   return;
 }

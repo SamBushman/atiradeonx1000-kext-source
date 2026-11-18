@@ -3077,9 +3077,9 @@ undefined4 * _glPixelTransferf_Comp(undefined4 glContext,undefined4 pname,float 
 void _glPixelTransferf_Exec(int glContext,uint pname,float param)
 {
   undefined4 glErrorCode;
-  uint uVar2;
-  uint uVar3;
-  float dVar4;
+  uint nonDefaultFlags;
+  uint transferBit;
+  float defaultValue;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -3090,162 +3090,162 @@ void _glPixelTransferf_Exec(int glContext,uint pname,float param)
   }
   if (pname == 0x8022) {
     *(float *)(glContext + 0x33a4) = (float)param;
-    dVar4 = (double)FLOAT_00108e50;
-    uVar3 = 0x40000000;
+    defaultValue = (double)FLOAT_00108e50;
+    transferBit = 0x40000000;
   }
   else {
     if (0x8022 < pname) {
       if (pname == 0x870f) {
         *(float *)(glContext + 0x3224) = (float)param;
-        dVar4 = (double)FLOAT_00108e54;
-        uVar3 = 4;
+        defaultValue = (double)FLOAT_00108e54;
+        transferBit = 4;
       }
       else {
         if (pname < 0x8710) {
           if (pname == 0x80b7) {
             *(float *)(glContext + 0x3374) = (float)param;
-            dVar4 = (double)FLOAT_00108e54;
-            uVar3 = 0x80000;
+            defaultValue = (double)FLOAT_00108e54;
+            transferBit = 0x80000;
           }
           else if (pname < 0x80b8) {
             if (pname == 0x80b4) {
               *(float *)(glContext + 0x335c) = (float)param;
-              dVar4 = (double)FLOAT_00108e54;
-              uVar3 = 0x10000;
+              defaultValue = (double)FLOAT_00108e54;
+              transferBit = 0x10000;
             }
             else if (pname < 0x80b5) {
               if (pname != 0x8023) goto LAB_0007de80;
               *(float *)(glContext + 0x33ac) = (float)param;
-              dVar4 = (double)FLOAT_00108e50;
-              uVar3 = 0x80000000;
+              defaultValue = (double)FLOAT_00108e50;
+              transferBit = 0x80000000;
             }
             else if (pname == 0x80b5) {
               *(float *)(glContext + 0x336c) = (float)param;
-              dVar4 = (double)FLOAT_00108e54;
-              uVar3 = 0x20000;
+              defaultValue = (double)FLOAT_00108e54;
+              transferBit = 0x20000;
             }
             else {
               if (pname != 0x80b6) goto LAB_0007de80;
               *(float *)(glContext + 0x3364) = (float)param;
-              dVar4 = (double)FLOAT_00108e54;
-              uVar3 = 0x40000;
+              defaultValue = (double)FLOAT_00108e54;
+              transferBit = 0x40000;
             }
           }
           else if (pname == 0x80ba) {
             *(float *)(glContext + 0x3370) = (float)param;
-            dVar4 = (double)FLOAT_00108e50;
-            uVar3 = 0x400000;
+            defaultValue = (double)FLOAT_00108e50;
+            transferBit = 0x400000;
           }
           else if (pname < 0x80bb) {
             if (pname == 0x80b8) {
               *(float *)(glContext + 0x3360) = (float)param;
-              dVar4 = (double)FLOAT_00108e50;
-              uVar3 = 0x100000;
+              defaultValue = (double)FLOAT_00108e50;
+              transferBit = 0x100000;
             }
             else {
               if (pname != 0x80b9) goto LAB_0007de80;
               *(float *)(glContext + 0x3368) = (float)param;
-              dVar4 = (double)FLOAT_00108e50;
-              uVar3 = 0x200000;
+              defaultValue = (double)FLOAT_00108e50;
+              transferBit = 0x200000;
             }
           }
           else {
             if (pname != 0x80bb) {
               if (pname == 0x870e) {
                 *(float *)(glContext + 0x321c) = (float)param;
-                dVar4 = (double)FLOAT_00108e54;
-                uVar3 = 1;
+                defaultValue = (double)FLOAT_00108e54;
+                transferBit = 1;
                 goto LAB_0007deb8;
               }
               goto LAB_0007de80;
             }
             *(float *)(glContext + 0x3378) = (float)param;
-            dVar4 = (double)FLOAT_00108e50;
-            uVar3 = 0x800000;
+            defaultValue = (double)FLOAT_00108e50;
+            transferBit = 0x800000;
           }
           goto LAB_0007de98;
         }
         if (pname == 0x8714) {
           *(float *)(glContext + 0x3218) = (float)param;
-          dVar4 = (double)FLOAT_00108e50;
-          uVar3 = 2;
+          defaultValue = (double)FLOAT_00108e50;
+          transferBit = 2;
         }
         else if (pname < 0x8715) {
           if (pname == 0x8711) {
             *(float *)(glContext + 0x3234) = (float)param;
-            dVar4 = (double)FLOAT_00108e54;
-            uVar3 = 0x40;
+            defaultValue = (double)FLOAT_00108e54;
+            transferBit = 0x40;
           }
           else if (pname < 0x8711) {
             *(float *)(glContext + 0x322c) = (float)param;
-            dVar4 = (double)FLOAT_00108e54;
-            uVar3 = 0x10;
+            defaultValue = (double)FLOAT_00108e54;
+            transferBit = 0x10;
           }
           else if (pname == 0x8712) {
             *(float *)(glContext + 0x323c) = (float)param;
-            dVar4 = (double)FLOAT_00108e54;
-            uVar3 = 0x100;
+            defaultValue = (double)FLOAT_00108e54;
+            transferBit = 0x100;
           }
           else {
             if (pname != 0x8713) goto LAB_0007de80;
             *(float *)(glContext + 0x3244) = (float)param;
-            dVar4 = (double)FLOAT_00108e54;
-            uVar3 = 0x400;
+            defaultValue = (double)FLOAT_00108e54;
+            transferBit = 0x400;
           }
         }
         else if (pname == 0x8717) {
           *(float *)(glContext + 0x3230) = (float)param;
-          dVar4 = (double)FLOAT_00108e50;
-          uVar3 = 0x80;
+          defaultValue = (double)FLOAT_00108e50;
+          transferBit = 0x80;
         }
         else if (pname < 0x8718) {
           if (pname == 0x8715) {
             *(float *)(glContext + 0x3220) = (float)param;
-            dVar4 = (double)FLOAT_00108e50;
-            uVar3 = 8;
+            defaultValue = (double)FLOAT_00108e50;
+            transferBit = 8;
           }
           else {
             if (pname != 0x8716) goto LAB_0007de80;
             *(float *)(glContext + 0x3228) = (float)param;
-            dVar4 = (double)FLOAT_00108e50;
-            uVar3 = 0x20;
+            defaultValue = (double)FLOAT_00108e50;
+            transferBit = 0x20;
           }
         }
         else if (pname == 0x8718) {
           *(float *)(glContext + 0x3238) = (float)param;
-          dVar4 = (double)FLOAT_00108e50;
-          uVar3 = 0x200;
+          defaultValue = (double)FLOAT_00108e50;
+          transferBit = 0x200;
         }
         else {
           if (pname != 0x8719) goto LAB_0007de80;
           *(float *)(glContext + 0x3240) = (float)param;
-          dVar4 = (double)FLOAT_00108e50;
-          uVar3 = 0x800;
+          defaultValue = (double)FLOAT_00108e50;
+          transferBit = 0x800;
         }
       }
 LAB_0007deb8:
-      uVar2 = *(uint *)(glContext + 0x3418) & ~uVar3;
-      if (param != (double)dVar4) {
-        uVar2 = uVar2 | uVar3;
+      nonDefaultFlags = *(uint *)(glContext + 0x3418) & ~transferBit;
+      if (param != (double)defaultValue) {
+        nonDefaultFlags = nonDefaultFlags | transferBit;
       }
-      *(uint *)(glContext + 0x3418) = uVar2;
+      *(uint *)(glContext + 0x3418) = nonDefaultFlags;
       goto LAB_0007ded0;
     }
     if (pname == 0xd1b) {
       *(float *)(glContext + 0x31f8) = (float)param;
-      dVar4 = (double)FLOAT_00108e50;
-      uVar3 = 0x400;
+      defaultValue = (double)FLOAT_00108e50;
+      transferBit = 0x400;
     }
     else if (pname < 0xd1c) {
       if (pname == 0xd14) {
         *(float *)(glContext + 0x31ec) = (float)param;
-        dVar4 = (double)FLOAT_00108e54;
-        uVar3 = 0x10;
+        defaultValue = (double)FLOAT_00108e54;
+        transferBit = 0x10;
       }
       else if (pname < 0xd15) {
         if (pname == 0xd11) {
-          dVar4 = (double)FLOAT_00108e50;
-          uVar3 = 2;
+          defaultValue = (double)FLOAT_00108e50;
+          transferBit = 2;
         }
         else if (pname < 0xd12) {
           if (pname != 0xd10) {
@@ -3258,108 +3258,108 @@ LAB_0007de90:
             *(undefined4 *)(glContext + 0x7574) = glErrorCode;
             return;
           }
-          dVar4 = (double)FLOAT_00108e50;
-          uVar3 = 1;
+          defaultValue = (double)FLOAT_00108e50;
+          transferBit = 1;
         }
         else if (pname == 0xd12) {
-          dVar4 = (double)FLOAT_00108e50;
-          uVar3 = 4;
+          defaultValue = (double)FLOAT_00108e50;
+          transferBit = 4;
           *(int *)(glContext + 0x3214) = (int)(param + (double)FLOAT_00108e90);
         }
         else {
           if (pname != 0xd13) goto LAB_0007de80;
-          dVar4 = (double)FLOAT_00108e50;
-          uVar3 = 8;
+          defaultValue = (double)FLOAT_00108e50;
+          transferBit = 8;
           *(int *)(glContext + 0x3210) = (int)(param + (double)FLOAT_00108e90);
         }
       }
       else if (pname == 0xd18) {
         *(float *)(glContext + 0x31f4) = (float)param;
-        dVar4 = (double)FLOAT_00108e54;
-        uVar3 = 0x20;
+        defaultValue = (double)FLOAT_00108e54;
+        transferBit = 0x20;
       }
       else if (pname < 0xd19) {
         if (pname != 0xd15) goto LAB_0007de80;
         *(float *)(glContext + 0x31e8) = (float)param;
-        dVar4 = (double)FLOAT_00108e50;
-        uVar3 = 0x100;
+        defaultValue = (double)FLOAT_00108e50;
+        transferBit = 0x100;
       }
       else if (pname == 0xd19) {
         *(float *)(glContext + 0x31f0) = (float)param;
-        dVar4 = (double)FLOAT_00108e50;
-        uVar3 = 0x200;
+        defaultValue = (double)FLOAT_00108e50;
+        transferBit = 0x200;
       }
       else {
         if (pname != 0xd1a) goto LAB_0007de80;
         *(float *)(glContext + 0x31fc) = (float)param;
-        dVar4 = (double)FLOAT_00108e54;
-        uVar3 = 0x40;
+        defaultValue = (double)FLOAT_00108e54;
+        transferBit = 0x40;
       }
     }
     else if (pname == 0x801c) {
       *(float *)(glContext + 0x3390) = (float)param;
-      dVar4 = (double)FLOAT_00108e54;
-      uVar3 = 0x1000000;
+      defaultValue = (double)FLOAT_00108e54;
+      transferBit = 0x1000000;
     }
     else if (pname < 0x801d) {
       if (pname == 0xd1d) {
         *(float *)(glContext + 0x3200) = (float)param;
-        dVar4 = (double)FLOAT_00108e50;
-        uVar3 = 0x800;
+        defaultValue = (double)FLOAT_00108e50;
+        transferBit = 0x800;
       }
       else if (pname < 0xd1d) {
         *(float *)(glContext + 0x3204) = (float)param;
-        dVar4 = (double)FLOAT_00108e54;
-        uVar3 = 0x80;
+        defaultValue = (double)FLOAT_00108e54;
+        transferBit = 0x80;
       }
       else if (pname == 0xd1e) {
         *(float *)(glContext + 0x320c) = (float)param;
-        dVar4 = (double)FLOAT_00108e54;
-        uVar3 = 0x1000;
+        defaultValue = (double)FLOAT_00108e54;
+        transferBit = 0x1000;
       }
       else {
         if (pname != 0xd1f) goto LAB_0007de80;
         *(float *)(glContext + 0x3208) = (float)param;
-        dVar4 = (double)FLOAT_00108e50;
-        uVar3 = 0x2000;
+        defaultValue = (double)FLOAT_00108e50;
+        transferBit = 0x2000;
       }
     }
     else if (pname == 0x801f) {
       *(float *)(glContext + 0x33a8) = (float)param;
-      dVar4 = (double)FLOAT_00108e54;
-      uVar3 = 0x8000000;
+      defaultValue = (double)FLOAT_00108e54;
+      transferBit = 0x8000000;
     }
     else if (pname < 0x8020) {
       if (pname == 0x801d) {
         *(float *)(glContext + 0x33a0) = (float)param;
-        dVar4 = (double)FLOAT_00108e54;
-        uVar3 = 0x2000000;
+        defaultValue = (double)FLOAT_00108e54;
+        transferBit = 0x2000000;
       }
       else {
         if (pname != 0x801e) goto LAB_0007de80;
         *(float *)(glContext + 0x3398) = (float)param;
-        dVar4 = (double)FLOAT_00108e54;
-        uVar3 = 0x4000000;
+        defaultValue = (double)FLOAT_00108e54;
+        transferBit = 0x4000000;
       }
     }
     else if (pname == 0x8020) {
       *(float *)(glContext + 0x3394) = (float)param;
-      dVar4 = (double)FLOAT_00108e50;
-      uVar3 = 0x10000000;
+      defaultValue = (double)FLOAT_00108e50;
+      transferBit = 0x10000000;
     }
     else {
       if (pname != 0x8021) goto LAB_0007de80;
       *(float *)(glContext + 0x339c) = (float)param;
-      dVar4 = (double)FLOAT_00108e50;
-      uVar3 = 0x20000000;
+      defaultValue = (double)FLOAT_00108e50;
+      transferBit = 0x20000000;
     }
   }
 LAB_0007de98:
-  uVar2 = *(uint *)(glContext + 0x3414) & ~uVar3;
-  if (param != (double)dVar4) {
-    uVar2 = uVar2 | uVar3;
+  nonDefaultFlags = *(uint *)(glContext + 0x3414) & ~transferBit;
+  if (param != (double)defaultValue) {
+    nonDefaultFlags = nonDefaultFlags | transferBit;
   }
-  *(uint *)(glContext + 0x3414) = uVar2;
+  *(uint *)(glContext + 0x3414) = nonDefaultFlags;
 LAB_0007ded0:
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x200000;
   return;

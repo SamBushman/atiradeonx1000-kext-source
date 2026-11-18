@@ -1,0 +1,64 @@
+use	_gleSwitchToNonRevertRenderer	bVar1	currentRenderer	INFERRED	ctx byte 0x85a6: index of the renderer currently drawing	^\s*bVar1\ =\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a6\);$	+2
+use	_gleSwitchToNonRevertRenderer	bVar1	currentRenderer	INFERRED	ctx byte 0x85a6: index of the renderer currently drawing	^\s*\*\(byte\ \*\)\(param_1\ \+\ 0x85a8\)\ =\ bVar1;$	+1
+use	_gleSwitchToNonRevertRenderer	bVar1	alternateRenderer	INFERRED	ctx byte 0x85a5: index of the renderer the context switches to	^\s*bVar1\ =\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a5\);$	+2
+use	_gleSwitchToNonRevertRenderer	bVar1	alternateRenderer	INFERRED	ctx byte 0x85a5: index of the renderer the context switches to	^\s*\(\(int\ \(\*\)\(\)\)_gleSwitchToRenderer\)\(param_1,\(uint\)bVar1\);$	+1
+use	_gleSwitchToNonRevertRenderer	bVar1	alternateRenderer	INFERRED	ctx byte 0x85a5: index of the renderer the context switches to	^\s*bVar1\ =\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a5\);$@2	+2
+use	_gleSwitchToNonRevertRenderer	bVar1	alternateRenderer	INFERRED	ctx byte 0x85a5: index of the renderer the context switches to	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)_gleSwitchToRenderer\)\(param_1,\(uint\)bVar1\);$	+1
+use	_gleSwitchToNonRevertRenderer	bVar1	switchFlags	INFERRED	low byte of the flags returned by the renderer switch: bit 0 is stored at ctx+0x7580	^\s*bVar1\ =\ \(byte\)uVar4;$	+1
+use	_gleSwitchToNonRevertRenderer	bVar1	switchFlags	INFERRED	low byte of the flags returned by the renderer switch: bit 0 is stored at ctx+0x7580	^\s*bVar1\ =\ \(byte\)uVar5;$	+1
+use	_gleSwitchToNonRevertRenderer	bVar1	switchFlags	INFERRED	low byte of the flags returned by the renderer switch: bit 0 is stored at ctx+0x7580	^\s*\*\(byte\ \*\)\(param_1\ \+\ 0x7580\)\ =\ bVar1\ \&\ 1;$	+1
+local	_gleSwitchToNonRevertRenderer	iVar3	rendererSlot	INFERRED	glContext + renderer index * 0x2e0: per-renderer slot (+0x8884 dispatch table, +0x85ac handle)
+use	_gleSwitchToNonRevertRenderer	uVar4	validateResult	INFERRED	result of the renderer dispatch function at +0x138 (below 5: renderer can switch, 0x2720: alternate renderer must be validated)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x8884\)\ \+\ 0x138\)\)$	+1
+use	_gleSwitchToNonRevertRenderer	uVar4	validateResult	INFERRED	result of the renderer dispatch function at +0x138 (below 5: renderer can switch, 0x2720: alternate renderer must be validated)	^\s*if\ \(uVar4\ <\ 5\)\ \{$	+1
+use	_gleSwitchToNonRevertRenderer	uVar4	validateResult	INFERRED	result of the renderer dispatch function at +0x138 (below 5: renderer can switch, 0x2720: alternate renderer must be validated)	^\s*if\ \(uVar4\ !=\ 0x2720\)\ \{$	+1
+use	_gleSwitchToNonRevertRenderer	uVar4	switchResult	INFERRED	flags returned by _gleSwitchToRenderer (bit 4 set: renderer buffers have to be copied)	^\s*uVar4\ =\ \(\(int\ \(\*\)\(\)\)_gleSwitchToRenderer\)\(param_1,uVar6\);$	+2
+use	_gleSwitchToNonRevertRenderer	uVar4	switchResult	INFERRED	flags returned by _gleSwitchToRenderer (bit 4 set: renderer buffers have to be copied)	^\s*bVar1\ =\ \(byte\)uVar4;$	+3
+local	_gleSwitchToNonRevertRenderer	uVar5	switchResult2	INFERRED	flags returned by _gleSwitchToRenderer for the alternate renderer
+local	_gleSwitchToNonRevertRenderer	uVar6	currentRendererIndex	INFERRED	current renderer index widened to uint
+local	_gleSwitchToNonRevertRenderer	local_40	copyContextData	INFERRED	copy context data (5 words) filled by _gleSwitchRenderersReadBuffers and written back by _gleSwitchRenderersWriteBuffers
+local	_gleSwitchToNonRevertRenderer	local_3c	copyContextData1	INFERRED	copy context data word 1
+local	_gleSwitchToNonRevertRenderer	local_38	copyContextData2	INFERRED	copy context data word 2
+local	_gleSwitchToNonRevertRenderer	local_34	copyContextData3	INFERRED	copy context data word 3
+local	_gleSwitchToNonRevertRenderer	local_30	copyContextData4	INFERRED	copy context data word 4
+use	_gleDrawArraysSyncState	iVar7	attribCursor	INFERRED	pointer into the context vertex attribute generic values (ctx+0x110 + 0x10 per attribute)	^\s*iVar7\ =\ param_1\ \+\ 0x110;$	+1
+use	_gleDrawArraysSyncState	iVar7	attribCursor	INFERRED	pointer into the context vertex attribute generic values (ctx+0x110 + 0x10 per attribute)	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ 0xa0\)\ =\ \*puVar11;$	+1
+use	_gleDrawArraysSyncState	iVar7	attribCursor	INFERRED	pointer into the context vertex attribute generic values (ctx+0x110 + 0x10 per attribute)	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ 0xa4\)\ =\ uVar6;$	+1
+use	_gleDrawArraysSyncState	iVar7	attribCursor	INFERRED	pointer into the context vertex attribute generic values (ctx+0x110 + 0x10 per attribute)	^\s*iVar7\ =\ iVar7\ \+\ 0x10;$@2	+1
+use	_gleDrawArraysSyncState	iVar10	texCoordCursor	INFERRED	pointer into the context texture coordinate current values (ctx+0x120 + 0x10 per unit)	^\s*iVar10\ =\ param_1;$	+1
+use	_gleDrawArraysSyncState	iVar10	texCoordCursor	INFERRED	pointer into the context texture coordinate current values (ctx+0x120 + 0x10 per unit)	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0x120\)\ =\ \*puVar11;$	+1
+use	_gleDrawArraysSyncState	iVar10	texCoordCursor	INFERRED	pointer into the context texture coordinate current values (ctx+0x120 + 0x10 per unit)	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0x124\)\ =\ puVar11\[1\];$	+3
+use	_gleDrawArraysSyncState	iVar10	texCoordCursor	INFERRED	pointer into the context texture coordinate current values (ctx+0x120 + 0x10 per unit)	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0x124\)\ =\ puVar11\[1\];$@2	+1
+use	_gleDrawArraysSyncState	iVar10	texCoordCursor	INFERRED	pointer into the context texture coordinate current values (ctx+0x120 + 0x10 per unit)	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 300\)\ =\ uVar5;$	+2
+use	_gleDrawArraysSyncState	iVar10	texCoordCursor	INFERRED	pointer into the context texture coordinate current values (ctx+0x120 + 0x10 per unit)	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0x124\)\ =\ uVar6;$	+1
+use	_gleDrawArraysSyncState	iVar10	texCoordCursor	INFERRED	pointer into the context texture coordinate current values (ctx+0x120 + 0x10 per unit)	^\s*iVar10\ =\ iVar10\ \+\ 0x10;$	+1
+use	_gleDrawArraysSyncState	puVar1	normalZ	INFERRED	address of the third normal word, read before the cursor advances	^\s*puVar1\ =\ puVar11\ \+\ 2;$	+1
+use	_gleDrawArraysSyncState	puVar1	normalZ	INFERRED	address of the third normal word, read before the cursor advances	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x2b8\)\ =\ \*puVar1;$	+1
+use	_gleDrawArraysSyncState	puVar1	secondaryColorB	INFERRED	address of the third secondary color word, read before the cursor advances	^\s*puVar1\ =\ puVar11\ \+\ 2;$@2	+1
+use	_gleDrawArraysSyncState	puVar1	secondaryColorB	INFERRED	address of the third secondary color word, read before the cursor advances	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x2c8\)\ =\ \*puVar1;$	+1
+use	_gleDrawArraysSyncState	bVar2	normalSize	INFERRED	byte size of the normal in the last vertex (param_2+0xd)	^\s*bVar2\ =\ \*\(byte\ \*\)\(param_2\ \+\ 0xd\);$	+1
+use	_gleDrawArraysSyncState	bVar2	normalSize	INFERRED	byte size of the normal in the last vertex (param_2+0xd)	^\s*if\ \(bVar2\ !=\ 0\)\ \{$	+1
+use	_gleDrawArraysSyncState	bVar2	normalSize	INFERRED	byte size of the normal in the last vertex (param_2+0xd)	^\s*puVar11\ =\ \(undefined4\ \*\)\(\(int\)puVar11\ \+\ \(uint\)bVar2\);$	+1
+use	_gleDrawArraysSyncState	bVar2	secondaryColorSize	INFERRED	byte size of the secondary color in the last vertex (param_2+0x10)	^\s*bVar2\ =\ \*\(byte\ \*\)\(param_2\ \+\ 0x10\);$	+2
+use	_gleDrawArraysSyncState	bVar2	secondaryColorSize	INFERRED	byte size of the secondary color in the last vertex (param_2+0x10)	^\s*puVar11\ =\ \(undefined4\ \*\)\(\(int\)puVar11\ \+\ \(uint\)bVar2\);$@2	+1
+local	_gleDrawArraysSyncState	uVar3	edgeFlagByte	INFERRED	edge flag byte of the last vertex
+local	_gleDrawArraysSyncState	uVar6	componentValue	INFERRED	one component of the vertex field being copied: the vertex word, or the default component when the field is shorter
+use	_gleDrawArraysSyncState	uVar9	colorSize	INFERRED	byte size of the color in the last vertex (param_2+0xe)	^\s*uVar9\ =\ \(uint\)\*\(byte\ \*\)\(param_2\ \+\ 0xe\);$	+2
+use	_gleDrawArraysSyncState	uVar9	colorSize	INFERRED	byte size of the color in the last vertex (param_2+0xe)	^\s*if\ \(uVar9\ ==\ 0x10\)\ \{$	+1
+use	_gleDrawArraysSyncState	uVar9	colorSize	INFERRED	byte size of the color in the last vertex (param_2+0xe)	^\s*puVar11\ =\ \(undefined4\ \*\)\(\(int\)puVar11\ \+\ uVar9\);$	+1
+use	_gleDrawArraysSyncState	uVar9	fogOrWeightSize	INFERRED	byte size of the vertex field at param_2+0x11 (copied to ctx+0x2d0)	^\s*uVar9\ =\ \(uint\)\*\(byte\ \*\)\(param_2\ \+\ 0x11\);$	+2
+use	_gleDrawArraysSyncState	uVar9	fogOrWeightSize	INFERRED	byte size of the vertex field at param_2+0x11 (copied to ctx+0x2d0)	^\s*if\ \(7\ <\ uVar9\)\ \{$	+1
+use	_gleDrawArraysSyncState	uVar9	fogOrWeightSize	INFERRED	byte size of the vertex field at param_2+0x11 (copied to ctx+0x2d0)	^\s*if\ \(0xb\ <\ uVar9\)\ \{$	+1
+use	_gleDrawArraysSyncState	uVar9	fogOrWeightSize	INFERRED	byte size of the vertex field at param_2+0x11 (copied to ctx+0x2d0)	^\s*if\ \(uVar9\ ==\ 0x10\)\ \{$@2	+1
+use	_gleDrawArraysSyncState	uVar9	fogOrWeightSize	INFERRED	byte size of the vertex field at param_2+0x11 (copied to ctx+0x2d0)	^\s*puVar11\ =\ \(undefined4\ \*\)\(\(int\)puVar11\ \+\ uVar9\);$@2	+1
+use	_gleDrawArraysSyncState	uVar9	texCoordSize	INFERRED	byte size of the texture coordinate of the current unit	^\s*uVar9\ =\ \(uint\)\*pbVar8;$	+1
+use	_gleDrawArraysSyncState	uVar9	texCoordSize	INFERRED	byte size of the texture coordinate of the current unit	^\s*if\ \(uVar9\ !=\ 0\)\ \{$@3	+1
+use	_gleDrawArraysSyncState	uVar9	texCoordSize	INFERRED	byte size of the texture coordinate of the current unit	^\s*if\ \(uVar9\ ==\ 0x10\)\ \{$@3	+1
+use	_gleDrawArraysSyncState	uVar9	texCoordSize	INFERRED	byte size of the texture coordinate of the current unit	^\s*else\ if\ \(uVar9\ ==\ 0xc\)\ \{$	+1
+use	_gleDrawArraysSyncState	uVar9	texCoordSize	INFERRED	byte size of the texture coordinate of the current unit	^\s*if\ \(uVar9\ ==\ 8\)\ \{$	+1
+use	_gleDrawArraysSyncState	uVar9	texCoordSize	INFERRED	byte size of the texture coordinate of the current unit	^\s*puVar11\ =\ \(undefined4\ \*\)\(\(int\)puVar11\ \+\ uVar9\);$@3	+1
+use	_gleDrawArraysSyncState	uVar9	attribSize	INFERRED	byte size of the generic attribute of the current index	^\s*uVar9\ =\ \(uint\)\*pbVar8;$@2	+1
+use	_gleDrawArraysSyncState	uVar9	attribSize	INFERRED	byte size of the generic attribute of the current index	^\s*if\ \(uVar9\ !=\ 0\)\ \{$@4	+1
+use	_gleDrawArraysSyncState	uVar9	attribSize	INFERRED	byte size of the generic attribute of the current index	^\s*if\ \(7\ <\ uVar9\)\ \{$@2	+1
+use	_gleDrawArraysSyncState	uVar9	attribSize	INFERRED	byte size of the generic attribute of the current index	^\s*if\ \(0xb\ <\ uVar9\)\ \{$@2	+1
+use	_gleDrawArraysSyncState	uVar9	attribSize	INFERRED	byte size of the generic attribute of the current index	^\s*if\ \(uVar9\ ==\ 0x10\)\ \{$@4	+1
+use	_gleDrawArraysSyncState	uVar9	attribSize	INFERRED	byte size of the generic attribute of the current index	^\s*puVar11\ =\ \(undefined4\ \*\)\(\(int\)puVar11\ \+\ uVar9\);$@4	+1

@@ -1,0 +1,100 @@
+local	_glePPLogParam	param_2	paramLogState	INFERRED	parameter log state: slot tables at +0x8070 (8 byte slot records) and +0x8874 (16 bit priorities)
+local	_glePPLogParam	param_3	bankIndex	INFERRED	parameter bank index: banks hold 0x146 slot records
+local	_glePPLogParam	param_4	paramWord	INFERRED	first word of the parameter being logged: kind in bits 16-20
+local	_glePPLogParam	param_6	slotSpan	INFERRED	number of consecutive slots the parameter spans, minus the one it starts in
+local	_glePPLogParam	param_7	requestedSlot	INFERRED	slot requested by the caller, negative to search; replaced by the slot chosen
+local	_glePPLogParam	param_8	blockedSlotBits	INFERRED	bit mask of slots that must not be used
+local	_glePPLogParam	param_9	lastSlot	INFERRED	last slot index of the bank
+use	_glePPLogParam	uVar7	paramKind	INFERRED	kind of the parameter (bits 16-20 of the parameter word); 0 means nothing to log	^\s*uVar7\ =\ param_4\ >>\ 0x10\ \&\ 0x1f;$	+1
+use	_glePPLogParam	uVar7	paramKind	INFERRED	kind of the parameter (bits 16-20 of the parameter word); 0 means nothing to log	^\s*if\ \(uVar7\ ==\ 0\)\ \{$	+1
+use	_glePPLogParam	uVar7	paramKind	INFERRED	kind of the parameter (bits 16-20 of the parameter word); 0 means nothing to log	^\s*if\ \(\(uVar7\ ==\ 1\)\ \|\|\ \(uVar7\ ==\ 0x11\)\)\ \{$	+1
+use	_glePPLogParam	uVar7	spanEnd	INFERRED	slot cursor while checking the span against the blocked slots	^\s*for\ \(uVar7\ =\ uVar10;$	+4
+use	_glePPLogParam	uVar7	spanEnd	INFERRED	slot cursor while checking the span against the blocked slots	^\s*if\ \(uVar7\ ==\ uVar10\ \+\ param_6\)\ \{$	+1
+use	_glePPLogParam	uVar7	spanEnd	INFERRED	slot cursor while checking the span against the blocked slots	^\s*for\ \(uVar7\ =\ param_7;$	+4
+use	_glePPLogParam	uVar7	spanEnd	INFERRED	slot cursor while checking the span against the blocked slots	^\s*if\ \(uVar7\ ==\ param_7\ \+\ param_6\)\ \{$	+1
+use	_glePPLogParam	uVar7	slotPriority	INFERRED	priority (16 bit) of the candidate slot	^\s*uVar7\ =\ \(uint\)\*\(ushort\ \*\)\(\(param_3\ \*\ 0x518\ \+\ uVar10\)\ \*\ 2\ \+\ param_2\ \+\ 0x8874\);$	+2
+use	_glePPLogParam	uVar7	slotPriority	INFERRED	priority (16 bit) of the candidate slot	^\s*uVar11\ =\ uVar7;$	+1
+use	_glePPLogParam	uVar7	slotPriority	INFERRED	priority (16 bit) of the candidate slot	^\s*uVar7\ =\ \(uint\)\*\(ushort\ \*\)\(\(param_3\ \*\ 0x518\ \+\ param_7\)\ \*\ 2\ \+\ param_2\ \+\ 0x8874\);$	+2
+use	_glePPLogParam	uVar7	slotPriority	INFERRED	priority (16 bit) of the candidate slot	^\s*uVar11\ =\ uVar7;$@2	+1
+use	_glePPLogParam	uVar7	slotWord1	INFERRED	first value of the slot record being compared	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar2\ \+\ 4\);$	+1
+use	_glePPLogParam	uVar7	slotWord1	INFERRED	first value of the slot record being compared	^\s*if\ \(\(uVar7\ ==\ param_4\)\ \&\&\ \(iVar4\ ==\ param_5\)\)\ \{$	+1
+use	_glePPLogParam	uVar7	slotWord1	INFERRED	first value of the slot record being compared	^\s*if\ \(\(uVar7\ ==\ 0xffffffff\)\ \&\&\ \(iVar4\ ==\ \-1\)\)\ \{$	+1
+use	_glePPLogParam	uVar7	slotWord1	INFERRED	first value of the slot record being compared	^\s*else\ if\ \(uVar7\ ==\ 0\ \&\&\ iVar4\ ==\ 0\)\ \{$	+1
+use	_glePPLogParam	uVar8	evictionSlot	INFERRED	candidate slot with the lowest priority, to be evicted when no free slot exists	^\s*uVar8\ =\ 0xffffffff;$	+1
+use	_glePPLogParam	uVar8	evictionSlot	INFERRED	candidate slot with the lowest priority, to be evicted when no free slot exists	^\s*uVar8\ =\ uVar10;$	+1
+use	_glePPLogParam	uVar8	evictionSlot	INFERRED	candidate slot with the lowest priority, to be evicted when no free slot exists	^\s*param_7\ =\ uVar8;$	+1
+use	_glePPLogParam	uVar8	evictionSlot	INFERRED	candidate slot with the lowest priority, to be evicted when no free slot exists	^\s*uVar8\ =\ param_7;$	+1
+use	_glePPLogParam	uVar8	evictionSlot	INFERRED	candidate slot with the lowest priority, to be evicted when no free slot exists	^\s*param_7\ =\ uVar8;$@2	+1
+use	_glePPLogParam	uVar8	slotValue1	INFERRED	first value stored in the slot record (+0x8074)	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar2\ \+\ 0x8074\);$	+1
+use	_glePPLogParam	uVar8	slotValue1	INFERRED	first value stored in the slot record (+0x8074)	^\s*if\ \(\(\(uVar8\ ==\ param_4\)\ \&\&\ \(uVar3\ =\ 5,\ iVar2\ ==\ param_5\)\)\ \|\|$	+3
+use	_glePPLogParam	uVar8	slotBit	INFERRED	bit mask of the requested slot	^\s*uVar8\ =\ 1\ <<\ \(param_7\ \&\ 0x1f\);$	+1
+use	_glePPLogParam	uVar8	slotBit	INFERRED	bit mask of the requested slot	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x8a74\)\ =\ uVar9\ \&\ \~uVar8;$	+1
+use	_glePPLogParam	uVar8	slotBit	INFERRED	bit mask of the requested slot	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x324\)\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0x324\)\ \|\ uVar8;$	+1
+use	_glePPLogParam	uVar8	slotBit	INFERRED	bit mask of the requested slot	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x348\)\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0x348\)\ \|\ uVar8;$	+1
+use	_glePPLogParam	uVar9	unusedSlot	INFERRED	first slot whose record holds zero (never used)	^\s*uVar9\ =\ 0xffffffff;$	+1
+use	_glePPLogParam	uVar9	unusedSlot	INFERRED	first slot whose record holds zero (never used)	^\s*if\ \(uVar9\ ==\ 0xffffffff\)\ \{$	+2
+use	_glePPLogParam	uVar9	unusedSlot	INFERRED	first slot whose record holds zero (never used)	^\s*if\ \(uVar9\ !=\ 0xffffffff\)\ \{$	+1
+use	_glePPLogParam	uVar9	unusedSlot	INFERRED	first slot whose record holds zero (never used)	^\s*param_7\ =\ uVar9;$	+1
+use	_glePPLogParam	uVar9	unusedSlot	INFERRED	first slot whose record holds zero (never used)	^\s*if\ \(uVar9\ ==\ 0xffffffff\)\ \{$@2	+2
+use	_glePPLogParam	uVar9	unusedSlot	INFERRED	first slot whose record holds zero (never used)	^\s*if\ \(uVar9\ !=\ 0xffffffff\)\ \{$@2	+1
+use	_glePPLogParam	uVar9	unusedSlot	INFERRED	first slot whose record holds zero (never used)	^\s*param_7\ =\ uVar9;$@2	+1
+local	_glePPLogParam	uVar10	freeSlot	INFERRED	first slot whose record holds -1 (free), 0xffffffff when none
+local	_glePPLogParam	uVar11	lowestPriority	INFERRED	lowest priority found among the occupied slots
+local	_glePPLogParam	uVar3	matchKind	INFERRED	how the slot was found: 1 requested slot, 2 unused, 3 free, 4 evicted, 5 same value already logged
+local	_glePPLogParam	bVar1	slotIsUnused	INFERRED	both values of the requested slot record are zero
+local	_gleEvalMap1	puVar5	controlPoints	INFERRED	control points of the map being evaluated (map data + 0xbc for texture coordinates, +0x2b8 for generic slots)
+local	_gleEvalMap1	iVar9	vertexWritePos	INFERRED	current write position of the vertex buffer (ctx+0x4858), compared with the buffer end before evaluating
+local	_gleEvalMap1	puVar12	slotMapTable	INFERRED	map data of the generic vertex attribute slot maps (map data + 0xb2e words)
+local	_glePreEvaluateWithDeriv	param_2	order	CONFIRMED	order of the Bezier curve: number of control points and of basis coefficients
+local	_glePreEvaluateWithDeriv	param_4	coefficients	CONFIRMED	output: Bernstein basis values of the given order at the parameter
+local	_glePreEvaluateWithDeriv	param_5	derivatives	CONFIRMED	output: derivatives of the Bernstein basis values at the parameter
+use	_glePreEvaluateWithDeriv	fVar2	oneMinusU	CONFIRMED	1 - u	^\s*fVar2\ =\ \(FLOAT_00108e54\ \-\ fparam_1\);$	+2
+use	_glePreEvaluateWithDeriv	fVar2	oneMinusU	CONFIRMED	1 - u	^\s*\*param_4\ =\ fVar2;$	+1
+use	_glePreEvaluateWithDeriv	fVar2	oneMinusU	CONFIRMED	1 - u	^\s*\*param_4\ =\ fVar2;$@2	+1
+use	_glePreEvaluateWithDeriv	fVar2	previousCoefficient	INFERRED	coefficient read before the difference with the next one is stored	^\s*fVar2\ =\ \*pfVar7;$	+1
+use	_glePreEvaluateWithDeriv	fVar2	previousCoefficient	INFERRED	coefficient read before the difference with the next one is stored	^\s*param_5\[iVar5\]\ =\ fVar2\ \-\ param_4\[iVar5\];$	+1
+local	_glePreEvaluateWithDeriv	dVar9	oneMinusUValue	CONFIRMED	1 - u as the multiplier of the recurrence
+use	_glePreEvaluateWithDeriv	dVar10	carry	INFERRED	product of the previous coefficient and u carried to the next coefficient	^\s*dVar10\ =\ \(double\)\(\*param_4\ \*\ fparam_1\);$	+1
+use	_glePreEvaluateWithDeriv	dVar10	carry	INFERRED	product of the previous coefficient and u carried to the next coefficient	^\s*dVar1\ =\ \(double\)dVar9\ \*\ \(double\)param_4\[iVar6\]\ \+\ \(double\)dVar10;$	+2
+use	_glePreEvaluateWithDeriv	dVar10	carry	INFERRED	product of the previous coefficient and u carried to the next coefficient	^\s*param_4\[iVar4\]\ =\ \(float\)\(double\)dVar10;$	+1
+use	_glePreEvaluateWithDeriv	dVar10	carry	INFERRED	product of the previous coefficient and u carried to the next coefficient	^\s*dVar10\ =\ \(double\)\(\*param_4\ \*\ fparam_1\);$@2	+1
+use	_glePreEvaluateWithDeriv	dVar10	carry	INFERRED	product of the previous coefficient and u carried to the next coefficient	^\s*dVar1\ =\ \(double\)dVar9\ \*\ \(double\)param_4\[iVar5\]\ \+\ \(double\)dVar10;$	+2
+use	_glePreEvaluateWithDeriv	dVar10	carry	INFERRED	product of the previous coefficient and u carried to the next coefficient	^\s*param_4\[iVar4\]\ =\ \(float\)\(double\)dVar10;$@2	+1
+use	_glePreEvaluateWithDeriv	dVar1	blended	INFERRED	new coefficient: (1 - u) * coefficient + carry	^\s*dVar1\ =\ \(double\)dVar9\ \*\ \(double\)param_4\[iVar6\]\ \+\ \(double\)dVar10;$	+1
+use	_glePreEvaluateWithDeriv	dVar1	blended	INFERRED	new coefficient: (1 - u) * coefficient + carry	^\s*param_4\[iVar6\]\ =\ \(float\)dVar1;$	+1
+use	_glePreEvaluateWithDeriv	dVar1	blended	INFERRED	new coefficient: (1 - u) * coefficient + carry	^\s*dVar1\ =\ \(double\)dVar9\ \*\ \(double\)param_4\[iVar5\]\ \+\ \(double\)dVar10;$	+1
+use	_glePreEvaluateWithDeriv	dVar1	blended	INFERRED	new coefficient: (1 - u) * coefficient + carry	^\s*param_4\[iVar5\]\ =\ \(float\)dVar1;$	+1
+local	_glePreEvaluateWithDeriv	iVar8	degreeCursor	INFERRED	current degree of the basis being built, from 2 up to order - 1
+use	_glePreEvaluateWithDeriv	iVar5	degree	INFERRED	order - 1: degree of the curve	^\s*iVar5\ =\ param_2\ \+\ \-1;$	+1
+use	_glePreEvaluateWithDeriv	iVar5	degree	INFERRED	order - 1: degree of the curve	^\s*if\ \(2\ <\ iVar5\)\ \{$	+1
+use	_glePreEvaluateWithDeriv	iVar5	degree	INFERRED	order - 1: degree of the curve	^\s*\}\ while\ \(iVar8\ <\ iVar5\);$	+1
+use	_glePreEvaluateWithDeriv	iVar5	degree	INFERRED	order - 1: degree of the curve	^\s*if\ \(iVar5\ <\ 2\)\ \{$	+1
+use	_glePreEvaluateWithDeriv	iVar5	coefficientIndex	INFERRED	index of the coefficient being updated	^\s*iVar5\ =\ iVar4;$	+1
+use	_glePreEvaluateWithDeriv	iVar5	coefficientIndex	INFERRED	index of the coefficient being updated	^\s*param_5\[iVar5\]\ =\ fVar2\ \-\ param_4\[iVar5\];$	+1
+use	_glePreEvaluateWithDeriv	iVar5	coefficientIndex	INFERRED	index of the coefficient being updated	^\s*iVar4\ =\ iVar5\ \+\ 1;$	+1
+use	_glePreEvaluateWithDeriv	iVar5	coefficientIndex	INFERRED	index of the coefficient being updated	^\s*param_5\[iVar5\ \+\ 1\]\ =\ param_4\[iVar5\];$	+1
+use	_glePreEvaluateWithDeriv	iVar5	coefficientIndex	INFERRED	index of the coefficient being updated	^\s*iVar5\ =\ iVar4;$@2	+1
+use	_glePreEvaluateWithDeriv	iVar5	coefficientIndex	INFERRED	index of the coefficient being updated	^\s*iVar4\ =\ iVar5\ \+\ 1;$@2	+4
+use	_glePreEvaluateWithDeriv	iVar5	coefficientIndex	INFERRED	index of the coefficient being updated	^\s*iVar5\ =\ iVar4;$@3	+1
+use	_glePreEvaluateWithDeriv	iVar4	nextIndex	INFERRED	index of the coefficient after the current one	^\s*iVar4\ =\ 1;$	+1
+use	_glePreEvaluateWithDeriv	iVar4	nextIndex	INFERRED	index of the coefficient after the current one	^\s*iVar6\ =\ iVar4;$	+1
+use	_glePreEvaluateWithDeriv	iVar4	nextIndex	INFERRED	index of the coefficient after the current one	^\s*iVar4\ =\ iVar6\ \+\ 1;$	+1
+use	_glePreEvaluateWithDeriv	iVar4	nextIndex	INFERRED	index of the coefficient after the current one	^\s*iVar6\ =\ iVar4;$@2	+1
+use	_glePreEvaluateWithDeriv	iVar4	nextIndex	INFERRED	index of the coefficient after the current one	^\s*param_4\[iVar4\]\ =\ \(float\)\(double\)dVar10;$	+1
+use	_glePreEvaluateWithDeriv	iVar4	nextIndex	INFERRED	index of the coefficient after the current one	^\s*iVar4\ =\ 1;$@2	+1
+use	_glePreEvaluateWithDeriv	iVar4	nextIndex	INFERRED	index of the coefficient after the current one	^\s*iVar5\ =\ iVar4;$	+1
+use	_glePreEvaluateWithDeriv	iVar4	nextIndex	INFERRED	index of the coefficient after the current one	^\s*iVar4\ =\ iVar5\ \+\ 1;$	+1
+use	_glePreEvaluateWithDeriv	iVar4	nextIndex	INFERRED	index of the coefficient after the current one	^\s*iVar4\ =\ 1;$@3	+1
+use	_glePreEvaluateWithDeriv	iVar4	nextIndex	INFERRED	index of the coefficient after the current one	^\s*iVar5\ =\ iVar4;$@2	+1
+use	_glePreEvaluateWithDeriv	iVar4	nextIndex	INFERRED	index of the coefficient after the current one	^\s*iVar4\ =\ iVar5\ \+\ 1;$@2	+1
+use	_glePreEvaluateWithDeriv	iVar4	nextIndex	INFERRED	index of the coefficient after the current one	^\s*iVar5\ =\ iVar4;$@3	+1
+use	_glePreEvaluateWithDeriv	iVar4	nextIndex	INFERRED	index of the coefficient after the current one	^\s*param_4\[iVar4\]\ =\ \(float\)\(double\)dVar10;$@2	+1
+use	_glePreEvaluateWithDeriv	iVar6	coefficientIndexA	INFERRED	index of the coefficient being updated in the recurrence	^\s*iVar6\ =\ iVar4;$	+1
+use	_glePreEvaluateWithDeriv	iVar6	coefficientIndexA	INFERRED	index of the coefficient being updated in the recurrence	^\s*iVar4\ =\ iVar6\ \+\ 1;$	+4
+use	_glePreEvaluateWithDeriv	iVar6	coefficientIndexA	INFERRED	index of the coefficient being updated in the recurrence	^\s*iVar6\ =\ iVar4;$@2	+1
+use	_glePreEvaluateWithDeriv	iVar6	differenceCount	INFERRED	number of differences left to store: order - 2	^\s*iVar6\ =\ param_2\ \+\ \-2;$	+1
+use	_glePreEvaluateWithDeriv	iVar6	differenceCount	INFERRED	number of differences left to store: order - 2	^\s*iVar6\ =\ 1;$	+1
+use	_glePreEvaluateWithDeriv	iVar6	differenceCount	INFERRED	number of differences left to store: order - 2	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+1
+use	_glePreEvaluateWithDeriv	iVar6	differenceCount	INFERRED	number of differences left to store: order - 2	^\s*\}\ while\ \(iVar6\ !=\ 0\);$	+1
+local	_glePreEvaluateWithDeriv	iVar3	innerCount	INFERRED	remaining coefficients in the recurrence pass
+local	_glePreEvaluateWithDeriv	pfVar7	coefficientCursor	INFERRED	cursor over the coefficients while computing the differences

@@ -221,67 +221,70 @@ double _gleSelectHit(glContext, param_2)
 }
 
 /* _gleSelectHitRecord @ 0xf398c (340 bytes) */
-void _gleSelectHitRecord(int param_1,double floatArg1)
+void _gleSelectHitRecord(int glContext,double floatArg1)
 {
-  uint uVar1;
-  uint *puVar2;
-  uint *puVar3;
-  uint *puVar4;
-  double dVar5;
+  uint depthValue;
+  uint copiedWord;
+  uint *selectCursor;
+  uint *hitRecord;
+  uint *selectBufferEnd;
+  uint *nameCountSlot;
+  uint *nameStackCursor;
+  double scaledDepth;
   
-  if (*(char *)(param_1 + 0x4fc9) != '\0') {
+  if (*(char *)(glContext + 0x4fc9) != '\0') {
     return;
   }
-  dVar5 = floatArg1 * DOUBLE_00108da8;
-  puVar2 = *(uint **)(param_1 + 0x4e24);
-  puVar3 = (uint *)(*(int *)(param_1 + 20000) + *(int *)(param_1 + 0x4e28) * 4);
-  if (DOUBLE_00108d80 <= dVar5) {
-    uVar1 = (int)(dVar5 - DOUBLE_00108d80) ^ 0x80000000;
+  scaledDepth = floatArg1 * DOUBLE_00108da8;
+  selectCursor = *(uint **)(glContext + 0x4e24);
+  selectBufferEnd = (uint *)(*(int *)(glContext + 20000) + *(int *)(glContext + 0x4e28) * 4);
+  if (DOUBLE_00108d80 <= scaledDepth) {
+    depthValue = (int)(scaledDepth - DOUBLE_00108d80) ^ 0x80000000;
   }
   else {
-    uVar1 = (uint)(int)dVar5;
+    depthValue = (uint)(int)scaledDepth;
   }
-  if (*(char *)(param_1 + 0x4fc8) != '\0') {
-    puVar2 = *(uint **)(param_1 + 0x4fc0);
-    if (uVar1 < *puVar2) {
-      *puVar2 = uVar1;
-      puVar2 = *(uint **)(param_1 + 0x4fc0);
+  if (*(char *)(glContext + 0x4fc8) != '\0') {
+    hitRecord = *(uint **)(glContext + 0x4fc0);
+    if (depthValue < *hitRecord) {
+      *hitRecord = depthValue;
+      hitRecord = *(uint **)(glContext + 0x4fc0);
     }
-    if (uVar1 <= puVar2[1]) {
+    if (depthValue <= hitRecord[1]) {
       return;
     }
-    puVar2[1] = uVar1;
+    hitRecord[1] = depthValue;
     return;
   }
-  *(undefined1 *)(param_1 + 0x4fc8) = 1;
-  if (puVar2 != puVar3) {
-    *puVar2 = (*(int *)(param_1 + 0x4fbc) - param_1) + -0x4e2c >> 2;
-    puVar4 = puVar2 + 1;
-    *(int *)(param_1 + 0x4fc4) = *(int *)(param_1 + 0x4fc4) + 1;
-    if (puVar4 != puVar3) {
-      *(uint **)(param_1 + 0x4fc0) = puVar4;
-      *puVar4 = uVar1;
-      if (puVar2 + 2 != puVar3) {
-        puVar2[2] = uVar1;
-        puVar4 = (uint *)(param_1 + 0x4e2c);
-        puVar2 = puVar2 + 3;
-        if (puVar4 < *(uint **)(param_1 + 0x4fbc)) {
+  *(undefined1 *)(glContext + 0x4fc8) = 1;
+  if (selectCursor != selectBufferEnd) {
+    *selectCursor = (*(int *)(glContext + 0x4fbc) - glContext) + -0x4e2c >> 2;
+    nameCountSlot = selectCursor + 1;
+    *(int *)(glContext + 0x4fc4) = *(int *)(glContext + 0x4fc4) + 1;
+    if (nameCountSlot != selectBufferEnd) {
+      *(uint **)(glContext + 0x4fc0) = nameCountSlot;
+      *nameCountSlot = depthValue;
+      if (selectCursor + 2 != selectBufferEnd) {
+        selectCursor[2] = depthValue;
+        nameStackCursor = (uint *)(glContext + 0x4e2c);
+        selectCursor = selectCursor + 3;
+        if (nameStackCursor < *(uint **)(glContext + 0x4fbc)) {
           do {
-            if (puVar2 == puVar3) goto LAB_000f3a4c;
-            uVar1 = *puVar4;
-            puVar4 = puVar4 + 1;
-            *puVar2 = uVar1;
-            puVar2 = puVar2 + 1;
-          } while (puVar4 < *(uint **)(param_1 + 0x4fbc));
+            if (selectCursor == selectBufferEnd) goto LAB_000f3a4c;
+            copiedWord = *nameStackCursor;
+            nameStackCursor = nameStackCursor + 1;
+            *selectCursor = copiedWord;
+            selectCursor = selectCursor + 1;
+          } while (nameStackCursor < *(uint **)(glContext + 0x4fbc));
         }
-        *(uint **)(param_1 + 0x4e24) = puVar2;
+        *(uint **)(glContext + 0x4e24) = selectCursor;
         return;
       }
     }
   }
 LAB_000f3a4c:
-  *(uint **)(param_1 + 0x4e24) = puVar3;
-  *(undefined1 *)(param_1 + 0x4fc9) = 1;
+  *(uint **)(glContext + 0x4e24) = selectBufferEnd;
+  *(undefined1 *)(glContext + 0x4fc9) = 1;
   return;
 }
 
@@ -725,186 +728,191 @@ void _gleFreeShaderObject(glContext, shaderObject)
 }
 
 /* _gleShaderDataUpdateParams @ 0xf4444 (1020 bytes) */
-void _gleShaderDataUpdateParams(param_1)
-  int param_1;
+void _gleShaderDataUpdateParams(shaderData)
+  int shaderData;
 {
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  int iVar5;
-  uint uVar6;
+  int parameterTableOffset;
+  uint componentKind;
+  uint elementKind;
+  int parameterCount;
+  uint elementPart;
+  int parameterBlock;
+  uint parameterWord;
+  uint updatedMaskWord;
   int iVar7;
-  uint uVar8;
-  undefined1 uVar9;
-  uint uVar10;
+  uint parameterIndex;
+  undefined1 parameterIndexByte;
+  uint parameterSlot;
+  uint parameterSlot3;
+  uint halfSelect;
+  uint parameterSlot2;
   
-  iVar5 = *(int *)(param_1 + 0x508);
-  uVar8 = 0;
-  iVar3 = *(int *)(iVar5 + 0x28);
-  iVar1 = *(int *)(iVar5 + 0x2c);
-  if (iVar3 < 1) {
+  parameterBlock = *(int *)(shaderData + 0x508);
+  parameterIndex = 0;
+  parameterCount = *(int *)(parameterBlock + 0x28);
+  parameterTableOffset = *(int *)(parameterBlock + 0x2c);
+  if (parameterCount < 1) {
     return;
   }
   do {
-    uVar6 = *(uint *)(uVar8 * 8 + iVar5 + iVar1 * 8);
-    uVar9 = (undefined1)uVar8;
-    switch(uVar6 >> 0x10 & 0x1f) {
+    parameterWord = *(uint *)(parameterIndex * 8 + parameterBlock + parameterTableOffset * 8);
+    parameterIndexByte = (undefined1)parameterIndex;
+    switch(parameterWord >> 0x10 & 0x1f) {
     default:
       goto switchD_000f44b0_caseD_0;
     case 1:
-      *(undefined1 *)((uVar6 & 0xffff) + param_1 + 0x8c) = uVar9;
+      *(undefined1 *)((parameterWord & 0xffff) + shaderData + 0x8c) = parameterIndexByte;
       break;
     case 2:
-      *(undefined1 *)((uVar6 & 0xffff) + param_1 + 0x18c) = uVar9;
+      *(undefined1 *)((parameterWord & 0xffff) + shaderData + 0x18c) = parameterIndexByte;
       break;
     case 3:
-      uVar10 = uVar6 & 0xff;
-      switch(uVar6 >> 8 & 0xf) {
+      parameterSlot = parameterWord & 0xff;
+      switch(parameterWord >> 8 & 0xf) {
       case 0:
-        *(undefined1 *)(uVar10 * 7 + param_1 + 0x28c) = uVar9;
+        *(undefined1 *)(parameterSlot * 7 + shaderData + 0x28c) = parameterIndexByte;
         break;
       case 1:
-        *(undefined1 *)(uVar10 * 7 + param_1 + 0x28d) = uVar9;
+        *(undefined1 *)(parameterSlot * 7 + shaderData + 0x28d) = parameterIndexByte;
         break;
       case 2:
-        *(undefined1 *)(uVar10 * 7 + param_1 + 0x28e) = uVar9;
+        *(undefined1 *)(parameterSlot * 7 + shaderData + 0x28e) = parameterIndexByte;
         break;
       case 3:
-        *(undefined1 *)(uVar10 * 7 + param_1 + 0x28f) = uVar9;
+        *(undefined1 *)(parameterSlot * 7 + shaderData + 0x28f) = parameterIndexByte;
         break;
       case 4:
-        *(undefined1 *)(uVar10 * 7 + param_1 + 0x290) = uVar9;
+        *(undefined1 *)(parameterSlot * 7 + shaderData + 0x290) = parameterIndexByte;
         break;
       case 5:
-        *(undefined1 *)(uVar10 * 7 + param_1 + 0x291) = uVar9;
+        *(undefined1 *)(parameterSlot * 7 + shaderData + 0x291) = parameterIndexByte;
         break;
       case 6:
-        *(undefined1 *)(uVar10 * 7 + param_1 + 0x292) = uVar9;
+        *(undefined1 *)(parameterSlot * 7 + shaderData + 0x292) = parameterIndexByte;
       }
       break;
     case 4:
-      uVar2 = uVar6 >> 9 & 3;
-      uVar10 = uVar6 & 0xff;
-      uVar6 = uVar6 >> 8 & 1;
-      if (uVar2 == 1) {
-        *(undefined1 *)(uVar10 * 6 + uVar6 * 3 + param_1 + 0x2c5) = uVar9;
+      componentKind = parameterWord >> 9 & 3;
+      parameterSlot2 = parameterWord & 0xff;
+      parameterWord = parameterWord >> 8 & 1;
+      if (componentKind == 1) {
+        *(undefined1 *)(parameterSlot2 * 6 + parameterWord * 3 + shaderData + 0x2c5) = parameterIndexByte;
       }
-      else if (uVar2 < 2) {
-        if (uVar2 == 0) {
-          *(undefined1 *)(uVar10 * 6 + uVar6 * 3 + param_1 + 0x2c4) = uVar9;
+      else if (componentKind < 2) {
+        if (componentKind == 0) {
+          *(undefined1 *)(parameterSlot2 * 6 + parameterWord * 3 + shaderData + 0x2c4) = parameterIndexByte;
         }
       }
-      else if (uVar2 == 2) {
-        *(undefined1 *)(uVar10 * 6 + uVar6 * 3 + param_1 + 0x2c6) = uVar9;
+      else if (componentKind == 2) {
+        *(undefined1 *)(parameterSlot2 * 6 + parameterWord * 3 + shaderData + 0x2c6) = parameterIndexByte;
       }
       break;
     case 5:
-      uVar10 = uVar6 & 1;
-      switch(uVar6 >> 1 & 7) {
+      halfSelect = parameterWord & 1;
+      switch(parameterWord >> 1 & 7) {
       case 0:
-        *(undefined1 *)(uVar10 * 6 + param_1 + 0x2f4) = uVar9;
+        *(undefined1 *)(halfSelect * 6 + shaderData + 0x2f4) = parameterIndexByte;
         break;
       case 1:
-        *(undefined1 *)(uVar10 * 6 + param_1 + 0x2f5) = uVar9;
+        *(undefined1 *)(halfSelect * 6 + shaderData + 0x2f5) = parameterIndexByte;
         break;
       case 2:
-        *(undefined1 *)(uVar10 * 6 + param_1 + 0x2f6) = uVar9;
+        *(undefined1 *)(halfSelect * 6 + shaderData + 0x2f6) = parameterIndexByte;
         break;
       case 3:
-        *(undefined1 *)(uVar10 * 6 + param_1 + 0x2f7) = uVar9;
+        *(undefined1 *)(halfSelect * 6 + shaderData + 0x2f7) = parameterIndexByte;
         break;
       case 4:
-        *(undefined1 *)(uVar10 * 6 + param_1 + 0x2f8) = uVar9;
+        *(undefined1 *)(halfSelect * 6 + shaderData + 0x2f8) = parameterIndexByte;
         break;
       case 5:
-        *(undefined1 *)(uVar10 * 6 + param_1 + 0x2f9) = uVar9;
+        *(undefined1 *)(halfSelect * 6 + shaderData + 0x2f9) = parameterIndexByte;
       }
       break;
     case 6:
-      *(undefined1 *)(param_1 + 0x358) = uVar9;
+      *(undefined1 *)(shaderData + 0x358) = parameterIndexByte;
       break;
     case 7:
-      *(undefined1 *)((uVar6 & 0x1f) * 4 + param_1 + (uVar6 >> 5 & 7) + 0x300) = uVar9;
+      *(undefined1 *)((parameterWord & 0x1f) * 4 + shaderData + (parameterWord >> 5 & 7) + 0x300) = parameterIndexByte;
       break;
     case 8:
-      *(undefined1 *)((uVar6 & 0x1f) * 4 + param_1 + (uVar6 >> 5 & 7) + 800) = uVar9;
+      *(undefined1 *)((parameterWord & 0x1f) * 4 + shaderData + (parameterWord >> 5 & 7) + 800) = parameterIndexByte;
       break;
     case 10:
-      *(undefined1 *)((uVar6 & 0xff) + param_1 + 0x350) = uVar9;
+      *(undefined1 *)((parameterWord & 0xff) + shaderData + 0x350) = parameterIndexByte;
       break;
     case 0xb:
-      *(undefined1 *)(param_1 + 0x356) = uVar9;
+      *(undefined1 *)(shaderData + 0x356) = parameterIndexByte;
       break;
     case 0xc:
-      *(undefined1 *)(param_1 + 0x357) = uVar9;
+      *(undefined1 *)(shaderData + 0x357) = parameterIndexByte;
       break;
     case 0xd:
-      *(undefined1 *)(param_1 + 0x359) = uVar9;
+      *(undefined1 *)(shaderData + 0x359) = parameterIndexByte;
       break;
     case 0xe:
-      *(undefined1 *)(param_1 + 0x35a) = uVar9;
+      *(undefined1 *)(shaderData + 0x35a) = parameterIndexByte;
       break;
     case 0x10:
-      uVar10 = uVar6 & 0xff;
-      switch(uVar6 >> 8 & 7) {
+      parameterSlot3 = parameterWord & 0xff;
+      switch(parameterWord >> 8 & 7) {
       case 0:
-        uVar10 = 0;
+        parameterSlot3 = 0;
         goto LAB_000f4800;
       case 1:
-        uVar10 = 3;
+        parameterSlot3 = 3;
         goto LAB_000f4800;
       case 2:
-        uVar10 = 2;
+        parameterSlot3 = 2;
         goto LAB_000f4800;
       case 3:
-        uVar10 = uVar10 + 4;
+        parameterSlot3 = parameterSlot3 + 4;
         break;
       case 4:
-        uVar10 = uVar10 + 0x10;
+        parameterSlot3 = parameterSlot3 + 0x10;
         break;
       case 5:
-        uVar10 = uVar10 + 8;
+        parameterSlot3 = parameterSlot3 + 8;
         break;
       default:
-        uVar10 = 0xffffffff;
+        parameterSlot3 = 0xffffffff;
       }
-      if (uVar10 != 0xffffffff) {
+      if (parameterSlot3 != 0xffffffff) {
 LAB_000f4800:
-        uVar2 = uVar6 >> 0xe & 3;
-        uVar4 = uVar6 >> 0xc & 3;
-        if (uVar2 == 1) {
-          *(undefined1 *)(uVar10 * 4 + param_1 + uVar4 + 0x41c) = uVar9;
+        elementKind = parameterWord >> 0xe & 3;
+        elementPart = parameterWord >> 0xc & 3;
+        if (elementKind == 1) {
+          *(undefined1 *)(parameterSlot3 * 4 + shaderData + elementPart + 0x41c) = parameterIndexByte;
         }
-        else if (uVar2 < 2) {
-          if (uVar2 == 0) {
-            *(undefined1 *)(uVar10 * 4 + param_1 + uVar4 + 0x35c) = uVar9;
+        else if (elementKind < 2) {
+          if (elementKind == 0) {
+            *(undefined1 *)(parameterSlot3 * 4 + shaderData + elementPart + 0x35c) = parameterIndexByte;
           }
         }
         else {
-          if (uVar2 == 2) {
-            uVar6 = *(uint *)(param_1 + 4) | 1 << (uVar10 & 0x3f);
-            *(undefined1 *)(uVar10 * 4 + param_1 + uVar4 + 0x3bc) = uVar9;
+          if (elementKind == 2) {
+            updatedMaskWord = *(uint *)(shaderData + 4) | 1 << (parameterSlot3 & 0x3f);
+            *(undefined1 *)(parameterSlot3 * 4 + shaderData + elementPart + 0x3bc) = parameterIndexByte;
           }
           else {
-            if (uVar2 != 3) break;
-            uVar6 = *(uint *)(param_1 + 4) | 1 << (uVar10 & 0x3f);
-            *(undefined1 *)(uVar10 * 4 + param_1 + uVar4 + 0x47c) = uVar9;
+            if (elementKind != 3) break;
+            updatedMaskWord = *(uint *)(shaderData + 4) | 1 << (parameterSlot3 & 0x3f);
+            *(undefined1 *)(parameterSlot3 * 4 + shaderData + elementPart + 0x47c) = parameterIndexByte;
           }
 LAB_000f48a0:
-          *(uint *)(param_1 + 4) = uVar6;
+          *(uint *)(shaderData + 4) = updatedMaskWord;
         }
       }
       break;
     case 0x12:
-      uVar6 = *(uint *)(param_1 + 4) | 0x10;
+      updatedMaskWord = *(uint *)(shaderData + 4) | 0x10;
       goto LAB_000f48a0;
     }
-    iVar7 = ((int)uVar8 >> 5) * 4 + param_1;
-    *(uint *)(iVar7 + 8) = *(uint *)(iVar7 + 8) | 1 << (uVar8 & 0x1f);
+    iVar7 = ((int)parameterIndex >> 5) * 4 + shaderData;
+    *(uint *)(iVar7 + 8) = *(uint *)(iVar7 + 8) | 1 << (parameterIndex & 0x1f);
 switchD_000f44b0_caseD_0:
-    uVar8 = uVar8 + 1;
-    if (iVar3 <= (int)uVar8) {
+    parameterIndex = parameterIndex + 1;
+    if (parameterCount <= (int)parameterIndex) {
       return;
     }
   } while( true );

@@ -1,0 +1,25 @@
+local	_gleSelectPixelExtractFunc	param_1	format	CONFIRMED	pixel format (0x1908 GL_RGBA, 0x1903 GL_RED, 0x1905 GL_BLUE, 0x1904 GL_GREEN, 0x1902 GL_DEPTH_COMPONENT, 0x1901 GL_STENCIL_INDEX, ...) selecting the extract function family
+local	_gleSelectPixelExtractFunc	param_2	type	CONFIRMED	pixel data type (0x1400..0x1406 byte/ubyte/short/ushort/int/uint/float, or a packed type such as 0x8033 4444) selecting the extract function within the family
+use	_glePixelPackSettings	iVar1	pixelBytes	CONFIRMED	_glePixelBytes(format, type)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_glePixelBytes\)\(param_2,param_3\);$	+2
+use	_glePixelPackSettings	iVar1	pixelBytes	CONFIRMED	_glePixelBytes(format, type)	^\s*\*param_9\ =\ iVar5\ \*\ iVar1;$	+1
+use	_glePixelPackSettings	iVar1	rowOversize	INFERRED	bytes the row length setting adds to the tightly packed row (0 when the row length is unset)	^\s*iVar1\ =\ 0;$	+1
+use	_glePixelPackSettings	iVar1	rowOversize	INFERRED	bytes the row length setting adds to the tightly packed row (0 when the row length is unset)	^\s*iVar1\ =\ uVar4\ \-\ uVar2;$	+1
+use	_glePixelPackSettings	iVar1	rowOversize	INFERRED	bytes the row length setting adds to the tightly packed row (0 when the row length is unset)	^\s*\*param_10\ =\ iVar1\ \+\ iVar3;$	+1
+use	_glePixelPackSettings	iVar1	imageBytes	INFERRED	height * rowBytes or image height * rowBytes: bytes per image	^\s*iVar1\ =\ param_5\ \*\ \*param_9;$	+1
+use	_glePixelPackSettings	iVar1	imageBytes	INFERRED	height * rowBytes or image height * rowBytes: bytes per image	^\s*iVar1\ =\ param_6\[1\]\ \*\ \*param_9;$	+1
+use	_glePixelPackSettings	iVar1	imageBytes	INFERRED	height * rowBytes or image height * rowBytes: bytes per image	^\s*\*param_11\ =\ iVar1;$	+1
+local	_glePixelPackSettings	uVar2	rowBytesThenAlignment	INFERRED	_gleRowBytes(format, type, width): bytes of a tightly packed row, later reloaded with the pixel store alignment (packSettings+0x14)
+local	_glePixelPackSettings	iVar3	alignPadding	INFERRED	bytes added to the row to reach the alignment
+local	_glePixelPackSettings	uVar4	packedRowBytes	INFERRED	row bytes before alignment: tightRowBytes, or row length * pixelBytes
+use	_glePixelPackSettings	iVar5	rowLength	INFERRED	pixel store row length (packSettings+0)	^\s*iVar5\ =\ \*param_6;$	+2
+use	_glePixelPackSettings	iVar5	rowLength	INFERRED	pixel store row length (packSettings+0)	^\s*\*param_9\ =\ iVar5\ \*\ iVar1\ \+\ 7\ >>\ 3;$	+1
+use	_glePixelPackSettings	iVar5	rowLength	INFERRED	pixel store row length (packSettings+0)	^\s*\*param_9\ =\ iVar5\ \*\ iVar1;$	+1
+use	_glePixelPackSettings	iVar5	alignRemainder	INFERRED	packedRowBytes modulo alignment	^\s*iVar5\ =\ uVar4\ \-\ \(uVar4\ /\ uVar2\)\ \*\ uVar2;$	+3
+local	_glePixelPackSettings	param_5	height	CONFIRMED	height of the image in rows, multiplied by the packed row bytes to get the image size
+local	_glePixelPackSettings	param_6	packSettings	INFERRED	pixel store settings block (+0 row length, +4 image height, +8 skip rows, +0xc skip pixels, +0x10 skip images, +0x14 alignment); NULL means tightly packed
+local	_glePixelPackSettings	param_7	pixelBytesOut	CONFIRMED	out: bytes per pixel (_glePixelBytes)
+local	_glePixelPackSettings	param_8	startOffsetOut	INFERRED	out: byte offset of the first pixel from the skip settings
+local	_glePixelPackSettings	param_9	rowBytesOut	INFERRED	out: bytes per row including alignment padding
+local	_glePixelPackSettings	param_10	rowPaddingOut	INFERRED	out: bytes of padding per row beyond the tightly packed row
+local	_glePixelPackSettings	param_11	imageBytesOut	INFERRED	out: bytes per image (rows * rowBytes, or image height * rowBytes when set)
+local	_glePixelPackSettings	param_12	imagePaddingOut	INFERRED	out: bytes of padding per image beyond height * rowBytes

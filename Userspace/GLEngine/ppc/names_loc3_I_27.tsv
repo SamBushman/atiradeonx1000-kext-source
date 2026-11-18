@@ -1,0 +1,65 @@
+local	_LFSParserParseConstantBinding	param_1	parser	INFERRED	source parser state: +0xc cursor, +0x10 line number, +0x14 program stream receiving the constants and bindings
+use	_LFSParserParseConstantBinding	iVar1	status	INFERRED	return code of _LFSParserParseRegister (0 parsed), then 5 when the register is not a constant register	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_LFSParserParseRegister\)\(param_1,local_20,\&local_5c\);$	+2
+use	_LFSParserParseConstantBinding	iVar1	status	INFERRED	return code of _LFSParserParseRegister (0 parsed), then 5 when the register is not a constant register	^\s*if\ \(\(iVar2\ !=\ 0\)\ \&\&\ \(iVar1\ =\ 0xf,\ local_160\[0\]\ ==\ '='\)\)\ \{$	+1
+use	_LFSParserParseConstantBinding	iVar1	status	INFERRED	return code of _LFSParserParseRegister (0 parsed), then 5 when the register is not a constant register	^\s*iVar1\ =\ 8;$@2	+1
+use	_LFSParserParseConstantBinding	iVar1	status	INFERRED	return code of _LFSParserParseRegister (0 parsed), then 5 when the register is not a constant register	^\s*iVar1\ =\ 0;$	+1
+use	_LFSParserParseConstantBinding	iVar1	status	INFERRED	return code of _LFSParserParseRegister (0 parsed), then 5 when the register is not a constant register	^\s*return\ iVar1;$@3	+1
+use	_LFSParserParseConstantBinding	iVar1	bindingNode	INFERRED	constant binding node being checked for a duplicate register index (+8 index, +0x4c next)	^\s*for\ \(iVar1\ =\ \*\(int\ \*\)\*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0x14\);\ iVar1\ !=\ 0;$	+3
+use	_LFSParserParseConstantBinding	iVar1	status	INFERRED	return code: 8 unexpected end of source, 0xf syntax error, 0x11 register already bound	^\s*iVar1\ =\ 8;$	+1
+use	_LFSParserParseConstantBinding	iVar1	compareResult	INFERRED	memcmp result of the token against program, env, local or {	^\s*iVar1\ =\ _memcmp\(local_160,"program",8\);$	+2
+use	_LFSParserParseConstantBinding	iVar1	compareResult	INFERRED	memcmp result of the token against program, env, local or {	^\s*iVar1\ =\ _memcmp\(local_160,"env",4\);$	+3
+use	_LFSParserParseConstantBinding	iVar1	compareResult	INFERRED	memcmp result of the token against program, env, local or {	^\s*iVar1\ =\ _memcmp\(local_160,"local",6\);$	+2
+use	_LFSParserParseConstantBinding	iVar1	compareResult	INFERRED	memcmp result of the token against program, env, local or {	^\s*iVar1\ =\ _memcmp\(local_160,"\{",2\);$	+2
+use	_LFSParserParseConstantBinding	iVar1	partLength	INFERRED	length returned by _LFSParserGetPart for the next token (0 at end of source)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_LFSParserGetPart\)\(param_1,local_160\);$	+2
+use	_LFSParserParseConstantBinding	iVar1	partLength	INFERRED	length returned by _LFSParserGetPart for the next token (0 at end of source)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_LFSParserGetPart\)\(param_1,local_160\);$@2	+2
+use	_LFSParserParseConstantBinding	iVar1	partLength	INFERRED	length returned by _LFSParserGetPart for the next token (0 at end of source)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_LFSParserGetPart\)\(param_1,local_160\);$@3	+2
+use	_LFSParserParseConstantBinding	iVar1	status	INFERRED	return code of _LFSParserParseArray for the program.env[] / program.local[] index	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_LFSParserParseArray\)\(param_1,local_40\);$	+3
+use	_LFSParserParseConstantBinding	iVar1	status	INFERRED	return code of _LFSParserParseArray for the program.env[] / program.local[] index	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_LFSParserParseArray\)\(param_1,local_40\);$@2	+3
+local	_LFSParserParseConstantBinding	iVar2	tokenLength	INFERRED	length returned by _LFSParserGetPart for the next token (0 at end of source)
+local	_LFSParserParseConstantBinding	local_160	tokenBuffer	INFERRED	256 byte buffer receiving the token read by _LFSParserGetPart
+local	_LFSParserParseConstantBinding	local_60	bindingKind	INFERRED	binding record word 0: 0 program.env[], 1 literal {x,y,z,w}, 2 program.local[]
+local	_LFSParserParseConstantBinding	local_5c	registerIndex	INFERRED	binding record word 1: register index returned by _LFSParserParseRegister
+local	_LFSParserParseConstantBinding	local_58	envIndex	INFERRED	binding record word 2: the index of program.env[index] converted to int
+local	_LFSParserParseConstantBinding	local_54	constantIndex	INFERRED	binding record word 3: index of the literal in the constant table (stream constant count)
+local	_LFSParserParseConstantBinding	local_50	localIndex	INFERRED	binding record word 4: the index of program.local[index] converted to int
+local	_LFSParserParseConstantBinding	local_40	literalValue	INFERRED	four floats: the array index or the {x,y,z,w} literal read by _LFSParserParseArray or _LFSParserGetScalars
+local	_LFSParserParseConstantBinding	local_30	floatToIntTemp	INFERRED	8 byte stack temporary of the float to int conversion of the local index
+local	_LFSParserParseConstantBinding	local_28	floatToIntTemp2	INFERRED	8 byte stack temporary of the float to int conversion of the env index
+local	_LFSParserParseConstantBinding	local_20	registerInfo	INFERRED	register kind (word 0, 2 means a constant register) and element count (word 1) returned by _LFSParserParseRegister
+local	_LFSStreamChunkListGetStream	param_1	chunkList	INFERRED	chunk list: word 0 is the first chunk (+0x4c next chunk)
+local	_LFSStreamChunkListGetStream	param_2	outStream	INFERRED	receives the stream words of all chunks (0 only counts them)
+local	_LFSStreamChunkListGetStream	param_3	outCount	INFERRED	receives the total number of stream words
+local	_LFSStreamChunkListGetStream	uVar1	streamWord	INFERRED	stream word returned by _LFSStreamChunkGetStream
+local	_LFSStreamChunkListGetStream	iVar2	wordIndex	INFERRED	index of the next word written to outStream
+local	_LFSStreamChunkListGetStream	iVar3	byteOffset	INFERRED	wordIndex * 4: byte offset of the next word in outStream
+local	_LFSStreamChunkListGetStream	iVar4	chunk	INFERRED	chunk being visited
+local	_LFSStreamChunkListGetStream	uVar5	subIndex	INFERRED	index of the additional stream words of the chunk
+local	_LFSStreamChunkListGetStream	puVar6	dstCursor	INFERRED	position in outStream of the next additional word
+local	_LFSStreamChunkListGetStream	local_30	chunkWordCount	INFERRED	number of stream words of the chunk
+local	_LFSStreamChunkListGetStream	auStack_2c	scratchCount	INFERRED	scratch word count for the additional word queries
+local	_gleLFSParse	uVar1	usageFlags	INFERRED	program usage flags (+0x4e8) with the bit of the chunk type 5 value set
+local	_gleLFSParse	iVar2	slotCursor	INFERRED	binding slot of a chunk being tested for type 4 (stride 0x10)
+local	_gleLFSParse	iVar3	stream	INFERRED	stream created for the parsed program (+0x4e4)
+use	_gleLFSParse	iVar4	parseStatus	INFERRED	result of _LFSParserParse (0 parsed)	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)_LFSParserParse\)\(iVar8\);$	+2
+use	_gleLFSParse	iVar4	chunk	INFERRED	stream chunk being visited (+8 type, +0xc value, +0x4c next chunk)	^\s*for\ \(iVar4\ =\ \*piVar7;\ iVar4\ !=\ 0;\ iVar4\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x4c\)\)\ \{$	+3
+use	_gleLFSParse	iVar4	chunk	INFERRED	stream chunk being visited (+8 type, +0xc value, +0x4c next chunk)	^\s*for\ \(iVar4\ =\ \*\*\(int\ \*\*\)\(iVar3\ \+\ 0x10\);\ iVar4\ !=\ 0;\ iVar4\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x4c\)\)\ \{$	+2
+use	_gleLFSParse	uVar5	listIndex	INFERRED	counts up from 0: which chunk list of the stream is scanned (0 and 1)	^\s*uVar5\ =\ 0;$	+1
+use	_gleLFSParse	uVar5	listIndex	INFERRED	counts up from 0: which chunk list of the stream is scanned (0 and 1)	^\s*if\ \(uVar5\ ==\ 0\)\ \{$	+1
+use	_gleLFSParse	uVar5	listIndex	INFERRED	counts up from 0: which chunk list of the stream is scanned (0 and 1)	^\s*if\ \(uVar5\ ==\ 1\)\ \{$	+1
+use	_gleLFSParse	uVar5	listIndex	INFERRED	counts up from 0: which chunk list of the stream is scanned (0 and 1)	^\s*uVar5\ =\ uVar5\ \+\ 1;$	+2
+use	_gleLFSParse	uVar5	newUsageFlags	INFERRED	usage flags with 0x100 or 0x200 set	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar9\ \+\ 0x4e8\)\ \|\ 0x100;$	+1
+use	_gleLFSParse	uVar5	newUsageFlags	INFERRED	usage flags with 0x100 or 0x200 set	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar9\ \+\ 0x4e8\)\ \|\ 0x200;$	+1
+use	_gleLFSParse	uVar5	newUsageFlags	INFERRED	usage flags with 0x100 or 0x200 set	^\s*\*\(uint\ \*\)\(iVar9\ \+\ 0x4e8\)\ =\ uVar5;$	+1
+use	_gleLFSParse	uVar6	sourceString	INFERRED	program source text (program +0x14) attached to the parser	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar9\ \+\ 0x14\);$	+1
+use	_gleLFSParse	uVar6	sourceString	INFERRED	program source text (program +0x14) attached to the parser	^\s*\(\(int\ \(\*\)\(\)\)_LFSParserAttachString\)\(iVar8,uVar6,1\);$	+1
+use	_gleLFSParse	uVar6	streamBuffer	INFERRED	buffer allocated for the stream words of the parsed program (program +0x4cc)	^\s*uVar6\ =\ _gleVecAlloc\(local_40\[0\]\ <<\ 2\);$	+3
+local	_gleLFSParse	piVar7	chunkList	INFERRED	chunk list of the stream being scanned (stream +4 or +0xc)
+use	_gleLFSParse	iVar8	oldStream	INFERRED	previously parsed stream (+0x4e4) released before the new parse	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x4e4\);$	+1
+use	_gleLFSParse	iVar8	oldStream	INFERRED	previously parsed stream (+0x4e4) released before the new parse	^\s*if\ \(iVar8\ !=\ 0\)\ \{$	+2
+use	_gleLFSParse	iVar8	parser	INFERRED	LFS parser created for this parse	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_LFSParserCreate\)\(\);$	+2
+use	_gleLFSParse	iVar8	parser	INFERRED	LFS parser created for this parse	^\s*\(\(void\ \(\*\)\(\)\)_LFSParserAttachStream\)\(iVar8,iVar3\);$	+2
+use	_gleLFSParse	iVar8	parser	INFERRED	LFS parser created for this parse	^\s*_snprintf\(\*\(char\ \*\*\)\(param_1\ \+\ 0x5418\),0x600,"Error\ on\ line\ %i:\ %s;",\*\(int\ \*\)\(iVar8\ \+\ 0x460\)\ \+\ 1$	+2
+use	_gleLFSParse	iVar8	parser	INFERRED	LFS parser created for this parse	^\s*\(\(void\ \(\*\)\(\)\)_LFSParserFree\)\(iVar8\);$	+1
+local	_gleLFSParse	iVar9	programObject	INFERRED	program object bound at ctx+0x5424 (+0x14 source, +0x4cc stream words, +0x4e4 stream, +0x4e8 usage flags)
+local	_gleLFSParse	iVar10	remaining	INFERRED	counts down from 3 by 1 over the binding slots of a chunk
+local	_gleLFSParse	local_40	streamSize	INFERRED	stream size: word 0 receives the number of stream words

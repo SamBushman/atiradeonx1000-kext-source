@@ -915,16 +915,18 @@ int _glCompressedTexImage3D_Exec(glContext, target, level, internalformat, width
   int imageSize;
   int data;
 {
-  byte bVar1;
-  ushort uVar2;
-  undefined4 uVar3;
+  byte levelFlags;
+  ushort objectFlags;
+  undefined4 pluginResult;
   undefined4 glErrorCode;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  uint faceIndex;
+  int contextThenTextureObject;
+  int pixelUnpackBuffer;
+  int createResult;
+  int levelRecord;
+  int textureLevel;
   
-  iVar5 = glContext;
+  contextThenTextureObject = glContext;
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((data == 0) && (*(char *)(glContext + 0x31e6) != '\0')) {
       if (*(int *)(glContext + 0x7574) != 0) {
@@ -933,73 +935,73 @@ int _glCompressedTexImage3D_Exec(glContext, target, level, internalformat, width
       glErrorCode = 0x501;
       goto LAB_00091ce0;
     }
-    iVar6 = *(int *)(glContext + 0x4a6c);
-    if (iVar6 != 0) {
-      if (*(int *)(iVar6 + 0x38) < imageSize + data) goto LAB_00091cd0;
-      if (*(int *)(iVar6 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar6 + 0x10);
+    pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+    if (pixelUnpackBuffer != 0) {
+      if (*(int *)(pixelUnpackBuffer + 0x38) < imageSize + data) goto LAB_00091cd0;
+      if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
       }
-      data = data + *(int *)(iVar6 + 0x30);
+      data = data + *(int *)(pixelUnpackBuffer + 0x30);
     }
-    iVar5 = _gleCheckCompressedTexImage3DArgs
+    contextThenTextureObject = _gleCheckCompressedTexImage3DArgs
                       (glContext,target,level,internalformat,width,height,depth,border,imageSize);
-    if (iVar5 == 0) {
+    if (contextThenTextureObject == 0) {
       return 0;
     }
-    uVar2 = *(ushort *)(iVar5 + 0x24);
-    if ((uVar2 & 0x3c00) == 0x1000) {
+    objectFlags = *(ushort *)(contextThenTextureObject + 0x24);
+    if ((objectFlags & 0x3c00) == 0x1000) {
 LAB_00091ce8:
-      uVar4 = target - 0x8515;
-      if (5 < uVar4) {
-        uVar4 = 0;
+      faceIndex = target - 0x8515;
+      if (5 < faceIndex) {
+        faceIndex = 0;
       }
-      iVar6 = iVar5 + uVar4 * 0x168 + level * 0x18;
-      iVar7 = iVar6 + 0xc4;
-      if ((*(byte *)(iVar6 + 0xcf) & 0x20) != 0) {
-        _gleDeletePluginTextureLevel(glContext,iVar5,iVar7,uVar4,level);
-        if (*(int *)(iVar6 + 0xd8) != 0) {
-          bVar1 = *(byte *)(iVar6 + 0xcf);
-          if ((bVar1 & 1) == 0) {
-            _gleFreeTextureLevel(glContext,iVar5,iVar7);
-            bVar1 = *(byte *)(iVar6 + 0xcf);
+      levelRecord = contextThenTextureObject + faceIndex * 0x168 + level * 0x18;
+      textureLevel = levelRecord + 0xc4;
+      if ((*(byte *)(levelRecord + 0xcf) & 0x20) != 0) {
+        _gleDeletePluginTextureLevel(glContext,contextThenTextureObject,textureLevel,faceIndex,level);
+        if (*(int *)(levelRecord + 0xd8) != 0) {
+          levelFlags = *(byte *)(levelRecord + 0xcf);
+          if ((levelFlags & 1) == 0) {
+            _gleFreeTextureLevel(glContext,contextThenTextureObject,textureLevel);
+            levelFlags = *(byte *)(levelRecord + 0xcf);
           }
           else {
-            *(undefined4 *)(iVar6 + 0xd8) = 0;
+            *(undefined4 *)(levelRecord + 0xd8) = 0;
           }
-          *(byte *)(iVar6 + 0xcf) = bVar1 & 0xef;
+          *(byte *)(levelRecord + 0xcf) = levelFlags & 0xef;
         }
-        *(byte *)(iVar6 + 0xcf) = *(byte *)(iVar6 + 0xcf) & 0xdf;
+        *(byte *)(levelRecord + 0xcf) = *(byte *)(levelRecord + 0xcf) & 0xdf;
       }
-      iVar6 = _gleCreateTextureLevel
-                        (glContext,iVar5,iVar7,internalformat,width,height,depth,border,internalformat,0,1,
+      createResult = _gleCreateTextureLevel
+                        (glContext,contextThenTextureObject,textureLevel,internalformat,width,height,depth,border,internalformat,0,1,
                          data);
-      if ((iVar6 != 0) && (data != 0)) {
+      if ((createResult != 0) && (data != 0)) {
         _gleCompressedTextureImagePut
-                  (glContext,iVar7,0,0,0,width,height,depth,internalformat,imageSize,data);
+                  (glContext,textureLevel,0,0,0,width,height,depth,internalformat,imageSize,data);
       }
-      uVar3 = _gleCreatePluginTextureLevel(glContext,iVar5,iVar7,uVar4,level,internalformat);
-      if ((((*(uint *)(iVar5 + 0x6c) & 0x8000) != 0) && (*(short *)(iVar5 + 0x60) == level)) &&
-         (iVar5 = _gleGenMipmapsToLevel(glContext,iVar5,0,level,0xf,1), uVar3 = 0, iVar5 != 0)) {
-        return iVar5;
+      pluginResult = _gleCreatePluginTextureLevel(glContext,contextThenTextureObject,textureLevel,faceIndex,level,internalformat);
+      if ((((*(uint *)(contextThenTextureObject + 0x6c) & 0x8000) != 0) && (*(short *)(contextThenTextureObject + 0x60) == level)) &&
+         (contextThenTextureObject = _gleGenMipmapsToLevel(glContext,contextThenTextureObject,0,level,0xf,1), pluginResult = 0, contextThenTextureObject != 0)) {
+        return contextThenTextureObject;
       }
       *(uint *)(glContext + 0x314) =
            *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
-      return uVar3;
+      return pluginResult;
     }
-    if ((uVar2 & 0x3c00) == 0) {
-      *(ushort *)(iVar5 + 0x24) = uVar2 | 0x1000;
+    if ((objectFlags & 0x3c00) == 0) {
+      *(ushort *)(contextThenTextureObject + 0x24) = objectFlags | 0x1000;
       goto LAB_00091ce8;
     }
-    if ((uVar2 & 0xc00) == 0) goto LAB_00091ce8;
+    if ((objectFlags & 0xc00) == 0) goto LAB_00091ce8;
   }
 LAB_00091cd0:
   if (*(int *)(glContext + 0x7574) != 0) {
-    return iVar5;
+    return contextThenTextureObject;
   }
   glErrorCode = 0x502;
 LAB_00091ce0:
   *(undefined4 *)(glContext + 0x7574) = glErrorCode;
-  return iVar5;
+  return contextThenTextureObject;
 }
 
 /* _glCompressedTexImage2D_Exec @ 0x91e84 (692 bytes) */
@@ -1313,15 +1315,18 @@ int _glCompressedTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, 
   int imageSize;
   int data;
 {
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  uint faceIndex;
+  uint nextLevel;
+  int levelRecord;
+  int levelImageCursor2;
+  int textureObject;
+  int pluginResult;
   int iVar5;
-  byte bVar6;
-  int iVar7;
-  int iVar8;
+  byte levelFlags;
+  int faceOffset;
+  int textureLevel;
   int iVar9;
+  int levelImageCursor;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     iVar9 = *(int *)(glContext + 0x4a6c);
@@ -1330,135 +1335,135 @@ int _glCompressedTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, 
       data = data + *(int *)(iVar9 + 0x30);
     }
     if (((width != 0) && (height != 0)) &&
-       (iVar3 = _gleCheckCompressedTexSubImage2DArgs
+       (textureObject = _gleCheckCompressedTexSubImage2DArgs
                           (glContext,target,level,xoffset,yoffset,width,height,format,imageSize),
-       iVar3 != 0)) {
-      uVar1 = target - 0x8515;
-      if (5 < uVar1) {
-        uVar1 = 0;
+       textureObject != 0)) {
+      faceIndex = target - 0x8515;
+      if (5 < faceIndex) {
+        faceIndex = 0;
       }
-      iVar7 = uVar1 * 0x168;
-      iVar2 = iVar3 + iVar7 + level * 0x18;
-      iVar8 = iVar2 + 0xc4;
+      faceOffset = faceIndex * 0x168;
+      levelRecord = textureObject + faceOffset + level * 0x18;
+      textureLevel = levelRecord + 0xc4;
       if (iVar9 != 0) {
-        if ((((int)(uint)*(byte *)(iVar3 + 0x8d) <= (int)level) &&
-            ((int)level <= (int)(uint)*(byte *)(iVar3 + 0x8f))) &&
-           ((iVar5 = uVar1 * 2, (*(ushort *)(iVar5 + iVar3 + 0x94) >> (level & 0x3f) & 1) != 0 &&
-            (iVar4 = (**(code **)(glContext + 0x4710))
+        if ((((int)(uint)*(byte *)(textureObject + 0x8d) <= (int)level) &&
+            ((int)level <= (int)(uint)*(byte *)(textureObject + 0x8f))) &&
+           ((iVar5 = faceIndex * 2, (*(ushort *)(iVar5 + textureObject + 0x94) >> (level & 0x3f) & 1) != 0 &&
+            (pluginResult = (**(code **)(glContext + 0x4710))
                                (*(undefined4 *)(glContext + 0x4688),
-                                *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4),uVar1
-                                ,level,xoffset,yoffset,0,width), iVar4 != 0)))) {
-          *(undefined4 *)(iVar3 + 0x20) =
+                                *(undefined4 *)(textureObject + (uint)*(byte *)(glContext + 0x85a8) * 4),faceIndex
+                                ,level,xoffset,yoffset,0,width), pluginResult != 0)))) {
+          *(undefined4 *)(textureObject + 0x20) =
                *(undefined4 *)
                 ((uint)*(byte *)(glContext + 0x85a8) * 4 + *(int *)(glContext + 0x5148) + 0x8054);
-          if (*(int *)(iVar2 + 0xd8) != 0) {
-            bVar6 = *(byte *)(iVar2 + 0xcf);
-            if (((bVar6 & 1) == 0) && (*(short *)(iVar3 + 0x3e) == -0x7a43)) {
-              _gleFreeTextureLevel(glContext,iVar3,iVar8);
-              bVar6 = *(byte *)(iVar2 + 0xcf);
+          if (*(int *)(levelRecord + 0xd8) != 0) {
+            levelFlags = *(byte *)(levelRecord + 0xcf);
+            if (((levelFlags & 1) == 0) && (*(short *)(textureObject + 0x3e) == -0x7a43)) {
+              _gleFreeTextureLevel(glContext,textureObject,textureLevel);
+              levelFlags = *(byte *)(levelRecord + 0xcf);
             }
-            *(byte *)(iVar2 + 0xcf) = bVar6 & 0xef;
-            *(ushort *)(iVar5 + iVar3 + 0xa0) =
-                 *(ushort *)(iVar5 + iVar3 + 0xa0) &
+            *(byte *)(levelRecord + 0xcf) = levelFlags & 0xef;
+            *(ushort *)(iVar5 + textureObject + 0xa0) =
+                 *(ushort *)(iVar5 + textureObject + 0xa0) &
                  ((ushort)(-2 << (level & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (level & 0x1f))
                  );
           }
-          *(byte *)(iVar2 + 0xcf) = *(byte *)(iVar2 + 0xcf) | 0x40;
-          if ((*(uint *)(iVar3 + 0x6c) & 0x8000) == 0) {
+          *(byte *)(levelRecord + 0xcf) = *(byte *)(levelRecord + 0xcf) | 0x40;
+          if ((*(uint *)(textureObject + 0x6c) & 0x8000) == 0) {
             return;
           }
-          if ((int)*(short *)(iVar3 + 0x60) != level) {
+          if ((int)*(short *)(textureObject + 0x60) != level) {
             return;
           }
-          uVar1 = level + 1;
-          if ((int)(uint)*(byte *)(iVar3 + 0x83) < (int)uVar1) {
+          nextLevel = level + 1;
+          if ((int)(uint)*(byte *)(textureObject + 0x83) < (int)nextLevel) {
             return;
           }
-          iVar9 = uVar1 * 0x18 + iVar7 + iVar3 + 0xc4;
+          levelImageCursor = nextLevel * 0x18 + faceOffset + textureObject + 0xc4;
           do {
-            if (*(int *)(iVar9 + 0x14) != 0) {
-              if (((*(byte *)(iVar9 + 0xb) & 1) == 0) && (*(short *)(iVar3 + 0x3e) == -0x7a43)) {
-                _gleFreeTextureLevel(glContext,iVar3,iVar9);
+            if (*(int *)(levelImageCursor + 0x14) != 0) {
+              if (((*(byte *)(levelImageCursor + 0xb) & 1) == 0) && (*(short *)(textureObject + 0x3e) == -0x7a43)) {
+                _gleFreeTextureLevel(glContext,textureObject,levelImageCursor);
               }
-              *(byte *)(iVar9 + 0xb) = *(byte *)(iVar9 + 0xb) & 0xef;
-              *(ushort *)(iVar5 + iVar3 + 0xa0) =
-                   *(ushort *)(iVar5 + iVar3 + 0xa0) & ~(ushort)(1 << (uVar1 & 0x3f));
+              *(byte *)(levelImageCursor + 0xb) = *(byte *)(levelImageCursor + 0xb) & 0xef;
+              *(ushort *)(iVar5 + textureObject + 0xa0) =
+                   *(ushort *)(iVar5 + textureObject + 0xa0) & ~(ushort)(1 << (nextLevel & 0x3f));
             }
-            uVar1 = uVar1 + 1;
-            *(byte *)(iVar9 + 0xb) = *(byte *)(iVar9 + 0xb) | 0x40;
-            iVar9 = iVar9 + 0x18;
-          } while ((int)uVar1 <= (int)(uint)*(byte *)(iVar3 + 0x83));
+            nextLevel = nextLevel + 1;
+            *(byte *)(levelImageCursor + 0xb) = *(byte *)(levelImageCursor + 0xb) | 0x40;
+            levelImageCursor = levelImageCursor + 0x18;
+          } while ((int)nextLevel <= (int)(uint)*(byte *)(textureObject + 0x83));
           return;
         }
         if (*(int *)(iVar9 + 0x40) != 0) {
           _gleSynchronizePluginBuffer(glContext,iVar9 + 0x10);
         }
       }
-      if (((((int)level < (int)(uint)*(byte *)(iVar3 + 0x8d)) ||
-           ((int)(uint)*(byte *)(iVar3 + 0x8f) < (int)level)) ||
-          (iVar9 = uVar1 * 2, (*(ushort *)(iVar9 + iVar3 + 0x94) >> (level & 0x3f) & 1) == 0)) ||
+      if (((((int)level < (int)(uint)*(byte *)(textureObject + 0x8d)) ||
+           ((int)(uint)*(byte *)(textureObject + 0x8f) < (int)level)) ||
+          (iVar9 = faceIndex * 2, (*(ushort *)(iVar9 + textureObject + 0x94) >> (level & 0x3f) & 1) == 0)) ||
          (iVar5 = (**(code **)(glContext + 0x4710))
                             (*(undefined4 *)(glContext + 0x4688),
-                             *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4),uVar1,
+                             *(undefined4 *)(textureObject + (uint)*(byte *)(glContext + 0x85a8) * 4),faceIndex,
                              level,xoffset,yoffset,0,width), iVar5 == 0)) {
-        bVar6 = *(byte *)(iVar2 + 0xcf);
-        if ((bVar6 & 0x10) == 0) {
-          if ((bVar6 & 0x40) == 0) {
-            if (*(int *)(iVar2 + 0xd8) == 0) {
-              _gleAllocateTextureLevel(glContext,iVar3,iVar8);
-              bVar6 = *(byte *)(iVar2 + 0xcf);
+        levelFlags = *(byte *)(levelRecord + 0xcf);
+        if ((levelFlags & 0x10) == 0) {
+          if ((levelFlags & 0x40) == 0) {
+            if (*(int *)(levelRecord + 0xd8) == 0) {
+              _gleAllocateTextureLevel(glContext,textureObject,textureLevel);
+              levelFlags = *(byte *)(levelRecord + 0xcf);
             }
-            *(byte *)(iVar2 + 0xcf) = bVar6 | 0x10;
+            *(byte *)(levelRecord + 0xcf) = levelFlags | 0x10;
           }
           else {
             _gleUploadPluginTextureLevel
-                      (glContext,iVar3,iVar8,uVar1,level,(uint)*(byte *)(glContext + 0x85a8));
+                      (glContext,textureObject,textureLevel,faceIndex,level,(uint)*(byte *)(glContext + 0x85a8));
           }
         }
         _gleModifyPluginTextureLevel
-                  (glContext,iVar3,iVar8,uVar1,level,xoffset,yoffset,0,width,height,1);
+                  (glContext,textureObject,textureLevel,faceIndex,level,xoffset,yoffset,0,width,height,1);
         if (data != 0) {
           _gleCompressedTextureImagePut
-                    (glContext,iVar8,xoffset,yoffset,0,width,height,1,format,imageSize,data);
+                    (glContext,textureLevel,xoffset,yoffset,0,width,height,1,format,imageSize,data);
         }
-        if ((((*(uint *)(iVar3 + 0x6c) & 0x8000) == 0) || ((int)*(short *)(iVar3 + 0x60) != level)
-            ) || (iVar9 = _gleGenMipmapsToLevel(glContext,iVar3,uVar1,level,0xf,1), iVar9 == 0)) {
+        if ((((*(uint *)(textureObject + 0x6c) & 0x8000) == 0) || ((int)*(short *)(textureObject + 0x60) != level)
+            ) || (iVar9 = _gleGenMipmapsToLevel(glContext,textureObject,faceIndex,level,0xf,1), iVar9 == 0)) {
           *(uint *)(glContext + 0x314) =
                *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
         }
       }
       else {
-        *(undefined4 *)(iVar3 + 0x20) =
+        *(undefined4 *)(textureObject + 0x20) =
              *(undefined4 *)
               ((uint)*(byte *)(glContext + 0x85a8) * 4 + *(int *)(glContext + 0x5148) + 0x8054);
-        if (*(int *)(iVar2 + 0xd8) != 0) {
-          bVar6 = *(byte *)(iVar2 + 0xcf);
-          if (((bVar6 & 1) == 0) && (*(short *)(iVar3 + 0x3e) == -0x7a43)) {
-            _gleFreeTextureLevel(glContext,iVar3,iVar8);
-            bVar6 = *(byte *)(iVar2 + 0xcf);
+        if (*(int *)(levelRecord + 0xd8) != 0) {
+          levelFlags = *(byte *)(levelRecord + 0xcf);
+          if (((levelFlags & 1) == 0) && (*(short *)(textureObject + 0x3e) == -0x7a43)) {
+            _gleFreeTextureLevel(glContext,textureObject,textureLevel);
+            levelFlags = *(byte *)(levelRecord + 0xcf);
           }
-          *(byte *)(iVar2 + 0xcf) = bVar6 & 0xef;
-          *(ushort *)(iVar9 + iVar3 + 0xa0) =
-               *(ushort *)(iVar9 + iVar3 + 0xa0) &
+          *(byte *)(levelRecord + 0xcf) = levelFlags & 0xef;
+          *(ushort *)(iVar9 + textureObject + 0xa0) =
+               *(ushort *)(iVar9 + textureObject + 0xa0) &
                ((ushort)(-2 << (level & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (level & 0x1f)));
         }
-        *(byte *)(iVar2 + 0xcf) = *(byte *)(iVar2 + 0xcf) | 0x40;
-        if ((((*(uint *)(iVar3 + 0x6c) & 0x8000) != 0) && ((int)*(short *)(iVar3 + 0x60) == level)
-            ) && (uVar1 = level + 1, (int)uVar1 <= (int)(uint)*(byte *)(iVar3 + 0x83))) {
-          iVar2 = uVar1 * 0x18 + iVar7 + iVar3 + 0xc4;
+        *(byte *)(levelRecord + 0xcf) = *(byte *)(levelRecord + 0xcf) | 0x40;
+        if ((((*(uint *)(textureObject + 0x6c) & 0x8000) != 0) && ((int)*(short *)(textureObject + 0x60) == level)
+            ) && (faceIndex = level + 1, (int)faceIndex <= (int)(uint)*(byte *)(textureObject + 0x83))) {
+          levelImageCursor2 = faceIndex * 0x18 + faceOffset + textureObject + 0xc4;
           do {
-            if (*(int *)(iVar2 + 0x14) != 0) {
-              if (((*(byte *)(iVar2 + 0xb) & 1) == 0) && (*(short *)(iVar3 + 0x3e) == -0x7a43)) {
-                _gleFreeTextureLevel(glContext,iVar3,iVar2);
+            if (*(int *)(levelImageCursor2 + 0x14) != 0) {
+              if (((*(byte *)(levelImageCursor2 + 0xb) & 1) == 0) && (*(short *)(textureObject + 0x3e) == -0x7a43)) {
+                _gleFreeTextureLevel(glContext,textureObject,levelImageCursor2);
               }
-              *(byte *)(iVar2 + 0xb) = *(byte *)(iVar2 + 0xb) & 0xef;
-              *(ushort *)(iVar9 + iVar3 + 0xa0) =
-                   *(ushort *)(iVar9 + iVar3 + 0xa0) & ~(ushort)(1 << (uVar1 & 0x3f));
+              *(byte *)(levelImageCursor2 + 0xb) = *(byte *)(levelImageCursor2 + 0xb) & 0xef;
+              *(ushort *)(iVar9 + textureObject + 0xa0) =
+                   *(ushort *)(iVar9 + textureObject + 0xa0) & ~(ushort)(1 << (faceIndex & 0x3f));
             }
-            uVar1 = uVar1 + 1;
-            *(byte *)(iVar2 + 0xb) = *(byte *)(iVar2 + 0xb) | 0x40;
-            iVar2 = iVar2 + 0x18;
-          } while ((int)uVar1 <= (int)(uint)*(byte *)(iVar3 + 0x83));
+            faceIndex = faceIndex + 1;
+            *(byte *)(levelImageCursor2 + 0xb) = *(byte *)(levelImageCursor2 + 0xb) | 0x40;
+            levelImageCursor2 = levelImageCursor2 + 0x18;
+          } while ((int)faceIndex <= (int)(uint)*(byte *)(textureObject + 0x83));
         }
       }
     }

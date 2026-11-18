@@ -1,0 +1,32 @@
+local	_LFSParserParseOperation	param_1	parser	INFERRED	source parser state: +0x14 program stream, +0x19 current pass (2 preliminary, 3 output), +0x1c + pass * 0x10 pending write mask, +0x20 + pass * 0x10 operation count
+local	_LFSParserParseOperation	bVar1	alphaPairsWithRgb	INFERRED	an alpha-only operation pairs with the pending RGB operation of the pass (co-issue): it is not counted as a new operation
+local	_LFSParserParseOperation	iVar2	swizzle	INFERRED	swizzle constant of a source operand (0x1000 r, 0x2000 g, 0x3000 b, 0x4000 a)
+local	_LFSParserParseOperation	iVar3	statusOrCompareOrPart	INFERRED	length returned by _LFSParserGetPart, the memcmp result of the opcode token against an instruction name (MOV, ADD, MUL, SUB, DOT3, DOT4, MAD, LERP, CND, CND0, DOT2ADD), a parse status, or the address of the pass counters
+use	_LFSParserParseOperation	uVar4	sourceCount	INFERRED	number of source operands of the instruction (1 for MOV, 2 up to DOT4, 3 for the rest)	^\s*uVar4\ =\ 0;$	+1
+use	_LFSParserParseOperation	uVar4	sourceCount	INFERRED	number of source operands of the instruction (1 for MOV, 2 up to DOT4, 3 for the rest)	^\s*uVar4\ =\ 1;$	+1
+use	_LFSParserParseOperation	uVar4	sourceCount	INFERRED	number of source operands of the instruction (1 for MOV, 2 up to DOT4, 3 for the rest)	^\s*uVar4\ =\ 2;$	+1
+use	_LFSParserParseOperation	uVar4	sourceCount	INFERRED	number of source operands of the instruction (1 for MOV, 2 up to DOT4, 3 for the rest)	^\s*uVar4\ =\ 3;$	+1
+use	_LFSParserParseOperation	uVar4	sourceCount	INFERRED	number of source operands of the instruction (1 for MOV, 2 up to DOT4, 3 for the rest)	^\s*if\ \(uVar4\ !=\ 0\)\ \{$	+1
+use	_LFSParserParseOperation	uVar4	sourceCount	INFERRED	number of source operands of the instruction (1 for MOV, 2 up to DOT4, 3 for the rest)	^\s*\}\ while\ \(uVar6\ <\ uVar4\);$	+1
+use	_LFSParserParseOperation	uVar4	passIndex	INFERRED	parser +0x19: current pass index	^\s*uVar4\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x19\);$	+1
+use	_LFSParserParseOperation	uVar4	passIndex	INFERRED	parser +0x19: current pass index	^\s*uVar5\ =\ \*\(uint\ \*\)\(uVar4\ \*\ 0x10\ \+\ param_1\ \+\ 0x1c\);$	+1
+use	_LFSParserParseOperation	uVar4	passIndex	INFERRED	parser +0x19: current pass index	^\s*if\ \(\(\(\(\(uVar5\ \&\ 0x10000\)\ !=\ 0\)\ \|\|\ \(\(uVar5\ \&\ 0x20000\)\ !=\ 0\)\)\ \|\|\ \(\(uVar5\ \&\ 0x40000\)\ !=\ 0\)\)\ \&\&$	+2
+use	_LFSParserParseOperation	uVar4	passIndex	INFERRED	parser +0x19: current pass index	^\s*iVar3\ =\ uVar4\ \*\ 0x10\ \+\ param_1;$	+1
+use	_LFSParserParseOperation	uVar4	passIndex	INFERRED	parser +0x19: current pass index	^\s*uVar4\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x19\);$@2	+1
+use	_LFSParserParseOperation	uVar4	passIndex	INFERRED	parser +0x19: current pass index	^\s*iVar3\ =\ uVar4\ \*\ 0x10\ \+\ param_1;$@2	+1
+use	_LFSParserParseOperation	uVar4	passIndex	INFERRED	parser +0x19: current pass index	^\s*iVar3\ =\ uVar4\ \*\ 0x10\ \+\ param_1;$@3	+1
+use	_LFSParserParseOperation	uVar4	passIndex	INFERRED	parser +0x19: current pass index	^\s*uVar4\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x19\);$@3	+1
+use	_LFSParserParseOperation	uVar4	passIndex	INFERRED	parser +0x19: current pass index	^\s*if\ \(\*\(uint\ \*\)\(uVar4\ \*\ 0x10\ \+\ param_1\ \+\ 0x20\)\ <\ 9\)\ \{$	+2
+use	_LFSParserParseOperation	uVar4	passIndex	INFERRED	parser +0x19: current pass index	^\s*if\ \(uVar4\ !=\ 3\)\ \{$	+1
+use	_LFSParserParseOperation	uVar5	constantRegCount	INFERRED	number of distinct constant registers used by the sources (3 or more is an error)	^\s*uVar5\ =\ 0;$	+1
+use	_LFSParserParseOperation	uVar5	constantRegCount	INFERRED	number of distinct constant registers used by the sources (3 or more is an error)	^\s*uVar5\ =\ uVar5\ \+\ 1;$	+1
+use	_LFSParserParseOperation	uVar5	constantRegCount	INFERRED	number of distinct constant registers used by the sources (3 or more is an error)	^\s*if\ \(2\ <\ uVar5\)\ \{$	+1
+use	_LFSParserParseOperation	uVar5	pendingMask	INFERRED	pending write mask of the current pass (parser +0x1c + pass * 0x10)	^\s*uVar5\ =\ \*\(uint\ \*\)\(uVar4\ \*\ 0x10\ \+\ param_1\ \+\ 0x1c\);$	+4
+local	_LFSParserParseOperation	uVar6	sourceIndex	INFERRED	index of the source operand being parsed
+local	_LFSParserParseOperation	piVar7	sourceCursor	INFERRED	position of the source operand being parsed inside the sources array (4 words each)
+local	_LFSParserParseOperation	local_190	tokenBuffer	INFERRED	256 byte buffer receiving the token read by _LFSParserGetPart
+local	_LFSParserParseOperation	local_90	opcode	INFERRED	instruction record word 0: opcode (0 MOV, 0x100 ADD, 0x200 MUL, 0x300 SUB, 0x400 DOT3, 0x500 DOT4, 0x600 MAD, 0x700 LERP, 0x800 CND, 0x900 CND0, 0xa00 DOT2ADD)
+local	_LFSParserParseOperation	auStack_8c	destination	INFERRED	instruction record destination operand (register kind, register index)
+local	_LFSParserParseOperation	local_84	destWriteMask	INFERRED	destination write mask word (+8 of the destination: 0xf0000 default, 0x10000 r, 0x20000 g, 0x40000 b, 0x80000 a)
+local	_LFSParserParseOperation	local_7c	sources	INFERRED	three source operands of 4 words each (register kind, register index, swizzle, modifiers)
+local	_LFSParserParseOperation	local_40	constantUseCount	INFERRED	use count of each of the 8 constant registers by this instruction

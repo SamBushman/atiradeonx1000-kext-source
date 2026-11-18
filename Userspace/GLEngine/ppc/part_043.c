@@ -734,90 +734,95 @@ void _gleRenderbufferStorage(glContext, target, internalformat, width, height)
   int width;
   int height;
 {
-  byte bVar1;
-  int iVar2;
-  int *piVar3;
-  int iVar4;
-  undefined4 *puVar5;
-  undefined4 *puVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
+  byte levelFlags;
+  int attachedObject;
+  int rendererIndex;
+  int *attachmentCursor;
+  int attachmentNameBase;
+  undefined4 *srcCursor;
+  undefined4 *dstCursor;
+  undefined4 dataType;
+  undefined4 dataFormat;
+  undefined4 copiedWord;
+  int renderbufferBody;
+  int attachmentRecordCursor;
+  int framebufferObject;
+  int renderbuffer;
+  int levelImage;
+  int attachmentIndex;
   
-  iVar10 = *(int *)(glContext + 0x7448);
-  if (iVar10 == 0) {
+  renderbuffer = *(int *)(glContext + 0x7448);
+  if (renderbuffer == 0) {
     return;
   }
-  iVar9 = iVar10 + 0x10;
+  renderbufferBody = renderbuffer + 0x10;
   if ((((internalformat == 0x1902) || (internalformat == 0x81a5)) || (internalformat == 0x81a6)) || (internalformat == 0x81a7))
   {
-    uVar8 = 0x1902;
+    dataFormat = 0x1902;
   }
   else {
     if (((internalformat != 0x1901) && (internalformat != 0x8d46)) &&
        ((internalformat != 0x8d47 && ((internalformat != 0x8d48 && (internalformat != 0x8d49)))))) {
-      uVar8 = 0x80e1;
-      uVar7 = 0x8367;
+      dataFormat = 0x80e1;
+      dataType = 0x8367;
       goto LAB_000cd6a0;
     }
-    uVar8 = 0x1901;
+    dataFormat = 0x1901;
   }
-  uVar7 = 0x1405;
+  dataType = 0x1405;
 LAB_000cd6a0:
-  iVar11 = iVar10 + 0xd4;
-  if ((*(byte *)(iVar10 + 0xdf) & 0x20) != 0) {
-    _gleDeletePluginTextureLevel(glContext,iVar9,iVar11,0,0);
-    if (*(int *)(iVar10 + 0xe8) != 0) {
-      bVar1 = *(byte *)(iVar10 + 0xdf);
-      if ((bVar1 & 1) == 0) {
-        _gleFreeTextureLevel(glContext,iVar9,iVar11);
-        bVar1 = *(byte *)(iVar10 + 0xdf);
+  levelImage = renderbuffer + 0xd4;
+  if ((*(byte *)(renderbuffer + 0xdf) & 0x20) != 0) {
+    _gleDeletePluginTextureLevel(glContext,renderbufferBody,levelImage,0,0);
+    if (*(int *)(renderbuffer + 0xe8) != 0) {
+      levelFlags = *(byte *)(renderbuffer + 0xdf);
+      if ((levelFlags & 1) == 0) {
+        _gleFreeTextureLevel(glContext,renderbufferBody,levelImage);
+        levelFlags = *(byte *)(renderbuffer + 0xdf);
       }
       else {
-        *(undefined4 *)(iVar10 + 0xe8) = 0;
+        *(undefined4 *)(renderbuffer + 0xe8) = 0;
       }
-      *(byte *)(iVar10 + 0xdf) = bVar1 & 0xef;
+      *(byte *)(renderbuffer + 0xdf) = levelFlags & 0xef;
     }
-    *(byte *)(iVar10 + 0xdf) = *(byte *)(iVar10 + 0xdf) & 0xdf;
+    *(byte *)(renderbuffer + 0xdf) = *(byte *)(renderbuffer + 0xdf) & 0xdf;
   }
-  _gleCreateTextureLevel(glContext,iVar9,iVar11,internalformat & 0xffff,width,height,1,0,uVar8,uVar7,0,0);
+  _gleCreateTextureLevel(glContext,renderbufferBody,levelImage,internalformat & 0xffff,width,height,1,0,dataFormat,dataType,0,0);
   if ((width != 0) && (height != 0)) {
-    _gleCreatePluginTextureLevel(glContext,iVar9,iVar11,0,0,internalformat & 0xffff);
+    _gleCreatePluginTextureLevel(glContext,renderbufferBody,levelImage,0,0,internalformat & 0xffff);
   }
-  iVar9 = *(int *)(glContext + 0x744c);
-  if (iVar9 != 0) {
-    iVar4 = iVar9 + 0x10;
-    piVar3 = (int *)(iVar9 + 0xd4);
-    iVar11 = 0;
-    iVar9 = iVar4;
+  framebufferObject = *(int *)(glContext + 0x744c);
+  if (framebufferObject != 0) {
+    attachmentNameBase = framebufferObject + 0x10;
+    attachmentCursor = (int *)(framebufferObject + 0xd4);
+    attachmentIndex = 0;
+    attachmentRecordCursor = attachmentNameBase;
     do {
-      iVar2 = *piVar3;
-      piVar3 = piVar3 + 1;
-      if (iVar2 == iVar10) {
-        *(undefined4 *)(iVar9 + 0x20) = target;
-        iVar2 = 0;
-        *(undefined4 *)(iVar9 + 0x28) = 0;
-        *(undefined4 *)(iVar9 + 0x24) = 0;
-        *(undefined4 *)(iVar9 + 0x2c) = 0;
+      attachedObject = *attachmentCursor;
+      attachmentCursor = attachmentCursor + 1;
+      if (attachedObject == renderbuffer) {
+        *(undefined4 *)(attachmentRecordCursor + 0x20) = target;
+        rendererIndex = 0;
+        *(undefined4 *)(attachmentRecordCursor + 0x28) = 0;
+        *(undefined4 *)(attachmentRecordCursor + 0x24) = 0;
+        *(undefined4 *)(attachmentRecordCursor + 0x2c) = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
-          puVar6 = (undefined4 *)(iVar4 + 0xe0);
-          puVar5 = (undefined4 *)(iVar10 + 0x10);
+          dstCursor = (undefined4 *)(attachmentNameBase + 0xe0);
+          srcCursor = (undefined4 *)(renderbuffer + 0x10);
           do {
-            uVar8 = *puVar5;
-            iVar2 = iVar2 + 1;
-            puVar5 = puVar5 + 1;
-            *puVar6 = uVar8;
-            puVar6 = puVar6 + 8;
-          } while (iVar2 < (int)(uint)*(byte *)(glContext + 0x85a4));
+            copiedWord = *srcCursor;
+            rendererIndex = rendererIndex + 1;
+            srcCursor = srcCursor + 1;
+            *dstCursor = copiedWord;
+            dstCursor = dstCursor + 8;
+          } while (rendererIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       }
-      iVar11 = iVar11 + 1;
-      iVar4 = iVar4 + 4;
-      iVar9 = iVar9 + 0x18;
-    } while (iVar11 < 6);
+      attachmentIndex = attachmentIndex + 1;
+      attachmentNameBase = attachmentNameBase + 4;
+      attachmentRecordCursor = attachmentRecordCursor + 0x18;
+    } while (attachmentIndex < 6);
   }
   return;
 }
@@ -885,75 +890,82 @@ int _gleCreateFramebufferObject(glContext, framebuffer)
   undefined4 framebuffer;
 {
   undefined *freeFramebufferObject;
-  undefined2 *puVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
-  undefined4 *puVar5;
-  int iVar6;
-  int iVar7;
+  undefined2 *halfwordCursor;
+  undefined4 *clearCursor;
+  undefined4 *rendererCursor;
+  undefined4 *attachmentCursor;
+  undefined4 *clearCursor2;
+  undefined4 *rendererClearCursor;
+  undefined4 *newObjectThenCursor;
+  int remaining;
+  int loopIndex;
+  int remaining4;
+  int remaining3;
+  int remaining2;
+  int innerRemaining;
   undefined4 *framebufferObject;
   
-  puVar5 = (undefined4 *)_gleVecAlloc((uint)*(byte *)(glContext + 0x85a4) * 0x20 + 0xf0);
-  framebufferObject = puVar5;
+  newObjectThenCursor = (undefined4 *)_gleVecAlloc((uint)*(byte *)(glContext + 0x85a4) * 0x20 + 0xf0);
+  framebufferObject = newObjectThenCursor;
   freeFramebufferObject = PTR__gleFreeFramebufferObject_00110e20;
-  puVar5[2] = 1;
-  puVar5[3] = freeFramebufferObject;
-  puVar5[1] = framebuffer;
-  puVar3 = puVar5 + 0x35;
-  *puVar5 = 0;
-  iVar6 = 6;
+  newObjectThenCursor[2] = 1;
+  newObjectThenCursor[3] = freeFramebufferObject;
+  newObjectThenCursor[1] = framebuffer;
+  clearCursor = newObjectThenCursor + 0x35;
+  *newObjectThenCursor = 0;
+  remaining = 6;
   do {
-    *puVar3 = 0;
-    puVar3 = puVar3 + 1;
-    iVar6 = iVar6 + -1;
-  } while (iVar6 != 0);
-  iVar6 = 8;
-  puVar5[0x3b] = 1;
-  puVar3 = puVar5 + 4;
+    *clearCursor = 0;
+    clearCursor = clearCursor + 1;
+    remaining = remaining + -1;
+  } while (remaining != 0);
+  remaining2 = 8;
+  newObjectThenCursor[0x3b] = 1;
+  clearCursor2 = newObjectThenCursor + 4;
   do {
-    *puVar3 = 0;
-    puVar3 = puVar3 + 1;
-    iVar6 = iVar6 + -1;
-  } while (iVar6 != 0);
-  iVar6 = 3;
-  *(undefined2 *)(puVar5 + 0x30) = 0x8ce0;
-  puVar2 = (undefined2 *)((int)puVar5 + 0xc2);
+    *clearCursor2 = 0;
+    clearCursor2 = clearCursor2 + 1;
+    remaining2 = remaining2 + -1;
+  } while (remaining2 != 0);
+  remaining3 = 3;
+  *(undefined2 *)(newObjectThenCursor + 0x30) = 0x8ce0;
+  halfwordCursor = (undefined2 *)((int)newObjectThenCursor + 0xc2);
   do {
-    *puVar2 = 0;
-    puVar2 = puVar2 + 1;
-    iVar6 = iVar6 + -1;
-  } while (iVar6 != 0);
-  iVar6 = 6;
-  *(undefined2 *)(puVar5 + 0x32) = 0x8ce0;
-  puVar5[0x34] = 0;
-  puVar3 = puVar5;
+    *halfwordCursor = 0;
+    halfwordCursor = halfwordCursor + 1;
+    remaining3 = remaining3 + -1;
+  } while (remaining3 != 0);
+  remaining4 = 6;
+  *(undefined2 *)(newObjectThenCursor + 0x32) = 0x8ce0;
+  newObjectThenCursor[0x34] = 0;
+  attachmentCursor = newObjectThenCursor;
   do {
-    puVar3[0xc] = 0;
-    puVar3[0xd] = 0;
-    puVar3[0xe] = 0;
-    puVar3[0xf] = 0;
-    puVar3[0x11] = 0;
-    puVar3[0x10] = 0;
-    puVar3 = puVar3 + 6;
-    iVar6 = iVar6 + -1;
-  } while (iVar6 != 0);
-  iVar6 = 0;
-  puVar3 = puVar5;
+    attachmentCursor[0xc] = 0;
+    attachmentCursor[0xd] = 0;
+    attachmentCursor[0xe] = 0;
+    attachmentCursor[0xf] = 0;
+    attachmentCursor[0x11] = 0;
+    attachmentCursor[0x10] = 0;
+    attachmentCursor = attachmentCursor + 6;
+    remaining4 = remaining4 + -1;
+  } while (remaining4 != 0);
+  loopIndex = 0;
+  rendererCursor = newObjectThenCursor;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      puVar4 = puVar3 + 0x3c;
-      iVar7 = 6;
+      rendererClearCursor = rendererCursor + 0x3c;
+      innerRemaining = 6;
       do {
-        *puVar4 = 0;
-        puVar4 = puVar4 + 1;
-        iVar7 = iVar7 + -1;
-      } while (iVar7 != 0);
-      puVar5[0x42] = 0;
-      iVar6 = iVar6 + 1;
-      puVar5[0x43] = 0;
-      puVar5 = puVar5 + 8;
-      puVar3 = puVar3 + 8;
-    } while (iVar6 < (int)(uint)*(byte *)(glContext + 0x85a4));
+        *rendererClearCursor = 0;
+        rendererClearCursor = rendererClearCursor + 1;
+        innerRemaining = innerRemaining + -1;
+      } while (innerRemaining != 0);
+      newObjectThenCursor[0x42] = 0;
+      loopIndex = loopIndex + 1;
+      newObjectThenCursor[0x43] = 0;
+      newObjectThenCursor = newObjectThenCursor + 8;
+      rendererCursor = rendererCursor + 8;
+    } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return (int)framebufferObject;
 }
@@ -1217,109 +1229,115 @@ void _gleFramebufferTexture(glContext, attachmentIndex, targetIndex, textureObje
   uint level;
   undefined4 zoffset;
 {
-  undefined4 uVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  uint uVar4;
-  undefined4 *puVar5;
-  int iVar6;
-  byte bVar7;
-  int iVar8;
-  undefined4 *puVar9;
+  undefined4 copiedWord;
+  undefined4 *dstCursor;
+  int attachmentBaseThenTemp;
+  uint loopIndex;
+  uint loopIndexThenMipLevel;
+  undefined4 *srcCursor;
+  undefined4 *nextLevelCursor;
+  int attachmentSlotPtr;
+  int levelOffset;
+  int attachmentRecord;
+  int oldAttachmentRecord;
+  byte levelFlags;
+  int oldTexture;
+  undefined4 *dstCursor2;
+  undefined4 *textureBody;
   
-  iVar3 = *(int *)(glContext + 0x744c) + 0x10;
-  iVar6 = attachmentIndex * 4 + iVar3;
+  attachmentBaseThenTemp = *(int *)(glContext + 0x744c) + 0x10;
+  attachmentSlotPtr = attachmentIndex * 4 + attachmentBaseThenTemp;
   *(undefined4 *)(*(int *)(glContext + 0x744c) + 0xec) = 1;
-  iVar8 = *(int *)(iVar6 + 0xc4);
-  *(int *)(iVar6 + 0xc4) = textureObject;
-  if (iVar8 != 0) {
-    iVar6 = attachmentIndex * 0x18 + iVar3;
-    iVar6 = iVar8 + *(int *)(iVar6 + 0x24) * 0x168 + *(int *)(iVar6 + 0x28) * 0x18;
-    *(byte *)(iVar6 + 0xdf) = *(byte *)(iVar6 + 0xdf) & 0x7f;
+  oldTexture = *(int *)(attachmentSlotPtr + 0xc4);
+  *(int *)(attachmentSlotPtr + 0xc4) = textureObject;
+  if (oldTexture != 0) {
+    oldAttachmentRecord = attachmentIndex * 0x18 + attachmentBaseThenTemp;
+    oldAttachmentRecord = oldTexture + *(int *)(oldAttachmentRecord + 0x24) * 0x168 + *(int *)(oldAttachmentRecord + 0x28) * 0x18;
+    *(byte *)(oldAttachmentRecord + 0xdf) = *(byte *)(oldAttachmentRecord + 0xdf) & 0x7f;
   }
   if (textureObject == 0) {
-    iVar6 = iVar3 + attachmentIndex * 0x18;
-    *(undefined4 *)(iVar6 + 0x20) = 0;
-    *(undefined4 *)(iVar6 + 0x30) = 0;
-    uVar4 = 0;
-    *(undefined4 *)(iVar6 + 0x24) = 0;
-    *(undefined4 *)(iVar6 + 0x28) = 0;
-    *(undefined4 *)(iVar6 + 0x2c) = 0;
+    attachmentRecord = attachmentBaseThenTemp + attachmentIndex * 0x18;
+    *(undefined4 *)(attachmentRecord + 0x20) = 0;
+    *(undefined4 *)(attachmentRecord + 0x30) = 0;
+    loopIndex = 0;
+    *(undefined4 *)(attachmentRecord + 0x24) = 0;
+    *(undefined4 *)(attachmentRecord + 0x28) = 0;
+    *(undefined4 *)(attachmentRecord + 0x2c) = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      puVar9 = (undefined4 *)(attachmentIndex * 4 + iVar3 + 0xe0);
+      dstCursor2 = (undefined4 *)(attachmentIndex * 4 + attachmentBaseThenTemp + 0xe0);
       do {
-        *puVar9 = 0;
-        uVar4 = uVar4 + 1;
-        *(undefined4 *)(iVar3 + 0xf8) = 1;
-        puVar9 = puVar9 + 8;
-        *(undefined4 *)(iVar3 + 0xfc) = 0;
-        iVar3 = iVar3 + 0x20;
-      } while (uVar4 < *(byte *)(glContext + 0x85a4));
+        *dstCursor2 = 0;
+        loopIndex = loopIndex + 1;
+        *(undefined4 *)(attachmentBaseThenTemp + 0xf8) = 1;
+        dstCursor2 = dstCursor2 + 8;
+        *(undefined4 *)(attachmentBaseThenTemp + 0xfc) = 0;
+        attachmentBaseThenTemp = attachmentBaseThenTemp + 0x20;
+      } while (loopIndex < *(byte *)(glContext + 0x85a4));
     }
   }
   else {
-    iVar6 = iVar3 + attachmentIndex * 0x18;
-    *(undefined4 *)(iVar6 + 0x20) = targetIndex;
-    *(undefined4 *)(iVar6 + 0x2c) = zoffset;
-    *(undefined4 *)(iVar6 + 0x30) = 0;
-    *(int *)(iVar6 + 0x24) = face;
-    uVar4 = 0;
-    *(uint *)(iVar6 + 0x28) = level;
-    puVar9 = (undefined4 *)(textureObject + 0x10);
-    iVar6 = level * 0x18 + face * 0x168;
+    attachmentRecord = attachmentBaseThenTemp + attachmentIndex * 0x18;
+    *(undefined4 *)(attachmentRecord + 0x20) = targetIndex;
+    *(undefined4 *)(attachmentRecord + 0x2c) = zoffset;
+    *(undefined4 *)(attachmentRecord + 0x30) = 0;
+    *(int *)(attachmentRecord + 0x24) = face;
+    loopIndexThenMipLevel = 0;
+    *(uint *)(attachmentRecord + 0x28) = level;
+    textureBody = (undefined4 *)(textureObject + 0x10);
+    levelOffset = level * 0x18 + face * 0x168;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      puVar2 = (undefined4 *)(attachmentIndex * 4 + iVar3 + 0xe0);
-      puVar5 = puVar9;
+      dstCursor = (undefined4 *)(attachmentIndex * 4 + attachmentBaseThenTemp + 0xe0);
+      srcCursor = textureBody;
       do {
-        uVar1 = *puVar5;
-        uVar4 = uVar4 + 1;
-        *(undefined4 *)(iVar3 + 0xf8) = 1;
-        puVar5 = puVar5 + 1;
-        *puVar2 = uVar1;
-        puVar2 = puVar2 + 8;
-        *(undefined4 *)(iVar3 + 0xfc) = 0;
-        iVar3 = iVar3 + 0x20;
-      } while (uVar4 < *(byte *)(glContext + 0x85a4));
+        copiedWord = *srcCursor;
+        loopIndexThenMipLevel = loopIndexThenMipLevel + 1;
+        *(undefined4 *)(attachmentBaseThenTemp + 0xf8) = 1;
+        srcCursor = srcCursor + 1;
+        *dstCursor = copiedWord;
+        dstCursor = dstCursor + 8;
+        *(undefined4 *)(attachmentBaseThenTemp + 0xfc) = 0;
+        attachmentBaseThenTemp = attachmentBaseThenTemp + 0x20;
+      } while (loopIndexThenMipLevel < *(byte *)(glContext + 0x85a4));
     }
     *(undefined4 *)(textureObject + 0x30) =
          *(undefined4 *)
           ((uint)*(byte *)(glContext + 0x85a8) * 4 + *(int *)(glContext + 0x5148) + 0x8054);
-    iVar3 = puVar9[face * 0x5a + level * 6 + 0x36];
-    *(byte *)((int)puVar9 + iVar6 + 0xcf) = *(byte *)((int)puVar9 + iVar6 + 0xcf) | 0x80;
-    if (iVar3 != 0) {
-      bVar7 = *(byte *)((int)puVar9 + iVar6 + 0xcf);
-      if (((bVar7 & 1) == 0) && (*(short *)(textureObject + 0x4e) == -0x7a43)) {
-        _gleFreeTextureLevel(glContext,puVar9,puVar9 + face * 0x5a + level * 6 + 0x31);
-        bVar7 = *(byte *)((int)puVar9 + iVar6 + 0xcf);
+    attachmentBaseThenTemp = textureBody[face * 0x5a + level * 6 + 0x36];
+    *(byte *)((int)textureBody + levelOffset + 0xcf) = *(byte *)((int)textureBody + levelOffset + 0xcf) | 0x80;
+    if (attachmentBaseThenTemp != 0) {
+      levelFlags = *(byte *)((int)textureBody + levelOffset + 0xcf);
+      if (((levelFlags & 1) == 0) && (*(short *)(textureObject + 0x4e) == -0x7a43)) {
+        _gleFreeTextureLevel(glContext,textureBody,textureBody + face * 0x5a + level * 6 + 0x31);
+        levelFlags = *(byte *)((int)textureBody + levelOffset + 0xcf);
       }
-      *(byte *)((int)puVar9 + iVar6 + 0xcf) = bVar7 & 0xef;
-      *(ushort *)((int)puVar9 + face * 2 + 0xa0) =
-           *(ushort *)((int)puVar9 + face * 2 + 0xa0) &
+      *(byte *)((int)textureBody + levelOffset + 0xcf) = levelFlags & 0xef;
+      *(ushort *)((int)textureBody + face * 2 + 0xa0) =
+           *(ushort *)((int)textureBody + face * 2 + 0xa0) &
            ((ushort)(-2 << (level & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (level & 0x1f)));
     }
-    *(byte *)((int)puVar9 + iVar6 + 0xcf) = *(byte *)((int)puVar9 + iVar6 + 0xcf) | 0x40;
+    *(byte *)((int)textureBody + levelOffset + 0xcf) = *(byte *)((int)textureBody + levelOffset + 0xcf) | 0x40;
     if ((((*(uint *)(textureObject + 0x7c) & 0x8000) != 0) && ((int)*(short *)(textureObject + 0x70) == level)
-        ) && (uVar4 = level + 1, (int)uVar4 <= (int)(uint)*(byte *)(textureObject + 0x93))) {
-      puVar5 = puVar9 + face * 0x5a + uVar4 * 6 + 0x31;
+        ) && (loopIndexThenMipLevel = level + 1, (int)loopIndexThenMipLevel <= (int)(uint)*(byte *)(textureObject + 0x93))) {
+      nextLevelCursor = textureBody + face * 0x5a + loopIndexThenMipLevel * 6 + 0x31;
       do {
-        if (puVar5[5] != 0) {
-          if (((*(byte *)((int)puVar5 + 0xb) & 1) == 0) && (*(short *)(textureObject + 0x4e) == -0x7a43))
+        if (nextLevelCursor[5] != 0) {
+          if (((*(byte *)((int)nextLevelCursor + 0xb) & 1) == 0) && (*(short *)(textureObject + 0x4e) == -0x7a43))
           {
-            _gleFreeTextureLevel(glContext,puVar9,puVar5);
+            _gleFreeTextureLevel(glContext,textureBody,nextLevelCursor);
           }
-          *(byte *)((int)puVar5 + 0xb) = *(byte *)((int)puVar5 + 0xb) & 0xef;
-          *(ushort *)((int)puVar9 + face * 2 + 0xa0) =
-               *(ushort *)((int)puVar9 + face * 2 + 0xa0) & ~(ushort)(1 << (uVar4 & 0x3f));
+          *(byte *)((int)nextLevelCursor + 0xb) = *(byte *)((int)nextLevelCursor + 0xb) & 0xef;
+          *(ushort *)((int)textureBody + face * 2 + 0xa0) =
+               *(ushort *)((int)textureBody + face * 2 + 0xa0) & ~(ushort)(1 << (loopIndexThenMipLevel & 0x3f));
         }
-        uVar4 = uVar4 + 1;
-        *(byte *)((int)puVar5 + 0xb) = *(byte *)((int)puVar5 + 0xb) | 0x40;
-        puVar5 = puVar5 + 6;
-      } while ((int)uVar4 <= (int)(uint)*(byte *)(textureObject + 0x93));
+        loopIndexThenMipLevel = loopIndexThenMipLevel + 1;
+        *(byte *)((int)nextLevelCursor + 0xb) = *(byte *)((int)nextLevelCursor + 0xb) | 0x40;
+        nextLevelCursor = nextLevelCursor + 6;
+      } while ((int)loopIndexThenMipLevel <= (int)(uint)*(byte *)(textureObject + 0x93));
     }
     *(int *)(textureObject + 8) = *(int *)(textureObject + 8) + 1;
   }
-  if ((iVar8 != 0) && (iVar3 = *(int *)(iVar8 + 8) + -1, *(int *)(iVar8 + 8) = iVar3, iVar3 == 0)) {
-    _gleFreeTextureObject(glContext,iVar8);
+  if ((oldTexture != 0) && (attachmentBaseThenTemp = *(int *)(oldTexture + 8) + -1, *(int *)(oldTexture + 8) = attachmentBaseThenTemp, attachmentBaseThenTemp == 0)) {
+    _gleFreeTextureObject(glContext,oldTexture);
   }
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   return;
@@ -1812,113 +1830,117 @@ double _gleFogExp2(int param_1,float floatArg1)
 void _gleLFSParse(glContext)
   int glContext;
 {
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
-  undefined4 uVar6;
-  int *piVar7;
-  int iVar8;
-  int iVar9;
-  int iVar10;
-  int local_40 [7];
+  uint usageFlags;
+  int slotCursor;
+  int stream;
+  int parseStatus;
+  int chunk;
+  uint listIndex;
+  uint newUsageFlags;
+  undefined4 sourceString;
+  undefined4 streamBuffer;
+  int *chunkList;
+  int oldStream;
+  int parser;
+  int programObject;
+  int remaining;
+  int streamSize [7];
   
-  iVar9 = *(int *)(glContext + 0x5424);
-  piVar7 = (int *)0x0;
-  uVar6 = *(undefined4 *)(iVar9 + 0x14);
-  iVar8 = *(int *)(iVar9 + 0x4e4);
-  if (*(int *)(iVar9 + 0x4cc) != 0) {
-    _gleVecFree(*(int *)(iVar9 + 0x4cc));
-    *(undefined4 *)(iVar9 + 0x4cc) = 0;
+  programObject = *(int *)(glContext + 0x5424);
+  chunkList = (int *)0x0;
+  sourceString = *(undefined4 *)(programObject + 0x14);
+  oldStream = *(int *)(programObject + 0x4e4);
+  if (*(int *)(programObject + 0x4cc) != 0) {
+    _gleVecFree(*(int *)(programObject + 0x4cc));
+    *(undefined4 *)(programObject + 0x4cc) = 0;
   }
-  if (iVar8 != 0) {
-    _LFSStreamFree(iVar8);
+  if (oldStream != 0) {
+    _LFSStreamFree(oldStream);
   }
-  iVar8 = ((int (*)())_LFSParserCreate)();
-  ((int (*)())_LFSParserAttachString)(iVar8,uVar6,1);
-  iVar3 = _LFSStreamCreate();
-  ((void (*)())_LFSParserAttachStream)(iVar8,iVar3);
-  iVar4 = ((int (*)())_LFSParserParse)(iVar8);
-  if (iVar4 == 0) {
-    *(undefined4 *)(iVar9 + 0x4e8) = 0;
-    uVar5 = 0;
+  parser = ((int (*)())_LFSParserCreate)();
+  ((int (*)())_LFSParserAttachString)(parser,sourceString,1);
+  stream = _LFSStreamCreate();
+  ((void (*)())_LFSParserAttachStream)(parser,stream);
+  parseStatus = ((int (*)())_LFSParserParse)(parser);
+  if (parseStatus == 0) {
+    *(undefined4 *)(programObject + 0x4e8) = 0;
+    listIndex = 0;
     do {
-      if (uVar5 == 0) {
-        piVar7 = *(int **)(iVar3 + 4);
+      if (listIndex == 0) {
+        chunkList = *(int **)(stream + 4);
       }
-      if (uVar5 == 1) {
-        piVar7 = *(int **)(iVar3 + 0xc);
+      if (listIndex == 1) {
+        chunkList = *(int **)(stream + 0xc);
       }
-      for (iVar4 = *piVar7; iVar4 != 0; iVar4 = *(int *)(iVar4 + 0x4c)) {
-        if (*(int *)(iVar4 + 8) == 5) {
-          switch(*(undefined4 *)(iVar4 + 0xc)) {
+      for (chunk = *chunkList; chunk != 0; chunk = *(int *)(chunk + 0x4c)) {
+        if (*(int *)(chunk + 8) == 5) {
+          switch(*(undefined4 *)(chunk + 0xc)) {
           case 0:
-            uVar1 = *(uint *)(iVar9 + 0x4e8) | 1;
+            usageFlags = *(uint *)(programObject + 0x4e8) | 1;
             break;
           case 1:
-            uVar1 = *(uint *)(iVar9 + 0x4e8) | 2;
+            usageFlags = *(uint *)(programObject + 0x4e8) | 2;
             break;
           case 2:
-            uVar1 = *(uint *)(iVar9 + 0x4e8) | 4;
+            usageFlags = *(uint *)(programObject + 0x4e8) | 4;
             break;
           case 3:
-            uVar1 = *(uint *)(iVar9 + 0x4e8) | 8;
+            usageFlags = *(uint *)(programObject + 0x4e8) | 8;
             break;
           case 4:
-            uVar1 = *(uint *)(iVar9 + 0x4e8) | 0x10;
+            usageFlags = *(uint *)(programObject + 0x4e8) | 0x10;
             break;
           case 5:
-            uVar1 = *(uint *)(iVar9 + 0x4e8) | 0x20;
+            usageFlags = *(uint *)(programObject + 0x4e8) | 0x20;
             break;
           case 6:
-            uVar1 = *(uint *)(iVar9 + 0x4e8) | 0x40;
+            usageFlags = *(uint *)(programObject + 0x4e8) | 0x40;
             break;
           case 7:
-            uVar1 = *(uint *)(iVar9 + 0x4e8) | 0x80;
+            usageFlags = *(uint *)(programObject + 0x4e8) | 0x80;
             break;
           default:
             goto switchD_000ceebc_default;
           }
-          *(uint *)(iVar9 + 0x4e8) = uVar1;
+          *(uint *)(programObject + 0x4e8) = usageFlags;
         }
 switchD_000ceebc_default: ;
       }
-      uVar5 = uVar5 + 1;
-    } while (uVar5 < 2);
-    for (iVar4 = **(int **)(iVar3 + 0x10); iVar4 != 0; iVar4 = *(int *)(iVar4 + 0x4c)) {
-      iVar2 = iVar4 + 4;
-      iVar10 = 3;
+      listIndex = listIndex + 1;
+    } while (listIndex < 2);
+    for (chunk = **(int **)(stream + 0x10); chunk != 0; chunk = *(int *)(chunk + 0x4c)) {
+      slotCursor = chunk + 4;
+      remaining = 3;
       do {
-        if (*(int *)(iVar2 + 0x14) == 4) {
-          if (*(int *)(iVar2 + 0x18) == 0) {
-            uVar5 = *(uint *)(iVar9 + 0x4e8) | 0x100;
+        if (*(int *)(slotCursor + 0x14) == 4) {
+          if (*(int *)(slotCursor + 0x18) == 0) {
+            newUsageFlags = *(uint *)(programObject + 0x4e8) | 0x100;
           }
           else {
-            if (*(int *)(iVar2 + 0x18) != 1) goto LAB_000cefac;
-            uVar5 = *(uint *)(iVar9 + 0x4e8) | 0x200;
+            if (*(int *)(slotCursor + 0x18) != 1) goto LAB_000cefac;
+            newUsageFlags = *(uint *)(programObject + 0x4e8) | 0x200;
           }
-          *(uint *)(iVar9 + 0x4e8) = uVar5;
+          *(uint *)(programObject + 0x4e8) = newUsageFlags;
         }
 LAB_000cefac:
-        iVar2 = iVar2 + 0x10;
-        iVar10 = iVar10 + -1;
-      } while (iVar10 != 0);
+        slotCursor = slotCursor + 0x10;
+        remaining = remaining + -1;
+      } while (remaining != 0);
     }
-    *(int *)(iVar9 + 0x4e4) = iVar3;
-    _LFSStreamGetStream(iVar3,0,local_40);
-    uVar6 = _gleVecAlloc(local_40[0] << 2);
-    *(undefined4 *)(iVar9 + 0x4cc) = uVar6;
-    _LFSStreamGetStream(iVar3,uVar6,local_40);
+    *(int *)(programObject + 0x4e4) = stream;
+    _LFSStreamGetStream(stream,0,streamSize);
+    streamBuffer = _gleVecAlloc(streamSize[0] << 2);
+    *(undefined4 *)(programObject + 0x4cc) = streamBuffer;
+    _LFSStreamGetStream(stream,streamBuffer,streamSize);
     **(undefined1 **)(glContext + 0x5418) = 0;
     *(undefined4 *)(glContext + 0x541c) = 0xffffffff;
   }
   else {
-    _snprintf(*(char **)(glContext + 0x5418),0x600,"Error on line %i: %s;",*(int *)(iVar8 + 0x460) + 1
-              ,iVar8 + 0x5c);
+    _snprintf(*(char **)(glContext + 0x5418),0x600,"Error on line %i: %s;",*(int *)(parser + 0x460) + 1
+              ,parser + 0x5c);
     *(undefined4 *)(glContext + 0x541c) = 0;
   }
-  ((void (*)())_LFSParserFree)(iVar8);
+  ((void (*)())_LFSParserFree)(parser);
   return;
 }
 
@@ -2169,71 +2191,71 @@ void _LFSParserEatWhiteSpace(param_1)
 }
 
 /* _LFSParserGetCharacter @ 0xcf4f0 (252 bytes) */
-int _LFSParserGetCharacter(param_1, param_2, param_3)
-  int *param_1;
-  byte *param_2;
-  int param_3;
+int _LFSParserGetCharacter(parser, outChar, backward)
+  int *parser;
+  byte *outChar;
+  int backward;
 {
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
-  int iVar4;
-  uint uVar5;
+  bool forward;
+  bool pendingWhitespace;
+  bool charProduced;
+  int cursor;
+  uint charValue;
   
-  bVar1 = param_3 == 0;
-  bVar3 = false;
-  bVar2 = false;
+  forward = backward == 0;
+  charProduced = false;
+  pendingWhitespace = false;
   do {
-    if (bVar1) {
-      iVar4 = param_1[3];
-      if (iVar4 == param_1[1]) {
+    if (forward) {
+      cursor = parser[3];
+      if (cursor == parser[1]) {
         return 1;
       }
     }
     else {
-      if (param_1[3] == 0) {
+      if (parser[3] == 0) {
         return 1;
       }
-      iVar4 = param_1[3] + -1;
-      param_1[3] = iVar4;
+      cursor = parser[3] + -1;
+      parser[3] = cursor;
     }
-    *param_2 = *(byte *)(*param_1 + iVar4);
-    if (bVar1) {
-      param_1[3] = param_1[3] + 1;
+    *outChar = *(byte *)(*parser + cursor);
+    if (forward) {
+      parser[3] = parser[3] + 1;
     }
-    uVar5 = (uint)*param_2;
-    if (uVar5 == 10) {
-      if (bVar1) {
-        iVar4 = param_1[4] + 1;
+    charValue = (uint)*outChar;
+    if (charValue == 10) {
+      if (forward) {
+        cursor = parser[4] + 1;
       }
       else {
-        iVar4 = param_1[4] + -1;
+        cursor = parser[4] + -1;
       }
-      param_1[4] = iVar4;
-      uVar5 = (uint)*param_2;
+      parser[4] = cursor;
+      charValue = (uint)*outChar;
     }
-    if ((uVar5 - 9 < 2) || ((char)uVar5 == ' ')) {
-      if (param_1[3] == param_1[1]) {
-        *param_2 = 0x20;
+    if ((charValue - 9 < 2) || ((char)charValue == ' ')) {
+      if (parser[3] == parser[1]) {
+        *outChar = 0x20;
         goto LAB_000cf5b0;
       }
-      bVar2 = true;
+      pendingWhitespace = true;
     }
     else {
 LAB_000cf5b0:
-      if (bVar2) {
-        *param_2 = 0x20;
-        if (bVar1) {
-          iVar4 = param_1[3] + -1;
+      if (pendingWhitespace) {
+        *outChar = 0x20;
+        if (forward) {
+          cursor = parser[3] + -1;
         }
         else {
-          iVar4 = param_1[3] + 1;
+          cursor = parser[3] + 1;
         }
-        param_1[3] = iVar4;
+        parser[3] = cursor;
       }
-      bVar3 = true;
+      charProduced = true;
     }
-    if (bVar3) {
+    if (charProduced) {
       return 0;
     }
   } while( true );
@@ -2529,131 +2551,131 @@ LAB_000cfb70:
 }
 
 /* _LFSParserParseDestinationModifiers @ 0xcfba8 (460 bytes) */
-int _LFSParserParseDestinationModifiers(param_1, param_2)
-  int param_1;
-  int param_2;
+int _LFSParserParseDestinationModifiers(parser, destination)
+  int parser;
+  int destination;
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  char local_120 [256];
-  undefined4 local_20;
-  undefined4 local_1c;
+  uint modifierBits;
+  int partOrCompareResult;
+  undefined4 status;
+  char tokenBuffer [256];
+  undefined4 savedCursor;
+  undefined4 savedLine;
   
-  iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_120);
-  uVar3 = 8;
-  if (iVar2 != 0) {
-    iVar2 = _memcmp(local_120,"2x",3);
-    uVar1 = 0x1000;
-    if (iVar2 != 0) {
-      iVar2 = _memcmp(local_120,"4x",3);
-      uVar1 = 0x2000;
-      if (iVar2 != 0) {
-        iVar2 = _memcmp(local_120,"8x",3);
-        uVar1 = 0x3000;
-        if (iVar2 != 0) {
-          iVar2 = _memcmp(local_120,"half",5);
-          uVar1 = 0x4000;
-          if (iVar2 != 0) {
-            iVar2 = _memcmp(local_120,"quarter",8);
-            uVar1 = 0x5000;
-            if (iVar2 != 0) {
-              iVar2 = _memcmp(local_120,"eighth",7);
-              uVar1 = 0x6000;
-              if (iVar2 != 0) {
-                iVar2 = _memcmp(local_120,"sat",4);
-                if (iVar2 != 0) {
+  partOrCompareResult = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+  status = 8;
+  if (partOrCompareResult != 0) {
+    partOrCompareResult = _memcmp(tokenBuffer,"2x",3);
+    modifierBits = 0x1000;
+    if (partOrCompareResult != 0) {
+      partOrCompareResult = _memcmp(tokenBuffer,"4x",3);
+      modifierBits = 0x2000;
+      if (partOrCompareResult != 0) {
+        partOrCompareResult = _memcmp(tokenBuffer,"8x",3);
+        modifierBits = 0x3000;
+        if (partOrCompareResult != 0) {
+          partOrCompareResult = _memcmp(tokenBuffer,"half",5);
+          modifierBits = 0x4000;
+          if (partOrCompareResult != 0) {
+            partOrCompareResult = _memcmp(tokenBuffer,"quarter",8);
+            modifierBits = 0x5000;
+            if (partOrCompareResult != 0) {
+              partOrCompareResult = _memcmp(tokenBuffer,"eighth",7);
+              modifierBits = 0x6000;
+              if (partOrCompareResult != 0) {
+                partOrCompareResult = _memcmp(tokenBuffer,"sat",4);
+                if (partOrCompareResult != 0) {
                   return 7;
                 }
-                uVar1 = *(uint *)(param_2 + 0xc) | 0x8000;
+                modifierBits = *(uint *)(destination + 0xc) | 0x8000;
               }
             }
           }
         }
       }
     }
-    *(uint *)(param_2 + 0xc) = uVar1;
-    local_20 = *(undefined4 *)(param_1 + 0xc);
-    local_1c = *(undefined4 *)(param_1 + 0x10);
-    iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_120);
-    uVar3 = 8;
-    if (iVar2 != 0) {
-      if (local_120[0] == '.') {
-        iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_120);
-        uVar3 = 8;
-        if (iVar2 != 0) {
-          iVar2 = _memcmp(local_120,"sat",4);
-          uVar3 = 7;
-          if (iVar2 == 0) {
-            uVar3 = 0;
-            *(uint *)(param_2 + 0xc) = *(uint *)(param_2 + 0xc) | 0x8000;
+    *(uint *)(destination + 0xc) = modifierBits;
+    savedCursor = *(undefined4 *)(parser + 0xc);
+    savedLine = *(undefined4 *)(parser + 0x10);
+    partOrCompareResult = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+    status = 8;
+    if (partOrCompareResult != 0) {
+      if (tokenBuffer[0] == '.') {
+        partOrCompareResult = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+        status = 8;
+        if (partOrCompareResult != 0) {
+          partOrCompareResult = _memcmp(tokenBuffer,"sat",4);
+          status = 7;
+          if (partOrCompareResult == 0) {
+            status = 0;
+            *(uint *)(destination + 0xc) = *(uint *)(destination + 0xc) | 0x8000;
           }
         }
       }
       else {
-        uVar3 = 0;
-        *(undefined4 *)(param_1 + 0x10) = local_1c;
-        *(undefined4 *)(param_1 + 0xc) = local_20;
+        status = 0;
+        *(undefined4 *)(parser + 0x10) = savedLine;
+        *(undefined4 *)(parser + 0xc) = savedCursor;
       }
     }
   }
-  return uVar3;
+  return status;
 }
 
 /* _LFSParserParseDestination @ 0xcfd74 (308 bytes) */
-int _LFSParserParseDestination(param_1, param_2)
-  int param_1;
-  int *param_2;
+int _LFSParserParseDestination(parser, destination)
+  int parser;
+  int *destination;
 {
-  int iVar1;
-  char local_130 [256];
-  undefined4 local_30;
-  undefined4 local_2c;
-  int local_20;
-  int local_1c [4];
+  int status;
+  char tokenBuffer [256];
+  undefined4 savedCursor;
+  undefined4 savedLine;
+  int registerKind;
+  int registerIndex [4];
   
-  iVar1 = ((int (*)())_LFSParserParseRegister)(param_1,&local_20,local_1c);
-  if (iVar1 != 0) {
-    return iVar1;
+  status = ((int (*)())_LFSParserParseRegister)(parser,&registerKind,registerIndex);
+  if (status != 0) {
+    return status;
   }
-  param_2[2] = 0xf0000;
-  param_2[1] = local_1c[0];
-  *param_2 = local_20;
-  if (local_20 != 1) {
+  destination[2] = 0xf0000;
+  destination[1] = registerIndex[0];
+  *destination = registerKind;
+  if (registerKind != 1) {
     return 5;
   }
-  local_30 = *(undefined4 *)(param_1 + 0xc);
-  local_2c = *(undefined4 *)(param_1 + 0x10);
-  iVar1 = ((int (*)())_LFSParserGetPart)(param_1,local_130);
-  if (iVar1 == 0) {
+  savedCursor = *(undefined4 *)(parser + 0xc);
+  savedLine = *(undefined4 *)(parser + 0x10);
+  status = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+  if (status == 0) {
     return 8;
   }
-  if (local_130[0] == '.') {
-    local_30 = *(undefined4 *)(param_1 + 0xc);
-    local_2c = *(undefined4 *)(param_1 + 0x10);
-    iVar1 = ((int (*)())_LFSParserParseDestinationMask)(param_1,param_2);
-    if (iVar1 == 0) {
-      local_30 = *(undefined4 *)(param_1 + 0xc);
-      local_2c = *(undefined4 *)(param_1 + 0x10);
-      iVar1 = ((int (*)())_LFSParserGetPart)(param_1,local_130);
-      if (iVar1 == 0) {
+  if (tokenBuffer[0] == '.') {
+    savedCursor = *(undefined4 *)(parser + 0xc);
+    savedLine = *(undefined4 *)(parser + 0x10);
+    status = ((int (*)())_LFSParserParseDestinationMask)(parser,destination);
+    if (status == 0) {
+      savedCursor = *(undefined4 *)(parser + 0xc);
+      savedLine = *(undefined4 *)(parser + 0x10);
+      status = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+      if (status == 0) {
         return 8;
       }
-      if (local_130[0] != '.') goto LAB_000cfe58;
+      if (tokenBuffer[0] != '.') goto LAB_000cfe58;
     }
     else {
-      *(undefined4 *)(param_1 + 0x10) = local_2c;
-      *(undefined4 *)(param_1 + 0xc) = local_30;
+      *(undefined4 *)(parser + 0x10) = savedLine;
+      *(undefined4 *)(parser + 0xc) = savedCursor;
     }
-    iVar1 = ((int (*)())_LFSParserParseDestinationModifiers)(param_1,param_2);
-    if (iVar1 != 0) {
-      return iVar1;
+    status = ((int (*)())_LFSParserParseDestinationModifiers)(parser,destination);
+    if (status != 0) {
+      return status;
     }
   }
   else {
 LAB_000cfe58:
-    *(undefined4 *)(param_1 + 0x10) = local_2c;
-    *(undefined4 *)(param_1 + 0xc) = local_30;
+    *(undefined4 *)(parser + 0x10) = savedLine;
+    *(undefined4 *)(parser + 0xc) = savedCursor;
   }
   return 0;
 }
@@ -2717,164 +2739,166 @@ int _LFSParserParseSourceModifier(param_1, param_2)
 }
 
 /* _LFSParserParseSourceVar @ 0xcfff8 (540 bytes) */
-int _LFSParserParseSourceVar(param_1, param_2)
-  int param_1;
-  int *param_2;
+int _LFSParserParseSourceVar(parser, sourceVar)
+  int parser;
+  int *sourceVar;
 {
-  int iVar1;
-  int iVar2;
-  char local_130 [256];
-  undefined4 local_30;
-  undefined4 local_2c;
-  int local_20;
-  int local_1c [4];
+  int statusOrSwizzle;
+  int bindingOrCompareResult;
+  char tokenBuffer [256];
+  undefined4 savedCursor;
+  undefined4 savedLine;
+  int registerKind;
+  int registerIndex [4];
   
-  iVar1 = ((int (*)())_LFSParserParseRegister)(param_1,&local_20,local_1c);
-  if (iVar1 != 0) {
-    return iVar1;
+  statusOrSwizzle = ((int (*)())_LFSParserParseRegister)(parser,&registerKind,registerIndex);
+  if (statusOrSwizzle != 0) {
+    return statusOrSwizzle;
   }
-  *param_2 = local_20;
-  param_2[1] = local_1c[0];
-  if (local_20 == 2) {
-    iVar1 = *(int *)**(undefined4 **)(param_1 + 0x14);
+  *sourceVar = registerKind;
+  sourceVar[1] = registerIndex[0];
+  if (registerKind == 2) {
+    statusOrSwizzle = *(int *)**(undefined4 **)(parser + 0x14);
     while( true ) {
-      if (iVar1 == 0) {
+      if (statusOrSwizzle == 0) {
         return 0x12;
       }
-      if (*(int *)(iVar1 + 8) == local_1c[0]) break;
-      iVar1 = *(int *)(iVar1 + 0x4c);
+      if (*(int *)(statusOrSwizzle + 8) == registerIndex[0]) break;
+      statusOrSwizzle = *(int *)(statusOrSwizzle + 0x4c);
     }
   }
-  local_30 = *(undefined4 *)(param_1 + 0xc);
-  local_2c = *(undefined4 *)(param_1 + 0x10);
-  iVar1 = ((int (*)())_LFSParserGetPart)(param_1,local_130);
-  if (iVar1 == 0) {
+  savedCursor = *(undefined4 *)(parser + 0xc);
+  savedLine = *(undefined4 *)(parser + 0x10);
+  statusOrSwizzle = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+  if (statusOrSwizzle == 0) {
     return 8;
   }
-  if (local_130[0] != '.') goto LAB_000d01ec;
-  local_30 = *(undefined4 *)(param_1 + 0xc);
-  local_2c = *(undefined4 *)(param_1 + 0x10);
-  iVar1 = ((int (*)())_LFSParserGetPart)(param_1,local_130);
-  if (iVar1 == 0) {
+  if (tokenBuffer[0] != '.') goto LAB_000d01ec;
+  savedCursor = *(undefined4 *)(parser + 0xc);
+  savedLine = *(undefined4 *)(parser + 0x10);
+  statusOrSwizzle = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+  if (statusOrSwizzle == 0) {
     return 8;
   }
-  iVar2 = _memcmp(local_130,"r",2);
-  iVar1 = 0x1000;
-  if (iVar2 == 0) {
+  bindingOrCompareResult = _memcmp(tokenBuffer,"r",2);
+  statusOrSwizzle = 0x1000;
+  if (bindingOrCompareResult == 0) {
 LAB_000d0164:
-    param_2[2] = iVar1;
+    sourceVar[2] = statusOrSwizzle;
   }
   else {
-    iVar2 = _memcmp(local_130,"g",2);
-    iVar1 = 0x2000;
-    if (iVar2 == 0) goto LAB_000d0164;
-    iVar2 = _memcmp(local_130,"b",2);
-    iVar1 = 0x3000;
-    if (iVar2 == 0) goto LAB_000d0164;
-    iVar1 = _memcmp(local_130,"a",2);
-    if (iVar1 == 0) {
-      iVar1 = 0x4000;
+    bindingOrCompareResult = _memcmp(tokenBuffer,"g",2);
+    statusOrSwizzle = 0x2000;
+    if (bindingOrCompareResult == 0) goto LAB_000d0164;
+    bindingOrCompareResult = _memcmp(tokenBuffer,"b",2);
+    statusOrSwizzle = 0x3000;
+    if (bindingOrCompareResult == 0) goto LAB_000d0164;
+    statusOrSwizzle = _memcmp(tokenBuffer,"a",2);
+    if (statusOrSwizzle == 0) {
+      statusOrSwizzle = 0x4000;
       goto LAB_000d0164;
     }
-    *(undefined4 *)(param_1 + 0x10) = local_2c;
-    *(undefined4 *)(param_1 + 0xc) = local_30;
-    iVar1 = ((int (*)())_LFSParserParseSourceModifier)(param_1,param_2);
-    if (iVar1 != 0) {
-      return iVar1;
+    *(undefined4 *)(parser + 0x10) = savedLine;
+    *(undefined4 *)(parser + 0xc) = savedCursor;
+    statusOrSwizzle = ((int (*)())_LFSParserParseSourceModifier)(parser,sourceVar);
+    if (statusOrSwizzle != 0) {
+      return statusOrSwizzle;
     }
   }
-  if (param_2[2] == 0) {
+  if (sourceVar[2] == 0) {
     return 0;
   }
-  local_30 = *(undefined4 *)(param_1 + 0xc);
-  local_2c = *(undefined4 *)(param_1 + 0x10);
-  iVar1 = ((int (*)())_LFSParserGetPart)(param_1,local_130);
-  if (iVar1 == 0) {
+  savedCursor = *(undefined4 *)(parser + 0xc);
+  savedLine = *(undefined4 *)(parser + 0x10);
+  statusOrSwizzle = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+  if (statusOrSwizzle == 0) {
     return 8;
   }
-  if (local_130[0] == '.') {
-    iVar1 = ((int (*)())_LFSParserParseSourceModifier)(param_1,param_2);
-    if (iVar1 == 0) {
+  if (tokenBuffer[0] == '.') {
+    statusOrSwizzle = ((int (*)())_LFSParserParseSourceModifier)(parser,sourceVar);
+    if (statusOrSwizzle == 0) {
       return 0;
     }
-    return iVar1;
+    return statusOrSwizzle;
   }
 LAB_000d01ec:
-  *(undefined4 *)(param_1 + 0x10) = local_2c;
-  *(undefined4 *)(param_1 + 0xc) = local_30;
+  *(undefined4 *)(parser + 0x10) = savedLine;
+  *(undefined4 *)(parser + 0xc) = savedCursor;
   return 0;
 }
 
 /* _LFSParserParseOperation @ 0xd0214 (1192 bytes) */
-int _LFSParserParseOperation(param_1)
-  int param_1;
+int _LFSParserParseOperation(parser)
+  int parser;
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  int *piVar7;
-  char local_190 [256];
-  uint local_90;
-  undefined1 auStack_8c [8];
-  uint local_84;
-  int local_7c [15];
-  int local_40 [8];
+  bool alphaPairsWithRgb;
+  int swizzle;
+  int statusOrCompareOrPart;
+  uint sourceCount;
+  uint passIndex;
+  uint constantRegCount;
+  uint pendingMask;
+  uint sourceIndex;
+  int *sourceCursor;
+  char tokenBuffer [256];
+  uint opcode;
+  undefined1 destination [8];
+  uint destWriteMask;
+  int sources [15];
+  int constantUseCount [8];
   
-  uVar5 = 0;
-  _memset(&local_90,0,0x44);
-  local_40[0] = 0;
-  local_40[1] = 0;
-  uVar4 = 0;
-  local_40[2] = 0;
-  local_40[3] = 0;
-  local_40[4] = 0;
-  local_40[5] = 0;
-  local_40[6] = 0;
-  local_40[7] = 0;
-  iVar3 = ((int (*)())_LFSParserGetPart)(param_1,local_190);
-  if (iVar3 == 0) {
+  constantRegCount = 0;
+  _memset(&opcode,0,0x44);
+  constantUseCount[0] = 0;
+  constantUseCount[1] = 0;
+  sourceCount = 0;
+  constantUseCount[2] = 0;
+  constantUseCount[3] = 0;
+  constantUseCount[4] = 0;
+  constantUseCount[5] = 0;
+  constantUseCount[6] = 0;
+  constantUseCount[7] = 0;
+  statusOrCompareOrPart = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+  if (statusOrCompareOrPart == 0) {
     return 8;
   }
-  iVar3 = _memcmp(local_190,"MOV",4);
-  if (iVar3 == 0) {
-    local_90 = 0;
+  statusOrCompareOrPart = _memcmp(tokenBuffer,"MOV",4);
+  if (statusOrCompareOrPart == 0) {
+    opcode = 0;
   }
   else {
-    iVar3 = _memcmp(local_190,"ADD",4);
-    local_90 = 0x100;
-    if (iVar3 != 0) {
-      iVar3 = _memcmp(local_190,"MUL",4);
-      local_90 = 0x200;
-      if (iVar3 != 0) {
-        iVar3 = _memcmp(local_190,"SUB",4);
-        local_90 = 0x300;
-        if (iVar3 != 0) {
-          iVar3 = _memcmp(local_190,"DOT3",5);
-          local_90 = 0x400;
-          if (iVar3 != 0) {
-            iVar3 = _memcmp(local_190,"DOT4",5);
-            local_90 = 0x500;
-            if (iVar3 != 0) {
-              iVar3 = _memcmp(local_190,"MAD",4);
-              local_90 = 0x600;
-              if (iVar3 != 0) {
-                iVar3 = _memcmp(local_190,"LERP",5);
-                local_90 = 0x700;
-                if (iVar3 != 0) {
-                  iVar3 = _memcmp(local_190,"CND",4);
-                  local_90 = 0x800;
-                  if (iVar3 != 0) {
-                    iVar3 = _memcmp(local_190,"CND0",5);
-                    local_90 = 0x900;
-                    if (iVar3 != 0) {
-                      iVar3 = _memcmp(local_190,"DOT2ADD",8);
-                      if (iVar3 != 0) {
+    statusOrCompareOrPart = _memcmp(tokenBuffer,"ADD",4);
+    opcode = 0x100;
+    if (statusOrCompareOrPart != 0) {
+      statusOrCompareOrPart = _memcmp(tokenBuffer,"MUL",4);
+      opcode = 0x200;
+      if (statusOrCompareOrPart != 0) {
+        statusOrCompareOrPart = _memcmp(tokenBuffer,"SUB",4);
+        opcode = 0x300;
+        if (statusOrCompareOrPart != 0) {
+          statusOrCompareOrPart = _memcmp(tokenBuffer,"DOT3",5);
+          opcode = 0x400;
+          if (statusOrCompareOrPart != 0) {
+            statusOrCompareOrPart = _memcmp(tokenBuffer,"DOT4",5);
+            opcode = 0x500;
+            if (statusOrCompareOrPart != 0) {
+              statusOrCompareOrPart = _memcmp(tokenBuffer,"MAD",4);
+              opcode = 0x600;
+              if (statusOrCompareOrPart != 0) {
+                statusOrCompareOrPart = _memcmp(tokenBuffer,"LERP",5);
+                opcode = 0x700;
+                if (statusOrCompareOrPart != 0) {
+                  statusOrCompareOrPart = _memcmp(tokenBuffer,"CND",4);
+                  opcode = 0x800;
+                  if (statusOrCompareOrPart != 0) {
+                    statusOrCompareOrPart = _memcmp(tokenBuffer,"CND0",5);
+                    opcode = 0x900;
+                    if (statusOrCompareOrPart != 0) {
+                      statusOrCompareOrPart = _memcmp(tokenBuffer,"DOT2ADD",8);
+                      if (statusOrCompareOrPart != 0) {
                         return 3;
                       }
-                      local_90 = 0xa00;
+                      opcode = 0xa00;
                     }
                   }
                 }
@@ -2885,104 +2909,104 @@ int _LFSParserParseOperation(param_1)
       }
     }
   }
-  if (local_90 == 0) {
-    uVar4 = 1;
+  if (opcode == 0) {
+    sourceCount = 1;
   }
-  else if (local_90 < 0x501) {
-    uVar4 = 2;
+  else if (opcode < 0x501) {
+    sourceCount = 2;
   }
-  else if (local_90 < 0xa01) {
-    uVar4 = 3;
+  else if (opcode < 0xa01) {
+    sourceCount = 3;
   }
-  iVar3 = ((int (*)())_LFSParserParseDestination)(param_1,auStack_8c);
-  if (iVar3 != 0) {
-    return iVar3;
+  statusOrCompareOrPart = ((int (*)())_LFSParserParseDestination)(parser,destination);
+  if (statusOrCompareOrPart != 0) {
+    return statusOrCompareOrPart;
   }
-  uVar6 = 0;
-  if (uVar4 != 0) {
-    piVar7 = local_7c;
+  sourceIndex = 0;
+  if (sourceCount != 0) {
+    sourceCursor = sources;
     do {
-      iVar3 = ((int (*)())_LFSParserGetPart)(param_1,local_190);
-      if (iVar3 == 0) {
+      statusOrCompareOrPart = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+      if (statusOrCompareOrPart == 0) {
         return 8;
       }
-      if (local_190[0] != ',') {
+      if (tokenBuffer[0] != ',') {
         return 10;
       }
-      iVar3 = ((int (*)())_LFSParserParseSourceVar)(param_1,piVar7);
-      if (local_7c[uVar6 * 4] == 2) {
-        if (local_40[local_7c[uVar6 * 4 + 1]] == 0) {
-          uVar5 = uVar5 + 1;
+      statusOrCompareOrPart = ((int (*)())_LFSParserParseSourceVar)(parser,sourceCursor);
+      if (sources[sourceIndex * 4] == 2) {
+        if (constantUseCount[sources[sourceIndex * 4 + 1]] == 0) {
+          constantRegCount = constantRegCount + 1;
         }
-        local_40[local_7c[uVar6 * 4 + 1]] = local_40[local_7c[uVar6 * 4 + 1]] + 1;
+        constantUseCount[sources[sourceIndex * 4 + 1]] = constantUseCount[sources[sourceIndex * 4 + 1]] + 1;
       }
-      if ((*(char *)(param_1 + 0x19) != '\x03') && (local_7c[uVar6 * 4] == 4)) {
+      if ((*(char *)(parser + 0x19) != '\x03') && (sources[sourceIndex * 4] == 4)) {
         return 0x14;
       }
-      if ((local_7c[uVar6 * 4] == 4) && (local_7c[uVar6 * 4 + 1] == 1)) {
-        if ((local_84 & 0x80000) == 0) {
-          if (local_7c[uVar6 * 4 + 2] == 0x4000) {
+      if ((sources[sourceIndex * 4] == 4) && (sources[sourceIndex * 4 + 1] == 1)) {
+        if ((destWriteMask & 0x80000) == 0) {
+          if (sources[sourceIndex * 4 + 2] == 0x4000) {
             return 0x1c;
           }
         }
         else {
-          iVar2 = local_7c[uVar6 * 4 + 2];
-          if (((iVar2 != 0x1000) && (iVar2 != 0x2000)) && (iVar2 != 0x3000)) {
+          swizzle = sources[sourceIndex * 4 + 2];
+          if (((swizzle != 0x1000) && (swizzle != 0x2000)) && (swizzle != 0x3000)) {
             return 0x1c;
           }
         }
       }
-      if (iVar3 != 0) {
-        return iVar3;
+      if (statusOrCompareOrPart != 0) {
+        return statusOrCompareOrPart;
       }
-      uVar6 = uVar6 + 1;
-      piVar7 = piVar7 + 4;
-    } while (uVar6 < uVar4);
-    if (2 < uVar5) {
+      sourceIndex = sourceIndex + 1;
+      sourceCursor = sourceCursor + 4;
+    } while (sourceIndex < sourceCount);
+    if (2 < constantRegCount) {
       return 0x13;
     }
   }
-  uVar4 = (uint)*(byte *)(param_1 + 0x19);
-  bVar1 = false;
-  uVar5 = *(uint *)(uVar4 * 0x10 + param_1 + 0x1c);
-  if (uVar5 != 0) {
-    if (((((uVar5 & 0x10000) != 0) || ((uVar5 & 0x20000) != 0)) || ((uVar5 & 0x40000) != 0)) &&
-       (((*(uint *)(uVar4 * 0x10 + param_1 + 0x1c) & 0x80000) == 0 && (local_84 == 0x80000)))) {
-      bVar1 = true;
+  passIndex = (uint)*(byte *)(parser + 0x19);
+  alphaPairsWithRgb = false;
+  pendingMask = *(uint *)(passIndex * 0x10 + parser + 0x1c);
+  if (pendingMask != 0) {
+    if (((((pendingMask & 0x10000) != 0) || ((pendingMask & 0x20000) != 0)) || ((pendingMask & 0x40000) != 0)) &&
+       (((*(uint *)(passIndex * 0x10 + parser + 0x1c) & 0x80000) == 0 && (destWriteMask == 0x80000)))) {
+      alphaPairsWithRgb = true;
     }
-    iVar3 = uVar4 * 0x10 + param_1;
-    *(int *)(iVar3 + 0x20) = *(int *)(iVar3 + 0x20) + 1;
-    *(undefined4 *)((uint)*(byte *)(param_1 + 0x19) * 0x10 + param_1 + 0x1c) = 0;
-    uVar4 = (uint)*(byte *)(param_1 + 0x19);
-    if (bVar1) goto LAB_000d064c;
+    statusOrCompareOrPart = passIndex * 0x10 + parser;
+    *(int *)(statusOrCompareOrPart + 0x20) = *(int *)(statusOrCompareOrPart + 0x20) + 1;
+    *(undefined4 *)((uint)*(byte *)(parser + 0x19) * 0x10 + parser + 0x1c) = 0;
+    passIndex = (uint)*(byte *)(parser + 0x19);
+    if (alphaPairsWithRgb) goto LAB_000d064c;
   }
-  if (((local_84 & 0x70000) == 0) || ((local_84 & 0x80000) != 0)) {
-    iVar3 = uVar4 * 0x10 + param_1;
-    *(int *)(iVar3 + 0x20) = *(int *)(iVar3 + 0x20) + 1;
+  if (((destWriteMask & 0x70000) == 0) || ((destWriteMask & 0x80000) != 0)) {
+    statusOrCompareOrPart = passIndex * 0x10 + parser;
+    *(int *)(statusOrCompareOrPart + 0x20) = *(int *)(statusOrCompareOrPart + 0x20) + 1;
   }
   else {
-    iVar3 = uVar4 * 0x10 + param_1;
-    if (7 < *(uint *)(iVar3 + 0x20)) {
+    statusOrCompareOrPart = passIndex * 0x10 + parser;
+    if (7 < *(uint *)(statusOrCompareOrPart + 0x20)) {
       return 0x16;
     }
-    *(uint *)(iVar3 + 0x1c) = local_84;
+    *(uint *)(statusOrCompareOrPart + 0x1c) = destWriteMask;
   }
-  uVar4 = (uint)*(byte *)(param_1 + 0x19);
+  passIndex = (uint)*(byte *)(parser + 0x19);
 LAB_000d064c:
-  iVar3 = 0x16;
-  if (*(uint *)(uVar4 * 0x10 + param_1 + 0x20) < 9) {
-    if (uVar4 == 2) {
-      _LFSStreamAddPreliminaryPassOperation(*(undefined4 *)(param_1 + 0x14),&local_90);
+  statusOrCompareOrPart = 0x16;
+  if (*(uint *)(passIndex * 0x10 + parser + 0x20) < 9) {
+    if (passIndex == 2) {
+      _LFSStreamAddPreliminaryPassOperation(*(undefined4 *)(parser + 0x14),&opcode);
     }
     else {
-      if (uVar4 != 3) {
+      if (passIndex != 3) {
         return 0xc;
       }
-      _LFSStreamAddOutputPassOperation(*(undefined4 *)(param_1 + 0x14),&local_90);
+      _LFSStreamAddOutputPassOperation(*(undefined4 *)(parser + 0x14),&opcode);
     }
-    iVar3 = 0;
+    statusOrCompareOrPart = 0;
   }
-  return iVar3;
+  return statusOrCompareOrPart;
 }
 
 /* _LFSParserParseRegisterInit @ 0xd06bc (940 bytes) */
@@ -3122,120 +3146,123 @@ int _LFSParserParseRegisterInit(param_1)
 }
 
 /* _LFSParserParseConstantBinding @ 0xd0a68 (748 bytes) */
-int _LFSParserParseConstantBinding(param_1)
-  int param_1;
+int _LFSParserParseConstantBinding(parser)
+  int parser;
 {
-  int iVar1;
-  int iVar2;
-  char local_160 [256];
-  int local_60;
-  int local_5c;
-  uint local_58;
-  undefined4 local_54;
-  uint local_50;
-  float local_40 [4];
-  longlong local_30;
-  longlong local_28;
-  int local_20 [5];
+  int status;
+  int partLength;
+  int compareResult;
+  int bindingNode;
+  int tokenLength;
+  char tokenBuffer [256];
+  int bindingKind;
+  int registerIndex;
+  uint envIndex;
+  undefined4 constantIndex;
+  uint localIndex;
+  float literalValue [4];
+  longlong floatToIntTemp;
+  longlong floatToIntTemp2;
+  int registerInfo [5];
   
-  local_60 = 0;
-  local_50 = 0;
-  local_5c = 0;
-  local_58 = 0;
-  local_54 = 0;
-  iVar1 = ((int (*)())_LFSParserParseRegister)(param_1,local_20,&local_5c);
-  if ((iVar1 == 0) && (iVar1 = 5, local_20[0] == 2)) {
-    for (iVar1 = *(int *)**(undefined4 **)(param_1 + 0x14); iVar1 != 0;
-        iVar1 = *(int *)(iVar1 + 0x4c)) {
-      if (*(int *)(iVar1 + 8) == local_5c) {
+  bindingKind = 0;
+  localIndex = 0;
+  registerIndex = 0;
+  envIndex = 0;
+  constantIndex = 0;
+  status = ((int (*)())_LFSParserParseRegister)(parser,registerInfo,&registerIndex);
+  if ((status == 0) && (status = 5, registerInfo[0] == 2)) {
+    for (bindingNode = *(int *)**(undefined4 **)(parser + 0x14); bindingNode != 0;
+        bindingNode = *(int *)(bindingNode + 0x4c)) {
+      if (*(int *)(bindingNode + 8) == registerIndex) {
         return 0x11;
       }
     }
-    iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_160);
-    iVar1 = 8;
-    if ((iVar2 != 0) && (iVar1 = 0xf, local_160[0] == '=')) {
-      iVar2 = ((int (*)())_LFSParserGetPart)(param_1,local_160);
-      iVar1 = 8;
-      if (iVar2 != 0) {
-        iVar1 = _memcmp(local_160,"program",8);
-        if (iVar1 == 0) {
-          iVar1 = ((int (*)())_LFSParserGetPart)(param_1,local_160);
-          if (iVar1 == 0) {
+    tokenLength = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+    status = 8;
+    if ((tokenLength != 0) && (status = 0xf, tokenBuffer[0] == '=')) {
+      tokenLength = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+      status = 8;
+      if (tokenLength != 0) {
+        compareResult = _memcmp(tokenBuffer,"program",8);
+        if (compareResult == 0) {
+          partLength = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+          if (partLength == 0) {
             return 8;
           }
-          if (local_160[0] != '.') {
+          if (tokenBuffer[0] != '.') {
             return 0xf;
           }
-          iVar1 = ((int (*)())_LFSParserGetPart)(param_1,local_160);
-          if (iVar1 == 0) {
+          partLength = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+          if (partLength == 0) {
             return 8;
           }
-          iVar1 = _memcmp(local_160,"env",4);
-          if (iVar1 == 0) {
-            local_60 = iVar1;
-            iVar1 = ((int (*)())_LFSParserParseArray)(param_1,local_40);
-            if (iVar1 != 0) {
-              return iVar1;
+          compareResult = _memcmp(tokenBuffer,"env",4);
+          if (compareResult == 0) {
+            bindingKind = compareResult;
+            status = ((int (*)())_LFSParserParseArray)(parser,literalValue);
+            if (status != 0) {
+              return status;
             }
-            if (DOUBLE_00108d80 <= (double)local_40[0]) {
-              local_58 = (uint)(int)((double)local_40[0] - DOUBLE_00108d80);
-              local_28 = (longlong)(int)local_58;
-              local_58 = local_58 ^ 0x80000000;
+            if (DOUBLE_00108d80 <= (double)literalValue[0]) {
+              envIndex = (uint)(int)((double)literalValue[0] - DOUBLE_00108d80);
+              floatToIntTemp2 = (longlong)(int)envIndex;
+              envIndex = envIndex ^ 0x80000000;
             }
             else {
-              local_58 = (uint)(int)local_40[0];
-              local_30 = (longlong)(int)local_58;
+              envIndex = (uint)(int)literalValue[0];
+              floatToIntTemp = (longlong)(int)envIndex;
             }
           }
           else {
-            iVar1 = _memcmp(local_160,"local",6);
-            if (iVar1 != 0) {
+            compareResult = _memcmp(tokenBuffer,"local",6);
+            if (compareResult != 0) {
               return 0xf;
             }
-            local_60 = 2;
-            iVar1 = ((int (*)())_LFSParserParseArray)(param_1,local_40);
-            if (iVar1 != 0) {
-              return iVar1;
+            bindingKind = 2;
+            status = ((int (*)())_LFSParserParseArray)(parser,literalValue);
+            if (status != 0) {
+              return status;
             }
-            if (DOUBLE_00108d80 <= (double)local_40[0]) {
-              local_50 = (uint)(int)((double)local_40[0] - DOUBLE_00108d80);
-              local_30 = (longlong)(int)local_50;
-              local_50 = local_50 ^ 0x80000000;
+            if (DOUBLE_00108d80 <= (double)literalValue[0]) {
+              localIndex = (uint)(int)((double)literalValue[0] - DOUBLE_00108d80);
+              floatToIntTemp = (longlong)(int)localIndex;
+              localIndex = localIndex ^ 0x80000000;
             }
             else {
-              local_50 = (uint)(int)local_40[0];
-              local_28 = (longlong)(int)local_50;
+              localIndex = (uint)(int)literalValue[0];
+              floatToIntTemp2 = (longlong)(int)localIndex;
             }
           }
         }
         else {
-          iVar1 = _memcmp(local_160,"{",2);
-          if (iVar1 != 0) {
+          compareResult = _memcmp(tokenBuffer,"{",2);
+          if (compareResult != 0) {
             return 0xf;
           }
-          local_60 = 1;
-          local_20[1] = 4;
-          local_40[0] = 0.0;
-          local_40[3] = 0.0;
-          local_40[2] = 0.0;
-          local_40[1] = 0.0;
-          ((int (*)())_LFSParserGetScalars)(param_1,local_40,local_20 + 1);
-          iVar1 = ((int (*)())_LFSParserGetPart)(param_1,local_160);
-          if (iVar1 == 0) {
+          bindingKind = 1;
+          registerInfo[1] = 4;
+          literalValue[0] = 0.0;
+          literalValue[3] = 0.0;
+          literalValue[2] = 0.0;
+          literalValue[1] = 0.0;
+          ((int (*)())_LFSParserGetScalars)(parser,literalValue,registerInfo + 1);
+          partLength = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+          if (partLength == 0) {
             return 8;
           }
-          if (local_160[0] != '}') {
+          if (tokenBuffer[0] != '}') {
             return 0xf;
           }
-          local_54 = *(undefined4 *)(*(int *)(*(int *)(param_1 + 0x14) + 0x14) + 8);
-          _LFSStreamAddConstant(*(int *)(param_1 + 0x14),local_40);
+          constantIndex = *(undefined4 *)(*(int *)(*(int *)(parser + 0x14) + 0x14) + 8);
+          _LFSStreamAddConstant(*(int *)(parser + 0x14),literalValue);
         }
-        _LFSStreamAddConstantBinding(*(undefined4 *)(param_1 + 0x14),&local_60);
-        iVar1 = 0;
+        _LFSStreamAddConstantBinding(*(undefined4 *)(parser + 0x14),&bindingKind);
+        status = 0;
       }
     }
   }
-  return iVar1;
+  return status;
 }
 
 /* _LFSParserParseInstruction @ 0xd0d54 (516 bytes) */

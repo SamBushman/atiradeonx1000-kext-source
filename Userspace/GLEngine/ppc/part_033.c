@@ -1412,28 +1412,31 @@ void _glVertexAttribPointerARB_Exec(glContext, index, size, type, normalized, st
   int stride;
   int pointer;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int slotByteOffset;
+  undefined4 copiedWord;
+  undefined4 savedWord350;
   undefined4 glErrorCode;
-  ushort uVar3;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  ushort typeFlags;
+  uint attribBit;
+  uint savedWord354;
+  int attribRecord;
+  int newRefCount;
+  int oldBufferObject;
   int loopIndex;
   undefined4 *dstCursor;
   undefined4 *srcCursor;
   int iVar9;
   int clientState;
   undefined4 *dstCursor2;
-  uint uVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
+  uint packedFormat;
+  uint selectMask;
+  int slot;
+  int newBufferObject;
+  int attribArrayBase;
   
   clientState = *(int *)(glContext + 0x4a60);
-  uVar11 = stride << 7 | type & 0xf | (size & 3) << 4 | (normalized & 1) << 6;
-  iVar14 = clientState + 0x10;
+  packedFormat = stride << 7 | type & 0xf | (size & 3) << 4 | (normalized & 1) << 6;
+  attribArrayBase = clientState + 0x10;
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -1443,7 +1446,7 @@ LAB_000a49a4:
     *(undefined4 *)(glContext + 0x7574) = glErrorCode;
     return;
   }
-  iVar12 = index + 0x10;
+  slot = index + 0x10;
   if (((0xf < index) || (3 < size - 1)) || (stride < 0)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -1451,28 +1454,28 @@ LAB_000a49a4:
     glErrorCode = 0x501;
     goto LAB_000a49a4;
   }
-  uVar4 = 1 << (index & 0x3f);
-  *(uint *)(clientState + 0x350) = *(uint *)(clientState + 0x350) | uVar4;
+  attribBit = 1 << (index & 0x3f);
+  *(uint *)(clientState + 0x350) = *(uint *)(clientState + 0x350) | attribBit;
   *(undefined4 *)(clientState + 0x354) = *(undefined4 *)(clientState + 0x354);
-  iVar5 = iVar14 + iVar12 * 0x18;
-  if (*(int *)(iVar5 + 0x20) != pointer) {
+  attribRecord = attribArrayBase + slot * 0x18;
+  if (*(int *)(attribRecord + 0x20) != pointer) {
     *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
   }
-  iVar1 = iVar12 * 4;
-  *(int *)(iVar5 + 0x20) = pointer;
-  iVar7 = *(int *)(iVar1 + iVar14 + 0x350);
-  iVar13 = *(int *)(clientState + 0x358);
-  if (iVar13 != iVar7) {
-    if ((iVar7 != 0) && (iVar6 = *(int *)(iVar7 + 8) + -1, *(int *)(iVar7 + 8) = iVar6, iVar6 == 0))
+  slotByteOffset = slot * 4;
+  *(int *)(attribRecord + 0x20) = pointer;
+  oldBufferObject = *(int *)(slotByteOffset + attribArrayBase + 0x350);
+  newBufferObject = *(int *)(clientState + 0x358);
+  if (newBufferObject != oldBufferObject) {
+    if ((oldBufferObject != 0) && (newRefCount = *(int *)(oldBufferObject + 8) + -1, *(int *)(oldBufferObject + 8) = newRefCount, newRefCount == 0))
     {
-      _gleFreeBufferObject(glContext,iVar7);
+      _gleFreeBufferObject(glContext,oldBufferObject);
     }
-    if (iVar13 == 0) {
-      *(uint *)(clientState + 0x338) = *(uint *)(clientState + 0x338) & ~uVar4;
+    if (newBufferObject == 0) {
+      *(uint *)(clientState + 0x338) = *(uint *)(clientState + 0x338) & ~attribBit;
       *(undefined4 *)(clientState + 0x33c) = *(undefined4 *)(clientState + 0x33c);
       loopIndex = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
-        dstCursor = (undefined4 *)(iVar12 * 4 + iVar14 + 0x3d0);
+        dstCursor = (undefined4 *)(slot * 4 + attribArrayBase + 0x3d0);
         do {
           *dstCursor = 0;
           loopIndex = loopIndex + 1;
@@ -1481,33 +1484,33 @@ LAB_000a49a4:
       }
     }
     else {
-      *(int *)(iVar13 + 8) = *(int *)(iVar13 + 8) + 1;
-      *(uint *)(clientState + 0x338) = *(uint *)(clientState + 0x338) | uVar4;
+      *(int *)(newBufferObject + 8) = *(int *)(newBufferObject + 8) + 1;
+      *(uint *)(clientState + 0x338) = *(uint *)(clientState + 0x338) | attribBit;
       *(undefined4 *)(clientState + 0x33c) = *(undefined4 *)(clientState + 0x33c);
       loopIndex = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
-        srcCursor = (undefined4 *)(iVar13 + 0x10);
-        dstCursor2 = (undefined4 *)(iVar12 * 4 + iVar14 + 0x3d0);
+        srcCursor = (undefined4 *)(newBufferObject + 0x10);
+        dstCursor2 = (undefined4 *)(slot * 4 + attribArrayBase + 0x3d0);
         do {
-          uVar2 = *srcCursor;
+          copiedWord = *srcCursor;
           loopIndex = loopIndex + 1;
           srcCursor = srcCursor + 1;
-          *dstCursor2 = uVar2;
+          *dstCursor2 = copiedWord;
           dstCursor2 = dstCursor2 + 0x23;
         } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
       }
     }
-    uVar2 = *(undefined4 *)(clientState + 0x350);
-    uVar4 = *(uint *)(clientState + 0x354);
-    *(int *)(iVar1 + iVar14 + 0x350) = iVar13;
-    *(undefined4 *)(clientState + 0x350) = uVar2;
-    *(uint *)(clientState + 0x354) = uVar4 | 0x10;
+    savedWord350 = *(undefined4 *)(clientState + 0x350);
+    savedWord354 = *(uint *)(clientState + 0x354);
+    *(int *)(slotByteOffset + attribArrayBase + 0x350) = newBufferObject;
+    *(undefined4 *)(clientState + 0x350) = savedWord350;
+    *(uint *)(clientState + 0x354) = savedWord354 | 0x10;
   }
-  if (iVar13 != 0) {
-    pointer = pointer + *(int *)(iVar13 + 0x30);
+  if (newBufferObject != 0) {
+    pointer = pointer + *(int *)(newBufferObject + 0x30);
   }
-  *(int *)(iVar1 + glContext + 0x48f8) = pointer;
-  if (*(uint *)(iVar5 + 0x34) == uVar11) {
+  *(int *)(slotByteOffset + glContext + 0x48f8) = pointer;
+  if (*(uint *)(attribRecord + 0x34) == packedFormat) {
     return;
   }
   switch(type) {
@@ -1537,26 +1540,26 @@ LAB_000a49a4:
 LAB_000a4974:
     normalized = 0;
   }
-  *(char *)(iVar5 + 0x2c) = (char)iVar9;
-  uVar3 = (ushort)type;
+  *(char *)(attribRecord + 0x2c) = (char)iVar9;
+  typeFlags = (ushort)type;
   if (normalized != 0) {
-    uVar3 = uVar3 | 0x8000;
+    typeFlags = typeFlags | 0x8000;
   }
-  *(ushort *)(iVar5 + 0x28) = uVar3;
-  *(short *)(iVar5 + 0x2a) = (short)size;
+  *(ushort *)(attribRecord + 0x28) = typeFlags;
+  *(short *)(attribRecord + 0x2a) = (short)size;
   if (stride < 1) {
     stride = size * iVar9;
   }
-  *(uint *)(iVar5 + 0x34) = uVar11;
-  *(int *)(iVar5 + 0x24) = stride;
+  *(uint *)(attribRecord + 0x34) = packedFormat;
+  *(int *)(attribRecord + 0x24) = stride;
   *(undefined4 *)(glContext + 0x488c) = 0;
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
   *(undefined4 *)(glContext + 0x4890) = 0;
   *(undefined4 *)(glContext + 0x4894) = 0;
   if (*(int *)(glContext + 0x5408) == 0) {
-    uVar11 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
+    selectMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
     *(undefined **)
-     ((*(uint *)(glContext + 0x4680) & uVar11 | *(uint *)(glContext + 0x4684) & ~uVar11) + 0xc) =
+     ((*(uint *)(glContext + 0x4680) & selectMask | *(uint *)(glContext + 0x4684) & ~selectMask) + 0xc) =
          PTR__glArrayElement_Exec_00110454;
   }
   return;
@@ -1643,28 +1646,28 @@ void _glInterleavedArrays_Exec(glContext, format, stride, pointer)
   int stride;
   int pointer;
 {
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
-  int iVar4;
-  undefined4 uVar5;
-  int iVar6;
-  int iVar7;
-  undefined4 uVar8;
+  bool hasTexCoord;
+  bool hasColor;
+  bool hasNormal;
+  int vertexStride;
+  undefined4 vertexSize;
+  int normalOffset;
+  int colorOffset;
+  undefined4 texCoordSize;
   undefined4 glErrorCode;
-  undefined4 uVar9;
-  undefined4 uVar10;
-  int iVar11;
+  undefined4 colorSize;
+  undefined4 colorType;
+  int vertexOffset;
   
-  bVar1 = false;
-  bVar2 = false;
-  bVar3 = false;
-  uVar10 = 0x1406;
-  uVar8 = 0;
-  uVar9 = 0;
-  iVar7 = 0;
-  iVar6 = 0;
-  iVar11 = 0;
+  hasTexCoord = false;
+  hasColor = false;
+  hasNormal = false;
+  colorType = 0x1406;
+  texCoordSize = 0;
+  colorSize = 0;
+  colorOffset = 0;
+  normalOffset = 0;
+  vertexOffset = 0;
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -1676,134 +1679,134 @@ LAB_000a4f70:
   }
   switch(format) {
   case 0x2a20:
-    iVar4 = _gleTypeSize(glContext,0x1406);
-    iVar4 = iVar4 << 1;
+    vertexStride = _gleTypeSize(glContext,0x1406);
+    vertexStride = vertexStride << 1;
     break;
   case 0x2a21:
-    iVar4 = _gleTypeSize(glContext,0x1406);
-    iVar4 = iVar4 * 3;
+    vertexStride = _gleTypeSize(glContext,0x1406);
+    vertexStride = vertexStride * 3;
     goto LAB_000a4ef0;
   case 0x2a22:
-    bVar2 = true;
-    iVar11 = _gleTypeSize(glContext,0x1401);
-    iVar11 = iVar11 * 4;
-    iVar4 = _gleTypeSize(glContext,0x1406);
-    uVar9 = 4;
-    uVar10 = 0x1401;
-    iVar4 = iVar11 + iVar4 * 2;
+    hasColor = true;
+    vertexOffset = _gleTypeSize(glContext,0x1401);
+    vertexOffset = vertexOffset * 4;
+    vertexStride = _gleTypeSize(glContext,0x1406);
+    colorSize = 4;
+    colorType = 0x1401;
+    vertexStride = vertexOffset + vertexStride * 2;
     break;
   case 0x2a23:
-    iVar11 = _gleTypeSize(glContext,0x1401);
-    iVar11 = iVar11 << 2;
-    iVar4 = _gleTypeSize(glContext,0x1406);
+    vertexOffset = _gleTypeSize(glContext,0x1401);
+    vertexOffset = vertexOffset << 2;
+    vertexStride = _gleTypeSize(glContext,0x1406);
     goto LAB_000a4df4;
   case 0x2a24:
-    iVar11 = _gleTypeSize(glContext,0x1406);
-    iVar11 = iVar11 * 3;
+    vertexOffset = _gleTypeSize(glContext,0x1406);
+    vertexOffset = vertexOffset * 3;
     goto LAB_000a4e38;
   case 0x2a25:
-    bVar3 = true;
-    iVar11 = _gleTypeSize(glContext,0x1406);
-    iVar11 = iVar11 * 3;
-    iVar4 = _gleTypeSize(glContext,0x1406);
+    hasNormal = true;
+    vertexOffset = _gleTypeSize(glContext,0x1406);
+    vertexOffset = vertexOffset * 3;
+    vertexStride = _gleTypeSize(glContext,0x1406);
     goto LAB_000a4d80;
   case 0x2a26:
-    iVar6 = _gleTypeSize(glContext,0x1406);
-    iVar6 = iVar6 * 4;
-    iVar11 = _gleTypeSize(glContext,0x1406);
-    iVar11 = iVar6 + iVar11 * 3;
-    iVar4 = _gleTypeSize(glContext,0x1406);
+    normalOffset = _gleTypeSize(glContext,0x1406);
+    normalOffset = normalOffset * 4;
+    vertexOffset = _gleTypeSize(glContext,0x1406);
+    vertexOffset = normalOffset + vertexOffset * 3;
+    vertexStride = _gleTypeSize(glContext,0x1406);
     goto LAB_000a4ee0;
   case 0x2a27:
-    bVar1 = true;
-    iVar11 = _gleTypeSize(glContext,0x1406);
-    iVar11 = iVar11 << 1;
-    iVar4 = _gleTypeSize(glContext,0x1406);
-    uVar8 = 2;
+    hasTexCoord = true;
+    vertexOffset = _gleTypeSize(glContext,0x1406);
+    vertexOffset = vertexOffset << 1;
+    vertexStride = _gleTypeSize(glContext,0x1406);
+    texCoordSize = 2;
 LAB_000a4d80:
-    iVar4 = iVar11 + iVar4 * 3;
+    vertexStride = vertexOffset + vertexStride * 3;
     goto LAB_000a4ef0;
   case 0x2a28:
-    iVar11 = _gleTypeSize(glContext,0x1406);
-    iVar11 = iVar11 * 4;
-    iVar4 = _gleTypeSize(glContext,0x1406);
-    iVar4 = iVar11 + iVar4 * 4;
+    vertexOffset = _gleTypeSize(glContext,0x1406);
+    vertexOffset = vertexOffset * 4;
+    vertexStride = _gleTypeSize(glContext,0x1406);
+    vertexStride = vertexOffset + vertexStride * 4;
     goto LAB_000a4f58;
   case 0x2a29:
-    bVar1 = true;
-    iVar7 = _gleTypeSize(glContext,0x1406);
-    iVar7 = iVar7 * 2;
-    iVar11 = _gleTypeSize(glContext,0x1401);
-    iVar11 = iVar7 + iVar11 * 4;
-    iVar4 = _gleTypeSize(glContext,0x1406);
-    uVar8 = 2;
+    hasTexCoord = true;
+    colorOffset = _gleTypeSize(glContext,0x1406);
+    colorOffset = colorOffset * 2;
+    vertexOffset = _gleTypeSize(glContext,0x1401);
+    vertexOffset = colorOffset + vertexOffset * 4;
+    vertexStride = _gleTypeSize(glContext,0x1406);
+    texCoordSize = 2;
 LAB_000a4df4:
-    bVar2 = true;
-    iVar4 = iVar11 + iVar4 * 3;
-    uVar9 = 4;
-    uVar10 = 0x1401;
+    hasColor = true;
+    vertexStride = vertexOffset + vertexStride * 3;
+    colorSize = 4;
+    colorType = 0x1401;
 LAB_000a4ef0:
-    uVar5 = 3;
+    vertexSize = 3;
     goto LAB_000a4f78;
   case 0x2a2a:
-    bVar1 = true;
-    iVar7 = _gleTypeSize(glContext,0x1406);
-    iVar7 = iVar7 * 2;
-    iVar11 = _gleTypeSize(glContext,0x1406);
-    uVar8 = 2;
-    iVar11 = iVar7 + iVar11 * 3;
+    hasTexCoord = true;
+    colorOffset = _gleTypeSize(glContext,0x1406);
+    colorOffset = colorOffset * 2;
+    vertexOffset = _gleTypeSize(glContext,0x1406);
+    texCoordSize = 2;
+    vertexOffset = colorOffset + vertexOffset * 3;
 LAB_000a4e38:
-    bVar2 = true;
-    iVar4 = _gleTypeSize(glContext,0x1406);
-    iVar4 = iVar11 + iVar4 * 3;
-    uVar9 = 3;
-    uVar10 = 0x1406;
+    hasColor = true;
+    vertexStride = _gleTypeSize(glContext,0x1406);
+    vertexStride = vertexOffset + vertexStride * 3;
+    colorSize = 3;
+    colorType = 0x1406;
     goto LAB_000a4ef0;
   case 0x2a2b:
-    bVar1 = true;
-    iVar6 = _gleTypeSize(glContext,0x1406);
-    iVar6 = iVar6 * 2;
-    iVar11 = _gleTypeSize(glContext,0x1406);
-    uVar8 = 2;
-    iVar11 = iVar6 + iVar11 * 3;
-    iVar4 = _gleTypeSize(glContext,0x1406);
-    iVar4 = iVar11 + iVar4 * 3;
+    hasTexCoord = true;
+    normalOffset = _gleTypeSize(glContext,0x1406);
+    normalOffset = normalOffset * 2;
+    vertexOffset = _gleTypeSize(glContext,0x1406);
+    texCoordSize = 2;
+    vertexOffset = normalOffset + vertexOffset * 3;
+    vertexStride = _gleTypeSize(glContext,0x1406);
+    vertexStride = vertexOffset + vertexStride * 3;
     goto LAB_000a4eec;
   case 0x2a2c:
-    bVar1 = true;
-    iVar7 = _gleTypeSize(glContext,0x1406);
-    iVar7 = iVar7 * 2;
-    iVar6 = _gleTypeSize(glContext,0x1406);
-    iVar6 = iVar7 + iVar6 * 4;
-    iVar11 = _gleTypeSize(glContext,0x1406);
-    uVar8 = 2;
-    iVar11 = iVar6 + iVar11 * 3;
-    iVar4 = _gleTypeSize(glContext,0x1406);
+    hasTexCoord = true;
+    colorOffset = _gleTypeSize(glContext,0x1406);
+    colorOffset = colorOffset * 2;
+    normalOffset = _gleTypeSize(glContext,0x1406);
+    normalOffset = colorOffset + normalOffset * 4;
+    vertexOffset = _gleTypeSize(glContext,0x1406);
+    texCoordSize = 2;
+    vertexOffset = normalOffset + vertexOffset * 3;
+    vertexStride = _gleTypeSize(glContext,0x1406);
 LAB_000a4ee0:
-    bVar2 = true;
-    iVar4 = iVar11 + iVar4 * 3;
-    uVar9 = 4;
+    hasColor = true;
+    vertexStride = vertexOffset + vertexStride * 3;
+    colorSize = 4;
 LAB_000a4eec:
-    uVar10 = 0x1406;
-    bVar3 = true;
+    colorType = 0x1406;
+    hasNormal = true;
     goto LAB_000a4ef0;
   case 0x2a2d:
-    iVar7 = _gleTypeSize(glContext,0x1406);
-    iVar7 = iVar7 * 4;
-    iVar6 = _gleTypeSize(glContext,0x1406);
-    iVar6 = iVar7 + iVar6 * 4;
-    iVar11 = _gleTypeSize(glContext,0x1406);
-    iVar11 = iVar6 + iVar11 * 3;
-    iVar4 = _gleTypeSize(glContext,0x1406);
-    bVar2 = true;
-    iVar4 = iVar11 + iVar4 * 4;
-    uVar9 = 4;
-    bVar3 = true;
+    colorOffset = _gleTypeSize(glContext,0x1406);
+    colorOffset = colorOffset * 4;
+    normalOffset = _gleTypeSize(glContext,0x1406);
+    normalOffset = colorOffset + normalOffset * 4;
+    vertexOffset = _gleTypeSize(glContext,0x1406);
+    vertexOffset = normalOffset + vertexOffset * 3;
+    vertexStride = _gleTypeSize(glContext,0x1406);
+    hasColor = true;
+    vertexStride = vertexOffset + vertexStride * 4;
+    colorSize = 4;
+    hasNormal = true;
 LAB_000a4f58:
-    uVar10 = 0x1406;
-    uVar8 = 4;
-    bVar1 = true;
-    uVar5 = 4;
+    colorType = 0x1406;
+    texCoordSize = 4;
+    hasTexCoord = true;
+    vertexSize = 4;
     goto LAB_000a4f78;
   default:
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1812,36 +1815,36 @@ LAB_000a4f58:
     glErrorCode = 0x500;
     goto LAB_000a4f70;
   }
-  uVar5 = 2;
+  vertexSize = 2;
 LAB_000a4f78:
   if (stride == 0) {
-    stride = iVar4;
+    stride = vertexStride;
   }
   _glDisableClientState_Exec(glContext,0x8079);
   _glDisableClientState_Exec(glContext,0x8077);
-  if (bVar1) {
+  if (hasTexCoord) {
     _glEnableClientState_Exec(glContext,0x8078);
-    _glTexCoordPointer_Exec(glContext,uVar8,0x1406,stride,pointer);
+    _glTexCoordPointer_Exec(glContext,texCoordSize,0x1406,stride,pointer);
   }
   else {
     _glDisableClientState_Exec(glContext,0x8078);
   }
-  if (bVar2) {
+  if (hasColor) {
     _glEnableClientState_Exec(glContext,0x8076);
-    _glColorPointer_Exec(glContext,uVar9,uVar10,stride,pointer + iVar7);
+    _glColorPointer_Exec(glContext,colorSize,colorType,stride,pointer + colorOffset);
   }
   else {
     _glDisableClientState_Exec(glContext,0x8076);
   }
-  if (bVar3) {
+  if (hasNormal) {
     _glEnableClientState_Exec(glContext,0x8075);
-    ((void (*)())_glNormalPointer_Exec)(glContext,0x1406,stride,pointer + iVar6);
+    ((void (*)())_glNormalPointer_Exec)(glContext,0x1406,stride,pointer + normalOffset);
   }
   else {
     _glDisableClientState_Exec(glContext,0x8075);
   }
   _glEnableClientState_Exec(glContext,0x8074);
-  _glVertexPointer_Exec(glContext,uVar5,0x1406,stride,pointer + iVar11);
+  _glVertexPointer_Exec(glContext,vertexSize,0x1406,stride,pointer + vertexOffset);
   return;
 }
 

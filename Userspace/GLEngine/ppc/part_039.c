@@ -388,112 +388,112 @@ void _gleDecomposePrimitiveVertices(param_1, param_2, param_3, param_4, param_5,
 }
 
 /* _gleVPSetFuncOutputDesc @ 0xb49f0 (548 bytes) */
-void _gleVPSetFuncOutputDesc(param_1, param_2, param_3, param_4)
-  int param_1;
-  uint param_2;
-  uint *param_3;
-  int param_4;
+void _gleVPSetFuncOutputDesc(outputRecords, outputCount, funcDesc, extraOutput)
+  int outputRecords;
+  uint outputCount;
+  uint *funcDesc;
+  int extraOutput;
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
-  uint uVar5;
-  int iVar6;
+  uint descHeaderThenOutputRecord;
+  int streamWordIndex;
+  uint streamCount;
+  int trailingIndex;
+  uint recordKindThenRecordBit0;
+  int recordIndexThenLeadingIndex;
   int loopIndex;
-  int iVar8;
-  int iVar9;
+  int streamType;
+  int leadingIndexNext;
   
-  uVar1 = (param_2 & 0x3f) << 10 | 0x200000;
-  *param_3 = uVar1;
-  uVar3 = param_2;
-  if (param_4 != 0) {
-    uVar3 = param_2 + 1;
+  descHeaderThenOutputRecord = (outputCount & 0x3f) << 10 | 0x200000;
+  *funcDesc = descHeaderThenOutputRecord;
+  streamCount = outputCount;
+  if (extraOutput != 0) {
+    streamCount = outputCount + 1;
   }
-  iVar6 = 0;
-  *param_3 = uVar1 | uVar3 << 0x18;
-  iVar4 = 0;
-  uVar1 = param_2;
-  if (0 < (int)param_2) {
+  recordIndexThenLeadingIndex = 0;
+  *funcDesc = descHeaderThenOutputRecord | streamCount << 0x18;
+  trailingIndex = 0;
+  descHeaderThenOutputRecord = outputCount;
+  if (0 < (int)outputCount) {
     do {
-      uVar5 = *(uint *)(iVar6 * 8 + param_1);
-      if (((uVar5 >> 0x10 & 0xf) == 1) || ((uVar5 & 0xf001f) == 0x90000)) {
-        iVar4 = iVar4 + 1;
+      recordKindThenRecordBit0 = *(uint *)(recordIndexThenLeadingIndex * 8 + outputRecords);
+      if (((recordKindThenRecordBit0 >> 0x10 & 0xf) == 1) || ((recordKindThenRecordBit0 & 0xf001f) == 0x90000)) {
+        trailingIndex = trailingIndex + 1;
       }
-      iVar6 = iVar6 + 1;
-      uVar1 = uVar1 - 1;
-    } while (uVar1 != 0);
+      recordIndexThenLeadingIndex = recordIndexThenLeadingIndex + 1;
+      descHeaderThenOutputRecord = descHeaderThenOutputRecord - 1;
+    } while (descHeaderThenOutputRecord != 0);
   }
   loopIndex = 0;
-  iVar6 = 0;
-  if (0 < (int)param_2) {
+  recordIndexThenLeadingIndex = 0;
+  if (0 < (int)outputCount) {
     do {
-      uVar1 = *(uint *)(loopIndex * 8 + param_1);
-      switch(uVar1 >> 0x10 & 0xf) {
+      descHeaderThenOutputRecord = *(uint *)(loopIndex * 8 + outputRecords);
+      switch(descHeaderThenOutputRecord >> 0x10 & 0xf) {
       default:
-        iVar8 = 0x2e;
+        streamType = 0x2e;
         break;
       case 1:
-        iVar8 = 0;
+        streamType = 0;
 LAB_000b4b78:
-        iVar9 = iVar6 + 1;
-        iVar2 = iVar6;
+        leadingIndexNext = recordIndexThenLeadingIndex + 1;
+        streamWordIndex = recordIndexThenLeadingIndex;
         goto LAB_000b4c00;
       case 2:
-        iVar8 = 2;
+        streamType = 2;
         break;
       case 3:
-        iVar8 = 4;
+        streamType = 4;
         break;
       case 4:
-        iVar8 = 1;
+        streamType = 1;
         break;
       case 5:
-        iVar8 = 3;
+        streamType = 3;
         break;
       case 6:
-        iVar8 = 5;
+        streamType = 5;
         break;
       case 7:
-        iVar8 = (uVar1 & 0x1f) + 8;
+        streamType = (descHeaderThenOutputRecord & 0x1f) + 8;
         break;
       case 9:
-        iVar8 = (uVar1 & 0x1f) + 0x10;
-        if ((uVar1 & 0x1f) == 0) goto LAB_000b4b78;
+        streamType = (descHeaderThenOutputRecord & 0x1f) + 0x10;
+        if ((descHeaderThenOutputRecord & 0x1f) == 0) goto LAB_000b4b78;
         break;
       case 10:
-        iVar8 = 0x2e;
-        uVar5 = uVar1 & 1;
-        switch(uVar1 >> 0xc & 0xf) {
+        streamType = 0x2e;
+        recordKindThenRecordBit0 = descHeaderThenOutputRecord & 1;
+        switch(descHeaderThenOutputRecord >> 0xc & 0xf) {
         case 0:
-          iVar8 = uVar5 + 0x20;
+          streamType = recordKindThenRecordBit0 + 0x20;
           break;
         case 1:
-          iVar8 = uVar5 + 0x22;
+          streamType = recordKindThenRecordBit0 + 0x22;
           break;
         case 2:
-          iVar8 = uVar5 + 0x24;
+          streamType = recordKindThenRecordBit0 + 0x24;
           break;
         case 3:
-          iVar8 = uVar5 + 0x26;
+          streamType = recordKindThenRecordBit0 + 0x26;
           break;
         case 4:
-          iVar8 = uVar5 + 0x28;
+          streamType = recordKindThenRecordBit0 + 0x28;
         }
       }
-      iVar2 = iVar4;
-      iVar4 = iVar4 + 1;
-      iVar9 = iVar6;
+      streamWordIndex = trailingIndex;
+      trailingIndex = trailingIndex + 1;
+      leadingIndexNext = recordIndexThenLeadingIndex;
 LAB_000b4c00:
-      iVar6 = loopIndex << 4;
+      recordIndexThenLeadingIndex = loopIndex << 4;
       loopIndex = loopIndex + 1;
-      *(ushort *)((int)param_3 + iVar2 * 2 + 4) =
-           (ushort)(iVar8 << 10) | (ushort)(iVar6 >> 2) | 0x300;
-      iVar6 = iVar9;
-    } while (loopIndex < (int)param_2);
+      *(ushort *)((int)funcDesc + streamWordIndex * 2 + 4) =
+           (ushort)(streamType << 10) | (ushort)(recordIndexThenLeadingIndex >> 2) | 0x300;
+      recordIndexThenLeadingIndex = leadingIndexNext;
+    } while (loopIndex < (int)outputCount);
   }
-  if ((int)param_2 < (int)uVar3) {
-    *(ushort *)((int)param_3 + iVar4 * 2 + 4) = (ushort)((loopIndex << 4) >> 2) | 0x1b00;
+  if ((int)outputCount < (int)streamCount) {
+    *(ushort *)((int)funcDesc + trailingIndex * 2 + 4) = (ushort)((loopIndex << 4) >> 2) | 0x1b00;
   }
   return;
 }
@@ -532,96 +532,98 @@ int _glePPSetFuncNeeds(param_1, param_2)
 }
 
 /* _gleSetFunctionIDFromList @ 0xb4d14 (408 bytes) */
-void _gleSetFunctionIDFromList(glContext, param_2, param_3)
+void _gleSetFunctionIDFromList(glContext, streamSizes, funcDesc)
   int glContext;
-  int param_2;
-  uint *param_3;
+  int streamSizes;
+  uint *funcDesc;
 {
-  byte bVar1;
-  uint uVar2;
-  uint uVar3;
-  int iVar4;
+  byte slotSize;
+  uint streamCount;
+  uint headerWithOutputs;
+  uint streamSlot;
+  int runningSize;
   ushort *dstCursor;
   byte *srcCursor;
-  ushort uVar7;
-  int *piVar8;
-  uint uVar9;
-  int iVar10;
-  int iVar11;
+  ushort streamWord;
+  ushort slotOffset;
+  int *offsetCursor;
+  uint componentCount;
+  int arrayDefaults;
+  int streamType;
   int remaining;
-  int local_90 [31];
+  int slotOffsets [31];
   int local_14;
   
-  uVar2 = *param_3;
-  iVar10 = *(int *)(glContext + 0x4674);
-  piVar8 = local_90 + 1;
-  uVar3 = uVar2 | 0x70000;
-  *param_3 = uVar3;
-  local_90[1] = 0;
-  *param_3 = uVar3 | *(uint *)(param_2 + 8) >> 2 & 0xff;
-  uVar2 = uVar2 >> 0x18;
-  srcCursor = (byte *)(param_2 + 0xd);
+  streamCount = *funcDesc;
+  arrayDefaults = *(int *)(glContext + 0x4674);
+  offsetCursor = slotOffsets + 1;
+  headerWithOutputs = streamCount | 0x70000;
+  *funcDesc = headerWithOutputs;
+  slotOffsets[1] = 0;
+  *funcDesc = headerWithOutputs | *(uint *)(streamSizes + 8) >> 2 & 0xff;
+  streamCount = streamCount >> 0x18;
+  srcCursor = (byte *)(streamSizes + 0xd);
   remaining = 0x1e;
   do {
-    bVar1 = *srcCursor;
+    slotSize = *srcCursor;
     srcCursor = srcCursor + 1;
-    iVar4 = *piVar8;
-    piVar8 = piVar8 + 1;
-    *piVar8 = iVar4 + (uint)bVar1;
+    runningSize = *offsetCursor;
+    offsetCursor = offsetCursor + 1;
+    *offsetCursor = runningSize + (uint)slotSize;
     remaining = remaining + -1;
   } while (remaining != 0);
-  local_90[0] = local_14 + (uint)*(byte *)(param_2 + 0x2b);
-  if (uVar2 == 0) {
+  slotOffsets[0] = local_14 + (uint)*(byte *)(streamSizes + 0x2b);
+  if (streamCount == 0) {
     return;
   }
-  dstCursor = (ushort *)((int)param_3 + uVar2 * 2 + 4);
+  dstCursor = (ushort *)((int)funcDesc + streamCount * 2 + 4);
   do {
-    uVar7 = *(ushort *)(param_3 + 1);
-    iVar11 = 0xe;
-    uVar3 = (uint)(uVar7 >> 10);
-    if ((uVar3 == 0) || (uVar3 == 0x10)) {
-      uVar9 = (uint)*(byte *)(param_2 + uVar3 + 0xc);
-      if (uVar9 == 0) {
-        if (*(byte *)(param_2 + 0xc) == 0) {
-          if (*(byte *)(param_2 + 0x1c) == 0) goto LAB_000b4e5c;
-          uVar9 = (int)(uint)*(byte *)(param_2 + 0x1c) >> 2;
-          uVar3 = 0x10;
-          *(ushort *)(param_3 + 1) = uVar7 & 0x3ff | 0x4000;
+    streamWord = *(ushort *)(funcDesc + 1);
+    streamType = 0xe;
+    streamSlot = (uint)(streamWord >> 10);
+    if ((streamSlot == 0) || (streamSlot == 0x10)) {
+      componentCount = (uint)*(byte *)(streamSizes + streamSlot + 0xc);
+      if (componentCount == 0) {
+        if (*(byte *)(streamSizes + 0xc) == 0) {
+          if (*(byte *)(streamSizes + 0x1c) == 0) goto LAB_000b4e5c;
+          componentCount = (int)(uint)*(byte *)(streamSizes + 0x1c) >> 2;
+          streamSlot = 0x10;
+          *(ushort *)(funcDesc + 1) = streamWord & 0x3ff | 0x4000;
         }
         else {
-          uVar9 = (int)(uint)*(byte *)(param_2 + 0xc) >> 2;
-          *(ushort *)(param_3 + 1) = uVar7 & 0x3ff;
-          uVar3 = 0;
+          componentCount = (int)(uint)*(byte *)(streamSizes + 0xc) >> 2;
+          *(ushort *)(funcDesc + 1) = streamWord & 0x3ff;
+          streamSlot = 0;
         }
       }
       else {
-        uVar9 = (int)uVar9 >> 2;
+        componentCount = (int)componentCount >> 2;
       }
-      iVar11 = 6;
+      streamType = 6;
 LAB_000b4e60:
-      uVar7 = (ushort)local_90[uVar3];
+      slotOffset = (ushort)slotOffsets[streamSlot];
     }
     else {
-      if (((uVar3 - 1 < 6) || (uVar3 - 8 < 8)) || (uVar3 - 0x11 < 0xf)) {
-        uVar9 = (uint)*(byte *)(param_2 + uVar3 + 0xc);
-        if (uVar9 == 0) {
+      if (((streamSlot - 1 < 6) || (streamSlot - 8 < 8)) || (streamSlot - 0x11 < 0xf)) {
+        componentCount = (uint)*(byte *)(streamSizes + streamSlot + 0xc);
+        if (componentCount == 0) {
 LAB_000b4e5c:
-          uVar9 = (uint)*(byte *)(iVar10 + 0x400 + uVar3);
+          componentCount = (uint)*(byte *)(arrayDefaults + 0x400 + streamSlot);
         }
         else {
-          uVar9 = (int)uVar9 >> 2;
-          iVar11 = 5 - ((int)-(uVar3 ^ 6) >> 0x1f);
+          componentCount = (int)componentCount >> 2;
+          streamType = 5 - ((int)-(streamSlot ^ 6) >> 0x1f);
         }
         goto LAB_000b4e60;
       }
-      uVar9 = (uint)(7 < uVar3 - 0x20);
-      uVar7 = 0;
+      componentCount = (uint)(7 < streamSlot - 0x20);
+      slotOffset = 0;
     }
-    param_3 = (uint *)((int)param_3 + 2);
-    *dstCursor = (short)(uVar9 - 1) * 0x4000 | (ushort)(iVar11 << 10) | uVar7;
+    funcDesc = (uint *)((int)funcDesc + 2);
+    *dstCursor = (short)(componentCount - 1) * 0x4000 | (ushort)(streamType << 10) | slotOffset;
     dstCursor = dstCursor + 1;
-    uVar2 = uVar2 - 1;
-    if (uVar2 == 0) {
+    streamCount = streamCount - 1;
+    if (streamCount == 0) {
       return;
     }
   } while( true );

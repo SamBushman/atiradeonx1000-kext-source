@@ -1,0 +1,43 @@
+local	_glTexSubImage2D_ListExec	iVar1	faceMaskOffset	INFERRED	faceIndex * 2: byte offset of the face's 16-bit level mask words (+0x94 valid levels, +0xa0 allocated levels)
+local	_glTexSubImage2D_ListExec	iVar2	pixelDataSize	INFERRED	listRecord[8]: size of the pixel data stored after the 9-word record header (the function returns pixelDataSize + 0x24, the record length in bytes)
+local	_glTexSubImage2D_ListExec	uVar3	faceIndex	INFERRED	target (listRecord[0]) - 0x8515 (cube map face index, 0 for non-cube targets)
+use	_glTexSubImage2D_ListExec	iVar4	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + mipLevel * 0x18: record of the updated mipmap level	^\s*iVar4\ =\ iVar5\ \+\ uVar3\ \*\ 0x168\ \+\ uVar8\ \*\ 0x18;$	+2
+use	_glTexSubImage2D_ListExec	iVar4	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + mipLevel * 0x18: record of the updated mipmap level	^\s*bVar7\ =\ \*\(byte\ \*\)\(iVar4\ \+\ 0xcf\);$	+1
+use	_glTexSubImage2D_ListExec	iVar4	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + mipLevel * 0x18: record of the updated mipmap level	^\s*if\ \(\*\(int\ \*\)\(iVar4\ \+\ 0xd8\)\ ==\ 0\)\ \{$	+1
+use	_glTexSubImage2D_ListExec	iVar4	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + mipLevel * 0x18: record of the updated mipmap level	^\s*bVar7\ =\ \*\(byte\ \*\)\(iVar4\ \+\ 0xcf\);$@2	+1
+use	_glTexSubImage2D_ListExec	iVar4	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + mipLevel * 0x18: record of the updated mipmap level	^\s*\*\(byte\ \*\)\(iVar4\ \+\ 0xcf\)\ =\ bVar7\ \|\ 0x10;$	+1
+use	_glTexSubImage2D_ListExec	iVar4	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + mipLevel * 0x18: record of the updated mipmap level	^\s*_gleTextureImagePut\(param_1,iVar9,param_2\[2\]\ \+\ \(uint\)\*\(byte\ \*\)\(iVar4\ \+\ 0xce\),$	+3
+use	_glTexSubImage2D_ListExec	iVar4	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + mipLevel * 0x18: record of the updated mipmap level	^\s*if\ \(\*\(int\ \*\)\(iVar4\ \+\ 0xd8\)\ !=\ 0\)\ \{$	+2
+use	_glTexSubImage2D_ListExec	iVar4	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + mipLevel * 0x18: record of the updated mipmap level	^\s*bVar7\ =\ \*\(byte\ \*\)\(iVar4\ \+\ 0xcf\);$@4	+1
+use	_glTexSubImage2D_ListExec	iVar4	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + mipLevel * 0x18: record of the updated mipmap level	^\s*\*\(byte\ \*\)\(iVar4\ \+\ 0xcf\)\ =\ bVar7\ \&\ 0xef;$	+1
+use	_glTexSubImage2D_ListExec	iVar4	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + mipLevel * 0x18: record of the updated mipmap level	^\s*\*\(byte\ \*\)\(iVar4\ \+\ 0xcf\)\ =\ \*\(byte\ \*\)\(iVar4\ \+\ 0xcf\)\ \|\ 0x40;$	+1
+use	_glTexSubImage2D_ListExec	iVar4	levelImageCursor	INFERRED	pointer to the level image of the next mipmap level, advanced by 0x18 per level	^\s*iVar4\ =\ uVar8\ \*\ 0x18\ \+\ uVar3\ \*\ 0x168\ \+\ iVar5\ \+\ 0xc4;$	+1
+use	_glTexSubImage2D_ListExec	iVar4	levelImageCursor	INFERRED	pointer to the level image of the next mipmap level, advanced by 0x18 per level	^\s*if\ \(\*\(int\ \*\)\(iVar4\ \+\ 0x14\)\ !=\ 0\)\ \{$	+3
+use	_glTexSubImage2D_ListExec	iVar4	levelImageCursor	INFERRED	pointer to the level image of the next mipmap level, advanced by 0x18 per level	^\s*\*\(byte\ \*\)\(iVar4\ \+\ 0xb\)\ =\ \*\(byte\ \*\)\(iVar4\ \+\ 0xb\)\ \&\ 0xef;$	+1
+use	_glTexSubImage2D_ListExec	iVar4	levelImageCursor	INFERRED	pointer to the level image of the next mipmap level, advanced by 0x18 per level	^\s*\*\(byte\ \*\)\(iVar4\ \+\ 0xb\)\ =\ \*\(byte\ \*\)\(iVar4\ \+\ 0xb\)\ \|\ 0x40;$	+2
+local	_glTexSubImage2D_ListExec	iVar5	textureObject	INFERRED	non-NULL result of _gleCheckTexSubImage2DArgs; the texture object whose level array, masks and flags are updated
+local	_glTexSubImage2D_ListExec	iVar6	pluginResult	INFERRED	result of the plugin callback ctx+0x4710 (texture, face, level, offsets, width), nonzero when the plugin handled the update
+local	_glTexSubImage2D_ListExec	bVar7	levelFlags	INFERRED	byte at levelRecord+0xcf (bit 0 / 0x10 / 0x40 flags tested and updated around the level storage)
+local	_glTexSubImage2D_ListExec	uVar8	mipLevel	CONFIRMED	listRecord[1] (level argument); after the update it is incremented to walk the remaining mipmap levels
+local	_glTexSubImage2D_ListExec	iVar9	textureLevel	INFERRED	levelRecord + 0xc4: level image passed to the texture level allocate/upload/modify/put functions
+local	_glTexSubImage3D_ListExec	uVar1	levelBorder	INFERRED	byte at levelRecord+0xce added to xoffset/yoffset/zoffset for _gleTextureImagePut (border width of the level)
+local	_glTexSubImage3D_ListExec	iVar2	pixelDataSize	INFERRED	listRecord[10]: size of the pixel data stored after the 11-word record header (the function returns pixelDataSize + 0x2c, the record length in bytes)
+use	_glTexSubImage3D_ListExec	iVar3	levelRecord	INFERRED	textureObject + mipLevel * 0x18: record of the updated mipmap level	^\s*iVar3\ =\ iVar4\ \+\ uVar7\ \*\ 0x18;$	+2
+use	_glTexSubImage3D_ListExec	iVar3	levelRecord	INFERRED	textureObject + mipLevel * 0x18: record of the updated mipmap level	^\s*bVar6\ =\ \*\(byte\ \*\)\(iVar3\ \+\ 0xcf\);$	+1
+use	_glTexSubImage3D_ListExec	iVar3	levelRecord	INFERRED	textureObject + mipLevel * 0x18: record of the updated mipmap level	^\s*if\ \(\*\(int\ \*\)\(iVar3\ \+\ 0xd8\)\ ==\ 0\)\ \{$	+1
+use	_glTexSubImage3D_ListExec	iVar3	levelRecord	INFERRED	textureObject + mipLevel * 0x18: record of the updated mipmap level	^\s*bVar6\ =\ \*\(byte\ \*\)\(iVar3\ \+\ 0xcf\);$@2	+1
+use	_glTexSubImage3D_ListExec	iVar3	levelRecord	INFERRED	textureObject + mipLevel * 0x18: record of the updated mipmap level	^\s*\*\(byte\ \*\)\(iVar3\ \+\ 0xcf\)\ =\ bVar6\ \|\ 0x10;$	+1
+use	_glTexSubImage3D_ListExec	iVar3	levelRecord	INFERRED	textureObject + mipLevel * 0x18: record of the updated mipmap level	^\s*uVar1\ =\ \(uint\)\*\(byte\ \*\)\(iVar3\ \+\ 0xce\);$	+1
+use	_glTexSubImage3D_ListExec	iVar3	levelRecord	INFERRED	textureObject + mipLevel * 0x18: record of the updated mipmap level	^\s*if\ \(\*\(int\ \*\)\(iVar3\ \+\ 0xd8\)\ !=\ 0\)\ \{$	+2
+use	_glTexSubImage3D_ListExec	iVar3	levelRecord	INFERRED	textureObject + mipLevel * 0x18: record of the updated mipmap level	^\s*bVar6\ =\ \*\(byte\ \*\)\(iVar3\ \+\ 0xcf\);$@4	+1
+use	_glTexSubImage3D_ListExec	iVar3	levelRecord	INFERRED	textureObject + mipLevel * 0x18: record of the updated mipmap level	^\s*\*\(byte\ \*\)\(iVar3\ \+\ 0xcf\)\ =\ bVar6\ \&\ 0xef;$	+1
+use	_glTexSubImage3D_ListExec	iVar3	levelRecord	INFERRED	textureObject + mipLevel * 0x18: record of the updated mipmap level	^\s*\*\(byte\ \*\)\(iVar3\ \+\ 0xcf\)\ =\ \*\(byte\ \*\)\(iVar3\ \+\ 0xcf\)\ \|\ 0x40;$	+1
+use	_glTexSubImage3D_ListExec	iVar3	levelImageCursor	INFERRED	pointer to the level image of the next mipmap level, advanced by 0x18 per level	^\s*iVar3\ =\ uVar7\ \*\ 0x18\ \+\ iVar4\ \+\ 0xc4;$	+1
+use	_glTexSubImage3D_ListExec	iVar3	levelImageCursor	INFERRED	pointer to the level image of the next mipmap level, advanced by 0x18 per level	^\s*if\ \(\*\(int\ \*\)\(iVar3\ \+\ 0x14\)\ !=\ 0\)\ \{$	+3
+use	_glTexSubImage3D_ListExec	iVar3	levelImageCursor	INFERRED	pointer to the level image of the next mipmap level, advanced by 0x18 per level	^\s*\*\(byte\ \*\)\(iVar3\ \+\ 0xb\)\ =\ \*\(byte\ \*\)\(iVar3\ \+\ 0xb\)\ \&\ 0xef;$	+1
+use	_glTexSubImage3D_ListExec	iVar3	levelImageCursor	INFERRED	pointer to the level image of the next mipmap level, advanced by 0x18 per level	^\s*\*\(byte\ \*\)\(iVar3\ \+\ 0xb\)\ =\ \*\(byte\ \*\)\(iVar3\ \+\ 0xb\)\ \|\ 0x40;$	+2
+local	_glTexSubImage3D_ListExec	iVar4	textureObject	INFERRED	non-NULL result of _gleCheckTexSubImage3DArgs; the texture object whose level array, masks and flags are updated
+local	_glTexSubImage3D_ListExec	iVar5	pluginResult	INFERRED	result of the plugin callback ctx+0x4710 (texture, level, offsets, width), nonzero when the plugin handled the update
+local	_glTexSubImage3D_ListExec	bVar6	levelFlags	INFERRED	byte at levelRecord+0xcf (bit 0 / 0x10 / 0x40 flags tested and updated around the level storage)
+local	_glTexSubImage3D_ListExec	uVar7	mipLevel	CONFIRMED	listRecord[1] (level argument); after the update it is incremented to walk the remaining mipmap levels
+local	_glTexSubImage3D_ListExec	iVar8	textureLevel	INFERRED	levelRecord + 0xc4: level image passed to the texture level allocate/upload/modify/put functions

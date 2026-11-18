@@ -1,0 +1,9 @@
+local	_glTexParameterF_Exec	iVar5	textureObject	CONFIRMED	result of _gleLookUpNonProxyTexture(glContext, target); its fields are written per pname and it is passed to _gleModifyPluginTexture
+use	_glTexParameterF_Exec	uVar6	modifyFlag	INFERRED	0, set to 1 on the paths that changed the texture object, then passed as third argument of _gleModifyPluginTexture	^\s*uVar6\ =\ 0;$	+1
+use	_glTexParameterF_Exec	uVar6	modifyFlag	INFERRED	0, set to 1 on the paths that changed the texture object, then passed as third argument of _gleModifyPluginTexture	^\s*uVar6\ =\ 1;$	+1
+use	_glTexParameterF_Exec	uVar6	modifyFlag	INFERRED	0, set to 1 on the paths that changed the texture object, then passed as third argument of _gleModifyPluginTexture	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)_gleModifyPluginTexture\)\(param_1,iVar5,uVar6\);$	+1
+local	_glTexParameterF_Exec	fVar2	borderColorComponent	CONFIRMED	params[0..3] of GL_TEXTURE_BORDER_COLOR (0x1004), clamped to [clampLow, clampHigh] and stored to textureObject+0x40..0x4c
+local	_glTexParameterF_Exec	uVar8	paramInt	CONFIRMED	*params converted to unsigned int (double magic-constant conversion), compared against the legal enum values
+local	_glTexParameterF_Exec	dVar9	paramDouble	CONFIRMED	(double)*params, the operand of the float-to-uint conversion
+local	_glTexParameterF_Exec	uVar4	legalEnum	INFERRED	candidate enum (0x812d, 0x8370, 0x8912) compared against paramInt for the wrap-mode validation
+local	_glTexParameterF_Exec	bVar1	isLegalEnum	INFERRED	result of comparing paramInt with 0x1906 / 0x8049, tested before storing

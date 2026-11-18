@@ -3897,90 +3897,93 @@ void _glePreEvaluate(undefined4 unusedArg1,int order,undefined4 unusedArg3,float
 }
 
 /* _glePreEvaluateWithDeriv @ 0xdda70 (356 bytes) */
-void _glePreEvaluateWithDeriv(undefined4 unusedArg1,int param_2,undefined4 unusedArg3,float *param_4,float *param_5,float floatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+void _glePreEvaluateWithDeriv(undefined4 unusedArg1,int order,undefined4 unusedArg3,float *coefficients,float *derivatives,float floatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double dVar1;
-  float fVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  float *pfVar7;
-  int iVar8;
-  float dVar9;
-  float dVar10;
+  double blended;
+  float oneMinusU;
+  float previousCoefficient;
+  int innerCount;
+  int nextIndex;
+  int degree;
+  int coefficientIndex;
+  int coefficientIndexA;
+  int differenceCount;
+  float *coefficientCursor;
+  int degreeCursor;
+  float oneMinusUValue;
+  float carry;
   
-  fVar2 = (FLOAT_00108e54 - floatArg1);
-  dVar9 = (double)fVar2;
-  if (param_2 == 1) {
-    *param_4 = FLOAT_00108e54;
-    *param_5 = 0.0;
+  oneMinusU = (FLOAT_00108e54 - floatArg1);
+  oneMinusUValue = (double)oneMinusU;
+  if (order == 1) {
+    *coefficients = FLOAT_00108e54;
+    *derivatives = 0.0;
     return;
   }
-  if (param_2 == 2) {
-    param_5[1] = FLOAT_00108e54;
-    *param_5 = -1.0;
-    param_4[1] = (float)floatArg1;
-    *param_4 = fVar2;
+  if (order == 2) {
+    derivatives[1] = FLOAT_00108e54;
+    *derivatives = -1.0;
+    coefficients[1] = (float)floatArg1;
+    *coefficients = oneMinusU;
     return;
   }
-  iVar5 = param_2 + -1;
-  iVar8 = 2;
-  *param_4 = fVar2;
-  param_4[1] = (float)floatArg1;
-  if (2 < iVar5) {
+  degree = order + -1;
+  degreeCursor = 2;
+  *coefficients = oneMinusU;
+  coefficients[1] = (float)floatArg1;
+  if (2 < degree) {
     do {
-      iVar4 = 1;
-      dVar10 = (double)(*param_4 * floatArg1);
-      *param_4 = (dVar9 * *param_4);
-      if (1 < iVar8) {
-        iVar3 = iVar8 + -1;
-        iVar6 = iVar4;
+      nextIndex = 1;
+      carry = (double)(*coefficients * floatArg1);
+      *coefficients = (oneMinusUValue * *coefficients);
+      if (1 < degreeCursor) {
+        innerCount = degreeCursor + -1;
+        coefficientIndexA = nextIndex;
         do {
-          iVar4 = iVar6 + 1;
-          dVar1 = (double)dVar9 * (double)param_4[iVar6] + (double)dVar10;
-          dVar10 = (double)(param_4[iVar6] * floatArg1);
-          param_4[iVar6] = (float)dVar1;
-          iVar3 = iVar3 + -1;
-          iVar6 = iVar4;
-        } while (iVar3 != 0);
+          nextIndex = coefficientIndexA + 1;
+          blended = (double)oneMinusUValue * (double)coefficients[coefficientIndexA] + (double)carry;
+          carry = (double)(coefficients[coefficientIndexA] * floatArg1);
+          coefficients[coefficientIndexA] = (float)blended;
+          innerCount = innerCount + -1;
+          coefficientIndexA = nextIndex;
+        } while (innerCount != 0);
       }
-      iVar8 = iVar8 + 1;
-      param_4[iVar4] = (float)(double)dVar10;
-    } while (iVar8 < iVar5);
+      degreeCursor = degreeCursor + 1;
+      coefficients[nextIndex] = (float)(double)carry;
+    } while (degreeCursor < degree);
   }
-  iVar6 = param_2 + -2;
-  *param_5 = -*param_4;
-  iVar4 = 1;
-  pfVar7 = param_4;
-  if (iVar5 < 2) {
-    iVar6 = 1;
+  differenceCount = order + -2;
+  *derivatives = -*coefficients;
+  nextIndex = 1;
+  coefficientCursor = coefficients;
+  if (degree < 2) {
+    differenceCount = 1;
   }
   do {
-    iVar5 = iVar4;
-    fVar2 = *pfVar7;
-    pfVar7 = pfVar7 + 1;
-    param_5[iVar5] = fVar2 - param_4[iVar5];
-    iVar6 = iVar6 + -1;
-    iVar4 = iVar5 + 1;
-  } while (iVar6 != 0);
-  iVar4 = 1;
-  param_5[iVar5 + 1] = param_4[iVar5];
-  dVar10 = (double)(*param_4 * floatArg1);
-  *param_4 = (dVar9 * *param_4);
-  if (1 < iVar8) {
-    iVar8 = iVar8 + -1;
-    iVar5 = iVar4;
+    coefficientIndex = nextIndex;
+    previousCoefficient = *coefficientCursor;
+    coefficientCursor = coefficientCursor + 1;
+    derivatives[coefficientIndex] = previousCoefficient - coefficients[coefficientIndex];
+    differenceCount = differenceCount + -1;
+    nextIndex = coefficientIndex + 1;
+  } while (differenceCount != 0);
+  nextIndex = 1;
+  derivatives[coefficientIndex + 1] = coefficients[coefficientIndex];
+  carry = (double)(*coefficients * floatArg1);
+  *coefficients = (oneMinusUValue * *coefficients);
+  if (1 < degreeCursor) {
+    degreeCursor = degreeCursor + -1;
+    coefficientIndex = nextIndex;
     do {
-      iVar4 = iVar5 + 1;
-      dVar1 = (double)dVar9 * (double)param_4[iVar5] + (double)dVar10;
-      dVar10 = (double)(param_4[iVar5] * floatArg1);
-      param_4[iVar5] = (float)dVar1;
-      iVar8 = iVar8 + -1;
-      iVar5 = iVar4;
-    } while (iVar8 != 0);
+      nextIndex = coefficientIndex + 1;
+      blended = (double)oneMinusUValue * (double)coefficients[coefficientIndex] + (double)carry;
+      carry = (double)(coefficients[coefficientIndex] * floatArg1);
+      coefficients[coefficientIndex] = (float)blended;
+      degreeCursor = degreeCursor + -1;
+      coefficientIndex = nextIndex;
+    } while (degreeCursor != 0);
   }
-  param_4[iVar4] = (float)(double)dVar10;
+  coefficients[nextIndex] = (float)(double)carry;
   return;
 }
 

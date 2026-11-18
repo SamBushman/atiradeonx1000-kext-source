@@ -5487,148 +5487,153 @@ void _gleDrawArraysSyncState(glContext, param_2)
   int loopIndex2;
   int remaining2;
   int loopIndex;
-  undefined4 *puVar1;
-  byte bVar2;
-  undefined1 uVar3;
+  undefined4 *normalZ;
+  undefined4 *secondaryColorB;
+  byte normalSize;
+  byte secondaryColorSize;
+  undefined1 edgeFlagByte;
   undefined4 glContextWord20;
   undefined4 glContextWord24;
-  undefined4 uVar6;
-  int iVar7;
+  undefined4 componentValue;
+  int attribCursor;
   byte *srcCursor;
-  uint uVar9;
-  int iVar10;
+  uint colorSize;
+  uint attribSize;
+  uint texCoordSize;
+  uint fogOrWeightSize;
+  int texCoordCursor;
   undefined4 *puVar11;
   int remaining;
   
-  bVar2 = *(byte *)(param_2 + 0xd);
+  normalSize = *(byte *)(param_2 + 0xd);
   glContextWord20 = *(undefined4 *)(glContext + 0x20);
   glContextWord24 = *(undefined4 *)(glContext + 0x24);
   puVar11 = (undefined4 *)(param_2 + 0x2c + *(int *)(param_2 + 8) * (*(int *)(param_2 + 4) + -1));
-  if (bVar2 != 0) {
+  if (normalSize != 0) {
     *(undefined4 *)(glContext + 0x2b0) = *puVar11;
     *(undefined4 *)(glContext + 0x2b4) = puVar11[1];
-    puVar1 = puVar11 + 2;
-    puVar11 = (undefined4 *)((int)puVar11 + (uint)bVar2);
-    *(undefined4 *)(glContext + 0x2b8) = *puVar1;
+    normalZ = puVar11 + 2;
+    puVar11 = (undefined4 *)((int)puVar11 + (uint)normalSize);
+    *(undefined4 *)(glContext + 0x2b8) = *normalZ;
   }
-  uVar9 = (uint)*(byte *)(param_2 + 0xe);
-  if (uVar9 != 0) {
+  colorSize = (uint)*(byte *)(param_2 + 0xe);
+  if (colorSize != 0) {
     *(undefined4 *)(glContext + 0x2a0) = *puVar11;
     *(undefined4 *)(glContext + 0x2a4) = puVar11[1];
     *(undefined4 *)(glContext + 0x2a8) = puVar11[2];
-    uVar6 = glContextWord24;
-    if (uVar9 == 0x10) {
-      uVar6 = puVar11[3];
+    componentValue = glContextWord24;
+    if (colorSize == 0x10) {
+      componentValue = puVar11[3];
     }
-    puVar11 = (undefined4 *)((int)puVar11 + uVar9);
-    *(undefined4 *)(glContext + 0x2ac) = uVar6;
+    puVar11 = (undefined4 *)((int)puVar11 + colorSize);
+    *(undefined4 *)(glContext + 0x2ac) = componentValue;
     if (*(char *)(glContext + 0x4df8) != '\0') {
       (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
     }
   }
   if (*(byte *)(param_2 + 0xf) != 0) {
-    uVar6 = *puVar11;
+    componentValue = *puVar11;
     puVar11 = (undefined4 *)((int)puVar11 + (uint)*(byte *)(param_2 + 0xf));
-    *(undefined4 *)(glContext + 0x2cc) = uVar6;
+    *(undefined4 *)(glContext + 0x2cc) = componentValue;
   }
-  bVar2 = *(byte *)(param_2 + 0x10);
-  if (bVar2 != 0) {
+  secondaryColorSize = *(byte *)(param_2 + 0x10);
+  if (secondaryColorSize != 0) {
     *(undefined4 *)(glContext + 0x2c0) = *puVar11;
     *(undefined4 *)(glContext + 0x2c4) = puVar11[1];
-    puVar1 = puVar11 + 2;
-    puVar11 = (undefined4 *)((int)puVar11 + (uint)bVar2);
-    *(undefined4 *)(glContext + 0x2c8) = *puVar1;
+    secondaryColorB = puVar11 + 2;
+    puVar11 = (undefined4 *)((int)puVar11 + (uint)secondaryColorSize);
+    *(undefined4 *)(glContext + 0x2c8) = *secondaryColorB;
   }
-  uVar9 = (uint)*(byte *)(param_2 + 0x11);
-  if (uVar9 != 0) {
+  fogOrWeightSize = (uint)*(byte *)(param_2 + 0x11);
+  if (fogOrWeightSize != 0) {
     *(undefined4 *)(glContext + 0x2d0) = *puVar11;
-    uVar6 = glContextWord20;
-    if (7 < uVar9) {
-      uVar6 = puVar11[1];
+    componentValue = glContextWord20;
+    if (7 < fogOrWeightSize) {
+      componentValue = puVar11[1];
     }
-    *(undefined4 *)(glContext + 0x2d4) = uVar6;
-    uVar6 = glContextWord20;
-    if (0xb < uVar9) {
-      uVar6 = puVar11[2];
+    *(undefined4 *)(glContext + 0x2d4) = componentValue;
+    componentValue = glContextWord20;
+    if (0xb < fogOrWeightSize) {
+      componentValue = puVar11[2];
     }
-    *(undefined4 *)(glContext + 0x2d8) = uVar6;
-    uVar6 = glContextWord20;
-    if (uVar9 == 0x10) {
-      uVar6 = puVar11[3];
+    *(undefined4 *)(glContext + 0x2d8) = componentValue;
+    componentValue = glContextWord20;
+    if (fogOrWeightSize == 0x10) {
+      componentValue = puVar11[3];
     }
-    *(undefined4 *)(glContext + 0x2dc) = uVar6;
-    puVar11 = (undefined4 *)((int)puVar11 + uVar9);
+    *(undefined4 *)(glContext + 0x2dc) = componentValue;
+    puVar11 = (undefined4 *)((int)puVar11 + fogOrWeightSize);
   }
   if (*(byte *)(param_2 + 0x12) != 0) {
-    uVar3 = *(undefined1 *)puVar11;
+    edgeFlagByte = *(undefined1 *)puVar11;
     puVar11 = (undefined4 *)((int)puVar11 + (uint)*(byte *)(param_2 + 0x12));
-    *(undefined1 *)(glContext + 0x2ec) = uVar3;
+    *(undefined1 *)(glContext + 0x2ec) = edgeFlagByte;
   }
   remaining = 8;
   loopIndex2 = 0;
   srcCursor = (byte *)(param_2 + 0x14);
-  iVar10 = glContext;
+  texCoordCursor = glContext;
   do {
-    uVar9 = (uint)*srcCursor;
+    texCoordSize = (uint)*srcCursor;
     srcCursor = srcCursor + 1;
-    if (uVar9 != 0) {
-      *(undefined4 *)(iVar10 + 0x120) = *puVar11;
-      if (uVar9 == 0x10) {
+    if (texCoordSize != 0) {
+      *(undefined4 *)(texCoordCursor + 0x120) = *puVar11;
+      if (texCoordSize == 0x10) {
         *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
-        *(undefined4 *)(iVar10 + 0x124) = puVar11[1];
-        *(undefined4 *)(iVar10 + 0x128) = puVar11[2];
-        *(undefined4 *)(iVar10 + 300) = puVar11[3];
+        *(undefined4 *)(texCoordCursor + 0x124) = puVar11[1];
+        *(undefined4 *)(texCoordCursor + 0x128) = puVar11[2];
+        *(undefined4 *)(texCoordCursor + 300) = puVar11[3];
       }
-      else if (uVar9 == 0xc) {
+      else if (texCoordSize == 0xc) {
         *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
-        *(undefined4 *)(iVar10 + 0x124) = puVar11[1];
-        uVar6 = puVar11[2];
-        *(undefined4 *)(iVar10 + 300) = glContextWord24;
-        *(undefined4 *)(iVar10 + 0x128) = uVar6;
+        *(undefined4 *)(texCoordCursor + 0x124) = puVar11[1];
+        componentValue = puVar11[2];
+        *(undefined4 *)(texCoordCursor + 300) = glContextWord24;
+        *(undefined4 *)(texCoordCursor + 0x128) = componentValue;
       }
       else {
-        uVar6 = glContextWord20;
-        if (uVar9 == 8) {
-          uVar6 = puVar11[1];
+        componentValue = glContextWord20;
+        if (texCoordSize == 8) {
+          componentValue = puVar11[1];
         }
-        *(undefined4 *)(iVar10 + 0x124) = uVar6;
+        *(undefined4 *)(texCoordCursor + 0x124) = componentValue;
         *(undefined4 *)(loopIndex2 + glContext + 300) = glContextWord24;
         *(undefined4 *)(loopIndex2 + glContext + 0x128) = glContextWord20;
       }
     }
-    puVar11 = (undefined4 *)((int)puVar11 + uVar9);
+    puVar11 = (undefined4 *)((int)puVar11 + texCoordSize);
     loopIndex2 = loopIndex2 + 0x10;
-    iVar10 = iVar10 + 0x10;
+    texCoordCursor = texCoordCursor + 0x10;
     remaining = remaining + -1;
   } while (remaining != 0);
   srcCursor = (byte *)(param_2 + 0x1d);
   remaining2 = 0xf;
   loopIndex = 0x11;
-  iVar7 = glContext + 0x110;
+  attribCursor = glContext + 0x110;
   do {
-    uVar9 = (uint)*srcCursor;
+    attribSize = (uint)*srcCursor;
     srcCursor = srcCursor + 1;
-    if (uVar9 != 0) {
-      *(undefined4 *)(iVar7 + 0xa0) = *puVar11;
-      uVar6 = glContextWord20;
-      if (7 < uVar9) {
-        uVar6 = puVar11[1];
+    if (attribSize != 0) {
+      *(undefined4 *)(attribCursor + 0xa0) = *puVar11;
+      componentValue = glContextWord20;
+      if (7 < attribSize) {
+        componentValue = puVar11[1];
       }
-      *(undefined4 *)(iVar7 + 0xa4) = uVar6;
-      uVar6 = glContextWord20;
-      if (0xb < uVar9) {
-        uVar6 = puVar11[2];
+      *(undefined4 *)(attribCursor + 0xa4) = componentValue;
+      componentValue = glContextWord20;
+      if (0xb < attribSize) {
+        componentValue = puVar11[2];
       }
-      *(undefined4 *)(loopIndex * 0x10 + glContext + 0xa8) = uVar6;
-      uVar6 = glContextWord24;
-      if (uVar9 == 0x10) {
-        uVar6 = puVar11[3];
+      *(undefined4 *)(loopIndex * 0x10 + glContext + 0xa8) = componentValue;
+      componentValue = glContextWord24;
+      if (attribSize == 0x10) {
+        componentValue = puVar11[3];
       }
-      *(undefined4 *)(loopIndex * 0x10 + glContext + 0xac) = uVar6;
+      *(undefined4 *)(loopIndex * 0x10 + glContext + 0xac) = componentValue;
     }
-    puVar11 = (undefined4 *)((int)puVar11 + uVar9);
+    puVar11 = (undefined4 *)((int)puVar11 + attribSize);
     loopIndex = loopIndex + 1;
-    iVar7 = iVar7 + 0x10;
+    attribCursor = attribCursor + 0x10;
     remaining2 = remaining2 + -1;
   } while (remaining2 != 0);
   return;

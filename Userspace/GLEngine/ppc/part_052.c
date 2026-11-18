@@ -166,49 +166,50 @@ void _gleBeginPolygonSelectFeedback(glContext)
 }
 
 /* _glePolyCentroid @ 0xeb91c (244 bytes) */
-void _glePolyCentroid(undefined4 unusedArg1,float *param_2,int param_3,float *param_4,float *param_5,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
+void _glePolyCentroid(undefined4 unusedArg1,float *vertices,int vertexCount,float *centroidX,float *centroidY,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  int iVar8;
-  float *pfVar9;
-  float *pfVar10;
+  float crossTerm;
+  float lastY;
+  float firstX;
+  float firstY;
+  float areaSum;
+  float centroidSumX;
+  float centroidSumY;
+  float closingCross;
+  int remaining;
+  float *vertexCursor;
+  float *lastVertex;
   
-  pfVar10 = param_2;
-  fVar4 = FLOAT_00108e50;
-  fVar5 = FLOAT_00108e50;
-  fVar6 = FLOAT_00108e50;
-  if (1 < param_3) {
-    iVar8 = param_3 + -1;
-    pfVar9 = param_2;
+  lastVertex = vertices;
+  areaSum = FLOAT_00108e50;
+  centroidSumX = FLOAT_00108e50;
+  centroidSumY = FLOAT_00108e50;
+  if (1 < vertexCount) {
+    remaining = vertexCount + -1;
+    vertexCursor = vertices;
     do {
-      pfVar10 = pfVar9 + 0x40;
-      fVar1 = *pfVar9 * pfVar9[0x41] - pfVar9[0x40] * pfVar9[1];
-      fVar6 = (pfVar9[1] + pfVar9[0x41]) * fVar1 + fVar6;
-      fVar5 = (*pfVar9 + pfVar9[0x40]) * fVar1 + fVar5;
-      fVar4 = fVar4 + fVar1;
-      iVar8 = iVar8 + -1;
-      pfVar9 = pfVar10;
-    } while (iVar8 != 0);
+      lastVertex = vertexCursor + 0x40;
+      crossTerm = *vertexCursor * vertexCursor[0x41] - vertexCursor[0x40] * vertexCursor[1];
+      centroidSumY = (vertexCursor[1] + vertexCursor[0x41]) * crossTerm + centroidSumY;
+      centroidSumX = (*vertexCursor + vertexCursor[0x40]) * crossTerm + centroidSumX;
+      areaSum = areaSum + crossTerm;
+      remaining = remaining + -1;
+      vertexCursor = lastVertex;
+    } while (remaining != 0);
   }
-  fVar1 = pfVar10[1];
-  fVar2 = *param_2;
-  fVar3 = param_2[1];
-  fVar7 = *pfVar10 * fVar3 - fVar2 * fVar1;
-  fVar4 = fVar4 + fVar7;
-  if ((fVar4 < FLOAT_00108e80) && (FLOAT_00108f3c < fVar4)) {
-    *param_4 = fVar2;
-    *param_5 = param_2[1];
+  lastY = lastVertex[1];
+  firstX = *vertices;
+  firstY = vertices[1];
+  closingCross = *lastVertex * firstY - firstX * lastY;
+  areaSum = areaSum + closingCross;
+  if ((areaSum < FLOAT_00108e80) && (FLOAT_00108f3c < areaSum)) {
+    *centroidX = firstX;
+    *centroidY = vertices[1];
     return;
   }
-  fVar4 = FLOAT_00108e54 / (fVar4 * FLOAT_00108f38);
-  *param_4 = ((*pfVar10 + fVar2) * fVar7 + fVar5) * fVar4;
-  *param_5 = ((fVar1 + fVar3) * fVar7 + fVar6) * fVar4;
+  areaSum = FLOAT_00108e54 / (areaSum * FLOAT_00108f38);
+  *centroidX = ((*lastVertex + firstX) * closingCross + centroidSumX) * areaSum;
+  *centroidY = ((lastY + firstY) * closingCross + centroidSumY) * areaSum;
   return;
 }
 

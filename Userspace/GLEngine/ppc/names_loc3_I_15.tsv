@@ -1,0 +1,28 @@
+local	_glTexImage2D_ListExec	bVar1	levelFlags	INFERRED	byte at levelRecord+0xcf (bit 0 / 0x10 / 0x20 flags tested and cleared while the old level storage is released)
+local	_glTexImage2D_ListExec	uVar2	objectFlags	INFERRED	ushort at textureObject+0x24; bits 0x3c00 are tested and bit 0x1000 is set when they are clear
+use	_glTexImage2D_ListExec	iVar3	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + level * 0x18: record of the mipmap level being replaced	^\s*iVar3\ =\ iVar5\ \+\ uVar4\ \*\ 0x168\ \+\ iVar8\ \*\ 0x18;$	+3
+use	_glTexImage2D_ListExec	iVar3	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + level * 0x18: record of the mipmap level being replaced	^\s*if\ \(\*\(int\ \*\)\(iVar3\ \+\ 0xd8\)\ !=\ 0\)\ \{$	+2
+use	_glTexImage2D_ListExec	iVar3	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + level * 0x18: record of the mipmap level being replaced	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar3\ \+\ 0xcf\);$@2	+1
+use	_glTexImage2D_ListExec	iVar3	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + level * 0x18: record of the mipmap level being replaced	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0xd8\)\ =\ 0;$	+1
+use	_glTexImage2D_ListExec	iVar3	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + level * 0x18: record of the mipmap level being replaced	^\s*\*\(byte\ \*\)\(iVar3\ \+\ 0xcf\)\ =\ bVar1\ \&\ 0xef;$	+1
+use	_glTexImage2D_ListExec	iVar3	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + level * 0x18: record of the mipmap level being replaced	^\s*\*\(byte\ \*\)\(iVar3\ \+\ 0xcf\)\ =\ \*\(byte\ \*\)\(iVar3\ \+\ 0xcf\)\ \&\ 0xdf;$	+1
+local	_glTexImage2D_ListExec	uVar4	faceIndex	INFERRED	target (listRecord[0]) - 0x8515 (cube map face index, 0 for non-cube targets)
+local	_glTexImage2D_ListExec	iVar5	textureObject	INFERRED	non-NULL result of _gleCheckTexImage2DArgs; the texture object whose level is replaced
+use	_glTexImage2D_ListExec	iVar6	textureLevel	INFERRED	levelRecord + 0xc4: level image passed to the texture level delete/free/create/put functions	^\s*iVar6\ =\ iVar3\ \+\ 0xc4;$	+1
+use	_glTexImage2D_ListExec	iVar6	textureLevel	INFERRED	levelRecord + 0xc4: level image passed to the texture level delete/free/create/put functions	^\s*_gleDeletePluginTextureLevel\(param_1,iVar5,iVar6,uVar4,iVar8\);$	+1
+use	_glTexImage2D_ListExec	iVar6	textureLevel	INFERRED	levelRecord + 0xc4: level image passed to the texture level delete/free/create/put functions	^\s*_gleFreeTextureLevel\(param_1,iVar5,iVar6\);$	+1
+use	_glTexImage2D_ListExec	iVar6	textureLevel	INFERRED	levelRecord + 0xc4: level image passed to the texture level delete/free/create/put functions	^\s*\(param_1,iVar5,iVar6,param_2\[2\],iVar9,iVar10,1,param_2\[5\],param_2\[6\],param_2\[7\],$	+2
+use	_glTexImage2D_ListExec	iVar6	textureLevel	INFERRED	levelRecord + 0xc4: level image passed to the texture level delete/free/create/put functions	^\s*_gleTextureImagePut\(param_1,iVar6,0,0,0,param_2\[3\],param_2\[4\],1,param_2\[6\],param_2\[7\],1,0,$	+2
+use	_glTexImage2D_ListExec	iVar6	textureLevel	INFERRED	levelRecord + 0xc4: level image passed to the texture level delete/free/create/put functions	^\s*_gleCreatePluginTextureLevel\(param_1,iVar5,iVar6,uVar4,iVar8,param_2\[2\]\);$	+1
+local	_glTexImage2D_ListExec	iVar7	recordSize	CONFIRMED	listRecord[8] + 0x24: byte size of this display-list record (pixel data size plus the 9-word header), returned to the list walker
+local	_glTexImage2D_ListExec	iVar8	level	CONFIRMED	listRecord[1]: the level argument of glTexImage2D
+local	_glTexImage2D_ListExec	iVar9	widthThenCreateResult	CONFIRMED	listRecord[3] (the width argument of glTexImage), reduced by the pixel-store offset in some cases, then overwritten by the result of _gleCreateTextureLevel (nonzero means the data is stored with _gleTextureImagePut)
+local	_glTexImage2D_ListExec	iVar10	height	CONFIRMED	listRecord[4]: the height argument of glTexImage2D (later reduced by the pixel-store offsets at ctx+0x3354/0x3314 in one case)
+local	_glTexImage1D_ListExec	bVar1	levelFlags	INFERRED	byte at levelRecord+0xcf (bit 0 / 0x10 / 0x20 flags tested and cleared while the old level storage is released)
+local	_glTexImage1D_ListExec	uVar2	objectFlags	INFERRED	ushort at textureObject+0x24; bits 0x3c00 are tested and bit 0x1000 is set when they are clear
+local	_glTexImage1D_ListExec	iVar3	levelRecord	INFERRED	textureObject + level * 0x18: record of the mipmap level being replaced
+local	_glTexImage1D_ListExec	iVar4	textureObject	INFERRED	non-NULL result of _gleCheckTexImage1DArgs; the texture object whose level is replaced
+local	_glTexImage1D_ListExec	iVar5	recordSize	CONFIRMED	listRecord[7] + 0x20: byte size of this display-list record (pixel data size plus the 8-word header), returned to the list walker
+local	_glTexImage1D_ListExec	iVar6	level	CONFIRMED	listRecord[1]: the level argument of glTexImage1D
+local	_glTexImage1D_ListExec	iVar7	widthThenCreateResult	CONFIRMED	listRecord[3] (the width argument of glTexImage), reduced by the pixel-store offset in some cases, then overwritten by the result of _gleCreateTextureLevel (nonzero means the data is stored with _gleTextureImagePut)
+local	_glTexImage1D_ListExec	iVar8	textureLevel	INFERRED	levelRecord + 0xc4: level image passed to the texture level delete/free/create/put functions

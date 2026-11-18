@@ -1,0 +1,8 @@
+use	_gleGetState	iVar13	texCoordArrayBuffer	INFERRED	buffer object bound to the texture coordinate array of the client active texture unit (clientState+0x380)	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x53d8\)\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x4a60\)\ \+$	+4
+use	_gleGetState	iVar13	clientArrayBuffer37c	INFERRED	buffer object bound to the client array at clientState+0x37c, pname 0x8a11	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x4a60\)\ \+\ 0x37c\);$	+3
+use	_gleGetState	iVar13	weightArrayBuffer	INFERRED	buffer object bound to the weight array (clientState+0x374), pname 0x889e	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x4a60\)\ \+\ 0x374\);$	+3
+use	_gleGetState	iVar13	secondaryColorArrayBuffer	INFERRED	buffer object bound to the secondary color array (clientState+0x370), pname 0x889c	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x4a60\)\ \+\ 0x370\);$	+3
+use	_gleGetState	iVar13	fogCoordArrayBuffer	INFERRED	buffer object bound to the fog coordinate array (clientState+0x36c), pname 0x889d	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x4a60\)\ \+\ 0x36c\);$	+3
+use	_gleGetState	iVar13	drawBufferIndex	INFERRED	pname - 0x8825: index of the GL_DRAW_BUFFERi query	^\s*iVar13\ =\ param_2\ \-\ 0x8825;$	+2
+use	_gleGetState	iVar13	drawBufferIndex	INFERRED	pname - 0x8825: index of the GL_DRAW_BUFFERi query	^\s*uVar2\ =\ \(uint\)\*\(ushort\ \*\)\(iVar13\ \*\ 2\ \+\ param_1\ \+\ 0x311a\);$	+1
+use	_gleGetState	iVar13	drawBufferIndex	INFERRED	pname - 0x8825: index of the GL_DRAW_BUFFERi query	^\s*uVar2\ =\ \(uint\)\*\(ushort\ \*\)\(iVar13\ \*\ 2\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\)\ \+\ 0xc0\);$	+1

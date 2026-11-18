@@ -3993,211 +3993,217 @@ void _glePPLogParameters(glContext, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _glePPLogParam @ 0x24c44 (1068 bytes) */
-int _glePPLogParam(glContext, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+int _glePPLogParam(glContext, paramLogState, bankIndex, paramWord, param_5, slotSpan, requestedSlot, blockedSlotBits, lastSlot)
   int glContext;
-  int param_2;
-  int param_3;
-  uint param_4;
+  int paramLogState;
+  int bankIndex;
+  uint paramWord;
   int param_5;
-  int param_6;
-  uint param_7;
-  int param_8;
-  int param_9;
+  int slotSpan;
+  uint requestedSlot;
+  int blockedSlotBits;
+  int lastSlot;
 {
-  bool bVar1;
+  bool slotIsUnused;
   int iVar2;
-  undefined4 uVar3;
+  undefined4 matchKind;
   int iVar4;
   int iVar5;
   int iVar6;
-  uint uVar7;
-  uint uVar8;
+  uint paramKind;
+  uint slotWord1;
+  uint slotPriority;
+  uint spanEnd;
+  uint evictionSlot;
+  uint slotBit;
+  uint slotValue1;
   uint uVar9;
-  uint uVar10;
-  uint uVar11;
+  uint unusedSlot;
+  uint freeSlot;
+  uint lowestPriority;
   short sVar12;
   
-  uVar7 = param_4 >> 0x10 & 0x1f;
-  uVar11 = 0x7fffffff;
-  uVar9 = 0xffffffff;
-  uVar10 = 0xffffffff;
-  uVar8 = 0xffffffff;
-  if (uVar7 == 0) {
+  paramKind = paramWord >> 0x10 & 0x1f;
+  lowestPriority = 0x7fffffff;
+  unusedSlot = 0xffffffff;
+  freeSlot = 0xffffffff;
+  evictionSlot = 0xffffffff;
+  if (paramKind == 0) {
     return 0;
   }
-  if ((uVar7 == 1) || (uVar7 == 0x11)) {
-    if (-1 < (int)param_7) {
-      if ((*(uint *)(param_8 + ((int)param_7 >> 5) * 4) >> (param_7 & 0x1f) & 1) != 0) {
+  if ((paramKind == 1) || (paramKind == 0x11)) {
+    if (-1 < (int)requestedSlot) {
+      if ((*(uint *)(blockedSlotBits + ((int)requestedSlot >> 5) * 4) >> (requestedSlot & 0x1f) & 1) != 0) {
         return 0xffffffff;
       }
-      uVar3 = 1;
-      iVar2 = (param_3 * 0x146 + param_7) * 8 + param_2;
-      bVar1 = *(int *)(iVar2 + 0x8074) == 0 && *(int *)(iVar2 + 0x8078) == 0;
+      matchKind = 1;
+      iVar2 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+      slotIsUnused = *(int *)(iVar2 + 0x8074) == 0 && *(int *)(iVar2 + 0x8078) == 0;
       goto LAB_00024ea0;
     }
-    uVar10 = 0;
-    if (param_9 - param_6 == -1) {
+    freeSlot = 0;
+    if (lastSlot - slotSpan == -1) {
       return 0xffffffff;
     }
-    iVar2 = param_3 * 0xa30 + param_2 + 0x8070;
+    iVar2 = bankIndex * 0xa30 + paramLogState + 0x8070;
     do {
-      for (uVar7 = uVar10;
-          ((int)uVar7 < (int)(uVar10 + param_6) &&
-          ((*(uint *)(param_8 + ((int)uVar7 >> 5) * 4) >> (uVar7 & 0x1f) & 1) == 0));
-          uVar7 = uVar7 + 1) {
+      for (spanEnd = freeSlot;
+          ((int)spanEnd < (int)(freeSlot + slotSpan) &&
+          ((*(uint *)(blockedSlotBits + ((int)spanEnd >> 5) * 4) >> (spanEnd & 0x1f) & 1) == 0));
+          spanEnd = spanEnd + 1) {
       }
-      if (uVar7 == uVar10 + param_6) {
+      if (spanEnd == freeSlot + slotSpan) {
         if ((*(int *)(iVar2 + 4) == -1) && (*(int *)(iVar2 + 8) == -1)) goto LAB_00024ff0;
         if (*(int *)(iVar2 + 4) == 0 && *(int *)(iVar2 + 8) == 0) {
-          if (uVar9 == 0xffffffff) {
-            uVar9 = uVar10;
+          if (unusedSlot == 0xffffffff) {
+            unusedSlot = freeSlot;
           }
         }
         else {
-          uVar7 = (uint)*(ushort *)((param_3 * 0x518 + uVar10) * 2 + param_2 + 0x8874);
-          if (uVar7 < uVar11) {
-            uVar8 = uVar10;
-            uVar11 = uVar7;
+          slotPriority = (uint)*(ushort *)((bankIndex * 0x518 + freeSlot) * 2 + paramLogState + 0x8874);
+          if (slotPriority < lowestPriority) {
+            evictionSlot = freeSlot;
+            lowestPriority = slotPriority;
           }
         }
       }
-      uVar10 = uVar10 + 1;
+      freeSlot = freeSlot + 1;
       iVar2 = iVar2 + 8;
-    } while (uVar10 < (param_9 - param_6) + 1U);
-    param_7 = uVar8;
-    if (uVar9 != 0xffffffff) {
-      uVar3 = 1;
-      param_7 = uVar9;
+    } while (freeSlot < (lastSlot - slotSpan) + 1U);
+    requestedSlot = evictionSlot;
+    if (unusedSlot != 0xffffffff) {
+      matchKind = 1;
+      requestedSlot = unusedSlot;
       goto LAB_00025008;
     }
 LAB_00024fd4:
-    if (param_7 == 0xffffffff) {
+    if (requestedSlot == 0xffffffff) {
       return 0xffffffff;
     }
   }
   else {
-    if ((int)param_7 < 0) {
-      param_7 = 0;
-      if (param_9 - param_6 == -1) {
+    if ((int)requestedSlot < 0) {
+      requestedSlot = 0;
+      if (lastSlot - slotSpan == -1) {
         return 0xffffffff;
       }
-      iVar2 = param_3 * 0xa30 + param_2 + 0x8070;
+      iVar2 = bankIndex * 0xa30 + paramLogState + 0x8070;
       do {
-        for (uVar7 = param_7;
-            ((int)uVar7 < (int)(param_7 + param_6) &&
-            ((*(uint *)(param_8 + ((int)uVar7 >> 5) * 4) >> (uVar7 & 0x1f) & 1) == 0));
-            uVar7 = uVar7 + 1) {
+        for (spanEnd = requestedSlot;
+            ((int)spanEnd < (int)(requestedSlot + slotSpan) &&
+            ((*(uint *)(blockedSlotBits + ((int)spanEnd >> 5) * 4) >> (spanEnd & 0x1f) & 1) == 0));
+            spanEnd = spanEnd + 1) {
         }
-        if (uVar7 == param_7 + param_6) {
-          uVar7 = *(uint *)(iVar2 + 4);
+        if (spanEnd == requestedSlot + slotSpan) {
+          slotWord1 = *(uint *)(iVar2 + 4);
           iVar4 = *(int *)(iVar2 + 8);
-          if ((uVar7 == param_4) && (iVar4 == param_5)) {
-            uVar3 = 5;
+          if ((slotWord1 == paramWord) && (iVar4 == param_5)) {
+            matchKind = 5;
             goto LAB_00025008;
           }
-          if ((uVar7 == 0xffffffff) && (iVar4 == -1)) {
-            if (uVar10 == 0xffffffff) {
-              uVar10 = param_7;
+          if ((slotWord1 == 0xffffffff) && (iVar4 == -1)) {
+            if (freeSlot == 0xffffffff) {
+              freeSlot = requestedSlot;
             }
           }
-          else if (uVar7 == 0 && iVar4 == 0) {
-            if (uVar9 == 0xffffffff) {
-              uVar9 = param_7;
+          else if (slotWord1 == 0 && iVar4 == 0) {
+            if (unusedSlot == 0xffffffff) {
+              unusedSlot = requestedSlot;
             }
           }
           else {
-            uVar7 = (uint)*(ushort *)((param_3 * 0x518 + param_7) * 2 + param_2 + 0x8874);
-            if (uVar7 < uVar11) {
-              uVar8 = param_7;
-              uVar11 = uVar7;
+            slotPriority = (uint)*(ushort *)((bankIndex * 0x518 + requestedSlot) * 2 + paramLogState + 0x8874);
+            if (slotPriority < lowestPriority) {
+              evictionSlot = requestedSlot;
+              lowestPriority = slotPriority;
             }
           }
         }
-        param_7 = param_7 + 1;
+        requestedSlot = requestedSlot + 1;
         iVar2 = iVar2 + 8;
-      } while (param_7 < (param_9 - param_6) + 1U);
-      if (uVar9 != 0xffffffff) {
-        uVar3 = 2;
-        param_7 = uVar9;
+      } while (requestedSlot < (lastSlot - slotSpan) + 1U);
+      if (unusedSlot != 0xffffffff) {
+        matchKind = 2;
+        requestedSlot = unusedSlot;
         goto LAB_00025008;
       }
-      param_7 = uVar8;
-      if (uVar10 != 0xffffffff) {
+      requestedSlot = evictionSlot;
+      if (freeSlot != 0xffffffff) {
 LAB_00024ff0:
-        uVar3 = 3;
-        param_7 = uVar10;
+        matchKind = 3;
+        requestedSlot = freeSlot;
         goto LAB_00025008;
       }
       goto LAB_00024fd4;
     }
-    if ((*(uint *)(param_8 + ((int)param_7 >> 5) * 4) >> (param_7 & 0x1f) & 1) != 0) {
+    if ((*(uint *)(blockedSlotBits + ((int)requestedSlot >> 5) * 4) >> (requestedSlot & 0x1f) & 1) != 0) {
       return 0xffffffff;
     }
-    iVar2 = (param_3 * 0x146 + param_7) * 8 + param_2;
-    uVar8 = *(uint *)(iVar2 + 0x8074);
+    iVar2 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+    slotValue1 = *(uint *)(iVar2 + 0x8074);
     iVar2 = *(int *)(iVar2 + 0x8078);
-    if (((uVar8 == param_4) && (uVar3 = 5, iVar2 == param_5)) ||
-       ((uVar8 == 0xffffffff && (uVar3 = 3, iVar2 == -1)))) goto LAB_00025008;
-    bVar1 = uVar8 == 0 && iVar2 == 0;
-    uVar3 = 2;
+    if (((slotValue1 == paramWord) && (matchKind = 5, iVar2 == param_5)) ||
+       ((slotValue1 == 0xffffffff && (matchKind = 3, iVar2 == -1)))) goto LAB_00025008;
+    slotIsUnused = slotValue1 == 0 && iVar2 == 0;
+    matchKind = 2;
 LAB_00024ea0:
-    if (bVar1) goto LAB_00025008;
+    if (slotIsUnused) goto LAB_00025008;
   }
-  uVar3 = 4;
+  matchKind = 4;
 LAB_00025008:
-  iVar2 = (int)param_7 >> 5;
+  iVar2 = (int)requestedSlot >> 5;
                     
-  switch(uVar3) {
+  switch(matchKind) {
   case 0:
-    iVar4 = param_3 * 0x518;
+    iVar4 = bankIndex * 0x518;
     sVar12 = 0;
     break;
   case 1:
-    iVar4 = (param_3 * 0x146 + param_7) * 8 + param_2;
-    iVar5 = (param_3 * 0x28c + iVar2) * 4 + param_2;
+    iVar4 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+    iVar5 = (bankIndex * 0x28c + iVar2) * 4 + paramLogState;
     *(undefined4 *)(iVar4 + 0x8074) = 0xffffffff;
     *(undefined4 *)(iVar4 + 0x8078) = 0xffffffff;
-    iVar4 = param_3 * 0x518;
+    iVar4 = bankIndex * 0x518;
     sVar12 = 0;
-    *(uint *)(iVar5 + 0x8a74) = *(uint *)(iVar5 + 0x8a74) | 1 << (param_7 & 0x1f);
+    *(uint *)(iVar5 + 0x8a74) = *(uint *)(iVar5 + 0x8a74) | 1 << (requestedSlot & 0x1f);
     break;
   case 2:
-    iVar5 = (param_3 * 0x28c + iVar2) * 4 + param_2;
+    iVar5 = (bankIndex * 0x28c + iVar2) * 4 + paramLogState;
     uVar9 = *(uint *)(iVar5 + 0x8a74);
-    iVar4 = (param_3 * 0x146 + param_7) * 8 + param_2;
-    uVar8 = 1 << (param_7 & 0x1f);
-    *(uint *)(iVar4 + 0x8074) = param_4;
+    iVar4 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+    slotBit = 1 << (requestedSlot & 0x1f);
+    *(uint *)(iVar4 + 0x8074) = paramWord;
     *(int *)(iVar4 + 0x8078) = param_5;
     sVar12 = 0;
-    *(uint *)(iVar5 + 0x8a74) = uVar9 & ~uVar8;
-    if (param_3 == 0) {
+    *(uint *)(iVar5 + 0x8a74) = uVar9 & ~slotBit;
+    if (bankIndex == 0) {
       iVar4 = 0;
       iVar5 = iVar2 * 4 + glContext;
-      *(uint *)(iVar5 + 0x324) = *(uint *)(iVar5 + 0x324) | uVar8;
+      *(uint *)(iVar5 + 0x324) = *(uint *)(iVar5 + 0x324) | slotBit;
     }
     else {
-      iVar4 = param_3 * 0x518;
+      iVar4 = bankIndex * 0x518;
       iVar5 = iVar2 * 4 + glContext;
-      *(uint *)(iVar5 + 0x348) = *(uint *)(iVar5 + 0x348) | uVar8;
+      *(uint *)(iVar5 + 0x348) = *(uint *)(iVar5 + 0x348) | slotBit;
     }
     break;
   case 5:
   case 3:
-    iVar4 = param_3 * 0x518;
-    sVar12 = *(short *)((iVar4 + param_7) * 2 + param_2 + 0x8874);
+    iVar4 = bankIndex * 0x518;
+    sVar12 = *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874);
     break;
   case 4:
-    iVar4 = param_3 * 0x518;
-    iVar5 = (param_3 * 0x146 + param_7) * 8 + param_2;
-    iVar6 = (param_3 * 0x28c + iVar2) * 4 + param_2;
-    sVar12 = *(short *)((iVar4 + param_7) * 2 + param_2 + 0x8874);
+    iVar4 = bankIndex * 0x518;
+    iVar5 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
+    iVar6 = (bankIndex * 0x28c + iVar2) * 4 + paramLogState;
+    sVar12 = *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874);
     *(undefined4 *)(iVar5 + 0x8074) = 0xffffffff;
     *(undefined4 *)(iVar5 + 0x8078) = 0xffffffff;
-    *(uint *)(iVar6 + 0x8a74) = *(uint *)(iVar6 + 0x8a74) | 1 << (param_7 & 0x1f);
+    *(uint *)(iVar6 + 0x8a74) = *(uint *)(iVar6 + 0x8a74) | 1 << (requestedSlot & 0x1f);
   }
-  *(uint *)(iVar2 * 4 + param_8) = *(uint *)(iVar2 * 4 + param_8) | 1 << (param_7 & 0x1f);
-  *(short *)((iVar4 + param_7) * 2 + param_2 + 0x8874) = sVar12 + 1;
-  return param_7;
+  *(uint *)(iVar2 * 4 + blockedSlotBits) = *(uint *)(iVar2 * 4 + blockedSlotBits) | 1 << (requestedSlot & 0x1f);
+  *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874) = sVar12 + 1;
+  return requestedSlot;
 }
 
 /* _PPEmulatorProgramSetupHandlesFromPPStream @ 0x25218 (844 bytes) */
@@ -10383,68 +10389,68 @@ LAB_0002e240:
 }
 
 /* _gleSelectPixelExtractFunc @ 0x2e264 (3124 bytes) */
-int _gleSelectPixelExtractFunc(param_1, param_2)
-  uint param_1;
-  uint param_2;
+int _gleSelectPixelExtractFunc(format, type)
+  uint format;
+  uint type;
 {
-  if (param_1 == 0x1908) {
-    if (param_2 == 0x1406) {
+  if (format == 0x1908) {
+    if (type == 0x1406) {
       return PTR__gleExtractPixel_RGBA_Float_00111074;
     }
-    if (param_2 < 0x1407) {
-      if (param_2 == 0x1402) {
+    if (type < 0x1407) {
+      if (type == 0x1402) {
         return PTR__gleExtractPixel_RGBA_Short_00111084;
       }
-      if (0x1402 < param_2) {
-        if (param_2 == 0x1404) {
+      if (0x1402 < type) {
+        if (type == 0x1404) {
           return PTR__gleExtractPixel_RGBA_Int_0011107c;
         }
-        if (0x1404 < param_2) {
+        if (0x1404 < type) {
           return PTR__gleExtractPixel_RGBA_Uint_00111078;
         }
         return PTR__gleExtractPixel_RGBA_Ushort_00111080;
       }
-      if (param_2 == 0x1400) {
+      if (type == 0x1400) {
         return PTR__gleExtractPixel_RGBA_Byte_0011108c;
       }
-      if (param_2 == 0x1401) {
+      if (type == 0x1401) {
         return PTR__gleExtractPixel_RGBA_Ubyte_00111088;
       }
     }
     else {
-      if (param_2 == 0x8036) {
+      if (type == 0x8036) {
         return PTR__gleExtractPixel_RGBA_1010102_00111058;
       }
-      if (param_2 < 0x8037) {
-        if (param_2 == 0x8034) {
+      if (type < 0x8037) {
+        if (type == 0x8034) {
           return PTR__gleExtractPixel_RGBA_5551_00111068;
         }
-        if (0x8034 < param_2) {
+        if (0x8034 < type) {
           return PTR__gleExtractPixel_RGBA_8888_00111060;
         }
-        if (param_2 == 0x8033) {
+        if (type == 0x8033) {
           return PTR__gleExtractPixel_RGBA_4444_00111070;
         }
       }
       else {
-        if (param_2 == 0x8366) {
+        if (type == 0x8366) {
           return PTR__gleExtractPixel_RGBA_1555Rev_00111064;
         }
-        if (param_2 < 0x8367) {
-          if (param_2 == 0x8365) {
+        if (type < 0x8367) {
+          if (type == 0x8365) {
             return PTR__gleExtractPixel_RGBA_4444Rev_0011106c;
           }
         }
-        else if (param_2 == 0x8367) {
+        else if (type == 0x8367) {
           return PTR__gleExtractPixel_RGBA_8888Rev_0011105c;
         }
       }
     }
     return PTR__gleExtractPixel_RGBA_2101010Rev_00111054;
   }
-  if (param_1 < 0x1909) {
-    if (param_1 == 0x1903) {
-      switch(param_2) {
+  if (format < 0x1909) {
+    if (format == 0x1903) {
+      switch(type) {
       case 0x1400:
         return PTR__gleExtractPixel_R_Byte_00110f38;
       case 0x1401:
@@ -10461,10 +10467,10 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
         return PTR__gleExtractPixel_R_Float_00110f20;
       }
     }
-    if (param_1 < 0x1904) {
-      if (0x18ff < param_1) {
-        if (0x1901 < param_1) {
-          switch(param_2) {
+    if (format < 0x1904) {
+      if (0x18ff < format) {
+        if (0x1901 < format) {
+          switch(type) {
           case 0x1400:
             return PTR__gleExtractPixel_Depth_Byte_001110a8;
           case 0x1401:
@@ -10481,7 +10487,7 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
             return PTR__gleExtractPixel_Depth_Float_00111090;
           }
         }
-        switch(param_2) {
+        switch(type) {
         case 0x1400:
           return PTR__gleExtractPixel_Index_Byte_001110c4;
         case 0x1401:
@@ -10500,8 +10506,8 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
       }
     }
     else {
-      if (param_1 == 0x1905) {
-        switch(param_2) {
+      if (format == 0x1905) {
+        switch(type) {
         case 0x1400:
           return PTR__gleExtractPixel_B_Byte_00110f00;
         case 0x1401:
@@ -10518,8 +10524,8 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
           return PTR__gleExtractPixel_B_Float_00110ee8;
         }
       }
-      if (param_1 < 0x1905) {
-        switch(param_2) {
+      if (format < 0x1905) {
+        switch(type) {
         case 0x1400:
           return PTR__gleExtractPixel_G_Byte_00110f1c;
         case 0x1401:
@@ -10536,8 +10542,8 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
           return PTR__gleExtractPixel_G_Float_00110f04;
         }
       }
-      if (param_1 == 0x1906) {
-        switch(param_2) {
+      if (format == 0x1906) {
+        switch(type) {
         case 0x1400:
           return PTR__gleExtractPixel_A_Byte_00110ee4;
         case 0x1401:
@@ -10554,45 +10560,45 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
           return PTR__gleExtractPixel_A_Float_00110ecc;
         }
       }
-      if (param_1 == 0x1907) {
-        if (param_2 == 0x1404) {
+      if (format == 0x1907) {
+        if (type == 0x1404) {
           return PTR__gleExtractPixel_RGB_Int_00110f54;
         }
-        if (param_2 < 0x1405) {
-          if (param_2 == 0x1401) {
+        if (type < 0x1405) {
+          if (type == 0x1401) {
             return PTR__gleExtractPixel_RGB_Ubyte_00110f60;
           }
-          if (param_2 < 0x1402) {
-            if (param_2 == 0x1400) {
+          if (type < 0x1402) {
+            if (type == 0x1400) {
               return PTR__gleExtractPixel_RGB_Byte_00110f64;
             }
           }
           else {
-            if (param_2 == 0x1402) {
+            if (type == 0x1402) {
               return PTR__gleExtractPixel_RGB_Short_00110f5c;
             }
-            if (param_2 == 0x1403) {
+            if (type == 0x1403) {
               return PTR__gleExtractPixel_RGB_Ushort_00110f58;
             }
           }
         }
         else {
-          if (param_2 == 0x8032) {
+          if (type == 0x8032) {
             return PTR__gleExtractPixel_RGB_332_00110f48;
           }
-          if (param_2 < 0x8033) {
-            if (param_2 == 0x1405) {
+          if (type < 0x8033) {
+            if (type == 0x1405) {
               return PTR__gleExtractPixel_RGB_Uint_00110f50;
             }
-            if (param_2 == 0x1406) {
+            if (type == 0x1406) {
               return PTR__gleExtractPixel_RGB_Float_00110f4c;
             }
           }
           else {
-            if (param_2 == 0x8362) {
+            if (type == 0x8362) {
               return PTR__gleExtractPixel_RGB_233Rev_00110f44;
             }
-            if (param_2 == 0x8363) {
+            if (type == 0x8363) {
               return PTR__gleExtractPixel_RGB_565_00110f40;
             }
           }
@@ -10602,64 +10608,64 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
     }
   }
   else {
-    if (param_1 == 0x80e1) {
-      if (param_2 == 0x1406) {
+    if (format == 0x80e1) {
+      if (type == 0x1406) {
         return PTR__gleExtractPixel_BGRA_EXT_Float_0011101c;
       }
-      if (param_2 < 0x1407) {
-        if (param_2 == 0x1402) {
+      if (type < 0x1407) {
+        if (type == 0x1402) {
           return PTR__gleExtractPixel_BGRA_EXT_Short_0011102c;
         }
-        if (0x1402 < param_2) {
-          if (param_2 == 0x1404) {
+        if (0x1402 < type) {
+          if (type == 0x1404) {
             return PTR__gleExtractPixel_BGRA_EXT_Int_00111024;
           }
-          if (0x1404 < param_2) {
+          if (0x1404 < type) {
             return PTR__gleExtractPixel_BGRA_EXT_Uint_00111020;
           }
           return PTR__gleExtractPixel_BGRA_EXT_Ushort_00111028;
         }
-        if (param_2 == 0x1400) {
+        if (type == 0x1400) {
           return PTR__gleExtractPixel_BGRA_EXT_Byte_00111034;
         }
-        if (param_2 == 0x1401) {
+        if (type == 0x1401) {
           return PTR__gleExtractPixel_BGRA_EXT_Ubyte_00111030;
         }
       }
       else {
-        if (param_2 == 0x8036) {
+        if (type == 0x8036) {
           return PTR__gleExtractPixel_BGRA_1010102_00111000;
         }
-        if (param_2 < 0x8037) {
-          if (param_2 == 0x8034) {
+        if (type < 0x8037) {
+          if (type == 0x8034) {
             return PTR__gleExtractPixel_BGRA_5551_00111010;
           }
-          if (0x8034 < param_2) {
+          if (0x8034 < type) {
             return PTR__gleExtractPixel_BGRA_8888_00111008;
           }
-          if (param_2 == 0x8033) {
+          if (type == 0x8033) {
             return PTR__gleExtractPixel_BGRA_4444_00111018;
           }
         }
         else {
-          if (param_2 == 0x8366) {
+          if (type == 0x8366) {
             return PTR__gleExtractPixel_BGRA_1555Rev_0011100c;
           }
-          if (param_2 < 0x8367) {
-            if (param_2 == 0x8365) {
+          if (type < 0x8367) {
+            if (type == 0x8365) {
               return PTR__gleExtractPixel_BGRA_4444Rev_00111014;
             }
           }
-          else if (param_2 == 0x8367) {
+          else if (type == 0x8367) {
             return PTR__gleExtractPixel_BGRA_8888Rev_00111004;
           }
         }
       }
       return PTR__gleExtractPixel_BGRA_2101010Rev_00110ffc;
     }
-    if (param_1 < 0x80e2) {
-      if (param_1 == 0x8000) {
-        switch(param_2) {
+    if (format < 0x80e2) {
+      if (format == 0x8000) {
+        switch(type) {
         case 0x1400:
           return PTR__gleExtractPixel_ABGR_EXT_Byte_00111050;
         case 0x1401:
@@ -10676,9 +10682,9 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
           return PTR__gleExtractPixel_ABGR_EXT_Float_00111038;
         }
       }
-      if (param_1 < 0x8001) {
-        if (param_1 == 0x1909) {
-          switch(param_2) {
+      if (format < 0x8001) {
+        if (format == 0x1909) {
+          switch(type) {
           case 0x1400:
             return PTR__gleExtractPixel_L_Byte_00110ec8;
           case 0x1401:
@@ -10696,8 +10702,8 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
           }
         }
       }
-      else if (param_1 == 0x80e0) {
-        switch(param_2) {
+      else if (format == 0x80e0) {
+        switch(type) {
         case 0x1400:
           return PTR__gleExtractPixel_BGR_EXT_Byte_00110ff8;
         case 0x1401:
@@ -10716,8 +10722,8 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
       }
     }
     else {
-      if (param_1 == 0x86f5) {
-        switch(param_2) {
+      if (format == 0x86f5) {
+        switch(type) {
         case 0x1400:
           return PTR__gleExtractPixel_DSDT_Byte_00110fc0;
         case 0x1401:
@@ -10734,9 +10740,9 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
           return PTR__gleExtractPixel_DSDT_Float_00110fa8;
         }
       }
-      if (param_1 < 0x86f6) {
-        if (param_1 == 0x86f4) {
-          switch(param_2) {
+      if (format < 0x86f6) {
+        if (format == 0x86f4) {
+          switch(type) {
           case 0x1400:
             return PTR__gleExtractPixel_HILO_Byte_00110fdc;
           case 0x1401:
@@ -10755,8 +10761,8 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
         }
       }
       else {
-        if (param_1 == 0x86f6) {
-          switch(param_2) {
+        if (format == 0x86f6) {
+          switch(type) {
           case 0x1400:
             return PTR__gleExtractPixel_DSDT_MAG_Byte_00110fa4;
           case 0x1401:
@@ -10773,32 +10779,32 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
             return PTR__gleExtractPixel_DSDT_MAG_Float_00110f8c;
           }
         }
-        if (param_1 == 0x86f7) {
-          if (param_2 == 0x1403) {
+        if (format == 0x86f7) {
+          if (type == 0x1403) {
             return PTR__gleExtractPixel_DSDT_MAG_VIB_Ushort_00110f74;
           }
-          if (param_2 < 0x1404) {
-            if (param_2 == 0x1401) {
+          if (type < 0x1404) {
+            if (type == 0x1401) {
               return PTR__gleExtractPixel_DSDT_MAG_VIB_Ubyte_00110f7c;
             }
-            if (0x1401 < param_2) {
+            if (0x1401 < type) {
               return PTR__gleExtractPixel_DSDT_MAG_VIB_Short_00110f78;
             }
-            if (param_2 == 0x1400) {
+            if (type == 0x1400) {
               return PTR__gleExtractPixel_DSDT_MAG_VIB_Byte_00110f80;
             }
           }
           else {
-            if (param_2 == 0x1405) {
+            if (type == 0x1405) {
               return PTR__gleExtractPixel_DSDT_MAG_VIB_Uint_00110f6c;
             }
-            if (param_2 < 0x1405) {
+            if (type < 0x1405) {
               return PTR__gleExtractPixel_DSDT_MAG_VIB_Int_00110f70;
             }
-            if (param_2 == 0x86da) {
+            if (type == 0x86da) {
               return PTR__gleExtractPixel_DSDT_MAG_VIB_S8_S8_8_8_00110f88;
             }
-            if (param_2 == 0x86db) {
+            if (type == 0x86db) {
               return PTR__gleExtractPixel_DSDT_MAG_VIB_8_8_S8_S8_Rev_00110f84;
             }
           }
@@ -10807,7 +10813,7 @@ int _gleSelectPixelExtractFunc(param_1, param_2)
       }
     }
   }
-  switch(param_2) {
+  switch(type) {
   case 0x1400:
     return PTR__gleExtractPixel_LA_Byte_00110eac;
   case 0x1401:

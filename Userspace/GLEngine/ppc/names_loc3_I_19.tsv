@@ -1,0 +1,172 @@
+use	_glDrawPixels_ListExec	bVar1	formatInvalid	INFERRED	true when the format is not one of the formats accepted for this type; falls into GL_INVALID_OPERATION	^\s*bVar1\ =\ 10\ <\ uVar6\ \-\ 0x1900;$	+1
+use	_glDrawPixels_ListExec	bVar1	formatInvalid	INFERRED	true when the format is not one of the formats accepted for this type; falls into GL_INVALID_OPERATION	^\s*bVar1\ =\ 1\ <\ uVar6\ \-\ 0x80e0;$	+1
+use	_glDrawPixels_ListExec	bVar1	formatInvalid	INFERRED	true when the format is not one of the formats accepted for this type; falls into GL_INVALID_OPERATION	^\s*if\ \(bVar1\)\ goto\ LAB_00063798;$	+1
+use	_glDrawPixels_ListExec	bVar1	rendererByte79Clear	INFERRED	true when the renderer info byte at +0x79 is zero; selects the narrower dirty-state mask 0x17000000 and the shorter pending-change test	^\s*bVar1\ =\ cVar2\ ==\ '\\0';$	+2
+use	_glDrawPixels_ListExec	bVar1	rendererByte79Clear	INFERRED	true when the renderer info byte at +0x79 is zero; selects the narrower dirty-state mask 0x17000000 and the shorter pending-change test	^\s*if\ \(bVar1\)\ \{$@2	+1
+local	_glDrawPixels_ListExec	uVar4	requiredFormat	INFERRED	the one format (0x80e1 or 0x80e0) a packed type allows; compared with the recorded format
+local	_glDrawPixels_ListExec	iVar5	rasterScratchEndThenFastResult	INFERRED	ctx+0x4854 scratch buffer end (raster position vector at -0x200), later reused for the result of _gleDrawPixelsFast
+use	_glDrawPixels_ListExec	uVar6	type	INFERRED	recordedArgs[3]: the type argument of glDrawPixels	^\s*uVar6\ =\ param_2\[3\];$	+3
+use	_glDrawPixels_ListExec	uVar6	type	INFERRED	recordedArgs[3]: the type argument of glDrawPixels	^\s*if\ \(uVar6\ ==\ 0x140b\)\ \{$	+1
+use	_glDrawPixels_ListExec	uVar6	type	INFERRED	recordedArgs[3]: the type argument of glDrawPixels	^\s*if\ \(uVar6\ <\ 0x140c\)\ \{$	+2
+use	_glDrawPixels_ListExec	uVar6	type	INFERRED	recordedArgs[3]: the type argument of glDrawPixels	^\s*else\ if\ \(uVar6\ ==\ 0x1a00\)\ \{$	+1
+use	_glDrawPixels_ListExec	uVar6	type	INFERRED	recordedArgs[3]: the type argument of glDrawPixels	^\s*else\ if\ \(uVar6\ ==\ 0x8032\)\ goto\ LAB_00063730;$	+1
+use	_glDrawPixels_ListExec	uVar6	type	INFERRED	recordedArgs[3]: the type argument of glDrawPixels	^\s*if\ \(uVar6\ <\ 0x8369\)\ \{$	+3
+use	_glDrawPixels_ListExec	uVar6	type	INFERRED	recordedArgs[3]: the type argument of glDrawPixels	^\s*if\ \(1\ <\ uVar6\ \-\ 0x85ba\)\ goto\ LAB_00063b08;$	+1
+use	_glDrawPixels_ListExec	uVar6	format	INFERRED	recordedArgs[2]: the format argument of glDrawPixels	^\s*uVar6\ =\ param_2\[2\];$	+2
+use	_glDrawPixels_ListExec	uVar6	format	INFERRED	recordedArgs[2]: the format argument of glDrawPixels	^\s*uVar6\ =\ param_2\[2\];$@3	+2
+use	_glDrawPixels_ListExec	uVar6	format	INFERRED	recordedArgs[2]: the format argument of glDrawPixels	^\s*if\ \(uVar6\ !=\ uVar4\)\ goto\ LAB_00063798;$	+1
+use	_glDrawPixels_ListExec	uVar6	format	INFERRED	recordedArgs[2]: the format argument of glDrawPixels	^\s*uVar6\ =\ param_2\[2\];$@2	+4
+use	_glDrawPixels_ListExec	uVar6	format	INFERRED	recordedArgs[2]: the format argument of glDrawPixels	^\s*bVar1\ =\ 1\ <\ uVar6\ \-\ 0x80e0;$	+1
+use	_glDrawPixels_ListExec	iVar8	dirtyWord	INFERRED	word read from the dirty-bit array at ctx+0x324 inside the dirty scan loop	^\s*iVar8\ =\ \*piVar7;$	+1
+use	_glDrawPixels_ListExec	iVar8	dirtyWord	INFERRED	word read from the dirty-bit array at ctx+0x324 inside the dirty scan loop	^\s*if\ \(iVar8\ !=\ 0\)\ \{$	+1
+use	_glDrawPixels_ListExec	uVar9	width	INFERRED	recordedArgs[0]: the width argument of glDrawPixels	^\s*uVar9\ =\ \*param_2;$	+2
+use	_glDrawPixels_ListExec	uVar9	width	INFERRED	recordedArgs[0]: the width argument of glDrawPixels	^\s*if\ \(\(param_2\[2\]\ !=\ 0x85b9\)\ \|\|\ \(\(uVar9\ \&\ 1\)\ !=\ 0\)\)\ goto\ LAB_00063798;$	+1
+use	_glDrawPixels_ListExec	uVar9	width	INFERRED	recordedArgs[0]: the width argument of glDrawPixels	^\s*if\ \(uVar9\ ==\ 0\)\ \{$	+1
+local	_glDrawPixels_ListExec	iVar12	recordSize	CONFIRMED	recordedArgs[4] + 0x14: byte size of this display-list record (pixel data size plus the 5-word header), returned to the list walker
+local	_glDrawPixels_ListExec	pfVar13	rasterPos	INFERRED	scratch vector at ctx+0x4854 - 0x200 receiving the raster position (x, y, z) in window coordinates
+local	_glDrawPixels_Comp	uVar1	recordDataSize	INFERRED	rowBytes * height rounded up to a multiple of 4: bytes of pixel data stored in the display-list record
+local	_glDrawPixels_Comp	iVar3	resultThenElementSize	INFERRED	0 then the result of _gleCopy or _glgProcessPixels (returned to the caller); in the unpack buffer branch it holds _gleBytesPerElement(type) truncated to int (or _glePixelBytes(format,type) when 0), the alignment of the buffer offset
+local	_glDrawPixels_Comp	puVar5	dstConvertDescPtrA	INFERRED	&convertDescAOut: second _glgConvertType out-pointer, also forwarded to _glgProcessPixels
+local	_glDrawPixels_Comp	puVar6	dstConvertDescPtrB	INFERRED	convertDescBOut array decayed to a pointer: third _glgConvertType out-pointer, also forwarded to _glgProcessPixels
+local	_glDrawPixels_Comp	puVar7	packPixelBytesPtr	INFERRED	pointer to packPixelBytes (arg 7 of _glePixelPackSettings), forwarded unused to _glgConvertType
+local	_glDrawPixels_Comp	piVar8	packOffsetPtr	INFERRED	pointer to packOffset (arg 8 of _glePixelPackSettings), forwarded unused to _glgConvertType
+use	_glDrawPixels_Comp	iVar9	unpackSettings	INFERRED	glContext + 0x31cc: pixel unpack settings block passed to the pack/convert helpers	^\s*iVar9\ =\ param_1\ \+\ 0x31cc;$	+1
+use	_glDrawPixels_Comp	iVar9	unpackSettings	INFERRED	glContext + 0x31cc: pixel unpack settings block passed to the pack/convert helpers	^\s*\(param_1,param_4,param_5,param_2,param_3,iVar9,puVar7,piVar8,\&local_50,auStack_4c,$	+2
+use	_glDrawPixels_Comp	iVar9	unpackSettings	INFERRED	glContext + 0x31cc: pixel unpack settings block passed to the pack/convert helpers	^\s*_glgConvertType\(param_4,param_5,puVar5,puVar6,iVar10,iVar9,puVar7,piVar8\);$	+1
+use	_glDrawPixels_Comp	iVar9	unpackSettings	INFERRED	glContext + 0x31cc: pixel unpack settings block passed to the pack/convert helpers	^\s*iVar3\ =\ _glgProcessPixels\(0,\&local_c0,puVar5,puVar6,iVar10,iVar9,local_34\[0\],local_38\);$	+1
+use	_glDrawPixels_Comp	iVar9	unpackBufferSize	INFERRED	pixel unpack buffer +0x38: byte size of the bound buffer object	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x38\);$	+1
+use	_glDrawPixels_Comp	iVar9	unpackBufferSize	INFERRED	pixel unpack buffer +0x38: byte size of the bound buffer object	^\s*if\ \(iVar2\ <=\ iVar9\)\ \{$	+1
+use	_glDrawPixels_Comp	iVar10	forwardedArg5	INFERRED	height copied into a temporary and only passed on unchanged to _glgConvertType and _glgProcessPixels	^\s*iVar10\ =\ param_3;$	+1
+use	_glDrawPixels_Comp	iVar10	forwardedArg5	INFERRED	height copied into a temporary and only passed on unchanged to _glgConvertType and _glgProcessPixels	^\s*_glgConvertType\(param_4,param_5,puVar5,puVar6,iVar10,iVar9,puVar7,piVar8\);$	+1
+use	_glDrawPixels_Comp	iVar10	forwardedArg5	INFERRED	height copied into a temporary and only passed on unchanged to _glgConvertType and _glgProcessPixels	^\s*iVar3\ =\ _glgProcessPixels\(0,\&local_c0,puVar5,puVar6,iVar10,iVar9,local_34\[0\],local_38\);$	+1
+local	_glDrawPixels_Comp	local_c0	srcImagePtr	INFERRED	_glgProcessPixels descriptor word: client pixels + packOffset, source address
+local	_glDrawPixels_Comp	local_bc	srcRowBytes	INFERRED	_glgProcessPixels descriptor word: bytes per source row (packedRowBytes)
+local	_glDrawPixels_Comp	local_b8	srcConvertDescA	INFERRED	_glgProcessPixels descriptor word: first conversion descriptor of the client format/type
+local	_glDrawPixels_Comp	local_b4	srcConvertDescB	INFERRED	_glgProcessPixels descriptor word: second conversion descriptor of the client format/type
+local	_glDrawPixels_Comp	local_b0	dstImagePtr	INFERRED	_glgProcessPixels descriptor word: pixel data area of the display-list record (listRecord + 5 words)
+local	_glDrawPixels_Comp	local_ac	dstRowBytes	INFERRED	_glgProcessPixels descriptor word: bytes per destination row
+local	_glDrawPixels_Comp	local_a8	dstConvertDescA	INFERRED	_glgProcessPixels descriptor word: first conversion descriptor of the stored data
+local	_glDrawPixels_Comp	local_a4	dstConvertDescB	INFERRED	_glgProcessPixels descriptor word: second conversion descriptor of the stored data
+local	_glDrawPixels_Comp	local_a0	unitCount	INFERRED	_glgProcessPixels descriptor word, constant 2
+local	_glDrawPixels_Comp	local_9c	copyFlags	INFERRED	_glgProcessPixels descriptor word: 1 when ctx byte 0x31e4 is set, | 4 when ctx byte 0x31e5 is set
+local	_glDrawPixels_Comp	local_98	pixelOpFlags	INFERRED	_glgProcessPixels descriptor word, constant 5
+local	_glDrawPixels_Comp	local_94	imageWidth	INFERRED	_glgProcessPixels descriptor word: image width
+local	_glDrawPixels_Comp	local_90	imageHeight	INFERRED	_glgProcessPixels descriptor word: image height
+local	_glDrawPixels_Comp	local_54	processReserved	INFERRED	_glgProcessPixels descriptor word, constant 0
+local	_glDrawPixels_Comp	local_50	packedRowBytes	INFERRED	_glePixelPackSettings out param 9: bytes per packed row including alignment padding
+local	_glDrawPixels_Comp	auStack_4c	rowPadding	INFERRED	_glePixelPackSettings out param 10: padding bytes at the end of each packed row
+local	_glDrawPixels_Comp	auStack_48	imageBytes	INFERRED	_glePixelPackSettings out param 11: bytes per packed image slice
+local	_glDrawPixels_Comp	auStack_44	imagePadding	INFERRED	_glePixelPackSettings out param 12: padding bytes at the end of each slice
+local	_glDrawPixels_Comp	auStack_40	packPixelBytes	INFERRED	_glePixelPackSettings out param 7: bytes per pixel (_glePixelBytes)
+local	_glDrawPixels_Comp	local_3c	packOffset	INFERRED	_glePixelPackSettings out param 8: byte offset of the first pixel from the unpack skip settings
+local	_glDrawPixels_Comp	local_38	convertDescAOut	INFERRED	_glgConvertType out param for the client format, copied into the descriptor words
+local	_glDrawPixels_Comp	local_34	convertDescBOut	INFERRED	_glgConvertType out param array for the client format, element 0 copied into the descriptor words
+local	_gleFramebufferTexture	uVar1	copiedWord	INFERRED	per-renderer texture name copied from the texture object into the framebuffer attachment record
+local	_gleFramebufferTexture	puVar2	dstCursor	INFERRED	attachment record per-renderer name slot being written (stride 8 words)
+local	_gleFramebufferTexture	iVar3	attachmentBaseThenTemp	INFERRED	framebuffer + 0x10 base of the attachment records, advanced by 0x20 per renderer in the copy loop, then reused as a level image pointer and a reference count
+use	_gleFramebufferTexture	uVar4	loopIndex	INFERRED	counts up from 0: renderer loop counter	^\s*uVar4\ =\ 0;$	+1
+use	_gleFramebufferTexture	uVar4	loopIndex	INFERRED	counts up from 0: renderer loop counter	^\s*uVar4\ =\ uVar4\ \+\ 1;$	+1
+use	_gleFramebufferTexture	uVar4	loopIndex	INFERRED	counts up from 0: renderer loop counter	^\s*\}\ while\ \(uVar4\ <\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleFramebufferTexture	uVar4	loopIndexThenMipLevel	INFERRED	renderer loop counter, then reused as the mipmap level (level + 1) while the higher levels are invalidated	^\s*uVar4\ =\ 0;$@2	+1
+use	_gleFramebufferTexture	uVar4	loopIndexThenMipLevel	INFERRED	renderer loop counter, then reused as the mipmap level (level + 1) while the higher levels are invalidated	^\s*uVar4\ =\ uVar4\ \+\ 1;$@2	+1
+use	_gleFramebufferTexture	uVar4	loopIndexThenMipLevel	INFERRED	renderer loop counter, then reused as the mipmap level (level + 1) while the higher levels are invalidated	^\s*\}\ while\ \(uVar4\ <\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@2	+1
+use	_gleFramebufferTexture	uVar4	loopIndexThenMipLevel	INFERRED	renderer loop counter, then reused as the mipmap level (level + 1) while the higher levels are invalidated	^\s*if\ \(\(\(\(\*\(uint\ \*\)\(param_4\ \+\ 0x7c\)\ \&\ 0x8000\)\ !=\ 0\)\ \&\&\ \(\(int\)\*\(short\ \*\)\(param_4\ \+\ 0x70\)\ ==\ param_6\)$	+3
+use	_gleFramebufferTexture	uVar4	loopIndexThenMipLevel	INFERRED	renderer loop counter, then reused as the mipmap level (level + 1) while the higher levels are invalidated	^\s*\*\(ushort\ \*\)\(\(int\)puVar9\ \+\ param_5\ \*\ 2\ \+\ 0xa0\)\ \&\ \~\(ushort\)\(1\ <<\ \(uVar4\ \&\ 0x3f\)\);$	+1
+use	_gleFramebufferTexture	uVar4	loopIndexThenMipLevel	INFERRED	renderer loop counter, then reused as the mipmap level (level + 1) while the higher levels are invalidated	^\s*uVar4\ =\ uVar4\ \+\ 1;$@3	+1
+use	_gleFramebufferTexture	uVar4	loopIndexThenMipLevel	INFERRED	renderer loop counter, then reused as the mipmap level (level + 1) while the higher levels are invalidated	^\s*\}\ while\ \(\(int\)uVar4\ <=\ \(int\)\(uint\)\*\(byte\ \*\)\(param_4\ \+\ 0x93\)\);$	+1
+use	_gleFramebufferTexture	puVar5	srcCursor	INFERRED	texture object per-renderer name array cursor	^\s*puVar5\ =\ puVar9;$	+1
+use	_gleFramebufferTexture	puVar5	srcCursor	INFERRED	texture object per-renderer name array cursor	^\s*uVar1\ =\ \*puVar5;$	+1
+use	_gleFramebufferTexture	puVar5	srcCursor	INFERRED	texture object per-renderer name array cursor	^\s*puVar5\ =\ puVar5\ \+\ 1;$	+1
+use	_gleFramebufferTexture	puVar5	nextLevelCursor	INFERRED	level record of the next mipmap level, stepped by 6 words (0x18 bytes) while the levels above a regenerated level are invalidated	^\s*puVar5\ =\ puVar9\ \+\ param_5\ \*\ 0x5a\ \+\ uVar4\ \*\ 6\ \+\ 0x31;$	+1
+use	_gleFramebufferTexture	puVar5	nextLevelCursor	INFERRED	level record of the next mipmap level, stepped by 6 words (0x18 bytes) while the levels above a regenerated level are invalidated	^\s*if\ \(puVar5\[5\]\ !=\ 0\)\ \{$	+2
+use	_gleFramebufferTexture	puVar5	nextLevelCursor	INFERRED	level record of the next mipmap level, stepped by 6 words (0x18 bytes) while the levels above a regenerated level are invalidated	^\s*_gleFreeTextureLevel\(param_1,puVar9,puVar5\);$	+1
+use	_gleFramebufferTexture	puVar5	nextLevelCursor	INFERRED	level record of the next mipmap level, stepped by 6 words (0x18 bytes) while the levels above a regenerated level are invalidated	^\s*\*\(byte\ \*\)\(\(int\)puVar5\ \+\ 0xb\)\ =\ \*\(byte\ \*\)\(\(int\)puVar5\ \+\ 0xb\)\ \&\ 0xef;$	+1
+use	_gleFramebufferTexture	puVar5	nextLevelCursor	INFERRED	level record of the next mipmap level, stepped by 6 words (0x18 bytes) while the levels above a regenerated level are invalidated	^\s*\*\(byte\ \*\)\(\(int\)puVar5\ \+\ 0xb\)\ =\ \*\(byte\ \*\)\(\(int\)puVar5\ \+\ 0xb\)\ \|\ 0x40;$	+2
+use	_gleFramebufferTexture	iVar6	attachmentSlotPtr	INFERRED	attachmentIndex * 4 + framebuffer + 0x10: slot holding the attached texture object pointer (+0xc4)	^\s*iVar6\ =\ param_2\ \*\ 4\ \+\ iVar3;$	+1
+use	_gleFramebufferTexture	iVar6	attachmentSlotPtr	INFERRED	attachmentIndex * 4 + framebuffer + 0x10: slot holding the attached texture object pointer (+0xc4)	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0xc4\);$	+2
+use	_gleFramebufferTexture	iVar6	oldAttachmentRecord	INFERRED	attachmentIndex * 0x18 + framebuffer + 0x10: attachment record, used to find the previously attached level record	^\s*iVar6\ =\ param_2\ \*\ 0x18\ \+\ iVar3;$	+3
+use	_gleFramebufferTexture	iVar6	attachmentRecord	INFERRED	attachmentIndex * 0x18 + framebuffer + 0x10: attachment record (+0x20 target, +0x24 face, +0x28 level, +0x2c zoffset)	^\s*iVar6\ =\ iVar3\ \+\ param_2\ \*\ 0x18;$	+3
+use	_gleFramebufferTexture	iVar6	attachmentRecord	INFERRED	attachmentIndex * 0x18 + framebuffer + 0x10: attachment record (+0x20 target, +0x24 face, +0x28 level, +0x2c zoffset)	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x24\)\ =\ 0;$	+3
+use	_gleFramebufferTexture	iVar6	attachmentRecord	INFERRED	attachmentIndex * 0x18 + framebuffer + 0x10: attachment record (+0x20 target, +0x24 face, +0x28 level, +0x2c zoffset)	^\s*iVar6\ =\ iVar3\ \+\ param_2\ \*\ 0x18;$@2	+5
+use	_gleFramebufferTexture	iVar6	attachmentRecord	INFERRED	attachmentIndex * 0x18 + framebuffer + 0x10: attachment record (+0x20 target, +0x24 face, +0x28 level, +0x2c zoffset)	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x28\)\ =\ param_6;$	+1
+use	_gleFramebufferTexture	iVar6	levelOffset	INFERRED	level * 0x18 + face * 0x168: offset of the attached level record inside the texture object	^\s*iVar6\ =\ param_6\ \*\ 0x18\ \+\ param_5\ \*\ 0x168;$	+1
+use	_gleFramebufferTexture	iVar6	levelOffset	INFERRED	level * 0x18 + face * 0x168: offset of the attached level record inside the texture object	^\s*\*\(byte\ \*\)\(\(int\)puVar9\ \+\ iVar6\ \+\ 0xcf\)\ =\ \*\(byte\ \*\)\(\(int\)puVar9\ \+\ iVar6\ \+\ 0xcf\)\ \|\ 0x80;$	+1
+use	_gleFramebufferTexture	iVar6	levelOffset	INFERRED	level * 0x18 + face * 0x168: offset of the attached level record inside the texture object	^\s*bVar7\ =\ \*\(byte\ \*\)\(\(int\)puVar9\ \+\ iVar6\ \+\ 0xcf\);$	+1
+use	_gleFramebufferTexture	iVar6	levelOffset	INFERRED	level * 0x18 + face * 0x168: offset of the attached level record inside the texture object	^\s*bVar7\ =\ \*\(byte\ \*\)\(\(int\)puVar9\ \+\ iVar6\ \+\ 0xcf\);$@2	+1
+use	_gleFramebufferTexture	iVar6	levelOffset	INFERRED	level * 0x18 + face * 0x168: offset of the attached level record inside the texture object	^\s*\*\(byte\ \*\)\(\(int\)puVar9\ \+\ iVar6\ \+\ 0xcf\)\ =\ bVar7\ \&\ 0xef;$	+1
+use	_gleFramebufferTexture	iVar6	levelOffset	INFERRED	level * 0x18 + face * 0x168: offset of the attached level record inside the texture object	^\s*\*\(byte\ \*\)\(\(int\)puVar9\ \+\ iVar6\ \+\ 0xcf\)\ =\ \*\(byte\ \*\)\(\(int\)puVar9\ \+\ iVar6\ \+\ 0xcf\)\ \|\ 0x40;$	+1
+local	_gleFramebufferTexture	bVar7	levelFlags	INFERRED	byte at the attached level record+0xcf (bit 0 / 0x10 / 0x40 / 0x80 flags)
+local	_gleFramebufferTexture	iVar8	oldTexture	INFERRED	texture object previously attached to this attachment point (released at the end)
+use	_gleFramebufferTexture	puVar9	dstCursor2	INFERRED	attachment per-renderer name slot being cleared (stride 8 words)	^\s*puVar9\ =\ \(undefined4\ \*\)\(param_2\ \*\ 4\ \+\ iVar3\ \+\ 0xe0\);$	+1
+use	_gleFramebufferTexture	puVar9	dstCursor2	INFERRED	attachment per-renderer name slot being cleared (stride 8 words)	^\s*\*puVar9\ =\ 0;$	+1
+use	_gleFramebufferTexture	puVar9	dstCursor2	INFERRED	attachment per-renderer name slot being cleared (stride 8 words)	^\s*puVar9\ =\ puVar9\ \+\ 8;$	+1
+use	_gleFramebufferTexture	puVar9	textureBody	INFERRED	textureObject + 0x10: texture object body that holds the level records	^\s*puVar9\ =\ \(undefined4\ \*\)\(param_4\ \+\ 0x10\);$	+1
+use	_gleFramebufferTexture	puVar9	textureBody	INFERRED	textureObject + 0x10: texture object body that holds the level records	^\s*puVar5\ =\ puVar9;$	+1
+use	_gleFramebufferTexture	puVar9	textureBody	INFERRED	textureObject + 0x10: texture object body that holds the level records	^\s*iVar3\ =\ puVar9\[param_5\ \*\ 0x5a\ \+\ param_6\ \*\ 6\ \+\ 0x36\];$	+2
+use	_gleFramebufferTexture	puVar9	textureBody	INFERRED	textureObject + 0x10: texture object body that holds the level records	^\s*bVar7\ =\ \*\(byte\ \*\)\(\(int\)puVar9\ \+\ iVar6\ \+\ 0xcf\);$	+1
+use	_gleFramebufferTexture	puVar9	textureBody	INFERRED	textureObject + 0x10: texture object body that holds the level records	^\s*_gleFreeTextureLevel\(param_1,puVar9,puVar9\ \+\ param_5\ \*\ 0x5a\ \+\ param_6\ \*\ 6\ \+\ 0x31\);$	+2
+use	_gleFramebufferTexture	puVar9	textureBody	INFERRED	textureObject + 0x10: texture object body that holds the level records	^\s*\*\(byte\ \*\)\(\(int\)puVar9\ \+\ iVar6\ \+\ 0xcf\)\ =\ bVar7\ \&\ 0xef;$	+3
+use	_gleFramebufferTexture	puVar9	textureBody	INFERRED	textureObject + 0x10: texture object body that holds the level records	^\s*\*\(byte\ \*\)\(\(int\)puVar9\ \+\ iVar6\ \+\ 0xcf\)\ =\ \*\(byte\ \*\)\(\(int\)puVar9\ \+\ iVar6\ \+\ 0xcf\)\ \|\ 0x40;$	+1
+use	_gleFramebufferTexture	puVar9	textureBody	INFERRED	textureObject + 0x10: texture object body that holds the level records	^\s*puVar5\ =\ puVar9\ \+\ param_5\ \*\ 0x5a\ \+\ uVar4\ \*\ 6\ \+\ 0x31;$	+1
+use	_gleFramebufferTexture	puVar9	textureBody	INFERRED	textureObject + 0x10: texture object body that holds the level records	^\s*_gleFreeTextureLevel\(param_1,puVar9,puVar5\);$	+1
+use	_gleFramebufferTexture	puVar9	textureBody	INFERRED	textureObject + 0x10: texture object body that holds the level records	^\s*\*\(ushort\ \*\)\(\(int\)puVar9\ \+\ param_5\ \*\ 2\ \+\ 0xa0\)\ =$@2	+2
+local	_gleRenderbufferStorage	bVar1	levelFlags	INFERRED	byte at renderbuffer+0xdf: flags of the renderbuffer level record (bit 0 / 0x10 / 0x20)
+use	_gleRenderbufferStorage	iVar2	attachedObject	INFERRED	object attached to the framebuffer attachment point being scanned	^\s*iVar2\ =\ \*piVar3;$	+1
+use	_gleRenderbufferStorage	iVar2	attachedObject	INFERRED	object attached to the framebuffer attachment point being scanned	^\s*if\ \(iVar2\ ==\ iVar10\)\ \{$	+1
+use	_gleRenderbufferStorage	iVar2	rendererIndex	INFERRED	counts up from 0: renderer loop counter of the name copy	^\s*iVar2\ =\ 0;$	+1
+use	_gleRenderbufferStorage	iVar2	rendererIndex	INFERRED	counts up from 0: renderer loop counter of the name copy	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+use	_gleRenderbufferStorage	iVar2	rendererIndex	INFERRED	counts up from 0: renderer loop counter of the name copy	^\s*\}\ while\ \(iVar2\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+local	_gleRenderbufferStorage	piVar3	attachmentCursor	INFERRED	framebuffer attachment pointer array cursor (framebuffer + 0xd4)
+local	_gleRenderbufferStorage	iVar4	attachmentNameBase	INFERRED	framebuffer + 0x10, advanced by 4 per attachment: base of the per-renderer name slots (+0xe0)
+local	_gleRenderbufferStorage	puVar5	srcCursor	INFERRED	renderbuffer per-renderer name array cursor
+local	_gleRenderbufferStorage	puVar6	dstCursor	INFERRED	attachment per-renderer name slot being written (stride 8 words)
+local	_gleRenderbufferStorage	uVar7	dataType	INFERRED	pixel type of the level created for the renderbuffer (0x1405 for depth/stencil formats, 0x8367 otherwise)
+use	_gleRenderbufferStorage	uVar8	dataFormat	INFERRED	pixel format of the level created for the renderbuffer (0x1902 depth, 0x1901 stencil, 0x80e1 color)	^\s*uVar8\ =\ 0x1902;$	+1
+use	_gleRenderbufferStorage	uVar8	dataFormat	INFERRED	pixel format of the level created for the renderbuffer (0x1902 depth, 0x1901 stencil, 0x80e1 color)	^\s*uVar8\ =\ 0x80e1;$	+1
+use	_gleRenderbufferStorage	uVar8	dataFormat	INFERRED	pixel format of the level created for the renderbuffer (0x1902 depth, 0x1901 stencil, 0x80e1 color)	^\s*uVar8\ =\ 0x1901;$	+1
+use	_gleRenderbufferStorage	uVar8	dataFormat	INFERRED	pixel format of the level created for the renderbuffer (0x1902 depth, 0x1901 stencil, 0x80e1 color)	^\s*_gleCreateTextureLevel\(param_1,iVar9,iVar11,param_3\ \&\ 0xffff,param_4,param_5,1,0,uVar8,uVar7,0,0\);$	+1
+use	_gleRenderbufferStorage	uVar8	copiedWord	INFERRED	per-renderer name copied from the renderbuffer into the attachment record	^\s*uVar8\ =\ \*puVar5;$	+1
+use	_gleRenderbufferStorage	uVar8	copiedWord	INFERRED	per-renderer name copied from the renderbuffer into the attachment record	^\s*\*puVar6\ =\ uVar8;$	+1
+use	_gleRenderbufferStorage	iVar9	renderbufferBody	INFERRED	renderbuffer + 0x10: texture-like body that holds the level record	^\s*iVar9\ =\ iVar10\ \+\ 0x10;$	+1
+use	_gleRenderbufferStorage	iVar9	renderbufferBody	INFERRED	renderbuffer + 0x10: texture-like body that holds the level record	^\s*_gleDeletePluginTextureLevel\(param_1,iVar9,iVar11,0,0\);$	+1
+use	_gleRenderbufferStorage	iVar9	renderbufferBody	INFERRED	renderbuffer + 0x10: texture-like body that holds the level record	^\s*_gleFreeTextureLevel\(param_1,iVar9,iVar11\);$	+1
+use	_gleRenderbufferStorage	iVar9	renderbufferBody	INFERRED	renderbuffer + 0x10: texture-like body that holds the level record	^\s*_gleCreateTextureLevel\(param_1,iVar9,iVar11,param_3\ \&\ 0xffff,param_4,param_5,1,0,uVar8,uVar7,0,0\);$	+1
+use	_gleRenderbufferStorage	iVar9	renderbufferBody	INFERRED	renderbuffer + 0x10: texture-like body that holds the level record	^\s*_gleCreatePluginTextureLevel\(param_1,iVar9,iVar11,0,0,param_3\ \&\ 0xffff\);$	+1
+use	_gleRenderbufferStorage	iVar9	framebufferObject	INFERRED	framebuffer bound at ctx+0x744c	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+4
+use	_gleRenderbufferStorage	iVar9	attachmentRecordCursor	INFERRED	framebuffer + 0x10, advanced by 0x18 per attachment: attachment record (+0x20 target, +0x24..0x2c)	^\s*iVar9\ =\ iVar4;$	+1
+use	_gleRenderbufferStorage	iVar9	attachmentRecordCursor	INFERRED	framebuffer + 0x10, advanced by 0x18 per attachment: attachment record (+0x20 target, +0x24..0x2c)	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x20\)\ =\ param_2;$	+1
+use	_gleRenderbufferStorage	iVar9	attachmentRecordCursor	INFERRED	framebuffer + 0x10, advanced by 0x18 per attachment: attachment record (+0x20 target, +0x24..0x2c)	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x28\)\ =\ 0;$	+3
+use	_gleRenderbufferStorage	iVar9	attachmentRecordCursor	INFERRED	framebuffer + 0x10, advanced by 0x18 per attachment: attachment record (+0x20 target, +0x24..0x2c)	^\s*iVar9\ =\ iVar9\ \+\ 0x18;$	+1
+local	_gleRenderbufferStorage	iVar10	renderbuffer	INFERRED	renderbuffer object bound at ctx+0x7448
+use	_gleRenderbufferStorage	iVar11	levelImage	INFERRED	renderbuffer + 0xd4: level image of the renderbuffer storage	^\s*iVar11\ =\ iVar10\ \+\ 0xd4;$	+1
+use	_gleRenderbufferStorage	iVar11	levelImage	INFERRED	renderbuffer + 0xd4: level image of the renderbuffer storage	^\s*_gleDeletePluginTextureLevel\(param_1,iVar9,iVar11,0,0\);$	+1
+use	_gleRenderbufferStorage	iVar11	levelImage	INFERRED	renderbuffer + 0xd4: level image of the renderbuffer storage	^\s*_gleFreeTextureLevel\(param_1,iVar9,iVar11\);$	+1
+use	_gleRenderbufferStorage	iVar11	levelImage	INFERRED	renderbuffer + 0xd4: level image of the renderbuffer storage	^\s*_gleCreateTextureLevel\(param_1,iVar9,iVar11,param_3\ \&\ 0xffff,param_4,param_5,1,0,uVar8,uVar7,0,0\);$	+1
+use	_gleRenderbufferStorage	iVar11	levelImage	INFERRED	renderbuffer + 0xd4: level image of the renderbuffer storage	^\s*_gleCreatePluginTextureLevel\(param_1,iVar9,iVar11,0,0,param_3\ \&\ 0xffff\);$	+1
+use	_gleRenderbufferStorage	iVar11	attachmentIndex	INFERRED	counts up from 0 to 6: attachment point being scanned	^\s*iVar11\ =\ 0;$	+1
+use	_gleRenderbufferStorage	iVar11	attachmentIndex	INFERRED	counts up from 0 to 6: attachment point being scanned	^\s*iVar11\ =\ iVar11\ \+\ 1;$	+1
+use	_gleRenderbufferStorage	iVar11	attachmentIndex	INFERRED	counts up from 0 to 6: attachment point being scanned	^\s*\}\ while\ \(iVar11\ <\ 6\);$	+1
+local	_gleCreateFramebufferObject	puVar2	halfwordCursor	INFERRED	cursor over the three halfword fields at +0xc2 being cleared
+use	_gleCreateFramebufferObject	puVar3	clearCursor	INFERRED	cursor over the six attachment pointer words at +0xd4 being cleared	^\s*puVar3\ =\ puVar5\ \+\ 0x35;$	+1
+use	_gleCreateFramebufferObject	puVar3	clearCursor	INFERRED	cursor over the six attachment pointer words at +0xd4 being cleared	^\s*\*puVar3\ =\ 0;$	+2
+use	_gleCreateFramebufferObject	puVar3	clearCursor2	INFERRED	cursor over the eight words at +0x10 being cleared	^\s*puVar3\ =\ puVar5\ \+\ 4;$	+1
+use	_gleCreateFramebufferObject	puVar3	clearCursor2	INFERRED	cursor over the eight words at +0x10 being cleared	^\s*\*puVar3\ =\ 0;$@2	+2
+use	_gleCreateFramebufferObject	puVar3	attachmentCursor	INFERRED	cursor over the six 0x18-byte attachment records being cleared	^\s*puVar3\ =\ puVar5;$	+1
+use	_gleCreateFramebufferObject	puVar3	attachmentCursor	INFERRED	cursor over the six 0x18-byte attachment records being cleared	^\s*puVar3\[0xc\]\ =\ 0;$	+7
+use	_gleCreateFramebufferObject	puVar3	rendererCursor	INFERRED	cursor over the per-renderer blocks (stride 8 words) being cleared	^\s*puVar3\ =\ puVar5;$@2	+1
+use	_gleCreateFramebufferObject	puVar3	rendererCursor	INFERRED	cursor over the per-renderer blocks (stride 8 words) being cleared	^\s*puVar4\ =\ puVar3\ \+\ 0x3c;$	+1
+use	_gleCreateFramebufferObject	puVar3	rendererCursor	INFERRED	cursor over the per-renderer blocks (stride 8 words) being cleared	^\s*puVar3\ =\ puVar3\ \+\ 8;$	+1
+local	_gleCreateFramebufferObject	puVar4	rendererClearCursor	INFERRED	cursor over the six words of one per-renderer block being cleared
+local	_gleCreateFramebufferObject	puVar5	newObjectThenCursor	INFERRED	0x20 * rendererCount + 0xf0 byte framebuffer object returned by _gleVecAlloc, later advanced by 8 words per renderer as a cursor
+use	_gleCreateFramebufferObject	iVar6	remaining	INFERRED	counts down from 6 by 1	^\s*iVar6\ =\ 6;$	+1
+use	_gleCreateFramebufferObject	iVar6	remaining	INFERRED	counts down from 6 by 1	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_gleCreateFramebufferObject	iVar6	remaining2	INFERRED	counts down from 8 by 1	^\s*iVar6\ =\ 8;$	+1
+use	_gleCreateFramebufferObject	iVar6	remaining2	INFERRED	counts down from 8 by 1	^\s*iVar6\ =\ iVar6\ \+\ \-1;$@2	+2
+use	_gleCreateFramebufferObject	iVar6	remaining3	INFERRED	counts down from 3 by 1	^\s*iVar6\ =\ 3;$	+1
+use	_gleCreateFramebufferObject	iVar6	remaining3	INFERRED	counts down from 3 by 1	^\s*iVar6\ =\ iVar6\ \+\ \-1;$@3	+2
+use	_gleCreateFramebufferObject	iVar6	remaining4	INFERRED	counts down from 6 by 1	^\s*iVar6\ =\ 6;$@2	+1
+use	_gleCreateFramebufferObject	iVar6	remaining4	INFERRED	counts down from 6 by 1	^\s*iVar6\ =\ iVar6\ \+\ \-1;$@4	+2
+use	_gleCreateFramebufferObject	iVar6	loopIndex	INFERRED	counts up from 0 by 1: renderer loop counter	^\s*iVar6\ =\ 0;$	+1
+use	_gleCreateFramebufferObject	iVar6	loopIndex	INFERRED	counts up from 0 by 1: renderer loop counter	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	_gleCreateFramebufferObject	iVar6	loopIndex	INFERRED	counts up from 0 by 1: renderer loop counter	^\s*\}\ while\ \(iVar6\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+local	_gleCreateFramebufferObject	iVar7	innerRemaining	INFERRED	counts down from 6 by 1: words of one per-renderer block

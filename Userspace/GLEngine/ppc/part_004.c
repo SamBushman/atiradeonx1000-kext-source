@@ -2445,49 +2445,51 @@ void _glRotateZ_Exec(int glContext,float fparam_1,float fparam_2,double unusedFl
 /* _glRotateY_Exec @ 0x32638 (372 bytes) */
 void _glRotateY_Exec(int glContext,float fparam_1,float fparam_2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
+  float savedElement8;
+  float savedElement10;
+  float savedElement1;
+  float savedElement3;
   float *currentMatrix;
   float *currentInverseMatrix;
   uint glContextWord50b0;
-  uint uVar5;
+  uint matrixDirtyBits;
   
-  uVar5 = *(uint *)(glContext + 0x50a8);
+  matrixDirtyBits = *(uint *)(glContext + 0x50a8);
   currentMatrix = *(float **)(glContext + 0x4fec);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    fVar1 = currentMatrix[8];
-    fVar2 = currentMatrix[1];
-    currentMatrix[8] = (fVar1 * fparam_2 + (*currentMatrix * fparam_1));
-    *currentMatrix = (*currentMatrix * fparam_2 - (fVar1 * fparam_1));
-    fVar1 = currentMatrix[10];
-    currentMatrix[1] = (fVar2 * fparam_2 - (currentMatrix[9] * fparam_1));
-    currentMatrix[9] = (currentMatrix[9] * fparam_2 + (fVar2 * fparam_1));
-    fVar2 = currentMatrix[3];
-    currentMatrix[10] = (fVar1 * fparam_2 + (currentMatrix[2] * fparam_1));
-    currentMatrix[2] = (currentMatrix[2] * fparam_2 - (fVar1 * fparam_1));
-    currentMatrix[3] = (fVar2 * fparam_2 - (currentMatrix[0xb] * fparam_1));
-    currentMatrix[0xb] = (currentMatrix[0xb] * fparam_2 + (fVar2 * fparam_1));
+    savedElement8 = currentMatrix[8];
+    savedElement1 = currentMatrix[1];
+    currentMatrix[8] = (savedElement8 * fparam_2 + (*currentMatrix * fparam_1));
+    *currentMatrix = (*currentMatrix * fparam_2 - (savedElement8 * fparam_1));
+    savedElement10 = currentMatrix[10];
+    currentMatrix[1] = (savedElement1 * fparam_2 - (currentMatrix[9] * fparam_1));
+    currentMatrix[9] = (currentMatrix[9] * fparam_2 + (savedElement1 * fparam_1));
+    savedElement3 = currentMatrix[3];
+    currentMatrix[10] = (savedElement10 * fparam_2 + (currentMatrix[2] * fparam_1));
+    currentMatrix[2] = (currentMatrix[2] * fparam_2 - (savedElement10 * fparam_1));
+    currentMatrix[3] = (savedElement3 * fparam_2 - (currentMatrix[0xb] * fparam_1));
+    currentMatrix[0xb] = (currentMatrix[0xb] * fparam_2 + (savedElement3 * fparam_1));
     glContextWord50b0 = *(uint *)(glContext + 0x50b0);
-    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | uVar5;
-    if ((uVar5 & ~glContextWord50b0 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
+    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | matrixDirtyBits;
+    if ((matrixDirtyBits & ~glContextWord50b0 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
       currentInverseMatrix = *(float **)(glContext + 0x4ff0);
-      uVar5 = uVar5 & 0xff000003;
-      fVar1 = currentInverseMatrix[8];
-      fVar2 = currentInverseMatrix[1];
-      currentInverseMatrix[8] = (fVar1 * fparam_2 + (*currentInverseMatrix * fparam_1));
-      *currentInverseMatrix = (*currentInverseMatrix * fparam_2 - (fVar1 * fparam_1));
-      fVar1 = currentInverseMatrix[10];
-      currentInverseMatrix[1] = (fVar2 * fparam_2 - (currentInverseMatrix[9] * fparam_1));
-      currentInverseMatrix[9] = (currentInverseMatrix[9] * fparam_2 + (fVar2 * fparam_1));
-      fVar2 = currentInverseMatrix[3];
-      currentInverseMatrix[10] = (fVar1 * fparam_2 + (currentInverseMatrix[2] * fparam_1))
+      matrixDirtyBits = matrixDirtyBits & 0xff000003;
+      savedElement8 = currentInverseMatrix[8];
+      savedElement1 = currentInverseMatrix[1];
+      currentInverseMatrix[8] = (savedElement8 * fparam_2 + (*currentInverseMatrix * fparam_1));
+      *currentInverseMatrix = (*currentInverseMatrix * fparam_2 - (savedElement8 * fparam_1));
+      savedElement10 = currentInverseMatrix[10];
+      currentInverseMatrix[1] = (savedElement1 * fparam_2 - (currentInverseMatrix[9] * fparam_1));
+      currentInverseMatrix[9] = (currentInverseMatrix[9] * fparam_2 + (savedElement1 * fparam_1));
+      savedElement3 = currentInverseMatrix[3];
+      currentInverseMatrix[10] = (savedElement10 * fparam_2 + (currentInverseMatrix[2] * fparam_1))
       ;
-      currentInverseMatrix[2] = (currentInverseMatrix[2] * fparam_2 - (fVar1 * fparam_1));
-      currentInverseMatrix[3] = (fVar2 * fparam_2 - (currentInverseMatrix[0xb] * fparam_1));
-      currentInverseMatrix[0xb] = (currentInverseMatrix[0xb] * fparam_2 + (fVar2 * fparam_1));
+      currentInverseMatrix[2] = (currentInverseMatrix[2] * fparam_2 - (savedElement10 * fparam_1));
+      currentInverseMatrix[3] = (savedElement3 * fparam_2 - (currentInverseMatrix[0xb] * fparam_1));
+      currentInverseMatrix[0xb] = (currentInverseMatrix[0xb] * fparam_2 + (savedElement3 * fparam_1));
       glContextWord50b0 = *(uint *)(glContext + 0x50b0);
     }
-    *(uint *)(glContext + 0x50b0) = glContextWord50b0 | uVar5;
+    *(uint *)(glContext + 0x50b0) = glContextWord50b0 | matrixDirtyBits;
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -2500,20 +2502,20 @@ void _glRotateY_Exec(int glContext,float fparam_1,float fparam_2,double unusedFl
 /* _glScale_Exec @ 0x327b0 (684 bytes) */
 void _glScale_Exec(int glContext,float x,float y,float z)
 {
-  float fVar1;
-  float fVar2;
-  float dVar3;
+  float reciprocalLimit;
+  float reciprocalScale;
+  float scaleMagnitude;
   float *currentMatrix;
   float *currentInverseMatrix;
   uint glContextWord50b0;
-  uint uVar6;
-  float dVar7;
-  float dVar8;
-  float dVar9;
-  float dVar10;
+  uint matrixDirtyBits;
+  float zeroForCompare;
+  float zeroValue;
+  float oneValue;
+  float minScaleMagnitude;
   
   currentMatrix = *(float **)(glContext + 0x4fec);
-  uVar6 = *(uint *)(glContext + 0x50a8);
+  matrixDirtyBits = *(uint *)(glContext + 0x50a8);
   if ((-1 < *(short *)(glContext + 0x4a10)) || (0x17 < *(int *)(glContext + 0x4ff4))) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -2533,70 +2535,70 @@ void _glScale_Exec(int glContext,float x,float y,float z)
   currentMatrix[10] = (currentMatrix[10] * z);
   currentMatrix[3] = (currentMatrix[3] * x);
   currentMatrix[7] = (currentMatrix[7] * y);
-  *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | uVar6;
-  fVar1 = FLOAT_00108eb4;
+  *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | matrixDirtyBits;
+  reciprocalLimit = FLOAT_00108eb4;
   if (*(char *)(glContext + 0x280e) == '\0') {
     glContextWord50b0 = *(uint *)(glContext + 0x50b0);
-    if ((uVar6 & ~glContextWord50b0 & *(uint *)(glContext + 0x505c) & 0xfffffc) == 0) goto LAB_00032a4c;
-    dVar8 = (double)FLOAT_00108e50;
-    dVar10 = (double)FLOAT_00108e80;
-    dVar9 = (double)FLOAT_00108e54;
+    if ((matrixDirtyBits & ~glContextWord50b0 & *(uint *)(glContext + 0x505c) & 0xfffffc) == 0) goto LAB_00032a4c;
+    zeroValue = (double)FLOAT_00108e50;
+    minScaleMagnitude = (double)FLOAT_00108e80;
+    oneValue = (double)FLOAT_00108e54;
     currentInverseMatrix = *(float **)(glContext + 0x4ff0);
-    dVar3 = x;
-    if (!((double)dVar8 <= x)) {
-      dVar3 = -x;
+    scaleMagnitude = x;
+    if (!((double)zeroValue <= x)) {
+      scaleMagnitude = -x;
     }
-    if ((double)dVar10 <= (double)dVar3) {
-      fVar2 = (dVar9 / x);
-    }
-    else {
-      fVar2 = FLOAT_00108eb4;
-      if (!((double)dVar8 <= x)) {
-        fVar2 = -FLOAT_00108eb4;
-      }
-    }
-    dVar7 = (double)FLOAT_00108e50;
-    *currentInverseMatrix = *currentInverseMatrix * fVar2;
-    currentInverseMatrix[2] = currentInverseMatrix[2] * fVar2;
-    currentInverseMatrix[3] = currentInverseMatrix[3] * fVar2;
-    currentInverseMatrix[1] = currentInverseMatrix[1] * fVar2;
-    dVar3 = y;
-    if (!((double)dVar7 <= y)) {
-      dVar3 = -y;
-    }
-    if ((double)dVar10 <= (double)dVar3) {
-      fVar2 = (dVar9 / y);
+    if ((double)minScaleMagnitude <= (double)scaleMagnitude) {
+      reciprocalScale = (oneValue / x);
     }
     else {
-      fVar2 = fVar1;
-      if (!((double)dVar8 <= y)) {
-        fVar2 = -fVar1;
+      reciprocalScale = FLOAT_00108eb4;
+      if (!((double)zeroValue <= x)) {
+        reciprocalScale = -FLOAT_00108eb4;
       }
     }
-    dVar7 = (double)FLOAT_00108e50;
-    currentInverseMatrix[4] = currentInverseMatrix[4] * fVar2;
-    currentInverseMatrix[6] = currentInverseMatrix[6] * fVar2;
-    currentInverseMatrix[7] = currentInverseMatrix[7] * fVar2;
-    currentInverseMatrix[5] = currentInverseMatrix[5] * fVar2;
-    dVar3 = z;
-    if (!((double)dVar7 <= z)) {
-      dVar3 = -z;
+    zeroForCompare = (double)FLOAT_00108e50;
+    *currentInverseMatrix = *currentInverseMatrix * reciprocalScale;
+    currentInverseMatrix[2] = currentInverseMatrix[2] * reciprocalScale;
+    currentInverseMatrix[3] = currentInverseMatrix[3] * reciprocalScale;
+    currentInverseMatrix[1] = currentInverseMatrix[1] * reciprocalScale;
+    scaleMagnitude = y;
+    if (!((double)zeroForCompare <= y)) {
+      scaleMagnitude = -y;
     }
-    if ((double)dVar10 <= (double)dVar3) {
-      fVar1 = (dVar9 / z);
+    if ((double)minScaleMagnitude <= (double)scaleMagnitude) {
+      reciprocalScale = (oneValue / y);
     }
-    else if (!((double)dVar8 <= z)) {
-      fVar1 = -fVar1;
+    else {
+      reciprocalScale = reciprocalLimit;
+      if (!((double)zeroValue <= y)) {
+        reciprocalScale = -reciprocalLimit;
+      }
     }
-    uVar6 = uVar6 & 0xff000003;
-    currentInverseMatrix[8] = currentInverseMatrix[8] * fVar1;
-    currentInverseMatrix[9] = currentInverseMatrix[9] * fVar1;
-    currentInverseMatrix[10] = currentInverseMatrix[10] * fVar1;
-    currentInverseMatrix[0xb] = currentInverseMatrix[0xb] * fVar1;
+    zeroForCompare = (double)FLOAT_00108e50;
+    currentInverseMatrix[4] = currentInverseMatrix[4] * reciprocalScale;
+    currentInverseMatrix[6] = currentInverseMatrix[6] * reciprocalScale;
+    currentInverseMatrix[7] = currentInverseMatrix[7] * reciprocalScale;
+    currentInverseMatrix[5] = currentInverseMatrix[5] * reciprocalScale;
+    scaleMagnitude = z;
+    if (!((double)zeroForCompare <= z)) {
+      scaleMagnitude = -z;
+    }
+    if ((double)minScaleMagnitude <= (double)scaleMagnitude) {
+      reciprocalLimit = (oneValue / z);
+    }
+    else if (!((double)zeroValue <= z)) {
+      reciprocalLimit = -reciprocalLimit;
+    }
+    matrixDirtyBits = matrixDirtyBits & 0xff000003;
+    currentInverseMatrix[8] = currentInverseMatrix[8] * reciprocalLimit;
+    currentInverseMatrix[9] = currentInverseMatrix[9] * reciprocalLimit;
+    currentInverseMatrix[10] = currentInverseMatrix[10] * reciprocalLimit;
+    currentInverseMatrix[0xb] = currentInverseMatrix[0xb] * reciprocalLimit;
   }
   glContextWord50b0 = *(uint *)(glContext + 0x50b0);
 LAB_00032a4c:
-  *(uint *)(glContext + 0x50b0) = glContextWord50b0 | uVar6;
+  *(uint *)(glContext + 0x50b0) = glContextWord50b0 | matrixDirtyBits;
   return;
 }
 

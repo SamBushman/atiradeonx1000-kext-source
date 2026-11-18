@@ -903,106 +903,106 @@ int _glUniformMatrix4fvARB_ListExec(glContext, listRecord)
 }
 
 /* _gleGetObjectParameter @ 0x8ded8 (508 bytes) */
-int _gleGetObjectParameter(unusedArg1, param_2, param_3, param_4)
+int _gleGetObjectParameter(unusedArg1, shaderObject, pname, result)
   undefined4 unusedArg1;
-  int param_2;
-  undefined4 param_3;
-  uint *param_4;
+  int shaderObject;
+  undefined4 pname;
+  uint *result;
 {
-  uint uVar1;
-  uint uVar2;
-  int iVar3;
+  uint value;
+  uint objectTypeThenZero;
+  int logLength;
   
-  switch(param_3) {
+  switch(pname) {
   case 0x8b4e:
-    uVar2 = *(uint *)(param_2 + 0x10);
-    if ((uVar2 != 0x8b40) && (uVar2 != 0x8b48)) {
+    objectTypeThenZero = *(uint *)(shaderObject + 0x10);
+    if ((objectTypeThenZero != 0x8b40) && (objectTypeThenZero != 0x8b48)) {
       return 0x502;
     }
     goto LAB_0008e178;
   case 0x8b4f:
-    if (*(int *)(param_2 + 0x10) != 0x8b48) {
+    if (*(int *)(shaderObject + 0x10) != 0x8b48) {
       return 0x502;
     }
-    uVar1 = *(uint *)(param_2 + 0x20);
+    value = *(uint *)(shaderObject + 0x20);
     break;
   default:
     return 0x500;
   case 0x8b80:
-    if ((*(int *)(param_2 + 0x10) != 0x8b40) && (*(int *)(param_2 + 0x10) != 0x8b48)) {
+    if ((*(int *)(shaderObject + 0x10) != 0x8b40) && (*(int *)(shaderObject + 0x10) != 0x8b48)) {
       return 0x502;
     }
-    uVar1 = (uint)*(byte *)(param_2 + 0x14);
+    value = (uint)*(byte *)(shaderObject + 0x14);
     break;
   case 0x8b81:
-    if (*(int *)(param_2 + 0x10) != 0x8b48) {
+    if (*(int *)(shaderObject + 0x10) != 0x8b48) {
       return 0x502;
     }
-    uVar1 = (uint)*(byte *)(param_2 + 0x25);
+    value = (uint)*(byte *)(shaderObject + 0x25);
     break;
   case 0x8b82:
-    if (*(int *)(param_2 + 0x10) != 0x8b40) {
+    if (*(int *)(shaderObject + 0x10) != 0x8b40) {
       return 0x502;
     }
-    uVar1 = (uint)*(byte *)(param_2 + 0x3c);
+    value = (uint)*(byte *)(shaderObject + 0x3c);
     break;
   case 0x8b83:
-    if (*(int *)(param_2 + 0x10) != 0x8b40) {
+    if (*(int *)(shaderObject + 0x10) != 0x8b40) {
       return 0x502;
     }
-    uVar1 = (uint)*(byte *)(param_2 + 0x3d);
+    value = (uint)*(byte *)(shaderObject + 0x3d);
     break;
   case 0x8b84:
-    if ((*(int *)(param_2 + 0x10) != 0x8b40) && (*(int *)(param_2 + 0x10) != 0x8b48)) {
+    if ((*(int *)(shaderObject + 0x10) != 0x8b40) && (*(int *)(shaderObject + 0x10) != 0x8b48)) {
       return 0x502;
     }
-    iVar3 = *(int *)(param_2 + 0x1c);
+    logLength = *(int *)(shaderObject + 0x1c);
     goto LAB_0008e16c;
   case 0x8b85:
-    if (*(int *)(param_2 + 0x10) != 0x8b40) {
+    if (*(int *)(shaderObject + 0x10) != 0x8b40) {
       return 0x502;
     }
-    uVar1 = *(uint *)(param_2 + 0x48);
+    value = *(uint *)(shaderObject + 0x48);
     break;
   case 0x8b86:
-    if (*(int *)(param_2 + 0x10) != 0x8b40) {
+    if (*(int *)(shaderObject + 0x10) != 0x8b40) {
       return 0x502;
     }
-    uVar1 = *(uint *)(param_2 + 0x28);
+    value = *(uint *)(shaderObject + 0x28);
     break;
   case 0x8b87:
-    if (*(int *)(param_2 + 0x10) != 0x8b40) {
+    if (*(int *)(shaderObject + 0x10) != 0x8b40) {
       return 0x502;
     }
-    uVar1 = *(uint *)(param_2 + 0x2c);
+    value = *(uint *)(shaderObject + 0x2c);
     break;
   case 0x8b88:
-    if (*(int *)(param_2 + 0x10) != 0x8b48) {
+    if (*(int *)(shaderObject + 0x10) != 0x8b48) {
       return 0x502;
     }
-    iVar3 = *(int *)(param_2 + 0x28);
+    logLength = *(int *)(shaderObject + 0x28);
 LAB_0008e16c:
-    uVar1 = iVar3 + 1;
-    uVar2 = 0;
-    if (iVar3 == 0) {
+    value = logLength + 1;
+    objectTypeThenZero = 0;
+    if (logLength == 0) {
 LAB_0008e178:
-      *param_4 = uVar2;
+      *result = objectTypeThenZero;
       return 0;
     }
     break;
   case 0x8b89:
-    if (*(int *)(param_2 + 0x10) != 0x8b40) {
+    if (*(int *)(shaderObject + 0x10) != 0x8b40) {
       return 0x502;
     }
-    uVar1 = *(uint *)(param_2 + 0x34);
+    value = *(uint *)(shaderObject + 0x34);
     break;
   case 0x8b8a:
-    if (*(int *)(param_2 + 0x10) != 0x8b40) {
+    if (*(int *)(shaderObject + 0x10) != 0x8b40) {
       return 0x502;
     }
-    uVar1 = *(uint *)(param_2 + 0x38);
+    value = *(uint *)(shaderObject + 0x38);
   }
-  *param_4 = uVar1;
+  *result = value;
   return 0;
 }
 
@@ -1798,12 +1798,14 @@ void _glGetUniformivARB_Exec(glContext, programObj, location, params)
   int *params;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int intValue;
+  int programObject;
+  int sharedState;
   int locationValueOffset;
-  int iVar3;
+  int uniformValues;
   int typeInfoFound;
-  int *piVar4;
-  float fVar5;
+  int *uniformValue;
+  float roundedComponent;
   undefined1 auStack_38 [4];
   uint uniformType;
   undefined2 uniformStageUse [14];
@@ -1819,13 +1821,13 @@ LAB_0008f680:
     *(undefined4 *)(glContext + 0x7574) = glErrorCode;
     return;
   }
-  iVar2 = *(int *)(glContext + 0x5148);
-  if (*(char *)(iVar2 + 0x8024) != '\0') {
-    _pthread_mutex_lock(iVar2 + 0x8028);
-    iVar2 = *(int *)(glContext + 0x5148);
+  sharedState = *(int *)(glContext + 0x5148);
+  if (*(char *)(sharedState + 0x8024) != '\0') {
+    _pthread_mutex_lock(sharedState + 0x8028);
+    sharedState = *(int *)(glContext + 0x5148);
   }
-  iVar2 = _gleLookupHashObject(iVar2 + 0x6018,programObj);
-  if (iVar2 == 0) {
+  programObject = _gleLookupHashObject(sharedState + 0x6018,programObj);
+  if (programObject == 0) {
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
@@ -1835,132 +1837,132 @@ LAB_0008f680:
     glErrorCode = 0x501;
     goto LAB_0008f680;
   }
-  if ((((*(int *)(iVar2 + 0x10) != 0x8b40) || (*(char *)(iVar2 + 0x3c) != '\x01')) ||
-      (*(int *)(iVar2 + 0x30) <= location)) ||
+  if ((((*(int *)(programObject + 0x10) != 0x8b40) || (*(char *)(programObject + 0x3c) != '\x01')) ||
+      (*(int *)(programObject + 0x30) <= location)) ||
      ((location == -1 ||
       (typeInfoFound = _ShGetUniformTypeInfo
-                         (*(undefined4 *)(iVar2 + 0x40),location,auStack_38,&uniformType,uniformStageUse),
+                         (*(undefined4 *)(programObject + 0x40),location,auStack_38,&uniformType,uniformStageUse),
       typeInfoFound == 0)))) {
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
     goto LAB_0008f670;
   }
-  iVar3 = *(int *)(iVar2 + 0x4c);
+  uniformValues = *(int *)(programObject + 0x4c);
   locationValueOffset = location * 0x10;
-  piVar4 = (int *)(iVar3 + locationValueOffset);
+  uniformValue = (int *)(uniformValues + locationValueOffset);
   if (uniformType == 0x8b56) {
 LAB_0008f8c4:
-    iVar2 = *piVar4;
+    intValue = *uniformValue;
   }
   else {
     if (0x8b56 < uniformType) {
       if (uniformType == 0x8b5a) {
-        fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
-        *params = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
-        params[1] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[4])));
-        params[2] = (int)fVar5;
-        fVar5 = GH_U2F((unsigned int)(piVar4[5]));
+        roundedComponent = _roundf(*(float *)(uniformValues + locationValueOffset));
+        *params = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[1])));
+        params[1] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[4])));
+        params[2] = (int)roundedComponent;
+        roundedComponent = GH_U2F((unsigned int)(uniformValue[5]));
 LAB_0008f91c:
-        fVar5 = _roundf(fVar5);
-        params[3] = (int)fVar5;
+        roundedComponent = _roundf(roundedComponent);
+        params[3] = (int)roundedComponent;
         goto LAB_0008fb90;
       }
       if (uniformType < 0x8b5b) {
         if (uniformType != 0x8b58) {
           if (0x8b58 < uniformType) {
 LAB_0008f7dc:
-            *params = *piVar4;
-            params[1] = piVar4[1];
-            params[2] = piVar4[2];
-            params[3] = piVar4[3];
+            *params = *uniformValue;
+            params[1] = uniformValue[1];
+            params[2] = uniformValue[2];
+            params[3] = uniformValue[3];
             goto LAB_0008fb90;
           }
           goto LAB_0008f898;
         }
 LAB_0008f848:
-        *params = *piVar4;
-        params[1] = piVar4[1];
-        iVar2 = piVar4[2];
+        *params = *uniformValue;
+        params[1] = uniformValue[1];
+        intValue = uniformValue[2];
         goto LAB_0008f85c;
       }
       if (uniformType == 0x8b5c) {
-        fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
-        *params = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
-        params[1] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[2])));
-        params[2] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[3])));
-        params[3] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[4])));
-        params[4] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[5])));
-        params[5] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[6])));
-        params[6] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[7])));
-        params[7] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[8])));
-        params[8] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[9])));
-        params[9] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[10])));
-        params[10] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[0xb])));
-        params[0xb] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[0xc])));
-        params[0xc] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[0xd])));
-        params[0xd] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[0xe])));
-        params[0xe] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[0xf])));
-        params[0xf] = (int)fVar5;
+        roundedComponent = _roundf(*(float *)(uniformValues + locationValueOffset));
+        *params = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[1])));
+        params[1] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[2])));
+        params[2] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[3])));
+        params[3] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[4])));
+        params[4] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[5])));
+        params[5] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[6])));
+        params[6] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[7])));
+        params[7] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[8])));
+        params[8] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[9])));
+        params[9] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[10])));
+        params[10] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[0xb])));
+        params[0xb] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[0xc])));
+        params[0xc] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[0xd])));
+        params[0xd] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[0xe])));
+        params[0xe] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[0xf])));
+        params[0xf] = (int)roundedComponent;
         goto LAB_0008fb90;
       }
       if (uniformType < 0x8b5c) {
-        fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
-        *params = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
-        params[1] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[2])));
-        params[2] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[4])));
-        params[3] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[5])));
-        params[4] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[6])));
-        params[5] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[8])));
-        params[6] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[9])));
-        params[7] = (int)fVar5;
-        fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[10])));
-        params[8] = (int)fVar5;
+        roundedComponent = _roundf(*(float *)(uniformValues + locationValueOffset));
+        *params = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[1])));
+        params[1] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[2])));
+        params[2] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[4])));
+        params[3] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[5])));
+        params[4] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[6])));
+        params[5] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[8])));
+        params[6] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[9])));
+        params[7] = (int)roundedComponent;
+        roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[10])));
+        params[8] = (int)roundedComponent;
         goto LAB_0008fb90;
       }
       if (0x8b64 < uniformType) goto LAB_0008fb90;
       goto LAB_0008f8c4;
     }
     if (uniformType == 0x8b51) {
-      fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
-      *params = (int)fVar5;
-      fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
-      params[1] = (int)fVar5;
-      fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[2])));
-      iVar2 = (int)fVar5;
+      roundedComponent = _roundf(*(float *)(uniformValues + locationValueOffset));
+      *params = (int)roundedComponent;
+      roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[1])));
+      params[1] = (int)roundedComponent;
+      roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[2])));
+      intValue = (int)roundedComponent;
 LAB_0008f85c:
-      params[2] = iVar2;
+      params[2] = intValue;
       goto LAB_0008fb90;
     }
     if (0x8b51 < uniformType) {
       if (uniformType == 0x8b53) {
 LAB_0008f898:
-        *params = *piVar4;
-        params[1] = piVar4[1];
+        *params = *uniformValue;
+        params[1] = uniformValue[1];
         goto LAB_0008fb90;
       }
       if (0x8b52 < uniformType) {
@@ -1970,32 +1972,32 @@ LAB_0008f898:
         }
         goto LAB_0008f848;
       }
-      fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
-      *params = (int)fVar5;
-      fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
-      params[1] = (int)fVar5;
-      fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[2])));
-      params[2] = (int)fVar5;
-      fVar5 = GH_U2F((unsigned int)(piVar4[3]));
+      roundedComponent = _roundf(*(float *)(uniformValues + locationValueOffset));
+      *params = (int)roundedComponent;
+      roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[1])));
+      params[1] = (int)roundedComponent;
+      roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[2])));
+      params[2] = (int)roundedComponent;
+      roundedComponent = GH_U2F((unsigned int)(uniformValue[3]));
       goto LAB_0008f91c;
     }
     if (uniformType != 0x1406) {
       if (0x1406 < uniformType) {
         if (uniformType == 0x8b50) {
-          fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
-          *params = (int)fVar5;
-          fVar5 = _roundf(GH_U2F((unsigned int)(piVar4[1])));
-          params[1] = (int)fVar5;
+          roundedComponent = _roundf(*(float *)(uniformValues + locationValueOffset));
+          *params = (int)roundedComponent;
+          roundedComponent = _roundf(GH_U2F((unsigned int)(uniformValue[1])));
+          params[1] = (int)roundedComponent;
         }
         goto LAB_0008fb90;
       }
       if (uniformType != 0x1404) goto LAB_0008fb90;
       goto LAB_0008f8c4;
     }
-    fVar5 = _roundf(*(float *)(iVar3 + locationValueOffset));
-    iVar2 = (int)fVar5;
+    roundedComponent = _roundf(*(float *)(uniformValues + locationValueOffset));
+    intValue = (int)roundedComponent;
   }
-  *params = iVar2;
+  *params = intValue;
 LAB_0008fb90:
   if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
     return;

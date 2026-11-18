@@ -1696,63 +1696,63 @@ LAB_00086f70:
 int _glCreateProgramObjectARB_Exec(glContext)
   int glContext;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  undefined *puVar4;
-  undefined4 uVar5;
-  int iVar6;
-  undefined4 uVar7;
-  int iVar8;
-  int iVar9;
+  int *rendererDispatch;
+  undefined4 *rendererHandlePtr;
+  int slotByteOffset;
+  undefined *freeFunction;
+  undefined4 programHandle;
+  int programObject;
+  undefined4 stageDataOrLinker;
+  int vertexStageData;
+  int stageData;
   int loopIndex;
-  int iVar10;
+  int rendererSlotCursor;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar6 = _gleVecAlloc(0x50);
-    _memset(iVar6,0,0x50);
-    uVar5 = _gleGenHashNames(*(int *)(glContext + 0x5148) + 0x6018,1);
-    puVar4 = PTR__gleFreeShaderObject_00112048;
-    *(undefined4 *)(iVar6 + 8) = 2;
-    *(undefined **)(iVar6 + 0xc) = puVar4;
-    *(undefined4 *)(iVar6 + 0x10) = 0x8b40;
-    *(undefined1 *)(iVar6 + 0x14) = 0;
-    *(undefined4 *)(iVar6 + 4) = uVar5;
+    programObject = _gleVecAlloc(0x50);
+    _memset(programObject,0,0x50);
+    programHandle = _gleGenHashNames(*(int *)(glContext + 0x5148) + 0x6018,1);
+    freeFunction = PTR__gleFreeShaderObject_00112048;
+    *(undefined4 *)(programObject + 8) = 2;
+    *(undefined **)(programObject + 0xc) = freeFunction;
+    *(undefined4 *)(programObject + 0x10) = 0x8b40;
+    *(undefined1 *)(programObject + 0x14) = 0;
+    *(undefined4 *)(programObject + 4) = programHandle;
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    uVar7 = _gleVecAlloc(0x520);
-    *(undefined4 *)(iVar6 + 0x20) = uVar7;
-    _memset(uVar7,0,0x520);
-    uVar7 = _gleVecAlloc(0x520);
-    *(undefined4 *)(iVar6 + 0x24) = uVar7;
+    stageDataOrLinker = _gleVecAlloc(0x520);
+    *(undefined4 *)(programObject + 0x20) = stageDataOrLinker;
+    _memset(stageDataOrLinker,0,0x520);
+    stageDataOrLinker = _gleVecAlloc(0x520);
+    *(undefined4 *)(programObject + 0x24) = stageDataOrLinker;
     loopIndex = 0;
-    _memset(uVar7,0,0x520);
+    _memset(stageDataOrLinker,0,0x520);
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      iVar10 = glContext + 0x85a0;
+      rendererSlotCursor = glContext + 0x85a0;
       do {
-        iVar3 = loopIndex * 4;
+        slotByteOffset = loopIndex * 4;
         loopIndex = loopIndex + 1;
-        (**(code **)(*(int *)(iVar10 + 0x2e4) + 400))
-                  (*(undefined4 *)(iVar10 + 0xc),*(int *)(iVar6 + 0x24) + iVar3 + 0x4e4,
-                   *(int *)(iVar6 + 0x24) + 0x504);
-        piVar1 = (int *)(iVar10 + 0x2e4);
-        iVar8 = *(int *)(iVar6 + 0x20);
-        puVar2 = (undefined4 *)(iVar10 + 0xc);
-        iVar10 = iVar10 + 0x2e0;
-        (**(code **)(*piVar1 + 400))(*puVar2,iVar8 + iVar3 + 0x4e4,iVar8 + 0x504);
+        (**(code **)(*(int *)(rendererSlotCursor + 0x2e4) + 400))
+                  (*(undefined4 *)(rendererSlotCursor + 0xc),*(int *)(programObject + 0x24) + slotByteOffset + 0x4e4,
+                   *(int *)(programObject + 0x24) + 0x504);
+        rendererDispatch = (int *)(rendererSlotCursor + 0x2e4);
+        vertexStageData = *(int *)(programObject + 0x20);
+        rendererHandlePtr = (undefined4 *)(rendererSlotCursor + 0xc);
+        rendererSlotCursor = rendererSlotCursor + 0x2e0;
+        (**(code **)(*rendererDispatch + 400))(*rendererHandlePtr,vertexStageData + slotByteOffset + 0x4e4,vertexStageData + 0x504);
       } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
-    iVar9 = *(int *)(iVar6 + 0x20);
-    *(undefined2 *)(iVar9 + 0x506) = 0;
-    *(undefined2 *)(iVar9 + 0x504) = 0x8b31;
-    iVar9 = *(int *)(iVar6 + 0x24);
-    *(undefined2 *)(iVar9 + 0x506) = 1;
-    *(undefined2 *)(iVar9 + 0x504) = 0x8b30;
+    stageData = *(int *)(programObject + 0x20);
+    *(undefined2 *)(stageData + 0x506) = 0;
+    *(undefined2 *)(stageData + 0x504) = 0x8b31;
+    stageData = *(int *)(programObject + 0x24);
+    *(undefined2 *)(stageData + 0x506) = 1;
+    *(undefined2 *)(stageData + 0x504) = 0x8b30;
     _ShInitialize();
-    uVar7 = _ShConstructLinker(0);
-    *(undefined4 *)(iVar6 + 0x40) = uVar7;
-    _gleAddHashNameAndObject(glContext,*(int *)(glContext + 0x5148) + 0x6018,iVar6);
+    stageDataOrLinker = _ShConstructLinker(0);
+    *(undefined4 *)(programObject + 0x40) = stageDataOrLinker;
+    _gleAddHashNameAndObject(glContext,*(int *)(glContext + 0x5148) + 0x6018,programObject);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
@@ -1761,8 +1761,8 @@ int _glCreateProgramObjectARB_Exec(glContext)
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    uVar5 = 0;
+    programHandle = 0;
   }
-  return uVar5;
+  return programHandle;
 }
 

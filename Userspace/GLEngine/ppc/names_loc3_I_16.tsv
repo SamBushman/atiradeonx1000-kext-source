@@ -1,0 +1,47 @@
+local	_glGetTexImage_Exec	bVar1	formatMatchesType	INFERRED	true when format equals the one format (GL_RGB 0x1907 for the packed 3-3-2/5-6-5 types, or requiredFormat) that the type allows; otherwise GL_INVALID_OPERATION
+local	_glGetTexImage_Exec	bVar2	levelFlags	INFERRED	byte at levelRecord+0xcf: bit 0x20 level has data, 0x40 plugin-resident, 0x10 data in system memory, bit 1 stored image still valid
+local	_glGetTexImage_Exec	uVar3	levelHeight	INFERRED	ushort at levelRecord+0xca: height of the stored level image, multiplied by rowBytes to step to the next slice
+local	_glGetTexImage_Exec	uVar4	pixelOpFlags	INFERRED	constant 0x68002 (same value stored in the descriptor at uStack_a8) passed on to _glgProcessPixels
+local	_glGetTexImage_Exec	sVar5	storedFormat	INFERRED	short at levelRecord+0xd4: format of the pixel data stored for this level (compared with the requested format, depth/color class must agree)
+local	_glGetTexImage_Exec	iVar6	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + level * 0x18: record of the requested mipmap level
+use	_glGetTexImage_Exec	iVar8	srcSliceOffset	INFERRED	running byte offset of the current slice inside the stored level data, advanced by rowBytes * levelHeight per slice	^\s*iVar8\ =\ 0;$	+1
+use	_glGetTexImage_Exec	iVar8	srcSliceOffset	INFERRED	running byte offset of the current slice inside the stored level data, advanced by rowBytes * levelHeight per slice	^\s*iStack_d0\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0xd8\)\ \+\ iVar8;$	+2
+use	_glGetTexImage_Exec	iVar8	requiredBufferSize	INFERRED	result of _gleOffsetLimitImage3D: bytes the packed image needs, compared with the pixel pack buffer size	^\s*iVar8\ =\ _gleOffsetLimitImage3D$	+1
+use	_glGetTexImage_Exec	iVar8	requiredBufferSize	INFERRED	result of _gleOffsetLimitImage3D: bytes the packed image needs, compared with the pixel pack buffer size	^\s*if\ \(iVar8\ <=\ iVar17\)\ \{$	+1
+use	_glGetTexImage_Exec	iVar9	dstSliceOffset	INFERRED	running byte offset of the current slice inside the destination image, advanced by imageBytes per slice	^\s*iVar9\ =\ 0;$	+1
+use	_glGetTexImage_Exec	iVar9	dstSliceOffset	INFERRED	running byte offset of the current slice inside the destination image, advanced by imageBytes per slice	^\s*iStack_c0\ =\ param_6\ \+\ iStack_4c\ \+\ iVar9;$	+1
+use	_glGetTexImage_Exec	iVar9	dstSliceOffset	INFERRED	running byte offset of the current slice inside the destination image, advanced by imageBytes per slice	^\s*iVar9\ =\ iVar9\ \+\ uStack_58;$	+1
+use	_glGetTexImage_Exec	iVar9	elementSize	INFERRED	_gleBytesPerElement(type) truncated to int (falls back to _glePixelBytes(format,type) when 0): the pack buffer offset must be a multiple of it	^\s*iVar9\ =\ \(int\)dVar18;$	+1
+use	_glGetTexImage_Exec	iVar9	elementSize	INFERRED	_gleBytesPerElement(type) truncated to int (falls back to _glePixelBytes(format,type) when 0): the pack buffer offset must be a multiple of it	^\s*if\ \(iVar9\ ==\ 0\)\ \{$	+2
+use	_glGetTexImage_Exec	iVar9	elementSize	INFERRED	_gleBytesPerElement(type) truncated to int (falls back to _glePixelBytes(format,type) when 0): the pack buffer offset must be a multiple of it	^\s*if\ \(param_6\ ==\ \(param_6\ /\ iVar9\)\ \*\ iVar9\)\ \{$	+1
+local	_glGetTexImage_Exec	puVar10	dstConvertDescPtrA	INFERRED	&dstConvertDescAOut: second _glgConvertType out-pointer, also forwarded to _glgProcessPixels
+local	_glGetTexImage_Exec	puVar11	dstConvertDescPtrB	INFERRED	dstConvertDescBOut array decayed to a pointer: third _glgConvertType out-pointer, also forwarded to _glgProcessPixels
+local	_glGetTexImage_Exec	uVar12	requiredFormat	INFERRED	the format the data type forces (0x80e1 GL_BGR-like or 0x85b9) that format is compared with
+local	_glGetTexImage_Exec	puVar13	forwardedArg7	INFERRED	pointer to packPixelBytes (arg 7 of _glePixelPackSettings), later reloaded with packedRowBytes and forwarded unused to _glgConvertType
+local	_glGetTexImage_Exec	piVar14	forwardedArg8	INFERRED	pointer to packOffset (arg 8 of _glePixelPackSettings), forwarded unused to _glgConvertType and _glgProcessPixels
+local	_glGetTexImage_Exec	uVar16	faceIndexThenHeight	INFERRED	target - 0x8515 (cube map face index, forced to 0 for non-cube targets) while selecting levelRecord, then reloaded with levelHeight (ushort at levelRecord+0xca) and used as the height argument of _glePixelPackSettings and forwarded argument 5
+local	_glGetTexImage_Exec	iVar17	packBufferSize	INFERRED	pixelPackBuffer+0x38: byte size of the bound pixel pack buffer
+local	_glGetTexImage_Exec	iStack_d0	srcImagePtr	INFERRED	_glgProcessPixels descriptor word: current slice address in the stored level data
+local	_glGetTexImage_Exec	iStack_cc	srcRowBytes	INFERRED	_glgProcessPixels descriptor word: bytes per row of the stored level data
+local	_glGetTexImage_Exec	uStack_c8	srcConvertDescA	INFERRED	_glgProcessPixels descriptor word: first conversion descriptor of the stored format
+local	_glGetTexImage_Exec	uStack_c4	srcConvertDescB	INFERRED	_glgProcessPixels descriptor word: second conversion descriptor of the stored format
+local	_glGetTexImage_Exec	iStack_c0	dstImagePtr	INFERRED	_glgProcessPixels descriptor word: pixels + packOffset + dstSliceOffset, destination slice address
+local	_glGetTexImage_Exec	puStack_bc	dstRowBytes	INFERRED	_glgProcessPixels descriptor word: packed bytes per destination row (packedRowBytes)
+local	_glGetTexImage_Exec	uStack_b8	dstConvertDescA	INFERRED	_glgProcessPixels descriptor word: first conversion descriptor of the requested format/type
+local	_glGetTexImage_Exec	uStack_b4	dstConvertDescB	INFERRED	_glgProcessPixels descriptor word: second conversion descriptor of the requested format/type
+local	_glGetTexImage_Exec	uStack_b0	unitCount	INFERRED	_glgProcessPixels descriptor word, constant 2
+local	_glGetTexImage_Exec	uStack_ac	copyFlags	INFERRED	_glgProcessPixels descriptor word: 0x60000 (0x68000 when RGB texture stores RGBA), | 2 when ctx byte 0x31c8 is set
+local	_glGetTexImage_Exec	uStack_a8	dstPixelOpFlags	INFERRED	_glgProcessPixels descriptor word, constant 0x68002
+local	_glGetTexImage_Exec	uStack_a4	imageWidth	INFERRED	_glgProcessPixels descriptor word: level width (ushort at levelRecord+200)
+local	_glGetTexImage_Exec	uStack_a0	imageHeight	INFERRED	_glgProcessPixels descriptor word: level height (ushort at levelRecord+0xca)
+local	_glGetTexImage_Exec	uStack_64	processReserved	INFERRED	_glgProcessPixels descriptor word, constant 0
+local	_glGetTexImage_Exec	puStack_60	packedRowBytes	INFERRED	_glePixelPackSettings out param 9: bytes per packed row including alignment padding
+local	_glGetTexImage_Exec	auStack_5c	rowPadding	INFERRED	_glePixelPackSettings out param 10: padding bytes at the end of each packed row
+local	_glGetTexImage_Exec	uStack_58	imageBytes	INFERRED	_glePixelPackSettings out param 11: bytes per packed image slice
+local	_glGetTexImage_Exec	auStack_54	imagePadding	INFERRED	_glePixelPackSettings out param 12: padding bytes at the end of each slice
+local	_glGetTexImage_Exec	uStack_50	packPixelBytes	INFERRED	_glePixelPackSettings out param 7: bytes per pixel (_glePixelBytes)
+local	_glGetTexImage_Exec	iStack_4c	packOffset	INFERRED	_glePixelPackSettings out param 8: byte offset of the first pixel from the pack skip settings
+local	_glGetTexImage_Exec	uStack_48	srcConvertDescAOut	INFERRED	_glgConvertType out param for the stored format, copied into srcConvertDescA
+local	_glGetTexImage_Exec	uStack_44	srcConvertDescBOut	INFERRED	_glgConvertType out param for the stored format, copied into srcConvertDescB
+local	_glGetTexImage_Exec	uStack_40	dstConvertDescAOut	INFERRED	_glgConvertType out param for the requested format, copied into dstConvertDescA
+local	_glGetTexImage_Exec	auStack_3c	dstConvertDescBOut	INFERRED	_glgConvertType out param array for the requested format, element 0 copied into dstConvertDescB

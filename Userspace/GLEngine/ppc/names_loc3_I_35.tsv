@@ -1,0 +1,48 @@
+local	_gleResetLevels	param_2	textureObject	CONFIRMED	texture object whose mipmap level range is being recomputed
+local	_gleResetLevels	param_3	updateFlags	INFERRED	update flags in and out: bit 0 forces a refresh, bit 1 is set when the resident level range changed
+local	_gleResetLevels	uVar15	baseLevel	CONFIRMED	texture base level (+0x60) clamped to the last defined level
+local	_gleResetLevels	uVar14	maxLevelThenLevelMask	CONFIRMED	texture max level (+0x62, 1000 by default) possibly lowered to the highest level that has image data
+local	_gleResetLevels	uVar10	highestFlaggedThenClampedMaxLevel	INFERRED	highest level whose flag byte has bit 0x10 set
+local	_gleResetLevels	uVar9	lastDefinedThenResidentLevelCount	INFERRED	last defined mipmap level (+0x87)
+local	_gleResetLevels	uVar12	minFilter	CONFIRMED	min filter (+0x3a), reduced to a non-mipmap filter when the chain is incomplete
+local	_gleResetLevels	uVar13	faceCount	CONFIRMED	number of faces (+0x90): 6 for cube maps, otherwise 1
+local	_gleResetLevels	bVar1	levelFlags	CONFIRMED	flag byte of a level record (bit 0x10: level has image data)
+local	_gleResetLevels	uVar2	faceLevelMask	INFERRED	per face bit mask of the defined levels (+0x94)
+local	_gleResetLevels	bVar3	allFacesHaveBaseThenChainRequired	INFERRED	every face has the base level defined
+local	_gleResetLevels	bVar4	levelRangeRestrictedThenSkipDowngrade	INFERRED	base level is not 0 or max level is not 1000
+local	_gleResetLevels	bVar5	hasUpperLevels	INFERRED	some face has a level above 0 defined
+local	_gleResetLevels	bVar6	restrictLevels	INFERRED	level range has to be restricted: range limited, chain required or upper levels present
+local	_gleResetLevels	bVar7	allFacesHaveRange	INFERRED	every face has all the levels in levelRangeMask defined
+local	_gleResetLevels	iVar18	levelRecord	CONFIRMED	level record at textureObject + face*0x168 + level*0x18 + 0xc4
+local	_gleResetLevels	uVar20	faceCountdownThenLevelCursor	INFERRED	remaining faces in the mask scan
+local	_gleResetLevels	uVar17	baseLevelBitThenFlags	INFERRED	bit mask of the base level plus bit 0
+use	_gleResetLevels	iVar19	clampedChannelLevel	INFERRED	level limit minus base level, floored at 0	^\s*iVar19\ =\ \*\(byte\ \*\)\(param_2\ \+\ 0x84\)\ \-\ uVar15;$	+3
+use	_gleResetLevels	iVar19	clampedChannelLevel	INFERRED	level limit minus base level, floored at 0	^\s*\*\(char\ \*\)\(param_2\ \+\ 0x88\)\ =\ \(char\)iVar19;$	+1
+use	_gleResetLevels	iVar19	clampedChannelLevel	INFERRED	level limit minus base level, floored at 0	^\s*iVar19\ =\ \*\(byte\ \*\)\(param_2\ \+\ 0x85\)\ \-\ uVar15;$	+3
+use	_gleResetLevels	iVar19	clampedChannelLevel	INFERRED	level limit minus base level, floored at 0	^\s*\*\(char\ \*\)\(param_2\ \+\ 0x89\)\ =\ \(char\)iVar19;$	+1
+use	_gleResetLevels	iVar19	clampedChannelLevel	INFERRED	level limit minus base level, floored at 0	^\s*iVar19\ =\ \*\(byte\ \*\)\(param_2\ \+\ 0x86\)\ \-\ uVar15;$	+3
+use	_gleResetLevels	iVar19	clampedChannelLevel	INFERRED	level limit minus base level, floored at 0	^\s*\*\(char\ \*\)\(param_2\ \+\ 0x8a\)\ =\ \(char\)iVar19;$	+1
+local	_gleSetFunctionIDFromArray	param_2	arrayState	INFERRED	vertex array state: per-slot records of 0x18 bytes from +4, enabled-slot masks at +0x300/+0x304
+local	_gleSetFunctionIDFromArray	param_3	funcDesc	INFERRED	function descriptor being filled: header word then one 16 bit stream word per input
+local	_gleSetFunctionIDFromArray	uVar1	elementTypeShort	INFERRED	GL element type of the array of the selected slot (16 bit load)
+local	_gleSetFunctionIDFromArray	uVar2	typeCodeThenStreamCount	INFERRED	compact code of the context index type (GL type minus 0x1400)
+local	_gleSetFunctionIDFromArray	uVar4	streamWord	INFERRED	input stream word: type and slot in bits 10-15
+local	_gleSetFunctionIDFromArray	uVar3	streamSlotThenElementTypeCode	INFERRED	array slot of the input stream (stream word >> 10)
+local	_gleSetFunctionIDFromArray	iVar6	slotRecord	INFERRED	array slot record at arrayState + slot*0x18
+local	_gleSetFunctionIDFromArray	uVar8	componentCount	INFERRED	component count of the array element
+local	_gleSetFunctionIDFromArray	uVar10	enabledSlotsHigh	INFERRED	upper 32 bits of the enabled array slot mask (+0x300)
+local	_gleSetFunctionIDFromArray	uVar11	enabledSlotsLow	INFERRED	lower 32 bits of the enabled array slot mask (+0x304)
+local	_gleSetFunctionIDFromArray	uVar12	elementType	INFERRED	GL type of the array element, 0 when none
+local	_gleSetFunctionIDFromArray	lVar13	slotBit	INFERRED	64 bit mask of the slot: 1 << (slot + 0x10)
+local	_gleVPSetFuncOutputDesc	param_1	outputRecords	INFERRED	vertex program output records of 8 bytes: bits 16-19 hold the output kind
+local	_gleVPSetFuncOutputDesc	param_2	outputCount	INFERRED	number of vertex program outputs
+local	_gleVPSetFuncOutputDesc	param_3	funcDesc	INFERRED	function descriptor being filled: header word then one 16 bit stream word per output
+local	_gleVPSetFuncOutputDesc	param_4	extraOutput	INFERRED	non-zero: one more stream word (0x1b00 | offset) is appended for the extra output
+local	_gleVPSetFuncOutputDesc	uVar1	descHeaderThenOutputRecord	INFERRED	descriptor header: output count and flag 0x200000
+local	_gleVPSetFuncOutputDesc	uVar3	streamCount	INFERRED	number of streams, outputCount plus one when there is an extra output
+local	_gleVPSetFuncOutputDesc	iVar4	trailingIndex	INFERRED	index of the next stream word for outputs that are not position or alpha outputs
+local	_gleVPSetFuncOutputDesc	iVar2	streamWordIndex	INFERRED	index of the stream word being written
+local	_gleVPSetFuncOutputDesc	iVar8	streamType	INFERRED	stream type code for the output kind
+local	_gleVPSetFuncOutputDesc	uVar5	recordKindThenRecordBit0	INFERRED	output record word while counting the leading outputs
+local	_gleVPSetFuncOutputDesc	iVar6	recordIndexThenLeadingIndex	INFERRED	output record index in the counting loop
+local	_gleVPSetFuncOutputDesc	iVar9	leadingIndexNext	INFERRED	leading index after this output

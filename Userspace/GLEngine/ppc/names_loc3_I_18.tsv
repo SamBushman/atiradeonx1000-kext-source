@@ -1,0 +1,113 @@
+local	_glCompressedTexImage3D_Exec	bVar1	levelFlags	INFERRED	byte at levelRecord+0xcf (bit 0 / 0x10 / 0x20 flags tested and cleared while the old level storage is released)
+local	_glCompressedTexImage3D_Exec	uVar2	objectFlags	INFERRED	ushort at textureObject+0x24; bits 0x3c00 are tested and bit 0x1000 is set when they are clear
+use	_glCompressedTexImage3D_Exec	uVar3	pluginResult	INFERRED	result of _gleCreatePluginTextureLevel, forced to 0 when a mipmap regeneration is attempted; returned to the caller	^\s*uVar3\ =\ _gleCreatePluginTextureLevel\(param_1,iVar5,iVar7,uVar4,param_3,param_4\);$	+1
+use	_glCompressedTexImage3D_Exec	uVar3	pluginResult	INFERRED	result of _gleCreatePluginTextureLevel, forced to 0 when a mipmap regeneration is attempted; returned to the caller	^\s*if\ \(\(\(\(\*\(uint\ \*\)\(iVar5\ \+\ 0x6c\)\ \&\ 0x8000\)\ !=\ 0\)\ \&\&\ \(\*\(short\ \*\)\(iVar5\ \+\ 0x60\)\ ==\ param_3\)\)\ \&\&$	+2
+use	_glCompressedTexImage3D_Exec	uVar3	pluginResult	INFERRED	result of _gleCreatePluginTextureLevel, forced to 0 when a mipmap regeneration is attempted; returned to the caller	^\s*return\ uVar3;$	+1
+local	_glCompressedTexImage3D_Exec	uVar4	faceIndex	INFERRED	target - 0x8515 (cube map face index, 0 for non-cube targets)
+local	_glCompressedTexImage3D_Exec	iVar5	contextThenTextureObject	INFERRED	initialised with the glContext value (returned on the error paths), then reloaded with the texture object returned by _gleCheckCompressedTexImage3DArgs
+use	_glCompressedTexImage3D_Exec	iVar6	pixelUnpackBuffer	INFERRED	buffer object bound at ctx+0x4a6c (+0x30 data, +0x38 size, +0x40 sync flag)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a6c\);$	+5
+use	_glCompressedTexImage3D_Exec	iVar6	pixelUnpackBuffer	INFERRED	buffer object bound at ctx+0x4a6c (+0x30 data, +0x38 size, +0x40 sync flag)	^\s*param_10\ =\ param_10\ \+\ \*\(int\ \*\)\(iVar6\ \+\ 0x30\);$	+1
+use	_glCompressedTexImage3D_Exec	iVar6	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + level * 0x18: record of the mipmap level being replaced	^\s*iVar6\ =\ iVar5\ \+\ uVar4\ \*\ 0x168\ \+\ param_3\ \*\ 0x18;$	+3
+use	_glCompressedTexImage3D_Exec	iVar6	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + level * 0x18: record of the mipmap level being replaced	^\s*if\ \(\*\(int\ \*\)\(iVar6\ \+\ 0xd8\)\ !=\ 0\)\ \{$	+2
+use	_glCompressedTexImage3D_Exec	iVar6	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + level * 0x18: record of the mipmap level being replaced	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar6\ \+\ 0xcf\);$@2	+1
+use	_glCompressedTexImage3D_Exec	iVar6	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + level * 0x18: record of the mipmap level being replaced	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0xd8\)\ =\ 0;$	+1
+use	_glCompressedTexImage3D_Exec	iVar6	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + level * 0x18: record of the mipmap level being replaced	^\s*\*\(byte\ \*\)\(iVar6\ \+\ 0xcf\)\ =\ bVar1\ \&\ 0xef;$	+1
+use	_glCompressedTexImage3D_Exec	iVar6	levelRecord	INFERRED	textureObject + faceIndex * 0x168 + level * 0x18: record of the mipmap level being replaced	^\s*\*\(byte\ \*\)\(iVar6\ \+\ 0xcf\)\ =\ \*\(byte\ \*\)\(iVar6\ \+\ 0xcf\)\ \&\ 0xdf;$	+1
+use	_glCompressedTexImage3D_Exec	iVar6	createResult	INFERRED	result of _gleCreateTextureLevel; nonzero with data != 0 means the compressed image is stored with _gleCompressedTextureImagePut	^\s*iVar6\ =\ _gleCreateTextureLevel$	+1
+use	_glCompressedTexImage3D_Exec	iVar6	createResult	INFERRED	result of _gleCreateTextureLevel; nonzero with data != 0 means the compressed image is stored with _gleCompressedTextureImagePut	^\s*if\ \(\(iVar6\ !=\ 0\)\ \&\&\ \(param_10\ !=\ 0\)\)\ \{$	+1
+local	_glCompressedTexImage3D_Exec	iVar7	textureLevel	INFERRED	levelRecord + 0xc4: level image passed to the texture level delete/free/create/put functions
+use	_glGetTexEnviv_Exec	fVar1	colorBiasThenAlpha	INFERRED	FLOAT_00108e90 (bias of the float to int color conversion), later reused for the converted fourth color component	^\s*fVar1\ =\ FLOAT_00108e90;$	+1
+use	_glGetTexEnviv_Exec	fVar1	colorBiasThenAlpha	INFERRED	FLOAT_00108e90 (bias of the float to int color conversion), later reused for the converted fourth color component	^\s*param_4\[1\]\ =\ \(int\)\(\*\(float\ \*\)\(iVar5\ \+\ 0x3528\)\ \*\ fVar2\ \-\ fVar1\);$	+3
+use	_glGetTexEnviv_Exec	fVar1	colorBiasThenAlpha	INFERRED	FLOAT_00108e90 (bias of the float to int color conversion), later reused for the converted fourth color component	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar5\ \+\ 0x3594\);$	+1
+use	_glGetTexEnviv_Exec	fVar1	colorBiasThenAlpha	INFERRED	FLOAT_00108e90 (bias of the float to int color conversion), later reused for the converted fourth color component	^\s*param_4\[3\]\ =\ \(int\)fVar1;$	+1
+use	_glGetTexEnviv_Exec	fVar1	floatParamValue	INFERRED	float state value (RGB/alpha scale at 0x3558/0x355c, LOD bias at 0x3560, or the fourth color component) truncated to int	^\s*fVar1\ =\ \*\(float\ \*\)\(uVar6\ \*\ 0x7c\ \+\ param_1\ \+\ 0x355c\);$	+1
+use	_glGetTexEnviv_Exec	fVar1	floatParamValue	INFERRED	float state value (RGB/alpha scale at 0x3558/0x355c, LOD bias at 0x3560, or the fourth color component) truncated to int	^\s*fVar1\ =\ \*\(float\ \*\)\(uVar6\ \*\ 0x7c\ \+\ param_1\ \+\ 0x3558\);$	+1
+use	_glGetTexEnviv_Exec	fVar1	floatParamValue	INFERRED	float state value (RGB/alpha scale at 0x3558/0x355c, LOD bias at 0x3560, or the fourth color component) truncated to int	^\s*fVar1\ =\ \*\(float\ \*\)\(uVar6\ \*\ 0x7c\ \+\ param_1\ \+\ 0x3560\);$	+1
+use	_glGetTexEnviv_Exec	fVar1	floatParamValue	INFERRED	float state value (RGB/alpha scale at 0x3558/0x355c, LOD bias at 0x3560, or the fourth color component) truncated to int	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar5\ \+\ 0x3598\);$	+1
+use	_glGetTexEnviv_Exec	fVar1	floatParamValue	INFERRED	float state value (RGB/alpha scale at 0x3558/0x355c, LOD bias at 0x3560, or the fourth color component) truncated to int	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar5\ \+\ 0x359c\);$	+1
+use	_glGetTexEnviv_Exec	fVar1	floatParamValue	INFERRED	float state value (RGB/alpha scale at 0x3558/0x355c, LOD bias at 0x3560, or the fourth color component) truncated to int	^\s*uVar4\ =\ \(uint\)\(int\)fVar1;$	+1
+local	_glGetTexEnviv_Exec	uVar4	intParamValue	INFERRED	integer value of the queried texture environment parameter, stored into params[0]
+local	_glGetTexEnviv_Exec	iVar5	texUnitState	INFERRED	glContext + activeTexUnit * 0x7c: per texture unit state block (texture shader state at +0x3564..)
+local	_glGetTexEnviv_Exec	uVar6	activeTexUnit	INFERRED	ctx+0x53d4: active texture unit
+local	_glTexEnvi_Exec	bVar1	paramAllowed	INFERRED	result of comparing param against one of the values valid for pname; false falls into the GL_INVALID_ENUM path
+use	_glTexEnvi_Exec	iVar3	texUnitState	INFERRED	glContext + activeTexUnit * 0x7c: per texture unit state block (texture shader state at +0x3564..)	^\s*iVar3\ =\ param_1\ \+\ uVar7\ \*\ 0x7c;$	+1
+use	_glTexEnvi_Exec	iVar3	texUnitState	INFERRED	glContext + activeTexUnit * 0x7c: per texture unit state block (texture shader state at +0x3564..)	^\s*\*\(undefined2\ \*\)\(iVar3\ \+\ 0x356c\)\ =\ uVar6;$	+1
+use	_glTexEnvi_Exec	iVar3	texUnitState	INFERRED	glContext + activeTexUnit * 0x7c: per texture unit state block (texture shader state at +0x3564..)	^\s*\*\(undefined2\ \*\)\(iVar3\ \+\ 0x3564\)\ =\ uVar6;$	+1
+use	_glTexEnvi_Exec	iVar3	texUnitState	INFERRED	glContext + activeTexUnit * 0x7c: per texture unit state block (texture shader state at +0x3564..)	^\s*\*\(float\ \*\)\(iVar3\ \+\ 0x3598\)\ =$	+1
+use	_glTexEnvi_Exec	iVar3	texUnitState	INFERRED	glContext + activeTexUnit * 0x7c: per texture unit state block (texture shader state at +0x3564..)	^\s*\*\(float\ \*\)\(iVar3\ \+\ 0x359c\)\ =$	+1
+use	_glTexEnvi_Exec	iVar3	texUnitState	INFERRED	glContext + activeTexUnit * 0x7c: per texture unit state block (texture shader state at +0x3564..)	^\s*\*\(undefined2\ \*\)\(iVar3\ \+\ 0x356a\)\ =\ uVar6;$	+1
+use	_glTexEnvi_Exec	iVar3	dirtyBit	INFERRED	dirty bit set in the dirty word at ctx+0x320 (1 for the shader-op case, 0x1000000 for the combiner case)	^\s*iVar3\ =\ 1;$	+1
+use	_glTexEnvi_Exec	iVar3	dirtyBit	INFERRED	dirty bit set in the dirty word at ctx+0x320 (1 for the shader-op case, 0x1000000 for the combiner case)	^\s*iVar3\ =\ 0x1000000;$	+1
+use	_glTexEnvi_Exec	iVar3	dirtyBit	INFERRED	dirty bit set in the dirty word at ctx+0x320 (1 for the shader-op case, 0x1000000 for the combiner case)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 800\)\ =\ uVar4\ \|\ iVar3\ <<\ \(uVar7\ \&\ 0x3f\);$	+1
+local	_glTexEnvi_Exec	uVar4	glContextWord320	INFERRED	ctx+0x320 dirty word read before the dirty bit is or'ed in
+local	_glTexEnvi_Exec	iVar5	shaderOpError	INFERRED	error code returned by _CheckNVShaderOperation for the texture shader operation; nonzero is recorded as the GL error
+local	_glTexEnvi_Exec	uVar6	paramShort	INFERRED	low 16 bits of param, the value stored into the texture unit state halfword fields
+local	_glTexEnvi_Exec	uVar7	activeTexUnitThenEnableMask	INFERRED	ctx+0x53d4 active texture unit, reused as the new GL_COORD_REPLACE enable mask stored at ctx+0x3444
+local	_glVertexAttribPointerARB_Exec	iVar1	slotByteOffset	INFERRED	slot * 4: byte offset into the per-slot pointer arrays
+use	_glVertexAttribPointerARB_Exec	uVar2	copiedWord	INFERRED	buffer object word copied to the per-renderer slot inside the copy loop	^\s*uVar2\ =\ \*puVar8;$	+1
+use	_glVertexAttribPointerARB_Exec	uVar2	copiedWord	INFERRED	buffer object word copied to the per-renderer slot inside the copy loop	^\s*\*puVar10\ =\ uVar2;$	+1
+use	_glVertexAttribPointerARB_Exec	uVar2	savedWord350	INFERRED	clientState+0x350 word saved before the bound-buffer pointer is replaced	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(iVar9\ \+\ 0x350\);$	+1
+use	_glVertexAttribPointerARB_Exec	uVar2	savedWord350	INFERRED	clientState+0x350 word saved before the bound-buffer pointer is replaced	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x350\)\ =\ uVar2;$	+1
+local	_glVertexAttribPointerARB_Exec	uVar3	typeFlags	INFERRED	type with bit 0x8000 set when the attribute is normalized; stored at attribRecord+0x28
+use	_glVertexAttribPointerARB_Exec	uVar4	attribBit	INFERRED	1 << index: bit of this attribute in the enable/buffer masks	^\s*uVar4\ =\ 1\ <<\ \(param_2\ \&\ 0x3f\);$	+2
+use	_glVertexAttribPointerARB_Exec	uVar4	attribBit	INFERRED	1 << index: bit of this attribute in the enable/buffer masks	^\s*\*\(uint\ \*\)\(iVar9\ \+\ 0x338\)\ =\ \*\(uint\ \*\)\(iVar9\ \+\ 0x338\)\ \&\ \~uVar4;$	+1
+use	_glVertexAttribPointerARB_Exec	uVar4	attribBit	INFERRED	1 << index: bit of this attribute in the enable/buffer masks	^\s*\*\(uint\ \*\)\(iVar9\ \+\ 0x338\)\ =\ \*\(uint\ \*\)\(iVar9\ \+\ 0x338\)\ \|\ uVar4;$	+1
+use	_glVertexAttribPointerARB_Exec	uVar4	savedWord354	INFERRED	clientState+0x354 word saved before the 0x10 change flag is or'ed in	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar9\ \+\ 0x354\);$	+1
+use	_glVertexAttribPointerARB_Exec	uVar4	savedWord354	INFERRED	clientState+0x354 word saved before the 0x10 change flag is or'ed in	^\s*\*\(uint\ \*\)\(iVar9\ \+\ 0x354\)\ =\ uVar4\ \|\ 0x10;$	+1
+local	_glVertexAttribPointerARB_Exec	iVar5	attribRecord	INFERRED	attribArrayBase + slot * 0x18: client array record of this attribute (pointer +0x20, size/type +0x28..0x2c, stride +0x24, packed format +0x34)
+local	_glVertexAttribPointerARB_Exec	iVar6	newRefCount	INFERRED	reference count of the previously bound buffer object after the decrement
+use	_glVertexAttribPointerARB_Exec	iVar7	oldBufferObject	INFERRED	buffer object previously bound to this attribute slot	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar1\ \+\ iVar14\ \+\ 0x350\);$	+1
+use	_glVertexAttribPointerARB_Exec	iVar7	oldBufferObject	INFERRED	buffer object previously bound to this attribute slot	^\s*if\ \(iVar13\ !=\ iVar7\)\ \{$	+2
+use	_glVertexAttribPointerARB_Exec	iVar7	oldBufferObject	INFERRED	buffer object previously bound to this attribute slot	^\s*_gleFreeBufferObject\(param_1,iVar7\);$	+1
+use	_glVertexAttribPointerARB_Exec	uVar11	packedFormat	INFERRED	stride << 7 | type & 0xf | (size & 3) << 4 | (normalized & 1) << 6: format word compared with attribRecord+0x34	^\s*uVar11\ =\ param_6\ <<\ 7\ \|\ param_4\ \&\ 0xf\ \|\ \(param_3\ \&\ 3\)\ <<\ 4\ \|\ \(param_5\ \&\ 1\)\ <<\ 6;$	+1
+use	_glVertexAttribPointerARB_Exec	uVar11	packedFormat	INFERRED	stride << 7 | type & 0xf | (size & 3) << 4 | (normalized & 1) << 6: format word compared with attribRecord+0x34	^\s*if\ \(\*\(uint\ \*\)\(iVar5\ \+\ 0x34\)\ ==\ uVar11\)\ \{$	+1
+use	_glVertexAttribPointerARB_Exec	uVar11	packedFormat	INFERRED	stride << 7 | type & 0xf | (size & 3) << 4 | (normalized & 1) << 6: format word compared with attribRecord+0x34	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x34\)\ =\ uVar11;$	+1
+use	_glVertexAttribPointerARB_Exec	uVar11	selectMask	INFERRED	all-ones when the dispatch table entry is empty: mask used to select between the two dispatch tables	^\s*uVar11\ =\ \-\(uint\)\(\*\(int\ \*\)\(\*\(uint\ \*\)\(param_1\ \+\ 0x4684\)\ \+\ 0xc\)\ ==\ 0\);$	+1
+use	_glVertexAttribPointerARB_Exec	uVar11	selectMask	INFERRED	all-ones when the dispatch table entry is empty: mask used to select between the two dispatch tables	^\s*\(\(\*\(uint\ \*\)\(param_1\ \+\ 0x4680\)\ \&\ uVar11\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x4684\)\ \&\ \~uVar11\)\ \+\ 0xc\)\ =$	+1
+local	_glVertexAttribPointerARB_Exec	iVar12	slot	INFERRED	index + 0x10: client array slot of the generic attribute
+local	_glVertexAttribPointerARB_Exec	iVar13	newBufferObject	INFERRED	buffer object bound to GL_ARRAY_BUFFER at clientState+0x358
+local	_glVertexAttribPointerARB_Exec	iVar14	attribArrayBase	INFERRED	clientState + 0x10: base of the client array records
+use	_glRotateY_Exec	fVar1	savedElement8	INFERRED	matrix element [8] held while it is rotated with element [0]	^\s*fVar1\ =\ pfVar3\[8\];$	+1
+use	_glRotateY_Exec	fVar1	savedElement8	INFERRED	matrix element [8] held while it is rotated with element [0]	^\s*pfVar3\[8\]\ =\ \(fVar1\ \*\ fparam_2\ \+\ \(\*pfVar3\ \*\ fparam_1\)\);$	+2
+use	_glRotateY_Exec	fVar1	savedElement8	INFERRED	matrix element [8] held while it is rotated with element [0]	^\s*fVar1\ =\ pfVar3\[8\];$@2	+1
+use	_glRotateY_Exec	fVar1	savedElement8	INFERRED	matrix element [8] held while it is rotated with element [0]	^\s*pfVar3\[8\]\ =\ \(fVar1\ \*\ fparam_2\ \+\ \(\*pfVar3\ \*\ fparam_1\)\);$@2	+2
+use	_glRotateY_Exec	fVar1	savedElement10	INFERRED	matrix element [10] held while it is rotated with element [2]	^\s*fVar1\ =\ pfVar3\[10\];$	+1
+use	_glRotateY_Exec	fVar1	savedElement10	INFERRED	matrix element [10] held while it is rotated with element [2]	^\s*pfVar3\[10\]\ =\ \(fVar1\ \*\ fparam_2\ \+\ \(pfVar3\[2\]\ \*\ fparam_1\)\);$	+2
+use	_glRotateY_Exec	fVar1	savedElement10	INFERRED	matrix element [10] held while it is rotated with element [2]	^\s*fVar1\ =\ pfVar3\[10\];$@2	+1
+use	_glRotateY_Exec	fVar1	savedElement10	INFERRED	matrix element [10] held while it is rotated with element [2]	^\s*pfVar3\[10\]\ =\ \(fVar1\ \*\ fparam_2\ \+\ \(pfVar3\[2\]\ \*\ fparam_1\)\)$	+1
+use	_glRotateY_Exec	fVar1	savedElement10	INFERRED	matrix element [10] held while it is rotated with element [2]	^\s*pfVar3\[2\]\ =\ \(pfVar3\[2\]\ \*\ fparam_2\ \-\ \(fVar1\ \*\ fparam_1\)\);$@2	+1
+use	_glRotateY_Exec	fVar2	savedElement1	INFERRED	matrix element [1] held while it is rotated with element [9]	^\s*fVar2\ =\ pfVar3\[1\];$	+1
+use	_glRotateY_Exec	fVar2	savedElement1	INFERRED	matrix element [1] held while it is rotated with element [9]	^\s*pfVar3\[1\]\ =\ \(fVar2\ \*\ fparam_2\ \-\ \(pfVar3\[9\]\ \*\ fparam_1\)\);$	+2
+use	_glRotateY_Exec	fVar2	savedElement1	INFERRED	matrix element [1] held while it is rotated with element [9]	^\s*fVar2\ =\ pfVar3\[1\];$@2	+1
+use	_glRotateY_Exec	fVar2	savedElement1	INFERRED	matrix element [1] held while it is rotated with element [9]	^\s*pfVar3\[1\]\ =\ \(fVar2\ \*\ fparam_2\ \-\ \(pfVar3\[9\]\ \*\ fparam_1\)\);$@2	+2
+use	_glRotateY_Exec	fVar2	savedElement3	INFERRED	matrix element [3] held while it is rotated with element [0xb]	^\s*fVar2\ =\ pfVar3\[3\];$	+1
+use	_glRotateY_Exec	fVar2	savedElement3	INFERRED	matrix element [3] held while it is rotated with element [0xb]	^\s*pfVar3\[3\]\ =\ \(fVar2\ \*\ fparam_2\ \-\ \(pfVar3\[0xb\]\ \*\ fparam_1\)\);$	+2
+use	_glRotateY_Exec	fVar2	savedElement3	INFERRED	matrix element [3] held while it is rotated with element [0xb]	^\s*fVar2\ =\ pfVar3\[3\];$@2	+1
+use	_glRotateY_Exec	fVar2	savedElement3	INFERRED	matrix element [3] held while it is rotated with element [0xb]	^\s*pfVar3\[3\]\ =\ \(fVar2\ \*\ fparam_2\ \-\ \(pfVar3\[0xb\]\ \*\ fparam_1\)\);$@2	+2
+local	_glRotateY_Exec	uVar5	matrixDirtyBits	INFERRED	ctx+0x50a8: dirty bits of the current matrix stack, or'ed into ctx+0x50ac and ctx+0x50b0
+local	_glScale_Exec	fVar1	reciprocalLimit	INFERRED	FLOAT_00108eb4: magnitude returned in place of 1/scale when |scale| is below the epsilon (sign follows the scale)
+local	_glScale_Exec	fVar2	reciprocalScale	INFERRED	1 / scale factor (or +-reciprocalLimit) multiplied into the inverse matrix
+local	_glScale_Exec	dVar3	scaleMagnitude	INFERRED	absolute value of the current scale factor tested against the epsilon
+local	_glScale_Exec	uVar6	matrixDirtyBits	INFERRED	ctx+0x50a8: dirty bits of the current matrix stack, or'ed into ctx+0x50ac and ctx+0x50b0
+local	_glScale_Exec	dVar7	zeroForCompare	INFERRED	0.0 (FLOAT_00108e50) reloaded for the sign tests of y and z
+local	_glScale_Exec	dVar8	zeroValue	INFERRED	0.0 (FLOAT_00108e50) for the sign test of x
+local	_glScale_Exec	dVar9	oneValue	INFERRED	1.0 (FLOAT_00108e54): numerator of 1/scale
+local	_glScale_Exec	dVar10	minScaleMagnitude	INFERRED	FLOAT_00108e80: epsilon below which the reciprocal is clamped
+local	_glPixelTransferf_Exec	uVar2	nonDefaultFlags	INFERRED	new value of the word at ctx+0x3414 (bits set for the pixel transfer parameters that differ from their default)
+local	_glPixelTransferf_Exec	uVar3	transferBit	INFERRED	bit of ctx+0x3414 that belongs to this pname
+local	_glPixelTransferf_Exec	dVar4	defaultValue	INFERRED	default value of the parameter (1.0 for scales, 0.0 for biases and the others)
+local	_glFinishObjectAPPLE_Exec	piVar1	rendererDispatch	INFERRED	per-renderer driver dispatch table pointer (function at +0x1c4 finishes the object)
+local	_glFinishObjectAPPLE_Exec	puVar2	rendererHandlePtr	INFERRED	pointer to the per-renderer handle passed as the first argument of the finish function
+local	_glFinishObjectAPPLE_Exec	uVar3	objectKind	INFERRED	index of the object type switch: 0 fence 0x8a0b, 1 texture 0x1702, 2 vertex array 0x8074, 3 object 0x85b3, 4 renderbuffer 0x8d41, 5 framebuffer 0x8d40
+local	_glFinishObjectAPPLE_Exec	uVar5	rendererObjectName	INFERRED	per-renderer name read from the object (hashObject+0x10 array)
+local	_glFinishObjectAPPLE_Exec	iVar6	rendererSlotCursor	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot
+local	_glCreateProgramObjectARB_Exec	piVar1	rendererDispatch	INFERRED	per-renderer driver dispatch table pointer (function at +400 builds the shader code buffer)
+local	_glCreateProgramObjectARB_Exec	puVar2	rendererHandlePtr	INFERRED	pointer to the per-renderer handle passed as the first argument
+local	_glCreateProgramObjectARB_Exec	iVar3	slotByteOffset	INFERRED	loopIndex * 4: byte offset of the renderer slot in the code buffers
+local	_glCreateProgramObjectARB_Exec	puVar4	freeFunction	INFERRED	PTR__gleFreeShaderObject: destructor stored in the new object at +0xc
+local	_glCreateProgramObjectARB_Exec	uVar5	programHandle	INFERRED	hash name generated for the new program object (0 on error); returned to the caller
+local	_glCreateProgramObjectARB_Exec	iVar6	programObject	INFERRED	0x50-byte program object being created (+4 name, +8 refcount 2, +0x10 type 0x8b40, +0x20/+0x24 stage data, +0x40 linker)
+local	_glCreateProgramObjectARB_Exec	uVar7	stageDataOrLinker	INFERRED	vertex/fragment stage data block (0x520 bytes) allocated for the object, then the shader linker handle
+local	_glCreateProgramObjectARB_Exec	iVar8	vertexStageData	INFERRED	programObject+0x20: vertex stage data block
+local	_glCreateProgramObjectARB_Exec	iVar9	stageData	INFERRED	vertex then fragment stage data block whose +0x504/+0x506 fields are initialised
+local	_glCreateProgramObjectARB_Exec	iVar10	rendererSlotCursor	INFERRED	ctx+0x85a0 stepped by 0x2e0 per renderer: address of the renderer slot

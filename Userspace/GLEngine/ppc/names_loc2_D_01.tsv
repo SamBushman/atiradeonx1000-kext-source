@@ -114,7 +114,7 @@ local	_gleSetEnable_BLEND	param_2	unusedArg2	CONFIRMED	never read in the functio
 local	_gleSetEnable_DEPTH_TEST	param_2	unusedArg2	CONFIRMED	never read in the function body (declared in the signature only; unused argument)
 local	_gleSetEnable_CULL_FACE	param_2	unusedArg2	CONFIRMED	never read in the function body (declared in the signature only; unused argument)
 local	_gleAddHashNameAndObject	param_2	forwardedArg2	CONFIRMED	only used as an unchanged argument of calls (2 occurrences): never otherwise read by this function
-local	_glePixelPackSettings	param_4	forwardedArg4	CONFIRMED	only used as an unchanged argument of calls (1 occurrences): never otherwise read by this function
+local	_glePixelPackSettings	param_4	width	CONFIRMED	width of the image in pixels: only used as the width argument of _gleRowBytes
 local	_gleTextureImagePut_Fast	param_9	forwardedArg9	CONFIRMED	only used as an unchanged argument of calls (1 occurrences): never otherwise read by this function
 local	_gleSetEnable_TEXTURE_RECTANGLE_EXT	param_2	unusedArg2	CONFIRMED	never read in the function body (declared in the signature only; unused argument)
 local	_glBegin_Exec	in_r5	incomingR5	INFERRED	Ghidra pseudo-register in_r5: the value r5 held on entry (read without being written in this function)

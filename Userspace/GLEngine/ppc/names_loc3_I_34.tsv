@@ -1,0 +1,97 @@
+local	_gleSetFunctionIDFromList	param_2	streamSizes	INFERRED	per-slot component sizes in bytes (+0xc) and the total vertex size (+8)
+local	_gleSetFunctionIDFromList	param_3	funcDesc	INFERRED	function descriptor being filled: header word then one 16 bit stream word per input
+local	_gleSetFunctionIDFromList	bVar1	slotSize	INFERRED	size in bytes of one slot
+local	_gleSetFunctionIDFromList	uVar2	streamCount	INFERRED	number of input streams (top byte of the descriptor header)
+use	_gleSetFunctionIDFromList	uVar3	headerWithOutputs	INFERRED	descriptor header with the output flags 0x70000 set	^\s*uVar3\ =\ uVar2\ \|\ 0x70000;$	+2
+use	_gleSetFunctionIDFromList	uVar3	headerWithOutputs	INFERRED	descriptor header with the output flags 0x70000 set	^\s*\*param_3\ =\ uVar3\ \|\ \*\(uint\ \*\)\(param_2\ \+\ 8\)\ >>\ 2\ \&\ 0xff;$	+1
+use	_gleSetFunctionIDFromList	uVar3	streamSlot	INFERRED	array slot of the input stream (stream word >> 10)	^\s*uVar3\ =\ \(uint\)\(uVar7\ >>\ 10\);$	+3
+use	_gleSetFunctionIDFromList	uVar3	streamSlot	INFERRED	array slot of the input stream (stream word >> 10)	^\s*uVar3\ =\ 0x10;$	+1
+use	_gleSetFunctionIDFromList	uVar3	streamSlot	INFERRED	array slot of the input stream (stream word >> 10)	^\s*uVar3\ =\ 0;$	+1
+use	_gleSetFunctionIDFromList	uVar3	streamSlot	INFERRED	array slot of the input stream (stream word >> 10)	^\s*uVar7\ =\ \(ushort\)local_90\[uVar3\];$	+1
+use	_gleSetFunctionIDFromList	uVar3	streamSlot	INFERRED	array slot of the input stream (stream word >> 10)	^\s*if\ \(\(\(uVar3\ \-\ 1\ <\ 6\)\ \|\|\ \(uVar3\ \-\ 8\ <\ 8\)\)\ \|\|\ \(uVar3\ \-\ 0x11\ <\ 0xf\)\)\ \{$	+2
+use	_gleSetFunctionIDFromList	uVar3	streamSlot	INFERRED	array slot of the input stream (stream word >> 10)	^\s*uVar9\ =\ \(uint\)\*\(byte\ \*\)\(iVar10\ \+\ 0x400\ \+\ uVar3\);$	+1
+use	_gleSetFunctionIDFromList	uVar3	streamSlot	INFERRED	array slot of the input stream (stream word >> 10)	^\s*iVar11\ =\ 5\ \-\ \(\(int\)\-\(uVar3\ \^\ 6\)\ >>\ 0x1f\);$	+1
+use	_gleSetFunctionIDFromList	uVar3	streamSlot	INFERRED	array slot of the input stream (stream word >> 10)	^\s*uVar9\ =\ \(uint\)\(7\ <\ uVar3\ \-\ 0x20\);$	+1
+local	_gleSetFunctionIDFromList	iVar4	runningSize	INFERRED	running sum of the slot sizes
+local	_gleSetFunctionIDFromList	piVar8	offsetCursor	INFERRED	cursor over the running offset table
+local	_gleSetFunctionIDFromList	local_90	slotOffsets	INFERRED	offset of each slot within a vertex: running sum of the slot sizes
+use	_gleSetFunctionIDFromList	uVar7	streamWord	INFERRED	input stream word read from the descriptor	^\s*uVar7\ =\ \*\(ushort\ \*\)\(param_3\ \+\ 1\);$	+1
+use	_gleSetFunctionIDFromList	uVar7	streamWord	INFERRED	input stream word read from the descriptor	^\s*uVar3\ =\ \(uint\)\(uVar7\ >>\ 10\);$	+1
+use	_gleSetFunctionIDFromList	uVar7	streamWord	INFERRED	input stream word read from the descriptor	^\s*\*\(ushort\ \*\)\(param_3\ \+\ 1\)\ =\ uVar7\ \&\ 0x3ff\ \|\ 0x4000;$	+1
+use	_gleSetFunctionIDFromList	uVar7	streamWord	INFERRED	input stream word read from the descriptor	^\s*\*\(ushort\ \*\)\(param_3\ \+\ 1\)\ =\ uVar7\ \&\ 0x3ff;$	+1
+use	_gleSetFunctionIDFromList	uVar7	slotOffset	INFERRED	offset of the slot within a vertex	^\s*uVar7\ =\ \(ushort\)local_90\[uVar3\];$	+1
+use	_gleSetFunctionIDFromList	uVar7	slotOffset	INFERRED	offset of the slot within a vertex	^\s*uVar7\ =\ 0;$	+1
+use	_gleSetFunctionIDFromList	uVar7	slotOffset	INFERRED	offset of the slot within a vertex	^\s*\*puVar5\ =\ \(short\)\(uVar9\ \-\ 1\)\ \*\ 0x4000\ \|\ \(ushort\)\(iVar11\ <<\ 10\)\ \|\ uVar7;$	+1
+local	_gleSetFunctionIDFromList	uVar9	componentCount	INFERRED	component count of the stream, from the slot size or the context default
+local	_gleSetFunctionIDFromList	iVar10	arrayDefaults	INFERRED	context array defaults (ctx+0x4674): default component counts at +0x400
+use	_gleSetFunctionIDFromList	iVar11	streamType	INFERRED	stream type code stored in bits 10-13 of the stream word	^\s*iVar11\ =\ 0xe;$	+1
+use	_gleSetFunctionIDFromList	iVar11	streamType	INFERRED	stream type code stored in bits 10-13 of the stream word	^\s*iVar11\ =\ 6;$	+1
+use	_gleSetFunctionIDFromList	iVar11	streamType	INFERRED	stream type code stored in bits 10-13 of the stream word	^\s*iVar11\ =\ 5\ \-\ \(\(int\)\-\(uVar3\ \^\ 6\)\ >>\ 0x1f\);$	+1
+use	_gleSetFunctionIDFromList	iVar11	streamType	INFERRED	stream type code stored in bits 10-13 of the stream word	^\s*\*puVar5\ =\ \(short\)\(uVar9\ \-\ 1\)\ \*\ 0x4000\ \|\ \(ushort\)\(iVar11\ <<\ 10\)\ \|\ uVar7;$	+1
+local	_gleShaderDataUpdateParams	param_1	shaderData	INFERRED	shader data block: reverse maps from parameter kind and index to the parameter table index (bytes at +0x8c.. +0x35a)
+local	_gleShaderDataUpdateParams	iVar5	parameterBlock	INFERRED	parameter block of the shader (shaderData+0x508): parameter count at +0x28, table offset at +0x2c
+local	_gleShaderDataUpdateParams	iVar3	parameterCount	INFERRED	number of parameter table entries
+local	_gleShaderDataUpdateParams	iVar1	parameterTableOffset	INFERRED	offset of the parameter table in 8 byte units
+local	_gleShaderDataUpdateParams	uVar8	parameterIndex	INFERRED	index of the parameter table entry being processed
+local	_gleShaderDataUpdateParams	uVar9	parameterIndexByte	INFERRED	parameter index stored into the reverse map
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*uVar6\ =\ \*\(uint\ \*\)\(uVar8\ \*\ 8\ \+\ iVar5\ \+\ iVar1\ \*\ 8\);$	+1
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*switch\(uVar6\ >>\ 0x10\ \&\ 0x1f\)\ \{$	+1
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*\*\(undefined1\ \*\)\(\(uVar6\ \&\ 0xffff\)\ \+\ param_1\ \+\ 0x8c\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*\*\(undefined1\ \*\)\(\(uVar6\ \&\ 0xffff\)\ \+\ param_1\ \+\ 0x18c\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*uVar10\ =\ uVar6\ \&\ 0xff;$	+2
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*uVar2\ =\ uVar6\ >>\ 9\ \&\ 3;$	+3
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 6\ \+\ uVar6\ \*\ 3\ \+\ param_1\ \+\ 0x2c5\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 6\ \+\ uVar6\ \*\ 3\ \+\ param_1\ \+\ 0x2c4\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 6\ \+\ uVar6\ \*\ 3\ \+\ param_1\ \+\ 0x2c6\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*uVar10\ =\ uVar6\ \&\ 1;$	+2
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*\*\(undefined1\ \*\)\(\(uVar6\ \&\ 0x1f\)\ \*\ 4\ \+\ param_1\ \+\ \(uVar6\ >>\ 5\ \&\ 7\)\ \+\ 0x300\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*\*\(undefined1\ \*\)\(\(uVar6\ \&\ 0x1f\)\ \*\ 4\ \+\ param_1\ \+\ \(uVar6\ >>\ 5\ \&\ 7\)\ \+\ 800\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*\*\(undefined1\ \*\)\(\(uVar6\ \&\ 0xff\)\ \+\ param_1\ \+\ 0x350\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*uVar10\ =\ uVar6\ \&\ 0xff;$@3	+2
+use	_gleShaderDataUpdateParams	uVar6	parameterWord	INFERRED	first word of the parameter table entry: kind in bits 16-20, index in the low bits	^\s*uVar2\ =\ uVar6\ >>\ 0xe\ \&\ 3;$	+2
+use	_gleShaderDataUpdateParams	uVar6	updatedMaskWord	INFERRED	mask word in the shader data with the bit of the parameter set	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 4\)\ \|\ 1\ <<\ \(uVar10\ \&\ 0x3f\);$	+1
+use	_gleShaderDataUpdateParams	uVar6	updatedMaskWord	INFERRED	mask word in the shader data with the bit of the parameter set	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 4\)\ \|\ 1\ <<\ \(uVar10\ \&\ 0x3f\);$@2	+1
+use	_gleShaderDataUpdateParams	uVar6	updatedMaskWord	INFERRED	mask word in the shader data with the bit of the parameter set	^\s*\*\(uint\ \*\)\(param_1\ \+\ 4\)\ =\ uVar6;$	+1
+use	_gleShaderDataUpdateParams	uVar6	updatedMaskWord	INFERRED	mask word in the shader data with the bit of the parameter set	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 4\)\ \|\ 0x10;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot	INFERRED	slot number of the parameter (low byte of the entry)	^\s*uVar10\ =\ uVar6\ \&\ 0xff;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot	INFERRED	slot number of the parameter (low byte of the entry)	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 7\ \+\ param_1\ \+\ 0x28c\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot	INFERRED	slot number of the parameter (low byte of the entry)	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 7\ \+\ param_1\ \+\ 0x28d\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot	INFERRED	slot number of the parameter (low byte of the entry)	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 7\ \+\ param_1\ \+\ 0x28e\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot	INFERRED	slot number of the parameter (low byte of the entry)	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 7\ \+\ param_1\ \+\ 0x28f\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot	INFERRED	slot number of the parameter (low byte of the entry)	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 7\ \+\ param_1\ \+\ 0x290\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot	INFERRED	slot number of the parameter (low byte of the entry)	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 7\ \+\ param_1\ \+\ 0x291\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot	INFERRED	slot number of the parameter (low byte of the entry)	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 7\ \+\ param_1\ \+\ 0x292\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot2	INFERRED	slot number of the parameter (low byte of the entry), second kind	^\s*uVar10\ =\ uVar6\ \&\ 0xff;$@2	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot2	INFERRED	slot number of the parameter (low byte of the entry), second kind	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 6\ \+\ uVar6\ \*\ 3\ \+\ param_1\ \+\ 0x2c5\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot2	INFERRED	slot number of the parameter (low byte of the entry), second kind	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 6\ \+\ uVar6\ \*\ 3\ \+\ param_1\ \+\ 0x2c4\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot2	INFERRED	slot number of the parameter (low byte of the entry), second kind	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 6\ \+\ uVar6\ \*\ 3\ \+\ param_1\ \+\ 0x2c6\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	halfSelect	INFERRED	bit 0 of the entry: selects the first or second group	^\s*uVar10\ =\ uVar6\ \&\ 1;$	+1
+use	_gleShaderDataUpdateParams	uVar10	halfSelect	INFERRED	bit 0 of the entry: selects the first or second group	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 6\ \+\ param_1\ \+\ 0x2f4\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	halfSelect	INFERRED	bit 0 of the entry: selects the first or second group	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 6\ \+\ param_1\ \+\ 0x2f5\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	halfSelect	INFERRED	bit 0 of the entry: selects the first or second group	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 6\ \+\ param_1\ \+\ 0x2f6\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	halfSelect	INFERRED	bit 0 of the entry: selects the first or second group	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 6\ \+\ param_1\ \+\ 0x2f7\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	halfSelect	INFERRED	bit 0 of the entry: selects the first or second group	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 6\ \+\ param_1\ \+\ 0x2f8\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	halfSelect	INFERRED	bit 0 of the entry: selects the first or second group	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 6\ \+\ param_1\ \+\ 0x2f9\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot3	INFERRED	slot number of the parameter (low byte of the entry), third kind	^\s*uVar10\ =\ uVar6\ \&\ 0xff;$@3	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot3	INFERRED	slot number of the parameter (low byte of the entry), third kind	^\s*uVar10\ =\ 0;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot3	INFERRED	slot number of the parameter (low byte of the entry), third kind	^\s*uVar10\ =\ 3;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot3	INFERRED	slot number of the parameter (low byte of the entry), third kind	^\s*uVar10\ =\ 2;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot3	INFERRED	slot number of the parameter (low byte of the entry), third kind	^\s*uVar10\ =\ uVar10\ \+\ 4;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot3	INFERRED	slot number of the parameter (low byte of the entry), third kind	^\s*uVar10\ =\ uVar10\ \+\ 0x10;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot3	INFERRED	slot number of the parameter (low byte of the entry), third kind	^\s*uVar10\ =\ uVar10\ \+\ 8;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot3	INFERRED	slot number of the parameter (low byte of the entry), third kind	^\s*uVar10\ =\ 0xffffffff;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot3	INFERRED	slot number of the parameter (low byte of the entry), third kind	^\s*if\ \(uVar10\ !=\ 0xffffffff\)\ \{$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot3	INFERRED	slot number of the parameter (low byte of the entry), third kind	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 4\ \+\ param_1\ \+\ uVar4\ \+\ 0x41c\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot3	INFERRED	slot number of the parameter (low byte of the entry), third kind	^\s*\*\(undefined1\ \*\)\(uVar10\ \*\ 4\ \+\ param_1\ \+\ uVar4\ \+\ 0x35c\)\ =\ uVar9;$	+1
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot3	INFERRED	slot number of the parameter (low byte of the entry), third kind	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 4\)\ \|\ 1\ <<\ \(uVar10\ \&\ 0x3f\);$	+2
+use	_gleShaderDataUpdateParams	uVar10	parameterSlot3	INFERRED	slot number of the parameter (low byte of the entry), third kind	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 4\)\ \|\ 1\ <<\ \(uVar10\ \&\ 0x3f\);$@2	+2
+use	_gleShaderDataUpdateParams	uVar2	componentKind	INFERRED	component selector in bits 9-10 of the entry	^\s*uVar2\ =\ uVar6\ >>\ 9\ \&\ 3;$	+1
+use	_gleShaderDataUpdateParams	uVar2	componentKind	INFERRED	component selector in bits 9-10 of the entry	^\s*if\ \(uVar2\ ==\ 1\)\ \{$	+1
+use	_gleShaderDataUpdateParams	uVar2	componentKind	INFERRED	component selector in bits 9-10 of the entry	^\s*else\ if\ \(uVar2\ <\ 2\)\ \{$	+2
+use	_gleShaderDataUpdateParams	uVar2	componentKind	INFERRED	component selector in bits 9-10 of the entry	^\s*else\ if\ \(uVar2\ ==\ 2\)\ \{$	+1
+use	_gleShaderDataUpdateParams	uVar2	elementKind	INFERRED	selector in bits 14-15 of the entry	^\s*uVar2\ =\ uVar6\ >>\ 0xe\ \&\ 3;$	+1
+use	_gleShaderDataUpdateParams	uVar2	elementKind	INFERRED	selector in bits 14-15 of the entry	^\s*if\ \(uVar2\ ==\ 1\)\ \{$@2	+1
+use	_gleShaderDataUpdateParams	uVar2	elementKind	INFERRED	selector in bits 14-15 of the entry	^\s*else\ if\ \(uVar2\ <\ 2\)\ \{$@2	+2
+use	_gleShaderDataUpdateParams	uVar2	elementKind	INFERRED	selector in bits 14-15 of the entry	^\s*if\ \(uVar2\ ==\ 2\)\ \{$	+1
+use	_gleShaderDataUpdateParams	uVar2	elementKind	INFERRED	selector in bits 14-15 of the entry	^\s*if\ \(uVar2\ !=\ 3\)\ break;$	+1
+local	_gleShaderDataUpdateParams	uVar4	elementPart	INFERRED	selector in bits 12-13 of the entry

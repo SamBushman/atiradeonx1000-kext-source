@@ -2890,45 +2890,52 @@ void _glVertex3d_Exec(int glContext,double x,double y,double z)
 }
 
 /* _gleSetFuncOutputDesc @ 0x39b0c (1348 bytes) */
-void _gleSetFuncOutputDesc(glContext, param_2, param_3)
+void _gleSetFuncOutputDesc(glContext, forceOutputFlag, outputDesc)
   int glContext;
-  int param_2;
-  uint *param_3;
+  int forceOutputFlag;
+  uint *outputDesc;
 {
   char glContextByte7580;
-  bool bVar2;
-  uint uVar3;
-  undefined4 uVar4;
+  bool hasLeadingOutput;
+  uint remainingNeeds;
+  undefined4 programInfo;
   int loopIndex;
-  uint uVar6;
-  int iVar7;
+  uint neededOutputs;
+  uint outputMask;
+  int outputCountWithLighting;
   int loopIndex2;
-  int iVar8;
+  int programObject;
+  int streamCount;
   int loopIndex3;
-  uint uVar9;
-  ushort uVar10;
+  uint outputBits;
+  uint streamWordCount;
+  ushort texCoordStreamBase;
+  ushort attribStreamBase;
   ushort *dstCursor;
-  uint uVar12;
-  uint uVar13;
+  uint needBitIndex;
+  uint outputMaskCandidate;
+  uint programNeeds;
   uint loopIndex5;
-  int iVar14;
+  int outputCount;
+  int streamByteOffset;
   int loopIndex4;
-  longlong lVar15;
+  longlong outputBit;
+  longlong attribBit;
   
-  *param_3 = 0x204000;
+  *outputDesc = 0x204000;
   *(undefined2 *)(glContext + 0x487e) = 0x7c;
   if (*(int *)(glContext + 0x4e1c) == 0x1c00) {
-    uVar9 = 0x10000;
-    iVar14 = 1;
+    outputBits = 0x10000;
+    outputCount = 1;
     if (*(char *)(glContext + 0x466c) == '\0') {
       if (*(char *)(glContext + 0x41f8) == '\0') {
-        uVar6 = *(uint *)(glContext + 0x514c);
-        uVar13 = uVar6;
+        neededOutputs = *(uint *)(glContext + 0x514c);
+        programNeeds = neededOutputs;
       }
       else {
         loopIndex3 = 0;
-        uVar6 = *(uint *)(glContext + 0x514c);
-        uVar13 = uVar6;
+        neededOutputs = *(uint *)(glContext + 0x514c);
+        programNeeds = neededOutputs;
         if (0 < *(int *)(glContext + 0x41fc)) {
           do {
             loopIndex2 = 0;
@@ -2937,7 +2944,7 @@ void _gleSetFuncOutputDesc(glContext, param_2, param_3)
               do {
                 if (*(short *)((loopIndex3 * 0x10 + loopIndex2 * 6 + loopIndex) * 8 + glContext + 0x4220) == -0x7ad3
                    ) {
-                  uVar13 = uVar13 | 0x200;
+                  programNeeds = programNeeds | 0x200;
                   loopIndex3 = 8;
                   loopIndex2 = 2;
                   loopIndex = 4;
@@ -2952,7 +2959,7 @@ void _gleSetFuncOutputDesc(glContext, param_2, param_3)
         loopIndex3 = 0;
         do {
           if (*(short *)(loopIndex3 * 8 + glContext + 0x4624) == -0x7ad3) {
-            uVar13 = uVar13 | 0x200;
+            programNeeds = programNeeds | 0x200;
             loopIndex3 = 7;
           }
           loopIndex3 = loopIndex3 + 1;
@@ -2960,167 +2967,167 @@ void _gleSetFuncOutputDesc(glContext, param_2, param_3)
       }
     }
     else {
-      iVar8 = *(int *)(glContext + 0x5424);
-      if (*(short *)(iVar8 + 0x4c8) == -0x7e00) {
-        uVar13 = *(uint *)(iVar8 + 0x4e8);
+      programObject = *(int *)(glContext + 0x5424);
+      if (*(short *)(programObject + 0x4c8) == -0x7e00) {
+        programNeeds = *(uint *)(programObject + 0x4e8);
       }
       else {
-        iVar8 = *(int *)(iVar8 + 0x4cc);
-        uVar4 = 0;
-        if (iVar8 != 0) {
-          uVar4 = *(undefined4 *)(iVar8 + 0x20);
-          iVar8 = iVar8 + *(int *)(iVar8 + 0x24) * 8;
+        programObject = *(int *)(programObject + 0x4cc);
+        programInfo = 0;
+        if (programObject != 0) {
+          programInfo = *(undefined4 *)(programObject + 0x20);
+          programObject = programObject + *(int *)(programObject + 0x24) * 8;
         }
-        uVar13 = _glePPSetFuncNeeds(iVar8,uVar4);
+        programNeeds = _glePPSetFuncNeeds(programObject,programInfo);
       }
-      uVar6 = uVar13 & 0xff;
+      neededOutputs = programNeeds & 0xff;
     }
-    uVar12 = 0;
+    needBitIndex = 0;
     do {
-      uVar3 = uVar6 >> (uVar12 & 0x3f);
-      if ((uVar3 & 1) == 0) {
-        if (uVar3 == 0) goto LAB_00039cc0;
+      remainingNeeds = neededOutputs >> (needBitIndex & 0x3f);
+      if ((remainingNeeds & 1) == 0) {
+        if (remainingNeeds == 0) goto LAB_00039cc0;
       }
       else {
-        iVar14 = iVar14 + 1;
-        lVar15 = ((longlong (*)())___ashldi3)(0,0x1000000,uVar12);
-        uVar9 = uVar9 | (uint)lVar15;
+        outputCount = outputCount + 1;
+        outputBit = ((longlong (*)())___ashldi3)(0,0x1000000,needBitIndex);
+        outputBits = outputBits | (uint)outputBit;
       }
-      uVar12 = uVar12 + 1;
+      needBitIndex = needBitIndex + 1;
     } while( true );
   }
   if (*(int *)(glContext + 0x4e1c) == 0x1c01) {
-    uVar6 = 0x1070080;
-    iVar8 = 5;
+    outputMask = 0x1070080;
+    streamCount = 5;
     if (*(char *)(glContext + 0x30aa) != '\0') {
-      iVar8 = 7;
-      uVar6 = 0x10700e0;
+      streamCount = 7;
+      outputMask = 0x10700e0;
     }
   }
   else {
-    uVar6 = 0x10000;
-    iVar8 = 1;
+    outputMask = 0x10000;
+    streamCount = 1;
   }
 LAB_00039e14:
-  bVar2 = (uVar6 & 0x80) != 0;
-  *param_3 = *param_3 | iVar8 << 0x18;
-  if (bVar2) {
-    *(undefined2 *)(param_3 + 1) = 0xb0df;
+  hasLeadingOutput = (outputMask & 0x80) != 0;
+  *outputDesc = *outputDesc | streamCount << 0x18;
+  if (hasLeadingOutput) {
+    *(undefined2 *)(outputDesc + 1) = 0xb0df;
   }
-  uVar9 = (uint)bVar2;
-  if ((uVar6 & 0x10000) != 0) {
-    iVar14 = uVar9 * 2;
-    uVar9 = uVar9 + 1;
-    *(undefined2 *)((int)param_3 + iVar14 + 4) = 0x308;
+  streamWordCount = (uint)hasLeadingOutput;
+  if ((outputMask & 0x10000) != 0) {
+    streamByteOffset = streamWordCount * 2;
+    streamWordCount = streamWordCount + 1;
+    *(undefined2 *)((int)outputDesc + streamByteOffset + 4) = 0x308;
   }
-  if ((uVar6 & 0x20000) != 0) {
-    iVar14 = uVar9 * 2;
-    uVar9 = uVar9 + 1;
-    *(undefined2 *)((int)param_3 + iVar14 + 4) = 0x610;
+  if ((outputMask & 0x20000) != 0) {
+    streamByteOffset = streamWordCount * 2;
+    streamWordCount = streamWordCount + 1;
+    *(undefined2 *)((int)outputDesc + streamByteOffset + 4) = 0x610;
   }
-  if ((uVar6 & 0x40000) != 0) {
-    iVar14 = uVar9 * 2;
-    uVar9 = uVar9 + 1;
-    *(undefined2 *)((int)param_3 + iVar14 + 4) = 0xb0c;
+  if ((outputMask & 0x40000) != 0) {
+    streamByteOffset = streamWordCount * 2;
+    streamWordCount = streamWordCount + 1;
+    *(undefined2 *)((int)outputDesc + streamByteOffset + 4) = 0xb0c;
   }
-  if ((uVar6 & 0x80000) != 0) {
-    iVar14 = uVar9 * 2;
-    uVar9 = uVar9 + 1;
-    *(undefined2 *)((int)param_3 + iVar14 + 4) = 0xc17;
+  if ((outputMask & 0x80000) != 0) {
+    streamByteOffset = streamWordCount * 2;
+    streamWordCount = streamWordCount + 1;
+    *(undefined2 *)((int)outputDesc + streamByteOffset + 4) = 0xc17;
   }
-  if ((uVar6 & 0x100000) != 0) {
-    iVar14 = uVar9 * 2;
-    uVar9 = uVar9 + 1;
-    *(undefined2 *)((int)param_3 + iVar14 + 4) = 0x1214;
+  if ((outputMask & 0x100000) != 0) {
+    streamByteOffset = streamWordCount * 2;
+    streamWordCount = streamWordCount + 1;
+    *(undefined2 *)((int)outputDesc + streamByteOffset + 4) = 0x1214;
   }
-  if ((uVar6 & 0x200000) != 0) {
-    iVar14 = uVar9 * 2;
-    uVar9 = uVar9 + 1;
-    *(ushort *)((int)param_3 + iVar14 + 4) = (*(byte *)(glContext + 0x4660) - 1) * 0x100 | 0x1418;
+  if ((outputMask & 0x200000) != 0) {
+    streamByteOffset = streamWordCount * 2;
+    streamWordCount = streamWordCount + 1;
+    *(ushort *)((int)outputDesc + streamByteOffset + 4) = (*(byte *)(glContext + 0x4660) - 1) * 0x100 | 0x1418;
   }
   loopIndex5 = 0;
-  dstCursor = (ushort *)((int)param_3 + uVar9 * 2 + 4);
-  uVar10 = 0x2000;
+  dstCursor = (ushort *)((int)outputDesc + streamWordCount * 2 + 4);
+  texCoordStreamBase = 0x2000;
   do {
-    lVar15 = ((longlong (*)())___ashldi3)(0,0x1000000,loopIndex5);
-    if ((uVar6 & (uint)lVar15) == 0) {
-      if ((uVar6 & -0x1000000 << (loopIndex5 & 0x3f) & 0xff000000) == 0) break;
+    outputBit = ((longlong (*)())___ashldi3)(0,0x1000000,loopIndex5);
+    if ((outputMask & (uint)outputBit) == 0) {
+      if ((outputMask & -0x1000000 << (loopIndex5 & 0x3f) & 0xff000000) == 0) break;
     }
     else {
-      uVar9 = uVar9 + 1;
-      *dstCursor = uVar10 | (ushort)((int)(loopIndex5 * 0x10 + 0x80) >> 2) | 0x300;
+      streamWordCount = streamWordCount + 1;
+      *dstCursor = texCoordStreamBase | (ushort)((int)(loopIndex5 * 0x10 + 0x80) >> 2) | 0x300;
       dstCursor = dstCursor + 1;
     }
     loopIndex5 = loopIndex5 + 1;
-    uVar10 = uVar10 + 0x400;
+    texCoordStreamBase = texCoordStreamBase + 0x400;
   } while ((int)loopIndex5 < 8);
-  uVar10 = 0xa800;
-  dstCursor = (ushort *)((int)param_3 + uVar9 * 2 + 4);
+  attribStreamBase = 0xa800;
+  dstCursor = (ushort *)((int)outputDesc + streamWordCount * 2 + 4);
   loopIndex4 = 0;
   do {
-    lVar15 = ((longlong (*)())___ashldi3)(0,0x20,loopIndex4);
-    if ((uVar6 & (uint)lVar15) != 0) {
-      uVar9 = uVar9 + 1;
-      *dstCursor = uVar10 | (ushort)(loopIndex4 * 4 + 0x74 >> 2) | 0xc0;
+    attribBit = ((longlong (*)())___ashldi3)(0,0x20,loopIndex4);
+    if ((outputMask & (uint)attribBit) != 0) {
+      streamWordCount = streamWordCount + 1;
+      *dstCursor = attribStreamBase | (ushort)(loopIndex4 * 4 + 0x74 >> 2) | 0xc0;
       dstCursor = dstCursor + 1;
     }
     loopIndex4 = loopIndex4 + 1;
-    uVar10 = uVar10 + 0x400;
+    attribStreamBase = attribStreamBase + 0x400;
   } while (loopIndex4 < 2);
-  if ((uVar6 & 0x400000) != 0) {
-    *(undefined2 *)((int)param_3 + uVar9 * 2 + 4) = 0x185f;
+  if ((outputMask & 0x400000) != 0) {
+    *(undefined2 *)((int)outputDesc + streamWordCount * 2 + 4) = 0x185f;
   }
   return;
 LAB_00039cc0:
-  if ((*(short *)(glContext + 0x3166) == -0x7baf) || ((uVar13 & 0x400) != 0)) {
-    uVar9 = uVar9 | 0x80000;
-    iVar14 = iVar14 + 1;
+  if ((*(short *)(glContext + 0x3166) == -0x7baf) || ((programNeeds & 0x400) != 0)) {
+    outputBits = outputBits | 0x80000;
+    outputCount = outputCount + 1;
   }
   if (*(char *)(glContext + 0x4661) != '\0') {
-    uVar9 = uVar9 | 0x200000;
-    iVar14 = iVar14 + 1;
+    outputBits = outputBits | 0x200000;
+    outputCount = outputCount + 1;
   }
   if (*(int *)(glContext + 0x34d0) != 0x1b021b02) {
-    uVar9 = uVar9 | 0x400000;
-    iVar14 = iVar14 + 1;
+    outputBits = outputBits | 0x400000;
+    outputCount = outputCount + 1;
   }
   glContextByte7580 = *(char *)(glContext + 0x7580);
   if (glContextByte7580 == '\0') {
-    uVar9 = uVar9 | 0x80;
-    iVar14 = iVar14 + 1;
+    outputBits = outputBits | 0x80;
+    outputCount = outputCount + 1;
   }
   if (*(char *)(glContext + 0x30aa) == '\0') {
-    uVar6 = uVar9 | 0x40000;
-    iVar8 = iVar14 + 1;
-    if (((uVar13 & 0x200) != 0) || (*(char *)(glContext + 0x4fea) != '\0')) {
-      uVar6 = uVar9 | 0x140000;
-      iVar8 = iVar14 + 2;
+    outputMask = outputBits | 0x40000;
+    streamCount = outputCount + 1;
+    if (((programNeeds & 0x200) != 0) || (*(char *)(glContext + 0x4fea) != '\0')) {
+      outputMask = outputBits | 0x140000;
+      streamCount = outputCount + 2;
     }
     if (((*(int *)(glContext + 0x514c) == 0) || (*(char *)(glContext + 0x53e6) == '\0')) &&
        (*(char *)(glContext + 0x280c) == '\0')) goto LAB_00039e14;
-    uVar6 = uVar6 | 0x20000;
+    outputMask = outputMask | 0x20000;
   }
   else {
-    uVar12 = uVar9 | 0x20000;
-    iVar7 = iVar14 + 1;
-    if ((*(char *)(glContext + 0x30ab) != '\0') && ((glContextByte7580 != '\0' || (param_2 != 0)))) {
-      uVar12 = uVar9 | 0x60000;
-      iVar7 = iVar14 + 2;
+    outputMaskCandidate = outputBits | 0x20000;
+    outputCountWithLighting = outputCount + 1;
+    if ((*(char *)(glContext + 0x30ab) != '\0') && ((glContextByte7580 != '\0' || (forceOutputFlag != 0)))) {
+      outputMaskCandidate = outputBits | 0x60000;
+      outputCountWithLighting = outputCount + 2;
     }
-    uVar6 = uVar12;
-    iVar8 = iVar7;
+    outputMask = outputMaskCandidate;
+    streamCount = outputCountWithLighting;
     if (glContextByte7580 == '\0') {
-      uVar6 = uVar12 | 0x20;
-      iVar8 = iVar7 + 1;
+      outputMask = outputMaskCandidate | 0x20;
+      streamCount = outputCountWithLighting + 1;
       if (*(char *)(glContext + 0x30ac) != '\0') {
-        uVar6 = uVar12 | 0x60;
-        iVar8 = iVar7 + 2;
+        outputMask = outputMaskCandidate | 0x60;
+        streamCount = outputCountWithLighting + 2;
       }
     }
-    if ((uVar13 & 0x200) == 0) goto LAB_00039e14;
-    uVar6 = uVar6 | 0x100000;
+    if ((programNeeds & 0x200) == 0) goto LAB_00039e14;
+    outputMask = outputMask | 0x100000;
   }
-  iVar8 = iVar8 + 1;
+  streamCount = streamCount + 1;
   goto LAB_00039e14;
 }
 

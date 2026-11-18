@@ -1,0 +1,2 @@
+use	_gleGetAttrib	puVar10	srcCursor20	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar10\ =\ \(uint\ \*\)\(param_1\ \+\ 0x3534\);$	+1
+use	_gleGetAttrib	puVar10	srcCursor20	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*uVar4\ =\ \*puVar10;$@2	+2

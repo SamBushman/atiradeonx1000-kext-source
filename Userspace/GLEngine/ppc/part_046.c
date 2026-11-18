@@ -721,17 +721,17 @@ void _gleEvalMap1(int glContext,float floatArg1)
   float domainScale2;
   float offsetFromStart;
   undefined4 *mapDataThenPoints;
-  undefined4 *puVar5;
+  undefined4 *controlPoints;
   undefined4 *selectedPoints;
   undefined4 order;
   undefined4 hookResult;
   undefined4 incomingR6;
   undefined4 components;
-  int iVar9;
+  int vertexWritePos;
   int outStart;
   int nextOut;
   int out;
-  undefined4 *puVar12;
+  undefined4 *slotMapTable;
   undefined4 *puVar13;
   undefined4 *puVar14;
   uint flagsUpdated;
@@ -755,10 +755,10 @@ void _gleEvalMap1(int glContext,float floatArg1)
   if (*(short *)(glContext + 0x4a10) < 0) {
     return;
   }
-  iVar9 = *(int *)(glContext + 0x4858);
-  if (iVar9 == *(int *)(glContext + 0x485c)) {
+  vertexWritePos = *(int *)(glContext + 0x4858);
+  if (vertexWritePos == *(int *)(glContext + 0x485c)) {
     (**(code **)(glContext + 0x4a0c))(glContext);
-    iVar9 = *(int *)(glContext + 0x4858);
+    vertexWritePos = *(int *)(glContext + 0x4858);
   }
   outStart = *(int *)(glContext + 0x4860);
   out = outStart;
@@ -784,11 +784,11 @@ void _gleEvalMap1(int glContext,float floatArg1)
     domainStart = GH_U2F((unsigned int)(mapDataThenPoints[0xb9]));
     domainScale2 = GH_U2F((unsigned int)(mapDataThenPoints[0xbb]));
     order = mapDataThenPoints[0xb8];
-    puVar5 = mapDataThenPoints + 0xbc;
+    controlPoints = mapDataThenPoints + 0xbc;
     components = 2;
     nextOut = out + 8;
 LAB_000df2c8:
-    ((void (*)())_gleEvalDomain1Coord)(glContext,puVar5,order,incomingR6,components,out,
+    ((void (*)())_gleEvalDomain1Coord)(glContext,controlPoints,order,incomingR6,components,out,
                (double)((floatArg1 - domainStart) * domainScale2),incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
                incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98,incomingStack_ffffffa0,
                incomingStack_ffffffa8);
@@ -799,7 +799,7 @@ LAB_000df2c8:
       domainStart = GH_U2F((unsigned int)(mapDataThenPoints[0xab]));
       domainScale2 = GH_U2F((unsigned int)(mapDataThenPoints[0xad]));
       order = mapDataThenPoints[0xaa];
-      puVar5 = mapDataThenPoints + 0xae;
+      controlPoints = mapDataThenPoints + 0xae;
       components = 1;
       nextOut = out + 4;
       goto LAB_000df2c8;
@@ -829,11 +829,11 @@ LAB_000df2c8:
 LAB_000df2d0:
   slotMask = *(uint *)(glContext + 0x74d8);
   if (slotMask != 0) {
-    puVar12 = mapDataThenPoints + 0xb2e;
+    slotMapTable = mapDataThenPoints + 0xb2e;
     sizeCursor = (byte *)(glContext + 0x7524);
-    puVar5 = puVar12;
-    puVar13 = puVar12;
-    puVar14 = puVar12;
+    controlPoints = slotMapTable;
+    puVar13 = slotMapTable;
+    puVar14 = slotMapTable;
     slotMapCursor = mapDataThenPoints;
     do {
       slotByteSize = *sizeCursor;
@@ -859,7 +859,7 @@ LAB_000df3c0:
             order = slotMapCursor[0xb2a];
             components = 3;
             nextOut = out + 0xc;
-            selectedPoints = puVar12;
+            selectedPoints = slotMapTable;
           }
           else {
             if (slotByteSize != 0x10) goto LAB_000df3c8;
@@ -868,7 +868,7 @@ LAB_000df3c0:
             order = slotMapCursor[0xb2a];
             components = 4;
             nextOut = out + 0x10;
-            selectedPoints = puVar5;
+            selectedPoints = controlPoints;
           }
           goto LAB_000df3c0;
         }
@@ -884,8 +884,8 @@ LAB_000df3c0:
       }
 LAB_000df3c8:
       slotMask = slotMask >> 1;
-      puVar5 = puVar5 + 0x2c;
-      puVar12 = puVar12 + 0x2c;
+      controlPoints = controlPoints + 0x2c;
+      slotMapTable = slotMapTable + 0x2c;
       puVar13 = puVar13 + 0x2c;
       slotMapCursor = slotMapCursor + 0x2c;
       puVar14 = puVar14 + 0x2c;
@@ -922,7 +922,7 @@ LAB_000df3c8:
              incomingStack_ffffffa8);
 LAB_000df478:
   *(int *)(glContext + 0x48ec) = glContext + 0x7508;
-  hookResult = (**(code **)(glContext + 0x4898))(glContext,*(undefined4 *)(glContext + 0x4860),iVar9);
+  hookResult = (**(code **)(glContext + 0x4898))(glContext,*(undefined4 *)(glContext + 0x4860),vertexWritePos);
   *(undefined4 *)(glContext + 0x48ec) = 0;
   *(undefined4 *)(glContext + 0x4858) = hookResult;
   return;
@@ -956,131 +956,131 @@ void _gleComputeFirstPartial(unusedArg1, param_2, param_3, param_4)
 }
 
 /* _gleInitMap2Data @ 0xdf528 (496 bytes) */
-void _gleInitMap2Data(param_1)
-  int param_1;
+void _gleInitMap2Data(glContext)
+  int glContext;
 {
-  int iVar1;
-  undefined1 *puVar2;
-  int iVar3;
+  int evalStateCursor;
+  undefined1 *mapDimensionCursor;
+  int remaining;
   
-  iVar1 = *(int *)(param_1 + 0x7450);
-  iVar3 = 0x10;
-  *(undefined4 *)(iVar1 + 0x478) = 1;
-  *(undefined4 *)(iVar1 + 0x47c) = 1;
-  *(undefined4 *)(iVar1 + 0x480) = 0;
-  puVar2 = (undefined1 *)(iVar1 + 0x9db8);
-  *(undefined4 *)(iVar1 + 0x484) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x490) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x488) = 0;
-  *(undefined4 *)(iVar1 + 0x48c) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x494) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x498) = 0;
-  *(undefined4 *)(iVar1 + 0x49c) = 0;
-  *(undefined4 *)(iVar1 + 0x4a0) = 0;
-  *(undefined4 *)(iVar1 + 0x948) = 1;
-  *(undefined4 *)(iVar1 + 0x94c) = 1;
-  *(undefined4 *)(iVar1 + 0x950) = 0;
-  *(undefined4 *)(iVar1 + 0x954) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x960) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x958) = 0;
-  *(undefined4 *)(iVar1 + 0x95c) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x964) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x968) = 0;
-  *(undefined4 *)(iVar1 + 0x96c) = 0;
-  *(undefined4 *)(iVar1 + 0x970) = 0;
-  *(undefined4 *)(iVar1 + 0x974) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0xfa8) = 1;
-  *(undefined4 *)(iVar1 + 0xfac) = 1;
-  *(undefined4 *)(iVar1 + 0xfb0) = 0;
-  *(undefined4 *)(iVar1 + 0xfb4) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0xfc0) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0xfb8) = 0;
-  *(undefined4 *)(iVar1 + 0xfbc) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0xfc4) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0xfc8) = 0;
-  *(undefined4 *)(iVar1 + 0xfcc) = 0;
-  *(undefined4 *)(iVar1 + 0xfd0) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1478) = 1;
-  *(undefined4 *)(iVar1 + 0x147c) = 1;
-  *(undefined4 *)(iVar1 + 0x1480) = 0;
-  *(undefined4 *)(iVar1 + 0x1484) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1490) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1488) = 0;
-  *(undefined4 *)(iVar1 + 0x148c) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1494) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1498) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x149c) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x14a0) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x14a4) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1ad8) = 1;
-  *(undefined4 *)(iVar1 + 0x1adc) = 1;
-  *(undefined4 *)(iVar1 + 0x1ae0) = 0;
-  *(undefined4 *)(iVar1 + 0x1ae4) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1af0) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1ae8) = 0;
-  *(undefined4 *)(iVar1 + 0x1aec) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1af4) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1af8) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1c88) = 1;
-  *(undefined4 *)(iVar1 + 0x1c8c) = 1;
-  *(undefined4 *)(iVar1 + 0x1c90) = 0;
-  *(undefined4 *)(iVar1 + 0x1c94) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1ca0) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1c98) = 0;
-  *(undefined4 *)(iVar1 + 0x1c9c) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1ca4) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1ca8) = 0;
-  *(undefined4 *)(iVar1 + 0x1e38) = 1;
-  *(undefined4 *)(iVar1 + 0x1e3c) = 1;
-  *(undefined4 *)(iVar1 + 0x1e40) = 0;
-  *(undefined4 *)(iVar1 + 0x264c) = 1;
-  *(undefined4 *)(iVar1 + 0x1e44) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1e50) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1e48) = 0;
-  *(undefined4 *)(iVar1 + 0x1e4c) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1e54) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x1e58) = 0;
-  *(undefined4 *)(iVar1 + 0x1e5c) = 0;
-  *(undefined4 *)(iVar1 + 0x2178) = 1;
-  *(undefined4 *)(iVar1 + 0x217c) = 1;
-  *(undefined4 *)(iVar1 + 0x2180) = 0;
-  *(undefined4 *)(iVar1 + 0x2184) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x2190) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x2188) = 0;
-  *(undefined4 *)(iVar1 + 0x218c) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x2194) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x2198) = 0;
-  *(undefined4 *)(iVar1 + 0x219c) = 0;
-  *(undefined4 *)(iVar1 + 0x21a0) = 0;
-  *(undefined4 *)(iVar1 + 0x2648) = 1;
-  *(undefined4 *)(iVar1 + 0x2650) = 0;
-  *(undefined4 *)(iVar1 + 0x2654) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x2660) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x2658) = 0;
-  *(undefined4 *)(iVar1 + 0x265c) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x2664) = 0x3f800000;
-  *(undefined4 *)(iVar1 + 0x2668) = 0;
-  *(undefined4 *)(iVar1 + 0x266c) = 0;
-  *(undefined4 *)(iVar1 + 0x2670) = 0;
-  *(undefined4 *)(iVar1 + 0x2674) = 0x3f800000;
+  evalStateCursor = *(int *)(glContext + 0x7450);
+  remaining = 0x10;
+  *(undefined4 *)(evalStateCursor + 0x478) = 1;
+  *(undefined4 *)(evalStateCursor + 0x47c) = 1;
+  *(undefined4 *)(evalStateCursor + 0x480) = 0;
+  mapDimensionCursor = (undefined1 *)(evalStateCursor + 0x9db8);
+  *(undefined4 *)(evalStateCursor + 0x484) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x490) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x488) = 0;
+  *(undefined4 *)(evalStateCursor + 0x48c) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x494) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x498) = 0;
+  *(undefined4 *)(evalStateCursor + 0x49c) = 0;
+  *(undefined4 *)(evalStateCursor + 0x4a0) = 0;
+  *(undefined4 *)(evalStateCursor + 0x948) = 1;
+  *(undefined4 *)(evalStateCursor + 0x94c) = 1;
+  *(undefined4 *)(evalStateCursor + 0x950) = 0;
+  *(undefined4 *)(evalStateCursor + 0x954) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x960) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x958) = 0;
+  *(undefined4 *)(evalStateCursor + 0x95c) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x964) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x968) = 0;
+  *(undefined4 *)(evalStateCursor + 0x96c) = 0;
+  *(undefined4 *)(evalStateCursor + 0x970) = 0;
+  *(undefined4 *)(evalStateCursor + 0x974) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0xfa8) = 1;
+  *(undefined4 *)(evalStateCursor + 0xfac) = 1;
+  *(undefined4 *)(evalStateCursor + 0xfb0) = 0;
+  *(undefined4 *)(evalStateCursor + 0xfb4) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0xfc0) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0xfb8) = 0;
+  *(undefined4 *)(evalStateCursor + 0xfbc) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0xfc4) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0xfc8) = 0;
+  *(undefined4 *)(evalStateCursor + 0xfcc) = 0;
+  *(undefined4 *)(evalStateCursor + 0xfd0) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1478) = 1;
+  *(undefined4 *)(evalStateCursor + 0x147c) = 1;
+  *(undefined4 *)(evalStateCursor + 0x1480) = 0;
+  *(undefined4 *)(evalStateCursor + 0x1484) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1490) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1488) = 0;
+  *(undefined4 *)(evalStateCursor + 0x148c) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1494) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1498) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x149c) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x14a0) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x14a4) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1ad8) = 1;
+  *(undefined4 *)(evalStateCursor + 0x1adc) = 1;
+  *(undefined4 *)(evalStateCursor + 0x1ae0) = 0;
+  *(undefined4 *)(evalStateCursor + 0x1ae4) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1af0) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1ae8) = 0;
+  *(undefined4 *)(evalStateCursor + 0x1aec) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1af4) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1af8) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1c88) = 1;
+  *(undefined4 *)(evalStateCursor + 0x1c8c) = 1;
+  *(undefined4 *)(evalStateCursor + 0x1c90) = 0;
+  *(undefined4 *)(evalStateCursor + 0x1c94) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1ca0) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1c98) = 0;
+  *(undefined4 *)(evalStateCursor + 0x1c9c) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1ca4) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1ca8) = 0;
+  *(undefined4 *)(evalStateCursor + 0x1e38) = 1;
+  *(undefined4 *)(evalStateCursor + 0x1e3c) = 1;
+  *(undefined4 *)(evalStateCursor + 0x1e40) = 0;
+  *(undefined4 *)(evalStateCursor + 0x264c) = 1;
+  *(undefined4 *)(evalStateCursor + 0x1e44) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1e50) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1e48) = 0;
+  *(undefined4 *)(evalStateCursor + 0x1e4c) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1e54) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x1e58) = 0;
+  *(undefined4 *)(evalStateCursor + 0x1e5c) = 0;
+  *(undefined4 *)(evalStateCursor + 0x2178) = 1;
+  *(undefined4 *)(evalStateCursor + 0x217c) = 1;
+  *(undefined4 *)(evalStateCursor + 0x2180) = 0;
+  *(undefined4 *)(evalStateCursor + 0x2184) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x2190) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x2188) = 0;
+  *(undefined4 *)(evalStateCursor + 0x218c) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x2194) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x2198) = 0;
+  *(undefined4 *)(evalStateCursor + 0x219c) = 0;
+  *(undefined4 *)(evalStateCursor + 0x21a0) = 0;
+  *(undefined4 *)(evalStateCursor + 0x2648) = 1;
+  *(undefined4 *)(evalStateCursor + 0x2650) = 0;
+  *(undefined4 *)(evalStateCursor + 0x2654) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x2660) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x2658) = 0;
+  *(undefined4 *)(evalStateCursor + 0x265c) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x2664) = 0x3f800000;
+  *(undefined4 *)(evalStateCursor + 0x2668) = 0;
+  *(undefined4 *)(evalStateCursor + 0x266c) = 0;
+  *(undefined4 *)(evalStateCursor + 0x2670) = 0;
+  *(undefined4 *)(evalStateCursor + 0x2674) = 0x3f800000;
   do {
-    *puVar2 = 4;
-    puVar2 = puVar2 + 1;
-    *(undefined4 *)(iVar1 + 0x37a8) = 1;
-    *(undefined4 *)(iVar1 + 0x37ac) = 1;
-    *(undefined4 *)(iVar1 + 0x37b0) = 0;
-    *(undefined4 *)(iVar1 + 0x37b4) = 0x3f800000;
-    *(undefined4 *)(iVar1 + 0x37c0) = 0x3f800000;
-    *(undefined4 *)(iVar1 + 0x37b8) = 0;
-    *(undefined4 *)(iVar1 + 0x37bc) = 0x3f800000;
-    *(undefined4 *)(iVar1 + 0x37c4) = 0x3f800000;
-    *(undefined4 *)(iVar1 + 0x37c8) = 0;
-    *(undefined4 *)(iVar1 + 0x37cc) = 0;
-    *(undefined4 *)(iVar1 + 0x37d0) = 0;
-    *(undefined4 *)(iVar1 + 0x37d4) = 0x3f800000;
-    iVar1 = iVar1 + 0x660;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    *mapDimensionCursor = 4;
+    mapDimensionCursor = mapDimensionCursor + 1;
+    *(undefined4 *)(evalStateCursor + 0x37a8) = 1;
+    *(undefined4 *)(evalStateCursor + 0x37ac) = 1;
+    *(undefined4 *)(evalStateCursor + 0x37b0) = 0;
+    *(undefined4 *)(evalStateCursor + 0x37b4) = 0x3f800000;
+    *(undefined4 *)(evalStateCursor + 0x37c0) = 0x3f800000;
+    *(undefined4 *)(evalStateCursor + 0x37b8) = 0;
+    *(undefined4 *)(evalStateCursor + 0x37bc) = 0x3f800000;
+    *(undefined4 *)(evalStateCursor + 0x37c4) = 0x3f800000;
+    *(undefined4 *)(evalStateCursor + 0x37c8) = 0;
+    *(undefined4 *)(evalStateCursor + 0x37cc) = 0;
+    *(undefined4 *)(evalStateCursor + 0x37d0) = 0;
+    *(undefined4 *)(evalStateCursor + 0x37d4) = 0x3f800000;
+    evalStateCursor = evalStateCursor + 0x660;
+    remaining = remaining + -1;
+  } while (remaining != 0);
   return;
 }
 

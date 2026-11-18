@@ -1,0 +1,165 @@
+local	_gleOrphanBufferData	param_2	bufferObject	INFERRED	buffer object whose storage (+0x20 pointer, +0x24 size, +0x2c usage) is parked in the orphan cache
+local	_gleOrphanBufferData	param_3	size	INFERRED	requested size of the new buffer storage; rounded up to whole 4K pages for the bucket lookup
+local	_gleOrphanBufferData	param_4	usage	INFERRED	requested usage halfword, compared with the usage of the cached storage
+local	_gleOrphanBufferData	piVar1	rendererDispatch	INFERRED	per-renderer driver dispatch table pointer (+0x1e8 parks the storage in the renderer)
+local	_gleOrphanBufferData	bVar2	allIdle	INFERRED	true while the idle test (ctx+0x4834) succeeded for every renderer so far
+local	_gleOrphanBufferData	bVar3	previousIdle	INFERRED	idle test result of the previous renderers
+use	_gleOrphanBufferData	iVar4	bucketSentinel	INFERRED	address of the list head (+0x14) inside the 0x30-byte orphan bucket being initialised	^\s*iVar4\ =\ iVar8\ \+\ 0x14;$	+1
+use	_gleOrphanBufferData	iVar4	bucketSentinel	INFERRED	address of the list head (+0x14) inside the 0x30-byte orphan bucket being initialised	^\s*\*\(int\ \*\)\(iVar8\ \+\ 0x20\)\ =\ iVar4;$	+3
+use	_gleOrphanBufferData	iVar4	bucketSentinel	INFERRED	address of the list head (+0x14) inside the 0x30-byte orphan bucket being initialised	^\s*\*\(int\ \*\)\(iVar8\ \+\ 0x14\)\ =\ iVar4;$	+1
+use	_gleOrphanBufferData	iVar4	bucketSentinel	INFERRED	address of the list head (+0x14) inside the 0x30-byte orphan bucket being initialised	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x7484\)\ \+\ iVar8;$	+1
+use	_gleOrphanBufferData	iVar4	bucketSentinel	INFERRED	address of the list head (+0x14) inside the 0x30-byte orphan bucket being initialised	^\s*puVar10\ =\ \*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x18\);$	+1
+use	_gleOrphanBufferData	iVar4	bucketSentinel	INFERRED	address of the list head (+0x14) inside the 0x30-byte orphan bucket being initialised	^\s*\*piVar6\ =\ iVar4\ \+\ 0x14;$	+1
+use	_gleOrphanBufferData	iVar4	bucketSentinel	INFERRED	address of the list head (+0x14) inside the 0x30-byte orphan bucket being initialised	^\s*\*\(int\ \*\*\)\(iVar4\ \+\ 0x18\)\ =\ piVar6;$	+1
+use	_gleOrphanBufferData	iVar4	bucketSentinel	INFERRED	address of the list head (+0x14) inside the 0x30-byte orphan bucket being initialised	^\s*if\ \(\(bVar3\)\ \&\&\ \(iVar4\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x4834\)\)\(\*puVar10,\*puVar13\),\ iVar4\ !=\ 0\)\)\ \{$	+1
+use	_gleOrphanBufferData	iVar4	listPrev	INFERRED	node->prev link of the orphan node being unlinked from the age list	^\s*iVar4\ =\ piVar6\[3\];$	+1
+use	_gleOrphanBufferData	iVar4	listPrev	INFERRED	node->prev link of the orphan node being unlinked from the age list	^\s*\*\(int\ \*\)\(iVar4\ \+\ 8\)\ =\ piVar6\[2\];$	+1
+use	_gleOrphanBufferData	iVar4	listPrev	INFERRED	node->prev link of the orphan node being unlinked from the age list	^\s*\*\(int\ \*\)\(iVar9\ \+\ 0xc\)\ =\ iVar4;$	+1
+use	_gleOrphanBufferData	iVar4	rendererCursor	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot	^\s*iVar4\ =\ param_1\ \+\ 0x10000;$	+1
+use	_gleOrphanBufferData	iVar4	rendererCursor	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot	^\s*piVar12\ =\ \(int\ \*\)\(iVar4\ \+\ \-0x777c\);$	+1
+use	_gleOrphanBufferData	iVar4	rendererCursor	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot	^\s*puVar13\ =\ \(undefined4\ \*\)\(iVar4\ \+\ \-0x7a54\);$	+2
+use	_gleOrphanBufferData	iVar4	bucketNode	INFERRED	orphan bucket address (table + bucket offset)	^\s*iVar4\ =\ iVar14\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x7484\);$	+2
+use	_gleOrphanBufferData	uVar5	orphanTable	INFERRED	0x1800-byte orphan cache table: 128 buckets of 0x30 bytes	^\s*uVar5\ =\ _gleVecAlloc\(0x1800\);$	+1
+use	_gleOrphanBufferData	uVar5	orphanTable	INFERRED	0x1800-byte orphan cache table: 128 buckets of 0x30 bytes	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x7484\)\ =\ uVar5;$	+1
+use	_gleOrphanBufferData	uVar5	spareNode	INFERRED	pre-allocated spare orphan node (0x1c + 4 * renderers bytes)	^\s*uVar5\ =\ _gleVecAlloc\(\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\ \*\ 4\ \+\ 0x1c\);$	+2
+use	_gleOrphanBufferData	uVar5	copiedWord	INFERRED	per-renderer name copied from the buffer object into the orphan node	^\s*uVar5\ =\ \*puVar10;$	+1
+use	_gleOrphanBufferData	uVar5	copiedWord	INFERRED	per-renderer name copied from the buffer object into the orphan node	^\s*\(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x1e8\)\)\(\*puVar13,uVar5,piVar12\);$	+1
+use	_gleOrphanBufferData	uVar5	nodeNext	INFERRED	node->next link of the orphan node being unlinked	^\s*uVar5\ =\ \*piVar6;$	+1
+use	_gleOrphanBufferData	uVar5	nodeNext	INFERRED	node->next link of the orphan node being unlinked	^\s*\*puVar10\ =\ uVar5;$	+1
+use	_gleOrphanBufferData	uVar5	storagePtr	INFERRED	storage pointer of the recycled orphan node	^\s*uVar5\ =\ piVar6\[4\];$	+1
+use	_gleOrphanBufferData	uVar5	storagePtr	INFERRED	storage pointer of the recycled orphan node	^\s*param_2\[8\]\ =\ uVar5;$	+1
+use	_gleOrphanBufferData	uVar5	rendererName	INFERRED	per-renderer name of the recycled orphan, passed to the renderer	^\s*uVar5\ =\ \*puVar10;$@2	+1
+use	_gleOrphanBufferData	uVar5	rendererName	INFERRED	per-renderer name of the recycled orphan, passed to the renderer	^\s*\(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x1ec\)\)\(\*puVar13,param_2\[iVar9\],uVar5\);$	+1
+use	_gleOrphanBufferData	piVar6	newNode	INFERRED	spare or newly allocated orphan node that receives the buffer storage	^\s*piVar6\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x7464\);$	+3
+use	_gleOrphanBufferData	piVar6	newNode	INFERRED	spare or newly allocated orphan node that receives the buffer storage	^\s*piVar12\ =\ piVar6\ \+\ 7;$	+1
+use	_gleOrphanBufferData	piVar6	newNode	INFERRED	spare or newly allocated orphan node that receives the buffer storage	^\s*piVar6\[4\]\ =\ param_2\[8\];$	+3
+use	_gleOrphanBufferData	piVar6	newNode	INFERRED	spare or newly allocated orphan node that receives the buffer storage	^\s*uVar7\ =\ piVar6\[5\];$	+1
+use	_gleOrphanBufferData	piVar6	newNode	INFERRED	spare or newly allocated orphan node that receives the buffer storage	^\s*piVar6\[3\]\ =\ iVar9;$	+1
+use	_gleOrphanBufferData	piVar6	newNode	INFERRED	spare or newly allocated orphan node that receives the buffer storage	^\s*\*\(int\ \*\*\)\(iVar9\ \+\ 8\)\ =\ piVar6;$	+5
+use	_gleOrphanBufferData	piVar6	newNode	INFERRED	spare or newly allocated orphan node that receives the buffer storage	^\s*\*\(int\ \*\*\)\(iVar4\ \+\ 0x18\)\ =\ piVar6;$	+2
+use	_gleOrphanBufferData	piVar6	newNode	INFERRED	spare or newly allocated orphan node that receives the buffer storage	^\s*\*\(int\ \*\)\(iVar8\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x7484\)\)\ \+\ piVar6\[5\];$	+1
+use	_gleOrphanBufferData	piVar6	candidateNode	INFERRED	orphan node found in the size bucket (same size and usage) and recycled	^\s*piVar6\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ 0x14\);$	+1
+use	_gleOrphanBufferData	piVar6	candidateNode	INFERRED	orphan node found in the size bucket (same size and usage) and recycled	^\s*if\ \(piVar6\ ==\ \(int\ \*\)\(iVar9\ \+\ 0x14\)\)\ goto\ LAB_000c7884;$	+4
+use	_gleOrphanBufferData	piVar6	candidateNode	INFERRED	orphan node found in the size bucket (same size and usage) and recycled	^\s*puVar13\ =\ piVar6\ \+\ 7;$	+1
+use	_gleOrphanBufferData	piVar6	candidateNode	INFERRED	orphan node found in the size bucket (same size and usage) and recycled	^\s*iVar4\ =\ piVar6\[3\];$	+4
+use	_gleOrphanBufferData	piVar6	candidateNode	INFERRED	orphan node found in the size bucket (same size and usage) and recycled	^\s*iVar9\ =\ piVar6\[2\];$	+3
+use	_gleOrphanBufferData	piVar6	candidateNode	INFERRED	orphan node found in the size bucket (same size and usage) and recycled	^\s*piVar6\[2\]\ =\ \(int\)piVar6;$	+4
+use	_gleOrphanBufferData	piVar6	candidateNode	INFERRED	orphan node found in the size bucket (same size and usage) and recycled	^\s*param_2\[9\]\ =\ piVar6\[5\];$	+2
+use	_gleOrphanBufferData	piVar6	candidateNode	INFERRED	orphan node found in the size bucket (same size and usage) and recycled	^\s*puVar10\ =\ piVar6\ \+\ 7;$	+1
+use	_gleOrphanBufferData	piVar6	candidateNode	INFERRED	orphan node found in the size bucket (same size and usage) and recycled	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x7454\)\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x7454\)\ \-\ piVar6\[5\];$	+1
+use	_gleOrphanBufferData	piVar6	candidateNode	INFERRED	orphan node found in the size bucket (same size and usage) and recycled	^\s*\*\(int\ \*\)\(iVar14\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x7484\)\)\ \-\ piVar6\[5\];$	+1
+use	_gleOrphanBufferData	piVar6	candidateNode	INFERRED	orphan node found in the size bucket (same size and usage) and recycled	^\s*\*\(int\ \*\*\)\(param_1\ \+\ 0x7464\)\ =\ piVar6;$	+1
+use	_gleOrphanBufferData	piVar6	candidateNode	INFERRED	orphan node found in the size bucket (same size and usage) and recycled	^\s*_gleVecFree\(piVar6\);$	+1
+use	_gleOrphanBufferData	piVar6	candidateNode	INFERRED	orphan node found in the size bucket (same size and usage) and recycled	^\s*if\ \(piVar6\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+local	_gleOrphanBufferData	uVar7	orphanSize	INFERRED	page rounded size of the orphan node (node +0x14)
+use	_gleOrphanBufferData	iVar8	bucketEntry	INFERRED	address of the 0x30-byte bucket entry being initialised	^\s*iVar8\ =\ iVar11\ \+\ iVar9;$	+9
+use	_gleOrphanBufferData	iVar8	bucketEntry	INFERRED	address of the 0x30-byte bucket entry being initialised	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 4\)\ =\ 0;$	+3
+use	_gleOrphanBufferData	iVar8	bucketOffset	INFERRED	bucket index * 0x30: offset of the orphan size bucket	^\s*iVar8\ =\ \(uVar7\ >>\ 0xc\ \&\ 0x7f\)\ \*\ 0x30;$	+1
+use	_gleOrphanBufferData	iVar8	bucketOffset	INFERRED	bucket index * 0x30: offset of the orphan size bucket	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x7484\)\ \+\ iVar8;$	+1
+use	_gleOrphanBufferData	iVar8	bucketOffset	INFERRED	bucket index * 0x30: offset of the orphan size bucket	^\s*\*\(int\ \*\)\(iVar8\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x7484\)\)\ =$	+4
+use	_gleOrphanBufferData	iVar8	nextIndex	INFERRED	loop index + 1 in the renderer loop	^\s*iVar8\ =\ iVar9\ \+\ 1;$	+1
+use	_gleOrphanBufferData	iVar8	nextIndex	INFERRED	loop index + 1 in the renderer loop	^\s*iVar9\ =\ iVar8;$	+2
+use	_gleOrphanBufferData	iVar9	initOffset	INFERRED	byte offset of the bucket being initialised, stepped by 0x30	^\s*iVar9\ =\ 0;$	+1
+use	_gleOrphanBufferData	iVar9	initOffset	INFERRED	byte offset of the bucket being initialised, stepped by 0x30	^\s*iVar8\ =\ iVar11\ \+\ iVar9;$	+1
+use	_gleOrphanBufferData	iVar9	initOffset	INFERRED	byte offset of the bucket being initialised, stepped by 0x30	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ iVar9\)\ =\ 0;$	+2
+use	_gleOrphanBufferData	iVar9	newestOrphan	INFERRED	ctx+0x7474: newest node of the orphan age list	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x7474\);$	+1
+use	_gleOrphanBufferData	iVar9	newestOrphan	INFERRED	ctx+0x7474: newest node of the orphan age list	^\s*piVar6\[3\]\ =\ iVar9;$	+1
+use	_gleOrphanBufferData	iVar9	newestOrphan	INFERRED	ctx+0x7474: newest node of the orphan age list	^\s*\*\(int\ \*\*\)\(iVar9\ \+\ 8\)\ =\ piVar6;$	+1
+use	_gleOrphanBufferData	iVar9	cachedBytes	INFERRED	ctx+0x7454: total bytes held by the orphan cache	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x7454\);$	+1
+use	_gleOrphanBufferData	iVar9	cachedBytes	INFERRED	ctx+0x7454: total bytes held by the orphan cache	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x7454\)\ =\ iVar9\ \+\ uVar7;$	+1
+use	_gleOrphanBufferData	iVar9	bucket	INFERRED	orphan bucket (table + bucket offset) searched for a matching node	^\s*iVar9\ =\ iVar14\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x7484\);$	+2
+use	_gleOrphanBufferData	iVar9	bucket	INFERRED	orphan bucket (table + bucket offset) searched for a matching node	^\s*if\ \(piVar6\ ==\ \(int\ \*\)\(iVar9\ \+\ 0x14\)\)\ goto\ LAB_000c7884;$	+1
+use	_gleOrphanBufferData	iVar9	listHead	INFERRED	node +8: list head the recycled node is unlinked from	^\s*iVar9\ =\ piVar6\[2\];$	+1
+use	_gleOrphanBufferData	iVar9	listHead	INFERRED	node +8: list head the recycled node is unlinked from	^\s*\*\(int\ \*\)\(iVar9\ \+\ 0xc\)\ =\ iVar4;$	+1
+use	_gleOrphanBufferData	iVar9	loopIndex2	INFERRED	counts up from 0 over the renderers	^\s*iVar9\ =\ 0;$@4	+1
+use	_gleOrphanBufferData	iVar9	loopIndex2	INFERRED	counts up from 0 over the renderers	^\s*iVar8\ =\ iVar9\ \+\ 1;$	+2
+use	_gleOrphanBufferData	iVar9	loopIndex2	INFERRED	counts up from 0 over the renderers	^\s*\(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x1ec\)\)\(\*puVar13,param_2\[iVar9\],uVar5\);$	+2
+use	_gleOrphanBufferData	iVar9	spareNodeSlot	INFERRED	ctx+0x7464: spare node slot, refilled with the recycled node when empty	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x7464\);$	+1
+use	_gleOrphanBufferData	iVar9	spareNodeSlot	INFERRED	ctx+0x7464: spare node slot, refilled with the recycled node when empty	^\s*if\ \(iVar9\ ==\ 0\)\ \{$	+1
+use	_gleOrphanBufferData	puVar10	srcCursor	INFERRED	buffer object per-renderer name array cursor	^\s*puVar10\ =\ param_2;$	+1
+use	_gleOrphanBufferData	puVar10	srcCursor	INFERRED	buffer object per-renderer name array cursor	^\s*uVar5\ =\ \*puVar10;$	+1
+use	_gleOrphanBufferData	puVar10	srcCursor	INFERRED	buffer object per-renderer name array cursor	^\s*puVar10\ =\ puVar10\ \+\ 1;$	+1
+use	_gleOrphanBufferData	puVar10	bucketTail	INFERRED	last node of the bucket list (bucket +0x18)	^\s*puVar10\ =\ \*\(undefined4\ \*\*\)\(iVar4\ \+\ 0x18\);$	+1
+use	_gleOrphanBufferData	puVar10	bucketTail	INFERRED	last node of the bucket list (bucket +0x18)	^\s*piVar6\[1\]\ =\ \(int\)puVar10;$	+2
+use	_gleOrphanBufferData	puVar10	rendererStateCursor	INFERRED	ctx+0x85ac per-renderer state array (stride 0xb8 words)	^\s*puVar10\ =\ \(undefined4\ \*\)\(param_1\ \+\ 0x85ac\);$	+1
+use	_gleOrphanBufferData	puVar10	rendererStateCursor	INFERRED	ctx+0x85ac per-renderer state array (stride 0xb8 words)	^\s*if\ \(\(bVar3\)\ \&\&\ \(iVar4\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x4834\)\)\(\*puVar10,\*puVar13\),\ iVar4\ !=\ 0\)\)\ \{$	+1
+use	_gleOrphanBufferData	puVar10	rendererStateCursor	INFERRED	ctx+0x85ac per-renderer state array (stride 0xb8 words)	^\s*puVar10\ =\ puVar10\ \+\ 0xb8;$	+1
+use	_gleOrphanBufferData	puVar10	prevNode	INFERRED	node->prev link of the recycled node	^\s*puVar10\ =\ \(undefined4\ \*\)piVar6\[1\];$	+1
+use	_gleOrphanBufferData	puVar10	prevNode	INFERRED	node->prev link of the recycled node	^\s*\*puVar10\ =\ uVar5;$	+1
+use	_gleOrphanBufferData	puVar10	prevNode	INFERRED	node->prev link of the recycled node	^\s*\*\(undefined4\ \*\*\)\(\*piVar6\ \+\ 4\)\ =\ puVar10;$	+1
+use	_gleOrphanBufferData	puVar10	nameCursor	INFERRED	per-renderer name array cursor of the recycled node	^\s*puVar10\ =\ piVar6\ \+\ 7;$	+1
+use	_gleOrphanBufferData	puVar10	nameCursor	INFERRED	per-renderer name array cursor of the recycled node	^\s*uVar5\ =\ \*puVar10;$@2	+2
+local	_gleOrphanBufferData	iVar11	tableBase	INFERRED	ctx+0x7484: orphan cache table
+use	_gleOrphanBufferData	piVar12	nameDstCursor	INFERRED	per-renderer name array cursor of the new node	^\s*piVar12\ =\ piVar6\ \+\ 7;$	+1
+use	_gleOrphanBufferData	piVar12	nameDstCursor	INFERRED	per-renderer name array cursor of the new node	^\s*\(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x1e8\)\)\(\*puVar13,uVar5,piVar12\);$	+2
+use	_gleOrphanBufferData	piVar12	rendererDispatch2	INFERRED	per-renderer driver dispatch table pointer (+0x1ec adopts the recycled storage)	^\s*piVar12\ =\ \(int\ \*\)\(iVar4\ \+\ \-0x777c\);$	+1
+use	_gleOrphanBufferData	piVar12	rendererDispatch2	INFERRED	per-renderer driver dispatch table pointer (+0x1ec adopts the recycled storage)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x1ec\)\)\(\*puVar13,param_2\[iVar9\],uVar5\);$	+1
+use	_gleOrphanBufferData	puVar13	rendererHandlePtr	INFERRED	per-renderer handle passed as the first argument of the dispatch function	^\s*puVar13\ =\ \(undefined4\ \*\)\(iVar14\ \+\ \-0x7a54\);$	+1
+use	_gleOrphanBufferData	puVar13	rendererHandlePtr	INFERRED	per-renderer handle passed as the first argument of the dispatch function	^\s*\(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x1e8\)\)\(\*puVar13,uVar5,piVar12\);$	+1
+use	_gleOrphanBufferData	puVar13	nameCursor2	INFERRED	per-renderer name array cursor of the recycled node	^\s*puVar13\ =\ piVar6\ \+\ 7;$	+1
+use	_gleOrphanBufferData	puVar13	nameCursor2	INFERRED	per-renderer name array cursor of the recycled node	^\s*if\ \(\(bVar3\)\ \&\&\ \(iVar4\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x4834\)\)\(\*puVar10,\*puVar13\),\ iVar4\ !=\ 0\)\)\ \{$	+1
+use	_gleOrphanBufferData	puVar13	nameCursor2	INFERRED	per-renderer name array cursor of the recycled node	^\s*puVar13\ =\ puVar13\ \+\ 1;$	+1
+use	_gleOrphanBufferData	puVar13	rendererHandlePtr2	INFERRED	per-renderer handle passed as the first argument of the dispatch function	^\s*puVar13\ =\ \(undefined4\ \*\)\(iVar4\ \+\ \-0x7a54\);$	+1
+use	_gleOrphanBufferData	puVar13	rendererHandlePtr2	INFERRED	per-renderer handle passed as the first argument of the dispatch function	^\s*\(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x1ec\)\)\(\*puVar13,param_2\[iVar9\],uVar5\);$	+1
+use	_gleOrphanBufferData	iVar14	rendererCursorBase	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot	^\s*iVar14\ =\ param_1\ \+\ 0x10000;$	+1
+use	_gleOrphanBufferData	iVar14	rendererCursorBase	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot	^\s*piVar1\ =\ \(int\ \*\)\(iVar14\ \+\ \-0x777c\);$	+1
+use	_gleOrphanBufferData	iVar14	rendererCursorBase	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot	^\s*puVar13\ =\ \(undefined4\ \*\)\(iVar14\ \+\ \-0x7a54\);$	+2
+use	_gleOrphanBufferData	iVar14	orphanCount	INFERRED	ctx+0x7458: number of orphan nodes in the cache	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x7458\);$	+1
+use	_gleOrphanBufferData	iVar14	orphanCount	INFERRED	ctx+0x7458: number of orphan nodes in the cache	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x7458\)\ =\ iVar14\ \+\ 1;$	+1
+use	_gleOrphanBufferData	iVar14	sizeBucketOffset	INFERRED	((size + 0xfff) >> 12 & 0x7f) * 0x30: offset of the bucket of the requested size	^\s*iVar14\ =\ \(param_3\ \+\ 0xfffU\ >>\ 0xc\ \&\ 0x7f\)\ \*\ 0x30;$	+2
+use	_gleOrphanBufferData	iVar14	sizeBucketOffset	INFERRED	((size + 0xfff) >> 12 & 0x7f) * 0x30: offset of the bucket of the requested size	^\s*\*\(int\ \*\)\(iVar14\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x7484\)\)\ =$	+3
+use	_gleOrphanBufferData	iVar14	sizeBucketOffset	INFERRED	((size + 0xfff) >> 12 & 0x7f) * 0x30: offset of the bucket of the requested size	^\s*iVar14\ =\ iVar14\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x7484\);$	+2
+use	_gleOrphanBufferData	iVar14	sizeBucketOffset	INFERRED	((size + 0xfff) >> 12 & 0x7f) * 0x30: offset of the bucket of the requested size	^\s*iVar14\ =\ iVar14\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x7484\);$@2	+2
+local	_gleCleanupOrphans	piVar1	rendererDispatch	INFERRED	per-renderer driver dispatch table pointer (+0x1f8 releases the orphan storage)
+local	_gleCleanupOrphans	puVar2	rendererHandlePtr	INFERRED	per-renderer handle passed as the first argument of the dispatch function
+local	_gleCleanupOrphans	iVar3	rendererName	INFERRED	per-renderer name of the orphan being released
+use	_gleCleanupOrphans	iVar4	cachedBytes	INFERRED	ctx+0x7454: total bytes held by the orphan cache	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x7454\);$	+2
+use	_gleCleanupOrphans	iVar4	cachedBytes	INFERRED	ctx+0x7454: total bytes held by the orphan cache	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x7454\);$@2	+1
+use	_gleCleanupOrphans	iVar4	cachedBytes	INFERRED	ctx+0x7454: total bytes held by the orphan cache	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x7454\)\ =\ iVar4\ \-\ iVar6;$	+1
+use	_gleCleanupOrphans	iVar4	cachedBytes	INFERRED	ctx+0x7454: total bytes held by the orphan cache	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x7454\);$@3	+1
+use	_gleCleanupOrphans	iVar4	rendererCursor	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot	^\s*iVar4\ =\ param_1\ \+\ 0x10000;$	+1
+use	_gleCleanupOrphans	iVar4	rendererCursor	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot	^\s*piVar1\ =\ \(int\ \*\)\(iVar4\ \+\ \-0x777c\);$	+1
+use	_gleCleanupOrphans	iVar4	rendererCursor	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot	^\s*puVar2\ =\ \(undefined4\ \*\)\(iVar4\ \+\ \-0x7a54\);$	+2
+use	_gleCleanupOrphans	iVar4	bucketOffset	INFERRED	bucket index * 0x30: offset of the orphan size bucket	^\s*iVar4\ =\ \(\(uint\)piVar7\[5\]\ >>\ 0xc\ \&\ 0x7f\)\ \*\ 0x30;$	+5
+use	_gleCleanupOrphans	iVar4	nodeLink	INFERRED	link word of the oldest orphan node read while unlinking it	^\s*iVar4\ =\ \*piVar7;$	+1
+use	_gleCleanupOrphans	iVar4	nodeLink	INFERRED	link word of the oldest orphan node read while unlinking it	^\s*\*piVar5\ =\ iVar4;$	+1
+use	_gleCleanupOrphans	iVar4	nodeLink	INFERRED	link word of the oldest orphan node read while unlinking it	^\s*iVar4\ =\ \*piVar7;$@2	+1
+use	_gleCleanupOrphans	iVar4	nodeLink	INFERRED	link word of the oldest orphan node read while unlinking it	^\s*\*\(int\ \*\*\)\(iVar4\ \+\ 4\)\ =\ piVar5;$	+1
+use	_gleCleanupOrphans	piVar5	nameCursor	INFERRED	per-renderer name array cursor of the oldest orphan node	^\s*piVar5\ =\ piVar7\ \+\ 7;$	+1
+use	_gleCleanupOrphans	piVar5	nameCursor	INFERRED	per-renderer name array cursor of the oldest orphan node	^\s*iVar3\ =\ \*piVar5;$	+2
+use	_gleCleanupOrphans	piVar5	nodePrev	INFERRED	node->prev link of the oldest orphan node	^\s*piVar5\ =\ \(int\ \*\)piVar7\[1\];$	+1
+use	_gleCleanupOrphans	piVar5	nodePrev	INFERRED	node->prev link of the oldest orphan node	^\s*\*piVar5\ =\ iVar4;$	+1
+use	_gleCleanupOrphans	piVar5	nodePrev	INFERRED	node->prev link of the oldest orphan node	^\s*\*\(int\ \*\*\)\(iVar4\ \+\ 4\)\ =\ piVar5;$	+1
+use	_gleCleanupOrphans	iVar6	orphanSize	INFERRED	page rounded size of the oldest orphan node	^\s*iVar6\ =\ piVar7\[5\];$	+1
+use	_gleCleanupOrphans	iVar6	orphanSize	INFERRED	page rounded size of the oldest orphan node	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x7454\)\ =\ iVar4\ \-\ iVar6;$	+1
+use	_gleCleanupOrphans	iVar6	nodeListHead	INFERRED	node +0xc link of the oldest orphan node	^\s*iVar6\ =\ piVar7\[3\];$	+1
+use	_gleCleanupOrphans	iVar6	nodeListHead	INFERRED	node +0xc link of the oldest orphan node	^\s*\*\(int\ \*\)\(iVar6\ \+\ 8\)\ =\ piVar7\[2\];$	+1
+use	_gleCleanupOrphans	iVar6	nodeListHead	INFERRED	node +0xc link of the oldest orphan node	^\s*\*\(int\ \*\)\(piVar7\[2\]\ \+\ 0xc\)\ =\ iVar6;$	+1
+local	_gleCleanupOrphans	piVar7	oldestOrphan	INFERRED	ctx+0x7470: oldest node of the orphan age list, released while the cache exceeds 0x4000000 bytes
+local	_gleReclaimTextureObjectResources	piVar1	rendererDispatch	INFERRED	per-renderer driver dispatch table pointer (+0x170 reclaims the texture resources)
+local	_gleReclaimTextureObjectResources	puVar2	rendererHandlePtr	INFERRED	per-renderer handle passed as the first argument of the dispatch function
+use	_gleReclaimTextureObjectResources	iVar3	sharedState	INFERRED	ctx+0x5148: shared state holding the texture object hash table at +0x2008	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x5148\);$	+2
+use	_gleReclaimTextureObjectResources	iVar3	sharedState	INFERRED	ctx+0x5148: shared state holding the texture object hash table at +0x2008	^\s*\}\ while\ \(piVar5\ <=\ \(int\ \*\)\(iVar3\ \+\ 0x3004\)\);$	+1
+use	_gleReclaimTextureObjectResources	iVar3	defaultTexture	INFERRED	default texture object read from the table at ctx+0x5294	^\s*iVar3\ =\ \*piVar8;$	+1
+use	_gleReclaimTextureObjectResources	iVar3	defaultTexture	INFERRED	default texture object read from the table at ctx+0x5294	^\s*if\ \(\(\(iVar3\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar3\ \+\ 8\)\ ==\ 1\)\)\ \&\&$	+4
+use	_gleReclaimTextureObjectResources	iVar3	rendererSlotCursor	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot	^\s*iVar3\ =\ param_1\ \+\ 0x10000;$	+1
+use	_gleReclaimTextureObjectResources	iVar3	rendererSlotCursor	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot	^\s*piVar5\ =\ \(int\ \*\)\(iVar3\ \+\ \-0x777c\);$	+1
+use	_gleReclaimTextureObjectResources	iVar3	rendererSlotCursor	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot	^\s*puVar2\ =\ \(undefined4\ \*\)\(iVar3\ \+\ \-0x7a54\);$	+2
+local	_gleReclaimTextureObjectResources	uVar4	rendererName	INFERRED	per-renderer name of the texture object passed to the reclaim function
+use	_gleReclaimTextureObjectResources	piVar5	nextBucket	INFERRED	address of the next hash bucket head	^\s*piVar5\ =\ piVar8\ \+\ 1;$	+1
+use	_gleReclaimTextureObjectResources	piVar5	nextBucket	INFERRED	address of the next hash bucket head	^\s*piVar8\ =\ piVar5;$	+2
+use	_gleReclaimTextureObjectResources	piVar5	rendererDispatch2	INFERRED	per-renderer driver dispatch table pointer (+0x170 reclaims the texture resources)	^\s*piVar5\ =\ \(int\ \*\)\(iVar3\ \+\ \-0x777c\);$	+1
+use	_gleReclaimTextureObjectResources	piVar5	rendererDispatch2	INFERRED	per-renderer driver dispatch table pointer (+0x170 reclaims the texture resources)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x170\)\)\(\*puVar2,uVar4\);$	+1
+use	_gleReclaimTextureObjectResources	uVar6	loopIndex	INFERRED	counts up from 0 over the renderers	^\s*if\ \(\(\(piVar8\[2\]\ ==\ 1\)\ \&\&\ \(\(\*\(ushort\ \*\)\(piVar8\ \+\ 0xd\)\ \&\ 0x3c00\)\ !=\ 0x800\)\)\ \&\&$	+2
+use	_gleReclaimTextureObjectResources	uVar6	loopIndex	INFERRED	counts up from 0 over the renderers	^\s*uVar6\ =\ uVar6\ \+\ 1;$	+1
+use	_gleReclaimTextureObjectResources	uVar6	loopIndex	INFERRED	counts up from 0 over the renderers	^\s*\}\ while\ \(uVar6\ <\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleReclaimTextureObjectResources	uVar6	defaultTexIndex	INFERRED	counts up from 0 over the five default textures	^\s*uVar6\ =\ 0;$	+1
+use	_gleReclaimTextureObjectResources	uVar6	defaultTexIndex	INFERRED	counts up from 0 over the five default textures	^\s*uVar6\ =\ uVar6\ \+\ 1;$@2	+2
+local	_gleReclaimTextureObjectResources	uVar7	loopIndex2	INFERRED	counts up from 0 over the renderers
+use	_gleReclaimTextureObjectResources	piVar8	hashNode	INFERRED	hash bucket head, then texture object chain node being visited	^\s*piVar8\ =\ \(int\ \*\)\(iVar3\ \+\ 0x2008\);$	+1
+use	_gleReclaimTextureObjectResources	piVar8	hashNode	INFERRED	hash bucket head, then texture object chain node being visited	^\s*piVar5\ =\ piVar8\ \+\ 1;$	+5
+use	_gleReclaimTextureObjectResources	piVar8	hashNode	INFERRED	hash bucket head, then texture object chain node being visited	^\s*piVar8\ =\ piVar5;$	+1
+use	_gleReclaimTextureObjectResources	piVar8	defaultTexCursor	INFERRED	cursor over the default texture table at ctx+0x5294	^\s*piVar8\ =\ \(int\ \*\)\(param_1\ \+\ 0x5294\);$	+1
+use	_gleReclaimTextureObjectResources	piVar8	defaultTexCursor	INFERRED	cursor over the default texture table at ctx+0x5294	^\s*iVar3\ =\ \*piVar8;$	+2
+local	_gleReclaimTextureObjectResources	puVar9	nameCursor	INFERRED	per-renderer name array cursor of the texture object
+local	_gleReclaimTextureObjectResources	iVar10	rendererCursor	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer: address of the renderer slot

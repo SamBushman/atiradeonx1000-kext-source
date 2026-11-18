@@ -454,58 +454,59 @@ int _gleClipPoints(unusedArg1, param_2, param_3, param_4)
 }
 
 /* _gleClipPointsPlane @ 0xeaa30 (244 bytes) */
-int _gleClipPointsPlane(glContext, param_2, param_3)
+int _gleClipPointsPlane(glContext, points, pointCount)
   int glContext;
-  int *param_2;
-  int param_3;
+  int *points;
+  int pointCount;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  int iVar6;
-  int iVar7;
-  int *piVar8;
-  int *piVar9;
-  int *piVar10;
-  int iVar11;
-  uint uVar12;
+  float planeA;
+  float planeD;
+  float planeB;
+  float planeC;
+  float zero;
+  int planeRecord;
+  int point;
+  int planeLoopIndex;
+  int *planeIndexCursor;
+  int *keepCursor;
+  int *readCursor;
+  int planeCount;
+  uint remaining;
   
-  fVar5 = FLOAT_00108e50;
-  iVar7 = 0;
-  iVar11 = *(int *)(glContext + 0x4dfc);
-  if ((0 < iVar11) && (0 < param_3)) {
-    piVar8 = (int *)(glContext + 0x4e00);
+  zero = FLOAT_00108e50;
+  planeLoopIndex = 0;
+  planeCount = *(int *)(glContext + 0x4dfc);
+  if ((0 < planeCount) && (0 < pointCount)) {
+    planeIndexCursor = (int *)(glContext + 0x4e00);
     do {
-      iVar6 = *piVar8;
-      piVar8 = piVar8 + 1;
-      iVar6 = glContext + iVar6 * 0x10;
-      fVar1 = *(float *)(iVar6 + 0x418c);
-      fVar2 = *(float *)(iVar6 + 0x4198);
-      fVar3 = *(float *)(iVar6 + 0x4190);
-      fVar4 = *(float *)(iVar6 + 0x4194);
-      piVar9 = param_2;
-      if (param_2 < param_2 + param_3) {
-        uVar12 = (uint)((int)(param_2 + param_3) + (3 - (int)param_2)) >> 2;
-        piVar10 = param_2;
+      planeRecord = *planeIndexCursor;
+      planeIndexCursor = planeIndexCursor + 1;
+      planeRecord = glContext + planeRecord * 0x10;
+      planeA = *(float *)(planeRecord + 0x418c);
+      planeD = *(float *)(planeRecord + 0x4198);
+      planeB = *(float *)(planeRecord + 0x4190);
+      planeC = *(float *)(planeRecord + 0x4194);
+      keepCursor = points;
+      if (points < points + pointCount) {
+        remaining = (uint)((int)(points + pointCount) + (3 - (int)points)) >> 2;
+        readCursor = points;
         do {
-          iVar6 = *piVar10;
-          if (fVar5 <= *(float *)(iVar6 + 0x2c) * fVar2 +
-                       (*(float *)(iVar6 + 0x28) * fVar4 +
-                       (*(float *)(iVar6 + 0x20) * fVar1 + *(float *)(iVar6 + 0x24) * fVar3))) {
-            *piVar9 = iVar6;
-            piVar9 = piVar9 + 1;
+          point = *readCursor;
+          if (zero <= *(float *)(point + 0x2c) * planeD +
+                       (*(float *)(point + 0x28) * planeC +
+                       (*(float *)(point + 0x20) * planeA + *(float *)(point + 0x24) * planeB))) {
+            *keepCursor = point;
+            keepCursor = keepCursor + 1;
           }
-          piVar10 = piVar10 + 1;
-          uVar12 = uVar12 - 1;
-        } while (uVar12 != 0);
+          readCursor = readCursor + 1;
+          remaining = remaining - 1;
+        } while (remaining != 0);
       }
-      iVar7 = iVar7 + 1;
-      param_3 = (int)piVar9 - (int)param_2 >> 2;
-    } while ((iVar7 < iVar11) && (0 < param_3));
+      planeLoopIndex = planeLoopIndex + 1;
+      pointCount = (int)keepCursor - (int)points >> 2;
+    } while ((planeLoopIndex < planeCount) && (0 < pointCount));
   }
-  return param_3;
+  return pointCount;
 }
 
 /* _gleFeedbackPointsFunc_body @ 0xeab28 (700 bytes) */

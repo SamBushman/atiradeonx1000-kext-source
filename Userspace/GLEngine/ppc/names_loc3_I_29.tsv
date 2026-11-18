@@ -1,0 +1,49 @@
+local	_gleInitMap2Data	iVar1	evalStateCursor	INFERRED	ctx+0x7450 evaluator state, advanced by 0x660 bytes per map2 evaluator while the defaults (orders 1x1, domain 0..1, control points) are written
+local	_gleInitMap2Data	puVar2	mapDimensionCursor	INFERRED	per evaluator dimension byte (state + 0x9db8) set to 4
+local	_gleInitMap2Data	iVar3	remaining	INFERRED	counts down from 0x10 by 1 over the map2 evaluators
+local	_gleInitMap2Data	param_1	glContext	INFERRED	GL context
+local	_gleSelectHitRecord	param_1	glContext	INFERRED	GL context
+use	_gleSelectHitRecord	uVar1	depthValue	INFERRED	window depth scaled to an unsigned integer (z * DOUBLE_00108da8) stored in the hit record	^\s*uVar1\ =\ \(int\)\(dVar5\ \-\ DOUBLE_00108d80\)\ \^\ 0x80000000;$	+1
+use	_gleSelectHitRecord	uVar1	depthValue	INFERRED	window depth scaled to an unsigned integer (z * DOUBLE_00108da8) stored in the hit record	^\s*uVar1\ =\ \(uint\)\(int\)dVar5;$	+1
+use	_gleSelectHitRecord	uVar1	depthValue	INFERRED	window depth scaled to an unsigned integer (z * DOUBLE_00108da8) stored in the hit record	^\s*if\ \(uVar1\ <\ \*puVar2\)\ \{$	+2
+use	_gleSelectHitRecord	uVar1	depthValue	INFERRED	window depth scaled to an unsigned integer (z * DOUBLE_00108da8) stored in the hit record	^\s*if\ \(uVar1\ <=\ puVar2\[1\]\)\ \{$	+1
+use	_gleSelectHitRecord	uVar1	depthValue	INFERRED	window depth scaled to an unsigned integer (z * DOUBLE_00108da8) stored in the hit record	^\s*puVar2\[1\]\ =\ uVar1;$	+1
+use	_gleSelectHitRecord	uVar1	depthValue	INFERRED	window depth scaled to an unsigned integer (z * DOUBLE_00108da8) stored in the hit record	^\s*\*puVar4\ =\ uVar1;$	+1
+use	_gleSelectHitRecord	uVar1	depthValue	INFERRED	window depth scaled to an unsigned integer (z * DOUBLE_00108da8) stored in the hit record	^\s*puVar2\[2\]\ =\ uVar1;$	+1
+use	_gleSelectHitRecord	uVar1	copiedWord	INFERRED	name stack word copied into the select buffer	^\s*uVar1\ =\ \*puVar4;$	+1
+use	_gleSelectHitRecord	uVar1	copiedWord	INFERRED	name stack word copied into the select buffer	^\s*\*puVar2\ =\ uVar1;$@2	+1
+use	_gleSelectHitRecord	puVar2	selectCursor	INFERRED	ctx+0x4e24: next free word of the select buffer	^\s*puVar2\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x4e24\);$	+1
+use	_gleSelectHitRecord	puVar2	selectCursor	INFERRED	ctx+0x4e24: next free word of the select buffer	^\s*if\ \(puVar2\ !=\ puVar3\)\ \{$	+3
+use	_gleSelectHitRecord	puVar2	selectCursor	INFERRED	ctx+0x4e24: next free word of the select buffer	^\s*if\ \(puVar2\ \+\ 2\ !=\ puVar3\)\ \{$	+2
+use	_gleSelectHitRecord	puVar2	selectCursor	INFERRED	ctx+0x4e24: next free word of the select buffer	^\s*puVar2\ =\ puVar2\ \+\ 3;$	+1
+use	_gleSelectHitRecord	puVar2	selectCursor	INFERRED	ctx+0x4e24: next free word of the select buffer	^\s*if\ \(puVar2\ ==\ puVar3\)\ goto\ LAB_000f3a4c;$	+1
+use	_gleSelectHitRecord	puVar2	selectCursor	INFERRED	ctx+0x4e24: next free word of the select buffer	^\s*\*puVar2\ =\ uVar1;$@2	+2
+use	_gleSelectHitRecord	puVar2	selectCursor	INFERRED	ctx+0x4e24: next free word of the select buffer	^\s*\*\(uint\ \*\*\)\(param_1\ \+\ 0x4e24\)\ =\ puVar2;$	+1
+use	_gleSelectHitRecord	puVar2	hitRecord	INFERRED	ctx+0x4fc0: depth range (min, max) words of the hit record being extended	^\s*puVar2\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x4fc0\);$	+4
+use	_gleSelectHitRecord	puVar2	hitRecord	INFERRED	ctx+0x4fc0: depth range (min, max) words of the hit record being extended	^\s*if\ \(uVar1\ <=\ puVar2\[1\]\)\ \{$	+1
+use	_gleSelectHitRecord	puVar2	hitRecord	INFERRED	ctx+0x4fc0: depth range (min, max) words of the hit record being extended	^\s*puVar2\[1\]\ =\ uVar1;$	+1
+local	_gleSelectHitRecord	puVar3	selectBufferEnd	INFERRED	end of the select buffer (ctx+20000 buffer + ctx+0x4e28 size words)
+use	_gleSelectHitRecord	puVar4	nameCountSlot	INFERRED	select buffer word following the hit header: receives the minimum depth	^\s*puVar4\ =\ puVar2\ \+\ 1;$	+1
+use	_gleSelectHitRecord	puVar4	nameCountSlot	INFERRED	select buffer word following the hit header: receives the minimum depth	^\s*if\ \(puVar4\ !=\ puVar3\)\ \{$	+3
+use	_gleSelectHitRecord	puVar4	nameStackCursor	INFERRED	cursor over the name stack at ctx+0x4e2c copied into the hit record	^\s*puVar4\ =\ \(uint\ \*\)\(param_1\ \+\ 0x4e2c\);$	+1
+use	_gleSelectHitRecord	puVar4	nameStackCursor	INFERRED	cursor over the name stack at ctx+0x4e2c copied into the hit record	^\s*if\ \(puVar4\ <\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x4fbc\)\)\ \{$	+1
+use	_gleSelectHitRecord	puVar4	nameStackCursor	INFERRED	cursor over the name stack at ctx+0x4e2c copied into the hit record	^\s*uVar1\ =\ \*puVar4;$	+2
+use	_gleSelectHitRecord	puVar4	nameStackCursor	INFERRED	cursor over the name stack at ctx+0x4e2c copied into the hit record	^\s*\}\ while\ \(puVar4\ <\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x4fbc\)\);$	+1
+local	_gleSelectHitRecord	dVar5	scaledDepth	INFERRED	depth argument scaled by DOUBLE_00108da8
+local	_glePolyCentroid	param_2	vertices	INFERRED	polygon vertices (x, y first; vertex stride 0x100 bytes)
+local	_glePolyCentroid	param_3	vertexCount	INFERRED	number of polygon vertices
+local	_glePolyCentroid	param_4	centroidX	INFERRED	receives the x coordinate of the polygon centroid
+local	_glePolyCentroid	param_5	centroidY	INFERRED	receives the y coordinate of the polygon centroid
+use	_glePolyCentroid	fVar1	crossTerm	INFERRED	x_i * y_(i+1) - x_(i+1) * y_i for the current edge	^\s*fVar1\ =\ \*pfVar9\ \*\ pfVar9\[0x41\]\ \-\ pfVar9\[0x40\]\ \*\ pfVar9\[1\];$	+4
+use	_glePolyCentroid	fVar1	lastY	INFERRED	y coordinate of the last vertex	^\s*fVar1\ =\ pfVar10\[1\];$	+1
+use	_glePolyCentroid	fVar1	lastY	INFERRED	y coordinate of the last vertex	^\s*fVar7\ =\ \*pfVar10\ \*\ fVar3\ \-\ fVar2\ \*\ fVar1;$	+1
+use	_glePolyCentroid	fVar1	lastY	INFERRED	y coordinate of the last vertex	^\s*\*param_5\ =\ \(\(fVar1\ \+\ fVar3\)\ \*\ fVar7\ \+\ fVar6\)\ \*\ fVar4;$	+1
+local	_glePolyCentroid	fVar2	firstX	INFERRED	x coordinate of the first vertex
+local	_glePolyCentroid	fVar3	firstY	INFERRED	y coordinate of the first vertex
+local	_glePolyCentroid	fVar4	areaSum	INFERRED	sum of the edge cross terms: twice the signed area (fall back to the first vertex when it is nearly 0)
+local	_glePolyCentroid	fVar5	centroidSumX	INFERRED	sum of (x_i + x_(i+1)) * cross term
+local	_glePolyCentroid	fVar6	centroidSumY	INFERRED	sum of (y_i + y_(i+1)) * cross term
+local	_glePolyCentroid	fVar7	closingCross	INFERRED	cross term of the closing edge (last vertex to first vertex)
+local	_glePolyCentroid	iVar8	remaining	INFERRED	counts down over the edges between consecutive vertices
+local	_glePolyCentroid	pfVar9	vertexCursor	INFERRED	current vertex of the edge loop
+local	_glePolyCentroid	pfVar10	lastVertex	INFERRED	last vertex of the polygon

@@ -1,0 +1,266 @@
+use	_gleGetAttrib	iVar11	dstCursor	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*iVar11\ =\ iVar21\ \+\ 0x2660;$	+1
+use	_gleGetAttrib	iVar11	dstCursor	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*\*\(uint\ \*\)\(iVar11\ \+\ 8\)\ =\ \(uint\)\*\(ushort\ \*\)\(iVar18\ \+\ 0x10\);$	+2
+use	_gleGetAttrib	iVar11	dstCursor	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*\*\(uint\ \*\)\(iVar11\ \+\ 0x10\)\ =\ \(uint\)\*puVar7;$	+2
+use	_gleGetAttrib	iVar13	srcCursor	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar13\ =\ iVar5\ \+\ 0x5140;$	+1
+use	_gleGetAttrib	iVar13	srcCursor	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar13\ \+\ 0x14\);$	+1
+use	_gleGetAttrib	iVar13	srcCursor	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*piVar12\ =\ \(int\ \*\)\(iVar13\ \+\ 0x14\);$	+2
+use	_gleGetAttrib	iVar13	srcCursor	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar13\ =\ iVar14\ \+\ 0x4270;$	+1
+use	_gleGetAttrib	iVar13	srcCursor	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar15\[2\]\ =\ \*\(uint\ \*\)\(iVar13\ \+\ 0x10\);$	+5
+use	_gleGetAttrib	iVar13	dstCursor2	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*iVar13\ =\ iVar19\ \+\ \(int\)param_3;$	+1
+use	_gleGetAttrib	iVar13	dstCursor2	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x6b8\)\ =\ \*\(undefined4\ \*\)\(iVar14\ \+\ 0x3524\);$	+23
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar14\ =\ param_1\ \+\ 0x34f0;$	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar10\[2\]\ =\ \(uint\)\*\(ushort\ \*\)\(iVar14\ \+\ 0x10\);$	+7
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar14\ =\ param_1;$	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar10\[0x20\]\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x1a0\);$	+5
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar14\ =\ param_1;$@2	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*\*puVar10\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x120\);$	+5
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar14\ =\ param_1;$@3	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar10\[0x17\]\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x2850\);$	+26
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar14\ =\ param_1;$@4	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar10\[0x1ab\]\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x2f0\);$	+4
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*\}\ while\ \(iVar14\ <=\ param_1\ \+\ 0x10\);$	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar14\ =\ param_1;$@5	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar10\[1\]\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x3cfc\);$	+41
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar14\ =\ param_1;$@6	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x6b8\)\ =\ \*\(undefined4\ \*\)\(iVar14\ \+\ 0x3524\);$	+4
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*\*\(uint\ \*\)\(iVar13\ \+\ 0x6dc\)\ =\ \(uint\)\*\(ushort\ \*\)\(iVar14\ \+\ 0x3544\);$	+13
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar14\ =\ iVar14\ \+\ 0x7c;$	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar14\ =\ param_1;$@7	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar13\ =\ iVar14\ \+\ 0x4270;$	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar14\ =\ iVar14\ \+\ 0x80;$@2	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*return\ iVar14;$	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar14\ =\ param_1\ \+\ 0x4180;$	+1
+use	_gleGetAttrib	iVar14	srcCursor2	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar10\[3\]\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0xc\);$	+5
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ 0x80;$	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ iVar14\ \+\ \-1;$	+2
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ 4;$	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ iVar14\ \+\ \-1;$@2	+2
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ 1;$	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ iVar14\ \+\ \-1;$@3	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*\}\ while\ \(\-1\ <\ iVar14\);$	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ 1;$@2	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ iVar14\ \+\ \-1;$@4	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*\}\ while\ \(\-1\ <\ iVar14\);$@2	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ 0x100;$	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ iVar14\ \+\ \-1;$@5	+2
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ 0x80;$@2	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ iVar14\ \+\ \-1;$@6	+2
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ 0x10;$	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ iVar14\ \+\ \-1;$@7	+2
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ 8;$	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ iVar14\ \+\ \-1;$@8	+2
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ 1;$@3	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ iVar14\ \+\ \-1;$@9	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*\}\ while\ \(\-1\ <\ iVar14\);$@3	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ 4;$@2	+1
+use	_gleGetAttrib	iVar14	remaining	INFERRED	counts down from a constant by 1	^\s*iVar14\ =\ iVar14\ \+\ \-1;$@10	+2
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar14\ =\ 0;$	+1
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar5\ =\ iVar14\ \*\ 4;$	+2
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar14\ =\ 0;$@2	+1
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar5\ =\ iVar14\ \*\ 4;$@2	+2
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar14\ =\ 0;$@3	+1
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar5\ =\ iVar14\ \*\ 4;$@3	+2
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar14\ =\ 0;$@4	+1
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar5\ =\ iVar14\ \*\ 4;$@4	+2
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar14\ =\ 0;$@5	+1
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar5\ =\ iVar14\ \*\ 4;$@5	+2
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar14\ =\ 0;$@6	+1
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar5\ =\ iVar14\ \*\ 4;$@6	+2
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar14\ =\ 0;$@7	+1
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar5\ =\ iVar14\ \*\ 4;$@7	+2
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar14\ =\ 0;$@8	+1
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar5\ =\ iVar14\ \*\ 4;$@8	+2
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar14\ =\ 0;$@9	+1
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar5\ =\ iVar14\ \*\ 4;$@9	+2
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar14\ =\ 0;$@10	+1
+use	_gleGetAttrib	iVar14	loopIndex	INFERRED	counts up from 0 by 1	^\s*iVar5\ =\ iVar14\ \*\ 4;$@10	+2
+use	_gleGetAttrib	iVar17	dstCursor3	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*iVar17\ =\ iVar19\ \+\ \(int\)param_3;$	+1
+use	_gleGetAttrib	iVar17	dstCursor3	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ 0x514\)\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x50\);$	+9
+use	_gleGetAttrib	iVar17	dstCursor3	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ 0x524\)\ =\ \*\(undefined4\ \*\)\(\*piVar12\ \+\ 4\);$	+13
+use	_gleGetAttrib	iVar17	remaining2	INFERRED	counts down from a constant by 1	^\s*iVar17\ =\ 0;$	+1
+use	_gleGetAttrib	iVar17	remaining2	INFERRED	counts down from a constant by 1	^\s*iVar17\ =\ iVar17\ \+\ \-1;$	+1
+use	_gleGetAttrib	iVar17	remaining2	INFERRED	counts down from a constant by 1	^\s*\}\ while\ \(\-1\ <\ iVar17\);$	+1
+use	_gleGetAttrib	iVar17	srcCursor3	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar17\ =\ iVar5\ \+\ 0x4230;$	+1
+use	_gleGetAttrib	iVar17	srcCursor3	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*\*\(undefined1\ \*\)\(iVar21\ \+\ 0x2698\)\ =\ \*\(undefined1\ \*\)\(iVar17\ \+\ 0x10\);$	+9
+use	_gleGetAttrib	iVar18	srcCursor4	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar18\ =\ iVar19\ \+\ 0x4210;$	+1
+use	_gleGetAttrib	iVar18	srcCursor4	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*\*\(uint\ \*\)\(iVar11\ \+\ 8\)\ =\ \(uint\)\*\(ushort\ \*\)\(iVar18\ \+\ 0x10\);$	+4
+use	_gleGetAttrib	iVar19	srcCursor5	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar19\ =\ param_1\ \+\ iVar20\ \*\ 8;$	+1
+use	_gleGetAttrib	iVar19	srcCursor5	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar18\ =\ iVar19\ \+\ 0x4210;$	+1
+use	_gleGetAttrib	iVar19	srcCursor5	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar19\ =\ iVar19\ \+\ 0x30;$	+1
+use	_gleGetAttrib	iVar20	remaining3	INFERRED	counts down from a constant by 1	^\s*iVar20\ =\ 0x10;$	+1
+use	_gleGetAttrib	iVar20	remaining3	INFERRED	counts down from a constant by 1	^\s*iVar20\ =\ iVar20\ \+\ \-1;$	+2
+use	_gleGetAttrib	iVar20	remaining3	INFERRED	counts down from a constant by 1	^\s*iVar20\ =\ 8;$	+1
+use	_gleGetAttrib	iVar20	remaining3	INFERRED	counts down from a constant by 1	^\s*iVar20\ =\ iVar20\ \+\ \-1;$@2	+2
+use	_gleGetAttrib	iVar20	loopIndex2	INFERRED	counts up from 0 by 1	^\s*iVar20\ =\ 0;$	+1
+use	_gleGetAttrib	iVar20	loopIndex2	INFERRED	counts up from 0 by 1	^\s*iVar20\ =\ iVar20\ \+\ 1;$	+1
+use	_gleGetAttrib	iVar20	loopIndex2	INFERRED	counts up from 0 by 1	^\s*\}\ while\ \(iVar20\ <\ 0x10\);$	+1
+use	_gleGetAttrib	iVar21	remaining4	INFERRED	counts down from a constant by 1	^\s*iVar21\ =\ 5;$	+1
+use	_gleGetAttrib	iVar21	remaining4	INFERRED	counts down from a constant by 1	^\s*iVar21\ =\ iVar21\ \+\ \-1;$	+2
+use	_gleGetAttrib	iVar21	dstCursor4	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*iVar21\ =\ iVar6\ \+\ \(int\)param_3;$	+1
+use	_gleGetAttrib	iVar21	dstCursor4	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*iVar11\ =\ iVar21\ \+\ 0x2660;$	+1
+use	_gleGetAttrib	iVar21	dstCursor4	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*\*\(undefined1\ \*\)\(iVar21\ \+\ 0x2698\)\ =\ \*\(undefined1\ \*\)\(iVar17\ \+\ 0x10\);$	+7
+use	_gleGetAttrib	iVar21	dstCursor4	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*\*\(uint\ \*\)\(iVar21\ \+\ 0x26ac\)\ =\ \(uint\)\*puVar7;$	+2
+use	_gleGetAttrib	iVar22	remaining5	INFERRED	counts down from a constant by 1	^\s*iVar22\ =\ 4;$	+1
+use	_gleGetAttrib	iVar22	remaining5	INFERRED	counts down from a constant by 1	^\s*iVar22\ =\ iVar22\ \+\ \-1;$	+2
+use	_gleGetAttrib	iVar5	srcPtr	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4854\);$	+1
+use	_gleGetAttrib	iVar5	srcPtr	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*iVar6\ =\ iVar5\ \+\ \-0x200;$	+1
+use	_gleGetAttrib	iVar5	srcPtr	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*param_3\[0x73\]\ =\ \*\(uint\ \*\)\(iVar5\ \+\ \-500\);$	+16
+use	_gleGetAttrib	iVar5	srcPtr	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*iVar5\ =\ \*piVar12;$	+1
+use	_gleGetAttrib	iVar5	srcPtr	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*\*puVar10\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 4\);$	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*iVar5\ =\ iVar14\ \*\ 4;$	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*\*puVar10\ =\ \*\(uint\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x3248\)\);$	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*iVar5\ =\ iVar14\ \*\ 4;$@2	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*\*puVar10\ =\ \*\(uint\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x324c\)\);$	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*iVar5\ =\ iVar14\ \*\ 4;$@3	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*\*puVar10\ =\ \*\(uint\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x3250\)\);$	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*iVar5\ =\ iVar14\ \*\ 4;$@4	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*\*puVar10\ =\ \*\(uint\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x3254\)\);$	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*iVar5\ =\ iVar14\ \*\ 4;$@5	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*\*puVar10\ =\ \*\(uint\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x3258\)\);$	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*iVar5\ =\ iVar14\ \*\ 4;$@6	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*\*puVar10\ =\ \*\(uint\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x325c\)\);$	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*iVar5\ =\ iVar14\ \*\ 4;$@7	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*\*puVar10\ =\ \*\(uint\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x3260\)\);$	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*iVar5\ =\ iVar14\ \*\ 4;$@8	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*\*puVar10\ =\ \*\(uint\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x3264\)\);$	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*iVar5\ =\ iVar14\ \*\ 4;$@9	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*\*puVar10\ =\ \*\(uint\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x3268\)\);$	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*iVar5\ =\ iVar14\ \*\ 4;$@10	+1
+use	_gleGetAttrib	iVar5	byteOffset	INFERRED	index * 4: byte offset of a 32-bit array element	^\s*\*puVar10\ =\ \*\(uint\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x326c\)\);$	+1
+use	_gleGetAttrib	iVar5	remaining6	INFERRED	counts down from a constant by 1	^\s*iVar5\ =\ 8;$	+1
+use	_gleGetAttrib	iVar5	remaining6	INFERRED	counts down from a constant by 1	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	_gleGetAttrib	iVar5	remaining6	INFERRED	counts down from a constant by 1	^\s*iVar5\ =\ 8;$@2	+1
+use	_gleGetAttrib	iVar5	remaining6	INFERRED	counts down from a constant by 1	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@2	+2
+use	_gleGetAttrib	iVar5	remaining6	INFERRED	counts down from a constant by 1	^\s*iVar5\ =\ 6;$	+1
+use	_gleGetAttrib	iVar5	remaining6	INFERRED	counts down from a constant by 1	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@3	+2
+use	_gleGetAttrib	iVar5	srcCursor6	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar5\ =\ param_1;$	+1
+use	_gleGetAttrib	iVar5	srcCursor6	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar10\[0x19b\]\ =\ \*\*\(uint\ \*\*\)\(iVar5\ \+\ 0x4dd0\);$	+18
+use	_gleGetAttrib	iVar5	srcCursor6	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar5\ =\ param_1;$@2	+1
+use	_gleGetAttrib	iVar5	srcCursor6	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar13\ =\ iVar5\ \+\ 0x5140;$	+1
+use	_gleGetAttrib	iVar5	srcCursor6	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar5\ =\ iVar5\ \+\ 0x14;$	+1
+use	_gleGetAttrib	iVar5	srcCursor6	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar5\ =\ param_1\ \+\ 0x41f0;$	+1
+use	_gleGetAttrib	iVar5	srcCursor6	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar10\[2\]\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0x10\);$	+5
+use	_gleGetAttrib	iVar5	srcCursor6	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar5\ =\ param_1;$@3	+1
+use	_gleGetAttrib	iVar5	srcCursor6	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar17\ =\ iVar5\ \+\ 0x4230;$	+1
+use	_gleGetAttrib	iVar5	srcCursor6	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar5\ =\ iVar5\ \+\ 0x80;$	+1
+use	_gleGetAttrib	iVar5	srcCursor6	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*\}\ while\ \(iVar5\ <=\ param_1\ \+\ 0x380\);$	+1
+use	_gleGetAttrib	iVar5	srcCursor6	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar5\ =\ param_1\ \+\ 0x4610;$	+1
+use	_gleGetAttrib	iVar5	srcCursor6	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar10\[3\]\ =\ \(uint\)\*\(ushort\ \*\)\(iVar5\ \+\ 0x14\);$	+4
+use	_gleGetAttrib	iVar6	srcCursor7	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar6\ =\ iVar5\ \+\ \-0x200;$	+1
+use	_gleGetAttrib	iVar6	srcCursor7	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar10\[0x80\]\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x80\);$	+5
+use	_gleGetAttrib	iVar6	srcCursor7	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar6\ =\ param_1\ \+\ 0x3530;$	+1
+use	_gleGetAttrib	iVar6	srcCursor7	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*\*puVar10\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 4\);$	+1
+use	_gleGetAttrib	iVar6	srcCursor7	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*\*\(uint\ \*\)\(iVar13\ \+\ 0x6c8\)\ =\ \(uint\)\*\(ushort\ \*\)\(iVar6\ \+\ 8\);$	+5
+use	_gleGetAttrib	iVar6	srcCursor7	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar6\ =\ iVar6\ \+\ 0x7c;$	+1
+use	_gleGetAttrib	iVar6	remaining7	INFERRED	counts down from a constant by 1	^\s*iVar6\ =\ 7;$	+1
+use	_gleGetAttrib	iVar6	remaining7	INFERRED	counts down from a constant by 1	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_gleGetAttrib	iVar8	srcPtr2	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar13\ \+\ 0x14\);$	+10
+use	_gleGetAttrib	iVar8	srcPtr2	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ 0x528\)\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x38\);$	+11
+use	_gleGetAttrib	iVar8	loopIndex3	INFERRED	counts up from 0 by 1	^\s*iVar8\ =\ 0;$	+1
+use	_gleGetAttrib	iVar8	loopIndex3	INFERRED	counts up from 0 by 1	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+1
+use	_gleGetAttrib	iVar8	loopIndex3	INFERRED	counts up from 0 by 1	^\s*\}\ while\ \(iVar8\ <\ 2\);$	+1
+use	_gleGetAttrib	piVar12	srcPtr3	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*piVar12\ =\ \(int\ \*\)\(iVar5\ \+\ 0x4dd0\);$	+1
+use	_gleGetAttrib	piVar12	srcPtr3	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar10\[0x1ae\]\ =\ \*\(uint\ \*\)\(\*piVar12\ \+\ 0x40\);$	+1
+use	_gleGetAttrib	piVar12	srcPtr3	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*piVar12\ =\ \(int\ \*\)\(iVar13\ \+\ 0x14\);$	+1
+use	_gleGetAttrib	piVar12	srcPtr3	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ 0x524\)\ =\ \*\(undefined4\ \*\)\(\*piVar12\ \+\ 4\);$	+1
+use	_gleGetAttrib	piVar12	srcCursor8	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*piVar12\ =\ \(int\ \*\)\(param_1\ \+\ 0x5420\);$	+1
+use	_gleGetAttrib	piVar12	srcCursor8	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*iVar5\ =\ \*piVar12;$	+1
+use	_gleGetAttrib	piVar12	srcCursor8	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*piVar12\ =\ piVar12\ \+\ 1;$	+1
+use	_gleGetAttrib	puVar1	srcPtr4	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar1\ =\ \(uint\ \*\)\(iVar13\ \+\ 0x1c\);$	+1
+use	_gleGetAttrib	puVar1	srcPtr4	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar15\[5\]\ =\ \*puVar1;$	+1
+use	_gleGetAttrib	puVar1	srcPtr4	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar1\ =\ puVar15\ \+\ 3;$	+1
+use	_gleGetAttrib	puVar1	srcPtr4	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar10\[4\]\ =\ \*puVar1;$	+1
+use	_gleGetAttrib	puVar1	srcPtr4	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar1\ =\ puVar15\ \+\ 3;$@2	+1
+use	_gleGetAttrib	puVar1	srcPtr4	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar10\[4\]\ =\ \*puVar1;$@2	+1
+use	_gleGetAttrib	puVar16	srcCursor11	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar16\ =\ \(undefined1\ \*\)\(param_1\ \+\ 0x3d7b\);$	+1
+use	_gleGetAttrib	puVar16	srcCursor11	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar9\[\-3\]\ =\ puVar16\[\-3\];$	+5
+use	_gleGetAttrib	puVar7	srcPtr6	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar7\ =\ \(ushort\ \*\)\(iVar14\ \+\ 0x16\);$	+1
+use	_gleGetAttrib	puVar7	srcPtr6	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar10\[5\]\ =\ \(uint\)\*puVar7;$	+1
+use	_gleGetAttrib	puVar7	srcPtr6	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar7\ =\ \(ushort\ \*\)\(iVar14\ \+\ 0x3d54\);$	+1
+use	_gleGetAttrib	puVar7	srcPtr6	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar10\[0x1e\]\ =\ \(uint\)\*puVar7;$	+1
+use	_gleGetAttrib	puVar7	srcPtr6	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar7\ =\ \(ushort\ \*\)\(iVar18\ \+\ 0x14\);$	+1
+use	_gleGetAttrib	puVar7	srcPtr6	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*\*\(uint\ \*\)\(iVar11\ \+\ 0x10\)\ =\ \(uint\)\*puVar7;$	+1
+use	_gleGetAttrib	puVar7	srcPtr6	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar7\ =\ \(ushort\ \*\)\(iVar17\ \+\ 0x1c\);$	+1
+use	_gleGetAttrib	puVar7	srcPtr6	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*\*\(uint\ \*\)\(iVar21\ \+\ 0x26ac\)\ =\ \(uint\)\*puVar7;$	+1
+use	_gleGetAttrib	puVar7	srcPtr6	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar7\ =\ \(ushort\ \*\)\(iVar5\ \+\ 0x18\);$	+1
+use	_gleGetAttrib	puVar7	srcPtr6	INFERRED	src-side pointer rooted at a parameter (single use)	^\s*puVar10\[5\]\ =\ \(uint\)\*puVar7;$@2	+1
+use	_gleGetAttrib	puVar7	srcCursor12	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar7\ =\ \(ushort\ \*\)\(param_1\ \+\ 0x311a\);$	+1
+use	_gleGetAttrib	puVar7	srcCursor12	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*uVar3\ =\ \*puVar7;$	+2
+use	_gleGetAttrib	puVar9	srcCursor13	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar9\ =\ \(undefined1\ \*\)\(param_1\ \+\ 0x3448\);$	+1
+use	_gleGetAttrib	puVar9	srcCursor13	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*uVar2\ =\ \*puVar9;$	+2
+use	_gleGetAttrib	puVar9	srcCursor13	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*return\ \(int\)puVar9;$	+1
+use	_gleGetAttrib	puVar9	srcCursor13	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar9\ =\ \(undefined1\ \*\)\(param_1\ \+\ 0x4664\);$	+1
+use	_gleGetAttrib	puVar9	srcCursor13	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*uVar2\ =\ \*puVar9;$@2	+2
+use	_gleGetAttrib	puVar9	srcCursor13	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*puVar9\ =\ \(undefined1\ \*\)\(param_1\ \+\ 0x4664\);$@2	+1
+use	_gleGetAttrib	puVar9	srcCursor13	INFERRED	src-side pointer rooted at a parameter advanced in the loop	^\s*uVar2\ =\ \*puVar9;$@3	+2
+use	_gleGetAttrib	puVar9	dstCursor7	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*puVar9\ =\ \(undefined1\ \*\)\(\(int\)param_3\ \+\ 0x6f\);$	+1
+use	_gleGetAttrib	puVar9	dstCursor7	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*puVar9\[\-3\]\ =\ puVar16\[\-3\];$	+3
+use	_gleGetAttrib	puVar9	dstCursor7	INFERRED	dst-side pointer rooted at a parameter advanced in the loop	^\s*\*puVar9\ =\ uVar2;$	+2
+use	_gleGetAttrib	uVar2	copiedByte	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar2\ =\ \*puVar9;$	+1
+use	_gleGetAttrib	uVar2	copiedByte	INFERRED	temporary: loaded once, then stored unchanged	^\s*\*\(undefined1\ \*\)param_3\ =\ uVar2;$	+1
+use	_gleGetAttrib	uVar2	copiedByte	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar2\ =\ \*puVar9;$@2	+1
+use	_gleGetAttrib	uVar2	copiedByte	INFERRED	temporary: loaded once, then stored unchanged	^\s*\*\(undefined1\ \*\)puVar15\ =\ uVar2;$	+1
+use	_gleGetAttrib	uVar2	copiedByte	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar2\ =\ \*puVar16;$	+1
+use	_gleGetAttrib	uVar2	copiedByte	INFERRED	temporary: loaded once, then stored unchanged	^\s*\*puVar9\ =\ uVar2;$	+1
+use	_gleGetAttrib	uVar2	copiedByte	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar2\ =\ \*puVar9;$@3	+1
+use	_gleGetAttrib	uVar2	copiedByte	INFERRED	temporary: loaded once, then stored unchanged	^\s*\*\(undefined1\ \*\)puVar10\ =\ uVar2;$	+1
+use	_gleGetAttrib	uVar3	copiedHalf	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar3\ =\ \*puVar7;$	+1
+use	_gleGetAttrib	uVar3	copiedHalf	INFERRED	temporary: loaded once, then stored unchanged	^\s*\*puVar10\ =\ \(uint\)uVar3;$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar4\ =\ \*puVar15;$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*puVar10\[6\]\ =\ uVar4;$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar4\ =\ \*puVar10;$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*\*puVar15\ =\ uVar4;$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar5\ \+\ \-0x1d0\);$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*param_3\[0xa0\]\ =\ uVar4;$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x30a0\);$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*param_3\[10\]\ =\ uVar4;$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x34f4\);$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*\*param_3\ =\ uVar4;$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x5404\);$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar4\ =\ \(uint\)\*\(ushort\ \*\)\(param_1\ \+\ 0x3176\);$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1bac\);$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*param_3\[7\]\ =\ uVar4;$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x2800\);$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*param_3\[6\]\ =\ uVar4;$	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*uVar4\ =\ \*puVar10;$@2	+1
+use	_gleGetAttrib	uVar4	copiedWord	INFERRED	temporary: loaded once, then stored unchanged	^\s*\*puVar15\ =\ uVar4;$@2	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x3270\);$	+2
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*if\ \(0\ <\ \(int\)uVar4\)\ \{$	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ uVar4\ \-\ 1;$	+2
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ param_3\[0xa11\];$	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*if\ \(0\ <\ \(int\)uVar4\)\ \{$@2	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ uVar4\ \-\ 1;$@2	+2
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ param_3\[0xa12\];$	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*if\ \(0\ <\ \(int\)uVar4\)\ \{$@3	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ uVar4\ \-\ 1;$@3	+2
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ param_3\[0xa13\];$	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*if\ \(0\ <\ \(int\)uVar4\)\ \{$@4	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ uVar4\ \-\ 1;$@4	+2
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ param_3\[0xa14\];$	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*if\ \(0\ <\ \(int\)uVar4\)\ \{$@5	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ uVar4\ \-\ 1;$@5	+2
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ param_3\[0xa15\];$	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*if\ \(0\ <\ \(int\)uVar4\)\ \{$@6	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ uVar4\ \-\ 1;$@6	+2
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ param_3\[0xa16\];$	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*if\ \(0\ <\ \(int\)uVar4\)\ \{$@7	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ uVar4\ \-\ 1;$@7	+2
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ param_3\[0xa17\];$	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*if\ \(0\ <\ \(int\)uVar4\)\ \{$@8	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ uVar4\ \-\ 1;$@8	+2
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ param_3\[0xa18\];$	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*if\ \(0\ <\ \(int\)uVar4\)\ \{$@9	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ uVar4\ \-\ 1;$@9	+2
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ param_3\[0xa10\];$	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*if\ \(0\ <\ \(int\)uVar4\)\ \{$@10	+1
+use	_gleGetAttrib	uVar4	remaining8	INFERRED	loaded element count, decremented by 1 per element	^\s*uVar4\ =\ uVar4\ \-\ 1;$@10	+2
+use	_gleGetAttrib	iVar6	dstOffset	INFERRED	0 then += 0xb0 per outer iteration; only use is iVar6 + (int)attribBuffer: byte offset into the output buffer	^\s*iVar6\ =\ 0;$	+1
+use	_gleGetAttrib	iVar6	dstOffset	INFERRED	0 then += 0xb0 per outer iteration; only use is iVar6 + (int)attribBuffer: byte offset into the output buffer	^\s*iVar21\ =\ iVar6\ \+\ \(int\)param_3;$	+1
+use	_gleGetAttrib	iVar6	dstOffset	INFERRED	0 then += 0xb0 per outer iteration; only use is iVar6 + (int)attribBuffer: byte offset into the output buffer	^\s*iVar6\ =\ iVar6\ \+\ 0xb0;$	+1
+use	_gleGetAttrib	iVar19	dstOffset2	INFERRED	0 then += 0x214 per outer iteration; only use is iVar19 + (int)attribBuffer: byte offset into the output buffer	^\s*iVar19\ =\ 0;$	+1
+use	_gleGetAttrib	iVar19	dstOffset2	INFERRED	0 then += 0x214 per outer iteration; only use is iVar19 + (int)attribBuffer: byte offset into the output buffer	^\s*iVar17\ =\ iVar19\ \+\ \(int\)param_3;$	+1
+use	_gleGetAttrib	iVar19	dstOffset2	INFERRED	0 then += 0x214 per outer iteration; only use is iVar19 + (int)attribBuffer: byte offset into the output buffer	^\s*iVar13\ =\ iVar19\ \+\ \(int\)param_3;$	+1
+use	_gleGetAttrib	iVar19	dstOffset2	INFERRED	0 then += 0x214 per outer iteration; only use is iVar19 + (int)attribBuffer: byte offset into the output buffer	^\s*iVar19\ =\ iVar19\ \+\ 0x214;$	+1
+use	_gleGetAttrib	iVar20	srcOffsetDiv8	INFERRED	0 then += 0x10; only use is glContext + iVar20 * 8: byte offset into the context divided by 8	^\s*iVar20\ =\ 0;$@2	+1
+use	_gleGetAttrib	iVar20	srcOffsetDiv8	INFERRED	0 then += 0x10; only use is glContext + iVar20 * 8: byte offset into the context divided by 8	^\s*iVar19\ =\ param_1\ \+\ iVar20\ \*\ 8;$	+1
+use	_gleGetAttrib	iVar20	srcOffsetDiv8	INFERRED	0 then += 0x10; only use is glContext + iVar20 * 8: byte offset into the context divided by 8	^\s*iVar20\ =\ iVar20\ \+\ 0x10;$	+1

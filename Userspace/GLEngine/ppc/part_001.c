@@ -5973,59 +5973,83 @@ int _gleGetState(glContext, pname, values, valueType, param_5)
   undefined4 *valueType;
   undefined1 *param_5;
 {
-  float fVar1;
+  float rangeMax;
+  float floatStateValueB;
   float glContextFloat2c8;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
+  uint scalarResult;
+  int nextIndex;
+  int attachmentRecord;
+  int attachmentObject;
+  uint otherLimit;
   int *srcCursor;
   undefined4 glContextWord4688;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  undefined4 uVar9;
-  undefined4 uVar10;
-  int iVar11;
+  undefined4 rendererTextureName;
+  undefined4 attachmentParamA;
+  undefined4 attachmentParamB;
+  undefined4 sizeQueryEnum;
+  int attachmentIndexThenBody;
   int glContextPtr468c;
   code *glContextPtr479c;
   int iVar13;
+  int drawBufferIndex;
+  int fogCoordArrayBuffer;
+  int secondaryColorArrayBuffer;
+  int weightArrayBuffer;
+  int clientArrayBuffer37c;
+  int texCoordArrayBuffer;
+  int colorArrayBuffer;
+  int vertexArrayBuffer;
+  int elementArrayBuffer;
+  int normalArrayBuffer;
+  int arrayBuffer;
+  int edgeFlagArrayBuffer;
+  int currentMatrixPtr;
+  int formatIndex;
+  int matrixPtr;
+  int valueCount;
   int matrixModeIndex;
   int glContextPtr4854;
   int framebufferObject;
   int clientState;
-  double dVar14;
-  longlong lVar15;
+  double intToDoubleMagicThenValue;
+  double doubleStateValue;
+  double fourthComponent2;
+  double floatStateValue;
+  double secondValue;
+  double fourthComponent;
+  longlong arrayEnableBit;
   
   *valueType = 0x1404;
   *param_5 = 0;
-  dVar14 = DOUBLE_00108d58;
-  iVar13 = 1;
+  intToDoubleMagicThenValue = DOUBLE_00108d58;
+  valueCount = 1;
   if (pname == 0x6092) {
-    uVar2 = (uint)*(ushort *)(glContext + 0x2808);
+    scalarResult = (uint)*(ushort *)(glContext + 0x2808);
     goto LAB_00015f48;
   }
   if (0x6092 < pname) {
     if (pname == 0x84e2) {
-      uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xb4);
+      scalarResult = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xb4);
       goto LAB_00015f48;
     }
     if (0x84e2 < pname) {
       if (pname == 0x86aa) {
-        uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0xac);
+        scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0xac);
         goto LAB_00015f48;
       }
       if (pname < 0x86ab) {
         if (pname == 0x854e) {
-          uVar2 = *(uint *)(glContext + 0x41fc);
+          scalarResult = *(uint *)(glContext + 0x41fc);
           goto LAB_00015f48;
         }
         if (pname < 0x854f) {
           if (pname == 0x8505) {
-            uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0xa4);
+            scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0xa4);
             goto LAB_00015f48;
           }
           if (pname < 0x8506) {
             if (pname == 0x84ef) {
-              uVar2 = (uint)*(ushort *)(glContext + 0x3176);
+              scalarResult = (uint)*(ushort *)(glContext + 0x3176);
               goto LAB_00015f48;
             }
             if (pname < 0x84f0) {
@@ -6033,17 +6057,17 @@ int _gleGetState(glContext, pname, values, valueType, param_5)
                 if (7 < *(int *)(glContext + 0x53d4)) {
                   return -1;
                 }
-                iVar13 = glContext + *(int *)(glContext + 0x53d4) * 0x40 + 0x1fc0;
+                matrixPtr = glContext + *(int *)(glContext + 0x53d4) * 0x40 + 0x1fc0;
               }
               else if (pname < 0x84e6) {
                 if (pname == 0x84e3) {
-                  iVar13 = glContext + 0x1cc0;
+                  matrixPtr = glContext + 0x1cc0;
                 }
                 else {
                   if (pname != 0x84e4) {
                     return 0;
                   }
-                  iVar13 = glContext + 0x1c80;
+                  matrixPtr = glContext + 0x1c80;
                 }
               }
               else {
@@ -6051,33 +6075,33 @@ int _gleGetState(glContext, pname, values, valueType, param_5)
                   if (pname != 0x84e8) {
                     return 0;
                   }
-                  uVar4 = *(uint *)(*(int *)(glContext + 0x468c) + 0x10);
-                  uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0xc);
-                  if ((int)uVar4 < (int)uVar2) {
-                    uVar2 = uVar4;
+                  otherLimit = *(uint *)(*(int *)(glContext + 0x468c) + 0x10);
+                  scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0xc);
+                  if ((int)otherLimit < (int)scalarResult) {
+                    scalarResult = otherLimit;
                   }
                   goto LAB_00015efc;
                 }
-                iVar13 = glContext + 0x1c40;
+                matrixPtr = glContext + 0x1c40;
               }
               goto LAB_00014d40;
             }
             if (pname == 0x84f8) goto LAB_00015960;
             if (0x84f8 < pname) {
               if (pname == 0x84ff) {
-                uVar2 = (uint)(int)*(float *)(*(int *)(glContext + 0x468c) + 0xac);
+                scalarResult = (uint)(int)*(float *)(*(int *)(glContext + 0x468c) + 0xac);
               }
               else if (pname < 0x8500) {
                 if (pname != 0x84fd) {
                   return 0;
                 }
-                uVar2 = (uint)(int)*(float *)(*(int *)(glContext + 0x468c) + 0xb0);
+                scalarResult = (uint)(int)*(float *)(*(int *)(glContext + 0x468c) + 0xb0);
               }
               else {
                 if (pname != 0x8504) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0xa0);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0xa0);
               }
               goto LAB_00015f48;
             }
@@ -6088,7 +6112,7 @@ int _gleGetState(glContext, pname, values, valueType, param_5)
             goto LAB_00015948;
           }
           if (pname == 0x851f) {
-            uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x4a60) + 0x342);
+            scalarResult = (uint)*(ushort *)(*(int *)(glContext + 0x4a60) + 0x342);
             goto LAB_00015f48;
           }
           if (0x851f < pname) {
@@ -6096,30 +6120,30 @@ int _gleGetState(glContext, pname, values, valueType, param_5)
               *values = (double)*(float *)(glContext + 0x4200);
               values[1] = (double)*(float *)(glContext + 0x4204);
               values[2] = (double)*(float *)(glContext + 0x4208);
-              dVar14 = (double)*(float *)(glContext + 0x420c);
+              fourthComponent = (double)*(float *)(glContext + 0x420c);
             }
             else {
               if (pname < 0x852b) {
                 if (pname == 0x8520) {
-                  uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x8c);
+                  scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x8c);
                 }
                 else {
                   if (pname != 0x8522) {
                     return 0;
                   }
-                  uVar2 = (uint)*(byte *)(glContext + 0x41f8);
+                  scalarResult = (uint)*(byte *)(glContext + 0x41f8);
                 }
                 goto LAB_00015f48;
               }
               if (pname == 0x8534) {
-                uVar2 = (uint)*(ushort *)(glContext + 0x317a);
+                scalarResult = (uint)*(ushort *)(glContext + 0x317a);
                 goto LAB_00015f48;
               }
               if (0x8534 < pname) {
                 if (pname != 0x854d) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x98);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x98);
                 goto LAB_00015f48;
               }
               if (pname != 0x852b) {
@@ -6128,23 +6152,23 @@ int _gleGetState(glContext, pname, values, valueType, param_5)
               *values = (double)*(float *)(glContext + 0x4210);
               values[1] = (double)*(float *)(glContext + 0x4214);
               values[2] = (double)*(float *)(glContext + 0x4218);
-              dVar14 = (double)*(float *)(glContext + 0x421c);
+              fourthComponent = (double)*(float *)(glContext + 0x421c);
             }
             goto LAB_00015a8c;
           }
           if (pname == 0x8514) {
-            uVar2 = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5154) + 4);
+            scalarResult = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5154) + 4);
             goto LAB_00015f48;
           }
           if (0x8514 < pname) {
             if (pname == 0x851c) {
-              uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc2);
+              scalarResult = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc2);
             }
             else {
               if (pname != 0x851e) {
                 return 0;
               }
-              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x348);
+              scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0x348);
             }
             goto LAB_00015f48;
           }
@@ -6152,280 +6176,280 @@ int _gleGetState(glContext, pname, values, valueType, param_5)
             if (pname != 0x8513) {
               return 0;
             }
-            uVar2 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) & 1;
+            scalarResult = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) & 1;
             goto LAB_00015f48;
           }
-          iVar13 = glContext + 0x1d00;
+          matrixPtr = glContext + 0x1d00;
         }
         else {
           if (pname != 0x8641) {
             if (0x8641 < pname) {
               if (pname == 0x86a3) {
                 glContextPtr468c = *(int *)(glContext + 0x468c);
-                iVar13 = 0;
+                formatIndex = 0;
                 if (*(char *)(glContextPtr468c + 0xc6) != '\0') {
                   do {
-                    iVar3 = iVar13 + 1;
-                    *(uint *)(values + iVar13) = *(uint *)(iVar13 * 4 + glContextPtr468c + 200);
+                    nextIndex = formatIndex + 1;
+                    *(uint *)(values + formatIndex) = *(uint *)(formatIndex * 4 + glContextPtr468c + 200);
                     glContextPtr468c = *(int *)(glContext + 0x468c);
-                    iVar13 = iVar3;
-                  } while (iVar3 < (int)(uint)*(byte *)(glContextPtr468c + 0xc6));
-                  return iVar3;
+                    formatIndex = nextIndex;
+                  } while (nextIndex < (int)(uint)*(byte *)(glContextPtr468c + 0xc6));
+                  return nextIndex;
                 }
                 return 0;
               }
               if (pname < 0x86a4) {
                 if (pname == 0x864b) {
-                  uVar2 = *(uint *)(glContext + 0x541c);
+                  scalarResult = *(uint *)(glContext + 0x541c);
                 }
                 else if (pname < 0x864c) {
                   if (pname == 0x8642) {
-                    uVar2 = (uint)*(byte *)(glContext + 0x4665);
+                    scalarResult = (uint)*(byte *)(glContext + 0x4665);
                   }
                   else {
                     if (pname != 0x8643) {
                       return 0;
                     }
-                    uVar2 = (uint)*(byte *)(glContext + 0x4666);
+                    scalarResult = (uint)*(byte *)(glContext + 0x4666);
                   }
                 }
                 else if (pname == 0x864f) {
-                  uVar2 = (uint)*(byte *)(glContext + 0x3129);
+                  scalarResult = (uint)*(byte *)(glContext + 0x3129);
                 }
                 else {
                   if (pname != 0x86a2) {
                     return 0;
                   }
-                  uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x468c) + 0xc6);
+                  scalarResult = (uint)*(byte *)(*(int *)(glContext + 0x468c) + 0xc6);
                 }
                 goto LAB_00015f48;
               }
               if (pname == 0x86a6) {
-                uVar2 = (uint)*(byte *)(glContext + 0x4662);
+                scalarResult = (uint)*(byte *)(glContext + 0x4662);
                 goto LAB_00015f48;
               }
               if (pname < 0x86a7) {
                 if (pname == 0x86a4) {
-                  uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x90);
+                  scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x90);
                 }
                 else {
                   if (pname != 0x86a5) {
                     return 0;
                   }
-                  uVar2 = (uint)*(byte *)(glContext + 0x4660);
+                  scalarResult = (uint)*(byte *)(glContext + 0x4660);
                 }
                 goto LAB_00015f48;
               }
               if (pname != 0x86a8) {
                 if (pname < 0x86a9) {
-                  uVar2 = (uint)*(byte *)(glContext + 0x4661);
+                  scalarResult = (uint)*(byte *)(glContext + 0x4661);
                 }
                 else {
-                  uVar2 = *(ushort *)(*(int *)(glContext + 0x4a60) + 0xb0) & 0xffff7fff;
+                  scalarResult = *(ushort *)(*(int *)(glContext + 0x4a60) + 0xb0) & 0xffff7fff;
                 }
                 goto LAB_00015f48;
               }
               *values = (double)*(float *)(glContext + 0x2d0);
               values[1] = (double)*(float *)(glContext + 0x2d4);
               values[2] = (double)*(float *)(glContext + 0x2d8);
-              dVar14 = (double)*(float *)(glContext + 0x2dc);
+              fourthComponent = (double)*(float *)(glContext + 0x2dc);
               goto LAB_00015a8c;
             }
             if (pname != 0x85b4) {
               if (pname < 0x85b5) {
                 if (pname == 0x85b1) {
-                  uVar2 = *(uint *)(glContext + 0x507c);
+                  scalarResult = *(uint *)(glContext + 0x507c);
                   goto LAB_00015f48;
                 }
                 if (pname < 0x85b2) {
                   if (pname == 0x855a) {
-                    uVar2 = (uint)*(ushort *)(glContext + 0x3168);
+                    scalarResult = (uint)*(ushort *)(glContext + 0x3168);
                   }
                   else {
                     if (pname != 0x85b0) {
                       return 0;
                     }
-                    uVar2 = (uint)*(byte *)(glContext + 0x30ae);
+                    scalarResult = (uint)*(byte *)(glContext + 0x30ae);
                   }
                   goto LAB_00015f48;
                 }
                 if (pname == 0x85b2) {
-                  uVar2 = (uint)*(byte *)(glContext + 0x31e6);
+                  scalarResult = (uint)*(byte *)(glContext + 0x31e6);
                   goto LAB_00015f48;
                 }
                 if (pname != 0x85b3) {
                   return 0;
                 }
 LAB_000155d4:
-                uVar2 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 2 & 1;
+                scalarResult = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 2 & 1;
                 goto LAB_00015f48;
               }
               if (pname == 0x8620) {
-                uVar2 = (uint)*(byte *)(glContext + 0x4664);
+                scalarResult = (uint)*(byte *)(glContext + 0x4664);
                 goto LAB_00015f48;
               }
               if (0x8620 < pname) {
                 if (pname == 0x862f) {
-                  uVar2 = 8;
+                  scalarResult = 8;
                   goto LAB_00015f48;
                 }
                 if (pname < 0x8630) {
                   if (pname != 0x862e) {
                     return 0;
                   }
-                  uVar2 = 2;
+                  scalarResult = 2;
                   goto LAB_00015f48;
                 }
                 if (pname != 0x8640) {
                   return 0;
                 }
-                iVar13 = *(int *)(*(int *)(glContext + 0x4ff4) * 4 + glContext + 0x4ffc);
+                currentMatrixPtr = *(int *)(*(int *)(glContext + 0x4ff4) * 4 + glContext + 0x4ffc);
                 goto LAB_00014c5c;
               }
               if (pname == 0x85b5) {
-                uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 4);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 4);
                 goto LAB_00015f48;
               }
               if (pname != 0x85b6) {
                 return 0;
               }
 LAB_00015960:
-              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0xe8);
+              scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0xe8);
               goto LAB_00015f48;
             }
 LAB_00015948:
-            uVar2 = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x515c) + 4);
+            scalarResult = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x515c) + 4);
             goto LAB_00015f48;
           }
-          iVar13 = glContext + *(int *)(glContext + 0x4ff4) * 0x40 + 0x1bc0;
+          matrixPtr = glContext + *(int *)(glContext + 0x4ff4) * 0x40 + 0x1bc0;
         }
 LAB_00014c84:
-        _gleGetMatrixd(iVar13,values);
+        _gleGetMatrixd(matrixPtr,values);
       }
       else {
         if (pname == 0x889b) {
-          uVar2 = 0;
-          iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x378);
-          if (iVar13 != 0) {
-            uVar2 = *(uint *)(iVar13 + 4);
+          scalarResult = 0;
+          edgeFlagArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x378);
+          if (edgeFlagArrayBuffer != 0) {
+            scalarResult = *(uint *)(edgeFlagArrayBuffer + 4);
           }
           goto LAB_00015f48;
         }
         if (pname < 0x889c) {
           if (pname == 0x883d) {
-            uVar2 = (uint)*(ushort *)(glContext + 0x30e2);
+            scalarResult = (uint)*(ushort *)(glContext + 0x30e2);
             goto LAB_00015f48;
           }
           if (0x883d < pname) {
             if (pname == 0x8894) {
-              uVar2 = 0;
-              iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
-              if (iVar13 != 0) {
-                uVar2 = *(uint *)(iVar13 + 4);
+              scalarResult = 0;
+              arrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
+              if (arrayBuffer != 0) {
+                scalarResult = *(uint *)(arrayBuffer + 4);
               }
               goto LAB_00015f48;
             }
             if (0x8894 < pname) {
               if (pname == 0x8897) {
-                uVar2 = 0;
-                iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x364);
-                if (iVar13 != 0) {
-                  uVar2 = *(uint *)(iVar13 + 4);
+                scalarResult = 0;
+                normalArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x364);
+                if (normalArrayBuffer != 0) {
+                  scalarResult = *(uint *)(normalArrayBuffer + 4);
                 }
               }
               else if (pname < 0x8898) {
                 if (pname == 0x8895) {
-                  uVar2 = 0;
-                  iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
-                  if (iVar13 != 0) {
-                    uVar2 = *(uint *)(iVar13 + 4);
+                  scalarResult = 0;
+                  elementArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+                  if (elementArrayBuffer != 0) {
+                    scalarResult = *(uint *)(elementArrayBuffer + 4);
                   }
                 }
                 else {
                   if (pname != 0x8896) {
                     return 0;
                   }
-                  uVar2 = 0;
-                  iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x360);
-                  if (iVar13 != 0) {
-                    uVar2 = *(uint *)(iVar13 + 4);
+                  scalarResult = 0;
+                  vertexArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x360);
+                  if (vertexArrayBuffer != 0) {
+                    scalarResult = *(uint *)(vertexArrayBuffer + 4);
                   }
                 }
               }
               else if (pname == 0x8899) {
-                uVar2 = 0;
+                scalarResult = 0;
                 if (*(int *)(glContext + 0x48f4) != 0) {
-                  uVar2 = *(uint *)(*(int *)(glContext + 0x48f4) + 4);
+                  scalarResult = *(uint *)(*(int *)(glContext + 0x48f4) + 4);
                 }
               }
               else if (pname < 0x889a) {
-                uVar2 = 0;
-                iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x368);
-                if (iVar13 != 0) {
-                  uVar2 = *(uint *)(iVar13 + 4);
+                scalarResult = 0;
+                colorArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x368);
+                if (colorArrayBuffer != 0) {
+                  scalarResult = *(uint *)(colorArrayBuffer + 4);
                 }
               }
               else {
-                uVar2 = 0;
-                iVar13 = *(int *)(*(int *)(glContext + 0x53d8) * 4 + *(int *)(glContext + 0x4a60) +
+                scalarResult = 0;
+                texCoordArrayBuffer = *(int *)(*(int *)(glContext + 0x53d8) * 4 + *(int *)(glContext + 0x4a60) +
                                  0x380);
-                if (iVar13 != 0) {
-                  uVar2 = *(uint *)(iVar13 + 4);
+                if (texCoordArrayBuffer != 0) {
+                  scalarResult = *(uint *)(texCoordArrayBuffer + 4);
                 }
               }
               goto LAB_00015f48;
             }
             if (pname == 0x8872) {
-              uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xb6);
+              scalarResult = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xb6);
               goto LAB_00015f48;
             }
             if (pname < 0x8873) {
               if (pname == 0x8869) {
-                uVar2 = 0x10;
+                scalarResult = 0x10;
               }
               else {
                 if (pname != 0x8871) {
                   return 0;
                 }
-                uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xba);
+                scalarResult = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xba);
               }
               goto LAB_00015f48;
             }
             if (pname == 0x8890) {
-              uVar2 = (uint)*(byte *)(glContext + 0x312a);
+              scalarResult = (uint)*(byte *)(glContext + 0x312a);
               goto LAB_00015f48;
             }
             if (pname != 0x8891) {
               return 0;
             }
             *values = *(double *)(glContext + 0x312c);
-            dVar14 = *(double *)(glContext + 0x3134);
+            secondValue = *(double *)(glContext + 0x3134);
 LAB_00015cf4:
-            iVar13 = 2;
-            values[1] = dVar14;
+            valueCount = 2;
+            values[1] = secondValue;
             goto LAB_00015d48;
           }
           if (pname == 0x8801) {
-            uVar2 = (uint)*(ushort *)(glContext + 0x351a);
+            scalarResult = (uint)*(ushort *)(glContext + 0x351a);
             goto LAB_00015f48;
           }
           if (0x8801 < pname) {
             if (pname == 0x8804) {
-              uVar2 = (uint)*(byte *)(glContext + 0x466c);
+              scalarResult = (uint)*(byte *)(glContext + 0x466c);
             }
             else if (pname < 0x8805) {
               if (pname == 0x8802) {
-                uVar2 = (uint)*(ushort *)(glContext + 0x351c);
+                scalarResult = (uint)*(ushort *)(glContext + 0x351c);
               }
               else {
                 if (pname != 0x8803) {
                   return 0;
                 }
-                uVar2 = (uint)*(ushort *)(glContext + 0x351e);
+                scalarResult = (uint)*(ushort *)(glContext + 0x351e);
               }
             }
             else if (pname == 0x8824) {
-              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x14);
+              scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x14);
             }
             else {
               if (pname < 0x8824) {
@@ -6434,14 +6458,14 @@ LAB_00015cf4:
               if (0x8834 < pname) {
                 return 0;
               }
-              uVar2 = 0;
-              iVar13 = pname - 0x8825;
-              if (iVar13 < 4) {
+              scalarResult = 0;
+              drawBufferIndex = pname - 0x8825;
+              if (drawBufferIndex < 4) {
                 if (*(int *)(glContext + 0x744c) == 0) {
-                  uVar2 = (uint)*(ushort *)(iVar13 * 2 + glContext + 0x311a);
+                  scalarResult = (uint)*(ushort *)(drawBufferIndex * 2 + glContext + 0x311a);
                 }
                 else {
-                  uVar2 = (uint)*(ushort *)(iVar13 * 2 + *(int *)(glContext + 0x744c) + 0xc0);
+                  scalarResult = (uint)*(ushort *)(drawBufferIndex * 2 + *(int *)(glContext + 0x744c) + 0xc0);
                 }
               }
             }
@@ -6451,164 +6475,164 @@ LAB_00015cf4:
             if (pname != 0x8800) {
               return 0;
             }
-            uVar2 = (uint)*(ushort *)(glContext + 0x3518);
+            scalarResult = (uint)*(ushort *)(glContext + 0x3518);
             goto LAB_00015f48;
           }
           if (pname < 0x8722) {
             if (pname == 0x86ab) {
-              uVar2 = (uint)*(short *)(*(int *)(glContext + 0x4a60) + 0xb2);
+              scalarResult = (uint)*(short *)(*(int *)(glContext + 0x4a60) + 0xb2);
             }
             else {
               if (pname != 0x86ad) {
                 return 0;
               }
-              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x15 & 1;
+              scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x15 & 1;
             }
             goto LAB_00015f48;
           }
-          iVar13 = glContext + pname * 0x40 + -0x21ab40;
+          matrixPtr = glContext + pname * 0x40 + -0x21ab40;
           goto LAB_00014c84;
         }
         if (pname == 0x8a10) {
           *(uint *)values = *(uint *)(*(int *)(glContext + 0x468c) + 0x1c);
-          uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x20);
+          scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x20);
           goto LAB_00015638;
         }
         if (0x8a10 < pname) {
           if (pname == 0x8b4d) {
-            uVar2 = 0x10;
+            scalarResult = 0x10;
           }
           else if (pname < 0x8b4e) {
             if (pname == 0x8b4a) {
-              uVar2 = 0x200;
+              scalarResult = 0x200;
             }
             else if (pname < 0x8b4b) {
               if (pname == 0x8a11) {
-                uVar2 = 0;
-                iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x37c);
-                if (iVar13 != 0) {
-                  uVar2 = *(uint *)(iVar13 + 4);
+                scalarResult = 0;
+                clientArrayBuffer37c = *(int *)(*(int *)(glContext + 0x4a60) + 0x37c);
+                if (clientArrayBuffer37c != 0) {
+                  scalarResult = *(uint *)(clientArrayBuffer37c + 4);
                 }
               }
               else {
                 if (pname != 0x8b49) {
                   return 0;
                 }
-                uVar2 = 0x200;
+                scalarResult = 0x200;
               }
             }
             else if (pname == 0x8b4b) {
-              uVar2 = 0x20;
+              scalarResult = 0x20;
             }
             else {
               if (pname != 0x8b4c) {
                 return 0;
               }
-              uVar2 = 0;
+              scalarResult = 0;
             }
           }
           else if (pname == 0x8ca6) {
-            uVar2 = 0;
+            scalarResult = 0;
             if (*(int *)(glContext + 0x744c) != 0) {
-              uVar2 = *(uint *)(*(int *)(glContext + 0x744c) + 4);
+              scalarResult = *(uint *)(*(int *)(glContext + 0x744c) + 4);
             }
           }
           else if (pname < 0x8ca7) {
             if (pname == 0x8b8b) {
-              uVar2 = (uint)*(ushort *)(glContext + 0x317c);
+              scalarResult = (uint)*(ushort *)(glContext + 0x317c);
             }
             else {
               if (pname != 0x8b8d) {
                 return 0;
               }
-              uVar2 = 0;
+              scalarResult = 0;
               if (*(int *)(glContext + 0x5430) != 0) {
-                uVar2 = *(uint *)(*(int *)(glContext + 0x5430) + 4);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x5430) + 4);
               }
             }
           }
           else if (pname == 0x8cdf) {
-            uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x18);
+            scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x18);
           }
           else if (pname < 0x8ce0) {
             if (pname != 0x8ca7) {
               return 0;
             }
-            uVar2 = 0;
+            scalarResult = 0;
             if (*(int *)(glContext + 0x7448) != 0) {
-              uVar2 = *(uint *)(*(int *)(glContext + 0x7448) + 4);
+              scalarResult = *(uint *)(*(int *)(glContext + 0x7448) + 4);
             }
           }
           else {
             if (pname != 0x19262) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(glContext + 0x50b5);
+            scalarResult = (uint)*(byte *)(glContext + 0x50b5);
           }
           goto LAB_00015f48;
         }
         if (pname == 0x88ef) {
-          uVar2 = 0;
+          scalarResult = 0;
           if (*(int *)(glContext + 0x4a6c) != 0) {
-            uVar2 = *(uint *)(*(int *)(glContext + 0x4a6c) + 4);
+            scalarResult = *(uint *)(*(int *)(glContext + 0x4a6c) + 4);
           }
           goto LAB_00015f48;
         }
         if (0x88ef < pname) {
           if (pname == 0x897c) {
-            uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x4a60) + 0x34c);
+            scalarResult = (uint)*(byte *)(*(int *)(glContext + 0x4a60) + 0x34c);
           }
           else if (pname < 0x897d) {
             if (pname != 0x8910) {
               if (pname != 0x8911) {
                 return 0;
               }
-              uVar2 = *(byte *)(glContext + 0x7583) + 0x404;
+              scalarResult = *(byte *)(glContext + 0x7583) + 0x404;
               goto LAB_00015efc;
             }
-            uVar2 = *(uint *)(glContext + 0x3520) >> 2 & 1;
+            scalarResult = *(uint *)(glContext + 0x3520) >> 2 & 1;
           }
           else if (pname == 0x8a0d) {
-            uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x4a60) + 0xe0);
+            scalarResult = (uint)*(ushort *)(*(int *)(glContext + 0x4a60) + 0xe0);
           }
           else if (pname < 0x8a0e) {
             if (pname != 0x8a0c) {
               return 0;
             }
-            uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x17 & 1;
+            scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x17 & 1;
           }
           else {
             if (pname != 0x8a0f) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x468c) + 0x27);
+            scalarResult = (uint)*(byte *)(*(int *)(glContext + 0x468c) + 0x27);
           }
           goto LAB_00015f48;
         }
         if (pname == 0x889e) {
-          uVar2 = 0;
-          iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x374);
-          if (iVar13 != 0) {
-            uVar2 = *(uint *)(iVar13 + 4);
+          scalarResult = 0;
+          weightArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x374);
+          if (weightArrayBuffer != 0) {
+            scalarResult = *(uint *)(weightArrayBuffer + 4);
           }
           goto LAB_00015f48;
         }
         if (pname < 0x889f) {
           if (pname == 0x889c) {
-            uVar2 = 0;
-            iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x370);
-            if (iVar13 != 0) {
-              uVar2 = *(uint *)(iVar13 + 4);
+            scalarResult = 0;
+            secondaryColorArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x370);
+            if (secondaryColorArrayBuffer != 0) {
+              scalarResult = *(uint *)(secondaryColorArrayBuffer + 4);
             }
           }
           else {
             if (pname != 0x889d) {
               return 0;
             }
-            uVar2 = 0;
-            iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x36c);
-            if (iVar13 != 0) {
-              uVar2 = *(uint *)(iVar13 + 4);
+            scalarResult = 0;
+            fogCoordArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x36c);
+            if (fogCoordArrayBuffer != 0) {
+              scalarResult = *(uint *)(fogCoordArrayBuffer + 4);
             }
           }
           goto LAB_00015f48;
@@ -6617,298 +6641,298 @@ LAB_00015cf4:
           if (pname != 0x88ed) {
             return 0;
           }
-          uVar2 = 0;
+          scalarResult = 0;
           if (*(int *)(glContext + 0x4a68) != 0) {
-            uVar2 = *(uint *)(*(int *)(glContext + 0x4a68) + 4);
+            scalarResult = *(uint *)(*(int *)(glContext + 0x4a68) + 4);
           }
           goto LAB_00015f48;
         }
-        iVar13 = glContext + *(int *)(glContext + 0x4ff4) * 0x40 + 0x1bc0;
+        matrixPtr = glContext + *(int *)(glContext + 0x4ff4) * 0x40 + 0x1bc0;
 LAB_00014d40:
-        _gleGetTransposeMatrixd(iVar13,values);
+        _gleGetTransposeMatrixd(matrixPtr,values);
       }
-      iVar13 = 0x10;
+      valueCount = 0x10;
       goto LAB_00015d48;
     }
     if (pname == 0x809f) {
-      uVar2 = (uint)*(byte *)(glContext + 0x41f2);
+      scalarResult = (uint)*(byte *)(glContext + 0x41f2);
       goto LAB_00015f48;
     }
     if (pname < 0x80a0) {
       if (pname == 0x806d) {
-        uVar2 = *(uint *)(glContext + 0x31dc);
+        scalarResult = *(uint *)(glContext + 0x31dc);
         goto LAB_00015f48;
       }
       if (0x806d < pname) {
         if (pname == 0x807e) {
-          uVar2 = *(ushort *)(*(int *)(glContext + 0x4a60) + 0x50) & 0xffff7fff;
+          scalarResult = *(ushort *)(*(int *)(glContext + 0x4a60) + 0x50) & 0xffff7fff;
         }
         else if (pname < 0x807f) {
           if (pname == 0x8076) {
-            uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x12 & 1;
+            scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x12 & 1;
           }
           else if (pname < 0x8077) {
             if (pname == 0x8073) {
-              uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xbe);
+              scalarResult = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xbe);
             }
             else if (pname < 0x8074) {
               if (pname == 0x806e) {
-                uVar2 = *(uint *)(glContext + 0x31d0);
+                scalarResult = *(uint *)(glContext + 0x31d0);
               }
               else {
                 if (pname != 0x806f) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 1 & 1;
+                scalarResult = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 1 & 1;
               }
             }
             else if (pname == 0x8074) {
-              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x10 & 1;
+              scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x10 & 1;
             }
             else {
               if (pname != 0x8075) {
                 return 0;
               }
-              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x11 & 1;
+              scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x11 & 1;
             }
           }
           else if (pname == 0x8079) {
-            uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x16 & 1;
+            scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x16 & 1;
           }
           else if (pname < 0x807a) {
             if (pname == 0x8077) {
-              uVar2 = -(uint)*(ushort *)(glContext + 0x48ea) >> 0x1f;
+              scalarResult = -(uint)*(ushort *)(glContext + 0x48ea) >> 0x1f;
             }
             else {
               if (pname != 0x8078) {
                 return 0;
               }
               clientState = *(int *)(glContext + 0x4a60);
-              lVar15 = ___ashldi3(0,0x1000000,*(undefined4 *)(glContext + 0x53d8));
-              uVar2 = 0;
-              if ((*(uint *)(clientState + 0x330) & (uint)((ulonglong)lVar15 >> 0x20)) != 0 ||
-                  (*(uint *)(clientState + 0x334) & (uint)lVar15) != 0) {
-                uVar2 = 1;
+              arrayEnableBit = ___ashldi3(0,0x1000000,*(undefined4 *)(glContext + 0x53d8));
+              scalarResult = 0;
+              if ((*(uint *)(clientState + 0x330) & (uint)((ulonglong)arrayEnableBit >> 0x20)) != 0 ||
+                  (*(uint *)(clientState + 0x334) & (uint)arrayEnableBit) != 0) {
+                scalarResult = 1;
               }
             }
           }
           else if (pname == 0x807b) {
-            uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x4a60) + 0x38);
+            scalarResult = (uint)*(ushort *)(*(int *)(glContext + 0x4a60) + 0x38);
           }
           else if (pname < 0x807b) {
-            uVar2 = (uint)*(short *)(*(int *)(glContext + 0x4a60) + 0x3a);
+            scalarResult = (uint)*(short *)(*(int *)(glContext + 0x4a60) + 0x3a);
           }
           else {
             if (pname != 0x807c) {
               return 0;
             }
-            uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x34);
+            scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0x34);
           }
         }
         else if (pname == 0x8086) {
-          uVar2 = *(uint *)(glContext + 0x48e4);
+          scalarResult = *(uint *)(glContext + 0x48e4);
         }
         else if (pname < 0x8087) {
           if (pname == 0x8082) {
-            uVar2 = *(ushort *)(*(int *)(glContext + 0x4a60) + 0x68) & 0xffff7fff;
+            scalarResult = *(ushort *)(*(int *)(glContext + 0x4a60) + 0x68) & 0xffff7fff;
           }
           else if (pname < 0x8083) {
             if (pname == 0x807f) {
-              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x4c);
+              scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0x4c);
             }
             else {
               if (pname != 0x8081) {
                 return 0;
               }
-              uVar2 = (uint)*(short *)(*(int *)(glContext + 0x4a60) + 0x6a);
+              scalarResult = (uint)*(short *)(*(int *)(glContext + 0x4a60) + 0x6a);
             }
           }
           else if (pname == 0x8083) {
-            uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 100);
+            scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 100);
           }
           else {
             if (pname != 0x8085) {
               return 0;
             }
-            uVar2 = (uint)*(ushort *)(glContext + 0x48e8);
+            scalarResult = (uint)*(ushort *)(glContext + 0x48e8);
           }
         }
         else if (pname == 0x808a) {
-          uVar2 = *(uint *)(*(int *)(glContext + 0x53d8) * 0x18 + *(int *)(glContext + 0x4a60) + 0xf4);
+          scalarResult = *(uint *)(*(int *)(glContext + 0x53d8) * 0x18 + *(int *)(glContext + 0x4a60) + 0xf4);
         }
         else if (pname < 0x808b) {
           if (pname == 0x8088) {
-            uVar2 = (uint)*(short *)(*(int *)(glContext + 0x53d8) * 0x18 + *(int *)(glContext + 0x4a60)
+            scalarResult = (uint)*(short *)(*(int *)(glContext + 0x53d8) * 0x18 + *(int *)(glContext + 0x4a60)
                                     + 0xfa);
           }
           else {
             if (pname != 0x8089) {
               return 0;
             }
-            uVar2 = (uint)*(ushort *)
+            scalarResult = (uint)*(ushort *)
                            (*(int *)(glContext + 0x53d8) * 0x18 + *(int *)(glContext + 0x4a60) + 0xf8);
           }
         }
         else if (pname == 0x809d) {
-          uVar2 = (uint)*(byte *)(glContext + 0x41f0);
+          scalarResult = (uint)*(byte *)(glContext + 0x41f0);
         }
         else if (pname < 0x809e) {
           if (pname != 0x808c) {
             return 0;
           }
-          uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0xc4);
+          scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0xc4);
         }
         else {
-          uVar2 = (uint)*(byte *)(glContext + 0x41f1);
+          scalarResult = (uint)*(byte *)(glContext + 0x41f1);
         }
         goto LAB_00015f48;
       }
       if (pname == 0x8021) {
-        dVar14 = (double)*(float *)(glContext + 0x339c);
+        floatStateValue = (double)*(float *)(glContext + 0x339c);
       }
       else if (pname < 0x8022) {
         if (pname == 0x8011) {
-          uVar2 = *(uint *)(glContext + 0x3410) >> 1 & 1;
+          scalarResult = *(uint *)(glContext + 0x3410) >> 1 & 1;
           goto LAB_00015f48;
         }
         if (pname < 0x8012) {
           if (pname != 0x8005) {
             if (pname < 0x8006) {
               if (pname == 0x6093) {
-                uVar2 = (uint)*(ushort *)(glContext + 0x280a);
+                scalarResult = (uint)*(ushort *)(glContext + 0x280a);
               }
               else {
                 if (pname != 0x6094) {
                   return 0;
                 }
-                uVar2 = *(uint *)(glContext + 0x2800);
+                scalarResult = *(uint *)(glContext + 0x2800);
               }
             }
             else if (pname == 0x8009) {
-              uVar2 = (uint)*(ushort *)(glContext + 0x30e0);
+              scalarResult = (uint)*(ushort *)(glContext + 0x30e0);
             }
             else {
               if (pname != 0x8010) {
                 return 0;
               }
-              uVar2 = *(uint *)(glContext + 0x3410) & 1;
+              scalarResult = *(uint *)(glContext + 0x3410) & 1;
             }
             goto LAB_00015f48;
           }
           *values = (double)*(float *)(glContext + 0x30d0);
           values[1] = (double)*(float *)(glContext + 0x30d4);
           values[2] = (double)*(float *)(glContext + 0x30d8);
-          dVar14 = (double)*(float *)(glContext + 0x30dc);
+          fourthComponent = (double)*(float *)(glContext + 0x30dc);
           goto LAB_00015a8c;
         }
         if (pname == 0x801d) {
-          dVar14 = (double)*(float *)(glContext + 0x3398);
+          floatStateValue = (double)*(float *)(glContext + 0x3398);
         }
         else if (pname < 0x801e) {
           if (pname == 0x8012) {
-            uVar2 = *(uint *)(glContext + 0x3410) >> 2 & 1;
+            scalarResult = *(uint *)(glContext + 0x3410) >> 2 & 1;
             goto LAB_00015f48;
           }
           if (pname != 0x801c) {
             return 0;
           }
-          dVar14 = (double)*(float *)(glContext + 0x3390);
+          floatStateValue = (double)*(float *)(glContext + 0x3390);
         }
         else if (pname == 0x801f) {
-          dVar14 = (double)*(float *)(glContext + 0x33a8);
+          floatStateValue = (double)*(float *)(glContext + 0x33a8);
         }
         else if (pname < 0x8020) {
-          dVar14 = (double)*(float *)(glContext + 0x33a0);
+          floatStateValue = (double)*(float *)(glContext + 0x33a0);
         }
         else {
-          dVar14 = (double)*(float *)(glContext + 0x3394);
+          floatStateValue = (double)*(float *)(glContext + 0x3394);
         }
       }
       else if (pname == 0x8038) {
-        dVar14 = (double)*(float *)(glContext + 0x34c8);
+        floatStateValue = (double)*(float *)(glContext + 0x34c8);
       }
       else {
         if (0x8038 < pname) {
           if (pname == 0x8069) {
-            uVar2 = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5160) + 4);
+            scalarResult = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5160) + 4);
           }
           else if (pname < 0x806a) {
             if (pname == 0x803a) {
-              uVar2 = (uint)*(byte *)(glContext + 0x280e);
+              scalarResult = (uint)*(byte *)(glContext + 0x280e);
             }
             else {
               if (pname != 0x8068) {
                 return 0;
               }
-              uVar2 = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5164) + 4);
+              scalarResult = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5164) + 4);
             }
           }
           else if (pname == 0x806b) {
-            uVar2 = *(uint *)(glContext + 0x31c0);
+            scalarResult = *(uint *)(glContext + 0x31c0);
           }
           else if (pname < 0x806c) {
-            uVar2 = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5158) + 4);
+            scalarResult = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5158) + 4);
           }
           else {
-            uVar2 = *(uint *)(0x31b4 + glContext);
+            scalarResult = *(uint *)(0x31b4 + glContext);
           }
           goto LAB_00015f48;
         }
         if (pname == 0x8024) {
-          uVar2 = *(uint *)(glContext + 0x3410) >> 4 & 1;
+          scalarResult = *(uint *)(glContext + 0x3410) >> 4 & 1;
           goto LAB_00015f48;
         }
         if (0x8024 < pname) {
           if (pname == 0x802e) {
-            uVar2 = *(uint *)(glContext + 0x3410) >> 3 & 1;
+            scalarResult = *(uint *)(glContext + 0x3410) >> 3 & 1;
           }
           else {
             if (pname != 0x8037) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(glContext + 0x34dd);
+            scalarResult = (uint)*(byte *)(glContext + 0x34dd);
           }
           goto LAB_00015f48;
         }
         if (pname == 0x8022) {
-          dVar14 = (double)*(float *)(glContext + 0x33a4);
+          floatStateValue = (double)*(float *)(glContext + 0x33a4);
         }
         else {
           if (pname != 0x8023) {
             return 0;
           }
-          dVar14 = (double)*(float *)(glContext + 0x33ac);
+          floatStateValue = (double)*(float *)(glContext + 0x33ac);
         }
       }
     }
     else {
       if (pname == 0x80f0) {
-        uVar2 = *(uint *)(glContext + 0x5080);
+        scalarResult = *(uint *)(glContext + 0x5080);
         goto LAB_00015f48;
       }
       if (pname < 0x80f1) {
         if (pname == 0x80b8) {
-          dVar14 = (double)*(float *)(glContext + 0x3360);
+          floatStateValue = (double)*(float *)(glContext + 0x3360);
         }
         else if (pname < 0x80b9) {
           if (pname == 0x80b1) {
-            iVar13 = glContext + 0x1c40;
+            matrixPtr = glContext + 0x1c40;
             goto LAB_00014c84;
           }
           if (pname < 0x80b2) {
             if (pname == 0x80a9) {
-              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x5c);
+              scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x5c);
               goto LAB_00015f48;
             }
             if (pname < 0x80aa) {
               if (pname == 0x80a0) {
-                uVar2 = (uint)*(byte *)(glContext + 0x41f3);
+                scalarResult = (uint)*(byte *)(glContext + 0x41f3);
               }
               else {
                 if (pname != 0x80a8) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x58);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x58);
               }
               goto LAB_00015f48;
             }
@@ -6916,13 +6940,13 @@ LAB_00014d40:
               if (pname != 0x80ab) {
                 return 0;
               }
-              uVar2 = (uint)*(byte *)(glContext + 0x41f4);
+              scalarResult = (uint)*(byte *)(glContext + 0x41f4);
               goto LAB_00015f48;
             }
-            dVar14 = (double)*(float *)(glContext + 0x41ec);
+            floatStateValue = (double)*(float *)(glContext + 0x41ec);
           }
           else if (pname == 0x80b4) {
-            dVar14 = (double)*(float *)(glContext + 0x335c);
+            floatStateValue = (double)*(float *)(glContext + 0x335c);
           }
           else {
             if (pname < 0x80b5) {
@@ -6930,62 +6954,62 @@ LAB_00014d40:
                 if (pname != 0x80b3) {
                   return 0;
                 }
-                uVar2 = 5;
+                scalarResult = 5;
                 goto LAB_00015f48;
               }
               iVar13 = *(int *)(glContext + 0x5004);
               goto LAB_00014bf4;
             }
             if (pname == 0x80b6) {
-              dVar14 = (double)*(float *)(glContext + 0x336c);
+              floatStateValue = (double)*(float *)(glContext + 0x336c);
             }
             else if (pname < 0x80b7) {
-              dVar14 = (double)*(float *)(glContext + 0x3364);
+              floatStateValue = (double)*(float *)(glContext + 0x3364);
             }
             else {
-              dVar14 = (double)*(float *)(glContext + 0x3374);
+              floatStateValue = (double)*(float *)(glContext + 0x3374);
             }
           }
         }
         else {
           if (pname == 0x80ca) {
-            uVar2 = (uint)*(ushort *)(glContext + 0x30ce);
+            scalarResult = (uint)*(ushort *)(glContext + 0x30ce);
             goto LAB_00015f48;
           }
           if (0x80ca < pname) {
             if (pname == 0x80d1) {
-              uVar2 = *(uint *)(glContext + 0x3410) >> 6 & 1;
+              scalarResult = *(uint *)(glContext + 0x3410) >> 6 & 1;
             }
             else if (pname < 0x80d2) {
               if (pname == 0x80cb) {
-                uVar2 = (uint)*(ushort *)(glContext + 0x30cc);
+                scalarResult = (uint)*(ushort *)(glContext + 0x30cc);
               }
               else {
                 if (pname != 0x80d0) {
                   return 0;
                 }
-                uVar2 = *(uint *)(glContext + 0x3410) >> 5 & 1;
+                scalarResult = *(uint *)(glContext + 0x3410) >> 5 & 1;
               }
             }
             else if (pname == 33000) {
-              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x88);
+              scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x88);
             }
             else if (pname < 0x80e9) {
               if (pname != 0x80d2) {
                 return 0;
               }
-              uVar2 = *(uint *)(glContext + 0x3410) >> 7 & 1;
+              scalarResult = *(uint *)(glContext + 0x3410) >> 7 & 1;
             }
             else {
               if (pname != 0x80e9) {
                 return 0;
               }
-              uVar2 = 150000;
+              scalarResult = 150000;
             }
             goto LAB_00015f48;
           }
           if (pname == 0x80bb) {
-            dVar14 = (double)*(float *)(glContext + 0x3378);
+            floatStateValue = (double)*(float *)(glContext + 0x3378);
           }
           else {
             if (0x80bb < pname) {
@@ -6998,43 +7022,43 @@ LAB_00014d40:
               goto LAB_00014d84;
             }
             if (pname == 0x80b9) {
-              dVar14 = (double)*(float *)(glContext + 0x3368);
+              floatStateValue = (double)*(float *)(glContext + 0x3368);
             }
             else {
               if (pname != 0x80ba) {
                 return 0;
               }
-              dVar14 = (double)*(float *)(glContext + 0x3370);
+              floatStateValue = (double)*(float *)(glContext + 0x3370);
             }
           }
         }
       }
       else if (pname == 0x8453) {
-        dVar14 = (double)*(float *)(glContext + 0x2cc);
+        floatStateValue = (double)*(float *)(glContext + 0x2cc);
       }
       else {
         if (0x8453 < pname) {
           if (pname == 0x845b) {
-            uVar2 = *(ushort *)(*(int *)(glContext + 0x4a60) + 0x98) & 0xffff7fff;
+            scalarResult = *(ushort *)(*(int *)(glContext + 0x4a60) + 0x98) & 0xffff7fff;
           }
           else if (pname < 0x845c) {
             if (pname == 0x8457) {
-              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x13 & 1;
+              scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x13 & 1;
             }
             else if (pname < 0x8458) {
               if (pname == 0x8454) {
-                uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x4a60) + 0x80);
+                scalarResult = (uint)*(ushort *)(*(int *)(glContext + 0x4a60) + 0x80);
               }
               else {
                 if (pname != 0x8455) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x7c);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0x7c);
               }
             }
             else {
               if (pname == 0x8459) {
-                iVar13 = 4;
+                valueCount = 4;
                 *values = (double)*(float *)(glContext + 0x2c0);
                 values[1] = (double)*(float *)(glContext + 0x2c4);
                 glContextFloat2c8 = *(float *)(glContext + 0x2c8);
@@ -7046,17 +7070,17 @@ LAB_00014d40:
               if (pname != 0x845a) {
                 return 0;
               }
-              uVar2 = (uint)*(short *)(*(int *)(glContext + 0x4a60) + 0x9a);
+              scalarResult = (uint)*(short *)(*(int *)(glContext + 0x4a60) + 0x9a);
             }
           }
           else {
             if (pname == 0x846d) {
-              uVar2 = (uint)(int)*(float *)(*(int *)(glContext + 0x468c) + 0x60);
-              *(uint *)values = uVar2;
-              fVar1 = *(float *)(*(int *)(glContext + 0x468c) + 100);
+              scalarResult = (uint)(int)*(float *)(*(int *)(glContext + 0x468c) + 0x60);
+              *(uint *)values = scalarResult;
+              rangeMax = *(float *)(*(int *)(glContext + 0x468c) + 100);
 LAB_00014828:
-              *(int *)(values + 1) = (int)fVar1;
-              if (uVar2 == 0) {
+              *(int *)(values + 1) = (int)rangeMax;
+              if (scalarResult == 0) {
                 *(uint *)values = 1;
               }
               return 2;
@@ -7070,46 +7094,46 @@ LAB_00014828:
                   if (pname != 0x846e) {
                     return 0;
                   }
-                  uVar2 = (uint)(int)*(float *)(*(int *)(glContext + 0x468c) + 0x6c);
-                  *(uint *)values = uVar2;
-                  fVar1 = *(float *)(*(int *)(glContext + 0x468c) + 0x70);
+                  scalarResult = (uint)(int)*(float *)(*(int *)(glContext + 0x468c) + 0x6c);
+                  *(uint *)values = scalarResult;
+                  rangeMax = *(float *)(*(int *)(glContext + 0x468c) + 0x70);
                   goto LAB_00014828;
                 }
                 iVar13 = *(int *)(glContext + 0x53d8);
               }
-              uVar2 = iVar13 + 0x84c0;
+              scalarResult = iVar13 + 0x84c0;
               goto LAB_00015efc;
             }
             if (pname == 0x845c) {
-              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x94);
+              scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0x94);
             }
             else {
               if (pname != 0x845e) {
                 return 0;
               }
-              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x14 & 1;
+              scalarResult = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x14 & 1;
             }
           }
           goto LAB_00015f48;
         }
         if (pname == 0x81a8) {
-          uVar2 = *(uint *)(glContext + 0x4984);
+          scalarResult = *(uint *)(glContext + 0x4984);
           goto LAB_00015f48;
         }
         if (0x81a8 < pname) {
           if (pname == 0x81fb) {
-            uVar2 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 8 & 1;
+            scalarResult = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 8 & 1;
             goto LAB_00015f48;
           }
           if (pname < 0x81fc) {
             if (pname == 0x81a9) {
-              uVar2 = *(uint *)(glContext + 0x4988);
+              scalarResult = *(uint *)(glContext + 0x4988);
             }
             else {
               if (pname != 0x81f8) {
                 return 0;
               }
-              uVar2 = (uint)*(ushort *)(glContext + 0x30a8);
+              scalarResult = (uint)*(ushort *)(glContext + 0x30a8);
             }
             goto LAB_00015f48;
           }
@@ -7118,27 +7142,27 @@ LAB_00014828:
               if (pname != 0x8200) {
                 return 0;
               }
-              uVar2 = (uint)*(byte *)(glContext + 0x466c);
+              scalarResult = (uint)*(byte *)(glContext + 0x466c);
             }
             else {
               if (pname != 0x8450) {
                 return 0;
               }
-              uVar2 = (uint)*(ushort *)(glContext + 0x3166);
+              scalarResult = (uint)*(ushort *)(glContext + 0x3166);
             }
             goto LAB_00015f48;
           }
           glContextPtr4854 = *(int *)(glContext + 0x4854);
           *values = (double)*(float *)(glContextPtr4854 + -0x1c0);
           values[1] = (double)*(float *)(glContextPtr4854 + -0x1bc);
-          fVar1 = *(float *)(glContextPtr4854 + -0x1b8);
+          floatStateValueB = *(float *)(glContextPtr4854 + -0x1b8);
 LAB_00015d40:
-          iVar13 = 3;
-          values[2] = (double)fVar1;
+          valueCount = 3;
+          values[2] = (double)floatStateValueB;
           goto LAB_00015d48;
         }
         if (pname == 0x8128) {
-          dVar14 = (double)*(float *)(glContext + 0x3428);
+          floatStateValue = (double)*(float *)(glContext + 0x3428);
         }
         else {
           if (0x8128 < pname) {
@@ -7146,22 +7170,22 @@ LAB_00015d40:
               if (pname != 0x8192) {
                 return 0;
               }
-              uVar2 = (uint)*(ushort *)(glContext + 0x3178);
+              scalarResult = (uint)*(ushort *)(glContext + 0x3178);
               goto LAB_00015f48;
             }
             *values = (double)*(float *)(glContext + 0x342c);
             values[1] = (double)*(float *)(glContext + 0x3430);
-            fVar1 = *(float *)(glContext + 0x3434);
+            floatStateValueB = *(float *)(glContext + 0x3434);
             goto LAB_00015d40;
           }
           if (pname == 0x8126) {
-            dVar14 = (double)*(float *)(glContext + 0x3420);
+            floatStateValue = (double)*(float *)(glContext + 0x3420);
           }
           else {
             if (pname != 0x8127) {
               return 0;
             }
-            dVar14 = (double)*(float *)(glContext + 0x3424);
+            floatStateValue = (double)*(float *)(glContext + 0x3424);
           }
         }
       }
@@ -7172,37 +7196,37 @@ LAB_00015d40:
     if (7 < *(int *)(glContext + 0x53d4)) {
       return -1;
     }
-    uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x94 + glContext + 0x3d79);
+    scalarResult = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x94 + glContext + 0x3d79);
     goto LAB_00015f48;
   }
   if (0xc61 < pname) {
     if (pname == 0xd3b) {
-      uVar2 = 0x10;
+      scalarResult = 0x10;
       goto LAB_00015f48;
     }
     if (pname < 0xd3c) {
       if (pname == 0xd11) {
-        uVar2 = *(uint *)(glContext + 0x3414) >> 1 & 1;
+        scalarResult = *(uint *)(glContext + 0x3414) >> 1 & 1;
         goto LAB_00015f48;
       }
       if (pname < 0xd12) {
         if (pname == 0xcf0) {
-          uVar2 = (uint)*(byte *)(glContext + 0x31e4);
+          scalarResult = (uint)*(byte *)(glContext + 0x31e4);
         }
         else if (pname < 0xcf1) {
           if (pname == 0xcb3) {
-            uVar2 = *(uint *)(glContext + 0x327c);
+            scalarResult = *(uint *)(glContext + 0x327c);
           }
           else if (pname < 0xcb4) {
             if (pname == 0xcb0) {
-              uVar2 = *(uint *)(glContext + 0x3270);
+              scalarResult = *(uint *)(glContext + 0x3270);
             }
             else if (pname < 0xcb1) {
               if (pname == 0xc62) {
                 if (7 < *(int *)(glContext + 0x53d4)) {
                   return -1;
                 }
-                uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x94 + glContext + 0x3d7a);
+                scalarResult = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x94 + glContext + 0x3d7a);
               }
               else {
                 if (pname != 0xc63) {
@@ -7211,207 +7235,207 @@ LAB_00015d40:
                 if (7 < *(int *)(glContext + 0x53d4)) {
                   return -1;
                 }
-                uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x94 + glContext + 0x3d7b);
+                scalarResult = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x94 + glContext + 0x3d7b);
               }
             }
             else if (pname == 0xcb1) {
-              uVar2 = *(uint *)(glContext + 0x3274);
+              scalarResult = *(uint *)(glContext + 0x3274);
             }
             else {
               if (pname != 0xcb2) {
                 return 0;
               }
-              uVar2 = *(uint *)(glContext + 0x3278);
+              scalarResult = *(uint *)(glContext + 0x3278);
             }
           }
           else if (pname == 0xcb6) {
-            uVar2 = *(uint *)(glContext + 0x3288);
+            scalarResult = *(uint *)(glContext + 0x3288);
           }
           else if (pname < 0xcb7) {
             if (pname == 0xcb4) {
-              uVar2 = *(uint *)(glContext + 0x3280);
+              scalarResult = *(uint *)(glContext + 0x3280);
             }
             else {
               if (pname != 0xcb5) {
                 return 0;
               }
-              uVar2 = *(uint *)(glContext + 0x3284);
+              scalarResult = *(uint *)(glContext + 0x3284);
             }
           }
           else if (pname == 0xcb8) {
-            uVar2 = *(uint *)(glContext + 0x3290);
+            scalarResult = *(uint *)(glContext + 0x3290);
           }
           else if (pname < 0xcb8) {
-            uVar2 = *(uint *)(glContext + 0x328c);
+            scalarResult = *(uint *)(glContext + 0x328c);
           }
           else {
             if (pname != 0xcb9) {
               return 0;
             }
-            uVar2 = *(uint *)(glContext + 0x3294);
+            scalarResult = *(uint *)(glContext + 0x3294);
           }
         }
         else if (pname == 0xd00) {
-          uVar2 = (uint)*(byte *)(glContext + 0x31c8);
+          scalarResult = (uint)*(byte *)(glContext + 0x31c8);
         }
         else if (pname < 0xd01) {
           if (pname == 0xcf3) {
-            uVar2 = *(uint *)(glContext + 0x31d4);
+            scalarResult = *(uint *)(glContext + 0x31d4);
           }
           else if (pname < 0xcf4) {
             if (pname == 0xcf1) {
-              uVar2 = (uint)*(byte *)(glContext + 0x31e5);
+              scalarResult = (uint)*(byte *)(glContext + 0x31e5);
             }
             else {
               if (pname != 0xcf2) {
                 return 0;
               }
-              uVar2 = *(uint *)(glContext + 0x31cc);
+              scalarResult = *(uint *)(glContext + 0x31cc);
             }
           }
           else if (pname == 0xcf4) {
-            uVar2 = *(uint *)(glContext + 0x31d8);
+            scalarResult = *(uint *)(glContext + 0x31d8);
           }
           else {
             if (pname != 0xcf5) {
               return 0;
             }
-            uVar2 = *(uint *)(glContext + 0x31e0);
+            scalarResult = *(uint *)(glContext + 0x31e0);
           }
         }
         else if (pname == 0xd03) {
-          uVar2 = *(uint *)(glContext + 0x31b8);
+          scalarResult = *(uint *)(glContext + 0x31b8);
         }
         else if (pname < 0xd04) {
           if (pname == 0xd01) {
-            uVar2 = (uint)*(byte *)(glContext + 0x31c9);
+            scalarResult = (uint)*(byte *)(glContext + 0x31c9);
           }
           else {
             if (pname != 0xd02) {
               return 0;
             }
-            uVar2 = *(uint *)(glContext + 0x31b0);
+            scalarResult = *(uint *)(glContext + 0x31b0);
           }
         }
         else if (pname == 0xd05) {
-          uVar2 = *(uint *)(glContext + 0x31c4);
+          scalarResult = *(uint *)(glContext + 0x31c4);
         }
         else if (pname < 0xd05) {
-          uVar2 = *(uint *)(glContext + 0x31bc);
+          scalarResult = *(uint *)(glContext + 0x31bc);
         }
         else {
           if (pname != 0xd10) {
             return 0;
           }
-          uVar2 = *(uint *)(glContext + 0x3414) & 1;
+          scalarResult = *(uint *)(glContext + 0x3414) & 1;
         }
         goto LAB_00015f48;
       }
       if (pname == 0xd1e) {
-        dVar14 = (double)*(float *)(glContext + 0x320c);
+        floatStateValue = (double)*(float *)(glContext + 0x320c);
       }
       else if (pname < 0xd1f) {
         if (pname == 0xd17) {
-          dVar14 = (double)*(float *)(glContext + 0x31ac);
+          floatStateValue = (double)*(float *)(glContext + 0x31ac);
         }
         else if (pname < 0xd18) {
           if (pname == 0xd14) {
-            dVar14 = (double)*(float *)(glContext + 0x31ec);
+            floatStateValue = (double)*(float *)(glContext + 0x31ec);
           }
           else {
             if (pname < 0xd15) {
               if (pname == 0xd12) {
-                uVar2 = *(uint *)(glContext + 0x3214);
+                scalarResult = *(uint *)(glContext + 0x3214);
               }
               else {
                 if (pname != 0xd13) {
                   return 0;
                 }
-                uVar2 = *(uint *)(glContext + 0x3210);
+                scalarResult = *(uint *)(glContext + 0x3210);
               }
               goto LAB_00015f48;
             }
             if (pname == 0xd15) {
-              dVar14 = (double)*(float *)(glContext + 0x31e8);
+              floatStateValue = (double)*(float *)(glContext + 0x31e8);
             }
             else {
               if (pname != 0xd16) {
                 return 0;
               }
-              dVar14 = (double)*(float *)(glContext + 0x31a8);
+              floatStateValue = (double)*(float *)(glContext + 0x31a8);
             }
           }
         }
         else if (pname == 0xd1a) {
-          dVar14 = (double)*(float *)(glContext + 0x31fc);
+          floatStateValue = (double)*(float *)(glContext + 0x31fc);
         }
         else if (pname < 0xd1b) {
           if (pname == 0xd18) {
-            dVar14 = (double)*(float *)(glContext + 0x31f4);
+            floatStateValue = (double)*(float *)(glContext + 0x31f4);
           }
           else {
             if (pname != 0xd19) {
               return 0;
             }
-            dVar14 = (double)*(float *)(glContext + 0x31f0);
+            floatStateValue = (double)*(float *)(glContext + 0x31f0);
           }
         }
         else if (pname == 0xd1c) {
-          dVar14 = (double)*(float *)(glContext + 0x3204);
+          floatStateValue = (double)*(float *)(glContext + 0x3204);
         }
         else if (pname < 0xd1d) {
-          dVar14 = (double)*(float *)(glContext + 0x31f8);
+          floatStateValue = (double)*(float *)(glContext + 0x31f8);
         }
         else {
-          dVar14 = (double)*(float *)(glContext + 0x3200);
+          floatStateValue = (double)*(float *)(glContext + 0x3200);
         }
       }
       else {
         if (pname == 0xd34) {
-          uVar2 = 0x100;
+          scalarResult = 0x100;
           goto LAB_00015f48;
         }
         if (0xd34 < pname) {
           if (pname == 0xd37) {
-            uVar2 = 100;
+            scalarResult = 100;
           }
           else if (pname < 0xd38) {
             if (pname == 0xd35) {
-              uVar2 = 0x10;
+              scalarResult = 0x10;
             }
             else {
               if (pname != 0xd36) {
                 return 0;
               }
-              uVar2 = 0x20;
+              scalarResult = 0x20;
             }
           }
           else if (pname == 0xd39) {
-            uVar2 = 5;
+            scalarResult = 5;
           }
           else {
             if (0xd39 < pname) {
               *(uint *)values = *(uint *)(*(int *)(glContext + 0x468c) + 0xc);
-              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x10);
+              scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x10);
               goto LAB_00015638;
             }
-            uVar2 = 5;
+            scalarResult = 5;
           }
           goto LAB_00015f48;
         }
         if (pname == 0xd31) {
-          uVar2 = 8;
+          scalarResult = 8;
           goto LAB_00015f48;
         }
         if (0xd31 < pname) {
           if (pname == 0xd32) {
-            uVar2 = 6;
+            scalarResult = 6;
           }
           else {
             if (pname != 0xd33) {
               return 0;
             }
-            uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xbc);
+            scalarResult = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xbc);
           }
           goto LAB_00015f48;
         }
@@ -7419,119 +7443,119 @@ LAB_00015d40:
           if (pname != 0xd30) {
             return 0;
           }
-          uVar2 = 10;
+          scalarResult = 10;
           goto LAB_00015f48;
         }
-        dVar14 = (double)*(float *)(glContext + 0x3208);
+        floatStateValue = (double)*(float *)(glContext + 0x3208);
       }
     }
     else {
       if (pname == 0xdb2) {
-        uVar2 = (uint)*(byte *)(glContext + 0x74ed);
+        scalarResult = (uint)*(byte *)(glContext + 0x74ed);
         goto LAB_00015f48;
       }
       if (pname < 0xdb3) {
         if (pname == 0xd70) {
-          uVar2 = (*(int *)(glContext + 0x4fbc) - glContext) + -0x4e2c >> 2;
+          scalarResult = (*(int *)(glContext + 0x4fbc) - glContext) + -0x4e2c >> 2;
           goto LAB_00015efc;
         }
         if (0xd70 < pname) {
           if (pname == 0xd94) {
-            uVar2 = (uint)*(byte *)(glContext + 0x74e6);
+            scalarResult = (uint)*(byte *)(glContext + 0x74e6);
           }
           else if (pname < 0xd95) {
             if (pname == 0xd91) {
-              uVar2 = (uint)*(byte *)(glContext + 0x74e3);
+              scalarResult = (uint)*(byte *)(glContext + 0x74e3);
             }
             else if (pname < 0xd92) {
               if (pname == 0xd80) {
-                uVar2 = (uint)*(byte *)(glContext + 0x74f2);
+                scalarResult = (uint)*(byte *)(glContext + 0x74f2);
               }
               else {
                 if (pname != 0xd90) {
                   return 0;
                 }
-                uVar2 = (uint)*(byte *)(glContext + 0x74e2);
+                scalarResult = (uint)*(byte *)(glContext + 0x74e2);
               }
             }
             else if (pname == 0xd92) {
-              uVar2 = (uint)*(byte *)(glContext + 0x74e4);
+              scalarResult = (uint)*(byte *)(glContext + 0x74e4);
             }
             else {
               if (pname != 0xd93) {
                 return 0;
               }
-              uVar2 = (uint)*(byte *)(glContext + 0x74e5);
+              scalarResult = (uint)*(byte *)(glContext + 0x74e5);
             }
           }
           else if (pname == 0xd97) {
-            uVar2 = (uint)*(byte *)(glContext + 0x74e0);
+            scalarResult = (uint)*(byte *)(glContext + 0x74e0);
           }
           else if (pname < 0xd98) {
             if (pname == 0xd95) {
-              uVar2 = (uint)*(byte *)(glContext + 0x74e7);
+              scalarResult = (uint)*(byte *)(glContext + 0x74e7);
             }
             else {
               if (pname != 0xd96) {
                 return 0;
               }
-              uVar2 = (uint)*(byte *)(glContext + 0x74e8);
+              scalarResult = (uint)*(byte *)(glContext + 0x74e8);
             }
           }
           else if (pname == 0xdb0) {
-            uVar2 = (uint)*(byte *)(glContext + 0x74eb);
+            scalarResult = (uint)*(byte *)(glContext + 0x74eb);
           }
           else if (pname < 0xdb1) {
             if (pname != 0xd98) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(glContext + 0x74e1);
+            scalarResult = (uint)*(byte *)(glContext + 0x74e1);
           }
           else {
-            uVar2 = (uint)*(byte *)(glContext + 0x74ec);
+            scalarResult = (uint)*(byte *)(glContext + 0x74ec);
           }
           goto LAB_00015f48;
         }
         if (pname == 0xd55) {
           framebufferObject = *(int *)(glContext + 0x744c);
           if (framebufferObject == 0) {
-            uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x38);
+            scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x38);
             goto LAB_00015f48;
           }
-          iVar11 = 0;
+          attachmentIndexThenBody = 0;
           srcCursor = (int *)(framebufferObject + 0xd4);
           do {
-            iVar3 = *srcCursor;
+            attachmentObject = *srcCursor;
             srcCursor = srcCursor + 1;
-            if (iVar3 != 0) break;
-            iVar11 = iVar11 + 1;
-          } while (iVar11 < 4);
-          uVar2 = 0;
-          if (iVar11 == 4) goto LAB_00015f48;
-          iVar3 = iVar11 * 0x18 + framebufferObject;
-          iVar11 = *(int *)(iVar11 * 4 + framebufferObject + 0xd4) + 0x10;
-          uVar9 = *(undefined4 *)(iVar3 + 0x38);
+            if (attachmentObject != 0) break;
+            attachmentIndexThenBody = attachmentIndexThenBody + 1;
+          } while (attachmentIndexThenBody < 4);
+          scalarResult = 0;
+          if (attachmentIndexThenBody == 4) goto LAB_00015f48;
+          attachmentRecord = attachmentIndexThenBody * 0x18 + framebufferObject;
+          attachmentIndexThenBody = *(int *)(attachmentIndexThenBody * 4 + framebufferObject + 0xd4) + 0x10;
+          attachmentParamB = *(undefined4 *)(attachmentRecord + 0x38);
           iVar13 = (uint)*(byte *)(glContext + 0x85a8) << 2;
-          uVar10 = 0x805f;
+          sizeQueryEnum = 0x805f;
         }
         else {
           if (0xd55 < pname) {
             if (pname == 0xd58) {
-              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x44);
+              scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x44);
               goto LAB_00015f48;
             }
             if (0xd58 < pname) {
               if (pname == 0xd5a) {
-                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x4c);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x4c);
               }
               else if (pname < 0xd5a) {
-                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x48);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x48);
               }
               else {
                 if (pname != 0xd5b) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x50);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x50);
               }
               goto LAB_00015f48;
             }
@@ -7541,34 +7565,34 @@ LAB_00015d40:
               }
               framebufferObject = *(int *)(glContext + 0x744c);
               if (framebufferObject == 0) {
-                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x40);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x40);
                 goto LAB_00015f48;
               }
-              uVar2 = 0;
+              scalarResult = 0;
               if (*(int *)(framebufferObject + 0xe8) == 0) goto LAB_00015450;
               glContextPtr479c = *(code **)(glContext + 0x479c);
-              uVar9 = *(undefined4 *)(framebufferObject + 0xb0);
-              uVar7 = *(undefined4 *)
+              attachmentParamB = *(undefined4 *)(framebufferObject + 0xb0);
+              rendererTextureName = *(undefined4 *)
                        (*(int *)(framebufferObject + 0xe8) + 0x10 + (uint)*(byte *)(glContext + 0x85a8) * 4);
-              uVar10 = 0x884a;
+              sizeQueryEnum = 0x884a;
               glContextWord4688 = *(undefined4 *)(glContext + 0x4688);
-              uVar8 = *(undefined4 *)(framebufferObject + 0xac);
+              attachmentParamA = *(undefined4 *)(framebufferObject + 0xac);
               goto LAB_00015488;
             }
             framebufferObject = *(int *)(glContext + 0x744c);
             if (framebufferObject == 0) {
-              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x3c);
+              scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x3c);
               goto LAB_00015f48;
             }
-            uVar2 = 0;
+            scalarResult = 0;
             if (*(int *)(framebufferObject + 0xe4) != 0) {
               glContextPtr479c = *(code **)(glContext + 0x479c);
-              uVar9 = *(undefined4 *)(framebufferObject + 0x98);
-              uVar7 = *(undefined4 *)
+              attachmentParamB = *(undefined4 *)(framebufferObject + 0x98);
+              rendererTextureName = *(undefined4 *)
                        (*(int *)(framebufferObject + 0xe4) + 0x10 + (uint)*(byte *)(glContext + 0x85a8) * 4);
-              uVar10 = 0x884a;
+              sizeQueryEnum = 0x884a;
               glContextWord4688 = *(undefined4 *)(glContext + 0x4688);
-              uVar8 = *(undefined4 *)(framebufferObject + 0x94);
+              attachmentParamA = *(undefined4 *)(framebufferObject + 0x94);
               goto LAB_00015488;
             }
             goto LAB_00015450;
@@ -7576,59 +7600,59 @@ LAB_00015d40:
           if (pname == 0xd52) {
             framebufferObject = *(int *)(glContext + 0x744c);
             if (framebufferObject == 0) {
-              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x2c);
+              scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x2c);
               goto LAB_00015f48;
             }
-            iVar11 = 0;
+            attachmentIndexThenBody = 0;
             srcCursor = (int *)(framebufferObject + 0xd4);
             do {
-              iVar3 = *srcCursor;
+              attachmentObject = *srcCursor;
               srcCursor = srcCursor + 1;
-              if (iVar3 != 0) break;
-              iVar11 = iVar11 + 1;
-            } while (iVar11 < 4);
-            uVar2 = 0;
-            if (iVar11 == 4) goto LAB_00015f48;
-            iVar3 = iVar11 * 0x18 + framebufferObject;
-            iVar11 = *(int *)(iVar11 * 4 + framebufferObject + 0xd4) + 0x10;
-            uVar9 = *(undefined4 *)(iVar3 + 0x38);
+              if (attachmentObject != 0) break;
+              attachmentIndexThenBody = attachmentIndexThenBody + 1;
+            } while (attachmentIndexThenBody < 4);
+            scalarResult = 0;
+            if (attachmentIndexThenBody == 4) goto LAB_00015f48;
+            attachmentRecord = attachmentIndexThenBody * 0x18 + framebufferObject;
+            attachmentIndexThenBody = *(int *)(attachmentIndexThenBody * 4 + framebufferObject + 0xd4) + 0x10;
+            attachmentParamB = *(undefined4 *)(attachmentRecord + 0x38);
             iVar13 = (uint)*(byte *)(glContext + 0x85a8) << 2;
-            uVar10 = 0x805c;
+            sizeQueryEnum = 0x805c;
           }
           else {
             if (pname < 0xd53) {
               if (pname == 0xd50) {
-                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 8);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 8);
               }
               else {
                 if (pname != 0xd51) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x28);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x28);
               }
               goto LAB_00015f48;
             }
             if (pname == 0xd53) {
               framebufferObject = *(int *)(glContext + 0x744c);
               if (framebufferObject == 0) {
-                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x30);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x30);
                 goto LAB_00015f48;
               }
-              iVar11 = 0;
+              attachmentIndexThenBody = 0;
               srcCursor = (int *)(framebufferObject + 0xd4);
               do {
-                iVar3 = *srcCursor;
+                attachmentObject = *srcCursor;
                 srcCursor = srcCursor + 1;
-                if (iVar3 != 0) break;
-                iVar11 = iVar11 + 1;
-              } while (iVar11 < 4);
-              uVar2 = 0;
-              if (iVar11 == 4) goto LAB_00015f48;
-              iVar3 = iVar11 * 0x18 + framebufferObject;
-              iVar11 = *(int *)(iVar11 * 4 + framebufferObject + 0xd4) + 0x10;
-              uVar9 = *(undefined4 *)(iVar3 + 0x38);
+                if (attachmentObject != 0) break;
+                attachmentIndexThenBody = attachmentIndexThenBody + 1;
+              } while (attachmentIndexThenBody < 4);
+              scalarResult = 0;
+              if (attachmentIndexThenBody == 4) goto LAB_00015f48;
+              attachmentRecord = attachmentIndexThenBody * 0x18 + framebufferObject;
+              attachmentIndexThenBody = *(int *)(attachmentIndexThenBody * 4 + framebufferObject + 0xd4) + 0x10;
+              attachmentParamB = *(undefined4 *)(attachmentRecord + 0x38);
               iVar13 = (uint)*(byte *)(glContext + 0x85a8) << 2;
-              uVar10 = 0x805d;
+              sizeQueryEnum = 0x805d;
             }
             else {
               if (pname != 0xd54) {
@@ -7636,67 +7660,67 @@ LAB_00015d40:
               }
               framebufferObject = *(int *)(glContext + 0x744c);
               if (framebufferObject == 0) {
-                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x34);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x34);
                 goto LAB_00015f48;
               }
-              iVar11 = 0;
+              attachmentIndexThenBody = 0;
               srcCursor = (int *)(framebufferObject + 0xd4);
               do {
-                iVar3 = *srcCursor;
+                attachmentObject = *srcCursor;
                 srcCursor = srcCursor + 1;
-                if (iVar3 != 0) break;
-                iVar11 = iVar11 + 1;
-              } while (iVar11 < 4);
-              uVar2 = 0;
-              if (iVar11 == 4) goto LAB_00015f48;
-              iVar3 = iVar11 * 0x18 + framebufferObject;
-              iVar11 = *(int *)(iVar11 * 4 + framebufferObject + 0xd4) + 0x10;
-              uVar9 = *(undefined4 *)(iVar3 + 0x38);
+                if (attachmentObject != 0) break;
+                attachmentIndexThenBody = attachmentIndexThenBody + 1;
+              } while (attachmentIndexThenBody < 4);
+              scalarResult = 0;
+              if (attachmentIndexThenBody == 4) goto LAB_00015f48;
+              attachmentRecord = attachmentIndexThenBody * 0x18 + framebufferObject;
+              attachmentIndexThenBody = *(int *)(attachmentIndexThenBody * 4 + framebufferObject + 0xd4) + 0x10;
+              attachmentParamB = *(undefined4 *)(attachmentRecord + 0x38);
               iVar13 = (uint)*(byte *)(glContext + 0x85a8) << 2;
-              uVar10 = 0x805e;
+              sizeQueryEnum = 0x805e;
             }
           }
         }
-        uVar7 = *(undefined4 *)(iVar11 + iVar13);
+        rendererTextureName = *(undefined4 *)(attachmentIndexThenBody + iVar13);
         glContextPtr479c = *(code **)(glContext + 0x479c);
         glContextWord4688 = *(undefined4 *)(glContext + 0x4688);
-        uVar8 = *(undefined4 *)(iVar3 + 0x34);
+        attachmentParamA = *(undefined4 *)(attachmentRecord + 0x34);
 LAB_00015488:
-        (*glContextPtr479c)(glContextWord4688,uVar7,uVar8,uVar9,uVar10,values);
+        (*glContextPtr479c)(glContextWord4688,rendererTextureName,attachmentParamA,attachmentParamB,sizeQueryEnum,values);
         return 1;
       }
       if (pname == 0xdf1) {
-        uVar2 = *(uint *)(glContext + 0x4fd4);
+        scalarResult = *(uint *)(glContext + 0x4fd4);
         goto LAB_00015f48;
       }
       if (pname < 0xdf2) {
         if (pname == 0xdb8) {
-          uVar2 = (uint)*(byte *)(glContext + 0x74ea);
+          scalarResult = (uint)*(byte *)(glContext + 0x74ea);
           goto LAB_00015f48;
         }
         if (pname < 0xdb9) {
           if (pname == 0xdb5) {
-            uVar2 = (uint)*(byte *)(glContext + 0x74f0);
+            scalarResult = (uint)*(byte *)(glContext + 0x74f0);
           }
           else if (pname < 0xdb6) {
             if (pname == 0xdb3) {
-              uVar2 = (uint)*(byte *)(glContext + 0x74ee);
+              scalarResult = (uint)*(byte *)(glContext + 0x74ee);
             }
             else {
               if (pname != 0xdb4) {
                 return 0;
               }
-              uVar2 = (uint)*(byte *)(glContext + 0x74ef);
+              scalarResult = (uint)*(byte *)(glContext + 0x74ef);
             }
           }
           else if (pname == 0xdb6) {
-            uVar2 = (uint)*(byte *)(glContext + 0x74f1);
+            scalarResult = (uint)*(byte *)(glContext + 0x74f1);
           }
           else {
             if (pname != 0xdb7) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(glContext + 0x74e9);
+            scalarResult = (uint)*(byte *)(glContext + 0x74e9);
           }
           goto LAB_00015f48;
         }
@@ -7704,19 +7728,19 @@ LAB_00015488:
           *values = (double)*(float *)(glContext + 0x74bc);
           values[1] = (double)*(float *)(glContext + 0x74c0);
           values[2] = (double)*(float *)(glContext + 0x74cc);
-          dVar14 = (double)*(float *)(glContext + 0x74d0);
+          fourthComponent2 = (double)*(float *)(glContext + 0x74d0);
           goto LAB_00014704;
         }
         if (0xdd2 < pname) {
           if (pname == 0xde0) {
-            uVar2 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 4 & 1;
+            scalarResult = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 4 & 1;
             goto LAB_00015f48;
           }
           if (0xde0 < pname) {
             if (pname != 0xde1) {
               return 0;
             }
-            uVar2 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 3 & 1;
+            scalarResult = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 3 & 1;
             goto LAB_00015f48;
           }
           if (pname != 0xdd3) {
@@ -7724,24 +7748,24 @@ LAB_00015488:
           }
           *values = (double)CONCAT44(0x43300000,*(uint *)(glContext + 0x74b8) ^ 0x80000000) -
                      DOUBLE_00108d58;
-          dVar14 = (double)CONCAT44(0x43300000,*(uint *)(glContext + 0x74c8) ^ 0x80000000) - dVar14;
+          intToDoubleMagicThenValue = (double)CONCAT44(0x43300000,*(uint *)(glContext + 0x74c8) ^ 0x80000000) - intToDoubleMagicThenValue;
           goto LAB_00014860;
         }
         if (pname == 0xdd0) {
           *values = (double)*(float *)(glContext + 0x74ac);
-          dVar14 = (double)*(float *)(glContext + 0x74b0);
+          secondValue = (double)*(float *)(glContext + 0x74b0);
           goto LAB_00015cf4;
         }
         if (pname != 0xdd1) {
           return 0;
         }
-        dVar14 = (double)CONCAT44(0x43300000,
+        floatStateValue = (double)CONCAT44(0x43300000,
                                   *(uint *)(0x74a4 + glContext + 4) ^ 0x80000000) -
                  DOUBLE_00108d58;
       }
       else {
         if (pname == 0x2a02) {
-          uVar2 = (uint)*(byte *)(glContext + 0x34dc);
+          scalarResult = (uint)*(byte *)(glContext + 0x34dc);
           goto LAB_00015f48;
         }
         if (0x2a02 < pname) {
@@ -7750,37 +7774,37 @@ LAB_00015488:
               if (5 < pname - 0x3000) {
                 return 0;
               }
-              uVar2 = *(uint *)(glContext + 0x4188) >> (pname - 0x3000 & 0x3f) & 1;
+              scalarResult = *(uint *)(glContext + 0x4188) >> (pname - 0x3000 & 0x3f) & 1;
             }
             else {
-              uVar2 = *(uint *)(glContext + 0x30a0) >> (pname - 0x4000 & 0x3f) & 1;
+              scalarResult = *(uint *)(glContext + 0x30a0) >> (pname - 0x4000 & 0x3f) & 1;
             }
           }
           else if (pname == 0x6090) {
-            uVar2 = (uint)*(byte *)(glContext + 0x280c);
+            scalarResult = (uint)*(byte *)(glContext + 0x280c);
           }
           else {
             if (pname != 0x6091) {
               return 0;
             }
-            uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x9c);
+            scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x9c);
           }
           goto LAB_00015f48;
         }
         if (pname == 0x1700) {
 LAB_00014c74:
-          iVar13 = glContext + 0x1cc0;
+          matrixPtr = glContext + 0x1cc0;
           goto LAB_00014c84;
         }
         if (pname < 0x1701) {
           if (pname == 0xdf2) {
-            uVar2 = *(uint *)(glContext + 0x4fd8);
+            scalarResult = *(uint *)(glContext + 0x4fd8);
           }
           else {
             if (pname != 0xdf4) {
               return 0;
             }
-            uVar2 = *(uint *)(glContext + 0x4e28);
+            scalarResult = *(uint *)(glContext + 0x4e28);
           }
           goto LAB_00015f48;
         }
@@ -7788,74 +7812,74 @@ LAB_00014c74:
           if (pname != 0x2a01) {
             return 0;
           }
-          uVar2 = (uint)*(byte *)(glContext + 0x34db);
+          scalarResult = (uint)*(byte *)(glContext + 0x34db);
           goto LAB_00015f48;
         }
-        dVar14 = (double)*(float *)(glContext + 0x34cc);
+        floatStateValue = (double)*(float *)(glContext + 0x34cc);
       }
     }
     goto LAB_0001467c;
   }
   if (pname == 0xb74) {
-    uVar2 = (uint)*(ushort *)(glContext + 0x3124);
+    scalarResult = (uint)*(ushort *)(glContext + 0x3124);
     goto LAB_00015f48;
   }
   if (pname < 0xb75) {
     if (pname == 0xb40) {
       *(uint *)values = (uint)*(ushort *)(glContext + 0x34d0);
-      uVar2 = (uint)*(ushort *)(glContext + 0x34d2);
+      scalarResult = (uint)*(ushort *)(glContext + 0x34d2);
 LAB_00015638:
-      *(uint *)(values + 1) = uVar2;
+      *(uint *)(values + 1) = scalarResult;
       return 2;
     }
     if (pname < 0xb41) {
       if (pname == 0xb12) {
         *values = (double)*(float *)(*(int *)(glContext + 0x468c) + 0x60);
-        dVar14 = (double)*(float *)(*(int *)(glContext + 0x468c) + 100);
+        intToDoubleMagicThenValue = (double)*(float *)(*(int *)(glContext + 0x468c) + 100);
 LAB_00014860:
-        iVar13 = 2;
-        values[1] = dVar14;
+        valueCount = 2;
+        values[1] = intToDoubleMagicThenValue;
         goto LAB_00015d48;
       }
       if (0xb12 < pname) {
         if (pname == 0xb24) {
-          uVar2 = (uint)*(byte *)(glContext + 0x318c);
+          scalarResult = (uint)*(byte *)(glContext + 0x318c);
           goto LAB_00015f48;
         }
         if (0xb24 < pname) {
           if (pname == 0xb30) {
-            uVar2 = *(uint *)(glContext + 0x5408);
+            scalarResult = *(uint *)(glContext + 0x5408);
           }
           else if (pname < 0xb31) {
             if (pname == 0xb25) {
-              uVar2 = (uint)*(ushort *)(glContext + 0x3188);
+              scalarResult = (uint)*(ushort *)(glContext + 0x3188);
             }
             else {
               if (pname != 0xb26) {
                 return 0;
               }
-              uVar2 = *(uint *)(glContext + 0x3184);
+              scalarResult = *(uint *)(glContext + 0x3184);
             }
           }
           else if (pname == 0xb32) {
-            uVar2 = *(uint *)(glContext + 0x5404);
+            scalarResult = *(uint *)(glContext + 0x5404);
           }
           else {
-            uVar2 = 0x40;
+            scalarResult = 0x40;
             if (0xb31 < pname) {
               if (pname != 0xb33) {
                 return 0;
               }
-              uVar2 = 0;
+              scalarResult = 0;
               if (*(int *)(glContext + 0x5408) != 0) {
-                uVar2 = *(uint *)(*(int *)(glContext + 0x53e8) + 4);
+                scalarResult = *(uint *)(*(int *)(glContext + 0x53e8) + 4);
               }
             }
           }
           goto LAB_00015f48;
         }
         if (pname == 0xb21) {
-          uVar2 = (uint)(int)*(float *)(glContext + 0x3180);
+          scalarResult = (uint)(int)*(float *)(glContext + 0x3180);
           goto LAB_00015f48;
         }
         if (pname < 0xb22) {
@@ -7863,21 +7887,21 @@ LAB_00014860:
             if (pname != 0xb20) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(glContext + 0x318d);
+            scalarResult = (uint)*(byte *)(glContext + 0x318d);
             goto LAB_00015f48;
           }
-          dVar14 = (double)*(float *)(*(int *)(glContext + 0x468c) + 0x68);
+          floatStateValue = (double)*(float *)(*(int *)(glContext + 0x468c) + 0x68);
         }
         else {
           if (pname == 0xb22) {
             *values = (double)*(float *)(*(int *)(glContext + 0x468c) + 0x6c);
-            dVar14 = (double)*(float *)(*(int *)(glContext + 0x468c) + 0x70);
+            intToDoubleMagicThenValue = (double)*(float *)(*(int *)(glContext + 0x468c) + 0x70);
             goto LAB_00014860;
           }
           if (pname != 0xb23) {
             return 0;
           }
-          dVar14 = (double)*(float *)(*(int *)(glContext + 0x468c) + 0x74);
+          floatStateValue = (double)*(float *)(*(int *)(glContext + 0x468c) + 0x74);
         }
         goto LAB_0001467c;
       }
@@ -7888,22 +7912,22 @@ LAB_00014860:
       }
       if (0xb05 < pname) {
         if (pname == 0xb08) {
-          uVar2 = (uint)*(byte *)(glContext + 0x2ef);
+          scalarResult = (uint)*(byte *)(glContext + 0x2ef);
           goto LAB_00015f48;
         }
         if (0xb08 < pname) {
           if (pname == 0xb10) {
-            uVar2 = (uint)*(byte *)(glContext + 0x343c);
+            scalarResult = (uint)*(byte *)(glContext + 0x343c);
             goto LAB_00015f48;
           }
           if (0xb10 < pname) {
-            uVar2 = (uint)(int)*(float *)(glContext + 0x341c);
+            scalarResult = (uint)(int)*(float *)(glContext + 0x341c);
             goto LAB_00015f48;
           }
           if (pname != 0xb09) {
             return 0;
           }
-          dVar14 = (double)*(float *)(*(int *)(glContext + 0x4854) + -0x1d8);
+          floatStateValue = (double)*(float *)(*(int *)(glContext + 0x4854) + -0x1d8);
           goto LAB_0001467c;
         }
         if (pname == 0xb06) {
@@ -7914,7 +7938,7 @@ LAB_00014860:
           *values = (double)*(float *)(iVar13 + 0x80);
           values[1] = (double)*(float *)(iVar13 + 0x84);
           values[2] = (double)*(float *)(iVar13 + 0x88);
-          dVar14 = (double)*(float *)(iVar13 + 0x8c);
+          fourthComponent2 = (double)*(float *)(iVar13 + 0x8c);
         }
         else {
           if (pname != 0xb07) {
@@ -7924,15 +7948,15 @@ LAB_00014860:
           *values = (double)*(float *)(glContext + 0x2e0);
           values[1] = (double)*(float *)(glContext + 0x2e4);
           values[2] = (double)*(float *)(glContext + 0x2e8);
-          dVar14 = (double)*(float *)(glContextPtr4854 + -0x1e4);
+          fourthComponent2 = (double)*(float *)(glContextPtr4854 + -0x1e4);
         }
 LAB_00014704:
-        iVar13 = 4;
-        values[3] = dVar14;
+        valueCount = 4;
+        values[3] = fourthComponent2;
         goto LAB_00015d48;
       }
       if (pname == 0xb02) {
-        iVar13 = 3;
+        valueCount = 3;
         *values = (double)*(float *)(glContext + 0x2b0);
         values[1] = (double)*(float *)(glContext + 0x2b4);
         values[2] = (double)*(float *)(glContext + 0x2b8);
@@ -7943,13 +7967,13 @@ LAB_00014704:
           if (pname != 0xb01) {
             return 0;
           }
-          dVar14 = (double)*(float *)(glContext + 700);
+          floatStateValue = (double)*(float *)(glContext + 700);
           goto LAB_00014670;
         }
         *values = (double)*(float *)(glContext + 0x2a0);
         values[1] = (double)*(float *)(glContext + 0x2a4);
         values[2] = (double)*(float *)(glContext + 0x2a8);
-        dVar14 = (double)*(float *)(glContext + 0x2ac);
+        fourthComponent = (double)*(float *)(glContext + 0x2ac);
       }
       else {
         if (pname == 0xb03) {
@@ -7960,7 +7984,7 @@ LAB_00014704:
           *values = (double)*(float *)(iVar13 + 0x120);
           values[1] = (double)*(float *)(iVar13 + 0x124);
           values[2] = (double)*(float *)(iVar13 + 0x128);
-          dVar14 = (double)*(float *)(iVar13 + 300);
+          fourthComponent2 = (double)*(float *)(iVar13 + 300);
           goto LAB_00014704;
         }
         if (pname != 0xb04) {
@@ -7970,17 +7994,17 @@ LAB_00014704:
         *values = (double)*(float *)(glContextPtr4854 + -0x1d0);
         values[1] = (double)*(float *)(glContextPtr4854 + -0x1cc);
         values[2] = (double)*(float *)(glContextPtr4854 + -0x1c8);
-        dVar14 = (double)*(float *)(glContextPtr4854 + -0x1c4);
+        fourthComponent = (double)*(float *)(glContextPtr4854 + -0x1c4);
       }
     }
     else {
       if (pname == 0xb56) {
-        uVar2 = (uint)*(ushort *)(glContext + 0x30a6);
+        scalarResult = (uint)*(ushort *)(glContext + 0x30a6);
         goto LAB_00015f48;
       }
       if (0xb56 < pname) {
         if (pname == 0xb64) {
-          dVar14 = (double)*(float *)(glContext + 0x3158);
+          floatStateValue = (double)*(float *)(glContext + 0x3158);
         }
         else {
           if (0xb64 < pname) {
@@ -7993,18 +8017,18 @@ LAB_00014704:
             }
             if (0xb70 < pname) {
               if (pname == 0xb72) {
-                uVar2 = (uint)*(byte *)(glContext + 0x31a4);
+                scalarResult = (uint)*(byte *)(glContext + 0x31a4);
                 goto LAB_00015f48;
               }
               if (pname < 0xb73) {
-                uVar2 = (uint)*(byte *)(glContext + 0x3128);
+                scalarResult = (uint)*(byte *)(glContext + 0x3128);
                 goto LAB_00015f48;
               }
-              dVar14 = *(double *)(glContext + 0x30e8);
+              doubleStateValue = *(double *)(glContext + 0x30e8);
               goto LAB_00014d74;
             }
             if (pname == 0xb65) {
-              uVar2 = (uint)*(ushort *)(glContext + 0x3164);
+              scalarResult = (uint)*(ushort *)(glContext + 0x3164);
               goto LAB_00015f48;
             }
             if (pname != 0xb66) {
@@ -8013,111 +8037,111 @@ LAB_00014704:
             *values = (double)*(float *)(glContext + 0x3140);
             values[1] = (double)*(float *)(glContext + 0x3144);
             values[2] = (double)*(float *)(glContext + 0x3148);
-            dVar14 = (double)*(float *)(glContext + 0x314c);
+            fourthComponent = (double)*(float *)(glContext + 0x314c);
             goto LAB_00015a8c;
           }
           if (pname == 0xb61) {
-            dVar14 = (double)*(float *)(glContext + 0x3160);
+            floatStateValue = (double)*(float *)(glContext + 0x3160);
             goto LAB_00014670;
           }
           if (pname < 0xb62) {
             if (pname == 0xb57) {
-              uVar2 = (uint)*(byte *)(glContext + 0x30ab);
+              scalarResult = (uint)*(byte *)(glContext + 0x30ab);
             }
             else {
               if (pname != 0xb60) {
                 return 0;
               }
-              uVar2 = (uint)*(byte *)(glContext + 0x316a);
+              scalarResult = (uint)*(byte *)(glContext + 0x316a);
             }
             goto LAB_00015f48;
           }
           if (pname == 0xb62) {
-            dVar14 = (double)*(float *)(glContext + 0x3150);
+            floatStateValue = (double)*(float *)(glContext + 0x3150);
           }
           else {
             if (pname != 0xb63) {
               return 0;
             }
-            dVar14 = (double)*(float *)(glContext + 0x3154);
+            floatStateValue = (double)*(float *)(glContext + 0x3154);
           }
         }
 LAB_0001467c:
-        *values = dVar14;
+        *values = floatStateValue;
 LAB_00015d48:
         *valueType = 0x140a;
-        return iVar13;
+        return valueCount;
       }
       if (pname == 0xb46) {
-        uVar2 = (uint)*(ushort *)(glContext + 0x34d4);
+        scalarResult = (uint)*(ushort *)(glContext + 0x34d4);
         goto LAB_00015f48;
       }
       if (pname < 0xb47) {
         if (pname == 0xb43) {
-          uVar2 = (uint)*(byte *)(glContext + 0x2ec);
+          scalarResult = (uint)*(byte *)(glContext + 0x2ec);
         }
         else if (pname < 0xb44) {
           if (pname == 0xb41) {
-            uVar2 = (uint)*(byte *)(glContext + 0x34d9);
+            scalarResult = (uint)*(byte *)(glContext + 0x34d9);
           }
           else {
             if (pname != 0xb42) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(glContext + 0x34d8);
+            scalarResult = (uint)*(byte *)(glContext + 0x34d8);
           }
         }
         else if (pname == 0xb44) {
-          uVar2 = (uint)*(byte *)(glContext + 0x34da);
+          scalarResult = (uint)*(byte *)(glContext + 0x34da);
         }
         else {
           if (pname != 0xb45) {
             return 0;
           }
-          uVar2 = (uint)*(ushort *)(glContext + 0x34d6);
+          scalarResult = (uint)*(ushort *)(glContext + 0x34d6);
         }
         goto LAB_00015f48;
       }
       if (pname == 0xb52) {
-        uVar2 = (uint)*(byte *)(glContext + 0x30ac);
+        scalarResult = (uint)*(byte *)(glContext + 0x30ac);
         goto LAB_00015f48;
       }
       if (pname < 0xb53) {
         if (pname == 0xb50) {
-          uVar2 = (uint)*(byte *)(glContext + 0x30aa);
+          scalarResult = (uint)*(byte *)(glContext + 0x30aa);
         }
         else {
           if (pname != 0xb51) {
             return 0;
           }
-          uVar2 = (uint)*(byte *)(glContext + 0x30ad);
+          scalarResult = (uint)*(byte *)(glContext + 0x30ad);
         }
         goto LAB_00015f48;
       }
       if (pname == 0xb54) {
-        uVar2 = *(uint *)(glContext + 0x34f4);
+        scalarResult = *(uint *)(glContext + 0x34f4);
         goto LAB_00015f48;
       }
       if (0xb54 < pname) {
-        uVar2 = (uint)*(ushort *)(glContext + 0x30a4);
+        scalarResult = (uint)*(ushort *)(glContext + 0x30a4);
         goto LAB_00015f48;
       }
       *values = (double)*(float *)(glContext + 0x2810);
       values[1] = (double)*(float *)(glContext + 0x2814);
       values[2] = (double)*(float *)(glContext + 0x2818);
-      dVar14 = (double)*(float *)(glContext + 0x281c);
+      fourthComponent = (double)*(float *)(glContext + 0x281c);
     }
 LAB_00015a8c:
-    iVar13 = 4;
-    values[3] = dVar14;
+    valueCount = 4;
+    values[3] = fourthComponent;
 LAB_00015a90:
     *valueType = 0x140a;
     *param_5 = 1;
-    return iVar13;
+    return valueCount;
   }
   if (pname == 0xbe0) {
 LAB_00014d84:
-    uVar2 = (uint)*(ushort *)(glContext + 0x30ca);
+    scalarResult = (uint)*(ushort *)(glContext + 0x30ca);
     goto LAB_00015f48;
   }
   if (0xbe0 < pname) {
@@ -8125,59 +8149,59 @@ LAB_00014d84:
       *values = (double)*(float *)(glContext + 0x3100);
       values[1] = (double)*(float *)(glContext + 0x3104);
       values[2] = (double)*(float *)(glContext + 0x3108);
-      dVar14 = (double)*(float *)(glContext + 0x310c);
+      fourthComponent = (double)*(float *)(glContext + 0x310c);
       goto LAB_00015a8c;
     }
     if (0xc22 < pname) {
       if (pname == 0xc40) {
-        uVar2 = *(uint *)(glContext + 0x4e1c);
+        scalarResult = *(uint *)(glContext + 0x4e1c);
       }
       else if (pname < 0xc41) {
         if (pname == 0xc31) {
-          uVar2 = 1;
+          scalarResult = 1;
         }
         else if (pname < 0xc32) {
           if (pname == 0xc23) {
             *(uint *)values = (uint)*(byte *)(glContext + 0x31a0);
             *(uint *)(values + 1) = (uint)*(byte *)(glContext + 0x31a1);
             *(uint *)(values + 2) = (uint)*(byte *)(glContext + 0x31a2);
-            uVar2 = (uint)*(byte *)(glContext + 0x31a3);
+            scalarResult = (uint)*(byte *)(glContext + 0x31a3);
             goto LAB_00014ed8;
           }
           if (pname != 0xc30) {
             return 0;
           }
-          uVar2 = 0;
+          scalarResult = 0;
         }
         else if (pname == 0xc32) {
-          uVar2 = (uint)*(byte *)(glContext + 0x7582);
+          scalarResult = (uint)*(byte *)(glContext + 0x7582);
         }
         else {
           if (pname != 0xc33) {
             return 0;
           }
-          uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x468c) + 0x26);
+          scalarResult = (uint)*(byte *)(*(int *)(glContext + 0x468c) + 0x26);
         }
       }
       else if (pname == 0xc52) {
-        uVar2 = (uint)*(ushort *)(0x3170 + glContext);
+        scalarResult = (uint)*(ushort *)(0x3170 + glContext);
       }
       else if (pname < 0xc53) {
         if (pname == 0xc50) {
-          uVar2 = (uint)*(ushort *)(glContext + 0x316c);
+          scalarResult = (uint)*(ushort *)(glContext + 0x316c);
         }
         else {
           if (pname != 0xc51) {
             return 0;
           }
-          uVar2 = (uint)*(ushort *)(glContext + 0x316e);
+          scalarResult = (uint)*(ushort *)(glContext + 0x316e);
         }
       }
       else if (pname == 0xc54) {
-        uVar2 = (uint)*(ushort *)(glContext + 0x3174);
+        scalarResult = (uint)*(ushort *)(glContext + 0x3174);
       }
       else if (pname < 0xc54) {
-        uVar2 = (uint)*(ushort *)(glContext + 0x3172);
+        scalarResult = (uint)*(ushort *)(glContext + 0x3172);
       }
       else {
         if (pname != 0xc60) {
@@ -8186,28 +8210,28 @@ LAB_00014d84:
         if (7 < *(int *)(glContext + 0x53d4)) {
           return -1;
         }
-        uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x94 + glContext + 0x3d78);
+        scalarResult = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x94 + glContext + 0x3d78);
       }
       goto LAB_00015f48;
     }
     if (pname == 0xc00) {
-      uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x54);
+      scalarResult = *(uint *)(*(int *)(glContext + 0x468c) + 0x54);
       goto LAB_00015f48;
     }
     if (pname < 0xc01) {
       if (pname == 0xbf0) {
-        uVar2 = (uint)*(ushort *)(glContext + 0x3190);
+        scalarResult = (uint)*(ushort *)(glContext + 0x3190);
         goto LAB_00015f48;
       }
       if (0xbf0 < pname) {
         if (pname == 0xbf1) {
-          uVar2 = (uint)*(byte *)(glContext + 0x3192);
+          scalarResult = (uint)*(byte *)(glContext + 0x3192);
         }
         else {
           if (pname != 0xbf2) {
             return 0;
           }
-          uVar2 = (uint)*(byte *)(glContext + 0x3193);
+          scalarResult = (uint)*(byte *)(glContext + 0x3193);
         }
         goto LAB_00015f48;
       }
@@ -8215,27 +8239,27 @@ LAB_00014d84:
         if (pname != 0xbe2) {
           return 0;
         }
-        uVar2 = (uint)*(byte *)(glContext + 0x30e4);
+        scalarResult = (uint)*(byte *)(glContext + 0x30e4);
         goto LAB_00015f48;
       }
 LAB_00014d8c:
-      uVar2 = (uint)*(ushort *)(glContext + 0x30c8);
+      scalarResult = (uint)*(ushort *)(glContext + 0x30c8);
       goto LAB_00015f48;
     }
     if (pname == 0xc10) {
       *(uint *)values = *(uint *)(glContext + 0x34e0);
       *(uint *)(values + 1) = *(uint *)(glContext + 0x34e4);
       *(uint *)(values + 2) = *(uint *)(glContext + 0x34e8);
-      uVar2 = *(uint *)(glContext + 0x34ec);
+      scalarResult = *(uint *)(glContext + 0x34ec);
       goto LAB_00014ed8;
     }
     if (pname < 0xc11) {
       if (pname == 0xc01) {
         if (*(int *)(glContext + 0x744c) == 0) {
-          uVar2 = (uint)*(ushort *)(glContext + 0x311a);
+          scalarResult = (uint)*(ushort *)(glContext + 0x311a);
         }
         else {
-          uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x744c) + 0xc0);
+          scalarResult = (uint)*(ushort *)(*(int *)(glContext + 0x744c) + 0xc0);
         }
       }
       else {
@@ -8243,10 +8267,10 @@ LAB_00014d8c:
           return 0;
         }
         if (*(int *)(glContext + 0x744c) == 0) {
-          uVar2 = (uint)*(ushort *)(glContext + 0x3118);
+          scalarResult = (uint)*(ushort *)(glContext + 0x3118);
         }
         else {
-          uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x744c) + 200);
+          scalarResult = (uint)*(ushort *)(*(int *)(glContext + 0x744c) + 200);
         }
       }
       goto LAB_00015f48;
@@ -8256,25 +8280,25 @@ LAB_00014d8c:
         if (pname != 0xc11) {
           return 0;
         }
-        uVar2 = (uint)*(byte *)(glContext + 0x34f0);
+        scalarResult = (uint)*(byte *)(glContext + 0x34f0);
       }
       else {
-        uVar2 = *(uint *)(glContext + 0x3194);
+        scalarResult = *(uint *)(glContext + 0x3194);
       }
       goto LAB_00015f48;
     }
-    dVar14 = (double)*(float *)(glContext + 0x3110);
+    floatStateValue = (double)*(float *)(glContext + 0x3110);
 LAB_00014670:
-    dVar14 = dVar14 * DOUBLE_00108d98;
+    floatStateValue = floatStateValue * DOUBLE_00108d98;
     goto LAB_0001467c;
   }
   if (pname == 0xba2) {
     *(uint *)values = *(uint *)(glContext + 0x1ba0);
     *(uint *)(values + 1) = *(uint *)(glContext + 0x1ba4);
     *(uint *)(values + 2) = *(uint *)(glContext + 0x1ba8);
-    uVar2 = *(uint *)(glContext + 0x1bac);
+    scalarResult = *(uint *)(glContext + 0x1bac);
 LAB_00014ed8:
-    *(uint *)(values + 3) = uVar2;
+    *(uint *)(values + 3) = scalarResult;
     return 4;
   }
   if (0xba2 < pname) {
@@ -8282,52 +8306,52 @@ LAB_00014ed8:
       if (7 < *(int *)(glContext + 0x53d4)) {
         return -1;
       }
-      iVar13 = glContext + *(int *)(glContext + 0x53d4) * 0x40 + 0x1fc0;
+      matrixPtr = glContext + *(int *)(glContext + 0x53d4) * 0x40 + 0x1fc0;
     }
     else {
       if (0xba8 < pname) {
         if (pname == 0xbc0) {
-          uVar2 = (uint)*(byte *)(glContext + 0x30c6);
+          scalarResult = (uint)*(byte *)(glContext + 0x30c6);
           goto LAB_00015f48;
         }
         if (pname < 0xbc1) {
           if (pname == 0xbb0) {
-            uVar2 = *(uint *)(glContext + 0x50fc);
+            scalarResult = *(uint *)(glContext + 0x50fc);
           }
           else {
             if (pname != 0xbb1) {
               return 0;
             }
-            uVar2 = *(uint *)(glContext + 0x5144);
+            scalarResult = *(uint *)(glContext + 0x5144);
           }
           goto LAB_00015f48;
         }
         if (pname != 0xbc2) {
           if (pname < 0xbc2) {
-            uVar2 = (uint)*(ushort *)(glContext + 0x30c4);
+            scalarResult = (uint)*(ushort *)(glContext + 0x30c4);
           }
           else {
             if (pname != 0xbd0) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(glContext + 0x313c);
+            scalarResult = (uint)*(byte *)(glContext + 0x313c);
           }
           goto LAB_00015f48;
         }
-        dVar14 = (double)*(float *)(glContext + 0x30c0);
+        doubleStateValue = (double)*(float *)(glContext + 0x30c0);
 LAB_00014d74:
-        *values = dVar14;
+        *values = doubleStateValue;
         goto LAB_00015a90;
       }
       if (pname == 0xba5) {
         if (7 < *(int *)(glContext + 0x53d4)) {
           return -1;
         }
-        iVar13 = *(int *)(*(int *)(glContext + 0x53d4) * 4 + glContext + 0x503c);
+        currentMatrixPtr = *(int *)(*(int *)(glContext + 0x53d4) * 4 + glContext + 0x503c);
 LAB_00014c5c:
-        uVar2 = iVar13 + 1;
+        scalarResult = currentMatrixPtr + 1;
 LAB_00015450:
-        *(uint *)values = uVar2;
+        *(uint *)values = scalarResult;
         return 1;
       }
       if (pname < 0xba6) {
@@ -8341,35 +8365,35 @@ LAB_00015450:
           iVar13 = *(int *)(glContext + 0x5008);
         }
 LAB_00014bf4:
-        uVar2 = iVar13 + 1;
+        scalarResult = iVar13 + 1;
         goto LAB_00015efc;
       }
       if (pname == 0xba6) goto LAB_00014c74;
       if (pname != 0xba7) {
         return 0;
       }
-      iVar13 = glContext + 0x1c80;
+      matrixPtr = glContext + 0x1c80;
     }
     goto LAB_00014c84;
   }
   if (pname == 0xb94) {
-    uVar2 = (uint)*(ushort *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x3502);
+    scalarResult = (uint)*(ushort *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x3502);
     goto LAB_00015f48;
   }
   if (pname < 0xb95) {
     if (pname == 0xb91) {
-      uVar2 = *(uint *)(glContext + 0x3114);
+      scalarResult = *(uint *)(glContext + 0x3114);
       goto LAB_00015f48;
     }
     if (0xb91 < pname) {
       if (pname == 0xb92) {
-        uVar2 = (uint)*(ushort *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x3500);
+        scalarResult = (uint)*(ushort *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x3500);
       }
       else {
         if (pname != 0xb93) {
           return 0;
         }
-        uVar2 = *(uint *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x34f8);
+        scalarResult = *(uint *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x34f8);
       }
       goto LAB_00015f48;
     }
@@ -8377,28 +8401,28 @@ LAB_00014bf4:
       if (pname != 0xb90) {
         return 0;
       }
-      uVar2 = *(uint *)(glContext + 0x3520) >> (*(byte *)(glContext + 0x7583) & 0x3f) & 1;
+      scalarResult = *(uint *)(glContext + 0x3520) >> (*(byte *)(glContext + 0x7583) & 0x3f) & 1;
       goto LAB_00015f48;
     }
     *values = (double)*(float *)(glContext + 0x30f0);
     values[1] = (double)*(float *)(glContext + 0x30f4);
     values[2] = (double)*(float *)(glContext + 0x30f8);
-    dVar14 = (double)*(float *)(glContext + 0x30fc);
+    fourthComponent = (double)*(float *)(glContext + 0x30fc);
     goto LAB_00015a8c;
   }
   if (pname == 0xb97) {
-    uVar2 = *(uint *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x34fc);
+    scalarResult = *(uint *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x34fc);
     goto LAB_00015f48;
   }
   if (pname < 0xb98) {
     if (pname == 0xb95) {
-      uVar2 = (uint)*(ushort *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x3504);
+      scalarResult = (uint)*(ushort *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x3504);
     }
     else {
       if (pname != 0xb96) {
         return 0;
       }
-      uVar2 = (uint)*(ushort *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x3506);
+      scalarResult = (uint)*(ushort *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x3506);
     }
     goto LAB_00015f48;
   }
@@ -8407,33 +8431,33 @@ LAB_00014bf4:
       if (pname != 0xb98) {
         return 0;
       }
-      uVar2 = *(uint *)((uint)*(byte *)(glContext + 0x7583) * 4 + glContext + 0x3198);
+      scalarResult = *(uint *)((uint)*(byte *)(glContext + 0x7583) * 4 + glContext + 0x3198);
     }
     else {
-      uVar2 = (uint)*(byte *)(glContext + 0x280d);
+      scalarResult = (uint)*(byte *)(glContext + 0x280d);
     }
     goto LAB_00015f48;
   }
   matrixModeIndex = *(int *)(glContext + 0x4ff4);
   switch(matrixModeIndex) {
   default:
-    uVar2 = 0x1702;
+    scalarResult = 0x1702;
     break;
   case 2:
-    uVar2 = 0x1800;
+    scalarResult = 0x1800;
     break;
   case 3:
-    uVar2 = 0x1701;
+    scalarResult = 0x1701;
     break;
   case 4:
-    uVar2 = 0x1700;
+    scalarResult = 0x1700;
     break;
   case 5:
-    uVar2 = 0x850a;
+    scalarResult = 0x850a;
     break;
   case 6:
   case 7:
-    uVar2 = matrixModeIndex + 0x871c;
+    scalarResult = matrixModeIndex + 0x871c;
     goto LAB_00015efc;
   case 8:
   case 9:
@@ -8443,13 +8467,13 @@ LAB_00014bf4:
   case 0xd:
   case 0xe:
   case 0xf:
-    uVar2 = matrixModeIndex + 35000;
+    scalarResult = matrixModeIndex + 35000;
 LAB_00015efc:
-    *(uint *)values = uVar2;
+    *(uint *)values = scalarResult;
     return 1;
   }
 LAB_00015f48:
-  *(uint *)values = uVar2;
+  *(uint *)values = scalarResult;
   return 1;
 }
 

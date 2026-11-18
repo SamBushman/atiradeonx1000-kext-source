@@ -1,0 +1,40 @@
+local	_gleBindBufferObject	param_2	target	INFERRED	buffer binding target: 0x8893 GL_ELEMENT_ARRAY_BUFFER, 0x88eb pixel pack buffer, 0x88ec pixel unpack buffer, otherwise GL_ARRAY_BUFFER
+local	_gleBindBufferObject	param_3	bufferName	INFERRED	buffer object name to bind (0 unbinds)
+local	_gleBindBufferObject	bVar1	noBuffer	INFERRED	true when the name is 0 or the buffer object could not be created: nothing to synchronize
+local	_gleBindBufferObject	uVar2	copiedWord	INFERRED	per-renderer buffer name copied into the client array record
+local	_gleBindBufferObject	iVar3	bufferObject	INFERRED	buffer object looked up (or created) for bufferName; 0 when unbinding
+local	_gleBindBufferObject	iVar4	clientState	INFERRED	ctx+0x4a60: client vertex array state
+use	_gleBindBufferObject	puVar5	dstCursor	INFERRED	per-renderer slot of the element array binding being cleared (stride 0x23 words)	^\s*puVar5\ =\ \(undefined4\ \*\)\(iVar4\ \+\ 0x460\);$	+1
+use	_gleBindBufferObject	puVar5	dstCursor	INFERRED	per-renderer slot of the element array binding being cleared (stride 0x23 words)	^\s*\*puVar5\ =\ 0;$	+1
+use	_gleBindBufferObject	puVar5	dstCursor	INFERRED	per-renderer slot of the element array binding being cleared (stride 0x23 words)	^\s*puVar5\ =\ puVar5\ \+\ 0x23;$	+1
+use	_gleBindBufferObject	puVar5	dstCursor2	INFERRED	per-renderer slot of the element array binding being written (stride 0x23 words)	^\s*puVar5\ =\ \(undefined4\ \*\)\(iVar4\ \+\ 0x460\);$@2	+1
+use	_gleBindBufferObject	puVar5	dstCursor2	INFERRED	per-renderer slot of the element array binding being written (stride 0x23 words)	^\s*\*puVar5\ =\ uVar2;$	+2
+local	_gleBindBufferObject	puVar7	srcCursor	INFERRED	buffer object per-renderer name array cursor
+use	_gleBindBufferObject	iVar8	bufferHashTable	INFERRED	shared state + 0x701c: hash table of buffer objects	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x5148\)\ \+\ 0x701c;$	+1
+use	_gleBindBufferObject	iVar8	bufferHashTable	INFERRED	shared state + 0x701c: hash table of buffer objects	^\s*iVar3\ =\ _gleLookupHashObject\(iVar8,param_3\);$	+1
+use	_gleBindBufferObject	iVar8	bufferHashTable	INFERRED	shared state + 0x701c: hash table of buffer objects	^\s*_gleAddHashNameAndObject\(param_1,iVar8,iVar3\);$	+1
+use	_gleBindBufferObject	iVar8	oldBufferObject	INFERRED	buffer object previously bound to the target (its reference count is released at the end)	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x35c\);$	+1
+use	_gleBindBufferObject	iVar8	oldBufferObject	INFERRED	buffer object previously bound to the target (its reference count is released at the end)	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a68\);$	+1
+use	_gleBindBufferObject	iVar8	oldBufferObject	INFERRED	buffer object previously bound to the target (its reference count is released at the end)	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a6c\);$	+1
+use	_gleBindBufferObject	iVar8	oldBufferObject	INFERRED	buffer object previously bound to the target (its reference count is released at the end)	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x358\);$	+1
+use	_gleBindBufferObject	iVar8	oldBufferObject	INFERRED	buffer object previously bound to the target (its reference count is released at the end)	^\s*if\ \(\(iVar8\ !=\ 0\)\ \&\&\ \(iVar4\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\)\ \+\ \-1,\ \*\(int\ \*\)\(iVar8\ \+\ 8\)\ =\ iVar4,\ iVar4\ ==\ 0\)\)\ \{$	+2
+local	_gleGetObjectParameter	param_2	shaderObject	INFERRED	program or shader object queried (+0x10 type 0x8b40 program / 0x8b48 shader)
+local	_gleGetObjectParameter	param_3	pname	INFERRED	GL_OBJECT_*_ARB parameter name (0x8b4e .. 0x8b8a)
+local	_gleGetObjectParameter	param_4	result	INFERRED	output location for the integer parameter value
+local	_gleGetObjectParameter	uVar1	value	INFERRED	value of the queried object parameter written to result
+local	_gleGetObjectParameter	uVar2	objectTypeThenZero	INFERRED	object type read from +0x10 for GL_OBJECT_TYPE, later 0 when the info log length is 0
+local	_gleGetObjectParameter	iVar3	logLength	INFERRED	stored length (info log or source) of the object; the reported value is length + 1 when nonzero
+local	_gleGenMipmapsToLevel	param_2	textureObject	INFERRED	texture object whose mipmap chain is generated
+local	_gleGenMipmapsToLevel	param_3	faceIndex	INFERRED	cube map face index (0 for non-cube targets)
+local	_gleGenMipmapsToLevel	param_5	maxLevelLimit	INFERRED	highest level to generate, forwarded to the mipmap generators (callers pass 0xf)
+local	_gleGenMipmapsToLevel	param_6	useMaxLevelByte	INFERRED	nonzero: the last level is the byte at textureObject+0x87, zero: the short at +0x62
+use	_gleGenMipmapsToLevel	iVar1	levelRecord	INFERRED	textureObject + faceOffset + level * 0x18: record of the base level	^\s*iVar1\ =\ param_2\ \+\ iVar5\ \+\ param_4\ \*\ 0x18;$	+1
+use	_gleGenMipmapsToLevel	iVar1	levelRecord	INFERRED	textureObject + faceOffset + level * 0x18: record of the base level	^\s*if\ \(\*\(int\ \*\)\(iVar1\ \+\ 0xd8\)\ ==\ 0\)\ \{$	+2
+use	_gleGenMipmapsToLevel	iVar1	nextLevel	INFERRED	level + 1: first level above the base level	^\s*iVar1\ =\ param_4\ \+\ 1;$	+4
+local	_gleGenMipmapsToLevel	pbVar2	levelFlagsPtr	INFERRED	pointer to the flags byte (+0xcf) of the level record being marked 0x40
+use	_gleGenMipmapsToLevel	iVar3	pluginResult	INFERRED	result of the plugin mipmap generation callback at ctx+0x4714; nonzero means the plugin generated the levels	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x4714\)\)$	+1
+use	_gleGenMipmapsToLevel	iVar3	pluginResult	INFERRED	result of the plugin mipmap generation callback at ctx+0x4714; nonzero means the plugin generated the levels	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+1
+use	_gleGenMipmapsToLevel	iVar3	remaining	INFERRED	counts down over the levels (lastLevel + 1 - nextLevel) to be marked plugin-resident	^\s*iVar3\ =\ \(uVar4\ \+\ 1\)\ \-\ iVar1;$	+1
+use	_gleGenMipmapsToLevel	iVar3	remaining	INFERRED	counts down over the levels (lastLevel + 1 - nextLevel) to be marked plugin-resident	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+local	_gleGenMipmapsToLevel	uVar4	lastLevel	INFERRED	last mipmap level of the chain, limited to 15
+local	_gleGenMipmapsToLevel	iVar5	faceOffset	INFERRED	faceIndex * 0x168: offset of the face inside the texture object

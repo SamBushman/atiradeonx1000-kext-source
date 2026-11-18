@@ -1,0 +1,37 @@
+use	_gleGetState	iVar13	valueCount	INFERRED	number of values written to the output array, returned to the caller (1 by default, 2 for ranges)	^\s*iVar13\ =\ 1;$	+1
+use	_gleGetState	iVar13	valueCount	INFERRED	number of values written to the output array, returned to the caller (1 by default, 2 for ranges)	^\s*iVar13\ =\ 2;$	+1
+use	_gleGetState	iVar13	valueCount	INFERRED	number of values written to the output array, returned to the caller (1 by default, 2 for ranges)	^\s*iVar13\ =\ 0x10;$	+1
+use	_gleGetState	iVar13	valueCount	INFERRED	number of values written to the output array, returned to the caller (1 by default, 2 for ranges)	^\s*iVar13\ =\ 4;$	+1
+use	_gleGetState	iVar13	valueCount	INFERRED	number of values written to the output array, returned to the caller (1 by default, 2 for ranges)	^\s*iVar13\ =\ 3;$	+1
+use	_gleGetState	iVar13	valueCount	INFERRED	number of values written to the output array, returned to the caller (1 by default, 2 for ranges)	^\s*iVar13\ =\ 2;$@2	+1
+use	_gleGetState	iVar13	valueCount	INFERRED	number of values written to the output array, returned to the caller (1 by default, 2 for ranges)	^\s*iVar13\ =\ 4;$@2	+1
+use	_gleGetState	iVar13	valueCount	INFERRED	number of values written to the output array, returned to the caller (1 by default, 2 for ranges)	^\s*iVar13\ =\ 3;$@2	+1
+use	_gleGetState	iVar13	valueCount	INFERRED	number of values written to the output array, returned to the caller (1 by default, 2 for ranges)	^\s*return\ iVar13;$	+1
+use	_gleGetState	iVar13	valueCount	INFERRED	number of values written to the output array, returned to the caller (1 by default, 2 for ranges)	^\s*iVar13\ =\ 4;$@3	+1
+use	_gleGetState	iVar13	valueCount	INFERRED	number of values written to the output array, returned to the caller (1 by default, 2 for ranges)	^\s*return\ iVar13;$@2	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*iVar13\ =\ param_1\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x53d4\)\ \*\ 0x40\ \+\ 0x1fc0;$	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*iVar13\ =\ param_1\ \+\ 0x1cc0;$	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*iVar13\ =\ param_1\ \+\ 0x1c80;$	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*iVar13\ =\ param_1\ \+\ 0x1c40;$	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*iVar13\ =\ param_1\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x4ff4\)\ \*\ 0x40\ \+\ 0x1bc0;$@2	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*_gleGetTransposeMatrixd\(iVar13,param_3\);$	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*iVar13\ =\ param_1\ \+\ 0x1d00;$	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*iVar13\ =\ param_1\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x4ff4\)\ \*\ 0x40\ \+\ 0x1bc0;$	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*_gleGetMatrixd\(iVar13,param_3\);$	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*iVar13\ =\ param_1\ \+\ param_2\ \*\ 0x40\ \+\ \-0x21ab40;$	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*iVar13\ =\ param_1\ \+\ 0x1c40;$@2	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*iVar13\ =\ param_1\ \+\ 0x1cc0;$@2	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*iVar13\ =\ param_1\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x53d4\)\ \*\ 0x40\ \+\ 0x1fc0;$@2	+1
+use	_gleGetState	iVar13	matrixPtr	INFERRED	matrix queried by the pname (transpose matrices, current matrix stack entries); passed to _gleGetMatrixd or copied element by element	^\s*iVar13\ =\ param_1\ \+\ 0x1c80;$@2	+1
+use	_gleGetState	iVar13	formatIndex	INFERRED	counts up from 0 over the compressed texture formats copied to the output array	^\s*iVar13\ =\ 0;$	+1
+use	_gleGetState	iVar13	formatIndex	INFERRED	counts up from 0 over the compressed texture formats copied to the output array	^\s*iVar3\ =\ iVar13\ \+\ 1;$	+2
+use	_gleGetState	iVar13	formatIndex	INFERRED	counts up from 0 over the compressed texture formats copied to the output array	^\s*iVar13\ =\ iVar3;$	+1
+use	_gleGetState	iVar13	currentMatrixPtr	INFERRED	top of the current matrix stack (indexed by the matrix mode at ctx+0x4ff4)	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x4ff4\)\ \*\ 4\ \+\ param_1\ \+\ 0x4ffc\);$	+1
+use	_gleGetState	iVar13	currentMatrixPtr	INFERRED	top of the current matrix stack (indexed by the matrix mode at ctx+0x4ff4)	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x53d4\)\ \*\ 4\ \+\ param_1\ \+\ 0x503c\);$	+1
+use	_gleGetState	iVar13	currentMatrixPtr	INFERRED	top of the current matrix stack (indexed by the matrix mode at ctx+0x4ff4)	^\s*uVar2\ =\ iVar13\ \+\ 1;$	+1
+use	_gleGetState	iVar13	edgeFlagArrayBuffer	INFERRED	buffer object bound to the edge flag array (clientState+0x378), pname 0x889b	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x4a60\)\ \+\ 0x378\);$	+3
+use	_gleGetState	iVar13	arrayBuffer	INFERRED	buffer object bound to GL_ARRAY_BUFFER (clientState+0x358), pname 0x8894	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x4a60\)\ \+\ 0x358\);$	+3
+use	_gleGetState	iVar13	normalArrayBuffer	INFERRED	buffer object bound to the normal array (clientState+0x364), pname 0x8897	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x4a60\)\ \+\ 0x364\);$	+3
+use	_gleGetState	iVar13	elementArrayBuffer	INFERRED	buffer object bound to GL_ELEMENT_ARRAY_BUFFER (clientState+0x35c), pname 0x8895	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x4a60\)\ \+\ 0x35c\);$	+3
+use	_gleGetState	iVar13	vertexArrayBuffer	INFERRED	buffer object bound to the vertex array (clientState+0x360), pname 0x8896	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x4a60\)\ \+\ 0x360\);$	+3
+use	_gleGetState	iVar13	colorArrayBuffer	INFERRED	buffer object bound to the color array (clientState+0x368), pname 0x8898	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x4a60\)\ \+\ 0x368\);$	+3

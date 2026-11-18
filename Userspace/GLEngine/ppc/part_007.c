@@ -2840,47 +2840,70 @@ int _gleGetAttrib(glContext, attribBit, attribBuffer)
   uint attribBit;
   uint *attribBuffer;
 {
-  uint *puVar1;
-  undefined1 uVar2;
-  ushort uVar3;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
-  ushort *puVar7;
-  int iVar8;
-  undefined1 *puVar9;
-  uint *puVar10;
-  int iVar11;
-  int *piVar12;
-  int iVar13;
-  int iVar14;
-  uint *puVar15;
-  undefined1 *puVar16;
-  int iVar17;
-  int iVar18;
-  int iVar19;
-  int iVar20;
-  int iVar21;
-  int iVar22;
+  uint *srcPtr4;
+  undefined1 copiedByte;
+  ushort copiedHalf;
+  uint copiedWord;
+  uint remaining8;
+  int srcPtr;
+  int srcCursor6;
+  int remaining6;
+  int byteOffset;
+  int srcCursor7;
+  int dstOffset;
+  int remaining7;
+  ushort *srcPtr6;
+  ushort *srcCursor12;
+  int srcPtr2;
+  int loopIndex3;
+  undefined1 *srcCursor13;
+  undefined1 *dstCursor7;
+  uint *dstCursor5;
+  uint *srcCursor20;
+  uint *srcCursor9;
+  int dstCursor;
+  int *srcPtr3;
+  int *srcCursor8;
+  int srcCursor;
+  int dstCursor2;
+  int srcCursor2;
+  int loopIndex;
+  int remaining;
+  uint *srcCursor21;
+  uint *dstCursor21;
+  uint *srcPtr21;
+  undefined1 *srcCursor11;
+  int dstCursor3;
+  int srcCursor3;
+  int remaining2;
+  int srcCursor4;
+  int srcCursor5;
+  int dstOffset2;
+  int remaining3;
+  int srcOffsetDiv8;
+  int loopIndex2;
+  int remaining4;
+  int dstCursor4;
+  int remaining5;
   
   if (attribBit == 0x400) {
-    puVar15 = (uint *)(glContext + 0x3198);
-    iVar14 = glContext + 0x34f0;
-    puVar10 = attribBuffer;
+    srcCursor21 = (uint *)(glContext + 0x3198);
+    srcCursor2 = glContext + 0x34f0;
+    dstCursor5 = attribBuffer;
     do {
-      puVar10[2] = (uint)*(ushort *)(iVar14 + 0x10);
-      *puVar10 = *(uint *)(iVar14 + 0xc);
-      puVar10[1] = *(uint *)(iVar14 + 8);
-      puVar10[3] = (uint)*(ushort *)(iVar14 + 0x12);
-      puVar10[4] = (uint)*(ushort *)(iVar14 + 0x14);
-      puVar7 = (ushort *)(iVar14 + 0x16);
-      iVar14 = iVar14 + 0x10;
-      puVar10[5] = (uint)*puVar7;
-      uVar4 = *puVar15;
-      puVar15 = puVar15 + 1;
-      puVar10[6] = uVar4;
-      puVar10 = puVar10 + 7;
-    } while ((int)puVar10 <= (int)(attribBuffer + 7));
+      dstCursor5[2] = (uint)*(ushort *)(srcCursor2 + 0x10);
+      *dstCursor5 = *(uint *)(srcCursor2 + 0xc);
+      dstCursor5[1] = *(uint *)(srcCursor2 + 8);
+      dstCursor5[3] = (uint)*(ushort *)(srcCursor2 + 0x12);
+      dstCursor5[4] = (uint)*(ushort *)(srcCursor2 + 0x14);
+      srcPtr6 = (ushort *)(srcCursor2 + 0x16);
+      srcCursor2 = srcCursor2 + 0x10;
+      dstCursor5[5] = (uint)*srcPtr6;
+      copiedWord = *srcCursor21;
+      srcCursor21 = srcCursor21 + 1;
+      dstCursor5[6] = copiedWord;
+      dstCursor5 = dstCursor5 + 7;
+    } while ((int)dstCursor5 <= (int)(attribBuffer + 7));
     attribBuffer[0xe] = (uint)*(ushort *)(glContext + 0x3518);
     attribBuffer[0xf] = (uint)*(ushort *)(glContext + 0x351a);
     attribBuffer[0x10] = (uint)*(ushort *)(glContext + 0x351c);
@@ -2892,16 +2915,16 @@ int _gleGetAttrib(glContext, attribBit, attribBuffer)
   }
   if (attribBit < 0x401) {
     if (attribBit == 0x10) {
-      puVar9 = (undefined1 *)(glContext + 0x3448);
-      iVar14 = 0x80;
+      srcCursor13 = (undefined1 *)(glContext + 0x3448);
+      remaining = 0x80;
       do {
-        uVar2 = *puVar9;
-        puVar9 = puVar9 + 1;
-        *(undefined1 *)attribBuffer = uVar2;
+        copiedByte = *srcCursor13;
+        srcCursor13 = srcCursor13 + 1;
+        *(undefined1 *)attribBuffer = copiedByte;
         attribBuffer = (uint *)((int)attribBuffer + 1);
-        iVar14 = iVar14 + -1;
-      } while (iVar14 != 0);
-      return (int)puVar9;
+        remaining = remaining + -1;
+      } while (remaining != 0);
+      return (int)srcCursor13;
     }
     if (attribBit < 0x11) {
       if (attribBit == 2) {
@@ -2922,36 +2945,36 @@ int _gleGetAttrib(glContext, attribBit, attribBuffer)
         if (attribBit != 1) {
           return glContext;
         }
-        iVar5 = *(int *)(glContext + 0x4854);
-        iVar20 = 0x10;
+        srcPtr = *(int *)(glContext + 0x4854);
+        remaining3 = 0x10;
         attribBuffer[100] = *(uint *)(glContext + 0x2a0);
-        iVar6 = iVar5 + -0x200;
+        srcCursor7 = srcPtr + -0x200;
         attribBuffer[0x65] = *(uint *)(glContext + 0x2a4);
         attribBuffer[0x66] = *(uint *)(glContext + 0x2a8);
         attribBuffer[0x67] = *(uint *)(glContext + 0x2ac);
-        puVar10 = attribBuffer;
-        iVar14 = glContext;
+        dstCursor5 = attribBuffer;
+        srcCursor2 = glContext;
         do {
-          puVar10[0x20] = *(uint *)(iVar14 + 0x1a0);
-          puVar10[0x21] = *(uint *)(iVar14 + 0x1a4);
-          puVar10[0x22] = *(uint *)(iVar14 + 0x1a8);
-          puVar15 = (uint *)(iVar14 + 0x1ac);
-          iVar14 = iVar14 + 0x10;
-          puVar10[0x23] = *puVar15;
-          puVar10 = puVar10 + 4;
-          iVar20 = iVar20 + -1;
-        } while (iVar20 != 0);
-        puVar15 = attribBuffer + 0x60;
-        iVar14 = 4;
-        puVar10 = (uint *)(glContext + 0x2d0);
+          dstCursor5[0x20] = *(uint *)(srcCursor2 + 0x1a0);
+          dstCursor5[0x21] = *(uint *)(srcCursor2 + 0x1a4);
+          dstCursor5[0x22] = *(uint *)(srcCursor2 + 0x1a8);
+          srcPtr21 = (uint *)(srcCursor2 + 0x1ac);
+          srcCursor2 = srcCursor2 + 0x10;
+          dstCursor5[0x23] = *srcPtr21;
+          dstCursor5 = dstCursor5 + 4;
+          remaining3 = remaining3 + -1;
+        } while (remaining3 != 0);
+        dstCursor21 = attribBuffer + 0x60;
+        remaining = 4;
+        srcCursor9 = (uint *)(glContext + 0x2d0);
         do {
-          uVar4 = *puVar10;
-          puVar10 = puVar10 + 1;
-          *puVar15 = uVar4;
-          puVar15 = puVar15 + 1;
-          iVar14 = iVar14 + -1;
-        } while (iVar14 != 0);
-        iVar20 = 8;
+          copiedWord = *srcCursor9;
+          srcCursor9 = srcCursor9 + 1;
+          *dstCursor21 = copiedWord;
+          dstCursor21 = dstCursor21 + 1;
+          remaining = remaining + -1;
+        } while (remaining != 0);
+        remaining3 = 8;
         attribBuffer[0x68] = *(uint *)(glContext + 0x2b0);
         attribBuffer[0x69] = *(uint *)(glContext + 0x2b4);
         attribBuffer[0x6a] = *(uint *)(glContext + 0x2b8);
@@ -2959,45 +2982,45 @@ int _gleGetAttrib(glContext, attribBit, attribBuffer)
         *(undefined8 *)(attribBuffer + 0x6c) = *(undefined8 *)(glContext + 0x2c0);
         attribBuffer[0x6e] = *(uint *)(glContext + 0x2c8);
         attribBuffer[0x6f] = *(uint *)(glContext + 0x2cc);
-        puVar10 = attribBuffer;
-        iVar14 = glContext;
+        dstCursor5 = attribBuffer;
+        srcCursor2 = glContext;
         do {
-          *puVar10 = *(uint *)(iVar14 + 0x120);
-          puVar10[1] = *(uint *)(iVar14 + 0x128);
-          puVar10[2] = *(uint *)(iVar14 + 0x124);
-          puVar15 = (uint *)(iVar14 + 300);
-          iVar14 = iVar14 + 0x10;
-          puVar10[3] = *puVar15;
-          puVar10[0x80] = *(uint *)(iVar6 + 0x80);
-          puVar10[0x81] = *(uint *)(iVar6 + 0x84);
-          puVar10[0x82] = *(uint *)(iVar6 + 0x88);
-          puVar15 = (uint *)(iVar6 + 0x8c);
-          iVar6 = iVar6 + 0x10;
-          puVar10[0x83] = *puVar15;
-          puVar10 = puVar10 + 4;
-          iVar20 = iVar20 + -1;
-        } while (iVar20 != 0);
+          *dstCursor5 = *(uint *)(srcCursor2 + 0x120);
+          dstCursor5[1] = *(uint *)(srcCursor2 + 0x128);
+          dstCursor5[2] = *(uint *)(srcCursor2 + 0x124);
+          srcPtr21 = (uint *)(srcCursor2 + 300);
+          srcCursor2 = srcCursor2 + 0x10;
+          dstCursor5[3] = *srcPtr21;
+          dstCursor5[0x80] = *(uint *)(srcCursor7 + 0x80);
+          dstCursor5[0x81] = *(uint *)(srcCursor7 + 0x84);
+          dstCursor5[0x82] = *(uint *)(srcCursor7 + 0x88);
+          srcPtr21 = (uint *)(srcCursor7 + 0x8c);
+          srcCursor7 = srcCursor7 + 0x10;
+          dstCursor5[0x83] = *srcPtr21;
+          dstCursor5 = dstCursor5 + 4;
+          remaining3 = remaining3 + -1;
+        } while (remaining3 != 0);
         attribBuffer[0x70] = *(uint *)(glContext + 0x2e0);
         attribBuffer[0x71] = *(uint *)(glContext + 0x2e4);
         attribBuffer[0x72] = *(uint *)(glContext + 0x2e8);
-        attribBuffer[0x73] = *(uint *)(iVar5 + -500);
-        attribBuffer[0x74] = *(uint *)(iVar5 + -0x1e0);
-        attribBuffer[0x75] = *(uint *)(iVar5 + -0x1dc);
-        attribBuffer[0x76] = *(uint *)(iVar5 + -0x1d8);
-        attribBuffer[0x77] = *(uint *)(iVar5 + -0x1d4);
-        attribBuffer[0x78] = *(uint *)(iVar5 + -0x1f0);
-        attribBuffer[0x79] = *(uint *)(iVar5 + -0x1ec);
-        attribBuffer[0x7a] = *(uint *)(iVar5 + -0x1e8);
-        attribBuffer[0x7b] = *(uint *)(iVar5 + -0x1e4);
-        attribBuffer[0x7c] = *(uint *)(iVar5 + -0x1c0);
-        attribBuffer[0x7d] = *(uint *)(iVar5 + -0x1bc);
-        attribBuffer[0x7e] = *(uint *)(iVar5 + -0x1b8);
-        attribBuffer[0xa1] = *(uint *)(iVar5 + -0x1cc);
-        attribBuffer[0xa2] = *(uint *)(iVar5 + -0x1c8);
-        attribBuffer[0xa3] = *(uint *)(iVar5 + -0x1c4);
-        uVar4 = *(uint *)(iVar5 + -0x1d0);
+        attribBuffer[0x73] = *(uint *)(srcPtr + -500);
+        attribBuffer[0x74] = *(uint *)(srcPtr + -0x1e0);
+        attribBuffer[0x75] = *(uint *)(srcPtr + -0x1dc);
+        attribBuffer[0x76] = *(uint *)(srcPtr + -0x1d8);
+        attribBuffer[0x77] = *(uint *)(srcPtr + -0x1d4);
+        attribBuffer[0x78] = *(uint *)(srcPtr + -0x1f0);
+        attribBuffer[0x79] = *(uint *)(srcPtr + -0x1ec);
+        attribBuffer[0x7a] = *(uint *)(srcPtr + -0x1e8);
+        attribBuffer[0x7b] = *(uint *)(srcPtr + -0x1e4);
+        attribBuffer[0x7c] = *(uint *)(srcPtr + -0x1c0);
+        attribBuffer[0x7d] = *(uint *)(srcPtr + -0x1bc);
+        attribBuffer[0x7e] = *(uint *)(srcPtr + -0x1b8);
+        attribBuffer[0xa1] = *(uint *)(srcPtr + -0x1cc);
+        attribBuffer[0xa2] = *(uint *)(srcPtr + -0x1c8);
+        attribBuffer[0xa3] = *(uint *)(srcPtr + -0x1c4);
+        copiedWord = *(uint *)(srcPtr + -0x1d0);
         attribBuffer[0x7f] = 0x3f800000;
-        attribBuffer[0xa0] = uVar4;
+        attribBuffer[0xa0] = copiedWord;
         *(undefined1 *)((int)attribBuffer + 0x291) = *(undefined1 *)(glContext + 0x2ef);
         *(undefined1 *)(attribBuffer + 0xa4) = *(undefined1 *)(glContext + 0x2ec);
         return glContext;
@@ -3063,7 +3086,7 @@ int _gleGetAttrib(glContext, attribBit, attribBuffer)
       return glContext;
     }
     if (attribBit == 0x20) {
-      iVar14 = 0;
+      loopIndex = 0;
       attribBuffer[2] = (uint)*(ushort *)(glContext + 0x3118);
       *attribBuffer = *(uint *)(glContext + 0x31a8);
       attribBuffer[1] = *(uint *)(glContext + 0x31ac);
@@ -3079,8 +3102,8 @@ int _gleGetAttrib(glContext, attribBit, attribBuffer)
       attribBuffer[0xc] = *(uint *)(glContext + 0x320c);
       attribBuffer[0xd] = *(uint *)(glContext + 0x3210);
       attribBuffer[0xe] = *(uint *)(glContext + 0x3214);
-      uVar4 = *(uint *)(glContext + 0x3270);
-      attribBuffer[0xa0f] = uVar4;
+      remaining8 = *(uint *)(glContext + 0x3270);
+      attribBuffer[0xa0f] = remaining8;
       attribBuffer[0xa10] = *(uint *)(glContext + 0x3274);
       attribBuffer[0xa11] = *(uint *)(glContext + 0x3278);
       attribBuffer[0xa12] = *(uint *)(glContext + 0x327c);
@@ -3090,123 +3113,123 @@ int _gleGetAttrib(glContext, attribBit, attribBuffer)
       attribBuffer[0xa16] = *(uint *)(glContext + 0x328c);
       attribBuffer[0xa17] = *(uint *)(glContext + 0x3290);
       attribBuffer[0xa18] = *(uint *)(glContext + 0x3294);
-      if (0 < (int)uVar4) {
-        puVar10 = attribBuffer + 0xf;
+      if (0 < (int)remaining8) {
+        dstCursor5 = attribBuffer + 0xf;
         do {
-          iVar5 = iVar14 * 4;
-          iVar14 = iVar14 + 1;
-          *puVar10 = *(uint *)(iVar5 + *(int *)(glContext + 0x3248));
-          puVar10 = puVar10 + 1;
-          uVar4 = uVar4 - 1;
-        } while (uVar4 != 0);
+          byteOffset = loopIndex * 4;
+          loopIndex = loopIndex + 1;
+          *dstCursor5 = *(uint *)(byteOffset + *(int *)(glContext + 0x3248));
+          dstCursor5 = dstCursor5 + 1;
+          remaining8 = remaining8 - 1;
+        } while (remaining8 != 0);
       }
-      uVar4 = attribBuffer[0xa11];
-      iVar14 = 0;
-      if (0 < (int)uVar4) {
-        puVar10 = attribBuffer + 0x10f;
+      remaining8 = attribBuffer[0xa11];
+      loopIndex = 0;
+      if (0 < (int)remaining8) {
+        dstCursor5 = attribBuffer + 0x10f;
         do {
-          iVar5 = iVar14 * 4;
-          iVar14 = iVar14 + 1;
-          *puVar10 = *(uint *)(iVar5 + *(int *)(glContext + 0x324c));
-          puVar10 = puVar10 + 1;
-          uVar4 = uVar4 - 1;
-        } while (uVar4 != 0);
+          byteOffset = loopIndex * 4;
+          loopIndex = loopIndex + 1;
+          *dstCursor5 = *(uint *)(byteOffset + *(int *)(glContext + 0x324c));
+          dstCursor5 = dstCursor5 + 1;
+          remaining8 = remaining8 - 1;
+        } while (remaining8 != 0);
       }
-      uVar4 = attribBuffer[0xa12];
-      iVar14 = 0;
-      if (0 < (int)uVar4) {
-        puVar10 = attribBuffer + 0x20f;
+      remaining8 = attribBuffer[0xa12];
+      loopIndex = 0;
+      if (0 < (int)remaining8) {
+        dstCursor5 = attribBuffer + 0x20f;
         do {
-          iVar5 = iVar14 * 4;
-          iVar14 = iVar14 + 1;
-          *puVar10 = *(uint *)(iVar5 + *(int *)(glContext + 0x3250));
-          puVar10 = puVar10 + 1;
-          uVar4 = uVar4 - 1;
-        } while (uVar4 != 0);
+          byteOffset = loopIndex * 4;
+          loopIndex = loopIndex + 1;
+          *dstCursor5 = *(uint *)(byteOffset + *(int *)(glContext + 0x3250));
+          dstCursor5 = dstCursor5 + 1;
+          remaining8 = remaining8 - 1;
+        } while (remaining8 != 0);
       }
-      uVar4 = attribBuffer[0xa13];
-      iVar14 = 0;
-      if (0 < (int)uVar4) {
-        puVar10 = attribBuffer + 0x30f;
+      remaining8 = attribBuffer[0xa13];
+      loopIndex = 0;
+      if (0 < (int)remaining8) {
+        dstCursor5 = attribBuffer + 0x30f;
         do {
-          iVar5 = iVar14 * 4;
-          iVar14 = iVar14 + 1;
-          *puVar10 = *(uint *)(iVar5 + *(int *)(glContext + 0x3254));
-          puVar10 = puVar10 + 1;
-          uVar4 = uVar4 - 1;
-        } while (uVar4 != 0);
+          byteOffset = loopIndex * 4;
+          loopIndex = loopIndex + 1;
+          *dstCursor5 = *(uint *)(byteOffset + *(int *)(glContext + 0x3254));
+          dstCursor5 = dstCursor5 + 1;
+          remaining8 = remaining8 - 1;
+        } while (remaining8 != 0);
       }
-      uVar4 = attribBuffer[0xa14];
-      iVar14 = 0;
-      if (0 < (int)uVar4) {
-        puVar10 = attribBuffer + 0x40f;
+      remaining8 = attribBuffer[0xa14];
+      loopIndex = 0;
+      if (0 < (int)remaining8) {
+        dstCursor5 = attribBuffer + 0x40f;
         do {
-          iVar5 = iVar14 * 4;
-          iVar14 = iVar14 + 1;
-          *puVar10 = *(uint *)(iVar5 + *(int *)(glContext + 0x3258));
-          puVar10 = puVar10 + 1;
-          uVar4 = uVar4 - 1;
-        } while (uVar4 != 0);
+          byteOffset = loopIndex * 4;
+          loopIndex = loopIndex + 1;
+          *dstCursor5 = *(uint *)(byteOffset + *(int *)(glContext + 0x3258));
+          dstCursor5 = dstCursor5 + 1;
+          remaining8 = remaining8 - 1;
+        } while (remaining8 != 0);
       }
-      uVar4 = attribBuffer[0xa15];
-      iVar14 = 0;
-      if (0 < (int)uVar4) {
-        puVar10 = attribBuffer + 0x50f;
+      remaining8 = attribBuffer[0xa15];
+      loopIndex = 0;
+      if (0 < (int)remaining8) {
+        dstCursor5 = attribBuffer + 0x50f;
         do {
-          iVar5 = iVar14 * 4;
-          iVar14 = iVar14 + 1;
-          *puVar10 = *(uint *)(iVar5 + *(int *)(glContext + 0x325c));
-          puVar10 = puVar10 + 1;
-          uVar4 = uVar4 - 1;
-        } while (uVar4 != 0);
+          byteOffset = loopIndex * 4;
+          loopIndex = loopIndex + 1;
+          *dstCursor5 = *(uint *)(byteOffset + *(int *)(glContext + 0x325c));
+          dstCursor5 = dstCursor5 + 1;
+          remaining8 = remaining8 - 1;
+        } while (remaining8 != 0);
       }
-      uVar4 = attribBuffer[0xa16];
-      iVar14 = 0;
-      if (0 < (int)uVar4) {
-        puVar10 = attribBuffer + 0x60f;
+      remaining8 = attribBuffer[0xa16];
+      loopIndex = 0;
+      if (0 < (int)remaining8) {
+        dstCursor5 = attribBuffer + 0x60f;
         do {
-          iVar5 = iVar14 * 4;
-          iVar14 = iVar14 + 1;
-          *puVar10 = *(uint *)(iVar5 + *(int *)(glContext + 0x3260));
-          puVar10 = puVar10 + 1;
-          uVar4 = uVar4 - 1;
-        } while (uVar4 != 0);
+          byteOffset = loopIndex * 4;
+          loopIndex = loopIndex + 1;
+          *dstCursor5 = *(uint *)(byteOffset + *(int *)(glContext + 0x3260));
+          dstCursor5 = dstCursor5 + 1;
+          remaining8 = remaining8 - 1;
+        } while (remaining8 != 0);
       }
-      uVar4 = attribBuffer[0xa17];
-      iVar14 = 0;
-      if (0 < (int)uVar4) {
-        puVar10 = attribBuffer + 0x70f;
+      remaining8 = attribBuffer[0xa17];
+      loopIndex = 0;
+      if (0 < (int)remaining8) {
+        dstCursor5 = attribBuffer + 0x70f;
         do {
-          iVar5 = iVar14 * 4;
-          iVar14 = iVar14 + 1;
-          *puVar10 = *(uint *)(iVar5 + *(int *)(glContext + 0x3264));
-          puVar10 = puVar10 + 1;
-          uVar4 = uVar4 - 1;
-        } while (uVar4 != 0);
+          byteOffset = loopIndex * 4;
+          loopIndex = loopIndex + 1;
+          *dstCursor5 = *(uint *)(byteOffset + *(int *)(glContext + 0x3264));
+          dstCursor5 = dstCursor5 + 1;
+          remaining8 = remaining8 - 1;
+        } while (remaining8 != 0);
       }
-      uVar4 = attribBuffer[0xa18];
-      iVar14 = 0;
-      if (0 < (int)uVar4) {
-        puVar10 = attribBuffer + 0x80f;
+      remaining8 = attribBuffer[0xa18];
+      loopIndex = 0;
+      if (0 < (int)remaining8) {
+        dstCursor5 = attribBuffer + 0x80f;
         do {
-          iVar5 = iVar14 * 4;
-          iVar14 = iVar14 + 1;
-          *puVar10 = *(uint *)(iVar5 + *(int *)(glContext + 0x3268));
-          puVar10 = puVar10 + 1;
-          uVar4 = uVar4 - 1;
-        } while (uVar4 != 0);
+          byteOffset = loopIndex * 4;
+          loopIndex = loopIndex + 1;
+          *dstCursor5 = *(uint *)(byteOffset + *(int *)(glContext + 0x3268));
+          dstCursor5 = dstCursor5 + 1;
+          remaining8 = remaining8 - 1;
+        } while (remaining8 != 0);
       }
-      uVar4 = attribBuffer[0xa10];
-      iVar14 = 0;
-      if (0 < (int)uVar4) {
-        puVar10 = attribBuffer + 0x90f;
+      remaining8 = attribBuffer[0xa10];
+      loopIndex = 0;
+      if (0 < (int)remaining8) {
+        dstCursor5 = attribBuffer + 0x90f;
         do {
-          iVar5 = iVar14 * 4;
-          iVar14 = iVar14 + 1;
-          *puVar10 = *(uint *)(iVar5 + *(int *)(glContext + 0x326c));
-          puVar10 = puVar10 + 1;
-          uVar4 = uVar4 - 1;
-        } while (uVar4 != 0);
+          byteOffset = loopIndex * 4;
+          loopIndex = loopIndex + 1;
+          *dstCursor5 = *(uint *)(byteOffset + *(int *)(glContext + 0x326c));
+          dstCursor5 = dstCursor5 + 1;
+          remaining8 = remaining8 - 1;
+        } while (remaining8 != 0);
       }
       *(byte *)(attribBuffer + 0xa19) = *(byte *)(glContext + 0x3417) & 1;
       *(byte *)((int)attribBuffer + 0x2865) = (byte)(*(uint *)(glContext + 0x3414) >> 1) & 1;
@@ -3215,7 +3238,7 @@ int _gleGetAttrib(glContext, attribBit, attribBuffer)
     if (attribBit != 0x40) {
       return glContext;
     }
-    iVar5 = 8;
+    remaining6 = 8;
     *(undefined1 *)(attribBuffer + 8) = *(undefined1 *)(glContext + 0x30ab);
     attribBuffer[1] = (uint)*(ushort *)(glContext + 0x30a4);
     attribBuffer[2] = (uint)*(ushort *)(glContext + 0x30a6);
@@ -3227,75 +3250,75 @@ int _gleGetAttrib(glContext, attribBit, attribBuffer)
     *(undefined1 *)((int)attribBuffer + 0x22) = *(undefined1 *)(glContext + 0x30ac);
     *(undefined1 *)((int)attribBuffer + 0x23) = *(undefined1 *)(glContext + 0x30ae);
     *(undefined1 *)(attribBuffer + 9) = *(undefined1 *)(glContext + 0x30aa);
-    uVar4 = *(uint *)(glContext + 0x30a0);
+    copiedWord = *(uint *)(glContext + 0x30a0);
     attribBuffer[7] = 8;
-    attribBuffer[10] = uVar4;
-    puVar10 = attribBuffer;
-    iVar14 = glContext;
+    attribBuffer[10] = copiedWord;
+    dstCursor5 = attribBuffer;
+    srcCursor2 = glContext;
     do {
-      puVar10[0x17] = *(uint *)(iVar14 + 0x2850);
-      puVar10[0x18] = *(uint *)(iVar14 + 0x2854);
-      puVar10[0x19] = *(uint *)(iVar14 + 0x2858);
-      puVar10[0x1a] = *(uint *)(iVar14 + 0x285c);
-      puVar10[0xb] = *(uint *)(iVar14 + 0x2820);
-      puVar10[0xc] = *(uint *)(iVar14 + 0x2824);
-      puVar10[0xd] = *(uint *)(iVar14 + 0x2828);
-      puVar10[0xe] = *(uint *)(iVar14 + 0x282c);
-      puVar10[0xf] = *(uint *)(iVar14 + 0x2830);
-      puVar10[0x10] = *(uint *)(iVar14 + 0x2834);
-      puVar10[0x11] = *(uint *)(iVar14 + 0x2838);
-      puVar10[0x12] = *(uint *)(iVar14 + 0x283c);
-      puVar10[0x13] = *(uint *)(iVar14 + 0x2840);
-      puVar10[0x14] = *(uint *)(iVar14 + 0x2844);
-      puVar10[0x15] = *(uint *)(iVar14 + 0x2848);
-      puVar10[0x16] = *(uint *)(iVar14 + 0x284c);
-      puVar10[0x1b] = *(uint *)(iVar14 + 0x2860);
-      puVar10[0x1c] = *(uint *)(iVar14 + 0x2864);
-      puVar10[0x1d] = *(uint *)(iVar14 + 0x2868);
-      puVar10[0x1e] = *(uint *)(iVar14 + 0x287c);
-      puVar10[0x1f] = *(uint *)(iVar14 + 0x2890);
-      puVar10[0x20] = *(uint *)(iVar14 + 0x286c);
-      puVar10[0x21] = *(uint *)(iVar14 + 0x2870);
-      puVar10[0x22] = *(uint *)(iVar14 + 0x2874);
-      puVar15 = (uint *)(iVar14 + 0x2878);
-      iVar14 = iVar14 + 0x80;
-      puVar10[0x23] = *puVar15;
-      puVar10 = puVar10 + 0x19;
-      iVar5 = iVar5 + -1;
-    } while (iVar5 != 0);
-    puVar10 = attribBuffer;
-    iVar14 = glContext;
-    iVar5 = glContext;
+      dstCursor5[0x17] = *(uint *)(srcCursor2 + 0x2850);
+      dstCursor5[0x18] = *(uint *)(srcCursor2 + 0x2854);
+      dstCursor5[0x19] = *(uint *)(srcCursor2 + 0x2858);
+      dstCursor5[0x1a] = *(uint *)(srcCursor2 + 0x285c);
+      dstCursor5[0xb] = *(uint *)(srcCursor2 + 0x2820);
+      dstCursor5[0xc] = *(uint *)(srcCursor2 + 0x2824);
+      dstCursor5[0xd] = *(uint *)(srcCursor2 + 0x2828);
+      dstCursor5[0xe] = *(uint *)(srcCursor2 + 0x282c);
+      dstCursor5[0xf] = *(uint *)(srcCursor2 + 0x2830);
+      dstCursor5[0x10] = *(uint *)(srcCursor2 + 0x2834);
+      dstCursor5[0x11] = *(uint *)(srcCursor2 + 0x2838);
+      dstCursor5[0x12] = *(uint *)(srcCursor2 + 0x283c);
+      dstCursor5[0x13] = *(uint *)(srcCursor2 + 0x2840);
+      dstCursor5[0x14] = *(uint *)(srcCursor2 + 0x2844);
+      dstCursor5[0x15] = *(uint *)(srcCursor2 + 0x2848);
+      dstCursor5[0x16] = *(uint *)(srcCursor2 + 0x284c);
+      dstCursor5[0x1b] = *(uint *)(srcCursor2 + 0x2860);
+      dstCursor5[0x1c] = *(uint *)(srcCursor2 + 0x2864);
+      dstCursor5[0x1d] = *(uint *)(srcCursor2 + 0x2868);
+      dstCursor5[0x1e] = *(uint *)(srcCursor2 + 0x287c);
+      dstCursor5[0x1f] = *(uint *)(srcCursor2 + 0x2890);
+      dstCursor5[0x20] = *(uint *)(srcCursor2 + 0x286c);
+      dstCursor5[0x21] = *(uint *)(srcCursor2 + 0x2870);
+      dstCursor5[0x22] = *(uint *)(srcCursor2 + 0x2874);
+      srcPtr21 = (uint *)(srcCursor2 + 0x2878);
+      srcCursor2 = srcCursor2 + 0x80;
+      dstCursor5[0x23] = *srcPtr21;
+      dstCursor5 = dstCursor5 + 0x19;
+      remaining6 = remaining6 + -1;
+    } while (remaining6 != 0);
+    dstCursor5 = attribBuffer;
+    srcCursor2 = glContext;
+    srcCursor6 = glContext;
     do {
-      puVar10[0x19b] = **(uint **)(iVar5 + 0x4dd0);
-      puVar10[0x19c] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 4);
-      puVar10[0x19d] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 8);
-      puVar10[0x19e] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 0xc);
-      puVar10[0x19f] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 0x10);
-      puVar10[0x1a0] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 0x14);
-      puVar10[0x1a1] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 0x18);
-      puVar10[0x1a2] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 0x1c);
-      puVar10[0x1a3] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 0x20);
-      puVar10[0x1a4] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 0x24);
-      puVar10[0x1a5] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 0x28);
-      puVar10[0x1a6] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 0x2c);
-      puVar10[0x1a7] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 0x30);
-      puVar10[0x1a8] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 0x34);
-      puVar10[0x1a9] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 0x38);
-      puVar10[0x1aa] = *(uint *)(*(int *)(iVar5 + 0x4dd0) + 0x3c);
-      piVar12 = (int *)(iVar5 + 0x4dd0);
-      iVar5 = iVar5 + 4;
-      puVar10[0x1ae] = *(uint *)(*piVar12 + 0x40);
-      puVar10[0x1ab] = *(uint *)(iVar14 + 0x2f0);
-      puVar10[0x1ac] = *(uint *)(iVar14 + 0x2f4);
-      puVar15 = (uint *)(iVar14 + 0x2f8);
-      iVar14 = iVar14 + 0x10;
-      puVar10[0x1ad] = *puVar15;
-      puVar10 = puVar10 + 0x14;
-    } while (iVar14 <= glContext + 0x10);
-    uVar4 = *(uint *)(glContext + 0x34f4);
+      dstCursor5[0x19b] = **(uint **)(srcCursor6 + 0x4dd0);
+      dstCursor5[0x19c] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 4);
+      dstCursor5[0x19d] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 8);
+      dstCursor5[0x19e] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 0xc);
+      dstCursor5[0x19f] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 0x10);
+      dstCursor5[0x1a0] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 0x14);
+      dstCursor5[0x1a1] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 0x18);
+      dstCursor5[0x1a2] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 0x1c);
+      dstCursor5[0x1a3] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 0x20);
+      dstCursor5[0x1a4] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 0x24);
+      dstCursor5[0x1a5] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 0x28);
+      dstCursor5[0x1a6] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 0x2c);
+      dstCursor5[0x1a7] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 0x30);
+      dstCursor5[0x1a8] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 0x34);
+      dstCursor5[0x1a9] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 0x38);
+      dstCursor5[0x1aa] = *(uint *)(*(int *)(srcCursor6 + 0x4dd0) + 0x3c);
+      srcPtr3 = (int *)(srcCursor6 + 0x4dd0);
+      srcCursor6 = srcCursor6 + 4;
+      dstCursor5[0x1ae] = *(uint *)(*srcPtr3 + 0x40);
+      dstCursor5[0x1ab] = *(uint *)(srcCursor2 + 0x2f0);
+      dstCursor5[0x1ac] = *(uint *)(srcCursor2 + 0x2f4);
+      srcPtr21 = (uint *)(srcCursor2 + 0x2f8);
+      srcCursor2 = srcCursor2 + 0x10;
+      dstCursor5[0x1ad] = *srcPtr21;
+      dstCursor5 = dstCursor5 + 0x14;
+    } while (srcCursor2 <= glContext + 0x10);
+    copiedWord = *(uint *)(glContext + 0x34f4);
 LAB_0004a27c:
-    *attribBuffer = uVar4;
+    *attribBuffer = copiedWord;
   }
   else {
     if (attribBit == 0x8000) {
@@ -3306,215 +3329,215 @@ LAB_0004a27c:
       attribBuffer[4] = (uint)*(ushort *)(glContext + 0x3174);
       attribBuffer[5] = *(uint *)(glContext + 0x507c);
       attribBuffer[6] = *(uint *)(glContext + 0x5080);
-      uVar4 = (uint)*(ushort *)(glContext + 0x3176);
+      copiedWord = (uint)*(ushort *)(glContext + 0x3176);
     }
     else {
       if (0x8000 < attribBit) {
         if (attribBit == 0x40000) {
-          iVar5 = 8;
-          puVar10 = attribBuffer;
-          iVar14 = glContext;
+          remaining6 = 8;
+          dstCursor5 = attribBuffer;
+          srcCursor2 = glContext;
           do {
-            puVar10[1] = *(uint *)(iVar14 + 0x3cfc);
-            puVar10[2] = *(uint *)(iVar14 + 0x3d00);
-            puVar10[3] = *(uint *)(iVar14 + 0x3d04);
-            puVar10[4] = *(uint *)(iVar14 + 0x3d08);
-            puVar10[5] = *(uint *)(iVar14 + 0x3cec);
-            puVar10[6] = *(uint *)(iVar14 + 0x3cf0);
-            puVar10[7] = *(uint *)(iVar14 + 0x3cf4);
-            puVar10[8] = *(uint *)(iVar14 + 0x3cf8);
-            puVar10[0xb] = *(uint *)(iVar14 + 0x3d20);
-            puVar10[0xc] = *(uint *)(iVar14 + 0x3d24);
-            puVar10[0xd] = *(uint *)(iVar14 + 0x3d28);
-            puVar10[0xe] = *(uint *)(iVar14 + 0x3d2c);
-            puVar10[0xf] = *(uint *)(iVar14 + 0x3d10);
-            puVar10[0x10] = *(uint *)(iVar14 + 0x3d14);
-            puVar10[0x11] = *(uint *)(iVar14 + 0x3d18);
-            puVar10[0x12] = *(uint *)(iVar14 + 0x3d1c);
-            puVar10[0x15] = *(uint *)(iVar14 + 0x3d44);
-            puVar10[0x16] = *(uint *)(iVar14 + 0x3d48);
-            puVar10[0x17] = *(uint *)(iVar14 + 0x3d4c);
-            puVar10[0x18] = *(uint *)(iVar14 + 0x3d50);
-            puVar10[0x19] = *(uint *)(iVar14 + 0x3d34);
-            puVar10[0x1a] = *(uint *)(iVar14 + 0x3d38);
-            puVar10[0x1b] = *(uint *)(iVar14 + 0x3d3c);
-            puVar10[0x1c] = *(uint *)(iVar14 + 0x3d40);
-            puVar10[0x1f] = *(uint *)(iVar14 + 0x3d68);
-            puVar10[0x20] = *(uint *)(iVar14 + 0x3d6c);
-            puVar10[0x21] = *(uint *)(iVar14 + 0x3d70);
-            puVar10[0x22] = *(uint *)(iVar14 + 0x3d74);
-            puVar10[0x23] = *(uint *)(iVar14 + 0x3d58);
-            puVar10[0x24] = *(uint *)(iVar14 + 0x3d5c);
-            puVar10[0x25] = *(uint *)(iVar14 + 0x3d60);
-            puVar10[0x26] = *(uint *)(iVar14 + 0x3d64);
-            *(undefined1 *)(puVar10 + 9) = *(undefined1 *)(iVar14 + 0x3d78);
-            *(undefined1 *)(puVar10 + 0x13) = *(undefined1 *)(iVar14 + 0x3d79);
-            *(undefined1 *)(puVar10 + 0x1d) = *(undefined1 *)(iVar14 + 0x3d7a);
-            *(undefined1 *)(puVar10 + 0x27) = *(undefined1 *)(iVar14 + 0x3d7b);
-            *puVar10 = (uint)*(ushort *)(iVar14 + 0x3ce8);
-            puVar10[10] = (uint)*(ushort *)(iVar14 + 0x3d0c);
-            puVar10[0x14] = (uint)*(ushort *)(iVar14 + 0x3d30);
-            puVar7 = (ushort *)(iVar14 + 0x3d54);
-            iVar14 = iVar14 + 0x94;
-            puVar10[0x1e] = (uint)*puVar7;
-            puVar10 = puVar10 + 0x28;
-            iVar5 = iVar5 + -1;
-          } while (iVar5 != 0);
-          iVar20 = 0;
-          iVar6 = glContext + 0x3530;
-          puVar10 = attribBuffer + 0x1c4;
-          iVar19 = 0;
-          iVar14 = glContext;
-          iVar5 = glContext;
+            dstCursor5[1] = *(uint *)(srcCursor2 + 0x3cfc);
+            dstCursor5[2] = *(uint *)(srcCursor2 + 0x3d00);
+            dstCursor5[3] = *(uint *)(srcCursor2 + 0x3d04);
+            dstCursor5[4] = *(uint *)(srcCursor2 + 0x3d08);
+            dstCursor5[5] = *(uint *)(srcCursor2 + 0x3cec);
+            dstCursor5[6] = *(uint *)(srcCursor2 + 0x3cf0);
+            dstCursor5[7] = *(uint *)(srcCursor2 + 0x3cf4);
+            dstCursor5[8] = *(uint *)(srcCursor2 + 0x3cf8);
+            dstCursor5[0xb] = *(uint *)(srcCursor2 + 0x3d20);
+            dstCursor5[0xc] = *(uint *)(srcCursor2 + 0x3d24);
+            dstCursor5[0xd] = *(uint *)(srcCursor2 + 0x3d28);
+            dstCursor5[0xe] = *(uint *)(srcCursor2 + 0x3d2c);
+            dstCursor5[0xf] = *(uint *)(srcCursor2 + 0x3d10);
+            dstCursor5[0x10] = *(uint *)(srcCursor2 + 0x3d14);
+            dstCursor5[0x11] = *(uint *)(srcCursor2 + 0x3d18);
+            dstCursor5[0x12] = *(uint *)(srcCursor2 + 0x3d1c);
+            dstCursor5[0x15] = *(uint *)(srcCursor2 + 0x3d44);
+            dstCursor5[0x16] = *(uint *)(srcCursor2 + 0x3d48);
+            dstCursor5[0x17] = *(uint *)(srcCursor2 + 0x3d4c);
+            dstCursor5[0x18] = *(uint *)(srcCursor2 + 0x3d50);
+            dstCursor5[0x19] = *(uint *)(srcCursor2 + 0x3d34);
+            dstCursor5[0x1a] = *(uint *)(srcCursor2 + 0x3d38);
+            dstCursor5[0x1b] = *(uint *)(srcCursor2 + 0x3d3c);
+            dstCursor5[0x1c] = *(uint *)(srcCursor2 + 0x3d40);
+            dstCursor5[0x1f] = *(uint *)(srcCursor2 + 0x3d68);
+            dstCursor5[0x20] = *(uint *)(srcCursor2 + 0x3d6c);
+            dstCursor5[0x21] = *(uint *)(srcCursor2 + 0x3d70);
+            dstCursor5[0x22] = *(uint *)(srcCursor2 + 0x3d74);
+            dstCursor5[0x23] = *(uint *)(srcCursor2 + 0x3d58);
+            dstCursor5[0x24] = *(uint *)(srcCursor2 + 0x3d5c);
+            dstCursor5[0x25] = *(uint *)(srcCursor2 + 0x3d60);
+            dstCursor5[0x26] = *(uint *)(srcCursor2 + 0x3d64);
+            *(undefined1 *)(dstCursor5 + 9) = *(undefined1 *)(srcCursor2 + 0x3d78);
+            *(undefined1 *)(dstCursor5 + 0x13) = *(undefined1 *)(srcCursor2 + 0x3d79);
+            *(undefined1 *)(dstCursor5 + 0x1d) = *(undefined1 *)(srcCursor2 + 0x3d7a);
+            *(undefined1 *)(dstCursor5 + 0x27) = *(undefined1 *)(srcCursor2 + 0x3d7b);
+            *dstCursor5 = (uint)*(ushort *)(srcCursor2 + 0x3ce8);
+            dstCursor5[10] = (uint)*(ushort *)(srcCursor2 + 0x3d0c);
+            dstCursor5[0x14] = (uint)*(ushort *)(srcCursor2 + 0x3d30);
+            srcPtr6 = (ushort *)(srcCursor2 + 0x3d54);
+            srcCursor2 = srcCursor2 + 0x94;
+            dstCursor5[0x1e] = (uint)*srcPtr6;
+            dstCursor5 = dstCursor5 + 0x28;
+            remaining6 = remaining6 + -1;
+          } while (remaining6 != 0);
+          loopIndex2 = 0;
+          srcCursor7 = glContext + 0x3530;
+          dstCursor5 = attribBuffer + 0x1c4;
+          dstOffset2 = 0;
+          srcCursor2 = glContext;
+          srcCursor6 = glContext;
           do {
-            iVar17 = iVar19 + (int)attribBuffer;
-            iVar13 = iVar5 + 0x5140;
-            *puVar10 = *(uint *)(iVar6 + 4);
-            iVar21 = 5;
+            dstCursor3 = dstOffset2 + (int)attribBuffer;
+            srcCursor = srcCursor6 + 0x5140;
+            *dstCursor5 = *(uint *)(srcCursor7 + 4);
+            remaining4 = 5;
             do {
-              iVar8 = *(int *)(iVar13 + 0x14);
-              *(undefined4 *)(iVar17 + 0x514) = *(undefined4 *)(iVar8 + 0x50);
-              *(undefined4 *)(iVar17 + 0x518) = *(undefined4 *)(iVar8 + 0x58);
-              *(undefined4 *)(iVar17 + 0x51c) = *(undefined4 *)(iVar8 + 0x54);
-              *(undefined4 *)(iVar17 + 0x520) = *(undefined4 *)(iVar8 + 0x5c);
-              *(uint *)(iVar17 + 0x500) = (uint)*(ushort *)(iVar8 + 0x4a);
-              *(uint *)(iVar17 + 0x504) = (uint)*(ushort *)(iVar8 + 0x4c);
-              *(uint *)(iVar17 + 0x508) = (uint)*(ushort *)(iVar8 + 0x44);
-              *(uint *)(iVar17 + 0x50c) = (uint)*(ushort *)(iVar8 + 0x46);
-              *(uint *)(iVar17 + 0x510) = (uint)*(ushort *)(iVar8 + 0x48);
-              piVar12 = (int *)(iVar13 + 0x14);
-              iVar13 = iVar13 + 4;
-              *(undefined4 *)(iVar17 + 0x524) = *(undefined4 *)(*piVar12 + 4);
-              *(undefined4 *)(iVar17 + 0x528) = *(undefined4 *)(iVar8 + 0x38);
-              *(undefined4 *)(iVar17 + 0x52c) = *(undefined4 *)(iVar8 + 0x60);
-              *(undefined4 *)(iVar17 + 0x530) = *(undefined4 *)(iVar8 + 100);
-              *(undefined4 *)(iVar17 + 0x534) = *(undefined4 *)(iVar8 + 0x68);
-              *(undefined4 *)(iVar17 + 0x538) = *(undefined4 *)(iVar8 + 0x6c);
-              *(int *)(iVar17 + 0x53c) = (int)*(short *)(iVar8 + 0x70);
-              *(int *)(iVar17 + 0x540) = (int)*(short *)(iVar8 + 0x72);
-              *(uint *)(iVar17 + 0x544) = (uint)*(ushort *)(iVar8 + 0x76);
-              *(uint *)(iVar17 + 0x548) = (uint)*(ushort *)(iVar8 + 0x74);
-              *(undefined4 *)(iVar17 + 0x54c) = *(undefined4 *)(iVar8 + 0x78);
-              *(uint *)(iVar17 + 0x550) = (uint)*(ushort *)(iVar8 + 0x7c);
-              iVar17 = iVar17 + 0x58;
-              iVar21 = iVar21 + -1;
-            } while (iVar21 != 0);
-            iVar17 = 0;
-            iVar13 = iVar19 + (int)attribBuffer;
+              srcPtr2 = *(int *)(srcCursor + 0x14);
+              *(undefined4 *)(dstCursor3 + 0x514) = *(undefined4 *)(srcPtr2 + 0x50);
+              *(undefined4 *)(dstCursor3 + 0x518) = *(undefined4 *)(srcPtr2 + 0x58);
+              *(undefined4 *)(dstCursor3 + 0x51c) = *(undefined4 *)(srcPtr2 + 0x54);
+              *(undefined4 *)(dstCursor3 + 0x520) = *(undefined4 *)(srcPtr2 + 0x5c);
+              *(uint *)(dstCursor3 + 0x500) = (uint)*(ushort *)(srcPtr2 + 0x4a);
+              *(uint *)(dstCursor3 + 0x504) = (uint)*(ushort *)(srcPtr2 + 0x4c);
+              *(uint *)(dstCursor3 + 0x508) = (uint)*(ushort *)(srcPtr2 + 0x44);
+              *(uint *)(dstCursor3 + 0x50c) = (uint)*(ushort *)(srcPtr2 + 0x46);
+              *(uint *)(dstCursor3 + 0x510) = (uint)*(ushort *)(srcPtr2 + 0x48);
+              srcPtr3 = (int *)(srcCursor + 0x14);
+              srcCursor = srcCursor + 4;
+              *(undefined4 *)(dstCursor3 + 0x524) = *(undefined4 *)(*srcPtr3 + 4);
+              *(undefined4 *)(dstCursor3 + 0x528) = *(undefined4 *)(srcPtr2 + 0x38);
+              *(undefined4 *)(dstCursor3 + 0x52c) = *(undefined4 *)(srcPtr2 + 0x60);
+              *(undefined4 *)(dstCursor3 + 0x530) = *(undefined4 *)(srcPtr2 + 100);
+              *(undefined4 *)(dstCursor3 + 0x534) = *(undefined4 *)(srcPtr2 + 0x68);
+              *(undefined4 *)(dstCursor3 + 0x538) = *(undefined4 *)(srcPtr2 + 0x6c);
+              *(int *)(dstCursor3 + 0x53c) = (int)*(short *)(srcPtr2 + 0x70);
+              *(int *)(dstCursor3 + 0x540) = (int)*(short *)(srcPtr2 + 0x72);
+              *(uint *)(dstCursor3 + 0x544) = (uint)*(ushort *)(srcPtr2 + 0x76);
+              *(uint *)(dstCursor3 + 0x548) = (uint)*(ushort *)(srcPtr2 + 0x74);
+              *(undefined4 *)(dstCursor3 + 0x54c) = *(undefined4 *)(srcPtr2 + 0x78);
+              *(uint *)(dstCursor3 + 0x550) = (uint)*(ushort *)(srcPtr2 + 0x7c);
+              dstCursor3 = dstCursor3 + 0x58;
+              remaining4 = remaining4 + -1;
+            } while (remaining4 != 0);
+            remaining2 = 0;
+            dstCursor2 = dstOffset2 + (int)attribBuffer;
             do {
-              iVar17 = iVar17 + -1;
-              *(undefined4 *)(iVar13 + 0x6b8) = *(undefined4 *)(iVar14 + 0x3524);
-              *(undefined4 *)(iVar13 + 0x6bc) = *(undefined4 *)(iVar14 + 0x3528);
-              *(undefined4 *)(iVar13 + 0x6c0) = *(undefined4 *)(iVar14 + 0x352c);
-              *(undefined4 *)(iVar13 + 0x6c4) = *(undefined4 *)(iVar14 + 0x3530);
-              *(uint *)(iVar13 + 0x6c8) = (uint)*(ushort *)(iVar6 + 8);
-              *(uint *)(iVar13 + 0x6cc) = (uint)*(ushort *)(iVar6 + 0xc);
-              *(uint *)(iVar13 + 0x6d0) = (uint)*(ushort *)(iVar6 + 0xe);
-              *(uint *)(iVar13 + 0x6d4) = (uint)*(ushort *)(iVar6 + 0x10);
-              *(uint *)(iVar13 + 0x6d8) = (uint)*(ushort *)(iVar6 + 0x12);
-              *(uint *)(iVar13 + 0x6dc) = (uint)*(ushort *)(iVar14 + 0x3544);
-              *(uint *)(iVar13 + 0x6e0) = (uint)*(ushort *)(iVar14 + 0x3546);
-              *(uint *)(iVar13 + 0x6e4) = (uint)*(ushort *)(iVar14 + 0x3548);
-              *(uint *)(iVar13 + 0x6e8) = (uint)*(ushort *)(iVar14 + 0x354a);
-              *(uint *)(iVar13 + 0x6ec) = (uint)*(ushort *)(iVar14 + 0x354c);
-              *(uint *)(iVar13 + 0x6f0) = (uint)*(ushort *)(iVar14 + 0x354e);
-              *(uint *)(iVar13 + 0x6f4) = (uint)*(ushort *)(iVar14 + 0x3550);
-              *(uint *)(iVar13 + 0x6f8) = (uint)*(ushort *)(iVar14 + 0x3552);
-              *(uint *)(iVar13 + 0x6fc) = (uint)*(ushort *)(iVar14 + 0x3554);
-              *(uint *)(iVar13 + 0x700) = (uint)*(ushort *)(iVar14 + 0x3556);
-              *(undefined4 *)(iVar13 + 0x704) = *(undefined4 *)(iVar14 + 0x3558);
-              *(undefined4 *)(iVar13 + 0x708) = *(undefined4 *)(iVar14 + 0x355c);
-              *(undefined4 *)(iVar13 + 0x70c) = *(undefined4 *)(iVar14 + 0x3560);
-              iVar13 = iVar13 + 0x58;
-            } while (-1 < iVar17);
-            iVar20 = iVar20 + 1;
-            iVar19 = iVar19 + 0x214;
-            puVar10 = puVar10 + 0x85;
-            iVar5 = iVar5 + 0x14;
-            iVar14 = iVar14 + 0x7c;
-            iVar6 = iVar6 + 0x7c;
-          } while (iVar20 < 0x10);
-          iVar5 = glContext + 0x41f0;
-          puVar10 = attribBuffer + 0x990;
-          iVar14 = 1;
+              remaining2 = remaining2 + -1;
+              *(undefined4 *)(dstCursor2 + 0x6b8) = *(undefined4 *)(srcCursor2 + 0x3524);
+              *(undefined4 *)(dstCursor2 + 0x6bc) = *(undefined4 *)(srcCursor2 + 0x3528);
+              *(undefined4 *)(dstCursor2 + 0x6c0) = *(undefined4 *)(srcCursor2 + 0x352c);
+              *(undefined4 *)(dstCursor2 + 0x6c4) = *(undefined4 *)(srcCursor2 + 0x3530);
+              *(uint *)(dstCursor2 + 0x6c8) = (uint)*(ushort *)(srcCursor7 + 8);
+              *(uint *)(dstCursor2 + 0x6cc) = (uint)*(ushort *)(srcCursor7 + 0xc);
+              *(uint *)(dstCursor2 + 0x6d0) = (uint)*(ushort *)(srcCursor7 + 0xe);
+              *(uint *)(dstCursor2 + 0x6d4) = (uint)*(ushort *)(srcCursor7 + 0x10);
+              *(uint *)(dstCursor2 + 0x6d8) = (uint)*(ushort *)(srcCursor7 + 0x12);
+              *(uint *)(dstCursor2 + 0x6dc) = (uint)*(ushort *)(srcCursor2 + 0x3544);
+              *(uint *)(dstCursor2 + 0x6e0) = (uint)*(ushort *)(srcCursor2 + 0x3546);
+              *(uint *)(dstCursor2 + 0x6e4) = (uint)*(ushort *)(srcCursor2 + 0x3548);
+              *(uint *)(dstCursor2 + 0x6e8) = (uint)*(ushort *)(srcCursor2 + 0x354a);
+              *(uint *)(dstCursor2 + 0x6ec) = (uint)*(ushort *)(srcCursor2 + 0x354c);
+              *(uint *)(dstCursor2 + 0x6f0) = (uint)*(ushort *)(srcCursor2 + 0x354e);
+              *(uint *)(dstCursor2 + 0x6f4) = (uint)*(ushort *)(srcCursor2 + 0x3550);
+              *(uint *)(dstCursor2 + 0x6f8) = (uint)*(ushort *)(srcCursor2 + 0x3552);
+              *(uint *)(dstCursor2 + 0x6fc) = (uint)*(ushort *)(srcCursor2 + 0x3554);
+              *(uint *)(dstCursor2 + 0x700) = (uint)*(ushort *)(srcCursor2 + 0x3556);
+              *(undefined4 *)(dstCursor2 + 0x704) = *(undefined4 *)(srcCursor2 + 0x3558);
+              *(undefined4 *)(dstCursor2 + 0x708) = *(undefined4 *)(srcCursor2 + 0x355c);
+              *(undefined4 *)(dstCursor2 + 0x70c) = *(undefined4 *)(srcCursor2 + 0x3560);
+              dstCursor2 = dstCursor2 + 0x58;
+            } while (-1 < remaining2);
+            loopIndex2 = loopIndex2 + 1;
+            dstOffset2 = dstOffset2 + 0x214;
+            dstCursor5 = dstCursor5 + 0x85;
+            srcCursor6 = srcCursor6 + 0x14;
+            srcCursor2 = srcCursor2 + 0x7c;
+            srcCursor7 = srcCursor7 + 0x7c;
+          } while (loopIndex2 < 0x10);
+          srcCursor6 = glContext + 0x41f0;
+          dstCursor5 = attribBuffer + 0x990;
+          remaining = 1;
           attribBuffer[0x991] = *(uint *)(glContext + 0x41fc);
           do {
-            iVar14 = iVar14 + -1;
-            puVar10[2] = *(uint *)(iVar5 + 0x10);
-            puVar10[3] = *(uint *)(iVar5 + 0x14);
-            puVar10[4] = *(uint *)(iVar5 + 0x18);
-            puVar15 = (uint *)(iVar5 + 0x1c);
-            iVar5 = iVar5 + 0x10;
-            puVar10[5] = *puVar15;
-            puVar10 = puVar10 + 4;
-          } while (-1 < iVar14);
-          iVar6 = 0;
-          iVar20 = 0;
-          iVar14 = glContext;
-          iVar5 = glContext;
-          puVar10 = attribBuffer;
+            remaining = remaining + -1;
+            dstCursor5[2] = *(uint *)(srcCursor6 + 0x10);
+            dstCursor5[3] = *(uint *)(srcCursor6 + 0x14);
+            dstCursor5[4] = *(uint *)(srcCursor6 + 0x18);
+            srcPtr21 = (uint *)(srcCursor6 + 0x1c);
+            srcCursor6 = srcCursor6 + 0x10;
+            dstCursor5[5] = *srcPtr21;
+            dstCursor5 = dstCursor5 + 4;
+          } while (-1 < remaining);
+          dstOffset = 0;
+          srcOffsetDiv8 = 0;
+          srcCursor2 = glContext;
+          srcCursor6 = glContext;
+          dstCursor5 = attribBuffer;
           do {
-            iVar8 = 0;
-            iVar19 = glContext + iVar20 * 8;
-            iVar13 = iVar14 + 0x4270;
-            puVar15 = puVar10 + 0x9bc;
-            iVar17 = iVar5 + 0x4230;
-            iVar21 = iVar6 + (int)attribBuffer;
+            loopIndex3 = 0;
+            srcCursor5 = glContext + srcOffsetDiv8 * 8;
+            srcCursor = srcCursor2 + 0x4270;
+            dstCursor21 = dstCursor5 + 0x9bc;
+            srcCursor3 = srcCursor6 + 0x4230;
+            dstCursor4 = dstOffset + (int)attribBuffer;
             do {
-              iVar18 = iVar19 + 0x4210;
-              iVar22 = 4;
-              iVar11 = iVar21 + 0x2660;
+              srcCursor4 = srcCursor5 + 0x4210;
+              remaining5 = 4;
+              dstCursor = dstCursor4 + 0x2660;
               do {
-                *(uint *)(iVar11 + 8) = (uint)*(ushort *)(iVar18 + 0x10);
-                *(uint *)(iVar11 + 0xc) = (uint)*(ushort *)(iVar18 + 0x12);
-                puVar7 = (ushort *)(iVar18 + 0x14);
-                iVar18 = iVar18 + 8;
-                *(uint *)(iVar11 + 0x10) = (uint)*puVar7;
-                iVar11 = iVar11 + 0xc;
-                iVar22 = iVar22 + -1;
-              } while (iVar22 != 0);
-              iVar8 = iVar8 + 1;
-              iVar19 = iVar19 + 0x30;
-              *(undefined1 *)(iVar21 + 0x2698) = *(undefined1 *)(iVar17 + 0x10);
-              *(undefined1 *)(iVar21 + 0x2699) = *(undefined1 *)(iVar17 + 0x11);
-              *(undefined1 *)(iVar21 + 0x269a) = *(undefined1 *)(iVar17 + 0x12);
-              *(uint *)(iVar21 + 0x269c) = (uint)*(ushort *)(iVar17 + 0x14);
-              *(uint *)(iVar21 + 0x26a0) = (uint)*(ushort *)(iVar17 + 0x16);
-              *(uint *)(iVar21 + 0x26a4) = (uint)*(ushort *)(iVar17 + 0x18);
-              *(uint *)(iVar21 + 0x26a8) = (uint)*(ushort *)(iVar17 + 0x1a);
-              puVar7 = (ushort *)(iVar17 + 0x1c);
-              iVar17 = iVar17 + 0x30;
-              *(uint *)(iVar21 + 0x26ac) = (uint)*puVar7;
-              iVar21 = iVar21 + 0x48;
-              puVar15[2] = *(uint *)(iVar13 + 0x10);
-              puVar15[3] = *(uint *)(iVar13 + 0x14);
-              puVar15[4] = *(uint *)(iVar13 + 0x18);
-              puVar1 = (uint *)(iVar13 + 0x1c);
-              iVar13 = iVar13 + 0x10;
-              puVar15[5] = *puVar1;
-              puVar15 = puVar15 + 4;
-            } while (iVar8 < 2);
-            iVar5 = iVar5 + 0x80;
-            iVar20 = iVar20 + 0x10;
-            iVar14 = iVar14 + 0x80;
-            iVar6 = iVar6 + 0xb0;
-            puVar10 = puVar10 + 0x2c;
-          } while (iVar5 <= glContext + 0x380);
-          iVar5 = glContext + 0x4610;
-          puVar10 = attribBuffer + 0xaf8;
+                *(uint *)(dstCursor + 8) = (uint)*(ushort *)(srcCursor4 + 0x10);
+                *(uint *)(dstCursor + 0xc) = (uint)*(ushort *)(srcCursor4 + 0x12);
+                srcPtr6 = (ushort *)(srcCursor4 + 0x14);
+                srcCursor4 = srcCursor4 + 8;
+                *(uint *)(dstCursor + 0x10) = (uint)*srcPtr6;
+                dstCursor = dstCursor + 0xc;
+                remaining5 = remaining5 + -1;
+              } while (remaining5 != 0);
+              loopIndex3 = loopIndex3 + 1;
+              srcCursor5 = srcCursor5 + 0x30;
+              *(undefined1 *)(dstCursor4 + 0x2698) = *(undefined1 *)(srcCursor3 + 0x10);
+              *(undefined1 *)(dstCursor4 + 0x2699) = *(undefined1 *)(srcCursor3 + 0x11);
+              *(undefined1 *)(dstCursor4 + 0x269a) = *(undefined1 *)(srcCursor3 + 0x12);
+              *(uint *)(dstCursor4 + 0x269c) = (uint)*(ushort *)(srcCursor3 + 0x14);
+              *(uint *)(dstCursor4 + 0x26a0) = (uint)*(ushort *)(srcCursor3 + 0x16);
+              *(uint *)(dstCursor4 + 0x26a4) = (uint)*(ushort *)(srcCursor3 + 0x18);
+              *(uint *)(dstCursor4 + 0x26a8) = (uint)*(ushort *)(srcCursor3 + 0x1a);
+              srcPtr6 = (ushort *)(srcCursor3 + 0x1c);
+              srcCursor3 = srcCursor3 + 0x30;
+              *(uint *)(dstCursor4 + 0x26ac) = (uint)*srcPtr6;
+              dstCursor4 = dstCursor4 + 0x48;
+              dstCursor21[2] = *(uint *)(srcCursor + 0x10);
+              dstCursor21[3] = *(uint *)(srcCursor + 0x14);
+              dstCursor21[4] = *(uint *)(srcCursor + 0x18);
+              srcPtr4 = (uint *)(srcCursor + 0x1c);
+              srcCursor = srcCursor + 0x10;
+              dstCursor21[5] = *srcPtr4;
+              dstCursor21 = dstCursor21 + 4;
+            } while (loopIndex3 < 2);
+            srcCursor6 = srcCursor6 + 0x80;
+            srcOffsetDiv8 = srcOffsetDiv8 + 0x10;
+            srcCursor2 = srcCursor2 + 0x80;
+            dstOffset = dstOffset + 0xb0;
+            dstCursor5 = dstCursor5 + 0x2c;
+          } while (srcCursor6 <= glContext + 0x380);
+          srcCursor6 = glContext + 0x4610;
+          dstCursor5 = attribBuffer + 0xaf8;
           *(undefined1 *)(attribBuffer + 0xafa) = *(undefined1 *)(glContext + 0x4620);
-          iVar6 = 7;
+          remaining7 = 7;
           do {
-            puVar10[3] = (uint)*(ushort *)(iVar5 + 0x14);
-            puVar10[4] = (uint)*(ushort *)(iVar5 + 0x16);
-            puVar7 = (ushort *)(iVar5 + 0x18);
-            iVar5 = iVar5 + 8;
-            puVar10[5] = (uint)*puVar7;
-            puVar10 = puVar10 + 3;
-            iVar6 = iVar6 + -1;
-          } while (iVar6 != 0);
+            dstCursor5[3] = (uint)*(ushort *)(srcCursor6 + 0x14);
+            dstCursor5[4] = (uint)*(ushort *)(srcCursor6 + 0x16);
+            srcPtr6 = (ushort *)(srcCursor6 + 0x18);
+            srcCursor6 = srcCursor6 + 8;
+            dstCursor5[5] = (uint)*srcPtr6;
+            dstCursor5 = dstCursor5 + 3;
+            remaining7 = remaining7 + -1;
+          } while (remaining7 != 0);
           attribBuffer[0x990] = *(int *)(glContext + 0x53d4) + 0x84c0;
-          return iVar14;
+          return srcCursor2;
         }
         if (0x40000 < attribBit) {
           if (attribBit == 0x80000) {
@@ -3572,85 +3595,85 @@ LAB_0004a27c:
         if (attribBit != 0x20000) {
           return glContext;
         }
-        uVar4 = *(uint *)(glContext + 0x5404);
+        copiedWord = *(uint *)(glContext + 0x5404);
         goto LAB_0004a27c;
       }
       if (attribBit == 0x1000) {
-        iVar5 = 6;
-        iVar14 = glContext + 0x4180;
+        remaining6 = 6;
+        srcCursor2 = glContext + 0x4180;
         attribBuffer[1] = *(uint *)(glContext + 0x4ff4);
-        puVar10 = attribBuffer + 0x808;
+        dstCursor5 = attribBuffer + 0x808;
         *(undefined1 *)(attribBuffer + 3) = *(undefined1 *)(glContext + 0x280d);
         *(undefined1 *)((int)attribBuffer + 0xd) = *(undefined1 *)(glContext + 0x280e);
         *(undefined1 *)((int)attribBuffer + 0xf) = *(undefined1 *)(glContext + 0x280c);
         attribBuffer[4] = (uint)*(ushort *)(glContext + 0x2808);
         attribBuffer[5] = (uint)*(ushort *)(glContext + 0x280a);
-        uVar4 = *(uint *)(glContext + 0x2800);
+        copiedWord = *(uint *)(glContext + 0x2800);
         *attribBuffer = 6;
-        attribBuffer[6] = uVar4;
+        attribBuffer[6] = copiedWord;
         attribBuffer[0x80a] = *(uint *)(glContext + 0x4188);
         do {
-          puVar10[3] = *(uint *)(iVar14 + 0xc);
-          puVar10[4] = *(uint *)(iVar14 + 0x10);
-          puVar10[5] = *(uint *)(iVar14 + 0x14);
-          puVar15 = (uint *)(iVar14 + 0x18);
-          iVar14 = iVar14 + 0x10;
-          puVar10[6] = *puVar15;
-          puVar10 = puVar10 + 4;
-          iVar5 = iVar5 + -1;
-        } while (iVar5 != 0);
-        puVar10 = attribBuffer + 7;
-        piVar12 = (int *)(glContext + 0x5420);
-        iVar14 = 1;
-        puVar15 = attribBuffer + 0x809;
-        puVar9 = (undefined1 *)(glContext + 0x4664);
+          dstCursor5[3] = *(uint *)(srcCursor2 + 0xc);
+          dstCursor5[4] = *(uint *)(srcCursor2 + 0x10);
+          dstCursor5[5] = *(uint *)(srcCursor2 + 0x14);
+          srcPtr21 = (uint *)(srcCursor2 + 0x18);
+          srcCursor2 = srcCursor2 + 0x10;
+          dstCursor5[6] = *srcPtr21;
+          dstCursor5 = dstCursor5 + 4;
+          remaining6 = remaining6 + -1;
+        } while (remaining6 != 0);
+        dstCursor5 = attribBuffer + 7;
+        srcCursor8 = (int *)(glContext + 0x5420);
+        remaining = 1;
+        dstCursor21 = attribBuffer + 0x809;
+        srcCursor13 = (undefined1 *)(glContext + 0x4664);
         do {
-          iVar5 = *piVar12;
-          iVar14 = iVar14 + -1;
-          piVar12 = piVar12 + 1;
-          *puVar10 = *(uint *)(iVar5 + 4);
-          puVar10 = puVar10 + 1;
-          uVar2 = *puVar9;
-          puVar9 = puVar9 + 8;
-          *(undefined1 *)puVar15 = uVar2;
-          puVar15 = (uint *)((int)puVar15 + 1);
-        } while (-1 < iVar14);
-        puVar15 = *(uint **)(glContext + 0x4668);
-        iVar14 = 0x100;
-        puVar10 = attribBuffer + 8;
+          srcPtr = *srcCursor8;
+          remaining = remaining + -1;
+          srcCursor8 = srcCursor8 + 1;
+          *dstCursor5 = *(uint *)(srcPtr + 4);
+          dstCursor5 = dstCursor5 + 1;
+          copiedByte = *srcCursor13;
+          srcCursor13 = srcCursor13 + 8;
+          *(undefined1 *)dstCursor21 = copiedByte;
+          dstCursor21 = (uint *)((int)dstCursor21 + 1);
+        } while (-1 < remaining);
+        srcCursor21 = *(uint **)(glContext + 0x4668);
+        remaining = 0x100;
+        dstCursor5 = attribBuffer + 8;
         do {
-          puVar10[1] = *puVar15;
-          puVar10[2] = puVar15[1];
-          puVar10[3] = puVar15[2];
-          puVar1 = puVar15 + 3;
-          puVar15 = puVar15 + 4;
-          puVar10[4] = *puVar1;
-          puVar10 = puVar10 + 4;
-          iVar14 = iVar14 + -1;
-        } while (iVar14 != 0);
-        puVar15 = *(uint **)(glContext + 0x4670);
-        iVar14 = 0x80;
-        puVar10 = attribBuffer + 0x408;
+          dstCursor5[1] = *srcCursor21;
+          dstCursor5[2] = srcCursor21[1];
+          dstCursor5[3] = srcCursor21[2];
+          srcPtr4 = srcCursor21 + 3;
+          srcCursor21 = srcCursor21 + 4;
+          dstCursor5[4] = *srcPtr4;
+          dstCursor5 = dstCursor5 + 4;
+          remaining = remaining + -1;
+        } while (remaining != 0);
+        srcCursor21 = *(uint **)(glContext + 0x4670);
+        remaining = 0x80;
+        dstCursor5 = attribBuffer + 0x408;
         do {
-          puVar10[1] = *puVar15;
-          puVar10[2] = puVar15[1];
-          puVar10[3] = puVar15[2];
-          puVar1 = puVar15 + 3;
-          puVar15 = puVar15 + 4;
-          puVar10[4] = *puVar1;
-          puVar10 = puVar10 + 4;
-          iVar14 = iVar14 + -1;
-        } while (iVar14 != 0);
+          dstCursor5[1] = *srcCursor21;
+          dstCursor5[2] = srcCursor21[1];
+          dstCursor5[3] = srcCursor21[2];
+          srcPtr4 = srcCursor21 + 3;
+          srcCursor21 = srcCursor21 + 4;
+          dstCursor5[4] = *srcPtr4;
+          dstCursor5 = dstCursor5 + 4;
+          remaining = remaining + -1;
+        } while (remaining != 0);
         *(undefined1 *)((int)attribBuffer + 0xe) = *(undefined1 *)(glContext + 0x4661);
         attribBuffer[2] = (uint)*(byte *)(glContext + 0x4660);
         return glContext;
       }
       if (0x1000 < attribBit) {
         if (attribBit == 0x2000) {
-          puVar15 = attribBuffer + 8;
-          puVar10 = (uint *)(glContext + 0x3534);
+          dstCursor21 = attribBuffer + 8;
+          srcCursor20 = (uint *)(glContext + 0x3534);
           *(undefined1 *)((int)attribBuffer + 0x97) = *(undefined1 *)(glContext + 0x316a);
-          iVar14 = 0x10;
+          remaining = 0x10;
           *(undefined1 *)(attribBuffer + 0x26) = *(undefined1 *)(glContext + 0x30aa);
           *(undefined1 *)((int)attribBuffer + 0x9a) = *(undefined1 *)(glContext + 0x318c);
           *(undefined1 *)((int)attribBuffer + 0xa3) = *(undefined1 *)(glContext + 0x34d8);
@@ -3703,38 +3726,38 @@ LAB_0004a27c:
           *(undefined1 *)((int)attribBuffer + 0xab) = *(undefined1 *)(glContext + 0x41f3);
           *(undefined1 *)(attribBuffer + 0x2b) = *(undefined1 *)(glContext + 0x4661);
           do {
-            uVar4 = *puVar10;
-            puVar10 = puVar10 + 0x1f;
-            *puVar15 = uVar4;
-            puVar15 = puVar15 + 1;
-            iVar14 = iVar14 + -1;
-          } while (iVar14 != 0);
-          puVar16 = (undefined1 *)(glContext + 0x3d7b);
-          iVar14 = 8;
-          puVar9 = (undefined1 *)((int)attribBuffer + 0x6f);
+            copiedWord = *srcCursor20;
+            srcCursor20 = srcCursor20 + 0x1f;
+            *dstCursor21 = copiedWord;
+            dstCursor21 = dstCursor21 + 1;
+            remaining = remaining + -1;
+          } while (remaining != 0);
+          srcCursor11 = (undefined1 *)(glContext + 0x3d7b);
+          remaining = 8;
+          dstCursor7 = (undefined1 *)((int)attribBuffer + 0x6f);
           do {
-            puVar9[-3] = puVar16[-3];
-            puVar9[-2] = puVar16[-2];
-            puVar9[-1] = puVar16[-1];
-            uVar2 = *puVar16;
-            puVar16 = puVar16 + 0x94;
-            *puVar9 = uVar2;
-            puVar9 = puVar9 + 4;
-            iVar14 = iVar14 + -1;
-          } while (iVar14 != 0);
-          iVar14 = 1;
-          puVar10 = attribBuffer + 0x23;
+            dstCursor7[-3] = srcCursor11[-3];
+            dstCursor7[-2] = srcCursor11[-2];
+            dstCursor7[-1] = srcCursor11[-1];
+            copiedByte = *srcCursor11;
+            srcCursor11 = srcCursor11 + 0x94;
+            *dstCursor7 = copiedByte;
+            dstCursor7 = dstCursor7 + 4;
+            remaining = remaining + -1;
+          } while (remaining != 0);
+          remaining = 1;
+          dstCursor5 = attribBuffer + 0x23;
           attribBuffer[0x1a] = *(uint *)(glContext + 0x3520);
           attribBuffer[0x19] = *(uint *)(glContext + 0x4188);
-          puVar9 = (undefined1 *)(glContext + 0x4664);
+          srcCursor13 = (undefined1 *)(glContext + 0x4664);
           attribBuffer[0x18] = *(uint *)(glContext + 0x30a0);
           do {
-            iVar14 = iVar14 + -1;
-            uVar2 = *puVar9;
-            puVar9 = puVar9 + 8;
-            *(undefined1 *)puVar10 = uVar2;
-            puVar10 = (uint *)((int)puVar10 + 1);
-          } while (-1 < iVar14);
+            remaining = remaining + -1;
+            copiedByte = *srcCursor13;
+            srcCursor13 = srcCursor13 + 8;
+            *(undefined1 *)dstCursor5 = copiedByte;
+            dstCursor5 = (uint *)((int)dstCursor5 + 1);
+          } while (-1 < remaining);
           *(undefined1 *)(attribBuffer + 0x2c) = *(undefined1 *)(glContext + 0x4fea);
           *(undefined1 *)((int)attribBuffer + 0xb1) = *(undefined1 *)(glContext + 0x312a);
           *(undefined1 *)((int)attribBuffer + 0xb2) = *(undefined1 *)(glContext + 0x3129);
@@ -3743,16 +3766,16 @@ LAB_0004a27c:
         if (attribBit != 0x4000) {
           return glContext;
         }
-        puVar10 = attribBuffer + 9;
-        iVar14 = 4;
-        puVar7 = (ushort *)(glContext + 0x311a);
+        dstCursor5 = attribBuffer + 9;
+        remaining = 4;
+        srcCursor12 = (ushort *)(glContext + 0x311a);
         do {
-          uVar3 = *puVar7;
-          puVar7 = puVar7 + 1;
-          *puVar10 = (uint)uVar3;
-          puVar10 = puVar10 + 1;
-          iVar14 = iVar14 + -1;
-        } while (iVar14 != 0);
+          copiedHalf = *srcCursor12;
+          srcCursor12 = srcCursor12 + 1;
+          *dstCursor5 = (uint)copiedHalf;
+          dstCursor5 = dstCursor5 + 1;
+          remaining = remaining + -1;
+        } while (remaining != 0);
         *(undefined1 *)(attribBuffer + 0x14) = *(undefined1 *)(glContext + 0x30c6);
         *attribBuffer = (uint)*(ushort *)(glContext + 0x30c4);
         attribBuffer[1] = *(uint *)(glContext + 0x30c0);
@@ -3788,9 +3811,9 @@ LAB_0004a27c:
       attribBuffer[4] = *(uint *)(glContext + 0x1ba0);
       attribBuffer[5] = *(uint *)(glContext + 0x1ba4);
       attribBuffer[6] = *(uint *)(glContext + 0x1ba8);
-      uVar4 = *(uint *)(glContext + 0x1bac);
+      copiedWord = *(uint *)(glContext + 0x1bac);
     }
-    attribBuffer[7] = uVar4;
+    attribBuffer[7] = copiedWord;
   }
   return glContext;
 }
@@ -4068,57 +4091,65 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
   int remaining3;
   int remaining2;
   int remaining;
-  float *pfVar1;
-  undefined2 uVar2;
+  float *srcPtr;
+  undefined2 copiedHalf;
   undefined *puVar3;
-  uint uVar4;
-  char cVar5;
-  undefined1 uVar6;
+  uint copiedWord;
+  char derivedByte;
+  undefined1 copiedByte;
+  undefined1 derivedByte2;
   int iVar7;
+  int dstCursor10;
   int glContextPtr4854;
-  int iVar8;
+  int dstCursor11;
   float fVar9;
   float fVar10;
-  byte bVar13;
-  float *pfVar11;
-  undefined2 *puVar12;
+  byte derivedByte3;
+  float *srcCursor6;
+  undefined2 *srcPtr3;
   undefined2 *srcCursor2;
-  undefined1 *puVar14;
+  undefined1 *srcCursor8;
+  undefined1 *dstCursor13;
   undefined1 *srcCursor3;
   undefined1 *dstCursor2;
   undefined4 uVar15;
   int iVar16;
+  int dstCursor4;
   undefined2 *dstCursor3;
-  int iVar18;
-  int *piVar19;
+  int dstCursor5;
+  int *dstPtr;
   int *srcCursor;
-  float *pfVar20;
+  float *srcPtr2;
+  float *dstCursor12;
+  float *srcCursor7;
   float *dstCursor;
   undefined1 *srcCursor4;
-  int iVar22;
+  int dstCursor6;
   int iVar23;
+  int dstCursor7;
   int loopIndex2;
-  undefined4 *puVar25;
+  undefined4 *srcPtr4;
   undefined4 *srcCursor5;
-  int iVar26;
+  int dstCursor8;
   int iVar27;
+  int dstCursor9;
   int remaining15;
   
   if (attribBit == (undefined *)0x400) {
     dstCursor = (float *)(glContext + 0x3198);
-    iVar16 = glContext + 0x34f0;
+    dstCursor4 = glContext + 0x34f0;
     cursor = attribBuffer;
     do {
-      *(undefined2 *)(iVar16 + 0x10) = *(undefined2 *)((int)cursor + 10);
-      *(float *)(iVar16 + 8) = cursor[1];
-      *(float *)(iVar16 + 0xc) = *cursor;
-      *(undefined2 *)(iVar16 + 0x12) = *(undefined2 *)((int)cursor + 0xe);
-      *(undefined2 *)(iVar16 + 0x14) = *(undefined2 *)((int)cursor + 0x12);
-      *(undefined2 *)(iVar16 + 0x16) = *(undefined2 *)((int)cursor + 0x16);
-      iVar16 = iVar16 + 0x10;
-      pfVar1 = cursor + 6;
+      *(undefined2 *)(dstCursor4 + 0x10) = *(undefined2 *)((int)cursor + 10);
+      *(float *)(dstCursor4 + 8) = cursor[1];
+      *(float *)(dstCursor4 + 0xc) = *cursor;
+      *(undefined2 *)(dstCursor4 + 0x12) = *(undefined2 *)((int)cursor + 0xe);
+      *(undefined2 *)(dstCursor4 + 0x14) = *(undefined2 *)((int)cursor + 0x12);
+      *(undefined2 *)(dstCursor4 + 0x16) = *(undefined2 *)((int)cursor + 0x16);
+      dstCursor4 = dstCursor4 + 0x10;
+      srcPtr = cursor + 6;
       cursor = cursor + 7;
-      *dstCursor = *pfVar1;
+      *dstCursor = *srcPtr;
       dstCursor = dstCursor + 1;
     } while ((int)cursor <= (int)(attribBuffer + 7));
     *(undefined2 *)(glContext + 0x3518) = *(undefined2 *)((int)attribBuffer + 0x3a);
@@ -4135,9 +4166,9 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
       dstCursor2 = (undefined1 *)(glContext + 0x3448);
       remaining = 0x80;
       do {
-        uVar6 = *(undefined1 *)attribBuffer;
+        copiedByte = *(undefined1 *)attribBuffer;
         attribBuffer = (float *)((int)attribBuffer + 1);
-        *dstCursor2 = uVar6;
+        *dstCursor2 = copiedByte;
         dstCursor2 = dstCursor2 + 1;
         remaining = remaining + -1;
       } while (remaining != 0);
@@ -4165,20 +4196,20 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
         glContextPtr4854 = *(int *)(glContext + 0x4854);
         remaining11 = 0x10;
         *(float *)(glContext + 0x2a0) = attribBuffer[100];
-        iVar8 = glContextPtr4854 + -0x200;
+        dstCursor11 = glContextPtr4854 + -0x200;
         *(float *)(glContext + 0x2a4) = attribBuffer[0x65];
         *(float *)(glContext + 0x2a8) = attribBuffer[0x66];
         *(float *)(glContext + 0x2ac) = attribBuffer[0x67];
-        iVar16 = glContext;
+        dstCursor4 = glContext;
         cursor2 = attribBuffer;
         do {
-          *(float *)(iVar16 + 0x1a0) = cursor2[0x20];
-          *(float *)(iVar16 + 0x1a4) = cursor2[0x21];
-          *(float *)(iVar16 + 0x1a8) = cursor2[0x22];
-          pfVar20 = cursor2 + 0x23;
+          *(float *)(dstCursor4 + 0x1a0) = cursor2[0x20];
+          *(float *)(dstCursor4 + 0x1a4) = cursor2[0x21];
+          *(float *)(dstCursor4 + 0x1a8) = cursor2[0x22];
+          srcPtr2 = cursor2 + 0x23;
           cursor2 = cursor2 + 4;
-          *(float *)(iVar16 + 0x1ac) = *pfVar20;
-          iVar16 = iVar16 + 0x10;
+          *(float *)(dstCursor4 + 0x1ac) = *srcPtr2;
+          dstCursor4 = dstCursor4 + 0x10;
           remaining11 = remaining11 + -1;
         } while (remaining11 != 0);
         dstCursor = (float *)(glContext + 0x2d0);
@@ -4200,20 +4231,20 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
         *(float *)(glContext + 0x2c8) = attribBuffer[0x6e];
         *(float *)(glContext + 0x2cc) = attribBuffer[0x6f];
         cursor4 = attribBuffer;
-        iVar16 = glContext;
+        dstCursor4 = glContext;
         do {
-          *(float *)(iVar16 + 0x120) = *cursor4;
-          *(float *)(iVar16 + 0x124) = cursor4[1];
-          *(float *)(iVar16 + 0x128) = cursor4[2];
-          *(float *)(iVar16 + 300) = cursor4[3];
-          iVar16 = iVar16 + 0x10;
-          *(float *)(iVar8 + 0x80) = cursor4[0x80];
-          *(float *)(iVar8 + 0x84) = cursor4[0x81];
-          *(float *)(iVar8 + 0x88) = cursor4[0x82];
-          pfVar20 = cursor4 + 0x83;
+          *(float *)(dstCursor4 + 0x120) = *cursor4;
+          *(float *)(dstCursor4 + 0x124) = cursor4[1];
+          *(float *)(dstCursor4 + 0x128) = cursor4[2];
+          *(float *)(dstCursor4 + 300) = cursor4[3];
+          dstCursor4 = dstCursor4 + 0x10;
+          *(float *)(dstCursor11 + 0x80) = cursor4[0x80];
+          *(float *)(dstCursor11 + 0x84) = cursor4[0x81];
+          *(float *)(dstCursor11 + 0x88) = cursor4[0x82];
+          srcPtr2 = cursor4 + 0x83;
           cursor4 = cursor4 + 4;
-          *(float *)(iVar8 + 0x8c) = *pfVar20;
-          iVar8 = iVar8 + 0x10;
+          *(float *)(dstCursor11 + 0x8c) = *srcPtr2;
+          dstCursor11 = dstCursor11 + 0x10;
           remaining12 = remaining12 + -1;
         } while (remaining12 != 0);
         *(float *)(glContext + 0x2e0) = attribBuffer[0x70];
@@ -4307,33 +4338,33 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
         uVar15 = _gleCopyPixelMapf(attribBuffer + 0x80f,glContext + 0x3268,*(int *)(attribBuffer + 0xa18),glContext + 0x3294)
         ;
         if (*attribBuffer == FLOAT_00108e54) {
-          uVar4 = *(uint *)(glContext + 0x3414) & 0xffffbfff;
+          copiedWord = *(uint *)(glContext + 0x3414) & 0xffffbfff;
         }
         else {
-          uVar4 = *(uint *)(glContext + 0x3414) | 0x4000;
+          copiedWord = *(uint *)(glContext + 0x3414) | 0x4000;
         }
-        *(uint *)(glContext + 0x3414) = uVar4;
+        *(uint *)(glContext + 0x3414) = copiedWord;
         if (attribBuffer[1] == FLOAT_00108e54) {
-          uVar4 = *(uint *)(glContext + 0x3414) & 0xffff7fff;
+          copiedWord = *(uint *)(glContext + 0x3414) & 0xffff7fff;
         }
         else {
-          uVar4 = *(uint *)(glContext + 0x3414) | 0x8000;
+          copiedWord = *(uint *)(glContext + 0x3414) | 0x8000;
         }
-        *(uint *)(glContext + 0x3414) = uVar4;
+        *(uint *)(glContext + 0x3414) = copiedWord;
         if (*(char *)(attribBuffer + 0xa19) == '\0') {
-          uVar4 = *(uint *)(glContext + 0x3414) & 0xfffffffe;
+          copiedWord = *(uint *)(glContext + 0x3414) & 0xfffffffe;
         }
         else {
-          uVar4 = *(uint *)(glContext + 0x3414) | 1;
+          copiedWord = *(uint *)(glContext + 0x3414) | 1;
         }
-        *(uint *)(glContext + 0x3414) = uVar4;
+        *(uint *)(glContext + 0x3414) = copiedWord;
         if (*(char *)((int)attribBuffer + 0x2865) == '\0') {
-          uVar4 = *(uint *)(glContext + 0x3414) & 0xfffffffd;
+          copiedWord = *(uint *)(glContext + 0x3414) & 0xfffffffd;
         }
         else {
-          uVar4 = *(uint *)(glContext + 0x3414) | 2;
+          copiedWord = *(uint *)(glContext + 0x3414) | 2;
         }
-        *(uint *)(glContext + 0x3414) = uVar4;
+        *(uint *)(glContext + 0x3414) = copiedWord;
         return uVar15;
       }
       if (attribBit != (undefined *)0x40) {
@@ -4355,70 +4386,70 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
       if (8 < (int)GH_F2U(fVar9)) {
         fVar9 = 1.12104e-44;
       }
-      iVar16 = glContext;
+      dstCursor4 = glContext;
       cursor5 = attribBuffer;
       if (0 < (int)GH_F2U(fVar9)) {
         do {
-          *(float *)(iVar16 + 0x2850) = cursor5[0x17];
-          *(float *)(iVar16 + 0x2854) = cursor5[0x18];
-          *(float *)(iVar16 + 0x2858) = cursor5[0x19];
-          *(float *)(iVar16 + 0x285c) = cursor5[0x1a];
-          *(float *)(iVar16 + 0x2820) = cursor5[0xb];
-          *(float *)(iVar16 + 0x2824) = cursor5[0xc];
-          *(float *)(iVar16 + 0x2828) = cursor5[0xd];
-          *(float *)(iVar16 + 0x282c) = cursor5[0xe];
-          *(float *)(iVar16 + 0x2830) = cursor5[0xf];
-          *(float *)(iVar16 + 0x2834) = cursor5[0x10];
-          *(float *)(iVar16 + 0x2838) = cursor5[0x11];
-          *(float *)(iVar16 + 0x283c) = cursor5[0x12];
-          *(float *)(iVar16 + 0x2840) = cursor5[0x13];
-          *(float *)(iVar16 + 0x2844) = cursor5[0x14];
-          *(float *)(iVar16 + 0x2848) = cursor5[0x15];
-          *(float *)(iVar16 + 0x284c) = cursor5[0x16];
-          *(float *)(iVar16 + 0x2860) = cursor5[0x1b];
-          *(float *)(iVar16 + 0x2864) = cursor5[0x1c];
-          *(float *)(iVar16 + 0x2868) = cursor5[0x1d];
-          *(float *)(iVar16 + 0x287c) = cursor5[0x1e];
-          *(float *)(iVar16 + 0x2890) = cursor5[0x1f];
-          *(float *)(iVar16 + 0x286c) = cursor5[0x20];
-          *(float *)(iVar16 + 0x2870) = cursor5[0x21];
-          *(float *)(iVar16 + 0x2874) = cursor5[0x22];
-          *(float *)(iVar16 + 0x2878) = cursor5[0x23];
+          *(float *)(dstCursor4 + 0x2850) = cursor5[0x17];
+          *(float *)(dstCursor4 + 0x2854) = cursor5[0x18];
+          *(float *)(dstCursor4 + 0x2858) = cursor5[0x19];
+          *(float *)(dstCursor4 + 0x285c) = cursor5[0x1a];
+          *(float *)(dstCursor4 + 0x2820) = cursor5[0xb];
+          *(float *)(dstCursor4 + 0x2824) = cursor5[0xc];
+          *(float *)(dstCursor4 + 0x2828) = cursor5[0xd];
+          *(float *)(dstCursor4 + 0x282c) = cursor5[0xe];
+          *(float *)(dstCursor4 + 0x2830) = cursor5[0xf];
+          *(float *)(dstCursor4 + 0x2834) = cursor5[0x10];
+          *(float *)(dstCursor4 + 0x2838) = cursor5[0x11];
+          *(float *)(dstCursor4 + 0x283c) = cursor5[0x12];
+          *(float *)(dstCursor4 + 0x2840) = cursor5[0x13];
+          *(float *)(dstCursor4 + 0x2844) = cursor5[0x14];
+          *(float *)(dstCursor4 + 0x2848) = cursor5[0x15];
+          *(float *)(dstCursor4 + 0x284c) = cursor5[0x16];
+          *(float *)(dstCursor4 + 0x2860) = cursor5[0x1b];
+          *(float *)(dstCursor4 + 0x2864) = cursor5[0x1c];
+          *(float *)(dstCursor4 + 0x2868) = cursor5[0x1d];
+          *(float *)(dstCursor4 + 0x287c) = cursor5[0x1e];
+          *(float *)(dstCursor4 + 0x2890) = cursor5[0x1f];
+          *(float *)(dstCursor4 + 0x286c) = cursor5[0x20];
+          *(float *)(dstCursor4 + 0x2870) = cursor5[0x21];
+          *(float *)(dstCursor4 + 0x2874) = cursor5[0x22];
+          *(float *)(dstCursor4 + 0x2878) = cursor5[0x23];
           fVar9 = GH_U2F((unsigned int)(((int)GH_F2U(fVar9) + -1)));
-          iVar16 = iVar16 + 0x80;
+          dstCursor4 = dstCursor4 + 0x80;
           cursor5 = cursor5 + 0x19;
         } while (fVar9 != 0.0);
       }
-      iVar16 = glContext;
-      iVar7 = glContext;
+      dstCursor4 = glContext;
+      dstCursor10 = glContext;
       cursor6 = attribBuffer;
       do {
-        **(float **)(iVar7 + 0x4dd0) = cursor6[0x19b];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 4) = cursor6[0x19c];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 8) = cursor6[0x19d];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 0xc) = cursor6[0x19e];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 0x10) = cursor6[0x19f];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 0x14) = cursor6[0x1a0];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 0x18) = cursor6[0x1a1];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 0x1c) = cursor6[0x1a2];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 0x20) = cursor6[0x1a3];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 0x24) = cursor6[0x1a4];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 0x28) = cursor6[0x1a5];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 0x2c) = cursor6[0x1a6];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 0x30) = cursor6[0x1a7];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 0x34) = cursor6[0x1a8];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 0x38) = cursor6[0x1a9];
-        *(float *)(*(int *)(iVar7 + 0x4dd0) + 0x3c) = cursor6[0x1aa];
-        piVar19 = (int *)(iVar7 + 0x4dd0);
-        iVar7 = iVar7 + 4;
-        *(float *)(*piVar19 + 0x40) = cursor6[0x1ae];
-        *(float *)(iVar16 + 0x2f0) = cursor6[0x1ab];
-        *(float *)(iVar16 + 0x2f4) = cursor6[0x1ac];
-        pfVar20 = cursor6 + 0x1ad;
+        **(float **)(dstCursor10 + 0x4dd0) = cursor6[0x19b];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 4) = cursor6[0x19c];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 8) = cursor6[0x19d];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 0xc) = cursor6[0x19e];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 0x10) = cursor6[0x19f];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 0x14) = cursor6[0x1a0];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 0x18) = cursor6[0x1a1];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 0x1c) = cursor6[0x1a2];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 0x20) = cursor6[0x1a3];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 0x24) = cursor6[0x1a4];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 0x28) = cursor6[0x1a5];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 0x2c) = cursor6[0x1a6];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 0x30) = cursor6[0x1a7];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 0x34) = cursor6[0x1a8];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 0x38) = cursor6[0x1a9];
+        *(float *)(*(int *)(dstCursor10 + 0x4dd0) + 0x3c) = cursor6[0x1aa];
+        dstPtr = (int *)(dstCursor10 + 0x4dd0);
+        dstCursor10 = dstCursor10 + 4;
+        *(float *)(*dstPtr + 0x40) = cursor6[0x1ae];
+        *(float *)(dstCursor4 + 0x2f0) = cursor6[0x1ab];
+        *(float *)(dstCursor4 + 0x2f4) = cursor6[0x1ac];
+        srcPtr2 = cursor6 + 0x1ad;
         cursor6 = cursor6 + 0x14;
-        *(float *)(iVar16 + 0x2f8) = *pfVar20;
-        iVar16 = iVar16 + 0x10;
-      } while (iVar16 <= glContext + 0x10);
+        *(float *)(dstCursor4 + 0x2f8) = *srcPtr2;
+        dstCursor4 = dstCursor4 + 0x10;
+      } while (dstCursor4 <= glContext + 0x10);
       *(float *)(glContext + 0x34f4) = *attribBuffer;
       return glContext;
     }
@@ -4439,7 +4470,7 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
     *(undefined1 *)(glContext + 0x312a) = *(undefined1 *)((int)attribBuffer + 0xf);
     *(undefined8 *)(glContext + 0x312c) = *(undefined8 *)(attribBuffer + 4);
     *(undefined8 *)(glContext + 0x3134) = *(undefined8 *)(attribBuffer + 6);
-    uVar6 = *(undefined1 *)((int)attribBuffer + 0xe);
+    copiedByte = *(undefined1 *)((int)attribBuffer + 0xe);
   }
   else {
     if (attribBit == (undefined *)0x8000) {
@@ -4456,61 +4487,61 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
     if ((undefined *)0x8000 < attribBit) {
       if (attribBit == (undefined *)0x40000) {
         remaining16 = 8;
-        iVar16 = glContext;
+        dstCursor4 = glContext;
         cursor7 = attribBuffer;
         do {
-          *(float *)(iVar16 + 0x3cfc) = cursor7[1];
-          *(float *)(iVar16 + 0x3d00) = cursor7[2];
-          *(float *)(iVar16 + 0x3d04) = cursor7[3];
-          *(float *)(iVar16 + 0x3d08) = cursor7[4];
-          *(float *)(iVar16 + 0x3cec) = cursor7[5];
-          *(float *)(iVar16 + 0x3cf0) = cursor7[6];
-          *(float *)(iVar16 + 0x3cf4) = cursor7[7];
-          *(float *)(iVar16 + 0x3cf8) = cursor7[8];
-          *(float *)(iVar16 + 0x3d20) = cursor7[0xb];
-          *(float *)(iVar16 + 0x3d24) = cursor7[0xc];
-          *(float *)(iVar16 + 0x3d28) = cursor7[0xd];
-          *(float *)(iVar16 + 0x3d2c) = cursor7[0xe];
-          *(float *)(iVar16 + 0x3d10) = cursor7[0xf];
-          *(float *)(iVar16 + 0x3d14) = cursor7[0x10];
-          *(float *)(iVar16 + 0x3d18) = cursor7[0x11];
-          *(float *)(iVar16 + 0x3d1c) = cursor7[0x12];
-          *(float *)(iVar16 + 0x3d44) = cursor7[0x15];
-          *(float *)(iVar16 + 0x3d48) = cursor7[0x16];
-          *(float *)(iVar16 + 0x3d4c) = cursor7[0x17];
-          *(float *)(iVar16 + 0x3d50) = cursor7[0x18];
-          *(float *)(iVar16 + 0x3d34) = cursor7[0x19];
-          *(float *)(iVar16 + 0x3d38) = cursor7[0x1a];
-          *(float *)(iVar16 + 0x3d3c) = cursor7[0x1b];
-          *(float *)(iVar16 + 0x3d40) = cursor7[0x1c];
-          *(float *)(iVar16 + 0x3d68) = cursor7[0x1f];
-          *(float *)(iVar16 + 0x3d6c) = cursor7[0x20];
-          *(float *)(iVar16 + 0x3d70) = cursor7[0x21];
-          *(float *)(iVar16 + 0x3d74) = cursor7[0x22];
-          *(float *)(iVar16 + 0x3d58) = cursor7[0x23];
-          *(float *)(iVar16 + 0x3d5c) = cursor7[0x24];
-          *(float *)(iVar16 + 0x3d60) = cursor7[0x25];
-          *(float *)(iVar16 + 0x3d64) = cursor7[0x26];
-          *(undefined1 *)(iVar16 + 0x3d78) = *(undefined1 *)(cursor7 + 9);
-          *(undefined1 *)(iVar16 + 0x3d79) = *(undefined1 *)(cursor7 + 0x13);
-          *(undefined1 *)(iVar16 + 0x3d7a) = *(undefined1 *)(cursor7 + 0x1d);
-          *(undefined1 *)(iVar16 + 0x3d7b) = *(undefined1 *)(cursor7 + 0x27);
-          *(undefined2 *)(iVar16 + 0x3ce8) = *(undefined2 *)((int)cursor7 + 2);
-          *(undefined2 *)(iVar16 + 0x3d0c) = *(undefined2 *)((int)cursor7 + 0x2a);
-          *(undefined2 *)(iVar16 + 0x3d30) = *(undefined2 *)((int)cursor7 + 0x52);
-          puVar12 = (undefined2 *)((int)cursor7 + 0x7a);
+          *(float *)(dstCursor4 + 0x3cfc) = cursor7[1];
+          *(float *)(dstCursor4 + 0x3d00) = cursor7[2];
+          *(float *)(dstCursor4 + 0x3d04) = cursor7[3];
+          *(float *)(dstCursor4 + 0x3d08) = cursor7[4];
+          *(float *)(dstCursor4 + 0x3cec) = cursor7[5];
+          *(float *)(dstCursor4 + 0x3cf0) = cursor7[6];
+          *(float *)(dstCursor4 + 0x3cf4) = cursor7[7];
+          *(float *)(dstCursor4 + 0x3cf8) = cursor7[8];
+          *(float *)(dstCursor4 + 0x3d20) = cursor7[0xb];
+          *(float *)(dstCursor4 + 0x3d24) = cursor7[0xc];
+          *(float *)(dstCursor4 + 0x3d28) = cursor7[0xd];
+          *(float *)(dstCursor4 + 0x3d2c) = cursor7[0xe];
+          *(float *)(dstCursor4 + 0x3d10) = cursor7[0xf];
+          *(float *)(dstCursor4 + 0x3d14) = cursor7[0x10];
+          *(float *)(dstCursor4 + 0x3d18) = cursor7[0x11];
+          *(float *)(dstCursor4 + 0x3d1c) = cursor7[0x12];
+          *(float *)(dstCursor4 + 0x3d44) = cursor7[0x15];
+          *(float *)(dstCursor4 + 0x3d48) = cursor7[0x16];
+          *(float *)(dstCursor4 + 0x3d4c) = cursor7[0x17];
+          *(float *)(dstCursor4 + 0x3d50) = cursor7[0x18];
+          *(float *)(dstCursor4 + 0x3d34) = cursor7[0x19];
+          *(float *)(dstCursor4 + 0x3d38) = cursor7[0x1a];
+          *(float *)(dstCursor4 + 0x3d3c) = cursor7[0x1b];
+          *(float *)(dstCursor4 + 0x3d40) = cursor7[0x1c];
+          *(float *)(dstCursor4 + 0x3d68) = cursor7[0x1f];
+          *(float *)(dstCursor4 + 0x3d6c) = cursor7[0x20];
+          *(float *)(dstCursor4 + 0x3d70) = cursor7[0x21];
+          *(float *)(dstCursor4 + 0x3d74) = cursor7[0x22];
+          *(float *)(dstCursor4 + 0x3d58) = cursor7[0x23];
+          *(float *)(dstCursor4 + 0x3d5c) = cursor7[0x24];
+          *(float *)(dstCursor4 + 0x3d60) = cursor7[0x25];
+          *(float *)(dstCursor4 + 0x3d64) = cursor7[0x26];
+          *(undefined1 *)(dstCursor4 + 0x3d78) = *(undefined1 *)(cursor7 + 9);
+          *(undefined1 *)(dstCursor4 + 0x3d79) = *(undefined1 *)(cursor7 + 0x13);
+          *(undefined1 *)(dstCursor4 + 0x3d7a) = *(undefined1 *)(cursor7 + 0x1d);
+          *(undefined1 *)(dstCursor4 + 0x3d7b) = *(undefined1 *)(cursor7 + 0x27);
+          *(undefined2 *)(dstCursor4 + 0x3ce8) = *(undefined2 *)((int)cursor7 + 2);
+          *(undefined2 *)(dstCursor4 + 0x3d0c) = *(undefined2 *)((int)cursor7 + 0x2a);
+          *(undefined2 *)(dstCursor4 + 0x3d30) = *(undefined2 *)((int)cursor7 + 0x52);
+          srcPtr3 = (undefined2 *)((int)cursor7 + 0x7a);
           cursor7 = cursor7 + 0x28;
-          *(undefined2 *)(iVar16 + 0x3d54) = *puVar12;
-          iVar16 = iVar16 + 0x94;
+          *(undefined2 *)(dstCursor4 + 0x3d54) = *srcPtr3;
+          dstCursor4 = dstCursor4 + 0x94;
           remaining16 = remaining16 + -1;
         } while (remaining16 != 0);
         loopIndex = 0;
-        iVar26 = glContext + 0x3530;
+        dstCursor8 = glContext + 0x3530;
         loopIndex4 = 0;
         loopIndex5 = 0;
-        iVar16 = glContext;
+        dstCursor4 = glContext;
         do {
-          *(undefined4 *)(iVar26 + 4) = *(undefined4 *)((int)attribBuffer + loopIndex5 + 0x710);
+          *(undefined4 *)(dstCursor8 + 4) = *(undefined4 *)((int)attribBuffer + loopIndex5 + 0x710);
           if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
             _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
           }
@@ -4527,150 +4558,150 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
           }
           remaining13 = 5;
           srcCursor = (int *)(glContext + loopIndex4 * 4 + 0x5154);
-          puVar14 = (undefined1 *)(loopIndex5 + (int)attribBuffer);
+          srcCursor8 = (undefined1 *)(loopIndex5 + (int)attribBuffer);
           do {
             iVar23 = *srcCursor;
             srcCursor = srcCursor + 1;
-            *(undefined4 *)(iVar23 + 0x50) = *(undefined4 *)(puVar14 + 0x514);
-            *(undefined4 *)(iVar23 + 0x54) = *(undefined4 *)(puVar14 + 0x518);
-            *(undefined4 *)(iVar23 + 0x58) = *(undefined4 *)(puVar14 + 0x51c);
-            *(undefined4 *)(iVar23 + 0x5c) = *(undefined4 *)(puVar14 + 0x520);
-            *(undefined2 *)(iVar23 + 0x4a) = *(undefined2 *)(puVar14 + 0x502);
-            *(undefined2 *)(iVar23 + 0x4c) = *(undefined2 *)(puVar14 + 0x506);
-            *(undefined2 *)(iVar23 + 0x44) = *(undefined2 *)(puVar14 + 0x50a);
-            *(undefined2 *)(iVar23 + 0x46) = *(undefined2 *)(puVar14 + 0x50e);
-            *(undefined2 *)(iVar23 + 0x48) = *(undefined2 *)(puVar14 + 0x512);
-            *(undefined4 *)(iVar23 + 0x38) = *(undefined4 *)(puVar14 + 0x528);
-            *(undefined4 *)(iVar23 + 0x60) = *(undefined4 *)(puVar14 + 0x52c);
-            *(undefined4 *)(iVar23 + 100) = *(undefined4 *)(puVar14 + 0x530);
-            *(undefined4 *)(iVar23 + 0x68) = *(undefined4 *)(puVar14 + 0x534);
-            *(undefined4 *)(iVar23 + 0x6c) = *(undefined4 *)(puVar14 + 0x538);
-            *(undefined2 *)(iVar23 + 0x70) = *(undefined2 *)(puVar14 + 0x53e);
-            *(undefined2 *)(iVar23 + 0x72) = *(undefined2 *)(puVar14 + 0x542);
-            *(undefined2 *)(iVar23 + 0x76) = *(undefined2 *)(puVar14 + 0x546);
-            *(undefined2 *)(iVar23 + 0x74) = *(undefined2 *)(puVar14 + 0x54a);
-            *(undefined4 *)(iVar23 + 0x78) = *(undefined4 *)(puVar14 + 0x54c);
-            puVar12 = (undefined2 *)(puVar14 + 0x552);
-            puVar14 = puVar14 + 0x58;
-            *(undefined2 *)(iVar23 + 0x7c) = *puVar12;
+            *(undefined4 *)(iVar23 + 0x50) = *(undefined4 *)(srcCursor8 + 0x514);
+            *(undefined4 *)(iVar23 + 0x54) = *(undefined4 *)(srcCursor8 + 0x518);
+            *(undefined4 *)(iVar23 + 0x58) = *(undefined4 *)(srcCursor8 + 0x51c);
+            *(undefined4 *)(iVar23 + 0x5c) = *(undefined4 *)(srcCursor8 + 0x520);
+            *(undefined2 *)(iVar23 + 0x4a) = *(undefined2 *)(srcCursor8 + 0x502);
+            *(undefined2 *)(iVar23 + 0x4c) = *(undefined2 *)(srcCursor8 + 0x506);
+            *(undefined2 *)(iVar23 + 0x44) = *(undefined2 *)(srcCursor8 + 0x50a);
+            *(undefined2 *)(iVar23 + 0x46) = *(undefined2 *)(srcCursor8 + 0x50e);
+            *(undefined2 *)(iVar23 + 0x48) = *(undefined2 *)(srcCursor8 + 0x512);
+            *(undefined4 *)(iVar23 + 0x38) = *(undefined4 *)(srcCursor8 + 0x528);
+            *(undefined4 *)(iVar23 + 0x60) = *(undefined4 *)(srcCursor8 + 0x52c);
+            *(undefined4 *)(iVar23 + 100) = *(undefined4 *)(srcCursor8 + 0x530);
+            *(undefined4 *)(iVar23 + 0x68) = *(undefined4 *)(srcCursor8 + 0x534);
+            *(undefined4 *)(iVar23 + 0x6c) = *(undefined4 *)(srcCursor8 + 0x538);
+            *(undefined2 *)(iVar23 + 0x70) = *(undefined2 *)(srcCursor8 + 0x53e);
+            *(undefined2 *)(iVar23 + 0x72) = *(undefined2 *)(srcCursor8 + 0x542);
+            *(undefined2 *)(iVar23 + 0x76) = *(undefined2 *)(srcCursor8 + 0x546);
+            *(undefined2 *)(iVar23 + 0x74) = *(undefined2 *)(srcCursor8 + 0x54a);
+            *(undefined4 *)(iVar23 + 0x78) = *(undefined4 *)(srcCursor8 + 0x54c);
+            srcPtr3 = (undefined2 *)(srcCursor8 + 0x552);
+            srcCursor8 = srcCursor8 + 0x58;
+            *(undefined2 *)(iVar23 + 0x7c) = *srcPtr3;
             remaining13 = remaining13 + -1;
           } while (remaining13 != 0);
           remaining14 = 0;
-          puVar14 = (undefined1 *)(loopIndex5 + (int)attribBuffer);
+          srcCursor8 = (undefined1 *)(loopIndex5 + (int)attribBuffer);
           do {
             remaining14 = remaining14 + -1;
-            *(undefined4 *)(iVar16 + 0x3524) = *(undefined4 *)(puVar14 + 0x6b8);
-            *(undefined4 *)(iVar16 + 0x3528) = *(undefined4 *)(puVar14 + 0x6bc);
-            *(undefined4 *)(iVar16 + 0x352c) = *(undefined4 *)(puVar14 + 0x6c0);
-            *(undefined4 *)(iVar16 + 0x3530) = *(undefined4 *)(puVar14 + 0x6c4);
-            *(undefined2 *)(iVar26 + 8) = *(undefined2 *)(puVar14 + 0x6ca);
-            *(undefined2 *)(iVar26 + 0xc) = *(undefined2 *)(puVar14 + 0x6ce);
-            *(undefined2 *)(iVar26 + 0xe) = *(undefined2 *)(puVar14 + 0x6d2);
-            *(undefined2 *)(iVar26 + 0x10) = *(undefined2 *)(puVar14 + 0x6d6);
-            *(undefined2 *)(iVar26 + 0x12) = *(undefined2 *)(puVar14 + 0x6da);
-            *(undefined2 *)(iVar16 + 0x3544) = *(undefined2 *)(puVar14 + 0x6de);
-            *(undefined2 *)(iVar16 + 0x3546) = *(undefined2 *)(puVar14 + 0x6e2);
-            *(undefined2 *)(iVar16 + 0x3548) = *(undefined2 *)(puVar14 + 0x6e6);
-            *(undefined2 *)(iVar16 + 0x354a) = *(undefined2 *)(puVar14 + 0x6ea);
-            *(undefined2 *)(iVar16 + 0x354c) = *(undefined2 *)(puVar14 + 0x6ee);
-            *(undefined2 *)(iVar16 + 0x354e) = *(undefined2 *)(puVar14 + 0x6f2);
-            *(undefined2 *)(iVar16 + 0x3550) = *(undefined2 *)(puVar14 + 0x6f6);
-            *(undefined2 *)(iVar16 + 0x3552) = *(undefined2 *)(puVar14 + 0x6fa);
-            *(undefined2 *)(iVar16 + 0x3554) = *(undefined2 *)(puVar14 + 0x6fe);
-            *(undefined2 *)(iVar16 + 0x3556) = *(undefined2 *)(puVar14 + 0x702);
-            *(undefined4 *)(iVar16 + 0x3558) = *(undefined4 *)(puVar14 + 0x704);
-            *(undefined4 *)(iVar16 + 0x355c) = *(undefined4 *)(puVar14 + 0x708);
-            puVar25 = (undefined4 *)(puVar14 + 0x70c);
-            puVar14 = puVar14 + 0x58;
-            *(undefined4 *)(iVar16 + 0x3560) = *puVar25;
+            *(undefined4 *)(dstCursor4 + 0x3524) = *(undefined4 *)(srcCursor8 + 0x6b8);
+            *(undefined4 *)(dstCursor4 + 0x3528) = *(undefined4 *)(srcCursor8 + 0x6bc);
+            *(undefined4 *)(dstCursor4 + 0x352c) = *(undefined4 *)(srcCursor8 + 0x6c0);
+            *(undefined4 *)(dstCursor4 + 0x3530) = *(undefined4 *)(srcCursor8 + 0x6c4);
+            *(undefined2 *)(dstCursor8 + 8) = *(undefined2 *)(srcCursor8 + 0x6ca);
+            *(undefined2 *)(dstCursor8 + 0xc) = *(undefined2 *)(srcCursor8 + 0x6ce);
+            *(undefined2 *)(dstCursor8 + 0xe) = *(undefined2 *)(srcCursor8 + 0x6d2);
+            *(undefined2 *)(dstCursor8 + 0x10) = *(undefined2 *)(srcCursor8 + 0x6d6);
+            *(undefined2 *)(dstCursor8 + 0x12) = *(undefined2 *)(srcCursor8 + 0x6da);
+            *(undefined2 *)(dstCursor4 + 0x3544) = *(undefined2 *)(srcCursor8 + 0x6de);
+            *(undefined2 *)(dstCursor4 + 0x3546) = *(undefined2 *)(srcCursor8 + 0x6e2);
+            *(undefined2 *)(dstCursor4 + 0x3548) = *(undefined2 *)(srcCursor8 + 0x6e6);
+            *(undefined2 *)(dstCursor4 + 0x354a) = *(undefined2 *)(srcCursor8 + 0x6ea);
+            *(undefined2 *)(dstCursor4 + 0x354c) = *(undefined2 *)(srcCursor8 + 0x6ee);
+            *(undefined2 *)(dstCursor4 + 0x354e) = *(undefined2 *)(srcCursor8 + 0x6f2);
+            *(undefined2 *)(dstCursor4 + 0x3550) = *(undefined2 *)(srcCursor8 + 0x6f6);
+            *(undefined2 *)(dstCursor4 + 0x3552) = *(undefined2 *)(srcCursor8 + 0x6fa);
+            *(undefined2 *)(dstCursor4 + 0x3554) = *(undefined2 *)(srcCursor8 + 0x6fe);
+            *(undefined2 *)(dstCursor4 + 0x3556) = *(undefined2 *)(srcCursor8 + 0x702);
+            *(undefined4 *)(dstCursor4 + 0x3558) = *(undefined4 *)(srcCursor8 + 0x704);
+            *(undefined4 *)(dstCursor4 + 0x355c) = *(undefined4 *)(srcCursor8 + 0x708);
+            srcPtr4 = (undefined4 *)(srcCursor8 + 0x70c);
+            srcCursor8 = srcCursor8 + 0x58;
+            *(undefined4 *)(dstCursor4 + 0x3560) = *srcPtr4;
           } while (-1 < remaining14);
           loopIndex = loopIndex + 1;
           loopIndex5 = loopIndex5 + 0x214;
           loopIndex4 = loopIndex4 + 5;
-          iVar16 = iVar16 + 0x7c;
-          iVar26 = iVar26 + 0x7c;
+          dstCursor4 = dstCursor4 + 0x7c;
+          dstCursor8 = dstCursor8 + 0x7c;
         } while (loopIndex < 0x10);
         cursor8 = attribBuffer + 0x990;
-        iVar16 = glContext + 0x41f0;
+        dstCursor4 = glContext + 0x41f0;
         remaining17 = 1;
         *(float *)(glContext + 0x41fc) = attribBuffer[0x991];
         do {
           remaining17 = remaining17 + -1;
-          *(float *)(iVar16 + 0x10) = cursor8[2];
-          *(float *)(iVar16 + 0x14) = cursor8[3];
-          *(float *)(iVar16 + 0x18) = cursor8[4];
-          pfVar20 = cursor8 + 5;
+          *(float *)(dstCursor4 + 0x10) = cursor8[2];
+          *(float *)(dstCursor4 + 0x14) = cursor8[3];
+          *(float *)(dstCursor4 + 0x18) = cursor8[4];
+          srcPtr2 = cursor8 + 5;
           cursor8 = cursor8 + 4;
-          *(float *)(iVar16 + 0x1c) = *pfVar20;
-          iVar16 = iVar16 + 0x10;
+          *(float *)(dstCursor4 + 0x1c) = *srcPtr2;
+          dstCursor4 = dstCursor4 + 0x10;
         } while (-1 < remaining17);
         loopIndex6 = 0;
         loopIndex3 = 0;
-        iVar16 = glContext;
-        iVar7 = glContext;
+        dstCursor4 = glContext;
+        dstCursor10 = glContext;
         cursor9 = attribBuffer;
         do {
           loopIndex2 = 0;
-          iVar22 = glContext + loopIndex3 * 8;
+          dstCursor6 = glContext + loopIndex3 * 8;
           cursor16 = cursor9 + 0x9bc;
-          iVar27 = iVar16 + 0x4270;
-          iVar23 = iVar7 + 0x4230;
+          dstCursor9 = dstCursor4 + 0x4270;
+          dstCursor7 = dstCursor10 + 0x4230;
           srcCursor3 = (undefined1 *)(loopIndex6 + (int)attribBuffer);
           do {
             cursor17 = srcCursor3 + 0x2660;
             remaining15 = 4;
-            iVar18 = iVar22 + 0x4210;
+            dstCursor5 = dstCursor6 + 0x4210;
             do {
-              *(undefined2 *)(iVar18 + 0x10) = *(undefined2 *)(cursor17 + 10);
-              *(undefined2 *)(iVar18 + 0x12) = *(undefined2 *)(cursor17 + 0xe);
-              puVar12 = (undefined2 *)(cursor17 + 0x12);
+              *(undefined2 *)(dstCursor5 + 0x10) = *(undefined2 *)(cursor17 + 10);
+              *(undefined2 *)(dstCursor5 + 0x12) = *(undefined2 *)(cursor17 + 0xe);
+              srcPtr3 = (undefined2 *)(cursor17 + 0x12);
               cursor17 = cursor17 + 0xc;
-              *(undefined2 *)(iVar18 + 0x14) = *puVar12;
-              iVar18 = iVar18 + 8;
+              *(undefined2 *)(dstCursor5 + 0x14) = *srcPtr3;
+              dstCursor5 = dstCursor5 + 8;
               remaining15 = remaining15 + -1;
             } while (remaining15 != 0);
             loopIndex2 = loopIndex2 + 1;
-            iVar22 = iVar22 + 0x30;
-            *(undefined1 *)(iVar23 + 0x10) = srcCursor3[0x2698];
-            *(undefined1 *)(iVar23 + 0x11) = srcCursor3[0x2699];
-            *(undefined1 *)(iVar23 + 0x12) = srcCursor3[0x269a];
-            *(undefined2 *)(iVar23 + 0x14) = *(undefined2 *)(srcCursor3 + 0x269e);
-            *(undefined2 *)(iVar23 + 0x16) = *(undefined2 *)(srcCursor3 + 0x26a2);
-            *(undefined2 *)(iVar23 + 0x18) = *(undefined2 *)(srcCursor3 + 0x26a6);
-            *(undefined2 *)(iVar23 + 0x1a) = *(undefined2 *)(srcCursor3 + 0x26aa);
-            puVar12 = (undefined2 *)(srcCursor3 + 0x26ae);
+            dstCursor6 = dstCursor6 + 0x30;
+            *(undefined1 *)(dstCursor7 + 0x10) = srcCursor3[0x2698];
+            *(undefined1 *)(dstCursor7 + 0x11) = srcCursor3[0x2699];
+            *(undefined1 *)(dstCursor7 + 0x12) = srcCursor3[0x269a];
+            *(undefined2 *)(dstCursor7 + 0x14) = *(undefined2 *)(srcCursor3 + 0x269e);
+            *(undefined2 *)(dstCursor7 + 0x16) = *(undefined2 *)(srcCursor3 + 0x26a2);
+            *(undefined2 *)(dstCursor7 + 0x18) = *(undefined2 *)(srcCursor3 + 0x26a6);
+            *(undefined2 *)(dstCursor7 + 0x1a) = *(undefined2 *)(srcCursor3 + 0x26aa);
+            srcPtr3 = (undefined2 *)(srcCursor3 + 0x26ae);
             srcCursor3 = srcCursor3 + 0x48;
-            *(undefined2 *)(iVar23 + 0x1c) = *puVar12;
-            iVar23 = iVar23 + 0x30;
-            *(float *)(iVar27 + 0x10) = cursor16[2];
-            *(float *)(iVar27 + 0x14) = cursor16[3];
-            *(float *)(iVar27 + 0x18) = cursor16[4];
-            pfVar1 = cursor16 + 5;
+            *(undefined2 *)(dstCursor7 + 0x1c) = *srcPtr3;
+            dstCursor7 = dstCursor7 + 0x30;
+            *(float *)(dstCursor9 + 0x10) = cursor16[2];
+            *(float *)(dstCursor9 + 0x14) = cursor16[3];
+            *(float *)(dstCursor9 + 0x18) = cursor16[4];
+            srcPtr = cursor16 + 5;
             cursor16 = cursor16 + 4;
-            *(float *)(iVar27 + 0x1c) = *pfVar1;
-            iVar27 = iVar27 + 0x10;
+            *(float *)(dstCursor9 + 0x1c) = *srcPtr;
+            dstCursor9 = dstCursor9 + 0x10;
           } while (loopIndex2 < 2);
-          iVar7 = iVar7 + 0x80;
+          dstCursor10 = dstCursor10 + 0x80;
           loopIndex3 = loopIndex3 + 0x10;
-          iVar16 = iVar16 + 0x80;
+          dstCursor4 = dstCursor4 + 0x80;
           loopIndex6 = loopIndex6 + 0xb0;
           cursor9 = cursor9 + 0x2c;
-        } while (iVar7 <= glContext + 0x380);
+        } while (dstCursor10 <= glContext + 0x380);
         cursor10 = attribBuffer + 0xaf8;
-        iVar7 = glContext + 0x4610;
+        dstCursor10 = glContext + 0x4610;
         *(undefined1 *)(glContext + 0x4620) = *(undefined1 *)(attribBuffer + 0xafa);
         remaining18 = 7;
         do {
-          *(undefined2 *)(iVar7 + 0x14) = *(undefined2 *)((int)cursor10 + 0xe);
-          *(undefined2 *)(iVar7 + 0x16) = *(undefined2 *)((int)cursor10 + 0x12);
-          puVar12 = (undefined2 *)((int)cursor10 + 0x16);
+          *(undefined2 *)(dstCursor10 + 0x14) = *(undefined2 *)((int)cursor10 + 0xe);
+          *(undefined2 *)(dstCursor10 + 0x16) = *(undefined2 *)((int)cursor10 + 0x12);
+          srcPtr3 = (undefined2 *)((int)cursor10 + 0x16);
           cursor10 = cursor10 + 3;
-          *(undefined2 *)(iVar7 + 0x18) = *puVar12;
-          iVar7 = iVar7 + 8;
+          *(undefined2 *)(dstCursor10 + 0x18) = *srcPtr3;
+          dstCursor10 = dstCursor10 + 8;
           remaining18 = remaining18 + -1;
         } while (remaining18 != 0);
         *(int *)(glContext + 0x53d4) = (int)GH_F2U((float)(attribBuffer[0x990])) + -0x84c0;
-        return iVar16;
+        return dstCursor4;
       }
       if ((undefined *)0x40000 < attribBit) {
         if (attribBit == (undefined *)0x80000) {
@@ -4713,25 +4744,25 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
             *(undefined1 *)(glContext + loopIndex7 + 0x7524) = 0;
           }
           else {
-            cVar5 = '\x04';
+            derivedByte = '\x04';
             if (*(int *)(glContext + 0x7450) != 0) {
-              cVar5 = (char)((unsigned char *)0x9da8)[loopIndex7 + *(int *)(glContext + 0x7450)]<< 2
+              derivedByte = (char)((unsigned char *)0x9da8)[loopIndex7 + *(int *)(glContext + 0x7450)]<< 2
               ;
             }
-            *(char *)(glContext + loopIndex7 + 0x7524) = cVar5;
+            *(char *)(glContext + loopIndex7 + 0x7524) = derivedByte;
           }
-          cVar5 = '\0';
+          derivedByte = '\0';
           if (((uint)GH_F2U(fVar10) & 1 << (loopIndex7 & 0x3f)) != 0) {
-            cVar5 = '\x04';
+            derivedByte = '\x04';
             if (*(int *)(glContext + 0x7450) != 0) {
-              cVar5 = *(char *)(loopIndex7 + *(int *)(glContext + 0x7450) + 0x9db8) << 2;
+              derivedByte = *(char *)(loopIndex7 + *(int *)(glContext + 0x7450) + 0x9db8) << 2;
             }
           }
-          *(char *)(glContext + loopIndex7 + 0x7564) = cVar5;
+          *(char *)(glContext + loopIndex7 + 0x7564) = derivedByte;
           loopIndex7 = loopIndex7 + 1;
           remaining3 = remaining3 + -1;
         } while (remaining3 != 0);
-        uVar6 = 0xc;
+        derivedByte2 = 0xc;
         *(undefined1 *)(glContext + 0x74e0) = *(undefined1 *)(attribBuffer + 4);
         *(undefined1 *)(glContext + 0x74e1) = *(undefined1 *)((int)attribBuffer + 0x11);
         *(undefined1 *)(glContext + 0x74e2) = *(undefined1 *)((int)attribBuffer + 0x12);
@@ -4752,42 +4783,42 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
         *(undefined1 *)(glContext + 0x74f1) = *(undefined1 *)(attribBuffer + 0x10);
         *(undefined1 *)(glContext + 0x74f2) = *(undefined1 *)(attribBuffer + 0x11);
         if (*(char *)(glContext + 0x74e4) == '\0') {
-          uVar6 = 0;
+          derivedByte2 = 0;
         }
-        *(undefined1 *)(glContext + 0x7515) = uVar6;
+        *(undefined1 *)(glContext + 0x7515) = derivedByte2;
         *(byte *)(glContext + 0x7516) = (byte)(-(uint)*(byte *)(glContext + 0x74e2) >> 0x1b) & 0x10;
-        bVar13 = 0x10;
+        derivedByte3 = 0x10;
         if (((*(char *)(glContext + 0x74e8) == '\0') &&
-            (bVar13 = 0xc, *(char *)(glContext + 0x74e7) == '\0')) &&
-           (bVar13 = 8, *(char *)(glContext + 0x74e6) == '\0')) {
-          bVar13 = (byte)(-(uint)*(byte *)(glContext + 0x74e5) >> 0x1d) & 4;
+            (derivedByte3 = 0xc, *(char *)(glContext + 0x74e7) == '\0')) &&
+           (derivedByte3 = 8, *(char *)(glContext + 0x74e6) == '\0')) {
+          derivedByte3 = (byte)(-(uint)*(byte *)(glContext + 0x74e5) >> 0x1d) & 4;
         }
-        *(byte *)(glContext + 0x751c) = bVar13;
-        uVar6 = 0x10;
+        *(byte *)(glContext + 0x751c) = derivedByte3;
+        derivedByte2 = 0x10;
         if ((*(char *)(glContext + 0x74e1) == '\0') &&
-           (uVar6 = 0xc, *(char *)(glContext + 0x74e0) == '\0')) {
-          uVar6 = 0;
+           (derivedByte2 = 0xc, *(char *)(glContext + 0x74e0) == '\0')) {
+          derivedByte2 = 0;
         }
-        *(undefined1 *)(glContext + 0x7514) = uVar6;
+        *(undefined1 *)(glContext + 0x7514) = derivedByte2;
         if ((*(char *)(glContext + 0x74ed) != '\0') ||
-           (uVar6 = 0, *(char *)(glContext + 0x74f2) != '\0')) {
-          uVar6 = 0xc;
+           (derivedByte2 = 0, *(char *)(glContext + 0x74f2) != '\0')) {
+          derivedByte2 = 0xc;
         }
-        *(undefined1 *)(glContext + 0x7555) = uVar6;
+        *(undefined1 *)(glContext + 0x7555) = derivedByte2;
         *(byte *)(glContext + 0x7556) = (byte)(-(uint)*(byte *)(glContext + 0x74eb) >> 0x1b) & 0x10;
-        bVar13 = 0x10;
+        derivedByte3 = 0x10;
         if (((*(char *)(glContext + 0x74f1) == '\0') &&
-            (bVar13 = 0xc, *(char *)(glContext + 0x74f0) == '\0')) &&
-           (bVar13 = 8, *(char *)(glContext + 0x74ef) == '\0')) {
-          bVar13 = (byte)(-(uint)*(byte *)(glContext + 0x74ee) >> 0x1d) & 4;
+            (derivedByte3 = 0xc, *(char *)(glContext + 0x74f0) == '\0')) &&
+           (derivedByte3 = 8, *(char *)(glContext + 0x74ef) == '\0')) {
+          derivedByte3 = (byte)(-(uint)*(byte *)(glContext + 0x74ee) >> 0x1d) & 4;
         }
-        *(byte *)(glContext + 0x755c) = bVar13;
-        uVar6 = 0x10;
+        *(byte *)(glContext + 0x755c) = derivedByte3;
+        derivedByte2 = 0x10;
         if ((*(char *)(glContext + 0x74ea) == '\0') &&
-           (uVar6 = 0xc, *(char *)(glContext + 0x74e9) == '\0')) {
-          uVar6 = 0;
+           (derivedByte2 = 0xc, *(char *)(glContext + 0x74e9) == '\0')) {
+          derivedByte2 = 0;
         }
-        *(undefined1 *)(glContext + 0x7554) = uVar6;
+        *(undefined1 *)(glContext + 0x7554) = derivedByte2;
         puVar3 = PTR__gleSetVertexEval2Func_00112068;
         *(undefined **)(glContext + 0x4898) = PTR__gleSetVertexEval1Func_0011206c;
         *(undefined **)(glContext + 0x489c) = puVar3;
@@ -4814,15 +4845,15 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
       *(float *)(glContext + 0x4188) = attribBuffer[0x80a];
       if (0 < (int)GH_F2U(fVar9)) {
         cursor11 = attribBuffer + 0x808;
-        iVar16 = glContext + 0x4180;
+        dstCursor4 = glContext + 0x4180;
         do {
-          *(float *)(iVar16 + 0xc) = cursor11[3];
-          *(float *)(iVar16 + 0x10) = cursor11[4];
-          *(float *)(iVar16 + 0x14) = cursor11[5];
-          pfVar20 = cursor11 + 6;
+          *(float *)(dstCursor4 + 0xc) = cursor11[3];
+          *(float *)(dstCursor4 + 0x10) = cursor11[4];
+          *(float *)(dstCursor4 + 0x14) = cursor11[5];
+          srcPtr2 = cursor11 + 6;
           cursor11 = cursor11 + 4;
-          *(float *)(iVar16 + 0x18) = *pfVar20;
-          iVar16 = iVar16 + 0x10;
+          *(float *)(dstCursor4 + 0x18) = *srcPtr2;
+          dstCursor4 = dstCursor4 + 0x10;
           fVar9 = GH_U2F((unsigned int)(((int)GH_F2U(fVar9) + -1)));
         } while (fVar9 != 0.0);
       }
@@ -4831,45 +4862,45 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
       }
       cursor12 = attribBuffer + 7;
       dstCursor2 = (undefined1 *)(glContext + 0x4664);
-      pfVar20 = attribBuffer + 0x809;
+      srcCursor7 = attribBuffer + 0x809;
       iVar16 = 0;
       do {
         iVar7 = iVar16 + 1;
         uVar15 = _gleBindPipelineProgram(glContext, iVar16, *(unsigned int *)cursor12);
-        uVar6 = *(undefined1 *)pfVar20;
+        copiedByte = *(undefined1 *)srcCursor7;
         cursor12 = cursor12 + 1;
-        pfVar20 = (float *)((int)pfVar20 + 1);
-        *dstCursor2 = uVar6;
+        srcCursor7 = (float *)((int)srcCursor7 + 1);
+        *dstCursor2 = copiedByte;
         dstCursor2 = dstCursor2 + 8;
         iVar16 = iVar7;
       } while (iVar7 < 2);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         uVar15 = _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      pfVar20 = *(float **)(glContext + 0x4668);
+      dstCursor12 = *(float **)(glContext + 0x4668);
       remaining4 = 0x100;
       cursor13 = attribBuffer + 8;
       do {
-        *pfVar20 = cursor13[1];
-        pfVar20[1] = cursor13[2];
-        pfVar20[2] = cursor13[3];
-        pfVar1 = cursor13 + 4;
+        *dstCursor12 = cursor13[1];
+        dstCursor12[1] = cursor13[2];
+        dstCursor12[2] = cursor13[3];
+        srcPtr = cursor13 + 4;
         cursor13 = cursor13 + 4;
-        pfVar20[3] = *pfVar1;
-        pfVar20 = pfVar20 + 4;
+        dstCursor12[3] = *srcPtr;
+        dstCursor12 = dstCursor12 + 4;
         remaining4 = remaining4 + -1;
       } while (remaining4 != 0);
-      pfVar20 = *(float **)(glContext + 0x4670);
+      dstCursor12 = *(float **)(glContext + 0x4670);
       remaining5 = 0x80;
       cursor14 = attribBuffer + 0x408;
       do {
-        *pfVar20 = cursor14[1];
-        pfVar20[1] = cursor14[2];
-        pfVar20[2] = cursor14[3];
-        pfVar1 = cursor14 + 4;
+        *dstCursor12 = cursor14[1];
+        dstCursor12[1] = cursor14[2];
+        dstCursor12[2] = cursor14[3];
+        srcPtr = cursor14 + 4;
         cursor14 = cursor14 + 4;
-        pfVar20[3] = *pfVar1;
-        pfVar20 = pfVar20 + 4;
+        dstCursor12[3] = *srcPtr;
+        dstCursor12 = dstCursor12 + 4;
         remaining5 = remaining5 + -1;
       } while (remaining5 != 0);
       *(undefined1 *)(glContext + 0x4661) = *(undefined1 *)((int)attribBuffer + 0xe);
@@ -4896,9 +4927,9 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
       remaining6 = 4;
       srcCursor2 = (undefined2 *)((int)attribBuffer + 0x26);
       do {
-        uVar2 = *srcCursor2;
+        copiedHalf = *srcCursor2;
         srcCursor2 = srcCursor2 + 2;
-        *dstCursor3 = uVar2;
+        *dstCursor3 = copiedHalf;
         dstCursor3 = dstCursor3 + 1;
         remaining6 = remaining6 + -1;
       } while (remaining6 != 0);
@@ -4951,24 +4982,24 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
         *(undefined1 *)(glContext + loopIndex8 + 0x7524) = 0;
       }
       else {
-        cVar5 = '\x04';
+        derivedByte = '\x04';
         if (*(int *)(glContext + 0x7450) != 0) {
-          cVar5 = (char)((unsigned char *)0x9da8)[loopIndex8 + *(int *)(glContext + 0x7450)]<< 2;
+          derivedByte = (char)((unsigned char *)0x9da8)[loopIndex8 + *(int *)(glContext + 0x7450)]<< 2;
         }
-        *(char *)(glContext + loopIndex8 + 0x7524) = cVar5;
+        *(char *)(glContext + loopIndex8 + 0x7524) = derivedByte;
       }
-      cVar5 = '\0';
+      derivedByte = '\0';
       if (((uint)GH_F2U(fVar10) & 1 << (loopIndex8 & 0x3f)) != 0) {
-        cVar5 = '\x04';
+        derivedByte = '\x04';
         if (*(int *)(glContext + 0x7450) != 0) {
-          cVar5 = *(char *)(loopIndex8 + *(int *)(glContext + 0x7450) + 0x9db8) << 2;
+          derivedByte = *(char *)(loopIndex8 + *(int *)(glContext + 0x7450) + 0x9db8) << 2;
         }
       }
-      *(char *)(glContext + loopIndex8 + 0x7564) = cVar5;
+      *(char *)(glContext + loopIndex8 + 0x7564) = derivedByte;
       loopIndex8 = loopIndex8 + 1;
       remaining7 = remaining7 + -1;
     } while (remaining7 != 0);
-    uVar6 = 0xc;
+    derivedByte2 = 0xc;
     *(undefined1 *)(glContext + 0x74e0) = *(undefined1 *)(attribBuffer + 1);
     *(undefined1 *)(glContext + 0x74e1) = *(undefined1 *)((int)attribBuffer + 5);
     *(undefined1 *)(glContext + 0x74e2) = *(undefined1 *)((int)attribBuffer + 6);
@@ -4989,41 +5020,41 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
     *(undefined1 *)(glContext + 0x74f1) = *(undefined1 *)(attribBuffer + 7);
     *(undefined1 *)(glContext + 0x74f2) = *(undefined1 *)((int)attribBuffer + 0x91);
     if (*(char *)(glContext + 0x74e4) == '\0') {
-      uVar6 = 0;
+      derivedByte2 = 0;
     }
-    *(undefined1 *)(glContext + 0x7515) = uVar6;
+    *(undefined1 *)(glContext + 0x7515) = derivedByte2;
     *(byte *)(glContext + 0x7516) = (byte)(-(uint)*(byte *)(glContext + 0x74e2) >> 0x1b) & 0x10;
-    bVar13 = 0x10;
+    derivedByte3 = 0x10;
     if (((*(char *)(glContext + 0x74e8) == '\0') &&
-        (bVar13 = 0xc, *(char *)(glContext + 0x74e7) == '\0')) &&
-       (bVar13 = 8, *(char *)(glContext + 0x74e6) == '\0')) {
-      bVar13 = (byte)(-(uint)*(byte *)(glContext + 0x74e5) >> 0x1d) & 4;
+        (derivedByte3 = 0xc, *(char *)(glContext + 0x74e7) == '\0')) &&
+       (derivedByte3 = 8, *(char *)(glContext + 0x74e6) == '\0')) {
+      derivedByte3 = (byte)(-(uint)*(byte *)(glContext + 0x74e5) >> 0x1d) & 4;
     }
-    *(byte *)(glContext + 0x751c) = bVar13;
-    uVar6 = 0x10;
-    if ((*(char *)(glContext + 0x74e1) == '\0') && (uVar6 = 0xc, *(char *)(glContext + 0x74e0) == '\0'))
+    *(byte *)(glContext + 0x751c) = derivedByte3;
+    derivedByte2 = 0x10;
+    if ((*(char *)(glContext + 0x74e1) == '\0') && (derivedByte2 = 0xc, *(char *)(glContext + 0x74e0) == '\0'))
     {
-      uVar6 = 0;
+      derivedByte2 = 0;
     }
-    *(undefined1 *)(glContext + 0x7514) = uVar6;
-    if ((*(char *)(glContext + 0x74ed) != '\0') || (uVar6 = 0, *(char *)(glContext + 0x74f2) != '\0')) {
-      uVar6 = 0xc;
+    *(undefined1 *)(glContext + 0x7514) = derivedByte2;
+    if ((*(char *)(glContext + 0x74ed) != '\0') || (derivedByte2 = 0, *(char *)(glContext + 0x74f2) != '\0')) {
+      derivedByte2 = 0xc;
     }
-    *(undefined1 *)(glContext + 0x7555) = uVar6;
+    *(undefined1 *)(glContext + 0x7555) = derivedByte2;
     *(byte *)(glContext + 0x7556) = (byte)(-(uint)*(byte *)(glContext + 0x74eb) >> 0x1b) & 0x10;
-    bVar13 = 0x10;
+    derivedByte3 = 0x10;
     if (((*(char *)(glContext + 0x74f1) == '\0') &&
-        (bVar13 = 0xc, *(char *)(glContext + 0x74f0) == '\0')) &&
-       (bVar13 = 8, *(char *)(glContext + 0x74ef) == '\0')) {
-      bVar13 = (byte)(-(uint)*(byte *)(glContext + 0x74ee) >> 0x1d) & 4;
+        (derivedByte3 = 0xc, *(char *)(glContext + 0x74f0) == '\0')) &&
+       (derivedByte3 = 8, *(char *)(glContext + 0x74ef) == '\0')) {
+      derivedByte3 = (byte)(-(uint)*(byte *)(glContext + 0x74ee) >> 0x1d) & 4;
     }
-    *(byte *)(glContext + 0x755c) = bVar13;
-    uVar6 = 0x10;
-    if ((*(char *)(glContext + 0x74ea) == '\0') && (uVar6 = 0xc, *(char *)(glContext + 0x74e9) == '\0'))
+    *(byte *)(glContext + 0x755c) = derivedByte3;
+    derivedByte2 = 0x10;
+    if ((*(char *)(glContext + 0x74ea) == '\0') && (derivedByte2 = 0xc, *(char *)(glContext + 0x74e9) == '\0'))
     {
-      uVar6 = 0;
+      derivedByte2 = 0;
     }
-    *(undefined1 *)(glContext + 0x7554) = uVar6;
+    *(undefined1 *)(glContext + 0x7554) = derivedByte2;
     puVar3 = PTR__gleSetVertexEval1Func_0011206c;
     dstCursor = (float *)(glContext + 0x3534);
     *(undefined **)(glContext + 0x489c) = PTR__gleSetVertexEval2Func_00112068;
@@ -5059,35 +5090,35 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
     } while (remaining8 != 0);
     srcCursor4 = (undefined1 *)((int)attribBuffer + 0x6f);
     remaining9 = 8;
-    puVar14 = (undefined1 *)(glContext + 0x3d7b);
+    dstCursor13 = (undefined1 *)(glContext + 0x3d7b);
     do {
-      puVar14[-3] = srcCursor4[-3];
-      puVar14[-2] = srcCursor4[-2];
-      puVar14[-1] = srcCursor4[-1];
-      uVar6 = *srcCursor4;
+      dstCursor13[-3] = srcCursor4[-3];
+      dstCursor13[-2] = srcCursor4[-2];
+      dstCursor13[-1] = srcCursor4[-1];
+      copiedByte = *srcCursor4;
       srcCursor4 = srcCursor4 + 4;
-      *puVar14 = uVar6;
-      puVar14 = puVar14 + 0x94;
+      *dstCursor13 = copiedByte;
+      dstCursor13 = dstCursor13 + 0x94;
       remaining9 = remaining9 + -1;
     } while (remaining9 != 0);
     remaining10 = 1;
     dstCursor2 = (undefined1 *)(glContext + 0x4664);
     *(float *)(glContext + 0x3520) = attribBuffer[0x1a];
     *(float *)(glContext + 0x4188) = attribBuffer[0x19];
-    pfVar11 = attribBuffer + 0x23;
+    srcCursor6 = attribBuffer + 0x23;
     *(float *)(glContext + 0x30a0) = attribBuffer[0x18];
     do {
       remaining10 = remaining10 + -1;
-      uVar6 = *(undefined1 *)pfVar11;
-      pfVar11 = (float *)((int)pfVar11 + 1);
-      *dstCursor2 = uVar6;
+      copiedByte = *(undefined1 *)srcCursor6;
+      srcCursor6 = (float *)((int)srcCursor6 + 1);
+      *dstCursor2 = copiedByte;
       dstCursor2 = dstCursor2 + 8;
     } while (-1 < remaining10);
     *(undefined1 *)(glContext + 0x4fea) = *(undefined1 *)(attribBuffer + 0x2c);
     *(undefined1 *)(glContext + 0x312a) = *(undefined1 *)((int)attribBuffer + 0xb1);
-    uVar6 = *(undefined1 *)((int)attribBuffer + 0xb2);
+    copiedByte = *(undefined1 *)((int)attribBuffer + 0xb2);
   }
-  *(undefined1 *)(glContext + 0x3129) = uVar6;
+  *(undefined1 *)(glContext + 0x3129) = copiedByte;
   return glContext;
 }
 
@@ -6100,103 +6131,103 @@ int _gleGetVertexArrayFunc(glContext)
 }
 
 /* _gleSetFunctionIDFromArray @ 0x4dd18 (532 bytes) */
-void _gleSetFunctionIDFromArray(glContext, param_2, param_3)
+void _gleSetFunctionIDFromArray(glContext, arrayState, funcDesc)
   int glContext;
-  int param_2;
-  uint *param_3;
+  int arrayState;
+  uint *funcDesc;
 {
-  ushort uVar1;
-  uint uVar2;
-  ushort uVar4;
-  uint uVar3;
+  ushort elementTypeShort;
+  uint typeCodeThenStreamCount;
+  ushort streamWord;
+  uint streamSlotThenElementTypeCode;
   int glContextPtr4674;
-  int iVar6;
+  int slotRecord;
   int iVar7;
   int glContextWord48dc;
-  ushort uVar8;
+  ushort componentCount;
   ushort *dstCursor;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  longlong lVar13;
+  uint enabledSlotsHigh;
+  uint enabledSlotsLow;
+  uint elementType;
+  longlong slotBit;
   
   glContextWord48dc = *(int *)(glContext + 0x48dc);
   glContextPtr4674 = *(int *)(glContext + 0x4674);
-  uVar2 = glContextWord48dc - 0x1400;
-  uVar10 = *(uint *)(param_2 + 0x300);
-  uVar11 = *(uint *)(param_2 + 0x304);
-  if (((6 < uVar2) && (uVar2 = 7, glContextWord48dc != 0x140a)) && (uVar2 = glContextWord48dc - 0x93f8, 5 < glContextWord48dc - 0x9400U)
+  typeCodeThenStreamCount = glContextWord48dc - 0x1400;
+  enabledSlotsHigh = *(uint *)(arrayState + 0x300);
+  enabledSlotsLow = *(uint *)(arrayState + 0x304);
+  if (((6 < typeCodeThenStreamCount) && (typeCodeThenStreamCount = 7, glContextWord48dc != 0x140a)) && (typeCodeThenStreamCount = glContextWord48dc - 0x93f8, 5 < glContextWord48dc - 0x9400U)
      ) {
-    uVar2 = 0xe;
+    typeCodeThenStreamCount = 0xe;
   }
-  uVar2 = *param_3 | (uVar2 & 0xf) << 0x10;
-  *param_3 = uVar2;
-  if (*(char *)(param_2 + 0x31c) != '\0') {
-    *param_3 = uVar2 | 0x800000;
+  typeCodeThenStreamCount = *funcDesc | (typeCodeThenStreamCount & 0xf) << 0x10;
+  *funcDesc = typeCodeThenStreamCount;
+  if (*(char *)(arrayState + 0x31c) != '\0') {
+    *funcDesc = typeCodeThenStreamCount | 0x800000;
   }
-  uVar2 = (uint)*(byte *)param_3;
-  if (uVar2 != 0) {
-    dstCursor = (ushort *)((int)param_3 + uVar2 * 2 + 4);
+  typeCodeThenStreamCount = (uint)*(byte *)funcDesc;
+  if (typeCodeThenStreamCount != 0) {
+    dstCursor = (ushort *)((int)funcDesc + typeCodeThenStreamCount * 2 + 4);
     do {
-      uVar4 = *(ushort *)(param_3 + 1);
-      uVar12 = 0;
-      uVar3 = (uint)(uVar4 >> 10);
-      if ((uVar3 == 0) || (uVar3 == 0x10)) {
-        lVar13 = ___ashldi3(0,1,uVar3 + 0x10);
-        if ((uVar10 & (uint)((ulonglong)lVar13 >> 0x20)) == 0 && (uVar11 & (uint)lVar13) == 0) {
-          if ((uVar11 & 0x10000) == 0) {
-            if ((uVar10 & 1) == 0) goto LAB_0004de9c;
-            iVar7 = *(int *)(param_2 + 0x184);
-            uVar8 = *(ushort *)(param_2 + 0x18a);
-            uVar4 = uVar4 & 0x3ff | 0x4000;
-            uVar1 = *(ushort *)(param_2 + 0x188);
+      streamWord = *(ushort *)(funcDesc + 1);
+      elementType = 0;
+      streamSlotThenElementTypeCode = (uint)(streamWord >> 10);
+      if ((streamSlotThenElementTypeCode == 0) || (streamSlotThenElementTypeCode == 0x10)) {
+        slotBit = ___ashldi3(0,1,streamSlotThenElementTypeCode + 0x10);
+        if ((enabledSlotsHigh & (uint)((ulonglong)slotBit >> 0x20)) == 0 && (enabledSlotsLow & (uint)slotBit) == 0) {
+          if ((enabledSlotsLow & 0x10000) == 0) {
+            if ((enabledSlotsHigh & 1) == 0) goto LAB_0004de9c;
+            iVar7 = *(int *)(arrayState + 0x184);
+            componentCount = *(ushort *)(arrayState + 0x18a);
+            streamWord = streamWord & 0x3ff | 0x4000;
+            elementTypeShort = *(ushort *)(arrayState + 0x188);
           }
           else {
-            uVar4 = uVar4 & 0x3ff;
-            iVar7 = *(int *)(param_2 + 4);
-            uVar8 = *(ushort *)(param_2 + 10);
-            uVar1 = *(ushort *)(param_2 + 8);
+            streamWord = streamWord & 0x3ff;
+            iVar7 = *(int *)(arrayState + 4);
+            componentCount = *(ushort *)(arrayState + 10);
+            elementTypeShort = *(ushort *)(arrayState + 8);
           }
-          uVar12 = (uint)uVar1;
-          *(ushort *)(param_3 + 1) = uVar4;
+          elementType = (uint)elementTypeShort;
+          *(ushort *)(funcDesc + 1) = streamWord;
         }
         else {
 LAB_0004de6c:
-          iVar6 = uVar3 * 0x18 + param_2;
-          uVar12 = (uint)*(ushort *)(iVar6 + 8);
-          iVar7 = *(int *)(iVar6 + 4);
-          uVar8 = *(ushort *)(iVar6 + 10);
+          slotRecord = streamSlotThenElementTypeCode * 0x18 + arrayState;
+          elementType = (uint)*(ushort *)(slotRecord + 8);
+          iVar7 = *(int *)(slotRecord + 4);
+          componentCount = *(ushort *)(slotRecord + 10);
         }
       }
-      else if (uVar3 < 0x20) {
-        lVar13 = ___ashldi3(0,1,uVar3 + 0x10);
-        if ((uVar10 & (uint)((ulonglong)lVar13 >> 0x20)) != 0 || (uVar11 & (uint)lVar13) != 0)
+      else if (streamSlotThenElementTypeCode < 0x20) {
+        slotBit = ___ashldi3(0,1,streamSlotThenElementTypeCode + 0x10);
+        if ((enabledSlotsHigh & (uint)((ulonglong)slotBit >> 0x20)) != 0 || (enabledSlotsLow & (uint)slotBit) != 0)
         goto LAB_0004de6c;
-        uVar8 = (ushort)*(byte *)(glContextPtr4674 + 0x400 + uVar3);
+        componentCount = (ushort)*(byte *)(glContextPtr4674 + 0x400 + streamSlotThenElementTypeCode);
         iVar7 = 0;
       }
-      else if (uVar3 - 0x20 < 8) {
+      else if (streamSlotThenElementTypeCode - 0x20 < 8) {
 LAB_0004de9c:
         iVar7 = 0;
-        uVar8 = 0;
+        componentCount = 0;
       }
       else {
         iVar7 = 0;
-        uVar8 = 1;
+        componentCount = 1;
       }
-      uVar3 = uVar12 - 0x1400;
-      if (((6 < uVar3) && (uVar3 = 7, uVar12 != 0x140a)) &&
-         (uVar3 = uVar12 - 0x93f8, 5 < uVar12 - 0x9400)) {
-        uVar3 = 0xe;
+      streamSlotThenElementTypeCode = elementType - 0x1400;
+      if (((6 < streamSlotThenElementTypeCode) && (streamSlotThenElementTypeCode = 7, elementType != 0x140a)) &&
+         (streamSlotThenElementTypeCode = elementType - 0x93f8, 5 < elementType - 0x9400)) {
+        streamSlotThenElementTypeCode = 0xe;
       }
       if (0x3ff < iVar7) {
         iVar7 = 0x3ff;
       }
-      uVar2 = uVar2 - 1;
-      param_3 = (uint *)((int)param_3 + 2);
-      *dstCursor = (uVar8 - 1) * 0x4000 | (ushort)(uVar3 << 10) | (ushort)iVar7;
+      typeCodeThenStreamCount = typeCodeThenStreamCount - 1;
+      funcDesc = (uint *)((int)funcDesc + 2);
+      *dstCursor = (componentCount - 1) * 0x4000 | (ushort)(streamSlotThenElementTypeCode << 10) | (ushort)iVar7;
       dstCursor = dstCursor + 1;
-    } while (uVar2 != 0);
+    } while (typeCodeThenStreamCount != 0);
   }
   return;
 }

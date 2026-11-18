@@ -1,0 +1,33 @@
+local	_LFSParserGetCharacter	bVar1	forward	INFERRED	true when reading forward (param_3 == 0): the cursor moves after the read, otherwise it moves back before the read
+local	_LFSParserGetCharacter	bVar2	pendingWhitespace	INFERRED	a run of whitespace characters has been skipped; it is collapsed into one blank
+local	_LFSParserGetCharacter	bVar3	charProduced	INFERRED	a character was produced: the loop ends and 0 is returned
+local	_LFSParserGetCharacter	iVar4	cursor	INFERRED	parser +0xc: index of the character read in the source text
+local	_LFSParserGetCharacter	uVar5	charValue	INFERRED	the character read (newline bumps the line counter, tab/newline/space count as whitespace)
+local	_LFSParserGetCharacter	param_1	parser	INFERRED	source parser state: +0 text, +4 text length, +0xc cursor, +0x10 line number
+local	_LFSParserGetCharacter	param_2	outChar	INFERRED	receives the character read
+local	_LFSParserGetCharacter	param_3	backward	INFERRED	nonzero: read the previous character (step backwards), zero: read the next one
+local	_LFSParserParseDestinationModifiers	uVar1	modifierBits	INFERRED	instruction modifier bits ored into destination+0xc: 0x1000 2x, 0x2000 4x, 0x3000 8x, 0x4000 half, 0x5000 quarter, 0x6000 eighth, 0x8000 sat
+local	_LFSParserParseDestinationModifiers	iVar2	partOrCompareResult	INFERRED	length returned by _LFSParserGetPart, then the memcmp result of the token against a modifier name
+local	_LFSParserParseDestinationModifiers	uVar3	status	INFERRED	return code: 0 parsed, 7 unknown modifier, 8 unexpected end of source
+local	_LFSParserParseDestinationModifiers	local_120	tokenBuffer	INFERRED	256 byte buffer receiving the token read by _LFSParserGetPart
+local	_LFSParserParseDestinationModifiers	local_20	savedCursor	INFERRED	parser cursor saved before reading a token, restored when the token is not part of the modifiers
+local	_LFSParserParseDestinationModifiers	local_1c	savedLine	INFERRED	parser line number saved before reading a token
+local	_LFSParserParseDestinationModifiers	param_1	parser	INFERRED	source parser state: +0xc cursor, +0x10 line number
+local	_LFSParserParseDestinationModifiers	param_2	destination	INFERRED	destination operand being parsed (+0xc holds the modifier bits)
+local	_LFSParserParseDestination	iVar1	status	INFERRED	return code of the sub parsers and token reads (0 parsed, 5 not a destination register, 8 unexpected end of source), or the length returned by _LFSParserGetPart
+local	_LFSParserParseDestination	local_130	tokenBuffer	INFERRED	256 byte buffer receiving the token read by _LFSParserGetPart
+local	_LFSParserParseDestination	local_30	savedCursor	INFERRED	parser cursor saved before reading a token, restored when the token does not continue the operand
+local	_LFSParserParseDestination	local_2c	savedLine	INFERRED	parser line number saved before reading a token
+local	_LFSParserParseDestination	local_20	registerKind	INFERRED	register file returned by _LFSParserParseRegister (1 means a destination register)
+local	_LFSParserParseDestination	local_1c	registerIndex	INFERRED	register index returned by _LFSParserParseRegister
+local	_LFSParserParseDestination	param_1	parser	INFERRED	source parser state: +0xc cursor, +0x10 line number
+local	_LFSParserParseDestination	param_2	destination	INFERRED	destination operand being parsed (+0 register kind, +4 register index, +8 write mask 0xf0000 by default, +0xc modifier bits)
+local	_LFSParserParseSourceVar	iVar1	statusOrSwizzle	INFERRED	status of the sub parsers and token reads, then the swizzle component constant (0x1000 r, 0x2000 g, 0x3000 b, 0x4000 a) stored into source+8
+local	_LFSParserParseSourceVar	iVar2	bindingOrCompareResult	INFERRED	constant binding node being searched (+8 index, +0x4c next), then the memcmp result of the token against a component name
+local	_LFSParserParseSourceVar	local_130	tokenBuffer	INFERRED	256 byte buffer receiving the token read by _LFSParserGetPart
+local	_LFSParserParseSourceVar	local_30	savedCursor	INFERRED	parser cursor saved before reading a token, restored when the token does not continue the operand
+local	_LFSParserParseSourceVar	local_2c	savedLine	INFERRED	parser line number saved before reading a token
+local	_LFSParserParseSourceVar	local_20	registerKind	INFERRED	register file returned by _LFSParserParseRegister (2 means a constant binding register)
+local	_LFSParserParseSourceVar	local_1c	registerIndex	INFERRED	register index returned by _LFSParserParseRegister
+local	_LFSParserParseSourceVar	param_1	parser	INFERRED	source parser state: +0xc cursor, +0x10 line number, +0x14 program info holding the constant binding list
+local	_LFSParserParseSourceVar	param_2	sourceVar	INFERRED	source operand being parsed (+0 register kind, +4 register index, +8 swizzle)
