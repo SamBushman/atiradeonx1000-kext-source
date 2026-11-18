@@ -1,0 +1,63 @@
+use	_gleGetHashMachineObjectNameTargetPairs	piVar2	bucketSlotThenEntry	CONFIRMED	walks the hash table: starts at hashBuckets, steps one bucket at a time (nextBucket), and inside a bucket follows the chain (piVar2 = *piVar2) so it holds a bucket head slot and then each chain entry	^\s*piVar2\ =\ param_2;$	+1
+use	_gleGetHashMachineObjectNameTargetPairs	piVar2	bucketSlotThenEntry	CONFIRMED	walks the hash table: starts at hashBuckets, steps one bucket at a time (nextBucket), and inside a bucket follows the chain (piVar2 = *piVar2) so it holds a bucket head slot and then each chain entry	^\s*piVar4\ =\ piVar2\ \+\ 1;$	+2
+use	_gleGetHashMachineObjectNameTargetPairs	piVar2	bucketSlotThenEntry	CONFIRMED	walks the hash table: starts at hashBuckets, steps one bucket at a time (nextBucket), and inside a bucket follows the chain (piVar2 = *piVar2) so it holds a bucket head slot and then each chain entry	^\s*piVar2\ =\ piVar4;$	+1
+use	_gleGetHashMachineObjectNameTargetPairs	piVar2	bucketSlotThenEntry	CONFIRMED	walks the hash table: starts at hashBuckets, steps one bucket at a time (nextBucket), and inside a bucket follows the chain (piVar2 = *piVar2) so it holds a bucket head slot and then each chain entry	^\s*piVar2\ =\ param_2;$@2	+1
+use	_gleGetHashMachineObjectNameTargetPairs	piVar2	bucketSlotThenEntry	CONFIRMED	walks the hash table: starts at hashBuckets, steps one bucket at a time (nextBucket), and inside a bucket follows the chain (piVar2 = *piVar2) so it holds a bucket head slot and then each chain entry	^\s*piVar4\ =\ piVar2\ \+\ 1;$@2	+2
+use	_gleGetHashMachineObjectNameTargetPairs	piVar2	bucketSlotThenEntry	CONFIRMED	walks the hash table: starts at hashBuckets, steps one bucket at a time (nextBucket), and inside a bucket follows the chain (piVar2 = *piVar2) so it holds a bucket head slot and then each chain entry	^\s*\*\(int\ \*\)\(\(iVar6\ \+\ 1\)\ \*\ 4\ \+\ a6\)\ =\ piVar2\[1\];$	+1
+use	_gleGetHashMachineObjectNameTargetPairs	piVar2	bucketSlotThenEntry	CONFIRMED	walks the hash table: starts at hashBuckets, steps one bucket at a time (nextBucket), and inside a bucket follows the chain (piVar2 = *piVar2) so it holds a bucket head slot and then each chain entry	^\s*uVar3\ =\ \(\*pcVar5\)\(param_1,piVar2,a2,a3,in_r7,in_r8,a6\);$	+1
+use	_gleGetHashMachineObjectNameTargetPairs	piVar2	bucketSlotThenEntry	CONFIRMED	walks the hash table: starts at hashBuckets, steps one bucket at a time (nextBucket), and inside a bucket follows the chain (piVar2 = *piVar2) so it holds a bucket head slot and then each chain entry	^\s*piVar2\ =\ piVar4;$@2	+1
+use	_gleGetHashMachineObjectNameTargetPairs	piVar2	resultArray	CONFIRMED	_malloc(entryCount * 8 + 4) block returned through *valuePtr: word 0 = number of entries, then one (object name, target) pair per entry	^\s*piVar2\ =\ \(int\ \*\)_malloc\(iVar6\ \*\ 8\ \+\ 4\);$	+3
+use	_gleGetHashMachineObjectNameTargetPairs	iVar6	entryCount	CONFIRMED	number of chain entries counted over all 0x400 buckets (sizes the result array)	^\s*iVar6\ =\ 0;$	+1
+use	_gleGetHashMachineObjectNameTargetPairs	iVar6	entryCount	CONFIRMED	number of chain entries counted over all 0x400 buckets (sizes the result array)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	_gleGetHashMachineObjectNameTargetPairs	iVar6	entryCount	CONFIRMED	number of chain entries counted over all 0x400 buckets (sizes the result array)	^\s*if\ \(iVar6\ ==\ 0\)\ \{$	+1
+use	_gleGetHashMachineObjectNameTargetPairs	iVar6	entryCount	CONFIRMED	number of chain entries counted over all 0x400 buckets (sizes the result array)	^\s*piVar2\ =\ \(int\ \*\)_malloc\(iVar6\ \*\ 8\ \+\ 4\);$	+2
+use	_gleGetHashMachineObjectNameTargetPairs	iVar6	pairWordIndex	CONFIRMED	word index into resultArray, advanced by 2 per entry: word iVar6+1 receives the object name (entry[1]) and word iVar6+2 the target	^\s*iVar6\ =\ 0;$@2	+1
+use	_gleGetHashMachineObjectNameTargetPairs	iVar6	pairWordIndex	CONFIRMED	word index into resultArray, advanced by 2 per entry: word iVar6+1 receives the object name (entry[1]) and word iVar6+2 the target	^\s*\*\(int\ \*\)\(\(iVar6\ \+\ 1\)\ \*\ 4\ \+\ a6\)\ =\ piVar2\[1\];$	+2
+use	_gleGetHashMachineObjectNameTargetPairs	iVar6	pairWordIndex	CONFIRMED	word index into resultArray, advanced by 2 per entry: word iVar6+1 receives the object name (entry[1]) and word iVar6+2 the target	^\s*\*\(undefined4\ \*\)\(iVar6\ \*\ 4\ \+\ \*param_4\)\ =\ uVar3;$	+1
+local	_gleVPFlushTriangleFanTCL	iVar7	copyUnitCount	CONFIRMED	(short)ctx+0x487c >> 3: number of 8-byte units copied, counted down by the loop
+local	_gleVPFlushTriangleFanTCL	iVar6	copyUnitIndex	CONFIRMED	index of the 8-byte unit being copied, counts up
+local	_gleVPFlushTriangleFanTCL	iVar4	vertexWriteCursor	INFERRED	ctx+0x4858, the end of the filled vertex records (the copy source ends here)
+local	_gleVPFlushTriangleFanTCL	iVar1	copyByteCount	CONFIRMED	copyUnitCount * 8: bytes copied
+local	_gleVPFlushTriangleFanTCL	iVar3	negativeCopyByteCount	CONFIRMED	copyUnitCount * -8: offset from the write cursor back to the start of the copied tail
+local	_gleVPFlushTriangleFanTCL	iVar5	copyDestination	CONFIRMED	ctx+0x4854 (vertex buffer start) + copyByteCount: the destination of the copy
+local	_gleVPFlushTriangleFanTCL	iVar2	copyByteOffset	CONFIRMED	copyUnitIndex * 8: byte offset of the unit being copied
+local	_gleFlushTriangleFanTCLRDirtyFunc	iVar3	copyByteCount	CONFIRMED	(short)ctx+0x487c: bytes of vertex data carried over
+local	_gleFlushTriangleFanTCLRDirtyFunc	iVar2	copyByteOffset	CONFIRMED	byte offset of the 8-byte unit being copied, advances by 8
+local	_gleFlushTriangleFanTCLRDirtyFunc	iVar4	vertexWriteCursor	INFERRED	ctx+0x4858, the end of the filled vertex records (the copy source ends copyByteCount before it)
+local	_gleFlushTriangleFanTCLRDirtyFunc	iVar1	copyDestination	CONFIRMED	ctx+0x4854 (vertex buffer start) + copyByteCount: the destination of the copy, also the new write cursor base
+local	_gleFlushTriangleFanTCLRDirtyFunc	uVar5	copyUnitCount	CONFIRMED	(copyByteCount + 7) >> 3 8-byte units, counted down by the loop
+local	_gleSubmitVertexCopy	param_2	sourceData	INFERRED	source of the 8-byte units copied to the write cursor
+local	_gleSubmitVertexCopy	sVar1	copyByteCount	CONFIRMED	(short)ctx+0x487c: bytes copied, then added to the write cursor
+local	_gleSubmitVertexCopy	iVar4	copyUnitIndex	CONFIRMED	index of the 8-byte unit being copied, counts up
+local	_gleSubmitVertexCopy	iVar5	vertexWriteCursor	INFERRED	ctx+0x4858, the destination of the copy and the cursor advanced by copyByteCount
+local	_gleSubmitVertexCopy	iVar3	copyUnitCount	CONFIRMED	copyByteCount >> 3 8-byte units, counted down by the loop
+local	_gleSubmitVertexCopy	iVar2	copyByteOffset	CONFIRMED	copyUnitIndex * 8: byte offset of the unit being copied
+local	_gleUpdateTextureTransform	bVar1	useDivideByW	INFERRED	true when bit 4 of the renderer information word +0x94 is clear and ctx+0x4e1c == 0x1c00: selects the DivW texture matrix transform functions
+local	_gleUpdateTextureTransform	iVar5	texEnableBits	INFERRED	result of _gleTexEnableBits(ctx): zero when no texture unit is enabled, 1 for the single-unit case
+local	_gleInitTextureState	uVar2	copiedWord	CONFIRMED	word read through srcCursor from the texture object and written through dstCursor2 into the context copy of the default texture state
+use	_gleInitTextureState	iVar12	glContextPlusIndex4	CONFIRMED	glContext, advanced by 4 per loop iteration: the base of the per-target pointer slot written next	^\s*iVar12\ =\ param_1;$	+1
+use	_gleInitTextureState	iVar12	glContextPlusIndex4	CONFIRMED	glContext, advanced by 4 per loop iteration: the base of the per-target pointer slot written next	^\s*piVar6\ =\ \(int\ \*\)\(iVar12\ \+\ 0x5154\);$	+1
+use	_gleInitTextureState	iVar12	glContextPlusIndex4	CONFIRMED	glContext, advanced by 4 per loop iteration: the base of the per-target pointer slot written next	^\s*iVar12\ =\ iVar12\ \+\ 4;$	+1
+use	_gleInitTextureState	iVar12	glContextPlusIndex4	CONFIRMED	glContext, advanced by 4 per loop iteration: the base of the per-target pointer slot written next	^\s*iVar12\ =\ param_1;$@2	+1
+use	_gleInitTextureState	iVar12	glContextPlusIndex4	CONFIRMED	glContext, advanced by 4 per loop iteration: the base of the per-target pointer slot written next	^\s*puVar9\ =\ \(undefined4\ \*\)\(iVar12\ \+\ 0x8820\);$	+1
+use	_gleInitTextureState	iVar12	glContextPlusIndex4	CONFIRMED	glContext, advanced by 4 per loop iteration: the base of the per-target pointer slot written next	^\s*iVar12\ =\ iVar12\ \+\ 4;$@2	+1
+use	_gleInitTextureState	iVar12	glContextPlusIndex4	CONFIRMED	glContext, advanced by 4 per loop iteration: the base of the per-target pointer slot written next	^\s*iVar12\ =\ param_1;$@3	+1
+use	_gleInitTextureState	iVar12	glContextPlusIndex4	CONFIRMED	glContext, advanced by 4 per loop iteration: the base of the per-target pointer slot written next	^\s*puVar9\ =\ \(undefined4\ \*\)\(iVar12\ \+\ 0x882c\);$	+1
+use	_gleInitTextureState	iVar12	glContextPlusIndex4	CONFIRMED	glContext, advanced by 4 per loop iteration: the base of the per-target pointer slot written next	^\s*iVar12\ =\ iVar12\ \+\ 4;$@3	+1
+use	_glPixelMapusv_Comp	iVar3	pixelUnpackBuffer	INFERRED	ctx+0x4a6c: the bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40); null when values is a client pointer	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a6c\);$	+3
+use	_glPixelMapusv_Comp	iVar3	pixelUnpackBuffer	INFERRED	ctx+0x4a6c: the bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40); null when values is a client pointer	^\s*if\ \(\*\(int\ \*\)\(iVar3\ \+\ 0x40\)\ !=\ 0\)\ \{$	+2
+use	_glPixelMapusv_Comp	iVar3	pixelUnpackBuffer	INFERRED	ctx+0x4a6c: the bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40); null when values is a client pointer	^\s*param_4\ =\ param_4\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0x30\);$	+1
+use	_glPixelMapusv_Comp	iVar3	valueIndex	CONFIRMED	index of the ushort value being copied into the list record, counts up	^\s*iVar3\ =\ 0;$	+1
+use	_glPixelMapusv_Comp	iVar3	valueIndex	CONFIRMED	index of the ushort value being copied into the list record, counts up	^\s*iVar1\ =\ iVar3\ \*\ 2;$	+2
+local	_glPixelMapusv_Comp	iVar1	byteOffset	CONFIRMED	valueIndex * 2: byte offset of the ushort value being copied
+local	_glPixelMapusv_Comp	puVar2	listRecordThenValuesDestination	CONFIRMED	record returned by _gleAddListItem (map, mapsize header), then advanced past the two header words to the destination of the copied values
+use	_glPixelMapfv_Comp	iVar3	pixelUnpackBuffer	INFERRED	ctx+0x4a6c: the bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40); null when values is a client pointer	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a6c\);$	+2
+use	_glPixelMapfv_Comp	iVar3	pixelUnpackBuffer	INFERRED	ctx+0x4a6c: the bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40); null when values is a client pointer	^\s*if\ \(\(\*\(int\ \*\)\(iVar3\ \+\ 0x38\)\ <\ \(int\)\(iVar2\ \+\ param_4\)\)\ \|\|\ \(\(param_4\ \&\ 3\)\ !=\ 0\)\)\ \{$	+1
+use	_glPixelMapfv_Comp	iVar3	pixelUnpackBuffer	INFERRED	ctx+0x4a6c: the bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40); null when values is a client pointer	^\s*if\ \(\*\(int\ \*\)\(iVar3\ \+\ 0x40\)\ !=\ 0\)\ \{$	+2
+use	_glPixelMapfv_Comp	iVar3	pixelUnpackBuffer	INFERRED	ctx+0x4a6c: the bound pixel unpack buffer object (size +0x38, offset +0x30, pending flag +0x40); null when values is a client pointer	^\s*param_4\ =\ param_4\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0x30\);$	+1
+use	_glPixelMapfv_Comp	iVar3	valueIndex	CONFIRMED	index of the float value being copied into the list record, counts up	^\s*iVar3\ =\ 0;$	+1
+use	_glPixelMapfv_Comp	iVar3	valueIndex	CONFIRMED	index of the float value being copied into the list record, counts up	^\s*puVar1\[iVar3\]\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ iVar3\ \*\ 4\);$	+1
+use	_glPixelMapfv_Comp	iVar3	valueIndex	CONFIRMED	index of the float value being copied into the list record, counts up	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
+local	_glPixelMapfv_Comp	iVar2	valuesByteCount	CONFIRMED	mapsize * 4: bytes of float values recorded
+local	_glPixelMapfv_Comp	puVar1	listRecordThenValuesDestination	CONFIRMED	record returned by _gleAddListItem (map, mapsize header), then advanced past the two header words to the destination of the copied values
+local	_glUniformMatrix2fvARB_Comp	puVar2	listRecordThenDestination	CONFIRMED	record returned by _gleAddListItem (location, count header), then advanced past the two header words to the matrix destination, stepping by 4 words per matrix

@@ -1174,43 +1174,44 @@ int _glPixelMapfv_Comp(glContext, map, mapsize, values)
   int mapsize;
   uint values;
 {
-  undefined4 *puVar1;
-  int iVar2;
-  int iVar3;
+  undefined4 *listRecordThenValuesDestination;
+  int valuesByteCount;
+  int pixelUnpackBuffer;
+  int valueIndex;
   
-  iVar3 = *(int *)(glContext + 0x4a6c);
-  if (iVar3 == 0) {
-    iVar2 = mapsize << 2;
+  pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+  if (pixelUnpackBuffer == 0) {
+    valuesByteCount = mapsize << 2;
   }
   else {
-    iVar2 = mapsize * 4;
-    if ((*(int *)(iVar3 + 0x38) < (int)(iVar2 + values)) || ((values & 3) != 0)) {
+    valuesByteCount = mapsize * 4;
+    if ((*(int *)(pixelUnpackBuffer + 0x38) < (int)(valuesByteCount + values)) || ((values & 3) != 0)) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return (undefined4 *)glContext;
       }
       *(undefined4 *)(glContext + 0x7574) = 0x502;
       return (undefined4 *)glContext;
     }
-    if (*(int *)(iVar3 + 0x40) != 0) {
-      _gleSynchronizePluginBuffer(glContext,iVar3 + 0x10);
+    if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+      _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
     }
-    values = values + *(int *)(iVar3 + 0x30);
+    values = values + *(int *)(pixelUnpackBuffer + 0x30);
   }
-  puVar1 = (undefined4 *)_gleAddListItem(glContext,PTR__glPixelMapfv_ListExec_0011024c,iVar2 + 8);
-  if (puVar1 != (undefined4 *)0x0) {
-    iVar3 = 0;
-    *puVar1 = map;
-    puVar1[1] = mapsize;
-    puVar1 = puVar1 + 2;
+  listRecordThenValuesDestination = (undefined4 *)_gleAddListItem(glContext,PTR__glPixelMapfv_ListExec_0011024c,valuesByteCount + 8);
+  if (listRecordThenValuesDestination != (undefined4 *)0x0) {
+    valueIndex = 0;
+    *listRecordThenValuesDestination = map;
+    listRecordThenValuesDestination[1] = mapsize;
+    listRecordThenValuesDestination = listRecordThenValuesDestination + 2;
     if (0 < mapsize) {
       do {
-        puVar1[iVar3] = *(undefined4 *)(values + iVar3 * 4);
+        listRecordThenValuesDestination[valueIndex] = *(undefined4 *)(values + valueIndex * 4);
         mapsize = mapsize + -1;
-        iVar3 = iVar3 + 1;
+        valueIndex = valueIndex + 1;
       } while (mapsize != 0);
     }
   }
-  return puVar1;
+  return listRecordThenValuesDestination;
 }
 
 /* _glPixelMapfv_Exec @ 0x7accc (1760 bytes) */
@@ -1947,42 +1948,43 @@ int _glPixelMapusv_Comp(glContext, map, mapsize, values)
   uint mapsize;
   uint values;
 {
-  int iVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  int byteOffset;
+  undefined4 *listRecordThenValuesDestination;
+  int pixelUnpackBuffer;
+  int valueIndex;
   
-  iVar3 = *(int *)(glContext + 0x4a6c);
-  if (iVar3 != 0) {
-    if ((*(int *)(iVar3 + 0x38) < (int)(mapsize * 2 + values)) || ((values & 1) != 0)) {
+  pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+  if (pixelUnpackBuffer != 0) {
+    if ((*(int *)(pixelUnpackBuffer + 0x38) < (int)(mapsize * 2 + values)) || ((values & 1) != 0)) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return (undefined4 *)glContext;
       }
       *(undefined4 *)(glContext + 0x7574) = 0x502;
       return (undefined4 *)glContext;
     }
-    if (*(int *)(iVar3 + 0x40) != 0) {
-      _gleSynchronizePluginBuffer(glContext,iVar3 + 0x10);
+    if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+      _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
     }
-    values = values + *(int *)(iVar3 + 0x30);
+    values = values + *(int *)(pixelUnpackBuffer + 0x30);
   }
-  puVar2 = (undefined4 *)
+  listRecordThenValuesDestination = (undefined4 *)
            _gleAddListItem(glContext,PTR__glPixelMapusv_ListExec_00110244,
                            (mapsize + (mapsize & 1)) * 2 + 8);
-  if (puVar2 != (undefined4 *)0x0) {
-    iVar3 = 0;
-    *puVar2 = map;
-    puVar2[1] = mapsize;
-    puVar2 = puVar2 + 2;
+  if (listRecordThenValuesDestination != (undefined4 *)0x0) {
+    valueIndex = 0;
+    *listRecordThenValuesDestination = map;
+    listRecordThenValuesDestination[1] = mapsize;
+    listRecordThenValuesDestination = listRecordThenValuesDestination + 2;
     if (0 < (int)mapsize) {
       do {
-        iVar1 = iVar3 * 2;
-        iVar3 = iVar3 + 1;
-        *(undefined2 *)((int)puVar2 + iVar1) = *(undefined2 *)(values + iVar1);
+        byteOffset = valueIndex * 2;
+        valueIndex = valueIndex + 1;
+        *(undefined2 *)((int)listRecordThenValuesDestination + byteOffset) = *(undefined2 *)(values + byteOffset);
         mapsize = mapsize - 1;
       } while (mapsize != 0);
     }
   }
-  return puVar2;
+  return listRecordThenValuesDestination;
 }
 
 /* _glPixelMapusv_Exec @ 0x7bd60 (1688 bytes) */

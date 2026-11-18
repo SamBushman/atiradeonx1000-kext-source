@@ -673,41 +673,41 @@ int _glUniformMatrix2fvARB_Comp(glContext, location, count, transpose, value)
   undefined4 *value;
 {
   int loopIndex;
-  undefined4 *puVar2;
+  undefined4 *listRecordThenDestination;
   
-  puVar2 = (undefined4 *)
+  listRecordThenDestination = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniformMatrix2fvARB_ListExec_001102c0,count * 0x10 + 8);
-  if (puVar2 != (undefined4 *)0x0) {
-    puVar2[1] = count;
-    *puVar2 = location;
-    puVar2 = puVar2 + 2;
+  if (listRecordThenDestination != (undefined4 *)0x0) {
+    listRecordThenDestination[1] = count;
+    *listRecordThenDestination = location;
+    listRecordThenDestination = listRecordThenDestination + 2;
     loopIndex = 0;
     if (transpose == 0) {
       while( true ) {
-        *puVar2 = *value;
-        puVar2[1] = value[1];
-        puVar2[2] = value[2];
-        puVar2[3] = value[3];
+        *listRecordThenDestination = *value;
+        listRecordThenDestination[1] = value[1];
+        listRecordThenDestination[2] = value[2];
+        listRecordThenDestination[3] = value[3];
         if (loopIndex == count + -1) break;
-        puVar2 = puVar2 + 4;
+        listRecordThenDestination = listRecordThenDestination + 4;
         value = value + 4;
         loopIndex = loopIndex + 1;
       }
     }
     else {
       while( true ) {
-        *puVar2 = *value;
-        puVar2[2] = value[1];
-        puVar2[1] = value[2];
-        puVar2[3] = value[3];
+        *listRecordThenDestination = *value;
+        listRecordThenDestination[2] = value[1];
+        listRecordThenDestination[1] = value[2];
+        listRecordThenDestination[3] = value[3];
         if (loopIndex == count + -1) break;
-        puVar2 = puVar2 + 4;
+        listRecordThenDestination = listRecordThenDestination + 4;
         value = value + 4;
         loopIndex = loopIndex + 1;
       }
     }
   }
-  return puVar2;
+  return listRecordThenDestination;
 }
 
 /* _glUniformMatrix3fvARB_Comp @ 0x8da38 (308 bytes) */

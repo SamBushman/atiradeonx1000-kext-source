@@ -476,7 +476,8 @@ void _gleGetHashMachineObjectNameTargetPairs(glContext, hashBuckets, objectType,
   int *valuePtr;
 {
   undefined *zeroTargetExtractor;
-  int *piVar2;
+  int *bucketSlotThenEntry;
+  int *resultArray;
   undefined4 objectTarget;
   int a2;
   int *a3;
@@ -485,50 +486,51 @@ void _gleGetHashMachineObjectNameTargetPairs(glContext, hashBuckets, objectType,
   int *nextBucket;
   int a6;
   code *targetExtractor;
-  int iVar6;
+  int entryCount;
+  int pairWordIndex;
   
   zeroTargetExtractor = PTR__zeroTargetExtractor_00110e30;
-  iVar6 = 0;
+  entryCount = 0;
   a2 = objectType;
   a3 = valuePtr;
   if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
     _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
   }
-  piVar2 = hashBuckets;
+  bucketSlotThenEntry = hashBuckets;
   do {
-    nextBucket = piVar2 + 1;
-    for (piVar2 = (int *)*piVar2; piVar2 != (int *)0x0; piVar2 = (int *)*piVar2) {
-      iVar6 = iVar6 + 1;
+    nextBucket = bucketSlotThenEntry + 1;
+    for (bucketSlotThenEntry = (int *)*bucketSlotThenEntry; bucketSlotThenEntry != (int *)0x0; bucketSlotThenEntry = (int *)*bucketSlotThenEntry) {
+      entryCount = entryCount + 1;
     }
-    piVar2 = nextBucket;
+    bucketSlotThenEntry = nextBucket;
   } while (nextBucket <= hashBuckets + 0x3ff);
-  if (iVar6 == 0) {
+  if (entryCount == 0) {
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
     *valuePtr = 0;
   }
   else {
-    piVar2 = (int *)_malloc(iVar6 * 8 + 4);
-    *piVar2 = iVar6;
-    *valuePtr = (int)piVar2;
+    resultArray = (int *)_malloc(entryCount * 8 + 4);
+    *resultArray = entryCount;
+    *valuePtr = (int)resultArray;
     targetExtractor = (code *)PTR__gleTextureTargetExtractor_0011215c;
     if ((objectType != 2) &&
        (targetExtractor = (code *)PTR__glePipelineProgramTargetExtactor_00112158, objectType != 4)) {
       targetExtractor = (code *)zeroTargetExtractor;
     }
-    iVar6 = 0;
-    piVar2 = hashBuckets;
+    pairWordIndex = 0;
+    bucketSlotThenEntry = hashBuckets;
     do {
-      nextBucket = piVar2 + 1;
-      for (piVar2 = (int *)*piVar2; piVar2 != (int *)0x0; piVar2 = (int *)*piVar2) {
+      nextBucket = bucketSlotThenEntry + 1;
+      for (bucketSlotThenEntry = (int *)*bucketSlotThenEntry; bucketSlotThenEntry != (int *)0x0; bucketSlotThenEntry = (int *)*bucketSlotThenEntry) {
         a6 = *valuePtr;
-        *(int *)((iVar6 + 1) * 4 + a6) = piVar2[1];
-        iVar6 = iVar6 + 2;
-        objectTarget = (*targetExtractor)(glContext,piVar2,a2,a3,incomingR7,incomingR8,a6);
-        *(undefined4 *)(iVar6 * 4 + *valuePtr) = objectTarget;
+        *(int *)((pairWordIndex + 1) * 4 + a6) = bucketSlotThenEntry[1];
+        pairWordIndex = pairWordIndex + 2;
+        objectTarget = (*targetExtractor)(glContext,bucketSlotThenEntry,a2,a3,incomingR7,incomingR8,a6);
+        *(undefined4 *)(pairWordIndex * 4 + *valuePtr) = objectTarget;
       }
-      piVar2 = nextBucket;
+      bucketSlotThenEntry = nextBucket;
     } while (nextBucket <= hashBuckets + 0x3ff);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);

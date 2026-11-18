@@ -1409,29 +1409,29 @@ void FUN_00008b68()
 int _gleUpdateTextureTransform(glContext)
   int glContext;
 {
-  bool bVar1;
+  bool useDivideByW;
   undefined *puVar2;
   undefined *puVar3;
   undefined *puVar4;
-  int iVar5;
+  int texEnableBits;
   
-  iVar5 = _gleTexEnableBits(glContext);
+  texEnableBits = _gleTexEnableBits(glContext);
   puVar3 = PTR__gleTextureMatTransPtrDivW_001115ec;
   puVar2 = PTR__gleMultiTextureMatTransPtr_001115e0;
   puVar4 = PTR__gleTextureMatTrans_Identity_001115f4;
-  if (((iVar5 != 0) && (*(char *)(glContext + 0x4664) == '\0')) && (*(int *)(glContext + 0x5434) == 0))
+  if (((texEnableBits != 0) && (*(char *)(glContext + 0x4664) == '\0')) && (*(int *)(glContext + 0x5434) == 0))
   {
-    bVar1 = false;
+    useDivideByW = false;
     if (((*(uint *)(*(int *)(glContext + 0x468c) + 0x94) & 4) == 0) &&
        (*(int *)(glContext + 0x4e1c) == 0x1c00)) {
-      bVar1 = true;
+      useDivideByW = true;
     }
-    if (iVar5 != 1) {
+    if (texEnableBits != 1) {
       *(undefined **)(glContext + 0x506c) = PTR__gleMultiTextureMatTrans_001115e4;
       *(undefined **)(glContext + 0x5074) = puVar2;
       puVar3 = PTR__gleTextureMatTransPtrDivW_001115ec;
       puVar2 = PTR__gleTextureMatTrans_001115e8;
-      if (bVar1) {
+      if (useDivideByW) {
         *(undefined **)(glContext + 0x5070) = PTR__gleTextureMatTransDivW_001115f0;
         *(undefined **)(glContext + 0x5078) = puVar3;
         return;
@@ -1441,7 +1441,7 @@ int _gleUpdateTextureTransform(glContext)
       return;
     }
     puVar4 = PTR__gleTextureMatTrans_001115e8;
-    if (bVar1) {
+    if (useDivideByW) {
       *(undefined **)(glContext + 0x506c) = PTR__gleTextureMatTransDivW_001115f0;
       *(undefined **)(glContext + 0x5074) = puVar3;
       return;

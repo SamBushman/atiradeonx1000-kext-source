@@ -5747,11 +5747,11 @@ void _gleFlushTriangleFanTCLFunc(glContext)
 /* _gleFlushTriangleFanTCLRDirtyFunc @ 0xf30c4 (232 bytes) */
 void _gleFlushTriangleFanTCLRDirtyFunc(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
+  int copyDestination;
+  int copyByteOffset;
+  int copyByteCount;
+  int vertexWriteCursor;
+  uint copyUnitCount;
   
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
@@ -5763,20 +5763,20 @@ void _gleFlushTriangleFanTCLRDirtyFunc(int glContext,double floatArg1,double flo
     return;
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar3 = (int)*(short *)(glContext + 0x487c);
-  iVar2 = 0;
-  iVar4 = *(int *)(glContext + 0x4858);
-  iVar1 = *(int *)(glContext + 0x4854) + iVar3;
-  if (0 < iVar3) {
-    uVar5 = iVar3 + 7U >> 3;
+  copyByteCount = (int)*(short *)(glContext + 0x487c);
+  copyByteOffset = 0;
+  vertexWriteCursor = *(int *)(glContext + 0x4858);
+  copyDestination = *(int *)(glContext + 0x4854) + copyByteCount;
+  if (0 < copyByteCount) {
+    copyUnitCount = copyByteCount + 7U >> 3;
     do {
-      *(undefined8 *)(iVar1 + iVar2) = *(undefined8 *)((iVar4 - iVar3) + iVar2);
-      iVar2 = iVar2 + 8;
-      uVar5 = uVar5 - 1;
-    } while (uVar5 != 0);
+      *(undefined8 *)(copyDestination + copyByteOffset) = *(undefined8 *)((vertexWriteCursor - copyByteCount) + copyByteOffset);
+      copyByteOffset = copyByteOffset + 8;
+      copyUnitCount = copyUnitCount - 1;
+    } while (copyUnitCount != 0);
   }
   *(undefined4 *)(glContext + 0x486c) = 0;
-  *(int *)(glContext + 0x4858) = iVar1 + iVar3;
+  *(int *)(glContext + 0x4858) = copyDestination + copyByteCount;
   return;
 }
 

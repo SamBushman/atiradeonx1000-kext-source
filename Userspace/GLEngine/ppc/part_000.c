@@ -3192,7 +3192,7 @@ void _gleInitTextureState(glContext)
   int loopIndex;
   int remaining;
   char glContextByte85a4;
-  undefined4 uVar2;
+  undefined4 copiedWord;
   int textureObject;
   int textureObject2;
   int iVar5;
@@ -3202,18 +3202,18 @@ void _gleInitTextureState(glContext)
   undefined4 *dstCursor2;
   uint loopIndex6;
   int *dstCursor3;
-  int iVar12;
+  int glContextPlusIndex4;
   int textureObject3;
   
   loopIndex6 = 0;
   dstCursor3 = (int *)(glContext + 0x5294);
-  iVar12 = glContext;
+  glContextPlusIndex4 = glContext;
   do {
     textureObject = ((int (*)())_gleCreateTextureObject)(loopIndex6 | 0x1000,0);
     ((void (*)())_gleCreatePluginTexture)(glContext,textureObject + 0x10);
     *dstCursor3 = textureObject;
     iVar5 = loopIndex6 * 4 + glContext + 0x10000;
-    dstCursor = (int *)(iVar12 + 0x5154);
+    dstCursor = (int *)(glContextPlusIndex4 + 0x5154);
     remaining2 = 0xf;
     do {
       glContextByte85a4 = *(char *)(glContext + 0x85a4);
@@ -3224,10 +3224,10 @@ void _gleInitTextureState(glContext)
         dstCursor2 = (undefined4 *)(iVar5 + -0x7920);
         srcCursor = (undefined4 *)(textureObject + 0x10);
         do {
-          uVar2 = *srcCursor;
+          copiedWord = *srcCursor;
           loopIndex5 = loopIndex5 + 1;
           srcCursor = srcCursor + 1;
-          *dstCursor2 = uVar2;
+          *dstCursor2 = copiedWord;
           dstCursor2 = dstCursor2 + 0xb8;
         } while (loopIndex5 < (int)(uint)*(byte *)(glContext + 0x85a4));
       }
@@ -3235,7 +3235,7 @@ void _gleInitTextureState(glContext)
       iVar5 = iVar5 + 0x14;
     } while (-1 < remaining2);
     loopIndex6 = loopIndex6 + 1;
-    iVar12 = iVar12 + 4;
+    glContextPlusIndex4 = glContextPlusIndex4 + 4;
     dstCursor3 = dstCursor3 + 1;
     *(int *)(textureObject + 8) = *(int *)(textureObject + 8) + 0x10;
   } while ((int)loopIndex6 < 5);
@@ -3250,7 +3250,7 @@ void _gleInitTextureState(glContext)
   } while ((int)loopIndex7 < 5);
   loopIndex = 0;
   dstCursor3 = (int *)(glContext + 0x52bc);
-  iVar12 = glContext;
+  glContextPlusIndex4 = glContext;
   do {
     textureObject2 = ((int (*)())_gleCreateTextureObject)(loopIndex << 4 | 0x1204,0);
     srcCursor = (undefined4 *)(textureObject2 + 0x10);
@@ -3260,17 +3260,17 @@ void _gleInitTextureState(glContext)
     *dstCursor3 = textureObject2;
     dstCursor3 = dstCursor3 + 1;
     if (glContextByte85a4 != '\0') {
-      dstCursor2 = (undefined4 *)(iVar12 + 0x8820);
+      dstCursor2 = (undefined4 *)(glContextPlusIndex4 + 0x8820);
       do {
-        uVar2 = *srcCursor;
+        copiedWord = *srcCursor;
         loopIndex3 = loopIndex3 + 1;
         srcCursor = srcCursor + 1;
-        *dstCursor2 = uVar2;
+        *dstCursor2 = copiedWord;
         dstCursor2 = dstCursor2 + 0xb8;
       } while (loopIndex3 < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
     loopIndex = loopIndex + 1;
-    iVar12 = iVar12 + 4;
+    glContextPlusIndex4 = glContextPlusIndex4 + 4;
   } while (loopIndex < 3);
   dstCursor3 = (int *)(glContext + 0x52c8);
   loopIndex8 = 0;
@@ -3285,7 +3285,7 @@ void _gleInitTextureState(glContext)
   } while (-1 < remaining);
   loopIndex2 = 0;
   dstCursor3 = (int *)(glContext + 0x52d4);
-  iVar12 = glContext;
+  glContextPlusIndex4 = glContext;
   do {
     textureObject2 = ((int (*)())_gleCreateTextureObject)(((unsigned char *)0x00001204U),0);
     srcCursor = (undefined4 *)(textureObject2 + 0x10);
@@ -3295,17 +3295,17 @@ void _gleInitTextureState(glContext)
     *dstCursor3 = textureObject2;
     dstCursor3 = dstCursor3 + 1;
     if (glContextByte85a4 != '\0') {
-      dstCursor2 = (undefined4 *)(iVar12 + 0x882c);
+      dstCursor2 = (undefined4 *)(glContextPlusIndex4 + 0x882c);
       do {
-        uVar2 = *srcCursor;
+        copiedWord = *srcCursor;
         loopIndex4 = loopIndex4 + 1;
         srcCursor = srcCursor + 1;
-        *dstCursor2 = uVar2;
+        *dstCursor2 = copiedWord;
         dstCursor2 = dstCursor2 + 0xb8;
       } while (loopIndex4 < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
     loopIndex2 = loopIndex2 + 1;
-    iVar12 = iVar12 + 4;
+    glContextPlusIndex4 = glContextPlusIndex4 + 4;
   } while (loopIndex2 < 0x10);
   return;
 }
