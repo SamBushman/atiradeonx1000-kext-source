@@ -81,16 +81,16 @@ void _gleSetEnable_BLEND(param_1, unusedArg2, param_3)
 }
 
 /* _gleSetEnable_DEPTH_TEST @ 0x16588 (32 bytes) */
-void _gleSetEnable_DEPTH_TEST(param_1, unusedArg2, param_3)
-  int param_1;
+void _gleSetEnable_DEPTH_TEST(glContext, unusedArg2, enable)
+  int glContext;
   undefined4 unusedArg2;
-  uint param_3;
+  uint enable;
 {
-  if (*(byte *)(param_1 + 0x3128) == param_3) {
+  if (*(byte *)(glContext + 0x3128) == enable) {
     return;
   }
-  *(char *)(param_1 + 0x3128) = (char)param_3;
-  *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x200;
+  *(char *)(glContext + 0x3128) = (char)enable;
+  *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x200;
   return;
 }
 
@@ -112,13 +112,13 @@ void _glDepthMask_Exec(glContext, flag)
 }
 
 /* _gleSetEnable_CULL_FACE @ 0x165e8 (84 bytes) */
-void _gleSetEnable_CULL_FACE(glContext, unusedArg2, param_3)
+void _gleSetEnable_CULL_FACE(glContext, unusedArg2, enable)
   int glContext;
   undefined4 unusedArg2;
-  uint param_3;
+  uint enable;
 {
-  if (*(byte *)(glContext + 0x34da) != param_3) {
-    *(char *)(glContext + 0x34da) = (char)param_3;
+  if (*(byte *)(glContext + 0x34da) != enable) {
+    *(char *)(glContext + 0x34da) = (char)enable;
     _gleUpdatePolyMode(glContext);
     _gleUpdatePrimitiveData(glContext);
     return;

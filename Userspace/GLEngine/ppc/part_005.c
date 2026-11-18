@@ -3308,21 +3308,22 @@ int _glClear_Comp(glContext, mask)
 }
 
 /* _gleSetEnable_STENCIL_TEST @ 0x3a3d0 (56 bytes) */
-void _gleSetEnable_STENCIL_TEST(param_1, unusedArg2, param_3)
-  int param_1;
+void _gleSetEnable_STENCIL_TEST(glContext, unusedArg2, enable)
+  int glContext;
   undefined4 unusedArg2;
-  int param_3;
+  int enable;
 {
-  uint uVar1;
+  uint faceShift;
+  uint newEnableBits;
   
-  uVar1 = *(byte *)(param_1 + 0x7583) & 0x1f;
-  uVar1 = *(uint *)(param_1 + 0x3520) & (-2 << uVar1 | 0xfffffffeU >> 0x20 - uVar1) |
-          param_3 << (*(byte *)(param_1 + 0x7583) & 0x3f);
-  if (*(uint *)(param_1 + 0x3520) == uVar1) {
+  faceShift = *(byte *)(glContext + 0x7583) & 0x1f;
+  newEnableBits = *(uint *)(glContext + 0x3520) & (-2 << faceShift | 0xfffffffeU >> 0x20 - faceShift) |
+          enable << (*(byte *)(glContext + 0x7583) & 0x3f);
+  if (*(uint *)(glContext + 0x3520) == newEnableBits) {
     return;
   }
-  *(uint *)(param_1 + 0x3520) = uVar1;
-  *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x10000000;
+  *(uint *)(glContext + 0x3520) = newEnableBits;
+  *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x10000000;
   return;
 }
 

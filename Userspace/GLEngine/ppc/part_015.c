@@ -1016,53 +1016,53 @@ void _glDeleteRenderbuffersEXT_Exec_body(glContext, n, renderbuffers)
   int *renderbuffers;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int attachedObject;
   int hashObject;
   int framebufferObject;
-  int *piVar5;
-  undefined *puVar6;
-  int iVar7;
+  int *attachmentObjects;
+  undefined *renderbufferHashTable;
+  int boundRenderbufferName;
   uint loopIndex;
-  int iVar9;
+  int renderbufferName;
   int *cursor;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
-      puVar6 = (undefined *)0x0;
-      piVar5 = (int *)0x0;
+      renderbufferHashTable = (undefined *)0x0;
+      attachmentObjects = (int *)0x0;
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
       }
       framebufferObject = *(int *)(glContext + 0x744c);
       if (framebufferObject != 0) {
-        piVar5 = (int *)(framebufferObject + 0xd4);
-        puVar6 = ((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148);
+        attachmentObjects = (int *)(framebufferObject + 0xd4);
+        renderbufferHashTable = ((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148);
       }
-      iVar7 = 0;
+      boundRenderbufferName = 0;
       if (*(int *)(glContext + 0x7448) != 0) {
-        iVar7 = *(int *)(*(int *)(glContext + 0x7448) + 4);
+        boundRenderbufferName = *(int *)(*(int *)(glContext + 0x7448) + 4);
       }
       if (0 < n) {
         do {
-          iVar9 = *renderbuffers;
+          renderbufferName = *renderbuffers;
           renderbuffers = renderbuffers + 1;
-          if (iVar9 != 0) {
-            if (iVar9 == iVar7) {
+          if (renderbufferName != 0) {
+            if (renderbufferName == boundRenderbufferName) {
               _gleBindRenderbuffer(glContext,0);
             }
-            if ((framebufferObject != 0) && (hashObject = _gleLookupHashObject(puVar6,iVar9), hashObject != 0)) {
+            if ((framebufferObject != 0) && (hashObject = _gleLookupHashObject(renderbufferHashTable,renderbufferName), hashObject != 0)) {
               loopIndex = 0;
-              cursor = piVar5;
+              cursor = attachmentObjects;
               do {
-                iVar2 = *cursor;
+                attachedObject = *cursor;
                 cursor = cursor + 1;
-                if (hashObject == iVar2) {
+                if (hashObject == attachedObject) {
                   _gleFramebufferTexture(glContext,loopIndex,0,0,0,0,0);
                 }
                 loopIndex = loopIndex + 1;
               } while (loopIndex < 6);
             }
-            _gleDeleteHashNameAndObject(glContext,((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148),iVar9);
+            _gleDeleteHashNameAndObject(glContext,((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148),renderbufferName);
           }
           n = n + -1;
         } while (n != 0);

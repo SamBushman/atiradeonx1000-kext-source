@@ -404,13 +404,13 @@ void _gleSetEnable_COLOR_MATERIAL(glContext, cap, enable)
   undefined4 cap;
   uint enable;
 {
-  char cVar1;
+  char colorCallbackFlagBefore;
   
   if (*(byte *)(glContext + 0x30ab) != enable) {
     *(char *)(glContext + 0x30ab) = (char)enable;
-    cVar1 = *(char *)(glContext + 0x4df8);
+    colorCallbackFlagBefore = *(char *)(glContext + 0x4df8);
     _gleSetColorMaterialEnable(glContext);
-    if (((enable == 0) && (cVar1 == '\0')) && (*(char *)(glContext + 0x4df8) == '\0')) {
+    if (((enable == 0) && (colorCallbackFlagBefore == '\0')) && (*(char *)(glContext + 0x4df8) == '\0')) {
       (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
     }
     _gleSelectVertexSubmitFunc(glContext);

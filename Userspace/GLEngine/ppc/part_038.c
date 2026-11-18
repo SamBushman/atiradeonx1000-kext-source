@@ -922,42 +922,42 @@ void _glCombinerOutputNV_Exec(glContext, stage, portion, abOutput, cdOutput, sum
   undefined4 muxSum;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  int stageIndexThenOutputRecord;
+  int portionIndex;
+  int rendererInfo;
   
-  iVar2 = stage + -0x8550;
+  stageIndexThenOutputRecord = stage + -0x8550;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((-1 < iVar2) && (iVar4 = *(int *)(glContext + 0x468c), iVar2 < *(int *)(iVar4 + 0x98))) {
+    if ((-1 < stageIndexThenOutputRecord) && (rendererInfo = *(int *)(glContext + 0x468c), stageIndexThenOutputRecord < *(int *)(rendererInfo + 0x98))) {
       if (portion == 0x1906) {
-        iVar3 = 0;
+        portionIndex = 0;
         if (((char)abDotProduct != '\0') || ((char)cdDotProduct != '\0')) goto LAB_000b362c;
       }
       else {
-        iVar3 = 1;
+        portionIndex = 1;
         if (portion != 0x1907) goto LAB_000b35d0;
       }
       if ((bias == 0) || (bias == 0x8541)) {
         if (scale == 0x853e) {
 LAB_000b354c:
-          if (((((0x84bf < abOutput) && (abOutput < *(ushort *)(iVar4 + 0xb4) + 0x84c0)) ||
+          if (((((0x84bf < abOutput) && (abOutput < *(ushort *)(rendererInfo + 0xb4) + 0x84c0)) ||
                (abOutput - 0x852c < 5)) &&
-              (((0x84bf < cdOutput && (cdOutput < *(ushort *)(iVar4 + 0xb4) + 0x84c0)) ||
+              (((0x84bf < cdOutput && (cdOutput < *(ushort *)(rendererInfo + 0xb4) + 0x84c0)) ||
                (cdOutput - 0x852c < 5)))) &&
-             (((0x84bf < sumOutput && (sumOutput < *(ushort *)(iVar4 + 0xb4) + 0x84c0)) ||
+             (((0x84bf < sumOutput && (sumOutput < *(ushort *)(rendererInfo + 0xb4) + 0x84c0)) ||
               (sumOutput - 0x852c < 5)))) {
             if (((sumOutput != abOutput) || (sumOutput == 0x8530)) &&
                (((sumOutput != cdOutput || (sumOutput == 0x8530)) &&
                 ((abOutput != cdOutput || (cdOutput == 0x8530)))))) {
-              iVar2 = iVar2 * 0x80 + iVar3 * 0x30 + glContext;
-              *(undefined1 *)(iVar2 + 0x4242) = (undefined1)muxSum;
-              *(short *)(iVar2 + 0x4248) = (short)abOutput;
-              *(short *)(iVar2 + 0x424a) = (short)cdOutput;
-              *(short *)(iVar2 + 0x424c) = (short)sumOutput;
-              *(short *)(iVar2 + 0x4244) = (short)scale;
-              *(short *)(iVar2 + 0x4246) = (short)bias;
-              *(char *)(iVar2 + 0x4240) = (char)abDotProduct;
-              *(char *)(iVar2 + 0x4241) = (char)cdDotProduct;
+              stageIndexThenOutputRecord = stageIndexThenOutputRecord * 0x80 + portionIndex * 0x30 + glContext;
+              *(undefined1 *)(stageIndexThenOutputRecord + 0x4242) = (undefined1)muxSum;
+              *(short *)(stageIndexThenOutputRecord + 0x4248) = (short)abOutput;
+              *(short *)(stageIndexThenOutputRecord + 0x424a) = (short)cdOutput;
+              *(short *)(stageIndexThenOutputRecord + 0x424c) = (short)sumOutput;
+              *(short *)(stageIndexThenOutputRecord + 0x4244) = (short)scale;
+              *(short *)(stageIndexThenOutputRecord + 0x4246) = (short)bias;
+              *(char *)(stageIndexThenOutputRecord + 0x4240) = (char)abDotProduct;
+              *(char *)(stageIndexThenOutputRecord + 0x4241) = (char)cdDotProduct;
               *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x1000000;
               return;
             }

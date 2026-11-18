@@ -2497,25 +2497,25 @@ float * _glTexCoord2f_Comp(undefined4 glContext,float sCoord,float tCoord)
 }
 
 /* _gleSetEnable_TEXTURE_2D @ 0x48818 (80 bytes) */
-void _gleSetEnable_TEXTURE_2D(glContext, unusedArg2, param_3)
+void _gleSetEnable_TEXTURE_2D(glContext, unusedArg2, enable)
   int glContext;
   undefined4 unusedArg2;
-  int param_3;
+  int enable;
 {
-  uint uVar1;
-  int iVar2;
+  uint newUnitEnableBits;
+  int texUnitRecord;
   uint texUnit;
-  uint uVar4;
+  uint oldUnitEnableBits;
   
   texUnit = *(uint *)(glContext + 0x53d4);
   if (texUnit < 8) {
-    iVar2 = texUnit * 0x7c + glContext;
-    uVar4 = *(uint *)(iVar2 + 0x3534);
-    uVar1 = uVar4 & 0xfffffff7 | param_3 << 3;
-    if (uVar4 == uVar1) {
+    texUnitRecord = texUnit * 0x7c + glContext;
+    oldUnitEnableBits = *(uint *)(texUnitRecord + 0x3534);
+    newUnitEnableBits = oldUnitEnableBits & 0xfffffff7 | enable << 3;
+    if (oldUnitEnableBits == newUnitEnableBits) {
       return;
     }
-    *(uint *)(iVar2 + 0x3534) = uVar1;
+    *(uint *)(texUnitRecord + 0x3534) = newUnitEnableBits;
     _gleUpdateTextureParams(glContext,texUnit);
     return;
   }

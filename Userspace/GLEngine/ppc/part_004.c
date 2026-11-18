@@ -2054,47 +2054,47 @@ LAB_00031c08:
 }
 
 /* _gleSetEnable_LIGHT @ 0x31c34 (144 bytes) */
-void _gleSetEnable_LIGHT(glContext, param_2, param_3)
+void _gleSetEnable_LIGHT(glContext, cap, enable)
   int glContext;
-  int param_2;
-  int param_3;
+  int cap;
+  int enable;
 {
-  uint uVar1;
-  uint uVar2;
+  uint newLightEnableBits;
+  uint lightIndex;
   
-  uVar2 = param_2 - 0x4000;
-  uVar1 = *(uint *)(glContext + 0x30a0) &
-          (-2 << (uVar2 & 0x1f) | 0xfffffffeU >> 0x20 - (uVar2 & 0x1f)) | param_3 << (uVar2 & 0x3f);
-  if (*(uint *)(glContext + 0x30a0) != uVar1) {
-    *(uint *)(glContext + 0x30a0) = uVar1;
+  lightIndex = cap - 0x4000;
+  newLightEnableBits = *(uint *)(glContext + 0x30a0) &
+          (-2 << (lightIndex & 0x1f) | 0xfffffffeU >> 0x20 - (lightIndex & 0x1f)) | enable << (lightIndex & 0x3f);
+  if (*(uint *)(glContext + 0x30a0) != newLightEnableBits) {
+    *(uint *)(glContext + 0x30a0) = newLightEnableBits;
     *(undefined1 *)(*(int *)(glContext + 0x4dd0) + 0x234) = 0x1f;
     *(undefined1 *)(*(int *)(glContext + 0x4dd4) + 0x234) = 0x1f;
-    _gleUpdateLightFast(glContext,uVar2);
+    _gleUpdateLightFast(glContext,lightIndex);
     _gleUpdateLightModelFunc(glContext);
-    *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 8 << (uVar2 * 2 & 0x3e);
+    *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 8 << (lightIndex * 2 & 0x3e);
   }
   return;
 }
 
 /* _gleSetEnable_LIGHTING @ 0x31cc4 (220 bytes) */
-void _gleSetEnable_LIGHTING(glContext, unusedArg2, param_3)
+void _gleSetEnable_LIGHTING(glContext, unusedArg2, enable)
   int glContext;
   undefined4 unusedArg2;
-  uint param_3;
+  uint enable;
 {
-  undefined *puVar1;
-  undefined1 uVar2;
+  undefined *setClipInterpFunc;
+  undefined1 newByte316b;
   
-  if (*(byte *)(glContext + 0x30aa) != param_3) {
-    *(char *)(glContext + 0x30aa) = (char)param_3;
+  if (*(byte *)(glContext + 0x30aa) != enable) {
+    *(char *)(glContext + 0x30aa) = (char)enable;
     if (*(char *)(glContext + 0x4664) == '\0') {
-      if (param_3 == 0) {
-        uVar2 = *(undefined1 *)(glContext + 0x4fea);
+      if (enable == 0) {
+        newByte316b = *(undefined1 *)(glContext + 0x4fea);
       }
       else {
-        uVar2 = *(short *)(glContext + 0x30a8) == -0x7e06;
+        newByte316b = *(short *)(glContext + 0x30a8) == -0x7e06;
       }
-      *(undefined1 *)(glContext + 0x316b) = uVar2;
+      *(undefined1 *)(glContext + 0x316b) = newByte316b;
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800;
     }
     *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 1;
@@ -2102,9 +2102,9 @@ void _gleSetEnable_LIGHTING(glContext, unusedArg2, param_3)
     _gleUpdateInverseNeeds(glContext);
     _gleSelectVertexSubmitFunc(glContext);
     _gleSelectVertexAddMaterialFunc(glContext);
-    puVar1 = PTR__gleSetClipInterpFunc_00112038;
+    setClipInterpFunc = PTR__gleSetClipInterpFunc_00112038;
     *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-    *(undefined **)(glContext + 0x49cc) = puVar1;
+    *(undefined **)(glContext + 0x49cc) = setClipInterpFunc;
     _gleUpdatePolyMode(glContext);
     return;
   }
