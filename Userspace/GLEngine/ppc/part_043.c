@@ -1947,21 +1947,21 @@ LAB_000cefac:
 /* _LFSParserCreate @ 0xcf04c (60 bytes) */
 int _LFSParserCreate()
 {
-  undefined4 uVar1;
+  undefined4 parser;
   
-  uVar1 = _calloc(0x46c,1);
-  ((int (*)())_LFSParserInit)(uVar1);
-  return uVar1;
+  parser = _calloc(0x46c,1);
+  ((int (*)())_LFSParserInit)(parser);
+  return parser;
 }
 
 /* _LFSParserInit @ 0xcf088 (12 bytes) */
-int _LFSParserInit(param_1)
-  undefined4 param_1;
+int _LFSParserInit(parser)
+  undefined4 parser;
 {
-  undefined4 uVar1;
+  undefined4 memsetResult;
   
-  uVar1 = _memset(param_1,0,0x46c);
-  return uVar1;
+  memsetResult = _memset(parser,0,0x46c);
+  return memsetResult;
 }
 
 /* _LFSParserShutdown @ 0xcf094 (12 bytes) */
@@ -1996,29 +1996,29 @@ void _LFSParserAttachStream(param_1, param_2)
 }
 
 /* _LFSParserCheckForNewline @ 0xcf110 (96 bytes) */
-int _LFSParserCheckForNewline(unusedArg1, param_2, param_3, param_4, param_5)
+int _LFSParserCheckForNewline(unusedArg1, text, position, textLength, newlineLengthOut)
   undefined4 unusedArg1;
-  int param_2;
-  int param_3;
-  uint param_4;
-  undefined4 *param_5;
+  int text;
+  int position;
+  uint textLength;
+  undefined4 *newlineLengthOut;
 {
-  char cVar1;
+  char currentChar;
   
-  if (param_3 + 1U < param_4) {
-    cVar1 = *(char *)(param_2 + param_3);
-    if ((cVar1 == '\r') && (*(char *)(param_2 + param_3 + 1) == '\n')) {
-      *param_5 = 2;
+  if (position + 1U < textLength) {
+    currentChar = *(char *)(text + position);
+    if ((currentChar == '\r') && (*(char *)(text + position + 1) == '\n')) {
+      *newlineLengthOut = 2;
       return true;
     }
   }
   else {
-    cVar1 = *(char *)(param_2 + param_3);
+    currentChar = *(char *)(text + position);
   }
-  if (cVar1 == '\n') {
+  if (currentChar == '\n') {
     return true;
   }
-  return cVar1 == '\r';
+  return currentChar == '\r';
 }
 
 /* _LFSParserPreprocessString @ 0xcf170 (568 bytes) */
@@ -3269,61 +3269,63 @@ int _LFSParserParseConstantBinding(parser)
 int _LFSParserParseInstruction(parser)
   int parser;
 {
-  int iVar1;
+  int getPartResult;
+  int parseResult;
+  int memcmpResult;
   char partText [256];
   undefined4 savedPosition0;
   undefined4 savedPosition1;
   
   savedPosition0 = *(undefined4 *)(parser + 0xc);
   savedPosition1 = *(undefined4 *)(parser + 0x10);
-  iVar1 = ((int (*)())_LFSParserGetPart)(parser,partText);
-  if (iVar1 == 0) {
+  getPartResult = ((int (*)())_LFSParserGetPart)(parser,partText);
+  if (getPartResult == 0) {
     return 1;
   }
-  iVar1 = _memcmp(partText,"StartConstants",0xf);
-  if (iVar1 == 0) {
+  memcmpResult = _memcmp(partText,"StartConstants",0xf);
+  if (memcmpResult == 0) {
     *(undefined1 *)(parser + 0x3a) = 1;
     *(undefined1 *)(parser + 0x19) = 1;
     goto LAB_000d0f14;
   }
-  iVar1 = _memcmp(partText,"EndConstants",0xd);
-  if (iVar1 != 0) {
-    iVar1 = _memcmp(partText,"StartPrelimPass",0x10);
-    if (iVar1 == 0) {
+  memcmpResult = _memcmp(partText,"EndConstants",0xd);
+  if (memcmpResult != 0) {
+    memcmpResult = _memcmp(partText,"StartPrelimPass",0x10);
+    if (memcmpResult == 0) {
       *(undefined1 *)(parser + 0x19) = 2;
       *(undefined1 *)(parser + 0x4a) = 1;
       goto LAB_000d0f14;
     }
-    iVar1 = _memcmp(partText,"EndPass",8);
-    if (iVar1 != 0) {
-      iVar1 = _memcmp(partText,"StartOutputPass",0x10);
-      if (iVar1 == 0) {
+    memcmpResult = _memcmp(partText,"EndPass",8);
+    if (memcmpResult != 0) {
+      memcmpResult = _memcmp(partText,"StartOutputPass",0x10);
+      if (memcmpResult == 0) {
         *(undefined1 *)(parser + 0x19) = 3;
         *(undefined1 *)(parser + 0x5a) = 1;
       }
       else {
-        iVar1 = _memcmp(partText,"CONSTANT",9);
-        if (iVar1 == 0) {
+        memcmpResult = _memcmp(partText,"CONSTANT",9);
+        if (memcmpResult == 0) {
           if (*(char *)(parser + 0x19) != '\x01') {
             return 0xd;
           }
-          iVar1 = ((int (*)())_LFSParserParseConstantBinding)(parser);
+          parseResult = ((int (*)())_LFSParserParseConstantBinding)(parser);
         }
         else {
-          iVar1 = _memcmp(partText,"PassTexCoord",0xd);
-          if ((iVar1 == 0) || (iVar1 = _memcmp(partText,"SampleMap",10), iVar1 == 0)) {
+          memcmpResult = _memcmp(partText,"PassTexCoord",0xd);
+          if ((memcmpResult == 0) || (memcmpResult = _memcmp(partText,"SampleMap",10), memcmpResult == 0)) {
             *(undefined4 *)(parser + 0x10) = savedPosition1;
             *(undefined4 *)(parser + 0xc) = savedPosition0;
-            iVar1 = ((int (*)())_LFSParserParseRegisterInit)(parser);
+            parseResult = ((int (*)())_LFSParserParseRegisterInit)(parser);
           }
           else {
             *(undefined4 *)(parser + 0x10) = savedPosition1;
             *(undefined4 *)(parser + 0xc) = savedPosition0;
-            iVar1 = ((int (*)())_LFSParserParseOperation)(parser);
+            parseResult = ((int (*)())_LFSParserParseOperation)(parser);
           }
         }
-        if (iVar1 != 0) {
-          return iVar1;
+        if (parseResult != 0) {
+          return parseResult;
         }
       }
       goto LAB_000d0f14;
@@ -3331,8 +3333,8 @@ int _LFSParserParseInstruction(parser)
   }
   *(undefined1 *)(parser + 0x19) = 0;
 LAB_000d0f14:
-  iVar1 = ((int (*)())_LFSParserGetPart)(parser,partText);
-  if (iVar1 == 0) {
+  getPartResult = ((int (*)())_LFSParserGetPart)(parser,partText);
+  if (getPartResult == 0) {
     return 8;
   }
   if (partText[0] == ';') {
@@ -3342,35 +3344,35 @@ LAB_000d0f14:
 }
 
 /* _LFSParserParseVersion @ 0xd0f58 (160 bytes) */
-int _LFSParserParseVersion(param_1)
-  undefined4 param_1;
+int _LFSParserParseVersion(parser)
+  undefined4 parser;
 {
-  int iVar1;
-  undefined4 uVar2;
-  char *pcVar3;
-  uint uVar4;
-  char local_120 [16];
-  char local_110 [256];
+  int getCharacterResult;
+  undefined4 parseResult;
+  char *versionWriteCursor;
+  uint charsRead;
+  char charBuffer [16];
+  char versionText [256];
   
-  uVar4 = 0;
-  pcVar3 = local_110;
+  charsRead = 0;
+  versionWriteCursor = versionText;
   do {
-    iVar1 = ((int (*)())_LFSParserGetCharacter)(param_1,local_120,0);
-    if (iVar1 != 0) {
+    getCharacterResult = ((int (*)())_LFSParserGetCharacter)(parser,charBuffer,0);
+    if (getCharacterResult != 0) {
       return 8;
     }
-    *pcVar3 = local_120[0];
-    if (local_120[0] != ' ') {
-      pcVar3 = pcVar3 + 1;
+    *versionWriteCursor = charBuffer[0];
+    if (charBuffer[0] != ' ') {
+      versionWriteCursor = versionWriteCursor + 1;
     }
-    uVar4 = uVar4 + 1;
-  } while (uVar4 < 0xc);
-  iVar1 = _memcmp(local_110,"!!ATIfs1.0",10);
-  uVar2 = 0x1f;
-  if (iVar1 == 0) {
-    uVar2 = 0;
+    charsRead = charsRead + 1;
+  } while (charsRead < 0xc);
+  getCharacterResult = _memcmp(versionText,"!!ATIfs1.0",10);
+  parseResult = 0x1f;
+  if (getCharacterResult == 0) {
+    parseResult = 0;
   }
-  return uVar2;
+  return parseResult;
 }
 
 /* _LFSParserParse @ 0xd0ff8 (136 bytes) */
@@ -3528,14 +3530,14 @@ int _LFSStreamChunkCreate()
 }
 
 /* _LFSStreamChunkCreateFromChunk @ 0xd1350 (64 bytes) */
-int _LFSStreamChunkCreateFromChunk(param_1)
-  undefined4 param_1;
+int _LFSStreamChunkCreateFromChunk(sourceChunk)
+  undefined4 sourceChunk;
 {
-  undefined4 uVar1;
+  undefined4 newChunk;
   
-  uVar1 = ((int (*)())_LFSStreamChunkCreate)();
-  _memcpy(uVar1,param_1,0x50);
-  return uVar1;
+  newChunk = ((int (*)())_LFSStreamChunkCreate)();
+  _memcpy(newChunk,sourceChunk,0x50);
+  return newChunk;
 }
 
 /* _LFSStreamChunkGetStream @ 0xd1394 (408 bytes) */

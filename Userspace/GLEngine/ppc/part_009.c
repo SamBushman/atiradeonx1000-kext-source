@@ -1051,15 +1051,15 @@ int _glVertexArrayParameteriEXT_Comp(glContext, pname, param)
   undefined4 pname;
   undefined4 param;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)
+  listRecord = (undefined4 *)
            _gleAddListItem(glContext,PTR__glVertexArrayParameteriEXT_ListExec_00110010,8);
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[1] = param;
-    *puVar1 = pname;
+  if (listRecord != (undefined4 *)0x0) {
+    listRecord[1] = param;
+    *listRecord = pname;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glVertexArrayParameteriEXT_Exec @ 0x56e88 (344 bytes) */

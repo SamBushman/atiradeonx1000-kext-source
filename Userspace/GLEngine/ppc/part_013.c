@@ -1933,21 +1933,21 @@ int _glColorTableParameteriv_Comp(glContext, target, pname, params)
   int pname;
   undefined4 *params;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)
+  listRecord = (undefined4 *)
            _gleAddListItem(glContext,PTR__glColorTableParameteriv_ListExec_00110078,0x18);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = target;
-    puVar1[1] = pname;
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = target;
+    listRecord[1] = pname;
     if (pname - 0x80d6U < 2) {
-      puVar1[2] = *params;
-      puVar1[3] = params[1];
-      puVar1[4] = params[2];
-      puVar1[5] = params[3];
+      listRecord[2] = *params;
+      listRecord[3] = params[1];
+      listRecord[4] = params[2];
+      listRecord[5] = params[3];
     }
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glColorTableParameteriv_Exec @ 0x61814 (476 bytes) */

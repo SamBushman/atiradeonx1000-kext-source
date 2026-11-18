@@ -1019,31 +1019,31 @@ int _glConvolutionParameterF_Comp(glContext, target, pname, params)
   uint pname;
   undefined4 *params;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)
+  listRecord = (undefined4 *)
            _gleAddListItem(glContext,PTR__glConvolutionParameterf_ListExec_00110128,0x18);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = target;
-    puVar1[1] = pname;
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = target;
+    listRecord[1] = pname;
     if (pname < 0x8016) {
       if (pname < 0x8014) {
         if (pname != 0x8013) {
-          return puVar1;
+          return listRecord;
         }
-        puVar1[2] = *params;
-        return puVar1;
+        listRecord[2] = *params;
+        return listRecord;
       }
     }
     else if (pname != 0x8154) {
-      return puVar1;
+      return listRecord;
     }
-    puVar1[2] = *params;
-    puVar1[3] = params[1];
-    puVar1[4] = params[2];
-    puVar1[5] = params[3];
+    listRecord[2] = *params;
+    listRecord[3] = params[1];
+    listRecord[4] = params[2];
+    listRecord[5] = params[3];
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glConvolutionParameterf_Comp @ 0x68e48 (40 bytes) */
@@ -1135,19 +1135,19 @@ int _glCopyConvolutionFilter2D_Comp(glContext, target, internalformat, x, y, wid
   undefined4 width;
   undefined4 height;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)
+  listRecord = (undefined4 *)
            _gleAddListItem(glContext,PTR__glCopyConvolutionFilter2D_ListExec_0011011c,0x18);
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[5] = height;
-    *puVar1 = target;
-    puVar1[1] = internalformat;
-    puVar1[2] = x;
-    puVar1[3] = y;
-    puVar1[4] = width;
+  if (listRecord != (undefined4 *)0x0) {
+    listRecord[5] = height;
+    *listRecord = target;
+    listRecord[1] = internalformat;
+    listRecord[2] = x;
+    listRecord[3] = y;
+    listRecord[4] = width;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glHistogram_Comp @ 0x69030 (100 bytes) */

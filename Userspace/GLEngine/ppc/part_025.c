@@ -3907,20 +3907,20 @@ int _glUniform1fvARB_Comp(glContext, location, count, value)
   undefined4 *value;
 {
   int loopIndex;
-  undefined4 *puVar2;
+  undefined4 *listRecordThenDestination;
   
-  puVar2 = (undefined4 *)
+  listRecordThenDestination = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform1fvARB_ListExec_001102e4,count * 4 + 8);
-  if (puVar2 != (undefined4 *)0x0) {
-    puVar2[1] = count;
-    *puVar2 = location;
-    puVar2 = puVar2 + 2;
-    for (loopIndex = 0; *puVar2 = *value, loopIndex != count + -1; loopIndex = loopIndex + 1) {
-      puVar2 = puVar2 + 1;
+  if (listRecordThenDestination != (undefined4 *)0x0) {
+    listRecordThenDestination[1] = count;
+    *listRecordThenDestination = location;
+    listRecordThenDestination = listRecordThenDestination + 2;
+    for (loopIndex = 0; *listRecordThenDestination = *value, loopIndex != count + -1; loopIndex = loopIndex + 1) {
+      listRecordThenDestination = listRecordThenDestination + 1;
       value = value + 1;
     }
   }
-  return puVar2;
+  return listRecordThenDestination;
 }
 
 /* _glUniform4iARB_Comp @ 0x8c23c (108 bytes) */
@@ -4006,28 +4006,28 @@ int _glUniform4ivARB_Comp(glContext, location, count, value)
   int count;
   undefined4 *value;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecordThenDestination;
   int loopIndex;
   
-  puVar1 = (undefined4 *)
+  listRecordThenDestination = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform4ivARB_ListExec_001102d0,count * 0x10 + 8);
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[1] = count;
+  if (listRecordThenDestination != (undefined4 *)0x0) {
+    listRecordThenDestination[1] = count;
     loopIndex = 0;
-    *puVar1 = location;
-    puVar1 = puVar1 + 2;
+    *listRecordThenDestination = location;
+    listRecordThenDestination = listRecordThenDestination + 2;
     while( true ) {
-      *puVar1 = *value;
-      puVar1[1] = value[1];
-      puVar1[2] = value[2];
-      puVar1[3] = value[3];
+      *listRecordThenDestination = *value;
+      listRecordThenDestination[1] = value[1];
+      listRecordThenDestination[2] = value[2];
+      listRecordThenDestination[3] = value[3];
       if (loopIndex == count + -1) break;
-      puVar1 = puVar1 + 4;
+      listRecordThenDestination = listRecordThenDestination + 4;
       value = value + 4;
       loopIndex = loopIndex + 1;
     }
   }
-  return puVar1;
+  return listRecordThenDestination;
 }
 
 /* _glUniform3ivARB_Comp @ 0x8c45c (152 bytes) */

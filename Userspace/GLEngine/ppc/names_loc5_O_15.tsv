@@ -1,0 +1,56 @@
+local	_LFSParserCreate	uVar1	parser	CONFIRMED	_calloc(0x46c, 1) block: the parser state (size equals the _memset in _LFSParserInit), initialised and returned
+local	_LFSParserInit	param_1	parser	CONFIRMED	the parser state block (0x46c bytes) cleared by _memset
+local	_LFSParserInit	uVar1	memsetResult	CONFIRMED	return value of _memset (the cleared block), returned
+local	_LFSStreamChunkCreateFromChunk	param_1	sourceChunk	CONFIRMED	the chunk whose 0x50 bytes are copied
+local	_LFSStreamChunkCreateFromChunk	uVar1	newChunk	CONFIRMED	chunk allocated by _LFSStreamChunkCreate that receives the copy and is returned
+local	_LFSStreamChunkListCreate	uVar1	chunkList	CONFIRMED	_calloc(0xc, 1) block: list header (head, tail, count words, see _LFSStreamChunkListRemoveChunk), returned
+local	_LFSStreamChunkListFree	param_1	chunkList	CONFIRMED	list header whose chunks are removed one by one from the head, then freed
+local	_LFSStreamChunkListFree	iVar1	chunk	CONFIRMED	first chunk of the list (*chunkList), removed with _LFSStreamChunkListRemoveChunk until the list is empty
+local	_LFSStreamChunkListRemoveChunk	param_1	chunkList	CONFIRMED	list header: head chunk [0], tail chunk [1], chunk count [2] (decremented here)
+local	_LFSStreamChunkListRemoveChunk	param_2	chunk	CONFIRMED	the chunk unlinked from the doubly linked list and freed (previous link at +0x48, next link at +0x4c)
+local	_LFSStreamChunkListRemoveChunk	iVar1	previousChunk	CONFIRMED	chunk->previous (+0x48), whose next link (+0x4c) is repointed to chunk->next; also the new tail when chunk was the tail
+local	_LFSStreamChunkListCreateFromChunkList	param_1	sourceList	CONFIRMED	list header copied chunk by chunk
+local	_LFSStreamChunkListCreateFromChunkList	uVar1	newList	CONFIRMED	list created by _LFSStreamChunkListCreate that receives the copies and is returned
+local	_LFSStreamChunkListCreateFromChunkList	uVar2	newChunk	CONFIRMED	copy of the current source chunk made by _LFSStreamChunkCreateFromChunk
+local	_LFSStreamChunkListCreateFromChunkList	iVar3	chunk	CONFIRMED	source chunk cursor: starts at the head (*sourceList) and follows the next link (+0x4c)
+local	_LFSStreamAddOutputPassRegisterInit	param_1	stream	INFERRED	the LFSStream: its list at +0xc receives the new chunk
+local	_LFSStreamAddOutputPassRegisterInit	param_2	registerInit	INFERRED	five-word register initialisation record copied into the chunk payload (+4..+0x17)
+local	_LFSStreamAddOutputPassRegisterInit	puVar2	chunk	CONFIRMED	new chunk from _LFSStreamChunkCreate: type byte 1, payload copy of registerInit, added to the list at stream+0xc
+local	_LFSStreamAddOutputPassRegisterInit	uVar1	registerInitWord1	CONFIRMED	registerInit[1], copied to chunk+8
+local	_LFSStreamAddOutputPassRegisterInit	uVar3	registerInitWord2	CONFIRMED	registerInit[2], copied to chunk+0xc
+local	_LFSStreamAddOutputPassRegisterInit	uVar4	registerInitWord3	CONFIRMED	registerInit[3], copied to chunk+0x10
+local	_LFSStreamAddConstant	param_1	stream	INFERRED	the LFSStream: its list at +0x14 receives the new chunk
+local	_LFSStreamAddConstant	param_2	constantValues	INFERRED	16 bytes (four floats) of the constant copied into the chunk payload (+4)
+local	_LFSStreamAddConstant	puVar1	chunk	CONFIRMED	new chunk from _LFSStreamChunkCreate: type byte 4, payload constantValues, added to the list at stream+0x14
+local	_LFSStreamOutputDebugInfo	param_1	stream	INFERRED	the LFSStream whose chunk lists (words 0..5) are printed with _LFSStreamChunkListOutputDebugInfo
+local	_LFSParserParseVersion	param_1	parser	INFERRED	the parser state, passed to _LFSParserGetCharacter
+local	_LFSParserParseVersion	iVar1	getCharacterResult	CONFIRMED	result of _LFSParserGetCharacter: nonzero returns error 8
+local	_LFSParserParseVersion	uVar2	parseResult	CONFIRMED	0 when the text matches "!!ATIfs1.0", else 0x1f
+local	_LFSParserParseVersion	pcVar3	versionWriteCursor	CONFIRMED	write position in versionText; advanced only for characters that are not spaces
+local	_LFSParserParseVersion	uVar4	charsRead	CONFIRMED	number of characters read from the parser, loop ends at 0xc
+local	_LFSParserParseVersion	local_120	charBuffer	CONFIRMED	16-byte buffer that receives the character read by _LFSParserGetCharacter
+local	_LFSParserParseVersion	local_110	versionText	CONFIRMED	256-byte buffer collecting the first 12 characters without spaces, compared with "!!ATIfs1.0"
+use	_LFSParserParseInstruction	iVar1	getPartResult	CONFIRMED	result of _LFSParserGetPart: zero (no more parts) returns 1	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_LFSParserGetPart\)\(param_1,local_120\);$	+2
+use	_LFSParserParseInstruction	iVar1	getPartResult	CONFIRMED	result of _LFSParserGetPart: zero (no more parts) returns 1	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_LFSParserGetPart\)\(param_1,local_120\);$@2	+2
+use	_LFSParserParseInstruction	iVar1	memcmpResult	CONFIRMED	result of _memcmp of the part text against a keyword (StartConstants, EndConstants, StartPrelimPass, EndPass, StartOutputPass, CONSTANT, PassTexCoord)	^\s*iVar1\ =\ _memcmp\(local_120,"StartConstants",0xf\);$	+2
+use	_LFSParserParseInstruction	iVar1	memcmpResult	CONFIRMED	result of _memcmp of the part text against a keyword (StartConstants, EndConstants, StartPrelimPass, EndPass, StartOutputPass, CONSTANT, PassTexCoord)	^\s*iVar1\ =\ _memcmp\(local_120,"EndConstants",0xd\);$	+2
+use	_LFSParserParseInstruction	iVar1	memcmpResult	CONFIRMED	result of _memcmp of the part text against a keyword (StartConstants, EndConstants, StartPrelimPass, EndPass, StartOutputPass, CONSTANT, PassTexCoord)	^\s*iVar1\ =\ _memcmp\(local_120,"StartPrelimPass",0x10\);$	+2
+use	_LFSParserParseInstruction	iVar1	memcmpResult	CONFIRMED	result of _memcmp of the part text against a keyword (StartConstants, EndConstants, StartPrelimPass, EndPass, StartOutputPass, CONSTANT, PassTexCoord)	^\s*iVar1\ =\ _memcmp\(local_120,"EndPass",8\);$	+2
+use	_LFSParserParseInstruction	iVar1	memcmpResult	CONFIRMED	result of _memcmp of the part text against a keyword (StartConstants, EndConstants, StartPrelimPass, EndPass, StartOutputPass, CONSTANT, PassTexCoord)	^\s*iVar1\ =\ _memcmp\(local_120,"StartOutputPass",0x10\);$	+2
+use	_LFSParserParseInstruction	iVar1	memcmpResult	CONFIRMED	result of _memcmp of the part text against a keyword (StartConstants, EndConstants, StartPrelimPass, EndPass, StartOutputPass, CONSTANT, PassTexCoord)	^\s*iVar1\ =\ _memcmp\(local_120,"CONSTANT",9\);$	+2
+use	_LFSParserParseInstruction	iVar1	memcmpResult	CONFIRMED	result of _memcmp of the part text against a keyword (StartConstants, EndConstants, StartPrelimPass, EndPass, StartOutputPass, CONSTANT, PassTexCoord)	^\s*iVar1\ =\ _memcmp\(local_120,"PassTexCoord",0xd\);$	+2
+use	_LFSParserParseInstruction	iVar1	parseResult	CONFIRMED	result of _LFSParserParseConstantBinding / ParseRegisterInit / ParseOperation: nonzero is returned	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_LFSParserParseConstantBinding\)\(param_1\);$	+1
+use	_LFSParserParseInstruction	iVar1	parseResult	CONFIRMED	result of _LFSParserParseConstantBinding / ParseRegisterInit / ParseOperation: nonzero is returned	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_LFSParserParseRegisterInit\)\(param_1\);$	+1
+use	_LFSParserParseInstruction	iVar1	parseResult	CONFIRMED	result of _LFSParserParseConstantBinding / ParseRegisterInit / ParseOperation: nonzero is returned	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_LFSParserParseOperation\)\(param_1\);$	+1
+use	_LFSParserParseInstruction	iVar1	parseResult	CONFIRMED	result of _LFSParserParseConstantBinding / ParseRegisterInit / ParseOperation: nonzero is returned	^\s*if\ \(iVar1\ !=\ 0\)\ \{$@3	+2
+local	_LFSParserCheckForNewline	param_2	text	INFERRED	the character buffer examined
+local	_LFSParserCheckForNewline	param_3	position	INFERRED	index of the character examined in text
+local	_LFSParserCheckForNewline	param_4	textLength	INFERRED	length of text; when position + 1 is inside it a "\r\n" pair is looked for
+local	_LFSParserCheckForNewline	param_5	newlineLengthOut	INFERRED	receives 2 when the newline is "\r\n"
+local	_LFSParserCheckForNewline	cVar1	currentChar	CONFIRMED	text[position]: tested for "\r", "\n"
+local	_glUniform4ivARB_Comp	puVar1	listRecordThenDestination	CONFIRMED	record returned by _gleAddListItem, then advanced past the header words / by one element so it points at the destination of the next copied words
+local	_glConvolutionParameterF_Comp	puVar1	listRecord	CONFIRMED	record returned by _gleAddListItem (header words then the recorded arguments), null when the list is full; the recorded data is stored through it
+local	_glUniform1fvARB_Comp	puVar2	listRecordThenDestination	CONFIRMED	record returned by _gleAddListItem, then advanced past the header words / by one element so it points at the destination of the next copied words
+local	_glCopyConvolutionFilter2D_Comp	puVar1	listRecord	CONFIRMED	record returned by _gleAddListItem (header words then the recorded arguments), null when the list is full; the recorded data is stored through it
+local	_glColorTableParameteriv_Comp	puVar1	listRecord	CONFIRMED	record returned by _gleAddListItem (header words then the recorded arguments), null when the list is full; the recorded data is stored through it
+local	_glVertexArrayParameteriEXT_Comp	puVar1	listRecord	CONFIRMED	record returned by _gleAddListItem (header words then the recorded arguments), null when the list is full; the recorded data is stored through it

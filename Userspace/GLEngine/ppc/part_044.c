@@ -3,40 +3,40 @@
 /* _LFSStreamChunkListCreate @ 0xd1854 (12 bytes) */
 int _LFSStreamChunkListCreate()
 {
-  undefined4 uVar1;
+  undefined4 chunkList;
   
-  uVar1 = _calloc(0xc,1);
-  return uVar1;
+  chunkList = _calloc(0xc,1);
+  return chunkList;
 }
 
 /* _LFSStreamChunkListCreateFromChunkList @ 0xd1860 (96 bytes) */
-int _LFSStreamChunkListCreateFromChunkList(param_1)
-  int *param_1;
+int _LFSStreamChunkListCreateFromChunkList(sourceList)
+  int *sourceList;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  int iVar3;
+  undefined4 newList;
+  undefined4 newChunk;
+  int chunk;
   
-  uVar1 = ((int (*)())_LFSStreamChunkListCreate)();
-  for (iVar3 = *param_1; iVar3 != 0; iVar3 = *(int *)(iVar3 + 0x4c)) {
-    uVar2 = _LFSStreamChunkCreateFromChunk(iVar3);
-    ((void (*)())_LFSStreamChunkListAddChunk)(uVar1,uVar2);
+  newList = ((int (*)())_LFSStreamChunkListCreate)();
+  for (chunk = *sourceList; chunk != 0; chunk = *(int *)(chunk + 0x4c)) {
+    newChunk = _LFSStreamChunkCreateFromChunk(chunk);
+    ((void (*)())_LFSStreamChunkListAddChunk)(newList,newChunk);
   }
-  return uVar1;
+  return newList;
 }
 
 /* _LFSStreamChunkListFree @ 0xd18c0 (80 bytes) */
-void _LFSStreamChunkListFree(param_1)
-  int *param_1;
+void _LFSStreamChunkListFree(chunkList)
+  int *chunkList;
 {
-  int iVar1;
+  int chunk;
   
-  iVar1 = *param_1;
-  while (iVar1 != 0) {
-    ((void (*)())_LFSStreamChunkListRemoveChunk)(param_1,iVar1);
-    iVar1 = *param_1;
+  chunk = *chunkList;
+  while (chunk != 0) {
+    ((void (*)())_LFSStreamChunkListRemoveChunk)(chunkList,chunk);
+    chunk = *chunkList;
   }
-  _free(param_1);
+  _free(chunkList);
   return;
 }
 
@@ -62,28 +62,28 @@ void _LFSStreamChunkListAddChunk(param_1, param_2)
 }
 
 /* _LFSStreamChunkListRemoveChunk @ 0xd1950 (120 bytes) */
-void _LFSStreamChunkListRemoveChunk(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+void _LFSStreamChunkListRemoveChunk(chunkList, chunk)
+  undefined4 *chunkList;
+  int chunk;
 {
-  int iVar1;
+  int previousChunk;
   
-  iVar1 = *(int *)(param_2 + 0x48);
-  if (iVar1 == 0) {
-    *param_1 = *(undefined4 *)(param_2 + 0x4c);
-    iVar1 = *(int *)(param_2 + 0x48);
+  previousChunk = *(int *)(chunk + 0x48);
+  if (previousChunk == 0) {
+    *chunkList = *(undefined4 *)(chunk + 0x4c);
+    previousChunk = *(int *)(chunk + 0x48);
   }
   else {
-    *(undefined4 *)(iVar1 + 0x4c) = *(undefined4 *)(param_2 + 0x4c);
+    *(undefined4 *)(previousChunk + 0x4c) = *(undefined4 *)(chunk + 0x4c);
   }
-  if (*(int *)(param_2 + 0x4c) == 0) {
-    param_1[1] = iVar1;
+  if (*(int *)(chunk + 0x4c) == 0) {
+    chunkList[1] = previousChunk;
   }
   else {
-    *(int *)(*(int *)(param_2 + 0x4c) + 0x48) = iVar1;
+    *(int *)(*(int *)(chunk + 0x4c) + 0x48) = previousChunk;
   }
-  _LFSStreamChunkFree(param_2);
-  param_1[2] = param_1[2] + -1;
+  _LFSStreamChunkFree(chunk);
+  chunkList[2] = chunkList[2] + -1;
   return;
 }
 
@@ -274,26 +274,26 @@ void _LFSStreamAddPreliminaryPassOperation(param_1, param_2)
 }
 
 /* _LFSStreamAddOutputPassRegisterInit @ 0xd1dbc (104 bytes) */
-void _LFSStreamAddOutputPassRegisterInit(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _LFSStreamAddOutputPassRegisterInit(stream, registerInit)
+  int stream;
+  undefined4 *registerInit;
 {
-  undefined4 uVar1;
-  undefined1 *puVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  undefined4 registerInitWord1;
+  undefined1 *chunk;
+  undefined4 registerInitWord2;
+  undefined4 registerInitWord3;
   
-  puVar2 = (undefined1 *)_LFSStreamChunkCreate();
-  *puVar2 = 1;
-  uVar1 = param_2[1];
-  uVar3 = param_2[2];
-  uVar4 = param_2[3];
-  *(undefined4 *)(puVar2 + 4) = *param_2;
-  *(undefined4 *)(puVar2 + 8) = uVar1;
-  *(undefined4 *)(puVar2 + 0xc) = uVar3;
-  *(undefined4 *)(puVar2 + 0x10) = uVar4;
-  *(undefined4 *)(puVar2 + 0x14) = param_2[4];
-  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0xc),puVar2);
+  chunk = (undefined1 *)_LFSStreamChunkCreate();
+  *chunk = 1;
+  registerInitWord1 = registerInit[1];
+  registerInitWord2 = registerInit[2];
+  registerInitWord3 = registerInit[3];
+  *(undefined4 *)(chunk + 4) = *registerInit;
+  *(undefined4 *)(chunk + 8) = registerInitWord1;
+  *(undefined4 *)(chunk + 0xc) = registerInitWord2;
+  *(undefined4 *)(chunk + 0x10) = registerInitWord3;
+  *(undefined4 *)(chunk + 0x14) = registerInit[4];
+  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(stream + 0xc),chunk);
   return;
 }
 
@@ -312,16 +312,16 @@ void _LFSStreamAddOutputPassOperation(param_1, param_2)
 }
 
 /* _LFSStreamAddConstant @ 0xd1e78 (84 bytes) */
-void _LFSStreamAddConstant(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+void _LFSStreamAddConstant(stream, constantValues)
+  int stream;
+  undefined4 constantValues;
 {
-  undefined1 *puVar1;
+  undefined1 *chunk;
   
-  puVar1 = (undefined1 *)_LFSStreamChunkCreate();
-  *puVar1 = 4;
-  _memmove(puVar1 + 4,param_2,0x10);
-  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0x14),puVar1);
+  chunk = (undefined1 *)_LFSStreamChunkCreate();
+  *chunk = 4;
+  _memmove(chunk + 4,constantValues,0x10);
+  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(stream + 0x14),chunk);
   return;
 }
 
@@ -411,20 +411,20 @@ int _LFSStreamCompare(param_1, param_2)
 }
 
 /* _LFSStreamOutputDebugInfo @ 0xd21ec (164 bytes) */
-void _LFSStreamOutputDebugInfo(param_1)
-  undefined4 *param_1;
+void _LFSStreamOutputDebugInfo(stream)
+  undefined4 *stream;
 {
   _puts("LFSStream {");
-  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(*param_1);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(*stream);
   _puts("   preliminarypass {");
-  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[1]);
-  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[2]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(stream[1]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(stream[2]);
   _puts("   };");
   _puts("   outputpass {");
-  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[3]);
-  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[4]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(stream[3]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(stream[4]);
   _puts("   };");
-  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(param_1[5]);
+  ((void (*)())_LFSStreamChunkListOutputDebugInfo)(stream[5]);
   _puts("};");
   return;
 }
