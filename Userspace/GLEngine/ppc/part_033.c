@@ -2887,25 +2887,25 @@ int _glDrawArraysOrElements_ListExec(int glContext,uint *listRecord,undefined4 p
   int loopIndex2;
   int *dirtyFlagWords;
   uint uVar14;
-  uint uVar15;
-  uint uVar16;
+  uint elementBytes;
+  uint count;
   double fparam_1_00;
   double extraout_f1;
   double extraout_f1_00;
   
   uVar14 = listRecord[5];
-  uVar16 = listRecord[6];
-  uVar15 = listRecord[7];
+  count = listRecord[6];
+  elementBytes = listRecord[7];
   if ((*(char *)(glContext + 0x759c) == '\0') || (-1 < *(short *)(glContext + 0x4a10))) {
 LAB_000a6788:
     if (*(int *)(glContext + 0x7574) != 0) goto LAB_000a6da4;
     glErrorCode = 0x502;
   }
   else if (uVar14 < 10) {
-    if (-1 < (int)uVar16) {
+    if (-1 < (int)count) {
       if ((*(char *)(glContext + 0x4664) != '\0') &&
          (*(int *)(*(int *)(glContext + 0x5420) + 0x4cc) == 0)) goto LAB_000a6788;
-      if ((uVar16 == 0) || ((*(char *)(listRecord + 8) == '\0' && (*(char *)(listRecord + 0xc) == '\0'))))
+      if ((count == 0) || ((*(char *)(listRecord + 8) == '\0' && (*(char *)(listRecord + 0xc) == '\0'))))
       goto LAB_000a6da4;
       cVar6 = *(char *)(glContext + 0x7580);
       if ((cVar6 != '\0') && ((*listRecord & 3) == 2)) {
@@ -3020,7 +3020,7 @@ LAB_000a6bbc:
         *(uint **)(glContext + 0x48ec) = listRecord + 5;
         uVar2 = _gleGetVertexArrayFunc(glContext);
         _gleDrawArraysOrElements_Core
-                  (glContext,uVar14,0,uVar16,uVar9,-(uint)*(byte *)((int)listRecord + 0x22) >> 0x1f,0,
+                  (glContext,uVar14,0,count,uVar9,-(uint)*(byte *)((int)listRecord + 0x22) >> 0x1f,0,
                    uVar2);
         *(undefined4 *)(glContext + 0x48ec) = 0;
         uVar14 = *listRecord;
@@ -3121,8 +3121,8 @@ LAB_000a6a4c:
         if (*(char *)(glContext + 0x7580) != '\0') {
           param_4 = 0;
           param_6 = 0x14ff;
-          param_5 = uVar16;
-          iVar12 = _gleExecuteVertexArrayRange(glContext,0,uVar14,0,uVar16,0x14ff,0);
+          param_5 = count;
+          iVar12 = _gleExecuteVertexArrayRange(glContext,0,uVar14,0,count,0x14ff,0);
         }
         _gleSetCurrentVertexObject(glContext,clientState);
         fparam_1 = (double)_gleSetClientEnableFlag(glContext,0x851d,param_3);
@@ -3144,7 +3144,7 @@ LAB_000a6a4c:
 LAB_000a6748:
   *(undefined4 *)(glContext + 0x7574) = glErrorCode;
 LAB_000a6da4:
-  return uVar16 * uVar15 + 0x40;
+  return count * elementBytes + 0x40;
 }
 
 /* _gleDrawArraysOrElements_Comp @ 0xa6dc0 (392 bytes) */

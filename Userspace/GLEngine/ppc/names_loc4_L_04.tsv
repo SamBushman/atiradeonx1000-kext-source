@@ -1,0 +1,155 @@
+local	_gleSelectTriangleFanFunc_body	bVar2	noVertexProgram	INFERRED	false when ctx+0x4664 or ctx+0x5434 is set (vertex program active): then the batch is taken from ctx+0x4864 and _gleVPFlipColors is used (same layout as _gleSelectTriangleStripFunc_body)
+local	_gleSelectTriangleFanFunc_body	bVar4	vertexProgramTwoSide	CONFIRMED	ctx+0x4666 byte (named vertexProgramTwoSide in _gleVPRenderTriangleStrip_body), only evaluated when a vertex program is active; selects _gleVPFlipColors
+local	_gleSelectTriangleFanFunc_body	bVar3	facingChanged	CONFIRMED	set when the triangle's backFacing differs from the facing of the run (iVar9)
+local	_gleSelectTriangleFanFunc_body	uVar6	batchEndReset	INFERRED	ctx+0x485c (vertex program) or ctx+0x4854 (batch start) stored back to ctx+0x4858 before clipping each triangle
+local	_OffsetLimitImage3D	param_1	pixelStore	CONFIRMED	pixel store block: [0] row length, [1] image height, [2] skip rows, [3] skip pixels, [4] skip images (passed as param_8 by _gleOffsetLimitImage3D), [5] alignment - same layout as ctx+0x31cc (unpack) / ctx+0x31b0 (pack) written by _glPixelStorei_Exec
+local	_OffsetLimitImage3D	param_2	width	CONFIRMED	image width: replaces the row length when that is < 1, argument of _gleRowBytes, added to skip pixels
+local	_OffsetLimitImage3D	param_3	height	CONFIRMED	image height: replaces the image height when that is < 1; multiplied with the row stride (plus skip rows)
+local	_OffsetLimitImage3D	param_4	depth	CONFIRMED	image depth: _gleOffsetLimitImage passes 1; multiplies the image stride together with skip images
+local	_OffsetLimitImage3D	param_7	baseOffset	CONFIRMED	added to the computed extent to give the returned limit
+local	_OffsetLimitImage3D	param_8	skipImages	CONFIRMED	_gleOffsetLimitImage3D passes *(pixelStore+0x10), _gleOffsetLimitImage passes 0
+local	_OffsetLimitImage3D	iVar3	skipRows	CONFIRMED	pixelStore[2] (ctx+0x31d4 unpack GL_UNPACK_SKIP_ROWS)
+local	_OffsetLimitImage3D	iVar8	rowLength	CONFIRMED	pixelStore[0] (GL_UNPACK_ROW_LENGTH), replaced by the image width when < 1
+local	_OffsetLimitImage3D	iVar6	imageHeight	CONFIRMED	pixelStore[1] (GL_UNPACK_IMAGE_HEIGHT), replaced by the image height when < 1
+local	_OffsetLimitImage3D	iVar4	alignment	CONFIRMED	pixelStore[5] (GL_UNPACK_ALIGNMENT): row bytes are rounded up to a multiple of it
+local	_OffsetLimitImage3D	iVar5	skipPixels	CONFIRMED	pixelStore[3] (GL_UNPACK_SKIP_PIXELS)
+local	_OffsetLimitImage3D	uVar2	rowStride	CONFIRMED	bytes per row (_gleRowBytes or (rowLength+7)/8 for bitmaps) rounded up to the alignment
+local	_gleRenderSmoothQuadStripFunc_body	bVar1	facingChanged	CONFIRMED	set when the quad's backFacing differs from the facing of the run (iVar12 != backFacing), cleared after the colour flip
+local	_gleRenderSmoothQuadStripFunc_body	bVar2	lightingActive	CONFIRMED	ctx+0x30aa lighting byte != 0 ((int)-(uint)lightingEnabled < 0); selects the lighting callbacks at ctx+0x4de8/0x4df0
+local	_gleRenderSmoothQuadStripFunc_body	uVar8	lastQuadStart	CONFIRMED	vertexCursor + vertexCount*0x100 - 0x400: start of the last quad of the strip; loop bound of the cull path
+local	_gleRenderSmoothQuadStripFunc_body	iVar19	cullResult	CONFIRMED	_gleCullQuad result: 0 means the quad is not culled (then backFacing is valid)
+local	_gleRenderSmoothQuadStripFunc_body	local_4c	clippedCount	CONFIRMED	out parameter of _gleClipPolyPlane/_gleClipPoly: vertex count of the clipped polygon (local_4c[0])
+local	_gleRenderSmoothQuadsFunc_body	bVar1	facingChanged	CONFIRMED	set when the quad's facing (local_40) differs from the facing of the run (iVar11)
+local	_gleRenderSmoothQuadsFunc_body	bVar2	lightingActive	CONFIRMED	ctx+0x30aa lighting byte != 0 ((int)-(uint)lightingEnabled < 0); selects the lighting callbacks at ctx+0x4de8/0x4df0
+local	_gleRenderSmoothQuadsFunc_body	uVar9	lastQuadStart	CONFIRMED	vertexCursor + vertexCount*0x100 - 0x400: start of the last quad of the batch; loop bound of the cull path
+local	_gleRenderSmoothQuadsFunc_body	iVar16	cullResult	CONFIRMED	_gleCullQuad result: 0 means the quad is not culled (then local_40 is valid)
+local	_gleRenderSmoothQuadsFunc_body	local_40	backFacing	CONFIRMED	out parameter of _gleCullQuad / _gleCullPolygonPtrStack (the same variable is named backFacing in _gleRenderSmoothQuadStripFunc_body): 0 front, else back; selects ctx+0x34d0/0x34d2 polygon mode and the callback index
+local	_gleRenderSmoothQuadsFunc_body	local_3c	clippedCount	CONFIRMED	out parameter of _gleClipPolyPlane/_gleClipPoly: vertex count of the clipped polygon (local_3c[0])
+local	_gleRenderSmoothLineLoopFunc_body	puVar12	batchStart	CONFIRMED	ctx+0x4854: first vertex of the batch; never advanced, first argument of the batch callbacks
+local	_gleRenderSmoothLineLoopFunc_body	iVar8	batchEnd	CONFIRMED	ctx+0x4858: end of the batch; the closing vertex copy is written there and ctx+0x4858 advanced by the vertex stride
+local	_gleRenderSmoothLineLoopFunc_body	iVar13	vertexCount	CONFIRMED	vertex count: (batchEnd - batchStart) >> 8 (+1 for the closing vertex), later the number of vertex pointers in polygonList and the count returned by the line clippers
+local	_gleRenderSmoothLineLoopFunc_body	sVar4	vertexStride	CONFIRMED	ctx+0x487c: bytes per vertex; (stride >> 3) 8-byte words are copied, ctx+0x4858 advances by it
+local	_gleRenderSmoothLineLoopFunc_body	iVar3	copyWordsLeft	CONFIRMED	countdown of the 8-byte words copied for the closing vertex ((int)vertexStride >> 3)
+local	_gleRenderSmoothLineLoopFunc_body	iVar9	copyWordIndex	CONFIRMED	index of the 8-byte word being copied to batchEnd
+local	_gleRenderSmoothLineLoopFunc_body	puVar11	listCursor	CONFIRMED	write cursor into polygonList (two vertex pointers per line, advanced by 2)
+local	_gleRenderSmoothLineLoopFunc_body	uVar14	copyDestination	CONFIRMED	ctx+0x4858: where the copy of the next vertex (memcpy of 0x100 bytes) is written, advanced by 0x100 per line
+local	_gleRenderFlatLineStripFunc_body	iVar7	vertexCount	CONFIRMED	vertex count: (ctx+0x4858 - ctx+0x4854) >> 8, later the number of vertex pointers in polygonList and the count returned by the line clippers
+local	_gleRenderFlatLineStripFunc_body	puVar3	sourceVertex	CONFIRMED	walks the batch vertices (advances 0x100 bytes per line)
+local	_gleRenderFlatLineStripFunc_body	puVar10	listCursor	CONFIRMED	write cursor into polygonList (two vertex pointers per line, advanced by 2)
+local	_gleRenderFlatLineStripFunc_body	uVar8	copyDestination	CONFIRMED	ctx+0x4858: where the copy of the next vertex (memcpy of 0x100 bytes) is written, advanced by 0x100 per line
+local	_gleBuildModelviewTransformFuncAV_body	param_2	inputFlags	CONFIRMED	bit 1 (value 2) selects the Z0 chunk variants (_gleLoadMatrixVectorsZ0RTC, _gleFullMatrixMultZ0RTC), bit 0 the W1 variants (_gleFullMatrixMultW1RTC); or-ed into the cache key flags
+local	_gleBuildModelviewTransformFuncAV_body	uVar1	matrixClassKey	CONFIRMED	cache key part stored at element+8 and matched against piVar13[2]: 0xbfeffbfe (identity-like), 0x3fcff3fc (diagonal), 0 (full matrix); selects the chunks _gleLoadMatrixPtrRTC / _gleDiagMatrixMultRTC / _gleFullMatrixMultRTC
+local	_gleBuildModelviewTransformFuncAV_body	iVar3	funcCacheElem	CONFIRMED	element returned by _gleCreateFuncCacheElem (and later _gleShrinkFuncCacheElem); code is generated at element+0x20
+local	_gleBuildModelviewTransformFuncAV_body	piVar12	cacheHead	CONFIRMED	ctx+0x5094: head of the circular function cache list; matched element is moved to the head by _gleMoveFuncCacheElem
+local	_gleBuildModelviewTransformFuncAV_body	piVar13	cacheScan	CONFIRMED	walks the circular cache list (piVar13 = *piVar13) comparing the key at [2] and the flags at [3]
+local	_gleBuildModelviewTransformFuncAV_body	uVar7	branchInstruction	CONFIRMED	result of _gleRTCBuildABranch stored at *bodyCursor: the loop-closing branch back to loopStart
+local	_gleBuildModelviewTransformFuncAV_body	iVar4	codeWordCount	CONFIRMED	words generated ((codeEnd - 0x1c - element) >> 2); checked against 0x70 and passed to _gleShrinkFuncCacheElem and _glePushInstructions
+local	_gleBuildModelviewTransformFuncAV_body	puVar9	codeEnd	CONFIRMED	end of the generated code: receives the terminating blr (0x4e800020)
+local	_gleBuildModelviewTransformFuncAV_body	puVar8	loopStart	CONFIRMED	start of the per-vertex loop body (after prolog, matrix load and fog init chunks): target of the backward branch built at the epilog
+local	_gleBuildModelviewTransformFuncAV_body	puVar10	bodyCursor	CONFIRMED	write position while appending the loop body chunks (vector load, matrix multiply, fog, vertex increment, epilog); the epilog word is later patched with the loop branch
+local	_glUseProgramObjectARB_Exec	bVar2	noPreviousProgram	CONFIRMED	currentProgram (ctx+0x5430) == 0: no program was bound before this call; controls whether the old program's refcount is dropped and whether the old stage records are used for the sampler comparison
+local	_glUseProgramObjectARB_Exec	piVar23	newStageRecordSlots	CONFIRMED	newProgram + 0x20: the two stage record pointers (vertex *piVar23, fragment at +0x24 as in _glLinkProgramARB_Exec stageRecordSlots) of the program being bound; passed to _updateShaderState
+local	_glUseProgramObjectARB_Exec	piVar24	oldStageRecordSlots	CONFIRMED	currentProgram + 0x20: stage record pointers of the program that was bound before; source of the sampler type comparison
+local	_glUseProgramObjectARB_Exec	uVar5	unitTargetBits	CONFIRMED	texture-target bit mask of the context texture unit (ctx+0x3534 + unit*0x7c): bit 0 -> 0x8b60 (cube), 1 -> 0x8b5f (3D), 2 -> 0x8b63 (rect), 3 -> 0x8b5e (2D), 4 -> 0x8b5d (1D) sampler type
+local	_glUseProgramObjectARB_Exec	uVar4	samplerUsedValue	INFERRED	word copied from the old program's stage record +0x2c array (one word per sampler unit) to the new program's
+local	_glUseProgramObjectARB_Exec	uVar3	samplerTypeValue	INFERRED	halfword copied from the old program's stage record +0x6c array (sampler type code 0x8b5d-0x8b63) to the new program's
+local	_gliGetInteger	puVar4	hashTable	CONFIRMED	name hash table (0x400 bucket pointers) passed as param_2 of _gleGetHashMachineObjectNameTargetPairs: shared state +0x6018 / +0x1004 / +0x5014 / +0x701c or ctx +0x6440 / +0x543c
+local	_glCopyTexImage1D_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte +0x79 of the record at ctx+0x468c: nonzero selects the 0x17ffffff dirty mask and the +0x318 test (same idiom as rendererInfoByte79 in the other state-validation prologues)
+local	_glCopyTexImage1D_Exec	uVar3	textureTargetBits	INFERRED	texture object +0x24 flags: bits 0x3c00 == 0 are set to 0x1000 (1D) here; 0x1000 passes, other dimensionality bits raise GL_INVALID_OPERATION (0x502)
+local	_glCopyTexImage1D_Exec	bVar6	levelFlags	CONFIRMED	byte +0xcf of the level record (0x20 plugin level, 0x10 allocated, 0x40 uploaded, 1 not owned) read-modify-written around _gleDeletePluginTextureLevel / _gleFreeTextureLevel / _gleAllocateTextureLevel
+local	_glCopyTexImage1D_Exec	iVar14	textureLevel	CONFIRMED	level record (textureObject + level*0x18 + 0xc4) passed to _gleCreateTextureLevel / _gleFreeTextureLevel / _gleTextureImageCopy (named textureLevel in _glCopyTexSubImage*/_glTexImage* handlers)
+local	_gleClipLinesPlane	param_2	lineVertexList	CONFIRMED	array of vertex pointers, two per line (read at piVar15[0..1], compacted in place through piVar14)
+local	_gleClipLinesPlane	param_3	vertexPointerCount	CONFIRMED	number of vertex pointers in lineVertexList; recomputed after each plane as (outCursor - lineVertexList) >> 2
+local	_gleClipLinesPlane	iVar11	planeCount	CONFIRMED	ctx+0x4dfc: number of enabled user clip planes; loop bound of the plane loop
+local	_gleClipLinesPlane	iVar12	planeLoopIndex	CONFIRMED	counts the planes processed, compared with planeCount
+local	_gleClipLinesPlane	piVar13	planeIndexCursor	CONFIRMED	walks the plane index list at ctx+0x4e00; each index selects the plane equation at ctx+0x418c + index*0x10
+local	_gleClipLinesPlane	piVar14	outCursor	CONFIRMED	write cursor of the compacted vertex pointer list (advances 2 per surviving line)
+local	_gleClipLinesPlane	piVar15	inCursor	CONFIRMED	read cursor over the vertex pointer pairs (advances 2 per line)
+local	_gleClipLinesPlane	fVar1	planeX	CONFIRMED	plane equation component at +0x418c: multiplies the vertex eye x (vertex+0x20)
+local	_gleClipLinesPlane	fVar3	planeY	CONFIRMED	plane equation component at +0x4190: multiplies the vertex eye y (vertex+0x24)
+local	_gleClipLinesPlane	fVar4	planeZ	CONFIRMED	plane equation component at +0x4194: multiplies the vertex eye z (vertex+0x28)
+local	_gleClipLinesPlane	fVar2	planeW	CONFIRMED	plane equation component at +0x4198: multiplies the vertex eye w (vertex+0x2c)
+local	_gleClipLinesPlane	fVar6	startDistance	CONFIRMED	signed distance (dot product with the plane) of the line's first vertex; < 0 means it is clipped away
+local	_gleClipLinesPlane	iVar16	startVertex	CONFIRMED	first vertex of the current line (*piVar15)
+local	_glePPPruneLocals	piVar4	localList	CONFIRMED	chunk list head at ppStream+4 (stream = *(param_1+0x1c)): the program's local variable chunks; unreferenced ones are removed with _PPStreamChunkListRemoveChunk and the rest renumbered with _glePPRelocateLocal
+local	_glePPPruneLocals	piVar3	instructionList	CONFIRMED	chunk list head at ppStream+0x20: the instruction chunks scanned for operands that reference the local (operand file field == 1)
+local	_glePPPruneLocals	iVar5	localChunk	CONFIRMED	the local chunk being tested; +0x12 is its index compared with the operand index words of the instructions
+local	_glePPPruneLocals	uVar1	instructionHeader	CONFIRMED	instruction chunk dword +0xc: bits 0x12-0x19 opcode (0x4a excluded), bits 0x1d-0x1f operand count guarding the operands at +0x1c, +0x24, +0x2c
+local	_glePPPruneAttribs	piVar6	attribList	CONFIRMED	chunk list head at ppStream+0x18: vertex attribute chunks; unreferenced or duplicate ones are removed and the rest renumbered with _glePPRelocateAttrib
+local	_glePPPruneAttribs	piVar5	instructionList	CONFIRMED	chunk list head at ppStream+0x20: the instruction chunks scanned for operands that reference the attribute (operand file bits 0x3800000 == 0)
+local	_glePPPruneAttribs	iVar7	attribChunk	CONFIRMED	the attribute chunk being tested/removed; +0x12 is its index, +0xc its binding compared with _PPStreamAttribBindingIsEqual
+local	_glePPPruneAttribs	iVar1	bindingEqual	CONFIRMED	result of _PPStreamAttribBindingIsEqual: nonzero means the other attribute chunk is a duplicate and its references are relocated to it
+local	_glePPPruneAttribs	uVar3	instructionHeader	CONFIRMED	instruction chunk dword +0xc: bits 0x12-0x19 opcode (0x4a excluded), bits 0x1d-0x1f operand count guarding the operands at +0x1c, +0x24, +0x2c
+local	_glePPPruneAttribs	uVar2	statusCode	CONFIRMED	return value: 0x35 when the remaining attribute count (attribList[2]) exceeds the limit at ppProgram+0x468, else 0
+local	_glePPPruneOutputs	piVar4	outputList	CONFIRMED	chunk list head at ppStream+0x1c: output chunks; unreferenced or duplicate ones are removed and the rest renumbered with _glePPRelocateOutput
+local	_glePPPruneOutputs	piVar3	instructionList	CONFIRMED	chunk list head at ppStream+0x20: the instruction chunks scanned for the destination that references the output (file field == 3)
+local	_glePPPruneOutputs	iVar6	outputChunk	CONFIRMED	the output chunk being tested/removed; +0x12 is its index, +0xc its binding compared with _PPStreamOutputBindingIsEqual
+local	_glePPPruneOutputs	iVar1	bindingEqual	CONFIRMED	result of _PPStreamOutputBindingIsEqual: nonzero means the other output chunk is a duplicate and its references are relocated to it
+local	_glePPPruneParams	piVar7	paramList	CONFIRMED	chunk list head at ppStream+0x10: parameter chunks; duplicates and unreferenced ones are removed with _PPStreamChunkListRemoveChunk (count at paramList[2] compared with the limit at ppProgram+0x464)
+local	_glePPPruneParams	piVar5	paramArrayList	CONFIRMED	chunk list head at ppStream+0x14: parameter array chunks with a first index (+0xe) and last index (+0x12) that mark parameters in range as used (+0x14 = 1)
+local	_glePPPruneParams	piVar6	instructionList	CONFIRMED	chunk list head at ppStream+0x20: the instruction chunks scanned for operands that reference the parameter (operand file field == 2)
+local	_glePPPruneParams	uVar3	statusCode	CONFIRMED	return value: 0x34 when the remaining parameter count (paramList[2]) exceeds the limit at ppProgram+0x464, else 0
+local	_glePPPruneParams	uVar4	instructionHeader	CONFIRMED	instruction chunk dword +0xc: bits 0x12-0x19 opcode (0x4a and 0x41-0x44 excluded), bits 0x1d-0x1f operand count guarding the operands at +0x1c, +0x24, +0x2c
+local	_gleCreateSharedState	param_1	glContext	CONFIRMED	context pointer: ctx+0x85a4 renderer count, ctx+0x8884 renderer array (stride 0x2e0), same layout as every other handler's glContext
+local	_gleCreateSharedState	iVar3	sharedState	CONFIRMED	_malloc(0x94d4) block returned to the caller and stored at ctx+0x5148: +0x8020 refcount (= 1), +0x8024 lock-needed flag, +0x8028 mutex (_pthread_mutex_init), +0x8054 per-renderer handles, hash tables at +0 and +0x1004...
+local	_gleCreateSharedState	piVar11	rendererSlot	CONFIRMED	walks the context's renderer array (ctx+0x8884, 0xb8 ints per renderer): *slot is the renderer's function table, +0x124 creates the per-renderer object, +0x128 destroys it in the failure unwind
+local	_gleCreateSharedState	puVar2	bucketCursor	CONFIRMED	zeroes the 0x400 bucket pointers of each of the 8 name hash tables (stride 0x1004) in the new shared state
+local	_gleCreateSharedState	uVar4	rendererHandle	CONFIRMED	per-renderer handle saved at sharedState+0x8054[i], passed to the renderer's +0x128 destroy function during the failure unwind
+local	_glCopyTexSubImage1D_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte +0x79 of the record at ctx+0x468c: nonzero selects the 0x17ffffff dirty mask and the +0x318 test (same idiom as rendererInfoByte79 in the other state-validation prologues)
+local	_glCopyTexSubImage1D_Exec	bVar11	levelFlags	CONFIRMED	byte +0xcf of the level record (0x10 allocated, 0x40 uploaded, 1 not owned) read-modify-written around _gleAllocateTextureLevel / _gleFreeTextureLevel
+local	_glCopyTexSubImage1D_Exec	iVar12	textureLevel	CONFIRMED	level record (textureObject + level*0x18 + 0xc4) passed to _gleAllocateTextureLevel / _gleFreeTextureLevel / _gleTextureSubImageCopy
+local	_gleVPFlushPolygon	iVar9	batchStart	CONFIRMED	ctx+0x4854: first vertex of the batch; the saved first vertex is restored there
+local	_gleVPFlushPolygon	iVar6	vertexQwordCount	CONFIRMED	(vertex stride ctx+0x487c) >> 3: number of 8-byte words copied per vertex
+local	_gleVPFlushPolygon	local_220	firstVertexCopy	CONFIRMED	copy of the batch's first vertex (up to 0x100 bytes) saved before the flush callback and written back to batchStart afterwards
+local	_gleVPFlushPolygon	local_120	lastVertexCopy	CONFIRMED	copy of the last vertex of the batch (batchEnd - stride) saved before the flush and written back as the second vertex (batchStart + stride) afterwards
+local	_gleVPFlushPolygon	uVar12	copyWord	CONFIRMED	8-byte temporary of the vertex copy loops
+local	_gleVPFlushPolygon	puVar7	vertexFlagBits	CONFIRMED	ctx+0x30b0: bit array indexed by vertex number; the last vertex's bit is cleared before the flush callback and its old value is moved to bit 1 of word 0 afterwards
+local	_gleVPFlushPolygon	uVar1	flagWordOffset	CONFIRMED	byte offset of the 32-bit word of vertexFlagBits that holds the last vertex's bit ((index >> 3) & 0x1ffffffc)
+local	_gleVPFlushPolygon	uVar8	oldFlagWord	CONFIRMED	value of that flag word before the bit was cleared; the saved bit is (oldFlagWord >> bit) & 1
+local	_glPixelTransferi_Exec	uVar5	parameterBit	CONFIRMED	bit assigned to the transfer parameter selected by pname; it is set in ctx+0x3414 when the new value differs from its neutral value and cleared otherwise
+local	_glPixelTransferi_Exec	uVar4	nonDefaultBits	CONFIRMED	new value of ctx+0x3414: old bits with parameterBit cleared, set again when the value != neutralValue; stored back to ctx+0x3414
+local	_glPixelTransferi_Exec	fVar1	neutralValue	CONFIRMED	value that leaves the transfer unchanged: 0.0 (FLOAT_00108e50) for biases, replaced by 1.0 (FLOAT_00108e54) for scales; compared with the new value to decide whether parameterBit is set
+local	_gleImagingUnpackData	param_1	glContext	CONFIRMED	context pointer: ctx+0x31cc is the unpack pixel store, ctx+0x31e4/0x31e5 the swap-bytes / lsb-first bytes, ctx+0x31a8 passed to _glgProcessPixels
+local	_gleImagingUnpackData	param_2	width	CONFIRMED	callers pass the image width (row/column length); stored as the pixel count local_94 and multiplied by _glePixelBytes for the row byte count
+local	_gleImagingUnpackData	param_5	sourceType	CONFIRMED	all six callers pass the user's pixel type here (format,type = arguments 4 and 5); converted together with format by the first _glgConvertType
+local	_gleImagingUnpackData	param_6	internalformat	CONFIRMED	callers pass the table/filter internalformat; paired with the GL_FLOAT (0x1406) argument as the destination of the second _glgConvertType and _glePixelBytes
+local	_gleImagingUnpackData	param_8	image	CONFIRMED	callers pass the user pixel pointer (image, row, column); the source address is image + skip offset from _glePixelPackSettings
+local	_gleImagingUnpackData	iVar4	unpackStore	CONFIRMED	glContext + 0x31cc: the unpack pixel store (row length, image height, skip rows/pixels/images, alignment) handed to the pixel setup and processing calls
+local	_gleDrawArraysOrElements_Core	param_2	mode	CONFIRMED	primitive mode passed by the callers (mode); stored at ctx+0x4a10 (current primitive, -1 outside) and used to index the per-mode handler table at ctx+0x49e0
+local	_gleDrawArraysOrElements_Core	param_3	startIndex	CONFIRMED	callers pass first; advanced while drawing and reloaded from ctx+0x48cc when the vertex buffer filled up and drawing resumes
+local	_gleDrawArraysOrElements_Core	param_4	count	CONFIRMED	callers pass the element count; iVar5 = count + first is the end index
+local	_gleDrawArraysOrElements_Core	param_8	vertexArrayFunc	CONFIRMED	callers pass the result of _gleGetVertexArrayFunc (cached at ctx+0x4890); called as (glContext, arrayState, vertexDest, index) and returns the new vertex write pointer
+local	_gleDrawArraysOrElements_Core	iVar5	endIndex	CONFIRMED	count + first: index one past the last element to draw
+local	_gleDrawArraysOrElements_Core	uVar8	desiredEnd	CONFIRMED	vertex write pointer if all remaining elements fit: ctx+0x4858 + (endIndex - index) * vertex stride (ctx+0x487c)
+local	_gleDrawArraysOrElements_Core	uVar9	bufferLimit	CONFIRMED	min(desiredEnd, ctx+0x485c): the vertex buffer end that bounds this pass (stored in the pass-end field ctx+0x48c8 by the other branch)
+local	_gleDrawArraysOrElements_Core	uVar2	emitEnd	CONFIRMED	vertex write pointer returned by vertexArrayFunc; reaching bufferLimit/desiredEnd ends the pass
+local	_gleDrawArraysOrElements_Core	iVar6	elementIndex	CONFIRMED	index of the element emitted by the current vertexArrayFunc call (startIndex, then +1 per vertex)
+local	_gleDrawArraysOrElements_Core	uVar11	nextFace	CONFIRMED	loop successor of the material face index passed to _gleForcePushMaterial
+local	_glDrawArraysOrElements_ListExec	uVar16	count	CONFIRMED	listRecord[6]: element count; tested (< 0 invalid, 0 nothing to draw) and passed as the count argument of _gleDrawArraysOrElements_Core / _gleExecuteVertexArrayRange
+local	_glDrawArraysOrElements_ListExec	uVar15	elementBytes	INFERRED	listRecord[7]: per-element byte size of the recorded data; the list command size returned is count * elementBytes + 0x40
+local	_gleFlushPrimitiveTCLFunc	local_220	carriedVertices	CONFIRMED	stack copy of the vertices that must survive the flush (last vertex of a line strip/loop, last 2 of a triangle strip, the first vertex of a fan/polygon plus the last, ...); copied back to the new vertex buffer after ctx+0x46e8 returns it
+local	_gleFlushPrimitiveTCLFunc	local_20	bufferVertexCount	CONFIRMED	local_20[0] = ctx+0x4a14 is passed by pointer to the buffer allocation callback ctx+0x46e8; the new buffer end ctx+0x485c = buffer + stride * local_20[0]
+local	_gleFlushPrimitiveTCLFunc	uVar6	qwordsLeft	CONFIRMED	countdown of the 8-byte words of the vertex copy loops ((bytes + 7) >> 3)
+local	_gleFlushPrimitiveTCLFunc	iVar1	carryOffset	CONFIRMED	-2 * vertex stride in the quad strip / quads cases: offset from the batch end to the two vertices that are carried over
+local	_gleTestObject	param_2	objectType	CONFIRMED	selects the name hash table (case 0: ctx+0x543c, 1: shared+0x2008, 2: +0x5014, 3: +0x701c, 4: +0x1004, 5: no lookup) and is passed unchanged to every renderer's test function (+0x1c0) together with the per-renderer handle
+local	_gleTestObject	iVar4	allValid	CONFIRMED	1 while every renderer's test of its handle returned nonzero; set to 0 by the first renderer that rejects it; returned (1 also for type 5 or when no renderer exists)
+local	_gleTestObject	bVar1	stillValid	CONFIRMED	allValid on entry of an iteration: renderers after a failed one are not asked
+local	_gleTestObject	iVar3	rendererBase	CONFIRMED	ctx + 0x10000, advanced by 0x2e0 per renderer: the renderer array (renderer function table at -0x777c, renderer context at -0x7a54)
+local	_gleTestObject	srcCursor	handleCursor	CONFIRMED	walks the object's per-renderer handles starting at object+0x10 (one word per renderer)
+local	_gleClipPoly	param_2	vertexList	CONFIRMED	polygon as an array of vertex pointers (callers pass polygonList); the plane loop alternates between it and the scratch list as input and output
+local	_gleClipPoly	param_3	vertexCount	CONFIRMED	number of vertices in vertexList (callers pass the polygon's vertex count)
+local	_gleClipPoly	param_4	clipPlaneMask	CONFIRMED	bit mask of the frustum planes to clip against (callers pass batchClipCodes & 0xff); bits are tested one plane at a time against the per-vertex outcode byte at vertex+0x7f and extended with the outcodes of generated vertices
+local	_gleClipPoly	param_5	outputList	CONFIRMED	result vertex pointer list; the final polygon is copied there when the last pass ended in the other list
+local	_gleClipPoly	param_6	outCount	CONFIRMED	out parameter: vertex count of the clipped polygon (callers pass &clippedCount), 0 when nothing remains, -1 when everything is inside
+local	_gleClipPoly	param_7	computeClipCodes	CONFIRMED	nonzero: first compute the outcodes of all vertices with _glePolyClipCode (callers pass 1)
+local	_gleClipPoly	uVar3	newVertexClipCode	CONFIRMED	outcode returned by the clip callback ctx+0x49cc for the vertex it interpolated at the plane crossing; or-ed into clipPlaneMask
+local	_gleClipPoly	piVar8	inputEnd	CONFIRMED	end of the current input list (vertexList + vertexCount, with one slot where the first vertex is repeated to close the polygon)
+local	_gleReclaimVertexArrayResources	piVar5	nextBucket	CONFIRMED	address of the next bucket pointer of the 0x400-bucket vertex array object hash table at shared+0x5014 (loop ends at shared+0x6010)
+local	_gleReclaimVertexArrayResources	piVar1	rendererFuncs	CONFIRMED	renderer function table of the current renderer (rendererBase - 0x777c); +0x1b4 reclaims one vertex array object handle
+local	_gleReclaimVertexArrayResources	puVar2	rendererContext	CONFIRMED	renderer context (rendererBase - 0x7a54) passed as first argument of the renderer function
+local	_gleReclaimVertexArrayResources	puVar9	handleCursor	CONFIRMED	walks the object's per-renderer handles starting at object+0x10 (one word per renderer)
+local	_gleReclaimVertexArrayResources	uVar4	rendererHandle	CONFIRMED	the handle read from handleCursor and passed to the renderer's +0x1b4 function
+local	_gleReclaimVertexArrayResources	iVar10	rendererBase	CONFIRMED	ctx + 0x10000, advanced by 0x2e0 per renderer: the renderer array (same walk as _gleTestObject)
+local	_glePPLogParam	param_5	paramWord2	CONFIRMED	second 32-bit word of the parameter key (the first is paramWord): compared with the slot's second word at +0x8078 and stored there when a slot is (re)assigned (callers pass the masked second word, see _glePPLogParameters paramWord2Masked)
+local	_glePPLogParam	uVar9	oldSlotBits	CONFIRMED	value of the in-use bit word at (bank*0x28c + slot/32)*4 + 0x8a74 before the slot bit is cleared (uVar9 & ~slotBit)
+local	_glePPLogParam	sVar12	oldPriority	CONFIRMED	priority halfword of the slot (array at (bank*0x518 + slot)*2 + 0x8874, the same array read as slotPriority for eviction): 0 for a newly assigned slot, else the existing value; stored back incremented by 1

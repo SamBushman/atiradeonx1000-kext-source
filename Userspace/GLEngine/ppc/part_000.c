@@ -645,7 +645,7 @@ int _gliGetInteger(glContext, stateId, valuePtr)
   int iVar2;
   int textureObject;
   undefined4 uVar3;
-  undefined *puVar4;
+  undefined *hashTable;
   
   if ((stateId == 0xe0) && (valuePtr != (uint *)0x0)) {
     *valuePtr = 0xaa8;
@@ -786,40 +786,40 @@ LAB_00002638:
   else {
     if (stateId == 0x643) {
       uVar3 = 6;
-      puVar4 = (undefined *)(*(int *)(glContext + 0x5148) + 0x6018);
+      hashTable = (undefined *)(*(int *)(glContext + 0x5148) + 0x6018);
       goto LAB_0000272c;
     }
     if (0x643 < stateId) {
       if (stateId == 0x649) {
         uVar3 = 1;
-        puVar4 = ((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148);
+        hashTable = ((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148);
 LAB_0000272c:
-        _gleGetHashMachineObjectNameTargetPairs(glContext,puVar4,uVar3,valuePtr);
+        _gleGetHashMachineObjectNameTargetPairs(glContext,hashTable,uVar3,valuePtr);
         return 0;
       }
       if (stateId < 0x64a) {
         if (stateId == 0x646) {
-          puVar4 = (undefined *)(glContext + 0x6440);
+          hashTable = (undefined *)(glContext + 0x6440);
           uVar3 = 0xfffffff5;
         }
         else if (stateId < 0x647) {
           if (stateId == 0x644) {
             uVar3 = 5;
-            puVar4 = (undefined *)(*(int *)(glContext + 0x5148) + 0x5014);
+            hashTable = (undefined *)(*(int *)(glContext + 0x5148) + 0x5014);
           }
           else {
             if (stateId != 0x645) goto LAB_00002978;
             uVar3 = 7;
-            puVar4 = (undefined *)(*(int *)(glContext + 0x5148) + 0x701c);
+            hashTable = (undefined *)(*(int *)(glContext + 0x5148) + 0x701c);
           }
         }
         else if (stateId == 0x647) {
-          puVar4 = (undefined *)(glContext + 0x543c);
+          hashTable = (undefined *)(glContext + 0x543c);
           uVar3 = 0xfffffff4;
         }
         else {
           if (stateId != 0x648) goto LAB_00002978;
-          puVar4 = *(undefined **)(glContext + 0x5148);
+          hashTable = *(undefined **)(glContext + 0x5148);
           uVar3 = 0;
         }
         goto LAB_0000272c;
@@ -939,18 +939,18 @@ LAB_000028f4:
     }
     if (stateId == 0x640) {
       uVar3 = 2;
-      puVar4 = (undefined *)(*(int *)(glContext + 0x5148) + 0x2008);
+      hashTable = (undefined *)(*(int *)(glContext + 0x5148) + 0x2008);
       goto LAB_0000272c;
     }
     if (0x640 < stateId) {
       if (stateId == 0x641) {
         uVar3 = 3;
-        puVar4 = (undefined *)(*(int *)(glContext + 0x5148) + 0x300c);
+        hashTable = (undefined *)(*(int *)(glContext + 0x5148) + 0x300c);
       }
       else {
         if (stateId != 0x642) goto LAB_00002978;
         uVar3 = 4;
-        puVar4 = (undefined *)(*(int *)(glContext + 0x5148) + 0x4010);
+        hashTable = (undefined *)(*(int *)(glContext + 0x5148) + 0x4010);
       }
       goto LAB_0000272c;
     }
@@ -1395,47 +1395,47 @@ int _gleDCBAlloc(param_1)
 }
 
 /* _gleCreateSharedState @ 0x31b4 (548 bytes) */
-int _gleCreateSharedState(param_1)
-  int param_1;
+int _gleCreateSharedState(glContext)
+  int glContext;
 {
   int loopIndex3;
   int remaining3;
   int remaining;
   int iVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  undefined4 uVar4;
+  undefined4 *bucketCursor;
+  int sharedState;
+  undefined4 rendererHandle;
   int loopIndex;
   int loopIndex2;
   undefined2 *puVar7;
   int iVar8;
   int iVar9;
   undefined4 *puVar10;
-  int *piVar11;
+  int *rendererSlot;
   uint loopIndex4;
   int remaining2;
   
-  iVar3 = _malloc(0x94d4);
-  *(undefined4 *)(iVar3 + 0x8020) = 1;
-  *(undefined1 *)(iVar3 + 0x8024) = 0;
-  _pthread_mutex_init(iVar3 + 0x8028,0);
+  sharedState = _malloc(0x94d4);
+  *(undefined4 *)(sharedState + 0x8020) = 1;
+  *(undefined1 *)(sharedState + 0x8024) = 0;
+  _pthread_mutex_init(sharedState + 0x8028,0);
   loopIndex4 = 0;
-  if (*(char *)(param_1 + 0x85a4) != '\0') {
-    iVar9 = iVar3 + 0x8054;
-    piVar11 = (int *)(param_1 + 0x8884);
+  if (*(char *)(glContext + 0x85a4) != '\0') {
+    iVar9 = sharedState + 0x8054;
+    rendererSlot = (int *)(glContext + 0x8884);
     do {
-      iVar1 = *piVar11;
-      piVar11 = piVar11 + 0xb8;
+      iVar1 = *rendererSlot;
+      rendererSlot = rendererSlot + 0xb8;
       iVar1 = (**(code **)(iVar1 + 0x124))(iVar9);
       if (iVar1 != 0) break;
       loopIndex4 = loopIndex4 + 1;
       iVar9 = iVar9 + 4;
-    } while ((int)loopIndex4 < (int)(uint)*(byte *)(param_1 + 0x85a4));
+    } while ((int)loopIndex4 < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
-  if (loopIndex4 == *(byte *)(param_1 + 0x85a4)) {
+  if (loopIndex4 == *(byte *)(glContext + 0x85a4)) {
     if ((int)loopIndex4 < 8) {
       iVar9 = 8 - loopIndex4;
-      puVar10 = (undefined4 *)(loopIndex4 * 4 + iVar3 + 0x8054);
+      puVar10 = (undefined4 *)(loopIndex4 * 4 + sharedState + 0x8054);
       do {
         *puVar10 = 0;
         puVar10 = puVar10 + 1;
@@ -1443,20 +1443,20 @@ int _gleCreateSharedState(param_1)
       } while (iVar9 != 0);
     }
     loopIndex3 = 0;
-    puVar10 = (undefined4 *)(iVar3 + 0x1000);
+    puVar10 = (undefined4 *)(sharedState + 0x1000);
     do {
-      puVar2 = (undefined4 *)(loopIndex3 * 0x1004 + iVar3);
+      bucketCursor = (undefined4 *)(loopIndex3 * 0x1004 + sharedState);
       remaining = 0x400;
       do {
-        *puVar2 = 0;
-        puVar2 = puVar2 + 1;
+        *bucketCursor = 0;
+        bucketCursor = bucketCursor + 1;
         remaining = remaining + -1;
       } while (remaining != 0);
       loopIndex3 = loopIndex3 + 1;
       *puVar10 = 0;
       puVar10 = puVar10 + 0x401;
     } while (loopIndex3 < 8);
-    iVar8 = iVar3 + 0x10000;
+    iVar8 = sharedState + 0x10000;
     loopIndex2 = 0;
     loopIndex = 0;
     iVar9 = iVar8;
@@ -1474,7 +1474,7 @@ int _gleCreateSharedState(param_1)
         remaining2 = remaining2 + -1;
       } while (remaining2 != 0);
       remaining3 = 9;
-      puVar10 = (undefined4 *)(loopIndex * 4 + iVar3 + 0x8a74);
+      puVar10 = (undefined4 *)(loopIndex * 4 + sharedState + 0x8a74);
       do {
         *puVar10 = 0xffffffff;
         puVar10 = puVar10 + 1;
@@ -1493,22 +1493,22 @@ int _gleCreateSharedState(param_1)
   else {
     iVar9 = loopIndex4 - 1;
     if (-1 < iVar9) {
-      puVar10 = (undefined4 *)(iVar9 * 4 + iVar3 + 0x8054);
-      piVar11 = (int *)(iVar9 * 0x2e0 + param_1 + 0x8884);
+      puVar10 = (undefined4 *)(iVar9 * 4 + sharedState + 0x8054);
+      rendererSlot = (int *)(iVar9 * 0x2e0 + glContext + 0x8884);
       do {
-        iVar1 = *piVar11;
-        piVar11 = piVar11 + -0xb8;
-        uVar4 = *puVar10;
+        iVar1 = *rendererSlot;
+        rendererSlot = rendererSlot + -0xb8;
+        rendererHandle = *puVar10;
         puVar10 = puVar10 + -1;
-        (**(code **)(iVar1 + 0x128))(uVar4);
+        (**(code **)(iVar1 + 0x128))(rendererHandle);
         iVar9 = iVar9 + -1;
       } while (-1 < iVar9);
     }
-    _pthread_mutex_destroy(iVar3 + 0x8028);
-    _free(iVar3);
-    iVar3 = 0;
+    _pthread_mutex_destroy(sharedState + 0x8028);
+    _free(sharedState);
+    sharedState = 0;
   }
-  return iVar3;
+  return sharedState;
 }
 
 /* _gleCreateEnableHashTable @ 0x33d8 (2092 bytes) */

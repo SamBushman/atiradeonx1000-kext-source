@@ -1717,89 +1717,89 @@ void _gleTextureMatTrans_body(int param_1,uint param_2,int param_3,int param_4,d
 }
 
 /* _gleClipPoly @ 0x5144c (432 bytes) */
-double _gleClipPoly(glContext, param_2, param_3, param_4, param_5, param_6, param_7)
+double _gleClipPoly(glContext, vertexList, vertexCount, clipPlaneMask, outputList, outCount, computeClipCodes)
   int glContext;
-  int *param_2;
-  int param_3;
-  uint param_4;
-  int *param_5;
-  int *param_6;
-  int param_7;
+  int *vertexList;
+  int vertexCount;
+  uint clipPlaneMask;
+  int *outputList;
+  int *outCount;
+  int computeClipCodes;
 {
   int iVar1;
   uint uVar2;
-  uint uVar3;
+  uint newVertexClipCode;
   int loopIndex;
   int iVar5;
   int *piVar6;
   int *cursor;
-  int *piVar8;
+  int *inputEnd;
   int *cursor2;
   int remaining;
   
-  if (param_7 == 0) {
+  if (computeClipCodes == 0) {
 LAB_000514ac:
     iVar1 = *(int *)(glContext + 0x4858);
-    piVar8 = param_2 + param_3;
+    inputEnd = vertexList + vertexCount;
     iVar5 = 0;
     uVar2 = 1;
-    piVar6 = param_5;
+    piVar6 = outputList;
     do {
       cursor = piVar6;
-      if ((param_4 & uVar2) != 0) {
-        *piVar8 = *param_2;
-        for (cursor2 = param_2; cursor2 < piVar8; cursor2 = cursor2 + 1) {
+      if ((clipPlaneMask & uVar2) != 0) {
+        *inputEnd = *vertexList;
+        for (cursor2 = vertexList; cursor2 < inputEnd; cursor2 = cursor2 + 1) {
           iVar5 = *cursor2;
           if ((uVar2 & *(byte *)(iVar5 + 0x7f)) == 0) {
             *cursor = iVar5;
             cursor = cursor + 1;
             if ((uVar2 & *(byte *)(cursor2[1] + 0x7f)) != 0) {
-              uVar3 = (**(code **)(glContext + 0x49cc))(glContext,cursor2[1],*cursor2,iVar1,uVar2);
+              newVertexClipCode = (**(code **)(glContext + 0x49cc))(glContext,cursor2[1],*cursor2,iVar1,uVar2);
               *(undefined1 *)(iVar1 + 0x7c) = 0;
               *cursor = iVar1;
               goto LAB_0005156c;
             }
           }
           else if ((uVar2 & *(byte *)(cursor2[1] + 0x7f)) == 0) {
-            uVar3 = (**(code **)(glContext + 0x49cc))(glContext,iVar5,cursor2[1],iVar1,uVar2);
+            newVertexClipCode = (**(code **)(glContext + 0x49cc))(glContext,iVar5,cursor2[1],iVar1,uVar2);
             *cursor = iVar1;
 LAB_0005156c:
-            param_4 = (param_4 | uVar3) & 0xff;
+            clipPlaneMask = (clipPlaneMask | newVertexClipCode) & 0xff;
             iVar1 = iVar1 + 0x100;
             cursor = cursor + 1;
           }
         }
         iVar5 = (int)cursor - (int)piVar6 >> 2;
         if (iVar5 < 3) goto LAB_000514a0;
-        piVar8 = piVar6 + iVar5;
-        cursor = param_2;
-        param_2 = piVar6;
+        inputEnd = piVar6 + iVar5;
+        cursor = vertexList;
+        vertexList = piVar6;
       }
       uVar2 = (uVar2 & 0x7f) << 1;
       piVar6 = cursor;
     } while (uVar2 < 0x21);
-    if ((param_2 != param_5) && (loopIndex = 0, remaining = iVar5, 0 < iVar5)) {
+    if ((vertexList != outputList) && (loopIndex = 0, remaining = iVar5, 0 < iVar5)) {
       do {
-        param_5[loopIndex] = param_2[loopIndex];
+        outputList[loopIndex] = vertexList[loopIndex];
         remaining = remaining + -1;
         loopIndex = loopIndex + 1;
       } while (remaining != 0);
     }
-    *param_6 = iVar5;
+    *outCount = iVar5;
     *(int *)(glContext + 0x4858) = iVar1;
   }
   else {
-    uVar2 = ((int (*)())_glePolyClipCode)(glContext,param_2,param_3);
+    uVar2 = ((int (*)())_glePolyClipCode)(glContext,vertexList,vertexCount);
     if ((uVar2 & 0xff) == 0) {
       iVar1 = -1;
     }
     else {
-      param_4 = uVar2 & 0xff;
+      clipPlaneMask = uVar2 & 0xff;
       if ((uVar2 & 0xff00) == 0) goto LAB_000514ac;
 LAB_000514a0:
       iVar1 = 0;
     }
-    *param_6 = iVar1;
+    *outCount = iVar1;
   }
   return;
 }

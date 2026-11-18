@@ -1290,11 +1290,11 @@ void _updateShaderState(int glContext,int *param_2,uint param_3,int param_4,int 
 void _glUseProgramObjectARB_Exec(int glContext,int programObj,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   bool bVar1;
-  bool bVar2;
-  undefined2 uVar3;
-  undefined4 uVar4;
+  bool noPreviousProgram;
+  undefined2 samplerTypeValue;
+  undefined4 samplerUsedValue;
   undefined4 glErrorCode;
-  uint uVar5;
+  uint unitTargetBits;
   int iVar6;
   int iVar7;
   int loopIndex;
@@ -1313,15 +1313,15 @@ void _glUseProgramObjectARB_Exec(int glContext,int programObj,double fparam_1,do
   uint uVar20;
   uint uVar21;
   int currentProgram;
-  int *piVar23;
-  int *piVar24;
+  int *newStageRecordSlots;
+  int *oldStageRecordSlots;
   int *srcCursor3;
   int remaining;
   double extraout_f1;
   double extraout_f1_00;
   
-  piVar24 = (int *)0x0;
-  piVar23 = (int *)0x0;
+  oldStageRecordSlots = (int *)0x0;
+  newStageRecordSlots = (int *)0x0;
   uVar21 = 0;
   uVar20 = 1;
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -1330,18 +1330,18 @@ void _glUseProgramObjectARB_Exec(int glContext,int programObj,double fparam_1,do
       fparam_1 = extraout_f1;
     }
     currentProgram = *(int *)(glContext + 0x5430);
-    bVar2 = currentProgram == 0;
-    if (!bVar2) {
-      piVar24 = (int *)(currentProgram + 0x20);
+    noPreviousProgram = currentProgram == 0;
+    if (!noPreviousProgram) {
+      oldStageRecordSlots = (int *)(currentProgram + 0x20);
       uVar20 = (uint)*(byte *)(currentProgram + 0x3e);
       uVar21 = (uint)**(byte **)(currentProgram + 0x24);
     }
     if (programObj == 0) {
       *(undefined4 *)(glContext + 0x5430) = 0;
 LAB_00086cd4:
-      ((void (*)())_updateShaderState)(glContext,piVar23,uVar20,uVar21,0,fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
+      ((void (*)())_updateShaderState)(glContext,newStageRecordSlots,uVar20,uVar21,0,fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
                          forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
-      if ((!bVar2) && (iVar7 = *(int *)(currentProgram + 8) + -1, *(int *)(currentProgram + 8) = iVar7, iVar7 == 1))
+      if ((!noPreviousProgram) && (iVar7 = *(int *)(currentProgram + 8) + -1, *(int *)(currentProgram + 8) = iVar7, iVar7 == 1))
       {
         _gleDeleteHashNameAndObject
                   (glContext,*(int *)(glContext + 0x5148) + 0x6018,*(undefined4 *)(currentProgram + 4));
@@ -1367,14 +1367,14 @@ LAB_00086cd4:
       }
       if (iVar7 != *(int *)(glContext + 0x5430)) {
         *(int *)(glContext + 0x5430) = iVar7;
-        piVar23 = (int *)(iVar7 + 0x20);
+        newStageRecordSlots = (int *)(iVar7 + 0x20);
         if ((**(char **)(iVar7 + 0x20) != '\0') || (**(char **)(iVar7 + 0x24) != '\0')) {
-          if (bVar2) {
+          if (noPreviousProgram) {
             loopIndex = 0;
             if (*(char *)(iVar7 + 0x3e) == '\0') {
               do {
                 if (loopIndex == 0) {
-                  iVar6 = *piVar23;
+                  iVar6 = *newStageRecordSlots;
                   remaining = 0;
                 }
                 else {
@@ -1429,7 +1429,7 @@ LAB_00086cd4:
             else {
               do {
                 if (loopIndex == 0) {
-                  iVar6 = *piVar23;
+                  iVar6 = *newStageRecordSlots;
                   remaining = 0;
                 }
                 else {
@@ -1451,21 +1451,21 @@ LAB_00086c90:
                     else {
                       if (*srcCursor3 == 0) goto LAB_00086c90;
 LAB_00086c28:
-                      uVar5 = *srcCursor8;
-                      if ((uVar5 & 1) == 0) {
-                        if ((uVar5 & 2) != 0) {
+                      unitTargetBits = *srcCursor8;
+                      if ((unitTargetBits & 1) == 0) {
+                        if ((unitTargetBits & 2) != 0) {
                           bVar1 = *srcCursor4 == -0x74a1;
                           goto LAB_00086c8c;
                         }
-                        if ((uVar5 & 4) != 0) {
+                        if ((unitTargetBits & 4) != 0) {
                           bVar1 = *srcCursor4 == -0x749d;
                           goto LAB_00086c8c;
                         }
-                        if ((uVar5 & 8) != 0) {
+                        if ((unitTargetBits & 8) != 0) {
                           bVar1 = *srcCursor4 == -0x74a2;
                           goto LAB_00086c8c;
                         }
-                        if ((uVar5 & 0x10) != 0) {
+                        if ((unitTargetBits & 0x10) != 0) {
                           bVar1 = *srcCursor4 == -0x74a3;
                           goto LAB_00086c8c;
                         }
@@ -1492,12 +1492,12 @@ LAB_00086c8c:
             if (*(char *)(iVar7 + 0x3e) == '\0') {
               do {
                 if (loopIndex == 0) {
-                  iVar9 = *piVar24;
-                  iVar6 = *piVar23;
+                  iVar9 = *oldStageRecordSlots;
+                  iVar6 = *newStageRecordSlots;
                   remaining = 0;
                 }
                 else {
-                  iVar9 = piVar24[1];
+                  iVar9 = oldStageRecordSlots[1];
                   remaining = 0x10;
                   iVar6 = *(int *)(iVar7 + 0x24);
                 }
@@ -1507,13 +1507,13 @@ LAB_00086c8c:
                   dstCursor3 = (undefined2 *)(iVar6 + 0x6c);
                   srcCursor6 = (undefined2 *)(iVar9 + 0x6c);
                   do {
-                    uVar4 = *srcCursor7;
+                    samplerUsedValue = *srcCursor7;
                     srcCursor7 = srcCursor7 + 1;
-                    uVar3 = *srcCursor6;
+                    samplerTypeValue = *srcCursor6;
                     srcCursor6 = srcCursor6 + 1;
-                    *dstCursor = uVar4;
+                    *dstCursor = samplerUsedValue;
                     dstCursor = dstCursor + 1;
-                    *dstCursor3 = uVar3;
+                    *dstCursor3 = samplerTypeValue;
                     dstCursor3 = dstCursor3 + 1;
                     remaining = remaining + -1;
                   } while (remaining != 0);
@@ -1524,12 +1524,12 @@ LAB_00086c8c:
             else {
               do {
                 if (loopIndex == 0) {
-                  iVar9 = *piVar24;
-                  iVar6 = *piVar23;
+                  iVar9 = *oldStageRecordSlots;
+                  iVar6 = *newStageRecordSlots;
                   remaining = 0;
                 }
                 else {
-                  iVar9 = piVar24[1];
+                  iVar9 = oldStageRecordSlots[1];
                   remaining = 0x10;
                   iVar6 = *(int *)(iVar7 + 0x24);
                 }

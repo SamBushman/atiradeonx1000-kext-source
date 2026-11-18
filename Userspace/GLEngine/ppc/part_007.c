@@ -6847,32 +6847,32 @@ LAB_0004ec20:
 }
 
 /* _gleDrawArraysOrElements_Core @ 0x4ec78 (532 bytes) */
-void _gleDrawArraysOrElements_Core(glContext, param_2, param_3, param_4, param_5, param_6, forwardedArg7, param_8)
+void _gleDrawArraysOrElements_Core(glContext, mode, startIndex, count, param_5, param_6, forwardedArg7, vertexArrayFunc)
   int glContext;
-  int param_2;
-  int param_3;
-  int param_4;
+  int mode;
+  int startIndex;
+  int count;
   undefined4 param_5;
   int param_6;
   undefined4 forwardedArg7;
-  code *param_8;
+  code *vertexArrayFunc;
 {
   uint uVar1;
-  uint uVar2;
+  uint emitEnd;
   short glContextShort487c;
   code *pcVar4;
-  int iVar5;
-  int iVar6;
+  int endIndex;
+  int elementIndex;
   uint uVar7;
-  uint uVar8;
-  uint uVar9;
+  uint desiredEnd;
+  uint bufferLimit;
   uint uVar10;
-  uint uVar11;
+  uint nextFace;
   
-  pcVar4 = *(code **)(param_2 * 4 + glContext + 0x49e0);
-  *(short *)(glContext + 0x4a10) = (short)param_2;
-  iVar5 = param_4 + param_3;
-  (*pcVar4)(glContext,param_2,param_3,param_4,param_5,param_6,forwardedArg7,param_8);
+  pcVar4 = *(code **)(mode * 4 + glContext + 0x49e0);
+  *(short *)(glContext + 0x4a10) = (short)mode;
+  endIndex = count + startIndex;
+  (*pcVar4)(glContext,mode,startIndex,count,param_5,param_6,forwardedArg7,vertexArrayFunc);
   *(undefined4 *)(glContext + 0x486c) = param_5;
   if ((((*(char *)(glContext + 0x7580) == '\0') && (param_6 != 0)) &&
       (*(char *)(glContext + 0x4664) == '\0')) &&
@@ -6892,46 +6892,46 @@ void _gleDrawArraysOrElements_Core(glContext, param_2, param_3, param_4, param_5
     while( true ) {
       glContextShort487c = *(short *)(glContext + 0x487c);
       uVar10 = *(uint *)(glContext + 0x4858);
-      uVar8 = uVar10 + (iVar5 - param_3) * (int)glContextShort487c;
-      iVar6 = param_3;
-      uVar9 = *(uint *)(glContext + 0x485c);
-      if (uVar8 < *(uint *)(glContext + 0x485c)) {
-        uVar9 = uVar8;
+      desiredEnd = uVar10 + (endIndex - startIndex) * (int)glContextShort487c;
+      elementIndex = startIndex;
+      bufferLimit = *(uint *)(glContext + 0x485c);
+      if (desiredEnd < *(uint *)(glContext + 0x485c)) {
+        bufferLimit = desiredEnd;
       }
       while( true ) {
         *(uint *)(glContext + 0x48c8) = uVar10 + (int)glContextShort487c;
-        param_3 = iVar6 + 1;
-        uVar2 = (*param_8)(glContext,forwardedArg7,uVar10,iVar6);
+        startIndex = elementIndex + 1;
+        emitEnd = (*vertexArrayFunc)(glContext,forwardedArg7,uVar10,elementIndex);
         (**(code **)(glContext + 0x4de0))(glContext,uVar10 + 0x30);
-        if (uVar2 == uVar9) break;
+        if (emitEnd == bufferLimit) break;
         uVar10 = uVar1;
         if (uVar1 <= uVar7) {
           do {
-            uVar11 = uVar10 + 1;
+            nextFace = uVar10 + 1;
             _gleForcePushMaterial(glContext,uVar10);
-            uVar10 = uVar11;
-          } while ((int)uVar11 <= (int)uVar7);
+            uVar10 = nextFace;
+          } while ((int)nextFace <= (int)uVar7);
         }
         glContextShort487c = *(short *)(glContext + 0x487c);
-        iVar6 = param_3;
-        uVar10 = uVar2;
+        elementIndex = startIndex;
+        uVar10 = emitEnd;
       }
-      if (uVar2 == uVar8) break;
+      if (emitEnd == desiredEnd) break;
       (**(code **)(glContext + 0x4a0c))(glContext);
     }
   }
   else {
     while( true ) {
-      uVar7 = *(int *)(glContext + 0x4858) + (iVar5 - param_3) * (int)*(short *)(glContext + 0x487c);
+      uVar7 = *(int *)(glContext + 0x4858) + (endIndex - startIndex) * (int)*(short *)(glContext + 0x487c);
       uVar1 = *(uint *)(glContext + 0x485c);
       if (uVar7 < *(uint *)(glContext + 0x485c)) {
         uVar1 = uVar7;
       }
       *(uint *)(glContext + 0x48c8) = uVar1;
-      uVar1 = (*param_8)(glContext,forwardedArg7,*(int *)(glContext + 0x4858),param_3);
+      uVar1 = (*vertexArrayFunc)(glContext,forwardedArg7,*(int *)(glContext + 0x4858),startIndex);
       if (uVar1 == uVar7) break;
       (**(code **)(glContext + 0x4a0c))(glContext);
-      param_3 = *(int *)(glContext + 0x48cc);
+      startIndex = *(int *)(glContext + 0x48cc);
     }
   }
   *(undefined2 *)(glContext + 0x4a10) = 0xffff;

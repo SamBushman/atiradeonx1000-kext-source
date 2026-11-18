@@ -669,21 +669,21 @@ int _gleImagingTexFormatToInternal(internalformat)
 }
 
 /* _gleImagingUnpackData @ 0xd2724 (316 bytes) */
-void _gleImagingUnpackData(param_1, param_2, height, format, param_5, param_6, type, param_8, filterData)
-  int param_1;
-  int param_2;
+void _gleImagingUnpackData(glContext, width, height, format, sourceType, internalformat, type, image, filterData)
+  int glContext;
+  int width;
   undefined4 height;
   undefined4 format;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 sourceType;
+  undefined4 internalformat;
   undefined4 type;
-  int param_8;
+  int image;
   undefined4 filterData;
 {
   undefined1 *puVar1;
   undefined1 *puVar2;
   undefined4 uVar3;
-  int iVar4;
+  int unpackStore;
   undefined1 *puVar5;
   int *piVar6;
   int local_c0;
@@ -707,35 +707,35 @@ void _gleImagingUnpackData(param_1, param_2, height, format, param_5, param_6, t
   undefined1 auStack_40 [4];
   int local_3c [6];
   
-  iVar4 = param_1 + 0x31cc;
+  unpackStore = glContext + 0x31cc;
   puVar5 = auStack_40;
   piVar6 = local_3c;
   uVar3 = height;
   _glePixelPackSettings
-            (param_1,param_6,type,param_2,height,iVar4,puVar5,piVar6,&local_50,auStack_4c,
+            (glContext,internalformat,type,width,height,unpackStore,puVar5,piVar6,&local_50,auStack_4c,
              auStack_48,auStack_44);
-  _glgConvertType(format,param_5,auStack_b8,auStack_b4,uVar3,iVar4,puVar5,piVar6);
+  _glgConvertType(format,sourceType,auStack_b8,auStack_b4,uVar3,unpackStore,puVar5,piVar6);
   puVar1 = auStack_a8;
   puVar2 = auStack_a4;
-  _glgConvertType(param_6,type,puVar1,puVar2,uVar3,iVar4,puVar5,piVar6);
-  local_c0 = param_8 + local_3c[0];
+  _glgConvertType(internalformat,type,puVar1,puVar2,uVar3,unpackStore,puVar5,piVar6);
+  local_c0 = image + local_3c[0];
   local_98 = 5;
   local_bc = local_50;
   local_a0 = 2;
   local_b0 = filterData;
   local_9c = 0;
-  local_94 = param_2;
+  local_94 = width;
   local_90 = height;
-  local_ac = _glePixelBytes(param_6,type);
-  local_ac = param_2 * local_ac;
+  local_ac = _glePixelBytes(internalformat,type);
+  local_ac = width * local_ac;
   local_54 = 0;
-  if (*(char *)(param_1 + 0x31e4) != '\0') {
+  if (*(char *)(glContext + 0x31e4) != '\0') {
     local_9c = local_9c | 1;
   }
-  if (*(char *)(param_1 + 0x31e5) != '\0') {
+  if (*(char *)(glContext + 0x31e5) != '\0') {
     local_9c = local_9c | 4;
   }
-  _glgProcessPixels(param_1 + 0x31a8,&local_c0,puVar1,puVar2,uVar3,iVar4,puVar5,piVar6);
+  _glgProcessPixels(glContext + 0x31a8,&local_c0,puVar1,puVar2,uVar3,unpackStore,puVar5,piVar6);
   return;
 }
 

@@ -699,36 +699,36 @@ int _gleBindVertexArray(glContext, id)
 void _gleReclaimVertexArrayResources(glContext)
   int glContext;
 {
-  int *piVar1;
-  undefined4 *puVar2;
+  int *rendererFuncs;
+  undefined4 *rendererContext;
   int iVar3;
-  undefined4 uVar4;
-  int *piVar5;
+  undefined4 rendererHandle;
+  int *nextBucket;
   int iVar6;
   int iVar7;
   int *piVar8;
-  undefined4 *puVar9;
-  int iVar10;
+  undefined4 *handleCursor;
+  int rendererBase;
   
   iVar3 = *(int *)(glContext + 0x5148);
   piVar8 = (int *)(iVar3 + 0x5014);
   do {
-    piVar5 = piVar8 + 1;
+    nextBucket = piVar8 + 1;
     for (piVar8 = (int *)*piVar8; piVar8 != (int *)0x0; piVar8 = (int *)*piVar8) {
       if (piVar8[2] == 1) {
         iVar6 = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           iVar7 = (int)(piVar8 + 0x118);
-          puVar9 = piVar8 + 4;
-          iVar10 = glContext + 0x10000;
+          handleCursor = piVar8 + 4;
+          rendererBase = glContext + 0x10000;
           do {
-            piVar1 = (int *)(iVar10 + -0x777c);
+            rendererFuncs = (int *)(rendererBase + -0x777c);
             iVar6 = iVar6 + 1;
-            puVar2 = (undefined4 *)(iVar10 + -0x7a54);
-            iVar10 = iVar10 + 0x2e0;
-            uVar4 = *puVar9;
-            puVar9 = puVar9 + 1;
-            (**(code **)(*piVar1 + 0x1b4))(*puVar2,uVar4);
+            rendererContext = (undefined4 *)(rendererBase + -0x7a54);
+            rendererBase = rendererBase + 0x2e0;
+            rendererHandle = *handleCursor;
+            handleCursor = handleCursor + 1;
+            (**(code **)(*rendererFuncs + 0x1b4))(*rendererContext,rendererHandle);
             *(undefined4 *)(iVar7 + 4) = *(undefined4 *)(iVar7 + 4);
             *(uint *)(iVar7 + 8) = *(uint *)(iVar7 + 8) | 1;
             iVar7 = iVar7 + 0x8c;
@@ -738,23 +738,23 @@ void _gleReclaimVertexArrayResources(glContext)
         piVar8[0xd5] = piVar8[0xd5] | 1;
       }
     }
-    piVar8 = piVar5;
-  } while ((int)piVar5 <= iVar3 + 0x6010);
+    piVar8 = nextBucket;
+  } while ((int)nextBucket <= iVar3 + 0x6010);
   iVar3 = *(int *)(glContext + 0x4a64);
   if (*(int *)(iVar3 + 8) == 1) {
     iVar6 = glContext + 0x10000;
     iVar7 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      puVar9 = (undefined4 *)(iVar3 + 0x10);
+      handleCursor = (undefined4 *)(iVar3 + 0x10);
       iVar3 = iVar3 + 0x460;
       do {
         piVar8 = (int *)(iVar6 + -0x777c);
         iVar7 = iVar7 + 1;
-        puVar2 = (undefined4 *)(iVar6 + -0x7a54);
+        rendererContext = (undefined4 *)(iVar6 + -0x7a54);
         iVar6 = iVar6 + 0x2e0;
-        uVar4 = *puVar9;
-        puVar9 = puVar9 + 1;
-        (**(code **)(*piVar8 + 0x1b4))(*puVar2,uVar4);
+        rendererHandle = *handleCursor;
+        handleCursor = handleCursor + 1;
+        (**(code **)(*piVar8 + 0x1b4))(*rendererContext,rendererHandle);
         *(undefined4 *)(iVar3 + 4) = *(undefined4 *)(iVar3 + 4);
         *(uint *)(iVar3 + 8) = *(uint *)(iVar3 + 8) | 1;
         iVar3 = iVar3 + 0x8c;
@@ -2589,7 +2589,7 @@ void _gleVPFlushTriangleFanTCLRDirty(int glContext,double floatArg1,double float
 void _gleVPFlushPolygon(glContext)
   int glContext;
 {
-  uint uVar1;
+  uint flagWordOffset;
   undefined8 *puVar2;
   undefined4 incomingR4;
   undefined4 incomingR5;
@@ -2599,64 +2599,64 @@ void _gleVPFlushPolygon(glContext)
   uint uVar3;
   undefined8 *puVar4;
   undefined8 *puVar5;
-  int iVar6;
-  uint *puVar7;
-  uint uVar8;
-  int iVar9;
+  int vertexQwordCount;
+  uint *vertexFlagBits;
+  uint oldFlagWord;
+  int batchStart;
   int iVar10;
   int iVar11;
-  undefined8 uVar12;
-  undefined8 local_220 [32];
-  undefined8 local_120 [32];
+  undefined8 copyWord;
+  undefined8 firstVertexCopy [32];
+  undefined8 lastVertexCopy [32];
   
-  iVar9 = *(int *)(glContext + 0x4854);
-  iVar6 = (int)*(short *)(glContext + 0x487c) >> 3;
-  puVar5 = (undefined8 *)(*(int *)(glContext + 0x4858) + iVar6 * -8);
+  batchStart = *(int *)(glContext + 0x4854);
+  vertexQwordCount = (int)*(short *)(glContext + 0x487c) >> 3;
+  puVar5 = (undefined8 *)(*(int *)(glContext + 0x4858) + vertexQwordCount * -8);
   iVar11 = 0;
-  for (iVar10 = iVar6; iVar10 != 0; iVar10 = iVar10 + -1) {
-    local_220[iVar11] = *(undefined8 *)(iVar9 + iVar11 * 8);
+  for (iVar10 = vertexQwordCount; iVar10 != 0; iVar10 = iVar10 + -1) {
+    firstVertexCopy[iVar11] = *(undefined8 *)(batchStart + iVar11 * 8);
     iVar11 = iVar11 + 1;
   }
-  if (iVar6 != 0) {
-    puVar4 = local_120;
+  if (vertexQwordCount != 0) {
+    puVar4 = lastVertexCopy;
     puVar2 = puVar5;
-    iVar11 = iVar6;
+    iVar11 = vertexQwordCount;
     do {
-      uVar12 = *puVar2;
+      copyWord = *puVar2;
       puVar2 = puVar2 + 1;
-      *puVar4 = uVar12;
+      *puVar4 = copyWord;
       puVar4 = puVar4 + 1;
       iVar11 = iVar11 + -1;
     } while (iVar11 != 0);
   }
-  puVar7 = *(uint **)(glContext + 0x30b0);
-  uVar3 = (uint)((int)puVar5 - iVar9) / (uint)(iVar6 * 8);
-  uVar1 = uVar3 >> 3 & 0x1ffffffc;
+  vertexFlagBits = *(uint **)(glContext + 0x30b0);
+  uVar3 = (uint)((int)puVar5 - batchStart) / (uint)(vertexQwordCount * 8);
+  flagWordOffset = uVar3 >> 3 & 0x1ffffffc;
   uVar3 = uVar3 & 0x1f;
-  uVar8 = *(uint *)(uVar1 + (int)puVar7);
-  *(uint *)(uVar1 + (int)puVar7) = uVar8 & ~(1 << uVar3);
+  oldFlagWord = *(uint *)(flagWordOffset + (int)vertexFlagBits);
+  *(uint *)(flagWordOffset + (int)vertexFlagBits) = oldFlagWord & ~(1 << uVar3);
   (**(code **)(glContext + 0x4a08))(glContext,incomingR4,incomingR5,incomingR6,incomingR7,incomingR8,uVar3);
   *(undefined1 *)(glContext + 0x4a18) = 1;
-  *puVar7 = *puVar7 & 0xfffffffc | (uVar8 >> uVar3 & 1) << 1;
+  *vertexFlagBits = *vertexFlagBits & 0xfffffffc | (oldFlagWord >> uVar3 & 1) << 1;
   iVar10 = 0;
-  for (iVar11 = iVar6; iVar11 != 0; iVar11 = iVar11 + -1) {
-    *(undefined8 *)(iVar9 + iVar10 * 8) = local_220[iVar10];
+  for (iVar11 = vertexQwordCount; iVar11 != 0; iVar11 = iVar11 + -1) {
+    *(undefined8 *)(batchStart + iVar10 * 8) = firstVertexCopy[iVar10];
     iVar10 = iVar10 + 1;
   }
-  puVar5 = (undefined8 *)(iVar9 + iVar6 * 8);
-  if (iVar6 != 0) {
-    puVar4 = local_120;
+  puVar5 = (undefined8 *)(batchStart + vertexQwordCount * 8);
+  if (vertexQwordCount != 0) {
+    puVar4 = lastVertexCopy;
     puVar2 = puVar5;
-    iVar11 = iVar6;
+    iVar11 = vertexQwordCount;
     do {
-      uVar12 = *puVar4;
+      copyWord = *puVar4;
       puVar4 = puVar4 + 1;
-      *puVar2 = uVar12;
+      *puVar2 = copyWord;
       puVar2 = puVar2 + 1;
       iVar11 = iVar11 + -1;
     } while (iVar11 != 0);
   }
-  *(undefined8 **)(glContext + 0x4858) = puVar5 + iVar6;
+  *(undefined8 **)(glContext + 0x4858) = puVar5 + vertexQwordCount;
   return;
 }
 
