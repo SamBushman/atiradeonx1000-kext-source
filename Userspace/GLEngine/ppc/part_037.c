@@ -666,20 +666,20 @@ void _glDisableVertexAttribArrayARB_Exec(glContext, index)
 {
   undefined4 glErrorCode;
   int clientState;
-  uint uVar3;
-  longlong lVar4;
+  uint slotBitHigh;
+  longlong slotBit;
   
   clientState = *(int *)(glContext + 0x4a60);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (index < 0x10) {
-      lVar4 = ___ashldi3(1,0,index);
-      uVar3 = (uint)((ulonglong)lVar4 >> 0x20);
-      *(uint *)(clientState + 0x330) = *(uint *)(clientState + 0x330) & ~uVar3;
-      *(uint *)(clientState + 0x334) = *(uint *)(clientState + 0x334) & ~(uint)lVar4;
+      slotBit = ___ashldi3(1,0,index);
+      slotBitHigh = (uint)((ulonglong)slotBit >> 0x20);
+      *(uint *)(clientState + 0x330) = *(uint *)(clientState + 0x330) & ~slotBitHigh;
+      *(uint *)(clientState + 0x334) = *(uint *)(clientState + 0x334) & ~(uint)slotBit;
       *(undefined4 *)(glContext + 0x488c) = 0;
       *(undefined4 *)(glContext + 0x4890) = 0;
-      *(uint *)(clientState + 0x350) = *(uint *)(clientState + 0x350) | uVar3;
-      *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | (uint)lVar4;
+      *(uint *)(clientState + 0x350) = *(uint *)(clientState + 0x350) | slotBitHigh;
+      *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | (uint)slotBit;
       if (((*(int *)(clientState + 0x344) == 0) && (*(int *)(clientState + 0x358) == 0)) &&
          (*(int *)(glContext + 0x49a0) == 0)) {
         return;

@@ -1410,15 +1410,15 @@ int _gleUpdateTextureTransform(glContext)
   int glContext;
 {
   bool useDivideByW;
-  undefined *puVar2;
-  undefined *puVar3;
-  undefined *puVar4;
+  undefined *multiMatTransPtrThenMatTransFunc;
+  undefined *matTransPtrDivWFunc;
+  undefined *identityThenMatTransFunc;
   int texEnableBits;
   
   texEnableBits = _gleTexEnableBits(glContext);
-  puVar3 = PTR__gleTextureMatTransPtrDivW_001115ec;
-  puVar2 = PTR__gleMultiTextureMatTransPtr_001115e0;
-  puVar4 = PTR__gleTextureMatTrans_Identity_001115f4;
+  matTransPtrDivWFunc = PTR__gleTextureMatTransPtrDivW_001115ec;
+  multiMatTransPtrThenMatTransFunc = PTR__gleMultiTextureMatTransPtr_001115e0;
+  identityThenMatTransFunc = PTR__gleTextureMatTrans_Identity_001115f4;
   if (((texEnableBits != 0) && (*(char *)(glContext + 0x4664) == '\0')) && (*(int *)(glContext + 0x5434) == 0))
   {
     useDivideByW = false;
@@ -1428,27 +1428,27 @@ int _gleUpdateTextureTransform(glContext)
     }
     if (texEnableBits != 1) {
       *(undefined **)(glContext + 0x506c) = PTR__gleMultiTextureMatTrans_001115e4;
-      *(undefined **)(glContext + 0x5074) = puVar2;
-      puVar3 = PTR__gleTextureMatTransPtrDivW_001115ec;
-      puVar2 = PTR__gleTextureMatTrans_001115e8;
+      *(undefined **)(glContext + 0x5074) = multiMatTransPtrThenMatTransFunc;
+      matTransPtrDivWFunc = PTR__gleTextureMatTransPtrDivW_001115ec;
+      multiMatTransPtrThenMatTransFunc = PTR__gleTextureMatTrans_001115e8;
       if (useDivideByW) {
         *(undefined **)(glContext + 0x5070) = PTR__gleTextureMatTransDivW_001115f0;
-        *(undefined **)(glContext + 0x5078) = puVar3;
+        *(undefined **)(glContext + 0x5078) = matTransPtrDivWFunc;
         return;
       }
       *(undefined **)(glContext + 0x5078) = PTR__gleTextureMatTrans_001115e8;
-      *(undefined **)(glContext + 0x5070) = puVar2;
+      *(undefined **)(glContext + 0x5070) = multiMatTransPtrThenMatTransFunc;
       return;
     }
-    puVar4 = PTR__gleTextureMatTrans_001115e8;
+    identityThenMatTransFunc = PTR__gleTextureMatTrans_001115e8;
     if (useDivideByW) {
       *(undefined **)(glContext + 0x506c) = PTR__gleTextureMatTransDivW_001115f0;
-      *(undefined **)(glContext + 0x5074) = puVar3;
+      *(undefined **)(glContext + 0x5074) = matTransPtrDivWFunc;
       return;
     }
   }
-  *(undefined **)(glContext + 0x5074) = puVar4;
-  *(undefined **)(glContext + 0x506c) = puVar4;
+  *(undefined **)(glContext + 0x5074) = identityThenMatTransFunc;
+  *(undefined **)(glContext + 0x506c) = identityThenMatTransFunc;
   return;
 }
 

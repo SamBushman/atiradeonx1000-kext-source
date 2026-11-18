@@ -121,21 +121,21 @@ void _gleMap1NormaldLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 
 void _gleMap1Texture1dLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,double *points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float *destPtr;
-  double dVar2;
+  double invDeltaThenPointValue;
   
-  dVar2 = DOUBLE_00108d68 / (u2 - u1);
+  invDeltaThenPointValue = DOUBLE_00108d68 / (u2 - u1);
   mapData[1] = (int)GH_F2U((float)u1);
   *mapData = order;
   mapData[2] = (int)GH_F2U((float)u2);
-  mapData[3] = (int)GH_F2U((float)dVar2);
+  mapData[3] = (int)GH_F2U((float)invDeltaThenPointValue);
   if (order < 1) {
     return;
   }
   destPtr = (float *)(mapData + 4);
   do {
-    dVar2 = *points;
+    invDeltaThenPointValue = *points;
     points = points + stride;
-    *destPtr = (float)dVar2;
+    *destPtr = (float)invDeltaThenPointValue;
     destPtr = destPtr + 1;
     order = order + -1;
   } while (order != 0);
@@ -1239,23 +1239,23 @@ void _gleMap2ColordLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 u
 /* _gleMap2IndexdLoad @ 0xdfa0c (224 bytes) */
 void _gleMap2IndexdLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int ustride,int uorder,undefined4 unusedArg8,undefined4 unusedArg9,undefined4 unusedArg10,undefined4 unusedArg11,int vstride,int vorder,int points,int *mapData,double u1,double u2,double v1,double v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float *pfVar1;
+  float *destPtr;
   int uIndex;
   int uElementOffset;
   int destRecord;
   double *pointPtr;
   int vRemaining;
-  double dVar7;
+  double unitThenPointValue;
   double invUDelta;
   
-  dVar7 = DOUBLE_00108d68;
+  unitThenPointValue = DOUBLE_00108d68;
   uIndex = 0;
   invUDelta = DOUBLE_00108d68 / (u2 - u1);
   *mapData = uorder;
   uElementOffset = 0;
   mapData[1] = vorder;
   mapData[6] = (int)GH_F2U((float)invUDelta);
-  mapData[7] = (int)GH_F2U((float)(dVar7 / (v2 - v1)));
+  mapData[7] = (int)GH_F2U((float)(unitThenPointValue / (v2 - v1)));
   mapData[2] = (int)GH_F2U((float)u1);
   mapData[3] = (int)GH_F2U((float)u2);
   mapData[4] = (int)GH_F2U((float)v1);
@@ -1265,13 +1265,13 @@ void _gleMap2IndexdLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 u
     do {
       if (0 < vorder) {
         pointPtr = (double *)(uElementOffset * 8 + points);
-        pfVar1 = (float *)(mapData + destRecord + 8);
+        destPtr = (float *)(mapData + destRecord + 8);
         vRemaining = vorder;
         do {
-          dVar7 = *pointPtr;
+          unitThenPointValue = *pointPtr;
           pointPtr = pointPtr + vstride;
-          *pfVar1 = (float)dVar7;
-          pfVar1 = pfVar1 + 1;
+          *destPtr = (float)unitThenPointValue;
+          destPtr = destPtr + 1;
           vRemaining = vRemaining + -1;
         } while (vRemaining != 0);
       }
@@ -1897,10 +1897,10 @@ void _gleMap2ColorfLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 u
 /* _gleMap2IndexfLoad @ 0xe05f4 (192 bytes) */
 void _gleMap2IndexfLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
+  int pointValue;
   float invUDelta;
   float one;
-  int *piVar4;
+  int *destPtr;
   int uIndex;
   int uElementOffset;
   int *pointPtr;
@@ -1924,13 +1924,13 @@ void _gleMap2IndexfLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 u
     do {
       if (0 < vorder) {
         pointPtr = (int *)(uElementOffset * 4 + points);
-        piVar4 = mapData + destRecord + 8;
+        destPtr = mapData + destRecord + 8;
         vRemaining = vorder;
         do {
-          iVar1 = *pointPtr;
+          pointValue = *pointPtr;
           pointPtr = pointPtr + vstride;
-          *piVar4 = iVar1;
-          piVar4 = piVar4 + 1;
+          *destPtr = pointValue;
+          destPtr = destPtr + 1;
           vRemaining = vRemaining + -1;
         } while (vRemaining != 0);
       }

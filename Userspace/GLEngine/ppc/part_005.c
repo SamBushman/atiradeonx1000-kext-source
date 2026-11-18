@@ -3133,27 +3133,27 @@ LAB_00039cc0:
 }
 
 /* ___ashldi3 @ 0x3a050 (96 bytes) */
-longlong ___ashldi3(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  uint param_3;
+longlong ___ashldi3(valueHigh, valueLow, shiftCount)
+  int valueHigh;
+  uint valueLow;
+  uint shiftCount;
 {
-  uint uVar1;
-  undefined4 local_2c;
+  uint complementShiftThenResultHigh;
+  undefined4 resultLow;
   
-  if (param_3 == 0) {
-    return CONCAT44(param_1,param_2);
+  if (shiftCount == 0) {
+    return CONCAT44(valueHigh,valueLow);
   }
-  uVar1 = 0x20 - param_3;
-  if ((int)uVar1 < 1) {
-    uVar1 = param_2 << (-uVar1 & 0x3f);
-    local_2c = 0;
+  complementShiftThenResultHigh = 0x20 - shiftCount;
+  if ((int)complementShiftThenResultHigh < 1) {
+    complementShiftThenResultHigh = valueLow << (-complementShiftThenResultHigh & 0x3f);
+    resultLow = 0;
   }
   else {
-    local_2c = param_2 << (param_3 & 0x3f);
-    uVar1 = param_1 << (param_3 & 0x3f) | param_2 >> (uVar1 & 0x3f);
+    resultLow = valueLow << (shiftCount & 0x3f);
+    complementShiftThenResultHigh = valueHigh << (shiftCount & 0x3f) | valueLow >> (complementShiftThenResultHigh & 0x3f);
   }
-  return CONCAT44(uVar1,local_2c);
+  return CONCAT44(complementShiftThenResultHigh,resultLow);
 }
 
 /* _glEnd_CompExec @ 0x3a0b0 (48 bytes) */

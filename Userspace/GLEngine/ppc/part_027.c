@@ -38,8 +38,8 @@ void _glStencilFuncSeparate_Exec(glContext, face, func, ref, mask)
   undefined4 mask;
 {
   undefined4 glErrorCode;
-  uint uVar2;
-  undefined2 uVar3;
+  uint maxStencilRef;
+  undefined2 funcWord16;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -53,14 +53,14 @@ void _glStencilFuncSeparate_Exec(glContext, face, func, ref, mask)
     ref = 0;
   }
   else {
-    uVar2 = 0xffffffff >> (0x20U - *(int *)(*(int *)(glContext + 0x468c) + 0x40) & 0x3f);
-    if (uVar2 < ref) {
-      ref = uVar2;
+    maxStencilRef = 0xffffffff >> (0x20U - *(int *)(*(int *)(glContext + 0x468c) + 0x40) & 0x3f);
+    if (maxStencilRef < ref) {
+      ref = maxStencilRef;
     }
   }
-  uVar3 = (undefined2)func;
+  funcWord16 = (undefined2)func;
   if (face == 0x405) {
-    *(undefined2 *)(glContext + 0x3510) = uVar3;
+    *(undefined2 *)(glContext + 0x3510) = funcWord16;
     *(uint *)(glContext + 0x350c) = ref;
     *(undefined4 *)(glContext + 0x3508) = mask;
     goto LAB_00090958;
@@ -68,7 +68,7 @@ void _glStencilFuncSeparate_Exec(glContext, face, func, ref, mask)
   if (face < 0x406) {
     if (face == 0x404) {
 LAB_0009094c:
-      *(undefined2 *)(glContext + 0x3500) = uVar3;
+      *(undefined2 *)(glContext + 0x3500) = funcWord16;
       *(uint *)(glContext + 0x34fc) = ref;
       *(undefined4 *)(glContext + 0x34f8) = mask;
 LAB_00090958:
@@ -77,7 +77,7 @@ LAB_00090958:
     }
   }
   else if (face == 0x408) {
-    *(undefined2 *)(glContext + 0x3510) = uVar3;
+    *(undefined2 *)(glContext + 0x3510) = funcWord16;
     *(uint *)(glContext + 0x350c) = ref;
     *(undefined4 *)(glContext + 0x3508) = mask;
     goto LAB_0009094c;

@@ -395,43 +395,43 @@ void _glePreInitGlobals()
   int remaining3;
   int remaining2;
   double intToDoubleMagic;
-  float fVar2;
-  undefined *puVar3;
-  uint uVar4;
+  float ubyteToFloatScale;
+  undefined *globalsStruct;
+  uint flippedIndex;
   float *dstCursor;
   undefined1 *cursor;
   uint loopIndex;
   int remaining;
   
-  puVar3 = PTR__gle_globals_struct_00112070;
-  fVar2 = FLOAT_00108e78;
+  globalsStruct = PTR__gle_globals_struct_00112070;
+  ubyteToFloatScale = FLOAT_00108e78;
   intToDoubleMagic = DOUBLE_00108d58;
   loopIndex = 0;
   remaining = 0x100;
   dstCursor = (float *)PTR__gle_globals_struct_00112070;
   do {
-    uVar4 = loopIndex ^ 0x80000000;
+    flippedIndex = loopIndex ^ 0x80000000;
     loopIndex = loopIndex + 1;
-    *dstCursor = (float)((double)CONCAT44(0x43300000,uVar4) - intToDoubleMagic) * fVar2;
+    *dstCursor = (float)((double)CONCAT44(0x43300000,flippedIndex) - intToDoubleMagic) * ubyteToFloatScale;
     dstCursor = dstCursor + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
-  puVar3[0x404] = 3;
-  puVar3[0x401] = 3;
+  globalsStruct[0x404] = 3;
+  globalsStruct[0x401] = 3;
   remaining2 = 8;
-  puVar3[0x405] = 4;
-  puVar3[0x407] = 0;
-  puVar3[0x400] = 4;
-  puVar3[0x402] = 4;
-  cursor = puVar3 + 0x408;
-  puVar3[0x406] = 1;
-  puVar3[0x403] = 1;
+  globalsStruct[0x405] = 4;
+  globalsStruct[0x407] = 0;
+  globalsStruct[0x400] = 4;
+  globalsStruct[0x402] = 4;
+  cursor = globalsStruct + 0x408;
+  globalsStruct[0x406] = 1;
+  globalsStruct[0x403] = 1;
   do {
     *cursor = 4;
     cursor = cursor + 1;
     remaining2 = remaining2 + -1;
   } while (remaining2 != 0);
-  cursor2 = puVar3 + 0x410;
+  cursor2 = globalsStruct + 0x410;
   remaining3 = 0x10;
   do {
     *cursor2 = 4;
@@ -1086,17 +1086,17 @@ LAB_00002bb0:
 }
 
 /* _gliDestroyRendererInfo @ 0x2bcc (52 bytes) */
-int _gliDestroyRendererInfo(param_1)
-  int param_1;
+int _gliDestroyRendererInfo(rendererInfo)
+  int rendererInfo;
 {
-  undefined4 uVar1;
+  undefined4 cglError;
   
-  uVar1 = 0x271e;
-  if (param_1 != 0) {
-    _free(param_1);
-    uVar1 = 0;
+  cglError = 0x271e;
+  if (rendererInfo != 0) {
+    _free(rendererInfo);
+    cglError = 0;
   }
-  return uVar1;
+  return cglError;
 }
 
 /* _gliDestroyPixelFormat @ 0x2c00 (208 bytes) */
@@ -2856,8 +2856,9 @@ void _gleInitGLIState(glContext)
   undefined1 rendererInfoByte79;
   float float257;
   undefined4 *dstCursor;
-  int iVar4;
-  int iVar5;
+  int matrixByteOffset;
+  int vertexTexCoordCursor;
+  int stateSlotCursor;
   int currentVertexAttrib;
   int currentTexCoord;
   int glContextPtr4854;
@@ -2865,14 +2866,14 @@ void _gleInitGLIState(glContext)
   
   loopIndex = 0;
   do {
-    iVar4 = loopIndex * 0x40;
+    matrixByteOffset = loopIndex * 0x40;
     loopIndex = loopIndex + 1;
-    ((int (*)())_gleMakeIdentityMatrix)(*(int *)(glContext + 0x4678) + iVar4);
+    ((int (*)())_gleMakeIdentityMatrix)(*(int *)(glContext + 0x4678) + matrixByteOffset);
     float257 = FLOAT_00108e5c;
   } while (loopIndex < 0xcb);
   glContextPtr4854 = *(int *)(glContext + 0x4854);
   *(undefined4 *)(glContext + 0x5144) = 0;
-  iVar4 = glContextPtr4854 + -0x200;
+  vertexTexCoordCursor = glContextPtr4854 + -0x200;
   *(undefined4 *)(glContext + 0x50fc) = 0;
   *(float *)(glContext + 700) = float257;
   *(undefined4 *)(glContext + 0x2c0) = 0;
@@ -2902,11 +2903,11 @@ void _gleInitGLIState(glContext)
     *(undefined4 *)(currentTexCoord + 0x128) = 0;
     *(undefined4 *)(currentTexCoord + 300) = 0x3f800000;
     currentTexCoord = currentTexCoord + 0x10;
-    *(undefined4 *)(iVar4 + 0x80) = 0;
-    *(undefined4 *)(iVar4 + 0x84) = 0;
-    *(undefined4 *)(iVar4 + 0x88) = 0;
-    *(undefined4 *)(iVar4 + 0x8c) = 0x3f800000;
-    iVar4 = iVar4 + 0x10;
+    *(undefined4 *)(vertexTexCoordCursor + 0x80) = 0;
+    *(undefined4 *)(vertexTexCoordCursor + 0x84) = 0;
+    *(undefined4 *)(vertexTexCoordCursor + 0x88) = 0;
+    *(undefined4 *)(vertexTexCoordCursor + 0x8c) = 0x3f800000;
+    vertexTexCoordCursor = vertexTexCoordCursor + 0x10;
     remaining4 = remaining4 + -1;
   } while (remaining4 != 0);
   remaining = 0x10;
@@ -2930,13 +2931,13 @@ void _gleInitGLIState(glContext)
   } while (remaining2 != 0);
   *(undefined1 *)(glContext + 0x2ef) = 1;
   *(undefined1 *)(glContext + 0x2ec) = 1;
-  iVar5 = glContext;
+  stateSlotCursor = glContext;
   do {
-    *(undefined4 *)(iVar5 + 0x2f0) = 0;
-    *(float *)(iVar5 + 0x2f4) = float257;
-    *(float *)(iVar5 + 0x2f8) = float257;
-    iVar5 = iVar5 + 0x10;
-  } while (iVar5 <= glContext + 0x10);
+    *(undefined4 *)(stateSlotCursor + 0x2f0) = 0;
+    *(float *)(stateSlotCursor + 0x2f4) = float257;
+    *(float *)(stateSlotCursor + 0x2f8) = float257;
+    stateSlotCursor = stateSlotCursor + 0x10;
+  } while (stateSlotCursor <= glContext + 0x10);
   *(undefined4 *)(glContext + 0x74cc) = 0;
   *(undefined4 *)(glContext + 0x74d0) = 0x3f800000;
   *(undefined4 *)(glContext + 0x5408) = 0;

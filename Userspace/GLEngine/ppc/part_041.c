@@ -29,18 +29,18 @@ int _gleRTCAddAChunk_c5280(srcCursor, dstCursor)
 }
 
 /* _gleSetNormalFunc @ 0xc52b0 (96 bytes) */
-void _gleSetNormalFunc(glContext, param_2, param_3)
+void _gleSetNormalFunc(glContext, forwardedArg2, forwardedArg3)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 forwardedArg2;
+  undefined4 forwardedArg3;
 {
   code *UNRECOVERED_JUMPTABLE;
   
-  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildNormalTransformFunc)(glContext,param_2,param_3);
+  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildNormalTransformFunc)(glContext,forwardedArg2,forwardedArg3);
   *(code **)(glContext + 0x5068) = UNRECOVERED_JUMPTABLE;
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(glContext,param_2,param_3);
+  (*UNRECOVERED_JUMPTABLE)(glContext,forwardedArg2,forwardedArg3);
   return;
 }
 
@@ -2329,10 +2329,10 @@ void _gleSwitchRenderersWriteBuffers(glContext, unusedArg2, copyContextData)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  float local_1a0;
+  float scaledVertexX;
   float scaledVertexY;
   float scaledVertexZ;
-  undefined1 auStack_a0 [80];
+  undefined1 recoveryStateBuffer [80];
   undefined4 savedWord0;
   undefined4 savedWord1;
   undefined4 savedWord2;
@@ -2360,12 +2360,12 @@ void _gleSwitchRenderersWriteBuffers(glContext, unusedArg2, copyContextData)
     *(undefined1 *)(glContext + 0x31e4) = 0;
     *(undefined1 *)(glContext + 0x31e5) = 0;
     *(undefined1 *)(glContext + 0x31e6) = 0;
-    saveStateResult = (double)((double (*)())_gleRecoverySaveState)(glContext,auStack_a0);
+    saveStateResult = (double)((double (*)())_gleRecoverySaveState)(glContext,recoveryStateBuffer);
     if (scissorWasEnabled) {
       ((undefined4 (*)())_gleToggleScissorEnableState)(glContext,0,saveStateResult,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     }
-    _memset(&local_1a0,0,0x100);
-    local_1a0 = *(float *)(glContext + 0x4a44) * local_1a0 + *(float *)(glContext + 0x4a48);
+    _memset(&scaledVertexX,0,0x100);
+    scaledVertexX = *(float *)(glContext + 0x4a44) * scaledVertexX + *(float *)(glContext + 0x4a48);
     viewportOffsetY = (double)*(float *)(glContext + 0x4a50);
     scaledVertexY = (float)((double)*(float *)(glContext + 0x4a4c) * (double)scaledVertexY + viewportOffsetY);
     scaledVertexZ = *(float *)(glContext + 0x4a54) * scaledVertexZ;
@@ -2376,7 +2376,7 @@ void _gleSwitchRenderersWriteBuffers(glContext, unusedArg2, copyContextData)
       (**(code **)(glContext + 0x4788))
                 (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,glContext + 0x310);
       (**(code **)(glContext + 0x46a4))
-                (*(undefined4 *)(glContext + 0x4688),&local_1a0,copyContextData[1],*copyContextData,0x1902,0x1406,
+                (*(undefined4 *)(glContext + 0x4688),&scaledVertexX,copyContextData[1],*copyContextData,0x1902,0x1406,
                  copyContextData[4],0);
       _glDisable_Exec(glContext,0xb71);
       _glDepthFunc_Exec(glContext,(uint)savedDepthFunc);
@@ -2384,7 +2384,7 @@ void _gleSwitchRenderersWriteBuffers(glContext, unusedArg2, copyContextData)
                 (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,glContext + 0x310);
     }
     forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int,int,int,int,int))(glContext + 0x46a4))
-                                 (*(undefined4 *)(glContext + 0x4688), &local_1a0, copyContextData[1], *copyContextData, 0x80e1, 0x8367, copyContextData[2], 0);
+                                 (*(undefined4 *)(glContext + 0x4688), &scaledVertexX, copyContextData[1], *copyContextData, 0x80e1, 0x8367, copyContextData[2], 0);
     if (scissorWasEnabled) {
       forwardedFloatArg1 = (double)((undefined4 (*)())_gleToggleScissorEnableState)(glContext,1,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,viewportOffsetY);
     }
@@ -2396,7 +2396,7 @@ void _gleSwitchRenderersWriteBuffers(glContext, unusedArg2, copyContextData)
     *(undefined4 *)(glContext + 0x31e0) = savedWord5;
     *(undefined4 *)(glContext + 0x31e4) = savedWord6;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x200000;
-    ((void (*)())_gleRecoveryRestoreState)(glContext,auStack_a0,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,viewportOffsetY);
+    ((void (*)())_gleRecoveryRestoreState)(glContext,recoveryStateBuffer,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,viewportOffsetY);
   }
   return;
 }

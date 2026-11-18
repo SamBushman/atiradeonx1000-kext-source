@@ -4707,17 +4707,17 @@ int _glColor4_ListExec(glContext, recordedArgs)
   int glContext;
   undefined4 *recordedArgs;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
+  undefined4 alpha;
+  undefined4 green;
+  undefined4 blue;
   
-  uVar1 = recordedArgs[3];
-  uVar2 = recordedArgs[1];
-  uVar3 = recordedArgs[2];
+  alpha = recordedArgs[3];
+  green = recordedArgs[1];
+  blue = recordedArgs[2];
   *(undefined4 *)(glContext + 0x2a0) = *recordedArgs;
-  *(undefined4 *)(glContext + 0x2a4) = uVar2;
-  *(undefined4 *)(glContext + 0x2a8) = uVar3;
-  *(undefined4 *)(glContext + 0x2ac) = uVar1;
+  *(undefined4 *)(glContext + 0x2a4) = green;
+  *(undefined4 *)(glContext + 0x2a8) = blue;
+  *(undefined4 *)(glContext + 0x2ac) = alpha;
   if (*(char *)(glContext + 0x4df8) != '\0') {
     (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
   }
