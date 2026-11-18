@@ -2249,8 +2249,8 @@ void _gleVtxTextureCoordGenEyeST(param_1, vertexCursor, vertexCount)
 }
 
 /* _gleVtxTextureCoordGenObjectST @ 0xf64dc (140 bytes) */
-void _gleVtxTextureCoordGenObjectST(param_1, vertexCursor, vertexCount)
-  int param_1;
+void _gleVtxTextureCoordGenObjectST(glContext, vertexCursor, vertexCount)
+  int glContext;
   uint vertexCursor;
   int vertexCount;
 {
@@ -2262,21 +2262,21 @@ void _gleVtxTextureCoordGenObjectST(param_1, vertexCursor, vertexCount)
   float objectPlaneSA;
   float objectPlaneTB;
   float objectPlaneTC;
-  uint uVar9;
+  uint vertexEndThenRemaining;
   
-  uVar9 = vertexCursor + vertexCount * 0x100;
-  objectPlaneSD = *(float *)(param_1 + 0x3d08);
-  objectPlaneSB = *(float *)(param_1 + 0x3d00);
-  objectPlaneSC = *(float *)(param_1 + 0x3d04);
-  objectPlaneTA = *(float *)(param_1 + 0x3d20);
-  objectPlaneTD = *(float *)(param_1 + 0x3d2c);
-  objectPlaneSA = *(float *)(param_1 + 0x3cfc);
-  objectPlaneTB = *(float *)(param_1 + 0x3d24);
-  objectPlaneTC = *(float *)(param_1 + 0x3d28);
-  if (uVar9 <= vertexCursor) {
+  vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
+  objectPlaneSD = *(float *)(glContext + 0x3d08);
+  objectPlaneSB = *(float *)(glContext + 0x3d00);
+  objectPlaneSC = *(float *)(glContext + 0x3d04);
+  objectPlaneTA = *(float *)(glContext + 0x3d20);
+  objectPlaneTD = *(float *)(glContext + 0x3d2c);
+  objectPlaneSA = *(float *)(glContext + 0x3cfc);
+  objectPlaneTB = *(float *)(glContext + 0x3d24);
+  objectPlaneTC = *(float *)(glContext + 0x3d28);
+  if (vertexEndThenRemaining <= vertexCursor) {
     return;
   }
-  uVar9 = (uVar9 - vertexCursor) + 0xff >> 8;
+  vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
   do {
     *(float *)(vertexCursor + 0x84) =
          objectPlaneTD * *(float *)(vertexCursor + 0x2c) +
@@ -2287,8 +2287,8 @@ void _gleVtxTextureCoordGenObjectST(param_1, vertexCursor, vertexCount)
          (objectPlaneSC * *(float *)(vertexCursor + 0x28) +
          (objectPlaneSA * *(float *)(vertexCursor + 0x20) + objectPlaneSB * *(float *)(vertexCursor + 0x24)));
     vertexCursor = vertexCursor + 0x100;
-    uVar9 = uVar9 - 1;
-  } while (uVar9 != 0);
+    vertexEndThenRemaining = vertexEndThenRemaining - 1;
+  } while (vertexEndThenRemaining != 0);
   return;
 }
 
@@ -2311,48 +2311,48 @@ void _gleVtxTextureCoordGenReflectST(glContext, vertexCursor, vertexCount)
   uint vertexCursor;
   int vertexCount;
 {
-  float fVar1;
+  float dotThenTwiceDot;
   undefined *vectorNormalize;
   uint vertexEnd;
-  float fStack_30;
-  float fStack_2c;
-  float fStack_28;
+  float normalizedEyeX;
+  float normalizedEyeY;
+  float normalizedEyeZ;
   
   vectorNormalize = PTR__gleVectorNormalize_00112064;
   vertexEnd = vertexCursor + vertexCount * 0x100;
   for (; vertexCursor < vertexEnd; vertexCursor = vertexCursor + 0x100) {
-    (**(code **)vectorNormalize)(glContext,vertexCursor + 0x20,&fStack_30);
-    fVar1 = *(float *)(vertexCursor + 0x48) * fStack_28 +
-            (*(float *)(vertexCursor + 0x40) * fStack_30 + *(float *)(vertexCursor + 0x44) * fStack_2c);
-    fVar1 = fVar1 + fVar1;
-    *(float *)(vertexCursor + 0x84) = -(*(float *)(vertexCursor + 0x44) * fVar1 - fStack_2c);
-    *(float *)(vertexCursor + 0x80) = -(*(float *)(vertexCursor + 0x40) * fVar1 - fStack_30);
+    (**(code **)vectorNormalize)(glContext,vertexCursor + 0x20,&normalizedEyeX);
+    dotThenTwiceDot = *(float *)(vertexCursor + 0x48) * normalizedEyeZ +
+            (*(float *)(vertexCursor + 0x40) * normalizedEyeX + *(float *)(vertexCursor + 0x44) * normalizedEyeY);
+    dotThenTwiceDot = dotThenTwiceDot + dotThenTwiceDot;
+    *(float *)(vertexCursor + 0x84) = -(*(float *)(vertexCursor + 0x44) * dotThenTwiceDot - normalizedEyeY);
+    *(float *)(vertexCursor + 0x80) = -(*(float *)(vertexCursor + 0x40) * dotThenTwiceDot - normalizedEyeX);
   }
   return;
 }
 
 /* _gleVtxTextureCoordGenReflectSTR @ 0xf666c (188 bytes) */
-void _gleVtxTextureCoordGenReflectSTR(int param_1,uint vertexCursor,int vertexCount,double fparam_1)
+void _gleVtxTextureCoordGenReflectSTR(int glContext,uint vertexCursor,int vertexCount,double fparam_1)
 {
-  float fVar1;
+  float dotThenTwiceDot;
   undefined *vectorNormalize;
   uint vertexEnd;
-  float fStack_30;
-  float fStack_2c;
-  float fStack_28;
+  float normalizedEyeX;
+  float normalizedEyeY;
+  float normalizedEyeZ;
   
   vectorNormalize = PTR__gleVectorNormalize_00112064;
   vertexEnd = vertexCursor + vertexCount * 0x100;
   for (; vertexCursor < vertexEnd; vertexCursor = vertexCursor + 0x100) {
-    fparam_1 = (double)(**(double ( **)(int,int,int,double))vectorNormalize)(param_1, vertexCursor + 0x20, &fStack_30, fparam_1);
-    fVar1 = *(float *)(vertexCursor + 0x48) * fStack_28 +
-            (*(float *)(vertexCursor + 0x40) * fStack_30 + *(float *)(vertexCursor + 0x44) * fStack_2c);
-    fVar1 = fVar1 + fVar1;
-    *(float *)(vertexCursor + 0x88) = -(*(float *)(vertexCursor + 0x48) * fVar1 - fStack_28);
-    *(float *)(vertexCursor + 0x80) = -(*(float *)(vertexCursor + 0x40) * fVar1 - fStack_30);
-    *(float *)(vertexCursor + 0x84) = -(*(float *)(vertexCursor + 0x44) * fVar1 - fStack_2c);
+    fparam_1 = (double)(**(double ( **)(int,int,int,double))vectorNormalize)(glContext, vertexCursor + 0x20, &normalizedEyeX, fparam_1);
+    dotThenTwiceDot = *(float *)(vertexCursor + 0x48) * normalizedEyeZ +
+            (*(float *)(vertexCursor + 0x40) * normalizedEyeX + *(float *)(vertexCursor + 0x44) * normalizedEyeY);
+    dotThenTwiceDot = dotThenTwiceDot + dotThenTwiceDot;
+    *(float *)(vertexCursor + 0x88) = -(*(float *)(vertexCursor + 0x48) * dotThenTwiceDot - normalizedEyeZ);
+    *(float *)(vertexCursor + 0x80) = -(*(float *)(vertexCursor + 0x40) * dotThenTwiceDot - normalizedEyeX);
+    *(float *)(vertexCursor + 0x84) = -(*(float *)(vertexCursor + 0x44) * dotThenTwiceDot - normalizedEyeY);
   }
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
   return;
 }
 
@@ -2934,56 +2934,56 @@ void _gleMultiVtxTextureCoordGenObjectST(param_1, vertexCursor, vertexCount, tex
 }
 
 /* _gleMultiVtxTextureCoordGenSphereST @ 0xf7178 (108 bytes) */
-void _gleMultiVtxTextureCoordGenSphereST(undefined4 param_1,uint vertexCursor,int vertexCount,int param_4,double fparam_1)
+void _gleMultiVtxTextureCoordGenSphereST(undefined4 glContext,uint vertexCursor,int vertexCount,int textureUnit,double fparam_1)
 {
-  int iVar1;
-  int iVar2;
+  int eyePosition;
+  int normal;
   uint vertexEnd;
-  int iVar4;
+  int stOut;
   
   vertexEnd = vertexCursor + vertexCount * 0x100;
   if (vertexCursor < vertexEnd) {
-    iVar4 = vertexCursor + param_4 * 0x10 + 0x80;
+    stOut = vertexCursor + textureUnit * 0x10 + 0x80;
     do {
-      iVar1 = vertexCursor + 0x20;
-      iVar2 = vertexCursor + 0x40;
+      eyePosition = vertexCursor + 0x20;
+      normal = vertexCursor + 0x40;
       vertexCursor = vertexCursor + 0x100;
-      fparam_1 = (double)((double (*)())_gleSphereGenST)(param_1,iVar1,iVar2,iVar4,fparam_1);
-      iVar4 = iVar4 + 0x100;
+      fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,eyePosition,normal,stOut,fparam_1);
+      stOut = stOut + 0x100;
     } while (vertexCursor < vertexEnd);
   }
   return;
 }
 
 /* _gleMultiVtxTextureCoordGenReflectST @ 0xf71e4 (184 bytes) */
-void _gleMultiVtxTextureCoordGenReflectST(glContext, vertexCursor, vertexCount, param_4)
+void _gleMultiVtxTextureCoordGenReflectST(glContext, vertexCursor, vertexCount, textureUnit)
   undefined4 glContext;
   uint vertexCursor;
   int vertexCount;
-  int param_4;
+  int textureUnit;
 {
   float *pfVar1;
-  float fVar2;
+  float dotThenTwiceDot;
   undefined *vectorNormalize;
   int texCoordSlot;
   uint vertexEnd;
-  float fStack_30;
-  float fStack_2c;
-  float fStack_28;
+  float normalizedEyeX;
+  float normalizedEyeY;
+  float normalizedEyeZ;
   
   vectorNormalize = PTR__gleVectorNormalize_00112064;
   vertexEnd = vertexCursor + vertexCount * 0x100;
   if (vertexCursor < vertexEnd) {
     do {
-      (**(code **)vectorNormalize)(glContext,vertexCursor + 0x20,&fStack_30);
-      texCoordSlot = param_4 * 0x10 + vertexCursor;
-      fVar2 = *(float *)(vertexCursor + 0x48) * fStack_28 +
-              (*(float *)(vertexCursor + 0x40) * fStack_30 + *(float *)(vertexCursor + 0x44) * fStack_2c);
-      fVar2 = fVar2 + fVar2;
-      *(float *)(texCoordSlot + 0x80) = -(*(float *)(vertexCursor + 0x40) * fVar2 - fStack_30);
+      (**(code **)vectorNormalize)(glContext,vertexCursor + 0x20,&normalizedEyeX);
+      texCoordSlot = textureUnit * 0x10 + vertexCursor;
+      dotThenTwiceDot = *(float *)(vertexCursor + 0x48) * normalizedEyeZ +
+              (*(float *)(vertexCursor + 0x40) * normalizedEyeX + *(float *)(vertexCursor + 0x44) * normalizedEyeY);
+      dotThenTwiceDot = dotThenTwiceDot + dotThenTwiceDot;
+      *(float *)(texCoordSlot + 0x80) = -(*(float *)(vertexCursor + 0x40) * dotThenTwiceDot - normalizedEyeX);
       pfVar1 = (float *)(vertexCursor + 0x44);
       vertexCursor = vertexCursor + 0x100;
-      *(float *)(texCoordSlot + 0x84) = -(*pfVar1 * fVar2 - fStack_2c);
+      *(float *)(texCoordSlot + 0x84) = -(*pfVar1 * dotThenTwiceDot - normalizedEyeY);
     } while (vertexCursor < vertexEnd);
   }
   return;

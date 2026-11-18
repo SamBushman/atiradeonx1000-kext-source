@@ -942,34 +942,34 @@ LAB_00020304:
 }
 
 /* _gleRemoveHashObject @ 0x20328 (120 bytes) */
-int _gleRemoveHashObject(param_1, param_2)
-  int param_1;
-  uint param_2;
+int _gleRemoveHashObject(hashTable, objectName)
+  int hashTable;
+  uint objectName;
 {
-  int *piVar1;
-  int *piVar2;
-  int iVar3;
+  int *entry;
+  int *bucketHeadThenPreviousEntry;
+  int bucketOffset;
   
-  iVar3 = (param_2 & 0x3ff) * 4;
-  piVar2 = *(int **)(iVar3 + param_1);
-  if (piVar2 == (int *)0x0) {
+  bucketOffset = (objectName & 0x3ff) * 4;
+  bucketHeadThenPreviousEntry = *(int **)(bucketOffset + hashTable);
+  if (bucketHeadThenPreviousEntry == (int *)0x0) {
     return (int *)0x0;
   }
-  if (piVar2[1] != param_2) {
-    piVar1 = (int *)*piVar2;
+  if (bucketHeadThenPreviousEntry[1] != objectName) {
+    entry = (int *)*bucketHeadThenPreviousEntry;
     while( true ) {
-      if (piVar1 == (int *)0x0) {
+      if (entry == (int *)0x0) {
         return (int *)0x0;
       }
-      if (piVar1[1] == param_2) break;
-      piVar2 = piVar1;
-      piVar1 = (int *)*piVar1;
+      if (entry[1] == objectName) break;
+      bucketHeadThenPreviousEntry = entry;
+      entry = (int *)*entry;
     }
-    *piVar2 = *piVar1;
-    return piVar1;
+    *bucketHeadThenPreviousEntry = *entry;
+    return entry;
   }
-  *(int *)(iVar3 + param_1) = *piVar2;
-  return piVar2;
+  *(int *)(bucketOffset + hashTable) = *bucketHeadThenPreviousEntry;
+  return bucketHeadThenPreviousEntry;
 }
 
 /* _gleFreeTextureObject @ 0x203a0 (256 bytes) */

@@ -1,0 +1,27 @@
+local	_glRotated_Comp	dVar1	zero	CONFIRMED	ctx+0x20 as double: the 0.0 compared with the axis components (y == 0 && z == 0 selects the X-axis fast path, etc.)
+local	_glRotated_Comp	dVar2	angleScaleThenCosValue	CONFIRMED	DOUBLE_00108db8 or DOUBLE_00108db0 (sign chosen by the axis component) multiplying the angle for _sin/_cos, then overwritten by the _cos result
+local	_glRotatef_Comp	fVar1	angleScale	CONFIRMED	FLOAT_00108e84 or FLOAT_00108eb0 (sign chosen by the axis component): multiplier of angle for _sin/_cos
+local	_glRotateX_Comp	fparam_1	sinValue	CONFIRMED	callers (_glRotated_Comp, _glRotatef_Comp) pass _sin(angle*scale); stored in listRecord[0]
+local	_glRotateX_Comp	fparam_2	cosValue	CONFIRMED	callers (_glRotated_Comp, _glRotatef_Comp) pass _cos(angle*scale); stored in listRecord[1]
+local	_glRotateXYZ_ListExec	uVar21	matrixDirtyBits	CONFIRMED	ctx+0x50a8 (dirty bits this rotation sets): OR-ed into ctx+0x50ac and ctx+0x50b0, later masked with 0xff000003
+local	_glRotateXYZ_ListExec	uVar20	secondMatrixDirtyWord	CONFIRMED	ctx+0x50b0 (dirty word of the second matrix), updated with matrixDirtyBits
+local	_glMap1VertexAttrib3ARB_ListExec	piVar1	pointComponent0Ptr	CONFIRMED	address of the first of the 3 words of the current control point in the list record
+local	_glMap1VertexAttrib3ARB_ListExec	iVar3	pointComponent1	CONFIRMED	second word of the current control point (float bits copied unchanged)
+local	_glMap1VertexAttrib3ARB_ListExec	iVar4	attribMapThenPointComponent2	CONFIRMED	mapData + attribIndex*0xb0 (the per-attribute 1D map record that receives order/u range), then the third word of the current control point
+local	_glMap1VertexAttrib3ARB_ListExec	iVar5	controlPointDest	CONFIRMED	cursor into the attribute map's control point array (record+0x2ca8+0x10), advanced by 0xc (3 words) per point
+local	_glMap2Texture4_ListExec	iVar5	pointIndex	CONFIRMED	index of the current control point, counted up per loop iteration; the 4 source words are listRecord[pointIndex*4+8..+0xb]
+local	_glMap2Texture4_ListExec	iVar8	pointRecord	CONFIRMED	mapData + pointIndex*0x10: destination of the current 4-word control point
+local	_glMap1Texture4_ListExec	iVar1	pointIndex	CONFIRMED	index of the current control point, counted up per loop iteration; the 4 source words are listRecord[pointIndex*4+4..+7]
+local	_glMap1Texture4_ListExec	iVar7	pointRecord	CONFIRMED	mapData + pointIndex*0x10: destination of the current 4-word control point
+local	_glMap2Normal_ListExec	piVar1	pointComponent0Ptr	CONFIRMED	address of the first of the 3 words of the current control point in the list record
+local	_glMap2Normal_ListExec	iVar8	mapDataThenPointDest	CONFIRMED	result of _gleGetMapData (map record base), then the destination cursor of the control points (advanced by 0xc per point)
+local	_glMap1Vertex3_ListExec	piVar1	pointComponent0Ptr	CONFIRMED	address of the first of the 3 words of the current control point in the list record
+local	_glMap1Vertex3_ListExec	piVar5	mapDataThenPointDest	CONFIRMED	result of _gleGetMapData (map record base, words 0-3 = order/u range), then the destination cursor of the control points (advanced by 3 words per point)
+local	_glMap2Texture2_ListExec	iVar4	pointIndex	CONFIRMED	index of the current control point, counted up per loop iteration; the 2 source words are listRecord[pointIndex*2+8..+9]
+local	_glMap2Texture2_ListExec	iVar5	pointRecord	CONFIRMED	mapData + pointIndex*8: destination of the current 2-word control point
+local	_glMap1Index_ListExec	iVar1	pointValueBits	CONFIRMED	word read through srcCursor (an index control point, float bits) and stored through dstCursor
+local	_glMap2Index_ListExec	iVar1	pointValueBits	CONFIRMED	word read through srcCursor (an index control point, float bits) and stored through dstCursor
+local	_glMap2Index_ListExec	iVar9	pointCount	CONFIRMED	uorder*vorder = number of control points copied; the returned record size is (100 - pointCount)*-4 + 0x1b0
+local	_glMap2d_Exec	iVar3	mapTypeIndex	CONFIRMED	target - 0xdb0 (GL_MAP2_COLOR_4): switch selector over the 9 map types, forwarded to the Map2*Load callee
+local	_glMap2d_Exec	iVar4	uorderCopy	CONFIRMED	copy of uorder taken at function entry, forwarded to the Map2*Load callee
+local	_glMap1f_Exec	iVar3	mapTypeIndex	CONFIRMED	target - 0xd90 (GL_MAP1_COLOR_4): switch selector over the 9 map types, forwarded to the Map1*Load callee

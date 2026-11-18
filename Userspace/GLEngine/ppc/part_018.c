@@ -461,32 +461,32 @@ int _glMap1Vertex3_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int *piVar1;
+  int *pointComponent0Ptr;
   int invUDeltaBits;
   int pointComponent1;
   int pointComponent2;
   int order;
-  int *piVar5;
+  int *mapDataThenPointDest;
   int u2Bits;
   int remaining;
   
-  piVar5 = (int *)_gleGetMapData(glContext);
+  mapDataThenPointDest = (int *)_gleGetMapData(glContext);
   order = *listRecord;
   u2Bits = listRecord[2];
   invUDeltaBits = listRecord[3];
-  piVar5[1] = listRecord[1];
-  piVar5[2] = u2Bits;
-  piVar5[3] = invUDeltaBits;
-  *piVar5 = order;
+  mapDataThenPointDest[1] = listRecord[1];
+  mapDataThenPointDest[2] = u2Bits;
+  mapDataThenPointDest[3] = invUDeltaBits;
+  *mapDataThenPointDest = order;
   for (remaining = order; remaining != 0; remaining = remaining + -1) {
-    piVar1 = listRecord + 4;
+    pointComponent0Ptr = listRecord + 4;
     pointComponent1 = listRecord[5];
     pointComponent2 = listRecord[6];
     listRecord = listRecord + 3;
-    piVar5[4] = *piVar1;
-    piVar5[5] = pointComponent1;
-    piVar5[6] = pointComponent2;
-    piVar5 = piVar5 + 3;
+    mapDataThenPointDest[4] = *pointComponent0Ptr;
+    mapDataThenPointDest[5] = pointComponent1;
+    mapDataThenPointDest[6] = pointComponent2;
+    mapDataThenPointDest = mapDataThenPointDest + 3;
   }
   return (10 - order) * -0xc + 0x88;
 }
@@ -574,7 +574,7 @@ int _glMap1Index_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int pointValueBits;
   int invUDeltaBits;
   int order;
   int mapData;
@@ -596,9 +596,9 @@ int _glMap1Index_ListExec(glContext, listRecord)
     srcCursor = listRecord + 4;
     remaining = order;
     do {
-      iVar1 = *srcCursor;
+      pointValueBits = *srcCursor;
       srcCursor = srcCursor + 1;
-      *dstCursor = iVar1;
+      *dstCursor = pointValueBits;
       dstCursor = dstCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);
@@ -751,14 +751,14 @@ int _glMap1Texture4_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int pointIndex;
   int invUDeltaBits;
   int pointComponent0;
   int pointComponent1;
   int pointComponent2;
   int order;
   int mapData;
-  int iVar7;
+  int pointRecord;
   int u2Bits;
   int remaining;
   
@@ -770,17 +770,17 @@ int _glMap1Texture4_ListExec(glContext, listRecord)
   *(int *)(mapData + 0x3d0) = u2Bits;
   *(int *)(mapData + 0x3d4) = invUDeltaBits;
   *(int *)(mapData + 0x3c8) = order;
-  iVar1 = 0;
+  pointIndex = 0;
   for (remaining = order; remaining != 0; remaining = remaining + -1) {
-    iVar7 = iVar1 * 0x10 + mapData;
-    pointComponent0 = listRecord[iVar1 * 4 + 4];
-    pointComponent1 = listRecord[iVar1 * 4 + 5];
-    pointComponent2 = listRecord[iVar1 * 4 + 6];
-    *(int *)(iVar7 + 0x3e4) = listRecord[iVar1 * 4 + 7];
-    *(int *)(iVar7 + 0x3d8) = pointComponent0;
-    *(int *)(iVar7 + 0x3dc) = pointComponent1;
-    *(int *)(iVar7 + 0x3e0) = pointComponent2;
-    iVar1 = iVar1 + 1;
+    pointRecord = pointIndex * 0x10 + mapData;
+    pointComponent0 = listRecord[pointIndex * 4 + 4];
+    pointComponent1 = listRecord[pointIndex * 4 + 5];
+    pointComponent2 = listRecord[pointIndex * 4 + 6];
+    *(int *)(pointRecord + 0x3e4) = listRecord[pointIndex * 4 + 7];
+    *(int *)(pointRecord + 0x3d8) = pointComponent0;
+    *(int *)(pointRecord + 0x3dc) = pointComponent1;
+    *(int *)(pointRecord + 0x3e0) = pointComponent2;
+    pointIndex = pointIndex + 1;
   }
   return (10 - order) * -0x10 + 0xb0;
 }
@@ -873,15 +873,15 @@ int _glMap1VertexAttrib3ARB_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int *piVar1;
+  int *pointComponent0Ptr;
   int attribIndex;
   int u2Bits;
   int remaining;
-  int iVar3;
+  int pointComponent1;
   int invUDeltaBits;
   int mapData;
-  int iVar4;
-  int iVar5;
+  int attribMapThenPointComponent2;
+  int controlPointDest;
   int order;
   int *srcCursor;
   
@@ -889,24 +889,24 @@ int _glMap1VertexAttrib3ARB_ListExec(glContext, listRecord)
   attribIndex = *listRecord;
   order = listRecord[1];
   srcCursor = listRecord + 1;
-  iVar4 = mapData + attribIndex * 0xb0;
-  *(int *)(iVar4 + 0x2ca8) = order;
-  iVar5 = iVar4 + 0x2ca8;
+  attribMapThenPointComponent2 = mapData + attribIndex * 0xb0;
+  *(int *)(attribMapThenPointComponent2 + 0x2ca8) = order;
+  controlPointDest = attribMapThenPointComponent2 + 0x2ca8;
   ((unsigned char *)0x9da8)[attribIndex + mapData] = 0x3;
   u2Bits = listRecord[3];
   invUDeltaBits = listRecord[4];
-  *(int *)(iVar4 + 0x2cac) = listRecord[2];
-  *(int *)(iVar4 + 0x2cb0) = u2Bits;
-  *(int *)(iVar4 + 0x2cb4) = invUDeltaBits;
+  *(int *)(attribMapThenPointComponent2 + 0x2cac) = listRecord[2];
+  *(int *)(attribMapThenPointComponent2 + 0x2cb0) = u2Bits;
+  *(int *)(attribMapThenPointComponent2 + 0x2cb4) = invUDeltaBits;
   for (remaining = order; remaining != 0; remaining = remaining + -1) {
-    piVar1 = srcCursor + 4;
-    iVar3 = srcCursor[5];
-    iVar4 = srcCursor[6];
+    pointComponent0Ptr = srcCursor + 4;
+    pointComponent1 = srcCursor[5];
+    attribMapThenPointComponent2 = srcCursor[6];
     srcCursor = srcCursor + 3;
-    *(int *)(iVar5 + 0x10) = *piVar1;
-    *(int *)(iVar5 + 0x14) = iVar3;
-    *(int *)(iVar5 + 0x18) = iVar4;
-    iVar5 = iVar5 + 0xc;
+    *(int *)(controlPointDest + 0x10) = *pointComponent0Ptr;
+    *(int *)(controlPointDest + 0x14) = pointComponent1;
+    *(int *)(controlPointDest + 0x18) = attribMapThenPointComponent2;
+    controlPointDest = controlPointDest + 0xc;
   }
   return (10 - order) * -0xc + 0x8c;
 }
@@ -1437,7 +1437,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
 {
   undefined4 glErrorCode;
   int mapData;
-  int iVar3;
+  int mapTypeIndex;
   undefined4 in_LR;
   double incomingFpr3;
   double incomingFpr4;
@@ -1449,11 +1449,11 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
   mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((u1 != u2) && (order - 1U < 10)) {
-      iVar3 = target + -0xd90;
-      switch(iVar3) {
+      mapTypeIndex = target + -0xd90;
+      switch(mapTypeIndex) {
       case 0:
         if (3 < stride) {
-          ((int (*)())_gleMap1ColorfLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x1c0,u1,
+          ((int (*)())_gleMap1ColorfLoad)(glContext,mapTypeIndex,u1Shadow,stride,order,points,mapData + 0x1c0,u1,
                              u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
@@ -1462,7 +1462,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 1:
         if (0 < stride) {
-          ((int (*)())_gleMap1IndexfLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x270,u1,
+          ((int (*)())_gleMap1IndexfLoad)(glContext,mapTypeIndex,u1Shadow,stride,order,points,mapData + 0x270,u1,
                              u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
@@ -1471,7 +1471,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 2:
         if (2 < stride) {
-          ((int (*)())_gleMap1NormalfLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x138,u1,
+          ((int (*)())_gleMap1NormalfLoad)(glContext,mapTypeIndex,u1Shadow,stride,order,points,mapData + 0x138,u1,
                               u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                               (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                               (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
@@ -1480,7 +1480,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 3:
         if (0 < stride) {
-          ((int (*)())_gleMap1Texture1fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x2a8,u1,u2,
+          ((int (*)())_gleMap1Texture1fLoad)(glContext,mapTypeIndex,u1Shadow,stride,order,points,mapData + 0x2a8,u1,u2,
                      incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
@@ -1488,7 +1488,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 4:
         if (1 < stride) {
-          ((int (*)())_gleMap1Texture2fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x2e0,u1,u2,
+          ((int (*)())_gleMap1Texture2fLoad)(glContext,mapTypeIndex,u1Shadow,stride,order,points,mapData + 0x2e0,u1,u2,
                      incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
@@ -1496,7 +1496,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 5:
         if (2 < stride) {
-          ((int (*)())_gleMap1Texture3fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x340,u1,u2,
+          ((int (*)())_gleMap1Texture3fLoad)(glContext,mapTypeIndex,u1Shadow,stride,order,points,mapData + 0x340,u1,u2,
                      incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
@@ -1504,7 +1504,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 6:
         if (3 < stride) {
-          ((int (*)())_gleMap1Texture4fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x3c8,u1,u2,
+          ((int (*)())_gleMap1Texture4fLoad)(glContext,mapTypeIndex,u1Shadow,stride,order,points,mapData + 0x3c8,u1,u2,
                      incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
@@ -1512,7 +1512,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 7:
         if (2 < stride) {
-          ((int (*)())_gleMap1Vertex3fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData,u1,u2,incomingFpr3,
+          ((int (*)())_gleMap1Vertex3fLoad)(glContext,mapTypeIndex,u1Shadow,stride,order,points,mapData,u1,u2,incomingFpr3,
                      incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
@@ -1520,7 +1520,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         break;
       case 8:
         if (3 < stride) {
-          ((int (*)())_gleMap1Vertex4fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x88,u1,u2,
+          ((int (*)())_gleMap1Vertex4fLoad)(glContext,mapTypeIndex,u1Shadow,stride,order,points,mapData + 0x88,u1,u2,
                      incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
@@ -2037,7 +2037,7 @@ int _glMap2Index_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int pointValueBits;
   int invUDeltaBits;
   int v1Bits;
   int v2Bits;
@@ -2048,13 +2048,13 @@ int _glMap2Index_ListExec(glContext, listRecord)
   int mapData;
   int *dstCursor;
   int *srcCursor;
-  int iVar9;
+  int pointCount;
   
   mapData = _gleGetMapData(glContext);
   vorder = listRecord[1];
   *(int *)(mapData + 0x1ad8) = *listRecord;
   *(int *)(mapData + 0x1adc) = vorder;
-  iVar9 = *listRecord * listRecord[1];
+  pointCount = *listRecord * listRecord[1];
   u2Bits = listRecord[3];
   invUDeltaBits = listRecord[6];
   v1Bits = listRecord[4];
@@ -2066,19 +2066,19 @@ int _glMap2Index_ListExec(glContext, listRecord)
   *(int *)(mapData + 0x1ae8) = v1Bits;
   *(int *)(mapData + 0x1aec) = v2Bits;
   *(int *)(mapData + 0x1af4) = invVDeltaBits;
-  if (iVar9 != 0) {
+  if (pointCount != 0) {
     dstCursor = (int *)(mapData + 0x1af8);
     srcCursor = listRecord + 8;
-    remaining = iVar9;
+    remaining = pointCount;
     do {
-      iVar1 = *srcCursor;
+      pointValueBits = *srcCursor;
       srcCursor = srcCursor + 1;
-      *dstCursor = iVar1;
+      *dstCursor = pointValueBits;
       dstCursor = dstCursor + 1;
       remaining = remaining + -1;
     } while (remaining != 0);
   }
-  return (100 - iVar9) * -4 + 0x1b0;
+  return (100 - pointCount) * -4 + 0x1b0;
 }
 
 /* _glMap2Normal_ListExec @ 0x6fc78 (180 bytes) */
@@ -2086,7 +2086,7 @@ int _glMap2Normal_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int *piVar1;
+  int *pointComponent0Ptr;
   int invUDeltaBits;
   int pointComponent1;
   int v1Bits;
@@ -2097,13 +2097,13 @@ int _glMap2Normal_ListExec(glContext, listRecord)
   int vorder2;
   int u2Bits;
   int remaining;
-  int iVar8;
+  int mapDataThenPointDest;
   int uorder;
   
-  iVar8 = _gleGetMapData(glContext);
+  mapDataThenPointDest = _gleGetMapData(glContext);
   vorder2 = listRecord[1];
-  *(int *)(iVar8 + 0xfa8) = *listRecord;
-  *(int *)(iVar8 + 0xfac) = vorder2;
+  *(int *)(mapDataThenPointDest + 0xfa8) = *listRecord;
+  *(int *)(mapDataThenPointDest + 0xfac) = vorder2;
   uorder = *listRecord;
   vorder = listRecord[1];
   u2Bits = listRecord[3];
@@ -2111,21 +2111,21 @@ int _glMap2Normal_ListExec(glContext, listRecord)
   v1Bits = listRecord[4];
   v2Bits = listRecord[5];
   invVDeltaBits = listRecord[7];
-  *(int *)(iVar8 + 0xfb0) = listRecord[2];
-  *(int *)(iVar8 + 0xfb4) = u2Bits;
-  *(int *)(iVar8 + 0xfc0) = invUDeltaBits;
-  *(int *)(iVar8 + 0xfb8) = v1Bits;
-  *(int *)(iVar8 + 0xfbc) = v2Bits;
-  *(int *)(iVar8 + 0xfc4) = invVDeltaBits;
+  *(int *)(mapDataThenPointDest + 0xfb0) = listRecord[2];
+  *(int *)(mapDataThenPointDest + 0xfb4) = u2Bits;
+  *(int *)(mapDataThenPointDest + 0xfc0) = invUDeltaBits;
+  *(int *)(mapDataThenPointDest + 0xfb8) = v1Bits;
+  *(int *)(mapDataThenPointDest + 0xfbc) = v2Bits;
+  *(int *)(mapDataThenPointDest + 0xfc4) = invVDeltaBits;
   for (remaining = uorder * vorder; remaining != 0; remaining = remaining + -1) {
-    piVar1 = listRecord + 8;
+    pointComponent0Ptr = listRecord + 8;
     pointComponent1 = listRecord[9];
     pointComponent2 = listRecord[10];
     listRecord = listRecord + 3;
-    *(int *)(iVar8 + 0xfc8) = *piVar1;
-    *(int *)(iVar8 + 0xfcc) = pointComponent1;
-    *(int *)(iVar8 + 0xfd0) = pointComponent2;
-    iVar8 = iVar8 + 0xc;
+    *(int *)(mapDataThenPointDest + 0xfc8) = *pointComponent0Ptr;
+    *(int *)(mapDataThenPointDest + 0xfcc) = pointComponent1;
+    *(int *)(mapDataThenPointDest + 0xfd0) = pointComponent2;
+    mapDataThenPointDest = mapDataThenPointDest + 0xc;
   }
   return (100 - uorder * vorder) * -0xc + 0x4d0;
 }
@@ -2188,10 +2188,10 @@ int _glMap2Texture2_ListExec(glContext, listRecord)
   int pointComponent0;
   int invVDeltaBits;
   int vorder;
-  int iVar4;
+  int pointIndex;
   int u2Bits;
   int vorder2;
-  int iVar5;
+  int pointRecord;
   int v2Bits;
   int mapData;
   int uorder;
@@ -2215,13 +2215,13 @@ int _glMap2Texture2_ListExec(glContext, listRecord)
   *(int *)(mapData + 0x1e48) = v1Bits;
   *(int *)(mapData + 0x1e4c) = v2Bits;
   *(int *)(mapData + 0x1e54) = invVDeltaBits;
-  iVar4 = 0;
+  pointIndex = 0;
   for (remaining = uorder * vorder; remaining != 0; remaining = remaining + -1) {
-    iVar5 = iVar4 * 8 + mapData;
-    pointComponent0 = listRecord[iVar4 * 2 + 8];
-    *(int *)(iVar5 + 0x1e5c) = listRecord[iVar4 * 2 + 9];
-    *(int *)(iVar5 + 0x1e58) = pointComponent0;
-    iVar4 = iVar4 + 1;
+    pointRecord = pointIndex * 8 + mapData;
+    pointComponent0 = listRecord[pointIndex * 2 + 8];
+    *(int *)(pointRecord + 0x1e5c) = listRecord[pointIndex * 2 + 9];
+    *(int *)(pointRecord + 0x1e58) = pointComponent0;
+    pointIndex = pointIndex + 1;
   }
   return (100 - uorder * vorder) * -8 + 0x340;
 }
@@ -2287,12 +2287,12 @@ int _glMap2Texture4_ListExec(glContext, listRecord)
   int invVDeltaBits;
   int pointComponent2;
   int vorder;
-  int iVar5;
+  int pointIndex;
   int u2Bits;
   int vorder2;
   int mapData;
   int uorder;
-  int iVar8;
+  int pointRecord;
   int invUDeltaBits;
   int remaining;
   
@@ -2313,17 +2313,17 @@ int _glMap2Texture4_ListExec(glContext, listRecord)
   *(int *)(mapData + 0x2658) = v1Bits;
   *(int *)(mapData + 0x265c) = v2Bits;
   *(int *)(mapData + 0x2664) = invVDeltaBits;
-  iVar5 = 0;
+  pointIndex = 0;
   for (remaining = uorder * vorder; remaining != 0; remaining = remaining + -1) {
-    iVar8 = iVar5 * 0x10 + mapData;
-    pointComponent0 = listRecord[iVar5 * 4 + 8];
-    pointComponent1 = listRecord[iVar5 * 4 + 9];
-    pointComponent2 = listRecord[iVar5 * 4 + 10];
-    *(int *)(iVar8 + 0x2674) = listRecord[iVar5 * 4 + 0xb];
-    *(int *)(iVar8 + 0x2668) = pointComponent0;
-    *(int *)(iVar8 + 0x266c) = pointComponent1;
-    *(int *)(iVar8 + 0x2670) = pointComponent2;
-    iVar5 = iVar5 + 1;
+    pointRecord = pointIndex * 0x10 + mapData;
+    pointComponent0 = listRecord[pointIndex * 4 + 8];
+    pointComponent1 = listRecord[pointIndex * 4 + 9];
+    pointComponent2 = listRecord[pointIndex * 4 + 10];
+    *(int *)(pointRecord + 0x2674) = listRecord[pointIndex * 4 + 0xb];
+    *(int *)(pointRecord + 0x2668) = pointComponent0;
+    *(int *)(pointRecord + 0x266c) = pointComponent1;
+    *(int *)(pointRecord + 0x2670) = pointComponent2;
+    pointIndex = pointIndex + 1;
   }
   return (100 - uorder * vorder) * -0x10 + 0x660;
 }
@@ -2442,19 +2442,19 @@ int _glMap2VertexAttrib3ARB_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int *pointXPtr;
+  int *pointComponent0Ptr;
   int v2Bits;
   int invVDeltaBits;
   int attribIndex;
   int u2Bits;
   int remaining;
-  int pointYBits;
+  int pointComponent1;
   int invUDeltaBits;
   int mapData;
   int vorderThenPointCount;
   int *srcCursor;
   int attribMap;
-  int pointZBits;
+  int pointComponent2;
   int v1Bits;
   int controlPointDest;
   int uorder;
@@ -2482,13 +2482,13 @@ int _glMap2VertexAttrib3ARB_ListExec(glContext, listRecord)
   *(int *)(attribMap + 0x37c4) = invVDeltaBits;
   vorderThenPointCount = vorderThenPointCount * uorder;
   for (remaining = vorderThenPointCount; remaining != 0; remaining = remaining + -1) {
-    pointXPtr = srcCursor + 8;
-    pointYBits = srcCursor[9];
-    pointZBits = srcCursor[10];
+    pointComponent0Ptr = srcCursor + 8;
+    pointComponent1 = srcCursor[9];
+    pointComponent2 = srcCursor[10];
     srcCursor = srcCursor + 3;
-    *(int *)(controlPointDest + 0x20) = *pointXPtr;
-    *(int *)(controlPointDest + 0x24) = pointYBits;
-    *(int *)(controlPointDest + 0x28) = pointZBits;
+    *(int *)(controlPointDest + 0x20) = *pointComponent0Ptr;
+    *(int *)(controlPointDest + 0x24) = pointComponent1;
+    *(int *)(controlPointDest + 0x28) = pointComponent2;
     controlPointDest = controlPointDest + 0xc;
   }
   return (100 - vorderThenPointCount) * -0xc + 0x4d4;
@@ -2734,8 +2734,8 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
 {
   undefined4 glErrorCode;
   int mapData;
-  int iVar3;
-  int iVar4;
+  int mapTypeIndex;
+  int uorderCopy;
   double incomingFpr5;
   double incomingFpr6;
   double incomingFpr7;
@@ -2746,16 +2746,16 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
   double incomingFpr12;
   double incomingFpr13;
   
-  iVar4 = uorder;
+  uorderCopy = uorder;
   mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((((u1 != u2) && (v1 != v2)) && (uorder - 1U < 10)) &&
        ((0 < vorder && (vorder < 0xb)))) {
-      iVar3 = target + -0xdb0;
-      switch(iVar3) {
+      mapTypeIndex = target + -0xdb0;
+      switch(mapTypeIndex) {
       case 0:
         if ((3 < ustride) && (3 < vstride)) {
-          ((void (*)())_gleMap2ColordLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
+          ((void (*)())_gleMap2ColordLoad)(glContext,mapTypeIndex,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,uorderCopy,v1ShadowHi,
                              v1ShadowLo,v2ShadowHi,vstride,vorder,points,mapData + 0x1478,u1,
                              u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                              incomingFpr12,incomingFpr13);
@@ -2764,7 +2764,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 1:
         if ((0 < ustride) && (0 < vstride)) {
-          ((void (*)())_gleMap2IndexdLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
+          ((void (*)())_gleMap2IndexdLoad)(glContext,mapTypeIndex,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,uorderCopy,v1ShadowHi,
                              v1ShadowLo,v2ShadowHi,vstride,vorder,points,mapData + 0x1ad8,u1,
                              u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                              incomingFpr12,incomingFpr13);
@@ -2773,7 +2773,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 2:
         if ((2 < ustride) && (2 < vstride)) {
-          ((void (*)())_gleMap2NormaldLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
+          ((void (*)())_gleMap2NormaldLoad)(glContext,mapTypeIndex,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,uorderCopy,v1ShadowHi,
                               v1ShadowLo,v2ShadowHi,vstride,vorder,points,mapData + 0xfa8,u1,
                               u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11
                               ,incomingFpr12,incomingFpr13);
@@ -2782,7 +2782,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 3:
         if ((0 < ustride) && (0 < vstride)) {
-          ((void (*)())_gleMap2Texture1dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
+          ((void (*)())_gleMap2Texture1dLoad)(glContext,mapTypeIndex,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,uorderCopy,v1ShadowHi,v1ShadowLo,
                      v2ShadowHi,vstride,vorder,points,mapData + 0x1c88,u1,u2,v1,
                      v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -2790,7 +2790,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 4:
         if ((1 < ustride) && (1 < vstride)) {
-          ((void (*)())_gleMap2Texture2dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
+          ((void (*)())_gleMap2Texture2dLoad)(glContext,mapTypeIndex,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,uorderCopy,v1ShadowHi,v1ShadowLo,
                      v2ShadowHi,vstride,vorder,points,mapData + 0x1e38,u1,u2,v1,
                      v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -2798,7 +2798,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 5:
         if ((2 < ustride) && (2 < vstride)) {
-          ((void (*)())_gleMap2Texture3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
+          ((void (*)())_gleMap2Texture3dLoad)(glContext,mapTypeIndex,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,uorderCopy,v1ShadowHi,v1ShadowLo,
                      v2ShadowHi,vstride,vorder,points,mapData + 0x2178,u1,u2,v1,
                      v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -2806,7 +2806,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 6:
         if ((3 < ustride) && (3 < vstride)) {
-          ((void (*)())_gleMap2Texture4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
+          ((void (*)())_gleMap2Texture4dLoad)(glContext,mapTypeIndex,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,uorderCopy,v1ShadowHi,v1ShadowLo,
                      v2ShadowHi,vstride,vorder,points,mapData + 0x2648,u1,u2,v1,
                      v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -2814,7 +2814,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 7:
         if ((2 < ustride) && (2 < vstride)) {
-          ((void (*)())_gleMap2Vertex3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
+          ((void (*)())_gleMap2Vertex3dLoad)(glContext,mapTypeIndex,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,uorderCopy,v1ShadowHi,v1ShadowLo,
                      v2ShadowHi,vstride,vorder,points,mapData + 0x478,u1,u2,v1,
                      v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -2822,7 +2822,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         break;
       case 8:
         if ((3 < ustride) && (3 < vstride)) {
-          ((void (*)())_gleMap2Vertex4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
+          ((void (*)())_gleMap2Vertex4dLoad)(glContext,mapTypeIndex,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,uorderCopy,v1ShadowHi,v1ShadowLo,
                      v2ShadowHi,vstride,vorder,points,mapData + 0x948,u1,u2,v1,
                      v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;

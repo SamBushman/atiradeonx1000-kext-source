@@ -383,20 +383,20 @@ undefined4 _gleCullTriangle(int glContext,float *param_2,float *param_3,float *p
 }
 
 /* _gleCullQuad @ 0xebd58 (160 bytes) */
-undefined4 _gleCullQuad(int glContext,float *param_2,float *param_3,float *param_4,float *param_5,uint *param_6,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
+undefined4 _gleCullQuad(int glContext,float *vertex0,float *vertex1,float *vertex2,float *vertex3,uint *backFacingOut,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
   uint uVar1;
   
   uVar1 = (uint)((bool)*(char *)(glContext + 0x4fe1) ==
                 FLOAT_00108e50 <
-                (*param_2 * param_3[1] - *param_3 * param_2[1]) +
-                ((*param_3 * param_4[1] - *param_4 * param_3[1])) +
-                ((*param_4 * param_5[1] - *param_5 * param_4[1])) +
-                ((*param_5 * param_2[1] - *param_2 * param_5[1])));
+                (*vertex0 * vertex1[1] - *vertex1 * vertex0[1]) +
+                ((*vertex1 * vertex2[1] - *vertex2 * vertex1[1])) +
+                ((*vertex2 * vertex3[1] - *vertex3 * vertex2[1])) +
+                ((*vertex3 * vertex0[1] - *vertex0 * vertex3[1])));
   if (*(byte *)(glContext + 0x4fe3) == uVar1) {
     return 1;
   }
-  *param_6 = uVar1 ^ 1;
+  *backFacingOut = uVar1 ^ 1;
   return 0;
 }
 
@@ -5469,29 +5469,29 @@ void _gleFlushLineLoopTCLRDirtyFunc(int glContext,double floatArg1,double floatA
 void _gleFlushLineStripFunc(glContext)
   int glContext;
 {
-  int iVar1;
-  undefined8 *puVar2;
-  undefined8 *puVar3;
-  undefined8 uVar4;
-  undefined8 local_110 [33];
+  int doubleWordCountThenRemaining;
+  undefined8 *srcCursor;
+  undefined8 *dstCursor;
+  undefined8 copiedWord;
+  undefined8 lastVertexCopy [33];
   
-  iVar1 = (int)*(short *)(glContext + 0x487c) >> 3;
-  if (0 < iVar1) {
-    puVar3 = local_110;
-    puVar2 = (undefined8 *)(*(int *)(glContext + 0x4858) + -0x100);
+  doubleWordCountThenRemaining = (int)*(short *)(glContext + 0x487c) >> 3;
+  if (0 < doubleWordCountThenRemaining) {
+    dstCursor = lastVertexCopy;
+    srcCursor = (undefined8 *)(*(int *)(glContext + 0x4858) + -0x100);
     do {
-      uVar4 = *puVar2;
-      puVar2 = puVar2 + 1;
-      *puVar3 = uVar4;
-      puVar3 = puVar3 + 1;
-      iVar1 = iVar1 + -1;
-    } while (iVar1 != 0);
+      copiedWord = *srcCursor;
+      srcCursor = srcCursor + 1;
+      *dstCursor = copiedWord;
+      dstCursor = dstCursor + 1;
+      doubleWordCountThenRemaining = doubleWordCountThenRemaining + -1;
+    } while (doubleWordCountThenRemaining != 0);
   }
   (**(code **)(glContext + 0x4a08))(glContext);
   *(undefined1 *)(glContext + 0x4a18) = 1;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   _glePopMaterials(glContext);
-  _gleSubmitVertexCopy(glContext,local_110);
+  _gleSubmitVertexCopy(glContext,lastVertexCopy);
   return;
 }
 
@@ -5499,27 +5499,27 @@ void _gleFlushLineStripFunc(glContext)
 void _gleFlushLineStripTCLFunc(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
+  int copyOffset;
+  int vertexBufferEnd;
+  int vertexSize;
+  int vertexBufferStart;
+  uint remaining;
   
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar3 = (int)*(short *)(glContext + 0x487c);
-  iVar1 = 0;
-  iVar2 = *(int *)(glContext + 0x4858);
+  vertexSize = (int)*(short *)(glContext + 0x487c);
+  copyOffset = 0;
+  vertexBufferEnd = *(int *)(glContext + 0x4858);
   *(undefined1 *)(glContext + 0x4a18) = 1;
-  iVar4 = *(int *)(glContext + 0x4854);
-  if (0 < iVar3) {
-    uVar5 = iVar3 + 7U >> 3;
+  vertexBufferStart = *(int *)(glContext + 0x4854);
+  if (0 < vertexSize) {
+    remaining = vertexSize + 7U >> 3;
     do {
-      *(undefined8 *)(iVar4 + iVar1) = *(undefined8 *)((iVar2 - iVar3) + iVar1);
-      iVar1 = iVar1 + 8;
-      uVar5 = uVar5 - 1;
-    } while (uVar5 != 0);
+      *(undefined8 *)(vertexBufferStart + copyOffset) = *(undefined8 *)((vertexBufferEnd - vertexSize) + copyOffset);
+      copyOffset = copyOffset + 8;
+      remaining = remaining - 1;
+    } while (remaining != 0);
   }
-  *(int *)(glContext + 0x4858) = iVar4 + iVar3;
+  *(int *)(glContext + 0x4858) = vertexBufferStart + vertexSize;
   return;
 }
 
@@ -5609,28 +5609,28 @@ void _gleFlushTriQuadStripFunc(glContext)
 void _gleFlushTriQuadStripTCLFunc(glContext)
   int glContext;
 {
-  short sVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  uint uVar6;
+  short vertexSize;
+  int copyBytes;
+  int copyOffset;
+  int vertexBufferEnd;
+  int vertexBufferStart;
+  uint remaining;
   
   (**(code **)(glContext + 0x4a08))(glContext);
-  sVar1 = *(short *)(glContext + 0x487c);
-  iVar3 = 0;
-  iVar4 = *(int *)(glContext + 0x4858);
-  iVar2 = sVar1 * 2;
-  iVar5 = *(int *)(glContext + 0x4854);
-  if (0 < iVar2) {
-    uVar6 = iVar2 + 7U >> 3;
+  vertexSize = *(short *)(glContext + 0x487c);
+  copyOffset = 0;
+  vertexBufferEnd = *(int *)(glContext + 0x4858);
+  copyBytes = vertexSize * 2;
+  vertexBufferStart = *(int *)(glContext + 0x4854);
+  if (0 < copyBytes) {
+    remaining = copyBytes + 7U >> 3;
     do {
-      *(undefined8 *)(iVar5 + iVar3) = *(undefined8 *)(iVar4 + sVar1 * -2 + iVar3);
-      iVar3 = iVar3 + 8;
-      uVar6 = uVar6 - 1;
-    } while (uVar6 != 0);
+      *(undefined8 *)(vertexBufferStart + copyOffset) = *(undefined8 *)(vertexBufferEnd + vertexSize * -2 + copyOffset);
+      copyOffset = copyOffset + 8;
+      remaining = remaining - 1;
+    } while (remaining != 0);
   }
-  *(int *)(glContext + 0x4858) = iVar5 + iVar2;
+  *(int *)(glContext + 0x4858) = vertexBufferStart + copyBytes;
   return;
 }
 

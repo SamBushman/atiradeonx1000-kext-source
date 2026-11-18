@@ -609,10 +609,10 @@ void _gleFreeAllAttrib(glContext)
   int glContext;
 {
   int loopIndex2;
-  int iVar1;
+  int nextBlock;
   int glContextWord5144;
   int glContextWord50fc;
-  int iVar2;
+  int blockCursor;
   int loopIndex;
   int *piVar4;
   
@@ -621,13 +621,13 @@ void _gleFreeAllAttrib(glContext)
   if (0 < glContextWord50fc) {
     piVar4 = (int *)(glContext + 0x50b8);
     do {
-      iVar2 = *piVar4;
+      blockCursor = *piVar4;
       if (*piVar4 != 0) {
         do {
-          iVar1 = *(int *)(iVar2 + 0x2c44);
-          _free(iVar2);
-          iVar2 = iVar1;
-        } while (iVar1 != 0);
+          nextBlock = *(int *)(blockCursor + 0x2c44);
+          _free(blockCursor);
+          blockCursor = nextBlock;
+        } while (nextBlock != 0);
         glContextWord50fc = *(int *)(glContext + 0x50fc);
       }
       loopIndex = loopIndex + 1;
@@ -640,13 +640,13 @@ void _gleFreeAllAttrib(glContext)
   if (0 < glContextWord5144) {
     piVar4 = (int *)(glContext + 0x5100);
     do {
-      iVar2 = *piVar4;
+      blockCursor = *piVar4;
       if (*piVar4 != 0) {
         do {
-          iVar1 = *(int *)(iVar2 + 700);
-          _free(iVar2);
-          iVar2 = iVar1;
-        } while (iVar1 != 0);
+          nextBlock = *(int *)(blockCursor + 700);
+          _free(blockCursor);
+          blockCursor = nextBlock;
+        } while (nextBlock != 0);
         glContextWord5144 = *(int *)(glContext + 0x5144);
       }
       loopIndex2 = loopIndex2 + 1;

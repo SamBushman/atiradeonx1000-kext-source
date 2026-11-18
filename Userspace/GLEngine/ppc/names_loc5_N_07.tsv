@@ -1,0 +1,100 @@
+local	_gleFreeAllAttrib	iVar2	blockCursor	CONFIRMED	head of a linked list of malloc'ed attribute blocks (slot table entry), advanced along the next link and freed in both loops
+local	_gleFreeAllAttrib	iVar1	nextBlock	CONFIRMED	next link of the block being freed (+0x2c44 / +700), read before _free
+local	_CloseCurrentVAR	puVar1	listRecord	CONFIRMED	record returned by _gleAddListItem (4 bytes) that receives the block address
+local	_CloseCurrentVAR	uVar3	blockAddress	CONFIRMED	*(ctx+0x53e8 table + param_2) after the optional shrink: address stored into the list record
+local	_CloseCurrentVAR	param_2	blockTableOffset	INFERRED	byte offset into the block pointer table at ctx+0x53e8 selecting the block being closed
+local	_CloseCurrentVAR	local_40	newAddressSlot	CONFIRMED	out address of _vm_allocate for the shrunk copy of the block, stored back into the table
+local	_glEdgeFlagPointer_Exec	iVar8	boundBuffer	CONFIRMED	clientState+0x358: buffer object bound for the array; refcount incremented, its +0x10 words copied, and stored at clientState+0x378
+local	_glEdgeFlagPointer_Exec	iVar5	previousBuffer	CONFIRMED	clientState+0x378: buffer object recorded earlier; its refcount (+8) is decremented and it is freed with _gleFreeBufferObject at zero
+local	_glEdgeFlagPointer_Exec	iVar4	refCount	CONFIRMED	previousBuffer+8 after decrement: freed when 0
+local	_glEdgeFlagPointer_Exec	uVar2	bufferWord	CONFIRMED	word read through srcCursor from the buffer object (+0x10..) and written to the client state through dstCursor2
+local	_gleBindVertexArray	iVar3	vertexArrayHashThenRefCount	CONFIRMED	hash table of vertex array objects (shared state +0x5014) passed to _gleLookupHashObject/_gleAddHashNameAndObject, then the decremented refcount (+8) of the previous client state object
+local	_gleBindVertexArray	iVar1	vertexArray	CONFIRMED	vertex array object: ctx+0x4a64 (default) for id 0, else looked up or created; refcount +8 incremented and made current
+local	_gleBindVertexArray	iVar4	previousClientState	CONFIRMED	ctx+0x4a60 read before _gleSetCurrentVertexObject: its refcount is decremented afterwards and it is freed at zero
+local	_gleBindVertexArray	uVar2	setCurrentResult	CONFIRMED	return value of _gleSetCurrentVertexObject, returned unless the old object is freed (then the free result)
+local	_gleVPFlushTriangleFanTCLRDirty	iVar7	doubleWordCountThenRemaining	CONFIRMED	ctx+0x487c (short vertex size in bytes) shifted right: number of 8-byte words copied, then used as the down counter of the copy loop (>>3)
+local	_gleVPFlushTriangleFanTCLRDirty	iVar1	copyBytes	CONFIRMED	doubleWordCount*8: bytes copied (one vertex); also the amount added to the buffer start for the new end
+local	_gleVPFlushTriangleFanTCLRDirty	iVar2	copyOffset	CONFIRMED	copyIndex*8: byte offset of the 8-byte word copied in this iteration
+local	_gleVPFlushTriangleFanTCLRDirty	iVar3	negCopyBytes	CONFIRMED	-copyBytes: offset from the buffer end back to the start of the last vertex (source of the copy)
+local	_gleVPFlushTriangleFanTCLRDirty	iVar4	vertexBufferEnd	CONFIRMED	ctx+0x4858 read before the copy: end of the vertex buffer (source = end - copyBytes)
+local	_gleVPFlushTriangleFanTCLRDirty	iVar5	copyDest	CONFIRMED	ctx+0x4854 + copyBytes: destination of the copy (the slot after the first vertex); the new end ctx+0x4858 is copyDest + copyBytes
+local	_gleVPFlushTriangleFanTCLRDirty	iVar6	copyIndex	CONFIRMED	number of 8-byte words copied so far
+local	_gleVPFlushTriQuadStripTCLRDirty	iVar6	doubleWordCountThenRemaining	CONFIRMED	ctx+0x487c (short vertex size in bytes) shifted right: number of 8-byte words copied, then used as the down counter of the copy loop (>>2: two vertices)
+local	_gleVPFlushTriQuadStripTCLRDirty	iVar1	copyBytes	CONFIRMED	doubleWordCount*8: bytes copied; the new end ctx+0x4858 is vertexBufferStart + copyBytes
+local	_gleVPFlushTriQuadStripTCLRDirty	iVar2	copyOffset	CONFIRMED	copyIndex*8: byte offset of the 8-byte word copied in this iteration
+local	_gleVPFlushTriQuadStripTCLRDirty	iVar3	negCopyBytes	CONFIRMED	-copyBytes: offset from the buffer end back to the start of the data copied
+local	_gleVPFlushTriQuadStripTCLRDirty	iVar4	vertexBufferEnd	CONFIRMED	ctx+0x4858 read before the copy: end of the vertex buffer (source = end - copyBytes)
+local	_gleVPFlushTriQuadStripTCLRDirty	iVar5	copyIndex	CONFIRMED	number of 8-byte words copied so far
+local	_gleVPFlushTriQuadStripTCLRDirty	iVar7	vertexBufferStart	CONFIRMED	ctx+0x4854: start of the vertex buffer, destination of the copy
+local	_gleVPFlushLineStripTCL	iVar6	doubleWordCountThenRemaining	CONFIRMED	ctx+0x487c (short vertex size in bytes) shifted right: number of 8-byte words copied, then used as the down counter of the copy loop (>>3)
+local	_gleVPFlushLineStripTCL	iVar1	copyBytes	CONFIRMED	doubleWordCount*8: bytes copied (one vertex); the new end ctx+0x4858 is vertexBufferStart + copyBytes
+local	_gleVPFlushLineStripTCL	iVar2	copyOffset	CONFIRMED	copyIndex*8: byte offset of the 8-byte word copied in this iteration
+local	_gleVPFlushLineStripTCL	iVar3	negCopyBytes	CONFIRMED	-copyBytes: offset from the buffer end back to the start of the last vertex
+local	_gleVPFlushLineStripTCL	iVar4	vertexBufferEnd	CONFIRMED	ctx+0x4858 read before the copy: end of the vertex buffer (source = end - copyBytes)
+local	_gleVPFlushLineStripTCL	iVar5	copyIndex	CONFIRMED	number of 8-byte words copied so far
+local	_gleVPFlushLineStripTCL	iVar7	vertexBufferStart	CONFIRMED	ctx+0x4854: start of the vertex buffer, destination of the copy
+local	_gleFlushLineStripFunc	iVar1	doubleWordCountThenRemaining	CONFIRMED	ctx+0x487c (short vertex size in bytes) shifted right: number of 8-byte words copied, then used as the down counter of the copy loop (>>3)
+local	_gleFlushLineStripFunc	puVar2	srcCursor	CONFIRMED	cursor over the last vertex of the buffer (ctx+0x4858 - 0x100), read one 8-byte word at a time
+local	_gleFlushLineStripFunc	puVar3	dstCursor	CONFIRMED	cursor over local_110 receiving the copy of the last vertex
+local	_gleFlushLineStripFunc	uVar4	copiedWord	CONFIRMED	8-byte word moved from srcCursor to dstCursor
+local	_gleFlushLineStripFunc	local_110	lastVertexCopy	CONFIRMED	stack copy of the last vertex, passed to _gleSubmitVertexCopy
+local	_gleFlushTriQuadStripTCLFunc	sVar1	vertexSize	CONFIRMED	short at ctx+0x487c: bytes per vertex (the copy is 2 vertices; ctx+0x487c is the divisor of the vertex count in _gleVPRenderPoints)
+local	_gleFlushTriQuadStripTCLFunc	iVar2	copyBytes	CONFIRMED	vertexSize*2: bytes copied; the new end ctx+0x4858 is vertexBufferStart + copyBytes
+local	_gleFlushTriQuadStripTCLFunc	iVar3	copyOffset	CONFIRMED	byte offset of the 8-byte word being copied, counted up by 8
+local	_gleFlushTriQuadStripTCLFunc	iVar4	vertexBufferEnd	CONFIRMED	ctx+0x4858 read before the copy: end of the vertex buffer (source = end - vertexSize*2)
+local	_gleFlushTriQuadStripTCLFunc	iVar5	vertexBufferStart	CONFIRMED	ctx+0x4854: start of the vertex buffer, destination of the copy
+local	_gleFlushTriQuadStripTCLFunc	uVar6	remaining	CONFIRMED	number of 8-byte words left to copy ((copyBytes+7)>>3), counted down
+local	_gleFlushLineStripTCLFunc	iVar3	vertexSize	CONFIRMED	short at ctx+0x487c: bytes per vertex (one vertex is copied)
+local	_gleFlushLineStripTCLFunc	iVar1	copyOffset	CONFIRMED	byte offset of the 8-byte word being copied, counted up by 8
+local	_gleFlushLineStripTCLFunc	iVar2	vertexBufferEnd	CONFIRMED	ctx+0x4858 read before the copy: end of the vertex buffer (source = end - vertexSize)
+local	_gleFlushLineStripTCLFunc	iVar4	vertexBufferStart	CONFIRMED	ctx+0x4854: start of the vertex buffer, destination of the copy
+local	_gleFlushLineStripTCLFunc	uVar5	remaining	CONFIRMED	number of 8-byte words left to copy ((vertexSize+7)>>3), counted down
+local	_gleUpdateDepthRangeData	dVar5	depthNear	CONFIRMED	ctx+0x1b90 (double): stored as float at ctx+0xf8 and the offset of the depth transform
+local	_gleUpdateDepthRangeData	fVar1	depthFarFloat	CONFIRMED	(float) of the double at ctx+0x1b98: stored at ctx+0x108
+local	_gleUpdateDepthRangeData	dVar6	depthHalfRange	INFERRED	(far - near) * DOUBLE_00108dc0: the depth scale of the window transform (z = zndc*halfRange + near + halfRange)
+local	_gleUpdateDepthRangeData	fVar2	depthHalfRangeFloat	INFERRED	(float) depthHalfRange, stored at ctx+0x1b78 and ctx+0x4a3c
+local	_gleUpdateDepthRangeData	fVar3	depthCenterFloat	INFERRED	(float)(depthHalfRange + near), stored at ctx+0x1b88 and ctx+0x4a40
+local	_gleUpdateDepthRangeData	fVar4	rendererInfoFloat4	CONFIRMED	float at *(ctx+0x468c)+4: stored at ctx+0x4a54 and multiplied into the four values when ctx+0x4e1c == 0x1c00; role of the field not established
+local	_gleRemoveHashObject	param_1	hashTable	INFERRED	array of 0x400 bucket heads: indexed by (name & 0x3ff)*4
+local	_gleRemoveHashObject	param_2	objectName	INFERRED	hash key compared with entry word 1; the bucket is (param_2 & 0x3ff)
+local	_gleRemoveHashObject	iVar3	bucketOffset	CONFIRMED	(name & 0x3ff)*4: byte offset of the bucket head in the table
+local	_gleRemoveHashObject	piVar2	bucketHeadThenPreviousEntry	CONFIRMED	bucket head entry, then the entry before piVar1 while the chain is walked (so its link can be unlinked)
+local	_gleRemoveHashObject	piVar1	entry	CONFIRMED	chain entry being tested (key at +4, next link at +0)
+local	_gleOptimizeDisplayListCreateHashTable	uVar1	bucketOffset	CONFIRMED	execFunc & 0x7c: byte offset of the bucket (32 buckets of 4 bytes in the 0x80-byte calloc table)
+local	_gleOptimizeDisplayListCreateHashTable	uVar6	execFunc	CONFIRMED	function pointer read from the PTR__glBegin_ListExec table; stored in the entry word 1 and hashed with & 0x7c
+local	_gleOptimizeDisplayListCreateHashTable	iVar2	hashTableThenChainCursor	CONFIRMED	_gleDisplayListFunctionHash (the bucket array), then the chain cursor following entry word 3 (+0xc) to the last entry
+local	_gleOptimizeDisplayListCreateHashTable	iVar4	bucketHeadThenChainTail	CONFIRMED	bucket head entry, then the last entry of the chain whose link (+0xc) receives the new entry
+local	_gleOptimizeDisplayListCreateHashTable	uVar3	entryWord2	CONFIRMED	word read from fi_word2 and stored in entry word 2 of the allocated block
+local	_gleOptimizeDisplayListCreateHashTable	uVar7	entryWord3	CONFIRMED	word read from fi_word3 and stored in entry word 3 (+0xc, the chain link slot) of the allocated block
+local	_LFSStreamAddPreliminaryPassRegisterInit	param_1	stream	INFERRED	*(param_1+4) is the chunk list passed to _LFSStreamChunkListAddChunk
+local	_LFSStreamAddPreliminaryPassRegisterInit	param_2	registerInit	INFERRED	5 words copied into a new type-1 chunk (function name: PreliminaryPassRegisterInit)
+local	_LFSStreamAddPreliminaryPassRegisterInit	puVar2	chunk	CONFIRMED	chunk returned by _LFSStreamChunkCreate, byte 0 = 1, words 1-5 = registerInit, added to the stream chunk list
+local	_LFSStreamAddPreliminaryPassRegisterInit	uVar1	initWord1	CONFIRMED	param_2[1] copied into chunk+8
+local	_LFSStreamAddPreliminaryPassRegisterInit	uVar3	initWord2	CONFIRMED	param_2[2] copied into chunk+0xc
+local	_LFSStreamAddPreliminaryPassRegisterInit	uVar4	initWord3	CONFIRMED	param_2[3] copied into chunk+0x10
+local	_gleCullQuad	param_2	vertex0	CONFIRMED	float pointer: words 0 and 1 are the window x/y of the vertex used in the signed-area (shoelace) sum over the 4 corners
+local	_gleCullQuad	param_3	vertex1	CONFIRMED	float pointer: words 0 and 1 are the window x/y of the vertex used in the signed-area (shoelace) sum over the 4 corners
+local	_gleCullQuad	param_4	vertex2	CONFIRMED	float pointer: words 0 and 1 are the window x/y of the vertex used in the signed-area (shoelace) sum over the 4 corners
+local	_gleCullQuad	param_5	vertex3	CONFIRMED	float pointer: words 0 and 1 are the window x/y of the vertex used in the signed-area (shoelace) sum over the 4 corners
+local	_gleCullQuad	param_6	backFacingOut	INFERRED	receives (winding match ^ 1) when the quad is not culled; the sibling render functions pass &backFacing
+local	_gleVtxTextureCoordGenReflectSTR	param_1	glContext	INFERRED	+0x486c is ORed with 1 (ctx dirty word of the vertex state), same ctx field as in the sibling texgen functions
+local	_gleVtxTextureCoordGenReflectSTR	fStack_30	normalizedEyeX	CONFIRMED	x of the eye position (vertex+0x20, named eyePosition in _gleSphereGenST) normalized by the _gleVectorNormalize callback
+local	_gleVtxTextureCoordGenReflectSTR	fStack_2c	normalizedEyeY	CONFIRMED	y of the eye position (vertex+0x20, named eyePosition in _gleSphereGenST) normalized by the _gleVectorNormalize callback
+local	_gleVtxTextureCoordGenReflectSTR	fStack_28	normalizedEyeZ	CONFIRMED	z of the eye position (vertex+0x20, named eyePosition in _gleSphereGenST) normalized by the _gleVectorNormalize callback
+local	_gleVtxTextureCoordGenReflectSTR	fVar1	dotThenTwiceDot	CONFIRMED	dot product of the vertex normal (+0x40, named normal in _gleSphereGenST) with the normalized eye vector, then doubled (the 2*(n.u) of the reflection formula r = u - 2(n.u)n)
+local	_gleMultiVtxTextureCoordGenReflectST	fStack_30	normalizedEyeX	CONFIRMED	x of the eye position (vertex+0x20, eyePosition parameter of _gleSphereGenST) normalized by the _gleVectorNormalize callback
+local	_gleMultiVtxTextureCoordGenReflectST	fStack_2c	normalizedEyeY	CONFIRMED	y of the eye position (vertex+0x20, eyePosition parameter of _gleSphereGenST) normalized by the _gleVectorNormalize callback
+local	_gleMultiVtxTextureCoordGenReflectST	fStack_28	normalizedEyeZ	CONFIRMED	z of the eye position (vertex+0x20, eyePosition parameter of _gleSphereGenST) normalized by the _gleVectorNormalize callback
+local	_gleVtxTextureCoordGenReflectST	fStack_30	normalizedEyeX	CONFIRMED	x of the eye position (vertex+0x20, eyePosition parameter of _gleSphereGenST) normalized by the _gleVectorNormalize callback
+local	_gleVtxTextureCoordGenReflectST	fStack_2c	normalizedEyeY	CONFIRMED	y of the eye position (vertex+0x20, eyePosition parameter of _gleSphereGenST) normalized by the _gleVectorNormalize callback
+local	_gleVtxTextureCoordGenReflectST	fStack_28	normalizedEyeZ	CONFIRMED	z of the eye position (vertex+0x20, eyePosition parameter of _gleSphereGenST) normalized by the _gleVectorNormalize callback
+local	_gleMultiVtxTextureCoordGenReflectST	fVar2	dotThenTwiceDot	CONFIRMED	dot product of the vertex normal (+0x40) with the normalized eye vector, then doubled (2*(n.e) of the reflection formula)
+local	_gleVtxTextureCoordGenReflectST	fVar1	dotThenTwiceDot	CONFIRMED	dot product of the vertex normal (+0x40) with the normalized eye vector, then doubled (2*(n.e) of the reflection formula)
+local	_gleMultiVtxTextureCoordGenReflectST	param_4	textureUnit	INFERRED	texCoordSlot = param_4*0x10 + vertex: selects the per-unit 16-byte texcoord slot at vertex+0x80
+local	_gleMultiVtxTextureCoordGenSphereST	param_1	glContext	CONFIRMED	first argument of _gleSphereGenST(glContext, eyePosition, normal, stOut)
+local	_gleMultiVtxTextureCoordGenSphereST	param_4	textureUnit	INFERRED	stOut = vertex + param_4*0x10 + 0x80: selects the per-unit 16-byte texcoord slot
+local	_gleMultiVtxTextureCoordGenSphereST	iVar1	eyePosition	CONFIRMED	vertex+0x20, the eyePosition argument of _gleSphereGenST
+local	_gleMultiVtxTextureCoordGenSphereST	iVar2	normal	CONFIRMED	vertex+0x40, the normal argument of _gleSphereGenST
+local	_gleMultiVtxTextureCoordGenSphereST	iVar4	stOut	CONFIRMED	texcoord slot of the unit in the current vertex (+0x80), the stOut argument of _gleSphereGenST, advanced 0x100 per vertex
+local	_gleVtxTextureCoordGenObjectST	param_1	glContext	INFERRED	object plane coefficients are read from ctx+0x3cfc..0x3d2c
+local	_gleVtxTextureCoordGenObjectST	uVar9	vertexEndThenRemaining	CONFIRMED	vertexCursor + vertexCount*0x100 (end of the vertex run), then the number of vertices left ((end - start + 0xff) >> 8), counted down

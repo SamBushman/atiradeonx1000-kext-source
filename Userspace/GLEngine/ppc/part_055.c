@@ -666,33 +666,33 @@ int _gleBindVertexArray(glContext, id)
   int glContext;
   int id;
 {
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
-  int iVar4;
+  int vertexArray;
+  undefined4 setCurrentResult;
+  int vertexArrayHashThenRefCount;
+  int previousClientState;
   
-  iVar3 = *(int *)(glContext + 0x5148) + 0x5014;
+  vertexArrayHashThenRefCount = *(int *)(glContext + 0x5148) + 0x5014;
   if (id == 0) {
-    iVar1 = *(int *)(glContext + 0x4a64);
+    vertexArray = *(int *)(glContext + 0x4a64);
   }
   else {
-    iVar1 = _gleLookupHashObject(iVar3,id);
-    if (iVar1 == 0) {
-      iVar1 = _gleCreateVertexArrayObject(glContext,id);
-      _gleCreatePluginVertexArray(glContext,iVar1 + 0x10);
-      _gleAddHashNameAndObject(glContext,iVar3,iVar1);
+    vertexArray = _gleLookupHashObject(vertexArrayHashThenRefCount,id);
+    if (vertexArray == 0) {
+      vertexArray = _gleCreateVertexArrayObject(glContext,id);
+      _gleCreatePluginVertexArray(glContext,vertexArray + 0x10);
+      _gleAddHashNameAndObject(glContext,vertexArrayHashThenRefCount,vertexArray);
     }
   }
-  *(int *)(iVar1 + 8) = *(int *)(iVar1 + 8) + 1;
-  iVar4 = *(int *)(glContext + 0x4a60);
-  uVar2 = _gleSetCurrentVertexObject(glContext,iVar1);
-  iVar3 = *(int *)(iVar4 + 8) + -1;
-  *(int *)(iVar4 + 8) = iVar3;
-  if (iVar3 == 0) {
-    uVar2 = _gleFreeVertexArrayObject(glContext,iVar4);
-    return uVar2;
+  *(int *)(vertexArray + 8) = *(int *)(vertexArray + 8) + 1;
+  previousClientState = *(int *)(glContext + 0x4a60);
+  setCurrentResult = _gleSetCurrentVertexObject(glContext,vertexArray);
+  vertexArrayHashThenRefCount = *(int *)(previousClientState + 8) + -1;
+  *(int *)(previousClientState + 8) = vertexArrayHashThenRefCount;
+  if (vertexArrayHashThenRefCount == 0) {
+    setCurrentResult = _gleFreeVertexArrayObject(glContext,previousClientState);
+    return setCurrentResult;
   }
-  return uVar2;
+  return setCurrentResult;
 }
 
 /* _gleReclaimVertexArrayResources @ 0x104260 (352 bytes) */
@@ -2334,28 +2334,28 @@ void _gleVPFlushLineStrip(glContext)
 void _gleVPFlushLineStripTCL(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int copyBytes;
+  int copyOffset;
+  int negCopyBytes;
+  int vertexBufferEnd;
+  int copyIndex;
+  int doubleWordCountThenRemaining;
+  int vertexBufferStart;
   
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar5 = 0;
-  iVar4 = *(int *)(glContext + 0x4858);
-  iVar6 = (int)*(short *)(glContext + 0x487c) >> 3;
-  iVar1 = iVar6 * 8;
+  copyIndex = 0;
+  vertexBufferEnd = *(int *)(glContext + 0x4858);
+  doubleWordCountThenRemaining = (int)*(short *)(glContext + 0x487c) >> 3;
+  copyBytes = doubleWordCountThenRemaining * 8;
   *(undefined1 *)(glContext + 0x4a18) = 1;
-  iVar3 = iVar6 * -8;
-  iVar7 = *(int *)(glContext + 0x4854);
-  for (; iVar6 != 0; iVar6 = iVar6 + -1) {
-    iVar2 = iVar5 * 8;
-    iVar5 = iVar5 + 1;
-    *(undefined8 *)(iVar7 + iVar2) = *(undefined8 *)(iVar4 + iVar3 + iVar2);
+  negCopyBytes = doubleWordCountThenRemaining * -8;
+  vertexBufferStart = *(int *)(glContext + 0x4854);
+  for (; doubleWordCountThenRemaining != 0; doubleWordCountThenRemaining = doubleWordCountThenRemaining + -1) {
+    copyOffset = copyIndex * 8;
+    copyIndex = copyIndex + 1;
+    *(undefined8 *)(vertexBufferStart + copyOffset) = *(undefined8 *)(vertexBufferEnd + negCopyBytes + copyOffset);
   }
-  *(int *)(glContext + 0x4858) = iVar7 + iVar1;
+  *(int *)(glContext + 0x4858) = vertexBufferStart + copyBytes;
   return;
 }
 
@@ -2453,13 +2453,13 @@ void _gleVPFlushTriQuadStripTCL(glContext)
 /* _gleVPFlushTriQuadStripTCLRDirty @ 0x10677c (192 bytes) */
 void _gleVPFlushTriQuadStripTCLRDirty(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int copyBytes;
+  int copyOffset;
+  int negCopyBytes;
+  int vertexBufferEnd;
+  int copyIndex;
+  int doubleWordCountThenRemaining;
+  int vertexBufferStart;
   
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
@@ -2467,18 +2467,18 @@ void _gleVPFlushTriQuadStripTCLRDirty(int glContext,double floatArg1,double floa
     ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar5 = 0;
-  iVar7 = *(int *)(glContext + 0x4854);
-  iVar6 = (int)*(short *)(glContext + 0x487c) >> 2;
-  iVar4 = *(int *)(glContext + 0x4858);
-  iVar1 = iVar6 * 8;
-  iVar3 = iVar6 * -8;
-  for (; iVar6 != 0; iVar6 = iVar6 + -1) {
-    iVar2 = iVar5 * 8;
-    iVar5 = iVar5 + 1;
-    *(undefined8 *)(iVar7 + iVar2) = *(undefined8 *)(iVar4 + iVar3 + iVar2);
+  copyIndex = 0;
+  vertexBufferStart = *(int *)(glContext + 0x4854);
+  doubleWordCountThenRemaining = (int)*(short *)(glContext + 0x487c) >> 2;
+  vertexBufferEnd = *(int *)(glContext + 0x4858);
+  copyBytes = doubleWordCountThenRemaining * 8;
+  negCopyBytes = doubleWordCountThenRemaining * -8;
+  for (; doubleWordCountThenRemaining != 0; doubleWordCountThenRemaining = doubleWordCountThenRemaining + -1) {
+    copyOffset = copyIndex * 8;
+    copyIndex = copyIndex + 1;
+    *(undefined8 *)(vertexBufferStart + copyOffset) = *(undefined8 *)(vertexBufferEnd + negCopyBytes + copyOffset);
   }
-  *(int *)(glContext + 0x4858) = iVar7 + iVar1;
+  *(int *)(glContext + 0x4858) = vertexBufferStart + copyBytes;
   return;
 }
 
@@ -2570,13 +2570,13 @@ void _gleVPFlushTriangleFanTCL(glContext)
 /* _gleVPFlushTriangleFanTCLRDirty @ 0x1069b4 (196 bytes) */
 void _gleVPFlushTriangleFanTCLRDirty(int glContext,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int copyBytes;
+  int copyOffset;
+  int negCopyBytes;
+  int vertexBufferEnd;
+  int copyDest;
+  int copyIndex;
+  int doubleWordCountThenRemaining;
   
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
@@ -2584,18 +2584,18 @@ void _gleVPFlushTriangleFanTCLRDirty(int glContext,double floatArg1,double float
     ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar6 = 0;
-  iVar7 = (int)*(short *)(glContext + 0x487c) >> 3;
-  iVar4 = *(int *)(glContext + 0x4858);
-  iVar1 = iVar7 * 8;
-  iVar3 = iVar7 * -8;
-  iVar5 = *(int *)(glContext + 0x4854) + iVar1;
-  for (; iVar7 != 0; iVar7 = iVar7 + -1) {
-    iVar2 = iVar6 * 8;
-    iVar6 = iVar6 + 1;
-    *(undefined8 *)(iVar5 + iVar2) = *(undefined8 *)(iVar4 + iVar3 + iVar2);
+  copyIndex = 0;
+  doubleWordCountThenRemaining = (int)*(short *)(glContext + 0x487c) >> 3;
+  vertexBufferEnd = *(int *)(glContext + 0x4858);
+  copyBytes = doubleWordCountThenRemaining * 8;
+  negCopyBytes = doubleWordCountThenRemaining * -8;
+  copyDest = *(int *)(glContext + 0x4854) + copyBytes;
+  for (; doubleWordCountThenRemaining != 0; doubleWordCountThenRemaining = doubleWordCountThenRemaining + -1) {
+    copyOffset = copyIndex * 8;
+    copyIndex = copyIndex + 1;
+    *(undefined8 *)(copyDest + copyOffset) = *(undefined8 *)(vertexBufferEnd + negCopyBytes + copyOffset);
   }
-  *(int *)(glContext + 0x4858) = iVar5 + iVar1;
+  *(int *)(glContext + 0x4858) = copyDest + copyBytes;
   return;
 }
 

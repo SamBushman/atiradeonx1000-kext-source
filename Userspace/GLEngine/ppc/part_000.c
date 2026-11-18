@@ -592,13 +592,13 @@ int _glepGetPlugins()
 /* _gleOptimizeDisplayListCreateHashTable @ 0x2140 (248 bytes) */
 void _gleOptimizeDisplayListCreateHashTable()
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
+  uint bucketOffset;
+  int hashTableThenChainCursor;
+  undefined4 entryWord2;
+  int bucketHeadThenChainTail;
   undefined4 *allocatedBlock;
-  uint uVar6;
-  undefined4 uVar7;
+  uint execFunc;
+  undefined4 entryWord3;
   undefined **cursor;
   int loopIndex;
   
@@ -609,24 +609,24 @@ void _gleOptimizeDisplayListCreateHashTable()
     cursor = &PTR__glBegin_ListExec_00110a2c;
     do {
       allocatedBlock = (undefined4 *)_malloc(0x10);
-      iVar2 = _gleDisplayListFunctionHash;
-      uVar3 = *(undefined4 *)((int)&fi_word2 + loopIndex);
-      uVar7 = *(undefined4 *)((int)&fi_word3 + loopIndex);
-      uVar6 = *(uint *)((int)&PTR__glBegin_ListExec_00110a2c + loopIndex);
-      uVar1 = uVar6 & 0x7c;
+      hashTableThenChainCursor = _gleDisplayListFunctionHash;
+      entryWord2 = *(undefined4 *)((int)&fi_word2 + loopIndex);
+      entryWord3 = *(undefined4 *)((int)&fi_word3 + loopIndex);
+      execFunc = *(uint *)((int)&PTR__glBegin_ListExec_00110a2c + loopIndex);
+      bucketOffset = execFunc & 0x7c;
       *allocatedBlock = *(undefined4 *)((int)&_fi + loopIndex);
-      allocatedBlock[2] = uVar3;
-      allocatedBlock[3] = uVar7;
-      allocatedBlock[1] = uVar6;
-      iVar4 = *(int *)(uVar1 + iVar2);
-      if (iVar4 == 0) {
-        *(undefined4 **)(uVar1 + iVar2) = allocatedBlock;
+      allocatedBlock[2] = entryWord2;
+      allocatedBlock[3] = entryWord3;
+      allocatedBlock[1] = execFunc;
+      bucketHeadThenChainTail = *(int *)(bucketOffset + hashTableThenChainCursor);
+      if (bucketHeadThenChainTail == 0) {
+        *(undefined4 **)(bucketOffset + hashTableThenChainCursor) = allocatedBlock;
       }
       else {
-        for (iVar2 = *(int *)(iVar4 + 0xc); iVar2 != 0; iVar2 = *(int *)(iVar2 + 0xc)) {
-          iVar4 = iVar2;
+        for (hashTableThenChainCursor = *(int *)(bucketHeadThenChainTail + 0xc); hashTableThenChainCursor != 0; hashTableThenChainCursor = *(int *)(hashTableThenChainCursor + 0xc)) {
+          bucketHeadThenChainTail = hashTableThenChainCursor;
         }
-        *(undefined4 **)(iVar4 + 0xc) = allocatedBlock;
+        *(undefined4 **)(bucketHeadThenChainTail + 0xc) = allocatedBlock;
       }
       cursor = cursor + 4;
       loopIndex = loopIndex + 0x10;

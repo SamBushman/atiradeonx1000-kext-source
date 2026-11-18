@@ -1455,31 +1455,31 @@ int _gleUpdateTextureTransform(glContext)
 /* _gleUpdateDepthRangeData @ 0x8c94 (156 bytes) */
 void _gleUpdateDepthRangeData(int glContext,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  double dVar5;
-  double dVar6;
+  float depthFarFloat;
+  float depthHalfRangeFloat;
+  float depthCenterFloat;
+  float rendererInfoFloat4;
+  double depthNear;
+  double depthHalfRange;
   
-  dVar5 = *(double *)(glContext + 0x1b90);
-  fVar1 = (float)*(double *)(glContext + 0x1b98);
-  dVar6 = (*(double *)(glContext + 0x1b98) - dVar5) * DOUBLE_00108dc0;
-  fVar4 = *(float *)(*(int *)(glContext + 0x468c) + 4);
-  *(float *)(glContext + 0xf8) = (float)dVar5;
-  fVar2 = (float)dVar6;
-  *(float *)(glContext + 0x108) = fVar1;
-  *(float *)(glContext + 0x4a54) = fVar4;
-  fVar3 = (float)(dVar6 + dVar5);
-  *(float *)(glContext + 0x1b78) = fVar2;
-  *(float *)(glContext + 0x4a3c) = fVar2;
-  *(float *)(glContext + 0x1b88) = fVar3;
-  *(float *)(glContext + 0x4a40) = fVar3;
+  depthNear = *(double *)(glContext + 0x1b90);
+  depthFarFloat = (float)*(double *)(glContext + 0x1b98);
+  depthHalfRange = (*(double *)(glContext + 0x1b98) - depthNear) * DOUBLE_00108dc0;
+  rendererInfoFloat4 = *(float *)(*(int *)(glContext + 0x468c) + 4);
+  *(float *)(glContext + 0xf8) = (float)depthNear;
+  depthHalfRangeFloat = (float)depthHalfRange;
+  *(float *)(glContext + 0x108) = depthFarFloat;
+  *(float *)(glContext + 0x4a54) = rendererInfoFloat4;
+  depthCenterFloat = (float)(depthHalfRange + depthNear);
+  *(float *)(glContext + 0x1b78) = depthHalfRangeFloat;
+  *(float *)(glContext + 0x4a3c) = depthHalfRangeFloat;
+  *(float *)(glContext + 0x1b88) = depthCenterFloat;
+  *(float *)(glContext + 0x4a40) = depthCenterFloat;
   if (*(int *)(glContext + 0x4e1c) == 0x1c00) {
-    *(float *)(glContext + 0x1b88) = fVar3 * fVar4;
-    *(float *)(glContext + 0x108) = fVar1 * fVar4;
-    *(float *)(glContext + 0x1b78) = fVar2 * fVar4;
-    *(float *)(glContext + 0xf8) = (float)dVar5 * fVar4;
+    *(float *)(glContext + 0x1b88) = depthCenterFloat * rendererInfoFloat4;
+    *(float *)(glContext + 0x108) = depthFarFloat * rendererInfoFloat4;
+    *(float *)(glContext + 0x1b78) = depthHalfRangeFloat * rendererInfoFloat4;
+    *(float *)(glContext + 0xf8) = (float)depthNear * rendererInfoFloat4;
   }
   *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 1;
   return;

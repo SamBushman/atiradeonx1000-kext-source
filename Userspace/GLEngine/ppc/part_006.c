@@ -4464,14 +4464,14 @@ void _glRotateY_Comp(undefined4 glContext,float fparam_1,float fparam_2)
 }
 
 /* _glRotateX_Comp @ 0x43ad0 (100 bytes) */
-void _glRotateX_Comp(undefined4 glContext,float fparam_1,float fparam_2)
+void _glRotateX_Comp(undefined4 glContext,float sinValue,float cosValue)
 {
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glRotateX_ListExec_00110290,8);
   if (listRecord != (float *)0x0) {
-    listRecord[1] = (float)fparam_2;
-    *listRecord = (float)fparam_1;
+    listRecord[1] = (float)cosValue;
+    *listRecord = (float)sinValue;
   }
   return;
 }
@@ -4581,39 +4581,39 @@ int _gleAddListItemWithFree(glContext, forwardedArg2, forwardedArg3, param_4, pa
 }
 
 /* _CloseCurrentVAR @ 0x43d34 (228 bytes) */
-void _CloseCurrentVAR(glContext, param_2, param_3, param_4, param_5)
+void _CloseCurrentVAR(glContext, blockTableOffset, param_3, param_4, param_5)
   int glContext;
-  int param_2;
+  int blockTableOffset;
   int param_3;
   int *param_4;
   undefined4 *param_5;
 {
   uint size;
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   uint size_00;
   int glContextPtr53e8;
   vm_address_t source_address;
   vm_map_t target_task;
-  undefined4 uVar3;
-  vm_address_t local_40 [6];
+  undefined4 blockAddress;
+  vm_address_t newAddressSlot [6];
   
   glContextPtr53e8 = *(int *)(glContext + 0x53e8);
-  source_address = *(vm_address_t *)(glContextPtr53e8 + param_2);
+  source_address = *(vm_address_t *)(glContextPtr53e8 + blockTableOffset);
   size_00 = *(uint *)(source_address + 0xc);
   size = (param_3 - *param_4) + 0xfffU & 0xfffff000;
   *(int *)(source_address + 8) = (param_3 - *param_4) + -0x40;
   if (size < size_00) {
     target_task = *(vm_map_t *)PTR_00112034;
-    *(uint *)(*(int *)(glContextPtr53e8 + param_2) + 0xc) = size;
-    _vm_allocate(target_task,local_40,size,1);
-    _vm_copy(target_task,source_address,size,local_40[0]);
+    *(uint *)(*(int *)(glContextPtr53e8 + blockTableOffset) + 0xc) = size;
+    _vm_allocate(target_task,newAddressSlot,size,1);
+    _vm_copy(target_task,source_address,size,newAddressSlot[0]);
     _vm_deallocate(target_task,source_address,size_00);
-    *(vm_address_t *)(glContextPtr53e8 + param_2) = local_40[0];
+    *(vm_address_t *)(glContextPtr53e8 + blockTableOffset) = newAddressSlot[0];
   }
-  uVar3 = *(undefined4 *)(glContextPtr53e8 + param_2);
-  puVar1 = (undefined4 *)
+  blockAddress = *(undefined4 *)(glContextPtr53e8 + blockTableOffset);
+  listRecord = (undefined4 *)
            _gleAddListItem(glContext,PTR__gleEndDrawArraysOrElementsOutOfLine_ListExec_00112148,4);
-  *puVar1 = uVar3;
+  *listRecord = blockAddress;
   *param_4 = 0;
   *param_5 = 0;
   return;

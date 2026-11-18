@@ -2443,39 +2443,39 @@ int _glMatrixMode_Comp(glContext, mode)
 /* _glRotatef_Comp @ 0x48620 (404 bytes) */
 void _glRotatef_Comp(int glContext,double angle,double x,double y,double z)
 {
-  float fVar1;
+  float angleScale;
   double cosValue;
   double glContextFloat20;
   double sinValue;
   
   glContextFloat20 = (double)*(float *)(glContext + 0x20);
   if ((y == glContextFloat20) && (z == glContextFloat20)) {
-    fVar1 = FLOAT_00108e84;
+    angleScale = FLOAT_00108e84;
     if (x < glContextFloat20) {
-      fVar1 = FLOAT_00108eb0;
+      angleScale = FLOAT_00108eb0;
     }
-    sinValue = _sin((double)(float)(angle * (double)fVar1));
-    cosValue = _cos((double)(float)(angle * (double)fVar1));
+    sinValue = _sin((double)(float)(angle * (double)angleScale));
+    cosValue = _cos((double)(float)(angle * (double)angleScale));
     ((void (*)())_glRotateX_Comp)(glContext,(double)(float)sinValue,(double)(float)cosValue);
     return;
   }
   if ((x == glContextFloat20) && (z == glContextFloat20)) {
-    fVar1 = FLOAT_00108e84;
+    angleScale = FLOAT_00108e84;
     if (y < glContextFloat20) {
-      fVar1 = FLOAT_00108eb0;
+      angleScale = FLOAT_00108eb0;
     }
-    sinValue = _sin((double)(float)(angle * (double)fVar1));
-    cosValue = _cos((double)(float)(angle * (double)fVar1));
+    sinValue = _sin((double)(float)(angle * (double)angleScale));
+    cosValue = _cos((double)(float)(angle * (double)angleScale));
     ((void (*)())_glRotateY_Comp)(glContext,(double)(float)sinValue,(double)(float)cosValue);
     return;
   }
   if ((x == glContextFloat20) && (y == glContextFloat20)) {
-    fVar1 = FLOAT_00108e84;
+    angleScale = FLOAT_00108e84;
     if (z < glContextFloat20) {
-      fVar1 = FLOAT_00108eb0;
+      angleScale = FLOAT_00108eb0;
     }
-    sinValue = _sin((double)(float)(angle * (double)fVar1));
-    cosValue = _cos((double)(float)(angle * (double)fVar1));
+    sinValue = _sin((double)(float)(angle * (double)angleScale));
+    cosValue = _cos((double)(float)(angle * (double)angleScale));
     ((void (*)())_glRotateZ_Comp)(glContext,(double)(float)sinValue,(double)(float)cosValue);
     return;
   }

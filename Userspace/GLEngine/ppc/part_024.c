@@ -333,11 +333,11 @@ undefined4 _glRotateXYZ_ListExec(int glContext,float *listRecord,double unusedFl
   float secondMatrixElem9;
   float *currentMatrix;
   float *secondMatrix;
-  uint uVar20;
-  uint uVar21;
+  uint secondMatrixDirtyWord;
+  uint matrixDirtyBits;
   
   currentMatrix = *(float **)(glContext + 0x4fec);
-  uVar21 = *(uint *)(glContext + 0x50a8);
+  matrixDirtyBits = *(uint *)(glContext + 0x50a8);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
     rotElem1 = listRecord[1];
     rotElem4 = listRecord[4];
@@ -372,11 +372,11 @@ undefined4 _glRotateXYZ_ListExec(int glContext,float *listRecord,double unusedFl
     currentMatrix[0xb] = matrixElem11 * rotElem8 + (matrixElem3 * rotElem6 + matrixElem7 * rotElem7);
     currentMatrix[3] = matrixElem11 * rotElem2 + (matrixElem3 * rotElem0 + matrixElem7 * rotElem1);
     currentMatrix[7] = matrixElem11 * rotElem5 + (matrixElem3 * rotElem3 + matrixElem7 * rotElem4);
-    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | uVar21;
-    uVar20 = *(uint *)(glContext + 0x50b0);
-    if ((uVar21 & ~uVar20 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
+    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | matrixDirtyBits;
+    secondMatrixDirtyWord = *(uint *)(glContext + 0x50b0);
+    if ((matrixDirtyBits & ~secondMatrixDirtyWord & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
       secondMatrix = *(float **)(glContext + 0x4ff0);
-      uVar21 = uVar21 & 0xff000003;
+      matrixDirtyBits = matrixDirtyBits & 0xff000003;
       secondMatrixElem4 = secondMatrix[4];
       secondMatrixElem0 = *secondMatrix;
       secondMatrixElem8 = secondMatrix[8];
@@ -401,9 +401,9 @@ undefined4 _glRotateXYZ_ListExec(int glContext,float *listRecord,double unusedFl
       secondMatrix[0xb] = secondMatrixElem11 * rotElem8 + (secondMatrixElem3 * rotElem6 + secondMatrixElem7 * rotElem7);
       secondMatrix[3] = secondMatrixElem11 * rotElem2 + (secondMatrixElem3 * rotElem0 + secondMatrixElem7 * rotElem1);
       secondMatrix[7] = secondMatrixElem11 * rotElem5 + (secondMatrixElem3 * rotElem3 + secondMatrixElem7 * rotElem4);
-      uVar20 = *(uint *)(glContext + 0x50b0);
+      secondMatrixDirtyWord = *(uint *)(glContext + 0x50b0);
     }
-    *(uint *)(glContext + 0x50b0) = uVar20 | uVar21;
+    *(uint *)(glContext + 0x50b0) = secondMatrixDirtyWord | matrixDirtyBits;
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
     *(undefined4 *)(glContext + 0x7574) = 0x502;
@@ -612,39 +612,39 @@ void _glRotateXYZ_Exec(int glContext,double angle,float x,float y,float z)
 /* _glRotated_Comp @ 0x8589c (416 bytes) */
 void _glRotated_Comp(int glContext,double angle,double x,double y,double z)
 {
-  double dVar1;
+  double zero;
   double sinValue;
-  double dVar2;
+  double angleScaleThenCosValue;
   
-  dVar1 = (double)*(float *)(glContext + 0x20);
-  if ((y == dVar1) && (z == dVar1)) {
-    dVar2 = DOUBLE_00108db8;
-    if (x < dVar1) {
-      dVar2 = DOUBLE_00108db0;
+  zero = (double)*(float *)(glContext + 0x20);
+  if ((y == zero) && (z == zero)) {
+    angleScaleThenCosValue = DOUBLE_00108db8;
+    if (x < zero) {
+      angleScaleThenCosValue = DOUBLE_00108db0;
     }
-    sinValue = _sin(angle * dVar2);
-    dVar2 = _cos(angle * dVar2);
-    ((void (*)())_glRotateX_Comp)(glContext,(double)(float)sinValue,(double)(float)dVar2);
+    sinValue = _sin(angle * angleScaleThenCosValue);
+    angleScaleThenCosValue = _cos(angle * angleScaleThenCosValue);
+    ((void (*)())_glRotateX_Comp)(glContext,(double)(float)sinValue,(double)(float)angleScaleThenCosValue);
     return;
   }
-  if ((x == dVar1) && (z == dVar1)) {
-    dVar2 = DOUBLE_00108db8;
-    if (y < dVar1) {
-      dVar2 = DOUBLE_00108db0;
+  if ((x == zero) && (z == zero)) {
+    angleScaleThenCosValue = DOUBLE_00108db8;
+    if (y < zero) {
+      angleScaleThenCosValue = DOUBLE_00108db0;
     }
-    sinValue = _sin(angle * dVar2);
-    dVar2 = _cos(angle * dVar2);
-    ((void (*)())_glRotateY_Comp)(glContext,(double)(float)sinValue,(double)(float)dVar2);
+    sinValue = _sin(angle * angleScaleThenCosValue);
+    angleScaleThenCosValue = _cos(angle * angleScaleThenCosValue);
+    ((void (*)())_glRotateY_Comp)(glContext,(double)(float)sinValue,(double)(float)angleScaleThenCosValue);
     return;
   }
-  if ((x == dVar1) && (y == dVar1)) {
-    dVar2 = DOUBLE_00108db8;
-    if (z < dVar1) {
-      dVar2 = DOUBLE_00108db0;
+  if ((x == zero) && (y == zero)) {
+    angleScaleThenCosValue = DOUBLE_00108db8;
+    if (z < zero) {
+      angleScaleThenCosValue = DOUBLE_00108db0;
     }
-    sinValue = _sin(angle * dVar2);
-    dVar2 = _cos(angle * dVar2);
-    ((void (*)())_glRotateZ_Comp)(glContext,(double)(float)sinValue,(double)(float)dVar2);
+    sinValue = _sin(angle * angleScaleThenCosValue);
+    angleScaleThenCosValue = _cos(angle * angleScaleThenCosValue);
+    ((void (*)())_glRotateZ_Comp)(glContext,(double)(float)sinValue,(double)(float)angleScaleThenCosValue);
     return;
   }
   ((void (*)())_glRotateXYZ_Comp)(glContext,(double)(float)angle,(double)(float)x,(double)(float)y,

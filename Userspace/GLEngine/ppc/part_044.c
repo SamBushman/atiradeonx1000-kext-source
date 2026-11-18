@@ -236,26 +236,26 @@ void _LFSStreamAddConstantBinding(param_1, param_2)
 }
 
 /* _LFSStreamAddPreliminaryPassRegisterInit @ 0xd1d00 (104 bytes) */
-void _LFSStreamAddPreliminaryPassRegisterInit(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _LFSStreamAddPreliminaryPassRegisterInit(stream, registerInit)
+  int stream;
+  undefined4 *registerInit;
 {
-  undefined4 uVar1;
-  undefined1 *puVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  undefined4 initWord1;
+  undefined1 *chunk;
+  undefined4 initWord2;
+  undefined4 initWord3;
   
-  puVar2 = (undefined1 *)_LFSStreamChunkCreate();
-  *puVar2 = 1;
-  uVar1 = param_2[1];
-  uVar3 = param_2[2];
-  uVar4 = param_2[3];
-  *(undefined4 *)(puVar2 + 4) = *param_2;
-  *(undefined4 *)(puVar2 + 8) = uVar1;
-  *(undefined4 *)(puVar2 + 0xc) = uVar3;
-  *(undefined4 *)(puVar2 + 0x10) = uVar4;
-  *(undefined4 *)(puVar2 + 0x14) = param_2[4];
-  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 4),puVar2);
+  chunk = (undefined1 *)_LFSStreamChunkCreate();
+  *chunk = 1;
+  initWord1 = registerInit[1];
+  initWord2 = registerInit[2];
+  initWord3 = registerInit[3];
+  *(undefined4 *)(chunk + 4) = *registerInit;
+  *(undefined4 *)(chunk + 8) = initWord1;
+  *(undefined4 *)(chunk + 0xc) = initWord2;
+  *(undefined4 *)(chunk + 0x10) = initWord3;
+  *(undefined4 *)(chunk + 0x14) = registerInit[4];
+  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(stream + 4),chunk);
   return;
 }
 

@@ -54,9 +54,9 @@ local	_gleCreateColorTableLevel	iVar1	allocated	CONFIRMED	result of _gleAllocate
 local	_glMap2VertexAttrib3ARB_ListExec	iVar6	vorderThenPointCount	CONFIRMED	listRecord[2] (vorder, stored at attribMap+0x37ac), then vorder*uorder = number of control points copied
 local	_glMap2VertexAttrib3ARB_ListExec	iVar8	attribMap	CONFIRMED	mapData + attribIndex*0x660: the per-attribute 2D map record that receives uorder/vorder/u/v range and the control points
 local	_glMap2VertexAttrib3ARB_ListExec	iVar10	controlPointDest	CONFIRMED	cursor into the attribute map's control point array (attribMap+0x37a8+0x20), advanced by 0xc (3 words) per point
-local	_glMap2VertexAttrib3ARB_ListExec	piVar1	pointXPtr	CONFIRMED	address of the first of the 3 words of the current control point in the list record
-local	_glMap2VertexAttrib3ARB_ListExec	iVar5	pointYBits	CONFIRMED	second word of the current control point (float bits copied unchanged)
-local	_glMap2VertexAttrib3ARB_ListExec	iVar9	pointZBits	CONFIRMED	third word of the current control point (float bits copied unchanged)
+local	_glMap2VertexAttrib3ARB_ListExec	piVar1	pointComponent0Ptr	CONFIRMED	address of the first of the 3 words of the current control point in the list record
+local	_glMap2VertexAttrib3ARB_ListExec	iVar5	pointComponent1	CONFIRMED	second word of the current control point (float bits copied unchanged)
+local	_glMap2VertexAttrib3ARB_ListExec	iVar9	pointComponent2	CONFIRMED	third word of the current control point (float bits copied unchanged)
 local	_glDrawElements_NoopExec	bVar1	rendererInfoByte79Clear	CONFIRMED	cVar2 == 0: byte 0x79 of the renderer info (ctx+0x468c) is clear; selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
 local	_glDrawElements_NoopExec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79
 local	_glDrawElements_NoopExec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
