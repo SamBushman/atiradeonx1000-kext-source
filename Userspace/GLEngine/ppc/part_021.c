@@ -2488,10 +2488,10 @@ void _glGetPixelMapuiv_Exec(glContext, map, values)
   int iVar3;
   int byteOffset;
   undefined4 glErrorCode;
-  uint uVar5;
+  uint uintValue;
   int iVar6;
   int loopIndex;
-  double dVar7;
+  double scaledValue;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     iVar6 = *(int *)(glContext + 0x4a68);
@@ -2569,14 +2569,14 @@ void _glGetPixelMapuiv_Exec(glContext, map, values)
       if (0 < *(int *)(glContext + 0x3278)) {
         byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x324c)) * uint32MaxAsDouble;
-          if (twoPow31 <= dVar7) {
-            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
+          scaledValue = (double)*(float *)(byteOffset + *(int *)(glContext + 0x324c)) * uint32MaxAsDouble;
+          if (twoPow31 <= scaledValue) {
+            uintValue = (int)(scaledValue - twoPow31) ^ 0x80000000;
           }
           else {
-            uVar5 = (uint)(int)dVar7;
+            uintValue = (uint)(int)scaledValue;
           }
-          *(uint *)(byteOffset + values) = uVar5;
+          *(uint *)(byteOffset + values) = uintValue;
           loopIndex = loopIndex + 1;
           byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x3278));
@@ -2587,14 +2587,14 @@ void _glGetPixelMapuiv_Exec(glContext, map, values)
       if (0 < *(int *)(glContext + 0x327c)) {
         byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3250)) * uint32MaxAsDouble;
-          if (twoPow31 <= dVar7) {
-            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
+          scaledValue = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3250)) * uint32MaxAsDouble;
+          if (twoPow31 <= scaledValue) {
+            uintValue = (int)(scaledValue - twoPow31) ^ 0x80000000;
           }
           else {
-            uVar5 = (uint)(int)dVar7;
+            uintValue = (uint)(int)scaledValue;
           }
-          *(uint *)(byteOffset + values) = uVar5;
+          *(uint *)(byteOffset + values) = uintValue;
           loopIndex = loopIndex + 1;
           byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x327c));
@@ -2605,14 +2605,14 @@ void _glGetPixelMapuiv_Exec(glContext, map, values)
       if (0 < *(int *)(glContext + 0x3280)) {
         byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3254)) * uint32MaxAsDouble;
-          if (twoPow31 <= dVar7) {
-            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
+          scaledValue = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3254)) * uint32MaxAsDouble;
+          if (twoPow31 <= scaledValue) {
+            uintValue = (int)(scaledValue - twoPow31) ^ 0x80000000;
           }
           else {
-            uVar5 = (uint)(int)dVar7;
+            uintValue = (uint)(int)scaledValue;
           }
-          *(uint *)(byteOffset + values) = uVar5;
+          *(uint *)(byteOffset + values) = uintValue;
           loopIndex = loopIndex + 1;
           byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x3280));
@@ -2623,14 +2623,14 @@ void _glGetPixelMapuiv_Exec(glContext, map, values)
       if (0 < *(int *)(glContext + 0x3284)) {
         byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3258)) * uint32MaxAsDouble;
-          if (twoPow31 <= dVar7) {
-            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
+          scaledValue = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3258)) * uint32MaxAsDouble;
+          if (twoPow31 <= scaledValue) {
+            uintValue = (int)(scaledValue - twoPow31) ^ 0x80000000;
           }
           else {
-            uVar5 = (uint)(int)dVar7;
+            uintValue = (uint)(int)scaledValue;
           }
-          *(uint *)(byteOffset + values) = uVar5;
+          *(uint *)(byteOffset + values) = uintValue;
           loopIndex = loopIndex + 1;
           byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x3284));
@@ -2641,14 +2641,14 @@ void _glGetPixelMapuiv_Exec(glContext, map, values)
       if (0 < *(int *)(glContext + 0x3288)) {
         byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x325c)) * uint32MaxAsDouble;
-          if (twoPow31 <= dVar7) {
-            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
+          scaledValue = (double)*(float *)(byteOffset + *(int *)(glContext + 0x325c)) * uint32MaxAsDouble;
+          if (twoPow31 <= scaledValue) {
+            uintValue = (int)(scaledValue - twoPow31) ^ 0x80000000;
           }
           else {
-            uVar5 = (uint)(int)dVar7;
+            uintValue = (uint)(int)scaledValue;
           }
-          *(uint *)(byteOffset + values) = uVar5;
+          *(uint *)(byteOffset + values) = uintValue;
           loopIndex = loopIndex + 1;
           byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x3288));
@@ -2659,14 +2659,14 @@ void _glGetPixelMapuiv_Exec(glContext, map, values)
       if (0 < *(int *)(glContext + 0x328c)) {
         byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3260)) * uint32MaxAsDouble;
-          if (twoPow31 <= dVar7) {
-            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
+          scaledValue = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3260)) * uint32MaxAsDouble;
+          if (twoPow31 <= scaledValue) {
+            uintValue = (int)(scaledValue - twoPow31) ^ 0x80000000;
           }
           else {
-            uVar5 = (uint)(int)dVar7;
+            uintValue = (uint)(int)scaledValue;
           }
-          *(uint *)(byteOffset + values) = uVar5;
+          *(uint *)(byteOffset + values) = uintValue;
           loopIndex = loopIndex + 1;
           byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x328c));
@@ -2677,14 +2677,14 @@ void _glGetPixelMapuiv_Exec(glContext, map, values)
       if (0 < *(int *)(glContext + 0x3290)) {
         byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3264)) * uint32MaxAsDouble;
-          if (twoPow31 <= dVar7) {
-            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
+          scaledValue = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3264)) * uint32MaxAsDouble;
+          if (twoPow31 <= scaledValue) {
+            uintValue = (int)(scaledValue - twoPow31) ^ 0x80000000;
           }
           else {
-            uVar5 = (uint)(int)dVar7;
+            uintValue = (uint)(int)scaledValue;
           }
-          *(uint *)(byteOffset + values) = uVar5;
+          *(uint *)(byteOffset + values) = uintValue;
           loopIndex = loopIndex + 1;
           byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x3290));
@@ -2695,14 +2695,14 @@ void _glGetPixelMapuiv_Exec(glContext, map, values)
       if (0 < *(int *)(glContext + 0x3294)) {
         byteOffset = 0;
         do {
-          dVar7 = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3268)) * uint32MaxAsDouble;
-          if (twoPow31 <= dVar7) {
-            uVar5 = (int)(dVar7 - twoPow31) ^ 0x80000000;
+          scaledValue = (double)*(float *)(byteOffset + *(int *)(glContext + 0x3268)) * uint32MaxAsDouble;
+          if (twoPow31 <= scaledValue) {
+            uintValue = (int)(scaledValue - twoPow31) ^ 0x80000000;
           }
           else {
-            uVar5 = (uint)(int)dVar7;
+            uintValue = (uint)(int)scaledValue;
           }
-          *(uint *)(byteOffset + values) = uVar5;
+          *(uint *)(byteOffset + values) = uintValue;
           loopIndex = loopIndex + 1;
           byteOffset = byteOffset + 4;
         } while (loopIndex < *(int *)(glContext + 0x3294));

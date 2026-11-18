@@ -708,39 +708,39 @@ void _gleSelectPointsFunc(glContext)
 }
 
 /* _glePolyArea @ 0xeb1d8 (128 bytes) */
-double _glePolyArea(undefined4 unusedArg1,float *param_2,int param_3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
+double _glePolyArea(undefined4 unusedArg1,float *vertices,int vertexCount,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float *pfVar8;
-  uint uVar9;
+  float firstX;
+  float firstY;
+  float lastX;
+  float lastY;
+  float previousY;
+  float previousX;
+  float doubledArea;
+  float *vertexCursor;
+  uint iterationsLeft;
   
-  pfVar8 = param_2 + 0x40;
-  fVar1 = *param_2;
-  fVar2 = param_2[1];
-  fVar4 = fVar2;
-  fVar3 = fVar1;
-  fVar7 = FLOAT_00108e50;
-  if (pfVar8 < param_2 + param_3 * 0x40) {
-    uVar9 = (uint)((int)(param_2 + param_3 * 0x40) + (0xff - (int)pfVar8)) >> 8;
-    fVar5 = fVar2;
-    fVar6 = fVar1;
+  vertexCursor = vertices + 0x40;
+  firstX = *vertices;
+  firstY = vertices[1];
+  lastY = firstY;
+  lastX = firstX;
+  doubledArea = FLOAT_00108e50;
+  if (vertexCursor < vertices + vertexCount * 0x40) {
+    iterationsLeft = (uint)((int)(vertices + vertexCount * 0x40) + (0xff - (int)vertexCursor)) >> 8;
+    previousY = firstY;
+    previousX = firstX;
     do {
-      fVar3 = *pfVar8;
-      fVar4 = pfVar8[1];
-      pfVar8 = pfVar8 + 0x40;
-      fVar7 = fVar7 + ((fVar6 * fVar4 - fVar3 * fVar5));
-      uVar9 = uVar9 - 1;
-      fVar5 = fVar4;
-      fVar6 = fVar3;
-    } while (uVar9 != 0);
+      lastX = *vertexCursor;
+      lastY = vertexCursor[1];
+      vertexCursor = vertexCursor + 0x40;
+      doubledArea = doubledArea + ((previousX * lastY - lastX * previousY));
+      iterationsLeft = iterationsLeft - 1;
+      previousY = lastY;
+      previousX = lastX;
+    } while (iterationsLeft != 0);
   }
-  return (double)(fVar7 + ((fVar3 * fVar2 - fVar1 * fVar4)));
+  return (double)(doubledArea + ((lastX * firstY - firstX * lastY)));
 }
 
 /* _glePolyAreaPtr @ 0xeb258 (136 bytes) */

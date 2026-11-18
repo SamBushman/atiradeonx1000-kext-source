@@ -258,17 +258,19 @@ void _glEvalMesh2_Exec(int glContext,uint mode,uint i1,int i2,uint j1,int j2,dou
   double intToDoubleMagic3;
   double intToDoubleMagic2;
   double intToDoubleMagic;
-  bool bVar1;
+  bool vIndexInRange;
   float glContextPtr74c4;
   float glContextPtr74d4;
   undefined4 glErrorCode;
-  uint *puVar5;
-  uint uVar6;
-  uint uVar7;
-  double dVar8;
-  double dVar9;
-  double dVar10;
-  double dVar11;
+  uint *gridDivisionsUPtr;
+  uint lineUIndex;
+  uint vIndex;
+  uint uIndex;
+  double vCoord;
+  double pointVCoord;
+  double nextVCoord;
+  double uCoord;
+  double lineUCoord;
   double fparam_1_00;
   double incomingStack_ffffff48;
   double incomingStack_ffffff50;
@@ -277,78 +279,78 @@ void _glEvalMesh2_Exec(int glContext,uint mode,uint i1,int i2,uint j1,int j2,dou
   
   intToDoubleMagic2 = DOUBLE_00108d58;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    puVar5 = (uint *)(glContext + 0x74b8);
+    gridDivisionsUPtr = (uint *)(glContext + 0x74b8);
     glContextPtr74c4 = *(float *)(glContext + 0x74c4);
     glContextPtr74d4 = *(float *)(glContext + 0x74d4);
     if (mode == 0x1b01) {
-      bVar1 = (int)j1 <= j2;
-      uVar7 = j1;
+      vIndexInRange = (int)j1 <= j2;
+      vIndex = j1;
       intToDoubleMagic3 = DOUBLE_00108d58;
-      while (DOUBLE_00108d58 = intToDoubleMagic3, bVar1) {
-        if (uVar7 == 0) {
-          dVar8 = (double)*(float *)(glContext + 0x74cc);
+      while (DOUBLE_00108d58 = intToDoubleMagic3, vIndexInRange) {
+        if (vIndex == 0) {
+          vCoord = (double)*(float *)(glContext + 0x74cc);
         }
-        else if (uVar7 == *(uint *)(glContext + 0x74c8)) {
-          dVar8 = (double)*(float *)(glContext + 0x74d0);
+        else if (vIndex == *(uint *)(glContext + 0x74c8)) {
+          vCoord = (double)*(float *)(glContext + 0x74d0);
         }
         else {
-          dVar8 = (double)((float)((double)CONCAT44(0x43300000,uVar7 ^ 0x80000000) - intToDoubleMagic2) * glContextPtr74d4
+          vCoord = (double)((float)((double)CONCAT44(0x43300000,vIndex ^ 0x80000000) - intToDoubleMagic2) * glContextPtr74d4
                           + *(float *)(glContext + 0x74cc));
         }
         ((void (*)())_glBegin_Exec)(glContext,3,fparam_1,fparam_2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
                       forwardedFloatArg8);
         intToDoubleMagic4 = DOUBLE_00108d58;
-        for (uVar6 = i1; (int)uVar6 <= i2; uVar6 = uVar6 + 1) {
-          if (uVar6 == 0) {
-            dVar10 = (double)*(float *)(glContext + 0x74bc);
+        for (lineUIndex = i1; (int)lineUIndex <= i2; lineUIndex = lineUIndex + 1) {
+          if (lineUIndex == 0) {
+            uCoord = (double)*(float *)(glContext + 0x74bc);
           }
-          else if (uVar6 == *puVar5) {
-            dVar10 = (double)*(float *)(glContext + 0x74c0);
+          else if (lineUIndex == *gridDivisionsUPtr) {
+            uCoord = (double)*(float *)(glContext + 0x74c0);
           }
           else {
-            dVar10 = (double)((float)((double)CONCAT44(0x43300000,uVar6 ^ 0x80000000) - intToDoubleMagic4) *
+            uCoord = (double)((float)((double)CONCAT44(0x43300000,lineUIndex ^ 0x80000000) - intToDoubleMagic4) *
                               glContextPtr74c4 + *(float *)(glContext + 0x74bc));
           }
-          fparam_2 = dVar8;
-          ((void (*)())_gleEvalMap2)(glContext,dVar10,dVar8,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,
+          fparam_2 = vCoord;
+          ((void (*)())_gleEvalMap2)(glContext,uCoord,vCoord,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,
                        incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60);
         }
-        uVar7 = uVar7 + 1;
+        vIndex = vIndex + 1;
         fparam_1 = (double)_glEnd_Exec(glContext);
-        bVar1 = (int)uVar7 <= j2;
+        vIndexInRange = (int)vIndex <= j2;
         intToDoubleMagic3 = DOUBLE_00108d58;
       }
       for (; (int)i1 <= i2; i1 = i1 + 1) {
         if (i1 == 0) {
-          dVar11 = (double)*(float *)(glContext + 0x74bc);
+          lineUCoord = (double)*(float *)(glContext + 0x74bc);
         }
-        else if (i1 == *puVar5) {
-          dVar11 = (double)*(float *)(glContext + 0x74c0);
+        else if (i1 == *gridDivisionsUPtr) {
+          lineUCoord = (double)*(float *)(glContext + 0x74c0);
         }
         else {
-          dVar11 = (double)((float)((double)CONCAT44(0x43300000,i1 ^ 0x80000000) - intToDoubleMagic3) *
+          lineUCoord = (double)((float)((double)CONCAT44(0x43300000,i1 ^ 0x80000000) - intToDoubleMagic3) *
                             glContextPtr74c4 + *(float *)(glContext + 0x74bc));
         }
         ((void (*)())_glBegin_Exec)(glContext,3,fparam_1,fparam_2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
                       forwardedFloatArg8);
         intToDoubleMagic4 = DOUBLE_00108d58;
-        bVar1 = (int)j1 <= j2;
-        uVar7 = j1;
-        while (bVar1) {
-          if (uVar7 == 0) {
+        vIndexInRange = (int)j1 <= j2;
+        vIndex = j1;
+        while (vIndexInRange) {
+          if (vIndex == 0) {
             fparam_2 = (double)*(float *)(glContext + 0x74cc);
           }
-          else if (uVar7 == *(uint *)(glContext + 0x74c8)) {
+          else if (vIndex == *(uint *)(glContext + 0x74c8)) {
             fparam_2 = (double)*(float *)(glContext + 0x74d0);
           }
           else {
-            fparam_2 = (double)((float)((double)CONCAT44(0x43300000,uVar7 ^ 0x80000000) - intToDoubleMagic4) *
+            fparam_2 = (double)((float)((double)CONCAT44(0x43300000,vIndex ^ 0x80000000) - intToDoubleMagic4) *
                                 glContextPtr74d4 + *(float *)(glContext + 0x74cc));
           }
-          uVar7 = uVar7 + 1;
-          ((void (*)())_gleEvalMap2)(glContext,dVar11,fparam_2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8
+          vIndex = vIndex + 1;
+          ((void (*)())_gleEvalMap2)(glContext,lineUCoord,fparam_2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8
                        ,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60);
-          bVar1 = (int)uVar7 <= j2;
+          vIndexInRange = (int)vIndex <= j2;
         }
         fparam_1 = (double)_glEnd_Exec(glContext);
       }
@@ -361,29 +363,29 @@ void _glEvalMesh2_Exec(int glContext,uint mode,uint i1,int i2,uint j1,int j2,dou
         intToDoubleMagic3 = DOUBLE_00108d58;
         intToDoubleMagic2 = DOUBLE_00108d58;
         for (; DOUBLE_00108d58 = intToDoubleMagic2, (int)j1 <= j2; j1 = j1 + 1) {
-          uVar7 = i1;
+          uIndex = i1;
           if (j1 == 0) {
-            dVar9 = (double)*(float *)(glContext + 0x74cc);
+            pointVCoord = (double)*(float *)(glContext + 0x74cc);
           }
           else if (j1 == *(uint *)(glContext + 0x74c8)) {
-            dVar9 = (double)*(float *)(glContext + 0x74d0);
+            pointVCoord = (double)*(float *)(glContext + 0x74d0);
           }
           else {
-            dVar9 = (double)((float)((double)CONCAT44(0x43300000,j1 ^ 0x80000000) - intToDoubleMagic3) *
+            pointVCoord = (double)((float)((double)CONCAT44(0x43300000,j1 ^ 0x80000000) - intToDoubleMagic3) *
                              glContextPtr74d4 + *(float *)(glContext + 0x74cc));
           }
-          for (; (int)uVar7 <= i2; uVar7 = uVar7 + 1) {
-            if (uVar7 == 0) {
-              dVar10 = (double)*(float *)(glContext + 0x74bc);
+          for (; (int)uIndex <= i2; uIndex = uIndex + 1) {
+            if (uIndex == 0) {
+              uCoord = (double)*(float *)(glContext + 0x74bc);
             }
-            else if (uVar7 == *puVar5) {
-              dVar10 = (double)*(float *)(glContext + 0x74c0);
+            else if (uIndex == *gridDivisionsUPtr) {
+              uCoord = (double)*(float *)(glContext + 0x74c0);
             }
             else {
-              dVar10 = (double)((float)((double)CONCAT44(0x43300000,uVar7 ^ 0x80000000) - intToDoubleMagic2) *
+              uCoord = (double)((float)((double)CONCAT44(0x43300000,uIndex ^ 0x80000000) - intToDoubleMagic2) *
                                 glContextPtr74c4 + *(float *)(glContext + 0x74bc));
             }
-            ((void (*)())_gleEvalMap2)(glContext,dVar10,dVar9,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,
+            ((void (*)())_gleEvalMap2)(glContext,uCoord,pointVCoord,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,
                          incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,incomingStack_ffffff60);
           }
           intToDoubleMagic2 = DOUBLE_00108d58;
@@ -395,48 +397,48 @@ void _glEvalMesh2_Exec(int glContext,uint mode,uint i1,int i2,uint j1,int j2,dou
     else if (mode == 0x1b02) {
       while ((int)j1 < j2) {
         if (j1 == 0) {
-          dVar8 = (double)*(float *)(glContext + 0x74cc);
+          vCoord = (double)*(float *)(glContext + 0x74cc);
         }
         else if (j1 == *(uint *)(glContext + 0x74c8)) {
-          dVar8 = (double)*(float *)(glContext + 0x74d0);
+          vCoord = (double)*(float *)(glContext + 0x74d0);
         }
         else {
-          dVar8 = (double)((float)((double)CONCAT44(0x43300000,j1 ^ 0x80000000) - intToDoubleMagic2) *
+          vCoord = (double)((float)((double)CONCAT44(0x43300000,j1 ^ 0x80000000) - intToDoubleMagic2) *
                            glContextPtr74d4 + *(float *)(glContext + 0x74cc));
         }
         if (j1 == 0xffffffff) {
-          dVar9 = (double)*(float *)(glContext + 0x74cc);
+          nextVCoord = (double)*(float *)(glContext + 0x74cc);
           j1 = 0;
         }
         else {
           j1 = j1 + 1;
           if (j1 == *(uint *)(glContext + 0x74c8)) {
-            dVar9 = (double)*(float *)(glContext + 0x74d0);
+            nextVCoord = (double)*(float *)(glContext + 0x74d0);
           }
           else {
-            dVar9 = (double)((float)((double)CONCAT44(0x43300000,j1 ^ 0x80000000) - intToDoubleMagic2) *
+            nextVCoord = (double)((float)((double)CONCAT44(0x43300000,j1 ^ 0x80000000) - intToDoubleMagic2) *
                              glContextPtr74d4 + *(float *)(glContext + 0x74cc));
           }
         }
         ((void (*)())_glBegin_Exec)(glContext,5,fparam_1,fparam_2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
                       forwardedFloatArg8);
         intToDoubleMagic = DOUBLE_00108d58;
-        for (uVar7 = i1; (int)uVar7 <= i2; uVar7 = uVar7 + 1) {
-          if (uVar7 == 0) {
+        for (uIndex = i1; (int)uIndex <= i2; uIndex = uIndex + 1) {
+          if (uIndex == 0) {
             fparam_1_00 = (double)*(float *)(glContext + 0x74bc);
           }
-          else if (uVar7 == *puVar5) {
+          else if (uIndex == *gridDivisionsUPtr) {
             fparam_1_00 = (double)*(float *)(glContext + 0x74c0);
           }
           else {
-            fparam_1_00 = (double)((float)((double)CONCAT44(0x43300000,uVar7 ^ 0x80000000) - intToDoubleMagic)
+            fparam_1_00 = (double)((float)((double)CONCAT44(0x43300000,uIndex ^ 0x80000000) - intToDoubleMagic)
                                    * glContextPtr74c4 + *(float *)(glContext + 0x74bc));
           }
-          ((void (*)())_gleEvalMap2)(glContext,fparam_1_00,dVar8,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
+          ((void (*)())_gleEvalMap2)(glContext,fparam_1_00,vCoord,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
                        forwardedFloatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,
                        incomingStack_ffffff60);
-          fparam_2 = dVar9;
-          ((void (*)())_gleEvalMap2)(glContext,fparam_1_00,dVar9,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
+          fparam_2 = nextVCoord;
+          ((void (*)())_gleEvalMap2)(glContext,fparam_1_00,nextVCoord,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
                        forwardedFloatArg8,incomingStack_ffffff48,incomingStack_ffffff50,incomingStack_ffffff58,
                        incomingStack_ffffff60);
         }

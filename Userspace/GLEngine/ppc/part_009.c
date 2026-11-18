@@ -577,7 +577,7 @@ void _gleFlushPrimitiveTCLFunc(glContext)
   int loopIndex3;
   int loopIndex2;
   int loopIndex;
-  int iVar1;
+  int carryOffset;
   int glContextWord4858;
   int glContextPtr4868;
   int iVar2;
@@ -586,9 +586,9 @@ void _gleFlushPrimitiveTCLFunc(glContext)
   int iVar4;
   int glContextWord48582;
   int iVar5;
-  uint uVar6;
-  undefined8 local_220 [64];
-  int local_20 [5];
+  uint qwordsLeft;
+  undefined8 carriedVertices [64];
+  int bufferVertexCount [5];
   
   iVar5 = (int)*(short *)(glContext + 0x487c);
   switch(*(undefined2 *)(glContext + 0x4a10)) {
@@ -598,12 +598,12 @@ void _gleFlushPrimitiveTCLFunc(glContext)
       glContextPtr4854 = *(int *)(glContext + 0x4854);
       glContextPtr4868 = *(int *)(glContext + 0x4868);
       if (0 < iVar5) {
-        uVar6 = iVar5 + 7U >> 3;
+        qwordsLeft = iVar5 + 7U >> 3;
         do {
           *(undefined8 *)(glContextPtr4854 + -0x100 + loopIndex8) = *(undefined8 *)(glContextPtr4868 + loopIndex8);
           loopIndex8 = loopIndex8 + 8;
-          uVar6 = uVar6 - 1;
-        } while (uVar6 != 0);
+          qwordsLeft = qwordsLeft - 1;
+        } while (qwordsLeft != 0);
       }
     }
   case 3:
@@ -611,12 +611,12 @@ void _gleFlushPrimitiveTCLFunc(glContext)
     glContextWord4858 = *(int *)(glContext + 0x4858);
     *(undefined1 *)(glContext + 0x4a18) = 1;
     if (0 < iVar5) {
-      uVar6 = iVar5 + 7U >> 3;
+      qwordsLeft = iVar5 + 7U >> 3;
       do {
-        *(undefined8 *)((int)local_220 + loopIndex3) = *(undefined8 *)((glContextWord4858 - iVar5) + loopIndex3);
+        *(undefined8 *)((int)carriedVertices + loopIndex3) = *(undefined8 *)((glContextWord4858 - iVar5) + loopIndex3);
         loopIndex3 = loopIndex3 + 8;
-        uVar6 = uVar6 - 1;
-      } while (uVar6 != 0);
+        qwordsLeft = qwordsLeft - 1;
+      } while (qwordsLeft != 0);
     }
     break;
   case 5:
@@ -624,15 +624,15 @@ void _gleFlushPrimitiveTCLFunc(glContext)
     iVar2 = iVar5 * 2;
     loopIndex9 = 0;
     glContextPtr4858 = *(int *)(glContext + 0x4858);
-    iVar1 = iVar5 * -2;
+    carryOffset = iVar5 * -2;
     iVar5 = iVar2;
     if (0 < iVar2) {
-      uVar6 = iVar2 + 7U >> 3;
+      qwordsLeft = iVar2 + 7U >> 3;
       do {
-        *(undefined8 *)((int)local_220 + loopIndex9) = *(undefined8 *)(glContextPtr4858 + iVar1 + loopIndex9);
+        *(undefined8 *)((int)carriedVertices + loopIndex9) = *(undefined8 *)(glContextPtr4858 + carryOffset + loopIndex9);
         loopIndex9 = loopIndex9 + 8;
-        uVar6 = uVar6 - 1;
-      } while (uVar6 != 0);
+        qwordsLeft = qwordsLeft - 1;
+      } while (qwordsLeft != 0);
     }
     break;
   case 6:
@@ -641,18 +641,18 @@ void _gleFlushPrimitiveTCLFunc(glContext)
     glContextPtr4868 = *(int *)(glContext + 0x4868);
     if (0 < iVar5) {
       do {
-        *(undefined8 *)((int)local_220 + loopIndex4) = *(undefined8 *)(glContextPtr4868 + loopIndex4);
+        *(undefined8 *)((int)carriedVertices + loopIndex4) = *(undefined8 *)(glContextPtr4868 + loopIndex4);
         loopIndex4 = loopIndex4 + 8;
       } while (loopIndex4 < iVar5);
     }
     loopIndex5 = 0;
     if (0 < iVar5) {
-      uVar6 = iVar5 + 7U >> 3;
+      qwordsLeft = iVar5 + 7U >> 3;
       do {
-        *(undefined8 *)((int)local_220 + loopIndex5 + iVar5) = *(undefined8 *)((glContextWord48582 - iVar5) + loopIndex5);
+        *(undefined8 *)((int)carriedVertices + loopIndex5 + iVar5) = *(undefined8 *)((glContextWord48582 - iVar5) + loopIndex5);
         loopIndex5 = loopIndex5 + 8;
-        uVar6 = uVar6 - 1;
-      } while (uVar6 != 0);
+        qwordsLeft = qwordsLeft - 1;
+      } while (qwordsLeft != 0);
     }
     break;
   case 9:
@@ -661,30 +661,30 @@ void _gleFlushPrimitiveTCLFunc(glContext)
     glContextPtr4868 = *(int *)(glContext + 0x4868);
     if (0 < iVar5) {
       do {
-        *(undefined8 *)((int)local_220 + loopIndex6) = *(undefined8 *)(glContextPtr4868 + loopIndex6);
+        *(undefined8 *)((int)carriedVertices + loopIndex6) = *(undefined8 *)(glContextPtr4868 + loopIndex6);
         loopIndex6 = loopIndex6 + 8;
       } while (loopIndex6 < iVar5);
     }
     loopIndex7 = 0;
     iVar4 = iVar4 - iVar5;
     if (0 < iVar5) {
-      uVar6 = iVar5 + 7U >> 3;
+      qwordsLeft = iVar5 + 7U >> 3;
       do {
-        *(undefined8 *)((int)local_220 + loopIndex7 + iVar5) = *(undefined8 *)(iVar4 + loopIndex7);
+        *(undefined8 *)((int)carriedVertices + loopIndex7 + iVar5) = *(undefined8 *)(iVar4 + loopIndex7);
         loopIndex7 = loopIndex7 + 8;
-        uVar6 = uVar6 - 1;
-      } while (uVar6 != 0);
+        qwordsLeft = qwordsLeft - 1;
+      } while (qwordsLeft != 0);
     }
     if ((*(short *)(glContext + 0x34d2) == 0x1b01) || (*(short *)(glContext + 0x34d0) == 0x1b01)) {
       *(undefined1 *)(iVar4 + *(short *)(glContext + 0x487e)) = 0;
     }
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  local_20[0] = *(int *)(glContext + 0x4a14);
+  bufferVertexCount[0] = *(int *)(glContext + 0x4a14);
   iVar2 = (**(code **)(glContext + 0x46e8))
-                    (*(undefined4 *)(glContext + 0x4688),(int)*(short *)(glContext + 0x4a10),local_20);
+                    (*(undefined4 *)(glContext + 0x4688),(int)*(short *)(glContext + 0x4a10),bufferVertexCount);
   *(int *)(glContext + 0x4868) = iVar2;
-  *(int *)(glContext + 0x485c) = iVar2 + *(short *)(glContext + 0x487c) * local_20[0];
+  *(int *)(glContext + 0x485c) = iVar2 + *(short *)(glContext + 0x487c) * bufferVertexCount[0];
   switch(*(undefined2 *)(glContext + 0x4a10)) {
   default:
     goto switchD_00056410_caseD_0;
@@ -692,17 +692,17 @@ void _gleFlushPrimitiveTCLFunc(glContext)
   case 3:
     loopIndex = 0;
     if (0 < iVar5) {
-      uVar6 = iVar5 + 7U >> 3;
+      qwordsLeft = iVar5 + 7U >> 3;
       do {
-        *(undefined8 *)(iVar2 + loopIndex) = *(undefined8 *)((int)local_220 + loopIndex);
+        *(undefined8 *)(iVar2 + loopIndex) = *(undefined8 *)((int)carriedVertices + loopIndex);
         loopIndex = loopIndex + 8;
-        uVar6 = uVar6 - 1;
-      } while (uVar6 != 0);
+        qwordsLeft = qwordsLeft - 1;
+      } while (qwordsLeft != 0);
     }
     break;
   case 9:
     if ((*(short *)(glContext + 0x34d2) == 0x1b01) || (*(short *)(glContext + 0x34d0) == 0x1b01)) {
-      *(undefined1 *)((int)local_220 + (int)*(short *)(glContext + 0x487e)) = 0;
+      *(undefined1 *)((int)carriedVertices + (int)*(short *)(glContext + 0x487e)) = 0;
     }
   case 6:
     iVar5 = iVar5 << 1;
@@ -710,12 +710,12 @@ void _gleFlushPrimitiveTCLFunc(glContext)
   case 8:
     loopIndex2 = 0;
     if (0 < iVar5) {
-      uVar6 = iVar5 + 7U >> 3;
+      qwordsLeft = iVar5 + 7U >> 3;
       do {
-        *(undefined8 *)(iVar2 + loopIndex2) = *(undefined8 *)((int)local_220 + loopIndex2);
+        *(undefined8 *)(iVar2 + loopIndex2) = *(undefined8 *)((int)carriedVertices + loopIndex2);
         loopIndex2 = loopIndex2 + 8;
-        uVar6 = uVar6 - 1;
-      } while (uVar6 != 0);
+        qwordsLeft = qwordsLeft - 1;
+      } while (qwordsLeft != 0);
     }
   }
   iVar2 = iVar2 + iVar5;

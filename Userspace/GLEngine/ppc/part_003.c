@@ -612,25 +612,25 @@ LAB_0001fc50:
 }
 
 /* _gleTestObject @ 0x1fc84 (760 bytes) */
-int _gleTestObject(glContext, param_2, name)
+int _gleTestObject(glContext, objectType, name)
   int glContext;
-  undefined4 param_2;
+  undefined4 objectType;
   undefined4 name;
 {
   uint loopIndex5;
   uint loopIndex4;
   uint loopIndex3;
   uint loopIndex2;
-  bool bVar1;
+  bool stillValid;
   int iVar2;
-  int iVar3;
-  int iVar4;
+  int rendererBase;
+  int allValid;
   undefined4 *srcCursor;
   uint loopIndex;
   
-  iVar4 = 1;
+  allValid = 1;
   iVar2 = 1;
-  switch(param_2) {
+  switch(objectType) {
   case 0:
     iVar2 = _gleLookupHashObject(glContext + 0x543c,name);
     if (iVar2 == 0) {
@@ -640,20 +640,20 @@ LAB_0001ff68:
       }
     }
     else {
-      iVar3 = glContext + 0x10000;
+      rendererBase = glContext + 0x10000;
       loopIndex = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
         srcCursor = (undefined4 *)(iVar2 + 0x10);
         do {
-          bVar1 = iVar4 != 0;
-          iVar4 = 0;
-          if ((bVar1) &&
-             (iVar2 = (**(code **)(*(int *)(iVar3 + -0x777c) + 0x1c0))
-                                (*(undefined4 *)(iVar3 + -0x7a54),param_2,*srcCursor), iVar2 != 0)) {
-            iVar4 = 1;
+          stillValid = allValid != 0;
+          allValid = 0;
+          if ((stillValid) &&
+             (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
+                                (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
+            allValid = 1;
           }
           loopIndex = loopIndex + 1;
-          iVar3 = iVar3 + 0x2e0;
+          rendererBase = rendererBase + 0x2e0;
           srcCursor = srcCursor + 1;
         } while (loopIndex < *(byte *)(glContext + 0x85a4));
       }
@@ -662,20 +662,20 @@ LAB_0001ff68:
   case 1:
     iVar2 = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,name);
     if (iVar2 == 0) goto LAB_0001ff68;
-    iVar3 = glContext + 0x10000;
+    rendererBase = glContext + 0x10000;
     loopIndex2 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
       srcCursor = (undefined4 *)(iVar2 + 0x10);
       do {
-        bVar1 = iVar4 != 0;
-        iVar4 = 0;
-        if ((bVar1) &&
-           (iVar2 = (**(code **)(*(int *)(iVar3 + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(iVar3 + -0x7a54),param_2,*srcCursor), iVar2 != 0)) {
-          iVar4 = 1;
+        stillValid = allValid != 0;
+        allValid = 0;
+        if ((stillValid) &&
+           (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
+                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
+          allValid = 1;
         }
         loopIndex2 = loopIndex2 + 1;
-        iVar3 = iVar3 + 0x2e0;
+        rendererBase = rendererBase + 0x2e0;
         srcCursor = srcCursor + 1;
       } while (loopIndex2 < *(byte *)(glContext + 0x85a4));
     }
@@ -683,20 +683,20 @@ LAB_0001ff68:
   case 2:
     iVar2 = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x5014,name);
     if (iVar2 == 0) goto LAB_0001ff68;
-    iVar3 = glContext + 0x10000;
+    rendererBase = glContext + 0x10000;
     loopIndex3 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
       srcCursor = (undefined4 *)(iVar2 + 0x10);
       do {
-        bVar1 = iVar4 != 0;
-        iVar4 = 0;
-        if ((bVar1) &&
-           (iVar2 = (**(code **)(*(int *)(iVar3 + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(iVar3 + -0x7a54),param_2,*srcCursor), iVar2 != 0)) {
-          iVar4 = 1;
+        stillValid = allValid != 0;
+        allValid = 0;
+        if ((stillValid) &&
+           (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
+                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
+          allValid = 1;
         }
         loopIndex3 = loopIndex3 + 1;
-        iVar3 = iVar3 + 0x2e0;
+        rendererBase = rendererBase + 0x2e0;
         srcCursor = srcCursor + 1;
       } while (loopIndex3 < *(byte *)(glContext + 0x85a4));
     }
@@ -704,20 +704,20 @@ LAB_0001ff68:
   case 3:
     iVar2 = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x701c,name);
     if (iVar2 == 0) goto LAB_0001ff68;
-    iVar3 = glContext + 0x10000;
+    rendererBase = glContext + 0x10000;
     loopIndex4 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
       srcCursor = (undefined4 *)(iVar2 + 0x10);
       do {
-        bVar1 = iVar4 != 0;
-        iVar4 = 0;
-        if ((bVar1) &&
-           (iVar2 = (**(code **)(*(int *)(iVar3 + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(iVar3 + -0x7a54),param_2,*srcCursor), iVar2 != 0)) {
-          iVar4 = 1;
+        stillValid = allValid != 0;
+        allValid = 0;
+        if ((stillValid) &&
+           (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
+                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
+          allValid = 1;
         }
         loopIndex4 = loopIndex4 + 1;
-        iVar3 = iVar3 + 0x2e0;
+        rendererBase = rendererBase + 0x2e0;
         srcCursor = srcCursor + 1;
       } while (loopIndex4 < *(byte *)(glContext + 0x85a4));
     }
@@ -725,20 +725,20 @@ LAB_0001ff68:
   case 4:
     iVar2 = _gleLookupHashObject(((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148),name);
     if (iVar2 == 0) goto LAB_0001ff68;
-    iVar3 = glContext + 0x10000;
+    rendererBase = glContext + 0x10000;
     loopIndex5 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
       srcCursor = (undefined4 *)(iVar2 + 0x10);
       do {
-        bVar1 = iVar4 != 0;
-        iVar4 = 0;
-        if ((bVar1) &&
-           (iVar2 = (**(code **)(*(int *)(iVar3 + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(iVar3 + -0x7a54),param_2,*srcCursor), iVar2 != 0)) {
-          iVar4 = 1;
+        stillValid = allValid != 0;
+        allValid = 0;
+        if ((stillValid) &&
+           (iVar2 = (**(code **)(*(int *)(rendererBase + -0x777c) + 0x1c0))
+                              (*(undefined4 *)(rendererBase + -0x7a54),objectType,*srcCursor), iVar2 != 0)) {
+          allValid = 1;
         }
         loopIndex5 = loopIndex5 + 1;
-        iVar3 = iVar3 + 0x2e0;
+        rendererBase = rendererBase + 0x2e0;
         srcCursor = srcCursor + 1;
       } while (loopIndex5 < *(byte *)(glContext + 0x85a4));
     }
@@ -748,7 +748,7 @@ LAB_0001ff68:
   default:
     goto switchD_0001fcd0_default;
   }
-  iVar2 = iVar4;
+  iVar2 = allValid;
 switchD_0001fcd0_default:
   return iVar2;
 }
@@ -1129,6 +1129,7 @@ int _gliSetInteger(glContext, stateId, valuePtr)
   int checkedTextureObject;
   int mipmapSource;
   int iVar7;
+  int width;
   undefined1 uVar8;
   int iVar9;
   int firstPluginError;
@@ -1140,11 +1141,13 @@ int _gliSetInteger(glContext, stateId, valuePtr)
   int level;
   int faceCount;
   int surfaceHandle2;
-  int iVar12;
+  int depth;
+  int textureLevel;
   int iVar13;
+  int internalformat;
   uint targetThenFace;
   int levelRecord2;
-  int iVar16;
+  int height;
   
   firstPluginError = 0;
   if ((glContext == 0) || (*(int *)(glContext + 0x467c) != 0x3463a223)) {
@@ -1302,20 +1305,20 @@ LAB_00020f04:
       iVar9 = valuePtr[7];
       surfaceHandle = *valuePtr;
       level = valuePtr[2];
-      iVar13 = valuePtr[3];
-      iVar7 = valuePtr[4];
-      iVar16 = valuePtr[5];
-      iVar12 = valuePtr[6];
+      internalformat = valuePtr[3];
+      width = valuePtr[4];
+      height = valuePtr[5];
+      depth = valuePtr[6];
       if (targetThenFace == 0xde1) {
 LAB_00020a7c:
         checkedTextureObject = _gleCheckTexImage2DArgs
-                          (glContext,targetThenFace,level,iVar13,iVar7,iVar16,iVar9,0x80e1,0x1401);
+                          (glContext,targetThenFace,level,internalformat,width,height,iVar9,0x80e1,0x1401);
       }
       else if (targetThenFace < 0xde2) {
         if (targetThenFace != 0xde0) {
           return 0x2717;
         }
-        checkedTextureObject = _gleCheckTexImage1DArgs(glContext,0xde0,level,iVar13,iVar7,iVar9,0x80e1,0x1401);
+        checkedTextureObject = _gleCheckTexImage1DArgs(glContext,0xde0,level,internalformat,width,iVar9,0x80e1,0x1401);
       }
       else {
         if (targetThenFace != 0x806f) {
@@ -1324,7 +1327,7 @@ LAB_00020a7c:
           }
           goto LAB_00020a7c;
         }
-        checkedTextureObject = ((int (*)())_gleCheckTexImage3DArgs)(glContext,0x806f,level,iVar13,iVar7,iVar16,iVar12,iVar9,0x80e1,0x1401);
+        checkedTextureObject = ((int (*)())_gleCheckTexImage3DArgs)(glContext,0x806f,level,internalformat,width,height,depth,iVar9,0x80e1,0x1401);
       }
       if (checkedTextureObject == 0) {
         return 0;
@@ -1364,8 +1367,8 @@ LAB_00020c88:
         }
         *(byte *)(levelBase + 0xcf) = *(byte *)(levelBase + 0xcf) & 0xdf;
       }
-      _gleCreateGlobalLevel(glContext,levelRecord2,iVar7,iVar16,iVar12,iVar9);
-      _gleCreatePluginTextureLevel(glContext,checkedTextureObject,levelRecord2,targetThenFace,level,iVar13);
+      _gleCreateGlobalLevel(glContext,levelRecord2,width,height,depth,iVar9);
+      _gleCreatePluginTextureLevel(glContext,checkedTextureObject,levelRecord2,targetThenFace,level,internalformat);
     }
     else {
       if (stateId == 0x3e1) {
@@ -1468,11 +1471,11 @@ joined_r0x00020e50:
         goto LAB_00020f04;
       }
       iVar9 = valuePtr[1];
-      iVar13 = valuePtr[2];
-      iVar7 = valuePtr[3];
-      iVar16 = valuePtr[4];
+      internalformat = valuePtr[2];
+      width = valuePtr[3];
+      height = valuePtr[4];
       surfaceHandle2 = *valuePtr;
-      textureObject = _gleCheckTexImage2DArgs(glContext,iVar9,0,iVar13,iVar7,iVar16,0,0x80e1,0x8367);
+      textureObject = _gleCheckTexImage2DArgs(glContext,iVar9,0,internalformat,width,height,0,0x80e1,0x8367);
       if (textureObject == 0) {
         return 0;
       }
@@ -1497,37 +1500,37 @@ joined_r0x00020e50:
       }
       loopIndex2 = 0;
       if (faceCount != 0) {
-        iVar12 = textureObject + 0xc4;
+        textureLevel = textureObject + 0xc4;
         do {
-          if ((*(byte *)(iVar12 + 0xb) & 0x20) != 0) {
-            _gleDeletePluginTextureLevel(glContext,textureObject,iVar12,0,0);
-            if (*(int *)(iVar12 + 0x14) != 0) {
-              levelFlagByte = *(byte *)(iVar12 + 0xb);
+          if ((*(byte *)(textureLevel + 0xb) & 0x20) != 0) {
+            _gleDeletePluginTextureLevel(glContext,textureObject,textureLevel,0,0);
+            if (*(int *)(textureLevel + 0x14) != 0) {
+              levelFlagByte = *(byte *)(textureLevel + 0xb);
               if ((levelFlagByte & 1) == 0) {
-                _gleFreeTextureLevel(glContext,textureObject,iVar12);
-                levelFlagByte = *(byte *)(iVar12 + 0xb);
+                _gleFreeTextureLevel(glContext,textureObject,textureLevel);
+                levelFlagByte = *(byte *)(textureLevel + 0xb);
               }
               else {
-                *(undefined4 *)(iVar12 + 0x14) = 0;
+                *(undefined4 *)(textureLevel + 0x14) = 0;
               }
-              *(byte *)(iVar12 + 0xb) = levelFlagByte & 0xef;
+              *(byte *)(textureLevel + 0xb) = levelFlagByte & 0xef;
             }
-            *(byte *)(iVar12 + 0xb) = *(byte *)(iVar12 + 0xb) & 0xdf;
+            *(byte *)(textureLevel + 0xb) = *(byte *)(textureLevel + 0xb) & 0xdf;
           }
-          ((int (*)())_gleCreateSurfaceLevel)(glContext,iVar12,iVar7,iVar16,0,0);
+          ((int (*)())_gleCreateSurfaceLevel)(glContext,textureLevel,width,height,0,0);
           if (stateId != 0x3e5) {
             mipmapSource = 0;
           }
           else {
             mipmapSource = valuePtr[7];
           }
-          baseFormat = _gleReqToBase(iVar13);
-          _gleCreatePluginTextureLevel(glContext,textureObject,iVar12,loopIndex2,0,baseFormat);
+          baseFormat = _gleReqToBase(internalformat);
+          _gleCreatePluginTextureLevel(glContext,textureObject,textureLevel,loopIndex2,0,baseFormat);
           if (mipmapSource != 0) {
             _gleGenSurfaceMipmaps(glContext,textureObject,loopIndex2,mipmapSource,*(uint *)(textureObject + 0x6c) >> 0xf & 1);
           }
           loopIndex2 = loopIndex2 + 1;
-          iVar12 = iVar12 + 0x168;
+          textureLevel = textureLevel + 0x168;
         } while (loopIndex2 < faceCount);
       }
     }
@@ -3584,66 +3587,66 @@ int _glePPPruneAttribs(param_1)
   int param_1;
 {
   uint loopIndex;
-  int iVar1;
-  undefined4 uVar2;
-  uint uVar3;
+  int bindingEqual;
+  undefined4 statusCode;
+  uint instructionHeader;
   int iVar4;
-  int *piVar5;
-  int *piVar6;
-  int iVar7;
+  int *instructionList;
+  int *attribList;
+  int attribChunk;
   
-  piVar6 = *(int **)(*(int *)(param_1 + 0x1c) + 0x18);
-  piVar5 = *(int **)(*(int *)(param_1 + 0x1c) + 0x20);
+  attribList = *(int **)(*(int *)(param_1 + 0x1c) + 0x18);
+  instructionList = *(int **)(*(int *)(param_1 + 0x1c) + 0x20);
   iVar4 = 0;
-  iVar7 = *piVar6;
-  if (*piVar6 != 0) {
+  attribChunk = *attribList;
+  if (*attribList != 0) {
     do {
-      if (((*(byte *)(param_1 + 0x442) & 1) == 0) || (iVar7 != *piVar6)) {
-        for (iVar4 = *piVar5; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
+      if (((*(byte *)(param_1 + 0x442) & 1) == 0) || (attribChunk != *attribList)) {
+        for (iVar4 = *instructionList; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
           if ((((((*(uint *)(iVar4 + 0xc) >> 0x1d != 0) &&
                  ((*(uint *)(iVar4 + 0xc) >> 0x12 & 0xff) != 0x4a)) &&
                 ((*(uint *)(iVar4 + 0x1c) & 0x3800000) == 0)) &&
-               (*(short *)(iVar4 + 0x22) == *(short *)(iVar7 + 0x12))) ||
-              (((uVar3 = *(uint *)(iVar4 + 0xc), 1 < uVar3 >> 0x1d &&
-                (3 < (uVar3 >> 0x12 & 0xff) - 0x41)) &&
+               (*(short *)(iVar4 + 0x22) == *(short *)(attribChunk + 0x12))) ||
+              (((instructionHeader = *(uint *)(iVar4 + 0xc), 1 < instructionHeader >> 0x1d &&
+                (3 < (instructionHeader >> 0x12 & 0xff) - 0x41)) &&
                (((*(uint *)(iVar4 + 0x24) & 0x3800000) == 0 &&
-                (*(short *)(iVar4 + 0x2a) == *(short *)(iVar7 + 0x12))))))) ||
-             (((2 < uVar3 >> 0x1d && ((*(uint *)(iVar4 + 0x2c) & 0x3800000) == 0)) &&
-              (*(short *)(iVar4 + 0x32) == *(short *)(iVar7 + 0x12))))) {
-            iVar4 = *piVar6;
+                (*(short *)(iVar4 + 0x2a) == *(short *)(attribChunk + 0x12))))))) ||
+             (((2 < instructionHeader >> 0x1d && ((*(uint *)(iVar4 + 0x2c) & 0x3800000) == 0)) &&
+              (*(short *)(iVar4 + 0x32) == *(short *)(attribChunk + 0x12))))) {
+            iVar4 = *attribList;
             goto joined_r0x0002431c;
           }
         }
 LAB_0002435c:
-        iVar4 = *(int *)(iVar7 + 8);
-        _PPStreamChunkListRemoveChunk(piVar6,iVar7);
+        iVar4 = *(int *)(attribChunk + 8);
+        _PPStreamChunkListRemoveChunk(attribList,attribChunk);
       }
       else {
 LAB_00024370:
-        iVar4 = *(int *)(iVar7 + 8);
+        iVar4 = *(int *)(attribChunk + 8);
       }
-      iVar7 = iVar4;
+      attribChunk = iVar4;
     } while (iVar4 != 0);
-    iVar4 = *piVar6;
+    iVar4 = *attribList;
   }
   loopIndex = 0;
   for (; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
     if (loopIndex != *(ushort *)(iVar4 + 0x12)) {
-      _glePPRelocateAttrib((uint)*(ushort *)(iVar4 + 0x12),loopIndex,piVar5);
+      _glePPRelocateAttrib((uint)*(ushort *)(iVar4 + 0x12),loopIndex,instructionList);
       *(short *)(iVar4 + 0x12) = (short)loopIndex;
     }
     loopIndex = loopIndex + 1;
   }
-  uVar2 = 0x35;
-  if ((uint)piVar6[2] <= *(uint *)(param_1 + 0x468)) {
-    uVar2 = 0;
+  statusCode = 0x35;
+  if ((uint)attribList[2] <= *(uint *)(param_1 + 0x468)) {
+    statusCode = 0;
   }
-  return uVar2;
+  return statusCode;
 joined_r0x0002431c:
-  if (iVar4 == iVar7) goto LAB_00024370;
-  iVar1 = _PPStreamAttribBindingIsEqual(iVar7 + 0xc,iVar4 + 0xc);
-  if (iVar1 != 0) {
-    _glePPRelocateAttrib((uint)*(ushort *)(iVar7 + 0x12),(uint)*(ushort *)(iVar4 + 0x12),piVar5);
+  if (iVar4 == attribChunk) goto LAB_00024370;
+  bindingEqual = _PPStreamAttribBindingIsEqual(attribChunk + 0xc,iVar4 + 0xc);
+  if (bindingEqual != 0) {
+    _glePPRelocateAttrib((uint)*(ushort *)(attribChunk + 0x12),(uint)*(ushort *)(iVar4 + 0x12),instructionList);
     goto LAB_0002435c;
   }
   iVar4 = *(int *)(iVar4 + 8);
@@ -3654,59 +3657,59 @@ joined_r0x0002431c:
 int _glePPPruneOutputs(param_1)
   int param_1;
 {
-  int iVar1;
+  int bindingEqual;
   int iVar2;
-  int *piVar3;
-  int *piVar4;
+  int *instructionList;
+  int *outputList;
   uint loopIndex;
-  int iVar6;
+  int outputChunk;
   
-  piVar4 = *(int **)(*(int *)(param_1 + 0x1c) + 0x1c);
-  piVar3 = *(int **)(*(int *)(param_1 + 0x1c) + 0x20);
+  outputList = *(int **)(*(int *)(param_1 + 0x1c) + 0x1c);
+  instructionList = *(int **)(*(int *)(param_1 + 0x1c) + 0x20);
   iVar2 = 0;
-  iVar6 = *piVar4;
-  if (*piVar4 != 0) {
+  outputChunk = *outputList;
+  if (*outputList != 0) {
 LAB_00024424:
-    for (iVar2 = *piVar3; iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
+    for (iVar2 = *instructionList; iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
       if ((((*(uint *)(iVar2 + 0xc) >> 0x12 & 0xff) < 0x4b) &&
           ((*(uint *)(iVar2 + 0x14) >> 0x11 & 7) == 3)) &&
-         (*(short *)(iVar2 + 0x1a) == *(short *)(iVar6 + 0x12))) {
-        iVar2 = *piVar4;
+         (*(short *)(iVar2 + 0x1a) == *(short *)(outputChunk + 0x12))) {
+        iVar2 = *outputList;
         goto joined_r0x00024488;
       }
     }
 LAB_000244c8:
-    iVar2 = *(int *)(iVar6 + 8);
-    _PPStreamChunkListRemoveChunk(piVar4,iVar6);
+    iVar2 = *(int *)(outputChunk + 8);
+    _PPStreamChunkListRemoveChunk(outputList,outputChunk);
     goto LAB_000244e0;
   }
 LAB_000244ec:
   loopIndex = 0;
   for (; iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
     if (loopIndex != *(ushort *)(iVar2 + 0x12)) {
-      _glePPRelocateOutput((uint)*(ushort *)(iVar2 + 0x12),loopIndex,piVar3);
+      _glePPRelocateOutput((uint)*(ushort *)(iVar2 + 0x12),loopIndex,instructionList);
       *(short *)(iVar2 + 0x12) = (short)loopIndex;
     }
     loopIndex = loopIndex + 1;
   }
   return 0;
 joined_r0x00024488:
-  if (iVar2 == iVar6) goto LAB_000244dc;
-  iVar1 = _PPStreamOutputBindingIsEqual(iVar6 + 0xc,iVar2 + 0xc);
-  if (iVar1 != 0) {
-    _glePPRelocateOutput((uint)*(ushort *)(iVar6 + 0x12),(uint)*(ushort *)(iVar2 + 0x12),piVar3);
+  if (iVar2 == outputChunk) goto LAB_000244dc;
+  bindingEqual = _PPStreamOutputBindingIsEqual(outputChunk + 0xc,iVar2 + 0xc);
+  if (bindingEqual != 0) {
+    _glePPRelocateOutput((uint)*(ushort *)(outputChunk + 0x12),(uint)*(ushort *)(iVar2 + 0x12),instructionList);
     goto LAB_000244c8;
   }
   iVar2 = *(int *)(iVar2 + 8);
   goto joined_r0x00024488;
 LAB_000244dc:
-  iVar2 = *(int *)(iVar6 + 8);
+  iVar2 = *(int *)(outputChunk + 8);
 LAB_000244e0:
-  iVar6 = iVar2;
+  outputChunk = iVar2;
   if (iVar2 == 0) goto code_r0x000244e8;
   goto LAB_00024424;
 code_r0x000244e8:
-  iVar2 = *piVar4;
+  iVar2 = *outputList;
   goto LAB_000244ec;
 }
 
@@ -3715,46 +3718,46 @@ int _glePPPruneLocals(param_1)
   int param_1;
 {
   uint loopIndex;
-  uint uVar1;
+  uint instructionHeader;
   int iVar2;
-  int *piVar3;
-  int *piVar4;
-  int iVar5;
+  int *instructionList;
+  int *localList;
+  int localChunk;
   
-  piVar4 = *(int **)(*(int *)(param_1 + 0x1c) + 4);
-  piVar3 = *(int **)(*(int *)(param_1 + 0x1c) + 0x20);
+  localList = *(int **)(*(int *)(param_1 + 0x1c) + 4);
+  instructionList = *(int **)(*(int *)(param_1 + 0x1c) + 0x20);
   iVar2 = 0;
-  iVar5 = *piVar4;
-  if (*piVar4 != 0) {
+  localChunk = *localList;
+  if (*localList != 0) {
     do {
-      for (iVar2 = *piVar3; iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
+      for (iVar2 = *instructionList; iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
         if (((((((*(uint *)(iVar2 + 0xc) >> 0x12 & 0xff) < 0x4b) &&
                ((*(uint *)(iVar2 + 0x14) >> 0x11 & 7) == 1)) &&
-              (*(short *)(iVar2 + 0x1a) == *(short *)(iVar5 + 0x12))) ||
-             (((uVar1 = *(uint *)(iVar2 + 0xc), uVar1 >> 0x1d != 0 &&
-               ((uVar1 >> 0x12 & 0xff) != 0x4a)) &&
+              (*(short *)(iVar2 + 0x1a) == *(short *)(localChunk + 0x12))) ||
+             (((instructionHeader = *(uint *)(iVar2 + 0xc), instructionHeader >> 0x1d != 0 &&
+               ((instructionHeader >> 0x12 & 0xff) != 0x4a)) &&
               (((*(uint *)(iVar2 + 0x1c) >> 0x17 & 7) == 1 &&
-               (*(short *)(iVar2 + 0x22) == *(short *)(iVar5 + 0x12))))))) ||
-            (((1 < uVar1 >> 0x1d && (3 < (uVar1 >> 0x12 & 0xff) - 0x41)) &&
+               (*(short *)(iVar2 + 0x22) == *(short *)(localChunk + 0x12))))))) ||
+            (((1 < instructionHeader >> 0x1d && (3 < (instructionHeader >> 0x12 & 0xff) - 0x41)) &&
              (((*(uint *)(iVar2 + 0x24) >> 0x17 & 7) == 1 &&
-              (*(short *)(iVar2 + 0x2a) == *(short *)(iVar5 + 0x12))))))) ||
-           (((2 < uVar1 >> 0x1d && ((*(uint *)(iVar2 + 0x2c) >> 0x17 & 7) == 1)) &&
-            (*(short *)(iVar2 + 0x32) == *(short *)(iVar5 + 0x12))))) {
-          iVar2 = *(int *)(iVar5 + 8);
+              (*(short *)(iVar2 + 0x2a) == *(short *)(localChunk + 0x12))))))) ||
+           (((2 < instructionHeader >> 0x1d && ((*(uint *)(iVar2 + 0x2c) >> 0x17 & 7) == 1)) &&
+            (*(short *)(iVar2 + 0x32) == *(short *)(localChunk + 0x12))))) {
+          iVar2 = *(int *)(localChunk + 8);
           goto LAB_00024684;
         }
       }
-      iVar2 = *(int *)(iVar5 + 8);
-      _PPStreamChunkListRemoveChunk(piVar4,iVar5);
+      iVar2 = *(int *)(localChunk + 8);
+      _PPStreamChunkListRemoveChunk(localList,localChunk);
 LAB_00024684:
-      iVar5 = iVar2;
+      localChunk = iVar2;
     } while (iVar2 != 0);
-    iVar2 = *piVar4;
+    iVar2 = *localList;
   }
   loopIndex = 0;
   for (; iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
     if (loopIndex != *(ushort *)(iVar2 + 0x12)) {
-      _glePPRelocateLocal((uint)*(ushort *)(iVar2 + 0x12),loopIndex,piVar3);
+      _glePPRelocateLocal((uint)*(ushort *)(iVar2 + 0x12),loopIndex,instructionList);
       *(short *)(iVar2 + 0x12) = (short)loopIndex;
     }
     loopIndex = loopIndex + 1;
@@ -3769,22 +3772,22 @@ int _glePPPruneParams(param_1)
   uint loopIndex;
   int iVar1;
   int iVar2;
-  undefined4 uVar3;
-  uint uVar4;
-  int *piVar5;
-  int *piVar6;
-  int *piVar7;
+  undefined4 statusCode;
+  uint instructionHeader;
+  int *paramArrayList;
+  int *instructionList;
+  int *paramList;
   int iVar8;
   
   iVar1 = *(int *)(param_1 + 0x1c);
-  piVar7 = *(int **)(iVar1 + 0x10);
-  piVar5 = *(int **)(iVar1 + 0x14);
-  iVar8 = *piVar7;
-  piVar6 = *(int **)(iVar1 + 0x20);
+  paramList = *(int **)(iVar1 + 0x10);
+  paramArrayList = *(int **)(iVar1 + 0x14);
+  iVar8 = *paramList;
+  instructionList = *(int **)(iVar1 + 0x20);
   iVar1 = 0;
   if (iVar8 != 0) {
     do {
-      iVar1 = *piVar5;
+      iVar1 = *paramArrayList;
       if (iVar1 == 0) break;
       do {
         if ((*(ushort *)(iVar1 + 0xe) <= *(ushort *)(iVar8 + 0x12)) &&
@@ -3796,14 +3799,14 @@ int _glePPPruneParams(param_1)
       } while (iVar1 != 0);
       iVar8 = *(int *)(iVar8 + 8);
     } while (iVar8 != 0);
-    iVar1 = *piVar7;
+    iVar1 = *paramList;
   }
   iVar8 = 0;
   if (iVar1 != 0) {
 LAB_0002477c:
     if (*(int *)(iVar1 + 0x14) != 0) {
 LAB_00024868:
-      iVar8 = *piVar7;
+      iVar8 = *paramList;
 joined_r0x00024874:
       do {
         if (iVar8 == 0) goto LAB_000248e8;
@@ -3811,9 +3814,9 @@ joined_r0x00024874:
            (iVar2 = _PPStreamParamBindingIsEqual(iVar1 + 0xc,iVar8 + 0xc), iVar2 != 0)) {
           if (*(int *)(iVar8 + 0x14) == 0) {
             _glePPRelocateParam((uint)*(ushort *)(iVar8 + 0x12),(uint)*(ushort *)(iVar1 + 0x12),
-                                piVar6,0);
+                                instructionList,0);
             iVar2 = *(int *)(iVar8 + 8);
-            _PPStreamChunkListRemoveChunk(piVar7,iVar8);
+            _PPStreamChunkListRemoveChunk(paramList,iVar8);
             iVar8 = iVar2;
             goto joined_r0x00024874;
           }
@@ -3824,20 +3827,20 @@ joined_r0x00024874:
         iVar8 = *(int *)(iVar8 + 8);
       } while( true );
     }
-    for (iVar8 = *piVar6; iVar8 != 0; iVar8 = *(int *)(iVar8 + 8)) {
+    for (iVar8 = *instructionList; iVar8 != 0; iVar8 = *(int *)(iVar8 + 8)) {
       if ((((((*(uint *)(iVar8 + 0xc) >> 0x1d != 0) &&
              ((*(uint *)(iVar8 + 0xc) >> 0x12 & 0xff) != 0x4a)) &&
             ((*(uint *)(iVar8 + 0x1c) >> 0x17 & 7) == 2)) &&
            (*(short *)(iVar8 + 0x22) == *(short *)(iVar1 + 0x12))) ||
-          (((uVar4 = *(uint *)(iVar8 + 0xc), 1 < uVar4 >> 0x1d &&
-            (3 < (uVar4 >> 0x12 & 0xff) - 0x41)) &&
+          (((instructionHeader = *(uint *)(iVar8 + 0xc), 1 < instructionHeader >> 0x1d &&
+            (3 < (instructionHeader >> 0x12 & 0xff) - 0x41)) &&
            (((*(uint *)(iVar8 + 0x24) >> 0x17 & 7) == 2 &&
             (*(short *)(iVar8 + 0x2a) == *(short *)(iVar1 + 0x12))))))) ||
-         (((2 < uVar4 >> 0x1d && ((*(uint *)(iVar8 + 0x2c) >> 0x17 & 7) == 2)) &&
+         (((2 < instructionHeader >> 0x1d && ((*(uint *)(iVar8 + 0x2c) >> 0x17 & 7) == 2)) &&
           (*(short *)(iVar8 + 0x32) == *(short *)(iVar1 + 0x12))))) goto LAB_00024868;
     }
     iVar8 = *(int *)(iVar1 + 8);
-    _PPStreamChunkListRemoveChunk(piVar7,iVar1);
+    _PPStreamChunkListRemoveChunk(paramList,iVar1);
     goto LAB_000248ec;
   }
 LAB_000248f8:
@@ -3845,16 +3848,16 @@ LAB_000248f8:
   for (; iVar8 != 0; iVar8 = *(int *)(iVar8 + 8)) {
     *(undefined4 *)(iVar8 + 0x14) = 0;
     if (loopIndex != *(ushort *)(iVar8 + 0x12)) {
-      _glePPRelocateParam((uint)*(ushort *)(iVar8 + 0x12),loopIndex,piVar6,piVar5);
+      _glePPRelocateParam((uint)*(ushort *)(iVar8 + 0x12),loopIndex,instructionList,paramArrayList);
       *(short *)(iVar8 + 0x12) = (short)loopIndex;
     }
     loopIndex = loopIndex + 1;
   }
-  uVar3 = 0x34;
-  if ((uint)piVar7[2] <= *(uint *)(param_1 + 0x464)) {
-    uVar3 = 0;
+  statusCode = 0x34;
+  if ((uint)paramList[2] <= *(uint *)(param_1 + 0x464)) {
+    statusCode = 0;
   }
-  return uVar3;
+  return statusCode;
 LAB_000248e8:
   iVar8 = *(int *)(iVar1 + 8);
 LAB_000248ec:
@@ -3862,64 +3865,64 @@ LAB_000248ec:
   if (iVar8 == 0) goto code_r0x000248f4;
   goto LAB_0002477c;
 code_r0x000248f4:
-  iVar8 = *piVar7;
+  iVar8 = *paramList;
   goto LAB_000248f8;
 }
 
 /* _glePPLogParameters @ 0x2496c (728 bytes) */
-void _glePPLogParameters(glContext, param_2, param_3, param_4, param_5, param_6)
+void _glePPLogParameters(glContext, program, paramCount, paramEntries, paramArrayCount, paramArrays)
   int glContext;
-  int param_2;
-  uint param_3;
-  int param_4;
-  uint param_5;
-  int param_6;
+  int program;
+  uint paramCount;
+  int paramEntries;
+  uint paramArrayCount;
+  int paramArrays;
 {
   uint loopIndex5;
   uint loopIndex4;
   uint loopIndex3;
   int loopIndex;
   int remaining;
-  uint uVar1;
+  uint lastSlot;
   int iVar2;
   undefined4 *cursor;
-  undefined2 uVar4;
+  undefined2 slotResult;
   int iVar5;
   uint *srcCursor;
-  uint uVar7;
+  uint bankIndex;
   int sharedState;
-  uint uVar9;
+  uint rangeEnd;
   int iVar10;
   uint loopIndex2;
-  uint uVar12;
+  uint paramIndex;
   uint uVar13;
-  undefined4 local_a0 [12];
+  undefined4 blockedSlotBits [12];
   uint local_70;
   uint local_6c;
-  uint local_60;
-  uint local_5c;
+  uint arrayStartWord;
+  uint arrayEndWord;
   
   loopIndex2 = 0;
-  uVar7 = (uint)*(ushort *)(param_2 + 0x4ba);
+  bankIndex = (uint)*(ushort *)(program + 0x4ba);
   sharedState = *(int *)(glContext + 0x5148);
-  iVar5 = uVar7 * 0xa30 + sharedState;
+  iVar5 = bankIndex * 0xa30 + sharedState;
   iVar2 = *(int *)(iVar5 + 0x8a98) + 1;
   *(int *)(iVar5 + 0x8a98) = iVar2;
-  *(int *)(param_2 + 0x14) = iVar2;
-  uVar1 = 0;
+  *(int *)(program + 0x14) = iVar2;
+  lastSlot = 0;
   if (*(uint *)(iVar5 + 0x8a9c) != 0) {
     srcCursor = *(uint **)(iVar5 + 0x8aa0);
     do {
-      uVar1 = *srcCursor;
+      lastSlot = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (param_3 <= uVar1) break;
+      if (paramCount <= lastSlot) break;
       loopIndex2 = loopIndex2 + 1;
-      uVar1 = 0;
+      lastSlot = 0;
     } while (loopIndex2 < *(uint *)(iVar5 + 0x8a9c));
   }
   loopIndex3 = 0;
   do {
-    cursor = local_a0;
+    cursor = blockedSlotBits;
     remaining = 9;
     do {
       *cursor = 0;
@@ -3927,65 +3930,65 @@ void _glePPLogParameters(glContext, param_2, param_3, param_4, param_5, param_6)
       remaining = remaining + -1;
     } while (remaining != 0);
     loopIndex = 0;
-    for (uVar13 = param_3; uVar13 != 0; uVar13 = uVar13 - 1) {
+    for (uVar13 = paramCount; uVar13 != 0; uVar13 = uVar13 - 1) {
       iVar5 = loopIndex * 8;
       loopIndex = loopIndex + 1;
-      *(uint *)(iVar5 + param_4) = *(uint *)(iVar5 + param_4) & 0xff1fffff;
+      *(uint *)(iVar5 + paramEntries) = *(uint *)(iVar5 + paramEntries) & 0xff1fffff;
     }
     loopIndex5 = 0;
     iVar2 = -1;
-    if (param_5 != 0) {
+    if (paramArrayCount != 0) {
       do {
-        local_60 = *(uint *)(param_6 + loopIndex5 * 8);
-        local_5c = *(uint *)(loopIndex5 * 8 + param_6 + 4);
-        uVar12 = local_60 & 0xffff;
-        uVar9 = (local_5c & 0xffff) + 1;
+        arrayStartWord = *(uint *)(paramArrays + loopIndex5 * 8);
+        arrayEndWord = *(uint *)(loopIndex5 * 8 + paramArrays + 4);
+        paramIndex = arrayStartWord & 0xffff;
+        rangeEnd = (arrayEndWord & 0xffff) + 1;
         if (loopIndex3 <= loopIndex5) {
-          iVar5 = uVar12 * 8;
-          iVar10 = iVar5 + param_4;
-          local_70 = *(undefined4 *)(iVar5 + param_4);
+          iVar5 = paramIndex * 8;
+          iVar10 = iVar5 + paramEntries;
+          local_70 = *(undefined4 *)(iVar5 + paramEntries);
           local_6c = *(uint *)(iVar10 + 4) & 0xffff0000;
-          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,uVar7,local_70,local_6c,uVar9 - uVar12,0xffffffff,
-                                 local_a0,uVar1);
+          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,bankIndex,local_70,local_6c,rangeEnd - paramIndex,0xffffffff,
+                                 blockedSlotBits,lastSlot);
           if (iVar2 < 0) break;
-          uVar12 = uVar12 + 1;
-          *(uint *)(iVar5 + param_4) = local_70;
+          paramIndex = paramIndex + 1;
+          *(uint *)(iVar5 + paramEntries) = local_70;
           *(uint *)(iVar10 + 4) = local_6c;
           *(short *)(iVar10 + 6) = (short)iVar2;
-          *(uint *)(iVar5 + param_4) = *(uint *)(iVar5 + param_4) & 0xff1fffff | 0x200000;
+          *(uint *)(iVar5 + paramEntries) = *(uint *)(iVar5 + paramEntries) & 0xff1fffff | 0x200000;
         }
-        for (; uVar12 < uVar9; uVar12 = uVar12 + 1) {
-          iVar5 = uVar12 * 8;
-          iVar10 = iVar5 + param_4;
-          local_70 = *(undefined4 *)(iVar5 + param_4);
+        for (; paramIndex < rangeEnd; paramIndex = paramIndex + 1) {
+          iVar5 = paramIndex * 8;
+          iVar10 = iVar5 + paramEntries;
+          local_70 = *(undefined4 *)(iVar5 + paramEntries);
           local_6c = *(uint *)(iVar10 + 4) & 0xffff0000;
-          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,uVar7,local_70,local_6c,1,iVar2 + 1,local_a0,uVar1);
-          *(uint *)(iVar5 + param_4) = local_70;
+          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,bankIndex,local_70,local_6c,1,iVar2 + 1,blockedSlotBits,lastSlot);
+          *(uint *)(iVar5 + paramEntries) = local_70;
           *(uint *)(iVar10 + 4) = local_6c;
           *(short *)(iVar10 + 6) = (short)iVar2;
-          *(uint *)(iVar5 + param_4) = *(uint *)(iVar5 + param_4) & 0xff1fffff | 0x200000;
+          *(uint *)(iVar5 + paramEntries) = *(uint *)(iVar5 + paramEntries) & 0xff1fffff | 0x200000;
         }
         loopIndex5 = loopIndex5 + 1;
-      } while (loopIndex5 < param_5);
+      } while (loopIndex5 < paramArrayCount);
     }
-    if ((loopIndex5 == param_5) || (loopIndex3 = loopIndex3 + 1, param_5 < loopIndex3)) {
+    if ((loopIndex5 == paramArrayCount) || (loopIndex3 = loopIndex3 + 1, paramArrayCount < loopIndex3)) {
       loopIndex4 = 0;
-      if (param_3 != 0) {
+      if (paramCount != 0) {
         do {
           iVar2 = loopIndex4 * 8;
-          local_70 = *(uint *)(iVar2 + param_4);
-          iVar5 = iVar2 + param_4;
+          local_70 = *(uint *)(iVar2 + paramEntries);
+          iVar5 = iVar2 + paramEntries;
           if ((local_70 >> 0x15 & 7) == 0) {
             local_6c = *(uint *)(iVar5 + 4) & 0xffff0000;
-            uVar4 = ((int (*)())_glePPLogParam)(glContext,sharedState,uVar7,local_70,local_6c,1,0xffffffff,local_a0,uVar1
+            slotResult = ((int (*)())_glePPLogParam)(glContext,sharedState,bankIndex,local_70,local_6c,1,0xffffffff,blockedSlotBits,lastSlot
                                   );
-            *(uint *)(iVar2 + param_4) = local_70;
+            *(uint *)(iVar2 + paramEntries) = local_70;
             *(uint *)(iVar5 + 4) = local_6c;
-            *(undefined2 *)(iVar5 + 6) = uVar4;
-            *(uint *)(iVar2 + param_4) = *(uint *)(iVar2 + param_4) & 0xff1fffff | 0x200000;
+            *(undefined2 *)(iVar5 + 6) = slotResult;
+            *(uint *)(iVar2 + paramEntries) = *(uint *)(iVar2 + paramEntries) & 0xff1fffff | 0x200000;
           }
           loopIndex4 = loopIndex4 + 1;
-        } while (loopIndex4 < param_3);
+        } while (loopIndex4 < paramCount);
       }
       return;
     }
@@ -3993,12 +3996,12 @@ void _glePPLogParameters(glContext, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _glePPLogParam @ 0x24c44 (1068 bytes) */
-int _glePPLogParam(glContext, paramLogState, bankIndex, paramWord, param_5, slotSpan, requestedSlot, blockedSlotBits, lastSlot)
+int _glePPLogParam(glContext, paramLogState, bankIndex, paramWord, paramWord2, slotSpan, requestedSlot, blockedSlotBits, lastSlot)
   int glContext;
   int paramLogState;
   int bankIndex;
   uint paramWord;
-  int param_5;
+  int paramWord2;
   int slotSpan;
   uint requestedSlot;
   int blockedSlotBits;
@@ -4017,11 +4020,11 @@ int _glePPLogParam(glContext, paramLogState, bankIndex, paramWord, param_5, slot
   uint evictionSlot;
   uint slotBit;
   uint slotValue1;
-  uint uVar9;
+  uint oldSlotBits;
   uint unusedSlot;
   uint freeSlot;
   uint lowestPriority;
-  short sVar12;
+  short oldPriority;
   
   paramKind = paramWord >> 0x10 & 0x1f;
   lowestPriority = 0x7fffffff;
@@ -4097,7 +4100,7 @@ LAB_00024fd4:
         if (spanEnd == requestedSlot + slotSpan) {
           slotWord1 = *(uint *)(iVar2 + 4);
           iVar4 = *(int *)(iVar2 + 8);
-          if ((slotWord1 == paramWord) && (iVar4 == param_5)) {
+          if ((slotWord1 == paramWord) && (iVar4 == paramWord2)) {
             matchKind = 5;
             goto LAB_00025008;
           }
@@ -4142,7 +4145,7 @@ LAB_00024ff0:
     iVar2 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
     slotValue1 = *(uint *)(iVar2 + 0x8074);
     iVar2 = *(int *)(iVar2 + 0x8078);
-    if (((slotValue1 == paramWord) && (matchKind = 5, iVar2 == param_5)) ||
+    if (((slotValue1 == paramWord) && (matchKind = 5, iVar2 == paramWord2)) ||
        ((slotValue1 == 0xffffffff && (matchKind = 3, iVar2 == -1)))) goto LAB_00025008;
     slotIsUnused = slotValue1 == 0 && iVar2 == 0;
     matchKind = 2;
@@ -4156,7 +4159,7 @@ LAB_00025008:
   switch(matchKind) {
   case 0:
     iVar4 = bankIndex * 0x518;
-    sVar12 = 0;
+    oldPriority = 0;
     break;
   case 1:
     iVar4 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
@@ -4164,18 +4167,18 @@ LAB_00025008:
     *(undefined4 *)(iVar4 + 0x8074) = 0xffffffff;
     *(undefined4 *)(iVar4 + 0x8078) = 0xffffffff;
     iVar4 = bankIndex * 0x518;
-    sVar12 = 0;
+    oldPriority = 0;
     *(uint *)(iVar5 + 0x8a74) = *(uint *)(iVar5 + 0x8a74) | 1 << (requestedSlot & 0x1f);
     break;
   case 2:
     iVar5 = (bankIndex * 0x28c + iVar2) * 4 + paramLogState;
-    uVar9 = *(uint *)(iVar5 + 0x8a74);
+    oldSlotBits = *(uint *)(iVar5 + 0x8a74);
     iVar4 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
     slotBit = 1 << (requestedSlot & 0x1f);
     *(uint *)(iVar4 + 0x8074) = paramWord;
-    *(int *)(iVar4 + 0x8078) = param_5;
-    sVar12 = 0;
-    *(uint *)(iVar5 + 0x8a74) = uVar9 & ~slotBit;
+    *(int *)(iVar4 + 0x8078) = paramWord2;
+    oldPriority = 0;
+    *(uint *)(iVar5 + 0x8a74) = oldSlotBits & ~slotBit;
     if (bankIndex == 0) {
       iVar4 = 0;
       iVar5 = iVar2 * 4 + glContext;
@@ -4190,325 +4193,330 @@ LAB_00025008:
   case 5:
   case 3:
     iVar4 = bankIndex * 0x518;
-    sVar12 = *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874);
+    oldPriority = *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874);
     break;
   case 4:
     iVar4 = bankIndex * 0x518;
     iVar5 = (bankIndex * 0x146 + requestedSlot) * 8 + paramLogState;
     iVar6 = (bankIndex * 0x28c + iVar2) * 4 + paramLogState;
-    sVar12 = *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874);
+    oldPriority = *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874);
     *(undefined4 *)(iVar5 + 0x8074) = 0xffffffff;
     *(undefined4 *)(iVar5 + 0x8078) = 0xffffffff;
     *(uint *)(iVar6 + 0x8a74) = *(uint *)(iVar6 + 0x8a74) | 1 << (requestedSlot & 0x1f);
   }
   *(uint *)(iVar2 * 4 + blockedSlotBits) = *(uint *)(iVar2 * 4 + blockedSlotBits) | 1 << (requestedSlot & 0x1f);
-  *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874) = sVar12 + 1;
+  *(short *)((iVar4 + requestedSlot) * 2 + paramLogState + 0x8874) = oldPriority + 1;
   return requestedSlot;
 }
 
 /* _PPEmulatorProgramSetupHandlesFromPPStream @ 0x25218 (844 bytes) */
-void _PPEmulatorProgramSetupHandlesFromPPStream(param_1, glContext, param_3)
-  int param_1;
+void _PPEmulatorProgramSetupHandlesFromPPStream(emulatorProgram, glContext, ppStream)
+  int emulatorProgram;
   undefined4 glContext;
-  int param_3;
+  int ppStream;
 {
   int loopIndex;
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  uint local_40;
-  undefined4 local_3c;
+  uint operandKind;
+  int resultHandleBank;
+  int parameterHandleBank;
+  int identityHandleBank;
+  int handleEntry;
+  int indexHandleBank;
+  int tempCountThenRemaining;
+  int parameterChunk;
+  int identityMappedChunk;
+  int resultChunk;
+  uint operandDescriptor;
+  undefined4 operandDescriptorWord2;
   undefined1 auStack_30 [4];
-  int local_2c;
-  undefined1 auStack_28 [4];
-  int local_24 [2];
+  int handleOffset;
+  undefined1 resultComponentStride [4];
+  int componentStride [2];
   
-  iVar5 = 0;
-  if (*(int *)(*(int *)(param_3 + 4) + 8) != 0) {
-    iVar5 = _PPStreamChunkListGetMaxIndex(*(int *)(param_3 + 4));
-    iVar5 = iVar5 + 1;
+  tempCountThenRemaining = 0;
+  if (*(int *)(*(int *)(ppStream + 4) + 8) != 0) {
+    tempCountThenRemaining = _PPStreamChunkListGetMaxIndex(*(int *)(ppStream + 4));
+    tempCountThenRemaining = tempCountThenRemaining + 1;
   }
   _PPEmulatorProgramInitialiseHandleBanks
-            (param_1,iVar5,*(undefined4 *)(*(int *)(param_3 + 0x1c) + 8),
-             *(undefined4 *)(*(int *)(param_3 + 0x18) + 8),
-             *(undefined4 *)(*(int *)(param_3 + 0x10) + 8));
+            (emulatorProgram,tempCountThenRemaining,*(undefined4 *)(*(int *)(ppStream + 0x1c) + 8),
+             *(undefined4 *)(*(int *)(ppStream + 0x18) + 8),
+             *(undefined4 *)(*(int *)(ppStream + 0x10) + 8));
   loopIndex = 0;
-  iVar4 = *(int *)(param_1 + 0x80);
-  for (; iVar5 != 0; iVar5 = iVar5 + -1) {
-    local_2c = loopIndex * 0x10;
+  indexHandleBank = *(int *)(emulatorProgram + 0x80);
+  for (; tempCountThenRemaining != 0; tempCountThenRemaining = tempCountThenRemaining + -1) {
+    handleOffset = loopIndex * 0x10;
     loopIndex = loopIndex + 1;
-    *(int *)(local_2c + iVar4) = local_2c;
-    iVar3 = local_2c + iVar4;
-    *(int *)(iVar3 + 4) = local_2c + 4;
-    *(int *)(iVar3 + 8) = local_2c + 8;
-    *(int *)(iVar3 + 0xc) = local_2c + 0xc;
+    *(int *)(handleOffset + indexHandleBank) = handleOffset;
+    handleEntry = handleOffset + indexHandleBank;
+    *(int *)(handleEntry + 4) = handleOffset + 4;
+    *(int *)(handleEntry + 8) = handleOffset + 8;
+    *(int *)(handleEntry + 0xc) = handleOffset + 0xc;
   }
-  iVar2 = *(int *)(param_1 + 0x8c);
-  for (iVar5 = **(int **)(param_3 + 0x1c); iVar5 != 0; iVar5 = *(int *)(iVar5 + 8)) {
-    _PPStreamChunkGetStream(&local_40,iVar5,param_3,auStack_30,0);
-    ((void (*)())_gleVPGetResultOffset)(glContext,local_40,local_3c,&local_2c,auStack_28);
-    *(int *)(iVar2 + (uint)*(ushort *)(iVar5 + 0x12) * 0x10) = local_2c;
-    *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 4) = local_2c + 4;
-    *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 8) = local_2c + 8;
-    *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 0xc) = local_2c + 0xc;
+  resultHandleBank = *(int *)(emulatorProgram + 0x8c);
+  for (resultChunk = **(int **)(ppStream + 0x1c); resultChunk != 0; resultChunk = *(int *)(resultChunk + 8)) {
+    _PPStreamChunkGetStream(&operandDescriptor,resultChunk,ppStream,auStack_30,0);
+    ((void (*)())_gleVPGetResultOffset)(glContext,operandDescriptor,operandDescriptorWord2,&handleOffset,resultComponentStride);
+    *(int *)(resultHandleBank + (uint)*(ushort *)(resultChunk + 0x12) * 0x10) = handleOffset;
+    *(int *)((uint)*(ushort *)(resultChunk + 0x12) * 0x10 + resultHandleBank + 4) = handleOffset + 4;
+    *(int *)((uint)*(ushort *)(resultChunk + 0x12) * 0x10 + resultHandleBank + 8) = handleOffset + 8;
+    *(int *)((uint)*(ushort *)(resultChunk + 0x12) * 0x10 + resultHandleBank + 0xc) = handleOffset + 0xc;
   }
-  iVar2 = *(int *)(param_1 + 0x98);
-  for (iVar5 = **(int **)(param_3 + 0x18); iVar5 != 0; iVar5 = *(int *)(iVar5 + 8)) {
-    local_2c = (uint)*(ushort *)(iVar5 + 0x12) * 0x10;
-    *(int *)(iVar2 + (uint)*(ushort *)(iVar5 + 0x12) * 0x10) = local_2c;
-    *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 4) = local_2c + 4;
-    *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 8) = local_2c + 8;
-    *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 0xc) = local_2c + 0xc;
+  identityHandleBank = *(int *)(emulatorProgram + 0x98);
+  for (identityMappedChunk = **(int **)(ppStream + 0x18); identityMappedChunk != 0; identityMappedChunk = *(int *)(identityMappedChunk + 8)) {
+    handleOffset = (uint)*(ushort *)(identityMappedChunk + 0x12) * 0x10;
+    *(int *)(identityHandleBank + (uint)*(ushort *)(identityMappedChunk + 0x12) * 0x10) = handleOffset;
+    *(int *)((uint)*(ushort *)(identityMappedChunk + 0x12) * 0x10 + identityHandleBank + 4) = handleOffset + 4;
+    *(int *)((uint)*(ushort *)(identityMappedChunk + 0x12) * 0x10 + identityHandleBank + 8) = handleOffset + 8;
+    *(int *)((uint)*(ushort *)(identityMappedChunk + 0x12) * 0x10 + identityHandleBank + 0xc) = handleOffset + 0xc;
   }
-  iVar2 = *(int *)(param_1 + 0xa4);
-  for (iVar5 = **(int **)(param_3 + 0x10); iVar5 != 0; iVar5 = *(int *)(iVar5 + 8)) {
-    uVar1 = *(uint *)(iVar5 + 0xc) >> 0x10 & 0x1f;
-    if ((uVar1 == 1) || (uVar1 == 0x11)) {
-      _PPStreamChunkGetStream(&local_40,iVar5,param_3,auStack_30,0);
-      local_2c = (local_40 & 0xffff) * 0x10;
-      *(int *)(iVar2 + (uint)*(ushort *)(iVar5 + 0x12) * 0x10) = local_2c;
-      *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 4) = local_2c + 4;
-      *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 8) = local_2c + 8;
-      *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 0xc) = local_2c + 0xc;
+  parameterHandleBank = *(int *)(emulatorProgram + 0xa4);
+  for (parameterChunk = **(int **)(ppStream + 0x10); parameterChunk != 0; parameterChunk = *(int *)(parameterChunk + 8)) {
+    operandKind = *(uint *)(parameterChunk + 0xc) >> 0x10 & 0x1f;
+    if ((operandKind == 1) || (operandKind == 0x11)) {
+      _PPStreamChunkGetStream(&operandDescriptor,parameterChunk,ppStream,auStack_30,0);
+      handleOffset = (operandDescriptor & 0xffff) * 0x10;
+      *(int *)(parameterHandleBank + (uint)*(ushort *)(parameterChunk + 0x12) * 0x10) = handleOffset;
+      *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 4) = handleOffset + 4;
+      *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 8) = handleOffset + 8;
+      *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 0xc) = handleOffset + 0xc;
     }
     else {
-      _PPStreamChunkGetStream(&local_40,iVar5,param_3,auStack_30,0);
-      ((void (*)())_gleVPGetParameterPtr)(glContext,local_40,local_3c,&local_2c,local_24);
-      *(int *)(iVar2 + (uint)*(ushort *)(iVar5 + 0x12) * 0x10) = local_2c;
-      *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 4) = local_2c + local_24[0];
-      *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 8) = local_2c + local_24[0] * 2;
-      *(int *)((uint)*(ushort *)(iVar5 + 0x12) * 0x10 + iVar2 + 0xc) = local_2c + local_24[0] * 3;
+      _PPStreamChunkGetStream(&operandDescriptor,parameterChunk,ppStream,auStack_30,0);
+      ((void (*)())_gleVPGetParameterPtr)(glContext,operandDescriptor,operandDescriptorWord2,&handleOffset,componentStride);
+      *(int *)(parameterHandleBank + (uint)*(ushort *)(parameterChunk + 0x12) * 0x10) = handleOffset;
+      *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 4) = handleOffset + componentStride[0];
+      *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 8) = handleOffset + componentStride[0] * 2;
+      *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 0xc) = handleOffset + componentStride[0] * 3;
     }
   }
   return;
 }
 
 /* _gleVPGetResultOffset @ 0x25564 (204 bytes) */
-void _gleVPGetResultOffset(glContext, param_2, unusedArg3, param_4, param_5)
+void _gleVPGetResultOffset(glContext, operandDescriptor, unusedArg3, outOffset, outComponentStride)
   undefined4 glContext;
-  uint param_2;
+  uint operandDescriptor;
   undefined4 unusedArg3;
-  int *param_4;
-  undefined4 *param_5;
+  int *outOffset;
+  undefined4 *outComponentStride;
 {
-  int iVar1;
+  int vertexRecordOffset;
   
-  *param_5 = 4;
-  switch(param_2 >> 0x10 & 0xf) {
+  *outComponentStride = 4;
+  switch(operandDescriptor >> 0x10 & 0xf) {
   case 0:
   case 7:
     return;
   case 1:
-    iVar1 = 0x10;
+    vertexRecordOffset = 0x10;
     break;
   case 2:
-    iVar1 = 0x5c;
-    *param_5 = 1;
+    vertexRecordOffset = 0x5c;
+    *outComponentStride = 1;
     goto LAB_00025630;
   case 3:
-    *param_5 = 1;
-    *param_4 = 0x70;
+    *outComponentStride = 1;
+    *outOffset = 0x70;
     return;
   case 4:
-    if ((param_2 & 1) == 0) {
-      iVar1 = 0x30;
+    if ((operandDescriptor & 1) == 0) {
+      vertexRecordOffset = 0x30;
       break;
     }
   case 8:
-    iVar1 = 0x20;
+    vertexRecordOffset = 0x20;
     break;
   case 5:
-    *param_5 = 3;
-    if ((param_2 & 1) == 0) {
-      iVar1 = 0x50;
+    *outComponentStride = 3;
+    if ((operandDescriptor & 1) == 0) {
+      vertexRecordOffset = 0x50;
     }
     else {
-      iVar1 = 0x40;
+      vertexRecordOffset = 0x40;
     }
     break;
   case 6:
-    iVar1 = (param_2 & 0x1f) * 0x10 + 0x80;
+    vertexRecordOffset = (operandDescriptor & 0x1f) * 0x10 + 0x80;
 LAB_00025630:
-    *param_4 = iVar1;
+    *outOffset = vertexRecordOffset;
     return;
   default:
     return;
   }
-  *param_4 = iVar1;
+  *outOffset = vertexRecordOffset;
   return;
 }
 
 /* _gleVPGetParameterPtr @ 0x25654 (972 bytes) */
-void _gleVPGetParameterPtr(glContext, param_2, unusedArg3, param_4, param_5)
+void _gleVPGetParameterPtr(glContext, operandDescriptor, unusedArg3, outOffset, outComponentStride)
   undefined4 glContext;
-  uint param_2;
+  uint operandDescriptor;
   undefined4 unusedArg3;
-  int *param_4;
-  undefined4 *param_5;
+  int *outOffset;
+  undefined4 *outComponentStride;
 {
   uint uVar1;
-  int iVar2;
+  int contextOffset;
   uint uVar3;
   uint uVar4;
   
-  *param_5 = 4;
-  switch(param_2 >> 0x10 & 0x1f) {
+  *outComponentStride = 4;
+  switch(operandDescriptor >> 0x10 & 0x1f) {
   case 0:
   case 1:
   case 9:
   case 0x11:
     return;
   case 2:
-    iVar2 = (param_2 & 0xffff) * 0x10 + 0x10;
+    contextOffset = (operandDescriptor & 0xffff) * 0x10 + 0x10;
     break;
   case 3:
-    uVar1 = param_2 & 0xff;
-    switch(param_2 >> 8 & 0xf) {
+    uVar1 = operandDescriptor & 0xff;
+    switch(operandDescriptor >> 8 & 0xf) {
     case 0:
-      iVar2 = uVar1 * 0x80 + 0x24c0;
+      contextOffset = uVar1 * 0x80 + 0x24c0;
       break;
     case 1:
-      iVar2 = uVar1 * 0x80 + 0x24d0;
+      contextOffset = uVar1 * 0x80 + 0x24d0;
       break;
     case 2:
-      iVar2 = uVar1 * 0x80 + 0x24e0;
+      contextOffset = uVar1 * 0x80 + 0x24e0;
       break;
     case 3:
-      iVar2 = uVar1 * 0x80 + 0x24f0;
+      contextOffset = uVar1 * 0x80 + 0x24f0;
       break;
     case 4:
-      iVar2 = uVar1 * 0x80 + 0x2500;
+      contextOffset = uVar1 * 0x80 + 0x2500;
       break;
     case 5:
-      iVar2 = uVar1 * 0x80 + 0x2510;
+      contextOffset = uVar1 * 0x80 + 0x2510;
       break;
     case 6:
-      iVar2 = uVar1 * 0x80 + 0x2520;
+      contextOffset = uVar1 * 0x80 + 0x2520;
       break;
     case 7:
-      iVar2 = uVar1 * 0x80 + 0x2530;
+      contextOffset = uVar1 * 0x80 + 0x2530;
       break;
     default:
       return;
     }
     break;
   case 4:
-    uVar3 = param_2 >> 9 & 3;
-    uVar1 = param_2 & 0xff;
-    uVar4 = param_2 >> 8 & 1;
+    uVar3 = operandDescriptor >> 9 & 3;
+    uVar1 = operandDescriptor & 0xff;
+    uVar4 = operandDescriptor >> 8 & 1;
     if (uVar3 == 1) {
-      iVar2 = uVar4 * 0x240 + uVar1 * 0x30 + 0x2920;
+      contextOffset = uVar4 * 0x240 + uVar1 * 0x30 + 0x2920;
     }
     else if (uVar3 < 2) {
       if (uVar3 != 0) {
         return;
       }
-      iVar2 = uVar4 * 0x240 + uVar1 * 0x30 + 0x2910;
+      contextOffset = uVar4 * 0x240 + uVar1 * 0x30 + 0x2910;
     }
     else {
       if (uVar3 != 2) {
         return;
       }
-      iVar2 = uVar4 * 0x240 + uVar1 * 0x30 + 0x2930;
+      contextOffset = uVar4 * 0x240 + uVar1 * 0x30 + 0x2930;
     }
     break;
   case 5:
-    uVar1 = param_2 & 1;
-    switch(param_2 >> 1 & 7) {
+    uVar1 = operandDescriptor & 1;
+    switch(operandDescriptor >> 1 & 7) {
     case 0:
-      iVar2 = uVar1 * 0x240 + 0x28c0;
+      contextOffset = uVar1 * 0x240 + 0x28c0;
       break;
     case 1:
-      iVar2 = uVar1 * 0x240 + 0x28d0;
+      contextOffset = uVar1 * 0x240 + 0x28d0;
       break;
     case 2:
-      iVar2 = uVar1 * 0x240 + 0x28e0;
+      contextOffset = uVar1 * 0x240 + 0x28e0;
       break;
     case 3:
-      iVar2 = uVar1 * 0x240 + 0x28f0;
+      contextOffset = uVar1 * 0x240 + 0x28f0;
       break;
     case 4:
-      iVar2 = uVar1 * 0x240 + 0x2900;
+      contextOffset = uVar1 * 0x240 + 0x2900;
       break;
     case 5:
-      iVar2 = uVar1 * 0x240 + 0x2a90;
+      contextOffset = uVar1 * 0x240 + 0x2a90;
       break;
     default:
       return;
     }
     break;
   case 6:
-    iVar2 = 0x24b0;
+    contextOffset = 0x24b0;
     goto LAB_00025998;
   case 7:
-    uVar3 = param_2 >> 5 & 7;
-    uVar1 = param_2 & 0x1f;
+    uVar3 = operandDescriptor >> 5 & 7;
+    uVar1 = operandDescriptor & 0x1f;
     if (uVar3 == 1) {
-      iVar2 = uVar1 * 0x94 + 0x39b0;
+      contextOffset = uVar1 * 0x94 + 0x39b0;
     }
     else if (uVar3 < 2) {
       if (uVar3 != 0) {
         return;
       }
-      iVar2 = uVar1 * 0x94 + 0x398c;
+      contextOffset = uVar1 * 0x94 + 0x398c;
     }
     else if (uVar3 == 2) {
-      iVar2 = uVar1 * 0x94 + 0x39d4;
+      contextOffset = uVar1 * 0x94 + 0x39d4;
     }
     else {
       if (uVar3 != 3) {
         return;
       }
-      iVar2 = uVar1 * 0x94 + 0x39f8;
+      contextOffset = uVar1 * 0x94 + 0x39f8;
     }
     break;
   case 8:
-    uVar3 = param_2 >> 5 & 7;
-    uVar1 = param_2 & 0x1f;
+    uVar3 = operandDescriptor >> 5 & 7;
+    uVar1 = operandDescriptor & 0x1f;
     if (uVar3 == 1) {
-      iVar2 = uVar1 * 0x94 + 0x39c0;
+      contextOffset = uVar1 * 0x94 + 0x39c0;
     }
     else if (uVar3 < 2) {
       if (uVar3 != 0) {
         return;
       }
-      iVar2 = uVar1 * 0x94 + 0x399c;
+      contextOffset = uVar1 * 0x94 + 0x399c;
     }
     else if (uVar3 == 2) {
-      iVar2 = uVar1 * 0x94 + 0x39e4;
+      contextOffset = uVar1 * 0x94 + 0x39e4;
     }
     else {
       if (uVar3 != 3) {
         return;
       }
-      iVar2 = uVar1 * 0x94 + 0x3a08;
+      contextOffset = uVar1 * 0x94 + 0x3a08;
     }
     break;
   case 10:
-    iVar2 = (param_2 & 0xff) * 0x10 + 0x3e2c;
+    contextOffset = (operandDescriptor & 0xff) * 0x10 + 0x3e2c;
     break;
   case 0xb:
-    iVar2 = 0x2de0;
+    contextOffset = 0x2de0;
     goto LAB_00025998;
   case 0xc:
-    iVar2 = 0x2df0;
+    contextOffset = 0x2df0;
     goto LAB_00025998;
   case 0xd:
-    iVar2 = 0x30bc;
+    contextOffset = 0x30bc;
     goto LAB_00025998;
   case 0xe:
-    iVar2 = 0x30cc;
+    contextOffset = 0x30cc;
     goto LAB_00025998;
   case 0xf:
-    iVar2 = 0x1850;
+    contextOffset = 0x1850;
 LAB_00025998:
-    *param_4 = iVar2;
+    *outOffset = contextOffset;
     return;
   case 0x10:
-    uVar1 = param_2 & 0xff;
-    switch(param_2 >> 8 & 7) {
+    uVar1 = operandDescriptor & 0xff;
+    switch(operandDescriptor >> 8 & 7) {
     case 0:
       uVar1 = 0;
       break;
@@ -4527,34 +4535,34 @@ LAB_00025998:
     case 5:
       uVar1 = uVar1 + 8;
     }
-    if ((param_2 >> 0xe & 3) < 2) {
-      iVar2 = uVar1 * 0x40 + 0x1860;
+    if ((operandDescriptor >> 0xe & 3) < 2) {
+      contextOffset = uVar1 * 0x40 + 0x1860;
     }
     else {
-      iVar2 = uVar1 * 0x40 + 0x1e60;
+      contextOffset = uVar1 * 0x40 + 0x1e60;
     }
-    uVar1 = param_2 >> 0xe & 3;
-    *param_4 = iVar2;
-    uVar3 = param_2 >> 0xc & 3;
+    uVar1 = operandDescriptor >> 0xe & 3;
+    *outOffset = contextOffset;
+    uVar3 = operandDescriptor >> 0xc & 3;
     if (uVar1 < 3) {
       if (uVar1 != 0) {
-        iVar2 = *param_4 + uVar3 * 0x10;
+        contextOffset = *outOffset + uVar3 * 0x10;
         goto LAB_00025998;
       }
     }
     else if (uVar1 != 3) {
       return;
     }
-    *param_4 = *param_4 + uVar3 * 4;
-    *param_5 = 0x10;
+    *outOffset = *outOffset + uVar3 * 4;
+    *outComponentStride = 0x10;
     return;
   case 0x12:
-    *param_4 = 0x24a4;
+    *outOffset = 0x24a4;
     return;
   default:
     return;
   }
-  *param_4 = iVar2;
+  *outOffset = contextOffset;
   return;
 }
 
@@ -4937,14 +4945,14 @@ void _glPixelTransferi_Exec(glContext, pname, param)
   uint pname;
   uint param;
 {
-  float fVar1;
+  float neutralValue;
   float fVar2;
   undefined4 glErrorCode;
-  uint uVar4;
-  uint uVar5;
+  uint nonDefaultBits;
+  uint parameterBit;
   
   fVar2 = FLOAT_00108e54;
-  fVar1 = FLOAT_00108e50;
+  neutralValue = FLOAT_00108e50;
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
@@ -4953,66 +4961,66 @@ void _glPixelTransferi_Exec(glContext, pname, param)
     goto LAB_00026ef8;
   }
   if (pname == 0x8022) {
-    uVar5 = 0x40000000;
+    parameterBit = 0x40000000;
     *(float *)(glContext + 0x33a4) =
          (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
   }
   else {
     if (0x8022 < pname) {
       if (pname == 0x870f) {
-        uVar5 = 4;
+        parameterBit = 4;
         *(float *)(glContext + 0x3224) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
       }
       else {
         if (pname < 0x8710) {
           if (pname == 0x80b7) {
-            uVar5 = 0x80000;
+            parameterBit = 0x80000;
             *(float *)(glContext + 0x3374) =
                  (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-            fVar1 = fVar2;
+            neutralValue = fVar2;
           }
           else if (pname < 0x80b8) {
             if (pname == 0x80b4) {
-              uVar5 = 0x10000;
+              parameterBit = 0x10000;
               *(float *)(glContext + 0x335c) =
                    (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-              fVar1 = fVar2;
+              neutralValue = fVar2;
             }
             else if (pname < 0x80b5) {
               if (pname != 0x8023) goto LAB_00026ee8;
-              uVar5 = 0x80000000;
+              parameterBit = 0x80000000;
               *(float *)(glContext + 0x33ac) =
                    (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
             }
             else if (pname == 0x80b5) {
-              uVar5 = 0x20000;
+              parameterBit = 0x20000;
               *(float *)(glContext + 0x336c) =
                    (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-              fVar1 = fVar2;
+              neutralValue = fVar2;
             }
             else {
               if (pname != 0x80b6) goto LAB_00026ee8;
-              uVar5 = 0x40000;
+              parameterBit = 0x40000;
               *(float *)(glContext + 0x3364) =
                    (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-              fVar1 = fVar2;
+              neutralValue = fVar2;
             }
           }
           else if (pname == 0x80ba) {
-            uVar5 = 0x400000;
+            parameterBit = 0x400000;
             *(float *)(glContext + 0x3370) =
                  (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
           }
           else if (pname < 0x80bb) {
             if (pname == 0x80b8) {
-              uVar5 = 0x100000;
+              parameterBit = 0x100000;
               *(float *)(glContext + 0x3360) =
                    (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
             }
             else {
               if (pname != 0x80b9) goto LAB_00026ee8;
-              uVar5 = 0x200000;
+              parameterBit = 0x200000;
               *(float *)(glContext + 0x3368) =
                    (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
             }
@@ -5020,106 +5028,106 @@ void _glPixelTransferi_Exec(glContext, pname, param)
           else {
             if (pname != 0x80bb) {
               if (pname == 0x870e) {
-                uVar5 = 1;
+                parameterBit = 1;
                 *(float *)(glContext + 0x321c) =
                      (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
                 goto LAB_00026f44;
               }
               goto LAB_00026ee8;
             }
-            uVar5 = 0x800000;
+            parameterBit = 0x800000;
             *(float *)(glContext + 0x3378) =
                  (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
           }
           goto LAB_00026f00;
         }
         if (pname == 0x8714) {
-          uVar5 = 2;
+          parameterBit = 2;
           *(float *)(glContext + 0x3218) =
                (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-          fVar2 = fVar1;
+          fVar2 = neutralValue;
         }
         else if (pname < 0x8715) {
           if (pname == 0x8711) {
-            uVar5 = 0x40;
+            parameterBit = 0x40;
             *(float *)(glContext + 0x3234) =
                  (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
           }
           else if (pname < 0x8711) {
-            uVar5 = 0x10;
+            parameterBit = 0x10;
             *(float *)(glContext + 0x322c) =
                  (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
           }
           else if (pname == 0x8712) {
-            uVar5 = 0x100;
+            parameterBit = 0x100;
             *(float *)(glContext + 0x323c) =
                  (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
           }
           else {
             if (pname != 0x8713) goto LAB_00026ee8;
-            uVar5 = 0x400;
+            parameterBit = 0x400;
             *(float *)(glContext + 0x3244) =
                  (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
           }
         }
         else if (pname == 0x8717) {
-          uVar5 = 0x80;
+          parameterBit = 0x80;
           *(float *)(glContext + 0x3230) =
                (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-          fVar2 = fVar1;
+          fVar2 = neutralValue;
         }
         else if (pname < 0x8718) {
           if (pname == 0x8715) {
-            uVar5 = 8;
+            parameterBit = 8;
             *(float *)(glContext + 0x3220) =
                  (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-            fVar2 = fVar1;
+            fVar2 = neutralValue;
           }
           else {
             if (pname != 0x8716) goto LAB_00026ee8;
-            uVar5 = 0x20;
+            parameterBit = 0x20;
             *(float *)(glContext + 0x3228) =
                  (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-            fVar2 = fVar1;
+            fVar2 = neutralValue;
           }
         }
         else if (pname == 0x8718) {
-          uVar5 = 0x200;
+          parameterBit = 0x200;
           *(float *)(glContext + 0x3238) =
                (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-          fVar2 = fVar1;
+          fVar2 = neutralValue;
         }
         else {
           if (pname != 0x8719) goto LAB_00026ee8;
-          uVar5 = 0x800;
+          parameterBit = 0x800;
           *(float *)(glContext + 0x3240) =
                (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-          fVar2 = fVar1;
+          fVar2 = neutralValue;
         }
       }
 LAB_00026f44:
-      uVar4 = *(uint *)(glContext + 0x3418) & ~uVar5;
+      nonDefaultBits = *(uint *)(glContext + 0x3418) & ~parameterBit;
       if ((float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58) != fVar2) {
-        uVar4 = uVar4 | uVar5;
+        nonDefaultBits = nonDefaultBits | parameterBit;
       }
-      *(uint *)(glContext + 0x3418) = uVar4;
+      *(uint *)(glContext + 0x3418) = nonDefaultBits;
       goto LAB_00026f80;
     }
     if (pname == 0xd1b) {
-      uVar5 = 0x400;
+      parameterBit = 0x400;
       *(float *)(glContext + 0x31f8) =
            (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
     }
     else if (pname < 0xd1c) {
       if (pname == 0xd14) {
-        uVar5 = 0x10;
+        parameterBit = 0x10;
         *(float *)(glContext + 0x31ec) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        fVar1 = fVar2;
+        neutralValue = fVar2;
       }
       else if (pname < 0xd15) {
         if (pname == 0xd11) {
-          uVar5 = 2;
+          parameterBit = 2;
         }
         else if (pname < 0xd12) {
           if (pname != 0xd10) {
@@ -5132,115 +5140,115 @@ LAB_00026ef8:
             *(undefined4 *)(glContext + 0x7574) = glErrorCode;
             return;
           }
-          uVar5 = 1;
+          parameterBit = 1;
         }
         else if (pname == 0xd12) {
           *(uint *)(glContext + 0x3214) = param;
-          uVar5 = 4;
-          fVar1 = FLOAT_00108e50;
+          parameterBit = 4;
+          neutralValue = FLOAT_00108e50;
         }
         else {
           if (pname != 0xd13) goto LAB_00026ee8;
           *(uint *)(glContext + 0x3210) = param;
-          uVar5 = 8;
-          fVar1 = FLOAT_00108e50;
+          parameterBit = 8;
+          neutralValue = FLOAT_00108e50;
         }
       }
       else if (pname == 0xd18) {
-        uVar5 = 0x20;
+        parameterBit = 0x20;
         *(float *)(glContext + 0x31f4) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        fVar1 = fVar2;
+        neutralValue = fVar2;
       }
       else if (pname < 0xd19) {
         if (pname != 0xd15) goto LAB_00026ee8;
-        uVar5 = 0x100;
+        parameterBit = 0x100;
         *(float *)(glContext + 0x31e8) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
       }
       else if (pname == 0xd19) {
-        uVar5 = 0x200;
+        parameterBit = 0x200;
         *(float *)(glContext + 0x31f0) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
       }
       else {
         if (pname != 0xd1a) goto LAB_00026ee8;
-        uVar5 = 0x40;
+        parameterBit = 0x40;
         *(float *)(glContext + 0x31fc) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        fVar1 = fVar2;
+        neutralValue = fVar2;
       }
     }
     else if (pname == 0x801c) {
-      uVar5 = 0x1000000;
+      parameterBit = 0x1000000;
       *(float *)(glContext + 0x3390) =
            (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-      fVar1 = fVar2;
+      neutralValue = fVar2;
     }
     else if (pname < 0x801d) {
       if (pname == 0xd1d) {
-        uVar5 = 0x800;
+        parameterBit = 0x800;
         *(float *)(glContext + 0x3200) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
       }
       else if (pname < 0xd1d) {
-        uVar5 = 0x80;
+        parameterBit = 0x80;
         *(float *)(glContext + 0x3204) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        fVar1 = fVar2;
+        neutralValue = fVar2;
       }
       else if (pname == 0xd1e) {
-        uVar5 = 0x1000;
+        parameterBit = 0x1000;
         *(float *)(glContext + 0x320c) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        fVar1 = fVar2;
+        neutralValue = fVar2;
       }
       else {
         if (pname != 0xd1f) goto LAB_00026ee8;
-        uVar5 = 0x2000;
+        parameterBit = 0x2000;
         *(float *)(glContext + 0x3208) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
       }
     }
     else if (pname == 0x801f) {
-      uVar5 = 0x8000000;
+      parameterBit = 0x8000000;
       *(float *)(glContext + 0x33a8) =
            (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-      fVar1 = fVar2;
+      neutralValue = fVar2;
     }
     else if (pname < 0x8020) {
       if (pname == 0x801d) {
-        uVar5 = 0x2000000;
+        parameterBit = 0x2000000;
         *(float *)(glContext + 0x33a0) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        fVar1 = fVar2;
+        neutralValue = fVar2;
       }
       else {
         if (pname != 0x801e) goto LAB_00026ee8;
-        uVar5 = 0x4000000;
+        parameterBit = 0x4000000;
         *(float *)(glContext + 0x3398) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        fVar1 = fVar2;
+        neutralValue = fVar2;
       }
     }
     else if (pname == 0x8020) {
-      uVar5 = 0x10000000;
+      parameterBit = 0x10000000;
       *(float *)(glContext + 0x3394) =
            (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
     }
     else {
       if (pname != 0x8021) goto LAB_00026ee8;
-      uVar5 = 0x20000000;
+      parameterBit = 0x20000000;
       *(float *)(glContext + 0x339c) =
            (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
     }
   }
 LAB_00026f00:
-  uVar4 = *(uint *)(glContext + 0x3414) & ~uVar5;
-  if ((float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58) != fVar1) {
-    uVar4 = uVar4 | uVar5;
+  nonDefaultBits = *(uint *)(glContext + 0x3414) & ~parameterBit;
+  if ((float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58) != neutralValue) {
+    nonDefaultBits = nonDefaultBits | parameterBit;
   }
-  *(uint *)(glContext + 0x3414) = uVar4;
+  *(uint *)(glContext + 0x3414) = nonDefaultBits;
 LAB_00026f80:
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x200000;
   return;
@@ -5260,14 +5268,17 @@ int _glTexImage3D_Exec(glContext, target, level, internalformat, width, height, 
   undefined4 type;
   int pixels;
 {
-  byte bVar1;
-  ushort uVar2;
+  byte levelFlags;
+  ushort textureTargetBits;
   undefined4 glErrorCode;
-  int iVar4;
-  int iVar5;
+  int levelRecord;
+  int imageEndOffset;
+  int levelSlot;
+  int elementBytes;
+  int createdLevel;
   int iVar6;
   int pixelUnpackBuffer;
-  int iVar7;
+  int bufferSize;
   double bytesPerElement;
   
   if (-1 < *(short *)(glContext + 0x4a10)) goto LAB_000270fc;
@@ -5286,35 +5297,35 @@ LAB_00027098:
     if (iVar6 == 0) {
       return;
     }
-    uVar2 = *(ushort *)(iVar6 + 0x24);
-    if ((uVar2 & 0x3c00) == 0x1000) {
+    textureTargetBits = *(ushort *)(iVar6 + 0x24);
+    if ((textureTargetBits & 0x3c00) == 0x1000) {
 LAB_00027114:
-      iVar5 = iVar6 + level * 0x18;
-      iVar4 = iVar5 + 0xc4;
-      if ((*(byte *)(iVar5 + 0xcf) & 0x20) != 0) {
-        _gleDeletePluginTextureLevel(glContext,iVar6,iVar4,0,level);
-        if (*(int *)(iVar5 + 0xd8) != 0) {
-          bVar1 = *(byte *)(iVar5 + 0xcf);
-          if ((bVar1 & 1) == 0) {
-            _gleFreeTextureLevel(glContext,iVar6,iVar4);
-            bVar1 = *(byte *)(iVar5 + 0xcf);
+      levelSlot = iVar6 + level * 0x18;
+      levelRecord = levelSlot + 0xc4;
+      if ((*(byte *)(levelSlot + 0xcf) & 0x20) != 0) {
+        _gleDeletePluginTextureLevel(glContext,iVar6,levelRecord,0,level);
+        if (*(int *)(levelSlot + 0xd8) != 0) {
+          levelFlags = *(byte *)(levelSlot + 0xcf);
+          if ((levelFlags & 1) == 0) {
+            _gleFreeTextureLevel(glContext,iVar6,levelRecord);
+            levelFlags = *(byte *)(levelSlot + 0xcf);
           }
           else {
-            *(undefined4 *)(iVar5 + 0xd8) = 0;
+            *(undefined4 *)(levelSlot + 0xd8) = 0;
           }
-          *(byte *)(iVar5 + 0xcf) = bVar1 & 0xef;
+          *(byte *)(levelSlot + 0xcf) = levelFlags & 0xef;
         }
-        *(byte *)(iVar5 + 0xcf) = *(byte *)(iVar5 + 0xcf) & 0xdf;
+        *(byte *)(levelSlot + 0xcf) = *(byte *)(levelSlot + 0xcf) & 0xdf;
       }
-      iVar5 = _gleCreateTextureLevel
-                        (glContext,iVar6,iVar4,internalformat,width,height,depth,border,format,
+      createdLevel = _gleCreateTextureLevel
+                        (glContext,iVar6,levelRecord,internalformat,width,height,depth,border,format,
                          type,1,pixels);
-      if ((iVar5 != 0) && (pixels != 0)) {
-        _gleTextureImagePut(glContext,iVar4,0,0,0,width,height,depth,format,type,0,
+      if ((createdLevel != 0) && (pixels != 0)) {
+        _gleTextureImagePut(glContext,levelRecord,0,0,0,width,height,depth,format,type,0,
                             glContext + 0x31cc,pixels);
       }
       if ((((width != 0) && (height != 0)) && (depth != 0)) &&
-         (((_gleCreatePluginTextureLevel(glContext,iVar6,iVar4,0,level,internalformat),
+         (((_gleCreatePluginTextureLevel(glContext,iVar6,levelRecord,0,level,internalformat),
            (*(uint *)(iVar6 + 0x6c) & 0x8000) != 0 && (*(short *)(iVar6 + 0x60) == level)) &&
           (iVar6 = _gleGenMipmapsToLevel(glContext,iVar6,0,level,0xf,1), iVar6 != 0)))) {
         return;
@@ -5323,23 +5334,23 @@ LAB_00027114:
            *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
       return;
     }
-    if ((uVar2 & 0x3c00) == 0) {
-      *(ushort *)(iVar6 + 0x24) = uVar2 | 0x1000;
+    if ((textureTargetBits & 0x3c00) == 0) {
+      *(ushort *)(iVar6 + 0x24) = textureTargetBits | 0x1000;
       goto LAB_00027114;
     }
-    if ((uVar2 & 0xc00) == 0) goto LAB_00027114;
+    if ((textureTargetBits & 0xc00) == 0) goto LAB_00027114;
   }
   else {
-    iVar4 = _gleOffsetLimitImage3D
+    imageEndOffset = _gleOffsetLimitImage3D
                       (glContext + 0x31cc,width,height,depth,format,type,pixels);
-    iVar7 = *(int *)(pixelUnpackBuffer + 0x38);
+    bufferSize = *(int *)(pixelUnpackBuffer + 0x38);
     bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar5 = (int)bytesPerElement;
-    if (iVar4 <= iVar7) {
-      if (iVar5 == 0) {
-        iVar5 = _glePixelBytes(format,type);
+    elementBytes = (int)bytesPerElement;
+    if (imageEndOffset <= bufferSize) {
+      if (elementBytes == 0) {
+        elementBytes = _glePixelBytes(format,type);
       }
-      if (pixels == (pixels / iVar5) * iVar5) {
+      if (pixels == (pixels / elementBytes) * elementBytes) {
         if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
           _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
         }

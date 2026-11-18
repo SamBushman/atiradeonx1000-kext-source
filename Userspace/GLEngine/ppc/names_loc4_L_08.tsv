@@ -1,0 +1,95 @@
+local	_gleLoadDataElementFromMatNO	param_1	instrCursor	CONFIRMED	write cursor into the generated PowerPC code: each emitted word is an lfs/lfd (0xc0../0xc8..) load; returned advanced past the emitted words
+local	_gleLoadDataElementFromMatNO	param_2	componentCount	CONFIRMED	number of components loaded (1..4): one load word is emitted per component (compared with 1, 2, 3 and 4)
+local	_gleLoadDataElementFromMatNO	param_3	doubleFlag	CONFIRMED	4 selects lfd (0xc8200000 and 0xc8600000 pair loads) otherwise lfs (0xc0..): caller passes (flags >> 0x13) & 4
+local	_gleLoadDataElementFromMatNO	param_4	sourceOffset	CONFIRMED	byte offset field of the load displacement (param_4 & 0xffff, then +4/+8/+0xc for later components)
+local	_gleLoadDataElementFromMatNO	param_5	baseRegisterSelect	CONFIRMED	(param_5 + 0xb) << 16 is the rA field of the load: base register r11 or r12 (caller passes uVar7 & 1)
+local	_gleLoadDataElementFromMatNO	uVar1	instrWord	CONFIRMED	the load instruction word being built, stored at the cursor at the end
+local	_gleExecuteTCLVertexArray	param_2	mode	CONFIRMED	primitive mode: caller _gleDrawArraysOrElements_Core passes its mode here, forwarded unchanged as the third argument of the ctx+0x46e4 draw hook
+local	_gleExecuteTCLVertexArray	param_3	firstThenNextSequentialIndex	CONFIRMED	first index: scales the indices pointer by the element size (1/2/4 bytes) and in the 0x14ff (no index array) path counts up as the generated sequential index (same name as the caller _gleDrawArraysOrElements_Core)
+local	_gleExecuteTCLVertexArray	param_4	count	CONFIRMED	element count, the fifth hook argument and the size (count*4) of the generated index array
+local	_gleExecuteTCLVertexArray	param_5	indexType	CONFIRMED	GL index type compared with 0x1401 (UNSIGNED_BYTE), 0x1403 (UNSIGNED_SHORT), 0x1405 (UNSIGNED_INT) and 0x14ff (no index array / DrawArrays)
+local	_gleExecuteTCLVertexArray	param_6	indices	CONFIRMED	index pointer, advanced by first * element size before the hook call
+local	_gleExecuteTCLVertexArray	piVar4	sequentialIndices	CONFIRMED	malloc(count*4) array filled with first..first+count-1 for the DrawArrays (0x14ff) case, passed as UNSIGNED_INT indices and freed
+local	_gleExecuteTCLVertexArray	piVar3	indexWriteCursor	CONFIRMED	write cursor while filling sequentialIndices
+local	_gleExecuteTCLVertexArray	iVar1	indicesLeft	CONFIRMED	loop counter of the sequentialIndices fill loop
+local	_gleExecuteTCLVertexArray	uVar2	errorCode	CONFIRMED	GL error recorded at ctx+0x7574 when none is set: 0x505 (GL_OUT_OF_MEMORY, malloc failed) or 0x500 (GL_INVALID_ENUM, bad index type)
+local	_gleVectorNormalizeNO	param_2	inVector	CONFIRMED	source vector (x,y,z read from [0],[1],[2])
+local	_gleVectorNormalizeNO	param_3	outVector	CONFIRMED	result vector: normalized components stored to [0],[1],[2]
+local	_gleVectorNormalizeNO	dVar7	reciprocalSqrtEstimate	CONFIRMED	initial 1/sqrt(lengthSquared) estimate from the 0x5f375a00 magic-constant integer trick
+local	_gleVectorNormalizeNO	dVar6	newtonCorrection	INFERRED	Newton-Raphson correction term (constant - lengthSquared*estimate^2) used to refine the estimate
+local	_glePolyArea	param_2	vertices	CONFIRMED	vertex array with stride 0x100 bytes (pfVar8 advances 0x40 floats); x at [0], y at [1] (shoelace formula on x,y)
+local	_glePolyArea	param_3	vertexCount	CONFIRMED	number of vertices: loop bound param_2 + count*0x40 floats
+local	_glePolyArea	pfVar8	vertexCursor	CONFIRMED	running vertex pointer, advanced by one vertex (0x100 bytes) per iteration
+local	_glePolyArea	uVar9	iterationsLeft	CONFIRMED	remaining loop iterations ((end + 0xff - cursor) >> 8)
+local	_glePolyArea	fVar1	firstX	CONFIRMED	x of vertex 0, used in the closing edge term
+local	_glePolyArea	fVar2	firstY	CONFIRMED	y of vertex 0, used in the closing edge term
+local	_glePolyArea	fVar3	lastX	CONFIRMED	x of the most recently read vertex; closing edge term lastX*firstY - firstX*lastY
+local	_glePolyArea	fVar4	lastY	CONFIRMED	y of the most recently read vertex
+local	_glePolyArea	fVar5	previousY	CONFIRMED	y of the previous vertex in the shoelace term x(i-1)*y(i) - x(i)*y(i-1)
+local	_glePolyArea	fVar6	previousX	CONFIRMED	x of the previous vertex
+local	_glePolyArea	fVar7	doubledArea	CONFIRMED	accumulated shoelace sum (twice the signed polygon area), returned
+local	_glTexImage3D_Exec	bVar1	levelFlags	CONFIRMED	level flags byte at levelSlot+0xcf (bit 0 = data not owned, bit 4 = has data, bit 5 = has plugin level), same role as in _glTexImage2D_Exec
+local	_glTexImage3D_Exec	uVar2	textureTargetBits	CONFIRMED	ushort at textureObject+0x24: target/type bits tested with 0x3c00, 0x1000 and 0xc00, same role as in _glTexImage2D_Exec
+local	_glTexImage3D_Exec	iVar7	bufferSize	CONFIRMED	pixelUnpackBuffer+0x38: size of the bound unpack buffer, compared with the offset-limit of the image
+local	_LFSParserAttachString	param_1	parser	CONFIRMED	parser object: [0] source text pointer, [1] text length, [2] newline (line) count; the same object is passed to _LFSParserCheckForNewline
+local	_LFSParserAttachString	param_2	sourceString	CONFIRMED	NUL-terminated text to attach: copied with calloc+memmove or passed through _LFSParserPreprocessString
+local	_LFSParserAttachString	param_3	preprocessFlag	CONFIRMED	non-zero selects _LFSParserPreprocessString, zero a plain copy
+local	_LFSParserAttachString	iVar2	textCopy	CONFIRMED	calloc(strlen+1) copy of the source text, stored in parser[0]
+local	_LFSParserAttachString	uVar3	textLength	CONFIRMED	strlen of the attached text, stored in parser[1] and the scan bound
+local	_LFSParserAttachString	uVar4	scanPosition	CONFIRMED	byte position in the text, advanced by stepLength per _LFSParserCheckForNewline call
+local	_LFSParserAttachString	local_20	stepLength	CONFIRMED	in/out step: initialised to 1, _LFSParserCheckForNewline may enlarge it, and scanPosition advances by it
+local	_glePPUnlogParameters	param_2	program	CONFIRMED	program object being freed (caller frees its stream at +0x135 then calls this): +0x4ba is its bank index, as in _glePPLogParameters
+local	_glePPUnlogParameters	param_3	paramCount	CONFIRMED	number of 8-byte logged parameter entries, passed as the entry-list count at +0x28 of the logged block
+local	_glePPUnlogParameters	param_4	paramEntries	CONFIRMED	logged parameter entry list (two words per entry) at the end of the logged block
+local	_glePPUnlogParameters	uVar3	bankIndex	CONFIRMED	*(ushort*)(program+0x4ba): bank index scaled by 0xa30 / 0x518 / 0x146 / 0x28c into the shared-state log tables, same as bankIndex in _glePPLogParameters
+local	_glePPUnlogParameters	uVar8	paramWord2	CONFIRMED	second word of the entry: low 16 bits give the slot, its low 5 bits the bit cleared in the slot bitmap (cf. paramWord2 in _glePPLogParam)
+local	_glePPUnlogParameters	uVar2	slotIndex	CONFIRMED	paramWord2 & 0xffff: the logged slot whose use count is released
+local	_glePPUnlogParameters	uVar1	slotPriority	CONFIRMED	ushort use/priority count of the slot at sharedState+0x8874 (the same table _glePPLogParam reads as slotPriority): 1 frees the slot, above 1 is decremented
+local	_glePPUnlogParameters	iVar5	slotRecord	CONFIRMED	(bankIndex*0x146 + slot)*8 + sharedState: the 8-byte slot record at +0x8074/+0x8078, zeroed when the slot is freed
+local	_glePPUnlogParameters	iVar9	slotBitmapWord	CONFIRMED	(bankIndex*0x28c + (slot>>5))*4 + sharedState: bitmap word at +0x8a74 where the slot bit is set when freed
+local	_gleEvalDrawArraysOrElements_Entires_Exec	param_6	arrayStateRecord	CONFIRMED	ctx+0x4a60 + 0x10, forwarded unchanged as arrayStateRecord of _gleDrawArraysOrElements_VBO_Exec: its +0x324..0x32c dirty words and +0x332..0x338 select the VBO, VAR, CVA or IMM draw path
+local	_glePPLogParameters	param_2	program	CONFIRMED	program object: +0x4ba is the bank index, +0x14 receives the new log serial (the caller _glePPParse passes its program here)
+use	_gleEmptyImage	iVar16	skipRows	CONFIRMED	ctx+0x31d4: GL_UNPACK_SKIP_ROWS of the pixel store	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x31d4\);$	+1
+use	_gleEmptyImage	iVar16	skipRows	CONFIRMED	ctx+0x31d4: GL_UNPACK_SKIP_ROWS of the pixel store	^\s*pbVar20\ =\ \(byte\ \*\)\(param_7\ \+\ iVar16\ \*\ iVar19\ \+\ iVar6\);$	+1
+use	_gleEmptyImage	iVar16	skipRows	CONFIRMED	ctx+0x31d4: GL_UNPACK_SKIP_ROWS of the pixel store	^\s*pbVar20\ =\ \(byte\ \*\)\(iVar16\ \*\ iVar6\ \+\ iVar17\ \*\ iVar19\ \+\ param_7\);$	+1
+use	_gleEmptyImage	iVar16	elementSize	CONFIRMED	(int)_gleBytesPerElement(type): bytes per element reversed by the byte-swap loop	^\s*iVar16\ =\ \(int\)dVar22;$	+1
+use	_gleEmptyImage	iVar16	elementSize	CONFIRMED	(int)_gleBytesPerElement(type): bytes per element reversed by the byte-swap loop	^\s*if\ \(0\ <\ iVar16\)\ \{$	+2
+use	_gleEmptyImage	iVar16	elementSize	CONFIRMED	(int)_gleBytesPerElement(type): bytes per element reversed by the byte-swap loop	^\s*iVar21\ =\ iVar16;$	+1
+use	_gleEmptyImage	iVar16	elementSize	CONFIRMED	(int)_gleBytesPerElement(type): bytes per element reversed by the byte-swap loop	^\s*param_6\ =\ param_6\ \+\ iVar16;$	+2
+use	_gleEmptyImage	iVar17	skipPixels	CONFIRMED	ctx+0x31d8: GL_UNPACK_SKIP_PIXELS of the pixel store	^\s*iVar17\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x31d8\);$	+1
+use	_gleEmptyImage	iVar17	skipPixels	CONFIRMED	ctx+0x31d8: GL_UNPACK_SKIP_PIXELS of the pixel store	^\s*uVar8\ =\ iVar17\ \*\ iVar10;$	+1
+use	_gleEmptyImage	iVar17	skipPixels	CONFIRMED	ctx+0x31d8: GL_UNPACK_SKIP_PIXELS of the pixel store	^\s*pbVar20\ =\ \(byte\ \*\)\(iVar16\ \*\ iVar6\ \+\ iVar17\ \*\ iVar19\ \+\ param_7\);$	+1
+use	_gleEmptyImage	iVar17	componentsLeft	CONFIRMED	width * componentCount countdown of the elements still to swap in the current row	^\s*iVar17\ =\ param_2\ \*\ iVar10;$	+1
+use	_gleEmptyImage	iVar17	componentsLeft	CONFIRMED	width * componentCount countdown of the elements still to swap in the current row	^\s*iVar17\ =\ iVar17\ \+\ \-1;$	+1
+use	_gleEmptyImage	iVar17	componentsLeft	CONFIRMED	width * componentCount countdown of the elements still to swap in the current row	^\s*\}\ while\ \(iVar17\ !=\ 0\);$	+1
+use	_gleEmptyImage	iVar19	bitmapRowStride	CONFIRMED	bitmap row bytes: (rowLength * components + 7) >> 3 rounded up to the alignment	^\s*iVar19\ =\ iVar6\ \*\ iVar10\ \+\ 7\ >>\ 3;$	+2
+use	_gleEmptyImage	iVar19	bitmapRowStride	CONFIRMED	bitmap row bytes: (rowLength * components + 7) >> 3 rounded up to the alignment	^\s*iVar19\ =\ iVar19\ \+\ \(iVar21\ \-\ iVar6\);$	+1
+use	_gleEmptyImage	iVar19	bitmapRowStride	CONFIRMED	bitmap row bytes: (rowLength * components + 7) >> 3 rounded up to the alignment	^\s*pbVar20\ =\ \(byte\ \*\)\(param_7\ \+\ iVar16\ \*\ iVar19\ \+\ iVar6\);$	+1
+use	_gleEmptyImage	iVar19	bitmapRowStride	CONFIRMED	bitmap row bytes: (rowLength * components + 7) >> 3 rounded up to the alignment	^\s*pbVar20\ =\ pbVar20\ \+\ iVar19;$	+1
+use	_gleEmptyImage	iVar19	pixelBytes	CONFIRMED	_glePixelBytes(format,type): bytes per pixel	^\s*iVar19\ =\ _glePixelBytes\(param_4,param_5\);$	+1
+use	_gleEmptyImage	iVar19	pixelBytes	CONFIRMED	_glePixelBytes(format,type): bytes per pixel	^\s*iVar6\ =\ iVar6\ \*\ iVar19;$	+1
+use	_gleEmptyImage	iVar19	pixelBytes	CONFIRMED	_glePixelBytes(format,type): bytes per pixel	^\s*pbVar20\ =\ \(byte\ \*\)\(iVar16\ \*\ iVar6\ \+\ iVar17\ \*\ iVar19\ \+\ param_7\);$	+1
+use	_gleEmptyImage	iVar21	alignment	CONFIRMED	ctx+0x31e0: GL_UNPACK_ALIGNMENT of the pixel store	^\s*iVar21\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x31e0\);$	+1
+use	_gleEmptyImage	iVar21	alignment	CONFIRMED	ctx+0x31e0: GL_UNPACK_ALIGNMENT of the pixel store	^\s*iVar6\ =\ iVar19\ \-\ \(iVar19\ /\ iVar21\)\ \*\ iVar21;$	+1
+use	_gleEmptyImage	iVar21	alignment	CONFIRMED	ctx+0x31e0: GL_UNPACK_ALIGNMENT of the pixel store	^\s*iVar19\ =\ iVar19\ \+\ \(iVar21\ \-\ iVar6\);$	+1
+use	_gleEmptyImage	iVar21	alignment	CONFIRMED	ctx+0x31e0: GL_UNPACK_ALIGNMENT of the pixel store	^\s*iVar7\ =\ iVar6\ \-\ \(iVar6\ /\ iVar21\)\ \*\ iVar21;$	+1
+use	_gleEmptyImage	iVar21	alignment	CONFIRMED	ctx+0x31e0: GL_UNPACK_ALIGNMENT of the pixel store	^\s*iVar6\ =\ iVar6\ \+\ \(iVar21\ \-\ iVar7\);$	+1
+use	_gleEmptyImage	iVar21	swapBytesLeft	CONFIRMED	countdown of the bytes of one element still to be copied reversed (starts at elementSize)	^\s*iVar21\ =\ iVar16;$	+1
+use	_gleEmptyImage	iVar21	swapBytesLeft	CONFIRMED	countdown of the bytes of one element still to be copied reversed (starts at elementSize)	^\s*iVar21\ =\ iVar21\ \+\ \-1;$	+2
+use	_glCompressedTexImage2D_Exec	iVar6	unpackBuffer	CONFIRMED	ctx+0x4a6c: bound pixel unpack buffer; imageSize + offset is checked against +0x38 and the offset is rebased with +0x30 (+0x40 triggers _gleSynchronizePluginBuffer)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a6c\);$	+5
+use	_glCompressedTexImage2D_Exec	iVar6	unpackBuffer	CONFIRMED	ctx+0x4a6c: bound pixel unpack buffer; imageSize + offset is checked against +0x38 and the offset is rebased with +0x30 (+0x40 triggers _gleSynchronizePluginBuffer)	^\s*param_9\ =\ param_9\ \+\ \*\(int\ \*\)\(iVar6\ \+\ 0x30\);$	+1
+use	_glCompressedTexImage2D_Exec	iVar6	textureObject	CONFIRMED	result of _gleCheckCompressedTexImage2DArgs (0 = error already raised): the texture object whose level is replaced (+0x24 target bits, +0xc4 level records)	^\s*iVar6\ =\ _gleCheckCompressedTexImage2DArgs$	+1
+use	_glCompressedTexImage2D_Exec	iVar6	textureObject	CONFIRMED	result of _gleCheckCompressedTexImage2DArgs (0 = error already raised): the texture object whose level is replaced (+0x24 target bits, +0xc4 level records)	^\s*if\ \(iVar6\ ==\ 0\)\ \{$	+1
+use	_glCompressedTexImage2D_Exec	iVar6	textureObject	CONFIRMED	result of _gleCheckCompressedTexImage2DArgs (0 = error already raised): the texture object whose level is replaced (+0x24 target bits, +0xc4 level records)	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar6\ \+\ 0x24\);$	+1
+use	_glCompressedTexImage2D_Exec	iVar6	textureObject	CONFIRMED	result of _gleCheckCompressedTexImage2DArgs (0 = error already raised): the texture object whose level is replaced (+0x24 target bits, +0xc4 level records)	^\s*iVar5\ =\ iVar6\ \+\ uVar4\ \*\ 0x168\ \+\ param_3\ \*\ 0x18;$	+1
+use	_glCompressedTexImage2D_Exec	iVar6	textureObject	CONFIRMED	result of _gleCheckCompressedTexImage2DArgs (0 = error already raised): the texture object whose level is replaced (+0x24 target bits, +0xc4 level records)	^\s*_gleDeletePluginTextureLevel\(param_1,iVar6,iVar7,uVar4,param_3\);$	+1
+use	_glCompressedTexImage2D_Exec	iVar6	textureObject	CONFIRMED	result of _gleCheckCompressedTexImage2DArgs (0 = error already raised): the texture object whose level is replaced (+0x24 target bits, +0xc4 level records)	^\s*_gleFreeTextureLevel\(param_1,iVar6,iVar7\);$	+1
+use	_glCompressedTexImage2D_Exec	iVar6	textureObject	CONFIRMED	result of _gleCheckCompressedTexImage2DArgs (0 = error already raised): the texture object whose level is replaced (+0x24 target bits, +0xc4 level records)	^\s*\(param_1,iVar6,iVar7,param_4,param_5,param_6,1,param_7,param_4,0,1,param_9\);$	+1
+use	_glCompressedTexImage2D_Exec	iVar6	textureObject	CONFIRMED	result of _gleCheckCompressedTexImage2DArgs (0 = error already raised): the texture object whose level is replaced (+0x24 target bits, +0xc4 level records)	^\s*_gleCreatePluginTextureLevel\(param_1,iVar6,iVar7,uVar4,param_3,param_4\);$	+3
+use	_glCompressedTexImage2D_Exec	iVar6	textureObject	CONFIRMED	result of _gleCheckCompressedTexImage2DArgs (0 = error already raised): the texture object whose level is replaced (+0x24 target bits, +0xc4 level records)	^\s*\*\(ushort\ \*\)\(iVar6\ \+\ 0x24\)\ =\ uVar2\ \|\ 0x1000;$	+1
+use	_glCompressedTexImage2D_Exec	iVar5	levelSlot	CONFIRMED	textureObject + faceIndex*0x168 + level*0x18: the level slot whose +0xcf flags, +0xd8 data and +0xc4 record are updated	^\s*iVar5\ =\ iVar6\ \+\ uVar4\ \*\ 0x168\ \+\ param_3\ \*\ 0x18;$	+3
+use	_glCompressedTexImage2D_Exec	iVar5	levelSlot	CONFIRMED	textureObject + faceIndex*0x168 + level*0x18: the level slot whose +0xcf flags, +0xd8 data and +0xc4 record are updated	^\s*if\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xd8\)\ !=\ 0\)\ \{$	+2
+use	_glCompressedTexImage2D_Exec	iVar5	levelSlot	CONFIRMED	textureObject + faceIndex*0x168 + level*0x18: the level slot whose +0xcf flags, +0xd8 data and +0xc4 record are updated	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar5\ \+\ 0xcf\);$@2	+1
+use	_glCompressedTexImage2D_Exec	iVar5	levelSlot	CONFIRMED	textureObject + faceIndex*0x168 + level*0x18: the level slot whose +0xcf flags, +0xd8 data and +0xc4 record are updated	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0xd8\)\ =\ 0;$	+1
+use	_glCompressedTexImage2D_Exec	iVar5	levelSlot	CONFIRMED	textureObject + faceIndex*0x168 + level*0x18: the level slot whose +0xcf flags, +0xd8 data and +0xc4 record are updated	^\s*\*\(byte\ \*\)\(iVar5\ \+\ 0xcf\)\ =\ bVar1\ \&\ 0xef;$	+1
+use	_glCompressedTexImage2D_Exec	iVar5	levelSlot	CONFIRMED	textureObject + faceIndex*0x168 + level*0x18: the level slot whose +0xcf flags, +0xd8 data and +0xc4 record are updated	^\s*\*\(byte\ \*\)\(iVar5\ \+\ 0xcf\)\ =\ \*\(byte\ \*\)\(iVar5\ \+\ 0xcf\)\ \&\ 0xdf;$	+1

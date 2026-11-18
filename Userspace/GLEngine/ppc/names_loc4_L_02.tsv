@@ -1,0 +1,195 @@
+local	_gleVPRenderTriangleStrip_body	uVar18	vertexCountThenLastTriangle	INFERRED	(ctx+0x4858 - ctx+0x4854) / (short ctx+0x487c): vertex count after _gleVPEmulate; in the face-test branch overwritten in place by uVar20 + count*0x100 - 0x300 (start of the last triangle, same expression as lastTriangleStart)
+local	_gleVPRenderTriangleStrip_body	uVar20	vertexCursor	CONFIRMED	starts at the first vertex (ctx+0x4864), advanced by 0x100 (vertex record stride) per triangle
+local	_gleVPRenderTriangleStrip_body	uVar19	nextVertex	CONFIRMED	vertexCursor + 0x100: second vertex of the triangle (cull call argument)
+local	_gleVPRenderTriangleStrip_body	uVar5	runStart	INFERRED	first vertex of the current run of visible triangles with equal facing; start pointer of the polygon drawn by the ctx+0x46cc/0x46e0 callbacks
+local	_gleVPRenderTriangleStrip_body	uVar16	newRunStart	INFERRED	runStart for the next triangle: unchanged for a visible triangle, nextVertex for a culled one
+local	_gleVPRenderTriangleStrip_body	piVar15	triangleVertexList	CONFIRMED	scratch vertex pointer list at ctx+0x4870 receiving the 3 vertex pointers of the split-off first triangle
+local	_gleVPRenderTriangleStrip_body	puVar17	polygonVertexList	CONFIRMED	scratch vertex pointer list at ctx+0x4870 holding the triangle / clipped polygon vertex pointers
+local	_gleVPRenderTriangleStrip_body	local_4c	clippedCount	CONFIRMED	out parameter of _gleClipPolyPlane/_gleClipPoly: vertex count of the clipped polygon (local_4c[0])
+use	_glLinkProgramARB_Exec	uVar4	glErrorCode	CONFIRMED	0x501/0x502 stored to ctx+0x7574 (GL_INVALID_VALUE / GL_INVALID_OPERATION)	^\s*uVar4\ =\ 0x501;$	+1
+use	_glLinkProgramARB_Exec	uVar4	glErrorCode	CONFIRMED	0x501/0x502 stored to ctx+0x7574 (GL_INVALID_VALUE / GL_INVALID_OPERATION)	^\s*uVar4\ =\ 0x502;$	+1
+use	_glLinkProgramARB_Exec	uVar4	glErrorCode	CONFIRMED	0x501/0x502 stored to ctx+0x7574 (GL_INVALID_VALUE / GL_INVALID_OPERATION)	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x7574\)\ =\ uVar4;$	+1
+use	_glLinkProgramARB_Exec	uVar4	errorLogLength	CONFIRMED	strlen of the literal error string stored to programObj+0x1c (info log length)	^\s*uVar4\ =\ _strlen\("ERROR:\ One\ or\ more\ attached\ shaders\ not\ successfully\ compiled\\n"\);$	+2
+use	_glLinkProgramARB_Exec	uVar4	numActiveUniforms	CONFIRMED	_ShGetNumActiveUniforms result stored to programObj+0x28	^\s*uVar4\ =\ _ShGetNumActiveUniforms\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\)\);$	+2
+use	_glLinkProgramARB_Exec	uVar4	maxUniformNameLength	CONFIRMED	_ShGetMaxUniformLength result stored to programObj+0x2c	^\s*uVar4\ =\ _ShGetMaxUniformLength\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\)\);$	+2
+use	_glLinkProgramARB_Exec	uVar4	numActiveAttributes	CONFIRMED	_ShGetNumActiveAttributes result stored to programObj+0x34	^\s*uVar4\ =\ _ShGetNumActiveAttributes\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\)\);$	+2
+use	_glLinkProgramARB_Exec	uVar4	maxAttributeNameLength	CONFIRMED	_ShGetMaxAttributeLength result stored to programObj+0x38	^\s*uVar4\ =\ _ShGetMaxAttributeLength\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\)\);$	+2
+use	_glLinkProgramARB_Exec	uVar4	activeUserUniformsSize	CONFIRMED	_ShGetActiveUserUniformsSize result stored to programObj+0x30	^\s*uVar4\ =\ _ShGetActiveUserUniformsSize\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\)\);$	+1
+use	_glLinkProgramARB_Exec	uVar4	activeUserUniformsSize	CONFIRMED	_ShGetActiveUserUniformsSize result stored to programObj+0x30	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x30\)\ =\ uVar4;$	+1
+use	_glLinkProgramARB_Exec	uVar4	localParamRemapTable	CONFIRMED	_ShGetShaderLocalParamRemapTable result stored to stage record +0x4e0	^\s*uVar4\ =\ _ShGetShaderLocalParamRemapTable\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),0\);$	+2
+use	_glLinkProgramARB_Exec	uVar4	localParamRemapTable	CONFIRMED	_ShGetShaderLocalParamRemapTable result stored to stage record +0x4e0	^\s*uVar4\ =\ _ShGetShaderLocalParamRemapTable\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),1\);$	+2
+use	_glLinkProgramARB_Exec	uVar4	streamBuffer	CONFIRMED	_gleVecAlloc(streamLength << 3) buffer stored at stage record +0x508 and filled by _PPStreamGetStream	^\s*uVar4\ =\ _gleVecAlloc\(local_60\[0\]\ <<\ 3\);$	+3
+use	_glLinkProgramARB_Exec	uVar4	streamCopy	CONFIRMED	_PPStreamDuplicate(stream) result, linearized, converted and freed	^\s*uVar4\ =\ _PPStreamDuplicate\(iVar18\);$	+2
+use	_glLinkProgramARB_Exec	uVar4	streamCopy	CONFIRMED	_PPStreamDuplicate(stream) result, linearized, converted and freed	^\s*_PPEmulatorProgramSetupHandlesFromPPStream\(uVar11,param_1,uVar4\);$	+3
+use	_glLinkProgramARB_Exec	uVar4	uniformNameBuffer	CONFIRMED	_gleVecAlloc(numActiveUniforms*maxLength) stored to linkInfoRecord[2]	^\s*uVar4\ =\ _gleVecAlloc\(\*\(int\ \*\)\(iVar9\ \+\ 0x28\)\ \*\ \*\(int\ \*\)\(iVar9\ \+\ 0x2c\)\);$	+2
+use	_glLinkProgramARB_Exec	uVar4	uniformLocationTable	CONFIRMED	_gleVecAlloc(numActiveUniforms<<2) stored to linkInfoRecord[3]	^\s*uVar4\ =\ _gleVecAlloc\(\*\(int\ \*\)\(iVar9\ \+\ 0x28\)\ <<\ 2\);$	+2
+use	_glLinkProgramARB_Exec	uVar4	uniformLocation	CONFIRMED	_ShGetUniformLocation result stored in the location table	^\s*uVar4\ =\ _ShGetUniformLocation$	+1
+use	_glLinkProgramARB_Exec	uVar4	uniformLocation	CONFIRMED	_ShGetUniformLocation result stored in the location table	^\s*\*\(undefined4\ \*\)\(iVar18\ \*\ 4\ \+\ puVar5\[3\]\)\ =\ uVar4;$	+1
+use	_glLinkProgramARB_Exec	uVar4	attribNameBuffer	CONFIRMED	_gleVecAlloc(numActiveAttributes*maxLength) stored to linkInfoRecord[6]	^\s*uVar4\ =\ _gleVecAlloc\(\*\(int\ \*\)\(iVar9\ \+\ 0x34\)\ \*\ \*\(int\ \*\)\(iVar9\ \+\ 0x38\)\);$	+2
+use	_glLinkProgramARB_Exec	uVar4	attribLocationTable	CONFIRMED	_gleVecAlloc(numActiveAttributes<<2) stored to linkInfoRecord[7]	^\s*uVar4\ =\ _gleVecAlloc\(\*\(int\ \*\)\(iVar9\ \+\ 0x34\)\ <<\ 2\);$	+2
+use	_glLinkProgramARB_Exec	uVar4	attribLocation	CONFIRMED	_ShGetAttribLocation result stored in the location table	^\s*uVar4\ =\ _ShGetAttribLocation$	+1
+use	_glLinkProgramARB_Exec	uVar4	attribLocation	CONFIRMED	_ShGetAttribLocation result stored in the location table	^\s*\*\(undefined4\ \*\)\(iVar18\ \*\ 4\ \+\ puVar5\[7\]\)\ =\ uVar4;$	+1
+use	_glLinkProgramARB_Exec	uVar4	shaderStringCopy	CONFIRMED	_gleVecAlloc(strlen+1) stored to linkInfoRecord[8], filled by _strncpy	^\s*uVar4\ =\ _gleVecAlloc\(iVar18\ \+\ 1\);$	+2
+use	_glLinkProgramARB_Exec	uVar4	infoLogThenLength	CONFIRMED	_ShGetInfoLog result, overwritten by its _strlen, stored to programObj+0x1c	^\s*uVar4\ =\ _ShGetInfoLog\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\)\);$	+3
+local	_gleVPRenderTriangleFan_body	iVar13	fanCenter	CONFIRMED	first vertex of the fan (ctx+0x4864): vertex 0 of every triangle (first vertex argument of _gleCullTriangle, polygonList[0])
+local	_gleVPRenderTriangleFan_body	uVar15	vertexCountThenLastVertex	INFERRED	(ctx+0x4858 - ctx+0x4854) / (short ctx+0x487c): vertex count after _gleVPEmulate; overwritten in place by fanCenter + count*0x100 - 0x200 (last rim vertex)
+local	_gleVPRenderTriangleFan_body	bVar4	facingChanged	CONFIRMED	set when the triangle's backFacing differs from runFacing
+local	_gleVPRenderTriangleFan_body	local_4c	clippedCount	CONFIRMED	out parameter of _gleClipPolyPlane/_gleClipPoly: vertex count of the clipped polygon (local_4c[0])
+local	_gleRenderFlatTrianglesFunc_body	uVar18	triangleCursor	CONFIRMED	first vertex of the current triangle: starts at the batch start (ctx+0x4854), advanced by 0x300 (3 vertex records of 0x100) per triangle
+local	_gleRenderFlatTrianglesFunc_body	iVar13	runLightedVertices	CONFIRMED	vertices lit so far (+3 per triangle) in the per-run lighting loop
+local	_gleRenderFlatTrianglesFunc_body	iVar9	runLightVertex	INFERRED	third vertex (runStart + 0x200) of the first triangle of the run handed to the lighting callbacks, advanced by 0x300
+local	_gleRenderFlatTrianglesFunc_body	uVar15	runStart	INFERRED	first vertex of the current run of visible triangles with equal facing; start pointer of the draw callback (ctx+0x46c4) call
+local	_gleRenderFlatTrianglesFunc_body	local_4c	clippedCount	CONFIRMED	out parameter of _gleClipPolyPlane/_gleClipPoly: vertex count of the clipped polygon (local_4c[0])
+local	_gleSelectTriangleStripFunc_body	bVar2	noVertexProgram	INFERRED	false when ctx+0x4664 or ctx+0x5434 is set (vertex program active): then the batch is taken from ctx+0x4864 and _gleVPFlipColors is used (same layout as _gleVPRenderTriangleStrip_body)
+local	_gleSelectTriangleStripFunc_body	bVar4	vertexProgramTwoSide	CONFIRMED	ctx+0x4666 byte (named vertexProgramTwoSide in _gleVPRenderTriangleStrip_body), only evaluated when a vertex program is active; selects _gleVPFlipColors
+local	_gleSelectTriangleStripFunc_body	uVar5	runStart	INFERRED	first vertex of the current run of visible triangles with equal facing
+local	_gleSelectTriangleStripFunc_body	uVar15	newRunStart	INFERRED	runStart for the next triangle: unchanged for a visible triangle, nextVertex for a culled one
+local	_gleSelectTriangleStripFunc_body	uVar7	batchEndReset	INFERRED	ctx+0x485c (vertex program) or ctx+0x4854 (batch start) stored back to ctx+0x4858 before clipping each triangle
+local	_gleSelectTriangleStripFunc_body	uVar19	nextVertex	CONFIRMED	vertexCursor + 0x100: second vertex of the triangle (cull call argument)
+local	_gleSelectTriangleStripFunc_body	piVar14	triangleVertexList	CONFIRMED	scratch vertex pointer list at ctx+0x4870 receiving the 3 vertex pointers of the split-off first triangle
+local	_gleSelectTriangleStripFunc_body	puVar18	polygonVertexList	CONFIRMED	scratch vertex pointer list at ctx+0x4870 holding the triangle / clipped polygon vertex pointers
+local	_gleSelectTriangleStripFunc_body	local_4c	clippedCount	CONFIRMED	out parameter of _gleClipPolyPlane/_gleClipPoly: vertex count of the clipped polygon (local_4c[0])
+use	_gleUpdateLightRGBASums	fVar4	sceneColorRed	CONFIRMED	lightModelAmbient.r (ctx+0x2810) * material ambient r + emission r, stored to material[0x74] and [0x7a]	^\s*fVar4\ =\ \*\(float\ \*\)\(param_1\ \+\ 0x2810\)\ \*\ \*param_2\ \+\ param_2\[0xc\];$	+1
+use	_gleUpdateLightRGBASums	fVar4	sceneColorRed	CONFIRMED	lightModelAmbient.r (ctx+0x2810) * material ambient r + emission r, stored to material[0x74] and [0x7a]	^\s*param_2\[0x7a\]\ =\ fVar4;$	+1
+use	_gleUpdateLightRGBASums	fVar4	sceneColorRed	CONFIRMED	lightModelAmbient.r (ctx+0x2810) * material ambient r + emission r, stored to material[0x74] and [0x7a]	^\s*param_2\[0x74\]\ =\ fVar4;$	+1
+use	_gleUpdateLightRGBASums	fVar9	sceneColorGreen	CONFIRMED	ctx+0x2814 * material[1] + material[0xd]	^\s*fVar9\ =\ \*\(float\ \*\)\(param_1\ \+\ 0x2814\)\ \*\ param_2\[1\]\ \+\ param_2\[0xd\];$	+1
+use	_gleUpdateLightRGBASums	fVar9	sceneColorGreen	CONFIRMED	ctx+0x2814 * material[1] + material[0xd]	^\s*param_2\[0x7b\]\ =\ fVar9;$	+1
+use	_gleUpdateLightRGBASums	fVar9	sceneColorGreen	CONFIRMED	ctx+0x2814 * material[1] + material[0xd]	^\s*param_2\[0x75\]\ =\ fVar9;$	+1
+use	_gleUpdateLightRGBASums	fVar10	sceneColorBlue	CONFIRMED	ctx+0x2818 * material[2] + material[0xe]	^\s*fVar10\ =\ \*\(float\ \*\)\(param_1\ \+\ 0x2818\)\ \*\ param_2\[2\]\ \+\ param_2\[0xe\];$	+1
+use	_gleUpdateLightRGBASums	fVar10	sceneColorBlue	CONFIRMED	ctx+0x2818 * material[2] + material[0xe]	^\s*param_2\[0x7c\]\ =\ fVar10;$	+1
+use	_gleUpdateLightRGBASums	fVar10	sceneColorBlue	CONFIRMED	ctx+0x2818 * material[2] + material[0xe]	^\s*param_2\[0x76\]\ =\ fVar10;$	+1
+use	_gleUpdateLightRGBASums	fVar4	linkedSceneGreen	CONFIRMED	linked record +0x1d4 stored to material[0x75]	^\s*fVar4\ =\ \*\(float\ \*\)\(\(int\)GH_F2U\(fVar3\)\ \+\ 0x1d4\);$	+1
+use	_gleUpdateLightRGBASums	fVar4	linkedSceneGreen	CONFIRMED	linked record +0x1d4 stored to material[0x75]	^\s*param_2\[0x75\]\ =\ fVar4;$	+1
+use	_gleUpdateLightRGBASums	fVar11	linkedSceneBlue	CONFIRMED	linked record +0x1d8 stored to material[0x76]	^\s*fVar11\ =\ \*\(float\ \*\)\(\(int\)GH_F2U\(fVar3\)\ \+\ 0x1d8\);$	+1
+use	_gleUpdateLightRGBASums	fVar11	linkedSceneBlue	CONFIRMED	linked record +0x1d8 stored to material[0x76]	^\s*param_2\[0x76\]\ =\ fVar11;$	+1
+use	_gleUpdateLightRGBASums	fVar14	linkedAmbientSumRed	CONFIRMED	linked record +0x1e8 stored to material[0x7a]	^\s*fVar14\ =\ \*\(float\ \*\)\(\(int\)GH_F2U\(fVar3\)\ \+\ 0x1e8\);$	+1
+use	_gleUpdateLightRGBASums	fVar14	linkedAmbientSumRed	CONFIRMED	linked record +0x1e8 stored to material[0x7a]	^\s*param_2\[0x7a\]\ =\ fVar14;$	+1
+use	_gleUpdateLightRGBASums	fVar10	linkedAmbientSumGreen	CONFIRMED	linked record +0x1ec stored to material[0x7b]	^\s*fVar10\ =\ \*\(float\ \*\)\(\(int\)GH_F2U\(fVar3\)\ \+\ 0x1ec\);$	+1
+use	_gleUpdateLightRGBASums	fVar10	linkedAmbientSumGreen	CONFIRMED	linked record +0x1ec stored to material[0x7b]	^\s*param_2\[0x7b\]\ =\ fVar10;$	+1
+use	_gleUpdateLightRGBASums	fVar9	linkedAmbientSumBlue	CONFIRMED	linked record +0x1f0 stored to material[0x7c]	^\s*fVar9\ =\ \*\(float\ \*\)\(\(int\)GH_F2U\(fVar3\)\ \+\ 0x1f0\);$	+1
+use	_gleUpdateLightRGBASums	fVar9	linkedAmbientSumBlue	CONFIRMED	linked record +0x1f0 stored to material[0x7c]	^\s*param_2\[0x7c\]\ =\ fVar9;$	+1
+use	_gleUpdateLightRGBASums	dVar24	powTableStartDouble	INFERRED	exp(log(c)/shininess) result	^\s*dVar24\ =\ _log\(DOUBLE_00108dd8\);$	+1
+use	_gleUpdateLightRGBASums	dVar24	powTableStartDouble	INFERRED	exp(log(c)/shininess) result	^\s*dVar24\ =\ _exp\(dVar24\ /\ \(double\)dVar26\);$	+2
+use	_gleUpdateLightRGBASums	dVar24	powTableStartDouble	INFERRED	exp(log(c)/shininess) result	^\s*param_2\[0x7e\]\ =\ \(float\)dVar24;$	+1
+use	_gleUpdateLightRGBASums	dVar24	powConstResult	INFERRED	pow(DOUBLE_00108de0, shininess) stored to material[0x81] after subtracting a constant	^\s*dVar24\ =\ DOUBLE_00108de0;$	+1
+use	_gleUpdateLightRGBASums	dVar24	powConstResult	INFERRED	pow(DOUBLE_00108de0, shininess) stored to material[0x81] after subtracting a constant	^\s*dVar24\ =\ _pow\(dVar24,\(double\)dVar26\);$	+1
+use	_gleUpdateLightRGBASums	dVar24	powConstResult	INFERRED	pow(DOUBLE_00108de0, shininess) stored to material[0x81] after subtracting a constant	^\s*param_2\[0x81\]\ =\ \(float\)\(dVar24\ \-\ DOUBLE_00108d68\);$	+1
+use	_gleUpdateLightRGBASums	dVar24	powTableX	INFERRED	sample position of the 11-entry pow table: starts at material[0x7e], advanced by (1 - start)/10 each iteration	^\s*dVar24\ =\ \(double\)fVar4;$	+1
+use	_gleUpdateLightRGBASums	dVar24	powTableX	INFERRED	sample position of the 11-entry pow table: starts at material[0x7e], advanced by (1 - start)/10 each iteration	^\s*dVar23\ =\ _pow\(dVar24,\(double\)dVar26\);$	+1
+use	_gleUpdateLightRGBASums	dVar24	powTableX	INFERRED	sample position of the 11-entry pow table: starts at material[0x7e], advanced by (1 - start)/10 each iteration	^\s*dVar24\ =\ \(double\)\(float\)\(dVar24\ \+\ \(double\)\(\(dVar27\ \-\ fVar4\)\ /\ fVar9\)\);$	+1
+use	_gleUpdateLightRGBASums	dVar23	powSample	CONFIRMED	pow(powTableX, shininess) stored to the table entry	^\s*dVar23\ =\ _pow\(dVar24,\(double\)dVar26\);$	+2
+use	_gleUpdateLightRGBASums	fVar4	powTableStartLoaded	INFERRED	material[0x7e] reloaded as the table's first sample position	^\s*fVar4\ =\ param_2\[0x7e\];$	+1
+use	_gleUpdateLightRGBASums	fVar4	powTableStartLoaded	INFERRED	material[0x7e] reloaded as the table's first sample position	^\s*dVar24\ =\ \(double\)fVar4;$	+1
+use	_gleUpdateLightRGBASums	fVar4	powTableStartLoaded	INFERRED	material[0x7e] reloaded as the table's first sample position	^\s*dVar24\ =\ \(double\)\(float\)\(dVar24\ \+\ \(double\)\(\(dVar27\ \-\ fVar4\)\ /\ fVar9\)\);$	+1
+use	_gleUpdateLightRGBASums	fVar4	linkedShininessCache1	CONFIRMED	linked record +0x1f8 stored to material[0x7e]	^\s*fVar4\ =\ \*\(float\ \*\)\(\(int\)GH_F2U\(fVar3\)\ \+\ 0x1f8\);$	+1
+use	_gleUpdateLightRGBASums	fVar4	linkedShininessCache1	CONFIRMED	linked record +0x1f8 stored to material[0x7e]	^\s*param_2\[0x7e\]\ =\ fVar4;$	+1
+use	_gleUpdateLightRGBASums	fVar9	linkedShininessCache2	CONFIRMED	linked record +0x1fc stored to material[0x7f]	^\s*fVar9\ =\ \*\(float\ \*\)\(\(int\)GH_F2U\(fVar3\)\ \+\ 0x1fc\);$	+1
+use	_gleUpdateLightRGBASums	fVar9	linkedShininessCache2	CONFIRMED	linked record +0x1fc stored to material[0x7f]	^\s*param_2\[0x7f\]\ =\ fVar9;$	+1
+use	_gleUpdateLightRGBASums	fVar10	linkedShininessCache3	CONFIRMED	linked record +0x200 stored to material[0x80]	^\s*fVar10\ =\ \*\(float\ \*\)\(\(int\)GH_F2U\(fVar3\)\ \+\ 0x200\);$	+1
+use	_gleUpdateLightRGBASums	fVar10	linkedShininessCache3	CONFIRMED	linked record +0x200 stored to material[0x80]	^\s*param_2\[0x80\]\ =\ fVar10;$	+1
+use	_gleUpdateLightRGBASums	fVar11	linkedShininessCache4	CONFIRMED	linked record +0x204 stored to material[0x81]	^\s*fVar11\ =\ \*\(float\ \*\)\(\(int\)GH_F2U\(fVar3\)\ \+\ 0x204\);$	+1
+use	_gleUpdateLightRGBASums	fVar11	linkedShininessCache4	CONFIRMED	linked record +0x204 stored to material[0x81]	^\s*param_2\[0x81\]\ =\ fVar11;$	+1
+use	_gleUpdateLightRGBASums	fVar4	copiedTableEntry	CONFIRMED	entry read from the linked record's table (+0x208..) and stored to material[0x82..]	^\s*fVar4\ =\ \*pfVar5;$	+1
+use	_gleUpdateLightRGBASums	fVar4	copiedTableEntry	CONFIRMED	entry read from the linked record's table (+0x208..) and stored to material[0x82..]	^\s*\*pfVar12\ =\ fVar4;$	+1
+use	_gleUpdateLightRGBASums	fVar4	materialAmbientG	CONFIRMED	material[1] ambient green, multiplied by the light ambient green ctx light +0x2824	^\s*fVar4\ =\ param_2\[1\];$	+1
+use	_gleUpdateLightRGBASums	fVar4	materialAmbientG	CONFIRMED	material[1] ambient green, multiplied by the light ambient green ctx light +0x2824	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x54\)\ =\ fVar9\ \*\ fVar4;$	+1
+use	_gleUpdateLightRGBASums	fVar9	lightAmbientG	CONFIRMED	lightRecord+0x2824, multiplied by material ambient green	^\s*fVar9\ =\ \*\(float\ \*\)\(iVar22\ \+\ 0x2824\);$	+1
+use	_gleUpdateLightRGBASums	fVar9	lightAmbientG	CONFIRMED	lightRecord+0x2824, multiplied by material ambient green	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x54\)\ =\ fVar9\ \*\ fVar4;$	+1
+use	_gleUpdateLightRGBASums	fVar10	lightAmbientB	CONFIRMED	lightRecord+0x2828, multiplied by material ambient blue	^\s*fVar10\ =\ \*\(float\ \*\)\(iVar22\ \+\ 0x2828\);$	+1
+use	_gleUpdateLightRGBASums	fVar10	lightAmbientB	CONFIRMED	lightRecord+0x2828, multiplied by material ambient blue	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x58\)\ =\ fVar10\ \*\ fVar11;$	+1
+use	_gleUpdateLightRGBASums	fVar11	materialAmbientB	CONFIRMED	material[2]	^\s*fVar11\ =\ param_2\[2\];$	+1
+use	_gleUpdateLightRGBASums	fVar11	materialAmbientB	CONFIRMED	material[2]	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x58\)\ =\ fVar10\ \*\ fVar11;$	+1
+use	_gleUpdateLightRGBASums	fVar14	materialAmbientA	CONFIRMED	material[3] copied unchanged as the ambient product alpha (+0x5c)	^\s*fVar14\ =\ param_2\[3\];$	+1
+use	_gleUpdateLightRGBASums	fVar14	materialAmbientA	CONFIRMED	material[3] copied unchanged as the ambient product alpha (+0x5c)	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x5c\)\ =\ fVar14;$	+1
+use	_gleUpdateLightRGBASums	fVar4	materialDiffuseG	CONFIRMED	material[5], multiplied by lightRecord+0x2834	^\s*fVar4\ =\ param_2\[5\];$	+1
+use	_gleUpdateLightRGBASums	fVar4	materialDiffuseG	CONFIRMED	material[5], multiplied by lightRecord+0x2834	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 100\)\ =\ fVar9\ \*\ fVar4;$	+1
+use	_gleUpdateLightRGBASums	fVar9	lightDiffuseG	CONFIRMED	lightRecord+0x2834	^\s*fVar9\ =\ \*\(float\ \*\)\(iVar22\ \+\ 0x2834\);$	+1
+use	_gleUpdateLightRGBASums	fVar9	lightDiffuseG	CONFIRMED	lightRecord+0x2834	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 100\)\ =\ fVar9\ \*\ fVar4;$	+1
+use	_gleUpdateLightRGBASums	fVar10	lightDiffuseB	CONFIRMED	lightRecord+0x2838	^\s*fVar10\ =\ \*\(float\ \*\)\(iVar22\ \+\ 0x2838\);$	+1
+use	_gleUpdateLightRGBASums	fVar10	lightDiffuseB	CONFIRMED	lightRecord+0x2838	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x68\)\ =\ fVar10\ \*\ fVar11;$	+1
+use	_gleUpdateLightRGBASums	fVar11	materialDiffuseB	CONFIRMED	material[6]	^\s*fVar11\ =\ param_2\[6\];$	+1
+use	_gleUpdateLightRGBASums	fVar11	materialDiffuseB	CONFIRMED	material[6]	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x68\)\ =\ fVar10\ \*\ fVar11;$	+1
+use	_gleUpdateLightRGBASums	fVar14	materialDiffuseA	CONFIRMED	material[7] copied as the diffuse product alpha (+0x6c)	^\s*fVar14\ =\ param_2\[7\];$	+1
+use	_gleUpdateLightRGBASums	fVar14	materialDiffuseA	CONFIRMED	material[7] copied as the diffuse product alpha (+0x6c)	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x6c\)\ =\ fVar14;$	+1
+use	_gleUpdateLightRGBASums	fVar4	materialSpecularG	CONFIRMED	material[9], multiplied by lightRecord+0x2844	^\s*fVar4\ =\ param_2\[9\];$	+1
+use	_gleUpdateLightRGBASums	fVar4	materialSpecularG	CONFIRMED	material[9], multiplied by lightRecord+0x2844	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x74\)\ =\ fVar10\ \*\ fVar4;$	+1
+use	_gleUpdateLightRGBASums	fVar9	lightSpecularB	CONFIRMED	lightRecord+0x2848, multiplied by material[10]	^\s*fVar9\ =\ \*\(float\ \*\)\(iVar22\ \+\ 0x2848\);$	+1
+use	_gleUpdateLightRGBASums	fVar9	lightSpecularB	CONFIRMED	lightRecord+0x2848, multiplied by material[10]	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x78\)\ =\ fVar9\ \*\ fVar11;$	+1
+use	_gleUpdateLightRGBASums	fVar10	lightSpecularG	CONFIRMED	lightRecord+0x2844, multiplied by material[9]	^\s*fVar10\ =\ \*\(float\ \*\)\(iVar22\ \+\ 0x2844\);$	+1
+use	_gleUpdateLightRGBASums	fVar10	lightSpecularG	CONFIRMED	lightRecord+0x2844, multiplied by material[9]	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x74\)\ =\ fVar10\ \*\ fVar4;$	+1
+use	_gleUpdateLightRGBASums	fVar11	materialSpecularB	CONFIRMED	material[10]	^\s*fVar11\ =\ param_2\[10\];$	+1
+use	_gleUpdateLightRGBASums	fVar11	materialSpecularB	CONFIRMED	material[10]	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x78\)\ =\ fVar9\ \*\ fVar11;$	+1
+use	_gleUpdateLightRGBASums	fVar14	materialSpecularA	CONFIRMED	material[0xb] copied as the specular product alpha (+0x7c)	^\s*fVar14\ =\ param_2\[0xb\];$	+1
+use	_gleUpdateLightRGBASums	fVar14	materialSpecularA	CONFIRMED	material[0xb] copied as the specular product alpha (+0x7c)	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x7c\)\ =\ fVar14;$	+1
+local	_glLightfv_Exec	uVar10	lightIndex	CONFIRMED	light - 0x4000 (GL_LIGHT0 = 0x4000), checked <= 7 and used as the light record index (ctx + 0x2820 + lightIndex*0x80)
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*iVar7\ =\ param_1\ \+\ uVar10\ \*\ 0x80;$	+1
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x2820\)\ =\ \*param_4;$	+4
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x2830\)\ =\ \*param_4;$	+4
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x2840\)\ =\ \*param_4;$	+4
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x2850\)\ =\ fVar5;$	+1
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x2854\)\ =\ fVar2;$	+1
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x2858\)\ =\ fVar3;$	+1
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x285c\)\ =\ fVar4;$	+2
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x2854\)\ =$	+1
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x2858\)\ =$	+1
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x285c\)\ =$	+1
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x2860\)\ =\ \*param_4;$	+3
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x287c\)\ =\ fVar5;$	+1
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x2890\)\ =\ fVar5;$	+1
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x286c\)\ =\ \(float\)dVar11;$	+1
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ 0x2890\)\ =\ 0;$	+2
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x2870\)\ =\ \*param_4;$	+1
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x2874\)\ =\ \*param_4;$	+1
+use	_glLightfv_Exec	iVar7	lightRecord	CONFIRMED	glContext + lightIndex*0x80: light record holding ambient (+0x2820), diffuse (+0x2830), specular (+0x2840), position (+0x2850), spot direction (+0x2860), attenuation (+0x2870..0x2878), spot exponent (+0x287c)	^\s*\*\(float\ \*\)\(iVar7\ \+\ 0x2878\)\ =\ \*param_4;$	+1
+use	_glLightfv_Exec	iVar7	dirtyWord348Ptr	INFERRED	ctx word of the +0x348 dirty bit array selected by dirtyBitIndex2 ((b>>3)&0x1c)	^\s*iVar7\ =\ \(uVar8\ >>\ 3\ \&\ 0x1c\)\ \+\ param_1;$	+2
+local	_glLightfv_Exec	bVar1	dirtyBitIndex	CONFIRMED	byte from the per-light state table (ctx+0x5420 / program record +0x20); (b>>3 & 0x1c) selects the word and 1<<(b&0x1f) the bit set in the ctx+0x324 dirty array
+local	_glLightfv_Exec	iVar9	dirtyWord324Ptr	INFERRED	ctx word of the +0x324 dirty bit array selected by dirtyBitIndex
+local	_glLightfv_Exec	uVar8	dirtyBitIndex2	INFERRED	byte from the same table in the ctx+0x5424 state copy; selects the bit set in the ctx+0x348 dirty array
+use	_glLightfv_Exec	fVar5	positionX	CONFIRMED	params[0] of GL_POSITION (0x1203), stored to lightRecord+0x2850 and multiplied by the matrix at ctx+0x1cc0	^\s*fVar5\ =\ \*param_4;$	+2
+use	_glLightfv_Exec	fVar5	positionX	CONFIRMED	params[0] of GL_POSITION (0x1203), stored to lightRecord+0x2850 and multiplied by the matrix at ctx+0x1cc0	^\s*\(fVar3\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ce0\)\ \+$	+2
+use	_glLightfv_Exec	fVar5	positionX	CONFIRMED	params[0] of GL_POSITION (0x1203), stored to lightRecord+0x2850 and multiplied by the matrix at ctx+0x1cc0	^\s*\(fVar3\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ce4\)\ \+$	+2
+use	_glLightfv_Exec	fVar5	positionX	CONFIRMED	params[0] of GL_POSITION (0x1203), stored to lightRecord+0x2850 and multiplied by the matrix at ctx+0x1cc0	^\s*\(fVar3\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1ce8\)\ \+$	+2
+use	_glLightfv_Exec	fVar5	positionX	CONFIRMED	params[0] of GL_POSITION (0x1203), stored to lightRecord+0x2850 and multiplied by the matrix at ctx+0x1cc0	^\s*\(fVar3\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x1cec\)\ \+$	+2
+local	_glLightfv_Exec	fVar2	positionY	CONFIRMED	params[1] of GL_POSITION
+local	_glLightfv_Exec	fVar3	positionZ	CONFIRMED	params[2] of GL_POSITION
+local	_glLightfv_Exec	fVar4	positionW	CONFIRMED	params[3] of GL_POSITION
+use	_glLightfv_Exec	fVar5	spotExponentValue	CONFIRMED	params[0] of GL_SPOT_EXPONENT (0x1205), range-checked and stored to lightRecord+0x287c	^\s*fVar5\ =\ \*param_4;$@2	+6
+use	_glLightfv_Exec	fVar5	spotCutoffValue	CONFIRMED	params[0] of GL_SPOT_CUTOFF (0x1206): 0..90, or 180 for no cutoff; stored to lightRecord+0x2890	^\s*fVar5\ =\ \*param_4;$@3	+3
+use	_glLightfv_Exec	fVar5	spotCutoffValue	CONFIRMED	params[0] of GL_SPOT_CUTOFF (0x1206): 0..90, or 180 for no cutoff; stored to lightRecord+0x2890	^\s*if\ \(fVar5\ !=\ FLOAT_00108e8c\)\ goto\ LAB_00031bc8;$	+1
+local	_PPEmulatorProgramSetupHandlesFromPPStream	param_1	emulatorProgram	CONFIRMED	caller _glLinkProgramARB_Exec passes the _PPEmulatorProgramCreate result; handle banks at +0x80/+0x8c/+0x98/+0xa4 are filled
+local	_PPEmulatorProgramSetupHandlesFromPPStream	param_3	ppStream	CONFIRMED	caller passes the _PPStreamDuplicate result; its chunk lists at +4/+0x10/+0x18/+0x1c are walked
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar5	tempCountThenRemaining	INFERRED	chunk-list max index + 1 (from _PPStreamChunkListGetMaxIndex of the list at ppStream+4), then counted down in the identity-handle loop	^\s*iVar5\ =\ 0;$	+1
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar5	tempCountThenRemaining	INFERRED	chunk-list max index + 1 (from _PPStreamChunkListGetMaxIndex of the list at ppStream+4), then counted down in the identity-handle loop	^\s*iVar5\ =\ _PPStreamChunkListGetMaxIndex\(\*\(int\ \*\)\(param_3\ \+\ 4\)\);$	+2
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar5	tempCountThenRemaining	INFERRED	chunk-list max index + 1 (from _PPStreamChunkListGetMaxIndex of the list at ppStream+4), then counted down in the identity-handle loop	^\s*\(param_1,iVar5,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x1c\)\ \+\ 8\),$	+3
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar5	tempCountThenRemaining	INFERRED	chunk-list max index + 1 (from _PPStreamChunkListGetMaxIndex of the list at ppStream+4), then counted down in the identity-handle loop	^\s*for\ \(;\ iVar5\ !=\ 0;\ iVar5\ =\ iVar5\ \+\ \-1\)\ \{$	+1
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar5	resultChunk	CONFIRMED	cursor over the chunk list at ppStream+0x1c; each chunk resolved with _gleVPGetResultOffset	^\s*for\ \(iVar5\ =\ \*\*\(int\ \*\*\)\(param_3\ \+\ 0x1c\);\ iVar5\ !=\ 0;\ iVar5\ =\ \*\(int\ \*\)\(iVar5\ \+\ 8\)\)\ \{$	+2
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar5	resultChunk	CONFIRMED	cursor over the chunk list at ppStream+0x1c; each chunk resolved with _gleVPGetResultOffset	^\s*\*\(int\ \*\)\(iVar2\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar5\ \+\ 0x12\)\ \*\ 0x10\)\ =\ local_2c;$	+4
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar5	identityMappedChunk	INFERRED	cursor over the chunk list at ppStream+0x18; its handle offset is simply register index*0x10	^\s*for\ \(iVar5\ =\ \*\*\(int\ \*\*\)\(param_3\ \+\ 0x18\);\ iVar5\ !=\ 0;\ iVar5\ =\ \*\(int\ \*\)\(iVar5\ \+\ 8\)\)\ \{$	+6
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar5	parameterChunk	CONFIRMED	cursor over the chunk list at ppStream+0x10; resolved with _gleVPGetParameterPtr	^\s*for\ \(iVar5\ =\ \*\*\(int\ \*\*\)\(param_3\ \+\ 0x10\);\ iVar5\ !=\ 0;\ iVar5\ =\ \*\(int\ \*\)\(iVar5\ \+\ 8\)\)\ \{$	+2
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar5	parameterChunk	CONFIRMED	cursor over the chunk list at ppStream+0x10; resolved with _gleVPGetParameterPtr	^\s*_PPStreamChunkGetStream\(\&local_40,iVar5,param_3,auStack_30,0\);$@2	+1
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar5	parameterChunk	CONFIRMED	cursor over the chunk list at ppStream+0x10; resolved with _gleVPGetParameterPtr	^\s*\*\(int\ \*\)\(iVar2\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar5\ \+\ 0x12\)\ \*\ 0x10\)\ =\ local_2c;$@3	+4
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar5	parameterChunk	CONFIRMED	cursor over the chunk list at ppStream+0x10; resolved with _gleVPGetParameterPtr	^\s*_PPStreamChunkGetStream\(\&local_40,iVar5,param_3,auStack_30,0\);$@3	+1
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar5	parameterChunk	CONFIRMED	cursor over the chunk list at ppStream+0x10; resolved with _gleVPGetParameterPtr	^\s*\*\(int\ \*\)\(iVar2\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar5\ \+\ 0x12\)\ \*\ 0x10\)\ =\ local_2c;$@4	+4
+local	_PPEmulatorProgramSetupHandlesFromPPStream	iVar4	indexHandleBank	INFERRED	emulatorProgram+0x80: bank filled with handle[i] = i*0x10 (+4/+8/+0xc per component) for the max-index registers
+local	_PPEmulatorProgramSetupHandlesFromPPStream	iVar3	handleEntry	CONFIRMED	address of the 16-byte handle entry being filled (offset + bank)
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar2	resultHandleBank	CONFIRMED	emulatorProgram+0x8c: handle bank of the result chunks	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x8c\);$	+1
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar2	resultHandleBank	CONFIRMED	emulatorProgram+0x8c: handle bank of the result chunks	^\s*\*\(int\ \*\)\(iVar2\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar5\ \+\ 0x12\)\ \*\ 0x10\)\ =\ local_2c;$	+4
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar2	identityHandleBank	INFERRED	emulatorProgram+0x98: handle bank of the identity-mapped chunks	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x98\);$	+1
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar2	identityHandleBank	INFERRED	emulatorProgram+0x98: handle bank of the identity-mapped chunks	^\s*\*\(int\ \*\)\(iVar2\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar5\ \+\ 0x12\)\ \*\ 0x10\)\ =\ local_2c;$@2	+4
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar2	parameterHandleBank	CONFIRMED	emulatorProgram+0xa4: handle bank of the parameter chunks	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xa4\);$	+1
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar2	parameterHandleBank	CONFIRMED	emulatorProgram+0xa4: handle bank of the parameter chunks	^\s*\*\(int\ \*\)\(iVar2\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar5\ \+\ 0x12\)\ \*\ 0x10\)\ =\ local_2c;$@3	+4
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar2	parameterHandleBank	CONFIRMED	emulatorProgram+0xa4: handle bank of the parameter chunks	^\s*\*\(int\ \*\)\(iVar2\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar5\ \+\ 0x12\)\ \*\ 0x10\)\ =\ local_2c;$@4	+4
+local	_PPEmulatorProgramSetupHandlesFromPPStream	uVar1	operandKind	INFERRED	chunk+0xc >> 16 & 0x1f: the operand kind field, same bit field _gleVPGetParameterPtr switches on; 1 and 0x11 are mapped directly
+local	_PPEmulatorProgramSetupHandlesFromPPStream	local_40	operandDescriptor	CONFIRMED	first output word of _PPStreamChunkGetStream, passed as the descriptor argument of _gleVPGetResultOffset/_gleVPGetParameterPtr
+local	_PPEmulatorProgramSetupHandlesFromPPStream	local_3c	operandDescriptorWord2	CONFIRMED	second output word of _PPStreamChunkGetStream (arg 3 of _gleVPGetResultOffset/_gleVPGetParameterPtr)
+local	_PPEmulatorProgramSetupHandlesFromPPStream	local_2c	handleOffset	CONFIRMED	out parameter offset from _gleVPGetResultOffset/_gleVPGetParameterPtr (or index*0x10): stored to the handle entry, +4/+8/+0xc (+stride) for the other components
+local	_PPEmulatorProgramSetupHandlesFromPPStream	local_24	componentStride	CONFIRMED	out parameter of _gleVPGetParameterPtr: stride between component offsets (4 normally, 0x10 for matrix rows)
+local	_PPEmulatorProgramSetupHandlesFromPPStream	auStack_28	resultComponentStride	INFERRED	out parameter of _gleVPGetResultOffset (set to 4), not used by the caller
+local	_gleVPGetParameterPtr	param_2	operandDescriptor	CONFIRMED	first output word of _PPStreamChunkGetStream (local_40 in _PPEmulatorProgramSetupHandlesFromPPStream); bits 16..20 select the operand kind
+local	_gleVPGetParameterPtr	param_4	outOffset	CONFIRMED	out parameter: byte offset stored for the parameter (iVar2 = base + index*stride), read by the caller as the handle offset
+local	_gleVPGetParameterPtr	param_5	outComponentStride	CONFIRMED	out parameter: stride between components (initialised to 4, 0x10 for the matrix-row case), read by the caller as local_24[0]
+local	_gleVPGetParameterPtr	iVar2	contextOffset	INFERRED	byte offset of the parameter inside the context, stored to *outOffset
+local	_gleVPGetResultOffset	param_2	operandDescriptor	CONFIRMED	first output word of _PPStreamChunkGetStream; bits 16..19 select the result kind
+local	_gleVPGetResultOffset	param_4	outOffset	CONFIRMED	out parameter: result offset stored to local_2c by the caller
+local	_gleVPGetResultOffset	param_5	outComponentStride	CONFIRMED	out parameter initialised to 4
+local	_gleVPGetResultOffset	iVar1	vertexRecordOffset	INFERRED	offset stored to *outOffset: 0x20/0x30/0x50/0x70 match the vertex record layout (eye position +0x20, colour +0x30, secondary colour +0x50) used by the lighting functions

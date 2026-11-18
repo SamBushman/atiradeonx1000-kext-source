@@ -1922,73 +1922,73 @@ void _gleReclaimBufferObjectResources(glContext)
 }
 
 /* _OffsetLimitImage3D @ 0xc7c78 (408 bytes) */
-int _OffsetLimitImage3D(param_1, param_2, param_3, param_4, format, type, param_7, param_8)
-  int *param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int _OffsetLimitImage3D(pixelStore, width, height, depth, format, type, baseOffset, skipImages)
+  int *pixelStore;
+  int width;
+  int height;
+  int depth;
   undefined4 format;
   int type;
-  int param_7;
-  int param_8;
+  int baseOffset;
+  int skipImages;
 {
   uint uVar1;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  uint rowStride;
+  int skipRows;
+  int alignment;
+  int skipPixels;
+  int imageHeight;
   int iVar7;
-  int iVar8;
+  int rowLength;
   
-  iVar3 = param_1[2];
-  iVar8 = *param_1;
-  iVar6 = param_1[1];
-  iVar4 = param_1[5];
-  iVar5 = param_1[3];
+  skipRows = pixelStore[2];
+  rowLength = *pixelStore;
+  imageHeight = pixelStore[1];
+  alignment = pixelStore[5];
+  skipPixels = pixelStore[3];
   if (type == 0x1a00) {
-    if (iVar8 < 1) {
-      iVar8 = param_2;
+    if (rowLength < 1) {
+      rowLength = width;
     }
-    if (iVar6 < 1) {
-      iVar6 = param_3;
+    if (imageHeight < 1) {
+      imageHeight = height;
     }
-    uVar1 = iVar8 + 7;
-    uVar2 = ((int)uVar1 >> 3) + (uint)((int)uVar1 < 0 && (uVar1 & 7) != 0);
-    uVar1 = uVar2 & iVar4 - 1U;
+    uVar1 = rowLength + 7;
+    rowStride = ((int)uVar1 >> 3) + (uint)((int)uVar1 < 0 && (uVar1 & 7) != 0);
+    uVar1 = rowStride & alignment - 1U;
     if (uVar1 != 0) {
-      uVar2 = uVar2 + (iVar4 - uVar1);
+      rowStride = rowStride + (alignment - uVar1);
     }
-    uVar1 = iVar5 + param_2 + 7;
-    iVar7 = param_7 + iVar6 * uVar2 * (param_8 + param_4 + -1) + uVar2 * (iVar3 + param_3 + -1) +
+    uVar1 = skipPixels + width + 7;
+    iVar7 = baseOffset + imageHeight * rowStride * (skipImages + depth + -1) + rowStride * (skipRows + height + -1) +
             ((int)uVar1 >> 3) + (uint)((int)uVar1 < 0 && (uVar1 & 7) != 0);
   }
   else {
     iVar7 = _glePixelBytes(format,type);
-    if ((((iVar8 == 0 && iVar6 == 0) && iVar5 == 0) && iVar3 == 0) && iVar5 == 0) {
-      uVar2 = _gleRowBytes(format,type,param_2);
-      uVar1 = uVar2 & iVar4 - 1U;
+    if ((((rowLength == 0 && imageHeight == 0) && skipPixels == 0) && skipRows == 0) && skipPixels == 0) {
+      rowStride = _gleRowBytes(format,type,width);
+      uVar1 = rowStride & alignment - 1U;
       if (uVar1 != 0) {
-        uVar2 = uVar2 + (iVar4 - uVar1);
+        rowStride = rowStride + (alignment - uVar1);
       }
-      iVar7 = param_4 * param_3 * uVar2;
+      iVar7 = depth * height * rowStride;
     }
     else {
-      if (iVar8 < 1) {
-        iVar8 = param_2;
+      if (rowLength < 1) {
+        rowLength = width;
       }
-      if (iVar6 < 1) {
-        iVar6 = param_3;
+      if (imageHeight < 1) {
+        imageHeight = height;
       }
-      uVar2 = _gleRowBytes(format,type,iVar8);
-      uVar1 = uVar2 & iVar4 - 1U;
+      rowStride = _gleRowBytes(format,type,rowLength);
+      uVar1 = rowStride & alignment - 1U;
       if (uVar1 != 0) {
-        uVar2 = uVar2 + (iVar4 - uVar1);
+        rowStride = rowStride + (alignment - uVar1);
       }
-      iVar7 = iVar7 * (iVar5 + param_2);
-      param_7 = param_7 + iVar6 * uVar2 * (param_8 + param_4 + -1) + uVar2 * (iVar3 + param_3 + -1);
+      iVar7 = iVar7 * (skipPixels + width);
+      baseOffset = baseOffset + imageHeight * rowStride * (skipImages + depth + -1) + rowStride * (skipRows + height + -1);
     }
-    iVar7 = param_7 + iVar7;
+    iVar7 = baseOffset + iVar7;
   }
   return iVar7;
 }

@@ -1182,22 +1182,24 @@ void _glCopyColorTable_Exec(int glContext,uint target,undefined4 internalformat,
   bool bVar1;
   bool noStateChangePending;
   char rendererInfoByte79;
-  byte bVar3;
-  ushort uVar4;
+  byte levelFlags;
+  ushort textureTargetBits;
   undefined4 uVar5;
   int *srcCursor;
   int iVar7;
   int iVar8;
+  int textureLevel;
   int framebufferObject;
   undefined4 uVar9;
   undefined4 uVar10;
   undefined4 uVar11;
-  int iVar12;
+  int textureObject;
   int matrixChangeBits;
   uint uVar13;
   uint dispatchFlags;
   uint changeWord3;
   int iVar14;
+  int tableScaleBias;
   int *changeWordCursor;
   double extraout_f1;
   
@@ -1297,71 +1299,71 @@ LAB_000608e8:
     }
   }
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar12 = _gleCheckCopyColorTableArgs(glContext,target,internalformat,width);
-    if (iVar12 == 0) {
+    textureObject = _gleCheckCopyColorTableArgs(glContext,target,internalformat,width);
+    if (textureObject == 0) {
       return;
     }
-    uVar4 = *(ushort *)(iVar12 + 0x24);
-    if ((uVar4 & 0x3c00) == 0x1000) {
+    textureTargetBits = *(ushort *)(textureObject + 0x24);
+    if ((textureTargetBits & 0x3c00) == 0x1000) {
 LAB_00060a7c:
-      iVar8 = iVar12 + 0xac;
-      if ((*(byte *)(iVar12 + 0xb7) & 0x20) != 0) {
-        _gleDeletePluginTextureLevel(glContext,iVar12,iVar8,0,0xffffffff);
-        if (*(int *)(iVar12 + 0xc0) != 0) {
-          bVar3 = *(byte *)(iVar12 + 0xb7);
-          if ((bVar3 & 1) == 0) {
-            _gleFreeTextureLevel(glContext,iVar12,iVar8);
-            bVar3 = *(byte *)(iVar12 + 0xb7);
+      textureLevel = textureObject + 0xac;
+      if ((*(byte *)(textureObject + 0xb7) & 0x20) != 0) {
+        _gleDeletePluginTextureLevel(glContext,textureObject,textureLevel,0,0xffffffff);
+        if (*(int *)(textureObject + 0xc0) != 0) {
+          levelFlags = *(byte *)(textureObject + 0xb7);
+          if ((levelFlags & 1) == 0) {
+            _gleFreeTextureLevel(glContext,textureObject,textureLevel);
+            levelFlags = *(byte *)(textureObject + 0xb7);
           }
           else {
-            *(undefined4 *)(iVar12 + 0xc0) = 0;
+            *(undefined4 *)(textureObject + 0xc0) = 0;
           }
-          *(byte *)(iVar12 + 0xb7) = bVar3 & 0xef;
+          *(byte *)(textureObject + 0xb7) = levelFlags & 0xef;
         }
-        *(byte *)(iVar12 + 0xb7) = *(byte *)(iVar12 + 0xb7) & 0xdf;
+        *(byte *)(textureObject + 0xb7) = *(byte *)(textureObject + 0xb7) & 0xdf;
       }
-      iVar14 = glContext + 0x33d0;
+      tableScaleBias = glContext + 0x33d0;
       if (target != 0x80d1) {
         if (target < 0x80d2) {
-          iVar14 = glContext + 0x33b0;
+          tableScaleBias = glContext + 0x33b0;
           uVar13 = 0x80d0;
         }
         else {
-          iVar14 = glContext + 0x33f0;
+          tableScaleBias = glContext + 0x33f0;
           uVar13 = 0x80d2;
         }
         if (target != uVar13) {
-          iVar14 = 0;
+          tableScaleBias = 0;
         }
       }
-      if (iVar14 == 0) {
+      if (tableScaleBias == 0) {
         iVar14 = _gleCreateTextureLevel
-                           (glContext,iVar12,iVar8,internalformat,width,1,1,0,0x1908,0x1401,0,0x1000);
+                           (glContext,textureObject,textureLevel,internalformat,width,1,1,0,0x1908,0x1401,0,0x1000);
         if (iVar14 != 0) {
-          _gleTextureImageCopy(glContext,iVar8,internalformat,x,y,width,1);
+          _gleTextureImageCopy(glContext,textureLevel,internalformat,x,y,width,1);
         }
         *(uint *)(glContext + 0x314) =
              *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
       }
       else {
-        iVar7 = _gleCreateColorTableLevel(glContext,iVar12,iVar8,internalformat,width,0x1908,0x1401,0x1000)
+        iVar7 = _gleCreateColorTableLevel(glContext,textureObject,textureLevel,internalformat,width,0x1908,0x1401,0x1000)
         ;
         if (iVar7 != 0) {
-          _gleTextureImageCopy(glContext,iVar8,internalformat,x,y,width,1);
+          _gleTextureImageCopy(glContext,textureLevel,internalformat,x,y,width,1);
         }
         _gleImagingScaleAndBias
-                  (glContext,iVar14,*(undefined4 *)(iVar12 + 0xc0),(uint)*(ushort *)(iVar12 + 0xbc),0,
+                  (glContext,tableScaleBias,*(undefined4 *)(textureObject + 0xc0),(uint)*(ushort *)(textureObject + 0xbc),0,
                    width,1);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x40000000;
       }
-      _gleCreatePluginTextureLevel(glContext,iVar12,iVar8,0,0xffffffff,internalformat);
+      _gleCreatePluginTextureLevel(glContext,textureObject,textureLevel,0,0xffffffff,internalformat);
       return;
     }
-    if ((uVar4 & 0x3c00) == 0) {
-      *(ushort *)(iVar12 + 0x24) = uVar4 | 0x1000;
+    if ((textureTargetBits & 0x3c00) == 0) {
+      *(ushort *)(textureObject + 0x24) = textureTargetBits | 0x1000;
       goto LAB_00060a7c;
     }
-    if ((uVar4 & 0xc00) == 0) goto LAB_00060a7c;
+    if ((textureTargetBits & 0xc00) == 0) goto LAB_00060a7c;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
     return;

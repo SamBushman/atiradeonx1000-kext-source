@@ -641,11 +641,12 @@ int _gliGetInteger(glContext, stateId, valuePtr)
   uint stateId;
   uint *valuePtr;
 {
-  uint uVar1;
+  uint stateValue;
   int iVar2;
   int textureObject;
-  undefined4 uVar3;
-  undefined *puVar4;
+  undefined4 driverResult;
+  undefined4 objectKind;
+  undefined *hashTable;
   
   if ((stateId == 0xe0) && (valuePtr != (uint *)0x0)) {
     *valuePtr = 0xaa8;
@@ -658,84 +659,84 @@ int _gliGetInteger(glContext, stateId, valuePtr)
     return 0x271e;
   }
   if (stateId == 0x184) {
-    uVar1 = (uint)*(short *)(glContext + 0x48bc);
+    stateValue = (uint)*(short *)(glContext + 0x48bc);
     goto LAB_0000296c;
   }
   if (stateId < 0x185) {
     if (stateId == 0x164) {
-      uVar1 = (uint)*(short *)(glContext + 0x509a);
+      stateValue = (uint)*(short *)(glContext + 0x509a);
       goto LAB_0000296c;
     }
     if (0x164 < stateId) {
       if (stateId == 0x174) {
-        uVar1 = (uint)*(short *)(glContext + 0x49be);
+        stateValue = (uint)*(short *)(glContext + 0x49be);
       }
       else if (stateId < 0x175) {
         if (stateId == 0x16a) {
-          uVar1 = (uint)*(short *)(glContext + 0x48b4);
+          stateValue = (uint)*(short *)(glContext + 0x48b4);
         }
         else if (stateId < 0x16b) {
           if (stateId == 0x166) {
-            uVar1 = (uint)*(short *)(glContext + 0x50a4);
+            stateValue = (uint)*(short *)(glContext + 0x50a4);
           }
           else {
             if (stateId != 0x168) goto LAB_00002978;
-            uVar1 = (uint)*(short *)(glContext + 0x50a6);
+            stateValue = (uint)*(short *)(glContext + 0x50a6);
           }
         }
         else if (stateId == 0x16c) {
-          uVar1 = (uint)*(short *)(glContext + 0x48b6);
+          stateValue = (uint)*(short *)(glContext + 0x48b6);
         }
         else {
           if (stateId != 0x172) goto LAB_00002978;
-          uVar1 = (uint)*(short *)(glContext + 0x49bc);
+          stateValue = (uint)*(short *)(glContext + 0x49bc);
         }
       }
       else if (stateId == 0x17c) {
-        uVar1 = (uint)*(short *)(glContext + 0x48a4);
+        stateValue = (uint)*(short *)(glContext + 0x48a4);
       }
       else if (stateId < 0x17d) {
         if (stateId == 0x176) {
-          uVar1 = (uint)*(short *)(glContext + 0x49c0);
+          stateValue = (uint)*(short *)(glContext + 0x49c0);
         }
         else {
           if (stateId != 0x178) goto LAB_00002978;
-          uVar1 = (uint)*(short *)(glContext + 0x49c2);
+          stateValue = (uint)*(short *)(glContext + 0x49c2);
         }
       }
       else if (stateId == 0x180) {
-        uVar1 = (uint)*(short *)(glContext + 0x48ac);
+        stateValue = (uint)*(short *)(glContext + 0x48ac);
       }
       else if (stateId < 0x181) {
         if (stateId != 0x17e) {
 LAB_00002978:
-          uVar3 = (**(code **)(glContext + 0x477c))(*(undefined4 *)(glContext + 0x4688),stateId,valuePtr)
+          driverResult = (**(code **)(glContext + 0x477c))(*(undefined4 *)(glContext + 0x4688),stateId,valuePtr)
           ;
-          return uVar3;
+          return driverResult;
         }
-        uVar1 = (uint)*(short *)(glContext + 0x48a6);
+        stateValue = (uint)*(short *)(glContext + 0x48a6);
       }
       else {
         if (stateId != 0x182) goto LAB_00002978;
-        uVar1 = (uint)*(short *)(glContext + 0x48ae);
+        stateValue = (uint)*(short *)(glContext + 0x48ae);
       }
       goto LAB_0000296c;
     }
     if (stateId == 0x135) {
-      uVar1 = *(uint *)((uint)*(byte *)(glContext + 0x85a8) * 0x2e0 + glContext + 0x8888);
+      stateValue = *(uint *)((uint)*(byte *)(glContext + 0x85a8) * 0x2e0 + glContext + 0x8888);
 LAB_00002638:
-      *valuePtr = uVar1;
+      *valuePtr = stateValue;
       return 0;
     }
     if (stateId < 0x136) {
       if (stateId != 0xe5) {
         if (stateId < 0xe6) {
           if (stateId == 0xdd) {
-            uVar1 = (uint)*(byte *)(glContext + 0x4690);
+            stateValue = (uint)*(byte *)(glContext + 0x4690);
             goto LAB_0000296c;
           }
           if (stateId == 0xe4) {
-            uVar1 = *(uint *)(glContext + 0x7590);
+            stateValue = *(uint *)(glContext + 0x7590);
             goto LAB_00002638;
           }
         }
@@ -748,79 +749,79 @@ LAB_00002638:
           *valuePtr = *(uint *)(textureObject + (uint)*(byte *)(glContext + 0x85a8) * 4);
         }
         else if (stateId == 0x133) {
-          uVar1 = (uint)*(byte *)(glContext + 0x5410);
+          stateValue = (uint)*(byte *)(glContext + 0x5410);
           goto LAB_00002638;
         }
         goto LAB_00002978;
       }
-      uVar1 = (uint)*(byte *)(glContext + 0x4693);
+      stateValue = (uint)*(byte *)(glContext + 0x4693);
       goto LAB_00002638;
     }
     if (stateId == 0x15e) {
-      uVar1 = (uint)*(short *)(glContext + 0x508c);
+      stateValue = (uint)*(short *)(glContext + 0x508c);
       goto LAB_0000296c;
     }
     if (0x15e < stateId) {
       if (stateId == 0x160) {
-        uVar1 = (uint)*(short *)(glContext + 0x508e);
+        stateValue = (uint)*(short *)(glContext + 0x508e);
       }
       else {
         if (stateId != 0x162) goto LAB_00002978;
-        uVar1 = (uint)*(short *)(glContext + 0x5098);
+        stateValue = (uint)*(short *)(glContext + 0x5098);
       }
       goto LAB_0000296c;
     }
     if (stateId == 0x136) {
-      uVar1 = (uint)(*(char *)(glContext + 0x7580) == '\x01');
+      stateValue = (uint)(*(char *)(glContext + 0x7580) == '\x01');
       goto LAB_0000296c;
     }
     if (stateId != 0x137) goto LAB_00002978;
-    uVar1 = *(uint *)(*(int *)((uint)*(byte *)(glContext + 0x85a6) * 0x2e0 + glContext + 0x8884) + 0x104
+    stateValue = *(uint *)(*(int *)((uint)*(byte *)(glContext + 0x85a6) * 0x2e0 + glContext + 0x8884) + 0x104
                      ) & 0xff00;
-    if ((uVar1 == 0x200) || (uVar1 == 0x400)) {
-      uVar1 = 0;
+    if ((stateValue == 0x200) || (stateValue == 0x400)) {
+      stateValue = 0;
       goto LAB_0000296c;
     }
-    uVar1 = -(uint)*(byte *)(glContext + 0x7581);
+    stateValue = -(uint)*(byte *)(glContext + 0x7581);
   }
   else {
     if (stateId == 0x643) {
-      uVar3 = 6;
-      puVar4 = (undefined *)(*(int *)(glContext + 0x5148) + 0x6018);
+      objectKind = 6;
+      hashTable = (undefined *)(*(int *)(glContext + 0x5148) + 0x6018);
       goto LAB_0000272c;
     }
     if (0x643 < stateId) {
       if (stateId == 0x649) {
-        uVar3 = 1;
-        puVar4 = ((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148);
+        objectKind = 1;
+        hashTable = ((unsigned char *)0x00001004) + *(int *)(glContext + 0x5148);
 LAB_0000272c:
-        _gleGetHashMachineObjectNameTargetPairs(glContext,puVar4,uVar3,valuePtr);
+        _gleGetHashMachineObjectNameTargetPairs(glContext,hashTable,objectKind,valuePtr);
         return 0;
       }
       if (stateId < 0x64a) {
         if (stateId == 0x646) {
-          puVar4 = (undefined *)(glContext + 0x6440);
-          uVar3 = 0xfffffff5;
+          hashTable = (undefined *)(glContext + 0x6440);
+          objectKind = 0xfffffff5;
         }
         else if (stateId < 0x647) {
           if (stateId == 0x644) {
-            uVar3 = 5;
-            puVar4 = (undefined *)(*(int *)(glContext + 0x5148) + 0x5014);
+            objectKind = 5;
+            hashTable = (undefined *)(*(int *)(glContext + 0x5148) + 0x5014);
           }
           else {
             if (stateId != 0x645) goto LAB_00002978;
-            uVar3 = 7;
-            puVar4 = (undefined *)(*(int *)(glContext + 0x5148) + 0x701c);
+            objectKind = 7;
+            hashTable = (undefined *)(*(int *)(glContext + 0x5148) + 0x701c);
           }
         }
         else if (stateId == 0x647) {
-          puVar4 = (undefined *)(glContext + 0x543c);
-          uVar3 = 0xfffffff4;
+          hashTable = (undefined *)(glContext + 0x543c);
+          objectKind = 0xfffffff4;
         }
         else {
           if (stateId != 0x648) goto LAB_00002978;
-          puVar4 = *(undefined **)(glContext + 0x5148);
-          uVar3 = 0;
+          hashTable = *(undefined **)(glContext + 0x5148);
+          objectKind = 0;
         }
         goto LAB_0000272c;
       }
@@ -833,11 +834,11 @@ LAB_0000272c:
         iVar2 = _gleLookupHashObject(iVar2 + 0x6018,*valuePtr);
         if (iVar2 == 0) goto LAB_000028f4;
         if (*(int *)(iVar2 + 0x10) == 0x8b40) {
-          uVar1 = _ShGetLinkerStats(*(undefined4 *)(iVar2 + 0x40));
+          stateValue = _ShGetLinkerStats(*(undefined4 *)(iVar2 + 0x40));
         }
         else {
           if (*(int *)(iVar2 + 0x10) != 0x8b48) goto LAB_000028f4;
-          uVar1 = _ShGetCompilerStats(*(undefined4 *)(iVar2 + 0x30));
+          stateValue = _ShGetCompilerStats(*(undefined4 *)(iVar2 + 0x30));
         }
       }
       else if (stateId < 0x6a7) {
@@ -850,11 +851,11 @@ LAB_0000272c:
           iVar2 = _gleLookupHashObject(iVar2 + 0x6018,*valuePtr);
           if (iVar2 == 0) goto LAB_000028f4;
           if (*(int *)(iVar2 + 0x10) == 0x8b40) {
-            uVar1 = _ShGetLinkerPPStream(*(undefined4 *)(iVar2 + 0x40));
+            stateValue = _ShGetLinkerPPStream(*(undefined4 *)(iVar2 + 0x40));
           }
           else {
             if (*(int *)(iVar2 + 0x10) != 0x8b48) goto LAB_000028f4;
-            uVar1 = _ShGetCompilerPPStream(*(undefined4 *)(iVar2 + 0x30));
+            stateValue = _ShGetCompilerPPStream(*(undefined4 *)(iVar2 + 0x30));
           }
         }
         else {
@@ -867,21 +868,21 @@ LAB_0000272c:
           iVar2 = _gleLookupHashObject(iVar2 + 0x6018,*valuePtr);
           if (iVar2 == 0) goto LAB_000028f4;
           if (*(int *)(iVar2 + 0x10) == 0x8b40) {
-            uVar1 = _ShGetLinkerBindingTable(*(undefined4 *)(iVar2 + 0x40));
+            stateValue = _ShGetLinkerBindingTable(*(undefined4 *)(iVar2 + 0x40));
           }
           else {
             if (*(int *)(iVar2 + 0x10) != 0x8b48) goto LAB_000028f4;
-            uVar1 = _ShGetCompilerSymbolTable(*(undefined4 *)(iVar2 + 0x30));
+            stateValue = _ShGetCompilerSymbolTable(*(undefined4 *)(iVar2 + 0x30));
           }
         }
       }
       else {
         if (stateId == 0x6a8) {
-          uVar1 = *(uint *)(glContext + 0x7598);
+          stateValue = *(uint *)(glContext + 0x7598);
           goto LAB_00002638;
         }
         if (stateId < 0x6a8) {
-          uVar1 = *(uint *)(glContext + 0x7594);
+          stateValue = *(uint *)(glContext + 0x7594);
           goto LAB_00002638;
         }
         if (stateId != 0x6a9) goto LAB_00002978;
@@ -893,14 +894,14 @@ LAB_0000272c:
         iVar2 = _gleLookupHashObject(iVar2 + 0x6018,*valuePtr);
         if (iVar2 == 0) goto LAB_000028f4;
         if (*(int *)(iVar2 + 0x10) == 0x8b40) {
-          uVar1 = _ShGetLinkerShaderToProgramString(*(undefined4 *)(iVar2 + 0x40));
+          stateValue = _ShGetLinkerShaderToProgramString(*(undefined4 *)(iVar2 + 0x40));
         }
         else {
           if (*(int *)(iVar2 + 0x10) != 0x8b48) goto LAB_000028f4;
-          uVar1 = _ShGetCompilerShaderToProgramString(*(undefined4 *)(iVar2 + 0x30));
+          stateValue = _ShGetCompilerShaderToProgramString(*(undefined4 *)(iVar2 + 0x30));
         }
       }
-      *valuePtr = uVar1;
+      *valuePtr = stateValue;
 LAB_000028f4:
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
         return 0;
@@ -909,61 +910,61 @@ LAB_000028f4:
       return 0;
     }
     if (stateId == 0x3e2) {
-      uVar1 = (uint)*(byte *)(glContext + 0x7584);
+      stateValue = (uint)*(byte *)(glContext + 0x7584);
       goto LAB_00002638;
     }
     if (stateId < 0x3e3) {
       if (stateId == 0x18a) {
-        uVar1 = (uint)*(short *)(glContext + 0x48c6);
+        stateValue = (uint)*(short *)(glContext + 0x48c6);
       }
       else {
         if (0x18a < stateId) {
           if (stateId == 0x3e0) {
-            uVar1 = (uint)*(byte *)(glContext + 0x7587);
+            stateValue = (uint)*(byte *)(glContext + 0x7587);
           }
           else {
             if (stateId != 0x3e1) goto LAB_00002978;
-            uVar1 = (uint)*(byte *)(glContext + 0x7586);
+            stateValue = (uint)*(byte *)(glContext + 0x7586);
           }
           goto LAB_00002638;
         }
         if (stateId == 0x186) {
-          uVar1 = (uint)*(short *)(glContext + 0x48be);
+          stateValue = (uint)*(short *)(glContext + 0x48be);
         }
         else {
           if (stateId != 0x188) goto LAB_00002978;
-          uVar1 = (uint)*(short *)(glContext + 0x48c4);
+          stateValue = (uint)*(short *)(glContext + 0x48c4);
         }
       }
       goto LAB_0000296c;
     }
     if (stateId == 0x640) {
-      uVar3 = 2;
-      puVar4 = (undefined *)(*(int *)(glContext + 0x5148) + 0x2008);
+      objectKind = 2;
+      hashTable = (undefined *)(*(int *)(glContext + 0x5148) + 0x2008);
       goto LAB_0000272c;
     }
     if (0x640 < stateId) {
       if (stateId == 0x641) {
-        uVar3 = 3;
-        puVar4 = (undefined *)(*(int *)(glContext + 0x5148) + 0x300c);
+        objectKind = 3;
+        hashTable = (undefined *)(*(int *)(glContext + 0x5148) + 0x300c);
       }
       else {
         if (stateId != 0x642) goto LAB_00002978;
-        uVar3 = 4;
-        puVar4 = (undefined *)(*(int *)(glContext + 0x5148) + 0x4010);
+        objectKind = 4;
+        hashTable = (undefined *)(*(int *)(glContext + 0x5148) + 0x4010);
       }
       goto LAB_0000272c;
     }
     if (stateId == 0x3e4) {
-      uVar1 = (uint)*(byte *)(glContext + 0x53e7);
+      stateValue = (uint)*(byte *)(glContext + 0x53e7);
       goto LAB_00002638;
     }
     if (stateId != 0x4d3) goto LAB_00002978;
-    uVar1 = ~(int)*(short *)(glContext + 0x4a10);
+    stateValue = ~(int)*(short *)(glContext + 0x4a10);
   }
-  uVar1 = uVar1 >> 0x1f;
+  stateValue = stateValue >> 0x1f;
 LAB_0000296c:
-  *valuePtr = uVar1;
+  *valuePtr = stateValue;
   return 0;
 }
 
@@ -1395,47 +1396,47 @@ int _gleDCBAlloc(param_1)
 }
 
 /* _gleCreateSharedState @ 0x31b4 (548 bytes) */
-int _gleCreateSharedState(param_1)
-  int param_1;
+int _gleCreateSharedState(glContext)
+  int glContext;
 {
   int loopIndex3;
   int remaining3;
   int remaining;
   int iVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  undefined4 uVar4;
+  undefined4 *bucketCursor;
+  int sharedState;
+  undefined4 rendererHandle;
   int loopIndex;
   int loopIndex2;
   undefined2 *puVar7;
   int iVar8;
   int iVar9;
   undefined4 *puVar10;
-  int *piVar11;
+  int *rendererSlot;
   uint loopIndex4;
   int remaining2;
   
-  iVar3 = _malloc(0x94d4);
-  *(undefined4 *)(iVar3 + 0x8020) = 1;
-  *(undefined1 *)(iVar3 + 0x8024) = 0;
-  _pthread_mutex_init(iVar3 + 0x8028,0);
+  sharedState = _malloc(0x94d4);
+  *(undefined4 *)(sharedState + 0x8020) = 1;
+  *(undefined1 *)(sharedState + 0x8024) = 0;
+  _pthread_mutex_init(sharedState + 0x8028,0);
   loopIndex4 = 0;
-  if (*(char *)(param_1 + 0x85a4) != '\0') {
-    iVar9 = iVar3 + 0x8054;
-    piVar11 = (int *)(param_1 + 0x8884);
+  if (*(char *)(glContext + 0x85a4) != '\0') {
+    iVar9 = sharedState + 0x8054;
+    rendererSlot = (int *)(glContext + 0x8884);
     do {
-      iVar1 = *piVar11;
-      piVar11 = piVar11 + 0xb8;
+      iVar1 = *rendererSlot;
+      rendererSlot = rendererSlot + 0xb8;
       iVar1 = (**(code **)(iVar1 + 0x124))(iVar9);
       if (iVar1 != 0) break;
       loopIndex4 = loopIndex4 + 1;
       iVar9 = iVar9 + 4;
-    } while ((int)loopIndex4 < (int)(uint)*(byte *)(param_1 + 0x85a4));
+    } while ((int)loopIndex4 < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
-  if (loopIndex4 == *(byte *)(param_1 + 0x85a4)) {
+  if (loopIndex4 == *(byte *)(glContext + 0x85a4)) {
     if ((int)loopIndex4 < 8) {
       iVar9 = 8 - loopIndex4;
-      puVar10 = (undefined4 *)(loopIndex4 * 4 + iVar3 + 0x8054);
+      puVar10 = (undefined4 *)(loopIndex4 * 4 + sharedState + 0x8054);
       do {
         *puVar10 = 0;
         puVar10 = puVar10 + 1;
@@ -1443,20 +1444,20 @@ int _gleCreateSharedState(param_1)
       } while (iVar9 != 0);
     }
     loopIndex3 = 0;
-    puVar10 = (undefined4 *)(iVar3 + 0x1000);
+    puVar10 = (undefined4 *)(sharedState + 0x1000);
     do {
-      puVar2 = (undefined4 *)(loopIndex3 * 0x1004 + iVar3);
+      bucketCursor = (undefined4 *)(loopIndex3 * 0x1004 + sharedState);
       remaining = 0x400;
       do {
-        *puVar2 = 0;
-        puVar2 = puVar2 + 1;
+        *bucketCursor = 0;
+        bucketCursor = bucketCursor + 1;
         remaining = remaining + -1;
       } while (remaining != 0);
       loopIndex3 = loopIndex3 + 1;
       *puVar10 = 0;
       puVar10 = puVar10 + 0x401;
     } while (loopIndex3 < 8);
-    iVar8 = iVar3 + 0x10000;
+    iVar8 = sharedState + 0x10000;
     loopIndex2 = 0;
     loopIndex = 0;
     iVar9 = iVar8;
@@ -1474,7 +1475,7 @@ int _gleCreateSharedState(param_1)
         remaining2 = remaining2 + -1;
       } while (remaining2 != 0);
       remaining3 = 9;
-      puVar10 = (undefined4 *)(loopIndex * 4 + iVar3 + 0x8a74);
+      puVar10 = (undefined4 *)(loopIndex * 4 + sharedState + 0x8a74);
       do {
         *puVar10 = 0xffffffff;
         puVar10 = puVar10 + 1;
@@ -1493,22 +1494,22 @@ int _gleCreateSharedState(param_1)
   else {
     iVar9 = loopIndex4 - 1;
     if (-1 < iVar9) {
-      puVar10 = (undefined4 *)(iVar9 * 4 + iVar3 + 0x8054);
-      piVar11 = (int *)(iVar9 * 0x2e0 + param_1 + 0x8884);
+      puVar10 = (undefined4 *)(iVar9 * 4 + sharedState + 0x8054);
+      rendererSlot = (int *)(iVar9 * 0x2e0 + glContext + 0x8884);
       do {
-        iVar1 = *piVar11;
-        piVar11 = piVar11 + -0xb8;
-        uVar4 = *puVar10;
+        iVar1 = *rendererSlot;
+        rendererSlot = rendererSlot + -0xb8;
+        rendererHandle = *puVar10;
         puVar10 = puVar10 + -1;
-        (**(code **)(iVar1 + 0x128))(uVar4);
+        (**(code **)(iVar1 + 0x128))(rendererHandle);
         iVar9 = iVar9 + -1;
       } while (-1 < iVar9);
     }
-    _pthread_mutex_destroy(iVar3 + 0x8028);
-    _free(iVar3);
-    iVar3 = 0;
+    _pthread_mutex_destroy(sharedState + 0x8028);
+    _free(sharedState);
+    sharedState = 0;
   }
-  return iVar3;
+  return sharedState;
 }
 
 /* _gleCreateEnableHashTable @ 0x33d8 (2092 bytes) */
@@ -3562,9 +3563,9 @@ void _gleInitPipelineProgramState(glContext)
   int loopIndex2;
   char glContextByte85a42;
   byte glContextByte85a4;
-  undefined4 uVar3;
+  undefined4 rendererProgramHandle;
   uint uVar4;
-  uint uVar5;
+  uint listValue;
   ushort *srcCursor;
   undefined1 *allocatedBlock2;
   int iVar8;
@@ -3572,11 +3573,11 @@ void _gleInitPipelineProgramState(glContext)
   uint *cursor;
   undefined4 *srcCursor2;
   uint *cursor3;
-  uint uVar13;
+  uint entriesLeft;
   undefined4 *dstCursor;
   int sharedState;
   int iVar16;
-  uint uVar17;
+  uint previousValue;
   int iVar18;
   int loopIndex;
   uint loopIndex6;
@@ -3602,10 +3603,10 @@ void _gleInitPipelineProgramState(glContext)
       srcCursor2 = (undefined4 *)(iVar8 + 0x4a8);
       dstCursor = (undefined4 *)(iVar16 + 0x886c);
       do {
-        uVar3 = *srcCursor2;
+        rendererProgramHandle = *srcCursor2;
         loopIndex3 = loopIndex3 + 1;
         srcCursor2 = srcCursor2 + 1;
-        *dstCursor = uVar3;
+        *dstCursor = rendererProgramHandle;
         dstCursor = dstCursor + 0xb8;
       } while (loopIndex3 < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
@@ -3622,7 +3623,7 @@ void _gleInitPipelineProgramState(glContext)
   iVar18 = glContext;
   do {
     if (*(int *)(iVar16 + -0x7560) == 0) {
-      uVar17 = 0;
+      previousValue = 0;
       loopIndex6 = 0;
       allocatedBlock3 = (uint *)_malloc((uint)*(byte *)(glContext + 0x85a4) * 4 + 4);
       loopIndex7 = 1;
@@ -3665,17 +3666,17 @@ void _gleInitPipelineProgramState(glContext)
         do {
           uVar4 = 0x7ffffff;
           cursor2 = allocatedBlock3;
-          for (uVar13 = loopIndex7; uVar13 != 0; uVar13 = uVar13 - 1) {
-            uVar5 = *cursor2;
+          for (entriesLeft = loopIndex7; entriesLeft != 0; entriesLeft = entriesLeft - 1) {
+            listValue = *cursor2;
             cursor2 = cursor2 + 1;
-            if ((uVar17 < uVar5) && (uVar5 < uVar4)) {
-              uVar4 = uVar5;
+            if ((previousValue < listValue) && (listValue < uVar4)) {
+              uVar4 = listValue;
             }
           }
           iVar8 = loopIndex6 * 4;
           loopIndex6 = loopIndex6 + 1;
           *(uint *)(iVar8 + *(int *)(iVar16 + -0x7560)) = uVar4;
-          uVar17 = uVar4;
+          previousValue = uVar4;
         } while (loopIndex6 < loopIndex7);
       }
       _free(allocatedBlock3);

@@ -1,0 +1,12 @@
+use	_gleRenderFlatTrianglesFunc_body	iVar10	runFacing	CONFIRMED	facing (backFacing) of the current run, starts at -1	^\s*iVar10\ =\ \-1;$	+1
+use	_gleRenderFlatTrianglesFunc_body	iVar10	runFacing	CONFIRMED	facing (backFacing) of the current run, starts at -1	^\s*if\ \(iVar10\ !=\ local_50\)\ \{$	+1
+use	_gleRenderFlatTrianglesFunc_body	iVar10	runFacing	CONFIRMED	facing (backFacing) of the current run, starts at -1	^\s*iVar10\ =\ local_50;$	+1
+use	_gleRenderFlatTrianglesFunc_body	iVar10	runFacing	CONFIRMED	facing (backFacing) of the current run, starts at -1	^\s*iVar17\ =\ iVar10;$	+1
+use	_gleRenderFlatTrianglesFunc_body	iVar10	runFacing	CONFIRMED	facing (backFacing) of the current run, starts at -1	^\s*if\ \(iVar10\ ==\ 0\)\ \{$	+1
+use	_gleRenderFlatTrianglesFunc_body	iVar10	lightedVertices	CONFIRMED	vertices lit so far (+3 per triangle) in the no-face-test lighting loop	^\s*iVar10\ =\ 0;$	+1
+use	_gleRenderFlatTrianglesFunc_body	iVar10	lightedVertices	CONFIRMED	vertices lit so far (+3 per triangle) in the no-face-test lighting loop	^\s*iVar10\ =\ iVar10\ \+\ 3;$	+1
+use	_gleRenderFlatTrianglesFunc_body	iVar10	lightedVertices	CONFIRMED	vertices lit so far (+3 per triangle) in the no-face-test lighting loop	^\s*\}\ while\ \(iVar10\ <=\ iVar17\ \+\ \-3\);$	+1
+use	_gleRenderFlatTrianglesFunc_body	iVar10	batchEnd	CONFIRMED	triangleCursor at batch start + vertexCount*0x100: end of the vertex batch	^\s*iVar10\ =\ uVar18\ \+\ iVar17\ \*\ 0x100;$	+1
+use	_gleRenderFlatTrianglesFunc_body	iVar10	batchEnd	CONFIRMED	triangleCursor at batch start + vertexCount*0x100: end of the vertex batch	^\s*for\ \(;\ uVar18\ <=\ iVar10\ \-\ 0x300U;\ uVar18\ =\ uVar18\ \+\ 0x300\)\ \{$	+1
+use	_gleSelectTriangleStripFunc_body	iVar9	cullResult	CONFIRMED	_gleCullTriangle result: 0 means the triangle is not culled	^\s*iVar9\ =\ \(\(undefined4\ \(\*\)\(\)\)_gleCullTriangle\)\(param_1,uVar21,uVar19,uVar21\ \+\ 0x200,uVar20,\&local_50,dVar22,$	+3
+use	_gleSelectTriangleStripFunc_body	iVar9	cullResult	CONFIRMED	_gleCullTriangle result: 0 means the triangle is not culled	^\s*if\ \(iVar9\ ==\ 0\)\ \{$	+1

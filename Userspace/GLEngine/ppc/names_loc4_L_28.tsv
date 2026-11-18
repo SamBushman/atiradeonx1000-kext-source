@@ -1,0 +1,5 @@
+use	_gleSelectTriangleStripFunc_body	iVar9	runVertexCount	CONFIRMED	runTriangleCount+2 (+1 after the first triangle is split off): vertices of the run	^\s*iVar9\ =\ iVar17\ \+\ 2;$	+2
+use	_gleSelectTriangleStripFunc_body	iVar9	runVertexCount	CONFIRMED	runTriangleCount+2 (+1 after the first triangle is split off): vertices of the run	^\s*_gleVPFlipColors\(param_1,uVar5,iVar9,iVar10\);$	+1
+use	_gleSelectTriangleStripFunc_body	iVar9	runVertexCount	CONFIRMED	runTriangleCount+2 (+1 after the first triangle is split off): vertices of the run	^\s*iVar9\ =\ iVar17\ \+\ 1;$	+1
+use	_gleSelectTriangleStripFunc_body	iVar9	runVertexCount	CONFIRMED	runTriangleCount+2 (+1 after the first triangle is split off): vertices of the run	^\s*if\ \(iVar9\ <\ 3\)\ goto\ LAB_000f1c00;$	+1
+use	_gleSelectTriangleStripFunc_body	iVar9	runVertexCount	CONFIRMED	runTriangleCount+2 (+1 after the first triangle is split off): vertices of the run	^\s*dVar22\ =\ \(double\)_gleSelectTriangleStrip\(param_1,uVar20,iVar9\);$	+1
