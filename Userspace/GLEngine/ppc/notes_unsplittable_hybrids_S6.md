@@ -2,7 +2,7 @@
 
 Function list: `r6_S.txt` (111 functions, 5605 placeholder occurrences at the start of round 6).
 Every name in the part files came from a `names_loc6_S_<NN>.tsv` row (or a `rn.py` rename of such
-a row) and the tree was gated with `gate_agent.sh` (tags S6_1 .. S6_12) with `VERDICT: IDENTICAL`
+a row) and the tree was gated with `gate_agent.sh` (tags S6_1 .. S6_13) with `VERDICT: IDENTICAL`
 before each commit.
 
 ## The merge rule (why most "refused splits" are refused)
@@ -60,6 +60,18 @@ Consequences used in this round:
   and cursors share registers across the 0x8620 and 0x8804 paths).
 - `_gleClipPoly` iVar1, uVar2, iVar5; `_gleVAClipPoly` bVar3, puVar7, puVar9.
 - `_gliAttachDrawableWithOptions` iVar2; `_gleDrawPixelsSaveState` uVar1.
+
+## State at the end of the round
+
+1902 placeholder occurrences remain in the 111 functions (5605 at the start). They are in 18 functions, almost all
+the big JIT builders and light bodies: `_gleBuildVertexFuncNO` 451, `_gleVtxLightSpecRGBAFront` 243,
+`_gleBuildProjectionTransformFuncNO` 236, `_gleCompileTCLVertexArray` 174, `_gleBuildCompileFuncTCLAV` 144,
+`_gleQuickOptimizeDisplayList` 127, `_gleBuildCompileFuncTCLNO` 105,
+`_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec` 102, `_gleDrawPixelsFast` 92,
+`_gleTextureImagePut_Slow` 84, `_gleVtxLightFastRGBAFront` 62, `_gleVtxLightRGBAFrontPtr` 29,
+`_gleVtxLightSpecRGBAFrontPtr` 25, `_gleDrawArraysOrElements_VBO_Exec` 22, plus a few leftovers
+(`_gleTestFence` 3, dead `extraout_f1_00` declarations with no web in three render bodies).
+None of them was attempted past reading; their variables have 20..80 webs each.
 
 ## Roles not established (placeholder or low-confidence name left)
 
