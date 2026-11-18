@@ -1,0 +1,49 @@
+local	_gleMakeIdentityMatrix	param_1	matrix	CONFIRMED	16 words written: 1.0f (0x3f800000) on the diagonal (0,5,10,15), 0 elsewhere
+local	_LFSParserEatWhiteSpace	param_1	parser	CONFIRMED	record with the text pointer (+0), length (+4), read position (+0xc) and line counter (+0x10)
+local	_LFSParserEatWhiteSpace	iVar2	position	CONFIRMED	parser+0xc: read position, compared with the length at +4 and advanced past white space
+local	_LFSParserEatWhiteSpace	uVar1	currentChar	CONFIRMED	byte of the text at the read position: skipped when 9..10 (tab, newline) or 0x20; newline increments the line counter at +0x10
+local	_LFSStreamChunkCompare	param_1	chunkA	CONFIRMED	first chunk: byte 0 (chunk type) and the bytes from +4 are compared with the second
+local	_LFSStreamChunkCompare	param_2	chunkB	CONFIRMED	second chunk compared with chunkA
+local	_LFSStreamChunkCompare	iVar1	memcmpResult	CONFIRMED	result of _memcmp over the chunk payload (0x14, then 0x44 bytes)
+local	_LFSStreamChunkCompare	bVar2	chunksDiffer	CONFIRMED	true unless the type bytes and payloads are equal: the function result
+local	_glePPRelocateOutput	param_1	oldIndex	CONFIRMED	output index matched against the ushort at instruction+0x1a
+local	_glePPRelocateOutput	param_2	newIndex	CONFIRMED	replacement stored (low 16 bits) at instruction+0x1a
+local	_glePPRelocateOutput	param_3	instructionList	CONFIRMED	_glePPPruneOutputs passes its instructionList: head (+0) of the instruction list walked through the next link at +8
+local	_glePPRelocateOutput	iVar1	instruction	CONFIRMED	instruction record walked along the list: matching output destination fields are rewritten
+local	_gleColorSubTable	param_3	tableLevel	INFERRED	level record of the color table: ushorts +0x10/+0x12 (format/type used for _glePixelBytes) and data pointer +0x14
+local	_gleColorSubTable	param_4	start	CONFIRMED	_glColorSubTable_Exec passes start here; multiplied by the pixel bytes to address the destination
+local	_gleColorSubTable	iVar1	pixelBytes	CONFIRMED	result of _glePixelBytes(tableLevel format, type)
+local	_gleModifyPixelR	uVar1	redScaledIndex	CONFIRMED	red * (map size - 1) + 0.5 converted to int: unclamped index into the red map (same role as in _gleModifyPixelRGB)
+local	_gleModifyPixelR	uVar4	redMapIndex	CONFIRMED	ctx+0x3288 - 1 (largest red map index), then replaced by the clamped red index used to read the map
+local	_gleModifyPixelR	fVar3	clampBound	CONFIRMED	0.0 or 1.0 constant the out-of-range component is clamped to
+local	_gleModifyPixelA	uVar1	alphaScaledIndex	CONFIRMED	alpha * (map size - 1) + 0.5 converted to int: unclamped index into the alpha map (same role as in _gleModifyPixelRGB)
+local	_gleModifyPixelA	uVar4	alphaMapIndex	CONFIRMED	ctx+0x3294 - 1 (largest alpha map index), then replaced by the clamped alpha index used to read the map
+local	_gleModifyPixelA	fVar3	clampBound	CONFIRMED	0.0 or 1.0 constant the out-of-range component is clamped to
+local	_gleFreeFramebufferState	iVar3	framebufferObjectThenRefCount	CONFIRMED	ctx+0x744c (bound framebuffer object, refcount at +8 decremented and freed at 0), later the decremented refcount of the second object
+local	_gleFreeFramebufferState	iVar1	framebufferRefCount	CONFIRMED	framebuffer object +8 after the decrement: freed with _gleFreeFramebufferObject at 0
+local	_gleFreeFramebufferState	iVar2	textureObject	INFERRED	ctx+0x7448: object released with _gleFreeTextureObject when its refcount (+8) reaches 0
+local	_gleCheckTexSubImageRange	param_2	textureLevel	CONFIRMED	level record: callers pass it with its ushort width (+4) / height (+6) as levelExtent; byte +10 (border) widens the allowed range
+local	_gleCheckTexSubImageRange	param_3	offset	CONFIRMED	callers pass xoffset / yoffset; must be >= -border
+local	_gleCheckTexSubImageRange	param_4	extent	CONFIRMED	callers pass width / height; must be >= 0 and offset+extent <= levelExtent+border
+local	_gleCheckTexSubImageRange	param_5	levelExtent	CONFIRMED	callers pass the level width (ushort +4) / height (+6)
+local	_gleSynchronizePluginBuffer	param_2	bufferObject	INFERRED	+0x30 (data pointer) is matched against the per-renderer table, per-renderer handles are read from +0 + loopIndex*4 and +0x30 is cleared
+local	_gleSynchronizePluginBuffer	iVar3	handleOffset	CONFIRMED	loopIndex*4: byte offset of the renderer's handle in bufferObject and of its pointer in the shared table at +0x8054
+local	_gleSynchronizePluginBuffer	iVar1	rendererRecord	CONFIRMED	loopIndex*0x2e0 + ctx: record of the renderer whose plugin function (+0x1e4) is called
+local	_gleAddHashObject	param_1	hashTable	INFERRED	array of 0x400 bucket heads: indexed by (key & 0x3ff)*4
+local	_gleAddHashObject	param_2	object	INFERRED	hash entry: word 0 is the chain link (set to the old bucket head), word 1 the key
+local	_gleAddHashObject	iVar1	bucketOffset	CONFIRMED	(key & 0x3ff)*4: byte offset of the bucket head in the table
+local	_gleLookUpTexture	iVar1	activeUnitThenTextureObject	CONFIRMED	ctx+0x53d4 (active texture unit, scaled by 0x14 to index the per-unit binding slots), then the texture object / binding slot loaded; the result is object+0x10
+local	_gleLookUpTexture2D	iVar1	activeUnitThenTextureObject	CONFIRMED	ctx+0x53d4 (active texture unit, scaled by 0x14 to index the per-unit binding slots), then the texture object / binding slot loaded; the result is object+0x10
+local	_gleInvertMatrices	param_2	invertBits	INFERRED	bit mask of matrices to invert: bit 0x10 = model matrix via _gleModelMatInvert, other set bits n call _gleInvertMatrix(ctx, n) and clear bit n of ctx+0x50b0
+local	_gleInvertMatrices	uVar1	bitsToInvert	CONFIRMED	param_2 with the handled bits cleared (0xfffffff9 / 0xffffffe9): the matrix bits still to be walked
+local	_gleInvertMatrices	uVar2	remainingBits	CONFIRMED	bitsToInvert shifted right by loopIndex: the walk stops when no bit is left
+local	_gleArrayIncAndStoreVertexLoop	param_1	emitCursor	INFERRED	instruction output: writes PPC encodings (0x38a50000 = addi r5,r5,imm ...) and returns the advanced cursor
+local	_gleArrayIncAndStoreVertexLoop	param_2	loopStartAddress	0x40820000	target of the emitted bne: (param_2 - address of the branch) & 0xfffc
+local	_gleArrayIncAndStoreVertexLoop	param_3	increment	0x38a50000)	low 16 bits merged into the emitted addi (param_3 & 0xffff
+local	_gleSetEnable_TEXTURE_3D	param_3	enable	INFERRED	shifted left by 1 into bit 1 of the per-unit state word (ctx + unit*0x7c + 0x3534)
+local	_gleSetEnable_TEXTURE_3D	iVar2	unitState	CONFIRMED	texUnit*0x7c + ctx: per-unit record whose word at +0x3534 holds the enable bits
+local	_gleSetEnable_TEXTURE_3D	uVar4	oldFlags	CONFIRMED	per-unit flags word before the change; compared with newFlags to skip _gleUpdateTextureParams
+local	_gleSetEnable_TEXTURE_3D	uVar1	newFlags	CONFIRMED	oldFlags with bit 1 replaced by the enable value
+local	_pixelCenters	iVar2	firstBoundary	CONFIRMED	_pixelBoundaryBottomLeft(floatArg1) when floatArg3 >= 0, else _pixelBoundaryTopRight(floatArg1)
+local	_pixelCenters	iVar3	secondBoundary	CONFIRMED	_pixelBoundaryTopRight(floatArg2) when floatArg3 >= 0, else _pixelBoundaryBottomLeft(floatArg2)
+local	_pixelCenters	iVar1	boundaryDistance	firstBoundary - secondBoundary	

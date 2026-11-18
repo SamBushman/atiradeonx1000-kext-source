@@ -436,15 +436,15 @@ LAB_0001f86c:
 }
 
 /* _gleCheckTexSubImageRange @ 0x1f88c (76 bytes) */
-int _gleCheckTexSubImageRange(glContext, param_2, param_3, param_4, param_5)
+int _gleCheckTexSubImageRange(glContext, textureLevel, offset, extent, levelExtent)
   int glContext;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
+  int textureLevel;
+  int offset;
+  int extent;
+  int levelExtent;
 {
-  if (((-1 < param_4) && ((int)-(uint)*(byte *)(param_2 + 10) <= param_3)) &&
-     (param_3 + param_4 <= (int)(param_5 + (uint)*(byte *)(param_2 + 10)))) {
+  if (((-1 < extent) && ((int)-(uint)*(byte *)(textureLevel + 10) <= offset)) &&
+     (offset + extent <= (int)(levelExtent + (uint)*(byte *)(textureLevel + 10)))) {
     return 1;
   }
   if (*(int *)(glContext + 0x7574) == 0) {

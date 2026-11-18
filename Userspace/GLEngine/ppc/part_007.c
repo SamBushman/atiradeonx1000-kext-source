@@ -593,25 +593,25 @@ int _gleLookUpTexture(glContext, target)
   int glContext;
   uint target;
 {
-  int iVar1;
+  int activeUnitThenTextureObject;
   
-  iVar1 = *(int *)(glContext + 0x53d4);
+  activeUnitThenTextureObject = *(int *)(glContext + 0x53d4);
   if (target != 0x84f5) {
     if (target < 0x84f6) {
       if (target == 0x8063) {
-        iVar1 = *(int *)(glContext + 0x52b8);
+        activeUnitThenTextureObject = *(int *)(glContext + 0x52b8);
 LAB_000466e0:
-        return iVar1 + 0x10;
+        return activeUnitThenTextureObject + 0x10;
       }
       if (target < 0x8064) {
         if (target == 0xde0) {
-          iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5164);
+          activeUnitThenTextureObject = *(int *)(activeUnitThenTextureObject * 0x14 + glContext + 0x5164);
         }
         else {
           if (target != 0xde1) {
             return 0;
           }
-          iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5160);
+          activeUnitThenTextureObject = *(int *)(activeUnitThenTextureObject * 0x14 + glContext + 0x5160);
         }
       }
       else {
@@ -620,44 +620,44 @@ LAB_000466e0:
             if (target != 0x8064) {
               return 0;
             }
-            iVar1 = *(int *)(glContext + 0x52b4);
+            activeUnitThenTextureObject = *(int *)(glContext + 0x52b4);
           }
           else {
             if (target != 0x8070) {
               return 0;
             }
-            iVar1 = *(int *)(glContext + 0x52ac);
+            activeUnitThenTextureObject = *(int *)(glContext + 0x52ac);
           }
           goto LAB_000466e0;
         }
-        iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5158);
+        activeUnitThenTextureObject = *(int *)(activeUnitThenTextureObject * 0x14 + glContext + 0x5158);
       }
       goto LAB_0004669c;
     }
     if (target < 0x851b) {
       if (target < 0x8515) {
         if (target == 0x84f7) {
-          iVar1 = *(int *)(glContext + 0x52b0);
+          activeUnitThenTextureObject = *(int *)(glContext + 0x52b0);
           goto LAB_000466e0;
         }
         if (target != 0x8513) {
           return 0;
         }
       }
-      iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5154);
+      activeUnitThenTextureObject = *(int *)(activeUnitThenTextureObject * 0x14 + glContext + 0x5154);
       goto LAB_0004669c;
     }
     if (target == 0x851b) {
-      iVar1 = *(int *)(glContext + 0x52a8);
+      activeUnitThenTextureObject = *(int *)(glContext + 0x52a8);
       goto LAB_000466e0;
     }
     if (target != 0x85b3) {
       return 0;
     }
   }
-  iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x515c);
+  activeUnitThenTextureObject = *(int *)(activeUnitThenTextureObject * 0x14 + glContext + 0x515c);
 LAB_0004669c:
-  return iVar1 + 0x10;
+  return activeUnitThenTextureObject + 0x10;
 }
 
 /* _gleTexLevelStorage @ 0x46708 (2272 bytes) */
@@ -2695,28 +2695,28 @@ void _gleMultMatrixd(leftMatrix, m, product)
 }
 
 /* _gleInvertMatrices @ 0x48e78 (156 bytes) */
-int _gleInvertMatrices(glContext, param_2)
+int _gleInvertMatrices(glContext, invertBits)
   int glContext;
-  uint param_2;
+  uint invertBits;
 {
-  uint uVar1;
-  uint uVar2;
+  uint bitsToInvert;
+  uint remainingBits;
   uint loopIndex;
   
-  uVar1 = param_2 & 0xfffffff9;
-  if ((param_2 & 0x10) != 0) {
+  bitsToInvert = invertBits & 0xfffffff9;
+  if ((invertBits & 0x10) != 0) {
     ((double (*)())_gleModelMatInvert)(glContext);
-    uVar1 = param_2 & 0xffffffe9;
+    bitsToInvert = invertBits & 0xffffffe9;
   }
   loopIndex = 0;
-  uVar2 = uVar1;
-  while (uVar2 != 0) {
-    if ((uVar2 & 1) != 0) {
+  remainingBits = bitsToInvert;
+  while (remainingBits != 0) {
+    if ((remainingBits & 1) != 0) {
       *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) & ~(1 << (loopIndex & 0x3f));
       (*(code *)_gleInvertMatrix)(glContext,loopIndex);
     }
     loopIndex = loopIndex + 1;
-    uVar2 = uVar1 >> (loopIndex & 0x3f);
+    remainingBits = bitsToInvert >> (loopIndex & 0x3f);
   }
   return;
 }
@@ -6815,16 +6815,16 @@ switchD_0004e8f4_default:
 }
 
 /* _gleArrayIncAndStoreVertexLoop @ 0x4eb5c (224 bytes) */
-int _gleArrayIncAndStoreVertexLoop(param_1, param_2, param_3, param_4)
-  uint *param_1;
-  int param_2;
-  uint param_3;
+int _gleArrayIncAndStoreVertexLoop(emitCursor, loopStartAddress, increment, param_4)
+  uint *emitCursor;
+  int loopStartAddress;
+  uint increment;
   undefined4 param_4;
 {
   uint *cursor;
   
-  *param_1 = param_3 & 0xffff | 0x38a50000;
-  cursor = param_1 + 1;
+  *emitCursor = increment & 0xffff | 0x38a50000;
+  cursor = emitCursor + 1;
   switch(param_4) {
   default:
     (*(volatile unsigned int *)0x0) = 0;
@@ -6833,8 +6833,8 @@ int _gleArrayIncAndStoreVertexLoop(param_1, param_2, param_3, param_4)
   case 3:
   case 5:
     *cursor = 0x80c348cc;
-    param_1[2] = 0x38c60001;
-    cursor = param_1 + 3;
+    emitCursor[2] = 0x38c60001;
+    cursor = emitCursor + 3;
     *cursor = 0x90c348cc;
     break;
   case 7:
@@ -6845,7 +6845,7 @@ int _gleArrayIncAndStoreVertexLoop(param_1, param_2, param_3, param_4)
 LAB_0004ec20:
   *cursor = 0x810348c8;
   cursor[1] = 0x7c054000;
-  cursor[2] = param_2 - (int)(cursor + 2) & 0xfffcU | 0x40820000;
+  cursor[2] = loopStartAddress - (int)(cursor + 2) & 0xfffcU | 0x40820000;
   cursor[3] = 0x90c348cc;
   cursor[4] = 0x90a34858;
   cursor[5] = 0x7ca32b78;

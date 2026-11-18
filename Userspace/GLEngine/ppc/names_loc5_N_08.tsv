@@ -1,0 +1,39 @@
+local	_gleFreeBufferObject	param_2	bufferObject	INFERRED	callers pass buffer objects (e.g. glContextPtr48f4); +0x10.. per-renderer handles, +0x30 data pointer and +0x38 size are released
+local	_gleFreeBufferObject	piVar1	rendererFuncTablePtr	INFERRED	address (ctx+0x10000-0x777c+n*0x2e0) of the per-renderer pointer whose target holds the delete function at +0x1d8
+local	_gleFreeBufferObject	puVar2	rendererStatePtr	INFERRED	address of the per-renderer word passed as first argument of the delete function
+local	_gleFreeBufferObject	iVar3	rendererRecordCursor	INFERRED	ctx+0x10000 advanced by 0x2e0 per renderer: base of the per-renderer record fields read through piVar1/puVar2
+local	_gleFreeBufferObject	iVar5	handleCursor	CONFIRMED	bufferObject advanced by 4 per renderer: the per-renderer buffer handle slot at +0x10 passed to the delete function and cleared
+local	_gleReinitFuncCache	piVar1	entry	CONFIRMED	list entry being freed (circular list walked from the header until it returns to the header)
+local	_gleReinitFuncCache	piVar3	nextEntry	CONFIRMED	next link of the entry read before _gleDCBFree
+local	_gleReinitFuncCache	iVar2	headerBlock	CONFIRMED	block from _gleDCBRealloc(funcCache, 0x24): the re-initialised header (self-linked, -1 markers, a blr 0x4e800020 at +0x20)
+local	_gleElementOffset	param_2	x	INFERRED	multiplied by the component count (per-pixel element step) in the returned offset
+local	_gleElementOffset	param_3	y	INFERRED	multiplied by the row length in elements in the returned offset
+local	_gleElementOffset	param_4	type	CONFIRMED	compared with 0x1a00 (GL_BITMAP): bitmap rows are measured in bits (_gleRowBytes(format, type, width) << 3)
+local	_gleElementOffset	param_6	width	INFERRED	third argument of _gleRowBytes(format, 0x1a00, param_6) and multiplied by the component count for the row length
+local	_gleElementOffset	iVar2	componentCount	CONFIRMED	result of _gleComponents(format)
+local	_gleElementOffset	iVar1	rowElements	CONFIRMED	components*width (row length in elements), or the row byte count << 3 for bitmaps
+local	_gleFogExp2	param_1	glContext	INFERRED	fog density at ctx+0x3150 and the constants at ctx+0x24/0x30/0x34/0x38 are read from the context
+local	_gleFogExp2	fVar2	one	CONFIRMED	ctx+0x24 float 1.0 (default w value, see glVertexAttrib1 spec defaults), the numerator and the constant term of the polynomial
+local	_gleFogExp2	fVar1	densityDistanceThenNegSquare	CONFIRMED	ctx+0x3150 * floatArg1 (density times distance), then -(x*x) as the exponent of the exp2 approximation
+local	_LFSStreamCreate	puVar1	stream	CONFIRMED	calloc(0x18, 1): record holding the six chunk lists created below
+local	_LFSStreamCreate	uVar2	chunkList	CONFIRMED	result of _LFSStreamChunkListCreate stored into the next stream slot
+local	_gleSelectTriangles	param_2	vertexCursor	INFERRED	start of the vertex run (0x100 bytes per vertex), advanced per primitive; same role as vertexCursor in the sibling render functions
+local	_gleSelectTriangles	param_3	vertexCount	INFERRED	number of vertices: the loop runs while iVar1 <= param_3 - 3 (triangles) / param_3 - 4 (quads)
+local	_gleSelectTriangles	iVar1	verticesConsumed	CONFIRMED	vertices consumed so far (+3 per triangle, +2 per quad of the strip)
+local	_gleSelectTriangles	uVar2	primitiveVertex	CONFIRMED	vertex of the current primitive; its window z (float at +8) is passed to _gleSelectHitRecord
+local	_gleSelectQuadStrip	param_2	vertexCursor	INFERRED	start of the vertex run (0x100 bytes per vertex), advanced per primitive; same role as vertexCursor in the sibling render functions
+local	_gleSelectQuadStrip	param_3	vertexCount	INFERRED	number of vertices: the loop runs while iVar1 <= param_3 - 3 (triangles) / param_3 - 4 (quads)
+local	_gleSelectQuadStrip	iVar1	verticesConsumed	CONFIRMED	vertices consumed so far (+3 per triangle, +2 per quad of the strip)
+local	_gleSelectQuadStrip	uVar2	primitiveVertex	CONFIRMED	vertex of the current primitive; its window z (float at +8) is passed to _gleSelectHitRecord
+local	_LFSStreamChunkListAddChunk	param_1	chunkList	CONFIRMED	record of head (+0), tail (+4) and count (+8); the chunk is appended at the tail
+local	_LFSStreamChunkListAddChunk	param_2	chunk	CONFIRMED	chunk appended to the list: its prev link (+0x48) is set to the old tail whose next link (+0x4c) is set to it
+local	_LFSStreamChunkListAddChunk	iVar1	headChunk	CONFIRMED	list head: unchanged unless the list was empty, then the new chunk
+local	_gleDestroyPluginFence	piVar1	rendererFuncTablePtr	INFERRED	address of the per-renderer pointer whose target holds the plugin function table (function called with the handle) at +0x1bc
+local	_gleDestroyPluginFence	puVar2	rendererStatePtr	INFERRED	address of the per-renderer word passed as first argument of the plugin function
+local	_gleCreatePluginFence	piVar1	rendererFuncTablePtr	INFERRED	address of the per-renderer pointer whose target holds the plugin function table (function called with the handle) at +0x1b8
+local	_gleCreatePluginFence	puVar2	rendererStatePtr	INFERRED	address of the per-renderer word passed as first argument of the plugin function
+local	_gleDestroyPluginFence	iVar4	rendererRecordCursor	INFERRED	ctx+0x10000 advanced by 0x2e0 per renderer (count at ctx+0x85a4): base of the per-renderer fields read through piVar1/puVar2
+local	_gleCreatePluginFence	iVar3	rendererRecordCursor	INFERRED	ctx+0x10000 advanced by 0x2e0 per renderer (count at ctx+0x85a4): base of the per-renderer fields read through piVar1/puVar2
+local	_gleDestroyPluginFence	param_2	fenceHandles	INFERRED	array of per-renderer fence handles, indexed loopIndex*4, passed to the destroy function and cleared
+local	_gleCreatePluginFence	param_2	fenceHandleCursor	INFERRED	pointer to the per-renderer fence handle slot, advanced by 4 per renderer, passed to the create function
+local	_gleDestroyPluginFence	iVar3	handleOffset	CONFIRMED	loopIndex*4: byte offset of this renderer's fence handle in fenceHandles

@@ -1148,15 +1148,15 @@ int _gleAddHashName(hashTable, hashName)
 }
 
 /* _gleAddHashObject @ 0x17de0 (24 bytes) */
-void _gleAddHashObject(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+void _gleAddHashObject(hashTable, object)
+  int hashTable;
+  undefined4 *object;
 {
-  int iVar1;
+  int bucketOffset;
   
-  iVar1 = (param_2[1] & 0x3ff) * 4;
-  *param_2 = *(undefined4 *)(param_1 + iVar1);
-  *(undefined4 **)(param_1 + iVar1) = param_2;
+  bucketOffset = (object[1] & 0x3ff) * 4;
+  *object = *(undefined4 *)(hashTable + bucketOffset);
+  *(undefined4 **)(hashTable + bucketOffset) = object;
   return;
 }
 
@@ -1875,38 +1875,38 @@ int _gleLookUpTexture2D(glContext, target)
   int glContext;
   uint target;
 {
-  int iVar1;
+  int activeUnitThenTextureObject;
   
-  iVar1 = *(int *)(glContext + 0x53d4);
+  activeUnitThenTextureObject = *(int *)(glContext + 0x53d4);
   if (target == 0x8513) {
 LAB_00018f60:
-    iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5154);
+    activeUnitThenTextureObject = *(int *)(activeUnitThenTextureObject * 0x14 + glContext + 0x5154);
   }
   else {
     if (target < 0x8514) {
       if (target == 0x8064) {
-        iVar1 = *(int *)(glContext + 0x52b4);
+        activeUnitThenTextureObject = *(int *)(glContext + 0x52b4);
 LAB_00018f90:
-        return iVar1 + 0x10;
+        return activeUnitThenTextureObject + 0x10;
       }
       if (target < 0x8065) {
         if (target != 0xde1) {
           return 0;
         }
-        iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5160);
+        activeUnitThenTextureObject = *(int *)(activeUnitThenTextureObject * 0x14 + glContext + 0x5160);
         goto LAB_00018f6c;
       }
       if (target != 0x84f5) {
         if (target != 0x84f7) {
           return 0;
         }
-        iVar1 = *(int *)(glContext + 0x52b0);
+        activeUnitThenTextureObject = *(int *)(glContext + 0x52b0);
         goto LAB_00018f90;
       }
     }
     else {
       if (target == 0x851b) {
-        iVar1 = *(int *)(glContext + 0x52a8);
+        activeUnitThenTextureObject = *(int *)(glContext + 0x52a8);
         goto LAB_00018f90;
       }
       if (target < 0x851c) {
@@ -1919,10 +1919,10 @@ LAB_00018f90:
         return 0;
       }
     }
-    iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x515c);
+    activeUnitThenTextureObject = *(int *)(activeUnitThenTextureObject * 0x14 + glContext + 0x515c);
   }
 LAB_00018f6c:
-  return iVar1 + 0x10;
+  return activeUnitThenTextureObject + 0x10;
 }
 
 /* _gleCheckTexImageArgs @ 0x18fa8 (648 bytes) */

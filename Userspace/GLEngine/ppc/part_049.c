@@ -879,26 +879,26 @@ void _gleModifyPixelDepth(glContext, pixel)
 /* _gleModifyPixelR @ 0xe6560 (200 bytes) */
 void _gleModifyPixelR(int glContext,int pixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
-  uint uVar1;
+  uint redScaledIndex;
   float red;
-  float fVar3;
-  uint uVar4;
+  float clampBound;
+  uint redMapIndex;
   
   red = *(float *)(pixel + 4) * *(float *)(glContext + 0x31ec) + *(float *)(glContext + 0x31e8);
   if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
-    fVar3 = FLOAT_00108e50;
-    if ((red < FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < red)) {
-      red = fVar3;
+    clampBound = FLOAT_00108e50;
+    if ((red < FLOAT_00108e50) || (clampBound = FLOAT_00108e54, FLOAT_00108e54 < red)) {
+      red = clampBound;
     }
   }
   else {
-    uVar4 = *(int *)(glContext + 0x3288) - 1;
-    uVar1 = (uint)(int)(red * (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - DOUBLE_00108d58
+    redMapIndex = *(int *)(glContext + 0x3288) - 1;
+    redScaledIndex = (uint)(int)(red * (float)((double)CONCAT44(0x43300000,redMapIndex ^ 0x80000000) - DOUBLE_00108d58
                                   ) + FLOAT_00108e90);
-    if (((int)uVar1 <= (int)uVar4) && (uVar4 = uVar1, (int)uVar1 < 0)) {
-      uVar4 = 0;
+    if (((int)redScaledIndex <= (int)redMapIndex) && (redMapIndex = redScaledIndex, (int)redScaledIndex < 0)) {
+      redMapIndex = 0;
     }
-    red = *(float *)(uVar4 * 4 + *(int *)(glContext + 0x325c));
+    red = *(float *)(redMapIndex * 4 + *(int *)(glContext + 0x325c));
   }
   *(float *)(pixel + 4) = red;
   return;
@@ -963,26 +963,26 @@ void _gleModifyPixelB(int glContext,int pixel,double unusedFloatArg1,double unus
 /* _gleModifyPixelA @ 0xe67b8 (200 bytes) */
 void _gleModifyPixelA(int glContext,int pixel,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
-  uint uVar1;
+  uint alphaScaledIndex;
   float alpha;
-  float fVar3;
-  uint uVar4;
+  float clampBound;
+  uint alphaMapIndex;
   
   alpha = *(float *)(pixel + 0x10) * *(float *)(glContext + 0x3204) + *(float *)(glContext + 0x3200);
   if ((*(uint *)(glContext + 0x3414) & 1) == 0) {
-    fVar3 = FLOAT_00108e50;
-    if ((alpha < FLOAT_00108e50) || (fVar3 = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
-      alpha = fVar3;
+    clampBound = FLOAT_00108e50;
+    if ((alpha < FLOAT_00108e50) || (clampBound = FLOAT_00108e54, FLOAT_00108e54 < alpha)) {
+      alpha = clampBound;
     }
   }
   else {
-    uVar4 = *(int *)(glContext + 0x3294) - 1;
-    uVar1 = (uint)(int)(alpha * (float)((double)CONCAT44(0x43300000,uVar4 ^ 0x80000000) - DOUBLE_00108d58
+    alphaMapIndex = *(int *)(glContext + 0x3294) - 1;
+    alphaScaledIndex = (uint)(int)(alpha * (float)((double)CONCAT44(0x43300000,alphaMapIndex ^ 0x80000000) - DOUBLE_00108d58
                                   ) + FLOAT_00108e90);
-    if (((int)uVar1 <= (int)uVar4) && (uVar4 = uVar1, (int)uVar1 < 0)) {
-      uVar4 = 0;
+    if (((int)alphaScaledIndex <= (int)alphaMapIndex) && (alphaMapIndex = alphaScaledIndex, (int)alphaScaledIndex < 0)) {
+      alphaMapIndex = 0;
     }
-    alpha = *(float *)(uVar4 * 4 + *(int *)(glContext + 0x3268));
+    alpha = *(float *)(alphaMapIndex * 4 + *(int *)(glContext + 0x3268));
   }
   *(float *)(pixel + 0x10) = alpha;
   return;

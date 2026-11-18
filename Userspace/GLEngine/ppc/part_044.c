@@ -41,23 +41,23 @@ void _LFSStreamChunkListFree(param_1)
 }
 
 /* _LFSStreamChunkListAddChunk @ 0xd1910 (64 bytes) */
-void _LFSStreamChunkListAddChunk(param_1, param_2)
-  int *param_1;
-  int param_2;
+void _LFSStreamChunkListAddChunk(chunkList, chunk)
+  int *chunkList;
+  int chunk;
 {
-  int iVar1;
+  int headChunk;
   
-  iVar1 = *param_1;
-  if (*param_1 == 0) {
-    iVar1 = param_2;
+  headChunk = *chunkList;
+  if (*chunkList == 0) {
+    headChunk = chunk;
   }
-  *param_1 = iVar1;
-  if (param_1[1] != 0) {
-    *(int *)(param_1[1] + 0x4c) = param_2;
-    *(int *)(param_2 + 0x48) = param_1[1];
+  *chunkList = headChunk;
+  if (chunkList[1] != 0) {
+    *(int *)(chunkList[1] + 0x4c) = chunk;
+    *(int *)(chunk + 0x48) = chunkList[1];
   }
-  param_1[1] = param_2;
-  param_1[2] = param_1[2] + 1;
+  chunkList[1] = chunk;
+  chunkList[2] = chunkList[2] + 1;
   return;
 }
 
@@ -178,23 +178,23 @@ void _LFSStreamChunkListOutputDebugInfo(param_1)
 /* _LFSStreamCreate @ 0xd1bd4 (104 bytes) */
 int _LFSStreamCreate()
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *stream;
+  undefined4 chunkList;
   
-  puVar1 = (undefined4 *)_calloc(0x18,1);
-  uVar2 = ((int (*)())_LFSStreamChunkListCreate)();
-  *puVar1 = uVar2;
-  uVar2 = ((int (*)())_LFSStreamChunkListCreate)();
-  puVar1[1] = uVar2;
-  uVar2 = ((int (*)())_LFSStreamChunkListCreate)();
-  puVar1[2] = uVar2;
-  uVar2 = ((int (*)())_LFSStreamChunkListCreate)();
-  puVar1[3] = uVar2;
-  uVar2 = ((int (*)())_LFSStreamChunkListCreate)();
-  puVar1[4] = uVar2;
-  uVar2 = ((int (*)())_LFSStreamChunkListCreate)();
-  puVar1[5] = uVar2;
-  return puVar1;
+  stream = (undefined4 *)_calloc(0x18,1);
+  chunkList = ((int (*)())_LFSStreamChunkListCreate)();
+  *stream = chunkList;
+  chunkList = ((int (*)())_LFSStreamChunkListCreate)();
+  stream[1] = chunkList;
+  chunkList = ((int (*)())_LFSStreamChunkListCreate)();
+  stream[2] = chunkList;
+  chunkList = ((int (*)())_LFSStreamChunkListCreate)();
+  stream[3] = chunkList;
+  chunkList = ((int (*)())_LFSStreamChunkListCreate)();
+  stream[4] = chunkList;
+  chunkList = ((int (*)())_LFSStreamChunkListCreate)();
+  stream[5] = chunkList;
+  return stream;
 }
 
 /* _LFSStreamFree @ 0xd1c3c (92 bytes) */
@@ -1711,23 +1711,23 @@ void _gleColorTable(glContext, scaleBias, param_3, param_4, format, type, table)
 }
 
 /* _gleColorSubTable @ 0xd4094 (160 bytes) */
-void _gleColorSubTable(glContext, scaleBias, param_3, param_4, pixelCount, format, type, data)
+void _gleColorSubTable(glContext, scaleBias, tableLevel, start, pixelCount, format, type, data)
   undefined4 glContext;
   undefined4 scaleBias;
-  int param_3;
-  int param_4;
+  int tableLevel;
+  int start;
   undefined4 pixelCount;
   undefined4 format;
   undefined4 type;
   undefined4 data;
 {
-  int iVar1;
+  int pixelBytes;
   
-  iVar1 = _glePixelBytes((uint)*(ushort *)(param_3 + 0x10),(uint)*(ushort *)(param_3 + 0x12));
-  ((void (*)())_gleImagingUnpackData)(glContext,pixelCount,1,format,type,(uint)*(ushort *)(param_3 + 0x10),
-             (uint)*(ushort *)(param_3 + 0x12),data,*(int *)(param_3 + 0x14) + iVar1 * param_4);
-  ((void (*)())_gleImagingScaleAndBias)(glContext,scaleBias,*(undefined4 *)(param_3 + 0x14),(uint)*(ushort *)(param_3 + 0x10),
-             param_4,pixelCount,1);
+  pixelBytes = _glePixelBytes((uint)*(ushort *)(tableLevel + 0x10),(uint)*(ushort *)(tableLevel + 0x12));
+  ((void (*)())_gleImagingUnpackData)(glContext,pixelCount,1,format,type,(uint)*(ushort *)(tableLevel + 0x10),
+             (uint)*(ushort *)(tableLevel + 0x12),data,*(int *)(tableLevel + 0x14) + pixelBytes * start);
+  ((void (*)())_gleImagingScaleAndBias)(glContext,scaleBias,*(undefined4 *)(tableLevel + 0x14),(uint)*(ushort *)(tableLevel + 0x10),
+             start,pixelCount,1);
   return;
 }
 

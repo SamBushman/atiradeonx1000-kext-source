@@ -103,25 +103,25 @@ double _glColor4fv_NoColorMat_Exec(glContext, v)
 }
 
 /* _gleSetEnable_TEXTURE_3D @ 0x4f25c (80 bytes) */
-void _gleSetEnable_TEXTURE_3D(glContext, unusedArg2, param_3)
+void _gleSetEnable_TEXTURE_3D(glContext, unusedArg2, enable)
   int glContext;
   undefined4 unusedArg2;
-  int param_3;
+  int enable;
 {
-  uint uVar1;
-  int iVar2;
+  uint newFlags;
+  int unitState;
   uint texUnit;
-  uint uVar4;
+  uint oldFlags;
   
   texUnit = *(uint *)(glContext + 0x53d4);
   if (texUnit < 8) {
-    iVar2 = texUnit * 0x7c + glContext;
-    uVar4 = *(uint *)(iVar2 + 0x3534);
-    uVar1 = uVar4 & 0xfffffffd | param_3 << 1;
-    if (uVar4 == uVar1) {
+    unitState = texUnit * 0x7c + glContext;
+    oldFlags = *(uint *)(unitState + 0x3534);
+    newFlags = oldFlags & 0xfffffffd | enable << 1;
+    if (oldFlags == newFlags) {
       return;
     }
-    *(uint *)(iVar2 + 0x3534) = uVar1;
+    *(uint *)(unitState + 0x3534) = newFlags;
     _gleUpdateTextureParams(glContext,texUnit);
     return;
   }
@@ -689,25 +689,25 @@ int _gleCreateFenceObject(fence)
 }
 
 /* _gleCreatePluginFence @ 0x4fed4 (112 bytes) */
-void _gleCreatePluginFence(glContext, param_2)
+void _gleCreatePluginFence(glContext, fenceHandleCursor)
   int glContext;
-  int param_2;
+  int fenceHandleCursor;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  int *rendererFuncTablePtr;
+  undefined4 *rendererStatePtr;
+  int rendererRecordCursor;
   int loopIndex;
   
-  iVar3 = glContext + 0x10000;
+  rendererRecordCursor = glContext + 0x10000;
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      piVar1 = (int *)(iVar3 + -0x777c);
-      puVar2 = (undefined4 *)(iVar3 + -0x7a54);
-      iVar3 = iVar3 + 0x2e0;
+      rendererFuncTablePtr = (int *)(rendererRecordCursor + -0x777c);
+      rendererStatePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+      rendererRecordCursor = rendererRecordCursor + 0x2e0;
       loopIndex = loopIndex + 1;
-      (**(code **)(*piVar1 + 0x1b8))(*puVar2,param_2);
-      param_2 = param_2 + 4;
+      (**(code **)(*rendererFuncTablePtr + 0x1b8))(*rendererStatePtr,fenceHandleCursor);
+      fenceHandleCursor = fenceHandleCursor + 4;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return;
@@ -1005,27 +1005,27 @@ void _gleFreeFenceObject(glContext, param_2)
 }
 
 /* _gleDestroyPluginFence @ 0x50564 (120 bytes) */
-void _gleDestroyPluginFence(glContext, param_2)
+void _gleDestroyPluginFence(glContext, fenceHandles)
   int glContext;
-  int param_2;
+  int fenceHandles;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
+  int *rendererFuncTablePtr;
+  undefined4 *rendererStatePtr;
+  int handleOffset;
+  int rendererRecordCursor;
   int loopIndex;
   
-  iVar4 = glContext + 0x10000;
+  rendererRecordCursor = glContext + 0x10000;
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      piVar1 = (int *)(iVar4 + -0x777c);
-      iVar3 = loopIndex * 4;
-      puVar2 = (undefined4 *)(iVar4 + -0x7a54);
-      iVar4 = iVar4 + 0x2e0;
+      rendererFuncTablePtr = (int *)(rendererRecordCursor + -0x777c);
+      handleOffset = loopIndex * 4;
+      rendererStatePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+      rendererRecordCursor = rendererRecordCursor + 0x2e0;
       loopIndex = loopIndex + 1;
-      (**(code **)(*piVar1 + 0x1bc))(*puVar2,*(undefined4 *)(iVar3 + param_2));
-      *(undefined4 *)(iVar3 + param_2) = 0;
+      (**(code **)(*rendererFuncTablePtr + 0x1bc))(*rendererStatePtr,*(undefined4 *)(handleOffset + fenceHandles));
+      *(undefined4 *)(handleOffset + fenceHandles) = 0;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return;

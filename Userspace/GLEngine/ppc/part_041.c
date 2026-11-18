@@ -1377,35 +1377,35 @@ void _gleCreatePluginBuffer(glContext, param_2)
 }
 
 /* _gleFreeBufferObject @ 0xc7160 (168 bytes) */
-void _gleFreeBufferObject(glContext, param_2)
+void _gleFreeBufferObject(glContext, bufferObject)
   int glContext;
-  int param_2;
+  int bufferObject;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  int *rendererFuncTablePtr;
+  undefined4 *rendererStatePtr;
+  int rendererRecordCursor;
   int loopIndex;
-  int iVar5;
+  int handleCursor;
   
-  iVar3 = glContext + 0x10000;
+  rendererRecordCursor = glContext + 0x10000;
   loopIndex = 0;
-  iVar5 = param_2;
+  handleCursor = bufferObject;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      piVar1 = (int *)(iVar3 + -0x777c);
+      rendererFuncTablePtr = (int *)(rendererRecordCursor + -0x777c);
       loopIndex = loopIndex + 1;
-      puVar2 = (undefined4 *)(iVar3 + -0x7a54);
-      iVar3 = iVar3 + 0x2e0;
-      (**(code **)(*piVar1 + 0x1d8))(*puVar2,*(undefined4 *)(iVar5 + 0x10));
-      *(undefined4 *)(iVar5 + 0x10) = 0;
-      iVar5 = iVar5 + 4;
+      rendererStatePtr = (undefined4 *)(rendererRecordCursor + -0x7a54);
+      rendererRecordCursor = rendererRecordCursor + 0x2e0;
+      (**(code **)(*rendererFuncTablePtr + 0x1d8))(*rendererStatePtr,*(undefined4 *)(handleCursor + 0x10));
+      *(undefined4 *)(handleCursor + 0x10) = 0;
+      handleCursor = handleCursor + 4;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
-  if (*(vm_address_t *)(param_2 + 0x30) != 0) {
-    _vm_deallocate(*(vm_map_t *)PTR_00112034,*(vm_address_t *)(param_2 + 0x30),
-                   *(vm_size_t *)(param_2 + 0x38));
+  if (*(vm_address_t *)(bufferObject + 0x30) != 0) {
+    _vm_deallocate(*(vm_map_t *)PTR_00112034,*(vm_address_t *)(bufferObject + 0x30),
+                   *(vm_size_t *)(bufferObject + 0x38));
   }
-  _gleVecFree(param_2);
+  _gleVecFree(bufferObject);
   return;
 }
 
@@ -1850,28 +1850,28 @@ void _gleSynchronizePluginBuffers(glContext)
 }
 
 /* _gleSynchronizePluginBuffer @ 0xc7ae0 (160 bytes) */
-double _gleSynchronizePluginBuffer(glContext, param_2)
+double _gleSynchronizePluginBuffer(glContext, bufferObject)
   int glContext;
-  int param_2;
+  int bufferObject;
 {
-  int iVar1;
+  int rendererRecord;
   uint loopIndex;
-  int iVar3;
+  int handleOffset;
   
   loopIndex = 0;
-  iVar3 = 0;
+  handleOffset = 0;
   if (*(byte *)(glContext + 0x85a4) != 0) {
     do {
-      iVar3 = loopIndex * 4;
-      if (*(int *)(param_2 + 0x30) == *(int *)(iVar3 + *(int *)(glContext + 0x5148) + 0x8054)) break;
+      handleOffset = loopIndex * 4;
+      if (*(int *)(bufferObject + 0x30) == *(int *)(handleOffset + *(int *)(glContext + 0x5148) + 0x8054)) break;
       loopIndex = loopIndex + 1;
-      iVar3 = loopIndex * 4;
+      handleOffset = loopIndex * 4;
     } while (loopIndex < *(byte *)(glContext + 0x85a4));
   }
-  iVar1 = loopIndex * 0x2e0 + glContext;
-  (**(code **)(*(int *)(iVar1 + 0x8884) + 0x1e4))
-            (*(undefined4 *)(iVar1 + 0x85ac),*(undefined4 *)(iVar3 + param_2));
-  *(undefined4 *)(param_2 + 0x30) = 0;
+  rendererRecord = loopIndex * 0x2e0 + glContext;
+  (**(code **)(*(int *)(rendererRecord + 0x8884) + 0x1e4))
+            (*(undefined4 *)(rendererRecord + 0x85ac),*(undefined4 *)(handleOffset + bufferObject));
+  *(undefined4 *)(bufferObject + 0x30) = 0;
   return;
 }
 
@@ -3590,23 +3590,23 @@ uint _pixelBoundaryTopRight(float floatArg1)
 /* _pixelCenters @ 0xca334 (160 bytes) */
 int _pixelCenters(float floatArg1,float floatArg2,double floatArg3)
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int boundaryDistance;
+  int firstBoundary;
+  int secondBoundary;
   
   if ((double)FLOAT_00108e50 <= floatArg3) {
-    iVar2 = ((uint (*)())_pixelBoundaryBottomLeft)(floatArg1);
-    iVar3 = ((uint (*)())_pixelBoundaryTopRight)(floatArg2);
+    firstBoundary = ((uint (*)())_pixelBoundaryBottomLeft)(floatArg1);
+    secondBoundary = ((uint (*)())_pixelBoundaryTopRight)(floatArg2);
   }
   else {
-    iVar2 = ((uint (*)())_pixelBoundaryTopRight)(floatArg1);
-    iVar3 = ((uint (*)())_pixelBoundaryBottomLeft)(floatArg2);
+    firstBoundary = ((uint (*)())_pixelBoundaryTopRight)(floatArg1);
+    secondBoundary = ((uint (*)())_pixelBoundaryBottomLeft)(floatArg2);
   }
-  iVar1 = iVar2 - iVar3;
-  if (iVar2 <= iVar3) {
-    iVar1 = iVar3 - iVar2;
+  boundaryDistance = firstBoundary - secondBoundary;
+  if (firstBoundary <= secondBoundary) {
+    boundaryDistance = secondBoundary - firstBoundary;
   }
-  return iVar1;
+  return boundaryDistance;
 }
 
 /* _gleDrawPixelsFast @ 0xca3d4 (3376 bytes) */

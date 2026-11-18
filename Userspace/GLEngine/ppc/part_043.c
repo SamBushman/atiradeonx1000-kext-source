@@ -1731,33 +1731,33 @@ int _gleSynchronizePluginFramebuffer(glContext)
 void _gleFreeFramebufferState(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int framebufferRefCount;
+  int textureObject;
+  int framebufferObjectThenRefCount;
   
-  iVar3 = *(int *)(glContext + 0x744c);
-  iVar2 = *(int *)(glContext + 0x7448);
-  if (iVar3 != 0) {
+  framebufferObjectThenRefCount = *(int *)(glContext + 0x744c);
+  textureObject = *(int *)(glContext + 0x7448);
+  if (framebufferObjectThenRefCount != 0) {
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    iVar1 = *(int *)(iVar3 + 8) + -1;
-    *(int *)(iVar3 + 8) = iVar1;
-    if (iVar1 == 0) {
-      ((void (*)())_gleFreeFramebufferObject)(glContext,iVar3);
+    framebufferRefCount = *(int *)(framebufferObjectThenRefCount + 8) + -1;
+    *(int *)(framebufferObjectThenRefCount + 8) = framebufferRefCount;
+    if (framebufferRefCount == 0) {
+      ((void (*)())_gleFreeFramebufferObject)(glContext,framebufferObjectThenRefCount);
     }
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
   }
-  if (iVar2 != 0) {
+  if (textureObject != 0) {
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    iVar3 = *(int *)(iVar2 + 8) + -1;
-    *(int *)(iVar2 + 8) = iVar3;
-    if (iVar3 == 0) {
-      _gleFreeTextureObject(glContext,iVar2);
+    framebufferObjectThenRefCount = *(int *)(textureObject + 8) + -1;
+    *(int *)(textureObject + 8) = framebufferObjectThenRefCount;
+    if (framebufferObjectThenRefCount == 0) {
+      _gleFreeTextureObject(glContext,textureObject);
     }
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -1814,16 +1814,16 @@ void _gleGenerateMipmap(glContext, target)
 }
 
 /* _gleFogExp2 @ 0xced90 (56 bytes) */
-double _gleFogExp2(int param_1,float floatArg1)
+double _gleFogExp2(int glContext,float floatArg1)
 {
-  float fVar1;
-  float fVar2;
+  float densityDistanceThenNegSquare;
+  float one;
   
-  fVar1 = (*(float *)(param_1 + 0x3150) * floatArg1);
-  fVar2 = *(float *)(param_1 + 0x24);
-  fVar1 = fVar1 * -fVar1;
-  return (double)(fVar2 / ((((*(float *)(param_1 + 0x38) * fVar1 - *(float *)(param_1 + 0x34)) *
-                             fVar1 + *(float *)(param_1 + 0x30)) * fVar1 - fVar2) * fVar1 + fVar2));
+  densityDistanceThenNegSquare = (*(float *)(glContext + 0x3150) * floatArg1);
+  one = *(float *)(glContext + 0x24);
+  densityDistanceThenNegSquare = densityDistanceThenNegSquare * -densityDistanceThenNegSquare;
+  return (double)(one / ((((*(float *)(glContext + 0x38) * densityDistanceThenNegSquare - *(float *)(glContext + 0x34)) *
+                             densityDistanceThenNegSquare + *(float *)(glContext + 0x30)) * densityDistanceThenNegSquare - one) * densityDistanceThenNegSquare + one));
 }
 
 /* _gleLFSParse @ 0xcedc8 (612 bytes) */
@@ -2169,22 +2169,22 @@ int _LFSParserAttachString(parser, sourceString, preprocessFlag)
 }
 
 /* _LFSParserEatWhiteSpace @ 0xcf4a4 (76 bytes) */
-void _LFSParserEatWhiteSpace(param_1)
-  int *param_1;
+void _LFSParserEatWhiteSpace(parser)
+  int *parser;
 {
-  uint uVar1;
-  int iVar2;
+  uint currentChar;
+  int position;
   
   while( true ) {
-    iVar2 = param_1[3];
-    if (iVar2 == param_1[1]) {
+    position = parser[3];
+    if (position == parser[1]) {
       return;
     }
-    uVar1 = (uint)*(byte *)(*param_1 + iVar2);
-    if ((1 < uVar1 - 9) && (uVar1 != 0x20)) break;
-    param_1[3] = iVar2 + 1;
-    if (uVar1 == 10) {
-      param_1[4] = param_1[4] + 1;
+    currentChar = (uint)*(byte *)(*parser + position);
+    if ((1 < currentChar - 9) && (currentChar != 0x20)) break;
+    parser[3] = position + 1;
+    if (currentChar == 10) {
+      parser[4] = parser[4] + 1;
     }
   }
   return;
@@ -3609,23 +3609,23 @@ LAB_000d1440:
 }
 
 /* _LFSStreamChunkCompare @ 0xd152c (124 bytes) */
-int _LFSStreamChunkCompare(param_1, param_2)
-  char *param_1;
-  char *param_2;
+int _LFSStreamChunkCompare(chunkA, chunkB)
+  char *chunkA;
+  char *chunkB;
 {
-  int iVar1;
-  bool bVar2;
+  int memcmpResult;
+  bool chunksDiffer;
   
-  bVar2 = true;
-  if (*param_1 == *param_2) {
-    iVar1 = _memcmp(param_1 + 4,param_2 + 4,0x14);
-    bVar2 = true;
-    if (iVar1 == 0) {
-      iVar1 = _memcmp(param_1 + 4,param_2 + 4,0x44);
-      bVar2 = iVar1 != 0;
+  chunksDiffer = true;
+  if (*chunkA == *chunkB) {
+    memcmpResult = _memcmp(chunkA + 4,chunkB + 4,0x14);
+    chunksDiffer = true;
+    if (memcmpResult == 0) {
+      memcmpResult = _memcmp(chunkA + 4,chunkB + 4,0x44);
+      chunksDiffer = memcmpResult != 0;
     }
   }
-  return bVar2;
+  return chunksDiffer;
 }
 
 /* _LFSStreamChunkOutputDebugInfo @ 0xd15a8 (684 bytes) */

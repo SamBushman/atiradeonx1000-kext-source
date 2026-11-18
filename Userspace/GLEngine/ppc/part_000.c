@@ -2819,25 +2819,25 @@ void _gleInitGLDState(glContext)
 }
 
 /* _gleMakeIdentityMatrix @ 0x5180 (76 bytes) */
-int _gleMakeIdentityMatrix(param_1)
-  undefined4 *param_1;
+int _gleMakeIdentityMatrix(matrix)
+  undefined4 *matrix;
 {
-  param_1[0xf] = 0x3f800000;
-  param_1[0xe] = 0;
-  *param_1 = 0x3f800000;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  param_1[5] = 0x3f800000;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[8] = 0;
-  param_1[9] = 0;
-  param_1[10] = 0x3f800000;
-  param_1[0xb] = 0;
-  param_1[0xc] = 0;
-  param_1[0xd] = 0;
+  matrix[0xf] = 0x3f800000;
+  matrix[0xe] = 0;
+  *matrix = 0x3f800000;
+  matrix[1] = 0;
+  matrix[2] = 0;
+  matrix[3] = 0;
+  matrix[4] = 0;
+  matrix[5] = 0x3f800000;
+  matrix[6] = 0;
+  matrix[7] = 0;
+  matrix[8] = 0;
+  matrix[9] = 0;
+  matrix[10] = 0x3f800000;
+  matrix[0xb] = 0;
+  matrix[0xc] = 0;
+  matrix[0xd] = 0;
   return;
 }
 

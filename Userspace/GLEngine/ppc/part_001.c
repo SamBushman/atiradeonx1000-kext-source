@@ -5802,32 +5802,32 @@ void _gleResetVertexArrays(glContext)
 }
 
 /* _gleReinitFuncCache @ 0x1288c (168 bytes) */
-int _gleReinitFuncCache(glContext)
-  int *glContext;
+int _gleReinitFuncCache(funcCache)
+  int *funcCache;
 {
-  int *piVar1;
-  int iVar2;
-  int *piVar3;
+  int *entry;
+  int headerBlock;
+  int *nextEntry;
   
-  iVar2 = 0;
-  if (glContext != (int *)0x0) {
-    piVar1 = (int *)*glContext;
-    while (piVar1 != glContext) {
-      piVar3 = (int *)*piVar1;
-      _gleDCBFree(piVar1);
-      piVar1 = piVar3;
+  headerBlock = 0;
+  if (funcCache != (int *)0x0) {
+    entry = (int *)*funcCache;
+    while (entry != funcCache) {
+      nextEntry = (int *)*entry;
+      _gleDCBFree(entry);
+      entry = nextEntry;
     }
-    iVar2 = ((int (*)())_gleDCBRealloc)(glContext,0x24);
-    *(undefined4 *)(iVar2 + 0x14) = 0xffffffff;
-    *(undefined4 *)(iVar2 + 0x20) = 0x4e800020;
-    *(undefined4 *)(iVar2 + 8) = 0xffffffff;
-    *(undefined4 *)(iVar2 + 0xc) = 0xffffffff;
-    *(undefined4 *)(iVar2 + 0x10) = 0xffffffff;
-    *(int *)(iVar2 + 4) = iVar2;
-    *(int *)iVar2 = iVar2;
-    (*(code *)_glePushInstructions)(1,iVar2 + 0x20);
+    headerBlock = ((int (*)())_gleDCBRealloc)(funcCache,0x24);
+    *(undefined4 *)(headerBlock + 0x14) = 0xffffffff;
+    *(undefined4 *)(headerBlock + 0x20) = 0x4e800020;
+    *(undefined4 *)(headerBlock + 8) = 0xffffffff;
+    *(undefined4 *)(headerBlock + 0xc) = 0xffffffff;
+    *(undefined4 *)(headerBlock + 0x10) = 0xffffffff;
+    *(int *)(headerBlock + 4) = headerBlock;
+    *(int *)headerBlock = headerBlock;
+    (*(code *)_glePushInstructions)(1,headerBlock + 0x20);
   }
-  return iVar2;
+  return headerBlock;
 }
 
 /* _gleDCBRealloc @ 0x12934 (256 bytes) */

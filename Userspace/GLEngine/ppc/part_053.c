@@ -414,23 +414,23 @@ double _gleSelectPolygonPtr(glContext, param_2, param_3)
 }
 
 /* _gleSelectTriangles @ 0xf3de8 (116 bytes) */
-double _gleSelectTriangles(glContext, param_2, param_3)
+double _gleSelectTriangles(glContext, vertexCursor, vertexCount)
   undefined4 glContext;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
-  int iVar1;
-  uint uVar2;
+  int verticesConsumed;
+  uint primitiveVertex;
   
-  iVar1 = 0;
-  if (-1 < param_3 + -3) {
+  verticesConsumed = 0;
+  if (-1 < vertexCount + -3) {
     do {
-      for (uVar2 = param_2; uVar2 < param_2 + 0x300; uVar2 = uVar2 + 0x100) {
-        ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(uVar2 + 8));
+      for (primitiveVertex = vertexCursor; primitiveVertex < vertexCursor + 0x300; primitiveVertex = primitiveVertex + 0x100) {
+        ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(primitiveVertex + 8));
       }
-      iVar1 = iVar1 + 3;
-      param_2 = param_2 + 0x300;
-    } while (iVar1 <= param_3 + -3);
+      verticesConsumed = verticesConsumed + 3;
+      vertexCursor = vertexCursor + 0x300;
+    } while (verticesConsumed <= vertexCount + -3);
   }
   return;
 }
@@ -504,23 +504,23 @@ double _gleSelectQuads(glContext, param_2, param_3)
 }
 
 /* _gleSelectQuadStrip @ 0xf3fb8 (116 bytes) */
-double _gleSelectQuadStrip(glContext, param_2, param_3)
+double _gleSelectQuadStrip(glContext, vertexCursor, vertexCount)
   undefined4 glContext;
-  uint param_2;
-  int param_3;
+  uint vertexCursor;
+  int vertexCount;
 {
-  int iVar1;
-  uint uVar2;
+  int verticesConsumed;
+  uint primitiveVertex;
   
-  iVar1 = 0;
-  if (-1 < param_3 + -4) {
+  verticesConsumed = 0;
+  if (-1 < vertexCount + -4) {
     do {
-      for (uVar2 = param_2; uVar2 < param_2 + 0x400; uVar2 = uVar2 + 0x100) {
-        ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(uVar2 + 8));
+      for (primitiveVertex = vertexCursor; primitiveVertex < vertexCursor + 0x400; primitiveVertex = primitiveVertex + 0x100) {
+        ((void (*)())_gleSelectHitRecord)(glContext,(double)*(float *)(primitiveVertex + 8));
       }
-      iVar1 = iVar1 + 2;
-      param_2 = param_2 + 0x200;
-    } while (iVar1 <= param_3 + -4);
+      verticesConsumed = verticesConsumed + 2;
+      vertexCursor = vertexCursor + 0x200;
+    } while (verticesConsumed <= vertexCount + -4);
   }
   return;
 }

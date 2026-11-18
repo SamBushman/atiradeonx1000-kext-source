@@ -327,6 +327,6 @@ local	_glFramebufferTexture2DEXT_Exec	iVar4	face	INFERRED	single web; passed to 
 local	_glFramebufferTexture3DEXT_Exec	iVar2	textureObject	INFERRED	single web; passed to the textureObject parameter of a callee (callee signature)
 local	_glFramebufferRenderbufferEXT_Exec_body	uVar1	attachmentIndex	INFERRED	single web; passed to the attachmentIndex parameter of a callee (callee signature)
 local	_glFramebufferRenderbufferEXT_Exec_body	iVar2	textureObject	INFERRED	single web; passed to the textureObject parameter of a callee (callee signature)
-local	_gleReinitFuncCache	param_1	glContext	INFERRED	passed unchanged to the glContext parameter of a callee (callee signature)
+local	_gleReinitFuncCache	param_1	funcCache	INFERRED	callers pass ctx+0x49b4 / ctx+0x49b8 (function caches); the argument is a circular list header (sentinel compared in the loop), not a GL context; the callee parameter it is forwarded to is the same list header
 local	_gleShrinkFuncCacheElem	param_1	glContext	INFERRED	passed unchanged to the glContext parameter of a callee (callee signature)
 local	_gleAddAttribElem	param_2	attribBit	INFERRED	passed unchanged to the attribBit parameter of a callee (callee signature)

@@ -15,22 +15,22 @@ int _glePipelineProgramTargetExtactor(unusedArg1, param_2)
 }
 
 /* _glePPRelocateOutput @ 0xe1d68 (80 bytes) */
-void _glePPRelocateOutput(param_1, param_2, param_3)
-  uint param_1;
-  undefined4 param_2;
-  int *param_3;
+void _glePPRelocateOutput(oldIndex, newIndex, instructionList)
+  uint oldIndex;
+  undefined4 newIndex;
+  int *instructionList;
 {
-  int iVar1;
+  int instruction;
   
-  iVar1 = *param_3;
-  if (iVar1 != 0) {
+  instruction = *instructionList;
+  if (instruction != 0) {
     do {
-      if ((((*(uint *)(iVar1 + 0xc) >> 0x12 & 0xff) < 0x4b) &&
-          ((*(uint *)(iVar1 + 0x14) >> 0x11 & 7) == 3)) && (*(ushort *)(iVar1 + 0x1a) == param_1)) {
-        *(undefined2 *)(iVar1 + 0x1a) = (*(unsigned short *)((unsigned char *)&(param_2) + 2));
+      if ((((*(uint *)(instruction + 0xc) >> 0x12 & 0xff) < 0x4b) &&
+          ((*(uint *)(instruction + 0x14) >> 0x11 & 7) == 3)) && (*(ushort *)(instruction + 0x1a) == oldIndex)) {
+        *(undefined2 *)(instruction + 0x1a) = (*(unsigned short *)((unsigned char *)&(newIndex) + 2));
       }
-      iVar1 = *(int *)(iVar1 + 8);
-    } while (iVar1 != 0);
+      instruction = *(int *)(instruction + 8);
+    } while (instruction != 0);
     return;
   }
   return;
@@ -63,24 +63,24 @@ LAB_000e1e14:
 }
 
 /* _gleElementOffset @ 0xe1e44 (112 bytes) */
-int _gleElementOffset(unusedArg1, param_2, param_3, param_4, format, param_6)
+int _gleElementOffset(unusedArg1, x, y, type, format, width)
   undefined4 unusedArg1;
-  int param_2;
-  int param_3;
-  int param_4;
+  int x;
+  int y;
+  int type;
   undefined4 format;
-  int param_6;
+  int width;
 {
-  int iVar1;
-  int iVar2;
+  int rowElements;
+  int componentCount;
   
-  iVar2 = _gleComponents(format);
-  iVar1 = iVar2 * param_6;
-  if (param_4 == 0x1a00) {
-    iVar1 = _gleRowBytes(format,0x1a00,param_6);
-    iVar1 = iVar1 << 3;
+  componentCount = _gleComponents(format);
+  rowElements = componentCount * width;
+  if (type == 0x1a00) {
+    rowElements = _gleRowBytes(format,0x1a00,width);
+    rowElements = rowElements << 3;
   }
-  return iVar1 * param_3 + iVar2 * param_2;
+  return rowElements * y + componentCount * x;
 }
 
 /* _gleGetFrac @ 0xe1eb4 (208 bytes) */
