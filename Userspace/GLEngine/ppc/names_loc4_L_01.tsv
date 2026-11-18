@@ -1,0 +1,244 @@
+use	_glLinkProgramARB_Exec	bVar1	isFragmentStage	CONFIRMED	bVar1 = stageIndex != 0, passed as the stage argument of _ShGetPPStreamManager and selects the fragment stage record (+0x24)	^\s*bVar1\ =\ iVar14\ !=\ 0;$	+2
+use	_glLinkProgramARB_Exec	bVar1	isFragmentStage	CONFIRMED	bVar1 = stageIndex != 0, passed as the stage argument of _ShGetPPStreamManager and selects the fragment stage record (+0x24)	^\s*iVar18\ =\ _ShGetPPStreamManager\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),bVar1\);$	+1
+use	_glLinkProgramARB_Exec	bVar1	isFragmentStage	CONFIRMED	bVar1 = stageIndex != 0, passed as the stage argument of _ShGetPPStreamManager and selects the fragment stage record (+0x24)	^\s*if\ \(\(\*\(int\ \*\)\(puVar17\ \+\ 0x508\)\ !=\ 0\)\ \&\&\ \(\*puVar17\ =\ 1,\ !bVar1\)\)\ \{$	+1
+use	_glLinkProgramARB_Exec	bVar1	attachmentsValid	INFERRED	bVar1 = attachedCount < 3 then cleared when an attached shader is neither type 0x8b31 nor 0x8b30 or a type repeats; gates the per-stage info loop	^\s*bVar1\ =\ iVar14\ <\ 3;$	+1
+use	_glLinkProgramARB_Exec	bVar1	attachmentsValid	INFERRED	bVar1 = attachedCount < 3 then cleared when an attached shader is neither type 0x8b31 nor 0x8b30 or a type repeats; gates the per-stage info loop	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	_glLinkProgramARB_Exec	bVar1	attachmentsValid	INFERRED	bVar1 = attachedCount < 3 then cleared when an attached shader is neither type 0x8b31 nor 0x8b30 or a type repeats; gates the per-stage info loop	^\s*else\ if\ \(bVar1\)\ \{$	+2
+use	_glLinkProgramARB_Exec	bVar1	attachmentsValid	INFERRED	bVar1 = attachedCount < 3 then cleared when an attached shader is neither type 0x8b31 nor 0x8b30 or a type repeats; gates the per-stage info loop	^\s*bVar1\ =\ false;$	+1
+use	_glLinkProgramARB_Exec	bVar1	attachmentsValid	INFERRED	bVar1 = attachedCount < 3 then cleared when an attached shader is neither type 0x8b31 nor 0x8b30 or a type repeats; gates the per-stage info loop	^\s*\}\ while\ \(bVar1\);$	+1
+local	_glLinkProgramARB_Exec	bVar2	vertexStageHadProgramByte	INFERRED	byte 0 of the vertex stage record (**(iVar9+0x20)) read before the reset; the reset loop clears it and the stream path sets it to 1; passed on to _updateShaderState
+local	_glLinkProgramARB_Exec	bVar3	fragmentStageHadProgramByte	INFERRED	same for the fragment stage record (**(iVar9+0x24))
+local	_glLinkProgramARB_Exec	iVar9	sharedStateThenProgramObj	CONFIRMED	ctx+0x5148 shared state (mutex flag +0x8024 / mutex +0x8028), then overwritten with the _gleLookupHashObject(programObj) result (type 0x8b40 program object)
+local	_glLinkProgramARB_Exec	piVar15	stageRecordSlots	CONFIRMED	iVar9+0x20: the two stage record pointers (vertex at +0x20, fragment at +0x24)
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*puVar17\ =\ \(undefined1\ \*\)\*piVar15;$	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*puVar17\ =\ \*\(undefined1\ \*\*\)\(iVar9\ \+\ 0x24\);$	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*\*puVar17\ =\ 0;$	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*\*\(undefined4\ \*\)\(puVar17\ \+\ 4\)\ =\ 0;$	+2
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*if\ \(\*\(int\ \*\)\(puVar17\ \+\ 0x4dc\)\ !=\ 0\)\ \{$	+2
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*\*\(undefined4\ \*\)\(puVar17\ \+\ 0x4dc\)\ =\ 0;$	+4
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*\*\(undefined4\ \*\)\(puVar17\ \+\ 0x508\)\ =\ 0;$	+5
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*iVar18\ =\ \*\(int\ \*\)\(puVar17\ \+\ 0x518\);$	+2
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*iVar18\ =\ \*\(int\ \*\)\(puVar17\ \+\ 0x518\);$@2	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*iVar18\ =\ \*\(int\ \*\)\(puVar17\ \+\ 0x518\);$@3	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*iVar18\ =\ \*\(int\ \*\)\(puVar17\ \+\ 0x518\);$@4	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*iVar18\ =\ \*\(int\ \*\)\(puVar17\ \+\ 0x518\);$@5	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*iVar18\ =\ \*\(int\ \*\)\(puVar17\ \+\ 0x518\);$@6	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*\*\(undefined4\ \*\)\(puVar17\ \+\ 0x518\)\ =\ 0;$	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*puVar17\ =\ \*\(undefined1\ \*\*\)\(iVar9\ \+\ 0x24\);$@2	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*puVar17\ =\ \(undefined1\ \*\)\*piVar15;$@2	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*\*\(undefined4\ \*\)\(puVar17\ \+\ 0x508\)\ =\ uVar4;$	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*if\ \(\(\*\(int\ \*\)\(puVar17\ \+\ 0x508\)\ !=\ 0\)\ \&\&\ \(\*puVar17\ =\ 1,\ !bVar1\)\)\ \{$	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*\*\(undefined4\ \*\)\(puVar17\ \+\ 0x4dc\)\ =\ uVar11;$	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*_PPEmulatorProgramConvertFromPPStream\(\*\(undefined4\ \*\)\(puVar17\ \+\ 0x4dc\),uVar4\);$	+1
+use	_glLinkProgramARB_Exec	puVar17	stageRecord	CONFIRMED	stage record chosen from stageRecordSlots by stage index 0/1	^\s*_gleShaderDataUpdateParams\(puVar17\);$	+1
+use	_glLinkProgramARB_Exec	puVar5	zeroCursor	CONFIRMED	cursor zeroing 9 words of the stage record at +8	^\s*puVar5\ =\ \(undefined4\ \*\)\(puVar17\ \+\ 8\);$	+1
+use	_glLinkProgramARB_Exec	puVar5	zeroCursor	CONFIRMED	cursor zeroing 9 words of the stage record at +8	^\s*\*puVar5\ =\ 0;$	+2
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*puVar5\ =\ \(undefined4\ \*\)_gleVecAlloc\(0x24\);$	+12
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*puVar5\[2\]\ =\ uVar4;$	+1
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*puVar5\[3\]\ =\ uVar4;$	+1
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*iVar6\ =\ _ShGetActiveUniform\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),iVar18,$	+4
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*\*\(undefined4\ \*\)\(iVar18\ \*\ 4\ \+\ puVar5\[3\]\)\ =\ 0xffffffff;$	+1
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),$	+3
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*puVar5\[4\]\ =\ \*\(undefined4\ \*\)\(iVar9\ \+\ 0x34\);$	+2
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*puVar5\[6\]\ =\ uVar4;$	+1
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*puVar5\[7\]\ =\ uVar4;$	+1
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*iVar6\ =\ _ShGetActiveAttrib\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),iVar18,$	+4
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*\*\(undefined4\ \*\)\(iVar18\ \*\ 4\ \+\ puVar5\[7\]\)\ =\ 0xffffffff;$	+1
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),$@2	+3
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*puVar5\[8\]\ =\ uVar4;$	+1
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*_strncpy\(\(char\ \*\)puVar5\[8\],pcVar16,iVar18\ \+\ 1\);$	+1
+use	_glLinkProgramARB_Exec	puVar5	linkInfoRecord	INFERRED	0x24-byte record filled with active uniform/attribute counts, name buffers and location tables, stored at stage record +0x518	^\s*\*\(undefined4\ \*\*\)\(pcVar10\ \+\ 0x518\)\ =\ puVar5;$	+1
+use	_glLinkProgramARB_Exec	iVar6	attachedShader	CONFIRMED	shader object read from the attached-shader array programObj+0x44 (type at +0x20, compiled flag at +0x25)	^\s*iVar6\ =\ \*piVar13;$	+1
+use	_glLinkProgramARB_Exec	iVar6	attachedShader	CONFIRMED	shader object read from the attached-shader array programObj+0x44 (type at +0x20, compiled flag at +0x25)	^\s*if\ \(\*\(char\ \*\)\(iVar6\ \+\ 0x25\)\ ==\ '\\0'\)\ \{$	+1
+use	_glLinkProgramARB_Exec	iVar6	attachedShader	CONFIRMED	shader object read from the attached-shader array programObj+0x44 (type at +0x20, compiled flag at +0x25)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar18\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar9\ \+\ 0x44\)\);$	+4
+use	_glLinkProgramARB_Exec	iVar6	attachedShader	CONFIRMED	shader object read from the attached-shader array programObj+0x44 (type at +0x20, compiled flag at +0x25)	^\s*if\ \(\(local_58\[1\]\ !=\ 0\)\ \|\|$	+3
+use	_glLinkProgramARB_Exec	iVar6	attachedShader	CONFIRMED	shader object read from the attached-shader array programObj+0x44 (type at +0x20, compiled flag at +0x25)	^\s*local_58\[1\]\ =\ iVar6;$	+1
+use	_glLinkProgramARB_Exec	iVar6	loopIndex	CONFIRMED	counter 0.. incremented per iteration	^\s*iVar6\ =\ 0;$	+1
+use	_glLinkProgramARB_Exec	iVar6	loopIndex	CONFIRMED	counter 0.. incremented per iteration	^\s*iVar18\ =\ iVar6\ \*\ 4;$	+2
+use	_glLinkProgramARB_Exec	iVar6	loopIndex	CONFIRMED	counter 0.. incremented per iteration	^\s*\}\ while\ \(iVar6\ <\ iVar18\);$	+1
+use	_glLinkProgramARB_Exec	iVar6	loopIndex	CONFIRMED	counter 0.. incremented per iteration	^\s*iVar6\ =\ 0;$@2	+1
+use	_glLinkProgramARB_Exec	iVar6	loopIndex	CONFIRMED	counter 0.. incremented per iteration	^\s*iVar18\ =\ iVar6\ \*\ 0x10;$	+2
+use	_glLinkProgramARB_Exec	iVar6	loopIndex	CONFIRMED	counter 0.. incremented per iteration	^\s*\}\ while\ \(iVar6\ <\ \*\(int\ \*\)\(iVar9\ \+\ 0x30\)\);$	+1
+use	_glLinkProgramARB_Exec	iVar6	vertexLocalParams	CONFIRMED	_gleVecAlloc(numShaderLocalParams<<4) stored to the vertex stage record +0x51c	^\s*iVar6\ =\ _gleVecAlloc\(iVar18\ <<\ 4\);$	+2
+use	_glLinkProgramARB_Exec	iVar6	vertexLocalParams	CONFIRMED	_gleVecAlloc(numShaderLocalParams<<4) stored to the vertex stage record +0x51c	^\s*iVar8\ =\ iVar14\ \+\ iVar6;$	+2
+use	_glLinkProgramARB_Exec	iVar6	fragmentLocalParams	CONFIRMED	_gleVecAlloc(numShaderLocalParams<<4) stored to the fragment stage record +0x51c	^\s*iVar6\ =\ _gleVecAlloc\(iVar18\ <<\ 4\);$@2	+2
+use	_glLinkProgramARB_Exec	iVar6	fragmentLocalParams	CONFIRMED	_gleVecAlloc(numShaderLocalParams<<4) stored to the fragment stage record +0x51c	^\s*iVar8\ =\ iVar14\ \+\ iVar6;$@2	+2
+use	_glLinkProgramARB_Exec	iVar6	activeUniformOk	INFERRED	result of _ShGetActiveUniform: zero stores location -1	^\s*iVar6\ =\ _ShGetActiveUniform\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),iVar18,$	+5
+use	_glLinkProgramARB_Exec	iVar6	activeAttribOk	INFERRED	result of _ShGetActiveAttrib: zero stores location -1	^\s*iVar6\ =\ _ShGetActiveAttrib\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),iVar18,$	+5
+use	_glLinkProgramARB_Exec	iVar6	perUnitByteOffset	INFERRED	byte offset (loop counter*4) indexing the per-unit array at stage record +0x4e4	^\s*iVar6\ =\ iVar14\ \*\ 4;$	+1
+use	_glLinkProgramARB_Exec	iVar6	perUnitByteOffset	INFERRED	byte offset (loop counter*4) indexing the per-unit array at stage record +0x4e4	^\s*\(\*\(undefined4\ \*\)\(iVar18\ \+\ 0xc\),\*\(undefined4\ \*\)\(iVar6\ \+\ \*piVar15\ \+\ 0x4e4\),1\);$	+1
+use	_glLinkProgramARB_Exec	iVar6	perUnitByteOffset	INFERRED	byte offset (loop counter*4) indexing the per-unit array at stage record +0x4e4	^\s*\(\*puVar5,\*\(undefined4\ \*\)\(iVar6\ \+\ \*\(int\ \*\)\(iVar9\ \+\ 0x24\)\ \+\ 0x4e4\),1\);$	+1
+use	_glLinkProgramARB_Exec	iVar7	uniformEntry	CONFIRMED	address of the 16-byte entry being zeroed in the uniform store	^\s*iVar7\ =\ iVar18\ \+\ iVar14;$	+1
+use	_glLinkProgramARB_Exec	iVar7	uniformEntry	CONFIRMED	address of the 16-byte entry being zeroed in the uniform store	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ 0xc\)\ =\ 0;$	+3
+use	_glLinkProgramARB_Exec	iVar7	rowIndex	CONFIRMED	counter 0.. incremented per iteration	^\s*iVar7\ =\ 0;$	+1
+use	_glLinkProgramARB_Exec	iVar7	rowIndex	CONFIRMED	counter 0.. incremented per iteration	^\s*iVar14\ =\ iVar7\ \*\ 0x10;$	+2
+use	_glLinkProgramARB_Exec	iVar7	rowIndex	CONFIRMED	counter 0.. incremented per iteration	^\s*iVar7\ =\ 0;$@2	+1
+use	_glLinkProgramARB_Exec	iVar7	rowIndex	CONFIRMED	counter 0.. incremented per iteration	^\s*iVar14\ =\ iVar7\ \*\ 0x10;$@2	+2
+use	_glLinkProgramARB_Exec	iVar8	localParamEntry	CONFIRMED	address of the 16-byte local parameter being zeroed	^\s*iVar8\ =\ iVar14\ \+\ iVar6;$	+1
+use	_glLinkProgramARB_Exec	iVar8	localParamEntry	CONFIRMED	address of the 16-byte local parameter being zeroed	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0xc\)\ =\ 0;$	+3
+use	_glLinkProgramARB_Exec	iVar8	localParamEntry	CONFIRMED	address of the 16-byte local parameter being zeroed	^\s*iVar8\ =\ iVar14\ \+\ iVar6;$@2	+1
+use	_glLinkProgramARB_Exec	iVar8	localParamEntry	CONFIRMED	address of the 16-byte local parameter being zeroed	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0xc\)\ =\ 0;$@2	+3
+use	_glLinkProgramARB_Exec	pcVar10	errorLogBuffer	CONFIRMED	malloc(infoLogLength+1) copy buffer of the error string at programObj+0x18	^\s*pcVar10\ =\ \(char\ \*\)_malloc\(\*\(int\ \*\)\(iVar9\ \+\ 0x1c\)\ \+\ 1\);$	+5
+use	_glLinkProgramARB_Exec	pcVar10	stageRecordForInfo	CONFIRMED	stage record pointer chosen by stage index (byte 0 tested, stored linkInfoRecord at +0x518)	^\s*pcVar10\ =\ \(char\ \*\)\*piVar15;$	+1
+use	_glLinkProgramARB_Exec	pcVar10	stageRecordForInfo	CONFIRMED	stage record pointer chosen by stage index (byte 0 tested, stored linkInfoRecord at +0x518)	^\s*pcVar10\ =\ \*\(char\ \*\*\)\(iVar9\ \+\ 0x24\);$	+1
+use	_glLinkProgramARB_Exec	pcVar10	stageRecordForInfo	CONFIRMED	stage record pointer chosen by stage index (byte 0 tested, stored linkInfoRecord at +0x518)	^\s*if\ \(\(\*pcVar10\ !=\ '\\0'\)\ \&\&\ \(local_58\[iVar14\]\ !=\ 0\)\)\ \{$	+1
+use	_glLinkProgramARB_Exec	pcVar10	stageRecordForInfo	CONFIRMED	stage record pointer chosen by stage index (byte 0 tested, stored linkInfoRecord at +0x518)	^\s*\*\(undefined4\ \*\*\)\(pcVar10\ \+\ 0x518\)\ =\ puVar5;$	+1
+use	_glLinkProgramARB_Exec	pcVar10	infoLogText	CONFIRMED	_ShGetInfoLog text copied with _strncpy into programObj+0x18	^\s*pcVar10\ =\ \(char\ \*\)_ShGetInfoLog\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\)\);$	+2
+use	_glLinkProgramARB_Exec	uVar12	linkSucceeded	CONFIRMED	_ShLink result stored to programObj+0x3c	^\s*uVar12\ =\ _ShLink\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),0,0,\*\(undefined4\ \*\)\(param_1\ \+\ 0x7594\),$	+3
+use	_glLinkProgramARB_Exec	uVar12	linkSucceeded	CONFIRMED	_ShLink result stored to programObj+0x3c	^\s*uVar12\ =\ _ShLink\(\*\(undefined4\ \*\)\(iVar9\ \+\ 0x40\),iVar14,iVar18,$	+3
+local	_glLinkProgramARB_Exec	uVar11	emulatorProgram	CONFIRMED	_PPEmulatorProgramCreate result stored at stage record +0x4dc
+use	_glLinkProgramARB_Exec	piVar13	attachedShaderCursor	CONFIRMED	walks programObj+0x44 attached shader array	^\s*piVar13\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ 0x44\);$	+1
+use	_glLinkProgramARB_Exec	piVar13	attachedShaderCursor	CONFIRMED	walks programObj+0x44 attached shader array	^\s*iVar6\ =\ \*piVar13;$	+2
+local	_glLinkProgramARB_Exec	pcVar16	shaderString	INFERRED	C string at shader+0x2c duplicated with _strlen/_gleVecAlloc/_strncpy into linkInfoRecord[8]
+local	_glLinkProgramARB_Exec	local_60	streamLength	CONFIRMED	out parameter of _PPStreamGetStream: stream length (local_60[0] used as element count)
+local	_glLinkProgramARB_Exec	local_58	stageShaders	CONFIRMED	[0] attached vertex shader (type 0x8b31), [1] fragment shader (0x8b30)
+local	_glLinkProgramARB_Exec	auStack_50	activeNameLength	INFERRED	length out parameter of _ShGetActiveUniform/_ShGetActiveAttrib (glGetActiveUniform argument order: program, index, bufSize, length, size, type, name)
+local	_glLinkProgramARB_Exec	auStack_4c	activeSize	INFERRED	size out parameter of _ShGetActiveUniform/_ShGetActiveAttrib
+local	_glLinkProgramARB_Exec	auStack_48	activeType	INFERRED	type out parameter of _ShGetActiveUniform/_ShGetActiveAttrib
+local	_gleUpdateLightRGBASums	param_2	material	INFERRED	callers pass ctx+0x2c20 (front) / ctx+0x2e60 (back); the record is the current material (_gleAddVertexMaterial links records at +0x238/+0x23c); fields read: [0..3] ambient, [4..7] diffuse, [8..0xb] specular, [0xc..0xe] emission, [0x10] shininess
+local	_gleUpdateLightRGBASums	param_3	faceIndex	CONFIRMED	callers pass 0 with ctx+0x2c20 and 1 with ctx+0x2e60 (front/back); indexes the per-face dirty-bit tables with stride 6 / 3
+local	_gleUpdateLightRGBASums	fVar3	linkedMaterial	INFERRED	material[0x8f] (+0x23c), the chained material record as in _gleAddVertexMaterial; its +0x1d0.. cached values are copied when valid (nonzero test, dirty byte +0x234..0x236)
+local	_gleUpdateLightRGBASums	bVar2	dirtyMask	INFERRED	byte +0x235 OR byte +0x234 of the material; bit tests select which cached sums are recomputed; byte +0x234 cleared at the end
+local	_gleUpdateLightRGBASums	uVar19	copyFromLinkedMask	INFERRED	~(dirtyMask byte 
+local	_gleUpdateLightRGBASums	bVar1	dirtyBitIndex	CONFIRMED	byte from the per-face state table; (b>>3 & 0x1c) selects the word, 1<<(b&0x1f) the bit set in the ctx+0x324 / ctx+0x348 dirty arrays
+local	_gleUpdateLightRGBASums	fVar16	linkedSceneAlpha	CONFIRMED	linked record +0x1dc stored to material[0x77]
+local	_gleUpdateLightRGBASums	dVar26	shininess	INFERRED	material[0x10], cached to material[0x7d]; exponent of the pow table built below
+local	_gleUpdateLightRGBASums	dVar25	powTableStart	INFERRED	float-rounded start sample exp(log(c)/shininess) of the pow table, stored to material[0x7e]
+local	_gleVtxLightSpecRGBABackPtr	param_2	vertexArray	CONFIRMED	array of vertex record pointers: copied to a stack slot and indexed as vertex = array[vertexIndex*4] in the lighting loop
+local	_gleVtxLightSpecRGBABackPtr	fparam_1	floatArg1	INFERRED	f1: FP argument/return register reused for many temporaries (lengths from _gleVectorNormalize, 1/distance, spot factor, specular green, specular base); same convention as _gleVtxLightSpecRGBABack; forwarded to _gleLightExponentPow/_gleMaterialShinePow
+local	_gleVtxLightSpecRGBABackPtr	fparam_2	floatArg2	INFERRED	f2: incoming FP argument register also reused as a temporary (shininess); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightSpecRGBABackPtr	fparam_4	floatArg4	INFERRED	f4: incoming FP argument register also reused as a temporary (normal x); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightSpecRGBABackPtr	fparam_5	floatArg5	INFERRED	f5: incoming FP argument register also reused as a temporary (toLight y); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightSpecRGBABackPtr	fparam_6	floatArg6	INFERRED	f6: incoming FP argument register also reused as a temporary (toLight z / directional light y); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightSpecRGBABackPtr	fparam_7	floatArg7	INFERRED	f7: incoming FP argument register also reused as a temporary (toLight x / normal x); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightSpecRGBABackPtr	fparam_8	floatArg8	INFERRED	f8: incoming FP argument register also reused as a temporary (normal z); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightSpecRGBABackPtr	iVar5	glContextForCalls	CONFIRMED	glContext copy held in r3 for the calls to _gleLightExponentPow/_gleMaterialShinePow (re-set from the extraout_r3 result after the pow call); same as _gleVtxLightSpecRGBABack iVar6
+local	_gleVtxLightSpecRGBABackPtr	pfVar8	eyePosition	CONFIRMED	vertex+0x20 eye-space position, or the 1/w-scaled copy local_120..local_118 when w != 1
+use	_gleVtxLightSpecRGBABackPtr	fVar1	invW	CONFIRMED	1.0 / vertex+0x2c (w): scales the eye position	^\s*fVar1\ =\ FLOAT_00108e54\ /\ \*\(float\ \*\)\(iVar15\ \+\ 0x2c\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	fVar1	invW	CONFIRMED	1.0 / vertex+0x2c (w): scales the eye position	^\s*local_118\ =\ \*\(float\ \*\)\(iVar15\ \+\ 0x28\)\ \*\ fVar1;$	+3
+use	_gleVtxLightSpecRGBABackPtr	fVar1	doubleCrossX	CONFIRMED	nz*Cy - ny*Cz with C = normal x toLight: x component of normal x C	^\s*fVar1\ =\ \(\*\(float\ \*\)\(iVar15\ \+\ 0x48\)\ \*\ dVar18\ \-\ \(float\)\(\(double\)\*\(float\ \*\)\(iVar15\ \+\ 0x44\)\ \*\ dVar17\)\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	fVar1	doubleCrossX	CONFIRMED	nz*Cy - ny*Cz with C = normal x toLight: x component of normal x C	^\s*local_e0\ =\ \(float\)\(\(double\)\(fVar1\ \+\ fVar1\)\ \+\ fparam_7\);$	+1
+local	_gleVtxLightSpecRGBABackPtr	fVar2	doubleCrossY	CONFIRMED	nx*Cz - nz*Cx: y component of normal x C
+use	_gleVtxLightSpecRGBABackPtr	fVar1	doubleCrossZ	CONFIRMED	ny*Cx - nx*Cy: z component of normal x C	^\s*fVar1\ =\ \(\*\(float\ \*\)\(iVar15\ \+\ 0x44\)\ \*\ dVar19\ \-\ \(\*\(float\ \*\)\(iVar15\ \+\ 0x40\)\ \*\ dVar18\)\);$	+2
+use	_gleVtxLightSpecRGBABackPtr	fVar1	specularFactor	CONFIRMED	(float) pow(specularDot, shininess), multiplied by lightProducts+0x70/0x74/0x78	^\s*fVar1\ =\ \(float\)dVar17;$	+2
+use	_gleVtxLightSpecRGBABackPtr	fVar1	specularFactor	CONFIRMED	(float) pow(specularDot, shininess), multiplied by lightProducts+0x70/0x74/0x78	^\s*fparam_1\ =\ \(double\)\(fVar1\ \*\ \*\(float\ \*\)\(iVar13\ \+\ 0x74\)\);$	+2
+use	_gleVtxLightSpecRGBABackPtr	fVar1	doubleCrossZ	CONFIRMED	directional path: ny*Cx - nx*Cy, the z component of normal x (normal x light direction)	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar15\ \+\ 0x44\)\ \*\ local_100\ \-$	+1
+use	_gleVtxLightSpecRGBABackPtr	fVar1	doubleCrossZ	CONFIRMED	directional path: ny*Cx - nx*Cy, the z component of normal x (normal x light direction)	^\s*fparam_1\ =\ \(double\)\(\(fVar1\ \+\ fVar1\)\ \+\ dVar16\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar16	directionalLightZ	CONFIRMED	lightRecord+0x4a84: z of the directional light's direction	^\s*dVar16\ =\ \(double\)\*\(float\ \*\)\(iVar14\ \+\ 0x4a84\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar16	directionalLightZ	CONFIRMED	lightRecord+0x4a84: z of the directional light's direction	^\s*dVar17\ =\ \(double\)\(float\)\(fparam_8\ \*\ \(double\)dVar16\ \+$	+3
+use	_gleVtxLightSpecRGBABackPtr	dVar16	directionalLightZ	CONFIRMED	lightRecord+0x4a84: z of the directional light's direction	^\s*local_100\ =\ \(float\)\(\(double\)\*\(float\ \*\)\(iVar15\ \+\ 0x48\)\ \*\ fparam_6\ \-$	+3
+use	_gleVtxLightSpecRGBABackPtr	dVar16	directionalLightZ	CONFIRMED	lightRecord+0x4a84: z of the directional light's direction	^\s*fparam_1\ =\ \(double\)\(\(fVar1\ \+\ fVar1\)\ \+\ dVar16\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar17	lnCrossZCopy	INFERRED	copy of lnCrossZ (local_e8) kept in a double for the second cross product	^\s*dVar17\ =\ \(double\)local_e8;$	+4
+use	_gleVtxLightSpecRGBABackPtr	dVar17	specularR	CONFIRMED	specularFactor * lightProducts+0x70: red specular contribution of this light	^\s*dVar17\ =\ \(double\)\(fVar1\ \*\ \*\(float\ \*\)\(iVar13\ \+\ 0x70\)\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar17	specularR	CONFIRMED	specularFactor * lightProducts+0x70: red specular contribution of this light	^\s*dVar17\ =\ \(double\)dVar19;$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar17	specularR	CONFIRMED	specularFactor * lightProducts+0x70: red specular contribution of this light	^\s*dVar24\ =\ \(double\)\(float\)\(\(double\)dVar24\ \+\ dVar17\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar17	specularR	CONFIRMED	specularFactor * lightProducts+0x70: red specular contribution of this light	^\s*dVar24\ =\ \(double\)\(float\)\(\(double\)dVar16\ \*\ dVar17\ \+\ \(double\)dVar24\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar17	normalDotDirection	CONFIRMED	normal . lightRecord+0x4a7c..0x4a84 (directional light direction): the directional diffuse term	^\s*dVar17\ =\ \(double\)\(float\)\(fparam_8\ \*\ \(double\)dVar16\ \+$	+3
+use	_gleVtxLightSpecRGBABackPtr	dVar17	normalDotDirection	CONFIRMED	normal . lightRecord+0x4a7c..0x4a84 (directional light direction): the directional diffuse term	^\s*fparam_1\ =\ \-dVar17;$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar17	normalDotDirection	CONFIRMED	normal . lightRecord+0x4a7c..0x4a84 (directional light direction): the directional diffuse term	^\s*dVar30\ =\ \-\(double\)\(float\)\(dVar17\ \*\ \(double\)\*\(float\ \*\)\(iVar13\ \+\ 0x60\)\ \-\ \(double\)dVar30\);$	+3
+local	_gleVtxLightSpecRGBABackPtr	dVar18	lnCrossYCopy	INFERRED	copy of lnCrossY (local_ec) kept in a double for the second cross product
+use	_gleVtxLightSpecRGBABackPtr	dVar19	normalDotLight	CONFIRMED	normal . toLight (vertex+0x40..0x48 against toLight x/y/z): the diffuse term; negative means the light is behind the surface	^\s*dVar19\ =\ \(double\)\(float\)\(fparam_8\ \*\ fparam_6\ \+$	+7
+use	_gleVtxLightSpecRGBABackPtr	dVar19	lnCrossXCopy	INFERRED	copy of lnCrossX (local_f0) kept in a double for the second cross product	^\s*dVar19\ =\ \(double\)local_f0;$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar19	lnCrossXCopy	INFERRED	copy of lnCrossX (local_f0) kept in a double for the second cross product	^\s*fVar2\ =\ \(float\)\(\(double\)\*\(float\ \*\)\(iVar15\ \+\ 0x40\)\ \*\ dVar17\ \-$	+2
+use	_gleVtxLightSpecRGBABackPtr	dVar19	lnCrossXCopy	INFERRED	copy of lnCrossX (local_f0) kept in a double for the second cross product	^\s*fVar1\ =\ \(\*\(float\ \*\)\(iVar15\ \+\ 0x44\)\ \*\ dVar19\ \-\ \(\*\(float\ \*\)\(iVar15\ \+\ 0x40\)\ \*\ dVar18\)\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar19	specularB	CONFIRMED	specularFactor * lightProducts+0x78: blue specular contribution of this light	^\s*dVar19\ =\ \(double\)\(fVar1\ \*\ \*\(float\ \*\)\(iVar13\ \+\ 0x78\)\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar19	specularB	CONFIRMED	specularFactor * lightProducts+0x78: blue specular contribution of this light	^\s*dVar19\ =\ \(double\)FLOAT_00108e50;$	+3
+use	_gleVtxLightSpecRGBABackPtr	dVar19	specularB	CONFIRMED	specularFactor * lightProducts+0x78: blue specular contribution of this light	^\s*dVar21\ =\ \(double\)\(dVar21\ \+\ dVar19\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar19	specularB	CONFIRMED	specularFactor * lightProducts+0x78: blue specular contribution of this light	^\s*dVar21\ =\ \(double\)\(dVar16\ \*\ dVar19\ \+\ dVar21\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar19	normalY	CONFIRMED	vertex+0x44: y of the vertex normal in the directional-light path	^\s*dVar19\ =\ \(double\)\*\(float\ \*\)\(iVar15\ \+\ 0x44\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	dVar19	normalY	CONFIRMED	vertex+0x44: y of the vertex normal in the directional-light path	^\s*dVar17\ =\ \(double\)\(float\)\(fparam_8\ \*\ \(double\)dVar16\ \+$	+3
+use	_gleVtxLightSpecRGBABackPtr	dVar19	normalY	CONFIRMED	vertex+0x44: y of the vertex normal in the directional-light path	^\s*fparam_1\ =\ \-\(double\)\(float\)\(fparam_8\ \*\ \(double\)\*\(float\ \*\)\(iVar10\ \+\ 0x2888\)\ \+$	+5
+use	_gleVtxLightSpecRGBABackPtr	dVar19	normalY	CONFIRMED	vertex+0x44: y of the vertex normal in the directional-light path	^\s*local_100\ =\ \(float\)\(\(double\)\*\(float\ \*\)\(iVar15\ \+\ 0x48\)\ \*\ fparam_6\ \-$	+2
+local	_gleVtxLightSpecRGBABackPtr	dVar21	specularSumB	CONFIRMED	sum over lights of the blue specular contribution; stored to vertex+0x58
+local	_gleVtxLightSpecRGBABackPtr	dVar22	specularSumG	CONFIRMED	sum over lights of the green specular contribution; stored to vertex+0x54
+local	_gleVtxLightSpecRGBABackPtr	dVar24	specularSumR	CONFIRMED	sum over lights of the red specular contribution; stored to vertex+0x50
+local	_gleVtxLightSpecRGBABackPtr	local_11c	eyeY	CONFIRMED	vertex+0x24 multiplied by 1/w
+local	_gleVtxLightSpecRGBABackPtr	local_118	eyeZ	CONFIRMED	vertex+0x28 multiplied by 1/w
+local	_gleVtxLightSpecRGBABackPtr	local_120	eyeX	CONFIRMED	vertex+0x20 multiplied by 1/w (address taken: pfVar8 = &local_120)
+local	_gleVtxLightSpecRGBABackPtr	local_f0	lnCrossX	CONFIRMED	nz*Ly - ny*Lz: x component of light x normal
+local	_gleVtxLightSpecRGBABackPtr	local_ec	lnCrossY	CONFIRMED	nx*Lz - nz*Lx: y component of light x normal
+local	_gleVtxLightSpecRGBABackPtr	local_e8	lnCrossZ	CONFIRMED	ny*Lx - nx*Ly: z component of light x normal
+local	_gleVtxLightSpecRGBABackPtr	local_e0	crossAdjustedLightX	CONFIRMED	2*doubleCrossX + toLight x
+local	_gleVtxLightSpecRGBABackPtr	local_dc	crossAdjustedLightY	CONFIRMED	2*doubleCrossY + toLight y
+local	_gleVtxLightSpecRGBABackPtr	local_d8	crossAdjustedLightZ	CONFIRMED	2*doubleCrossZ + toLight z
+use	_gleVtxLightSpecRGBABackPtr	local_fc	directionalCrossY	CONFIRMED	nx*Lz - nz*Lx with the directional light vector: y component of normal x light direction	^\s*local_fc\ =\ \(\*\(float\ \*\)\(iVar15\ \+\ 0x40\)\ \*\ dVar16\ \-\ \(\*\(float\ \*\)\(iVar15\ \+\ 0x48\)\ \*\ \*\(float\ \*\)\(iVar14\ \+\ 0x4a7c\)\)\);$	+1
+use	_gleVtxLightSpecRGBABackPtr	local_fc	directionalCrossY	CONFIRMED	nx*Lz - nz*Lx with the directional light vector: y component of normal x light direction	^\s*\(\*\(float\ \*\)\(iVar15\ \+\ 0x40\)\ \*\ local_fc\);$	+1
+local	_gleVtxLightSpecRGBAFrontPtr	param_2	vertexArray	CONFIRMED	array of vertex record pointers: copied to a stack slot and indexed as vertex = array[vertexIndex*4] in the lighting loop
+local	_gleVtxLightSpecRGBAFrontPtr	fparam_1	floatArg1	INFERRED	f1: FP argument/return register reused for many temporaries (lengths from _gleVectorNormalize, 1/distance, spot factor, specular green, specular base); same convention as _gleVtxLightSpecRGBABack; forwarded to _gleLightExponentPow/_gleMaterialShinePow
+local	_gleVtxLightSpecRGBAFrontPtr	fparam_2	floatArg2	INFERRED	f2: incoming FP argument register also reused as a temporary (shininess); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightSpecRGBAFrontPtr	fparam_5	floatArg5	INFERRED	f5: incoming FP argument register also reused as a temporary (toLight z); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightSpecRGBAFrontPtr	fparam_6	floatArg6	INFERRED	f6: incoming FP argument register also reused as a temporary (toLight y / directional light y); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightSpecRGBAFrontPtr	fparam_7	floatArg7	INFERRED	f7: incoming FP argument register also reused as a temporary (toLight x); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightSpecRGBAFrontPtr	fparam_8	floatArg8	INFERRED	f8: incoming FP argument register also reused as a temporary (normal y / x component of normal x light); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightSpecRGBAFrontPtr	iVar4	glContextForCalls	CONFIRMED	glContext copy held in r3 for the calls to _gleLightExponentPow/_gleMaterialShinePow (re-set from the extraout_r3 result after the pow call); same as _gleVtxLightSpecRGBABack iVar6
+local	_gleVtxLightSpecRGBAFrontPtr	pfVar7	eyePosition	CONFIRMED	vertex+0x20 eye-space position, or the 1/w-scaled copy local_120..local_118 when w != 1
+local	_gleVtxLightSpecRGBAFrontPtr	local_cc	distanceThresholdPtr	INFERRED	only assigned &FLOAT_00108e80, dereferenced as the limit the normalized light distance is compared with
+use	_gleVtxLightSpecRGBAFrontPtr	fVar1	invW	CONFIRMED	1.0 / vertex+0x2c (w): scales the eye position	^\s*fVar1\ =\ FLOAT_00108e54\ /\ \*\(float\ \*\)\(iVar14\ \+\ 0x2c\);$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	fVar1	invW	CONFIRMED	1.0 / vertex+0x2c (w): scales the eye position	^\s*local_118\ =\ \*\(float\ \*\)\(iVar14\ \+\ 0x28\)\ \*\ fVar1;$	+3
+use	_gleVtxLightSpecRGBAFrontPtr	fVar1	specularDot	INFERRED	dot product whose power gives the specular intensity: normal . halfVector, or (crossAdjustedLight . halfVector) when ctx+0x30ae is set	^\s*fVar1\ =\ \(dVar17\ \*\ local_108\ \+\ \(\*\(float\ \*\)\(iVar14\ \+\ 0x40\)\ \*\ local_110\ \+\ \(dVar18\ \*\ local_10c\)\)\);$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	fVar1	specularDot	INFERRED	dot product whose power gives the specular intensity: normal . halfVector, or (crossAdjustedLight . halfVector) when ctx+0x30ae is set	^\s*fVar1\ =\ local_d8\ \*\ local_108\ \+\ \(local_e0\ \*\ local_110\ \+\ local_dc\ \*\ local_10c\);$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	fVar1	specularDot	INFERRED	dot product whose power gives the specular intensity: normal . halfVector, or (crossAdjustedLight . halfVector) when ctx+0x30ae is set	^\s*if\ \(!\(\(double\)dVar22\ <\ \(double\)fVar1\)\)\ goto\ LAB_000d6e10;$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	fVar1	specularDot	INFERRED	dot product whose power gives the specular intensity: normal . halfVector, or (crossAdjustedLight . halfVector) when ctx+0x30ae is set	^\s*dVar15\ =\ _pow\(\(double\)fVar1,fparam_2\);$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	fVar1	doubleCrossX	CONFIRMED	ny*Cz - nz*Cy with C = normal x toLight: x component of normal x C	^\s*fVar1\ =\ \(\*\(float\ \*\)\(iVar14\ \+\ 0x44\)\ \*\ dVar17\ \-\ \(float\)\(\(double\)\*\(float\ \*\)\(iVar14\ \+\ 0x48\)\ \*\ dVar15\)\);$	+2
+use	_gleVtxLightSpecRGBAFrontPtr	fVar1	doubleCrossY	CONFIRMED	nz*Cx - nx*Cz: y component of normal x C	^\s*fVar1\ =\ \(float\)\(\(double\)\*\(float\ \*\)\(iVar14\ \+\ 0x48\)\ \*\ fparam_8\ \-$	+3
+use	_gleVtxLightSpecRGBAFrontPtr	fVar1	doubleCrossZ	CONFIRMED	nx*Cy - ny*Cx: z component of normal x C	^\s*fVar1\ =\ \(float\)\(\(double\)\*\(float\ \*\)\(iVar14\ \+\ 0x40\)\ \*\ dVar15\ \-$	+3
+use	_gleVtxLightSpecRGBAFrontPtr	fVar1	specularFactor	CONFIRMED	(float) pow(specularDot, shininess), multiplied by lightProducts+0x70/0x74/0x78	^\s*fVar1\ =\ \(float\)dVar15;$	+2
+use	_gleVtxLightSpecRGBAFrontPtr	fVar1	specularFactor	CONFIRMED	(float) pow(specularDot, shininess), multiplied by lightProducts+0x70/0x74/0x78	^\s*fparam_1\ =\ \(double\)\(fVar1\ \*\ \*\(float\ \*\)\(iVar12\ \+\ 0x74\)\);$	+2
+use	_gleVtxLightSpecRGBAFrontPtr	fVar1	doubleCrossZ	CONFIRMED	directional path: nx*Cy - ny*Cx, the z component of normal x (normal x light direction)	^\s*fVar1\ =\ \(\*\(float\ \*\)\(iVar14\ \+\ 0x40\)\ \*\ local_fc\ \-\ \(\*\(float\ \*\)\(iVar14\ \+\ 0x44\)\ \*\ local_100\)\);$	+2
+use	_gleVtxLightSpecRGBAFrontPtr	dVar15	normalDotLight	CONFIRMED	normal . toLight (vertex+0x40..0x48 against toLight x/y/z): the diffuse term	^\s*dVar15\ =\ \(double\)\(float\)\(\(double\)dVar17\ \*\ fparam_5\ \+$	+7
+use	_gleVtxLightSpecRGBAFrontPtr	dVar15	normalCrossLightYCopy	INFERRED	copy of normalCrossLightY (local_ec) kept in a double for the second cross product	^\s*dVar15\ =\ \(double\)local_ec;$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	dVar15	normalCrossLightYCopy	INFERRED	copy of normalCrossLightY (local_ec) kept in a double for the second cross product	^\s*fVar1\ =\ \(\*\(float\ \*\)\(iVar14\ \+\ 0x44\)\ \*\ dVar17\ \-\ \(float\)\(\(double\)\*\(float\ \*\)\(iVar14\ \+\ 0x48\)\ \*\ dVar15\)\);$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	dVar15	normalCrossLightYCopy	INFERRED	copy of normalCrossLightY (local_ec) kept in a double for the second cross product	^\s*fVar1\ =\ \(float\)\(\(double\)\*\(float\ \*\)\(iVar14\ \+\ 0x40\)\ \*\ dVar15\ \-$	+2
+use	_gleVtxLightSpecRGBAFrontPtr	dVar15	specularPow	CONFIRMED	pow(specularDot, shininess (material+0x40)) result	^\s*dVar15\ =\ _pow\(\(double\)fVar1,fparam_2\);$	+2
+use	_gleVtxLightSpecRGBAFrontPtr	dVar15	specularR	CONFIRMED	specularFactor * lightProducts+0x70: red specular contribution of this light	^\s*dVar15\ =\ \(double\)\(fVar1\ \*\ \*\(float\ \*\)\(iVar12\ \+\ 0x70\)\);$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	dVar15	specularR	CONFIRMED	specularFactor * lightProducts+0x70: red specular contribution of this light	^\s*dVar15\ =\ \(double\)dVar17;$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	dVar15	specularR	CONFIRMED	specularFactor * lightProducts+0x70: red specular contribution of this light	^\s*dVar23\ =\ \(double\)\(float\)\(\(double\)dVar23\ \+\ dVar15\);$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	dVar15	specularR	CONFIRMED	specularFactor * lightProducts+0x70: red specular contribution of this light	^\s*dVar23\ =\ \(double\)\(float\)\(dVar16\ \*\ dVar15\ \+\ \(double\)dVar23\);$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	dVar17	normalZ	CONFIRMED	vertex+0x48: z of the vertex normal	^\s*dVar17\ =\ \(double\)\*\(float\ \*\)\(iVar14\ \+\ 0x48\);$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	dVar17	normalZ	CONFIRMED	vertex+0x48: z of the vertex normal	^\s*dVar15\ =\ \(double\)\(float\)\(\(double\)dVar17\ \*\ fparam_5\ \+$	+3
+use	_gleVtxLightSpecRGBAFrontPtr	dVar17	normalZ	CONFIRMED	vertex+0x48: z of the vertex normal	^\s*fVar1\ =\ \(dVar17\ \*\ local_108\ \+\ \(\*\(float\ \*\)\(iVar14\ \+\ 0x40\)\ \*\ local_110\ \+\ \(dVar18\ \*\ local_10c\)\)\);$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	dVar17	normalZ	CONFIRMED	vertex+0x48: z of the vertex normal	^\s*local_f0\ =\ \(float\)\(\(double\)dVar18\ \*\ fparam_5\ \-\ \(double\)\(float\)\(\(double\)dVar17\ \*\ fparam_6\)\);$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	dVar17	normalZ	CONFIRMED	vertex+0x48: z of the vertex normal	^\s*local_ec\ =\ \(float\)\(\(double\)dVar17\ \*\ fparam_7\ \-$	+2
+use	_gleVtxLightSpecRGBAFrontPtr	dVar17	normalCrossLightZCopy	INFERRED	copy of normalCrossLightZ (local_e8) kept in a double for the second cross product	^\s*dVar17\ =\ \(double\)local_e8;$	+2
+use	_gleVtxLightSpecRGBAFrontPtr	dVar17	normalCrossLightZCopy	INFERRED	copy of normalCrossLightZ (local_e8) kept in a double for the second cross product	^\s*fVar1\ =\ \(float\)\(\(double\)\*\(float\ \*\)\(iVar14\ \+\ 0x48\)\ \*\ fparam_8\ \-$	+2
+use	_gleVtxLightSpecRGBAFrontPtr	dVar17	specularB	CONFIRMED	specularFactor * lightProducts+0x78: blue specular contribution of this light	^\s*dVar17\ =\ \(double\)\(fVar1\ \*\ \*\(float\ \*\)\(iVar12\ \+\ 0x78\)\);$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	dVar17	specularB	CONFIRMED	specularFactor * lightProducts+0x78: blue specular contribution of this light	^\s*dVar17\ =\ \(double\)FLOAT_00108e50;$	+3
+use	_gleVtxLightSpecRGBAFrontPtr	dVar17	specularB	CONFIRMED	specularFactor * lightProducts+0x78: blue specular contribution of this light	^\s*dVar20\ =\ \(double\)\(dVar20\ \+\ dVar17\);$	+1
+use	_gleVtxLightSpecRGBAFrontPtr	dVar17	specularB	CONFIRMED	specularFactor * lightProducts+0x78: blue specular contribution of this light	^\s*dVar20\ =\ \(double\)\(float\)\(dVar16\ \*\ \(double\)dVar17\ \+\ \(double\)dVar20\);$	+1
+local	_gleVtxLightSpecRGBAFrontPtr	dVar18	normalY	CONFIRMED	vertex+0x44: y of the vertex normal
+local	_gleVtxLightSpecRGBAFrontPtr	dVar20	specularSumB	CONFIRMED	sum over lights of the blue specular contribution; stored to vertex+0x58
+local	_gleVtxLightSpecRGBAFrontPtr	dVar21	specularSumG	CONFIRMED	sum over lights of the green specular contribution; stored to vertex+0x54
+local	_gleVtxLightSpecRGBAFrontPtr	dVar23	specularSumR	CONFIRMED	sum over lights of the red specular contribution; stored to vertex+0x50
+local	_gleVtxLightSpecRGBAFrontPtr	local_11c	eyeY	CONFIRMED	vertex+0x24 multiplied by 1/w
+local	_gleVtxLightSpecRGBAFrontPtr	local_118	eyeZ	CONFIRMED	vertex+0x28 multiplied by 1/w
+local	_gleVtxLightSpecRGBAFrontPtr	local_120	eyeX	CONFIRMED	vertex+0x20 multiplied by 1/w (address taken: pfVar7 = &local_120)
+local	_gleVtxLightSpecRGBAFrontPtr	local_f0	normalCrossLightX	CONFIRMED	ny*Lz - nz*Ly: x component of normal x toLight
+local	_gleVtxLightSpecRGBAFrontPtr	local_ec	normalCrossLightY	CONFIRMED	nz*Lx - nx*Lz: y component of normal x toLight
+local	_gleVtxLightSpecRGBAFrontPtr	local_e8	normalCrossLightZ	CONFIRMED	nx*Ly - ny*Lx: z component of normal x toLight
+local	_gleVtxLightSpecRGBAFrontPtr	local_e0	crossAdjustedLightX	CONFIRMED	2*doubleCrossX + toLight x
+local	_gleVtxLightSpecRGBAFrontPtr	local_dc	crossAdjustedLightY	CONFIRMED	2*doubleCrossY + toLight y
+local	_gleVtxLightSpecRGBAFrontPtr	local_d8	crossAdjustedLightZ	CONFIRMED	2*doubleCrossZ + toLight z
+use	_gleVtxLightSpecRGBAFrontPtr	local_fc	directionalCrossY	CONFIRMED	nz*Lx - nx*Lz with the directional light vector: y component of normal x light direction	^\s*local_fc\ =\ \(\*\(float\ \*\)\(iVar14\ \+\ 0x48\)\ \*\ \*\(float\ \*\)\(iVar13\ \+\ 0x4a7c\)\ \-\ \(float\)\(\(double\)\*\(float\ \*\)\(iVar14\ \+\ 0x40\)\ \*\ dVar16\)\);$	+2
+local	_gleVtxLightRGBABackPtr	iVar14	vertex	CONFIRMED	vertex record read through the pointer array cursor (*vertexPtrCursor); +0x7e flag byte, +0x30..0x3c lit colour, +0x40..0x48 normal, +0x20..0x2c eye position, +0x78 material
+local	_gleVtxLightRGBABackPtr	fparam_1	floatArg1	INFERRED	f1: FP argument/return register reused for many temporaries (spot dot product, lengths returned by _gleVectorNormalize, specular dot product and its power); same convention as _gleVtxLightSpecRGBABack; forwarded to _gleLightExponentPow/_gleMaterialShinePow
+local	_gleVtxLightRGBABackPtr	fparam_2	floatArg2	INFERRED	f2: incoming FP argument register also reused as a temporary (shininess material+0x40); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightRGBABackPtr	fparam_7	floatArg7	INFERRED	f7: incoming FP argument register also reused as a temporary (normal z / 0.0); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightRGBABackPtr	fparam_8	floatArg8	INFERRED	f8: incoming FP argument register also reused as a temporary (0.0 constant / normal z); forwarded to the pow helper calls; one web, not split
+local	_gleVtxLightRGBABackPtr	iVar4	glContextForCalls	CONFIRMED	glContext copy held in r3 for the calls to _gleLightExponentPow/_gleMaterialShinePow (re-set from the extraout_r3 result after the pow call); same as _gleVtxLightSpecRGBABack iVar6
+local	_gleVtxLightRGBABackPtr	pfVar7	eyePosition	CONFIRMED	vertex+0x20 eye-space position, or the 1/w-scaled copy local_e0..local_d8 when w != 1
+local	_gleVtxLightRGBABackPtr	local_ac	distanceThresholdPtr	INFERRED	only assigned &FLOAT_00108e80, dereferenced as the limit the normalized light distance is compared with
+use	_gleVtxLightRGBABackPtr	fVar1	invW	CONFIRMED	1.0 / vertex+0x2c (w): scales the eye position	^\s*fVar1\ =\ FLOAT_00108e54\ /\ \*\(float\ \*\)\(iVar14\ \+\ 0x2c\);$	+1
+use	_gleVtxLightRGBABackPtr	fVar1	invW	CONFIRMED	1.0 / vertex+0x2c (w): scales the eye position	^\s*local_d8\ =\ \*\(float\ \*\)\(iVar14\ \+\ 0x28\)\ \*\ fVar1;$	+3
+use	_gleVtxLightRGBABackPtr	fVar1	inverseDistance	CONFIRMED	1.0 / normalized-light-distance returned by _gleVectorNormalize, used in the k0 + k1*d + k2*d^2 attenuation (lightParams2+0x2870..0x2878)	^\s*fVar1\ =\ \(float\)\(\(double\)dVar17\ /\ extraout_f1_00\);$	+4
+local	_gleVtxLightRGBABackPtr	local_dc	eyeY	CONFIRMED	vertex+0x24 multiplied by 1/w
+local	_gleVtxLightRGBABackPtr	local_d8	eyeZ	CONFIRMED	vertex+0x28 multiplied by 1/w
+local	_gleVtxLightRGBABackPtr	local_e0	eyeX	CONFIRMED	vertex+0x20 multiplied by 1/w (address taken: pfVar7 = &local_e0)
+use	_gleVtxLightRGBABackPtr	dVar15	spotFactor	INFERRED	result of _gleLightExponentPow(light direction dot): spot-light exponent term multiplied into lightAttenuation	^\s*dVar15\ =\ \(\(double\ \(\*\)\(\)\)_gleLightExponentPow\)\(iVar4,iVar13\ \+\ 0x4a70,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,$	+4
+use	_gleVtxLightRGBABackPtr	dVar15	normalDotLight	CONFIRMED	normal . toLight (vertex+0x40..0x48 against toLight x/y/z): the diffuse term	^\s*dVar15\ =\ \(double\)\(float\)\(fparam_7\ \*\ \(double\)local_c8\ \+$	+4
+use	_gleVtxLightRGBABackPtr	dVar15	normalDotLight	CONFIRMED	normal . toLight (vertex+0x40..0x48 against toLight x/y/z): the diffuse term	^\s*dVar19\ =\ \-\(double\)\(float\)\(dVar15\ \*\ \(double\)\*\(float\ \*\)\(iVar12\ \+\ 0x60\)\ \-\ \(double\)dVar19\);$	+2
+use	_gleVtxLightRGBABackPtr	dVar15	normalDotLight	CONFIRMED	normal . toLight (vertex+0x40..0x48 against toLight x/y/z): the diffuse term	^\s*dVar18\ =\ \-\(double\)\(float\)\(dVar15\ \*\ \(double\)\*\(float\ \*\)\(iVar12\ \+\ 100\)\ \-\ \(double\)dVar18\);$	+1
+use	_gleVtxLightRGBABackPtr	dVar15	specularPow	CONFIRMED	pow(specular dot, shininess material+0x40) result	^\s*dVar15\ =\ _pow\(fparam_1,fparam_2\);$	+2
+use	_gleVtxLightRGBABackPtr	dVar16	normalDotDirection	CONFIRMED	normal . lightRecord+0x4a7c..0x4a84 (directional light direction): the directional diffuse term	^\s*dVar16\ =\ \(double\)\(float\)\(fparam_8\ \*\ \(double\)\*\(float\ \*\)\(iVar13\ \+\ 0x4a84\)\ \+$	+3
+use	_gleVtxLightRGBABackPtr	dVar16	normalDotDirection	CONFIRMED	normal . lightRecord+0x4a7c..0x4a84 (directional light direction): the directional diffuse term	^\s*fparam_1\ =\ \-\(double\)dVar16;$	+1
+use	_gleVtxLightRGBABackPtr	dVar16	normalDotDirection	CONFIRMED	normal . lightRecord+0x4a7c..0x4a84 (directional light direction): the directional diffuse term	^\s*dVar23\ =\ \-\(double\)\(dVar16\ \*\ \*\(float\ \*\)\(iVar12\ \+\ 0x60\)\ \-\ dVar23\);$	+2
+use	_gleVtxLightRGBABackPtr	dVar16	normalDotDirection	CONFIRMED	normal . lightRecord+0x4a7c..0x4a84 (directional light direction): the directional diffuse term	^\s*dVar21\ =\ \-\(double\)\(dVar16\ \*\ \*\(float\ \*\)\(iVar12\ \+\ 0x68\)\ \-\ dVar21\);$	+1

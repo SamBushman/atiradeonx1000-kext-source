@@ -3541,29 +3541,32 @@ LAB_000d6370:
 }
 
 /* _gleVtxLightRGBABackPtr @ 0xd638c (1200 bytes) */
-void _gleVtxLightRGBABackPtr(int glContext,int *vertexPtrCursor,int vertexCount,double fparam_1,double fparam_2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double fparam_7,double fparam_8,double unusedFloatArg9)
+void _gleVtxLightRGBABackPtr(int glContext,int *vertexPtrCursor,int vertexCount,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8,double unusedFloatArg9)
 {
-  float fVar1;
+  float invW;
+  float inverseDistance;
   undefined4 colorAlpha;
   undefined *vectorNormalize;
-  int iVar4;
+  int glContextForCalls;
   int extraout_r3;
   int r3AfterCall1;
   uint enabledLightMask;
   int vertexIndex;
-  float *pfVar7;
+  float *eyePosition;
   uint lightIndex;
   int lightParams;
   int material;
   int lightParams2;
   int lightProducts;
   int lightRecord;
-  int iVar14;
+  int vertex;
   double extraout_f1;
   double f1AfterCall1;
-  double dVar15;
+  double spotFactor;
+  double specularPow;
+  double normalDotLight;
   double f1AfterCall2;
-  float dVar16;
+  float normalDotDirection;
   float lightAttenuation;
   float floatOne;
   float lightContributionG;
@@ -3578,9 +3581,9 @@ void _gleVtxLightRGBABackPtr(int glContext,int *vertexPtrCursor,int vertexCount,
   double incomingStack_fffffef8;
   double incomingStack_ffffff00;
   double incomingStack_ffffff08;
-  float local_e0;
-  float local_dc;
-  float local_d8;
+  float eyeX;
+  float eyeY;
+  float eyeZ;
   float toLightX;
   float toLightY;
   float toLightZ;
@@ -3588,40 +3591,40 @@ void _gleVtxLightRGBABackPtr(int glContext,int *vertexPtrCursor,int vertexCount,
   float halfY;
   float halfZ;
   uint localViewer;
-  float *local_ac;
+  float *distanceThresholdPtr;
   
   vertexIndex = 0;
   localViewer = (uint)*(byte *)(glContext + 0x30ad);
   enabledLightMask = *(uint *)(glContext + 0x30a0);
-  iVar4 = glContext;
+  glContextForCalls = glContext;
   iStack00000020 = vertexCount;
   if (vertexCount < 1) {
     return;
   }
 LAB_000d63d0:
-  iVar14 = *vertexPtrCursor;
+  vertex = *vertexPtrCursor;
   vertexPtrCursor = vertexPtrCursor + 1;
-  if ((*(byte *)(iVar14 + 0x7e) & 4) != 0) {
-    material = *(int *)(iVar14 + 0x78);
-    *(byte *)(iVar14 + 0x7e) = *(byte *)(iVar14 + 0x7e) & 0xfb;
+  if ((*(byte *)(vertex + 0x7e) & 4) != 0) {
+    material = *(int *)(vertex + 0x78);
+    *(byte *)(vertex + 0x7e) = *(byte *)(vertex + 0x7e) & 0xfb;
     if (*(char *)(material + 0x234) != '\0') {
       _gleUpdateLightRGBASums(glContext,material,1);
           }
     vectorNormalize = PTR__gleVectorNormalize_00112064;
-    pfVar7 = (float *)(iVar14 + 0x20);
-    if (*(float *)(iVar14 + 0x2c) != FLOAT_00108e54) {
-      fVar1 = FLOAT_00108e54 / *(float *)(iVar14 + 0x2c);
-      pfVar7 = &local_e0;
-      local_d8 = *(float *)(iVar14 + 0x28) * fVar1;
-      local_e0 = *(float *)(iVar14 + 0x20) * fVar1;
-      local_dc = *(float *)(iVar14 + 0x24) * fVar1;
+    eyePosition = (float *)(vertex + 0x20);
+    if (*(float *)(vertex + 0x2c) != FLOAT_00108e54) {
+      invW = FLOAT_00108e54 / *(float *)(vertex + 0x2c);
+      eyePosition = &eyeX;
+      eyeZ = *(float *)(vertex + 0x28) * invW;
+      eyeX = *(float *)(vertex + 0x20) * invW;
+      eyeY = *(float *)(vertex + 0x24) * invW;
     }
     colorR = (double)*(float *)(material + 0x1d0);
     colorG = (double)*(float *)(material + 0x1d4);
     lightIndex = 0;
     colorB = (double)*(float *)(material + 0x1d8);
     colorAlpha = *(undefined4 *)(material + 0x1dc);
-    local_ac = &FLOAT_00108e80;
+    distanceThresholdPtr = &FLOAT_00108e80;
     floatOne = (double)FLOAT_00108e54;
     lightParams = glContext;
     lightParams2 = glContext;
@@ -3633,17 +3636,17 @@ LAB_000d63d0:
       }
       else if (*(char *)(lightRecord + 0x4ad8) == '\0') {
         if (*(char *)(lightRecord + 0x4ad9) == '\0') {
-          toLightX = *(float *)(lightRecord + 0x4a70) - *pfVar7;
-          toLightY = *(float *)(lightRecord + 0x4a74) - pfVar7[1];
-          toLightZ = *(float *)(lightRecord + 0x4a78) - pfVar7[2];
+          toLightX = *(float *)(lightRecord + 0x4a70) - *eyePosition;
+          toLightY = *(float *)(lightRecord + 0x4a74) - eyePosition[1];
+          toLightZ = *(float *)(lightRecord + 0x4a78) - eyePosition[2];
           f1AfterCall1 = ((double (*)())(*(code **)vectorNormalize))(glContext,&toLightX,&toLightX);
-          if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall1 < (double)*local_ac)) {
+          if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall1 < (double)*distanceThresholdPtr)) {
             lightAttenuation = (double)*(float *)(lightRecord + 0x4ad4);
           }
           else {
-            fVar1 = (float)((double)floatOne / f1AfterCall1);
-            lightAttenuation = (double)(floatOne / (*(float *)(lightParams2 + 0x2878) * fVar1 * fVar1 +
-                                                      (*(float *)(lightParams2 + 0x2874) * fVar1 +
+            inverseDistance = (float)((double)floatOne / f1AfterCall1);
+            lightAttenuation = (double)(floatOne / (*(float *)(lightParams2 + 0x2878) * inverseDistance * inverseDistance +
+                                                      (*(float *)(lightParams2 + 0x2874) * inverseDistance +
                                                       *(float *)(lightParams2 + 0x2870))));
           }
         }
@@ -3654,14 +3657,14 @@ LAB_000d63d0:
           toLightZ = *(float *)(lightRecord + 0x4a84);
         }
         if (*(char *)(lightRecord + 0x4ada) != '\0') {
-          fparam_1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
+          floatArg1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
                               (toLightX * *(float *)(lightRecord + 0x4a88) +
                               toLightY * *(float *)(lightRecord + 0x4a8c)));
-          if (fparam_1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d67f8;
-          dVar15 = ((double (*)())_gleLightExponentPow)(iVar4,lightRecord + 0x4a70,fparam_1,fparam_2,floatArg3,floatArg4,floatArg5,
-                              floatArg6,fparam_7,fparam_8,incomingStack_fffffee8,incomingStack_fffffef0,
+          if (floatArg1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d67f8;
+          spotFactor = ((double (*)())_gleLightExponentPow)(glContextForCalls,lightRecord + 0x4a70,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,
+                              floatArg6,floatArg7,floatArg8,incomingStack_fffffee8,incomingStack_fffffef0,
                               incomingStack_fffffef8,incomingStack_ffffff00,incomingStack_ffffff08);
-          lightAttenuation = (double)(float)((double)lightAttenuation * dVar15);
+          lightAttenuation = (double)(float)((double)lightAttenuation * spotFactor);
         }
         if (localViewer == 0) {
           halfZ = (toLightZ + floatOne);
@@ -3669,41 +3672,41 @@ LAB_000d63d0:
           halfY = toLightY;
         }
         else {
-          halfX = -*pfVar7;
-          halfY = -pfVar7[1];
-          halfZ = -pfVar7[2];
+          halfX = -*eyePosition;
+          halfY = -eyePosition[1];
+          halfZ = -eyePosition[2];
           (**(code **)vectorNormalize)(glContext,&halfX,&halfX);
           halfX = halfX + toLightX;
           halfY = halfY + toLightY;
           halfZ = halfZ + toLightZ;
         }
         f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(glContext,&halfX,&halfX);
-        fparam_8 = (double)FLOAT_00108e50;
-        fparam_1 = f1AfterCall2;
-        if ((double)lightAttenuation != fparam_8) {
-          fparam_7 = (double)*(float *)(iVar14 + 0x48);
+        floatArg8 = (double)FLOAT_00108e50;
+        floatArg1 = f1AfterCall2;
+        if ((double)lightAttenuation != floatArg8) {
+          floatArg7 = (double)*(float *)(vertex + 0x48);
           lightContributionR = (double)*(float *)(lightProducts + 0x50);
           lightContributionG = (double)*(float *)(lightProducts + 0x54);
           lightContributionB = (double)*(float *)(lightProducts + 0x58);
-          dVar15 = (double)(float)(fparam_7 * (double)toLightZ +
-                                  (double)(*(float *)(iVar14 + 0x40) * toLightX +
-                                          *(float *)(iVar14 + 0x44) * toLightY));
-          fparam_1 = -dVar15;
-          if (fparam_8 < fparam_1) {
-            lightContributionR = -(double)(float)(dVar15 * (double)*(float *)(lightProducts + 0x60) - (double)lightContributionR);
-            lightContributionB = -(double)(float)(dVar15 * (double)*(float *)(lightProducts + 0x68) - (double)lightContributionB);
-            fparam_1 = -(double)(float)(fparam_7 * (double)halfZ +
-                                       (double)(*(float *)(iVar14 + 0x40) * halfX +
-                                               *(float *)(iVar14 + 0x44) * halfY));
-            lightContributionG = -(double)(float)(dVar15 * (double)*(float *)(lightProducts + 100) - (double)lightContributionG);
-            if (fparam_8 < fparam_1) {
-              fparam_2 = (double)*(float *)(material + 0x40);
-              dVar15 = _pow(fparam_1,fparam_2);
-              fparam_1 = (double)(float)dVar15;
-              lightContributionB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)lightContributionB);
-              lightContributionR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)lightContributionR);
-              lightContributionG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)lightContributionG);
-              iVar4 = r3AfterCall1;
+          normalDotLight = (double)(float)(floatArg7 * (double)toLightZ +
+                                  (double)(*(float *)(vertex + 0x40) * toLightX +
+                                          *(float *)(vertex + 0x44) * toLightY));
+          floatArg1 = -normalDotLight;
+          if (floatArg8 < floatArg1) {
+            lightContributionR = -(double)(float)(normalDotLight * (double)*(float *)(lightProducts + 0x60) - (double)lightContributionR);
+            lightContributionB = -(double)(float)(normalDotLight * (double)*(float *)(lightProducts + 0x68) - (double)lightContributionB);
+            floatArg1 = -(double)(float)(floatArg7 * (double)halfZ +
+                                       (double)(*(float *)(vertex + 0x40) * halfX +
+                                               *(float *)(vertex + 0x44) * halfY));
+            lightContributionG = -(double)(float)(normalDotLight * (double)*(float *)(lightProducts + 100) - (double)lightContributionG);
+            if (floatArg8 < floatArg1) {
+              floatArg2 = (double)*(float *)(material + 0x40);
+              specularPow = _pow(floatArg1,floatArg2);
+              floatArg1 = (double)(float)specularPow;
+              lightContributionB = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x78) + (double)lightContributionB);
+              lightContributionR = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x70) + (double)lightContributionR);
+              lightContributionG = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x74) + (double)lightContributionG);
+              glContextForCalls = r3AfterCall1;
             }
           }
           if ((double)lightAttenuation == (double)floatOne) {
@@ -3719,31 +3722,31 @@ LAB_000d63d0:
         }
       }
       else {
-        fparam_8 = (double)*(float *)(iVar14 + 0x48);
-        fparam_7 = (double)FLOAT_00108e50;
-        dVar16 = (double)(float)(fparam_8 * (double)*(float *)(lightRecord + 0x4a84) +
-                                (double)(*(float *)(iVar14 + 0x40) * *(float *)(lightRecord + 0x4a7c) +
-                                        *(float *)(iVar14 + 0x44) * *(float *)(lightRecord + 0x4a80)));
+        floatArg8 = (double)*(float *)(vertex + 0x48);
+        floatArg7 = (double)FLOAT_00108e50;
+        normalDotDirection = (double)(float)(floatArg8 * (double)*(float *)(lightRecord + 0x4a84) +
+                                (double)(*(float *)(vertex + 0x40) * *(float *)(lightRecord + 0x4a7c) +
+                                        *(float *)(vertex + 0x44) * *(float *)(lightRecord + 0x4a80)));
         colorR = (double)(colorR + *(float *)(lightProducts + 0x50));
         colorG = (double)(colorG + *(float *)(lightProducts + 0x54));
-        fparam_1 = -(double)dVar16;
+        floatArg1 = -(double)normalDotDirection;
         colorB = (double)(colorB + *(float *)(lightProducts + 0x58));
-        if (fparam_7 < fparam_1) {
-          colorR = -(double)(dVar16 * *(float *)(lightProducts + 0x60) - colorR);
-          colorG = -(double)(dVar16 * *(float *)(lightProducts + 100) - colorG);
-          fparam_1 = -(double)(float)(fparam_8 * (double)*(float *)(lightParams + 0x2888) +
-                                     (double)(*(float *)(iVar14 + 0x40) * *(float *)(lightParams + 0x2880)
-                                             + *(float *)(iVar14 + 0x44) *
+        if (floatArg7 < floatArg1) {
+          colorR = -(double)(normalDotDirection * *(float *)(lightProducts + 0x60) - colorR);
+          colorG = -(double)(normalDotDirection * *(float *)(lightProducts + 100) - colorG);
+          floatArg1 = -(double)(float)(floatArg8 * (double)*(float *)(lightParams + 0x2888) +
+                                     (double)(*(float *)(vertex + 0x40) * *(float *)(lightParams + 0x2880)
+                                             + *(float *)(vertex + 0x44) *
                                                *(float *)(lightParams + 0x2884)));
-          colorB = -(double)(dVar16 * *(float *)(lightProducts + 0x68) - colorB);
-          if (fparam_7 < fparam_1) {
-            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar4,material + 0x1e8,fparam_1,fparam_2,floatArg3,floatArg4,floatArg5,
-                                  floatArg6,fparam_7,fparam_8,incomingStack_fffffee8,incomingStack_fffffef0,
+          colorB = -(double)(normalDotDirection * *(float *)(lightProducts + 0x68) - colorB);
+          if (floatArg7 < floatArg1) {
+            floatArg1 = ((double (*)())_gleMaterialShinePow)(glContextForCalls,material + 0x1e8,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,
+                                  floatArg6,floatArg7,floatArg8,incomingStack_fffffee8,incomingStack_fffffef0,
                                   incomingStack_fffffef8,incomingStack_ffffff00,incomingStack_ffffff08);
-            colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
-            colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
-            colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
-            iVar4 = iVar4;
+            colorB = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
+            colorR = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
+            colorG = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
+            glContextForCalls = glContextForCalls;
           }
         }
       }
@@ -3757,10 +3760,10 @@ LAB_000d67f8:
   }
   goto LAB_000d6820;
 LAB_000d6810:
-  *(undefined4 *)(iVar14 + 0x3c) = colorAlpha;
-  *(float *)(iVar14 + 0x30) = (float)(double)colorR;
-  *(float *)(iVar14 + 0x34) = (float)(double)colorG;
-  *(float *)(iVar14 + 0x38) = (float)(double)colorB;
+  *(undefined4 *)(vertex + 0x3c) = colorAlpha;
+  *(float *)(vertex + 0x30) = (float)(double)colorR;
+  *(float *)(vertex + 0x34) = (float)(double)colorG;
+  *(float *)(vertex + 0x38) = (float)(double)colorB;
 LAB_000d6820:
   vertexIndex = vertexIndex + 1;
   if (iStack00000020 <= vertexIndex) {
@@ -3770,18 +3773,23 @@ LAB_000d6820:
 }
 
 /* _gleVtxLightSpecRGBAFrontPtr @ 0xd683c (1680 bytes) */
-void _gleVtxLightSpecRGBAFrontPtr(int glContext,int param_2,int vertexCount,double fparam_1,double fparam_2,double floatArg3,double floatArg4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gleVtxLightSpecRGBAFrontPtr(int glContext,int vertexArray,int vertexCount,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
-  float fVar1;
+  float invW;
+  float specularFactor;
+  float doubleCrossZ;
+  float doubleCrossY;
+  float doubleCrossX;
+  float specularDot;
   undefined4 colorAlpha;
   undefined *vectorNormalize;
-  int iVar4;
+  int glContextForCalls;
   int extraout_r3;
   int extraout_r3_00;
   int r3AfterCall2;
   uint enabledLightMask;
   int vertexIndex;
-  float *pfVar7;
+  float *eyePosition;
   uint lightIndex;
   int lightParams;
   int lightParams2;
@@ -3793,16 +3801,21 @@ void _gleVtxLightSpecRGBAFrontPtr(int glContext,int param_2,int vertexCount,doub
   double f1AfterCall1;
   double f1AfterCall2;
   double f1AfterCall3;
-  double dVar15;
+  double normalDotLight;
+  double specularR;
+  double specularPow;
+  double normalCrossLightYCopy;
   double dVar16;
   double lightAttenuation;
-  float dVar17;
-  float dVar18;
+  float normalZ;
+  float specularB;
+  float normalCrossLightZCopy;
+  float normalY;
   float floatOne;
-  float dVar20;
-  float dVar21;
+  float specularSumB;
+  float specularSumG;
   float floatZero;
-  float dVar23;
+  float specularSumR;
   float lightContributionB;
   float lightContributionG;
   float lightContributionR;
@@ -3815,31 +3828,31 @@ void _gleVtxLightSpecRGBAFrontPtr(int glContext,int param_2,int vertexCount,doub
   double incomingStack_fffffeb8;
   double incomingStack_fffffec0;
   double incomingStack_fffffec8;
-  float local_120;
-  float local_11c;
-  float local_118;
+  float eyeX;
+  float eyeY;
+  float eyeZ;
   float halfX;
   float halfY;
   float halfZ;
   float local_100;
-  float local_fc;
+  float directionalCrossY;
   float toLightY;
   float local_f8;
   float toLightZ;
-  float local_f0;
-  float local_ec;
-  float local_e8;
-  float local_e0;
-  float local_dc;
-  float local_d8;
+  float normalCrossLightX;
+  float normalCrossLightY;
+  float normalCrossLightZ;
+  float crossAdjustedLightX;
+  float crossAdjustedLightY;
+  float crossAdjustedLightZ;
   uint localViewer;
-  float *local_cc;
+  float *distanceThresholdPtr;
   
   vertexIndex = 0;
   localViewer = (uint)*(byte *)(glContext + 0x30ad);
   enabledLightMask = *(uint *)(glContext + 0x30a0);
-  iVar4 = glContext;
-  iStack0000001c = param_2;
+  glContextForCalls = glContext;
+  iStack0000001c = vertexArray;
   if (vertexCount < 1) {
     return;
   }
@@ -3851,13 +3864,13 @@ LAB_000d6880:
     if (*(char *)(material + 0x234) != '\0') {
       _gleUpdateLightRGBASums(glContext,material,0);
           }
-    pfVar7 = (float *)(vertex + 0x20);
+    eyePosition = (float *)(vertex + 0x20);
     if (*(float *)(vertex + 0x2c) != FLOAT_00108e54) {
-      fVar1 = FLOAT_00108e54 / *(float *)(vertex + 0x2c);
-      pfVar7 = &local_120;
-      local_118 = *(float *)(vertex + 0x28) * fVar1;
-      local_120 = *(float *)(vertex + 0x20) * fVar1;
-      local_11c = *(float *)(vertex + 0x24) * fVar1;
+      invW = FLOAT_00108e54 / *(float *)(vertex + 0x2c);
+      eyePosition = &eyeX;
+      eyeZ = *(float *)(vertex + 0x28) * invW;
+      eyeX = *(float *)(vertex + 0x20) * invW;
+      eyeY = *(float *)(vertex + 0x24) * invW;
     }
     if (*(char *)(glContext + 0x30ae) != '\0') {
       if ((localViewer == 0) || (*(int *)(glContext + 0x4ddc) == 0)) {
@@ -3866,11 +3879,11 @@ LAB_000d6880:
         halfX = 0.0;
       }
       else {
-        halfX = -*pfVar7;
-        halfY = -pfVar7[1];
-        halfZ = -pfVar7[2];
+        halfX = -*eyePosition;
+        halfY = -eyePosition[1];
+        halfZ = -eyePosition[2];
         f1AfterCall1 = ((double (*)())(*(code **)PTR__gleVectorNormalize_00112064))(glContext,&halfX,&halfX);
-        fparam_1 = f1AfterCall1;
+        floatArg1 = f1AfterCall1;
       }
     }
     vectorNormalize = PTR__gleVectorNormalize_00112064;
@@ -3880,35 +3893,35 @@ LAB_000d6880:
     colorG = (double)*(float *)(material + 0x1d4);
     colorB = (double)*(float *)(material + 0x1d8);
     colorAlpha = *(undefined4 *)(material + 0x1dc);
-    local_cc = &FLOAT_00108e80;
+    distanceThresholdPtr = &FLOAT_00108e80;
     floatOne = (double)FLOAT_00108e54;
     lightParams = glContext;
     lightParams2 = glContext;
     lightProducts = material;
     lightRecord = glContext;
-    dVar20 = (double)floatZero;
-    dVar21 = (double)floatZero;
-    dVar23 = (double)floatZero;
+    specularSumB = (double)floatZero;
+    specularSumG = (double)floatZero;
+    specularSumR = (double)floatZero;
     do {
       if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
         if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d6e74;
       }
       else if (*(char *)(lightRecord + 0x4ad8) == '\0') {
         if (*(char *)(lightRecord + 0x4ad9) == '\0') {
-          local_100 = *(float *)(lightRecord + 0x4a70) - *pfVar7;
-          toLightY = *(float *)(lightRecord + 0x4a74) - pfVar7[1];
-          toLightZ = *(float *)(lightRecord + 0x4a78) - pfVar7[2];
+          local_100 = *(float *)(lightRecord + 0x4a70) - *eyePosition;
+          toLightY = *(float *)(lightRecord + 0x4a74) - eyePosition[1];
+          toLightZ = *(float *)(lightRecord + 0x4a78) - eyePosition[2];
           f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(glContext,&local_100,&local_100);
-          if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall2 < (double)*local_cc)) {
+          if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall2 < (double)*distanceThresholdPtr)) {
             lightAttenuation = (double)*(float *)(lightRecord + 0x4ad4);
-            fparam_1 = f1AfterCall2;
+            floatArg1 = f1AfterCall2;
           }
           else {
-            fparam_1 = (double)(float)((double)floatOne / f1AfterCall2);
+            floatArg1 = (double)(float)((double)floatOne / f1AfterCall2);
             lightAttenuation = (double)(floatOne / (float)((double)(float)((double)*(float *)(
-                                                  lightParams2 + 0x2878) * fparam_1) * fparam_1 +
+                                                  lightParams2 + 0x2878) * floatArg1) * floatArg1 +
                                                   (double)(float)((double)*(float *)(lightParams2 + 0x2874
-                                                                                    ) * fparam_1 +
+                                                                                    ) * floatArg1 +
                                                                  (double)*(float *)(lightParams2 + 0x2870)
                                                                  )));
           }
@@ -3920,15 +3933,15 @@ LAB_000d6880:
           toLightZ = *(float *)(lightRecord + 0x4a84);
         }
         if (*(char *)(lightRecord + 0x4ada) != '\0') {
-          fparam_1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
+          floatArg1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
                               (local_100 * *(float *)(lightRecord + 0x4a88) +
                               toLightY * *(float *)(lightRecord + 0x4a8c)));
-          if (fparam_1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d6e5c;
-          fparam_1 = ((double (*)())_gleLightExponentPow)(iVar4,lightRecord + 0x4a70,fparam_1,fparam_2,floatArg3,floatArg4,fparam_5,
-                                fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
+          if (floatArg1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d6e5c;
+          floatArg1 = ((double (*)())_gleLightExponentPow)(glContextForCalls,lightRecord + 0x4a70,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,
+                                floatArg6,floatArg7,floatArg8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                 incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-          lightAttenuation = (double)(float)(lightAttenuation * fparam_1);
-          iVar4 = iVar4;
+          lightAttenuation = (double)(float)(lightAttenuation * floatArg1);
+          glContextForCalls = glContextForCalls;
         }
         if (*(char *)(glContext + 0x30ae) == '\0') {
           if (localViewer == 0) {
@@ -3937,124 +3950,124 @@ LAB_000d6880:
             halfY = toLightY;
           }
           else {
-            halfX = -*pfVar7;
-            halfY = -pfVar7[1];
-            halfZ = -pfVar7[2];
+            halfX = -*eyePosition;
+            halfY = -eyePosition[1];
+            halfZ = -eyePosition[2];
             (**(code **)vectorNormalize)(glContext,&halfX,&halfX);
             halfX = halfX + local_100;
             halfY = halfY + toLightY;
             halfZ = halfZ + toLightZ;
           }
           f1AfterCall3 = ((double (*)())(*(code **)vectorNormalize))(glContext,&halfX,&halfX);
-          fparam_1 = f1AfterCall3;
+          floatArg1 = f1AfterCall3;
         }
         if (lightAttenuation != (double)FLOAT_00108e50) {
-          dVar18 = (double)*(float *)(vertex + 0x44);
-          fparam_6 = (double)toLightY;
-          fparam_7 = (double)local_100;
-          dVar17 = (double)*(float *)(vertex + 0x48);
-          fparam_5 = (double)toLightZ;
+          normalY = (double)*(float *)(vertex + 0x44);
+          floatArg6 = (double)toLightY;
+          floatArg7 = (double)local_100;
+          normalZ = (double)*(float *)(vertex + 0x48);
+          floatArg5 = (double)toLightZ;
           lightContributionR = (double)*(float *)(lightProducts + 0x50);
           lightContributionG = (double)*(float *)(lightProducts + 0x54);
           lightContributionB = (double)*(float *)(lightProducts + 0x58);
-          dVar15 = (double)(float)((double)dVar17 * fparam_5 +
-                                  (double)(float)((double)*(float *)(vertex + 0x40) * fparam_7 +
-                                                 (double)(float)((double)dVar18 * fparam_6)));
-          if ((double)FLOAT_00108e50 < dVar15) {
-            lightContributionR = (double)(float)(dVar15 * (double)*(float *)(lightProducts + 0x60) + (double)lightContributionR);
-            lightContributionG = (double)(float)(dVar15 * (double)*(float *)(lightProducts + 100) + (double)lightContributionG);
-            lightContributionB = (double)(float)(dVar15 * (double)*(float *)(lightProducts + 0x68) + (double)lightContributionB);
+          normalDotLight = (double)(float)((double)normalZ * floatArg5 +
+                                  (double)(float)((double)*(float *)(vertex + 0x40) * floatArg7 +
+                                                 (double)(float)((double)normalY * floatArg6)));
+          if ((double)FLOAT_00108e50 < normalDotLight) {
+            lightContributionR = (double)(float)(normalDotLight * (double)*(float *)(lightProducts + 0x60) + (double)lightContributionR);
+            lightContributionG = (double)(float)(normalDotLight * (double)*(float *)(lightProducts + 100) + (double)lightContributionG);
+            lightContributionB = (double)(float)(normalDotLight * (double)*(float *)(lightProducts + 0x68) + (double)lightContributionB);
             if (*(char *)(glContext + 0x30ae) == '\0') {
-              fVar1 = (dVar17 * halfZ + (*(float *)(vertex + 0x40) * halfX + (dVar18 * halfY)));
+              specularDot = (normalZ * halfZ + (*(float *)(vertex + 0x40) * halfX + (normalY * halfY)));
             }
             else {
-              local_f0 = (float)((double)dVar18 * fparam_5 - (double)(float)((double)dVar17 * fparam_6));
-              fparam_8 = (double)local_f0;
-              local_ec = (float)((double)dVar17 * fparam_7 -
-                                (double)(float)((double)*(float *)(vertex + 0x40) * fparam_5));
-              dVar15 = (double)local_ec;
-              local_e8 = (float)((double)*(float *)(vertex + 0x40) * fparam_6 -
-                                (double)(float)((double)*(float *)(vertex + 0x44) * fparam_7));
-              dVar17 = (double)local_e8;
-              fVar1 = (*(float *)(vertex + 0x44) * dVar17 - (float)((double)*(float *)(vertex + 0x48) * dVar15));
-              local_e0 = (float)((double)(fVar1 + fVar1) + fparam_7);
-              fVar1 = (float)((double)*(float *)(vertex + 0x48) * fparam_8 -
-                             (double)(*(float *)(vertex + 0x40) * dVar17));
-              local_dc = (float)((double)(fVar1 + fVar1) + fparam_6);
-              fVar1 = (float)((double)*(float *)(vertex + 0x40) * dVar15 -
-                             (double)(float)((double)*(float *)(vertex + 0x44) * fparam_8));
-              local_d8 = (float)((double)(fVar1 + fVar1) + fparam_5);
-              fVar1 = local_d8 * halfZ + (local_e0 * halfX + local_dc * halfY);
+              normalCrossLightX = (float)((double)normalY * floatArg5 - (double)(float)((double)normalZ * floatArg6));
+              floatArg8 = (double)normalCrossLightX;
+              normalCrossLightY = (float)((double)normalZ * floatArg7 -
+                                (double)(float)((double)*(float *)(vertex + 0x40) * floatArg5));
+              normalCrossLightYCopy = (double)normalCrossLightY;
+              normalCrossLightZ = (float)((double)*(float *)(vertex + 0x40) * floatArg6 -
+                                (double)(float)((double)*(float *)(vertex + 0x44) * floatArg7));
+              normalCrossLightZCopy = (double)normalCrossLightZ;
+              doubleCrossX = (*(float *)(vertex + 0x44) * normalCrossLightZCopy - (float)((double)*(float *)(vertex + 0x48) * normalCrossLightYCopy));
+              crossAdjustedLightX = (float)((double)(doubleCrossX + doubleCrossX) + floatArg7);
+              doubleCrossY = (float)((double)*(float *)(vertex + 0x48) * floatArg8 -
+                             (double)(*(float *)(vertex + 0x40) * normalCrossLightZCopy));
+              crossAdjustedLightY = (float)((double)(doubleCrossY + doubleCrossY) + floatArg6);
+              doubleCrossZ = (float)((double)*(float *)(vertex + 0x40) * normalCrossLightYCopy -
+                             (double)(float)((double)*(float *)(vertex + 0x44) * floatArg8));
+              crossAdjustedLightZ = (float)((double)(doubleCrossZ + doubleCrossZ) + floatArg5);
+              specularDot = crossAdjustedLightZ * halfZ + (crossAdjustedLightX * halfX + crossAdjustedLightY * halfY);
             }
-            if (!((double)floatZero < (double)fVar1)) goto LAB_000d6e10;
-            fparam_2 = (double)*(float *)(material + 0x40);
-            dVar15 = _pow((double)fVar1,fparam_2);
-            fVar1 = (float)dVar15;
-            dVar17 = (double)(fVar1 * *(float *)(lightProducts + 0x78));
-            iVar4 = r3AfterCall2;
-            fparam_1 = (double)(fVar1 * *(float *)(lightProducts + 0x74));
-            dVar15 = (double)(fVar1 * *(float *)(lightProducts + 0x70));
+            if (!((double)floatZero < (double)specularDot)) goto LAB_000d6e10;
+            floatArg2 = (double)*(float *)(material + 0x40);
+            specularPow = _pow((double)specularDot,floatArg2);
+            specularFactor = (float)specularPow;
+            specularB = (double)(specularFactor * *(float *)(lightProducts + 0x78));
+            glContextForCalls = r3AfterCall2;
+            floatArg1 = (double)(specularFactor * *(float *)(lightProducts + 0x74));
+            specularR = (double)(specularFactor * *(float *)(lightProducts + 0x70));
           }
           else {
 LAB_000d6e10:
-            dVar17 = (double)FLOAT_00108e50;
-            fparam_1 = (double)dVar17;
-            dVar15 = (double)dVar17;
+            specularB = (double)FLOAT_00108e50;
+            floatArg1 = (double)specularB;
+            specularR = (double)specularB;
           }
           if (lightAttenuation == (double)floatOne) {
             colorR = (double)(colorR + lightContributionR);
             colorG = (double)(colorG + lightContributionG);
             colorB = (double)(colorB + lightContributionB);
-            dVar23 = (double)(float)((double)dVar23 + dVar15);
-            dVar21 = (double)(float)((double)dVar21 + fparam_1);
-            dVar20 = (double)(dVar20 + dVar17);
+            specularSumR = (double)(float)((double)specularSumR + specularR);
+            specularSumG = (double)(float)((double)specularSumG + floatArg1);
+            specularSumB = (double)(specularSumB + specularB);
           }
           else {
-            dVar20 = (double)(float)(lightAttenuation * (double)dVar17 + (double)dVar20);
+            specularSumB = (double)(float)(lightAttenuation * (double)specularB + (double)specularSumB);
             colorR = (double)(float)(lightAttenuation * (double)lightContributionR + (double)colorR);
             colorG = (double)(float)(lightAttenuation * (double)lightContributionG + (double)colorG);
             colorB = (double)(float)(lightAttenuation * (double)lightContributionB + (double)colorB);
-            dVar23 = (double)(float)(lightAttenuation * dVar15 + (double)dVar23);
-            dVar21 = (double)(float)(lightAttenuation * fparam_1 + (double)dVar21);
+            specularSumR = (double)(float)(lightAttenuation * specularR + (double)specularSumR);
+            specularSumG = (double)(float)(lightAttenuation * floatArg1 + (double)specularSumG);
           }
         }
       }
       else {
-        fparam_8 = (double)*(float *)(vertex + 0x44);
-        fparam_7 = (double)*(float *)(lightRecord + 0x4a80);
+        floatArg8 = (double)*(float *)(vertex + 0x44);
+        floatArg7 = (double)*(float *)(lightRecord + 0x4a80);
         dVar16 = (double)*(float *)(lightRecord + 0x4a84);
         colorR = (double)(colorR + *(float *)(lightProducts + 0x50));
-        fparam_1 = (double)(float)((double)*(float *)(vertex + 0x48) * dVar16 +
+        floatArg1 = (double)(float)((double)*(float *)(vertex + 0x48) * dVar16 +
                                   (double)(*(float *)(vertex + 0x40) * *(float *)(lightRecord + 0x4a7c) +
-                                          (float)(fparam_8 * fparam_7)));
+                                          (float)(floatArg8 * floatArg7)));
         colorG = (double)(colorG + *(float *)(lightProducts + 0x54));
         colorB = (double)(colorB + *(float *)(lightProducts + 0x58));
-        if ((double)floatZero < fparam_1) {
-          colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x60) + (double)colorR);
-          colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 100) + (double)colorG);
-          colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x68) + (double)colorB);
+        if ((double)floatZero < floatArg1) {
+          colorR = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x60) + (double)colorR);
+          colorG = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 100) + (double)colorG);
+          colorB = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x68) + (double)colorB);
           if (*(char *)(glContext + 0x30ae) == '\0') {
             dVar16 = (double)*(float *)(vertex + 0x48) * (double)*(float *)(lightParams + 0x2888) +
                      (double)(*(float *)(vertex + 0x40) * *(float *)(lightParams + 0x2880) +
-                             (float)(fparam_8 * (double)*(float *)(lightParams + 0x2884)));
+                             (float)(floatArg8 * (double)*(float *)(lightParams + 0x2884)));
           }
           else {
             local_f8 = *(float *)(lightRecord + 0x4a84);
-            local_100 = (float)(fparam_8 * dVar16 -
-                               (double)(float)((double)*(float *)(vertex + 0x48) * fparam_7));
-            local_fc = (*(float *)(vertex + 0x48) * *(float *)(lightRecord + 0x4a7c) - (float)((double)*(float *)(vertex + 0x40) * dVar16));
-            fVar1 = (*(float *)(vertex + 0x40) * local_fc - (*(float *)(vertex + 0x44) * local_100));
-            dVar16 = (double)(fVar1 + fVar1) + dVar16;
+            local_100 = (float)(floatArg8 * dVar16 -
+                               (double)(float)((double)*(float *)(vertex + 0x48) * floatArg7));
+            directionalCrossY = (*(float *)(vertex + 0x48) * *(float *)(lightRecord + 0x4a7c) - (float)((double)*(float *)(vertex + 0x40) * dVar16));
+            doubleCrossZ = (*(float *)(vertex + 0x40) * directionalCrossY - (*(float *)(vertex + 0x44) * local_100));
+            dVar16 = (double)(doubleCrossZ + doubleCrossZ) + dVar16;
           }
-          fparam_1 = (double)(float)dVar16;
-          if ((double)floatZero < fparam_1) {
-            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar4,material + 0x1e8,fparam_1,fparam_2,floatArg3,floatArg4,fparam_5,
-                                  fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
+          floatArg1 = (double)(float)dVar16;
+          if ((double)floatZero < floatArg1) {
+            floatArg1 = ((double (*)())_gleMaterialShinePow)(glContextForCalls,material + 0x1e8,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,
+                                  floatArg6,floatArg7,floatArg8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                   incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-            colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
-            colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
-            colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
-            iVar4 = iVar4;
+            colorB = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
+            colorR = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
+            colorG = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
+            glContextForCalls = glContextForCalls;
           }
         }
       }
@@ -4069,14 +4082,14 @@ LAB_000d6e5c:
   goto LAB_000d6eb4;
 LAB_000d6e74:
   if (*(short *)(glContext + 0x30a8) == -0x7e06) {
-    *(float *)(vertex + 0x50) = (float)(double)dVar23;
-    *(float *)(vertex + 0x54) = (float)(double)dVar21;
-    *(float *)(vertex + 0x58) = (float)(double)dVar20;
+    *(float *)(vertex + 0x50) = (float)(double)specularSumR;
+    *(float *)(vertex + 0x54) = (float)(double)specularSumG;
+    *(float *)(vertex + 0x58) = (float)(double)specularSumB;
   }
   else {
-    colorR = (double)(colorR + dVar23);
-    colorG = (double)(colorG + dVar21);
-    colorB = (double)(colorB + dVar20);
+    colorR = (double)(colorR + specularSumR);
+    colorG = (double)(colorG + specularSumG);
+    colorB = (double)(colorB + specularSumB);
   }
   *(undefined4 *)(vertex + 0x3c) = colorAlpha;
   *(float *)(vertex + 0x30) = (float)(double)colorR;
@@ -4091,19 +4104,22 @@ LAB_000d6eb4:
 }
 
 /* _gleVtxLightSpecRGBABackPtr @ 0xd6ecc (1688 bytes) */
-void _gleVtxLightSpecRGBABackPtr(int glContext,int param_2,int vertexCount,double fparam_1,double fparam_2,double floatArg3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double unusedFloatArg9,double unusedFloatArg10)
+void _gleVtxLightSpecRGBABackPtr(int glContext,int vertexArray,int vertexCount,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
-  float fVar1;
-  float fVar2;
+  float invW;
+  float specularFactor;
+  float doubleCrossZ;
+  float doubleCrossX;
+  float doubleCrossY;
   undefined4 colorAlpha;
   undefined *vectorNormalize;
-  int iVar5;
+  int glContextForCalls;
   int extraout_r3;
   int extraout_r3_00;
   int r3AfterCall2;
   uint enabledLightMask;
   int vertexIndex;
-  float *pfVar8;
+  float *eyePosition;
   uint lightIndex;
   int lightParams;
   int lightParams2;
@@ -4115,16 +4131,22 @@ void _gleVtxLightSpecRGBABackPtr(int glContext,int param_2,int vertexCount,doubl
   double f1AfterCall1;
   double f1AfterCall2;
   double f1AfterCall3;
-  float dVar16;
+  float directionalLightZ;
   float lightAttenuation;
   double dVar17;
-  float dVar18;
-  float dVar19;
+  double normalDotDirection;
+  double specularR;
+  double lnCrossZCopy;
+  float lnCrossYCopy;
+  float normalDotLight;
+  float normalY;
+  float specularB;
+  float lnCrossXCopy;
   float floatOne;
-  float dVar21;
-  float dVar22;
+  float specularSumB;
+  float specularSumG;
   float floatZero;
-  float dVar24;
+  float specularSumR;
   float lightContributionB;
   float lightContributionG;
   float lightContributionR;
@@ -4138,30 +4160,30 @@ void _gleVtxLightSpecRGBABackPtr(int glContext,int param_2,int vertexCount,doubl
   double incomingStack_fffffeb8;
   double incomingStack_fffffec0;
   double incomingStack_fffffec8;
-  float local_120;
-  float local_11c;
-  float local_118;
+  float eyeX;
+  float eyeY;
+  float eyeZ;
   float halfX;
   float halfY;
   float halfZ;
   float local_100;
-  float local_fc;
+  float directionalCrossY;
   float toLightY;
   float local_f8;
   float toLightZ;
-  float local_f0;
-  float local_ec;
-  float local_e8;
-  float local_e0;
-  float local_dc;
-  float local_d8;
+  float lnCrossX;
+  float lnCrossY;
+  float lnCrossZ;
+  float crossAdjustedLightX;
+  float crossAdjustedLightY;
+  float crossAdjustedLightZ;
   uint localViewer;
   
   vertexIndex = 0;
   localViewer = (uint)*(byte *)(glContext + 0x30ad);
   enabledLightMask = *(uint *)(glContext + 0x30a0);
-  iVar5 = glContext;
-  iStack0000001c = param_2;
+  glContextForCalls = glContext;
+  iStack0000001c = vertexArray;
   iStack00000020 = vertexCount;
   if (vertexCount < 1) {
     return;
@@ -4174,13 +4196,13 @@ LAB_000d6f10:
     if (*(char *)(material + 0x234) != '\0') {
       _gleUpdateLightRGBASums(glContext,material,1);
           }
-    pfVar8 = (float *)(vertex + 0x20);
+    eyePosition = (float *)(vertex + 0x20);
     if (*(float *)(vertex + 0x2c) != FLOAT_00108e54) {
-      fVar1 = FLOAT_00108e54 / *(float *)(vertex + 0x2c);
-      pfVar8 = &local_120;
-      local_118 = *(float *)(vertex + 0x28) * fVar1;
-      local_120 = *(float *)(vertex + 0x20) * fVar1;
-      local_11c = *(float *)(vertex + 0x24) * fVar1;
+      invW = FLOAT_00108e54 / *(float *)(vertex + 0x2c);
+      eyePosition = &eyeX;
+      eyeZ = *(float *)(vertex + 0x28) * invW;
+      eyeX = *(float *)(vertex + 0x20) * invW;
+      eyeY = *(float *)(vertex + 0x24) * invW;
     }
     if (*(char *)(glContext + 0x30ae) != '\0') {
       if ((localViewer == 0) || (*(int *)(glContext + 0x4ddc) == 0)) {
@@ -4189,11 +4211,11 @@ LAB_000d6f10:
         halfX = 0.0;
       }
       else {
-        halfX = -*pfVar8;
-        halfY = -pfVar8[1];
-        halfZ = -pfVar8[2];
+        halfX = -*eyePosition;
+        halfY = -eyePosition[1];
+        halfZ = -eyePosition[2];
         f1AfterCall1 = ((double (*)())(*(code **)PTR__gleVectorNormalize_00112064))(glContext,&halfX,&halfX);
-        fparam_1 = f1AfterCall1;
+        floatArg1 = f1AfterCall1;
       }
     }
     vectorNormalize = PTR__gleVectorNormalize_00112064;
@@ -4208,29 +4230,29 @@ LAB_000d6f10:
     lightParams2 = glContext;
     lightProducts = material;
     lightRecord = glContext;
-    dVar21 = (double)floatZero;
-    dVar22 = (double)floatZero;
-    dVar24 = (double)floatZero;
+    specularSumB = (double)floatZero;
+    specularSumG = (double)floatZero;
+    specularSumR = (double)floatZero;
     do {
       if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
         if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d7508;
       }
       else if (*(char *)(lightRecord + 0x4ad8) == '\0') {
         if (*(char *)(lightRecord + 0x4ad9) == '\0') {
-          local_100 = *(float *)(lightRecord + 0x4a70) - *pfVar8;
-          toLightY = *(float *)(lightRecord + 0x4a74) - pfVar8[1];
-          toLightZ = *(float *)(lightRecord + 0x4a78) - pfVar8[2];
+          local_100 = *(float *)(lightRecord + 0x4a70) - *eyePosition;
+          toLightY = *(float *)(lightRecord + 0x4a74) - eyePosition[1];
+          toLightZ = *(float *)(lightRecord + 0x4a78) - eyePosition[2];
           f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(glContext,&local_100,&local_100);
           if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall2 < (double)FLOAT_00108e80)) {
             lightAttenuation = (double)*(float *)(lightRecord + 0x4ad4);
-            fparam_1 = f1AfterCall2;
+            floatArg1 = f1AfterCall2;
           }
           else {
-            fparam_1 = (double)(float)((double)floatOne / f1AfterCall2);
+            floatArg1 = (double)(float)((double)floatOne / f1AfterCall2);
             lightAttenuation = (double)(floatOne / (float)((double)(float)((double)*(float *)(
-                                                  lightParams2 + 0x2878) * fparam_1) * fparam_1 +
+                                                  lightParams2 + 0x2878) * floatArg1) * floatArg1 +
                                                   (double)(float)((double)*(float *)(lightParams2 + 0x2874
-                                                                                    ) * fparam_1 +
+                                                                                    ) * floatArg1 +
                                                                  (double)*(float *)(lightParams2 + 0x2870)
                                                                  )));
           }
@@ -4242,15 +4264,15 @@ LAB_000d6f10:
           toLightZ = *(float *)(lightRecord + 0x4a84);
         }
         if (*(char *)(lightRecord + 0x4ada) != '\0') {
-          fparam_1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
+          floatArg1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
                               (local_100 * *(float *)(lightRecord + 0x4a88) +
                               toLightY * *(float *)(lightRecord + 0x4a8c)));
-          if (fparam_1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d74f0;
-          fparam_1 = ((double (*)())_gleLightExponentPow)(iVar5,lightRecord + 0x4a70,fparam_1,fparam_2,floatArg3,fparam_4,fparam_5,
-                                fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
+          if (floatArg1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d74f0;
+          floatArg1 = ((double (*)())_gleLightExponentPow)(glContextForCalls,lightRecord + 0x4a70,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,
+                                floatArg6,floatArg7,floatArg8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                 incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-          lightAttenuation = (double)(float)((double)lightAttenuation * fparam_1);
-          iVar5 = iVar5;
+          lightAttenuation = (double)(float)((double)lightAttenuation * floatArg1);
+          glContextForCalls = glContextForCalls;
         }
         if (*(char *)(glContext + 0x30ae) == '\0') {
           if (localViewer == 0) {
@@ -4259,131 +4281,131 @@ LAB_000d6f10:
             halfY = toLightY;
           }
           else {
-            halfX = -*pfVar8;
-            halfY = -pfVar8[1];
-            halfZ = -pfVar8[2];
+            halfX = -*eyePosition;
+            halfY = -eyePosition[1];
+            halfZ = -eyePosition[2];
             (**(code **)vectorNormalize)(glContext,&halfX,&halfX);
             halfX = halfX + local_100;
             halfY = halfY + toLightY;
             halfZ = halfZ + toLightZ;
           }
           f1AfterCall3 = ((double (*)())(*(code **)vectorNormalize))(glContext,&halfX,&halfX);
-          fparam_1 = f1AfterCall3;
+          floatArg1 = f1AfterCall3;
         }
         if ((double)lightAttenuation != (double)FLOAT_00108e50) {
           dVar17 = (double)*(float *)(vertex + 0x44);
-          fparam_5 = (double)toLightY;
-          fparam_4 = (double)*(float *)(vertex + 0x40);
-          fparam_7 = (double)local_100;
-          fparam_8 = (double)*(float *)(vertex + 0x48);
-          fparam_6 = (double)toLightZ;
+          floatArg5 = (double)toLightY;
+          floatArg4 = (double)*(float *)(vertex + 0x40);
+          floatArg7 = (double)local_100;
+          floatArg8 = (double)*(float *)(vertex + 0x48);
+          floatArg6 = (double)toLightZ;
           lightContributionR = (double)*(float *)(lightProducts + 0x50);
           lightContributionG = (double)*(float *)(lightProducts + 0x54);
           lightContributionB = (double)*(float *)(lightProducts + 0x58);
-          dVar19 = (double)(float)(fparam_8 * fparam_6 +
-                                  (double)(float)(fparam_4 * fparam_7 +
-                                                 (double)(float)(dVar17 * fparam_5)));
-          if ((double)FLOAT_00108e50 < -(double)dVar19) {
-            lightContributionR = -(double)(dVar19 * *(float *)(lightProducts + 0x60) - lightContributionR);
-            lightContributionG = -(double)(dVar19 * *(float *)(lightProducts + 100) - lightContributionG);
-            lightContributionB = -(double)(dVar19 * *(float *)(lightProducts + 0x68) - lightContributionB);
+          normalDotLight = (double)(float)(floatArg8 * floatArg6 +
+                                  (double)(float)(floatArg4 * floatArg7 +
+                                                 (double)(float)(dVar17 * floatArg5)));
+          if ((double)FLOAT_00108e50 < -(double)normalDotLight) {
+            lightContributionR = -(double)(normalDotLight * *(float *)(lightProducts + 0x60) - lightContributionR);
+            lightContributionG = -(double)(normalDotLight * *(float *)(lightProducts + 100) - lightContributionG);
+            lightContributionB = -(double)(normalDotLight * *(float *)(lightProducts + 0x68) - lightContributionB);
             if (*(char *)(glContext + 0x30ae) == '\0') {
-              dVar17 = -(double)(float)(fparam_8 * (double)halfZ +
-                                       (double)(float)(fparam_4 * (double)halfX +
+              dVar17 = -(double)(float)(floatArg8 * (double)halfZ +
+                                       (double)(float)(floatArg4 * (double)halfX +
                                                       (double)(float)(dVar17 * (double)halfY)));
             }
             else {
-              local_f0 = (float)(fparam_8 * fparam_5 - (double)(float)(dVar17 * fparam_6));
-              dVar19 = (double)local_f0;
-              local_ec = (float)((double)*(float *)(vertex + 0x40) * fparam_6 -
-                                (double)(float)(fparam_8 * fparam_7));
-              dVar18 = (double)local_ec;
-              local_e8 = (float)((double)*(float *)(vertex + 0x44) * fparam_7 -
-                                (double)(float)((double)*(float *)(vertex + 0x40) * fparam_5));
-              dVar17 = (double)local_e8;
-              fVar1 = (*(float *)(vertex + 0x48) * dVar18 - (float)((double)*(float *)(vertex + 0x44) * dVar17));
-              fVar2 = (float)((double)*(float *)(vertex + 0x40) * dVar17 -
-                             (double)(*(float *)(vertex + 0x48) * dVar19));
-              local_e0 = (float)((double)(fVar1 + fVar1) + fparam_7);
-              local_dc = (float)((double)(fVar2 + fVar2) + fparam_5);
-              fVar1 = (*(float *)(vertex + 0x44) * dVar19 - (*(float *)(vertex + 0x40) * dVar18));
-              local_d8 = (float)((double)(fVar1 + fVar1) + fparam_6);
-              dVar17 = (double)(local_d8 * halfZ + (local_e0 * halfX + local_dc * halfY));
+              lnCrossX = (float)(floatArg8 * floatArg5 - (double)(float)(dVar17 * floatArg6));
+              lnCrossXCopy = (double)lnCrossX;
+              lnCrossY = (float)((double)*(float *)(vertex + 0x40) * floatArg6 -
+                                (double)(float)(floatArg8 * floatArg7));
+              lnCrossYCopy = (double)lnCrossY;
+              lnCrossZ = (float)((double)*(float *)(vertex + 0x44) * floatArg7 -
+                                (double)(float)((double)*(float *)(vertex + 0x40) * floatArg5));
+              lnCrossZCopy = (double)lnCrossZ;
+              doubleCrossX = (*(float *)(vertex + 0x48) * lnCrossYCopy - (float)((double)*(float *)(vertex + 0x44) * lnCrossZCopy));
+              doubleCrossY = (float)((double)*(float *)(vertex + 0x40) * lnCrossZCopy -
+                             (double)(*(float *)(vertex + 0x48) * lnCrossXCopy));
+              crossAdjustedLightX = (float)((double)(doubleCrossX + doubleCrossX) + floatArg7);
+              crossAdjustedLightY = (float)((double)(doubleCrossY + doubleCrossY) + floatArg5);
+              doubleCrossZ = (*(float *)(vertex + 0x44) * lnCrossXCopy - (*(float *)(vertex + 0x40) * lnCrossYCopy));
+              crossAdjustedLightZ = (float)((double)(doubleCrossZ + doubleCrossZ) + floatArg6);
+              dVar17 = (double)(crossAdjustedLightZ * halfZ + (crossAdjustedLightX * halfX + crossAdjustedLightY * halfY));
             }
             if (!((double)floatZero < dVar17)) goto LAB_000d74a4;
-            fparam_2 = (double)*(float *)(material + 0x40);
-            dVar17 = _pow(dVar17,fparam_2);
-            fVar1 = (float)dVar17;
-            dVar19 = (double)(fVar1 * *(float *)(lightProducts + 0x78));
-            iVar5 = r3AfterCall2;
-            fparam_1 = (double)(fVar1 * *(float *)(lightProducts + 0x74));
-            dVar17 = (double)(fVar1 * *(float *)(lightProducts + 0x70));
+            floatArg2 = (double)*(float *)(material + 0x40);
+            dVar17 = _pow(dVar17,floatArg2);
+            specularFactor = (float)dVar17;
+            specularB = (double)(specularFactor * *(float *)(lightProducts + 0x78));
+            glContextForCalls = r3AfterCall2;
+            floatArg1 = (double)(specularFactor * *(float *)(lightProducts + 0x74));
+            specularR = (double)(specularFactor * *(float *)(lightProducts + 0x70));
           }
           else {
 LAB_000d74a4:
-            dVar19 = (double)FLOAT_00108e50;
-            fparam_1 = (double)dVar19;
-            dVar17 = (double)dVar19;
+            specularB = (double)FLOAT_00108e50;
+            floatArg1 = (double)specularB;
+            specularR = (double)specularB;
           }
           if ((double)lightAttenuation == (double)floatOne) {
             colorR = (double)(colorR + lightContributionR);
             colorG = (double)(colorG + lightContributionG);
             colorB = (double)(colorB + lightContributionB);
-            dVar24 = (double)(float)((double)dVar24 + dVar17);
-            dVar22 = (double)(float)((double)dVar22 + fparam_1);
-            dVar21 = (double)(dVar21 + dVar19);
+            specularSumR = (double)(float)((double)specularSumR + specularR);
+            specularSumG = (double)(float)((double)specularSumG + floatArg1);
+            specularSumB = (double)(specularSumB + specularB);
           }
           else {
-            dVar21 = (double)(lightAttenuation * dVar19 + dVar21);
+            specularSumB = (double)(lightAttenuation * specularB + specularSumB);
             colorR = (double)(lightAttenuation * lightContributionR + colorR);
             colorG = (double)(lightAttenuation * lightContributionG + colorG);
             colorB = (double)(lightAttenuation * lightContributionB + colorB);
-            dVar24 = (double)(float)((double)lightAttenuation * dVar17 + (double)dVar24);
-            dVar22 = (double)(float)((double)lightAttenuation * fparam_1 + (double)dVar22);
+            specularSumR = (double)(float)((double)lightAttenuation * specularR + (double)specularSumR);
+            specularSumG = (double)(float)((double)lightAttenuation * floatArg1 + (double)specularSumG);
           }
         }
       }
       else {
-        dVar19 = (double)*(float *)(vertex + 0x44);
-        fparam_6 = (double)*(float *)(lightRecord + 0x4a80);
-        fparam_7 = (double)*(float *)(vertex + 0x40);
-        fparam_8 = (double)*(float *)(vertex + 0x48);
-        dVar16 = (double)*(float *)(lightRecord + 0x4a84);
+        normalY = (double)*(float *)(vertex + 0x44);
+        floatArg6 = (double)*(float *)(lightRecord + 0x4a80);
+        floatArg7 = (double)*(float *)(vertex + 0x40);
+        floatArg8 = (double)*(float *)(vertex + 0x48);
+        directionalLightZ = (double)*(float *)(lightRecord + 0x4a84);
         colorR = (double)(colorR + *(float *)(lightProducts + 0x50));
-        dVar17 = (double)(float)(fparam_8 * (double)dVar16 +
-                                (double)(float)(fparam_7 * (double)*(float *)(lightRecord + 0x4a7c) +
-                                               (double)(float)((double)dVar19 * fparam_6)));
+        normalDotDirection = (double)(float)(floatArg8 * (double)directionalLightZ +
+                                (double)(float)(floatArg7 * (double)*(float *)(lightRecord + 0x4a7c) +
+                                               (double)(float)((double)normalY * floatArg6)));
         colorG = (double)(colorG + *(float *)(lightProducts + 0x54));
         colorB = (double)(colorB + *(float *)(lightProducts + 0x58));
-        fparam_1 = -dVar17;
-        if ((double)floatZero < fparam_1) {
-          colorR = -(double)(float)(dVar17 * (double)*(float *)(lightProducts + 0x60) - (double)colorR);
-          colorG = -(double)(float)(dVar17 * (double)*(float *)(lightProducts + 100) - (double)colorG);
-          colorB = -(double)(float)(dVar17 * (double)*(float *)(lightProducts + 0x68) - (double)colorB);
+        floatArg1 = -normalDotDirection;
+        if ((double)floatZero < floatArg1) {
+          colorR = -(double)(float)(normalDotDirection * (double)*(float *)(lightProducts + 0x60) - (double)colorR);
+          colorG = -(double)(float)(normalDotDirection * (double)*(float *)(lightProducts + 100) - (double)colorG);
+          colorB = -(double)(float)(normalDotDirection * (double)*(float *)(lightProducts + 0x68) - (double)colorB);
           if (*(char *)(glContext + 0x30ae) == '\0') {
-            fparam_1 = -(double)(float)(fparam_8 * (double)*(float *)(lightParams + 0x2888) +
-                                       (double)(float)(fparam_7 *
+            floatArg1 = -(double)(float)(floatArg8 * (double)*(float *)(lightParams + 0x2888) +
+                                       (double)(float)(floatArg7 *
                                                        (double)*(float *)(lightParams + 0x2880) +
-                                                      (double)(dVar19 * *(float *)(
+                                                      (double)(normalY * *(float *)(
                                                   lightParams + 0x2884))));
           }
           else {
             local_f8 = *(float *)(lightRecord + 0x4a84);
-            local_100 = (float)((double)*(float *)(vertex + 0x48) * fparam_6 -
-                               (double)(dVar19 * dVar16));
-            local_fc = (*(float *)(vertex + 0x40) * dVar16 - (*(float *)(vertex + 0x48) * *(float *)(lightRecord + 0x4a7c)));
-            fVar1 = *(float *)(vertex + 0x44) * local_100 -
-                    (*(float *)(vertex + 0x40) * local_fc);
-            fparam_1 = (double)((fVar1 + fVar1) + dVar16);
+            local_100 = (float)((double)*(float *)(vertex + 0x48) * floatArg6 -
+                               (double)(normalY * directionalLightZ));
+            directionalCrossY = (*(float *)(vertex + 0x40) * directionalLightZ - (*(float *)(vertex + 0x48) * *(float *)(lightRecord + 0x4a7c)));
+            doubleCrossZ = *(float *)(vertex + 0x44) * local_100 -
+                    (*(float *)(vertex + 0x40) * directionalCrossY);
+            floatArg1 = (double)((doubleCrossZ + doubleCrossZ) + directionalLightZ);
           }
-          if ((double)floatZero < fparam_1) {
-            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar5,material + 0x1e8,fparam_1,fparam_2,floatArg3,fparam_4,fparam_5,
-                                  fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
+          if ((double)floatZero < floatArg1) {
+            floatArg1 = ((double (*)())_gleMaterialShinePow)(glContextForCalls,material + 0x1e8,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,
+                                  floatArg6,floatArg7,floatArg8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                   incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-            colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
-            colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
-            colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
-            iVar5 = iVar5;
+            colorB = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
+            colorR = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
+            colorG = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
+            glContextForCalls = glContextForCalls;
           }
         }
       }
@@ -4398,14 +4420,14 @@ LAB_000d74f0:
   goto LAB_000d7548;
 LAB_000d7508:
   if (*(short *)(glContext + 0x30a8) == -0x7e06) {
-    *(float *)(vertex + 0x50) = (float)(double)dVar24;
-    *(float *)(vertex + 0x54) = (float)(double)dVar22;
-    *(float *)(vertex + 0x58) = (float)(double)dVar21;
+    *(float *)(vertex + 0x50) = (float)(double)specularSumR;
+    *(float *)(vertex + 0x54) = (float)(double)specularSumG;
+    *(float *)(vertex + 0x58) = (float)(double)specularSumB;
   }
   else {
-    colorR = (double)(colorR + dVar24);
-    colorG = (double)(colorG + dVar22);
-    colorB = (double)(colorB + dVar21);
+    colorR = (double)(colorR + specularSumR);
+    colorG = (double)(colorG + specularSumG);
+    colorB = (double)(colorB + specularSumB);
   }
   *(undefined4 *)(vertex + 0x3c) = colorAlpha;
   *(float *)(vertex + 0x30) = (float)(double)colorR;
