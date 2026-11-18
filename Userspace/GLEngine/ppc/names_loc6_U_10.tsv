@@ -1,0 +1,6 @@
+local	_glDrawArraysOrElements_ListExec	uVar14	modeThenListFlags	CONFIRMED	first listRecord[5], the primitive mode validated < 10 (GL_POINTS..GL_POLYGON) and passed as the mode argument of the core draw call (listRecord[6] count and [7] elementBytes follow); later reassigned to *listRecord, the record's flag word
+local	_glDrawArraysOrElements_ListExec	param_3	incomingR5	CONFIRMED	unused by the list executor itself (list records carry the data): stale register r5 forwarded to _gleUpdateFramebufferCompleteness
+local	_glDrawArraysOrElements_ListExec	param_4	incomingR6	CONFIRMED	stale register r6 forwarded to _gleUpdateFramebufferCompleteness
+local	_glDrawArraysOrElements_ListExec	param_5	incomingR7	CONFIRMED	stale register r7 forwarded to _gleUpdateFramebufferCompleteness
+local	_glDrawArraysOrElements_ListExec	param_6	incomingR8	CONFIRMED	stale register r8 forwarded to _gleUpdateFramebufferCompleteness
+local	_glDrawArraysOrElements_ListExec	fparam_1	forwardedFloatArg1ThenCalleeResult	CONFIRMED	first float argument forwarded to _gleUpdateFramebufferCompleteness; reassigned to the f1 result of the helper callees; same role as in the NoopExec functions

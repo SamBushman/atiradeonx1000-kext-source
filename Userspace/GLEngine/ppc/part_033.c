@@ -2866,7 +2866,7 @@ void _gleForcePushMaterial(param_1, param_2)
 }
 
 /* _glDrawArraysOrElements_ListExec @ 0xa66f4 (1740 bytes) */
-int _glDrawArraysOrElements_ListExec(int glContext,uint *listRecord,undefined4 param_3,undefined4 param_4,uint param_5,undefined4 param_6,undefined4 unusedArg7,undefined4 unusedArg8,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+int _glDrawArraysOrElements_ListExec(int glContext,uint *listRecord,undefined4 incomingR5,undefined4 incomingR6,uint incomingR7,undefined4 incomingR8,undefined4 unusedArg7,undefined4 unusedArg8,double forwardedFloatArg1ThenCalleeResult,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   bool bVar1;
   bool stateClean;
@@ -2893,14 +2893,14 @@ int _glDrawArraysOrElements_ListExec(int glContext,uint *listRecord,undefined4 p
   int remaining2;
   int loopIndex2;
   int *dirtyFlagWords;
-  uint uVar14;
+  uint modeThenListFlags;
   uint elementBytes;
   uint count;
   double fparam_1_00;
   double extraout_f1;
   double extraout_f1_00;
   
-  uVar14 = listRecord[5];
+  modeThenListFlags = listRecord[5];
   count = listRecord[6];
   elementBytes = listRecord[7];
   if ((*(char *)(glContext + 0x759c) == '\0') || (-1 < *(short *)(glContext + 0x4a10))) {
@@ -2908,7 +2908,7 @@ LAB_000a6788:
     if (*(int *)(glContext + 0x7574) != 0) goto LAB_000a6da4;
     glErrorCode = 0x502;
   }
-  else if (uVar14 < 10) {
+  else if (modeThenListFlags < 10) {
     if (-1 < (int)count) {
       if ((*(char *)(glContext + 0x4664) != '\0') &&
          (*(int *)(*(int *)(glContext + 0x5420) + 0x4cc) == 0)) goto LAB_000a6788;
@@ -2916,7 +2916,7 @@ LAB_000a6788:
       goto LAB_000a6da4;
       cVar6 = *(char *)(glContext + 0x7580);
       if ((cVar6 != '\0') && ((*listRecord & 3) == 2)) {
-        fparam_1 = (double)_gleCreateDrawArraysOrElementsVertexObject(glContext,listRecord);
+        forwardedFloatArg1ThenCalleeResult = (double)_gleCreateDrawArraysOrElementsVertexObject(glContext,listRecord);
         cVar6 = *(char *)(glContext + 0x7580);
       }
       if ((cVar6 == '\0') || ((*listRecord & 3) == 0)) {
@@ -2924,14 +2924,14 @@ LAB_000a6acc:
         matrixFuncDirty = *(int *)(glContext + 0x50ac);
         if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
           _gleUpdateMatrixFunc(glContext);
-          fparam_1 = extraout_f1_00;
+          forwardedFloatArg1ThenCalleeResult = extraout_f1_00;
         }
         if (*(char *)(glContext + 0x4691) != '\0') {
           framebufferObject2 = *(int *)(glContext + 0x744c);
           dirtyFlagWords = (int *)(glContext + 0x310);
           cVar6 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
           if ((framebufferObject2 != 0) && (*(int *)(framebufferObject2 + 0xec) != 0)) {
-            ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject2 + 0x10,param_3,param_4,param_5,param_6,matrixFuncDirty,fparam_1,forwardedFloatArg2
+            ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject2 + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,forwardedFloatArg1ThenCalleeResult,forwardedFloatArg2
                        ,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
             *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
           }
@@ -3027,14 +3027,14 @@ LAB_000a6bbc:
         *(uint **)(glContext + 0x48ec) = listRecord + 5;
         uVar2 = _gleGetVertexArrayFunc(glContext);
         _gleDrawArraysOrElements_Core
-                  (glContext,uVar14,0,count,uVar9,-(uint)*(byte *)((int)listRecord + 0x22) >> 0x1f,0,
+                  (glContext,modeThenListFlags,0,count,uVar9,-(uint)*(byte *)((int)listRecord + 0x22) >> 0x1f,0,
                    uVar2);
         *(undefined4 *)(glContext + 0x48ec) = 0;
-        uVar14 = *listRecord;
+        modeThenListFlags = *listRecord;
       }
       else {
         clientState = *(undefined4 *)(glContext + 0x4a60);
-        param_3 = _gleGetEnabled(glContext,0x851d);
+        incomingR5 = _gleGetEnabled(glContext,0x851d);
         _gleSetCurrentVertexObject(glContext,listRecord[1]);
         uVar2 = 1;
         iVar12 = 0;
@@ -3049,7 +3049,7 @@ LAB_000a6bbc:
           dirtyFlagWords = (int *)(glContext + 0x310);
           cVar6 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
           if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-            ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar2,param_4,param_5,param_6,matrixFuncDirty2,fparam_1_00,forwardedFloatArg2
+            ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar2,incomingR6,incomingR7,incomingR8,matrixFuncDirty2,fparam_1_00,forwardedFloatArg2
                        ,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
             *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
           }
@@ -3126,17 +3126,17 @@ LAB_000a6ca8:
         }
 LAB_000a6a4c:
         if (*(char *)(glContext + 0x7580) != '\0') {
-          param_4 = 0;
-          param_6 = 0x14ff;
-          param_5 = count;
-          iVar12 = _gleExecuteVertexArrayRange(glContext,0,uVar14,0,count,0x14ff,0);
+          incomingR6 = 0;
+          incomingR8 = 0x14ff;
+          incomingR7 = count;
+          iVar12 = _gleExecuteVertexArrayRange(glContext,0,modeThenListFlags,0,count,0x14ff,0);
         }
         _gleSetCurrentVertexObject(glContext,clientState);
-        fparam_1 = (double)_gleSetClientEnableFlag(glContext,0x851d,param_3);
+        forwardedFloatArg1ThenCalleeResult = (double)_gleSetClientEnableFlag(glContext,0x851d,incomingR5);
         if (iVar12 == 0) goto LAB_000a6acc;
-        uVar14 = *listRecord;
+        modeThenListFlags = *listRecord;
       }
-      if ((uVar14 & 4) != 0) {
+      if ((modeThenListFlags & 4) != 0) {
         _gleDrawArraysSyncState(glContext,listRecord + 5);
       }
       goto LAB_000a6da4;

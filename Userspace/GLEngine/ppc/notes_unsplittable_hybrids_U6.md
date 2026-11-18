@@ -14,6 +14,7 @@ A pure rename must leave the image byte-identical. These names changed gcc's reg
 | U6_2 | `_gleRenderFlatQuadStripFunc_body` | bVar2 | orientationChanged | register allocation |
 | U6_5 | `_glGetPixelMapuiv_Exec` | iVar3 | mapSizeThenByteOffset | `stwx r2,r9,r28` became `stwx r2,r28,r9` (operand order) |
 | U6_6 | `_glGetPixelMapuiv_Exec` | iVar6 | pixelPackBuffer | `li r9`/`li r11` allocation swap |
+| U6_13 | `_gleDrawArraysOrElementsOutOfLine_ListExec` | iVar14, piVar12, uVar11 | drawRecord, drawMode, drawCount | register swap r25/r26 (the names reorder gcc's allocation) |
 | U6_8 | `_gleSwitchToRenderer` | param_2, uVar1, uVar5, uVar6, puVar4 | rendererIndex, rendererHandle, newDirtyFlags31c, dispatchSlot, finishFunc | store order and register allocation (0x318/0x31c stores swapped, bctrl moved) |
 
 Rows withheld to protect earlier anchored rows (not a gate failure): `_glGetVertexAttribfvARB_Exec` iVar5 (indexedRecord) and remaining3 (elementCount). Earlier rows in `names_loc_B_07.tsv` anchor on lines that contain `iVar5`, so renaming it made `apply_names.py --check` report 4 new anchor-not-found errors (96 instead of 94 plus 2 chain errors in `_glArrayElement_Comp`). The names are TRUE and can be applied once B_07 is rebased onto final names.
@@ -35,7 +36,7 @@ Each of these is a variable that holds several unrelated values over its lifetim
 * `_LFSParserParseRegisterInit`: iVar2/iVar3 are reused for token compare results, error codes and list nodes.
 * `_gleGetState` iVar13: offset, pointer and value in different pname branches; param_5 is an out flag set to 1 together with valueType 0x140a but no caller reads it, so its role is not established.
 * `_glGetProgramivARB_Exec` uVar4, `_gleCheckTexImageArgs` bVar1: compare temporaries.
-* `_gleDrawArraysOrElementsOutOfLine_ListExec`, `_glDrawArraysOrElements_ListExec`: the display-list argument record offsets (puVar13/iVar14/piVar12/uVar11) were not traced to GL arguments.
+* `_gleDrawArraysOrElementsOutOfLine_ListExec`: roles are known (iVar14 = drawRecord passed to _gleSetupOutOfLineDrawPointers, piVar12 = mode, uVar11 = count passed to _gleDrawArraysOrElements_Core) but naming them changes register allocation (gate U6_13), so they stay placeholders; puVar13 and the mixed uVar9 are separate flag roles.
 
 ## More hybrids
 
