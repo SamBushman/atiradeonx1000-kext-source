@@ -2101,10 +2101,10 @@ int _glMultiDrawElements_Comp(glContext, mode, count, type, indices, primcount)
 }
 
 /* _glMultiDrawElements_Exec @ 0xaaa80 (136 bytes) */
-void _glMultiDrawElements_Exec(int glContext,undefined4 mode,undefined4 *count,undefined4 type,undefined4 indices,int primcount,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glMultiDrawElements_Exec(int glContext,undefined4 mode,undefined4 *count,undefined4 type,undefined4 indices,int primcount,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   undefined4 uVar1;
-  double extraout_f1;
+  double f1AfterCall;
   
   if (primcount < 0) {
     if (*(int *)(glContext + 0x7574) == 0) {
@@ -2115,10 +2115,10 @@ void _glMultiDrawElements_Exec(int glContext,undefined4 mode,undefined4 *count,u
     do {
       uVar1 = *count;
       count = count + 1;
-      ((void (*)())_glDrawElements_STD_Exec)(glContext,mode,uVar1,type,indices,fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,
+      ((void (*)())_glDrawElements_STD_Exec)(glContext,mode,uVar1,type,indices,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,
                  forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       primcount = primcount + -1;
-      fparam_1 = extraout_f1;
+      forwardedFloatArg1 = f1AfterCall;
     } while (primcount != 0);
   }
   return;

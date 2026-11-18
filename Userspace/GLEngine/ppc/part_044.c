@@ -1967,28 +1967,28 @@ double _gleMaterialShinePow(undefined4 unusedArg1,int param_2,float floatArg1,do
 }
 
 /* _gleLightExponentPow @ 0xd4538 (176 bytes) */
-double _gleLightExponentPow(undefined4 unusedArg1,int param_2,float floatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+double _gleLightExponentPow(undefined4 unusedArg1,int exponentTable,float floatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  uint uVar1;
-  float fVar2;
-  int iVar3;
-  float dVar4;
-  float dVar5;
+  uint tableIndex;
+  float scaledIndex;
+  int tableEntry;
+  float one;
+  float fraction;
   
-  dVar4 = (double)FLOAT_00108e54;
-  if ((double)dVar4 < floatArg1) {
-    return (double)((floatArg1 - dVar4) * *(float *)(param_2 + 0x34) + dVar4);
+  one = (double)FLOAT_00108e54;
+  if ((double)one < floatArg1) {
+    return (double)((floatArg1 - one) * *(float *)(exponentTable + 0x34) + one);
   }
-  if (floatArg1 <= (double)*(float *)(param_2 + 0x28)) {
-    return (double)(floatArg1 * *(float *)(param_2 + 0x30));
+  if (floatArg1 <= (double)*(float *)(exponentTable + 0x28)) {
+    return (double)(floatArg1 * *(float *)(exponentTable + 0x30));
   }
-  fVar2 = (floatArg1 - *(float *)(param_2 + 0x28)) * *(float *)(param_2 + 0x2c);
-  uVar1 = (uint)(int)fVar2;
-  iVar3 = uVar1 * 4 + param_2;
-  dVar5 = (double)(fVar2 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58
+  scaledIndex = (floatArg1 - *(float *)(exponentTable + 0x28)) * *(float *)(exponentTable + 0x2c);
+  tableIndex = (uint)(int)scaledIndex;
+  tableEntry = tableIndex * 4 + exponentTable;
+  fraction = (double)(scaledIndex - (float)((double)CONCAT44(0x43300000,tableIndex ^ 0x80000000) - DOUBLE_00108d58
                                   ));
-  return (double)((dVar4 - dVar5) * *(float *)(iVar3 + 0x38) +
-                 (dVar5 * *(float *)(iVar3 + 0x3c)));
+  return (double)((one - fraction) * *(float *)(tableEntry + 0x38) +
+                 (fraction * *(float *)(tableEntry + 0x3c)));
 }
 
 /* _gleVtxLightRGBAFront_body @ 0xd45ec (1180 bytes) */

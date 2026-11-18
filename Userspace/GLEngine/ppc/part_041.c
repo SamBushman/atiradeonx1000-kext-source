@@ -2117,15 +2117,15 @@ int _gleSwitchToRenderer(glContext, param_2)
 }
 
 /* _gleRecoverySaveState @ 0xc80d4 (280 bytes) */
-double _gleRecoverySaveState(glContext, param_2)
+double _gleRecoverySaveState(glContext, recoveryStateBuffer)
   int glContext;
-  int *param_2;
+  int *recoveryStateBuffer;
 {
-  int iVar1;
+  int savedUnitWord;
   int loopIndex;
-  int *piVar3;
-  int iVar4;
-  double fparam_1;
+  int *saveCursor;
+  int unitState;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -2134,38 +2134,38 @@ double _gleRecoverySaveState(glContext, param_2)
   double incomingFpr7;
   double incomingFpr8;
   
-  *(undefined1 *)(param_2 + 0x12) = *(undefined1 *)(glContext + 0x3128);
-  if (*(char *)(param_2 + 0x12) != '\0') {
+  *(undefined1 *)(recoveryStateBuffer + 0x12) = *(undefined1 *)(glContext + 0x3128);
+  if (*(char *)(recoveryStateBuffer + 0x12) != '\0') {
     _glDisable_Exec(glContext,0xb71);
   }
-  *(undefined1 *)((int)param_2 + 0x4a) = *(undefined1 *)(glContext + 0x30c6);
-  if (*(char *)((int)param_2 + 0x4a) != '\0') {
+  *(undefined1 *)((int)recoveryStateBuffer + 0x4a) = *(undefined1 *)(glContext + 0x30c6);
+  if (*(char *)((int)recoveryStateBuffer + 0x4a) != '\0') {
     _glDisable_Exec(glContext,0xbc0);
   }
   loopIndex = 0;
   if (*(short *)(*(int *)(glContext + 0x468c) + 0xb4) != 0) {
-    iVar4 = glContext + 0x3530;
-    piVar3 = param_2;
+    unitState = glContext + 0x3530;
+    saveCursor = recoveryStateBuffer;
     do {
-      iVar1 = *(int *)(iVar4 + 4);
-      *piVar3 = iVar1;
-      piVar3 = piVar3 + 1;
-      if (iVar1 != 0) {
-        *(undefined4 *)(iVar4 + 4) = 0;
+      savedUnitWord = *(int *)(unitState + 4);
+      *saveCursor = savedUnitWord;
+      saveCursor = saveCursor + 1;
+      if (savedUnitWord != 0) {
+        *(undefined4 *)(unitState + 4) = 0;
         _gleUpdateTextureParams(glContext,loopIndex);
       }
       loopIndex = loopIndex + 1;
-      iVar4 = iVar4 + 0x7c;
+      unitState = unitState + 0x7c;
     } while (loopIndex < (int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xb4));
   }
-  param_2[0x10] = (uint)*(byte *)(glContext + 0x466c);
-  fparam_1 = (double)_glDisable_Exec(glContext,0x8804);
+  recoveryStateBuffer[0x10] = (uint)*(byte *)(glContext + 0x466c);
+  forwardedFloatArg1 = (double)_glDisable_Exec(glContext,0x8804);
   if (*(int *)(glContext + 0x5430) == 0) {
-    param_2[0x11] = 0;
+    recoveryStateBuffer[0x11] = 0;
   }
   else {
-    param_2[0x11] = *(int *)(*(int *)(glContext + 0x5430) + 4);
-    ((void (*)())_glUseProgramObjectARB_Exec)(glContext,0,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+    recoveryStateBuffer[0x11] = *(int *)(*(int *)(glContext + 0x5430) + 4);
+    ((void (*)())_glUseProgramObjectARB_Exec)(glContext,0,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   }
                     
                     

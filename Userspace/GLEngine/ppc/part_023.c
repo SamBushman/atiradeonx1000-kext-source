@@ -314,14 +314,14 @@ void _glRasterPos3dv_Comp(glContext, v)
 }
 
 /* _glRasterPos3dv_Exec @ 0x81074 (712 bytes) */
-void _glRasterPos3dv_Exec(int glContext,double *v,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glRasterPos3dv_Exec(int glContext,double *v,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   bool bVar1;
   bool stateClean;
   char cVar2;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -333,7 +333,7 @@ void _glRasterPos3dv_Exec(int glContext,double *v,double fparam_1,double forward
   uint dirtyWord3ThenMasked;
   uint dispatchFlags;
   int *dirtyFlagWords;
-  double extraout_f1;
+  double f1AfterCall;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -346,14 +346,14 @@ void _glRasterPos3dv_Exec(int glContext,double *v,double fparam_1,double forward
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1;
+    forwardedFloatArg1 = f1AfterCall;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_000812f0;
   framebufferObject = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
   cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -365,9 +365,9 @@ LAB_000811c8:
     loopIndex = 0;
     srcCursor = (int *)(glContext + 0x324);
     do {
-      iVar5 = *srcCursor;
+      dirtyWord = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (iVar5 != 0) {
+      if (dirtyWord != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
@@ -1115,14 +1115,14 @@ void _glRasterPos3s_Comp(glContext, x, y, z)
 }
 
 /* _glRasterPos3s_Exec @ 0x821f8 (756 bytes) */
-void _glRasterPos3s_Exec(int glContext,uint x,uint y,uint z,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glRasterPos3s_Exec(int glContext,uint x,uint y,uint z,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   bool bVar1;
   bool stateClean;
   char cVar2;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyWord;
   int framebufferObject;
   uint uVar6;
   undefined4 incomingR7;
@@ -1134,7 +1134,7 @@ void _glRasterPos3s_Exec(int glContext,uint x,uint y,uint z,double fparam_1,doub
   uint dispatchFlags;
   uint dirtyWord3ThenMasked;
   int *dirtyFlagWords;
-  double extraout_f1;
+  double f1AfterCall;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
@@ -1143,14 +1143,14 @@ void _glRasterPos3s_Exec(int glContext,uint x,uint y,uint z,double fparam_1,doub
       uVar6 = z;
       if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
         _gleUpdateMatrixFunc(glContext);
-        fparam_1 = extraout_f1;
+        forwardedFloatArg1 = f1AfterCall;
       }
       if (*(char *)(glContext + 0x4691) != '\0') {
         framebufferObject = *(int *)(glContext + 0x744c);
         dirtyFlagWords = (int *)(glContext + 0x310);
         cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
         if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar8,uVar6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar8,uVar6,incomingR7,incomingR8,matrixFuncDirty,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                      forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         }
@@ -1162,9 +1162,9 @@ LAB_00082354:
           loopIndex = 0;
           srcCursor = (int *)(glContext + 0x324);
           do {
-            iVar5 = *srcCursor;
+            dirtyWord = *srcCursor;
             srcCursor = srcCursor + 1;
-            if (iVar5 != 0) {
+            if (dirtyWord != 0) {
               *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
               break;
             }
@@ -1285,14 +1285,14 @@ void _glRasterPos3sv_Comp(glContext, v)
 }
 
 /* _glRasterPos3sv_Exec @ 0x825c4 (760 bytes) */
-void _glRasterPos3sv_Exec(int glContext,short *v,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glRasterPos3sv_Exec(int glContext,short *v,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   bool bVar1;
   bool stateClean;
   char cVar2;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -1304,21 +1304,21 @@ void _glRasterPos3sv_Exec(int glContext,short *v,double fparam_1,double forwarde
   uint dirtyWord3ThenMasked;
   uint dispatchFlags;
   int *dirtyFlagWords;
-  double extraout_f1;
+  double f1AfterCall;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
       matrixFuncDirty = *(int *)(glContext + 0x50ac);
       if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
         _gleUpdateMatrixFunc(glContext);
-        fparam_1 = extraout_f1;
+        forwardedFloatArg1 = f1AfterCall;
       }
       if (*(char *)(glContext + 0x4691) != '\0') {
         framebufferObject = *(int *)(glContext + 0x744c);
         dirtyFlagWords = (int *)(glContext + 0x310);
         cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
         if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                      forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         }
@@ -1330,9 +1330,9 @@ LAB_00082718:
           loopIndex = 0;
           srcCursor = (int *)(glContext + 0x324);
           do {
-            iVar5 = *srcCursor;
+            dirtyWord = *srcCursor;
             srcCursor = srcCursor + 1;
-            if (iVar5 != 0) {
+            if (dirtyWord != 0) {
               *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
               break;
             }
@@ -1451,7 +1451,7 @@ void _glRasterPos4d_Exec(int glContext,double x,double y,double z,double w,doubl
   char cVar2;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -1504,9 +1504,9 @@ LAB_00082a60:
     loopIndex = 0;
     srcCursor = (int *)(glContext + 0x324);
     do {
-      iVar5 = *srcCursor;
+      dirtyWord = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (iVar5 != 0) {
+      if (dirtyWord != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
@@ -2229,14 +2229,14 @@ void _glRasterPos4iv_Comp(glContext, v)
 }
 
 /* _glRasterPos4iv_Exec @ 0x839f0 (776 bytes) */
-void _glRasterPos4iv_Exec(int glContext,uint *v,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glRasterPos4iv_Exec(int glContext,uint *v,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   bool bVar1;
   bool stateClean;
   char cVar2;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -2248,21 +2248,21 @@ void _glRasterPos4iv_Exec(int glContext,uint *v,double fparam_1,double forwarded
   uint dirtyWord3ThenMasked;
   uint dispatchFlags;
   int *dirtyFlagWords;
-  double extraout_f1;
+  double f1AfterCall;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
       matrixFuncDirty = *(int *)(glContext + 0x50ac);
       if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
         _gleUpdateMatrixFunc(glContext);
-        fparam_1 = extraout_f1;
+        forwardedFloatArg1 = f1AfterCall;
       }
       if (*(char *)(glContext + 0x4691) != '\0') {
         framebufferObject = *(int *)(glContext + 0x744c);
         dirtyFlagWords = (int *)(glContext + 0x310);
         cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
         if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                      forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         }
@@ -2274,9 +2274,9 @@ LAB_00083b44:
           loopIndex = 0;
           srcCursor = (int *)(glContext + 0x324);
           do {
-            iVar5 = *srcCursor;
+            dirtyWord = *srcCursor;
             srcCursor = srcCursor + 1;
-            if (iVar5 != 0) {
+            if (dirtyWord != 0) {
               *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
               break;
             }
@@ -2398,14 +2398,14 @@ void _glRasterPos4s_Comp(glContext, x, y, z, w)
 }
 
 /* _glRasterPos4s_Exec @ 0x83dc0 (772 bytes) */
-void _glRasterPos4s_Exec(int glContext,uint x,uint y,uint z,uint w,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glRasterPos4s_Exec(int glContext,uint x,uint y,uint z,uint w,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   bool bVar1;
   bool stateClean;
   char cVar2;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyWord;
   int framebufferObject;
   uint uVar6;
   uint uVar7;
@@ -2417,7 +2417,7 @@ void _glRasterPos4s_Exec(int glContext,uint x,uint y,uint z,uint w,double fparam
   uint dispatchFlags;
   uint dirtyWord3ThenMasked;
   int *dirtyFlagWords;
-  double extraout_f1;
+  double f1AfterCall;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
@@ -2427,14 +2427,14 @@ void _glRasterPos4s_Exec(int glContext,uint x,uint y,uint z,uint w,double fparam
       uVar7 = w;
       if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
         _gleUpdateMatrixFunc(glContext);
-        fparam_1 = extraout_f1;
+        forwardedFloatArg1 = f1AfterCall;
       }
       if (*(char *)(glContext + 0x4691) != '\0') {
         framebufferObject = *(int *)(glContext + 0x744c);
         dirtyFlagWords = (int *)(glContext + 0x310);
         cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
         if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar9,uVar6,uVar7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar9,uVar6,uVar7,incomingR8,matrixFuncDirty,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                      forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         }
@@ -2446,9 +2446,9 @@ LAB_00083f20:
           loopIndex = 0;
           srcCursor = (int *)(glContext + 0x324);
           do {
-            iVar5 = *srcCursor;
+            dirtyWord = *srcCursor;
             srcCursor = srcCursor + 1;
-            if (iVar5 != 0) {
+            if (dirtyWord != 0) {
               *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
               break;
             }

@@ -719,51 +719,51 @@ int _glUniformMatrix3fvARB_Comp(glContext, location, count, transpose, value)
   undefined4 *value;
 {
   int loopIndex;
-  undefined4 *puVar2;
+  undefined4 *listRecordThenWriteCursor;
   
-  puVar2 = (undefined4 *)
+  listRecordThenWriteCursor = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniformMatrix3fvARB_ListExec_001102bc,count * 0x24 + 8);
-  if (puVar2 != (undefined4 *)0x0) {
-    puVar2[1] = count;
-    *puVar2 = location;
-    puVar2 = puVar2 + 2;
+  if (listRecordThenWriteCursor != (undefined4 *)0x0) {
+    listRecordThenWriteCursor[1] = count;
+    *listRecordThenWriteCursor = location;
+    listRecordThenWriteCursor = listRecordThenWriteCursor + 2;
     loopIndex = 0;
     if (transpose == 0) {
       while( true ) {
-        *puVar2 = *value;
-        puVar2[1] = value[1];
-        puVar2[2] = value[2];
-        puVar2[3] = value[3];
-        puVar2[4] = value[4];
-        puVar2[5] = value[5];
-        puVar2[6] = value[6];
-        puVar2[7] = value[7];
-        puVar2[8] = value[8];
+        *listRecordThenWriteCursor = *value;
+        listRecordThenWriteCursor[1] = value[1];
+        listRecordThenWriteCursor[2] = value[2];
+        listRecordThenWriteCursor[3] = value[3];
+        listRecordThenWriteCursor[4] = value[4];
+        listRecordThenWriteCursor[5] = value[5];
+        listRecordThenWriteCursor[6] = value[6];
+        listRecordThenWriteCursor[7] = value[7];
+        listRecordThenWriteCursor[8] = value[8];
         if (loopIndex == count + -1) break;
-        puVar2 = puVar2 + 9;
+        listRecordThenWriteCursor = listRecordThenWriteCursor + 9;
         value = value + 9;
         loopIndex = loopIndex + 1;
       }
     }
     else {
       while( true ) {
-        *puVar2 = *value;
-        puVar2[3] = value[1];
-        puVar2[6] = value[2];
-        puVar2[1] = value[3];
-        puVar2[4] = value[4];
-        puVar2[7] = value[5];
-        puVar2[2] = value[6];
-        puVar2[5] = value[7];
-        puVar2[8] = value[8];
+        *listRecordThenWriteCursor = *value;
+        listRecordThenWriteCursor[3] = value[1];
+        listRecordThenWriteCursor[6] = value[2];
+        listRecordThenWriteCursor[1] = value[3];
+        listRecordThenWriteCursor[4] = value[4];
+        listRecordThenWriteCursor[7] = value[5];
+        listRecordThenWriteCursor[2] = value[6];
+        listRecordThenWriteCursor[5] = value[7];
+        listRecordThenWriteCursor[8] = value[8];
         if (loopIndex == count + -1) break;
-        puVar2 = puVar2 + 9;
+        listRecordThenWriteCursor = listRecordThenWriteCursor + 9;
         value = value + 9;
         loopIndex = loopIndex + 1;
       }
     }
   }
-  return puVar2;
+  return listRecordThenWriteCursor;
 }
 
 /* _glUniformMatrix4fvARB_Comp @ 0x8db6c (420 bytes) */

@@ -3813,27 +3813,27 @@ int _glUniform4fvARB_Comp(glContext, location, count, value)
   undefined4 *value;
 {
   int loopIndex;
-  undefined4 *puVar2;
+  undefined4 *listRecordThenWriteCursor;
   
-  puVar2 = (undefined4 *)
+  listRecordThenWriteCursor = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform4fvARB_ListExec_001102f0,count * 0x10 + 8);
-  if (puVar2 != (undefined4 *)0x0) {
-    puVar2[1] = count;
+  if (listRecordThenWriteCursor != (undefined4 *)0x0) {
+    listRecordThenWriteCursor[1] = count;
     loopIndex = 0;
-    *puVar2 = location;
-    puVar2 = puVar2 + 2;
+    *listRecordThenWriteCursor = location;
+    listRecordThenWriteCursor = listRecordThenWriteCursor + 2;
     while( true ) {
-      *puVar2 = *value;
-      puVar2[1] = value[1];
-      puVar2[2] = value[2];
-      puVar2[3] = value[3];
+      *listRecordThenWriteCursor = *value;
+      listRecordThenWriteCursor[1] = value[1];
+      listRecordThenWriteCursor[2] = value[2];
+      listRecordThenWriteCursor[3] = value[3];
       if (loopIndex == count + -1) break;
-      puVar2 = puVar2 + 4;
+      listRecordThenWriteCursor = listRecordThenWriteCursor + 4;
       value = value + 4;
       loopIndex = loopIndex + 1;
     }
   }
-  return puVar2;
+  return listRecordThenWriteCursor;
 }
 
 /* _glUniform3fvARB_Comp @ 0x8c08c (152 bytes) */
@@ -3874,27 +3874,27 @@ int _glUniform2fvARB_Comp(glContext, location, count, value)
   undefined4 *value;
 {
   int loopIndex;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
+  undefined4 *listRecordThenPreviousSlot;
+  undefined4 *vectorSlot;
   
-  puVar2 = (undefined4 *)
+  listRecordThenPreviousSlot = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform2fvARB_ListExec_001102e8,count * 8 + 8);
-  puVar3 = (undefined4 *)0x0;
-  if (puVar2 != (undefined4 *)0x0) {
-    puVar2[1] = count;
+  vectorSlot = (undefined4 *)0x0;
+  if (listRecordThenPreviousSlot != (undefined4 *)0x0) {
+    listRecordThenPreviousSlot[1] = count;
     loopIndex = 0;
-    *puVar2 = location;
+    *listRecordThenPreviousSlot = location;
     while( true ) {
-      puVar3 = puVar2 + 2;
-      *puVar3 = *value;
-      puVar2[3] = value[1];
+      vectorSlot = listRecordThenPreviousSlot + 2;
+      *vectorSlot = *value;
+      listRecordThenPreviousSlot[3] = value[1];
       if (loopIndex == count + -1) break;
       value = value + 2;
       loopIndex = loopIndex + 1;
-      puVar2 = puVar3;
+      listRecordThenPreviousSlot = vectorSlot;
     }
   }
-  return puVar3;
+  return vectorSlot;
 }
 
 /* _glUniform1fvARB_Comp @ 0x8c1b4 (136 bytes) */
@@ -4035,27 +4035,27 @@ int _glUniform3ivARB_Comp(glContext, location, count, value)
   int count;
   undefined4 *value;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecordThenWriteCursor;
   int loopIndex;
   
-  puVar1 = (undefined4 *)
+  listRecordThenWriteCursor = (undefined4 *)
            _gleAddListItem(glContext,PTR__glUniform3ivARB_ListExec_001102cc,count * 0xc + 8);
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[1] = count;
+  if (listRecordThenWriteCursor != (undefined4 *)0x0) {
+    listRecordThenWriteCursor[1] = count;
     loopIndex = 0;
-    *puVar1 = location;
-    puVar1 = puVar1 + 2;
+    *listRecordThenWriteCursor = location;
+    listRecordThenWriteCursor = listRecordThenWriteCursor + 2;
     while( true ) {
-      *puVar1 = *value;
-      puVar1[1] = value[1];
-      puVar1[2] = value[2];
+      *listRecordThenWriteCursor = *value;
+      listRecordThenWriteCursor[1] = value[1];
+      listRecordThenWriteCursor[2] = value[2];
       if (loopIndex == count + -1) break;
-      puVar1 = puVar1 + 3;
+      listRecordThenWriteCursor = listRecordThenWriteCursor + 3;
       value = value + 3;
       loopIndex = loopIndex + 1;
     }
   }
-  return puVar1;
+  return listRecordThenWriteCursor;
 }
 
 /* _glUniform2ivARB_Comp @ 0x8c4f4 (144 bytes) */

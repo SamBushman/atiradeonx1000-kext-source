@@ -4492,16 +4492,16 @@ void _gleSetEnable_TEXTURE_RECTANGLE_EXT(glContext, unusedArg2, param_3)
 }
 
 /* _glBegin_Exec @ 0x1cacc (704 bytes) */
-void _glBegin_Exec(int glContext,uint mode,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glBegin_Exec(int glContext,uint mode,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
-  bool bVar1;
+  bool rendererInfoByte79Zero;
   bool noStateChangePending;
   char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -4511,7 +4511,7 @@ void _glBegin_Exec(int glContext,uint mode,double fparam_1,double forwardedFloat
   uint dispatchFlags;
   uint changeWord3;
   int *changeWordCursor;
-  double extraout_f1;
+  double f1AfterCall;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -4530,14 +4530,14 @@ void _glBegin_Exec(int glContext,uint mode,double fparam_1,double forwardedFloat
   matrixChangeBits = *(int *)(glContext + 0x50ac);
   if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1;
+    forwardedFloatArg1 = f1AfterCall;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_0001cd44;
   framebufferObject = *(int *)(glContext + 0x744c);
   changeWordCursor = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -4549,9 +4549,9 @@ LAB_0001cc1c:
     loopIndex = 0;
     srcCursor = (int *)(glContext + 0x324);
     do {
-      iVar5 = *srcCursor;
+      dirtyWord = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (iVar5 != 0) {
+      if (dirtyWord != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
@@ -4568,14 +4568,14 @@ LAB_0001cc1c:
       goto LAB_0001cc1c;
     }
   }
-  bVar1 = rendererInfoByte79 == '\0';
-  if (bVar1) {
+  rendererInfoByte79Zero = rendererInfoByte79 == '\0';
+  if (rendererInfoByte79Zero) {
     changeWord3 = changeWord3 & 0x17000000;
   }
   else {
     changeWord3 = changeWord3 & 0x17ffffff;
   }
-  if (bVar1) {
+  if (rendererInfoByte79Zero) {
     noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
             *(int *)(glContext + 800) == 0;
   }
@@ -5444,37 +5444,37 @@ int _gleCalculateOptions(functionId, attributeCount)
 }
 
 /* _gleLoadForOptionsNO @ 0x1e0f8 (172 bytes) */
-int _gleLoadForOptionsNO(param_1, param_2)
-  undefined4 *param_1;
-  uint param_2;
+int _gleLoadForOptionsNO(codeCursor, optionBits)
+  undefined4 *codeCursor;
+  uint optionBits;
 {
-  if ((param_2 & 1) != 0) {
-    *param_1 = 0x81634dd0;
-    param_1 = param_1 + 1;
+  if ((optionBits & 1) != 0) {
+    *codeCursor = 0x81634dd0;
+    codeCursor = codeCursor + 1;
   }
-  if ((param_2 & 2) != 0) {
-    *param_1 = 0x81834dd4;
-    param_1 = param_1 + 1;
+  if ((optionBits & 2) != 0) {
+    *codeCursor = 0x81834dd4;
+    codeCursor = codeCursor + 1;
   }
-  if ((param_2 & 4) != 0) {
-    *param_1 = 0x8043002c;
-    param_1[1] = 0xc94200e0;
-    param_1[2] = 0xc96200e8;
-    param_1 = param_1 + 3;
+  if ((optionBits & 4) != 0) {
+    *codeCursor = 0x8043002c;
+    codeCursor[1] = 0xc94200e0;
+    codeCursor[2] = 0xc96200e8;
+    codeCursor = codeCursor + 3;
   }
-  if ((param_2 & 8) != 0) {
-    *param_1 = 0xc0e30020;
-    param_1 = param_1 + 1;
+  if ((optionBits & 8) != 0) {
+    *codeCursor = 0xc0e30020;
+    codeCursor = codeCursor + 1;
   }
-  if ((param_2 & 0x10) != 0) {
-    *param_1 = 0xc1030024;
-    param_1 = param_1 + 1;
+  if ((optionBits & 0x10) != 0) {
+    *codeCursor = 0xc1030024;
+    codeCursor = codeCursor + 1;
   }
-  if ((param_2 & 0x20) == 0) {
-    return param_1;
+  if ((optionBits & 0x20) == 0) {
+    return codeCursor;
   }
-  *param_1 = 0xc9230020;
-  return param_1 + 1;
+  *codeCursor = 0xc9230020;
+  return codeCursor + 1;
 }
 
 /* _gleStoreDataElementNO @ 0x1e1a4 (2540 bytes) */

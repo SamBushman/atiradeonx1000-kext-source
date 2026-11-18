@@ -3972,28 +3972,29 @@ LAB_0004ab74:
 }
 
 /* _gleLightMaterialShineChange_F @ 0x4ab90 (180 bytes) */
-void _gleLightMaterialShineChange_F(int glContext,float fparam_1)
+void _gleLightMaterialShineChange_F(int glContext,float shininess)
 {
-  byte bVar1;
-  int iVar2;
+  byte dirtyBitIndex;
+  int material;
+  int dirtyWord348;
   int glContextPtr5424;
-  int iVar3;
+  int dirtyWord324;
   
-  iVar2 = _glePushMaterial(glContext,0);
-  *(float *)(iVar2 + 0x40) = (float)fparam_1;
-  *(ushort *)(iVar2 + 0x234) = *(ushort *)(iVar2 + 0x234) | 0x101;
+  material = _glePushMaterial(glContext,0);
+  *(float *)(material + 0x40) = (float)shininess;
+  *(ushort *)(material + 0x234) = *(ushort *)(material + 0x234) | 0x101;
   if (*(int *)(glContext + 0x5434) == 0) {
-    bVar1 = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c4);
+    dirtyBitIndex = *(byte *)(*(int *)(glContext + 0x5420) + 0x2c4);
   }
   else {
-    bVar1 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f8);
+    dirtyBitIndex = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f8);
   }
-  iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
+  dirtyWord324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
   glContextPtr5424 = *(int *)(glContext + 0x5424);
-  *(uint *)(iVar3 + 0x324) = *(uint *)(iVar3 + 0x324) | 1 << (bVar1 & 0x1f);
-  bVar1 = *(byte *)(glContextPtr5424 + 0x2c4);
-  iVar2 = (bVar1 >> 3 & 0x1c) + glContext;
-  *(uint *)(iVar2 + 0x348) = *(uint *)(iVar2 + 0x348) | 1 << (bVar1 & 0x1f);
+  *(uint *)(dirtyWord324 + 0x324) = *(uint *)(dirtyWord324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+  dirtyBitIndex = *(byte *)(glContextPtr5424 + 0x2c4);
+  dirtyWord348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  *(uint *)(dirtyWord348 + 0x348) = *(uint *)(dirtyWord348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
   return;
 }
 

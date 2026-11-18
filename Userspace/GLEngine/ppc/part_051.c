@@ -428,29 +428,29 @@ void _gleBeginPointsSelectFeedback(glContext)
 }
 
 /* _gleClipPoints @ 0xea9e4 (76 bytes) */
-int _gleClipPoints(unusedArg1, param_2, param_3, param_4)
+int _gleClipPoints(unusedArg1, vertexCursor, vertexCount, pointList)
   undefined4 unusedArg1;
-  uint param_2;
-  int param_3;
-  uint *param_4;
+  uint vertexCursor;
+  int vertexCount;
+  uint *pointList;
 {
-  uint uVar1;
-  uint *puVar2;
+  uint vertexEndThenRemaining;
+  uint *listCursor;
   
-  uVar1 = param_2 + param_3 * 0x100;
-  puVar2 = param_4;
-  if (param_2 < uVar1) {
-    uVar1 = (uVar1 - param_2) + 0xff >> 8;
+  vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
+  listCursor = pointList;
+  if (vertexCursor < vertexEndThenRemaining) {
+    vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
     do {
-      if (*(char *)(param_2 + 0x7f) == '\0') {
-        *puVar2 = param_2;
-        puVar2 = puVar2 + 1;
+      if (*(char *)(vertexCursor + 0x7f) == '\0') {
+        *listCursor = vertexCursor;
+        listCursor = listCursor + 1;
       }
-      param_2 = param_2 + 0x100;
-      uVar1 = uVar1 - 1;
-    } while (uVar1 != 0);
+      vertexCursor = vertexCursor + 0x100;
+      vertexEndThenRemaining = vertexEndThenRemaining - 1;
+    } while (vertexEndThenRemaining != 0);
   }
-  return (int)puVar2 - (int)param_4 >> 2;
+  return (int)listCursor - (int)pointList >> 2;
 }
 
 /* _gleClipPointsPlane @ 0xeaa30 (244 bytes) */

@@ -801,37 +801,39 @@ void _gleFreeVertexArrayState(glContext)
 }
 
 /* _gleFreeVertexArrayObject @ 0x30200 (196 bytes) */
-int _gleFreeVertexArrayObject(glContext, param_2)
+int _gleFreeVertexArrayObject(glContext, vertexArrayObject)
   undefined4 glContext;
-  int param_2;
+  int vertexArrayObject;
 {
   int remaining;
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int newRefCount;
+  int attribBuffer;
+  int attribNewRefCount;
+  int arrayBuffer;
+  int elementArrayBuffer;
   int *srcCursor;
   
-  ((void (*)())_gleDestroyPluginVertexArray)(glContext,param_2 + 0x10);
-  iVar3 = *(int *)(param_2 + 0x358);
-  if ((iVar3 != 0) && (iVar1 = *(int *)(iVar3 + 8) + -1, *(int *)(iVar3 + 8) = iVar1, iVar1 == 0)) {
-    _gleFreeBufferObject(glContext,iVar3);
+  ((void (*)())_gleDestroyPluginVertexArray)(glContext,vertexArrayObject + 0x10);
+  arrayBuffer = *(int *)(vertexArrayObject + 0x358);
+  if ((arrayBuffer != 0) && (newRefCount = *(int *)(arrayBuffer + 8) + -1, *(int *)(arrayBuffer + 8) = newRefCount, newRefCount == 0)) {
+    _gleFreeBufferObject(glContext,arrayBuffer);
   }
-  iVar3 = *(int *)(param_2 + 0x35c);
-  if ((iVar3 != 0) && (iVar1 = *(int *)(iVar3 + 8) + -1, *(int *)(iVar3 + 8) = iVar1, iVar1 == 0)) {
-    _gleFreeBufferObject(glContext,iVar3);
+  elementArrayBuffer = *(int *)(vertexArrayObject + 0x35c);
+  if ((elementArrayBuffer != 0) && (newRefCount = *(int *)(elementArrayBuffer + 8) + -1, *(int *)(elementArrayBuffer + 8) = newRefCount, newRefCount == 0)) {
+    _gleFreeBufferObject(glContext,elementArrayBuffer);
   }
-  srcCursor = (int *)(param_2 + 0x360);
+  srcCursor = (int *)(vertexArrayObject + 0x360);
   remaining = 0x1f;
   do {
-    iVar1 = *srcCursor;
+    attribBuffer = *srcCursor;
     srcCursor = srcCursor + 1;
-    if ((iVar1 != 0) && (iVar2 = *(int *)(iVar1 + 8) + -1, *(int *)(iVar1 + 8) = iVar2, iVar2 == 0))
+    if ((attribBuffer != 0) && (attribNewRefCount = *(int *)(attribBuffer + 8) + -1, *(int *)(attribBuffer + 8) = attribNewRefCount, attribNewRefCount == 0))
     {
-      _gleFreeBufferObject(glContext,iVar1);
+      _gleFreeBufferObject(glContext,attribBuffer);
     }
     remaining = remaining + -1;
   } while (-1 < remaining);
-  _gleVecFree(param_2);
+  _gleVecFree(vertexArrayObject);
   return;
 }
 

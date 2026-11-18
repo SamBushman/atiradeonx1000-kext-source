@@ -655,49 +655,49 @@ void _glRotated_Comp(int glContext,double angle,double x,double y,double z)
 /* _glRotated_Exec @ 0x85a3c (416 bytes) */
 void _glRotated_Exec(int glContext,double angle,double x,double y,double z)
 {
-  undefined4 in_LR;
-  double dVar1;
+  undefined4 incomingLR;
+  double zeroReference;
   double sinValue;
-  double dVar2;
+  double signedRadiansPerDegreeThenCosValue;
   double incomingFpr5;
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
   
-  dVar1 = (double)*(float *)(glContext + 0x20);
-  if ((y == dVar1) && (z == dVar1)) {
-    dVar2 = DOUBLE_00108db8;
-    if (x < dVar1) {
-      dVar2 = DOUBLE_00108db0;
+  zeroReference = (double)*(float *)(glContext + 0x20);
+  if ((y == zeroReference) && (z == zeroReference)) {
+    signedRadiansPerDegreeThenCosValue = DOUBLE_00108db8;
+    if (x < zeroReference) {
+      signedRadiansPerDegreeThenCosValue = DOUBLE_00108db0;
     }
-    sinValue = _sin(angle * dVar2);
-    dVar2 = _cos(angle * dVar2);
-    ((void (*)())_glRotateX_Exec)(glContext,(double)(float)sinValue,(double)(float)dVar2,y,z,incomingFpr5,incomingFpr6,
-                    incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
+    sinValue = _sin(angle * signedRadiansPerDegreeThenCosValue);
+    signedRadiansPerDegreeThenCosValue = _cos(angle * signedRadiansPerDegreeThenCosValue);
+    ((void (*)())_glRotateX_Exec)(glContext,(double)(float)sinValue,(double)(float)signedRadiansPerDegreeThenCosValue,y,z,incomingFpr5,incomingFpr6,
+                    incomingFpr7,incomingFpr8,(double)CONCAT44(incomingLR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
-  if ((x == dVar1) && (z == dVar1)) {
-    dVar2 = DOUBLE_00108db8;
-    if (y < dVar1) {
-      dVar2 = DOUBLE_00108db0;
+  if ((x == zeroReference) && (z == zeroReference)) {
+    signedRadiansPerDegreeThenCosValue = DOUBLE_00108db8;
+    if (y < zeroReference) {
+      signedRadiansPerDegreeThenCosValue = DOUBLE_00108db0;
     }
-    sinValue = _sin(angle * dVar2);
-    dVar2 = _cos(angle * dVar2);
-    ((void (*)())_glRotateY_Exec)(glContext,(double)(float)sinValue,(double)(float)dVar2,y,z,incomingFpr5,incomingFpr6,
-                    incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
+    sinValue = _sin(angle * signedRadiansPerDegreeThenCosValue);
+    signedRadiansPerDegreeThenCosValue = _cos(angle * signedRadiansPerDegreeThenCosValue);
+    ((void (*)())_glRotateY_Exec)(glContext,(double)(float)sinValue,(double)(float)signedRadiansPerDegreeThenCosValue,y,z,incomingFpr5,incomingFpr6,
+                    incomingFpr7,incomingFpr8,(double)CONCAT44(incomingLR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
-  if ((x == dVar1) && (y == dVar1)) {
-    dVar2 = DOUBLE_00108db8;
-    if (z < dVar1) {
-      dVar2 = DOUBLE_00108db0;
+  if ((x == zeroReference) && (y == zeroReference)) {
+    signedRadiansPerDegreeThenCosValue = DOUBLE_00108db8;
+    if (z < zeroReference) {
+      signedRadiansPerDegreeThenCosValue = DOUBLE_00108db0;
     }
-    sinValue = _sin(angle * dVar2);
-    dVar2 = _cos(angle * dVar2);
-    ((void (*)())_glRotateZ_Exec)(glContext,(double)(float)sinValue,(double)(float)dVar2,y,z,incomingFpr5,incomingFpr6,
-                    incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
+    sinValue = _sin(angle * signedRadiansPerDegreeThenCosValue);
+    signedRadiansPerDegreeThenCosValue = _cos(angle * signedRadiansPerDegreeThenCosValue);
+    ((void (*)())_glRotateZ_Exec)(glContext,(double)(float)sinValue,(double)(float)signedRadiansPerDegreeThenCosValue,y,z,incomingFpr5,incomingFpr6,
+                    incomingFpr7,incomingFpr8,(double)CONCAT44(incomingLR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }

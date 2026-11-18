@@ -1413,7 +1413,7 @@ void _gleFeedbackQuadStripFunc_body(glContext)
   uint clipFlagsThenRunStartOrNextQuadStart;
   int cullResultThenBackFacing;
   uint *oldPolygonListThenVertexPtrCursor;
-  code *pcVar12;
+  code *lightingHook;
   int previousBackFacingThenRemainingVertices;
   uint *spareList;
   uint nextQuadStart;
@@ -1564,12 +1564,12 @@ LAB_000ed654:
                   clipFlagsThenRunStartOrNextQuadStart = clipFlagsThenRunStartOrNextQuadStart + 0x100;
                 } while ((int)clipFlagsThenRunStartOrNextQuadStart <= (int)(quadStartThenRunStart + 0x100));
               }
-              pcVar12 = *(code **)(previousBackFacingThenRemainingVertices * 4 + glContext + 0x4de8);
+              lightingHook = *(code **)(previousBackFacingThenRemainingVertices * 4 + glContext + 0x4de8);
 LAB_000ed6b4:
-              (*pcVar12)(glContext,quadStartThenRunStart,iVar17);
+              (*lightingHook)(glContext,quadStartThenRunStart,iVar17);
             }
             else if (lightingActive) {
-              pcVar12 = *(code **)(glContext + 0x4de8);
+              lightingHook = *(code **)(glContext + 0x4de8);
               goto LAB_000ed6b4;
             }
             if ((!fixedFunctionPath) && (lightingActive)) {
@@ -1617,13 +1617,13 @@ LAB_000ed80c:
       }
       facingChanged = false;
     }
-    pcVar12 = *(code **)(backFacing * 4 + glContext + 0x4df0);
+    lightingHook = *(code **)(backFacing * 4 + glContext + 0x4df0);
   }
   else {
     if (!lightingActive) goto LAB_000ed8b4;
-    pcVar12 = *(code **)(glContext + 0x4df0);
+    lightingHook = *(code **)(glContext + 0x4df0);
   }
-  (*pcVar12)(glContext,polygonList,polygonVertexCount);
+  (*lightingHook)(glContext,polygonList,polygonVertexCount);
 LAB_000ed8b4:
   if (((!fixedFunctionPath) && (lightingActive)) && (oldPolygonListThenVertexPtrCursor = polygonList, previousBackFacingThenRemainingVertices = polygonVertexCount, 0 < polygonVertexCount)) {
     do {

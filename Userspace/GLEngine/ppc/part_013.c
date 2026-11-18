@@ -1175,51 +1175,51 @@ int _glCopyColorTable_Comp(glContext, target, internalformat, x, y, width)
 }
 
 /* _glCopyColorTable_Exec @ 0x607a8 (1232 bytes) */
-void _glCopyColorTable_Exec(int glContext,uint target,undefined4 internalformat,undefined4 x,undefined4 y,undefined4 width,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glCopyColorTable_Exec(int glContext,uint target,undefined4 internalformat,undefined4 x,undefined4 y,undefined4 width,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
   undefined4 glErrorCode;
-  bool bVar1;
+  bool rendererInfoByte79Zero;
   bool noStateChangePending;
   char rendererInfoByte79;
   byte levelFlags;
   ushort textureTargetBits;
-  undefined4 uVar5;
+  undefined4 forwardedInternalformat;
   int *srcCursor;
-  int iVar7;
-  int iVar8;
+  int createdColorTableLevel;
+  int dirtyWord;
   int textureLevel;
   int framebufferObject;
-  undefined4 uVar9;
-  undefined4 uVar10;
-  undefined4 uVar11;
+  undefined4 forwardedX;
+  undefined4 forwardedY;
+  undefined4 forwardedWidth;
   int textureObject;
   int matrixChangeBits;
-  uint uVar13;
+  uint nonProxyTarget;
   uint dispatchFlags;
   uint changeWord3;
-  int iVar14;
+  int createdLevel;
   int tableScaleBias;
   int *changeWordCursor;
-  double extraout_f1;
+  double f1AfterCall;
   
   if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
     matrixChangeBits = *(int *)(glContext + 0x50ac);
-    uVar5 = internalformat;
-    uVar9 = x;
-    uVar10 = y;
-    uVar11 = width;
+    forwardedInternalformat = internalformat;
+    forwardedX = x;
+    forwardedY = y;
+    forwardedWidth = width;
     if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
       _gleUpdateMatrixFunc(glContext);
-      fparam_1 = extraout_f1;
+      forwardedFloatArg1 = f1AfterCall;
     }
     if (*(char *)(glContext + 0x4691) != '\0') {
       framebufferObject = *(int *)(glContext + 0x744c);
       changeWordCursor = (int *)(glContext + 0x310);
       rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar5,uVar9,uVar10,uVar11,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedInternalformat,forwardedX,forwardedY,forwardedWidth,matrixChangeBits,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                    forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       }
@@ -1231,9 +1231,9 @@ LAB_000608e8:
         loopIndex = 0;
         srcCursor = (int *)(glContext + 0x324);
         do {
-          iVar8 = *srcCursor;
+          dirtyWord = *srcCursor;
           srcCursor = srcCursor + 1;
-          if (iVar8 != 0) {
+          if (dirtyWord != 0) {
             *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
             break;
           }
@@ -1250,14 +1250,14 @@ LAB_000608e8:
           goto LAB_000608e8;
         }
       }
-      bVar1 = rendererInfoByte79 == '\0';
-      if (bVar1) {
+      rendererInfoByte79Zero = rendererInfoByte79 == '\0';
+      if (rendererInfoByte79Zero) {
         changeWord3 = changeWord3 & 0x17000000;
       }
       else {
         changeWord3 = changeWord3 & 0x17ffffff;
       }
-      if (bVar1) {
+      if (rendererInfoByte79Zero) {
         noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
                 *(int *)(glContext + 800) == 0;
       }
@@ -1327,29 +1327,29 @@ LAB_00060a7c:
       if (target != 0x80d1) {
         if (target < 0x80d2) {
           tableScaleBias = glContext + 0x33b0;
-          uVar13 = 0x80d0;
+          nonProxyTarget = 0x80d0;
         }
         else {
           tableScaleBias = glContext + 0x33f0;
-          uVar13 = 0x80d2;
+          nonProxyTarget = 0x80d2;
         }
-        if (target != uVar13) {
+        if (target != nonProxyTarget) {
           tableScaleBias = 0;
         }
       }
       if (tableScaleBias == 0) {
-        iVar14 = _gleCreateTextureLevel
+        createdLevel = _gleCreateTextureLevel
                            (glContext,textureObject,textureLevel,internalformat,width,1,1,0,0x1908,0x1401,0,0x1000);
-        if (iVar14 != 0) {
+        if (createdLevel != 0) {
           _gleTextureImageCopy(glContext,textureLevel,internalformat,x,y,width,1);
         }
         *(uint *)(glContext + 0x314) =
              *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
       }
       else {
-        iVar7 = _gleCreateColorTableLevel(glContext,textureObject,textureLevel,internalformat,width,0x1908,0x1401,0x1000)
+        createdColorTableLevel = _gleCreateColorTableLevel(glContext,textureObject,textureLevel,internalformat,width,0x1908,0x1401,0x1000)
         ;
-        if (iVar7 != 0) {
+        if (createdColorTableLevel != 0) {
           _gleTextureImageCopy(glContext,textureLevel,internalformat,x,y,width,1);
         }
         _gleImagingScaleAndBias

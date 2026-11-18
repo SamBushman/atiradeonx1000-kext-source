@@ -828,31 +828,31 @@ LAB_000cd6a0:
 }
 
 /* _gleCreatePluginFramebuffer @ 0xcd82c (132 bytes) */
-void _gleCreatePluginFramebuffer(glContext, param_2)
+void _gleCreatePluginFramebuffer(glContext, pluginHandleArray)
   int glContext;
-  int param_2;
+  int pluginHandleArray;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  int *rendererDispatch;
+  undefined4 *rendererContextPtr;
+  int rendererRecord;
+  int loopIndex;
+  int handleCursor;
+  int rendererBlockCursor;
   
-  iVar3 = glContext + 0x10000;
-  iVar4 = 0;
+  rendererRecord = glContext + 0x10000;
+  loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
-    iVar5 = param_2;
-    iVar6 = param_2 + 0xe0;
+    handleCursor = pluginHandleArray;
+    rendererBlockCursor = pluginHandleArray + 0xe0;
     do {
-      piVar1 = (int *)(iVar3 + -0x777c);
-      puVar2 = (undefined4 *)(iVar3 + -0x7a54);
-      iVar3 = iVar3 + 0x2e0;
-      iVar4 = iVar4 + 1;
-      (**(code **)(*piVar1 + 0x1fc))(*puVar2,iVar5,param_2 + 0x20,iVar6);
-      iVar5 = iVar5 + 4;
-      iVar6 = iVar6 + 0x20;
-    } while (iVar4 < (int)(uint)*(byte *)(glContext + 0x85a4));
+      rendererDispatch = (int *)(rendererRecord + -0x777c);
+      rendererContextPtr = (undefined4 *)(rendererRecord + -0x7a54);
+      rendererRecord = rendererRecord + 0x2e0;
+      loopIndex = loopIndex + 1;
+      (**(code **)(*rendererDispatch + 0x1fc))(*rendererContextPtr,handleCursor,pluginHandleArray + 0x20,rendererBlockCursor);
+      handleCursor = handleCursor + 4;
+      rendererBlockCursor = rendererBlockCursor + 0x20;
+    } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return;
 }
@@ -997,37 +997,37 @@ void _gleFreeFramebufferObject(glContext, param_2)
 }
 
 /* _gleUpdateFramebufferDirtyBits @ 0xcdaf4 (192 bytes) */
-void _gleUpdateFramebufferDirtyBits(glContext, param_2)
+void _gleUpdateFramebufferDirtyBits(glContext, framebufferState)
   int glContext;
-  int param_2;
+  int framebufferState;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int attachmentIndexThenRendererIndex;
+  int attachedObject;
+  int attachmentRecord;
   
-  if (*(int *)(param_2 + 0xdc) != 0) {
+  if (*(int *)(framebufferState + 0xdc) != 0) {
     return;
   }
-  iVar1 = 0;
-  while ((iVar2 = *(int *)(iVar1 * 4 + param_2 + 0xc4), iVar2 == 0 ||
-         (iVar3 = param_2 + iVar1 * 0x18,
-         *(int *)(iVar3 + 0x30) ==
-         *(int *)(iVar2 + *(int *)(iVar3 + 0x24) * 0x168 + *(int *)(iVar3 + 0x28) * 0x18 + 0xd4))))
+  attachmentIndexThenRendererIndex = 0;
+  while ((attachedObject = *(int *)(attachmentIndexThenRendererIndex * 4 + framebufferState + 0xc4), attachedObject == 0 ||
+         (attachmentRecord = framebufferState + attachmentIndexThenRendererIndex * 0x18,
+         *(int *)(attachmentRecord + 0x30) ==
+         *(int *)(attachedObject + *(int *)(attachmentRecord + 0x24) * 0x168 + *(int *)(attachmentRecord + 0x28) * 0x18 + 0xd4))))
   {
-    iVar1 = iVar1 + 1;
-    if (5 < iVar1) {
+    attachmentIndexThenRendererIndex = attachmentIndexThenRendererIndex + 1;
+    if (5 < attachmentIndexThenRendererIndex) {
       return;
     }
   }
-  iVar1 = 0;
-  *(undefined4 *)(param_2 + 0xdc) = 1;
+  attachmentIndexThenRendererIndex = 0;
+  *(undefined4 *)(framebufferState + 0xdc) = 1;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      *(undefined4 *)(param_2 + 0xf8) = 1;
-      iVar1 = iVar1 + 1;
-      *(undefined4 *)(param_2 + 0xfc) = 0;
-      param_2 = param_2 + 0x20;
-    } while (iVar1 < (int)(uint)*(byte *)(glContext + 0x85a4));
+      *(undefined4 *)(framebufferState + 0xf8) = 1;
+      attachmentIndexThenRendererIndex = attachmentIndexThenRendererIndex + 1;
+      *(undefined4 *)(framebufferState + 0xfc) = 0;
+      framebufferState = framebufferState + 0x20;
+    } while (attachmentIndexThenRendererIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   return;
@@ -2390,30 +2390,30 @@ LAB_000cf878:
 }
 
 /* _LFSParserParseArray @ 0xcf894 (188 bytes) */
-int _LFSParserParseArray(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _LFSParserParseArray(parser, outValue)
+  undefined4 parser;
+  undefined4 *outValue;
 {
-  int iVar1;
-  int iVar2;
-  char local_130 [256];
-  undefined4 local_30 [4];
-  int local_20 [5];
+  int partLength;
+  int status;
+  char tokenBuffer [256];
+  undefined4 scalars [4];
+  int scalarCount [5];
   
-  local_20[0] = 1;
-  iVar1 = ((int (*)())_LFSParserGetPart)(param_1,local_130);
-  iVar2 = 8;
-  if ((((iVar1 != 0) && (iVar2 = 0x10, local_130[0] == '[')) &&
-      (iVar2 = ((int (*)())_LFSParserGetScalars)(param_1,local_30,local_20), iVar2 == 0)) &&
-     (iVar2 = 0x10, local_20[0] == 1)) {
-    *param_2 = local_30[0];
-    iVar1 = ((int (*)())_LFSParserGetPart)(param_1,local_130);
-    iVar2 = 8;
-    if (iVar1 != 0) {
-      iVar2 = (uint)(local_130[0] != ']') * 0x10;
+  scalarCount[0] = 1;
+  partLength = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+  status = 8;
+  if ((((partLength != 0) && (status = 0x10, tokenBuffer[0] == '[')) &&
+      (status = ((int (*)())_LFSParserGetScalars)(parser,scalars,scalarCount), status == 0)) &&
+     (status = 0x10, scalarCount[0] == 1)) {
+    *outValue = scalars[0];
+    partLength = ((int (*)())_LFSParserGetPart)(parser,tokenBuffer);
+    status = 8;
+    if (partLength != 0) {
+      status = (uint)(tokenBuffer[0] != ']') * 0x10;
     }
   }
-  return iVar2;
+  return status;
 }
 
 /* _LFSParserParseRegister @ 0xcf950 (356 bytes) */
