@@ -48,6 +48,7 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
   float linkedSceneGreen;
   float *srcCursor;
   int iVar6;
+  int linkedLightProducts;
   int glContextWord5424;
   undefined4 uVar7;
   uint loopIndex2;
@@ -83,6 +84,7 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
   uint glContextWord30a0;
   int iVar21;
   int iVar22;
+  int userLightRecord;
   int glContextWord54243;
   double dVar23;
   double powSample;
@@ -215,7 +217,7 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
   glContextWord30a0 = *(uint *)(glContext + 0x30a0);
   loopIndex3 = 0;
   loopIndex = 0;
-  iVar22 = glContext;
+  userLightRecord = glContext;
   do {
     if ((glContextWord30a0 & 1 << (loopIndex3 & 0x3f)) == 0) {
       if (glContextWord30a0 >> (loopIndex3 & 0x3f) == 0) {
@@ -224,24 +226,24 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
       }
     }
     else {
-      iVar6 = (int)GH_F2U(linkedMaterial) + loopIndex;
+      linkedLightProducts = (int)GH_F2U(linkedMaterial) + loopIndex;
       if ((dirtyMask >> 2 & 1) != 0) {
         if ((copyFromLinkedMask & 4) == 0) {
           materialAmbientG = material[1];
-          lightAmbientG = *(float *)(iVar22 + 0x2824);
-          lightAmbientB = *(float *)(iVar22 + 0x2828);
+          lightAmbientG = *(float *)(userLightRecord + 0x2824);
+          lightAmbientB = *(float *)(userLightRecord + 0x2828);
           materialAmbientB = material[2];
           materialAmbientA = material[3];
-          *(float *)((int)material + loopIndex + 0x50) = *(float *)(iVar22 + 0x2820) * *material;
+          *(float *)((int)material + loopIndex + 0x50) = *(float *)(userLightRecord + 0x2820) * *material;
           *(float *)((int)material + loopIndex + 0x54) = lightAmbientG * materialAmbientG;
           *(float *)((int)material + loopIndex + 0x5c) = materialAmbientA;
           *(float *)((int)material + loopIndex + 0x58) = lightAmbientB * materialAmbientB;
         }
         else {
-          uVar13 = *(undefined4 *)(iVar6 + 0x58);
-          uVar7 = *(undefined4 *)(iVar6 + 0x54);
-          uVar17 = *(undefined4 *)(iVar6 + 0x5c);
-          *(undefined4 *)((int)material + loopIndex + 0x50) = *(undefined4 *)(iVar6 + 0x50);
+          uVar13 = *(undefined4 *)(linkedLightProducts + 0x58);
+          uVar7 = *(undefined4 *)(linkedLightProducts + 0x54);
+          uVar17 = *(undefined4 *)(linkedLightProducts + 0x5c);
+          *(undefined4 *)((int)material + loopIndex + 0x50) = *(undefined4 *)(linkedLightProducts + 0x50);
           *(undefined4 *)((int)material + loopIndex + 0x54) = uVar7;
           *(undefined4 *)((int)material + loopIndex + 0x58) = uVar13;
           *(undefined4 *)((int)material + loopIndex + 0x5c) = uVar17;
@@ -268,20 +270,20 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
       if ((dirtyMask >> 3 & 1) != 0) {
         if ((copyFromLinkedMask & 8) == 0) {
           materialDiffuseG = material[5];
-          lightDiffuseG = *(float *)(iVar22 + 0x2834);
-          lightDiffuseB = *(float *)(iVar22 + 0x2838);
+          lightDiffuseG = *(float *)(userLightRecord + 0x2834);
+          lightDiffuseB = *(float *)(userLightRecord + 0x2838);
           materialDiffuseB = material[6];
           materialDiffuseA = material[7];
-          *(float *)((int)material + loopIndex + 0x60) = *(float *)(iVar22 + 0x2830) * material[4];
+          *(float *)((int)material + loopIndex + 0x60) = *(float *)(userLightRecord + 0x2830) * material[4];
           *(float *)((int)material + loopIndex + 100) = lightDiffuseG * materialDiffuseG;
           *(float *)((int)material + loopIndex + 0x6c) = materialDiffuseA;
           *(float *)((int)material + loopIndex + 0x68) = lightDiffuseB * materialDiffuseB;
         }
         else {
-          uVar7 = *(undefined4 *)(iVar6 + 100);
-          uVar13 = *(undefined4 *)(iVar6 + 0x68);
-          uVar17 = *(undefined4 *)(iVar6 + 0x6c);
-          *(undefined4 *)((int)material + loopIndex + 0x60) = *(undefined4 *)(iVar6 + 0x60);
+          uVar7 = *(undefined4 *)(linkedLightProducts + 100);
+          uVar13 = *(undefined4 *)(linkedLightProducts + 0x68);
+          uVar17 = *(undefined4 *)(linkedLightProducts + 0x6c);
+          *(undefined4 *)((int)material + loopIndex + 0x60) = *(undefined4 *)(linkedLightProducts + 0x60);
           *(undefined4 *)((int)material + loopIndex + 100) = uVar7;
           *(undefined4 *)((int)material + loopIndex + 0x68) = uVar13;
           *(undefined4 *)((int)material + loopIndex + 0x6c) = uVar17;
@@ -303,20 +305,20 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
       if ((dirtyMask & 0x10) != 0) {
         if ((copyFromLinkedMask >> 4 & 1) == 0) {
           materialSpecularG = material[9];
-          lightSpecularB = *(float *)(iVar22 + 0x2848);
-          lightSpecularG = *(float *)(iVar22 + 0x2844);
+          lightSpecularB = *(float *)(userLightRecord + 0x2848);
+          lightSpecularG = *(float *)(userLightRecord + 0x2844);
           materialSpecularB = material[10];
           materialSpecularA = material[0xb];
-          *(float *)((int)material + loopIndex + 0x70) = *(float *)(iVar22 + 0x2840) * material[8];
+          *(float *)((int)material + loopIndex + 0x70) = *(float *)(userLightRecord + 0x2840) * material[8];
           *(float *)((int)material + loopIndex + 0x7c) = materialSpecularA;
           *(float *)((int)material + loopIndex + 0x74) = lightSpecularG * materialSpecularG;
           *(float *)((int)material + loopIndex + 0x78) = lightSpecularB * materialSpecularB;
         }
         else {
-          uVar7 = *(undefined4 *)(iVar6 + 0x70);
-          uVar13 = *(undefined4 *)(iVar6 + 0x74);
-          uVar17 = *(undefined4 *)(iVar6 + 0x78);
-          *(undefined4 *)((int)material + loopIndex + 0x7c) = *(undefined4 *)(iVar6 + 0x7c);
+          uVar7 = *(undefined4 *)(linkedLightProducts + 0x70);
+          uVar13 = *(undefined4 *)(linkedLightProducts + 0x74);
+          uVar17 = *(undefined4 *)(linkedLightProducts + 0x78);
+          *(undefined4 *)((int)material + loopIndex + 0x7c) = *(undefined4 *)(linkedLightProducts + 0x7c);
           *(undefined4 *)((int)material + loopIndex + 0x70) = uVar7;
           *(undefined4 *)((int)material + loopIndex + 0x74) = uVar13;
           *(undefined4 *)((int)material + loopIndex + 0x78) = uVar17;
@@ -337,7 +339,7 @@ double _gleUpdateLightRGBASums(glContext, material, faceIndex)
       }
     }
     loopIndex3 = loopIndex3 + 1;
-    iVar22 = iVar22 + 0x80;
+    userLightRecord = userLightRecord + 0x80;
     loopIndex = loopIndex + 0x30;
   } while( true );
 }
