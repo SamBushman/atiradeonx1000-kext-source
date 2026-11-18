@@ -1638,45 +1638,45 @@ void _glGetColorTable_Exec(glContext, target, format, type, table)
   int table;
 {
   undefined4 glErrorCode;
-  bool bVar1;
-  byte bVar2;
+  bool formatCheck;
+  byte tableFlags;
   undefined4 rowBytes;
   int colorTable;
-  int iVar5;
-  int iVar6;
-  undefined4 *puVar7;
-  undefined4 *puVar8;
-  uint uVar9;
+  int imageEndOffset;
+  int elementBytes;
+  undefined4 *userConvertAPtr;
+  undefined4 *userConvertBPtr;
+  uint tableHeight;
   uint glContextByte31c8;
   undefined1 *puVar11;
-  int *piVar12;
+  int *packOffsetPtr;
   int pixelPackBuffer;
-  int iVar14;
+  int bufferSize;
   double bytesPerElement;
-  undefined4 local_d0;
-  undefined4 local_cc;
-  undefined4 local_c8;
-  undefined4 local_c4;
-  int local_c0;
-  undefined4 local_bc;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined4 local_b0;
-  uint local_ac;
-  undefined4 local_a8;
-  uint local_a4;
-  uint local_a0;
-  undefined1 local_64;
-  undefined4 local_60;
+  undefined4 procSrcAddress;
+  undefined4 procSrcRowBytes;
+  undefined4 procSrcConvertA;
+  undefined4 procSrcConvertB;
+  int procDstAddress;
+  undefined4 procDstRowBytes;
+  undefined4 procDstConvertA;
+  undefined4 procDstConvertB;
+  undefined4 procMode;
+  uint procFlags;
+  undefined4 procMask;
+  uint procWidth;
+  uint procHeight;
+  undefined1 procEnd;
+  undefined4 packRowBytes;
   undefined1 auStack_5c [4];
   undefined1 auStack_58 [4];
   undefined1 auStack_54 [4];
   undefined1 auStack_50 [4];
-  int local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c [5];
+  int packOffset;
+  undefined4 tableConvertA;
+  undefined4 tableConvertB;
+  undefined4 userConvertA;
+  undefined4 userConvertB [5];
   
   colorTable = _gleLookUpNonProxyColorTable(glContext,target);
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -1685,20 +1685,20 @@ void _glGetColorTable_Exec(glContext, target, format, type, table)
         if (0x8032 < type) {
 LAB_000612b0:
           if (format != 0x1908) {
-            bVar1 = format == 0x80e1;
+            formatCheck = format == 0x80e1;
 LAB_000612c4:
-            if (!bVar1) goto LAB_00061354;
+            if (!formatCheck) goto LAB_00061354;
           }
 LAB_000612e0:
           pixelPackBuffer = *(int *)(glContext + 0x4a68);
           if (pixelPackBuffer == 0) {
 LAB_0006138c:
-            bVar2 = *(byte *)(colorTable + 0xb7);
-            if ((bVar2 & 0x20) == 0) {
+            tableFlags = *(byte *)(colorTable + 0xb7);
+            if ((tableFlags & 0x20) == 0) {
               return;
             }
-            if ((bVar2 & 0x40) == 0) {
-              if ((bVar2 & 0x10) == 0) {
+            if ((tableFlags & 0x40) == 0) {
+              if ((tableFlags & 0x10) == 0) {
                 return;
               }
             }
@@ -1706,14 +1706,14 @@ LAB_0006138c:
               _gleUploadPluginTextureLevel
                         (glContext,colorTable,colorTable + 0xac,0,0xffffffff,(uint)*(byte *)(glContext + 0x85a8));
             }
-            uVar9 = (uint)*(ushort *)(colorTable + 0xb2);
+            tableHeight = (uint)*(ushort *)(colorTable + 0xb2);
             puVar11 = auStack_50;
-            piVar12 = &local_4c;
+            packOffsetPtr = &packOffset;
             _glePixelPackSettings
-                      (glContext,format,type,(uint)*(ushort *)(colorTable + 0xb0),uVar9,
-                       glContext + 0x31b0,puVar11,piVar12,&local_60,auStack_5c,auStack_58,auStack_54);
+                      (glContext,format,type,(uint)*(ushort *)(colorTable + 0xb0),tableHeight,
+                       glContext + 0x31b0,puVar11,packOffsetPtr,&packRowBytes,auStack_5c,auStack_58,auStack_54);
             if (((((*(byte *)(colorTable + 0xb7) & 1) == 0) ||
-                 (table + local_4c != *(int *)(colorTable + 0xc0))) ||
+                 (table + packOffset != *(int *)(colorTable + 0xc0))) ||
                 (format != *(ushort *)(colorTable + 0xbc))) || (type != *(ushort *)(colorTable + 0xbe))) {
               glContextByte31c8 = (uint)*(byte *)(glContext + 0x31c8);
             }
@@ -1723,42 +1723,42 @@ LAB_0006138c:
                 return;
               }
             }
-            local_ac = (uint)(glContextByte31c8 != 0);
+            procFlags = (uint)(glContextByte31c8 != 0);
             rowBytes = _gleRowBytes((uint)*(ushort *)(colorTable + 0xbc),(uint)*(ushort *)(colorTable + 0xbe),
                                  (uint)*(ushort *)(colorTable + 0xb8));
             _glgConvertType((uint)*(ushort *)(colorTable + 0xbc),(uint)*(ushort *)(colorTable + 0xbe),
-                            &local_48,&local_44,uVar9,glContextByte31c8,puVar11,piVar12);
-            puVar7 = &local_40;
-            puVar8 = local_3c;
-            _glgConvertType(format,type,puVar7,puVar8,uVar9,glContextByte31c8,puVar11,piVar12);
-            local_c8 = local_48;
-            local_c4 = local_44;
-            local_bc = local_60;
-            local_b8 = local_40;
-            local_b4 = local_3c[0];
-            local_a8 = 1;
-            local_b0 = 2;
-            local_a4 = (uint)*(ushort *)(colorTable + 0xb0);
-            local_a0 = (uint)*(ushort *)(colorTable + 0xb2);
-            local_c0 = table + local_4c;
-            local_d0 = *(undefined4 *)(colorTable + 0xc0);
-            local_64 = 0;
-            local_cc = rowBytes;
-            _glgProcessPixels(glContext + 0x31a8,&local_d0,puVar7,puVar8,uVar9,glContextByte31c8,local_a0,piVar12
+                            &tableConvertA,&tableConvertB,tableHeight,glContextByte31c8,puVar11,packOffsetPtr);
+            userConvertAPtr = &userConvertA;
+            userConvertBPtr = userConvertB;
+            _glgConvertType(format,type,userConvertAPtr,userConvertBPtr,tableHeight,glContextByte31c8,puVar11,packOffsetPtr);
+            procSrcConvertA = tableConvertA;
+            procSrcConvertB = tableConvertB;
+            procDstRowBytes = packRowBytes;
+            procDstConvertA = userConvertA;
+            procDstConvertB = userConvertB[0];
+            procMask = 1;
+            procMode = 2;
+            procWidth = (uint)*(ushort *)(colorTable + 0xb0);
+            procHeight = (uint)*(ushort *)(colorTable + 0xb2);
+            procDstAddress = table + packOffset;
+            procSrcAddress = *(undefined4 *)(colorTable + 0xc0);
+            procEnd = 0;
+            procSrcRowBytes = rowBytes;
+            _glgProcessPixels(glContext + 0x31a8,&procSrcAddress,userConvertAPtr,userConvertBPtr,tableHeight,glContextByte31c8,procHeight,packOffsetPtr
                              );
             return;
           }
-          iVar5 = _gleOffsetLimitImage
+          imageEndOffset = _gleOffsetLimitImage
                             (glContext + 0x31b0,(uint)*(ushort *)(colorTable + 0xb0),
                              (uint)*(ushort *)(colorTable + 0xb2),format,type,table);
-          iVar14 = *(int *)(pixelPackBuffer + 0x38);
+          bufferSize = *(int *)(pixelPackBuffer + 0x38);
           bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-          iVar6 = (int)bytesPerElement;
-          if (iVar5 <= iVar14) {
-            if (iVar6 == 0) {
-              iVar6 = _glePixelBytes(format,type);
+          elementBytes = (int)bytesPerElement;
+          if (imageEndOffset <= bufferSize) {
+            if (elementBytes == 0) {
+              elementBytes = _glePixelBytes(format,type);
             }
-            if (table == (table / iVar6) * iVar6) {
+            if (table == (table / elementBytes) * elementBytes) {
               if (*(int *)(pixelPackBuffer + 0x40) != 0) {
                 _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
               }
@@ -1772,12 +1772,12 @@ LAB_0006138c:
           if (type < 0x1407) {
             if (format != 0x8000) {
               if (format < 0x8001) {
-                bVar1 = 7 < format - 0x1903;
+                formatCheck = 7 < format - 0x1903;
               }
               else {
-                bVar1 = 1 < format - 0x80e0;
+                formatCheck = 1 < format - 0x80e0;
               }
-              if (bVar1) goto LAB_00061354;
+              if (formatCheck) goto LAB_00061354;
             }
             goto LAB_000612e0;
           }
@@ -1787,7 +1787,7 @@ LAB_0006138c:
       else if (0x8361 < type) {
         if (type < 0x8365) {
 LAB_000612a8:
-          bVar1 = format == 0x1907;
+          formatCheck = format == 0x1907;
           goto LAB_000612c4;
         }
         if (type < 0x8369) goto LAB_000612b0;

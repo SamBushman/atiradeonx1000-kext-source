@@ -1,0 +1,11 @@
+local	_gleQuickOptimizeDisplayList	param_3	recordedList	INFERRED	recorded display-list block: +0x10 entry count, +0x14 pointer to the per-entry byte sizes, +0x2c first entry (function pointer followed by its arguments)
+local	_gleQuickOptimizeDisplayList	uVar13	entryCount	CONFIRMED	recordedList+0x10: number of recorded entries walked by both loops
+local	_gleQuickOptimizeDisplayList	piVar9	entrySizes	CONFIRMED	recordedList+0x14: array of per-entry byte sizes; entry i advances the cursor by entrySizes[i]
+local	_gleQuickOptimizeDisplayList	puVar17	scanCursor	CONFIRMED	first-pass cursor over the recorded entries (starts at recordedList+0x2c, advanced by the entry size, or by words[1]+2 words for glWeightARB entries)
+local	_gleQuickOptimizeDisplayList	puVar16	entryCursor	CONFIRMED	second-pass cursor over the recorded entries (starts at recordedList+0x2c); word 0 is the entry function pointer, +0x18.. the DrawArraysOrElements arguments
+local	_gleQuickOptimizeDisplayList	puVar4	entryFunc	CONFIRMED	function pointer (word 0) of the entry at entryCursor
+local	_gleQuickOptimizeDisplayList	pvVar2	varItem	CONFIRMED	0x10-byte list item added with _gleAddListItemWithFree: word 0 receives the vm_allocate()d block
+local	_gleQuickOptimizeDisplayList	vVar7	varWriteCursor	CONFIRMED	write position inside the current VAR block; memcpy destination and argument of _CloseCurrentVAR
+local	_gleQuickOptimizeDisplayList	vVar8	varNextCursor	CONFIRMED	new write position (varWriteCursor + data + header) assigned back to varWriteCursor after each copy
+local	_gleQuickOptimizeDisplayList	local_5c	varBytesLeft	CONFIRMED	bytes left in the current VAR block (address passed to _CloseCurrentVAR); initial 0 forces a new block
+local	_gleQuickOptimizeDisplayList	local_60	varBlockBase	CONFIRMED	base address of the current VAR block (vm_allocate result; address passed to _CloseCurrentVAR); 0 when none is open

@@ -2012,208 +2012,220 @@ LAB_000da850:
 int _gleCompileClippedVertexArray(glContext)
   int glContext;
 {
-  bool bVar1;
-  ushort uVar2;
-  uint uVar3;
-  int *piVar4;
-  undefined4 uVar5;
-  int *piVar6;
-  code *pcVar7;
-  int iVar8;
-  undefined4 *puVar9;
+  bool skipBufferRelease;
+  ushort cachedStride;
+  uint bufferKind;
+  uint enableFlags;
+  int *interpCacheNode;
+  int *newIndexCursor;
+  int *compileCacheHead;
+  undefined4 interpFunc;
+  int *compileCacheNode;
+  int *indexCursor;
+  code *compiledFunc;
+  int remainingCapacity;
+  int cursorByteOffset;
+  undefined4 *interpCacheTail;
+  undefined4 *compileCacheTail;
   int iVar10;
-  int *piVar11;
-  int *piVar12;
+  int indexArrayBase;
+  int *interpCacheHead;
+  int *compileNodePrev;
+  int *interpNodePrev;
   undefined4 uVar13;
+  undefined4 releaseResult;
   int iVar14;
-  uint uVar15;
-  int iVar16;
-  uint uVar17;
-  int iVar18;
-  uint uVar19;
-  int local_40 [4];
+  int vertexCount;
+  uint vertexStride;
+  int oldBuffer;
+  uint formatFlagsThenCompileKey;
+  int runValue;
+  uint interpKey;
+  uint enableMask;
+  uint fillCount;
+  int requestedSize [4];
   
-  iVar16 = 0;
+  oldBuffer = 0;
   iVar14 = glContext;
   if (*(int *)(glContext + 0x49ac) != 0) {
-    iVar14 = *(int *)(glContext + 0x4988);
+    vertexCount = *(int *)(glContext + 0x4988);
     uVar13 = *(undefined4 *)(glContext + 0x49a4);
-    uVar2 = *(ushort *)(glContext + 0x4990);
-    uVar17 = *(uint *)(glContext + 0x4980);
+    cachedStride = *(ushort *)(glContext + 0x4990);
+    formatFlagsThenCompileKey = *(uint *)(glContext + 0x4980);
     if (*(short *)(glContext + 0x4992) == 0) {
-      iVar10 = *(int *)(glContext + 0x49a0);
+      indexArrayBase = *(int *)(glContext + 0x49a0);
     }
     else {
-      uVar17 = uVar17 & 0xffff;
+      formatFlagsThenCompileKey = formatFlagsThenCompileKey & 0xffff;
       *(undefined2 *)(glContext + 0x4992) = 0;
-      iVar10 = *(int *)(glContext + 0x49a0);
-      *(int *)(glContext + 0x499c) = iVar10 + *(int *)(*(int *)(glContext + 0x468c) + 0x88) * 4;
+      indexArrayBase = *(int *)(glContext + 0x49a0);
+      *(int *)(glContext + 0x499c) = indexArrayBase + *(int *)(*(int *)(glContext + 0x468c) + 0x88) * 4;
     }
-    piVar6 = *(int **)(glContext + 0x499c) + 0x11;
-    iVar8 = (int)piVar6 - iVar10;
-    for (iVar18 = *(int *)(glContext + 0x4984) + (iVar8 >> 2);
-        (*(int **)(glContext + 0x499c) <= piVar6 && (iVar8 = (int)piVar6 - iVar10, *piVar6 == iVar18))
-        ; iVar18 = iVar18 + -1) {
-      piVar6 = piVar6 + -1;
-      iVar8 = (int)piVar6 - iVar10;
+    indexCursor = *(int **)(glContext + 0x499c) + 0x11;
+    cursorByteOffset = (int)indexCursor - indexArrayBase;
+    for (runValue = *(int *)(glContext + 0x4984) + (cursorByteOffset >> 2);
+        (*(int **)(glContext + 0x499c) <= indexCursor && (cursorByteOffset = (int)indexCursor - indexArrayBase, *indexCursor == runValue))
+        ; runValue = runValue + -1) {
+      indexCursor = indexCursor + -1;
+      cursorByteOffset = (int)indexCursor - indexArrayBase;
     }
-    uVar19 = uVar17 & 0xffff;
-    iVar10 = *(int *)(glContext + 0x4994) + (iVar8 >> 2) + 1;
-    if (uVar19 == uVar17 >> 0x10) {
-      iVar8 = *(int *)(glContext + 0x4998) - iVar10;
-      uVar15 = (uint)uVar2;
+    interpKey = formatFlagsThenCompileKey & 0xffff;
+    iVar10 = *(int *)(glContext + 0x4994) + (cursorByteOffset >> 2) + 1;
+    if (interpKey == formatFlagsThenCompileKey >> 0x10) {
+      remainingCapacity = *(int *)(glContext + 0x4998) - iVar10;
+      vertexStride = (uint)cachedStride;
     }
     else {
-      *(uint *)(glContext + 0x4980) = uVar19 | uVar17 << 0x10;
-      if ((uVar17 & 0x10) == 0) {
-        if ((uVar17 & 8) == 0) {
-          if ((uVar17 & 4) == 0) {
-            uVar15 = 0x14;
-            uVar3 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x7c);
+      *(uint *)(glContext + 0x4980) = interpKey | formatFlagsThenCompileKey << 0x10;
+      if ((formatFlagsThenCompileKey & 0x10) == 0) {
+        if ((formatFlagsThenCompileKey & 8) == 0) {
+          if ((formatFlagsThenCompileKey & 4) == 0) {
+            vertexStride = 0x14;
+            bufferKind = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x7c);
           }
           else {
-            uVar15 = 0x18;
-            uVar3 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x82);
+            vertexStride = 0x18;
+            bufferKind = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x82);
           }
         }
-        else if ((uVar17 & 4) == 0) {
-          uVar15 = 0x1c;
-          uVar3 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x7e);
+        else if ((formatFlagsThenCompileKey & 4) == 0) {
+          vertexStride = 0x1c;
+          bufferKind = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x7e);
         }
         else {
-          uVar15 = 0x20;
-          uVar3 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x84);
+          vertexStride = 0x20;
+          bufferKind = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x84);
         }
       }
-      else if ((uVar17 & 4) == 0) {
-        uVar15 = 0x28;
-        uVar3 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x80);
+      else if ((formatFlagsThenCompileKey & 4) == 0) {
+        vertexStride = 0x28;
+        bufferKind = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x80);
       }
       else {
-        uVar15 = 0x2c;
-        uVar3 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x86);
+        vertexStride = 0x2c;
+        bufferKind = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x86);
       }
-      piVar11 = *(int **)(glContext + 0x49b8);
-      *(short *)(glContext + 0x4990) = (short)uVar15;
-      *(uint *)(glContext + 0x498c) = uVar3;
-      piVar4 = piVar11;
+      interpCacheHead = *(int **)(glContext + 0x49b8);
+      *(short *)(glContext + 0x4990) = (short)vertexStride;
+      *(uint *)(glContext + 0x498c) = bufferKind;
+      interpCacheNode = interpCacheHead;
       do {
-        if (uVar19 == piVar4[2]) {
-          if (piVar4 != piVar11) {
-            piVar12 = (int *)piVar4[1];
-            *piVar12 = *piVar4;
-            *(int **)(*piVar4 + 4) = piVar12;
-            puVar9 = (undefined4 *)piVar11[1];
-            *puVar9 = piVar4;
-            piVar4[1] = (int)puVar9;
-            *piVar4 = (int)piVar11;
-            piVar11[1] = (int)piVar4;
-            *(int **)(glContext + 0x49b8) = piVar4;
+        if (interpKey == interpCacheNode[2]) {
+          if (interpCacheNode != interpCacheHead) {
+            interpNodePrev = (int *)interpCacheNode[1];
+            *interpNodePrev = *interpCacheNode;
+            *(int **)(*interpCacheNode + 4) = interpNodePrev;
+            interpCacheTail = (undefined4 *)interpCacheHead[1];
+            *interpCacheTail = interpCacheNode;
+            interpCacheNode[1] = (int)interpCacheTail;
+            *interpCacheNode = (int)interpCacheHead;
+            interpCacheHead[1] = (int)interpCacheNode;
+            *(int **)(glContext + 0x49b8) = interpCacheNode;
           }
-          *(int **)(glContext + 0x49c4) = piVar4 + 8;
+          *(int **)(glContext + 0x49c4) = interpCacheNode + 8;
           goto LAB_000daa98;
         }
-        piVar4 = (int *)*piVar4;
-      } while (piVar4 != piVar11);
-      uVar5 = _gleBuildInterpFunc(glContext,uVar19);
-      *(undefined4 *)(glContext + 0x49c4) = uVar5;
+        interpCacheNode = (int *)*interpCacheNode;
+      } while (interpCacheNode != interpCacheHead);
+      interpFunc = _gleBuildInterpFunc(glContext,interpKey);
+      *(undefined4 *)(glContext + 0x49c4) = interpFunc;
 LAB_000daa98:
-      iVar8 = 0;
+      remainingCapacity = 0;
     }
-    local_40[0] = iVar14 * 2 + 0x12;
-    if (local_40[0] < iVar8) {
-      bVar1 = true;
+    requestedSize[0] = vertexCount * 2 + 0x12;
+    if (requestedSize[0] < remainingCapacity) {
+      skipBufferRelease = true;
       *(int *)(glContext + 0x4994) = iVar10;
-      iVar10 = *(int *)(glContext + 0x49a8) + iVar10 * uVar15;
+      iVar10 = *(int *)(glContext + 0x49a8) + iVar10 * vertexStride;
     }
     else {
-      iVar16 = *(int *)(glContext + 0x49a8);
-      bVar1 = iVar16 == 0;
-      if (!bVar1) {
-        (**(code **)(glContext + 0x47c8))(*(undefined4 *)(glContext + 0x4688),iVar16,iVar10);
+      oldBuffer = *(int *)(glContext + 0x49a8);
+      skipBufferRelease = oldBuffer == 0;
+      if (!skipBufferRelease) {
+        (**(code **)(glContext + 0x47c8))(*(undefined4 *)(glContext + 0x4688),oldBuffer,iVar10);
       }
       iVar10 = (**(code **)(glContext + 0x47c4))
                          (*(undefined4 *)(glContext + 0x4688),*(undefined4 *)(glContext + 0x498c),
-                          local_40);
+                          requestedSize);
       if (iVar10 == 0) {
-        *(uint *)(glContext + 0x4980) = uVar19;
+        *(uint *)(glContext + 0x4980) = interpKey;
         *(undefined4 *)(glContext + 0x4998) = 0;
         *(undefined4 *)(glContext + 0x4994) = 0;
         *(undefined4 *)(glContext + 0x49a4) = 0;
-        if (bVar1) {
+        if (skipBufferRelease) {
           return 0;
         }
-        uVar13 = (**(code **)(glContext + 0x47cc))(*(undefined4 *)(glContext + 0x4688),iVar16);
+        releaseResult = (**(code **)(glContext + 0x47cc))(*(undefined4 *)(glContext + 0x4688),oldBuffer);
         *(undefined4 *)(glContext + 0x49a8) = 0;
-        return uVar13;
+        return releaseResult;
       }
       *(undefined4 *)(glContext + 0x4994) = 0;
-      *(int *)(glContext + 0x4998) = local_40[0];
+      *(int *)(glContext + 0x4998) = requestedSize[0];
       *(int *)(glContext + 0x49a8) = iVar10;
     }
     *(int *)(glContext + 0x49a4) = iVar10;
-    piVar4 = (int *)(*(int *)(glContext + 0x49a0) + iVar14 * 4);
-    if (piVar4 <= piVar6) {
-      uVar19 = (uint)((int)piVar6 + (4 - (int)piVar4)) >> 2;
+    newIndexCursor = (int *)(*(int *)(glContext + 0x49a0) + vertexCount * 4);
+    if (newIndexCursor <= indexCursor) {
+      fillCount = (uint)((int)indexCursor + (4 - (int)newIndexCursor)) >> 2;
       do {
-        *piVar6 = iVar18;
-        piVar6 = piVar6 + -1;
-        iVar18 = iVar18 + -1;
-        uVar19 = uVar19 - 1;
-      } while (uVar19 != 0);
+        *indexCursor = runValue;
+        indexCursor = indexCursor + -1;
+        runValue = runValue + -1;
+        fillCount = fillCount - 1;
+      } while (fillCount != 0);
     }
-    *(int **)(glContext + 0x499c) = piVar4;
-    uVar3 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334);
-    uVar19 = 0;
-    if ((uVar3 & 0x10000) != 0) {
-      uVar19 = 5;
+    *(int **)(glContext + 0x499c) = newIndexCursor;
+    enableFlags = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334);
+    enableMask = 0;
+    if ((enableFlags & 0x10000) != 0) {
+      enableMask = 5;
     }
-    if ((uVar3 & 0x40000) != 0) {
-      uVar19 = uVar19 | 2;
+    if ((enableFlags & 0x40000) != 0) {
+      enableMask = enableMask | 2;
     }
-    if ((uVar3 & 0x1000000) != 0) {
-      uVar19 = uVar19 | 8;
+    if ((enableFlags & 0x1000000) != 0) {
+      enableMask = enableMask | 8;
     }
-    if ((uVar3 & 0x2000000) != 0) {
-      uVar19 = uVar19 | 0x10;
+    if ((enableFlags & 0x2000000) != 0) {
+      enableMask = enableMask | 0x10;
     }
-    uVar17 = (uVar17 & uVar19) << 0x15 |
-             (uVar17 & (*(uint *)(glContext + 0x497c) | ~uVar19) & 0x1f) << 0x10 |
+    formatFlagsThenCompileKey = (formatFlagsThenCompileKey & enableMask) << 0x15 |
+             (formatFlagsThenCompileKey & (*(uint *)(glContext + 0x497c) | ~enableMask) & 0x1f) << 0x10 |
              *(uint *)(glContext + 0x49b0) | (uint)*(ushort *)(glContext + 0x4fe8) << 0x18;
     if (*(undefined **)(glContext + 0x5080) == ((unsigned char *)0x00001101)) {
-      uVar17 = uVar17 | 0x10000000;
+      formatFlagsThenCompileKey = formatFlagsThenCompileKey | 0x10000000;
     }
-    piVar4 = *(int **)(glContext + 0x49b4);
-    piVar6 = piVar4;
+    compileCacheHead = *(int **)(glContext + 0x49b4);
+    compileCacheNode = compileCacheHead;
     do {
-      if (uVar17 == piVar6[2]) {
-        if (piVar6 != piVar4) {
-          piVar11 = (int *)piVar6[1];
-          *piVar11 = *piVar6;
-          *(int **)(*piVar6 + 4) = piVar11;
-          puVar9 = (undefined4 *)piVar4[1];
-          *puVar9 = piVar6;
-          piVar6[1] = (int)puVar9;
-          *piVar6 = (int)piVar4;
-          piVar4[1] = (int)piVar6;
-          *(int **)(glContext + 0x49b4) = piVar6;
+      if (formatFlagsThenCompileKey == compileCacheNode[2]) {
+        if (compileCacheNode != compileCacheHead) {
+          compileNodePrev = (int *)compileCacheNode[1];
+          *compileNodePrev = *compileCacheNode;
+          *(int **)(*compileCacheNode + 4) = compileNodePrev;
+          compileCacheTail = (undefined4 *)compileCacheHead[1];
+          *compileCacheTail = compileCacheNode;
+          compileCacheNode[1] = (int)compileCacheTail;
+          *compileCacheNode = (int)compileCacheHead;
+          compileCacheHead[1] = (int)compileCacheNode;
+          *(int **)(glContext + 0x49b4) = compileCacheNode;
         }
-        pcVar7 = (code *)(piVar6 + 8);
+        compiledFunc = (code *)(compileCacheNode + 8);
         goto LAB_000dacc0;
       }
-      piVar6 = (int *)*piVar6;
-    } while (piVar6 != piVar4);
+      compileCacheNode = (int *)*compileCacheNode;
+    } while (compileCacheNode != compileCacheHead);
     if ((*(uint *)PTR__gle_processor_0011204c & 0x10) == 0) {
-      pcVar7 = (code *)_gleBuildCompileFuncNO(glContext,uVar17);
+      compiledFunc = (code *)_gleBuildCompileFuncNO(glContext,formatFlagsThenCompileKey);
     }
     else {
-      pcVar7 = (code *)_gleBuildCompileFuncAV(glContext,uVar17);
+      compiledFunc = (code *)_gleBuildCompileFuncAV(glContext,formatFlagsThenCompileKey);
     }
 LAB_000dacc0:
-    iVar14 = (*pcVar7)(glContext,iVar10,uVar13,uVar15,(uint)uVar2);
+    iVar14 = (*compiledFunc)(glContext,iVar10,uVar13,vertexStride,(uint)cachedStride);
     *(uint *)(glContext + 0x497c) = ~*(uint *)(glContext + 0x4980) & 0x1f;
-    if (!bVar1) {
-      iVar14 = (**(code **)(glContext + 0x47cc))(*(undefined4 *)(glContext + 0x4688),iVar16);
+    if (!skipBufferRelease) {
+      iVar14 = (**(code **)(glContext + 0x47cc))(*(undefined4 *)(glContext + 0x4688),oldBuffer);
     }
   }
   return iVar14;

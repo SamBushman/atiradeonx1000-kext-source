@@ -6269,335 +6269,335 @@ LAB_0004e12c:
 }
 
 /* _gleLoadDataElementNO @ 0x4e138 (2516 bytes) */
-int _gleLoadDataElementNO(instrCursor, param_2, param_3, param_4, param_5)
+int _gleLoadDataElementNO(instrCursor, componentCount, dataType, param_4, byteReversed)
   uint *instrCursor;
-  int param_2;
-  undefined4 param_3;
+  int componentCount;
+  undefined4 dataType;
   int param_4;
-  int param_5;
+  int byteReversed;
 {
-  uint uVar1;
-  uint uVar2;
+  uint instrWord;
+  uint nextInstrWord;
   undefined *codeChunk;
   int chunkWordCount;
-  uint *puVar5;
+  uint *wordCursor;
   
   if (param_4 == 1) {
-    if (param_5 == 0) {
-      if (param_2 == 2) {
+    if (byteReversed == 0) {
+      if (componentCount == 2) {
 LAB_0004e33c:
-        uVar1 = 0xa0070000;
+        instrWord = 0xa0070000;
       }
       else {
-        if (2 < param_2) {
-          if (param_2 != 3) {
-            if (param_2 != 4) {
+        if (2 < componentCount) {
+          if (componentCount != 3) {
+            if (componentCount != 4) {
               return instrCursor;
             }
             goto LAB_0004e344;
           }
-          uVar1 = 0xa0070000;
-          uVar2 = 0x89470002;
+          instrWord = 0xa0070000;
+          nextInstrWord = 0x89470002;
           goto LAB_0004e360;
         }
-        if (param_2 != 1) {
+        if (componentCount != 1) {
           return instrCursor;
         }
-        uVar1 = 0x88070000;
+        instrWord = 0x88070000;
       }
     }
     else {
-      if (param_2 == 2) {
-        uVar1 = 0x39400002;
-        uVar2 = 0x7c0a3e2c;
+      if (componentCount == 2) {
+        instrWord = 0x39400002;
+        nextInstrWord = 0x7c0a3e2c;
 LAB_0004e360:
-        *instrCursor = uVar1;
+        *instrCursor = instrWord;
 LAB_0004e364:
         instrCursor = instrCursor + 1;
-        *instrCursor = uVar2;
+        *instrCursor = nextInstrWord;
         goto LAB_0004e368;
       }
-      if (param_2 < 3) {
-        if (param_2 != 1) {
+      if (componentCount < 3) {
+        if (componentCount != 1) {
           return instrCursor;
         }
-        uVar1 = 0x88070003;
+        instrWord = 0x88070003;
       }
       else {
-        if (param_2 == 3) {
+        if (componentCount == 3) {
           *instrCursor = 0x39400002;
-          uVar2 = 0x89470001;
+          nextInstrWord = 0x89470001;
           instrCursor = instrCursor + 1;
           *instrCursor = 0x7c0a3e2c;
           goto LAB_0004e364;
         }
-        if (param_2 != 4) {
+        if (componentCount != 4) {
           return instrCursor;
         }
-        uVar1 = 0x7c003c2c;
+        instrWord = 0x7c003c2c;
       }
     }
 LAB_0004e1e4:
-    *instrCursor = uVar1;
+    *instrCursor = instrWord;
 LAB_0004e368:
     return instrCursor + 1;
   }
   if (param_4 == 2) {
-    if (param_5 == 0) {
-      if (param_2 != 2) {
-        if (param_2 < 3) {
-          if (param_2 != 1) {
+    if (byteReversed == 0) {
+      if (componentCount != 2) {
+        if (componentCount < 3) {
+          if (componentCount != 1) {
             return instrCursor;
           }
           goto LAB_0004e33c;
         }
-        if (param_2 == 3) {
-          uVar2 = 0xa1470000;
+        if (componentCount == 3) {
+          nextInstrWord = 0xa1470000;
         }
         else {
-          if (param_2 != 4) {
+          if (componentCount != 4) {
             return instrCursor;
           }
-          uVar2 = 0x81470000;
+          nextInstrWord = 0x81470000;
         }
-        uVar2 = uVar2 | 4;
-        uVar1 = 0x80070000;
+        nextInstrWord = nextInstrWord | 4;
+        instrWord = 0x80070000;
         goto LAB_0004e360;
       }
 LAB_0004e344:
-      uVar1 = 0x80070000;
+      instrWord = 0x80070000;
     }
     else {
-      if (param_2 == 2) {
+      if (componentCount == 2) {
         *instrCursor = 0xa1470002;
         instrCursor[1] = 0xa0070000;
         instrCursor = instrCursor + 2;
         *instrCursor = 0x5140801e;
         goto LAB_0004e368;
       }
-      if (2 < param_2) {
-        if (param_2 == 3) {
+      if (2 < componentCount) {
+        if (componentCount == 3) {
           *instrCursor = 0xa1470002;
           instrCursor[1] = 0xa0070000;
-          puVar5 = instrCursor + 2;
-          *puVar5 = 0x5140801e;
-          uVar1 = 0xa1470006;
+          wordCursor = instrCursor + 2;
+          *wordCursor = 0x5140801e;
+          instrWord = 0xa1470006;
         }
         else {
-          if (param_2 != 4) {
+          if (componentCount != 4) {
             return instrCursor;
           }
           *instrCursor = 0xa1070002;
           instrCursor[1] = 0xa0070000;
           instrCursor[2] = 0x5100801e;
           instrCursor[3] = 0xa1070006;
-          puVar5 = instrCursor + 4;
-          *puVar5 = 0xa1470004;
-          uVar1 = 0x510a801e;
+          wordCursor = instrCursor + 4;
+          *wordCursor = 0xa1470004;
+          instrWord = 0x510a801e;
         }
-        instrCursor = puVar5 + 1;
-        *instrCursor = uVar1;
+        instrCursor = wordCursor + 1;
+        *instrCursor = instrWord;
         goto LAB_0004e368;
       }
-      if (param_2 != 1) {
+      if (componentCount != 1) {
         return instrCursor;
       }
-      uVar1 = 0xa0070002;
+      instrWord = 0xa0070002;
     }
     goto LAB_0004e1e4;
   }
-  switch(param_3) {
+  switch(dataType) {
   case 0:
   case 8:
-    if (param_5 == 0) {
-      if (param_2 == 2) {
+    if (byteReversed == 0) {
+      if (componentCount == 2) {
         codeChunk = &_gleLoadByte2RTC;
       }
-      else if (param_2 < 3) {
-        if (param_2 != 1) goto switchD_0004e390_default;
+      else if (componentCount < 3) {
+        if (componentCount != 1) goto switchD_0004e390_default;
         codeChunk = &_gleLoadByte1RTC;
       }
-      else if (param_2 == 3) {
+      else if (componentCount == 3) {
         codeChunk = &_gleLoadByte3RTC;
       }
       else {
-        if (param_2 != 4) goto switchD_0004e390_default;
+        if (componentCount != 4) goto switchD_0004e390_default;
         codeChunk = &_gleLoadByte4RTC;
       }
     }
-    else if (param_2 == 2) {
+    else if (componentCount == 2) {
       codeChunk = &_gleLoadByte2RevRTC;
     }
-    else if (param_2 < 3) {
-      if (param_2 != 1) goto switchD_0004e390_default;
+    else if (componentCount < 3) {
+      if (componentCount != 1) goto switchD_0004e390_default;
       codeChunk = &_gleLoadByte1RevRTC;
     }
-    else if (param_2 == 3) {
+    else if (componentCount == 3) {
       codeChunk = &_gleLoadByte3RevRTC;
     }
     else {
-      if (param_2 != 4) goto switchD_0004e390_default;
+      if (componentCount != 4) goto switchD_0004e390_default;
       codeChunk = &_gleLoadByte4RevRTC;
     }
     break;
   case 1:
   case 9:
-    if (param_5 == 0) {
-      if (param_2 == 2) {
+    if (byteReversed == 0) {
+      if (componentCount == 2) {
         codeChunk = &_gleLoadUByte2RTC;
       }
-      else if (param_2 < 3) {
-        if (param_2 != 1) goto switchD_0004e390_default;
+      else if (componentCount < 3) {
+        if (componentCount != 1) goto switchD_0004e390_default;
         codeChunk = &_gleLoadUByte1RTC;
       }
-      else if (param_2 == 3) {
+      else if (componentCount == 3) {
         codeChunk = &_gleLoadUByte3RTC;
       }
       else {
-        if (param_2 != 4) goto switchD_0004e390_default;
+        if (componentCount != 4) goto switchD_0004e390_default;
         codeChunk = &_gleLoadUByte4RTC;
       }
     }
-    else if (param_2 == 2) {
+    else if (componentCount == 2) {
       codeChunk = &_gleLoadUByte2RevRTC;
     }
-    else if (param_2 < 3) {
-      if (param_2 != 1) goto switchD_0004e390_default;
+    else if (componentCount < 3) {
+      if (componentCount != 1) goto switchD_0004e390_default;
       codeChunk = &_gleLoadUByte1RevRTC;
     }
-    else if (param_2 == 3) {
+    else if (componentCount == 3) {
       codeChunk = &_gleLoadUByte3RevRTC;
     }
     else {
-      if (param_2 != 4) goto switchD_0004e390_default;
+      if (componentCount != 4) goto switchD_0004e390_default;
       codeChunk = &_gleLoadUByte4RevRTC;
     }
     break;
   case 2:
   case 10:
-    if (param_5 == 0) {
-      if (param_2 == 2) {
+    if (byteReversed == 0) {
+      if (componentCount == 2) {
         codeChunk = &_gleLoadShort2RTC;
       }
-      else if (param_2 < 3) {
-        if (param_2 != 1) goto switchD_0004e390_default;
+      else if (componentCount < 3) {
+        if (componentCount != 1) goto switchD_0004e390_default;
         codeChunk = &_gleLoadShort1RTC;
       }
-      else if (param_2 == 3) {
+      else if (componentCount == 3) {
         codeChunk = &_gleLoadShort3RTC;
       }
       else {
-        if (param_2 != 4) goto switchD_0004e390_default;
+        if (componentCount != 4) goto switchD_0004e390_default;
         codeChunk = &_gleLoadShort4RTC;
       }
     }
-    else if (param_2 == 2) {
+    else if (componentCount == 2) {
       codeChunk = &_gleLoadShort2RevRTC;
     }
-    else if (param_2 < 3) {
-      if (param_2 != 1) goto switchD_0004e390_default;
+    else if (componentCount < 3) {
+      if (componentCount != 1) goto switchD_0004e390_default;
       codeChunk = &_gleLoadShort1RevRTC;
     }
-    else if (param_2 == 3) {
+    else if (componentCount == 3) {
       codeChunk = &_gleLoadShort3RevRTC;
     }
     else {
-      if (param_2 != 4) goto switchD_0004e390_default;
+      if (componentCount != 4) goto switchD_0004e390_default;
       codeChunk = &_gleLoadShort4RevRTC;
     }
     break;
   case 3:
   case 0xb:
-    if (param_5 == 0) {
-      if (param_2 == 2) {
+    if (byteReversed == 0) {
+      if (componentCount == 2) {
         codeChunk = &_gleLoadUShort2RTC;
       }
-      else if (param_2 < 3) {
-        if (param_2 != 1) goto switchD_0004e390_default;
+      else if (componentCount < 3) {
+        if (componentCount != 1) goto switchD_0004e390_default;
         codeChunk = &_gleLoadUShort1RTC;
       }
-      else if (param_2 == 3) {
+      else if (componentCount == 3) {
         codeChunk = &_gleLoadUShort3RTC;
       }
       else {
-        if (param_2 != 4) goto switchD_0004e390_default;
+        if (componentCount != 4) goto switchD_0004e390_default;
         codeChunk = &_gleLoadUShort4RTC;
       }
     }
-    else if (param_2 == 2) {
+    else if (componentCount == 2) {
       codeChunk = &_gleLoadUShort2RevRTC;
     }
-    else if (param_2 < 3) {
-      if (param_2 != 1) goto switchD_0004e390_default;
+    else if (componentCount < 3) {
+      if (componentCount != 1) goto switchD_0004e390_default;
       codeChunk = &_gleLoadUShort1RevRTC;
     }
-    else if (param_2 == 3) {
+    else if (componentCount == 3) {
       codeChunk = &_gleLoadUShort3RevRTC;
     }
     else {
-      if (param_2 != 4) goto switchD_0004e390_default;
+      if (componentCount != 4) goto switchD_0004e390_default;
       codeChunk = &_gleLoadUShort4RevRTC;
     }
     break;
   case 4:
   case 0xc:
-    if (param_2 == 2) {
+    if (componentCount == 2) {
       codeChunk = &_gleLoadInt2RTC;
     }
-    else if (param_2 < 3) {
-      if (param_2 != 1) goto switchD_0004e390_default;
+    else if (componentCount < 3) {
+      if (componentCount != 1) goto switchD_0004e390_default;
       codeChunk = &_gleLoadInt1RTC;
     }
-    else if (param_2 == 3) {
+    else if (componentCount == 3) {
       codeChunk = &_gleLoadInt3RTC;
     }
     else {
-      if (param_2 != 4) goto switchD_0004e390_default;
+      if (componentCount != 4) goto switchD_0004e390_default;
       codeChunk = &_gleLoadInt4RTC;
     }
     break;
   case 5:
   case 0xd:
-    if (param_2 == 2) {
+    if (componentCount == 2) {
       codeChunk = &_gleLoadUInt2RTC;
     }
-    else if (param_2 < 3) {
-      if (param_2 != 1) goto switchD_0004e390_default;
+    else if (componentCount < 3) {
+      if (componentCount != 1) goto switchD_0004e390_default;
       codeChunk = &_gleLoadUInt1RTC;
     }
-    else if (param_2 == 3) {
+    else if (componentCount == 3) {
       codeChunk = &_gleLoadUInt3RTC;
     }
     else {
-      if (param_2 != 4) goto switchD_0004e390_default;
+      if (componentCount != 4) goto switchD_0004e390_default;
       codeChunk = &_gleLoadUInt4RTC;
     }
     break;
   case 6:
-    if (param_2 == 2) {
+    if (componentCount == 2) {
       if (param_4 == 4) {
-        uVar1 = 0xc8270000;
+        instrWord = 0xc8270000;
         goto LAB_0004e7c4;
       }
-      uVar1 = 0xc0270000;
-      uVar2 = 0xc0470004;
+      instrWord = 0xc0270000;
+      nextInstrWord = 0xc0470004;
 LAB_0004e828:
-      *instrCursor = uVar1;
+      *instrCursor = instrWord;
       instrCursor = instrCursor + 1;
-      *instrCursor = uVar2;
+      *instrCursor = nextInstrWord;
 LAB_0004e860:
       instrCursor = instrCursor + 1;
     }
-    else if (param_2 < 3) {
-      if (param_2 == 1) {
-        uVar1 = 0xc0270000;
+    else if (componentCount < 3) {
+      if (componentCount == 1) {
+        instrWord = 0xc0270000;
 LAB_0004e7c4:
-        *instrCursor = uVar1;
+        *instrCursor = instrWord;
         goto LAB_0004e860;
       }
     }
     else {
-      if (param_2 == 3) {
+      if (componentCount == 3) {
         if (param_4 == 4) {
           *instrCursor = 0xc8270000;
         }
@@ -6607,13 +6607,13 @@ LAB_0004e7c4:
           *instrCursor = 0xc0470004;
         }
         instrCursor = instrCursor + 1;
-        uVar1 = 0xc0670008;
+        instrWord = 0xc0670008;
         goto LAB_0004e7c4;
       }
-      if (param_2 == 4) {
+      if (componentCount == 4) {
         if (param_4 == 4) {
-          uVar1 = 0xc8270000;
-          uVar2 = 0xc8670008;
+          instrWord = 0xc8270000;
+          nextInstrWord = 0xc8670008;
           goto LAB_0004e828;
         }
         *instrCursor = 0xc0270000;
@@ -6626,18 +6626,18 @@ LAB_0004e7c4:
     }
     goto switchD_0004e390_default;
   case 7:
-    if (param_2 == 2) {
+    if (componentCount == 2) {
       codeChunk = &_gleLoadDouble2RTC;
     }
-    else if (param_2 < 3) {
-      if (param_2 != 1) goto switchD_0004e390_default;
+    else if (componentCount < 3) {
+      if (componentCount != 1) goto switchD_0004e390_default;
       codeChunk = &_gleLoadDouble1RTC;
     }
-    else if (param_2 == 3) {
+    else if (componentCount == 3) {
       codeChunk = &_gleLoadDouble3RTC;
     }
     else {
-      if (param_2 != 4) goto switchD_0004e390_default;
+      if (componentCount != 4) goto switchD_0004e390_default;
       codeChunk = &_gleLoadDouble4RTC;
     }
     break;
@@ -6647,122 +6647,122 @@ LAB_0004e7c4:
   chunkWordCount = _gleRTCAddAChunk_b50a8(codeChunk,instrCursor);
   instrCursor = instrCursor + chunkWordCount;
 switchD_0004e390_default:
-  switch(param_3) {
+  switch(dataType) {
   case 8:
-    if (param_2 == 2) {
+    if (componentCount == 2) {
       codeChunk = &_gleNormalizeByte2RTC;
     }
-    else if (param_2 < 3) {
-      if (param_2 != 1) {
+    else if (componentCount < 3) {
+      if (componentCount != 1) {
         return instrCursor;
       }
       codeChunk = &_gleNormalizeByte1RTC;
     }
-    else if (param_2 == 3) {
+    else if (componentCount == 3) {
       codeChunk = &_gleNormalizeByte3RTC;
     }
     else {
-      if (param_2 != 4) {
+      if (componentCount != 4) {
         return instrCursor;
       }
       codeChunk = &_gleNormalizeByte4RTC;
     }
     break;
   case 9:
-    if (param_2 == 2) {
+    if (componentCount == 2) {
       codeChunk = &_gleNormalizeUByte2RTC;
     }
-    else if (param_2 < 3) {
-      if (param_2 != 1) {
+    else if (componentCount < 3) {
+      if (componentCount != 1) {
         return instrCursor;
       }
       codeChunk = &_gleNormalizeUByte1RTC;
     }
-    else if (param_2 == 3) {
+    else if (componentCount == 3) {
       codeChunk = &_gleNormalizeUByte3RTC;
     }
     else {
-      if (param_2 != 4) {
+      if (componentCount != 4) {
         return instrCursor;
       }
       codeChunk = &_gleNormalizeUByte4RTC;
     }
     break;
   case 10:
-    if (param_2 == 2) {
+    if (componentCount == 2) {
       codeChunk = &_gleNormalizeShort2RTC;
     }
-    else if (param_2 < 3) {
-      if (param_2 != 1) {
+    else if (componentCount < 3) {
+      if (componentCount != 1) {
         return instrCursor;
       }
       codeChunk = &_gleNormalizeShort1RTC;
     }
-    else if (param_2 == 3) {
+    else if (componentCount == 3) {
       codeChunk = &_gleNormalizeShort3RTC;
     }
     else {
-      if (param_2 != 4) {
+      if (componentCount != 4) {
         return instrCursor;
       }
       codeChunk = &_gleNormalizeShort4RTC;
     }
     break;
   case 0xb:
-    if (param_2 == 2) {
+    if (componentCount == 2) {
       codeChunk = &_gleNormalizeUShort2RTC;
     }
-    else if (param_2 < 3) {
-      if (param_2 != 1) {
+    else if (componentCount < 3) {
+      if (componentCount != 1) {
         return instrCursor;
       }
       codeChunk = &_gleNormalizeUShort1RTC;
     }
-    else if (param_2 == 3) {
+    else if (componentCount == 3) {
       codeChunk = &_gleNormalizeUShort3RTC;
     }
     else {
-      if (param_2 != 4) {
+      if (componentCount != 4) {
         return instrCursor;
       }
       codeChunk = &_gleNormalizeUShort4RTC;
     }
     break;
   case 0xc:
-    if (param_2 == 2) {
+    if (componentCount == 2) {
       codeChunk = &_gleNormalizeInt2RTC;
     }
-    else if (param_2 < 3) {
-      if (param_2 != 1) {
+    else if (componentCount < 3) {
+      if (componentCount != 1) {
         return instrCursor;
       }
       codeChunk = &_gleNormalizeInt1RTC;
     }
-    else if (param_2 == 3) {
+    else if (componentCount == 3) {
       codeChunk = &_gleNormalizeInt3RTC;
     }
     else {
-      if (param_2 != 4) {
+      if (componentCount != 4) {
         return instrCursor;
       }
       codeChunk = &_gleNormalizeInt4RTC;
     }
     break;
   case 0xd:
-    if (param_2 == 2) {
+    if (componentCount == 2) {
       codeChunk = &_gleNormalizeUInt2RTC;
     }
-    else if (param_2 < 3) {
-      if (param_2 != 1) {
+    else if (componentCount < 3) {
+      if (componentCount != 1) {
         return instrCursor;
       }
       codeChunk = &_gleNormalizeUInt1RTC;
     }
-    else if (param_2 == 3) {
+    else if (componentCount == 3) {
       codeChunk = &_gleNormalizeUInt3RTC;
     }
     else {
-      if (param_2 != 4) {
+      if (componentCount != 4) {
         return instrCursor;
       }
       codeChunk = &_gleNormalizeUInt4RTC;

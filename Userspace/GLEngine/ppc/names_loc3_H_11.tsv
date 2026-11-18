@@ -1,0 +1,83 @@
+local	_gleFillImage	bVar1	isMsbFirst	CONFIRMED	lsbFirst == 0: true when no MSB-to-LSB table translation is needed for the source bytes (the flag byte at ctx+0x31e5 is clear)
+local	_gleFillImage	bVar3	keepMask	CONFIRMED	byte read from the table at 0x1111d0 - bitShift: mask applied to the current source byte before it is shifted left by bitShift
+local	_gleFillImage	bVar4	nextByteMask	CONFIRMED	_HighBitsMask[bitShift]: mask applied to the next source byte before it is shifted right by bitsRemainingInByte and merged
+local	_gleFillImage	bVar5	nextByte	CONFIRMED	the source byte after the current one (pbVar18[1]), translated through ___glMsbToLsbTable when lsbFirst
+local	_gleFillImage	bVar10	currentByte	CONFIRMED	the source byte at pbVar18, translated through ___glMsbToLsbTable when lsbFirst, then masked / merged and stored to dest
+use	_gleFillImage	iVar6	rowLengthThenRowStride	CONFIRMED	pixel-store row length read from ctx+0x31cc (replaced by width when < 1), then multiplied by pixelBytes and padded to the alignment: the byte stride between rows	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x31cc\);$	+1
+use	_gleFillImage	iVar6	rowLengthThenRowStride	CONFIRMED	pixel-store row length read from ctx+0x31cc (replaced by width when < 1), then multiplied by pixelBytes and padded to the alignment: the byte stride between rows	^\s*if\ \(iVar6\ <\ 1\)\ \{$	+2
+use	_gleFillImage	iVar6	rowLengthThenRowStride	CONFIRMED	pixel-store row length read from ctx+0x31cc (replaced by width when < 1), then multiplied by pixelBytes and padded to the alignment: the byte stride between rows	^\s*iVar17\ =\ iVar6\ \*\ iVar11\ \+\ 7\ >>\ 3;$	+1
+use	_gleFillImage	iVar6	rowLengthThenRowStride	CONFIRMED	pixel-store row length read from ctx+0x31cc (replaced by width when < 1), then multiplied by pixelBytes and padded to the alignment: the byte stride between rows	^\s*iVar6\ =\ iVar6\ \*\ iVar17;$	+2
+use	_gleFillImage	iVar6	rowLengthThenRowStride	CONFIRMED	pixel-store row length read from ctx+0x31cc (replaced by width when < 1), then multiplied by pixelBytes and padded to the alignment: the byte stride between rows	^\s*iVar6\ =\ iVar6\ \+\ \(iVar19\ \-\ iVar7\);$	+1
+use	_gleFillImage	iVar6	rowLengthThenRowStride	CONFIRMED	pixel-store row length read from ctx+0x31cc (replaced by width when < 1), then multiplied by pixelBytes and padded to the alignment: the byte stride between rows	^\s*iVar14\ =\ iVar14\ \*\ iVar6\ \+\ iVar15\ \*\ iVar17\ \+\ param_7;$	+1
+use	_gleFillImage	iVar6	rowLengthThenRowStride	CONFIRMED	pixel-store row length read from ctx+0x31cc (replaced by width when < 1), then multiplied by pixelBytes and padded to the alignment: the byte stride between rows	^\s*_gleCopy\(iVar14,param_8,uVar12,param_3,iVar6,uVar12\);$	+1
+use	_gleFillImage	iVar6	rowLengthThenRowStride	CONFIRMED	pixel-store row length read from ctx+0x31cc (replaced by width when < 1), then multiplied by pixelBytes and padded to the alignment: the byte stride between rows	^\s*iVar14\ =\ iVar14\ \+\ iVar6;$	+1
+use	_gleFillImage	iVar6	alignRemainder	CONFIRMED	bitmap row bytes modulo the alignment (ctx+0x31e0)	^\s*iVar6\ =\ iVar17\ \-\ \(iVar17\ /\ iVar19\)\ \*\ iVar19;$	+3
+use	_gleFillImage	iVar6	skipBytes	CONFIRMED	whole bytes of the skip-pixels bit offset: (skipPixels*componentCount) / 8 rounded toward zero	^\s*iVar6\ =\ \(\(int\)uVar8\ >>\ 3\)\ \+\ \(uint\)\(\(int\)uVar8\ <\ 0\ \&\&\ \(uVar8\ \&\ 7\)\ !=\ 0\);$	+2
+use	_gleFillImage	iVar6	skipBytes	CONFIRMED	whole bytes of the skip-pixels bit offset: (skipPixels*componentCount) / 8 rounded toward zero	^\s*pbVar18\ =\ \(byte\ \*\)\(param_7\ \+\ iVar14\ \*\ iVar17\ \+\ iVar6\);$	+1
+use	_gleFillImage	iVar6	bitsLeftInRow	CONFIRMED	width*componentCount, then the number of bits of the row still to copy; the loop ends when it reaches 0	^\s*iVar6\ =\ param_2\ \*\ iVar11;$	+1
+use	_gleFillImage	iVar6	bitsLeftInRow	CONFIRMED	width*componentCount, then the number of bits of the row still to copy; the loop ends when it reaches 0	^\s*while\ \(iVar6\ !=\ 0\)\ \{$	+1
+use	_gleFillImage	iVar6	bitsLeftInRow	CONFIRMED	width*componentCount, then the number of bits of the row still to copy; the loop ends when it reaches 0	^\s*if\ \(\(int\)uVar13\ <\ iVar6\)\ \{$	+1
+use	_gleFillImage	iVar6	bitsLeftInRow	CONFIRMED	width*componentCount, then the number of bits of the row still to copy; the loop ends when it reaches 0	^\s*if\ \(iVar6\ <\ 8\)\ \{$	+1
+use	_gleFillImage	iVar6	bitsLeftInRow	CONFIRMED	width*componentCount, then the number of bits of the row still to copy; the loop ends when it reaches 0	^\s*\*param_8\ =\ \(\&_HighBitsMask\)\[iVar6\]\ \&\ bVar10;$	+1
+use	_gleFillImage	iVar6	bitsLeftInRow	CONFIRMED	width*componentCount, then the number of bits of the row still to copy; the loop ends when it reaches 0	^\s*iVar14\ =\ iVar6\ \+\ \-8;$	+1
+use	_gleFillImage	iVar6	bitsLeftInRow	CONFIRMED	width*componentCount, then the number of bits of the row still to copy; the loop ends when it reaches 0	^\s*iVar6\ =\ iVar14;$	+1
+use	_gleFillImage	iVar6	bitsLeftInRow	CONFIRMED	width*componentCount, then the number of bits of the row still to copy; the loop ends when it reaches 0	^\s*iVar6\ =\ param_2\ \*\ iVar11;$@2	+1
+use	_gleFillImage	iVar7	strideRemainder	CONFIRMED	padded row byte count modulo the alignment, used to round the stride up	^\s*iVar7\ =\ iVar6\ \-\ \(iVar6\ /\ iVar19\)\ \*\ iVar19;$	+3
+use	_gleFillImage	iVar7	byteCount	CONFIRMED	loop counter of the per-element byte reversal (elementBytes down to 0)	^\s*iVar7\ =\ iVar15;$	+1
+use	_gleFillImage	iVar7	byteCount	CONFIRMED	loop counter of the per-element byte reversal (elementBytes down to 0)	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2
+local	_gleFillImage	uVar8	skipBitsThenBitShift	CONFIRMED	skipPixels*componentCount (bit offset), then reduced to the bit offset inside the first byte (skip bits minus 8*skipBytes)
+local	_gleFillImage	uVar13	bitsRemainingInByte	CONFIRMED	8 - bitShift: bits of the first source byte that remain after the shift
+local	_gleFillImage	iVar11	componentCount	CONFIRMED	result of _gleComponents(format): components per pixel
+use	_gleFillImage	iVar14	skipRowsThenRowStart	CONFIRMED	skip-rows count read from ctx+0x31d4, then replaced by the address of the first source element (skipRows*stride + skipPixels*pixelBytes + image)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x31d4\);$	+1
+use	_gleFillImage	iVar14	skipRowsThenRowStart	CONFIRMED	skip-rows count read from ctx+0x31d4, then replaced by the address of the first source element (skipRows*stride + skipPixels*pixelBytes + image)	^\s*pbVar18\ =\ \(byte\ \*\)\(param_7\ \+\ iVar14\ \*\ iVar17\ \+\ iVar6\);$	+1
+use	_gleFillImage	iVar14	skipRowsThenRowStart	CONFIRMED	skip-rows count read from ctx+0x31d4, then replaced by the address of the first source element (skipRows*stride + skipPixels*pixelBytes + image)	^\s*iVar14\ =\ iVar14\ \*\ iVar6\ \+\ iVar15\ \*\ iVar17\ \+\ param_7;$	+1
+use	_gleFillImage	iVar14	skipRowsThenRowStart	CONFIRMED	skip-rows count read from ctx+0x31d4, then replaced by the address of the first source element (skipRows*stride + skipPixels*pixelBytes + image)	^\s*_gleCopy\(iVar14,param_8,uVar12,param_3,iVar6,uVar12\);$	+1
+use	_gleFillImage	iVar14	skipRowsThenRowStart	CONFIRMED	skip-rows count read from ctx+0x31d4, then replaced by the address of the first source element (skipRows*stride + skipPixels*pixelBytes + image)	^\s*iVar17\ =\ iVar14;$	+1
+use	_gleFillImage	iVar14	skipRowsThenRowStart	CONFIRMED	skip-rows count read from ctx+0x31d4, then replaced by the address of the first source element (skipRows*stride + skipPixels*pixelBytes + image)	^\s*iVar14\ =\ iVar14\ \+\ iVar6;$	+1
+use	_gleFillImage	iVar14	bitsLeftNext	CONFIRMED	bits of the row left after the current byte (0 when fewer than 8 bits were left)	^\s*iVar14\ =\ 0;$	+1
+use	_gleFillImage	iVar14	bitsLeftNext	CONFIRMED	bits of the row left after the current byte (0 when fewer than 8 bits were left)	^\s*iVar14\ =\ iVar6\ \+\ \-8;$	+1
+use	_gleFillImage	iVar14	bitsLeftNext	CONFIRMED	bits of the row left after the current byte (0 when fewer than 8 bits were left)	^\s*iVar6\ =\ iVar14;$	+1
+use	_gleFillImage	iVar15	skipPixels	CONFIRMED	skip-pixels count read from ctx+0x31d8	^\s*iVar15\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x31d8\);$	+1
+use	_gleFillImage	iVar15	skipPixels	CONFIRMED	skip-pixels count read from ctx+0x31d8	^\s*uVar8\ =\ iVar15\ \*\ iVar11;$	+1
+use	_gleFillImage	iVar15	skipPixels	CONFIRMED	skip-pixels count read from ctx+0x31d8	^\s*iVar14\ =\ iVar14\ \*\ iVar6\ \+\ iVar15\ \*\ iVar17\ \+\ param_7;$	+1
+use	_gleFillImage	iVar15	elementBytes	CONFIRMED	(int) of _gleBytesPerElement(type): bytes per component, the size of the reversed unit	^\s*iVar15\ =\ \(int\)dVar20;$	+1
+use	_gleFillImage	iVar15	elementBytes	CONFIRMED	(int) of _gleBytesPerElement(type): bytes per component, the size of the reversed unit	^\s*if\ \(0\ <\ iVar15\)\ \{$	+2
+use	_gleFillImage	iVar15	elementBytes	CONFIRMED	(int) of _gleBytesPerElement(type): bytes per component, the size of the reversed unit	^\s*iVar7\ =\ iVar15;$	+1
+use	_gleFillImage	iVar15	elementBytes	CONFIRMED	(int) of _gleBytesPerElement(type): bytes per component, the size of the reversed unit	^\s*param_8\ =\ param_8\ \+\ iVar15;$	+2
+local	_gleFillImage	cVar16	swapBytes	CONFIRMED	pixel-store swap-bytes flag read from ctx+0x31e4, cleared for the single-byte types 0x1400 / 0x1401
+use	_gleFillImage	iVar17	bitmapRowBytes	CONFIRMED	(rowLength*componentCount + 7) >> 3 rounded up to the alignment: byte stride of a bitmap row	^\s*iVar17\ =\ iVar6\ \*\ iVar11\ \+\ 7\ >>\ 3;$	+2
+use	_gleFillImage	iVar17	bitmapRowBytes	CONFIRMED	(rowLength*componentCount + 7) >> 3 rounded up to the alignment: byte stride of a bitmap row	^\s*iVar17\ =\ iVar17\ \+\ \(iVar19\ \-\ iVar6\);$	+1
+use	_gleFillImage	iVar17	bitmapRowBytes	CONFIRMED	(rowLength*componentCount + 7) >> 3 rounded up to the alignment: byte stride of a bitmap row	^\s*pbVar18\ =\ \(byte\ \*\)\(param_7\ \+\ iVar14\ \*\ iVar17\ \+\ iVar6\);$	+1
+use	_gleFillImage	iVar17	bitmapRowBytes	CONFIRMED	(rowLength*componentCount + 7) >> 3 rounded up to the alignment: byte stride of a bitmap row	^\s*pbVar18\ =\ pbVar9\ \+\ iVar17;$	+1
+use	_gleFillImage	iVar17	pixelBytes	CONFIRMED	result of _glePixelBytes(format, type)	^\s*iVar17\ =\ _glePixelBytes\(param_5,param_6\);$	+1
+use	_gleFillImage	iVar17	pixelBytes	CONFIRMED	result of _glePixelBytes(format, type)	^\s*iVar6\ =\ iVar6\ \*\ iVar17;$	+1
+use	_gleFillImage	iVar17	pixelBytes	CONFIRMED	result of _glePixelBytes(format, type)	^\s*iVar14\ =\ iVar14\ \*\ iVar6\ \+\ iVar15\ \*\ iVar17\ \+\ param_7;$	+1
+use	_gleFillImage	iVar17	elementCursor	CONFIRMED	address of the current source element in the byte-reversing copy	^\s*iVar17\ =\ iVar14;$	+1
+use	_gleFillImage	iVar17	elementCursor	CONFIRMED	address of the current source element in the byte-reversing copy	^\s*pbVar9\ =\ \(byte\ \*\)\(iVar15\ \+\ iVar17\);$	+1
+use	_gleFillImage	iVar17	elementCursor	CONFIRMED	address of the current source element in the byte-reversing copy	^\s*iVar17\ =\ iVar17\ \+\ iVar15;$	+1
+use	_gleFillImage	iVar19	alignment	CONFIRMED	pixel-store row alignment read from ctx+0x31e0	^\s*iVar19\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x31e0\);$	+1
+use	_gleFillImage	iVar19	alignment	CONFIRMED	pixel-store row alignment read from ctx+0x31e0	^\s*iVar6\ =\ iVar17\ \-\ \(iVar17\ /\ iVar19\)\ \*\ iVar19;$	+1
+use	_gleFillImage	iVar19	alignment	CONFIRMED	pixel-store row alignment read from ctx+0x31e0	^\s*iVar17\ =\ iVar17\ \+\ \(iVar19\ \-\ iVar6\);$	+1
+use	_gleFillImage	iVar19	alignment	CONFIRMED	pixel-store row alignment read from ctx+0x31e0	^\s*iVar7\ =\ iVar6\ \-\ \(iVar6\ /\ iVar19\)\ \*\ iVar19;$	+1
+use	_gleFillImage	iVar19	alignment	CONFIRMED	pixel-store row alignment read from ctx+0x31e0	^\s*iVar6\ =\ iVar6\ \+\ \(iVar19\ \-\ iVar7\);$	+1
+use	_gleFillImage	iVar19	elementsLeft	CONFIRMED	width*componentCount: number of elements left in the current row of the byte-reversing copy	^\s*iVar19\ =\ param_2\ \*\ iVar11;$	+1
+use	_gleFillImage	iVar19	elementsLeft	CONFIRMED	width*componentCount: number of elements left in the current row of the byte-reversing copy	^\s*iVar19\ =\ iVar19\ \+\ \-1;$	+1
+use	_gleFillImage	iVar19	elementsLeft	CONFIRMED	width*componentCount: number of elements left in the current row of the byte-reversing copy	^\s*\}\ while\ \(iVar19\ !=\ 0\);$	+1
+use	_gleFillImage	pbVar18	srcCursor	CONFIRMED	source byte pointer of the bitmap path (image + skipRows*rowBytes + skipBytes), advanced one byte per output byte	^\s*pbVar18\ =\ \(byte\ \*\)\(param_7\ \+\ iVar14\ \*\ iVar17\ \+\ iVar6\);$	+1
+use	_gleFillImage	pbVar18	srcCursor	CONFIRMED	source byte pointer of the bitmap path (image + skipRows*rowBytes + skipBytes), advanced one byte per output byte	^\s*pbVar9\ =\ pbVar18;$	+1
+use	_gleFillImage	pbVar18	srcCursor	CONFIRMED	source byte pointer of the bitmap path (image + skipRows*rowBytes + skipBytes), advanced one byte per output byte	^\s*bVar10\ =\ \*pbVar18;$	+1
+use	_gleFillImage	pbVar18	srcCursor	CONFIRMED	source byte pointer of the bitmap path (image + skipRows*rowBytes + skipBytes), advanced one byte per output byte	^\s*bVar10\ =\ \(\&___glMsbToLsbTable\)\[\*pbVar18\];$	+1
+use	_gleFillImage	pbVar18	srcCursor	CONFIRMED	source byte pointer of the bitmap path (image + skipRows*rowBytes + skipBytes), advanced one byte per output byte	^\s*bVar5\ =\ pbVar18\[1\];$	+1
+use	_gleFillImage	pbVar18	srcCursor	CONFIRMED	source byte pointer of the bitmap path (image + skipRows*rowBytes + skipBytes), advanced one byte per output byte	^\s*bVar5\ =\ \(\&___glMsbToLsbTable\)\[pbVar18\[1\]\];$	+1
+use	_gleFillImage	pbVar18	srcCursor	CONFIRMED	source byte pointer of the bitmap path (image + skipRows*rowBytes + skipBytes), advanced one byte per output byte	^\s*pbVar18\ =\ pbVar18\ \+\ 1;$	+1
+use	_gleFillImage	pbVar18	srcCursor	CONFIRMED	source byte pointer of the bitmap path (image + skipRows*rowBytes + skipBytes), advanced one byte per output byte	^\s*pbVar18\ =\ pbVar9\ \+\ iVar17;$	+1
+use	_gleFillImage	pbVar18	srcCursor	CONFIRMED	source byte pointer of the bitmap path (image + skipRows*rowBytes + skipBytes), advanced one byte per output byte	^\s*pbVar9\ =\ pbVar18;$@2	+1
+use	_gleFillImage	pbVar18	reverseDest	CONFIRMED	destination write pointer inside the per-element byte reversal (copy of dest)	^\s*pbVar18\ =\ param_8;$	+1
+use	_gleFillImage	pbVar18	reverseDest	CONFIRMED	destination write pointer inside the per-element byte reversal (copy of dest)	^\s*\*pbVar18\ =\ \*pbVar9;$	+2
+use	_gleFillImage	pbVar9	rowStart	CONFIRMED	start address of the current source row of the bitmap path	^\s*pbVar9\ =\ pbVar18;$	+1
+use	_gleFillImage	pbVar9	rowStart	CONFIRMED	start address of the current source row of the bitmap path	^\s*pbVar18\ =\ pbVar9\ \+\ iVar17;$	+1
+use	_gleFillImage	pbVar9	rowStart	CONFIRMED	start address of the current source row of the bitmap path	^\s*pbVar9\ =\ pbVar18;$@2	+1
+use	_gleFillImage	pbVar9	reverseSrcEnd	CONFIRMED	address one past the current source element (elementBytes + elementCursor), read backwards	^\s*pbVar9\ =\ \(byte\ \*\)\(iVar15\ \+\ iVar17\);$	+1
+use	_gleFillImage	pbVar9	reverseSrcEnd	CONFIRMED	address one past the current source element (elementBytes + elementCursor), read backwards	^\s*pbVar9\ =\ pbVar9\ \+\ \-1;$	+2
+local	_gleFillImage	uVar12	rowByteCount	CONFIRMED	result of _gleRowBytes(format, type, width), the byte count per row passed to _gleCopy
+local	_gleFillImage	dVar20	elementBytesValue	CONFIRMED	return value of _gleBytesPerElement(type) as double, converted to elementBytes

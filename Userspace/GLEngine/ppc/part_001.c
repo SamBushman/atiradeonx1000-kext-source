@@ -1866,19 +1866,29 @@ void _gleUpdateViewScissorData(int glContext,double unusedFloatArg1,double unuse
   float floatOne;
   double intToDoubleMagic2;
   double intToDoubleMagic;
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
+  float viewportXFloat;
+  float surfaceHeightFloat;
+  float offsetXFloat;
+  float viewportYFloat;
+  float clipWidthFloat2;
+  float offsetYFloat;
+  float viewportHalfWidth;
+  float viewportTopFloat;
+  float clipHeightFloat2;
+  float clipWidthFloat;
+  float viewportHalfHeight;
+  float clipHeightFloat;
+  float surfaceWidthFloat;
   float fVar6;
+  float viewportRightFloat;
   float fVar7;
   uint uVar8;
   int glContextWord472c;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
+  uint scissorMaxYRaw;
+  uint clipMinX;
+  uint windowMinY;
+  uint windowOffsetYThenMaxY;
+  uint windowMinX;
   uint uVar14;
   uint glContextWord34e0;
   uint uVar15;
@@ -1887,7 +1897,7 @@ void _gleUpdateViewScissorData(int glContext,double unusedFloatArg1,double unuse
   uint glContextWord34e4;
   uint uVar18;
   int glContextWord4730;
-  uint uVar20;
+  uint rendererInfoFlags;
   uint viewportWidth;
   uint viewportHeight;
   uint surfaceHeight;
@@ -1914,26 +1924,26 @@ void _gleUpdateViewScissorData(int glContext,double unusedFloatArg1,double unuse
     surfaceWidth = (uint)*(ushort *)(surface + 0xca);
     surfaceHeight = (uint)*(ushort *)(surface + 0xcc);
   }
-  fVar1 = (float)((double)CONCAT44(0x43300000,viewportX ^ 0x80000000) - DOUBLE_00108d58);
-  fVar3 = (float)((double)CONCAT44(0x43300000,viewportWidth ^ 0x80000000) - DOUBLE_00108d58) *
+  viewportXFloat = (float)((double)CONCAT44(0x43300000,viewportX ^ 0x80000000) - DOUBLE_00108d58);
+  viewportHalfWidth = (float)((double)CONCAT44(0x43300000,viewportWidth ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e90;
-  fVar2 = (float)((double)CONCAT44(0x43300000,viewportY ^ 0x80000000) - DOUBLE_00108d58);
-  fVar4 = (float)((double)CONCAT44(0x43300000,viewportHeight ^ 0x80000000) - DOUBLE_00108d58) *
+  viewportYFloat = (float)((double)CONCAT44(0x43300000,viewportY ^ 0x80000000) - DOUBLE_00108d58);
+  viewportHalfHeight = (float)((double)CONCAT44(0x43300000,viewportHeight ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e90;
-  *(float *)(glContext + 0x4a2c) = fVar3;
-  *(float *)(glContext + 0x4a34) = fVar4;
-  *(float *)(glContext + 0x4a30) = fVar3 + fVar1;
-  *(float *)(glContext + 19000) = fVar4 + fVar2;
+  *(float *)(glContext + 0x4a2c) = viewportHalfWidth;
+  *(float *)(glContext + 0x4a34) = viewportHalfHeight;
+  *(float *)(glContext + 0x4a30) = viewportHalfWidth + viewportXFloat;
+  *(float *)(glContext + 19000) = viewportHalfHeight + viewportYFloat;
   intToDoubleMagic2 = DOUBLE_00108d58;
   if (*(int *)(glContext + 0x4e1c) == 0x1c00) {
-    uVar20 = **(uint **)(glContext + 0x468c);
+    rendererInfoFlags = **(uint **)(glContext + 0x468c);
     if ((((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5434) == 0)) &&
         (*(char *)(glContext + 0x34f0) != '\0')) &&
-       (((uVar20 & 4) != 0 || (*(undefined **)(glContext + 0x507c) == ((unsigned char *)0x00001101))))) {
+       (((rendererInfoFlags & 4) != 0 || (*(undefined **)(glContext + 0x507c) == ((unsigned char *)0x00001101))))) {
       glContextWord34e0 = *(uint *)(glContext + 0x34e0);
       glContextWord34e4 = *(uint *)(glContext + 0x34e4);
       uVar8 = *(int *)(glContext + 0x34e8) + glContextWord34e0;
-      uVar10 = *(int *)(glContext + 0x34ec) + glContextWord34e4;
+      scissorMaxYRaw = *(int *)(glContext + 0x34ec) + glContextWord34e4;
       uVar15 = 0;
       if ((-1 < (int)glContextWord34e0) && (uVar15 = glContextWord34e0, (int)surfaceWidth < (int)glContextWord34e0)) {
         uVar15 = surfaceWidth;
@@ -1947,7 +1957,7 @@ void _gleUpdateViewScissorData(int glContext,double unusedFloatArg1,double unuse
         uVar14 = surfaceWidth;
       }
       uVar8 = uVar18;
-      if (((int)uVar18 <= (int)uVar10) && (uVar8 = uVar10, (int)surfaceHeight < (int)uVar10)) {
+      if (((int)uVar18 <= (int)scissorMaxYRaw) && (uVar8 = scissorMaxYRaw, (int)surfaceHeight < (int)scissorMaxYRaw)) {
         uVar8 = surfaceHeight;
       }
     }
@@ -1957,16 +1967,16 @@ void _gleUpdateViewScissorData(int glContext,double unusedFloatArg1,double unuse
       uVar14 = surfaceWidth;
       uVar8 = surfaceHeight;
     }
-    uVar10 = viewportX;
-    if (((int)viewportX <= (int)uVar15) && (uVar10 = uVar15, (int)viewportRight < (int)uVar15)) {
-      uVar10 = viewportRight;
+    clipMinX = viewportX;
+    if (((int)viewportX <= (int)uVar15) && (clipMinX = uVar15, (int)viewportRight < (int)uVar15)) {
+      clipMinX = viewportRight;
     }
     uVar15 = viewportY;
     if (((int)viewportY <= (int)uVar18) && (uVar15 = uVar18, (int)viewportTop < (int)uVar18)) {
       uVar15 = viewportTop;
     }
-    uVar18 = uVar10;
-    if (((int)uVar10 <= (int)uVar14) && (uVar18 = uVar14, (int)viewportRight < (int)uVar14)) {
+    uVar18 = clipMinX;
+    if (((int)clipMinX <= (int)uVar14) && (uVar18 = uVar14, (int)viewportRight < (int)uVar14)) {
       uVar18 = viewportRight;
     }
     uVar16 = uVar15;
@@ -1974,106 +1984,106 @@ void _gleUpdateViewScissorData(int glContext,double unusedFloatArg1,double unuse
       uVar16 = viewportTop;
     }
     uVar14 = *(uint *)(glContext + 0x4724);
-    uVar12 = *(uint *)(glContext + 0x4728);
-    uVar17 = uVar18 - uVar10;
+    windowOffsetYThenMaxY = *(uint *)(glContext + 0x4728);
+    uVar17 = uVar18 - clipMinX;
     uVar8 = uVar16 - uVar15;
     glContextWord472c = *(int *)(glContext + 0x472c);
     glContextWord4730 = *(int *)(glContext + 0x4730);
-    fVar1 = (float)((double)CONCAT44(0x43300000,uVar14 ^ 0x80000000) - DOUBLE_00108d58);
-    fVar2 = (float)((double)CONCAT44(0x43300000,uVar12 ^ 0x80000000) - DOUBLE_00108d58);
-    fVar3 = (float)((double)CONCAT44(0x43300000,uVar17 ^ 0x80000000) - DOUBLE_00108d58);
-    fVar4 = (float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - DOUBLE_00108d58);
+    offsetXFloat = (float)((double)CONCAT44(0x43300000,uVar14 ^ 0x80000000) - DOUBLE_00108d58);
+    offsetYFloat = (float)((double)CONCAT44(0x43300000,windowOffsetYThenMaxY ^ 0x80000000) - DOUBLE_00108d58);
+    clipWidthFloat = (float)((double)CONCAT44(0x43300000,uVar17 ^ 0x80000000) - DOUBLE_00108d58);
+    clipHeightFloat = (float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - DOUBLE_00108d58);
     fVar6 = FLOAT_00108f8c;
-    if ((uVar20 & 8) != 0) {
+    if ((rendererInfoFlags & 8) != 0) {
       fVar6 = FLOAT_00108e90;
     }
-    fVar7 = fVar4 * fVar6;
-    fVar6 = fVar3 * fVar6;
-    fVar3 = fVar3 * FLOAT_00108e90 +
-            (float)((double)CONCAT44(0x43300000,uVar10 ^ 0x80000000) - DOUBLE_00108d58);
-    fVar4 = fVar4 * FLOAT_00108e90 +
+    fVar7 = clipHeightFloat * fVar6;
+    fVar6 = clipWidthFloat * fVar6;
+    clipWidthFloat = clipWidthFloat * FLOAT_00108e90 +
+            (float)((double)CONCAT44(0x43300000,clipMinX ^ 0x80000000) - DOUBLE_00108d58);
+    clipHeightFloat = clipHeightFloat * FLOAT_00108e90 +
             (float)((double)CONCAT44(0x43300000,uVar15 ^ 0x80000000) - DOUBLE_00108d58);
-    if ((uVar20 & 1) == 0) {
-      uVar13 = uVar10 + uVar14;
+    if ((rendererInfoFlags & 1) == 0) {
+      windowMinX = clipMinX + uVar14;
       uVar14 = uVar18 + uVar14;
-      dVar26 = (double)CONCAT44(0x43300000,uVar13 ^ 0x80000000) - DOUBLE_00108d58;
+      dVar26 = (double)CONCAT44(0x43300000,windowMinX ^ 0x80000000) - DOUBLE_00108d58;
       *(float *)(glContext + 0x1b70) = fVar6;
-      *(float *)(glContext + 0x1b80) = fVar3 + fVar1;
+      *(float *)(glContext + 0x1b80) = clipWidthFloat + offsetXFloat;
       *(undefined4 *)(glContext + 0x4a44) = 0x3f800000;
-      *(float *)(glContext + 0x4a48) = fVar1;
+      *(float *)(glContext + 0x4a48) = offsetXFloat;
       *(float *)(glContext + 0xf0) = (float)dVar26;
       *(float *)(glContext + 0x100) =
            (float)((double)CONCAT44(0x43300000,uVar14 ^ 0x80000000) - intToDoubleMagic2);
-      if (uVar10 == 0) {
-        uVar13 = uVar13 - glContextWord472c;
+      if (clipMinX == 0) {
+        windowMinX = windowMinX - glContextWord472c;
       }
       if (uVar18 == surfaceWidth) {
         uVar14 = uVar14 + glContextWord472c;
       }
     }
     else {
-      uVar13 = (surfaceWidth - uVar18) + uVar14;
-      uVar14 = (surfaceWidth - uVar10) + uVar14;
-      fVar5 = (float)((double)CONCAT44(0x43300000,surfaceWidth ^ 0x80000000) - DOUBLE_00108d58);
-      dVar28 = (double)CONCAT44(0x43300000,uVar13 ^ 0x80000000) - DOUBLE_00108d58;
+      windowMinX = (surfaceWidth - uVar18) + uVar14;
+      uVar14 = (surfaceWidth - clipMinX) + uVar14;
+      surfaceWidthFloat = (float)((double)CONCAT44(0x43300000,surfaceWidth ^ 0x80000000) - DOUBLE_00108d58);
+      dVar28 = (double)CONCAT44(0x43300000,windowMinX ^ 0x80000000) - DOUBLE_00108d58;
       dVar26 = (double)CONCAT44(0x43300000,uVar14 ^ 0x80000000) - DOUBLE_00108d58;
       *(undefined4 *)(glContext + 0x4a44) = 0xbf800000;
       *(float *)(glContext + 0x1b70) = -fVar6;
-      *(float *)(glContext + 0x4a48) = fVar5 + fVar1;
-      *(float *)(glContext + 0x1b80) = (fVar5 - fVar3) + fVar1;
+      *(float *)(glContext + 0x4a48) = surfaceWidthFloat + offsetXFloat;
+      *(float *)(glContext + 0x1b80) = (surfaceWidthFloat - clipWidthFloat) + offsetXFloat;
       *(float *)(glContext + 0xf0) = (float)dVar28;
       *(float *)(glContext + 0x100) = (float)dVar26;
-      if (uVar10 == 0) {
+      if (clipMinX == 0) {
         uVar14 = uVar14 + glContextWord472c;
       }
       if (uVar18 == surfaceWidth) {
-        uVar13 = uVar13 - glContextWord472c;
+        windowMinX = windowMinX - glContextWord472c;
       }
     }
     intToDoubleMagic = DOUBLE_00108d58;
-    if ((uVar20 & 2) == 0) {
-      uVar11 = uVar15 + uVar12;
-      uVar12 = uVar16 + uVar12;
-      dVar28 = (double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) - DOUBLE_00108d58;
+    if ((rendererInfoFlags & 2) == 0) {
+      windowMinY = uVar15 + windowOffsetYThenMaxY;
+      windowOffsetYThenMaxY = uVar16 + windowOffsetYThenMaxY;
+      dVar28 = (double)CONCAT44(0x43300000,windowMinY ^ 0x80000000) - DOUBLE_00108d58;
       *(float *)(glContext + 0x1b74) = fVar7;
       *(undefined4 *)(glContext + 0x4a4c) = 0x3f800000;
-      *(float *)(glContext + 0x4a50) = fVar2;
-      *(float *)(glContext + 0x1b84) = fVar4 + fVar2;
+      *(float *)(glContext + 0x4a50) = offsetYFloat;
+      *(float *)(glContext + 0x1b84) = clipHeightFloat + offsetYFloat;
       *(float *)(glContext + 0xf4) = (float)dVar28;
       *(float *)(glContext + 0x104) =
-           (float)((double)CONCAT44(0x43300000,uVar12 ^ 0x80000000) - intToDoubleMagic);
+           (float)((double)CONCAT44(0x43300000,windowOffsetYThenMaxY ^ 0x80000000) - intToDoubleMagic);
       if (uVar15 == 0) {
-        uVar11 = uVar11 - glContextWord4730;
+        windowMinY = windowMinY - glContextWord4730;
       }
       if (uVar16 == surfaceHeight) {
-        uVar12 = uVar12 + glContextWord4730;
+        windowOffsetYThenMaxY = windowOffsetYThenMaxY + glContextWord4730;
       }
     }
     else {
-      uVar11 = (surfaceHeight - uVar16) + uVar12;
-      uVar12 = (surfaceHeight - uVar15) + uVar12;
-      fVar1 = (float)((double)CONCAT44(0x43300000,surfaceHeight ^ 0x80000000) - DOUBLE_00108d58);
-      dVar28 = (double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) - DOUBLE_00108d58;
-      dVar26 = (double)CONCAT44(0x43300000,uVar12 ^ 0x80000000) - DOUBLE_00108d58;
+      windowMinY = (surfaceHeight - uVar16) + windowOffsetYThenMaxY;
+      windowOffsetYThenMaxY = (surfaceHeight - uVar15) + windowOffsetYThenMaxY;
+      surfaceHeightFloat = (float)((double)CONCAT44(0x43300000,surfaceHeight ^ 0x80000000) - DOUBLE_00108d58);
+      dVar28 = (double)CONCAT44(0x43300000,windowMinY ^ 0x80000000) - DOUBLE_00108d58;
+      dVar26 = (double)CONCAT44(0x43300000,windowOffsetYThenMaxY ^ 0x80000000) - DOUBLE_00108d58;
       *(undefined4 *)(glContext + 0x4a4c) = 0xbf800000;
-      *(float *)(glContext + 0x4a50) = fVar1 + fVar2;
+      *(float *)(glContext + 0x4a50) = surfaceHeightFloat + offsetYFloat;
       *(float *)(glContext + 0x1b74) = -fVar7;
-      *(float *)(glContext + 0x1b84) = (fVar1 - fVar4) + fVar2;
+      *(float *)(glContext + 0x1b84) = (surfaceHeightFloat - clipHeightFloat) + offsetYFloat;
       *(float *)(glContext + 0xf4) = (float)dVar28;
       *(float *)(glContext + 0x104) = (float)dVar26;
       if (uVar15 == 0) {
-        uVar12 = uVar12 + glContextWord4730;
+        windowOffsetYThenMaxY = windowOffsetYThenMaxY + glContextWord4730;
       }
       if (uVar16 == surfaceHeight) {
-        uVar11 = uVar11 - glContextWord4730;
+        windowMinY = windowMinY - glContextWord4730;
       }
     }
     intToDoubleMagic = DOUBLE_00108d58;
     dVar27 = (double)CONCAT44(0x43300000,uVar14 ^ 0x80000000) - DOUBLE_00108d58;
-    dVar29 = (double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) - DOUBLE_00108d58;
-    dVar28 = (double)CONCAT44(0x43300000,uVar12 ^ 0x80000000) - DOUBLE_00108d58;
+    dVar29 = (double)CONCAT44(0x43300000,windowMinY ^ 0x80000000) - DOUBLE_00108d58;
+    dVar28 = (double)CONCAT44(0x43300000,windowOffsetYThenMaxY ^ 0x80000000) - DOUBLE_00108d58;
     *(float *)(glContext + 0x110) =
-         (float)((double)CONCAT44(0x43300000,uVar13 ^ 0x80000000) - DOUBLE_00108d58);
+         (float)((double)CONCAT44(0x43300000,windowMinX ^ 0x80000000) - DOUBLE_00108d58);
     *(float *)(glContext + 0x118) = (float)dVar27;
     *(float *)(glContext + 0x114) = (float)dVar29;
     *(float *)(glContext + 0x11c) = (float)dVar28;
@@ -2085,43 +2095,43 @@ void _gleUpdateViewScissorData(int glContext,double unusedFloatArg1,double unuse
       *(undefined4 *)(glContext + 0x4a20) = 0;
     }
     else {
-      fVar2 = (float)((double)CONCAT44(0x43300000,uVar17 ^ 0x80000000) - intToDoubleMagic);
-      fVar3 = (float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - intToDoubleMagic);
+      clipWidthFloat2 = (float)((double)CONCAT44(0x43300000,uVar17 ^ 0x80000000) - intToDoubleMagic);
+      clipHeightFloat2 = (float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - intToDoubleMagic);
       *(float *)(glContext + 0x4a1c) =
-           (float)((double)CONCAT44(0x43300000,viewportWidth ^ 0x80000000) - intToDoubleMagic) / fVar2;
+           (float)((double)CONCAT44(0x43300000,viewportWidth ^ 0x80000000) - intToDoubleMagic) / clipWidthFloat2;
       *(float *)(glContext + 0x4a24) =
-           (float)((double)CONCAT44(0x43300000,viewportHeight ^ 0x80000000) - intToDoubleMagic) / fVar3;
+           (float)((double)CONCAT44(0x43300000,viewportHeight ^ 0x80000000) - intToDoubleMagic) / clipHeightFloat2;
       *(float *)(glContext + 0x4a28) =
            (float)((double)CONCAT44(0x43300000,(viewportY - uVar15) * 2 + viewportHeight ^ 0x80000000) - intToDoubleMagic
-                  ) / fVar3 - floatOne;
+                  ) / clipHeightFloat2 - floatOne;
       *(float *)(glContext + 0x4a20) =
-           (float)((double)CONCAT44(0x43300000,(viewportX - uVar10) * 2 + viewportWidth ^ 0x80000000) - intToDoubleMagic
-                  ) / fVar2 - floatOne;
+           (float)((double)CONCAT44(0x43300000,(viewportX - clipMinX) * 2 + viewportWidth ^ 0x80000000) - intToDoubleMagic
+                  ) / clipWidthFloat2 - floatOne;
     }
   }
   else {
-    *(float *)(glContext + 0x1b70) = fVar3;
-    *(float *)(glContext + 0x1b74) = fVar4;
-    fVar6 = (float)((double)CONCAT44(0x43300000,viewportRight ^ 0x80000000) - intToDoubleMagic);
-    *(float *)(glContext + 0x1b80) = fVar3 + fVar1;
-    *(float *)(glContext + 0x1b84) = fVar4 + fVar2;
-    fVar3 = (float)((double)CONCAT44(0x43300000,viewportTop ^ 0x80000000) - intToDoubleMagic);
+    *(float *)(glContext + 0x1b70) = viewportHalfWidth;
+    *(float *)(glContext + 0x1b74) = viewportHalfHeight;
+    viewportRightFloat = (float)((double)CONCAT44(0x43300000,viewportRight ^ 0x80000000) - intToDoubleMagic);
+    *(float *)(glContext + 0x1b80) = viewportHalfWidth + viewportXFloat;
+    *(float *)(glContext + 0x1b84) = viewportHalfHeight + viewportYFloat;
+    viewportTopFloat = (float)((double)CONCAT44(0x43300000,viewportTop ^ 0x80000000) - intToDoubleMagic);
     *(undefined4 *)(glContext + 0x4a4c) = 0x3f800000;
     *(undefined4 *)(glContext + 0x4a50) = 0;
-    *(float *)(glContext + 0xf0) = fVar1;
-    *(float *)(glContext + 0x100) = fVar6;
-    *(float *)(glContext + 0xf4) = fVar2;
-    *(float *)(glContext + 0x104) = fVar3;
+    *(float *)(glContext + 0xf0) = viewportXFloat;
+    *(float *)(glContext + 0x100) = viewportRightFloat;
+    *(float *)(glContext + 0xf4) = viewportYFloat;
+    *(float *)(glContext + 0x104) = viewportTopFloat;
     *(undefined4 *)(glContext + 0x4a1c) = 0x3f800000;
     *(undefined4 *)(glContext + 0x4a24) = 0x3f800000;
     *(undefined4 *)(glContext + 0x4a20) = 0;
     *(undefined4 *)(glContext + 0x4a28) = 0;
     *(undefined4 *)(glContext + 0x4a44) = 0x3f800000;
     *(undefined4 *)(glContext + 0x4a48) = 0;
-    *(float *)(glContext + 0x110) = fVar1;
-    *(float *)(glContext + 0x118) = fVar6;
-    *(float *)(glContext + 0x114) = fVar2;
-    *(float *)(glContext + 0x11c) = fVar3;
+    *(float *)(glContext + 0x110) = viewportXFloat;
+    *(float *)(glContext + 0x118) = viewportRightFloat;
+    *(float *)(glContext + 0x114) = viewportYFloat;
+    *(float *)(glContext + 0x11c) = viewportTopFloat;
   }
   *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 1;
   *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 1;

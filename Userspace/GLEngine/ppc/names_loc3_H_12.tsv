@@ -1,0 +1,40 @@
+local	_gleEmptyImage	bVar2	leadMask	CONFIRMED	byte read from the table at 0x1111d0 - bitShift: mask of the bits of the first destination byte that the source overwrites (uVar15 starts as this value)
+local	_gleEmptyImage	bVar3	spillMask	CONFIRMED	_HighBitsMask[bitShift]: mask applied to the bits carried over into the byte after the last full destination byte
+use	_gleEmptyImage	bVar4	destByte	CONFIRMED	the existing destination byte at pbVar12, translated through ___glMsbToLsbTable when lsbFirst, merged with the new bits under the mask	^\s*bVar4\ =\ \*pbVar12;$	+1
+use	_gleEmptyImage	bVar4	destByte	CONFIRMED	the existing destination byte at pbVar12, translated through ___glMsbToLsbTable when lsbFirst, merged with the new bits under the mask	^\s*bVar4\ =\ \(\&___glMsbToLsbTable\)\[\*pbVar12\];$	+1
+use	_gleEmptyImage	bVar4	destByte	CONFIRMED	the existing destination byte at pbVar12, translated through ___glMsbToLsbTable when lsbFirst, merged with the new bits under the mask	^\s*uVar15\ =\ \(uint\)bVar4\ \&\ \~uVar15\ \|\ \*param_6\ \&\ uVar15;$	+1
+use	_gleEmptyImage	bVar4	destByte	CONFIRMED	the existing destination byte at pbVar12, translated through ___glMsbToLsbTable when lsbFirst, merged with the new bits under the mask	^\s*uVar15\ =\ \(uint\)bVar4\ \&\ \~uVar15\ \|\ uVar5\ \&\ uVar15;$	+1
+use	_gleEmptyImage	bVar4	destByte	CONFIRMED	the existing destination byte at pbVar12, translated through ___glMsbToLsbTable when lsbFirst, merged with the new bits under the mask	^\s*bVar4\ =\ \*pbVar12;$@2	+1
+use	_gleEmptyImage	bVar4	destByte	CONFIRMED	the existing destination byte at pbVar12, translated through ___glMsbToLsbTable when lsbFirst, merged with the new bits under the mask	^\s*bVar4\ =\ \(\&___glMsbToLsbTable\)\[\*pbVar12\];$@2	+1
+use	_gleEmptyImage	bVar4	destByte	CONFIRMED	the existing destination byte at pbVar12, translated through ___glMsbToLsbTable when lsbFirst, merged with the new bits under the mask	^\s*uVar13\ =\ \(uint\)bVar4\ \&\ \~\(uint\)bVar3\ \|\ uVar13\ \&\ bVar3;$	+1
+local	_gleEmptyImage	uVar5	mergedBits	CONFIRMED	carry bits of the previous source byte OR-ed with the current source byte shifted right by bitShift
+local	_gleEmptyImage	uVar13	carryBits	CONFIRMED	low bits of the current source byte shifted left by 8 - bitShift: carried into the next destination byte
+local	_gleEmptyImage	uVar15	writeMask	CONFIRMED	bits of the current destination byte that are overwritten: leadMask for the first byte (narrowed for a short row), 0xff afterwards
+local	_gleEmptyImage	iVar7	strideRemainder	CONFIRMED	padded row byte count modulo the alignment, used to round the stride up
+local	_gleEmptyImage	uVar8	skipBitsThenBitShift	CONFIRMED	skipPixels*componentCount (bit offset), then reduced to the bit offset inside the first byte (skip bits minus 8*skipBytes)
+local	_gleEmptyImage	iVar10	componentCount	CONFIRMED	result of _gleComponents(format): components per pixel
+local	_gleEmptyImage	uVar11	rowByteCount	CONFIRMED	result of _gleRowBytes(format, type, width), the byte count per row passed to _gleCopy
+local	_gleEmptyImage	pbVar14	reverseDest	CONFIRMED	destination write pointer inside the per-element byte reversal
+local	_gleEmptyImage	pbVar9	reverseSrcEnd	CONFIRMED	address one past the current source element (source + elementBytes), read backwards
+local	_gleEmptyImage	cVar18	swapBytes	CONFIRMED	pixel-store swap-bytes flag read from ctx+0x31e4, cleared for the single-byte types 0x1400 / 0x1401
+local	_gleEmptyImage	dVar22	elementBytesValue	CONFIRMED	return value of _gleBytesPerElement(type) as double, converted to elementBytes
+use	_gleEmptyImage	pbVar12	bitmapDestCursor	CONFIRMED	destination byte pointer of the bitmap path, advanced one byte per source byte	^\s*pbVar12\ =\ pbVar20;$	+1
+use	_gleEmptyImage	pbVar12	bitmapDestCursor	CONFIRMED	destination byte pointer of the bitmap path, advanced one byte per source byte	^\s*bVar4\ =\ \*pbVar12;$	+1
+use	_gleEmptyImage	pbVar12	bitmapDestCursor	CONFIRMED	destination byte pointer of the bitmap path, advanced one byte per source byte	^\s*bVar4\ =\ \(\&___glMsbToLsbTable\)\[\*pbVar12\];$	+1
+use	_gleEmptyImage	pbVar12	bitmapDestCursor	CONFIRMED	destination byte pointer of the bitmap path, advanced one byte per source byte	^\s*\*pbVar12\ =\ \(byte\)uVar15;$	+1
+use	_gleEmptyImage	pbVar12	bitmapDestCursor	CONFIRMED	destination byte pointer of the bitmap path, advanced one byte per source byte	^\s*\*pbVar12\ =\ \(\&___glMsbToLsbTable\)\[uVar15\];$	+1
+use	_gleEmptyImage	pbVar12	bitmapDestCursor	CONFIRMED	destination byte pointer of the bitmap path, advanced one byte per source byte	^\s*pbVar12\ =\ pbVar12\ \+\ 1;$	+1
+use	_gleEmptyImage	pbVar12	bitmapDestCursor	CONFIRMED	destination byte pointer of the bitmap path, advanced one byte per source byte	^\s*bVar4\ =\ \*pbVar12;$@2	+1
+use	_gleEmptyImage	pbVar12	bitmapDestCursor	CONFIRMED	destination byte pointer of the bitmap path, advanced one byte per source byte	^\s*bVar4\ =\ \(\&___glMsbToLsbTable\)\[\*pbVar12\];$@2	+1
+use	_gleEmptyImage	pbVar12	bitmapDestCursor	CONFIRMED	destination byte pointer of the bitmap path, advanced one byte per source byte	^\s*\*pbVar12\ =\ \(byte\)uVar13;$	+1
+use	_gleEmptyImage	pbVar12	bitmapDestCursor	CONFIRMED	destination byte pointer of the bitmap path, advanced one byte per source byte	^\s*\*pbVar12\ =\ \(\&___glMsbToLsbTable\)\[uVar13\];$	+1
+use	_gleEmptyImage	pbVar12	elementDestCursor	CONFIRMED	destination address of the current element in the byte-reversing copy	^\s*pbVar12\ =\ pbVar20;$@2	+1
+use	_gleEmptyImage	pbVar12	elementDestCursor	CONFIRMED	destination address of the current element in the byte-reversing copy	^\s*pbVar14\ =\ pbVar12;$	+1
+use	_gleEmptyImage	pbVar12	elementDestCursor	CONFIRMED	destination address of the current element in the byte-reversing copy	^\s*pbVar12\ =\ pbVar12\ \+\ iVar16;$	+1
+use	_gleEmptyImage	pbVar20	bitmapRowStart	CONFIRMED	start of the current destination row of the bitmap path (image + skipRows*rowBytes + skipBytes)	^\s*pbVar20\ =\ \(byte\ \*\)\(param_7\ \+\ iVar16\ \*\ iVar19\ \+\ iVar6\);$	+1
+use	_gleEmptyImage	pbVar20	bitmapRowStart	CONFIRMED	start of the current destination row of the bitmap path (image + skipRows*rowBytes + skipBytes)	^\s*pbVar12\ =\ pbVar20;$	+1
+use	_gleEmptyImage	pbVar20	bitmapRowStart	CONFIRMED	start of the current destination row of the bitmap path (image + skipRows*rowBytes + skipBytes)	^\s*pbVar20\ =\ pbVar20\ \+\ iVar19;$	+1
+use	_gleEmptyImage	pbVar20	rowStart	CONFIRMED	start of the current destination row of the non-bitmap path (skipRows*stride + skipPixels*pixelBytes + image)	^\s*pbVar20\ =\ \(byte\ \*\)\(iVar16\ \*\ iVar6\ \+\ iVar17\ \*\ iVar19\ \+\ param_7\);$	+1
+use	_gleEmptyImage	pbVar20	rowStart	CONFIRMED	start of the current destination row of the non-bitmap path (skipRows*stride + skipPixels*pixelBytes + image)	^\s*_gleCopy\(param_6,pbVar20,uVar11,param_3,uVar11,iVar6\);$	+1
+use	_gleEmptyImage	pbVar20	rowStart	CONFIRMED	start of the current destination row of the non-bitmap path (skipRows*stride + skipPixels*pixelBytes + image)	^\s*pbVar12\ =\ pbVar20;$@2	+1
+use	_gleEmptyImage	pbVar20	rowStart	CONFIRMED	start of the current destination row of the non-bitmap path (skipRows*stride + skipPixels*pixelBytes + image)	^\s*pbVar20\ =\ pbVar20\ \+\ iVar6;$	+1

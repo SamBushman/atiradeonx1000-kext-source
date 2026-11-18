@@ -1,0 +1,47 @@
+local	_gle_strtod	param_1	textCursor	CONFIRMED	the string being parsed: advanced past an optional '+' (0x2b) or '-' (0x2d) sign, then scanned for the integer digits
+local	_gle_strtod	param_2	endPtrOut	CONFIRMED	optional out pointer: *param_2 receives the address where parsing stopped
+local	_gle_strtod	bVar4	negative	CONFIRMED	set when the leading sign character is '-' (0x2d); negates the result at the end
+local	_gle_strtod	bVar3	negativeExponent	CONFIRMED	set when the exponent sign character is '-' (0x2d); negates the exponent value
+local	_gle_strtod	bVar2	parsedDigits	INFERRED	set true once integer or fraction digits were scanned; the exponent part ('e' / 'E') is only accepted when it is set
+local	_gle_strtod	bVar1	atDecimalPoint	CONFIRMED	current character equals '.' (0x2e): selects the fraction scan
+local	_gle_strtod	bVar6	currentChar	CONFIRMED	character being examined: compared with '.', 'e' / 'E' and with the digit range (c - 0x30 < 10)
+use	_gle_strtod	iVar5	integerDigitsLeft	CONFIRMED	number of integer digits still to accumulate in the backwards loop over the integer part	^\s*iVar5\ =\ \(int\)pbVar7\ \-\ \(int\)\(param_1\ \+\ \-1\);$	+1
+use	_gle_strtod	iVar5	integerDigitsLeft	CONFIRMED	number of integer digits still to accumulate in the backwards loop over the integer part	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	_gle_strtod	iVar5	exponentDigitsLeft	CONFIRMED	number of exponent digits still to accumulate in the backwards loop over the exponent	^\s*iVar5\ =\ \(int\)pbVar8\ \-\ \(int\)\(pbVar7\ \+\ \-1\);$	+1
+use	_gle_strtod	iVar5	exponentDigitsLeft	CONFIRMED	number of exponent digits still to accumulate in the backwards loop over the exponent	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@2	+2
+use	_gle_strtod	pbVar7	integerCursor	CONFIRMED	scans forward over the integer digits, then walks backwards over them while accumulating the value	^\s*if\ \(\(bVar6\ !=\ 0x65\)\ \&\&\ \(pbVar7\ =\ param_1,\ bVar6\ !=\ 0x45\)\)\ \{$	+1
+use	_gle_strtod	pbVar7	integerCursor	CONFIRMED	scans forward over the integer digits, then walks backwards over them while accumulating the value	^\s*bVar6\ =\ pbVar7\[1\];$	+2
+use	_gle_strtod	pbVar7	integerCursor	CONFIRMED	scans forward over the integer digits, then walks backwards over them while accumulating the value	^\s*pbStack00000018\ =\ pbVar7;$	+1
+use	_gle_strtod	pbVar7	integerCursor	CONFIRMED	scans forward over the integer digits, then walks backwards over them while accumulating the value	^\s*pbVar7\ =\ pbVar7\ \+\ \-1;$	+3
+use	_gle_strtod	pbVar7	integerCursor	CONFIRMED	scans forward over the integer digits, then walks backwards over them while accumulating the value	^\s*bVar6\ =\ \*pbVar7;$	+2
+use	_gle_strtod	pbVar7	fractionCursor	CONFIRMED	scans forward over the fraction digits, then walks backwards over them while accumulating the fraction	^\s*pbVar7\ =\ pbVar8;$	+1
+use	_gle_strtod	pbVar7	fractionCursor	CONFIRMED	scans forward over the fraction digits, then walks backwards over them while accumulating the fraction	^\s*pbVar7\ =\ pbVar7\ \+\ 1;$@2	+2
+use	_gle_strtod	pbVar7	fractionCursor	CONFIRMED	scans forward over the fraction digits, then walks backwards over them while accumulating the fraction	^\s*pbStack00000018\ =\ pbVar7;$@2	+1
+use	_gle_strtod	pbVar7	fractionCursor	CONFIRMED	scans forward over the fraction digits, then walks backwards over them while accumulating the fraction	^\s*while\ \(pbVar7\ =\ pbVar7\ \+\ \-1,\ pbVar8\ <=\ pbVar7\)\ \{$	+1
+use	_gle_strtod	pbVar7	fractionCursor	CONFIRMED	scans forward over the fraction digits, then walks backwards over them while accumulating the fraction	^\s*\(\(\(double\)CONCAT44\(0x43300000,\(int\)\(char\)\*pbVar7\ \-\ 0x30U\ \^\ 0x80000000\)\ \-$	+2
+use	_gle_strtod	pbVar7	exponentSignCursor	CONFIRMED	position after the 'e' / 'E': checked for an optional '+' / '-' sign	^\s*pbVar7\ =\ pbStack00000018\ \+\ 1;$	+2
+use	_gle_strtod	pbVar7	exponentSignCursor	CONFIRMED	position after the 'e' / 'E': checked for an optional '+' / '-' sign	^\s*pbVar7\ =\ pbStack00000018\ \+\ 2;$	+1
+use	_gle_strtod	pbVar7	exponentSignCursor	CONFIRMED	position after the 'e' / 'E': checked for an optional '+' / '-' sign	^\s*else\ if\ \(\*pbVar7\ ==\ 0x2d\)\ \{$	+1
+use	_gle_strtod	pbVar7	exponentSignCursor	CONFIRMED	position after the 'e' / 'E': checked for an optional '+' / '-' sign	^\s*bVar6\ =\ \*pbVar7;$@3	+2
+use	_gle_strtod	pbVar7	exponentSignCursor	CONFIRMED	position after the 'e' / 'E': checked for an optional '+' / '-' sign	^\s*pbStack00000018\ =\ pbVar7;$@3	+1
+use	_gle_strtod	pbVar7	exponentSignCursor	CONFIRMED	position after the 'e' / 'E': checked for an optional '+' / '-' sign	^\s*if\ \(pbVar7\ <=\ pbVar8\)\ \{$	+2
+use	_gle_strtod	pbVar8	fractionStart	CONFIRMED	first character after the decimal point: lower bound of the backwards fraction loop	^\s*pbVar8\ =\ pbStack00000018\ \+\ 1;$	+1
+use	_gle_strtod	pbVar8	fractionStart	CONFIRMED	first character after the decimal point: lower bound of the backwards fraction loop	^\s*pbVar7\ =\ pbVar8;$	+1
+use	_gle_strtod	pbVar8	fractionStart	CONFIRMED	first character after the decimal point: lower bound of the backwards fraction loop	^\s*while\ \(pbVar7\ =\ pbVar7\ \+\ \-1,\ pbVar8\ <=\ pbVar7\)\ \{$	+1
+use	_gle_strtod	pbVar8	exponentCursor	CONFIRMED	scans forward over the exponent digits, then walks backwards over them while accumulating the exponent	^\s*pbVar8\ =\ pbVar7;$	+1
+use	_gle_strtod	pbVar8	exponentCursor	CONFIRMED	scans forward over the exponent digits, then walks backwards over them while accumulating the exponent	^\s*pbVar8\ =\ pbVar8\ \+\ 1;$	+2
+use	_gle_strtod	pbVar8	exponentCursor	CONFIRMED	scans forward over the exponent digits, then walks backwards over them while accumulating the exponent	^\s*pbStack00000018\ =\ pbVar8;$	+1
+use	_gle_strtod	pbVar8	exponentCursor	CONFIRMED	scans forward over the exponent digits, then walks backwards over them while accumulating the exponent	^\s*pbVar8\ =\ pbVar8\ \+\ \-1;$	+1
+use	_gle_strtod	pbVar8	exponentCursor	CONFIRMED	scans forward over the exponent digits, then walks backwards over them while accumulating the exponent	^\s*if\ \(pbVar7\ <=\ pbVar8\)\ \{$	+2
+use	_gle_strtod	pbVar8	exponentCursor	CONFIRMED	scans forward over the exponent digits, then walks backwards over them while accumulating the exponent	^\s*bVar6\ =\ \*pbVar8;$@2	+2
+local	_gle_strtod	dVar9	value	CONFIRMED	the result: integer part, plus the fraction scaled by DOUBLE_00108e08, finally multiplied by the power of ten of the exponent and negated for a leading '-'
+use	_gle_strtod	dVar10	integerPlace	CONFIRMED	place value of the current integer digit: starts at DOUBLE_00108d68 and is multiplied by DOUBLE_00108e10 for each digit	^\s*dVar10\ =\ DOUBLE_00108d68;$	+1
+use	_gle_strtod	dVar10	integerPlace	CONFIRMED	place value of the current integer digit: starts at DOUBLE_00108d68 and is multiplied by DOUBLE_00108e10 for each digit	^\s*dVar9\ =\ \(\(double\)CONCAT44\(0x43300000,\(int\)\(char\)bVar6\ \-\ 0x30U\ \^\ 0x80000000\)\ \-$	+3
+use	_gle_strtod	dVar10	fractionValue	CONFIRMED	Horner accumulation of the fraction digits (value * DOUBLE_00108e08 + digit), added to value scaled by DOUBLE_00108e08	^\s*dVar10\ =\ DOUBLE_00108d60;$	+1
+use	_gle_strtod	dVar10	fractionValue	CONFIRMED	Horner accumulation of the fraction digits (value * DOUBLE_00108e08 + digit), added to value scaled by DOUBLE_00108e08	^\s*dVar10\ =\ dVar10\ \*\ DOUBLE_00108e08\ \+$	+1
+use	_gle_strtod	dVar10	fractionValue	CONFIRMED	Horner accumulation of the fraction digits (value * DOUBLE_00108e08 + digit), added to value scaled by DOUBLE_00108e08	^\s*dVar9\ =\ dVar10\ \*\ DOUBLE_00108e08\ \+\ dVar9;$	+1
+use	_gle_strtod	dVar10	exponentThenScale	CONFIRMED	the exponent integer (negated for a '-' sign), then replaced by _pow_10(exponent): the factor that value is multiplied with	^\s*dVar10\ =\ DOUBLE_00108d60;$@2	+1
+use	_gle_strtod	dVar10	exponentThenScale	CONFIRMED	the exponent integer (negated for a '-' sign), then replaced by _pow_10(exponent): the factor that value is multiplied with	^\s*dVar10\ =\ \(\(double\)CONCAT44\(0x43300000,\(int\)\(char\)bVar6\ \-\ 0x30U\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58$	+2
+use	_gle_strtod	dVar10	exponentThenScale	CONFIRMED	the exponent integer (negated for a '-' sign), then replaced by _pow_10(exponent): the factor that value is multiplied with	^\s*dVar10\ =\ \-dVar10;$	+1
+use	_gle_strtod	dVar10	exponentThenScale	CONFIRMED	the exponent integer (negated for a '-' sign), then replaced by _pow_10(exponent): the factor that value is multiplied with	^\s*dVar10\ =\ \(double\)\(\(double\ \(\*\)\(\)\)_pow_10\)\(\(int\)dVar10\);$	+2
+local	_gle_strtod	dVar11	exponentPlace	CONFIRMED	place value of the current exponent digit: starts at DOUBLE_00108d68 and is multiplied by DOUBLE_00108e10 for each digit

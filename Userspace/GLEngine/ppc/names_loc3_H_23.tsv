@@ -1,0 +1,7 @@
+local	_evaluateImageUnits	param_2	program	INFERRED	object whose +0x30 is the uniform count and +0x40 the handle passed to _ShGetUniformTypeInfo; +0x20 / +0x24 hold the two per-stage unit tables and +0x3e the validity flag
+local	_evaluateImageUnits	local_58	savedValidFlag	CONFIRMED	original byte at param_2+0x3e: the function sets that byte to 1, may clear it, and returns whether it differs from this saved value
+local	_evaluateImageUnits	local_120	savedCounts	CONFIRMED	copy of the 2 x 16 counts at +0x2c of the per-stage unit tables, taken before they are reset to 0 and compared with the recomputed counts at the end
+local	_evaluateImageUnits	local_a0	savedTypes	CONFIRMED	copy of the 2 x 16 halfwords at +0x6c of the per-stage unit tables, taken before they are reset to 0 and compared with the recomputed types at the end
+local	_evaluateImageUnits	local_60	uniformType	CONFIRMED	type output of _ShGetUniformTypeInfo; values 0x8b5d..0x8b64 (local_60 - 0x8b5d < 8) are processed as sampler types
+local	_evaluateImageUnits	local_5c	stagesUsed	INFERRED	byte flags output of _ShGetUniformTypeInfo: one entry per stage (0 / 1) telling whether the uniform is used by that stage
+local	_evaluateImageUnits	uVar4	samplerIndex	CONFIRMED	result of _getIndexForGLSLSamplerType(type halfword): the 4-bit code written into the 64-bit slot mask at +0x50c / +0x510

@@ -480,138 +480,149 @@ int _gleFillImage(glContext, width, height, unusedArg4, format, type, image, des
   int image;
   byte *dest;
 {
-  bool bVar1;
+  bool isMsbFirst;
   char lsbFirst;
-  byte bVar3;
-  byte bVar4;
-  byte bVar5;
-  int iVar6;
-  int iVar7;
-  uint uVar8;
-  byte bVar10;
-  byte *pbVar9;
-  int iVar11;
-  undefined4 uVar12;
-  uint uVar13;
-  int iVar14;
-  int iVar15;
-  char cVar16;
-  int iVar17;
-  byte *pbVar18;
-  int iVar19;
-  double dVar20;
+  byte keepMask;
+  byte nextByteMask;
+  byte nextByte;
+  int rowLengthThenRowStride;
+  int bitsLeftInRow;
+  int skipBytes;
+  int alignRemainder;
+  int strideRemainder;
+  int byteCount;
+  uint skipBitsThenBitShift;
+  byte currentByte;
+  byte *rowStart;
+  byte *reverseSrcEnd;
+  int componentCount;
+  undefined4 rowByteCount;
+  uint bitsRemainingInByte;
+  int skipRowsThenRowStart;
+  int bitsLeftNext;
+  int skipPixels;
+  int elementBytes;
+  char swapBytes;
+  int bitmapRowBytes;
+  int elementCursor;
+  int pixelBytes;
+  byte *srcCursor;
+  byte *reverseDest;
+  int alignment;
+  int elementsLeft;
+  double elementBytesValue;
   
-  iVar6 = *(int *)(glContext + 0x31cc);
-  iVar19 = *(int *)(glContext + 0x31e0);
-  cVar16 = *(char *)(glContext + 0x31e4);
-  iVar15 = *(int *)(glContext + 0x31d8);
-  iVar14 = *(int *)(glContext + 0x31d4);
+  rowLengthThenRowStride = *(int *)(glContext + 0x31cc);
+  alignment = *(int *)(glContext + 0x31e0);
+  swapBytes = *(char *)(glContext + 0x31e4);
+  skipPixels = *(int *)(glContext + 0x31d8);
+  skipRowsThenRowStart = *(int *)(glContext + 0x31d4);
   lsbFirst = *(char *)(glContext + 0x31e5);
-  iVar11 = _gleComponents(format);
-  if (iVar6 < 1) {
-    iVar6 = width;
+  componentCount = _gleComponents(format);
+  if (rowLengthThenRowStride < 1) {
+    rowLengthThenRowStride = width;
   }
   if (type == 0x1a00) {
-    iVar17 = iVar6 * iVar11 + 7 >> 3;
-    iVar6 = iVar17 - (iVar17 / iVar19) * iVar19;
-    if (iVar6 != 0) {
-      iVar17 = iVar17 + (iVar19 - iVar6);
+    bitmapRowBytes = rowLengthThenRowStride * componentCount + 7 >> 3;
+    alignRemainder = bitmapRowBytes - (bitmapRowBytes / alignment) * alignment;
+    if (alignRemainder != 0) {
+      bitmapRowBytes = bitmapRowBytes + (alignment - alignRemainder);
     }
-    uVar8 = iVar15 * iVar11;
-    iVar6 = ((int)uVar8 >> 3) + (uint)((int)uVar8 < 0 && (uVar8 & 7) != 0);
-    uVar8 = uVar8 + iVar6 * -8;
-    uVar13 = -uVar8 + 8;
-    pbVar18 = (byte *)(image + iVar14 * iVar17 + iVar6);
-    bVar3 = *(byte *)(-uVar8 + 0x1111d0);
-    bVar4 = (&_HighBitsMask)[uVar8];
+    skipBitsThenBitShift = skipPixels * componentCount;
+    skipBytes = ((int)skipBitsThenBitShift >> 3) + (uint)((int)skipBitsThenBitShift < 0 && (skipBitsThenBitShift & 7) != 0);
+    skipBitsThenBitShift = skipBitsThenBitShift + skipBytes * -8;
+    bitsRemainingInByte = -skipBitsThenBitShift + 8;
+    srcCursor = (byte *)(image + skipRowsThenRowStart * bitmapRowBytes + skipBytes);
+    keepMask = *(byte *)(-skipBitsThenBitShift + 0x1111d0);
+    nextByteMask = (&_HighBitsMask)[skipBitsThenBitShift];
     if (0 < height) {
-      bVar1 = lsbFirst == '\0';
-      iVar6 = width * iVar11;
-      pbVar9 = pbVar18;
+      isMsbFirst = lsbFirst == '\0';
+      bitsLeftInRow = width * componentCount;
+      rowStart = srcCursor;
       do {
-        while (iVar6 != 0) {
-          if (bVar1) {
-            bVar10 = *pbVar18;
+        while (bitsLeftInRow != 0) {
+          if (isMsbFirst) {
+            currentByte = *srcCursor;
           }
           else {
-            bVar10 = (&___glMsbToLsbTable)[*pbVar18];
+            currentByte = (&___glMsbToLsbTable)[*srcCursor];
           }
-          if (uVar8 != 0) {
-            if ((int)uVar13 < iVar6) {
-              if (bVar1) {
-                bVar5 = pbVar18[1];
+          if (skipBitsThenBitShift != 0) {
+            if ((int)bitsRemainingInByte < bitsLeftInRow) {
+              if (isMsbFirst) {
+                nextByte = srcCursor[1];
               }
               else {
-                bVar5 = (&___glMsbToLsbTable)[pbVar18[1]];
+                nextByte = (&___glMsbToLsbTable)[srcCursor[1]];
               }
-              bVar10 = (bVar10 & bVar3) << (uVar8 & 0x3f) |
-                       (byte)((int)(uint)(bVar5 & bVar4) >> (uVar13 & 0x3f));
+              currentByte = (currentByte & keepMask) << (skipBitsThenBitShift & 0x3f) |
+                       (byte)((int)(uint)(nextByte & nextByteMask) >> (bitsRemainingInByte & 0x3f));
             }
             else {
-              bVar10 = (bVar10 & bVar3) << (uVar8 & 0x3f);
+              currentByte = (currentByte & keepMask) << (skipBitsThenBitShift & 0x3f);
             }
           }
-          if (iVar6 < 8) {
-            iVar14 = 0;
-            *dest = (&_HighBitsMask)[iVar6] & bVar10;
+          if (bitsLeftInRow < 8) {
+            bitsLeftNext = 0;
+            *dest = (&_HighBitsMask)[bitsLeftInRow] & currentByte;
           }
           else {
-            *dest = bVar10;
-            iVar14 = iVar6 + -8;
+            *dest = currentByte;
+            bitsLeftNext = bitsLeftInRow + -8;
           }
           dest = dest + 1;
-          pbVar18 = pbVar18 + 1;
-          iVar6 = iVar14;
+          srcCursor = srcCursor + 1;
+          bitsLeftInRow = bitsLeftNext;
         }
         height = height + -1;
-        pbVar18 = pbVar9 + iVar17;
-        iVar6 = width * iVar11;
-        pbVar9 = pbVar18;
+        srcCursor = rowStart + bitmapRowBytes;
+        bitsLeftInRow = width * componentCount;
+        rowStart = srcCursor;
       } while (height != 0);
     }
   }
   else {
-    iVar17 = _glePixelBytes(format,type);
+    pixelBytes = _glePixelBytes(format,type);
     if (type - 0x1400U < 2) {
-      cVar16 = '\0';
+      swapBytes = '\0';
     }
-    iVar6 = iVar6 * iVar17;
-    iVar7 = iVar6 - (iVar6 / iVar19) * iVar19;
-    if (iVar7 != 0) {
-      iVar6 = iVar6 + (iVar19 - iVar7);
+    rowLengthThenRowStride = rowLengthThenRowStride * pixelBytes;
+    strideRemainder = rowLengthThenRowStride - (rowLengthThenRowStride / alignment) * alignment;
+    if (strideRemainder != 0) {
+      rowLengthThenRowStride = rowLengthThenRowStride + (alignment - strideRemainder);
     }
-    iVar14 = iVar14 * iVar6 + iVar15 * iVar17 + image;
-    if (cVar16 == '\0') {
-      uVar12 = _gleRowBytes(format,type,width);
-      _gleCopy(iVar14,dest,uVar12,height,iVar6,uVar12);
+    skipRowsThenRowStart = skipRowsThenRowStart * rowLengthThenRowStride + skipPixels * pixelBytes + image;
+    if (swapBytes == '\0') {
+      rowByteCount = _gleRowBytes(format,type,width);
+      _gleCopy(skipRowsThenRowStart,dest,rowByteCount,height,rowLengthThenRowStride,rowByteCount);
     }
     else {
-      dVar20 = (double)((double (*)())_gleBytesPerElement)(type);
-      iVar15 = (int)dVar20;
+      elementBytesValue = (double)((double (*)())_gleBytesPerElement)(type);
+      elementBytes = (int)elementBytesValue;
       if (0 < height) {
         do {
-          iVar19 = width * iVar11;
-          iVar17 = iVar14;
-          if (0 < width * iVar11) {
+          elementsLeft = width * componentCount;
+          elementCursor = skipRowsThenRowStart;
+          if (0 < width * componentCount) {
             do {
-              if (0 < iVar15) {
-                pbVar9 = (byte *)(iVar15 + iVar17);
-                pbVar18 = dest;
-                iVar7 = iVar15;
+              if (0 < elementBytes) {
+                reverseSrcEnd = (byte *)(elementBytes + elementCursor);
+                reverseDest = dest;
+                byteCount = elementBytes;
                 do {
-                  pbVar9 = pbVar9 + -1;
-                  *pbVar18 = *pbVar9;
-                  pbVar18 = pbVar18 + 1;
-                  iVar7 = iVar7 + -1;
-                } while (iVar7 != 0);
+                  reverseSrcEnd = reverseSrcEnd + -1;
+                  *reverseDest = *reverseSrcEnd;
+                  reverseDest = reverseDest + 1;
+                  byteCount = byteCount + -1;
+                } while (byteCount != 0);
               }
-              iVar19 = iVar19 + -1;
-              dest = dest + iVar15;
-              iVar17 = iVar17 + iVar15;
-            } while (iVar19 != 0);
+              elementsLeft = elementsLeft + -1;
+              dest = dest + elementBytes;
+              elementCursor = elementCursor + elementBytes;
+            } while (elementsLeft != 0);
           }
           height = height + -1;
-          iVar14 = iVar14 + iVar6;
+          skipRowsThenRowStart = skipRowsThenRowStart + rowLengthThenRowStride;
         } while (height != 0);
       }
     }
@@ -630,80 +641,82 @@ void _gleEmptyImage(glContext, width, height, format, type, source, image)
   int image;
 {
   char lsbFirst;
-  byte bVar2;
-  byte bVar3;
-  byte bVar4;
-  uint uVar5;
+  byte leadMask;
+  byte spillMask;
+  byte destByte;
+  uint mergedBits;
   int iVar6;
-  int iVar7;
-  uint uVar8;
-  byte *pbVar9;
-  int iVar10;
-  undefined4 uVar11;
-  byte *pbVar12;
-  uint uVar13;
-  byte *pbVar14;
-  uint uVar15;
+  int strideRemainder;
+  uint skipBitsThenBitShift;
+  byte *reverseSrcEnd;
+  int componentCount;
+  undefined4 rowByteCount;
+  byte *bitmapDestCursor;
+  byte *elementDestCursor;
+  uint carryBits;
+  byte *reverseDest;
+  uint writeMask;
   int iVar16;
   int iVar17;
-  char cVar18;
+  char swapBytes;
   int iVar19;
-  byte *pbVar20;
+  byte *bitmapRowStart;
+  byte *rowStart;
   int iVar21;
-  double dVar22;
+  double elementBytesValue;
   
   iVar6 = *(int *)(glContext + 0x31cc);
   iVar21 = *(int *)(glContext + 0x31e0);
-  cVar18 = *(char *)(glContext + 0x31e4);
+  swapBytes = *(char *)(glContext + 0x31e4);
   iVar17 = *(int *)(glContext + 0x31d8);
   iVar16 = *(int *)(glContext + 0x31d4);
   lsbFirst = *(char *)(glContext + 0x31e5);
-  iVar10 = _gleComponents(format);
+  componentCount = _gleComponents(format);
   if (iVar6 < 1) {
     iVar6 = width;
   }
   if (type == 0x1a00) {
-    iVar19 = iVar6 * iVar10 + 7 >> 3;
+    iVar19 = iVar6 * componentCount + 7 >> 3;
     iVar6 = iVar19 - (iVar19 / iVar21) * iVar21;
     if (iVar6 != 0) {
       iVar19 = iVar19 + (iVar21 - iVar6);
     }
-    uVar8 = iVar17 * iVar10;
-    iVar6 = ((int)uVar8 >> 3) + (uint)((int)uVar8 < 0 && (uVar8 & 7) != 0);
-    uVar8 = uVar8 + iVar6 * -8;
-    pbVar20 = (byte *)(image + iVar16 * iVar19 + iVar6);
-    bVar2 = *(byte *)(-uVar8 + 0x1111d0);
-    bVar3 = (&_HighBitsMask)[uVar8];
+    skipBitsThenBitShift = iVar17 * componentCount;
+    iVar6 = ((int)skipBitsThenBitShift >> 3) + (uint)((int)skipBitsThenBitShift < 0 && (skipBitsThenBitShift & 7) != 0);
+    skipBitsThenBitShift = skipBitsThenBitShift + iVar6 * -8;
+    bitmapRowStart = (byte *)(image + iVar16 * iVar19 + iVar6);
+    leadMask = *(byte *)(-skipBitsThenBitShift + 0x1111d0);
+    spillMask = (&_HighBitsMask)[skipBitsThenBitShift];
     if (0 < height) {
       do {
-        uVar13 = 0;
-        if (width * iVar10 != 0) {
-          pbVar12 = pbVar20;
-          iVar6 = width * iVar10;
-          uVar15 = (uint)bVar2;
+        carryBits = 0;
+        if (width * componentCount != 0) {
+          bitmapDestCursor = bitmapRowStart;
+          iVar6 = width * componentCount;
+          writeMask = (uint)leadMask;
           do {
-            if ((int)(iVar6 + uVar8) < 8) {
-              uVar15 = uVar15 & (byte)(&_HighBitsMask)[iVar6 + uVar8];
+            if ((int)(iVar6 + skipBitsThenBitShift) < 8) {
+              writeMask = writeMask & (byte)(&_HighBitsMask)[iVar6 + skipBitsThenBitShift];
             }
             if (lsbFirst == '\0') {
-              bVar4 = *pbVar12;
+              destByte = *bitmapDestCursor;
             }
             else {
-              bVar4 = (&___glMsbToLsbTable)[*pbVar12];
+              destByte = (&___glMsbToLsbTable)[*bitmapDestCursor];
             }
-            if (uVar8 == 0) {
-              uVar15 = (uint)bVar4 & ~uVar15 | *source & uVar15;
+            if (skipBitsThenBitShift == 0) {
+              writeMask = (uint)destByte & ~writeMask | *source & writeMask;
             }
             else {
-              uVar5 = uVar13 | (int)(uint)*source >> (uVar8 & 0x3f) & 0xffU;
-              uVar13 = (uint)*source << (-uVar8 + 8 & 0x3f) & 0xff;
-              uVar15 = (uint)bVar4 & ~uVar15 | uVar5 & uVar15;
+              mergedBits = carryBits | (int)(uint)*source >> (skipBitsThenBitShift & 0x3f) & 0xffU;
+              carryBits = (uint)*source << (-skipBitsThenBitShift + 8 & 0x3f) & 0xff;
+              writeMask = (uint)destByte & ~writeMask | mergedBits & writeMask;
             }
             if (lsbFirst == '\0') {
-              *pbVar12 = (byte)uVar15;
+              *bitmapDestCursor = (byte)writeMask;
             }
             else {
-              *pbVar12 = (&___glMsbToLsbTable)[uVar15];
+              *bitmapDestCursor = (&___glMsbToLsbTable)[writeMask];
             }
             if (iVar6 < 8) {
               iVar6 = 0;
@@ -712,72 +725,72 @@ void _gleEmptyImage(glContext, width, height, format, type, source, image)
               iVar6 = iVar6 + -8;
             }
             source = source + 1;
-            pbVar12 = pbVar12 + 1;
-            uVar15 = 0xff;
+            bitmapDestCursor = bitmapDestCursor + 1;
+            writeMask = 0xff;
           } while (iVar6 != 0);
-          if (uVar13 != 0) {
+          if (carryBits != 0) {
             if (lsbFirst == '\0') {
-              bVar4 = *pbVar12;
+              destByte = *bitmapDestCursor;
             }
             else {
-              bVar4 = (&___glMsbToLsbTable)[*pbVar12];
+              destByte = (&___glMsbToLsbTable)[*bitmapDestCursor];
             }
-            uVar13 = (uint)bVar4 & ~(uint)bVar3 | uVar13 & bVar3;
+            carryBits = (uint)destByte & ~(uint)spillMask | carryBits & spillMask;
             if (lsbFirst == '\0') {
-              *pbVar12 = (byte)uVar13;
+              *bitmapDestCursor = (byte)carryBits;
             }
             else {
-              *pbVar12 = (&___glMsbToLsbTable)[uVar13];
+              *bitmapDestCursor = (&___glMsbToLsbTable)[carryBits];
             }
           }
         }
         height = height + -1;
-        pbVar20 = pbVar20 + iVar19;
+        bitmapRowStart = bitmapRowStart + iVar19;
       } while (height != 0);
     }
   }
   else {
     iVar19 = _glePixelBytes(format,type);
     if (type - 0x1400U < 2) {
-      cVar18 = '\0';
+      swapBytes = '\0';
     }
     iVar6 = iVar6 * iVar19;
-    iVar7 = iVar6 - (iVar6 / iVar21) * iVar21;
-    if (iVar7 != 0) {
-      iVar6 = iVar6 + (iVar21 - iVar7);
+    strideRemainder = iVar6 - (iVar6 / iVar21) * iVar21;
+    if (strideRemainder != 0) {
+      iVar6 = iVar6 + (iVar21 - strideRemainder);
     }
-    pbVar20 = (byte *)(iVar16 * iVar6 + iVar17 * iVar19 + image);
-    if (cVar18 == '\0') {
-      uVar11 = _gleRowBytes(format,type,width);
-      _gleCopy(source,pbVar20,uVar11,height,uVar11,iVar6);
+    rowStart = (byte *)(iVar16 * iVar6 + iVar17 * iVar19 + image);
+    if (swapBytes == '\0') {
+      rowByteCount = _gleRowBytes(format,type,width);
+      _gleCopy(source,rowStart,rowByteCount,height,rowByteCount,iVar6);
     }
     else {
-      dVar22 = (double)((double (*)())_gleBytesPerElement)(type);
-      iVar16 = (int)dVar22;
+      elementBytesValue = (double)((double (*)())_gleBytesPerElement)(type);
+      iVar16 = (int)elementBytesValue;
       if (0 < height) {
         do {
-          pbVar12 = pbVar20;
-          iVar17 = width * iVar10;
-          if (0 < width * iVar10) {
+          elementDestCursor = rowStart;
+          iVar17 = width * componentCount;
+          if (0 < width * componentCount) {
             do {
               if (0 < iVar16) {
-                pbVar9 = source + iVar16;
-                pbVar14 = pbVar12;
+                reverseSrcEnd = source + iVar16;
+                reverseDest = elementDestCursor;
                 iVar21 = iVar16;
                 do {
-                  pbVar9 = pbVar9 + -1;
-                  *pbVar14 = *pbVar9;
-                  pbVar14 = pbVar14 + 1;
+                  reverseSrcEnd = reverseSrcEnd + -1;
+                  *reverseDest = *reverseSrcEnd;
+                  reverseDest = reverseDest + 1;
                   iVar21 = iVar21 + -1;
                 } while (iVar21 != 0);
               }
               iVar17 = iVar17 + -1;
               source = source + iVar16;
-              pbVar12 = pbVar12 + iVar16;
+              elementDestCursor = elementDestCursor + iVar16;
             } while (iVar17 != 0);
           }
           height = height + -1;
-          pbVar20 = pbVar20 + iVar6;
+          rowStart = rowStart + iVar6;
         } while (height != 0);
       }
     }

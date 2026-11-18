@@ -1,0 +1,29 @@
+local	_gleInitDrawPixelsShareObject	param_2	shareObject	INFERRED	record initialised here: +4 = 0x100000 (data bytes per texture), +8 = 2 (texture count), +0x18 pointer table of texture objects, +0x1c data block; each texture gets its level record pointing into the data block
+local	_gleInitDrawPixelsShareObject	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the 0x17000000 mask and the shorter all-zero test
+local	_gleInitDrawPixelsShareObject	cVar3	rendererInfoByte79	INFERRED	byte at +0x79 of the record at ctx+0x468c: selects which change-word bits matter in the all-clean test (same load as in the other state-validation blocks)
+local	_gleInitDrawPixelsShareObject	uVar2	savedByte31e6	CONFIRMED	byte at ctx+0x31e6 saved on entry, set to 1 during the init and restored at the end
+use	_gleInitDrawPixelsShareObject	iVar4	textureAddress	CONFIRMED	address of the texture object slot: first entry of the allocated block plus offset 0xa9c per texture, stored into the pointer table param_2[6]	^\s*iVar4\ =\ \*\(int\ \*\)param_2\[6\]\ \+\ iVar11;$	+1
+use	_gleInitDrawPixelsShareObject	iVar4	textureAddress	CONFIRMED	address of the texture object slot: first entry of the allocated block plus offset 0xa9c per texture, stored into the pointer table param_2[6]	^\s*\(\(int\ \*\)param_2\[6\]\)\[uVar10\]\ =\ iVar4;$	+1
+use	_gleInitDrawPixelsShareObject	iVar4	dirtyBitArrayWord	CONFIRMED	word read through dirtyBitArrayCursor (*piVar6)	^\s*iVar4\ =\ \*piVar6;$	+1
+use	_gleInitDrawPixelsShareObject	iVar4	dirtyBitArrayWord	CONFIRMED	word read through dirtyBitArrayCursor (*piVar6)	^\s*if\ \(iVar4\ !=\ 0\)\ \{$	+1
+use	_gleInitDrawPixelsShareObject	iVar4	dataStride	CONFIRMED	param_2[1]: bytes of the data block per texture, multiplied by the texture index for the level data pointer	^\s*iVar4\ =\ param_2\[1\];$	+1
+use	_gleInitDrawPixelsShareObject	iVar4	dataStride	CONFIRMED	param_2[1]: bytes of the data block per texture, multiplied by the texture index for the level data pointer	^\s*\*\(uint\ \*\)\(iVar12\ \+\ 0xd8\)\ =\ iVar7\ \+\ uVar10\ \*\ iVar4;$	+1
+local	_gleInitDrawPixelsShareObject	piVar6	dirtyBitArrayCursor	CONFIRMED	cursor over the 9 words of the dirty bit array at context offset 0x324; the first nonzero word sets bit 0x800000 of the 0x31c word
+local	_gleInitDrawPixelsShareObject	iVar7	dataBlock	CONFIRMED	param_2[7]: the data block allocated with _gleVecAlloc; texture level data pointers are dataBlock + index*dataStride
+local	_gleInitDrawPixelsShareObject	puVar8	textureTable	CONFIRMED	result of _gleVecAlloc(8) stored at param_2[6]: its first word points to the texture object storage, then it holds one texture object pointer per index
+use	_gleInitDrawPixelsShareObject	uVar9	textureStorage	CONFIRMED	_gleVecAlloc(textureCount * 0xa9c): storage for all texture objects	^\s*uVar9\ =\ _gleVecAlloc\(param_2\[2\]\ \*\ 0xa9c\);$	+2
+use	_gleInitDrawPixelsShareObject	uVar9	dataBlockHandle	CONFIRMED	_gleVecAlloc(textureCount * dataStride): the data block, stored at param_2[7]	^\s*uVar9\ =\ _gleVecAlloc\(uVar5\ \*\ param_2\[1\]\);$	+2
+use	_gleInitDrawPixelsShareObject	uVar5	textureCount	CONFIRMED	param_2[2]: number of textures, the bound of the first loop and the factor of the data block size	^\s*uVar5\ =\ 0;$	+1
+use	_gleInitDrawPixelsShareObject	uVar5	textureCount	CONFIRMED	param_2[2]: number of textures, the bound of the first loop and the factor of the data block size	^\s*uVar5\ =\ param_2\[2\];$	+1
+use	_gleInitDrawPixelsShareObject	uVar5	textureCount	CONFIRMED	param_2[2]: number of textures, the bound of the first loop and the factor of the data block size	^\s*\}\ while\ \(uVar13\ <\ uVar5\);$	+1
+use	_gleInitDrawPixelsShareObject	uVar5	textureCount	CONFIRMED	param_2[2]: number of textures, the bound of the first loop and the factor of the data block size	^\s*param_2\[5\]\ =\ uVar5\ \*\ param_2\[1\];$	+2
+local	_gleInitDrawPixelsShareObject	uVar10	textureIndex	CONFIRMED	loop counter of the texture pointer table setup
+local	_gleInitDrawPixelsShareObject	uVar13	nextTextureIndex	CONFIRMED	textureIndex + 1, the loop bound compared with textureCount
+use	_gleInitDrawPixelsShareObject	iVar11	textureOffset	CONFIRMED	byte offset of the texture object in the storage block, advanced by 0xa9c per texture	^\s*iVar11\ =\ 0;$	+1
+use	_gleInitDrawPixelsShareObject	iVar11	textureOffset	CONFIRMED	byte offset of the texture object in the storage block, advanced by 0xa9c per texture	^\s*iVar4\ =\ \*\(int\ \*\)param_2\[6\]\ \+\ iVar11;$	+2
+use	_gleInitDrawPixelsShareObject	iVar11	framebufferObject	CONFIRMED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar11\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_gleInitDrawPixelsShareObject	iVar11	framebufferObject	CONFIRMED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar11\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar11\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+use	_gleInitDrawPixelsShareObject	iVar11	slotByteOffset	CONFIRMED	textureIndex * 4: byte offset of the texture pointer in the table param_2[6]	^\s*iVar11\ =\ uVar10\ \*\ 4;$	+2
+use	_gleInitDrawPixelsShareObject	iVar11	slotByteOffset	CONFIRMED	textureIndex * 4: byte offset of the texture pointer in the table param_2[6]	^\s*_gleCreatePluginTexture\(param_1,\*\(undefined4\ \*\)\(iVar11\ \+\ param_2\[6\]\)\);$	+1
+use	_gleInitDrawPixelsShareObject	iVar11	slotByteOffset	CONFIRMED	textureIndex * 4: byte offset of the texture pointer in the table param_2[6]	^\s*\(param_1,\*\(undefined4\ \*\)\(iVar11\ \+\ param_2\[6\]\),iVar12\ \+\ 0xc4,0,0,0x8058\);$	+1
+local	_gleInitDrawPixelsShareObject	iVar12	textureObject	CONFIRMED	texture object from the pointer table: initialised with _gleInitializeGLTexture, wrap/filter fields set, plugin texture created, level record at +0xc4 filled

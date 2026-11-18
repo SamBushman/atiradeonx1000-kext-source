@@ -368,85 +368,97 @@ int _gleSubmitVertexCopy(glContext, param_2)
 /* _gleForceToSoftwareTCL @ 0x103b38 (1520 bytes) */
 undefined4 _gleForceToSoftwareTCL(int glContext,double fparam_1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
-  bool bVar1;
-  char cVar2;
+  bool rendererInfoByte79Clear;
+  bool stateClean;
+  char rendererInfoByte79;
   undefined1 uVar3;
-  int *piVar4;
-  undefined4 uVar5;
+  int *dirtyBitArrayCursor;
+  undefined4 drawResult;
   int iVar6;
+  int verticesLeft;
+  int framebufferObject;
+  int dirtyBitArrayWord;
   int incomingR5;
   undefined4 incomingR6;
   int incomingR7;
   undefined1 *puVar7;
   char *incomingR8;
   int iVar8;
-  uint uVar9;
-  int iVar10;
+  int matrixFuncDirty;
+  int remaining;
+  int loopIndex;
+  uint dirtyWord3ThenMasked;
+  uint dispatchFlags;
+  int vertexCursor;
+  int copyVertexCount;
   int iVar11;
-  int iVar12;
-  undefined4 uVar13;
-  int *piVar14;
-  int iVar15;
-  undefined4 uVar16;
+  int vertexField30Cursor;
+  int vertexCountThenRemaining;
+  int copyVertexCursor;
+  int lastVertexIndex;
+  undefined4 savedWord486c;
+  int *dirtyFlagWords;
+  int vertexLoopCursor;
+  undefined4 savedVertexEnd;
   double f1AfterCall;
   double f1AfterCall1;
-  char local_30 [16];
+  char decomposeResultFlags [16];
   
-  local_30[0] = '\0';
-  iVar10 = *(int *)(glContext + 0x4854);
+  decomposeResultFlags[0] = '\0';
+  vertexCursor = *(int *)(glContext + 0x4854);
   if (*(int *)(glContext + 0x48d0) == 0) {
-    iVar11 = *(int *)(glContext + 0x4858) - iVar10 >> 8;
+    vertexCountThenRemaining = *(int *)(glContext + 0x4858) - vertexCursor >> 8;
   }
   else {
-    incomingR8 = local_30;
-    iVar11 = (*(int *)(glContext + 0x4858) - *(int *)(glContext + 0x4868)) /
+    incomingR8 = decomposeResultFlags;
+    vertexCountThenRemaining = (*(int *)(glContext + 0x4858) - *(int *)(glContext + 0x4868)) /
              (int)*(short *)(glContext + 0x487c);
-    *(int *)(glContext + 0x4858) = iVar10 + iVar11 * 0x100;
-    incomingR7 = iVar10;
+    *(int *)(glContext + 0x4858) = vertexCursor + vertexCountThenRemaining * 0x100;
+    incomingR7 = vertexCursor;
     _gleDecomposePrimitiveVertices
-              (glContext,*(int *)(glContext + 0x48d0),iVar11,*(int *)(glContext + 0x4868),iVar10,incomingR8);
-    if (local_30[0] != '\0') {
-      iVar10 = *(int *)(glContext + 0x758c);
+              (glContext,*(int *)(glContext + 0x48d0),vertexCountThenRemaining,*(int *)(glContext + 0x4868),vertexCursor,incomingR8);
+    if (decomposeResultFlags[0] != '\0') {
+      vertexCursor = *(int *)(glContext + 0x758c);
     }
     incomingR6 = 0;
     incomingR5 = (int)*(short *)(glContext + 0x4a12);
     (**(code **)(glContext + 0x46ec))(*(undefined4 *)(glContext + 0x4688),2,incomingR5,0);
     fparam_1 = f1AfterCall;
   }
-  iVar12 = iVar11 + -1;
-  iVar8 = *(int *)(glContext + 0x50ac);
+  lastVertexIndex = vertexCountThenRemaining + -1;
+  matrixFuncDirty = *(int *)(glContext + 0x50ac);
   *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
-  if (iVar8 != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+  if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
     fparam_1 = f1AfterCall1;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00103dec;
-  iVar6 = *(int *)(glContext + 0x744c);
-  piVar14 = (int *)(glContext + 0x310);
-  cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
-  if ((iVar6 != 0) && (*(int *)(iVar6 + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar6 + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,iVar8,fparam_1,floatArg2,floatArg3,
+  framebufferObject = *(int *)(glContext + 0x744c);
+  dirtyFlagWords = (int *)(glContext + 0x310);
+  rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+  if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,floatArg2,floatArg3,
                floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
   if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_00103ce4:
-    uVar9 = *(uint *)(glContext + 0x31c);
+    dirtyWord3ThenMasked = *(uint *)(glContext + 0x31c);
   }
   else {
-    iVar8 = 0;
-    piVar4 = (int *)(glContext + 0x324);
+    loopIndex = 0;
+    dirtyBitArrayCursor = (int *)(glContext + 0x324);
     do {
-      iVar6 = *piVar4;
-      piVar4 = piVar4 + 1;
-      if (iVar6 != 0) {
+      dirtyBitArrayWord = *dirtyBitArrayCursor;
+      dirtyBitArrayCursor = dirtyBitArrayCursor + 1;
+      if (dirtyBitArrayWord != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
-      iVar8 = iVar8 + 1;
-    } while (iVar8 < 9);
-    uVar9 = *(uint *)(glContext + 0x31c);
-    if ((uVar9 & 0x15555) != 0) {
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < 9);
+    dirtyWord3ThenMasked = *(uint *)(glContext + 0x31c);
+    if ((dirtyWord3ThenMasked & 0x15555) != 0) {
       if (*(char *)(glContext + 0x2e54) != '\0') {
         _gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
       }
@@ -456,72 +468,72 @@ LAB_00103ce4:
       goto LAB_00103ce4;
     }
   }
-  bVar1 = cVar2 == '\0';
-  if (bVar1) {
-    uVar9 = uVar9 & 0x17000000;
+  rendererInfoByte79Clear = rendererInfoByte79 == '\0';
+  if (rendererInfoByte79Clear) {
+    dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
   }
   else {
-    uVar9 = uVar9 & 0x17ffffff;
+    dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
   }
-  if (bVar1) {
-    bVar1 = ((*piVar14 == 0 && *(int *)(glContext + 0x314) == 0) && uVar9 == 0) &&
+  if (rendererInfoByte79Clear) {
+    stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
             *(int *)(glContext + 800) == 0;
   }
   else {
-    bVar1 = (((*piVar14 == 0 && *(int *)(glContext + 0x314) == 0) &&
-             (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && uVar9 == 0) &&
+    stateClean = (((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) &&
+             (*(uint *)(glContext + 0x318) & 0xfffffffd) == 0) && dirtyWord3ThenMasked == 0) &&
             *(int *)(glContext + 800) == 0;
   }
-  if (!bVar1) {
+  if (!stateClean) {
     if (*(char *)(glContext + 0x85a8) == *(char *)(glContext + 0x85a6)) {
-      uVar9 = (**(code **)(glContext + 0x4788))
-                        (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,piVar14);
-      if ((((uVar9 & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
-          ((uVar9 & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-         ((uVar9 & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
-        if ((uVar9 & 4) == 0) {
-          uVar9 = uVar9 & 0xfffffffe;
+      dispatchFlags = (**(code **)(glContext + 0x4788))
+                        (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,dirtyFlagWords);
+      if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
+          ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
+         ((dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
+        if ((dispatchFlags & 4) == 0) {
+          dispatchFlags = dispatchFlags & 0xfffffffe;
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
         }
-        _gleUpdateDispatchCodeChange(glContext,uVar9);
+        _gleUpdateDispatchCodeChange(glContext,dispatchFlags);
       }
     }
     else {
       _gleSwitchToNonRevertRenderer(glContext);
     }
   }
-  iVar8 = 0x13;
+  remaining = 0x13;
   do {
-    *piVar14 = 0;
-    piVar14 = piVar14 + 1;
-    iVar8 = iVar8 + -1;
-  } while (iVar8 != 0);
+    *dirtyFlagWords = 0;
+    dirtyFlagWords = dirtyFlagWords + 1;
+    remaining = remaining + -1;
+  } while (remaining != 0);
 LAB_00103dec:
   *(undefined4 *)(glContext + 0x4884) = *(undefined4 *)(glContext + 0x4888);
   if (*(char *)(glContext + 0x30aa) == '\0') {
-    if (-1 < iVar12) {
-      puVar7 = (undefined1 *)(iVar10 + 0x7e);
+    if (-1 < lastVertexIndex) {
+      puVar7 = (undefined1 *)(vertexCursor + 0x7e);
       do {
         puVar7[-1] = *(undefined1 *)(glContext + 0x2ed);
         *puVar7 = *(undefined1 *)(glContext + 0x2ee);
         puVar7 = puVar7 + 0x100;
-        iVar11 = iVar11 + -1;
-      } while (iVar11 != 0);
+        vertexCountThenRemaining = vertexCountThenRemaining + -1;
+      } while (vertexCountThenRemaining != 0);
     }
   }
   else if (*(char *)(glContext + 0x4df8) == '\0') {
     if (*(char *)(glContext + 0x30ac) == '\0') {
       iVar8 = *(int *)(glContext + 0x4dd0);
       *(undefined4 *)(iVar8 + 0x1e0) = 1;
-      if (-1 < iVar12) {
+      if (-1 < lastVertexIndex) {
         do {
-          *(undefined1 *)(iVar10 + 0x7d) = *(undefined1 *)(glContext + 0x2ed);
+          *(undefined1 *)(vertexCursor + 0x7d) = *(undefined1 *)(glContext + 0x2ed);
           uVar3 = *(undefined1 *)(glContext + 0x2ee);
-          *(int *)(iVar10 + 0x74) = iVar8;
-          *(undefined1 *)(iVar10 + 0x7e) = uVar3;
-          iVar10 = iVar10 + 0x100;
-          iVar11 = iVar11 + -1;
-        } while (iVar11 != 0);
+          *(int *)(vertexCursor + 0x74) = iVar8;
+          *(undefined1 *)(vertexCursor + 0x7e) = uVar3;
+          vertexCursor = vertexCursor + 0x100;
+          vertexCountThenRemaining = vertexCountThenRemaining + -1;
+        } while (vertexCountThenRemaining != 0);
       }
     }
     else {
@@ -529,103 +541,103 @@ LAB_00103dec:
       iVar6 = *(int *)(glContext + 0x4dd4);
       *(undefined4 *)(iVar8 + 0x1e0) = 1;
       *(undefined4 *)(iVar6 + 0x1e0) = 1;
-      if (-1 < iVar12) {
+      if (-1 < lastVertexIndex) {
         do {
-          *(undefined1 *)(iVar10 + 0x7d) = *(undefined1 *)(glContext + 0x2ed);
+          *(undefined1 *)(vertexCursor + 0x7d) = *(undefined1 *)(glContext + 0x2ed);
           uVar3 = *(undefined1 *)(glContext + 0x2ee);
-          *(int *)(iVar10 + 0x74) = iVar8;
-          *(undefined1 *)(iVar10 + 0x7e) = uVar3;
-          *(int *)(iVar10 + 0x78) = iVar6;
-          iVar10 = iVar10 + 0x100;
-          iVar11 = iVar11 + -1;
-        } while (iVar11 != 0);
+          *(int *)(vertexCursor + 0x74) = iVar8;
+          *(undefined1 *)(vertexCursor + 0x7e) = uVar3;
+          *(int *)(vertexCursor + 0x78) = iVar6;
+          vertexCursor = vertexCursor + 0x100;
+          vertexCountThenRemaining = vertexCountThenRemaining + -1;
+        } while (vertexCountThenRemaining != 0);
       }
     }
   }
   else {
-    iVar11 = iVar10 + 0x30;
-    (**(code **)(glContext + 0x4de0))(glContext,iVar11);
+    vertexField30Cursor = vertexCursor + 0x30;
+    (**(code **)(glContext + 0x4de0))(glContext,vertexField30Cursor);
     if (*(char *)(glContext + 0x30ac) == '\0') {
       iVar8 = 0;
-      iVar6 = iVar12;
-      iVar15 = iVar10;
-      if (0 < iVar12) {
+      verticesLeft = lastVertexIndex;
+      vertexLoopCursor = vertexCursor;
+      if (0 < lastVertexIndex) {
         do {
-          *(undefined1 *)(iVar15 + 0x7d) = *(undefined1 *)(glContext + 0x2ed);
-          *(undefined1 *)(iVar15 + 0x7e) = *(undefined1 *)(glContext + 0x2ee);
+          *(undefined1 *)(vertexLoopCursor + 0x7d) = *(undefined1 *)(glContext + 0x2ed);
+          *(undefined1 *)(vertexLoopCursor + 0x7e) = *(undefined1 *)(glContext + 0x2ee);
           iVar8 = *(int *)(glContext + 0x4dd0);
           *(undefined4 *)(iVar8 + 0x1e0) = 1;
-          *(int *)(iVar15 + 0x74) = iVar8;
-          if (((*(float *)(iVar15 + 0x30) != *(float *)(iVar15 + 0x130)) ||
-              (*(float *)(iVar15 + 0x34) != *(float *)(iVar15 + 0x134))) ||
-             ((*(float *)(iVar15 + 0x38) != *(float *)(iVar15 + 0x138) ||
-              (*(float *)(iVar15 + 0x3c) != *(float *)(iVar15 + 0x13c))))) {
-            (**(code **)(glContext + 0x4de0))(glContext,iVar11);
+          *(int *)(vertexLoopCursor + 0x74) = iVar8;
+          if (((*(float *)(vertexLoopCursor + 0x30) != *(float *)(vertexLoopCursor + 0x130)) ||
+              (*(float *)(vertexLoopCursor + 0x34) != *(float *)(vertexLoopCursor + 0x134))) ||
+             ((*(float *)(vertexLoopCursor + 0x38) != *(float *)(vertexLoopCursor + 0x138) ||
+              (*(float *)(vertexLoopCursor + 0x3c) != *(float *)(vertexLoopCursor + 0x13c))))) {
+            (**(code **)(glContext + 0x4de0))(glContext,vertexField30Cursor);
           }
-          iVar6 = iVar6 + -1;
-          iVar11 = iVar11 + 0x100;
-          iVar8 = iVar12;
-          iVar15 = iVar15 + 0x100;
-        } while (iVar6 != 0);
+          verticesLeft = verticesLeft + -1;
+          vertexField30Cursor = vertexField30Cursor + 0x100;
+          iVar8 = lastVertexIndex;
+          vertexLoopCursor = vertexLoopCursor + 0x100;
+        } while (verticesLeft != 0);
       }
       iVar11 = *(int *)(glContext + 0x4dd0);
       *(undefined4 *)(iVar11 + 0x1e0) = 1;
-      *(int *)(iVar8 * 0x100 + iVar10 + 0x74) = iVar11;
+      *(int *)(iVar8 * 0x100 + vertexCursor + 0x74) = iVar11;
     }
     else {
       iVar8 = 0;
-      iVar6 = iVar12;
-      iVar15 = iVar10;
-      if (0 < iVar12) {
+      verticesLeft = lastVertexIndex;
+      vertexLoopCursor = vertexCursor;
+      if (0 < lastVertexIndex) {
         do {
-          *(undefined1 *)(iVar15 + 0x7d) = *(undefined1 *)(glContext + 0x2ed);
-          *(undefined1 *)(iVar15 + 0x7e) = *(undefined1 *)(glContext + 0x2ee);
+          *(undefined1 *)(vertexLoopCursor + 0x7d) = *(undefined1 *)(glContext + 0x2ed);
+          *(undefined1 *)(vertexLoopCursor + 0x7e) = *(undefined1 *)(glContext + 0x2ee);
           iVar8 = *(int *)(glContext + 0x4dd0);
           *(undefined4 *)(iVar8 + 0x1e0) = 1;
-          *(int *)(iVar15 + 0x74) = iVar8;
+          *(int *)(vertexLoopCursor + 0x74) = iVar8;
           iVar8 = *(int *)(glContext + 0x4dd4);
           *(undefined4 *)(iVar8 + 0x1e0) = 1;
-          *(int *)(iVar15 + 0x78) = iVar8;
-          if (((*(float *)(iVar15 + 0x30) != *(float *)(iVar15 + 0x130)) ||
-              (*(float *)(iVar15 + 0x34) != *(float *)(iVar15 + 0x134))) ||
-             ((*(float *)(iVar15 + 0x38) != *(float *)(iVar15 + 0x138) ||
-              (*(float *)(iVar15 + 0x3c) != *(float *)(iVar15 + 0x13c))))) {
-            (**(code **)(glContext + 0x4de0))(glContext,iVar11);
+          *(int *)(vertexLoopCursor + 0x78) = iVar8;
+          if (((*(float *)(vertexLoopCursor + 0x30) != *(float *)(vertexLoopCursor + 0x130)) ||
+              (*(float *)(vertexLoopCursor + 0x34) != *(float *)(vertexLoopCursor + 0x134))) ||
+             ((*(float *)(vertexLoopCursor + 0x38) != *(float *)(vertexLoopCursor + 0x138) ||
+              (*(float *)(vertexLoopCursor + 0x3c) != *(float *)(vertexLoopCursor + 0x13c))))) {
+            (**(code **)(glContext + 0x4de0))(glContext,vertexField30Cursor);
           }
-          iVar6 = iVar6 + -1;
-          iVar11 = iVar11 + 0x100;
-          iVar8 = iVar12;
-          iVar15 = iVar15 + 0x100;
-        } while (iVar6 != 0);
+          verticesLeft = verticesLeft + -1;
+          vertexField30Cursor = vertexField30Cursor + 0x100;
+          iVar8 = lastVertexIndex;
+          vertexLoopCursor = vertexLoopCursor + 0x100;
+        } while (verticesLeft != 0);
       }
       iVar11 = *(int *)(glContext + 0x4dd0);
-      iVar10 = iVar8 * 0x100 + iVar10;
+      vertexCursor = iVar8 * 0x100 + vertexCursor;
       *(undefined4 *)(iVar11 + 0x1e0) = 1;
-      *(int *)(iVar10 + 0x74) = iVar11;
+      *(int *)(vertexCursor + 0x74) = iVar11;
       iVar11 = *(int *)(glContext + 0x4dd4);
       *(undefined4 *)(iVar11 + 0x1e0) = 1;
-      *(int *)(iVar10 + 0x78) = iVar11;
+      *(int *)(vertexCursor + 0x78) = iVar11;
     }
   }
-  if (local_30[0] == '\0') {
-    uVar13 = *(undefined4 *)(glContext + 0x486c);
-    uVar16 = *(undefined4 *)(glContext + 0x4858);
-    uVar5 = (**(code **)(*(short *)(glContext + 0x4a10) * 4 + glContext + 0x49e0))(glContext);
-    *(undefined4 *)(glContext + 0x4858) = uVar16;
-    *(undefined4 *)(glContext + 0x486c) = uVar13;
+  if (decomposeResultFlags[0] == '\0') {
+    savedWord486c = *(undefined4 *)(glContext + 0x486c);
+    savedVertexEnd = *(undefined4 *)(glContext + 0x4858);
+    drawResult = (**(code **)(*(short *)(glContext + 0x4a10) * 4 + glContext + 0x49e0))(glContext);
+    *(undefined4 *)(glContext + 0x4858) = savedVertexEnd;
+    *(undefined4 *)(glContext + 0x486c) = savedWord486c;
   }
   else {
-    uVar13 = *(undefined4 *)(glContext + 0x486c);
-    uVar5 = (**(code **)(*(short *)(glContext + 0x4a10) * 4 + glContext + 0x49e0))(glContext);
-    iVar10 = *(int *)(glContext + 0x7588);
-    *(undefined4 *)(glContext + 0x486c) = uVar13;
-    iVar11 = *(int *)(glContext + 0x758c);
-    for (; iVar10 != 0; iVar10 = iVar10 + -1) {
-      uVar5 = ((int (*)())_gleSubmitVertexCopy)(glContext,iVar11);
-      iVar11 = iVar11 + 0x100;
+    savedWord486c = *(undefined4 *)(glContext + 0x486c);
+    drawResult = (**(code **)(*(short *)(glContext + 0x4a10) * 4 + glContext + 0x49e0))(glContext);
+    copyVertexCount = *(int *)(glContext + 0x7588);
+    *(undefined4 *)(glContext + 0x486c) = savedWord486c;
+    copyVertexCursor = *(int *)(glContext + 0x758c);
+    for (; copyVertexCount != 0; copyVertexCount = copyVertexCount + -1) {
+      drawResult = ((int (*)())_gleSubmitVertexCopy)(glContext,copyVertexCursor);
+      copyVertexCursor = copyVertexCursor + 0x100;
     }
   }
-  return uVar5;
+  return drawResult;
 }
 
 /* _gleTypeSize @ 0x104128 (84 bytes) */

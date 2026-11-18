@@ -1,0 +1,29 @@
+local	_glGetColorTable_Exec	bVar1	formatCheck	CONFIRMED	result of a comparison of format with the accepted formats (0x80e1 / the 0x1903..0x190a range); it decides the jump to the error exit (the polarity differs between the two uses, so the name only says that it is a format check)
+local	_glGetColorTable_Exec	bVar2	tableFlags	INFERRED	flag byte at colorTable+0xb7: bit 0x20 must be set to read the table, bit 0x40 triggers _gleUploadPluginTextureLevel first, bit 0x10 allows the read otherwise
+local	_glGetColorTable_Exec	iVar5	imageEndOffset	INFERRED	result of _gleOffsetLimitImage(glContext+0x31b0, ...): the end offset of the image written to the user buffer, compared with the size (+0x38) of the bound pixel buffer object
+local	_glGetColorTable_Exec	iVar14	bufferSize	CONFIRMED	size at +0x38 of the bound pixel buffer object (ctx+0x4a68), compared with imageEndOffset
+local	_glGetColorTable_Exec	iVar6	elementBytes	CONFIRMED	(int) of _gleBytesPerElement(type), or _glePixelBytes(format, type) when 0: the alignment that the buffer offset (table) must have
+local	_glGetColorTable_Exec	uVar9	tableHeight	CONFIRMED	halfword at colorTable+0xb2: height of the color table level record (level layout as textureLevel: +4 width, +6 height at the record starting at +0xac)
+local	_glGetColorTable_Exec	puVar7	userConvertAPtr	CONFIRMED	address of local_40, the first output word of the _glgConvertType(format, type, ...) call for the user data format
+local	_glGetColorTable_Exec	puVar8	userConvertBPtr	CONFIRMED	address of local_3c, the second output word of the _glgConvertType(format, type, ...) call for the user data format
+local	_glGetColorTable_Exec	piVar12	packOffsetPtr	CONFIRMED	address of packOffset, the offset output of _glePixelPackSettings
+local	_glGetColorTable_Exec	local_4c	packOffset	CONFIRMED	offset output of _glePixelPackSettings: added to the user pointer to give the destination address of the descriptor
+local	_glGetColorTable_Exec	local_60	packRowBytes	CONFIRMED	row bytes output of _glePixelPackSettings: copied to the descriptor destination row bytes
+local	_glGetColorTable_Exec	local_48	tableConvertA	CONFIRMED	first output word of _glgConvertType(table format, table type): source channel description in the descriptor
+local	_glGetColorTable_Exec	local_44	tableConvertB	CONFIRMED	second output word of _glgConvertType(table format, table type): source channel description in the descriptor
+local	_glGetColorTable_Exec	local_40	userConvertA	CONFIRMED	first output word of _glgConvertType(format, type): destination channel description in the descriptor
+local	_glGetColorTable_Exec	local_3c	userConvertB	CONFIRMED	second output word of _glgConvertType(format, type): destination channel description in the descriptor
+local	_glGetColorTable_Exec	local_d0	procSrcAddress	CONFIRMED	first field of the descriptor passed to _glgProcessPixels: source pixel pointer, the table data at colorTable+0xc0
+local	_glGetColorTable_Exec	local_cc	procSrcRowBytes	CONFIRMED	second descriptor field: source row bytes = _gleRowBytes(table format, table type, table width)
+local	_glGetColorTable_Exec	local_c8	procSrcConvertA	CONFIRMED	descriptor source channel description, copy of tableConvertA
+local	_glGetColorTable_Exec	local_c4	procSrcConvertB	CONFIRMED	descriptor source channel description, copy of tableConvertB
+local	_glGetColorTable_Exec	local_c0	procDstAddress	CONFIRMED	descriptor destination pointer: the user pointer table + packOffset
+local	_glGetColorTable_Exec	local_bc	procDstRowBytes	CONFIRMED	descriptor destination row bytes, copy of packRowBytes
+local	_glGetColorTable_Exec	local_b8	procDstConvertA	CONFIRMED	descriptor destination channel description, copy of userConvertA
+local	_glGetColorTable_Exec	local_b4	procDstConvertB	CONFIRMED	descriptor destination channel description, copy of userConvertB
+local	_glGetColorTable_Exec	local_b0	procMode	CONFIRMED	descriptor word set to the constant 2 before _glgProcessPixels (GLDriver procMode)
+local	_glGetColorTable_Exec	local_ac	procFlags	CONFIRMED	descriptor flag word: 1 when the byte at ctx+0x31c8 (pack record +0x18) is nonzero
+local	_glGetColorTable_Exec	local_a8	procMask	CONFIRMED	descriptor word set to the constant 1 before _glgProcessPixels (GLDriver procMask)
+local	_glGetColorTable_Exec	local_a4	procWidth	CONFIRMED	descriptor width = halfword at colorTable+0xb0 (table width)
+local	_glGetColorTable_Exec	local_a0	procHeight	CONFIRMED	descriptor height = halfword at colorTable+0xb2 (table height)
+local	_glGetColorTable_Exec	local_64	procEnd	CONFIRMED	descriptor trailing byte cleared to 0 before the call (GLDriver procEnd)

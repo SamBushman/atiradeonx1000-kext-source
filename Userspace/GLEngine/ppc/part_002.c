@@ -1256,246 +1256,247 @@ int _glTexParameterI_Exec(glContext, target, pname, params)
 {
   float floatZero;
   undefined4 glErrorCode;
-  bool bVar1;
-  float fVar2;
+  bool formatAllowed;
+  float colorComponent;
   double intToDoubleMagic;
-  uint uVar4;
-  undefined4 uVar5;
-  float fVar6;
-  int iVar7;
-  undefined4 uVar8;
-  uint uVar9;
+  uint allowedValue;
+  undefined4 onOffFloatBits;
+  float clampedPriority;
+  int textureObject;
+  undefined4 levelRangeChanged;
+  uint paramValue;
+  uint newFlags;
   
-  iVar7 = ((int (*)())_gleLookUpNonProxyTexture)(glContext,target);
+  textureObject = ((int (*)())_gleLookUpNonProxyTexture)(glContext,target);
   floatZero = FLOAT_00108e50;
   intToDoubleMagic = DOUBLE_00108d58;
-  uVar8 = 0;
+  levelRangeChanged = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (iVar7 == 0) goto LAB_00018768;
+    if (textureObject == 0) goto LAB_00018768;
     if (pname == (undefined *)0x813c) {
       if ((int)*params < 0) goto LAB_00018554;
-      uVar8 = 1;
-      *(short *)(iVar7 + 0x60) = (short)*params;
+      levelRangeChanged = 1;
+      *(short *)(textureObject + 0x60) = (short)*params;
     }
     else if (pname < (undefined *)0x813d) {
       if (pname != (undefined *)0x2803) {
         if ((undefined *)0x2803 < pname) {
           if (pname == (undefined *)0x80bf) {
             if ((int)*params < 1) {
-              uVar5 = 0;
+              onOffFloatBits = 0;
             }
             else {
-              uVar5 = 0x3f800000;
+              onOffFloatBits = 0x3f800000;
             }
-            *(undefined4 *)(iVar7 + 0x68) = uVar5;
+            *(undefined4 *)(textureObject + 0x68) = onOffFloatBits;
           }
           else if (pname < (undefined *)0x80c0) {
             if (pname == (undefined *)0x8066) {
-              fVar6 = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
-              if (fVar6 < FLOAT_00108e50) {
-                fVar6 = 0.0;
+              clampedPriority = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
+              if (clampedPriority < FLOAT_00108e50) {
+                clampedPriority = 0.0;
               }
-              else if (FLOAT_00108e54 < fVar6) {
-                fVar6 = 1.0;
+              else if (FLOAT_00108e54 < clampedPriority) {
+                clampedPriority = 1.0;
               }
-              *(float *)(iVar7 + 0x28) = fVar6;
+              *(float *)(textureObject + 0x28) = clampedPriority;
             }
             else {
               if (pname != (undefined *)0x8072) goto LAB_00018768;
-              uVar9 = *params;
-              if (uVar9 != 0x812f) {
-                if (uVar9 < 0x8130) {
-                  if (0x28ff < uVar9) {
-                    if (0x2901 < uVar9) {
-                      uVar4 = 0x812d;
+              paramValue = *params;
+              if (paramValue != 0x812f) {
+                if (paramValue < 0x8130) {
+                  if (0x28ff < paramValue) {
+                    if (0x2901 < paramValue) {
+                      allowedValue = 0x812d;
                       goto LAB_0001830c;
                     }
                     goto LAB_00018314;
                   }
                 }
                 else {
-                  if (uVar9 < 0x8744) {
-                    if (0x8741 < uVar9) goto LAB_00018314;
-                    uVar4 = 0x8370;
+                  if (paramValue < 0x8744) {
+                    if (0x8741 < paramValue) goto LAB_00018314;
+                    allowedValue = 0x8370;
                   }
                   else {
-                    uVar4 = 0x8912;
+                    allowedValue = 0x8912;
                   }
 LAB_0001830c:
-                  if (uVar9 == uVar4) goto LAB_00018314;
+                  if (paramValue == allowedValue) goto LAB_00018314;
                 }
                 goto LAB_00018768;
               }
 LAB_00018314:
-              *(short *)(iVar7 + 0x38) = (short)uVar9;
+              *(short *)(textureObject + 0x38) = (short)paramValue;
             }
           }
           else if (pname == (undefined *)0x813a) {
-            *(float *)(iVar7 + 0x54) =
+            *(float *)(textureObject + 0x54) =
                  (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
           }
           else {
             if (pname != (undefined *)0x813b) goto LAB_00018768;
-            *(float *)(iVar7 + 0x58) =
+            *(float *)(textureObject + 0x58) =
                  (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
           }
           goto LAB_00018780;
         }
         if (pname == (undefined *)0x2800) {
           if (*params - 0x2600 < 2) {
-            *(short *)(iVar7 + 0x3c) = (short)*params;
+            *(short *)(textureObject + 0x3c) = (short)*params;
             goto LAB_00018780;
           }
         }
         else if (pname < (undefined *)0x2801) {
           if (pname == ((unsigned char *)0x00001004)) {
-            fVar2 = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58) *
+            colorComponent = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58) *
                     FLOAT_00108e68 + FLOAT_00108e6c;
-            if (fVar2 < FLOAT_00108e50) {
-              *(float *)(iVar7 + 0x40) = FLOAT_00108e50;
+            if (colorComponent < FLOAT_00108e50) {
+              *(float *)(textureObject + 0x40) = FLOAT_00108e50;
             }
             else {
-              *(float *)(iVar7 + 0x40) = fVar2;
+              *(float *)(textureObject + 0x40) = colorComponent;
             }
-            fVar2 = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58)
+            colorComponent = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - DOUBLE_00108d58)
                     * FLOAT_00108e68 + FLOAT_00108e6c;
-            if (fVar2 < floatZero) {
-              *(float *)(iVar7 + 0x44) = floatZero;
+            if (colorComponent < floatZero) {
+              *(float *)(textureObject + 0x44) = floatZero;
             }
             else {
-              *(float *)(iVar7 + 0x44) = fVar2;
+              *(float *)(textureObject + 0x44) = colorComponent;
             }
-            fVar2 = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58)
+            colorComponent = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - DOUBLE_00108d58)
                     * FLOAT_00108e68 + FLOAT_00108e6c;
-            if (fVar2 < floatZero) {
-              *(float *)(iVar7 + 0x48) = floatZero;
+            if (colorComponent < floatZero) {
+              *(float *)(textureObject + 0x48) = floatZero;
             }
             else {
-              *(float *)(iVar7 + 0x48) = fVar2;
+              *(float *)(textureObject + 0x48) = colorComponent;
             }
-            fVar2 = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - DOUBLE_00108d58)
+            colorComponent = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - DOUBLE_00108d58)
                     * FLOAT_00108e68 + FLOAT_00108e6c;
-            if (!(fVar2 < floatZero)) goto LAB_00018760;
-            *(float *)(iVar7 + 0x4c) = floatZero;
+            if (!(colorComponent < floatZero)) goto LAB_00018760;
+            *(float *)(textureObject + 0x4c) = floatZero;
             goto LAB_00018780;
           }
         }
         else if (pname == (undefined *)0x2801) {
-          uVar9 = *params;
-          if ((0x25ff < uVar9) && ((uVar9 < 0x2602 || (uVar9 - 0x2700 < 4)))) {
-            *(short *)(iVar7 + 0x3a) = (short)uVar9;
-            uVar8 = 1;
+          paramValue = *params;
+          if ((0x25ff < paramValue) && ((paramValue < 0x2602 || (paramValue - 0x2700 < 4)))) {
+            *(short *)(textureObject + 0x3a) = (short)paramValue;
+            levelRangeChanged = 1;
             goto LAB_00018780;
           }
         }
         else if (pname == (undefined *)0x2802) {
-          uVar9 = *params;
-          if (uVar9 == 0x812f) {
+          paramValue = *params;
+          if (paramValue == 0x812f) {
 LAB_0001823c:
-            *(short *)(iVar7 + 0x34) = (short)uVar9;
+            *(short *)(textureObject + 0x34) = (short)paramValue;
             goto LAB_00018780;
           }
-          if (uVar9 < 0x8130) {
-            if (0x28ff < uVar9) {
-              if (0x2901 < uVar9) {
-                uVar4 = 0x812d;
+          if (paramValue < 0x8130) {
+            if (0x28ff < paramValue) {
+              if (0x2901 < paramValue) {
+                allowedValue = 0x812d;
                 goto LAB_00018234;
               }
               goto LAB_0001823c;
             }
           }
           else {
-            if (uVar9 < 0x8744) {
-              if (0x8741 < uVar9) goto LAB_0001823c;
-              uVar4 = 0x8370;
+            if (paramValue < 0x8744) {
+              if (0x8741 < paramValue) goto LAB_0001823c;
+              allowedValue = 0x8370;
             }
             else {
-              uVar4 = 0x8912;
+              allowedValue = 0x8912;
             }
 LAB_00018234:
-            if (uVar9 == uVar4) goto LAB_0001823c;
+            if (paramValue == allowedValue) goto LAB_0001823c;
           }
         }
         goto LAB_00018768;
       }
-      uVar9 = *params;
-      if (uVar9 != 0x812f) {
-        if (uVar9 < 0x8130) {
-          if (uVar9 < 0x2900) goto LAB_00018768;
-          if (0x2901 < uVar9) {
-            uVar4 = 0x812d;
+      paramValue = *params;
+      if (paramValue != 0x812f) {
+        if (paramValue < 0x8130) {
+          if (paramValue < 0x2900) goto LAB_00018768;
+          if (0x2901 < paramValue) {
+            allowedValue = 0x812d;
             goto LAB_000182a0;
           }
         }
         else {
-          if (uVar9 < 0x8744) {
-            if (0x8741 < uVar9) goto LAB_000182a8;
-            uVar4 = 0x8370;
+          if (paramValue < 0x8744) {
+            if (0x8741 < paramValue) goto LAB_000182a8;
+            allowedValue = 0x8370;
           }
           else {
-            uVar4 = 0x8912;
+            allowedValue = 0x8912;
           }
 LAB_000182a0:
-          if (uVar9 != uVar4) goto LAB_00018768;
+          if (paramValue != allowedValue) goto LAB_00018768;
         }
       }
 LAB_000182a8:
-      *(short *)(iVar7 + 0x36) = (short)uVar9;
+      *(short *)(textureObject + 0x36) = (short)paramValue;
     }
     else if (pname == (undefined *)0x85bc) {
       if (2 < *params - 0x85bd) goto LAB_00018768;
-      *(short *)(iVar7 + 0x3e) = (short)*params;
+      *(short *)(textureObject + 0x3e) = (short)*params;
     }
     else {
       if ((undefined *)0x85bc < pname) {
         if (pname == (undefined *)0x884c) {
-          uVar9 = *params;
-          if ((uVar9 == 0) || (uVar9 == 0x884e)) {
-            *(short *)(iVar7 + 0x66) = (short)uVar9;
+          paramValue = *params;
+          if ((paramValue == 0) || (paramValue == 0x884e)) {
+            *(short *)(textureObject + 0x66) = (short)paramValue;
             goto LAB_00018780;
           }
         }
         else if (pname < (undefined *)0x884d) {
           if (pname == (undefined *)0x871a) {
-            *(float *)(iVar7 + 0x40) =
+            *(float *)(textureObject + 0x40) =
                  (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
-            *(float *)(iVar7 + 0x44) =
+            *(float *)(textureObject + 0x44) =
                  (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
-            *(float *)(iVar7 + 0x48) =
+            *(float *)(textureObject + 0x48) =
                  (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
-            fVar2 = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
+            colorComponent = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
 LAB_00018760:
-            *(float *)(iVar7 + 0x4c) = fVar2;
+            *(float *)(textureObject + 0x4c) = colorComponent;
             goto LAB_00018780;
           }
           if (pname == (undefined *)0x884b) {
-            uVar9 = *params;
-            if (uVar9 != 0x1909) {
-              if (uVar9 < 0x190a) {
-                bVar1 = uVar9 == 0x1906;
+            paramValue = *params;
+            if (paramValue != 0x1909) {
+              if (paramValue < 0x190a) {
+                formatAllowed = paramValue == 0x1906;
               }
               else {
-                bVar1 = uVar9 == 0x8049;
+                formatAllowed = paramValue == 0x8049;
               }
-              if (!bVar1) goto LAB_00018768;
+              if (!formatAllowed) goto LAB_00018768;
             }
-            *(short *)(iVar7 + 0x6c) = (short)uVar9;
+            *(short *)(textureObject + 0x6c) = (short)paramValue;
             goto LAB_00018780;
           }
         }
         else if (pname == (undefined *)0x884d) {
           if (*params - 0x200 < 8) {
-            *(short *)(iVar7 + 100) = (short)*params;
+            *(short *)(textureObject + 100) = (short)*params;
             goto LAB_00018780;
           }
         }
         else if ((pname == (undefined *)0x8a7f) && (*params < 2)) {
-          uVar9 = (*params & 1) << 6 | *(uint *)(iVar7 + 0x6c) & 0xffffffbf;
+          newFlags = (*params & 1) << 6 | *(uint *)(textureObject + 0x6c) & 0xffffffbf;
           goto LAB_00018448;
         }
 LAB_00018768:
         if (*(int *)(glContext + 0x7574) != 0) {
-          return iVar7;
+          return textureObject;
         }
         glErrorCode = 0x500;
         goto LAB_00018778;
@@ -1504,51 +1505,51 @@ LAB_00018768:
         if ((int)*params < 1) {
 LAB_00018554:
           if (*(int *)(glContext + 0x7574) != 0) {
-            return iVar7;
+            return textureObject;
           }
           glErrorCode = 0x501;
           goto LAB_00018778;
         }
-        *(float *)(iVar7 + 0x50) =
+        *(float *)(textureObject + 0x50) =
              (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
       }
       else if (pname < (undefined *)0x84ff) {
         if (pname == (undefined *)0x813d) {
           if ((int)*params < 0) goto LAB_00018554;
-          uVar8 = 1;
-          *(short *)(iVar7 + 0x62) = (short)*params;
+          levelRangeChanged = 1;
+          *(short *)(textureObject + 0x62) = (short)*params;
         }
         else {
           if ((pname != (undefined *)0x8191) || (1 < *params)) goto LAB_00018768;
-          uVar9 = (*params & 1) << 0xf | *(uint *)(iVar7 + 0x6c) & 0xffff7fff;
+          newFlags = (*params & 1) << 0xf | *(uint *)(textureObject + 0x6c) & 0xffff7fff;
 LAB_00018448:
-          *(uint *)(iVar7 + 0x6c) = uVar9;
+          *(uint *)(textureObject + 0x6c) = newFlags;
         }
       }
       else if (pname == (undefined *)0x8501) {
-        *(float *)(iVar7 + 0x5c) =
+        *(float *)(textureObject + 0x5c) =
              (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
       }
       else {
         if (pname != (undefined *)0x85b6) goto LAB_00018768;
-        *(uint *)(iVar7 + 0x6c) =
-             (uint)(*params != 0) * 0x80 | *(uint *)(iVar7 + 0x6c) & 0xffffff7f;
+        *(uint *)(textureObject + 0x6c) =
+             (uint)(*params != 0) * 0x80 | *(uint *)(textureObject + 0x6c) & 0xffffff7f;
       }
     }
 LAB_00018780:
-    iVar7 = ((int (*)())_gleModifyPluginTexture)(glContext,iVar7,uVar8);
+    textureObject = ((int (*)())_gleModifyPluginTexture)(glContext,textureObject,levelRangeChanged);
     *(uint *)(glContext + 0x314) =
          *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {
-      return iVar7;
+      return textureObject;
     }
     glErrorCode = 0x502;
 LAB_00018778:
     *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   }
-  return iVar7;
+  return textureObject;
 }
 
 /* _gleModifyPluginTexture @ 0x187b8 (368 bytes) */

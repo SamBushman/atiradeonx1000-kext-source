@@ -1,0 +1,8 @@
+local	_LFSStreamGetStream	param_1	chunkLists	CONFIRMED	the stream object: six chunk-list pointers (param_1[0] .. param_1[5]), each handed to _LFSStreamChunkListGetStream; the list type value at list+8 goes into the stream header word
+local	_LFSStreamGetStream	param_2	streamOut	CONFIRMED	output word buffer; when null only the size is computed (the size query call passes 0)
+local	_LFSStreamGetStream	param_3	sizeOut	CONFIRMED	receives the computed stream size in words: totalWords - ((totalWords + 6) & 3) + 10
+local	_LFSStreamGetStream	iVar2	totalWords	CONFIRMED	running sum of the word counts returned for the six chunk lists
+local	_LFSStreamGetStream	local_30	listWords	CONFIRMED	output block of _LFSStreamChunkListGetStream; element 0 is the number of words the list occupies
+local	_LFSStreamGetStream	uVar3	wordOffset	CONFIRMED	word offset in streamOut where the next chunk list is written: starts at 6 plus the first list size and advances by each list size
+local	_LFSStreamGetStream	uVar4	lastListOffset	CONFIRMED	word offset of the sixth list: end of the fifth list plus one terminator word, advanced until it is a multiple of 4 (padding words 0x50000000)
+local	_LFSStreamGetStream	puVar1	paddingCursor	CONFIRMED	pointer to the next padding word (0x50000000) written at streamOut + lastListOffset

@@ -326,57 +326,57 @@ void _LFSStreamAddConstant(param_1, param_2)
 }
 
 /* _LFSStreamGetStream @ 0xd1ecc (628 bytes) */
-void _LFSStreamGetStream(param_1, param_2, param_3)
-  int *param_1;
-  uint *param_2;
-  int *param_3;
+void _LFSStreamGetStream(chunkLists, streamOut, sizeOut)
+  int *chunkLists;
+  uint *streamOut;
+  int *sizeOut;
 {
-  uint *puVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  int local_30 [7];
+  uint *paddingCursor;
+  int totalWords;
+  uint wordOffset;
+  uint lastListOffset;
+  int listWords [7];
   
-  ((void (*)())_LFSStreamChunkListGetStream)(*param_1,0,local_30,param_1);
-  iVar2 = local_30[0];
-  ((void (*)())_LFSStreamChunkListGetStream)(param_1[1],0,local_30,param_1);
-  iVar2 = iVar2 + local_30[0];
-  ((void (*)())_LFSStreamChunkListGetStream)(param_1[2],0,local_30,param_1);
-  iVar2 = iVar2 + local_30[0];
-  ((void (*)())_LFSStreamChunkListGetStream)(param_1[3],0,local_30,param_1);
-  iVar2 = iVar2 + local_30[0];
-  ((void (*)())_LFSStreamChunkListGetStream)(param_1[4],0,local_30,param_1);
-  iVar2 = iVar2 + local_30[0];
-  ((void (*)())_LFSStreamChunkListGetStream)(param_1[5],0,local_30,param_1);
-  iVar2 = iVar2 + local_30[0];
-  *param_3 = (iVar2 - (iVar2 + 6U & 3)) + 10;
-  if (param_2 != (uint *)0x0) {
-    *param_2 = *(int *)(*param_1 + 8) << 0x10 | 0x10000006;
-    ((void (*)())_LFSStreamChunkListGetStream)(*param_1,param_2 + 6,local_30,param_1);
-    uVar3 = local_30[0] + 6;
-    param_2[1] = *(int *)(param_1[1] + 8) << 0x10 | uVar3 | 0x10000000;
-    ((void (*)())_LFSStreamChunkListGetStream)(param_1[1],param_2 + uVar3,local_30,param_1);
-    uVar3 = uVar3 + local_30[0];
-    param_2[2] = *(int *)(param_1[2] + 8) << 0x10 | uVar3 | 0x10000000;
-    ((void (*)())_LFSStreamChunkListGetStream)(param_1[2],param_2 + uVar3,local_30,param_1);
-    uVar3 = uVar3 + local_30[0];
-    param_2[3] = *(int *)(param_1[3] + 8) << 0x10 | uVar3 | 0x10000000;
-    ((void (*)())_LFSStreamChunkListGetStream)(param_1[3],param_2 + uVar3,local_30,param_1);
-    uVar3 = uVar3 + local_30[0];
-    param_2[4] = *(int *)(param_1[4] + 8) << 0x10 | uVar3 | 0x10000000;
-    ((void (*)())_LFSStreamChunkListGetStream)(param_1[4],param_2 + uVar3,local_30,param_1);
-    uVar4 = uVar3 + local_30[0] + 1;
-    param_2[uVar3 + local_30[0]] = 0;
-    if ((uVar4 & 3) != 0) {
-      puVar1 = param_2 + uVar4;
+  ((void (*)())_LFSStreamChunkListGetStream)(*chunkLists,0,listWords,chunkLists);
+  totalWords = listWords[0];
+  ((void (*)())_LFSStreamChunkListGetStream)(chunkLists[1],0,listWords,chunkLists);
+  totalWords = totalWords + listWords[0];
+  ((void (*)())_LFSStreamChunkListGetStream)(chunkLists[2],0,listWords,chunkLists);
+  totalWords = totalWords + listWords[0];
+  ((void (*)())_LFSStreamChunkListGetStream)(chunkLists[3],0,listWords,chunkLists);
+  totalWords = totalWords + listWords[0];
+  ((void (*)())_LFSStreamChunkListGetStream)(chunkLists[4],0,listWords,chunkLists);
+  totalWords = totalWords + listWords[0];
+  ((void (*)())_LFSStreamChunkListGetStream)(chunkLists[5],0,listWords,chunkLists);
+  totalWords = totalWords + listWords[0];
+  *sizeOut = (totalWords - (totalWords + 6U & 3)) + 10;
+  if (streamOut != (uint *)0x0) {
+    *streamOut = *(int *)(*chunkLists + 8) << 0x10 | 0x10000006;
+    ((void (*)())_LFSStreamChunkListGetStream)(*chunkLists,streamOut + 6,listWords,chunkLists);
+    wordOffset = listWords[0] + 6;
+    streamOut[1] = *(int *)(chunkLists[1] + 8) << 0x10 | wordOffset | 0x10000000;
+    ((void (*)())_LFSStreamChunkListGetStream)(chunkLists[1],streamOut + wordOffset,listWords,chunkLists);
+    wordOffset = wordOffset + listWords[0];
+    streamOut[2] = *(int *)(chunkLists[2] + 8) << 0x10 | wordOffset | 0x10000000;
+    ((void (*)())_LFSStreamChunkListGetStream)(chunkLists[2],streamOut + wordOffset,listWords,chunkLists);
+    wordOffset = wordOffset + listWords[0];
+    streamOut[3] = *(int *)(chunkLists[3] + 8) << 0x10 | wordOffset | 0x10000000;
+    ((void (*)())_LFSStreamChunkListGetStream)(chunkLists[3],streamOut + wordOffset,listWords,chunkLists);
+    wordOffset = wordOffset + listWords[0];
+    streamOut[4] = *(int *)(chunkLists[4] + 8) << 0x10 | wordOffset | 0x10000000;
+    ((void (*)())_LFSStreamChunkListGetStream)(chunkLists[4],streamOut + wordOffset,listWords,chunkLists);
+    lastListOffset = wordOffset + listWords[0] + 1;
+    streamOut[wordOffset + listWords[0]] = 0;
+    if ((lastListOffset & 3) != 0) {
+      paddingCursor = streamOut + lastListOffset;
       do {
-        uVar4 = uVar4 + 1;
-        *puVar1 = 0x50000000;
-        puVar1 = puVar1 + 1;
-      } while ((uVar4 & 3) != 0);
+        lastListOffset = lastListOffset + 1;
+        *paddingCursor = 0x50000000;
+        paddingCursor = paddingCursor + 1;
+      } while ((lastListOffset & 3) != 0);
     }
-    param_2[5] = *(int *)(param_1[5] + 8) << 0x10 | uVar4 | 0x10000000;
-    ((void (*)())_LFSStreamChunkListGetStream)(param_1[5],param_2 + uVar4,local_30,param_1);
+    streamOut[5] = *(int *)(chunkLists[5] + 8) << 0x10 | lastListOffset | 0x10000000;
+    ((void (*)())_LFSStreamChunkListGetStream)(chunkLists[5],streamOut + lastListOffset,listWords,chunkLists);
   }
   return;
 }
@@ -740,70 +740,70 @@ void _gleImagingUnpackData(param_1, param_2, height, format, param_5, param_6, t
 }
 
 /* _gleImagingPackData @ 0xd2860 (312 bytes) */
-void _gleImagingPackData(param_1, rowWidth, param_3, format, type, param_6, param_7, filterData, param_9)
-  int param_1;
+void _gleImagingPackData(glContext, rowWidth, height, format, type, param_6, param_7, filterData, dest)
+  int glContext;
   int rowWidth;
-  undefined4 param_3;
+  undefined4 height;
   undefined4 format;
   undefined4 type;
   undefined4 param_6;
   undefined4 param_7;
   undefined4 filterData;
-  int param_9;
+  int dest;
 {
-  undefined1 *puVar1;
-  undefined1 *puVar2;
-  undefined4 uVar3;
-  int iVar4;
+  undefined1 *dstConvertAPtr;
+  undefined1 *dstConvertBPtr;
+  undefined4 heightArg;
+  int packState;
   undefined1 *puVar5;
-  int *piVar6;
-  undefined4 local_c0;
-  int local_bc;
-  undefined1 auStack_b8 [4];
-  undefined1 auStack_b4 [4];
-  int local_b0;
-  undefined4 local_ac;
-  undefined1 auStack_a8 [4];
-  undefined1 auStack_a4 [4];
-  undefined4 local_a0;
-  uint local_9c;
-  undefined4 local_98;
-  int local_94;
-  undefined4 local_90;
-  undefined1 local_54;
-  undefined4 local_50;
+  int *packOffsets;
+  undefined4 procSrcAddress;
+  int procSrcRowBytes;
+  undefined1 procSrcConvertA [4];
+  undefined1 procSrcConvertB [4];
+  int procDstAddress;
+  undefined4 procDstRowBytes;
+  undefined1 procDstConvertA [4];
+  undefined1 procDstConvertB [4];
+  undefined4 procMode;
+  uint procFlags;
+  undefined4 procMask;
+  int procWidth;
+  undefined4 procHeight;
+  undefined1 procEnd;
+  undefined4 packRowBytes;
   undefined1 auStack_4c [4];
   undefined1 auStack_48 [4];
   undefined1 auStack_44 [4];
   undefined1 auStack_40 [4];
   int local_3c [6];
   
-  iVar4 = param_1 + 0x31b0;
+  packState = glContext + 0x31b0;
   puVar5 = auStack_40;
-  piVar6 = local_3c;
-  uVar3 = param_3;
+  packOffsets = local_3c;
+  heightArg = height;
   _glePixelPackSettings
-            (param_1,format,type,rowWidth,param_3,iVar4,puVar5,piVar6,&local_50,auStack_4c,
+            (glContext,format,type,rowWidth,height,packState,puVar5,packOffsets,&packRowBytes,auStack_4c,
              auStack_48,auStack_44);
-  _glgConvertType(format,type,auStack_b8,auStack_b4,uVar3,iVar4,puVar5,piVar6);
-  puVar1 = auStack_a8;
-  puVar2 = auStack_a4;
-  _glgConvertType(param_6,param_7,puVar1,puVar2,uVar3,iVar4,puVar5,piVar6);
-  local_c0 = filterData;
-  local_bc = _glePixelBytes(format,type);
-  local_bc = rowWidth * local_bc;
-  local_b0 = param_9 + local_3c[0];
-  local_98 = 5;
-  local_a0 = 2;
-  local_ac = local_50;
-  local_54 = 0;
-  local_9c = (uint)(*(char *)(param_1 + 0x31c8) != '\0');
-  if (*(char *)(param_1 + 0x31c9) != '\0') {
-    local_9c = local_9c | 4;
+  _glgConvertType(format,type,procSrcConvertA,procSrcConvertB,heightArg,packState,puVar5,packOffsets);
+  dstConvertAPtr = procDstConvertA;
+  dstConvertBPtr = procDstConvertB;
+  _glgConvertType(param_6,param_7,dstConvertAPtr,dstConvertBPtr,heightArg,packState,puVar5,packOffsets);
+  procSrcAddress = filterData;
+  procSrcRowBytes = _glePixelBytes(format,type);
+  procSrcRowBytes = rowWidth * procSrcRowBytes;
+  procDstAddress = dest + local_3c[0];
+  procMask = 5;
+  procMode = 2;
+  procDstRowBytes = packRowBytes;
+  procEnd = 0;
+  procFlags = (uint)(*(char *)(glContext + 0x31c8) != '\0');
+  if (*(char *)(glContext + 0x31c9) != '\0') {
+    procFlags = procFlags | 4;
   }
-  local_94 = rowWidth;
-  local_90 = param_3;
-  _glgProcessPixels(param_1 + 0x31a8,&local_c0,puVar1,puVar2,uVar3,iVar4,0,piVar6);
+  procWidth = rowWidth;
+  procHeight = height;
+  _glgProcessPixels(glContext + 0x31a8,&procSrcAddress,dstConvertAPtr,dstConvertBPtr,heightArg,packState,0,packOffsets);
   return;
 }
 

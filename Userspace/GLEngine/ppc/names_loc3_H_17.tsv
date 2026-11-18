@@ -1,0 +1,23 @@
+local	_gleImagingPackData	param_1	glContext	CONFIRMED	first argument of _glePixelPackSettings and base of the pack record at +0x31b0 and of the pack flag bytes at +0x31c8 / +0x31c9 (the glContext of every GLEngine entry point)
+local	_gleImagingPackData	param_3	height	CONFIRMED	passed as the height argument of _glePixelPackSettings (after rowWidth) and stored as the descriptor height (procHeight)
+local	_gleImagingPackData	param_9	dest	CONFIRMED	user destination pointer: procDstAddress is dest + the offset output of _glePixelPackSettings
+local	_gleImagingPackData	uVar3	heightArg	CONFIRMED	copy of height passed as the height argument of the two _glgConvertType calls and of _glgProcessPixels
+local	_gleImagingPackData	iVar4	packState	CONFIRMED	glContext + 0x31b0: the pack record passed to _glePixelPackSettings and as an extra argument of _glgConvertType / _glgProcessPixels
+local	_gleImagingPackData	piVar6	packOffsets	CONFIRMED	address of local_3c, the offset output array of _glePixelPackSettings; element 0 is added to dest for procDstAddress
+local	_gleImagingPackData	puVar1	dstConvertAPtr	CONFIRMED	address of the first output word (procDstConvertA) of the second _glgConvertType call
+local	_gleImagingPackData	puVar2	dstConvertBPtr	CONFIRMED	address of the second output word (procDstConvertB) of the second _glgConvertType call
+local	_gleImagingPackData	local_c0	procSrcAddress	CONFIRMED	first field of the descriptor passed to _glgProcessPixels: source pixel pointer, set from filterData
+local	_gleImagingPackData	local_bc	procSrcRowBytes	CONFIRMED	second descriptor field: source row bytes = rowWidth * _glePixelBytes(format, type)
+local	_gleImagingPackData	auStack_b8	procSrcConvertA	CONFIRMED	first output word of _glgConvertType(format, type): source channel description in the descriptor
+local	_gleImagingPackData	auStack_b4	procSrcConvertB	CONFIRMED	second output word of _glgConvertType(format, type): source channel description in the descriptor
+local	_gleImagingPackData	local_b0	procDstAddress	CONFIRMED	descriptor destination pointer: dest + packOffsets[0]
+local	_gleImagingPackData	local_ac	procDstRowBytes	CONFIRMED	descriptor destination row bytes, copy of the row bytes output (local_50) of _glePixelPackSettings
+local	_gleImagingPackData	auStack_a8	procDstConvertA	CONFIRMED	first output word of _glgConvertType(param_6, param_7): destination channel description in the descriptor
+local	_gleImagingPackData	auStack_a4	procDstConvertB	CONFIRMED	second output word of _glgConvertType(param_6, param_7): destination channel description in the descriptor
+local	_gleImagingPackData	local_a0	procMode	CONFIRMED	descriptor word set to the constant 2 before _glgProcessPixels (GLDriver procMode)
+local	_gleImagingPackData	local_9c	procFlags	CONFIRMED	descriptor flag word: bit 1 set when the byte at ctx+0x31c8 is nonzero, bit 4 when the byte at ctx+0x31c9 is nonzero (GLDriver procFlags)
+local	_gleImagingPackData	local_98	procMask	CONFIRMED	descriptor word set to the constant 5 before _glgProcessPixels (GLDriver procMask)
+local	_gleImagingPackData	local_94	procWidth	CONFIRMED	descriptor width = the rowWidth argument
+local	_gleImagingPackData	local_90	procHeight	CONFIRMED	descriptor height = the height argument
+local	_gleImagingPackData	local_54	procEnd	CONFIRMED	descriptor trailing byte cleared to 0 before the call (GLDriver procEnd)
+local	_gleImagingPackData	local_50	packRowBytes	CONFIRMED	row bytes output of _glePixelPackSettings: copied to the descriptor destination row bytes

@@ -2780,137 +2780,143 @@ double _pow_10(int param_1)
 }
 
 /* _gle_strtod @ 0xe15b4 (824 bytes) */
-double _gle_strtod(byte *param_1,undefined4 *param_2)
+double _gle_strtod(byte *textCursor,undefined4 *endPtrOut)
 {
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
-  bool bVar4;
-  int iVar5;
-  byte bVar6;
-  byte *pbVar7;
-  byte *pbVar8;
-  double dVar9;
-  double dVar10;
-  double dVar11;
+  bool atDecimalPoint;
+  bool parsedDigits;
+  bool negativeExponent;
+  bool negative;
+  int integerDigitsLeft;
+  int exponentDigitsLeft;
+  byte currentChar;
+  byte *integerCursor;
+  byte *exponentSignCursor;
+  byte *fractionCursor;
+  byte *fractionStart;
+  byte *exponentCursor;
+  double value;
+  double integerPlace;
+  double exponentThenScale;
+  double fractionValue;
+  double exponentPlace;
   byte *pbStack00000018;
   
-  bVar4 = false;
-  bVar3 = false;
-  bVar2 = false;
-  if (*param_1 == 0x2b) {
+  negative = false;
+  negativeExponent = false;
+  parsedDigits = false;
+  if (*textCursor == 0x2b) {
 LAB_000e1614:
-    param_1 = param_1 + 1;
+    textCursor = textCursor + 1;
   }
-  else if (*param_1 == 0x2d) {
-    bVar4 = true;
+  else if (*textCursor == 0x2d) {
+    negative = true;
     goto LAB_000e1614;
   }
-  bVar6 = *param_1;
-  bVar1 = bVar6 == 0x2e;
-  pbStack00000018 = param_1;
-  dVar9 = DOUBLE_00108d60;
-  if (bVar6 == 0) {
+  currentChar = *textCursor;
+  atDecimalPoint = currentChar == 0x2e;
+  pbStack00000018 = textCursor;
+  value = DOUBLE_00108d60;
+  if (currentChar == 0) {
 LAB_000e16f8:
-    if (bVar1) goto LAB_000e16fc;
+    if (atDecimalPoint) goto LAB_000e16fc;
   }
   else {
-    if (!bVar1) {
-      if ((bVar6 != 0x65) && (pbVar7 = param_1, bVar6 != 0x45)) {
-        while (bVar6 - 0x30 < 10) {
-          bVar6 = pbVar7[1];
-          pbVar7 = pbVar7 + 1;
+    if (!atDecimalPoint) {
+      if ((currentChar != 0x65) && (integerCursor = textCursor, currentChar != 0x45)) {
+        while (currentChar - 0x30 < 10) {
+          currentChar = integerCursor[1];
+          integerCursor = integerCursor + 1;
         }
         if (&STACKARG(0x0) != (undefined1 *)0xffffffe8) {
-          pbStack00000018 = pbVar7;
+          pbStack00000018 = integerCursor;
         }
-        pbVar7 = pbVar7 + -1;
-        if (param_1 <= pbVar7) {
-          iVar5 = (int)pbVar7 - (int)(param_1 + -1);
-          dVar10 = DOUBLE_00108d68;
+        integerCursor = integerCursor + -1;
+        if (textCursor <= integerCursor) {
+          integerDigitsLeft = (int)integerCursor - (int)(textCursor + -1);
+          integerPlace = DOUBLE_00108d68;
           do {
-            bVar6 = *pbVar7;
-            pbVar7 = pbVar7 + -1;
-            dVar9 = ((double)CONCAT44(0x43300000,(int)(char)bVar6 - 0x30U ^ 0x80000000) -
-                    DOUBLE_00108d58) * dVar10 + dVar9;
-            dVar10 = dVar10 * DOUBLE_00108e10;
-            iVar5 = iVar5 + -1;
-          } while (iVar5 != 0);
+            currentChar = *integerCursor;
+            integerCursor = integerCursor + -1;
+            value = ((double)CONCAT44(0x43300000,(int)(char)currentChar - 0x30U ^ 0x80000000) -
+                    DOUBLE_00108d58) * integerPlace + value;
+            integerPlace = integerPlace * DOUBLE_00108e10;
+            integerDigitsLeft = integerDigitsLeft + -1;
+          } while (integerDigitsLeft != 0);
         }
-        bVar6 = *pbStack00000018;
-        bVar2 = true;
-        bVar1 = bVar6 == 0x2e;
+        currentChar = *pbStack00000018;
+        parsedDigits = true;
+        atDecimalPoint = currentChar == 0x2e;
       }
       goto LAB_000e16f8;
     }
 LAB_000e16fc:
-    pbVar8 = pbStack00000018 + 1;
-    bVar6 = pbStack00000018[1];
-    pbVar7 = pbVar8;
-    while (bVar6 - 0x30 < 10) {
-      pbVar7 = pbVar7 + 1;
-      bVar6 = *pbVar7;
+    fractionStart = pbStack00000018 + 1;
+    currentChar = pbStack00000018[1];
+    fractionCursor = fractionStart;
+    while (currentChar - 0x30 < 10) {
+      fractionCursor = fractionCursor + 1;
+      currentChar = *fractionCursor;
     }
-    dVar10 = DOUBLE_00108d60;
+    fractionValue = DOUBLE_00108d60;
     if (&STACKARG(0x0) != (undefined1 *)0xffffffe8) {
-      pbStack00000018 = pbVar7;
+      pbStack00000018 = fractionCursor;
     }
-    while (pbVar7 = pbVar7 + -1, pbVar8 <= pbVar7) {
-      dVar10 = dVar10 * DOUBLE_00108e08 +
-               (((double)CONCAT44(0x43300000,(int)(char)*pbVar7 - 0x30U ^ 0x80000000) -
+    while (fractionCursor = fractionCursor + -1, fractionStart <= fractionCursor) {
+      fractionValue = fractionValue * DOUBLE_00108e08 +
+               (((double)CONCAT44(0x43300000,(int)(char)*fractionCursor - 0x30U ^ 0x80000000) -
                DOUBLE_00108d58));
     }
-    bVar2 = true;
-    bVar6 = *pbStack00000018;
-    dVar9 = dVar10 * DOUBLE_00108e08 + dVar9;
+    parsedDigits = true;
+    currentChar = *pbStack00000018;
+    value = fractionValue * DOUBLE_00108e08 + value;
   }
-  if ((!bVar2) || ((bVar6 != 0x65 && (bVar6 != 0x45)))) goto LAB_000e18b8;
-  pbVar7 = pbStack00000018 + 1;
-  if (*pbVar7 == 0x2b) {
+  if ((!parsedDigits) || ((currentChar != 0x65 && (currentChar != 0x45)))) goto LAB_000e18b8;
+  exponentSignCursor = pbStack00000018 + 1;
+  if (*exponentSignCursor == 0x2b) {
 LAB_000e17ec:
-    pbVar7 = pbStack00000018 + 2;
+    exponentSignCursor = pbStack00000018 + 2;
   }
-  else if (*pbVar7 == 0x2d) {
-    bVar3 = true;
+  else if (*exponentSignCursor == 0x2d) {
+    negativeExponent = true;
     goto LAB_000e17ec;
   }
-  bVar6 = *pbVar7;
-  pbVar8 = pbVar7;
-  while (bVar6 - 0x30 < 10) {
-    pbVar8 = pbVar8 + 1;
-    bVar6 = *pbVar8;
+  currentChar = *exponentSignCursor;
+  exponentCursor = exponentSignCursor;
+  while (currentChar - 0x30 < 10) {
+    exponentCursor = exponentCursor + 1;
+    currentChar = *exponentCursor;
   }
-  pbStack00000018 = pbVar7;
+  pbStack00000018 = exponentSignCursor;
   if (&STACKARG(0x0) != (undefined1 *)0xffffffe8) {
-    pbStack00000018 = pbVar8;
+    pbStack00000018 = exponentCursor;
   }
-  pbVar8 = pbVar8 + -1;
-  dVar10 = DOUBLE_00108d60;
-  if (pbVar7 <= pbVar8) {
-    iVar5 = (int)pbVar8 - (int)(pbVar7 + -1);
-    dVar11 = DOUBLE_00108d68;
+  exponentCursor = exponentCursor + -1;
+  exponentThenScale = DOUBLE_00108d60;
+  if (exponentSignCursor <= exponentCursor) {
+    exponentDigitsLeft = (int)exponentCursor - (int)(exponentSignCursor + -1);
+    exponentPlace = DOUBLE_00108d68;
     do {
-      bVar6 = *pbVar8;
-      pbVar8 = pbVar8 + -1;
-      dVar10 = ((double)CONCAT44(0x43300000,(int)(char)bVar6 - 0x30U ^ 0x80000000) - DOUBLE_00108d58
-               ) * dVar11 + dVar10;
-      dVar11 = dVar11 * DOUBLE_00108e10;
-      iVar5 = iVar5 + -1;
-    } while (iVar5 != 0);
+      currentChar = *exponentCursor;
+      exponentCursor = exponentCursor + -1;
+      exponentThenScale = ((double)CONCAT44(0x43300000,(int)(char)currentChar - 0x30U ^ 0x80000000) - DOUBLE_00108d58
+               ) * exponentPlace + exponentThenScale;
+      exponentPlace = exponentPlace * DOUBLE_00108e10;
+      exponentDigitsLeft = exponentDigitsLeft + -1;
+    } while (exponentDigitsLeft != 0);
   }
-  if (bVar3) {
-    dVar10 = -dVar10;
+  if (negativeExponent) {
+    exponentThenScale = -exponentThenScale;
   }
-  dVar10 = (double)((double (*)())_pow_10)((int)dVar10);
-  dVar9 = dVar9 * dVar10;
+  exponentThenScale = (double)((double (*)())_pow_10)((int)exponentThenScale);
+  value = value * exponentThenScale;
 LAB_000e18b8:
-  if (bVar4) {
-    dVar9 = -dVar9;
+  if (negative) {
+    value = -value;
   }
-  if (param_2 != (undefined4 *)0x0) {
-    *param_2 = pbStack00000018;
+  if (endPtrOut != (undefined4 *)0x0) {
+    *endPtrOut = pbStack00000018;
   }
-  return dVar9;
+  return value;
 }
 
 /* _gle_dtostr @ 0xe18ec (1096 bytes) */

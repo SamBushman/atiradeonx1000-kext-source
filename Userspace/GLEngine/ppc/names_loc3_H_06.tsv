@@ -1,0 +1,89 @@
+local	_gleUpdateViewScissorData	uVar20	rendererInfoFlags	INFERRED	first word of the renderer record at ctx+0x468c: bit 1 / bit 2 mirror the x / y axis of the window rectangles, bit 4 allows the scissor path, bit 8 selects the 0.5 scale for the half sizes
+use	_gleUpdateViewScissorData	uVar10	scissorMaxYRaw	CONFIRMED	scissor y (ctx+0x34e4) + scissor height (ctx+0x34ec): unclamped top edge	^\s*uVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x34ec\)\ \+\ uVar17;$	+1
+use	_gleUpdateViewScissorData	uVar10	scissorMaxYRaw	CONFIRMED	scissor y (ctx+0x34e4) + scissor height (ctx+0x34ec): unclamped top edge	^\s*if\ \(\(\(int\)uVar18\ <=\ \(int\)uVar10\)\ \&\&\ \(uVar8\ =\ uVar10,\ \(int\)uVar23\ <\ \(int\)uVar10\)\)\ \{$	+1
+use	_gleUpdateViewScissorData	uVar10	clipMinX	CONFIRMED	scissorMinX clamped into the viewport x range [viewportX, viewportRight]	^\s*uVar10\ =\ uVar24;$	+1
+use	_gleUpdateViewScissorData	uVar10	clipMinX	CONFIRMED	scissorMinX clamped into the viewport x range [viewportX, viewportRight]	^\s*if\ \(\(\(int\)uVar24\ <=\ \(int\)uVar15\)\ \&\&\ \(uVar10\ =\ uVar15,\ \(int\)uVar16\ <\ \(int\)uVar15\)\)\ \{$	+2
+use	_gleUpdateViewScissorData	uVar10	clipMinX	CONFIRMED	scissorMinX clamped into the viewport x range [viewportX, viewportRight]	^\s*uVar18\ =\ uVar10;$	+2
+use	_gleUpdateViewScissorData	uVar10	clipMinX	CONFIRMED	scissorMinX clamped into the viewport x range [viewportX, viewportRight]	^\s*uVar17\ =\ uVar18\ \-\ uVar10;$	+1
+use	_gleUpdateViewScissorData	uVar10	clipMinX	CONFIRMED	scissorMinX clamped into the viewport x range [viewportX, viewportRight]	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,uVar10\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58\);$	+1
+use	_gleUpdateViewScissorData	uVar10	clipMinX	CONFIRMED	scissorMinX clamped into the viewport x range [viewportX, viewportRight]	^\s*uVar13\ =\ uVar10\ \+\ uVar14;$	+1
+use	_gleUpdateViewScissorData	uVar10	clipMinX	CONFIRMED	scissorMinX clamped into the viewport x range [viewportX, viewportRight]	^\s*if\ \(uVar10\ ==\ 0\)\ \{$	+1
+use	_gleUpdateViewScissorData	uVar10	clipMinX	CONFIRMED	scissorMinX clamped into the viewport x range [viewportX, viewportRight]	^\s*uVar14\ =\ \(uVar11\ \-\ uVar10\)\ \+\ uVar14;$	+1
+use	_gleUpdateViewScissorData	uVar10	clipMinX	CONFIRMED	scissorMinX clamped into the viewport x range [viewportX, viewportRight]	^\s*if\ \(uVar10\ ==\ 0\)\ \{$@2	+1
+use	_gleUpdateViewScissorData	uVar10	clipMinX	CONFIRMED	scissorMinX clamped into the viewport x range [viewportX, viewportRight]	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,\(uVar24\ \-\ uVar10\)\ \*\ 2\ \+\ uVar21\ \^\ 0x80000000\)\ \-\ dVar26$	+2
+use	_gleUpdateViewScissorData	uVar12	windowOffsetYThenMaxY	CONFIRMED	ctx+0x4728 (window y offset), then (in place) clipMaxY + offset, or surfaceHeight - clipMinY + offset when y is mirrored	^\s*uVar12\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x4728\);$	+1
+use	_gleUpdateViewScissorData	uVar12	windowOffsetYThenMaxY	CONFIRMED	ctx+0x4728 (window y offset), then (in place) clipMaxY + offset, or surfaceHeight - clipMinY + offset when y is mirrored	^\s*fVar2\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar12\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58\);$	+1
+use	_gleUpdateViewScissorData	uVar12	windowOffsetYThenMaxY	CONFIRMED	ctx+0x4728 (window y offset), then (in place) clipMaxY + offset, or surfaceHeight - clipMinY + offset when y is mirrored	^\s*uVar11\ =\ uVar15\ \+\ uVar12;$	+2
+use	_gleUpdateViewScissorData	uVar12	windowOffsetYThenMaxY	CONFIRMED	ctx+0x4728 (window y offset), then (in place) clipMaxY + offset, or surfaceHeight - clipMinY + offset when y is mirrored	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,uVar12\ \^\ 0x80000000\)\ \-\ dVar26\);$	+1
+use	_gleUpdateViewScissorData	uVar12	windowOffsetYThenMaxY	CONFIRMED	ctx+0x4728 (window y offset), then (in place) clipMaxY + offset, or surfaceHeight - clipMinY + offset when y is mirrored	^\s*uVar12\ =\ uVar12\ \+\ iVar19;$	+1
+use	_gleUpdateViewScissorData	uVar12	windowOffsetYThenMaxY	CONFIRMED	ctx+0x4728 (window y offset), then (in place) clipMaxY + offset, or surfaceHeight - clipMinY + offset when y is mirrored	^\s*uVar11\ =\ \(uVar23\ \-\ uVar16\)\ \+\ uVar12;$	+2
+use	_gleUpdateViewScissorData	uVar12	windowOffsetYThenMaxY	CONFIRMED	ctx+0x4728 (window y offset), then (in place) clipMaxY + offset, or surfaceHeight - clipMinY + offset when y is mirrored	^\s*dVar26\ =\ \(double\)CONCAT44\(0x43300000,uVar12\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58;$	+1
+use	_gleUpdateViewScissorData	uVar12	windowOffsetYThenMaxY	CONFIRMED	ctx+0x4728 (window y offset), then (in place) clipMaxY + offset, or surfaceHeight - clipMinY + offset when y is mirrored	^\s*uVar12\ =\ uVar12\ \+\ iVar19;$@2	+1
+use	_gleUpdateViewScissorData	uVar12	windowOffsetYThenMaxY	CONFIRMED	ctx+0x4728 (window y offset), then (in place) clipMaxY + offset, or surfaceHeight - clipMinY + offset when y is mirrored	^\s*dVar28\ =\ \(double\)CONCAT44\(0x43300000,uVar12\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58;$	+1
+use	_gleUpdateViewScissorData	uVar13	windowMinX	CONFIRMED	clipMinX + window x offset, or the mirrored left edge (surfaceWidth - clipMaxX + offset); adjusted by the border word at ctx+0x472c	^\s*uVar13\ =\ uVar10\ \+\ uVar14;$	+1
+use	_gleUpdateViewScissorData	uVar13	windowMinX	CONFIRMED	clipMinX + window x offset, or the mirrored left edge (surfaceWidth - clipMaxX + offset); adjusted by the border word at ctx+0x472c	^\s*dVar26\ =\ \(double\)CONCAT44\(0x43300000,uVar13\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58;$	+1
+use	_gleUpdateViewScissorData	uVar13	windowMinX	CONFIRMED	clipMinX + window x offset, or the mirrored left edge (surfaceWidth - clipMaxX + offset); adjusted by the border word at ctx+0x472c	^\s*uVar13\ =\ uVar13\ \-\ iVar9;$	+1
+use	_gleUpdateViewScissorData	uVar13	windowMinX	CONFIRMED	clipMinX + window x offset, or the mirrored left edge (surfaceWidth - clipMaxX + offset); adjusted by the border word at ctx+0x472c	^\s*uVar13\ =\ \(uVar11\ \-\ uVar18\)\ \+\ uVar14;$	+1
+use	_gleUpdateViewScissorData	uVar13	windowMinX	CONFIRMED	clipMinX + window x offset, or the mirrored left edge (surfaceWidth - clipMaxX + offset); adjusted by the border word at ctx+0x472c	^\s*dVar28\ =\ \(double\)CONCAT44\(0x43300000,uVar13\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58;$	+1
+use	_gleUpdateViewScissorData	uVar13	windowMinX	CONFIRMED	clipMinX + window x offset, or the mirrored left edge (surfaceWidth - clipMaxX + offset); adjusted by the border word at ctx+0x472c	^\s*uVar13\ =\ uVar13\ \-\ iVar9;$@2	+1
+use	_gleUpdateViewScissorData	uVar13	windowMinX	CONFIRMED	clipMinX + window x offset, or the mirrored left edge (surfaceWidth - clipMaxX + offset); adjusted by the border word at ctx+0x472c	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,uVar13\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58\);$	+1
+use	_gleUpdateViewScissorData	uVar11	windowMinY	CONFIRMED	clipMinY + window y offset, or the mirrored lower edge; adjusted by the border word at ctx+0x4730	^\s*uVar11\ =\ uVar15\ \+\ uVar12;$	+1
+use	_gleUpdateViewScissorData	uVar11	windowMinY	CONFIRMED	clipMinY + window y offset, or the mirrored lower edge; adjusted by the border word at ctx+0x4730	^\s*dVar28\ =\ \(double\)CONCAT44\(0x43300000,uVar11\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58;$	+1
+use	_gleUpdateViewScissorData	uVar11	windowMinY	CONFIRMED	clipMinY + window y offset, or the mirrored lower edge; adjusted by the border word at ctx+0x4730	^\s*uVar11\ =\ uVar11\ \-\ iVar19;$	+1
+use	_gleUpdateViewScissorData	uVar11	windowMinY	CONFIRMED	clipMinY + window y offset, or the mirrored lower edge; adjusted by the border word at ctx+0x4730	^\s*uVar11\ =\ \(uVar23\ \-\ uVar16\)\ \+\ uVar12;$	+1
+use	_gleUpdateViewScissorData	uVar11	windowMinY	CONFIRMED	clipMinY + window y offset, or the mirrored lower edge; adjusted by the border word at ctx+0x4730	^\s*dVar28\ =\ \(double\)CONCAT44\(0x43300000,uVar11\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58;$@2	+1
+use	_gleUpdateViewScissorData	uVar11	windowMinY	CONFIRMED	clipMinY + window y offset, or the mirrored lower edge; adjusted by the border word at ctx+0x4730	^\s*uVar11\ =\ uVar11\ \-\ iVar19;$@2	+1
+use	_gleUpdateViewScissorData	uVar11	windowMinY	CONFIRMED	clipMinY + window y offset, or the mirrored lower edge; adjusted by the border word at ctx+0x4730	^\s*dVar29\ =\ \(double\)CONCAT44\(0x43300000,uVar11\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58;$	+1
+use	_gleUpdateViewScissorData	fVar1	viewportXFloat	CONFIRMED	(float)viewportX	^\s*fVar1\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar24\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58\);$	+1
+use	_gleUpdateViewScissorData	fVar1	viewportXFloat	CONFIRMED	(float)viewportX	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x4a30\)\ =\ fVar3\ \+\ fVar1;$	+1
+use	_gleUpdateViewScissorData	fVar1	viewportXFloat	CONFIRMED	(float)viewportX	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x1b80\)\ =\ fVar3\ \+\ fVar1;$@2	+1
+use	_gleUpdateViewScissorData	fVar1	viewportXFloat	CONFIRMED	(float)viewportX	^\s*\*\(float\ \*\)\(param_1\ \+\ 0xf0\)\ =\ fVar1;$	+1
+use	_gleUpdateViewScissorData	fVar1	viewportXFloat	CONFIRMED	(float)viewportX	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x110\)\ =\ fVar1;$	+1
+use	_gleUpdateViewScissorData	fVar2	viewportYFloat	CONFIRMED	(float)viewportY	^\s*fVar2\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar25\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58\);$	+1
+use	_gleUpdateViewScissorData	fVar2	viewportYFloat	CONFIRMED	(float)viewportY	^\s*\*\(float\ \*\)\(param_1\ \+\ 19000\)\ =\ fVar4\ \+\ fVar2;$	+1
+use	_gleUpdateViewScissorData	fVar2	viewportYFloat	CONFIRMED	(float)viewportY	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x1b84\)\ =\ fVar4\ \+\ fVar2;$@2	+1
+use	_gleUpdateViewScissorData	fVar2	viewportYFloat	CONFIRMED	(float)viewportY	^\s*\*\(float\ \*\)\(param_1\ \+\ 0xf4\)\ =\ fVar2;$	+1
+use	_gleUpdateViewScissorData	fVar2	viewportYFloat	CONFIRMED	(float)viewportY	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x114\)\ =\ fVar2;$	+1
+use	_gleUpdateViewScissorData	fVar3	viewportHalfWidth	CONFIRMED	(float)viewportWidth * 0.5 (FLOAT_00108e90), stored to ctx+0x4a2c and added to viewportXFloat for the centre	^\s*fVar3\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar21\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58\)\ \*$	+1
+use	_gleUpdateViewScissorData	fVar3	viewportHalfWidth	CONFIRMED	(float)viewportWidth * 0.5 (FLOAT_00108e90), stored to ctx+0x4a2c and added to viewportXFloat for the centre	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x4a2c\)\ =\ fVar3;$	+1
+use	_gleUpdateViewScissorData	fVar3	viewportHalfWidth	CONFIRMED	(float)viewportWidth * 0.5 (FLOAT_00108e90), stored to ctx+0x4a2c and added to viewportXFloat for the centre	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x4a30\)\ =\ fVar3\ \+\ fVar1;$	+1
+use	_gleUpdateViewScissorData	fVar3	viewportHalfWidth	CONFIRMED	(float)viewportWidth * 0.5 (FLOAT_00108e90), stored to ctx+0x4a2c and added to viewportXFloat for the centre	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x1b70\)\ =\ fVar3;$	+1
+use	_gleUpdateViewScissorData	fVar3	viewportHalfWidth	CONFIRMED	(float)viewportWidth * 0.5 (FLOAT_00108e90), stored to ctx+0x4a2c and added to viewportXFloat for the centre	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x1b80\)\ =\ fVar3\ \+\ fVar1;$@2	+1
+use	_gleUpdateViewScissorData	fVar4	viewportHalfHeight	CONFIRMED	(float)viewportHeight * 0.5, stored to ctx+0x4a34	^\s*fVar4\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar22\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58\)\ \*$	+1
+use	_gleUpdateViewScissorData	fVar4	viewportHalfHeight	CONFIRMED	(float)viewportHeight * 0.5, stored to ctx+0x4a34	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x4a34\)\ =\ fVar4;$	+1
+use	_gleUpdateViewScissorData	fVar4	viewportHalfHeight	CONFIRMED	(float)viewportHeight * 0.5, stored to ctx+0x4a34	^\s*\*\(float\ \*\)\(param_1\ \+\ 19000\)\ =\ fVar4\ \+\ fVar2;$	+1
+use	_gleUpdateViewScissorData	fVar4	viewportHalfHeight	CONFIRMED	(float)viewportHeight * 0.5, stored to ctx+0x4a34	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x1b74\)\ =\ fVar4;$	+1
+use	_gleUpdateViewScissorData	fVar4	viewportHalfHeight	CONFIRMED	(float)viewportHeight * 0.5, stored to ctx+0x4a34	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x1b84\)\ =\ fVar4\ \+\ fVar2;$@2	+1
+use	_gleUpdateViewScissorData	fVar1	offsetXFloat	CONFIRMED	(float)window x offset (ctx+0x4724)	^\s*fVar1\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar14\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58\);$	+1
+use	_gleUpdateViewScissorData	fVar1	offsetXFloat	CONFIRMED	(float)window x offset (ctx+0x4724)	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x1b80\)\ =\ fVar3\ \+\ fVar1;$	+1
+use	_gleUpdateViewScissorData	fVar1	offsetXFloat	CONFIRMED	(float)window x offset (ctx+0x4724)	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x4a48\)\ =\ fVar1;$	+1
+use	_gleUpdateViewScissorData	fVar1	offsetXFloat	CONFIRMED	(float)window x offset (ctx+0x4724)	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x4a48\)\ =\ fVar5\ \+\ fVar1;$	+2
+use	_gleUpdateViewScissorData	fVar2	offsetYFloat	CONFIRMED	(float)window y offset (ctx+0x4728)	^\s*fVar2\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar12\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58\);$	+1
+use	_gleUpdateViewScissorData	fVar2	offsetYFloat	CONFIRMED	(float)window y offset (ctx+0x4728)	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x4a50\)\ =\ fVar2;$	+2
+use	_gleUpdateViewScissorData	fVar2	offsetYFloat	CONFIRMED	(float)window y offset (ctx+0x4728)	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x4a50\)\ =\ fVar1\ \+\ fVar2;$	+1
+use	_gleUpdateViewScissorData	fVar2	offsetYFloat	CONFIRMED	(float)window y offset (ctx+0x4728)	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x1b84\)\ =\ \(fVar1\ \-\ fVar4\)\ \+\ fVar2;$	+1
+use	_gleUpdateViewScissorData	fVar3	clipWidthFloat	CONFIRMED	(float)clipWidth	^\s*fVar3\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar17\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58\);$	+1
+use	_gleUpdateViewScissorData	fVar3	clipWidthFloat	CONFIRMED	(float)clipWidth	^\s*fVar6\ =\ fVar3\ \*\ fVar6;$	+2
+use	_gleUpdateViewScissorData	fVar3	clipWidthFloat	CONFIRMED	(float)clipWidth	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x1b80\)\ =\ fVar3\ \+\ fVar1;$	+1
+use	_gleUpdateViewScissorData	fVar3	clipWidthFloat	CONFIRMED	(float)clipWidth	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x1b80\)\ =\ \(fVar5\ \-\ fVar3\)\ \+\ fVar1;$	+1
+use	_gleUpdateViewScissorData	fVar4	clipHeightFloat	CONFIRMED	(float)clipHeight	^\s*fVar4\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar8\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58\);$	+1
+use	_gleUpdateViewScissorData	fVar4	clipHeightFloat	CONFIRMED	(float)clipHeight	^\s*fVar7\ =\ fVar4\ \*\ fVar6;$	+1
+use	_gleUpdateViewScissorData	fVar4	clipHeightFloat	CONFIRMED	(float)clipHeight	^\s*fVar4\ =\ fVar4\ \*\ FLOAT_00108e90\ \+$	+1
+use	_gleUpdateViewScissorData	fVar4	clipHeightFloat	CONFIRMED	(float)clipHeight	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x1b84\)\ =\ fVar4\ \+\ fVar2;$	+1
+use	_gleUpdateViewScissorData	fVar4	clipHeightFloat	CONFIRMED	(float)clipHeight	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x1b84\)\ =\ \(fVar1\ \-\ fVar4\)\ \+\ fVar2;$	+1
+local	_gleUpdateViewScissorData	fVar5	surfaceWidthFloat	CONFIRMED	(float)surfaceWidth
+use	_gleUpdateViewScissorData	fVar1	surfaceHeightFloat	CONFIRMED	(float)surfaceHeight	^\s*fVar1\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar23\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58\);$	+1
+use	_gleUpdateViewScissorData	fVar1	surfaceHeightFloat	CONFIRMED	(float)surfaceHeight	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x4a50\)\ =\ fVar1\ \+\ fVar2;$	+1
+use	_gleUpdateViewScissorData	fVar1	surfaceHeightFloat	CONFIRMED	(float)surfaceHeight	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x1b84\)\ =\ \(fVar1\ \-\ fVar4\)\ \+\ fVar2;$	+1
+use	_gleUpdateViewScissorData	fVar2	clipWidthFloat2	CONFIRMED	(float)clipWidth, reloaded for the 1/clip scale terms	^\s*fVar2\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar17\ \^\ 0x80000000\)\ \-\ dVar26\);$	+1
+use	_gleUpdateViewScissorData	fVar2	clipWidthFloat2	CONFIRMED	(float)clipWidth, reloaded for the 1/clip scale terms	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,uVar21\ \^\ 0x80000000\)\ \-\ dVar26\)\ /\ fVar2;$	+1
+use	_gleUpdateViewScissorData	fVar2	clipWidthFloat2	CONFIRMED	(float)clipWidth, reloaded for the 1/clip scale terms	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,\(uVar24\ \-\ uVar10\)\ \*\ 2\ \+\ uVar21\ \^\ 0x80000000\)\ \-\ dVar26$	+2
+use	_gleUpdateViewScissorData	fVar3	clipHeightFloat2	CONFIRMED	(float)clipHeight, reloaded for the 1/clip scale terms	^\s*fVar3\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar8\ \^\ 0x80000000\)\ \-\ dVar26\);$	+1
+use	_gleUpdateViewScissorData	fVar3	clipHeightFloat2	CONFIRMED	(float)clipHeight, reloaded for the 1/clip scale terms	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,uVar22\ \^\ 0x80000000\)\ \-\ dVar26\)\ /\ fVar3;$	+1
+use	_gleUpdateViewScissorData	fVar3	clipHeightFloat2	CONFIRMED	(float)clipHeight, reloaded for the 1/clip scale terms	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,\(uVar25\ \-\ uVar15\)\ \*\ 2\ \+\ uVar22\ \^\ 0x80000000\)\ \-\ dVar26$	+2
+use	_gleUpdateViewScissorData	fVar6	viewportRightFloat	CONFIRMED	(float)viewportRight on the no-scissor path	^\s*fVar6\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar16\ \^\ 0x80000000\)\ \-\ dVar26\);$	+1
+use	_gleUpdateViewScissorData	fVar6	viewportRightFloat	CONFIRMED	(float)viewportRight on the no-scissor path	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x100\)\ =\ fVar6;$	+1
+use	_gleUpdateViewScissorData	fVar6	viewportRightFloat	CONFIRMED	(float)viewportRight on the no-scissor path	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x118\)\ =\ fVar6;$	+1
+use	_gleUpdateViewScissorData	fVar3	viewportTopFloat	CONFIRMED	(float)viewportTop on the no-scissor path	^\s*fVar3\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar12\ \^\ 0x80000000\)\ \-\ dVar26\);$	+1
+use	_gleUpdateViewScissorData	fVar3	viewportTopFloat	CONFIRMED	(float)viewportTop on the no-scissor path	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x104\)\ =\ fVar3;$	+1
+use	_gleUpdateViewScissorData	fVar3	viewportTopFloat	CONFIRMED	(float)viewportTop on the no-scissor path	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x11c\)\ =\ fVar3;$	+1

@@ -1,0 +1,6 @@
+local	_gleLoadDataElementNO	param_2	componentCount	CONFIRMED	selects the 1/2/3/4-component code chunk in every branch (_gleLoadByte1RTC .. _gleLoadByte4RTC, _gleLoadFloat*RTC, _gleNormalize*1RTC .. 4RTC) and the number of loads emitted inline
+local	_gleLoadDataElementNO	param_3	dataType	CONFIRMED	switch value choosing the element type of the chunk family (_gleLoadByte*, UByte*, Short*, UShort*, Int*, UInt*, Float*, Double* and the _gleNormalize* variants for the normalised types 8 .. 0xc)
+local	_gleLoadDataElementNO	param_5	byteReversed	CONFIRMED	when nonzero the byte-reversed chunk (_gleLoad*Rev*RTC) or the byte-reversing load (lhbrx/lwbrx) is emitted instead of the plain load
+local	_gleLoadDataElementNO	uVar1	instrWord	CONFIRMED	PowerPC instruction word (0x88070000 = lbz, 0xa0070000 = lhz, 0xc0270000 = lfs, ...) stored at the instruction cursor
+local	_gleLoadDataElementNO	uVar2	nextInstrWord	CONFIRMED	instruction word (0x89470002, 0x7c0a3e2c, 0xc0470004, ...) stored at the following cursor position
+local	_gleLoadDataElementNO	puVar5	wordCursor	CONFIRMED	instrCursor + 2 / + 4: position of the instruction word being written before instrCursor is advanced past it

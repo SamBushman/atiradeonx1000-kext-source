@@ -177,20 +177,21 @@ int _glTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, width, hei
   undefined4 type;
   int pixels;
 {
-  uint uVar1;
-  int iVar2;
+  uint face;
+  int levelBase;
   int imageEndOffset;
   int iVar3;
-  int iVar4;
+  int callbackResult;
   undefined4 uVar5;
   undefined4 glContextWord4688;
-  undefined4 uVar6;
-  byte bVar7;
-  uint uVar8;
-  int iVar9;
+  undefined4 pluginTextureHandle;
+  byte levelFlagByte;
+  uint mipLevel;
+  int mipLevelRecord;
   int pixelUnpackBuffer;
   int textureLevel;
-  int iVar11;
+  int bufferSize;
+  int fastPathResultThenFaceOffset;
   double bytesPerElement;
   
   iVar3 = glContext;
@@ -198,10 +199,10 @@ int _glTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, width, hei
   pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
   if (pixelUnpackBuffer != 0) {
     imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,pixels);
-    iVar11 = *(int *)(pixelUnpackBuffer + 0x38);
+    bufferSize = *(int *)(pixelUnpackBuffer + 0x38);
     bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
     iVar3 = (int)bytesPerElement;
-    if (iVar11 < imageEndOffset) {
+    if (bufferSize < imageEndOffset) {
 LAB_0001f180:
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x502;
@@ -224,98 +225,98 @@ LAB_0001f180:
   if (iVar3 == 0) {
     return 0;
   }
-  uVar1 = target - 0x8515;
-  if (5 < uVar1) {
-    uVar1 = 0;
+  face = target - 0x8515;
+  if (5 < face) {
+    face = 0;
   }
-  iVar2 = iVar3 + uVar1 * 0x168 + level * 0x18;
-  textureLevel = iVar2 + 0xc4;
-  iVar11 = ((int (*)())_checkFastPath)(glContext,textureLevel,xoffset,yoffset,0,width,height,format,type,pixels)
+  levelBase = iVar3 + face * 0x168 + level * 0x18;
+  textureLevel = levelBase + 0xc4;
+  fastPathResultThenFaceOffset = ((int (*)())_checkFastPath)(glContext,textureLevel,xoffset,yoffset,0,width,height,format,type,pixels)
   ;
-  if ((((iVar11 != 0) && ((int)(uint)*(byte *)(iVar3 + 0x8d) <= (int)level)) &&
+  if ((((fastPathResultThenFaceOffset != 0) && ((int)(uint)*(byte *)(iVar3 + 0x8d) <= (int)level)) &&
       ((int)level <= (int)(uint)*(byte *)(iVar3 + 0x8f))) &&
-     (iVar11 = uVar1 * 2, (*(ushort *)(iVar11 + iVar3 + 0x94) >> (level & 0x3f) & 1) != 0)) {
+     (fastPathResultThenFaceOffset = face * 2, (*(ushort *)(fastPathResultThenFaceOffset + iVar3 + 0x94) >> (level & 0x3f) & 1) != 0)) {
     if (pixelUnpackBuffer == 0) {
       glContextWord4688 = *(undefined4 *)(glContext + 0x4688);
-      uVar6 = *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4);
+      pluginTextureHandle = *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4);
     }
     else {
-      iVar4 = (**(code **)(glContext + 0x4710))
+      callbackResult = (**(code **)(glContext + 0x4710))
                         (*(undefined4 *)(glContext + 0x4688),
-                         *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4),uVar1,
+                         *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4),face,
                          level,xoffset,yoffset,0,width);
-      if (iVar4 != 0) goto LAB_0001f388;
+      if (callbackResult != 0) goto LAB_0001f388;
       if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
         _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
       }
       glContextWord4688 = *(undefined4 *)(glContext + 0x4688);
-      uVar6 = *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4);
+      pluginTextureHandle = *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4);
     }
-    iVar4 = (**(code **)(glContext + 0x4710))(glContextWord4688,uVar6,uVar1,level,xoffset,yoffset,0,width);
-    if (iVar4 != 0) {
+    callbackResult = (**(code **)(glContext + 0x4710))(glContextWord4688,pluginTextureHandle,face,level,xoffset,yoffset,0,width);
+    if (callbackResult != 0) {
 LAB_0001f388:
       *(undefined4 *)(iVar3 + 0x20) =
            *(undefined4 *)
             ((uint)*(byte *)(glContext + 0x85a8) * 4 + *(int *)(glContext + 0x5148) + 0x8054);
-      if (*(int *)(iVar2 + 0xd8) != 0) {
-        bVar7 = *(byte *)(iVar2 + 0xcf);
-        if (((bVar7 & 1) == 0) && (*(short *)(iVar3 + 0x3e) == -0x7a43)) {
-          iVar4 = _gleFreeTextureLevel(glContext,iVar3,textureLevel);
-          bVar7 = *(byte *)(iVar2 + 0xcf);
+      if (*(int *)(levelBase + 0xd8) != 0) {
+        levelFlagByte = *(byte *)(levelBase + 0xcf);
+        if (((levelFlagByte & 1) == 0) && (*(short *)(iVar3 + 0x3e) == -0x7a43)) {
+          callbackResult = _gleFreeTextureLevel(glContext,iVar3,textureLevel);
+          levelFlagByte = *(byte *)(levelBase + 0xcf);
         }
-        *(byte *)(iVar2 + 0xcf) = bVar7 & 0xef;
-        *(ushort *)(iVar11 + iVar3 + 0xa0) =
-             *(ushort *)(iVar11 + iVar3 + 0xa0) &
+        *(byte *)(levelBase + 0xcf) = levelFlagByte & 0xef;
+        *(ushort *)(fastPathResultThenFaceOffset + iVar3 + 0xa0) =
+             *(ushort *)(fastPathResultThenFaceOffset + iVar3 + 0xa0) &
              ((ushort)(-2 << (level & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (level & 0x1f)));
       }
-      *(byte *)(iVar2 + 0xcf) = *(byte *)(iVar2 + 0xcf) | 0x40;
+      *(byte *)(levelBase + 0xcf) = *(byte *)(levelBase + 0xcf) | 0x40;
       if ((*(uint *)(iVar3 + 0x6c) & 0x8000) == 0) {
-        return iVar4;
+        return callbackResult;
       }
       if ((int)*(short *)(iVar3 + 0x60) != level) {
-        return iVar4;
+        return callbackResult;
       }
-      uVar8 = level + 1;
-      if ((int)(uint)*(byte *)(iVar3 + 0x83) < (int)uVar8) {
-        return iVar4;
+      mipLevel = level + 1;
+      if ((int)(uint)*(byte *)(iVar3 + 0x83) < (int)mipLevel) {
+        return callbackResult;
       }
-      iVar9 = uVar8 * 0x18 + uVar1 * 0x168 + iVar3 + 0xc4;
+      mipLevelRecord = mipLevel * 0x18 + face * 0x168 + iVar3 + 0xc4;
       do {
-        if (*(int *)(iVar9 + 0x14) != 0) {
-          if (((*(byte *)(iVar9 + 0xb) & 1) == 0) && (*(short *)(iVar3 + 0x3e) == -0x7a43)) {
-            iVar4 = _gleFreeTextureLevel(glContext,iVar3,iVar9);
+        if (*(int *)(mipLevelRecord + 0x14) != 0) {
+          if (((*(byte *)(mipLevelRecord + 0xb) & 1) == 0) && (*(short *)(iVar3 + 0x3e) == -0x7a43)) {
+            callbackResult = _gleFreeTextureLevel(glContext,iVar3,mipLevelRecord);
           }
-          *(byte *)(iVar9 + 0xb) = *(byte *)(iVar9 + 0xb) & 0xef;
-          *(ushort *)(iVar11 + iVar3 + 0xa0) =
-               *(ushort *)(iVar11 + iVar3 + 0xa0) & ~(ushort)(1 << (uVar8 & 0x3f));
+          *(byte *)(mipLevelRecord + 0xb) = *(byte *)(mipLevelRecord + 0xb) & 0xef;
+          *(ushort *)(fastPathResultThenFaceOffset + iVar3 + 0xa0) =
+               *(ushort *)(fastPathResultThenFaceOffset + iVar3 + 0xa0) & ~(ushort)(1 << (mipLevel & 0x3f));
         }
-        uVar8 = uVar8 + 1;
-        *(byte *)(iVar9 + 0xb) = *(byte *)(iVar9 + 0xb) | 0x40;
-        iVar9 = iVar9 + 0x18;
-      } while ((int)uVar8 <= (int)(uint)*(byte *)(iVar3 + 0x83));
-      return iVar4;
+        mipLevel = mipLevel + 1;
+        *(byte *)(mipLevelRecord + 0xb) = *(byte *)(mipLevelRecord + 0xb) | 0x40;
+        mipLevelRecord = mipLevelRecord + 0x18;
+      } while ((int)mipLevel <= (int)(uint)*(byte *)(iVar3 + 0x83));
+      return callbackResult;
     }
   }
-  bVar7 = *(byte *)(iVar2 + 0xcf);
-  if ((bVar7 & 0x10) == 0) {
-    if ((bVar7 & 0x40) == 0) {
-      if (*(int *)(iVar2 + 0xd8) == 0) {
+  levelFlagByte = *(byte *)(levelBase + 0xcf);
+  if ((levelFlagByte & 0x10) == 0) {
+    if ((levelFlagByte & 0x40) == 0) {
+      if (*(int *)(levelBase + 0xd8) == 0) {
         _gleAllocateTextureLevel(glContext,iVar3,textureLevel);
-        bVar7 = *(byte *)(iVar2 + 0xcf);
+        levelFlagByte = *(byte *)(levelBase + 0xcf);
       }
-      *(byte *)(iVar2 + 0xcf) = bVar7 | 0x10;
+      *(byte *)(levelBase + 0xcf) = levelFlagByte | 0x10;
     }
     else {
       _gleUploadPluginTextureLevel
-                (glContext,iVar3,textureLevel,uVar1,level,(uint)*(byte *)(glContext + 0x85a8));
+                (glContext,iVar3,textureLevel,face,level,(uint)*(byte *)(glContext + 0x85a8));
     }
   }
-  ((int (*)())_gleModifyPluginTextureLevel)(glContext,iVar3,textureLevel,uVar1,level,xoffset,yoffset,0,width,height,1);
-  uVar5 = _gleTextureImagePut(glContext,textureLevel,xoffset + (uint)*(byte *)(iVar2 + 0xce),
-                              yoffset + (uint)*(byte *)(iVar2 + 0xce),0,width,height,1,format,
+  ((int (*)())_gleModifyPluginTextureLevel)(glContext,iVar3,textureLevel,face,level,xoffset,yoffset,0,width,height,1);
+  uVar5 = _gleTextureImagePut(glContext,textureLevel,xoffset + (uint)*(byte *)(levelBase + 0xce),
+                              yoffset + (uint)*(byte *)(levelBase + 0xce),0,width,height,1,format,
                               type,1,glContext + 0x31cc,pixels);
   if ((((*(uint *)(iVar3 + 0x6c) & 0x8000) != 0) && ((int)*(short *)(iVar3 + 0x60) == level)) &&
-     (iVar3 = _gleGenMipmapsToLevel(glContext,iVar3,uVar1,level,0xf,1), uVar5 = 0, iVar3 != 0)) {
+     (iVar3 = _gleGenMipmapsToLevel(glContext,iVar3,face,level,0xf,1), uVar5 = 0, iVar3 != 0)) {
     return iVar3;
   }
   *(uint *)(glContext + 0x314) =
@@ -1119,25 +1120,33 @@ int _gliSetInteger(glContext, stateId, valuePtr)
 {
   int loopIndex2;
   int loopIndex;
-  byte bVar1;
-  ushort uVar2;
+  byte levelFlagByte;
+  ushort textureFlags;
   undefined2 uVar3;
   undefined1 uVar4;
-  undefined4 uVar5;
-  int iVar6;
+  undefined4 funcCache;
+  undefined4 baseFormat;
+  int checkedTextureObject;
+  int mipmapSource;
   int iVar7;
   undefined1 uVar8;
   int iVar9;
-  int iVar10;
+  int firstPluginError;
+  int textureObject;
+  int levelBase;
+  int surfaceHandle;
+  int newCacheLimit;
   int glContextWord5408;
-  int iVar11;
+  int level;
+  int faceCount;
+  int surfaceHandle2;
   int iVar12;
   int iVar13;
-  uint uVar14;
-  int iVar15;
+  uint targetThenFace;
+  int levelRecord2;
   int iVar16;
   
-  iVar10 = 0;
+  firstPluginError = 0;
   if ((glContext == 0) || (*(int *)(glContext + 0x467c) != 0x3463a223)) {
     return 0x2714;
   }
@@ -1145,19 +1154,19 @@ int _gliSetInteger(glContext, stateId, valuePtr)
     return 0x271e;
   }
   if (stateId == 0x176) {
-    iVar10 = *valuePtr;
-    if (iVar10 < 1) {
+    newCacheLimit = *valuePtr;
+    if (newCacheLimit < 1) {
       return 0x2718;
     }
-    *(short *)(glContext + 0x49c0) = (short)iVar10;
-    if (*(short *)(glContext + 0x49c2) <= iVar10) {
+    *(short *)(glContext + 0x49c0) = (short)newCacheLimit;
+    if (*(short *)(glContext + 0x49c2) <= newCacheLimit) {
       return 0;
     }
-    uVar5 = *(undefined4 *)(glContext + 0x49b8);
-    iVar13 = *(short *)(glContext + 0x49c2) - iVar10;
-    *(short *)(glContext + 0x49c2) = (short)iVar10;
+    funcCache = *(undefined4 *)(glContext + 0x49b8);
+    iVar13 = *(short *)(glContext + 0x49c2) - newCacheLimit;
+    *(short *)(glContext + 0x49c2) = (short)newCacheLimit;
 LAB_0002085c:
-    _gleShrinkFuncCache(uVar5,iVar13);
+    _gleShrinkFuncCache(funcCache,iVar13);
   }
   else {
     if (stateId < 0x177) {
@@ -1167,17 +1176,17 @@ LAB_0002085c:
       }
       if (0x133 < stateId) {
         if (stateId == 0x162) {
-          iVar10 = *valuePtr;
-          if (iVar10 < 4) {
+          newCacheLimit = *valuePtr;
+          if (newCacheLimit < 4) {
             return 0x2718;
           }
-          *(short *)(glContext + 0x5098) = (short)iVar10;
-          if (*(short *)(glContext + 0x509a) <= iVar10) {
+          *(short *)(glContext + 0x5098) = (short)newCacheLimit;
+          if (*(short *)(glContext + 0x509a) <= newCacheLimit) {
             return 0;
           }
-          uVar5 = *(undefined4 *)(glContext + 0x5094);
-          iVar13 = *(short *)(glContext + 0x509a) - iVar10;
-          *(short *)(glContext + 0x509a) = (short)iVar10;
+          funcCache = *(undefined4 *)(glContext + 0x5094);
+          iVar13 = *(short *)(glContext + 0x509a) - newCacheLimit;
+          *(short *)(glContext + 0x509a) = (short)newCacheLimit;
         }
         else if (stateId < 0x163) {
           if (stateId == 0x134) {
@@ -1185,58 +1194,58 @@ LAB_0002085c:
             return 0;
           }
           if (stateId != 0x15e) goto LAB_00020f04;
-          iVar10 = *valuePtr;
-          if (iVar10 < 4) {
+          newCacheLimit = *valuePtr;
+          if (newCacheLimit < 4) {
             return 0x2718;
           }
-          *(short *)(glContext + 0x508c) = (short)iVar10;
-          if (*(short *)(glContext + 0x508e) <= iVar10) {
+          *(short *)(glContext + 0x508c) = (short)newCacheLimit;
+          if (*(short *)(glContext + 0x508e) <= newCacheLimit) {
             return 0;
           }
-          uVar5 = *(undefined4 *)(glContext + 0x5088);
-          iVar13 = *(short *)(glContext + 0x508e) - iVar10;
-          *(short *)(glContext + 0x508e) = (short)iVar10;
+          funcCache = *(undefined4 *)(glContext + 0x5088);
+          iVar13 = *(short *)(glContext + 0x508e) - newCacheLimit;
+          *(short *)(glContext + 0x508e) = (short)newCacheLimit;
         }
         else if (stateId == 0x16a) {
-          iVar10 = *valuePtr;
-          if (iVar10 < 1) {
+          newCacheLimit = *valuePtr;
+          if (newCacheLimit < 1) {
             return 0x2718;
           }
-          *(short *)(glContext + 0x48b4) = (short)iVar10;
-          if (*(short *)(glContext + 0x48b6) <= iVar10) {
+          *(short *)(glContext + 0x48b4) = (short)newCacheLimit;
+          if (*(short *)(glContext + 0x48b6) <= newCacheLimit) {
             return 0;
           }
-          uVar5 = *(undefined4 *)(glContext + 0x48b0);
-          iVar13 = *(short *)(glContext + 0x48b6) - iVar10;
-          *(short *)(glContext + 0x48b6) = (short)iVar10;
+          funcCache = *(undefined4 *)(glContext + 0x48b0);
+          iVar13 = *(short *)(glContext + 0x48b6) - newCacheLimit;
+          *(short *)(glContext + 0x48b6) = (short)newCacheLimit;
         }
         else if (stateId < 0x16b) {
           if (stateId != 0x166) goto LAB_00020f04;
-          iVar10 = *valuePtr;
-          if (iVar10 < 1) {
+          newCacheLimit = *valuePtr;
+          if (newCacheLimit < 1) {
             return 0x2718;
           }
-          *(short *)(glContext + 0x50a4) = (short)iVar10;
-          if (*(short *)(glContext + 0x50a6) <= iVar10) {
+          *(short *)(glContext + 0x50a4) = (short)newCacheLimit;
+          if (*(short *)(glContext + 0x50a6) <= newCacheLimit) {
             return 0;
           }
-          uVar5 = *(undefined4 *)(glContext + 0x50a0);
-          iVar13 = *(short *)(glContext + 0x50a6) - iVar10;
-          *(short *)(glContext + 0x50a6) = (short)iVar10;
+          funcCache = *(undefined4 *)(glContext + 0x50a0);
+          iVar13 = *(short *)(glContext + 0x50a6) - newCacheLimit;
+          *(short *)(glContext + 0x50a6) = (short)newCacheLimit;
         }
         else {
           if (stateId != 0x172) goto LAB_00020f04;
-          iVar10 = *valuePtr;
-          if (iVar10 < 1) {
+          newCacheLimit = *valuePtr;
+          if (newCacheLimit < 1) {
             return 0x2718;
           }
-          *(short *)(glContext + 0x49bc) = (short)iVar10;
-          if (*(short *)(glContext + 0x49be) <= iVar10) {
+          *(short *)(glContext + 0x49bc) = (short)newCacheLimit;
+          if (*(short *)(glContext + 0x49be) <= newCacheLimit) {
             return 0;
           }
-          uVar5 = *(undefined4 *)(glContext + 0x49b4);
-          iVar13 = *(short *)(glContext + 0x49be) - iVar10;
-          *(short *)(glContext + 0x49be) = (short)iVar10;
+          funcCache = *(undefined4 *)(glContext + 0x49b4);
+          iVar13 = *(short *)(glContext + 0x49be) - newCacheLimit;
+          *(short *)(glContext + 0x49be) = (short)newCacheLimit;
         }
         goto LAB_0002085c;
       }
@@ -1272,13 +1281,13 @@ LAB_00020f04:
           do {
             iVar7 = (**(code **)(*(int *)(iVar13 + -0x777c) + 0x140))
                               (*(undefined4 *)(iVar13 + -0x7a54),stateId,valuePtr);
-            if ((iVar7 != 0) && (iVar10 == 0)) {
-              iVar10 = iVar7;
+            if ((iVar7 != 0) && (firstPluginError == 0)) {
+              firstPluginError = iVar7;
             }
             loopIndex = loopIndex + 1;
             iVar13 = iVar13 + 0x2e0;
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
-          return iVar10;
+          return firstPluginError;
         }
         return 0;
       }
@@ -1289,43 +1298,43 @@ LAB_00020f04:
         goto LAB_00020f04;
       }
       if (-1 < *(short *)(glContext + 0x4a10)) goto LAB_00020c88;
-      uVar14 = valuePtr[1];
+      targetThenFace = valuePtr[1];
       iVar9 = valuePtr[7];
-      iVar10 = *valuePtr;
-      iVar11 = valuePtr[2];
+      surfaceHandle = *valuePtr;
+      level = valuePtr[2];
       iVar13 = valuePtr[3];
       iVar7 = valuePtr[4];
       iVar16 = valuePtr[5];
       iVar12 = valuePtr[6];
-      if (uVar14 == 0xde1) {
+      if (targetThenFace == 0xde1) {
 LAB_00020a7c:
-        iVar6 = _gleCheckTexImage2DArgs
-                          (glContext,uVar14,iVar11,iVar13,iVar7,iVar16,iVar9,0x80e1,0x1401);
+        checkedTextureObject = _gleCheckTexImage2DArgs
+                          (glContext,targetThenFace,level,iVar13,iVar7,iVar16,iVar9,0x80e1,0x1401);
       }
-      else if (uVar14 < 0xde2) {
-        if (uVar14 != 0xde0) {
+      else if (targetThenFace < 0xde2) {
+        if (targetThenFace != 0xde0) {
           return 0x2717;
         }
-        iVar6 = _gleCheckTexImage1DArgs(glContext,0xde0,iVar11,iVar13,iVar7,iVar9,0x80e1,0x1401);
+        checkedTextureObject = _gleCheckTexImage1DArgs(glContext,0xde0,level,iVar13,iVar7,iVar9,0x80e1,0x1401);
       }
       else {
-        if (uVar14 != 0x806f) {
-          if (uVar14 != 0x84f5) {
+        if (targetThenFace != 0x806f) {
+          if (targetThenFace != 0x84f5) {
             return 0x2717;
           }
           goto LAB_00020a7c;
         }
-        iVar6 = ((int (*)())_gleCheckTexImage3DArgs)(glContext,0x806f,iVar11,iVar13,iVar7,iVar16,iVar12,iVar9,0x80e1,0x1401);
+        checkedTextureObject = ((int (*)())_gleCheckTexImage3DArgs)(glContext,0x806f,level,iVar13,iVar7,iVar16,iVar12,iVar9,0x80e1,0x1401);
       }
-      if (iVar6 == 0) {
+      if (checkedTextureObject == 0) {
         return 0;
       }
-      uVar2 = *(ushort *)(iVar6 + 0x24);
-      if ((uVar2 & 0x3c00) != 0x800) {
-        if ((uVar2 & 0x3c00) == 0) {
-          *(ushort *)(iVar6 + 0x24) = uVar2 | 0x800;
+      textureFlags = *(ushort *)(checkedTextureObject + 0x24);
+      if ((textureFlags & 0x3c00) != 0x800) {
+        if ((textureFlags & 0x3c00) == 0) {
+          *(ushort *)(checkedTextureObject + 0x24) = textureFlags | 0x800;
         }
-        else if ((uVar2 & 0x1400) != 0) {
+        else if ((textureFlags & 0x1400) != 0) {
 LAB_00020c88:
           if (*(int *)(glContext + 0x7574) == 0) {
             *(undefined4 *)(glContext + 0x7574) = 0x502;
@@ -1333,30 +1342,30 @@ LAB_00020c88:
           return 0x2717;
         }
       }
-      *(int *)(iVar6 + 0x2c) = iVar10;
-      uVar14 = uVar14 - 0x8515;
-      if (5 < uVar14) {
-        uVar14 = 0;
+      *(int *)(checkedTextureObject + 0x2c) = surfaceHandle;
+      targetThenFace = targetThenFace - 0x8515;
+      if (5 < targetThenFace) {
+        targetThenFace = 0;
       }
-      iVar10 = iVar6 + uVar14 * 0x168 + iVar11 * 0x18;
-      iVar15 = iVar10 + 0xc4;
-      if ((*(byte *)(iVar10 + 0xcf) & 0x20) != 0) {
-        _gleDeletePluginTextureLevel(glContext,iVar6,iVar15,uVar14,iVar11);
-        if (*(int *)(iVar10 + 0xd8) != 0) {
-          bVar1 = *(byte *)(iVar10 + 0xcf);
-          if ((bVar1 & 1) == 0) {
-            _gleFreeTextureLevel(glContext,iVar6,iVar15);
-            bVar1 = *(byte *)(iVar10 + 0xcf);
+      levelBase = checkedTextureObject + targetThenFace * 0x168 + level * 0x18;
+      levelRecord2 = levelBase + 0xc4;
+      if ((*(byte *)(levelBase + 0xcf) & 0x20) != 0) {
+        _gleDeletePluginTextureLevel(glContext,checkedTextureObject,levelRecord2,targetThenFace,level);
+        if (*(int *)(levelBase + 0xd8) != 0) {
+          levelFlagByte = *(byte *)(levelBase + 0xcf);
+          if ((levelFlagByte & 1) == 0) {
+            _gleFreeTextureLevel(glContext,checkedTextureObject,levelRecord2);
+            levelFlagByte = *(byte *)(levelBase + 0xcf);
           }
           else {
-            *(undefined4 *)(iVar10 + 0xd8) = 0;
+            *(undefined4 *)(levelBase + 0xd8) = 0;
           }
-          *(byte *)(iVar10 + 0xcf) = bVar1 & 0xef;
+          *(byte *)(levelBase + 0xcf) = levelFlagByte & 0xef;
         }
-        *(byte *)(iVar10 + 0xcf) = *(byte *)(iVar10 + 0xcf) & 0xdf;
+        *(byte *)(levelBase + 0xcf) = *(byte *)(levelBase + 0xcf) & 0xdf;
       }
-      _gleCreateGlobalLevel(glContext,iVar15,iVar7,iVar16,iVar12,iVar9);
-      _gleCreatePluginTextureLevel(glContext,iVar6,iVar15,uVar14,iVar11,iVar13);
+      _gleCreateGlobalLevel(glContext,levelRecord2,iVar7,iVar16,iVar12,iVar9);
+      _gleCreatePluginTextureLevel(glContext,checkedTextureObject,levelRecord2,targetThenFace,level,iVar13);
     }
     else {
       if (stateId == 0x3e1) {
@@ -1371,45 +1380,45 @@ joined_r0x00020e50:
       }
       if (stateId < 0x3e2) {
         if (stateId == 0x184) {
-          iVar10 = *valuePtr;
-          if (iVar10 < 1) {
+          newCacheLimit = *valuePtr;
+          if (newCacheLimit < 1) {
             return 0x2718;
           }
-          *(short *)(glContext + 0x48bc) = (short)iVar10;
-          if (*(short *)(glContext + 0x48be) <= iVar10) {
+          *(short *)(glContext + 0x48bc) = (short)newCacheLimit;
+          if (*(short *)(glContext + 0x48be) <= newCacheLimit) {
             return 0;
           }
-          uVar5 = *(undefined4 *)(glContext + 0x48b8);
-          iVar13 = *(short *)(glContext + 0x48be) - iVar10;
-          *(short *)(glContext + 0x48be) = (short)iVar10;
+          funcCache = *(undefined4 *)(glContext + 0x48b8);
+          iVar13 = *(short *)(glContext + 0x48be) - newCacheLimit;
+          *(short *)(glContext + 0x48be) = (short)newCacheLimit;
         }
         else if (stateId < 0x185) {
           if (stateId == 0x17c) {
-            iVar10 = *valuePtr;
-            if (iVar10 < 1) {
+            newCacheLimit = *valuePtr;
+            if (newCacheLimit < 1) {
               return 0x2718;
             }
-            *(short *)(glContext + 0x48a4) = (short)iVar10;
-            if (*(short *)(glContext + 0x48a6) <= iVar10) {
+            *(short *)(glContext + 0x48a4) = (short)newCacheLimit;
+            if (*(short *)(glContext + 0x48a6) <= newCacheLimit) {
               return 0;
             }
-            uVar5 = *(undefined4 *)(glContext + 0x48a0);
-            iVar13 = *(short *)(glContext + 0x48a6) - iVar10;
-            *(short *)(glContext + 0x48a6) = (short)iVar10;
+            funcCache = *(undefined4 *)(glContext + 0x48a0);
+            iVar13 = *(short *)(glContext + 0x48a6) - newCacheLimit;
+            *(short *)(glContext + 0x48a6) = (short)newCacheLimit;
           }
           else {
             if (stateId != 0x180) goto LAB_00020f04;
-            iVar10 = *valuePtr;
-            if (iVar10 < 1) {
+            newCacheLimit = *valuePtr;
+            if (newCacheLimit < 1) {
               return 0x2718;
             }
-            *(short *)(glContext + 0x48ac) = (short)iVar10;
-            if (*(short *)(glContext + 0x48ae) <= iVar10) {
+            *(short *)(glContext + 0x48ac) = (short)newCacheLimit;
+            if (*(short *)(glContext + 0x48ae) <= newCacheLimit) {
               return 0;
             }
-            uVar5 = *(undefined4 *)(glContext + 0x48a8);
-            iVar13 = *(short *)(glContext + 0x48ae) - iVar10;
-            *(short *)(glContext + 0x48ae) = (short)iVar10;
+            funcCache = *(undefined4 *)(glContext + 0x48a8);
+            iVar13 = *(short *)(glContext + 0x48ae) - newCacheLimit;
+            *(short *)(glContext + 0x48ae) = (short)newCacheLimit;
           }
         }
         else {
@@ -1421,17 +1430,17 @@ joined_r0x00020e50:
             }
             goto LAB_00020f04;
           }
-          iVar10 = *valuePtr;
-          if (iVar10 < 1) {
+          newCacheLimit = *valuePtr;
+          if (newCacheLimit < 1) {
             return 0x2718;
           }
-          *(short *)(glContext + 0x48c4) = (short)iVar10;
-          if (*(short *)(glContext + 0x48c6) <= iVar10) {
+          *(short *)(glContext + 0x48c4) = (short)newCacheLimit;
+          if (*(short *)(glContext + 0x48c6) <= newCacheLimit) {
             return 0;
           }
-          uVar5 = *(undefined4 *)(glContext + 0x48c0);
-          iVar13 = *(short *)(glContext + 0x48c6) - iVar10;
-          *(short *)(glContext + 0x48c6) = (short)iVar10;
+          funcCache = *(undefined4 *)(glContext + 0x48c0);
+          iVar13 = *(short *)(glContext + 0x48c6) - newCacheLimit;
+          *(short *)(glContext + 0x48c6) = (short)newCacheLimit;
         }
         goto LAB_0002085c;
       }
@@ -1462,64 +1471,64 @@ joined_r0x00020e50:
       iVar13 = valuePtr[2];
       iVar7 = valuePtr[3];
       iVar16 = valuePtr[4];
-      iVar11 = *valuePtr;
-      iVar10 = _gleCheckTexImage2DArgs(glContext,iVar9,0,iVar13,iVar7,iVar16,0,0x80e1,0x8367);
-      if (iVar10 == 0) {
+      surfaceHandle2 = *valuePtr;
+      textureObject = _gleCheckTexImage2DArgs(glContext,iVar9,0,iVar13,iVar7,iVar16,0,0x80e1,0x8367);
+      if (textureObject == 0) {
         return 0;
       }
-      uVar2 = *(ushort *)(iVar10 + 0x24);
-      if ((uVar2 & 0x3c00) != 0x400) {
-        if ((uVar2 & 0x3c00) == 0) {
-          *(ushort *)(iVar10 + 0x24) = uVar2 | 0x400;
+      textureFlags = *(ushort *)(textureObject + 0x24);
+      if ((textureFlags & 0x3c00) != 0x400) {
+        if ((textureFlags & 0x3c00) == 0) {
+          *(ushort *)(textureObject + 0x24) = textureFlags | 0x400;
         }
-        else if ((uVar2 & 0x1800) != 0) goto LAB_00020c88;
+        else if ((textureFlags & 0x1800) != 0) goto LAB_00020c88;
       }
-      *(int *)(iVar10 + 0x2c) = iVar11;
+      *(int *)(textureObject + 0x2c) = surfaceHandle2;
       if (stateId != 0x3e5) {
         uVar3 = 0x404;
       }
       else {
         uVar3 = *(undefined2 *)((int)valuePtr + 0x1a);
       }
-      *(undefined2 *)(iVar10 + 0x30) = uVar3;
-      iVar11 = 6;
+      *(undefined2 *)(textureObject + 0x30) = uVar3;
+      faceCount = 6;
       if (iVar9 != 0x8513) {
-        iVar11 = 1;
+        faceCount = 1;
       }
       loopIndex2 = 0;
-      if (iVar11 != 0) {
-        iVar12 = iVar10 + 0xc4;
+      if (faceCount != 0) {
+        iVar12 = textureObject + 0xc4;
         do {
           if ((*(byte *)(iVar12 + 0xb) & 0x20) != 0) {
-            _gleDeletePluginTextureLevel(glContext,iVar10,iVar12,0,0);
+            _gleDeletePluginTextureLevel(glContext,textureObject,iVar12,0,0);
             if (*(int *)(iVar12 + 0x14) != 0) {
-              bVar1 = *(byte *)(iVar12 + 0xb);
-              if ((bVar1 & 1) == 0) {
-                _gleFreeTextureLevel(glContext,iVar10,iVar12);
-                bVar1 = *(byte *)(iVar12 + 0xb);
+              levelFlagByte = *(byte *)(iVar12 + 0xb);
+              if ((levelFlagByte & 1) == 0) {
+                _gleFreeTextureLevel(glContext,textureObject,iVar12);
+                levelFlagByte = *(byte *)(iVar12 + 0xb);
               }
               else {
                 *(undefined4 *)(iVar12 + 0x14) = 0;
               }
-              *(byte *)(iVar12 + 0xb) = bVar1 & 0xef;
+              *(byte *)(iVar12 + 0xb) = levelFlagByte & 0xef;
             }
             *(byte *)(iVar12 + 0xb) = *(byte *)(iVar12 + 0xb) & 0xdf;
           }
           ((int (*)())_gleCreateSurfaceLevel)(glContext,iVar12,iVar7,iVar16,0,0);
           if (stateId != 0x3e5) {
-            iVar6 = 0;
+            mipmapSource = 0;
           }
           else {
-            iVar6 = valuePtr[7];
+            mipmapSource = valuePtr[7];
           }
-          uVar5 = _gleReqToBase(iVar13);
-          _gleCreatePluginTextureLevel(glContext,iVar10,iVar12,loopIndex2,0,uVar5);
-          if (iVar6 != 0) {
-            _gleGenSurfaceMipmaps(glContext,iVar10,loopIndex2,iVar6,*(uint *)(iVar10 + 0x6c) >> 0xf & 1);
+          baseFormat = _gleReqToBase(iVar13);
+          _gleCreatePluginTextureLevel(glContext,textureObject,iVar12,loopIndex2,0,baseFormat);
+          if (mipmapSource != 0) {
+            _gleGenSurfaceMipmaps(glContext,textureObject,loopIndex2,mipmapSource,*(uint *)(textureObject + 0x6c) >> 0xf & 1);
           }
           loopIndex2 = loopIndex2 + 1;
           iVar12 = iVar12 + 0x168;
-        } while (loopIndex2 < iVar11);
+        } while (loopIndex2 < faceCount);
       }
     }
     *(uint *)(glContext + 0x314) =
@@ -1641,12 +1650,13 @@ void _glGetProgramivARB_Exec(glContext, target, pname, params)
   uint pname;
   uint *params;
 {
-  int iVar1;
-  uint uVar2;
+  int programLimitsOffset;
+  uint result;
   undefined4 glErrorCode;
   uint uVar4;
-  int iVar5;
-  uint local_30 [5];
+  uint programIndex;
+  int programRecord;
+  uint queryValue [5];
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1656,30 +1666,30 @@ void _glGetProgramivARB_Exec(glContext, target, pname, params)
     goto LAB_0002190c;
   }
   if (target == 0x8620) {
-    uVar4 = 0;
+    programIndex = 0;
 LAB_00021188:
-    iVar5 = *(int *)(uVar4 * 4 + glContext + 0x5420);
+    programRecord = *(int *)(programIndex * 4 + glContext + 0x5420);
     if (pname == 0x88a6) goto LAB_000216f4;
     if (pname < 0x88a7) {
       if (pname == 0x880d) {
 LAB_00021804:
-        uVar2 = 0;
-        if (uVar4 != 0) {
-          uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x110);
+        result = 0;
+        if (programIndex != 0) {
+          result = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x110);
         }
         goto LAB_00021914;
       }
       if (pname < 0x880e) {
         if (pname == 0x8807) {
-          uVar2 = (uint)*(ushort *)(iVar5 + 0x4f0);
+          result = (uint)*(ushort *)(programRecord + 0x4f0);
           goto LAB_00021914;
         }
         if (0x8807 < pname) {
           if (pname == 0x880b) {
 LAB_000217d4:
-            uVar2 = 0;
-            if (uVar4 != 0) {
-              uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x10c);
+            result = 0;
+            if (programIndex != 0) {
+              result = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x10c);
             }
             goto LAB_00021914;
           }
@@ -1687,57 +1697,57 @@ LAB_000217d4:
           goto LAB_000216f4;
         }
         if (pname == 0x8677) {
-          uVar2 = *(uint *)(iVar5 + 4);
+          result = *(uint *)(programRecord + 4);
           goto LAB_00021914;
         }
         if (pname < 0x8678) {
           if (pname == 0x8627) {
-            uVar2 = *(uint *)(iVar5 + 0x18);
+            result = *(uint *)(programRecord + 0x18);
             goto LAB_00021914;
           }
         }
         else {
           if (pname == 0x8805) {
-            uVar2 = (uint)*(ushort *)(iVar5 + 0x4ec);
+            result = (uint)*(ushort *)(programRecord + 0x4ec);
             goto LAB_00021914;
           }
           if (pname == 0x8806) {
-            uVar2 = (uint)*(ushort *)(iVar5 + 0x4ee);
+            result = (uint)*(ushort *)(programRecord + 0x4ee);
             goto LAB_00021914;
           }
         }
       }
       else {
         if (pname == 0x88a0) {
-          uVar2 = (uint)*(ushort *)(iVar5 + 0x50);
+          result = (uint)*(ushort *)(programRecord + 0x50);
           goto LAB_00021914;
         }
         if (pname < 0x88a1) {
           if (pname == 0x880f) {
 LAB_000217ec:
-            uVar2 = 0;
-            if (uVar4 != 0) {
-              uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x10e);
+            result = 0;
+            if (programIndex != 0) {
+              result = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x10e);
             }
             goto LAB_00021914;
           }
           if (pname < 0x880f) goto LAB_000217d4;
           if (pname == 0x8810) goto LAB_00021804;
           if (pname == 0x8876) {
-            uVar2 = *(uint *)(iVar5 + 0x1c);
+            result = *(uint *)(programRecord + 0x1c);
             goto LAB_00021914;
           }
         }
         else {
           if (pname == 0x88a3) {
-            uVar2 = (uint)*(ushort *)(uVar4 * 0x10 + *(int *)(glContext + 0x468c) + 0xec);
+            result = (uint)*(ushort *)(programIndex * 0x10 + *(int *)(glContext + 0x468c) + 0xec);
             goto LAB_00021914;
           }
           if (pname < 0x88a4) {
             if (pname == 0x88a1) {
-              uVar2 = 0x8000;
-              if (uVar4 != 0) {
-                uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xfc);
+              result = 0x8000;
+              if (programIndex != 0) {
+                result = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xfc);
               }
               goto LAB_00021914;
             }
@@ -1745,13 +1755,13 @@ LAB_000217ec:
             goto LAB_00021354;
           }
           if (pname == 0x88a4) {
-            uVar2 = (uint)*(ushort *)(iVar5 + 0x56);
+            result = (uint)*(ushort *)(programRecord + 0x56);
             goto LAB_00021914;
           }
           if (pname == 0x88a5) {
-            uVar2 = 0x100;
-            if (uVar4 != 0) {
-              uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x102);
+            result = 0x100;
+            if (programIndex != 0) {
+              result = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x102);
             }
             goto LAB_00021914;
           }
@@ -1760,27 +1770,27 @@ LAB_000217ec:
     }
     else {
       if (pname == 0x88b1) {
-        uVar2 = (uVar4 ^ 1) << 1;
+        result = (programIndex ^ 1) << 1;
         goto LAB_00021914;
       }
       if (pname < 0x88b2) {
         if (pname == 0x88ab) {
-          uVar2 = (uint)*(ushort *)(uVar4 * 0x10 + *(int *)(glContext + 0x468c) + 0xf0);
+          result = (uint)*(ushort *)(programIndex * 0x10 + *(int *)(glContext + 0x468c) + 0xf0);
           goto LAB_00021914;
         }
         if (pname < 0x88ac) {
           if (pname == 0x88a8) {
-            uVar2 = (uint)*(ushort *)(iVar5 + 0x54);
+            result = (uint)*(ushort *)(programRecord + 0x54);
             goto LAB_00021914;
           }
           if (pname < 0x88a8) {
-            uVar2 = (uint)*(ushort *)(uVar4 * 0x10 + *(int *)(glContext + 0x468c) + 0xf2);
+            result = (uint)*(ushort *)(programIndex * 0x10 + *(int *)(glContext + 0x468c) + 0xf2);
             goto LAB_00021914;
           }
           if (pname == 0x88a9) {
-            uVar2 = 0x100;
-            if (uVar4 != 0) {
-              uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x100);
+            result = 0x100;
+            if (programIndex != 0) {
+              result = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x100);
             }
             goto LAB_00021914;
           }
@@ -1790,12 +1800,12 @@ LAB_00021354:
 LAB_000216f4:
             (**(code **)(glContext + 0x47dc))
                       (*(undefined4 *)(glContext + 0x4688),
-                       *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar5 + 0x4a8),
-                       pname,local_30);
-            uVar2 = local_30[0];
+                       *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + programRecord + 0x4a8),
+                       pname,queryValue);
+            result = queryValue[0];
 LAB_00021914:
-            local_30[0] = uVar2;
-            *params = local_30[0];
+            queryValue[0] = result;
+            *params = queryValue[0];
             return;
           }
         }
@@ -1803,24 +1813,24 @@ LAB_00021914:
           if (pname == 0x88ae) goto LAB_000216f4;
           if (pname < 0x88af) {
             if (pname == 0x88ac) {
-              uVar2 = (uint)*(ushort *)(iVar5 + 0x52);
+              result = (uint)*(ushort *)(programRecord + 0x52);
               goto LAB_00021914;
             }
             if (pname == 0x88ad) {
-              uVar2 = 0x20;
-              if (uVar4 != 0) {
-                uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xfe);
+              result = 0x20;
+              if (programIndex != 0) {
+                result = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xfe);
               }
               goto LAB_00021914;
             }
           }
           else {
             if (pname == 0x88af) {
-              uVar2 = (uint)*(ushort *)(uVar4 * 0x10 + *(int *)(glContext + 0x468c) + 0xee);
+              result = (uint)*(ushort *)(programIndex * 0x10 + *(int *)(glContext + 0x468c) + 0xee);
               goto LAB_00021914;
             }
             if (pname == 0x88b0) {
-              uVar2 = (uint)*(ushort *)(iVar5 + 0x4e);
+              result = (uint)*(ushort *)(programRecord + 0x4e);
               goto LAB_00021914;
             }
           }
@@ -1828,112 +1838,112 @@ LAB_00021914:
       }
       else {
         if (pname == 0x88b6) {
-          iVar1 = uVar4 * 0x10;
-          uVar2 = 0;
-          if (*(short *)(iVar1 + *(int *)(glContext + 0x468c) + 0xec) == 0) goto LAB_00021914;
+          programLimitsOffset = programIndex * 0x10;
+          result = 0;
+          if (*(short *)(programLimitsOffset + *(int *)(glContext + 0x468c) + 0xec) == 0) goto LAB_00021914;
           (**(code **)(glContext + 0x47dc))
                     (*(undefined4 *)(glContext + 0x4688),
-                     *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar5 + 0x4a8),0x88a2,
-                     local_30);
-          if (((((int)local_30[0] <=
-                 (int)(uint)*(ushort *)(iVar1 + *(int *)(glContext + 0x468c) + 0xec)) &&
+                     *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + programRecord + 0x4a8),0x88a2,
+                     queryValue);
+          if (((((int)queryValue[0] <=
+                 (int)(uint)*(ushort *)(programLimitsOffset + *(int *)(glContext + 0x468c) + 0xec)) &&
                ((**(code **)(glContext + 0x47dc))
                           (*(undefined4 *)(glContext + 0x4688),
-                           *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar5 + 0x4a8),
-                           0x88aa,local_30),
-               (int)local_30[0] <= (int)(uint)*(ushort *)(iVar1 + *(int *)(glContext + 0x468c) + 0xf0)
+                           *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + programRecord + 0x4a8),
+                           0x88aa,queryValue),
+               (int)queryValue[0] <= (int)(uint)*(ushort *)(programLimitsOffset + *(int *)(glContext + 0x468c) + 0xf0)
                )) && ((**(code **)(glContext + 0x47dc))
                                 (*(undefined4 *)(glContext + 0x4688),
                                  *(undefined4 *)
-                                  ((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar5 + 0x4a8),0x88a6,
-                                 local_30),
-                     (int)local_30[0] <=
-                     (int)(uint)*(ushort *)(iVar1 + *(int *)(glContext + 0x468c) + 0xf2))) &&
+                                  ((uint)*(byte *)(glContext + 0x85a8) * 4 + programRecord + 0x4a8),0x88a6,
+                                 queryValue),
+                     (int)queryValue[0] <=
+                     (int)(uint)*(ushort *)(programLimitsOffset + *(int *)(glContext + 0x468c) + 0xf2))) &&
              ((**(code **)(glContext + 0x47dc))
                         (*(undefined4 *)(glContext + 0x4688),
-                         *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar5 + 0x4a8),
-                         0x88ae,local_30),
-             (int)local_30[0] <= (int)(uint)*(ushort *)(iVar1 + *(int *)(glContext + 0x468c) + 0xee)))
+                         *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + programRecord + 0x4a8),
+                         0x88ae,queryValue),
+             (int)queryValue[0] <= (int)(uint)*(ushort *)(programLimitsOffset + *(int *)(glContext + 0x468c) + 0xee)))
           {
-            if ((uVar4 == 0) &&
+            if ((programIndex == 0) &&
                ((**(code **)(glContext + 0x47dc))
                           (*(undefined4 *)(glContext + 0x4688),
-                           *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar5 + 0x4a8),
-                           0x88b2,local_30),
-               (int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x118) < (int)local_30[0])) {
-              uVar2 = 0;
+                           *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + programRecord + 0x4a8),
+                           0x88b2,queryValue),
+               (int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x118) < (int)queryValue[0])) {
+              result = 0;
               goto LAB_00021914;
             }
-            if ((uVar4 != 1) ||
+            if ((programIndex != 1) ||
                ((((**(code **)(glContext + 0x47dc))
                             (*(undefined4 *)(glContext + 0x4688),
-                             *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar5 + 0x4a8),
-                             0x8808,local_30),
-                 (int)local_30[0] <= (int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x10c) &&
+                             *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + programRecord + 0x4a8),
+                             0x8808,queryValue),
+                 (int)queryValue[0] <= (int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x10c) &&
                  ((**(code **)(glContext + 0x47dc))
                             (*(undefined4 *)(glContext + 0x4688),
-                             *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar5 + 0x4a8),
-                             0x8809,local_30),
-                 (int)local_30[0] <= (int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x10e))) &&
+                             *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + programRecord + 0x4a8),
+                             0x8809,queryValue),
+                 (int)queryValue[0] <= (int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x10e))) &&
                 ((**(code **)(glContext + 0x47dc))
                            (*(undefined4 *)(glContext + 0x4688),
-                            *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + iVar5 + 0x4a8),
-                            0x880a,local_30),
-                (int)local_30[0] <= (int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x110))))) {
-              uVar2 = 1;
+                            *(undefined4 *)((uint)*(byte *)(glContext + 0x85a8) * 4 + programRecord + 0x4a8),
+                            0x880a,queryValue),
+                (int)queryValue[0] <= (int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x110))))) {
+              result = 1;
               goto LAB_00021914;
             }
           }
-          uVar2 = 0;
+          result = 0;
           goto LAB_00021914;
         }
         if (pname < 34999) {
           if (pname == 0x88b3) {
-            uVar2 = 0;
-            if (uVar4 == 0) {
-              uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x118);
+            result = 0;
+            if (programIndex == 0) {
+              result = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x118);
             }
             goto LAB_00021914;
           }
           if (pname < 0x88b3) goto LAB_000216f4;
           if ((pname == 0x88b4) || (pname == 0x88b5)) {
-            uVar2 = 0x100;
-            if (uVar4 != 0) {
-              uVar2 = 0x80;
+            result = 0x100;
+            if (programIndex != 0) {
+              result = 0x80;
             }
             goto LAB_00021914;
           }
         }
         else {
           if (pname == 0x88f6) {
-            uVar2 = 0;
-            if (uVar4 != 0) {
-              uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x112);
+            result = 0;
+            if (programIndex != 0) {
+              result = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x112);
             }
             goto LAB_00021914;
           }
           if (pname < 0x88f7) {
             if (pname == 0x88f4) {
-              uVar2 = *(uint *)(uVar4 * 0x10 + *(int *)(glContext + 0x468c) + 0xf8);
+              result = *(uint *)(programIndex * 0x10 + *(int *)(glContext + 0x468c) + 0xf8);
               goto LAB_00021914;
             }
             if (pname == 0x88f5) {
-              uVar2 = (uint)*(ushort *)(uVar4 * 0x10 + *(int *)(glContext + 0x468c) + 0xf4);
+              result = (uint)*(ushort *)(programIndex * 0x10 + *(int *)(glContext + 0x468c) + 0xf4);
               goto LAB_00021914;
             }
           }
           else {
             if (pname == 0x88f7) {
-              uVar2 = 0;
-              if (uVar4 != 0) {
-                uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x114);
+              result = 0;
+              if (programIndex != 0) {
+                result = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x114);
               }
               goto LAB_00021914;
             }
             if (pname == 0x88f8) {
-              uVar2 = 0;
-              if (uVar4 != 0) {
-                uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x116);
+              result = 0;
+              if (programIndex != 0) {
+                result = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0x116);
               }
               goto LAB_00021914;
             }
@@ -1950,7 +1960,7 @@ LAB_00021914:
       uVar4 = 0x8804;
     }
     if (target == uVar4) {
-      uVar4 = 1;
+      programIndex = 1;
       goto LAB_00021188;
     }
   }
@@ -5421,7 +5431,7 @@ int _gleLookUpTexture3D(glContext, target)
 }
 
 /* _gleTextureImagePut_Slow @ 0x27448 (28188 bytes) */
-void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset, width, height, depth, format, type, param_11, param_12, pixels)
+void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset, width, height, depth, format, type, applyPixelTransfer, pixelStoreState, pixels)
   int glContext;
   int textureLevel;
   uint xoffset;
@@ -5432,8 +5442,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
   uint depth;
   int format;
   int type;
-  undefined4 param_11;
-  int param_12;
+  undefined4 applyPixelTransfer;
+  int pixelStoreState;
   uint pixels;
 {
   int srcPixel;
@@ -5452,9 +5462,10 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
   float floatZero;
   float floatOne;
   int scaledInt;
-  short sVar2;
-  ushort uVar3;
-  bool bVar4;
+  short dstTypeCompare;
+  ushort dstFormat;
+  ushort dstType;
+  bool freeTempImage;
   double twoPow31;
   double uint32MaxAsDouble;
   float float65535;
@@ -5462,15 +5473,15 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
   float fVar9;
   float float127;
   float float255;
-  ushort uVar14;
+  ushort compareFormat;
   undefined1 componentByte;
-  uint uVar12;
-  uint uVar13;
+  uint componentUint3;
+  uint componentUint4;
   undefined2 componentShort;
   int iVar17;
   int componentCount;
   int imageSize;
-  uint uVar18;
+  uint componentUint2;
   uint loopIndex;
   code *extractPixelFunc;
   code *modifyPixelFunc;
@@ -5489,67 +5500,67 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
   undefined1 *puVar30;
   uint *dstPixel;
   double scaledComponent;
-  undefined1 auStack_1b0 [4];
-  float local_1ac;
-  float local_1a8;
-  float local_1a4;
-  float local_1a0;
-  float local_19c;
-  float local_190;
-  float local_18c;
-  float local_188;
-  float local_184;
-  float local_180;
-  int local_170;
-  int local_16c;
-  undefined1 auStack_168 [4];
-  undefined1 auStack_164 [4];
-  int local_160;
-  int local_15c;
-  undefined1 auStack_158 [4];
-  undefined1 auStack_154 [4];
-  undefined4 local_150;
-  uint local_14c;
-  undefined4 local_148;
-  int local_144;
-  uint local_140;
-  undefined4 local_13c;
-  undefined4 local_138;
-  uint local_134;
-  uint local_130;
-  uint local_12c;
-  undefined4 local_128;
-  uint local_124;
-  uint local_120;
-  uint local_11c;
-  undefined4 local_118;
-  uint local_114;
-  uint local_110;
-  uint local_10c;
-  undefined4 local_108;
-  undefined1 local_104;
-  undefined8 local_100;
-  longlong local_f8;
-  undefined8 local_f0;
-  longlong local_e8;
-  longlong local_e0;
-  longlong local_d8;
-  longlong local_d0;
-  undefined8 local_c8;
+  undefined1 pixelRecord [4];
+  float pixelRed;
+  float pixelGreen;
+  float pixelBlue;
+  float pixelAlpha;
+  float pixelDepth;
+  float pixelHi;
+  float pixelLo;
+  float pixelDs;
+  float pixelDt;
+  float pixelMagnitude;
+  int procSrcAddress;
+  int procSrcRowBytes;
+  undefined1 procSrcConvertA [4];
+  undefined1 procSrcConvertB [4];
+  int procDstAddress;
+  int procDstRowBytes;
+  undefined1 procDstConvertA [4];
+  undefined1 procDstConvertB [4];
+  undefined4 procMode;
+  uint procFlags;
+  undefined4 procMask;
+  int procWidth;
+  uint procHeight;
+  undefined4 procZero13c;
+  undefined4 procZero138;
+  uint colorTableFormat;
+  uint colorTableType;
+  uint colorTableWidth;
+  undefined4 colorTableData;
+  uint postColorMatrixTableFormat;
+  uint postColorMatrixTableType;
+  uint postColorMatrixTableWidth;
+  undefined4 postColorMatrixTableData;
+  uint postConvolutionTableFormat;
+  uint postConvolutionTableType;
+  uint postConvolutionTableWidth;
+  undefined4 postConvolutionTableData;
+  undefined1 procEnd;
+  undefined8 fctiwzSlot100;
+  longlong fctiwzSlotF8;
+  undefined8 fctiwzSlotF0;
+  longlong fctiwzSlotE8;
+  longlong fctiwzSlotE0;
+  longlong fctiwzSlotD8;
+  longlong fctiwzSlotD0;
+  undefined8 fctiwzSlotC8;
   int srcRowBytes;
   int srcRowPad;
   int srcImageBytes;
   int srcImagePad;
   int srcPixelStride;
   int srcOffset;
-  float local_a8;
-  float local_a4;
-  int local_a0;
-  int local_9c;
-  float local_90;
+  float float65535Spill;
+  float float32767Spill;
+  int dstPixelStrideSpillB;
+  int dstPixelStrideSpill;
+  float scaleSpill;
   
   if (type != 0x1a00) {
-    bVar4 = false;
+    freeTempImage = false;
     iVar17 = zoffset;
     iVar21 = width;
     uVar22 = height;
@@ -5569,105 +5580,105 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
     iVar17 = format;
     uVar23 = allocatedBlock;
     _gleFillImage(glContext,width,height,depth,format,0x1a00,pixels,allocatedBlock);
-    bVar4 = true;
+    freeTempImage = true;
     uVar22 = pixels;
     pixels = allocatedBlock;
   }
-  if (((((param_12 != 0) && (*(char *)(param_12 + 0x18) != '\0')) ||
-       (((char)param_11 != '\0' &&
+  if (((((pixelStoreState != 0) && (*(char *)(pixelStoreState + 0x18) != '\0')) ||
+       (((char)applyPixelTransfer != '\0' &&
         ((((*(uint *)(glContext + 0x3410) & 0x1ff) != 0 ||
           (uVar22 = *(uint *)(glContext + 0x3414) & 0xff0000, uVar22 != 0)) && (format != 0x1900)))))
        ) || ((type == 0x140b || (type == 0x1406)))) ||
-     ((sVar2 = *(short *)(textureLevel + 0x12), sVar2 == 0x140b ||
-      (((sVar2 == 0x1406 || (sVar2 == 0)) || ((sVar2 == 0x1403 || (type == 0x1a00)))))))) {
-    _glgConvertType(format,type,auStack_168,auStack_164,iVar17,iVar21,uVar22,uVar23);
+     ((dstTypeCompare = *(short *)(textureLevel + 0x12), dstTypeCompare == 0x140b ||
+      (((dstTypeCompare == 0x1406 || (dstTypeCompare == 0)) || ((dstTypeCompare == 0x1403 || (type == 0x1a00)))))))) {
+    _glgConvertType(format,type,procSrcConvertA,procSrcConvertB,iVar17,iVar21,uVar22,uVar23);
     piVar25 = &srcOffset;
     rowsLeft = height;
-    iVar17 = param_12;
+    iVar17 = pixelStoreState;
     _glePixelPackSettings
-              (glContext,format,type,width,height,param_12,&srcPixelStride,piVar25,&srcRowBytes,
+              (glContext,format,type,width,height,pixelStoreState,&srcPixelStride,piVar25,&srcRowBytes,
                &srcRowPad,&srcImageBytes,&srcImagePad);
     uVar23 = 0;
-    local_14c = 0;
-    local_148 = 0x7efff;
-    local_138 = 0;
-    local_13c = 0;
-    if ((char)param_11 != '\0') {
+    procFlags = 0;
+    procMask = 0x7efff;
+    procZero138 = 0;
+    procZero13c = 0;
+    if ((char)applyPixelTransfer != '\0') {
       uVar23 = *(uint *)(glContext + 0x3410);
       if ((uVar23 & 0x20) != 0) {
         colorTable = _gleLookUpNonProxyColorTable(glContext,0x80d0);
         uVar23 = *(uint *)(glContext + 0x3410);
-        local_128 = *(undefined4 *)(colorTable + 0xc0);
-        local_134 = (uint)*(ushort *)(colorTable + 0xbc);
-        local_130 = (uint)*(ushort *)(colorTable + 0xbe);
-        local_12c = (uint)*(ushort *)(colorTable + 0xb0);
+        colorTableData = *(undefined4 *)(colorTable + 0xc0);
+        colorTableFormat = (uint)*(ushort *)(colorTable + 0xbc);
+        colorTableType = (uint)*(ushort *)(colorTable + 0xbe);
+        colorTableWidth = (uint)*(ushort *)(colorTable + 0xb0);
       }
       if ((uVar23 & 0x80) != 0) {
         colorTable = _gleLookUpNonProxyColorTable(glContext,0x80d2);
         uVar23 = *(uint *)(glContext + 0x3410);
-        local_118 = *(undefined4 *)(colorTable + 0xc0);
-        local_124 = (uint)*(ushort *)(colorTable + 0xbc);
-        local_120 = (uint)*(ushort *)(colorTable + 0xbe);
-        local_11c = (uint)*(ushort *)(colorTable + 0xb0);
+        postColorMatrixTableData = *(undefined4 *)(colorTable + 0xc0);
+        postColorMatrixTableFormat = (uint)*(ushort *)(colorTable + 0xbc);
+        postColorMatrixTableType = (uint)*(ushort *)(colorTable + 0xbe);
+        postColorMatrixTableWidth = (uint)*(ushort *)(colorTable + 0xb0);
       }
       if ((uVar23 & 0x40) != 0) {
         colorTable = _gleLookUpNonProxyColorTable(glContext,0x80d1);
-        local_108 = *(undefined4 *)(colorTable + 0xc0);
-        local_114 = (uint)*(ushort *)(colorTable + 0xbc);
-        local_110 = (uint)*(ushort *)(colorTable + 0xbe);
-        local_10c = (uint)*(ushort *)(colorTable + 0xb0);
+        postConvolutionTableData = *(undefined4 *)(colorTable + 0xc0);
+        postConvolutionTableFormat = (uint)*(ushort *)(colorTable + 0xbc);
+        postConvolutionTableType = (uint)*(ushort *)(colorTable + 0xbe);
+        postConvolutionTableWidth = (uint)*(ushort *)(colorTable + 0xb0);
       }
     }
-    if (param_12 == 0) {
+    if (pixelStoreState == 0) {
       if (1 < (int)depth) {
         srcImageBytes = srcRowBytes * height;
       }
     }
     else {
-      if (*(char *)(param_12 + 0x19) != '\0') {
-        local_14c = local_14c | 4;
+      if (*(char *)(pixelStoreState + 0x19) != '\0') {
+        procFlags = procFlags | 4;
       }
-      if (*(char *)(param_12 + 0x18) != '\0') {
-        local_14c = local_14c | 1;
+      if (*(char *)(pixelStoreState + 0x18) != '\0') {
+        procFlags = procFlags | 1;
       }
     }
-    puVar30 = auStack_154;
-    local_150 = 2;
-    local_104 = 0;
-    local_144 = width;
-    local_140 = height;
-    _glgConvertType((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12),auStack_158,
+    puVar30 = procDstConvertB;
+    procMode = 2;
+    procEnd = 0;
+    procWidth = width;
+    procHeight = height;
+    _glgConvertType((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12),procDstConvertA,
                     puVar30,rowsLeft,iVar17,uVar23,piVar25);
     pixelBytes = _glePixelBytes((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12));
     uVar23 = (uint)*(ushort *)(textureLevel + 0xc);
-    local_15c = _gleRowBytes((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12),
+    procDstRowBytes = _gleRowBytes((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12),
                              uVar23);
-    dstSliceBytes = local_15c * (uint)*(ushort *)(textureLevel + 6);
-    local_170 = pixels + srcOffset;
-    local_16c = srcRowBytes;
+    dstSliceBytes = procDstRowBytes * (uint)*(ushort *)(textureLevel + 6);
+    procSrcAddress = pixels + srcOffset;
+    procSrcRowBytes = srcRowBytes;
     if ((*(short *)(textureLevel + 0x12) == 0) && (((xoffset != 0 || (yoffset != 0)) || (zoffset != 0))))
     {
-      uVar3 = *(ushort *)(textureLevel + 0x10);
-      if (((0x83f3 < uVar3) || (0x83f1 < uVar3)) || (uVar23 = 8, uVar3 < 0x83f0)) {
+      dstFormat = *(ushort *)(textureLevel + 0x10);
+      if (((0x83f3 < dstFormat) || (0x83f1 < dstFormat)) || (uVar23 = 8, dstFormat < 0x83f0)) {
         uVar23 = 0x10;
       }
       iVar24 = ((int)xoffset >> 2) + (uint)((int)xoffset < 0 && (xoffset & 3) != 0);
-      local_160 = *(int *)(textureLevel + 0x14) +
+      procDstAddress = *(int *)(textureLevel + 0x14) +
                   ((uint)(*(ushort *)(textureLevel + 4) >> 2) *
                    (((int)yoffset >> 2) + (uint)((int)yoffset < 0 && (yoffset & 3) != 0)) + iVar24)
                   * uVar23;
     }
     else {
-      iVar24 = local_15c * yoffset;
-      local_160 = dstSliceBytes * zoffset + iVar24 + *(int *)(textureLevel + 0x14) + pixelBytes * xoffset;
+      iVar24 = procDstRowBytes * yoffset;
+      procDstAddress = dstSliceBytes * zoffset + iVar24 + *(int *)(textureLevel + 0x14) + pixelBytes * xoffset;
     }
     loopIndex = 0;
     while( true ) {
       loopIndex = loopIndex + 1;
-      _glgProcessPixels(glContext + 0x31a8,&local_170,uVar23,puVar30,rowsLeft,iVar17,iVar24,piVar25);
+      _glgProcessPixels(glContext + 0x31a8,&procSrcAddress,uVar23,puVar30,rowsLeft,iVar17,iVar24,piVar25);
       if (loopIndex == depth) break;
-      local_160 = local_160 + dstSliceBytes;
-      local_170 = local_170 + srcImageBytes;
+      procDstAddress = procDstAddress + dstSliceBytes;
+      procSrcAddress = procSrcAddress + srcImageBytes;
       iVar24 = srcImageBytes;
     }
     goto LAB_0002e240;
@@ -5681,7 +5692,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         (uint)*(ushort *)(textureLevel + 4));
   dstSliceBytes = rowBytes * (uint)*(ushort *)(textureLevel + 6);
   _glePixelPackSettings
-            (glContext,format,type,width,height,param_12,&srcPixelStride,&srcOffset,&srcRowBytes,
+            (glContext,format,type,width,height,pixelStoreState,&srcPixelStride,&srcOffset,&srcRowBytes,
              &srcRowPad,&srcImageBytes,&srcImagePad);
   srcPixel = pixels + srcOffset;
   extractPixelFunc = (code *)((int (*)())_gleSelectPixelExtractFunc)(format,type);
@@ -5691,13 +5702,13 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
   if (extractPixelFunc == (code *)0x0) {
     return;
   }
-  local_1a4 = 0.0;
-  local_1a0 = 1.0;
-  local_1ac = 0.0;
-  local_1a8 = 0.0;
+  pixelBlue = 0.0;
+  pixelAlpha = 1.0;
+  pixelRed = 0.0;
+  pixelGreen = 0.0;
   if (modifyPixelFunc != (code *)0x0) {
-    uVar3 = *(ushort *)(textureLevel + 0x10);
-    if (uVar3 == 0x190a) {
+    dstFormat = *(ushort *)(textureLevel + 0x10);
+    if (dstFormat == 0x190a) {
       if (*(short *)(textureLevel + 0x12) == 1) {
         if (0 < (int)depth) {
           do {
@@ -5712,31 +5723,31 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 dstPixel = dstRow;
                 if (0 < width) {
                   do {
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
-                    _gleModifyPixelSignedRGBA(glContext,auStack_1b0);
-                    if (floatOne < local_1a0) {
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
+                    _gleModifyPixelSignedRGBA(glContext,pixelRecord);
+                    if (floatOne < pixelAlpha) {
                       componentByte = 0x7f;
                     }
                     else {
                       componentByte = 0x81;
-                      if (!(local_1a0 < floatMinusOne)) {
-                        scaledInt = (int)(local_1a0 * float127B);
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)scaledInt;
+                      if (!(pixelAlpha < floatMinusOne)) {
+                        scaledInt = (int)(pixelAlpha * float127B);
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)scaledInt;
                       }
                     }
                     *(undefined1 *)dstPixel = componentByte;
-                    if (floatOne < local_1ac) {
+                    if (floatOne < pixelRed) {
                       componentByte = 0x7f;
                     }
                     else {
                       componentByte = 0x81;
-                      if (!(local_1ac < floatMinusOne)) {
-                        scaledInt = (int)(local_1ac * float127B);
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)scaledInt;
+                      if (!(pixelRed < floatMinusOne)) {
+                        scaledInt = (int)(pixelRed * float127B);
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)scaledInt;
                       }
                     }
                     columnsLeft = columnsLeft + -1;
@@ -5769,33 +5780,33 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               dstPixel = dstRow;
               if (0 < width) {
                 do {
-                  local_1ac = floatZero;
-                  local_1a0 = floatOne2;
-                  (*extractPixelFunc)(auStack_1b0,srcPixel);
-                  (*modifyPixelFunc)(glContext,auStack_1b0);
-                  if (floatOne2 < local_1ac) {
+                  pixelRed = floatZero;
+                  pixelAlpha = floatOne2;
+                  (*extractPixelFunc)(pixelRecord,srcPixel);
+                  (*modifyPixelFunc)(glContext,pixelRecord);
+                  if (floatOne2 < pixelRed) {
                     componentByte = 0xff;
                   }
                   else {
                     componentByte = 0;
-                    if (!(local_1ac < floatZero)) {
-                      scaledInt = (int)(local_1ac * float255C);
-                      (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                      componentByte = (undefined1)local_c8;
-                      local_c8 = (longlong)scaledInt;
+                    if (!(pixelRed < floatZero)) {
+                      scaledInt = (int)(pixelRed * float255C);
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                      componentByte = (undefined1)fctiwzSlotC8;
+                      fctiwzSlotC8 = (longlong)scaledInt;
                     }
                   }
                   *(undefined1 *)dstPixel = componentByte;
-                  if (floatOne2 < local_1a0) {
+                  if (floatOne2 < pixelAlpha) {
                     componentByte = 0xff;
                   }
                   else {
                     componentByte = 0;
-                    if (!(local_1a0 < floatZero)) {
-                      scaledInt = (int)(local_1a0 * float255C);
-                      (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                      componentByte = (undefined1)local_c8;
-                      local_c8 = (longlong)scaledInt;
+                    if (!(pixelAlpha < floatZero)) {
+                      scaledInt = (int)(pixelAlpha * float255C);
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                      componentByte = (undefined1)fctiwzSlotC8;
+                      fctiwzSlotC8 = (longlong)scaledInt;
                     }
                   }
                   columnsLeft = columnsLeft + -1;
@@ -5816,10 +5827,10 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
       }
       goto LAB_0002e240;
     }
-    if (uVar3 < 0x190b) {
-      if (uVar3 == 0x1907) {
-        uVar3 = *(ushort *)(textureLevel + 0x12);
-        if (uVar3 == 0x8362) {
+    if (dstFormat < 0x190b) {
+      if (dstFormat == 0x1907) {
+        dstType = *(ushort *)(textureLevel + 0x12);
+        if (dstType == 0x8362) {
           if (0 < (int)depth) {
             do {
               rowsLeft = height;
@@ -5831,16 +5842,16 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      (*modifyPixelFunc)(glContext,auStack_1b0);
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      (*modifyPixelFunc)(glContext,pixelRecord);
                       columnsLeft2 = columnsLeft2 + -1;
-                      local_c8 = (longlong)(int)(local_1a4 * float255B);
-                      local_d0 = (longlong)(int)(local_1a8 * float255B);
-                      local_d8 = (longlong)(int)(local_1ac * float255B);
+                      fctiwzSlotC8 = (longlong)(int)(pixelBlue * float255B);
+                      fctiwzSlotD0 = (longlong)(int)(pixelGreen * float255B);
+                      fctiwzSlotD8 = (longlong)(int)(pixelRed * float255B);
                       *(byte *)dstPixel =
-                           (byte)(int)(local_1a4 * float255B) & 0xc0 |
-                           (byte)((uint)(int)(local_1a8 * float255B) >> 2) & 0x38 |
-                           (byte)((uint)(int)(local_1ac * float255B) >> 5) & 7;
+                           (byte)(int)(pixelBlue * float255B) & 0xc0 |
+                           (byte)((uint)(int)(pixelGreen * float255B) >> 2) & 0x38 |
+                           (byte)((uint)(int)(pixelRed * float255B) >> 5) & 7;
                       srcPixel = srcPixel + srcPixelStride;
                       dstPixel = (uint *)((int)dstPixel + 1);
                     } while (columnsLeft2 != 0);
@@ -5857,8 +5868,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           }
           goto LAB_0002e240;
         }
-        if (uVar3 < 0x8363) {
-          if (uVar3 == 8) {
+        if (dstType < 0x8363) {
+          if (dstType == 8) {
             if (0 < (int)depth) {
               do {
                 rowsLeft = height;
@@ -5872,41 +5883,41 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     dstPixel = dstRow;
                     if (0 < width) {
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
-                        _gleModifyPixelSignedRGBA(glContext,auStack_1b0);
-                        if (floatOne < local_1ac) {
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
+                        _gleModifyPixelSignedRGBA(glContext,pixelRecord);
+                        if (floatOne < pixelRed) {
                           componentByte = 0x7f;
                         }
                         else {
                           componentByte = 0x81;
-                          if (!(local_1ac < floatMinusOne)) {
-                            (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float127B);
-                            componentByte = (undefined1)local_c8;
-                            local_c8 = (longlong)(int)(local_1ac * float127B);
+                          if (!(pixelRed < floatMinusOne)) {
+                            (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float127B);
+                            componentByte = (undefined1)fctiwzSlotC8;
+                            fctiwzSlotC8 = (longlong)(int)(pixelRed * float127B);
                           }
                         }
                         *(undefined1 *)dstPixel = componentByte;
-                        if (floatOne < local_1a8) {
+                        if (floatOne < pixelGreen) {
                           componentByte = 0x7f;
                         }
                         else {
                           componentByte = 0x81;
-                          if (!(local_1a8 < floatMinusOne)) {
-                            (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * float127B);
-                            componentByte = (undefined1)local_c8;
-                            local_c8 = (longlong)(int)(local_1a8 * float127B);
+                          if (!(pixelGreen < floatMinusOne)) {
+                            (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelGreen * float127B);
+                            componentByte = (undefined1)fctiwzSlotC8;
+                            fctiwzSlotC8 = (longlong)(int)(pixelGreen * float127B);
                           }
                         }
                         *(undefined1 *)((int)dstPixel + 1) = componentByte;
-                        if (floatOne < local_1a4) {
+                        if (floatOne < pixelBlue) {
                           componentByte = 0x7f;
                         }
                         else {
                           componentByte = 0x81;
-                          if (!(local_1a4 < floatMinusOne)) {
-                            (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * float127B);
-                            componentByte = (undefined1)local_c8;
-                            local_c8 = (longlong)(int)(local_1a4 * float127B);
+                          if (!(pixelBlue < floatMinusOne)) {
+                            (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelBlue * float127B);
+                            componentByte = (undefined1)fctiwzSlotC8;
+                            fctiwzSlotC8 = (longlong)(int)(pixelBlue * float127B);
                           }
                         }
                         columnsLeft = columnsLeft + -1;
@@ -5928,7 +5939,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
             goto LAB_0002e240;
           }
-          if (uVar3 == 0x8032) {
+          if (dstType == 0x8032) {
             if (0 < (int)depth) {
               do {
                 rowsLeft = height;
@@ -5940,16 +5951,16 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     dstPixel = dstRow;
                     if (0 < width) {
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
-                        (*modifyPixelFunc)(glContext,auStack_1b0);
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
+                        (*modifyPixelFunc)(glContext,pixelRecord);
                         columnsLeft2 = columnsLeft2 + -1;
-                        local_c8 = (longlong)(int)(local_1ac * float255B);
-                        local_d0 = (longlong)(int)(local_1a8 * float255B);
-                        local_d8 = (longlong)(int)(local_1a4 * float255B);
+                        fctiwzSlotC8 = (longlong)(int)(pixelRed * float255B);
+                        fctiwzSlotD0 = (longlong)(int)(pixelGreen * float255B);
+                        fctiwzSlotD8 = (longlong)(int)(pixelBlue * float255B);
                         *(byte *)dstPixel =
-                             (byte)(int)(local_1ac * float255B) & 0xe0 |
-                             (byte)((uint)(int)(local_1a8 * float255B) >> 3) & 0x1c |
-                             (byte)((uint)(int)(local_1a4 * float255B) >> 6) & 3;
+                             (byte)(int)(pixelRed * float255B) & 0xe0 |
+                             (byte)((uint)(int)(pixelGreen * float255B) >> 3) & 0x1c |
+                             (byte)((uint)(int)(pixelBlue * float255B) >> 6) & 3;
                         srcPixel = srcPixel + srcPixelStride;
                         dstPixel = (uint *)((int)dstPixel + 1);
                       } while (columnsLeft2 != 0);
@@ -5968,7 +5979,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           }
         }
         else {
-          if (uVar3 == 0x8363) {
+          if (dstType == 0x8363) {
             if (0 < (int)depth) {
               do {
                 rowsLeft = height;
@@ -5976,20 +5987,20 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 if (0 < (int)height) {
                   do {
                     if (0 < width) {
-                      local_90 = float65535;
+                      scaleSpill = float65535;
                       columnsLeft2 = width;
                       dstPixel = dstRow;
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
-                        (*modifyPixelFunc)(glContext,auStack_1b0);
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
+                        (*modifyPixelFunc)(glContext,pixelRecord);
                         columnsLeft2 = columnsLeft2 + -1;
-                        local_c8 = (longlong)(int)(local_1ac * float65535);
-                        local_d0 = (longlong)(int)(local_1a8 * float65535);
-                        local_d8 = (longlong)(int)(local_1a4 * float65535);
+                        fctiwzSlotC8 = (longlong)(int)(pixelRed * float65535);
+                        fctiwzSlotD0 = (longlong)(int)(pixelGreen * float65535);
+                        fctiwzSlotD8 = (longlong)(int)(pixelBlue * float65535);
                         *(ushort *)dstPixel =
-                             (ushort)(int)(local_1ac * float65535) & 0xf800 |
-                             (ushort)((uint)(int)(local_1a8 * float65535) >> 5) & 0x7e0 |
-                             (ushort)((uint)(int)(local_1a4 * float65535) >> 0xb) & 0x1f;
+                             (ushort)(int)(pixelRed * float65535) & 0xf800 |
+                             (ushort)((uint)(int)(pixelGreen * float65535) >> 5) & 0x7e0 |
+                             (ushort)((uint)(int)(pixelBlue * float65535) >> 0xb) & 0x1f;
                         dstPixel = (uint *)((int)dstPixel + 2);
                         srcPixel = srcPixel + srcPixelStride;
                       } while (columnsLeft2 != 0);
@@ -6006,7 +6017,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
             goto LAB_0002e240;
           }
-          if (uVar3 == 0x8364) {
+          if (dstType == 0x8364) {
             if (0 < (int)depth) {
               do {
                 rowsLeft = height;
@@ -6014,20 +6025,20 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 if (0 < (int)height) {
                   do {
                     if (0 < width) {
-                      local_90 = float65535;
+                      scaleSpill = float65535;
                       columnsLeft2 = width;
                       dstPixel = dstRow;
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
-                        (*modifyPixelFunc)(glContext,auStack_1b0);
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
+                        (*modifyPixelFunc)(glContext,pixelRecord);
                         columnsLeft2 = columnsLeft2 + -1;
-                        local_c8 = (longlong)(int)(local_1a4 * float65535);
-                        local_d0 = (longlong)(int)(local_1a8 * float65535);
-                        local_d8 = (longlong)(int)(local_1ac * float65535);
+                        fctiwzSlotC8 = (longlong)(int)(pixelBlue * float65535);
+                        fctiwzSlotD0 = (longlong)(int)(pixelGreen * float65535);
+                        fctiwzSlotD8 = (longlong)(int)(pixelRed * float65535);
                         *(ushort *)dstPixel =
-                             (ushort)(int)(local_1a4 * float65535) & 0xf800 |
-                             (ushort)((uint)(int)(local_1a8 * float65535) >> 5) & 0x7e0 |
-                             (ushort)((uint)(int)(local_1ac * float65535) >> 0xb) & 0x1f;
+                             (ushort)(int)(pixelBlue * float65535) & 0xf800 |
+                             (ushort)((uint)(int)(pixelGreen * float65535) >> 5) & 0x7e0 |
+                             (ushort)((uint)(int)(pixelRed * float65535) >> 0xb) & 0x1f;
                         dstPixel = (uint *)((int)dstPixel + 2);
                         srcPixel = srcPixel + srcPixelStride;
                       } while (columnsLeft2 != 0);
@@ -6058,44 +6069,44 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 dstPixel = dstRow;
                 if (0 < width) {
                   do {
-                    local_1ac = floatZero;
-                    local_1a8 = floatZero;
-                    local_1a4 = floatZero;
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
-                    (*modifyPixelFunc)(glContext,auStack_1b0);
-                    if (floatOne2 < local_1ac) {
+                    pixelRed = floatZero;
+                    pixelGreen = floatZero;
+                    pixelBlue = floatZero;
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
+                    (*modifyPixelFunc)(glContext,pixelRecord);
+                    if (floatOne2 < pixelRed) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1ac < floatZero)) {
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float255C);
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)(int)(local_1ac * float255C);
+                      if (!(pixelRed < floatZero)) {
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float255C);
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)(int)(pixelRed * float255C);
                       }
                     }
                     *(undefined1 *)dstPixel = componentByte;
-                    if (floatOne2 < local_1a8) {
+                    if (floatOne2 < pixelGreen) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1a8 < floatZero)) {
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * float255C);
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)(int)(local_1a8 * float255C);
+                      if (!(pixelGreen < floatZero)) {
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelGreen * float255C);
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)(int)(pixelGreen * float255C);
                       }
                     }
                     *(undefined1 *)((int)dstPixel + 1) = componentByte;
-                    if (floatOne2 < local_1a4) {
+                    if (floatOne2 < pixelBlue) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1a4 < floatZero)) {
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * float255C);
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)(int)(local_1a4 * float255C);
+                      if (!(pixelBlue < floatZero)) {
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelBlue * float255C);
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)(int)(pixelBlue * float255C);
                       }
                     }
                     columnsLeft = columnsLeft + -1;
@@ -6116,8 +6127,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
         }
         goto LAB_0002e240;
       }
-      if (uVar3 < 0x1908) {
-        if (uVar3 == 0x1906) {
+      if (dstFormat < 0x1908) {
+        if (dstFormat == 0x1906) {
           if (*(short *)(textureLevel + 0x12) == 0x1400) {
             if (0 < (int)depth) {
               do {
@@ -6132,17 +6143,17 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     dstPixel = dstRow;
                     if (0 < width) {
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
-                        (*modifyPixelFunc)(glContext,auStack_1b0);
-                        if (floatOne2 < local_1a0) {
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
+                        (*modifyPixelFunc)(glContext,pixelRecord);
+                        if (floatOne2 < pixelAlpha) {
                           componentByte = 0xff;
                         }
                         else {
                           componentByte = 0;
-                          if (!(local_1a0 < floatZero)) {
-                            (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * float255C);
-                            componentByte = (undefined1)local_c8;
-                            local_c8 = (longlong)(int)(local_1a0 * float255C);
+                          if (!(pixelAlpha < floatZero)) {
+                            (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelAlpha * float255C);
+                            componentByte = (undefined1)fctiwzSlotC8;
+                            fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float255C);
                           }
                         }
                         columnsLeft = columnsLeft + -1;
@@ -6175,18 +6186,18 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      local_1a0 = floatOne2;
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      (*modifyPixelFunc)(glContext,auStack_1b0);
-                      if (floatOne2 < local_1a0) {
+                      pixelAlpha = floatOne2;
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      (*modifyPixelFunc)(glContext,pixelRecord);
+                      if (floatOne2 < pixelAlpha) {
                         componentByte = 0xff;
                       }
                       else {
                         componentByte = 0;
-                        if (!(local_1a0 < floatZero)) {
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * float255C);
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)(int)(local_1a0 * float255C);
+                        if (!(pixelAlpha < floatZero)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelAlpha * float255C);
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float255C);
                         }
                       }
                       columnsLeft = columnsLeft + -1;
@@ -6209,9 +6220,9 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
         }
       }
       else {
-        if (uVar3 == 0x1908) {
-          uVar3 = *(ushort *)(textureLevel + 0x12);
-          if (uVar3 == 0x8036) {
+        if (dstFormat == 0x1908) {
+          dstType = *(ushort *)(textureLevel + 0x12);
+          if (dstType == 0x8036) {
             if (0 < (int)depth) {
               do {
                 rowsLeft = height;
@@ -6223,48 +6234,48 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     columnsLeft2 = width;
                     if (0 < width) {
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
-                        (*modifyPixelFunc)(glContext,auStack_1b0);
-                        scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
+                        (*modifyPixelFunc)(glContext,pixelRecord);
+                        scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                         if (twoPow31 <= scaledComponent) {
                           componentUint = (uint)(int)(scaledComponent - twoPow31);
-                          local_d0 = (longlong)(int)componentUint;
+                          fctiwzSlotD0 = (longlong)(int)componentUint;
                           componentUint = componentUint ^ 0x80000000;
                         }
                         else {
                           componentUint = (uint)(int)scaledComponent;
-                          local_c8 = (longlong)(int)componentUint;
+                          fctiwzSlotC8 = (longlong)(int)componentUint;
                         }
-                        scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                        scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                         if (DOUBLE_00108d80 <= scaledComponent) {
-                          local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                          uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                          fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                          componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                         }
                         else {
-                          uVar18 = (uint)(int)scaledComponent;
-                          local_d8 = (longlong)(int)uVar18;
+                          componentUint2 = (uint)(int)scaledComponent;
+                          fctiwzSlotD8 = (longlong)(int)componentUint2;
                         }
-                        scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                        scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                         if (DOUBLE_00108d80 <= scaledComponent) {
-                          local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                          uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                          fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                          componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                         }
                         else {
-                          uVar12 = (uint)(int)scaledComponent;
-                          local_e8 = (longlong)(int)uVar12;
+                          componentUint3 = (uint)(int)scaledComponent;
+                          fctiwzSlotE8 = (longlong)(int)componentUint3;
                         }
-                        scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                        scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                         if (DOUBLE_00108d80 <= scaledComponent) {
-                          local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                          uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                          fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                          componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                         }
                         else {
-                          uVar13 = (uint)(int)scaledComponent;
-                          local_f8 = (longlong)(int)uVar13;
+                          componentUint4 = (uint)(int)scaledComponent;
+                          fctiwzSlotF8 = (longlong)(int)componentUint4;
                         }
                         columnsLeft2 = columnsLeft2 + -1;
-                        *dstPixel = componentUint & 0xffc00000 | uVar18 >> 10 & 0x3ff000 |
-                                   uVar12 >> 0x14 & 0xffc | uVar13 >> 0x1e;
+                        *dstPixel = componentUint & 0xffc00000 | componentUint2 >> 10 & 0x3ff000 |
+                                   componentUint3 >> 0x14 & 0xffc | componentUint4 >> 0x1e;
                         srcPixel = srcPixel + srcPixelStride;
                         dstPixel = dstPixel + 1;
                       } while (columnsLeft2 != 0);
@@ -6281,8 +6292,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
             goto LAB_0002e240;
           }
-          if (uVar3 < 0x8037) {
-            if (uVar3 == 0x8033) {
+          if (dstType < 0x8037) {
+            if (dstType == 0x8033) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -6290,22 +6301,22 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   if (0 < (int)height) {
                     do {
                       if (0 < width) {
-                        local_90 = float65535;
+                        scaleSpill = float65535;
                         dstPixel = dstRow;
                         columnsLeft2 = width;
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
-                          (*modifyPixelFunc)(glContext,auStack_1b0);
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
+                          (*modifyPixelFunc)(glContext,pixelRecord);
                           columnsLeft2 = columnsLeft2 + -1;
-                          local_c8 = (longlong)(int)(local_1ac * float65535);
-                          local_d0 = (longlong)(int)(local_1a8 * float65535);
-                          local_d8 = (longlong)(int)(local_1a4 * float65535);
-                          local_e0 = (longlong)(int)(local_1a0 * float65535);
+                          fctiwzSlotC8 = (longlong)(int)(pixelRed * float65535);
+                          fctiwzSlotD0 = (longlong)(int)(pixelGreen * float65535);
+                          fctiwzSlotD8 = (longlong)(int)(pixelBlue * float65535);
+                          fctiwzSlotE0 = (longlong)(int)(pixelAlpha * float65535);
                           *(ushort *)dstPixel =
-                               (ushort)(int)(local_1ac * float65535) & 0xf000 |
-                               (ushort)((uint)(int)(local_1a8 * float65535) >> 4) & 0xf00 |
-                               (ushort)((uint)(int)(local_1a4 * float65535) >> 8) & 0xf0 |
-                               (ushort)((uint)(int)(local_1a0 * float65535) >> 0xc) & 0xf;
+                               (ushort)(int)(pixelRed * float65535) & 0xf000 |
+                               (ushort)((uint)(int)(pixelGreen * float65535) >> 4) & 0xf00 |
+                               (ushort)((uint)(int)(pixelBlue * float65535) >> 8) & 0xf0 |
+                               (ushort)((uint)(int)(pixelAlpha * float65535) >> 0xc) & 0xf;
                           dstPixel = (uint *)((int)dstPixel + 2);
                           srcPixel = srcPixel + srcPixelStride;
                         } while (columnsLeft2 != 0);
@@ -6322,8 +6333,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               goto LAB_0002e240;
             }
-            if (uVar3 < 0x8034) {
-              if (uVar3 == 8) {
+            if (dstType < 0x8034) {
+              if (dstType == 8) {
                 if (0 < (int)depth) {
                   do {
                     rowsLeft = height;
@@ -6337,53 +6348,53 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         dstPixel = dstRow;
                         if (0 < width) {
                           do {
-                            (*extractPixelFunc)(auStack_1b0,srcPixel);
-                            _gleModifyPixelSignedRGBA(glContext,auStack_1b0);
-                            if (floatOne < local_1ac) {
+                            (*extractPixelFunc)(pixelRecord,srcPixel);
+                            _gleModifyPixelSignedRGBA(glContext,pixelRecord);
+                            if (floatOne < pixelRed) {
                               componentByte = 0x7f;
                             }
                             else {
                               componentByte = 0x81;
-                              if (!(local_1ac < floatMinusOne)) {
-                                (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float127B);
-                                componentByte = (undefined1)local_c8;
-                                local_c8 = (longlong)(int)(local_1ac * float127B);
+                              if (!(pixelRed < floatMinusOne)) {
+                                (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float127B);
+                                componentByte = (undefined1)fctiwzSlotC8;
+                                fctiwzSlotC8 = (longlong)(int)(pixelRed * float127B);
                               }
                             }
                             *(undefined1 *)dstPixel = componentByte;
-                            if (floatOne < local_1a8) {
+                            if (floatOne < pixelGreen) {
                               componentByte = 0x7f;
                             }
                             else {
                               componentByte = 0x81;
-                              if (!(local_1a8 < floatMinusOne)) {
-                                (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * float127B);
-                                componentByte = (undefined1)local_c8;
-                                local_c8 = (longlong)(int)(local_1a8 * float127B);
+                              if (!(pixelGreen < floatMinusOne)) {
+                                (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelGreen * float127B);
+                                componentByte = (undefined1)fctiwzSlotC8;
+                                fctiwzSlotC8 = (longlong)(int)(pixelGreen * float127B);
                               }
                             }
                             *(undefined1 *)((int)dstPixel + 1) = componentByte;
-                            if (floatOne < local_1a4) {
+                            if (floatOne < pixelBlue) {
                               componentByte = 0x7f;
                             }
                             else {
                               componentByte = 0x81;
-                              if (!(local_1a4 < floatMinusOne)) {
-                                (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * float127B);
-                                componentByte = (undefined1)local_c8;
-                                local_c8 = (longlong)(int)(local_1a4 * float127B);
+                              if (!(pixelBlue < floatMinusOne)) {
+                                (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelBlue * float127B);
+                                componentByte = (undefined1)fctiwzSlotC8;
+                                fctiwzSlotC8 = (longlong)(int)(pixelBlue * float127B);
                               }
                             }
                             *(undefined1 *)((int)dstPixel + 2) = componentByte;
-                            if (floatOne < local_1a0) {
+                            if (floatOne < pixelAlpha) {
                               componentByte = 0x7f;
                             }
                             else {
                               componentByte = 0x81;
-                              if (!(local_1a0 < floatMinusOne)) {
-                                (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * float127B);
-                                componentByte = (undefined1)local_c8;
-                                local_c8 = (longlong)(int)(local_1a0 * float127B);
+                              if (!(pixelAlpha < floatMinusOne)) {
+                                (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelAlpha * float127B);
+                                componentByte = (undefined1)fctiwzSlotC8;
+                                fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float127B);
                               }
                             }
                             columnsLeft = columnsLeft + -1;
@@ -6406,7 +6417,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
             }
             else {
-              if (uVar3 == 0x8034) {
+              if (dstType == 0x8034) {
                 if (0 < (int)depth) {
                   do {
                     rowsLeft = height;
@@ -6414,22 +6425,22 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     if (0 < (int)height) {
                       do {
                         if (0 < width) {
-                          local_90 = float65535;
+                          scaleSpill = float65535;
                           dstPixel = dstRow;
                           columnsLeft2 = width;
                           do {
-                            (*extractPixelFunc)(auStack_1b0,srcPixel);
-                            (*modifyPixelFunc)(glContext,auStack_1b0);
+                            (*extractPixelFunc)(pixelRecord,srcPixel);
+                            (*modifyPixelFunc)(glContext,pixelRecord);
                             columnsLeft2 = columnsLeft2 + -1;
-                            local_c8 = (longlong)(int)(local_1ac * float65535);
-                            local_d0 = (longlong)(int)(local_1a8 * float65535);
-                            local_d8 = (longlong)(int)(local_1a4 * float65535);
-                            local_e0 = (longlong)(int)(local_1a0 * float65535);
+                            fctiwzSlotC8 = (longlong)(int)(pixelRed * float65535);
+                            fctiwzSlotD0 = (longlong)(int)(pixelGreen * float65535);
+                            fctiwzSlotD8 = (longlong)(int)(pixelBlue * float65535);
+                            fctiwzSlotE0 = (longlong)(int)(pixelAlpha * float65535);
                             *(ushort *)dstPixel =
-                                 (ushort)(int)(local_1ac * float65535) & 0xf800 |
-                                 (ushort)((uint)(int)(local_1a8 * float65535) >> 5) & 0x7c0 |
-                                 (ushort)((uint)(int)(local_1a4 * float65535) >> 10) & 0x3e |
-                                 (ushort)((uint)(int)(local_1a0 * float65535) >> 0xf) & 1;
+                                 (ushort)(int)(pixelRed * float65535) & 0xf800 |
+                                 (ushort)((uint)(int)(pixelGreen * float65535) >> 5) & 0x7c0 |
+                                 (ushort)((uint)(int)(pixelBlue * float65535) >> 10) & 0x3e |
+                                 (ushort)((uint)(int)(pixelAlpha * float65535) >> 0xf) & 1;
                             dstPixel = (uint *)((int)dstPixel + 2);
                             srcPixel = srcPixel + srcPixelStride;
                           } while (columnsLeft2 != 0);
@@ -6446,7 +6457,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 goto LAB_0002e240;
               }
-              if (uVar3 == 0x8035) {
+              if (dstType == 0x8035) {
                 if (0 < (int)depth) {
                   do {
                     rowsLeft = height;
@@ -6458,48 +6469,48 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         columnsLeft2 = width;
                         if (0 < width) {
                           do {
-                            (*extractPixelFunc)(auStack_1b0,srcPixel);
-                            (*modifyPixelFunc)(glContext,auStack_1b0);
-                            scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                            (*extractPixelFunc)(pixelRecord,srcPixel);
+                            (*modifyPixelFunc)(glContext,pixelRecord);
+                            scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                             if (twoPow31 <= scaledComponent) {
                               componentUint = (uint)(int)(scaledComponent - twoPow31);
-                              local_d0 = (longlong)(int)componentUint;
+                              fctiwzSlotD0 = (longlong)(int)componentUint;
                               componentUint = componentUint ^ 0x80000000;
                             }
                             else {
                               componentUint = (uint)(int)scaledComponent;
-                              local_c8 = (longlong)(int)componentUint;
+                              fctiwzSlotC8 = (longlong)(int)componentUint;
                             }
-                            scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar18 = (uint)(int)scaledComponent;
-                              local_d8 = (longlong)(int)uVar18;
+                              componentUint2 = (uint)(int)scaledComponent;
+                              fctiwzSlotD8 = (longlong)(int)componentUint2;
                             }
-                            scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar12 = (uint)(int)scaledComponent;
-                              local_e8 = (longlong)(int)uVar12;
+                              componentUint3 = (uint)(int)scaledComponent;
+                              fctiwzSlotE8 = (longlong)(int)componentUint3;
                             }
-                            scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar13 = (uint)(int)scaledComponent;
-                              local_f8 = (longlong)(int)uVar13;
+                              componentUint4 = (uint)(int)scaledComponent;
+                              fctiwzSlotF8 = (longlong)(int)componentUint4;
                             }
                             columnsLeft2 = columnsLeft2 + -1;
-                            *dstPixel = componentUint & 0xff000000 | uVar18 >> 8 & 0xff0000 |
-                                       uVar12 >> 0x10 & 0xff00 | uVar13 >> 0x18;
+                            *dstPixel = componentUint & 0xff000000 | componentUint2 >> 8 & 0xff0000 |
+                                       componentUint3 >> 0x10 & 0xff00 | componentUint4 >> 0x18;
                             srcPixel = srcPixel + srcPixelStride;
                             dstPixel = dstPixel + 1;
                           } while (columnsLeft2 != 0);
@@ -6519,7 +6530,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
           }
           else {
-            if (uVar3 == 0x8366) {
+            if (dstType == 0x8366) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -6527,22 +6538,22 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   if (0 < (int)height) {
                     do {
                       if (0 < width) {
-                        local_90 = float65535;
+                        scaleSpill = float65535;
                         dstPixel = dstRow;
                         columnsLeft2 = width;
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
-                          (*modifyPixelFunc)(glContext,auStack_1b0);
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
+                          (*modifyPixelFunc)(glContext,pixelRecord);
                           columnsLeft2 = columnsLeft2 + -1;
-                          local_c8 = (longlong)(int)(local_1a0 * float65535);
-                          local_d0 = (longlong)(int)(local_1a4 * float65535);
-                          local_d8 = (longlong)(int)(local_1a8 * float65535);
-                          local_e0 = (longlong)(int)(local_1ac * float65535);
+                          fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float65535);
+                          fctiwzSlotD0 = (longlong)(int)(pixelBlue * float65535);
+                          fctiwzSlotD8 = (longlong)(int)(pixelGreen * float65535);
+                          fctiwzSlotE0 = (longlong)(int)(pixelRed * float65535);
                           *(ushort *)dstPixel =
-                               (ushort)(int)(local_1a0 * float65535) & 0x8000 |
-                               (ushort)((uint)(int)(local_1a4 * float65535) >> 1) & 0x7c00 |
-                               (ushort)((uint)(int)(local_1a8 * float65535) >> 6) & 0x3e0 |
-                               (ushort)((uint)(int)(local_1ac * float65535) >> 0xb) & 0x1f;
+                               (ushort)(int)(pixelAlpha * float65535) & 0x8000 |
+                               (ushort)((uint)(int)(pixelBlue * float65535) >> 1) & 0x7c00 |
+                               (ushort)((uint)(int)(pixelGreen * float65535) >> 6) & 0x3e0 |
+                               (ushort)((uint)(int)(pixelRed * float65535) >> 0xb) & 0x1f;
                           dstPixel = (uint *)((int)dstPixel + 2);
                           srcPixel = srcPixel + srcPixelStride;
                         } while (columnsLeft2 != 0);
@@ -6559,8 +6570,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               goto LAB_0002e240;
             }
-            if (uVar3 < 0x8367) {
-              if (uVar3 == 0x8365) {
+            if (dstType < 0x8367) {
+              if (dstType == 0x8365) {
                 if (0 < (int)depth) {
                   do {
                     rowsLeft = height;
@@ -6568,22 +6579,22 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     if (0 < (int)height) {
                       do {
                         if (0 < width) {
-                          local_90 = float65535;
+                          scaleSpill = float65535;
                           dstPixel = dstRow;
                           columnsLeft2 = width;
                           do {
-                            (*extractPixelFunc)(auStack_1b0,srcPixel);
-                            (*modifyPixelFunc)(glContext,auStack_1b0);
+                            (*extractPixelFunc)(pixelRecord,srcPixel);
+                            (*modifyPixelFunc)(glContext,pixelRecord);
                             columnsLeft2 = columnsLeft2 + -1;
-                            local_c8 = (longlong)(int)(local_1a0 * float65535);
-                            local_d0 = (longlong)(int)(local_1a4 * float65535);
-                            local_d8 = (longlong)(int)(local_1a8 * float65535);
-                            local_e0 = (longlong)(int)(local_1ac * float65535);
+                            fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float65535);
+                            fctiwzSlotD0 = (longlong)(int)(pixelBlue * float65535);
+                            fctiwzSlotD8 = (longlong)(int)(pixelGreen * float65535);
+                            fctiwzSlotE0 = (longlong)(int)(pixelRed * float65535);
                             *(ushort *)dstPixel =
-                                 (ushort)(int)(local_1a0 * float65535) & 0xf000 |
-                                 (ushort)((uint)(int)(local_1a4 * float65535) >> 4) & 0xf00 |
-                                 (ushort)((uint)(int)(local_1a8 * float65535) >> 8) & 0xf0 |
-                                 (ushort)((uint)(int)(local_1ac * float65535) >> 0xc) & 0xf;
+                                 (ushort)(int)(pixelAlpha * float65535) & 0xf000 |
+                                 (ushort)((uint)(int)(pixelBlue * float65535) >> 4) & 0xf00 |
+                                 (ushort)((uint)(int)(pixelGreen * float65535) >> 8) & 0xf0 |
+                                 (ushort)((uint)(int)(pixelRed * float65535) >> 0xc) & 0xf;
                             dstPixel = (uint *)((int)dstPixel + 2);
                             srcPixel = srcPixel + srcPixelStride;
                           } while (columnsLeft2 != 0);
@@ -6602,7 +6613,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
             }
             else {
-              if (uVar3 == 0x8367) {
+              if (dstType == 0x8367) {
                 if (0 < (int)depth) {
                   do {
                     rowsLeft = height;
@@ -6614,48 +6625,48 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         columnsLeft2 = width;
                         if (0 < width) {
                           do {
-                            (*extractPixelFunc)(auStack_1b0,srcPixel);
-                            (*modifyPixelFunc)(glContext,auStack_1b0);
-                            scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                            (*extractPixelFunc)(pixelRecord,srcPixel);
+                            (*modifyPixelFunc)(glContext,pixelRecord);
+                            scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                             if (twoPow31 <= scaledComponent) {
                               componentUint = (uint)(int)(scaledComponent - twoPow31);
-                              local_d0 = (longlong)(int)componentUint;
+                              fctiwzSlotD0 = (longlong)(int)componentUint;
                               componentUint = componentUint ^ 0x80000000;
                             }
                             else {
                               componentUint = (uint)(int)scaledComponent;
-                              local_c8 = (longlong)(int)componentUint;
+                              fctiwzSlotC8 = (longlong)(int)componentUint;
                             }
-                            scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar18 = (uint)(int)scaledComponent;
-                              local_d8 = (longlong)(int)uVar18;
+                              componentUint2 = (uint)(int)scaledComponent;
+                              fctiwzSlotD8 = (longlong)(int)componentUint2;
                             }
-                            scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar12 = (uint)(int)scaledComponent;
-                              local_e8 = (longlong)(int)uVar12;
+                              componentUint3 = (uint)(int)scaledComponent;
+                              fctiwzSlotE8 = (longlong)(int)componentUint3;
                             }
-                            scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar13 = (uint)(int)scaledComponent;
-                              local_f8 = (longlong)(int)uVar13;
+                              componentUint4 = (uint)(int)scaledComponent;
+                              fctiwzSlotF8 = (longlong)(int)componentUint4;
                             }
                             columnsLeft2 = columnsLeft2 + -1;
-                            *dstPixel = componentUint & 0xff000000 | uVar18 >> 8 & 0xff0000 |
-                                       uVar12 >> 0x10 & 0xff00 | uVar13 >> 0x18;
+                            *dstPixel = componentUint & 0xff000000 | componentUint2 >> 8 & 0xff0000 |
+                                       componentUint3 >> 0x10 & 0xff00 | componentUint4 >> 0x18;
                             srcPixel = srcPixel + srcPixelStride;
                             dstPixel = dstPixel + 1;
                           } while (columnsLeft2 != 0);
@@ -6672,7 +6683,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 goto LAB_0002e240;
               }
-              if (uVar3 == 0x8368) {
+              if (dstType == 0x8368) {
                 if (0 < (int)depth) {
                   do {
                     rowsLeft = height;
@@ -6684,48 +6695,48 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         columnsLeft2 = width;
                         if (0 < width) {
                           do {
-                            (*extractPixelFunc)(auStack_1b0,srcPixel);
-                            (*modifyPixelFunc)(glContext,auStack_1b0);
-                            scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                            (*extractPixelFunc)(pixelRecord,srcPixel);
+                            (*modifyPixelFunc)(glContext,pixelRecord);
+                            scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                             if (twoPow31 <= scaledComponent) {
                               componentUint = (uint)(int)(scaledComponent - twoPow31);
-                              local_d0 = (longlong)(int)componentUint;
+                              fctiwzSlotD0 = (longlong)(int)componentUint;
                               componentUint = componentUint ^ 0x80000000;
                             }
                             else {
                               componentUint = (uint)(int)scaledComponent;
-                              local_c8 = (longlong)(int)componentUint;
+                              fctiwzSlotC8 = (longlong)(int)componentUint;
                             }
-                            scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar18 = (uint)(int)scaledComponent;
-                              local_d8 = (longlong)(int)uVar18;
+                              componentUint2 = (uint)(int)scaledComponent;
+                              fctiwzSlotD8 = (longlong)(int)componentUint2;
                             }
-                            scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar12 = (uint)(int)scaledComponent;
-                              local_e8 = (longlong)(int)uVar12;
+                              componentUint3 = (uint)(int)scaledComponent;
+                              fctiwzSlotE8 = (longlong)(int)componentUint3;
                             }
-                            scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar13 = (uint)(int)scaledComponent;
-                              local_f8 = (longlong)(int)uVar13;
+                              componentUint4 = (uint)(int)scaledComponent;
+                              fctiwzSlotF8 = (longlong)(int)componentUint4;
                             }
                             columnsLeft2 = columnsLeft2 + -1;
-                            *dstPixel = componentUint & 0xc0000000 | uVar18 >> 2 & 0x3ff00000 |
-                                       uVar12 >> 0xc & 0xffc00 | uVar13 >> 0x16;
+                            *dstPixel = componentUint & 0xc0000000 | componentUint2 >> 2 & 0x3ff00000 |
+                                       componentUint3 >> 0xc & 0xffc00 | componentUint4 >> 0x16;
                             srcPixel = srcPixel + srcPixelStride;
                             dstPixel = dstPixel + 1;
                           } while (columnsLeft2 != 0);
@@ -6757,57 +6768,57 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      local_1ac = floatZero;
-                      local_1a8 = floatZero;
-                      local_1a4 = floatZero;
-                      local_1a0 = floatOne2;
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      (*modifyPixelFunc)(glContext,auStack_1b0);
-                      if (floatOne2 < local_1ac) {
+                      pixelRed = floatZero;
+                      pixelGreen = floatZero;
+                      pixelBlue = floatZero;
+                      pixelAlpha = floatOne2;
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      (*modifyPixelFunc)(glContext,pixelRecord);
+                      if (floatOne2 < pixelRed) {
                         componentByte = 0xff;
                       }
                       else {
                         componentByte = 0;
-                        if (!(local_1ac < floatZero)) {
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float255C);
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)(int)(local_1ac * float255C);
+                        if (!(pixelRed < floatZero)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float255C);
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)(int)(pixelRed * float255C);
                         }
                       }
                       *(undefined1 *)dstPixel = componentByte;
-                      if (floatOne2 < local_1a8) {
+                      if (floatOne2 < pixelGreen) {
                         componentByte = 0xff;
                       }
                       else {
                         componentByte = 0;
-                        if (!(local_1a8 < floatZero)) {
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * float255C);
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)(int)(local_1a8 * float255C);
+                        if (!(pixelGreen < floatZero)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelGreen * float255C);
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)(int)(pixelGreen * float255C);
                         }
                       }
                       *(undefined1 *)((int)dstPixel + 1) = componentByte;
-                      if (floatOne2 < local_1a4) {
+                      if (floatOne2 < pixelBlue) {
                         componentByte = 0xff;
                       }
                       else {
                         componentByte = 0;
-                        if (!(local_1a4 < floatZero)) {
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * float255C);
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)(int)(local_1a4 * float255C);
+                        if (!(pixelBlue < floatZero)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelBlue * float255C);
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)(int)(pixelBlue * float255C);
                         }
                       }
                       *(undefined1 *)((int)dstPixel + 2) = componentByte;
-                      if (floatOne2 < local_1a0) {
+                      if (floatOne2 < pixelAlpha) {
                         componentByte = 0xff;
                       }
                       else {
                         componentByte = 0;
-                        if (!(local_1a0 < floatZero)) {
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * float255C);
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)(int)(local_1a0 * float255C);
+                        if (!(pixelAlpha < floatZero)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelAlpha * float255C);
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float255C);
                         }
                       }
                       columnsLeft = columnsLeft + -1;
@@ -6828,7 +6839,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           }
           goto LAB_0002e240;
         }
-        if (uVar3 == 0x1909) {
+        if (dstFormat == 0x1909) {
           if (*(short *)(textureLevel + 0x12) == 0x1400) {
             if (0 < (int)depth) {
               do {
@@ -6843,17 +6854,17 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     dstPixel = dstRow;
                     if (0 < width) {
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
-                        _gleModifyPixelSignedRGBA(glContext,auStack_1b0);
-                        if (floatOne < local_1ac) {
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
+                        _gleModifyPixelSignedRGBA(glContext,pixelRecord);
+                        if (floatOne < pixelRed) {
                           componentByte = 0x7f;
                         }
                         else {
                           componentByte = 0x81;
-                          if (!(local_1ac < floatMinusOne)) {
-                            (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float127B);
-                            componentByte = (undefined1)local_c8;
-                            local_c8 = (longlong)(int)(local_1ac * float127B);
+                          if (!(pixelRed < floatMinusOne)) {
+                            (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float127B);
+                            componentByte = (undefined1)fctiwzSlotC8;
+                            fctiwzSlotC8 = (longlong)(int)(pixelRed * float127B);
                           }
                         }
                         columnsLeft = columnsLeft + -1;
@@ -6886,18 +6897,18 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      local_1ac = floatZero;
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      (*modifyPixelFunc)(glContext,auStack_1b0);
-                      if (floatOne2 < local_1ac) {
+                      pixelRed = floatZero;
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      (*modifyPixelFunc)(glContext,pixelRecord);
+                      if (floatOne2 < pixelRed) {
                         componentByte = 0xff;
                       }
                       else {
                         componentByte = 0;
-                        if (!(local_1ac < floatZero)) {
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float255C);
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)(int)(local_1ac * float255C);
+                        if (!(pixelRed < floatZero)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float255C);
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)(int)(pixelRed * float255C);
                         }
                       }
                       columnsLeft = columnsLeft + -1;
@@ -6921,50 +6932,50 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
       }
     }
     else {
-      if (uVar3 == 0x86f4) {
-        uVar3 = *(ushort *)(textureLevel + 0x12);
-        if (uVar3 == 6) {
+      if (dstFormat == 0x86f4) {
+        dstType = *(ushort *)(textureLevel + 0x12);
+        if (dstType == 6) {
           if (0 < (int)depth) {
-            local_9c = componentCount << 1;
+            dstPixelStrideSpill = componentCount << 1;
             do {
-              iVar17 = local_9c;
+              iVar17 = dstPixelStrideSpill;
               if (0 < (int)height) {
-                local_a4 = FLOAT_00108f74;
+                float32767Spill = FLOAT_00108f74;
                 rowsLeft = height;
                 dstRow = dstSlice;
                 do {
-                  fVar9 = local_a4;
+                  fVar9 = float32767Spill;
                   floatMinusOne = FLOAT_00108e58;
                   floatOne = FLOAT_00108e54;
                   columnsLeft = width;
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      (*modifyPixelFunc)(glContext,auStack_1b0);
-                      if (floatOne < local_190) {
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      (*modifyPixelFunc)(glContext,pixelRecord);
+                      if (floatOne < pixelHi) {
                         componentShort = 0x7fff;
                       }
                       else {
                         componentShort = 0x8001;
-                        if (!(local_190 < floatMinusOne)) {
-                          scaledInt = (int)(local_190 * fVar9);
-                          (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)scaledInt;
-                          componentShort = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
-                          local_c8 = (longlong)scaledInt;
+                        if (!(pixelHi < floatMinusOne)) {
+                          scaledInt = (int)(pixelHi * fVar9);
+                          (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6)) = (undefined2)scaledInt;
+                          componentShort = (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6));
+                          fctiwzSlotC8 = (longlong)scaledInt;
                         }
                       }
                       *(undefined2 *)dstPixel = componentShort;
-                      if (floatOne < local_18c) {
+                      if (floatOne < pixelLo) {
                         componentShort = 0x7fff;
                       }
                       else {
                         componentShort = 0x8001;
-                        if (!(local_18c < floatMinusOne)) {
-                          scaledInt = (int)(local_18c * fVar9);
-                          (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)scaledInt;
-                          componentShort = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
-                          local_c8 = (longlong)scaledInt;
+                        if (!(pixelLo < floatMinusOne)) {
+                          scaledInt = (int)(pixelLo * fVar9);
+                          (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6)) = (undefined2)scaledInt;
+                          componentShort = (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6));
+                          fctiwzSlotC8 = (longlong)scaledInt;
                         }
                       }
                       columnsLeft = columnsLeft + -1;
@@ -6984,48 +6995,48 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             } while (depth != 0);
           }
         }
-        else if (uVar3 < 7) {
-          if ((uVar3 == 5) && (0 < (int)depth)) {
-            local_a0 = componentCount << 1;
+        else if (dstType < 7) {
+          if ((dstType == 5) && (0 < (int)depth)) {
+            dstPixelStrideSpillB = componentCount << 1;
             do {
-              iVar17 = local_a0;
+              iVar17 = dstPixelStrideSpillB;
               if (0 < (int)height) {
-                local_a8 = FLOAT_00108ea0;
+                float65535Spill = FLOAT_00108ea0;
                 rowsLeft = height;
                 dstRow = dstSlice;
                 do {
-                  fVar9 = local_a8;
+                  fVar9 = float65535Spill;
                   floatOne2 = FLOAT_00108e54;
                   floatZero = FLOAT_00108e50;
                   columnsLeft = width;
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      (*modifyPixelFunc)(glContext,auStack_1b0);
-                      if (floatOne2 < local_190) {
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      (*modifyPixelFunc)(glContext,pixelRecord);
+                      if (floatOne2 < pixelHi) {
                         componentShort = 0xffff;
                       }
                       else {
                         componentShort = 0;
-                        if (!(local_190 < floatZero)) {
-                          scaledInt = (int)(local_190 * fVar9);
-                          (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)scaledInt;
-                          componentShort = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
-                          local_c8 = (longlong)scaledInt;
+                        if (!(pixelHi < floatZero)) {
+                          scaledInt = (int)(pixelHi * fVar9);
+                          (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6)) = (undefined2)scaledInt;
+                          componentShort = (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6));
+                          fctiwzSlotC8 = (longlong)scaledInt;
                         }
                       }
                       *(undefined2 *)dstPixel = componentShort;
-                      if (floatOne2 < local_18c) {
+                      if (floatOne2 < pixelLo) {
                         componentShort = 0xffff;
                       }
                       else {
                         componentShort = 0;
-                        if (!(local_18c < floatZero)) {
-                          scaledInt = (int)(local_18c * fVar9);
-                          (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)scaledInt;
-                          componentShort = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
-                          local_c8 = (longlong)scaledInt;
+                        if (!(pixelLo < floatZero)) {
+                          scaledInt = (int)(pixelLo * fVar9);
+                          (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6)) = (undefined2)scaledInt;
+                          componentShort = (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6));
+                          fctiwzSlotC8 = (longlong)scaledInt;
                         }
                       }
                       columnsLeft = columnsLeft + -1;
@@ -7045,7 +7056,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             } while (depth != 0);
           }
         }
-        else if (uVar3 == 0x1400) {
+        else if (dstType == 0x1400) {
           if (0 < (int)depth) {
             do {
               rowsLeft = height;
@@ -7059,31 +7070,31 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      (*modifyPixelFunc)(glContext,auStack_1b0);
-                      if (floatOne < local_190) {
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      (*modifyPixelFunc)(glContext,pixelRecord);
+                      if (floatOne < pixelHi) {
                         componentByte = 0x7f;
                       }
                       else {
                         componentByte = 0x81;
-                        if (!(local_190 < floatMinusOne)) {
-                          scaledInt = (int)(local_190 * float127B);
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)scaledInt;
+                        if (!(pixelHi < floatMinusOne)) {
+                          scaledInt = (int)(pixelHi * float127B);
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)scaledInt;
                         }
                       }
                       *(undefined1 *)dstPixel = componentByte;
-                      if (floatOne < local_18c) {
+                      if (floatOne < pixelLo) {
                         componentByte = 0x7f;
                       }
                       else {
                         componentByte = 0x81;
-                        if (!(local_18c < floatMinusOne)) {
-                          scaledInt = (int)(local_18c * float127B);
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)scaledInt;
+                        if (!(pixelLo < floatMinusOne)) {
+                          scaledInt = (int)(pixelLo * float127B);
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)scaledInt;
                         }
                       }
                       columnsLeft = columnsLeft + -1;
@@ -7103,7 +7114,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             } while (depth != 0);
           }
         }
-        else if ((uVar3 == 0x1401) && (0 < (int)depth)) {
+        else if ((dstType == 0x1401) && (0 < (int)depth)) {
           do {
             rowsLeft = height;
             dstRow = dstSlice;
@@ -7116,31 +7127,31 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 dstPixel = dstRow;
                 if (0 < width) {
                   do {
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
-                    (*modifyPixelFunc)(glContext,auStack_1b0);
-                    if (floatOne2 < local_190) {
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
+                    (*modifyPixelFunc)(glContext,pixelRecord);
+                    if (floatOne2 < pixelHi) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_190 < floatZero)) {
-                        scaledInt = (int)(local_190 * float255C);
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)scaledInt;
+                      if (!(pixelHi < floatZero)) {
+                        scaledInt = (int)(pixelHi * float255C);
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)scaledInt;
                       }
                     }
                     *(undefined1 *)dstPixel = componentByte;
-                    if (floatOne2 < local_18c) {
+                    if (floatOne2 < pixelLo) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_18c < floatZero)) {
-                        scaledInt = (int)(local_18c * float255C);
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)scaledInt;
+                      if (!(pixelLo < floatZero)) {
+                        scaledInt = (int)(pixelLo * float255C);
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)scaledInt;
                       }
                     }
                     columnsLeft = columnsLeft + -1;
@@ -7161,10 +7172,10 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
         }
         goto LAB_0002e240;
       }
-      if (uVar3 < 0x86f5) {
-        if (uVar3 == 0x80e1) {
-          uVar3 = *(ushort *)(textureLevel + 0x12);
-          if (uVar3 == 0x8036) {
+      if (dstFormat < 0x86f5) {
+        if (dstFormat == 0x80e1) {
+          dstType = *(ushort *)(textureLevel + 0x12);
+          if (dstType == 0x8036) {
             if (0 < (int)depth) {
               do {
                 rowsLeft = height;
@@ -7176,48 +7187,48 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     columnsLeft2 = width;
                     if (0 < width) {
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
-                        (*modifyPixelFunc)(glContext,auStack_1b0);
-                        scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
+                        (*modifyPixelFunc)(glContext,pixelRecord);
+                        scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                         if (twoPow31 <= scaledComponent) {
                           componentUint = (uint)(int)(scaledComponent - twoPow31);
-                          local_d0 = (longlong)(int)componentUint;
+                          fctiwzSlotD0 = (longlong)(int)componentUint;
                           componentUint = componentUint ^ 0x80000000;
                         }
                         else {
                           componentUint = (uint)(int)scaledComponent;
-                          local_c8 = (longlong)(int)componentUint;
+                          fctiwzSlotC8 = (longlong)(int)componentUint;
                         }
-                        scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                        scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                         if (DOUBLE_00108d80 <= scaledComponent) {
-                          local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                          uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                          fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                          componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                         }
                         else {
-                          uVar18 = (uint)(int)scaledComponent;
-                          local_d8 = (longlong)(int)uVar18;
+                          componentUint2 = (uint)(int)scaledComponent;
+                          fctiwzSlotD8 = (longlong)(int)componentUint2;
                         }
-                        scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                        scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                         if (DOUBLE_00108d80 <= scaledComponent) {
-                          local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                          uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                          fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                          componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                         }
                         else {
-                          uVar12 = (uint)(int)scaledComponent;
-                          local_e8 = (longlong)(int)uVar12;
+                          componentUint3 = (uint)(int)scaledComponent;
+                          fctiwzSlotE8 = (longlong)(int)componentUint3;
                         }
-                        scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                        scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                         if (DOUBLE_00108d80 <= scaledComponent) {
-                          local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                          uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                          fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                          componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                         }
                         else {
-                          uVar13 = (uint)(int)scaledComponent;
-                          local_f8 = (longlong)(int)uVar13;
+                          componentUint4 = (uint)(int)scaledComponent;
+                          fctiwzSlotF8 = (longlong)(int)componentUint4;
                         }
                         columnsLeft2 = columnsLeft2 + -1;
-                        *dstPixel = componentUint & 0xffc00000 | uVar18 >> 10 & 0x3ff000 |
-                                   uVar12 >> 0x14 & 0xffc | uVar13 >> 0x1e;
+                        *dstPixel = componentUint & 0xffc00000 | componentUint2 >> 10 & 0x3ff000 |
+                                   componentUint3 >> 0x14 & 0xffc | componentUint4 >> 0x1e;
                         srcPixel = srcPixel + srcPixelStride;
                         dstPixel = dstPixel + 1;
                       } while (columnsLeft2 != 0);
@@ -7234,8 +7245,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
             goto LAB_0002e240;
           }
-          if (uVar3 < 0x8037) {
-            if (uVar3 == 0x8033) {
+          if (dstType < 0x8037) {
+            if (dstType == 0x8033) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -7243,22 +7254,22 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   if (0 < (int)height) {
                     do {
                       if (0 < width) {
-                        local_90 = float65535;
+                        scaleSpill = float65535;
                         dstPixel = dstRow;
                         columnsLeft2 = width;
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
-                          (*modifyPixelFunc)(glContext,auStack_1b0);
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
+                          (*modifyPixelFunc)(glContext,pixelRecord);
                           columnsLeft2 = columnsLeft2 + -1;
-                          local_c8 = (longlong)(int)(local_1a4 * float65535);
-                          local_d0 = (longlong)(int)(local_1a8 * float65535);
-                          local_d8 = (longlong)(int)(local_1ac * float65535);
-                          local_e0 = (longlong)(int)(local_1a0 * float65535);
+                          fctiwzSlotC8 = (longlong)(int)(pixelBlue * float65535);
+                          fctiwzSlotD0 = (longlong)(int)(pixelGreen * float65535);
+                          fctiwzSlotD8 = (longlong)(int)(pixelRed * float65535);
+                          fctiwzSlotE0 = (longlong)(int)(pixelAlpha * float65535);
                           *(ushort *)dstPixel =
-                               (ushort)(int)(local_1a4 * float65535) & 0xf000 |
-                               (ushort)((uint)(int)(local_1a8 * float65535) >> 4) & 0xf00 |
-                               (ushort)((uint)(int)(local_1ac * float65535) >> 8) & 0xf0 |
-                               (ushort)((uint)(int)(local_1a0 * float65535) >> 0xc) & 0xf;
+                               (ushort)(int)(pixelBlue * float65535) & 0xf000 |
+                               (ushort)((uint)(int)(pixelGreen * float65535) >> 4) & 0xf00 |
+                               (ushort)((uint)(int)(pixelRed * float65535) >> 8) & 0xf0 |
+                               (ushort)((uint)(int)(pixelAlpha * float65535) >> 0xc) & 0xf;
                           dstPixel = (uint *)((int)dstPixel + 2);
                           srcPixel = srcPixel + srcPixelStride;
                         } while (columnsLeft2 != 0);
@@ -7275,8 +7286,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               goto LAB_0002e240;
             }
-            if (uVar3 < 0x8034) {
-              if (uVar3 == 7) {
+            if (dstType < 0x8034) {
+              if (dstType == 7) {
                 if (0 < (int)depth) {
                   do {
                     rowsLeft = height;
@@ -7293,53 +7304,53 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                           dstPixel = dstRow;
                           columnsLeft = width;
                           do {
-                            (*extractPixelFunc)(auStack_1b0,srcPixel);
-                            _gleModifyPixelSignedRGB_UnsignedA(glContext,auStack_1b0);
-                            if (floatOne2 < local_1a0) {
+                            (*extractPixelFunc)(pixelRecord,srcPixel);
+                            _gleModifyPixelSignedRGB_UnsignedA(glContext,pixelRecord);
+                            if (floatOne2 < pixelAlpha) {
                               componentByte = 0xff;
                             }
                             else {
                               componentByte = 0;
-                              if (!(local_1a0 < floatZero)) {
-                                (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * float255);
-                                componentByte = (undefined1)local_c8;
-                                local_c8 = (longlong)(int)(local_1a0 * float255);
+                              if (!(pixelAlpha < floatZero)) {
+                                (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelAlpha * float255);
+                                componentByte = (undefined1)fctiwzSlotC8;
+                                fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float255);
                               }
                             }
                             *(undefined1 *)dstPixel = componentByte;
-                            if (floatOne2 < local_1ac) {
+                            if (floatOne2 < pixelRed) {
                               componentByte = 0x7f;
                             }
                             else {
                               componentByte = 0x81;
-                              if (!(local_1ac < floatMinusOne2)) {
-                                (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float127);
-                                componentByte = (undefined1)local_c8;
-                                local_c8 = (longlong)(int)(local_1ac * float127);
+                              if (!(pixelRed < floatMinusOne2)) {
+                                (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float127);
+                                componentByte = (undefined1)fctiwzSlotC8;
+                                fctiwzSlotC8 = (longlong)(int)(pixelRed * float127);
                               }
                             }
                             puVar30[-2] = componentByte;
-                            if (floatOne2 < local_1a8) {
+                            if (floatOne2 < pixelGreen) {
                               componentByte = 0x7f;
                             }
                             else {
                               componentByte = 0x81;
-                              if (!(local_1a8 < floatMinusOne2)) {
-                                (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * float127);
-                                componentByte = (undefined1)local_c8;
-                                local_c8 = (longlong)(int)(local_1a8 * float127);
+                              if (!(pixelGreen < floatMinusOne2)) {
+                                (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelGreen * float127);
+                                componentByte = (undefined1)fctiwzSlotC8;
+                                fctiwzSlotC8 = (longlong)(int)(pixelGreen * float127);
                               }
                             }
                             puVar30[-1] = componentByte;
-                            if (floatOne2 < local_1a4) {
+                            if (floatOne2 < pixelBlue) {
                               componentByte = 0x7f;
                             }
                             else {
                               componentByte = 0x81;
-                              if (!(local_1a4 < floatMinusOne2)) {
-                                (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * float127);
-                                componentByte = (undefined1)local_c8;
-                                local_c8 = (longlong)(int)(local_1a4 * float127);
+                              if (!(pixelBlue < floatMinusOne2)) {
+                                (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelBlue * float127);
+                                componentByte = (undefined1)fctiwzSlotC8;
+                                fctiwzSlotC8 = (longlong)(int)(pixelBlue * float127);
                               }
                             }
                             columnsLeft = columnsLeft + -1;
@@ -7363,7 +7374,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
             }
             else {
-              if (uVar3 == 0x8034) {
+              if (dstType == 0x8034) {
                 if (0 < (int)depth) {
                   do {
                     rowsLeft = height;
@@ -7371,22 +7382,22 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     if (0 < (int)height) {
                       do {
                         if (0 < width) {
-                          local_90 = float65535;
+                          scaleSpill = float65535;
                           dstPixel = dstRow;
                           columnsLeft2 = width;
                           do {
-                            (*extractPixelFunc)(auStack_1b0,srcPixel);
-                            (*modifyPixelFunc)(glContext,auStack_1b0);
+                            (*extractPixelFunc)(pixelRecord,srcPixel);
+                            (*modifyPixelFunc)(glContext,pixelRecord);
                             columnsLeft2 = columnsLeft2 + -1;
-                            local_c8 = (longlong)(int)(local_1a4 * float65535);
-                            local_d0 = (longlong)(int)(local_1a8 * float65535);
-                            local_d8 = (longlong)(int)(local_1ac * float65535);
-                            local_e0 = (longlong)(int)(local_1a0 * float65535);
+                            fctiwzSlotC8 = (longlong)(int)(pixelBlue * float65535);
+                            fctiwzSlotD0 = (longlong)(int)(pixelGreen * float65535);
+                            fctiwzSlotD8 = (longlong)(int)(pixelRed * float65535);
+                            fctiwzSlotE0 = (longlong)(int)(pixelAlpha * float65535);
                             *(ushort *)dstPixel =
-                                 (ushort)(int)(local_1a4 * float65535) & 0xf800 |
-                                 (ushort)((uint)(int)(local_1a8 * float65535) >> 5) & 0x7c0 |
-                                 (ushort)((uint)(int)(local_1ac * float65535) >> 10) & 0x3e |
-                                 (ushort)((uint)(int)(local_1a0 * float65535) >> 0xf) & 1;
+                                 (ushort)(int)(pixelBlue * float65535) & 0xf800 |
+                                 (ushort)((uint)(int)(pixelGreen * float65535) >> 5) & 0x7c0 |
+                                 (ushort)((uint)(int)(pixelRed * float65535) >> 10) & 0x3e |
+                                 (ushort)((uint)(int)(pixelAlpha * float65535) >> 0xf) & 1;
                             dstPixel = (uint *)((int)dstPixel + 2);
                             srcPixel = srcPixel + srcPixelStride;
                           } while (columnsLeft2 != 0);
@@ -7403,7 +7414,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 goto LAB_0002e240;
               }
-              if (uVar3 == 0x8035) {
+              if (dstType == 0x8035) {
                 if (0 < (int)depth) {
                   do {
                     rowsLeft = height;
@@ -7415,48 +7426,48 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         columnsLeft2 = width;
                         if (0 < width) {
                           do {
-                            (*extractPixelFunc)(auStack_1b0,srcPixel);
-                            (*modifyPixelFunc)(glContext,auStack_1b0);
-                            scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                            (*extractPixelFunc)(pixelRecord,srcPixel);
+                            (*modifyPixelFunc)(glContext,pixelRecord);
+                            scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                             if (twoPow31 <= scaledComponent) {
                               componentUint = (uint)(int)(scaledComponent - twoPow31);
-                              local_d0 = (longlong)(int)componentUint;
+                              fctiwzSlotD0 = (longlong)(int)componentUint;
                               componentUint = componentUint ^ 0x80000000;
                             }
                             else {
                               componentUint = (uint)(int)scaledComponent;
-                              local_c8 = (longlong)(int)componentUint;
+                              fctiwzSlotC8 = (longlong)(int)componentUint;
                             }
-                            scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar18 = (uint)(int)scaledComponent;
-                              local_d8 = (longlong)(int)uVar18;
+                              componentUint2 = (uint)(int)scaledComponent;
+                              fctiwzSlotD8 = (longlong)(int)componentUint2;
                             }
-                            scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar12 = (uint)(int)scaledComponent;
-                              local_e8 = (longlong)(int)uVar12;
+                              componentUint3 = (uint)(int)scaledComponent;
+                              fctiwzSlotE8 = (longlong)(int)componentUint3;
                             }
-                            scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar13 = (uint)(int)scaledComponent;
-                              local_f8 = (longlong)(int)uVar13;
+                              componentUint4 = (uint)(int)scaledComponent;
+                              fctiwzSlotF8 = (longlong)(int)componentUint4;
                             }
                             columnsLeft2 = columnsLeft2 + -1;
-                            *dstPixel = componentUint & 0xff000000 | uVar18 >> 8 & 0xff0000 |
-                                       uVar12 >> 0x10 & 0xff00 | uVar13 >> 0x18;
+                            *dstPixel = componentUint & 0xff000000 | componentUint2 >> 8 & 0xff0000 |
+                                       componentUint3 >> 0x10 & 0xff00 | componentUint4 >> 0x18;
                             srcPixel = srcPixel + srcPixelStride;
                             dstPixel = dstPixel + 1;
                           } while (columnsLeft2 != 0);
@@ -7476,7 +7487,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
           }
           else {
-            if (uVar3 == 0x8366) {
+            if (dstType == 0x8366) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -7484,22 +7495,22 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   if (0 < (int)height) {
                     do {
                       if (0 < width) {
-                        local_90 = float65535;
+                        scaleSpill = float65535;
                         dstPixel = dstRow;
                         columnsLeft2 = width;
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
-                          (*modifyPixelFunc)(glContext,auStack_1b0);
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
+                          (*modifyPixelFunc)(glContext,pixelRecord);
                           columnsLeft2 = columnsLeft2 + -1;
-                          local_c8 = (longlong)(int)(local_1a0 * float65535);
-                          local_d0 = (longlong)(int)(local_1ac * float65535);
-                          local_d8 = (longlong)(int)(local_1a8 * float65535);
-                          local_e0 = (longlong)(int)(local_1a4 * float65535);
+                          fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float65535);
+                          fctiwzSlotD0 = (longlong)(int)(pixelRed * float65535);
+                          fctiwzSlotD8 = (longlong)(int)(pixelGreen * float65535);
+                          fctiwzSlotE0 = (longlong)(int)(pixelBlue * float65535);
                           *(ushort *)dstPixel =
-                               (ushort)(int)(local_1a0 * float65535) & 0x8000 |
-                               (ushort)((uint)(int)(local_1ac * float65535) >> 1) & 0x7c00 |
-                               (ushort)((uint)(int)(local_1a8 * float65535) >> 6) & 0x3e0 |
-                               (ushort)((uint)(int)(local_1a4 * float65535) >> 0xb) & 0x1f;
+                               (ushort)(int)(pixelAlpha * float65535) & 0x8000 |
+                               (ushort)((uint)(int)(pixelRed * float65535) >> 1) & 0x7c00 |
+                               (ushort)((uint)(int)(pixelGreen * float65535) >> 6) & 0x3e0 |
+                               (ushort)((uint)(int)(pixelBlue * float65535) >> 0xb) & 0x1f;
                           dstPixel = (uint *)((int)dstPixel + 2);
                           srcPixel = srcPixel + srcPixelStride;
                         } while (columnsLeft2 != 0);
@@ -7516,8 +7527,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               goto LAB_0002e240;
             }
-            if (uVar3 < 0x8367) {
-              if (uVar3 == 0x8365) {
+            if (dstType < 0x8367) {
+              if (dstType == 0x8365) {
                 if (0 < (int)depth) {
                   do {
                     rowsLeft = height;
@@ -7525,22 +7536,22 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     if (0 < (int)height) {
                       do {
                         if (0 < width) {
-                          local_90 = float65535;
+                          scaleSpill = float65535;
                           dstPixel = dstRow;
                           columnsLeft2 = width;
                           do {
-                            (*extractPixelFunc)(auStack_1b0,srcPixel);
-                            (*modifyPixelFunc)(glContext,auStack_1b0);
+                            (*extractPixelFunc)(pixelRecord,srcPixel);
+                            (*modifyPixelFunc)(glContext,pixelRecord);
                             columnsLeft2 = columnsLeft2 + -1;
-                            local_c8 = (longlong)(int)(local_1a0 * float65535);
-                            local_d0 = (longlong)(int)(local_1ac * float65535);
-                            local_d8 = (longlong)(int)(local_1a8 * float65535);
-                            local_e0 = (longlong)(int)(local_1a4 * float65535);
+                            fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float65535);
+                            fctiwzSlotD0 = (longlong)(int)(pixelRed * float65535);
+                            fctiwzSlotD8 = (longlong)(int)(pixelGreen * float65535);
+                            fctiwzSlotE0 = (longlong)(int)(pixelBlue * float65535);
                             *(ushort *)dstPixel =
-                                 (ushort)(int)(local_1a0 * float65535) & 0xf000 |
-                                 (ushort)((uint)(int)(local_1ac * float65535) >> 4) & 0xf00 |
-                                 (ushort)((uint)(int)(local_1a8 * float65535) >> 8) & 0xf0 |
-                                 (ushort)((uint)(int)(local_1a4 * float65535) >> 0xc) & 0xf;
+                                 (ushort)(int)(pixelAlpha * float65535) & 0xf000 |
+                                 (ushort)((uint)(int)(pixelRed * float65535) >> 4) & 0xf00 |
+                                 (ushort)((uint)(int)(pixelGreen * float65535) >> 8) & 0xf0 |
+                                 (ushort)((uint)(int)(pixelBlue * float65535) >> 0xc) & 0xf;
                             dstPixel = (uint *)((int)dstPixel + 2);
                             srcPixel = srcPixel + srcPixelStride;
                           } while (columnsLeft2 != 0);
@@ -7559,7 +7570,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
             }
             else {
-              if (uVar3 == 0x8367) {
+              if (dstType == 0x8367) {
                 if (0 < (int)depth) {
                   do {
                     rowsLeft = height;
@@ -7571,48 +7582,48 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         columnsLeft2 = width;
                         if (0 < width) {
                           do {
-                            (*extractPixelFunc)(auStack_1b0,srcPixel);
-                            (*modifyPixelFunc)(glContext,auStack_1b0);
-                            scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                            (*extractPixelFunc)(pixelRecord,srcPixel);
+                            (*modifyPixelFunc)(glContext,pixelRecord);
+                            scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                             if (twoPow31 <= scaledComponent) {
                               componentUint = (uint)(int)(scaledComponent - twoPow31);
-                              local_d0 = (longlong)(int)componentUint;
+                              fctiwzSlotD0 = (longlong)(int)componentUint;
                               componentUint = componentUint ^ 0x80000000;
                             }
                             else {
                               componentUint = (uint)(int)scaledComponent;
-                              local_c8 = (longlong)(int)componentUint;
+                              fctiwzSlotC8 = (longlong)(int)componentUint;
                             }
-                            scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar18 = (uint)(int)scaledComponent;
-                              local_d8 = (longlong)(int)uVar18;
+                              componentUint2 = (uint)(int)scaledComponent;
+                              fctiwzSlotD8 = (longlong)(int)componentUint2;
                             }
-                            scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar12 = (uint)(int)scaledComponent;
-                              local_e8 = (longlong)(int)uVar12;
+                              componentUint3 = (uint)(int)scaledComponent;
+                              fctiwzSlotE8 = (longlong)(int)componentUint3;
                             }
-                            scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar13 = (uint)(int)scaledComponent;
-                              local_f8 = (longlong)(int)uVar13;
+                              componentUint4 = (uint)(int)scaledComponent;
+                              fctiwzSlotF8 = (longlong)(int)componentUint4;
                             }
                             columnsLeft2 = columnsLeft2 + -1;
-                            *dstPixel = componentUint & 0xff000000 | uVar18 >> 8 & 0xff0000 |
-                                       uVar12 >> 0x10 & 0xff00 | uVar13 >> 0x18;
+                            *dstPixel = componentUint & 0xff000000 | componentUint2 >> 8 & 0xff0000 |
+                                       componentUint3 >> 0x10 & 0xff00 | componentUint4 >> 0x18;
                             srcPixel = srcPixel + srcPixelStride;
                             dstPixel = dstPixel + 1;
                           } while (columnsLeft2 != 0);
@@ -7629,7 +7640,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 goto LAB_0002e240;
               }
-              if (uVar3 == 0x8368) {
+              if (dstType == 0x8368) {
                 if (0 < (int)depth) {
                   do {
                     rowsLeft = height;
@@ -7641,48 +7652,48 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         columnsLeft2 = width;
                         if (0 < width) {
                           do {
-                            (*extractPixelFunc)(auStack_1b0,srcPixel);
-                            (*modifyPixelFunc)(glContext,auStack_1b0);
-                            scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                            (*extractPixelFunc)(pixelRecord,srcPixel);
+                            (*modifyPixelFunc)(glContext,pixelRecord);
+                            scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                             if (twoPow31 <= scaledComponent) {
                               componentUint = (uint)(int)(scaledComponent - twoPow31);
-                              local_d0 = (longlong)(int)componentUint;
+                              fctiwzSlotD0 = (longlong)(int)componentUint;
                               componentUint = componentUint ^ 0x80000000;
                             }
                             else {
                               componentUint = (uint)(int)scaledComponent;
-                              local_c8 = (longlong)(int)componentUint;
+                              fctiwzSlotC8 = (longlong)(int)componentUint;
                             }
-                            scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar18 = (uint)(int)scaledComponent;
-                              local_d8 = (longlong)(int)uVar18;
+                              componentUint2 = (uint)(int)scaledComponent;
+                              fctiwzSlotD8 = (longlong)(int)componentUint2;
                             }
-                            scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar12 = (uint)(int)scaledComponent;
-                              local_e8 = (longlong)(int)uVar12;
+                              componentUint3 = (uint)(int)scaledComponent;
+                              fctiwzSlotE8 = (longlong)(int)componentUint3;
                             }
-                            scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                            scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                             if (DOUBLE_00108d80 <= scaledComponent) {
-                              local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                              uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                              fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                              componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                             }
                             else {
-                              uVar13 = (uint)(int)scaledComponent;
-                              local_f8 = (longlong)(int)uVar13;
+                              componentUint4 = (uint)(int)scaledComponent;
+                              fctiwzSlotF8 = (longlong)(int)componentUint4;
                             }
                             columnsLeft2 = columnsLeft2 + -1;
-                            *dstPixel = componentUint & 0xc0000000 | uVar18 >> 2 & 0x3ff00000 |
-                                       uVar12 >> 0xc & 0xffc00 | uVar13 >> 0x16;
+                            *dstPixel = componentUint & 0xc0000000 | componentUint2 >> 2 & 0x3ff00000 |
+                                       componentUint3 >> 0xc & 0xffc00 | componentUint4 >> 0x16;
                             srcPixel = srcPixel + srcPixelStride;
                             dstPixel = dstPixel + 1;
                           } while (columnsLeft2 != 0);
@@ -7714,57 +7725,57 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      local_1ac = floatZero;
-                      local_1a8 = floatZero;
-                      local_1a4 = floatZero;
-                      local_1a0 = floatOne2;
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      (*modifyPixelFunc)(glContext,auStack_1b0);
-                      if (floatOne2 < local_1a4) {
+                      pixelRed = floatZero;
+                      pixelGreen = floatZero;
+                      pixelBlue = floatZero;
+                      pixelAlpha = floatOne2;
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      (*modifyPixelFunc)(glContext,pixelRecord);
+                      if (floatOne2 < pixelBlue) {
                         componentByte = 0xff;
                       }
                       else {
                         componentByte = 0;
-                        if (!(local_1a4 < floatZero)) {
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * float255C);
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)(int)(local_1a4 * float255C);
+                        if (!(pixelBlue < floatZero)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelBlue * float255C);
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)(int)(pixelBlue * float255C);
                         }
                       }
                       *(undefined1 *)dstPixel = componentByte;
-                      if (floatOne2 < local_1a8) {
+                      if (floatOne2 < pixelGreen) {
                         componentByte = 0xff;
                       }
                       else {
                         componentByte = 0;
-                        if (!(local_1a8 < floatZero)) {
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * float255C);
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)(int)(local_1a8 * float255C);
+                        if (!(pixelGreen < floatZero)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelGreen * float255C);
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)(int)(pixelGreen * float255C);
                         }
                       }
                       *(undefined1 *)((int)dstPixel + 1) = componentByte;
-                      if (floatOne2 < local_1ac) {
+                      if (floatOne2 < pixelRed) {
                         componentByte = 0xff;
                       }
                       else {
                         componentByte = 0;
-                        if (!(local_1ac < floatZero)) {
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float255C);
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)(int)(local_1ac * float255C);
+                        if (!(pixelRed < floatZero)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float255C);
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)(int)(pixelRed * float255C);
                         }
                       }
                       *(undefined1 *)((int)dstPixel + 2) = componentByte;
-                      if (floatOne2 < local_1a0) {
+                      if (floatOne2 < pixelAlpha) {
                         componentByte = 0xff;
                       }
                       else {
                         componentByte = 0;
-                        if (!(local_1a0 < floatZero)) {
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * float255C);
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)(int)(local_1a0 * float255C);
+                        if (!(pixelAlpha < floatZero)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelAlpha * float255C);
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float255C);
                         }
                       }
                       columnsLeft = columnsLeft + -1;
@@ -7785,10 +7796,10 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           }
           goto LAB_0002e240;
         }
-        uVar14 = 0x86dc;
+        compareFormat = 0x86dc;
       }
       else {
-        if (uVar3 == 0x86f5) {
+        if (dstFormat == 0x86f5) {
           if (0 < (int)depth) {
             do {
               rowsLeft = height;
@@ -7802,31 +7813,31 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      (*modifyPixelFunc)(glContext,auStack_1b0);
-                      if (floatOne < local_188) {
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      (*modifyPixelFunc)(glContext,pixelRecord);
+                      if (floatOne < pixelDs) {
                         componentByte = 0x7f;
                       }
                       else {
                         componentByte = 0x81;
-                        if (!(local_188 < floatMinusOne)) {
-                          scaledInt = (int)(local_188 * float127B);
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)scaledInt;
+                        if (!(pixelDs < floatMinusOne)) {
+                          scaledInt = (int)(pixelDs * float127B);
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)scaledInt;
                         }
                       }
                       *(undefined1 *)dstPixel = componentByte;
-                      if (floatOne < local_184) {
+                      if (floatOne < pixelDt) {
                         componentByte = 0x7f;
                       }
                       else {
                         componentByte = 0x81;
-                        if (!(local_184 < floatMinusOne)) {
-                          scaledInt = (int)(local_184 * float127B);
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)scaledInt;
+                        if (!(pixelDt < floatMinusOne)) {
+                          scaledInt = (int)(pixelDt * float127B);
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)scaledInt;
                         }
                       }
                       columnsLeft = columnsLeft + -1;
@@ -7847,9 +7858,9 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           }
           goto LAB_0002e240;
         }
-        uVar14 = 0x86f6;
+        compareFormat = 0x86f6;
       }
-      if (uVar3 == uVar14) {
+      if (dstFormat == compareFormat) {
         if (0 < (int)depth) {
           do {
             dstRow = dstSlice;
@@ -7866,57 +7877,57 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   columnsLeft = width;
                   dstPixel = dstRow;
                   do {
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
-                    (*modifyPixelFunc)(glContext,auStack_1b0);
-                    if (floatOne2 < local_1ac) {
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
+                    (*modifyPixelFunc)(glContext,pixelRecord);
+                    if (floatOne2 < pixelRed) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1ac < floatZero)) {
-                        scaledInt = (int)(local_1ac * float255);
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)scaledInt;
+                      if (!(pixelRed < floatZero)) {
+                        scaledInt = (int)(pixelRed * float255);
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)scaledInt;
                       }
                     }
                     *(undefined1 *)dstPixel = componentByte;
-                    if (floatOne2 < local_180) {
+                    if (floatOne2 < pixelMagnitude) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_180 < floatZero)) {
-                        scaledInt = (int)(local_180 * float255);
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)scaledInt;
+                      if (!(pixelMagnitude < floatZero)) {
+                        scaledInt = (int)(pixelMagnitude * float255);
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)scaledInt;
                       }
                     }
                     *(undefined1 *)((int)dstPixel + 1) = componentByte;
-                    if (floatOne2 < local_184) {
+                    if (floatOne2 < pixelDt) {
                       componentByte = 0x7f;
                     }
                     else {
                       componentByte = 0x81;
-                      if (!(local_184 < floatMinusOne2)) {
-                        scaledInt = (int)(local_184 * float127);
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)scaledInt;
+                      if (!(pixelDt < floatMinusOne2)) {
+                        scaledInt = (int)(pixelDt * float127);
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)scaledInt;
                       }
                     }
                     puVar30[-1] = componentByte;
-                    if (floatOne2 < local_188) {
+                    if (floatOne2 < pixelDs) {
                       componentByte = 0x7f;
                     }
                     else {
                       componentByte = 0x81;
-                      if (!(local_188 < floatMinusOne2)) {
-                        scaledInt = (int)(local_188 * float127);
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)scaledInt;
+                      if (!(pixelDs < floatMinusOne2)) {
+                        scaledInt = (int)(pixelDs * float127);
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)scaledInt;
                       }
                     }
                     columnsLeft = columnsLeft + -1;
@@ -7953,17 +7964,17 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               dstPixel = dstRow;
               if (0 < width) {
                 do {
-                  (*extractPixelFunc)(auStack_1b0,srcPixel);
-                  _gleModifyPixelSignedRGBA(glContext,auStack_1b0);
-                  if (floatOne < local_1ac) {
+                  (*extractPixelFunc)(pixelRecord,srcPixel);
+                  _gleModifyPixelSignedRGBA(glContext,pixelRecord);
+                  if (floatOne < pixelRed) {
                     componentByte = 0x7f;
                   }
                   else {
                     componentByte = 0x81;
-                    if (!(local_1ac < floatMinusOne)) {
-                      (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float127B);
-                      componentByte = (undefined1)local_c8;
-                      local_c8 = (longlong)(int)(local_1ac * float127B);
+                    if (!(pixelRed < floatMinusOne)) {
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float127B);
+                      componentByte = (undefined1)fctiwzSlotC8;
+                      fctiwzSlotC8 = (longlong)(int)(pixelRed * float127B);
                     }
                   }
                   columnsLeft = columnsLeft + -1;
@@ -7996,18 +8007,18 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             dstPixel = dstRow;
             if (0 < width) {
               do {
-                local_1ac = floatOne2;
-                (*extractPixelFunc)(auStack_1b0,srcPixel);
-                (*modifyPixelFunc)(glContext,auStack_1b0);
-                if (floatOne2 < local_1ac) {
+                pixelRed = floatOne2;
+                (*extractPixelFunc)(pixelRecord,srcPixel);
+                (*modifyPixelFunc)(glContext,pixelRecord);
+                if (floatOne2 < pixelRed) {
                   componentByte = 0xff;
                 }
                 else {
                   componentByte = 0;
-                  if (!(local_1ac < floatZero)) {
-                    (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float255C);
-                    componentByte = (undefined1)local_c8;
-                    local_c8 = (longlong)(int)(local_1ac * float255C);
+                  if (!(pixelRed < floatZero)) {
+                    (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float255C);
+                    componentByte = (undefined1)fctiwzSlotC8;
+                    fctiwzSlotC8 = (longlong)(int)(pixelRed * float255C);
                   }
                 }
                 columnsLeft = columnsLeft + -1;
@@ -8028,8 +8039,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
     }
     goto LAB_0002e240;
   }
-  uVar3 = *(ushort *)(textureLevel + 0x10);
-  if (uVar3 == 0x190a) {
+  dstFormat = *(ushort *)(textureLevel + 0x10);
+  if (dstFormat == 0x190a) {
     if (*(short *)(textureLevel + 0x12) == 1) {
       if (0 < (int)depth) {
         do {
@@ -8044,30 +8055,30 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               dstPixel = dstRow;
               if (0 < width) {
                 do {
-                  (*extractPixelFunc)(auStack_1b0,srcPixel);
-                  if (floatOne < local_1a0) {
+                  (*extractPixelFunc)(pixelRecord,srcPixel);
+                  if (floatOne < pixelAlpha) {
                     componentByte = 0x7f;
                   }
                   else {
                     componentByte = 0x81;
-                    if (!(local_1a0 < floatMinusOne)) {
-                      scaledInt = (int)(local_1a0 * float127B);
-                      (*(unsigned char *)((unsigned char *)&(local_100) + 7)) = (undefined1)scaledInt;
-                      componentByte = (undefined1)local_100;
-                      local_100 = (longlong)scaledInt;
+                    if (!(pixelAlpha < floatMinusOne)) {
+                      scaledInt = (int)(pixelAlpha * float127B);
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlot100) + 7)) = (undefined1)scaledInt;
+                      componentByte = (undefined1)fctiwzSlot100;
+                      fctiwzSlot100 = (longlong)scaledInt;
                     }
                   }
                   *(undefined1 *)dstPixel = componentByte;
-                  if (floatOne < local_1ac) {
+                  if (floatOne < pixelRed) {
                     componentByte = 0x7f;
                   }
                   else {
                     componentByte = 0x81;
-                    if (!(local_1ac < floatMinusOne)) {
-                      scaledInt = (int)(local_1ac * float127B);
-                      (*(unsigned char *)((unsigned char *)&(local_100) + 7)) = (undefined1)scaledInt;
-                      componentByte = (undefined1)local_100;
-                      local_100 = (longlong)scaledInt;
+                    if (!(pixelRed < floatMinusOne)) {
+                      scaledInt = (int)(pixelRed * float127B);
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlot100) + 7)) = (undefined1)scaledInt;
+                      componentByte = (undefined1)fctiwzSlot100;
+                      fctiwzSlot100 = (longlong)scaledInt;
                     }
                   }
                   columnsLeft = columnsLeft + -1;
@@ -8100,30 +8111,30 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             dstPixel = dstRow;
             if (0 < width) {
               do {
-                (*extractPixelFunc)(auStack_1b0,srcPixel);
-                if (floatOne2 < local_1ac) {
+                (*extractPixelFunc)(pixelRecord,srcPixel);
+                if (floatOne2 < pixelRed) {
                   componentByte = 0xff;
                 }
                 else {
                   componentByte = 0;
-                  if (!(local_1ac < floatZero)) {
-                    scaledInt = (int)(local_1ac * float255C);
-                    (*(unsigned char *)((unsigned char *)&(local_100) + 7)) = (undefined1)scaledInt;
-                    componentByte = (undefined1)local_100;
-                    local_100 = (longlong)scaledInt;
+                  if (!(pixelRed < floatZero)) {
+                    scaledInt = (int)(pixelRed * float255C);
+                    (*(unsigned char *)((unsigned char *)&(fctiwzSlot100) + 7)) = (undefined1)scaledInt;
+                    componentByte = (undefined1)fctiwzSlot100;
+                    fctiwzSlot100 = (longlong)scaledInt;
                   }
                 }
                 *(undefined1 *)dstPixel = componentByte;
-                if (floatOne2 < local_1a0) {
+                if (floatOne2 < pixelAlpha) {
                   componentByte = 0xff;
                 }
                 else {
                   componentByte = 0;
-                  if (!(local_1a0 < floatZero)) {
-                    scaledInt = (int)(local_1a0 * float255C);
-                    (*(unsigned char *)((unsigned char *)&(local_100) + 7)) = (undefined1)scaledInt;
-                    componentByte = (undefined1)local_100;
-                    local_100 = (longlong)scaledInt;
+                  if (!(pixelAlpha < floatZero)) {
+                    scaledInt = (int)(pixelAlpha * float255C);
+                    (*(unsigned char *)((unsigned char *)&(fctiwzSlot100) + 7)) = (undefined1)scaledInt;
+                    componentByte = (undefined1)fctiwzSlot100;
+                    fctiwzSlot100 = (longlong)scaledInt;
                   }
                 }
                 columnsLeft = columnsLeft + -1;
@@ -8144,10 +8155,10 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
     }
     goto LAB_0002e240;
   }
-  if (uVar3 < 0x190b) {
-    if (uVar3 == 0x1907) {
-      uVar3 = *(ushort *)(textureLevel + 0x12);
-      if (uVar3 == 0x8362) {
+  if (dstFormat < 0x190b) {
+    if (dstFormat == 0x1907) {
+      dstType = *(ushort *)(textureLevel + 0x12);
+      if (dstType == 0x8362) {
         if (0 < (int)depth) {
           do {
             rowsLeft = height;
@@ -8159,15 +8170,15 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 dstPixel = dstRow;
                 if (0 < width) {
                   do {
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
                     columnsLeft2 = columnsLeft2 + -1;
-                    local_f0 = (longlong)(int)(local_1a4 * float255B);
-                    local_f8 = (longlong)(int)(local_1a8 * float255B);
-                    local_100 = (longlong)(int)(local_1ac * float255B);
+                    fctiwzSlotF0 = (longlong)(int)(pixelBlue * float255B);
+                    fctiwzSlotF8 = (longlong)(int)(pixelGreen * float255B);
+                    fctiwzSlot100 = (longlong)(int)(pixelRed * float255B);
                     *(byte *)dstPixel =
-                         (byte)(int)(local_1a4 * float255B) & 0xc0 |
-                         (byte)((uint)(int)(local_1a8 * float255B) >> 2) & 0x38 |
-                         (byte)((uint)(int)(local_1ac * float255B) >> 5) & 7;
+                         (byte)(int)(pixelBlue * float255B) & 0xc0 |
+                         (byte)((uint)(int)(pixelGreen * float255B) >> 2) & 0x38 |
+                         (byte)((uint)(int)(pixelRed * float255B) >> 5) & 7;
                     srcPixel = srcPixel + srcPixelStride;
                     dstPixel = (uint *)((int)dstPixel + 1);
                   } while (columnsLeft2 != 0);
@@ -8184,8 +8195,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
         }
         goto LAB_0002e240;
       }
-      if (uVar3 < 0x8363) {
-        if (uVar3 == 8) {
+      if (dstType < 0x8363) {
+        if (dstType == 8) {
           if (0 < (int)depth) {
             do {
               rowsLeft = height;
@@ -8199,41 +8210,41 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
                       *(undefined1 *)dstPixel = 0x7f;
-                      if (floatOne < local_1ac) {
+                      if (floatOne < pixelRed) {
                         componentByte = 0x7f;
                       }
                       else {
                         componentByte = 0x81;
-                        if (!(local_1ac < floatMinusOne)) {
-                          (*(unsigned char *)((unsigned char *)&(local_f0) + 7)) = (undefined1)(int)(local_1ac * float127B);
-                          componentByte = (undefined1)local_f0;
-                          local_f0 = (longlong)(int)(local_1ac * float127B);
+                        if (!(pixelRed < floatMinusOne)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotF0) + 7)) = (undefined1)(int)(pixelRed * float127B);
+                          componentByte = (undefined1)fctiwzSlotF0;
+                          fctiwzSlotF0 = (longlong)(int)(pixelRed * float127B);
                         }
                       }
                       *(undefined1 *)((int)dstPixel + 1) = componentByte;
-                      if (floatOne < local_1a8) {
+                      if (floatOne < pixelGreen) {
                         componentByte = 0x7f;
                       }
                       else {
                         componentByte = 0x81;
-                        if (!(local_1a8 < floatMinusOne)) {
-                          (*(unsigned char *)((unsigned char *)&(local_f0) + 7)) = (undefined1)(int)(local_1a8 * float127B);
-                          componentByte = (undefined1)local_f0;
-                          local_f0 = (longlong)(int)(local_1a8 * float127B);
+                        if (!(pixelGreen < floatMinusOne)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotF0) + 7)) = (undefined1)(int)(pixelGreen * float127B);
+                          componentByte = (undefined1)fctiwzSlotF0;
+                          fctiwzSlotF0 = (longlong)(int)(pixelGreen * float127B);
                         }
                       }
                       *(undefined1 *)((int)dstPixel + 2) = componentByte;
-                      if (floatOne < local_1a4) {
+                      if (floatOne < pixelBlue) {
                         componentByte = 0x7f;
                       }
                       else {
                         componentByte = 0x81;
-                        if (!(local_1a4 < floatMinusOne)) {
-                          (*(unsigned char *)((unsigned char *)&(local_f0) + 7)) = (undefined1)(int)(local_1a4 * float127B);
-                          componentByte = (undefined1)local_f0;
-                          local_f0 = (longlong)(int)(local_1a4 * float127B);
+                        if (!(pixelBlue < floatMinusOne)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotF0) + 7)) = (undefined1)(int)(pixelBlue * float127B);
+                          componentByte = (undefined1)fctiwzSlotF0;
+                          fctiwzSlotF0 = (longlong)(int)(pixelBlue * float127B);
                         }
                       }
                       columnsLeft = columnsLeft + -1;
@@ -8254,7 +8265,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           }
           goto LAB_0002e240;
         }
-        if (uVar3 == 0x8032) {
+        if (dstType == 0x8032) {
           if (0 < (int)depth) {
             do {
               rowsLeft = height;
@@ -8266,15 +8277,15 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
                       columnsLeft2 = columnsLeft2 + -1;
-                      local_100 = (longlong)(int)(local_1ac * float255B);
-                      local_f8 = (longlong)(int)(local_1a8 * float255B);
-                      local_f0 = (longlong)(int)(local_1a4 * float255B);
+                      fctiwzSlot100 = (longlong)(int)(pixelRed * float255B);
+                      fctiwzSlotF8 = (longlong)(int)(pixelGreen * float255B);
+                      fctiwzSlotF0 = (longlong)(int)(pixelBlue * float255B);
                       *(byte *)dstPixel =
-                           (byte)(int)(local_1ac * float255B) & 0xe0 |
-                           (byte)((uint)(int)(local_1a8 * float255B) >> 3) & 0x1c |
-                           (byte)((uint)(int)(local_1a4 * float255B) >> 6) & 3;
+                           (byte)(int)(pixelRed * float255B) & 0xe0 |
+                           (byte)((uint)(int)(pixelGreen * float255B) >> 3) & 0x1c |
+                           (byte)((uint)(int)(pixelBlue * float255B) >> 6) & 3;
                       srcPixel = srcPixel + srcPixelStride;
                       dstPixel = (uint *)((int)dstPixel + 1);
                     } while (columnsLeft2 != 0);
@@ -8293,7 +8304,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
         }
       }
       else {
-        if (uVar3 == 0x8363) {
+        if (dstType == 0x8363) {
           if (0 < (int)depth) {
             do {
               rowsLeft = height;
@@ -8301,19 +8312,19 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               if (0 < (int)height) {
                 do {
                   if (0 < width) {
-                    local_90 = float65535;
+                    scaleSpill = float65535;
                     dstPixel = dstRow;
                     columnsLeft2 = width;
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
                       columnsLeft2 = columnsLeft2 + -1;
-                      local_f0 = (longlong)(int)(local_1ac * float65535);
-                      local_f8 = (longlong)(int)(local_1a8 * float65535);
-                      local_100 = (longlong)(int)(local_1a4 * float65535);
+                      fctiwzSlotF0 = (longlong)(int)(pixelRed * float65535);
+                      fctiwzSlotF8 = (longlong)(int)(pixelGreen * float65535);
+                      fctiwzSlot100 = (longlong)(int)(pixelBlue * float65535);
                       *(ushort *)dstPixel =
-                           (ushort)(int)(local_1ac * float65535) & 0xf800 |
-                           (ushort)((uint)(int)(local_1a8 * float65535) >> 5) & 0x7e0 |
-                           (ushort)((uint)(int)(local_1a4 * float65535) >> 0xb) & 0x1f;
+                           (ushort)(int)(pixelRed * float65535) & 0xf800 |
+                           (ushort)((uint)(int)(pixelGreen * float65535) >> 5) & 0x7e0 |
+                           (ushort)((uint)(int)(pixelBlue * float65535) >> 0xb) & 0x1f;
                       dstPixel = (uint *)((int)dstPixel + 2);
                       srcPixel = srcPixel + srcPixelStride;
                     } while (columnsLeft2 != 0);
@@ -8330,7 +8341,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           }
           goto LAB_0002e240;
         }
-        if (uVar3 == 0x8364) {
+        if (dstType == 0x8364) {
           if (0 < (int)depth) {
             do {
               rowsLeft = height;
@@ -8338,19 +8349,19 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               if (0 < (int)height) {
                 do {
                   if (0 < width) {
-                    local_90 = float65535;
+                    scaleSpill = float65535;
                     dstPixel = dstRow;
                     columnsLeft2 = width;
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
                       columnsLeft2 = columnsLeft2 + -1;
-                      local_f0 = (longlong)(int)(local_1a4 * float65535);
-                      local_f8 = (longlong)(int)(local_1a8 * float65535);
-                      local_100 = (longlong)(int)(local_1ac * float65535);
+                      fctiwzSlotF0 = (longlong)(int)(pixelBlue * float65535);
+                      fctiwzSlotF8 = (longlong)(int)(pixelGreen * float65535);
+                      fctiwzSlot100 = (longlong)(int)(pixelRed * float65535);
                       *(ushort *)dstPixel =
-                           (ushort)(int)(local_1a4 * float65535) & 0xf800 |
-                           (ushort)((uint)(int)(local_1a8 * float65535) >> 5) & 0x7e0 |
-                           (ushort)((uint)(int)(local_1ac * float65535) >> 0xb) & 0x1f;
+                           (ushort)(int)(pixelBlue * float65535) & 0xf800 |
+                           (ushort)((uint)(int)(pixelGreen * float65535) >> 5) & 0x7e0 |
+                           (ushort)((uint)(int)(pixelRed * float65535) >> 0xb) & 0x1f;
                       dstPixel = (uint *)((int)dstPixel + 2);
                       srcPixel = srcPixel + srcPixelStride;
                     } while (columnsLeft2 != 0);
@@ -8381,40 +8392,40 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               dstPixel = dstRow;
               if (0 < width) {
                 do {
-                  (*extractPixelFunc)(auStack_1b0,srcPixel);
-                  if (floatOne2 < local_1ac) {
+                  (*extractPixelFunc)(pixelRecord,srcPixel);
+                  if (floatOne2 < pixelRed) {
                     componentByte = 0xff;
                   }
                   else {
                     componentByte = 0;
-                    if (!(local_1ac < floatZero)) {
-                      (*(unsigned char *)((unsigned char *)&(local_f0) + 7)) = (undefined1)(int)(local_1ac * float255C);
-                      componentByte = (undefined1)local_f0;
-                      local_f0 = (longlong)(int)(local_1ac * float255C);
+                    if (!(pixelRed < floatZero)) {
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlotF0) + 7)) = (undefined1)(int)(pixelRed * float255C);
+                      componentByte = (undefined1)fctiwzSlotF0;
+                      fctiwzSlotF0 = (longlong)(int)(pixelRed * float255C);
                     }
                   }
                   *(undefined1 *)dstPixel = componentByte;
-                  if (floatOne2 < local_1a8) {
+                  if (floatOne2 < pixelGreen) {
                     componentByte = 0xff;
                   }
                   else {
                     componentByte = 0;
-                    if (!(local_1a8 < floatZero)) {
-                      (*(unsigned char *)((unsigned char *)&(local_f0) + 7)) = (undefined1)(int)(local_1a8 * float255C);
-                      componentByte = (undefined1)local_f0;
-                      local_f0 = (longlong)(int)(local_1a8 * float255C);
+                    if (!(pixelGreen < floatZero)) {
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlotF0) + 7)) = (undefined1)(int)(pixelGreen * float255C);
+                      componentByte = (undefined1)fctiwzSlotF0;
+                      fctiwzSlotF0 = (longlong)(int)(pixelGreen * float255C);
                     }
                   }
                   *(undefined1 *)((int)dstPixel + 1) = componentByte;
-                  if (floatOne2 < local_1a4) {
+                  if (floatOne2 < pixelBlue) {
                     componentByte = 0xff;
                   }
                   else {
                     componentByte = 0;
-                    if (!(local_1a4 < floatZero)) {
-                      (*(unsigned char *)((unsigned char *)&(local_f0) + 7)) = (undefined1)(int)(local_1a4 * float255C);
-                      componentByte = (undefined1)local_f0;
-                      local_f0 = (longlong)(int)(local_1a4 * float255C);
+                    if (!(pixelBlue < floatZero)) {
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlotF0) + 7)) = (undefined1)(int)(pixelBlue * float255C);
+                      componentByte = (undefined1)fctiwzSlotF0;
+                      fctiwzSlotF0 = (longlong)(int)(pixelBlue * float255C);
                     }
                   }
                   columnsLeft = columnsLeft + -1;
@@ -8435,8 +8446,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
       }
       goto LAB_0002e240;
     }
-    if (uVar3 < 0x1908) {
-      if (uVar3 == 0x1902) {
+    if (dstFormat < 0x1908) {
+      if (dstFormat == 0x1902) {
         if (*(short *)(textureLevel + 0x12) == 0x1405) {
           if (0 < (int)depth) {
             do {
@@ -8449,16 +8460,16 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      scaledComponent = (double)local_19c * uint32MaxAsDouble;
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      scaledComponent = (double)pixelDepth * uint32MaxAsDouble;
                       if (twoPow31 <= scaledComponent) {
                         componentUint = (uint)(int)(scaledComponent - twoPow31);
-                        local_d0 = (longlong)(int)componentUint;
+                        fctiwzSlotD0 = (longlong)(int)componentUint;
                         componentUint = componentUint ^ 0x80000000;
                       }
                       else {
                         componentUint = (uint)(int)scaledComponent;
-                        local_c8 = (longlong)(int)componentUint;
+                        fctiwzSlotC8 = (longlong)(int)componentUint;
                       }
                       columnsLeft = columnsLeft + -1;
                       *dstPixel = componentUint;
@@ -8485,14 +8496,14 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             if (0 < (int)height) {
               do {
                 if (0 < width) {
-                  local_90 = float65535;
+                  scaleSpill = float65535;
                   columnsLeft = width;
                   dstPixel = dstRow;
                   do {
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
                     columnsLeft = columnsLeft + -1;
-                    scaledInt = (int)(local_19c * float65535);
-                    local_c8 = (longlong)scaledInt;
+                    scaledInt = (int)(pixelDepth * float65535);
+                    fctiwzSlotC8 = (longlong)scaledInt;
                     *(short *)dstPixel = (short)scaledInt;
                     dstPixel = (uint *)((int)dstPixel + componentCount * 2);
                     srcPixel = srcPixel + srcPixelStride;
@@ -8510,7 +8521,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
         }
         goto LAB_0002e240;
       }
-      if (uVar3 == 0x1906) {
+      if (dstFormat == 0x1906) {
         if (*(short *)(textureLevel + 0x12) == 0x1400) {
           if (0 < (int)depth) {
             do {
@@ -8525,16 +8536,16 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      if (floatOne2 < local_1a0) {
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      if (floatOne2 < pixelAlpha) {
                         componentByte = 0xff;
                       }
                       else {
                         componentByte = 0;
-                        if (!(local_1a0 < floatZero)) {
-                          (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * float255C);
-                          componentByte = (undefined1)local_c8;
-                          local_c8 = (longlong)(int)(local_1a0 * float255C);
+                        if (!(pixelAlpha < floatZero)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelAlpha * float255C);
+                          componentByte = (undefined1)fctiwzSlotC8;
+                          fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float255C);
                         }
                       }
                       columnsLeft = columnsLeft + -1;
@@ -8567,16 +8578,16 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 dstPixel = dstRow;
                 if (0 < width) {
                   do {
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
-                    if (floatOne2 < local_1a0) {
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
+                    if (floatOne2 < pixelAlpha) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1a0 < floatZero)) {
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * float255C);
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)(int)(local_1a0 * float255C);
+                      if (!(pixelAlpha < floatZero)) {
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelAlpha * float255C);
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float255C);
                       }
                     }
                     columnsLeft = columnsLeft + -1;
@@ -8599,9 +8610,9 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
       }
     }
     else {
-      if (uVar3 == 0x1908) {
-        uVar3 = *(ushort *)(textureLevel + 0x12);
-        if (uVar3 == 0x8035) {
+      if (dstFormat == 0x1908) {
+        dstType = *(ushort *)(textureLevel + 0x12);
+        if (dstType == 0x8035) {
           if (0 < (int)depth) {
             do {
               rowsLeft = height;
@@ -8613,47 +8624,47 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   columnsLeft2 = width;
                   if (0 < width) {
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                       if (twoPow31 <= scaledComponent) {
                         componentUint = (uint)(int)(scaledComponent - twoPow31);
-                        local_f0 = (longlong)(int)componentUint;
+                        fctiwzSlotF0 = (longlong)(int)componentUint;
                         componentUint = componentUint ^ 0x80000000;
                       }
                       else {
                         componentUint = (uint)(int)scaledComponent;
-                        local_e8 = (longlong)(int)componentUint;
+                        fctiwzSlotE8 = (longlong)(int)componentUint;
                       }
-                      scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                      scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                       if (DOUBLE_00108d80 <= scaledComponent) {
-                        local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                        uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                        fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                        componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                       }
                       else {
-                        uVar18 = (uint)(int)scaledComponent;
-                        local_f8 = (longlong)(int)uVar18;
+                        componentUint2 = (uint)(int)scaledComponent;
+                        fctiwzSlotF8 = (longlong)(int)componentUint2;
                       }
-                      scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                      scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                       if (DOUBLE_00108d80 <= scaledComponent) {
-                        local_d8 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                        uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                        fctiwzSlotD8 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                        componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                       }
                       else {
-                        uVar12 = (uint)(int)scaledComponent;
-                        local_e0 = (longlong)(int)uVar12;
+                        componentUint3 = (uint)(int)scaledComponent;
+                        fctiwzSlotE0 = (longlong)(int)componentUint3;
                       }
-                      scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                      scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                       if (DOUBLE_00108d80 <= scaledComponent) {
-                        local_c8 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                        uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                        fctiwzSlotC8 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                        componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                       }
                       else {
-                        uVar13 = (uint)(int)scaledComponent;
-                        local_d0 = (longlong)(int)uVar13;
+                        componentUint4 = (uint)(int)scaledComponent;
+                        fctiwzSlotD0 = (longlong)(int)componentUint4;
                       }
                       columnsLeft2 = columnsLeft2 + -1;
-                      *dstPixel = componentUint & 0xff000000 | uVar18 >> 8 & 0xff0000 |
-                                 uVar12 >> 0x10 & 0xff00 | uVar13 >> 0x18;
+                      *dstPixel = componentUint & 0xff000000 | componentUint2 >> 8 & 0xff0000 |
+                                 componentUint3 >> 0x10 & 0xff00 | componentUint4 >> 0x18;
                       srcPixel = srcPixel + srcPixelStride;
                       dstPixel = dstPixel + 1;
                     } while (columnsLeft2 != 0);
@@ -8670,8 +8681,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           }
           goto LAB_0002e240;
         }
-        if (uVar3 < 0x8036) {
-          if (uVar3 == 8) {
+        if (dstType < 0x8036) {
+          if (dstType == 8) {
             if (0 < (int)depth) {
               do {
                 rowsLeft = height;
@@ -8685,52 +8696,52 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     dstPixel = dstRow;
                     if (0 < width) {
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
-                        if (floatOne < local_1a0) {
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
+                        if (floatOne < pixelAlpha) {
                           componentByte = 0x7f;
                         }
                         else {
                           componentByte = 0x81;
-                          if (!(local_1a0 < floatMinusOne)) {
-                            (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * float127B);
-                            componentByte = (undefined1)local_c8;
-                            local_c8 = (longlong)(int)(local_1a0 * float127B);
+                          if (!(pixelAlpha < floatMinusOne)) {
+                            (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelAlpha * float127B);
+                            componentByte = (undefined1)fctiwzSlotC8;
+                            fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float127B);
                           }
                         }
                         *(undefined1 *)dstPixel = componentByte;
-                        if (floatOne < local_1ac) {
+                        if (floatOne < pixelRed) {
                           componentByte = 0x7f;
                         }
                         else {
                           componentByte = 0x81;
-                          if (!(local_1ac < floatMinusOne)) {
-                            (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float127B);
-                            componentByte = (undefined1)local_c8;
-                            local_c8 = (longlong)(int)(local_1ac * float127B);
+                          if (!(pixelRed < floatMinusOne)) {
+                            (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float127B);
+                            componentByte = (undefined1)fctiwzSlotC8;
+                            fctiwzSlotC8 = (longlong)(int)(pixelRed * float127B);
                           }
                         }
                         *(undefined1 *)((int)dstPixel + 1) = componentByte;
-                        if (floatOne < local_1a8) {
+                        if (floatOne < pixelGreen) {
                           componentByte = 0x7f;
                         }
                         else {
                           componentByte = 0x81;
-                          if (!(local_1a8 < floatMinusOne)) {
-                            (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * float127B);
-                            componentByte = (undefined1)local_c8;
-                            local_c8 = (longlong)(int)(local_1a8 * float127B);
+                          if (!(pixelGreen < floatMinusOne)) {
+                            (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelGreen * float127B);
+                            componentByte = (undefined1)fctiwzSlotC8;
+                            fctiwzSlotC8 = (longlong)(int)(pixelGreen * float127B);
                           }
                         }
                         *(undefined1 *)((int)dstPixel + 2) = componentByte;
-                        if (floatOne < local_1a4) {
+                        if (floatOne < pixelBlue) {
                           componentByte = 0x7f;
                         }
                         else {
                           componentByte = 0x81;
-                          if (!(local_1a4 < floatMinusOne)) {
-                            (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * float127B);
-                            componentByte = (undefined1)local_c8;
-                            local_c8 = (longlong)(int)(local_1a4 * float127B);
+                          if (!(pixelBlue < floatMinusOne)) {
+                            (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelBlue * float127B);
+                            componentByte = (undefined1)fctiwzSlotC8;
+                            fctiwzSlotC8 = (longlong)(int)(pixelBlue * float127B);
                           }
                         }
                         columnsLeft = columnsLeft + -1;
@@ -8751,8 +8762,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
             goto LAB_0002e240;
           }
-          if (uVar3 < 9) {
-            if (uVar3 == 7) {
+          if (dstType < 9) {
+            if (dstType == 7) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -8769,52 +8780,52 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         dstPixel = dstRow;
                         columnsLeft = width;
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
-                          if (floatOne2 < local_1a0) {
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
+                          if (floatOne2 < pixelAlpha) {
                             componentByte = 0xff;
                           }
                           else {
                             componentByte = 0;
-                            if (!(local_1a0 < floatZero)) {
-                              (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * float255);
-                              componentByte = (undefined1)local_c8;
-                              local_c8 = (longlong)(int)(local_1a0 * float255);
+                            if (!(pixelAlpha < floatZero)) {
+                              (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelAlpha * float255);
+                              componentByte = (undefined1)fctiwzSlotC8;
+                              fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float255);
                             }
                           }
                           *(undefined1 *)dstPixel = componentByte;
-                          if (floatOne2 < local_1ac) {
+                          if (floatOne2 < pixelRed) {
                             componentByte = 0x7f;
                           }
                           else {
                             componentByte = 0x81;
-                            if (!(local_1ac < floatMinusOne2)) {
-                              (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float127);
-                              componentByte = (undefined1)local_c8;
-                              local_c8 = (longlong)(int)(local_1ac * float127);
+                            if (!(pixelRed < floatMinusOne2)) {
+                              (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float127);
+                              componentByte = (undefined1)fctiwzSlotC8;
+                              fctiwzSlotC8 = (longlong)(int)(pixelRed * float127);
                             }
                           }
                           puVar30[-2] = componentByte;
-                          if (floatOne2 < local_1a8) {
+                          if (floatOne2 < pixelGreen) {
                             componentByte = 0x7f;
                           }
                           else {
                             componentByte = 0x81;
-                            if (!(local_1a8 < floatMinusOne2)) {
-                              (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * float127);
-                              componentByte = (undefined1)local_c8;
-                              local_c8 = (longlong)(int)(local_1a8 * float127);
+                            if (!(pixelGreen < floatMinusOne2)) {
+                              (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelGreen * float127);
+                              componentByte = (undefined1)fctiwzSlotC8;
+                              fctiwzSlotC8 = (longlong)(int)(pixelGreen * float127);
                             }
                           }
                           puVar30[-1] = componentByte;
-                          if (floatOne2 < local_1a4) {
+                          if (floatOne2 < pixelBlue) {
                             componentByte = 0x7f;
                           }
                           else {
                             componentByte = 0x81;
-                            if (!(local_1a4 < floatMinusOne2)) {
-                              (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * float127);
-                              componentByte = (undefined1)local_c8;
-                              local_c8 = (longlong)(int)(local_1a4 * float127);
+                            if (!(pixelBlue < floatMinusOne2)) {
+                              (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelBlue * float127);
+                              componentByte = (undefined1)fctiwzSlotC8;
+                              fctiwzSlotC8 = (longlong)(int)(pixelBlue * float127);
                             }
                           }
                           columnsLeft = columnsLeft + -1;
@@ -8838,7 +8849,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
           }
           else {
-            if (uVar3 == 0x8033) {
+            if (dstType == 0x8033) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -8846,21 +8857,21 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   if (0 < (int)height) {
                     do {
                       if (0 < width) {
-                        local_90 = float65535;
+                        scaleSpill = float65535;
                         columnsLeft2 = width;
                         dstPixel = dstRow;
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
                           columnsLeft2 = columnsLeft2 + -1;
-                          local_f0 = (longlong)(int)(local_1ac * float65535);
-                          local_f8 = (longlong)(int)(local_1a8 * float65535);
-                          local_100 = (longlong)(int)(local_1a4 * float65535);
-                          local_e8 = (longlong)(int)(local_1a0 * float65535);
+                          fctiwzSlotF0 = (longlong)(int)(pixelRed * float65535);
+                          fctiwzSlotF8 = (longlong)(int)(pixelGreen * float65535);
+                          fctiwzSlot100 = (longlong)(int)(pixelBlue * float65535);
+                          fctiwzSlotE8 = (longlong)(int)(pixelAlpha * float65535);
                           *(ushort *)dstPixel =
-                               (ushort)(int)(local_1ac * float65535) & 0xf000 |
-                               (ushort)((uint)(int)(local_1a8 * float65535) >> 4) & 0xf00 |
-                               (ushort)((uint)(int)(local_1a4 * float65535) >> 8) & 0xf0 |
-                               (ushort)((uint)(int)(local_1a0 * float65535) >> 0xc) & 0xf;
+                               (ushort)(int)(pixelRed * float65535) & 0xf000 |
+                               (ushort)((uint)(int)(pixelGreen * float65535) >> 4) & 0xf00 |
+                               (ushort)((uint)(int)(pixelBlue * float65535) >> 8) & 0xf0 |
+                               (ushort)((uint)(int)(pixelAlpha * float65535) >> 0xc) & 0xf;
                           dstPixel = (uint *)((int)dstPixel + 2);
                           srcPixel = srcPixel + srcPixelStride;
                         } while (columnsLeft2 != 0);
@@ -8877,7 +8888,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               goto LAB_0002e240;
             }
-            if (uVar3 == 0x8034) {
+            if (dstType == 0x8034) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -8885,21 +8896,21 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   if (0 < (int)height) {
                     do {
                       if (0 < width) {
-                        local_90 = float65535;
+                        scaleSpill = float65535;
                         columnsLeft2 = width;
                         dstPixel = dstRow;
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
                           columnsLeft2 = columnsLeft2 + -1;
-                          local_e8 = (longlong)(int)(local_1ac * float65535);
-                          local_f0 = (longlong)(int)(local_1a8 * float65535);
-                          local_f8 = (longlong)(int)(local_1a4 * float65535);
-                          local_100 = (longlong)(int)(local_1a0 * float65535);
+                          fctiwzSlotE8 = (longlong)(int)(pixelRed * float65535);
+                          fctiwzSlotF0 = (longlong)(int)(pixelGreen * float65535);
+                          fctiwzSlotF8 = (longlong)(int)(pixelBlue * float65535);
+                          fctiwzSlot100 = (longlong)(int)(pixelAlpha * float65535);
                           *(ushort *)dstPixel =
-                               (ushort)(int)(local_1ac * float65535) & 0xf800 |
-                               (ushort)((uint)(int)(local_1a8 * float65535) >> 5) & 0x7c0 |
-                               (ushort)((uint)(int)(local_1a4 * float65535) >> 10) & 0x3e |
-                               (ushort)((uint)(int)(local_1a0 * float65535) >> 0xf) & 1;
+                               (ushort)(int)(pixelRed * float65535) & 0xf800 |
+                               (ushort)((uint)(int)(pixelGreen * float65535) >> 5) & 0x7c0 |
+                               (ushort)((uint)(int)(pixelBlue * float65535) >> 10) & 0x3e |
+                               (ushort)((uint)(int)(pixelAlpha * float65535) >> 0xf) & 1;
                           dstPixel = (uint *)((int)dstPixel + 2);
                           srcPixel = srcPixel + srcPixelStride;
                         } while (columnsLeft2 != 0);
@@ -8919,7 +8930,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           }
         }
         else {
-          if (uVar3 == 0x8366) {
+          if (dstType == 0x8366) {
             if (0 < (int)depth) {
               do {
                 rowsLeft = height;
@@ -8927,21 +8938,21 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 if (0 < (int)height) {
                   do {
                     if (0 < width) {
-                      local_90 = float65535;
+                      scaleSpill = float65535;
                       columnsLeft2 = width;
                       dstPixel = dstRow;
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
                         columnsLeft2 = columnsLeft2 + -1;
-                        local_e8 = (longlong)(int)(local_1a0 * float65535);
-                        local_f0 = (longlong)(int)(local_1a4 * float65535);
-                        local_f8 = (longlong)(int)(local_1a8 * float65535);
-                        local_100 = (longlong)(int)(local_1ac * float65535);
+                        fctiwzSlotE8 = (longlong)(int)(pixelAlpha * float65535);
+                        fctiwzSlotF0 = (longlong)(int)(pixelBlue * float65535);
+                        fctiwzSlotF8 = (longlong)(int)(pixelGreen * float65535);
+                        fctiwzSlot100 = (longlong)(int)(pixelRed * float65535);
                         *(ushort *)dstPixel =
-                             (ushort)(int)(local_1a0 * float65535) & 0x8000 |
-                             (ushort)((uint)(int)(local_1a4 * float65535) >> 1) & 0x7c00 |
-                             (ushort)((uint)(int)(local_1a8 * float65535) >> 6) & 0x3e0 |
-                             (ushort)((uint)(int)(local_1ac * float65535) >> 0xb) & 0x1f;
+                             (ushort)(int)(pixelAlpha * float65535) & 0x8000 |
+                             (ushort)((uint)(int)(pixelBlue * float65535) >> 1) & 0x7c00 |
+                             (ushort)((uint)(int)(pixelGreen * float65535) >> 6) & 0x3e0 |
+                             (ushort)((uint)(int)(pixelRed * float65535) >> 0xb) & 0x1f;
                         dstPixel = (uint *)((int)dstPixel + 2);
                         srcPixel = srcPixel + srcPixelStride;
                       } while (columnsLeft2 != 0);
@@ -8958,8 +8969,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
             goto LAB_0002e240;
           }
-          if (uVar3 < 0x8367) {
-            if (uVar3 == 0x8036) {
+          if (dstType < 0x8367) {
+            if (dstType == 0x8036) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -8971,47 +8982,47 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft2 = width;
                       if (0 < width) {
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
-                          scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
+                          scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                           if (twoPow31 <= scaledComponent) {
                             componentUint = (uint)(int)(scaledComponent - twoPow31);
-                            local_d0 = (longlong)(int)componentUint;
+                            fctiwzSlotD0 = (longlong)(int)componentUint;
                             componentUint = componentUint ^ 0x80000000;
                           }
                           else {
                             componentUint = (uint)(int)scaledComponent;
-                            local_c8 = (longlong)(int)componentUint;
+                            fctiwzSlotC8 = (longlong)(int)componentUint;
                           }
-                          scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar18 = (uint)(int)scaledComponent;
-                            local_d8 = (longlong)(int)uVar18;
+                            componentUint2 = (uint)(int)scaledComponent;
+                            fctiwzSlotD8 = (longlong)(int)componentUint2;
                           }
-                          scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar12 = (uint)(int)scaledComponent;
-                            local_e8 = (longlong)(int)uVar12;
+                            componentUint3 = (uint)(int)scaledComponent;
+                            fctiwzSlotE8 = (longlong)(int)componentUint3;
                           }
-                          scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar13 = (uint)(int)scaledComponent;
-                            local_f8 = (longlong)(int)uVar13;
+                            componentUint4 = (uint)(int)scaledComponent;
+                            fctiwzSlotF8 = (longlong)(int)componentUint4;
                           }
                           columnsLeft2 = columnsLeft2 + -1;
-                          *dstPixel = componentUint & 0xffc00000 | uVar18 >> 10 & 0x3ff000 |
-                                     uVar12 >> 0x14 & 0xffc | uVar13 >> 0x1e;
+                          *dstPixel = componentUint & 0xffc00000 | componentUint2 >> 10 & 0x3ff000 |
+                                     componentUint3 >> 0x14 & 0xffc | componentUint4 >> 0x1e;
                           srcPixel = srcPixel + srcPixelStride;
                           dstPixel = dstPixel + 1;
                         } while (columnsLeft2 != 0);
@@ -9028,7 +9039,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               goto LAB_0002e240;
             }
-            if (uVar3 == 0x8365) {
+            if (dstType == 0x8365) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -9036,21 +9047,21 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   if (0 < (int)height) {
                     do {
                       if (0 < width) {
-                        local_90 = float65535;
+                        scaleSpill = float65535;
                         columnsLeft2 = width;
                         dstPixel = dstRow;
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
                           columnsLeft2 = columnsLeft2 + -1;
-                          local_e8 = (longlong)(int)(local_1a0 * float65535);
-                          local_f0 = (longlong)(int)(local_1a4 * float65535);
-                          local_f8 = (longlong)(int)(local_1a8 * float65535);
-                          local_100 = (longlong)(int)(local_1ac * float65535);
+                          fctiwzSlotE8 = (longlong)(int)(pixelAlpha * float65535);
+                          fctiwzSlotF0 = (longlong)(int)(pixelBlue * float65535);
+                          fctiwzSlotF8 = (longlong)(int)(pixelGreen * float65535);
+                          fctiwzSlot100 = (longlong)(int)(pixelRed * float65535);
                           *(ushort *)dstPixel =
-                               (ushort)(int)(local_1a0 * float65535) & 0xf000 |
-                               (ushort)((uint)(int)(local_1a4 * float65535) >> 4) & 0xf00 |
-                               (ushort)((uint)(int)(local_1a8 * float65535) >> 8) & 0xf0 |
-                               (ushort)((uint)(int)(local_1ac * float65535) >> 0xc) & 0xf;
+                               (ushort)(int)(pixelAlpha * float65535) & 0xf000 |
+                               (ushort)((uint)(int)(pixelBlue * float65535) >> 4) & 0xf00 |
+                               (ushort)((uint)(int)(pixelGreen * float65535) >> 8) & 0xf0 |
+                               (ushort)((uint)(int)(pixelRed * float65535) >> 0xc) & 0xf;
                           dstPixel = (uint *)((int)dstPixel + 2);
                           srcPixel = srcPixel + srcPixelStride;
                         } while (columnsLeft2 != 0);
@@ -9069,7 +9080,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
           }
           else {
-            if (uVar3 == 0x8367) {
+            if (dstType == 0x8367) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -9081,47 +9092,47 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft2 = width;
                       if (0 < width) {
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
-                          scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
+                          scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                           if (twoPow31 <= scaledComponent) {
                             componentUint = (uint)(int)(scaledComponent - twoPow31);
-                            local_d0 = (longlong)(int)componentUint;
+                            fctiwzSlotD0 = (longlong)(int)componentUint;
                             componentUint = componentUint ^ 0x80000000;
                           }
                           else {
                             componentUint = (uint)(int)scaledComponent;
-                            local_c8 = (longlong)(int)componentUint;
+                            fctiwzSlotC8 = (longlong)(int)componentUint;
                           }
-                          scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar18 = (uint)(int)scaledComponent;
-                            local_d8 = (longlong)(int)uVar18;
+                            componentUint2 = (uint)(int)scaledComponent;
+                            fctiwzSlotD8 = (longlong)(int)componentUint2;
                           }
-                          scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar12 = (uint)(int)scaledComponent;
-                            local_e8 = (longlong)(int)uVar12;
+                            componentUint3 = (uint)(int)scaledComponent;
+                            fctiwzSlotE8 = (longlong)(int)componentUint3;
                           }
-                          scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar13 = (uint)(int)scaledComponent;
-                            local_f8 = (longlong)(int)uVar13;
+                            componentUint4 = (uint)(int)scaledComponent;
+                            fctiwzSlotF8 = (longlong)(int)componentUint4;
                           }
                           columnsLeft2 = columnsLeft2 + -1;
-                          *dstPixel = componentUint & 0xff000000 | uVar18 >> 8 & 0xff0000 |
-                                     uVar12 >> 0x10 & 0xff00 | uVar13 >> 0x18;
+                          *dstPixel = componentUint & 0xff000000 | componentUint2 >> 8 & 0xff0000 |
+                                     componentUint3 >> 0x10 & 0xff00 | componentUint4 >> 0x18;
                           srcPixel = srcPixel + srcPixelStride;
                           dstPixel = dstPixel + 1;
                         } while (columnsLeft2 != 0);
@@ -9138,7 +9149,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               goto LAB_0002e240;
             }
-            if (uVar3 == 0x8368) {
+            if (dstType == 0x8368) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -9150,47 +9161,47 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft2 = width;
                       if (0 < width) {
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
-                          scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
+                          scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                           if (twoPow31 <= scaledComponent) {
                             componentUint = (uint)(int)(scaledComponent - twoPow31);
-                            local_d0 = (longlong)(int)componentUint;
+                            fctiwzSlotD0 = (longlong)(int)componentUint;
                             componentUint = componentUint ^ 0x80000000;
                           }
                           else {
                             componentUint = (uint)(int)scaledComponent;
-                            local_c8 = (longlong)(int)componentUint;
+                            fctiwzSlotC8 = (longlong)(int)componentUint;
                           }
-                          scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar18 = (uint)(int)scaledComponent;
-                            local_d8 = (longlong)(int)uVar18;
+                            componentUint2 = (uint)(int)scaledComponent;
+                            fctiwzSlotD8 = (longlong)(int)componentUint2;
                           }
-                          scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar12 = (uint)(int)scaledComponent;
-                            local_e8 = (longlong)(int)uVar12;
+                            componentUint3 = (uint)(int)scaledComponent;
+                            fctiwzSlotE8 = (longlong)(int)componentUint3;
                           }
-                          scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar13 = (uint)(int)scaledComponent;
-                            local_f8 = (longlong)(int)uVar13;
+                            componentUint4 = (uint)(int)scaledComponent;
+                            fctiwzSlotF8 = (longlong)(int)componentUint4;
                           }
                           columnsLeft2 = columnsLeft2 + -1;
-                          *dstPixel = componentUint & 0xc0000000 | uVar18 >> 2 & 0x3ff00000 |
-                                     uVar12 >> 0xc & 0xffc00 | uVar13 >> 0x16;
+                          *dstPixel = componentUint & 0xc0000000 | componentUint2 >> 2 & 0x3ff00000 |
+                                     componentUint3 >> 0xc & 0xffc00 | componentUint4 >> 0x16;
                           srcPixel = srcPixel + srcPixelStride;
                           dstPixel = dstPixel + 1;
                         } while (columnsLeft2 != 0);
@@ -9222,52 +9233,52 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 dstPixel = dstRow;
                 if (0 < width) {
                   do {
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
-                    if (floatOne2 < local_1ac) {
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
+                    if (floatOne2 < pixelRed) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1ac < floatZero)) {
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float255C);
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)(int)(local_1ac * float255C);
+                      if (!(pixelRed < floatZero)) {
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float255C);
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)(int)(pixelRed * float255C);
                       }
                     }
                     *(undefined1 *)dstPixel = componentByte;
-                    if (floatOne2 < local_1a8) {
+                    if (floatOne2 < pixelGreen) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1a8 < floatZero)) {
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * float255C);
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)(int)(local_1a8 * float255C);
+                      if (!(pixelGreen < floatZero)) {
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelGreen * float255C);
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)(int)(pixelGreen * float255C);
                       }
                     }
                     *(undefined1 *)((int)dstPixel + 1) = componentByte;
-                    if (floatOne2 < local_1a4) {
+                    if (floatOne2 < pixelBlue) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1a4 < floatZero)) {
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * float255C);
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)(int)(local_1a4 * float255C);
+                      if (!(pixelBlue < floatZero)) {
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelBlue * float255C);
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)(int)(pixelBlue * float255C);
                       }
                     }
                     *(undefined1 *)((int)dstPixel + 2) = componentByte;
-                    if (floatOne2 < local_1a0) {
+                    if (floatOne2 < pixelAlpha) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1a0 < floatZero)) {
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * float255C);
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)(int)(local_1a0 * float255C);
+                      if (!(pixelAlpha < floatZero)) {
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelAlpha * float255C);
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float255C);
                       }
                     }
                     columnsLeft = columnsLeft + -1;
@@ -9288,7 +9299,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
         }
         goto LAB_0002e240;
       }
-      if (uVar3 == 0x1909) {
+      if (dstFormat == 0x1909) {
         if (*(short *)(textureLevel + 0x12) == 0x1400) {
           if (0 < (int)depth) {
             do {
@@ -9303,16 +9314,16 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   dstPixel = dstRow;
                   if (0 < width) {
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      if (floatOne < local_1ac) {
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      if (floatOne < pixelRed) {
                         componentByte = 0x7f;
                       }
                       else {
                         componentByte = 0x81;
-                        if (!(local_1ac < floatMinusOne)) {
-                          (*(unsigned char *)((unsigned char *)&(local_100) + 7)) = (undefined1)(int)(local_1ac * float127B);
-                          componentByte = (undefined1)local_100;
-                          local_100 = (longlong)(int)(local_1ac * float127B);
+                        if (!(pixelRed < floatMinusOne)) {
+                          (*(unsigned char *)((unsigned char *)&(fctiwzSlot100) + 7)) = (undefined1)(int)(pixelRed * float127B);
+                          componentByte = (undefined1)fctiwzSlot100;
+                          fctiwzSlot100 = (longlong)(int)(pixelRed * float127B);
                         }
                       }
                       columnsLeft = columnsLeft + -1;
@@ -9345,16 +9356,16 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 dstPixel = dstRow;
                 if (0 < width) {
                   do {
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
-                    if (floatOne2 < local_1ac) {
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
+                    if (floatOne2 < pixelRed) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1ac < floatZero)) {
-                        (*(unsigned char *)((unsigned char *)&(local_100) + 7)) = (undefined1)(int)(local_1ac * float255C);
-                        componentByte = (undefined1)local_100;
-                        local_100 = (longlong)(int)(local_1ac * float255C);
+                      if (!(pixelRed < floatZero)) {
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlot100) + 7)) = (undefined1)(int)(pixelRed * float255C);
+                        componentByte = (undefined1)fctiwzSlot100;
+                        fctiwzSlot100 = (longlong)(int)(pixelRed * float255C);
                       }
                     }
                     columnsLeft = columnsLeft + -1;
@@ -9378,9 +9389,9 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
     }
   }
   else {
-    if (uVar3 == 0x86f4) {
-      uVar3 = *(ushort *)(textureLevel + 0x12);
-      if (uVar3 == 6) {
+    if (dstFormat == 0x86f4) {
+      dstType = *(ushort *)(textureLevel + 0x12);
+      if (dstType == 6) {
         if (0 < (int)depth) {
           do {
             float32767 = FLOAT_00108f74;
@@ -9391,32 +9402,32 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 floatMinusOne2 = FLOAT_00108e58;
                 floatOne2 = FLOAT_00108e54;
                 if (0 < width) {
-                  local_90 = float32767;
+                  scaleSpill = float32767;
                   columnsLeft = width;
                   dstPixel = dstRow;
                   do {
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
-                    if (floatOne2 < local_190) {
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
+                    if (floatOne2 < pixelHi) {
                       componentShort = 0x7fff;
                     }
                     else {
                       componentShort = 0x8001;
-                      if (!(local_190 < floatMinusOne2)) {
-                        (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)(int)(local_190 * float32767);
-                        componentShort = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
-                        local_c8 = (longlong)(int)(local_190 * float32767);
+                      if (!(pixelHi < floatMinusOne2)) {
+                        (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6)) = (undefined2)(int)(pixelHi * float32767);
+                        componentShort = (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6));
+                        fctiwzSlotC8 = (longlong)(int)(pixelHi * float32767);
                       }
                     }
                     *(undefined2 *)dstPixel = componentShort;
-                    if (floatOne2 < local_18c) {
+                    if (floatOne2 < pixelLo) {
                       componentShort = 0x7fff;
                     }
                     else {
                       componentShort = 0x8001;
-                      if (!(local_18c < floatMinusOne2)) {
-                        (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)(int)(local_18c * float32767);
-                        componentShort = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
-                        local_c8 = (longlong)(int)(local_18c * float32767);
+                      if (!(pixelLo < floatMinusOne2)) {
+                        (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6)) = (undefined2)(int)(pixelLo * float32767);
+                        componentShort = (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6));
+                        fctiwzSlotC8 = (longlong)(int)(pixelLo * float32767);
                       }
                     }
                     columnsLeft = columnsLeft + -1;
@@ -9436,8 +9447,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           } while (depth != 0);
         }
       }
-      else if (uVar3 < 7) {
-        if ((uVar3 == 5) && (0 < (int)depth)) {
+      else if (dstType < 7) {
+        if ((dstType == 5) && (0 < (int)depth)) {
           do {
             float65535 = FLOAT_00108ea0;
             rowsLeft = height;
@@ -9447,32 +9458,32 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 floatOne3 = FLOAT_00108e54;
                 floatZero2 = FLOAT_00108e50;
                 if (0 < width) {
-                  local_90 = float65535;
+                  scaleSpill = float65535;
                   columnsLeft = width;
                   dstPixel = dstRow;
                   do {
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
-                    if (floatOne3 < local_190) {
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
+                    if (floatOne3 < pixelHi) {
                       componentShort = 0xffff;
                     }
                     else {
                       componentShort = 0;
-                      if (!(local_190 < floatZero2)) {
-                        (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)(int)(local_190 * float65535);
-                        componentShort = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
-                        local_c8 = (longlong)(int)(local_190 * float65535);
+                      if (!(pixelHi < floatZero2)) {
+                        (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6)) = (undefined2)(int)(pixelHi * float65535);
+                        componentShort = (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6));
+                        fctiwzSlotC8 = (longlong)(int)(pixelHi * float65535);
                       }
                     }
                     *(undefined2 *)dstPixel = componentShort;
-                    if (floatOne3 < local_18c) {
+                    if (floatOne3 < pixelLo) {
                       componentShort = 0xffff;
                     }
                     else {
                       componentShort = 0;
-                      if (!(local_18c < floatZero2)) {
-                        (*(unsigned short *)((unsigned char *)&(local_c8) + 6)) = (undefined2)(int)(local_18c * float65535);
-                        componentShort = (*(unsigned short *)((unsigned char *)&(local_c8) + 6));
-                        local_c8 = (longlong)(int)(local_18c * float65535);
+                      if (!(pixelLo < floatZero2)) {
+                        (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6)) = (undefined2)(int)(pixelLo * float65535);
+                        componentShort = (*(unsigned short *)((unsigned char *)&(fctiwzSlotC8) + 6));
+                        fctiwzSlotC8 = (longlong)(int)(pixelLo * float65535);
                       }
                     }
                     columnsLeft = columnsLeft + -1;
@@ -9492,7 +9503,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           } while (depth != 0);
         }
       }
-      else if (uVar3 == 0x1400) {
+      else if (dstType == 0x1400) {
         if (0 < (int)depth) {
           do {
             rowsLeft = height;
@@ -9506,30 +9517,30 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 dstPixel = dstRow;
                 if (0 < width) {
                   do {
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
-                    if (floatOne < local_190) {
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
+                    if (floatOne < pixelHi) {
                       componentByte = 0x7f;
                     }
                     else {
                       componentByte = 0x81;
-                      if (!(local_190 < floatMinusOne)) {
-                        scaledInt = (int)(local_190 * float127B);
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)scaledInt;
+                      if (!(pixelHi < floatMinusOne)) {
+                        scaledInt = (int)(pixelHi * float127B);
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)scaledInt;
                       }
                     }
                     *(undefined1 *)dstPixel = componentByte;
-                    if (floatOne < local_18c) {
+                    if (floatOne < pixelLo) {
                       componentByte = 0x7f;
                     }
                     else {
                       componentByte = 0x81;
-                      if (!(local_18c < floatMinusOne)) {
-                        scaledInt = (int)(local_18c * float127B);
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)scaledInt;
+                      if (!(pixelLo < floatMinusOne)) {
+                        scaledInt = (int)(pixelLo * float127B);
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)scaledInt;
                       }
                     }
                     columnsLeft = columnsLeft + -1;
@@ -9549,7 +9560,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           } while (depth != 0);
         }
       }
-      else if ((uVar3 == 0x1401) && (0 < (int)depth)) {
+      else if ((dstType == 0x1401) && (0 < (int)depth)) {
         do {
           rowsLeft = height;
           dstRow = dstSlice;
@@ -9562,30 +9573,30 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               dstPixel = dstRow;
               if (0 < width) {
                 do {
-                  (*extractPixelFunc)(auStack_1b0,srcPixel);
-                  if (floatOne2 < local_190) {
+                  (*extractPixelFunc)(pixelRecord,srcPixel);
+                  if (floatOne2 < pixelHi) {
                     componentByte = 0xff;
                   }
                   else {
                     componentByte = 0;
-                    if (!(local_190 < floatZero)) {
-                      scaledInt = (int)(local_190 * float255C);
-                      (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                      componentByte = (undefined1)local_c8;
-                      local_c8 = (longlong)scaledInt;
+                    if (!(pixelHi < floatZero)) {
+                      scaledInt = (int)(pixelHi * float255C);
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                      componentByte = (undefined1)fctiwzSlotC8;
+                      fctiwzSlotC8 = (longlong)scaledInt;
                     }
                   }
                   *(undefined1 *)dstPixel = componentByte;
-                  if (floatOne2 < local_18c) {
+                  if (floatOne2 < pixelLo) {
                     componentByte = 0xff;
                   }
                   else {
                     componentByte = 0;
-                    if (!(local_18c < floatZero)) {
-                      scaledInt = (int)(local_18c * float255C);
-                      (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                      componentByte = (undefined1)local_c8;
-                      local_c8 = (longlong)scaledInt;
+                    if (!(pixelLo < floatZero)) {
+                      scaledInt = (int)(pixelLo * float255C);
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                      componentByte = (undefined1)fctiwzSlotC8;
+                      fctiwzSlotC8 = (longlong)scaledInt;
                     }
                   }
                   columnsLeft = columnsLeft + -1;
@@ -9606,10 +9617,10 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
       }
       goto LAB_0002e240;
     }
-    if (uVar3 < 0x86f5) {
-      if (uVar3 == 0x80e1) {
-        uVar3 = *(ushort *)(textureLevel + 0x12);
-        if (uVar3 == 0x8036) {
+    if (dstFormat < 0x86f5) {
+      if (dstFormat == 0x80e1) {
+        dstType = *(ushort *)(textureLevel + 0x12);
+        if (dstType == 0x8036) {
           if (0 < (int)depth) {
             do {
               rowsLeft = height;
@@ -9621,47 +9632,47 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   columnsLeft2 = width;
                   if (0 < width) {
                     do {
-                      (*extractPixelFunc)(auStack_1b0,srcPixel);
-                      scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                      (*extractPixelFunc)(pixelRecord,srcPixel);
+                      scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                       if (twoPow31 <= scaledComponent) {
                         componentUint = (uint)(int)(scaledComponent - twoPow31);
-                        local_d0 = (longlong)(int)componentUint;
+                        fctiwzSlotD0 = (longlong)(int)componentUint;
                         componentUint = componentUint ^ 0x80000000;
                       }
                       else {
                         componentUint = (uint)(int)scaledComponent;
-                        local_c8 = (longlong)(int)componentUint;
+                        fctiwzSlotC8 = (longlong)(int)componentUint;
                       }
-                      scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                      scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                       if (DOUBLE_00108d80 <= scaledComponent) {
-                        local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                        uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                        fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                        componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                       }
                       else {
-                        uVar18 = (uint)(int)scaledComponent;
-                        local_d8 = (longlong)(int)uVar18;
+                        componentUint2 = (uint)(int)scaledComponent;
+                        fctiwzSlotD8 = (longlong)(int)componentUint2;
                       }
-                      scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                      scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                       if (DOUBLE_00108d80 <= scaledComponent) {
-                        local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                        uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                        fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                        componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                       }
                       else {
-                        uVar12 = (uint)(int)scaledComponent;
-                        local_e8 = (longlong)(int)uVar12;
+                        componentUint3 = (uint)(int)scaledComponent;
+                        fctiwzSlotE8 = (longlong)(int)componentUint3;
                       }
-                      scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                      scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                       if (DOUBLE_00108d80 <= scaledComponent) {
-                        local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                        uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                        fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                        componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                       }
                       else {
-                        uVar13 = (uint)(int)scaledComponent;
-                        local_f8 = (longlong)(int)uVar13;
+                        componentUint4 = (uint)(int)scaledComponent;
+                        fctiwzSlotF8 = (longlong)(int)componentUint4;
                       }
                       columnsLeft2 = columnsLeft2 + -1;
-                      *dstPixel = componentUint & 0xffc00000 | uVar18 >> 10 & 0x3ff000 |
-                                 uVar12 >> 0x14 & 0xffc | uVar13 >> 0x1e;
+                      *dstPixel = componentUint & 0xffc00000 | componentUint2 >> 10 & 0x3ff000 |
+                                 componentUint3 >> 0x14 & 0xffc | componentUint4 >> 0x1e;
                       srcPixel = srcPixel + srcPixelStride;
                       dstPixel = dstPixel + 1;
                     } while (columnsLeft2 != 0);
@@ -9678,8 +9689,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           }
           goto LAB_0002e240;
         }
-        if (uVar3 < 0x8037) {
-          if (uVar3 == 0x8034) {
+        if (dstType < 0x8037) {
+          if (dstType == 0x8034) {
             if (0 < (int)depth) {
               do {
                 rowsLeft = height;
@@ -9687,21 +9698,21 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 if (0 < (int)height) {
                   do {
                     if (0 < width) {
-                      local_90 = float65535;
+                      scaleSpill = float65535;
                       columnsLeft2 = width;
                       dstPixel = dstRow;
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
                         columnsLeft2 = columnsLeft2 + -1;
-                        local_c8 = (longlong)(int)(local_1a4 * float65535);
-                        local_d0 = (longlong)(int)(local_1a8 * float65535);
-                        local_d8 = (longlong)(int)(local_1ac * float65535);
-                        local_e0 = (longlong)(int)(local_1a0 * float65535);
+                        fctiwzSlotC8 = (longlong)(int)(pixelBlue * float65535);
+                        fctiwzSlotD0 = (longlong)(int)(pixelGreen * float65535);
+                        fctiwzSlotD8 = (longlong)(int)(pixelRed * float65535);
+                        fctiwzSlotE0 = (longlong)(int)(pixelAlpha * float65535);
                         *(ushort *)dstPixel =
-                             (ushort)(int)(local_1a4 * float65535) & 0xf800 |
-                             (ushort)((uint)(int)(local_1a8 * float65535) >> 5) & 0x7c0 |
-                             (ushort)((uint)(int)(local_1ac * float65535) >> 10) & 0x3e |
-                             (ushort)((uint)(int)(local_1a0 * float65535) >> 0xf) & 1;
+                             (ushort)(int)(pixelBlue * float65535) & 0xf800 |
+                             (ushort)((uint)(int)(pixelGreen * float65535) >> 5) & 0x7c0 |
+                             (ushort)((uint)(int)(pixelRed * float65535) >> 10) & 0x3e |
+                             (ushort)((uint)(int)(pixelAlpha * float65535) >> 0xf) & 1;
                         dstPixel = (uint *)((int)dstPixel + 2);
                         srcPixel = srcPixel + srcPixelStride;
                       } while (columnsLeft2 != 0);
@@ -9718,7 +9729,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
             goto LAB_0002e240;
           }
-          if (0x8034 < uVar3) {
+          if (0x8034 < dstType) {
             if (0 < (int)depth) {
               do {
                 rowsLeft = height;
@@ -9730,47 +9741,47 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     columnsLeft2 = width;
                     if (0 < width) {
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
-                        scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
+                        scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                         if (twoPow31 <= scaledComponent) {
                           componentUint = (uint)(int)(scaledComponent - twoPow31);
-                          local_d0 = (longlong)(int)componentUint;
+                          fctiwzSlotD0 = (longlong)(int)componentUint;
                           componentUint = componentUint ^ 0x80000000;
                         }
                         else {
                           componentUint = (uint)(int)scaledComponent;
-                          local_c8 = (longlong)(int)componentUint;
+                          fctiwzSlotC8 = (longlong)(int)componentUint;
                         }
-                        scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                        scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                         if (DOUBLE_00108d80 <= scaledComponent) {
-                          local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                          uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                          fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                          componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                         }
                         else {
-                          uVar18 = (uint)(int)scaledComponent;
-                          local_d8 = (longlong)(int)uVar18;
+                          componentUint2 = (uint)(int)scaledComponent;
+                          fctiwzSlotD8 = (longlong)(int)componentUint2;
                         }
-                        scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                        scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                         if (DOUBLE_00108d80 <= scaledComponent) {
-                          local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                          uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                          fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                          componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                         }
                         else {
-                          uVar12 = (uint)(int)scaledComponent;
-                          local_e8 = (longlong)(int)uVar12;
+                          componentUint3 = (uint)(int)scaledComponent;
+                          fctiwzSlotE8 = (longlong)(int)componentUint3;
                         }
-                        scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                        scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                         if (DOUBLE_00108d80 <= scaledComponent) {
-                          local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                          uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                          fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                          componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                         }
                         else {
-                          uVar13 = (uint)(int)scaledComponent;
-                          local_f8 = (longlong)(int)uVar13;
+                          componentUint4 = (uint)(int)scaledComponent;
+                          fctiwzSlotF8 = (longlong)(int)componentUint4;
                         }
                         columnsLeft2 = columnsLeft2 + -1;
-                        *dstPixel = componentUint & 0xff000000 | uVar18 >> 8 & 0xff0000 |
-                                   uVar12 >> 0x10 & 0xff00 | uVar13 >> 0x18;
+                        *dstPixel = componentUint & 0xff000000 | componentUint2 >> 8 & 0xff0000 |
+                                   componentUint3 >> 0x10 & 0xff00 | componentUint4 >> 0x18;
                         srcPixel = srcPixel + srcPixelStride;
                         dstPixel = dstPixel + 1;
                       } while (columnsLeft2 != 0);
@@ -9787,7 +9798,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
             goto LAB_0002e240;
           }
-          if (uVar3 == 0x8033) {
+          if (dstType == 0x8033) {
             if (0 < (int)depth) {
               do {
                 rowsLeft = height;
@@ -9795,21 +9806,21 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 if (0 < (int)height) {
                   do {
                     if (0 < width) {
-                      local_90 = float65535;
+                      scaleSpill = float65535;
                       columnsLeft2 = width;
                       dstPixel = dstRow;
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
                         columnsLeft2 = columnsLeft2 + -1;
-                        local_c8 = (longlong)(int)(local_1a4 * float65535);
-                        local_d0 = (longlong)(int)(local_1a8 * float65535);
-                        local_d8 = (longlong)(int)(local_1ac * float65535);
-                        local_e0 = (longlong)(int)(local_1a0 * float65535);
+                        fctiwzSlotC8 = (longlong)(int)(pixelBlue * float65535);
+                        fctiwzSlotD0 = (longlong)(int)(pixelGreen * float65535);
+                        fctiwzSlotD8 = (longlong)(int)(pixelRed * float65535);
+                        fctiwzSlotE0 = (longlong)(int)(pixelAlpha * float65535);
                         *(ushort *)dstPixel =
-                             (ushort)(int)(local_1a4 * float65535) & 0xf000 |
-                             (ushort)((uint)(int)(local_1a8 * float65535) >> 4) & 0xf00 |
-                             (ushort)((uint)(int)(local_1ac * float65535) >> 8) & 0xf0 |
-                             (ushort)((uint)(int)(local_1a0 * float65535) >> 0xc) & 0xf;
+                             (ushort)(int)(pixelBlue * float65535) & 0xf000 |
+                             (ushort)((uint)(int)(pixelGreen * float65535) >> 4) & 0xf00 |
+                             (ushort)((uint)(int)(pixelRed * float65535) >> 8) & 0xf0 |
+                             (ushort)((uint)(int)(pixelAlpha * float65535) >> 0xc) & 0xf;
                         dstPixel = (uint *)((int)dstPixel + 2);
                         srcPixel = srcPixel + srcPixelStride;
                       } while (columnsLeft2 != 0);
@@ -9828,7 +9839,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           }
         }
         else {
-          if (uVar3 == 0x8366) {
+          if (dstType == 0x8366) {
             if (0 < (int)depth) {
               do {
                 rowsLeft = height;
@@ -9836,21 +9847,21 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 if (0 < (int)height) {
                   do {
                     if (0 < width) {
-                      local_90 = float65535;
+                      scaleSpill = float65535;
                       columnsLeft2 = width;
                       dstPixel = dstRow;
                       do {
-                        (*extractPixelFunc)(auStack_1b0,srcPixel);
+                        (*extractPixelFunc)(pixelRecord,srcPixel);
                         columnsLeft2 = columnsLeft2 + -1;
-                        local_c8 = (longlong)(int)(local_1a0 * float65535);
-                        local_d0 = (longlong)(int)(local_1ac * float65535);
-                        local_d8 = (longlong)(int)(local_1a8 * float65535);
-                        local_e0 = (longlong)(int)(local_1a4 * float65535);
+                        fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float65535);
+                        fctiwzSlotD0 = (longlong)(int)(pixelRed * float65535);
+                        fctiwzSlotD8 = (longlong)(int)(pixelGreen * float65535);
+                        fctiwzSlotE0 = (longlong)(int)(pixelBlue * float65535);
                         *(ushort *)dstPixel =
-                             (ushort)(int)(local_1a0 * float65535) & 0x8000 |
-                             (ushort)((uint)(int)(local_1ac * float65535) >> 1) & 0x7c00 |
-                             (ushort)((uint)(int)(local_1a8 * float65535) >> 6) & 0x3e0 |
-                             (ushort)((uint)(int)(local_1a4 * float65535) >> 0xb) & 0x1f;
+                             (ushort)(int)(pixelAlpha * float65535) & 0x8000 |
+                             (ushort)((uint)(int)(pixelRed * float65535) >> 1) & 0x7c00 |
+                             (ushort)((uint)(int)(pixelGreen * float65535) >> 6) & 0x3e0 |
+                             (ushort)((uint)(int)(pixelBlue * float65535) >> 0xb) & 0x1f;
                         dstPixel = (uint *)((int)dstPixel + 2);
                         srcPixel = srcPixel + srcPixelStride;
                       } while (columnsLeft2 != 0);
@@ -9867,8 +9878,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
             goto LAB_0002e240;
           }
-          if (uVar3 < 0x8367) {
-            if (uVar3 == 0x8365) {
+          if (dstType < 0x8367) {
+            if (dstType == 0x8365) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -9876,21 +9887,21 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   if (0 < (int)height) {
                     do {
                       if (0 < width) {
-                        local_90 = float65535;
+                        scaleSpill = float65535;
                         columnsLeft2 = width;
                         dstPixel = dstRow;
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
                           columnsLeft2 = columnsLeft2 + -1;
-                          local_c8 = (longlong)(int)(local_1a0 * float65535);
-                          local_d0 = (longlong)(int)(local_1ac * float65535);
-                          local_d8 = (longlong)(int)(local_1a8 * float65535);
-                          local_e0 = (longlong)(int)(local_1a4 * float65535);
+                          fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float65535);
+                          fctiwzSlotD0 = (longlong)(int)(pixelRed * float65535);
+                          fctiwzSlotD8 = (longlong)(int)(pixelGreen * float65535);
+                          fctiwzSlotE0 = (longlong)(int)(pixelBlue * float65535);
                           *(ushort *)dstPixel =
-                               (ushort)(int)(local_1a0 * float65535) & 0xf000 |
-                               (ushort)((uint)(int)(local_1ac * float65535) >> 4) & 0xf00 |
-                               (ushort)((uint)(int)(local_1a8 * float65535) >> 8) & 0xf0 |
-                               (ushort)((uint)(int)(local_1a4 * float65535) >> 0xc) & 0xf;
+                               (ushort)(int)(pixelAlpha * float65535) & 0xf000 |
+                               (ushort)((uint)(int)(pixelRed * float65535) >> 4) & 0xf00 |
+                               (ushort)((uint)(int)(pixelGreen * float65535) >> 8) & 0xf0 |
+                               (ushort)((uint)(int)(pixelBlue * float65535) >> 0xc) & 0xf;
                           dstPixel = (uint *)((int)dstPixel + 2);
                           srcPixel = srcPixel + srcPixelStride;
                         } while (columnsLeft2 != 0);
@@ -9909,7 +9920,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
           }
           else {
-            if (uVar3 == 0x8367) {
+            if (dstType == 0x8367) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -9921,47 +9932,47 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft2 = width;
                       if (0 < width) {
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
-                          scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
+                          scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                           if (twoPow31 <= scaledComponent) {
                             componentUint = (uint)(int)(scaledComponent - twoPow31);
-                            local_d0 = (longlong)(int)componentUint;
+                            fctiwzSlotD0 = (longlong)(int)componentUint;
                             componentUint = componentUint ^ 0x80000000;
                           }
                           else {
                             componentUint = (uint)(int)scaledComponent;
-                            local_c8 = (longlong)(int)componentUint;
+                            fctiwzSlotC8 = (longlong)(int)componentUint;
                           }
-                          scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar18 = (uint)(int)scaledComponent;
-                            local_d8 = (longlong)(int)uVar18;
+                            componentUint2 = (uint)(int)scaledComponent;
+                            fctiwzSlotD8 = (longlong)(int)componentUint2;
                           }
-                          scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar12 = (uint)(int)scaledComponent;
-                            local_e8 = (longlong)(int)uVar12;
+                            componentUint3 = (uint)(int)scaledComponent;
+                            fctiwzSlotE8 = (longlong)(int)componentUint3;
                           }
-                          scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar13 = (uint)(int)scaledComponent;
-                            local_f8 = (longlong)(int)uVar13;
+                            componentUint4 = (uint)(int)scaledComponent;
+                            fctiwzSlotF8 = (longlong)(int)componentUint4;
                           }
                           columnsLeft2 = columnsLeft2 + -1;
-                          *dstPixel = componentUint & 0xff000000 | uVar18 >> 8 & 0xff0000 |
-                                     uVar12 >> 0x10 & 0xff00 | uVar13 >> 0x18;
+                          *dstPixel = componentUint & 0xff000000 | componentUint2 >> 8 & 0xff0000 |
+                                     componentUint3 >> 0x10 & 0xff00 | componentUint4 >> 0x18;
                           srcPixel = srcPixel + srcPixelStride;
                           dstPixel = dstPixel + 1;
                         } while (columnsLeft2 != 0);
@@ -9978,7 +9989,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               goto LAB_0002e240;
             }
-            if (uVar3 == 0x8368) {
+            if (dstType == 0x8368) {
               if (0 < (int)depth) {
                 do {
                   rowsLeft = height;
@@ -9990,47 +10001,47 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       columnsLeft2 = width;
                       if (0 < width) {
                         do {
-                          (*extractPixelFunc)(auStack_1b0,srcPixel);
-                          scaledComponent = (double)local_1a0 * uint32MaxAsDouble;
+                          (*extractPixelFunc)(pixelRecord,srcPixel);
+                          scaledComponent = (double)pixelAlpha * uint32MaxAsDouble;
                           if (twoPow31 <= scaledComponent) {
                             componentUint = (uint)(int)(scaledComponent - twoPow31);
-                            local_d0 = (longlong)(int)componentUint;
+                            fctiwzSlotD0 = (longlong)(int)componentUint;
                             componentUint = componentUint ^ 0x80000000;
                           }
                           else {
                             componentUint = (uint)(int)scaledComponent;
-                            local_c8 = (longlong)(int)componentUint;
+                            fctiwzSlotC8 = (longlong)(int)componentUint;
                           }
-                          scaledComponent = (double)local_1ac * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelRed * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_e0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar18 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlotE0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint2 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar18 = (uint)(int)scaledComponent;
-                            local_d8 = (longlong)(int)uVar18;
+                            componentUint2 = (uint)(int)scaledComponent;
+                            fctiwzSlotD8 = (longlong)(int)componentUint2;
                           }
-                          scaledComponent = (double)local_1a8 * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelGreen * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_f0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar12 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlotF0 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint3 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar12 = (uint)(int)scaledComponent;
-                            local_e8 = (longlong)(int)uVar12;
+                            componentUint3 = (uint)(int)scaledComponent;
+                            fctiwzSlotE8 = (longlong)(int)componentUint3;
                           }
-                          scaledComponent = (double)local_1a4 * uint32MaxAsDouble;
+                          scaledComponent = (double)pixelBlue * uint32MaxAsDouble;
                           if (DOUBLE_00108d80 <= scaledComponent) {
-                            local_100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
-                            uVar13 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
+                            fctiwzSlot100 = (longlong)(int)(scaledComponent - DOUBLE_00108d80);
+                            componentUint4 = (int)(scaledComponent - DOUBLE_00108d80) ^ 0x80000000;
                           }
                           else {
-                            uVar13 = (uint)(int)scaledComponent;
-                            local_f8 = (longlong)(int)uVar13;
+                            componentUint4 = (uint)(int)scaledComponent;
+                            fctiwzSlotF8 = (longlong)(int)componentUint4;
                           }
                           columnsLeft2 = columnsLeft2 + -1;
-                          *dstPixel = componentUint & 0xc0000000 | uVar18 >> 2 & 0x3ff00000 |
-                                     uVar12 >> 0xc & 0xffc00 | uVar13 >> 0x16;
+                          *dstPixel = componentUint & 0xc0000000 | componentUint2 >> 2 & 0x3ff00000 |
+                                     componentUint3 >> 0xc & 0xffc00 | componentUint4 >> 0x16;
                           srcPixel = srcPixel + srcPixelStride;
                           dstPixel = dstPixel + 1;
                         } while (columnsLeft2 != 0);
@@ -10062,52 +10073,52 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 dstPixel = dstRow;
                 if (0 < width) {
                   do {
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
-                    if (floatOne2 < local_1a4) {
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
+                    if (floatOne2 < pixelBlue) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1a4 < floatZero)) {
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a4 * float255C);
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)(int)(local_1a4 * float255C);
+                      if (!(pixelBlue < floatZero)) {
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelBlue * float255C);
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)(int)(pixelBlue * float255C);
                       }
                     }
                     *(undefined1 *)dstPixel = componentByte;
-                    if (floatOne2 < local_1a8) {
+                    if (floatOne2 < pixelGreen) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1a8 < floatZero)) {
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a8 * float255C);
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)(int)(local_1a8 * float255C);
+                      if (!(pixelGreen < floatZero)) {
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelGreen * float255C);
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)(int)(pixelGreen * float255C);
                       }
                     }
                     *(undefined1 *)((int)dstPixel + 1) = componentByte;
-                    if (floatOne2 < local_1ac) {
+                    if (floatOne2 < pixelRed) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1ac < floatZero)) {
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float255C);
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)(int)(local_1ac * float255C);
+                      if (!(pixelRed < floatZero)) {
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float255C);
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)(int)(pixelRed * float255C);
                       }
                     }
                     *(undefined1 *)((int)dstPixel + 2) = componentByte;
-                    if (floatOne2 < local_1a0) {
+                    if (floatOne2 < pixelAlpha) {
                       componentByte = 0xff;
                     }
                     else {
                       componentByte = 0;
-                      if (!(local_1a0 < floatZero)) {
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1a0 * float255C);
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)(int)(local_1a0 * float255C);
+                      if (!(pixelAlpha < floatZero)) {
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelAlpha * float255C);
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)(int)(pixelAlpha * float255C);
                       }
                     }
                     columnsLeft = columnsLeft + -1;
@@ -10128,10 +10139,10 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
         }
         goto LAB_0002e240;
       }
-      uVar14 = 0x86dc;
+      compareFormat = 0x86dc;
     }
     else {
-      if (uVar3 == 0x86f5) {
+      if (dstFormat == 0x86f5) {
         if (0 < (int)depth) {
           do {
             rowsLeft = height;
@@ -10145,30 +10156,30 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 dstPixel = dstRow;
                 if (0 < width) {
                   do {
-                    (*extractPixelFunc)(auStack_1b0,srcPixel);
-                    if (floatOne < local_188) {
+                    (*extractPixelFunc)(pixelRecord,srcPixel);
+                    if (floatOne < pixelDs) {
                       componentByte = 0x7f;
                     }
                     else {
                       componentByte = 0x81;
-                      if (!(local_188 < floatMinusOne)) {
-                        scaledInt = (int)(local_188 * float127B);
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)scaledInt;
+                      if (!(pixelDs < floatMinusOne)) {
+                        scaledInt = (int)(pixelDs * float127B);
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)scaledInt;
                       }
                     }
                     *(undefined1 *)((int)dstPixel + 1) = componentByte;
-                    if (floatOne < local_184) {
+                    if (floatOne < pixelDt) {
                       componentByte = 0x7f;
                     }
                     else {
                       componentByte = 0x81;
-                      if (!(local_184 < floatMinusOne)) {
-                        scaledInt = (int)(local_184 * float127B);
-                        (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                        componentByte = (undefined1)local_c8;
-                        local_c8 = (longlong)scaledInt;
+                      if (!(pixelDt < floatMinusOne)) {
+                        scaledInt = (int)(pixelDt * float127B);
+                        (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                        componentByte = (undefined1)fctiwzSlotC8;
+                        fctiwzSlotC8 = (longlong)scaledInt;
                       }
                     }
                     columnsLeft = columnsLeft + -1;
@@ -10189,9 +10200,9 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
         }
         goto LAB_0002e240;
       }
-      uVar14 = 0x86f6;
+      compareFormat = 0x86f6;
     }
-    if (uVar3 == uVar14) {
+    if (dstFormat == compareFormat) {
       if (0 < (int)depth) {
         do {
           rowsLeft = height;
@@ -10208,56 +10219,56 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 dstPixel = dstRow;
                 columnsLeft = width;
                 do {
-                  (*extractPixelFunc)(auStack_1b0,srcPixel);
-                  if (floatOne2 < local_188) {
+                  (*extractPixelFunc)(pixelRecord,srcPixel);
+                  if (floatOne2 < pixelDs) {
                     componentByte = 0x7f;
                   }
                   else {
                     componentByte = 0x81;
-                    if (!(local_188 < floatMinusOne2)) {
-                      scaledInt = (int)(local_188 * float127);
-                      (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                      componentByte = (undefined1)local_c8;
-                      local_c8 = (longlong)scaledInt;
+                    if (!(pixelDs < floatMinusOne2)) {
+                      scaledInt = (int)(pixelDs * float127);
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                      componentByte = (undefined1)fctiwzSlotC8;
+                      fctiwzSlotC8 = (longlong)scaledInt;
                     }
                   }
                   puVar30[1] = componentByte;
-                  if (floatOne2 < local_184) {
+                  if (floatOne2 < pixelDt) {
                     componentByte = 0x7f;
                   }
                   else {
                     componentByte = 0x81;
-                    if (!(local_184 < floatMinusOne2)) {
-                      scaledInt = (int)(local_184 * float127);
-                      (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                      componentByte = (undefined1)local_c8;
-                      local_c8 = (longlong)scaledInt;
+                    if (!(pixelDt < floatMinusOne2)) {
+                      scaledInt = (int)(pixelDt * float127);
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                      componentByte = (undefined1)fctiwzSlotC8;
+                      fctiwzSlotC8 = (longlong)scaledInt;
                     }
                   }
                   *puVar30 = componentByte;
-                  if (floatOne2 < local_180) {
+                  if (floatOne2 < pixelMagnitude) {
                     componentByte = 0xff;
                   }
                   else {
                     componentByte = 0;
-                    if (!(local_180 < floatZero)) {
-                      scaledInt = (int)(local_180 * float255);
-                      (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                      componentByte = (undefined1)local_c8;
-                      local_c8 = (longlong)scaledInt;
+                    if (!(pixelMagnitude < floatZero)) {
+                      scaledInt = (int)(pixelMagnitude * float255);
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                      componentByte = (undefined1)fctiwzSlotC8;
+                      fctiwzSlotC8 = (longlong)scaledInt;
                     }
                   }
                   *(undefined1 *)((int)dstPixel + 1) = componentByte;
-                  if (floatOne2 < local_1ac) {
+                  if (floatOne2 < pixelRed) {
                     componentByte = 0xff;
                   }
                   else {
                     componentByte = 0;
-                    if (!(local_1ac < floatZero)) {
-                      scaledInt = (int)(local_1ac * float255);
-                      (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)scaledInt;
-                      componentByte = (undefined1)local_c8;
-                      local_c8 = (longlong)scaledInt;
+                    if (!(pixelRed < floatZero)) {
+                      scaledInt = (int)(pixelRed * float255);
+                      (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)scaledInt;
+                      componentByte = (undefined1)fctiwzSlotC8;
+                      fctiwzSlotC8 = (longlong)scaledInt;
                     }
                   }
                   columnsLeft = columnsLeft + -1;
@@ -10294,16 +10305,16 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             dstPixel = dstRow;
             if (0 < width) {
               do {
-                (*extractPixelFunc)(auStack_1b0,srcPixel);
-                if (floatOne < local_1ac) {
+                (*extractPixelFunc)(pixelRecord,srcPixel);
+                if (floatOne < pixelRed) {
                   componentByte = 0x7f;
                 }
                 else {
                   componentByte = 0x81;
-                  if (!(local_1ac < floatMinusOne)) {
-                    (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float127B);
-                    componentByte = (undefined1)local_c8;
-                    local_c8 = (longlong)(int)(local_1ac * float127B);
+                  if (!(pixelRed < floatMinusOne)) {
+                    (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float127B);
+                    componentByte = (undefined1)fctiwzSlotC8;
+                    fctiwzSlotC8 = (longlong)(int)(pixelRed * float127B);
                   }
                 }
                 columnsLeft = columnsLeft + -1;
@@ -10336,16 +10347,16 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           dstPixel = dstRow;
           if (0 < width) {
             do {
-              (*extractPixelFunc)(auStack_1b0,srcPixel);
-              if (floatOne2 < local_1ac) {
+              (*extractPixelFunc)(pixelRecord,srcPixel);
+              if (floatOne2 < pixelRed) {
                 componentByte = 0xff;
               }
               else {
                 componentByte = 0;
-                if (!(local_1ac < floatZero)) {
-                  (*(unsigned char *)((unsigned char *)&(local_c8) + 7)) = (undefined1)(int)(local_1ac * float255C);
-                  componentByte = (undefined1)local_c8;
-                  local_c8 = (longlong)(int)(local_1ac * float255C);
+                if (!(pixelRed < floatZero)) {
+                  (*(unsigned char *)((unsigned char *)&(fctiwzSlotC8) + 7)) = (undefined1)(int)(pixelRed * float255C);
+                  componentByte = (undefined1)fctiwzSlotC8;
+                  fctiwzSlotC8 = (longlong)(int)(pixelRed * float255C);
                 }
               }
               columnsLeft = columnsLeft + -1;
@@ -10365,7 +10376,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
     } while (depth != 0);
   }
 LAB_0002e240:
-  if (bVar4) {
+  if (freeTempImage) {
     _free(pixels);
   }
   return;

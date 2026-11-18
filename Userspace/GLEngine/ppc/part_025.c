@@ -453,14 +453,14 @@ LAB_00087ad8:
 }
 
 /* _evaluateImageUnits @ 0x87b18 (1000 bytes) */
-int _evaluateImageUnits(glContext, param_2)
+int _evaluateImageUnits(glContext, program)
   int glContext;
-  int param_2;
+  int program;
 {
   ushort uVar1;
   int iVar2;
   char cVar3;
-  undefined4 uVar4;
+  undefined4 samplerIndex;
   char *srcCursor;
   int iVar6;
   ushort *dstCursor2;
@@ -479,28 +479,28 @@ int _evaluateImageUnits(glContext, param_2)
   int loopIndex3;
   int remaining;
   longlong lVar18;
-  int local_120 [32];
-  ushort local_a0 [32];
-  undefined4 local_60;
-  char local_5c [4];
-  uint local_58;
+  int savedCounts [32];
+  ushort savedTypes [32];
+  undefined4 uniformType;
+  char stagesUsed [4];
+  uint savedValidFlag;
   
-  piVar10 = (int *)(param_2 + 0x20);
+  piVar10 = (int *)(program + 0x20);
   loopIndex = 0;
-  local_58 = (uint)*(byte *)(param_2 + 0x3e);
-  *(undefined1 *)(param_2 + 0x3e) = 1;
+  savedValidFlag = (uint)*(byte *)(program + 0x3e);
+  *(undefined1 *)(program + 0x3e) = 1;
   do {
     if (loopIndex == 0) {
       iVar16 = *piVar10;
       remaining = 0;
     }
     else {
-      iVar16 = *(int *)(param_2 + 0x24);
+      iVar16 = *(int *)(program + 0x24);
       remaining = 0x10;
     }
     if (remaining != 0) {
-      dstCursor3 = local_120 + loopIndex * 0x10;
-      dstCursor2 = local_a0 + loopIndex * 0x10;
+      dstCursor3 = savedCounts + loopIndex * 0x10;
+      dstCursor2 = savedTypes + loopIndex * 0x10;
       iVar6 = iVar16 + 0x60;
       do {
         *dstCursor3 = *(int *)(iVar16 + 0x2c);
@@ -517,37 +517,37 @@ int _evaluateImageUnits(glContext, param_2)
     loopIndex = loopIndex + 1;
   } while (loopIndex < 2);
   loopIndex = 0;
-  if (*(int *)(param_2 + 0x30) < 1) {
+  if (*(int *)(program + 0x30) < 1) {
 LAB_00087d18:
-    cVar3 = *(char *)(param_2 + 0x3e);
+    cVar3 = *(char *)(program + 0x3e);
   }
   else {
-    cVar3 = *(char *)(param_2 + 0x3e);
+    cVar3 = *(char *)(program + 0x3e);
     if (cVar3 == '\x01') {
       do {
-        local_60 = 0;
-        local_5c[0] = '\0';
-        local_5c[1] = '\0';
-        iVar17 = _ShGetUniformTypeInfo(*(undefined4 *)(param_2 + 0x40),loopIndex,0,&local_60,local_5c);
-        if ((iVar17 != 0) && (local_60 - 0x8b5d < 8)) {
+        uniformType = 0;
+        stagesUsed[0] = '\0';
+        stagesUsed[1] = '\0';
+        iVar17 = _ShGetUniformTypeInfo(*(undefined4 *)(program + 0x40),loopIndex,0,&uniformType,stagesUsed);
+        if ((iVar17 != 0) && (uniformType - 0x8b5d < 8)) {
           loopIndex3 = 0;
-          srcCursor = local_5c;
+          srcCursor = stagesUsed;
           do {
             cVar3 = *srcCursor;
             srcCursor = srcCursor + 1;
             if (cVar3 != '\0') {
-              iVar16 = *(int *)(*(int *)(param_2 + 0x4c) + loopIndex * 0x10);
+              iVar16 = *(int *)(*(int *)(program + 0x4c) + loopIndex * 0x10);
               if (loopIndex3 == 0) {
                 iVar6 = *piVar10;
                 iVar2 = 0;
               }
               else {
-                iVar6 = *(int *)(param_2 + 0x24);
+                iVar6 = *(int *)(program + 0x24);
                 iVar2 = 0x10;
               }
               if ((iVar2 <= iVar16) || (iVar16 < 0)) {
 LAB_00087ce4:
-                *(undefined1 *)(param_2 + 0x3e) = 0;
+                *(undefined1 *)(program + 0x3e) = 0;
                 break;
               }
               if (*(int *)(iVar16 * 4 + iVar6 + 0x2c) < 1) {
@@ -555,18 +555,18 @@ LAB_00087ce4:
               }
               else {
                 iVar2 = iVar16 * 2;
-                if (local_60 != *(ushort *)(iVar2 + iVar6 + 0x6c)) goto LAB_00087ce4;
+                if (uniformType != *(ushort *)(iVar2 + iVar6 + 0x6c)) goto LAB_00087ce4;
               }
               iVar16 = iVar16 * 4 + iVar6;
               *(int *)(iVar16 + 0x2c) = *(int *)(iVar16 + 0x2c) + 1;
-              *(undefined2 *)(iVar2 + iVar6 + 0x6c) = (*(unsigned short *)((unsigned char *)&(local_60) + 2));
+              *(undefined2 *)(iVar2 + iVar6 + 0x6c) = (*(unsigned short *)((unsigned char *)&(uniformType) + 2));
             }
             loopIndex3 = loopIndex3 + 1;
           } while (loopIndex3 < 2);
         }
         loopIndex = loopIndex + 1;
-        if (*(int *)(param_2 + 0x30) <= loopIndex) goto LAB_00087d18;
-        cVar3 = *(char *)(param_2 + 0x3e);
+        if (*(int *)(program + 0x30) <= loopIndex) goto LAB_00087d18;
+        cVar3 = *(char *)(program + 0x3e);
       } while (cVar3 == '\x01');
     }
   }
@@ -578,12 +578,12 @@ LAB_00087ce4:
         remaining = 0;
       }
       else {
-        iVar16 = *(int *)(param_2 + 0x24);
+        iVar16 = *(int *)(program + 0x24);
         remaining = 0x10;
       }
       if (remaining != 0) {
-        srcCursor4 = local_120 + loopIndex * 0x10;
-        srcCursor3 = local_a0 + loopIndex * 0x10;
+        srcCursor4 = savedCounts + loopIndex * 0x10;
+        srcCursor3 = savedTypes + loopIndex * 0x10;
         dstCursor = (int *)(iVar16 + 0x2c);
         dstCursor2 = (ushort *)(iVar16 + 0x6c);
         do {
@@ -609,7 +609,7 @@ LAB_00087ce4:
         iVar17 = 0;
       }
       else {
-        iVar16 = *(int *)(param_2 + 0x24);
+        iVar16 = *(int *)(program + 0x24);
         iVar17 = 0x10;
       }
       loopIndex2 = 0;
@@ -628,14 +628,14 @@ LAB_00087ce4:
             uVar1 = *srcCursor2;
             *(uint *)(iVar16 + 0x50c) = uVar14;
             *(uint *)(iVar16 + 0x510) = uVar15;
-            uVar4 = _getIndexForGLSLSamplerType((uint)uVar1);
-            lVar18 = ___ashldi3(0,uVar4,loopIndex2 << 2);
+            samplerIndex = _getIndexForGLSLSamplerType((uint)uVar1);
+            lVar18 = ___ashldi3(0,samplerIndex,loopIndex2 << 2);
             *(uint *)(iVar16 + 0x50c) = uVar14 | (uint)((ulonglong)lVar18 >> 0x20);
             *(uint *)(iVar16 + 0x510) = uVar15 | (uint)lVar18;
           }
-          if ((*(int *)(glContext + 0x5430) == param_2) &&
-             ((iVar2 = loopIndex * 0x10 + loopIndex2, iVar6 != local_120[iVar2] ||
-              ((iVar6 != 0 && (*srcCursor2 != local_a0[iVar2])))))) {
+          if ((*(int *)(glContext + 0x5430) == program) &&
+             ((iVar2 = loopIndex * 0x10 + loopIndex2, iVar6 != savedCounts[iVar2] ||
+              ((iVar6 != 0 && (*srcCursor2 != savedTypes[iVar2])))))) {
             *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1 << (loopIndex2 & 0x3f);
           }
           loopIndex2 = loopIndex2 + 1;
@@ -645,7 +645,7 @@ LAB_00087ce4:
       loopIndex = loopIndex + 1;
     } while (loopIndex < 2);
   }
-  return -(uint)(local_58 ^ *(byte *)(param_2 + 0x3e)) >> 0x1f;
+  return -(uint)(savedValidFlag ^ *(byte *)(program + 0x3e)) >> 0x1f;
 }
 
 /* _setImageUnit @ 0x87f00 (576 bytes) */
