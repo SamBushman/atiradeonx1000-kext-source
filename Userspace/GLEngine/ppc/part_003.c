@@ -5269,8 +5269,11 @@ int _glTexImage3D_Exec(glContext, target, level, internalformat, width, height, 
   byte levelFlags;
   ushort textureTargetBits;
   undefined4 glErrorCode;
-  int iVar4;
-  int iVar5;
+  int levelRecord;
+  int imageEndOffset;
+  int levelSlot;
+  int elementBytes;
+  int createdLevel;
   int iVar6;
   int pixelUnpackBuffer;
   int bufferSize;
@@ -5295,32 +5298,32 @@ LAB_00027098:
     textureTargetBits = *(ushort *)(iVar6 + 0x24);
     if ((textureTargetBits & 0x3c00) == 0x1000) {
 LAB_00027114:
-      iVar5 = iVar6 + level * 0x18;
-      iVar4 = iVar5 + 0xc4;
-      if ((*(byte *)(iVar5 + 0xcf) & 0x20) != 0) {
-        _gleDeletePluginTextureLevel(glContext,iVar6,iVar4,0,level);
-        if (*(int *)(iVar5 + 0xd8) != 0) {
-          levelFlags = *(byte *)(iVar5 + 0xcf);
+      levelSlot = iVar6 + level * 0x18;
+      levelRecord = levelSlot + 0xc4;
+      if ((*(byte *)(levelSlot + 0xcf) & 0x20) != 0) {
+        _gleDeletePluginTextureLevel(glContext,iVar6,levelRecord,0,level);
+        if (*(int *)(levelSlot + 0xd8) != 0) {
+          levelFlags = *(byte *)(levelSlot + 0xcf);
           if ((levelFlags & 1) == 0) {
-            _gleFreeTextureLevel(glContext,iVar6,iVar4);
-            levelFlags = *(byte *)(iVar5 + 0xcf);
+            _gleFreeTextureLevel(glContext,iVar6,levelRecord);
+            levelFlags = *(byte *)(levelSlot + 0xcf);
           }
           else {
-            *(undefined4 *)(iVar5 + 0xd8) = 0;
+            *(undefined4 *)(levelSlot + 0xd8) = 0;
           }
-          *(byte *)(iVar5 + 0xcf) = levelFlags & 0xef;
+          *(byte *)(levelSlot + 0xcf) = levelFlags & 0xef;
         }
-        *(byte *)(iVar5 + 0xcf) = *(byte *)(iVar5 + 0xcf) & 0xdf;
+        *(byte *)(levelSlot + 0xcf) = *(byte *)(levelSlot + 0xcf) & 0xdf;
       }
-      iVar5 = _gleCreateTextureLevel
-                        (glContext,iVar6,iVar4,internalformat,width,height,depth,border,format,
+      createdLevel = _gleCreateTextureLevel
+                        (glContext,iVar6,levelRecord,internalformat,width,height,depth,border,format,
                          type,1,pixels);
-      if ((iVar5 != 0) && (pixels != 0)) {
-        _gleTextureImagePut(glContext,iVar4,0,0,0,width,height,depth,format,type,0,
+      if ((createdLevel != 0) && (pixels != 0)) {
+        _gleTextureImagePut(glContext,levelRecord,0,0,0,width,height,depth,format,type,0,
                             glContext + 0x31cc,pixels);
       }
       if ((((width != 0) && (height != 0)) && (depth != 0)) &&
-         (((_gleCreatePluginTextureLevel(glContext,iVar6,iVar4,0,level,internalformat),
+         (((_gleCreatePluginTextureLevel(glContext,iVar6,levelRecord,0,level,internalformat),
            (*(uint *)(iVar6 + 0x6c) & 0x8000) != 0 && (*(short *)(iVar6 + 0x60) == level)) &&
           (iVar6 = _gleGenMipmapsToLevel(glContext,iVar6,0,level,0xf,1), iVar6 != 0)))) {
         return;
@@ -5336,16 +5339,16 @@ LAB_00027114:
     if ((textureTargetBits & 0xc00) == 0) goto LAB_00027114;
   }
   else {
-    iVar4 = _gleOffsetLimitImage3D
+    imageEndOffset = _gleOffsetLimitImage3D
                       (glContext + 0x31cc,width,height,depth,format,type,pixels);
     bufferSize = *(int *)(pixelUnpackBuffer + 0x38);
     bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar5 = (int)bytesPerElement;
-    if (iVar4 <= bufferSize) {
-      if (iVar5 == 0) {
-        iVar5 = _glePixelBytes(format,type);
+    elementBytes = (int)bytesPerElement;
+    if (imageEndOffset <= bufferSize) {
+      if (elementBytes == 0) {
+        elementBytes = _glePixelBytes(format,type);
       }
-      if (pixels == (pixels / iVar5) * iVar5) {
+      if (pixels == (pixels / elementBytes) * elementBytes) {
         if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
           _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
         }

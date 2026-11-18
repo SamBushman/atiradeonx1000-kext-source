@@ -2444,16 +2444,16 @@ void _gleMultiVtxTextureCoordGenWrapEye(glContext, vertices, vertexCount)
 }
 
 /* _gleMultiVtxTextureCoordGenObjectSlow @ 0xf6898 (552 bytes) */
-void _gleMultiVtxTextureCoordGenObjectSlow(param_1, vertexStartThenCursor, vertexCount, texUnit)
-  int param_1;
+void _gleMultiVtxTextureCoordGenObjectSlow(glContext, vertexStartThenCursor, vertexCount, texUnit)
+  int glContext;
   uint vertexStartThenCursor;
   int vertexCount;
   int texUnit;
 {
-  float *pfVar1;
-  float *pfVar2;
-  float *pfVar3;
-  float *pfVar4;
+  float *objectYPtr;
+  float *objectXPtr;
+  float *objectZPtr;
+  float *objectWPtr;
   float objectPlaneSA;
   float objectPlaneQA;
   float objectPlaneRA;
@@ -2479,7 +2479,7 @@ void _gleMultiVtxTextureCoordGenObjectSlow(param_1, vertexStartThenCursor, verte
   
   iVar12 = texUnit * 0x94;
   uVar10 = vertexStartThenCursor + vertexCount * 0x100;
-  unitState = iVar12 + param_1;
+  unitState = iVar12 + glContext;
   if ((*(char *)(unitState + 0x3d78) != '\0') && (*(short *)(unitState + 0x3ce8) == 0x2401)) {
     objectPlaneSA = *(float *)(unitState + 0x3cfc);
     objectPlaneSD = *(float *)(unitState + 0x3d08);
@@ -2489,19 +2489,19 @@ void _gleMultiVtxTextureCoordGenObjectSlow(param_1, vertexStartThenCursor, verte
       remaining = (uVar10 - vertexStartThenCursor) + 0xff >> 8;
       vertexCursor = vertexStartThenCursor;
       do {
-        pfVar1 = (float *)(vertexCursor + 0x24);
+        objectYPtr = (float *)(vertexCursor + 0x24);
         texCoordSlot = texUnit * 0x10 + vertexCursor;
-        pfVar2 = (float *)(vertexCursor + 0x20);
-        pfVar3 = (float *)(vertexCursor + 0x28);
-        pfVar4 = (float *)(vertexCursor + 0x2c);
+        objectXPtr = (float *)(vertexCursor + 0x20);
+        objectZPtr = (float *)(vertexCursor + 0x28);
+        objectWPtr = (float *)(vertexCursor + 0x2c);
         vertexCursor = vertexCursor + 0x100;
         *(float *)(texCoordSlot + 0x80) =
-             objectPlaneSD * *pfVar4 + (objectPlaneSC * *pfVar3 + (objectPlaneSA * *pfVar2 + objectPlaneSB * *pfVar1));
+             objectPlaneSD * *objectWPtr + (objectPlaneSC * *objectZPtr + (objectPlaneSA * *objectXPtr + objectPlaneSB * *objectYPtr));
         remaining = remaining - 1;
       } while (remaining != 0);
     }
   }
-  unitState = iVar12 + param_1;
+  unitState = iVar12 + glContext;
   if ((*(char *)(unitState + 0x3d79) != '\0') && (*(short *)(unitState + 0x3d0c) == 0x2401)) {
     objectPlaneTA = *(float *)(unitState + 0x3d20);
     objectPlaneTD = *(float *)(unitState + 0x3d2c);
@@ -2511,19 +2511,19 @@ void _gleMultiVtxTextureCoordGenObjectSlow(param_1, vertexStartThenCursor, verte
       remaining = (uVar10 - vertexStartThenCursor) + 0xff >> 8;
       vertexCursor = vertexStartThenCursor;
       do {
-        pfVar1 = (float *)(vertexCursor + 0x24);
+        objectYPtr = (float *)(vertexCursor + 0x24);
         texCoordSlot = texUnit * 0x10 + vertexCursor;
-        pfVar2 = (float *)(vertexCursor + 0x20);
-        pfVar3 = (float *)(vertexCursor + 0x28);
-        pfVar4 = (float *)(vertexCursor + 0x2c);
+        objectXPtr = (float *)(vertexCursor + 0x20);
+        objectZPtr = (float *)(vertexCursor + 0x28);
+        objectWPtr = (float *)(vertexCursor + 0x2c);
         vertexCursor = vertexCursor + 0x100;
         *(float *)(texCoordSlot + 0x84) =
-             objectPlaneTD * *pfVar4 + (objectPlaneTC * *pfVar3 + (objectPlaneTA * *pfVar2 + objectPlaneTB * *pfVar1));
+             objectPlaneTD * *objectWPtr + (objectPlaneTC * *objectZPtr + (objectPlaneTA * *objectXPtr + objectPlaneTB * *objectYPtr));
         remaining = remaining - 1;
       } while (remaining != 0);
     }
   }
-  unitState = iVar12 + param_1;
+  unitState = iVar12 + glContext;
   if ((*(char *)(unitState + 0x3d7a) != '\0') && (*(short *)(unitState + 0x3d30) == 0x2401)) {
     objectPlaneRA = *(float *)(unitState + 0x3d44);
     objectPlaneRD = *(float *)(unitState + 0x3d50);
@@ -2533,20 +2533,20 @@ void _gleMultiVtxTextureCoordGenObjectSlow(param_1, vertexStartThenCursor, verte
       remaining = (uVar10 - vertexStartThenCursor) + 0xff >> 8;
       vertexCursor = vertexStartThenCursor;
       do {
-        pfVar1 = (float *)(vertexCursor + 0x24);
+        objectYPtr = (float *)(vertexCursor + 0x24);
         texCoordSlot = texUnit * 0x10 + vertexCursor;
-        pfVar2 = (float *)(vertexCursor + 0x20);
-        pfVar3 = (float *)(vertexCursor + 0x28);
-        pfVar4 = (float *)(vertexCursor + 0x2c);
+        objectXPtr = (float *)(vertexCursor + 0x20);
+        objectZPtr = (float *)(vertexCursor + 0x28);
+        objectWPtr = (float *)(vertexCursor + 0x2c);
         vertexCursor = vertexCursor + 0x100;
         *(float *)(texCoordSlot + 0x88) =
-             objectPlaneRD * *pfVar4 + (objectPlaneRC * *pfVar3 + (objectPlaneRA * *pfVar2 + objectPlaneRB * *pfVar1));
+             objectPlaneRD * *objectWPtr + (objectPlaneRC * *objectZPtr + (objectPlaneRA * *objectXPtr + objectPlaneRB * *objectYPtr));
         remaining = remaining - 1;
       } while (remaining != 0);
     }
-    *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
+    *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
   }
-  iVar12 = iVar12 + param_1;
+  iVar12 = iVar12 + glContext;
   if (*(char *)(iVar12 + 0x3d7b) == '\0') {
     return;
   }
@@ -2560,18 +2560,18 @@ void _gleMultiVtxTextureCoordGenObjectSlow(param_1, vertexStartThenCursor, verte
   if (vertexStartThenCursor < uVar10) {
     uVar10 = (uVar10 - vertexStartThenCursor) + 0xff >> 8;
     do {
-      pfVar1 = (float *)(vertexStartThenCursor + 0x24);
+      objectYPtr = (float *)(vertexStartThenCursor + 0x24);
       texCoordSlot = texUnit * 0x10 + vertexStartThenCursor;
-      pfVar2 = (float *)(vertexStartThenCursor + 0x20);
-      pfVar3 = (float *)(vertexStartThenCursor + 0x28);
-      pfVar4 = (float *)(vertexStartThenCursor + 0x2c);
+      objectXPtr = (float *)(vertexStartThenCursor + 0x20);
+      objectZPtr = (float *)(vertexStartThenCursor + 0x28);
+      objectWPtr = (float *)(vertexStartThenCursor + 0x2c);
       vertexStartThenCursor = vertexStartThenCursor + 0x100;
       *(float *)(texCoordSlot + 0x8c) =
-           objectPlaneQD * *pfVar4 + (objectPlaneQC * *pfVar3 + (objectPlaneQA * *pfVar2 + objectPlaneQB * *pfVar1));
+           objectPlaneQD * *objectWPtr + (objectPlaneQC * *objectZPtr + (objectPlaneQA * *objectXPtr + objectPlaneQB * *objectYPtr));
       uVar10 = uVar10 - 1;
     } while (uVar10 != 0);
   }
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 2;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 2;
   return;
 }
 
