@@ -2789,8 +2789,8 @@ void _gleVtxLightSpecRGBABack(int glContext,int vertex,int vertexCount,double fl
   undefined4 colorAlpha;
   undefined *vectorNormalize;
   int glContextForCalls;
-  int extraout_r3;
-  int extraout_r3_00;
+  int r3AfterCall;
+  int r3AfterCall1;
   int r3AfterCall2;
   uint enabledLightMask;
   int vertexIndex;
@@ -2801,7 +2801,7 @@ void _gleVtxLightSpecRGBABack(int glContext,int vertex,int vertexCount,double fl
   int material;
   int lightProducts;
   int lightRecord;
-  double extraout_f1;
+  double f1AfterCall;
   double f1AfterCall1;
   double f1AfterCall2;
   double f1AfterCall3;

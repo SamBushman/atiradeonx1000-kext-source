@@ -2675,56 +2675,56 @@ void _gleReclaimTextureObjectResources(glContext)
 }
 
 /* _gleCompressedTextureImagePut @ 0xfc668 (252 bytes) */
-int _gleCompressedTextureImagePut(unusedArg1, param_2, param_3, param_4, unusedArg5, width, height, param_8, internalformat, unusedArg10, data)
+int _gleCompressedTextureImagePut(unusedArg1, textureLevel, xoffset, yoffset, unusedArg5, width, height, depth, internalformat, unusedArg10, data)
   undefined4 unusedArg1;
-  int param_2;
-  int param_3;
-  int param_4;
+  int textureLevel;
+  int xoffset;
+  int yoffset;
   undefined4 unusedArg5;
   int width;
   int height;
-  int param_8;
+  int depth;
   uint internalformat;
   undefined4 unusedArg10;
   int data;
 {
-  ushort uVar1;
-  ushort uVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
-  int iVar10;
+  ushort levelWidth;
+  ushort levelHeight;
+  int destBlockRow;
+  int sliceBlockRow;
+  int srcRowBytes;
+  int blockRowsPerSlice;
+  int sliceIndex;
+  int blockSizeShift;
+  int srcRowCursor;
+  int blockRowIndex;
   
-  if (((0x83f3 < internalformat) || (0x83f1 < internalformat)) || (iVar8 = 3, internalformat < 0x83f0)) {
-    iVar8 = 4;
+  if (((0x83f3 < internalformat) || (0x83f1 < internalformat)) || (blockSizeShift = 3, internalformat < 0x83f0)) {
+    blockSizeShift = 4;
   }
-  iVar7 = 0;
-  uVar1 = *(ushort *)(param_2 + 4);
-  uVar2 = *(ushort *)(param_2 + 6);
-  iVar4 = param_4 >> 2;
-  if (0 < param_8) {
-    iVar6 = height + 3 >> 2;
-    iVar5 = (width + 3 >> 2) << iVar8;
+  sliceIndex = 0;
+  levelWidth = *(ushort *)(textureLevel + 4);
+  levelHeight = *(ushort *)(textureLevel + 6);
+  sliceBlockRow = yoffset >> 2;
+  if (0 < depth) {
+    blockRowsPerSlice = height + 3 >> 2;
+    srcRowBytes = (width + 3 >> 2) << blockSizeShift;
     do {
-      iVar10 = 0;
-      iVar9 = data;
-      if (0 < iVar6) {
+      blockRowIndex = 0;
+      srcRowCursor = data;
+      if (0 < blockRowsPerSlice) {
         do {
-          iVar3 = iVar4 + iVar10;
-          iVar10 = iVar10 + 1;
-          data = iVar9 + iVar5;
-          _memcpy(*(int *)(param_2 + 0x14) +
-                  (iVar3 * ((int)(uVar1 + 3) >> 2) + (param_3 >> 2) << iVar8),iVar9,iVar5);
-          iVar9 = data;
-        } while (iVar10 < iVar6);
+          destBlockRow = sliceBlockRow + blockRowIndex;
+          blockRowIndex = blockRowIndex + 1;
+          data = srcRowCursor + srcRowBytes;
+          _memcpy(*(int *)(textureLevel + 0x14) +
+                  (destBlockRow * ((int)(levelWidth + 3) >> 2) + (xoffset >> 2) << blockSizeShift),srcRowCursor,srcRowBytes);
+          srcRowCursor = data;
+        } while (blockRowIndex < blockRowsPerSlice);
       }
-      iVar7 = iVar7 + 1;
-      iVar4 = iVar4 + ((int)(uVar2 + 3) >> 2);
-    } while (iVar7 < param_8);
+      sliceIndex = sliceIndex + 1;
+      sliceBlockRow = sliceBlockRow + ((int)(levelHeight + 3) >> 2);
+    } while (sliceIndex < depth);
   }
   return;
 }

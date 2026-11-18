@@ -9,9 +9,9 @@ local	_glDetachObjectARB_Exec	iVar6	hashObject	INFERRED	object found by name in 
 use	_glDetachObjectARB_Exec	iVar9	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar9\ =\ 0;$	+1
 use	_glDetachObjectARB_Exec	iVar9	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar9\ \*\ 4\ \+\ iVar7\);$	+1
 use	_glDetachObjectARB_Exec	iVar9	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+2
-use	_glDetachObjectARB_Exec	iVar10	loopIndex2	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar10\ =\ 0;$	+1
-use	_glDetachObjectARB_Exec	iVar10	loopIndex2	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1
-use	_glDetachObjectARB_Exec	iVar10	loopIndex2	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*if\ \(iVar9\ <=\ iVar10\)\ goto\ LAB_000875c8;$	+1
+use	_glDetachObjectARB_Exec	iVar10	attachmentScanIndexThenAttachmentCountForCopy	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar10\ =\ 0;$	+1
+use	_glDetachObjectARB_Exec	iVar10	attachmentScanIndexThenAttachmentCountForCopy	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1
+use	_glDetachObjectARB_Exec	iVar10	attachmentScanIndexThenAttachmentCountForCopy	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*if\ \(iVar9\ <=\ iVar10\)\ goto\ LAB_000875c8;$	+1
 use	_glDetachObjectARB_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar4\ =\ \*\(int\ \*\*\)\(iVar5\ \+\ 0x44\);$	+1
 use	_glDetachObjectARB_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*if\ \(iVar6\ ==\ \*piVar4\)\ \{$	+1
 use	_glDetachObjectARB_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar4\ =\ piVar4\ \+\ 1;$	+1

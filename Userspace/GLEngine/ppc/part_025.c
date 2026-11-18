@@ -161,8 +161,7 @@ void _glDetachObjectARB_Exec(glContext, containerObj, attachedObj)
   int *dstCursor;
   int attachmentCount;
   int loopIndex;
-  int iVar10;
-  int loopIndex2;
+  int attachmentScanIndexThenAttachmentCountForCopy;
   
   attachmentFound = false;
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -187,26 +186,26 @@ LAB_00087554:
       hashObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x6018,attachedObj);
       if (hashObject == 0) goto LAB_00087554;
       attachmentCount = *(int *)(sharedStateThenContainerObject + 0x48);
-      loopIndex2 = 0;
+      attachmentScanIndexThenAttachmentCountForCopy = 0;
       if (0 < attachmentCount) {
         srcCursor = *(int **)(sharedStateThenContainerObject + 0x44);
         do {
           if (hashObject == *srcCursor) {
             attachmentFound = true;
           }
-          loopIndex2 = loopIndex2 + 1;
+          attachmentScanIndexThenAttachmentCountForCopy = attachmentScanIndexThenAttachmentCountForCopy + 1;
           srcCursor = srcCursor + 1;
-          if (attachmentCount <= loopIndex2) goto LAB_000875c8;
+          if (attachmentCount <= attachmentScanIndexThenAttachmentCountForCopy) goto LAB_000875c8;
         } while (!attachmentFound);
 LAB_00087604:
         newAttachments = (int *)0x0;
-        iVar10 = 1;
+        attachmentScanIndexThenAttachmentCountForCopy = 1;
         if (attachmentCount != 1) {
           newAttachments = (int *)_malloc(attachmentCount * 4 + -4);
-          iVar10 = *(int *)(sharedStateThenContainerObject + 0x48);
+          attachmentScanIndexThenAttachmentCountForCopy = *(int *)(sharedStateThenContainerObject + 0x48);
         }
         loopIndex = 0;
-        if (iVar10 < 1) {
+        if (attachmentScanIndexThenAttachmentCountForCopy < 1) {
           oldAttachments = *(int *)(sharedStateThenContainerObject + 0x44);
         }
         else {
@@ -217,13 +216,13 @@ LAB_00087604:
             if (hashObject != attachmentEntry) {
               *dstCursor = attachmentEntry;
               dstCursor = dstCursor + 1;
-              iVar10 = *(int *)(sharedStateThenContainerObject + 0x48);
+              attachmentScanIndexThenAttachmentCountForCopy = *(int *)(sharedStateThenContainerObject + 0x48);
               oldAttachments = *(int *)(sharedStateThenContainerObject + 0x44);
             }
             loopIndex = loopIndex + 1;
-          } while (loopIndex < iVar10);
+          } while (loopIndex < attachmentScanIndexThenAttachmentCountForCopy);
         }
-        *(int *)(sharedStateThenContainerObject + 0x48) = iVar10 + -1;
+        *(int *)(sharedStateThenContainerObject + 0x48) = attachmentScanIndexThenAttachmentCountForCopy + -1;
         if (oldAttachments != 0) {
           _free(oldAttachments);
         }

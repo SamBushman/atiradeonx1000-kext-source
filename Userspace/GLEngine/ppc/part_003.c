@@ -4234,7 +4234,7 @@ void _PPEmulatorProgramSetupHandlesFromPPStream(emulatorProgram, glContext, ppSt
   int resultChunk;
   uint operandDescriptor;
   undefined4 operandDescriptorWord2;
-  undefined1 auStack_30 [4];
+  undefined1 chunkEntryCount [4];
   int handleOffset;
   undefined1 resultComponentStride [4];
   int componentStride [2];
@@ -4261,7 +4261,7 @@ void _PPEmulatorProgramSetupHandlesFromPPStream(emulatorProgram, glContext, ppSt
   }
   resultHandleBank = *(int *)(emulatorProgram + 0x8c);
   for (resultChunk = **(int **)(ppStream + 0x1c); resultChunk != 0; resultChunk = *(int *)(resultChunk + 8)) {
-    _PPStreamChunkGetStream(&operandDescriptor,resultChunk,ppStream,auStack_30,0);
+    _PPStreamChunkGetStream(&operandDescriptor,resultChunk,ppStream,chunkEntryCount,0);
     ((void (*)())_gleVPGetResultOffset)(glContext,operandDescriptor,operandDescriptorWord2,&handleOffset,resultComponentStride);
     *(int *)(resultHandleBank + (uint)*(ushort *)(resultChunk + 0x12) * 0x10) = handleOffset;
     *(int *)((uint)*(ushort *)(resultChunk + 0x12) * 0x10 + resultHandleBank + 4) = handleOffset + 4;
@@ -4280,7 +4280,7 @@ void _PPEmulatorProgramSetupHandlesFromPPStream(emulatorProgram, glContext, ppSt
   for (parameterChunk = **(int **)(ppStream + 0x10); parameterChunk != 0; parameterChunk = *(int *)(parameterChunk + 8)) {
     operandKind = *(uint *)(parameterChunk + 0xc) >> 0x10 & 0x1f;
     if ((operandKind == 1) || (operandKind == 0x11)) {
-      _PPStreamChunkGetStream(&operandDescriptor,parameterChunk,ppStream,auStack_30,0);
+      _PPStreamChunkGetStream(&operandDescriptor,parameterChunk,ppStream,chunkEntryCount,0);
       handleOffset = (operandDescriptor & 0xffff) * 0x10;
       *(int *)(parameterHandleBank + (uint)*(ushort *)(parameterChunk + 0x12) * 0x10) = handleOffset;
       *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 4) = handleOffset + 4;
@@ -4288,7 +4288,7 @@ void _PPEmulatorProgramSetupHandlesFromPPStream(emulatorProgram, glContext, ppSt
       *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 0xc) = handleOffset + 0xc;
     }
     else {
-      _PPStreamChunkGetStream(&operandDescriptor,parameterChunk,ppStream,auStack_30,0);
+      _PPStreamChunkGetStream(&operandDescriptor,parameterChunk,ppStream,chunkEntryCount,0);
       ((void (*)())_gleVPGetParameterPtr)(glContext,operandDescriptor,operandDescriptorWord2,&handleOffset,componentStride);
       *(int *)(parameterHandleBank + (uint)*(ushort *)(parameterChunk + 0x12) * 0x10) = handleOffset;
       *(int *)((uint)*(ushort *)(parameterChunk + 0x12) * 0x10 + parameterHandleBank + 4) = handleOffset + componentStride[0];

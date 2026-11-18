@@ -603,17 +603,17 @@ int _gleTestFence(glContext, param_2, fence)
 {
   bool previousRenderersComplete;
   int fenceObject;
-  int iVar3;
+  int initialOneThenRendererTestResult;
   int allRenderersComplete;
   int rendererRecordCursor;
   uint rendererIndex;
   undefined4 *rendererFenceHandlePtr;
   
-  iVar3 = 1;
+  initialOneThenRendererTestResult = 1;
   allRenderersComplete = 0;
   if (param_2 == 0) {
     fenceObject = _gleLookupHashObject(glContext + 0x543c,fence);
-    allRenderersComplete = iVar3;
+    allRenderersComplete = initialOneThenRendererTestResult;
     if (fenceObject == 0) {
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x502;
@@ -628,8 +628,8 @@ int _gleTestFence(glContext, param_2, fence)
           previousRenderersComplete = allRenderersComplete != 0;
           allRenderersComplete = 0;
           if ((previousRenderersComplete) &&
-             (iVar3 = (**(code **)(*(int *)(rendererRecordCursor + -0x777c) + 0x1c0))
-                                (*(undefined4 *)(rendererRecordCursor + -0x7a54),0,*rendererFenceHandlePtr), iVar3 != 0)) {
+             (initialOneThenRendererTestResult = (**(code **)(*(int *)(rendererRecordCursor + -0x777c) + 0x1c0))
+                                (*(undefined4 *)(rendererRecordCursor + -0x7a54),0,*rendererFenceHandlePtr), initialOneThenRendererTestResult != 0)) {
             allRenderersComplete = 1;
           }
           rendererIndex = rendererIndex + 1;
@@ -2128,7 +2128,7 @@ int _LFSParserAttachString(parser, sourceString, preprocessFlag)
   int sourceString;
   int preprocessFlag;
 {
-  int iVar1;
+  int sourceLengthThenPreprocessedTextThenNewlineResult;
   int textCopy;
   uint textLength;
   uint scanPosition;
@@ -2137,14 +2137,14 @@ int _LFSParserAttachString(parser, sourceString, preprocessFlag)
   if (*parser == 0) {
     if (sourceString != 0) {
       if (preprocessFlag == 0) {
-        iVar1 = _strlen(sourceString);
-        textCopy = _calloc(iVar1 + 1,1);
+        sourceLengthThenPreprocessedTextThenNewlineResult = _strlen(sourceString);
+        textCopy = _calloc(sourceLengthThenPreprocessedTextThenNewlineResult + 1,1);
         *parser = textCopy;
-        _memmove(textCopy,sourceString,iVar1);
+        _memmove(textCopy,sourceString,sourceLengthThenPreprocessedTextThenNewlineResult);
       }
       else {
-        iVar1 = ((int (*)())_LFSParserPreprocessString)(parser,sourceString);
-        *parser = iVar1;
+        sourceLengthThenPreprocessedTextThenNewlineResult = ((int (*)())_LFSParserPreprocessString)(parser,sourceString);
+        *parser = sourceLengthThenPreprocessedTextThenNewlineResult;
       }
       scanPosition = 0;
       textLength = _strlen(*parser);
@@ -2153,8 +2153,8 @@ int _LFSParserAttachString(parser, sourceString, preprocessFlag)
       if (textLength != 0) {
         do {
           stepLength[0] = 1;
-          iVar1 = ((int (*)())_LFSParserCheckForNewline)(parser,*parser,scanPosition,textLength,stepLength);
-          if (iVar1 != 0) {
+          sourceLengthThenPreprocessedTextThenNewlineResult = ((int (*)())_LFSParserCheckForNewline)(parser,*parser,scanPosition,textLength,stepLength);
+          if (sourceLengthThenPreprocessedTextThenNewlineResult != 0) {
             parser[2] = parser[2] + 1;
           }
           textLength = parser[1];

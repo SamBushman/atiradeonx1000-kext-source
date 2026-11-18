@@ -645,7 +645,7 @@ void _gleEmptyImage(glContext, width, height, format, type, source, image)
   byte spillMask;
   byte destByte;
   uint mergedBits;
-  int iVar6;
+  int rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft;
   int strideRemainder;
   uint skipBitsThenBitShift;
   byte *reverseSrcEnd;
@@ -669,26 +669,26 @@ void _gleEmptyImage(glContext, width, height, format, type, source, image)
   int swapBytesLeft;
   double elementBytesValue;
   
-  iVar6 = *(int *)(glContext + 0x31cc);
+  rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft = *(int *)(glContext + 0x31cc);
   alignment = *(int *)(glContext + 0x31e0);
   swapBytes = *(char *)(glContext + 0x31e4);
   skipPixels = *(int *)(glContext + 0x31d8);
   skipRows = *(int *)(glContext + 0x31d4);
   lsbFirst = *(char *)(glContext + 0x31e5);
   componentCount = _gleComponents(format);
-  if (iVar6 < 1) {
-    iVar6 = width;
+  if (rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft < 1) {
+    rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft = width;
   }
   if (type == 0x1a00) {
-    bitmapRowStride = iVar6 * componentCount + 7 >> 3;
-    iVar6 = bitmapRowStride - (bitmapRowStride / alignment) * alignment;
-    if (iVar6 != 0) {
-      bitmapRowStride = bitmapRowStride + (alignment - iVar6);
+    bitmapRowStride = rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft * componentCount + 7 >> 3;
+    rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft = bitmapRowStride - (bitmapRowStride / alignment) * alignment;
+    if (rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft != 0) {
+      bitmapRowStride = bitmapRowStride + (alignment - rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft);
     }
     skipBitsThenBitShift = skipPixels * componentCount;
-    iVar6 = ((int)skipBitsThenBitShift >> 3) + (uint)((int)skipBitsThenBitShift < 0 && (skipBitsThenBitShift & 7) != 0);
-    skipBitsThenBitShift = skipBitsThenBitShift + iVar6 * -8;
-    bitmapRowStart = (byte *)(image + skipRows * bitmapRowStride + iVar6);
+    rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft = ((int)skipBitsThenBitShift >> 3) + (uint)((int)skipBitsThenBitShift < 0 && (skipBitsThenBitShift & 7) != 0);
+    skipBitsThenBitShift = skipBitsThenBitShift + rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft * -8;
+    bitmapRowStart = (byte *)(image + skipRows * bitmapRowStride + rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft);
     leadMask = *(byte *)(-skipBitsThenBitShift + 0x1111d0);
     spillMask = (&_HighBitsMask)[skipBitsThenBitShift];
     if (0 < height) {
@@ -696,11 +696,11 @@ void _gleEmptyImage(glContext, width, height, format, type, source, image)
         carryBits = 0;
         if (width * componentCount != 0) {
           bitmapDestCursor = bitmapRowStart;
-          iVar6 = width * componentCount;
+          rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft = width * componentCount;
           writeMask = (uint)leadMask;
           do {
-            if ((int)(iVar6 + skipBitsThenBitShift) < 8) {
-              writeMask = writeMask & (byte)(&_HighBitsMask)[iVar6 + skipBitsThenBitShift];
+            if ((int)(rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft + skipBitsThenBitShift) < 8) {
+              writeMask = writeMask & (byte)(&_HighBitsMask)[rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft + skipBitsThenBitShift];
             }
             if (lsbFirst == '\0') {
               destByte = *bitmapDestCursor;
@@ -722,16 +722,16 @@ void _gleEmptyImage(glContext, width, height, format, type, source, image)
             else {
               *bitmapDestCursor = (&___glMsbToLsbTable)[writeMask];
             }
-            if (iVar6 < 8) {
-              iVar6 = 0;
+            if (rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft < 8) {
+              rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft = 0;
             }
             else {
-              iVar6 = iVar6 + -8;
+              rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft = rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft + -8;
             }
             source = source + 1;
             bitmapDestCursor = bitmapDestCursor + 1;
             writeMask = 0xff;
-          } while (iVar6 != 0);
+          } while (rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft != 0);
           if (carryBits != 0) {
             if (lsbFirst == '\0') {
               destByte = *bitmapDestCursor;
@@ -758,15 +758,15 @@ void _gleEmptyImage(glContext, width, height, format, type, source, image)
     if (type - 0x1400U < 2) {
       swapBytes = '\0';
     }
-    iVar6 = iVar6 * pixelBytes;
-    strideRemainder = iVar6 - (iVar6 / alignment) * alignment;
+    rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft = rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft * pixelBytes;
+    strideRemainder = rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft - (rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft / alignment) * alignment;
     if (strideRemainder != 0) {
-      iVar6 = iVar6 + (alignment - strideRemainder);
+      rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft = rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft + (alignment - strideRemainder);
     }
-    rowStart = (byte *)(skipRows * iVar6 + skipPixels * pixelBytes + image);
+    rowStart = (byte *)(skipRows * rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft + skipPixels * pixelBytes + image);
     if (swapBytes == '\0') {
       rowByteCount = _gleRowBytes(format,type,width);
-      _gleCopy(source,rowStart,rowByteCount,height,rowByteCount,iVar6);
+      _gleCopy(source,rowStart,rowByteCount,height,rowByteCount,rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft);
     }
     else {
       elementBytesValue = (double)((double (*)())_gleBytesPerElement)(type);
@@ -794,7 +794,7 @@ void _gleEmptyImage(glContext, width, height, format, type, source, image)
             } while (componentsLeft != 0);
           }
           height = height + -1;
-          rowStart = rowStart + iVar6;
+          rowStart = rowStart + rowLengthThenRowStrideThenBitmapRemainderThenSkipBytesThenBitsLeft;
         } while (height != 0);
       }
     }

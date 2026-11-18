@@ -1,0 +1,10 @@
+local	_gleTestFence	iVar3	initialOneThenRendererTestResult	CONFIRMED	1 first (copied to iVar4: nothing failed so far), then the return value of each renderer's test callback (dispatch +0x1c0)
+local	_glGetBooleanv_Exec	auStack_b0	stateFlagBytes	INFERRED	16-byte buffer filled by _gleGetState (5th argument); the same name _glGetIntegerv_Exec / _glGetFloatv_Exec give it
+use	_glSeparableFilter2D_Exec	iVar3	checkTypeFormatResultThenPixelUnpackBuffer	CONFIRMED	the result of _CheckTypeFormat(type, format): nonzero lets the pixel data checks continue	^\s*iVar3\ =\ _CheckTypeFormat\(param_7,param_6\);$	+2
+local	_gleFeedbackDrawPixels	param_2	rasterPositionVertex	CONFIRMED	the callers pass their rasterPos / rasterPositionVertex; it is forwarded unchanged as the vertex record to _gleFeedbackHitRecord
+local	_gleFeedbackHitRecord	param_2	vertex	CONFIRMED	the callers' own variable name (vertex / vertexCursor / *vertexPtrCursor): the vertex record whose floats (position +0..+8, +0x1c, colour +0x30.., texture coordinates +0x80..) are emitted as feedback tokens
+local	_PPEmulatorProgramSetupHandlesFromPPStream	auStack_30	chunkEntryCount	CONFIRMED	4-byte output buffer passed as entryCountOut (4th parameter) of _PPStreamChunkGetStream; never read afterwards
+local	_gleVtxLightSpecRGBABack	extraout_r3	r3AfterCall	CONFIRMED	r3 after a call, declared by the decompiler but never referenced
+local	_gleVtxLightSpecRGBABack	extraout_r3_00	r3AfterCall1	CONFIRMED	r3 after a call, declared by the decompiler but never referenced
+local	_gleVtxLightSpecRGBABack	extraout_f1	f1AfterCall	CONFIRMED	f1 after a call, declared by the decompiler but never referenced
+local	_gleFeedbackHitRecord	fparam_1	lastTokenValue	CONFIRMED	the float of the record's last token (param_2[1], [2] or [0xf] ...), passed to the final _gleFeedbackToken call at LAB_000520f4

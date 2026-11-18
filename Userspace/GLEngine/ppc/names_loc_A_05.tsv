@@ -1078,16 +1078,16 @@ use	_gleDestroyPluginFence	iVar5	loopIndex	INFERRED	only ever set to a start val
 use	_gleDestroyPluginFence	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar5\ \*\ 4;$	+1
 use	_gleDestroyPluginFence	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
 use	_gleDestroyPluginFence	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
-use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar20\ =\ 0;$	+1
-use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(bVar4\)\ \&\&\ \(uVar9\ =\ uVar19,\ 0\ <\ iVar20\)\)\ break;$	+2
-use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(0\ <\ iVar20\)\ break;$	+1
-use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(3\ <\ iVar20\)\ \{$	+1
-use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\(\*pcVar11\)\(param_1,uVar18,iVar20\);$	+1
-use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleVPFlipColors\(param_1,uVar18,iVar20,iVar12\);$	+1
-use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*dVar22\ =\ \(double\)_gleFeedbackQuads\(param_1,uVar18,iVar20,uVar2\ \-\ 0x1b00\);$	+1
-use	_gleFeedbackQuadsFunc_body	puVar14	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*if\ \(\(\(!bVar3\)\ \&\&\ \(bVar5\)\)\ \&\&\ \(puVar14\ =\ puVar16,\ iVar21\ =\ iVar20,\ 0\ <\ iVar20\)\)\ \{$	+1
-use	_gleFeedbackQuadsFunc_body	puVar14	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*_gleVPFlipColors\(param_1,\*puVar14,1,iVar10\);$	+1
-use	_gleFeedbackQuadsFunc_body	puVar14	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar14\ =\ puVar14\ \+\ 1;$	+1
+use	_gleFeedbackQuadsFunc_body	iVar20	runVertexCountThenPolygonVertexCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar20\ =\ 0;$	+1
+use	_gleFeedbackQuadsFunc_body	iVar20	runVertexCountThenPolygonVertexCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(bVar4\)\ \&\&\ \(uVar9\ =\ uVar19,\ 0\ <\ iVar20\)\)\ break;$	+2
+use	_gleFeedbackQuadsFunc_body	iVar20	runVertexCountThenPolygonVertexCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(0\ <\ iVar20\)\ break;$	+1
+use	_gleFeedbackQuadsFunc_body	iVar20	runVertexCountThenPolygonVertexCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(3\ <\ iVar20\)\ \{$	+1
+use	_gleFeedbackQuadsFunc_body	iVar20	runVertexCountThenPolygonVertexCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\(\*pcVar11\)\(param_1,uVar18,iVar20\);$	+1
+use	_gleFeedbackQuadsFunc_body	iVar20	runVertexCountThenPolygonVertexCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleVPFlipColors\(param_1,uVar18,iVar20,iVar12\);$	+1
+use	_gleFeedbackQuadsFunc_body	iVar20	runVertexCountThenPolygonVertexCount	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*dVar22\ =\ \(double\)_gleFeedbackQuads\(param_1,uVar18,iVar20,uVar2\ \-\ 0x1b00\);$	+1
+use	_gleFeedbackQuadsFunc_body	puVar14	oldPolygonListThenVertexPtrCursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*if\ \(\(\(!bVar3\)\ \&\&\ \(bVar5\)\)\ \&\&\ \(puVar14\ =\ puVar16,\ iVar21\ =\ iVar20,\ 0\ <\ iVar20\)\)\ \{$	+1
+use	_gleFeedbackQuadsFunc_body	puVar14	oldPolygonListThenVertexPtrCursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*_gleVPFlipColors\(param_1,\*puVar14,1,iVar10\);$	+1
+use	_gleFeedbackQuadsFunc_body	puVar14	oldPolygonListThenVertexPtrCursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar14\ =\ puVar14\ \+\ 1;$	+1
 use	_gleRTCAddAChunk_51324	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ 0;$	+1
 use	_gleRTCAddAChunk_51324	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
 use	_gleRTCAddAChunk_51324	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*return\ iVar2;$	+1

@@ -2614,8 +2614,7 @@ double _gleUpdateDispatchCodeChange(glContext, dispatchModeBits)
   byte rendererIndexByte;
   undefined *a6;
   undefined *setEyeInterpFunc;
-  uint uVar3;
-  uint dispatchFlags;
+  uint dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
   int rendererRecord;
   undefined4 a3;
   undefined4 incomingR7;
@@ -2642,23 +2641,23 @@ double _gleUpdateDispatchCodeChange(glContext, dispatchModeBits)
   
   if ((dispatchModeBits & 4) != (uint)*(byte *)(glContext + 0x7581)) {
     *(char *)(glContext + 0x7581) = (char)(dispatchModeBits & 4);
-    uVar3 = (uint)*(byte *)(glContext + 0x7581);
-    if (uVar3 == 0) {
+    dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 = (uint)*(byte *)(glContext + 0x7581);
+    if (dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 == 0) {
       rendererIndexByte = *(byte *)(glContext + 0x85a5);
       rendererIndex = (uint)rendererIndexByte;
       if (rendererIndex != 0xff) {
-        copyContextWord0 = uVar3;
-        copyContextWord1 = uVar3;
-        copyContextWord2 = uVar3;
-        copyContextWord3 = uVar3;
-        copyContextWord4 = uVar3;
+        copyContextWord0 = dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
+        copyContextWord1 = dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
+        copyContextWord2 = dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
+        copyContextWord3 = dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
+        copyContextWord4 = dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
         ((void (*)())_gleSwitchRenderersReadBuffers)(glContext,(uint)*(byte *)(glContext + 0x85a6),&copyContextWord0);
         a3 = 0;
         rendererRecord = rendererIndex * 0x2e0 + glContext;
-        uVar3 = (**(code **)(*(int *)(rendererRecord + 0x8884) + 0x138))
+        dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 = (**(code **)(*(int *)(rendererRecord + 0x8884) + 0x138))
                           (*(undefined4 *)(rendererRecord + 0x85ac),*(undefined4 *)(glContext + 0x484c),
                            *(undefined4 *)(glContext + 0x4848));
-        if ((uVar3 < 5) && (rendererIndex != *(byte *)(glContext + 0x85a8))) {
+        if ((dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 < 5) && (rendererIndex != *(byte *)(glContext + 0x85a8))) {
           _gleSynchronizePluginTextures(glContext);
           ((void (*)())_gleSynchronizePluginBuffers)(glContext);
           *(byte *)(glContext + 0x85a8) = rendererIndexByte;
@@ -2670,18 +2669,18 @@ double _gleUpdateDispatchCodeChange(glContext, dispatchModeBits)
           _gleUpdateTextureTransform(glContext);
           setEyeInterpFunc = PTR__gleSetEyeInterpFunc_0011203c;
           a6 = PTR__gleSetClipInterpFunc_00112038;
-          uVar3 = *(uint *)(glContext + 0x31c) | 0x7ffffff;
+          dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 = *(uint *)(glContext + 0x31c) | 0x7ffffff;
           *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x3ffffff;
           *(undefined **)(glContext + 0x49c8) = setEyeInterpFunc;
           *(undefined **)(glContext + 0x49cc) = a6;
           *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 0xfffffffd;
-          *(uint *)(glContext + 0x31c) = uVar3;
+          *(uint *)(glContext + 0x31c) = dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
           *(undefined4 *)(glContext + 800) = 0xffffffff;
           *(undefined4 *)(glContext + 0x310) = 0xffffffff;
-          dispatchFlags = (**(code **)(glContext + 0x4788))
+          dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 = (**(code **)(glContext + 0x4788))
                             (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,glContext + 0x310,a3,
-                             incomingR7,0xffffffff,a6,dispatchFlags);
-          if ((dispatchFlags & 8) == 0) {
+                             incomingR7,0xffffffff,a6,dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3);
+          if ((dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 & 8) == 0) {
             ((void (*)())_gleSwitchRenderersWriteBuffers)(glContext,(uint)*(byte *)(glContext + 0x85a5),&copyContextWord0);
           }
           dispatchModeBits = 0;
@@ -2702,9 +2701,9 @@ double _gleUpdateDispatchCodeChange(glContext, dispatchModeBits)
     *(undefined4 *)(glContext + 0x4890) = 0;
     *(undefined4 *)(glContext + 0x4894) = 0;
   }
-  uVar3 = (dispatchModeBits ^ 8) >> 3 & 1;
-  if (uVar3 != *(byte *)(glContext + 0x759d)) {
-    *(char *)(glContext + 0x759d) = (char)uVar3;
+  dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 = (dispatchModeBits ^ 8) >> 3 & 1;
+  if (dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3 != *(byte *)(glContext + 0x759d)) {
+    *(char *)(glContext + 0x759d) = (char)dispatchBit4ThenRendererQueryResultThenChangeWord3ThenDispatchFlagsThenInvertedBit3;
     ((void (*)())_gleUpdateFramebufferOperationFuncs)(glContext);
   }
   return;

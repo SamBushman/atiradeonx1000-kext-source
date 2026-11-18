@@ -2363,25 +2363,25 @@ int _gleDeletePluginTextureLevel(glContext, textureRecordThenHandleCursor, unuse
 {
   int *rendererFuncs;
   undefined4 *rendererContext;
-  byte bVar3;
+  byte baseLevel;
   ushort minFilter;
   ushort newMinFilter;
   undefined4 rendererHandle;
   uint levelBit;
-  uint uVar8;
+  uint levelRangeShift;
   int rendererBase;
   int loopIndex;
   
-  bVar3 = *(byte *)((int)textureRecordThenHandleCursor + 0x82);
+  baseLevel = *(byte *)((int)textureRecordThenHandleCursor + 0x82);
   levelBit = 1 << (level & 0x3f);
-  uVar8 = 0x1f - *(byte *)((int)textureRecordThenHandleCursor + 0x83);
+  levelRangeShift = 0x1f - *(byte *)((int)textureRecordThenHandleCursor + 0x83);
   *(ushort *)((int)textureRecordThenHandleCursor + faceIndex * 2 + 0xa0) =
        *(ushort *)((int)textureRecordThenHandleCursor + faceIndex * 2 + 0xa0) & ~(ushort)levelBit;
   *(ushort *)((int)textureRecordThenHandleCursor + faceIndex * 2 + 0x94) =
        *(ushort *)((int)textureRecordThenHandleCursor + faceIndex * 2 + 0x94) & ~(ushort)levelBit;
   minFilter = *(ushort *)(textureRecordThenHandleCursor + 0x20);
-  if (((levelBit & (1 << (bVar3 & 0x3f) | 1U)) == 0) || (minFilter == 0)) {
-    if (((levelBit & ((uint)(-1 << (uVar8 + bVar3 & 0x3f)) >> (uVar8 & 0x3f) | 1)) == 0) ||
+  if (((levelBit & (1 << (baseLevel & 0x3f) | 1U)) == 0) || (minFilter == 0)) {
+    if (((levelBit & ((uint)(-1 << (levelRangeShift + baseLevel & 0x3f)) >> (levelRangeShift & 0x3f) | 1)) == 0) ||
        (minFilter < 0x2602)) goto LAB_0004856c;
     newMinFilter = 0;
     if (*(char *)(glContext + 0x53e7) != '\0') {
@@ -2408,7 +2408,7 @@ LAB_00048558:
     newMinFilter = 0;
   }
   *(ushort *)(textureRecordThenHandleCursor + 0x20) = newMinFilter;
-  *(byte *)((int)textureRecordThenHandleCursor + 0x83) = bVar3;
+  *(byte *)((int)textureRecordThenHandleCursor + 0x83) = baseLevel;
 LAB_0004856c:
   rendererBase = glContext + 0x10000;
   loopIndex = 0;
@@ -4104,8 +4104,8 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
   int dstCursor10;
   int glContextPtr4854;
   int dstCursor11;
-  float fVar9;
-  float fVar10;
+  float copiedFloatThenLoopCountThenMaskWord74d8;
+  float maskWord74dc;
   byte derivedByte3;
   float *srcCursor6;
   undefined2 *srcPtr3;
@@ -4127,7 +4127,7 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
   float *dstCursor;
   undefined1 *srcCursor4;
   int dstCursor6;
-  int iVar23;
+  int nextTextureTargetIndexThenTextureObject;
   int dstCursor7;
   int loopIndex2;
   undefined4 *srcPtr4;
@@ -4218,9 +4218,9 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
         remaining2 = 4;
         cursor3 = attribBuffer + 0x60;
         do {
-          fVar9 = *cursor3;
+          copiedFloatThenLoopCountThenMaskWord74d8 = *cursor3;
           cursor3 = cursor3 + 1;
-          *dstCursor = fVar9;
+          *dstCursor = copiedFloatThenLoopCountThenMaskWord74d8;
           dstCursor = dstCursor + 1;
           remaining2 = remaining2 + -1;
         } while (remaining2 != 0);
@@ -4384,13 +4384,13 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
       *(undefined1 *)(glContext + 0x30ae) = *(undefined1 *)((int)attribBuffer + 0x23);
       *(undefined1 *)(glContext + 0x30aa) = *(undefined1 *)(attribBuffer + 9);
       *(float *)(glContext + 0x30a0) = attribBuffer[10];
-      fVar9 = attribBuffer[7];
-      if (8 < (int)GH_F2U(fVar9)) {
-        fVar9 = 1.12104e-44;
+      copiedFloatThenLoopCountThenMaskWord74d8 = attribBuffer[7];
+      if (8 < (int)GH_F2U(copiedFloatThenLoopCountThenMaskWord74d8)) {
+        copiedFloatThenLoopCountThenMaskWord74d8 = 1.12104e-44;
       }
       dstCursor4 = glContext;
       cursor5 = attribBuffer;
-      if (0 < (int)GH_F2U(fVar9)) {
+      if (0 < (int)GH_F2U(copiedFloatThenLoopCountThenMaskWord74d8)) {
         do {
           *(float *)(dstCursor4 + 0x2850) = cursor5[0x17];
           *(float *)(dstCursor4 + 0x2854) = cursor5[0x18];
@@ -4417,10 +4417,10 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
           *(float *)(dstCursor4 + 0x2870) = cursor5[0x21];
           *(float *)(dstCursor4 + 0x2874) = cursor5[0x22];
           *(float *)(dstCursor4 + 0x2878) = cursor5[0x23];
-          fVar9 = GH_U2F((unsigned int)(((int)GH_F2U(fVar9) + -1)));
+          copiedFloatThenLoopCountThenMaskWord74d8 = GH_U2F((unsigned int)(((int)GH_F2U(copiedFloatThenLoopCountThenMaskWord74d8) + -1)));
           dstCursor4 = dstCursor4 + 0x80;
           cursor5 = cursor5 + 0x19;
-        } while (fVar9 != 0.0);
+        } while (copiedFloatThenLoopCountThenMaskWord74d8 != 0.0);
       }
       dstCursor4 = glContext;
       dstCursor10 = glContext;
@@ -4550,11 +4550,11 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
           srcCursor5 = (undefined4 *)((int)attribBuffer + loopIndex5 + 0x524);
           textureTargetIndex = 0;
           do {
-            iVar23 = textureTargetIndex + 1;
+            nextTextureTargetIndexThenTextureObject = textureTargetIndex + 1;
             _gleBindTexture(glContext,textureTargetIndex,*srcCursor5,loopIndex);
             srcCursor5 = srcCursor5 + 0x16;
-            textureTargetIndex = iVar23;
-          } while (iVar23 < 5);
+            textureTargetIndex = nextTextureTargetIndexThenTextureObject;
+          } while (nextTextureTargetIndexThenTextureObject < 5);
           if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
             _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
           }
@@ -4562,30 +4562,30 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
           srcCursor = (int *)(glContext + loopIndex4 * 4 + 0x5154);
           srcCursor8 = (undefined1 *)(loopIndex5 + (int)attribBuffer);
           do {
-            iVar23 = *srcCursor;
+            nextTextureTargetIndexThenTextureObject = *srcCursor;
             srcCursor = srcCursor + 1;
-            *(undefined4 *)(iVar23 + 0x50) = *(undefined4 *)(srcCursor8 + 0x514);
-            *(undefined4 *)(iVar23 + 0x54) = *(undefined4 *)(srcCursor8 + 0x518);
-            *(undefined4 *)(iVar23 + 0x58) = *(undefined4 *)(srcCursor8 + 0x51c);
-            *(undefined4 *)(iVar23 + 0x5c) = *(undefined4 *)(srcCursor8 + 0x520);
-            *(undefined2 *)(iVar23 + 0x4a) = *(undefined2 *)(srcCursor8 + 0x502);
-            *(undefined2 *)(iVar23 + 0x4c) = *(undefined2 *)(srcCursor8 + 0x506);
-            *(undefined2 *)(iVar23 + 0x44) = *(undefined2 *)(srcCursor8 + 0x50a);
-            *(undefined2 *)(iVar23 + 0x46) = *(undefined2 *)(srcCursor8 + 0x50e);
-            *(undefined2 *)(iVar23 + 0x48) = *(undefined2 *)(srcCursor8 + 0x512);
-            *(undefined4 *)(iVar23 + 0x38) = *(undefined4 *)(srcCursor8 + 0x528);
-            *(undefined4 *)(iVar23 + 0x60) = *(undefined4 *)(srcCursor8 + 0x52c);
-            *(undefined4 *)(iVar23 + 100) = *(undefined4 *)(srcCursor8 + 0x530);
-            *(undefined4 *)(iVar23 + 0x68) = *(undefined4 *)(srcCursor8 + 0x534);
-            *(undefined4 *)(iVar23 + 0x6c) = *(undefined4 *)(srcCursor8 + 0x538);
-            *(undefined2 *)(iVar23 + 0x70) = *(undefined2 *)(srcCursor8 + 0x53e);
-            *(undefined2 *)(iVar23 + 0x72) = *(undefined2 *)(srcCursor8 + 0x542);
-            *(undefined2 *)(iVar23 + 0x76) = *(undefined2 *)(srcCursor8 + 0x546);
-            *(undefined2 *)(iVar23 + 0x74) = *(undefined2 *)(srcCursor8 + 0x54a);
-            *(undefined4 *)(iVar23 + 0x78) = *(undefined4 *)(srcCursor8 + 0x54c);
+            *(undefined4 *)(nextTextureTargetIndexThenTextureObject + 0x50) = *(undefined4 *)(srcCursor8 + 0x514);
+            *(undefined4 *)(nextTextureTargetIndexThenTextureObject + 0x54) = *(undefined4 *)(srcCursor8 + 0x518);
+            *(undefined4 *)(nextTextureTargetIndexThenTextureObject + 0x58) = *(undefined4 *)(srcCursor8 + 0x51c);
+            *(undefined4 *)(nextTextureTargetIndexThenTextureObject + 0x5c) = *(undefined4 *)(srcCursor8 + 0x520);
+            *(undefined2 *)(nextTextureTargetIndexThenTextureObject + 0x4a) = *(undefined2 *)(srcCursor8 + 0x502);
+            *(undefined2 *)(nextTextureTargetIndexThenTextureObject + 0x4c) = *(undefined2 *)(srcCursor8 + 0x506);
+            *(undefined2 *)(nextTextureTargetIndexThenTextureObject + 0x44) = *(undefined2 *)(srcCursor8 + 0x50a);
+            *(undefined2 *)(nextTextureTargetIndexThenTextureObject + 0x46) = *(undefined2 *)(srcCursor8 + 0x50e);
+            *(undefined2 *)(nextTextureTargetIndexThenTextureObject + 0x48) = *(undefined2 *)(srcCursor8 + 0x512);
+            *(undefined4 *)(nextTextureTargetIndexThenTextureObject + 0x38) = *(undefined4 *)(srcCursor8 + 0x528);
+            *(undefined4 *)(nextTextureTargetIndexThenTextureObject + 0x60) = *(undefined4 *)(srcCursor8 + 0x52c);
+            *(undefined4 *)(nextTextureTargetIndexThenTextureObject + 100) = *(undefined4 *)(srcCursor8 + 0x530);
+            *(undefined4 *)(nextTextureTargetIndexThenTextureObject + 0x68) = *(undefined4 *)(srcCursor8 + 0x534);
+            *(undefined4 *)(nextTextureTargetIndexThenTextureObject + 0x6c) = *(undefined4 *)(srcCursor8 + 0x538);
+            *(undefined2 *)(nextTextureTargetIndexThenTextureObject + 0x70) = *(undefined2 *)(srcCursor8 + 0x53e);
+            *(undefined2 *)(nextTextureTargetIndexThenTextureObject + 0x72) = *(undefined2 *)(srcCursor8 + 0x542);
+            *(undefined2 *)(nextTextureTargetIndexThenTextureObject + 0x76) = *(undefined2 *)(srcCursor8 + 0x546);
+            *(undefined2 *)(nextTextureTargetIndexThenTextureObject + 0x74) = *(undefined2 *)(srcCursor8 + 0x54a);
+            *(undefined4 *)(nextTextureTargetIndexThenTextureObject + 0x78) = *(undefined4 *)(srcCursor8 + 0x54c);
             srcPtr3 = (undefined2 *)(srcCursor8 + 0x552);
             srcCursor8 = srcCursor8 + 0x58;
-            *(undefined2 *)(iVar23 + 0x7c) = *srcPtr3;
+            *(undefined2 *)(nextTextureTargetIndexThenTextureObject + 0x7c) = *srcPtr3;
             remaining13 = remaining13 + -1;
           } while (remaining13 != 0);
           remaining14 = 0;
@@ -4737,12 +4737,12 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
         *(float *)(glContext + 0x74c8) = attribBuffer[8];
         *(float *)(glContext + 0x74cc) = attribBuffer[0xb];
         *(float *)(glContext + 0x74d0) = attribBuffer[0xc];
-        fVar9 = attribBuffer[3];
-        *(float *)(glContext + 0x74d8) = fVar9;
-        fVar10 = attribBuffer[0xd];
-        *(float *)(glContext + 0x74dc) = fVar10;
+        copiedFloatThenLoopCountThenMaskWord74d8 = attribBuffer[3];
+        *(float *)(glContext + 0x74d8) = copiedFloatThenLoopCountThenMaskWord74d8;
+        maskWord74dc = attribBuffer[0xd];
+        *(float *)(glContext + 0x74dc) = maskWord74dc;
         do {
-          if (((uint)GH_F2U(fVar9) & 1 << (loopIndex7 & 0x3f)) == 0) {
+          if (((uint)GH_F2U(copiedFloatThenLoopCountThenMaskWord74d8) & 1 << (loopIndex7 & 0x3f)) == 0) {
             *(undefined1 *)(glContext + loopIndex7 + 0x7524) = 0;
           }
           else {
@@ -4754,7 +4754,7 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
             *(char *)(glContext + loopIndex7 + 0x7524) = derivedByte;
           }
           derivedByte = '\0';
-          if (((uint)GH_F2U(fVar10) & 1 << (loopIndex7 & 0x3f)) != 0) {
+          if (((uint)GH_F2U(maskWord74dc) & 1 << (loopIndex7 & 0x3f)) != 0) {
             derivedByte = '\x04';
             if (*(int *)(glContext + 0x7450) != 0) {
               derivedByte = *(char *)(loopIndex7 + *(int *)(glContext + 0x7450) + 0x9db8) << 2;
@@ -4840,12 +4840,12 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
       *(undefined2 *)(glContext + 0x2808) = *(undefined2 *)((int)attribBuffer + 0x12);
       *(undefined2 *)(glContext + 0x280a) = *(undefined2 *)((int)attribBuffer + 0x16);
       *(float *)(glContext + 0x2800) = attribBuffer[6];
-      fVar9 = *attribBuffer;
-      if (6 < (int)GH_F2U(fVar9)) {
-        fVar9 = 8.40779e-45;
+      copiedFloatThenLoopCountThenMaskWord74d8 = *attribBuffer;
+      if (6 < (int)GH_F2U(copiedFloatThenLoopCountThenMaskWord74d8)) {
+        copiedFloatThenLoopCountThenMaskWord74d8 = 8.40779e-45;
       }
       *(float *)(glContext + 0x4188) = attribBuffer[0x80a];
-      if (0 < (int)GH_F2U(fVar9)) {
+      if (0 < (int)GH_F2U(copiedFloatThenLoopCountThenMaskWord74d8)) {
         cursor11 = attribBuffer + 0x808;
         dstCursor4 = glContext + 0x4180;
         do {
@@ -4856,8 +4856,8 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
           cursor11 = cursor11 + 4;
           *(float *)(dstCursor4 + 0x18) = *srcPtr2;
           dstCursor4 = dstCursor4 + 0x10;
-          fVar9 = GH_U2F((unsigned int)(((int)GH_F2U(fVar9) + -1)));
-        } while (fVar9 != 0.0);
+          copiedFloatThenLoopCountThenMaskWord74d8 = GH_U2F((unsigned int)(((int)GH_F2U(copiedFloatThenLoopCountThenMaskWord74d8) + -1)));
+        } while (copiedFloatThenLoopCountThenMaskWord74d8 != 0.0);
       }
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
@@ -4975,12 +4975,12 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
     *(undefined1 *)(glContext + 0x3192) = *(undefined1 *)(attribBuffer + 0x27);
     *(undefined1 *)(glContext + 0x313c) = *(undefined1 *)((int)attribBuffer + 0x96);
     *(undefined1 *)(glContext + 0x3128) = *(undefined1 *)((int)attribBuffer + 0x95);
-    fVar9 = *attribBuffer;
-    *(float *)(glContext + 0x74d8) = fVar9;
-    fVar10 = attribBuffer[4];
-    *(float *)(glContext + 0x74dc) = fVar10;
+    copiedFloatThenLoopCountThenMaskWord74d8 = *attribBuffer;
+    *(float *)(glContext + 0x74d8) = copiedFloatThenLoopCountThenMaskWord74d8;
+    maskWord74dc = attribBuffer[4];
+    *(float *)(glContext + 0x74dc) = maskWord74dc;
     do {
-      if (((uint)GH_F2U(fVar9) & 1 << (loopIndex8 & 0x3f)) == 0) {
+      if (((uint)GH_F2U(copiedFloatThenLoopCountThenMaskWord74d8) & 1 << (loopIndex8 & 0x3f)) == 0) {
         *(undefined1 *)(glContext + loopIndex8 + 0x7524) = 0;
       }
       else {
@@ -4991,7 +4991,7 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
         *(char *)(glContext + loopIndex8 + 0x7524) = derivedByte;
       }
       derivedByte = '\0';
-      if (((uint)GH_F2U(fVar10) & 1 << (loopIndex8 & 0x3f)) != 0) {
+      if (((uint)GH_F2U(maskWord74dc) & 1 << (loopIndex8 & 0x3f)) != 0) {
         derivedByte = '\x04';
         if (*(int *)(glContext + 0x7450) != 0) {
           derivedByte = *(char *)(loopIndex8 + *(int *)(glContext + 0x7450) + 0x9db8) << 2;
@@ -5084,9 +5084,9 @@ int _gleSetAttrib(glContext, attribBit, attribBuffer)
     *(undefined1 *)(glContext + 0x41f3) = *(undefined1 *)((int)attribBuffer + 0xab);
     *(undefined1 *)(glContext + 0x4661) = *(undefined1 *)(attribBuffer + 0x2b);
     do {
-      fVar9 = *cursor15;
+      copiedFloatThenLoopCountThenMaskWord74d8 = *cursor15;
       cursor15 = cursor15 + 1;
-      *dstCursor = fVar9;
+      *dstCursor = copiedFloatThenLoopCountThenMaskWord74d8;
       dstCursor = dstCursor + 0x1f;
       remaining8 = remaining8 + -1;
     } while (remaining8 != 0);

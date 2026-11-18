@@ -1000,8 +1000,7 @@ void _glSeparableFilter2D_Exec(glContext, target, internalformat, width, height,
 {
   undefined4 glErrorCode;
   int internalFormat;
-  int iVar3;
-  int pixelUnpackBuffer;
+  int checkTypeFormatResultThenPixelUnpackBuffer;
   int imageEndOffset;
   int imageEndOffset2;
   int elementSize;
@@ -1017,8 +1016,8 @@ void _glSeparableFilter2D_Exec(glContext, target, internalformat, width, height,
       glErrorCode = 0x500;
       goto LAB_0006a824;
     }
-    iVar3 = _CheckTypeFormat(type,format);
-    if (iVar3 != 0) {
+    checkTypeFormatResultThenPixelUnpackBuffer = _CheckTypeFormat(type,format);
+    if (checkTypeFormatResultThenPixelUnpackBuffer != 0) {
       if ((((0xb < width) || (0xb < height)) || (width < 0)) || (height < 0)) {
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
@@ -1026,15 +1025,15 @@ void _glSeparableFilter2D_Exec(glContext, target, internalformat, width, height,
         glErrorCode = 0x501;
         goto LAB_0006a824;
       }
-      pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
-      if (pixelUnpackBuffer == 0) {
+      checkTypeFormatResultThenPixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+      if (checkTypeFormatResultThenPixelUnpackBuffer == 0) {
 LAB_0006a850:
         _gleSeparableFilter2D(glContext,0x8012,internalFormat,width,height,format,type,row,column);
         return;
       }
       imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,row);
       imageEndOffset2 = _gleOffsetLimitImage(glContext + 0x31cc,height,1,format,type,column);
-      unpackBufferSize = *(int *)(pixelUnpackBuffer + 0x38);
+      unpackBufferSize = *(int *)(checkTypeFormatResultThenPixelUnpackBuffer + 0x38);
       bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
       elementSize = (int)bytesPerElement;
       if ((imageEndOffset <= unpackBufferSize) && (imageEndOffset2 <= unpackBufferSize)) {
@@ -1042,11 +1041,11 @@ LAB_0006a850:
           elementSize = _glePixelBytes(format,type);
         }
         if ((row == (row / elementSize) * elementSize) && (column == (column / elementSize) * elementSize)) {
-          if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
-            _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
+          if (*(int *)(checkTypeFormatResultThenPixelUnpackBuffer + 0x40) != 0) {
+            _gleSynchronizePluginBuffer(glContext,checkTypeFormatResultThenPixelUnpackBuffer + 0x10);
           }
-          column = column + *(int *)(pixelUnpackBuffer + 0x30);
-          row = row + *(int *)(pixelUnpackBuffer + 0x30);
+          column = column + *(int *)(checkTypeFormatResultThenPixelUnpackBuffer + 0x30);
+          row = row + *(int *)(checkTypeFormatResultThenPixelUnpackBuffer + 0x30);
           goto LAB_0006a850;
         }
       }
