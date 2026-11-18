@@ -815,7 +815,7 @@ int _glCopyTexSubImage3D_Comp(glContext, target, level, xoffset, yoffset, zoffse
 }
 
 /* _glCopyTexSubImage3D_Exec @ 0x9908c (1464 bytes) */
-void _glCopyTexSubImage3D_Exec(int glContext,undefined4 target,uint level,undefined4 xoffset,undefined4 yoffset,undefined4 zoffset,undefined4 x,undefined4 y,int width,int height,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glCopyTexSubImage3D_Exec(int glContext,undefined4 target,uint level,undefined4 xoffset,undefined4 yoffset,undefined4 zoffset,undefined4 x,undefined4 y,int width,int height,double forwardedFloatArg1ThenCalleeResult,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   bool rendererInfoByte79IsZero;
   bool stateClean;
@@ -851,14 +851,14 @@ void _glCopyTexSubImage3D_Exec(int glContext,undefined4 target,uint level,undefi
     forwardedArg6 = zoffset;
     if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
       _gleUpdateMatrixFunc(glContext);
-      fparam_1 = extraout_f1;
+      forwardedFloatArg1ThenCalleeResult = extraout_f1;
     }
     if (*(char *)(glContext + 0x4691) != '\0') {
       framebufferObject = *(int *)(glContext + 0x744c);
       dirtyFlagWords = (int *)(glContext + 0x310);
       rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,forwardedFloatArg1ThenCalleeResult,forwardedFloatArg2,forwardedFloatArg3,
                    forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       }
@@ -3630,7 +3630,7 @@ void _glCopyTexImage2D_CompExec(glContext, target, level, internalformat, x, y, 
   undefined4 height;
   undefined4 border;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -3640,7 +3640,7 @@ void _glCopyTexImage2D_CompExec(glContext, target, level, internalformat, x, y, 
   double incomingFpr8;
   
   ((int (*)())_glCopyTexImage2D_Comp)(glContext,target,level,internalformat,x,y,width,height,border);
-  ((void (*)())_glCopyTexImage2D_Exec)(glContext,target,level,internalformat,x,y,width,height,border,fparam_1,incomingFpr2,
+  ((void (*)())_glCopyTexImage2D_Exec)(glContext,target,level,internalformat,x,y,width,height,border,incomingFpr1,incomingFpr2,
              incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }

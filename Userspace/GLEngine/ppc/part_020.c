@@ -819,9 +819,9 @@ void _glBeginQuery_Exec(glContext, target, id)
   int target;
   int id;
 {
-  bool bVar1;
+  bool rendererInfoByte79Clear;
   bool stateClean;
-  char cVar2;
+  char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
   int iVar5;
@@ -878,7 +878,7 @@ void _glBeginQuery_Exec(glContext, target, id)
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00078cf8;
   framebufferObject = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
-  cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+  rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
     ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,iVar8,incomingR6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
                incomingFpr6,incomingFpr7,incomingFpr8);
@@ -911,14 +911,14 @@ LAB_00078bc4:
       goto LAB_00078bc4;
     }
   }
-  bVar1 = cVar2 == '\0';
-  if (bVar1) {
+  rendererInfoByte79Clear = rendererInfoByte79 == '\0';
+  if (rendererInfoByte79Clear) {
     dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
   }
   else {
     dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
   }
-  if (bVar1) {
+  if (rendererInfoByte79Clear) {
     stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
             *(int *)(glContext + 800) == 0;
   }
@@ -969,14 +969,14 @@ LAB_00078cf8:
 }
 
 /* _glEndQuery_Exec @ 0x78d30 (728 bytes) */
-void _glEndQuery_Exec(int glContext,int target,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glEndQuery_Exec(int glContext,int target,double forwardedFloatArg1ThenCalleeResult,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool rendererInfoByte79Clear;
   bool stateClean;
-  char cVar2;
+  char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyBitArrayWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -1006,14 +1006,14 @@ void _glEndQuery_Exec(int glContext,int target,double fparam_1,double forwardedF
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1;
+    forwardedFloatArg1ThenCalleeResult = extraout_f1;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00078fc8;
   framebufferObject = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
-  cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+  rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,forwardedFloatArg1ThenCalleeResult,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -1025,9 +1025,9 @@ LAB_00078e94:
     loopIndex = 0;
     srcCursor = (int *)(glContext + 0x324);
     do {
-      iVar5 = *srcCursor;
+      dirtyBitArrayWord = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (iVar5 != 0) {
+      if (dirtyBitArrayWord != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
@@ -1044,14 +1044,14 @@ LAB_00078e94:
       goto LAB_00078e94;
     }
   }
-  bVar1 = cVar2 == '\0';
-  if (bVar1) {
+  rendererInfoByte79Clear = rendererInfoByte79 == '\0';
+  if (rendererInfoByte79Clear) {
     dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
   }
   else {
     dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
   }
-  if (bVar1) {
+  if (rendererInfoByte79Clear) {
     stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
             *(int *)(glContext + 800) == 0;
   }
@@ -1167,7 +1167,7 @@ void _glEndQuery_CompExec(glContext, target)
   undefined4 glContext;
   undefined4 target;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1177,7 +1177,7 @@ void _glEndQuery_CompExec(glContext, target)
   double incomingFpr8;
   
   ((int (*)())_glEndQuery_Comp)(glContext,target);
-  ((void (*)())_glEndQuery_Exec)(glContext,target,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glEndQuery_Exec)(glContext,target,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 

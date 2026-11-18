@@ -29,15 +29,15 @@ local	_gliGetVersion	local_40	hostInfoCount	CONFIRMED	in/out count of _host_info
 local	_gliGetVersion	local_38	sysctlMibAndVectorUnit	INFERRED	words 0-1 = sysctl mib {CTL_HW=6, 0xd}, word 2 receives the value tested for AltiVec
 local	_gliGetVersion	local_2c	sysctlResultLength	CONFIRMED	size_t length argument of _sysctl: set to 4
 local	_glProgramEnvParameter4dvARB_Exec	bVar1	dirtyBitIndex	CONFIRMED	byte read from the per-parameter table: bits >>3 &0x1c select the dirty word and &0x1f the bit set in it
-local	_glProgramEnvParameter4dvARB_Exec	iVar6	dirtyWordPtr324	CONFIRMED	ctx + (bit>>3 & 0x1c): word in the dirty bit array at ctx+0x324 that gets the bit OR-ed in
+local	_glProgramEnvParameter4dvARB_Exec	iVar6	dirtyWordAddress324	CONFIRMED	ctx + (bit>>3 & 0x1c): word in the dirty bit array at ctx+0x324 that gets the bit OR-ed in
 local	_glProgramEnvParameter4dvARB_Exec	iVar5	programKindThenParamArrayThenRecord	CONFIRMED	0 (vertex, target 0x8620) or 1 (fragment) selects ctx+kind*8+0x4668 (the env parameter array), which is then advanced by index*0x10 to the parameter record that is written
-local	_glProgramEnvParameter4dvARB_Exec	iVar4	paramTable5424ThenDirtyWordPtr348	CONFIRMED	first ctx+0x5424 (table whose byte at index+0x158 is read), then ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348
+local	_glProgramEnvParameter4dvARB_Exec	iVar4	glContextPtr5424ThenDirtyWordAddress348	CONFIRMED	first ctx+0x5424 (table whose byte at index+0x158 is read), then ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348
 local	_glProgramEnvParameter4dvARB_Exec	uVar2	dirtyFlagsOrExpectedTarget	0x800000 or	either the new ctx+0x31c dirty word (
 local	_gleFreeTextureState	iVar6	textureObject	CONFIRMED	entry read from the per-unit texture binding slots (ctx+0x5154 ...): its +8 field is decremented and it is passed to _gleFreeTextureObject
 local	_gleFreeTextureState	iVar1	refCount	CONFIRMED	*(textureObject+8) - 1, stored back and tested for 0 before _gleFreeTextureObject: the object's reference count after release
 local	_glLightModelfv_Exec	bVar1	dirtyBitIndex	CONFIRMED	byte read from the renderer table: bits >>3 &0x1c select the dirty word and &0x1f the bit OR-ed in
-local	_glLightModelfv_Exec	iVar7	dirtyWordPtr324	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x324 that gets the bit set
-local	_glLightModelfv_Exec	iVar6	dirtyWordPtr348	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348 that gets the bit set
+local	_glLightModelfv_Exec	iVar7	dirtyWordAddress324	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x324 that gets the bit set
+local	_glLightModelfv_Exec	iVar6	dirtyWordAddress348	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348 that gets the bit set
 local	_glLightModelfv_Exec	fVar2	paramValue	CONFIRMED	*params (the single float of the pname 0x81f8 case), converted to uint with the 2^31 bias idiom
 local	_glLightModelfv_Exec	uVar4	paramEnum	CONFIRMED	(uint) of *params, checked against GL_SINGLE_COLOR/GL_SEPARATE_SPECULAR_COLOR (0x81f9/0x81fa) via uVar4-0x81f9 < 2
 local	_glLightModelfv_Exec	uVar5	colorControl	CONFIRMED	16-bit enum value stored at ctx+0x30a8 (GL_LIGHT_MODEL_COLOR_CONTROL 0x81f8 state)

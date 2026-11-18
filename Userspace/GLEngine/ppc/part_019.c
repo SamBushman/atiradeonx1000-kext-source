@@ -3457,7 +3457,7 @@ void _glMaterialiv_CompExec(glContext, face, pname, params)
   undefined4 pname;
   undefined4 params;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -3467,7 +3467,7 @@ void _glMaterialiv_CompExec(glContext, face, pname, params)
   double incomingFpr8;
   
   ((int (*)())_glMaterialiv_Comp)(glContext,face,pname,params);
-  ((void (*)())_glMaterialiv_Exec)(glContext,face,pname,params,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
+  ((void (*)())_glMaterialiv_Exec)(glContext,face,pname,params,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
                      incomingFpr8);
   return;
 }

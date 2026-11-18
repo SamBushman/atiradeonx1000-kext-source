@@ -5326,31 +5326,31 @@ void _gleSetFunctionIDFromCurrent(glContext, param_2, unusedArg3, unusedArg4, un
 }
 
 /* _gleCreateFuncCacheElem @ 0x1de88 (156 bytes) */
-int _gleCreateFuncCacheElem(param_1, param_2)
-  int param_1;
-  int param_2;
+int _gleCreateFuncCacheElem(funcCache, slotCount)
+  int funcCache;
+  int slotCount;
 {
-  int *piVar1;
-  int *piVar2;
-  undefined4 *puVar3;
+  int *newElem;
+  int *resultElem;
+  undefined4 *oldTail;
   
-  piVar1 = (int *)_gleDCBAlloc(param_2 * 4 + 0x20);
-  piVar2 = (int *)0x0;
-  if (piVar1 != (int *)0x0) {
-    _gleBlockClear(piVar1 + 8,param_2);
-    puVar3 = *(undefined4 **)(param_1 + 4);
-    *puVar3 = piVar1;
-    piVar1[1] = (int)puVar3;
-    piVar1[param_2 + 7] = 0;
-    piVar1[5] = -1;
-    *(int **)(param_1 + 4) = piVar1;
-    piVar1[2] = -1;
-    piVar1[3] = -1;
-    piVar1[4] = -1;
-    *piVar1 = param_1;
-    piVar2 = piVar1;
+  newElem = (int *)_gleDCBAlloc(slotCount * 4 + 0x20);
+  resultElem = (int *)0x0;
+  if (newElem != (int *)0x0) {
+    _gleBlockClear(newElem + 8,slotCount);
+    oldTail = *(undefined4 **)(funcCache + 4);
+    *oldTail = newElem;
+    newElem[1] = (int)oldTail;
+    newElem[slotCount + 7] = 0;
+    newElem[5] = -1;
+    *(int **)(funcCache + 4) = newElem;
+    newElem[2] = -1;
+    newElem[3] = -1;
+    newElem[4] = -1;
+    *newElem = funcCache;
+    resultElem = newElem;
   }
-  return piVar2;
+  return resultElem;
 }
 
 /* _gleCalculateOptions @ 0x1df24 (468 bytes) */

@@ -512,13 +512,13 @@ void _glVertexAttrib4NusvARB_CompExec(glContext, index, v)
   undefined4 index;
   undefined4 v;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
   
   ((int (*)())_glVertexAttrib4NusvARB_Comp)(glContext,index,v);
-  ((double (*)())_glVertexAttrib4NusvARB_Exec)(glContext,index,v,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4);
+  ((double (*)())_glVertexAttrib4NusvARB_Exec)(glContext,index,v,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4);
   return;
 }
 
@@ -1541,7 +1541,7 @@ void _glViewport_CompExec(glContext, x, y, width, height)
   undefined4 width;
   undefined4 height;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1551,7 +1551,7 @@ void _glViewport_CompExec(glContext, x, y, width, height)
   double incomingFpr8;
   
   ((int (*)())_glViewport_Comp)(glContext,x,y,width,height);
-  ((void (*)())_glViewport_Exec)(glContext,x,y,width,height,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
+  ((void (*)())_glViewport_Exec)(glContext,x,y,width,height,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
                    incomingFpr7,incomingFpr8);
   return;
 }

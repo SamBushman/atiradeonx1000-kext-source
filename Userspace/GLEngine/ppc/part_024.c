@@ -45,7 +45,7 @@ void _glRects_CompExec(glContext, x1, y1, x2, y2)
   undefined4 x2;
   undefined4 y2;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -55,7 +55,7 @@ void _glRects_CompExec(glContext, x1, y1, x2, y2)
   double incomingFpr8;
   
   ((int (*)())_glRects_Comp)(glContext,x1,y1,x2,y2);
-  ((void (*)())_glRects_Exec)(glContext,x1,y1,x2,y2,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
+  ((void (*)())_glRects_Exec)(glContext,x1,y1,x2,y2,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
                 ,incomingFpr8);
   return;
 }
@@ -156,7 +156,7 @@ void _glRectfv_CompExec(glContext, v1, v2)
   undefined4 v1;
   undefined4 v2;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -166,7 +166,7 @@ void _glRectfv_CompExec(glContext, v1, v2)
   double incomingFpr8;
   
   ((int (*)())_glRectfv_Comp)(glContext,v1,v2);
-  ((void (*)())_glRectfv_Exec)(glContext,v1,v2,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRectfv_Exec)(glContext,v1,v2,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -901,7 +901,7 @@ void _glScissor_CompExec(glContext, x, y, width, height)
   undefined4 width;
   undefined4 height;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -911,7 +911,7 @@ void _glScissor_CompExec(glContext, x, y, width, height)
   double incomingFpr8;
   
   ((int (*)())_glScissor_Comp)(glContext,x,y,width,height);
-  ((void (*)())_glScissor_Exec)(glContext,x,y,width,height,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
+  ((void (*)())_glScissor_Exec)(glContext,x,y,width,height,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
                   incomingFpr7,incomingFpr8);
   return;
 }
@@ -1600,7 +1600,7 @@ void _glUseProgramObjectARB_CompExec(glContext, programObj)
   undefined4 glContext;
   undefined4 programObj;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1610,7 +1610,7 @@ void _glUseProgramObjectARB_CompExec(glContext, programObj)
   double incomingFpr8;
   
   ((int (*)())_glUseProgramObjectARB_Comp)(glContext,programObj);
-  ((void (*)())_glUseProgramObjectARB_Exec)(glContext,programObj,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glUseProgramObjectARB_Exec)(glContext,programObj,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 

@@ -2930,7 +2930,7 @@ void _glUniform1iARB_Exec(glContext, location, v0)
   int loopIndex;
   int rendererRecordCursor2;
   int loopIndex2;
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -2975,7 +2975,7 @@ void _glUniform1iARB_Exec(glContext, location, v0)
     if (uniformType - 0x8b5dU < 8) {
       *(int *)(iVar8 + locationValueOffset) = v0;
       uVar11 = 6;
-      ((double (*)())_setImageUnit)(glContext,currentProgram,v0,iVar5,uniformStageUse,uniformType,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+      ((double (*)())_setImageUnit)(glContext,currentProgram,v0,iVar5,uniformStageUse,uniformType,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
                     incomingFpr6,incomingFpr7,incomingFpr8);
       goto LAB_0008af2c;
     }

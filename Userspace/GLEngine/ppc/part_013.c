@@ -2188,11 +2188,11 @@ LAB_00061d88:
 }
 
 /* _glCopyPixels_ListExec @ 0x61de0 (876 bytes) */
-undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double forwardedFloatArg1ThenCalleeResult,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
-  bool bVar1;
+  bool rendererInfoByte79Clear;
   bool noStateChangePending;
   char rendererInfoByte79;
   uint dispatchFlags;
@@ -2242,14 +2242,14 @@ undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double 
       matrixChangeBits = *(int *)(glContext + 0x50ac);
       if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
         _gleUpdateMatrixFunc(glContext);
-        fparam_1 = extraout_f1;
+        forwardedFloatArg1ThenCalleeResult = extraout_f1;
       }
       if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00062098;
       framebufferObject = *(int *)(glContext + 0x744c);
       changeWordCursor = (int *)(glContext + 0x310);
       rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,forwardedFloatArg1ThenCalleeResult,forwardedFloatArg2,forwardedFloatArg3,
                    forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       }
@@ -2280,14 +2280,14 @@ LAB_00061f74:
           goto LAB_00061f74;
         }
       }
-      bVar1 = rendererInfoByte79 == '\0';
-      if (bVar1) {
+      rendererInfoByte79Clear = rendererInfoByte79 == '\0';
+      if (rendererInfoByte79Clear) {
         changeWord3 = changeWord3 & 0x17000000;
       }
       else {
         changeWord3 = changeWord3 & 0x17ffffff;
       }
-      if (bVar1) {
+      if (rendererInfoByte79Clear) {
         noStateChangePending = ((*changeWordCursor == 0 && *(int *)(glContext + 0x314) == 0) && changeWord3 == 0) &&
                 *(int *)(glContext + 800) == 0;
       }

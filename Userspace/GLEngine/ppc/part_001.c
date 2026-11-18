@@ -739,26 +739,26 @@ void _gleUpdateLightModelFunc(glContext)
 /* _gleUpdateLightDirection @ 0x78f4 (220 bytes) */
 void _gleUpdateLightDirection(int glContext,int param_2,double unusedFloatArg1)
 {
-  byte bVar1;
-  int iVar2;
+  byte dirtyBitIndex;
+  int dirtyWordAddress348;
   int glContextWord5424;
   undefined4 incomingR6;
-  int iVar3;
+  int dirtyWordAddress324;
   
   (**(code **)PTR__gleVectorNormalize_00112064)
             (glContext,glContext + param_2 * 0x80 + 0x2860,glContext + param_2 * 0x6c + 0x4a88,incomingR6);
   if (*(int *)(glContext + 0x5434) == 0) {
-    bVar1 = *(byte *)(param_2 * 7 + *(int *)(glContext + 0x5420) + 0x25c);
+    dirtyBitIndex = *(byte *)(param_2 * 7 + *(int *)(glContext + 0x5420) + 0x25c);
   }
   else {
-    bVar1 = *(byte *)(param_2 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x290);
+    dirtyBitIndex = *(byte *)(param_2 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x290);
   }
-  iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
+  dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
   glContextWord5424 = *(int *)(glContext + 0x5424);
-  *(uint *)(iVar3 + 0x324) = *(uint *)(iVar3 + 0x324) | 1 << (bVar1 & 0x1f);
-  bVar1 = *(byte *)(param_2 * 7 + glContextWord5424 + 0x25c);
-  iVar2 = (bVar1 >> 3 & 0x1c) + glContext;
-  *(uint *)(iVar2 + 0x348) = *(uint *)(iVar2 + 0x348) | 1 << (bVar1 & 0x1f);
+  *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+  dirtyBitIndex = *(byte *)(param_2 * 7 + glContextWord5424 + 0x25c);
+  dirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+  *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
   return;
 }
 

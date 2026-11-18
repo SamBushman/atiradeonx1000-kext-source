@@ -257,9 +257,9 @@ void _glProgramEnvParameter4dvARB_Exec(glContext, target, index, params)
   byte dirtyBitIndex;
   uint dirtyFlagsOrExpectedTarget;
   undefined4 glErrorCode;
-  int paramTable5424ThenDirtyWordPtr348;
+  int glContextPtr5424ThenDirtyWordAddress348;
   int programKindThenParamArrayThenRecord;
-  int dirtyWordPtr324;
+  int dirtyWordAddress324;
   
   if (target == 0x8620) {
     programKindThenParamArrayThenRecord = 0;
@@ -273,12 +273,12 @@ LAB_00079a7c:
       else {
         dirtyBitIndex = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x18c);
       }
-      dirtyWordPtr324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
-      paramTable5424ThenDirtyWordPtr348 = *(int *)(glContext + 0x5424);
-      *(uint *)(dirtyWordPtr324 + 0x324) = *(uint *)(dirtyWordPtr324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
-      dirtyBitIndex = *(byte *)(index + paramTable5424ThenDirtyWordPtr348 + 0x158);
-      paramTable5424ThenDirtyWordPtr348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
-      *(uint *)(paramTable5424ThenDirtyWordPtr348 + 0x348) = *(uint *)(paramTable5424ThenDirtyWordPtr348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
+      dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+      glContextPtr5424ThenDirtyWordAddress348 = *(int *)(glContext + 0x5424);
+      *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+      dirtyBitIndex = *(byte *)(index + glContextPtr5424ThenDirtyWordAddress348 + 0x158);
+      glContextPtr5424ThenDirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+      *(uint *)(glContextPtr5424ThenDirtyWordAddress348 + 0x348) = *(uint *)(glContextPtr5424ThenDirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
       programKindThenParamArrayThenRecord = *(int *)(programKindThenParamArrayThenRecord * 8 + glContext + 0x4668);
       *(float *)(programKindThenParamArrayThenRecord + index * 0x10) = (float)*params;
       programKindThenParamArrayThenRecord = programKindThenParamArrayThenRecord + index * 0x10;

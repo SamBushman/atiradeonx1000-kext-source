@@ -43,9 +43,9 @@ void _glLightModelfv_Exec(glContext, pname, params)
   undefined4 glErrorCode;
   uint paramEnum;
   undefined2 colorControl;
-  int dirtyWordPtr348;
+  int dirtyWordAddress348;
   int glContextPtr5424;
-  int dirtyWordPtr324;
+  int dirtyWordAddress324;
   float dVar8;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -64,12 +64,12 @@ void _glLightModelfv_Exec(glContext, pname, params)
       else {
         dirtyBitIndex = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x358);
       }
-      dirtyWordPtr324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+      dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
       glContextPtr5424 = *(int *)(glContext + 0x5424);
-      *(uint *)(dirtyWordPtr324 + 0x324) = *(uint *)(dirtyWordPtr324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+      *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
       dirtyBitIndex = *(byte *)(glContextPtr5424 + 0x324);
-      dirtyWordPtr348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
-      *(uint *)(dirtyWordPtr348 + 0x348) = *(uint *)(dirtyWordPtr348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
+      dirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+      *(uint *)(dirtyWordAddress348 + 0x348) = *(uint *)(dirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
     }
     else if (pname < 0xb54) {
       if (pname == 0xb51) {

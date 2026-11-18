@@ -125,32 +125,32 @@ void _gleLightMaterialRGBAChange_FB_D(glContext, param_2)
 /* _gleLightMaterialShineChange_FB @ 0x331c0 (220 bytes) */
 void _gleLightMaterialShineChange_FB(int glContext,float fparam_1)
 {
-  byte bVar1;
-  int iVar2;
+  byte dirtyBitIndex;
+  int materialThenDirtyWordAddress348;
   int glContextWord5424;
-  int iVar3;
-  int iVar4;
+  int faceBitTableOffset;
+  int dirtyWordAddress324;
   uint loopIndex;
   
   loopIndex = 0;
   do {
-    iVar2 = ((int (*)())_glePushMaterial)(glContext,loopIndex);
-    *(float *)(iVar2 + 0x40) = (float)fparam_1;
-    *(ushort *)(iVar2 + 0x234) = *(ushort *)(iVar2 + 0x234) | 0x101;
+    materialThenDirtyWordAddress348 = ((int (*)())_glePushMaterial)(glContext,loopIndex);
+    *(float *)(materialThenDirtyWordAddress348 + 0x40) = (float)fparam_1;
+    *(ushort *)(materialThenDirtyWordAddress348 + 0x234) = *(ushort *)(materialThenDirtyWordAddress348 + 0x234) | 0x101;
     if (*(int *)(glContext + 0x5434) == 0) {
-      bVar1 = *(byte *)(loopIndex * 6 + *(int *)(glContext + 0x5420) + 0x2c4);
+      dirtyBitIndex = *(byte *)(loopIndex * 6 + *(int *)(glContext + 0x5420) + 0x2c4);
     }
     else {
-      bVar1 = *(byte *)(loopIndex * 6 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f8);
+      dirtyBitIndex = *(byte *)(loopIndex * 6 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x2f8);
     }
-    iVar3 = loopIndex * 6;
-    iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
+    faceBitTableOffset = loopIndex * 6;
+    dirtyWordAddress324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
     loopIndex = loopIndex + 1;
     glContextWord5424 = *(int *)(glContext + 0x5424);
-    *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar1 & 0x1f);
-    bVar1 = *(byte *)(iVar3 + glContextWord5424 + 0x2c4);
-    iVar2 = (bVar1 >> 3 & 0x1c) + glContext;
-    *(uint *)(iVar2 + 0x348) = *(uint *)(iVar2 + 0x348) | 1 << (bVar1 & 0x1f);
+    *(uint *)(dirtyWordAddress324 + 0x324) = *(uint *)(dirtyWordAddress324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+    dirtyBitIndex = *(byte *)(faceBitTableOffset + glContextWord5424 + 0x2c4);
+    materialThenDirtyWordAddress348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+    *(uint *)(materialThenDirtyWordAddress348 + 0x348) = *(uint *)(materialThenDirtyWordAddress348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
   } while (loopIndex < 2);
   return;
 }

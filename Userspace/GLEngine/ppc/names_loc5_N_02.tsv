@@ -1,0 +1,86 @@
+local	_glDrawElementArrayAPPLE_NoopExec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79 (renderer info), read once for the validation block
+local	_glDrawElementArrayAPPLE_NoopExec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glDrawElementArrayAPPLE_NoopExec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glBeginQuery_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79 (renderer info), read once for the validation block
+local	_glBeginQuery_Exec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glArrayElement_NoopExec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79 (renderer info), read once for the validation block
+local	_glArrayElement_NoopExec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glArrayElement_NoopExec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glRasterPos4i_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79 (renderer info), read once for the validation block
+local	_glRasterPos4i_Exec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glRasterPos4i_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glBegin_NoopExec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glBegin_NoopExec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glRasterPos3i_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79 (renderer info), read once for the validation block
+local	_glRasterPos3i_Exec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glRasterPos3i_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glRasterPos2s_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79 (renderer info), read once for the validation block
+local	_glRasterPos2s_Exec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glRasterPos2s_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glFinish_Exec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glFinish_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glCopyPixels_ListExec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glRasterPos4fv_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79 (renderer info), read once for the validation block
+local	_glRasterPos4fv_Exec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glRasterPos4fv_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glRasterPos3iv_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79 (renderer info), read once for the validation block
+local	_glRasterPos3iv_Exec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glRasterPos3iv_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glRasterPos2sv_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79 (renderer info), read once for the validation block
+local	_glRasterPos2sv_Exec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glRasterPos2sv_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glRasterPos2fv_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79 (renderer info), read once for the validation block
+local	_glRasterPos2fv_Exec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glRasterPos2fv_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glEndQuery_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79 (renderer info), read once for the validation block
+local	_glEndQuery_Exec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glEndQuery_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glRasterPos3f_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79 (renderer info), read once for the validation block
+local	_glRasterPos3f_Exec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glRasterPos3f_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glRasterPos2d_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte at *(ctx+0x468c)+0x79 (renderer info), read once for the validation block
+local	_glRasterPos2d_Exec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glRasterPos2d_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_glFlush_Exec	bVar1	rendererInfoByte79Clear	CONFIRMED	rendererInfoByte79 == 0: selects the dirty mask (0x17000000 or 0x17ffffff) and the clean test
+local	_glFlush_Exec	iVar5	dirtyBitArrayWord	CONFIRMED	word read through srcCursor from the dirty bit array at ctx+0x324 (9 words); nonzero sets 0x800000 in ctx+0x31c
+local	_gleCreateFuncCacheElem	param_1	funcCache	INFERRED	header of a doubly linked list of cache elements: new element is linked after the tail kept at param_1+4
+local	_gleCreateFuncCacheElem	param_2	slotCount	CONFIRMED	number of words cleared by _gleBlockClear and the size of the allocation (slotCount*4+0x20); the word after the slots is zeroed
+local	_gleCreateFuncCacheElem	piVar1	newElem	CONFIRMED	block from _gleDCBAlloc: header words linked into the list, slots cleared
+local	_gleCreateFuncCacheElem	puVar3	oldTail	CONFIRMED	previous tail element of the list (param_1+4), whose next pointer is set to the new element
+local	_gleCreateFuncCacheElem	piVar2	resultElem	CONFIRMED	newElem on success, 0 if the allocation failed: the function result
+local	_gleFlushIndexStack	param_1	glContext	INFERRED	all accesses are ctx offsets (0x4984..0x49a0, callback at +0x47b8 called with ctx+0x4688)
+local	_gleFlushIndexStack	piVar2	indexCursor	CONFIRMED	ctx+0x49a0 + ctx+0x4988*4, stored to ctx+0x499c, then the write cursor filling consecutive index values
+local	_gleFlushIndexStack	piVar1	indexLimit	CONFIRMED	previous ctx+0x499c + 0x48: the end the fill loop stops at
+local	_gleFlushIndexStack	iVar3	nextIndexValue	CONFIRMED	ctx+0x4984 + ctx+0x4988, stored at each position and incremented
+local	_gleFlushIndexStack	uVar4	remaining	CONFIRMED	word count of the fill loop ((limit + 3 - cursor) >> 2), counted down
+local	_gleRenderFlatLineStripFunc_body	puVar9	vertexArrayThenLightCursor	CONFIRMED	ctx+0x4854 (vertex array start passed to every callback), then in the clip path the cursor over the polygon list entries used for the per-line lighting callback
+local	_glDrawElementArrayAPPLE_NoopExec	uVar3	firstCopy	CONFIRMED	copy of the first parameter forwarded to _gleUpdateFramebufferCompleteness as a stale argument
+local	_glDrawElementArrayAPPLE_NoopExec	uVar6	countCopy	CONFIRMED	copy of the count parameter forwarded to _gleUpdateFramebufferCompleteness as a stale argument
+local	_gleLightMaterialRGBAChange_F_A	bVar1	dirtyBitIndex	CONFIRMED	byte read from the state table: bits >>3 &0x1c select the dirty word and &0x1f the bit OR-ed in (read twice, once per dirty array)
+local	_gleLightMaterialRGBAChange_F_A	iVar4	dirtyWordAddress324	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x324 that gets the bit set
+local	_gleLightMaterialRGBAChange_F_A	iVar3	glContextPtr5424ThenDirtyWordAddress348	CONFIRMED	ctx+0x5424 (second table byte read through it), then ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348 that gets the bit set
+local	_gleLightMaterialRGBAChange_B_A	bVar1	dirtyBitIndex	CONFIRMED	byte read from the state table: bits >>3 &0x1c select the dirty word and &0x1f the bit OR-ed in (read twice, once per dirty array)
+local	_gleLightMaterialRGBAChange_B_A	iVar4	dirtyWordAddress324	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x324 that gets the bit set
+local	_gleLightMaterialRGBAChange_B_A	iVar3	glContextPtr5424ThenDirtyWordAddress348	CONFIRMED	ctx+0x5424 (second table byte read through it), then ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348 that gets the bit set
+local	_gleLightMaterialRGBAChange_F_D	bVar1	dirtyBitIndex	CONFIRMED	byte read from the state table: bits >>3 &0x1c select the dirty word and &0x1f the bit OR-ed in (read twice, once per dirty array)
+local	_gleLightMaterialRGBAChange_F_D	iVar3	dirtyWordAddress324	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x324 that gets the bit set
+local	_gleLightMaterialRGBAChange_F_D	iVar2	materialThenGlContextPtr5424ThenDirtyWordAddress348	CONFIRMED	_glePushMaterial result (the material record written), then ctx+0x5424 (second table byte read through it), then ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348 that gets the bit set
+local	_gleLightMaterialRGBAChange_B_D	bVar1	dirtyBitIndex	CONFIRMED	byte read from the state table: bits >>3 &0x1c select the dirty word and &0x1f the bit OR-ed in (read twice, once per dirty array)
+local	_gleLightMaterialRGBAChange_B_D	iVar3	dirtyWordAddress324	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x324 that gets the bit set
+local	_gleLightMaterialRGBAChange_B_D	iVar2	materialThenGlContextPtr5424ThenDirtyWordAddress348	CONFIRMED	_glePushMaterial result (the material record written), then ctx+0x5424 (second table byte read through it), then ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348 that gets the bit set
+local	_gleLightMaterialShineChange_B	bVar1	dirtyBitIndex	CONFIRMED	byte read from the state table: bits >>3 &0x1c select the dirty word and &0x1f the bit OR-ed in (read twice, once per dirty array)
+local	_gleLightMaterialShineChange_B	iVar3	dirtyWordAddress324	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x324 that gets the bit set
+local	_gleLightMaterialShineChange_B	iVar2	materialThenGlContextPtr5424ThenDirtyWordAddress348	CONFIRMED	_glePushMaterial result (the material record written), then ctx+0x5424 (second table byte read through it), then ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348 that gets the bit set
+local	_gleLightMaterialRGBAChange_F_S	bVar1	dirtyBitIndex	CONFIRMED	byte read from the state table: bits >>3 &0x1c select the dirty word and &0x1f the bit OR-ed in (read twice, once per dirty array)
+local	_gleLightMaterialRGBAChange_F_S	iVar3	dirtyWordAddress324	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x324 that gets the bit set
+local	_gleLightMaterialRGBAChange_F_S	iVar2	materialThenDirtyWordAddress348	CONFIRMED	_glePushMaterial result (the material record written), then ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348 that gets the bit set
+local	_gleLightMaterialRGBAChange_B_AD	iVar3	glContextPtr5424	CONFIRMED	ctx+0x5424, the table read for the second dirty bit byte of both stores
+local	_gleLightMaterialRGBAChange_B_AD	iVar4	glContextWord5434ThenDirtyWordAddress	CONFIRMED	ctx+0x5434 (tested twice for 0), then the dirty word address of the ctx+0x324 array for the second bit
+local	_gleLightMaterialShineChange_FB	bVar1	dirtyBitIndex	CONFIRMED	byte read from the state table: bits >>3 &0x1c select the dirty word and &0x1f the bit OR-ed in (read twice, once per dirty array)
+local	_gleLightMaterialShineChange_FB	iVar4	dirtyWordAddress324	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x324 that gets the bit set
+local	_gleLightMaterialShineChange_FB	iVar2	materialThenDirtyWordAddress348	CONFIRMED	_glePushMaterial result (the material record written), then ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348 that gets the bit set
+local	_gleLightMaterialShineChange_FB	iVar3	faceBitTableOffset	CONFIRMED	loopIndex*6: byte offset of this face's group of dirty-bit bytes in both state tables (added to ctx+0x5420 / ctx+0x5424 tables)
+local	_gleUpdateLightDirection	bVar1	dirtyBitIndex	CONFIRMED	byte read from the state table: bits >>3 &0x1c select the dirty word and &0x1f the bit OR-ed in (read twice, once per dirty array)
+local	_gleUpdateLightDirection	iVar3	dirtyWordAddress324	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x324 that gets the bit set
+local	_gleUpdateLightDirection	iVar2	dirtyWordAddress348	CONFIRMED	ctx + (bit>>3 & 0x1c): word of the dirty bit array at ctx+0x348 that gets the bit set
+local	_glPointParameterfv_Exec	bVar1	enumMatchesAllowedValue	CONFIRMED	enumValue == 0 / == 0x2002 (with the 0x2000 test): nonzero when the enum is one of the accepted values, else GL error 0x500

@@ -1,14 +1,14 @@
 #include "decls.h"
 
 /* _glRasterPos2sv_Exec @ 0x809b0 (744 bytes) */
-void _glRasterPos2sv_Exec(int glContext,short *v,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glRasterPos2sv_Exec(int glContext,short *v,double forwardedFloatArg1ThenCalleeResult,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool rendererInfoByte79Clear;
   bool stateClean;
-  char cVar2;
+  char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyBitArrayWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -27,14 +27,14 @@ void _glRasterPos2sv_Exec(int glContext,short *v,double fparam_1,double forwarde
       matrixFuncDirty = *(int *)(glContext + 0x50ac);
       if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
         _gleUpdateMatrixFunc(glContext);
-        fparam_1 = extraout_f1;
+        forwardedFloatArg1ThenCalleeResult = extraout_f1;
       }
       if (*(char *)(glContext + 0x4691) != '\0') {
         framebufferObject = *(int *)(glContext + 0x744c);
         dirtyFlagWords = (int *)(glContext + 0x310);
-        cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+        rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
         if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,forwardedFloatArg1ThenCalleeResult,forwardedFloatArg2,forwardedFloatArg3,
                      forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         }
@@ -46,9 +46,9 @@ LAB_00080b04:
           loopIndex = 0;
           srcCursor = (int *)(glContext + 0x324);
           do {
-            iVar5 = *srcCursor;
+            dirtyBitArrayWord = *srcCursor;
             srcCursor = srcCursor + 1;
-            if (iVar5 != 0) {
+            if (dirtyBitArrayWord != 0) {
               *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
               break;
             }
@@ -65,14 +65,14 @@ LAB_00080b04:
             goto LAB_00080b04;
           }
         }
-        bVar1 = cVar2 == '\0';
-        if (bVar1) {
+        rendererInfoByte79Clear = rendererInfoByte79 == '\0';
+        if (rendererInfoByte79Clear) {
           dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
         }
         else {
           dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
         }
-        if (bVar1) {
+        if (rendererInfoByte79Clear) {
           stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
                   *(int *)(glContext + 800) == 0;
         }
@@ -468,12 +468,12 @@ void _glRasterPos3f_Comp(undefined4 glContext,float x,float y,float z)
 /* _glRasterPos3f_Exec @ 0x81390 (744 bytes) */
 void _glRasterPos3f_Exec(int glContext,float x,float y,float z,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool rendererInfoByte79Clear;
   bool stateClean;
-  char cVar2;
+  char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyBitArrayWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -509,7 +509,7 @@ void _glRasterPos3f_Exec(int glContext,float x,float y,float z,double forwardedF
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00081620;
   framebufferObject = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
-  cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+  rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
     ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,fparam_1_00,fparam_2_00,
                fparam_3_00,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
@@ -523,9 +523,9 @@ LAB_000814f8:
     loopIndex = 0;
     srcCursor = (int *)(glContext + 0x324);
     do {
-      iVar5 = *srcCursor;
+      dirtyBitArrayWord = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (iVar5 != 0) {
+      if (dirtyBitArrayWord != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
@@ -542,14 +542,14 @@ LAB_000814f8:
       goto LAB_000814f8;
     }
   }
-  bVar1 = cVar2 == '\0';
-  if (bVar1) {
+  rendererInfoByte79Clear = rendererInfoByte79 == '\0';
+  if (rendererInfoByte79Clear) {
     dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
   }
   else {
     dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
   }
-  if (bVar1) {
+  if (rendererInfoByte79Clear) {
     stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
             *(int *)(glContext + 800) == 0;
   }
@@ -750,7 +750,7 @@ void _glRasterPos3fv_CompExec(glContext, v)
   undefined4 glContext;
   undefined4 v;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -760,7 +760,7 @@ void _glRasterPos3fv_CompExec(glContext, v)
   double incomingFpr8;
   
   ((void (*)())_glRasterPos3fv_Comp)(glContext,v);
-  ((void (*)())_glRasterPos3fv_Exec)(glContext,v,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRasterPos3fv_Exec)(glContext,v,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -780,22 +780,22 @@ void _glRasterPos3i_Comp(glContext, x, y, z)
 }
 
 /* _glRasterPos3i_Exec @ 0x81a78 (756 bytes) */
-void _glRasterPos3i_Exec(int glContext,uint x,uint y,uint z,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glRasterPos3i_Exec(int glContext,uint x,uint y,uint z,double forwardedFloatArg1ThenCalleeResult,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool rendererInfoByte79Clear;
   bool stateClean;
-  char cVar2;
+  char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyBitArrayWord;
   int framebufferObject;
-  uint uVar6;
+  uint zCopy;
   undefined4 incomingR7;
   undefined4 incomingR8;
   int matrixFuncDirty;
   int remaining;
   int loopIndex;
-  uint uVar8;
+  uint yCopy;
   uint dispatchFlags;
   uint dirtyWord3ThenMasked;
   int *dirtyFlagWords;
@@ -804,18 +804,18 @@ void _glRasterPos3i_Exec(int glContext,uint x,uint y,uint z,double fparam_1,doub
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
       matrixFuncDirty = *(int *)(glContext + 0x50ac);
-      uVar8 = y;
-      uVar6 = z;
+      yCopy = y;
+      zCopy = z;
       if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
         _gleUpdateMatrixFunc(glContext);
-        fparam_1 = extraout_f1;
+        forwardedFloatArg1ThenCalleeResult = extraout_f1;
       }
       if (*(char *)(glContext + 0x4691) != '\0') {
         framebufferObject = *(int *)(glContext + 0x744c);
         dirtyFlagWords = (int *)(glContext + 0x310);
-        cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+        rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
         if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar8,uVar6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,yCopy,zCopy,incomingR7,incomingR8,matrixFuncDirty,forwardedFloatArg1ThenCalleeResult,forwardedFloatArg2,forwardedFloatArg3,
                      forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         }
@@ -827,9 +827,9 @@ LAB_00081bd4:
           loopIndex = 0;
           srcCursor = (int *)(glContext + 0x324);
           do {
-            iVar5 = *srcCursor;
+            dirtyBitArrayWord = *srcCursor;
             srcCursor = srcCursor + 1;
-            if (iVar5 != 0) {
+            if (dirtyBitArrayWord != 0) {
               *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
               break;
             }
@@ -846,14 +846,14 @@ LAB_00081bd4:
             goto LAB_00081bd4;
           }
         }
-        bVar1 = cVar2 == '\0';
-        if (bVar1) {
+        rendererInfoByte79Clear = rendererInfoByte79 == '\0';
+        if (rendererInfoByte79Clear) {
           dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
         }
         else {
           dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
         }
-        if (bVar1) {
+        if (rendererInfoByte79Clear) {
           stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
                   *(int *)(glContext + 800) == 0;
         }
@@ -949,14 +949,14 @@ void _glRasterPos3iv_Comp(glContext, v)
 }
 
 /* _glRasterPos3iv_Exec @ 0x81e44 (760 bytes) */
-void _glRasterPos3iv_Exec(int glContext,uint *v,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glRasterPos3iv_Exec(int glContext,uint *v,double forwardedFloatArg1ThenCalleeResult,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool rendererInfoByte79Clear;
   bool stateClean;
-  char cVar2;
+  char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyBitArrayWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -975,14 +975,14 @@ void _glRasterPos3iv_Exec(int glContext,uint *v,double fparam_1,double forwarded
       matrixFuncDirty = *(int *)(glContext + 0x50ac);
       if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
         _gleUpdateMatrixFunc(glContext);
-        fparam_1 = extraout_f1;
+        forwardedFloatArg1ThenCalleeResult = extraout_f1;
       }
       if (*(char *)(glContext + 0x4691) != '\0') {
         framebufferObject = *(int *)(glContext + 0x744c);
         dirtyFlagWords = (int *)(glContext + 0x310);
-        cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+        rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
         if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,forwardedFloatArg1ThenCalleeResult,forwardedFloatArg2,forwardedFloatArg3,
                      forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         }
@@ -994,9 +994,9 @@ LAB_00081f98:
           loopIndex = 0;
           srcCursor = (int *)(glContext + 0x324);
           do {
-            iVar5 = *srcCursor;
+            dirtyBitArrayWord = *srcCursor;
             srcCursor = srcCursor + 1;
-            if (iVar5 != 0) {
+            if (dirtyBitArrayWord != 0) {
               *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
               break;
             }
@@ -1013,14 +1013,14 @@ LAB_00081f98:
             goto LAB_00081f98;
           }
         }
-        bVar1 = cVar2 == '\0';
-        if (bVar1) {
+        rendererInfoByte79Clear = rendererInfoByte79 == '\0';
+        if (rendererInfoByte79Clear) {
           dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
         }
         else {
           dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
         }
-        if (bVar1) {
+        if (rendererInfoByte79Clear) {
           stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
                   *(int *)(glContext + 800) == 0;
         }
@@ -1255,7 +1255,7 @@ void _glRasterPos3s_CompExec(glContext, x, y, z)
   undefined4 y;
   undefined4 z;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1265,7 +1265,7 @@ void _glRasterPos3s_CompExec(glContext, x, y, z)
   double incomingFpr8;
   
   ((void (*)())_glRasterPos3s_Comp)(glContext,x,y,z);
-  ((void (*)())_glRasterPos3s_Exec)(glContext,x,y,z,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
+  ((void (*)())_glRasterPos3s_Exec)(glContext,x,y,z,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
                       incomingFpr8);
   return;
 }
@@ -1893,14 +1893,14 @@ void _glRasterPos4fv_Comp(glContext, v)
 }
 
 /* _glRasterPos4fv_Exec @ 0x83284 (688 bytes) */
-void _glRasterPos4fv_Exec(int glContext,float *v,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glRasterPos4fv_Exec(int glContext,float *v,double forwardedFloatArg1ThenCalleeResult,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool rendererInfoByte79Clear;
   bool stateClean;
-  char cVar2;
+  char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyBitArrayWord;
   int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
@@ -1925,14 +1925,14 @@ void _glRasterPos4fv_Exec(int glContext,float *v,double fparam_1,double forwarde
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = extraout_f1;
+    forwardedFloatArg1ThenCalleeResult = extraout_f1;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_000834f8;
   framebufferObject = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
-  cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+  rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixFuncDirty,forwardedFloatArg1ThenCalleeResult,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -1944,9 +1944,9 @@ LAB_000833d0:
     loopIndex = 0;
     srcCursor = (int *)(glContext + 0x324);
     do {
-      iVar5 = *srcCursor;
+      dirtyBitArrayWord = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (iVar5 != 0) {
+      if (dirtyBitArrayWord != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
       }
@@ -1963,14 +1963,14 @@ LAB_000833d0:
       goto LAB_000833d0;
     }
   }
-  bVar1 = cVar2 == '\0';
-  if (bVar1) {
+  rendererInfoByte79Clear = rendererInfoByte79 == '\0';
+  if (rendererInfoByte79Clear) {
     dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
   }
   else {
     dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
   }
-  if (bVar1) {
+  if (rendererInfoByte79Clear) {
     stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
             *(int *)(glContext + 800) == 0;
   }
@@ -2023,7 +2023,7 @@ void _glRasterPos4fv_CompExec(glContext, v)
   undefined4 glContext;
   undefined4 v;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -2033,7 +2033,7 @@ void _glRasterPos4fv_CompExec(glContext, v)
   double incomingFpr8;
   
   ((void (*)())_glRasterPos4fv_Comp)(glContext,v);
-  ((void (*)())_glRasterPos4fv_Exec)(glContext,v,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRasterPos4fv_Exec)(glContext,v,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -2054,22 +2054,22 @@ void _glRasterPos4i_Comp(glContext, x, y, z, w)
 }
 
 /* _glRasterPos4i_Exec @ 0x835fc (772 bytes) */
-void _glRasterPos4i_Exec(int glContext,uint x,uint y,uint z,uint w,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glRasterPos4i_Exec(int glContext,uint x,uint y,uint z,uint w,double forwardedFloatArg1ThenCalleeResult,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool rendererInfoByte79Clear;
   bool stateClean;
-  char cVar2;
+  char rendererInfoByte79;
   undefined4 glErrorCode;
   int *srcCursor;
-  int iVar5;
+  int dirtyBitArrayWord;
   int framebufferObject;
-  uint uVar6;
-  uint uVar7;
+  uint zCopy;
+  uint wCopy;
   undefined4 incomingR8;
   int matrixFuncDirty;
   int remaining;
   int loopIndex;
-  uint uVar9;
+  uint yCopy;
   uint dispatchFlags;
   uint dirtyWord3ThenMasked;
   int *dirtyFlagWords;
@@ -2078,19 +2078,19 @@ void _glRasterPos4i_Exec(int glContext,uint x,uint y,uint z,uint w,double fparam
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((*(int *)(glContext + 0x744c) != 0) || (*(int *)(glContext + 0x310) < 0)) {
       matrixFuncDirty = *(int *)(glContext + 0x50ac);
-      uVar9 = y;
-      uVar6 = z;
-      uVar7 = w;
+      yCopy = y;
+      zCopy = z;
+      wCopy = w;
       if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
         _gleUpdateMatrixFunc(glContext);
-        fparam_1 = extraout_f1;
+        forwardedFloatArg1ThenCalleeResult = extraout_f1;
       }
       if (*(char *)(glContext + 0x4691) != '\0') {
         framebufferObject = *(int *)(glContext + 0x744c);
         dirtyFlagWords = (int *)(glContext + 0x310);
-        cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+        rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
         if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar9,uVar6,uVar7,incomingR8,matrixFuncDirty,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,yCopy,zCopy,wCopy,incomingR8,matrixFuncDirty,forwardedFloatArg1ThenCalleeResult,forwardedFloatArg2,forwardedFloatArg3,
                      forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         }
@@ -2102,9 +2102,9 @@ LAB_0008375c:
           loopIndex = 0;
           srcCursor = (int *)(glContext + 0x324);
           do {
-            iVar5 = *srcCursor;
+            dirtyBitArrayWord = *srcCursor;
             srcCursor = srcCursor + 1;
-            if (iVar5 != 0) {
+            if (dirtyBitArrayWord != 0) {
               *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
               break;
             }
@@ -2121,14 +2121,14 @@ LAB_0008375c:
             goto LAB_0008375c;
           }
         }
-        bVar1 = cVar2 == '\0';
-        if (bVar1) {
+        rendererInfoByte79Clear = rendererInfoByte79 == '\0';
+        if (rendererInfoByte79Clear) {
           dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
         }
         else {
           dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
         }
-        if (bVar1) {
+        if (rendererInfoByte79Clear) {
           stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
                   *(int *)(glContext + 800) == 0;
         }
@@ -2542,7 +2542,7 @@ void _glRasterPos4s_CompExec(glContext, x, y, z, w)
   undefined4 z;
   undefined4 w;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -2552,7 +2552,7 @@ void _glRasterPos4s_CompExec(glContext, x, y, z, w)
   double incomingFpr8;
   
   ((void (*)())_glRasterPos4s_Comp)(glContext,x,y,z,w);
-  ((void (*)())_glRasterPos4s_Exec)(glContext,x,y,z,w,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6
+  ((void (*)())_glRasterPos4s_Exec)(glContext,x,y,z,w,incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6
                       ,incomingFpr7,incomingFpr8);
   return;
 }
