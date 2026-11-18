@@ -551,8 +551,7 @@ void _gleSetFunctionIDFromList(glContext, streamSizes, funcDesc)
   int arrayDefaults;
   int streamType;
   int remaining;
-  int slotOffsets [31];
-  int local_14;
+  int slotOffsets [32];
   
   streamCount = *funcDesc;
   arrayDefaults = *(int *)(glContext + 0x4674);
@@ -572,7 +571,7 @@ void _gleSetFunctionIDFromList(glContext, streamSizes, funcDesc)
     *offsetCursor = runningSize + (uint)slotSize;
     remaining = remaining + -1;
   } while (remaining != 0);
-  slotOffsets[0] = local_14 + (uint)*(byte *)(streamSizes + 0x2b);
+  slotOffsets[0] = slotOffsets[31] + (uint)*(byte *)(streamSizes + 0x2b);
   if (streamCount == 0) {
     return;
   }
