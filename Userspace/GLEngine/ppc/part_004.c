@@ -1743,19 +1743,19 @@ void _glShadeModel_Exec(glContext, mode)
   int glContext;
   int mode;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *clipInterpFunc;
+  undefined *eyeInterpFunc;
   undefined4 glErrorCode;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (mode - 0x1d00U < 2) {
       *(int *)(glContext + 0x34f4) = mode;
       _gleUpdatePrimitiveData(glContext);
-      puVar2 = PTR__gleSetEyeInterpFunc_0011203c;
-      puVar1 = PTR__gleSetClipInterpFunc_00112038;
+      eyeInterpFunc = PTR__gleSetEyeInterpFunc_0011203c;
+      clipInterpFunc = PTR__gleSetClipInterpFunc_00112038;
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x8000000;
-      *(undefined **)(glContext + 0x49c8) = puVar2;
-      *(undefined **)(glContext + 0x49cc) = puVar1;
+      *(undefined **)(glContext + 0x49c8) = eyeInterpFunc;
+      *(undefined **)(glContext + 0x49cc) = clipInterpFunc;
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1776,8 +1776,8 @@ void _glShadeModel_Exec(glContext, mode)
 /* _glClearDepth_Exec @ 0x31554 (140 bytes) */
 void _glClearDepth_Exec(int glContext,double depth)
 {
-  uint uVar1;
-  bool bVar2;
+  uint clampedDepthHighWord;
+  bool depthBelowLowerBound;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) == 0) {
@@ -1786,16 +1786,16 @@ void _glClearDepth_Exec(int glContext,double depth)
     }
     return;
   }
-  bVar2 = depth < DOUBLE_00108d60;
+  depthBelowLowerBound = depth < DOUBLE_00108d60;
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x10;
-  if (bVar2) {
-    uVar1 = 0;
+  if (depthBelowLowerBound) {
+    clampedDepthHighWord = 0;
   }
   else {
     if (!(DOUBLE_00108d68 < depth)) goto LAB_000315d4;
-    uVar1 = 0x3ff00000;
+    clampedDepthHighWord = 0x3ff00000;
   }
-  depth = GH_U2D((unsigned long long)uVar1 << 0x20);
+  depth = GH_U2D((unsigned long long)clampedDepthHighWord << 0x20);
 LAB_000315d4:
   *(double *)(glContext + 0x30e8) = depth;
   return;
@@ -2324,7 +2324,7 @@ void _glPolygonMode_Exec(glContext, face, mode)
   int mode;
 {
   undefined4 glErrorCode;
-  undefined2 uVar2;
+  undefined2 modeHalfword;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -2342,20 +2342,20 @@ LAB_000322a8:
     glErrorCode = 0x500;
     goto LAB_000322a8;
   }
-  uVar2 = (undefined2)mode;
+  modeHalfword = (undefined2)mode;
   if (face == 0x405) {
-    *(undefined2 *)(glContext + 0x34d2) = uVar2;
+    *(undefined2 *)(glContext + 0x34d2) = modeHalfword;
     goto LAB_000322fc;
   }
   if (face < 0x406) {
     if (face == 0x404) {
 LAB_000322d8:
-      *(undefined2 *)(glContext + 0x34d0) = uVar2;
+      *(undefined2 *)(glContext + 0x34d0) = modeHalfword;
       goto LAB_000322fc;
     }
   }
   else if (face == 0x408) {
-    *(undefined2 *)(glContext + 0x34d2) = uVar2;
+    *(undefined2 *)(glContext + 0x34d2) = modeHalfword;
     goto LAB_000322d8;
   }
   if (*(int *)(glContext + 0x7574) == 0) {

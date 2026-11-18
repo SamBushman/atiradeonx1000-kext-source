@@ -918,29 +918,29 @@ int _glVertexAttrib4ivARB_ListExec(glContext, listRecord)
 /* _glVertexAttrib4ubvARB_Exec @ 0xaeaf0 (384 bytes) */
 double _glVertexAttrib4ubvARB_Exec(int glContext,uint index,byte *v,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4)
 {
-  int iVar1;
+  int vertexBufferEndThenAttribRecord;
   undefined4 incomingR6;
   code *vertexFunc;
   
   if (index < 0x10) {
     if (index == 0) {
-      iVar1 = *(int *)(glContext + 0x4858);
+      vertexBufferEndThenAttribRecord = *(int *)(glContext + 0x4858);
       vertexFunc = *(code **)(glContext + 0x4884);
-      if (iVar1 == *(int *)(glContext + 0x485c)) {
+      if (vertexBufferEndThenAttribRecord == *(int *)(glContext + 0x485c)) {
         vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*vertexFunc)(glContext,0,v,incomingR6,iVar1,iVar1,(uint)v[2],v[1] | 0x4b000000,
+      (*vertexFunc)(glContext,0,v,incomingR6,vertexBufferEndThenAttribRecord,vertexBufferEndThenAttribRecord,(uint)v[2],v[1] | 0x4b000000,
                 (double)(GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0),
                 (double)(GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0),
                 (double)(GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0),
                 (double)(GH_U2F((unsigned int)((v[3] | 0x4b000000))) - 8388608.0));
     }
     else {
-      iVar1 = glContext + index * 0x10;
-      *(float *)(iVar1 + 0x1a0) = GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0;
-      *(float *)(iVar1 + 0x1a4) = GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0;
-      *(float *)(iVar1 + 0x1a8) = GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0;
-      *(float *)(iVar1 + 0x1ac) = GH_U2F((unsigned int)((v[3] | 0x4b000000))) - 8388608.0;
+      vertexBufferEndThenAttribRecord = glContext + index * 0x10;
+      *(float *)(vertexBufferEndThenAttribRecord + 0x1a0) = GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0;
+      *(float *)(vertexBufferEndThenAttribRecord + 0x1a4) = GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0;
+      *(float *)(vertexBufferEndThenAttribRecord + 0x1a8) = GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0;
+      *(float *)(vertexBufferEndThenAttribRecord + 0x1ac) = GH_U2F((unsigned int)((v[3] | 0x4b000000))) - 8388608.0;
     }
   }
   else if (*(int *)(glContext + 0x7574) == 0) {

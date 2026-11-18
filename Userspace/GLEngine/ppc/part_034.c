@@ -237,17 +237,17 @@ void _glDrawElements_IMM_Exec(int glContext,undefined4 forwardedArg2,undefined4 
 /* _glDrawElements_VBO_Exec @ 0xa8a24 (136 bytes) */
 void _glDrawElements_VBO_Exec(int glContext,undefined4 forwardedArg2,undefined4 forwardedArg3,uint type,int indices,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
-  int iVar2;
+  bool typeValid;
+  int elementArrayBuffer;
   
   if (type != 0x1403) {
     if (type < 0x1404) {
-      bVar1 = type == 0x1401;
+      typeValid = type == 0x1401;
     }
     else {
-      bVar1 = type == 0x1405;
+      typeValid = type == 0x1405;
     }
-    if (!bVar1) {
+    if (!typeValid) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -260,9 +260,9 @@ void _glDrawElements_VBO_Exec(int glContext,undefined4 forwardedArg2,undefined4 
     *(undefined4 *)(glContext + 0x488c) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  iVar2 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
-  if (iVar2 != 0) {
-    indices = indices + *(int *)(iVar2 + 0x30);
+  elementArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+  if (elementArrayBuffer != 0) {
+    indices = indices + *(int *)(elementArrayBuffer + 0x30);
   }
   *(int *)(glContext + 0x48d8) = indices;
   *(int *)(glContext + 0x4978) = indices;
@@ -385,17 +385,17 @@ void _glDrawElements_STD_Exec(int glContext,undefined4 forwardedArg2,undefined4 
 /* _glDrawElements_Exec @ 0xa8c44 (136 bytes) */
 void _glDrawElements_Exec(int glContext,undefined4 mode,undefined4 count,uint type,int indices,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
-  int iVar2;
+  bool typeValid;
+  int elementArrayBuffer;
   
   if (type != 0x1403) {
     if (type < 0x1404) {
-      bVar1 = type == 0x1401;
+      typeValid = type == 0x1401;
     }
     else {
-      bVar1 = type == 0x1405;
+      typeValid = type == 0x1405;
     }
-    if (!bVar1) {
+    if (!typeValid) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -403,9 +403,9 @@ void _glDrawElements_Exec(int glContext,undefined4 mode,undefined4 count,uint ty
       return;
     }
   }
-  iVar2 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
-  if (iVar2 != 0) {
-    indices = indices + *(int *)(iVar2 + 0x30);
+  elementArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+  if (elementArrayBuffer != 0) {
+    indices = indices + *(int *)(elementArrayBuffer + 0x30);
   }
   *(int *)(glContext + 0x48d8) = indices;
   *(int *)(glContext + 0x4978) = indices;
@@ -602,9 +602,9 @@ int _glDrawRangeElements_Comp(glContext, mode, start, end, count, type, indices)
 /* _glDrawRangeElements_IMM_Exec @ 0xa9000 (168 bytes) */
 void _glDrawRangeElements_IMM_Exec(int glContext,undefined4 forwardedArg2,uint start,uint end,undefined4 forwardedArg5,uint type,int indices,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool typeValid;
   undefined4 glErrorCode;
-  int iVar3;
+  int elementArrayBuffer;
   
   if (end < start) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -617,12 +617,12 @@ LAB_000a9058:
   }
   if (type != 0x1403) {
     if (type < 0x1404) {
-      bVar1 = type == 0x1401;
+      typeValid = type == 0x1401;
     }
     else {
-      bVar1 = type == 0x1405;
+      typeValid = type == 0x1405;
     }
-    if (!bVar1) {
+    if (!typeValid) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -635,9 +635,9 @@ LAB_000a9058:
     *(undefined4 *)(glContext + 0x488c) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  iVar3 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
-  if (iVar3 != 0) {
-    indices = indices + *(int *)(iVar3 + 0x30);
+  elementArrayBuffer = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+  if (elementArrayBuffer != 0) {
+    indices = indices + *(int *)(elementArrayBuffer + 0x30);
   }
   *(int *)(glContext + 0x4978) = indices;
   *(int *)(glContext + 0x48d8) = indices;
@@ -1396,23 +1396,23 @@ int _glDrawElementArrayAPPLE_Comp(glContext, mode, first, count)
   undefined4 count;
 {
   int clientState;
-  undefined4 uVar2;
-  int iVar3;
+  undefined4 callResult;
+  int elementArrayPointer;
   
   clientState = *(int *)(glContext + 0x4a60);
-  iVar3 = *(int *)(clientState + 0xd8);
+  elementArrayPointer = *(int *)(clientState + 0xd8);
   if (*(int *)(clientState + 0x35c) != 0) {
-    iVar3 = iVar3 + *(int *)(*(int *)(clientState + 0x35c) + 0x30);
+    elementArrayPointer = elementArrayPointer + *(int *)(*(int *)(clientState + 0x35c) + 0x30);
   }
-  *(int *)(glContext + 0x48d8) = iVar3;
-  *(int *)(glContext + 0x4978) = iVar3;
+  *(int *)(glContext + 0x48d8) = elementArrayPointer;
+  *(int *)(glContext + 0x4978) = elementArrayPointer;
   if ((uint)*(ushort *)(clientState + 0xe0) != *(uint *)(glContext + 0x48dc)) {
     *(uint *)(glContext + 0x48dc) = (uint)*(ushort *)(clientState + 0xe0);
     *(undefined4 *)(glContext + 0x488c) = 0;
     *(undefined4 *)(glContext + 0x4890) = 0;
   }
-  uVar2 = _gleDrawArraysOrElements_Comp(glContext,mode,first,count);
-  return uVar2;
+  callResult = _gleDrawArraysOrElements_Comp(glContext,mode,first,count);
+  return callResult;
 }
 
 /* _glDrawElementArrayAPPLE_Exec @ 0xa9db0 (84 bytes) */
@@ -1600,13 +1600,13 @@ int _glMultiDrawElementArrayAPPLE_Comp(glContext, mode, first, count, primcount)
   int count;
   int primcount;
 {
-  int iVar1;
+  int elementArrayPointer;
   int loopIndex;
-  int iVar2;
+  int indexByteOffset;
   int clientState;
   
   clientState = *(int *)(glContext + 0x4a60);
-  iVar1 = *(int *)(clientState + 0xd8);
+  elementArrayPointer = *(int *)(clientState + 0xd8);
   if (primcount < 0) {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x501;
@@ -1614,10 +1614,10 @@ int _glMultiDrawElementArrayAPPLE_Comp(glContext, mode, first, count, primcount)
   }
   else {
     if (*(int *)(clientState + 0x35c) != 0) {
-      iVar1 = iVar1 + *(int *)(*(int *)(clientState + 0x35c) + 0x30);
+      elementArrayPointer = elementArrayPointer + *(int *)(*(int *)(clientState + 0x35c) + 0x30);
     }
-    *(int *)(glContext + 0x48d8) = iVar1;
-    *(int *)(glContext + 0x4978) = iVar1;
+    *(int *)(glContext + 0x48d8) = elementArrayPointer;
+    *(int *)(glContext + 0x4978) = elementArrayPointer;
     if ((uint)*(ushort *)(clientState + 0xe0) != *(uint *)(glContext + 0x48dc)) {
       *(uint *)(glContext + 0x48dc) = (uint)*(ushort *)(clientState + 0xe0);
       *(undefined4 *)(glContext + 0x488c) = 0;
@@ -1626,10 +1626,10 @@ int _glMultiDrawElementArrayAPPLE_Comp(glContext, mode, first, count, primcount)
     loopIndex = 0;
     if (0 < primcount) {
       do {
-        iVar2 = loopIndex * 4;
+        indexByteOffset = loopIndex * 4;
         loopIndex = loopIndex + 1;
         _gleDrawArraysOrElements_Comp
-                  (glContext,mode,*(undefined4 *)(first + iVar2),*(undefined4 *)(count + iVar2)
+                  (glContext,mode,*(undefined4 *)(first + indexByteOffset),*(undefined4 *)(count + indexByteOffset)
                   );
       } while (loopIndex < primcount);
     }
@@ -1861,10 +1861,10 @@ int _glMultiDrawArrays_Comp(glContext, mode, first, count, primcount)
   int count;
   int primcount;
 {
-  int iVar1;
+  int glContextThenByteOffsetThenDrawResult;
   int loopIndex;
   
-  iVar1 = glContext;
+  glContextThenByteOffsetThenDrawResult = glContext;
   if (primcount < 0) {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x501;
@@ -1874,14 +1874,14 @@ int _glMultiDrawArrays_Comp(glContext, mode, first, count, primcount)
     loopIndex = 0;
     if (0 < primcount) {
       do {
-        iVar1 = loopIndex * 4;
+        glContextThenByteOffsetThenDrawResult = loopIndex * 4;
         loopIndex = loopIndex + 1;
-        iVar1 = _glDrawArrays_Comp(glContext,mode,*(undefined4 *)(first + iVar1),
-                                   *(undefined4 *)(count + iVar1));
+        glContextThenByteOffsetThenDrawResult = _glDrawArrays_Comp(glContext,mode,*(undefined4 *)(first + glContextThenByteOffsetThenDrawResult),
+                                   *(undefined4 *)(count + glContextThenByteOffsetThenDrawResult));
       } while (loopIndex < primcount);
     }
   }
-  return iVar1;
+  return glContextThenByteOffsetThenDrawResult;
 }
 
 /* _glMultiDrawArrays_Exec @ 0xaa66c (132 bytes) */
@@ -2515,11 +2515,11 @@ double _glWeightivARB_Exec(glContext, size, weights)
   int size;
   uint *weights;
 {
-  int iVar1;
+  int dstByteOffset;
   double intToDoubleBias;
   float channelScale;
   float channelBias;
-  uint uVar5;
+  uint weightValue;
   float *dstCursor;
   int loopIndex;
   
@@ -2537,10 +2537,10 @@ double _glWeightivARB_Exec(glContext, size, weights)
   if (0 < size) {
     dstCursor = (float *)(glContext + 0x2d0);
     do {
-      uVar5 = *weights;
+      weightValue = *weights;
       loopIndex = loopIndex + 1;
       weights = weights + 1;
-      *dstCursor = (float)((double)CONCAT44(0x43300000,uVar5 ^ 0x80000000) - intToDoubleBias) * channelScale + channelBias;
+      *dstCursor = (float)((double)CONCAT44(0x43300000,weightValue ^ 0x80000000) - intToDoubleBias) * channelScale + channelBias;
       dstCursor = dstCursor + 1;
       size = size + -1;
     } while (size != 0);
@@ -2549,9 +2549,9 @@ double _glWeightivARB_Exec(glContext, size, weights)
     }
   }
   do {
-    iVar1 = loopIndex * 4;
+    dstByteOffset = loopIndex * 4;
     loopIndex = loopIndex + 1;
-    *(undefined4 *)(iVar1 + glContext + 0x2d0) = 0;
+    *(undefined4 *)(dstByteOffset + glContext + 0x2d0) = 0;
   } while (loopIndex < 4);
   return;
 }

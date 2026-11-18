@@ -4397,7 +4397,7 @@ void _glRotated_CompExec(int glContext,double angle,double x,double y,double z)
 {
   double glContextFloat20;
   double sinValue;
-  double dVar2;
+  double angleScaleThenCosValue;
   double incomingFpr5;
   double incomingFpr6;
   double incomingFpr7;
@@ -4405,40 +4405,40 @@ void _glRotated_CompExec(int glContext,double angle,double x,double y,double z)
   
   glContextFloat20 = (double)*(float *)(glContext + 0x20);
   if ((y == glContextFloat20) && (z == glContextFloat20)) {
-    dVar2 = DOUBLE_00108db8;
+    angleScaleThenCosValue = DOUBLE_00108db8;
     if (x < glContextFloat20) {
-      dVar2 = DOUBLE_00108db0;
+      angleScaleThenCosValue = DOUBLE_00108db0;
     }
-    sinValue = _sin(angle * dVar2);
-    dVar2 = _cos(angle * dVar2);
-    ((void (*)())_glRotateX_Comp)(glContext,(double)(float)sinValue,(double)(float)dVar2);
-    ((void (*)())_glRotateX_Exec)(glContext,(double)(float)sinValue,(double)(float)dVar2,y,z,incomingFpr5,incomingFpr6,
+    sinValue = _sin(angle * angleScaleThenCosValue);
+    angleScaleThenCosValue = _cos(angle * angleScaleThenCosValue);
+    ((void (*)())_glRotateX_Comp)(glContext,(double)(float)sinValue,(double)(float)angleScaleThenCosValue);
+    ((void (*)())_glRotateX_Exec)(glContext,(double)(float)sinValue,(double)(float)angleScaleThenCosValue,y,z,incomingFpr5,incomingFpr6,
                     incomingFpr7,incomingFpr8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
   if ((x == glContextFloat20) && (z == glContextFloat20)) {
-    dVar2 = DOUBLE_00108db8;
+    angleScaleThenCosValue = DOUBLE_00108db8;
     if (y < glContextFloat20) {
-      dVar2 = DOUBLE_00108db0;
+      angleScaleThenCosValue = DOUBLE_00108db0;
     }
-    sinValue = _sin(angle * dVar2);
-    dVar2 = _cos(angle * dVar2);
-    ((void (*)())_glRotateY_Comp)(glContext,(double)(float)sinValue,(double)(float)dVar2);
-    ((void (*)())_glRotateY_Exec)(glContext,(double)(float)sinValue,(double)(float)dVar2,y,z,incomingFpr5,incomingFpr6,
+    sinValue = _sin(angle * angleScaleThenCosValue);
+    angleScaleThenCosValue = _cos(angle * angleScaleThenCosValue);
+    ((void (*)())_glRotateY_Comp)(glContext,(double)(float)sinValue,(double)(float)angleScaleThenCosValue);
+    ((void (*)())_glRotateY_Exec)(glContext,(double)(float)sinValue,(double)(float)angleScaleThenCosValue,y,z,incomingFpr5,incomingFpr6,
                     incomingFpr7,incomingFpr8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
   if ((x == glContextFloat20) && (y == glContextFloat20)) {
-    dVar2 = DOUBLE_00108db8;
+    angleScaleThenCosValue = DOUBLE_00108db8;
     if (z < glContextFloat20) {
-      dVar2 = DOUBLE_00108db0;
+      angleScaleThenCosValue = DOUBLE_00108db0;
     }
-    sinValue = _sin(angle * dVar2);
-    dVar2 = _cos(angle * dVar2);
-    ((void (*)())_glRotateZ_Comp)(glContext,(double)(float)sinValue,(double)(float)dVar2);
-    ((void (*)())_glRotateZ_Exec)(glContext,(double)(float)sinValue,(double)(float)dVar2,y,z,incomingFpr5,incomingFpr6,
+    sinValue = _sin(angle * angleScaleThenCosValue);
+    angleScaleThenCosValue = _cos(angle * angleScaleThenCosValue);
+    ((void (*)())_glRotateZ_Comp)(glContext,(double)(float)sinValue,(double)(float)angleScaleThenCosValue);
+    ((void (*)())_glRotateZ_Exec)(glContext,(double)(float)sinValue,(double)(float)angleScaleThenCosValue,y,z,incomingFpr5,incomingFpr6,
                     incomingFpr7,incomingFpr8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;

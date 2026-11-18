@@ -1330,12 +1330,12 @@ void _glGetFinalCombinerInputParameterivNV_Exec(glContext, variable, pname, para
   uint pname;
   uint *params;
 {
-  uint uVar1;
+  uint variableIndexThenValue;
   
-  uVar1 = variable - 0x8523;
-  if (6 < uVar1) goto LAB_000b3ec0;
+  variableIndexThenValue = variable - 0x8523;
+  if (6 < variableIndexThenValue) goto LAB_000b3ec0;
   if (pname == 0x8543) {
-    uVar1 = (uint)*(ushort *)(uVar1 * 8 + glContext + 0x4628);
+    variableIndexThenValue = (uint)*(ushort *)(variableIndexThenValue * 8 + glContext + 0x4628);
   }
   else if (pname < 0x8544) {
     if (pname != 0x8542) {
@@ -1346,13 +1346,13 @@ LAB_000b3ec0:
       }
       return;
     }
-    uVar1 = (uint)*(ushort *)(uVar1 * 8 + glContext + 0x4624);
+    variableIndexThenValue = (uint)*(ushort *)(variableIndexThenValue * 8 + glContext + 0x4624);
   }
   else {
     if (pname != 0x8544) goto LAB_000b3ec0;
-    uVar1 = (uint)*(ushort *)(uVar1 * 8 + glContext + 0x4626);
+    variableIndexThenValue = (uint)*(ushort *)(variableIndexThenValue * 8 + glContext + 0x4626);
   }
-  *params = uVar1;
+  *params = variableIndexThenValue;
   return;
 }
 

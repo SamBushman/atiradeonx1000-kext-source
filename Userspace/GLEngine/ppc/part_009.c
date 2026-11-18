@@ -729,22 +729,22 @@ int _glMultMatrixf_Exec(glContext, m)
   int glContext;
   undefined4 m;
 {
-  int iVar1;
-  undefined1 auStack_50 [72];
+  int copyMatrixResultOrGlContext;
+  undefined1 productMatrix [72];
   
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
-    ((void (*)())_gleMultMatrixf)(*(undefined4 *)(glContext + 0x4fec),m,auStack_50);
-    iVar1 = _gleCopyMatrix(auStack_50,*(undefined4 *)(glContext + 0x4fec));
+    ((void (*)())_gleMultMatrixf)(*(undefined4 *)(glContext + 0x4fec),m,productMatrix);
+    copyMatrixResultOrGlContext = _gleCopyMatrix(productMatrix,*(undefined4 *)(glContext + 0x4fec));
     *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | *(uint *)(glContext + 0x50a8);
     *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | *(uint *)(glContext + 0x50a8);
   }
   else {
-    iVar1 = glContext;
+    copyMatrixResultOrGlContext = glContext;
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
   }
-  return iVar1;
+  return copyMatrixResultOrGlContext;
 }
 
 /* _gleMultMatrixf @ 0x5656c (836 bytes) */
@@ -1560,15 +1560,15 @@ LAB_000578e8:
 /* _glBitmap_Comp @ 0x57920 (444 bytes) */
 void _glBitmap_Comp(int glContext,int width,int height,undefined4 xorigShadow,undefined4 yorigShadow,undefined4 xmoveShadow,undefined4 ymoveShadow,int bitmap,float xorig,float yorig,float xmove,float ymove)
 {
-  uint uVar1;
+  uint paddedBitmapBytes;
   int imageEndOffset;
   int *listRecord;
-  int iVar4;
+  int bitmapBytes;
   int pixelUnpackBuffer;
   
   pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
-  iVar4 = (width + 7 >> 3) * height;
-  uVar1 = iVar4 + 3U & 0xfffffffc;
+  bitmapBytes = (width + 7 >> 3) * height;
+  paddedBitmapBytes = bitmapBytes + 3U & 0xfffffffc;
   if (pixelUnpackBuffer != 0) {
     imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,height,0,0x1a00,bitmap);
     if (*(int *)(pixelUnpackBuffer + 0x38) < imageEndOffset) {
@@ -1582,20 +1582,20 @@ void _glBitmap_Comp(int glContext,int width,int height,undefined4 xorigShadow,un
     }
     bitmap = bitmap + *(int *)(pixelUnpackBuffer + 0x30);
   }
-  listRecord = (int *)_gleAddListItem(glContext,PTR__glBitmap_ListExec_00110020,uVar1 + 0x1c);
+  listRecord = (int *)_gleAddListItem(glContext,PTR__glBitmap_ListExec_00110020,paddedBitmapBytes + 0x1c);
   if (listRecord != (int *)0x0) {
     listRecord[2] = (int)GH_F2U((float)xorig);
     listRecord[3] = (int)GH_F2U((float)yorig);
     listRecord[4] = (int)GH_F2U((float)xmove);
     listRecord[5] = (int)GH_F2U((float)ymove);
-    listRecord[6] = uVar1;
+    listRecord[6] = paddedBitmapBytes;
     *listRecord = width;
     listRecord[1] = height;
-    if (iVar4 != 0) {
+    if (bitmapBytes != 0) {
       if ((((*(char *)(glContext + 0x31e5) == '\0') && (*(int *)(glContext + 0x31cc) == 0)) &&
           (*(int *)(glContext + 0x31d4) == 0)) &&
          ((*(int *)(glContext + 0x31e0) == 1 && ((*(uint *)(glContext + 0x31d8) & 7) == 0)))) {
-        _gleCopy(bitmap + ((int)*(uint *)(glContext + 0x31d8) >> 3),listRecord + 7,iVar4,1,0,0);
+        _gleCopy(bitmap + ((int)*(uint *)(glContext + 0x31d8) >> 3),listRecord + 7,bitmapBytes,1,0,0);
         return;
       }
       _gleFillImage(glContext,width,height,1,0x1900,0x1a00,bitmap,listRecord + 7);
@@ -1899,18 +1899,18 @@ void _glBlendEquation_Exec(glContext, mode)
   int glContext;
   uint mode;
 {
-  bool bVar1;
+  bool modeOutOfRange;
   undefined4 glErrorCode;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (mode < 0x800c) {
       if (0x8009 < mode) goto LAB_0005817c;
-      bVar1 = 2 < mode - 0x8006;
+      modeOutOfRange = 2 < mode - 0x8006;
     }
     else {
-      bVar1 = 1 < mode - 0x877d;
+      modeOutOfRange = 1 < mode - 0x877d;
     }
-    if (!bVar1) {
+    if (!modeOutOfRange) {
 LAB_0005817c:
       *(short *)(glContext + 0x30e2) = (short)mode;
       *(short *)(glContext + 0x30e0) = (short)mode;
@@ -1979,7 +1979,7 @@ void _glBlendFuncSeparate_Exec(glContext, sfactorRGB, dfactorRGB, sfactorAlpha, 
   uint sfactorAlpha;
   uint dfactorAlpha;
 {
-  bool bVar1;
+  bool factorOutOfRange;
   undefined4 glErrorCode;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -1991,40 +1991,40 @@ void _glBlendFuncSeparate_Exec(glContext, sfactorRGB, dfactorRGB, sfactorAlpha, 
   }
   if (dfactorRGB < 0x308) {
     if (dfactorRGB < 0x300) {
-      bVar1 = 1 < dfactorRGB;
+      factorOutOfRange = 1 < dfactorRGB;
       goto LAB_000582ac;
     }
 LAB_000582c8:
     if (sfactorRGB < 0x309) {
       if (sfactorRGB < 0x300) {
-        bVar1 = 1 < sfactorRGB;
+        factorOutOfRange = 1 < sfactorRGB;
         goto LAB_000582ec;
       }
     }
     else {
-      bVar1 = 3 < sfactorRGB - 0x8001;
+      factorOutOfRange = 3 < sfactorRGB - 0x8001;
 LAB_000582ec:
-      if (bVar1) goto LAB_000582b0;
+      if (factorOutOfRange) goto LAB_000582b0;
     }
     if (dfactorAlpha < 0x308) {
       if (dfactorAlpha < 0x300) {
-        bVar1 = 1 < dfactorAlpha;
+        factorOutOfRange = 1 < dfactorAlpha;
         goto LAB_00058314;
       }
     }
     else {
-      bVar1 = 3 < dfactorAlpha - 0x8001;
+      factorOutOfRange = 3 < dfactorAlpha - 0x8001;
 LAB_00058314:
-      if (bVar1) goto LAB_000582b0;
+      if (factorOutOfRange) goto LAB_000582b0;
     }
     if (sfactorAlpha < 0x309) {
       if (0x2ff < sfactorAlpha) goto LAB_00058340;
-      bVar1 = 1 < sfactorAlpha;
+      factorOutOfRange = 1 < sfactorAlpha;
     }
     else {
-      bVar1 = 3 < sfactorAlpha - 0x8001;
+      factorOutOfRange = 3 < sfactorAlpha - 0x8001;
     }
-    if (!bVar1) {
+    if (!factorOutOfRange) {
 LAB_00058340:
       *(short *)(glContext + 0x30ca) = (short)dfactorRGB;
       *(short *)(glContext + 0x30c8) = (short)sfactorRGB;
@@ -2035,9 +2035,9 @@ LAB_00058340:
     }
   }
   else {
-    bVar1 = 3 < dfactorRGB - 0x8001;
+    factorOutOfRange = 3 < dfactorRGB - 0x8001;
 LAB_000582ac:
-    if (!bVar1) goto LAB_000582c8;
+    if (!factorOutOfRange) goto LAB_000582c8;
   }
 LAB_000582b0:
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -2077,15 +2077,15 @@ int _glBlendEquationSeparateEXT_Comp(glContext, modeRGB, modeAlpha)
   undefined4 modeRGB;
   undefined4 modeAlpha;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)
+  listRecord = (undefined4 *)
            _gleAddListItem(glContext,PTR__glBlendEquationSeparateEXT_ListExec_00110024,8);
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[1] = modeAlpha;
-    *puVar1 = modeRGB;
+  if (listRecord != (undefined4 *)0x0) {
+    listRecord[1] = modeAlpha;
+    *listRecord = modeRGB;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glBlendEquationSeparateEXT_Exec @ 0x58430 (176 bytes) */
@@ -2094,7 +2094,7 @@ void _glBlendEquationSeparateEXT_Exec(glContext, modeRGB, modeAlpha)
   uint modeRGB;
   uint modeAlpha;
 {
-  bool bVar1;
+  bool modeOutOfRange;
   undefined4 glErrorCode;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -2106,18 +2106,18 @@ void _glBlendEquationSeparateEXT_Exec(glContext, modeRGB, modeAlpha)
   }
   if (modeRGB < 0x800c) {
     if (modeRGB < 0x800a) {
-      bVar1 = 2 < modeRGB - 0x8006;
+      modeOutOfRange = 2 < modeRGB - 0x8006;
       goto LAB_0005847c;
     }
 LAB_00058498:
     if (modeAlpha < 0x800c) {
       if (0x8009 < modeAlpha) goto LAB_000584c8;
-      bVar1 = 2 < modeAlpha - 0x8006;
+      modeOutOfRange = 2 < modeAlpha - 0x8006;
     }
     else {
-      bVar1 = 1 < modeAlpha - 0x877d;
+      modeOutOfRange = 1 < modeAlpha - 0x877d;
     }
-    if (!bVar1) {
+    if (!modeOutOfRange) {
 LAB_000584c8:
       *(short *)(glContext + 0x30e0) = (short)modeRGB;
       *(short *)(glContext + 0x30e2) = (short)modeAlpha;
@@ -2126,9 +2126,9 @@ LAB_000584c8:
     }
   }
   else {
-    bVar1 = 1 < modeRGB - 0x877d;
+    modeOutOfRange = 1 < modeRGB - 0x877d;
 LAB_0005847c:
-    if (!bVar1) goto LAB_00058498;
+    if (!modeOutOfRange) goto LAB_00058498;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
     return;

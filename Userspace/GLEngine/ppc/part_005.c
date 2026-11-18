@@ -3438,7 +3438,7 @@ void _glStencilOp_Exec(glContext, fail, zfail, zpass)
   uint zpass;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int stencilFaceRecord;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -3456,10 +3456,10 @@ LAB_0003a694:
           if (zpass < 0x1e04) {
             if (((0x1dff < zpass) || (zpass == 0)) || (zpass == 0x150a)) {
 LAB_0003a6c8:
-              iVar2 = (uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext;
-              *(short *)(iVar2 + 0x3506) = (short)zpass;
-              *(short *)(iVar2 + 0x3502) = (short)fail;
-              *(short *)(iVar2 + 0x3504) = (short)zfail;
+              stencilFaceRecord = (uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext;
+              *(short *)(stencilFaceRecord + 0x3506) = (short)zpass;
+              *(short *)(stencilFaceRecord + 0x3502) = (short)fail;
+              *(short *)(stencilFaceRecord + 0x3504) = (short)zfail;
               *(short *)(glContext + 0x351a) = (short)fail;
               *(short *)(glContext + 0x351c) = (short)zfail;
               *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x10000000;

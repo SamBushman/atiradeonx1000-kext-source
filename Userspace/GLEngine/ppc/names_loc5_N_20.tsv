@@ -1,0 +1,25 @@
+local	_glSecondaryColor3_ListExec	uVar1	secondaryRed	INFERRED	recordedArgs[0], stored to the secondary colour slot +0x2c0
+local	_glSecondaryColor3_ListExec	uVar2	secondaryGreen	INFERRED	recordedArgs[1], stored to the secondary colour slot +0x2c4
+local	_glMultiDrawElementArrayAPPLE_CompExec	iVar1	byteOffset	CONFIRMED	loopIndex*4 offset into the first[] and count[] arrays
+local	_glEnableVertexAttribARB_Comp	param_2	attribIndex	CONFIRMED	stored at listRecord[0]; the matching _glEnableVertexAttribARB_Exec param_2 is the attribute index (<0x10, else GL_INVALID_VALUE)
+local	_glEnableVertexAttribARB_Comp	param_3	attribSelector	CONFIRMED	stored at listRecord[1]; the Exec compares it with 0x8a00/0x8a01 to pick which attribute enable bitmask is updated
+local	_glCopyPixels_ListExec	iVar7	dirtyWord	CONFIRMED	word read from the dirty-word array scanned from ctx+0x324; non-zero sets flag 0x800000
+local	_glCopyPixels_ListExec	pfVar10	rasterPosRecord	INFERRED	scratch record at ctx+0x4854-0x200 filled from the current raster position (ctx+0x2e0..) and passed to _gleFeedbackCopyPixels and the renderer callback ctx+0x46a8
+local	_glTexImage2D_ListExec	iVar3	regionOffsetX	CONFIRMED	pixel-store region x offset (ctx+0x3350 or +0x3310) used to reduce width
+local	_glTexImage2D_ListExec	iVar6	regionOffsetY	CONFIRMED	pixel-store region y offset (ctx+0x3354 or +0x3314) used to reduce height
+local	_glLightModelfv_Exec	dVar8	paramValueAsDouble	CONFIRMED	params[0] widened to double for the unsigned conversion and range compare
+local	_glEndRDirty_Exec	uVar1	popMaterialsResult	CONFIRMED	result of _glePopAndCopyMaterials; only returned
+local	_glClearAccum_Exec	dVar2	floatMinusOneAsDouble	CONFIRMED	(double)FLOAT_00108e58, the lower clamp compared with red
+local	_glMapGrid2f_Exec	dVar3	unAsDouble	CONFIRMED	un converted to double with the magic-bias trick; divisor of (u2-u1) for the u step
+local	_glRectsv_Comp	uVar1	endResult	CONFIRMED	result of _glEnd_Comp; only returned
+local	_glRecti_Comp	uVar1	endResult	CONFIRMED	result of _glEnd_Comp; only returned
+local	_glRectdv_Comp	uVar1	endResult	CONFIRMED	result of _glEnd_Comp; only returned
+local	_glPointParameterfv_Comp	iVar1	paramWord	CONFIRMED	current word read from params and copied into the list record
+local	_gleCheckColorTableArgs	uVar1	glErrorCode	CONFIRMED	error enum (0x500, 0x501 or 0x8031) stored to ctx+0x7574
+local	_gleCheckColorTableArgs	iVar3	texImageArgsCheck	CONFIRMED	result of _gleCheckTexImageArgs for format/type/internalformat; zero returns 0
+local	_glMaterialfv_Comp	puVar1	expectedPname	INFERRED	0x1200 or 0x1202 selected by the pname range, compared with pname for the ambient/specular 4-component case
+local	_glEdgeFlagPointer_Exec	uVar1	selectFirstTableMask	CONFIRMED	all ones when *(ctx+0x4684 table)+0xc is zero; selects ctx+0x4680 over ctx+0x4684 as the table the ArrayElement function is stored into
+local	_glBindFramebufferEXT_Exec	iVar2	sharedStateMutex	CONFIRMED	shared state (ctx+0x5148) + 0x8028, the pthread mutex locked around _gleBindFramebuffer
+local	_glDrawBuffersARB_Comp	iVar1	bufEnum	CONFIRMED	current draw buffer enum read from bufs and copied into the list record
+local	_glConvolutionParameterf_Comp	uVar1	calleeResult	CONFIRMED	result of _glConvolutionParameterF_Comp; only returned
+local	_glGetMinmaxParameteriv_Exec	uVar2	minmaxFormatOrSink	CONFIRMED	ushort format (pname 0x802f at +0x3380) or ubyte sink flag (pname 0x8030 at +0x3382) stored to params

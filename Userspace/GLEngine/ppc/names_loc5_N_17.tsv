@@ -1,0 +1,14 @@
+local	_glColorTableParameterfv_Exec	puVar2	targetColorTable	CONFIRMED	state block of the colour table selected by target (ctx+0x33b0, +0x33d0, +0x33f0) whose scale (+0,+8,+0x10,+0x18) or bias (+4,+0xc,+0x14,+0x1c) floats are written
+local	_glConvolutionFilter1D_Exec	iVar5	elementSize	CONFIRMED	int of _gleBytesPerElement(type), or _glePixelBytes(format,type) when that is 0; the image offset must be a multiple of it
+local	_glConvolutionFilter1D_Exec	iVar6	unpackBufferSize	CONFIRMED	pixelUnpackBuffer+0x38 (buffer size) compared with the image end offset
+local	_glVertexAttrib4ubvARB_Exec	iVar1	vertexBufferEndThenAttribRecord	CONFIRMED	ctx+0x4858 (vertex buffer end) forwarded to the vertex function in the index 0 path, then reassigned glContext + index*0x10: the generic attribute record written in the other path
+local	_glMultiDrawElementArrayAPPLE_Comp	iVar1	elementArrayPointer	CONFIRMED	clientState+0xd8 (element array pointer, see _glGetPointerv_Exec GL_ELEMENT_ARRAY_POINTER_APPLE) plus the bound element buffer data pointer, stored to ctx+0x48d8 and ctx+0x4978
+local	_glMultiDrawElementArrayAPPLE_Comp	iVar2	indexByteOffset	CONFIRMED	loopIndex*4: offset into the first and count arrays
+local	_glDrawElementArrayAPPLE_Comp	iVar3	elementArrayPointer	CONFIRMED	clientState+0xd8 (element array pointer, see _glGetPointerv_Exec GL_ELEMENT_ARRAY_POINTER_APPLE) plus the bound element buffer data pointer, stored to ctx+0x48d8 and ctx+0x4978
+local	_glDrawElementArrayAPPLE_Comp	uVar2	callResult	CONFIRMED	result of _gleDrawArraysOrElements_Comp, returned
+local	_glDrawElements_Exec	bVar1	typeValid	CONFIRMED	type equals the remaining accepted index type (0x1401 or 0x1405 after the 0x1403 test); false raises GL_INVALID_ENUM
+local	_glDrawElements_Exec	iVar2	elementArrayBuffer	CONFIRMED	buffer bound to GL_ELEMENT_ARRAY_BUFFER (client state +0x35c); its data pointer (+0x30) is added to indices
+local	_glDrawElements_VBO_Exec	bVar1	typeValid	CONFIRMED	type equals the remaining accepted index type (0x1401 or 0x1405 after the 0x1403 test); false raises GL_INVALID_ENUM
+local	_glDrawElements_VBO_Exec	iVar2	elementArrayBuffer	CONFIRMED	buffer bound to GL_ELEMENT_ARRAY_BUFFER (client state +0x35c); its data pointer (+0x30) is added to indices
+local	_glDrawRangeElements_IMM_Exec	bVar1	typeValid	CONFIRMED	type equals the remaining accepted index type (0x1401 or 0x1405 after the 0x1403 test); false raises GL_INVALID_ENUM
+local	_glDrawRangeElements_IMM_Exec	iVar3	elementArrayBuffer	CONFIRMED	buffer bound to GL_ELEMENT_ARRAY_BUFFER (client state +0x35c); its data pointer (+0x30) is added to indices

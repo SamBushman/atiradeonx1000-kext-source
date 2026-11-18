@@ -43,8 +43,8 @@ void _glConvolutionFilter1D_Exec(glContext, target, internalformat, width, forma
   int iVar3;
   int pixelUnpackBuffer;
   int imageEndOffset;
-  int iVar5;
-  int iVar6;
+  int elementSize;
+  int unpackBufferSize;
   double bytesPerElement;
   
   internalFormat = _gleImagingTexFormatToInternal(internalformat);
@@ -72,14 +72,14 @@ LAB_000692cc:
         return;
       }
       imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,1,format,type,image);
-      iVar6 = *(int *)(pixelUnpackBuffer + 0x38);
+      unpackBufferSize = *(int *)(pixelUnpackBuffer + 0x38);
       bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
-      iVar5 = (int)bytesPerElement;
-      if (imageEndOffset <= iVar6) {
-        if (iVar5 == 0) {
-          iVar5 = _glePixelBytes(format,type);
+      elementSize = (int)bytesPerElement;
+      if (imageEndOffset <= unpackBufferSize) {
+        if (elementSize == 0) {
+          elementSize = _glePixelBytes(format,type);
         }
-        if (image == (image / iVar5) * iVar5) {
+        if (image == (image / elementSize) * elementSize) {
           if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
             _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
           }
@@ -2536,8 +2536,8 @@ undefined4 * _glLightModelf_Comp(undefined4 glContext,undefined4 pname,float par
 void _glLightModelf_Exec(int glContext,uint pname,double param)
 {
   undefined4 glErrorCode;
-  uint uVar2;
-  undefined2 uVar3;
+  uint colorControlValue;
+  undefined2 colorControlHalfword;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (pname == 0xb52) {
@@ -2552,19 +2552,19 @@ void _glLightModelf_Exec(int glContext,uint pname,double param)
     }
     else if (pname == 0x81f8) {
       if (DOUBLE_00108d80 <= param) {
-        uVar2 = (int)(param - DOUBLE_00108d80) ^ 0x80000000;
+        colorControlValue = (int)(param - DOUBLE_00108d80) ^ 0x80000000;
       }
       else {
-        uVar2 = (uint)(int)param;
+        colorControlValue = (uint)(int)param;
       }
-      if (1 < uVar2 - 0x81f9) goto LAB_0006ce28;
+      if (1 < colorControlValue - 0x81f9) goto LAB_0006ce28;
       if (DOUBLE_00108d80 <= param) {
-        uVar3 = (undefined2)(int)(param - DOUBLE_00108d80);
+        colorControlHalfword = (undefined2)(int)(param - DOUBLE_00108d80);
       }
       else {
-        uVar3 = (undefined2)(int)param;
+        colorControlHalfword = (undefined2)(int)param;
       }
-      *(undefined2 *)(glContext + 0x30a8) = uVar3;
+      *(undefined2 *)(glContext + 0x30a8) = colorControlHalfword;
       if ((*(char *)(glContext + 0x30aa) != '\0') && (*(char *)(glContext + 0x4664) == '\0')) {
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800;
         *(bool *)(glContext + 0x316b) = *(short *)(glContext + 0x30a8) == -0x7e06;

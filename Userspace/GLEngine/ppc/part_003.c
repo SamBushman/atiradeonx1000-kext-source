@@ -4946,12 +4946,12 @@ void _glPixelTransferi_Exec(glContext, pname, param)
   uint param;
 {
   float neutralValue;
-  float fVar2;
+  float alternateDefaultThenSelectedDefault;
   undefined4 glErrorCode;
   uint nonDefaultBits;
   uint parameterBit;
   
-  fVar2 = FLOAT_00108e54;
+  alternateDefaultThenSelectedDefault = FLOAT_00108e54;
   neutralValue = FLOAT_00108e50;
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -4978,14 +4978,14 @@ void _glPixelTransferi_Exec(glContext, pname, param)
             parameterBit = 0x80000;
             *(float *)(glContext + 0x3374) =
                  (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-            neutralValue = fVar2;
+            neutralValue = alternateDefaultThenSelectedDefault;
           }
           else if (pname < 0x80b8) {
             if (pname == 0x80b4) {
               parameterBit = 0x10000;
               *(float *)(glContext + 0x335c) =
                    (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-              neutralValue = fVar2;
+              neutralValue = alternateDefaultThenSelectedDefault;
             }
             else if (pname < 0x80b5) {
               if (pname != 0x8023) goto LAB_00026ee8;
@@ -4997,14 +4997,14 @@ void _glPixelTransferi_Exec(glContext, pname, param)
               parameterBit = 0x20000;
               *(float *)(glContext + 0x336c) =
                    (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-              neutralValue = fVar2;
+              neutralValue = alternateDefaultThenSelectedDefault;
             }
             else {
               if (pname != 0x80b6) goto LAB_00026ee8;
               parameterBit = 0x40000;
               *(float *)(glContext + 0x3364) =
                    (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-              neutralValue = fVar2;
+              neutralValue = alternateDefaultThenSelectedDefault;
             }
           }
           else if (pname == 0x80ba) {
@@ -5045,7 +5045,7 @@ void _glPixelTransferi_Exec(glContext, pname, param)
           parameterBit = 2;
           *(float *)(glContext + 0x3218) =
                (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-          fVar2 = neutralValue;
+          alternateDefaultThenSelectedDefault = neutralValue;
         }
         else if (pname < 0x8715) {
           if (pname == 0x8711) {
@@ -5074,40 +5074,40 @@ void _glPixelTransferi_Exec(glContext, pname, param)
           parameterBit = 0x80;
           *(float *)(glContext + 0x3230) =
                (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-          fVar2 = neutralValue;
+          alternateDefaultThenSelectedDefault = neutralValue;
         }
         else if (pname < 0x8718) {
           if (pname == 0x8715) {
             parameterBit = 8;
             *(float *)(glContext + 0x3220) =
                  (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-            fVar2 = neutralValue;
+            alternateDefaultThenSelectedDefault = neutralValue;
           }
           else {
             if (pname != 0x8716) goto LAB_00026ee8;
             parameterBit = 0x20;
             *(float *)(glContext + 0x3228) =
                  (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-            fVar2 = neutralValue;
+            alternateDefaultThenSelectedDefault = neutralValue;
           }
         }
         else if (pname == 0x8718) {
           parameterBit = 0x200;
           *(float *)(glContext + 0x3238) =
                (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-          fVar2 = neutralValue;
+          alternateDefaultThenSelectedDefault = neutralValue;
         }
         else {
           if (pname != 0x8719) goto LAB_00026ee8;
           parameterBit = 0x800;
           *(float *)(glContext + 0x3240) =
                (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-          fVar2 = neutralValue;
+          alternateDefaultThenSelectedDefault = neutralValue;
         }
       }
 LAB_00026f44:
       nonDefaultBits = *(uint *)(glContext + 0x3418) & ~parameterBit;
-      if ((float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58) != fVar2) {
+      if ((float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58) != alternateDefaultThenSelectedDefault) {
         nonDefaultBits = nonDefaultBits | parameterBit;
       }
       *(uint *)(glContext + 0x3418) = nonDefaultBits;
@@ -5123,7 +5123,7 @@ LAB_00026f44:
         parameterBit = 0x10;
         *(float *)(glContext + 0x31ec) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        neutralValue = fVar2;
+        neutralValue = alternateDefaultThenSelectedDefault;
       }
       else if (pname < 0xd15) {
         if (pname == 0xd11) {
@@ -5158,7 +5158,7 @@ LAB_00026ef8:
         parameterBit = 0x20;
         *(float *)(glContext + 0x31f4) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        neutralValue = fVar2;
+        neutralValue = alternateDefaultThenSelectedDefault;
       }
       else if (pname < 0xd19) {
         if (pname != 0xd15) goto LAB_00026ee8;
@@ -5176,14 +5176,14 @@ LAB_00026ef8:
         parameterBit = 0x40;
         *(float *)(glContext + 0x31fc) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        neutralValue = fVar2;
+        neutralValue = alternateDefaultThenSelectedDefault;
       }
     }
     else if (pname == 0x801c) {
       parameterBit = 0x1000000;
       *(float *)(glContext + 0x3390) =
            (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-      neutralValue = fVar2;
+      neutralValue = alternateDefaultThenSelectedDefault;
     }
     else if (pname < 0x801d) {
       if (pname == 0xd1d) {
@@ -5195,13 +5195,13 @@ LAB_00026ef8:
         parameterBit = 0x80;
         *(float *)(glContext + 0x3204) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        neutralValue = fVar2;
+        neutralValue = alternateDefaultThenSelectedDefault;
       }
       else if (pname == 0xd1e) {
         parameterBit = 0x1000;
         *(float *)(glContext + 0x320c) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        neutralValue = fVar2;
+        neutralValue = alternateDefaultThenSelectedDefault;
       }
       else {
         if (pname != 0xd1f) goto LAB_00026ee8;
@@ -5214,21 +5214,21 @@ LAB_00026ef8:
       parameterBit = 0x8000000;
       *(float *)(glContext + 0x33a8) =
            (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-      neutralValue = fVar2;
+      neutralValue = alternateDefaultThenSelectedDefault;
     }
     else if (pname < 0x8020) {
       if (pname == 0x801d) {
         parameterBit = 0x2000000;
         *(float *)(glContext + 0x33a0) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        neutralValue = fVar2;
+        neutralValue = alternateDefaultThenSelectedDefault;
       }
       else {
         if (pname != 0x801e) goto LAB_00026ee8;
         parameterBit = 0x4000000;
         *(float *)(glContext + 0x3398) =
              (float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58);
-        neutralValue = fVar2;
+        neutralValue = alternateDefaultThenSelectedDefault;
       }
     }
     else if (pname == 0x8020) {

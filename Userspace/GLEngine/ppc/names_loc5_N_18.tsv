@@ -1,0 +1,13 @@
+local	_glRotated_CompExec	dVar2	angleScaleThenCosValue	INFERRED	dVar2 first holds the factor chosen by the axis sign and multiplied with angle for _sin, then is overwritten with _cos(angle*factor)
+local	_glPixelTransferi_Exec	fVar2	alternateDefaultThenSelectedDefault	INFERRED	starts as FLOAT_00108e54 (the alternative to neutralValue's FLOAT_00108e50), later receives neutralValue and is compared with the converted param to set the non-default bit
+local	_glColor4uiv_Exec	fVar1	greenComponent	CONFIRMED	v[1] converted to float, stored to current colour +0x2a4
+local	_glColor4uiv_Exec	fVar2	alphaComponent	CONFIRMED	v[3] converted to float, stored to current colour +0x2ac
+local	_glColor4uiv_Exec	fVar3	blueComponent	CONFIRMED	v[2] converted to float, stored to current colour +0x2a8
+local	_glLightModelf_Exec	uVar2	colorControlValue	CONFIRMED	param converted to unsigned; checked as 0x81f9 or 0x81fa (GL_SEPARATE_SPECULAR_COLOR / GL_SINGLE_COLOR) for GL_LIGHT_MODEL_COLOR_CONTROL
+local	_glLightModelf_Exec	uVar3	colorControlHalfword	CONFIRMED	16-bit truncation of param stored at +0x30a8
+local	_glClearDepth_Exec	uVar1	clampedDepthHighWord	CONFIRMED	0 or 0x3ff00000, high word of 0.0 or 1.0 used to build the clamped depth double
+local	_glClearDepth_Exec	bVar2	depthBelowLowerBound	INFERRED	depth < DOUBLE_00108d60, selects the low clamp
+local	_glShadeModel_Exec	puVar1	clipInterpFunc	CONFIRMED	PTR__gleSetClipInterpFunc stored at +0x49cc
+local	_glShadeModel_Exec	puVar2	eyeInterpFunc	CONFIRMED	PTR__gleSetEyeInterpFunc stored at +0x49c8
+local	_glStencilOp_Exec	iVar2	stencilFaceRecord	INFERRED	glContext + stencil face byte (+0x7583)*0x10; shorts at +0x3502/4/6 receive fail/zfail/zpass
+local	_glPolygonMode_Exec	uVar2	modeHalfword	CONFIRMED	mode truncated to 16 bits stored at +0x34d0/+0x34d2

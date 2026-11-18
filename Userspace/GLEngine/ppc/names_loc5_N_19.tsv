@@ -1,0 +1,19 @@
+local	_glDisable_Exec	puVar2	enableTableEntry	CONFIRMED	entry in the enable-handler hash table at ctx+0x4850 (indexed by cap&0x3ff): [0]=cap, [1]=handler, [2]=next entry
+local	_glCompileShaderARB_Exec	iVar2	sharedStateThenShaderObject	CONFIRMED	ctx+0x5148 shared state, then the object returned by _gleLookupHashObject(shaderObj)
+local	_glGetFinalCombinerInputParameterivNV_Exec	uVar1	variableIndexThenValue	CONFIRMED	variable-0x8523 index into the 8-byte combiner-input table, then the ushort read from it and stored to params
+local	_glMultMatrixf_Exec	iVar1	copyMatrixResultOrGlContext	CONFIRMED	result of _gleCopyMatrix on the multiply path, glContext on the error path; only returned
+local	_glMultMatrixf_Exec	auStack_50	productMatrix	CONFIRMED	output of _gleMultMatrixf(currentMatrix,m,out) then source of _gleCopyMatrix back into the current matrix
+local	_glMultiDrawArrays_Comp	iVar1	glContextThenByteOffsetThenDrawResult	CONFIRMED	initial copy of glContext, then loopIndex*4 byte offset into first/count, then the result of _glDrawArrays_Comp; only returned after the loop
+local	_glBlendFuncSeparate_Exec	bVar1	factorOutOfRange	CONFIRMED	true when the blend factor under test is outside the accepted ranges (0/1, 0x300-0x308, 0x8001-0x8004); reused for each of the four factors
+local	_glBlendEquation_Exec	bVar1	modeOutOfRange	CONFIRMED	true when mode is outside the accepted ranges 0x8006-0x800b and 0x877d-0x877e; false jumps to the store
+local	_glBlendEquationSeparateEXT_Exec	bVar1	modeOutOfRange	CONFIRMED	true when the mode under test (modeRGB then modeAlpha) is outside the accepted equation ranges
+local	_glBlendEquationSeparateEXT_Comp	puVar1	listRecord	CONFIRMED	record returned by _gleAddListItem, filled with modeRGB/modeAlpha
+local	_glBitmap_Comp	uVar1	paddedBitmapBytes	CONFIRMED	(rowBytes*height+3)&~3: size added to the list item (+0x1c) and stored at listRecord[6]
+local	_glBitmap_Comp	iVar4	bitmapBytes	CONFIRMED	((width+7)>>3)*height, byte count copied/filled from the bitmap; zero skips the copy
+local	_glWeightubvARB_Comp	pbVar1	weightBytePtr	CONFIRMED	pointer to the current ubyte weight (weights+index)
+local	_glWeightubvARB_Comp	iVar3	weightIndex	CONFIRMED	index of the current weight in the weights array
+local	_glWeightuivARB_Exec	iVar1	dstByteOffset	CONFIRMED	loopIndex*4 byte offset of the weight slot (+0x2d0) being zeroed
+local	_glWeightuivARB_Exec	uVar4	weightValue	CONFIRMED	current uint weight read from weights
+local	_glWeightivARB_Exec	iVar1	dstByteOffset	CONFIRMED	loopIndex*4 byte offset of the weight slot (+0x2d0) being zeroed
+local	_glWeightivARB_Exec	uVar5	weightValue	CONFIRMED	current int weight read from weights (sign-bit flipped for the double conversion)
+local	_glTexGeni_Comp	dVar1	zeroFloatThenCalleeResult	INFERRED	FLOAT_00108e50 (the neutral constant used as boolean zero elsewhere) forwarded as the three extra params, then _glTexGen_Comp's result

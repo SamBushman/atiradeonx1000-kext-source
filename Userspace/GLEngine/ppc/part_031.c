@@ -2730,13 +2730,13 @@ void _glTexGenfv_CompExec(glContext, coord, pname, params)
 /* _glTexGeni_Comp @ 0x9c388 (100 bytes) */
 double _glTexGeni_Comp(undefined4 glContext,undefined4 coord,undefined4 pname,uint param)
 {
-  double dVar1;
+  double zeroFloatThenCalleeResult;
   
-  dVar1 = (double)FLOAT_00108e50;
-  dVar1 = (double)((double (*)())_glTexGen_Comp)(glContext,coord,pname,
+  zeroFloatThenCalleeResult = (double)FLOAT_00108e50;
+  zeroFloatThenCalleeResult = (double)((double (*)())_glTexGen_Comp)(glContext,coord,pname,
                                  (double)(float)((double)CONCAT44(0x43300000,param ^ 0x80000000) -
-                                                DOUBLE_00108d58),dVar1,dVar1,dVar1);
-  return dVar1;
+                                                DOUBLE_00108d58),zeroFloatThenCalleeResult,zeroFloatThenCalleeResult,zeroFloatThenCalleeResult);
+  return zeroFloatThenCalleeResult;
 }
 
 /* _glTexGeni_Exec @ 0x9c3ec (100 bytes) */

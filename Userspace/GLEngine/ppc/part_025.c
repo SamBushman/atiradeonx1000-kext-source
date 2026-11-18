@@ -417,7 +417,7 @@ void _glCompileShaderARB_Exec(glContext, shaderObj)
   undefined4 shaderObj;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int sharedStateThenShaderObject;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -426,19 +426,19 @@ void _glCompileShaderARB_Exec(glContext, shaderObj)
     *(undefined4 *)(glContext + 0x7574) = 0x502;
     return;
   }
-  iVar2 = *(int *)(glContext + 0x5148);
-  if (*(char *)(iVar2 + 0x8024) != '\0') {
-    _pthread_mutex_lock(iVar2 + 0x8028);
-    iVar2 = *(int *)(glContext + 0x5148);
+  sharedStateThenShaderObject = *(int *)(glContext + 0x5148);
+  if (*(char *)(sharedStateThenShaderObject + 0x8024) != '\0') {
+    _pthread_mutex_lock(sharedStateThenShaderObject + 0x8028);
+    sharedStateThenShaderObject = *(int *)(glContext + 0x5148);
   }
-  iVar2 = _gleLookupHashObject(iVar2 + 0x6018,shaderObj);
-  if (iVar2 == 0) {
+  sharedStateThenShaderObject = _gleLookupHashObject(sharedStateThenShaderObject + 0x6018,shaderObj);
+  if (sharedStateThenShaderObject == 0) {
     if (*(int *)(glContext + 0x7574) != 0) goto LAB_00087ad8;
     glErrorCode = 0x501;
   }
   else {
-    if (*(int *)(iVar2 + 0x10) == 0x8b48) {
-      _gleShaderParse(glContext,iVar2);
+    if (*(int *)(sharedStateThenShaderObject + 0x10) == 0x8b48) {
+      _gleShaderParse(glContext,sharedStateThenShaderObject);
       goto LAB_00087ad8;
     }
     if (*(int *)(glContext + 0x7574) != 0) goto LAB_00087ad8;

@@ -6,22 +6,22 @@ int _glWeightubvARB_Comp(glContext, size, weights)
   uint size;
   uint weights;
 {
-  byte *pbVar1;
+  byte *weightBytePtr;
   float channelScale;
-  int iVar3;
+  int weightIndex;
   
   if ((int)size < 5) {
     glContext = _gleAddListItem(glContext,PTR__glWeightARB_ListExec_0011045c,size * 4 + 4);
     if ((float *)glContext != (float *)0x0) {
-      iVar3 = 0;
+      weightIndex = 0;
       *(uint *)glContext = size;
       channelScale = FLOAT_00108e78;
       if (0 < (int)size) {
         glContext = glContext + 4;
         do {
-          pbVar1 = (byte *)(weights + iVar3);
-          iVar3 = iVar3 + 1;
-          *(float *)glContext = (GH_U2F((unsigned int)((*pbVar1 | 0x4b000000))) - 8388608.0) * channelScale;
+          weightBytePtr = (byte *)(weights + weightIndex);
+          weightIndex = weightIndex + 1;
+          *(float *)glContext = (GH_U2F((unsigned int)((*weightBytePtr | 0x4b000000))) - 8388608.0) * channelScale;
           glContext = glContext + 4;
           size = size - 1;
         } while (size != 0);
@@ -136,10 +136,10 @@ double _glWeightuivARB_Exec(glContext, size, weights)
   int size;
   undefined4 *weights;
 {
-  int iVar1;
+  int dstByteOffset;
   double intToDoubleBias;
   float channelScale;
-  undefined4 uVar4;
+  undefined4 weightValue;
   float *dstCursor;
   int loopIndex;
   
@@ -156,10 +156,10 @@ double _glWeightuivARB_Exec(glContext, size, weights)
   if (0 < size) {
     dstCursor = (float *)(glContext + 0x2d0);
     do {
-      uVar4 = *weights;
+      weightValue = *weights;
       loopIndex = loopIndex + 1;
       weights = weights + 1;
-      *dstCursor = (float)((double)CONCAT44(0x43300000,uVar4) - intToDoubleBias) * channelScale;
+      *dstCursor = (float)((double)CONCAT44(0x43300000,weightValue) - intToDoubleBias) * channelScale;
       dstCursor = dstCursor + 1;
       size = size + -1;
     } while (size != 0);
@@ -168,9 +168,9 @@ double _glWeightuivARB_Exec(glContext, size, weights)
     }
   }
   do {
-    iVar1 = loopIndex * 4;
+    dstByteOffset = loopIndex * 4;
     loopIndex = loopIndex + 1;
-    *(undefined4 *)(iVar1 + glContext + 0x2d0) = 0;
+    *(undefined4 *)(dstByteOffset + glContext + 0x2d0) = 0;
   } while (loopIndex < 4);
   return;
 }

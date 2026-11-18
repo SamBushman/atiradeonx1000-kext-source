@@ -1852,7 +1852,7 @@ void _glColorTableParameterfv_Exec(glContext, target, pname, params)
   undefined4 *params;
 {
   undefined4 glErrorCode;
-  undefined4 *puVar2;
+  undefined4 *targetColorTable;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1864,24 +1864,24 @@ void _glColorTableParameterfv_Exec(glContext, target, pname, params)
   switch(target) {
   case 0x80d0:
   case 0x80d3:
-    puVar2 = (undefined4 *)(glContext + 0x33b0);
+    targetColorTable = (undefined4 *)(glContext + 0x33b0);
     break;
   case 0x80d1:
   case 0x80d4:
-    puVar2 = (undefined4 *)(glContext + 0x33d0);
+    targetColorTable = (undefined4 *)(glContext + 0x33d0);
     break;
   case 0x80d2:
   case 0x80d5:
-    puVar2 = (undefined4 *)(glContext + 0x33f0);
+    targetColorTable = (undefined4 *)(glContext + 0x33f0);
     break;
   default:
     goto switchD_0006164c_default;
   }
   if (pname == 0x80d6) {
-    *puVar2 = *params;
-    puVar2[2] = params[1];
-    puVar2[4] = params[2];
-    puVar2[6] = params[3];
+    *targetColorTable = *params;
+    targetColorTable[2] = params[1];
+    targetColorTable[4] = params[2];
+    targetColorTable[6] = params[3];
   }
   else {
     if (pname != 0x80d7) {
@@ -1894,10 +1894,10 @@ LAB_00061690:
       *(undefined4 *)(glContext + 0x7574) = glErrorCode;
       return;
     }
-    puVar2[1] = *params;
-    puVar2[3] = params[1];
-    puVar2[5] = params[2];
-    puVar2[7] = params[3];
+    targetColorTable[1] = *params;
+    targetColorTable[3] = params[1];
+    targetColorTable[5] = params[2];
+    targetColorTable[7] = params[3];
   }
   *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x40000000;
   return;

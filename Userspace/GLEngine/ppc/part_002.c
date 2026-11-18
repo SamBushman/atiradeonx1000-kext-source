@@ -38,19 +38,19 @@ double _glDisable_Exec(glContext, cap)
   uint cap;
 {
   undefined4 glErrorCode;
-  uint *puVar2;
+  uint *enableTableEntry;
   
-  puVar2 = (uint *)(*(int *)(glContext + 0x4850) + (cap & 0x3ff) * 0x10);
+  enableTableEntry = (uint *)(*(int *)(glContext + 0x4850) + (cap & 0x3ff) * 0x10);
   if (*(short *)(glContext + 0x4a10) < 0) {
     do {
-      if (*puVar2 == cap) {
+      if (*enableTableEntry == cap) {
                     
                     
-        (*(code *)puVar2[1])(glContext,cap,0);
+        (*(code *)enableTableEntry[1])(glContext,cap,0);
         return;
       }
-      puVar2 = (uint *)puVar2[2];
-    } while (puVar2 != (uint *)0x0);
+      enableTableEntry = (uint *)enableTableEntry[2];
+    } while (enableTableEntry != (uint *)0x0);
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
