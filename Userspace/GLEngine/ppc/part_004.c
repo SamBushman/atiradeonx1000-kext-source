@@ -747,29 +747,29 @@ void _gleFreeFenceMachine(glContext)
   int glContext;
 {
   int remaining;
-  int iVar1;
-  int *piVar2;
+  int nextFreeListNode;
+  int *freeListNode;
   int *srcCursor;
-  int *piVar3;
-  int iVar4;
+  int *fenceEntry;
+  int nextFenceEntry;
   
   srcCursor = (int *)(glContext + 0x543c);
   remaining = 0x3ff;
   do {
-    piVar3 = (int *)*srcCursor;
+    fenceEntry = (int *)*srcCursor;
     srcCursor = srcCursor + 1;
-    while (piVar3 != (int *)0x0) {
-      iVar4 = *piVar3;
-      (*(code *)piVar3[3])(glContext,piVar3);
-      piVar3 = (int *)iVar4;
+    while (fenceEntry != (int *)0x0) {
+      nextFenceEntry = *fenceEntry;
+      (*(code *)fenceEntry[3])(glContext,fenceEntry);
+      fenceEntry = (int *)nextFenceEntry;
     }
     remaining = remaining + -1;
   } while (-1 < remaining);
-  piVar2 = (int *)*(int *)(glContext + 0x643c);
-  while (piVar2 != (int *)0x0) {
-    iVar1 = *piVar2;
-    _free(piVar2);
-    piVar2 = (int *)iVar1;
+  freeListNode = (int *)*(int *)(glContext + 0x643c);
+  while (freeListNode != (int *)0x0) {
+    nextFreeListNode = *freeListNode;
+    _free(freeListNode);
+    freeListNode = (int *)nextFreeListNode;
   }
   return;
 }
@@ -2375,7 +2375,7 @@ LAB_000322fc:
 /* _glRotatef_Exec @ 0x32330 (404 bytes) */
 void _glRotatef_Exec(int glContext,double angle,double x,double y,double z)
 {
-  float fVar1;
+  float angleScale;
   undefined4 in_LR;
   double sinValue;
   double cosValue;
@@ -2387,36 +2387,36 @@ void _glRotatef_Exec(int glContext,double angle,double x,double y,double z)
   
   fparam_3_00 = (double)*(float *)(glContext + 0x20);
   if ((y == fparam_3_00) && (z == fparam_3_00)) {
-    fVar1 = FLOAT_00108e84;
+    angleScale = FLOAT_00108e84;
     if (x < fparam_3_00) {
-      fVar1 = FLOAT_00108eb0;
+      angleScale = FLOAT_00108eb0;
     }
-    sinValue = _sin((double)(float)(angle * (double)fVar1));
-    cosValue = _cos((double)(float)(angle * (double)fVar1));
+    sinValue = _sin((double)(float)(angle * (double)angleScale));
+    cosValue = _cos((double)(float)(angle * (double)angleScale));
     ((void (*)())_glRotateX_Exec)(glContext,(double)(float)sinValue,(double)(float)cosValue,fparam_3_00,z,incomingFpr5,
                     incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
   if ((x == fparam_3_00) && (z == fparam_3_00)) {
-    fVar1 = FLOAT_00108e84;
+    angleScale = FLOAT_00108e84;
     if (y < fparam_3_00) {
-      fVar1 = FLOAT_00108eb0;
+      angleScale = FLOAT_00108eb0;
     }
-    sinValue = _sin((double)(float)(angle * (double)fVar1));
-    cosValue = _cos((double)(float)(angle * (double)fVar1));
+    sinValue = _sin((double)(float)(angle * (double)angleScale));
+    cosValue = _cos((double)(float)(angle * (double)angleScale));
     ((void (*)())_glRotateY_Exec)(glContext,(double)(float)sinValue,(double)(float)cosValue,fparam_3_00,z,incomingFpr5,
                     incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
   if ((x == fparam_3_00) && (y == fparam_3_00)) {
-    fVar1 = FLOAT_00108e84;
+    angleScale = FLOAT_00108e84;
     if (z < fparam_3_00) {
-      fVar1 = FLOAT_00108eb0;
+      angleScale = FLOAT_00108eb0;
     }
-    sinValue = _sin((double)(float)(angle * (double)fVar1));
-    cosValue = _cos((double)(float)(angle * (double)fVar1));
+    sinValue = _sin((double)(float)(angle * (double)angleScale));
+    cosValue = _cos((double)(float)(angle * (double)angleScale));
     ((void (*)())_glRotateZ_Exec)(glContext,(double)(float)sinValue,(double)(float)cosValue,fparam_3_00,z,incomingFpr5,
                     incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));

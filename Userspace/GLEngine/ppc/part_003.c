@@ -2590,22 +2590,22 @@ void _glGenProgramsARB_Exec(glContext, n, programs)
   int *programs;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int programName;
   int loopIndex;
-  int iVar4;
+  int sharedStateThenFirstName;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
-      iVar4 = *(int *)(glContext + 0x5148);
-      if (*(char *)(iVar4 + 0x8024) != '\0') {
-        _pthread_mutex_lock(iVar4 + 0x8028);
-        iVar4 = *(int *)(glContext + 0x5148);
+      sharedStateThenFirstName = *(int *)(glContext + 0x5148);
+      if (*(char *)(sharedStateThenFirstName + 0x8024) != '\0') {
+        _pthread_mutex_lock(sharedStateThenFirstName + 0x8028);
+        sharedStateThenFirstName = *(int *)(glContext + 0x5148);
       }
-      iVar4 = _gleGenHashNames(iVar4 + 0x4010,n);
+      sharedStateThenFirstName = _gleGenHashNames(sharedStateThenFirstName + 0x4010,n);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      if (iVar4 == 0) {
+      if (sharedStateThenFirstName == 0) {
         return;
       }
       loopIndex = 0;
@@ -2613,9 +2613,9 @@ void _glGenProgramsARB_Exec(glContext, n, programs)
         return;
       }
       do {
-        iVar2 = loopIndex + iVar4;
+        programName = loopIndex + sharedStateThenFirstName;
         loopIndex = loopIndex + 1;
-        *programs = iVar2;
+        *programs = programName;
         programs = programs + 1;
         n = n + -1;
       } while (n != 0);

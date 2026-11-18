@@ -240,16 +240,17 @@ void _glPolygonStipple_Exec(glContext, mask)
   uint uVar1;
   int byteOffset;
   int iVar3;
+  int pixelUnpackBuffer;
   int remaining;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar3 = *(int *)(glContext + 0x4a6c);
-    if (iVar3 != 0) {
-      if (*(int *)(iVar3 + 0x38) < mask + 0x20) goto LAB_00090c68;
-      if (*(int *)(iVar3 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar3 + 0x10);
+    pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+    if (pixelUnpackBuffer != 0) {
+      if (*(int *)(pixelUnpackBuffer + 0x38) < mask + 0x20) goto LAB_00090c68;
+      if (*(int *)(pixelUnpackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelUnpackBuffer + 0x10);
       }
-      mask = mask + *(int *)(iVar3 + 0x30);
+      mask = mask + *(int *)(pixelUnpackBuffer + 0x30);
     }
     uVar1 = *(uint *)(glContext + 0x31d8);
     iVar3 = *(int *)(glContext + 0x31d4);
@@ -296,16 +297,17 @@ void _glGetPolygonStipple_Exec(glContext, mask)
   uint uVar1;
   int byteOffset;
   int iVar3;
+  int pixelPackBuffer;
   int remaining;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar3 = *(int *)(glContext + 0x4a68);
-    if (iVar3 != 0) {
-      if (*(int *)(iVar3 + 0x38) < mask + 0x20) goto LAB_00090dc0;
-      if (*(int *)(iVar3 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar3 + 0x10);
+    pixelPackBuffer = *(int *)(glContext + 0x4a68);
+    if (pixelPackBuffer != 0) {
+      if (*(int *)(pixelPackBuffer + 0x38) < mask + 0x20) goto LAB_00090dc0;
+      if (*(int *)(pixelPackBuffer + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,pixelPackBuffer + 0x10);
       }
-      mask = mask + *(int *)(iVar3 + 0x30);
+      mask = mask + *(int *)(pixelPackBuffer + 0x30);
     }
     uVar1 = *(uint *)(glContext + 0x31bc);
     iVar3 = *(int *)(0x31b4 + glContext + 4);
@@ -472,28 +474,28 @@ int _glIsTexture_Exec(glContext, texture)
   int glContext;
   undefined4 texture;
 {
-  int iVar1;
-  bool bVar2;
+  int sharedStateThenTextureObject;
+  bool objectExists;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar1 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar1 + 0x8028);
-      iVar1 = *(int *)(glContext + 0x5148);
+    sharedStateThenTextureObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenTextureObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenTextureObject + 0x8028);
+      sharedStateThenTextureObject = *(int *)(glContext + 0x5148);
     }
-    iVar1 = _gleLookupHashObject(iVar1 + 0x2008,texture);
+    sharedStateThenTextureObject = _gleLookupHashObject(sharedStateThenTextureObject + 0x2008,texture);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    bVar2 = iVar1 != 0;
+    objectExists = sharedStateThenTextureObject != 0;
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    bVar2 = false;
+    objectExists = false;
   }
-  return bVar2;
+  return objectExists;
 }
 
 /* _glBindTexture_ListExec @ 0x911c4 (44 bytes) */

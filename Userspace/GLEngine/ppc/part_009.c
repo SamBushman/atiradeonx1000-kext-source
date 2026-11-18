@@ -1195,19 +1195,19 @@ void _glPopClientAttrib_Exec(glContext)
   int glContext;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  int iVar3;
+  int attribStackPointerThenElem;
+  int nextElem;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (0 < *(int *)(glContext + 0x5144)) {
-      iVar2 = *(int *)(glContext + 0x5140);
+      attribStackPointerThenElem = *(int *)(glContext + 0x5140);
       *(int *)(glContext + 0x5144) = *(int *)(glContext + 0x5144) + -1;
-      *(int *)(glContext + 0x5140) = iVar2 + -4;
-      iVar2 = *(int *)(iVar2 + -4);
-      while (iVar2 != 0) {
-        iVar3 = *(int *)(iVar2 + 700);
-        _gleRemoveClientAttribElem(glContext,iVar2);
-        iVar2 = iVar3;
+      *(int *)(glContext + 0x5140) = attribStackPointerThenElem + -4;
+      attribStackPointerThenElem = *(int *)(attribStackPointerThenElem + -4);
+      while (attribStackPointerThenElem != 0) {
+        nextElem = *(int *)(attribStackPointerThenElem + 700);
+        _gleRemoveClientAttribElem(glContext,attribStackPointerThenElem);
+        attribStackPointerThenElem = nextElem;
       }
       _gleUpdateState(glContext);
       return;

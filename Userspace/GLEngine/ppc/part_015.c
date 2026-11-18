@@ -1790,28 +1790,28 @@ int _glIsFramebufferEXT_Exec(glContext, framebuffer)
   int glContext;
   undefined4 framebuffer;
 {
-  int iVar1;
-  bool bVar2;
+  int sharedStateThenFramebufferObject;
+  bool objectExists;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar1 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar1 + 0x8028);
-      iVar1 = *(int *)(glContext + 0x5148);
+    sharedStateThenFramebufferObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenFramebufferObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenFramebufferObject + 0x8028);
+      sharedStateThenFramebufferObject = *(int *)(glContext + 0x5148);
     }
-    iVar1 = _gleLookupHashObject(iVar1,framebuffer);
+    sharedStateThenFramebufferObject = _gleLookupHashObject(sharedStateThenFramebufferObject,framebuffer);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    bVar2 = iVar1 != 0;
+    objectExists = sharedStateThenFramebufferObject != 0;
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    bVar2 = false;
+    objectExists = false;
   }
-  return bVar2;
+  return objectExists;
 }
 
 /* _glCheckFramebufferStatusEXT_Exec @ 0x67194 (216 bytes) */

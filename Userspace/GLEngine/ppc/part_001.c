@@ -8594,23 +8594,23 @@ LAB_000160d8:
 int _glLoadIdentity_Exec(glContext)
   int glContext;
 {
-  uint uVar1;
+  uint inverseSlotBits;
   int iVar2;
-  uint uVar3;
+  uint matrixDirtyBits;
   undefined4 currentMatrix;
   
   currentMatrix = *(undefined4 *)(glContext + 0x4fec);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
     iVar2 = _gleMakeIdentityMatrix(currentMatrix);
-    uVar3 = *(uint *)(glContext + 0x50a8);
-    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | uVar3;
-    if ((uVar3 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
+    matrixDirtyBits = *(uint *)(glContext + 0x50a8);
+    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | matrixDirtyBits;
+    if ((matrixDirtyBits & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
       iVar2 = _gleCopyMatrix(currentMatrix,*(undefined4 *)(glContext + 0x4ff0));
-      uVar1 = uVar3 & 0xfffffc;
-      uVar3 = uVar3 & 0xff000003;
-      *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) & ~uVar1;
+      inverseSlotBits = matrixDirtyBits & 0xfffffc;
+      matrixDirtyBits = matrixDirtyBits & 0xff000003;
+      *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) & ~inverseSlotBits;
     }
-    *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | uVar3;
+    *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | matrixDirtyBits;
   }
   else {
     iVar2 = glContext;

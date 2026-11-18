@@ -44,26 +44,26 @@ int _glLoadMatrixf_Exec(glContext, m)
 }
 
 /* _gleLoadMatrixf @ 0x4f188 (132 bytes) */
-int _gleLoadMatrixf(m, param_2)
+int _gleLoadMatrixf(m, destination)
   undefined4 *m;
-  undefined4 *param_2;
+  undefined4 *destination;
 {
-  *param_2 = *m;
-  param_2[1] = m[1];
-  param_2[2] = m[2];
-  param_2[3] = m[3];
-  param_2[4] = m[4];
-  param_2[5] = m[5];
-  param_2[6] = m[6];
-  param_2[7] = m[7];
-  param_2[8] = m[8];
-  param_2[9] = m[9];
-  param_2[10] = m[10];
-  param_2[0xb] = m[0xb];
-  param_2[0xc] = m[0xc];
-  param_2[0xd] = m[0xd];
-  param_2[0xe] = m[0xe];
-  param_2[0xf] = m[0xf];
+  *destination = *m;
+  destination[1] = m[1];
+  destination[2] = m[2];
+  destination[3] = m[3];
+  destination[4] = m[4];
+  destination[5] = m[5];
+  destination[6] = m[6];
+  destination[7] = m[7];
+  destination[8] = m[8];
+  destination[9] = m[9];
+  destination[10] = m[10];
+  destination[0xb] = m[0xb];
+  destination[0xc] = m[0xc];
+  destination[0xd] = m[0xd];
+  destination[0xe] = m[0xe];
+  destination[0xf] = m[0xf];
   return;
 }
 
