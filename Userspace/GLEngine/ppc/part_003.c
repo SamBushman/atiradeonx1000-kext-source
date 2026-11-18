@@ -46,13 +46,14 @@ void _glFlush_Exec(int glContext,double fparam_1,double forwardedFloatArg2,doubl
   bool bVar1;
   char cVar2;
   undefined4 glErrorCode;
-  int *piVar4;
+  int *srcCursor;
   int iVar5;
+  int framebufferObject;
   undefined4 incomingR5;
   undefined4 incomingR6;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  int iVar6;
+  int glContextWord50ac;
   uint uVar7;
   int *piVar8;
   double extraout_f1;
@@ -64,17 +65,17 @@ void _glFlush_Exec(int glContext,double fparam_1,double forwardedFloatArg2,doubl
     glErrorCode = 0x502;
     goto LAB_0001f064;
   }
-  iVar6 = *(int *)(glContext + 0x50ac);
-  if (iVar6 != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
+  glContextWord50ac = *(int *)(glContext + 0x50ac);
+  if (glContextWord50ac != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
     fparam_1 = extraout_f1;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_0001f090;
-  iVar5 = *(int *)(glContext + 0x744c);
+  framebufferObject = *(int *)(glContext + 0x744c);
   piVar8 = (int *)(glContext + 0x310);
   cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
-  if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar5 + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,iVar6,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+  if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,glContextWord50ac,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
@@ -84,10 +85,10 @@ LAB_0001ef68:
   }
   else {
     loopIndex = 0;
-    piVar4 = (int *)(glContext + 0x324);
+    srcCursor = (int *)(glContext + 0x324);
     do {
-      iVar5 = *piVar4;
-      piVar4 = piVar4 + 1;
+      iVar5 = *srcCursor;
+      srcCursor = srcCursor + 1;
       if (iVar5 != 0) {
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
         break;
@@ -179,20 +180,22 @@ int _glTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, width, hei
   int iVar3;
   int iVar4;
   undefined4 uVar5;
+  undefined4 glContextWord4688;
   undefined4 uVar6;
   byte bVar7;
   uint uVar8;
   int iVar9;
+  int glContextPtr4a6c;
   int iVar10;
   int iVar11;
   double dVar12;
   
   iVar3 = glContext;
   if (-1 < *(short *)(glContext + 0x4a10)) goto LAB_0001f180;
-  iVar9 = *(int *)(glContext + 0x4a6c);
-  if (iVar9 != 0) {
+  glContextPtr4a6c = *(int *)(glContext + 0x4a6c);
+  if (glContextPtr4a6c != 0) {
     iVar2 = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,pixels);
-    iVar11 = *(int *)(iVar9 + 0x38);
+    iVar11 = *(int *)(glContextPtr4a6c + 0x38);
     dVar12 = (double)((double (*)())_gleBytesPerElement)(type);
     iVar3 = (int)dVar12;
     if (iVar11 < iVar2) {
@@ -206,7 +209,7 @@ LAB_0001f180:
       iVar3 = _glePixelBytes(format,type);
     }
     if (pixels != (pixels / iVar3) * iVar3) goto LAB_0001f180;
-    pixels = pixels + *(int *)(iVar9 + 0x30);
+    pixels = pixels + *(int *)(glContextPtr4a6c + 0x30);
   }
   if (width == 0) {
     return iVar3;
@@ -229,8 +232,8 @@ LAB_0001f180:
   if ((((iVar11 != 0) && ((int)(uint)*(byte *)(iVar3 + 0x8d) <= (int)level)) &&
       ((int)level <= (int)(uint)*(byte *)(iVar3 + 0x8f))) &&
      (iVar11 = uVar1 * 2, (*(ushort *)(iVar11 + iVar3 + 0x94) >> (level & 0x3f) & 1) != 0)) {
-    if (iVar9 == 0) {
-      uVar5 = *(undefined4 *)(glContext + 0x4688);
+    if (glContextPtr4a6c == 0) {
+      glContextWord4688 = *(undefined4 *)(glContext + 0x4688);
       uVar6 = *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4);
     }
     else {
@@ -239,13 +242,13 @@ LAB_0001f180:
                          *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4),uVar1,
                          level,xoffset,yoffset,0,width);
       if (iVar4 != 0) goto LAB_0001f388;
-      if (*(int *)(iVar9 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar9 + 0x10);
+      if (*(int *)(glContextPtr4a6c + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,glContextPtr4a6c + 0x10);
       }
-      uVar5 = *(undefined4 *)(glContext + 0x4688);
+      glContextWord4688 = *(undefined4 *)(glContext + 0x4688);
       uVar6 = *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4);
     }
-    iVar4 = (**(code **)(glContext + 0x4710))(uVar5,uVar6,uVar1,level,xoffset,yoffset,0,width);
+    iVar4 = (**(code **)(glContext + 0x4710))(glContextWord4688,uVar6,uVar1,level,xoffset,yoffset,0,width);
     if (iVar4 != 0) {
 LAB_0001f388:
       *(undefined4 *)(iVar3 + 0x20) =
@@ -461,8 +464,8 @@ int _checkFastPath(glContext, param_2, xoffset, yoffset, param_5, width, height,
 {
   ushort uVar1;
   ushort uVar2;
-  int iVar3;
-  int iVar4;
+  int pixelBytes;
+  int rowBytes;
   int iVar5;
   int local_50;
   undefined1 auStack_4c [4];
@@ -472,8 +475,8 @@ int _checkFastPath(glContext, param_2, xoffset, yoffset, param_5, width, height,
   int local_3c [4];
   
   if ((*(byte *)(param_2 + 0xb) & 1) != 0) {
-    iVar3 = _glePixelBytes((uint)*(ushort *)(param_2 + 0x10),(uint)*(ushort *)(param_2 + 0x12));
-    iVar4 = _gleRowBytes((uint)*(ushort *)(param_2 + 0x10),(uint)*(ushort *)(param_2 + 0x12),
+    pixelBytes = _glePixelBytes((uint)*(ushort *)(param_2 + 0x10),(uint)*(ushort *)(param_2 + 0x12));
+    rowBytes = _gleRowBytes((uint)*(ushort *)(param_2 + 0x10),(uint)*(ushort *)(param_2 + 0x12),
                          (uint)*(ushort *)(param_2 + 0xc));
     uVar1 = *(ushort *)(param_2 + 0xe);
     uVar2 = *(ushort *)(param_2 + 0xc);
@@ -482,8 +485,8 @@ int _checkFastPath(glContext, param_2, xoffset, yoffset, param_5, width, height,
               (glContext,format,type,width,height,glContext + 0x31cc,auStack_40,local_3c,
                &local_50,auStack_4c,auStack_48,auStack_44);
     if ((pixels + local_3c[0] ==
-         iVar5 + iVar3 * ((uint)uVar2 * ((uint)uVar1 * param_5 + yoffset) + xoffset)) &&
-       (local_50 == iVar4)) {
+         iVar5 + pixelBytes * ((uint)uVar2 * ((uint)uVar1 * param_5 + yoffset) + xoffset)) &&
+       (local_50 == rowBytes)) {
       return 0;
     }
   }
@@ -618,7 +621,7 @@ int _gleTestObject(glContext, param_2, name)
   int iVar2;
   int iVar3;
   int iVar4;
-  undefined4 *puVar5;
+  undefined4 *srcCursor;
   uint loopIndex;
   
   iVar4 = 1;
@@ -636,18 +639,18 @@ LAB_0001ff68:
       iVar3 = glContext + 0x10000;
       loopIndex = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
-        puVar5 = (undefined4 *)(iVar2 + 0x10);
+        srcCursor = (undefined4 *)(iVar2 + 0x10);
         do {
           bVar1 = iVar4 != 0;
           iVar4 = 0;
           if ((bVar1) &&
              (iVar2 = (**(code **)(*(int *)(iVar3 + -0x777c) + 0x1c0))
-                                (*(undefined4 *)(iVar3 + -0x7a54),param_2,*puVar5), iVar2 != 0)) {
+                                (*(undefined4 *)(iVar3 + -0x7a54),param_2,*srcCursor), iVar2 != 0)) {
             iVar4 = 1;
           }
           loopIndex = loopIndex + 1;
           iVar3 = iVar3 + 0x2e0;
-          puVar5 = puVar5 + 1;
+          srcCursor = srcCursor + 1;
         } while (loopIndex < *(byte *)(glContext + 0x85a4));
       }
     }
@@ -658,18 +661,18 @@ LAB_0001ff68:
     iVar3 = glContext + 0x10000;
     loopIndex2 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      puVar5 = (undefined4 *)(iVar2 + 0x10);
+      srcCursor = (undefined4 *)(iVar2 + 0x10);
       do {
         bVar1 = iVar4 != 0;
         iVar4 = 0;
         if ((bVar1) &&
            (iVar2 = (**(code **)(*(int *)(iVar3 + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(iVar3 + -0x7a54),param_2,*puVar5), iVar2 != 0)) {
+                              (*(undefined4 *)(iVar3 + -0x7a54),param_2,*srcCursor), iVar2 != 0)) {
           iVar4 = 1;
         }
         loopIndex2 = loopIndex2 + 1;
         iVar3 = iVar3 + 0x2e0;
-        puVar5 = puVar5 + 1;
+        srcCursor = srcCursor + 1;
       } while (loopIndex2 < *(byte *)(glContext + 0x85a4));
     }
     break;
@@ -679,18 +682,18 @@ LAB_0001ff68:
     iVar3 = glContext + 0x10000;
     loopIndex3 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      puVar5 = (undefined4 *)(iVar2 + 0x10);
+      srcCursor = (undefined4 *)(iVar2 + 0x10);
       do {
         bVar1 = iVar4 != 0;
         iVar4 = 0;
         if ((bVar1) &&
            (iVar2 = (**(code **)(*(int *)(iVar3 + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(iVar3 + -0x7a54),param_2,*puVar5), iVar2 != 0)) {
+                              (*(undefined4 *)(iVar3 + -0x7a54),param_2,*srcCursor), iVar2 != 0)) {
           iVar4 = 1;
         }
         loopIndex3 = loopIndex3 + 1;
         iVar3 = iVar3 + 0x2e0;
-        puVar5 = puVar5 + 1;
+        srcCursor = srcCursor + 1;
       } while (loopIndex3 < *(byte *)(glContext + 0x85a4));
     }
     break;
@@ -700,18 +703,18 @@ LAB_0001ff68:
     iVar3 = glContext + 0x10000;
     loopIndex4 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      puVar5 = (undefined4 *)(iVar2 + 0x10);
+      srcCursor = (undefined4 *)(iVar2 + 0x10);
       do {
         bVar1 = iVar4 != 0;
         iVar4 = 0;
         if ((bVar1) &&
            (iVar2 = (**(code **)(*(int *)(iVar3 + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(iVar3 + -0x7a54),param_2,*puVar5), iVar2 != 0)) {
+                              (*(undefined4 *)(iVar3 + -0x7a54),param_2,*srcCursor), iVar2 != 0)) {
           iVar4 = 1;
         }
         loopIndex4 = loopIndex4 + 1;
         iVar3 = iVar3 + 0x2e0;
-        puVar5 = puVar5 + 1;
+        srcCursor = srcCursor + 1;
       } while (loopIndex4 < *(byte *)(glContext + 0x85a4));
     }
     break;
@@ -721,18 +724,18 @@ LAB_0001ff68:
     iVar3 = glContext + 0x10000;
     loopIndex5 = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      puVar5 = (undefined4 *)(iVar2 + 0x10);
+      srcCursor = (undefined4 *)(iVar2 + 0x10);
       do {
         bVar1 = iVar4 != 0;
         iVar4 = 0;
         if ((bVar1) &&
            (iVar2 = (**(code **)(*(int *)(iVar3 + -0x777c) + 0x1c0))
-                              (*(undefined4 *)(iVar3 + -0x7a54),param_2,*puVar5), iVar2 != 0)) {
+                              (*(undefined4 *)(iVar3 + -0x7a54),param_2,*srcCursor), iVar2 != 0)) {
           iVar4 = 1;
         }
         loopIndex5 = loopIndex5 + 1;
         iVar3 = iVar3 + 0x2e0;
-        puVar5 = puVar5 + 1;
+        srcCursor = srcCursor + 1;
       } while (loopIndex5 < *(byte *)(glContext + 0x85a4));
     }
     break;
@@ -756,9 +759,10 @@ void _glDeleteTextures_Exec_body(glContext, n, textures)
   int *cursor;
   undefined4 glErrorCode;
   int iVar2;
-  int iVar3;
+  int sharedState;
+  int framebufferObject;
   uint loopIndex4;
-  int *piVar5;
+  int *srcCursor;
   int *piVar6;
   int iVar7;
   int loopIndex;
@@ -772,15 +776,15 @@ void _glDeleteTextures_Exec_body(glContext, n, textures)
       if (n == 0) {
         return;
       }
-      iVar3 = *(int *)(glContext + 0x5148);
+      sharedState = *(int *)(glContext + 0x5148);
       piVar6 = (int *)0x0;
-      iVar7 = iVar3 + 0x2008;
-      if (*(char *)(iVar3 + 0x8024) != '\0') {
-        _pthread_mutex_lock(iVar3 + 0x8028);
+      iVar7 = sharedState + 0x2008;
+      if (*(char *)(sharedState + 0x8024) != '\0') {
+        _pthread_mutex_lock(sharedState + 0x8028);
       }
-      iVar3 = *(int *)(glContext + 0x744c);
-      if (iVar3 != 0) {
-        piVar6 = (int *)(iVar3 + 0xd4);
+      framebufferObject = *(int *)(glContext + 0x744c);
+      if (framebufferObject != 0) {
+        piVar6 = (int *)(framebufferObject + 0xd4);
       }
       loopIndex = 0;
       iVar9 = *textures;
@@ -796,20 +800,20 @@ void _glDeleteTextures_Exec_body(glContext, n, textures)
             loopIndex2 = 0;
             iVar12 = glContext;
             do {
-              piVar5 = (int *)(iVar12 + 0x5154);
+              srcCursor = (int *)(iVar12 + 0x5154);
               loopIndex4 = 0;
               do {
-                if (*(int *)(*piVar5 + 4) == *textures) {
+                if (*(int *)(*srcCursor + 4) == *textures) {
                   _gleBindTexture(glContext,loopIndex4,0,loopIndex2);
                   break;
                 }
                 loopIndex4 = loopIndex4 + 1;
-                piVar5 = piVar5 + 1;
+                srcCursor = srcCursor + 1;
               } while (loopIndex4 < 5);
               loopIndex2 = loopIndex2 + 1;
               iVar12 = iVar12 + 0x14;
             } while (loopIndex2 < 0x10);
-            if ((iVar3 != 0) && (iVar12 = _gleLookupHashObject(iVar7,*textures), iVar12 != 0)) {
+            if ((framebufferObject != 0) && (iVar12 = _gleLookupHashObject(iVar7,*textures), iVar12 != 0)) {
               loopIndex3 = 0;
               cursor = piVar6;
               do {
@@ -1121,6 +1125,7 @@ int _gliSetInteger(glContext, stateId, valuePtr)
   undefined1 uVar8;
   int iVar9;
   int iVar10;
+  int glContextWord5408;
   int iVar11;
   int iVar12;
   int iVar13;
@@ -1351,10 +1356,10 @@ LAB_00020c88:
     }
     else {
       if (stateId == 0x3e1) {
-        iVar10 = *(int *)(glContext + 0x5408);
+        glContextWord5408 = *(int *)(glContext + 0x5408);
         *(char *)(glContext + 0x7586) = '\x01' - (*valuePtr == 0);
 joined_r0x00020e50:
-        if (iVar10 != 0) {
+        if (glContextWord5408 != 0) {
           return 0;
         }
         _gliExecDispatchTable(glContext);
@@ -1406,7 +1411,7 @@ joined_r0x00020e50:
         else {
           if (stateId != 0x188) {
             if (stateId == 0x3e0) {
-              iVar10 = *(int *)(glContext + 0x5408);
+              glContextWord5408 = *(int *)(glContext + 0x5408);
               *(char *)(glContext + 0x7587) = '\x01' - (*valuePtr == 0);
               goto joined_r0x00020e50;
             }
@@ -1568,7 +1573,7 @@ void _glGetFloatv_Exec(glContext, pname, params)
   undefined4 glErrorCode;
   uint uVar2;
   double *cursor;
-  int iVar4;
+  int remaining;
   double dVar5;
   undefined1 auStack_b0 [16];
   double local_a0 [16];
@@ -1578,18 +1583,18 @@ void _glGetFloatv_Exec(glContext, pname, params)
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     cursor = local_a0;
-    iVar4 = _gleGetState(glContext,pname,cursor,local_18,auStack_b0);
+    remaining = _gleGetState(glContext,pname,cursor,local_18,auStack_b0);
     intToDoubleMagic = DOUBLE_00108d58;
-    if (iVar4 == 0) {
+    if (remaining == 0) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
       glErrorCode = 0x500;
       goto LAB_00021068;
     }
-    if (iVar4 != -1) {
+    if (remaining != -1) {
       if (local_18[0] != 0x1404) {
-        if (iVar4 < 1) {
+        if (remaining < 1) {
           return;
         }
         do {
@@ -1597,11 +1602,11 @@ void _glGetFloatv_Exec(glContext, pname, params)
           cursor = cursor + 1;
           *params = (float)dVar5;
           params = params + 1;
-          iVar4 = iVar4 + -1;
-        } while (iVar4 != 0);
+          remaining = remaining + -1;
+        } while (remaining != 0);
         return;
       }
-      if (iVar4 < 1) {
+      if (remaining < 1) {
         return;
       }
       do {
@@ -1611,8 +1616,8 @@ void _glGetFloatv_Exec(glContext, pname, params)
         uStack_1c = uVar2 ^ 0x80000000;
         *params = (float)((double)CONCAT44(0x43300000,uVar2 ^ 0x80000000) - intToDoubleMagic);
         params = params + 1;
-        iVar4 = iVar4 + -1;
-      } while (iVar4 != 0);
+        remaining = remaining + -1;
+      } while (remaining != 0);
       return;
     }
   }
@@ -1980,7 +1985,7 @@ int _gleGetEnabled(glContext, cap)
 {
   uint uVar1;
   uint uVar2;
-  int iVar3;
+  int clientState;
   longlong lVar4;
   
   if (cap < 0x4008) {
@@ -2216,10 +2221,10 @@ LAB_00022328:
             return (uint)*(byte *)(glContext + 0x48eb);
           }
           if (cap == 0x8078) {
-            iVar3 = *(int *)(glContext + 0x4a60);
+            clientState = *(int *)(glContext + 0x4a60);
             lVar4 = ___ashldi3(0,0x1000000,*(undefined4 *)(glContext + 0x53d8));
-            if ((*(uint *)(iVar3 + 0x330) & (uint)((ulonglong)lVar4 >> 0x20)) == 0 &&
-                (*(uint *)(iVar3 + 0x334) & (uint)lVar4) == 0) {
+            if ((*(uint *)(clientState + 0x330) & (uint)((ulonglong)lVar4 >> 0x20)) == 0 &&
+                (*(uint *)(clientState + 0x334) & (uint)lVar4) == 0) {
               return 0;
             }
             return 1;
@@ -2416,14 +2421,14 @@ LAB_00022398:
 int _gleShareSharedState(param_1)
   int param_1;
 {
-  int iVar1;
+  int sharedState;
   
-  iVar1 = *(int *)(param_1 + 0x5148);
-  _pthread_mutex_lock(iVar1 + 0x8028);
-  *(undefined1 *)(iVar1 + 0x8024) = 1;
-  *(int *)(iVar1 + 0x8020) = *(int *)(iVar1 + 0x8020) + 1;
-  _pthread_mutex_unlock(iVar1 + 0x8028);
-  return iVar1;
+  sharedState = *(int *)(param_1 + 0x5148);
+  _pthread_mutex_lock(sharedState + 0x8028);
+  *(undefined1 *)(sharedState + 0x8024) = 1;
+  *(int *)(sharedState + 0x8020) = *(int *)(sharedState + 0x8020) + 1;
+  _pthread_mutex_unlock(sharedState + 0x8028);
+  return sharedState;
 }
 
 /* _gleSetEnable_DITHER @ 0x2242c (32 bytes) */
@@ -2445,12 +2450,12 @@ void _glStencilMask_Exec(glContext, mask)
   int glContext;
   undefined4 mask;
 {
-  uint uVar1;
+  uint glContextWord310;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    uVar1 = *(uint *)(glContext + 0x310);
+    glContextWord310 = *(uint *)(glContext + 0x310);
     *(undefined4 *)((uint)*(byte *)(glContext + 0x7583) * 4 + glContext + 0x3198) = mask;
-    *(uint *)(glContext + 0x310) = uVar1 | 0x100000;
+    *(uint *)(glContext + 0x310) = glContextWord310 | 0x100000;
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -2671,17 +2676,17 @@ int _gleBindPipelineProgram(glContext, param_2, program)
 {
   int loopIndex2;
   int remaining;
-  char cVar1;
+  char glContextByte85a4;
   int iVar2;
   undefined *puVar3;
   undefined4 uVar4;
-  int iVar5;
+  int sharedState;
   uint uVar6;
   int iVar7;
-  undefined4 *puVar8;
+  undefined4 *srcCursor;
   int iVar9;
   int loopIndex;
-  undefined4 *puVar11;
+  undefined4 *dstCursor;
   int iVar12;
   int iVar13;
   int iVar14;
@@ -2716,18 +2721,18 @@ int _gleBindPipelineProgram(glContext, param_2, program)
   loopIndex2 = 0;
   *(undefined4 *)(glContext + 0x541c) = 0xffffffff;
   *(int *)(iVar7 + 8) = *(int *)(iVar7 + 8) + 1;
-  cVar1 = *(char *)(glContext + 0x85a4);
+  glContextByte85a4 = *(char *)(glContext + 0x85a4);
   iVar13 = *(int *)(iVar12 + glContext + 0x5420);
   *(int *)(iVar12 + glContext + 0x5420) = iVar7;
-  if (cVar1 != '\0') {
-    puVar8 = (undefined4 *)(iVar7 + 0x4a8);
-    puVar11 = (undefined4 *)(param_2 * 4 + glContext + 0x886c);
+  if (glContextByte85a4 != '\0') {
+    srcCursor = (undefined4 *)(iVar7 + 0x4a8);
+    dstCursor = (undefined4 *)(param_2 * 4 + glContext + 0x886c);
     do {
-      uVar4 = *puVar8;
+      uVar4 = *srcCursor;
       loopIndex2 = loopIndex2 + 1;
-      puVar8 = puVar8 + 1;
-      *puVar11 = uVar4;
-      puVar11 = puVar11 + 0xb8;
+      srcCursor = srcCursor + 1;
+      *dstCursor = uVar4;
+      dstCursor = dstCursor + 0xb8;
     } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   if (param_2 == 0) {
@@ -2755,14 +2760,14 @@ LAB_0002299c:
   _gleUpdateInverseNeeds(glContext);
   loopIndex = 0;
   if (remaining != 0) {
-    iVar5 = *(int *)(glContext + 0x5148);
+    sharedState = *(int *)(glContext + 0x5148);
     iVar12 = iVar12 * 4 + glContext;
     do {
       iVar2 = loopIndex * 4;
       loopIndex = loopIndex + 1;
       uVar6 = *(uint *)(iVar12 + 0x310) |
               *(uint *)(iVar2 + iVar14 + 0x18) &
-              (*(uint *)(iVar2 + iVar5 + iVar9 + 0x8a74) | ~*(uint *)(iVar2 + iVar13 + 0x28));
+              (*(uint *)(iVar2 + sharedState + iVar9 + 0x8a74) | ~*(uint *)(iVar2 + iVar13 + 0x28));
       *(uint *)(iVar12 + 0x310) = uVar6;
       *(uint *)(iVar12 + 0x310) = uVar6 & *(uint *)(iVar2 + iVar14 + 0x18);
       iVar12 = iVar12 + 4;
@@ -2802,7 +2807,7 @@ void _glProgramStringARB_Exec(glContext, target, format, len, string)
   bool bVar2;
   undefined4 uVar3;
   uint uVar4;
-  undefined4 *puVar5;
+  undefined4 *srcCursor;
   int iVar6;
   int iVar7;
   int iVar8;
@@ -2865,11 +2870,11 @@ LAB_00022b48:
       if (target == 0x8620) {
         iVar6 = iVar7 + 0x10;
         remaining3 = 9;
-        puVar5 = (undefined4 *)(iVar7 + 0x28);
+        srcCursor = (undefined4 *)(iVar7 + 0x28);
         loopIndex3 = 0;
         do {
-          uVar3 = *puVar5;
-          puVar5 = puVar5 + 1;
+          uVar3 = *srcCursor;
+          srcCursor = srcCursor + 1;
           *(undefined4 *)((int)local_60 + loopIndex3) = uVar3;
           loopIndex3 = loopIndex3 + 4;
           remaining3 = remaining3 + -1;
@@ -2895,13 +2900,13 @@ LAB_00022b48:
         *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x400000;
       }
       if (target == 0x8804) {
-        puVar5 = (undefined4 *)(iVar7 + 0x28);
+        srcCursor = (undefined4 *)(iVar7 + 0x28);
         remaining2 = 5;
         iVar7 = iVar7 + 0x10;
         loopIndex = 0;
         do {
-          uVar3 = *puVar5;
-          puVar5 = puVar5 + 1;
+          uVar3 = *srcCursor;
+          srcCursor = srcCursor + 1;
           *(undefined4 *)((int)local_60 + loopIndex) = uVar3;
           loopIndex = loopIndex + 4;
           remaining2 = remaining2 + -1;
@@ -2964,7 +2969,7 @@ void _glePPParse(glContext, param_2, param_3)
   undefined4 uVar10;
   undefined2 uVar11;
   short sVar12;
-  undefined4 *puVar13;
+  undefined4 *srcCursor;
   int iVar14;
   uint uVar15;
   int iVar16;
@@ -2975,6 +2980,7 @@ void _glePPParse(glContext, param_2, param_3)
   int iVar21;
   int iVar22;
   uint uVar23;
+  uint loopIndex;
   undefined4 uVar24;
   uint local_110;
   uint local_10c;
@@ -3095,16 +3101,16 @@ void _glePPParse(glContext, param_2, param_3)
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
       piVar19 = *(int **)(iVar22 + 0x20);
-      uVar23 = 0;
+      loopIndex = 0;
       piVar18 = *(int **)(iVar22 + 0x14);
       piVar7 = (int *)_PPStreamChunkListCreateFromChunkList(piVar19);
       piVar8 = (int *)_PPStreamChunkListCreateFromChunkList(piVar18);
       iVar21 = *piVar20;
       if (local_60 != 0) {
-        puVar13 = (undefined4 *)(allocatedBlock + 4);
+        srcCursor = (undefined4 *)(allocatedBlock + 4);
         do {
-          uVar24 = *puVar13;
-          puVar13 = puVar13 + 2;
+          uVar24 = *srcCursor;
+          srcCursor = srcCursor + 2;
           iVar14 = *piVar7;
           sVar12 = (short)uVar24;
           for (iVar16 = *piVar19; iVar16 != 0; iVar16 = *(int *)(iVar16 + 8)) {
@@ -3137,9 +3143,9 @@ void _glePPParse(glContext, param_2, param_3)
             iVar14 = *(int *)(iVar14 + 8);
           }
           *(short *)(iVar21 + 0x12) = sVar12;
-          uVar23 = uVar23 + 1;
+          loopIndex = loopIndex + 1;
           iVar21 = *(int *)(iVar21 + 8);
-        } while (uVar23 < local_60);
+        } while (loopIndex < local_60);
       }
       uVar23 = 0;
       _PPStreamChunkListSort(piVar20);
@@ -3194,7 +3200,7 @@ void _glePPParse(glContext, param_2, param_3)
         }
         uVar24 = *(undefined4 *)(iVar22 + 0x1c);
         local_100 = 0;
-        uVar23 = 0;
+        loopIndex = 0;
         local_fc = 0;
         sVar12 = _PPStreamChunkListGetMaxIndex(uVar24);
         local_100 = local_100 & 0xfff0ffff | 0x10000;
@@ -3220,12 +3226,12 @@ void _glePPParse(glContext, param_2, param_3)
           else {
             uVar15 = local_f0 & 0xffe03fff | 0x100000;
           }
-          local_f0 = (uVar23 & 3) << 0xc | uVar15 & 0xffffc8ff;
-          uVar23 = uVar23 + 1;
+          local_f0 = (loopIndex & 3) << 0xc | uVar15 & 0xffffc8ff;
+          loopIndex = loopIndex + 1;
           _PPStreamAddParamBinding(iVar22,&local_f0);
-        } while (uVar23 < 4);
+        } while (loopIndex < 4);
         uVar24 = *(undefined4 *)(iVar22 + 0x10);
-        uVar23 = 0;
+        loopIndex = 0;
         do {
           local_70 = 0;
           local_6c = 0;
@@ -3239,10 +3245,10 @@ void _glePPParse(glContext, param_2, param_3)
           else {
             uVar15 = local_70 & 0xffe03fff | 0x100000;
           }
-          local_70 = (uVar23 & 3) << 0xc | uVar15 & 0xffffc8ff | 0x300;
-          uVar23 = uVar23 + 1;
+          local_70 = (loopIndex & 3) << 0xc | uVar15 & 0xffffc8ff | 0x300;
+          loopIndex = loopIndex + 1;
           _PPStreamAddParamBinding(iVar22,&local_70);
-        } while (uVar23 < 4);
+        } while (loopIndex < 4);
         uVar4 = *(ushort *)(*(int *)(glContext + 0x468c) + 0x11a);
         uVar23 = uVar4 & 1;
         if ((uVar4 & 1) == 0) {
@@ -3865,9 +3871,9 @@ void _glePPLogParameters(glContext, param_2, param_3, param_4, param_5, param_6)
   undefined4 *cursor;
   undefined2 uVar4;
   int iVar5;
-  uint *puVar6;
+  uint *srcCursor;
   uint uVar7;
-  int iVar8;
+  int sharedState;
   uint uVar9;
   int iVar10;
   uint loopIndex2;
@@ -3881,17 +3887,17 @@ void _glePPLogParameters(glContext, param_2, param_3, param_4, param_5, param_6)
   
   loopIndex2 = 0;
   uVar7 = (uint)*(ushort *)(param_2 + 0x4ba);
-  iVar8 = *(int *)(glContext + 0x5148);
-  iVar5 = uVar7 * 0xa30 + iVar8;
+  sharedState = *(int *)(glContext + 0x5148);
+  iVar5 = uVar7 * 0xa30 + sharedState;
   iVar2 = *(int *)(iVar5 + 0x8a98) + 1;
   *(int *)(iVar5 + 0x8a98) = iVar2;
   *(int *)(param_2 + 0x14) = iVar2;
   uVar1 = 0;
   if (*(uint *)(iVar5 + 0x8a9c) != 0) {
-    puVar6 = *(uint **)(iVar5 + 0x8aa0);
+    srcCursor = *(uint **)(iVar5 + 0x8aa0);
     do {
-      uVar1 = *puVar6;
-      puVar6 = puVar6 + 1;
+      uVar1 = *srcCursor;
+      srcCursor = srcCursor + 1;
       if (param_3 <= uVar1) break;
       loopIndex2 = loopIndex2 + 1;
       uVar1 = 0;
@@ -3925,7 +3931,7 @@ void _glePPLogParameters(glContext, param_2, param_3, param_4, param_5, param_6)
           iVar10 = iVar5 + param_4;
           local_70 = *(undefined4 *)(iVar5 + param_4);
           local_6c = *(uint *)(iVar10 + 4) & 0xffff0000;
-          iVar2 = ((int (*)())_glePPLogParam)(glContext,iVar8,uVar7,local_70,local_6c,uVar9 - uVar12,0xffffffff,
+          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,uVar7,local_70,local_6c,uVar9 - uVar12,0xffffffff,
                                  local_a0,uVar1);
           if (iVar2 < 0) break;
           uVar12 = uVar12 + 1;
@@ -3939,7 +3945,7 @@ void _glePPLogParameters(glContext, param_2, param_3, param_4, param_5, param_6)
           iVar10 = iVar5 + param_4;
           local_70 = *(undefined4 *)(iVar5 + param_4);
           local_6c = *(uint *)(iVar10 + 4) & 0xffff0000;
-          iVar2 = ((int (*)())_glePPLogParam)(glContext,iVar8,uVar7,local_70,local_6c,1,iVar2 + 1,local_a0,uVar1);
+          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,uVar7,local_70,local_6c,1,iVar2 + 1,local_a0,uVar1);
           *(uint *)(iVar5 + param_4) = local_70;
           *(uint *)(iVar10 + 4) = local_6c;
           *(short *)(iVar10 + 6) = (short)iVar2;
@@ -3957,7 +3963,7 @@ void _glePPLogParameters(glContext, param_2, param_3, param_4, param_5, param_6)
           iVar5 = iVar2 + param_4;
           if ((local_70 >> 0x15 & 7) == 0) {
             local_6c = *(uint *)(iVar5 + 4) & 0xffff0000;
-            uVar4 = ((int (*)())_glePPLogParam)(glContext,iVar8,uVar7,local_70,local_6c,1,0xffffffff,local_a0,uVar1
+            uVar4 = ((int (*)())_glePPLogParam)(glContext,sharedState,uVar7,local_70,local_6c,1,0xffffffff,local_a0,uVar1
                                   );
             *(uint *)(iVar2 + param_4) = local_70;
             *(uint *)(iVar5 + 4) = local_6c;
@@ -4745,31 +4751,31 @@ void _gleVPChanged(int glContext,double forwardedFloatArg1,double forwardedFloat
   int remaining;
   int iVar1;
   uint uVar2;
-  int iVar3;
+  int currentProgram;
   int loopIndex;
   int iVar5;
-  uint *puVar6;
+  uint *srcCursor;
   int remaining2;
   
   if (*(int *)(glContext + 0x5434) == 0) {
     remaining = 9;
-    puVar6 = (uint *)(*(int *)(glContext + 0x5420) + 0x28);
+    srcCursor = (uint *)(*(int *)(glContext + 0x5420) + 0x28);
     iVar5 = glContext;
     do {
-      uVar2 = *puVar6;
-      puVar6 = puVar6 + 1;
+      uVar2 = *srcCursor;
+      srcCursor = srcCursor + 1;
       *(uint *)(iVar5 + 0x324) = *(uint *)(iVar5 + 0x324) | uVar2;
       iVar5 = iVar5 + 4;
       remaining = remaining + -1;
     } while (remaining != 0);
   }
   else {
-    iVar3 = *(int *)(glContext + 0x5430);
+    currentProgram = *(int *)(glContext + 0x5430);
     remaining2 = 9;
     loopIndex = 0;
     iVar5 = glContext;
     do {
-      iVar1 = loopIndex + *(int *)(iVar3 + 0x20);
+      iVar1 = loopIndex + *(int *)(currentProgram + 0x20);
       loopIndex = loopIndex + 4;
       *(uint *)(iVar5 + 0x324) = *(uint *)(iVar5 + 0x324) | *(uint *)(iVar1 + 8);
       iVar5 = iVar5 + 4;
@@ -4793,6 +4799,7 @@ void _glProgramLocalParameter4fvARB_Exec(glContext, target, index, params)
   uint uVar2;
   undefined4 glErrorCode;
   int iVar4;
+  int glContextWord5424;
   int iVar5;
   int iVar6;
   int iVar7;
@@ -4810,10 +4817,10 @@ LAB_00026190:
         bVar1 = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x8c);
       }
       iVar7 = (bVar1 >> 3 & 0x1c) + glContext;
-      iVar4 = *(int *)(glContext + 0x5424);
+      glContextWord5424 = *(int *)(glContext + 0x5424);
       iVar6 = iVar5 * 4 + glContext;
       *(uint *)(iVar7 + 0x324) = *(uint *)(iVar7 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(index + iVar4 + 0x58);
+      bVar1 = *(byte *)(index + glContextWord5424 + 0x58);
       iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
       iVar5 = *(int *)(iVar6 + 0x5420);
       *(uint *)(iVar4 + 0x348) = *(uint *)(iVar4 + 0x348) | 1 << (bVar1 & 0x1f);
@@ -4867,17 +4874,17 @@ void _gleModifyPluginPipelineProgram(glContext, param_2, forwardedArg3)
   undefined4 uVar3;
   int iVar4;
   int loopIndex;
-  undefined4 *puVar6;
+  undefined4 *srcCursor;
   
   iVar4 = glContext + 0x10000;
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
-    puVar6 = (undefined4 *)(param_2 + 0x498);
+    srcCursor = (undefined4 *)(param_2 + 0x498);
     do {
       piVar1 = (int *)(iVar4 + -0x777c);
-      uVar3 = *puVar6;
+      uVar3 = *srcCursor;
       loopIndex = loopIndex + 1;
-      puVar6 = puVar6 + 1;
+      srcCursor = srcCursor + 1;
       puVar2 = (undefined4 *)(iVar4 + -0x7a54);
       iVar4 = iVar4 + 0x2e0;
       (**(code **)(*piVar1 + 0x194))(*puVar2,uVar3,forwardedArg3);
@@ -5239,6 +5246,7 @@ int _glTexImage3D_Exec(glContext, target, level, internalformat, width, height, 
   int iVar4;
   int iVar5;
   int iVar6;
+  int glContextPtr4a6c;
   int iVar7;
   double dVar8;
   
@@ -5250,8 +5258,8 @@ int _glTexImage3D_Exec(glContext, target, level, internalformat, width, height, 
     glErrorCode = 0x501;
     goto LAB_0002710c;
   }
-  iVar6 = *(int *)(glContext + 0x4a6c);
-  if (iVar6 == 0) {
+  glContextPtr4a6c = *(int *)(glContext + 0x4a6c);
+  if (glContextPtr4a6c == 0) {
 LAB_00027098:
     iVar6 = ((int (*)())_gleCheckTexImage3DArgs)(glContext,target,level,internalformat,width,height,depth,border,format,
                        type);
@@ -5304,7 +5312,7 @@ LAB_00027114:
   else {
     iVar4 = _gleOffsetLimitImage3D
                       (glContext + 0x31cc,width,height,depth,format,type,pixels);
-    iVar7 = *(int *)(iVar6 + 0x38);
+    iVar7 = *(int *)(glContextPtr4a6c + 0x38);
     dVar8 = (double)((double (*)())_gleBytesPerElement)(type);
     iVar5 = (int)dVar8;
     if (iVar4 <= iVar7) {
@@ -5312,10 +5320,10 @@ LAB_00027114:
         iVar5 = _glePixelBytes(format,type);
       }
       if (pixels == (pixels / iVar5) * iVar5) {
-        if (*(int *)(iVar6 + 0x40) != 0) {
-          _gleSynchronizePluginBuffer(glContext,iVar6 + 0x10);
+        if (*(int *)(glContextPtr4a6c + 0x40) != 0) {
+          _gleSynchronizePluginBuffer(glContext,glContextPtr4a6c + 0x10);
         }
-        pixels = pixels + *(int *)(iVar6 + 0x30);
+        pixels = pixels + *(int *)(glContextPtr4a6c + 0x30);
         goto LAB_00027098;
       }
     }
@@ -5345,6 +5353,7 @@ int _gleCheckTexImage3DArgs(glContext, target, level, internalformat, width, hei
 {
   undefined4 glErrorCode;
   int iVar2;
+  int glContextPtr468c;
   int iVar3;
   uint uVar4;
   uint uVar5;
@@ -5364,17 +5373,17 @@ int _gleCheckTexImage3DArgs(glContext, target, level, internalformat, width, hei
   uVar5 = depth + border * -2;
   if (-1 < (int)uVar7) {
     if ((uVar7 & uVar7 - 1) == 0) {
-      iVar2 = *(int *)(glContext + 0x468c);
+      glContextPtr468c = *(int *)(glContext + 0x468c);
     }
     else {
-      iVar2 = *(int *)(glContext + 0x468c);
-      if ((*(uint *)(iVar2 + 0x124) & 0x80000) == 0) goto LAB_00027394;
+      glContextPtr468c = *(int *)(glContext + 0x468c);
+      if ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) == 0) goto LAB_00027394;
     }
-    uVar4 = (uint)*(ushort *)(iVar2 + 0xbe);
+    uVar4 = (uint)*(ushort *)(glContextPtr468c + 0xbe);
     if (((((((int)uVar7 <= (int)uVar4) && (-1 < (int)uVar6)) &&
-          (((uVar6 & uVar6 - 1) == 0 || ((*(uint *)(iVar2 + 0x124) & 0x80000) != 0)))) &&
+          (((uVar6 & uVar6 - 1) == 0 || ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) != 0)))) &&
          (((int)uVar6 <= (int)uVar4 && (-1 < (int)uVar5)))) &&
-        (((uVar5 & uVar5 - 1) == 0 || ((*(uint *)(iVar2 + 0x124) & 0x80000) != 0)))) &&
+        (((uVar5 & uVar5 - 1) == 0 || ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) != 0)))) &&
        ((int)uVar5 <= (int)uVar4)) {
       iVar2 = _gleCheckTexImageArgs(glContext,level,format,type,internalformat,border,0,1);
       if (iVar2 != 0) {
@@ -5455,10 +5464,14 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
   uint uVar13;
   undefined2 componentShort;
   int iVar17;
+  int imageSize;
   uint uVar18;
+  uint loopIndex;
   code *extractPixelFunc;
   code *modifyPixelFunc;
   int iVar21;
+  int rowBytes;
+  int pixelBytes;
   uint uVar22;
   uint uVar23;
   int iVar24;
@@ -5537,8 +5550,8 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
     uVar23 = depth;
   }
   else {
-    iVar17 = _gleImageSize(format,0x1a00,width,height);
-    allocatedBlock = _malloc(iVar17 * depth);
+    imageSize = _gleImageSize(format,0x1a00,width,height);
+    allocatedBlock = _malloc(imageSize * depth);
     if (allocatedBlock == 0) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
@@ -5619,7 +5632,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
     local_140 = height;
     _glgConvertType((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12),auStack_158,
                     puVar30,rowsLeft,iVar17,uVar23,piVar25);
-    iVar21 = _glePixelBytes((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12));
+    pixelBytes = _glePixelBytes((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12));
     uVar23 = (uint)*(ushort *)(textureLevel + 0xc);
     local_15c = _gleRowBytes((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12),
                              uVar23);
@@ -5640,13 +5653,13 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
     }
     else {
       iVar24 = local_15c * yoffset;
-      local_160 = dstSliceBytes * zoffset + iVar24 + *(int *)(textureLevel + 0x14) + iVar21 * xoffset;
+      local_160 = dstSliceBytes * zoffset + iVar24 + *(int *)(textureLevel + 0x14) + pixelBytes * xoffset;
     }
-    uVar18 = 0;
+    loopIndex = 0;
     while( true ) {
-      uVar18 = uVar18 + 1;
+      loopIndex = loopIndex + 1;
       _glgProcessPixels(glContext + 0x31a8,&local_170,uVar23,puVar30,rowsLeft,iVar17,iVar24,piVar25);
-      if (uVar18 == depth) break;
+      if (loopIndex == depth) break;
       local_160 = local_160 + dstSliceBytes;
       local_170 = local_170 + srcImageBytes;
       iVar24 = srcImageBytes;
@@ -5654,13 +5667,13 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
     goto LAB_0002e240;
   }
   iVar17 = _gleComponents((uint)*(ushort *)(textureLevel + 0x10));
-  iVar21 = _glePixelBytes((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12));
+  pixelBytes = _glePixelBytes((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12));
   dstSlice = (uint *)(*(int *)(textureLevel + 0x14) +
-                    iVar21 * ((uint)*(ushort *)(textureLevel + 4) *
+                    pixelBytes * ((uint)*(ushort *)(textureLevel + 4) *
                               ((uint)*(ushort *)(textureLevel + 6) * zoffset + yoffset) + xoffset));
-  iVar21 = _gleRowBytes((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12),
+  rowBytes = _gleRowBytes((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12),
                         (uint)*(ushort *)(textureLevel + 4));
-  dstSliceBytes = iVar21 * (uint)*(ushort *)(textureLevel + 6);
+  dstSliceBytes = rowBytes * (uint)*(ushort *)(textureLevel + 6);
   _glePixelPackSettings
             (glContext,format,type,width,height,param_12,&srcPixelStride,&srcOffset,&srcRowBytes,
              &srcRowPad,&srcImageBytes,&srcImagePad);
@@ -5728,7 +5741,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -5787,7 +5800,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               rowsLeft = rowsLeft - 1;
               srcPixel = srcPixel + srcRowPad;
-              dstRow = (uint *)((int)dstRow + iVar21);
+              dstRow = (uint *)((int)dstRow + rowBytes);
             } while (rowsLeft != 0);
           }
           depth = depth - 1;
@@ -5828,7 +5841,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -5899,7 +5912,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -5937,7 +5950,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -5977,7 +5990,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -6015,7 +6028,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -6087,7 +6100,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -6134,7 +6147,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -6178,7 +6191,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -6252,7 +6265,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -6293,7 +6306,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -6375,7 +6388,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         }
                         rowsLeft = rowsLeft - 1;
                         srcPixel = srcPixel + srcRowPad;
-                        dstRow = (uint *)((int)dstRow + iVar21);
+                        dstRow = (uint *)((int)dstRow + rowBytes);
                       } while (rowsLeft != 0);
                     }
                     depth = depth - 1;
@@ -6417,7 +6430,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         }
                         rowsLeft = rowsLeft - 1;
                         srcPixel = srcPixel + srcRowPad;
-                        dstRow = (uint *)((int)dstRow + iVar21);
+                        dstRow = (uint *)((int)dstRow + rowBytes);
                       } while (rowsLeft != 0);
                     }
                     depth = depth - 1;
@@ -6487,7 +6500,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         }
                         rowsLeft = rowsLeft - 1;
                         srcPixel = srcPixel + srcRowPad;
-                        dstRow = (uint *)((int)dstRow + iVar21);
+                        dstRow = (uint *)((int)dstRow + rowBytes);
                       } while (rowsLeft != 0);
                     }
                     depth = depth - 1;
@@ -6530,7 +6543,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -6571,7 +6584,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         }
                         rowsLeft = rowsLeft - 1;
                         srcPixel = srcPixel + srcRowPad;
-                        dstRow = (uint *)((int)dstRow + iVar21);
+                        dstRow = (uint *)((int)dstRow + rowBytes);
                       } while (rowsLeft != 0);
                     }
                     depth = depth - 1;
@@ -6643,7 +6656,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         }
                         rowsLeft = rowsLeft - 1;
                         srcPixel = srcPixel + srcRowPad;
-                        dstRow = (uint *)((int)dstRow + iVar21);
+                        dstRow = (uint *)((int)dstRow + rowBytes);
                       } while (rowsLeft != 0);
                     }
                     depth = depth - 1;
@@ -6713,7 +6726,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         }
                         rowsLeft = rowsLeft - 1;
                         srcPixel = srcPixel + srcRowPad;
-                        dstRow = (uint *)((int)dstRow + iVar21);
+                        dstRow = (uint *)((int)dstRow + rowBytes);
                       } while (rowsLeft != 0);
                     }
                     depth = depth - 1;
@@ -6799,7 +6812,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -6845,7 +6858,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -6889,7 +6902,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -6955,7 +6968,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     } while (columnsLeft != 0);
                   }
                   rowsLeft = rowsLeft - 1;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                   srcPixel = srcPixel + srcRowPad;
                 } while (rowsLeft != 0);
               }
@@ -7016,7 +7029,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     } while (columnsLeft != 0);
                   }
                   rowsLeft = rowsLeft - 1;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                   srcPixel = srcPixel + srcRowPad;
                 } while (rowsLeft != 0);
               }
@@ -7075,7 +7088,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -7132,7 +7145,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -7205,7 +7218,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -7246,7 +7259,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -7332,7 +7345,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         }
                         rowsLeft = rowsLeft - 1;
                         srcPixel = srcPixel + srcRowPad;
-                        dstRow = (uint *)((int)dstRow + iVar21);
+                        dstRow = (uint *)((int)dstRow + rowBytes);
                       } while (rowsLeft != 0);
                     }
                     depth = depth - 1;
@@ -7374,7 +7387,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         }
                         rowsLeft = rowsLeft - 1;
                         srcPixel = srcPixel + srcRowPad;
-                        dstRow = (uint *)((int)dstRow + iVar21);
+                        dstRow = (uint *)((int)dstRow + rowBytes);
                       } while (rowsLeft != 0);
                     }
                     depth = depth - 1;
@@ -7444,7 +7457,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         }
                         rowsLeft = rowsLeft - 1;
                         srcPixel = srcPixel + srcRowPad;
-                        dstRow = (uint *)((int)dstRow + iVar21);
+                        dstRow = (uint *)((int)dstRow + rowBytes);
                       } while (rowsLeft != 0);
                     }
                     depth = depth - 1;
@@ -7487,7 +7500,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -7528,7 +7541,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         }
                         rowsLeft = rowsLeft - 1;
                         srcPixel = srcPixel + srcRowPad;
-                        dstRow = (uint *)((int)dstRow + iVar21);
+                        dstRow = (uint *)((int)dstRow + rowBytes);
                       } while (rowsLeft != 0);
                     }
                     depth = depth - 1;
@@ -7600,7 +7613,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         }
                         rowsLeft = rowsLeft - 1;
                         srcPixel = srcPixel + srcRowPad;
-                        dstRow = (uint *)((int)dstRow + iVar21);
+                        dstRow = (uint *)((int)dstRow + rowBytes);
                       } while (rowsLeft != 0);
                     }
                     depth = depth - 1;
@@ -7670,7 +7683,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                         }
                         rowsLeft = rowsLeft - 1;
                         srcPixel = srcPixel + srcRowPad;
-                        dstRow = (uint *)((int)dstRow + iVar21);
+                        dstRow = (uint *)((int)dstRow + rowBytes);
                       } while (rowsLeft != 0);
                     }
                     depth = depth - 1;
@@ -7756,7 +7769,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -7818,7 +7831,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -7909,7 +7922,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -7955,7 +7968,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               rowsLeft = rowsLeft - 1;
               srcPixel = srcPixel + srcRowPad;
-              dstRow = (uint *)((int)dstRow + iVar21);
+              dstRow = (uint *)((int)dstRow + rowBytes);
             } while (rowsLeft != 0);
           }
           depth = depth - 1;
@@ -7999,7 +8012,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
             rowsLeft = rowsLeft - 1;
             srcPixel = srcPixel + srcRowPad;
-            dstRow = (uint *)((int)dstRow + iVar21);
+            dstRow = (uint *)((int)dstRow + rowBytes);
           } while (rowsLeft != 0);
         }
         depth = depth - 1;
@@ -8059,7 +8072,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               rowsLeft = rowsLeft - 1;
               srcPixel = srcPixel + srcRowPad;
-              dstRow = (uint *)((int)dstRow + iVar21);
+              dstRow = (uint *)((int)dstRow + rowBytes);
             } while (rowsLeft != 0);
           }
           depth = depth - 1;
@@ -8115,7 +8128,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
             rowsLeft = rowsLeft - 1;
             srcPixel = srcPixel + srcRowPad;
-            dstRow = (uint *)((int)dstRow + iVar21);
+            dstRow = (uint *)((int)dstRow + rowBytes);
           } while (rowsLeft != 0);
         }
         depth = depth - 1;
@@ -8155,7 +8168,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -8225,7 +8238,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -8262,7 +8275,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -8301,7 +8314,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -8338,7 +8351,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -8406,7 +8419,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               rowsLeft = rowsLeft - 1;
               srcPixel = srcPixel + srcRowPad;
-              dstRow = (uint *)((int)dstRow + iVar21);
+              dstRow = (uint *)((int)dstRow + rowBytes);
             } while (rowsLeft != 0);
           }
           depth = depth - 1;
@@ -8449,7 +8462,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -8481,7 +8494,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -8526,7 +8539,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -8568,7 +8581,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -8641,7 +8654,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -8722,7 +8735,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -8807,7 +8820,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -8848,7 +8861,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -8887,7 +8900,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -8929,7 +8942,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -8999,7 +9012,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -9038,7 +9051,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -9109,7 +9122,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -9178,7 +9191,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -9259,7 +9272,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -9304,7 +9317,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -9346,7 +9359,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -9408,7 +9421,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -9464,7 +9477,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -9521,7 +9534,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -9577,7 +9590,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               rowsLeft = rowsLeft - 1;
               srcPixel = srcPixel + srcRowPad;
-              dstRow = (uint *)((int)dstRow + iVar21);
+              dstRow = (uint *)((int)dstRow + rowBytes);
             } while (rowsLeft != 0);
           }
           depth = depth - 1;
@@ -9649,7 +9662,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                   }
                   rowsLeft = rowsLeft - 1;
                   srcPixel = srcPixel + srcRowPad;
-                  dstRow = (uint *)((int)dstRow + iVar21);
+                  dstRow = (uint *)((int)dstRow + rowBytes);
                 } while (rowsLeft != 0);
               }
               depth = depth - 1;
@@ -9689,7 +9702,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -9758,7 +9771,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -9797,7 +9810,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -9838,7 +9851,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                     }
                     rowsLeft = rowsLeft - 1;
                     srcPixel = srcPixel + srcRowPad;
-                    dstRow = (uint *)((int)dstRow + iVar21);
+                    dstRow = (uint *)((int)dstRow + rowBytes);
                   } while (rowsLeft != 0);
                 }
                 depth = depth - 1;
@@ -9878,7 +9891,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -9949,7 +9962,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -10018,7 +10031,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                       }
                       rowsLeft = rowsLeft - 1;
                       srcPixel = srcPixel + srcRowPad;
-                      dstRow = (uint *)((int)dstRow + iVar21);
+                      dstRow = (uint *)((int)dstRow + rowBytes);
                     } while (rowsLeft != 0);
                   }
                   depth = depth - 1;
@@ -10099,7 +10112,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -10160,7 +10173,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
                 }
                 rowsLeft = rowsLeft - 1;
                 srcPixel = srcPixel + srcRowPad;
-                dstRow = (uint *)((int)dstRow + iVar21);
+                dstRow = (uint *)((int)dstRow + rowBytes);
               } while (rowsLeft != 0);
             }
             depth = depth - 1;
@@ -10250,7 +10263,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
               }
               rowsLeft = rowsLeft - 1;
               srcPixel = srcPixel + srcRowPad;
-              dstRow = (uint *)((int)dstRow + iVar21);
+              dstRow = (uint *)((int)dstRow + rowBytes);
             } while (rowsLeft != 0);
           }
           depth = depth - 1;
@@ -10295,7 +10308,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
             }
             rowsLeft = rowsLeft - 1;
             srcPixel = srcPixel + srcRowPad;
-            dstRow = (uint *)((int)dstRow + iVar21);
+            dstRow = (uint *)((int)dstRow + rowBytes);
           } while (rowsLeft != 0);
         }
         depth = depth - 1;
@@ -10337,7 +10350,7 @@ void _gleTextureImagePut_Slow(glContext, textureLevel, xoffset, yoffset, zoffset
           }
           rowsLeft = rowsLeft - 1;
           srcPixel = srcPixel + srcRowPad;
-          dstRow = (uint *)((int)dstRow + iVar21);
+          dstRow = (uint *)((int)dstRow + rowBytes);
         } while (rowsLeft != 0);
       }
       depth = depth - 1;

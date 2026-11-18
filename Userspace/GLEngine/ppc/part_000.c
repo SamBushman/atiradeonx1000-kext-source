@@ -398,7 +398,7 @@ void _glePreInitGlobals()
   float fVar2;
   undefined *puVar3;
   uint uVar4;
-  float *pfVar5;
+  float *dstCursor;
   undefined1 *cursor;
   uint loopIndex;
   int remaining;
@@ -408,12 +408,12 @@ void _glePreInitGlobals()
   intToDoubleMagic = DOUBLE_00108d58;
   loopIndex = 0;
   remaining = 0x100;
-  pfVar5 = (float *)PTR__gle_globals_struct_00112070;
+  dstCursor = (float *)PTR__gle_globals_struct_00112070;
   do {
     uVar4 = loopIndex ^ 0x80000000;
     loopIndex = loopIndex + 1;
-    *pfVar5 = (float)((double)CONCAT44(0x43300000,uVar4) - intToDoubleMagic) * fVar2;
-    pfVar5 = pfVar5 + 1;
+    *dstCursor = (float)((double)CONCAT44(0x43300000,uVar4) - intToDoubleMagic) * fVar2;
+    dstCursor = dstCursor + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
   puVar3[0x404] = 3;
@@ -1670,23 +1670,23 @@ int _gleInitializeContext(glContext)
   int remaining2;
   int remaining;
   undefined *puVar1;
-  undefined4 *puVar2;
-  undefined2 *puVar3;
+  undefined4 *dstCursor;
+  undefined2 *dstCursor2;
   int iVar4;
   int iVar5;
   
   remaining = 0x13;
   *(undefined4 *)(glContext + 0x4730) = 0;
   *(undefined4 *)(glContext + 0x471c) = 0;
-  puVar2 = (undefined4 *)(glContext + 0x310);
+  dstCursor = (undefined4 *)(glContext + 0x310);
   *(undefined4 *)(glContext + 0x4720) = 0;
   *(undefined4 *)(glContext + 0x4724) = 0;
   *(undefined4 *)(glContext + 0x4728) = 0;
   *(undefined4 *)(glContext + 0x472c) = 0;
   do {
-    *puVar2 = 0;
+    *dstCursor = 0;
     puVar1 = PTR__gle_globals_struct_00112070;
-    puVar2 = puVar2 + 1;
+    dstCursor = dstCursor + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
   *(undefined1 *)(glContext + 0x7582) = *(undefined1 *)(*(int *)(glContext + 0x468c) + 0x25);
@@ -1720,13 +1720,13 @@ int _gleInitializeContext(glContext)
         remaining2 = 3;
         *(int *)(glContext + 0x337c) = glContext + 0x4734;
         *(undefined2 *)(glContext + 0x311a) = *(undefined2 *)(glContext + 0x3118);
-        puVar3 = (undefined2 *)(glContext + 0x311c);
+        dstCursor2 = (undefined2 *)(glContext + 0x311c);
         *(undefined1 *)(glContext + 0x4694) = 0;
         *(undefined1 *)(glContext + 0x4691) = 0;
         *(undefined1 *)(glContext + 0x4693) = 0;
         do {
-          *puVar3 = 0;
-          puVar3 = puVar3 + 1;
+          *dstCursor2 = 0;
+          dstCursor2 = dstCursor2 + 1;
           remaining2 = remaining2 + -1;
         } while (remaining2 != 0);
         ((void (*)())_gleInitGLDState)(glContext + 0x360);
@@ -1762,19 +1762,19 @@ void _gleNullMemoryPointers(glContext)
   int loopIndex;
   int remaining2;
   int remaining;
-  undefined4 *puVar1;
+  undefined4 *dstCursor;
   int iVar2;
   int loopIndex2;
   int remaining5;
   
-  puVar1 = (undefined4 *)(glContext + 0x4dd0);
+  dstCursor = (undefined4 *)(glContext + 0x4dd0);
   *(undefined4 *)(glContext + 0x4854) = 0;
   remaining = 1;
   *(undefined4 *)(glContext + 0x4678) = 0;
   do {
     remaining = remaining + -1;
-    *puVar1 = 0;
-    puVar1 = puVar1 + 1;
+    *dstCursor = 0;
+    dstCursor = dstCursor + 1;
   } while (-1 < remaining);
   *(undefined4 *)(glContext + 0x5418) = 0;
   *(undefined4 *)(glContext + 0x4dd8) = 0;
@@ -1815,21 +1815,21 @@ void _gleNullMemoryPointers(glContext)
   *(undefined4 *)(glContext + 0x4a64) = 0;
   iVar2 = glContext;
   do {
-    puVar1 = (undefined4 *)(iVar2 + 0x5154);
+    dstCursor = (undefined4 *)(iVar2 + 0x5154);
     remaining5 = 5;
     do {
-      *puVar1 = 0;
-      puVar1 = puVar1 + 1;
+      *dstCursor = 0;
+      dstCursor = dstCursor + 1;
       remaining5 = remaining5 + -1;
     } while (remaining5 != 0);
     loopIndex3 = loopIndex3 + 1;
     iVar2 = iVar2 + 0x14;
   } while (loopIndex3 < 0x10);
   remaining2 = 0x10;
-  puVar1 = (undefined4 *)(glContext + 0x52d4);
+  dstCursor = (undefined4 *)(glContext + 0x52d4);
   do {
-    *puVar1 = 0;
-    puVar1 = puVar1 + 1;
+    *dstCursor = 0;
+    dstCursor = dstCursor + 1;
     remaining2 = remaining2 + -1;
   } while (remaining2 != 0);
   remaining3 = 3;
@@ -1853,11 +1853,11 @@ void _gleNullMemoryPointers(glContext)
   *(undefined4 *)(glContext + 0x48f4) = 0;
   *(undefined4 *)(glContext + 0x7448) = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
-    puVar1 = (undefined4 *)(glContext + 0x8880);
+    dstCursor = (undefined4 *)(glContext + 0x8880);
     do {
-      *puVar1 = 0;
+      *dstCursor = 0;
       loopIndex = loopIndex + 1;
-      puVar1 = puVar1 + 0xb8;
+      dstCursor = dstCursor + 0xb8;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
     return;
   }
@@ -1869,8 +1869,8 @@ int _gleAllocVertexMachine(glContext, param_2)
   int glContext;
   int param_2;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 glContextWord24;
+  undefined4 glContextWord20;
   int iVar3;
   uint uVar4;
   int iVar5;
@@ -1893,15 +1893,15 @@ int _gleAllocVertexMachine(glContext, param_2)
   *(int *)(glContext + 0x4854) = iVar3;
   *(int *)(glContext + 0x4860) = iVar7;
   *(int *)(glContext + 0x4870) = iVar5;
-  uVar1 = *(undefined4 *)(glContext + 0x24);
-  uVar2 = *(undefined4 *)(glContext + 0x20);
+  glContextWord24 = *(undefined4 *)(glContext + 0x24);
+  glContextWord20 = *(undefined4 *)(glContext + 0x20);
   if (uVar4 < uVar6) {
     uVar6 = (uVar6 - uVar4) + 0xff >> 8;
     do {
-      *(undefined4 *)(uVar4 + 0x20) = uVar2;
-      *(undefined4 *)(uVar4 + 0x24) = uVar2;
-      *(undefined4 *)(uVar4 + 0x28) = uVar2;
-      *(undefined4 *)(uVar4 + 0x2c) = uVar1;
+      *(undefined4 *)(uVar4 + 0x20) = glContextWord20;
+      *(undefined4 *)(uVar4 + 0x24) = glContextWord20;
+      *(undefined4 *)(uVar4 + 0x28) = glContextWord20;
+      *(undefined4 *)(uVar4 + 0x2c) = glContextWord24;
       uVar4 = uVar4 + 0x100;
       uVar6 = uVar6 - 1;
     } while (uVar6 != 0);
@@ -1915,16 +1915,16 @@ int _gleAllocMaterials(glContext)
 {
   int remaining;
   int iVar2;
-  int *piVar3;
+  int *dstCursor;
   
-  piVar3 = (int *)(glContext + 0x4dd0);
+  dstCursor = (int *)(glContext + 0x4dd0);
   iVar2 = glContext + 0x2c20;
   remaining = 1;
   do {
     remaining = remaining + -1;
-    *piVar3 = iVar2;
+    *dstCursor = iVar2;
     *(undefined4 *)(iVar2 + 0x238) = 0;
-    piVar3 = piVar3 + 1;
+    dstCursor = dstCursor + 1;
     *(undefined4 *)(iVar2 + 0x23c) = 0;
     *(undefined4 *)(iVar2 + 0x1e0) = 0;
     iVar2 = iVar2 + 0x240;
@@ -2165,9 +2165,9 @@ void _gleInitGLDState(glContext)
   float fVar2;
   undefined2 uVar3;
   undefined2 *puVar4;
-  undefined1 *puVar5;
+  undefined1 *dstCursor;
   int iVar6;
-  undefined4 *puVar7;
+  undefined4 *dstCursor2;
   int iVar8;
   int iVar9;
   int iVar10;
@@ -2374,7 +2374,7 @@ void _gleInitGLDState(glContext)
   *(undefined4 *)(glContext + 0x2f7c) = 0;
   *(undefined4 *)(glContext + 0x2f80) = 0;
   *(undefined4 *)(glContext + 0x2f84) = 0;
-  puVar7 = (undefined4 *)(glContext + 0x30e8);
+  dstCursor2 = (undefined4 *)(glContext + 0x30e8);
   *(undefined2 *)(glContext + 0x2fe8) = 0x8016;
   *(undefined2 *)(glContext + 0x2f6a) = 0x1908;
   *(undefined2 *)(glContext + 0x2faa) = 0x1908;
@@ -2431,8 +2431,8 @@ void _gleInitGLDState(glContext)
   *(undefined4 *)(glContext + 0x30d8) = 0x3f800000;
   *(undefined4 *)(glContext + 0x30e4) = 0;
   do {
-    *puVar7 = 0xffffffff;
-    puVar7 = puVar7 + 1;
+    *dstCursor2 = 0xffffffff;
+    dstCursor2 = dstCursor2 + 1;
     remaining10 = remaining10 + -1;
   } while (remaining10 != 0);
   *(undefined2 *)(glContext + 0x3174) = 0x901;
@@ -2765,7 +2765,7 @@ void _gleInitGLDState(glContext)
   *(undefined2 *)(glContext + 0x42f6) = 0x1906;
   remaining11 = 1;
   *(undefined2 *)(glContext + 0x42d4) = 0xb60;
-  puVar5 = (undefined1 *)(glContext + 0x4304);
+  dstCursor = (undefined1 *)(glContext + 0x4304);
   *(undefined2 *)(glContext + 0x42f4) = 0x852e;
   *(undefined1 *)(glContext + 0x42fc) = 0;
   *(undefined2 *)(glContext + 0x42c6) = 0x1906;
@@ -2775,8 +2775,8 @@ void _gleInitGLDState(glContext)
   *(undefined2 *)(glContext + 0x42ec) = 0;
   do {
     remaining11 = remaining11 + -1;
-    *puVar5 = 0;
-    puVar5 = puVar5 + 8;
+    *dstCursor = 0;
+    dstCursor = dstCursor + 8;
   } while (-1 < remaining11);
   remaining7 = 0x100;
   *(undefined1 *)(glContext + 0x4306) = 0;
@@ -2841,9 +2841,10 @@ void _gleInitGLIState(glContext)
   int remaining;
   undefined1 uVar1;
   float float257;
-  undefined4 *puVar3;
+  undefined4 *dstCursor;
   int iVar4;
   int iVar5;
+  int glContextPtr4854;
   int remaining4;
   
   loopIndex = 0;
@@ -2853,9 +2854,9 @@ void _gleInitGLIState(glContext)
     ((int (*)())_gleMakeIdentityMatrix)(*(int *)(glContext + 0x4678) + iVar4);
     float257 = FLOAT_00108e5c;
   } while (loopIndex < 0xcb);
-  iVar5 = *(int *)(glContext + 0x4854);
+  glContextPtr4854 = *(int *)(glContext + 0x4854);
   *(undefined4 *)(glContext + 0x5144) = 0;
-  iVar4 = iVar5 + -0x200;
+  iVar4 = glContextPtr4854 + -0x200;
   *(undefined4 *)(glContext + 0x50fc) = 0;
   *(float *)(glContext + 700) = float257;
   *(undefined4 *)(glContext + 0x2c0) = 0;
@@ -2873,11 +2874,11 @@ void _gleInitGLIState(glContext)
   *(undefined4 *)(glContext + 0x2a0) = 0x3f800000;
   *(undefined4 *)(glContext + 0x2a4) = 0x3f800000;
   *(undefined4 *)(glContext + 0x2a8) = 0x3f800000;
-  *(undefined4 *)(iVar5 + -0x1d0) = 0x3f800000;
-  *(undefined4 *)(iVar5 + -500) = 0x3f800000;
-  *(undefined4 *)(iVar5 + -0x1cc) = 0x3f800000;
-  *(undefined4 *)(iVar5 + -0x1c8) = 0x3f800000;
-  *(undefined4 *)(iVar5 + -0x1c4) = 0x3f800000;
+  *(undefined4 *)(glContextPtr4854 + -0x1d0) = 0x3f800000;
+  *(undefined4 *)(glContextPtr4854 + -500) = 0x3f800000;
+  *(undefined4 *)(glContextPtr4854 + -0x1cc) = 0x3f800000;
+  *(undefined4 *)(glContextPtr4854 + -0x1c8) = 0x3f800000;
+  *(undefined4 *)(glContextPtr4854 + -0x1c4) = 0x3f800000;
   iVar5 = glContext;
   do {
     *(undefined4 *)(iVar5 + 0x120) = 0;
@@ -2904,11 +2905,11 @@ void _gleInitGLIState(glContext)
   } while (remaining != 0);
   *(undefined4 *)(glContext + 0x2d0) = 0x3f800000;
   remaining2 = 3;
-  puVar3 = (undefined4 *)(glContext + 0x2d4);
+  dstCursor = (undefined4 *)(glContext + 0x2d4);
   do {
-    *puVar3 = 0;
+    *dstCursor = 0;
     float257 = FLOAT_00108e5c;
-    puVar3 = puVar3 + 1;
+    dstCursor = dstCursor + 1;
     remaining2 = remaining2 + -1;
   } while (remaining2 != 0);
   *(undefined1 *)(glContext + 0x2ef) = 1;
@@ -2957,7 +2958,7 @@ void _gleInitGLIState(glContext)
   *(undefined4 *)(glContext + 0x4fd8) = 0x600;
   *(undefined4 *)(glContext + 0x4ff4) = 4;
   *(undefined4 *)(glContext + 0x754c) = 1;
-  puVar3 = (undefined4 *)(glContext + 0x4ffc);
+  dstCursor = (undefined4 *)(glContext + 0x4ffc);
   *(undefined4 *)(glContext + 0x505c) = 0;
   remaining3 = 0x18;
   *(undefined **)(glContext + 0x5080) = ((unsigned char *)0x00001100U);
@@ -2968,8 +2969,8 @@ void _gleInitGLIState(glContext)
   *(undefined1 *)(glContext + 0x4df8) = 0;
   *(undefined **)(glContext + 0x507c) = ((unsigned char *)0x00001100U);
   do {
-    *puVar3 = 0;
-    puVar3 = puVar3 + 1;
+    *dstCursor = 0;
+    dstCursor = dstCursor + 1;
     remaining3 = remaining3 + -1;
   } while (remaining3 != 0);
   *(undefined4 *)(glContext + 0x4e1c) = 0x1c00;
@@ -3012,37 +3013,38 @@ void _gleInitDerivedState(glContext)
   undefined *puVar2;
   undefined *puVar3;
   int iVar4;
-  undefined1 *puVar5;
+  undefined1 *dstCursor;
   int iVar6;
-  int *piVar7;
+  int glContextPtr4854;
+  int *srcCursor;
   
-  iVar6 = *(int *)(glContext + 0x4854);
+  glContextPtr4854 = *(int *)(glContext + 0x4854);
   *(int *)(glContext + 0x5140) = glContext + 0x5100;
   *(int *)(glContext + 0x50f8) = glContext + 0x50b8;
-  piVar7 = (int *)(glContext + 0x4dd0);
+  srcCursor = (int *)(glContext + 0x4dd0);
   *(undefined1 *)(glContext + 0x4e18) = 0;
   remaining = 1;
   *(undefined1 *)(glContext + 0x2ed) = 0;
   *(undefined1 *)(glContext + 0x2ee) = 6;
-  *(undefined1 *)(iVar6 + -0x181) = 0;
-  *(undefined4 *)(iVar6 + -0x200) = 0;
-  *(undefined1 *)(iVar6 + -0x182) = 6;
-  *(undefined1 *)(iVar6 + -0x184) = 0;
-  *(undefined4 *)(iVar6 + -0x1e0) = 0;
-  *(undefined4 *)(iVar6 + -0x1dc) = 0;
-  *(undefined4 *)(iVar6 + -0x1d8) = 0;
-  *(undefined4 *)(iVar6 + -0x1d4) = 0x3f800000;
-  *(undefined4 *)(iVar6 + -0x1f0) = 0;
-  *(undefined4 *)(iVar6 + -0x1ec) = 0;
-  *(undefined4 *)(iVar6 + -0x1e8) = 0;
-  *(undefined4 *)(iVar6 + -0x1e4) = 0x3f800000;
-  *(undefined4 *)(iVar6 + -0x1fc) = 0;
-  *(undefined4 *)(iVar6 + -0x1f8) = 0;
-  *(undefined4 *)(iVar6 + -0x1c0) = 0;
-  *(undefined4 *)(iVar6 + -0x1bc) = 0;
-  *(undefined4 *)(iVar6 + -0x1b8) = 0x3f800000;
-  *(undefined4 *)(iVar6 + -0x1b4) = 0x3f800000;
-  *(undefined1 *)(iVar6 + -0x183) = 1;
+  *(undefined1 *)(glContextPtr4854 + -0x181) = 0;
+  *(undefined4 *)(glContextPtr4854 + -0x200) = 0;
+  *(undefined1 *)(glContextPtr4854 + -0x182) = 6;
+  *(undefined1 *)(glContextPtr4854 + -0x184) = 0;
+  *(undefined4 *)(glContextPtr4854 + -0x1e0) = 0;
+  *(undefined4 *)(glContextPtr4854 + -0x1dc) = 0;
+  *(undefined4 *)(glContextPtr4854 + -0x1d8) = 0;
+  *(undefined4 *)(glContextPtr4854 + -0x1d4) = 0x3f800000;
+  *(undefined4 *)(glContextPtr4854 + -0x1f0) = 0;
+  *(undefined4 *)(glContextPtr4854 + -0x1ec) = 0;
+  *(undefined4 *)(glContextPtr4854 + -0x1e8) = 0;
+  *(undefined4 *)(glContextPtr4854 + -0x1e4) = 0x3f800000;
+  *(undefined4 *)(glContextPtr4854 + -0x1fc) = 0;
+  *(undefined4 *)(glContextPtr4854 + -0x1f8) = 0;
+  *(undefined4 *)(glContextPtr4854 + -0x1c0) = 0;
+  *(undefined4 *)(glContextPtr4854 + -0x1bc) = 0;
+  *(undefined4 *)(glContextPtr4854 + -0x1b8) = 0x3f800000;
+  *(undefined4 *)(glContextPtr4854 + -0x1b4) = 0x3f800000;
+  *(undefined1 *)(glContextPtr4854 + -0x183) = 1;
   *(undefined1 *)(glContext + 0x5410) = 1;
   *(undefined4 *)(glContext + 0x540c) = 0;
   *(undefined4 *)(glContext + 0x53e8) = 0;
@@ -3057,8 +3059,8 @@ void _gleInitDerivedState(glContext)
   *(undefined1 *)(glContext + 0x4fdc) = 0;
   do {
     remaining = remaining + -1;
-    iVar6 = *piVar7;
-    piVar7 = piVar7 + 1;
+    iVar6 = *srcCursor;
+    srcCursor = srcCursor + 1;
     *(undefined4 *)(iVar6 + 500) = 0xbf800000;
     *(undefined1 *)(iVar6 + 0x234) = 0x1f;
     *(undefined1 *)(iVar6 + 0x235) = 0;
@@ -3096,7 +3098,7 @@ void _gleInitDerivedState(glContext)
   remaining2 = 8;
   *(undefined2 *)(glContext + 0x4a12) = 0xffff;
   *(undefined1 *)(glContext + 0x4fe3) = 2;
-  puVar5 = (undefined1 *)(glContext + 0x531c);
+  dstCursor = (undefined1 *)(glContext + 0x531c);
   *(undefined4 *)(glContext + 0x50ac) = 0xffffffff;
   *(undefined2 *)(glContext + 0x4a10) = 0xffff;
   *(int *)(glContext + 0x4fec) = glContext + 0x1cc0;
@@ -3104,11 +3106,11 @@ void _gleInitDerivedState(glContext)
   *(undefined1 *)(glContext + 0x4fe1) = 1;
   *(undefined1 *)(glContext + 0x4fe2) = 1;
   do {
-    *(undefined4 *)(puVar5 + -8) = 0;
-    *(undefined4 *)(puVar5 + -4) = 0;
-    *puVar5 = 0;
+    *(undefined4 *)(dstCursor + -8) = 0;
+    *(undefined4 *)(dstCursor + -4) = 0;
+    *dstCursor = 0;
     puVar2 = PTR__gleSetVertexEval2Func_00112068;
-    puVar5 = puVar5 + 0xc;
+    dstCursor = dstCursor + 0xc;
     remaining2 = remaining2 + -1;
   } while (remaining2 != 0);
   *(undefined **)(glContext + 0x4898) = PTR__gleSetVertexEval1Func_0011206c;
@@ -3177,43 +3179,43 @@ void _gleInitTextureState(glContext)
   int loopIndex2;
   int loopIndex;
   int remaining;
-  char cVar1;
+  char glContextByte85a4;
   undefined4 uVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  int *piVar6;
-  undefined4 *puVar7;
+  int *dstCursor;
+  undefined4 *srcCursor;
   int loopIndex5;
-  undefined4 *puVar9;
+  undefined4 *dstCursor2;
   uint loopIndex6;
-  int *piVar11;
+  int *dstCursor3;
   int iVar12;
   
   loopIndex6 = 0;
-  piVar11 = (int *)(glContext + 0x5294);
+  dstCursor3 = (int *)(glContext + 0x5294);
   iVar12 = glContext;
   do {
     iVar3 = ((int (*)())_gleCreateTextureObject)(loopIndex6 | 0x1000,0);
     ((void (*)())_gleCreatePluginTexture)(glContext,iVar3 + 0x10);
-    *piVar11 = iVar3;
+    *dstCursor3 = iVar3;
     iVar5 = loopIndex6 * 4 + glContext + 0x10000;
-    piVar6 = (int *)(iVar12 + 0x5154);
+    dstCursor = (int *)(iVar12 + 0x5154);
     remaining2 = 0xf;
     do {
-      cVar1 = *(char *)(glContext + 0x85a4);
+      glContextByte85a4 = *(char *)(glContext + 0x85a4);
       loopIndex5 = 0;
-      *piVar6 = iVar3;
-      piVar6 = piVar6 + 5;
-      if (cVar1 != '\0') {
-        puVar9 = (undefined4 *)(iVar5 + -0x7920);
-        puVar7 = (undefined4 *)(iVar3 + 0x10);
+      *dstCursor = iVar3;
+      dstCursor = dstCursor + 5;
+      if (glContextByte85a4 != '\0') {
+        dstCursor2 = (undefined4 *)(iVar5 + -0x7920);
+        srcCursor = (undefined4 *)(iVar3 + 0x10);
         do {
-          uVar2 = *puVar7;
+          uVar2 = *srcCursor;
           loopIndex5 = loopIndex5 + 1;
-          puVar7 = puVar7 + 1;
-          *puVar9 = uVar2;
-          puVar9 = puVar9 + 0xb8;
+          srcCursor = srcCursor + 1;
+          *dstCursor2 = uVar2;
+          dstCursor2 = dstCursor2 + 0xb8;
         } while (loopIndex5 < (int)(uint)*(byte *)(glContext + 0x85a4));
       }
       remaining2 = remaining2 + -1;
@@ -3221,43 +3223,43 @@ void _gleInitTextureState(glContext)
     } while (-1 < remaining2);
     loopIndex6 = loopIndex6 + 1;
     iVar12 = iVar12 + 4;
-    piVar11 = piVar11 + 1;
+    dstCursor3 = dstCursor3 + 1;
     *(int *)(iVar3 + 8) = *(int *)(iVar3 + 8) + 0x10;
   } while ((int)loopIndex6 < 5);
   loopIndex7 = 0;
-  piVar11 = (int *)(glContext + 0x52a8);
+  dstCursor3 = (int *)(glContext + 0x52a8);
   do {
     iVar12 = ((int (*)())_gleCreateTextureObject)(loopIndex7 | 0x1100,0);
     loopIndex7 = loopIndex7 + 1;
     ((void (*)())_gleCreatePluginTexture)(glContext,iVar12 + 0x10);
-    *piVar11 = iVar12;
-    piVar11 = piVar11 + 1;
+    *dstCursor3 = iVar12;
+    dstCursor3 = dstCursor3 + 1;
   } while ((int)loopIndex7 < 5);
   loopIndex = 0;
-  piVar11 = (int *)(glContext + 0x52bc);
+  dstCursor3 = (int *)(glContext + 0x52bc);
   iVar12 = glContext;
   do {
     iVar4 = ((int (*)())_gleCreateTextureObject)(loopIndex << 4 | 0x1204,0);
-    puVar7 = (undefined4 *)(iVar4 + 0x10);
-    ((void (*)())_gleCreatePluginTexture)(glContext,puVar7);
-    cVar1 = *(char *)(glContext + 0x85a4);
+    srcCursor = (undefined4 *)(iVar4 + 0x10);
+    ((void (*)())_gleCreatePluginTexture)(glContext,srcCursor);
+    glContextByte85a4 = *(char *)(glContext + 0x85a4);
     loopIndex3 = 0;
-    *piVar11 = iVar4;
-    piVar11 = piVar11 + 1;
-    if (cVar1 != '\0') {
-      puVar9 = (undefined4 *)(iVar12 + 0x8820);
+    *dstCursor3 = iVar4;
+    dstCursor3 = dstCursor3 + 1;
+    if (glContextByte85a4 != '\0') {
+      dstCursor2 = (undefined4 *)(iVar12 + 0x8820);
       do {
-        uVar2 = *puVar7;
+        uVar2 = *srcCursor;
         loopIndex3 = loopIndex3 + 1;
-        puVar7 = puVar7 + 1;
-        *puVar9 = uVar2;
-        puVar9 = puVar9 + 0xb8;
+        srcCursor = srcCursor + 1;
+        *dstCursor2 = uVar2;
+        dstCursor2 = dstCursor2 + 0xb8;
       } while (loopIndex3 < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
     loopIndex = loopIndex + 1;
     iVar12 = iVar12 + 4;
   } while (loopIndex < 3);
-  piVar11 = (int *)(glContext + 0x52c8);
+  dstCursor3 = (int *)(glContext + 0x52c8);
   loopIndex8 = 0;
   remaining = 2;
   do {
@@ -3265,28 +3267,28 @@ void _gleInitTextureState(glContext)
     loopIndex8 = loopIndex8 + 0x10;
     ((void (*)())_gleCreatePluginTexture)(glContext,iVar3 + 0x10);
     remaining = remaining + -1;
-    *piVar11 = iVar3;
-    piVar11 = piVar11 + 1;
+    *dstCursor3 = iVar3;
+    dstCursor3 = dstCursor3 + 1;
   } while (-1 < remaining);
   loopIndex2 = 0;
-  piVar11 = (int *)(glContext + 0x52d4);
+  dstCursor3 = (int *)(glContext + 0x52d4);
   iVar12 = glContext;
   do {
     iVar4 = ((int (*)())_gleCreateTextureObject)(((unsigned char *)0x00001204U),0);
-    puVar7 = (undefined4 *)(iVar4 + 0x10);
-    ((void (*)())_gleCreatePluginTexture)(glContext,puVar7);
-    cVar1 = *(char *)(glContext + 0x85a4);
+    srcCursor = (undefined4 *)(iVar4 + 0x10);
+    ((void (*)())_gleCreatePluginTexture)(glContext,srcCursor);
+    glContextByte85a4 = *(char *)(glContext + 0x85a4);
     loopIndex4 = 0;
-    *piVar11 = iVar4;
-    piVar11 = piVar11 + 1;
-    if (cVar1 != '\0') {
-      puVar9 = (undefined4 *)(iVar12 + 0x882c);
+    *dstCursor3 = iVar4;
+    dstCursor3 = dstCursor3 + 1;
+    if (glContextByte85a4 != '\0') {
+      dstCursor2 = (undefined4 *)(iVar12 + 0x882c);
       do {
-        uVar2 = *puVar7;
+        uVar2 = *srcCursor;
         loopIndex4 = loopIndex4 + 1;
-        puVar7 = puVar7 + 1;
-        *puVar9 = uVar2;
-        puVar9 = puVar9 + 0xb8;
+        srcCursor = srcCursor + 1;
+        *dstCursor2 = uVar2;
+        dstCursor2 = dstCursor2 + 0xb8;
       } while (loopIndex4 < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
     loopIndex2 = loopIndex2 + 1;
@@ -3548,21 +3550,21 @@ void _gleInitPipelineProgramState(glContext)
   uint *cursor2;
   int loopIndex4;
   int loopIndex2;
-  char cVar1;
-  byte bVar2;
+  char glContextByte85a42;
+  byte glContextByte85a4;
   undefined4 uVar3;
   uint uVar4;
   uint uVar5;
-  ushort *puVar6;
+  ushort *srcCursor;
   undefined1 *puVar7;
   int iVar8;
   uint *puVar9;
   uint *cursor;
-  undefined4 *puVar11;
+  undefined4 *srcCursor2;
   uint *cursor3;
   uint uVar13;
-  undefined4 *puVar14;
-  int iVar15;
+  undefined4 *dstCursor;
+  int sharedState;
   int iVar16;
   uint uVar17;
   int iVar18;
@@ -3571,7 +3573,7 @@ void _gleInitPipelineProgramState(glContext)
   int loopIndex3;
   uint loopIndex7;
   
-  iVar15 = *(int *)(glContext + 0x5148);
+  sharedState = *(int *)(glContext + 0x5148);
   puVar7 = (undefined1 *)_malloc(0x600);
   *puVar7 = 0;
   loopIndex = 0;
@@ -3583,18 +3585,18 @@ void _gleInitPipelineProgramState(glContext)
     loopIndex3 = 0;
     iVar8 = ((int (*)())_gleCreatePipelineProgramObject)(glContext,loopIndex,0);
     ((void (*)())_gleCreatePluginPipelineProgram)(glContext,iVar8 + 0x10);
-    cVar1 = *(char *)(glContext + 0x85a4);
+    glContextByte85a42 = *(char *)(glContext + 0x85a4);
     *(int *)(iVar18 + 0x5428) = iVar8;
     *(int *)(iVar18 + 0x5420) = iVar8;
-    if (cVar1 != '\0') {
-      puVar11 = (undefined4 *)(iVar8 + 0x4a8);
-      puVar14 = (undefined4 *)(iVar16 + 0x886c);
+    if (glContextByte85a42 != '\0') {
+      srcCursor2 = (undefined4 *)(iVar8 + 0x4a8);
+      dstCursor = (undefined4 *)(iVar16 + 0x886c);
       do {
-        uVar3 = *puVar11;
+        uVar3 = *srcCursor2;
         loopIndex3 = loopIndex3 + 1;
-        puVar11 = puVar11 + 1;
-        *puVar14 = uVar3;
-        puVar14 = puVar14 + 0xb8;
+        srcCursor2 = srcCursor2 + 1;
+        *dstCursor = uVar3;
+        dstCursor = dstCursor + 0xb8;
       } while (loopIndex3 < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
     loopIndex = loopIndex + 1;
@@ -3602,9 +3604,9 @@ void _gleInitPipelineProgramState(glContext)
     iVar18 = iVar18 + 4;
     *(int *)(iVar8 + 8) = *(int *)(iVar8 + 8) + 1;
   } while (loopIndex < 2);
-  iVar16 = iVar15 + 0x10000;
-  if (*(char *)(iVar15 + 0x8024) != '\0') {
-    _pthread_mutex_lock(iVar15 + 0x8028);
+  iVar16 = sharedState + 0x10000;
+  if (*(char *)(sharedState + 0x8024) != '\0') {
+    _pthread_mutex_lock(sharedState + 0x8028);
   }
   loopIndex2 = 0;
   iVar18 = glContext;
@@ -3618,15 +3620,15 @@ void _gleInitPipelineProgramState(glContext)
       if (loopIndex2 != 0) {
         uVar4 = 0x80;
       }
-      bVar2 = *(byte *)(glContext + 0x85a4);
+      glContextByte85a4 = *(byte *)(glContext + 0x85a4);
       loopIndex4 = 0;
       *puVar9 = uVar4;
-      if (bVar2 != 0) {
-        puVar6 = (ushort *)(iVar18 + 0x86a0);
+      if (glContextByte85a4 != 0) {
+        srcCursor = (ushort *)(iVar18 + 0x86a0);
         cursor = puVar9 + 1;
         do {
-          uVar4 = (uint)*puVar6;
-          puVar6 = puVar6 + 0x170;
+          uVar4 = (uint)*srcCursor;
+          srcCursor = srcCursor + 0x170;
           if (uVar4 != 0) {
             loopIndex5 = 0;
             cursor3 = puVar9;
@@ -3644,7 +3646,7 @@ void _gleInitPipelineProgramState(glContext)
             }
           }
           loopIndex4 = loopIndex4 + 1;
-        } while (loopIndex4 < (int)(uint)bVar2);
+        } while (loopIndex4 < (int)(uint)glContextByte85a4);
       }
       *(uint *)(iVar16 + -0x7564) = loopIndex7;
       allocatedBlock = _malloc(loopIndex7 << 2);
@@ -3672,8 +3674,8 @@ void _gleInitPipelineProgramState(glContext)
     iVar18 = iVar18 + 0x10;
     iVar16 = iVar16 + 0xa30;
     if (1 < loopIndex2) {
-      if (*(char *)(iVar15 + 0x8024) != '\0') {
-        _pthread_mutex_unlock(iVar15 + 0x8028);
+      if (*(char *)(sharedState + 0x8024) != '\0') {
+        _pthread_mutex_unlock(sharedState + 0x8028);
         return;
       }
       return;
@@ -3840,15 +3842,15 @@ void _gleInitShaderState(glContext)
 void _gleInitBufferState(glContext)
   int glContext;
 {
-  undefined4 *puVar1;
+  undefined4 *dstCursor;
   int remaining;
   
   remaining = 0x20;
   *(undefined4 *)(glContext + 0x48f4) = 0;
-  puVar1 = (undefined4 *)(glContext + 0x48f8);
+  dstCursor = (undefined4 *)(glContext + 0x48f8);
   do {
-    *puVar1 = 0;
-    puVar1 = puVar1 + 1;
+    *dstCursor = 0;
+    dstCursor = dstCursor + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
   *(undefined4 *)(glContext + 0x4a6c) = 0;
@@ -3874,24 +3876,24 @@ void _gleInitVertexArrayState(glContext)
 {
   undefined4 uVar1;
   int iVar2;
-  undefined4 *puVar3;
+  undefined4 *dstCursor;
   int loopIndex;
-  undefined4 *puVar5;
+  undefined4 *srcCursor;
   
   iVar2 = ((int (*)())_gleCreateVertexArrayObject)(glContext,0);
-  puVar5 = (undefined4 *)(iVar2 + 0x10);
-  ((void (*)())_gleCreatePluginVertexArray)(glContext,puVar5);
+  srcCursor = (undefined4 *)(iVar2 + 0x10);
+  ((void (*)())_gleCreatePluginVertexArray)(glContext,srcCursor);
   loopIndex = 0;
   *(int *)(glContext + 0x4a64) = iVar2;
   *(int *)(glContext + 0x4a60) = iVar2;
   if (*(char *)(glContext + 0x85a4) != '\0') {
-    puVar3 = (undefined4 *)(glContext + 0x8874);
+    dstCursor = (undefined4 *)(glContext + 0x8874);
     do {
-      uVar1 = *puVar5;
+      uVar1 = *srcCursor;
       loopIndex = loopIndex + 1;
-      puVar5 = puVar5 + 1;
-      *puVar3 = uVar1;
-      puVar3 = puVar3 + 0xb8;
+      srcCursor = srcCursor + 1;
+      *dstCursor = uVar1;
+      dstCursor = dstCursor + 0xb8;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   *(int *)(iVar2 + 8) = *(int *)(iVar2 + 8) + 1;
@@ -4028,14 +4030,14 @@ void _gleCreatePluginVertexArray(glContext, param_2)
 void _gleInitFenceMachine(glContext)
   int glContext;
 {
-  undefined4 *puVar1;
+  undefined4 *dstCursor;
   int remaining;
   
   remaining = 0x400;
-  puVar1 = (undefined4 *)(glContext + 0x543c);
+  dstCursor = (undefined4 *)(glContext + 0x543c);
   do {
-    *puVar1 = 0;
-    puVar1 = puVar1 + 1;
+    *dstCursor = 0;
+    dstCursor = dstCursor + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
   *(undefined4 *)(glContext + 0x643c) = 0;
@@ -4046,14 +4048,14 @@ void _gleInitFenceMachine(glContext)
 void _gleInitQueryMachine(glContext)
   int glContext;
 {
-  undefined4 *puVar1;
+  undefined4 *dstCursor;
   int remaining;
   
   remaining = 0x400;
-  puVar1 = (undefined4 *)(glContext + 0x6440);
+  dstCursor = (undefined4 *)(glContext + 0x6440);
   do {
-    *puVar1 = 0;
-    puVar1 = puVar1 + 1;
+    *dstCursor = 0;
+    dstCursor = dstCursor + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
   *(undefined4 *)(glContext + 0x7444) = 0;

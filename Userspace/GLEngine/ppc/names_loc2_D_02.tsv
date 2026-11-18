@@ -1,0 +1,792 @@
+local	_glePreInitGlobals	pfVar5	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitializeContext	puVar2	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitializeContext	puVar3	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleNullMemoryPointers	puVar1	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleAllocMaterials	piVar3	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitGLDState	puVar5	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitGLDState	puVar7	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitGLIState	puVar3	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitDerivedState	piVar7	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleInitDerivedState	puVar5	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitTextureState	piVar6	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitTextureState	puVar7	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleInitTextureState	puVar9	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitTextureState	piVar11	dstCursor3	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitPipelineProgramState	iVar15	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through
+local	_gleInitPipelineProgramState	puVar6	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleInitPipelineProgramState	puVar11	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleInitPipelineProgramState	puVar14	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitBufferState	puVar1	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitVertexArrayState	puVar3	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitVertexArrayState	puVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleInitFenceMachine	puVar1	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleInitQueryMachine	puVar1	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleUpdateLightExponents	pfVar7	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleUpdateLightExponents	puVar4	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleUpdateClipPlane	puVar2	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gliSetCurrentPluginDispatchTable	puVar2	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ \(char\ \*\)0x0;$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_imaging";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_point_parameters";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_texture_env_crossbar";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_texture_border_clamp";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_multitexture";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_texture_env_add";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_texture_cube_map";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_texture_env_dot3";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_multisample";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_texture_env_combine";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_texture_compression";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_texture_mirrored_repeat";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_shadow";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_depth_texture";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_shadow_ambient";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_fragment_program";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_fragment_shader";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_occlusion_query";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_point_sprite";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_texture_non_power_of_two";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_vertex_buffer_object";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_pixel_buffer_object";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ARB_draw_buffers";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_compiled_vertex_array";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_framebuffer_object";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_texture_rectangle\ GL_ARB_texture_rectangle";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_texture_env_add";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_blend_color";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_blend_minmax";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_blend_subtract";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_texture_lod_bias";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_abgr";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_bgra";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_stencil_wrap";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_texture_filter_anisotropic";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_paletted_texture";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_shared_texture_palette";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_separate_specular_color";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_secondary_color";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_blend_func_separate";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_shadow_funcs";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_stencil_two_side";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_depth_bounds_test";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_texture_compression_s3tc\ GL_EXT_texture_compression_dxt1";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_blend_equation_separate";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_EXT_texture_mirror_clamp";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_APPLE_ycbcr_422";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_APPLE_vertex_array_range";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_APPLE_texture_range";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_APPLE_float_pixels\ GL_ATI_texture_float";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_APPLE_pixel_buffer";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_point_sprite";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_register_combiners";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_register_combiners2";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_blend_square";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_texture_shader";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_texture_shader2";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_texture_shader3";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_fog_distance";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_depth_clamp";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_multisample_filter_hint";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_fragment_program_option";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_fragment_program2";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_vertex_program2_option";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_NV_vertex_program3";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ATI_point_cull_mode";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ATI_texture_mirror_once";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ATI_text_fragment_shader";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ATI_blend_equation_separate";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ATI_blend_weighted_minmax";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ATI_texture_env_combine3";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ATI_separate_stencil";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ATI_array_rev_comps_in_4_bytes";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ATI_pn_triangles";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ATI_texture_compression_3dc";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_ATIX_pn_triangles";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_SGIS_texture_edge_clamp";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_SGIS_texture_lod";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ "GL_SGI_color_matrix";$	+1
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*if\ \(pcVar5\ !=\ \(char\ \*\)0x0\)\ \{$	+2
+use	_glGetString_Exec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pcVar5\ =\ pcVar5\ \+\ 1;$@2	+2
+use	_glGetString_Exec	pcVar6	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*pcVar6\ =\ \(char\ \*\)\(param_1\ \+\ 0x759e\);$	+1
+use	_glGetString_Exec	pcVar6	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*pcVar6\ =\ cVar2;$	+2
+use	_glGetString_Exec	pcVar6	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*pcVar6\ =\ '\ ';$	+2
+use	_glGetString_Exec	pcVar6	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*pcVar6\ =\ cVar2;$@2	+2
+use	_glGetString_Exec	pcVar6	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*pcVar6\ =\ '\ ';$@2	+2
+use	_glGetString_Exec	pcVar6	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*pcVar6\ =\ '\\0';$	+1
+local	_gleDCBRealloc	iVar4	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero
+use	_gleDCBRealloc	iVar6	remaining2	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar6\ =\ iVar4\ \+\ \-1;$	+2
+use	_gleDCBRealloc	iVar6	remaining2	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar1\ =\ iVar6\ \*\ 4;$@2	+2
+local	_glGetIntegerv_Exec	iVar4	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero
+use	_gleGetState	iVar13	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*iVar13\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a60\);$	+1
+use	_gleGetState	iVar13	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*if\ \(\(\*\(uint\ \*\)\(iVar13\ \+\ 0x330\)\ \&\ \(uint\)\(\(ulonglong\)lVar15\ >>\ 0x20\)\)\ !=\ 0\ \|\|$	+2
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar13\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+2
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*piVar5\ =\ \(int\ \*\)\(iVar13\ \+\ 0xd4\);$	+1
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar3\ =\ iVar11\ \*\ 0x18\ \+\ iVar13;$	+2
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar13\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@2	+2
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\*\(int\ \*\)\(iVar13\ \+\ 0xe8\)\ ==\ 0\)\ goto\ LAB_00015450;$	+1
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 0xb0\);$	+1
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*\(\*\(int\ \*\)\(iVar13\ \+\ 0xe8\)\ \+\ 0x10\ \+\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a8\)\ \*\ 4\);$	+1
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 0xac\);$	+1
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar13\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@3	+2
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\*\(int\ \*\)\(iVar13\ \+\ 0xe4\)\ !=\ 0\)\ \{$	+1
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 0x98\);$	+1
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*\(\*\(int\ \*\)\(iVar13\ \+\ 0xe4\)\ \+\ 0x10\ \+\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a8\)\ \*\ 4\);$	+1
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 0x94\);$	+1
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar13\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@4	+2
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*piVar5\ =\ \(int\ \*\)\(iVar13\ \+\ 0xd4\);$@2	+1
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar3\ =\ iVar11\ \*\ 0x18\ \+\ iVar13;$@2	+2
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar13\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@5	+2
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*piVar5\ =\ \(int\ \*\)\(iVar13\ \+\ 0xd4\);$@3	+1
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar3\ =\ iVar11\ \*\ 0x18\ \+\ iVar13;$@3	+2
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar13\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@6	+2
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*piVar5\ =\ \(int\ \*\)\(iVar13\ \+\ 0xd4\);$@4	+1
+use	_gleGetState	iVar13	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar3\ =\ iVar11\ \*\ 0x18\ \+\ iVar13;$@4	+2
+local	_gleGetState	piVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glTexEnvfv_Exec	puVar9	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleBindTexture	puVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleBindTexture	puVar6	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleCreatePluginTextureLevel	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero
+local	_gleResetLevels	pbVar8	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleResetLevels	puVar11	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glBegin_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glBegin_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar5\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glBegin_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_gleBuildVertexFuncNO	iVar23	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar23\ =\ 0;$@2	+1
+use	_gleBuildVertexFuncNO	iVar23	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar23\ =\ iVar23\ \+\ 1;$@2	+2
+use	_gleBuildVertexFuncNO	iVar23	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*if\ \(iVar23\ ==\ iVar26\)\ \{$	+1
+use	_gleBuildVertexFuncNO	iVar26	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar26\ =\ \(\(int\)\(\*pbVar16\ \+\ 1\)\ >>\ 1\)\ \+\ 1;$	+2
+use	_gleBuildVertexFuncNO	iVar26	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar26\ =\ iVar26\ \+\ \-1;$	+1
+use	_gleBuildVertexFuncNO	iVar26	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*\}\ while\ \(iVar26\ !=\ 0\);$	+1
+use	_gleBuildVertexFuncNO	iVar26	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar26\ =\ uVar25\ \+\ 1;$	+1
+use	_gleBuildVertexFuncNO	iVar26	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*if\ \(\(iVar26\ !=\ 0\)\ \&\&\ \(uStack_d0\ ==\ piVar22\[3\]\)\)\ \{$	+1
+use	_gleBuildVertexFuncNO	iVar26	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*if\ \(iVar26\ <=\ iVar23\)\ break;$	+1
+use	_gleBuildVertexFuncNO	iVar26	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*if\ \(iVar23\ ==\ iVar26\)\ \{$	+1
+use	_gleBuildVertexFuncNO	iVar26	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*if\ \(iVar26\ !=\ 0\)\ \{$@2	+1
+use	_gleBuildVertexFuncNO	iVar26	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar26\ =\ iVar26\ \+\ \-1;$@2	+2
+use	_gleBuildVertexFuncNO	puVar8	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar8\ =\ \&uStack_d0;$	+1
+use	_gleBuildVertexFuncNO	puVar8	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar8\ =\ puVar8\ \+\ 1;$	+1
+use	_gleBuildVertexFuncNO	puVar8	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*\}\ while\ \(\*puVar8\ ==\ \*puVar15\);$	+1
+use	_gleBuildVertexFuncNO	puVar8	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*puVar8\ =\ \(uint\ \*\)\(iVar23\ \+\ 0xc\);$	+1
+use	_gleBuildVertexFuncNO	puVar8	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*puVar8\ =\ uVar6;$	+2
+use	_gleBuildVertexFuncNO	puVar15	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar15\ =\ \(uint\ \*\)\(piVar22\ \+\ 3\);$	+1
+use	_gleBuildVertexFuncNO	puVar15	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar15\ =\ puVar15\ \+\ 1;$	+2
+use	_gleBuildVertexFuncNO	puVar15	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar15\ =\ \&uStack_d0;$	+1
+use	_gleBuildVertexFuncNO	puVar15	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*uVar6\ =\ \*puVar15;$	+2
+local	_gleBuildVertexFuncNO	puVar19	srcCursor3	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleSetFunctionIDFromCurrent	puVar4	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleCalculateOptions	iVar12	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero
+local	_gleCalculateOptions	puVar6	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glFlush_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glFlush_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar5\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glFlush_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_checkFastPath	iVar3	pixelBytes	INFERRED	result of _glePixelBytes: bytes per pixel of the format/type pair
+local	_checkFastPath	iVar4	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image
+local	_gleTestObject	puVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glDeleteTextures_Exec_body	iVar3	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x5148\);$	+1
+use	_glDeleteTextures_Exec_body	iVar3	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through	^\s*iVar7\ =\ iVar3\ \+\ 0x2008;$	+3
+use	_glDeleteTextures_Exec_body	iVar3	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+3
+use	_glDeleteTextures_Exec_body	iVar3	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar3\ !=\ 0\)\ \&\&\ \(iVar12\ =\ _gleLookupHashObject\(iVar7,\*param_3\),\ iVar12\ !=\ 0\)\)\ \{$	+1
+use	_glDeleteTextures_Exec_body	piVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar5\ =\ \(int\ \*\)\(iVar12\ \+\ 0x5154\);$	+1
+use	_glDeleteTextures_Exec_body	piVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*if\ \(\*\(int\ \*\)\(\*piVar5\ \+\ 4\)\ ==\ \*param_3\)\ \{$	+1
+use	_glDeleteTextures_Exec_body	piVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar5\ =\ piVar5\ \+\ 1;$	+1
+local	_glGetFloatv_Exec	iVar4	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero
+local	_gleGetEnabled	iVar3	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)
+local	_gleShareSharedState	iVar1	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through
+local	_gleBindPipelineProgram	iVar5	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through
+local	_gleBindPipelineProgram	puVar8	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleBindPipelineProgram	puVar11	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_glProgramStringARB_Exec	puVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glePPParse	uVar23	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*uVar23\ =\ 0;$	+1
+use	_glePPParse	uVar23	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*uVar23\ =\ uVar23\ \+\ 1;$	+1
+use	_glePPParse	uVar23	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*\}\ while\ \(uVar23\ <\ local_60\);$	+1
+use	_glePPParse	uVar23	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*uVar23\ =\ 0;$@3	+1
+use	_glePPParse	uVar23	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*local_f0\ =\ \(uVar23\ \&\ 3\)\ <<\ 0xc\ \|\ uVar15\ \&\ 0xffffc8ff;$	+2
+use	_glePPParse	uVar23	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*\}\ while\ \(uVar23\ <\ 4\);$	+1
+use	_glePPParse	uVar23	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*uVar23\ =\ 0;$@4	+1
+use	_glePPParse	uVar23	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*local_70\ =\ \(uVar23\ \&\ 3\)\ <<\ 0xc\ \|\ uVar15\ \&\ 0xffffc8ff\ \|\ 0x300;$	+2
+use	_glePPParse	uVar23	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*\}\ while\ \(uVar23\ <\ 4\);$@2	+1
+local	_glePPParse	puVar13	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glePPLogParameters	iVar8	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through
+local	_glePPLogParameters	puVar6	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_gleVPChanged	iVar3	currentProgram	INFERRED	ctx+0x5430 is the current program object of the shader entry points (uniform count at +0x30, ShHandle +0x40, uniform storage +0x4c)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x5430\);$	+1
+use	_gleVPChanged	iVar3	currentProgram	INFERRED	ctx+0x5430 is the current program object of the shader entry points (uniform count at +0x30, ShHandle +0x40, uniform storage +0x4c)	^\s*iVar1\ =\ iVar4\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0x20\);$	+1
+local	_gleVPChanged	puVar6	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleModifyPluginPipelineProgram	puVar6	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_gleTextureImagePut_Slow	iVar17	imageSize	INFERRED	result of _gleImageSize: byte size of the image	^\s*iVar17\ =\ _gleImageSize\(param_9,0x1a00,param_6,param_7\);$	+2
+use	_gleTextureImagePut_Slow	iVar21	pixelBytes	INFERRED	result of _glePixelBytes: bytes per pixel of the format/type pair	^\s*iVar21\ =\ _glePixelBytes\(\(uint\)\*\(ushort\ \*\)\(param_2\ \+\ 0x10\),\(uint\)\*\(ushort\ \*\)\(param_2\ \+\ 0x12\)\);$	+1
+use	_gleTextureImagePut_Slow	iVar21	pixelBytes	INFERRED	result of _glePixelBytes: bytes per pixel of the format/type pair	^\s*local_160\ =\ iVar27\ \*\ param_5\ \+\ iVar24\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x14\)\ \+\ iVar21\ \*\ param_3;$	+1
+use	_gleTextureImagePut_Slow	iVar21	pixelBytes	INFERRED	result of _glePixelBytes: bytes per pixel of the format/type pair	^\s*iVar21\ =\ _glePixelBytes\(\(uint\)\*\(ushort\ \*\)\(param_2\ \+\ 0x10\),\(uint\)\*\(ushort\ \*\)\(param_2\ \+\ 0x12\)\);$@2	+4
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*iVar21\ =\ _gleRowBytes\(\(uint\)\*\(ushort\ \*\)\(param_2\ \+\ 0x10\),\(uint\)\*\(ushort\ \*\)\(param_2\ \+\ 0x12\),$	+3
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@2	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@3	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@4	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@5	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@6	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@7	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@8	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@9	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@10	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@11	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@12	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@13	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@14	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@15	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@16	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@17	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@18	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@19	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@20	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@21	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@22	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@23	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@24	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@25	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@26	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@27	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@28	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@29	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@30	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@31	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@32	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@33	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@34	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@35	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@36	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@37	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@38	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@39	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@40	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@41	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@42	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@43	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@44	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@45	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@46	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@47	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@48	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@49	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@50	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@51	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@52	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@53	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@54	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@55	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@56	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@57	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@58	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@59	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@60	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@61	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@62	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@63	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@64	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@65	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@66	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@67	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@68	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@69	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@70	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@71	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@72	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@73	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@74	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@75	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@76	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@77	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@78	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@79	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@80	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@81	+1
+use	_gleTextureImagePut_Slow	iVar21	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*puVar28\ =\ \(uint\ \*\)\(\(int\)puVar28\ \+\ iVar21\);$@82	+1
+use	_gleTextureImagePut_Slow	uVar18	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*uVar18\ =\ 0;$	+1
+use	_gleTextureImagePut_Slow	uVar18	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*uVar18\ =\ uVar18\ \+\ 1;$	+1
+use	_gleTextureImagePut_Slow	uVar18	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*if\ \(uVar18\ ==\ param_8\)\ break;$	+1
+use	_gleUpdateLightRGBASums	pfVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*pfVar5\ =\ \(float\ \*\)\(\(int\)GH_F2U\(fVar3\)\ \+\ 0x208\);$	+1
+use	_gleUpdateLightRGBASums	pfVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*fVar4\ =\ \*pfVar5;$	+2
+use	_gleFreeQueryMachine	piVar2	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar2\ =\ \(int\ \*\)\(param_1\ \+\ 0x6440\);$	+1
+use	_gleFreeQueryMachine	piVar2	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar3\ =\ \(int\ \*\)\*piVar2;$	+2
+use	_gleFreeFenceMachine	piVar2	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar2\ =\ \(int\ \*\)\(param_1\ \+\ 0x543c\);$	+1
+use	_gleFreeFenceMachine	piVar2	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar3\ =\ \(int\ \*\)\*piVar2;$	+2
+local	_gleFreeVertexArrayState	iVar2	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)
+local	_gleFreeVertexArrayObject	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleFreeShaderState	iVar2	currentProgram	INFERRED	ctx+0x5430 is the current program object of the shader entry points (uniform count at +0x30, ShHandle +0x40, uniform storage +0x4c)
+local	_gleFreePipelineProgramState	puVar3	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleFreeTextureState	piVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleDetachShaderObjects	iVar2	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through
+local	_gleDestroySharedState	iVar3	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through
+local	_gleDestroySharedState	piVar6	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleDestroySharedState	puVar5	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glGetBooleanv_Exec	iVar4	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero
+local	_glDeleteProgramsARB_Exec	piVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glePPUnlogParameters	iVar6	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through
+local	_gleDestroyEnableHashTable	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glLightfv_Exec	dVar11	cosValue	CONFIRMED	result of libm _cos
+use	_glClear_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glClear_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar5\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glClear_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glRotatef_Exec	dVar2	sinValue	CONFIRMED	result of libm _sin
+local	_glRotatef_Exec	dVar3	cosValue	CONFIRMED	result of libm _cos
+local	_glMaterialfv_Exec	iVar4	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero
+local	_glPopMatrix_Exec	iVar6	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero
+local	_glGenLists_Exec	iVar2	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through
+local	_gleSetFuncOutputDesc	iVar5	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound
+use	_gleSetFuncOutputDesc	iVar7	loopIndex2	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar7\ =\ 0;$	+1
+use	_gleSetFuncOutputDesc	iVar7	loopIndex2	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*if\ \(\*\(short\ \*\)\(\(iVar8\ \*\ 0x10\ \+\ iVar7\ \*\ 6\ \+\ iVar5\)\ \*\ 8\ \+\ param_1\ \+\ 0x4220\)\ ==\ \-0x7ad3$	+2
+use	_gleSetFuncOutputDesc	iVar7	loopIndex2	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar7\ =\ 2;$	+1
+use	_gleSetFuncOutputDesc	iVar7	loopIndex2	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+2
+use	_gleSetFuncOutputDesc	iVar8	loopIndex3	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar8\ =\ 0;$	+1
+use	_gleSetFuncOutputDesc	iVar8	loopIndex3	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*if\ \(\*\(short\ \*\)\(\(iVar8\ \*\ 0x10\ \+\ iVar7\ \*\ 6\ \+\ iVar5\)\ \*\ 8\ \+\ param_1\ \+\ 0x4220\)\ ==\ \-0x7ad3$	+2
+use	_gleSetFuncOutputDesc	iVar8	loopIndex3	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar8\ =\ 8;$	+1
+use	_gleSetFuncOutputDesc	iVar8	loopIndex3	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+2
+use	_gleSetFuncOutputDesc	iVar8	loopIndex3	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar8\ =\ 0;$@2	+1
+use	_gleSetFuncOutputDesc	iVar8	loopIndex3	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*if\ \(\*\(short\ \*\)\(iVar8\ \*\ 8\ \+\ param_1\ \+\ 0x4624\)\ ==\ \-0x7ad3\)\ \{$	+1
+use	_gleSetFuncOutputDesc	iVar8	loopIndex3	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar8\ =\ 7;$	+1
+use	_gleSetFuncOutputDesc	iVar8	loopIndex3	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar8\ =\ iVar8\ \+\ 1;$@2	+2
+use	_gleSetFuncOutputDesc	iVar14	loopIndex4	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar14\ =\ 0;$	+1
+use	_gleSetFuncOutputDesc	iVar14	loopIndex4	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*lVar15\ =\ \(\(longlong\ \(\*\)\(\)\)___ashldi3\)\(0,0x20,iVar14\);$	+1
+use	_gleSetFuncOutputDesc	iVar14	loopIndex4	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*\*puVar11\ =\ uVar10\ \|\ \(ushort\)\(iVar14\ \*\ 4\ \+\ 0x74\ >>\ 2\)\ \|\ 0xc0;$	+1
+use	_gleSetFuncOutputDesc	iVar14	loopIndex4	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar14\ =\ iVar14\ \+\ 1;$@2	+1
+use	_gleSetFuncOutputDesc	iVar14	loopIndex4	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*\}\ while\ \(iVar14\ <\ 2\);$	+1
+use	_gleSetFuncOutputDesc	uVar13	loopIndex5	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*uVar13\ =\ 0;$	+1
+use	_gleSetFuncOutputDesc	uVar13	loopIndex5	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*lVar15\ =\ \(\(longlong\ \(\*\)\(\)\)___ashldi3\)\(0,0x1000000,uVar13\);$	+1
+use	_gleSetFuncOutputDesc	uVar13	loopIndex5	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*if\ \(\(uVar6\ \&\ \-0x1000000\ <<\ \(uVar13\ \&\ 0x3f\)\ \&\ 0xff000000\)\ ==\ 0\)\ break;$	+1
+use	_gleSetFuncOutputDesc	uVar13	loopIndex5	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*\*puVar11\ =\ uVar10\ \|\ \(ushort\)\(\(int\)\(uVar13\ \*\ 0x10\ \+\ 0x80\)\ >>\ 2\)\ \|\ 0x300;$	+1
+use	_gleSetFuncOutputDesc	uVar13	loopIndex5	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*uVar13\ =\ uVar13\ \+\ 1;$	+1
+use	_gleSetFuncOutputDesc	uVar13	loopIndex5	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*\}\ while\ \(\(int\)uVar13\ <\ 8\);$	+1
+local	_gleSetFuncOutputDesc	puVar11	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_glNormal3f_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glVertex3f_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glPushMatrix_Comp	uVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glScalef_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glPopMatrix_Comp	uVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glTranslatef_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_gleRenderLineLoopTCLFunc	iVar2	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero
+use	_gleEndList	iVar2	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x5148\);$	+4
+use	_gleOptimizeDisplayList	iVar12	hashObject	INFERRED	object found by name in a machine-object hash table (_gleLookupHashObject(table, name))	^\s*iVar12\ =\ _gleLookupHashObject\(\*\(int\ \*\)\(param_1\ \+\ 0x5148\)\ \+\ 0x300c,param_2\);$	+3
+use	_gleOptimizeDisplayList	iVar12	hashObject	INFERRED	object found by name in a machine-object hash table (_gleLookupHashObject(table, name))	^\s*_gleQuickOptimizeDisplayList\(param_1,param_2,iVar12\);$	+1
+use	_gleOptimizeDisplayList	iVar12	hashObject	INFERRED	object found by name in a machine-object hash table (_gleLookupHashObject(table, name))	^\s*puVar29\ =\ \(uint\ \*\)\(iVar12\ \+\ 0x2c\);$	+2
+use	_gleOptimizeDisplayList	iVar12	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through	^\s*iVar12\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x5148\);$	+1
+use	_gleOptimizeDisplayList	iVar12	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through	^\s*iVar24\ =\ iVar12\ \+\ 0x300c;$	+3
+use	_gleOptimizeDisplayList	iVar14	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)	^\s*iVar14\ =\ _gleAddListItem\(param_1,\*puVar29,uVar13\);$	+1
+use	_gleOptimizeDisplayList	iVar14	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)	^\s*\*\(uint\ \*\)\(iVar14\ \+\ iVar11\ \*\ 4\)\ =\ puVar29\[iVar11\ \+\ 1\];$	+1
+use	_gleOptimizeDisplayList	iVar14	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)	^\s*iVar14\ =\ _gleAddListItem\(param_1,puVar16,uVar13\);$	+1
+use	_gleOptimizeDisplayList	iVar14	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)	^\s*\*\(uint\ \*\)\(iVar14\ \+\ iVar11\ \*\ 4\)\ =\ puVar29\[iVar11\ \+\ 1\];$@2	+1
+use	_gleOptimizeDisplayList	iVar14	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)	^\s*iVar14\ =\ _gleAddListItem\(param_1,puVar16,uVar13\);$@2	+1
+use	_gleOptimizeDisplayList	iVar14	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)	^\s*\*\(uint\ \*\)\(iVar14\ \+\ iVar11\ \*\ 4\)\ =\ puVar29\[iVar11\ \+\ 1\];$@3	+1
+local	_gleOptimizeDisplayList	pbVar19	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_gleOptimizeDisplayList	piVar15	listRecord2	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)	^\s*piVar15\ =\ \(int\ \*\)_gleAddListItem\(param_1,$	+5
+use	_gleOptimizeDisplayList	piVar15	listRecord2	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)	^\s*piVar15\ =\ \(int\ \*\)_gleAddListItem\(param_1,$@2	+5
+use	_gleOptimizeDisplayList	piVar15	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar15\ =\ \(int\ \*\)\(uVar26\ \*\ 4\ \+\ iVar24\);$	+1
+use	_gleOptimizeDisplayList	piVar15	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ \*piVar15\);$	+1
+use	_gleOptimizeDisplayList	piVar15	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar15\ =\ piVar15\ \+\ 1;$	+1
+use	_gleOptimizeDisplayList	puVar18	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*puVar18\ =\ \(undefined4\ \*\)\(iVar27\ \+\ uVar31\ \*\ 4\ \+\ local_2bc\[4\]\);$	+1
+use	_gleOptimizeDisplayList	puVar18	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*puVar18\ =\ 0;$	+1
+use	_gleOptimizeDisplayList	puVar18	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*puVar18\ =\ puVar18\ \+\ 1;$@2	+1
+use	_glSwap_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glSwap_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar5\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glSwap_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glDeleteLists_Exec	iVar2	sharedState	INFERRED	ctx+0x5148 is the shared state SS (+0x8028 mutex, +0x6018 machine-object hash table, +0x1000 free-name list heads) that the object wrappers and the Gen*/Delete* entry points reach every shared object through
+local	_glTranslated_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_glRotated_CompExec	dVar1	sinValue	CONFIRMED	result of libm _sin	^\s*dVar1\ =\ _sin\(fparam_1\ \*\ dVar2\);$	+1
+use	_glRotated_CompExec	dVar1	sinValue	CONFIRMED	result of libm _sin	^\s*\(\(void\ \(\*\)\(\)\)_glRotateX_Comp\)\(param_1,\(double\)\(float\)dVar1,\(double\)\(float\)dVar2\);$	+4
+use	_glRotated_CompExec	dVar1	sinValue	CONFIRMED	result of libm _sin	^\s*dVar1\ =\ _sin\(fparam_1\ \*\ dVar2\);$@2	+1
+use	_glRotated_CompExec	dVar1	sinValue	CONFIRMED	result of libm _sin	^\s*\(\(void\ \(\*\)\(\)\)_glRotateY_Comp\)\(param_1,\(double\)\(float\)dVar1,\(double\)\(float\)dVar2\);$	+4
+use	_glRotated_CompExec	dVar1	sinValue	CONFIRMED	result of libm _sin	^\s*dVar1\ =\ _sin\(fparam_1\ \*\ dVar2\);$@3	+1
+use	_glRotated_CompExec	dVar1	sinValue	CONFIRMED	result of libm _sin	^\s*\(\(void\ \(\*\)\(\)\)_glRotateZ_Comp\)\(param_1,\(double\)\(float\)dVar1,\(double\)\(float\)dVar2\);$	+4
+local	_glRotateY_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glRotateX_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_gleAddListItemWithFree	iVar3	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_gleCallList	iVar1	hashObject	INFERRED	object found by name in a machine-object hash table (_gleLookupHashObject(table, name))	^\s*iVar1\ =\ _gleLookupHashObject\(\*\(int\ \*\)\(param_1\ \+\ 0x5148\)\ \+\ 0x300c,param_2\);$	+2
+use	_gleCallList	iVar1	hashObject	INFERRED	object found by name in a machine-object hash table (_gleLookupHashObject(table, name))	^\s*puVar6\ =\ \(undefined4\ \*\)\(iVar1\ \+\ 0x2c\);$	+1
+use	_gleCallList	iVar1	hashObject	INFERRED	object found by name in a machine-object hash table (_gleLookupHashObject(table, name))	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 0x10\);$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar7\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar7\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@2	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar7\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar7\ \+\ 0xec\)\ !=\ 0\)\)\ \{$@2	+3
+local	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar8	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*piVar8\ =\ \(int\ \*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 1\);$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar8	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\(\(void\ \(\*\)\(\)\)_gleUpdateFramebufferCompleteness\)\(param_1,iVar7\ \+\ 0x10,piVar8,in_r6,in_r7,in_r8,iVar9,fparam_1,in_f2,in_f3,in_f4,$	+2
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar8	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*piVar8\ =\ \(int\ \*\)0x0;$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar8	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*piVar8\ =\ \(int\ \*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 1\);$@2	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar8	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*piVar8\ =\ piVar16;$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar8	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*piVar8\ =\ 0;$	+2
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar8	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*piVar8\ =\ piVar13;$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar8	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\(\(void\ \(\*\)\(\)\)_gleUpdateFramebufferCompleteness\)\(param_1,iVar7\ \+\ 0x10,piVar8,in_r6,in_r7,in_r8,iVar9,fparam_1,in_f2,in_f3,in_f4,$@2	+2
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar8	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar8\ =\ \(int\ \*\)\(param_1\ \+\ 0x324\);$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar8	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*iVar7\ =\ \*piVar8;$	+2
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar16	pendingChangeWords	INFERRED	pointer to the 19 state-change words at ctx+0x310: state setters OR change bits into them, the renderer validate callback receives them, and they are cleared (0x13 words) after validation	^\s*piVar16\ =\ \(int\ \*\)\(param_1\ \+\ 0x310\);$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar16	pendingChangeWords	INFERRED	pointer to the 19 state-change words at ctx+0x310: state setters OR change bits into them, the renderer validate callback receives them, and they are cleared (0x13 words) after validation	^\s*bVar1\ =\ \(\(\*piVar16\ ==\ 0\ \&\&\ \*\(int\ \*\)\(param_1\ \+\ 0x314\)\ ==\ 0\)\ \&\&\ uVar10\ ==\ 0\)\ \&\&$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar16	pendingChangeWords	INFERRED	pointer to the 19 state-change words at ctx+0x310: state setters OR change bits into them, the renderer validate callback receives them, and they are cleared (0x13 words) after validation	^\s*bVar1\ =\ \(\(\(\*piVar16\ ==\ 0\ \&\&\ \*\(int\ \*\)\(param_1\ \+\ 0x314\)\ ==\ 0\)\ \&\&$	+2
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar16	pendingChangeWords	INFERRED	pointer to the 19 state-change words at ctx+0x310: state setters OR change bits into them, the renderer validate callback receives them, and they are cleared (0x13 words) after validation	^\s*piVar8\ =\ piVar16;$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	piVar16	pendingChangeWords	INFERRED	pointer to the 19 state-change words at ctx+0x310: state setters OR change bits into them, the renderer validate callback receives them, and they are cleared (0x13 words) after validation	^\s*\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x4688\),param_1\ \+\ 0x4698,piVar16\);$	+1
+local	_gleSetCurrentVertexObject	puVar2	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleSetCurrentVertexObject	puVar3	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleResetVACachePointers	piVar1	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleResetVACachePointers	piVar2	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleResetVACachePointers	piVar5	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleSetClientEnableFlag	iVar1	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)
+local	_gleSetupOutOfLineDrawPointers	piVar15	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_gleDrawArraysSyncState	pbVar8	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar7\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar7\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@2	+1
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar7\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar7\ \+\ 0xec\)\ !=\ 0\)\)\ \{$@2	+3
+local	_gleDrawArraysOrElementsOutOfLine_ListExec	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleDrawArraysOrElementsOutOfLine_ListExec	piVar4	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	piVar15	pendingChangeWords	INFERRED	pointer to the 19 state-change words at ctx+0x310: state setters OR change bits into them, the renderer validate callback receives them, and they are cleared (0x13 words) after validation	^\s*piVar15\ =\ \(int\ \*\)\(param_1\ \+\ 0x310\);$	+1
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	piVar15	pendingChangeWords	INFERRED	pointer to the 19 state-change words at ctx+0x310: state setters OR change bits into them, the renderer validate callback receives them, and they are cleared (0x13 words) after validation	^\s*bVar1\ =\ \(\(\*piVar15\ ==\ 0\ \&\&\ \*\(int\ \*\)\(param_1\ \+\ 0x314\)\ ==\ 0\)\ \&\&\ uVar9\ ==\ 0\)\ \&\&$	+1
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	piVar15	pendingChangeWords	INFERRED	pointer to the 19 state-change words at ctx+0x310: state setters OR change bits into them, the renderer validate callback receives them, and they are cleared (0x13 words) after validation	^\s*bVar1\ =\ \(\(\(\*piVar15\ ==\ 0\ \&\&\ \*\(int\ \*\)\(param_1\ \+\ 0x314\)\ ==\ 0\)\ \&\&$	+2
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	piVar15	pendingChangeWords	INFERRED	pointer to the 19 state-change words at ctx+0x310: state setters OR change bits into them, the renderer validate callback receives them, and they are cleared (0x13 words) after validation	^\s*in_r5\ =\ piVar15;$	+1
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	piVar15	pendingChangeWords	INFERRED	pointer to the 19 state-change words at ctx+0x310: state setters OR change bits into them, the renderer validate callback receives them, and they are cleared (0x13 words) after validation	^\s*\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x4688\),param_1\ \+\ 0x4698,piVar15\);$	+1
+use	_glReadPixels_Exec	iVar6	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+2
+use	_glReadPixels_Exec	iVar6	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@2	+1
+use	_glReadPixels_Exec	iVar6	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar6\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar6\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+use	_glReadPixels_Exec	iVar6	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@3	+1
+use	_glReadPixels_Exec	iVar6	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(\(\*\(short\ \*\)\(iVar6\ \+\ 200\)\ ==\ 0\)\ \&\&\ \(param_6\ !=\ 0x1901\)\)\ \&\&\ \(param_6\ !=\ 0x1902\)\)$	+2
+local	_glReadPixels_Exec	piVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glGetTexLevelParameteriv_Exec_body	iVar8	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glGetTexLevelParameteriv_Exec_body	iVar8	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar8\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar8\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glGetTexLevelParameteriv_Exec_body	piVar6	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleTextureLevelBytes	iVar2	pixelBytes	INFERRED	result of _glePixelBytes: bytes per pixel of the format/type pair
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@2	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@2	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@3	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@3	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@4	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@4	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@5	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@5	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@6	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@6	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@7	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@7	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@8	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@8	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@9	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@9	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@10	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@10	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@11	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@11	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@12	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@12	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@13	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@13	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@14	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@14	+2
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ \(int\)puVar6\ \-\ \(int\)param_5;$@15	+1
+use	_gleTextureImagePut_FastUbyte	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@15	+2
+local	_gleCopy	iVar5	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero
+local	_glMatrixMode_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glRotatef_Comp	dVar2	cosValue	CONFIRMED	result of libm _cos
+use	_glRotatef_Comp	dVar3	sinValue	CONFIRMED	result of libm _sin	^\s*dVar3\ =\ _sin\(\(double\)\(float\)\(fparam_1\ \*\ \(double\)fVar1\)\);$	+1
+use	_glRotatef_Comp	dVar3	sinValue	CONFIRMED	result of libm _sin	^\s*\(\(void\ \(\*\)\(\)\)_glRotateX_Comp\)\(param_1,\(double\)\(float\)dVar3,\(double\)\(float\)dVar2\);$	+1
+use	_glRotatef_Comp	dVar3	sinValue	CONFIRMED	result of libm _sin	^\s*dVar3\ =\ _sin\(\(double\)\(float\)\(fparam_1\ \*\ \(double\)fVar1\)\);$@2	+1
+use	_glRotatef_Comp	dVar3	sinValue	CONFIRMED	result of libm _sin	^\s*\(\(void\ \(\*\)\(\)\)_glRotateY_Comp\)\(param_1,\(double\)\(float\)dVar3,\(double\)\(float\)dVar2\);$	+1
+use	_glRotatef_Comp	dVar3	sinValue	CONFIRMED	result of libm _sin	^\s*dVar3\ =\ _sin\(\(double\)\(float\)\(fparam_1\ \*\ \(double\)fVar1\)\);$@3	+1
+use	_glRotatef_Comp	dVar3	sinValue	CONFIRMED	result of libm _sin	^\s*\(\(void\ \(\*\)\(\)\)_glRotateZ_Comp\)\(param_1,\(double\)\(float\)dVar3,\(double\)\(float\)dVar2\);$	+1
+local	_glTexCoord2f_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_gleSetAttrib	pfVar20	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*pfVar20\ =\ \(float\ \*\)\(param_1\ \+\ 0x3198\);$	+1
+use	_gleSetAttrib	pfVar20	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*pfVar20\ =\ \*pfVar1;$	+2
+use	_gleSetAttrib	pfVar20	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*pfVar20\ =\ \(float\ \*\)\(param_1\ \+\ 0x2d0\);$	+1
+use	_gleSetAttrib	pfVar20	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*pfVar20\ =\ fVar9;$	+2
+use	_gleSetAttrib	pfVar20	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*pfVar20\ =\ \(float\ \*\)\(param_1\ \+\ 0x3534\);$	+1
+use	_gleSetAttrib	pfVar20	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*pfVar20\ =\ fVar9;$@2	+2
+use	_gleSetAttrib	piVar19	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar19\ =\ \(int\ \*\)\(param_1\ \+\ iVar7\ \*\ 4\ \+\ 0x5154\);$	+1
+use	_gleSetAttrib	piVar19	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*iVar23\ =\ \*piVar19;$	+2
+use	_gleSetAttrib	puVar12	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar12\ =\ \(undefined2\ \*\)\(\(int\)param_3\ \+\ 0x26\);$	+1
+use	_gleSetAttrib	puVar12	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*uVar2\ =\ \*puVar12;$	+2
+use	_gleSetAttrib	puVar14	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*puVar14\ =\ \(undefined1\ \*\)\(param_1\ \+\ 0x3448\);$	+1
+use	_gleSetAttrib	puVar14	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*puVar14\ =\ uVar6;$	+2
+use	_gleSetAttrib	puVar14	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*return\ \(int\)puVar14;$	+1
+use	_gleSetAttrib	puVar14	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*puVar14\ =\ \(undefined1\ \*\)\(param_1\ \+\ 0x4664\);$	+1
+use	_gleSetAttrib	puVar14	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*puVar14\ =\ uVar6;$@2	+2
+use	_gleSetAttrib	puVar14	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*puVar14\ =\ \(undefined1\ \*\)\(param_1\ \+\ 0x4664\);$@2	+1
+use	_gleSetAttrib	puVar14	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*puVar14\ =\ uVar6;$@4	+2
+use	_gleSetAttrib	puVar14	srcCursor3	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar14\ =\ \(undefined1\ \*\)\(iVar8\ \+\ \(int\)param_3\);$@3	+1
+use	_gleSetAttrib	puVar14	srcCursor3	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar21\ =\ puVar14\ \+\ 0x2660;$	+1
+use	_gleSetAttrib	puVar14	srcCursor3	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*\*\(undefined1\ \*\)\(iVar23\ \+\ 0x10\)\ =\ puVar14\[0x2698\];$	+9
+local	_gleSetAttrib	puVar17	dstCursor3	INFERRED	pointer advanced by a constant stride each iteration and only written through
+use	_gleSetAttrib	puVar21	srcCursor4	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar21\ =\ \(undefined1\ \*\)\(\(int\)param_3\ \+\ 0x6f\);$	+1
+use	_gleSetAttrib	puVar21	srcCursor4	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar14\[\-3\]\ =\ puVar21\[\-3\];$	+5
+use	_gleSetAttrib	puVar25	srcCursor5	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar25\ =\ \(undefined4\ \*\)\(\(int\)param_3\ \+\ iVar8\ \+\ 0x524\);$	+1
+use	_gleSetAttrib	puVar25	srcCursor5	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*_gleBindTexture\(param_1,iVar27,\*puVar25,iVar22\);$	+2
+local	_glGetDoublev_Exec	iVar4	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero
+local	_glColorPointer_Exec	iVar4	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)
+use	_glColorPointer_Exec	puVar5	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*puVar5\ =\ \(undefined4\ \*\)\(iVar4\ \+\ 1000\);$	+1
+use	_glColorPointer_Exec	puVar5	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*puVar5\ =\ 0;$	+1
+use	_glColorPointer_Exec	puVar5	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*puVar5\ =\ puVar5\ \+\ 0x23;$	+1
+use	_glColorPointer_Exec	puVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar5\ =\ \(undefined4\ \*\)\(iVar8\ \+\ 0x10\);$	+1
+use	_glColorPointer_Exec	puVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*uVar1\ =\ \*puVar5;$	+1
+use	_glColorPointer_Exec	puVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar5\ =\ puVar5\ \+\ 1;$	+1
+local	_glColorPointer_Exec	puVar6	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_glVertexPointer_Exec	iVar5	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)
+use	_glVertexPointer_Exec	puVar4	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar5\ \+\ 0x3e0\);$	+1
+use	_glVertexPointer_Exec	puVar4	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*puVar4\ =\ 0;$	+1
+use	_glVertexPointer_Exec	puVar4	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*puVar4\ =\ puVar4\ \+\ 0x23;$	+1
+use	_glVertexPointer_Exec	puVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar8\ \+\ 0x10\);$	+1
+use	_glVertexPointer_Exec	puVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*uVar1\ =\ \*puVar4;$	+1
+use	_glVertexPointer_Exec	puVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar4\ =\ puVar4\ \+\ 1;$	+1
+local	_glVertexPointer_Exec	puVar6	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through
+use	_glTexCoordPointer_Exec	iVar8	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a60\);$	+1
+use	_glTexCoordPointer_Exec	iVar8	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*iVar14\ =\ iVar8\ \+\ 0x10;$	+1
+use	_glTexCoordPointer_Exec	iVar8	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0x350\)\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x350\);$	+2
+use	_glTexCoordPointer_Exec	iVar8	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar8\ \+\ 0x35c\);$	+1
+use	_glTexCoordPointer_Exec	iVar8	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar8\ \+\ 0x358\);$	+1
+use	_glTexCoordPointer_Exec	iVar8	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0x338\)\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x338\);$	+2
+use	_glTexCoordPointer_Exec	iVar8	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0x338\)\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x338\);$@2	+2
+use	_glTexCoordPointer_Exec	iVar8	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x350\);$	+2
+use	_glTexCoordPointer_Exec	iVar8	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0x350\)\ =\ uVar2;$	+2
+local	_glTexCoordPointer_Exec	puVar6	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_glTexCoordPointer_Exec	puVar9	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleDrawArraysOrElements_IMM_Exec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object
+local	_gleDrawArraysOrElements_IMM_Exec	piVar6	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleDrawArraysOrElements_IMM_Exec	psVar14	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleSetFunctionIDFromArray	puVar9	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+local	_glVertexArrayRangeEXT_Exec	iVar1	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)
+local	_gleDrawArraysOrElements_VAR_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object
+local	_gleDrawArraysOrElements_VAR_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glSetFenceAPPLE_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glSetFenceAPPLE_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar5\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glSetFenceAPPLE_Exec	piVar3	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleFeedbackQuadsFunc_body	iVar21	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero
+local	_gleClipPoly	iVar10	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero
+use	_gleBuildInterpolateFunc	iVar3	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*for\ \(iVar3\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x20\);\ iVar3\ !=\ 0;\ iVar3\ =\ iVar3\ \+\ \-1\)\ \{$	+1
+use	_gleBuildInterpolateFunc	puVar9	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar9\ =\ \(uint\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(iVar5\ \+\ 0x24\)\ \*\ 8\);$	+1
+use	_gleBuildInterpolateFunc	puVar9	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*if\ \(\(\*puVar9\ >>\ 0x10\ \&\ 0xf\)\ ==\ 7\)\ \{$	+2
+use	_gleBuildInterpolateFunc	puVar9	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar9\ =\ puVar9\ \+\ 2;$	+1
+local	_glFinishObjectAPPLE_Exec	iVar4	hashObject	INFERRED	object found by name in a machine-object hash table (_gleLookupHashObject(table, name))
+local	_glFinishObjectAPPLE_Exec	puVar8	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glCopyTexImage2D_Exec	iVar11	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar11\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glCopyTexImage2D_Exec	iVar11	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar11\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar11\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glCopyTexImage2D_Exec	piVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glRasterPos2i_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glRasterPos2i_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar5\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glRasterPos2i_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_gleSetRasterPos	piVar16	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glBitmap_Exec	iVar6	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glBitmap_Exec	iVar6	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar6\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar6\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glBitmap_Exec	piVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glCopyPixels_Exec	iVar8	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object
+local	_glCopyPixels_Exec	piVar7	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glFinish_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glFinish_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar5\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glFinish_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glGetTexImage_Exec	iVar7	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*iVar7\ =\ _gleRowBytes\(\(uint\)\*\(ushort\ \*\)\(iVar6\ \+\ 0xd4\),\(uint\)\*\(ushort\ \*\)\(iVar6\ \+\ 0xd6\),$	+2
+use	_glGetTexImage_Exec	iVar7	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*iStack_cc\ =\ iVar7;$	+1
+use	_glGetTexImage_Exec	iVar7	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*iVar8\ =\ iVar8\ \+\ iVar7\ \*\ \(uint\)uVar3;$	+1
+local	_glAccum_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_glAccum_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glAccum_Exec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar5\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glAccum_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glActiveTexture_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glAlphaFunc_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glVertexArrayParameteriEXT_Exec	iVar2	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)
+local	_glPushAttrib_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glPopAttrib_Comp	uVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_glBegin_NoopExec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glBegin_NoopExec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar5\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glBegin_NoopExec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glBitmap_ListExec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glBitmap_ListExec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar7\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar7\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glBitmap_ListExec	piVar6	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glBitmap_Comp	piVar3	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_glBitmap_NoopExec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glBitmap_NoopExec	iVar5	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar5\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glBitmap_NoopExec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glBlendFunc_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glBlendColor_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glBlendEquation_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glBlendFuncSeparate_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glDeleteBuffers_Exec	iVar3	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)
+local	_glDeleteBuffers_Exec	puVar5	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+use	_glBufferData_Exec_body	iVar4	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a60\);$	+3
+use	_glBufferData_Exec_body	iVar4	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a60\);$@2	+3
+use	_glBufferSubData_Exec	iVar4	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a60\);$	+3
+use	_glBufferSubData_Exec	iVar7	clientState2	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a60\);$	+3
+use	_glUnmapBuffer_Exec	iVar2	clientState	INFERRED	ctx+0x4a60 is the client vertex-array state CS (+0x358/+0x35c bound array / element buffer object, +0x360+4k per-array buffer objects)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x4a60\);$	+3
+use	_glClear_NoopExec	iVar4	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glClear_NoopExec	iVar4	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar4\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar4\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glClear_NoopExec	piVar3	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glClearAccum_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glClearColor_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glClearDepth_Comp	pdVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glClearIndex_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glClearStencil_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glClipPlane_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3b_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3bv_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3d_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3dv_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3f_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3fv_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3i_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3iv_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3s_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3sv_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3ub_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3ubv_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3ui_Comp	pfVar3	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3uiv_Comp	pfVar3	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3us_Comp	pfVar2	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor3usv_Comp	pfVar2	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4b_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4bv_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4d_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4dv_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4fv_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4i_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4iv_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4s_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4sv_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4ub_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4ubv_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4ui_Comp	pfVar3	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4uiv_Comp	pfVar3	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4us_Comp	pfVar2	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColor4usv_Comp	pfVar2	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glIndexd_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glIndexdv_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glIndexf_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glIndexfv_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glIndexi_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glIndexiv_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glIndexs_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glIndexsv_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glIndexub_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glIndexubv_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glColorMaterial_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3b_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3bv_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3s_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3sv_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3i_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3iv_Comp	pfVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3f_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3fv_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3d_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3dv_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3ub_Comp	pfVar2	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3ubv_Comp	pfVar2	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3us_Comp	pfVar2	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3usv_Comp	pfVar2	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3ui_Comp	pfVar3	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSecondaryColor3uiv_Comp	pfVar3	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_glColorTable_Comp	iVar5	pixelBytes	INFERRED	result of _glePixelBytes: bytes per pixel of the format/type pair	^\s*iVar5\ =\ _glePixelBytes\(param_5,param_6\);$	+3
+use	_glColorTable_Comp	iVar5	pixelBytes	INFERRED	result of _glePixelBytes: bytes per pixel of the format/type pair	^\s*uVar2\ =\ iVar5\ \*\ param_4\ \+\ 3\ \&\ 0xfffffffc;$	+1
+local	_glColorTable_Comp	puVar6	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_glColorSubTable_Comp	iVar5	pixelBytes	INFERRED	result of _glePixelBytes: bytes per pixel of the format/type pair	^\s*iVar5\ =\ _glePixelBytes\(param_5,param_6\);$	+3
+use	_glColorSubTable_Comp	iVar5	pixelBytes	INFERRED	result of _glePixelBytes: bytes per pixel of the format/type pair	^\s*uVar2\ =\ iVar5\ \*\ param_4\ \+\ 3\ \&\ 0xfffffffc;$	+1
+local	_glColorSubTable_Comp	puVar6	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glCopyColorTable_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_glCopyColorTable_Exec	iVar8	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glCopyColorTable_Exec	iVar8	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar8\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar8\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glCopyColorTable_Exec	piVar6	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glCopyColorSubTable_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_glCopyColorSubTable_Exec	iVar6	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glCopyColorSubTable_Exec	iVar6	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar6\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar6\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glCopyColorSubTable_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glGetColorTable_Exec	uVar3	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*uVar3\ =\ _gleRowBytes\(\(uint\)\*\(ushort\ \*\)\(iVar4\ \+\ 0xbc\),\(uint\)\*\(ushort\ \*\)\(iVar4\ \+\ 0xbe\),$	+2
+use	_glGetColorTable_Exec	uVar3	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*local_cc\ =\ uVar3;$	+1
+use	_glCopyPixels_ListExec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glCopyPixels_ListExec	iVar7	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar7\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar7\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glCopyPixels_ListExec	piVar6	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glCopyPixels_Comp	puVar2	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_glCopyPixels_NoopExec	iVar4	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glCopyPixels_NoopExec	iVar4	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar4\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar4\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glCopyPixels_NoopExec	piVar3	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glDepthFunc_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glDepthRange_Comp	pdVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glDepthBoundsEXT_Comp	pdVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glCallList_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glCallLists_Comp	iVar2	typeSize	INFERRED	result of _gleTypeSize(ctx, type): the byte size of one element of a GL data type
+local	_glCallLists_Comp	piVar3	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glListBase_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glDrawBuffer_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glDrawBuffer_Exec	puVar5	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+use	_glDrawBuffersARB_Exec	iVar10	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+2
+use	_glDrawBuffersARB_Exec	iVar10	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*\*\(undefined2\ \*\)\(iVar2\ \+\ iVar10\ \+\ 0xc0\)\ =\ 0;$	+1
+use	_glDrawBuffersARB_Exec	iVar10	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@2	+1
+use	_glDrawBuffersARB_Exec	iVar10	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@3	+1
+use	_glDrawBuffersARB_Exec	iVar10	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*\*\(undefined2\ \*\)\(iVar8\ \*\ 2\ \+\ iVar10\ \+\ 0xc0\)\ =\ uVar1;$	+1
+use	_glDrawBuffersARB_Exec	iVar10	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@4	+1
+use	_glDrawBuffersARB_Exec	iVar10	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$@5	+1
+use	_glDrawBuffersARB_Exec	iVar10	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0xec\)\ =\ 1;$	+1
+use	_glDrawBuffersARB_Exec	iVar10	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar10\ =\ param_2;$	+1
+use	_glDrawBuffersARB_Exec	iVar10	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	_glDrawBuffersARB_Exec	puVar5	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*puVar5\ =\ \(undefined2\ \*\)\(param_1\ \+\ 0x311a\);$	+1
+use	_glDrawBuffersARB_Exec	puVar5	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*puVar5\ =\ uVar1;$	+2
+use	_glDrawBuffersARB_Exec	puVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar5\ =\ \(undefined2\ \*\)\(\(int\)param_3\ \+\ 2\);$	+1
+use	_glDrawBuffersARB_Exec	puVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*uVar1\ =\ \*puVar5;$	+2
+local	_glDrawBuffersARB_Exec	puVar6	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glDrawPixels_ListExec	iVar8	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glDrawPixels_ListExec	iVar8	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar8\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar8\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glDrawPixels_ListExec	piVar7	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glDrawPixels_Comp	iVar2	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*iVar2\ =\ _gleRowBytes\(param_4,param_5,param_2\);$	+2
+use	_glDrawPixels_Comp	iVar2	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*iVar3\ =\ _gleCopy\(param_6\ \+\ local_3c,puVar4\ \+\ 5,iVar2,param_3,local_50,iVar2\);$	+1
+use	_glDrawPixels_Comp	iVar2	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*local_ac\ =\ iVar2;$	+1
+local	_glDrawPixels_Comp	puVar4	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_glDrawPixels_Exec	iVar8	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glDrawPixels_Exec	iVar8	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar8\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar8\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glDrawPixels_Exec	piVar7	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_glDrawPixels_NoopExec	iVar4	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glDrawPixels_NoopExec	iVar4	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar4\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar4\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glDrawPixels_NoopExec	piVar3	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glEdgeFlag_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glEdgeFlagv_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glEvalCoord1d_Comp	pdVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glEvalCoord1dv_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glEvalCoord1f_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glEvalCoord1fv_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glEvalCoord2d_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glEvalCoord2dv_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glEvalCoord2f_Comp	pdVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glEvalCoord2fv_Comp	pdVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glEvalMesh1_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glEvalMesh2_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glEvalPoint1_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glEvalPoint2_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glPassThrough_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSetFenceAPPLE_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glFinishFenceAPPLE_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glFinishObjectAPPLE_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glDeleteRenderbuffersEXT_Exec_body	iVar3	hashObject	INFERRED	object found by name in a machine-object hash table (_gleLookupHashObject(table, name))
+local	_glDeleteRenderbuffersEXT_Exec_body	iVar4	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object
+local	_glCheckFramebufferStatusEXT_Exec	iVar2	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object
+local	_glGenerateMipmapEXT_Exec	puVar3	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glFogf_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glFogfv_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glFogi_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glFogiv_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glFogCoordf_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glFogCoordfv_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glFogCoordd_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glFogCoorddv_Comp	pfVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glFrontFace_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glFrustum_Comp	pfVar5	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glHint_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glSeparableFilter2D_ListExec	iVar1	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image
+use	_glSeparableFilter2D_Comp	iVar2	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*iVar2\ =\ _gleRowBytes\(param_6,param_7,param_4\);$	+1
+use	_glSeparableFilter2D_Comp	iVar2	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*if\ \(iVar2\ <\ 1\)\ \{$	+1
+use	_glSeparableFilter2D_Comp	iVar2	rowBytes	INFERRED	result of _gleRowBytes: byte size of one row of the image	^\s*uVar1\ =\ iVar2\ \+\ 3U\ \&\ 0xfffffffc;$	+1
+local	_glSeparableFilter2D_Comp	iVar3	rowBytes2	INFERRED	result of _gleRowBytes: byte size of one row of the image
+local	_glHistogram_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glMinmax_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glResetHistogram_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glResetMinmax_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_glCopyConvolutionFilter1D_Exec	iVar6	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x744c\);$	+1
+use	_glCopyConvolutionFilter1D_Exec	iVar6	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object	^\s*if\ \(\(iVar6\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar6\ \+\ 0xec\)\ !=\ 0\)\)\ \{$	+3
+local	_glCopyConvolutionFilter1D_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glCopyConvolutionFilter2D_Exec	iVar6	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object
+local	_glCopyConvolutionFilter2D_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glLightf_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glLightf_Exec	dVar6	cosValue	CONFIRMED	result of libm _cos
+local	_glLightfv_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+local	_glLighti_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_glLighti_Exec	dVar7	cosValue	CONFIRMED	result of libm _cos	^\s*dVar7\ =\ _cos\(\(double\)\(fVar1\ \*\ FLOAT_00108e84\)\);$	+2
+local	_glLightiv_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)
+use	_glLightiv_Exec	dVar12	cosValue	CONFIRMED	result of libm _cos	^\s*dVar12\ =\ _cos\(\(double\)\(fVar1\ \*\ FLOAT_00108e84\)\);$	+2
+local	_glLightModelf_Comp	puVar1	listRecord	CONFIRMED	result of _gleAddListItem(ctx, listExecFn, size): the new display-list record the Comp function fills (the matching _ListExec replays it)

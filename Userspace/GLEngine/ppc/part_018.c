@@ -44,6 +44,7 @@ void _glLightModelfv_Exec(glContext, pname, params)
   uint uVar4;
   undefined2 uVar5;
   int iVar6;
+  int glContextPtr5424;
   int iVar7;
   float dVar8;
   
@@ -64,9 +65,9 @@ void _glLightModelfv_Exec(glContext, pname, params)
         bVar1 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x358);
       }
       iVar7 = (bVar1 >> 3 & 0x1c) + glContext;
-      iVar6 = *(int *)(glContext + 0x5424);
+      glContextPtr5424 = *(int *)(glContext + 0x5424);
       *(uint *)(iVar7 + 0x324) = *(uint *)(iVar7 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(iVar6 + 0x324);
+      bVar1 = *(byte *)(glContextPtr5424 + 0x324);
       iVar6 = (bVar1 >> 3 & 0x1c) + glContext;
       *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (bVar1 & 0x1f);
     }
@@ -227,6 +228,7 @@ void _glLightModeliv_Exec(glContext, pname, params)
   double dVar2;
   undefined4 glErrorCode;
   int iVar4;
+  int glContextPtr5424;
   int iVar5;
   
   dVar2 = DOUBLE_00108d58;
@@ -251,9 +253,9 @@ void _glLightModeliv_Exec(glContext, pname, params)
         bVar1 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x358);
       }
       iVar5 = (bVar1 >> 3 & 0x1c) + glContext;
-      iVar4 = *(int *)(glContext + 0x5424);
+      glContextPtr5424 = *(int *)(glContext + 0x5424);
       *(uint *)(iVar5 + 0x324) = *(uint *)(iVar5 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(iVar4 + 0x324);
+      bVar1 = *(byte *)(glContextPtr5424 + 0x324);
       iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
       *(uint *)(iVar4 + 0x348) = *(uint *)(iVar4 + 0x348) | 1 << (bVar1 & 0x1f);
     }

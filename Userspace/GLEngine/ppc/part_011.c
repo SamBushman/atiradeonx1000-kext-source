@@ -10,19 +10,19 @@ int _glColor3s_Comp(glContext, red, green, blue)
   double intToDoubleMagic;
   float fVar2;
   float fVar3;
-  float *pfVar4;
+  float *listRecord;
   
-  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   fVar3 = FLOAT_00108e74;
   fVar2 = FLOAT_00108e70;
   intToDoubleMagic = DOUBLE_00108d58;
-  if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e70 + FLOAT_00108e74;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
   }
-  return pfVar4;
+  return listRecord;
 }
 
 /* _glColor3s_Exec @ 0x5b048 (196 bytes) */
@@ -74,21 +74,21 @@ int _glColor3sv_Comp(glContext, v)
   double intToDoubleMagic;
   float fVar2;
   float fVar3;
-  float *pfVar4;
+  float *listRecord;
   
-  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   fVar3 = FLOAT_00108e74;
   fVar2 = FLOAT_00108e70;
   intToDoubleMagic = DOUBLE_00108d58;
-  if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e70 + FLOAT_00108e74;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
   }
-  return pfVar4;
+  return listRecord;
 }
 
 /* _glColor3sv_Exec @ 0x5b224 (208 bytes) */
@@ -135,17 +135,17 @@ int _glColor3ub_Comp(glContext, red, green, blue)
   int green;
   int blue;
 {
-  undefined4 *puVar1;
-  int iVar2;
+  undefined4 *listRecord;
+  int glContextPtr4674;
   
-  iVar2 = *(int *)(glContext + 0x4674);
-  puVar1 = (undefined4 *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = *(undefined4 *)(iVar2 + red * 4);
-    puVar1[1] = *(undefined4 *)(green * 4 + iVar2);
-    puVar1[2] = *(undefined4 *)(iVar2 + blue * 4);
+  glContextPtr4674 = *(int *)(glContext + 0x4674);
+  listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = *(undefined4 *)(glContextPtr4674 + red * 4);
+    listRecord[1] = *(undefined4 *)(green * 4 + glContextPtr4674);
+    listRecord[2] = *(undefined4 *)(glContextPtr4674 + blue * 4);
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glColor3ub_CompExec @ 0x5b3f0 (148 bytes) */
@@ -157,13 +157,13 @@ void _glColor3ub_CompExec(glContext, red, green, blue)
 {
   undefined4 uVar1;
   undefined4 uVar2;
-  int iVar3;
+  int glContextWord4674;
   
   ((int (*)())_glColor3ub_Comp)(glContext,red,green,blue);
-  iVar3 = *(int *)(glContext + 0x4674);
-  uVar1 = *(undefined4 *)(blue * 4 + iVar3);
-  uVar2 = *(undefined4 *)(green * 4 + iVar3);
-  *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)(red * 4 + iVar3);
+  glContextWord4674 = *(int *)(glContext + 0x4674);
+  uVar1 = *(undefined4 *)(blue * 4 + glContextWord4674);
+  uVar2 = *(undefined4 *)(green * 4 + glContextWord4674);
+  *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)(red * 4 + glContextWord4674);
   *(undefined4 *)(glContext + 0x2a4) = uVar2;
   *(undefined4 *)(glContext + 0x2a8) = uVar1;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
@@ -181,17 +181,17 @@ int _glColor3ubv_Comp(glContext, v)
   int glContext;
   byte *v;
 {
-  undefined4 *puVar1;
-  int iVar2;
+  undefined4 *listRecord;
+  int glContextPtr4674;
   
-  iVar2 = *(int *)(glContext + 0x4674);
-  puVar1 = (undefined4 *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = *(undefined4 *)(iVar2 + (uint)*v * 4);
-    puVar1[1] = *(undefined4 *)(iVar2 + (uint)v[1] * 4);
-    puVar1[2] = *(undefined4 *)(iVar2 + (uint)v[2] * 4);
+  glContextPtr4674 = *(int *)(glContext + 0x4674);
+  listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = *(undefined4 *)(glContextPtr4674 + (uint)*v * 4);
+    listRecord[1] = *(undefined4 *)(glContextPtr4674 + (uint)v[1] * 4);
+    listRecord[2] = *(undefined4 *)(glContextPtr4674 + (uint)v[2] * 4);
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glColor3ubv_Exec @ 0x5b4b4 (88 bytes) */
@@ -201,12 +201,12 @@ double _glColor3ubv_Exec(glContext, v)
 {
   undefined4 uVar1;
   undefined4 uVar2;
-  int iVar3;
+  int glContextPtr4674;
   
-  iVar3 = *(int *)(glContext + 0x4674);
-  uVar1 = *(undefined4 *)(iVar3 + (uint)v[2] * 4);
-  uVar2 = *(undefined4 *)((uint)v[1] * 4 + iVar3);
-  *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)((uint)*v * 4 + iVar3);
+  glContextPtr4674 = *(int *)(glContext + 0x4674);
+  uVar1 = *(undefined4 *)(glContextPtr4674 + (uint)v[2] * 4);
+  uVar2 = *(undefined4 *)((uint)v[1] * 4 + glContextPtr4674);
+  *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)((uint)*v * 4 + glContextPtr4674);
   *(undefined4 *)(glContext + 0x2a4) = uVar2;
   *(undefined4 *)(glContext + 0x2a8) = uVar1;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
@@ -238,17 +238,17 @@ int _glColor3ui_Comp(glContext, red, green, blue)
 {
   double dVar1;
   float fVar2;
-  float *pfVar3;
+  float *listRecord;
   
-  pfVar3 = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   fVar2 = FLOAT_00108e6c;
   dVar1 = DOUBLE_00108d70;
-  if (pfVar3 != (float *)0x0) {
-    *pfVar3 = (float)((double)CONCAT44(0x43300000,red) - DOUBLE_00108d70) * FLOAT_00108e6c;
-    pfVar3[1] = (float)((double)CONCAT44(0x43300000,green) - dVar1) * fVar2;
-    pfVar3[2] = (float)((double)CONCAT44(0x43300000,blue) - dVar1) * fVar2;
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)((double)CONCAT44(0x43300000,red) - DOUBLE_00108d70) * FLOAT_00108e6c;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,green) - dVar1) * fVar2;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue) - dVar1) * fVar2;
   }
-  return pfVar3;
+  return listRecord;
 }
 
 /* _glColor3ui_Exec @ 0x5b5fc (176 bytes) */
@@ -296,17 +296,17 @@ int _glColor3uiv_Comp(glContext, v)
 {
   double dVar1;
   float fVar2;
-  float *pfVar3;
+  float *listRecord;
   
-  pfVar3 = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   fVar2 = FLOAT_00108e6c;
   dVar1 = DOUBLE_00108d70;
-  if (pfVar3 != (float *)0x0) {
-    *pfVar3 = (float)((double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70) * FLOAT_00108e6c;
-    pfVar3[1] = (float)((double)CONCAT44(0x43300000,v[1]) - dVar1) * fVar2;
-    pfVar3[2] = (float)((double)CONCAT44(0x43300000,v[2]) - dVar1) * fVar2;
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)((double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70) * FLOAT_00108e6c;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1]) - dVar1) * fVar2;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,v[2]) - dVar1) * fVar2;
   }
-  return pfVar3;
+  return listRecord;
 }
 
 /* _glColor3uiv_Exec @ 0x5b7b0 (188 bytes) */
@@ -351,16 +351,16 @@ int _glColor3us_Comp(glContext, red, green, blue)
   uint blue;
 {
   float fVar1;
-  float *pfVar2;
+  float *listRecord;
   
-  pfVar2 = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   fVar1 = FLOAT_00108e74;
-  if (pfVar2 != (float *)0x0) {
-    *pfVar2 = (GH_U2F((unsigned int)((red | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-    pfVar2[1] = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * fVar1;
-    pfVar2[2] = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * fVar1;
+  if (listRecord != (float *)0x0) {
+    *listRecord = (GH_U2F((unsigned int)((red | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+    listRecord[1] = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * fVar1;
+    listRecord[2] = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * fVar1;
   }
-  return pfVar2;
+  return listRecord;
 }
 
 /* _glColor3us_Exec @ 0x5b964 (184 bytes) */
@@ -414,16 +414,16 @@ int _glColor3usv_Comp(glContext, v)
   ushort *v;
 {
   float fVar1;
-  float *pfVar2;
+  float *listRecord;
   
-  pfVar2 = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   fVar1 = FLOAT_00108e74;
-  if (pfVar2 != (float *)0x0) {
-    *pfVar2 = (GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-    pfVar2[1] = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * fVar1;
-    pfVar2[2] = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * fVar1;
+  if (listRecord != (float *)0x0) {
+    *listRecord = (GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+    listRecord[1] = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * fVar1;
+    listRecord[2] = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * fVar1;
   }
-  return pfVar2;
+  return listRecord;
 }
 
 /* _glColor3usv_Exec @ 0x5bb28 (196 bytes) */
@@ -482,20 +482,20 @@ int _glColor4b_Comp(glContext, red, green, blue, alpha)
   double intToDoubleMagic;
   float fVar2;
   float fVar3;
-  float *pfVar4;
+  float *listRecord;
   
-  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar3 = FLOAT_00108e64;
   fVar2 = FLOAT_00108e60;
   intToDoubleMagic = DOUBLE_00108d58;
-  if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e60 + FLOAT_00108e64;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
-    pfVar4[3] = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    listRecord[3] = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
   }
-  return pfVar4;
+  return listRecord;
 }
 
 /* _glColor4b_Exec @ 0x5bd14 (216 bytes) */
@@ -549,23 +549,23 @@ int _glColor4bv_Comp(glContext, v)
   double intToDoubleMagic;
   float fVar2;
   float fVar3;
-  float *pfVar4;
+  float *listRecord;
   
-  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar3 = FLOAT_00108e64;
   fVar2 = FLOAT_00108e60;
   intToDoubleMagic = DOUBLE_00108d58;
-  if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e60 + FLOAT_00108e64;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[3] = (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
+    listRecord[3] = (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
   }
-  return pfVar4;
+  return listRecord;
 }
 
 /* _glColor4bv_Exec @ 0x5bf40 (248 bytes) */
@@ -608,14 +608,14 @@ void _glColor4bv_CompExec(glContext, v)
 /* _glColor4d_Comp @ 0x5c070 (108 bytes) */
 void _glColor4d_Comp(undefined4 glContext,double red,double green,double blue,double alpha)
 {
-  float *pfVar1;
+  float *listRecord;
   
-  pfVar1 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
-  if (pfVar1 != (float *)0x0) {
-    *pfVar1 = (float)red;
-    pfVar1[1] = (float)green;
-    pfVar1[2] = (float)blue;
-    pfVar1[3] = (float)alpha;
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)red;
+    listRecord[1] = (float)green;
+    listRecord[2] = (float)blue;
+    listRecord[3] = (float)alpha;
   }
   return;
 }
@@ -633,16 +633,16 @@ int _glColor4dv_Comp(glContext, v)
   undefined4 glContext;
   double *v;
 {
-  float *pfVar1;
+  float *listRecord;
   
-  pfVar1 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
-  if (pfVar1 != (float *)0x0) {
-    *pfVar1 = (float)*v;
-    pfVar1[1] = (float)v[1];
-    pfVar1[2] = (float)v[2];
-    pfVar1[3] = (float)v[3];
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)*v;
+    listRecord[1] = (float)v[1];
+    listRecord[2] = (float)v[2];
+    listRecord[3] = (float)v[3];
   }
-  return pfVar1;
+  return listRecord;
 }
 
 /* _glColor4dv_Exec @ 0x5c1b4 (76 bytes) */
@@ -698,16 +698,16 @@ int _glColor4fv_Comp(glContext, v)
   undefined4 glContext;
   undefined4 *v;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = *v;
-    puVar1[1] = v[1];
-    puVar1[2] = v[2];
-    puVar1[3] = v[3];
+  listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = *v;
+    listRecord[1] = v[1];
+    listRecord[2] = v[2];
+    listRecord[3] = v[3];
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glColor4fv_ColorMat_Exec @ 0x5c2c0 (48 bytes) */
@@ -757,20 +757,20 @@ int _glColor4i_Comp(glContext, red, green, blue, alpha)
   double intToDoubleMagic;
   float fVar2;
   float fVar3;
-  float *pfVar4;
+  float *listRecord;
   
-  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar3 = FLOAT_00108e6c;
   fVar2 = FLOAT_00108e68;
   intToDoubleMagic = DOUBLE_00108d58;
-  if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e68 + FLOAT_00108e6c;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
-    pfVar4[3] = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    listRecord[3] = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
   }
-  return pfVar4;
+  return listRecord;
 }
 
 /* _glColor4i_Exec @ 0x5c440 (216 bytes) */
@@ -824,23 +824,23 @@ int _glColor4iv_Comp(glContext, v)
   double intToDoubleMagic;
   float fVar2;
   float fVar3;
-  float *pfVar4;
+  float *listRecord;
   
-  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar3 = FLOAT_00108e6c;
   fVar2 = FLOAT_00108e68;
   intToDoubleMagic = DOUBLE_00108d58;
-  if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58) *
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e68 + FLOAT_00108e6c;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[3] = (float)((double)CONCAT44(0x43300000,v[3] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
+    listRecord[3] = (float)((double)CONCAT44(0x43300000,v[3] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
   }
-  return pfVar4;
+  return listRecord;
 }
 
 /* _glColor4iv_Exec @ 0x5c65c (232 bytes) */
@@ -891,20 +891,20 @@ int _glColor4s_Comp(glContext, red, green, blue, alpha)
   double intToDoubleMagic;
   float fVar2;
   float fVar3;
-  float *pfVar4;
+  float *listRecord;
   
-  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar3 = FLOAT_00108e74;
   fVar2 = FLOAT_00108e70;
   intToDoubleMagic = DOUBLE_00108d58;
-  if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e70 + FLOAT_00108e74;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
-    pfVar4[3] = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    listRecord[3] = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
   }
-  return pfVar4;
+  return listRecord;
 }
 
 /* _glColor4s_Exec @ 0x5c86c (216 bytes) */
@@ -958,23 +958,23 @@ int _glColor4sv_Comp(glContext, v)
   double intToDoubleMagic;
   float fVar2;
   float fVar3;
-  float *pfVar4;
+  float *listRecord;
   
-  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar3 = FLOAT_00108e74;
   fVar2 = FLOAT_00108e70;
   intToDoubleMagic = DOUBLE_00108d58;
-  if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e70 + FLOAT_00108e74;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[3] = (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
+    listRecord[3] = (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
   }
-  return pfVar4;
+  return listRecord;
 }
 
 /* _glColor4sv_Exec @ 0x5ca88 (232 bytes) */
@@ -1022,18 +1022,18 @@ int _glColor4ub_Comp(glContext, red, green, blue, alpha)
   int blue;
   int alpha;
 {
-  undefined4 *puVar1;
-  int iVar2;
+  undefined4 *listRecord;
+  int glContextPtr4674;
   
-  iVar2 = *(int *)(glContext + 0x4674);
-  puVar1 = (undefined4 *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = *(undefined4 *)(iVar2 + red * 4);
-    puVar1[1] = *(undefined4 *)(green * 4 + iVar2);
-    puVar1[2] = *(undefined4 *)(iVar2 + blue * 4);
-    puVar1[3] = *(undefined4 *)(alpha * 4 + iVar2);
+  glContextPtr4674 = *(int *)(glContext + 0x4674);
+  listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = *(undefined4 *)(glContextPtr4674 + red * 4);
+    listRecord[1] = *(undefined4 *)(green * 4 + glContextPtr4674);
+    listRecord[2] = *(undefined4 *)(glContextPtr4674 + blue * 4);
+    listRecord[3] = *(undefined4 *)(alpha * 4 + glContextPtr4674);
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glColor4ub_CompExec @ 0x5cc30 (80 bytes) */
@@ -1054,18 +1054,18 @@ int _glColor4ubv_Comp(glContext, v)
   int glContext;
   byte *v;
 {
-  undefined4 *puVar1;
-  int iVar2;
+  undefined4 *listRecord;
+  int glContextPtr4674;
   
-  iVar2 = *(int *)(glContext + 0x4674);
-  puVar1 = (undefined4 *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = *(undefined4 *)(iVar2 + (uint)*v * 4);
-    puVar1[1] = *(undefined4 *)(iVar2 + (uint)v[1] * 4);
-    puVar1[2] = *(undefined4 *)(iVar2 + (uint)v[2] * 4);
-    puVar1[3] = *(undefined4 *)(iVar2 + (uint)v[3] * 4);
+  glContextPtr4674 = *(int *)(glContext + 0x4674);
+  listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = *(undefined4 *)(glContextPtr4674 + (uint)*v * 4);
+    listRecord[1] = *(undefined4 *)(glContextPtr4674 + (uint)v[1] * 4);
+    listRecord[2] = *(undefined4 *)(glContextPtr4674 + (uint)v[2] * 4);
+    listRecord[3] = *(undefined4 *)(glContextPtr4674 + (uint)v[3] * 4);
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glColor4ubv_Exec @ 0x5cd0c (96 bytes) */
@@ -1076,13 +1076,13 @@ double _glColor4ubv_Exec(glContext, v)
   undefined4 uVar1;
   undefined4 uVar2;
   undefined4 uVar3;
-  int iVar4;
+  int glContextPtr4674;
   
-  iVar4 = *(int *)(glContext + 0x4674);
-  uVar1 = *(undefined4 *)(iVar4 + (uint)v[3] * 4);
-  uVar2 = *(undefined4 *)((uint)v[1] * 4 + iVar4);
-  uVar3 = *(undefined4 *)((uint)v[2] * 4 + iVar4);
-  *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)((uint)*v * 4 + iVar4);
+  glContextPtr4674 = *(int *)(glContext + 0x4674);
+  uVar1 = *(undefined4 *)(glContextPtr4674 + (uint)v[3] * 4);
+  uVar2 = *(undefined4 *)((uint)v[1] * 4 + glContextPtr4674);
+  uVar3 = *(undefined4 *)((uint)v[2] * 4 + glContextPtr4674);
+  *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)((uint)*v * 4 + glContextPtr4674);
   *(undefined4 *)(glContext + 0x2a4) = uVar2;
   *(undefined4 *)(glContext + 0x2a8) = uVar3;
   *(undefined4 *)(glContext + 0x2ac) = uVar1;
@@ -1115,18 +1115,18 @@ int _glColor4ui_Comp(glContext, red, green, blue, alpha)
 {
   double dVar1;
   float fVar2;
-  float *pfVar3;
+  float *listRecord;
   
-  pfVar3 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar2 = FLOAT_00108e6c;
   dVar1 = DOUBLE_00108d70;
-  if (pfVar3 != (float *)0x0) {
-    *pfVar3 = (float)((double)CONCAT44(0x43300000,red) - DOUBLE_00108d70) * FLOAT_00108e6c;
-    pfVar3[1] = (float)((double)CONCAT44(0x43300000,green) - dVar1) * fVar2;
-    pfVar3[2] = (float)((double)CONCAT44(0x43300000,blue) - dVar1) * fVar2;
-    pfVar3[3] = (float)((double)CONCAT44(0x43300000,alpha) - dVar1) * fVar2;
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)((double)CONCAT44(0x43300000,red) - DOUBLE_00108d70) * FLOAT_00108e6c;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,green) - dVar1) * fVar2;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue) - dVar1) * fVar2;
+    listRecord[3] = (float)((double)CONCAT44(0x43300000,alpha) - dVar1) * fVar2;
   }
-  return pfVar3;
+  return listRecord;
 }
 
 /* _glColor4ui_Exec @ 0x5ce7c (192 bytes) */
@@ -1175,18 +1175,18 @@ int _glColor4uiv_Comp(glContext, v)
 {
   double dVar1;
   float fVar2;
-  float *pfVar3;
+  float *listRecord;
   
-  pfVar3 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar2 = FLOAT_00108e6c;
   dVar1 = DOUBLE_00108d70;
-  if (pfVar3 != (float *)0x0) {
-    *pfVar3 = (float)((double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70) * FLOAT_00108e6c;
-    pfVar3[1] = (float)((double)CONCAT44(0x43300000,v[1]) - dVar1) * fVar2;
-    pfVar3[2] = (float)((double)CONCAT44(0x43300000,v[2]) - dVar1) * fVar2;
-    pfVar3[3] = (float)((double)CONCAT44(0x43300000,v[3]) - dVar1) * fVar2;
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)((double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70) * FLOAT_00108e6c;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1]) - dVar1) * fVar2;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,v[2]) - dVar1) * fVar2;
+    listRecord[3] = (float)((double)CONCAT44(0x43300000,v[3]) - dVar1) * fVar2;
   }
-  return pfVar3;
+  return listRecord;
 }
 
 /* _glColor4uiv_Exec @ 0x5d068 (208 bytes) */
