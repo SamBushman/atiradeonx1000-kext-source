@@ -100,45 +100,45 @@ void _gleFeedbackLineLoop(glContext, param_2, param_3, param_4)
 }
 
 /* _gleFeedbackLinesPtr @ 0xcc4ec (276 bytes) */
-void _gleFeedbackLinesPtr(glContext, param_2, param_3, param_4)
+void _gleFeedbackLinesPtr(glContext, vertexList, vertexCount, param_4)
   undefined4 glContext;
-  undefined4 *param_2;
-  int param_3;
+  undefined4 *vertexList;
+  int vertexCount;
   int param_4;
 {
-  undefined4 *puVar1;
-  double dVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 *puVar5;
+  undefined4 *nextVertexPtr;
+  double uintToDoubleBias;
+  undefined4 firstToken;
+  undefined4 restToken;
+  undefined4 *vertexCursor;
   
-  dVar2 = DOUBLE_00108d70;
-  if (1 < param_3) {
+  uintToDoubleBias = DOUBLE_00108d70;
+  if (1 < vertexCount) {
     if (param_4 == 0) {
-      uVar4 = 0x702;
-      uVar3 = 0x702;
+      restToken = 0x702;
+      firstToken = 0x702;
     }
     else if (param_4 == 1) {
-      uVar3 = 0x707;
-      uVar4 = 0x702;
+      firstToken = 0x707;
+      restToken = 0x702;
     }
     else {
-      uVar4 = 0x707;
-      uVar3 = 0x707;
+      restToken = 0x707;
+      firstToken = 0x707;
     }
-    puVar5 = param_2 + 2;
-    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar3) - DOUBLE_00108d70))
+    vertexCursor = vertexList + 2;
+    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,firstToken) - DOUBLE_00108d70))
     ;
-    _gleFeedbackHitRecord(glContext,*param_2);
-    _gleFeedbackHitRecord(glContext,param_2[1]);
-    if (puVar5 < param_2 + param_3 + -1) {
+    _gleFeedbackHitRecord(glContext,*vertexList);
+    _gleFeedbackHitRecord(glContext,vertexList[1]);
+    if (vertexCursor < vertexList + vertexCount + -1) {
       do {
-        ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar4) - dVar2));
-        _gleFeedbackHitRecord(glContext,*puVar5);
-        puVar1 = puVar5 + 1;
-        puVar5 = puVar5 + 2;
-        _gleFeedbackHitRecord(glContext,*puVar1);
-      } while (puVar5 < param_2 + param_3 + -1);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,restToken) - uintToDoubleBias));
+        _gleFeedbackHitRecord(glContext,*vertexCursor);
+        nextVertexPtr = vertexCursor + 1;
+        vertexCursor = vertexCursor + 2;
+        _gleFeedbackHitRecord(glContext,*nextVertexPtr);
+      } while (vertexCursor < vertexList + vertexCount + -1);
     }
   }
   return;

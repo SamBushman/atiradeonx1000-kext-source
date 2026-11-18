@@ -8,9 +8,9 @@ void _glMapVertexAttrib2fARB_Comp(int glContext,undefined4 index,uint size,undef
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
   undefined4 extraout_r4_02;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
+  int payloadBytes;
+  undefined4 forwardedUstride;
+  int forwardedUorder;
   double incomingFpr5;
   double incomingFpr6;
   double incomingFpr7;
@@ -22,13 +22,13 @@ void _glMapVertexAttrib2fARB_Comp(int glContext,undefined4 index,uint size,undef
   double incomingFpr13;
   
   if (size == 2) {
-    iVar2 = (100 - uorder * vorder) * -8 + 0x344;
-    uVar3 = ustride;
-    iVar4 = uorder;
+    payloadBytes = (100 - uorder * vorder) * -8 + 0x344;
+    forwardedUstride = ustride;
+    forwardedUorder = uorder;
     listRecord = (undefined4 *)
-             _gleAddListItem(glContext,PTR__glMap2VertexAttrib2ARB_ListExec_0011019c,iVar2);
+             _gleAddListItem(glContext,PTR__glMap2VertexAttrib2ARB_ListExec_0011019c,payloadBytes);
     if (listRecord == (undefined4 *)0x0) goto LAB_00071b28;
-    ((void (*)())_gleMap2VertexAttrib2fLoad)(glContext,extraout_r4_00,iVar2,ustride,uorder,uVar3,iVar4,vstride,vorder,points,
+    ((void (*)())_gleMap2VertexAttrib2fLoad)(glContext,extraout_r4_00,payloadBytes,ustride,uorder,forwardedUstride,forwardedUorder,vstride,vorder,points,
                listRecord + 1,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,
                incomingFpr11,incomingFpr12,incomingFpr13);
   }
@@ -40,36 +40,36 @@ LAB_00071b14:
       }
       goto LAB_00071b28;
     }
-    iVar2 = (100 - uorder * vorder) * -4 + 0x1b4;
-    uVar3 = ustride;
-    iVar4 = uorder;
+    payloadBytes = (100 - uorder * vorder) * -4 + 0x1b4;
+    forwardedUstride = ustride;
+    forwardedUorder = uorder;
     listRecord = (undefined4 *)
-             _gleAddListItem(glContext,PTR__glMap2VertexAttrib1ARB_ListExec_001101a0,iVar2);
+             _gleAddListItem(glContext,PTR__glMap2VertexAttrib1ARB_ListExec_001101a0,payloadBytes);
     if (listRecord == (undefined4 *)0x0) goto LAB_00071b28;
-    ((void (*)())_gleMap2VertexAttrib1fLoad)(glContext,extraout_r4,iVar2,ustride,uorder,uVar3,iVar4,vstride,vorder,points,
+    ((void (*)())_gleMap2VertexAttrib1fLoad)(glContext,extraout_r4,payloadBytes,ustride,uorder,forwardedUstride,forwardedUorder,vstride,vorder,points,
                listRecord + 1,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,
                incomingFpr11,incomingFpr12,incomingFpr13);
   }
   else if (size == 3) {
-    iVar2 = (100 - uorder * vorder) * -0xc + 0x4d4;
-    uVar3 = ustride;
-    iVar4 = uorder;
+    payloadBytes = (100 - uorder * vorder) * -0xc + 0x4d4;
+    forwardedUstride = ustride;
+    forwardedUorder = uorder;
     listRecord = (undefined4 *)
-             _gleAddListItem(glContext,PTR__glMap2VertexAttrib3ARB_ListExec_00110198,iVar2);
+             _gleAddListItem(glContext,PTR__glMap2VertexAttrib3ARB_ListExec_00110198,payloadBytes);
     if (listRecord == (undefined4 *)0x0) goto LAB_00071b28;
-    ((void (*)())_gleMap2VertexAttrib3fLoad)(glContext,extraout_r4_01,iVar2,ustride,uorder,uVar3,iVar4,vstride,vorder,points,
+    ((void (*)())_gleMap2VertexAttrib3fLoad)(glContext,extraout_r4_01,payloadBytes,ustride,uorder,forwardedUstride,forwardedUorder,vstride,vorder,points,
                listRecord + 1,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,
                incomingFpr11,incomingFpr12,incomingFpr13);
   }
   else {
     if (size != 4) goto LAB_00071b14;
-    iVar2 = (100 - uorder * vorder) * -0x10 + 0x664;
-    uVar3 = ustride;
-    iVar4 = uorder;
+    payloadBytes = (100 - uorder * vorder) * -0x10 + 0x664;
+    forwardedUstride = ustride;
+    forwardedUorder = uorder;
     listRecord = (undefined4 *)
-             _gleAddListItem(glContext,PTR__glMap2VertexAttrib4ARB_ListExec_00110194,iVar2);
+             _gleAddListItem(glContext,PTR__glMap2VertexAttrib4ARB_ListExec_00110194,payloadBytes);
     if (listRecord == (undefined4 *)0x0) goto LAB_00071b28;
-    ((void (*)())_gleMap2VertexAttrib4fLoad)(glContext,extraout_r4_02,iVar2,ustride,uorder,uVar3,iVar4,vstride,vorder,points,
+    ((void (*)())_gleMap2VertexAttrib4fLoad)(glContext,extraout_r4_02,payloadBytes,ustride,uorder,forwardedUstride,forwardedUorder,vstride,vorder,points,
                listRecord + 1,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,
                incomingFpr11,incomingFpr12,incomingFpr13);
   }
@@ -169,8 +169,8 @@ void _glMapVertexAttrib2dARB_Comp(int glContext,undefined4 index,uint size,undef
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
   undefined4 extraout_r4_02;
-  int iVar2;
-  undefined4 uVar3;
+  int payloadBytes;
+  undefined4 forwardedUstride;
   double incomingFpr5;
   double incomingFpr6;
   double incomingFpr7;
@@ -185,12 +185,12 @@ void _glMapVertexAttrib2dARB_Comp(int glContext,undefined4 index,uint size,undef
   undefined4 incomingStackWord_ffffff90;
   
   if (size == 2) {
-    iVar2 = (100 - uorder * vorder) * -8 + 0x344;
-    uVar3 = ustride;
+    payloadBytes = (100 - uorder * vorder) * -8 + 0x344;
+    forwardedUstride = ustride;
     listRecord = (undefined4 *)
-             _gleAddListItem(glContext,PTR__glMap2VertexAttrib2ARB_ListExec_0011019c,iVar2);
+             _gleAddListItem(glContext,PTR__glMap2VertexAttrib2ARB_ListExec_0011019c,payloadBytes);
     if (listRecord == (undefined4 *)0x0) goto LAB_00072010;
-    ((void (*)())_gleMap2VertexAttrib2dLoad)(glContext,extraout_r4_00,iVar2,u1ShadowHi,u1ShadowLo,ustride,uorder,uVar3,incomingStackWord_ffffff88,
+    ((void (*)())_gleMap2VertexAttrib2dLoad)(glContext,extraout_r4_00,payloadBytes,u1ShadowHi,u1ShadowLo,ustride,uorder,forwardedUstride,incomingStackWord_ffffff88,
                incomingStackWord_ffffff8c,incomingStackWord_ffffff90,vstride,vorder,points,listRecord + 1,u1,
                u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13)
     ;
@@ -203,35 +203,35 @@ LAB_00071ffc:
       }
       goto LAB_00072010;
     }
-    iVar2 = (100 - uorder * vorder) * -4 + 0x1b4;
-    uVar3 = ustride;
+    payloadBytes = (100 - uorder * vorder) * -4 + 0x1b4;
+    forwardedUstride = ustride;
     listRecord = (undefined4 *)
-             _gleAddListItem(glContext,PTR__glMap2VertexAttrib1ARB_ListExec_001101a0,iVar2);
+             _gleAddListItem(glContext,PTR__glMap2VertexAttrib1ARB_ListExec_001101a0,payloadBytes);
     if (listRecord == (undefined4 *)0x0) goto LAB_00072010;
-    ((void (*)())_gleMap2VertexAttrib1dLoad)(glContext,extraout_r4,iVar2,u1ShadowHi,u1ShadowLo,ustride,uorder,uVar3,incomingStackWord_ffffff88,
+    ((void (*)())_gleMap2VertexAttrib1dLoad)(glContext,extraout_r4,payloadBytes,u1ShadowHi,u1ShadowLo,ustride,uorder,forwardedUstride,incomingStackWord_ffffff88,
                incomingStackWord_ffffff8c,incomingStackWord_ffffff90,vstride,vorder,points,listRecord + 1,u1,
                u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13)
     ;
   }
   else if (size == 3) {
-    iVar2 = (100 - uorder * vorder) * -0xc + 0x4d4;
-    uVar3 = ustride;
+    payloadBytes = (100 - uorder * vorder) * -0xc + 0x4d4;
+    forwardedUstride = ustride;
     listRecord = (undefined4 *)
-             _gleAddListItem(glContext,PTR__glMap2VertexAttrib3ARB_ListExec_00110198,iVar2);
+             _gleAddListItem(glContext,PTR__glMap2VertexAttrib3ARB_ListExec_00110198,payloadBytes);
     if (listRecord == (undefined4 *)0x0) goto LAB_00072010;
-    ((void (*)())_gleMap2VertexAttrib3dLoad)(glContext,extraout_r4_01,iVar2,u1ShadowHi,u1ShadowLo,ustride,uorder,uVar3,incomingStackWord_ffffff88,
+    ((void (*)())_gleMap2VertexAttrib3dLoad)(glContext,extraout_r4_01,payloadBytes,u1ShadowHi,u1ShadowLo,ustride,uorder,forwardedUstride,incomingStackWord_ffffff88,
                incomingStackWord_ffffff8c,incomingStackWord_ffffff90,vstride,vorder,points,listRecord + 1,u1,
                u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13)
     ;
   }
   else {
     if (size != 4) goto LAB_00071ffc;
-    iVar2 = (100 - uorder * vorder) * -0x10 + 0x664;
-    uVar3 = ustride;
+    payloadBytes = (100 - uorder * vorder) * -0x10 + 0x664;
+    forwardedUstride = ustride;
     listRecord = (undefined4 *)
-             _gleAddListItem(glContext,PTR__glMap2VertexAttrib4ARB_ListExec_00110194,iVar2);
+             _gleAddListItem(glContext,PTR__glMap2VertexAttrib4ARB_ListExec_00110194,payloadBytes);
     if (listRecord == (undefined4 *)0x0) goto LAB_00072010;
-    ((void (*)())_gleMap2VertexAttrib4dLoad)(glContext,extraout_r4_02,iVar2,u1ShadowHi,u1ShadowLo,ustride,uorder,uVar3,incomingStackWord_ffffff88,
+    ((void (*)())_gleMap2VertexAttrib4dLoad)(glContext,extraout_r4_02,payloadBytes,u1ShadowHi,u1ShadowLo,ustride,uorder,forwardedUstride,incomingStackWord_ffffff88,
                incomingStackWord_ffffff8c,incomingStackWord_ffffff90,vstride,vorder,points,listRecord + 1,u1,
                u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13)
     ;

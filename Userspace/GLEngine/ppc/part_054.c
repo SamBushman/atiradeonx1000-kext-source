@@ -824,29 +824,29 @@ void _gle233RevFilter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
   int offsetB;
   int offsetC;
 {
-  byte bVar1;
-  byte bVar2;
-  byte bVar3;
-  byte bVar4;
-  byte bVar5;
-  byte bVar6;
-  byte bVar7;
-  byte bVar8;
+  byte texelBase;
+  byte texelA;
+  byte texelB;
+  byte texelAB;
+  byte texelC;
+  byte texelAC;
+  byte texelBC;
+  byte texelABC;
   
-  bVar1 = *src;
-  bVar2 = src[offsetA];
-  bVar3 = src[offsetB];
-  bVar4 = src[offsetB + offsetA];
-  bVar5 = src[offsetC];
-  bVar6 = src[offsetC + offsetA];
-  bVar7 = src[offsetC + offsetB];
-  bVar8 = src[offsetC + offsetB + offsetA];
-  *dst = (byte)((bVar1 & 7) + (bVar2 & 7) + (bVar3 & 7) + (bVar4 & 7) + (bVar5 & 7) +
-                    (bVar6 & 7) + (bVar7 & 7) + (bVar8 & 7) >> 3) & 7 |
-             (byte)((bVar1 & 0x38) + (bVar2 & 0x38) + (bVar3 & 0x38) + (bVar4 & 0x38) +
-                    (bVar5 & 0x38) + (bVar6 & 0x38) + (bVar7 & 0x38) + (bVar8 & 0x38) >> 3) & 0x38 |
-             (byte)((bVar1 & 0xc0) + (bVar2 & 0xc0) + (bVar3 & 0xc0) + (bVar4 & 0xc0) +
-                    (bVar5 & 0xc0) + (bVar6 & 0xc0) + (bVar7 & 0xc0) + (bVar8 & 0xc0) >> 3) & 0xc0;
+  texelBase = *src;
+  texelA = src[offsetA];
+  texelB = src[offsetB];
+  texelAB = src[offsetB + offsetA];
+  texelC = src[offsetC];
+  texelAC = src[offsetC + offsetA];
+  texelBC = src[offsetC + offsetB];
+  texelABC = src[offsetC + offsetB + offsetA];
+  *dst = (byte)((texelBase & 7) + (texelA & 7) + (texelB & 7) + (texelAB & 7) + (texelC & 7) +
+                    (texelAC & 7) + (texelBC & 7) + (texelABC & 7) >> 3) & 7 |
+             (byte)((texelBase & 0x38) + (texelA & 0x38) + (texelB & 0x38) + (texelAB & 0x38) +
+                    (texelC & 0x38) + (texelAC & 0x38) + (texelBC & 0x38) + (texelABC & 0x38) >> 3) & 0x38 |
+             (byte)((texelBase & 0xc0) + (texelA & 0xc0) + (texelB & 0xc0) + (texelAB & 0xc0) +
+                    (texelC & 0xc0) + (texelAC & 0xc0) + (texelBC & 0xc0) + (texelABC & 0xc0) >> 3) & 0xc0;
   return;
 }
 
@@ -984,33 +984,33 @@ void _gle4444Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
   int offsetB;
   int offsetC;
 {
-  ushort uVar1;
-  ushort uVar2;
-  ushort uVar3;
-  ushort uVar4;
-  ushort uVar5;
-  ushort uVar6;
-  ushort uVar7;
-  ushort uVar8;
+  ushort texelBase;
+  ushort texelA;
+  ushort texelB;
+  ushort texelAB;
+  ushort texelC;
+  ushort texelAC;
+  ushort texelBC;
+  ushort texelABC;
   
-  uVar1 = *src;
-  uVar2 = *(ushort *)((int)src + offsetA);
-  uVar3 = *(ushort *)((int)src + offsetB);
-  uVar4 = *(ushort *)((int)src + offsetB + offsetA);
-  uVar5 = *(ushort *)((int)src + offsetC);
-  uVar6 = *(ushort *)((int)src + offsetC + offsetA);
-  uVar7 = *(ushort *)((int)src + offsetC + offsetB);
-  uVar8 = *(ushort *)((int)src + offsetC + offsetB + offsetA);
-  *dst = (ushort)((uVar1 & 0xf000) + (uVar2 & 0xf000) + (uVar3 & 0xf000) + (uVar4 & 0xf000) +
-                      (uVar5 & 0xf000) + (uVar6 & 0xf000) + (uVar7 & 0xf000) + (uVar8 & 0xf000) >> 3
+  texelBase = *src;
+  texelA = *(ushort *)((int)src + offsetA);
+  texelB = *(ushort *)((int)src + offsetB);
+  texelAB = *(ushort *)((int)src + offsetB + offsetA);
+  texelC = *(ushort *)((int)src + offsetC);
+  texelAC = *(ushort *)((int)src + offsetC + offsetA);
+  texelBC = *(ushort *)((int)src + offsetC + offsetB);
+  texelABC = *(ushort *)((int)src + offsetC + offsetB + offsetA);
+  *dst = (ushort)((texelBase & 0xf000) + (texelA & 0xf000) + (texelB & 0xf000) + (texelAB & 0xf000) +
+                      (texelC & 0xf000) + (texelAC & 0xf000) + (texelBC & 0xf000) + (texelABC & 0xf000) >> 3
                      ) & 0xf000 |
-             (ushort)((uVar1 & 0xf00) + (uVar2 & 0xf00) + (uVar3 & 0xf00) + (uVar4 & 0xf00) +
-                      (uVar5 & 0xf00) + (uVar6 & 0xf00) + (uVar7 & 0xf00) + (uVar8 & 0xf00) >> 3) &
-             0xf00 | (ushort)((uVar1 & 0xf0) + (uVar2 & 0xf0) + (uVar3 & 0xf0) + (uVar4 & 0xf0) +
-                              (uVar5 & 0xf0) + (uVar6 & 0xf0) + (uVar7 & 0xf0) + (uVar8 & 0xf0) >> 3
+             (ushort)((texelBase & 0xf00) + (texelA & 0xf00) + (texelB & 0xf00) + (texelAB & 0xf00) +
+                      (texelC & 0xf00) + (texelAC & 0xf00) + (texelBC & 0xf00) + (texelABC & 0xf00) >> 3) &
+             0xf00 | (ushort)((texelBase & 0xf0) + (texelA & 0xf0) + (texelB & 0xf0) + (texelAB & 0xf0) +
+                              (texelC & 0xf0) + (texelAC & 0xf0) + (texelBC & 0xf0) + (texelABC & 0xf0) >> 3
                              ) & 0xf0 |
-             (ushort)((uVar1 & 0xf) + (uVar2 & 0xf) + (uVar3 & 0xf) + (uVar4 & 0xf) + (uVar5 & 0xf)
-                      + (uVar6 & 0xf) + (uVar7 & 0xf) + (uVar8 & 0xf) >> 3) & 0xf;
+             (ushort)((texelBase & 0xf) + (texelA & 0xf) + (texelB & 0xf) + (texelAB & 0xf) + (texelC & 0xf)
+                      + (texelAC & 0xf) + (texelBC & 0xf) + (texelABC & 0xf) >> 3) & 0xf;
   return;
 }
 

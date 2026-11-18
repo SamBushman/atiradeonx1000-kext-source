@@ -1,0 +1,44 @@
+local	_glePPRelocateLocal	param_1	oldLocalIndex	CONFIRMED	the caller passes the chunk's current index (+0x12 of the local chunk); same shape as oldAttribIndex in the sibling _glePPRelocateAttrib (compared with every operand index field)
+local	_glePPRelocateLocal	param_2	newLocalIndex	CONFIRMED	the caller passes loopIndex, the renumbered index; same role as newAttribIndex in _glePPRelocateAttrib (written into the operand index fields)
+local	_glePPRelocateLocal	param_3	instructionList	CONFIRMED	the caller passes instructionList; same role as in _glePPRelocateAttrib
+local	_glePPRelocateLocal	iVar1	instruction	CONFIRMED	cursor over the instruction list (+8 = next), same role as `instruction` in _glePPRelocateAttrib
+local	_glePPRelocateLocal	uVar2	instructionHeader	CONFIRMED	*(instruction+0xc), the header word whose top 3 bits give the operand count; same role as instructionHeader in _glePPRelocateAttrib
+local	_gle4444Filter3	uVar1	texelBase	CONFIRMED	sample read at source + 0 (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle4444Filter3	uVar2	texelA	CONFIRMED	sample read at source + offsetA (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle4444Filter3	uVar3	texelB	CONFIRMED	sample read at source + offsetB (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle4444Filter3	uVar4	texelAB	CONFIRMED	sample read at source + offsetB + offsetA (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle4444Filter3	uVar5	texelC	CONFIRMED	sample read at source + offsetC (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle4444Filter3	uVar6	texelAC	CONFIRMED	sample read at source + offsetC + offsetA (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle4444Filter3	uVar7	texelBC	CONFIRMED	sample read at source + offsetC + offsetB (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle4444Filter3	uVar8	texelABC	CONFIRMED	sample read at source + offsetC + offsetB + offsetA (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle233RevFilter3	bVar1	texelBase	CONFIRMED	sample read at source + 0 (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle233RevFilter3	bVar2	texelA	CONFIRMED	sample read at source + offsetA (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle233RevFilter3	bVar3	texelB	CONFIRMED	sample read at source + offsetB (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle233RevFilter3	bVar4	texelAB	CONFIRMED	sample read at source + offsetB + offsetA (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle233RevFilter3	bVar5	texelC	CONFIRMED	sample read at source + offsetC (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle233RevFilter3	bVar6	texelAC	CONFIRMED	sample read at source + offsetC + offsetA (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle233RevFilter3	bVar7	texelBC	CONFIRMED	sample read at source + offsetC + offsetB (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_gle233RevFilter3	bVar8	texelABC	CONFIRMED	sample read at source + offsetC + offsetB + offsetA (offsetA/offsetB/offsetC combinations; the 8 samples are averaged per channel); same convention as texelBC/texelAB in _gleFloatFilter3/_gles16s16Filter3
+local	_glMapVertexAttrib2fARB_Comp	iVar2	payloadBytes	INFERRED	the display list payload size computed from the orders ((100 - uorder*vorder) * -4*size + const): passed to _gleAddListItem as payloadBytes and as the (unused) 3rd argument of the _gleMap2VertexAttrib*fLoad call
+local	_glMapVertexAttrib2fARB_Comp	uVar3	forwardedUstride	INFERRED	copy of ustride that becomes the 6th argument of the Load call, a parameter the callee names unusedArg6
+local	_glMapVertexAttrib2fARB_Comp	iVar4	forwardedUorder	INFERRED	copy of uorder that becomes the 7th argument of the Load call, a parameter the callee names unusedArg7
+local	_glMapVertexAttrib2dARB_Comp	iVar2	payloadBytes	INFERRED	the display list payload size computed from the orders ((100 - uorder*vorder) * -8*size + const): passed to _gleAddListItem as payloadBytes and as the (unused) 3rd argument of the _gleMap2VertexAttrib*dLoad call
+local	_glMapVertexAttrib2dARB_Comp	uVar3	forwardedUstride	INFERRED	copy of ustride that becomes the 8th argument of the Load call, a parameter the callee names unusedArg8
+local	_glMap2d_Comp	iVar4	forwardedUorder	INFERRED	copy of uorder taken before each Load call and passed as its 8th argument, a parameter the callee does not use (unusedArg8 in the _gleMap2*dLoad family)
+local	_glGetTexParameteriv_Exec	uVar4	paramValue	INFERRED	the integer state value stored to *params (every branch assigns it from a texture object field or a cast of fVar1, and the epilogue writes *params = uVar4)
+local	_glGetTexParameteriv_Exec	fVar2	floatToIntScale	CONFIRMED	FLOAT_00108e94 = 2147483520.0 (largest float below 2^31), the scale applied to the border colour components (params[i] = (int)(color * fVar2 - 0.5))
+local	_glGetTexParameteriv_Exec	fVar1	halfThenFloatValue	INFERRED	first FLOAT_00108e90 = 0.5 (the rounding offset subtracted in the border colour case), later a float texture parameter (+0x28 .. +0x68) or colour component converted with a cast to int
+local	_gleFeedbackPolygonPtr	param_2	vertexList	CONFIRMED	array of vertex pointers: *param_2 is handed to _gleFeedbackHitRecord; callers pass polygonList / triangleVertexList
+local	_gleFeedbackPolygonPtr	param_3	vertexCount	CONFIRMED	number of vertices: loop bound (param_2 + param_3) and emitted as the vertex count token; callers pass polygonVertexCount / 3
+local	_gleFeedbackPolygonPtr	param_4	polygonModeIndex	CONFIRMED	callers pass facePolygonMode - 0x1b00 (GL_POINT/GL_LINE/GL_FILL as 0/1/2); the low 2 bits select the point, line or polygon feedback branch
+local	_gleFeedbackPolygonPtr	uVar1	polygonModeBits	INFERRED	polygonModeIndex & 3
+local	_gleFeedbackPolygonPtr	uVar3	feedbackTokenEnum	INFERRED	the token enum converted to float for _gleFeedbackToken: 0x707 GL_LINE_RESET_TOKEN for the first edge, 0x702 GL_LINE_TOKEN afterwards
+local	_gleFeedbackPolygonPtr	dVar2	uintToDoubleBias	CONFIRMED	DOUBLE_00108d70 = 2^52, the bias of the unsigned int to double conversion (CONCAT44(0x43300000, value) - bias)
+local	_gleFeedbackPolygonPtr	piVar4	vertexEnd	INFERRED	vertexList + vertexCount, the end of the vertex pointer array
+local	_gleFeedbackLinesPtr	param_2	vertexList	CONFIRMED	array of vertex pointers whose entries are handed to _gleFeedbackHitRecord
+local	_gleFeedbackLinesPtr	param_3	vertexCount	CONFIRMED	number of vertices: nothing is emitted for fewer than 2, loop bound param_2 + param_3 - 1
+local	_gleFeedbackLinesPtr	dVar2	uintToDoubleBias	CONFIRMED	DOUBLE_00108d70 = 2^52, the bias of the unsigned int to double conversion
+local	_gleFeedbackLinesPtr	uVar3	firstToken	INFERRED	token enum emitted for the first line segment (0x702 GL_LINE_TOKEN or 0x707 GL_LINE_RESET_TOKEN depending on param_4)
+local	_gleFeedbackLinesPtr	uVar4	restToken	INFERRED	token enum emitted for the following segments
+local	_gleFeedbackLinesPtr	puVar5	vertexCursor	INFERRED	walks the vertex pointer pairs from index 2, two entries per segment
+local	_gleFeedbackLinesPtr	puVar1	nextVertexPtr	INFERRED	puVar5 + 1, the second vertex of the pair being emitted
