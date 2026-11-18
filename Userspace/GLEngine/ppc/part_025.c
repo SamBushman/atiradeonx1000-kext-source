@@ -1273,22 +1273,22 @@ void _glValidateProgramARB_Exec(glContext, programObj)
 {
   undefined4 glErrorCode;
   undefined4 stringLength2;
-  int iVar2;
+  int sharedStateThenProgramObject;
   int stringLength;
-  char *pcVar4;
-  char *pcVar5;
+  char *newInfoLog;
+  char *validationMessage;
   
-  pcVar5 = 
+  validationMessage = 
   "Validation Failed: Sampler error:\n  Samplers of different types use the same texture image unit.\n   - or -\n  A sampler\'s texture unit is out of range (greater than max allowed or negative).\n"
   ;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar2 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_unlock(iVar2 + 0x8028);
-      iVar2 = *(int *)(glContext + 0x5148);
+    sharedStateThenProgramObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenProgramObject + 0x8024) != '\0') {
+      _pthread_mutex_unlock(sharedStateThenProgramObject + 0x8028);
+      sharedStateThenProgramObject = *(int *)(glContext + 0x5148);
     }
-    iVar2 = _gleLookupHashObject(iVar2 + 0x6018,programObj);
-    if (iVar2 == 0) {
+    sharedStateThenProgramObject = _gleLookupHashObject(sharedStateThenProgramObject + 0x6018,programObj);
+    if (sharedStateThenProgramObject == 0) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
@@ -1298,55 +1298,55 @@ void _glValidateProgramARB_Exec(glContext, programObj)
       glErrorCode = 0x501;
       goto LAB_00088c48;
     }
-    if (*(int *)(iVar2 + 0x10) == 0x8b40) {
-      *(undefined1 *)(iVar2 + 0x3d) = 1;
-      if (*(char *)(iVar2 + 0x3c) == '\0') {
-        *(undefined1 *)(iVar2 + 0x3d) = 0;
+    if (*(int *)(sharedStateThenProgramObject + 0x10) == 0x8b40) {
+      *(undefined1 *)(sharedStateThenProgramObject + 0x3d) = 1;
+      if (*(char *)(sharedStateThenProgramObject + 0x3c) == '\0') {
+        *(undefined1 *)(sharedStateThenProgramObject + 0x3d) = 0;
         stringLength = _strlen("Validation Failed: Program is not successfully linked.\n");
-        pcVar4 = (char *)_malloc(*(int *)(iVar2 + 0x1c) + stringLength + 2);
-        if (*(char **)(iVar2 + 0x18) == (char *)0x0) {
-          _strcpy(pcVar4,"Validation Failed: Program is not successfully linked.\n");
+        newInfoLog = (char *)_malloc(*(int *)(sharedStateThenProgramObject + 0x1c) + stringLength + 2);
+        if (*(char **)(sharedStateThenProgramObject + 0x18) == (char *)0x0) {
+          _strcpy(newInfoLog,"Validation Failed: Program is not successfully linked.\n");
           stringLength = _strlen("Validation Failed: Program is not successfully linked.\n");
-          pcVar4[stringLength] = '\0';
+          newInfoLog[stringLength] = '\0';
         }
         else {
-          _strncpy(pcVar4,*(char **)(iVar2 + 0x18),*(size_t *)(iVar2 + 0x1c));
-          pcVar4[*(int *)(iVar2 + 0x1c)] = '\n';
-          _strcpy(pcVar4 + *(int *)(iVar2 + 0x1c) + 1,
+          _strncpy(newInfoLog,*(char **)(sharedStateThenProgramObject + 0x18),*(size_t *)(sharedStateThenProgramObject + 0x1c));
+          newInfoLog[*(int *)(sharedStateThenProgramObject + 0x1c)] = '\n';
+          _strcpy(newInfoLog + *(int *)(sharedStateThenProgramObject + 0x1c) + 1,
                   "Validation Failed: Program is not successfully linked.\n");
-          pcVar5 = "Validation Failed: Program is not successfully linked.\n";
+          validationMessage = "Validation Failed: Program is not successfully linked.\n";
 LAB_00088d48:
-          stringLength = _strlen(pcVar5);
-          pcVar4[*(int *)(iVar2 + 0x1c) + stringLength + 1] = '\0';
-          _free(*(undefined4 *)(iVar2 + 0x18));
+          stringLength = _strlen(validationMessage);
+          newInfoLog[*(int *)(sharedStateThenProgramObject + 0x1c) + stringLength + 1] = '\0';
+          _free(*(undefined4 *)(sharedStateThenProgramObject + 0x18));
         }
       }
       else {
-        if (*(char *)(iVar2 + 0x3e) != '\0') goto LAB_00088d8c;
-        *(undefined1 *)(iVar2 + 0x3d) = 0;
+        if (*(char *)(sharedStateThenProgramObject + 0x3e) != '\0') goto LAB_00088d8c;
+        *(undefined1 *)(sharedStateThenProgramObject + 0x3d) = 0;
         stringLength = _strlen(
                        "Validation Failed: Sampler error:\n  Samplers of different types use the same texture image unit.\n   - or -\n  A sampler\'s texture unit is out of range (greater than max allowed or negative).\n"
                        );
-        pcVar4 = (char *)_malloc(*(int *)(iVar2 + 0x1c) + stringLength + 2);
-        if (*(char **)(iVar2 + 0x18) != (char *)0x0) {
-          _strncpy(pcVar4,*(char **)(iVar2 + 0x18),*(size_t *)(iVar2 + 0x1c));
-          pcVar4[*(int *)(iVar2 + 0x1c)] = '\n';
-          _strcpy(pcVar4 + *(int *)(iVar2 + 0x1c) + 1,
+        newInfoLog = (char *)_malloc(*(int *)(sharedStateThenProgramObject + 0x1c) + stringLength + 2);
+        if (*(char **)(sharedStateThenProgramObject + 0x18) != (char *)0x0) {
+          _strncpy(newInfoLog,*(char **)(sharedStateThenProgramObject + 0x18),*(size_t *)(sharedStateThenProgramObject + 0x1c));
+          newInfoLog[*(int *)(sharedStateThenProgramObject + 0x1c)] = '\n';
+          _strcpy(newInfoLog + *(int *)(sharedStateThenProgramObject + 0x1c) + 1,
                   "Validation Failed: Sampler error:\n  Samplers of different types use the same texture image unit.\n   - or -\n  A sampler\'s texture unit is out of range (greater than max allowed or negative).\n"
                  );
           goto LAB_00088d48;
         }
-        _strcpy(pcVar4,
+        _strcpy(newInfoLog,
                 "Validation Failed: Sampler error:\n  Samplers of different types use the same texture image unit.\n   - or -\n  A sampler\'s texture unit is out of range (greater than max allowed or negative).\n"
                );
         stringLength = _strlen(
                        "Validation Failed: Sampler error:\n  Samplers of different types use the same texture image unit.\n   - or -\n  A sampler\'s texture unit is out of range (greater than max allowed or negative).\n"
                        );
-        pcVar4[stringLength] = '\0';
+        newInfoLog[stringLength] = '\0';
       }
-      *(char **)(iVar2 + 0x18) = pcVar4;
-      stringLength2 = _strlen(pcVar4);
-      *(undefined4 *)(iVar2 + 0x1c) = stringLength2;
+      *(char **)(sharedStateThenProgramObject + 0x18) = newInfoLog;
+      stringLength2 = _strlen(newInfoLog);
+      *(undefined4 *)(sharedStateThenProgramObject + 0x1c) = stringLength2;
 LAB_00088d8c:
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
         return;

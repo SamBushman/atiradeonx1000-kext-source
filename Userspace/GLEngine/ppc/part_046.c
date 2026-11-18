@@ -2718,41 +2718,41 @@ int _gleCreateQueryObject(glContext, id)
   int glContext;
   undefined4 id;
 {
-  int *piVar1;
-  undefined4 *puVar2;
+  int *rendererFuncs;
+  undefined4 *rendererContext;
   undefined *freeQueryObject;
-  undefined4 *puVar4;
-  undefined4 *puVar5;
-  int iVar6;
+  undefined4 *handleCursor;
+  undefined4 *queryObject;
+  int rendererIndex;
   int iVar7;
   
-  puVar5 = (undefined4 *)_malloc(0x30);
+  queryObject = (undefined4 *)_malloc(0x30);
   freeQueryObject = PTR__gleFreeQueryObject_00110e8c;
-  puVar5[2] = 1;
-  puVar5[3] = freeQueryObject;
-  puVar5[1] = id;
-  puVar4 = puVar5 + 4;
-  *puVar5 = 0;
+  queryObject[2] = 1;
+  queryObject[3] = freeQueryObject;
+  queryObject[1] = id;
+  handleCursor = queryObject + 4;
+  *queryObject = 0;
   iVar7 = 8;
   do {
-    *puVar4 = 0;
-    puVar4 = puVar4 + 1;
+    *handleCursor = 0;
+    handleCursor = handleCursor + 1;
     iVar7 = iVar7 + -1;
   } while (iVar7 != 0);
   iVar7 = glContext + 0x10000;
-  iVar6 = 0;
+  rendererIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
-    puVar4 = puVar5 + 4;
+    handleCursor = queryObject + 4;
     do {
-      piVar1 = (int *)(iVar7 + -0x777c);
-      puVar2 = (undefined4 *)(iVar7 + -0x7a54);
-      iVar6 = iVar6 + 1;
+      rendererFuncs = (int *)(iVar7 + -0x777c);
+      rendererContext = (undefined4 *)(iVar7 + -0x7a54);
+      rendererIndex = rendererIndex + 1;
       iVar7 = iVar7 + 0x2e0;
-      (**(code **)(*piVar1 + 0x1c8))(*puVar2,puVar4);
-      puVar4 = puVar4 + 1;
-    } while (iVar6 < (int)(uint)*(byte *)(glContext + 0x85a4));
+      (**(code **)(*rendererFuncs + 0x1c8))(*rendererContext,handleCursor);
+      handleCursor = handleCursor + 1;
+    } while (rendererIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
-  return puVar5;
+  return queryObject;
 }
 
 /* _pow_10 @ 0xe1518 (156 bytes) */

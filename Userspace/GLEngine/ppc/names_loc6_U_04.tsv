@@ -1,0 +1,58 @@
+local	_LFSParserGetPart	param_1	parser	CONFIRMED	first argument of _LFSParserGetCharacter/_LFSParserRewind/_LFSParserEatWhiteSpace (parser) and named parser in every sibling
+local	_LFSParserGetPart	param_2	tokenBuffer	CONFIRMED	output buffer the characters are stored into; callers pass their tokenBuffer arrays
+local	_LFSParserGetPart	local_30	currentChar	CONFIRMED	address passed as the outChar parameter of _LFSParserGetCharacter; local_30[0] is the character copied to the token buffer
+local	_LFSParserGetPart	iVar1	getCharacterStatus	CONFIRMED	result of _LFSParserGetCharacter (0 = a character was read, nonzero ends the token)
+local	_LFSParserGetPart	uVar2	partLength	CONFIRMED	number of characters stored; returned (0 when empty or 0xff) and used as the token length by callers (partLength in _LFSParserParseArray)
+local	_LFSParserGetPart	local_20	savedCursorWord0	INFERRED	parser cursor word at +0xc saved on entry and also stored to +0x45c (start of the part); _LFSParserParseSourceModifier restores +0xc from the same pattern
+local	_LFSParserGetPart	local_1c	savedCursorWord1	INFERRED	parser cursor word at +0x10 saved on entry and also stored to +0x460 (start of the part)
+local	_LFSParserParseRegister	param_1	parser	CONFIRMED	passed to _LFSParserGetPart as the parser (callers pass their parser)
+local	_LFSParserParseRegister	param_2	registerKind	CONFIRMED	callers pass &registerKind (_LFSParserParseDestination/_LFSParserParseSourceVar); receives 1 for rN, 2 for cN, 3 for the literals 0/1, 4 for color0/color1, 5 for tN
+local	_LFSParserParseRegister	param_3	registerIndex	CONFIRMED	callers pass registerIndex; receives the number parsed with _atoi (or 0/1 for the colorN / 0 / 1 names)
+local	_LFSParserParseRegister	local_110	tokenBuffer	CONFIRMED	buffer filled by _LFSParserGetPart and compared with "color0"/"color1"; its first char selects c/r/t
+local	_LFSParserParseRegister	auStack_10f	tokenAfterPrefix	CONFIRMED	second character of tokenBuffer onward: the digits parsed with _atoi after the register letter
+local	_LFSParserParseRegister	uVar3	registerNumber	CONFIRMED	value stored to *param_3 (the register index): _atoi result or the constants 0/1
+local	_LFSParserParseRegister	bVar1	registerNumberTooLarge	CONFIRMED	8 < registerNumber (c) or 6 < registerNumber (r/t): selects the error code returned
+local	_LFSParserParseSourceModifier	param_1	parser	CONFIRMED	passed to _LFSParserGetPart; callers pass parser
+local	_LFSParserParseSourceModifier	param_2	sourceVar	CONFIRMED	callers pass sourceVar (_LFSParserParseSourceVar); its word at +0xc collects the modifier flag bits
+local	_LFSParserParseSourceModifier	local_120	tokenBuffer	CONFIRMED	buffer filled by _LFSParserGetPart and compared with "neg"/"2x"/"bias"/"comp"
+local	_LFSParserParseSourceModifier	uVar1	modifierFlags	CONFIRMED	sourceVar+0xc OR-ed with 0x100 (neg), 0x200 (2x), 0x400 (bias) or 0x800 (comp) and stored back
+local	_LFSParserParseSourceModifier	uVar3	modifierCount	INFERRED	counts modifiers consumed (loop continues while a '.' follows, at most 4)
+local	_LFSParserParseSourceModifier	local_20	savedCursorWord0	INFERRED	parser cursor word +0xc saved before peeking the next part and written back when it is not '.'
+local	_LFSParserParseSourceModifier	local_1c	savedCursorWord1	INFERRED	parser cursor word +0x10 saved before peeking the next part and written back when it is not '.'
+local	_LFSStreamChunkGetStream	param_1	chunk	CONFIRMED	callers pass chunk
+local	_LFSStreamChunkGetStream	param_3	chunkWordCount	CONFIRMED	callers pass &chunkWordCount (or scratchCount); the function stores 1..4 into it
+local	_LFSStreamChunkGetStream	param_4	subIndex	CONFIRMED	callers pass subIndex; selects the word of a type-4 chunk (param_1+param_4*4+4) or the sub-record of the type-2 chunk
+local	_LFSStreamChunkGetStream	bVar1	chunkType	INFERRED	first byte of the chunk, switched on 1..4 to pick how the stream word is built
+local	_LFSStreamChunkGetStream	local_20	wordBuffer	INFERRED	8-word scratch whose first word is zeroed, filled with _memmove from the chunk (type 4) and returned
+local	_LFSParserParseRegisterInit	param_1	parser	CONFIRMED	passed to _LFSParserGetPart/_LFSParserParseRegister; parser
+local	_LFSParserParseRegisterInit	local_140	tokenBuffer	CONFIRMED	buffer filled by _LFSParserGetPart and compared with "PassTexCoord"/"SampleMap"/"str"/"stq"/"str_dr"/"stq_dq"
+local	_LFSParserParseRegisterInit	local_20	destRegisterKind	CONFIRMED	out registerKind of the first _LFSParserParseRegister call (must be 1)
+local	_LFSParserParseRegisterInit	local_34	destRegisterIndex	CONFIRMED	out registerIndex of the first _LFSParserParseRegister call; used to index the per-pass register-used byte table (parser+0x24+pass*0x10)
+local	_LFSParserParseRegisterInit	local_40	initOperation	INFERRED	first word of the register-init record passed to _LFSStreamAdd*PassRegisterInit: 0 for PassTexCoord, 0x10 for SampleMap
+local	_LFSParserParseRegisterInit	local_3c	sourceRegisterKind	CONFIRMED	out registerKind of the second _LFSParserParseRegister call (must be 1 or 5)
+local	_LFSParserParseRegisterInit	local_38	sourceRegisterIndex	CONFIRMED	out registerIndex of the second _LFSParserParseRegister call; compared with the register list entries (+0xc)
+local	_LFSParserParseRegisterInit	local_30	coordFormat	INFERRED	0 for ".str", 0x100 ".stq", 0x200 ".str_dr", 0x300 ".stq_dq": the coordinate format word of the init record
+local	_LFSParserParseRegisterInit	cVar1	passKind	INFERRED	parser byte +0x19: 2 selects _LFSStreamAddPreliminaryPassRegisterInit, 3 selects _LFSStreamAddOutputPassRegisterInit
+local	_LFSParserParseRegisterInit	uVar4	listIndex	INFERRED	loop counter 0..1 over the two register lists (stream+4 and stream+0xc) checked for a conflicting coordinate format
+local	_LFSParserParseRegisterInit	piVar5	registerListHead	INFERRED	pointer to the head of the register list (stream+4 or +0xc) walked through the +0x4c next links
+local	_gleClearPipelineProgram	param_2	pipelineProgram	INFERRED	the caller passes programObject+0x10 (the pipeline program embedded in the program object); its PP stream (word 0), source buffer (word 1) and per-kind emulator/LFS program (word 0x135, kind at short +0x4ba) are freed and cleared here
+local	_gleClearPipelineProgram	iVar4	loggedParamVectorThenDefaultTable	INFERRED	first pipelineProgram[0x12f] (the logged parameter vector: passed with its +0x28 count and +0x2c offset to _glePPUnlogParameters and released with _gleVecFree); then pipelineProgram[0x134], a table of 4-float entries reset to (0,0,0,1.0f)
+local	_gleClearPipelineProgram	iVar1	entryByteOffset	INFERRED	loopIndex*0x10 byte offset of the 16-byte default entry being reset
+local	_gleClearPipelineProgram	iVar2	entryPtr	INFERRED	iVar1+table: address of the 16-byte entry whose words +4/+8/+0xc are set to 0/0/1.0f
+local	_gleShaderParse	param_2	shaderObject	CONFIRMED	+0x20 compared with 0x8b31 (GL_VERTEX_SHADER_ARB), source string +0x2c passed to _ShCompile, compiler +0x30, info log +0x18/+0x1c (shaderObject in the sibling shader functions)
+local	_gleShaderParse	local_20	sourceStrings	CONFIRMED	one-element array holding the source string pointer (shaderObject+0x2c) passed as the strings argument of _ShCompile with count 1
+local	_gleShaderParse	uVar4	compileSucceeded	INFERRED	byte result of _ShCompile stored to shaderObject+0x25
+local	_gleShaderParse	pcVar3	infoLog	CONFIRMED	result of _ShGetInfoLog copied into the freshly malloc'd shaderObject+0x18 buffer
+local	_glValidateProgramARB_Exec	iVar2	sharedStateThenProgramObject	CONFIRMED	ctx+0x5148 shared state (mutex at +0x8028, hash at +0x6018), then the program object found by _gleLookupHashObject (type word +0x10 == 0x8b40 GL_PROGRAM_OBJECT_ARB)
+local	_glValidateProgramARB_Exec	pcVar4	newInfoLog	CONFIRMED	malloc'd buffer receiving the old info log, a newline and the validation message; stored as programObject+0x18 with its _strlen at +0x1c
+local	_glValidateProgramARB_Exec	pcVar5	validationMessage	CONFIRMED	the validation failure text ("Sampler error..." initially, "Program is not successfully linked" after the not-linked branch) appended to the info log
+local	_gleCreateQueryObject	puVar5	queryObject	CONFIRMED	malloc(0x30) block returned by the function: id stored at word 1, refcount 1 at word 2, _gleFreeQueryObject destructor at word 3, per-renderer handles from word 4
+local	_gleCreateQueryObject	puVar4	handleCursor	INFERRED	cursor into the per-renderer handle array (queryObject words 4..11): first zero-filled, then advanced per renderer as the out argument of the renderer create-query callback (+0x1c8)
+local	_gleCreateQueryObject	iVar6	rendererIndex	INFERRED	counts renderers up to the renderer count byte ctx+0x85a4
+local	_gleCreateQueryObject	piVar1	rendererFuncs	INFERRED	address ctx+0x8884+k*0x2e0 holding the renderer function table (same role as rendererFuncs in _gleReclaimVertexArrayResources); entry +0x1c8 creates the query
+local	_gleCreateQueryObject	puVar2	rendererContext	INFERRED	address ctx+0x85ac+k*0x2e0 holding the renderer handle passed first to the renderer callback (same role as rendererContext in _gleReclaimVertexArrayResources)
+local	_gleReclaimBufferObjectResources	piVar1	rendererFuncs	INFERRED	address ctx+0x8884+k*0x2e0 holding the renderer function table (same role as rendererFuncs in _gleReclaimVertexArrayResources); entry +0x1e0 is called with the buffer handle
+local	_gleReclaimBufferObjectResources	puVar2	rendererContext	INFERRED	address ctx+0x85ac+k*0x2e0 holding the renderer handle passed first to the callback (same role as rendererContext in _gleReclaimVertexArrayResources)
+local	_gleReclaimBufferObjectResources	iVar7	rendererBase	INFERRED	ctx+0x10000 stepped by the 0x2e0 renderer stride (same role as rendererBase in _gleReclaimVertexArrayResources)
+local	_gleReclaimBufferObjectResources	piVar4	nextBucket	INFERRED	address of the next hash bucket slot (bucket+1) saved before walking the chain of the current bucket (same role as nextBucket in _gleReclaimVertexArrayResources)
+local	_gleReclaimBufferObjectResources	piVar8	bufferWordCursor	INFERRED	buffer object address advanced by 4 per renderer: its +0x10 word is the renderer buffer handle and its +0x48 word the dirty flags that get bit 1

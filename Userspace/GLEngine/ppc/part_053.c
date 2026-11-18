@@ -919,41 +919,41 @@ switchD_000f44b0_caseD_0:
 }
 
 /* _gleShaderParse @ 0xf48d8 (244 bytes) */
-void _gleShaderParse(glContext, param_2)
+void _gleShaderParse(glContext, shaderObject)
   int glContext;
-  int param_2;
+  int shaderObject;
 {
   int iVar1;
-  undefined1 uVar4;
+  undefined1 compileSucceeded;
   undefined4 uVar2;
-  char *pcVar3;
-  undefined4 local_20 [4];
+  char *infoLog;
+  undefined4 sourceStrings [4];
   
-  if (*(char *)(param_2 + 0x24) != '\0') {
-    iVar1 = *(int *)(param_2 + 0x30);
-    local_20[0] = *(undefined4 *)(param_2 + 0x2c);
-    *(undefined1 *)(param_2 + 0x25) = 0;
+  if (*(char *)(shaderObject + 0x24) != '\0') {
+    iVar1 = *(int *)(shaderObject + 0x30);
+    sourceStrings[0] = *(undefined4 *)(shaderObject + 0x2c);
+    *(undefined1 *)(shaderObject + 0x25) = 0;
     if (iVar1 == 0) {
-      iVar1 = _ShConstructCompiler(*(int *)(param_2 + 0x20) != 0x8b31,0);
-      *(int *)(param_2 + 0x30) = iVar1;
+      iVar1 = _ShConstructCompiler(*(int *)(shaderObject + 0x20) != 0x8b31,0);
+      *(int *)(shaderObject + 0x30) = iVar1;
     }
-    uVar4 = _ShCompile(iVar1,local_20,1,*(undefined4 *)(glContext + 0x7594),
+    compileSucceeded = _ShCompile(iVar1,sourceStrings,1,*(undefined4 *)(glContext + 0x7594),
                        *(undefined4 *)(glContext + 0x7598));
-    *(undefined1 *)(param_2 + 0x24) = 0;
-    *(undefined1 *)(param_2 + 0x25) = uVar4;
-    uVar2 = _ShGetInfoLog(*(undefined4 *)(param_2 + 0x30));
+    *(undefined1 *)(shaderObject + 0x24) = 0;
+    *(undefined1 *)(shaderObject + 0x25) = compileSucceeded;
+    uVar2 = _ShGetInfoLog(*(undefined4 *)(shaderObject + 0x30));
     uVar2 = _strlen(uVar2);
-    *(undefined4 *)(param_2 + 0x1c) = uVar2;
-    if (*(int *)(param_2 + 0x18) != 0) {
-      _free(*(int *)(param_2 + 0x18));
+    *(undefined4 *)(shaderObject + 0x1c) = uVar2;
+    if (*(int *)(shaderObject + 0x18) != 0) {
+      _free(*(int *)(shaderObject + 0x18));
     }
-    *(undefined4 *)(param_2 + 0x18) = 0;
-    if (*(int *)(param_2 + 0x1c) != 0) {
-      iVar1 = _malloc(*(int *)(param_2 + 0x1c) + 1);
-      *(int *)(param_2 + 0x18) = iVar1;
+    *(undefined4 *)(shaderObject + 0x18) = 0;
+    if (*(int *)(shaderObject + 0x1c) != 0) {
+      iVar1 = _malloc(*(int *)(shaderObject + 0x1c) + 1);
+      *(int *)(shaderObject + 0x18) = iVar1;
       if (iVar1 != 0) {
-        pcVar3 = (char *)_ShGetInfoLog(*(undefined4 *)(param_2 + 0x30));
-        _strncpy(*(char **)(param_2 + 0x18),pcVar3,*(size_t *)(param_2 + 0x1c));
+        infoLog = (char *)_ShGetInfoLog(*(undefined4 *)(shaderObject + 0x30));
+        _strncpy(*(char **)(shaderObject + 0x18),infoLog,*(size_t *)(shaderObject + 0x1c));
       }
     }
   }
