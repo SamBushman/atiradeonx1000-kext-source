@@ -1781,20 +1781,20 @@ int _gleCheckTexImage2DArgs(glContext, target, level, internalformat, width, hei
   undefined4 type;
 {
   undefined4 glErrorCode;
-  ushort uVar1;
-  int iVar2;
+  ushort textureKindBits;
+  int rangeMinXThenReturnValue;
   int glContextPtr468c;
   int textureObject;
-  uint uVar4;
-  int iVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  uint uVar8;
-  uint uVar9;
+  uint sizeLimit;
+  int rangeMinYThenCheckResult;
+  undefined4 allowColorIndex;
+  undefined4 allowDepthFormat;
+  uint innerHeight;
+  uint innerWidth;
   
   textureObject = ((int (*)())_gleLookUpTexture2D)(glContext,target);
-  uVar7 = 1;
-  uVar6 = 1;
+  allowDepthFormat = 1;
+  allowColorIndex = 1;
   if (textureObject == 0) {
     if (*(int *)(glContext + 0x7574) == 0) {
       glErrorCode = 0x500;
@@ -1802,33 +1802,33 @@ LAB_00018e64:
       *(undefined4 *)(glContext + 0x7574) = glErrorCode;
     }
 LAB_00018e68:
-    iVar2 = 0;
+    rangeMinXThenReturnValue = 0;
   }
   else {
     if ((*(uint *)(glContext + 0x3410) & 2) == 0) {
       if (((*(uint *)(glContext + 0x3410) & 4) != 0) && (*(short *)(glContext + 0x3348) == -0x7fea)) {
-        iVar5 = *(int *)(glContext + 0x3354);
-        iVar2 = *(int *)(glContext + 0x3350);
+        rangeMinYThenCheckResult = *(int *)(glContext + 0x3354);
+        rangeMinXThenReturnValue = *(int *)(glContext + 0x3350);
         goto LAB_00018d64;
       }
     }
     else if (*(short *)(glContext + 0x3308) == -0x7fea) {
-      iVar5 = *(int *)(glContext + 0x3314);
-      iVar2 = *(int *)(glContext + 0x3310);
+      rangeMinYThenCheckResult = *(int *)(glContext + 0x3314);
+      rangeMinXThenReturnValue = *(int *)(glContext + 0x3310);
 LAB_00018d64:
-      width = (width - iVar2) + 1;
-      height = (height - iVar5) + 1;
+      width = (width - rangeMinXThenReturnValue) + 1;
+      height = (height - rangeMinYThenCheckResult) + 1;
     }
-    uVar8 = height + border * -2;
-    uVar9 = width + border * -2;
-    uVar1 = *(ushort *)(textureObject + 0x24) & 0xf;
-    if (uVar1 == 2) {
-      uVar6 = 0;
-      if ((((int)uVar9 < 0) ||
-          (uVar4 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc0), (int)uVar4 < (int)uVar9))
-         || ((int)uVar8 < 0)) goto LAB_00018e54;
+    innerHeight = height + border * -2;
+    innerWidth = width + border * -2;
+    textureKindBits = *(ushort *)(textureObject + 0x24) & 0xf;
+    if (textureKindBits == 2) {
+      allowColorIndex = 0;
+      if ((((int)innerWidth < 0) ||
+          (sizeLimit = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc0), (int)sizeLimit < (int)innerWidth))
+         || ((int)innerHeight < 0)) goto LAB_00018e54;
 LAB_00018e50:
-      if ((int)uVar4 < (int)uVar8) {
+      if ((int)sizeLimit < (int)innerHeight) {
 LAB_00018e54:
         if (*(int *)(glContext + 0x7574) == 0) {
           glErrorCode = 0x501;
@@ -1837,37 +1837,37 @@ LAB_00018e54:
         goto LAB_00018e68;
       }
     }
-    else if (uVar1 < 3) {
+    else if (textureKindBits < 3) {
       if ((*(ushort *)(textureObject + 0x24) & 0xf) == 0) {
-        uVar7 = 0;
-        if ((uVar9 != uVar8) ||
-           ((int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc2) < (int)uVar8))
+        allowDepthFormat = 0;
+        if ((innerWidth != innerHeight) ||
+           ((int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc2) < (int)innerHeight))
         goto LAB_00018e54;
 LAB_00018dc8:
-        if (-1 < (int)uVar9) {
-          if ((uVar9 & uVar9 - 1) == 0) {
+        if (-1 < (int)innerWidth) {
+          if ((innerWidth & innerWidth - 1) == 0) {
             glContextPtr468c = *(int *)(glContext + 0x468c);
           }
           else {
             glContextPtr468c = *(int *)(glContext + 0x468c);
             if ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) == 0) goto LAB_00018e54;
           }
-          uVar4 = (uint)*(ushort *)(glContextPtr468c + 0xbc);
-          if ((((int)uVar9 <= (int)uVar4) && (-1 < (int)uVar8)) &&
-             (((uVar8 & uVar8 - 1) == 0 || ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) != 0))))
+          sizeLimit = (uint)*(ushort *)(glContextPtr468c + 0xbc);
+          if ((((int)innerWidth <= (int)sizeLimit) && (-1 < (int)innerHeight)) &&
+             (((innerHeight & innerHeight - 1) == 0 || ((*(uint *)(glContextPtr468c + 0x124) & 0x80000) != 0))))
           goto LAB_00018e50;
         }
         goto LAB_00018e54;
       }
     }
-    else if (uVar1 == 3) goto LAB_00018dc8;
-    iVar5 = ((int (*)())_gleCheckTexImageArgs)(glContext,level,format,type,internalformat,border,uVar7,uVar6);
-    iVar2 = 0;
-    if (iVar5 != 0) {
-      iVar2 = textureObject;
+    else if (textureKindBits == 3) goto LAB_00018dc8;
+    rangeMinYThenCheckResult = ((int (*)())_gleCheckTexImageArgs)(glContext,level,format,type,internalformat,border,allowDepthFormat,allowColorIndex);
+    rangeMinXThenReturnValue = 0;
+    if (rangeMinYThenCheckResult != 0) {
+      rangeMinXThenReturnValue = textureObject;
     }
   }
-  return iVar2;
+  return rangeMinXThenReturnValue;
 }
 
 /* _gleLookUpTexture2D @ 0x18eb4 (244 bytes) */

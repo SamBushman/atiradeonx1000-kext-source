@@ -4829,62 +4829,65 @@ void _glProgramLocalParameter4fvARB_Exec(glContext, target, index, params)
   uint index;
   undefined4 *params;
 {
-  byte bVar1;
-  uint uVar2;
+  byte dirtyBitIndex;
+  byte dirtyBitIndex2;
+  uint changeWord3WithFlag;
+  uint alternateFragmentTarget;
   undefined4 glErrorCode;
-  int iVar4;
+  int dirtyWord348Ptr;
   int glContextWord5424;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int pipelineStageIndex;
+  int boundProgramThenLocalParamArrayThenEntry;
+  int stageTableBase;
+  int dirtyWordPtr;
   
   if (target == 0x8620) {
-    iVar5 = 0;
+    pipelineStageIndex = 0;
     if (index < 0x100) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x400000;
+      changeWord3WithFlag = *(uint *)(glContext + 0x31c) | 0x400000;
 LAB_00026190:
-      *(uint *)(glContext + 0x31c) = uVar2;
+      *(uint *)(glContext + 0x31c) = changeWord3WithFlag;
       if (*(int *)(glContext + 0x5434) == 0) {
-        bVar1 = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x58);
+        dirtyBitIndex = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x58);
       }
       else {
-        bVar1 = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x8c);
+        dirtyBitIndex = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x8c);
       }
-      iVar7 = (bVar1 >> 3 & 0x1c) + glContext;
+      dirtyWordPtr = (dirtyBitIndex >> 3 & 0x1c) + glContext;
       glContextWord5424 = *(int *)(glContext + 0x5424);
-      iVar6 = iVar5 * 4 + glContext;
-      *(uint *)(iVar7 + 0x324) = *(uint *)(iVar7 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(index + glContextWord5424 + 0x58);
-      iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
-      iVar5 = *(int *)(iVar6 + 0x5420);
-      *(uint *)(iVar4 + 0x348) = *(uint *)(iVar4 + 0x348) | 1 << (bVar1 & 0x1f);
-      iVar5 = *(int *)(iVar5 + 0x4e0);
-      *(undefined4 *)(iVar5 + index * 0x10) = *params;
-      iVar5 = iVar5 + index * 0x10;
-      *(undefined4 *)(iVar5 + 4) = params[1];
-      *(undefined4 *)(iVar5 + 8) = params[2];
-      *(undefined4 *)(iVar5 + 0xc) = params[3];
-      ((void (*)())_gleModifyPluginPipelineProgram)(glContext,*(int *)(iVar6 + 0x5420) + 0x10,2);
+      stageTableBase = pipelineStageIndex * 4 + glContext;
+      *(uint *)(dirtyWordPtr + 0x324) = *(uint *)(dirtyWordPtr + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+      dirtyBitIndex2 = *(byte *)(index + glContextWord5424 + 0x58);
+      dirtyWord348Ptr = (dirtyBitIndex2 >> 3 & 0x1c) + glContext;
+      boundProgramThenLocalParamArrayThenEntry = *(int *)(stageTableBase + 0x5420);
+      *(uint *)(dirtyWord348Ptr + 0x348) = *(uint *)(dirtyWord348Ptr + 0x348) | 1 << (dirtyBitIndex2 & 0x1f);
+      boundProgramThenLocalParamArrayThenEntry = *(int *)(boundProgramThenLocalParamArrayThenEntry + 0x4e0);
+      *(undefined4 *)(boundProgramThenLocalParamArrayThenEntry + index * 0x10) = *params;
+      boundProgramThenLocalParamArrayThenEntry = boundProgramThenLocalParamArrayThenEntry + index * 0x10;
+      *(undefined4 *)(boundProgramThenLocalParamArrayThenEntry + 4) = params[1];
+      *(undefined4 *)(boundProgramThenLocalParamArrayThenEntry + 8) = params[2];
+      *(undefined4 *)(boundProgramThenLocalParamArrayThenEntry + 0xc) = params[3];
+      ((void (*)())_gleModifyPluginPipelineProgram)(glContext,*(int *)(stageTableBase + 0x5420) + 0x10,2);
       return;
     }
   }
   else {
     if (target < 0x8621) {
-      uVar2 = 0x8200;
+      alternateFragmentTarget = 0x8200;
     }
     else {
-      uVar2 = 0x8804;
+      alternateFragmentTarget = 0x8804;
     }
-    if (target != uVar2) {
+    if (target != alternateFragmentTarget) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
       glErrorCode = 0x500;
       goto LAB_00026188;
     }
-    iVar5 = 1;
+    pipelineStageIndex = 1;
     if (index < 0x80) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x1000000;
+      changeWord3WithFlag = *(uint *)(glContext + 0x31c) | 0x1000000;
       goto LAB_00026190;
     }
   }

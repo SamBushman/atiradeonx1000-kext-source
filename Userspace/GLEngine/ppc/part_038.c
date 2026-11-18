@@ -1235,55 +1235,55 @@ switchD_000b3af0_default:
 }
 
 /* _glGetCombinerOutputParameterivNV_Exec_body @ 0xb3c14 (332 bytes) */
-void _glGetCombinerOutputParameterivNV_Exec_body(glContext, param_2, param_3, param_4, param_5)
+void _glGetCombinerOutputParameterivNV_Exec_body(glContext, stage, portion, pname, params)
   int glContext;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
-  uint *param_5;
+  int stage;
+  int portion;
+  undefined4 pname;
+  uint *params;
 {
-  uint uVar1;
-  int iVar2;
-  int iVar3;
+  uint queriedValue;
+  int stageIndex;
+  int portionIndex;
   
-  iVar2 = param_2 + 0x7ab0;
-  if ((-1 < iVar2) && (iVar2 < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) {
-    if (param_3 == 0x1906) {
-      iVar3 = 0;
+  stageIndex = stage + 0x7ab0;
+  if ((-1 < stageIndex) && (stageIndex < *(int *)(*(int *)(glContext + 0x468c) + 0x98))) {
+    if (portion == 0x1906) {
+      portionIndex = 0;
     }
     else {
-      iVar3 = 1;
-      if (param_3 != 0x1907) goto switchD_000b3c80_default;
+      portionIndex = 1;
+      if (portion != 0x1907) goto switchD_000b3c80_default;
     }
-    switch(param_4) {
+    switch(pname) {
     case 0x8545:
-      uVar1 = (uint)*(byte *)(iVar2 * 0x80 + iVar3 * 0x30 + glContext + 0x4240);
+      queriedValue = (uint)*(byte *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x4240);
       break;
     case 0x8546:
-      uVar1 = (uint)*(byte *)(iVar2 * 0x80 + iVar3 * 0x30 + glContext + 0x4241);
+      queriedValue = (uint)*(byte *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x4241);
       break;
     case 0x8547:
-      uVar1 = (uint)*(byte *)(iVar2 * 0x80 + iVar3 * 0x30 + glContext + 0x4242);
+      queriedValue = (uint)*(byte *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x4242);
       break;
     case 0x8548:
-      uVar1 = (uint)*(ushort *)(iVar2 * 0x80 + iVar3 * 0x30 + glContext + 0x4244);
+      queriedValue = (uint)*(ushort *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x4244);
       break;
     case 0x8549:
-      uVar1 = (uint)*(ushort *)(iVar2 * 0x80 + iVar3 * 0x30 + glContext + 0x4246);
+      queriedValue = (uint)*(ushort *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x4246);
       break;
     case 0x854a:
-      uVar1 = (uint)*(ushort *)(iVar2 * 0x80 + iVar3 * 0x30 + glContext + 0x4248);
+      queriedValue = (uint)*(ushort *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x4248);
       break;
     case 0x854b:
-      uVar1 = (uint)*(ushort *)(iVar2 * 0x80 + iVar3 * 0x30 + glContext + 0x424a);
+      queriedValue = (uint)*(ushort *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x424a);
       break;
     case 0x854c:
-      uVar1 = (uint)*(ushort *)(iVar2 * 0x80 + iVar3 * 0x30 + glContext + 0x424c);
+      queriedValue = (uint)*(ushort *)(stageIndex * 0x80 + portionIndex * 0x30 + glContext + 0x424c);
       break;
     default:
       goto switchD_000b3c80_default;
     }
-    *param_5 = uVar1;
+    *params = queriedValue;
     return;
   }
 switchD_000b3c80_default:

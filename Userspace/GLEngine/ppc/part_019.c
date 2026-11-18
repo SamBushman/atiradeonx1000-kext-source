@@ -3570,12 +3570,12 @@ void _glGetMaterialiv_Exec(glContext, face, pname, params)
   undefined *pname;
   int *params;
 {
-  float fVar1;
+  float materialAlpha;
   double channelScale;
   float floatHalf;
   float float2147483520;
   undefined4 glErrorCode;
-  int iVar6;
+  int faceIndexThenMaterialTableBaseThenColorIndexRecord;
   
   float2147483520 = FLOAT_00108e94;
   floatHalf = FLOAT_00108e90;
@@ -3588,66 +3588,66 @@ void _glGetMaterialiv_Exec(glContext, face, pname, params)
     goto LAB_00077110;
   }
   if (face == 0x404) {
-    iVar6 = 0;
+    faceIndexThenMaterialTableBaseThenColorIndexRecord = 0;
 LAB_00077118:
     if (pname == ((unsigned char *)0x00001202)) {
-      iVar6 = iVar6 * 4 + glContext;
-      *params = (int)(*(float *)(*(int *)(iVar6 + 0x4dd0) + 0x20) * FLOAT_00108e94 - FLOAT_00108e90
+      faceIndexThenMaterialTableBaseThenColorIndexRecord = faceIndexThenMaterialTableBaseThenColorIndexRecord * 4 + glContext;
+      *params = (int)(*(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 0x20) * FLOAT_00108e94 - FLOAT_00108e90
                       );
-      params[1] = (int)(*(float *)(*(int *)(iVar6 + 0x4dd0) + 0x24) * float2147483520 - floatHalf);
-      params[2] = (int)(*(float *)(*(int *)(iVar6 + 0x4dd0) + 0x28) * float2147483520 - floatHalf);
-      fVar1 = *(float *)(*(int *)(iVar6 + 0x4dd0) + 0x2c);
+      params[1] = (int)(*(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 0x24) * float2147483520 - floatHalf);
+      params[2] = (int)(*(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 0x28) * float2147483520 - floatHalf);
+      materialAlpha = *(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 0x2c);
       goto LAB_00077254;
     }
     if (((unsigned char *)0x00001202) < pname) {
       if (pname == (undefined *)0x1601) {
-        *params = (int)(*(float *)(*(int *)(iVar6 * 4 + glContext + 0x4dd0) + 0x40) + FLOAT_00108e90)
+        *params = (int)(*(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord * 4 + glContext + 0x4dd0) + 0x40) + FLOAT_00108e90)
         ;
         return;
       }
       if (pname < (undefined *)0x1602) {
         if (pname == (undefined *)0x1600) {
-          iVar6 = iVar6 * 4 + glContext;
-          *params = (int)(*(float *)(*(int *)(iVar6 + 0x4dd0) + 0x30) * FLOAT_00108e94 -
+          faceIndexThenMaterialTableBaseThenColorIndexRecord = faceIndexThenMaterialTableBaseThenColorIndexRecord * 4 + glContext;
+          *params = (int)(*(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 0x30) * FLOAT_00108e94 -
                           FLOAT_00108e90);
-          params[1] = (int)(*(float *)(*(int *)(iVar6 + 0x4dd0) + 0x34) * float2147483520 - floatHalf);
-          params[2] = (int)(*(float *)(*(int *)(iVar6 + 0x4dd0) + 0x38) * float2147483520 - floatHalf);
-          fVar1 = *(float *)(*(int *)(iVar6 + 0x4dd0) + 0x3c);
+          params[1] = (int)(*(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 0x34) * float2147483520 - floatHalf);
+          params[2] = (int)(*(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 0x38) * float2147483520 - floatHalf);
+          materialAlpha = *(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 0x3c);
           goto LAB_00077254;
         }
       }
       else if (pname == (undefined *)0x1603) {
-        iVar6 = iVar6 * 0x10 + glContext;
-        *params = (int)((double)*(float *)(iVar6 + 0x2f0) * DOUBLE_00108d98);
-        params[1] = (int)((double)*(float *)(iVar6 + 0x2f4) * channelScale);
-        params[2] = (int)((double)*(float *)(iVar6 + 0x2f8) * channelScale);
+        faceIndexThenMaterialTableBaseThenColorIndexRecord = faceIndexThenMaterialTableBaseThenColorIndexRecord * 0x10 + glContext;
+        *params = (int)((double)*(float *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x2f0) * DOUBLE_00108d98);
+        params[1] = (int)((double)*(float *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x2f4) * channelScale);
+        params[2] = (int)((double)*(float *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x2f8) * channelScale);
         return;
       }
     }
     else {
       if (pname == ((unsigned char *)0x00001200)) {
-        iVar6 = iVar6 * 4 + glContext;
-        *params = (int)(**(float **)(iVar6 + 0x4dd0) * FLOAT_00108e94 - FLOAT_00108e90);
-        params[1] = (int)(*(float *)(*(int *)(iVar6 + 0x4dd0) + 4) * float2147483520 - floatHalf);
-        params[2] = (int)(*(float *)(*(int *)(iVar6 + 0x4dd0) + 8) * float2147483520 - floatHalf);
-        fVar1 = *(float *)(*(int *)(iVar6 + 0x4dd0) + 0xc);
+        faceIndexThenMaterialTableBaseThenColorIndexRecord = faceIndexThenMaterialTableBaseThenColorIndexRecord * 4 + glContext;
+        *params = (int)(**(float **)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) * FLOAT_00108e94 - FLOAT_00108e90);
+        params[1] = (int)(*(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 4) * float2147483520 - floatHalf);
+        params[2] = (int)(*(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 8) * float2147483520 - floatHalf);
+        materialAlpha = *(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 0xc);
 LAB_00077254:
-        params[3] = (int)(fVar1 * float2147483520 - floatHalf);
+        params[3] = (int)(materialAlpha * float2147483520 - floatHalf);
         return;
       }
       if (pname == ((unsigned char *)0x00001201)) {
-        iVar6 = iVar6 * 4 + glContext;
-        *params = (int)(*(float *)(*(int *)(iVar6 + 0x4dd0) + 0x10) * FLOAT_00108e94 -
+        faceIndexThenMaterialTableBaseThenColorIndexRecord = faceIndexThenMaterialTableBaseThenColorIndexRecord * 4 + glContext;
+        *params = (int)(*(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 0x10) * FLOAT_00108e94 -
                         FLOAT_00108e90);
-        params[1] = (int)(*(float *)(*(int *)(iVar6 + 0x4dd0) + 0x14) * float2147483520 - floatHalf);
-        params[2] = (int)(*(float *)(*(int *)(iVar6 + 0x4dd0) + 0x18) * float2147483520 - floatHalf);
-        fVar1 = *(float *)(*(int *)(iVar6 + 0x4dd0) + 0x1c);
+        params[1] = (int)(*(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 0x14) * float2147483520 - floatHalf);
+        params[2] = (int)(*(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 0x18) * float2147483520 - floatHalf);
+        materialAlpha = *(float *)(*(int *)(faceIndexThenMaterialTableBaseThenColorIndexRecord + 0x4dd0) + 0x1c);
         goto LAB_00077254;
       }
     }
   }
   else if (face == 0x405) {
-    iVar6 = 1;
+    faceIndexThenMaterialTableBaseThenColorIndexRecord = 1;
     goto LAB_00077118;
   }
   if (*(int *)(glContext + 0x7574) != 0) {

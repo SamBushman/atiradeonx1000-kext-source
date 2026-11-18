@@ -43,21 +43,21 @@ void _glDeleteBuffers_Exec(glContext, n, buffers)
   int *buffers;
 {
   int loopIndex2;
-  bool bVar1;
+  bool clientArrayBufferDeleted;
   undefined4 glErrorCode;
   int clientState;
-  int iVar4;
+  int newRefCount;
   undefined4 *dstCursor;
-  int iVar6;
-  uint uVar7;
-  int iVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
+  int arrayBufferObject;
+  uint bufferBoundBitsWord;
+  int boundElementArrayBufferName;
+  int boundArrayBufferName;
+  int boundPixelUnpackBufferName;
+  int boundPixelPackBufferName;
+  int bufferName;
   int loopIndex;
-  int iVar14;
-  int iVar15;
+  int unitTableCursor;
+  int bufferSlotCursor;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
@@ -65,47 +65,47 @@ void _glDeleteBuffers_Exec(glContext, n, buffers)
         _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
       }
       clientState = *(int *)(glContext + 0x4a60);
-      iVar9 = 0;
+      boundArrayBufferName = 0;
       if (*(int *)(clientState + 0x358) != 0) {
-        iVar9 = *(int *)(*(int *)(clientState + 0x358) + 4);
+        boundArrayBufferName = *(int *)(*(int *)(clientState + 0x358) + 4);
       }
-      iVar8 = 0;
+      boundElementArrayBufferName = 0;
       if (*(int *)(clientState + 0x35c) != 0) {
-        iVar8 = *(int *)(*(int *)(clientState + 0x35c) + 4);
+        boundElementArrayBufferName = *(int *)(*(int *)(clientState + 0x35c) + 4);
       }
-      iVar11 = 0;
+      boundPixelPackBufferName = 0;
       if (*(int *)(glContext + 0x4a68) != 0) {
-        iVar11 = *(int *)(*(int *)(glContext + 0x4a68) + 4);
+        boundPixelPackBufferName = *(int *)(*(int *)(glContext + 0x4a68) + 4);
       }
-      iVar10 = 0;
+      boundPixelUnpackBufferName = 0;
       if (*(int *)(glContext + 0x4a6c) != 0) {
-        iVar10 = *(int *)(*(int *)(glContext + 0x4a6c) + 4);
+        boundPixelUnpackBufferName = *(int *)(*(int *)(glContext + 0x4a6c) + 4);
       }
-      bVar1 = false;
+      clientArrayBufferDeleted = false;
       if (0 < n) {
         do {
-          iVar12 = *buffers;
+          bufferName = *buffers;
           buffers = buffers + 1;
-          if (iVar12 != 0) {
+          if (bufferName != 0) {
             loopIndex = 0;
-            iVar14 = clientState + 0x10;
-            iVar15 = clientState + 0x10;
+            unitTableCursor = clientState + 0x10;
+            bufferSlotCursor = clientState + 0x10;
             do {
-              iVar6 = *(int *)(iVar15 + 0x350);
-              if ((iVar6 != 0) && (iVar12 == *(int *)(iVar6 + 4))) {
-                bVar1 = true;
-                iVar4 = *(int *)(iVar6 + 8) + -1;
-                *(int *)(iVar6 + 8) = iVar4;
-                if (iVar4 == 0) {
-                  _gleFreeBufferObject(glContext,iVar6);
+              arrayBufferObject = *(int *)(bufferSlotCursor + 0x350);
+              if ((arrayBufferObject != 0) && (bufferName == *(int *)(arrayBufferObject + 4))) {
+                clientArrayBufferDeleted = true;
+                newRefCount = *(int *)(arrayBufferObject + 8) + -1;
+                *(int *)(arrayBufferObject + 8) = newRefCount;
+                if (newRefCount == 0) {
+                  _gleFreeBufferObject(glContext,arrayBufferObject);
                 }
-                uVar7 = *(uint *)(clientState + 0x33c);
-                *(undefined4 *)(iVar15 + 0x350) = 0;
+                bufferBoundBitsWord = *(uint *)(clientState + 0x33c);
+                *(undefined4 *)(bufferSlotCursor + 0x350) = 0;
                 *(undefined4 *)(clientState + 0x338) = 0;
-                *(uint *)(clientState + 0x33c) = uVar7 & ~(1 << (loopIndex + 0x10U & 0x3f));
+                *(uint *)(clientState + 0x33c) = bufferBoundBitsWord & ~(1 << (loopIndex + 0x10U & 0x3f));
                 loopIndex2 = 0;
                 if (*(char *)(glContext + 0x85a4) != '\0') {
-                  dstCursor = (undefined4 *)(iVar14 + 0x3d0);
+                  dstCursor = (undefined4 *)(unitTableCursor + 0x3d0);
                   do {
                     *dstCursor = 0;
                     loopIndex2 = loopIndex2 + 1;
@@ -114,26 +114,26 @@ void _glDeleteBuffers_Exec(glContext, n, buffers)
                 }
               }
               loopIndex = loopIndex + 1;
-              iVar14 = iVar14 + 4;
-              iVar15 = iVar15 + 4;
+              unitTableCursor = unitTableCursor + 4;
+              bufferSlotCursor = bufferSlotCursor + 4;
             } while (loopIndex < 0x20);
-            if (iVar12 == iVar9) {
+            if (bufferName == boundArrayBufferName) {
               _gleBindBufferObject(glContext,0x8892,0);
             }
-            if (iVar12 == iVar8) {
+            if (bufferName == boundElementArrayBufferName) {
               _gleBindBufferObject(glContext,0x8893,0);
             }
-            if (iVar12 == iVar11) {
+            if (bufferName == boundPixelPackBufferName) {
               _gleBindBufferObject(glContext,0x88eb,0);
             }
-            if (iVar12 == iVar10) {
+            if (bufferName == boundPixelUnpackBufferName) {
               _gleBindBufferObject(glContext,0x88ec,0);
             }
-            _gleDeleteHashNameAndObject(glContext,*(int *)(glContext + 0x5148) + 0x701c,iVar12);
+            _gleDeleteHashNameAndObject(glContext,*(int *)(glContext + 0x5148) + 0x701c,bufferName);
           }
           n = n + -1;
         } while (n != 0);
-        if (bVar1) {
+        if (clientArrayBufferDeleted) {
           _gleResetVACachePointers(glContext);
           *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
           *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | 0x10;

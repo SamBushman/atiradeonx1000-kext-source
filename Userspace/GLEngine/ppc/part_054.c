@@ -583,46 +583,46 @@ void _gleHalfFloatFilter2(dst, src, count, offsetA, offsetB)
   int offsetA;
   int offsetB;
 {
-  float fVar1;
-  uint uVar2;
+  float filteredValue;
+  uint floatExponentBits;
   float weight;
-  ushort uVar4;
-  int iVar5;
+  ushort halfResult;
+  int srcElement;
   int byteOffset;
-  double dVar7;
-  double dVar8;
-  double dVar9;
-  double dVar10;
+  double sampleBase;
+  double sampleA;
+  double sampleB;
+  double sampleAB;
   
   weight = FLOAT_00108f88;
   byteOffset = 0;
   if (0 < count << 1) {
     do {
-      iVar5 = src + byteOffset;
-      dVar7 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset));
-      dVar8 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar5 + offsetA));
-      dVar9 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar5 + offsetB));
-      dVar10 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar5 + offsetA + offsetB));
-      fVar1 = (float)((double)(float)((double)(float)(dVar7 + dVar8) + dVar9) + dVar10) * weight;
-      uVar2 = (uint)GH_F2U(fVar1) & 0x7f800000;
-      uVar4 = (ushort)((uint)GH_F2U(fVar1) >> 0x10) & 0x8000;
-      if (uVar2 < 0x47800000) {
-        if (uVar2 < 0x38000001) {
-          uVar4 = uVar4 | (ushort)(((uint)GH_F2U(fVar1) & 0x7fffff | 0x800000) >>
-                                  ((0x38000000 - uVar2 >> 0x17) + 0xe & 0x3f));
+      srcElement = src + byteOffset;
+      sampleBase = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset));
+      sampleA = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(srcElement + offsetA));
+      sampleB = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(srcElement + offsetB));
+      sampleAB = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(srcElement + offsetA + offsetB));
+      filteredValue = (float)((double)(float)((double)(float)(sampleBase + sampleA) + sampleB) + sampleAB) * weight;
+      floatExponentBits = (uint)GH_F2U(filteredValue) & 0x7f800000;
+      halfResult = (ushort)((uint)GH_F2U(filteredValue) >> 0x10) & 0x8000;
+      if (floatExponentBits < 0x47800000) {
+        if (floatExponentBits < 0x38000001) {
+          halfResult = halfResult | (ushort)(((uint)GH_F2U(filteredValue) & 0x7fffff | 0x800000) >>
+                                  ((0x38000000 - floatExponentBits >> 0x17) + 0xe & 0x3f));
         }
         else {
-          uVar4 = uVar4 | (ushort)(uVar2 + 0xc8000000 >> 0xd) |
-                  (ushort)(((uint)GH_F2U(fVar1) & 0x7fffff) >> 0xd);
+          halfResult = halfResult | (ushort)(floatExponentBits + 0xc8000000 >> 0xd) |
+                  (ushort)(((uint)GH_F2U(filteredValue) & 0x7fffff) >> 0xd);
         }
       }
-      else if ((uVar2 == 0x7f800000) && (((uint)GH_F2U(fVar1) & 1) != 0)) {
-        uVar4 = uVar4 | 0x7fff;
+      else if ((floatExponentBits == 0x7f800000) && (((uint)GH_F2U(filteredValue) & 1) != 0)) {
+        halfResult = halfResult | 0x7fff;
       }
       else {
-        uVar4 = uVar4 | 0x7c00;
+        halfResult = halfResult | 0x7c00;
       }
-      *(ushort *)(dst + byteOffset) = uVar4;
+      *(ushort *)(dst + byteOffset) = halfResult;
       byteOffset = byteOffset + 2;
     } while (byteOffset < count << 1);
   }
@@ -638,61 +638,61 @@ void _gleHalfFloatFilter3(dst, src, count, offsetA, offsetB, offsetC)
   int offsetB;
   int offsetC;
 {
-  float fVar1;
-  uint uVar2;
+  float filteredValue;
+  uint floatExponentBits;
   float weight;
-  ushort uVar4;
-  ushort *puVar5;
-  int iVar6;
+  ushort halfResult;
+  ushort *sampleBCCursor;
+  int srcElement;
   int byteOffset;
-  double dVar8;
-  double dVar9;
-  double dVar10;
-  double dVar11;
-  double dVar12;
-  double dVar13;
-  double dVar14;
-  double dVar15;
+  double sampleBase;
+  double sampleA;
+  double sampleB;
+  double sampleAB;
+  double sampleC;
+  double sampleAC;
+  double sampleBC;
+  double sampleABC;
   
   weight = FLOAT_00108f4c;
   byteOffset = 0;
   if (0 < count << 1) {
-    puVar5 = (ushort *)(src + offsetB + offsetC);
+    sampleBCCursor = (ushort *)(src + offsetB + offsetC);
     do {
-      iVar6 = src + byteOffset;
-      dVar8 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset));
-      dVar9 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + offsetA));
-      dVar10 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + offsetB));
-      dVar11 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + offsetA + offsetB));
-      dVar12 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + offsetC));
-      dVar13 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(iVar6 + offsetA + offsetC));
-      dVar14 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*puVar5);
-      dVar15 = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)((int)puVar5 + offsetA));
-      fVar1 = (float)((double)(float)((double)(float)((double)(float)((double)(float)((double)(float
-                                                  )((double)(float)(dVar8 + dVar9) + dVar10) +
-                                                  dVar11) + dVar12) + dVar13) + dVar14) + dVar15) *
+      srcElement = src + byteOffset;
+      sampleBase = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(src + byteOffset));
+      sampleA = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(srcElement + offsetA));
+      sampleB = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(srcElement + offsetB));
+      sampleAB = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(srcElement + offsetA + offsetB));
+      sampleC = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(srcElement + offsetC));
+      sampleAC = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)(srcElement + offsetA + offsetC));
+      sampleBC = (double)((double (*)())_gleHalfFloatToFloat)((uint)*sampleBCCursor);
+      sampleABC = (double)((double (*)())_gleHalfFloatToFloat)((uint)*(ushort *)((int)sampleBCCursor + offsetA));
+      filteredValue = (float)((double)(float)((double)(float)((double)(float)((double)(float)((double)(float
+                                                  )((double)(float)(sampleBase + sampleA) + sampleB) +
+                                                  sampleAB) + sampleC) + sampleAC) + sampleBC) + sampleABC) *
               weight;
-      uVar2 = (uint)GH_F2U(fVar1) & 0x7f800000;
-      uVar4 = (ushort)((uint)GH_F2U(fVar1) >> 0x10) & 0x8000;
-      if (uVar2 < 0x47800000) {
-        if (uVar2 < 0x38000001) {
-          uVar4 = uVar4 | (ushort)(((uint)GH_F2U(fVar1) & 0x7fffff | 0x800000) >>
-                                  ((0x38000000 - uVar2 >> 0x17) + 0xe & 0x3f));
+      floatExponentBits = (uint)GH_F2U(filteredValue) & 0x7f800000;
+      halfResult = (ushort)((uint)GH_F2U(filteredValue) >> 0x10) & 0x8000;
+      if (floatExponentBits < 0x47800000) {
+        if (floatExponentBits < 0x38000001) {
+          halfResult = halfResult | (ushort)(((uint)GH_F2U(filteredValue) & 0x7fffff | 0x800000) >>
+                                  ((0x38000000 - floatExponentBits >> 0x17) + 0xe & 0x3f));
         }
         else {
-          uVar4 = uVar4 | (ushort)(uVar2 + 0xc8000000 >> 0xd) |
-                  (ushort)(((uint)GH_F2U(fVar1) & 0x7fffff) >> 0xd);
+          halfResult = halfResult | (ushort)(floatExponentBits + 0xc8000000 >> 0xd) |
+                  (ushort)(((uint)GH_F2U(filteredValue) & 0x7fffff) >> 0xd);
         }
       }
-      else if ((uVar2 == 0x7f800000) && (((uint)GH_F2U(fVar1) & 1) != 0)) {
-        uVar4 = uVar4 | 0x7fff;
+      else if ((floatExponentBits == 0x7f800000) && (((uint)GH_F2U(filteredValue) & 1) != 0)) {
+        halfResult = halfResult | 0x7fff;
       }
       else {
-        uVar4 = uVar4 | 0x7c00;
+        halfResult = halfResult | 0x7c00;
       }
-      *(ushort *)(dst + byteOffset) = uVar4;
+      *(ushort *)(dst + byteOffset) = halfResult;
       byteOffset = byteOffset + 2;
-      puVar5 = puVar5 + 1;
+      sampleBCCursor = sampleBCCursor + 1;
     } while (byteOffset < count << 1);
   }
   return;
@@ -748,29 +748,29 @@ void _gle332Filter3(dst, src, unusedArg3, offsetA, offsetB, offsetC)
   int offsetB;
   int offsetC;
 {
-  byte bVar1;
-  byte bVar2;
-  byte bVar3;
-  byte bVar4;
-  byte bVar5;
-  byte bVar6;
-  byte bVar7;
-  byte bVar8;
+  byte sampleBase;
+  byte sampleA;
+  byte sampleB;
+  byte sampleAB;
+  byte sampleC;
+  byte sampleAC;
+  byte sampleBC;
+  byte sampleABC;
   
-  bVar1 = *src;
-  bVar2 = src[offsetA];
-  bVar3 = src[offsetB];
-  bVar4 = src[offsetB + offsetA];
-  bVar5 = src[offsetC];
-  bVar6 = src[offsetC + offsetA];
-  bVar7 = src[offsetC + offsetB];
-  bVar8 = src[offsetC + offsetB + offsetA];
-  *dst = (byte)((bVar1 & 0xe0) + (bVar2 & 0xe0) + (bVar3 & 0xe0) + (bVar4 & 0xe0) +
-                    (bVar5 & 0xe0) + (bVar6 & 0xe0) + (bVar7 & 0xe0) + (bVar8 & 0xe0) >> 3) & 0xe0 |
-             (byte)((bVar1 & 0x1c) + (bVar2 & 0x1c) + (bVar3 & 0x1c) + (bVar4 & 0x1c) +
-                    (bVar5 & 0x1c) + (bVar6 & 0x1c) + (bVar7 & 0x1c) + (bVar8 & 0x1c) >> 3) & 0x1c |
-             (byte)((bVar1 & 3) + (bVar2 & 3) + (bVar3 & 3) + (bVar4 & 3) + (bVar5 & 3) +
-                    (bVar6 & 3) + (bVar7 & 3) + (bVar8 & 3) >> 3) & 3;
+  sampleBase = *src;
+  sampleA = src[offsetA];
+  sampleB = src[offsetB];
+  sampleAB = src[offsetB + offsetA];
+  sampleC = src[offsetC];
+  sampleAC = src[offsetC + offsetA];
+  sampleBC = src[offsetC + offsetB];
+  sampleABC = src[offsetC + offsetB + offsetA];
+  *dst = (byte)((sampleBase & 0xe0) + (sampleA & 0xe0) + (sampleB & 0xe0) + (sampleAB & 0xe0) +
+                    (sampleC & 0xe0) + (sampleAC & 0xe0) + (sampleBC & 0xe0) + (sampleABC & 0xe0) >> 3) & 0xe0 |
+             (byte)((sampleBase & 0x1c) + (sampleA & 0x1c) + (sampleB & 0x1c) + (sampleAB & 0x1c) +
+                    (sampleC & 0x1c) + (sampleAC & 0x1c) + (sampleBC & 0x1c) + (sampleABC & 0x1c) >> 3) & 0x1c |
+             (byte)((sampleBase & 3) + (sampleA & 3) + (sampleB & 3) + (sampleAB & 3) + (sampleC & 3) +
+                    (sampleAC & 3) + (sampleBC & 3) + (sampleABC & 3) >> 3) & 3;
   return;
 }
 
