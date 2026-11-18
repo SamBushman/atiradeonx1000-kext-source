@@ -1,0 +1,9 @@
+# data	OLDNAME	NEWNAME	tier	evidence
+data	DAT_00113e50	cfstr_IOGLBundleName	CONFIRMED	stock 0x113e50 holds a CFConstantString {isa (bound by dyld), flags 0x7c8, ptr 0x10a4e4 -> "IOGLBundleName", len 14}; _glepLoadRenderers passes it as the property key of IORegistryEntryCreateCFProperty
+data	DAT_00113e61	new_rend_str_0_byte1	CONFIRMED	stock 0x113e60 is the __bss symbol _new_rend_str.0; 0x113e61 is its byte 1; _glGetString_Exec memcpy's the renderer string there and stores 'x' (0x78) at index (strstr(s,"FX") - s) of this label, i.e. over the 'X' of "FX"
+data	DAT_00111e1c	gliInitLibraryArg1	INFERRED	_gliInitializeLibrary stores its parameter 1 here (parameter 3 goes to _gle_io_data, 2/4/5 to the three following words); no corpus function reads it back, the role of the argument is not established
+data	DAT_00111e20	gliInitLibraryArg2	INFERRED	_gliInitializeLibrary stores its parameter 2 here; role not established
+data	DAT_00111e24	gliInitLibraryArg4	INFERRED	_gliInitializeLibrary stores its parameter 4 here; role not established
+data	DAT_00111e28	gliInitLibraryArg5	INFERRED	_gliInitializeLibrary stores its parameter 5 here; role not established
+data	DAT_00110a30	fi_word2	INFERRED	_gleOptimizeDisplayListCreateHashTable walks the 16-byte records starting at stock 0x110a28 (_fi) with one byte offset: _fi+off = word 0, PTR__glBegin_ListExec+off = word 1 (the ListExec handler), DAT_00110a30+off = word 2, DAT_00110a34+off = word 3; the stock words of the first records are (ptr, 4, 0, 1), (ptr, 0, 0, 2), (ptr, 8, ..): the meaning of the word is not established
+data	DAT_00110a34	fi_word3	INFERRED	word 3 of the 16-byte _fi records (see fi_word2); the first records hold 1, 2, ... (looks like an index) - not established

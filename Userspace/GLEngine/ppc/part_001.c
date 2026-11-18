@@ -5443,7 +5443,7 @@ LAB_000122ec:
         if (pcVar5 != (char *)0x0) {
           uVar3 = _strlen(pcVar6);
           _memcpy(&_new_rend_str_0,pcVar6,uVar3);
-          (DAT_00113e61)[(int)pcVar5 - (int)pcVar6] = 0x78;
+          (new_rend_str_0_byte1)[(int)pcVar5 - (int)pcVar6] = 0x78;
           return &_new_rend_str_0;
         }
         return pcVar6;

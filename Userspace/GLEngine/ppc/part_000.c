@@ -8,11 +8,11 @@ void _gliInitializeLibrary(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_4;
   undefined4 param_5;
 {
-  DAT_00111e28 = param_5;
+  gliInitLibraryArg5 = param_5;
   _gle_io_data = param_3;
-  DAT_00111e1c = param_1;
-  DAT_00111e20 = param_2;
-  DAT_00111e24 = param_4;
+  gliInitLibraryArg1 = param_1;
+  gliInitLibraryArg2 = param_2;
+  gliInitLibraryArg4 = param_4;
   return;
 }
 
@@ -138,7 +138,7 @@ void _glepLoadRenderers()
     do {
       iVar7 = *(int *)(uVar14 * 4 + *(int *)(puVar5 + 4));
       if ((iVar7 != 0) &&
-         (iVar7 = _IORegistryEntryCreateCFProperty(iVar7,&DAT_00113e50,*(undefined4 *)puVar4,0),
+         (iVar7 = _IORegistryEntryCreateCFProperty(iVar7,&cfstr_IOGLBundleName,*(undefined4 *)puVar4,0),
          iVar7 != 0)) {
         pcVar12 = (char *)0x0;
         pcVar8 = (char *)_CFStringGetCStringPtr(iVar7,0);
@@ -593,8 +593,8 @@ void _gleOptimizeDisplayListCreateHashTable()
     do {
       puVar5 = (undefined4 *)_malloc(0x10);
       iVar2 = _gleDisplayListFunctionHash;
-      uVar3 = *(undefined4 *)((int)&DAT_00110a30 + iVar9);
-      uVar7 = *(undefined4 *)((int)&DAT_00110a34 + iVar9);
+      uVar3 = *(undefined4 *)((int)&fi_word2 + iVar9);
+      uVar7 = *(undefined4 *)((int)&fi_word3 + iVar9);
       uVar6 = *(uint *)((int)&PTR__glBegin_ListExec_00110a2c + iVar9);
       uVar1 = uVar6 & 0x7c;
       *puVar5 = *(undefined4 *)((int)&_fi + iVar9);

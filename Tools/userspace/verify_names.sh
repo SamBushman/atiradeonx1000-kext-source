@@ -8,6 +8,8 @@ tar czf $T/v.tgz -C $T base cand
 R=rung3/vn_$N
 ssh G5 "rm -rf $R; mkdir -p $R" && scp -q $T/v.tgz G5:$R/v.tgz || exit 2
 ssh G5 "cd $R && tar xzf v.tgz && for s in base cand; do (cd \$s/$D && for f in part_*.c unowned_code/part_*.c landing_pads/part_*.c; do [ -f \$f ] || continue; gcc -arch ppc -w -c \$f -o \${f%.c}.o 2> \${f%.c}.err || echo FAIL \$s \$f; done); done; n=0; bad=0; for f in base/$D/part_*.o base/$D/unowned_code/part_*.o base/$D/landing_pads/part_*.o; do [ -f \$f ] || continue; b=\${f#base/$D/}; n=\$((n+1)); cmp -s \$f cand/$D/\$b || { bad=\$((bad+1)); echo DIFFERENT \$b; }; done; echo \$n objects, \$bad different" | tee $T/result.txt
+# a gate that compiled nothing proves nothing: any FAIL line or an empty object set is a gate error, never IDENTICAL (a Nov 17 GLEngine run printed IDENTICAL for '0 objects')
+if grep -q '^FAIL' $T/result.txt || tail -1 $T/result.txt | grep -q '^0 objects'; then echo "GATE-ERROR: compile failures or no objects (see $T/result.txt)"; exit 2; fi
 if tail -1 $T/result.txt | grep -q ' 0 different$'; then echo IDENTICAL; exit 0; fi
 H=$(dirname $0)
 # `func` rows rename symbols: the objects differ in their symbol tables, so a map (candidate name -> Ghidra name) is applied to the assembler text and the
