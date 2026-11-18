@@ -1065,19 +1065,19 @@ void _glCopyTexSubImage3D_CompExec(glContext, target, level, xoffset, yoffset, z
 /* _glCopyTexSubImage3D_NoopExec @ 0x996c4 (704 bytes) */
 void _glCopyTexSubImage3D_NoopExec(int glContext,undefined4 forwardedArg2,undefined4 level,undefined4 xoffset,undefined4 yoffset,undefined4 zoffset,undefined4 x,undefined4 forwardedArg8,undefined4 forwardedArg9,undefined4 forwardedArg10,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool rendererInfoByte79IsZero;
   bool stateClean;
-  char cVar2;
-  int iVar3;
+  char rendererInfoByte79;
+  int dirtyWord;
   int *srcCursor;
   int framebufferObject;
   int remaining;
   int loopIndex;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  undefined4 uVar9;
-  undefined4 uVar10;
+  undefined4 forwardedLevel;
+  undefined4 forwardedXoffset;
+  undefined4 forwardedYoffset;
+  undefined4 forwardedZoffset;
+  undefined4 forwardedX;
   uint dirtyWord3ThenMasked;
   uint dispatchFlags;
   int *dirtyFlagWords;
@@ -1085,11 +1085,11 @@ void _glCopyTexSubImage3D_NoopExec(int glContext,undefined4 forwardedArg2,undefi
   double extraout_f1_00;
   double extraout_f1_01;
   
-  uVar6 = level;
-  uVar7 = xoffset;
-  uVar8 = yoffset;
-  uVar9 = zoffset;
-  uVar10 = x;
+  forwardedLevel = level;
+  forwardedXoffset = xoffset;
+  forwardedYoffset = yoffset;
+  forwardedZoffset = zoffset;
+  forwardedX = x;
   if (*(int *)(glContext + 0x50ac) != 0 ||
       (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
@@ -1098,9 +1098,9 @@ void _glCopyTexSubImage3D_NoopExec(int glContext,undefined4 forwardedArg2,undefi
   if (*(char *)(glContext + 0x4691) != '\0') {
     framebufferObject = *(int *)(glContext + 0x744c);
     dirtyFlagWords = (int *)(glContext + 0x310);
-    cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+    rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar6,uVar7,uVar8,uVar9,uVar10,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedLevel,forwardedXoffset,forwardedYoffset,forwardedZoffset,forwardedX,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                  forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -1113,9 +1113,9 @@ LAB_000997fc:
       loopIndex = 0;
       srcCursor = (int *)(glContext + 0x324);
       do {
-        iVar3 = *srcCursor;
+        dirtyWord = *srcCursor;
         srcCursor = srcCursor + 1;
-        if (iVar3 != 0) {
+        if (dirtyWord != 0) {
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
           break;
         }
@@ -1132,14 +1132,14 @@ LAB_000997fc:
         goto LAB_000997fc;
       }
     }
-    bVar1 = cVar2 == '\0';
-    if (bVar1) {
+    rendererInfoByte79IsZero = rendererInfoByte79 == '\0';
+    if (rendererInfoByte79IsZero) {
       dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
     }
     else {
       dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
     }
-    if (bVar1) {
+    if (rendererInfoByte79IsZero) {
       stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
               *(int *)(glContext + 800) == 0;
     }
@@ -3648,19 +3648,19 @@ void _glCopyTexImage2D_CompExec(glContext, target, level, internalformat, x, y, 
 /* _glCopyTexImage2D_NoopExec @ 0x9d940 (696 bytes) */
 void _glCopyTexImage2D_NoopExec(int glContext,undefined4 forwardedArg2,undefined4 level,undefined4 internalformat,undefined4 x,undefined4 y,undefined4 width,undefined4 forwardedArg8,undefined4 forwardedArg9,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  bool bVar1;
+  bool rendererInfoByte79IsZero;
   bool stateClean;
-  char cVar2;
-  int iVar3;
+  char rendererInfoByte79;
+  int dirtyWord;
   int *srcCursor;
   int framebufferObject;
   int remaining;
   int loopIndex;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  undefined4 uVar9;
-  undefined4 uVar10;
+  undefined4 forwardedLevel;
+  undefined4 forwardedInternalformat;
+  undefined4 forwardedX;
+  undefined4 forwardedY;
+  undefined4 forwardedWidth;
   uint dirtyWord3ThenMasked;
   uint dispatchFlags;
   int *dirtyFlagWords;
@@ -3668,11 +3668,11 @@ void _glCopyTexImage2D_NoopExec(int glContext,undefined4 forwardedArg2,undefined
   double extraout_f1_00;
   double extraout_f1_01;
   
-  uVar6 = level;
-  uVar7 = internalformat;
-  uVar8 = x;
-  uVar9 = y;
-  uVar10 = width;
+  forwardedLevel = level;
+  forwardedInternalformat = internalformat;
+  forwardedX = x;
+  forwardedY = y;
+  forwardedWidth = width;
   if (*(int *)(glContext + 0x50ac) != 0 ||
       (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
@@ -3681,9 +3681,9 @@ void _glCopyTexImage2D_NoopExec(int glContext,undefined4 forwardedArg2,undefined
   if (*(char *)(glContext + 0x4691) != '\0') {
     framebufferObject = *(int *)(glContext + 0x744c);
     dirtyFlagWords = (int *)(glContext + 0x310);
-    cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
+    rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar6,uVar7,uVar8,uVar9,uVar10,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedLevel,forwardedInternalformat,forwardedX,forwardedY,forwardedWidth,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                  forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
@@ -3696,9 +3696,9 @@ LAB_0009da74:
       loopIndex = 0;
       srcCursor = (int *)(glContext + 0x324);
       do {
-        iVar3 = *srcCursor;
+        dirtyWord = *srcCursor;
         srcCursor = srcCursor + 1;
-        if (iVar3 != 0) {
+        if (dirtyWord != 0) {
           *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
           break;
         }
@@ -3715,14 +3715,14 @@ LAB_0009da74:
         goto LAB_0009da74;
       }
     }
-    bVar1 = cVar2 == '\0';
-    if (bVar1) {
+    rendererInfoByte79IsZero = rendererInfoByte79 == '\0';
+    if (rendererInfoByte79IsZero) {
       dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
     }
     else {
       dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
     }
-    if (bVar1) {
+    if (rendererInfoByte79IsZero) {
       stateClean = ((*dirtyFlagWords == 0 && *(int *)(glContext + 0x314) == 0) && dirtyWord3ThenMasked == 0) &&
               *(int *)(glContext + 800) == 0;
     }

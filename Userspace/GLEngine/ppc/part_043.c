@@ -1390,15 +1390,15 @@ void _gleUpdateFramebufferCompleteness(int glContext,int framebufferObject,undef
   ushort drawBufferEnum;
   undefined4 framebufferStatus;
   int attachedImage;
-  uint uVar4;
-  int iVar5;
-  int *piVar6;
+  uint distinctCountThenScanIndex;
+  int attachmentObjectThenSeenImage;
+  int *seenImageCursor;
   ushort *drawBufferPtr;
   short colorAttachmentFormat;
   int attachmentIndex;
   uint distinctImageCount;
   int *attachmentSlotPtr;
-  int iVar12;
+  int attachmentRecordCursorThenDrawBufferIndex;
   int seenImages [8];
   
   colorAttachmentFormat = 0;
@@ -1409,17 +1409,17 @@ void _gleUpdateFramebufferCompleteness(int glContext,int framebufferObject,undef
   *(undefined2 *)(framebufferObject + 0xbc) = 0;
   attachmentSlotPtr = (int *)(framebufferObject + 0xc4);
   distinctImageCount = 0;
-  iVar12 = framebufferObject;
+  attachmentRecordCursorThenDrawBufferIndex = framebufferObject;
   do {
-    iVar5 = *attachmentSlotPtr;
+    attachmentObjectThenSeenImage = *attachmentSlotPtr;
     attachmentSlotPtr = attachmentSlotPtr + 1;
-    uVar4 = distinctImageCount;
-    if (iVar5 != 0) {
-      attachedImage = iVar5 + 0x10 + *(int *)(iVar12 + 0x24) * 0x168 + *(int *)(iVar12 + 0x28) * 0x18;
-      if (*(int *)(iVar12 + 0x30) != *(int *)(attachedImage + 0xc4)) {
-        fparam_1 = (double)((double (*)())_gleCheckFramebufferAttachmentCompleteness)(glContext,iVar5 + 0x10,iVar12 + 0x20,attachmentIndex);
+    distinctCountThenScanIndex = distinctImageCount;
+    if (attachmentObjectThenSeenImage != 0) {
+      attachedImage = attachmentObjectThenSeenImage + 0x10 + *(int *)(attachmentRecordCursorThenDrawBufferIndex + 0x24) * 0x168 + *(int *)(attachmentRecordCursorThenDrawBufferIndex + 0x28) * 0x18;
+      if (*(int *)(attachmentRecordCursorThenDrawBufferIndex + 0x30) != *(int *)(attachedImage + 0xc4)) {
+        fparam_1 = (double)((double (*)())_gleCheckFramebufferAttachmentCompleteness)(glContext,attachmentObjectThenSeenImage + 0x10,attachmentRecordCursorThenDrawBufferIndex + 0x20,attachmentIndex);
       }
-      if (*(int *)(iVar12 + 0x34) != 0) {
+      if (*(int *)(attachmentRecordCursorThenDrawBufferIndex + 0x34) != 0) {
         framebufferStatus = 0x8cd6;
         goto LAB_000ce630;
       }
@@ -1434,38 +1434,38 @@ void _gleUpdateFramebufferCompleteness(int glContext,int framebufferObject,undef
       }
       if (attachmentIndex < 4) {
         if (colorAttachmentFormat == 0) {
-          colorAttachmentFormat = *(short *)(iVar5 + 0x88);
+          colorAttachmentFormat = *(short *)(attachmentObjectThenSeenImage + 0x88);
         }
-        else if (colorAttachmentFormat != *(short *)(iVar5 + 0x88)) {
+        else if (colorAttachmentFormat != *(short *)(attachmentObjectThenSeenImage + 0x88)) {
           framebufferStatus = 0x8cda;
           goto LAB_000ce630;
         }
       }
-      uVar4 = 0;
+      distinctCountThenScanIndex = 0;
       if (distinctImageCount != 0) {
-        piVar6 = seenImages;
+        seenImageCursor = seenImages;
         do {
-          iVar5 = *piVar6;
-          piVar6 = piVar6 + 1;
-          if (iVar5 == attachedImage + 0xc4) {
+          attachmentObjectThenSeenImage = *seenImageCursor;
+          seenImageCursor = seenImageCursor + 1;
+          if (attachmentObjectThenSeenImage == attachedImage + 0xc4) {
             framebufferStatus = 0x8cd8;
             goto LAB_000ce630;
           }
-          uVar4 = uVar4 + 1;
-        } while (uVar4 < distinctImageCount);
+          distinctCountThenScanIndex = distinctCountThenScanIndex + 1;
+        } while (distinctCountThenScanIndex < distinctImageCount);
       }
-      uVar4 = distinctImageCount + 1;
+      distinctCountThenScanIndex = distinctImageCount + 1;
       seenImages[distinctImageCount] = attachedImage + 0xc4;
     }
     attachmentIndex = attachmentIndex + 1;
-    iVar12 = iVar12 + 0x18;
-    distinctImageCount = uVar4;
+    attachmentRecordCursorThenDrawBufferIndex = attachmentRecordCursorThenDrawBufferIndex + 0x18;
+    distinctImageCount = distinctCountThenScanIndex;
   } while (attachmentIndex < 6);
-  if (uVar4 == 0) {
+  if (distinctCountThenScanIndex == 0) {
     framebufferStatus = 0x8cd7;
   }
   else {
-    iVar12 = 0;
+    attachmentRecordCursorThenDrawBufferIndex = 0;
     drawBufferPtr = (ushort *)(framebufferObject + 0xb0);
     do {
       drawBufferEnum = *drawBufferPtr;
@@ -1474,8 +1474,8 @@ void _gleUpdateFramebufferCompleteness(int glContext,int framebufferObject,undef
         framebufferStatus = 0x8cdb;
         goto LAB_000ce630;
       }
-      iVar12 = iVar12 + 1;
-    } while (iVar12 < 4);
+      attachmentRecordCursorThenDrawBufferIndex = attachmentRecordCursorThenDrawBufferIndex + 1;
+    } while (attachmentRecordCursorThenDrawBufferIndex < 4);
     if ((*(ushort *)(framebufferObject + 0xb8) == 0) ||
        (*(int *)((*(ushort *)(framebufferObject + 0xb8) - 0x8ce0) * 4 + framebufferObject + 0xc4) != 0)) {
       ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,floatArg2,floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);

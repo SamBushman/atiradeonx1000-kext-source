@@ -758,20 +758,20 @@ void _glNormalPointer_Exec(glContext, type, stride, pointer)
   int stride;
   int pointer;
 {
-  undefined4 uVar1;
+  undefined4 rendererBufferHandle;
   undefined4 glErrorCode;
-  int iVar2;
-  int iVar3;
+  int previousRefCount;
+  int previousBufferThenElementSize;
   int loopIndex;
   undefined4 *dstCursor;
   undefined4 *srcCursor;
   int clientState;
   undefined4 *dstCursor2;
-  uint uVar7;
-  int iVar8;
+  uint strideAndType;
+  int arrayBuffer;
   
   clientState = *(int *)(glContext + 0x4a60);
-  uVar7 = stride << 7 | (uint)type & 0xf;
+  strideAndType = stride << 7 | (uint)type & 0xf;
   if (*(short *)(glContext + 0x4a10) < 0) {
     *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
     *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | 0x20000;
@@ -779,14 +779,14 @@ void _glNormalPointer_Exec(glContext, type, stride, pointer)
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
     }
     *(int *)(clientState + 0x48) = pointer;
-    iVar8 = *(int *)(clientState + 0x358);
-    iVar3 = *(int *)(clientState + 0x364);
-    if (iVar8 != iVar3) {
-      if ((iVar3 != 0) &&
-         (iVar2 = *(int *)(iVar3 + 8) + -1, *(int *)(iVar3 + 8) = iVar2, iVar2 == 0)) {
-        _gleFreeBufferObject(glContext,iVar3);
+    arrayBuffer = *(int *)(clientState + 0x358);
+    previousBufferThenElementSize = *(int *)(clientState + 0x364);
+    if (arrayBuffer != previousBufferThenElementSize) {
+      if ((previousBufferThenElementSize != 0) &&
+         (previousRefCount = *(int *)(previousBufferThenElementSize + 8) + -1, *(int *)(previousBufferThenElementSize + 8) = previousRefCount, previousRefCount == 0)) {
+        _gleFreeBufferObject(glContext,previousBufferThenElementSize);
       }
-      if (iVar8 == 0) {
+      if (arrayBuffer == 0) {
         loopIndex = 0;
         *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
         *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) & 0xfffdffff;
@@ -800,37 +800,37 @@ void _glNormalPointer_Exec(glContext, type, stride, pointer)
         }
       }
       else {
-        *(int *)(iVar8 + 8) = *(int *)(iVar8 + 8) + 1;
+        *(int *)(arrayBuffer + 8) = *(int *)(arrayBuffer + 8) + 1;
         *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
         *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) | 0x20000;
         loopIndex = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           dstCursor2 = (undefined4 *)(clientState + 0x3e4);
-          srcCursor = (undefined4 *)(iVar8 + 0x10);
+          srcCursor = (undefined4 *)(arrayBuffer + 0x10);
           do {
-            uVar1 = *srcCursor;
+            rendererBufferHandle = *srcCursor;
             loopIndex = loopIndex + 1;
             srcCursor = srcCursor + 1;
-            *dstCursor2 = uVar1;
+            *dstCursor2 = rendererBufferHandle;
             dstCursor2 = dstCursor2 + 0x23;
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      *(int *)(clientState + 0x364) = iVar8;
+      *(int *)(clientState + 0x364) = arrayBuffer;
       *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
       *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | 0x10;
     }
-    if (iVar8 != 0) {
-      pointer = pointer + *(int *)(iVar8 + 0x30);
+    if (arrayBuffer != 0) {
+      pointer = pointer + *(int *)(arrayBuffer + 0x30);
     }
     *(int *)(glContext + 0x48fc) = pointer;
-    if (*(uint *)(clientState + 0x5c) == uVar7) {
+    if (*(uint *)(clientState + 0x5c) == strideAndType) {
       return;
     }
     if (-1 < stride) {
       switch((int)type) {
       case 0x1400:
-        iVar3 = 1;
+        previousBufferThenElementSize = 1;
         type = (code *)0x9400;
         break;
       default:
@@ -840,23 +840,23 @@ void _glNormalPointer_Exec(glContext, type, stride, pointer)
         glErrorCode = 0x500;
         goto LAB_000a3b64;
       case 0x1402:
-        iVar3 = 2;
+        previousBufferThenElementSize = 2;
         type = (code *)0x9402;
         break;
       case 0x1404:
         type = (code *)0x9404;
       case 0x1406:
-        iVar3 = 4;
+        previousBufferThenElementSize = 4;
         break;
       case 0x140a:
-        iVar3 = 8;
+        previousBufferThenElementSize = 8;
       }
       *(short *)(clientState + 0x50) = (short)type;
-      *(char *)(clientState + 0x54) = (char)iVar3;
+      *(char *)(clientState + 0x54) = (char)previousBufferThenElementSize;
       if (stride < 1) {
-        stride = iVar3 * 3;
+        stride = previousBufferThenElementSize * 3;
       }
-      *(uint *)(clientState + 0x5c) = uVar7;
+      *(uint *)(clientState + 0x5c) = strideAndType;
       *(int *)(clientState + 0x4c) = stride;
       *(undefined4 *)(glContext + 0x488c) = 0;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
@@ -865,9 +865,9 @@ void _glNormalPointer_Exec(glContext, type, stride, pointer)
       if (*(int *)(glContext + 0x5408) != 0) {
         return;
       }
-      uVar7 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
+      strideAndType = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
       *(undefined **)
-       ((*(uint *)(glContext + 0x4680) & uVar7 | *(uint *)(glContext + 0x4684) & ~uVar7) + 0xc) =
+       ((*(uint *)(glContext + 0x4680) & strideAndType | *(uint *)(glContext + 0x4684) & ~strideAndType) + 0xc) =
            PTR__glArrayElement_Exec_00110454;
       return;
     }

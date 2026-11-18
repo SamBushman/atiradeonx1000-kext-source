@@ -1781,43 +1781,43 @@ void _gleAddVertexMaterialNoop()
 }
 
 /* _gleAddVertexMaterial @ 0xd4260 (132 bytes) */
-void _gleAddVertexMaterial(param_1, param_2)
-  int param_1;
+void _gleAddVertexMaterial(glContext, param_2)
+  int glContext;
   int param_2;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int nextLinkThenCurrentNextLink;
+  int material;
+  int prevLinkThenCurrentMaterial;
   
-  iVar2 = *(int *)(param_2 + 0x74);
-  *(undefined4 *)(iVar2 + 0x1e0) = 1;
-  if (iVar2 == param_1 + 0x2c20) {
+  material = *(int *)(param_2 + 0x74);
+  *(undefined4 *)(material + 0x1e0) = 1;
+  if (material == glContext + 0x2c20) {
     return;
   }
-  if (iVar2 == *(int *)(param_1 + 0x4dd0)) {
+  if (material == *(int *)(glContext + 0x4dd0)) {
     return;
   }
-  iVar1 = *(int *)(iVar2 + 0x23c);
-  iVar3 = *(int *)(iVar2 + 0x238);
-  if (iVar2 == *(int *)(param_1 + 0x4dd8)) {
-    *(int *)(param_1 + 0x4dd8) = iVar1;
+  nextLinkThenCurrentNextLink = *(int *)(material + 0x23c);
+  prevLinkThenCurrentMaterial = *(int *)(material + 0x238);
+  if (material == *(int *)(glContext + 0x4dd8)) {
+    *(int *)(glContext + 0x4dd8) = nextLinkThenCurrentNextLink;
   }
   else {
-    *(int *)(iVar3 + 0x23c) = iVar1;
+    *(int *)(prevLinkThenCurrentMaterial + 0x23c) = nextLinkThenCurrentNextLink;
   }
-  if (iVar1 != 0) {
-    *(int *)(iVar1 + 0x238) = iVar3;
+  if (nextLinkThenCurrentNextLink != 0) {
+    *(int *)(nextLinkThenCurrentNextLink + 0x238) = prevLinkThenCurrentMaterial;
   }
-  iVar3 = *(int *)(param_1 + 0x4dd0);
-  iVar1 = *(int *)(iVar3 + 0x23c);
-  *(int *)(iVar2 + 0x238) = iVar3;
-  *(int *)(iVar2 + 0x23c) = iVar1;
-  *(int *)(iVar3 + 0x23c) = iVar2;
-  if (iVar1 != 0) {
-    *(int *)(iVar1 + 0x238) = iVar2;
+  prevLinkThenCurrentMaterial = *(int *)(glContext + 0x4dd0);
+  nextLinkThenCurrentNextLink = *(int *)(prevLinkThenCurrentMaterial + 0x23c);
+  *(int *)(material + 0x238) = prevLinkThenCurrentMaterial;
+  *(int *)(material + 0x23c) = nextLinkThenCurrentNextLink;
+  *(int *)(prevLinkThenCurrentMaterial + 0x23c) = material;
+  if (nextLinkThenCurrentNextLink != 0) {
+    *(int *)(nextLinkThenCurrentNextLink + 0x238) = material;
   }
-  *(undefined1 *)(iVar3 + 0x236) = 1;
-  *(undefined1 *)(iVar3 + 0x235) = 0x1f;
+  *(undefined1 *)(prevLinkThenCurrentMaterial + 0x236) = 1;
+  *(undefined1 *)(prevLinkThenCurrentMaterial + 0x235) = 0x1f;
   return;
 }
 

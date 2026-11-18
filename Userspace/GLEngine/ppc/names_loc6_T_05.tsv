@@ -1,0 +1,66 @@
+local	_glCopyTexSubImage3D_NoopExec	uVar6	forwardedLevel	INFERRED	copy of the level parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glCopyTexSubImage3D_NoopExec	uVar7	forwardedXoffset	INFERRED	copy of the xoffset parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glCopyTexSubImage3D_NoopExec	uVar8	forwardedYoffset	INFERRED	copy of the yoffset parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glCopyTexSubImage3D_NoopExec	uVar9	forwardedZoffset	INFERRED	copy of the zoffset parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glCopyTexSubImage3D_NoopExec	uVar10	forwardedX	INFERRED	copy of the x parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glCopyTexSubImage3D_NoopExec	iVar3	dirtyWord	INFERRED	dirty word read from the +0x324 array in the 9-word scan loop
+local	_glCopyTexSubImage3D_NoopExec	cVar2	rendererInfoByte79	INFERRED	the byte at (ctx+0x468c)+0x79, the renderer info flag tested by the state-validation block (same load as rendererInfoByte79 in _glCopyTexSubImage1D_Exec)
+local	_glCopyTexSubImage3D_NoopExec	bVar1	rendererInfoByte79IsZero	INFERRED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff mask of the dirty word 0x31c
+local	_glCopyTexImage2D_NoopExec	uVar6	forwardedLevel	INFERRED	copy of the level parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glCopyTexImage2D_NoopExec	uVar7	forwardedInternalformat	INFERRED	copy of the internalformat parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glCopyTexImage2D_NoopExec	uVar8	forwardedX	INFERRED	copy of the x parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glCopyTexImage2D_NoopExec	uVar9	forwardedY	INFERRED	copy of the y parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glCopyTexImage2D_NoopExec	uVar10	forwardedWidth	INFERRED	copy of the width parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glCopyTexImage2D_NoopExec	iVar3	dirtyWord	INFERRED	dirty word read from the +0x324 array in the 9-word scan loop
+local	_glCopyTexImage2D_NoopExec	cVar2	rendererInfoByte79	INFERRED	the byte at (ctx+0x468c)+0x79, the renderer info flag tested by the state-validation block (same load as rendererInfoByte79 in _glCopyTexSubImage1D_Exec)
+local	_glCopyTexImage2D_NoopExec	bVar1	rendererInfoByte79IsZero	INFERRED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff mask of the dirty word 0x31c
+local	_glMultiDrawRangeElementArrayAPPLE_NoopExec	uVar3	forwardedStart	INFERRED	copy of the start parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glMultiDrawRangeElementArrayAPPLE_NoopExec	uVar6	forwardedEnd	INFERRED	copy of the end parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glMultiDrawRangeElementArrayAPPLE_NoopExec	uVar7	forwardedFirst	INFERRED	copy of the first parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glMultiDrawRangeElementArrayAPPLE_NoopExec	uVar8	forwardedCount	INFERRED	copy of the count parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glMultiDrawRangeElementArrayAPPLE_NoopExec	iVar5	dirtyWord	INFERRED	dirty word read from the +0x324 array in the 9-word scan loop
+local	_glMultiDrawRangeElementArrayAPPLE_NoopExec	cVar2	rendererInfoByte79	INFERRED	the byte at (ctx+0x468c)+0x79, the renderer info flag tested by the state-validation block (same load as rendererInfoByte79 in _glCopyTexSubImage1D_Exec)
+local	_glMultiDrawRangeElementArrayAPPLE_NoopExec	bVar1	rendererInfoByte79IsZero	INFERRED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff mask of the dirty word 0x31c
+local	_glDrawRangeElements_NoopExec	uVar3	forwardedStart	INFERRED	copy of the start parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glDrawRangeElements_NoopExec	uVar6	forwardedEnd	INFERRED	copy of the end parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glDrawRangeElements_NoopExec	uVar7	forwardedCount	INFERRED	copy of the count parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glDrawRangeElements_NoopExec	uVar8	forwardedType	INFERRED	copy of the type parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glDrawRangeElements_NoopExec	iVar5	dirtyWord	INFERRED	dirty word read from the +0x324 array in the 9-word scan loop
+local	_glDrawRangeElements_NoopExec	cVar2	rendererInfoByte79	INFERRED	the byte at (ctx+0x468c)+0x79, the renderer info flag tested by the state-validation block (same load as rendererInfoByte79 in _glCopyTexSubImage1D_Exec)
+local	_glDrawRangeElements_NoopExec	bVar1	rendererInfoByte79IsZero	INFERRED	rendererInfoByte79 == 0, selects the 0x17000000 / 0x17ffffff mask of the dirty word 0x31c
+local	_glProgramLocalParameter4fARB_Exec	bVar1	dirtyBitNumber	INFERRED	every use is (bit >> 3 & 0x1c) word offset and (bit & 0x1f) bit into the dirty bit arrays at glContext+0x324 / +0x348
+local	_glProgramLocalParameter4fARB_Exec	iVar7	dirtyWordBase324	INFERRED	glContext plus the word offset used for the dirty bit array at +0x324
+local	_glProgramLocalParameter4fARB_Exec	iVar6	programSlotBase	INFERRED	programKind*4 + glContext; +0x5420 of it is the current program object of that kind (vertex program for target 0x8620, fragment program for 0x8804)
+local	_glProgramLocalParameter4fARB_Exec	iVar4	programObjectThenLocalParams	INFERRED	first the current program object (*(programSlotBase+0x5420)), then its local parameter array (program +0x4e0)
+local	_glProgramLocalParameter4fARB_Exec	iVar5	programKindThenDirtyWordBase348ThenParamRecord	INFERRED	first 0 (target 0x8620) or 1 (other program target), then glContext plus the word offset for the dirty bit array at +0x348, finally the local parameter record localParams + index*0x10 that x,y,z,w are stored into
+local	_glProgramLocalParameter4fARB_Exec	uVar2	dirtyWordValue	INFERRED	the new value of the dirty word ctx+0x31c (old | 0x400000 or | 0x1000000), and in the target switch the expected second target enum
+local	_gleUpdateFramebufferCompleteness	iVar5	attachmentObjectThenSeenImage	INFERRED	first the attachment object read from the attachment slot (+0x10 image array, +0x88 format), later the entry read from the seenImages array in the duplicate-attachment scan
+local	_gleUpdateFramebufferCompleteness	uVar4	distinctCountThenScanIndex	INFERRED	first a copy of distinctImageCount (the value kept when the slot is empty), then the index of the duplicate scan over seenImages, finally distinctImageCount + 1 (tested for 0 after the loop: status 0x8cd7 = no attachments)
+local	_gleUpdateFramebufferCompleteness	iVar12	attachmentRecordCursorThenDrawBufferIndex	INFERRED	first framebufferObject advanced by 0x18 per attachment (record fields +0x20..+0x34), later the index 0..3 of the draw buffer check loop
+local	_gleUpdateFramebufferCompleteness	piVar6	seenImageCursor	INFERRED	walks the seenImages array while looking for a duplicated attachment image (status 0x8cd8)
+local	_gleAddListItem	param_2	listExecFunc	INFERRED	stored at the start of the new item; every caller passes a PTR__gl*_ListExec function pointer (e.g. _glMap2VertexAttrib2ARB_ListExec)
+local	_gleAddListItem	param_3	payloadBytes	INFERRED	the callers pass the record size they will fill (item size = param_3 + 4 for the stored function pointer); the returned pointer is item + 4
+local	_gleAddListItem	uVar5	itemBytes	INFERRED	param_3 + 4: bytes the item occupies in the display list buffer (ctx+0x53e8), also recorded in the item size array
+local	_gleAddListItem	uVar3	growBytes	INFERRED	amount added to the buffer capacity (ctx+0x53fc) by the _realloc (capped at 0x2000000, or itemBytes+0x20 for a huge item)
+local	_gleAddListItem	iVar4	newOffsetCapacity	INFERRED	old item-offset array capacity*2 + 2 (entries of 4 bytes), the new capacity of the offsets array
+local	_gleAddListItem	piVar6	itemCountPtr	INFERRED	&listBlock->count (+0x10): the number of items, incremented after the offset of the new item is stored
+local	_gleAddListItem	iVar1	resultThenListBlockThenItemPayload	INFERRED	0 on allocation failure; otherwise first the list block (ctx+0x53e8), finally the address of the item payload (block + used offset + 4) that is returned
+local	_gleTextureImagePut_FastUbyte	puVar4	srcRowStart	INFERRED	copy of srcPixels taken at the start of each row; the next row is srcRowStart + srcRowStride
+local	_gleTextureImagePut_FastUbyte	puVar1	srcBytePtr	INFERRED	pointer to one source byte (srcPixels + k) that is copied into the destination pixel
+local	_gleTextureImagePut_FastUbyte	bVar2	srcFormatSupported	INFERRED	srcFormat == the one source format accepted for this destination format (0x1900 for dst 0x1900, 0x1903 for dst 0x1903); false returns 0 (not handled)
+local	_glNormalPointer_Exec	iVar8	arrayBuffer	CONFIRMED	client state +0x358 is the buffer bound to GL_ARRAY_BUFFER (_glBufferSubData_Exec selects clientState+0x358 for target 0x8892); its +0x30 data pointer is added to the pointer, +0x10[i] holds the per-renderer handles
+local	_glNormalPointer_Exec	iVar3	previousBufferThenElementSize	INFERRED	first the buffer previously recorded in the normal array state (+0x364), whose reference count is dropped, later the element size 1/2/4/8 of the data type
+local	_glNormalPointer_Exec	iVar2	previousRefCount	INFERRED	reference count (+8) of the previous buffer after the decrement; freed with _gleFreeBufferObject at zero
+local	_glNormalPointer_Exec	uVar7	strideAndType	INFERRED	stride << 7 | (type & 0xf), compared with clientState+0x5c to skip an unchanged array setup
+local	_glNormalPointer_Exec	uVar1	rendererBufferHandle	INFERRED	per-renderer handle copied from arrayBuffer+0x10[i] into the client state (stride 0x23 words)
+local	_gleCopy	lists	source	CONFIRMED	copy source: first argument of the row-copy loops (`*(param_2 + i) = *(lists + i)`) and the memcpy source; the name `lists` came from one call site (_glCallLists_Comp) and is wrong for the other callers, which pass source / srcStart / bitmap data
+local	_gleCopy	param_2	dest	CONFIRMED	copy destination (memcpy destination; callers pass dest / rowStart / destPixels)
+local	_gleCopy	param_3	rowByteCount	CONFIRMED	bytes copied per row; callers pass rowByteCount / width * srcPixelBytes
+local	_gleCopy	param_5	srcRowStride	CONFIRMED	added to the source pointer after each row; callers pass srcRowBytes / rowLengthThenRowStride
+local	_gleCopy	param_6	dstRowStride	CONFIRMED	added to the destination pointer after each row; callers pass levelRowBytes / rowByteCount
+local	_gleCopy	iVar1	byteOffset	INFERRED	loopIndex * 4, byte offset of the word copied
+local	_gleCopy	uVar2	tailBytes	INFERRED	param_3 & 3, the 0..3 trailing bytes copied after the word loop
+local	_gleAddVertexMaterial	param_1	glContext	INFERRED	every access is a glContext field (+0x4dd0 current material, +0x4dd8 free list, +0x2c20 embedded material)
+local	_gleAddVertexMaterial	iVar2	material	INFERRED	the material record referenced by the vertex-side record (param_2 + 0x74); +0x1e0 is set to 1 and it is relinked after the current material
+local	_gleAddVertexMaterial	iVar1	nextLinkThenCurrentNextLink	INFERRED	first the material's +0x23c link (next), later the +0x23c link of the current material
+local	_gleAddVertexMaterial	iVar3	prevLinkThenCurrentMaterial	INFERRED	first the material's +0x238 link (previous), later the current material (ctx+0x4dd0) the record is inserted behind

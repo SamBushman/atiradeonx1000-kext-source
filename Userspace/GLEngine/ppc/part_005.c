@@ -2508,62 +2508,62 @@ int _glCullFace_Comp(glContext, mode)
 }
 
 /* _gleAddListItem @ 0x392ec (292 bytes) */
-int _gleAddListItem(glContext, param_2, param_3)
+int _gleAddListItem(glContext, listExecFunc, payloadBytes)
   int glContext;
-  undefined4 param_2;
-  int param_3;
+  undefined4 listExecFunc;
+  int payloadBytes;
 {
   int reallocatedBlock2;
   int reallocatedBlock;
-  int iVar1;
+  int resultThenListBlockThenItemPayload;
   int glContextWord5400;
   int glContextPtr53e8;
-  uint uVar3;
-  int iVar4;
+  uint growBytes;
+  int newOffsetCapacity;
   int glContextWord54002;
-  uint uVar5;
-  int *piVar6;
+  uint itemBytes;
+  int *itemCountPtr;
   
-  uVar5 = param_3 + 4;
+  itemBytes = payloadBytes + 4;
   glContextWord5400 = *(int *)(glContext + 0x5400);
-  if ((uint)(*(int *)(glContext + 0x53fc) - glContextWord5400) < uVar5) {
-    uVar3 = glContextWord5400 + uVar5;
-    if ((0x2000000 < uVar3) && (uVar3 = 0x2000000, 0x1ffffff < uVar5)) {
-      uVar3 = param_3 + 0x24;
+  if ((uint)(*(int *)(glContext + 0x53fc) - glContextWord5400) < itemBytes) {
+    growBytes = glContextWord5400 + itemBytes;
+    if ((0x2000000 < growBytes) && (growBytes = 0x2000000, 0x1ffffff < itemBytes)) {
+      growBytes = payloadBytes + 0x24;
     }
-    reallocatedBlock2 = _realloc(*(undefined4 *)(glContext + 0x53e8),glContextWord5400 + uVar3);
+    reallocatedBlock2 = _realloc(*(undefined4 *)(glContext + 0x53e8),glContextWord5400 + growBytes);
     *(int *)(glContext + 0x53e8) = reallocatedBlock2;
     if (reallocatedBlock2 != 0) {
-      *(uint *)(glContext + 0x53fc) = glContextWord5400 + uVar3;
+      *(uint *)(glContext + 0x53fc) = glContextWord5400 + growBytes;
       goto LAB_00039364;
     }
 LAB_000393a0:
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x505;
     }
-    iVar1 = 0;
+    resultThenListBlockThenItemPayload = 0;
   }
   else {
 LAB_00039364:
     glContextPtr53e8 = *(int *)(glContext + 0x53e8);
-    piVar6 = (int *)(glContextPtr53e8 + 0x10);
-    iVar1 = glContextPtr53e8;
+    itemCountPtr = (int *)(glContextPtr53e8 + 0x10);
+    resultThenListBlockThenItemPayload = glContextPtr53e8;
     if (*(uint *)(glContextPtr53e8 + 0x18) <= *(int *)(glContextPtr53e8 + 0x10) + 1U) {
-      iVar4 = *(uint *)(glContextPtr53e8 + 0x18) * 2 + 2;
-      reallocatedBlock = _realloc(*(undefined4 *)(glContextPtr53e8 + 0x14),iVar4 * 4);
+      newOffsetCapacity = *(uint *)(glContextPtr53e8 + 0x18) * 2 + 2;
+      reallocatedBlock = _realloc(*(undefined4 *)(glContextPtr53e8 + 0x14),newOffsetCapacity * 4);
       *(int *)(glContextPtr53e8 + 0x14) = reallocatedBlock;
       if (reallocatedBlock == 0) goto LAB_000393a0;
-      *(int *)(glContextPtr53e8 + 0x18) = iVar4;
-      iVar1 = *(int *)(glContext + 0x53e8);
+      *(int *)(glContextPtr53e8 + 0x18) = newOffsetCapacity;
+      resultThenListBlockThenItemPayload = *(int *)(glContext + 0x53e8);
     }
     glContextWord54002 = *(int *)(glContext + 0x5400);
-    *(undefined4 *)(iVar1 + glContextWord54002) = param_2;
-    iVar1 = iVar1 + glContextWord54002 + 4;
-    *(uint *)(*piVar6 * 4 + *(int *)(glContextPtr53e8 + 0x14)) = uVar5;
-    *piVar6 = *piVar6 + 1;
-    *(uint *)(glContext + 0x5400) = *(int *)(glContext + 0x5400) + uVar5;
+    *(undefined4 *)(resultThenListBlockThenItemPayload + glContextWord54002) = listExecFunc;
+    resultThenListBlockThenItemPayload = resultThenListBlockThenItemPayload + glContextWord54002 + 4;
+    *(uint *)(*itemCountPtr * 4 + *(int *)(glContextPtr53e8 + 0x14)) = itemBytes;
+    *itemCountPtr = *itemCountPtr + 1;
+    *(uint *)(glContext + 0x5400) = *(int *)(glContext + 0x5400) + itemBytes;
   }
-  return iVar1;
+  return resultThenListBlockThenItemPayload;
 }
 
 /* _glCullFace_Exec @ 0x39410 (156 bytes) */

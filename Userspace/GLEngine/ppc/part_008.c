@@ -761,62 +761,62 @@ void _glPointSize_Exec(int glContext,float size)
 /* _glProgramLocalParameter4fARB_Exec @ 0x5001c (328 bytes) */
 void _glProgramLocalParameter4fARB_Exec(int glContext,uint target,uint index,float x,float y,float z,float w)
 {
-  byte bVar1;
-  uint uVar2;
+  byte dirtyBitNumber;
+  uint dirtyWordValue;
   undefined4 glErrorCode;
-  int iVar4;
+  int programObjectThenLocalParams;
   int glContextWord5424;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int programKindThenDirtyWordBase348ThenParamRecord;
+  int programSlotBase;
+  int dirtyWordBase324;
   
   if (target == 0x8620) {
-    iVar5 = 0;
+    programKindThenDirtyWordBase348ThenParamRecord = 0;
     if (index < 0x100) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x400000;
+      dirtyWordValue = *(uint *)(glContext + 0x31c) | 0x400000;
 LAB_000500b0:
-      *(uint *)(glContext + 0x31c) = uVar2;
+      *(uint *)(glContext + 0x31c) = dirtyWordValue;
       if (*(int *)(glContext + 0x5434) == 0) {
-        bVar1 = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x58);
+        dirtyBitNumber = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x58);
       }
       else {
-        bVar1 = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x8c);
+        dirtyBitNumber = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x8c);
       }
-      iVar7 = (bVar1 >> 3 & 0x1c) + glContext;
+      dirtyWordBase324 = (dirtyBitNumber >> 3 & 0x1c) + glContext;
       glContextWord5424 = *(int *)(glContext + 0x5424);
-      iVar6 = iVar5 * 4 + glContext;
-      *(uint *)(iVar7 + 0x324) = *(uint *)(iVar7 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(index + glContextWord5424 + 0x58);
-      iVar4 = *(int *)(iVar6 + 0x5420);
-      iVar5 = (bVar1 >> 3 & 0x1c) + glContext;
-      *(uint *)(iVar5 + 0x348) = *(uint *)(iVar5 + 0x348) | 1 << (bVar1 & 0x1f);
-      iVar4 = *(int *)(iVar4 + 0x4e0);
-      iVar5 = iVar4 + index * 0x10;
-      *(float *)(iVar4 + index * 0x10) = (float)x;
-      *(float *)(iVar5 + 0xc) = (float)w;
-      *(float *)(iVar5 + 4) = (float)y;
-      *(float *)(iVar5 + 8) = (float)z;
-      _gleModifyPluginPipelineProgram(glContext,*(int *)(iVar6 + 0x5420) + 0x10,2);
+      programSlotBase = programKindThenDirtyWordBase348ThenParamRecord * 4 + glContext;
+      *(uint *)(dirtyWordBase324 + 0x324) = *(uint *)(dirtyWordBase324 + 0x324) | 1 << (dirtyBitNumber & 0x1f);
+      dirtyBitNumber = *(byte *)(index + glContextWord5424 + 0x58);
+      programObjectThenLocalParams = *(int *)(programSlotBase + 0x5420);
+      programKindThenDirtyWordBase348ThenParamRecord = (dirtyBitNumber >> 3 & 0x1c) + glContext;
+      *(uint *)(programKindThenDirtyWordBase348ThenParamRecord + 0x348) = *(uint *)(programKindThenDirtyWordBase348ThenParamRecord + 0x348) | 1 << (dirtyBitNumber & 0x1f);
+      programObjectThenLocalParams = *(int *)(programObjectThenLocalParams + 0x4e0);
+      programKindThenDirtyWordBase348ThenParamRecord = programObjectThenLocalParams + index * 0x10;
+      *(float *)(programObjectThenLocalParams + index * 0x10) = (float)x;
+      *(float *)(programKindThenDirtyWordBase348ThenParamRecord + 0xc) = (float)w;
+      *(float *)(programKindThenDirtyWordBase348ThenParamRecord + 4) = (float)y;
+      *(float *)(programKindThenDirtyWordBase348ThenParamRecord + 8) = (float)z;
+      _gleModifyPluginPipelineProgram(glContext,*(int *)(programSlotBase + 0x5420) + 0x10,2);
       return;
     }
   }
   else {
     if (target < 0x8621) {
-      uVar2 = 0x8200;
+      dirtyWordValue = 0x8200;
     }
     else {
-      uVar2 = 0x8804;
+      dirtyWordValue = 0x8804;
     }
-    if (target != uVar2) {
+    if (target != dirtyWordValue) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
       glErrorCode = 0x500;
       goto LAB_000500a8;
     }
-    iVar5 = 1;
+    programKindThenDirtyWordBase348ThenParamRecord = 1;
     if (index < 0x80) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x1000000;
+      dirtyWordValue = *(uint *)(glContext + 0x31c) | 0x1000000;
       goto LAB_000500b0;
     }
   }
