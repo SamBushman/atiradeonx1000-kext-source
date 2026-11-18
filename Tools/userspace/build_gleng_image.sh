@@ -21,7 +21,7 @@ python3 Tools/userspace/fix_link_tree.py "$EV/gleng_link" || exit 2
 # ld64 (not the stock ld) must do the final link: the stock ld rejects the rebuilt libGLProgrammability's load commands and mis-links images of this size
 sed -i 's#^gcc -arch ppc -bundle#gcc -B/usr/local/opt/ld64/bin/ -arch ppc -bundle#' "$EV/gleng_link/build.sh"
 tar czf "$EV/gleng_link.tgz" -C "$EV" gleng_link && scp -q "$EV/gleng_link.tgz" $H:rung3/gleng_$SHA.tgz || { echo "ship FAILED"; exit 2; }
-ssh $H "cd rung3 && rm -rf gleng_$SHA && mkdir gleng_$SHA && cd gleng_$SHA && tar xzf ../gleng_$SHA.tgz && cd gleng_link && (PATH=/usr/local/opt/ld64/bin:\$PATH sh build.sh GLEngine_rebuilt > ../build.log 2>&1; echo \$? > ../build.rc) </dev/null"
+ssh $H "cd rung3 && rm -rf gleng_$SHA && mkdir gleng_$SHA && cd gleng_$SHA && tar xzf ../gleng_$SHA.tgz && cd gleng_link && (PATH=/usr/local/opt/ld64/bin:\$PATH BUILD_JOBS=${BUILD_JOBS:-1} sh build.sh GLEngine_rebuilt > ../build.log 2>&1; echo \$? > ../build.rc) </dev/null"
 if [ "$(ssh $H cat rung3/gleng_$SHA/build.rc)" = 0 ] && ssh $H "test -s rung3/gleng_$SHA/gleng_link/GLEngine_rebuilt"; then echo "BUILT: ~/rung3/gleng_$SHA/gleng_link/GLEngine_rebuilt"; ssh $H "grep -c 'COMPILE FAIL' rung3/gleng_$SHA/build.log"; exit 0; fi
 echo "host build FAILED"; ssh $H "grep -v '^In file' rung3/gleng_$SHA/build.log | sed 's/^part_[0-9]*.c:[0-9]*: //' | sort | uniq -c | sort -rn | head -15"
 exit 1

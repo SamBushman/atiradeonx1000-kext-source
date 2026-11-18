@@ -1827,7 +1827,9 @@ ln = ['#!/bin/sh', '# build.sh - compile + link on the Tiger G5 (gcc 4.0.1). Usa
       'rm -rf obj; mkdir obj',
       # LINK_OPT_ALT_FILES (space-separated part basenames) are compiled with LINK_OPT_ALT instead of LINK_OPT (issue #212: the shader-compiler parts are faster at -Os, the draw/state parts at -O2)
       'ALTFILES=" %s "; CFLAGS_ALT="-arch ppc %s -w %s -fno-common -force_cpusubtype_ALL"' % (os.environ.get('LINK_OPT_ALT_FILES', ''), os.environ.get('LINK_OPT_ALT', '-Os -mtune=970'), os.environ.get('LINK_PIC', '-fPIC')),
-      'for f in part_*.c x_*part_*.c; do [ -f $f ] || continue; XF=; grep -qw vec16 $f && XF=-maltivec; CF="$CFLAGS"; case "$ALTFILES" in *" ${f%.c} "*) CF="$CFLAGS_ALT";; esac; ' + COMPILE_CMD + ' || echo "COMPILE FAIL $f"; done',
+      '# BUILD_JOBS=N (default 1 = the old sequential loop) compiles N parts at a time (groups of N, `wait` after each group): the parts are independent, the objects are identical',
+      'J=${BUILD_JOBS:-1}; n=0',
+      'for f in part_*.c x_*part_*.c; do [ -f $f ] || continue; XF=; grep -qw vec16 $f && XF=-maltivec; CF="$CFLAGS"; case "$ALTFILES" in *" ${f%.c} "*) CF="$CFLAGS_ALT";; esac; ( ' + COMPILE_CMD + ' || echo "COMPILE FAIL $f" ) & n=$((n+1)); if [ $n -ge $J ]; then wait; n=0; fi; done; wait',
       'as -arch ppc -o obj/data.o data.s',
       'as -arch ppc -o obj/code.o code.s',
       '# INSTALL overrides the install name (a dlopen() of a copy that keeps the stock name returns the already-loaded system image)',
