@@ -765,76 +765,80 @@ void _gleReclaimVertexArrayResources(glContext)
 }
 
 /* _gleVPFlipColors @ 0x1043c0 (404 bytes) */
-double _gleVPFlipColors(glContext, param_2, param_3, param_4)
+double _gleVPFlipColors(glContext, vertexCursor, vertexCount, facing)
   int glContext;
-  uint param_2;
-  int param_3;
-  uint param_4;
+  uint vertexCursor;
+  int vertexCount;
+  uint facing;
 {
-  uint uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
+  uint vertexEndThenRemaining;
+  undefined4 savedFrontR;
+  undefined4 savedFrontASecPath;
+  undefined4 savedFrontG;
+  undefined4 savedSecondaryBSecPath;
+  undefined4 savedFrontB;
+  undefined4 savedSecondaryRSecPath;
+  undefined4 savedFrontA;
+  undefined4 savedSecondaryGSecPath;
+  undefined4 savedFrontRSecPath;
+  undefined4 savedFrontGSecPath;
+  undefined4 savedFrontBSecPath;
   
-  uVar1 = param_2 + param_3 * 0x100;
+  vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
   if (*(char *)(glContext + 0x316b) == '\0') {
-    if (param_2 < uVar1) {
-      uVar1 = (uVar1 - param_2) + 0xff >> 8;
+    if (vertexCursor < vertexEndThenRemaining) {
+      vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
       do {
-        if (param_4 != *(byte *)(param_2 + 0x7e)) {
-          uVar2 = *(undefined4 *)(param_2 + 0x30);
-          uVar3 = *(undefined4 *)(param_2 + 0x34);
-          uVar4 = *(undefined4 *)(param_2 + 0x38);
-          uVar5 = *(undefined4 *)(param_2 + 0x3c);
-          *(undefined4 *)(param_2 + 0x30) = *(undefined4 *)(param_2 + 0x20);
-          *(undefined4 *)(param_2 + 0x34) = *(undefined4 *)(param_2 + 0x24);
-          *(undefined4 *)(param_2 + 0x38) = *(undefined4 *)(param_2 + 0x28);
-          *(undefined4 *)(param_2 + 0x3c) = *(undefined4 *)(param_2 + 0x2c);
-          *(char *)(param_2 + 0x7e) = (char)param_4;
-          *(undefined4 *)(param_2 + 0x20) = uVar2;
-          *(undefined4 *)(param_2 + 0x24) = uVar3;
-          *(undefined4 *)(param_2 + 0x28) = uVar4;
-          *(undefined4 *)(param_2 + 0x2c) = uVar5;
+        if (facing != *(byte *)(vertexCursor + 0x7e)) {
+          savedFrontR = *(undefined4 *)(vertexCursor + 0x30);
+          savedFrontG = *(undefined4 *)(vertexCursor + 0x34);
+          savedFrontB = *(undefined4 *)(vertexCursor + 0x38);
+          savedFrontA = *(undefined4 *)(vertexCursor + 0x3c);
+          *(undefined4 *)(vertexCursor + 0x30) = *(undefined4 *)(vertexCursor + 0x20);
+          *(undefined4 *)(vertexCursor + 0x34) = *(undefined4 *)(vertexCursor + 0x24);
+          *(undefined4 *)(vertexCursor + 0x38) = *(undefined4 *)(vertexCursor + 0x28);
+          *(undefined4 *)(vertexCursor + 0x3c) = *(undefined4 *)(vertexCursor + 0x2c);
+          *(char *)(vertexCursor + 0x7e) = (char)facing;
+          *(undefined4 *)(vertexCursor + 0x20) = savedFrontR;
+          *(undefined4 *)(vertexCursor + 0x24) = savedFrontG;
+          *(undefined4 *)(vertexCursor + 0x28) = savedFrontB;
+          *(undefined4 *)(vertexCursor + 0x2c) = savedFrontA;
         }
-        param_2 = param_2 + 0x100;
-        uVar1 = uVar1 - 1;
-      } while (uVar1 != 0);
+        vertexCursor = vertexCursor + 0x100;
+        vertexEndThenRemaining = vertexEndThenRemaining - 1;
+      } while (vertexEndThenRemaining != 0);
     }
   }
-  else if (param_2 < uVar1) {
-    uVar1 = (uVar1 - param_2) + 0xff >> 8;
+  else if (vertexCursor < vertexEndThenRemaining) {
+    vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
     do {
-      if (param_4 != *(byte *)(param_2 + 0x7e)) {
-        uVar6 = *(undefined4 *)(param_2 + 0x30);
-        uVar7 = *(undefined4 *)(param_2 + 0x34);
-        uVar8 = *(undefined4 *)(param_2 + 0x38);
-        uVar2 = *(undefined4 *)(param_2 + 0x3c);
-        uVar4 = *(undefined4 *)(param_2 + 0x50);
-        uVar5 = *(undefined4 *)(param_2 + 0x54);
-        uVar3 = *(undefined4 *)(param_2 + 0x58);
-        *(undefined4 *)(param_2 + 0x30) = *(undefined4 *)(param_2 + 0x20);
-        *(undefined4 *)(param_2 + 0x34) = *(undefined4 *)(param_2 + 0x24);
-        *(undefined4 *)(param_2 + 0x38) = *(undefined4 *)(param_2 + 0x28);
-        *(undefined4 *)(param_2 + 0x3c) = *(undefined4 *)(param_2 + 0x2c);
-        *(undefined4 *)(param_2 + 0x50) = *(undefined4 *)(param_2 + 0x40);
-        *(undefined4 *)(param_2 + 0x54) = *(undefined4 *)(param_2 + 0x44);
-        *(undefined4 *)(param_2 + 0x58) = *(undefined4 *)(param_2 + 0x48);
-        *(char *)(param_2 + 0x7e) = (char)param_4;
-        *(undefined4 *)(param_2 + 0x20) = uVar6;
-        *(undefined4 *)(param_2 + 0x24) = uVar7;
-        *(undefined4 *)(param_2 + 0x28) = uVar8;
-        *(undefined4 *)(param_2 + 0x2c) = uVar2;
-        *(undefined4 *)(param_2 + 0x40) = uVar4;
-        *(undefined4 *)(param_2 + 0x44) = uVar5;
-        *(undefined4 *)(param_2 + 0x48) = uVar3;
+      if (facing != *(byte *)(vertexCursor + 0x7e)) {
+        savedFrontRSecPath = *(undefined4 *)(vertexCursor + 0x30);
+        savedFrontGSecPath = *(undefined4 *)(vertexCursor + 0x34);
+        savedFrontBSecPath = *(undefined4 *)(vertexCursor + 0x38);
+        savedFrontASecPath = *(undefined4 *)(vertexCursor + 0x3c);
+        savedSecondaryRSecPath = *(undefined4 *)(vertexCursor + 0x50);
+        savedSecondaryGSecPath = *(undefined4 *)(vertexCursor + 0x54);
+        savedSecondaryBSecPath = *(undefined4 *)(vertexCursor + 0x58);
+        *(undefined4 *)(vertexCursor + 0x30) = *(undefined4 *)(vertexCursor + 0x20);
+        *(undefined4 *)(vertexCursor + 0x34) = *(undefined4 *)(vertexCursor + 0x24);
+        *(undefined4 *)(vertexCursor + 0x38) = *(undefined4 *)(vertexCursor + 0x28);
+        *(undefined4 *)(vertexCursor + 0x3c) = *(undefined4 *)(vertexCursor + 0x2c);
+        *(undefined4 *)(vertexCursor + 0x50) = *(undefined4 *)(vertexCursor + 0x40);
+        *(undefined4 *)(vertexCursor + 0x54) = *(undefined4 *)(vertexCursor + 0x44);
+        *(undefined4 *)(vertexCursor + 0x58) = *(undefined4 *)(vertexCursor + 0x48);
+        *(char *)(vertexCursor + 0x7e) = (char)facing;
+        *(undefined4 *)(vertexCursor + 0x20) = savedFrontRSecPath;
+        *(undefined4 *)(vertexCursor + 0x24) = savedFrontGSecPath;
+        *(undefined4 *)(vertexCursor + 0x28) = savedFrontBSecPath;
+        *(undefined4 *)(vertexCursor + 0x2c) = savedFrontASecPath;
+        *(undefined4 *)(vertexCursor + 0x40) = savedSecondaryRSecPath;
+        *(undefined4 *)(vertexCursor + 0x44) = savedSecondaryGSecPath;
+        *(undefined4 *)(vertexCursor + 0x48) = savedSecondaryBSecPath;
       }
-      param_2 = param_2 + 0x100;
-      uVar1 = uVar1 - 1;
-    } while (uVar1 != 0);
+      vertexCursor = vertexCursor + 0x100;
+      vertexEndThenRemaining = vertexEndThenRemaining - 1;
+    } while (vertexEndThenRemaining != 0);
   }
   return;
 }

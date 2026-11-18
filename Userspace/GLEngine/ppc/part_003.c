@@ -3867,59 +3867,59 @@ code_r0x000248f4:
 }
 
 /* _glePPLogParameters @ 0x2496c (728 bytes) */
-void _glePPLogParameters(glContext, param_2, param_3, param_4, param_5, param_6)
+void _glePPLogParameters(glContext, param_2, paramCount, paramEntries, paramArrayCount, paramArrays)
   int glContext;
   int param_2;
-  uint param_3;
-  int param_4;
-  uint param_5;
-  int param_6;
+  uint paramCount;
+  int paramEntries;
+  uint paramArrayCount;
+  int paramArrays;
 {
   uint loopIndex5;
   uint loopIndex4;
   uint loopIndex3;
   int loopIndex;
   int remaining;
-  uint uVar1;
+  uint lastSlot;
   int iVar2;
   undefined4 *cursor;
-  undefined2 uVar4;
+  undefined2 slotResult;
   int iVar5;
   uint *srcCursor;
-  uint uVar7;
+  uint bankIndex;
   int sharedState;
-  uint uVar9;
+  uint rangeEnd;
   int iVar10;
   uint loopIndex2;
-  uint uVar12;
+  uint paramIndex;
   uint uVar13;
-  undefined4 local_a0 [12];
+  undefined4 blockedSlotBits [12];
   uint local_70;
   uint local_6c;
-  uint local_60;
-  uint local_5c;
+  uint arrayStartWord;
+  uint arrayEndWord;
   
   loopIndex2 = 0;
-  uVar7 = (uint)*(ushort *)(param_2 + 0x4ba);
+  bankIndex = (uint)*(ushort *)(param_2 + 0x4ba);
   sharedState = *(int *)(glContext + 0x5148);
-  iVar5 = uVar7 * 0xa30 + sharedState;
+  iVar5 = bankIndex * 0xa30 + sharedState;
   iVar2 = *(int *)(iVar5 + 0x8a98) + 1;
   *(int *)(iVar5 + 0x8a98) = iVar2;
   *(int *)(param_2 + 0x14) = iVar2;
-  uVar1 = 0;
+  lastSlot = 0;
   if (*(uint *)(iVar5 + 0x8a9c) != 0) {
     srcCursor = *(uint **)(iVar5 + 0x8aa0);
     do {
-      uVar1 = *srcCursor;
+      lastSlot = *srcCursor;
       srcCursor = srcCursor + 1;
-      if (param_3 <= uVar1) break;
+      if (paramCount <= lastSlot) break;
       loopIndex2 = loopIndex2 + 1;
-      uVar1 = 0;
+      lastSlot = 0;
     } while (loopIndex2 < *(uint *)(iVar5 + 0x8a9c));
   }
   loopIndex3 = 0;
   do {
-    cursor = local_a0;
+    cursor = blockedSlotBits;
     remaining = 9;
     do {
       *cursor = 0;
@@ -3927,65 +3927,65 @@ void _glePPLogParameters(glContext, param_2, param_3, param_4, param_5, param_6)
       remaining = remaining + -1;
     } while (remaining != 0);
     loopIndex = 0;
-    for (uVar13 = param_3; uVar13 != 0; uVar13 = uVar13 - 1) {
+    for (uVar13 = paramCount; uVar13 != 0; uVar13 = uVar13 - 1) {
       iVar5 = loopIndex * 8;
       loopIndex = loopIndex + 1;
-      *(uint *)(iVar5 + param_4) = *(uint *)(iVar5 + param_4) & 0xff1fffff;
+      *(uint *)(iVar5 + paramEntries) = *(uint *)(iVar5 + paramEntries) & 0xff1fffff;
     }
     loopIndex5 = 0;
     iVar2 = -1;
-    if (param_5 != 0) {
+    if (paramArrayCount != 0) {
       do {
-        local_60 = *(uint *)(param_6 + loopIndex5 * 8);
-        local_5c = *(uint *)(loopIndex5 * 8 + param_6 + 4);
-        uVar12 = local_60 & 0xffff;
-        uVar9 = (local_5c & 0xffff) + 1;
+        arrayStartWord = *(uint *)(paramArrays + loopIndex5 * 8);
+        arrayEndWord = *(uint *)(loopIndex5 * 8 + paramArrays + 4);
+        paramIndex = arrayStartWord & 0xffff;
+        rangeEnd = (arrayEndWord & 0xffff) + 1;
         if (loopIndex3 <= loopIndex5) {
-          iVar5 = uVar12 * 8;
-          iVar10 = iVar5 + param_4;
-          local_70 = *(undefined4 *)(iVar5 + param_4);
+          iVar5 = paramIndex * 8;
+          iVar10 = iVar5 + paramEntries;
+          local_70 = *(undefined4 *)(iVar5 + paramEntries);
           local_6c = *(uint *)(iVar10 + 4) & 0xffff0000;
-          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,uVar7,local_70,local_6c,uVar9 - uVar12,0xffffffff,
-                                 local_a0,uVar1);
+          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,bankIndex,local_70,local_6c,rangeEnd - paramIndex,0xffffffff,
+                                 blockedSlotBits,lastSlot);
           if (iVar2 < 0) break;
-          uVar12 = uVar12 + 1;
-          *(uint *)(iVar5 + param_4) = local_70;
+          paramIndex = paramIndex + 1;
+          *(uint *)(iVar5 + paramEntries) = local_70;
           *(uint *)(iVar10 + 4) = local_6c;
           *(short *)(iVar10 + 6) = (short)iVar2;
-          *(uint *)(iVar5 + param_4) = *(uint *)(iVar5 + param_4) & 0xff1fffff | 0x200000;
+          *(uint *)(iVar5 + paramEntries) = *(uint *)(iVar5 + paramEntries) & 0xff1fffff | 0x200000;
         }
-        for (; uVar12 < uVar9; uVar12 = uVar12 + 1) {
-          iVar5 = uVar12 * 8;
-          iVar10 = iVar5 + param_4;
-          local_70 = *(undefined4 *)(iVar5 + param_4);
+        for (; paramIndex < rangeEnd; paramIndex = paramIndex + 1) {
+          iVar5 = paramIndex * 8;
+          iVar10 = iVar5 + paramEntries;
+          local_70 = *(undefined4 *)(iVar5 + paramEntries);
           local_6c = *(uint *)(iVar10 + 4) & 0xffff0000;
-          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,uVar7,local_70,local_6c,1,iVar2 + 1,local_a0,uVar1);
-          *(uint *)(iVar5 + param_4) = local_70;
+          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,bankIndex,local_70,local_6c,1,iVar2 + 1,blockedSlotBits,lastSlot);
+          *(uint *)(iVar5 + paramEntries) = local_70;
           *(uint *)(iVar10 + 4) = local_6c;
           *(short *)(iVar10 + 6) = (short)iVar2;
-          *(uint *)(iVar5 + param_4) = *(uint *)(iVar5 + param_4) & 0xff1fffff | 0x200000;
+          *(uint *)(iVar5 + paramEntries) = *(uint *)(iVar5 + paramEntries) & 0xff1fffff | 0x200000;
         }
         loopIndex5 = loopIndex5 + 1;
-      } while (loopIndex5 < param_5);
+      } while (loopIndex5 < paramArrayCount);
     }
-    if ((loopIndex5 == param_5) || (loopIndex3 = loopIndex3 + 1, param_5 < loopIndex3)) {
+    if ((loopIndex5 == paramArrayCount) || (loopIndex3 = loopIndex3 + 1, paramArrayCount < loopIndex3)) {
       loopIndex4 = 0;
-      if (param_3 != 0) {
+      if (paramCount != 0) {
         do {
           iVar2 = loopIndex4 * 8;
-          local_70 = *(uint *)(iVar2 + param_4);
-          iVar5 = iVar2 + param_4;
+          local_70 = *(uint *)(iVar2 + paramEntries);
+          iVar5 = iVar2 + paramEntries;
           if ((local_70 >> 0x15 & 7) == 0) {
             local_6c = *(uint *)(iVar5 + 4) & 0xffff0000;
-            uVar4 = ((int (*)())_glePPLogParam)(glContext,sharedState,uVar7,local_70,local_6c,1,0xffffffff,local_a0,uVar1
+            slotResult = ((int (*)())_glePPLogParam)(glContext,sharedState,bankIndex,local_70,local_6c,1,0xffffffff,blockedSlotBits,lastSlot
                                   );
-            *(uint *)(iVar2 + param_4) = local_70;
+            *(uint *)(iVar2 + paramEntries) = local_70;
             *(uint *)(iVar5 + 4) = local_6c;
-            *(undefined2 *)(iVar5 + 6) = uVar4;
-            *(uint *)(iVar2 + param_4) = *(uint *)(iVar2 + param_4) & 0xff1fffff | 0x200000;
+            *(undefined2 *)(iVar5 + 6) = slotResult;
+            *(uint *)(iVar2 + paramEntries) = *(uint *)(iVar2 + paramEntries) & 0xff1fffff | 0x200000;
           }
           loopIndex4 = loopIndex4 + 1;
-        } while (loopIndex4 < param_3);
+        } while (loopIndex4 < paramCount);
       }
       return;
     }
