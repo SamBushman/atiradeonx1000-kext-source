@@ -854,7 +854,7 @@ int _gleLoadDataElementFromMatNO(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _gleInterpolEyeNO0000 @ 0xb5390 (448 bytes) */
-void _gleInterpolEyeNO0000(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO0000(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -923,10 +923,10 @@ void _gleInterpolEyeNO0000(int param_1,float *param_2,int param_3,float *param_4
       fVar2 = fVar2 * fVar1;
       fVar3 = fVar3 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar11 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar2 + *(float *)(param_1 + 0x1b84);
-    fVar11 = *(float *)(param_1 + 0x1b88);
-    fVar2 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar11 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar2 + *(float *)(glContext + 0x1b84);
+    fVar11 = *(float *)(glContext + 0x1b88);
+    fVar2 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar2 * fVar3 + fVar11;
   }
@@ -945,7 +945,7 @@ void _gleInterpolEyeNO0000(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO0010 @ 0xb5550 (468 bytes) */
-void _gleInterpolEyeNO0010(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO0010(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -1014,10 +1014,10 @@ void _gleInterpolEyeNO0010(int param_1,float *param_2,int param_3,float *param_4
       fVar2 = fVar2 * fVar1;
       fVar3 = fVar3 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar11 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar2 + *(float *)(param_1 + 0x1b84);
-    fVar11 = *(float *)(param_1 + 0x1b88);
-    fVar2 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar11 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar2 + *(float *)(glContext + 0x1b84);
+    fVar11 = *(float *)(glContext + 0x1b88);
+    fVar2 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar2 * fVar3 + fVar11;
   }
@@ -1038,7 +1038,7 @@ void _gleInterpolEyeNO0010(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO0100 @ 0xb5724 (616 bytes) */
-void _gleInterpolEyeNO0100(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO0100(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -1118,10 +1118,10 @@ void _gleInterpolEyeNO0100(int param_1,float *param_2,int param_3,float *param_4
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar12 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar12 = *(float *)(param_1 + 0x1b88);
-    fVar3 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar12 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar12 = *(float *)(glContext + 0x1b88);
+    fVar3 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar4 + fVar12;
   }
@@ -1177,7 +1177,7 @@ void _gleInterpolEyeNO0100(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO0100w @ 0xb598c (528 bytes) */
-void _gleInterpolEyeNO0100w(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO0100w(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -1246,10 +1246,10 @@ void _gleInterpolEyeNO0100w(int param_1,float *param_2,int param_3,float *param_
       fVar2 = fVar2 * fVar1;
       fVar3 = fVar3 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar11 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar2 + *(float *)(param_1 + 0x1b84);
-    fVar11 = *(float *)(param_1 + 0x1b88);
-    fVar2 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar11 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar2 + *(float *)(glContext + 0x1b84);
+    fVar11 = *(float *)(glContext + 0x1b88);
+    fVar2 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar2 * fVar3 + fVar11;
   }
@@ -1282,7 +1282,7 @@ void _gleInterpolEyeNO0100w(int param_1,float *param_2,int param_3,float *param_
 }
 
 /* _gleInterpolEyeNO0110 @ 0xb5b9c (636 bytes) */
-void _gleInterpolEyeNO0110(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO0110(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -1362,10 +1362,10 @@ void _gleInterpolEyeNO0110(int param_1,float *param_2,int param_3,float *param_4
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar12 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar12 = *(float *)(param_1 + 0x1b88);
-    fVar3 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar12 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar12 = *(float *)(glContext + 0x1b88);
+    fVar3 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar4 + fVar12;
   }
@@ -1423,7 +1423,7 @@ void _gleInterpolEyeNO0110(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO0110w @ 0xb5e18 (548 bytes) */
-void _gleInterpolEyeNO0110w(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO0110w(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -1492,10 +1492,10 @@ void _gleInterpolEyeNO0110w(int param_1,float *param_2,int param_3,float *param_
       fVar2 = fVar2 * fVar1;
       fVar3 = fVar3 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar11 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar2 + *(float *)(param_1 + 0x1b84);
-    fVar11 = *(float *)(param_1 + 0x1b88);
-    fVar2 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar11 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar2 + *(float *)(glContext + 0x1b84);
+    fVar11 = *(float *)(glContext + 0x1b88);
+    fVar2 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar2 * fVar3 + fVar11;
   }
@@ -1530,7 +1530,7 @@ void _gleInterpolEyeNO0110w(int param_1,float *param_2,int param_3,float *param_
 }
 
 /* _gleInterpolEyeNO0200 @ 0xb603c (672 bytes) */
-void _gleInterpolEyeNO0200(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO0200(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -1614,14 +1614,14 @@ void _gleInterpolEyeNO0200(int param_1,float *param_2,int param_3,float *param_4
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar14 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar14 = *(float *)(param_1 + 0x1b78);
-    fVar3 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar14 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar14 = *(float *)(glContext + 0x1b78);
+    fVar3 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar14 * fVar4 + fVar3;
   }
-  uVar15 = *(uint *)(param_1 + 0x5150);
+  uVar15 = *(uint *)(glContext + 0x5150);
   uVar17 = 0;
   do {
     uVar12 = uVar15 >> (uVar17 & 0x3f);
@@ -1686,7 +1686,7 @@ void _gleInterpolEyeNO0200(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO0200w @ 0xb62dc (584 bytes) */
-void _gleInterpolEyeNO0200w(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO0200w(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -1758,14 +1758,14 @@ void _gleInterpolEyeNO0200w(int param_1,float *param_2,int param_3,float *param_
       fVar2 = fVar2 * fVar1;
       fVar3 = fVar3 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar12 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar2 + *(float *)(param_1 + 0x1b84);
-    fVar12 = *(float *)(param_1 + 0x1b78);
-    fVar2 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar12 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar2 + *(float *)(glContext + 0x1b84);
+    fVar12 = *(float *)(glContext + 0x1b78);
+    fVar2 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar12 * fVar3 + fVar2;
   }
-  uVar13 = *(uint *)(param_1 + 0x5150);
+  uVar13 = *(uint *)(glContext + 0x5150);
   uVar14 = 0;
   do {
     uVar11 = uVar13 >> (uVar14 & 0x3f);
@@ -1807,7 +1807,7 @@ void _gleInterpolEyeNO0200w(int param_1,float *param_2,int param_3,float *param_
 }
 
 /* _gleInterpolEyeNO0210 @ 0xb6524 (692 bytes) */
-void _gleInterpolEyeNO0210(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO0210(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -1891,17 +1891,17 @@ void _gleInterpolEyeNO0210(int param_1,float *param_2,int param_3,float *param_4
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar14 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar14 = *(float *)(param_1 + 0x1b78);
-    fVar3 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar14 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar14 = *(float *)(glContext + 0x1b78);
+    fVar3 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar14 * fVar4 + fVar3;
   }
   uVar17 = 0;
   param_4[0x13] =
        (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
-  uVar15 = *(uint *)(param_1 + 0x5150);
+  uVar15 = *(uint *)(glContext + 0x5150);
   do {
     uVar12 = uVar15 >> (uVar17 & 0x3f);
     if ((uVar12 & 1) == 0) {
@@ -1965,7 +1965,7 @@ void _gleInterpolEyeNO0210(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO0210w @ 0xb67d8 (604 bytes) */
-void _gleInterpolEyeNO0210w(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO0210w(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2037,17 +2037,17 @@ void _gleInterpolEyeNO0210w(int param_1,float *param_2,int param_3,float *param_
       fVar2 = fVar2 * fVar1;
       fVar3 = fVar3 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar12 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar2 + *(float *)(param_1 + 0x1b84);
-    fVar12 = *(float *)(param_1 + 0x1b78);
-    fVar2 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar12 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar2 + *(float *)(glContext + 0x1b84);
+    fVar12 = *(float *)(glContext + 0x1b78);
+    fVar2 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar12 * fVar3 + fVar2;
   }
   uVar14 = 0;
   param_4[0x13] =
        (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
-  uVar13 = *(uint *)(param_1 + 0x5150);
+  uVar13 = *(uint *)(glContext + 0x5150);
   do {
     uVar11 = uVar13 >> (uVar14 & 0x3f);
     if ((uVar11 & 1) == 0) {
@@ -2088,7 +2088,7 @@ void _gleInterpolEyeNO0210w(int param_1,float *param_2,int param_3,float *param_
 }
 
 /* _gleInterpolEyeNO1000 @ 0xb6a34 (476 bytes) */
-void _gleInterpolEyeNO1000(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1000(int glContext,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2157,10 +2157,10 @@ void _gleInterpolEyeNO1000(int param_1,int param_2,int param_3,float *param_4,fl
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar2 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar2 = *(float *)(param_1 + 0x1b88);
-    fVar3 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar2 = *(float *)(glContext + 0x1b88);
+    fVar3 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar4 + fVar2;
   }
@@ -2178,7 +2178,7 @@ void _gleInterpolEyeNO1000(int param_1,int param_2,int param_3,float *param_4,fl
 }
 
 /* _gleInterpolEyeNO1001 @ 0xb6c10 (480 bytes) */
-void _gleInterpolEyeNO1001(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1001(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2247,10 +2247,10 @@ void _gleInterpolEyeNO1001(int param_1,float *param_2,int param_3,float *param_4
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar2 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar2 = *(float *)(param_1 + 0x1b88);
-    fVar3 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar2 = *(float *)(glContext + 0x1b88);
+    fVar3 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar4 + fVar2;
   }
@@ -2273,7 +2273,7 @@ void _gleInterpolEyeNO1001(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO1010 @ 0xb6df0 (496 bytes) */
-void _gleInterpolEyeNO1010(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1010(int glContext,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2342,10 +2342,10 @@ void _gleInterpolEyeNO1010(int param_1,int param_2,int param_3,float *param_4,fl
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar2 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar2 = *(float *)(param_1 + 0x1b88);
-    fVar3 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar2 = *(float *)(glContext + 0x1b88);
+    fVar3 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar4 + fVar2;
   }
@@ -2367,7 +2367,7 @@ void _gleInterpolEyeNO1010(int param_1,int param_2,int param_3,float *param_4,fl
 }
 
 /* _gleInterpolEyeNO1011 @ 0xb6fe0 (500 bytes) */
-void _gleInterpolEyeNO1011(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1011(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2436,10 +2436,10 @@ void _gleInterpolEyeNO1011(int param_1,float *param_2,int param_3,float *param_4
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar2 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar2 = *(float *)(param_1 + 0x1b88);
-    fVar3 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar2 = *(float *)(glContext + 0x1b88);
+    fVar3 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar4 + fVar2;
   }
@@ -2466,7 +2466,7 @@ void _gleInterpolEyeNO1011(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO1100_body @ 0xb71d8 (636 bytes) */
-void _gleInterpolEyeNO1100_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,float fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1100_body(int glContext,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,float fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -2545,10 +2545,10 @@ void _gleInterpolEyeNO1100_body(int param_1,int param_2,int param_3,float *param
       fVar4 = fVar4 * fVar1;
       fVar5 = fVar5 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar3 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar4 + *(float *)(param_1 + 0x1b84);
-    fVar3 = *(float *)(param_1 + 0x1b88);
-    fVar4 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar3 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar4 + *(float *)(glContext + 0x1b84);
+    fVar3 = *(float *)(glContext + 0x1b88);
+    fVar4 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar4 * fVar5 + fVar3;
   }
@@ -2603,7 +2603,7 @@ void _gleInterpolEyeNO1100_body(int param_1,int param_2,int param_3,float *param
 }
 
 /* _gleInterpolEyeNO1100w_body @ 0xb7458 (548 bytes) */
-void _gleInterpolEyeNO1100w_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1100w_body(int glContext,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2671,10 +2671,10 @@ void _gleInterpolEyeNO1100w_body(int param_1,int param_2,int param_3,float *para
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar2 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar2 = *(float *)(param_1 + 0x1b88);
-    fVar3 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar2 = *(float *)(glContext + 0x1b88);
+    fVar3 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar4 + fVar2;
   }
@@ -2706,7 +2706,7 @@ void _gleInterpolEyeNO1100w_body(int param_1,int param_2,int param_3,float *para
 }
 
 /* _gleInterpolEyeNO1101 @ 0xb767c (648 bytes) */
-void _gleInterpolEyeNO1101(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1101(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -2786,10 +2786,10 @@ void _gleInterpolEyeNO1101(int param_1,float *param_2,int param_3,float *param_4
       fVar4 = fVar4 * fVar1;
       fVar5 = fVar5 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar3 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar4 + *(float *)(param_1 + 0x1b84);
-    fVar3 = *(float *)(param_1 + 0x1b88);
-    fVar4 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar3 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar4 + *(float *)(glContext + 0x1b84);
+    fVar3 = *(float *)(glContext + 0x1b88);
+    fVar4 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar4 * fVar5 + fVar3;
   }
@@ -2849,7 +2849,7 @@ void _gleInterpolEyeNO1101(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO1101w @ 0xb7904 (560 bytes) */
-void _gleInterpolEyeNO1101w(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1101w(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2918,10 +2918,10 @@ void _gleInterpolEyeNO1101w(int param_1,float *param_2,int param_3,float *param_
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar2 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar2 = *(float *)(param_1 + 0x1b88);
-    fVar3 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar2 = *(float *)(glContext + 0x1b88);
+    fVar3 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar4 + fVar2;
   }
@@ -2958,7 +2958,7 @@ void _gleInterpolEyeNO1101w(int param_1,float *param_2,int param_3,float *param_
 }
 
 /* _gleInterpolEyeNO1110_body @ 0xb7b38 (656 bytes) */
-void _gleInterpolEyeNO1110_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,float fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1110_body(int glContext,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,float fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -3037,10 +3037,10 @@ void _gleInterpolEyeNO1110_body(int param_1,int param_2,int param_3,float *param
       fVar4 = fVar4 * fVar1;
       fVar5 = fVar5 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar3 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar4 + *(float *)(param_1 + 0x1b84);
-    fVar3 = *(float *)(param_1 + 0x1b88);
-    fVar4 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar3 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar4 + *(float *)(glContext + 0x1b84);
+    fVar3 = *(float *)(glContext + 0x1b88);
+    fVar4 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar4 * fVar5 + fVar3;
   }
@@ -3099,7 +3099,7 @@ void _gleInterpolEyeNO1110_body(int param_1,int param_2,int param_3,float *param
 }
 
 /* _gleInterpolEyeNO1110w_body @ 0xb7dcc (568 bytes) */
-void _gleInterpolEyeNO1110w_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1110w_body(int glContext,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -3167,10 +3167,10 @@ void _gleInterpolEyeNO1110w_body(int param_1,int param_2,int param_3,float *para
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar2 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar2 = *(float *)(param_1 + 0x1b88);
-    fVar3 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar2 = *(float *)(glContext + 0x1b88);
+    fVar3 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar4 + fVar2;
   }
@@ -3206,7 +3206,7 @@ void _gleInterpolEyeNO1110w_body(int param_1,int param_2,int param_3,float *para
 }
 
 /* _gleInterpolEyeNO1111 @ 0xb8004 (668 bytes) */
-void _gleInterpolEyeNO1111(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1111(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -3286,10 +3286,10 @@ void _gleInterpolEyeNO1111(int param_1,float *param_2,int param_3,float *param_4
       fVar4 = fVar4 * fVar1;
       fVar5 = fVar5 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar3 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar4 + *(float *)(param_1 + 0x1b84);
-    fVar3 = *(float *)(param_1 + 0x1b88);
-    fVar4 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar3 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar4 + *(float *)(glContext + 0x1b84);
+    fVar3 = *(float *)(glContext + 0x1b88);
+    fVar4 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar4 * fVar5 + fVar3;
   }
@@ -3351,7 +3351,7 @@ void _gleInterpolEyeNO1111(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO1111w @ 0xb82a0 (580 bytes) */
-void _gleInterpolEyeNO1111w(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1111w(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -3420,10 +3420,10 @@ void _gleInterpolEyeNO1111w(int param_1,float *param_2,int param_3,float *param_
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar2 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar2 = *(float *)(param_1 + 0x1b88);
-    fVar3 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar2 = *(float *)(glContext + 0x1b88);
+    fVar3 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar4 + fVar2;
   }
@@ -3462,7 +3462,7 @@ void _gleInterpolEyeNO1111w(int param_1,float *param_2,int param_3,float *param_
 }
 
 /* _gleInterpolEyeNO1200_body @ 0xb84e8 (688 bytes) */
-void _gleInterpolEyeNO1200_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1200_body(int glContext,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -3545,10 +3545,10 @@ void _gleInterpolEyeNO1200_body(int param_1,int param_2,int param_3,float *param
       fVar4 = fVar4 * fVar1;
       fVar5 = fVar5 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar3 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar4 + *(float *)(param_1 + 0x1b84);
-    fVar3 = *(float *)(param_1 + 0x1b78);
-    fVar4 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar3 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar4 + *(float *)(glContext + 0x1b84);
+    fVar3 = *(float *)(glContext + 0x1b78);
+    fVar4 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar5 + fVar4;
   }
@@ -3563,7 +3563,7 @@ void _gleInterpolEyeNO1200_body(int param_1,int param_2,int param_3,float *param
   param_4[0xd] = (fparam_1 * (fVar5 - fVar1) + fVar1);
   param_4[0xe] = (fparam_1 * (fVar6 - fVar3) + fVar3);
   param_4[0xf] = (fparam_1 * (fVar7 - fVar4) + fVar4);
-  uVar15 = *(uint *)(param_1 + 0x5150);
+  uVar15 = *(uint *)(glContext + 0x5150);
   do {
     uVar13 = uVar15 >> (uVar17 & 0x3f);
     if ((uVar13 & 1) == 0) {
@@ -3617,7 +3617,7 @@ void _gleInterpolEyeNO1200_body(int param_1,int param_2,int param_3,float *param
 }
 
 /* _gleInterpolEyeNO1200w_body @ 0xb879c (600 bytes) */
-void _gleInterpolEyeNO1200w_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,float fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1200w_body(int glContext,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,float fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -3689,10 +3689,10 @@ void _gleInterpolEyeNO1200w_body(int param_1,int param_2,int param_3,float *para
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar2 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar2 = *(float *)(param_1 + 0x1b78);
-    fVar3 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar2 = *(float *)(glContext + 0x1b78);
+    fVar3 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar2 * fVar4 + fVar3;
   }
@@ -3707,7 +3707,7 @@ void _gleInterpolEyeNO1200w_body(int param_1,int param_2,int param_3,float *para
   param_4[0xd] = (fparam_1 * (fVar4 - fVar1) + fVar1);
   param_4[0xe] = (fparam_1 * (fVar5 - fVar2) + fVar2);
   param_4[0xf] = (fparam_1 * (fVar6 - fVar3) + fVar3);
-  uVar13 = *(uint *)(param_1 + 0x5150);
+  uVar13 = *(uint *)(glContext + 0x5150);
   do {
     uVar12 = uVar13 >> (uVar15 & 0x3f);
     if ((uVar12 & 1) == 0) {
@@ -3738,7 +3738,7 @@ void _gleInterpolEyeNO1200w_body(int param_1,int param_2,int param_3,float *para
 }
 
 /* _gleInterpolEyeNO1201 @ 0xb89f4 (704 bytes) */
-void _gleInterpolEyeNO1201(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1201(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -3822,14 +3822,14 @@ void _gleInterpolEyeNO1201(int param_1,float *param_2,int param_3,float *param_4
       fVar4 = fVar4 * fVar1;
       fVar5 = fVar5 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar3 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar4 + *(float *)(param_1 + 0x1b84);
-    fVar3 = *(float *)(param_1 + 0x1b78);
-    fVar4 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar3 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar4 + *(float *)(glContext + 0x1b84);
+    fVar3 = *(float *)(glContext + 0x1b78);
+    fVar4 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar5 + fVar4;
   }
-  uVar15 = *(uint *)(param_1 + 0x5150);
+  uVar15 = *(uint *)(glContext + 0x5150);
   uVar17 = 0;
   do {
     uVar13 = uVar15 >> (uVar17 & 0x3f);
@@ -3898,7 +3898,7 @@ void _gleInterpolEyeNO1201(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO1201w @ 0xb8cb4 (616 bytes) */
-void _gleInterpolEyeNO1201w(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1201w(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -3970,14 +3970,14 @@ void _gleInterpolEyeNO1201w(int param_1,float *param_2,int param_3,float *param_
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar2 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar2 = *(float *)(param_1 + 0x1b78);
-    fVar3 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar2 = *(float *)(glContext + 0x1b78);
+    fVar3 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar2 * fVar4 + fVar3;
   }
-  uVar13 = *(uint *)(param_1 + 0x5150);
+  uVar13 = *(uint *)(glContext + 0x5150);
   uVar14 = 0;
   do {
     uVar12 = uVar13 >> (uVar14 & 0x3f);
@@ -4023,7 +4023,7 @@ void _gleInterpolEyeNO1201w(int param_1,float *param_2,int param_3,float *param_
 }
 
 /* _gleInterpolEyeNO1210_body @ 0xb8f20 (708 bytes) */
-void _gleInterpolEyeNO1210_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1210_body(int glContext,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -4106,10 +4106,10 @@ void _gleInterpolEyeNO1210_body(int param_1,int param_2,int param_3,float *param
       fVar4 = fVar4 * fVar1;
       fVar5 = fVar5 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar3 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar4 + *(float *)(param_1 + 0x1b84);
-    fVar3 = *(float *)(param_1 + 0x1b78);
-    fVar4 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar3 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar4 + *(float *)(glContext + 0x1b84);
+    fVar3 = *(float *)(glContext + 0x1b78);
+    fVar4 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar5 + fVar4;
   }
@@ -4128,7 +4128,7 @@ void _gleInterpolEyeNO1210_body(int param_1,int param_2,int param_3,float *param
   param_4[0xd] = (fparam_1 * (fVar6 - fVar3) + fVar3);
   param_4[0xf] = (fparam_1 * (fVar8 - fVar4) + fVar4);
   param_4[0xe] = (fparam_1 * (fVar9 - fVar7) + fVar7);
-  uVar15 = *(uint *)(param_1 + 0x5150);
+  uVar15 = *(uint *)(glContext + 0x5150);
   do {
     uVar13 = uVar15 >> (uVar17 & 0x3f);
     if ((uVar13 & 1) == 0) {
@@ -4182,7 +4182,7 @@ void _gleInterpolEyeNO1210_body(int param_1,int param_2,int param_3,float *param
 }
 
 /* _gleInterpolEyeNO1210w_body @ 0xb91e8 (620 bytes) */
-void _gleInterpolEyeNO1210w_body(int param_1,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,float fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1210w_body(int glContext,int param_2,int param_3,float *param_4,float fparam_1,double fparam_2,float fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -4254,10 +4254,10 @@ void _gleInterpolEyeNO1210w_body(int param_1,int param_2,int param_3,float *para
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar2 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar2 = *(float *)(param_1 + 0x1b78);
-    fVar3 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar2 = *(float *)(glContext + 0x1b78);
+    fVar3 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar2 * fVar4 + fVar3;
   }
@@ -4276,7 +4276,7 @@ void _gleInterpolEyeNO1210w_body(int param_1,int param_2,int param_3,float *para
   param_4[0xd] = (fparam_1 * (fVar5 - fVar2) + fVar2);
   param_4[0xf] = (fparam_1 * (fVar7 - fVar3) + fVar3);
   param_4[0xe] = (fparam_1 * (fVar8 - fVar6) + fVar6);
-  uVar13 = *(uint *)(param_1 + 0x5150);
+  uVar13 = *(uint *)(glContext + 0x5150);
   do {
     uVar12 = uVar13 >> (uVar15 & 0x3f);
     if ((uVar12 & 1) == 0) {
@@ -4307,7 +4307,7 @@ void _gleInterpolEyeNO1210w_body(int param_1,int param_2,int param_3,float *para
 }
 
 /* _gleInterpolEyeNO1211 @ 0xb9454 (724 bytes) */
-void _gleInterpolEyeNO1211(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1211(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -4391,17 +4391,17 @@ void _gleInterpolEyeNO1211(int param_1,float *param_2,int param_3,float *param_4
       fVar4 = fVar4 * fVar1;
       fVar5 = fVar5 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar3 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar4 + *(float *)(param_1 + 0x1b84);
-    fVar3 = *(float *)(param_1 + 0x1b78);
-    fVar4 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar3 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar4 + *(float *)(glContext + 0x1b84);
+    fVar3 = *(float *)(glContext + 0x1b78);
+    fVar4 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar5 + fVar4;
   }
   uVar17 = 0;
   param_4[0x13] =
        (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
-  uVar15 = *(uint *)(param_1 + 0x5150);
+  uVar15 = *(uint *)(glContext + 0x5150);
   do {
     uVar13 = uVar15 >> (uVar17 & 0x3f);
     if ((uVar13 & 1) == 0) {
@@ -4469,7 +4469,7 @@ void _gleInterpolEyeNO1211(int param_1,float *param_2,int param_3,float *param_4
 }
 
 /* _gleInterpolEyeNO1211w @ 0xb9728 (636 bytes) */
-void _gleInterpolEyeNO1211w(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeNO1211w(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -4541,17 +4541,17 @@ void _gleInterpolEyeNO1211w(int param_1,float *param_2,int param_3,float *param_
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar2 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar2 = *(float *)(param_1 + 0x1b78);
-    fVar3 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar2 = *(float *)(glContext + 0x1b78);
+    fVar3 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar2 * fVar4 + fVar3;
   }
   uVar14 = 0;
   param_4[0x13] =
        (fparam_1 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13]);
-  uVar13 = *(uint *)(param_1 + 0x5150);
+  uVar13 = *(uint *)(glContext + 0x5150);
   do {
     uVar12 = uVar13 >> (uVar14 & 0x3f);
     if ((uVar12 & 1) == 0) {
@@ -4596,7 +4596,7 @@ void _gleInterpolEyeNO1211w(int param_1,float *param_2,int param_3,float *param_
 }
 
 /* _gleInterpolEyeAllFlat @ 0xb99a4 (728 bytes) */
-void _gleInterpolEyeAllFlat(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeAllFlat(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -4680,10 +4680,10 @@ void _gleInterpolEyeAllFlat(int param_1,float *param_2,int param_3,float *param_
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar14 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar14 = *(float *)(param_1 + 0x1b78);
-    fVar3 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar14 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar14 = *(float *)(glContext + 0x1b78);
+    fVar3 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar14 * fVar4 + fVar3;
   }
@@ -4694,7 +4694,7 @@ void _gleInterpolEyeAllFlat(int param_1,float *param_2,int param_3,float *param_
        (fparam_1 * (*(float *)(param_3 + 0x5c) - param_2[0x17]) + param_2[0x17]);
   param_4[0x13] =
        (fparam_1 * (fVar14 - fVar1) + fVar1);
-  uVar15 = *(uint *)(param_1 + 0x5150);
+  uVar15 = *(uint *)(glContext + 0x5150);
   do {
     uVar12 = uVar15 >> (uVar17 & 0x3f);
     if ((uVar12 & 1) == 0) {

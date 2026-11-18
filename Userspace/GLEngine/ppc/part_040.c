@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _gleInterpolEyeAllFlatw @ 0xb9c7c (640 bytes) */
-void _gleInterpolEyeAllFlatw(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeAllFlatw(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -73,10 +73,10 @@ void _gleInterpolEyeAllFlatw(int param_1,float *param_2,int param_3,float *param
       fVar2 = fVar2 * fVar1;
       fVar3 = fVar3 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar12 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar2 + *(float *)(param_1 + 0x1b84);
-    fVar12 = *(float *)(param_1 + 0x1b78);
-    fVar2 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar12 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar2 + *(float *)(glContext + 0x1b84);
+    fVar12 = *(float *)(glContext + 0x1b78);
+    fVar2 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar12 * fVar3 + fVar2;
   }
@@ -87,7 +87,7 @@ void _gleInterpolEyeAllFlatw(int param_1,float *param_2,int param_3,float *param
        (fparam_1 * (*(float *)(param_3 + 0x5c) - param_2[0x17]) + param_2[0x17]);
   param_4[0x13] =
        (fparam_1 * (fVar12 - fVar1) + fVar1);
-  uVar13 = *(uint *)(param_1 + 0x5150);
+  uVar13 = *(uint *)(glContext + 0x5150);
   do {
     uVar11 = uVar13 >> (uVar14 & 0x3f);
     if ((uVar11 & 1) == 0) {
@@ -130,7 +130,7 @@ void _gleInterpolEyeAllFlatw(int param_1,float *param_2,int param_3,float *param
 }
 
 /* _gleInterpolEyeAllSmooth @ 0xb9efc (892 bytes) */
-void _gleInterpolEyeAllSmooth(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeAllSmooth(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   char cVar2;
@@ -215,10 +215,10 @@ void _gleInterpolEyeAllSmooth(int param_1,float *param_2,int param_3,float *para
       fVar4 = fVar4 * fVar1;
       fVar5 = fVar5 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar3 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar4 + *(float *)(param_1 + 0x1b84);
-    fVar3 = *(float *)(param_1 + 0x1b78);
-    fVar4 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar3 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar4 + *(float *)(glContext + 0x1b84);
+    fVar3 = *(float *)(glContext + 0x1b78);
+    fVar4 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar3 * fVar5 + fVar4;
   }
@@ -253,7 +253,7 @@ void _gleInterpolEyeAllSmooth(int param_1,float *param_2,int param_3,float *para
   ;
   param_4[0x16] =
        (fparam_1 * (fVar13 - fVar12) + fVar12);
-  uVar16 = *(uint *)(param_1 + 0x5150);
+  uVar16 = *(uint *)(glContext + 0x5150);
   do {
     uVar14 = uVar16 >> (uVar18 & 0x3f);
     if ((uVar14 & 1) == 0) {
@@ -320,7 +320,7 @@ void _gleInterpolEyeAllSmooth(int param_1,float *param_2,int param_3,float *para
 }
 
 /* _gleInterpolEyeAllSmoothw @ 0xba278 (804 bytes) */
-void _gleInterpolEyeAllSmoothw(int param_1,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleInterpolEyeAllSmoothw(int glContext,float *param_2,int param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -393,10 +393,10 @@ void _gleInterpolEyeAllSmoothw(int param_1,float *param_2,int param_3,float *par
       fVar3 = fVar3 * fVar1;
       fVar4 = fVar4 * fVar1;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar2 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar3 + *(float *)(param_1 + 0x1b84);
-    fVar2 = *(float *)(param_1 + 0x1b78);
-    fVar3 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar2 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar3 + *(float *)(glContext + 0x1b84);
+    fVar2 = *(float *)(glContext + 0x1b78);
+    fVar3 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar1;
     param_4[2] = fVar2 * fVar4 + fVar3;
   }
@@ -431,7 +431,7 @@ void _gleInterpolEyeAllSmoothw(int param_1,float *param_2,int param_3,float *par
   ;
   param_4[0x16] =
        (fparam_1 * (fVar12 - fVar11) + fVar11);
-  uVar14 = *(uint *)(param_1 + 0x5150);
+  uVar14 = *(uint *)(glContext + 0x5150);
   do {
     uVar13 = uVar14 >> (uVar15 & 0x3f);
     if ((uVar13 & 1) == 0) {
@@ -475,7 +475,7 @@ void _gleInterpolEyeAllSmoothw(int param_1,float *param_2,int param_3,float *par
 }
 
 /* _gleInterpolClipNO0000 @ 0xba59c (732 bytes) */
-uint _gleInterpolClipNO0000(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO0000(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -590,10 +590,10 @@ LAB_000ba7a0:
       fVar5 = fVar5 * fVar4;
       fVar6 = fVar6 * fVar4;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar7 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar11 = *(float *)(param_1 + 0x1b88);
-    fVar5 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar7 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar11 = *(float *)(glContext + 0x1b88);
+    fVar5 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar4;
     param_4[2] = fVar5 * fVar6 + fVar11;
   }
@@ -613,7 +613,7 @@ LAB_000ba7a0:
 }
 
 /* _gleInterpolClipNO0010 @ 0xba878 (752 bytes) */
-uint _gleInterpolClipNO0010(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO0010(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -729,10 +729,10 @@ LAB_000baa7c:
       fVar12 = fVar12 * fVar6;
       fVar5 = fVar5 * fVar6;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar12 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b88);
-    fVar12 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar12 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b88);
+    fVar12 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar6;
     param_4[2] = fVar12 * fVar5 + fVar4;
   }
@@ -753,7 +753,7 @@ LAB_000baa7c:
 }
 
 /* _gleInterpolClipNO0100 @ 0xbab68 (868 bytes) */
-uint _gleInterpolClipNO0100(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO0100(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -869,10 +869,10 @@ LAB_000bad6c:
       fVar12 = fVar12 * fVar6;
       fVar5 = fVar5 * fVar6;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar12 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b88);
-    fVar12 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar12 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b88);
+    fVar12 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar6;
     param_4[2] = fVar12 * fVar5 + fVar4;
   }
@@ -918,7 +918,7 @@ LAB_000bad6c:
 }
 
 /* _gleInterpolClipNO0100w @ 0xbaecc (812 bytes) */
-uint _gleInterpolClipNO0100w(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO0100w(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -1034,10 +1034,10 @@ LAB_000bb0d0:
       fVar12 = fVar12 * fVar6;
       fVar5 = fVar5 * fVar6;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar12 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b88);
-    fVar12 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar12 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b88);
+    fVar12 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar6;
     param_4[2] = fVar12 * fVar5 + fVar4;
   }
@@ -1067,7 +1067,7 @@ LAB_000bb0d0:
 }
 
 /* _gleInterpolClipNO0110 @ 0xbb1f8 (888 bytes) */
-uint _gleInterpolClipNO0110(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO0110(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -1184,10 +1184,10 @@ LAB_000bb3fc:
       fVar13 = fVar13 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar5 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar13 + *(float *)(param_1 + 0x1b84);
-    fVar5 = *(float *)(param_1 + 0x1b88);
-    fVar13 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar5 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
+    fVar5 = *(float *)(glContext + 0x1b88);
+    fVar13 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar7;
     param_4[2] = fVar13 * fVar6 + fVar5;
   }
@@ -1235,7 +1235,7 @@ LAB_000bb3fc:
 }
 
 /* _gleInterpolClipNO0110w @ 0xbb570 (832 bytes) */
-uint _gleInterpolClipNO0110w(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO0110w(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -1351,10 +1351,10 @@ LAB_000bb774:
       fVar12 = fVar12 * fVar6;
       fVar5 = fVar5 * fVar6;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar12 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b88);
-    fVar12 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar12 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b88);
+    fVar12 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar6;
     param_4[2] = fVar12 * fVar5 + fVar4;
   }
@@ -1385,7 +1385,7 @@ LAB_000bb774:
 }
 
 /* _gleInterpolClipNO0200 @ 0xbb8b0 (924 bytes) */
-uint _gleInterpolClipNO0200(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO0200(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -1505,14 +1505,14 @@ LAB_000bbab4:
       fVar13 = fVar13 * fVar6;
       fVar5 = fVar5 * fVar6;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar13 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar13 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar13 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar6;
     param_4[2] = fVar4 * fVar5 + fVar13;
   }
-  uVar14 = *(uint *)(param_1 + 0x5150);
+  uVar14 = *(uint *)(glContext + 0x5150);
   uVar17 = 0;
   do {
     uVar12 = uVar14 >> (uVar17 & 0x3f);
@@ -1567,7 +1567,7 @@ LAB_000bbab4:
 }
 
 /* _gleInterpolClipNO0200w @ 0xbbc4c (868 bytes) */
-uint _gleInterpolClipNO0200w(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO0200w(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -1687,14 +1687,14 @@ LAB_000bbe50:
       fVar13 = fVar13 * fVar6;
       fVar5 = fVar5 * fVar6;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar13 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar13 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar13 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar6;
     param_4[2] = fVar4 * fVar5 + fVar13;
   }
-  uVar14 = *(uint *)(param_1 + 0x5150);
+  uVar14 = *(uint *)(glContext + 0x5150);
   uVar16 = 0;
   do {
     uVar12 = uVar14 >> (uVar16 & 0x3f);
@@ -1735,7 +1735,7 @@ LAB_000bbe50:
 }
 
 /* _gleInterpolClipNO0210 @ 0xbbfb0 (944 bytes) */
-uint _gleInterpolClipNO0210(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO0210(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -1855,16 +1855,16 @@ LAB_000bc1b4:
       fVar13 = fVar13 * fVar6;
       fVar5 = fVar5 * fVar6;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar13 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar13 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar13 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar6;
     param_4[2] = fVar4 * fVar5 + fVar13;
   }
   uVar17 = 0;
   param_4[0x13] = fVar11 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13];
-  uVar14 = *(uint *)(param_1 + 0x5150);
+  uVar14 = *(uint *)(glContext + 0x5150);
   do {
     uVar12 = uVar14 >> (uVar17 & 0x3f);
     if ((uVar12 & 1) == 0) {
@@ -1918,7 +1918,7 @@ LAB_000bc1b4:
 }
 
 /* _gleInterpolClipNO0210w @ 0xbc360 (888 bytes) */
-uint _gleInterpolClipNO0210w(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO0210w(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -2038,16 +2038,16 @@ LAB_000bc564:
       fVar13 = fVar13 * fVar6;
       fVar5 = fVar5 * fVar6;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar13 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar13 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar13 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar6;
     param_4[2] = fVar4 * fVar5 + fVar13;
   }
   uVar16 = 0;
   param_4[0x13] = fVar11 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13];
-  uVar14 = *(uint *)(param_1 + 0x5150);
+  uVar14 = *(uint *)(glContext + 0x5150);
   do {
     uVar12 = uVar14 >> (uVar16 & 0x3f);
     if ((uVar12 & 1) == 0) {
@@ -2087,7 +2087,7 @@ LAB_000bc564:
 }
 
 /* _gleInterpolClipNO1000 @ 0xbc6d8 (740 bytes) */
-uint _gleInterpolClipNO1000(int param_1,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1000(int glContext,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -2203,10 +2203,10 @@ LAB_000bc8dc:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b88);
-    fVar5 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b88);
+    fVar5 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar7;
     param_4[2] = fVar5 * fVar6 + fVar4;
   }
@@ -2225,7 +2225,7 @@ LAB_000bc8dc:
 }
 
 /* _gleInterpolClipNO1001 @ 0xbc9bc (824 bytes) */
-uint _gleInterpolClipNO1001(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1001(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -2341,10 +2341,10 @@ LAB_000bcbc0:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b88);
-    fVar5 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b88);
+    fVar5 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar7;
     param_4[2] = fVar5 * fVar6 + fVar4;
   }
@@ -2373,7 +2373,7 @@ LAB_000bcbc0:
 }
 
 /* _gleInterpolClipNO1010 @ 0xbccf4 (760 bytes) */
-uint _gleInterpolClipNO1010(int param_1,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1010(int glContext,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -2489,10 +2489,10 @@ LAB_000bcef8:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b88);
-    fVar5 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b88);
+    fVar5 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar7;
     param_4[2] = fVar5 * fVar6 + fVar4;
   }
@@ -2515,7 +2515,7 @@ LAB_000bcef8:
 }
 
 /* _gleInterpolClipNO1011 @ 0xbcfec (844 bytes) */
-uint _gleInterpolClipNO1011(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1011(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -2631,10 +2631,10 @@ LAB_000bd1f0:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b88);
-    fVar5 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b88);
+    fVar5 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar7;
     param_4[2] = fVar5 * fVar6 + fVar4;
   }
@@ -2666,7 +2666,7 @@ LAB_000bd1f0:
 }
 
 /* _gleInterpolClipNO1100 @ 0xbd338 (876 bytes) */
-uint _gleInterpolClipNO1100(int param_1,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1100(int glContext,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -2783,10 +2783,10 @@ LAB_000bd53c:
       fVar6 = fVar6 * fVar8;
       fVar7 = fVar7 * fVar8;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar5 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar6 + *(float *)(param_1 + 0x1b84);
-    fVar5 = *(float *)(param_1 + 0x1b88);
-    fVar6 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar5 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar6 + *(float *)(glContext + 0x1b84);
+    fVar5 = *(float *)(glContext + 0x1b88);
+    fVar6 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar8;
     param_4[2] = fVar6 * fVar7 + fVar5;
   }
@@ -2832,7 +2832,7 @@ LAB_000bd53c:
 }
 
 /* _gleInterpolClipNO1100w @ 0xbd6a4 (820 bytes) */
-uint _gleInterpolClipNO1100w(int param_1,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1100w(int glContext,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -2948,10 +2948,10 @@ LAB_000bd8a8:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b88);
-    fVar5 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b88);
+    fVar5 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar7;
     param_4[2] = fVar5 * fVar6 + fVar4;
   }
@@ -2982,7 +2982,7 @@ LAB_000bd8a8:
 }
 
 /* _gleInterpolClipNO1101 @ 0xbd9d8 (960 bytes) */
-uint _gleInterpolClipNO1101(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1101(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -3098,10 +3098,10 @@ LAB_000bdbdc:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b88);
-    fVar5 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b88);
+    fVar5 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar7;
     param_4[2] = fVar5 * fVar6 + fVar4;
   }
@@ -3156,7 +3156,7 @@ LAB_000bdbdc:
 }
 
 /* _gleInterpolClipNO1101w @ 0xbdd98 (904 bytes) */
-uint _gleInterpolClipNO1101w(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1101w(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -3272,10 +3272,10 @@ LAB_000bdf9c:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b88);
-    fVar5 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b88);
+    fVar5 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar7;
     param_4[2] = fVar5 * fVar6 + fVar4;
   }
@@ -3314,7 +3314,7 @@ LAB_000bdf9c:
 }
 
 /* _gleInterpolClipNO1110 @ 0xbe120 (896 bytes) */
-uint _gleInterpolClipNO1110(int param_1,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1110(int glContext,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -3431,10 +3431,10 @@ LAB_000be324:
       fVar6 = fVar6 * fVar8;
       fVar7 = fVar7 * fVar8;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar5 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar6 + *(float *)(param_1 + 0x1b84);
-    fVar5 = *(float *)(param_1 + 0x1b88);
-    fVar6 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar5 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar6 + *(float *)(glContext + 0x1b84);
+    fVar5 = *(float *)(glContext + 0x1b88);
+    fVar6 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar8;
     param_4[2] = fVar6 * fVar7 + fVar5;
   }
@@ -3484,7 +3484,7 @@ LAB_000be324:
 }
 
 /* _gleInterpolClipNO1110w @ 0xbe4a0 (840 bytes) */
-uint _gleInterpolClipNO1110w(int param_1,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1110w(int glContext,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -3600,10 +3600,10 @@ LAB_000be6a4:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b88);
-    fVar5 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b88);
+    fVar5 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar7;
     param_4[2] = fVar5 * fVar6 + fVar4;
   }
@@ -3638,7 +3638,7 @@ LAB_000be6a4:
 }
 
 /* _gleInterpolClipNO1111 @ 0xbe7e8 (980 bytes) */
-uint _gleInterpolClipNO1111(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1111(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -3755,10 +3755,10 @@ LAB_000be9ec:
       fVar6 = fVar6 * fVar8;
       fVar7 = fVar7 * fVar8;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar5 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar6 + *(float *)(param_1 + 0x1b84);
-    fVar5 = *(float *)(param_1 + 0x1b88);
-    fVar6 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar5 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar6 + *(float *)(glContext + 0x1b84);
+    fVar5 = *(float *)(glContext + 0x1b88);
+    fVar6 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar8;
     param_4[2] = fVar6 * fVar7 + fVar5;
   }
@@ -3815,7 +3815,7 @@ LAB_000be9ec:
 }
 
 /* _gleInterpolClipNO1111w @ 0xbebbc (924 bytes) */
-uint _gleInterpolClipNO1111w(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1111w(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -3931,10 +3931,10 @@ LAB_000bedc0:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b88);
-    fVar5 = *(float *)(param_1 + 0x1b78);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b88);
+    fVar5 = *(float *)(glContext + 0x1b78);
     param_4[3] = fVar7;
     param_4[2] = fVar5 * fVar6 + fVar4;
   }
@@ -3974,7 +3974,7 @@ LAB_000bedc0:
 }
 
 /* _gleInterpolClipNO1200 @ 0xbef58 (932 bytes) */
-uint _gleInterpolClipNO1200(int param_1,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1200(int glContext,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -4095,10 +4095,10 @@ LAB_000bf15c:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar5 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar5 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar7;
     param_4[2] = fVar4 * fVar6 + fVar5;
   }
@@ -4114,7 +4114,7 @@ LAB_000bf15c:
   param_4[0xd] = fVar12 * (fVar7 - fVar4) + fVar4;
   param_4[0xe] = fVar12 * (fVar8 - fVar5) + fVar5;
   param_4[0xf] = fVar12 * (fVar9 - fVar6) + fVar6;
-  uVar15 = *(uint *)(param_1 + 0x5150);
+  uVar15 = *(uint *)(glContext + 0x5150);
   do {
     uVar13 = uVar15 >> (uVar18 & 0x3f);
     if ((uVar13 & 1) == 0) {
@@ -4157,7 +4157,7 @@ LAB_000bf15c:
 }
 
 /* _gleInterpolClipNO1200w @ 0xbf2fc (876 bytes) */
-uint _gleInterpolClipNO1200w(int param_1,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1200w(int glContext,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -4278,10 +4278,10 @@ LAB_000bf500:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar5 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar5 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar7;
     param_4[2] = fVar4 * fVar6 + fVar5;
   }
@@ -4297,7 +4297,7 @@ LAB_000bf500:
   param_4[0xd] = fVar12 * (fVar7 - fVar4) + fVar4;
   param_4[0xe] = fVar12 * (fVar8 - fVar5) + fVar5;
   param_4[0xf] = fVar12 * (fVar9 - fVar6) + fVar6;
-  uVar14 = *(uint *)(param_1 + 0x5150);
+  uVar14 = *(uint *)(glContext + 0x5150);
   do {
     uVar13 = uVar14 >> (uVar17 & 0x3f);
     if ((uVar13 & 1) == 0) {
@@ -4326,7 +4326,7 @@ LAB_000bf500:
 }
 
 /* _gleInterpolClipNO1201 @ 0xbf668 (1016 bytes) */
-uint _gleInterpolClipNO1201(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1201(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -4446,14 +4446,14 @@ LAB_000bf86c:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar5 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar5 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar7;
     param_4[2] = fVar4 * fVar6 + fVar5;
   }
-  uVar14 = *(uint *)(param_1 + 0x5150);
+  uVar14 = *(uint *)(glContext + 0x5150);
   uVar17 = 0;
   do {
     uVar13 = uVar14 >> (uVar17 & 0x3f);
@@ -4517,7 +4517,7 @@ LAB_000bf86c:
 }
 
 /* _gleInterpolClipNO1201w @ 0xbfa60 (960 bytes) */
-uint _gleInterpolClipNO1201w(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1201w(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -4637,14 +4637,14 @@ LAB_000bfc64:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar5 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar5 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar7;
     param_4[2] = fVar4 * fVar6 + fVar5;
   }
-  uVar14 = *(uint *)(param_1 + 0x5150);
+  uVar14 = *(uint *)(glContext + 0x5150);
   uVar16 = 0;
   do {
     uVar13 = uVar14 >> (uVar16 & 0x3f);
@@ -4694,7 +4694,7 @@ LAB_000bfc64:
 }
 
 /* _gleInterpolClipNO1210 @ 0xbfe20 (952 bytes) */
-uint _gleInterpolClipNO1210(int param_1,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1210(int glContext,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -4815,10 +4815,10 @@ LAB_000c0024:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar5 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar5 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar7;
     param_4[2] = fVar4 * fVar6 + fVar5;
   }
@@ -4838,7 +4838,7 @@ LAB_000c0024:
   param_4[0xd] = fVar12 * (fVar8 - fVar5) + fVar5;
   param_4[0xf] = fVar12 * (fVar10 - fVar6) + fVar6;
   param_4[0xe] = fVar12 * (fVar11 - fVar9) + fVar9;
-  uVar15 = *(uint *)(param_1 + 0x5150);
+  uVar15 = *(uint *)(glContext + 0x5150);
   do {
     uVar13 = uVar15 >> (uVar18 & 0x3f);
     if ((uVar13 & 1) == 0) {
@@ -4881,7 +4881,7 @@ LAB_000c0024:
 }
 
 /* _gleInterpolClipNO1210w @ 0xc01d8 (896 bytes) */
-uint _gleInterpolClipNO1210w(int param_1,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1210w(int glContext,int param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -5002,10 +5002,10 @@ LAB_000c03dc:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar5 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar5 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar7;
     param_4[2] = fVar4 * fVar6 + fVar5;
   }
@@ -5025,7 +5025,7 @@ LAB_000c03dc:
   param_4[0xd] = fVar12 * (fVar8 - fVar5) + fVar5;
   param_4[0xf] = fVar12 * (fVar10 - fVar6) + fVar6;
   param_4[0xe] = fVar12 * (fVar11 - fVar9) + fVar9;
-  uVar14 = *(uint *)(param_1 + 0x5150);
+  uVar14 = *(uint *)(glContext + 0x5150);
   do {
     uVar13 = uVar14 >> (uVar17 & 0x3f);
     if ((uVar13 & 1) == 0) {
@@ -5054,7 +5054,7 @@ LAB_000c03dc:
 }
 
 /* _gleInterpolClipNO1211 @ 0xc0558 (1036 bytes) */
-uint _gleInterpolClipNO1211(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1211(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -5174,16 +5174,16 @@ LAB_000c075c:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar5 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar5 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar7;
     param_4[2] = fVar4 * fVar6 + fVar5;
   }
   uVar17 = 0;
   param_4[0x13] = fVar12 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13];
-  uVar14 = *(uint *)(param_1 + 0x5150);
+  uVar14 = *(uint *)(glContext + 0x5150);
   do {
     uVar13 = uVar14 >> (uVar17 & 0x3f);
     if ((uVar13 & 1) == 0) {
@@ -5246,7 +5246,7 @@ LAB_000c075c:
 }
 
 /* _gleInterpolClipNO1211w @ 0xc0964 (980 bytes) */
-uint _gleInterpolClipNO1211w(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipNO1211w(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -5366,16 +5366,16 @@ LAB_000c0b68:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar5 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar5 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar7;
     param_4[2] = fVar4 * fVar6 + fVar5;
   }
   uVar16 = 0;
   param_4[0x13] = fVar12 * (*(float *)(param_3 + 0x4c) - param_2[0x13]) + param_2[0x13];
-  uVar14 = *(uint *)(param_1 + 0x5150);
+  uVar14 = *(uint *)(glContext + 0x5150);
   do {
     uVar13 = uVar14 >> (uVar16 & 0x3f);
     if ((uVar13 & 1) == 0) {
@@ -5424,7 +5424,7 @@ LAB_000c0b68:
 }
 
 /* _gleInterpolClipAllFlat @ 0xc0d38 (980 bytes) */
-uint _gleInterpolClipAllFlat(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipAllFlat(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -5544,10 +5544,10 @@ LAB_000c0f3c:
       fVar13 = fVar13 * fVar6;
       fVar5 = fVar5 * fVar6;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar13 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar13 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar13 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar6;
     param_4[2] = fVar4 * fVar5 + fVar13;
   }
@@ -5556,7 +5556,7 @@ LAB_000c0f3c:
   fVar13 = *(float *)(param_3 + 0x4c);
   param_4[0x17] = fVar11 * (*(float *)(param_3 + 0x5c) - param_2[0x17]) + param_2[0x17];
   param_4[0x13] = fVar11 * (fVar13 - fVar4) + fVar4;
-  uVar14 = *(uint *)(param_1 + 0x5150);
+  uVar14 = *(uint *)(glContext + 0x5150);
   do {
     uVar12 = uVar14 >> (uVar17 & 0x3f);
     if ((uVar12 & 1) == 0) {
@@ -5612,7 +5612,7 @@ LAB_000c0f3c:
 }
 
 /* _gleInterpolClipAllFlatw @ 0xc110c (924 bytes) */
-uint _gleInterpolClipAllFlatw(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipAllFlatw(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -5732,10 +5732,10 @@ LAB_000c1310:
       fVar13 = fVar13 * fVar6;
       fVar5 = fVar5 * fVar6;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar13 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar13 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar13 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar13 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar6;
     param_4[2] = fVar4 * fVar5 + fVar13;
   }
@@ -5744,7 +5744,7 @@ LAB_000c1310:
   fVar13 = *(float *)(param_3 + 0x4c);
   param_4[0x17] = fVar11 * (*(float *)(param_3 + 0x5c) - param_2[0x17]) + param_2[0x17];
   param_4[0x13] = fVar11 * (fVar13 - fVar4) + fVar4;
-  uVar14 = *(uint *)(param_1 + 0x5150);
+  uVar14 = *(uint *)(glContext + 0x5150);
   do {
     uVar12 = uVar14 >> (uVar16 & 0x3f);
     if ((uVar12 & 1) == 0) {
@@ -5786,7 +5786,7 @@ LAB_000c1310:
 }
 
 /* _gleInterpolClipAllSmooth @ 0xc14a8 (1196 bytes) */
-uint _gleInterpolClipAllSmooth(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipAllSmooth(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -5910,10 +5910,10 @@ LAB_000c16ac:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar5 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar5 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar7;
     param_4[2] = fVar4 * fVar6 + fVar5;
   }
@@ -5943,7 +5943,7 @@ LAB_000c16ac:
   param_4[0x14] = fVar16 * (fVar13 - fVar12) + fVar12;
   param_4[0x15] = fVar16 * (fVar7 - fVar6) + fVar6;
   param_4[0x16] = fVar16 * (fVar15 - fVar14) + fVar14;
-  uVar18 = *(uint *)(param_1 + 0x5150);
+  uVar18 = *(uint *)(glContext + 0x5150);
   do {
     uVar17 = uVar18 >> (uVar21 & 0x3f);
     if ((uVar17 & 1) == 0) {
@@ -6006,7 +6006,7 @@ LAB_000c16ac:
 }
 
 /* _gleInterpolClipAllSmoothw @ 0xc1954 (1140 bytes) */
-uint _gleInterpolClipAllSmoothw(int param_1,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+uint _gleInterpolClipAllSmoothw(int glContext,float *param_2,int param_3,float *param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   byte bVar2;
@@ -6130,10 +6130,10 @@ LAB_000c1b58:
       fVar5 = fVar5 * fVar7;
       fVar6 = fVar6 * fVar7;
     }
-    *param_4 = *(float *)(param_1 + 0x1b70) * fVar4 + *(float *)(param_1 + 0x1b80);
-    param_4[1] = *(float *)(param_1 + 0x1b74) * fVar5 + *(float *)(param_1 + 0x1b84);
-    fVar4 = *(float *)(param_1 + 0x1b78);
-    fVar5 = *(float *)(param_1 + 0x1b88);
+    *param_4 = *(float *)(glContext + 0x1b70) * fVar4 + *(float *)(glContext + 0x1b80);
+    param_4[1] = *(float *)(glContext + 0x1b74) * fVar5 + *(float *)(glContext + 0x1b84);
+    fVar4 = *(float *)(glContext + 0x1b78);
+    fVar5 = *(float *)(glContext + 0x1b88);
     param_4[3] = fVar7;
     param_4[2] = fVar4 * fVar6 + fVar5;
   }
@@ -6163,7 +6163,7 @@ LAB_000c1b58:
   param_4[0x14] = fVar16 * (fVar13 - fVar12) + fVar12;
   param_4[0x15] = fVar16 * (fVar7 - fVar6) + fVar6;
   param_4[0x16] = fVar16 * (fVar15 - fVar14) + fVar14;
-  uVar18 = *(uint *)(param_1 + 0x5150);
+  uVar18 = *(uint *)(glContext + 0x5150);
   do {
     uVar17 = uVar18 >> (uVar20 & 0x3f);
     if ((uVar17 & 1) == 0) {
@@ -6212,8 +6212,8 @@ LAB_000c1b58:
 }
 
 /* _gleSelectArrayInterpFunc @ 0xc1dc8 (544 bytes) */
-int _gleSelectArrayInterpFunc(param_1, param_2)
-  int param_1;
+int _gleSelectArrayInterpFunc(glContext, param_2)
+  int glContext;
   int param_2;
 {
   undefined *puVar1;
@@ -6226,29 +6226,29 @@ int _gleSelectArrayInterpFunc(param_1, param_2)
   uint uVar8;
   
   uVar6 = 0;
-  if ((*(int *)(param_1 + 0x4e1c) != 0x1c00) ||
-     ((*(uint *)(*(int *)(param_1 + 0x468c) + 0x94) & 4) != 0)) {
+  if ((*(int *)(glContext + 0x4e1c) != 0x1c00) ||
+     ((*(uint *)(*(int *)(glContext + 0x468c) + 0x94) & 4) != 0)) {
     uVar6 = 0x18;
   }
   uVar7 = uVar6;
-  if ((((*(int *)(param_1 + 0x34f4) == 0x1d01) &&
-       (uVar7 = uVar6 + 0xc, *(char *)(param_1 + 0x30aa) != '\0')) &&
-      (*(char *)(param_1 + 0x4664) == '\0')) && (*(int *)(param_1 + 0x5434) == 0)) {
+  if ((((*(int *)(glContext + 0x34f4) == 0x1d01) &&
+       (uVar7 = uVar6 + 0xc, *(char *)(glContext + 0x30aa) != '\0')) &&
+      (*(char *)(glContext + 0x4664) == '\0')) && (*(int *)(glContext + 0x5434) == 0)) {
     uVar7 = uVar6 + 0xd;
   }
-  uVar6 = _gleTexEnableBits(param_1);
-  *(uint *)(param_1 + 0x5150) = uVar6;
-  if (((uVar6 != 0) || (uVar8 = uVar7, *(int *)(param_1 + 0x4e1c) == 0x1c01)) &&
-     ((uVar8 = uVar7 + 4, (uVar6 & 0xfffffffe) != 0 && (*(int *)(param_1 + 0x4e1c) == 0x1c00)))) {
+  uVar6 = _gleTexEnableBits(glContext);
+  *(uint *)(glContext + 0x5150) = uVar6;
+  if (((uVar6 != 0) || (uVar8 = uVar7, *(int *)(glContext + 0x4e1c) == 0x1c01)) &&
+     ((uVar8 = uVar7 + 4, (uVar6 & 0xfffffffe) != 0 && (*(int *)(glContext + 0x4e1c) == 0x1c00)))) {
     uVar8 = uVar7 + 8;
   }
-  if ((*(char *)(param_1 + 0x316a) != '\0') && (*(int *)(param_1 + 0x4e1c) == 0x1c00)) {
+  if ((*(char *)(glContext + 0x316a) != '\0') && (*(int *)(glContext + 0x4e1c) == 0x1c00)) {
     uVar8 = uVar8 + 2;
   }
-  if ((*(short *)(0x3170 + param_1 + 4) == 0x1102) ||
-     ((*(char *)(param_1 + 0x4fea) != '\0' &&
-      (((*(char *)(param_1 + 0x30aa) == '\0' || (*(char *)(param_1 + 0x4664) != '\0')) ||
-       (*(int *)(param_1 + 0x5434) != 0)))))) {
+  if ((*(short *)(0x3170 + glContext + 4) == 0x1102) ||
+     ((*(char *)(glContext + 0x4fea) != '\0' &&
+      (((*(char *)(glContext + 0x30aa) == '\0' || (*(char *)(glContext + 0x4664) != '\0')) ||
+       (*(int *)(glContext + 0x5434) != 0)))))) {
     uVar8 = uVar8 / 0xc;
     puVar1 = PTR__gleInterpolClipAllSmoothw_00110678;
     puVar2 = PTR__gleInterpolClipAllFlatw_0011067c;

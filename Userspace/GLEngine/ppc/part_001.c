@@ -1,155 +1,155 @@
 #include "decls.h"
 
 /* _gleUpdatePrimitiveData @ 0x66d8 (1928 bytes) */
-void _gleUpdatePrimitiveData(param_1)
-  int param_1;
+void _gleUpdatePrimitiveData(glContext)
+  int glContext;
 {
   undefined *puVar1;
   undefined *puVar2;
   undefined *puVar3;
   uint uVar4;
   
-  if (*(int *)(param_1 + 0x4e1c) == 0x1c00) {
-    if (*(char *)(param_1 + 0x7580) == '\0') {
-      if (*(undefined **)(param_1 + 0x5408) == (undefined *)0x0) {
-        uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-        uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+  if (*(int *)(glContext + 0x4e1c) == 0x1c00) {
+    if (*(char *)(glContext + 0x7580) == '\0') {
+      if (*(undefined **)(glContext + 0x5408) == (undefined *)0x0) {
+        uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+        uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
         puVar3 = PTR__glEnd_Exec_00112164;
       }
-      else if (*(undefined **)(param_1 + 0x5408) == ((unsigned char *)0x00001300)) {
-        uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-        uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+      else if (*(undefined **)(glContext + 0x5408) == ((unsigned char *)0x00001300)) {
+        uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+        uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
         puVar3 = PTR__glEnd_Comp_00112388;
       }
       else {
-        uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-        uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+        uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+        uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
         puVar3 = PTR__glEnd_CompExec_00112384;
       }
       *(undefined **)(uVar4 + 0x128) = puVar3;
       puVar2 = PTR__gleVPBeginLines_0011237c;
       puVar1 = PTR__gleBeginLinesRenderSmooth_00112354;
       puVar3 = PTR__gleBeginLinesRenderFlat_00112330;
-      if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5434) == 0)) {
-        if (*(int *)(param_1 + 0x34f4) == 0x1d01) {
-          *(undefined **)(param_1 + 0x49e0) = PTR__gleBeginPointsRender_00112358;
+      if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5434) == 0)) {
+        if (*(int *)(glContext + 0x34f4) == 0x1d01) {
+          *(undefined **)(glContext + 0x49e0) = PTR__gleBeginPointsRender_00112358;
           puVar3 = PTR__gleBeginLineLoopRenderSmooth_00112350;
-          *(undefined **)(param_1 + 0x49e4) = puVar1;
+          *(undefined **)(glContext + 0x49e4) = puVar1;
           puVar1 = PTR__gleBeginLineStripRenderSmooth_0011234c;
-          *(undefined **)(param_1 + 0x49e8) = puVar3;
+          *(undefined **)(glContext + 0x49e8) = puVar3;
           puVar3 = PTR__gleBeginTrianglesRenderSmooth_00112348;
-          *(undefined **)(param_1 + 0x49ec) = puVar1;
+          *(undefined **)(glContext + 0x49ec) = puVar1;
           puVar1 = PTR__gleBeginTriangleStripRenderSmooth_00112344;
-          *(undefined **)(param_1 + 0x49f0) = puVar3;
+          *(undefined **)(glContext + 0x49f0) = puVar3;
           puVar3 = PTR__gleBeginTriangleFanRenderSmooth_00112340;
-          *(undefined **)(param_1 + 0x49f4) = puVar1;
+          *(undefined **)(glContext + 0x49f4) = puVar1;
           puVar1 = PTR__gleBeginQuadsRenderSmooth_0011233c;
-          *(undefined **)(param_1 + 0x49f8) = puVar3;
+          *(undefined **)(glContext + 0x49f8) = puVar3;
           puVar3 = PTR__gleBeginQuadStripRenderSmooth_00112338;
-          *(undefined **)(param_1 + 0x49fc) = puVar1;
-          *(undefined **)(param_1 + 0x4a00) = puVar3;
+          *(undefined **)(glContext + 0x49fc) = puVar1;
+          *(undefined **)(glContext + 0x4a00) = puVar3;
           puVar3 = PTR__gleBeginPolygonRenderSmooth_00112334;
         }
         else {
-          *(undefined **)(param_1 + 0x49e0) = PTR__gleBeginPointsRender_00112358;
+          *(undefined **)(glContext + 0x49e0) = PTR__gleBeginPointsRender_00112358;
           puVar2 = PTR__gleBeginLineLoopRenderFlat_0011232c;
-          *(undefined **)(param_1 + 0x49e4) = puVar3;
+          *(undefined **)(glContext + 0x49e4) = puVar3;
           puVar1 = PTR__gleBeginLineStripRenderFlat_00112328;
-          *(undefined **)(param_1 + 0x49e8) = puVar2;
+          *(undefined **)(glContext + 0x49e8) = puVar2;
           puVar3 = PTR__gleBeginTrianglesRenderFlat_00112324;
-          *(undefined **)(param_1 + 0x49ec) = puVar1;
+          *(undefined **)(glContext + 0x49ec) = puVar1;
           puVar1 = PTR__gleBeginTriangleStripRenderFlat_00112320;
-          *(undefined **)(param_1 + 0x49f0) = puVar3;
+          *(undefined **)(glContext + 0x49f0) = puVar3;
           puVar3 = PTR__gleBeginTriangleFanRenderFlat_0011231c;
-          *(undefined **)(param_1 + 0x49f4) = puVar1;
+          *(undefined **)(glContext + 0x49f4) = puVar1;
           puVar1 = PTR__gleBeginQuadsRenderFlat_00112318;
-          *(undefined **)(param_1 + 0x49f8) = puVar3;
+          *(undefined **)(glContext + 0x49f8) = puVar3;
           puVar3 = PTR__gleBeginQuadStripRenderFlat_00112314;
-          *(undefined **)(param_1 + 0x49fc) = puVar1;
-          *(undefined **)(param_1 + 0x4a00) = puVar3;
+          *(undefined **)(glContext + 0x49fc) = puVar1;
+          *(undefined **)(glContext + 0x4a00) = puVar3;
           puVar3 = PTR__gleBeginPolygonRenderFlat_00112310;
         }
       }
       else {
-        *(undefined **)(param_1 + 0x49e0) = PTR__gleVPBeginPoints_00112380;
+        *(undefined **)(glContext + 0x49e0) = PTR__gleVPBeginPoints_00112380;
         puVar3 = PTR__gleVPBeginLineLoop_00112378;
-        *(undefined **)(param_1 + 0x49e4) = puVar2;
+        *(undefined **)(glContext + 0x49e4) = puVar2;
         puVar1 = PTR__gleVPBeginLineStrip_00112374;
-        *(undefined **)(param_1 + 0x49e8) = puVar3;
+        *(undefined **)(glContext + 0x49e8) = puVar3;
         puVar3 = PTR__gleVPBeginTriangles_00112370;
-        *(undefined **)(param_1 + 0x49ec) = puVar1;
+        *(undefined **)(glContext + 0x49ec) = puVar1;
         puVar1 = PTR__gleVPBeginTriangleStrip_0011236c;
-        *(undefined **)(param_1 + 0x49f0) = puVar3;
+        *(undefined **)(glContext + 0x49f0) = puVar3;
         puVar3 = PTR__gleVPBeginTriangleFan_00112368;
-        *(undefined **)(param_1 + 0x49f4) = puVar1;
+        *(undefined **)(glContext + 0x49f4) = puVar1;
         puVar1 = PTR__gleVPBeginQuads_00112364;
-        *(undefined **)(param_1 + 0x49f8) = puVar3;
+        *(undefined **)(glContext + 0x49f8) = puVar3;
         puVar3 = PTR__gleVPBeginQuadStrip_00112360;
-        *(undefined **)(param_1 + 0x49fc) = puVar1;
-        *(undefined **)(param_1 + 0x4a00) = puVar3;
+        *(undefined **)(glContext + 0x49fc) = puVar1;
+        *(undefined **)(glContext + 0x4a00) = puVar3;
         puVar3 = PTR__gleVPBeginPolygon_0011235c;
       }
     }
-    else if (*(char *)(*(int *)(param_1 + 0x468c) + 0x7a) == '\0') {
-      if (*(int *)(param_1 + 0x5408) == 0) {
-        uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
+    else if (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0') {
+      if (*(int *)(glContext + 0x5408) == 0) {
+        uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
         *(undefined **)
-         ((*(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4) + 0x128) =
+         ((*(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4) + 0x128) =
              PTR__glEndRDirty_Exec_00112160;
       }
       puVar1 = PTR__gleVPBeginLinesTCLRDirty_001123d4;
       puVar3 = PTR__gleBeginLinesRenderTCLRDirty_001123ac;
       puVar2 = PTR__gleBeginPrimitiveTCLRDirtyFunc_001113d8;
-      if (*(int *)(param_1 + 0x48d0) != 0) goto LAB_000068ec;
-      if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5434) == 0)) {
-        *(undefined **)(param_1 + 0x49e0) = PTR__gleBeginPointsRenderTCLRDirty_001123b0;
+      if (*(int *)(glContext + 0x48d0) != 0) goto LAB_000068ec;
+      if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5434) == 0)) {
+        *(undefined **)(glContext + 0x49e0) = PTR__gleBeginPointsRenderTCLRDirty_001123b0;
         puVar2 = PTR__gleBeginLineLoopRenderTCLRDirty_001123a8;
-        *(undefined **)(param_1 + 0x49e4) = puVar3;
+        *(undefined **)(glContext + 0x49e4) = puVar3;
         puVar1 = PTR__gleBeginLineStripRenderTCLRDirty_001123a4;
-        *(undefined **)(param_1 + 0x49e8) = puVar2;
+        *(undefined **)(glContext + 0x49e8) = puVar2;
         puVar3 = PTR__gleBeginTrianglesRenderTCLRDirty_001123a0;
-        *(undefined **)(param_1 + 0x49ec) = puVar1;
+        *(undefined **)(glContext + 0x49ec) = puVar1;
         puVar1 = PTR__gleBeginTriangleStripRenderTCLRDirty_0011239c;
-        *(undefined **)(param_1 + 0x49f0) = puVar3;
+        *(undefined **)(glContext + 0x49f0) = puVar3;
         puVar3 = PTR__gleBeginTriangleFanRenderTCLRDirty_00112398;
-        *(undefined **)(param_1 + 0x49f4) = puVar1;
+        *(undefined **)(glContext + 0x49f4) = puVar1;
         puVar1 = PTR__gleBeginQuadsRenderTCLRDirty_00112394;
-        *(undefined **)(param_1 + 0x49f8) = puVar3;
+        *(undefined **)(glContext + 0x49f8) = puVar3;
         puVar3 = PTR__gleBeginQuadStripRenderTCLRDirty_00112390;
-        *(undefined **)(param_1 + 0x49fc) = puVar1;
-        *(undefined **)(param_1 + 0x4a00) = puVar3;
+        *(undefined **)(glContext + 0x49fc) = puVar1;
+        *(undefined **)(glContext + 0x4a00) = puVar3;
         puVar3 = PTR__gleBeginPolygonRenderTCLRDirty_0011238c;
       }
       else {
-        *(undefined **)(param_1 + 0x49e0) = PTR__gleVPBeginPointsTCLRDirty_001123d8;
+        *(undefined **)(glContext + 0x49e0) = PTR__gleVPBeginPointsTCLRDirty_001123d8;
         puVar3 = PTR__gleVPBeginLineLoopTCLRDirty_001123d0;
-        *(undefined **)(param_1 + 0x49e4) = puVar1;
+        *(undefined **)(glContext + 0x49e4) = puVar1;
         puVar1 = PTR__gleVPBeginLineStripTCLRDirty_001123cc;
-        *(undefined **)(param_1 + 0x49e8) = puVar3;
+        *(undefined **)(glContext + 0x49e8) = puVar3;
         puVar3 = PTR__gleVPBeginTrianglesTCLRDirty_001123c8;
-        *(undefined **)(param_1 + 0x49ec) = puVar1;
+        *(undefined **)(glContext + 0x49ec) = puVar1;
         puVar1 = PTR__gleVPBeginTriangleStripTCLRDirty_001123c4;
-        *(undefined **)(param_1 + 0x49f0) = puVar3;
+        *(undefined **)(glContext + 0x49f0) = puVar3;
         puVar3 = PTR__gleVPBeginTriangleFanTCLRDirty_001123c0;
-        *(undefined **)(param_1 + 0x49f4) = puVar1;
+        *(undefined **)(glContext + 0x49f4) = puVar1;
         puVar1 = PTR__gleVPBeginQuadsTCLRDirty_001123bc;
-        *(undefined **)(param_1 + 0x49f8) = puVar3;
+        *(undefined **)(glContext + 0x49f8) = puVar3;
         puVar3 = PTR__gleVPBeginQuadStripTCLRDirty_001123b8;
-        *(undefined **)(param_1 + 0x49fc) = puVar1;
-        *(undefined **)(param_1 + 0x4a00) = puVar3;
+        *(undefined **)(glContext + 0x49fc) = puVar1;
+        *(undefined **)(glContext + 0x4a00) = puVar3;
         puVar3 = PTR__gleVPBeginPolygonTCLRDirty_001123b4;
       }
     }
     else {
-      if (*(int *)(param_1 + 0x5408) == 0) {
-        if (*(char *)(param_1 + 0x4df8) == '\0') {
-          uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-          uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+      if (*(int *)(glContext + 0x5408) == 0) {
+        if (*(char *)(glContext + 0x4df8) == '\0') {
+          uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+          uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
           puVar3 = PTR__glEndNoMat_Exec_00112168;
         }
         else {
-          uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-          uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+          uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+          uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
           puVar3 = PTR__glEnd_Exec_00112164;
         }
         *(undefined **)(uVar4 + 0x128) = puVar3;
@@ -157,124 +157,124 @@ void _gleUpdatePrimitiveData(param_1)
       puVar1 = PTR__gleVPBeginLinesTCL_00112424;
       puVar3 = PTR__gleBeginLinesRenderTCL_001123fc;
       puVar2 = PTR__gleBeginPrimitiveTCLFunc_001113dc;
-      if (*(int *)(param_1 + 0x48d0) != 0) {
+      if (*(int *)(glContext + 0x48d0) != 0) {
 LAB_000068ec:
-        *(undefined **)(param_1 + 0x4a04) = puVar2;
-        *(undefined **)(param_1 + 0x49e0) = puVar2;
-        *(undefined **)(param_1 + 0x49e4) = puVar2;
-        *(undefined **)(param_1 + 0x49e8) = puVar2;
-        *(undefined **)(param_1 + 0x49ec) = puVar2;
-        *(undefined **)(param_1 + 0x49f0) = puVar2;
-        *(undefined **)(param_1 + 0x49f4) = puVar2;
-        *(undefined **)(param_1 + 0x49f8) = puVar2;
-        *(undefined **)(param_1 + 0x49fc) = puVar2;
-        *(undefined **)(param_1 + 0x4a00) = puVar2;
+        *(undefined **)(glContext + 0x4a04) = puVar2;
+        *(undefined **)(glContext + 0x49e0) = puVar2;
+        *(undefined **)(glContext + 0x49e4) = puVar2;
+        *(undefined **)(glContext + 0x49e8) = puVar2;
+        *(undefined **)(glContext + 0x49ec) = puVar2;
+        *(undefined **)(glContext + 0x49f0) = puVar2;
+        *(undefined **)(glContext + 0x49f4) = puVar2;
+        *(undefined **)(glContext + 0x49f8) = puVar2;
+        *(undefined **)(glContext + 0x49fc) = puVar2;
+        *(undefined **)(glContext + 0x4a00) = puVar2;
         goto LAB_00006d54;
       }
-      if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5434) == 0)) {
-        *(undefined **)(param_1 + 0x49e0) = PTR__gleBeginPointsRenderTCL_00112400;
+      if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5434) == 0)) {
+        *(undefined **)(glContext + 0x49e0) = PTR__gleBeginPointsRenderTCL_00112400;
         puVar2 = PTR__gleBeginLineLoopRenderTCL_001123f8;
-        *(undefined **)(param_1 + 0x49e4) = puVar3;
+        *(undefined **)(glContext + 0x49e4) = puVar3;
         puVar1 = PTR__gleBeginLineStripRenderTCL_001123f4;
-        *(undefined **)(param_1 + 0x49e8) = puVar2;
+        *(undefined **)(glContext + 0x49e8) = puVar2;
         puVar3 = PTR__gleBeginTrianglesRenderTCL_001123f0;
-        *(undefined **)(param_1 + 0x49ec) = puVar1;
+        *(undefined **)(glContext + 0x49ec) = puVar1;
         puVar1 = PTR__gleBeginTriangleStripRenderTCL_001123ec;
-        *(undefined **)(param_1 + 0x49f0) = puVar3;
+        *(undefined **)(glContext + 0x49f0) = puVar3;
         puVar3 = PTR__gleBeginTriangleFanRenderTCL_001123e8;
-        *(undefined **)(param_1 + 0x49f4) = puVar1;
+        *(undefined **)(glContext + 0x49f4) = puVar1;
         puVar1 = PTR__gleBeginQuadsRenderTCL_001123e4;
-        *(undefined **)(param_1 + 0x49f8) = puVar3;
+        *(undefined **)(glContext + 0x49f8) = puVar3;
         puVar3 = PTR__gleBeginQuadStripRenderTCL_001123e0;
-        *(undefined **)(param_1 + 0x49fc) = puVar1;
-        *(undefined **)(param_1 + 0x4a00) = puVar3;
+        *(undefined **)(glContext + 0x49fc) = puVar1;
+        *(undefined **)(glContext + 0x4a00) = puVar3;
         puVar3 = PTR__gleBeginPolygonRenderTCL_001123dc;
       }
       else {
-        *(undefined **)(param_1 + 0x49e0) = PTR__gleVPBeginPointsTCL_00112428;
+        *(undefined **)(glContext + 0x49e0) = PTR__gleVPBeginPointsTCL_00112428;
         puVar3 = PTR__gleVPBeginLineLoopTCL_00112420;
-        *(undefined **)(param_1 + 0x49e4) = puVar1;
+        *(undefined **)(glContext + 0x49e4) = puVar1;
         puVar1 = PTR__gleVPBeginLineStripTCL_0011241c;
-        *(undefined **)(param_1 + 0x49e8) = puVar3;
+        *(undefined **)(glContext + 0x49e8) = puVar3;
         puVar3 = PTR__gleVPBeginTrianglesTCL_00112418;
-        *(undefined **)(param_1 + 0x49ec) = puVar1;
+        *(undefined **)(glContext + 0x49ec) = puVar1;
         puVar1 = PTR__gleVPBeginTriangleStripTCL_00112414;
-        *(undefined **)(param_1 + 0x49f0) = puVar3;
+        *(undefined **)(glContext + 0x49f0) = puVar3;
         puVar3 = PTR__gleVPBeginTriangleFanTCL_00112410;
-        *(undefined **)(param_1 + 0x49f4) = puVar1;
+        *(undefined **)(glContext + 0x49f4) = puVar1;
         puVar1 = PTR__gleVPBeginQuadsTCL_0011240c;
-        *(undefined **)(param_1 + 0x49f8) = puVar3;
+        *(undefined **)(glContext + 0x49f8) = puVar3;
         puVar3 = PTR__gleVPBeginQuadStripTCL_00112408;
-        *(undefined **)(param_1 + 0x49fc) = puVar1;
-        *(undefined **)(param_1 + 0x4a00) = puVar3;
+        *(undefined **)(glContext + 0x49fc) = puVar1;
+        *(undefined **)(glContext + 0x4a00) = puVar3;
         puVar3 = PTR__gleVPBeginPolygonTCL_00112404;
       }
     }
   }
   else {
-    if (*(undefined **)(param_1 + 0x5408) == (undefined *)0x0) {
-      uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-      uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+    if (*(undefined **)(glContext + 0x5408) == (undefined *)0x0) {
+      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+      uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
       puVar3 = PTR__glEnd_Exec_00112164;
     }
-    else if (*(undefined **)(param_1 + 0x5408) == ((unsigned char *)0x00001300)) {
-      uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-      uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+    else if (*(undefined **)(glContext + 0x5408) == ((unsigned char *)0x00001300)) {
+      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+      uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
       puVar3 = PTR__glEnd_Comp_00112388;
     }
     else {
-      uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-      uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+      uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
       puVar3 = PTR__glEnd_CompExec_00112384;
     }
     *(undefined **)(uVar4 + 0x128) = puVar3;
     puVar3 = PTR__gleBeginLinesSelectFeedback_00112308;
-    *(undefined **)(param_1 + 0x49e0) = PTR__gleBeginPointsSelectFeedback_0011230c;
+    *(undefined **)(glContext + 0x49e0) = PTR__gleBeginPointsSelectFeedback_0011230c;
     puVar1 = PTR__gleBeginLineLoopSelectFeedback_00112304;
-    *(undefined **)(param_1 + 0x49e4) = puVar3;
+    *(undefined **)(glContext + 0x49e4) = puVar3;
     puVar3 = PTR__gleBeginLineStripSelectFeedback_00112300;
-    *(undefined **)(param_1 + 0x49e8) = puVar1;
+    *(undefined **)(glContext + 0x49e8) = puVar1;
     puVar1 = PTR__gleBeginTrianglesSelectFeedback_001122fc;
-    *(undefined **)(param_1 + 0x49ec) = puVar3;
+    *(undefined **)(glContext + 0x49ec) = puVar3;
     puVar3 = PTR__gleBeginTriangleStripSelectFeedback_001122f8;
-    *(undefined **)(param_1 + 0x49f0) = puVar1;
+    *(undefined **)(glContext + 0x49f0) = puVar1;
     puVar1 = PTR__gleBeginTriangleFanSelectFeedback_001122f4;
-    *(undefined **)(param_1 + 0x49f4) = puVar3;
+    *(undefined **)(glContext + 0x49f4) = puVar3;
     puVar3 = PTR__gleBeginQuadsSelectFeedback_001122f0;
-    *(undefined **)(param_1 + 0x49f8) = puVar1;
-    *(undefined **)(param_1 + 0x49fc) = puVar3;
+    *(undefined **)(glContext + 0x49f8) = puVar1;
+    *(undefined **)(glContext + 0x49fc) = puVar3;
     puVar3 = PTR__gleBeginPolygonSelectFeedback_001122e8;
-    *(undefined **)(param_1 + 0x4a00) = PTR__gleBeginQuadStripSelectFeedback_001122ec;
+    *(undefined **)(glContext + 0x4a00) = PTR__gleBeginQuadStripSelectFeedback_001122ec;
   }
-  *(undefined **)(param_1 + 0x4a04) = puVar3;
+  *(undefined **)(glContext + 0x4a04) = puVar3;
 LAB_00006d54:
   puVar3 = PTR__gleBeginRSLNoop_001113d4;
-  if ((*(char *)(param_1 + 0x34da) != '\0') && (*(short *)(param_1 + 0x34d6) == 0x408)) {
-    *(undefined **)(param_1 + 0x4a04) = PTR__gleBeginRSLNoop_001113d4;
-    *(undefined **)(param_1 + 0x49f0) = puVar3;
-    *(undefined **)(param_1 + 0x49f4) = puVar3;
-    *(undefined **)(param_1 + 0x49f8) = puVar3;
-    *(undefined **)(param_1 + 0x49fc) = puVar3;
-    *(undefined **)(param_1 + 0x4a00) = puVar3;
+  if ((*(char *)(glContext + 0x34da) != '\0') && (*(short *)(glContext + 0x34d6) == 0x408)) {
+    *(undefined **)(glContext + 0x4a04) = PTR__gleBeginRSLNoop_001113d4;
+    *(undefined **)(glContext + 0x49f0) = puVar3;
+    *(undefined **)(glContext + 0x49f4) = puVar3;
+    *(undefined **)(glContext + 0x49f8) = puVar3;
+    *(undefined **)(glContext + 0x49fc) = puVar3;
+    *(undefined **)(glContext + 0x4a00) = puVar3;
   }
-  if (*(char *)(param_1 + 0x759c) == '\0') {
-    uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x10) == 0);
-    uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+  if (*(char *)(glContext + 0x759c) == '\0') {
+    uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10) == 0);
+    uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
     puVar3 = PTR__glBegin_NoopExec_00112078;
   }
-  else if (*(undefined **)(param_1 + 0x5408) == (undefined *)0x0) {
-    uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x10) == 0);
-    uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+  else if (*(undefined **)(glContext + 0x5408) == (undefined *)0x0) {
+    uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10) == 0);
+    uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
     puVar3 = PTR__glBegin_Exec_00112074;
   }
-  else if (*(undefined **)(param_1 + 0x5408) == ((unsigned char *)0x00001300)) {
-    uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x10) == 0);
-    uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+  else if (*(undefined **)(glContext + 0x5408) == ((unsigned char *)0x00001300)) {
+    uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10) == 0);
+    uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
     puVar3 = PTR__glBegin_Comp_001122e4;
   }
   else {
-    uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x10) == 0);
-    uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+    uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10) == 0);
+    uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
     puVar3 = PTR__glBegin_CompExec_001122e0;
   }
   *(undefined **)(uVar4 + 0x10) = puVar3;
@@ -282,8 +282,8 @@ LAB_00006d54:
 }
 
 /* _gleUpdateState @ 0x6e60 (480 bytes) */
-void _gleUpdateState(param_1)
-  int param_1;
+void _gleUpdateState(glContext)
+  int glContext;
 {
   undefined *puVar1;
   undefined1 uVar2;
@@ -308,78 +308,78 @@ void _gleUpdateState(param_1)
   double in_stack_ffffffd0;
   double in_stack_ffffffd8;
   
-  iVar3 = *(int *)(*(int *)(param_1 + 0x468c) + 0x10);
-  iVar4 = *(int *)(*(int *)(param_1 + 0x468c) + 0xc);
-  *(uint *)(param_1 + 0x314) = *(uint *)(param_1 + 0x314) | 0x3ffffff;
-  *(uint *)(param_1 + 0x318) = *(uint *)(param_1 + 0x318) | 0xfffffffd;
-  *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x7ffffff;
-  *(undefined4 *)(param_1 + 800) = 0xffffffff;
-  *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | 1;
-  *(undefined4 *)(param_1 + 0x310) = 0xffffffff;
-  if (((*(char *)(param_1 + 0x30aa) == '\0') || (*(char *)(param_1 + 0x4664) != '\0')) ||
-     (*(int *)(param_1 + 0x5434) != 0)) {
-    uVar2 = *(undefined1 *)(param_1 + 0x4fea);
+  iVar3 = *(int *)(*(int *)(glContext + 0x468c) + 0x10);
+  iVar4 = *(int *)(*(int *)(glContext + 0x468c) + 0xc);
+  *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x3ffffff;
+  *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 0xfffffffd;
+  *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x7ffffff;
+  *(undefined4 *)(glContext + 800) = 0xffffffff;
+  *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 1;
+  *(undefined4 *)(glContext + 0x310) = 0xffffffff;
+  if (((*(char *)(glContext + 0x30aa) == '\0') || (*(char *)(glContext + 0x4664) != '\0')) ||
+     (*(int *)(glContext + 0x5434) != 0)) {
+    uVar2 = *(undefined1 *)(glContext + 0x4fea);
   }
   else {
-    uVar2 = *(short *)(param_1 + 0x30a8) == -0x7e06;
+    uVar2 = *(short *)(glContext + 0x30a8) == -0x7e06;
   }
-  *(undefined1 *)(param_1 + 0x316b) = uVar2;
-  if (iVar4 < *(int *)(param_1 + 0x1ba8)) {
-    *(int *)(param_1 + 0x1ba8) = iVar4;
+  *(undefined1 *)(glContext + 0x316b) = uVar2;
+  if (iVar4 < *(int *)(glContext + 0x1ba8)) {
+    *(int *)(glContext + 0x1ba8) = iVar4;
   }
-  if (iVar3 < *(int *)(param_1 + 0x1bac)) {
-    *(int *)(param_1 + 0x1bac) = iVar3;
+  if (iVar3 < *(int *)(glContext + 0x1bac)) {
+    *(int *)(glContext + 0x1bac) = iVar3;
   }
-  ((void (*)())_gleUpdateLightColorChangeFunc)(param_1);
-  ((void (*)())_gleSetColorMaterialEnable)(param_1);
-  *(undefined1 *)(*(int *)(param_1 + 0x4dd0) + 0x234) = 0x1f;
-  *(undefined1 *)(*(int *)(param_1 + 0x4dd4) + 0x234) = 0x1f;
+  ((void (*)())_gleUpdateLightColorChangeFunc)(glContext);
+  ((void (*)())_gleSetColorMaterialEnable)(glContext);
+  *(undefined1 *)(*(int *)(glContext + 0x4dd0) + 0x234) = 0x1f;
+  *(undefined1 *)(*(int *)(glContext + 0x4dd4) + 0x234) = 0x1f;
   iVar3 = 0;
   dVar5 = extraout_f1;
   do {
-    dVar5 = (double)((double (*)())_gleUpdateLightPosition)(param_1,iVar3,dVar5);
-    ((void (*)())_gleUpdateLightDirection)(param_1,iVar3,dVar5);
-    ((double (*)())_gleUpdateLightExponents)(param_1,iVar3);
+    dVar5 = (double)((double (*)())_gleUpdateLightPosition)(glContext,iVar3,dVar5);
+    ((void (*)())_gleUpdateLightDirection)(glContext,iVar3,dVar5);
+    ((double (*)())_gleUpdateLightExponents)(glContext,iVar3);
     iVar4 = iVar3 + 1;
-    dVar5 = (double)((double (*)())_gleUpdateLightAttenuation)(param_1,iVar3);
+    dVar5 = (double)((double (*)())_gleUpdateLightAttenuation)(glContext,iVar3);
     iVar3 = iVar4;
   } while (iVar4 < 8);
-  ((void (*)())_gleUpdateInverseNeeds)(param_1);
-  ((void (*)())_gleUpdateLightModel)(param_1);
-  ((void (*)())_gleUpdateClipPlane)(param_1,extraout_r4,in_r5,in_r6);
-  ((void (*)())_gleUpdateMatrixMode)(param_1);
-  ((int (*)())_gleUpdateMatrixFunc)(param_1);
-  ((void (*)())_gleUpdateDepthRangeData)(param_1,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffffb8,
+  ((void (*)())_gleUpdateInverseNeeds)(glContext);
+  ((void (*)())_gleUpdateLightModel)(glContext);
+  ((void (*)())_gleUpdateClipPlane)(glContext,extraout_r4,in_r5,in_r6);
+  ((void (*)())_gleUpdateMatrixMode)(glContext);
+  ((int (*)())_gleUpdateMatrixFunc)(glContext);
+  ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffffb8,
              in_stack_ffffffc0,in_stack_ffffffc8,in_stack_ffffffd0,in_stack_ffffffd8);
-  ((void (*)())_gleUpdateTextureCoordGen)(param_1);
+  ((void (*)())_gleUpdateTextureCoordGen)(glContext);
   iVar3 = 0;
   do {
     iVar4 = iVar3 + 1;
-    ((int (*)())_gleUpdateTextureParams)(param_1,iVar3);
+    ((int (*)())_gleUpdateTextureParams)(glContext,iVar3);
     iVar3 = iVar4;
   } while (iVar4 < 0x10);
-  ((double (*)())_gleUpdateFogData)(param_1);
-  ((void (*)())_gleUpdatePolyMode)(param_1);
-  dVar5 = (double)((double (*)())_gleUpdateEvalData)(param_1);
-  ((void (*)())_gleUpdateViewScissorData)(param_1,dVar5,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((double (*)())_gleUpdateFogData)(glContext);
+  ((void (*)())_gleUpdatePolyMode)(glContext);
+  dVar5 = (double)((double (*)())_gleUpdateEvalData)(glContext);
+  ((void (*)())_gleUpdateViewScissorData)(glContext,dVar5,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   puVar1 = PTR__gleSetClipInterpFunc_00112038;
-  *(undefined **)(param_1 + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-  *(undefined **)(param_1 + 0x49cc) = puVar1;
-  ((void (*)())_gleSelectVertexAddMaterialFunc)(param_1);
-  ((void (*)())_gleSelectVertexSubmitFunc)(param_1);
+  *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
+  *(undefined **)(glContext + 0x49cc) = puVar1;
+  ((void (*)())_gleSelectVertexAddMaterialFunc)(glContext);
+  ((void (*)())_gleSelectVertexSubmitFunc)(glContext);
   return;
 }
 
 /* _gleUpdateLightColorChangeFunc @ 0x7040 (468 bytes) */
-void _gleUpdateLightColorChangeFunc(param_1)
-  int param_1;
+void _gleUpdateLightColorChangeFunc(glContext)
+  int glContext;
 {
   ushort uVar1;
   char cVar2;
   code *pcVar3;
   
-  if (*(short *)(param_1 + 0x30a4) == 0x404) {
-    uVar1 = *(ushort *)(param_1 + 0x30a6);
+  if (*(short *)(glContext + 0x30a4) == 0x404) {
+    uVar1 = *(ushort *)(glContext + 0x30a6);
     pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_F_D_001121bc;
     if (uVar1 != 0x1201) {
       if (uVar1 < 0x1202) {
@@ -397,8 +397,8 @@ LAB_000070d4:
       }
     }
   }
-  else if (*(short *)(param_1 + 0x30a4) == 0x405) {
-    uVar1 = *(ushort *)(param_1 + 0x30a6);
+  else if (*(short *)(glContext + 0x30a4) == 0x405) {
+    uVar1 = *(ushort *)(glContext + 0x30a6);
     pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_B_D_001121a8;
     if (uVar1 != 0x1201) {
       if (uVar1 < 0x1202) {
@@ -417,7 +417,7 @@ LAB_0000713c:
     }
   }
   else {
-    uVar1 = *(ushort *)(param_1 + 0x30a6);
+    uVar1 = *(ushort *)(glContext + 0x30a6);
     pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_FB_D_00112194;
     if (uVar1 != 0x1201) {
       if (uVar1 < 0x1202) {
@@ -435,29 +435,29 @@ LAB_000071a4:
       }
     }
   }
-  if (*(code **)(param_1 + 0x4de0) == pcVar3) goto LAB_000071fc;
-  if (*(char *)(param_1 + 0x30ab) == '\0') {
+  if (*(code **)(glContext + 0x4de0) == pcVar3) goto LAB_000071fc;
+  if (*(char *)(glContext + 0x30ab) == '\0') {
 LAB_000071dc:
-    cVar2 = *(char *)(param_1 + 0x4df8);
+    cVar2 = *(char *)(glContext + 0x4df8);
   }
   else {
-    cVar2 = *(char *)(param_1 + 0x4df8);
+    cVar2 = *(char *)(glContext + 0x4df8);
     if (cVar2 == '\0') {
-      (**(code **)(param_1 + 0x4de0))(param_1,param_1 + 0x2a0);
+      (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
       goto LAB_000071dc;
     }
   }
   if (cVar2 != '\0') {
-    (*pcVar3)(param_1,param_1 + 0x2a0);
+    (*pcVar3)(glContext,glContext + 0x2a0);
   }
 LAB_000071fc:
-  *(code **)(param_1 + 0x4de0) = pcVar3;
+  *(code **)(glContext + 0x4de0) = pcVar3;
   return;
 }
 
 /* _gleSetColorMaterialEnable @ 0x7214 (656 bytes) */
-void _gleSetColorMaterialEnable(param_1)
-  int param_1;
+void _gleSetColorMaterialEnable(glContext)
+  int glContext;
 {
   int iVar1;
   char cVar3;
@@ -466,71 +466,71 @@ void _gleSetColorMaterialEnable(param_1)
   uint uVar5;
   
   cVar3 = '\0';
-  if ((((*(char *)(param_1 + 0x7580) == '\0') && (*(char *)(param_1 + 0x30ab) != '\0')) &&
-      (*(char *)(param_1 + 0x4664) == '\0')) && (*(int *)(param_1 + 0x5434) == 0)) {
+  if ((((*(char *)(glContext + 0x7580) == '\0') && (*(char *)(glContext + 0x30ab) != '\0')) &&
+      (*(char *)(glContext + 0x4664) == '\0')) && (*(int *)(glContext + 0x5434) == 0)) {
     cVar3 = '\x01';
   }
-  if (cVar3 == *(char *)(param_1 + 0x4df8)) {
+  if (cVar3 == *(char *)(glContext + 0x4df8)) {
     return;
   }
-  iVar1 = *(int *)(param_1 + 0x5408);
-  *(char *)(param_1 + 0x4df8) = cVar3;
+  iVar1 = *(int *)(glContext + 0x5408);
+  *(char *)(glContext + 0x4df8) = cVar3;
   if (iVar1 == 0) {
     if (cVar3 == '\0') {
-      uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x54) == 0);
+      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x54) == 0);
       *(undefined **)
-       ((*(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4) + 0x54) =
+       ((*(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4) + 0x54) =
            PTR__glColor3f_NoColorMat_Exec_00112178;
-      uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x58) == 0);
+      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x58) == 0);
       *(undefined **)
-       ((*(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4) + 0x58) =
+       ((*(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4) + 0x58) =
            PTR__glColor3fv_NoColorMat_Exec_00112174;
-      uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x94) == 0);
+      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x94) == 0);
       *(undefined **)
-       ((*(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4) + 0x94) =
+       ((*(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4) + 0x94) =
            PTR__glColor4f_NoColorMat_Exec_00112170;
-      uVar5 = *(uint *)(param_1 + 0x4684);
-      uVar4 = *(uint *)(param_1 + 0x4680);
+      uVar5 = *(uint *)(glContext + 0x4684);
+      uVar4 = *(uint *)(glContext + 0x4680);
       iVar1 = *(int *)(uVar5 + 0x98);
       puVar2 = PTR__glColor4fv_NoColorMat_Exec_0011216c;
     }
     else {
-      uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x54) == 0);
+      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x54) == 0);
       *(undefined **)
-       ((*(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4) + 0x54) =
+       ((*(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4) + 0x54) =
            PTR__glColor3f_ColorMat_Exec_00112188;
-      uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x58) == 0);
+      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x58) == 0);
       *(undefined **)
-       ((*(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4) + 0x58) =
+       ((*(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4) + 0x58) =
            PTR__glColor3fv_ColorMat_Exec_00112184;
-      uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x94) == 0);
+      uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x94) == 0);
       *(undefined **)
-       ((*(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4) + 0x94) =
+       ((*(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4) + 0x94) =
            PTR__glColor4f_ColorMat_Exec_00112180;
-      uVar5 = *(uint *)(param_1 + 0x4684);
-      uVar4 = *(uint *)(param_1 + 0x4680);
+      uVar5 = *(uint *)(glContext + 0x4684);
+      uVar4 = *(uint *)(glContext + 0x4680);
       iVar1 = *(int *)(uVar5 + 0x98);
       puVar2 = PTR__glColor4fv_ColorMat_Exec_0011217c;
     }
     *(undefined **)((uVar4 & -(uint)(iVar1 == 0) | uVar5 & ~-(uint)(iVar1 == 0)) + 0x98) = puVar2;
-    iVar1 = *(int *)(param_1 + 0x5408);
+    iVar1 = *(int *)(glContext + 0x5408);
   }
   if (iVar1 != 0) goto LAB_00007490;
-  if ((*(char *)(param_1 + 0x7580) == '\0') || (*(int *)(param_1 + 0x4e1c) != 0x1c00)) {
+  if ((*(char *)(glContext + 0x7580) == '\0') || (*(int *)(glContext + 0x4e1c) != 0x1c00)) {
 LAB_00007464:
-    uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-    uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+    uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+    uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
     puVar2 = PTR__glEnd_Exec_00112164;
   }
-  else if (*(char *)(*(int *)(param_1 + 0x468c) + 0x7a) == '\0') {
-    uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-    uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+  else if (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0') {
+    uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+    uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
     puVar2 = PTR__glEndRDirty_Exec_00112160;
   }
   else {
-    if (*(char *)(param_1 + 0x4df8) != '\0') goto LAB_00007464;
-    uVar4 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-    uVar4 = *(uint *)(param_1 + 0x4680) & uVar4 | *(uint *)(param_1 + 0x4684) & ~uVar4;
+    if (*(char *)(glContext + 0x4df8) != '\0') goto LAB_00007464;
+    uVar4 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+    uVar4 = *(uint *)(glContext + 0x4680) & uVar4 | *(uint *)(glContext + 0x4684) & ~uVar4;
     puVar2 = PTR__glEndNoMat_Exec_00112168;
   }
   *(undefined **)(uVar4 + 0x128) = puVar2;
@@ -540,12 +540,12 @@ LAB_00007490:
   }
                     
                     
-  (**(code **)(param_1 + 0x4de0))(param_1,param_1 + 0x2a0);
+  (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
   return;
 }
 
 /* _gleUpdateLightPosition @ 0x74a4 (540 bytes) */
-double _gleUpdateLightPosition(int param_1,int param_2,double fparam_1)
+double _gleUpdateLightPosition(int glContext,int param_2,double fparam_1)
 {
   byte bVar1;
   float fVar2;
@@ -563,9 +563,9 @@ double _gleUpdateLightPosition(int param_1,int param_2,double fparam_1)
   undefined4 in_r8;
   undefined4 a6;
   
-  iVar7 = param_1 + param_2 * 0x80;
+  iVar7 = glContext + param_2 * 0x80;
   fVar2 = *(float *)(iVar7 + 0x2850);
-  iVar8 = param_1 + param_2 * 0x6c;
+  iVar8 = glContext + param_2 * 0x6c;
   *(float *)(iVar8 + 0x4a70) = fVar2;
   fVar5 = FLOAT_00108e50;
   fVar3 = *(float *)(iVar7 + 0x2854);
@@ -585,7 +585,7 @@ double _gleUpdateLightPosition(int param_1,int param_2,double fparam_1)
     }
   }
   puVar6 = PTR__gleVectorNormalize_00112064;
-  (**(code **)PTR__gleVectorNormalize_00112064)(param_1,iVar8 + 0x4a70,iVar8 + 0x4a7c);
+  (**(code **)PTR__gleVectorNormalize_00112064)(glContext,iVar8 + 0x4a70,iVar8 + 0x4a7c);
   uVar9 = *(undefined4 *)(iVar8 + 0x4a7c);
   a6 = *(undefined4 *)(iVar8 + 0x4a80);
   *(undefined4 *)(iVar7 + 0x2888) = *(undefined4 *)(iVar8 + 0x4a84);
@@ -593,33 +593,33 @@ double _gleUpdateLightPosition(int param_1,int param_2,double fparam_1)
   *(undefined4 *)(iVar7 + 0x2880) = uVar9;
   *(undefined4 *)(iVar7 + 0x2884) = a6;
   *(float *)(iVar7 + 0x2888) = *(float *)(iVar7 + 0x2888) + fVar2;
-  (**(code **)puVar6)(param_1,iVar7 + 0x2880,iVar7 + 0x2880,in_r6,in_r7,in_r8,a6);
-  ((void (*)())_gleUpdateLightFast)(param_1,param_2);
-  ((void (*)())_gleUpdateLightModelFunc)(param_1);
-  iVar7 = *(int *)(param_1 + 0x5434);
+  (**(code **)puVar6)(glContext,iVar7 + 0x2880,iVar7 + 0x2880,in_r6,in_r7,in_r8,a6);
+  ((void (*)())_gleUpdateLightFast)(glContext,param_2);
+  ((void (*)())_gleUpdateLightModelFunc)(glContext);
+  iVar7 = *(int *)(glContext + 0x5434);
   if (iVar7 == 0) {
-    bVar1 = *(byte *)(param_2 * 7 + *(int *)(param_1 + 0x5420) + 0x25b);
+    bVar1 = *(byte *)(param_2 * 7 + *(int *)(glContext + 0x5420) + 0x25b);
   }
   else {
-    bVar1 = *(byte *)(param_2 * 7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x28f);
+    bVar1 = *(byte *)(param_2 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x28f);
   }
   iVar10 = param_2 * 7;
-  iVar8 = (bVar1 >> 3 & 0x1c) + param_1;
-  iVar11 = *(int *)(param_1 + 0x5424);
+  iVar8 = (bVar1 >> 3 & 0x1c) + glContext;
+  iVar11 = *(int *)(glContext + 0x5424);
   *(uint *)(iVar8 + 0x324) = *(uint *)(iVar8 + 0x324) | 1 << (bVar1 & 0x1f);
   bVar1 = *(byte *)(iVar10 + iVar11 + 0x25b);
-  iVar8 = (bVar1 >> 3 & 0x1c) + param_1;
+  iVar8 = (bVar1 >> 3 & 0x1c) + glContext;
   *(uint *)(iVar8 + 0x348) = *(uint *)(iVar8 + 0x348) | 1 << (bVar1 & 0x1f);
   if (iVar7 == 0) {
-    bVar1 = *(byte *)(iVar10 + *(int *)(param_1 + 0x5420) + 0x25e);
+    bVar1 = *(byte *)(iVar10 + *(int *)(glContext + 0x5420) + 0x25e);
   }
   else {
-    bVar1 = *(byte *)(iVar10 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x292);
+    bVar1 = *(byte *)(iVar10 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x292);
   }
-  iVar7 = (bVar1 >> 3 & 0x1c) + param_1;
+  iVar7 = (bVar1 >> 3 & 0x1c) + glContext;
   *(uint *)(iVar7 + 0x324) = *(uint *)(iVar7 + 0x324) | 1 << (bVar1 & 0x1f);
   bVar1 = *(byte *)(iVar10 + iVar11 + 0x25e);
-  iVar7 = (bVar1 >> 3 & 0x1c) + param_1;
+  iVar7 = (bVar1 >> 3 & 0x1c) + glContext;
   *(uint *)(iVar7 + 0x348) = *(uint *)(iVar7 + 0x348) | 1 << (bVar1 & 0x1f);
   return;
 }
@@ -728,7 +728,7 @@ void _gleUpdateLightModelFunc(param_1)
 }
 
 /* _gleUpdateLightDirection @ 0x78f4 (220 bytes) */
-void _gleUpdateLightDirection(int param_1,int param_2,double fparam_1)
+void _gleUpdateLightDirection(int glContext,int param_2,double fparam_1)
 {
   byte bVar1;
   int iVar2;
@@ -736,18 +736,18 @@ void _gleUpdateLightDirection(int param_1,int param_2,double fparam_1)
   int iVar3;
   
   (**(code **)PTR__gleVectorNormalize_00112064)
-            (param_1,param_1 + param_2 * 0x80 + 0x2860,param_1 + param_2 * 0x6c + 0x4a88,in_r6);
-  if (*(int *)(param_1 + 0x5434) == 0) {
-    bVar1 = *(byte *)(param_2 * 7 + *(int *)(param_1 + 0x5420) + 0x25c);
+            (glContext,glContext + param_2 * 0x80 + 0x2860,glContext + param_2 * 0x6c + 0x4a88,in_r6);
+  if (*(int *)(glContext + 0x5434) == 0) {
+    bVar1 = *(byte *)(param_2 * 7 + *(int *)(glContext + 0x5420) + 0x25c);
   }
   else {
-    bVar1 = *(byte *)(param_2 * 7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x290);
+    bVar1 = *(byte *)(param_2 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x290);
   }
-  iVar3 = (bVar1 >> 3 & 0x1c) + param_1;
-  iVar2 = *(int *)(param_1 + 0x5424);
+  iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
+  iVar2 = *(int *)(glContext + 0x5424);
   *(uint *)(iVar3 + 0x324) = *(uint *)(iVar3 + 0x324) | 1 << (bVar1 & 0x1f);
   bVar1 = *(byte *)(param_2 * 7 + iVar2 + 0x25c);
-  iVar2 = (bVar1 >> 3 & 0x1c) + param_1;
+  iVar2 = (bVar1 >> 3 & 0x1c) + glContext;
   *(uint *)(iVar2 + 0x348) = *(uint *)(iVar2 + 0x348) | 1 << (bVar1 & 0x1f);
   return;
 }
@@ -825,8 +825,8 @@ double _gleUpdateLightExponents(param_1, param_2)
 }
 
 /* _gleUpdateLightAttenuation @ 0x7b78 (280 bytes) */
-double _gleUpdateLightAttenuation(param_1, param_2)
-  int param_1;
+double _gleUpdateLightAttenuation(glContext, param_2)
+  int glContext;
   int param_2;
 {
   byte bVar1;
@@ -834,8 +834,8 @@ double _gleUpdateLightAttenuation(param_1, param_2)
   int iVar3;
   int iVar4;
   
-  iVar3 = param_1 + param_2 * 0x80;
-  iVar4 = param_1 + param_2 * 0x6c;
+  iVar3 = glContext + param_2 * 0x80;
+  iVar4 = glContext + param_2 * 0x6c;
   if ((*(float *)(iVar3 + 0x2870) < FLOAT_00108e80) && (FLOAT_00108f3c < *(float *)(iVar3 + 0x2870))
      ) {
     *(undefined1 *)(iVar4 + 0x4adb) = 0;
@@ -848,56 +848,56 @@ double _gleUpdateLightAttenuation(param_1, param_2)
     *(undefined1 *)(iVar4 + 0x4adb) = uVar2;
     *(float *)(iVar4 + 0x4ad4) = FLOAT_00108e54 / *(float *)(iVar3 + 0x2870);
   }
-  if (*(int *)(param_1 + 0x5434) == 0) {
-    bVar1 = *(byte *)(param_2 * 7 + *(int *)(param_1 + 0x5420) + 0x25d);
+  if (*(int *)(glContext + 0x5434) == 0) {
+    bVar1 = *(byte *)(param_2 * 7 + *(int *)(glContext + 0x5420) + 0x25d);
   }
   else {
-    bVar1 = *(byte *)(param_2 * 7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x291);
+    bVar1 = *(byte *)(param_2 * 7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x291);
   }
-  iVar4 = (bVar1 >> 3 & 0x1c) + param_1;
-  iVar3 = *(int *)(param_1 + 0x5424);
+  iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
+  iVar3 = *(int *)(glContext + 0x5424);
   *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar1 & 0x1f);
   bVar1 = *(byte *)(param_2 * 7 + iVar3 + 0x25d);
-  iVar3 = (bVar1 >> 3 & 0x1c) + param_1;
+  iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
   *(uint *)(iVar3 + 0x348) = *(uint *)(iVar3 + 0x348) | 1 << (bVar1 & 0x1f);
   return;
 }
 
 /* _gleUpdateInverseNeeds @ 0x7c90 (192 bytes) */
-void _gleUpdateInverseNeeds(param_1)
-  int param_1;
+void _gleUpdateInverseNeeds(glContext)
+  int glContext;
 {
   int iVar1;
   
-  if (*(char *)(param_1 + 0x4664) == '\0') {
-    if (*(int *)(param_1 + 0x5434) == 0) {
-      if ((*(char *)(param_1 + 0x30aa) != '\0') || (iVar1 = 0, *(char *)(param_1 + 0x53e6) != '\0'))
+  if (*(char *)(glContext + 0x4664) == '\0') {
+    if (*(int *)(glContext + 0x5434) == 0) {
+      if ((*(char *)(glContext + 0x30aa) != '\0') || (iVar1 = 0, *(char *)(glContext + 0x53e6) != '\0'))
       {
-        if (*(char *)(param_1 + 0x4661) == '\0') {
+        if (*(char *)(glContext + 0x4661) == '\0') {
           iVar1 = 0x10;
         }
         else {
-          iVar1 = (0xffffffffU >> (0x20 - *(byte *)(param_1 + 0x4660) & 0x3f)) << 4;
+          iVar1 = (0xffffffffU >> (0x20 - *(byte *)(glContext + 0x4660) & 0x3f)) << 4;
         }
       }
     }
     else {
-      iVar1 = *(int *)(*(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 4);
+      iVar1 = *(int *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 4);
     }
   }
   else {
-    iVar1 = *(int *)(*(int *)(param_1 + 0x5420) + 0x20);
+    iVar1 = *(int *)(*(int *)(glContext + 0x5420) + 0x20);
   }
-  *(int *)(param_1 + 0x505c) = iVar1;
-  if (*(char *)(param_1 + 0x466c) != '\0') {
-    *(uint *)(param_1 + 0x505c) =
-         *(uint *)(param_1 + 0x505c) | *(uint *)(*(int *)(param_1 + 0x5424) + 0x20);
+  *(int *)(glContext + 0x505c) = iVar1;
+  if (*(char *)(glContext + 0x466c) != '\0') {
+    *(uint *)(glContext + 0x505c) =
+         *(uint *)(glContext + 0x505c) | *(uint *)(*(int *)(glContext + 0x5424) + 0x20);
   }
-  if (*(int *)(param_1 + 0x5438) == 0) {
+  if (*(int *)(glContext + 0x5438) == 0) {
     return;
   }
-  *(uint *)(param_1 + 0x505c) =
-       *(uint *)(param_1 + 0x505c) | *(uint *)(*(int *)(*(int *)(param_1 + 0x5430) + 0x24) + 4);
+  *(uint *)(glContext + 0x505c) =
+       *(uint *)(glContext + 0x505c) | *(uint *)(*(int *)(*(int *)(glContext + 0x5430) + 0x24) + 4);
   return;
 }
 
@@ -919,8 +919,8 @@ void _gleUpdateLightModel(param_1)
 }
 
 /* _gleUpdateClipPlane @ 0x7d98 (108 bytes) */
-void _gleUpdateClipPlane(param_1, param_2, param_3, param_4)
-  int param_1;
+void _gleUpdateClipPlane(glContext, param_2, param_3, param_4)
+  int glContext;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -932,28 +932,28 @@ void _gleUpdateClipPlane(param_1, param_2, param_3, param_4)
   int iVar5;
   int iVar6;
   
-  cVar1 = *(char *)(param_1 + 0x4e18);
-  *(undefined1 *)(param_1 + 0x4e18) = 0;
-  uVar3 = *(uint *)(param_1 + 0x4188);
+  cVar1 = *(char *)(glContext + 0x4e18);
+  *(undefined1 *)(glContext + 0x4e18) = 0;
+  uVar3 = *(uint *)(glContext + 0x4188);
   iVar6 = 6;
   uVar4 = 0;
   iVar5 = 0;
-  puVar2 = (uint *)(param_1 + 0x4e00);
+  puVar2 = (uint *)(glContext + 0x4e00);
   do {
     if ((uVar3 & 1 << (uVar4 & 0x3f)) != 0) {
       *puVar2 = uVar4;
       iVar5 = iVar5 + 1;
-      *(undefined1 *)(param_1 + 0x4e18) = 1;
+      *(undefined1 *)(glContext + 0x4e18) = 1;
       puVar2 = puVar2 + 1;
     }
     uVar4 = uVar4 + 1;
     iVar6 = iVar6 + -1;
   } while (iVar6 != 0);
-  *(int *)(param_1 + 0x4dfc) = iVar5;
-  if (*(char *)(param_1 + 0x4e18) == cVar1) {
+  *(int *)(glContext + 0x4dfc) = iVar5;
+  if (*(char *)(glContext + 0x4e18) == cVar1) {
     return;
   }
-  *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | 1;
+  *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 1;
   return;
 }
 
@@ -981,8 +981,8 @@ void _gleUpdateMatrixMode(param_1)
 }
 
 /* _gleUpdateMatrixFunc @ 0x7e48 (2092 bytes) */
-int _gleUpdateMatrixFunc(param_1)
-  int param_1;
+int _gleUpdateMatrixFunc(glContext)
+  int glContext;
 {
   undefined *puVar1;
   uint uVar2;
@@ -995,236 +995,236 @@ int _gleUpdateMatrixFunc(param_1)
   uint uVar9;
   int iVar10;
   
-  uVar9 = *(uint *)(param_1 + 0x50ac);
+  uVar9 = *(uint *)(glContext + 0x50ac);
   bVar5 = 0;
-  uVar8 = *(uint *)(param_1 + 0x50b0);
-  if ((*(char *)(param_1 + 0x4e18) != '\0') ||
-     (((*(char *)(param_1 + 0x30aa) != '\0' && (*(int *)(param_1 + 0x4ddc) != 0)) ||
-      (*(char *)(param_1 + 0x53e5) != '\0')))) {
+  uVar8 = *(uint *)(glContext + 0x50b0);
+  if ((*(char *)(glContext + 0x4e18) != '\0') ||
+     (((*(char *)(glContext + 0x30aa) != '\0' && (*(int *)(glContext + 0x4ddc) != 0)) ||
+      (*(char *)(glContext + 0x53e5) != '\0')))) {
     bVar5 = 1;
   }
-  *(byte *)(param_1 + 0x50b4) =
-       bVar5 | *(char *)(param_1 + 0x316a) << 1 | *(char *)(param_1 + 0x4661) << 2;
-  if (((uVar9 & 0x18) != 0) || (iVar3 = param_1, (*(uint *)(param_1 + 0x318) & 1) != 0)) {
-    iVar3 = ((int (*)())_gleApplyViewScissorTransform)(param_1);
+  *(byte *)(glContext + 0x50b4) =
+       bVar5 | *(char *)(glContext + 0x316a) << 1 | *(char *)(glContext + 0x4661) << 2;
+  if (((uVar9 & 0x18) != 0) || (iVar3 = glContext, (*(uint *)(glContext + 0x318) & 1) != 0)) {
+    iVar3 = ((int (*)())_gleApplyViewScissorTransform)(glContext);
   }
-  uVar8 = uVar8 & *(uint *)(param_1 + 0x505c);
+  uVar8 = uVar8 & *(uint *)(glContext + 0x505c);
   if (uVar8 != 0) {
-    iVar3 = _gleInvertMatrices(param_1,uVar8);
+    iVar3 = _gleInvertMatrices(glContext,uVar8);
   }
   puVar1 = PTR__gleSetModelviewFuncAll_0011222c;
-  *(undefined **)(param_1 + 0x5068) = PTR__gleSetNormalFunc_00112230;
-  *(undefined **)(param_1 + 0x5064) = puVar1;
+  *(undefined **)(glContext + 0x5068) = PTR__gleSetNormalFunc_00112230;
+  *(undefined **)(glContext + 0x5064) = puVar1;
   if ((uVar9 & 0x18) == 0) {
-    if (((*(uint *)(param_1 + 0x318) & 1) == 0) && ((*(uint *)(param_1 + 0x31c) & 0x200000) == 0))
+    if (((*(uint *)(glContext + 0x318) & 1) == 0) && ((*(uint *)(glContext + 0x31c) & 0x200000) == 0))
     goto LAB_00007f38;
   }
-  *(undefined **)(param_1 + 0x5060) = PTR__gleSetProjectionFuncAll_00112228;
+  *(undefined **)(glContext + 0x5060) = PTR__gleSetProjectionFuncAll_00112228;
 LAB_00007f38:
   if ((uVar9 & 0xff0000) != 0) {
-    iVar3 = ((int (*)())_gleUpdateTextureTransform)(param_1);
+    iVar3 = ((int (*)())_gleUpdateTextureTransform)(glContext);
   }
   if ((uVar9 & 4) != 0) {
-    iVar3 = (**(code **)PTR__gleGenerateMatrixIdentifier_00112060)(param_1,param_1 + 0x1c40);
+    iVar3 = (**(code **)PTR__gleGenerateMatrixIdentifier_00112060)(glContext,glContext + 0x1c40);
     if (iVar3 == -0x40100402) {
-      uVar2 = *(uint *)(param_1 + 0x3410) & 0xfffffeff;
+      uVar2 = *(uint *)(glContext + 0x3410) & 0xfffffeff;
     }
     else {
-      uVar2 = *(uint *)(param_1 + 0x3410) | 0x100;
+      uVar2 = *(uint *)(glContext + 0x3410) | 0x100;
     }
-    *(uint *)(param_1 + 0x3410) = uVar2;
+    *(uint *)(glContext + 0x3410) = uVar2;
   }
   uVar8 = (uVar9 | uVar8) & 0xfffffc;
-  *(uint *)(param_1 + 0x318) = *(uint *)(param_1 + 0x318) | uVar8;
-  if ((*(char *)(param_1 + 0x4664) != '\0') || (*(int *)(param_1 + 0x5434) != 0)) {
+  *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | uVar8;
+  if ((*(char *)(glContext + 0x4664) != '\0') || (*(int *)(glContext + 0x5434) != 0)) {
     uVar9 = 0;
     iVar10 = 0x18;
     do {
       if (((uVar8 | (uVar8 >> 4 | uVar8 >> 3) & 1) >> (uVar9 & 0x3f) & 1) != 0) {
-        iVar6 = *(int *)(param_1 + 0x5434);
+        iVar6 = *(int *)(glContext + 0x5434);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(uVar9 * 4 + *(int *)(param_1 + 0x5420) + 0x328);
+          bVar5 = *(byte *)(uVar9 * 4 + *(int *)(glContext + 0x5420) + 0x328);
         }
         else {
-          bVar5 = *(byte *)(uVar9 * 4 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x35c);
+          bVar5 = *(byte *)(uVar9 * 4 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x35c);
         }
         iVar7 = uVar9 * 4;
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 0x329);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 0x329);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x35d);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x35d);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 0x32a);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 0x32a);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x35e);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x35e);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 0x32b);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 0x32b);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x35f);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x35f);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 0x388);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 0x388);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x3bc);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x3bc);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 0x389);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 0x389);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x3bd);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x3bd);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 0x38a);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 0x38a);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x3be);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x3be);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 0x38b);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 0x38b);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x3bf);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x3bf);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 1000);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 1000);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x41c);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x41c);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 0x3e9);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 0x3e9);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x41d);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x41d);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 0x3ea);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 0x3ea);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x41e);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x41e);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 0x3eb);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 0x3eb);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x41f);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x41f);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 0x448);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 0x448);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x47c);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x47c);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 0x449);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 0x449);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x47d);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x47d);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 0x44a);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 0x44a);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x47e);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x47e);
         }
-        iVar4 = (bVar5 >> 3 & 0x1c) + param_1;
+        iVar4 = (bVar5 >> 3 & 0x1c) + glContext;
         *(uint *)(iVar4 + 0x324) = *(uint *)(iVar4 + 0x324) | 1 << (bVar5 & 0x1f);
         if (iVar6 == 0) {
-          bVar5 = *(byte *)(iVar7 + *(int *)(param_1 + 0x5420) + 1099);
+          bVar5 = *(byte *)(iVar7 + *(int *)(glContext + 0x5420) + 1099);
         }
         else {
-          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x47f);
+          bVar5 = *(byte *)(iVar7 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x47f);
         }
-        iVar6 = (bVar5 >> 3 & 0x1c) + param_1;
-        iVar7 = iVar7 + *(int *)(param_1 + 0x5424);
+        iVar6 = (bVar5 >> 3 & 0x1c) + glContext;
+        iVar7 = iVar7 + *(int *)(glContext + 0x5424);
         *(uint *)(iVar6 + 0x324) = *(uint *)(iVar6 + 0x324) | 1 << (bVar5 & 0x1f);
-        iVar6 = (*(byte *)(iVar7 + 0x328) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x328) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x328) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 0x329) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x329) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x329) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 0x32a) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x32a) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x32a) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 0x32b) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x32b) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x32b) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 0x388) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x388) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x388) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 0x389) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x389) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x389) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 0x38a) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x38a) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x38a) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 0x38b) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x38b) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x38b) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 1000) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 1000) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 1000) & 0x1f);
-        iVar6 = (*(byte *)(iVar7 + 0x3e9) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x3e9) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x3e9) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 0x3ea) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x3ea) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x3ea) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 0x3eb) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x3eb) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x3eb) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 0x448) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x448) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x448) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 0x449) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x449) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x449) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 0x44a) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 0x44a) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 0x44a) & 0x1f)
         ;
-        iVar6 = (*(byte *)(iVar7 + 1099) >> 3 & 0x1c) + param_1;
+        iVar6 = (*(byte *)(iVar7 + 1099) >> 3 & 0x1c) + glContext;
         *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (*(byte *)(iVar7 + 1099) & 0x1f);
       }
       uVar9 = uVar9 + 1;
       iVar10 = iVar10 + -1;
     } while (iVar10 != 0);
   }
-  *(undefined4 *)(param_1 + 0x50ac) = 0;
-  *(uint *)(param_1 + 0x497c) = *(uint *)(param_1 + 0x497c) | 0x1d;
+  *(undefined4 *)(glContext + 0x50ac) = 0;
+  *(uint *)(glContext + 0x497c) = *(uint *)(glContext + 0x497c) | 0x1d;
   return iVar3;
 }
 
@@ -1390,8 +1390,8 @@ void FUN_00008b68()
 }
 
 /* _gleUpdateTextureTransform @ 0x8b84 (272 bytes) */
-int _gleUpdateTextureTransform(param_1)
-  int param_1;
+int _gleUpdateTextureTransform(glContext)
+  int glContext;
 {
   bool bVar1;
   undefined *puVar2;
@@ -1399,45 +1399,45 @@ int _gleUpdateTextureTransform(param_1)
   undefined *puVar4;
   int iVar5;
   
-  iVar5 = _gleTexEnableBits(param_1);
+  iVar5 = _gleTexEnableBits(glContext);
   puVar3 = PTR__gleTextureMatTransPtrDivW_001115ec;
   puVar2 = PTR__gleMultiTextureMatTransPtr_001115e0;
   puVar4 = PTR__gleTextureMatTrans_Identity_001115f4;
-  if (((iVar5 != 0) && (*(char *)(param_1 + 0x4664) == '\0')) && (*(int *)(param_1 + 0x5434) == 0))
+  if (((iVar5 != 0) && (*(char *)(glContext + 0x4664) == '\0')) && (*(int *)(glContext + 0x5434) == 0))
   {
     bVar1 = false;
-    if (((*(uint *)(*(int *)(param_1 + 0x468c) + 0x94) & 4) == 0) &&
-       (*(int *)(param_1 + 0x4e1c) == 0x1c00)) {
+    if (((*(uint *)(*(int *)(glContext + 0x468c) + 0x94) & 4) == 0) &&
+       (*(int *)(glContext + 0x4e1c) == 0x1c00)) {
       bVar1 = true;
     }
     if (iVar5 != 1) {
-      *(undefined **)(param_1 + 0x506c) = PTR__gleMultiTextureMatTrans_001115e4;
-      *(undefined **)(param_1 + 0x5074) = puVar2;
+      *(undefined **)(glContext + 0x506c) = PTR__gleMultiTextureMatTrans_001115e4;
+      *(undefined **)(glContext + 0x5074) = puVar2;
       puVar3 = PTR__gleTextureMatTransPtrDivW_001115ec;
       puVar2 = PTR__gleTextureMatTrans_001115e8;
       if (bVar1) {
-        *(undefined **)(param_1 + 0x5070) = PTR__gleTextureMatTransDivW_001115f0;
-        *(undefined **)(param_1 + 0x5078) = puVar3;
+        *(undefined **)(glContext + 0x5070) = PTR__gleTextureMatTransDivW_001115f0;
+        *(undefined **)(glContext + 0x5078) = puVar3;
         return;
       }
-      *(undefined **)(param_1 + 0x5078) = PTR__gleTextureMatTrans_001115e8;
-      *(undefined **)(param_1 + 0x5070) = puVar2;
+      *(undefined **)(glContext + 0x5078) = PTR__gleTextureMatTrans_001115e8;
+      *(undefined **)(glContext + 0x5070) = puVar2;
       return;
     }
     puVar4 = PTR__gleTextureMatTrans_001115e8;
     if (bVar1) {
-      *(undefined **)(param_1 + 0x506c) = PTR__gleTextureMatTransDivW_001115f0;
-      *(undefined **)(param_1 + 0x5074) = puVar3;
+      *(undefined **)(glContext + 0x506c) = PTR__gleTextureMatTransDivW_001115f0;
+      *(undefined **)(glContext + 0x5074) = puVar3;
       return;
     }
   }
-  *(undefined **)(param_1 + 0x5074) = puVar4;
-  *(undefined **)(param_1 + 0x506c) = puVar4;
+  *(undefined **)(glContext + 0x5074) = puVar4;
+  *(undefined **)(glContext + 0x506c) = puVar4;
   return;
 }
 
 /* _gleUpdateDepthRangeData @ 0x8c94 (156 bytes) */
-void _gleUpdateDepthRangeData(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleUpdateDepthRangeData(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -1446,32 +1446,32 @@ void _gleUpdateDepthRangeData(int param_1,double fparam_1,double fparam_2,double
   double dVar5;
   double dVar6;
   
-  dVar5 = *(double *)(param_1 + 0x1b90);
-  fVar1 = (float)*(double *)(param_1 + 0x1b98);
-  dVar6 = (*(double *)(param_1 + 0x1b98) - dVar5) * DOUBLE_00108dc0;
-  fVar4 = *(float *)(*(int *)(param_1 + 0x468c) + 4);
-  *(float *)(param_1 + 0xf8) = (float)dVar5;
+  dVar5 = *(double *)(glContext + 0x1b90);
+  fVar1 = (float)*(double *)(glContext + 0x1b98);
+  dVar6 = (*(double *)(glContext + 0x1b98) - dVar5) * DOUBLE_00108dc0;
+  fVar4 = *(float *)(*(int *)(glContext + 0x468c) + 4);
+  *(float *)(glContext + 0xf8) = (float)dVar5;
   fVar2 = (float)dVar6;
-  *(float *)(param_1 + 0x108) = fVar1;
-  *(float *)(param_1 + 0x4a54) = fVar4;
+  *(float *)(glContext + 0x108) = fVar1;
+  *(float *)(glContext + 0x4a54) = fVar4;
   fVar3 = (float)(dVar6 + dVar5);
-  *(float *)(param_1 + 0x1b78) = fVar2;
-  *(float *)(param_1 + 0x4a3c) = fVar2;
-  *(float *)(param_1 + 0x1b88) = fVar3;
-  *(float *)(param_1 + 0x4a40) = fVar3;
-  if (*(int *)(param_1 + 0x4e1c) == 0x1c00) {
-    *(float *)(param_1 + 0x1b88) = fVar3 * fVar4;
-    *(float *)(param_1 + 0x108) = fVar1 * fVar4;
-    *(float *)(param_1 + 0x1b78) = fVar2 * fVar4;
-    *(float *)(param_1 + 0xf8) = (float)dVar5 * fVar4;
+  *(float *)(glContext + 0x1b78) = fVar2;
+  *(float *)(glContext + 0x4a3c) = fVar2;
+  *(float *)(glContext + 0x1b88) = fVar3;
+  *(float *)(glContext + 0x4a40) = fVar3;
+  if (*(int *)(glContext + 0x4e1c) == 0x1c00) {
+    *(float *)(glContext + 0x1b88) = fVar3 * fVar4;
+    *(float *)(glContext + 0x108) = fVar1 * fVar4;
+    *(float *)(glContext + 0x1b78) = fVar2 * fVar4;
+    *(float *)(glContext + 0xf8) = (float)dVar5 * fVar4;
   }
-  *(uint *)(param_1 + 0x318) = *(uint *)(param_1 + 0x318) | 1;
+  *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 1;
   return;
 }
 
 /* _gleUpdateTextureCoordGen @ 0x8d30 (1120 bytes) */
-void _gleUpdateTextureCoordGen(param_1)
-  int param_1;
+void _gleUpdateTextureCoordGen(glContext)
+  int glContext;
 {
   bool bVar1;
   bool bVar2;
@@ -1525,17 +1525,17 @@ void _gleUpdateTextureCoordGen(param_1)
   puVar9 = PTR__gleMultiVtxTextureCoordGenObjectSlow_00111460;
   puVar8 = PTR__gleMultiVtxTextureCoordGenWrapObject_0011145c;
   puVar7 = PTR__gleMultiVtxTextureCoordGenWrapEye_00111458;
-  *(undefined **)(param_1 + 0x53e0) = PTR__gleVtxTextureCoordGenNoop_001114ac;
-  *(undefined1 *)(param_1 + 0x53e4) = 0;
+  *(undefined **)(glContext + 0x53e0) = PTR__gleVtxTextureCoordGenNoop_001114ac;
+  *(undefined1 *)(glContext + 0x53e4) = 0;
   iVar27 = 0;
-  *(undefined1 *)(param_1 + 0x53e5) = 0;
-  cVar4 = *(char *)(param_1 + 0x53e6);
-  iVar26 = param_1 + 0x3d70;
-  *(undefined1 *)(param_1 + 0x53e6) = 0;
-  *(undefined **)(param_1 + 0x53dc) = puVar29;
-  pcVar28 = (char *)(param_1 + 0x531c);
+  *(undefined1 *)(glContext + 0x53e5) = 0;
+  cVar4 = *(char *)(glContext + 0x53e6);
+  iVar26 = glContext + 0x3d70;
+  *(undefined1 *)(glContext + 0x53e6) = 0;
+  *(undefined **)(glContext + 0x53dc) = puVar29;
+  pcVar28 = (char *)(glContext + 0x531c);
   iVar31 = 8;
-  iVar30 = param_1;
+  iVar30 = glContext;
   do {
     *(undefined **)(pcVar28 + -8) = puVar25;
     *(undefined **)(pcVar28 + -4) = puVar25;
@@ -1560,10 +1560,10 @@ LAB_00008f68:
             ((bVar2 && (*(short *)(iVar30 + 0x3ce8) == -0x7aee)))) ||
            (((bVar3 && (*(short *)(iVar30 + 0x3d0c) == -0x7aee)) ||
             ((bVar1 && (*(short *)(iVar30 + 0x3d30) == -0x7aee)))))) {
-          *(undefined1 *)(param_1 + 0x53e6) = 1;
+          *(undefined1 *)(glContext + 0x53e6) = 1;
 LAB_0000909c:
-          *(undefined1 *)(param_1 + 0x53e5) = 1;
-          *(undefined **)(param_1 + 0x53e0) = puVar12;
+          *(undefined1 *)(glContext + 0x53e5) = 1;
+          *(undefined **)(glContext + 0x53e0) = puVar12;
           *(undefined **)(pcVar28 + -4) = puVar11;
         }
         else if ((((*(char *)(iVar26 + 8) != '\0') && (*(short *)(iVar26 + -0x88) == 0x2400)) ||
@@ -1575,8 +1575,8 @@ LAB_0000909c:
              ((*(char *)(iVar26 + 9) != '\0' && (*(short *)(iVar30 + 0x3d0c) == 0x2401)))) ||
             ((*(char *)(iVar26 + 10) != '\0' && (*(short *)(iVar30 + 0x3d30) == 0x2401)))) ||
            ((*(char *)(iVar26 + 0xb) != '\0' && (*(short *)(iVar30 + 0x3d54) == 0x2401)))) {
-          *(undefined1 *)(param_1 + 0x53e4) = 1;
-          *(undefined **)(param_1 + 0x53dc) = puVar10;
+          *(undefined1 *)(glContext + 0x53e4) = 1;
+          *(undefined **)(glContext + 0x53dc) = puVar10;
           *(undefined **)(pcVar28 + -8) = puVar9;
         }
       }
@@ -1588,61 +1588,61 @@ LAB_0000909c:
       if (uVar6 != *(ushort *)(iVar26 + -100)) goto LAB_00008f68;
       if (*(char *)(iVar26 + 10) == '\0') {
         if (uVar6 == 0x2401) {
-          *(undefined1 *)(param_1 + 0x53e4) = 1;
-          *(undefined **)(param_1 + 0x53dc) = puVar22;
+          *(undefined1 *)(glContext + 0x53e4) = 1;
+          *(undefined **)(glContext + 0x53dc) = puVar22;
           *(undefined **)(pcVar28 + -8) = puVar21;
         }
         else if (uVar6 < 0x2402) {
           if (uVar6 == 0x2400) {
-            *(undefined1 *)(param_1 + 0x53e5) = 1;
-            *(undefined **)(param_1 + 0x53e0) = puVar24;
+            *(undefined1 *)(glContext + 0x53e5) = 1;
+            *(undefined **)(glContext + 0x53e0) = puVar24;
             *(undefined **)(pcVar28 + -4) = puVar23;
           }
           else {
 LAB_00008ef8:
-            *(undefined1 *)(param_1 + 0x53e5) = 1;
-            *(undefined1 *)(param_1 + 0x53e6) = 1;
-            *(undefined **)(param_1 + 0x53e0) = puVar16;
+            *(undefined1 *)(glContext + 0x53e5) = 1;
+            *(undefined1 *)(glContext + 0x53e6) = 1;
+            *(undefined **)(glContext + 0x53e0) = puVar16;
             *(undefined **)(pcVar28 + -4) = puVar15;
           }
         }
         else if (uVar6 == 0x2402) {
-          *(undefined1 *)(param_1 + 0x53e6) = 1;
-          *(undefined1 *)(param_1 + 0x53e5) = 1;
-          *(undefined **)(param_1 + 0x53e0) = puVar20;
+          *(undefined1 *)(glContext + 0x53e6) = 1;
+          *(undefined1 *)(glContext + 0x53e5) = 1;
+          *(undefined **)(glContext + 0x53e0) = puVar20;
           *(undefined **)(pcVar28 + -4) = puVar19;
         }
         else {
           if (uVar6 != 0x8511) goto LAB_00008ef8;
-          *(undefined1 *)(param_1 + 0x53e6) = 1;
-          *(undefined1 *)(param_1 + 0x53e5) = 1;
-          *(undefined **)(param_1 + 0x53e0) = puVar18;
+          *(undefined1 *)(glContext + 0x53e6) = 1;
+          *(undefined1 *)(glContext + 0x53e5) = 1;
+          *(undefined **)(glContext + 0x53e0) = puVar18;
           *(undefined **)(pcVar28 + -4) = puVar17;
         }
       }
       else {
         if (uVar6 != *(ushort *)(iVar26 + -0x40)) goto LAB_00008f68;
         if (uVar6 == 0x8511) {
-          *(undefined **)(param_1 + 0x53e0) = puVar14;
-          *(undefined1 *)(param_1 + 0x53e6) = 1;
+          *(undefined **)(glContext + 0x53e0) = puVar14;
+          *(undefined1 *)(glContext + 0x53e6) = 1;
           puVar29 = puVar13;
         }
         else {
           if (uVar6 != 0x8512) goto LAB_00008f68;
-          *(undefined1 *)(param_1 + 0x53e6) = 1;
-          *(undefined **)(param_1 + 0x53e0) = puVar29;
+          *(undefined1 *)(glContext + 0x53e6) = 1;
+          *(undefined **)(glContext + 0x53e0) = puVar29;
           puVar29 = PTR__gleMultiVtxTextureCoordGenReflectSTR_00111470;
         }
-        *(undefined1 *)(param_1 + 0x53e5) = 1;
+        *(undefined1 *)(glContext + 0x53e5) = 1;
         *(undefined **)(pcVar28 + -4) = puVar29;
       }
     }
     if ((iVar27 != 0) && (*pcVar28 != '\0')) {
-      *(undefined **)(param_1 + 0x53dc) = puVar8;
-      *(undefined **)(param_1 + 0x53e0) = puVar7;
+      *(undefined **)(glContext + 0x53dc) = puVar8;
+      *(undefined **)(glContext + 0x53e0) = puVar7;
     }
     if (*pcVar28 != cVar5) {
-      *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | 1;
+      *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 1;
     }
     iVar27 = iVar27 + 1;
     pcVar28 = pcVar28 + 0xc;
@@ -1650,18 +1650,18 @@ LAB_00008ef8:
     iVar26 = iVar26 + 0x94;
     iVar31 = iVar31 + -1;
     if (iVar31 == 0) {
-      if (*(char *)(param_1 + 0x53e6) == cVar4) {
+      if (*(char *)(glContext + 0x53e6) == cVar4) {
         return;
       }
-      ((void (*)())_gleUpdateInverseNeeds)(param_1);
+      ((void (*)())_gleUpdateInverseNeeds)(glContext);
       return;
     }
   } while( true );
 }
 
 /* _gleUpdateTextureParams @ 0x9190 (280 bytes) */
-int _gleUpdateTextureParams(param_1, param_2)
-  int param_1;
+int _gleUpdateTextureParams(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   undefined *puVar1;
@@ -1670,37 +1670,37 @@ int _gleUpdateTextureParams(param_1, param_2)
   int iVar3;
   uint uVar4;
   
-  if (*(char *)(param_1 + 0x3ce4) == '\0') {
-    uVar2 = *(uint *)(param_2 * 0x7c + param_1 + 0x3534) & 0x1f;
+  if (*(char *)(glContext + 0x3ce4) == '\0') {
+    uVar2 = *(uint *)(param_2 * 0x7c + glContext + 0x3534) & 0x1f;
   }
   else {
-    uVar2 = (uint)*(ushort *)(param_2 * 0x7c + param_1 + 0x3564);
+    uVar2 = (uint)*(ushort *)(param_2 * 0x7c + glContext + 0x3564);
   }
-  uVar4 = *(uint *)(param_1 + 0x514c);
-  iVar3 = param_1;
+  uVar4 = *(uint *)(glContext + 0x514c);
+  iVar3 = glContext;
   if ((uVar4 >> (param_2 & 0x3f) & 1) != -((int)-uVar2 >> 0x1f)) {
     if (-((int)-uVar2 >> 0x1f) == 0) {
-      *(uint *)(param_1 + 0x514c) =
+      *(uint *)(glContext + 0x514c) =
            uVar4 & (-2 << (param_2 & 0x1f) | 0xfffffffeU >> 0x20 - (param_2 & 0x1f));
-      *(uint *)(param_1 + 0x4980) = *(uint *)(param_1 + 0x4980) & ~(8 << (param_2 & 0x3f));
+      *(uint *)(glContext + 0x4980) = *(uint *)(glContext + 0x4980) & ~(8 << (param_2 & 0x3f));
     }
     else {
-      *(uint *)(param_1 + 0x514c) = uVar4 | 1 << (param_2 & 0x3f);
-      *(uint *)(param_1 + 0x4980) = *(uint *)(param_1 + 0x4980) | 8 << (param_2 & 0x3f);
+      *(uint *)(glContext + 0x514c) = uVar4 | 1 << (param_2 & 0x3f);
+      *(uint *)(glContext + 0x4980) = *(uint *)(glContext + 0x4980) | 8 << (param_2 & 0x3f);
     }
-    *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | 0x10000 << (param_2 & 0x3f);
-    ((void (*)())_gleSelectVertexSubmitFunc)(param_1);
+    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 0x10000 << (param_2 & 0x3f);
+    ((void (*)())_gleSelectVertexSubmitFunc)(glContext);
     puVar1 = PTR__gleSetClipInterpFunc_00112038;
-    *(undefined **)(param_1 + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-    *(undefined **)(param_1 + 0x49cc) = puVar1;
+    *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
+    *(undefined **)(glContext + 0x49cc) = puVar1;
     iVar3 = extraout_r3;
   }
-  *(uint *)(param_1 + 0x314) = *(uint *)(param_1 + 0x314) | 1 << (param_2 & 0x3f);
+  *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1 << (param_2 & 0x3f);
   return iVar3;
 }
 
 /* _gleUpdateFogData @ 0x92a8 (348 bytes) */
-double _gleUpdateFogData(int param_1)
+double _gleUpdateFogData(int glContext)
 {
   float fVar1;
   float fVar2;
@@ -1711,25 +1711,25 @@ double _gleUpdateFogData(int param_1)
   bool bVar7;
   double in_f1;
   
-  fVar1 = *(float *)(param_1 + 0x3158) - *(float *)(param_1 + 0x3154);
+  fVar1 = *(float *)(glContext + 0x3158) - *(float *)(glContext + 0x3154);
   bVar7 = fVar1 < FLOAT_00108e80;
-  *(float *)(param_1 + 0x315c) = fVar1;
+  *(float *)(glContext + 0x315c) = fVar1;
   if ((!bVar7) || (fVar2 = FLOAT_00108eb4, !(FLOAT_00108f3c < fVar1))) {
     fVar2 = FLOAT_00108e54 / fVar1;
   }
-  *(float *)(param_1 + 0x315c) = fVar2;
+  *(float *)(glContext + 0x315c) = fVar2;
   puVar6 = PTR__gleFogExp_00110e28;
-  if (*(char *)(param_1 + 0x316a) == '\0') {
-    uVar3 = *(uint *)(param_1 + 0x4980) & 0xfffffffb;
-    *(undefined2 *)(param_1 + 0x4fe8) = 0;
-    *(undefined **)(param_1 + 0x4fe4) = puVar6;
+  if (*(char *)(glContext + 0x316a) == '\0') {
+    uVar3 = *(uint *)(glContext + 0x4980) & 0xfffffffb;
+    *(undefined2 *)(glContext + 0x4fe8) = 0;
+    *(undefined **)(glContext + 0x4fe4) = puVar6;
   }
   else {
-    iVar5 = *(int *)(param_1 + 0x4854);
-    if (*(short *)(param_1 + 0x3164) == 0x800) {
+    iVar5 = *(int *)(glContext + 0x4854);
+    if (*(short *)(glContext + 0x3164) == 0x800) {
       uVar4 = 8;
     }
-    else if (*(short *)(param_1 + 0x3164) == 0x2601) {
+    else if (*(short *)(glContext + 0x3164) == 0x2601) {
       uVar4 = 4;
       puVar6 = PTR__gleFogLinear_00110e2c;
     }
@@ -1737,91 +1737,91 @@ double _gleUpdateFogData(int param_1)
       uVar4 = 0xc;
       puVar6 = PTR__gleFogExp2_00110e24;
     }
-    *(undefined **)(param_1 + 0x4fe4) = puVar6;
-    *(undefined2 *)(param_1 + 0x4fe8) = uVar4;
-    if (*(short *)(param_1 + 0x3166) == -0x7baf) {
-      *(ushort *)(param_1 + 0x4fe8) = *(ushort *)(param_1 + 0x4fe8) | 0x10;
+    *(undefined **)(glContext + 0x4fe4) = puVar6;
+    *(undefined2 *)(glContext + 0x4fe8) = uVar4;
+    if (*(short *)(glContext + 0x3166) == -0x7baf) {
+      *(ushort *)(glContext + 0x4fe8) = *(ushort *)(glContext + 0x4fe8) | 0x10;
       fVar1 = *(float *)(iVar5 + -0x1a4);
     }
     else {
       fVar1 = *(float *)(iVar5 + -0x1d8);
     }
-    in_f1 = (double)(**(double ( **)(int,double))(param_1 + 0x4fe4))(param_1, (double)fVar1);
+    in_f1 = (double)(**(double ( **)(int,double))(glContext + 0x4fe4))(glContext, (double)fVar1);
     *(float *)(iVar5 + -0x1b4) = (float)in_f1;
-    uVar3 = *(uint *)(param_1 + 0x4980) | 4;
+    uVar3 = *(uint *)(glContext + 0x4980) | 4;
   }
-  *(uint *)(param_1 + 0x4980) = uVar3;
-  *(uint *)(param_1 + 0x497c) = *(uint *)(param_1 + 0x497c) | 4;
-  *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | 1;
+  *(uint *)(glContext + 0x4980) = uVar3;
+  *(uint *)(glContext + 0x497c) = *(uint *)(glContext + 0x497c) | 4;
+  *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 1;
   return in_f1;
 }
 
 /* _gleUpdatePolyMode @ 0x9404 (408 bytes) */
-void _gleUpdatePolyMode(param_1)
-  int param_1;
+void _gleUpdatePolyMode(glContext)
+  int glContext;
 {
   char cVar1;
   undefined1 uVar2;
   bool bVar3;
   
-  cVar1 = *(char *)(param_1 + 0x34da);
-  *(bool *)(param_1 + 0x4fe2) = *(int *)(param_1 + 0x34d0) == 0x1b021b02;
-  if (*(char *)(param_1 + 0x4664) == '\0') {
+  cVar1 = *(char *)(glContext + 0x34da);
+  *(bool *)(glContext + 0x4fe2) = *(int *)(glContext + 0x34d0) == 0x1b021b02;
+  if (*(char *)(glContext + 0x4664) == '\0') {
     bVar3 = false;
-    if ((*(short *)(param_1 + 0x34d0) != *(short *)(param_1 + 0x34d2)) ||
-       ((*(char *)(param_1 + 0x30aa) != '\0' && (*(char *)(param_1 + 0x30ac) != '\0')))) {
+    if ((*(short *)(glContext + 0x34d0) != *(short *)(glContext + 0x34d2)) ||
+       ((*(char *)(glContext + 0x30aa) != '\0' && (*(char *)(glContext + 0x30ac) != '\0')))) {
       bVar3 = true;
     }
     uVar2 = 0;
     if ((bVar3) || (cVar1 != '\0')) {
       uVar2 = 1;
     }
-    *(undefined1 *)(param_1 + 0x4fe0) = uVar2;
+    *(undefined1 *)(glContext + 0x4fe0) = uVar2;
     uVar2 = 0;
     if (!bVar3) {
       if (cVar1 == '\0') goto LAB_0000951c;
-      if ((*(char *)(param_1 + 0x4fe2) != '\0') && (*(char *)(param_1 + 0x30aa) == '\0'))
+      if ((*(char *)(glContext + 0x4fe2) != '\0') && (*(char *)(glContext + 0x30aa) == '\0'))
       goto LAB_00009508;
     }
   }
   else {
     bVar3 = false;
-    if ((*(short *)(param_1 + 0x34d0) != *(short *)(param_1 + 0x34d2)) ||
-       (*(char *)(param_1 + 0x4666) != '\0')) {
+    if ((*(short *)(glContext + 0x34d0) != *(short *)(glContext + 0x34d2)) ||
+       (*(char *)(glContext + 0x4666) != '\0')) {
       bVar3 = true;
     }
     uVar2 = 0;
     if ((bVar3) || (cVar1 != '\0')) {
       uVar2 = 1;
     }
-    *(undefined1 *)(param_1 + 0x4fe0) = uVar2;
+    *(undefined1 *)(glContext + 0x4fe0) = uVar2;
     uVar2 = 0;
     if (!bVar3) {
       if (cVar1 == '\0') goto LAB_0000951c;
-      if (*(char *)(param_1 + 0x4fe2) != '\0') {
+      if (*(char *)(glContext + 0x4fe2) != '\0') {
 LAB_00009508:
         uVar2 = 0;
-        if (*(char *)(*(int *)(param_1 + 0x468c) + 0x78) != '\0') goto LAB_0000951c;
+        if (*(char *)(*(int *)(glContext + 0x468c) + 0x78) != '\0') goto LAB_0000951c;
       }
     }
   }
   uVar2 = 1;
 LAB_0000951c:
-  *(undefined1 *)(param_1 + 0x34de) = uVar2;
-  if ((*(int *)(param_1 + 0x4e1c) == 0x1c00) &&
-     ((**(uint **)(param_1 + 0x468c) >> 1 & 1) != (**(uint **)(param_1 + 0x468c) & 1))) {
-    bVar3 = SUB41(-(uint)(*(ushort *)(param_1 + 0x34d4) ^ 0x901) >> 0x1f,0);
+  *(undefined1 *)(glContext + 0x34de) = uVar2;
+  if ((*(int *)(glContext + 0x4e1c) == 0x1c00) &&
+     ((**(uint **)(glContext + 0x468c) >> 1 & 1) != (**(uint **)(glContext + 0x468c) & 1))) {
+    bVar3 = SUB41(-(uint)(*(ushort *)(glContext + 0x34d4) ^ 0x901) >> 0x1f,0);
   }
   else {
-    bVar3 = *(short *)(param_1 + 0x34d4) == 0x901;
+    bVar3 = *(short *)(glContext + 0x34d4) == 0x901;
   }
-  *(bool *)(param_1 + 0x4fe1) = bVar3;
+  *(bool *)(glContext + 0x4fe1) = bVar3;
   uVar2 = 2;
   if (cVar1 != '\0') {
-    uVar2 = *(short *)(param_1 + 0x34d6) == 0x404;
+    uVar2 = *(short *)(glContext + 0x34d6) == 0x404;
   }
-  *(undefined1 *)(param_1 + 0x4fe3) = uVar2;
-  *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x800000;
+  *(undefined1 *)(glContext + 0x4fe3) = uVar2;
+  *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800000;
   return;
 }
 
@@ -1847,7 +1847,7 @@ double _gleUpdateEvalData(param_1)
 }
 
 /* _gleUpdateViewScissorData @ 0x9644 (1892 bytes) */
-void _gleUpdateViewScissorData(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gleUpdateViewScissorData(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   float fVar1;
   float fVar2;
@@ -1880,16 +1880,16 @@ void _gleUpdateViewScissorData(int param_1,double fparam_1,double fparam_2,doubl
   double dVar29;
   
   dVar26 = DOUBLE_00108d58;
-  iVar9 = *(int *)(param_1 + 0x744c);
-  uVar24 = *(uint *)(param_1 + 0x1ba0);
-  uVar25 = *(uint *)(param_1 + 0x1ba4);
-  uVar21 = *(uint *)(param_1 + 0x1ba8);
-  uVar22 = *(uint *)(param_1 + 0x1bac);
+  iVar9 = *(int *)(glContext + 0x744c);
+  uVar24 = *(uint *)(glContext + 0x1ba0);
+  uVar25 = *(uint *)(glContext + 0x1ba4);
+  uVar21 = *(uint *)(glContext + 0x1ba8);
+  uVar22 = *(uint *)(glContext + 0x1bac);
   uVar16 = uVar24 + uVar21;
   uVar12 = uVar25 + uVar22;
   if (iVar9 == 0) {
-    uVar11 = *(uint *)(param_1 + 0x471c);
-    uVar23 = *(uint *)(param_1 + 0x4720);
+    uVar11 = *(uint *)(glContext + 0x471c);
+    uVar23 = *(uint *)(glContext + 0x4720);
   }
   else {
     uVar11 = (uint)*(ushort *)(iVar9 + 0xca);
@@ -1901,20 +1901,20 @@ void _gleUpdateViewScissorData(int param_1,double fparam_1,double fparam_2,doubl
   fVar2 = (float)((double)CONCAT44(0x43300000,uVar25 ^ 0x80000000) - DOUBLE_00108d58);
   fVar4 = (float)((double)CONCAT44(0x43300000,uVar22 ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e90;
-  *(float *)(param_1 + 0x4a2c) = fVar3;
-  *(float *)(param_1 + 0x4a34) = fVar4;
-  *(float *)(param_1 + 0x4a30) = fVar3 + fVar1;
-  *(float *)(param_1 + 19000) = fVar4 + fVar2;
+  *(float *)(glContext + 0x4a2c) = fVar3;
+  *(float *)(glContext + 0x4a34) = fVar4;
+  *(float *)(glContext + 0x4a30) = fVar3 + fVar1;
+  *(float *)(glContext + 19000) = fVar4 + fVar2;
   dVar28 = DOUBLE_00108d58;
-  if (*(int *)(param_1 + 0x4e1c) == 0x1c00) {
-    uVar20 = **(uint **)(param_1 + 0x468c);
-    if ((((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5434) == 0)) &&
-        (*(char *)(param_1 + 0x34f0) != '\0')) &&
-       (((uVar20 & 4) != 0 || (*(undefined **)(param_1 + 0x507c) == ((unsigned char *)0x00001101))))) {
-      uVar14 = *(uint *)(param_1 + 0x34e0);
-      uVar17 = *(uint *)(param_1 + 0x34e4);
-      uVar8 = *(int *)(param_1 + 0x34e8) + uVar14;
-      uVar10 = *(int *)(param_1 + 0x34ec) + uVar17;
+  if (*(int *)(glContext + 0x4e1c) == 0x1c00) {
+    uVar20 = **(uint **)(glContext + 0x468c);
+    if ((((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5434) == 0)) &&
+        (*(char *)(glContext + 0x34f0) != '\0')) &&
+       (((uVar20 & 4) != 0 || (*(undefined **)(glContext + 0x507c) == ((unsigned char *)0x00001101))))) {
+      uVar14 = *(uint *)(glContext + 0x34e0);
+      uVar17 = *(uint *)(glContext + 0x34e4);
+      uVar8 = *(int *)(glContext + 0x34e8) + uVar14;
+      uVar10 = *(int *)(glContext + 0x34ec) + uVar17;
       uVar15 = 0;
       if ((-1 < (int)uVar14) && (uVar15 = uVar14, (int)uVar11 < (int)uVar14)) {
         uVar15 = uVar11;
@@ -1954,12 +1954,12 @@ void _gleUpdateViewScissorData(int param_1,double fparam_1,double fparam_2,doubl
     if (((int)uVar15 <= (int)uVar8) && (uVar16 = uVar8, (int)uVar12 < (int)uVar8)) {
       uVar16 = uVar12;
     }
-    uVar14 = *(uint *)(param_1 + 0x4724);
-    uVar12 = *(uint *)(param_1 + 0x4728);
+    uVar14 = *(uint *)(glContext + 0x4724);
+    uVar12 = *(uint *)(glContext + 0x4728);
     uVar17 = uVar18 - uVar10;
     uVar8 = uVar16 - uVar15;
-    iVar9 = *(int *)(param_1 + 0x472c);
-    iVar19 = *(int *)(param_1 + 0x4730);
+    iVar9 = *(int *)(glContext + 0x472c);
+    iVar19 = *(int *)(glContext + 0x4730);
     fVar1 = (float)((double)CONCAT44(0x43300000,uVar14 ^ 0x80000000) - DOUBLE_00108d58);
     fVar2 = (float)((double)CONCAT44(0x43300000,uVar12 ^ 0x80000000) - DOUBLE_00108d58);
     fVar3 = (float)((double)CONCAT44(0x43300000,uVar17 ^ 0x80000000) - DOUBLE_00108d58);
@@ -1978,12 +1978,12 @@ void _gleUpdateViewScissorData(int param_1,double fparam_1,double fparam_2,doubl
       uVar13 = uVar10 + uVar14;
       uVar14 = uVar18 + uVar14;
       dVar26 = (double)CONCAT44(0x43300000,uVar13 ^ 0x80000000) - DOUBLE_00108d58;
-      *(float *)(param_1 + 0x1b70) = fVar6;
-      *(float *)(param_1 + 0x1b80) = fVar3 + fVar1;
-      *(undefined4 *)(param_1 + 0x4a44) = 0x3f800000;
-      *(float *)(param_1 + 0x4a48) = fVar1;
-      *(float *)(param_1 + 0xf0) = (float)dVar26;
-      *(float *)(param_1 + 0x100) =
+      *(float *)(glContext + 0x1b70) = fVar6;
+      *(float *)(glContext + 0x1b80) = fVar3 + fVar1;
+      *(undefined4 *)(glContext + 0x4a44) = 0x3f800000;
+      *(float *)(glContext + 0x4a48) = fVar1;
+      *(float *)(glContext + 0xf0) = (float)dVar26;
+      *(float *)(glContext + 0x100) =
            (float)((double)CONCAT44(0x43300000,uVar14 ^ 0x80000000) - dVar28);
       if (uVar10 == 0) {
         uVar13 = uVar13 - iVar9;
@@ -1998,12 +1998,12 @@ void _gleUpdateViewScissorData(int param_1,double fparam_1,double fparam_2,doubl
       fVar5 = (float)((double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) - DOUBLE_00108d58);
       dVar28 = (double)CONCAT44(0x43300000,uVar13 ^ 0x80000000) - DOUBLE_00108d58;
       dVar26 = (double)CONCAT44(0x43300000,uVar14 ^ 0x80000000) - DOUBLE_00108d58;
-      *(undefined4 *)(param_1 + 0x4a44) = 0xbf800000;
-      *(float *)(param_1 + 0x1b70) = -fVar6;
-      *(float *)(param_1 + 0x4a48) = fVar5 + fVar1;
-      *(float *)(param_1 + 0x1b80) = (fVar5 - fVar3) + fVar1;
-      *(float *)(param_1 + 0xf0) = (float)dVar28;
-      *(float *)(param_1 + 0x100) = (float)dVar26;
+      *(undefined4 *)(glContext + 0x4a44) = 0xbf800000;
+      *(float *)(glContext + 0x1b70) = -fVar6;
+      *(float *)(glContext + 0x4a48) = fVar5 + fVar1;
+      *(float *)(glContext + 0x1b80) = (fVar5 - fVar3) + fVar1;
+      *(float *)(glContext + 0xf0) = (float)dVar28;
+      *(float *)(glContext + 0x100) = (float)dVar26;
       if (uVar10 == 0) {
         uVar14 = uVar14 + iVar9;
       }
@@ -2016,12 +2016,12 @@ void _gleUpdateViewScissorData(int param_1,double fparam_1,double fparam_2,doubl
       uVar11 = uVar15 + uVar12;
       uVar12 = uVar16 + uVar12;
       dVar28 = (double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) - DOUBLE_00108d58;
-      *(float *)(param_1 + 0x1b74) = fVar7;
-      *(undefined4 *)(param_1 + 0x4a4c) = 0x3f800000;
-      *(float *)(param_1 + 0x4a50) = fVar2;
-      *(float *)(param_1 + 0x1b84) = fVar4 + fVar2;
-      *(float *)(param_1 + 0xf4) = (float)dVar28;
-      *(float *)(param_1 + 0x104) =
+      *(float *)(glContext + 0x1b74) = fVar7;
+      *(undefined4 *)(glContext + 0x4a4c) = 0x3f800000;
+      *(float *)(glContext + 0x4a50) = fVar2;
+      *(float *)(glContext + 0x1b84) = fVar4 + fVar2;
+      *(float *)(glContext + 0xf4) = (float)dVar28;
+      *(float *)(glContext + 0x104) =
            (float)((double)CONCAT44(0x43300000,uVar12 ^ 0x80000000) - dVar26);
       if (uVar15 == 0) {
         uVar11 = uVar11 - iVar19;
@@ -2036,12 +2036,12 @@ void _gleUpdateViewScissorData(int param_1,double fparam_1,double fparam_2,doubl
       fVar1 = (float)((double)CONCAT44(0x43300000,uVar23 ^ 0x80000000) - DOUBLE_00108d58);
       dVar28 = (double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) - DOUBLE_00108d58;
       dVar26 = (double)CONCAT44(0x43300000,uVar12 ^ 0x80000000) - DOUBLE_00108d58;
-      *(undefined4 *)(param_1 + 0x4a4c) = 0xbf800000;
-      *(float *)(param_1 + 0x4a50) = fVar1 + fVar2;
-      *(float *)(param_1 + 0x1b74) = -fVar7;
-      *(float *)(param_1 + 0x1b84) = (fVar1 - fVar4) + fVar2;
-      *(float *)(param_1 + 0xf4) = (float)dVar28;
-      *(float *)(param_1 + 0x104) = (float)dVar26;
+      *(undefined4 *)(glContext + 0x4a4c) = 0xbf800000;
+      *(float *)(glContext + 0x4a50) = fVar1 + fVar2;
+      *(float *)(glContext + 0x1b74) = -fVar7;
+      *(float *)(glContext + 0x1b84) = (fVar1 - fVar4) + fVar2;
+      *(float *)(glContext + 0xf4) = (float)dVar28;
+      *(float *)(glContext + 0x104) = (float)dVar26;
       if (uVar15 == 0) {
         uVar12 = uVar12 + iVar19;
       }
@@ -2053,59 +2053,59 @@ void _gleUpdateViewScissorData(int param_1,double fparam_1,double fparam_2,doubl
     dVar27 = (double)CONCAT44(0x43300000,uVar14 ^ 0x80000000) - DOUBLE_00108d58;
     dVar29 = (double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) - DOUBLE_00108d58;
     dVar28 = (double)CONCAT44(0x43300000,uVar12 ^ 0x80000000) - DOUBLE_00108d58;
-    *(float *)(param_1 + 0x110) =
+    *(float *)(glContext + 0x110) =
          (float)((double)CONCAT44(0x43300000,uVar13 ^ 0x80000000) - DOUBLE_00108d58);
-    *(float *)(param_1 + 0x118) = (float)dVar27;
-    *(float *)(param_1 + 0x114) = (float)dVar29;
-    *(float *)(param_1 + 0x11c) = (float)dVar28;
+    *(float *)(glContext + 0x118) = (float)dVar27;
+    *(float *)(glContext + 0x114) = (float)dVar29;
+    *(float *)(glContext + 0x11c) = (float)dVar28;
     fVar1 = FLOAT_00108e54;
     if ((uVar17 == 0) || (uVar8 == 0)) {
-      *(undefined4 *)(param_1 + 0x4a24) = 0x3f800000;
-      *(undefined4 *)(param_1 + 0x4a28) = 0;
-      *(undefined4 *)(param_1 + 0x4a1c) = 0x3f800000;
-      *(undefined4 *)(param_1 + 0x4a20) = 0;
+      *(undefined4 *)(glContext + 0x4a24) = 0x3f800000;
+      *(undefined4 *)(glContext + 0x4a28) = 0;
+      *(undefined4 *)(glContext + 0x4a1c) = 0x3f800000;
+      *(undefined4 *)(glContext + 0x4a20) = 0;
     }
     else {
       fVar2 = (float)((double)CONCAT44(0x43300000,uVar17 ^ 0x80000000) - dVar26);
       fVar3 = (float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - dVar26);
-      *(float *)(param_1 + 0x4a1c) =
+      *(float *)(glContext + 0x4a1c) =
            (float)((double)CONCAT44(0x43300000,uVar21 ^ 0x80000000) - dVar26) / fVar2;
-      *(float *)(param_1 + 0x4a24) =
+      *(float *)(glContext + 0x4a24) =
            (float)((double)CONCAT44(0x43300000,uVar22 ^ 0x80000000) - dVar26) / fVar3;
-      *(float *)(param_1 + 0x4a28) =
+      *(float *)(glContext + 0x4a28) =
            (float)((double)CONCAT44(0x43300000,(uVar25 - uVar15) * 2 + uVar22 ^ 0x80000000) - dVar26
                   ) / fVar3 - fVar1;
-      *(float *)(param_1 + 0x4a20) =
+      *(float *)(glContext + 0x4a20) =
            (float)((double)CONCAT44(0x43300000,(uVar24 - uVar10) * 2 + uVar21 ^ 0x80000000) - dVar26
                   ) / fVar2 - fVar1;
     }
   }
   else {
-    *(float *)(param_1 + 0x1b70) = fVar3;
-    *(float *)(param_1 + 0x1b74) = fVar4;
+    *(float *)(glContext + 0x1b70) = fVar3;
+    *(float *)(glContext + 0x1b74) = fVar4;
     fVar6 = (float)((double)CONCAT44(0x43300000,uVar16 ^ 0x80000000) - dVar26);
-    *(float *)(param_1 + 0x1b80) = fVar3 + fVar1;
-    *(float *)(param_1 + 0x1b84) = fVar4 + fVar2;
+    *(float *)(glContext + 0x1b80) = fVar3 + fVar1;
+    *(float *)(glContext + 0x1b84) = fVar4 + fVar2;
     fVar3 = (float)((double)CONCAT44(0x43300000,uVar12 ^ 0x80000000) - dVar26);
-    *(undefined4 *)(param_1 + 0x4a4c) = 0x3f800000;
-    *(undefined4 *)(param_1 + 0x4a50) = 0;
-    *(float *)(param_1 + 0xf0) = fVar1;
-    *(float *)(param_1 + 0x100) = fVar6;
-    *(float *)(param_1 + 0xf4) = fVar2;
-    *(float *)(param_1 + 0x104) = fVar3;
-    *(undefined4 *)(param_1 + 0x4a1c) = 0x3f800000;
-    *(undefined4 *)(param_1 + 0x4a24) = 0x3f800000;
-    *(undefined4 *)(param_1 + 0x4a20) = 0;
-    *(undefined4 *)(param_1 + 0x4a28) = 0;
-    *(undefined4 *)(param_1 + 0x4a44) = 0x3f800000;
-    *(undefined4 *)(param_1 + 0x4a48) = 0;
-    *(float *)(param_1 + 0x110) = fVar1;
-    *(float *)(param_1 + 0x118) = fVar6;
-    *(float *)(param_1 + 0x114) = fVar2;
-    *(float *)(param_1 + 0x11c) = fVar3;
+    *(undefined4 *)(glContext + 0x4a4c) = 0x3f800000;
+    *(undefined4 *)(glContext + 0x4a50) = 0;
+    *(float *)(glContext + 0xf0) = fVar1;
+    *(float *)(glContext + 0x100) = fVar6;
+    *(float *)(glContext + 0xf4) = fVar2;
+    *(float *)(glContext + 0x104) = fVar3;
+    *(undefined4 *)(glContext + 0x4a1c) = 0x3f800000;
+    *(undefined4 *)(glContext + 0x4a24) = 0x3f800000;
+    *(undefined4 *)(glContext + 0x4a20) = 0;
+    *(undefined4 *)(glContext + 0x4a28) = 0;
+    *(undefined4 *)(glContext + 0x4a44) = 0x3f800000;
+    *(undefined4 *)(glContext + 0x4a48) = 0;
+    *(float *)(glContext + 0x110) = fVar1;
+    *(float *)(glContext + 0x118) = fVar6;
+    *(float *)(glContext + 0x114) = fVar2;
+    *(float *)(glContext + 0x11c) = fVar3;
   }
-  *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | 1;
-  *(uint *)(param_1 + 0x318) = *(uint *)(param_1 + 0x318) | 1;
+  *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 1;
+  *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 1;
   return;
 }
 
@@ -2118,8 +2118,8 @@ void _gleSelectVertexAddMaterialFunc(param_1)
 }
 
 /* _gleSelectVertexSubmitFunc @ 0x9dc8 (272 bytes) */
-void _gleSelectVertexSubmitFunc(param_1)
-  int param_1;
+void _gleSelectVertexSubmitFunc(glContext)
+  int glContext;
 {
   undefined *puVar1;
   undefined *puVar2;
@@ -2127,50 +2127,50 @@ void _gleSelectVertexSubmitFunc(param_1)
   int iVar3;
   
   puVar1 = PTR__gleSetVertexEval2Func_00112068;
-  *(undefined **)(param_1 + 0x4888) = PTR__gleSetVertexSubmitFunc_0011242c;
+  *(undefined **)(glContext + 0x4888) = PTR__gleSetVertexSubmitFunc_0011242c;
   puVar2 = PTR__gleSetVertexEval1Func_0011206c;
-  *(undefined4 *)(param_1 + 0x4890) = 0;
-  *(undefined **)(param_1 + 0x4898) = puVar2;
-  *(undefined **)(param_1 + 0x489c) = puVar1;
-  if (((*(int *)(param_1 + 0x4e1c) == 0x1c00) && (*(char *)(param_1 + 0x7580) != '\0')) &&
-     (*(int *)(param_1 + 0x48d0) != 0)) {
-    sVar4 = (ushort)*(byte *)(*(int *)(param_1 + 0x48d0) + 2) << 2;
-    *(short *)(param_1 + 0x4880) = sVar4;
-    if (*(int *)(param_1 + 0x48d4) != 0) {
-      sVar4 = (ushort)*(byte *)(*(int *)(param_1 + 0x48d4) + 2) << 2;
+  *(undefined4 *)(glContext + 0x4890) = 0;
+  *(undefined **)(glContext + 0x4898) = puVar2;
+  *(undefined **)(glContext + 0x489c) = puVar1;
+  if (((*(int *)(glContext + 0x4e1c) == 0x1c00) && (*(char *)(glContext + 0x7580) != '\0')) &&
+     (*(int *)(glContext + 0x48d0) != 0)) {
+    sVar4 = (ushort)*(byte *)(*(int *)(glContext + 0x48d0) + 2) << 2;
+    *(short *)(glContext + 0x4880) = sVar4;
+    if (*(int *)(glContext + 0x48d4) != 0) {
+      sVar4 = (ushort)*(byte *)(*(int *)(glContext + 0x48d4) + 2) << 2;
     }
-    *(short *)(param_1 + 0x4882) = sVar4;
+    *(short *)(glContext + 0x4882) = sVar4;
     return;
   }
-  if (*(char *)(param_1 + 0x4664) == '\0') {
-    iVar3 = *(int *)(param_1 + 0x5434);
+  if (*(char *)(glContext + 0x4664) == '\0') {
+    iVar3 = *(int *)(glContext + 0x5434);
     if (iVar3 == 0) {
-      *(undefined2 *)(param_1 + 0x487c) = 0x100;
-      *(undefined4 *)(param_1 + 0x485c) = *(undefined4 *)(param_1 + 0x4860);
+      *(undefined2 *)(glContext + 0x487c) = 0x100;
+      *(undefined4 *)(glContext + 0x485c) = *(undefined4 *)(glContext + 0x4860);
       return;
     }
   }
   else {
-    iVar3 = *(int *)(param_1 + 0x5434);
+    iVar3 = *(int *)(glContext + 0x5434);
   }
   if (iVar3 == 0) {
-    iVar3 = *(int *)(*(int *)(param_1 + 0x5420) + 0x4cc);
+    iVar3 = *(int *)(*(int *)(glContext + 0x5420) + 0x4cc);
   }
   else {
-    iVar3 = *(int *)(*(int *)(*(int *)(param_1 + 0x5430) + 0x20) + 0x508);
+    iVar3 = *(int *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x508);
   }
   if (iVar3 != 0) {
     iVar3 = *(int *)(iVar3 + 0x20) * 0x10;
-    *(short *)(param_1 + 0x487c) = (short)iVar3;
-    *(int *)(param_1 + 0x485c) = *(int *)(param_1 + 0x4854) + iVar3 * *(int *)(param_1 + 0x4878);
+    *(short *)(glContext + 0x487c) = (short)iVar3;
+    *(int *)(glContext + 0x485c) = *(int *)(glContext + 0x4854) + iVar3 * *(int *)(glContext + 0x4878);
     return;
   }
   return;
 }
 
 /* _gliSetCurrentPluginDispatchTable @ 0x9ed8 (288 bytes) */
-void _gliSetCurrentPluginDispatchTable(param_1)
-  int param_1;
+void _gliSetCurrentPluginDispatchTable(glContext)
+  int glContext;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -2186,36 +2186,36 @@ void _gliSetCurrentPluginDispatchTable(param_1)
   double in_f8;
   
   puVar1 = PTR__gliDispatchNoop_00111e14;
-  if (*(char *)(param_1 + 0x4692) == '\0') {
-    uVar3 = (**(code **)(param_1 + 0x4784))
-                      (*(undefined4 *)(param_1 + 0x4688),param_1 + 0x4698,param_1 + 0x471c);
-    ((void (*)())_gleUpdateViewScissorData)(param_1,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  if (*(char *)(glContext + 0x4692) == '\0') {
+    uVar3 = (**(code **)(glContext + 0x4784))
+                      (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,glContext + 0x471c);
+    ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
     if ((uVar3 & 4) == 0) {
-      *(undefined1 *)(param_1 + 0x7581) = 4;
+      *(undefined1 *)(glContext + 0x7581) = 4;
     }
-    _gleUpdateDispatchCodeChange(param_1,uVar3);
+    _gleUpdateDispatchCodeChange(glContext,uVar3);
     return;
   }
   iVar4 = 0x21;
-  puVar2 = (undefined4 *)(param_1 + 0x4698);
+  puVar2 = (undefined4 *)(glContext + 0x4698);
   do {
     *puVar2 = puVar1;
     puVar2 = puVar2 + 1;
     iVar4 = iVar4 + -1;
   } while (iVar4 != 0);
-  if ((*(int *)(param_1 + 0x48d0) != 0) || (*(int *)(param_1 + 0x48d4) != 0)) {
-    *(undefined4 *)(param_1 + 0x48d0) = 0;
-    *(undefined4 *)(param_1 + 0x48d4) = 0;
-    ((void (*)())_gleUpdatePrimitiveData)(param_1);
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xc) == 0);
+  if ((*(int *)(glContext + 0x48d0) != 0) || (*(int *)(glContext + 0x48d4) != 0)) {
+    *(undefined4 *)(glContext + 0x48d0) = 0;
+    *(undefined4 *)(glContext + 0x48d4) = 0;
+    ((void (*)())_gleUpdatePrimitiveData)(glContext);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xc) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xc) =
          PTR__glArrayElement_Exec_001120e8;
-    _gleUpdateDrawArraysFuncs(param_1);
-    ((void (*)())_gleSelectVertexSubmitFunc)(param_1);
-    *(undefined4 *)(param_1 + 0x488c) = 0;
-    *(undefined4 *)(param_1 + 0x4890) = 0;
-    *(undefined4 *)(param_1 + 0x4894) = 0;
+    _gleUpdateDrawArraysFuncs(glContext);
+    ((void (*)())_gleSelectVertexSubmitFunc)(glContext);
+    *(undefined4 *)(glContext + 0x488c) = 0;
+    *(undefined4 *)(glContext + 0x4890) = 0;
+    *(undefined4 *)(glContext + 0x4894) = 0;
   }
   return;
 }
@@ -2961,2180 +2961,2180 @@ void _gliInitDispatchTable(param_1)
 }
 
 /* _gliExecDispatchTable @ 0xbf80 (23616 bytes) */
-void _gliExecDispatchTable(param_1)
-  int param_1;
+void _gliExecDispatchTable(glContext)
+  int glContext;
 {
   int iVar1;
   undefined *puVar2;
   uint uVar3;
   uint uVar4;
   
-  uVar3 = -(uint)(**(int **)(param_1 + 0x4684) == 0);
-  *(undefined **)(*(uint *)(param_1 + 0x4680) & uVar3 | (uint)*(int **)(param_1 + 0x4684) & ~uVar3)
+  uVar3 = -(uint)(**(int **)(glContext + 0x4684) == 0);
+  *(undefined **)(*(uint *)(glContext + 0x4680) & uVar3 | (uint)*(int **)(glContext + 0x4684) & ~uVar3)
        = PTR__glAccum_Exec_00113b38;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 4) == 0);
-  *(undefined **)((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 4)
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 4) == 0);
+  *(undefined **)((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 4)
        = PTR__glAlphaFunc_Exec_00113b34;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xc) =
        PTR__glArrayElement_Exec_001120e8;
-  if ((*(char *)(param_1 + 0x759c) == '\0') || (*(char *)(param_1 + 0x759d) == '\0')) {
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x10) == 0);
-    uVar3 = *(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3;
+  if ((*(char *)(glContext + 0x759c) == '\0') || (*(char *)(glContext + 0x759d) == '\0')) {
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10) == 0);
+    uVar3 = *(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3;
     puVar2 = PTR__glBegin_NoopExec_00112078;
   }
   else {
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x10) == 0);
-    uVar3 = *(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3;
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10) == 0);
+    uVar3 = *(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3;
     puVar2 = PTR__glBegin_Exec_00112074;
   }
   *(undefined **)(uVar3 + 0x10) = puVar2;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x14) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x14) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x14) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x14) =
        PTR__glBindTexture_Exec_00113b30;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x18) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x18) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x18) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x18) =
        PTR__glBitmap_Exec_0011207c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x1c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x1c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x1c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x1c) =
        PTR__glBlendFunc_Exec_00113b2c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x20) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x20) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x20) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x20) =
        PTR__glCallList_Exec_00113b28;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x24) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x24) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x24) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x24) =
        PTR__glCallLists_Exec_00113b24;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x28) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x28) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x28) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x28) =
        PTR__glClear_Exec_0011209c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2c) =
        PTR__glClearAccum_Exec_00113b20;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x30) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x30) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x30) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x30) =
        PTR__glClearColor_Exec_00113b1c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x34) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x34) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x34) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x34) =
        PTR__glClearDepth_Exec_00113b18;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x38) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x38) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x38) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x38) =
        PTR__glClearIndex_Exec_00113b14;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3c) =
        PTR__glClearStencil_Exec_00113b10;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x40) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x40) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x40) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x40) =
        PTR__glClipPlane_Exec_00113b0c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x44) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x44) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x44) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x44) =
        PTR__glColor3b_Exec_00113b08;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x48) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x48) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x48) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x48) =
        PTR__glColor3bv_Exec_00113b04;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4c) =
        PTR__glColor3d_Exec_00113b00;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x50) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x50) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x50) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x50) =
        PTR__glColor3dv_Exec_00113afc;
-  if (*(char *)(param_1 + 0x4df8) == '\0') {
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x54) == 0);
+  if (*(char *)(glContext + 0x4df8) == '\0') {
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x54) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x54) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x54) =
          PTR__glColor3f_NoColorMat_Exec_00112178;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x58) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x58) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x58) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x58) =
          PTR__glColor3fv_NoColorMat_Exec_00112174;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x94) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x94) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x94) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x94) =
          PTR__glColor4f_NoColorMat_Exec_00112170;
-    uVar4 = *(uint *)(param_1 + 0x4684);
-    uVar3 = *(uint *)(param_1 + 0x4680);
+    uVar4 = *(uint *)(glContext + 0x4684);
+    uVar3 = *(uint *)(glContext + 0x4680);
     iVar1 = *(int *)(uVar4 + 0x98);
     puVar2 = PTR__glColor4fv_NoColorMat_Exec_0011216c;
   }
   else {
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x54) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x54) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x54) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x54) =
          PTR__glColor3f_ColorMat_Exec_00112188;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x58) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x58) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x58) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x58) =
          PTR__glColor3fv_ColorMat_Exec_00112184;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x94) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x94) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x94) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x94) =
          PTR__glColor4f_ColorMat_Exec_00112180;
-    uVar4 = *(uint *)(param_1 + 0x4684);
-    uVar3 = *(uint *)(param_1 + 0x4680);
+    uVar4 = *(uint *)(glContext + 0x4684);
+    uVar3 = *(uint *)(glContext + 0x4680);
     iVar1 = *(int *)(uVar4 + 0x98);
     puVar2 = PTR__glColor4fv_ColorMat_Exec_0011217c;
   }
   *(undefined **)((uVar3 & -(uint)(iVar1 == 0) | uVar4 & ~-(uint)(iVar1 == 0)) + 0x98) = puVar2;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5c) =
        PTR__glColor3i_Exec_00113af8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x60) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x60) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x60) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x60) =
        PTR__glColor3iv_Exec_00113af4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 100) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 100) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 100) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 100) =
        PTR__glColor3s_Exec_00113af0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x68) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x68) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x68) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x68) =
        PTR__glColor3sv_Exec_00113aec;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6c) =
        PTR__glColor3ub_Exec_00113ae8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x70) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x70) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x70) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x70) =
        PTR__glColor3ubv_Exec_00113ae4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x74) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x74) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x74) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x74) =
        PTR__glColor3ui_Exec_00113ae0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x78) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x78) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x78) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x78) =
        PTR__glColor3uiv_Exec_00113adc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7c) =
        PTR__glColor3us_Exec_00113ad8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x80) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x80) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x80) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x80) =
        PTR__glColor3usv_Exec_00113ad4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x84) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x84) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x84) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x84) =
        PTR__glColor4b_Exec_00113ad0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x88) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x88) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x88) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x88) =
        PTR__glColor4bv_Exec_00113acc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8c) =
        PTR__glColor4d_Exec_00113ac8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x90) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x90) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x90) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x90) =
        PTR__glColor4dv_Exec_00113ac4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x9c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x9c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x9c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x9c) =
        PTR__glColor4i_Exec_00113ac0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa0) =
        PTR__glColor4iv_Exec_00113abc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa4) =
        PTR__glColor4s_Exec_00113ab8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa8) =
        PTR__glColor4sv_Exec_00113ab4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xac) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xac) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xac) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xac) =
        PTR__glColor4ub_Exec_00113ab0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xb0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xb0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xb0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xb0) =
        PTR__glColor4ubv_Exec_00113aac;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xb4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xb4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xb4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xb4) =
        PTR__glColor4ui_Exec_00113aa8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xb8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xb8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xb8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xb8) =
        PTR__glColor4uiv_Exec_00113aa4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xbc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xbc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xbc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xbc) =
        PTR__glColor4us_Exec_00113aa0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xc0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xc0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xc0) =
        PTR__glColor4usv_Exec_00113a9c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xc4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xc4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xc4) =
        PTR__glColorMask_Exec_00113a98;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 200) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 200) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 200) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 200) =
        PTR__glColorMaterial_Exec_00113a94;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xd0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xd0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xd0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xd0) =
        PTR__glCopyPixels_Exec_00112098;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xd4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xd4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xd4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xd4) =
        PTR__glCopyTexImage1D_Exec_00112094;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xd8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xd8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xd8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xd8) =
        PTR__glCopyTexImage2D_Exec_00112090;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xdc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xdc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xdc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xdc) =
        PTR__glCopyTexSubImage1D_Exec_0011208c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xe0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xe0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xe0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xe0) =
        PTR__glCopyTexSubImage2D_Exec_00112088;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xe4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xe4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xe4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xe4) =
        PTR__glCullFace_Exec_00113a90;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xf0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xf0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xf0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xf0) =
        PTR__glDepthFunc_Exec_00113a8c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xf4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xf4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xf4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xf4) =
        PTR__glDepthMask_Exec_00113a88;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xf8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xf8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xf8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xf8) =
        PTR__glDepthRange_Exec_00113a84;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xfc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xfc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xfc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xfc) =
        PTR__glDisable_Exec_00113a80;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x104) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x104) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x104) =
        PTR__glDrawArrays_Exec_001120e4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x108) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x108) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x108) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x108) =
        PTR__glDrawBuffer_Exec_00113a7c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x10c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x10c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x10c) =
        PTR__glDrawElements_Exec_001120e0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x110) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x110) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x110) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x110) =
        PTR__glDrawPixels_Exec_00112080;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x114) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x114) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x114) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x114) =
        PTR__glEdgeFlag_Exec_00113a78;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x11c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x11c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x11c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x11c) =
        PTR__glEdgeFlagv_Exec_00113a74;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x120) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x120) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x120) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x120) =
        PTR__glEnable_Exec_00113a70;
-  if ((*(char *)(param_1 + 0x7580) != '\0') && (*(int *)(param_1 + 0x4e1c) == 0x1c00)) {
-    if ((*(int *)(param_1 + 0x468c) == 0) || (*(char *)(*(int *)(param_1 + 0x468c) + 0x7a) == '\0'))
+  if ((*(char *)(glContext + 0x7580) != '\0') && (*(int *)(glContext + 0x4e1c) == 0x1c00)) {
+    if ((*(int *)(glContext + 0x468c) == 0) || (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0'))
     {
-      uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-      uVar3 = *(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3;
+      uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+      uVar3 = *(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3;
       puVar2 = PTR__glEndRDirty_Exec_00112160;
       goto LAB_0000ccc0;
     }
-    if (*(char *)(param_1 + 0x4df8) == '\0') {
-      uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-      uVar3 = *(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3;
+    if (*(char *)(glContext + 0x4df8) == '\0') {
+      uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+      uVar3 = *(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3;
       puVar2 = PTR__glEndNoMat_Exec_00112168;
       goto LAB_0000ccc0;
     }
   }
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x128) == 0);
-  uVar3 = *(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3;
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x128) == 0);
+  uVar3 = *(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3;
   puVar2 = PTR__glEnd_Exec_00112164;
 LAB_0000ccc0:
   *(undefined **)(uVar3 + 0x128) = puVar2;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x130) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x130) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x130) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x130) =
        PTR__glEvalCoord1d_Exec_00113a6c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x134) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x134) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x134) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x134) =
        PTR__glEvalCoord1dv_Exec_00113a68;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x138) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x138) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x138) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x138) =
        PTR__glEvalCoord1f_Exec_00113a64;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x13c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x13c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x13c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x13c) =
        PTR__glEvalCoord1fv_Exec_00113a60;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x140) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x140) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x140) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x140) =
        PTR__glEvalCoord2d_Exec_00113a5c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x144) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x144) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x144) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x144) =
        PTR__glEvalCoord2dv_Exec_00113a58;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x148) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x148) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x148) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x148) =
        PTR__glEvalCoord2f_Exec_00113a54;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x14c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x14c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x14c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x14c) =
        PTR__glEvalCoord2fv_Exec_00113a50;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x150) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x150) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x150) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x150) =
        PTR__glEvalMesh1_Exec_00113a4c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x154) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x154) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x154) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x154) =
        PTR__glEvalMesh2_Exec_00113a48;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x158) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x158) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x158) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x158) =
        PTR__glEvalPoint1_Exec_00113a44;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x15c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x15c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x15c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x15c) =
        PTR__glEvalPoint2_Exec_00113a40;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x16c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x16c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x16c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x16c) =
        PTR__glFogf_Exec_00113a3c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x170) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x170) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x170) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x170) =
        PTR__glFogfv_Exec_00113a38;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x174) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x174) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x174) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x174) =
        PTR__glFogi_Exec_00113a34;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x178) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x178) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x178) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x178) =
        PTR__glFogiv_Exec_00113a30;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x17c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x17c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x17c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x17c) =
        PTR__glFrontFace_Exec_00113a2c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x180) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x180) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x180) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x180) =
        PTR__glFrustum_Exec_00113a28;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x200) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x200) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x200) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x200) =
        PTR__glHint_Exec_00113a24;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x204) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x204) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x204) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x204) =
        PTR__glIndexMask_Exec_00113a20;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x20c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x20c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x20c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x20c) =
        PTR__glIndexd_Exec_00113a1c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x210) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x210) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x210) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x210) =
        PTR__glIndexdv_Exec_00113a18;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x214) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x214) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x214) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x214) =
        PTR__glIndexf_Exec_00113a14;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x218) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x218) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x218) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x218) =
        PTR__glIndexfv_Exec_00113a10;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x21c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x21c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x21c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x21c) =
        PTR__glIndexi_Exec_00113a0c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x220) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x220) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x220) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x220) =
        PTR__glIndexiv_Exec_00113a08;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x224) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x224) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x224) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x224) =
        PTR__glIndexs_Exec_00113a04;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x228) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x228) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x228) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x228) =
        PTR__glIndexsv_Exec_00113a00;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x22c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x22c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x22c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x22c) =
        PTR__glIndexub_Exec_001139fc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x230) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x230) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x230) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x230) =
        PTR__glIndexubv_Exec_001139f8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x234) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x234) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x234) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x234) =
        PTR__glInitNames_Exec_001139f4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x248) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x248) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x248) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x248) =
        PTR__glLightModelf_Exec_001139f0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x24c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x24c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x24c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x24c) =
        PTR__glLightModelfv_Exec_001139ec;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x250) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x250) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x250) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x250) =
        PTR__glLightModeli_Exec_001139e8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x254) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x254) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x254) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x254) =
        PTR__glLightModeliv_Exec_001139e4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 600) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 600) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 600) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 600) =
        PTR__glLightf_Exec_001139e0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x25c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x25c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x25c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x25c) =
        PTR__glLightfv_Exec_001139dc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x260) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x260) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x260) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x260) =
        PTR__glLighti_Exec_001139d8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x264) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x264) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x264) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x264) =
        PTR__glLightiv_Exec_001139d4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x268) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x268) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x268) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x268) =
        PTR__glLineStipple_Exec_001139d0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x26c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x26c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x26c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x26c) =
        PTR__glLineWidth_Exec_001139cc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x270) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x270) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x270) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x270) =
        PTR__glListBase_Exec_001139c8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x274) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x274) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x274) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x274) =
        PTR__glLoadIdentity_Exec_001139c4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x278) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x278) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x278) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x278) =
        PTR__glLoadMatrixd_Exec_001139c0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x27c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x27c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x27c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x27c) =
        PTR__glLoadMatrixf_Exec_001139bc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x280) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x280) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x280) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x280) =
        PTR__glLoadName_Exec_001139b8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x284) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x284) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x284) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x284) =
        PTR__glLogicOp_Exec_001139b4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x288) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x288) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x288) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x288) =
        PTR__glMap1d_Exec_001139b0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x28c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x28c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x28c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x28c) =
        PTR__glMap1f_Exec_001139ac;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x290) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x290) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x290) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x290) =
        PTR__glMap2d_Exec_001139a8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x294) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x294) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x294) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x294) =
        PTR__glMap2f_Exec_001139a4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x298) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x298) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x298) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x298) =
        PTR__glMapGrid1d_Exec_001139a0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x29c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x29c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x29c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x29c) =
        PTR__glMapGrid1f_Exec_0011399c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2a0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2a0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2a0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2a0) =
        PTR__glMapGrid2d_Exec_00113998;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2a4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2a4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2a4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2a4) =
        PTR__glMapGrid2f_Exec_00113994;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2a8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2a8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2a8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2a8) =
        PTR__glMaterialf_Exec_00113990;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2ac) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2ac) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2ac) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2ac) =
        PTR__glMaterialfv_Exec_0011398c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2b0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2b0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2b0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2b0) =
        PTR__glMateriali_Exec_00113988;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2b4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2b4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2b4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2b4) =
        PTR__glMaterialiv_Exec_00113984;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2b8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2b8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2b8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2b8) =
        PTR__glMatrixMode_Exec_00113980;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 700) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 700) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 700) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 700) =
        PTR__glMultMatrixd_Exec_0011397c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2c0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2c0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2c0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2c0) =
        PTR__glMultMatrixf_Exec_00113978;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2c8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2c8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2c8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2c8) =
        PTR__glNormal3b_Exec_00113974;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2cc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2cc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2cc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2cc) =
        PTR__glNormal3bv_Exec_00113970;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2d0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2d0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2d0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2d0) =
        PTR__glNormal3d_Exec_0011396c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2d4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2d4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2d4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2d4) =
        PTR__glNormal3dv_Exec_00113968;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2d8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2d8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2d8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2d8) =
        PTR__glNormal3f_Exec_00113964;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2dc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2dc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2dc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2dc) =
        PTR__glNormal3fv_Exec_00113960;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2e0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2e0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2e0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2e0) =
        PTR__glNormal3i_Exec_0011395c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2e4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2e4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2e4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2e4) =
        PTR__glNormal3iv_Exec_00113958;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2e8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2e8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2e8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2e8) =
        PTR__glNormal3s_Exec_00113954;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2ec) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2ec) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2ec) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2ec) =
        PTR__glNormal3sv_Exec_00113950;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2f4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2f4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2f4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2f4) =
        PTR__glOrtho_Exec_0011394c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2f8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2f8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2f8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2f8) =
        PTR__glPassThrough_Exec_00113948;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x2fc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x2fc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x2fc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x2fc) =
        PTR__glPixelMapfv_Exec_00113944;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x300) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x300) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x300) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x300) =
        PTR__glPixelMapuiv_Exec_00113940;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x304) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x304) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x304) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x304) =
        PTR__glPixelMapusv_Exec_0011393c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x310) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x310) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x310) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x310) =
        PTR__glPixelTransferf_Exec_00113938;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x314) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x314) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x314) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x314) =
        PTR__glPixelTransferi_Exec_00113934;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x318) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x318) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x318) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x318) =
        PTR__glPixelZoom_Exec_00113930;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x31c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x31c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x31c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x31c) =
        PTR__glPointSize_Exec_0011392c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 800) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 800) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 800) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 800) =
        PTR__glPolygonMode_Exec_00113928;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x324) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x324) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x324) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x324) =
        PTR__glPolygonOffset_Exec_00113924;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x328) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x328) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x328) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x328) =
        PTR__glPolygonStipple_Exec_00113920;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x32c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x32c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x32c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x32c) =
        PTR__glPopAttrib_Exec_0011391c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x334) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x334) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x334) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x334) =
        PTR__glPopMatrix_Exec_00113918;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x338) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x338) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x338) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x338) =
        PTR__glPopName_Exec_00113914;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x33c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x33c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x33c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x33c) =
        PTR__glPrioritizeTextures_Exec_00113910;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x340) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x340) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x340) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x340) =
        PTR__glPushAttrib_Exec_0011390c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x348) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x348) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x348) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x348) =
        PTR__glPushMatrix_Exec_00113908;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x34c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x34c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x34c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x34c) =
        PTR__glPushName_Exec_00113904;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x350) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x350) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x350) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x350) =
        PTR__glRasterPos2d_Exec_00113900;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x354) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x354) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x354) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x354) =
        PTR__glRasterPos2dv_Exec_001138fc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x358) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x358) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x358) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x358) =
        PTR__glRasterPos2f_Exec_001138f8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x35c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x35c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x35c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x35c) =
        PTR__glRasterPos2fv_Exec_001138f4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x360) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x360) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x360) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x360) =
        PTR__glRasterPos2i_Exec_001138f0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x364) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x364) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x364) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x364) =
        PTR__glRasterPos2iv_Exec_001138ec;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x368) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x368) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x368) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x368) =
        PTR__glRasterPos2s_Exec_001138e8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x36c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x36c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x36c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x36c) =
        PTR__glRasterPos2sv_Exec_001138e4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x370) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x370) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x370) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x370) =
        PTR__glRasterPos3d_Exec_001138e0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x374) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x374) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x374) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x374) =
        PTR__glRasterPos3dv_Exec_001138dc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x378) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x378) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x378) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x378) =
        PTR__glRasterPos3f_Exec_001138d8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x37c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x37c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x37c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x37c) =
        PTR__glRasterPos3fv_Exec_001138d4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x380) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x380) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x380) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x380) =
        PTR__glRasterPos3i_Exec_001138d0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 900) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 900) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 900) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 900) =
        PTR__glRasterPos3iv_Exec_001138cc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x388) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x388) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x388) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x388) =
        PTR__glRasterPos3s_Exec_001138c8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x38c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x38c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x38c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x38c) =
        PTR__glRasterPos3sv_Exec_001138c4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x390) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x390) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x390) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x390) =
        PTR__glRasterPos4d_Exec_001138c0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x394) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x394) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x394) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x394) =
        PTR__glRasterPos4dv_Exec_001138bc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x398) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x398) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x398) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x398) =
        PTR__glRasterPos4f_Exec_001138b8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x39c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x39c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x39c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x39c) =
        PTR__glRasterPos4fv_Exec_001138b4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3a0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3a0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3a0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3a0) =
        PTR__glRasterPos4i_Exec_001138b0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3a4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3a4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3a4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3a4) =
        PTR__glRasterPos4iv_Exec_001138ac;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3a8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3a8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3a8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3a8) =
        PTR__glRasterPos4s_Exec_001138a8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3ac) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3ac) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3ac) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3ac) =
        PTR__glRasterPos4sv_Exec_001138a4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3b0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3b0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3b0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3b0) =
        PTR__glReadBuffer_Exec_001138a0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3b8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3b8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3b8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3b8) =
        PTR__glRectd_Exec_0011389c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3bc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3bc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3bc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3bc) =
        PTR__glRectdv_Exec_00113898;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3c0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3c0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3c0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3c0) =
        PTR__glRectf_Exec_00113894;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3c4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3c4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3c4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3c4) =
        PTR__glRectfv_Exec_00113890;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3c8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3c8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3c8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3c8) =
        PTR__glRecti_Exec_0011388c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3cc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3cc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3cc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3cc) =
        PTR__glRectiv_Exec_00113888;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3d0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3d0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3d0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3d0) =
        PTR__glRects_Exec_00113884;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3d4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3d4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3d4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3d4) =
        PTR__glRectsv_Exec_00113880;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3dc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3dc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3dc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3dc) =
        PTR__glRotated_Exec_0011387c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3e0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3e0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3e0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3e0) =
        PTR__glRotatef_Exec_00113878;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3e4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3e4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3e4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3e4) =
        PTR__glScaled_Exec_00113874;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 1000) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 1000) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 1000) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 1000) =
        PTR__glScalef_Exec_00113870;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3ec) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3ec) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3ec) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3ec) =
        PTR__glScissor_Exec_0011386c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3f4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3f4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3f4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3f4) =
        PTR__glShadeModel_Exec_00113868;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3f8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3f8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3f8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3f8) =
        PTR__glStencilFunc_Exec_00113864;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x3fc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x3fc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x3fc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x3fc) =
        PTR__glStencilMask_Exec_00113860;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x400) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x400) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x400) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x400) =
        PTR__glStencilOp_Exec_0011385c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x404) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x404) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x404) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x404) =
        PTR__glTexCoord1d_Exec_00113858;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x408) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x408) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x408) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x408) =
        PTR__glTexCoord1dv_Exec_00113854;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x40c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x40c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x40c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x40c) =
        PTR__glTexCoord1f_Exec_00113850;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x410) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x410) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x410) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x410) =
        PTR__glTexCoord1fv_Exec_0011384c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x414) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x414) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x414) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x414) =
        PTR__glTexCoord1i_Exec_00113848;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x418) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x418) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x418) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x418) =
        PTR__glTexCoord1iv_Exec_00113844;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x41c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x41c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x41c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x41c) =
        PTR__glTexCoord1s_Exec_00113840;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x420) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x420) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x420) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x420) =
        PTR__glTexCoord1sv_Exec_0011383c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x424) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x424) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x424) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x424) =
        PTR__glTexCoord2d_Exec_00113838;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x428) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x428) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x428) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x428) =
        PTR__glTexCoord2dv_Exec_00113834;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x42c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x42c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x42c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x42c) =
        PTR__glTexCoord2f_Exec_00113830;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x430) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x430) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x430) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x430) =
        PTR__glTexCoord2fv_Exec_0011382c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x434) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x434) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x434) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x434) =
        PTR__glTexCoord2i_Exec_00113828;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x438) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x438) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x438) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x438) =
        PTR__glTexCoord2iv_Exec_00113824;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x43c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x43c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x43c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x43c) =
        PTR__glTexCoord2s_Exec_00113820;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x440) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x440) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x440) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x440) =
        PTR__glTexCoord2sv_Exec_0011381c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x444) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x444) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x444) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x444) =
        PTR__glTexCoord3d_Exec_00113818;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x448) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x448) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x448) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x448) =
        PTR__glTexCoord3dv_Exec_00113814;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x44c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x44c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x44c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x44c) =
        PTR__glTexCoord3f_Exec_00113810;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x450) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x450) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x450) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x450) =
        PTR__glTexCoord3fv_Exec_0011380c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x454) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x454) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x454) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x454) =
        PTR__glTexCoord3i_Exec_00113808;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x458) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x458) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x458) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x458) =
        PTR__glTexCoord3iv_Exec_00113804;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x45c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x45c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x45c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x45c) =
        PTR__glTexCoord3s_Exec_00113800;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x460) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x460) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x460) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x460) =
        PTR__glTexCoord3sv_Exec_001137fc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x464) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x464) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x464) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x464) =
        PTR__glTexCoord4d_Exec_001137f8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x468) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x468) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x468) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x468) =
        PTR__glTexCoord4dv_Exec_001137f4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x46c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x46c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x46c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x46c) =
        PTR__glTexCoord4f_Exec_001137f0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x470) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x470) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x470) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x470) =
        PTR__glTexCoord4fv_Exec_001137ec;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x474) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x474) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x474) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x474) =
        PTR__glTexCoord4i_Exec_001137e8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x478) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x478) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x478) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x478) =
        PTR__glTexCoord4iv_Exec_001137e4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x47c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x47c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x47c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x47c) =
        PTR__glTexCoord4s_Exec_001137e0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x480) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x480) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x480) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x480) =
        PTR__glTexCoord4sv_Exec_001137dc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x488) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x488) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x488) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x488) =
        PTR__glTexEnvf_Exec_001137d8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x48c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x48c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x48c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x48c) =
        PTR__glTexEnvfv_Exec_001137d4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x490) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x490) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x490) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x490) =
        PTR__glTexEnvi_Exec_001137d0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x494) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x494) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x494) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x494) =
        PTR__glTexEnviv_Exec_001137cc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x498) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x498) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x498) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x498) =
        PTR__glTexGend_Exec_001137c8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x49c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x49c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x49c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x49c) =
        PTR__glTexGendv_Exec_001137c4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4a0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4a0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4a0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4a0) =
        PTR__glTexGenf_Exec_001137c0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4a4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4a4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4a4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4a4) =
        PTR__glTexGenfv_Exec_001137bc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4a8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4a8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4a8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4a8) =
        PTR__glTexGeni_Exec_001137b8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4ac) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4ac) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4ac) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4ac) =
        PTR__glTexGeniv_Exec_001137b4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4b0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4b0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4b0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4b0) =
        PTR__glTexImage1D_Exec_001137b0;
-  if (*(char *)(param_1 + 0x7587) == '\0') {
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4b4) == 0);
-    uVar3 = *(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3;
+  if (*(char *)(glContext + 0x7587) == '\0') {
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4b4) == 0);
+    uVar3 = *(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3;
     puVar2 = PTR__glTexImage2D_Exec_001137ac;
   }
   else {
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4b4) == 0);
-    uVar3 = *(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3;
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4b4) == 0);
+    uVar3 = *(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3;
     puVar2 = PTR__glTexImage2D_FlushExec_001137a8;
   }
   *(undefined **)(uVar3 + 0x4b4) = puVar2;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4b8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4b8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4b8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4b8) =
        PTR__glTexParameterf_Exec_001137a4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4bc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4bc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4bc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4bc) =
        PTR__glTexParameterfv_Exec_001137a0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4c0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4c0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4c0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4c0) =
        PTR__glTexParameteri_Exec_0011379c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4c4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4c4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4c4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4c4) =
        PTR__glTexParameteriv_Exec_00113798;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4c8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4c8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4c8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4c8) =
        PTR__glTexSubImage1D_Exec_00113794;
-  if (*(char *)(param_1 + 0x7586) == '\0') {
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4cc) == 0);
-    uVar3 = *(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3;
+  if (*(char *)(glContext + 0x7586) == '\0') {
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4cc) == 0);
+    uVar3 = *(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3;
     puVar2 = PTR__glTexSubImage2D_Exec_00113790;
   }
   else {
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4cc) == 0);
-    uVar3 = *(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3;
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4cc) == 0);
+    uVar3 = *(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3;
     puVar2 = PTR__glTexSubImage2D_FlushExec_0011378c;
   }
   *(undefined **)(uVar3 + 0x4cc) = puVar2;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4d0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4d0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4d0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4d0) =
        PTR__glTranslated_Exec_00113788;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4d4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4d4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4d4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4d4) =
        PTR__glTranslatef_Exec_00113784;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4d8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4d8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4d8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4d8) =
        PTR__glVertex2d_Exec_00113780;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4dc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4dc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4dc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4dc) =
        PTR__glVertex2dv_Exec_0011377c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4e0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4e0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4e0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4e0) =
        PTR__glVertex2f_Exec_00113778;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4e4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4e4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4e4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4e4) =
        PTR__glVertex2fv_Exec_00113774;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4e8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4e8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4e8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4e8) =
        PTR__glVertex2i_Exec_00113770;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4ec) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4ec) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4ec) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4ec) =
        PTR__glVertex2iv_Exec_0011376c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4f0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4f0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4f0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4f0) =
        PTR__glVertex2s_Exec_00113768;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4f4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4f4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4f4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4f4) =
        PTR__glVertex2sv_Exec_00113764;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4f8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4f8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4f8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4f8) =
        PTR__glVertex3d_Exec_00113760;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x4fc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x4fc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x4fc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x4fc) =
        PTR__glVertex3dv_Exec_0011375c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x500) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x500) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x500) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x500) =
        PTR__glVertex3f_Exec_00113758;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x504) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x504) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x504) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x504) =
        PTR__glVertex3fv_Exec_00113754;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x508) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x508) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x508) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x508) =
        PTR__glVertex3i_Exec_00113750;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x50c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x50c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x50c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x50c) =
        PTR__glVertex3iv_Exec_0011374c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x510) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x510) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x510) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x510) =
        PTR__glVertex3s_Exec_00113748;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x514) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x514) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x514) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x514) =
        PTR__glVertex3sv_Exec_00113744;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x518) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x518) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x518) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x518) =
        PTR__glVertex4d_Exec_00113740;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x51c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x51c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x51c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x51c) =
        PTR__glVertex4dv_Exec_0011373c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x520) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x520) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x520) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x520) =
        PTR__glVertex4f_Exec_00113738;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x524) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x524) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x524) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x524) =
        PTR__glVertex4fv_Exec_00113734;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x528) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x528) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x528) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x528) =
        PTR__glVertex4i_Exec_00113730;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x52c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x52c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x52c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x52c) =
        PTR__glVertex4iv_Exec_0011372c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x530) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x530) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x530) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x530) =
        PTR__glVertex4s_Exec_00113728;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x534) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x534) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x534) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x534) =
        PTR__glVertex4sv_Exec_00113724;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x53c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x53c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x53c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x53c) =
        PTR__glViewport_Exec_00113720;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x544) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x544) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x544) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x544) =
        PTR__glBlendColor_Exec_0011371c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x548) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x548) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x548) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x548) =
        PTR__glBlendEquation_Exec_00113718;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x558) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x558) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x558) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x558) =
        PTR__glActiveTexture_Exec_00113714;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x55c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x55c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x55c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x55c) =
        PTR__glMultiTexCoord1d_Exec_00113710;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x560) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x560) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x560) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x560) =
        PTR__glMultiTexCoord1dv_Exec_0011370c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x564) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x564) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x564) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x564) =
        PTR__glMultiTexCoord1f_Exec_00113708;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x568) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x568) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x568) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x568) =
        PTR__glMultiTexCoord1fv_Exec_00113704;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x56c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x56c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x56c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x56c) =
        PTR__glMultiTexCoord1i_Exec_00113700;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x570) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x570) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x570) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x570) =
        PTR__glMultiTexCoord1iv_Exec_001136fc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x574) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x574) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x574) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x574) =
        PTR__glMultiTexCoord1s_Exec_001136f8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x578) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x578) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x578) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x578) =
        PTR__glMultiTexCoord1sv_Exec_001136f4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x57c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x57c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x57c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x57c) =
        PTR__glMultiTexCoord2d_Exec_001136f0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x580) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x580) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x580) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x580) =
        PTR__glMultiTexCoord2dv_Exec_001136ec;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x584) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x584) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x584) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x584) =
        PTR__glMultiTexCoord2f_Exec_001136e8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x588) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x588) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x588) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x588) =
        PTR__glMultiTexCoord2fv_Exec_001136e4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x58c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x58c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x58c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x58c) =
        PTR__glMultiTexCoord2i_Exec_001136e0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x590) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x590) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x590) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x590) =
        PTR__glMultiTexCoord2iv_Exec_001136dc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x594) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x594) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x594) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x594) =
        PTR__glMultiTexCoord2s_Exec_001136d8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x598) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x598) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x598) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x598) =
        PTR__glMultiTexCoord2sv_Exec_001136d4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x59c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x59c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x59c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x59c) =
        PTR__glMultiTexCoord3d_Exec_001136d0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5a0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5a0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5a0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5a0) =
        PTR__glMultiTexCoord3dv_Exec_001136cc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5a4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5a4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5a4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5a4) =
        PTR__glMultiTexCoord3f_Exec_001136c8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5a8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5a8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5a8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5a8) =
        PTR__glMultiTexCoord3fv_Exec_001136c4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5ac) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5ac) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5ac) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5ac) =
        PTR__glMultiTexCoord3i_Exec_001136c0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5b0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5b0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5b0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5b0) =
        PTR__glMultiTexCoord3iv_Exec_001136bc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5b4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5b4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5b4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5b4) =
        PTR__glMultiTexCoord3s_Exec_001136b8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5b8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5b8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5b8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5b8) =
        PTR__glMultiTexCoord3sv_Exec_001136b4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5bc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5bc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5bc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5bc) =
        PTR__glMultiTexCoord4d_Exec_001136b0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5c0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5c0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5c0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5c0) =
        PTR__glMultiTexCoord4dv_Exec_001136ac;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5c4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5c4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5c4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5c4) =
        PTR__glMultiTexCoord4f_Exec_001136a8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5c8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5c8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5c8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5c8) =
        PTR__glMultiTexCoord4fv_Exec_001136a4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5cc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5cc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5cc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5cc) =
        PTR__glMultiTexCoord4i_Exec_001136a0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5d0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5d0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5d0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5d0) =
        PTR__glMultiTexCoord4iv_Exec_0011369c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5d4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5d4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5d4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5d4) =
        PTR__glMultiTexCoord4s_Exec_00113698;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5d8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5d8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5d8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5d8) =
        PTR__glMultiTexCoord4sv_Exec_00113694;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5dc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5dc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5dc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5dc) =
        PTR__glLoadTransposeMatrixd_Exec_00113690;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5e0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5e0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5e0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5e0) =
        PTR__glLoadTransposeMatrixf_Exec_0011368c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5e4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5e4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5e4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5e4) =
        PTR__glMultTransposeMatrixd_Exec_00113688;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5e8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5e8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5e8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5e8) =
        PTR__glMultTransposeMatrixf_Exec_00113684;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x654) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x654) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x654) =
        PTR__glDrawRangeElements_Exec_001120dc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6d8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6d8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6d8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6d8) =
        PTR__glTexImage3D_Exec_00113680;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6dc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6dc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6dc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6dc) =
        PTR__glTexSubImage3D_Exec_0011367c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6e0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6e0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6e0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6e0) =
        PTR__glCopyTexSubImage3D_Exec_00112084;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x658) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x658) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x658) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x658) =
        PTR__glColorTable_Exec_00113678;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x65c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x65c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x65c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x65c) =
        PTR__glColorTableParameterfv_Exec_00113674;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x660) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x660) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x660) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x660) =
        PTR__glColorTableParameteriv_Exec_00113670;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x664) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x664) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x664) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x664) =
        PTR__glCopyColorTable_Exec_0011366c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x674) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x674) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x674) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x674) =
        PTR__glColorSubTable_Exec_00113668;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x678) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x678) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x678) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x678) =
        PTR__glCopyColorSubTable_Exec_00113664;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x67c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x67c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x67c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x67c) =
        PTR__glConvolutionFilter1D_Exec_00113660;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x680) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x680) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x680) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x680) =
        PTR__glConvolutionFilter2D_Exec_0011365c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x684) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x684) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x684) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x684) =
        PTR__glConvolutionParameterf_Exec_00113658;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x688) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x688) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x688) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x688) =
        PTR__glConvolutionParameterfv_Exec_00113654;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x68c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x68c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x68c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x68c) =
        PTR__glConvolutionParameteri_Exec_00113650;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x690) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x690) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x690) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x690) =
        PTR__glConvolutionParameteriv_Exec_0011364c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x694) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x694) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x694) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x694) =
        PTR__glCopyConvolutionFilter1D_Exec_00113648;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x698) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x698) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x698) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x698) =
        PTR__glCopyConvolutionFilter2D_Exec_00113644;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6ac) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6ac) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6ac) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6ac) =
        PTR__glSeparableFilter2D_Exec_00113640;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6c8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6c8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6c8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6c8) =
        PTR__glHistogram_Exec_0011363c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6cc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6cc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6cc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6cc) =
        PTR__glMinmax_Exec_00113638;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6d0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6d0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6d0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6d0) =
        PTR__glResetHistogram_Exec_00113634;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6d4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6d4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6d4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6d4) =
        PTR__glResetMinmax_Exec_00113630;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5ec) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5ec) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5ec) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5ec) =
        PTR__glCompressedTexImage3D_Exec_0011362c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5f0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5f0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5f0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5f0) =
        PTR__glCompressedTexImage2D_Exec_00113628;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5f4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5f4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5f4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5f4) =
        PTR__glCompressedTexImage1D_Exec_00113624;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5f8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5f8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5f8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5f8) =
        PTR__glCompressedTexSubImage3D_Exec_00113620;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x5fc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x5fc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x5fc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x5fc) =
        PTR__glCompressedTexSubImage2D_Exec_0011361c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x600) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x600) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x600) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x600) =
        PTR__glCompressedTexSubImage1D_Exec_00113618;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x608) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x608) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x608) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x608) =
        PTR__glSecondaryColor3b_Exec_00113614;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x60c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x60c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x60c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x60c) =
        PTR__glSecondaryColor3bv_Exec_00113610;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x610) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x610) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x610) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x610) =
        PTR__glSecondaryColor3d_Exec_0011360c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x614) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x614) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x614) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x614) =
        PTR__glSecondaryColor3dv_Exec_00113608;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x618) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x618) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x618) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x618) =
        PTR__glSecondaryColor3f_Exec_00113604;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x61c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x61c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x61c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x61c) =
        PTR__glSecondaryColor3fv_Exec_00113600;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x620) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x620) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x620) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x620) =
        PTR__glSecondaryColor3i_Exec_001135fc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x624) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x624) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x624) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x624) =
        PTR__glSecondaryColor3iv_Exec_001135f8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x628) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x628) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x628) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x628) =
        PTR__glSecondaryColor3s_Exec_001135f4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x62c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x62c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x62c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x62c) =
        PTR__glSecondaryColor3sv_Exec_001135f0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x630) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x630) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x630) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x630) =
        PTR__glSecondaryColor3ub_Exec_001135ec;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x634) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x634) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x634) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x634) =
        PTR__glSecondaryColor3ubv_Exec_001135e8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x638) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x638) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x638) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x638) =
        PTR__glSecondaryColor3ui_Exec_001135e4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x63c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x63c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x63c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x63c) =
        PTR__glSecondaryColor3uiv_Exec_001135e0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x640) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x640) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x640) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x640) =
        PTR__glSecondaryColor3us_Exec_001135dc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x644) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x644) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x644) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x644) =
        PTR__glSecondaryColor3usv_Exec_001135d8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x72c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x72c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x72c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x72c) =
        PTR__glSampleCoverage_Exec_001135d4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x730) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x730) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x730) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x730) =
        PTR__glSamplePass_Exec_001135d0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8e4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8e4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8e4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8e4) =
        PTR__glWindowPos2d_Exec_001135cc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8e8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8e8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8e8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8e8) =
        PTR__glWindowPos2dv_Exec_001135c8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8ec) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8ec) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8ec) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8ec) =
        PTR__glWindowPos2f_Exec_001135c4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8f0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8f0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8f0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8f0) =
        PTR__glWindowPos2fv_Exec_001135c0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8f4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8f4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8f4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8f4) =
        PTR__glWindowPos2i_Exec_001135bc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8f8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8f8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8f8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8f8) =
        PTR__glWindowPos2iv_Exec_001135b8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8fc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8fc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8fc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8fc) =
        PTR__glWindowPos2s_Exec_001135b4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x900) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x900) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x900) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x900) =
        PTR__glWindowPos2sv_Exec_001135b0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x904) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x904) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x904) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x904) =
        PTR__glWindowPos3d_Exec_001135ac;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x908) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x908) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x908) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x908) =
        PTR__glWindowPos3dv_Exec_001135a8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x90c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x90c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x90c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x90c) =
        PTR__glWindowPos3f_Exec_001135a4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x910) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x910) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x910) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x910) =
        PTR__glWindowPos3fv_Exec_001135a0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x914) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x914) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x914) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x914) =
        PTR__glWindowPos3i_Exec_0011359c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x918) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x918) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x918) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x918) =
        PTR__glWindowPos3iv_Exec_00113598;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x91c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x91c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x91c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x91c) =
        PTR__glWindowPos3s_Exec_00113594;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x920) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x920) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x920) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x920) =
        PTR__glWindowPos3sv_Exec_00113590;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x894) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x894) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x894) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x894) =
        PTR__glVertexArrayParameteriEXT_Exec_0011358c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6e4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6e4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6e4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6e4) =
        PTR__glCombinerParameterfvNV_Exec_00113588;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6e8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6e8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6e8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6e8) =
        PTR__glCombinerParameterfNV_Exec_00113584;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6ec) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6ec) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6ec) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6ec) =
        PTR__glCombinerParameterivNV_Exec_00113580;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6f0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6f0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6f0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6f0) =
        PTR__glCombinerParameteriNV_Exec_0011357c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6f4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6f4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6f4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6f4) =
        PTR__glCombinerInputNV_Exec_00113578;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6f8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6f8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6f8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6f8) =
        PTR__glCombinerOutputNV_Exec_00113574;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x6fc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x6fc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x6fc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x6fc) =
        PTR__glFinalCombinerInputNV_Exec_00113570;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x718) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x718) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x718) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x718) =
        PTR__glCombinerStageParameterfvNV_Exec_0011356c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x738) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x738) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x738) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x738) =
        PTR__glPNTrianglesfATIX_Exec_00113568;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x734) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x734) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x734) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x734) =
        PTR__glPNTrianglesiATIX_Exec_00113564;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x75c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x75c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x75c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x75c) =
        PTR__glBindProgramARB_Exec_00113560;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x76c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x76c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x76c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x76c) =
        PTR__glVertexAttrib1sARB_Exec_0011355c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x770) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x770) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x770) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x770) =
        PTR__glVertexAttrib1fARB_Exec_00113558;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x774) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x774) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x774) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x774) =
        PTR__glVertexAttrib1dARB_Exec_00113554;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x778) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x778) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x778) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x778) =
        PTR__glVertexAttrib2sARB_Exec_00113550;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x77c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x77c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x77c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x77c) =
        PTR__glVertexAttrib2fARB_Exec_0011354c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x780) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x780) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x780) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x780) =
        PTR__glVertexAttrib2dARB_Exec_00113548;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x784) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x784) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x784) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x784) =
        PTR__glVertexAttrib3sARB_Exec_00113544;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x788) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x788) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x788) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x788) =
        PTR__glVertexAttrib3fARB_Exec_00113540;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x78c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x78c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x78c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x78c) =
        PTR__glVertexAttrib3dARB_Exec_0011353c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x790) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x790) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x790) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x790) =
        PTR__glVertexAttrib4sARB_Exec_00113538;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x794) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x794) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x794) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x794) =
        PTR__glVertexAttrib4fARB_Exec_00113534;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x798) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x798) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x798) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x798) =
        PTR__glVertexAttrib4dARB_Exec_00113530;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x79c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x79c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x79c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x79c) =
        PTR__glVertexAttrib4NubARB_Exec_0011352c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7a0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7a0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7a0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7a0) =
        PTR__glVertexAttrib1svARB_Exec_00113528;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7a4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7a4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7a4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7a4) =
        PTR__glVertexAttrib1fvARB_Exec_00113524;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7a8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7a8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7a8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7a8) =
        PTR__glVertexAttrib1dvARB_Exec_00113520;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7ac) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7ac) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7ac) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7ac) =
        PTR__glVertexAttrib2svARB_Exec_0011351c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7b0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7b0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7b0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7b0) =
        PTR__glVertexAttrib2fvARB_Exec_00113518;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7b4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7b4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7b4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7b4) =
        PTR__glVertexAttrib2dvARB_Exec_00113514;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7b8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7b8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7b8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7b8) =
        PTR__glVertexAttrib3svARB_Exec_00113510;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7bc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7bc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7bc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7bc) =
        PTR__glVertexAttrib3fvARB_Exec_0011350c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7c0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7c0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7c0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7c0) =
        PTR__glVertexAttrib3dvARB_Exec_00113508;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7c4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7c4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7c4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7c4) =
        PTR__glVertexAttrib4bvARB_Exec_00113504;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7c8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7c8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7c8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7c8) =
        PTR__glVertexAttrib4svARB_Exec_00113500;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7cc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7cc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7cc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7cc) =
        PTR__glVertexAttrib4ivARB_Exec_001134fc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 2000) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 2000) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 2000) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 2000) =
        PTR__glVertexAttrib4ubvARB_Exec_001134f8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7d4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7d4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7d4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7d4) =
        PTR__glVertexAttrib4usvARB_Exec_001134f4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7d8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7d8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7d8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7d8) =
        PTR__glVertexAttrib4uivARB_Exec_001134f0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7dc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7dc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7dc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7dc) =
        PTR__glVertexAttrib4fvARB_Exec_001134ec;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7e0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7e0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7e0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7e0) =
        PTR__glVertexAttrib4dvARB_Exec_001134e8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7e4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7e4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7e4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7e4) =
        PTR__glVertexAttrib4NbvARB_Exec_001134e4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7e8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7e8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7e8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7e8) =
        PTR__glVertexAttrib4NsvARB_Exec_001134e0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7ec) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7ec) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7ec) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7ec) =
        PTR__glVertexAttrib4NivARB_Exec_001134dc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7f0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7f0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7f0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7f0) =
        PTR__glVertexAttrib4NubvARB_Exec_001134d8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7f4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7f4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7f4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7f4) =
        PTR__glVertexAttrib4NusvARB_Exec_001134d4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x7f8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x7f8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x7f8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x7f8) =
        PTR__glVertexAttrib4NuivARB_Exec_001134d0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x818) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x818) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x818) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x818) =
        PTR__glProgramEnvParameter4dARB_Exec_001134cc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x81c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x81c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x81c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x81c) =
        PTR__glProgramEnvParameter4dvARB_Exec_001134c8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x820) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x820) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x820) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x820) =
        PTR__glProgramEnvParameter4fARB_Exec_001134c4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x824) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x824) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x824) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x824) =
        PTR__glProgramEnvParameter4fvARB_Exec_001134c0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x828) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x828) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x828) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x828) =
        PTR__glProgramLocalParameter4dARB_Exec_001134bc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x82c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x82c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x82c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x82c) =
        PTR__glProgramLocalParameter4dvARB_Exec_001134b8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x830) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x830) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x830) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x830) =
        PTR__glProgramLocalParameter4fARB_Exec_001134b4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x834) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x834) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x834) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x834) =
        PTR__glProgramLocalParameter4fvARB_Exec_001134b0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x848) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x848) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x848) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x848) =
        PTR__glProgramStringARB_Exec_001134ac;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x854) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x854) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x854) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x854) =
        PTR__glEnableVertexAttribARB_Exec_001134a8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x858) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x858) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x858) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x858) =
        PTR__glDisableVertexAttribARB_Exec_001134a4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x860) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x860) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x860) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x860) =
        PTR__glMapVertexAttrib1dARB_Exec_001134a0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x864) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x864) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x864) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x864) =
        PTR__glMapVertexAttrib1fARB_Exec_0011349c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x868) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x868) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x868) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x868) =
        PTR__glMapVertexAttrib2dARB_Exec_00113498;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x86c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x86c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x86c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x86c) =
        PTR__glMapVertexAttrib2fARB_Exec_00113494;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x744) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x744) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x744) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x744) =
        PTR__glSetFenceAPPLE_Exec_00113490;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x750) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x750) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x750) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x750) =
        PTR__glFinishFenceAPPLE_Exec_0011348c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x758) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x758) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x758) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x758) =
        PTR__glFinishObjectAPPLE_Exec_00113488;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x870) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x870) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x870) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x870) =
        PTR__glPointParameterf_Exec_00113484;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x874) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x874) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x874) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x874) =
        PTR__glPointParameterfv_Exec_00113480;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x878) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x878) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x878) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x878) =
        PTR__glPointParameteriARB_Exec_0011347c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x87c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x87c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x87c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x87c) =
        PTR__glPointParameterivARB_Exec_00113478;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x880) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x880) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x880) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x880) =
        PTR__glFogCoordf_Exec_00113474;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x884) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x884) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x884) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x884) =
        PTR__glFogCoordfv_Exec_00113470;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x888) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x888) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x888) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x888) =
        PTR__glFogCoordd_Exec_0011346c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x88c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x88c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x88c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x88c) =
        PTR__glFogCoorddv_Exec_00113468;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x898) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x898) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x898) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x898) =
        PTR__glBindVertexArrayEXT_Exec_00113464;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8ac) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8ac) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8ac) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8ac) =
        PTR__glDrawElementArrayAPPLE_Exec_001120cc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8b0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8b0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8b0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8b0) =
        PTR__glDrawRangeElementArrayAPPLE_Exec_001120d0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa5c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa5c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa5c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa5c) =
        PTR__glMultiDrawElementArrayAPPLE_Exec_001120c4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa60) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa60) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa60) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa60) =
        PTR__glMultiDrawRangeElementArrayAPPLE_Exec_001120c8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x540) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x540) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x540) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x540) =
        PTR__glBlendFuncSeparate_Exec_00113460;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x728) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x728) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x728) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x728) =
        PTR__glBlendEquationSeparateEXT_Exec_0011345c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8dc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8dc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8dc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8dc) =
        PTR__glMultiDrawArrays_Exec_001120d8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8e0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8e0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8e0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8e0) =
        PTR__glMultiDrawElements_Exec_001120d4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8b4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8b4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8b4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8b4) =
        PTR__glWeightbvARB_Exec_00113458;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8b8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8b8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8b8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8b8) =
        PTR__glWeightsvARB_Exec_00113454;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8bc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8bc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8bc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8bc) =
        PTR__glWeightivARB_Exec_00113450;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8c0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8c0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8c0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8c0) =
        PTR__glWeightfvARB_Exec_0011344c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8c4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8c4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8c4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8c4) =
        PTR__glWeightdvARB_Exec_00113448;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8c8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8c8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8c8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8c8) =
        PTR__glWeightubvARB_Exec_00113444;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8cc) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8cc) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8cc) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8cc) =
        PTR__glWeightusvARB_Exec_00113440;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8d0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8d0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8d0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8d0) =
        PTR__glWeightuivARB_Exec_0011343c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8d8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8d8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8d8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8d8) =
        PTR__glVertexBlendARB_Exec_00113438;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x924) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x924) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x924) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x924) =
        PTR__glActiveStencilFace_Exec_00113434;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x928) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x928) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x928) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x928) =
        PTR__glStencilOpSeparateATI_Exec_00113430;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x92c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x92c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x92c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x92c) =
        PTR__glStencilFuncSeparateATI_Exec_0011342c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x960) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x960) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x960) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x960) =
        PTR__glUseProgramObjectARB_Exec_00113428;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x968) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x968) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x968) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x968) =
        PTR__glUniform1fARB_Exec_00113424;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x96c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x96c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x96c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x96c) =
        PTR__glUniform2fARB_Exec_00113420;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x970) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x970) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x970) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x970) =
        PTR__glUniform3fARB_Exec_0011341c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x974) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x974) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x974) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x974) =
        PTR__glUniform4fARB_Exec_00113418;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x978) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x978) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x978) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x978) =
        PTR__glUniform1iARB_Exec_00113414;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x97c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x97c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x97c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x97c) =
        PTR__glUniform2iARB_Exec_00113410;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x980) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x980) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x980) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x980) =
        PTR__glUniform3iARB_Exec_0011340c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x984) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x984) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x984) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x984) =
        PTR__glUniform4iARB_Exec_00113408;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x988) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x988) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x988) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x988) =
        PTR__glUniform1fvARB_Exec_00113404;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x98c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x98c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x98c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x98c) =
        PTR__glUniform2fvARB_Exec_00113400;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x990) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x990) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x990) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x990) =
        PTR__glUniform3fvARB_Exec_001133fc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x994) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x994) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x994) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x994) =
        PTR__glUniform4fvARB_Exec_001133f8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x998) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x998) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x998) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x998) =
        PTR__glUniform1ivARB_Exec_001133f4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x99c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x99c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x99c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x99c) =
        PTR__glUniform2ivARB_Exec_001133f0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x9a0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x9a0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x9a0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x9a0) =
        PTR__glUniform3ivARB_Exec_001133ec;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x9a4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x9a4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x9a4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x9a4) =
        PTR__glUniform4ivARB_Exec_001133e8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x9a8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x9a8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x9a8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x9a8) =
        PTR__glUniformMatrix2fvARB_Exec_001133e4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x9ac) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x9ac) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x9ac) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x9ac) =
        PTR__glUniformMatrix3fvARB_Exec_001133e0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x9b0) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x9b0) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x9b0) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x9b0) =
        PTR__glUniformMatrix4fvARB_Exec_001133dc;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x9f4) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x9f4) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x9f4) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x9f4) =
        PTR__glBeginQuery_Exec_001133d8;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x9f8) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x9f8) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x9f8) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x9f8) =
        PTR__glEndQuery_Exec_001133d4;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa34) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa34) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa34) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa34) =
        PTR__glDepthBoundsEXT_Exec_001133d0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa38) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa38) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa38) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa38) =
        PTR__glDrawBuffersARB_Exec_00113ba0;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa3c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa3c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa3c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa3c) =
        PTR__glIsShader_Exec_00113b9c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa40) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa40) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa40) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa40) =
        PTR__glIsProgram_Exec_00113b98;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa44) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa44) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa44) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa44) =
        PTR__glGetShaderiv_Exec_00113b94;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa48) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa48) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa48) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa48) =
        PTR__glGetProgramiv_Exec_00113b90;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa4c) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa4c) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa4c) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa4c) =
        PTR__glGetShaderInfoLog_Exec_00113b8c;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa50) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa50) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa50) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa50) =
        PTR__glGetProgramInfoLog_Exec_00113b88;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa54) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa54) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa54) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa54) =
        PTR__glStencilFuncSeparate_Exec_00113b84;
-  uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa58) == 0);
+  uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa58) == 0);
   *(undefined **)
-   ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa58) =
+   ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa58) =
        PTR__glStencilMaskSeparate_Exec_00113b80;
-  if ((*(char *)(param_1 + 0x759c) == '\0') || (*(char *)(param_1 + 0x759d) == '\0')) {
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x104) == 0);
+  if ((*(char *)(glContext + 0x759c) == '\0') || (*(char *)(glContext + 0x759d) == '\0')) {
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x104) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x104) =
          PTR__glDrawArrays_NoopExec_0011210c;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x10c) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x10c) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x10c) =
          PTR__glDrawElements_NoopExec_00112108;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x654) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x654) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x654) =
          PTR__glDrawRangeElements_NoopExec_00112104;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8dc) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8dc) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8dc) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8dc) =
          PTR__glMultiDrawArrays_NoopExec_00112100;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8e0) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8e0) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8e0) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8e0) =
          PTR__glMultiDrawElements_NoopExec_001120fc;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8b0) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8b0) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8b0) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8b0) =
          PTR__glDrawRangeElementArrayAPPLE_NoopExec_001120f8;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8ac) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8ac) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8ac) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8ac) =
          PTR__glDrawElementArrayAPPLE_NoopExec_001120f4;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa60) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa60) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa60) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa60) =
          PTR__glMultiDrawRangeElementArrayAPPLE_NoopExec_001120f0;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa5c) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa5c) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa5c) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa5c) =
          PTR__glMultiDrawElementArrayAPPLE_NoopExec_001120ec;
   }
   else {
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x104) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x104) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x104) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x104) =
          PTR__glDrawArrays_Exec_001120e4;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x10c) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x10c) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x10c) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x10c) =
          PTR__glDrawElements_Exec_001120e0;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x654) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x654) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x654) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x654) =
          PTR__glDrawRangeElements_Exec_001120dc;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8dc) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8dc) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8dc) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8dc) =
          PTR__glMultiDrawArrays_Exec_001120d8;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8e0) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8e0) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8e0) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8e0) =
          PTR__glMultiDrawElements_Exec_001120d4;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8b0) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8b0) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8b0) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8b0) =
          PTR__glDrawRangeElementArrayAPPLE_Exec_001120d0;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x8ac) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0x8ac) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0x8ac) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0x8ac) =
          PTR__glDrawElementArrayAPPLE_Exec_001120cc;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa60) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa60) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa60) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa60) =
          PTR__glMultiDrawRangeElementArrayAPPLE_Exec_001120c8;
-    uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0xa5c) == 0);
+    uVar3 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xa5c) == 0);
     *(undefined **)
-     ((*(uint *)(param_1 + 0x4680) & uVar3 | *(uint *)(param_1 + 0x4684) & ~uVar3) + 0xa5c) =
+     ((*(uint *)(glContext + 0x4680) & uVar3 | *(uint *)(glContext + 0x4684) & ~uVar3) + 0xa5c) =
          PTR__glMultiDrawElementArrayAPPLE_Exec_001120c4;
   }
   return;
 }
 
 /* _glGetString_Exec @ 0x11bc0 (1596 bytes) */
-int _glGetString_Exec(param_1, param_2)
-  int param_1;
+int _glGetString_Exec(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   bool bVar1;
@@ -5145,8 +5145,8 @@ int _glGetString_Exec(param_1, param_2)
   char *pcVar6;
   uint uVar7;
   
-  if (-1 < *(short *)(param_1 + 0x4a10)) {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+  if (-1 < *(short *)(glContext + 0x4a10)) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return (char *)0x0;
     }
     uVar3 = 0x502;
@@ -5154,7 +5154,7 @@ int _glGetString_Exec(param_1, param_2)
   }
   if (param_2 == 0x1f03) {
     ppuVar4 = &_engine_extensions;
-    pcVar6 = (char *)(param_1 + 0x759e);
+    pcVar6 = (char *)(glContext + 0x759e);
     do {
       pcVar5 = *ppuVar4;
       ppuVar4 = ppuVar4 + 1;
@@ -5170,7 +5170,7 @@ int _glGetString_Exec(param_1, param_2)
     } while ((int)ppuVar4 < 0x110389);
     uVar7 = 0;
     do {
-      if ((*(uint *)(((int)uVar7 >> 5) * 4 + *(int *)(param_1 + 0x468c) + 0x124) >> (uVar7 & 0x1f) &
+      if ((*(uint *)(((int)uVar7 >> 5) * 4 + *(int *)(glContext + 0x468c) + 0x124) >> (uVar7 & 0x1f) &
           1) != 0) {
         pcVar5 = (char *)0x0;
         switch(uVar7) {
@@ -5235,7 +5235,7 @@ int _glGetString_Exec(param_1, param_2)
           pcVar5 = "GL_ARB_texture_non_power_of_two";
           break;
         case 0x14:
-          if (*(char *)(param_1 + 0x7584) != '\0') goto LAB_000122ec;
+          if (*(char *)(glContext + 0x7584) != '\0') goto LAB_000122ec;
           pcVar5 = "GL_ARB_vertex_buffer_object";
           break;
         case 0x15:
@@ -5428,15 +5428,15 @@ LAB_000122ec:
       uVar7 = uVar7 + 1;
       if (0x4e < (int)uVar7) {
         *pcVar6 = '\0';
-        return (char *)(param_1 + 0x759e);
+        return (char *)(glContext + 0x759e);
       }
     } while( true );
   }
   if (param_2 < 0x1f04) {
     if (param_2 == 0x1f01) {
-      if (*(char *)(param_1 + 0x7585) != '\0') {
-        pcVar6 = (char *)(**(code **)(param_1 + 0x47bc))(*(undefined4 *)(param_1 + 0x4688));
-        if (*(short *)((uint)*(byte *)(param_1 + 0x85a8) * 0x2e0 + param_1 + 0x888a) == 0x2402) {
+      if (*(char *)(glContext + 0x7585) != '\0') {
+        pcVar6 = (char *)(**(code **)(glContext + 0x47bc))(*(undefined4 *)(glContext + 0x4688));
+        if (*(short *)((uint)*(byte *)(glContext + 0x85a8) * 0x2e0 + glContext + 0x888a) == 0x2402) {
           return pcVar6;
         }
         pcVar5 = _strstr(pcVar6,"FX");
@@ -5455,13 +5455,13 @@ LAB_000122ec:
 LAB_00011c44:
     if (bVar1) {
 LAB_00011cf8:
-      pcVar6 = (char *)(**(code **)(param_1 + 0x47bc))(*(undefined4 *)(param_1 + 0x4688),param_2);
+      pcVar6 = (char *)(**(code **)(glContext + 0x47bc))(*(undefined4 *)(glContext + 0x4688),param_2);
       return pcVar6;
     }
   }
   else {
     if (param_2 == 0x8874) {
-      return *(char **)(param_1 + 0x5418);
+      return *(char **)(glContext + 0x5418);
     }
     if (param_2 < 0x8875) {
       bVar1 = param_2 == 0x1f04;
@@ -5471,18 +5471,18 @@ LAB_00011cf8:
       return "1.10";
     }
   }
-  if (*(int *)(param_1 + 0x7574) != 0) {
+  if (*(int *)(glContext + 0x7574) != 0) {
     return (char *)0x0;
   }
   uVar3 = 0x500;
 LAB_0001231c:
-  *(undefined4 *)(param_1 + 0x7574) = uVar3;
+  *(undefined4 *)(glContext + 0x7574) = uVar3;
   return (char *)0x0;
 }
 
 /* _glGenFencesAPPLE_Exec @ 0x12338 (164 bytes) */
-void _glGenFencesAPPLE_Exec(param_1, param_2, param_3)
-  int param_1;
+void _glGenFencesAPPLE_Exec(glContext, param_2, param_3)
+  int glContext;
   int param_2;
   int *param_3;
 {
@@ -5491,9 +5491,9 @@ void _glGenFencesAPPLE_Exec(param_1, param_2, param_3)
   int iVar3;
   int iVar4;
   
-  if (*(short *)(param_1 + 0x4a10) < 0) {
+  if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < param_2) {
-      iVar4 = ((int (*)())_gleGenHashNames)(param_1 + 0x543c,param_2);
+      iVar4 = ((int (*)())_gleGenHashNames)(glContext + 0x543c,param_2);
       if (iVar4 == 0) {
         return;
       }
@@ -5510,18 +5510,18 @@ void _glGenFencesAPPLE_Exec(param_1, param_2, param_3)
       } while (param_2 != 0);
       return;
     }
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
     uVar1 = 0x501;
   }
   else {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
     uVar1 = 0x502;
   }
-  *(undefined4 *)(param_1 + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = uVar1;
   return;
 }
 
@@ -5589,8 +5589,8 @@ int _gleGenHashNames(param_1, param_2)
 }
 
 /* _gliAttachDrawableWithOptions @ 0x1250c (656 bytes) */
-int _gliAttachDrawableWithOptions(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
+int _gliAttachDrawableWithOptions(glContext, param_2, param_3, param_4, param_5)
+  int glContext;
   int param_2;
   int param_3;
   uint param_4;
@@ -5618,36 +5618,36 @@ int _gliAttachDrawableWithOptions(param_1, param_2, param_3, param_4, param_5)
   double in_stack_ffffffb0;
   double in_stack_ffffffb8;
   
-  iVar2 = -(uint)(*(byte *)(param_1 + 0x85a8) ^ *(byte *)(param_1 + 0x85a6));
+  iVar2 = -(uint)(*(byte *)(glContext + 0x85a8) ^ *(byte *)(glContext + 0x85a6));
   bVar1 = false;
-  if ((param_1 == 0) || (*(int *)(param_1 + 0x467c) != 0x3463a223)) {
+  if ((glContext == 0) || (*(int *)(glContext + 0x467c) != 0x3463a223)) {
     return 0x2714;
   }
   if ((param_2 == 0) != (param_3 == 0)) {
     return 0x2715;
   }
-  if (((int)param_4 < 0) || ((int)(uint)*(byte *)(param_1 + 0x85a4) <= (int)param_4)) {
+  if (((int)param_4 < 0) || ((int)(uint)*(byte *)(glContext + 0x85a4) <= (int)param_4)) {
     return 0x2718;
   }
-  *(char *)(param_1 + 0x85a6) = (char)param_4;
-  *(undefined1 *)(param_1 + 0x85a7) = 0;
-  iVar4 = param_4 * 0x2e0 + param_1;
+  *(char *)(glContext + 0x85a6) = (char)param_4;
+  *(undefined1 *)(glContext + 0x85a7) = 0;
+  iVar4 = param_4 * 0x2e0 + glContext;
   uVar6 = (**(code **)(*(int *)(iVar4 + 0x8884) + 0x138))
                     (*(undefined4 *)(iVar4 + 0x85ac),param_2,param_3,param_5);
   fparam_1 = extraout_f1;
-  if ((uVar6 < 5) && (param_4 != *(byte *)(param_1 + 0x85a8))) {
-    fparam_1 = (double)_gliSwitchPlugin(param_1,param_4);
+  if ((uVar6 < 5) && (param_4 != *(byte *)(glContext + 0x85a8))) {
+    fparam_1 = (double)_gliSwitchPlugin(glContext,param_4);
     bVar1 = true;
     uVar6 = 2;
   }
   if (uVar6 == 2) {
-    ((void (*)())_gliUpdatePluginConfig)(param_1,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,
+    ((void (*)())_gliUpdatePluginConfig)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,
                in_stack_ffffffa0,in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8);
 LAB_00012634:
     bVar1 = true;
 LAB_00012638:
     if (iVar2 < 0) {
-      _gliDetachRevert(param_1);
+      _gliDetachRevert(glContext);
     }
 LAB_000126b8:
     uVar6 = 0;
@@ -5656,55 +5656,55 @@ LAB_000126b8:
     if ((uVar6 < 2) || (uVar6 == 4)) goto LAB_00012638;
     if (uVar6 < 4) goto LAB_00012634;
     if (uVar6 == 0x2720) {
-      if ((param_2 == 0) || (uVar7 = (uint)*(byte *)(param_1 + 0x85a5), uVar7 == 0xff)) {
+      if ((param_2 == 0) || (uVar7 = (uint)*(byte *)(glContext + 0x85a5), uVar7 == 0xff)) {
         uVar6 = 0x2720;
         goto LAB_00012744;
       }
-      *(undefined1 *)(param_1 + 0x85a7) = 1;
-      iVar2 = uVar7 * 0x2e0 + param_1;
+      *(undefined1 *)(glContext + 0x85a7) = 1;
+      iVar2 = uVar7 * 0x2e0 + glContext;
       uVar6 = (**(code **)(*(int *)(iVar2 + 0x8884) + 0x138))
                         (*(undefined4 *)(iVar2 + 0x85ac),param_2,param_3,param_5);
       if (4 < uVar6) goto LAB_000126d8;
-      if (uVar7 != *(byte *)(param_1 + 0x85a8)) {
-        _gliSwitchPlugin(param_1,uVar7);
+      if (uVar7 != *(byte *)(glContext + 0x85a8)) {
+        _gliSwitchPlugin(glContext,uVar7);
         bVar1 = true;
       }
       goto LAB_000126b8;
     }
     if (iVar2 < 0) {
-      _gliDetachRevert(param_1);
+      _gliDetachRevert(glContext);
     }
 LAB_000126d8:
     if (uVar6 != 0) {
 LAB_00012744:
-      *(undefined4 *)(param_1 + 0x4848) = 0;
-      *(undefined4 *)(param_1 + 0x484c) = 0;
-      if ((*(char *)(param_1 + 0x4692) != '\0') && (*(char *)(param_1 + 0x4691) == '\0')) {
+      *(undefined4 *)(glContext + 0x4848) = 0;
+      *(undefined4 *)(glContext + 0x484c) = 0;
+      if ((*(char *)(glContext + 0x4692) != '\0') && (*(char *)(glContext + 0x4691) == '\0')) {
         return uVar6;
       }
-      *(undefined1 *)(param_1 + 0x4691) = 0;
-      *(undefined1 *)(param_1 + 0x4692) = 1;
+      *(undefined1 *)(glContext + 0x4691) = 0;
+      *(undefined1 *)(glContext + 0x4692) = 1;
       goto LAB_00012774;
     }
   }
   cVar5 = '\0';
-  if ((*(char *)(param_1 + 0x4690) == '\0') || (param_3 == 0)) {
+  if ((*(char *)(glContext + 0x4690) == '\0') || (param_3 == 0)) {
     cVar5 = '\x01';
   }
-  *(int *)(param_1 + 0x4848) = param_3;
-  *(int *)(param_1 + 0x484c) = param_2;
-  if ((!bVar1) && (*(char *)(param_1 + 0x4692) == cVar5)) {
+  *(int *)(glContext + 0x4848) = param_3;
+  *(int *)(glContext + 0x484c) = param_2;
+  if ((!bVar1) && (*(char *)(glContext + 0x4692) == cVar5)) {
     return uVar6;
   }
-  *(char *)(param_1 + 0x4692) = cVar5;
+  *(char *)(glContext + 0x4692) = cVar5;
   uVar3 = 0;
-  if ((*(int *)(param_1 + 0x4e1c) == 0x1c00) && (cVar5 == '\0')) {
+  if ((*(int *)(glContext + 0x4e1c) == 0x1c00) && (cVar5 == '\0')) {
     uVar3 = 1;
   }
-  *(undefined1 *)(param_1 + 0x4691) = uVar3;
-  *(undefined4 *)(param_1 + 0x757c) = 0xffffffff;
+  *(undefined1 *)(glContext + 0x4691) = uVar3;
+  *(undefined4 *)(glContext + 0x757c) = 0xffffffff;
 LAB_00012774:
-  ((void (*)())_gliSetCurrentPluginDispatchTable)(param_1);
+  ((void (*)())_gliSetCurrentPluginDispatchTable)(glContext);
   return uVar6;
 }
 
@@ -5846,8 +5846,8 @@ int _gleDCBRealloc(param_1, param_2)
 }
 
 /* _glGetIntegerv_Exec @ 0x12a34 (332 bytes) */
-void _glGetIntegerv_Exec(param_1, param_2, param_3)
-  int param_1;
+void _glGetIntegerv_Exec(glContext, param_2, param_3)
+  int glContext;
   undefined4 param_2;
   int *param_3;
 {
@@ -5862,12 +5862,12 @@ void _glGetIntegerv_Exec(param_1, param_2, param_3)
   longlong local_20;
   int local_18 [2];
   
-  if (*(short *)(param_1 + 0x4a10) < 0) {
+  if (*(short *)(glContext + 0x4a10) < 0) {
     pdVar3 = local_a0;
-    iVar4 = ((int (*)())_gleGetState)(param_1,param_2,pdVar3,local_18,local_b0);
+    iVar4 = ((int (*)())_gleGetState)(glContext,param_2,pdVar3,local_18,local_b0);
     dVar6 = DOUBLE_00108d90;
     if (iVar4 == 0) {
-      if (*(int *)(param_1 + 0x7574) != 0) {
+      if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
       uVar1 = 0x500;
@@ -5915,18 +5915,18 @@ void _glGetIntegerv_Exec(param_1, param_2, param_3)
       return;
     }
   }
-  if (*(int *)(param_1 + 0x7574) != 0) {
+  if (*(int *)(glContext + 0x7574) != 0) {
     return;
   }
   uVar1 = 0x502;
 LAB_00012aa8:
-  *(undefined4 *)(param_1 + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = uVar1;
   return;
 }
 
 /* _gleGetState @ 0x12b80 (13228 bytes) */
-int _gleGetState(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
+int _gleGetState(glContext, param_2, param_3, param_4, param_5)
+  int glContext;
   uint param_2;
   double *param_3;
   undefined4 *param_4;
@@ -5953,50 +5953,50 @@ int _gleGetState(param_1, param_2, param_3, param_4, param_5)
   dVar14 = DOUBLE_00108d58;
   iVar13 = 1;
   if (param_2 == 0x6092) {
-    uVar2 = (uint)*(ushort *)(param_1 + 0x2808);
+    uVar2 = (uint)*(ushort *)(glContext + 0x2808);
     goto LAB_00015f48;
   }
   if (0x6092 < param_2) {
     if (param_2 == 0x84e2) {
-      uVar2 = (uint)*(ushort *)(*(int *)(param_1 + 0x468c) + 0xb4);
+      uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xb4);
       goto LAB_00015f48;
     }
     if (0x84e2 < param_2) {
       if (param_2 == 0x86aa) {
-        uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0xac);
+        uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0xac);
         goto LAB_00015f48;
       }
       if (param_2 < 0x86ab) {
         if (param_2 == 0x854e) {
-          uVar2 = *(uint *)(param_1 + 0x41fc);
+          uVar2 = *(uint *)(glContext + 0x41fc);
           goto LAB_00015f48;
         }
         if (param_2 < 0x854f) {
           if (param_2 == 0x8505) {
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0xa4);
+            uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0xa4);
             goto LAB_00015f48;
           }
           if (param_2 < 0x8506) {
             if (param_2 == 0x84ef) {
-              uVar2 = (uint)*(ushort *)(param_1 + 0x3176);
+              uVar2 = (uint)*(ushort *)(glContext + 0x3176);
               goto LAB_00015f48;
             }
             if (param_2 < 0x84f0) {
               if (param_2 == 0x84e5) {
-                if (7 < *(int *)(param_1 + 0x53d4)) {
+                if (7 < *(int *)(glContext + 0x53d4)) {
                   return -1;
                 }
-                iVar13 = param_1 + *(int *)(param_1 + 0x53d4) * 0x40 + 0x1fc0;
+                iVar13 = glContext + *(int *)(glContext + 0x53d4) * 0x40 + 0x1fc0;
               }
               else if (param_2 < 0x84e6) {
                 if (param_2 == 0x84e3) {
-                  iVar13 = param_1 + 0x1cc0;
+                  iVar13 = glContext + 0x1cc0;
                 }
                 else {
                   if (param_2 != 0x84e4) {
                     return 0;
                   }
-                  iVar13 = param_1 + 0x1c80;
+                  iVar13 = glContext + 0x1c80;
                 }
               }
               else {
@@ -6004,33 +6004,33 @@ int _gleGetState(param_1, param_2, param_3, param_4, param_5)
                   if (param_2 != 0x84e8) {
                     return 0;
                   }
-                  uVar4 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x10);
-                  uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0xc);
+                  uVar4 = *(uint *)(*(int *)(glContext + 0x468c) + 0x10);
+                  uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0xc);
                   if ((int)uVar4 < (int)uVar2) {
                     uVar2 = uVar4;
                   }
                   goto LAB_00015efc;
                 }
-                iVar13 = param_1 + 0x1c40;
+                iVar13 = glContext + 0x1c40;
               }
               goto LAB_00014d40;
             }
             if (param_2 == 0x84f8) goto LAB_00015960;
             if (0x84f8 < param_2) {
               if (param_2 == 0x84ff) {
-                uVar2 = (uint)(int)*(float *)(*(int *)(param_1 + 0x468c) + 0xac);
+                uVar2 = (uint)(int)*(float *)(*(int *)(glContext + 0x468c) + 0xac);
               }
               else if (param_2 < 0x8500) {
                 if (param_2 != 0x84fd) {
                   return 0;
                 }
-                uVar2 = (uint)(int)*(float *)(*(int *)(param_1 + 0x468c) + 0xb0);
+                uVar2 = (uint)(int)*(float *)(*(int *)(glContext + 0x468c) + 0xb0);
               }
               else {
                 if (param_2 != 0x8504) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0xa0);
+                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0xa0);
               }
               goto LAB_00015f48;
             }
@@ -6041,63 +6041,63 @@ int _gleGetState(param_1, param_2, param_3, param_4, param_5)
             goto LAB_00015948;
           }
           if (param_2 == 0x851f) {
-            uVar2 = (uint)*(ushort *)(*(int *)(param_1 + 0x4a60) + 0x342);
+            uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x4a60) + 0x342);
             goto LAB_00015f48;
           }
           if (0x851f < param_2) {
             if (param_2 == 0x852a) {
-              *param_3 = (double)*(float *)(param_1 + 0x4200);
-              param_3[1] = (double)*(float *)(param_1 + 0x4204);
-              param_3[2] = (double)*(float *)(param_1 + 0x4208);
-              dVar14 = (double)*(float *)(param_1 + 0x420c);
+              *param_3 = (double)*(float *)(glContext + 0x4200);
+              param_3[1] = (double)*(float *)(glContext + 0x4204);
+              param_3[2] = (double)*(float *)(glContext + 0x4208);
+              dVar14 = (double)*(float *)(glContext + 0x420c);
             }
             else {
               if (param_2 < 0x852b) {
                 if (param_2 == 0x8520) {
-                  uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x8c);
+                  uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x8c);
                 }
                 else {
                   if (param_2 != 0x8522) {
                     return 0;
                   }
-                  uVar2 = (uint)*(byte *)(param_1 + 0x41f8);
+                  uVar2 = (uint)*(byte *)(glContext + 0x41f8);
                 }
                 goto LAB_00015f48;
               }
               if (param_2 == 0x8534) {
-                uVar2 = (uint)*(ushort *)(param_1 + 0x317a);
+                uVar2 = (uint)*(ushort *)(glContext + 0x317a);
                 goto LAB_00015f48;
               }
               if (0x8534 < param_2) {
                 if (param_2 != 0x854d) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x98);
+                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x98);
                 goto LAB_00015f48;
               }
               if (param_2 != 0x852b) {
                 return 0;
               }
-              *param_3 = (double)*(float *)(param_1 + 0x4210);
-              param_3[1] = (double)*(float *)(param_1 + 0x4214);
-              param_3[2] = (double)*(float *)(param_1 + 0x4218);
-              dVar14 = (double)*(float *)(param_1 + 0x421c);
+              *param_3 = (double)*(float *)(glContext + 0x4210);
+              param_3[1] = (double)*(float *)(glContext + 0x4214);
+              param_3[2] = (double)*(float *)(glContext + 0x4218);
+              dVar14 = (double)*(float *)(glContext + 0x421c);
             }
             goto LAB_00015a8c;
           }
           if (param_2 == 0x8514) {
-            uVar2 = *(uint *)(*(int *)(*(int *)(param_1 + 0x53d4) * 0x14 + param_1 + 0x5154) + 4);
+            uVar2 = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5154) + 4);
             goto LAB_00015f48;
           }
           if (0x8514 < param_2) {
             if (param_2 == 0x851c) {
-              uVar2 = (uint)*(ushort *)(*(int *)(param_1 + 0x468c) + 0xc2);
+              uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xc2);
             }
             else {
               if (param_2 != 0x851e) {
                 return 0;
               }
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0x348);
+              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x348);
             }
             goto LAB_00015f48;
           }
@@ -6105,22 +6105,22 @@ int _gleGetState(param_1, param_2, param_3, param_4, param_5)
             if (param_2 != 0x8513) {
               return 0;
             }
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x53d4) * 0x7c + param_1 + 0x3534) & 1;
+            uVar2 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) & 1;
             goto LAB_00015f48;
           }
-          iVar13 = param_1 + 0x1d00;
+          iVar13 = glContext + 0x1d00;
         }
         else {
           if (param_2 != 0x8641) {
             if (0x8641 < param_2) {
               if (param_2 == 0x86a3) {
-                iVar11 = *(int *)(param_1 + 0x468c);
+                iVar11 = *(int *)(glContext + 0x468c);
                 iVar13 = 0;
                 if (*(char *)(iVar11 + 0xc6) != '\0') {
                   do {
                     iVar3 = iVar13 + 1;
                     *(uint *)(param_3 + iVar13) = *(uint *)(iVar13 * 4 + iVar11 + 200);
-                    iVar11 = *(int *)(param_1 + 0x468c);
+                    iVar11 = *(int *)(glContext + 0x468c);
                     iVar13 = iVar3;
                   } while (iVar3 < (int)(uint)*(byte *)(iVar11 + 0xc6));
                   return iVar3;
@@ -6129,92 +6129,92 @@ int _gleGetState(param_1, param_2, param_3, param_4, param_5)
               }
               if (param_2 < 0x86a4) {
                 if (param_2 == 0x864b) {
-                  uVar2 = *(uint *)(param_1 + 0x541c);
+                  uVar2 = *(uint *)(glContext + 0x541c);
                 }
                 else if (param_2 < 0x864c) {
                   if (param_2 == 0x8642) {
-                    uVar2 = (uint)*(byte *)(param_1 + 0x4665);
+                    uVar2 = (uint)*(byte *)(glContext + 0x4665);
                   }
                   else {
                     if (param_2 != 0x8643) {
                       return 0;
                     }
-                    uVar2 = (uint)*(byte *)(param_1 + 0x4666);
+                    uVar2 = (uint)*(byte *)(glContext + 0x4666);
                   }
                 }
                 else if (param_2 == 0x864f) {
-                  uVar2 = (uint)*(byte *)(param_1 + 0x3129);
+                  uVar2 = (uint)*(byte *)(glContext + 0x3129);
                 }
                 else {
                   if (param_2 != 0x86a2) {
                     return 0;
                   }
-                  uVar2 = (uint)*(byte *)(*(int *)(param_1 + 0x468c) + 0xc6);
+                  uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x468c) + 0xc6);
                 }
                 goto LAB_00015f48;
               }
               if (param_2 == 0x86a6) {
-                uVar2 = (uint)*(byte *)(param_1 + 0x4662);
+                uVar2 = (uint)*(byte *)(glContext + 0x4662);
                 goto LAB_00015f48;
               }
               if (param_2 < 0x86a7) {
                 if (param_2 == 0x86a4) {
-                  uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x90);
+                  uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x90);
                 }
                 else {
                   if (param_2 != 0x86a5) {
                     return 0;
                   }
-                  uVar2 = (uint)*(byte *)(param_1 + 0x4660);
+                  uVar2 = (uint)*(byte *)(glContext + 0x4660);
                 }
                 goto LAB_00015f48;
               }
               if (param_2 != 0x86a8) {
                 if (param_2 < 0x86a9) {
-                  uVar2 = (uint)*(byte *)(param_1 + 0x4661);
+                  uVar2 = (uint)*(byte *)(glContext + 0x4661);
                 }
                 else {
-                  uVar2 = *(ushort *)(*(int *)(param_1 + 0x4a60) + 0xb0) & 0xffff7fff;
+                  uVar2 = *(ushort *)(*(int *)(glContext + 0x4a60) + 0xb0) & 0xffff7fff;
                 }
                 goto LAB_00015f48;
               }
-              *param_3 = (double)*(float *)(param_1 + 0x2d0);
-              param_3[1] = (double)*(float *)(param_1 + 0x2d4);
-              param_3[2] = (double)*(float *)(param_1 + 0x2d8);
-              dVar14 = (double)*(float *)(param_1 + 0x2dc);
+              *param_3 = (double)*(float *)(glContext + 0x2d0);
+              param_3[1] = (double)*(float *)(glContext + 0x2d4);
+              param_3[2] = (double)*(float *)(glContext + 0x2d8);
+              dVar14 = (double)*(float *)(glContext + 0x2dc);
               goto LAB_00015a8c;
             }
             if (param_2 != 0x85b4) {
               if (param_2 < 0x85b5) {
                 if (param_2 == 0x85b1) {
-                  uVar2 = *(uint *)(param_1 + 0x507c);
+                  uVar2 = *(uint *)(glContext + 0x507c);
                   goto LAB_00015f48;
                 }
                 if (param_2 < 0x85b2) {
                   if (param_2 == 0x855a) {
-                    uVar2 = (uint)*(ushort *)(param_1 + 0x3168);
+                    uVar2 = (uint)*(ushort *)(glContext + 0x3168);
                   }
                   else {
                     if (param_2 != 0x85b0) {
                       return 0;
                     }
-                    uVar2 = (uint)*(byte *)(param_1 + 0x30ae);
+                    uVar2 = (uint)*(byte *)(glContext + 0x30ae);
                   }
                   goto LAB_00015f48;
                 }
                 if (param_2 == 0x85b2) {
-                  uVar2 = (uint)*(byte *)(param_1 + 0x31e6);
+                  uVar2 = (uint)*(byte *)(glContext + 0x31e6);
                   goto LAB_00015f48;
                 }
                 if (param_2 != 0x85b3) {
                   return 0;
                 }
 LAB_000155d4:
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x53d4) * 0x7c + param_1 + 0x3534) >> 2 & 1;
+                uVar2 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 2 & 1;
                 goto LAB_00015f48;
               }
               if (param_2 == 0x8620) {
-                uVar2 = (uint)*(byte *)(param_1 + 0x4664);
+                uVar2 = (uint)*(byte *)(glContext + 0x4664);
                 goto LAB_00015f48;
               }
               if (0x8620 < param_2) {
@@ -6232,25 +6232,25 @@ LAB_000155d4:
                 if (param_2 != 0x8640) {
                   return 0;
                 }
-                iVar13 = *(int *)(*(int *)(param_1 + 0x4ff4) * 4 + param_1 + 0x4ffc);
+                iVar13 = *(int *)(*(int *)(glContext + 0x4ff4) * 4 + glContext + 0x4ffc);
                 goto LAB_00014c5c;
               }
               if (param_2 == 0x85b5) {
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 4);
+                uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 4);
                 goto LAB_00015f48;
               }
               if (param_2 != 0x85b6) {
                 return 0;
               }
 LAB_00015960:
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0xe8);
+              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0xe8);
               goto LAB_00015f48;
             }
 LAB_00015948:
-            uVar2 = *(uint *)(*(int *)(*(int *)(param_1 + 0x53d4) * 0x14 + param_1 + 0x515c) + 4);
+            uVar2 = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x515c) + 4);
             goto LAB_00015f48;
           }
-          iVar13 = param_1 + *(int *)(param_1 + 0x4ff4) * 0x40 + 0x1bc0;
+          iVar13 = glContext + *(int *)(glContext + 0x4ff4) * 0x40 + 0x1bc0;
         }
 LAB_00014c84:
         _gleGetMatrixd(iVar13,param_3);
@@ -6258,7 +6258,7 @@ LAB_00014c84:
       else {
         if (param_2 == 0x889b) {
           uVar2 = 0;
-          iVar13 = *(int *)(*(int *)(param_1 + 0x4a60) + 0x378);
+          iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x378);
           if (iVar13 != 0) {
             uVar2 = *(uint *)(iVar13 + 4);
           }
@@ -6266,13 +6266,13 @@ LAB_00014c84:
         }
         if (param_2 < 0x889c) {
           if (param_2 == 0x883d) {
-            uVar2 = (uint)*(ushort *)(param_1 + 0x30e2);
+            uVar2 = (uint)*(ushort *)(glContext + 0x30e2);
             goto LAB_00015f48;
           }
           if (0x883d < param_2) {
             if (param_2 == 0x8894) {
               uVar2 = 0;
-              iVar13 = *(int *)(*(int *)(param_1 + 0x4a60) + 0x358);
+              iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
               if (iVar13 != 0) {
                 uVar2 = *(uint *)(iVar13 + 4);
               }
@@ -6281,7 +6281,7 @@ LAB_00014c84:
             if (0x8894 < param_2) {
               if (param_2 == 0x8897) {
                 uVar2 = 0;
-                iVar13 = *(int *)(*(int *)(param_1 + 0x4a60) + 0x364);
+                iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x364);
                 if (iVar13 != 0) {
                   uVar2 = *(uint *)(iVar13 + 4);
                 }
@@ -6289,7 +6289,7 @@ LAB_00014c84:
               else if (param_2 < 0x8898) {
                 if (param_2 == 0x8895) {
                   uVar2 = 0;
-                  iVar13 = *(int *)(*(int *)(param_1 + 0x4a60) + 0x35c);
+                  iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
                   if (iVar13 != 0) {
                     uVar2 = *(uint *)(iVar13 + 4);
                   }
@@ -6299,7 +6299,7 @@ LAB_00014c84:
                     return 0;
                   }
                   uVar2 = 0;
-                  iVar13 = *(int *)(*(int *)(param_1 + 0x4a60) + 0x360);
+                  iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x360);
                   if (iVar13 != 0) {
                     uVar2 = *(uint *)(iVar13 + 4);
                   }
@@ -6307,20 +6307,20 @@ LAB_00014c84:
               }
               else if (param_2 == 0x8899) {
                 uVar2 = 0;
-                if (*(int *)(param_1 + 0x48f4) != 0) {
-                  uVar2 = *(uint *)(*(int *)(param_1 + 0x48f4) + 4);
+                if (*(int *)(glContext + 0x48f4) != 0) {
+                  uVar2 = *(uint *)(*(int *)(glContext + 0x48f4) + 4);
                 }
               }
               else if (param_2 < 0x889a) {
                 uVar2 = 0;
-                iVar13 = *(int *)(*(int *)(param_1 + 0x4a60) + 0x368);
+                iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x368);
                 if (iVar13 != 0) {
                   uVar2 = *(uint *)(iVar13 + 4);
                 }
               }
               else {
                 uVar2 = 0;
-                iVar13 = *(int *)(*(int *)(param_1 + 0x53d8) * 4 + *(int *)(param_1 + 0x4a60) +
+                iVar13 = *(int *)(*(int *)(glContext + 0x53d8) * 4 + *(int *)(glContext + 0x4a60) +
                                  0x380);
                 if (iVar13 != 0) {
                   uVar2 = *(uint *)(iVar13 + 4);
@@ -6329,7 +6329,7 @@ LAB_00014c84:
               goto LAB_00015f48;
             }
             if (param_2 == 0x8872) {
-              uVar2 = (uint)*(ushort *)(*(int *)(param_1 + 0x468c) + 0xb6);
+              uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xb6);
               goto LAB_00015f48;
             }
             if (param_2 < 0x8873) {
@@ -6340,45 +6340,45 @@ LAB_00014c84:
                 if (param_2 != 0x8871) {
                   return 0;
                 }
-                uVar2 = (uint)*(ushort *)(*(int *)(param_1 + 0x468c) + 0xba);
+                uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xba);
               }
               goto LAB_00015f48;
             }
             if (param_2 == 0x8890) {
-              uVar2 = (uint)*(byte *)(param_1 + 0x312a);
+              uVar2 = (uint)*(byte *)(glContext + 0x312a);
               goto LAB_00015f48;
             }
             if (param_2 != 0x8891) {
               return 0;
             }
-            *param_3 = *(double *)(param_1 + 0x312c);
-            dVar14 = *(double *)(param_1 + 0x3134);
+            *param_3 = *(double *)(glContext + 0x312c);
+            dVar14 = *(double *)(glContext + 0x3134);
 LAB_00015cf4:
             iVar13 = 2;
             param_3[1] = dVar14;
             goto LAB_00015d48;
           }
           if (param_2 == 0x8801) {
-            uVar2 = (uint)*(ushort *)(param_1 + 0x351a);
+            uVar2 = (uint)*(ushort *)(glContext + 0x351a);
             goto LAB_00015f48;
           }
           if (0x8801 < param_2) {
             if (param_2 == 0x8804) {
-              uVar2 = (uint)*(byte *)(param_1 + 0x466c);
+              uVar2 = (uint)*(byte *)(glContext + 0x466c);
             }
             else if (param_2 < 0x8805) {
               if (param_2 == 0x8802) {
-                uVar2 = (uint)*(ushort *)(param_1 + 0x351c);
+                uVar2 = (uint)*(ushort *)(glContext + 0x351c);
               }
               else {
                 if (param_2 != 0x8803) {
                   return 0;
                 }
-                uVar2 = (uint)*(ushort *)(param_1 + 0x351e);
+                uVar2 = (uint)*(ushort *)(glContext + 0x351e);
               }
             }
             else if (param_2 == 0x8824) {
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x14);
+              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x14);
             }
             else {
               if (param_2 < 0x8824) {
@@ -6390,11 +6390,11 @@ LAB_00015cf4:
               uVar2 = 0;
               iVar13 = param_2 - 0x8825;
               if (iVar13 < 4) {
-                if (*(int *)(param_1 + 0x744c) == 0) {
-                  uVar2 = (uint)*(ushort *)(iVar13 * 2 + param_1 + 0x311a);
+                if (*(int *)(glContext + 0x744c) == 0) {
+                  uVar2 = (uint)*(ushort *)(iVar13 * 2 + glContext + 0x311a);
                 }
                 else {
-                  uVar2 = (uint)*(ushort *)(iVar13 * 2 + *(int *)(param_1 + 0x744c) + 0xc0);
+                  uVar2 = (uint)*(ushort *)(iVar13 * 2 + *(int *)(glContext + 0x744c) + 0xc0);
                 }
               }
             }
@@ -6404,27 +6404,27 @@ LAB_00015cf4:
             if (param_2 != 0x8800) {
               return 0;
             }
-            uVar2 = (uint)*(ushort *)(param_1 + 0x3518);
+            uVar2 = (uint)*(ushort *)(glContext + 0x3518);
             goto LAB_00015f48;
           }
           if (param_2 < 0x8722) {
             if (param_2 == 0x86ab) {
-              uVar2 = (uint)*(short *)(*(int *)(param_1 + 0x4a60) + 0xb2);
+              uVar2 = (uint)*(short *)(*(int *)(glContext + 0x4a60) + 0xb2);
             }
             else {
               if (param_2 != 0x86ad) {
                 return 0;
               }
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0x334) >> 0x15 & 1;
+              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x15 & 1;
             }
             goto LAB_00015f48;
           }
-          iVar13 = param_1 + param_2 * 0x40 + -0x21ab40;
+          iVar13 = glContext + param_2 * 0x40 + -0x21ab40;
           goto LAB_00014c84;
         }
         if (param_2 == 0x8a10) {
-          *(uint *)param_3 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x1c);
-          uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x20);
+          *(uint *)param_3 = *(uint *)(*(int *)(glContext + 0x468c) + 0x1c);
+          uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x20);
           goto LAB_00015638;
         }
         if (0x8a10 < param_2) {
@@ -6438,7 +6438,7 @@ LAB_00015cf4:
             else if (param_2 < 0x8b4b) {
               if (param_2 == 0x8a11) {
                 uVar2 = 0;
-                iVar13 = *(int *)(*(int *)(param_1 + 0x4a60) + 0x37c);
+                iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x37c);
                 if (iVar13 != 0) {
                   uVar2 = *(uint *)(iVar13 + 4);
                 }
@@ -6462,85 +6462,85 @@ LAB_00015cf4:
           }
           else if (param_2 == 0x8ca6) {
             uVar2 = 0;
-            if (*(int *)(param_1 + 0x744c) != 0) {
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x744c) + 4);
+            if (*(int *)(glContext + 0x744c) != 0) {
+              uVar2 = *(uint *)(*(int *)(glContext + 0x744c) + 4);
             }
           }
           else if (param_2 < 0x8ca7) {
             if (param_2 == 0x8b8b) {
-              uVar2 = (uint)*(ushort *)(param_1 + 0x317c);
+              uVar2 = (uint)*(ushort *)(glContext + 0x317c);
             }
             else {
               if (param_2 != 0x8b8d) {
                 return 0;
               }
               uVar2 = 0;
-              if (*(int *)(param_1 + 0x5430) != 0) {
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x5430) + 4);
+              if (*(int *)(glContext + 0x5430) != 0) {
+                uVar2 = *(uint *)(*(int *)(glContext + 0x5430) + 4);
               }
             }
           }
           else if (param_2 == 0x8cdf) {
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x18);
+            uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x18);
           }
           else if (param_2 < 0x8ce0) {
             if (param_2 != 0x8ca7) {
               return 0;
             }
             uVar2 = 0;
-            if (*(int *)(param_1 + 0x7448) != 0) {
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x7448) + 4);
+            if (*(int *)(glContext + 0x7448) != 0) {
+              uVar2 = *(uint *)(*(int *)(glContext + 0x7448) + 4);
             }
           }
           else {
             if (param_2 != 0x19262) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(param_1 + 0x50b5);
+            uVar2 = (uint)*(byte *)(glContext + 0x50b5);
           }
           goto LAB_00015f48;
         }
         if (param_2 == 0x88ef) {
           uVar2 = 0;
-          if (*(int *)(param_1 + 0x4a6c) != 0) {
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x4a6c) + 4);
+          if (*(int *)(glContext + 0x4a6c) != 0) {
+            uVar2 = *(uint *)(*(int *)(glContext + 0x4a6c) + 4);
           }
           goto LAB_00015f48;
         }
         if (0x88ef < param_2) {
           if (param_2 == 0x897c) {
-            uVar2 = (uint)*(byte *)(*(int *)(param_1 + 0x4a60) + 0x34c);
+            uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x4a60) + 0x34c);
           }
           else if (param_2 < 0x897d) {
             if (param_2 != 0x8910) {
               if (param_2 != 0x8911) {
                 return 0;
               }
-              uVar2 = *(byte *)(param_1 + 0x7583) + 0x404;
+              uVar2 = *(byte *)(glContext + 0x7583) + 0x404;
               goto LAB_00015efc;
             }
-            uVar2 = *(uint *)(param_1 + 0x3520) >> 2 & 1;
+            uVar2 = *(uint *)(glContext + 0x3520) >> 2 & 1;
           }
           else if (param_2 == 0x8a0d) {
-            uVar2 = (uint)*(ushort *)(*(int *)(param_1 + 0x4a60) + 0xe0);
+            uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x4a60) + 0xe0);
           }
           else if (param_2 < 0x8a0e) {
             if (param_2 != 0x8a0c) {
               return 0;
             }
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0x334) >> 0x17 & 1;
+            uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x17 & 1;
           }
           else {
             if (param_2 != 0x8a0f) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(*(int *)(param_1 + 0x468c) + 0x27);
+            uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x468c) + 0x27);
           }
           goto LAB_00015f48;
         }
         if (param_2 == 0x889e) {
           uVar2 = 0;
-          iVar13 = *(int *)(*(int *)(param_1 + 0x4a60) + 0x374);
+          iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x374);
           if (iVar13 != 0) {
             uVar2 = *(uint *)(iVar13 + 4);
           }
@@ -6549,7 +6549,7 @@ LAB_00015cf4:
         if (param_2 < 0x889f) {
           if (param_2 == 0x889c) {
             uVar2 = 0;
-            iVar13 = *(int *)(*(int *)(param_1 + 0x4a60) + 0x370);
+            iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x370);
             if (iVar13 != 0) {
               uVar2 = *(uint *)(iVar13 + 4);
             }
@@ -6559,7 +6559,7 @@ LAB_00015cf4:
               return 0;
             }
             uVar2 = 0;
-            iVar13 = *(int *)(*(int *)(param_1 + 0x4a60) + 0x36c);
+            iVar13 = *(int *)(*(int *)(glContext + 0x4a60) + 0x36c);
             if (iVar13 != 0) {
               uVar2 = *(uint *)(iVar13 + 4);
             }
@@ -6571,12 +6571,12 @@ LAB_00015cf4:
             return 0;
           }
           uVar2 = 0;
-          if (*(int *)(param_1 + 0x4a68) != 0) {
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x4a68) + 4);
+          if (*(int *)(glContext + 0x4a68) != 0) {
+            uVar2 = *(uint *)(*(int *)(glContext + 0x4a68) + 4);
           }
           goto LAB_00015f48;
         }
-        iVar13 = param_1 + *(int *)(param_1 + 0x4ff4) * 0x40 + 0x1bc0;
+        iVar13 = glContext + *(int *)(glContext + 0x4ff4) * 0x40 + 0x1bc0;
 LAB_00014d40:
         _gleGetTransposeMatrixd(iVar13,param_3);
       }
@@ -6584,60 +6584,60 @@ LAB_00014d40:
       goto LAB_00015d48;
     }
     if (param_2 == 0x809f) {
-      uVar2 = (uint)*(byte *)(param_1 + 0x41f2);
+      uVar2 = (uint)*(byte *)(glContext + 0x41f2);
       goto LAB_00015f48;
     }
     if (param_2 < 0x80a0) {
       if (param_2 == 0x806d) {
-        uVar2 = *(uint *)(param_1 + 0x31dc);
+        uVar2 = *(uint *)(glContext + 0x31dc);
         goto LAB_00015f48;
       }
       if (0x806d < param_2) {
         if (param_2 == 0x807e) {
-          uVar2 = *(ushort *)(*(int *)(param_1 + 0x4a60) + 0x50) & 0xffff7fff;
+          uVar2 = *(ushort *)(*(int *)(glContext + 0x4a60) + 0x50) & 0xffff7fff;
         }
         else if (param_2 < 0x807f) {
           if (param_2 == 0x8076) {
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0x334) >> 0x12 & 1;
+            uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x12 & 1;
           }
           else if (param_2 < 0x8077) {
             if (param_2 == 0x8073) {
-              uVar2 = (uint)*(ushort *)(*(int *)(param_1 + 0x468c) + 0xbe);
+              uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xbe);
             }
             else if (param_2 < 0x8074) {
               if (param_2 == 0x806e) {
-                uVar2 = *(uint *)(param_1 + 0x31d0);
+                uVar2 = *(uint *)(glContext + 0x31d0);
               }
               else {
                 if (param_2 != 0x806f) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x53d4) * 0x7c + param_1 + 0x3534) >> 1 & 1;
+                uVar2 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 1 & 1;
               }
             }
             else if (param_2 == 0x8074) {
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0x334) >> 0x10 & 1;
+              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x10 & 1;
             }
             else {
               if (param_2 != 0x8075) {
                 return 0;
               }
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0x334) >> 0x11 & 1;
+              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x11 & 1;
             }
           }
           else if (param_2 == 0x8079) {
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0x334) >> 0x16 & 1;
+            uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x16 & 1;
           }
           else if (param_2 < 0x807a) {
             if (param_2 == 0x8077) {
-              uVar2 = -(uint)*(ushort *)(param_1 + 0x48ea) >> 0x1f;
+              uVar2 = -(uint)*(ushort *)(glContext + 0x48ea) >> 0x1f;
             }
             else {
               if (param_2 != 0x8078) {
                 return 0;
               }
-              iVar13 = *(int *)(param_1 + 0x4a60);
-              lVar15 = ___ashldi3(0,0x1000000,*(undefined4 *)(param_1 + 0x53d8));
+              iVar13 = *(int *)(glContext + 0x4a60);
+              lVar15 = ___ashldi3(0,0x1000000,*(undefined4 *)(glContext + 0x53d8));
               uVar2 = 0;
               if ((*(uint *)(iVar13 + 0x330) & (uint)((ulonglong)lVar15 >> 0x20)) != 0 ||
                   (*(uint *)(iVar13 + 0x334) & (uint)lVar15) != 0) {
@@ -6646,52 +6646,52 @@ LAB_00014d40:
             }
           }
           else if (param_2 == 0x807b) {
-            uVar2 = (uint)*(ushort *)(*(int *)(param_1 + 0x4a60) + 0x38);
+            uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x4a60) + 0x38);
           }
           else if (param_2 < 0x807b) {
-            uVar2 = (uint)*(short *)(*(int *)(param_1 + 0x4a60) + 0x3a);
+            uVar2 = (uint)*(short *)(*(int *)(glContext + 0x4a60) + 0x3a);
           }
           else {
             if (param_2 != 0x807c) {
               return 0;
             }
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0x34);
+            uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x34);
           }
         }
         else if (param_2 == 0x8086) {
-          uVar2 = *(uint *)(param_1 + 0x48e4);
+          uVar2 = *(uint *)(glContext + 0x48e4);
         }
         else if (param_2 < 0x8087) {
           if (param_2 == 0x8082) {
-            uVar2 = *(ushort *)(*(int *)(param_1 + 0x4a60) + 0x68) & 0xffff7fff;
+            uVar2 = *(ushort *)(*(int *)(glContext + 0x4a60) + 0x68) & 0xffff7fff;
           }
           else if (param_2 < 0x8083) {
             if (param_2 == 0x807f) {
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0x4c);
+              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x4c);
             }
             else {
               if (param_2 != 0x8081) {
                 return 0;
               }
-              uVar2 = (uint)*(short *)(*(int *)(param_1 + 0x4a60) + 0x6a);
+              uVar2 = (uint)*(short *)(*(int *)(glContext + 0x4a60) + 0x6a);
             }
           }
           else if (param_2 == 0x8083) {
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 100);
+            uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 100);
           }
           else {
             if (param_2 != 0x8085) {
               return 0;
             }
-            uVar2 = (uint)*(ushort *)(param_1 + 0x48e8);
+            uVar2 = (uint)*(ushort *)(glContext + 0x48e8);
           }
         }
         else if (param_2 == 0x808a) {
-          uVar2 = *(uint *)(*(int *)(param_1 + 0x53d8) * 0x18 + *(int *)(param_1 + 0x4a60) + 0xf4);
+          uVar2 = *(uint *)(*(int *)(glContext + 0x53d8) * 0x18 + *(int *)(glContext + 0x4a60) + 0xf4);
         }
         else if (param_2 < 0x808b) {
           if (param_2 == 0x8088) {
-            uVar2 = (uint)*(short *)(*(int *)(param_1 + 0x53d8) * 0x18 + *(int *)(param_1 + 0x4a60)
+            uVar2 = (uint)*(short *)(*(int *)(glContext + 0x53d8) * 0x18 + *(int *)(glContext + 0x4a60)
                                     + 0xfa);
           }
           else {
@@ -6699,169 +6699,169 @@ LAB_00014d40:
               return 0;
             }
             uVar2 = (uint)*(ushort *)
-                           (*(int *)(param_1 + 0x53d8) * 0x18 + *(int *)(param_1 + 0x4a60) + 0xf8);
+                           (*(int *)(glContext + 0x53d8) * 0x18 + *(int *)(glContext + 0x4a60) + 0xf8);
           }
         }
         else if (param_2 == 0x809d) {
-          uVar2 = (uint)*(byte *)(param_1 + 0x41f0);
+          uVar2 = (uint)*(byte *)(glContext + 0x41f0);
         }
         else if (param_2 < 0x809e) {
           if (param_2 != 0x808c) {
             return 0;
           }
-          uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0xc4);
+          uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0xc4);
         }
         else {
-          uVar2 = (uint)*(byte *)(param_1 + 0x41f1);
+          uVar2 = (uint)*(byte *)(glContext + 0x41f1);
         }
         goto LAB_00015f48;
       }
       if (param_2 == 0x8021) {
-        dVar14 = (double)*(float *)(param_1 + 0x339c);
+        dVar14 = (double)*(float *)(glContext + 0x339c);
       }
       else if (param_2 < 0x8022) {
         if (param_2 == 0x8011) {
-          uVar2 = *(uint *)(param_1 + 0x3410) >> 1 & 1;
+          uVar2 = *(uint *)(glContext + 0x3410) >> 1 & 1;
           goto LAB_00015f48;
         }
         if (param_2 < 0x8012) {
           if (param_2 != 0x8005) {
             if (param_2 < 0x8006) {
               if (param_2 == 0x6093) {
-                uVar2 = (uint)*(ushort *)(param_1 + 0x280a);
+                uVar2 = (uint)*(ushort *)(glContext + 0x280a);
               }
               else {
                 if (param_2 != 0x6094) {
                   return 0;
                 }
-                uVar2 = *(uint *)(param_1 + 0x2800);
+                uVar2 = *(uint *)(glContext + 0x2800);
               }
             }
             else if (param_2 == 0x8009) {
-              uVar2 = (uint)*(ushort *)(param_1 + 0x30e0);
+              uVar2 = (uint)*(ushort *)(glContext + 0x30e0);
             }
             else {
               if (param_2 != 0x8010) {
                 return 0;
               }
-              uVar2 = *(uint *)(param_1 + 0x3410) & 1;
+              uVar2 = *(uint *)(glContext + 0x3410) & 1;
             }
             goto LAB_00015f48;
           }
-          *param_3 = (double)*(float *)(param_1 + 0x30d0);
-          param_3[1] = (double)*(float *)(param_1 + 0x30d4);
-          param_3[2] = (double)*(float *)(param_1 + 0x30d8);
-          dVar14 = (double)*(float *)(param_1 + 0x30dc);
+          *param_3 = (double)*(float *)(glContext + 0x30d0);
+          param_3[1] = (double)*(float *)(glContext + 0x30d4);
+          param_3[2] = (double)*(float *)(glContext + 0x30d8);
+          dVar14 = (double)*(float *)(glContext + 0x30dc);
           goto LAB_00015a8c;
         }
         if (param_2 == 0x801d) {
-          dVar14 = (double)*(float *)(param_1 + 0x3398);
+          dVar14 = (double)*(float *)(glContext + 0x3398);
         }
         else if (param_2 < 0x801e) {
           if (param_2 == 0x8012) {
-            uVar2 = *(uint *)(param_1 + 0x3410) >> 2 & 1;
+            uVar2 = *(uint *)(glContext + 0x3410) >> 2 & 1;
             goto LAB_00015f48;
           }
           if (param_2 != 0x801c) {
             return 0;
           }
-          dVar14 = (double)*(float *)(param_1 + 0x3390);
+          dVar14 = (double)*(float *)(glContext + 0x3390);
         }
         else if (param_2 == 0x801f) {
-          dVar14 = (double)*(float *)(param_1 + 0x33a8);
+          dVar14 = (double)*(float *)(glContext + 0x33a8);
         }
         else if (param_2 < 0x8020) {
-          dVar14 = (double)*(float *)(param_1 + 0x33a0);
+          dVar14 = (double)*(float *)(glContext + 0x33a0);
         }
         else {
-          dVar14 = (double)*(float *)(param_1 + 0x3394);
+          dVar14 = (double)*(float *)(glContext + 0x3394);
         }
       }
       else if (param_2 == 0x8038) {
-        dVar14 = (double)*(float *)(param_1 + 0x34c8);
+        dVar14 = (double)*(float *)(glContext + 0x34c8);
       }
       else {
         if (0x8038 < param_2) {
           if (param_2 == 0x8069) {
-            uVar2 = *(uint *)(*(int *)(*(int *)(param_1 + 0x53d4) * 0x14 + param_1 + 0x5160) + 4);
+            uVar2 = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5160) + 4);
           }
           else if (param_2 < 0x806a) {
             if (param_2 == 0x803a) {
-              uVar2 = (uint)*(byte *)(param_1 + 0x280e);
+              uVar2 = (uint)*(byte *)(glContext + 0x280e);
             }
             else {
               if (param_2 != 0x8068) {
                 return 0;
               }
-              uVar2 = *(uint *)(*(int *)(*(int *)(param_1 + 0x53d4) * 0x14 + param_1 + 0x5164) + 4);
+              uVar2 = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5164) + 4);
             }
           }
           else if (param_2 == 0x806b) {
-            uVar2 = *(uint *)(param_1 + 0x31c0);
+            uVar2 = *(uint *)(glContext + 0x31c0);
           }
           else if (param_2 < 0x806c) {
-            uVar2 = *(uint *)(*(int *)(*(int *)(param_1 + 0x53d4) * 0x14 + param_1 + 0x5158) + 4);
+            uVar2 = *(uint *)(*(int *)(*(int *)(glContext + 0x53d4) * 0x14 + glContext + 0x5158) + 4);
           }
           else {
-            uVar2 = *(uint *)(0x31b4 + param_1);
+            uVar2 = *(uint *)(0x31b4 + glContext);
           }
           goto LAB_00015f48;
         }
         if (param_2 == 0x8024) {
-          uVar2 = *(uint *)(param_1 + 0x3410) >> 4 & 1;
+          uVar2 = *(uint *)(glContext + 0x3410) >> 4 & 1;
           goto LAB_00015f48;
         }
         if (0x8024 < param_2) {
           if (param_2 == 0x802e) {
-            uVar2 = *(uint *)(param_1 + 0x3410) >> 3 & 1;
+            uVar2 = *(uint *)(glContext + 0x3410) >> 3 & 1;
           }
           else {
             if (param_2 != 0x8037) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(param_1 + 0x34dd);
+            uVar2 = (uint)*(byte *)(glContext + 0x34dd);
           }
           goto LAB_00015f48;
         }
         if (param_2 == 0x8022) {
-          dVar14 = (double)*(float *)(param_1 + 0x33a4);
+          dVar14 = (double)*(float *)(glContext + 0x33a4);
         }
         else {
           if (param_2 != 0x8023) {
             return 0;
           }
-          dVar14 = (double)*(float *)(param_1 + 0x33ac);
+          dVar14 = (double)*(float *)(glContext + 0x33ac);
         }
       }
     }
     else {
       if (param_2 == 0x80f0) {
-        uVar2 = *(uint *)(param_1 + 0x5080);
+        uVar2 = *(uint *)(glContext + 0x5080);
         goto LAB_00015f48;
       }
       if (param_2 < 0x80f1) {
         if (param_2 == 0x80b8) {
-          dVar14 = (double)*(float *)(param_1 + 0x3360);
+          dVar14 = (double)*(float *)(glContext + 0x3360);
         }
         else if (param_2 < 0x80b9) {
           if (param_2 == 0x80b1) {
-            iVar13 = param_1 + 0x1c40;
+            iVar13 = glContext + 0x1c40;
             goto LAB_00014c84;
           }
           if (param_2 < 0x80b2) {
             if (param_2 == 0x80a9) {
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x5c);
+              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x5c);
               goto LAB_00015f48;
             }
             if (param_2 < 0x80aa) {
               if (param_2 == 0x80a0) {
-                uVar2 = (uint)*(byte *)(param_1 + 0x41f3);
+                uVar2 = (uint)*(byte *)(glContext + 0x41f3);
               }
               else {
                 if (param_2 != 0x80a8) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x58);
+                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x58);
               }
               goto LAB_00015f48;
             }
@@ -6869,13 +6869,13 @@ LAB_00014d40:
               if (param_2 != 0x80ab) {
                 return 0;
               }
-              uVar2 = (uint)*(byte *)(param_1 + 0x41f4);
+              uVar2 = (uint)*(byte *)(glContext + 0x41f4);
               goto LAB_00015f48;
             }
-            dVar14 = (double)*(float *)(param_1 + 0x41ec);
+            dVar14 = (double)*(float *)(glContext + 0x41ec);
           }
           else if (param_2 == 0x80b4) {
-            dVar14 = (double)*(float *)(param_1 + 0x335c);
+            dVar14 = (double)*(float *)(glContext + 0x335c);
           }
           else {
             if (param_2 < 0x80b5) {
@@ -6886,48 +6886,48 @@ LAB_00014d40:
                 uVar2 = 5;
                 goto LAB_00015f48;
               }
-              iVar13 = *(int *)(param_1 + 0x5004);
+              iVar13 = *(int *)(glContext + 0x5004);
               goto LAB_00014bf4;
             }
             if (param_2 == 0x80b6) {
-              dVar14 = (double)*(float *)(param_1 + 0x336c);
+              dVar14 = (double)*(float *)(glContext + 0x336c);
             }
             else if (param_2 < 0x80b7) {
-              dVar14 = (double)*(float *)(param_1 + 0x3364);
+              dVar14 = (double)*(float *)(glContext + 0x3364);
             }
             else {
-              dVar14 = (double)*(float *)(param_1 + 0x3374);
+              dVar14 = (double)*(float *)(glContext + 0x3374);
             }
           }
         }
         else {
           if (param_2 == 0x80ca) {
-            uVar2 = (uint)*(ushort *)(param_1 + 0x30ce);
+            uVar2 = (uint)*(ushort *)(glContext + 0x30ce);
             goto LAB_00015f48;
           }
           if (0x80ca < param_2) {
             if (param_2 == 0x80d1) {
-              uVar2 = *(uint *)(param_1 + 0x3410) >> 6 & 1;
+              uVar2 = *(uint *)(glContext + 0x3410) >> 6 & 1;
             }
             else if (param_2 < 0x80d2) {
               if (param_2 == 0x80cb) {
-                uVar2 = (uint)*(ushort *)(param_1 + 0x30cc);
+                uVar2 = (uint)*(ushort *)(glContext + 0x30cc);
               }
               else {
                 if (param_2 != 0x80d0) {
                   return 0;
                 }
-                uVar2 = *(uint *)(param_1 + 0x3410) >> 5 & 1;
+                uVar2 = *(uint *)(glContext + 0x3410) >> 5 & 1;
               }
             }
             else if (param_2 == 33000) {
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x88);
+              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x88);
             }
             else if (param_2 < 0x80e9) {
               if (param_2 != 0x80d2) {
                 return 0;
               }
-              uVar2 = *(uint *)(param_1 + 0x3410) >> 7 & 1;
+              uVar2 = *(uint *)(glContext + 0x3410) >> 7 & 1;
             }
             else {
               if (param_2 != 0x80e9) {
@@ -6938,7 +6938,7 @@ LAB_00014d40:
             goto LAB_00015f48;
           }
           if (param_2 == 0x80bb) {
-            dVar14 = (double)*(float *)(param_1 + 0x3378);
+            dVar14 = (double)*(float *)(glContext + 0x3378);
           }
           else {
             if (0x80bb < param_2) {
@@ -6951,46 +6951,46 @@ LAB_00014d40:
               goto LAB_00014d84;
             }
             if (param_2 == 0x80b9) {
-              dVar14 = (double)*(float *)(param_1 + 0x3368);
+              dVar14 = (double)*(float *)(glContext + 0x3368);
             }
             else {
               if (param_2 != 0x80ba) {
                 return 0;
               }
-              dVar14 = (double)*(float *)(param_1 + 0x3370);
+              dVar14 = (double)*(float *)(glContext + 0x3370);
             }
           }
         }
       }
       else if (param_2 == 0x8453) {
-        dVar14 = (double)*(float *)(param_1 + 0x2cc);
+        dVar14 = (double)*(float *)(glContext + 0x2cc);
       }
       else {
         if (0x8453 < param_2) {
           if (param_2 == 0x845b) {
-            uVar2 = *(ushort *)(*(int *)(param_1 + 0x4a60) + 0x98) & 0xffff7fff;
+            uVar2 = *(ushort *)(*(int *)(glContext + 0x4a60) + 0x98) & 0xffff7fff;
           }
           else if (param_2 < 0x845c) {
             if (param_2 == 0x8457) {
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0x334) >> 0x13 & 1;
+              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x13 & 1;
             }
             else if (param_2 < 0x8458) {
               if (param_2 == 0x8454) {
-                uVar2 = (uint)*(ushort *)(*(int *)(param_1 + 0x4a60) + 0x80);
+                uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x4a60) + 0x80);
               }
               else {
                 if (param_2 != 0x8455) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0x7c);
+                uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x7c);
               }
             }
             else {
               if (param_2 == 0x8459) {
                 iVar13 = 4;
-                *param_3 = (double)*(float *)(param_1 + 0x2c0);
-                param_3[1] = (double)*(float *)(param_1 + 0x2c4);
-                fVar1 = *(float *)(param_1 + 0x2c8);
+                *param_3 = (double)*(float *)(glContext + 0x2c0);
+                param_3[1] = (double)*(float *)(glContext + 0x2c4);
+                fVar1 = *(float *)(glContext + 0x2c8);
                 *(uint *)(param_3 + 3) = 0x3ff00000;
                 *(uint *)((int)param_3 + 0x1c) = 0;
                 param_3[2] = (double)fVar1;
@@ -6999,14 +6999,14 @@ LAB_00014d40:
               if (param_2 != 0x845a) {
                 return 0;
               }
-              uVar2 = (uint)*(short *)(*(int *)(param_1 + 0x4a60) + 0x9a);
+              uVar2 = (uint)*(short *)(*(int *)(glContext + 0x4a60) + 0x9a);
             }
           }
           else {
             if (param_2 == 0x846d) {
-              uVar2 = (uint)(int)*(float *)(*(int *)(param_1 + 0x468c) + 0x60);
+              uVar2 = (uint)(int)*(float *)(*(int *)(glContext + 0x468c) + 0x60);
               *(uint *)param_3 = uVar2;
-              fVar1 = *(float *)(*(int *)(param_1 + 0x468c) + 100);
+              fVar1 = *(float *)(*(int *)(glContext + 0x468c) + 100);
 LAB_00014828:
               *(int *)(param_3 + 1) = (int)fVar1;
               if (uVar2 == 0) {
@@ -7016,53 +7016,53 @@ LAB_00014828:
             }
             if (0x846d < param_2) {
               if (param_2 == 0x84e0) {
-                iVar13 = *(int *)(param_1 + 0x53d4);
+                iVar13 = *(int *)(glContext + 0x53d4);
               }
               else {
                 if (param_2 < 0x84e1) {
                   if (param_2 != 0x846e) {
                     return 0;
                   }
-                  uVar2 = (uint)(int)*(float *)(*(int *)(param_1 + 0x468c) + 0x6c);
+                  uVar2 = (uint)(int)*(float *)(*(int *)(glContext + 0x468c) + 0x6c);
                   *(uint *)param_3 = uVar2;
-                  fVar1 = *(float *)(*(int *)(param_1 + 0x468c) + 0x70);
+                  fVar1 = *(float *)(*(int *)(glContext + 0x468c) + 0x70);
                   goto LAB_00014828;
                 }
-                iVar13 = *(int *)(param_1 + 0x53d8);
+                iVar13 = *(int *)(glContext + 0x53d8);
               }
               uVar2 = iVar13 + 0x84c0;
               goto LAB_00015efc;
             }
             if (param_2 == 0x845c) {
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0x94);
+              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x94);
             }
             else {
               if (param_2 != 0x845e) {
                 return 0;
               }
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x4a60) + 0x334) >> 0x14 & 1;
+              uVar2 = *(uint *)(*(int *)(glContext + 0x4a60) + 0x334) >> 0x14 & 1;
             }
           }
           goto LAB_00015f48;
         }
         if (param_2 == 0x81a8) {
-          uVar2 = *(uint *)(param_1 + 0x4984);
+          uVar2 = *(uint *)(glContext + 0x4984);
           goto LAB_00015f48;
         }
         if (0x81a8 < param_2) {
           if (param_2 == 0x81fb) {
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x53d4) * 0x7c + param_1 + 0x3534) >> 8 & 1;
+            uVar2 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 8 & 1;
             goto LAB_00015f48;
           }
           if (param_2 < 0x81fc) {
             if (param_2 == 0x81a9) {
-              uVar2 = *(uint *)(param_1 + 0x4988);
+              uVar2 = *(uint *)(glContext + 0x4988);
             }
             else {
               if (param_2 != 0x81f8) {
                 return 0;
               }
-              uVar2 = (uint)*(ushort *)(param_1 + 0x30a8);
+              uVar2 = (uint)*(ushort *)(glContext + 0x30a8);
             }
             goto LAB_00015f48;
           }
@@ -7071,17 +7071,17 @@ LAB_00014828:
               if (param_2 != 0x8200) {
                 return 0;
               }
-              uVar2 = (uint)*(byte *)(param_1 + 0x466c);
+              uVar2 = (uint)*(byte *)(glContext + 0x466c);
             }
             else {
               if (param_2 != 0x8450) {
                 return 0;
               }
-              uVar2 = (uint)*(ushort *)(param_1 + 0x3166);
+              uVar2 = (uint)*(ushort *)(glContext + 0x3166);
             }
             goto LAB_00015f48;
           }
-          iVar13 = *(int *)(param_1 + 0x4854);
+          iVar13 = *(int *)(glContext + 0x4854);
           *param_3 = (double)*(float *)(iVar13 + -0x1c0);
           param_3[1] = (double)*(float *)(iVar13 + -0x1bc);
           fVar1 = *(float *)(iVar13 + -0x1b8);
@@ -7091,7 +7091,7 @@ LAB_00015d40:
           goto LAB_00015d48;
         }
         if (param_2 == 0x8128) {
-          dVar14 = (double)*(float *)(param_1 + 0x3428);
+          dVar14 = (double)*(float *)(glContext + 0x3428);
         }
         else {
           if (0x8128 < param_2) {
@@ -7099,22 +7099,22 @@ LAB_00015d40:
               if (param_2 != 0x8192) {
                 return 0;
               }
-              uVar2 = (uint)*(ushort *)(param_1 + 0x3178);
+              uVar2 = (uint)*(ushort *)(glContext + 0x3178);
               goto LAB_00015f48;
             }
-            *param_3 = (double)*(float *)(param_1 + 0x342c);
-            param_3[1] = (double)*(float *)(param_1 + 0x3430);
-            fVar1 = *(float *)(param_1 + 0x3434);
+            *param_3 = (double)*(float *)(glContext + 0x342c);
+            param_3[1] = (double)*(float *)(glContext + 0x3430);
+            fVar1 = *(float *)(glContext + 0x3434);
             goto LAB_00015d40;
           }
           if (param_2 == 0x8126) {
-            dVar14 = (double)*(float *)(param_1 + 0x3420);
+            dVar14 = (double)*(float *)(glContext + 0x3420);
           }
           else {
             if (param_2 != 0x8127) {
               return 0;
             }
-            dVar14 = (double)*(float *)(param_1 + 0x3424);
+            dVar14 = (double)*(float *)(glContext + 0x3424);
           }
         }
       }
@@ -7122,10 +7122,10 @@ LAB_00015d40:
     goto LAB_0001467c;
   }
   if (param_2 == 0xc61) {
-    if (7 < *(int *)(param_1 + 0x53d4)) {
+    if (7 < *(int *)(glContext + 0x53d4)) {
       return -1;
     }
-    uVar2 = (uint)*(byte *)(*(int *)(param_1 + 0x53d4) * 0x94 + param_1 + 0x3d79);
+    uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x94 + glContext + 0x3d79);
     goto LAB_00015f48;
   }
   if (0xc61 < param_2) {
@@ -7135,188 +7135,188 @@ LAB_00015d40:
     }
     if (param_2 < 0xd3c) {
       if (param_2 == 0xd11) {
-        uVar2 = *(uint *)(param_1 + 0x3414) >> 1 & 1;
+        uVar2 = *(uint *)(glContext + 0x3414) >> 1 & 1;
         goto LAB_00015f48;
       }
       if (param_2 < 0xd12) {
         if (param_2 == 0xcf0) {
-          uVar2 = (uint)*(byte *)(param_1 + 0x31e4);
+          uVar2 = (uint)*(byte *)(glContext + 0x31e4);
         }
         else if (param_2 < 0xcf1) {
           if (param_2 == 0xcb3) {
-            uVar2 = *(uint *)(param_1 + 0x327c);
+            uVar2 = *(uint *)(glContext + 0x327c);
           }
           else if (param_2 < 0xcb4) {
             if (param_2 == 0xcb0) {
-              uVar2 = *(uint *)(param_1 + 0x3270);
+              uVar2 = *(uint *)(glContext + 0x3270);
             }
             else if (param_2 < 0xcb1) {
               if (param_2 == 0xc62) {
-                if (7 < *(int *)(param_1 + 0x53d4)) {
+                if (7 < *(int *)(glContext + 0x53d4)) {
                   return -1;
                 }
-                uVar2 = (uint)*(byte *)(*(int *)(param_1 + 0x53d4) * 0x94 + param_1 + 0x3d7a);
+                uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x94 + glContext + 0x3d7a);
               }
               else {
                 if (param_2 != 0xc63) {
                   return 0;
                 }
-                if (7 < *(int *)(param_1 + 0x53d4)) {
+                if (7 < *(int *)(glContext + 0x53d4)) {
                   return -1;
                 }
-                uVar2 = (uint)*(byte *)(*(int *)(param_1 + 0x53d4) * 0x94 + param_1 + 0x3d7b);
+                uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x94 + glContext + 0x3d7b);
               }
             }
             else if (param_2 == 0xcb1) {
-              uVar2 = *(uint *)(param_1 + 0x3274);
+              uVar2 = *(uint *)(glContext + 0x3274);
             }
             else {
               if (param_2 != 0xcb2) {
                 return 0;
               }
-              uVar2 = *(uint *)(param_1 + 0x3278);
+              uVar2 = *(uint *)(glContext + 0x3278);
             }
           }
           else if (param_2 == 0xcb6) {
-            uVar2 = *(uint *)(param_1 + 0x3288);
+            uVar2 = *(uint *)(glContext + 0x3288);
           }
           else if (param_2 < 0xcb7) {
             if (param_2 == 0xcb4) {
-              uVar2 = *(uint *)(param_1 + 0x3280);
+              uVar2 = *(uint *)(glContext + 0x3280);
             }
             else {
               if (param_2 != 0xcb5) {
                 return 0;
               }
-              uVar2 = *(uint *)(param_1 + 0x3284);
+              uVar2 = *(uint *)(glContext + 0x3284);
             }
           }
           else if (param_2 == 0xcb8) {
-            uVar2 = *(uint *)(param_1 + 0x3290);
+            uVar2 = *(uint *)(glContext + 0x3290);
           }
           else if (param_2 < 0xcb8) {
-            uVar2 = *(uint *)(param_1 + 0x328c);
+            uVar2 = *(uint *)(glContext + 0x328c);
           }
           else {
             if (param_2 != 0xcb9) {
               return 0;
             }
-            uVar2 = *(uint *)(param_1 + 0x3294);
+            uVar2 = *(uint *)(glContext + 0x3294);
           }
         }
         else if (param_2 == 0xd00) {
-          uVar2 = (uint)*(byte *)(param_1 + 0x31c8);
+          uVar2 = (uint)*(byte *)(glContext + 0x31c8);
         }
         else if (param_2 < 0xd01) {
           if (param_2 == 0xcf3) {
-            uVar2 = *(uint *)(param_1 + 0x31d4);
+            uVar2 = *(uint *)(glContext + 0x31d4);
           }
           else if (param_2 < 0xcf4) {
             if (param_2 == 0xcf1) {
-              uVar2 = (uint)*(byte *)(param_1 + 0x31e5);
+              uVar2 = (uint)*(byte *)(glContext + 0x31e5);
             }
             else {
               if (param_2 != 0xcf2) {
                 return 0;
               }
-              uVar2 = *(uint *)(param_1 + 0x31cc);
+              uVar2 = *(uint *)(glContext + 0x31cc);
             }
           }
           else if (param_2 == 0xcf4) {
-            uVar2 = *(uint *)(param_1 + 0x31d8);
+            uVar2 = *(uint *)(glContext + 0x31d8);
           }
           else {
             if (param_2 != 0xcf5) {
               return 0;
             }
-            uVar2 = *(uint *)(param_1 + 0x31e0);
+            uVar2 = *(uint *)(glContext + 0x31e0);
           }
         }
         else if (param_2 == 0xd03) {
-          uVar2 = *(uint *)(param_1 + 0x31b8);
+          uVar2 = *(uint *)(glContext + 0x31b8);
         }
         else if (param_2 < 0xd04) {
           if (param_2 == 0xd01) {
-            uVar2 = (uint)*(byte *)(param_1 + 0x31c9);
+            uVar2 = (uint)*(byte *)(glContext + 0x31c9);
           }
           else {
             if (param_2 != 0xd02) {
               return 0;
             }
-            uVar2 = *(uint *)(param_1 + 0x31b0);
+            uVar2 = *(uint *)(glContext + 0x31b0);
           }
         }
         else if (param_2 == 0xd05) {
-          uVar2 = *(uint *)(param_1 + 0x31c4);
+          uVar2 = *(uint *)(glContext + 0x31c4);
         }
         else if (param_2 < 0xd05) {
-          uVar2 = *(uint *)(param_1 + 0x31bc);
+          uVar2 = *(uint *)(glContext + 0x31bc);
         }
         else {
           if (param_2 != 0xd10) {
             return 0;
           }
-          uVar2 = *(uint *)(param_1 + 0x3414) & 1;
+          uVar2 = *(uint *)(glContext + 0x3414) & 1;
         }
         goto LAB_00015f48;
       }
       if (param_2 == 0xd1e) {
-        dVar14 = (double)*(float *)(param_1 + 0x320c);
+        dVar14 = (double)*(float *)(glContext + 0x320c);
       }
       else if (param_2 < 0xd1f) {
         if (param_2 == 0xd17) {
-          dVar14 = (double)*(float *)(param_1 + 0x31ac);
+          dVar14 = (double)*(float *)(glContext + 0x31ac);
         }
         else if (param_2 < 0xd18) {
           if (param_2 == 0xd14) {
-            dVar14 = (double)*(float *)(param_1 + 0x31ec);
+            dVar14 = (double)*(float *)(glContext + 0x31ec);
           }
           else {
             if (param_2 < 0xd15) {
               if (param_2 == 0xd12) {
-                uVar2 = *(uint *)(param_1 + 0x3214);
+                uVar2 = *(uint *)(glContext + 0x3214);
               }
               else {
                 if (param_2 != 0xd13) {
                   return 0;
                 }
-                uVar2 = *(uint *)(param_1 + 0x3210);
+                uVar2 = *(uint *)(glContext + 0x3210);
               }
               goto LAB_00015f48;
             }
             if (param_2 == 0xd15) {
-              dVar14 = (double)*(float *)(param_1 + 0x31e8);
+              dVar14 = (double)*(float *)(glContext + 0x31e8);
             }
             else {
               if (param_2 != 0xd16) {
                 return 0;
               }
-              dVar14 = (double)*(float *)(param_1 + 0x31a8);
+              dVar14 = (double)*(float *)(glContext + 0x31a8);
             }
           }
         }
         else if (param_2 == 0xd1a) {
-          dVar14 = (double)*(float *)(param_1 + 0x31fc);
+          dVar14 = (double)*(float *)(glContext + 0x31fc);
         }
         else if (param_2 < 0xd1b) {
           if (param_2 == 0xd18) {
-            dVar14 = (double)*(float *)(param_1 + 0x31f4);
+            dVar14 = (double)*(float *)(glContext + 0x31f4);
           }
           else {
             if (param_2 != 0xd19) {
               return 0;
             }
-            dVar14 = (double)*(float *)(param_1 + 0x31f0);
+            dVar14 = (double)*(float *)(glContext + 0x31f0);
           }
         }
         else if (param_2 == 0xd1c) {
-          dVar14 = (double)*(float *)(param_1 + 0x3204);
+          dVar14 = (double)*(float *)(glContext + 0x3204);
         }
         else if (param_2 < 0xd1d) {
-          dVar14 = (double)*(float *)(param_1 + 0x31f8);
+          dVar14 = (double)*(float *)(glContext + 0x31f8);
         }
         else {
-          dVar14 = (double)*(float *)(param_1 + 0x3200);
+          dVar14 = (double)*(float *)(glContext + 0x3200);
         }
       }
       else {
@@ -7344,8 +7344,8 @@ LAB_00015d40:
           }
           else {
             if (0xd39 < param_2) {
-              *(uint *)param_3 = *(uint *)(*(int *)(param_1 + 0x468c) + 0xc);
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x10);
+              *(uint *)param_3 = *(uint *)(*(int *)(glContext + 0x468c) + 0xc);
+              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x10);
               goto LAB_00015638;
             }
             uVar2 = 5;
@@ -7364,7 +7364,7 @@ LAB_00015d40:
             if (param_2 != 0xd33) {
               return 0;
             }
-            uVar2 = (uint)*(ushort *)(*(int *)(param_1 + 0x468c) + 0xbc);
+            uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xbc);
           }
           goto LAB_00015f48;
         }
@@ -7375,80 +7375,80 @@ LAB_00015d40:
           uVar2 = 10;
           goto LAB_00015f48;
         }
-        dVar14 = (double)*(float *)(param_1 + 0x3208);
+        dVar14 = (double)*(float *)(glContext + 0x3208);
       }
     }
     else {
       if (param_2 == 0xdb2) {
-        uVar2 = (uint)*(byte *)(param_1 + 0x74ed);
+        uVar2 = (uint)*(byte *)(glContext + 0x74ed);
         goto LAB_00015f48;
       }
       if (param_2 < 0xdb3) {
         if (param_2 == 0xd70) {
-          uVar2 = (*(int *)(param_1 + 0x4fbc) - param_1) + -0x4e2c >> 2;
+          uVar2 = (*(int *)(glContext + 0x4fbc) - glContext) + -0x4e2c >> 2;
           goto LAB_00015efc;
         }
         if (0xd70 < param_2) {
           if (param_2 == 0xd94) {
-            uVar2 = (uint)*(byte *)(param_1 + 0x74e6);
+            uVar2 = (uint)*(byte *)(glContext + 0x74e6);
           }
           else if (param_2 < 0xd95) {
             if (param_2 == 0xd91) {
-              uVar2 = (uint)*(byte *)(param_1 + 0x74e3);
+              uVar2 = (uint)*(byte *)(glContext + 0x74e3);
             }
             else if (param_2 < 0xd92) {
               if (param_2 == 0xd80) {
-                uVar2 = (uint)*(byte *)(param_1 + 0x74f2);
+                uVar2 = (uint)*(byte *)(glContext + 0x74f2);
               }
               else {
                 if (param_2 != 0xd90) {
                   return 0;
                 }
-                uVar2 = (uint)*(byte *)(param_1 + 0x74e2);
+                uVar2 = (uint)*(byte *)(glContext + 0x74e2);
               }
             }
             else if (param_2 == 0xd92) {
-              uVar2 = (uint)*(byte *)(param_1 + 0x74e4);
+              uVar2 = (uint)*(byte *)(glContext + 0x74e4);
             }
             else {
               if (param_2 != 0xd93) {
                 return 0;
               }
-              uVar2 = (uint)*(byte *)(param_1 + 0x74e5);
+              uVar2 = (uint)*(byte *)(glContext + 0x74e5);
             }
           }
           else if (param_2 == 0xd97) {
-            uVar2 = (uint)*(byte *)(param_1 + 0x74e0);
+            uVar2 = (uint)*(byte *)(glContext + 0x74e0);
           }
           else if (param_2 < 0xd98) {
             if (param_2 == 0xd95) {
-              uVar2 = (uint)*(byte *)(param_1 + 0x74e7);
+              uVar2 = (uint)*(byte *)(glContext + 0x74e7);
             }
             else {
               if (param_2 != 0xd96) {
                 return 0;
               }
-              uVar2 = (uint)*(byte *)(param_1 + 0x74e8);
+              uVar2 = (uint)*(byte *)(glContext + 0x74e8);
             }
           }
           else if (param_2 == 0xdb0) {
-            uVar2 = (uint)*(byte *)(param_1 + 0x74eb);
+            uVar2 = (uint)*(byte *)(glContext + 0x74eb);
           }
           else if (param_2 < 0xdb1) {
             if (param_2 != 0xd98) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(param_1 + 0x74e1);
+            uVar2 = (uint)*(byte *)(glContext + 0x74e1);
           }
           else {
-            uVar2 = (uint)*(byte *)(param_1 + 0x74ec);
+            uVar2 = (uint)*(byte *)(glContext + 0x74ec);
           }
           goto LAB_00015f48;
         }
         if (param_2 == 0xd55) {
-          iVar13 = *(int *)(param_1 + 0x744c);
+          iVar13 = *(int *)(glContext + 0x744c);
           if (iVar13 == 0) {
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x38);
+            uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x38);
             goto LAB_00015f48;
           }
           iVar11 = 0;
@@ -7464,27 +7464,27 @@ LAB_00015d40:
           iVar3 = iVar11 * 0x18 + iVar13;
           iVar11 = *(int *)(iVar11 * 4 + iVar13 + 0xd4) + 0x10;
           uVar9 = *(undefined4 *)(iVar3 + 0x38);
-          iVar13 = (uint)*(byte *)(param_1 + 0x85a8) << 2;
+          iVar13 = (uint)*(byte *)(glContext + 0x85a8) << 2;
           uVar10 = 0x805f;
         }
         else {
           if (0xd55 < param_2) {
             if (param_2 == 0xd58) {
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x44);
+              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x44);
               goto LAB_00015f48;
             }
             if (0xd58 < param_2) {
               if (param_2 == 0xd5a) {
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x4c);
+                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x4c);
               }
               else if (param_2 < 0xd5a) {
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x48);
+                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x48);
               }
               else {
                 if (param_2 != 0xd5b) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x50);
+                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x50);
               }
               goto LAB_00015f48;
             }
@@ -7492,44 +7492,44 @@ LAB_00015d40:
               if (param_2 != 0xd57) {
                 return 0;
               }
-              iVar13 = *(int *)(param_1 + 0x744c);
+              iVar13 = *(int *)(glContext + 0x744c);
               if (iVar13 == 0) {
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x40);
+                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x40);
                 goto LAB_00015f48;
               }
               uVar2 = 0;
               if (*(int *)(iVar13 + 0xe8) == 0) goto LAB_00015450;
-              pcVar12 = *(code **)(param_1 + 0x479c);
+              pcVar12 = *(code **)(glContext + 0x479c);
               uVar9 = *(undefined4 *)(iVar13 + 0xb0);
               uVar7 = *(undefined4 *)
-                       (*(int *)(iVar13 + 0xe8) + 0x10 + (uint)*(byte *)(param_1 + 0x85a8) * 4);
+                       (*(int *)(iVar13 + 0xe8) + 0x10 + (uint)*(byte *)(glContext + 0x85a8) * 4);
               uVar10 = 0x884a;
-              uVar6 = *(undefined4 *)(param_1 + 0x4688);
+              uVar6 = *(undefined4 *)(glContext + 0x4688);
               uVar8 = *(undefined4 *)(iVar13 + 0xac);
               goto LAB_00015488;
             }
-            iVar13 = *(int *)(param_1 + 0x744c);
+            iVar13 = *(int *)(glContext + 0x744c);
             if (iVar13 == 0) {
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x3c);
+              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x3c);
               goto LAB_00015f48;
             }
             uVar2 = 0;
             if (*(int *)(iVar13 + 0xe4) != 0) {
-              pcVar12 = *(code **)(param_1 + 0x479c);
+              pcVar12 = *(code **)(glContext + 0x479c);
               uVar9 = *(undefined4 *)(iVar13 + 0x98);
               uVar7 = *(undefined4 *)
-                       (*(int *)(iVar13 + 0xe4) + 0x10 + (uint)*(byte *)(param_1 + 0x85a8) * 4);
+                       (*(int *)(iVar13 + 0xe4) + 0x10 + (uint)*(byte *)(glContext + 0x85a8) * 4);
               uVar10 = 0x884a;
-              uVar6 = *(undefined4 *)(param_1 + 0x4688);
+              uVar6 = *(undefined4 *)(glContext + 0x4688);
               uVar8 = *(undefined4 *)(iVar13 + 0x94);
               goto LAB_00015488;
             }
             goto LAB_00015450;
           }
           if (param_2 == 0xd52) {
-            iVar13 = *(int *)(param_1 + 0x744c);
+            iVar13 = *(int *)(glContext + 0x744c);
             if (iVar13 == 0) {
-              uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x2c);
+              uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x2c);
               goto LAB_00015f48;
             }
             iVar11 = 0;
@@ -7545,26 +7545,26 @@ LAB_00015d40:
             iVar3 = iVar11 * 0x18 + iVar13;
             iVar11 = *(int *)(iVar11 * 4 + iVar13 + 0xd4) + 0x10;
             uVar9 = *(undefined4 *)(iVar3 + 0x38);
-            iVar13 = (uint)*(byte *)(param_1 + 0x85a8) << 2;
+            iVar13 = (uint)*(byte *)(glContext + 0x85a8) << 2;
             uVar10 = 0x805c;
           }
           else {
             if (param_2 < 0xd53) {
               if (param_2 == 0xd50) {
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 8);
+                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 8);
               }
               else {
                 if (param_2 != 0xd51) {
                   return 0;
                 }
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x28);
+                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x28);
               }
               goto LAB_00015f48;
             }
             if (param_2 == 0xd53) {
-              iVar13 = *(int *)(param_1 + 0x744c);
+              iVar13 = *(int *)(glContext + 0x744c);
               if (iVar13 == 0) {
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x30);
+                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x30);
                 goto LAB_00015f48;
               }
               iVar11 = 0;
@@ -7580,16 +7580,16 @@ LAB_00015d40:
               iVar3 = iVar11 * 0x18 + iVar13;
               iVar11 = *(int *)(iVar11 * 4 + iVar13 + 0xd4) + 0x10;
               uVar9 = *(undefined4 *)(iVar3 + 0x38);
-              iVar13 = (uint)*(byte *)(param_1 + 0x85a8) << 2;
+              iVar13 = (uint)*(byte *)(glContext + 0x85a8) << 2;
               uVar10 = 0x805d;
             }
             else {
               if (param_2 != 0xd54) {
                 return 0;
               }
-              iVar13 = *(int *)(param_1 + 0x744c);
+              iVar13 = *(int *)(glContext + 0x744c);
               if (iVar13 == 0) {
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x34);
+                uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x34);
                 goto LAB_00015f48;
               }
               iVar11 = 0;
@@ -7605,96 +7605,96 @@ LAB_00015d40:
               iVar3 = iVar11 * 0x18 + iVar13;
               iVar11 = *(int *)(iVar11 * 4 + iVar13 + 0xd4) + 0x10;
               uVar9 = *(undefined4 *)(iVar3 + 0x38);
-              iVar13 = (uint)*(byte *)(param_1 + 0x85a8) << 2;
+              iVar13 = (uint)*(byte *)(glContext + 0x85a8) << 2;
               uVar10 = 0x805e;
             }
           }
         }
         uVar7 = *(undefined4 *)(iVar11 + iVar13);
-        pcVar12 = *(code **)(param_1 + 0x479c);
-        uVar6 = *(undefined4 *)(param_1 + 0x4688);
+        pcVar12 = *(code **)(glContext + 0x479c);
+        uVar6 = *(undefined4 *)(glContext + 0x4688);
         uVar8 = *(undefined4 *)(iVar3 + 0x34);
 LAB_00015488:
         (*pcVar12)(uVar6,uVar7,uVar8,uVar9,uVar10,param_3);
         return 1;
       }
       if (param_2 == 0xdf1) {
-        uVar2 = *(uint *)(param_1 + 0x4fd4);
+        uVar2 = *(uint *)(glContext + 0x4fd4);
         goto LAB_00015f48;
       }
       if (param_2 < 0xdf2) {
         if (param_2 == 0xdb8) {
-          uVar2 = (uint)*(byte *)(param_1 + 0x74ea);
+          uVar2 = (uint)*(byte *)(glContext + 0x74ea);
           goto LAB_00015f48;
         }
         if (param_2 < 0xdb9) {
           if (param_2 == 0xdb5) {
-            uVar2 = (uint)*(byte *)(param_1 + 0x74f0);
+            uVar2 = (uint)*(byte *)(glContext + 0x74f0);
           }
           else if (param_2 < 0xdb6) {
             if (param_2 == 0xdb3) {
-              uVar2 = (uint)*(byte *)(param_1 + 0x74ee);
+              uVar2 = (uint)*(byte *)(glContext + 0x74ee);
             }
             else {
               if (param_2 != 0xdb4) {
                 return 0;
               }
-              uVar2 = (uint)*(byte *)(param_1 + 0x74ef);
+              uVar2 = (uint)*(byte *)(glContext + 0x74ef);
             }
           }
           else if (param_2 == 0xdb6) {
-            uVar2 = (uint)*(byte *)(param_1 + 0x74f1);
+            uVar2 = (uint)*(byte *)(glContext + 0x74f1);
           }
           else {
             if (param_2 != 0xdb7) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(param_1 + 0x74e9);
+            uVar2 = (uint)*(byte *)(glContext + 0x74e9);
           }
           goto LAB_00015f48;
         }
         if (param_2 == 0xdd2) {
-          *param_3 = (double)*(float *)(param_1 + 0x74bc);
-          param_3[1] = (double)*(float *)(param_1 + 0x74c0);
-          param_3[2] = (double)*(float *)(param_1 + 0x74cc);
-          dVar14 = (double)*(float *)(param_1 + 0x74d0);
+          *param_3 = (double)*(float *)(glContext + 0x74bc);
+          param_3[1] = (double)*(float *)(glContext + 0x74c0);
+          param_3[2] = (double)*(float *)(glContext + 0x74cc);
+          dVar14 = (double)*(float *)(glContext + 0x74d0);
           goto LAB_00014704;
         }
         if (0xdd2 < param_2) {
           if (param_2 == 0xde0) {
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x53d4) * 0x7c + param_1 + 0x3534) >> 4 & 1;
+            uVar2 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 4 & 1;
             goto LAB_00015f48;
           }
           if (0xde0 < param_2) {
             if (param_2 != 0xde1) {
               return 0;
             }
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x53d4) * 0x7c + param_1 + 0x3534) >> 3 & 1;
+            uVar2 = *(uint *)(*(int *)(glContext + 0x53d4) * 0x7c + glContext + 0x3534) >> 3 & 1;
             goto LAB_00015f48;
           }
           if (param_2 != 0xdd3) {
             return 0;
           }
-          *param_3 = (double)CONCAT44(0x43300000,*(uint *)(param_1 + 0x74b8) ^ 0x80000000) -
+          *param_3 = (double)CONCAT44(0x43300000,*(uint *)(glContext + 0x74b8) ^ 0x80000000) -
                      DOUBLE_00108d58;
-          dVar14 = (double)CONCAT44(0x43300000,*(uint *)(param_1 + 0x74c8) ^ 0x80000000) - dVar14;
+          dVar14 = (double)CONCAT44(0x43300000,*(uint *)(glContext + 0x74c8) ^ 0x80000000) - dVar14;
           goto LAB_00014860;
         }
         if (param_2 == 0xdd0) {
-          *param_3 = (double)*(float *)(param_1 + 0x74ac);
-          dVar14 = (double)*(float *)(param_1 + 0x74b0);
+          *param_3 = (double)*(float *)(glContext + 0x74ac);
+          dVar14 = (double)*(float *)(glContext + 0x74b0);
           goto LAB_00015cf4;
         }
         if (param_2 != 0xdd1) {
           return 0;
         }
         dVar14 = (double)CONCAT44(0x43300000,
-                                  *(uint *)(0x74a4 + param_1 + 4) ^ 0x80000000) -
+                                  *(uint *)(0x74a4 + glContext + 4) ^ 0x80000000) -
                  DOUBLE_00108d58;
       }
       else {
         if (param_2 == 0x2a02) {
-          uVar2 = (uint)*(byte *)(param_1 + 0x34dc);
+          uVar2 = (uint)*(byte *)(glContext + 0x34dc);
           goto LAB_00015f48;
         }
         if (0x2a02 < param_2) {
@@ -7703,37 +7703,37 @@ LAB_00015488:
               if (5 < param_2 - 0x3000) {
                 return 0;
               }
-              uVar2 = *(uint *)(param_1 + 0x4188) >> (param_2 - 0x3000 & 0x3f) & 1;
+              uVar2 = *(uint *)(glContext + 0x4188) >> (param_2 - 0x3000 & 0x3f) & 1;
             }
             else {
-              uVar2 = *(uint *)(param_1 + 0x30a0) >> (param_2 - 0x4000 & 0x3f) & 1;
+              uVar2 = *(uint *)(glContext + 0x30a0) >> (param_2 - 0x4000 & 0x3f) & 1;
             }
           }
           else if (param_2 == 0x6090) {
-            uVar2 = (uint)*(byte *)(param_1 + 0x280c);
+            uVar2 = (uint)*(byte *)(glContext + 0x280c);
           }
           else {
             if (param_2 != 0x6091) {
               return 0;
             }
-            uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x9c);
+            uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x9c);
           }
           goto LAB_00015f48;
         }
         if (param_2 == 0x1700) {
 LAB_00014c74:
-          iVar13 = param_1 + 0x1cc0;
+          iVar13 = glContext + 0x1cc0;
           goto LAB_00014c84;
         }
         if (param_2 < 0x1701) {
           if (param_2 == 0xdf2) {
-            uVar2 = *(uint *)(param_1 + 0x4fd8);
+            uVar2 = *(uint *)(glContext + 0x4fd8);
           }
           else {
             if (param_2 != 0xdf4) {
               return 0;
             }
-            uVar2 = *(uint *)(param_1 + 0x4e28);
+            uVar2 = *(uint *)(glContext + 0x4e28);
           }
           goto LAB_00015f48;
         }
@@ -7741,30 +7741,30 @@ LAB_00014c74:
           if (param_2 != 0x2a01) {
             return 0;
           }
-          uVar2 = (uint)*(byte *)(param_1 + 0x34db);
+          uVar2 = (uint)*(byte *)(glContext + 0x34db);
           goto LAB_00015f48;
         }
-        dVar14 = (double)*(float *)(param_1 + 0x34cc);
+        dVar14 = (double)*(float *)(glContext + 0x34cc);
       }
     }
     goto LAB_0001467c;
   }
   if (param_2 == 0xb74) {
-    uVar2 = (uint)*(ushort *)(param_1 + 0x3124);
+    uVar2 = (uint)*(ushort *)(glContext + 0x3124);
     goto LAB_00015f48;
   }
   if (param_2 < 0xb75) {
     if (param_2 == 0xb40) {
-      *(uint *)param_3 = (uint)*(ushort *)(param_1 + 0x34d0);
-      uVar2 = (uint)*(ushort *)(param_1 + 0x34d2);
+      *(uint *)param_3 = (uint)*(ushort *)(glContext + 0x34d0);
+      uVar2 = (uint)*(ushort *)(glContext + 0x34d2);
 LAB_00015638:
       *(uint *)(param_3 + 1) = uVar2;
       return 2;
     }
     if (param_2 < 0xb41) {
       if (param_2 == 0xb12) {
-        *param_3 = (double)*(float *)(*(int *)(param_1 + 0x468c) + 0x60);
-        dVar14 = (double)*(float *)(*(int *)(param_1 + 0x468c) + 100);
+        *param_3 = (double)*(float *)(*(int *)(glContext + 0x468c) + 0x60);
+        dVar14 = (double)*(float *)(*(int *)(glContext + 0x468c) + 100);
 LAB_00014860:
         iVar13 = 2;
         param_3[1] = dVar14;
@@ -7772,26 +7772,26 @@ LAB_00014860:
       }
       if (0xb12 < param_2) {
         if (param_2 == 0xb24) {
-          uVar2 = (uint)*(byte *)(param_1 + 0x318c);
+          uVar2 = (uint)*(byte *)(glContext + 0x318c);
           goto LAB_00015f48;
         }
         if (0xb24 < param_2) {
           if (param_2 == 0xb30) {
-            uVar2 = *(uint *)(param_1 + 0x5408);
+            uVar2 = *(uint *)(glContext + 0x5408);
           }
           else if (param_2 < 0xb31) {
             if (param_2 == 0xb25) {
-              uVar2 = (uint)*(ushort *)(param_1 + 0x3188);
+              uVar2 = (uint)*(ushort *)(glContext + 0x3188);
             }
             else {
               if (param_2 != 0xb26) {
                 return 0;
               }
-              uVar2 = *(uint *)(param_1 + 0x3184);
+              uVar2 = *(uint *)(glContext + 0x3184);
             }
           }
           else if (param_2 == 0xb32) {
-            uVar2 = *(uint *)(param_1 + 0x5404);
+            uVar2 = *(uint *)(glContext + 0x5404);
           }
           else {
             uVar2 = 0x40;
@@ -7800,15 +7800,15 @@ LAB_00014860:
                 return 0;
               }
               uVar2 = 0;
-              if (*(int *)(param_1 + 0x5408) != 0) {
-                uVar2 = *(uint *)(*(int *)(param_1 + 0x53e8) + 4);
+              if (*(int *)(glContext + 0x5408) != 0) {
+                uVar2 = *(uint *)(*(int *)(glContext + 0x53e8) + 4);
               }
             }
           }
           goto LAB_00015f48;
         }
         if (param_2 == 0xb21) {
-          uVar2 = (uint)(int)*(float *)(param_1 + 0x3180);
+          uVar2 = (uint)(int)*(float *)(glContext + 0x3180);
           goto LAB_00015f48;
         }
         if (param_2 < 0xb22) {
@@ -7816,21 +7816,21 @@ LAB_00014860:
             if (param_2 != 0xb20) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(param_1 + 0x318d);
+            uVar2 = (uint)*(byte *)(glContext + 0x318d);
             goto LAB_00015f48;
           }
-          dVar14 = (double)*(float *)(*(int *)(param_1 + 0x468c) + 0x68);
+          dVar14 = (double)*(float *)(*(int *)(glContext + 0x468c) + 0x68);
         }
         else {
           if (param_2 == 0xb22) {
-            *param_3 = (double)*(float *)(*(int *)(param_1 + 0x468c) + 0x6c);
-            dVar14 = (double)*(float *)(*(int *)(param_1 + 0x468c) + 0x70);
+            *param_3 = (double)*(float *)(*(int *)(glContext + 0x468c) + 0x6c);
+            dVar14 = (double)*(float *)(*(int *)(glContext + 0x468c) + 0x70);
             goto LAB_00014860;
           }
           if (param_2 != 0xb23) {
             return 0;
           }
-          dVar14 = (double)*(float *)(*(int *)(param_1 + 0x468c) + 0x74);
+          dVar14 = (double)*(float *)(*(int *)(glContext + 0x468c) + 0x74);
         }
         goto LAB_0001467c;
       }
@@ -7841,29 +7841,29 @@ LAB_00014860:
       }
       if (0xb05 < param_2) {
         if (param_2 == 0xb08) {
-          uVar2 = (uint)*(byte *)(param_1 + 0x2ef);
+          uVar2 = (uint)*(byte *)(glContext + 0x2ef);
           goto LAB_00015f48;
         }
         if (0xb08 < param_2) {
           if (param_2 == 0xb10) {
-            uVar2 = (uint)*(byte *)(param_1 + 0x343c);
+            uVar2 = (uint)*(byte *)(glContext + 0x343c);
             goto LAB_00015f48;
           }
           if (0xb10 < param_2) {
-            uVar2 = (uint)(int)*(float *)(param_1 + 0x341c);
+            uVar2 = (uint)(int)*(float *)(glContext + 0x341c);
             goto LAB_00015f48;
           }
           if (param_2 != 0xb09) {
             return 0;
           }
-          dVar14 = (double)*(float *)(*(int *)(param_1 + 0x4854) + -0x1d8);
+          dVar14 = (double)*(float *)(*(int *)(glContext + 0x4854) + -0x1d8);
           goto LAB_0001467c;
         }
         if (param_2 == 0xb06) {
-          if (7 < *(int *)(param_1 + 0x53d4)) {
+          if (7 < *(int *)(glContext + 0x53d4)) {
             return -1;
           }
-          iVar13 = *(int *)(param_1 + 0x53d4) * 0x10 + *(int *)(param_1 + 0x4854) + -0x200;
+          iVar13 = *(int *)(glContext + 0x53d4) * 0x10 + *(int *)(glContext + 0x4854) + -0x200;
           *param_3 = (double)*(float *)(iVar13 + 0x80);
           param_3[1] = (double)*(float *)(iVar13 + 0x84);
           param_3[2] = (double)*(float *)(iVar13 + 0x88);
@@ -7873,10 +7873,10 @@ LAB_00014860:
           if (param_2 != 0xb07) {
             return 0;
           }
-          iVar13 = *(int *)(param_1 + 0x4854);
-          *param_3 = (double)*(float *)(param_1 + 0x2e0);
-          param_3[1] = (double)*(float *)(param_1 + 0x2e4);
-          param_3[2] = (double)*(float *)(param_1 + 0x2e8);
+          iVar13 = *(int *)(glContext + 0x4854);
+          *param_3 = (double)*(float *)(glContext + 0x2e0);
+          param_3[1] = (double)*(float *)(glContext + 0x2e4);
+          param_3[2] = (double)*(float *)(glContext + 0x2e8);
           dVar14 = (double)*(float *)(iVar13 + -0x1e4);
         }
 LAB_00014704:
@@ -7886,9 +7886,9 @@ LAB_00014704:
       }
       if (param_2 == 0xb02) {
         iVar13 = 3;
-        *param_3 = (double)*(float *)(param_1 + 0x2b0);
-        param_3[1] = (double)*(float *)(param_1 + 0x2b4);
-        param_3[2] = (double)*(float *)(param_1 + 0x2b8);
+        *param_3 = (double)*(float *)(glContext + 0x2b0);
+        param_3[1] = (double)*(float *)(glContext + 0x2b4);
+        param_3[2] = (double)*(float *)(glContext + 0x2b8);
         goto LAB_00015a90;
       }
       if (param_2 < 0xb03) {
@@ -7896,20 +7896,20 @@ LAB_00014704:
           if (param_2 != 0xb01) {
             return 0;
           }
-          dVar14 = (double)*(float *)(param_1 + 700);
+          dVar14 = (double)*(float *)(glContext + 700);
           goto LAB_00014670;
         }
-        *param_3 = (double)*(float *)(param_1 + 0x2a0);
-        param_3[1] = (double)*(float *)(param_1 + 0x2a4);
-        param_3[2] = (double)*(float *)(param_1 + 0x2a8);
-        dVar14 = (double)*(float *)(param_1 + 0x2ac);
+        *param_3 = (double)*(float *)(glContext + 0x2a0);
+        param_3[1] = (double)*(float *)(glContext + 0x2a4);
+        param_3[2] = (double)*(float *)(glContext + 0x2a8);
+        dVar14 = (double)*(float *)(glContext + 0x2ac);
       }
       else {
         if (param_2 == 0xb03) {
-          if (7 < *(int *)(param_1 + 0x53d4)) {
+          if (7 < *(int *)(glContext + 0x53d4)) {
             return -1;
           }
-          iVar13 = *(int *)(param_1 + 0x53d4) * 0x10 + param_1;
+          iVar13 = *(int *)(glContext + 0x53d4) * 0x10 + glContext;
           *param_3 = (double)*(float *)(iVar13 + 0x120);
           param_3[1] = (double)*(float *)(iVar13 + 0x124);
           param_3[2] = (double)*(float *)(iVar13 + 0x128);
@@ -7919,7 +7919,7 @@ LAB_00014704:
         if (param_2 != 0xb04) {
           return 0;
         }
-        iVar13 = *(int *)(param_1 + 0x4854);
+        iVar13 = *(int *)(glContext + 0x4854);
         *param_3 = (double)*(float *)(iVar13 + -0x1d0);
         param_3[1] = (double)*(float *)(iVar13 + -0x1cc);
         param_3[2] = (double)*(float *)(iVar13 + -0x1c8);
@@ -7928,71 +7928,71 @@ LAB_00014704:
     }
     else {
       if (param_2 == 0xb56) {
-        uVar2 = (uint)*(ushort *)(param_1 + 0x30a6);
+        uVar2 = (uint)*(ushort *)(glContext + 0x30a6);
         goto LAB_00015f48;
       }
       if (0xb56 < param_2) {
         if (param_2 == 0xb64) {
-          dVar14 = (double)*(float *)(param_1 + 0x3158);
+          dVar14 = (double)*(float *)(glContext + 0x3158);
         }
         else {
           if (0xb64 < param_2) {
             if (param_2 == 0xb70) {
-              *param_3 = *(double *)(param_1 + 0x1b90);
-              param_3[1] = *(double *)(param_1 + 0x1b98);
+              *param_3 = *(double *)(glContext + 0x1b90);
+              param_3[1] = *(double *)(glContext + 0x1b98);
               *param_4 = 0x140a;
               *param_5 = 1;
               return 2;
             }
             if (0xb70 < param_2) {
               if (param_2 == 0xb72) {
-                uVar2 = (uint)*(byte *)(param_1 + 0x31a4);
+                uVar2 = (uint)*(byte *)(glContext + 0x31a4);
                 goto LAB_00015f48;
               }
               if (param_2 < 0xb73) {
-                uVar2 = (uint)*(byte *)(param_1 + 0x3128);
+                uVar2 = (uint)*(byte *)(glContext + 0x3128);
                 goto LAB_00015f48;
               }
-              dVar14 = *(double *)(param_1 + 0x30e8);
+              dVar14 = *(double *)(glContext + 0x30e8);
               goto LAB_00014d74;
             }
             if (param_2 == 0xb65) {
-              uVar2 = (uint)*(ushort *)(param_1 + 0x3164);
+              uVar2 = (uint)*(ushort *)(glContext + 0x3164);
               goto LAB_00015f48;
             }
             if (param_2 != 0xb66) {
               return 0;
             }
-            *param_3 = (double)*(float *)(param_1 + 0x3140);
-            param_3[1] = (double)*(float *)(param_1 + 0x3144);
-            param_3[2] = (double)*(float *)(param_1 + 0x3148);
-            dVar14 = (double)*(float *)(param_1 + 0x314c);
+            *param_3 = (double)*(float *)(glContext + 0x3140);
+            param_3[1] = (double)*(float *)(glContext + 0x3144);
+            param_3[2] = (double)*(float *)(glContext + 0x3148);
+            dVar14 = (double)*(float *)(glContext + 0x314c);
             goto LAB_00015a8c;
           }
           if (param_2 == 0xb61) {
-            dVar14 = (double)*(float *)(param_1 + 0x3160);
+            dVar14 = (double)*(float *)(glContext + 0x3160);
             goto LAB_00014670;
           }
           if (param_2 < 0xb62) {
             if (param_2 == 0xb57) {
-              uVar2 = (uint)*(byte *)(param_1 + 0x30ab);
+              uVar2 = (uint)*(byte *)(glContext + 0x30ab);
             }
             else {
               if (param_2 != 0xb60) {
                 return 0;
               }
-              uVar2 = (uint)*(byte *)(param_1 + 0x316a);
+              uVar2 = (uint)*(byte *)(glContext + 0x316a);
             }
             goto LAB_00015f48;
           }
           if (param_2 == 0xb62) {
-            dVar14 = (double)*(float *)(param_1 + 0x3150);
+            dVar14 = (double)*(float *)(glContext + 0x3150);
           }
           else {
             if (param_2 != 0xb63) {
               return 0;
             }
-            dVar14 = (double)*(float *)(param_1 + 0x3154);
+            dVar14 = (double)*(float *)(glContext + 0x3154);
           }
         }
 LAB_0001467c:
@@ -8002,63 +8002,63 @@ LAB_00015d48:
         return iVar13;
       }
       if (param_2 == 0xb46) {
-        uVar2 = (uint)*(ushort *)(param_1 + 0x34d4);
+        uVar2 = (uint)*(ushort *)(glContext + 0x34d4);
         goto LAB_00015f48;
       }
       if (param_2 < 0xb47) {
         if (param_2 == 0xb43) {
-          uVar2 = (uint)*(byte *)(param_1 + 0x2ec);
+          uVar2 = (uint)*(byte *)(glContext + 0x2ec);
         }
         else if (param_2 < 0xb44) {
           if (param_2 == 0xb41) {
-            uVar2 = (uint)*(byte *)(param_1 + 0x34d9);
+            uVar2 = (uint)*(byte *)(glContext + 0x34d9);
           }
           else {
             if (param_2 != 0xb42) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(param_1 + 0x34d8);
+            uVar2 = (uint)*(byte *)(glContext + 0x34d8);
           }
         }
         else if (param_2 == 0xb44) {
-          uVar2 = (uint)*(byte *)(param_1 + 0x34da);
+          uVar2 = (uint)*(byte *)(glContext + 0x34da);
         }
         else {
           if (param_2 != 0xb45) {
             return 0;
           }
-          uVar2 = (uint)*(ushort *)(param_1 + 0x34d6);
+          uVar2 = (uint)*(ushort *)(glContext + 0x34d6);
         }
         goto LAB_00015f48;
       }
       if (param_2 == 0xb52) {
-        uVar2 = (uint)*(byte *)(param_1 + 0x30ac);
+        uVar2 = (uint)*(byte *)(glContext + 0x30ac);
         goto LAB_00015f48;
       }
       if (param_2 < 0xb53) {
         if (param_2 == 0xb50) {
-          uVar2 = (uint)*(byte *)(param_1 + 0x30aa);
+          uVar2 = (uint)*(byte *)(glContext + 0x30aa);
         }
         else {
           if (param_2 != 0xb51) {
             return 0;
           }
-          uVar2 = (uint)*(byte *)(param_1 + 0x30ad);
+          uVar2 = (uint)*(byte *)(glContext + 0x30ad);
         }
         goto LAB_00015f48;
       }
       if (param_2 == 0xb54) {
-        uVar2 = *(uint *)(param_1 + 0x34f4);
+        uVar2 = *(uint *)(glContext + 0x34f4);
         goto LAB_00015f48;
       }
       if (0xb54 < param_2) {
-        uVar2 = (uint)*(ushort *)(param_1 + 0x30a4);
+        uVar2 = (uint)*(ushort *)(glContext + 0x30a4);
         goto LAB_00015f48;
       }
-      *param_3 = (double)*(float *)(param_1 + 0x2810);
-      param_3[1] = (double)*(float *)(param_1 + 0x2814);
-      param_3[2] = (double)*(float *)(param_1 + 0x2818);
-      dVar14 = (double)*(float *)(param_1 + 0x281c);
+      *param_3 = (double)*(float *)(glContext + 0x2810);
+      param_3[1] = (double)*(float *)(glContext + 0x2814);
+      param_3[2] = (double)*(float *)(glContext + 0x2818);
+      dVar14 = (double)*(float *)(glContext + 0x281c);
     }
 LAB_00015a8c:
     iVar13 = 4;
@@ -8070,20 +8070,20 @@ LAB_00015a90:
   }
   if (param_2 == 0xbe0) {
 LAB_00014d84:
-    uVar2 = (uint)*(ushort *)(param_1 + 0x30ca);
+    uVar2 = (uint)*(ushort *)(glContext + 0x30ca);
     goto LAB_00015f48;
   }
   if (0xbe0 < param_2) {
     if (param_2 == 0xc22) {
-      *param_3 = (double)*(float *)(param_1 + 0x3100);
-      param_3[1] = (double)*(float *)(param_1 + 0x3104);
-      param_3[2] = (double)*(float *)(param_1 + 0x3108);
-      dVar14 = (double)*(float *)(param_1 + 0x310c);
+      *param_3 = (double)*(float *)(glContext + 0x3100);
+      param_3[1] = (double)*(float *)(glContext + 0x3104);
+      param_3[2] = (double)*(float *)(glContext + 0x3108);
+      dVar14 = (double)*(float *)(glContext + 0x310c);
       goto LAB_00015a8c;
     }
     if (0xc22 < param_2) {
       if (param_2 == 0xc40) {
-        uVar2 = *(uint *)(param_1 + 0x4e1c);
+        uVar2 = *(uint *)(glContext + 0x4e1c);
       }
       else if (param_2 < 0xc41) {
         if (param_2 == 0xc31) {
@@ -8091,10 +8091,10 @@ LAB_00014d84:
         }
         else if (param_2 < 0xc32) {
           if (param_2 == 0xc23) {
-            *(uint *)param_3 = (uint)*(byte *)(param_1 + 0x31a0);
-            *(uint *)(param_3 + 1) = (uint)*(byte *)(param_1 + 0x31a1);
-            *(uint *)(param_3 + 2) = (uint)*(byte *)(param_1 + 0x31a2);
-            uVar2 = (uint)*(byte *)(param_1 + 0x31a3);
+            *(uint *)param_3 = (uint)*(byte *)(glContext + 0x31a0);
+            *(uint *)(param_3 + 1) = (uint)*(byte *)(glContext + 0x31a1);
+            *(uint *)(param_3 + 2) = (uint)*(byte *)(glContext + 0x31a2);
+            uVar2 = (uint)*(byte *)(glContext + 0x31a3);
             goto LAB_00014ed8;
           }
           if (param_2 != 0xc30) {
@@ -8103,64 +8103,64 @@ LAB_00014d84:
           uVar2 = 0;
         }
         else if (param_2 == 0xc32) {
-          uVar2 = (uint)*(byte *)(param_1 + 0x7582);
+          uVar2 = (uint)*(byte *)(glContext + 0x7582);
         }
         else {
           if (param_2 != 0xc33) {
             return 0;
           }
-          uVar2 = (uint)*(byte *)(*(int *)(param_1 + 0x468c) + 0x26);
+          uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x468c) + 0x26);
         }
       }
       else if (param_2 == 0xc52) {
-        uVar2 = (uint)*(ushort *)(0x3170 + param_1);
+        uVar2 = (uint)*(ushort *)(0x3170 + glContext);
       }
       else if (param_2 < 0xc53) {
         if (param_2 == 0xc50) {
-          uVar2 = (uint)*(ushort *)(param_1 + 0x316c);
+          uVar2 = (uint)*(ushort *)(glContext + 0x316c);
         }
         else {
           if (param_2 != 0xc51) {
             return 0;
           }
-          uVar2 = (uint)*(ushort *)(param_1 + 0x316e);
+          uVar2 = (uint)*(ushort *)(glContext + 0x316e);
         }
       }
       else if (param_2 == 0xc54) {
-        uVar2 = (uint)*(ushort *)(param_1 + 0x3174);
+        uVar2 = (uint)*(ushort *)(glContext + 0x3174);
       }
       else if (param_2 < 0xc54) {
-        uVar2 = (uint)*(ushort *)(param_1 + 0x3172);
+        uVar2 = (uint)*(ushort *)(glContext + 0x3172);
       }
       else {
         if (param_2 != 0xc60) {
           return 0;
         }
-        if (7 < *(int *)(param_1 + 0x53d4)) {
+        if (7 < *(int *)(glContext + 0x53d4)) {
           return -1;
         }
-        uVar2 = (uint)*(byte *)(*(int *)(param_1 + 0x53d4) * 0x94 + param_1 + 0x3d78);
+        uVar2 = (uint)*(byte *)(*(int *)(glContext + 0x53d4) * 0x94 + glContext + 0x3d78);
       }
       goto LAB_00015f48;
     }
     if (param_2 == 0xc00) {
-      uVar2 = *(uint *)(*(int *)(param_1 + 0x468c) + 0x54);
+      uVar2 = *(uint *)(*(int *)(glContext + 0x468c) + 0x54);
       goto LAB_00015f48;
     }
     if (param_2 < 0xc01) {
       if (param_2 == 0xbf0) {
-        uVar2 = (uint)*(ushort *)(param_1 + 0x3190);
+        uVar2 = (uint)*(ushort *)(glContext + 0x3190);
         goto LAB_00015f48;
       }
       if (0xbf0 < param_2) {
         if (param_2 == 0xbf1) {
-          uVar2 = (uint)*(byte *)(param_1 + 0x3192);
+          uVar2 = (uint)*(byte *)(glContext + 0x3192);
         }
         else {
           if (param_2 != 0xbf2) {
             return 0;
           }
-          uVar2 = (uint)*(byte *)(param_1 + 0x3193);
+          uVar2 = (uint)*(byte *)(glContext + 0x3193);
         }
         goto LAB_00015f48;
       }
@@ -8168,38 +8168,38 @@ LAB_00014d84:
         if (param_2 != 0xbe2) {
           return 0;
         }
-        uVar2 = (uint)*(byte *)(param_1 + 0x30e4);
+        uVar2 = (uint)*(byte *)(glContext + 0x30e4);
         goto LAB_00015f48;
       }
 LAB_00014d8c:
-      uVar2 = (uint)*(ushort *)(param_1 + 0x30c8);
+      uVar2 = (uint)*(ushort *)(glContext + 0x30c8);
       goto LAB_00015f48;
     }
     if (param_2 == 0xc10) {
-      *(uint *)param_3 = *(uint *)(param_1 + 0x34e0);
-      *(uint *)(param_3 + 1) = *(uint *)(param_1 + 0x34e4);
-      *(uint *)(param_3 + 2) = *(uint *)(param_1 + 0x34e8);
-      uVar2 = *(uint *)(param_1 + 0x34ec);
+      *(uint *)param_3 = *(uint *)(glContext + 0x34e0);
+      *(uint *)(param_3 + 1) = *(uint *)(glContext + 0x34e4);
+      *(uint *)(param_3 + 2) = *(uint *)(glContext + 0x34e8);
+      uVar2 = *(uint *)(glContext + 0x34ec);
       goto LAB_00014ed8;
     }
     if (param_2 < 0xc11) {
       if (param_2 == 0xc01) {
-        if (*(int *)(param_1 + 0x744c) == 0) {
-          uVar2 = (uint)*(ushort *)(param_1 + 0x311a);
+        if (*(int *)(glContext + 0x744c) == 0) {
+          uVar2 = (uint)*(ushort *)(glContext + 0x311a);
         }
         else {
-          uVar2 = (uint)*(ushort *)(*(int *)(param_1 + 0x744c) + 0xc0);
+          uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x744c) + 0xc0);
         }
       }
       else {
         if (param_2 != 0xc02) {
           return 0;
         }
-        if (*(int *)(param_1 + 0x744c) == 0) {
-          uVar2 = (uint)*(ushort *)(param_1 + 0x3118);
+        if (*(int *)(glContext + 0x744c) == 0) {
+          uVar2 = (uint)*(ushort *)(glContext + 0x3118);
         }
         else {
-          uVar2 = (uint)*(ushort *)(*(int *)(param_1 + 0x744c) + 200);
+          uVar2 = (uint)*(ushort *)(*(int *)(glContext + 0x744c) + 200);
         }
       }
       goto LAB_00015f48;
@@ -8209,74 +8209,74 @@ LAB_00014d8c:
         if (param_2 != 0xc11) {
           return 0;
         }
-        uVar2 = (uint)*(byte *)(param_1 + 0x34f0);
+        uVar2 = (uint)*(byte *)(glContext + 0x34f0);
       }
       else {
-        uVar2 = *(uint *)(param_1 + 0x3194);
+        uVar2 = *(uint *)(glContext + 0x3194);
       }
       goto LAB_00015f48;
     }
-    dVar14 = (double)*(float *)(param_1 + 0x3110);
+    dVar14 = (double)*(float *)(glContext + 0x3110);
 LAB_00014670:
     dVar14 = dVar14 * DOUBLE_00108d98;
     goto LAB_0001467c;
   }
   if (param_2 == 0xba2) {
-    *(uint *)param_3 = *(uint *)(param_1 + 0x1ba0);
-    *(uint *)(param_3 + 1) = *(uint *)(param_1 + 0x1ba4);
-    *(uint *)(param_3 + 2) = *(uint *)(param_1 + 0x1ba8);
-    uVar2 = *(uint *)(param_1 + 0x1bac);
+    *(uint *)param_3 = *(uint *)(glContext + 0x1ba0);
+    *(uint *)(param_3 + 1) = *(uint *)(glContext + 0x1ba4);
+    *(uint *)(param_3 + 2) = *(uint *)(glContext + 0x1ba8);
+    uVar2 = *(uint *)(glContext + 0x1bac);
 LAB_00014ed8:
     *(uint *)(param_3 + 3) = uVar2;
     return 4;
   }
   if (0xba2 < param_2) {
     if (param_2 == 0xba8) {
-      if (7 < *(int *)(param_1 + 0x53d4)) {
+      if (7 < *(int *)(glContext + 0x53d4)) {
         return -1;
       }
-      iVar13 = param_1 + *(int *)(param_1 + 0x53d4) * 0x40 + 0x1fc0;
+      iVar13 = glContext + *(int *)(glContext + 0x53d4) * 0x40 + 0x1fc0;
     }
     else {
       if (0xba8 < param_2) {
         if (param_2 == 0xbc0) {
-          uVar2 = (uint)*(byte *)(param_1 + 0x30c6);
+          uVar2 = (uint)*(byte *)(glContext + 0x30c6);
           goto LAB_00015f48;
         }
         if (param_2 < 0xbc1) {
           if (param_2 == 0xbb0) {
-            uVar2 = *(uint *)(param_1 + 0x50fc);
+            uVar2 = *(uint *)(glContext + 0x50fc);
           }
           else {
             if (param_2 != 0xbb1) {
               return 0;
             }
-            uVar2 = *(uint *)(param_1 + 0x5144);
+            uVar2 = *(uint *)(glContext + 0x5144);
           }
           goto LAB_00015f48;
         }
         if (param_2 != 0xbc2) {
           if (param_2 < 0xbc2) {
-            uVar2 = (uint)*(ushort *)(param_1 + 0x30c4);
+            uVar2 = (uint)*(ushort *)(glContext + 0x30c4);
           }
           else {
             if (param_2 != 0xbd0) {
               return 0;
             }
-            uVar2 = (uint)*(byte *)(param_1 + 0x313c);
+            uVar2 = (uint)*(byte *)(glContext + 0x313c);
           }
           goto LAB_00015f48;
         }
-        dVar14 = (double)*(float *)(param_1 + 0x30c0);
+        dVar14 = (double)*(float *)(glContext + 0x30c0);
 LAB_00014d74:
         *param_3 = dVar14;
         goto LAB_00015a90;
       }
       if (param_2 == 0xba5) {
-        if (7 < *(int *)(param_1 + 0x53d4)) {
+        if (7 < *(int *)(glContext + 0x53d4)) {
           return -1;
         }
-        iVar13 = *(int *)(*(int *)(param_1 + 0x53d4) * 4 + param_1 + 0x503c);
+        iVar13 = *(int *)(*(int *)(glContext + 0x53d4) * 4 + glContext + 0x503c);
 LAB_00014c5c:
         uVar2 = iVar13 + 1;
 LAB_00015450:
@@ -8285,13 +8285,13 @@ LAB_00015450:
       }
       if (param_2 < 0xba6) {
         if (param_2 == 0xba3) {
-          iVar13 = *(int *)(param_1 + 0x500c);
+          iVar13 = *(int *)(glContext + 0x500c);
         }
         else {
           if (param_2 != 0xba4) {
             return 0;
           }
-          iVar13 = *(int *)(param_1 + 0x5008);
+          iVar13 = *(int *)(glContext + 0x5008);
         }
 LAB_00014bf4:
         uVar2 = iVar13 + 1;
@@ -8301,28 +8301,28 @@ LAB_00014bf4:
       if (param_2 != 0xba7) {
         return 0;
       }
-      iVar13 = param_1 + 0x1c80;
+      iVar13 = glContext + 0x1c80;
     }
     goto LAB_00014c84;
   }
   if (param_2 == 0xb94) {
-    uVar2 = (uint)*(ushort *)((uint)*(byte *)(param_1 + 0x7583) * 0x10 + param_1 + 0x3502);
+    uVar2 = (uint)*(ushort *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x3502);
     goto LAB_00015f48;
   }
   if (param_2 < 0xb95) {
     if (param_2 == 0xb91) {
-      uVar2 = *(uint *)(param_1 + 0x3114);
+      uVar2 = *(uint *)(glContext + 0x3114);
       goto LAB_00015f48;
     }
     if (0xb91 < param_2) {
       if (param_2 == 0xb92) {
-        uVar2 = (uint)*(ushort *)((uint)*(byte *)(param_1 + 0x7583) * 0x10 + param_1 + 0x3500);
+        uVar2 = (uint)*(ushort *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x3500);
       }
       else {
         if (param_2 != 0xb93) {
           return 0;
         }
-        uVar2 = *(uint *)((uint)*(byte *)(param_1 + 0x7583) * 0x10 + param_1 + 0x34f8);
+        uVar2 = *(uint *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x34f8);
       }
       goto LAB_00015f48;
     }
@@ -8330,28 +8330,28 @@ LAB_00014bf4:
       if (param_2 != 0xb90) {
         return 0;
       }
-      uVar2 = *(uint *)(param_1 + 0x3520) >> (*(byte *)(param_1 + 0x7583) & 0x3f) & 1;
+      uVar2 = *(uint *)(glContext + 0x3520) >> (*(byte *)(glContext + 0x7583) & 0x3f) & 1;
       goto LAB_00015f48;
     }
-    *param_3 = (double)*(float *)(param_1 + 0x30f0);
-    param_3[1] = (double)*(float *)(param_1 + 0x30f4);
-    param_3[2] = (double)*(float *)(param_1 + 0x30f8);
-    dVar14 = (double)*(float *)(param_1 + 0x30fc);
+    *param_3 = (double)*(float *)(glContext + 0x30f0);
+    param_3[1] = (double)*(float *)(glContext + 0x30f4);
+    param_3[2] = (double)*(float *)(glContext + 0x30f8);
+    dVar14 = (double)*(float *)(glContext + 0x30fc);
     goto LAB_00015a8c;
   }
   if (param_2 == 0xb97) {
-    uVar2 = *(uint *)((uint)*(byte *)(param_1 + 0x7583) * 0x10 + param_1 + 0x34fc);
+    uVar2 = *(uint *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x34fc);
     goto LAB_00015f48;
   }
   if (param_2 < 0xb98) {
     if (param_2 == 0xb95) {
-      uVar2 = (uint)*(ushort *)((uint)*(byte *)(param_1 + 0x7583) * 0x10 + param_1 + 0x3504);
+      uVar2 = (uint)*(ushort *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x3504);
     }
     else {
       if (param_2 != 0xb96) {
         return 0;
       }
-      uVar2 = (uint)*(ushort *)((uint)*(byte *)(param_1 + 0x7583) * 0x10 + param_1 + 0x3506);
+      uVar2 = (uint)*(ushort *)((uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext + 0x3506);
     }
     goto LAB_00015f48;
   }
@@ -8360,14 +8360,14 @@ LAB_00014bf4:
       if (param_2 != 0xb98) {
         return 0;
       }
-      uVar2 = *(uint *)((uint)*(byte *)(param_1 + 0x7583) * 4 + param_1 + 0x3198);
+      uVar2 = *(uint *)((uint)*(byte *)(glContext + 0x7583) * 4 + glContext + 0x3198);
     }
     else {
-      uVar2 = (uint)*(byte *)(param_1 + 0x280d);
+      uVar2 = (uint)*(byte *)(glContext + 0x280d);
     }
     goto LAB_00015f48;
   }
-  iVar13 = *(int *)(param_1 + 0x4ff4);
+  iVar13 = *(int *)(glContext + 0x4ff4);
   switch(iVar13) {
   default:
     uVar2 = 0x1702;
@@ -8407,57 +8407,57 @@ LAB_00015f48:
 }
 
 /* _glViewport_Exec @ 0x15f6c (136 bytes) */
-void _glViewport_Exec(int param_1,undefined4 param_2,undefined4 param_3,int param_4,int param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glViewport_Exec(int glContext,undefined4 param_2,undefined4 param_3,int param_4,int param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   int iVar1;
   undefined4 uVar2;
   int iVar3;
   
-  iVar3 = *(int *)(*(int *)(param_1 + 0x468c) + 0x10);
-  iVar1 = *(int *)(*(int *)(param_1 + 0x468c) + 0xc);
-  if (*(short *)(param_1 + 0x4a10) < 0) {
+  iVar3 = *(int *)(*(int *)(glContext + 0x468c) + 0x10);
+  iVar1 = *(int *)(*(int *)(glContext + 0x468c) + 0xc);
+  if (*(short *)(glContext + 0x4a10) < 0) {
     if ((-1 < param_4) && (-1 < param_5)) {
-      *(undefined4 *)(param_1 + 0x1ba0) = param_2;
-      *(undefined4 *)(param_1 + 0x1ba4) = param_3;
+      *(undefined4 *)(glContext + 0x1ba0) = param_2;
+      *(undefined4 *)(glContext + 0x1ba4) = param_3;
       if (iVar1 < param_4) {
-        *(int *)(param_1 + 0x1ba8) = iVar1;
+        *(int *)(glContext + 0x1ba8) = iVar1;
       }
       else {
-        *(int *)(param_1 + 0x1ba8) = param_4;
+        *(int *)(glContext + 0x1ba8) = param_4;
       }
       if (iVar3 < param_5) {
-        *(int *)(param_1 + 0x1bac) = iVar3;
+        *(int *)(glContext + 0x1bac) = iVar3;
       }
       else {
-        *(int *)(param_1 + 0x1bac) = param_5;
+        *(int *)(glContext + 0x1bac) = param_5;
       }
-      ((void (*)())_gleUpdateViewScissorData)(param_1,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+      ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       return;
     }
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
     uVar2 = 0x501;
   }
   else {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
     uVar2 = 0x502;
   }
-  *(undefined4 *)(param_1 + 0x7574) = uVar2;
+  *(undefined4 *)(glContext + 0x7574) = uVar2;
   return;
 }
 
 /* _glMatrixMode_Exec @ 0x15ff4 (236 bytes) */
-void _glMatrixMode_Exec(param_1, param_2)
-  int param_1;
+void _glMatrixMode_Exec(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   undefined4 uVar1;
   int iVar2;
   
-  if (*(short *)(param_1 + 0x4a10) < 0) {
+  if (*(short *)(glContext + 0x4a10) < 0) {
     if (param_2 == 0x850a) {
       iVar2 = 5;
       goto LAB_000160d8;
@@ -8475,7 +8475,7 @@ void _glMatrixMode_Exec(param_1, param_2)
       }
       else {
         if (param_2 == 0x1702) {
-          iVar2 = *(int *)(param_1 + 0x53d4) + 0x10;
+          iVar2 = *(int *)(glContext + 0x53d4) + 0x10;
           goto LAB_000160d8;
         }
         if (param_2 == 0x1800) {
@@ -8488,8 +8488,8 @@ void _glMatrixMode_Exec(param_1, param_2)
       if (param_2 < 0x8724) {
         iVar2 = param_2 - 0x871c;
 LAB_000160d8:
-        *(int *)(param_1 + 0x4ff4) = iVar2;
-        ((void (*)())_gleUpdateMatrixMode)(param_1);
+        *(int *)(glContext + 0x4ff4) = iVar2;
+        ((void (*)())_gleUpdateMatrixMode)(glContext);
         return;
       }
       if (param_2 - 0x88c0 < 8) {
@@ -8497,54 +8497,54 @@ LAB_000160d8:
         goto LAB_000160d8;
       }
     }
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
     uVar1 = 0x500;
   }
   else {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
     uVar1 = 0x502;
   }
-  *(undefined4 *)(param_1 + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = uVar1;
   return;
 }
 
 /* _glLoadIdentity_Exec @ 0x160e0 (176 bytes) */
-int _glLoadIdentity_Exec(param_1)
-  int param_1;
+int _glLoadIdentity_Exec(glContext)
+  int glContext;
 {
   uint uVar1;
   int iVar2;
   uint uVar3;
   undefined4 uVar4;
   
-  uVar4 = *(undefined4 *)(param_1 + 0x4fec);
-  if ((*(short *)(param_1 + 0x4a10) < 0) && (*(int *)(param_1 + 0x4ff4) < 0x18)) {
+  uVar4 = *(undefined4 *)(glContext + 0x4fec);
+  if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
     iVar2 = _gleMakeIdentityMatrix(uVar4);
-    uVar3 = *(uint *)(param_1 + 0x50a8);
-    *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | uVar3;
-    if ((uVar3 & *(uint *)(param_1 + 0x505c) & 0xfffffc) != 0) {
-      iVar2 = _gleCopyMatrix(uVar4,*(undefined4 *)(param_1 + 0x4ff0));
+    uVar3 = *(uint *)(glContext + 0x50a8);
+    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | uVar3;
+    if ((uVar3 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0) {
+      iVar2 = _gleCopyMatrix(uVar4,*(undefined4 *)(glContext + 0x4ff0));
       uVar1 = uVar3 & 0xfffffc;
       uVar3 = uVar3 & 0xff000003;
-      *(uint *)(param_1 + 0x50b0) = *(uint *)(param_1 + 0x50b0) & ~uVar1;
+      *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) & ~uVar1;
     }
-    *(uint *)(param_1 + 0x50b0) = *(uint *)(param_1 + 0x50b0) | uVar3;
+    *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | uVar3;
   }
   else {
-    iVar2 = param_1;
-    if (*(int *)(param_1 + 0x7574) == 0) {
-      *(undefined4 *)(param_1 + 0x7574) = 0x502;
+    iVar2 = glContext;
+    if (*(int *)(glContext + 0x7574) == 0) {
+      *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
   }
   return iVar2;
 }
 
 /* _glOrtho_Exec @ 0x16190 (616 bytes) */
-void _glOrtho_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glOrtho_Exec(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -8558,8 +8558,8 @@ void _glOrtho_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,d
   double dVar10;
   double dVar11;
   
-  pfVar8 = *(float **)(param_1 + 0x4fec);
-  if ((*(short *)(param_1 + 0x4a10) < 0) && (*(int *)(param_1 + 0x4ff4) < 0x18)) {
+  pfVar8 = *(float **)(glContext + 0x4fec);
+  if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
     fVar1 = (float)(fparam_2 - fparam_1);
     fVar2 = (float)(fparam_4 - fparam_3);
     fVar3 = (float)(fparam_5 - fparam_6);
@@ -8603,58 +8603,58 @@ void _glOrtho_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,d
           pfVar8[8] = pfVar8[8] * fVar1;
           pfVar8[9] = pfVar8[9] * fVar1;
           pfVar8[10] = pfVar8[10] * fVar1;
-          *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | *(uint *)(param_1 + 0x50a8);
-          *(uint *)(param_1 + 0x50b0) = *(uint *)(param_1 + 0x50b0) | *(uint *)(param_1 + 0x50a8);
+          *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | *(uint *)(glContext + 0x50a8);
+          *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | *(uint *)(glContext + 0x50a8);
           return;
         }
       }
     }
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
     uVar7 = 0x501;
   }
   else {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
     uVar7 = 0x502;
   }
-  *(undefined4 *)(param_1 + 0x7574) = uVar7;
+  *(undefined4 *)(glContext + 0x7574) = uVar7;
   return;
 }
 
 /* _glEnable_Exec @ 0x163f8 (108 bytes) */
-double _glEnable_Exec(param_1, param_2)
-  int param_1;
+double _glEnable_Exec(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   undefined4 uVar1;
   uint *puVar2;
   
-  puVar2 = (uint *)(*(int *)(param_1 + 0x4850) + (param_2 & 0x3ff) * 0x10);
-  if (*(short *)(param_1 + 0x4a10) < 0) {
+  puVar2 = (uint *)(*(int *)(glContext + 0x4850) + (param_2 & 0x3ff) * 0x10);
+  if (*(short *)(glContext + 0x4a10) < 0) {
     do {
       if (*puVar2 == param_2) {
                     
                     
-        (*(code *)puVar2[1])(param_1,param_2,1);
+        (*(code *)puVar2[1])(glContext,param_2,1);
         return;
       }
       puVar2 = (uint *)puVar2[2];
     } while (puVar2 != (uint *)0x0);
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
     uVar1 = 0x500;
   }
   else {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
     uVar1 = 0x502;
   }
-  *(undefined4 *)(param_1 + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = uVar1;
   return;
 }
 

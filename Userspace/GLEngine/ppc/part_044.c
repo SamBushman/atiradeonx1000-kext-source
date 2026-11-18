@@ -1867,31 +1867,31 @@ void _gleAddVertexMaterial2Sided(param_1, param_2)
 }
 
 /* _gleSetAddVertexMaterialFunc @ 0xd4384 (136 bytes) */
-void _gleSetAddVertexMaterialFunc(param_1)
-  int param_1;
+void _gleSetAddVertexMaterialFunc(glContext)
+  int glContext;
 {
   char cVar1;
   undefined *puVar2;
   
   puVar2 = PTR__gleAddVertexMaterialNoop_00110e40;
-  if (*(int *)(param_1 + 0x4e1c) == 0x1c00) {
-    if ((*(char *)(param_1 + 0x30aa) == '\0') || (*(char *)(param_1 + 0x7580) != '\0'))
+  if (*(int *)(glContext + 0x4e1c) == 0x1c00) {
+    if ((*(char *)(glContext + 0x30aa) == '\0') || (*(char *)(glContext + 0x7580) != '\0'))
     goto LAB_000d43fc;
-    cVar1 = *(char *)(param_1 + 0x30ac);
+    cVar1 = *(char *)(glContext + 0x30ac);
     puVar2 = PTR__gleAddVertexMaterial_00110e3c;
   }
   else {
-    if (*(int *)(param_1 + 0x4e1c) != 0x1c01) goto LAB_000d43fc;
-    cVar1 = *(char *)(param_1 + 0x30aa);
+    if (*(int *)(glContext + 0x4e1c) != 0x1c01) goto LAB_000d43fc;
+    cVar1 = *(char *)(glContext + 0x30aa);
   }
   if (cVar1 != '\0') {
     puVar2 = PTR__gleAddVertexMaterial2Sided_00110e38;
   }
 LAB_000d43fc:
-  *(undefined **)(param_1 + 0x4de4) = puVar2;
+  *(undefined **)(glContext + 0x4de4) = puVar2;
                     
                     
-  (**(int ( **)(int))(param_1 + 0x4de4))(param_1);
+  (**(int ( **)(int))(glContext + 0x4de4))(glContext);
   return;
 }
 
@@ -4586,41 +4586,41 @@ LAB_000d7840:
 }
 
 /* _gleBeginLinesRenderSmooth @ 0xd7858 (52 bytes) */
-void _gleBeginLinesRenderSmooth(param_1)
-  int param_1;
+void _gleBeginLinesRenderSmooth(glContext)
+  int glContext;
 {
   undefined *puVar1;
   
   puVar1 = PTR__gleFlushAtomicFunc_00112224;
-  *(undefined4 *)(param_1 + 0x4858) = *(undefined4 *)(param_1 + 0x4854);
-  *(undefined **)(param_1 + 0x4a0c) = puVar1;
-  *(undefined **)(param_1 + 0x4a08) = PTR__gleRenderSmoothLinesFunc_00112220;
+  *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
+  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = PTR__gleRenderSmoothLinesFunc_00112220;
   return;
 }
 
 /* _gleBeginLinesRenderFlat @ 0xd788c (52 bytes) */
-void _gleBeginLinesRenderFlat(param_1)
-  int param_1;
+void _gleBeginLinesRenderFlat(glContext)
+  int glContext;
 {
   undefined *puVar1;
   
   puVar1 = PTR__gleFlushAtomicFunc_00112224;
-  *(undefined4 *)(param_1 + 0x4858) = *(undefined4 *)(param_1 + 0x4854);
-  *(undefined **)(param_1 + 0x4a0c) = puVar1;
-  *(undefined **)(param_1 + 0x4a08) = PTR__gleRenderFlatLinesFunc_0011221c;
+  *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
+  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = PTR__gleRenderFlatLinesFunc_0011221c;
   return;
 }
 
 /* _gleBeginLinesRenderTCL @ 0xd78c0 (52 bytes) */
-void _gleBeginLinesRenderTCL(param_1)
-  int param_1;
+void _gleBeginLinesRenderTCL(glContext)
+  int glContext;
 {
   undefined *puVar1;
   
   puVar1 = PTR__gleFlushAtomicTCLFunc_00112218;
-  *(undefined4 *)(param_1 + 0x4858) = *(undefined4 *)(param_1 + 0x4854);
-  *(undefined **)(param_1 + 0x4a0c) = puVar1;
-  *(undefined **)(param_1 + 0x4a08) = PTR__gleRenderLinesTCLFunc_00112214;
+  *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
+  *(undefined **)(glContext + 0x4a0c) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = PTR__gleRenderLinesTCLFunc_00112214;
   return;
 }
 

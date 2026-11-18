@@ -24,79 +24,79 @@ void _gleSetEnable_CLIP_PLANE(param_1, param_2, param_3, param_4)
 }
 
 /* _gleSetEnable_TEXTURE_GEN_S @ 0xcb2f0 (104 bytes) */
-void _gleSetEnable_TEXTURE_GEN_S(param_1, param_2, param_3)
-  int param_1;
+void _gleSetEnable_TEXTURE_GEN_S(glContext, param_2, param_3)
+  int glContext;
   undefined4 param_2;
   uint param_3;
 {
   int iVar1;
   uint uVar2;
   
-  uVar2 = *(uint *)(param_1 + 0x53d4);
-  iVar1 = uVar2 * 0x94 + param_1;
+  uVar2 = *(uint *)(glContext + 0x53d4);
+  iVar1 = uVar2 * 0x94 + glContext;
   if (*(byte *)(iVar1 + 0x3d78) != param_3) {
     *(char *)(iVar1 + 0x3d78) = (char)param_3;
-    _gleUpdateTextureCoordGen(param_1);
-    _gleSelectVertexSubmitFunc(param_1);
-    *(uint *)(param_1 + 0x314) = *(uint *)(param_1 + 0x314) | 0x10000 << (uVar2 & 0x3f);
+    _gleUpdateTextureCoordGen(glContext);
+    _gleSelectVertexSubmitFunc(glContext);
+    *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x10000 << (uVar2 & 0x3f);
   }
   return;
 }
 
 /* _gleSetEnable_TEXTURE_GEN_T @ 0xcb358 (104 bytes) */
-void _gleSetEnable_TEXTURE_GEN_T(param_1, param_2, param_3)
-  int param_1;
+void _gleSetEnable_TEXTURE_GEN_T(glContext, param_2, param_3)
+  int glContext;
   undefined4 param_2;
   uint param_3;
 {
   int iVar1;
   uint uVar2;
   
-  uVar2 = *(uint *)(param_1 + 0x53d4);
-  iVar1 = uVar2 * 0x94 + param_1;
+  uVar2 = *(uint *)(glContext + 0x53d4);
+  iVar1 = uVar2 * 0x94 + glContext;
   if (*(byte *)(iVar1 + 0x3d79) != param_3) {
     *(char *)(iVar1 + 0x3d79) = (char)param_3;
-    _gleUpdateTextureCoordGen(param_1);
-    _gleSelectVertexSubmitFunc(param_1);
-    *(uint *)(param_1 + 0x314) = *(uint *)(param_1 + 0x314) | 0x10000 << (uVar2 & 0x3f);
+    _gleUpdateTextureCoordGen(glContext);
+    _gleSelectVertexSubmitFunc(glContext);
+    *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x10000 << (uVar2 & 0x3f);
   }
   return;
 }
 
 /* _gleSetEnable_TEXTURE_GEN_R @ 0xcb3c0 (96 bytes) */
-void _gleSetEnable_TEXTURE_GEN_R(param_1, param_2, param_3)
-  int param_1;
+void _gleSetEnable_TEXTURE_GEN_R(glContext, param_2, param_3)
+  int glContext;
   undefined4 param_2;
   uint param_3;
 {
   int iVar1;
   uint uVar2;
   
-  uVar2 = *(uint *)(param_1 + 0x53d4);
-  iVar1 = uVar2 * 0x94 + param_1;
+  uVar2 = *(uint *)(glContext + 0x53d4);
+  iVar1 = uVar2 * 0x94 + glContext;
   if (*(byte *)(iVar1 + 0x3d7a) != param_3) {
     *(char *)(iVar1 + 0x3d7a) = (char)param_3;
-    _gleUpdateTextureCoordGen(param_1);
-    *(uint *)(param_1 + 0x314) = *(uint *)(param_1 + 0x314) | 0x10000 << (uVar2 & 0x3f);
+    _gleUpdateTextureCoordGen(glContext);
+    *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x10000 << (uVar2 & 0x3f);
   }
   return;
 }
 
 /* _gleSetEnable_TEXTURE_GEN_Q @ 0xcb420 (96 bytes) */
-void _gleSetEnable_TEXTURE_GEN_Q(param_1, param_2, param_3)
-  int param_1;
+void _gleSetEnable_TEXTURE_GEN_Q(glContext, param_2, param_3)
+  int glContext;
   undefined4 param_2;
   uint param_3;
 {
   int iVar1;
   uint uVar2;
   
-  uVar2 = *(uint *)(param_1 + 0x53d4);
-  iVar1 = uVar2 * 0x94 + param_1;
+  uVar2 = *(uint *)(glContext + 0x53d4);
+  iVar1 = uVar2 * 0x94 + glContext;
   if (*(byte *)(iVar1 + 0x3d7b) != param_3) {
     *(char *)(iVar1 + 0x3d7b) = (char)param_3;
-    _gleUpdateTextureCoordGen(param_1);
-    *(uint *)(param_1 + 0x314) = *(uint *)(param_1 + 0x314) | 0x10000 << (uVar2 & 0x3f);
+    _gleUpdateTextureCoordGen(glContext);
+    *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x10000 << (uVar2 & 0x3f);
   }
   return;
 }
@@ -399,22 +399,22 @@ void _gleSetEnable_POINT_SMOOTH(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_COLOR_MATERIAL @ 0xcb9ec (136 bytes) */
-void _gleSetEnable_COLOR_MATERIAL(param_1, param_2, param_3)
-  int param_1;
+void _gleSetEnable_COLOR_MATERIAL(glContext, param_2, param_3)
+  int glContext;
   undefined4 param_2;
   uint param_3;
 {
   char cVar1;
   
-  if (*(byte *)(param_1 + 0x30ab) != param_3) {
-    *(char *)(param_1 + 0x30ab) = (char)param_3;
-    cVar1 = *(char *)(param_1 + 0x4df8);
-    _gleSetColorMaterialEnable(param_1);
-    if (((param_3 == 0) && (cVar1 == '\0')) && (*(char *)(param_1 + 0x4df8) == '\0')) {
-      (**(code **)(param_1 + 0x4de0))(param_1,param_1 + 0x2a0);
+  if (*(byte *)(glContext + 0x30ab) != param_3) {
+    *(char *)(glContext + 0x30ab) = (char)param_3;
+    cVar1 = *(char *)(glContext + 0x4df8);
+    _gleSetColorMaterialEnable(glContext);
+    if (((param_3 == 0) && (cVar1 == '\0')) && (*(char *)(glContext + 0x4df8) == '\0')) {
+      (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
     }
-    _gleSelectVertexSubmitFunc(param_1);
-    *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x40000;
+    _gleSelectVertexSubmitFunc(glContext);
+    *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x40000;
   }
   return;
 }
@@ -646,17 +646,17 @@ void _gleSetEnable_SAMPLE_COVERAGE(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_VERTEX_BLEND_ARB @ 0xcbcd4 (92 bytes) */
-void _gleSetEnable_VERTEX_BLEND_ARB(param_1, param_2, param_3)
-  int param_1;
+void _gleSetEnable_VERTEX_BLEND_ARB(glContext, param_2, param_3)
+  int glContext;
   undefined4 param_2;
   uint param_3;
 {
-  if (*(byte *)(param_1 + 0x4661) != param_3) {
-    *(char *)(param_1 + 0x4661) = (char)param_3;
-    _gleUpdateInverseNeeds(param_1);
-    _gleSelectVertexSubmitFunc(param_1);
-    *(uint *)(param_1 + 0x50ac) = *(uint *)(param_1 + 0x50ac) | 1;
-    *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x200000;
+  if (*(byte *)(glContext + 0x4661) != param_3) {
+    *(char *)(glContext + 0x4661) = (char)param_3;
+    _gleUpdateInverseNeeds(glContext);
+    _gleSelectVertexSubmitFunc(glContext);
+    *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | 1;
+    *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x200000;
   }
   return;
 }
@@ -704,8 +704,8 @@ void _gleSetEnable_VERTEX_PROGRAM_TWO_SIDE_ARB(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_COLOR_SUM @ 0xcbdd8 (192 bytes) */
-void _gleSetEnable_COLOR_SUM(param_1, param_2, param_3)
-  int param_1;
+void _gleSetEnable_COLOR_SUM(glContext, param_2, param_3)
+  int glContext;
   undefined4 param_2;
   uint param_3;
 {
@@ -713,29 +713,29 @@ void _gleSetEnable_COLOR_SUM(param_1, param_2, param_3)
   undefined *puVar2;
   char cVar3;
   
-  if (*(byte *)(param_1 + 0x4fea) != param_3) {
-    *(char *)(param_1 + 0x4fea) = (char)param_3;
-    if (*(char *)(param_1 + 0x30aa) == '\0') {
-      cVar3 = *(char *)(param_1 + 0x4664);
+  if (*(byte *)(glContext + 0x4fea) != param_3) {
+    *(char *)(glContext + 0x4fea) = (char)param_3;
+    if (*(char *)(glContext + 0x30aa) == '\0') {
+      cVar3 = *(char *)(glContext + 0x4664);
     }
     else {
-      cVar3 = *(char *)(param_1 + 0x4664);
-      if ((cVar3 == '\0') && (*(int *)(param_1 + 0x5434) == 0)) {
+      cVar3 = *(char *)(glContext + 0x4664);
+      if ((cVar3 == '\0') && (*(int *)(glContext + 0x5434) == 0)) {
         return;
       }
     }
-    *(char *)(param_1 + 0x316b) = (char)param_3;
-    if ((cVar3 == '\0') && (*(int *)(param_1 + 0x5434) == 0)) {
-      _gleSelectVertexSubmitFunc(param_1);
+    *(char *)(glContext + 0x316b) = (char)param_3;
+    if ((cVar3 == '\0') && (*(int *)(glContext + 0x5434) == 0)) {
+      _gleSelectVertexSubmitFunc(glContext);
     }
     else {
-      *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x800000;
+      *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x800000;
     }
     puVar2 = PTR__gleSetEyeInterpFunc_0011203c;
     puVar1 = PTR__gleSetClipInterpFunc_00112038;
-    *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x800;
-    *(undefined **)(param_1 + 0x49c8) = puVar2;
-    *(undefined **)(param_1 + 0x49cc) = puVar1;
+    *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800;
+    *(undefined **)(glContext + 0x49c8) = puVar2;
+    *(undefined **)(glContext + 0x49cc) = puVar1;
   }
   return;
 }

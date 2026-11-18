@@ -15,3 +15,7 @@ Gate result (images `~/rung3/gleng_nmb_f3` = HEAD, `gleng_nmc_f3` = renamed; scr
 
 ## Not applied: 11 saveFP/restFP millicode entries (`millicode_names_deferred.txt`)
 First gate (f2) with these 11 renamed to `saveFP_from_fNN` / `restFP_from_f28`: the new names match the toolchain-code pattern, the link drops them (3546 functions, data pointers shifted by 0xb0). Not a corpus defect, a naming that changes the image; the rows are parked, to be named only together with a toolchain-pattern exception.
+
+## Batch 3: param_1 -> glContext (names_params_ctx_1.tsv, 1093 functions, INFERRED)
+Rule: `param_1` is dereferenced at >=2 offsets from the set of 86 context-state offsets that >=30 GLEngine functions access through param_1 (e.g. +0x7574 in 656 functions, +0x4a10 in 459); first argument = GL context. Whole-variable renames only.
+Gate p1 (images `~/rung3/gleng_nmb_p1` HEAD ab57b1e7 vs `gleng_nmc_p1`): 3557/3557 functions, 0 instruction-sequence differences, data section identical, same size. (An earlier gate run was invalid because I killed it mid-run and the base tree dir was left half-built; base rebuilt from a clean dir.)

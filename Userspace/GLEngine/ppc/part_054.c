@@ -2266,8 +2266,8 @@ LAB_000fbb7c:
 }
 
 /* _gleGenMipmapsToLevel @ 0xfbe64 (384 bytes) */
-int _gleGenMipmapsToLevel(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
+int _gleGenMipmapsToLevel(glContext, param_2, param_3, param_4, param_5, param_6)
+  int glContext;
   int param_2;
   int param_3;
   int param_4;
@@ -2283,17 +2283,17 @@ int _gleGenMipmapsToLevel(param_1, param_2, param_3, param_4, param_5, param_6)
   if ((*(ushort *)(param_2 + 0x24) & 0xf) != 2) {
     iVar5 = param_3 * 0x168;
     iVar1 = param_2 + iVar5 + param_4 * 0x18;
-    ((int (*)())_gleGenerateEmptyMipmaps)(param_1,param_2,param_3,param_4,param_5,0,0);
+    ((int (*)())_gleGenerateEmptyMipmaps)(glContext,param_2,param_3,param_4,param_5,0,0);
     if ((*(byte *)(iVar5 + param_4 * 0x18 + param_2 + 0xcf) & 0x20) == 0) {
       return 0;
     }
-    iVar3 = (**(code **)(param_1 + 0x4714))
-                      (*(undefined4 *)(param_1 + 0x4688),
-                       *(undefined4 *)(param_2 + (uint)*(byte *)(param_1 + 0x85a8) * 4),param_3);
+    iVar3 = (**(code **)(glContext + 0x4714))
+                      (*(undefined4 *)(glContext + 0x4688),
+                       *(undefined4 *)(param_2 + (uint)*(byte *)(glContext + 0x85a8) * 4),param_3);
     if (iVar3 != 0) {
       *(undefined4 *)(param_2 + 0x20) =
            *(undefined4 *)
-            ((uint)*(byte *)(param_1 + 0x85a8) * 4 + *(int *)(param_1 + 0x5148) + 0x8054);
+            ((uint)*(byte *)(glContext + 0x85a8) * 4 + *(int *)(glContext + 0x5148) + 0x8054);
       if (param_6 == 0) {
         uVar4 = (uint)*(short *)(param_2 + 0x62);
       }
@@ -2317,18 +2317,18 @@ int _gleGenMipmapsToLevel(param_1, param_2, param_3, param_4, param_5, param_6)
     }
     if ((*(ushort *)(param_2 + 0x24) & 0x100) == 0) {
       if (*(int *)(iVar1 + 0xd8) == 0) {
-        _gleAllocateTextureLevel(param_1,param_2,iVar1 + 0xc4);
+        _gleAllocateTextureLevel(glContext,param_2,iVar1 + 0xc4);
       }
-      _gleSynchronizePluginTextureLevels(param_1,param_2);
-      ((void (*)())_gleGenerateMipmapData)(param_1,param_2,param_3,param_4,param_5);
+      _gleSynchronizePluginTextureLevels(glContext,param_2);
+      ((void (*)())_gleGenerateMipmapData)(glContext,param_2,param_3,param_4,param_5);
     }
   }
   return 0;
 }
 
 /* _gleGenSurfaceMipmaps @ 0xfbfe4 (160 bytes) */
-int _gleGenSurfaceMipmaps(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
+int _gleGenSurfaceMipmaps(glContext, param_2, param_3, param_4, param_5)
+  int glContext;
   int param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -2338,13 +2338,13 @@ int _gleGenSurfaceMipmaps(param_1, param_2, param_3, param_4, param_5)
   
   uVar1 = 0;
   if ((*(ushort *)(param_2 + 0x24) & 0xf) != 2) {
-    ((int (*)())_gleGenerateEmptyMipmaps)(param_1,param_2,param_3,0,param_4,0,0x12);
+    ((int (*)())_gleGenerateEmptyMipmaps)(glContext,param_2,param_3,0,param_4,0,0x12);
     uVar1 = 0;
     if (*(int *)(param_2 + 0x2c) != 0) {
       if (param_5 != 0) {
-        (**(code **)(param_1 + 0x4714))
-                  (*(undefined4 *)(param_1 + 0x4688),
-                   *(undefined4 *)(param_2 + (uint)*(byte *)(param_1 + 0x85a8) * 4),param_3);
+        (**(code **)(glContext + 0x4714))
+                  (*(undefined4 *)(glContext + 0x4688),
+                   *(undefined4 *)(param_2 + (uint)*(byte *)(glContext + 0x85a8) * 4),param_3);
       }
       uVar1 = 1;
     }
@@ -2588,8 +2588,8 @@ LAB_000fc4a4:
 }
 
 /* _gleReclaimTextureObjectResources @ 0xfc510 (344 bytes) */
-void _gleReclaimTextureObjectResources(param_1)
-  int param_1;
+void _gleReclaimTextureObjectResources(glContext)
+  int glContext;
 {
   int *piVar1;
   undefined4 *puVar2;
@@ -2602,15 +2602,15 @@ void _gleReclaimTextureObjectResources(param_1)
   undefined4 *puVar9;
   int iVar10;
   
-  iVar3 = *(int *)(param_1 + 0x5148);
+  iVar3 = *(int *)(glContext + 0x5148);
   piVar8 = (int *)(iVar3 + 0x2008);
   do {
     piVar5 = piVar8 + 1;
     for (piVar8 = (int *)*piVar8; piVar8 != (int *)0x0; piVar8 = (int *)*piVar8) {
       if (((piVar8[2] == 1) && ((*(ushort *)(piVar8 + 0xd) & 0x3c00) != 0x800)) &&
-         (uVar6 = 0, *(char *)(param_1 + 0x85a4) != '\0')) {
+         (uVar6 = 0, *(char *)(glContext + 0x85a4) != '\0')) {
         puVar9 = piVar8 + 4;
-        iVar10 = param_1 + 0x10000;
+        iVar10 = glContext + 0x10000;
         do {
           piVar1 = (int *)(iVar10 + -0x777c);
           uVar6 = uVar6 + 1;
@@ -2619,21 +2619,21 @@ void _gleReclaimTextureObjectResources(param_1)
           puVar2 = (undefined4 *)(iVar10 + -0x7a54);
           iVar10 = iVar10 + 0x2e0;
           (**(code **)(*piVar1 + 0x170))(*puVar2,uVar4);
-        } while (uVar6 < *(byte *)(param_1 + 0x85a4));
+        } while (uVar6 < *(byte *)(glContext + 0x85a4));
       }
     }
     piVar8 = piVar5;
   } while (piVar5 <= (int *)(iVar3 + 0x3004));
   uVar6 = 0;
-  piVar8 = (int *)(param_1 + 0x5294);
+  piVar8 = (int *)(glContext + 0x5294);
   do {
     iVar3 = *piVar8;
     piVar8 = piVar8 + 1;
     if (((iVar3 != 0) && (*(int *)(iVar3 + 8) == 1)) &&
        (((*(ushort *)(iVar3 + 0x34) & 0x3c00) != 0x800 &&
-        (uVar7 = 0, *(char *)(param_1 + 0x85a4) != '\0')))) {
+        (uVar7 = 0, *(char *)(glContext + 0x85a4) != '\0')))) {
       puVar9 = (undefined4 *)(iVar3 + 0x10);
-      iVar3 = param_1 + 0x10000;
+      iVar3 = glContext + 0x10000;
       do {
         piVar5 = (int *)(iVar3 + -0x777c);
         uVar7 = uVar7 + 1;
@@ -2642,7 +2642,7 @@ void _gleReclaimTextureObjectResources(param_1)
         puVar2 = (undefined4 *)(iVar3 + -0x7a54);
         iVar3 = iVar3 + 0x2e0;
         (**(code **)(*piVar5 + 0x170))(*puVar2,uVar4);
-      } while (uVar7 < *(byte *)(param_1 + 0x85a4));
+      } while (uVar7 < *(byte *)(glContext + 0x85a4));
     }
     uVar6 = uVar6 + 1;
   } while (uVar6 < 5);

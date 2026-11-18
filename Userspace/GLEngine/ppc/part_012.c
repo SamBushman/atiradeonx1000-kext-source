@@ -33,7 +33,7 @@ int _glColor4us_Comp(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4us_Exec @ 0x5d254 (204 bytes) */
-double _glColor4us_Exec(int param_1,uint param_2,uint param_3,uint param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+double _glColor4us_Exec(int glContext,uint param_2,uint param_3,uint param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -42,12 +42,12 @@ double _glColor4us_Exec(int param_1,uint param_2,uint param_3,uint param_4,uint 
   fVar1 = (GH_U2F((unsigned int)((param_5 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   fVar2 = (GH_U2F((unsigned int)((param_3 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   fVar3 = (GH_U2F((unsigned int)((param_4 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  *(float *)(param_1 + 0x2a0) = (GH_U2F((unsigned int)((param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  *(float *)(param_1 + 0x2ac) = fVar1;
-  *(float *)(param_1 + 0x2a4) = fVar2;
-  *(float *)(param_1 + 0x2a8) = fVar3;
-  if (*(char *)(param_1 + 0x4df8) != '\0') {
-    fparam_1 = (double)(**(double ( **)(int,int))(param_1 + 0x4de0))(param_1, param_1 + 0x2a0);
+  *(float *)(glContext + 0x2a0) = (GH_U2F((unsigned int)((param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  *(float *)(glContext + 0x2ac) = fVar1;
+  *(float *)(glContext + 0x2a4) = fVar2;
+  *(float *)(glContext + 0x2a8) = fVar3;
+  if (*(char *)(glContext + 0x4df8) != '\0') {
+    fparam_1 = (double)(**(double ( **)(int,int))(glContext + 0x4de0))(glContext, glContext + 0x2a0);
   }
   return fparam_1;
 }
@@ -98,7 +98,7 @@ int _glColor4usv_Comp(param_1, param_2)
 }
 
 /* _glColor4usv_Exec @ 0x5d458 (220 bytes) */
-double _glColor4usv_Exec(int param_1,ushort *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+double _glColor4usv_Exec(int glContext,ushort *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -107,12 +107,12 @@ double _glColor4usv_Exec(int param_1,ushort *param_2,double fparam_1,double fpar
   fVar1 = (GH_U2F((unsigned int)((param_2[3] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   fVar2 = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   fVar3 = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  *(float *)(param_1 + 0x2a0) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  *(float *)(param_1 + 0x2ac) = fVar1;
-  *(float *)(param_1 + 0x2a4) = fVar2;
-  *(float *)(param_1 + 0x2a8) = fVar3;
-  if (*(char *)(param_1 + 0x4df8) != '\0') {
-    fparam_1 = (double)(**(double ( **)(int,int))(param_1 + 0x4de0))(param_1, param_1 + 0x2a0);
+  *(float *)(glContext + 0x2a0) = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  *(float *)(glContext + 0x2ac) = fVar1;
+  *(float *)(glContext + 0x2a4) = fVar2;
+  *(float *)(glContext + 0x2a8) = fVar3;
+  if (*(char *)(glContext + 0x4df8) != '\0') {
+    fparam_1 = (double)(**(double ( **)(int,int))(glContext + 0x4de0))(glContext, glContext + 0x2a0);
   }
   return fparam_1;
 }
@@ -490,20 +490,20 @@ int _glColorMaterial_Comp(param_1, param_2, param_3)
 }
 
 /* _glColorMaterial_Exec @ 0x5dee0 (188 bytes) */
-void _glColorMaterial_Exec(param_1, param_2, param_3)
-  int param_1;
+void _glColorMaterial_Exec(glContext, param_2, param_3)
+  int glContext;
   uint param_2;
   uint param_3;
 {
   undefined4 uVar1;
   
-  if (*(short *)(param_1 + 0x4a10) < 0) {
+  if (*(short *)(glContext + 0x4a10) < 0) {
     if ((param_2 < 0x404) || ((0x405 < param_2 && (param_2 != 0x408)))) goto LAB_0005df54;
     if (param_3 != 0x1600) {
       if (param_3 < 0x1601) {
         if (2 < param_3 - 0x1200) {
 LAB_0005df54:
-          if (*(int *)(param_1 + 0x7574) != 0) {
+          if (*(int *)(glContext + 0x7574) != 0) {
             return;
           }
           uVar1 = 0x500;
@@ -512,18 +512,18 @@ LAB_0005df54:
       }
       else if (param_3 != 0x1602) goto LAB_0005df54;
     }
-    *(short *)(param_1 + 0x30a4) = (short)param_2;
-    *(short *)(param_1 + 0x30a6) = (short)param_3;
-    _gleUpdateLightColorChangeFunc(param_1);
-    *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x40000;
+    *(short *)(glContext + 0x30a4) = (short)param_2;
+    *(short *)(glContext + 0x30a6) = (short)param_3;
+    _gleUpdateLightColorChangeFunc(glContext);
+    *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x40000;
   }
   else {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
     uVar1 = 0x502;
 LAB_0005df64:
-    *(undefined4 *)(param_1 + 0x7574) = uVar1;
+    *(undefined4 *)(glContext + 0x7574) = uVar1;
   }
   return;
 }

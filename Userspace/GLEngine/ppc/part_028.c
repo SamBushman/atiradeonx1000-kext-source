@@ -1,13 +1,13 @@
 #include "decls.h"
 
 /* _glTexCoord3d_Exec @ 0x936a0 (48 bytes) */
-void _glTexCoord3d_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glTexCoord3d_Exec(int glContext,double fparam_1,double fparam_2,double fparam_3)
 {
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
-  *(float *)(param_1 + 0x120) = (float)fparam_1;
-  *(float *)(param_1 + 0x124) = (float)fparam_2;
-  *(float *)(param_1 + 0x128) = (float)fparam_3;
-  *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
+  *(float *)(glContext + 0x120) = (float)fparam_1;
+  *(float *)(glContext + 0x124) = (float)fparam_2;
+  *(float *)(glContext + 0x128) = (float)fparam_3;
+  *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   return;
 }
 
@@ -34,8 +34,8 @@ void _glTexCoord3d_CompExec(undefined4 param_1,double fparam_1,double fparam_2,d
 }
 
 /* _glTexCoord3dv_Exec @ 0x937b0 (60 bytes) */
-void _glTexCoord3dv_Exec(param_1, param_2)
-  int param_1;
+void _glTexCoord3dv_Exec(glContext, param_2)
+  int glContext;
   double *param_2;
 {
   double dVar1;
@@ -43,11 +43,11 @@ void _glTexCoord3dv_Exec(param_1, param_2)
   
   dVar1 = *param_2;
   dVar2 = param_2[1];
-  *(float *)(param_1 + 0x128) = (float)param_2[2];
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
-  *(float *)(param_1 + 0x120) = (float)dVar1;
-  *(float *)(param_1 + 0x124) = (float)dVar2;
-  *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
+  *(float *)(glContext + 0x128) = (float)param_2[2];
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
+  *(float *)(glContext + 0x120) = (float)dVar1;
+  *(float *)(glContext + 0x124) = (float)dVar2;
+  *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   return;
 }
 
@@ -78,13 +78,13 @@ void _glTexCoord3dv_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord4d_Exec @ 0x93890 (48 bytes) */
-void _glTexCoord4d_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glTexCoord4d_Exec(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
-  *(float *)(param_1 + 0x120) = (float)fparam_1;
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 3;
-  *(float *)(param_1 + 0x124) = (float)fparam_2;
-  *(float *)(param_1 + 0x128) = (float)fparam_3;
-  *(float *)(param_1 + 300) = (float)fparam_4;
+  *(float *)(glContext + 0x120) = (float)fparam_1;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
+  *(float *)(glContext + 0x124) = (float)fparam_2;
+  *(float *)(glContext + 0x128) = (float)fparam_3;
+  *(float *)(glContext + 300) = (float)fparam_4;
   return;
 }
 
@@ -112,8 +112,8 @@ void _glTexCoord4d_CompExec(undefined4 param_1,double fparam_1,double fparam_2,d
 }
 
 /* _glTexCoord4dv_Exec @ 0x9398c (64 bytes) */
-void _glTexCoord4dv_Exec(param_1, param_2)
-  int param_1;
+void _glTexCoord4dv_Exec(glContext, param_2)
+  int glContext;
   double *param_2;
 {
   double dVar1;
@@ -123,11 +123,11 @@ void _glTexCoord4dv_Exec(param_1, param_2)
   dVar1 = *param_2;
   dVar3 = param_2[1];
   dVar2 = param_2[2];
-  *(float *)(param_1 + 300) = (float)param_2[3];
-  *(float *)(param_1 + 0x120) = (float)dVar1;
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 3;
-  *(float *)(param_1 + 0x124) = (float)dVar3;
-  *(float *)(param_1 + 0x128) = (float)dVar2;
+  *(float *)(glContext + 300) = (float)param_2[3];
+  *(float *)(glContext + 0x120) = (float)dVar1;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
+  *(float *)(glContext + 0x124) = (float)dVar3;
+  *(float *)(glContext + 0x128) = (float)dVar2;
   return;
 }
 
@@ -159,12 +159,12 @@ void _glTexCoord4dv_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord1f_Exec @ 0x93a7c (28 bytes) */
-void _glTexCoord1f_Exec(int param_1,float fparam_1)
+void _glTexCoord1f_Exec(int glContext,float fparam_1)
 {
-  *(float *)(param_1 + 0x120) = (float)fparam_1;
-  *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
-  *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
-  *(undefined4 *)(param_1 + 0x124) = *(undefined4 *)(param_1 + 0x20);
+  *(float *)(glContext + 0x120) = (float)fparam_1;
+  *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
+  *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
+  *(undefined4 *)(glContext + 0x124) = *(undefined4 *)(glContext + 0x20);
   return;
 }
 
@@ -189,14 +189,14 @@ void _glTexCoord1f_CompExec(undefined4 param_1,float fparam_1)
 }
 
 /* _glTexCoord1fv_Exec @ 0x93b2c (32 bytes) */
-void _glTexCoord1fv_Exec(param_1, param_2)
-  int param_1;
+void _glTexCoord1fv_Exec(glContext, param_2)
+  int glContext;
   undefined4 *param_2;
 {
-  *(undefined4 *)(param_1 + 0x120) = *param_2;
-  *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
-  *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
-  *(undefined4 *)(param_1 + 0x124) = *(undefined4 *)(param_1 + 0x20);
+  *(undefined4 *)(glContext + 0x120) = *param_2;
+  *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
+  *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
+  *(undefined4 *)(glContext + 0x124) = *(undefined4 *)(glContext + 0x20);
   return;
 }
 
@@ -280,8 +280,8 @@ void _glTexCoord3f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,flo
 }
 
 /* _glTexCoord3fv_Exec @ 0x93d88 (48 bytes) */
-void _glTexCoord3fv_Exec(param_1, param_2)
-  int param_1;
+void _glTexCoord3fv_Exec(glContext, param_2)
+  int glContext;
   undefined4 *param_2;
 {
   undefined4 uVar1;
@@ -291,11 +291,11 @@ void _glTexCoord3fv_Exec(param_1, param_2)
   uVar1 = param_2[2];
   uVar2 = *param_2;
   uVar3 = param_2[1];
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
-  *(undefined4 *)(param_1 + 0x120) = uVar2;
-  *(undefined4 *)(param_1 + 0x124) = uVar3;
-  *(undefined4 *)(param_1 + 0x128) = uVar1;
-  *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
+  *(undefined4 *)(glContext + 0x120) = uVar2;
+  *(undefined4 *)(glContext + 0x124) = uVar3;
+  *(undefined4 *)(glContext + 0x128) = uVar1;
+  *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   return;
 }
 
@@ -326,13 +326,13 @@ void _glTexCoord3fv_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord4f_Exec @ 0x93e50 (32 bytes) */
-void _glTexCoord4f_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
+void _glTexCoord4f_Exec(int glContext,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
-  *(float *)(param_1 + 0x120) = (float)fparam_1;
-  *(float *)(param_1 + 0x124) = (float)fparam_2;
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 3;
-  *(float *)(param_1 + 0x128) = (float)fparam_3;
-  *(float *)(param_1 + 300) = (float)fparam_4;
+  *(float *)(glContext + 0x120) = (float)fparam_1;
+  *(float *)(glContext + 0x124) = (float)fparam_2;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
+  *(float *)(glContext + 0x128) = (float)fparam_3;
+  *(float *)(glContext + 300) = (float)fparam_4;
   return;
 }
 
@@ -360,8 +360,8 @@ void _glTexCoord4f_CompExec(undefined4 param_1,float fparam_1,float fparam_2,flo
 }
 
 /* _glTexCoord4fv_Exec @ 0x93f2c (48 bytes) */
-void _glTexCoord4fv_Exec(param_1, param_2)
-  int param_1;
+void _glTexCoord4fv_Exec(glContext, param_2)
+  int glContext;
   undefined4 *param_2;
 {
   undefined4 uVar1;
@@ -373,11 +373,11 @@ void _glTexCoord4fv_Exec(param_1, param_2)
   uVar2 = *param_2;
   uVar3 = param_2[1];
   uVar4 = param_2[2];
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 3;
-  *(undefined4 *)(param_1 + 0x120) = uVar2;
-  *(undefined4 *)(param_1 + 0x124) = uVar3;
-  *(undefined4 *)(param_1 + 0x128) = uVar4;
-  *(undefined4 *)(param_1 + 300) = uVar1;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
+  *(undefined4 *)(glContext + 0x120) = uVar2;
+  *(undefined4 *)(glContext + 0x124) = uVar3;
+  *(undefined4 *)(glContext + 0x128) = uVar4;
+  *(undefined4 *)(glContext + 300) = uVar1;
   return;
 }
 
@@ -409,17 +409,17 @@ void _glTexCoord4fv_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord1i_Exec @ 0x93ffc (80 bytes) */
-void _glTexCoord1i_Exec(param_1, param_2)
-  int param_1;
+void _glTexCoord1i_Exec(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   double dVar1;
   
   dVar1 = (double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58;
-  *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
-  *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
-  *(undefined4 *)(param_1 + 0x124) = *(undefined4 *)(param_1 + 0x20);
-  *(float *)(param_1 + 0x120) = (float)dVar1;
+  *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
+  *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
+  *(undefined4 *)(glContext + 0x124) = *(undefined4 *)(glContext + 0x20);
+  *(float *)(glContext + 0x120) = (float)dVar1;
   return;
 }
 
@@ -448,17 +448,17 @@ void _glTexCoord1i_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord1iv_Exec @ 0x940f4 (84 bytes) */
-void _glTexCoord1iv_Exec(param_1, param_2)
-  int param_1;
+void _glTexCoord1iv_Exec(glContext, param_2)
+  int glContext;
   uint *param_2;
 {
   double dVar1;
   
   dVar1 = (double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58;
-  *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
-  *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
-  *(undefined4 *)(param_1 + 0x124) = *(undefined4 *)(param_1 + 0x20);
-  *(float *)(param_1 + 0x120) = (float)dVar1;
+  *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
+  *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
+  *(undefined4 *)(glContext + 0x124) = *(undefined4 *)(glContext + 0x20);
+  *(float *)(glContext + 0x120) = (float)dVar1;
   return;
 }
 
@@ -487,8 +487,8 @@ void _glTexCoord1iv_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord2i_Exec @ 0x941f4 (100 bytes) */
-void _glTexCoord2i_Exec(param_1, param_2, param_3)
-  int param_1;
+void _glTexCoord2i_Exec(glContext, param_2, param_3)
+  int glContext;
   uint param_2;
   uint param_3;
 {
@@ -497,10 +497,10 @@ void _glTexCoord2i_Exec(param_1, param_2, param_3)
   
   dVar2 = (double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58;
   dVar1 = (double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58;
-  *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
-  *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
-  *(float *)(param_1 + 0x120) = (float)dVar2;
-  *(float *)(param_1 + 0x124) = (float)dVar1;
+  *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
+  *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
+  *(float *)(glContext + 0x120) = (float)dVar2;
+  *(float *)(glContext + 0x124) = (float)dVar1;
   return;
 }
 
@@ -534,8 +534,8 @@ void _glTexCoord2i_CompExec(param_1, param_2, param_3)
 }
 
 /* _glTexCoord2iv_Exec @ 0x94328 (108 bytes) */
-void _glTexCoord2iv_Exec(param_1, param_2)
-  int param_1;
+void _glTexCoord2iv_Exec(glContext, param_2)
+  int glContext;
   uint *param_2;
 {
   double dVar1;
@@ -543,10 +543,10 @@ void _glTexCoord2iv_Exec(param_1, param_2)
   
   dVar2 = (double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58;
   dVar1 = (double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - DOUBLE_00108d58;
-  *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
-  *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
-  *(float *)(param_1 + 0x120) = (float)dVar2;
-  *(float *)(param_1 + 0x124) = (float)dVar1;
+  *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
+  *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
+  *(float *)(glContext + 0x120) = (float)dVar2;
+  *(float *)(glContext + 0x124) = (float)dVar1;
   return;
 }
 
@@ -578,8 +578,8 @@ void _glTexCoord2iv_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord3i_Exec @ 0x94460 (128 bytes) */
-void _glTexCoord3i_Exec(param_1, param_2, param_3, param_4)
-  int param_1;
+void _glTexCoord3i_Exec(glContext, param_2, param_3, param_4)
+  int glContext;
   uint param_2;
   uint param_3;
   uint param_4;
@@ -591,11 +591,11 @@ void _glTexCoord3i_Exec(param_1, param_2, param_3, param_4)
   dVar1 = (double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58;
   dVar3 = (double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58;
   dVar2 = (double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58;
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
-  *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
-  *(float *)(param_1 + 0x120) = (float)dVar1;
-  *(float *)(param_1 + 0x128) = (float)dVar3;
-  *(float *)(param_1 + 0x124) = (float)dVar2;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
+  *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
+  *(float *)(glContext + 0x120) = (float)dVar1;
+  *(float *)(glContext + 0x128) = (float)dVar3;
+  *(float *)(glContext + 0x124) = (float)dVar2;
   return;
 }
 
@@ -632,8 +632,8 @@ void _glTexCoord3i_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glTexCoord3iv_Exec @ 0x945d8 (140 bytes) */
-void _glTexCoord3iv_Exec(param_1, param_2)
-  int param_1;
+void _glTexCoord3iv_Exec(glContext, param_2)
+  int glContext;
   uint *param_2;
 {
   double dVar1;
@@ -643,11 +643,11 @@ void _glTexCoord3iv_Exec(param_1, param_2)
   dVar1 = (double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58;
   dVar3 = (double)CONCAT44(0x43300000,param_2[2] ^ 0x80000000) - DOUBLE_00108d58;
   dVar2 = (double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - DOUBLE_00108d58;
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
-  *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
-  *(float *)(param_1 + 0x120) = (float)dVar1;
-  *(float *)(param_1 + 0x128) = (float)dVar3;
-  *(float *)(param_1 + 0x124) = (float)dVar2;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
+  *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
+  *(float *)(glContext + 0x120) = (float)dVar1;
+  *(float *)(glContext + 0x128) = (float)dVar3;
+  *(float *)(glContext + 0x124) = (float)dVar2;
   return;
 }
 
@@ -680,8 +680,8 @@ void _glTexCoord3iv_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord4i_Exec @ 0x94750 (144 bytes) */
-void _glTexCoord4i_Exec(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
+void _glTexCoord4i_Exec(glContext, param_2, param_3, param_4, param_5)
+  int glContext;
   uint param_2;
   uint param_3;
   uint param_4;
@@ -696,11 +696,11 @@ void _glTexCoord4i_Exec(param_1, param_2, param_3, param_4, param_5)
   dVar4 = (double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - DOUBLE_00108d58;
   dVar2 = (double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58;
   dVar3 = (double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58;
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 3;
-  *(float *)(param_1 + 0x120) = (float)dVar1;
-  *(float *)(param_1 + 0x124) = (float)dVar2;
-  *(float *)(param_1 + 0x128) = (float)dVar3;
-  *(float *)(param_1 + 300) = (float)dVar4;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
+  *(float *)(glContext + 0x120) = (float)dVar1;
+  *(float *)(glContext + 0x124) = (float)dVar2;
+  *(float *)(glContext + 0x128) = (float)dVar3;
+  *(float *)(glContext + 300) = (float)dVar4;
   return;
 }
 
@@ -740,8 +740,8 @@ void _glTexCoord4i_CompExec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glTexCoord4iv_Exec @ 0x94900 (160 bytes) */
-void _glTexCoord4iv_Exec(param_1, param_2)
-  int param_1;
+void _glTexCoord4iv_Exec(glContext, param_2)
+  int glContext;
   uint *param_2;
 {
   double dVar1;
@@ -753,11 +753,11 @@ void _glTexCoord4iv_Exec(param_1, param_2)
   dVar4 = (double)CONCAT44(0x43300000,param_2[3] ^ 0x80000000) - DOUBLE_00108d58;
   dVar2 = (double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - DOUBLE_00108d58;
   dVar3 = (double)CONCAT44(0x43300000,param_2[2] ^ 0x80000000) - DOUBLE_00108d58;
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 3;
-  *(float *)(param_1 + 0x120) = (float)dVar1;
-  *(float *)(param_1 + 0x124) = (float)dVar2;
-  *(float *)(param_1 + 0x128) = (float)dVar3;
-  *(float *)(param_1 + 300) = (float)dVar4;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 3;
+  *(float *)(glContext + 0x120) = (float)dVar1;
+  *(float *)(glContext + 0x124) = (float)dVar2;
+  *(float *)(glContext + 0x128) = (float)dVar3;
+  *(float *)(glContext + 300) = (float)dVar4;
   return;
 }
 
@@ -791,17 +791,17 @@ void _glTexCoord4iv_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord1s_Exec @ 0x94aac (80 bytes) */
-void _glTexCoord1s_Exec(param_1, param_2)
-  int param_1;
+void _glTexCoord1s_Exec(glContext, param_2)
+  int glContext;
   uint param_2;
 {
   double dVar1;
   
   dVar1 = (double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58;
-  *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
-  *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
-  *(undefined4 *)(param_1 + 0x124) = *(undefined4 *)(param_1 + 0x20);
-  *(float *)(param_1 + 0x120) = (float)dVar1;
+  *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
+  *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
+  *(undefined4 *)(glContext + 0x124) = *(undefined4 *)(glContext + 0x20);
+  *(float *)(glContext + 0x120) = (float)dVar1;
   return;
 }
 
@@ -830,17 +830,17 @@ void _glTexCoord1s_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord1sv_Exec @ 0x94ba4 (84 bytes) */
-void _glTexCoord1sv_Exec(param_1, param_2)
-  int param_1;
+void _glTexCoord1sv_Exec(glContext, param_2)
+  int glContext;
   short *param_2;
 {
   double dVar1;
   
   dVar1 = (double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58;
-  *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
-  *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
-  *(undefined4 *)(param_1 + 0x124) = *(undefined4 *)(param_1 + 0x20);
-  *(float *)(param_1 + 0x120) = (float)dVar1;
+  *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
+  *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
+  *(undefined4 *)(glContext + 0x124) = *(undefined4 *)(glContext + 0x20);
+  *(float *)(glContext + 0x120) = (float)dVar1;
   return;
 }
 
