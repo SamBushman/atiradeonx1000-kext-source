@@ -2034,14 +2034,14 @@ int _LFSParserPreprocessString(forwardedArg1, sourceString)
   int newlineFound;
   undefined1 *processedString;
   uint sourceIndex;
-  int iVar7;
+  int outputLengthThenNewlineResult;
   undefined1 *outputCursor;
   int sourceAdvance [5];
   
   sourceIndex = 0;
   sourceLength = _strlen(sourceString);
   inComment = false;
-  iVar7 = 0;
+  outputLengthThenNewlineResult = 0;
   if (sourceLength != 0) {
     do {
       sourceAdvance[0] = 1;
@@ -2051,7 +2051,7 @@ int _LFSParserPreprocessString(forwardedArg1, sourceString)
           inComment = false;
         }
 LAB_000cf24c:
-        iVar7 = iVar7 + 1;
+        outputLengthThenNewlineResult = outputLengthThenNewlineResult + 1;
       }
       else {
         currentChar = *(char *)(sourceString + sourceIndex);
@@ -2059,7 +2059,7 @@ LAB_000cf24c:
           if (((((currentChar == '[') || (currentChar == ']')) || (currentChar == '=')) ||
               ((currentChar == '{' || (currentChar == '}')))) ||
              ((currentChar == ';' || ((currentChar == '.' || (currentChar == ',')))))) {
-            iVar7 = iVar7 + 2;
+            outputLengthThenNewlineResult = outputLengthThenNewlineResult + 2;
           }
           goto LAB_000cf24c;
         }
@@ -2069,15 +2069,15 @@ LAB_000cf24c:
     } while (sourceIndex < sourceLength);
   }
   sourceIndex = 0;
-  processedString = (undefined1 *)_calloc(iVar7 + 1,1);
+  processedString = (undefined1 *)_calloc(outputLengthThenNewlineResult + 1,1);
   inComment = false;
   outputCursor = processedString;
   if (sourceLength != 0) {
     do {
       sourceAdvance[0] = 1;
       if (inComment) {
-        iVar7 = ((int (*)())_LFSParserCheckForNewline)(forwardedArg1,sourceString,sourceIndex,sourceLength,sourceAdvance);
-        if (iVar7 != 0) {
+        outputLengthThenNewlineResult = ((int (*)())_LFSParserCheckForNewline)(forwardedArg1,sourceString,sourceIndex,sourceLength,sourceAdvance);
+        if (outputLengthThenNewlineResult != 0) {
           *outputCursor = 10;
           inComment = false;
           outputCursor = outputCursor + 1;
@@ -2103,8 +2103,8 @@ LAB_000cf24c:
             *outputCursor = 0x20;
           }
           else {
-            iVar7 = ((int (*)())_LFSParserCheckForNewline)(forwardedArg1,sourceString,sourceIndex,sourceLength,sourceAdvance);
-            if (iVar7 == 0) {
+            outputLengthThenNewlineResult = ((int (*)())_LFSParserCheckForNewline)(forwardedArg1,sourceString,sourceIndex,sourceLength,sourceAdvance);
+            if (outputLengthThenNewlineResult == 0) {
               *outputCursor = *(undefined1 *)(sourceString + sourceIndex);
             }
             else {
@@ -2264,24 +2264,24 @@ LAB_000cf5b0:
 }
 
 /* _LFSParserRewind @ 0xcf5ec (92 bytes) */
-int _LFSParserRewind(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
+int _LFSParserRewind(parser, stepCount)
+  undefined4 parser;
+  int stepCount;
 {
-  int iVar1;
-  undefined1 auStack_20 [20];
+  int stepResult;
+  undefined1 discardedChar [20];
   
-  iVar1 = 0;
-  if (param_2 != 0) {
+  stepResult = 0;
+  if (stepCount != 0) {
     do {
-      param_2 = param_2 + -1;
-      iVar1 = ((int (*)())_LFSParserGetCharacter)(param_1,auStack_20,1);
-      if (param_2 == 0) {
-        return iVar1;
+      stepCount = stepCount + -1;
+      stepResult = ((int (*)())_LFSParserGetCharacter)(parser,discardedChar,1);
+      if (stepCount == 0) {
+        return stepResult;
       }
-    } while (iVar1 == 0);
+    } while (stepResult == 0);
   }
-  return iVar1;
+  return stepResult;
 }
 
 /* _LFSParserGetPart @ 0xcf648 (188 bytes) */
@@ -3376,24 +3376,24 @@ int _LFSParserParseVersion(param_1)
 }
 
 /* _LFSParserParse @ 0xd0ff8 (136 bytes) */
-int _LFSParserParse(param_1)
-  int param_1;
+int _LFSParserParse(parser)
+  int parser;
 {
-  int iVar1;
+  int parseStatus;
   
-  iVar1 = ((int (*)())_LFSParserParseVersion)(param_1);
-  while (iVar1 == 0) {
-    iVar1 = ((int (*)())_LFSParserParseInstruction)(param_1);
+  parseStatus = ((int (*)())_LFSParserParseVersion)(parser);
+  while (parseStatus == 0) {
+    parseStatus = ((int (*)())_LFSParserParseInstruction)(parser);
   }
-  if ((iVar1 == 1) &&
-     ((*(char *)(param_1 + 0x4a) == '\0' ||
-      (iVar1 = 0x15, *(int *)(*(int *)(*(int *)(param_1 + 0x14) + 8) + 8) != 0)))) {
-    iVar1 = 0;
+  if ((parseStatus == 1) &&
+     ((*(char *)(parser + 0x4a) == '\0' ||
+      (parseStatus = 0x15, *(int *)(*(int *)(*(int *)(parser + 0x14) + 8) + 8) != 0)))) {
+    parseStatus = 0;
   }
   else {
-    ((void (*)())_LFSParserBuildErrorString)(param_1,iVar1);
+    ((void (*)())_LFSParserBuildErrorString)(parser,parseStatus);
   }
-  return iVar1;
+  return parseStatus;
 }
 
 /* _LFSParserBuildErrorString @ 0xd1080 (580 bytes) */

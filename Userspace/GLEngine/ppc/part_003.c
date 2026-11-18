@@ -2435,12 +2435,12 @@ LAB_00022398:
 }
 
 /* _gleShareSharedState @ 0x223d4 (88 bytes) */
-int _gleShareSharedState(param_1)
-  int param_1;
+int _gleShareSharedState(glContext)
+  int glContext;
 {
   int sharedState;
   
-  sharedState = *(int *)(param_1 + 0x5148);
+  sharedState = *(int *)(glContext + 0x5148);
   _pthread_mutex_lock(sharedState + 0x8028);
   *(undefined1 *)(sharedState + 0x8024) = 1;
   *(int *)(sharedState + 0x8020) = *(int *)(sharedState + 0x8020) + 1;

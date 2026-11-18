@@ -20,14 +20,14 @@ void _gleBeginLinesRenderTCLRDirty(glContext)
 void _gleBeginLinesSelectFeedback(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *renderFunc;
   
   *(undefined **)(glContext + 0x4a0c) = PTR__gleFlushAtomicFunc_00112224;
-  puVar1 = PTR__gleFeedbackLinesFunc_00112208;
+  renderFunc = PTR__gleFeedbackLinesFunc_00112208;
   if (*(int *)(glContext + 0x4e1c) == 0x1c02) {
-    puVar1 = PTR__gleSelectLinesFunc_0011220c;
+    renderFunc = PTR__gleSelectLinesFunc_0011220c;
   }
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = renderFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }

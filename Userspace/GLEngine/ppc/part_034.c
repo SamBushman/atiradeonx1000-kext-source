@@ -2606,8 +2606,8 @@ double _glWeightfvARB_Exec(glContext, size, weights)
   int size;
   undefined4 *weights;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 weightValue;
+  int weightByteOffset;
   undefined4 *dstCursor;
   int loopIndex;
   
@@ -2622,10 +2622,10 @@ double _glWeightfvARB_Exec(glContext, size, weights)
   if (0 < size) {
     dstCursor = (undefined4 *)(glContext + 0x2d0);
     do {
-      uVar1 = *weights;
+      weightValue = *weights;
       loopIndex = loopIndex + 1;
       weights = weights + 1;
-      *dstCursor = uVar1;
+      *dstCursor = weightValue;
       dstCursor = dstCursor + 1;
       size = size + -1;
     } while (size != 0);
@@ -2634,9 +2634,9 @@ double _glWeightfvARB_Exec(glContext, size, weights)
     }
   }
   do {
-    iVar2 = loopIndex * 4;
+    weightByteOffset = loopIndex * 4;
     loopIndex = loopIndex + 1;
-    *(undefined4 *)(iVar2 + glContext + 0x2d0) = 0;
+    *(undefined4 *)(weightByteOffset + glContext + 0x2d0) = 0;
   } while (loopIndex < 4);
   return;
 }
@@ -2728,16 +2728,16 @@ int _glWeightdvARB_Comp(glContext, size, weights)
   uint size;
   uint weights;
 {
-  double dVar1;
+  double weightValue;
   
   if ((int)size < 5) {
     glContext = _gleAddListItem(glContext,PTR__glWeightARB_ListExec_0011045c,size * 4 + 4);
     if (((float *)glContext != (float *)0x0) && (*(uint *)glContext = size, 0 < (int)size)) {
       glContext = glContext + 4;
       do {
-        dVar1 = *(double *)weights;
+        weightValue = *(double *)weights;
         weights = weights + 8;
-        *(float *)glContext = (float)dVar1;
+        *(float *)glContext = (float)weightValue;
         glContext = glContext + 4;
         size = size - 1;
       } while (size != 0);

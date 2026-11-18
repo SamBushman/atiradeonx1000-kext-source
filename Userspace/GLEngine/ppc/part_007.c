@@ -6247,7 +6247,7 @@ int _gleSetArrayLoadAddressNO(codeCursor, codeStart, arrayBaseOffset, elementStr
   uint elementStride;
 {
   uint offsetField;
-  uint uVar2;
+  uint strideLog2ThenInstructionWord;
   
   if (elementStride == 0x3ff) {
     *codeCursor = arrayBaseOffset & 0xffff | 0x81030000;
@@ -6256,16 +6256,16 @@ int _gleSetArrayLoadAddressNO(codeCursor, codeStart, arrayBaseOffset, elementStr
     codeCursor[3] = 0x7ce84a14;
     return codeCursor + 4;
   }
-  uVar2 = 0x1f - LZCOUNT(elementStride);
+  strideLog2ThenInstructionWord = 0x1f - LZCOUNT(elementStride);
   offsetField = arrayBaseOffset & 0xffff;
   *codeCursor = offsetField | 0x81030000;
-  if ((elementStride & (-2 << (uVar2 & 0x1f) | 0xfffffffeU >> 0x20 - (uVar2 & 0x1f))) == 0) {
-    uVar2 = uVar2 * 0x800 | 0xc90000 | (0x1f - uVar2) * 2 | 0x54000000;
+  if ((elementStride & (-2 << (strideLog2ThenInstructionWord & 0x1f) | 0xfffffffeU >> 0x20 - (strideLog2ThenInstructionWord & 0x1f))) == 0) {
+    strideLog2ThenInstructionWord = strideLog2ThenInstructionWord * 0x800 | 0xc90000 | (0x1f - strideLog2ThenInstructionWord) * 2 | 0x54000000;
   }
   else {
-    uVar2 = elementStride & 0xffff | 0x1d260000;
+    strideLog2ThenInstructionWord = elementStride & 0xffff | 0x1d260000;
   }
-  codeCursor[1] = uVar2;
+  codeCursor[1] = strideLog2ThenInstructionWord;
   codeCursor[2] = 0x7ce84a14;
   switch((int)codeCursor - codeStart >> 2) {
   case 0:

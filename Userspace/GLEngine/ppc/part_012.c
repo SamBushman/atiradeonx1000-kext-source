@@ -562,18 +562,18 @@ void _glSecondaryColor3b_Exec(glContext, red, green, blue)
   uint green;
   uint blue;
 {
-  float fVar1;
-  float fVar2;
+  float greenComponent;
+  float blueComponent;
   
-  fVar2 = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - DOUBLE_00108d58) *
+  blueComponent = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e60 + FLOAT_00108e64;
-  fVar1 = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - DOUBLE_00108d58) *
+  greenComponent = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e60 + FLOAT_00108e64;
   *(float *)(glContext + 0x2c0) =
        (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e60
        + FLOAT_00108e64;
-  *(float *)(glContext + 0x2c8) = fVar2;
-  *(float *)(glContext + 0x2c4) = fVar1;
+  *(float *)(glContext + 0x2c8) = blueComponent;
+  *(float *)(glContext + 0x2c4) = greenComponent;
   return;
 }
 
@@ -640,21 +640,21 @@ int _glSecondaryColor3bv_Comp(glContext, v)
   char *v;
 {
   double intToDoubleMagic;
-  float fVar2;
-  float fVar3;
+  float channelScale;
+  float channelBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glSecondaryColor3_ListExec_00110064,0xc);
-  fVar3 = FLOAT_00108e64;
-  fVar2 = FLOAT_00108e60;
+  channelBias = FLOAT_00108e64;
+  channelScale = FLOAT_00108e60;
   intToDoubleMagic = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e60 + FLOAT_00108e64;
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
-                fVar3;
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
-                fVar3;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * channelScale +
+                channelBias;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * channelScale +
+                channelBias;
   }
   return listRecord;
 }
@@ -676,18 +676,18 @@ void _glSecondaryColor3s_Exec(glContext, red, green, blue)
   uint green;
   uint blue;
 {
-  float fVar1;
-  float fVar2;
+  float greenComponent;
+  float blueComponent;
   
-  fVar2 = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - DOUBLE_00108d58) *
+  blueComponent = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e70 + FLOAT_00108e74;
-  fVar1 = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - DOUBLE_00108d58) *
+  greenComponent = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e70 + FLOAT_00108e74;
   *(float *)(glContext + 0x2c0) =
        (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e70
        + FLOAT_00108e74;
-  *(float *)(glContext + 0x2c8) = fVar2;
-  *(float *)(glContext + 0x2c4) = fVar1;
+  *(float *)(glContext + 0x2c8) = blueComponent;
+  *(float *)(glContext + 0x2c4) = greenComponent;
   return;
 }
 
@@ -699,19 +699,19 @@ int _glSecondaryColor3s_Comp(glContext, red, green, blue)
   uint blue;
 {
   double intToDoubleMagic;
-  float fVar2;
-  float fVar3;
+  float channelScale;
+  float channelBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glSecondaryColor3_ListExec_00110064,0xc);
-  fVar3 = FLOAT_00108e74;
-  fVar2 = FLOAT_00108e70;
+  channelBias = FLOAT_00108e74;
+  channelScale = FLOAT_00108e70;
   intToDoubleMagic = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e70 + FLOAT_00108e74;
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * channelScale + channelBias;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * channelScale + channelBias;
   }
   return listRecord;
 }

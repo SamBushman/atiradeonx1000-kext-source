@@ -88,14 +88,14 @@ void _gleBeginQuadStripRenderTCLRDirty(glContext)
 void _gleBeginQuadStripSelectFeedback(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *renderFunc;
   
   *(undefined **)(glContext + 0x4a0c) = PTR__gleFlushTriQuadStripFunc_001122c8;
-  puVar1 = PTR__gleFeedbackQuadStripFunc_00112264;
+  renderFunc = PTR__gleFeedbackQuadStripFunc_00112264;
   if (*(int *)(glContext + 0x4e1c) == 0x1c02) {
-    puVar1 = PTR__gleSelectQuadStripFunc_00112268;
+    renderFunc = PTR__gleSelectQuadStripFunc_00112268;
   }
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = renderFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }

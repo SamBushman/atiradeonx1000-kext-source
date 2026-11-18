@@ -36,14 +36,14 @@ double _glSecondaryColor3fv_Exec(glContext, v)
   int glContext;
   undefined4 *v;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 redValue;
+  undefined4 greenValue;
   
-  uVar1 = *v;
-  uVar2 = v[1];
+  redValue = *v;
+  greenValue = v[1];
   *(undefined4 *)(glContext + 0x2c8) = v[2];
-  *(undefined4 *)(glContext + 0x2c0) = uVar1;
-  *(undefined4 *)(glContext + 0x2c4) = uVar2;
+  *(undefined4 *)(glContext + 0x2c0) = redValue;
+  *(undefined4 *)(glContext + 0x2c4) = greenValue;
   return;
 }
 
@@ -201,14 +201,14 @@ double _glSecondaryColor3ubv_Exec(glContext, v)
   int glContext;
   byte *v;
 {
-  float fVar1;
-  float fVar2;
+  float blueComponent;
+  float greenComponent;
   
-  fVar1 = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-  fVar2 = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+  blueComponent = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
+  greenComponent = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
   *(float *)(glContext + 0x2c0) = (GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-  *(float *)(glContext + 0x2c8) = fVar1;
-  *(float *)(glContext + 0x2c4) = fVar2;
+  *(float *)(glContext + 0x2c8) = blueComponent;
+  *(float *)(glContext + 0x2c4) = greenComponent;
   return;
 }
 
@@ -217,15 +217,15 @@ int _glSecondaryColor3ubv_Comp(glContext, v)
   undefined4 glContext;
   byte *v;
 {
-  float fVar1;
+  float channelScale;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glSecondaryColor3_ListExec_00110064,0xc);
-  fVar1 = FLOAT_00108e78;
+  channelScale = FLOAT_00108e78;
   if (listRecord != (float *)0x0) {
     *listRecord = (GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e78;
-    listRecord[1] = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * fVar1;
-    listRecord[2] = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * fVar1;
+    listRecord[1] = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * channelScale;
+    listRecord[2] = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * channelScale;
   }
   return listRecord;
 }
@@ -247,14 +247,14 @@ void _glSecondaryColor3us_Exec(glContext, red, green, blue)
   uint green;
   uint blue;
 {
-  float fVar1;
-  float fVar2;
+  float blueComponent;
+  float greenComponent;
   
-  fVar1 = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  fVar2 = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  blueComponent = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  greenComponent = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   *(float *)(glContext + 0x2c0) = (GH_U2F((unsigned int)((red | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  *(float *)(glContext + 0x2c8) = fVar1;
-  *(float *)(glContext + 0x2c4) = fVar2;
+  *(float *)(glContext + 0x2c8) = blueComponent;
+  *(float *)(glContext + 0x2c4) = greenComponent;
   return;
 }
 
@@ -409,17 +409,17 @@ int _glSecondaryColor3uiv_Comp(glContext, v)
   undefined4 glContext;
   undefined4 *v;
 {
-  double dVar1;
-  float fVar2;
+  double intToDoubleBias;
+  float channelScale;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glSecondaryColor3_ListExec_00110064,0xc);
-  fVar2 = FLOAT_00108e6c;
-  dVar1 = DOUBLE_00108d70;
+  channelScale = FLOAT_00108e6c;
+  intToDoubleBias = DOUBLE_00108d70;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70) * FLOAT_00108e6c;
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1]) - dVar1) * fVar2;
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,v[2]) - dVar1) * fVar2;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,v[1]) - intToDoubleBias) * channelScale;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,v[2]) - intToDoubleBias) * channelScale;
   }
   return listRecord;
 }

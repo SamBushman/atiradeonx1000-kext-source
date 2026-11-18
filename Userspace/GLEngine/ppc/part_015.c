@@ -1095,15 +1095,15 @@ void _glBindRenderbufferEXT_Exec(glContext, target, renderbuffer)
   undefined4 renderbuffer;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int sharedMutex;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8d41) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
-        iVar2 = *(int *)(glContext + 0x5148) + 0x8028;
-        _pthread_mutex_lock(iVar2);
+        sharedMutex = *(int *)(glContext + 0x5148) + 0x8028;
+        _pthread_mutex_lock(sharedMutex);
         _gleBindRenderbuffer(glContext,renderbuffer);
-        _pthread_mutex_unlock(iVar2);
+        _pthread_mutex_unlock(sharedMutex);
         return;
       }
       _gleBindRenderbuffer(glContext,renderbuffer);
@@ -1386,27 +1386,27 @@ void _glDeleteFramebuffersEXT_Exec(glContext, n, framebuffers)
   int *framebuffers;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  int iVar3;
+  int boundFramebufferName;
+  int framebufferName;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      iVar2 = 0;
+      boundFramebufferName = 0;
       if (*(int *)(glContext + 0x744c) != 0) {
-        iVar2 = *(int *)(*(int *)(glContext + 0x744c) + 4);
+        boundFramebufferName = *(int *)(*(int *)(glContext + 0x744c) + 4);
       }
       if (0 < n) {
         do {
-          iVar3 = *framebuffers;
+          framebufferName = *framebuffers;
           framebuffers = framebuffers + 1;
-          if (iVar3 != 0) {
-            if (iVar3 == iVar2) {
+          if (framebufferName != 0) {
+            if (framebufferName == boundFramebufferName) {
               _gleBindFramebuffer(glContext,0);
             }
-            _gleDeleteHashNameAndObject(glContext,*(undefined4 *)(glContext + 0x5148),iVar3);
+            _gleDeleteHashNameAndObject(glContext,*(undefined4 *)(glContext + 0x5148),framebufferName);
           }
           n = n + -1;
         } while (n != 0);

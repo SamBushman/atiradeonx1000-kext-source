@@ -4750,13 +4750,13 @@ int _glVertex3_ListExec(glContext, recordedArgs)
   int glContext;
   float *recordedArgs;
 {
-  code *pcVar1;
+  code *vertexFunc;
   
-  pcVar1 = *(code **)(glContext + 0x4884);
+  vertexFunc = *(code **)(glContext + 0x4884);
   if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-    pcVar1 = *(code **)(glContext + 0x28);
+    vertexFunc = *(code **)(glContext + 0x28);
   }
-  (*pcVar1)(glContext,(double)*recordedArgs,(double)recordedArgs[1],(double)recordedArgs[2],
+  (*vertexFunc)(glContext,(double)*recordedArgs,(double)recordedArgs[1],(double)recordedArgs[2],
             (double)*(float *)(glContext + 0x24));
   return 0xc;
 }
@@ -5687,14 +5687,14 @@ int _glNormal_ListExec(glContext, recordedArgs)
   int glContext;
   undefined4 *recordedArgs;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 normalY;
+  undefined4 normalZ;
   
-  uVar1 = recordedArgs[1];
-  uVar2 = recordedArgs[2];
+  normalY = recordedArgs[1];
+  normalZ = recordedArgs[2];
   *(undefined4 *)(glContext + 0x2b0) = *recordedArgs;
-  *(undefined4 *)(glContext + 0x2b4) = uVar1;
-  *(undefined4 *)(glContext + 0x2b8) = uVar2;
+  *(undefined4 *)(glContext + 0x2b4) = normalY;
+  *(undefined4 *)(glContext + 0x2b8) = normalZ;
   return 0xc;
 }
 

@@ -909,14 +909,14 @@ void _gleBeginTriangleStripRenderTCLRDirty(glContext)
 void _gleBeginTriangleStripSelectFeedback(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *renderFunc;
   
   *(undefined **)(glContext + 0x4a0c) = PTR__gleFlushTriQuadStripFunc_001122c8;
-  puVar1 = PTR__gleFeedbackTriangleStripFunc_001122ac;
+  renderFunc = PTR__gleFeedbackTriangleStripFunc_001122ac;
   if (*(int *)(glContext + 0x4e1c) == 0x1c02) {
-    puVar1 = PTR__gleSelectTriangleStripFunc_001122b0;
+    renderFunc = PTR__gleSelectTriangleStripFunc_001122b0;
   }
-  *(undefined **)(glContext + 0x4a08) = puVar1;
+  *(undefined **)(glContext + 0x4a08) = renderFunc;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   return;
 }

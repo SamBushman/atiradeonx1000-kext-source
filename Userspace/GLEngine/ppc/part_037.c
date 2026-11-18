@@ -26,16 +26,16 @@ double _glVertexAttrib4dvARB_Exec(glContext, index, v)
   uint index;
   double *v;
 {
-  int iVar1;
+  int attribRecord;
   code *UNRECOVERED_JUMPTABLE;
   
   if (index < 0x10) {
     if (index != 0) {
-      iVar1 = glContext + index * 0x10;
-      *(float *)(iVar1 + 0x1a0) = (float)*v;
-      *(float *)(iVar1 + 0x1a4) = (float)v[1];
-      *(float *)(iVar1 + 0x1a8) = (float)v[2];
-      *(float *)(iVar1 + 0x1ac) = (float)v[3];
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) = (float)*v;
+      *(float *)(attribRecord + 0x1a4) = (float)v[1];
+      *(float *)(attribRecord + 0x1a8) = (float)v[2];
+      *(float *)(attribRecord + 0x1ac) = (float)v[3];
       return;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x4884);
@@ -623,20 +623,20 @@ void _glEnableVertexAttribArrayARB_Exec(glContext, index)
 {
   undefined4 glErrorCode;
   int clientState;
-  uint uVar3;
-  longlong lVar4;
+  uint attribMaskHigh;
+  longlong attribMask;
   
   clientState = *(int *)(glContext + 0x4a60);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (index < 0x10) {
-      lVar4 = ___ashldi3(1,0,index);
-      uVar3 = (uint)((ulonglong)lVar4 >> 0x20);
-      *(uint *)(clientState + 0x330) = *(uint *)(clientState + 0x330) | uVar3;
-      *(uint *)(clientState + 0x334) = *(uint *)(clientState + 0x334) | (uint)lVar4;
+      attribMask = ___ashldi3(1,0,index);
+      attribMaskHigh = (uint)((ulonglong)attribMask >> 0x20);
+      *(uint *)(clientState + 0x330) = *(uint *)(clientState + 0x330) | attribMaskHigh;
+      *(uint *)(clientState + 0x334) = *(uint *)(clientState + 0x334) | (uint)attribMask;
       *(undefined4 *)(glContext + 0x488c) = 0;
       *(undefined4 *)(glContext + 0x4890) = 0;
-      *(uint *)(clientState + 0x350) = *(uint *)(clientState + 0x350) | uVar3;
-      *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | (uint)lVar4;
+      *(uint *)(clientState + 0x350) = *(uint *)(clientState + 0x350) | attribMaskHigh;
+      *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | (uint)attribMask;
       if (((*(int *)(clientState + 0x344) == 0) && (*(int *)(clientState + 0x358) == 0)) &&
          (*(int *)(glContext + 0x49a0) == 0)) {
         return;

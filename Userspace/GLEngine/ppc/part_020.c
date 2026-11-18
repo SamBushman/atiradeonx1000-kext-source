@@ -317,18 +317,18 @@ void _glNormal3b_Exec(glContext, nx, ny, nz)
   uint ny;
   uint nz;
 {
-  float fVar1;
-  float fVar2;
+  float normalX;
+  float normalZ;
   
-  fVar1 = (float)((double)CONCAT44(0x43300000,nx ^ 0x80000000) - DOUBLE_00108d58) *
+  normalX = (float)((double)CONCAT44(0x43300000,nx ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e98;
-  fVar2 = (float)((double)CONCAT44(0x43300000,nz ^ 0x80000000) - DOUBLE_00108d58) *
+  normalZ = (float)((double)CONCAT44(0x43300000,nz ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e98;
   *(float *)(glContext + 0x2b4) =
        (float)((double)CONCAT44(0x43300000,ny ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e98
   ;
-  *(float *)(glContext + 0x2b0) = fVar1;
-  *(float *)(glContext + 0x2b8) = fVar2;
+  *(float *)(glContext + 0x2b0) = normalX;
+  *(float *)(glContext + 0x2b8) = normalZ;
   return;
 }
 
@@ -482,14 +482,14 @@ double _glNormal3fv_Exec(glContext, v)
   int glContext;
   undefined4 *v;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 normalY;
+  undefined4 normalZ;
   
-  uVar1 = v[1];
-  uVar2 = v[2];
+  normalY = v[1];
+  normalZ = v[2];
   *(undefined4 *)(glContext + 0x2b0) = *v;
-  *(undefined4 *)(glContext + 0x2b4) = uVar1;
-  *(undefined4 *)(glContext + 0x2b8) = uVar2;
+  *(undefined4 *)(glContext + 0x2b4) = normalY;
+  *(undefined4 *)(glContext + 0x2b8) = normalZ;
   return;
 }
 
@@ -586,18 +586,18 @@ int _glNormal3iv_Comp(glContext, v)
 /* _glNormal3iv_Exec @ 0x784d8 (156 bytes) */
 double _glNormal3iv_Exec(int glContext,uint *v,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
-  double dVar1;
-  double dVar2;
+  double normalX;
+  double normalZ;
   
-  dVar2 = (double)(float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58) *
+  normalZ = (double)(float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58) *
           DOUBLE_00108d88;
-  dVar1 = (double)(float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58) *
+  normalX = (double)(float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58) *
           DOUBLE_00108d88;
   *(float *)(glContext + 0x2b4) =
        (float)((double)(float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) -
                               DOUBLE_00108d58) * DOUBLE_00108d88);
-  *(float *)(glContext + 0x2b8) = (float)dVar2;
-  *(float *)(glContext + 0x2b0) = (float)dVar1;
+  *(float *)(glContext + 0x2b8) = (float)normalZ;
+  *(float *)(glContext + 0x2b0) = (float)normalX;
   return;
 }
 

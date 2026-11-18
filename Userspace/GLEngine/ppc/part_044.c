@@ -198,16 +198,16 @@ int _LFSStreamCreate()
 }
 
 /* _LFSStreamFree @ 0xd1c3c (92 bytes) */
-void _LFSStreamFree(param_1)
-  undefined4 *param_1;
+void _LFSStreamFree(stream)
+  undefined4 *stream;
 {
-  ((void (*)())_LFSStreamChunkListFree)(*param_1);
-  ((void (*)())_LFSStreamChunkListFree)(param_1[1]);
-  ((void (*)())_LFSStreamChunkListFree)(param_1[2]);
-  ((void (*)())_LFSStreamChunkListFree)(param_1[3]);
-  ((void (*)())_LFSStreamChunkListFree)(param_1[4]);
-  ((void (*)())_LFSStreamChunkListFree)(param_1[5]);
-  _free(param_1);
+  ((void (*)())_LFSStreamChunkListFree)(*stream);
+  ((void (*)())_LFSStreamChunkListFree)(stream[1]);
+  ((void (*)())_LFSStreamChunkListFree)(stream[2]);
+  ((void (*)())_LFSStreamChunkListFree)(stream[3]);
+  ((void (*)())_LFSStreamChunkListFree)(stream[4]);
+  ((void (*)())_LFSStreamChunkListFree)(stream[5]);
+  _free(stream);
   return;
 }
 
@@ -260,16 +260,16 @@ void _LFSStreamAddPreliminaryPassRegisterInit(param_1, param_2)
 }
 
 /* _LFSStreamAddPreliminaryPassOperation @ 0xd1d68 (84 bytes) */
-void _LFSStreamAddPreliminaryPassOperation(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+void _LFSStreamAddPreliminaryPassOperation(stream, operation)
+  int stream;
+  undefined4 operation;
 {
-  undefined1 *puVar1;
+  undefined1 *chunk;
   
-  puVar1 = (undefined1 *)_LFSStreamChunkCreate();
-  *puVar1 = 2;
-  _memcpy(puVar1 + 4,param_2,0x44);
-  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 8),puVar1);
+  chunk = (undefined1 *)_LFSStreamChunkCreate();
+  *chunk = 2;
+  _memcpy(chunk + 4,operation,0x44);
+  ((void (*)())_LFSStreamChunkListAddChunk)(*(undefined4 *)(stream + 8),chunk);
   return;
 }
 
@@ -542,8 +542,8 @@ void _gleGetHashMachineObjectNameTargetPairs(glContext, hashBuckets, objectType,
 int _gleImagingTexFormatToInternal(internalformat)
   uint internalformat;
 {
-  bool bVar1;
-  uint uVar2;
+  bool formatMatches;
+  uint candidateFormat;
   
   if (internalformat < 0x805c) {
     if (0x8054 < internalformat) {
@@ -591,7 +591,7 @@ int _gleImagingTexFormatToInternal(internalformat)
     if (internalformat < 0x190b) {
       return internalformat;
     }
-    bVar1 = internalformat == 0x2a10;
+    formatMatches = internalformat == 0x2a10;
   }
   else {
     if (internalformat == 0x8817) {
@@ -614,7 +614,7 @@ int _gleImagingTexFormatToInternal(internalformat)
           }
           return 0x8049;
         }
-        uVar2 = 0x84e9;
+        candidateFormat = 0x84e9;
       }
       else {
         if (internalformat == 0x8814) {
@@ -629,9 +629,9 @@ int _gleImagingTexFormatToInternal(internalformat)
         if (internalformat == 0x8815) {
           return 0x1907;
         }
-        uVar2 = 0x8816;
+        candidateFormat = 0x8816;
       }
-      if (internalformat == uVar2) {
+      if (internalformat == candidateFormat) {
         return 0x1906;
       }
       return 0;
@@ -660,9 +660,9 @@ int _gleImagingTexFormatToInternal(internalformat)
     if (internalformat == 0x881a) {
       return 0x1908;
     }
-    bVar1 = internalformat == 0x881b;
+    formatMatches = internalformat == 0x881b;
   }
-  if (bVar1) {
+  if (formatMatches) {
     return 0x1907;
   }
   return 0;

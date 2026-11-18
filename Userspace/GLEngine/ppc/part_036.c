@@ -662,19 +662,19 @@ double _glVertexAttrib4bvARB_Exec(glContext, index, v)
   char *v;
 {
   double intToDoubleBias;
-  int iVar2;
+  int attribRecord;
   undefined4 incomingR6;
   undefined4 incomingR7;
-  code *pcVar3;
+  code *vertexFunc;
   
   intToDoubleBias = DOUBLE_00108d58;
   if (index < 0x10) {
     if (index == 0) {
-      pcVar3 = *(code **)(glContext + 0x4884);
+      vertexFunc = *(code **)(glContext + 0x4884);
       if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-        pcVar3 = (code *)PTR__gleFlushAndSubmit_00112050;
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar3)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),
+      (*vertexFunc)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),
                 (int)v[2] ^ 0x80000000U,0x43300000,
                 (double)(float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) -
                                DOUBLE_00108d58),
@@ -686,14 +686,14 @@ double _glVertexAttrib4bvARB_Exec(glContext, index, v)
                                DOUBLE_00108d58));
     }
     else {
-      iVar2 = glContext + index * 0x10;
-      *(float *)(iVar2 + 0x1a0) =
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) =
            (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58);
-      *(float *)(iVar2 + 0x1a4) =
+      *(float *)(attribRecord + 0x1a4) =
            (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleBias);
-      *(float *)(iVar2 + 0x1a8) =
+      *(float *)(attribRecord + 0x1a8) =
            (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleBias);
-      *(float *)(iVar2 + 0x1ac) =
+      *(float *)(attribRecord + 0x1ac) =
            (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - intToDoubleBias);
     }
   }
@@ -749,19 +749,19 @@ double _glVertexAttrib4svARB_Exec(glContext, index, v)
   short *v;
 {
   double intToDoubleBias;
-  int iVar2;
+  int attribRecord;
   undefined4 incomingR6;
   undefined4 incomingR7;
-  code *pcVar3;
+  code *vertexFunc;
   
   intToDoubleBias = DOUBLE_00108d58;
   if (index < 0x10) {
     if (index == 0) {
-      pcVar3 = *(code **)(glContext + 0x4884);
+      vertexFunc = *(code **)(glContext + 0x4884);
       if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-        pcVar3 = (code *)PTR__gleFlushAndSubmit_00112050;
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar3)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),
+      (*vertexFunc)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),
                 (int)v[2] ^ 0x80000000U,
                 (double)(float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) -
                                DOUBLE_00108d58),
@@ -773,14 +773,14 @@ double _glVertexAttrib4svARB_Exec(glContext, index, v)
                                DOUBLE_00108d58));
     }
     else {
-      iVar2 = glContext + index * 0x10;
-      *(float *)(iVar2 + 0x1a0) =
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) =
            (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58);
-      *(float *)(iVar2 + 0x1a4) =
+      *(float *)(attribRecord + 0x1a4) =
            (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleBias);
-      *(float *)(iVar2 + 0x1a8) =
+      *(float *)(attribRecord + 0x1a8) =
            (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleBias);
-      *(float *)(iVar2 + 0x1ac) =
+      *(float *)(attribRecord + 0x1ac) =
            (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - intToDoubleBias);
     }
   }

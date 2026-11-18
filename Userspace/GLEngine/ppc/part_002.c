@@ -132,14 +132,14 @@ void _glActiveTexture_Exec(glContext, texture)
   int texture;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int textureUnit;
   
-  iVar2 = texture + -0x84c0;
+  textureUnit = texture + -0x84c0;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((-1 < iVar2) &&
-       ((iVar2 < (int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xb6) ||
-        (iVar2 < (int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xba))))) {
-      *(int *)(glContext + 0x53d4) = iVar2;
+    if ((-1 < textureUnit) &&
+       ((textureUnit < (int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xb6) ||
+        (textureUnit < (int)(uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xba))))) {
+      *(int *)(glContext + 0x53d4) = textureUnit;
       if (7 < *(int *)(glContext + 0x4ff4) - 0x10U) {
         return;
       }
@@ -2626,7 +2626,7 @@ LAB_00019eac:
 int _gleComponents(format)
   uint format;
 {
-  uint uVar1;
+  uint candidateFormat;
   
   if (format == 0x8049) {
     return 1;
@@ -2665,7 +2665,7 @@ int _gleComponents(format)
         }
         return 2;
       }
-      uVar1 = 0x80e0;
+      candidateFormat = 0x80e0;
     }
     else {
       if (format < 0x86f4) {
@@ -2674,9 +2674,9 @@ int _gleComponents(format)
       if (format < 0x86f6) {
         return 2;
       }
-      uVar1 = 0x86f6;
+      candidateFormat = 0x86f6;
     }
-    if (format == uVar1) {
+    if (format == candidateFormat) {
       return 3;
     }
   }

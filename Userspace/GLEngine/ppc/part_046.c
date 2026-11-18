@@ -66,21 +66,21 @@ void _gleMap1ColordLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 u
 void _gleMap1IndexdLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,int stride,int order,double *points,int *mapData,double u1,double u2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float *destPtr;
-  double dVar2;
+  double invUDeltaThenPointValue;
   
-  dVar2 = DOUBLE_00108d68 / (u2 - u1);
+  invUDeltaThenPointValue = DOUBLE_00108d68 / (u2 - u1);
   mapData[1] = (int)GH_F2U((float)u1);
   *mapData = order;
   mapData[2] = (int)GH_F2U((float)u2);
-  mapData[3] = (int)GH_F2U((float)dVar2);
+  mapData[3] = (int)GH_F2U((float)invUDeltaThenPointValue);
   if (order < 1) {
     return;
   }
   destPtr = (float *)(mapData + 4);
   do {
-    dVar2 = *points;
+    invUDeltaThenPointValue = *points;
     points = points + stride;
-    *destPtr = (float)dVar2;
+    *destPtr = (float)invUDeltaThenPointValue;
     destPtr = destPtr + 1;
     order = order + -1;
   } while (order != 0);
@@ -2200,10 +2200,10 @@ void _gleMap2Texture4fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined
 /* _gleMap2VertexAttrib1fLoad @ 0xe0ab8 (192 bytes) */
 void _gleMap2VertexAttrib1fLoad(undefined4 unusedArg1,undefined4 unusedArg2,undefined4 unusedArg3,int ustride,int uorder,undefined4 unusedArg6,undefined4 unusedArg7,int vstride,int vorder,int points,int *mapData,float u1,float u2,float v1,float v2,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  int iVar1;
+  int pointBits;
   float invUDelta;
   float one;
-  int *piVar4;
+  int *destPoint;
   int uIndex;
   int uElementOffset;
   int *pointPtr;
@@ -2227,13 +2227,13 @@ void _gleMap2VertexAttrib1fLoad(undefined4 unusedArg1,undefined4 unusedArg2,unde
     do {
       if (0 < vorder) {
         pointPtr = (int *)(uElementOffset * 4 + points);
-        piVar4 = mapData + destRecord + 8;
+        destPoint = mapData + destRecord + 8;
         vRemaining = vorder;
         do {
-          iVar1 = *pointPtr;
+          pointBits = *pointPtr;
           pointPtr = pointPtr + vstride;
-          *piVar4 = iVar1;
-          piVar4 = piVar4 + 1;
+          *destPoint = pointBits;
+          destPoint = destPoint + 1;
           vRemaining = vRemaining + -1;
         } while (vRemaining != 0);
       }

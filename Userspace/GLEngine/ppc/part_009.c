@@ -185,14 +185,14 @@ int _gliDestroyAllContexts()
 /* _glepPluginDisconnectAll @ 0x55978 (100 bytes) */
 void _glepPluginDisconnectAll()
 {
-  int *piVar1;
+  int *plugin;
   
-  piVar1 = _glep_plugin_head;
+  plugin = _glep_plugin_head;
   if (_glep_plugin_head != (int *)0x0) {
     do {
-      ((void (*)())_glepPluginDisconnect)(piVar1);
-      piVar1 = (int *)*piVar1;
-    } while (piVar1 != (int *)0x0);
+      ((void (*)())_glepPluginDisconnect)(plugin);
+      plugin = (int *)*plugin;
+    } while (plugin != (int *)0x0);
     ((void (*)())_glepUnloadRenderers)();
     return;
   }

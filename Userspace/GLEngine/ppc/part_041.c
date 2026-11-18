@@ -3579,15 +3579,15 @@ uint _pixelBoundaryBottomLeft(float floatArg1)
 /* _pixelBoundaryTopRight @ 0xca2d8 (92 bytes) */
 uint _pixelBoundaryTopRight(float floatArg1)
 {
-  uint uVar1;
+  uint truncatedValue;
   
-  uVar1 = (uint)(int)floatArg1;
+  truncatedValue = (uint)(int)floatArg1;
   if (!(FLOAT_00108e90 <
-       (floatArg1 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_00108d58))))
+       (floatArg1 - (float)((double)CONCAT44(0x43300000,truncatedValue ^ 0x80000000) - DOUBLE_00108d58))))
   {
-    return uVar1;
+    return truncatedValue;
   }
-  return uVar1 + 1;
+  return truncatedValue + 1;
 }
 
 /* _pixelCenters @ 0xca334 (160 bytes) */

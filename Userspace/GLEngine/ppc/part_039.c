@@ -755,11 +755,11 @@ void _gleSetVertexEval1Func(glContext, forwardedArg2, forwardedArg3)
   undefined4 forwardedArg2;
   undefined4 forwardedArg3;
 {
-  undefined4 *puVar1;
+  undefined4 *vertexFuncEntry;
   code *UNRECOVERED_JUMPTABLE;
   
-  puVar1 = (undefined4 *)(*_gleBuildVertexFunc)(glContext,2,forwardedArg3);
-  UNRECOVERED_JUMPTABLE = (code *)*puVar1;
+  vertexFuncEntry = (undefined4 *)(*_gleBuildVertexFunc)(glContext,2,forwardedArg3);
+  UNRECOVERED_JUMPTABLE = (code *)*vertexFuncEntry;
   *(code **)(glContext + 0x4898) = UNRECOVERED_JUMPTABLE;
                     
                     
@@ -799,10 +799,10 @@ int _gleGetVertexElemFunc(forwardedArg1)
 int _gleGetVertexToListFunc(forwardedArg1)
   undefined4 forwardedArg1;
 {
-  undefined4 *puVar1;
+  undefined4 *vertexFuncEntry;
   
-  puVar1 = (undefined4 *)(*_gleBuildVertexFunc)(forwardedArg1,3);
-  return *puVar1;
+  vertexFuncEntry = (undefined4 *)(*_gleBuildVertexFunc)(forwardedArg1,3);
+  return *vertexFuncEntry;
 }
 
 /* _gleLoadDataElementFromMatNO @ 0xb5290 (256 bytes) */

@@ -1148,17 +1148,17 @@ int _gliDestroyPixelFormat(param_1)
 int _glepGetPlugin(pluginId)
   int pluginId;
 {
-  int *piVar1;
+  int *plugin;
   
-  piVar1 = (int *)_glep_plugin_head;
+  plugin = (int *)_glep_plugin_head;
   while( true ) {
-    if (piVar1 == (int *)0x0) {
+    if (plugin == (int *)0x0) {
       return 0;
     }
-    if (pluginId == piVar1[0x41]) break;
-    piVar1 = (int *)*piVar1;
+    if (pluginId == plugin[0x41]) break;
+    plugin = (int *)*plugin;
   }
-  return (int)piVar1;
+  return (int)plugin;
 }
 
 /* _gliCreateContext @ 0x2d18 (1112 bytes) */
@@ -1515,20 +1515,20 @@ int _gleCreateSharedState(glContext)
 /* _gleCreateEnableHashTable @ 0x33d8 (2092 bytes) */
 int _gleCreateEnableHashTable()
 {
-  undefined *puVar1;
+  undefined *errorFunc;
   undefined4 *cursor;
   undefined4 *allocatedBlock;
-  undefined4 uVar4;
+  undefined4 addResult;
   int remaining;
   
   allocatedBlock = (undefined4 *)_malloc(0x4000);
-  puVar1 = PTR__gleSetEnable_Error_00110e18;
+  errorFunc = PTR__gleSetEnable_Error_00110e18;
   remaining = 0x400;
   cursor = allocatedBlock;
   _gle_enable_hash_table = allocatedBlock;
   do {
     *cursor = 0;
-    cursor[1] = puVar1;
+    cursor[1] = errorFunc;
     cursor[2] = 0;
     cursor = cursor + 4;
     remaining = remaining + -1;
@@ -1627,8 +1627,8 @@ int _gleCreateEnableHashTable()
   ((int (*)())_gleAddEnableHashFunc)(allocatedBlock,0x8200,PTR__gleSetEnable_TEXT_FRAGMENT_SHADER_ATI_00110cdc);
   ((int (*)())_gleAddEnableHashFunc)(allocatedBlock,0x8458,PTR__gleSetEnable_COLOR_SUM_00110cd8);
   ((int (*)())_gleAddEnableHashFunc)(allocatedBlock,0x8910,PTR__gleSetEnable_STENCIL_TEST_TWO_SIDE_EXT_00110cd4);
-  uVar4 = ((int (*)())_gleAddEnableHashFunc)(allocatedBlock,0x8890,PTR__gleSetEnable_DEPTH_BOUNDS_TEST_EXT_00110cd0);
-  return uVar4;
+  addResult = ((int (*)())_gleAddEnableHashFunc)(allocatedBlock,0x8890,PTR__gleSetEnable_DEPTH_BOUNDS_TEST_EXT_00110cd0);
+  return addResult;
 }
 
 /* _gleAddEnableHashFunc @ 0x3c04 (124 bytes) */
@@ -1916,20 +1916,20 @@ int _gleAllocMaterials(glContext)
   int glContext;
 {
   int remaining;
-  int iVar2;
+  int materialRecord;
   int *dstCursor;
   
   dstCursor = (int *)(glContext + 0x4dd0);
-  iVar2 = glContext + 0x2c20;
+  materialRecord = glContext + 0x2c20;
   remaining = 1;
   do {
     remaining = remaining + -1;
-    *dstCursor = iVar2;
-    *(undefined4 *)(iVar2 + 0x238) = 0;
+    *dstCursor = materialRecord;
+    *(undefined4 *)(materialRecord + 0x238) = 0;
     dstCursor = dstCursor + 1;
-    *(undefined4 *)(iVar2 + 0x23c) = 0;
-    *(undefined4 *)(iVar2 + 0x1e0) = 0;
-    iVar2 = iVar2 + 0x240;
+    *(undefined4 *)(materialRecord + 0x23c) = 0;
+    *(undefined4 *)(materialRecord + 0x1e0) = 0;
+    materialRecord = materialRecord + 0x240;
   } while (-1 < remaining);
   *(undefined4 *)(glContext + 0x4dd8) = 0;
   return 0;
@@ -2138,13 +2138,13 @@ void _gleInitConstants(glContext)
 void _gleInitVectorConstants(glContext)
   int glContext;
 {
-  undefined4 *puVar1;
+  undefined4 *vectorConstants;
   
-  puVar1 = (undefined4 *)(glContext + 0x10U & 0xfffffff0);
-  *puVar1 = 0x1a;
-  puVar1[1] = 0x1c;
-  puVar1[2] = 0x1e;
-  puVar1[3] = 0;
+  vectorConstants = (undefined4 *)(glContext + 0x10U & 0xfffffff0);
+  *vectorConstants = 0x1a;
+  vectorConstants[1] = 0x1c;
+  vectorConstants[2] = 0x1e;
+  vectorConstants[3] = 0;
   return;
 }
 
@@ -3804,12 +3804,12 @@ int _gleCreatePipelineProgramObject(glContext, param_2, program)
 }
 
 /* _gleVecAlloc @ 0x62ac (12 bytes) */
-int _gleVecAlloc(param_1)
-  int param_1;
+int _gleVecAlloc(byteSize)
+  int byteSize;
 {
   undefined4 allocatedBlock;
   
-  allocatedBlock = _malloc(param_1 + 0xfU & 0xfffffff0);
+  allocatedBlock = _malloc(byteSize + 0xfU & 0xfffffff0);
   return allocatedBlock;
 }
 

@@ -909,7 +909,7 @@ void _gleFreeBufferState(glContext)
 void _gleFreeShaderState(glContext)
   int glContext;
 {
-  int iVar1;
+  int newRefCount;
   int currentProgram;
   
   currentProgram = *(int *)(glContext + 0x5430);
@@ -917,9 +917,9 @@ void _gleFreeShaderState(glContext)
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    iVar1 = *(int *)(currentProgram + 8) + -1;
-    *(int *)(currentProgram + 8) = iVar1;
-    if (iVar1 == 1) {
+    newRefCount = *(int *)(currentProgram + 8) + -1;
+    *(int *)(currentProgram + 8) = newRefCount;
+    if (newRefCount == 1) {
       ((int (*)())_gleDeleteHashNameAndObject)(glContext,*(int *)(glContext + 0x5148) + 0x6018,*(undefined4 *)(currentProgram + 4));
     }
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
@@ -1270,18 +1270,18 @@ int _gleReleaseSharedState(glContext)
 void _gleDetachShaderObjects(glContext)
   int glContext;
 {
-  undefined *puVar1;
+  undefined *detachIterFunc;
   int sharedState;
   int *nextBucket;
   int *bucketSlotThenObject;
   
-  puVar1 = PTR__gleDetachShaderObjectIterFunc_001113e8;
+  detachIterFunc = PTR__gleDetachShaderObjectIterFunc_001113e8;
   sharedState = *(int *)(glContext + 0x5148);
   bucketSlotThenObject = (int *)(sharedState + 0x6018);
   do {
     nextBucket = bucketSlotThenObject + 1;
     for (bucketSlotThenObject = (int *)*bucketSlotThenObject; bucketSlotThenObject != (int *)0x0; bucketSlotThenObject = (int *)*bucketSlotThenObject) {
-      (*(code *)puVar1)(glContext,bucketSlotThenObject);
+      (*(code *)detachIterFunc)(glContext,bucketSlotThenObject);
     }
     bucketSlotThenObject = nextBucket;
   } while ((int)nextBucket <= sharedState + 0x7014);
@@ -1426,9 +1426,9 @@ void _glDeleteProgramsARB_Exec(glContext, n, programs)
   int *programs;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int boundProgram;
   uint loopIndex;
-  int iVar4;
+  int programName;
   int *srcCursor;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -1438,20 +1438,20 @@ void _glDeleteProgramsARB_Exec(glContext, n, programs)
       }
       if (0 < n) {
         do {
-          iVar4 = *programs;
+          programName = *programs;
           programs = programs + 1;
-          if (iVar4 != 0) {
+          if (programName != 0) {
             loopIndex = 0;
             srcCursor = (int *)(glContext + 0x5420);
             do {
-              iVar2 = *srcCursor;
+              boundProgram = *srcCursor;
               srcCursor = srcCursor + 1;
-              if (iVar4 == *(int *)(iVar2 + 4)) {
+              if (programName == *(int *)(boundProgram + 4)) {
                 _gleBindPipelineProgram(glContext,loopIndex,0);
               }
               loopIndex = loopIndex + 1;
             } while (loopIndex < 2);
-            ((int (*)())_gleDeleteHashNameAndObject)(glContext,*(int *)(glContext + 0x5148) + 0x4010,iVar4);
+            ((int (*)())_gleDeleteHashNameAndObject)(glContext,*(int *)(glContext + 0x5148) + 0x4010,programName);
           }
           n = n + -1;
         } while (n != 0);
@@ -1605,35 +1605,35 @@ void _glePPUnlogParameters(glContext, program, paramCount, paramEntries)
 /* _gleDestroyEnableHashTable @ 0x3115c (104 bytes) */
 void _gleDestroyEnableHashTable()
 {
-  int iVar1;
-  int iVar2;
+  int hashTable;
+  int bucketObject;
   int remaining;
   int *srcCursor;
   
-  iVar1 = _gle_enable_hash_table;
+  hashTable = _gle_enable_hash_table;
   remaining = 0x3ff;
   srcCursor = (int *)(_gle_enable_hash_table + 8);
   do {
-    iVar2 = *srcCursor;
+    bucketObject = *srcCursor;
     srcCursor = srcCursor + 4;
-    if (iVar2 != 0) {
-      ((void (*)())_gleFreeEnableHashObject)(iVar2);
+    if (bucketObject != 0) {
+      ((void (*)())_gleFreeEnableHashObject)(bucketObject);
     }
     remaining = remaining + -1;
   } while (-1 < remaining);
-  _free(iVar1);
+  _free(hashTable);
   _gle_enable_hash_table = 0;
   return;
 }
 
 /* _gleFreeEnableHashObject @ 0x311c4 (60 bytes) */
-void _gleFreeEnableHashObject(param_1)
-  int param_1;
+void _gleFreeEnableHashObject(chainNode)
+  int chainNode;
 {
-  if (*(int *)(param_1 + 8) != 0) {
-    ((void (*)())_gleFreeEnableHashObject)(*(int *)(param_1 + 8));
+  if (*(int *)(chainNode + 8) != 0) {
+    ((void (*)())_gleFreeEnableHashObject)(*(int *)(chainNode + 8));
   }
-  _free(param_1);
+  _free(chainNode);
   return;
 }
 

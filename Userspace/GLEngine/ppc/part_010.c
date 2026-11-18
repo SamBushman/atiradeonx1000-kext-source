@@ -1386,14 +1386,14 @@ int _glColor3_ListExec(glContext, recordedArgs)
   int glContext;
   undefined4 *recordedArgs;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 blueValue;
+  undefined4 greenValue;
   
-  uVar1 = recordedArgs[2];
-  uVar2 = recordedArgs[1];
+  blueValue = recordedArgs[2];
+  greenValue = recordedArgs[1];
   *(undefined4 *)(glContext + 0x2a0) = *recordedArgs;
-  *(undefined4 *)(glContext + 0x2a4) = uVar2;
-  *(undefined4 *)(glContext + 0x2a8) = uVar1;
+  *(undefined4 *)(glContext + 0x2a4) = greenValue;
+  *(undefined4 *)(glContext + 0x2a8) = blueValue;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
   if (*(char *)(glContext + 0x4df8) != '\0') {
     (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
@@ -1473,21 +1473,21 @@ int _glColor3bv_Comp(glContext, v)
   char *v;
 {
   double intToDoubleMagic;
-  float fVar2;
-  float fVar3;
+  float channelScale;
+  float channelBias;
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
-  fVar3 = FLOAT_00108e64;
-  fVar2 = FLOAT_00108e60;
+  channelBias = FLOAT_00108e64;
+  channelScale = FLOAT_00108e60;
   intToDoubleMagic = DOUBLE_00108d58;
   if (listRecord != (float *)0x0) {
     *listRecord = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e60 + FLOAT_00108e64;
-    listRecord[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
-                fVar3;
-    listRecord[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
-                fVar3;
+    listRecord[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * channelScale +
+                channelBias;
+    listRecord[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * channelScale +
+                channelBias;
   }
   return listRecord;
 }
@@ -1665,15 +1665,15 @@ double _glColor3fv_NoColorMat_Exec(glContext, v)
   int glContext;
   undefined4 *v;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 greenValue;
+  undefined4 blueValue;
   
-  uVar1 = v[1];
-  uVar2 = v[2];
+  greenValue = v[1];
+  blueValue = v[2];
   *(undefined4 *)(glContext + 0x2a0) = *v;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
-  *(undefined4 *)(glContext + 0x2a4) = uVar1;
-  *(undefined4 *)(glContext + 0x2a8) = uVar2;
+  *(undefined4 *)(glContext + 0x2a4) = greenValue;
+  *(undefined4 *)(glContext + 0x2a8) = blueValue;
   return;
 }
 

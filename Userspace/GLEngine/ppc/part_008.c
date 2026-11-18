@@ -88,17 +88,17 @@ double _glColor4fv_NoColorMat_Exec(glContext, v)
   int glContext;
   undefined4 *v;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
+  undefined4 greenValue;
+  undefined4 blueValue;
+  undefined4 alphaValue;
   
-  uVar1 = v[1];
-  uVar2 = v[2];
-  uVar3 = v[3];
+  greenValue = v[1];
+  blueValue = v[2];
+  alphaValue = v[3];
   *(undefined4 *)(glContext + 0x2a0) = *v;
-  *(undefined4 *)(glContext + 0x2a4) = uVar1;
-  *(undefined4 *)(glContext + 0x2a8) = uVar2;
-  *(undefined4 *)(glContext + 0x2ac) = uVar3;
+  *(undefined4 *)(glContext + 0x2a4) = greenValue;
+  *(undefined4 *)(glContext + 0x2a8) = blueValue;
+  *(undefined4 *)(glContext + 0x2ac) = alphaValue;
   return;
 }
 
@@ -670,15 +670,15 @@ LAB_0004fe34:
 int _gleCreateFenceObject(fence)
   undefined4 fence;
 {
-  undefined *puVar1;
+  undefined *freeFunc;
   undefined4 *cursor;
   undefined4 *allocatedBlock;
   int remaining;
   
   allocatedBlock = (undefined4 *)_malloc(0x30);
-  puVar1 = PTR__gleFreeFenceObject_00110e1c;
+  freeFunc = PTR__gleFreeFenceObject_00110e1c;
   allocatedBlock[2] = 1;
-  allocatedBlock[3] = puVar1;
+  allocatedBlock[3] = freeFunc;
   allocatedBlock[1] = fence;
   cursor = allocatedBlock + 4;
   *allocatedBlock = 0;
@@ -1627,21 +1627,21 @@ int _gleBuildProjectionTransformFuncAV(glContext, optionBits)
 }
 
 /* _gleRTCAddAChunk_51324 @ 0x51324 (48 bytes) */
-int _gleRTCAddAChunk_51324(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int _gleRTCAddAChunk_51324(sourceWords, destWords)
+  int *sourceWords;
+  int *destWords;
 {
-  int iVar1;
+  int wordValue;
   int loopIndex;
   
   loopIndex = 0;
-  iVar1 = *param_1;
-  while (iVar1 != 0) {
-    *param_2 = iVar1;
+  wordValue = *sourceWords;
+  while (wordValue != 0) {
+    *destWords = wordValue;
     loopIndex = loopIndex + 1;
-    param_1 = param_1 + 1;
-    param_2 = param_2 + 1;
-    iVar1 = *param_1;
+    sourceWords = sourceWords + 1;
+    destWords = destWords + 1;
+    wordValue = *sourceWords;
   }
   return loopIndex;
 }

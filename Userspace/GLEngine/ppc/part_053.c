@@ -1173,27 +1173,27 @@ int _gleCheckCopyColorTableArgs(glContext, target, internalformat, width)
   undefined4 internalformat;
   uint width;
 {
-  undefined4 uVar1;
+  undefined4 glErrorCode;
   int colorTable;
-  int iVar3;
+  int texArgsResult;
   
   colorTable = _gleLookUpNonProxyColorTable(glContext,target);
   if (colorTable == 0) {
     if (*(int *)(glContext + 0x7574) != 0) {
       return 0;
     }
-    uVar1 = 0x500;
+    glErrorCode = 0x500;
   }
   else {
-    iVar3 = _gleCheckCopyTexImageArgs(glContext,0,internalformat,0,0,0);
-    if (iVar3 == 0) {
+    texArgsResult = _gleCheckCopyTexImageArgs(glContext,0,internalformat,0,0,0);
+    if (texArgsResult == 0) {
       return 0;
     }
     if (((int)width < 0) || ((width & width - 1) != 0)) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
       }
-      uVar1 = 0x501;
+      glErrorCode = 0x501;
     }
     else {
       if ((int)width < 0x4001) {
@@ -1205,10 +1205,10 @@ int _gleCheckCopyColorTableArgs(glContext, target, internalformat, width)
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
       }
-      uVar1 = 0x8031;
+      glErrorCode = 0x8031;
     }
   }
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return 0;
 }
 
@@ -1784,7 +1784,7 @@ int _gleCheckColorSubTableArgs(glContext, target, start, count, format, type)
 {
   undefined4 errorCode;
   int colorTable;
-  int iVar3;
+  int checkResult;
   
   colorTable = _gleLookUpNonProxyColorTable(glContext,target);
   if (colorTable == 0) {
@@ -1794,14 +1794,14 @@ int _gleCheckColorSubTableArgs(glContext, target, start, count, format, type)
     errorCode = 0x500;
   }
   else {
-    iVar3 = _gleCheckTexSubImageArgs(glContext,0,format,type);
-    if (iVar3 == 0) {
+    checkResult = _gleCheckTexSubImageArgs(glContext,0,format,type);
+    if (checkResult == 0) {
       return 0;
     }
     if (*(int *)(colorTable + 0xc0) != 0) {
-      iVar3 = _gleCheckTexSubImageRange
+      checkResult = _gleCheckTexSubImageRange
                         (glContext,colorTable + 0xac,start,count,(uint)*(ushort *)(colorTable + 0xb0));
-      if (iVar3 != 0) {
+      if (checkResult != 0) {
         return colorTable;
       }
       return 0;

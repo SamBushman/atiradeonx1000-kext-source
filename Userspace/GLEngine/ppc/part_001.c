@@ -917,15 +917,15 @@ void _gleUpdateInverseNeeds(glContext)
 void _gleUpdateLightModel(glContext)
   undefined4 glContext;
 {
-  int iVar1;
-  int iVar2;
+  int lightIndex;
+  int nextLightIndex;
   
-  iVar1 = 0;
+  lightIndex = 0;
   do {
-    iVar2 = iVar1 + 1;
-    ((void (*)())_gleUpdateLightFast)(glContext,iVar1);
-    iVar1 = iVar2;
-  } while (iVar2 < 8);
+    nextLightIndex = lightIndex + 1;
+    ((void (*)())_gleUpdateLightFast)(glContext,lightIndex);
+    lightIndex = nextLightIndex;
+  } while (nextLightIndex < 8);
   ((void (*)())_gleUpdateLightModelFunc)(glContext);
   return;
 }
@@ -8532,45 +8532,45 @@ void _glMatrixMode_Exec(glContext, mode)
   uint mode;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int internalMatrixMode;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (mode == 0x850a) {
-      iVar2 = 5;
+      internalMatrixMode = 5;
       goto LAB_000160d8;
     }
     if (mode < 0x850b) {
       if (mode == 0x1701) {
-        iVar2 = 3;
+        internalMatrixMode = 3;
         goto LAB_000160d8;
       }
       if (mode < 0x1702) {
         if (mode == 0x1700) {
-          iVar2 = 4;
+          internalMatrixMode = 4;
           goto LAB_000160d8;
         }
       }
       else {
         if (mode == 0x1702) {
-          iVar2 = *(int *)(glContext + 0x53d4) + 0x10;
+          internalMatrixMode = *(int *)(glContext + 0x53d4) + 0x10;
           goto LAB_000160d8;
         }
         if (mode == 0x1800) {
-          iVar2 = 2;
+          internalMatrixMode = 2;
           goto LAB_000160d8;
         }
       }
     }
     else if (0x8721 < mode) {
       if (mode < 0x8724) {
-        iVar2 = mode - 0x871c;
+        internalMatrixMode = mode - 0x871c;
 LAB_000160d8:
-        *(int *)(glContext + 0x4ff4) = iVar2;
+        *(int *)(glContext + 0x4ff4) = internalMatrixMode;
         ((void (*)())_gleUpdateMatrixMode)(glContext);
         return;
       }
       if (mode - 0x88c0 < 8) {
-        iVar2 = mode - 35000;
+        internalMatrixMode = mode - 35000;
         goto LAB_000160d8;
       }
     }

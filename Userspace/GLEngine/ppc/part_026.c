@@ -2072,17 +2072,17 @@ void _glBindAttribLocationARB_Exec(glContext, programObj, index, name)
   char *name;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int sharedStateThenProgramObj;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar2 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar2 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar2 + 0x8028);
-      iVar2 = *(int *)(glContext + 0x5148);
+    sharedStateThenProgramObj = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenProgramObj + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenProgramObj + 0x8028);
+      sharedStateThenProgramObj = *(int *)(glContext + 0x5148);
     }
-    iVar2 = _gleLookupHashObject(iVar2 + 0x6018,programObj);
-    if (iVar2 != 0) {
-      if ((*(int *)(iVar2 + 0x10) != 0x8b40) ||
+    sharedStateThenProgramObj = _gleLookupHashObject(sharedStateThenProgramObj + 0x6018,programObj);
+    if (sharedStateThenProgramObj != 0) {
+      if ((*(int *)(sharedStateThenProgramObj + 0x10) != 0x8b40) ||
          ((((name != (char *)0x0 && (*name == 'g')) && (name[1] == 'l')) &&
           (name[2] == '_')))) {
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
@@ -2091,7 +2091,7 @@ void _glBindAttribLocationARB_Exec(glContext, programObj, index, name)
         goto LAB_0008fddc;
       }
       if (index < 0x10) {
-        _ShAttributeBindingRequest(*(undefined4 *)(iVar2 + 0x40),index,name);
+        _ShAttributeBindingRequest(*(undefined4 *)(sharedStateThenProgramObj + 0x40),index,name);
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) == '\0') {
           return;
         }
@@ -2449,8 +2449,8 @@ void _glStencilFuncSeparateATI_Exec(glContext, frontfunc, backfunc, ref, mask)
   undefined4 mask;
 {
   undefined4 glErrorCode;
-  uint uVar2;
-  int iVar3;
+  uint maxReference;
+  int stencilFaceRecord;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((frontfunc - 0x200U < 8) && (backfunc - 0x200U < 8)) {
@@ -2458,15 +2458,15 @@ void _glStencilFuncSeparateATI_Exec(glContext, frontfunc, backfunc, ref, mask)
         ref = 0;
       }
       else {
-        uVar2 = 0xffffffff >> (0x20U - *(int *)(*(int *)(glContext + 0x468c) + 0x40) & 0x3f);
-        if (uVar2 < ref) {
-          ref = uVar2;
+        maxReference = 0xffffffff >> (0x20U - *(int *)(*(int *)(glContext + 0x468c) + 0x40) & 0x3f);
+        if (maxReference < ref) {
+          ref = maxReference;
         }
       }
-      iVar3 = (uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext;
-      *(undefined4 *)(iVar3 + 0x34f8) = mask;
-      *(short *)(iVar3 + 0x3500) = (short)frontfunc;
-      *(uint *)(iVar3 + 0x34fc) = ref;
+      stencilFaceRecord = (uint)*(byte *)(glContext + 0x7583) * 0x10 + glContext;
+      *(undefined4 *)(stencilFaceRecord + 0x34f8) = mask;
+      *(short *)(stencilFaceRecord + 0x3500) = (short)frontfunc;
+      *(uint *)(stencilFaceRecord + 0x34fc) = ref;
       *(short *)(glContext + 0x3518) = (short)backfunc;
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x10000000;
       return;
