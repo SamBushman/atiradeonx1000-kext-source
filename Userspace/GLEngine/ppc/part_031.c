@@ -1047,7 +1047,7 @@ void _glCopyTexSubImage3D_CompExec(glContext, target, level, xoffset, yoffset, z
   undefined4 width;
   undefined4 height;
 {
-  double fparam_1;
+  double incomingFpr1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1058,7 +1058,7 @@ void _glCopyTexSubImage3D_CompExec(glContext, target, level, xoffset, yoffset, z
   
   ((int (*)())_glCopyTexSubImage3D_Comp)(glContext,target,level,xoffset,yoffset,zoffset,x,y,width,height);
   ((void (*)())_glCopyTexSubImage3D_Exec)(glContext,target,level,xoffset,yoffset,zoffset,x,y,width,height,
-             fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+             incomingFpr1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 

@@ -2451,7 +2451,7 @@ int _gleRowBytes(format, type, param_3)
 }
 
 /* _gleTextureImagePut @ 0x19a28 (300 bytes) */
-int _gleTextureImagePut(glContext, textureLevel, xoffset, yoffset, zoffset, width, height, depth, format, type, param_11, unpackState, pixels)
+int _gleTextureImagePut(glContext, textureLevel, xoffset, yoffset, zoffset, width, height, depth, format, type, applyPixelTransfer, unpackState, pixels)
   int glContext;
   int textureLevel;
   undefined4 xoffset;
@@ -2462,23 +2462,23 @@ int _gleTextureImagePut(glContext, textureLevel, xoffset, yoffset, zoffset, widt
   int depth;
   int format;
   int type;
-  uint param_11;
+  uint applyPixelTransfer;
   int unpackState;
   undefined4 pixels;
 {
-  int iVar1;
+  int fastPathResult;
   
   if ((type != 0x1a00) && ((format != 0x1900 || (*(short *)(textureLevel + 0x10) == 0x1900)))) {
     if ((*(uint *)(glContext + 0x3414) & 0xff1) == 0) {
-      if ((param_11 & 0xff) == 1) {
+      if ((applyPixelTransfer & 0xff) == 1) {
         if (((*(uint *)(glContext + 0x3410) & 0x1ff) != 0) ||
            ((*(uint *)(glContext + 0x3414) & 0xff0000) != 0)) goto LAB_00019af8;
       }
       if (((unpackState == 0) || (*(char *)(unpackState + 0x18) == '\0')) &&
          ((depth == 1 && (zoffset == 0)))) {
-        iVar1 = ((int (*)())_gleTextureImagePut_Fast)(glContext,textureLevel,xoffset,yoffset,width,height,format,type,unpackState
+        fastPathResult = ((int (*)())_gleTextureImagePut_Fast)(glContext,textureLevel,xoffset,yoffset,width,height,format,type,unpackState
                            ,pixels);
-        if (iVar1 != 0) {
+        if (fastPathResult != 0) {
           return;
         }
       }
@@ -2487,7 +2487,7 @@ int _gleTextureImagePut(glContext, textureLevel, xoffset, yoffset, zoffset, widt
 LAB_00019af8:
   _gleTextureImagePut_Slow
             (glContext,textureLevel,xoffset,yoffset,zoffset,width,height,depth,format,type,
-             param_11 & 0xff,unpackState,pixels);
+             applyPixelTransfer & 0xff,unpackState,pixels);
   return;
 }
 

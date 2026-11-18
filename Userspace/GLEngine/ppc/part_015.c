@@ -59,13 +59,13 @@ double * _glEvalCoord2f_Comp(undefined4 glContext,double u,double v)
 }
 
 /* _glEvalCoord2f_CompExec @ 0x64cb4 (84 bytes) */
-void _glEvalCoord2f_CompExec(undefined4 glContext,float u,float v,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double fparam_9,double forwardedFloatArg10,double forwardedFloatArg11,double forwardedFloatArg12)
+void _glEvalCoord2f_CompExec(undefined4 glContext,float u,float v,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double forwardedFloatArg9,double forwardedFloatArg10,double forwardedFloatArg11,double forwardedFloatArg12)
 {
   undefined4 in_LR;
   
   ((double * (*)())_glEvalCoord2f_Comp)(glContext,u,v);
   ((void (*)())_gleEvalMap2)(glContext,u,v,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,
-               (double)CONCAT44(in_LR,(*(unsigned int *)((unsigned char *)&(fparam_9) + 4))),forwardedFloatArg10,forwardedFloatArg11,forwardedFloatArg12);
+               (double)CONCAT44(in_LR,(*(unsigned int *)((unsigned char *)&(forwardedFloatArg9) + 4))),forwardedFloatArg10,forwardedFloatArg11,forwardedFloatArg12);
   return;
 }
 

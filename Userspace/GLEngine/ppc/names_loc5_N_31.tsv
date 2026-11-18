@@ -1,0 +1,1 @@
+local	_glConvolutionFilter1D_Exec	iVar3	hasValidTypeFormat	CONFIRMED	result of _CheckTypeFormat(type,format); zero raises GL_INVALID_OPERATION

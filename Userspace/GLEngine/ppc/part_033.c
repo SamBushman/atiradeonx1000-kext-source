@@ -2093,7 +2093,7 @@ int _glArrayElement_Comp(glContext, i)
 }
 
 /* _glArrayElement_NoopExec @ 0xa5510 (668 bytes) */
-void _glArrayElement_NoopExec(int glContext,undefined4 forwardedArg2,double forwardedFloatArg1ThenCalleeResult,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double fparam_9,double forwardedFloatArg10,double forwardedFloatArg11,double forwardedFloatArg12,double forwardedFloatArg13)
+void _glArrayElement_NoopExec(int glContext,undefined4 forwardedArg2,double forwardedFloatArg1ThenCalleeResult,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double forwardedFloatArg9,double forwardedFloatArg10,double forwardedFloatArg11,double forwardedFloatArg12,double forwardedFloatArg13)
 {
   bool rendererInfoByte79Clear;
   bool stateClean;
@@ -2133,7 +2133,7 @@ void _glArrayElement_NoopExec(int glContext,undefined4 forwardedArg2,double forw
 LAB_000a5758:
     if (*(char *)(glContext + 0x759d) != '\0') {
       ((void (*)())_glArrayElement_Exec)(glContext,forwardedArg2,forwardedFloatArg1ThenCalleeResult,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
-                 forwardedFloatArg8,(double)CONCAT44(in_LR,(*(unsigned int *)((unsigned char *)&(fparam_9) + 4))),forwardedFloatArg10,forwardedFloatArg11,forwardedFloatArg12,
+                 forwardedFloatArg8,(double)CONCAT44(in_LR,(*(unsigned int *)((unsigned char *)&(forwardedFloatArg9) + 4))),forwardedFloatArg10,forwardedFloatArg11,forwardedFloatArg12,
                  forwardedFloatArg13);
       return;
     }

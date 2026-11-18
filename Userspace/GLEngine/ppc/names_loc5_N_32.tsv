@@ -1,0 +1,2 @@
+local	_gleTextureImagePut	iVar1	fastPathResult	CONFIRMED	result of _gleTextureImagePut_Fast; non-zero returns without the slow path
+local	_gleTextureImagePut	param_11	applyPixelTransfer	INFERRED	low byte forwarded as the applyPixelTransfer argument of _gleTextureImagePut_Slow; also tested against 1 together with the pixel-transfer state words at ctx+0x3410/+0x3414

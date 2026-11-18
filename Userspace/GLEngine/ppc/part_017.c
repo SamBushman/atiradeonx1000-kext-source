@@ -40,7 +40,7 @@ void _glConvolutionFilter1D_Exec(glContext, target, internalformat, width, forma
 {
   undefined4 glErrorCode;
   int internalFormat;
-  int iVar3;
+  int hasValidTypeFormat;
   int pixelUnpackBuffer;
   int imageEndOffset;
   int elementSize;
@@ -56,8 +56,8 @@ void _glConvolutionFilter1D_Exec(glContext, target, internalformat, width, forma
       glErrorCode = 0x500;
       goto LAB_000692a4;
     }
-    iVar3 = _CheckTypeFormat(type,format);
-    if (iVar3 != 0) {
+    hasValidTypeFormat = _CheckTypeFormat(type,format);
+    if (hasValidTypeFormat != 0) {
       if (0xb < width) {
         if (*(int *)(glContext + 0x7574) != 0) {
           return;

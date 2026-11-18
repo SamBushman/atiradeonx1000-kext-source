@@ -30,7 +30,7 @@ void _glGetTexLevelParameterfv_Exec_body(glContext, target, level, pname, params
   int *dirtyFlagWords;
   double f1AfterCall;
   double f1AfterCall1;
-  double fparam_1;
+  double lastCalleeF1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -105,17 +105,17 @@ LAB_0009dd64:
 LAB_0009dd7c:
   if ((*(ushort *)(textureObject + 0x24) & 0x100) == 0) goto LAB_0009df84;
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
-  fparam_1 = f1AfterCall;
+  lastCalleeF1 = f1AfterCall;
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = f1AfterCall1;
+    lastCalleeF1 = f1AfterCall1;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_0009df84;
   framebufferObject = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedLevel,forwardedPname,forwardedParams,incomingR8,matrixFuncDirty,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedLevel,forwardedPname,forwardedParams,incomingR8,matrixFuncDirty,lastCalleeF1,incomingFpr2,incomingFpr3,incomingFpr4,
                incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }

@@ -1,0 +1,4 @@
+local	_glGetTexLevelParameterfv_Exec_body	fparam_1	lastCalleeF1	CONFIRMED	f1AfterCall or f1AfterCall1 (f1 left by the most recent call), forwarded to _gleUpdateFramebufferCompleteness
+local	_glCopyTexSubImage3D_CompExec	fparam_1	incomingFpr1	CONFIRMED	stale FPR value (never written in this function) read as an argument of the forwarded call: the established incomingFprN convention
+local	_glEvalCoord2f_CompExec	fparam_9	forwardedFloatArg9	CONFIRMED	incoming 9th float argument, forwarded (its low word via the CONCAT44 expression) to the callee; sibling params are forwardedFloatArg3..12
+local	_glArrayElement_NoopExec	fparam_9	forwardedFloatArg9	CONFIRMED	incoming 9th float argument, forwarded (its low word via the CONCAT44 expression) to the callee; sibling params are forwardedFloatArg3..12
