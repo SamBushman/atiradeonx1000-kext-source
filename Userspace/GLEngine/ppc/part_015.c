@@ -915,8 +915,8 @@ void _glFlush_RevertExec(glContext)
   int glContext;
 {
   byte glContextByte85a5;
-  undefined *puVar2;
-  int iVar3;
+  undefined *setClipInterpFunc;
+  int rendererSlot;
   double forwardedFloatArg1;
   double fparam_1_00;
   double incomingFpr2;
@@ -936,9 +936,9 @@ void _glFlush_RevertExec(glContext)
   if (*(short *)(glContext + 0x4a10) < 0) {
     _gleRevertSwapToPrimary(glContext);
     (**(code **)(glContext + 0x46f4))(*(undefined4 *)(glContext + 0x4688));
-    iVar3 = (uint)glContextByte85a5 * 0x2e0 + glContext;
-    (**(code **)(*(int *)(iVar3 + 0x8884) + 0x138))
-              (*(undefined4 *)(iVar3 + 0x85ac),*(undefined4 *)(glContext + 0x484c),
+    rendererSlot = (uint)glContextByte85a5 * 0x2e0 + glContext;
+    (**(code **)(*(int *)(rendererSlot + 0x8884) + 0x138))
+              (*(undefined4 *)(rendererSlot + 0x85ac),*(undefined4 *)(glContext + 0x484c),
                *(undefined4 *)(glContext + 0x4848),0);
     forwardedFloatArg1 = (double)_gleSwitchToRenderer(glContext,(uint)glContextByte85a5);
     ((void (*)())_gleUpdateDepthRangeData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
@@ -946,9 +946,9 @@ void _glFlush_RevertExec(glContext)
     _gleUpdatePolyMode(glContext);
     ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     _gleUpdateTextureTransform(glContext);
-    puVar2 = PTR__gleSetClipInterpFunc_00112038;
+    setClipInterpFunc = PTR__gleSetClipInterpFunc_00112038;
     *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
-    *(undefined **)(glContext + 0x49cc) = puVar2;
+    *(undefined **)(glContext + 0x49cc) = setClipInterpFunc;
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
     *(undefined4 *)(glContext + 0x7574) = 0x502;

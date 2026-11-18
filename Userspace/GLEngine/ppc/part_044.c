@@ -3213,7 +3213,7 @@ LAB_000d5d50:
 void _gleVtxLightFastRGBABack(int glContext,int vertex,int vertexCount,double unusedFloatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9)
 {
   undefined4 colorAlpha;
-  int iVar2;
+  int glContextCopy;
   int r3AfterCall;
   int vertexIndex;
   uint enabledLightMask;
@@ -3223,7 +3223,7 @@ void _gleVtxLightFastRGBABack(int glContext,int vertex,int vertexCount,double un
   int material;
   int lightRecord;
   double fparam_1_00;
-  double dVar10;
+  double zeroThenShineFactor;
   double fparam_8_00;
   float normalDotLight;
   float colorB;
@@ -3237,7 +3237,7 @@ void _gleVtxLightFastRGBABack(int glContext,int vertex,int vertexCount,double un
   
   vertexIndex = 0;
   enabledLightMask = *(uint *)(glContext + 0x30a0);
-  iVar2 = glContext;
+  glContextCopy = glContext;
   if (vertexCount < 1) {
 LAB_000d5ed8:
     return;
@@ -3263,11 +3263,11 @@ LAB_000d5da0:
       }
       else {
         fparam_8_00 = (double)*(float *)(vertex + 0x48);
-        dVar10 = (double)FLOAT_00108e50;
+        zeroThenShineFactor = (double)FLOAT_00108e50;
         normalDotLight = (double)(float)(fparam_8_00 * (double)*(float *)(lightRecord + 0x14) +
                                 (double)(*(float *)(vertex + 0x40) * *(float *)(lightRecord + 0xc) +
                                         *(float *)(vertex + 0x44) * *(float *)(lightRecord + 0x10)));
-        if (dVar10 < -(double)normalDotLight) {
+        if (zeroThenShineFactor < -(double)normalDotLight) {
           colorR = -(double)(normalDotLight * *(float *)(lightProducts + 0x10) - colorR);
           colorG = -(double)(normalDotLight * *(float *)(lightProducts + 0x14) - colorG);
           fparam_1_00 = -(double)(float)(fparam_8_00 * (double)*(float *)(lightParams + 0x68) +
@@ -3276,14 +3276,14 @@ LAB_000d5da0:
                                                 *(float *)(vertex + 0x44) * *(float *)(lightParams + 100)
                                                 ));
           colorB = -(double)(normalDotLight * *(float *)(lightProducts + 0x18) - colorB);
-          if (dVar10 < fparam_1_00) {
-            dVar10 = ((double (*)())_gleMaterialShinePow)(iVar2,material + 0x1e8,fparam_1_00,floatArg2,floatArg3,floatArg4,floatArg5,
-                                floatArg6,dVar10,fparam_8_00,incomingStack_ffffff78,incomingStack_ffffff80,
+          if (zeroThenShineFactor < fparam_1_00) {
+            zeroThenShineFactor = ((double (*)())_gleMaterialShinePow)(glContextCopy,material + 0x1e8,fparam_1_00,floatArg2,floatArg3,floatArg4,floatArg5,
+                                floatArg6,zeroThenShineFactor,fparam_8_00,incomingStack_ffffff78,incomingStack_ffffff80,
                                 incomingStack_ffffff88,incomingStack_ffffff90,incomingStack_ffffff98);
-            colorR = (double)(float)(dVar10 * (double)*(float *)(lightProducts + 0x20) + (double)colorR);
-            colorG = (double)(float)(dVar10 * (double)*(float *)(lightProducts + 0x24) + (double)colorG);
-            colorB = (double)(float)(dVar10 * (double)*(float *)(lightProducts + 0x28) + (double)colorB);
-            iVar2 = iVar2;
+            colorR = (double)(float)(zeroThenShineFactor * (double)*(float *)(lightProducts + 0x20) + (double)colorR);
+            colorG = (double)(float)(zeroThenShineFactor * (double)*(float *)(lightProducts + 0x24) + (double)colorG);
+            colorB = (double)(float)(zeroThenShineFactor * (double)*(float *)(lightProducts + 0x28) + (double)colorB);
+            glContextCopy = glContextCopy;
           }
         }
       }
