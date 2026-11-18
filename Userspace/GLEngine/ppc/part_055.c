@@ -1303,6 +1303,7 @@ void _gleVPRenderTriangleStrip_body(glContext)
   uint runStart;
   uint *puVar6;
   int iVar7;
+  int runTriangleCount;
   uint uVar8;
   uint batchClipCodes;
   int iVar9;
@@ -1361,7 +1362,7 @@ void _gleVPRenderTriangleStrip_body(glContext)
         vertexCountThenLastTriangle = (vertexCursor + vertexCountThenLastTriangle * 0x100) - 0x300;
         do {
           facingChanged = false;
-          iVar7 = 0;
+          runTriangleCount = 0;
           uVar10 = uVar8;
           runStart = vertexCursor;
           while (uVar8 = uVar10, vertexCursor <= vertexCountThenLastTriangle) {
@@ -1374,11 +1375,11 @@ void _gleVPRenderTriangleStrip_body(glContext)
               if (iVar11 != backFacing) {
                 facingChanged = true;
               }
-              if ((facingChanged) && (0 < iVar7)) break;
-              if (iVar7 == 0) {
+              if ((facingChanged) && (0 < runTriangleCount)) break;
+              if (runTriangleCount == 0) {
                 uVar12 = uVar10;
               }
-              iVar7 = iVar7 + 1;
+              runTriangleCount = runTriangleCount + 1;
               iVar11 = backFacing;
               newRunStart = runStart;
             }
@@ -1386,13 +1387,13 @@ void _gleVPRenderTriangleStrip_body(glContext)
               newRunStart = nextVertex;
               uVar8 = uVar10 ^ 1;
               vertexCursor = nextVertex;
-              if (0 < iVar7) break;
+              if (0 < runTriangleCount) break;
             }
             uVar10 = uVar10 ^ 1;
             vertexCursor = nextVertex;
             runStart = newRunStart;
           }
-          iVar9 = iVar7 + 2;
+          iVar9 = runTriangleCount + 2;
           if (2 < iVar9) {
             if ((int)-(uint)vertexProgramTwoSide < 0) {
               ((double (*)())_gleVPFlipColors)(glContext,runStart,iVar9,iVar11);
@@ -1409,7 +1410,7 @@ void _gleVPRenderTriangleStrip_body(glContext)
               else {
                 facePolygonMode = *(ushort *)(glContext + 0x34d0);
               }
-              iVar9 = iVar7 + 1;
+              iVar9 = runTriangleCount + 1;
               dVar21 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x46e0))
                                          (*(undefined4 *)(glContext + 0x4688), triangleVertexList, 3, facePolygonMode - 0x1b00);
               if (iVar9 < 3) goto LAB_001051b4;
@@ -1508,6 +1509,7 @@ void _gleVPRenderTriangleFan_body(glContext)
   bool facingChanged;
   int *piVar5;
   int iVar6;
+  int runTriangleCount;
   uint uVar7;
   uint batchClipCodes;
   int iVar8;
@@ -1561,7 +1563,7 @@ void _gleVPRenderTriangleFan_body(glContext)
         vertexCountThenLastVertex = (fanCenter + vertexCountThenLastVertex * 0x100) - 0x200;
         do {
           facingChanged = false;
-          iVar6 = 0;
+          runTriangleCount = 0;
           uVar16 = uVar7;
           do {
             while( true ) {
@@ -1576,19 +1578,19 @@ void _gleVPRenderTriangleFan_body(glContext)
               if (iVar11 != backFacing) {
                 facingChanged = true;
               }
-              if ((facingChanged) && (0 < iVar6)) goto LAB_00105508;
-              iVar6 = iVar6 + 1;
+              if ((facingChanged) && (0 < runTriangleCount)) goto LAB_00105508;
+              runTriangleCount = runTriangleCount + 1;
               iVar11 = backFacing;
               uVar7 = uVar16;
               uVar16 = uVar12;
             }
             uVar7 = uVar16;
-          } while (iVar6 < 1);
+          } while (runTriangleCount < 1);
 LAB_00105508:
-          iVar6 = iVar6 + 1;
-          if (1 < iVar6) {
+          runTriangleCount = runTriangleCount + 1;
+          if (1 < runTriangleCount) {
             if ((int)-(uint)vertexProgramTwoSide < 0) {
-              ((double (*)())_gleVPFlipColors)(glContext,uVar12,iVar6,iVar11);
+              ((double (*)())_gleVPFlipColors)(glContext,uVar12,runTriangleCount,iVar11);
             }
             if (iVar11 == 0) {
               facePolygonMode = *(ushort *)(glContext + 0x34d0);
@@ -1597,7 +1599,7 @@ LAB_00105508:
               facePolygonMode = *(ushort *)(glContext + 0x34d2);
             }
             dVar17 = (double)(**(double ( **)(int,int,int,int,int))(glContext + 0x46c8))
-                                       (*(undefined4 *)(glContext + 0x4688), fanCenter, uVar12, iVar6, facePolygonMode - 0x1b00);
+                                       (*(undefined4 *)(glContext + 0x4688), fanCenter, uVar12, runTriangleCount, facePolygonMode - 0x1b00);
           }
         } while (uVar7 <= vertexCountThenLastVertex);
       }
