@@ -2198,7 +2198,9 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
   uint uVar8;
   uint batchClipCodes;
   int runLightVertex;
-  int iVar10;
+  int runFacing;
+  int batchEnd;
+  int lightedVertices;
   uint *spareList;
   uint *puVar12;
   int runLightedVertices;
@@ -2226,7 +2228,7 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
   int backFacing;
   int clippedCount [6];
   
-  iVar10 = -1;
+  runFacing = -1;
   texEnableBits = _gleTexEnableBits(glContext);
   lightingPending = *(char *)(glContext + 0x30aa);
   twoSidedLighting = false;
@@ -2262,17 +2264,17 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
       }
       if (faceTestNeeded == '\0') {
         if (lightingEnabled) {
-          iVar10 = 0;
+          lightedVertices = 0;
           if (-1 < vertexCount + -3) {
             iVar7 = triangleCursor + 0x200;
             do {
               if (lightingPending != '\0') {
                 (**(code **)(glContext + 0x5068))(glContext,iVar7,1);
               }
-              iVar10 = iVar10 + 3;
+              lightedVertices = lightedVertices + 3;
               (**(code **)(glContext + 0x4de8))(glContext,iVar7,1);
               iVar7 = iVar7 + 0x300;
-            } while (iVar10 <= vertexCount + -3);
+            } while (lightedVertices <= vertexCount + -3);
           }
         }
         (**(code **)(glContext + 0x46c4))
@@ -2293,12 +2295,12 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
                                         incomingStack_ffffff78,incomingStack_ffffff80);
               dVar20 = dVar20;
               if (cullResult == 0) {
-                if (iVar10 != backFacing) {
+                if (runFacing != backFacing) {
                   facingChanged = true;
                 }
                 if ((facingChanged) && (uVar19 = triangleCursor, 0 < iVar7)) break;
                 iVar7 = iVar7 + 3;
-                iVar10 = backFacing;
+                runFacing = backFacing;
                 uVar19 = runStart;
               }
               else {
@@ -2311,7 +2313,7 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
             } while (triangleCursor <= uVar8);
             if (2 < iVar7) {
               if (lightingEnabled) {
-                lightFuncIndex = iVar10;
+                lightFuncIndex = runFacing;
                 if (!twoSidedLighting) {
                   lightFuncIndex = 0;
                 }
@@ -2328,7 +2330,7 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
                   } while (runLightedVertices <= iVar7 + -3);
                 }
               }
-              if (iVar10 == 0) {
+              if (runFacing == 0) {
                 facePolygonMode = *(ushort *)(glContext + 0x34d0);
               }
               else {
@@ -2347,9 +2349,9 @@ void _gleRenderFlatTrianglesFunc_body(glContext)
         dVar20 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, triangleCursor, vertexCount, 0);
       }
       polygonList = *(uint **)(glContext + 0x4870);
-      iVar10 = triangleCursor + vertexCount * 0x100;
+      batchEnd = triangleCursor + vertexCount * 0x100;
       spareList = *(uint **)(glContext + 0x4874);
-      for (; triangleCursor <= iVar10 - 0x300U; triangleCursor = triangleCursor + 0x300) {
+      for (; triangleCursor <= batchEnd - 0x300U; triangleCursor = triangleCursor + 0x300) {
         uVar19 = triangleCursor + 0x200;
         polygonList[1] = triangleCursor + 0x100;
         *polygonList = triangleCursor;
@@ -4578,6 +4580,7 @@ void _gleSelectTriangleStripFunc_body(glContext)
   uint uVar8;
   uint batchClipCodes;
   int iVar9;
+  int cullResult;
   int iVar10;
   int polygonVertexCount;
   uint uVar11;
@@ -4651,11 +4654,11 @@ void _gleSelectTriangleStripFunc_body(glContext)
           runStart = vertexCursor;
           while (uVar16 = uVar20, vertexCursor <= uVar8) {
             nextVertex = vertexCursor + 0x100;
-            iVar9 = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,nextVertex,vertexCursor + 0x200,uVar20,&backFacing,dVar22,
+            cullResult = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,nextVertex,vertexCursor + 0x200,uVar20,&backFacing,dVar22,
                                      incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78,
                                      incomingStack_ffffff80);
             dVar22 = f1AfterCall1;
-            if (iVar9 == 0) {
+            if (cullResult == 0) {
               if (iVar10 != backFacing) {
                 facingChanged = true;
               }
