@@ -3164,11 +3164,11 @@ int _gleDrawArraysOrElements_Comp(glContext, mode, first, count)
   unsigned char copiedByte;
   uint clientMaskLowMasked;
   uint clientMaskHigh;
-  code *pcVar4;
+  code *sizeByteCursorThenVertexToListFunc;
   code *pcVar5;
   int clientState;
   code *dstCursor;
-  int iVar8;
+  int vertexDataBytesThenEndIndex;
   int bitIndex;
   int remaining;
   int *dstCursor2;
@@ -3186,7 +3186,7 @@ int _gleDrawArraysOrElements_Comp(glContext, mode, first, count)
      (pcVar5 = (code *)((uint)pcVar5 & 0x10000), (clientMaskHigh & 1) != 0 || pcVar5 != (code *)0x0)) {
     dstCursor2 = &arrayByteSizes;
     srcCursor = (short *)(clientState + 0x3a);
-    iVar8 = 0;
+    vertexDataBytesThenEndIndex = 0;
     bitIndex = 0x10;
     do {
       shiftedBit64 = ___ashldi3(0,1,bitIndex);
@@ -3194,7 +3194,7 @@ int _gleDrawArraysOrElements_Comp(glContext, mode, first, count)
         *dstCursor2 = 0;
       }
       else {
-        iVar8 = iVar8 + *srcCursor * 4;
+        vertexDataBytesThenEndIndex = vertexDataBytesThenEndIndex + *srcCursor * 4;
         *dstCursor2 = *srcCursor * 4;
       }
       dstCursor2 = dstCursor2 + 1;
@@ -3202,34 +3202,34 @@ int _gleDrawArraysOrElements_Comp(glContext, mode, first, count)
       srcCursor = srcCursor + 0xc;
     } while ((int)dstCursor2 <= (int)auStack_44);
     pcVar5 = (code *)_gleAddListItem(glContext,PTR__glDrawArraysOrElements_ListExec_0011044c,
-                                     count * iVar8 + 0x40);
+                                     count * vertexDataBytesThenEndIndex + 0x40);
     if (pcVar5 != (code *)0x0) {
       *(undefined4 *)(pcVar5 + 0x14) = mode;
       *(undefined4 *)(pcVar5 + 4) = 0;
       dstCursor = pcVar5 + 0x20;
       *(undefined4 *)pcVar5 = 0;
       remaining = 0x20;
-      *(int *)(pcVar5 + 0x1c) = iVar8;
-      *(int *)(pcVar5 + 8) = count * iVar8;
-      pcVar4 = (code *)((int)&arrayByteSizes + 3);
+      *(int *)(pcVar5 + 0x1c) = vertexDataBytesThenEndIndex;
+      *(int *)(pcVar5 + 8) = count * vertexDataBytesThenEndIndex;
+      sizeByteCursorThenVertexToListFunc = (code *)((int)&arrayByteSizes + 3);
       *(int *)(pcVar5 + 0x18) = count;
       listDataCursor = pcVar5 + 0x40;
       do {
-        copiedByte = *(char *)pcVar4;
-        pcVar4 = pcVar4 + 4;
+        copiedByte = *(char *)sizeByteCursorThenVertexToListFunc;
+        sizeByteCursorThenVertexToListFunc = sizeByteCursorThenVertexToListFunc + 4;
         *(char *)dstCursor = copiedByte;
         dstCursor = dstCursor + 1;
         remaining = remaining + -1;
       } while (remaining != 0);
-      pcVar4 = *(code **)(glContext + 0x488c);
+      sizeByteCursorThenVertexToListFunc = *(code **)(glContext + 0x488c);
       if (*(code **)(glContext + 0x488c) == (code *)0x0) {
         pcVar5 = (code *)_gleGetVertexToListFunc(glContext);
         *(code **)(glContext + 0x488c) = pcVar5;
-        pcVar4 = pcVar5;
+        sizeByteCursorThenVertexToListFunc = pcVar5;
       }
-      iVar8 = count + first;
-      for (; first < iVar8; first = first + 1) {
-        listDataCursor = (code *)(*pcVar4)(glContext,clientState + 0x30,listDataCursor,first);
+      vertexDataBytesThenEndIndex = count + first;
+      for (; first < vertexDataBytesThenEndIndex; first = first + 1) {
+        listDataCursor = (code *)(*sizeByteCursorThenVertexToListFunc)(glContext,clientState + 0x30,listDataCursor,first);
         pcVar5 = listDataCursor;
       }
     }

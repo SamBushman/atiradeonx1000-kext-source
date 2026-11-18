@@ -37,6 +37,15 @@ Each of these is a variable that holds several unrelated values over its lifetim
 * `_glGetProgramivARB_Exec` uVar4, `_gleCheckTexImageArgs` bVar1: compare temporaries.
 * `_gleDrawArraysOrElementsOutOfLine_ListExec`, `_glDrawArraysOrElements_ListExec`: the display-list argument record offsets (puVar13/iVar14/piVar12/uVar11) were not traced to GL arguments.
 
+## More hybrids
+
+* `_gleBuildModelviewTransformFuncNO` (uVar2, uVar6, uVar7, uVar9, uVar10, iVar8, piVar13, puVar15, iVar18): code-generator temporaries reused as instruction word, register counter, field mask and loop index in different phases of the generator. The identifiable roles were named (matrixKey, matrixIdThenFlagsThenLoopIndex, fogModeThenStoreOffset, funcCacheHead, funcCacheElem, elementRegisters).
+* `_gleBuildCompileFuncAV`, `_gleBuildCompileFuncNO`, `_gleBuildProjectionTransformFuncAV`: uVar5/uVar6/uVar12 hold the key bit-fields (`>>0x11 & 0x21`, `>>0x13 & 0x21` ...) one after another; iVar7/iVar13/puVar10 are chunk word counts and chunk pointers; bVar3/bVar4 in the NO variant is set in several unrelated branches.
+* `_glTexImage1D_Comp`, `_glTexSubImage3D_Comp`: iVar5 starts as a copy of glContext (a stale register), is then the bytes-per-element value and finally the return value; uVar3 is a callee return value.
+* `_gleVPFlushLineLoop`: iVar1/iVar3/iVar6 are loop counters and byte offsets reused by three consecutive copy loops.
+* `_gleReclaimVertexArrayResources`: the object behind `ctx+0x4a64` and the node type of the hash chain were not verified.
+* `_glProgramLocalParameter4dvARB_Exec` iVar5: program kind, then a dirty-word pointer, then a constant-vector pointer.
+
 ## Convention note
 
 Round-6 renames `incomingStack_<hex>` to `incomingStackWord_<hex>`. Chained rows (in_stack_X to incomingStack_X to incomingStackWord_X) make `apply_names.py --check` print 94 "neither in_stack nor incomingStack present" errors; the apply still applies the new rows and link_corpus resolves the chain.

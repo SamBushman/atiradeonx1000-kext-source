@@ -604,7 +604,7 @@ void _glProgramLocalParameter4dvARB_Exec(glContext, target, index, params)
   double *params;
 {
   byte dirtyBitIndex;
-  uint uVar2;
+  uint expectedTargetThenNewDirtyFlags31c;
   undefined4 glErrorCode;
   int iVar4;
   int iVar5;
@@ -614,9 +614,9 @@ void _glProgramLocalParameter4dvARB_Exec(glContext, target, index, params)
   if (target == 0x8620) {
     iVar5 = 0;
     if (index < 0x100) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x400000;
+      expectedTargetThenNewDirtyFlags31c = *(uint *)(glContext + 0x31c) | 0x400000;
 LAB_0007a1e8:
-      *(uint *)(glContext + 0x31c) = uVar2;
+      *(uint *)(glContext + 0x31c) = expectedTargetThenNewDirtyFlags31c;
       if (*(int *)(glContext + 0x5434) == 0) {
         dirtyBitIndex = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x58);
       }
@@ -642,12 +642,12 @@ LAB_0007a1e8:
   }
   else {
     if (target < 0x8621) {
-      uVar2 = 0x8200;
+      expectedTargetThenNewDirtyFlags31c = 0x8200;
     }
     else {
-      uVar2 = 0x8804;
+      expectedTargetThenNewDirtyFlags31c = 0x8804;
     }
-    if (target != uVar2) {
+    if (target != expectedTargetThenNewDirtyFlags31c) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
@@ -656,7 +656,7 @@ LAB_0007a1e8:
     }
     iVar5 = 1;
     if (index < 0x80) {
-      uVar2 = *(uint *)(glContext + 0x31c) | 0x1000000;
+      expectedTargetThenNewDirtyFlags31c = *(uint *)(glContext + 0x31c) | 0x1000000;
       goto LAB_0007a1e8;
     }
   }

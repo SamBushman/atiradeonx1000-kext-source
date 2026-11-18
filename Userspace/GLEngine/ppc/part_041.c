@@ -1883,26 +1883,26 @@ void _gleReclaimBufferObjectResources(glContext)
 {
   int *rendererFuncs;
   undefined4 *rendererContext;
-  int iVar3;
+  int sharedStateThenClientState;
   int *nextBucket;
   uint loopIndex;
-  int *piVar6;
+  int *bucketSlotThenBufferObject;
   int rendererBase;
   int *bufferWordCursor;
   
-  iVar3 = *(int *)(glContext + 0x5148);
-  piVar6 = (int *)(iVar3 + 0x701c);
+  sharedStateThenClientState = *(int *)(glContext + 0x5148);
+  bucketSlotThenBufferObject = (int *)(sharedStateThenClientState + 0x701c);
   do {
-    nextBucket = piVar6 + 1;
-    for (piVar6 = (int *)*piVar6; piVar6 != (int *)0x0; piVar6 = (int *)*piVar6) {
-      if (piVar6[2] == 1) {
-        if (piVar6[0x10] != 0) {
-          ((double (*)())_gleSynchronizePluginBuffer)(glContext,piVar6 + 4);
+    nextBucket = bucketSlotThenBufferObject + 1;
+    for (bucketSlotThenBufferObject = (int *)*bucketSlotThenBufferObject; bucketSlotThenBufferObject != (int *)0x0; bucketSlotThenBufferObject = (int *)*bucketSlotThenBufferObject) {
+      if (bucketSlotThenBufferObject[2] == 1) {
+        if (bucketSlotThenBufferObject[0x10] != 0) {
+          ((double (*)())_gleSynchronizePluginBuffer)(glContext,bucketSlotThenBufferObject + 4);
         }
         loopIndex = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           rendererBase = glContext + 0x10000;
-          bufferWordCursor = piVar6;
+          bufferWordCursor = bucketSlotThenBufferObject;
           do {
             rendererFuncs = (int *)(rendererBase + -0x777c);
             loopIndex = loopIndex + 1;
@@ -1915,11 +1915,11 @@ void _gleReclaimBufferObjectResources(glContext)
         }
       }
     }
-    piVar6 = nextBucket;
-  } while (nextBucket <= (int *)(iVar3 + 0x8018));
-  iVar3 = *(int *)(glContext + 0x4a60);
-  *(undefined4 *)(iVar3 + 0x350) = *(undefined4 *)(iVar3 + 0x350);
-  *(uint *)(iVar3 + 0x354) = *(uint *)(iVar3 + 0x354) | 0x10;
+    bucketSlotThenBufferObject = nextBucket;
+  } while (nextBucket <= (int *)(sharedStateThenClientState + 0x8018));
+  sharedStateThenClientState = *(int *)(glContext + 0x4a60);
+  *(undefined4 *)(sharedStateThenClientState + 0x350) = *(undefined4 *)(sharedStateThenClientState + 0x350);
+  *(uint *)(sharedStateThenClientState + 0x354) = *(uint *)(sharedStateThenClientState + 0x354) | 0x10;
   return;
 }
 

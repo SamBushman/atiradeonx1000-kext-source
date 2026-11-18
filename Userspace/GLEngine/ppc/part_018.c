@@ -2881,8 +2881,8 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
   undefined4 r4AfterListItemTexture3;
   undefined4 r4AfterListItemTexture4;
   int recordSize;
-  int iVar4;
-  int iVar5;
+  int forwardedUorder;
+  int targetTableOffset;
   double incomingFpr5;
   double incomingFpr6;
   double incomingFpr7;
@@ -2901,15 +2901,15 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
         glErrorCode = 0x500;
         goto LAB_000713e8;
       }
-      iVar5 = (target - 0xdb0U) * 4;
+      targetTableOffset = (target - 0xdb0U) * 4;
       switch(target) {
       case 0xdb0:
         if ((3 < ustride) && (3 < vstride)) {
           recordSize = (100 - uorder * vorder) * -0x10 + 0x660;
-          iVar4 = uorder;
+          forwardedUorder = uorder;
           listRecord = _gleAddListItem(glContext,PTR__glMap2Color_ListExec_001101bc,recordSize);
           if (listRecord != 0) {
-            ((void (*)())_gleMap2ColorfLoad)(glContext,r4AfterListItemColor,recordSize,ustride,uorder,iVar4,iVar5,vstride,
+            ((void (*)())_gleMap2ColorfLoad)(glContext,r4AfterListItemColor,recordSize,ustride,uorder,forwardedUorder,targetTableOffset,vstride,
                                vorder,points,listRecord,u1,u2,v1,v2,incomingFpr5,
                                incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
@@ -2920,10 +2920,10 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 0xdb1:
         if ((0 < ustride) && (0 < vstride)) {
           recordSize = (100 - uorder * vorder) * -4 + 0x1b0;
-          iVar4 = uorder;
+          forwardedUorder = uorder;
           listRecord = _gleAddListItem(glContext,PTR__glMap2Index_ListExec_001101b8,recordSize);
           if (listRecord != 0) {
-            ((void (*)())_gleMap2IndexfLoad)(glContext,r4AfterListItemIndex,recordSize,ustride,uorder,iVar4,iVar5,vstride,
+            ((void (*)())_gleMap2IndexfLoad)(glContext,r4AfterListItemIndex,recordSize,ustride,uorder,forwardedUorder,targetTableOffset,vstride,
                                vorder,points,listRecord,u1,u2,v1,v2,incomingFpr5,
                                incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
@@ -2934,10 +2934,10 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 0xdb2:
         if ((2 < ustride) && (2 < vstride)) {
           recordSize = (100 - uorder * vorder) * -0xc + 0x4d0;
-          iVar4 = uorder;
+          forwardedUorder = uorder;
           listRecord = _gleAddListItem(glContext,PTR__glMap2Normal_ListExec_001101b4,recordSize);
           if (listRecord != 0) {
-            ((void (*)())_gleMap2NormalfLoad)(glContext,r4AfterListItemNormal,recordSize,ustride,uorder,iVar4,iVar5,vstride,
+            ((void (*)())_gleMap2NormalfLoad)(glContext,r4AfterListItemNormal,recordSize,ustride,uorder,forwardedUorder,targetTableOffset,vstride,
                                 vorder,points,listRecord,u1,u2,v1,v2,incomingFpr5,
                                 incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
@@ -2948,10 +2948,10 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 0xdb3:
         if ((0 < ustride) && (0 < vstride)) {
           recordSize = (100 - uorder * vorder) * -4 + 0x1b0;
-          iVar4 = uorder;
+          forwardedUorder = uorder;
           listRecord = _gleAddListItem(glContext,PTR__glMap2Texture1_ListExec_001101b0,recordSize);
           if (listRecord != 0) {
-            ((void (*)())_gleMap2Texture1fLoad)(glContext,r4AfterListItemTexture1,recordSize,ustride,uorder,iVar4,iVar5,vstride,vorder,
+            ((void (*)())_gleMap2Texture1fLoad)(glContext,r4AfterListItemTexture1,recordSize,ustride,uorder,forwardedUorder,targetTableOffset,vstride,vorder,
                        points,listRecord,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                        incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
@@ -2962,10 +2962,10 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 0xdb4:
         if ((1 < ustride) && (1 < vstride)) {
           recordSize = (100 - uorder * vorder) * -8 + 0x340;
-          iVar4 = uorder;
+          forwardedUorder = uorder;
           listRecord = _gleAddListItem(glContext,PTR__glMap2Texture2_ListExec_001101ac,recordSize);
           if (listRecord != 0) {
-            ((void (*)())_gleMap2Texture2fLoad)(glContext,r4AfterListItemTexture2,recordSize,ustride,uorder,iVar4,iVar5,vstride,vorder,
+            ((void (*)())_gleMap2Texture2fLoad)(glContext,r4AfterListItemTexture2,recordSize,ustride,uorder,forwardedUorder,targetTableOffset,vstride,vorder,
                        points,listRecord,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                        incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
@@ -2976,10 +2976,10 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 0xdb5:
         if ((2 < ustride) && (2 < vstride)) {
           recordSize = (100 - uorder * vorder) * -0xc + 0x4d0;
-          iVar4 = uorder;
+          forwardedUorder = uorder;
           listRecord = _gleAddListItem(glContext,PTR__glMap2Texture3_ListExec_001101a8,recordSize);
           if (listRecord != 0) {
-            ((void (*)())_gleMap2Texture3fLoad)(glContext,r4AfterListItemTexture3,recordSize,ustride,uorder,iVar4,iVar5,vstride,vorder,
+            ((void (*)())_gleMap2Texture3fLoad)(glContext,r4AfterListItemTexture3,recordSize,ustride,uorder,forwardedUorder,targetTableOffset,vstride,vorder,
                        points,listRecord,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                        incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
@@ -2990,10 +2990,10 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 0xdb6:
         if ((3 < ustride) && (3 < vstride)) {
           recordSize = (100 - uorder * vorder) * -0x10 + 0x660;
-          iVar4 = uorder;
+          forwardedUorder = uorder;
           listRecord = _gleAddListItem(glContext,PTR__glMap2Texture4_ListExec_001101a4,recordSize);
           if (listRecord != 0) {
-            ((void (*)())_gleMap2Texture4fLoad)(glContext,r4AfterListItemTexture4,recordSize,ustride,uorder,iVar4,iVar5,vstride,vorder,
+            ((void (*)())_gleMap2Texture4fLoad)(glContext,r4AfterListItemTexture4,recordSize,ustride,uorder,forwardedUorder,targetTableOffset,vstride,vorder,
                        points,listRecord,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                        incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
@@ -3004,10 +3004,10 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 0xdb7:
         if ((2 < ustride) && (2 < vstride)) {
           recordSize = (100 - uorder * vorder) * -0xc + 0x4d0;
-          iVar4 = uorder;
+          forwardedUorder = uorder;
           listRecord = _gleAddListItem(glContext,PTR__glMap2Vertex3_ListExec_001101c4,recordSize);
           if (listRecord != 0) {
-            ((void (*)())_gleMap2Vertex3fLoad)(glContext,r4AfterListItemVertex3,recordSize,ustride,uorder,iVar4,iVar5,vstride,vorder,
+            ((void (*)())_gleMap2Vertex3fLoad)(glContext,r4AfterListItemVertex3,recordSize,ustride,uorder,forwardedUorder,targetTableOffset,vstride,vorder,
                        points,listRecord,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                        incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
@@ -3018,10 +3018,10 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 0xdb8:
         if ((3 < ustride) && (3 < vstride)) {
           recordSize = (100 - uorder * vorder) * -0x10 + 0x660;
-          iVar4 = uorder;
+          forwardedUorder = uorder;
           listRecord = _gleAddListItem(glContext,PTR__glMap2Vertex4_ListExec_001101c0,recordSize);
           if (listRecord != 0) {
-            ((void (*)())_gleMap2Vertex4fLoad)(glContext,r4AfterListItemVertex4,recordSize,ustride,uorder,iVar4,iVar5,vstride,vorder,
+            ((void (*)())_gleMap2Vertex4fLoad)(glContext,r4AfterListItemVertex4,recordSize,ustride,uorder,forwardedUorder,targetTableOffset,vstride,vorder,
                        points,listRecord,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                        incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
