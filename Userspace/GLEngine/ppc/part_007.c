@@ -147,18 +147,18 @@ void _glReadPixels_Exec(int glContext,undefined4 x,undefined4 y,uint width,int h
   bool noStateChangePending;
   char rendererInfoByte79;
   int iVar3;
-  undefined4 uVar4;
+  undefined4 forwardedY;
   int *srcCursor;
-  int iVar6;
+  int pixelPackBufferThenFlagCursor;
   int framebufferObject;
-  uint uVar7;
+  uint forwardedFormat;
   int imageEndOffset;
   int matrixChangeBits;
-  uint uVar9;
+  uint forwardedWidth;
   uint dispatchFlags;
   uint changeWord3;
   int *changeWordCursor;
-  int iVar11;
+  int bufferSize;
   double extraout_f1;
   double bytesPerElement;
   
@@ -201,10 +201,10 @@ LAB_00045d24:
     framebufferObject = *(int *)(glContext + 0x744c);
     if (framebufferObject != 0) {
       matrixChangeBits = *(int *)(glContext + 0x50ac);
-      uVar4 = y;
-      uVar9 = width;
+      forwardedY = y;
+      forwardedWidth = width;
       iVar3 = height;
-      uVar7 = format;
+      forwardedFormat = format;
       if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
         _gleUpdateMatrixFunc(glContext);
         framebufferObject = *(int *)(glContext + 0x744c);
@@ -214,7 +214,7 @@ LAB_00045d24:
         changeWordCursor = (int *)(glContext + 0x310);
         rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
         if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,uVar4,uVar9,iVar3,uVar7,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedY,forwardedWidth,iVar3,forwardedFormat,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
                      forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         }
@@ -307,8 +307,8 @@ LAB_00045e20:
         glErrorCode = 0x501;
         goto LAB_00046050;
       }
-      iVar6 = *(int *)(glContext + 0x4a68);
-      if (iVar6 == 0) {
+      pixelPackBufferThenFlagCursor = *(int *)(glContext + 0x4a68);
+      if (pixelPackBufferThenFlagCursor == 0) {
 LAB_0004611c:
         (**(code **)(glContext + 0x46a0))
                   (*(undefined4 *)(glContext + 0x4688),x,y,width,height,format,type
@@ -316,33 +316,33 @@ LAB_0004611c:
         return;
       }
       imageEndOffset = _gleOffsetLimitImage(glContext + 0x31b0,width,height,format,type,pixels);
-      iVar11 = *(int *)(iVar6 + 0x38);
+      bufferSize = *(int *)(pixelPackBufferThenFlagCursor + 0x38);
       bytesPerElement = (double)((double (*)())_gleBytesPerElement)(type);
       iVar3 = (int)bytesPerElement;
-      if (imageEndOffset <= iVar11) {
+      if (imageEndOffset <= bufferSize) {
         if (iVar3 == 0) {
           iVar3 = _glePixelBytes(format,type);
         }
         if (pixels == (pixels / iVar3) * iVar3) {
-          pixels = pixels + *(int *)(iVar6 + 0x30);
+          pixels = pixels + *(int *)(pixelPackBufferThenFlagCursor + 0x30);
           iVar3 = (**(code **)(glContext + 0x46a0))
                             (*(undefined4 *)(glContext + 0x4688),x,y,width,height,
                              format,type,pixels);
           if (iVar3 != 0) {
-            *(undefined4 *)(iVar6 + 0x40) =
+            *(undefined4 *)(pixelPackBufferThenFlagCursor + 0x40) =
                  *(undefined4 *)
                   ((uint)*(byte *)(glContext + 0x85a8) * 4 + *(int *)(glContext + 0x5148) + 0x8054);
             return;
           }
-          if (*(int *)(iVar6 + 0x40) != 0) {
-            _gleSynchronizePluginBuffer(glContext,iVar6 + 0x10);
+          if (*(int *)(pixelPackBufferThenFlagCursor + 0x40) != 0) {
+            _gleSynchronizePluginBuffer(glContext,pixelPackBufferThenFlagCursor + 0x10);
           }
           loopIndex = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
               loopIndex = loopIndex + 1;
-              *(uint *)(iVar6 + 0x48) = *(uint *)(iVar6 + 0x48) | 2;
-              iVar6 = iVar6 + 4;
+              *(uint *)(pixelPackBufferThenFlagCursor + 0x48) = *(uint *)(pixelPackBufferThenFlagCursor + 0x48) | 2;
+              pixelPackBufferThenFlagCursor = pixelPackBufferThenFlagCursor + 4;
             } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
           }
           goto LAB_0004611c;

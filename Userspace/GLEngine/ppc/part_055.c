@@ -2225,36 +2225,36 @@ void _gleVPFlushLineLoop(glContext)
 void _gleVPFlushLineLoopTCL(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int byteOffset;
+  int vertexWritePtr;
+  int vertexQwordCountThenRemaining;
+  int copyIndexThenNegativeVertexBytes;
+  int byteOffsetThenCopyIndex;
+  int batchStart;
+  int remainingThenVertexSizeBytes;
   
   (**(code **)(glContext + 0x4a08))(glContext);
-  iVar6 = *(int *)(glContext + 0x4854);
-  iVar3 = (int)*(short *)(glContext + 0x487c) >> 3;
+  batchStart = *(int *)(glContext + 0x4854);
+  vertexQwordCountThenRemaining = (int)*(short *)(glContext + 0x487c) >> 3;
   if (*(char *)(glContext + 0x4a18) == '\0') {
-    iVar4 = 0;
-    for (iVar7 = iVar3; iVar7 != 0; iVar7 = iVar7 + -1) {
-      iVar5 = iVar4 * 8;
-      iVar4 = iVar4 + 1;
-      *(undefined8 *)(iVar6 + -0x100 + iVar5) = *(undefined8 *)(iVar6 + iVar5);
+    copyIndexThenNegativeVertexBytes = 0;
+    for (remainingThenVertexSizeBytes = vertexQwordCountThenRemaining; remainingThenVertexSizeBytes != 0; remainingThenVertexSizeBytes = remainingThenVertexSizeBytes + -1) {
+      byteOffsetThenCopyIndex = copyIndexThenNegativeVertexBytes * 8;
+      copyIndexThenNegativeVertexBytes = copyIndexThenNegativeVertexBytes + 1;
+      *(undefined8 *)(batchStart + -0x100 + byteOffsetThenCopyIndex) = *(undefined8 *)(batchStart + byteOffsetThenCopyIndex);
     }
     *(undefined1 *)(glContext + 0x4a18) = 1;
   }
-  iVar5 = 0;
-  iVar2 = *(int *)(glContext + 0x4858);
-  iVar7 = iVar3 * 8;
-  iVar4 = iVar3 * -8;
-  for (; iVar3 != 0; iVar3 = iVar3 + -1) {
-    iVar1 = iVar5 * 8;
-    iVar5 = iVar5 + 1;
-    *(undefined8 *)(iVar6 + iVar1) = *(undefined8 *)(iVar2 + iVar4 + iVar1);
+  byteOffsetThenCopyIndex = 0;
+  vertexWritePtr = *(int *)(glContext + 0x4858);
+  remainingThenVertexSizeBytes = vertexQwordCountThenRemaining * 8;
+  copyIndexThenNegativeVertexBytes = vertexQwordCountThenRemaining * -8;
+  for (; vertexQwordCountThenRemaining != 0; vertexQwordCountThenRemaining = vertexQwordCountThenRemaining + -1) {
+    byteOffset = byteOffsetThenCopyIndex * 8;
+    byteOffsetThenCopyIndex = byteOffsetThenCopyIndex + 1;
+    *(undefined8 *)(batchStart + byteOffset) = *(undefined8 *)(vertexWritePtr + copyIndexThenNegativeVertexBytes + byteOffset);
   }
-  *(int *)(glContext + 0x4858) = iVar6 + iVar7;
+  *(int *)(glContext + 0x4858) = batchStart + remainingThenVertexSizeBytes;
   return;
 }
 
@@ -2680,42 +2680,42 @@ void _gleVPFlushPolygon(glContext)
 void _gleVPFlushPolygonTCL(glContext)
   int glContext;
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
+  uint vertexSizeBytes;
+  int byteOffset;
+  uint flagWordOffset;
   undefined4 incomingR4;
   undefined4 incomingR5;
   undefined4 incomingR6;
   undefined4 incomingR7;
   undefined4 incomingR8;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  uint *puVar8;
-  uint uVar9;
-  int iVar10;
+  uint lastVertexIndexThenBitIndex;
+  int copyIndex;
+  int vertexQwordCountThenRemaining;
+  int lastVertex;
+  uint *vertexFlagBits;
+  uint oldFlagWord;
+  int secondVertex;
   
-  iVar6 = (int)*(short *)(glContext + 0x487c) >> 3;
-  uVar1 = iVar6 * 8;
-  puVar8 = *(uint **)(glContext + 0x30b0);
-  iVar7 = *(int *)(glContext + 0x4858) + iVar6 * -8;
-  iVar10 = *(int *)(glContext + 0x4854) + uVar1;
-  uVar4 = (uint)(iVar7 - *(int *)(glContext + 0x4854)) / uVar1;
-  uVar3 = uVar4 >> 3 & 0x1ffffffc;
-  uVar4 = uVar4 & 0x1f;
-  uVar9 = *(uint *)(uVar3 + (int)puVar8);
-  *(uint *)(uVar3 + (int)puVar8) = uVar9 & ~(1 << uVar4);
-  (**(code **)(glContext + 0x4a08))(glContext,incomingR4,incomingR5,incomingR6,incomingR7,incomingR8,uVar4);
+  vertexQwordCountThenRemaining = (int)*(short *)(glContext + 0x487c) >> 3;
+  vertexSizeBytes = vertexQwordCountThenRemaining * 8;
+  vertexFlagBits = *(uint **)(glContext + 0x30b0);
+  lastVertex = *(int *)(glContext + 0x4858) + vertexQwordCountThenRemaining * -8;
+  secondVertex = *(int *)(glContext + 0x4854) + vertexSizeBytes;
+  lastVertexIndexThenBitIndex = (uint)(lastVertex - *(int *)(glContext + 0x4854)) / vertexSizeBytes;
+  flagWordOffset = lastVertexIndexThenBitIndex >> 3 & 0x1ffffffc;
+  lastVertexIndexThenBitIndex = lastVertexIndexThenBitIndex & 0x1f;
+  oldFlagWord = *(uint *)(flagWordOffset + (int)vertexFlagBits);
+  *(uint *)(flagWordOffset + (int)vertexFlagBits) = oldFlagWord & ~(1 << lastVertexIndexThenBitIndex);
+  (**(code **)(glContext + 0x4a08))(glContext,incomingR4,incomingR5,incomingR6,incomingR7,incomingR8,lastVertexIndexThenBitIndex);
   *(undefined1 *)(glContext + 0x4a18) = 1;
-  iVar5 = 0;
-  *puVar8 = *puVar8 & 0xfffffffc | (uVar9 >> uVar4 & 1) << 1;
-  for (; iVar6 != 0; iVar6 = iVar6 + -1) {
-    iVar2 = iVar5 * 8;
-    iVar5 = iVar5 + 1;
-    *(undefined8 *)(iVar10 + iVar2) = *(undefined8 *)(iVar7 + iVar2);
+  copyIndex = 0;
+  *vertexFlagBits = *vertexFlagBits & 0xfffffffc | (oldFlagWord >> lastVertexIndexThenBitIndex & 1) << 1;
+  for (; vertexQwordCountThenRemaining != 0; vertexQwordCountThenRemaining = vertexQwordCountThenRemaining + -1) {
+    byteOffset = copyIndex * 8;
+    copyIndex = copyIndex + 1;
+    *(undefined8 *)(secondVertex + byteOffset) = *(undefined8 *)(lastVertex + byteOffset);
   }
-  *(uint *)(glContext + 0x4858) = iVar10 + uVar1;
+  *(uint *)(glContext + 0x4858) = secondVertex + vertexSizeBytes;
   return;
 }
 

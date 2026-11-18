@@ -972,69 +972,69 @@ LAB_000179b4:
 }
 
 /* _gleBindTexture @ 0x17a38 (420 bytes) */
-void _gleBindTexture(glContext, param_2, texture, param_4)
+void _gleBindTexture(glContext, textureTargetIndex, texture, textureUnit)
   int glContext;
-  uint param_2;
+  uint textureTargetIndex;
   int texture;
-  uint param_4;
+  uint textureUnit;
 {
   int loopIndex;
-  undefined4 uVar1;
-  int iVar2;
-  int iVar3;
+  undefined4 rendererTextureHandle;
+  int previousRefCount;
+  int textureObject;
   undefined4 *srcCursor;
-  int iVar5;
+  int previousTextureObject;
   undefined4 *dstCursor;
-  int iVar7;
+  int textureHashTableThenBindingSlot;
   
-  iVar7 = *(int *)(glContext + 0x5148) + 0x2008;
+  textureHashTableThenBindingSlot = *(int *)(glContext + 0x5148) + 0x2008;
   if (texture == 0) {
-    if ((param_2 & 0xfffffff0) != 0) {
+    if ((textureTargetIndex & 0xfffffff0) != 0) {
 LAB_00017ac4:
       if (*(int *)(glContext + 0x7574) == 0) {
         *(undefined4 *)(glContext + 0x7574) = 0x502;
       }
       goto LAB_00017bb4;
     }
-    iVar3 = *(int *)(param_2 * 4 + glContext + 0x5294);
+    textureObject = *(int *)(textureTargetIndex * 4 + glContext + 0x5294);
   }
   else {
-    iVar3 = ((int (*)())_gleLookupHashObject)(iVar7,texture);
-    if (iVar3 == 0) {
-      iVar3 = _gleCreateTextureObject(param_2,texture);
-      _gleCreatePluginTexture(glContext,iVar3 + 0x10);
-      ((int (*)())_gleAddHashNameAndObject)(glContext,iVar7,iVar3);
+    textureObject = ((int (*)())_gleLookupHashObject)(textureHashTableThenBindingSlot,texture);
+    if (textureObject == 0) {
+      textureObject = _gleCreateTextureObject(textureTargetIndex,texture);
+      _gleCreatePluginTexture(glContext,textureObject + 0x10);
+      ((int (*)())_gleAddHashNameAndObject)(glContext,textureHashTableThenBindingSlot,textureObject);
     }
-    else if ((*(ushort *)(iVar3 + 0x34) & 0xffffc3ff) != param_2) goto LAB_00017ac4;
+    else if ((*(ushort *)(textureObject + 0x34) & 0xffffc3ff) != textureTargetIndex) goto LAB_00017ac4;
   }
-  iVar7 = (param_4 * 5 + (param_2 & 0xf)) * 4 + glContext;
-  *(int *)(iVar3 + 8) = *(int *)(iVar3 + 8) + 1;
-  iVar5 = *(int *)(iVar7 + 0x5154);
-  iVar2 = *(int *)(iVar5 + 8) + -1;
-  *(int *)(iVar5 + 8) = iVar2;
-  if (iVar2 == 0) {
-    _gleFreeTextureObject(glContext,iVar5);
+  textureHashTableThenBindingSlot = (textureUnit * 5 + (textureTargetIndex & 0xf)) * 4 + glContext;
+  *(int *)(textureObject + 8) = *(int *)(textureObject + 8) + 1;
+  previousTextureObject = *(int *)(textureHashTableThenBindingSlot + 0x5154);
+  previousRefCount = *(int *)(previousTextureObject + 8) + -1;
+  *(int *)(previousTextureObject + 8) = previousRefCount;
+  if (previousRefCount == 0) {
+    _gleFreeTextureObject(glContext,previousTextureObject);
   }
-  *(int *)(iVar7 + 0x5154) = iVar3;
-  if ((*(int *)(iVar3 + 0x30) != 0) &&
-     (*(int *)(iVar3 + 0x30) !=
+  *(int *)(textureHashTableThenBindingSlot + 0x5154) = textureObject;
+  if ((*(int *)(textureObject + 0x30) != 0) &&
+     (*(int *)(textureObject + 0x30) !=
       *(int *)((uint)*(byte *)(glContext + 0x85a8) * 4 + *(int *)(glContext + 0x5148) + 0x8054))) {
-    _gleSynchronizePluginTextureLevels(glContext,iVar3 + 0x10);
+    _gleSynchronizePluginTextureLevels(glContext,textureObject + 0x10);
   }
   loopIndex = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
-    srcCursor = (undefined4 *)(iVar3 + 0x10);
-    dstCursor = (undefined4 *)((param_4 * 5 + (param_2 & 0xf)) * 4 + glContext + 0x86e0);
+    srcCursor = (undefined4 *)(textureObject + 0x10);
+    dstCursor = (undefined4 *)((textureUnit * 5 + (textureTargetIndex & 0xf)) * 4 + glContext + 0x86e0);
     do {
-      uVar1 = *srcCursor;
+      rendererTextureHandle = *srcCursor;
       loopIndex = loopIndex + 1;
       srcCursor = srcCursor + 1;
-      *dstCursor = uVar1;
+      *dstCursor = rendererTextureHandle;
       dstCursor = dstCursor + 0xb8;
     } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
 LAB_00017bb4:
-  *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1 << (param_4 & 0x3f);
+  *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1 << (textureUnit & 0x3f);
   return;
 }
 

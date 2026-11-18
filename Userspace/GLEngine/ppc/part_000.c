@@ -3571,11 +3571,11 @@ void _gleInitPipelineProgramState(glContext)
   char glContextByte85a42;
   byte glContextByte85a4;
   undefined4 rendererProgramHandle;
-  uint uVar4;
+  uint initialEntryThenRendererValueThenSmallestAbovePrevious;
   uint listValue;
   ushort *srcCursor;
   undefined1 *allocatedBlock2;
-  int iVar8;
+  int programObjectThenSortedOffset;
   uint *allocatedBlock3;
   uint *cursor;
   undefined4 *srcCursor2;
@@ -3583,9 +3583,9 @@ void _gleInitPipelineProgramState(glContext)
   uint entriesLeft;
   undefined4 *dstCursor;
   int sharedState;
-  int iVar16;
+  int contextSlotBaseThenSharedRecordCursor;
   uint previousValue;
-  int iVar18;
+  int contextSlotBaseThenRendererRecordBase;
   int loopIndex;
   uint loopIndex6;
   int loopIndex3;
@@ -3597,18 +3597,18 @@ void _gleInitPipelineProgramState(glContext)
   loopIndex = 0;
   *(undefined4 *)(glContext + 0x541c) = 0xffffffff;
   *(undefined1 **)(glContext + 0x5418) = allocatedBlock2;
-  iVar16 = glContext;
-  iVar18 = glContext;
+  contextSlotBaseThenSharedRecordCursor = glContext;
+  contextSlotBaseThenRendererRecordBase = glContext;
   do {
     loopIndex3 = 0;
-    iVar8 = ((int (*)())_gleCreatePipelineProgramObject)(glContext,loopIndex,0);
-    ((void (*)())_gleCreatePluginPipelineProgram)(glContext,iVar8 + 0x10);
+    programObjectThenSortedOffset = ((int (*)())_gleCreatePipelineProgramObject)(glContext,loopIndex,0);
+    ((void (*)())_gleCreatePluginPipelineProgram)(glContext,programObjectThenSortedOffset + 0x10);
     glContextByte85a42 = *(char *)(glContext + 0x85a4);
-    *(int *)(iVar18 + 0x5428) = iVar8;
-    *(int *)(iVar18 + 0x5420) = iVar8;
+    *(int *)(contextSlotBaseThenRendererRecordBase + 0x5428) = programObjectThenSortedOffset;
+    *(int *)(contextSlotBaseThenRendererRecordBase + 0x5420) = programObjectThenSortedOffset;
     if (glContextByte85a42 != '\0') {
-      srcCursor2 = (undefined4 *)(iVar8 + 0x4a8);
-      dstCursor = (undefined4 *)(iVar16 + 0x886c);
+      srcCursor2 = (undefined4 *)(programObjectThenSortedOffset + 0x4a8);
+      dstCursor = (undefined4 *)(contextSlotBaseThenSharedRecordCursor + 0x886c);
       do {
         rendererProgramHandle = *srcCursor2;
         loopIndex3 = loopIndex3 + 1;
@@ -3618,47 +3618,47 @@ void _gleInitPipelineProgramState(glContext)
       } while (loopIndex3 < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
     loopIndex = loopIndex + 1;
-    iVar16 = iVar16 + 4;
-    iVar18 = iVar18 + 4;
-    *(int *)(iVar8 + 8) = *(int *)(iVar8 + 8) + 1;
+    contextSlotBaseThenSharedRecordCursor = contextSlotBaseThenSharedRecordCursor + 4;
+    contextSlotBaseThenRendererRecordBase = contextSlotBaseThenRendererRecordBase + 4;
+    *(int *)(programObjectThenSortedOffset + 8) = *(int *)(programObjectThenSortedOffset + 8) + 1;
   } while (loopIndex < 2);
-  iVar16 = sharedState + 0x10000;
+  contextSlotBaseThenSharedRecordCursor = sharedState + 0x10000;
   if (*(char *)(sharedState + 0x8024) != '\0') {
     _pthread_mutex_lock(sharedState + 0x8028);
   }
   loopIndex2 = 0;
-  iVar18 = glContext;
+  contextSlotBaseThenRendererRecordBase = glContext;
   do {
-    if (*(int *)(iVar16 + -0x7560) == 0) {
+    if (*(int *)(contextSlotBaseThenSharedRecordCursor + -0x7560) == 0) {
       previousValue = 0;
       loopIndex6 = 0;
       allocatedBlock3 = (uint *)_malloc((uint)*(byte *)(glContext + 0x85a4) * 4 + 4);
       loopIndex7 = 1;
-      uVar4 = 0x100;
+      initialEntryThenRendererValueThenSmallestAbovePrevious = 0x100;
       if (loopIndex2 != 0) {
-        uVar4 = 0x80;
+        initialEntryThenRendererValueThenSmallestAbovePrevious = 0x80;
       }
       glContextByte85a4 = *(byte *)(glContext + 0x85a4);
       loopIndex4 = 0;
-      *allocatedBlock3 = uVar4;
+      *allocatedBlock3 = initialEntryThenRendererValueThenSmallestAbovePrevious;
       if (glContextByte85a4 != 0) {
-        srcCursor = (ushort *)(iVar18 + 0x86a0);
+        srcCursor = (ushort *)(contextSlotBaseThenRendererRecordBase + 0x86a0);
         cursor = allocatedBlock3 + 1;
         do {
-          uVar4 = (uint)*srcCursor;
+          initialEntryThenRendererValueThenSmallestAbovePrevious = (uint)*srcCursor;
           srcCursor = srcCursor + 0x170;
-          if (uVar4 != 0) {
+          if (initialEntryThenRendererValueThenSmallestAbovePrevious != 0) {
             loopIndex5 = 0;
             cursor3 = allocatedBlock3;
             if (loopIndex7 != 0) {
               do {
-                if (uVar4 == *cursor3) break;
+                if (initialEntryThenRendererValueThenSmallestAbovePrevious == *cursor3) break;
                 loopIndex5 = loopIndex5 + 1;
                 cursor3 = cursor3 + 1;
               } while (loopIndex5 < loopIndex7);
             }
             if (loopIndex5 == loopIndex7) {
-              *cursor = uVar4;
+              *cursor = initialEntryThenRendererValueThenSmallestAbovePrevious;
               loopIndex7 = loopIndex7 + 1;
               cursor = cursor + 1;
             }
@@ -3666,31 +3666,31 @@ void _gleInitPipelineProgramState(glContext)
           loopIndex4 = loopIndex4 + 1;
         } while (loopIndex4 < (int)(uint)glContextByte85a4);
       }
-      *(uint *)(iVar16 + -0x7564) = loopIndex7;
+      *(uint *)(contextSlotBaseThenSharedRecordCursor + -0x7564) = loopIndex7;
       allocatedBlock = _malloc(loopIndex7 << 2);
-      *(undefined4 *)(iVar16 + -0x7560) = allocatedBlock;
+      *(undefined4 *)(contextSlotBaseThenSharedRecordCursor + -0x7560) = allocatedBlock;
       if (loopIndex7 != 0) {
         do {
-          uVar4 = 0x7ffffff;
+          initialEntryThenRendererValueThenSmallestAbovePrevious = 0x7ffffff;
           cursor2 = allocatedBlock3;
           for (entriesLeft = loopIndex7; entriesLeft != 0; entriesLeft = entriesLeft - 1) {
             listValue = *cursor2;
             cursor2 = cursor2 + 1;
-            if ((previousValue < listValue) && (listValue < uVar4)) {
-              uVar4 = listValue;
+            if ((previousValue < listValue) && (listValue < initialEntryThenRendererValueThenSmallestAbovePrevious)) {
+              initialEntryThenRendererValueThenSmallestAbovePrevious = listValue;
             }
           }
-          iVar8 = loopIndex6 * 4;
+          programObjectThenSortedOffset = loopIndex6 * 4;
           loopIndex6 = loopIndex6 + 1;
-          *(uint *)(iVar8 + *(int *)(iVar16 + -0x7560)) = uVar4;
-          previousValue = uVar4;
+          *(uint *)(programObjectThenSortedOffset + *(int *)(contextSlotBaseThenSharedRecordCursor + -0x7560)) = initialEntryThenRendererValueThenSmallestAbovePrevious;
+          previousValue = initialEntryThenRendererValueThenSmallestAbovePrevious;
         } while (loopIndex6 < loopIndex7);
       }
       _free(allocatedBlock3);
     }
     loopIndex2 = loopIndex2 + 1;
-    iVar18 = iVar18 + 0x10;
-    iVar16 = iVar16 + 0xa30;
+    contextSlotBaseThenRendererRecordBase = contextSlotBaseThenRendererRecordBase + 0x10;
+    contextSlotBaseThenSharedRecordCursor = contextSlotBaseThenSharedRecordCursor + 0xa30;
     if (1 < loopIndex2) {
       if (*(char *)(sharedState + 0x8024) != '\0') {
         _pthread_mutex_unlock(sharedState + 0x8028);

@@ -607,29 +607,29 @@ void _glPointParameterivARB_Exec(glContext, pname, params)
   uint pname;
   uint *params;
 {
-  bool bVar1;
-  byte bVar2;
+  bool glContextWord5434IsZero;
+  byte dirtyBitNumber;
   double intToDoubleBias;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
+  uint paramValue;
+  int glContextPtr5424ThenDirtyWordBase348;
+  int dirtyWordBase324;
   
   intToDoubleBias = DOUBLE_00108d58;
   if (pname == 0x8127) {
-    bVar1 = *(int *)(glContext + 0x5434) == 0;
+    glContextWord5434IsZero = *(int *)(glContext + 0x5434) == 0;
     *(float *)(glContext + 0x3424) =
          (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
 LAB_0007ee28:
-    if (bVar1) {
-      bVar2 = *(byte *)(*(int *)(glContext + 0x5420) + 0x325);
+    if (glContextWord5434IsZero) {
+      dirtyBitNumber = *(byte *)(*(int *)(glContext + 0x5420) + 0x325);
     }
     else {
-      bVar2 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x359);
+      dirtyBitNumber = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x359);
     }
-    iVar6 = (bVar2 >> 3 & 0x1c) + glContext;
-    iVar5 = *(int *)(glContext + 0x5424);
-    *(uint *)(iVar6 + 0x324) = *(uint *)(iVar6 + 0x324) | 1 << (bVar2 & 0x1f);
-    bVar2 = *(byte *)(iVar5 + 0x325);
+    dirtyWordBase324 = (dirtyBitNumber >> 3 & 0x1c) + glContext;
+    glContextPtr5424ThenDirtyWordBase348 = *(int *)(glContext + 0x5424);
+    *(uint *)(dirtyWordBase324 + 0x324) = *(uint *)(dirtyWordBase324 + 0x324) | 1 << (dirtyBitNumber & 0x1f);
+    dirtyBitNumber = *(byte *)(glContextPtr5424ThenDirtyWordBase348 + 0x325);
   }
   else {
     if (pname < 0x8128) {
@@ -652,7 +652,7 @@ LAB_0007ef9c:
         }
         return;
       }
-      bVar1 = *(int *)(glContext + 0x5434) == 0;
+      glContextWord5434IsZero = *(int *)(glContext + 0x5434) == 0;
       *(float *)(glContext + 0x3420) =
            (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
       goto LAB_0007ee28;
@@ -660,20 +660,20 @@ LAB_0007ef9c:
     if (pname != 0x8129) {
       if (0x8128 < pname) {
         if (pname != 0x8863) goto LAB_0007ef9c;
-        uVar4 = *params;
-        if (uVar4 != 0x2000) {
-          if (uVar4 < 0x2001) {
-            bVar1 = uVar4 == 0;
+        paramValue = *params;
+        if (paramValue != 0x2000) {
+          if (paramValue < 0x2001) {
+            glContextWord5434IsZero = paramValue == 0;
           }
           else {
-            bVar1 = uVar4 == 0x2002;
+            glContextWord5434IsZero = paramValue == 0x2002;
           }
-          if (!bVar1) goto LAB_0007ef84;
+          if (!glContextWord5434IsZero) goto LAB_0007ef84;
         }
-        *(short *)(glContext + 0x3440) = (short)uVar4;
+        *(short *)(glContext + 0x3440) = (short)paramValue;
         goto LAB_0007efb4;
       }
-      bVar1 = *(int *)(glContext + 0x5434) == 0;
+      glContextWord5434IsZero = *(int *)(glContext + 0x5434) == 0;
       *(float *)(glContext + 0x3428) =
            (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
       goto LAB_0007ee28;
@@ -685,18 +685,18 @@ LAB_0007ef9c:
     *(float *)(glContext + 0x3434) =
          (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleBias);
     if (*(int *)(glContext + 0x5434) == 0) {
-      bVar2 = *(byte *)(*(int *)(glContext + 0x5420) + 0x326);
+      dirtyBitNumber = *(byte *)(*(int *)(glContext + 0x5420) + 0x326);
     }
     else {
-      bVar2 = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x35a);
+      dirtyBitNumber = *(byte *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x35a);
     }
-    iVar6 = (bVar2 >> 3 & 0x1c) + glContext;
-    iVar5 = *(int *)(glContext + 0x5424);
-    *(uint *)(iVar6 + 0x324) = *(uint *)(iVar6 + 0x324) | 1 << (bVar2 & 0x1f);
-    bVar2 = *(byte *)(iVar5 + 0x326);
+    dirtyWordBase324 = (dirtyBitNumber >> 3 & 0x1c) + glContext;
+    glContextPtr5424ThenDirtyWordBase348 = *(int *)(glContext + 0x5424);
+    *(uint *)(dirtyWordBase324 + 0x324) = *(uint *)(dirtyWordBase324 + 0x324) | 1 << (dirtyBitNumber & 0x1f);
+    dirtyBitNumber = *(byte *)(glContextPtr5424ThenDirtyWordBase348 + 0x326);
   }
-  iVar5 = (bVar2 >> 3 & 0x1c) + glContext;
-  *(uint *)(iVar5 + 0x348) = *(uint *)(iVar5 + 0x348) | 1 << (bVar2 & 0x1f);
+  glContextPtr5424ThenDirtyWordBase348 = (dirtyBitNumber >> 3 & 0x1c) + glContext;
+  *(uint *)(glContextPtr5424ThenDirtyWordBase348 + 0x348) = *(uint *)(glContextPtr5424ThenDirtyWordBase348 + 0x348) | 1 << (dirtyBitNumber & 0x1f);
 LAB_0007efb4:
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x400000;
   return;

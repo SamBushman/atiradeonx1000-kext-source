@@ -1,0 +1,65 @@
+local	_gleBindTexture	param_2	textureTargetIndex	CONFIRMED	the caller passes `textureTargetIndex`; (param_2 & 0xf) indexes the five per-unit bindings and param_2 selects the default texture at ctx+0x5294
+local	_gleBindTexture	param_4	textureUnit	INFERRED	texture unit: bit (1 << unit) of the dirty word ctx+0x314 is set and the binding slot index is unit*5 + target
+local	_gleBindTexture	iVar3	textureObject	CONFIRMED	the texture object bound: default object of the target, or the _gleLookupHashObject result / _gleCreateTextureObject result for a nonzero name
+local	_gleBindTexture	iVar7	textureHashTableThenBindingSlot	INFERRED	first shared state +0x2008 (the texture hash table given to _gleLookupHashObject / _gleAddHashNameAndObject), then the address of the binding slot (unit*5+target)*4 + ctx
+local	_gleBindTexture	iVar5	previousTextureObject	INFERRED	the texture previously in the binding slot; its reference count (+8) is decremented and the object freed at zero
+local	_gleBindTexture	iVar2	previousRefCount	INFERRED	previousTextureObject's reference count after the decrement
+local	_gleBindTexture	uVar1	rendererTextureHandle	INFERRED	per-renderer plugin texture handle copied from textureObject+0x10[i] to the renderer table (stride 0xb8 words)
+local	_gleInitPipelineProgramState	iVar8	programObjectThenSortedOffset	INFERRED	first the pipeline program object from _gleCreatePipelineProgramObject, later the byte offset loopIndex6*4 into the sorted value table
+local	_gleInitPipelineProgramState	iVar16	contextSlotBaseThenSharedRecordCursor	INFERRED	first glContext advanced by 4 per program slot (renderer handles at +0x886c), then sharedState+0x10000 advanced by 0xa30 per record
+local	_gleInitPipelineProgramState	iVar18	contextSlotBaseThenRendererRecordBase	INFERRED	first glContext advanced by 4 per program slot (+0x5420/+0x5428 program pointers), then glContext advanced by 0x10 per record (+0x86a0 renderer value source)
+local	_gleInitPipelineProgramState	uVar4	initialEntryThenRendererValueThenSmallestAbovePrevious	INFERRED	first the initial list entry (0x100, or 0x80 for the second record), then a renderer's 16-bit value read via srcCursor, then the smallest list entry above previousValue (sentinel 0x7ffffff) in the sort loop
+local	_gleCreateDrawArraysOrElementsVertexObject	puVar4	vertexDataStart	INFERRED	param_2 + 0x10, the start of the packed vertex data; stored in the new vertex array object at +0x344
+local	_gleCreateDrawArraysOrElementsVertexObject	puVar6	attribDataCursor	INFERRED	walks the packed data: each present attribute record points at it and it advances by that attribute's byte size
+local	_gleCreateDrawArraysOrElementsVertexObject	uVar7	attribByteSize	INFERRED	byte read from param_2 + 0x20 + index: the attribute's size in bytes (record +0x2a gets size/4)
+local	_gleCreateDrawArraysOrElementsVertexObject	iVar9	pluginVertexArray	INFERRED	vertexArrayObject + 0x10, the plugin vertex array passed to _gleCreatePluginVertexArray / _gleFlushPluginVertexArray
+local	_gleCreateDrawArraysOrElementsVertexObject	iVar1	attribRecord	INFERRED	the 0x18-byte attribute record of this index inside the vertex array object (pointer +0x20, stride/size +0x24, type 0x1406 at +0x28)
+local	_gleCreateDrawArraysOrElementsVertexObject	lVar10	attribBit	INFERRED	64-bit mask 1 << (index + 0x10) from ___ashldi3, OR-ed into the enable words at +0x330/+0x334 and +0x350/+0x354
+local	_gleCreateDrawArraysOrElementsVertexObject	uVar3	attribBitHigh	INFERRED	high 32 bits of attribBit
+local	_glReadPixels_Exec	uVar4	forwardedY	INFERRED	copy of the y parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glReadPixels_Exec	uVar9	forwardedWidth	INFERRED	copy of the width parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glReadPixels_Exec	uVar7	forwardedFormat	INFERRED	copy of the format parameter taken for the _gleUpdateFramebufferCompleteness call (its only use)
+local	_glReadPixels_Exec	iVar6	pixelPackBufferThenFlagCursor	INFERRED	first the bound pixel pack buffer object (glContext+0x4a68), later advanced by 4 over its per-renderer flag words (+0x48)
+local	_glReadPixels_Exec	iVar11	bufferSize	INFERRED	pixel pack buffer object +0x38, the buffer size compared with imageEndOffset
+local	_gleFlushTriQuadStripFunc	sVar1	vertexSizeBytes	INFERRED	ctx+0x487c, the vertex size in bytes (>> 3 = qwords per vertex, as in _gleVPFlushPolygon)
+local	_gleFlushTriQuadStripFunc	iVar2	copyRemaining	INFERRED	qword count of one vertex, decremented as the copy loops run
+local	_gleFlushTriQuadStripFunc	puVar3	srcCursor	INFERRED	walks the last two vertices at the end of the vertex array (ctx+0x4858 - 0x200 / - 0x100)
+local	_gleFlushTriQuadStripFunc	puVar4	dstCursor	INFERRED	walks the local copy arrays
+local	_gleFlushTriQuadStripFunc	uVar5	copyWord	INFERRED	the qword being copied
+local	_gleFlushTriQuadStripFunc	local_210	secondLastVertexCopy	INFERRED	copy of the vertex 0x200 bytes (two vertices) before ctx+0x4858, submitted first with _gleSubmitVertexCopy
+local	_gleFlushTriQuadStripFunc	local_110	lastVertexCopy	INFERRED	copy of the vertex 0x100 bytes before ctx+0x4858, submitted second with _gleSubmitVertexCopy
+local	_gleFlushLineLoopFunc	iVar1	byteOffset	INFERRED	iVar5*8, byte offset of the qword copied
+local	_gleFlushLineLoopFunc	sVar3	vertexSizeBytes	INFERRED	ctx+0x487c, the vertex size in bytes (>> 3 = qwords per vertex)
+local	_gleFlushLineLoopFunc	puVar2	srcCursor	INFERRED	walks the last vertex at the end of the vertex array (ctx+0x4858 - 0x100)
+local	_gleFlushLineLoopFunc	puVar4	dstCursor	INFERRED	walks the local copy lastVertexCopy
+local	_gleFlushLineLoopFunc	iVar5	copyIndexThenRemaining	INFERRED	first the qword index of the first copy loop, later the remaining qword count of the second loop
+local	_gleFlushLineLoopFunc	uVar6	copyWord	INFERRED	the qword being copied
+local	_gleFlushLineLoopFunc	local_110	lastVertexCopy	INFERRED	copy of the vertex 0x100 bytes before ctx+0x4858, submitted with _gleSubmitVertexCopy
+local	_gleVPFlushPolygonTCL	iVar6	vertexQwordCountThenRemaining	INFERRED	(short)ctx+0x487c >> 3, the qwords per vertex, then decremented as the copy loop counter
+local	_gleVPFlushPolygonTCL	uVar1	vertexSizeBytes	INFERRED	vertexQwordCount * 8
+local	_gleVPFlushPolygonTCL	puVar8	vertexFlagBits	INFERRED	ctx+0x30b0, the per-vertex flag bit array (same as vertexFlagBits in _gleVPFlushPolygon)
+local	_gleVPFlushPolygonTCL	iVar7	lastVertex	INFERRED	ctx+0x4858 minus one vertex, the last vertex written
+local	_gleVPFlushPolygonTCL	iVar10	secondVertex	INFERRED	batchStart (ctx+0x4854) plus one vertex, the destination of the saved last vertex
+local	_gleVPFlushPolygonTCL	uVar4	lastVertexIndexThenBitIndex	INFERRED	first the index of the last vertex in the batch, then masked to the bit index inside its flag word
+local	_gleVPFlushPolygonTCL	uVar3	flagWordOffset	INFERRED	byte offset of the flag word that holds the last vertex's bit
+local	_gleVPFlushPolygonTCL	uVar9	oldFlagWord	INFERRED	the flag word before the last vertex's bit is cleared
+local	_gleVPFlushPolygonTCL	iVar5	copyIndex	INFERRED	qword index of the copy loop
+local	_gleVPFlushPolygonTCL	iVar2	byteOffset	INFERRED	copyIndex*8
+local	_gleVPFlushLineLoopTCL	iVar6	batchStart	INFERRED	ctx+0x4854, the start of the vertex batch
+local	_gleVPFlushLineLoopTCL	iVar3	vertexQwordCountThenRemaining	INFERRED	(short)ctx+0x487c >> 3, the qwords per vertex, then the remaining count of the copy loop
+local	_gleVPFlushLineLoopTCL	iVar7	remainingThenVertexSizeBytes	INFERRED	first the remaining count of the first copy loop, later vertexQwordCount*8
+local	_gleVPFlushLineLoopTCL	iVar4	copyIndexThenNegativeVertexBytes	INFERRED	first the copy index of the first loop, later -vertexQwordCount*8 (offset back to the last vertex)
+local	_gleVPFlushLineLoopTCL	iVar5	byteOffsetThenCopyIndex	INFERRED	first the byte offset of the first loop's qword, later the copy index of the second loop
+local	_gleVPFlushLineLoopTCL	iVar2	vertexWritePtr	INFERRED	ctx+0x4858, the end of the written vertices
+local	_gleVPFlushLineLoopTCL	iVar1	byteOffset	INFERRED	copyIndex*8 of the second loop
+local	_gleVtxTextureCoordGenObjectSlow	param_1	glContext	INFERRED	every use is a glContext field offset (object plane coefficients at +0x3cfc.., enable bytes +0x3d78.., dirty word +0x486c); the sibling _gleVtxTextureCoordGenEyeSlow is called from the same dispatch with glContext
+local	_gleVtxTextureCoordGenObjectSlow	uVar6	vertexEndThenRemaining	INFERRED	first vertexStart + vertexCount*0x100 (end of the batch), in the last (Q) coordinate block reused as the remaining vertex count
+local	_glPointParameterivARB_Exec	bVar1	glContextWord5434IsZero	INFERRED	ctx+0x5434 == 0 selects which state record (ctx+0x5420 or ctx+0x5430+0x20) supplies the dirty bit byte; also reused as the "value in {0x2000,0x2002,0}" test result of the 0x8863 case
+local	_glPointParameterivARB_Exec	bVar2	dirtyBitNumber	INFERRED	every use is (bit >> 3 & 0x1c) word offset and (bit & 0x1f) bit into the dirty bit arrays at glContext+0x324 / +0x348
+local	_glPointParameterivARB_Exec	uVar4	paramValue	CONFIRMED	*params for pname 0x8863 (point sprite coord origin value 0x2000/0x2002 or 0) validated before it is stored at ctx+0x3440
+local	_glPointParameterivARB_Exec	iVar6	dirtyWordBase324	INFERRED	glContext plus the word offset used for the dirty bit array at +0x324
+local	_glPointParameterivARB_Exec	iVar5	glContextPtr5424ThenDirtyWordBase348	INFERRED	first *(ctx+0x5424) (the record whose +0x325/+0x326 byte is the second dirty bit), then glContext plus the word offset for the dirty bit array at +0x348
+local	_glGetLightfv_Exec	iVar2	lightRecordBase	CONFIRMED	glContext + (light - 0x4000) * 0x80, the per-light parameter record: ambient/diffuse/specular/position/direction/spot/attenuation fields are read at fixed offsets from it (+0x2820 ambient ... +0x2890)
+local	_glGetLightfv_Exec	uVar1	lightValue	INFERRED	the fourth component / the single float value that is stored to params[3] / params[0] for the queried pname
+local	_glGetMaterialfv_Exec	iVar4	faceIndexThenMaterialSlotBase	INFERRED	first the face index (0 for GL_FRONT 0x404 ..., scaled by 4 into the current-material pointer table at ctx+0x4dd0, or by 0x10 for the colour-index copy at ctx+0x2f0), then reassigned to the scaled address glContext + index*4 (or *0x10) that the field reads go through
+local	_glGetMaterialfv_Exec	fVar1	materialFourthComponent	INFERRED	the w/alpha float (+0xc/+0x2c/+0x3c of the material record) stored to params[3] after the first three components

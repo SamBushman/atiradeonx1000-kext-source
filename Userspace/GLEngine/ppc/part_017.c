@@ -2339,8 +2339,8 @@ void _glGetLightfv_Exec(glContext, light, pname, params)
   undefined4 *params;
 {
   undefined4 glErrorCode;
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 lightValue;
+  int lightRecordBase;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -2359,58 +2359,58 @@ LAB_0006c7f0:
     *(undefined4 *)(glContext + 0x7574) = glErrorCode;
     return;
   }
-  iVar2 = glContext + (light - 0x4000U) * 0x80;
+  lightRecordBase = glContext + (light - 0x4000U) * 0x80;
   switch(pname) {
   case 0x1200:
-    *params = *(undefined4 *)(iVar2 + 0x2820);
-    params[1] = *(undefined4 *)(iVar2 + 0x2824);
-    params[2] = *(undefined4 *)(iVar2 + 0x2828);
-    uVar1 = *(undefined4 *)(iVar2 + 0x282c);
+    *params = *(undefined4 *)(lightRecordBase + 0x2820);
+    params[1] = *(undefined4 *)(lightRecordBase + 0x2824);
+    params[2] = *(undefined4 *)(lightRecordBase + 0x2828);
+    lightValue = *(undefined4 *)(lightRecordBase + 0x282c);
     goto LAB_0006c890;
   case 0x1201:
-    *params = *(undefined4 *)(iVar2 + 0x2830);
-    params[1] = *(undefined4 *)(iVar2 + 0x2834);
-    params[2] = *(undefined4 *)(iVar2 + 0x2838);
-    uVar1 = *(undefined4 *)(iVar2 + 0x283c);
+    *params = *(undefined4 *)(lightRecordBase + 0x2830);
+    params[1] = *(undefined4 *)(lightRecordBase + 0x2834);
+    params[2] = *(undefined4 *)(lightRecordBase + 0x2838);
+    lightValue = *(undefined4 *)(lightRecordBase + 0x283c);
     goto LAB_0006c890;
   case 0x1202:
-    *params = *(undefined4 *)(iVar2 + 0x2840);
-    params[1] = *(undefined4 *)(iVar2 + 0x2844);
-    params[2] = *(undefined4 *)(iVar2 + 0x2848);
-    uVar1 = *(undefined4 *)(iVar2 + 0x284c);
+    *params = *(undefined4 *)(lightRecordBase + 0x2840);
+    params[1] = *(undefined4 *)(lightRecordBase + 0x2844);
+    params[2] = *(undefined4 *)(lightRecordBase + 0x2848);
+    lightValue = *(undefined4 *)(lightRecordBase + 0x284c);
     goto LAB_0006c890;
   case 0x1203:
-    *params = *(undefined4 *)(iVar2 + 0x2850);
-    params[1] = *(undefined4 *)(iVar2 + 0x2854);
-    params[2] = *(undefined4 *)(iVar2 + 0x2858);
-    uVar1 = *(undefined4 *)(iVar2 + 0x285c);
+    *params = *(undefined4 *)(lightRecordBase + 0x2850);
+    params[1] = *(undefined4 *)(lightRecordBase + 0x2854);
+    params[2] = *(undefined4 *)(lightRecordBase + 0x2858);
+    lightValue = *(undefined4 *)(lightRecordBase + 0x285c);
 LAB_0006c890:
-    params[3] = uVar1;
+    params[3] = lightValue;
     return;
   case 0x1204:
-    *params = *(undefined4 *)(iVar2 + 0x2860);
-    params[1] = *(undefined4 *)(iVar2 + 0x2864);
-    params[2] = *(undefined4 *)(iVar2 + 0x2868);
+    *params = *(undefined4 *)(lightRecordBase + 0x2860);
+    params[1] = *(undefined4 *)(lightRecordBase + 0x2864);
+    params[2] = *(undefined4 *)(lightRecordBase + 0x2868);
     return;
   case 0x1205:
-    uVar1 = *(undefined4 *)(iVar2 + 0x287c);
+    lightValue = *(undefined4 *)(lightRecordBase + 0x287c);
     break;
   case 0x1206:
-    uVar1 = *(undefined4 *)(iVar2 + 0x2890);
+    lightValue = *(undefined4 *)(lightRecordBase + 0x2890);
     break;
   case 0x1207:
-    uVar1 = *(undefined4 *)(iVar2 + 0x2870);
+    lightValue = *(undefined4 *)(lightRecordBase + 0x2870);
     break;
   case 0x1208:
-    uVar1 = *(undefined4 *)(iVar2 + 0x2874);
+    lightValue = *(undefined4 *)(lightRecordBase + 0x2874);
     break;
   case 0x1209:
-    uVar1 = *(undefined4 *)(iVar2 + 0x2878);
+    lightValue = *(undefined4 *)(lightRecordBase + 0x2878);
     break;
   default:
     goto switchD_0006c828_default;
   }
-  *params = uVar1;
+  *params = lightValue;
   return;
 }
 

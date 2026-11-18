@@ -3479,10 +3479,10 @@ void _glGetMaterialfv_Exec(glContext, face, pname, params)
   undefined *pname;
   float *params;
 {
-  float fVar1;
+  float materialFourthComponent;
   double channelScale;
   undefined4 glErrorCode;
-  int iVar4;
+  int faceIndexThenMaterialSlotBase;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -3496,62 +3496,62 @@ void _glGetMaterialfv_Exec(glContext, face, pname, params)
   }
   channelScale = DOUBLE_00108d98;
   if (face == 0x404) {
-    iVar4 = 0;
+    faceIndexThenMaterialSlotBase = 0;
 LAB_00076ef4:
     if (pname == ((unsigned char *)0x00001202)) {
-      iVar4 = iVar4 * 4 + glContext;
-      *params = *(float *)(*(int *)(iVar4 + 0x4dd0) + 0x20);
-      params[1] = *(float *)(*(int *)(iVar4 + 0x4dd0) + 0x24);
-      params[2] = *(float *)(*(int *)(iVar4 + 0x4dd0) + 0x28);
-      fVar1 = *(float *)(*(int *)(iVar4 + 0x4dd0) + 0x2c);
+      faceIndexThenMaterialSlotBase = faceIndexThenMaterialSlotBase * 4 + glContext;
+      *params = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 0x20);
+      params[1] = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 0x24);
+      params[2] = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 0x28);
+      materialFourthComponent = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 0x2c);
       goto LAB_0007701c;
     }
     if (((unsigned char *)0x00001202) < pname) {
       if (pname == (undefined *)0x1601) {
-        *params = *(float *)(*(int *)(iVar4 * 4 + glContext + 0x4dd0) + 0x40);
+        *params = *(float *)(*(int *)(faceIndexThenMaterialSlotBase * 4 + glContext + 0x4dd0) + 0x40);
         return;
       }
       if (pname < (undefined *)0x1602) {
         if (pname == (undefined *)0x1600) {
-          iVar4 = iVar4 * 4 + glContext;
-          *params = *(float *)(*(int *)(iVar4 + 0x4dd0) + 0x30);
-          params[1] = *(float *)(*(int *)(iVar4 + 0x4dd0) + 0x34);
-          params[2] = *(float *)(*(int *)(iVar4 + 0x4dd0) + 0x38);
-          fVar1 = *(float *)(*(int *)(iVar4 + 0x4dd0) + 0x3c);
+          faceIndexThenMaterialSlotBase = faceIndexThenMaterialSlotBase * 4 + glContext;
+          *params = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 0x30);
+          params[1] = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 0x34);
+          params[2] = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 0x38);
+          materialFourthComponent = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 0x3c);
           goto LAB_0007701c;
         }
       }
       else if (pname == (undefined *)0x1603) {
-        iVar4 = iVar4 * 0x10 + glContext;
-        *params = (float)((double)*(float *)(iVar4 + 0x2f0) * DOUBLE_00108d98);
-        params[1] = (float)((double)*(float *)(iVar4 + 0x2f4) * channelScale);
-        params[2] = (float)((double)*(float *)(iVar4 + 0x2f8) * channelScale);
+        faceIndexThenMaterialSlotBase = faceIndexThenMaterialSlotBase * 0x10 + glContext;
+        *params = (float)((double)*(float *)(faceIndexThenMaterialSlotBase + 0x2f0) * DOUBLE_00108d98);
+        params[1] = (float)((double)*(float *)(faceIndexThenMaterialSlotBase + 0x2f4) * channelScale);
+        params[2] = (float)((double)*(float *)(faceIndexThenMaterialSlotBase + 0x2f8) * channelScale);
         return;
       }
     }
     else {
       if (pname == ((unsigned char *)0x00001200)) {
-        iVar4 = iVar4 * 4 + glContext;
-        *params = **(float **)(iVar4 + 0x4dd0);
-        params[1] = *(float *)(*(int *)(iVar4 + 0x4dd0) + 4);
-        params[2] = *(float *)(*(int *)(iVar4 + 0x4dd0) + 8);
-        fVar1 = *(float *)(*(int *)(iVar4 + 0x4dd0) + 0xc);
+        faceIndexThenMaterialSlotBase = faceIndexThenMaterialSlotBase * 4 + glContext;
+        *params = **(float **)(faceIndexThenMaterialSlotBase + 0x4dd0);
+        params[1] = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 4);
+        params[2] = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 8);
+        materialFourthComponent = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 0xc);
 LAB_0007701c:
-        params[3] = fVar1;
+        params[3] = materialFourthComponent;
         return;
       }
       if (pname == ((unsigned char *)0x00001201)) {
-        iVar4 = iVar4 * 4 + glContext;
-        *params = *(float *)(*(int *)(iVar4 + 0x4dd0) + 0x10);
-        params[1] = *(float *)(*(int *)(iVar4 + 0x4dd0) + 0x14);
-        params[2] = *(float *)(*(int *)(iVar4 + 0x4dd0) + 0x18);
-        fVar1 = *(float *)(*(int *)(iVar4 + 0x4dd0) + 0x1c);
+        faceIndexThenMaterialSlotBase = faceIndexThenMaterialSlotBase * 4 + glContext;
+        *params = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 0x10);
+        params[1] = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 0x14);
+        params[2] = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 0x18);
+        materialFourthComponent = *(float *)(*(int *)(faceIndexThenMaterialSlotBase + 0x4dd0) + 0x1c);
         goto LAB_0007701c;
       }
     }
   }
   else if (face == 0x405) {
-    iVar4 = 1;
+    faceIndexThenMaterialSlotBase = 1;
     goto LAB_00076ef4;
   }
   if (*(int *)(glContext + 0x7574) != 0) {

@@ -5338,44 +5338,44 @@ void _gleFlushAtomicTCLRDirtyFunc(int glContext,double floatArg1,double floatArg
 void _gleFlushLineLoopFunc(glContext)
   int glContext;
 {
-  int iVar1;
-  short sVar3;
-  undefined8 *puVar2;
-  undefined8 *puVar4;
-  int iVar5;
-  undefined8 uVar6;
-  undefined8 local_110 [33];
+  int byteOffset;
+  short vertexSizeBytes;
+  undefined8 *srcCursor;
+  undefined8 *dstCursor;
+  int copyIndexThenRemaining;
+  undefined8 copyWord;
+  undefined8 lastVertexCopy [33];
   
   if (*(char *)(glContext + 0x4a18) == '\0') {
-    sVar3 = *(short *)(glContext + 0x487c);
-    iVar5 = 0;
-    if ((int)sVar3 >> 3 < 1) goto LAB_000f291c;
+    vertexSizeBytes = *(short *)(glContext + 0x487c);
+    copyIndexThenRemaining = 0;
+    if ((int)vertexSizeBytes >> 3 < 1) goto LAB_000f291c;
     do {
-      iVar1 = iVar5 * 8;
-      iVar5 = iVar5 + 1;
-      *(undefined8 *)(iVar1 + *(int *)(glContext + 0x4854) + -0x100) =
-           *(undefined8 *)(iVar1 + *(int *)(glContext + 0x4854));
-    } while (iVar5 < (int)sVar3 >> 3);
+      byteOffset = copyIndexThenRemaining * 8;
+      copyIndexThenRemaining = copyIndexThenRemaining + 1;
+      *(undefined8 *)(byteOffset + *(int *)(glContext + 0x4854) + -0x100) =
+           *(undefined8 *)(byteOffset + *(int *)(glContext + 0x4854));
+    } while (copyIndexThenRemaining < (int)vertexSizeBytes >> 3);
   }
-  sVar3 = *(short *)(glContext + 0x487c);
+  vertexSizeBytes = *(short *)(glContext + 0x487c);
 LAB_000f291c:
-  iVar5 = (int)sVar3 >> 3;
-  if (0 < iVar5) {
-    puVar4 = local_110;
-    puVar2 = (undefined8 *)(*(int *)(glContext + 0x4858) + -0x100);
+  copyIndexThenRemaining = (int)vertexSizeBytes >> 3;
+  if (0 < copyIndexThenRemaining) {
+    dstCursor = lastVertexCopy;
+    srcCursor = (undefined8 *)(*(int *)(glContext + 0x4858) + -0x100);
     do {
-      uVar6 = *puVar2;
-      puVar2 = puVar2 + 1;
-      *puVar4 = uVar6;
-      puVar4 = puVar4 + 1;
-      iVar5 = iVar5 + -1;
-    } while (iVar5 != 0);
+      copyWord = *srcCursor;
+      srcCursor = srcCursor + 1;
+      *dstCursor = copyWord;
+      dstCursor = dstCursor + 1;
+      copyIndexThenRemaining = copyIndexThenRemaining + -1;
+    } while (copyIndexThenRemaining != 0);
   }
   (**(code **)(glContext + 0x4a08))(glContext);
   *(undefined1 *)(glContext + 0x4a18) = 1;
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   _glePopMaterials(glContext);
-  _gleSubmitVertexCopy(glContext,local_110);
+  _gleSubmitVertexCopy(glContext,lastVertexCopy);
   return;
 }
 
@@ -5565,44 +5565,44 @@ void _gleFlushLineStripTCLRDirtyFunc(int glContext,double floatArg1,double float
 void _gleFlushTriQuadStripFunc(glContext)
   int glContext;
 {
-  short sVar1;
-  int iVar2;
-  undefined8 *puVar3;
-  undefined8 *puVar4;
-  undefined8 uVar5;
-  undefined8 local_210 [32];
-  undefined8 local_110 [33];
+  short vertexSizeBytes;
+  int copyRemaining;
+  undefined8 *srcCursor;
+  undefined8 *dstCursor;
+  undefined8 copyWord;
+  undefined8 secondLastVertexCopy [32];
+  undefined8 lastVertexCopy [33];
   
-  sVar1 = *(short *)(glContext + 0x487c);
-  iVar2 = (int)sVar1 >> 3;
-  if (0 < iVar2) {
-    puVar4 = local_210;
-    puVar3 = (undefined8 *)(*(int *)(glContext + 0x4858) + -0x200);
+  vertexSizeBytes = *(short *)(glContext + 0x487c);
+  copyRemaining = (int)vertexSizeBytes >> 3;
+  if (0 < copyRemaining) {
+    dstCursor = secondLastVertexCopy;
+    srcCursor = (undefined8 *)(*(int *)(glContext + 0x4858) + -0x200);
     do {
-      uVar5 = *puVar3;
-      puVar3 = puVar3 + 1;
-      *puVar4 = uVar5;
-      puVar4 = puVar4 + 1;
-      iVar2 = iVar2 + -1;
-    } while (iVar2 != 0);
+      copyWord = *srcCursor;
+      srcCursor = srcCursor + 1;
+      *dstCursor = copyWord;
+      dstCursor = dstCursor + 1;
+      copyRemaining = copyRemaining + -1;
+    } while (copyRemaining != 0);
   }
-  iVar2 = (int)sVar1 >> 3;
-  if (0 < iVar2) {
-    puVar4 = local_110;
-    puVar3 = (undefined8 *)(*(int *)(glContext + 0x4858) + -0x100);
+  copyRemaining = (int)vertexSizeBytes >> 3;
+  if (0 < copyRemaining) {
+    dstCursor = lastVertexCopy;
+    srcCursor = (undefined8 *)(*(int *)(glContext + 0x4858) + -0x100);
     do {
-      uVar5 = *puVar3;
-      puVar3 = puVar3 + 1;
-      *puVar4 = uVar5;
-      puVar4 = puVar4 + 1;
-      iVar2 = iVar2 + -1;
-    } while (iVar2 != 0);
+      copyWord = *srcCursor;
+      srcCursor = srcCursor + 1;
+      *dstCursor = copyWord;
+      dstCursor = dstCursor + 1;
+      copyRemaining = copyRemaining + -1;
+    } while (copyRemaining != 0);
   }
   (**(code **)(glContext + 0x4a08))(glContext);
   *(undefined4 *)(glContext + 0x4858) = *(undefined4 *)(glContext + 0x4854);
   _glePopMaterials(glContext);
-  _gleSubmitVertexCopy(glContext,local_210);
-  _gleSubmitVertexCopy(glContext,local_110);
+  _gleSubmitVertexCopy(glContext,secondLastVertexCopy);
+  _gleSubmitVertexCopy(glContext,lastVertexCopy);
   return;
 }
 

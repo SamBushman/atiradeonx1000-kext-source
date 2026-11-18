@@ -5126,41 +5126,41 @@ double _gleCreateDrawArraysOrElementsVertexObject(glContext, param_2)
   undefined4 glContext;
   uint *param_2;
 {
-  int iVar1;
+  int attribRecord;
   uint vertexArrayObject;
-  uint uVar3;
-  uint *puVar4;
+  uint attribBitHigh;
+  uint *vertexDataStart;
   uint uVar5;
-  uint *puVar6;
-  uint uVar7;
+  uint *attribDataCursor;
+  uint attribByteSize;
   int loopIndex;
-  int iVar9;
-  longlong lVar10;
+  int pluginVertexArray;
+  longlong attribBit;
   
   vertexArrayObject = _gleCreateVertexArrayObject(glContext,0xffffffff);
-  iVar9 = vertexArrayObject + 0x10;
+  pluginVertexArray = vertexArrayObject + 0x10;
   param_2[1] = vertexArrayObject;
   *(undefined2 *)(vertexArrayObject + 0x342) = 0x85be;
-  _gleCreatePluginVertexArray(glContext,iVar9);
-  puVar4 = param_2 + 0x10;
+  _gleCreatePluginVertexArray(glContext,pluginVertexArray);
+  vertexDataStart = param_2 + 0x10;
   uVar5 = param_2[7];
   loopIndex = 1;
-  puVar6 = puVar4;
+  attribDataCursor = vertexDataStart;
   while( true ) {
-    uVar7 = (uint)*(byte *)((int)param_2 + loopIndex + 0x20);
-    if (uVar7 != 0) {
-      lVar10 = ___ashldi3(0,1,loopIndex + 0x10);
-      uVar3 = (uint)((ulonglong)lVar10 >> 0x20);
-      iVar1 = loopIndex * 0x18 + iVar9;
-      *(uint **)(iVar1 + 0x20) = puVar6;
-      *(short *)(iVar1 + 0x2a) = (short)((int)uVar7 >> 2);
-      puVar6 = (uint *)((int)puVar6 + uVar7);
-      *(undefined2 *)(iVar1 + 0x28) = 0x1406;
-      *(uint *)(iVar1 + 0x24) = uVar5;
-      *(uint *)(vertexArrayObject + 0x330) = *(uint *)(vertexArrayObject + 0x330) | uVar3;
-      *(uint *)(vertexArrayObject + 0x334) = *(uint *)(vertexArrayObject + 0x334) | (uint)lVar10;
-      *(uint *)(vertexArrayObject + 0x350) = *(uint *)(vertexArrayObject + 0x350) | uVar3;
-      *(uint *)(vertexArrayObject + 0x354) = *(uint *)(vertexArrayObject + 0x354) | (uint)lVar10;
+    attribByteSize = (uint)*(byte *)((int)param_2 + loopIndex + 0x20);
+    if (attribByteSize != 0) {
+      attribBit = ___ashldi3(0,1,loopIndex + 0x10);
+      attribBitHigh = (uint)((ulonglong)attribBit >> 0x20);
+      attribRecord = loopIndex * 0x18 + pluginVertexArray;
+      *(uint **)(attribRecord + 0x20) = attribDataCursor;
+      *(short *)(attribRecord + 0x2a) = (short)((int)attribByteSize >> 2);
+      attribDataCursor = (uint *)((int)attribDataCursor + attribByteSize);
+      *(undefined2 *)(attribRecord + 0x28) = 0x1406;
+      *(uint *)(attribRecord + 0x24) = uVar5;
+      *(uint *)(vertexArrayObject + 0x330) = *(uint *)(vertexArrayObject + 0x330) | attribBitHigh;
+      *(uint *)(vertexArrayObject + 0x334) = *(uint *)(vertexArrayObject + 0x334) | (uint)attribBit;
+      *(uint *)(vertexArrayObject + 0x350) = *(uint *)(vertexArrayObject + 0x350) | attribBitHigh;
+      *(uint *)(vertexArrayObject + 0x354) = *(uint *)(vertexArrayObject + 0x354) | (uint)attribBit;
     }
     if (loopIndex == 0) break;
     if (loopIndex < 0x1f) {
@@ -5173,10 +5173,10 @@ double _gleCreateDrawArraysOrElementsVertexObject(glContext, param_2)
   uVar5 = param_2[2];
   *param_2 = *param_2 | 1;
   *(uint *)(vertexArrayObject + 0x348) = uVar5;
-  *(uint **)(vertexArrayObject + 0x344) = puVar4;
+  *(uint **)(vertexArrayObject + 0x344) = vertexDataStart;
   *(undefined4 *)(vertexArrayObject + 0x350) = *(undefined4 *)(vertexArrayObject + 0x350);
   *(uint *)(vertexArrayObject + 0x354) = *(uint *)(vertexArrayObject + 0x354) | 3;
-  ((void (*)())_gleFlushPluginVertexArray)(glContext,iVar9,uVar5,puVar4);
+  ((void (*)())_gleFlushPluginVertexArray)(glContext,pluginVertexArray,uVar5,vertexDataStart);
   return;
 }
 
