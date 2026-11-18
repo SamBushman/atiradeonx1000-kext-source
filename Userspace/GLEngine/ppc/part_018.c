@@ -1,46 +1,46 @@
 #include "decls.h"
 
 /* _glLightModelfv_Comp @ 0x6cee0 (188 bytes) */
-int _glLightModelfv_Comp(param_1, param_2, param_3)
-  undefined4 param_1;
-  uint param_2;
-  uint *param_3;
+int _glLightModelfv_Comp(glContext, pname, params)
+  undefined4 glContext;
+  uint pname;
+  uint *params;
 {
-  uint *puVar1;
+  uint *listRecord;
   
-  puVar1 = (uint *)_gleAddListItem(param_1,PTR__glLightModelfv_ListExec_00110150,0x14);
-  if (puVar1 != (uint *)0x0) {
-    *puVar1 = param_2;
-    if (param_2 == 0xb53) {
-      puVar1[1] = *param_3;
-      puVar1[2] = param_3[1];
-      puVar1[3] = param_3[2];
-      puVar1[4] = param_3[3];
+  listRecord = (uint *)_gleAddListItem(glContext,PTR__glLightModelfv_ListExec_00110150,0x14);
+  if (listRecord != (uint *)0x0) {
+    *listRecord = pname;
+    if (pname == 0xb53) {
+      listRecord[1] = *params;
+      listRecord[2] = params[1];
+      listRecord[3] = params[2];
+      listRecord[4] = params[3];
     }
     else {
-      if (param_2 < 0xb54) {
-        if (param_2 < 0xb51) {
-          return puVar1;
+      if (pname < 0xb54) {
+        if (pname < 0xb51) {
+          return listRecord;
         }
       }
-      else if ((param_2 != 0x81f8) && (param_2 != 0x85b0)) {
-        return puVar1;
+      else if ((pname != 0x81f8) && (pname != 0x85b0)) {
+        return listRecord;
       }
-      puVar1[1] = *param_3;
+      listRecord[1] = *params;
     }
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glLightModelfv_Exec @ 0x6cf9c (696 bytes) */
-void _glLightModelfv_Exec(glContext, param_2, param_3)
+void _glLightModelfv_Exec(glContext, pname, params)
   int glContext;
-  uint param_2;
-  float *param_3;
+  uint pname;
+  float *params;
 {
   byte bVar1;
   float fVar2;
-  undefined4 uVar3;
+  undefined4 glErrorCode;
   uint uVar4;
   undefined2 uVar5;
   int iVar6;
@@ -48,11 +48,11 @@ void _glLightModelfv_Exec(glContext, param_2, param_3)
   float dVar8;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (param_2 == 0xb53) {
-      *(float *)(glContext + 0x2810) = *param_3;
-      *(float *)(glContext + 0x2814) = param_3[1];
-      *(float *)(glContext + 0x2818) = param_3[2];
-      *(float *)(glContext + 0x281c) = param_3[3];
+    if (pname == 0xb53) {
+      *(float *)(glContext + 0x2810) = *params;
+      *(float *)(glContext + 0x2814) = params[1];
+      *(float *)(glContext + 0x2818) = params[2];
+      *(float *)(glContext + 0x281c) = params[3];
       *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) =
            *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) | 0x1e;
       *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) =
@@ -70,20 +70,20 @@ void _glLightModelfv_Exec(glContext, param_2, param_3)
       iVar6 = (bVar1 >> 3 & 0x1c) + glContext;
       *(uint *)(iVar6 + 0x348) = *(uint *)(iVar6 + 0x348) | 1 << (bVar1 & 0x1f);
     }
-    else if (param_2 < 0xb54) {
-      if (param_2 == 0xb51) {
-        *(bool *)(glContext + 0x30ad) = *param_3 != FLOAT_00108e50;
+    else if (pname < 0xb54) {
+      if (pname == 0xb51) {
+        *(bool *)(glContext + 0x30ad) = *params != FLOAT_00108e50;
       }
       else {
-        if (param_2 != 0xb52) goto LAB_0006d214;
-        *(bool *)(glContext + 0x30ac) = *param_3 != FLOAT_00108e50;
+        if (pname != 0xb52) goto LAB_0006d214;
+        *(bool *)(glContext + 0x30ac) = *params != FLOAT_00108e50;
         _gleUpdatePolyMode(glContext);
         _gleSelectVertexSubmitFunc(glContext);
         _gleSelectVertexAddMaterialFunc(glContext);
       }
     }
-    else if (param_2 == 0x81f8) {
-      fVar2 = *param_3;
+    else if (pname == 0x81f8) {
+      fVar2 = *params;
       dVar8 = (double)fVar2;
       if (DOUBLE_00108d80 <= (double)dVar8) {
         uVar4 = (int)((double)dVar8 - DOUBLE_00108d80) ^ 0x80000000;
@@ -105,15 +105,15 @@ void _glLightModelfv_Exec(glContext, param_2, param_3)
       }
     }
     else {
-      if (param_2 != 0x85b0) {
+      if (pname != 0x85b0) {
 LAB_0006d214:
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
-        uVar3 = 0x500;
+        glErrorCode = 0x500;
         goto LAB_0006d224;
       }
-      *(bool *)(glContext + 0x30ae) = *param_3 != FLOAT_00108e50;
+      *(bool *)(glContext + 0x30ae) = *params != FLOAT_00108e50;
     }
     _gleUpdateLightModel(glContext);
     *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 1;
@@ -122,124 +122,124 @@ LAB_0006d214:
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar3 = 0x502;
+    glErrorCode = 0x502;
 LAB_0006d224:
-    *(undefined4 *)(glContext + 0x7574) = uVar3;
+    *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   }
   return;
 }
 
 /* _glLightModelfv_CompExec @ 0x6d254 (64 bytes) */
-void _glLightModelfv_CompExec(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+void _glLightModelfv_CompExec(glContext, pname, params)
+  undefined4 glContext;
+  undefined4 pname;
+  undefined4 params;
 {
-  ((int (*)())_glLightModelfv_Comp)(param_1,param_2,param_3);
-  ((void (*)())_glLightModelfv_Exec)(param_1,param_2,param_3);
+  ((int (*)())_glLightModelfv_Comp)(glContext,pname,params);
+  ((void (*)())_glLightModelfv_Exec)(glContext,pname,params);
   return;
 }
 
 /* _glLightModeli_ListExec @ 0x6d294 (44 bytes) */
-int _glLightModeli_ListExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _glLightModeli_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  undefined4 *listRecord;
 {
-  _glLightModeli_Exec(param_1,*param_2,param_2[1]);
+  _glLightModeli_Exec(glContext,*listRecord,listRecord[1]);
   return 8;
 }
 
 /* _glLightModeli_Comp @ 0x6d2c0 (84 bytes) */
-int _glLightModeli_Comp(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int _glLightModeli_Comp(glContext, pname, param)
+  undefined4 glContext;
+  undefined4 pname;
+  undefined4 param;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)_gleAddListItem(param_1,PTR__glLightModeli_ListExec_0011014c,8);
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[1] = param_3;
-    *puVar1 = param_2;
+  listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glLightModeli_ListExec_0011014c,8);
+  if (listRecord != (undefined4 *)0x0) {
+    listRecord[1] = param;
+    *listRecord = pname;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glLightModeli_CompExec @ 0x6d314 (64 bytes) */
-void _glLightModeli_CompExec(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+void _glLightModeli_CompExec(glContext, pname, param)
+  undefined4 glContext;
+  undefined4 pname;
+  undefined4 param;
 {
-  ((int (*)())_glLightModeli_Comp)(param_1,param_2,param_3);
-  _glLightModeli_Exec(param_1,param_2,param_3);
+  ((int (*)())_glLightModeli_Comp)(glContext,pname,param);
+  _glLightModeli_Exec(glContext,pname,param);
   return;
 }
 
 /* _glLightModeliv_ListExec @ 0x6d354 (48 bytes) */
-int _glLightModeliv_ListExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _glLightModeliv_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  undefined4 *listRecord;
 {
-  ((void (*)())_glLightModeliv_Exec)(param_1,*param_2,param_2 + 1);
+  ((void (*)())_glLightModeliv_Exec)(glContext,*listRecord,listRecord + 1);
   return 0x14;
 }
 
 /* _glLightModeliv_Comp @ 0x6d384 (188 bytes) */
-int _glLightModeliv_Comp(param_1, param_2, param_3)
-  undefined4 param_1;
-  uint param_2;
-  uint *param_3;
+int _glLightModeliv_Comp(glContext, pname, params)
+  undefined4 glContext;
+  uint pname;
+  uint *params;
 {
-  uint *puVar1;
+  uint *listRecord;
   
-  puVar1 = (uint *)_gleAddListItem(param_1,PTR__glLightModeliv_ListExec_00110148,0x14);
-  if (puVar1 != (uint *)0x0) {
-    *puVar1 = param_2;
-    if (param_2 == 0xb53) {
-      puVar1[1] = *param_3;
-      puVar1[2] = param_3[1];
-      puVar1[3] = param_3[2];
-      puVar1[4] = param_3[3];
+  listRecord = (uint *)_gleAddListItem(glContext,PTR__glLightModeliv_ListExec_00110148,0x14);
+  if (listRecord != (uint *)0x0) {
+    *listRecord = pname;
+    if (pname == 0xb53) {
+      listRecord[1] = *params;
+      listRecord[2] = params[1];
+      listRecord[3] = params[2];
+      listRecord[4] = params[3];
     }
     else {
-      if (param_2 < 0xb54) {
-        if (param_2 < 0xb51) {
-          return puVar1;
+      if (pname < 0xb54) {
+        if (pname < 0xb51) {
+          return listRecord;
         }
       }
-      else if ((param_2 != 0x81f8) && (param_2 != 0x85b0)) {
-        return puVar1;
+      else if ((pname != 0x81f8) && (pname != 0x85b0)) {
+        return listRecord;
       }
-      puVar1[1] = *param_3;
+      listRecord[1] = *params;
     }
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glLightModeliv_Exec @ 0x6d440 (656 bytes) */
-void _glLightModeliv_Exec(glContext, param_2, param_3)
+void _glLightModeliv_Exec(glContext, pname, params)
   int glContext;
-  uint param_2;
-  uint *param_3;
+  uint pname;
+  uint *params;
 {
   byte bVar1;
   double dVar2;
-  undefined4 uVar3;
+  undefined4 glErrorCode;
   int iVar4;
   int iVar5;
   
   dVar2 = DOUBLE_00108d58;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (param_2 == 0xb53) {
+    if (pname == 0xb53) {
       *(float *)(glContext + 0x2810) =
-           (float)((double)CONCAT44(0x43300000,*param_3 ^ 0x80000000) - DOUBLE_00108d58);
+           (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
       *(float *)(glContext + 0x2814) =
-           (float)((double)CONCAT44(0x43300000,param_3[1] ^ 0x80000000) - dVar2);
+           (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - dVar2);
       *(float *)(glContext + 0x2818) =
-           (float)((double)CONCAT44(0x43300000,param_3[2] ^ 0x80000000) - dVar2);
+           (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - dVar2);
       *(float *)(glContext + 0x281c) =
-           (float)((double)CONCAT44(0x43300000,param_3[3] ^ 0x80000000) - dVar2);
+           (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - dVar2);
       *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) =
            *(byte *)(*(int *)(glContext + 0x4dd0) + 0x234) | 0x1e;
       *(byte *)(*(int *)(glContext + 0x4dd4) + 0x234) =
@@ -257,36 +257,36 @@ void _glLightModeliv_Exec(glContext, param_2, param_3)
       iVar4 = (bVar1 >> 3 & 0x1c) + glContext;
       *(uint *)(iVar4 + 0x348) = *(uint *)(iVar4 + 0x348) | 1 << (bVar1 & 0x1f);
     }
-    else if (param_2 < 0xb54) {
-      if (param_2 == 0xb51) {
-        *(bool *)(glContext + 0x30ad) = *param_3 != 0;
+    else if (pname < 0xb54) {
+      if (pname == 0xb51) {
+        *(bool *)(glContext + 0x30ad) = *params != 0;
       }
       else {
-        if (param_2 != 0xb52) goto LAB_0006d690;
-        *(bool *)(glContext + 0x30ac) = *param_3 != 0;
+        if (pname != 0xb52) goto LAB_0006d690;
+        *(bool *)(glContext + 0x30ac) = *params != 0;
         _gleUpdatePolyMode(glContext);
         _gleSelectVertexSubmitFunc(glContext);
         _gleSelectVertexAddMaterialFunc(glContext);
       }
     }
-    else if (param_2 == 0x81f8) {
-      if (1 < *param_3 - 0x81f9) goto LAB_0006d690;
-      *(short *)(glContext + 0x30a8) = (short)*param_3;
+    else if (pname == 0x81f8) {
+      if (1 < *params - 0x81f9) goto LAB_0006d690;
+      *(short *)(glContext + 0x30a8) = (short)*params;
       if ((*(char *)(glContext + 0x30aa) != '\0') && (*(char *)(glContext + 0x4664) == '\0')) {
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x800;
         *(bool *)(glContext + 0x316b) = *(short *)(glContext + 0x30a8) == -0x7e06;
       }
     }
     else {
-      if (param_2 != 0x85b0) {
+      if (pname != 0x85b0) {
 LAB_0006d690:
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
-        uVar3 = 0x500;
+        glErrorCode = 0x500;
         goto LAB_0006d6a0;
       }
-      *(bool *)(glContext + 0x30ae) = *param_3 != 0;
+      *(bool *)(glContext + 0x30ae) = *params != 0;
     }
     _gleUpdateLightModel(glContext);
     *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 1;
@@ -295,39 +295,39 @@ LAB_0006d690:
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar3 = 0x502;
+    glErrorCode = 0x502;
 LAB_0006d6a0:
-    *(undefined4 *)(glContext + 0x7574) = uVar3;
+    *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   }
   return;
 }
 
 /* _glLightModeliv_CompExec @ 0x6d6d0 (64 bytes) */
-void _glLightModeliv_CompExec(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+void _glLightModeliv_CompExec(glContext, pname, params)
+  undefined4 glContext;
+  undefined4 pname;
+  undefined4 params;
 {
-  ((int (*)())_glLightModeliv_Comp)(param_1,param_2,param_3);
-  ((void (*)())_glLightModeliv_Exec)(param_1,param_2,param_3);
+  ((int (*)())_glLightModeliv_Comp)(glContext,pname,params);
+  ((void (*)())_glLightModeliv_Exec)(glContext,pname,params);
   return;
 }
 
 /* _glLockArraysEXT_Exec @ 0x6d710 (352 bytes) */
-void _glLockArraysEXT_Exec(glContext, param_2, param_3)
+void _glLockArraysEXT_Exec(glContext, first, count)
   int glContext;
-  int param_2;
-  int param_3;
+  int first;
+  int count;
 {
   bool bVar1;
-  undefined4 uVar2;
+  undefined4 glErrorCode;
   int iVar3;
   int iVar4;
   
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4988) == 0)) {
-    if ((-1 < param_2) && (0 < param_3)) {
+    if ((-1 < first) && (0 < count)) {
       iVar4 = *(int *)(*(int *)(glContext + 0x468c) + 0x88);
-      if (param_3 < iVar4 + -0x12) {
+      if (count < iVar4 + -0x12) {
         iVar3 = *(int *)(glContext + 0x49ac);
         bVar1 = iVar3 == 0;
         if (bVar1) {
@@ -337,7 +337,7 @@ void _glLockArraysEXT_Exec(glContext, param_2, param_3)
           *(int *)(glContext + 0x499c) = iVar3 + iVar4 + iVar4 * 4;
           bVar1 = iVar3 == 0;
         }
-        else if (param_2 != *(int *)(glContext + 0x4984)) {
+        else if (first != *(int *)(glContext + 0x4984)) {
           *(int *)(glContext + 0x499c) = *(int *)(glContext + 0x49a0) + iVar4 * 4;
         }
         if (bVar1) {
@@ -354,9 +354,9 @@ void _glLockArraysEXT_Exec(glContext, param_2, param_3)
         *(undefined4 *)(glContext + 0x49ac) = 0;
         *(undefined4 *)(glContext + 0x49a0) = 0;
       }
-      *(int *)(glContext + 0x4984) = param_2;
-      *(int *)(glContext + 0x4988) = param_3;
-      if (param_3 == 0) {
+      *(int *)(glContext + 0x4984) = first;
+      *(int *)(glContext + 0x4988) = count;
+      if (count == 0) {
         return;
       }
       _gleUpdateDrawArraysFuncs(glContext);
@@ -365,15 +365,15 @@ void _glLockArraysEXT_Exec(glContext, param_2, param_3)
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar2 = 0x501;
+    glErrorCode = 0x501;
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar2 = 0x502;
+    glErrorCode = 0x502;
   }
-  *(undefined4 *)(glContext + 0x7574) = uVar2;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
@@ -394,70 +394,70 @@ void _glUnlockArraysEXT_Exec(glContext)
 }
 
 /* _glLogicOp_ListExec @ 0x6d8b0 (40 bytes) */
-int _glLogicOp_ListExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _glLogicOp_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  undefined4 *listRecord;
 {
-  ((void (*)())_glLogicOp_Exec)(param_1,*param_2);
+  ((void (*)())_glLogicOp_Exec)(glContext,*listRecord);
   return 4;
 }
 
 /* _glLogicOp_Comp @ 0x6d8d8 (76 bytes) */
-int _glLogicOp_Comp(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int _glLogicOp_Comp(glContext, opcode)
+  undefined4 glContext;
+  undefined4 opcode;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)_gleAddListItem(param_1,PTR__glLogicOp_ListExec_0011015c,4);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = param_2;
+  listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glLogicOp_ListExec_0011015c,4);
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = opcode;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glLogicOp_Exec @ 0x6d924 (88 bytes) */
-void _glLogicOp_Exec(glContext, param_2)
+void _glLogicOp_Exec(glContext, opcode)
   int glContext;
-  int param_2;
+  int opcode;
 {
-  undefined4 uVar1;
+  undefined4 glErrorCode;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (param_2 - 0x1500U < 0x10) {
-      *(short *)(glContext + 0x3190) = (short)param_2;
+    if (opcode - 0x1500U < 0x10) {
+      *(short *)(glContext + 0x3190) = (short)opcode;
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x20000;
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x500;
+    glErrorCode = 0x500;
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
 /* _glLogicOp_CompExec @ 0x6d97c (56 bytes) */
-void _glLogicOp_CompExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+void _glLogicOp_CompExec(glContext, opcode)
+  undefined4 glContext;
+  undefined4 opcode;
 {
-  ((int (*)())_glLogicOp_Comp)(param_1,param_2);
-  ((void (*)())_glLogicOp_Exec)(param_1,param_2);
+  ((int (*)())_glLogicOp_Comp)(glContext,opcode);
+  ((void (*)())_glLogicOp_Exec)(glContext,opcode);
   return;
 }
 
 /* _glMap1Vertex3_ListExec @ 0x6d9b4 (140 bytes) */
-int _glMap1Vertex3_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap1Vertex3_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int *piVar1;
   int iVar2;
@@ -465,20 +465,21 @@ int _glMap1Vertex3_ListExec(param_1, param_2)
   int iVar4;
   int *piVar5;
   int iVar6;
+  int remaining;
   
-  piVar5 = (int *)_gleGetMapData(param_1);
-  iVar4 = *param_2;
-  iVar6 = param_2[2];
-  iVar2 = param_2[3];
-  piVar5[1] = param_2[1];
+  piVar5 = (int *)_gleGetMapData(glContext);
+  iVar4 = *listRecord;
+  iVar6 = listRecord[2];
+  iVar2 = listRecord[3];
+  piVar5[1] = listRecord[1];
   piVar5[2] = iVar6;
   piVar5[3] = iVar2;
   *piVar5 = iVar4;
-  for (iVar6 = iVar4; iVar6 != 0; iVar6 = iVar6 + -1) {
-    piVar1 = param_2 + 4;
-    iVar2 = param_2[5];
-    iVar3 = param_2[6];
-    param_2 = param_2 + 3;
+  for (remaining = iVar4; remaining != 0; remaining = remaining + -1) {
+    piVar1 = listRecord + 4;
+    iVar2 = listRecord[5];
+    iVar3 = listRecord[6];
+    listRecord = listRecord + 3;
     piVar5[4] = *piVar1;
     piVar5[5] = iVar2;
     piVar5[6] = iVar3;
@@ -488,34 +489,35 @@ int _glMap1Vertex3_ListExec(param_1, param_2)
 }
 
 /* _glMap1Vertex4_ListExec @ 0x6da40 (156 bytes) */
-int _glMap1Vertex4_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap1Vertex4_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
+  int mapData;
   int iVar7;
   int iVar8;
+  int remaining;
   
-  iVar6 = _gleGetMapData(param_1);
-  iVar5 = *param_2;
-  iVar8 = param_2[2];
-  iVar1 = param_2[3];
-  *(int *)(iVar6 + 0x8c) = param_2[1];
-  *(int *)(iVar6 + 0x90) = iVar8;
-  *(int *)(iVar6 + 0x94) = iVar1;
-  *(int *)(iVar6 + 0x88) = iVar5;
+  mapData = _gleGetMapData(glContext);
+  iVar5 = *listRecord;
+  iVar8 = listRecord[2];
+  iVar1 = listRecord[3];
+  *(int *)(mapData + 0x8c) = listRecord[1];
+  *(int *)(mapData + 0x90) = iVar8;
+  *(int *)(mapData + 0x94) = iVar1;
+  *(int *)(mapData + 0x88) = iVar5;
   iVar1 = 0;
-  for (iVar8 = iVar5; iVar8 != 0; iVar8 = iVar8 + -1) {
-    iVar7 = iVar1 * 0x10 + iVar6;
-    iVar2 = param_2[iVar1 * 4 + 4];
-    iVar3 = param_2[iVar1 * 4 + 5];
-    iVar4 = param_2[iVar1 * 4 + 6];
-    *(int *)(iVar7 + 0xa4) = param_2[iVar1 * 4 + 7];
+  for (remaining = iVar5; remaining != 0; remaining = remaining + -1) {
+    iVar7 = iVar1 * 0x10 + mapData;
+    iVar2 = listRecord[iVar1 * 4 + 4];
+    iVar3 = listRecord[iVar1 * 4 + 5];
+    iVar4 = listRecord[iVar1 * 4 + 6];
+    *(int *)(iVar7 + 0xa4) = listRecord[iVar1 * 4 + 7];
     *(int *)(iVar7 + 0x98) = iVar2;
     *(int *)(iVar7 + 0x9c) = iVar3;
     *(int *)(iVar7 + 0xa0) = iVar4;
@@ -525,34 +527,35 @@ int _glMap1Vertex4_ListExec(param_1, param_2)
 }
 
 /* _glMap1Color_ListExec @ 0x6dadc (156 bytes) */
-int _glMap1Color_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap1Color_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
+  int mapData;
   int iVar7;
   int iVar8;
+  int remaining;
   
-  iVar6 = _gleGetMapData(param_1);
-  iVar5 = *param_2;
-  iVar8 = param_2[2];
-  iVar1 = param_2[3];
-  *(int *)(iVar6 + 0x1c4) = param_2[1];
-  *(int *)(iVar6 + 0x1c8) = iVar8;
-  *(int *)(iVar6 + 0x1cc) = iVar1;
-  *(int *)(iVar6 + 0x1c0) = iVar5;
+  mapData = _gleGetMapData(glContext);
+  iVar5 = *listRecord;
+  iVar8 = listRecord[2];
+  iVar1 = listRecord[3];
+  *(int *)(mapData + 0x1c4) = listRecord[1];
+  *(int *)(mapData + 0x1c8) = iVar8;
+  *(int *)(mapData + 0x1cc) = iVar1;
+  *(int *)(mapData + 0x1c0) = iVar5;
   iVar1 = 0;
-  for (iVar8 = iVar5; iVar8 != 0; iVar8 = iVar8 + -1) {
-    iVar7 = iVar1 * 0x10 + iVar6;
-    iVar2 = param_2[iVar1 * 4 + 4];
-    iVar3 = param_2[iVar1 * 4 + 5];
-    iVar4 = param_2[iVar1 * 4 + 6];
-    *(int *)(iVar7 + 0x1dc) = param_2[iVar1 * 4 + 7];
+  for (remaining = iVar5; remaining != 0; remaining = remaining + -1) {
+    iVar7 = iVar1 * 0x10 + mapData;
+    iVar2 = listRecord[iVar1 * 4 + 4];
+    iVar3 = listRecord[iVar1 * 4 + 5];
+    iVar4 = listRecord[iVar1 * 4 + 6];
+    *(int *)(iVar7 + 0x1dc) = listRecord[iVar1 * 4 + 7];
     *(int *)(iVar7 + 0x1d0) = iVar2;
     *(int *)(iVar7 + 0x1d4) = iVar3;
     *(int *)(iVar7 + 0x1d8) = iVar4;
@@ -562,44 +565,45 @@ int _glMap1Color_ListExec(param_1, param_2)
 }
 
 /* _glMap1Index_ListExec @ 0x6db78 (128 bytes) */
-int _glMap1Index_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap1Index_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
+  int mapData;
+  int *dstCursor;
+  int *srcCursor;
   int iVar6;
+  int remaining;
   
-  iVar3 = _gleGetMapData(param_1);
-  iVar2 = *param_2;
-  iVar6 = param_2[2];
-  iVar1 = param_2[3];
-  *(int *)(iVar3 + 0x274) = param_2[1];
-  *(int *)(iVar3 + 0x278) = iVar6;
-  *(int *)(iVar3 + 0x27c) = iVar1;
-  *(int *)(iVar3 + 0x270) = iVar2;
+  mapData = _gleGetMapData(glContext);
+  iVar2 = *listRecord;
+  iVar6 = listRecord[2];
+  iVar1 = listRecord[3];
+  *(int *)(mapData + 0x274) = listRecord[1];
+  *(int *)(mapData + 0x278) = iVar6;
+  *(int *)(mapData + 0x27c) = iVar1;
+  *(int *)(mapData + 0x270) = iVar2;
   if (iVar2 != 0) {
-    piVar4 = (int *)(iVar3 + 0x280);
-    piVar5 = param_2 + 4;
-    iVar6 = iVar2;
+    dstCursor = (int *)(mapData + 0x280);
+    srcCursor = listRecord + 4;
+    remaining = iVar2;
     do {
-      iVar1 = *piVar5;
-      piVar5 = piVar5 + 1;
-      *piVar4 = iVar1;
-      piVar4 = piVar4 + 1;
-      iVar6 = iVar6 + -1;
-    } while (iVar6 != 0);
+      iVar1 = *srcCursor;
+      srcCursor = srcCursor + 1;
+      *dstCursor = iVar1;
+      dstCursor = dstCursor + 1;
+      remaining = remaining + -1;
+    } while (remaining != 0);
   }
   return (10 - iVar2) * -4 + 0x38;
 }
 
 /* _glMap1Normal_ListExec @ 0x6dbf8 (140 bytes) */
-int _glMap1Normal_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap1Normal_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int *piVar1;
   int iVar2;
@@ -607,20 +611,21 @@ int _glMap1Normal_ListExec(param_1, param_2)
   int iVar4;
   int iVar5;
   int iVar6;
+  int remaining;
   
-  iVar5 = _gleGetMapData(param_1);
-  iVar4 = *param_2;
-  iVar6 = param_2[2];
-  iVar2 = param_2[3];
-  *(int *)(iVar5 + 0x13c) = param_2[1];
+  iVar5 = _gleGetMapData(glContext);
+  iVar4 = *listRecord;
+  iVar6 = listRecord[2];
+  iVar2 = listRecord[3];
+  *(int *)(iVar5 + 0x13c) = listRecord[1];
   *(int *)(iVar5 + 0x140) = iVar6;
   *(int *)(iVar5 + 0x144) = iVar2;
   *(int *)(iVar5 + 0x138) = iVar4;
-  for (iVar6 = iVar4; iVar6 != 0; iVar6 = iVar6 + -1) {
-    piVar1 = param_2 + 4;
-    iVar2 = param_2[5];
-    iVar3 = param_2[6];
-    param_2 = param_2 + 3;
+  for (remaining = iVar4; remaining != 0; remaining = remaining + -1) {
+    piVar1 = listRecord + 4;
+    iVar2 = listRecord[5];
+    iVar3 = listRecord[6];
+    listRecord = listRecord + 3;
     *(int *)(iVar5 + 0x148) = *piVar1;
     *(int *)(iVar5 + 0x14c) = iVar2;
     *(int *)(iVar5 + 0x150) = iVar3;
@@ -630,65 +635,67 @@ int _glMap1Normal_ListExec(param_1, param_2)
 }
 
 /* _glMap1Texture1_ListExec @ 0x6dc84 (128 bytes) */
-int _glMap1Texture1_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap1Texture1_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
-  int iVar3;
-  int *piVar4;
-  int *piVar5;
+  int mapData;
+  int *dstCursor;
+  int *srcCursor;
   int iVar6;
+  int remaining;
   
-  iVar3 = _gleGetMapData(param_1);
-  iVar2 = *param_2;
-  iVar6 = param_2[2];
-  iVar1 = param_2[3];
-  *(int *)(iVar3 + 0x2ac) = param_2[1];
-  *(int *)(iVar3 + 0x2b0) = iVar6;
-  *(int *)(iVar3 + 0x2b4) = iVar1;
-  *(int *)(iVar3 + 0x2a8) = iVar2;
+  mapData = _gleGetMapData(glContext);
+  iVar2 = *listRecord;
+  iVar6 = listRecord[2];
+  iVar1 = listRecord[3];
+  *(int *)(mapData + 0x2ac) = listRecord[1];
+  *(int *)(mapData + 0x2b0) = iVar6;
+  *(int *)(mapData + 0x2b4) = iVar1;
+  *(int *)(mapData + 0x2a8) = iVar2;
   if (iVar2 != 0) {
-    piVar4 = (int *)(iVar3 + 0x2b8);
-    piVar5 = param_2 + 4;
-    iVar6 = iVar2;
+    dstCursor = (int *)(mapData + 0x2b8);
+    srcCursor = listRecord + 4;
+    remaining = iVar2;
     do {
-      iVar1 = *piVar5;
-      piVar5 = piVar5 + 1;
-      *piVar4 = iVar1;
-      piVar4 = piVar4 + 1;
-      iVar6 = iVar6 + -1;
-    } while (iVar6 != 0);
+      iVar1 = *srcCursor;
+      srcCursor = srcCursor + 1;
+      *dstCursor = iVar1;
+      dstCursor = dstCursor + 1;
+      remaining = remaining + -1;
+    } while (remaining != 0);
   }
   return (10 - iVar2) * -4 + 0x38;
 }
 
 /* _glMap1Texture2_ListExec @ 0x6dd04 (140 bytes) */
-int _glMap1Texture2_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap1Texture2_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int iVar4;
-  int iVar5;
+  int mapData;
   int iVar6;
+  int remaining;
   
-  iVar5 = _gleGetMapData(param_1);
-  iVar3 = *param_2;
-  iVar6 = param_2[2];
-  iVar1 = param_2[3];
-  *(int *)(iVar5 + 0x2e4) = param_2[1];
-  *(int *)(iVar5 + 0x2e8) = iVar6;
-  *(int *)(iVar5 + 0x2ec) = iVar1;
-  *(int *)(iVar5 + 0x2e0) = iVar3;
+  mapData = _gleGetMapData(glContext);
+  iVar3 = *listRecord;
+  iVar6 = listRecord[2];
+  iVar1 = listRecord[3];
+  *(int *)(mapData + 0x2e4) = listRecord[1];
+  *(int *)(mapData + 0x2e8) = iVar6;
+  *(int *)(mapData + 0x2ec) = iVar1;
+  *(int *)(mapData + 0x2e0) = iVar3;
   iVar1 = 0;
-  for (iVar6 = iVar3; iVar6 != 0; iVar6 = iVar6 + -1) {
-    iVar4 = iVar1 * 8 + iVar5;
-    iVar2 = param_2[iVar1 * 2 + 4];
-    *(int *)(iVar4 + 0x2f4) = param_2[iVar1 * 2 + 5];
+  for (remaining = iVar3; remaining != 0; remaining = remaining + -1) {
+    iVar4 = iVar1 * 8 + mapData;
+    iVar2 = listRecord[iVar1 * 2 + 4];
+    *(int *)(iVar4 + 0x2f4) = listRecord[iVar1 * 2 + 5];
     *(int *)(iVar4 + 0x2f0) = iVar2;
     iVar1 = iVar1 + 1;
   }
@@ -696,9 +703,9 @@ int _glMap1Texture2_ListExec(param_1, param_2)
 }
 
 /* _glMap1Texture3_ListExec @ 0x6dd90 (140 bytes) */
-int _glMap1Texture3_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap1Texture3_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int *piVar1;
   int iVar2;
@@ -706,20 +713,21 @@ int _glMap1Texture3_ListExec(param_1, param_2)
   int iVar4;
   int iVar5;
   int iVar6;
+  int remaining;
   
-  iVar5 = _gleGetMapData(param_1);
-  iVar4 = *param_2;
-  iVar6 = param_2[2];
-  iVar2 = param_2[3];
-  *(int *)(iVar5 + 0x344) = param_2[1];
+  iVar5 = _gleGetMapData(glContext);
+  iVar4 = *listRecord;
+  iVar6 = listRecord[2];
+  iVar2 = listRecord[3];
+  *(int *)(iVar5 + 0x344) = listRecord[1];
   *(int *)(iVar5 + 0x348) = iVar6;
   *(int *)(iVar5 + 0x34c) = iVar2;
   *(int *)(iVar5 + 0x340) = iVar4;
-  for (iVar6 = iVar4; iVar6 != 0; iVar6 = iVar6 + -1) {
-    piVar1 = param_2 + 4;
-    iVar2 = param_2[5];
-    iVar3 = param_2[6];
-    param_2 = param_2 + 3;
+  for (remaining = iVar4; remaining != 0; remaining = remaining + -1) {
+    piVar1 = listRecord + 4;
+    iVar2 = listRecord[5];
+    iVar3 = listRecord[6];
+    listRecord = listRecord + 3;
     *(int *)(iVar5 + 0x350) = *piVar1;
     *(int *)(iVar5 + 0x354) = iVar2;
     *(int *)(iVar5 + 0x358) = iVar3;
@@ -729,34 +737,35 @@ int _glMap1Texture3_ListExec(param_1, param_2)
 }
 
 /* _glMap1Texture4_ListExec @ 0x6de1c (156 bytes) */
-int _glMap1Texture4_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap1Texture4_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
+  int mapData;
   int iVar7;
   int iVar8;
+  int remaining;
   
-  iVar6 = _gleGetMapData(param_1);
-  iVar5 = *param_2;
-  iVar8 = param_2[2];
-  iVar1 = param_2[3];
-  *(int *)(iVar6 + 0x3cc) = param_2[1];
-  *(int *)(iVar6 + 0x3d0) = iVar8;
-  *(int *)(iVar6 + 0x3d4) = iVar1;
-  *(int *)(iVar6 + 0x3c8) = iVar5;
+  mapData = _gleGetMapData(glContext);
+  iVar5 = *listRecord;
+  iVar8 = listRecord[2];
+  iVar1 = listRecord[3];
+  *(int *)(mapData + 0x3cc) = listRecord[1];
+  *(int *)(mapData + 0x3d0) = iVar8;
+  *(int *)(mapData + 0x3d4) = iVar1;
+  *(int *)(mapData + 0x3c8) = iVar5;
   iVar1 = 0;
-  for (iVar8 = iVar5; iVar8 != 0; iVar8 = iVar8 + -1) {
-    iVar7 = iVar1 * 0x10 + iVar6;
-    iVar2 = param_2[iVar1 * 4 + 4];
-    iVar3 = param_2[iVar1 * 4 + 5];
-    iVar4 = param_2[iVar1 * 4 + 6];
-    *(int *)(iVar7 + 0x3e4) = param_2[iVar1 * 4 + 7];
+  for (remaining = iVar5; remaining != 0; remaining = remaining + -1) {
+    iVar7 = iVar1 * 0x10 + mapData;
+    iVar2 = listRecord[iVar1 * 4 + 4];
+    iVar3 = listRecord[iVar1 * 4 + 5];
+    iVar4 = listRecord[iVar1 * 4 + 6];
+    *(int *)(iVar7 + 0x3e4) = listRecord[iVar1 * 4 + 7];
     *(int *)(iVar7 + 0x3d8) = iVar2;
     *(int *)(iVar7 + 0x3dc) = iVar3;
     *(int *)(iVar7 + 0x3e0) = iVar4;
@@ -766,73 +775,77 @@ int _glMap1Texture4_ListExec(param_1, param_2)
 }
 
 /* _glMap1VertexAttrib1ARB_ListExec @ 0x6deb8 (164 bytes) */
-int _glMap1VertexAttrib1ARB_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap1VertexAttrib1ARB_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
-  int *piVar1;
+  int *srcCursor;
   int iVar2;
+  int remaining;
+  int mapData;
   int iVar3;
-  int *piVar4;
+  int *dstCursor;
   int iVar5;
   int iVar6;
   
-  iVar2 = _gleGetMapData(param_1);
-  iVar5 = *param_2;
-  iVar6 = param_2[1];
-  iVar3 = iVar2 + iVar5 * 0xb0;
+  mapData = _gleGetMapData(glContext);
+  iVar5 = *listRecord;
+  iVar6 = listRecord[1];
+  iVar3 = mapData + iVar5 * 0xb0;
   *(int *)(iVar3 + 0x2ca8) = iVar6;
-  ((unsigned char *)0x9da8)[iVar5 + iVar2] = 0x1;
-  iVar2 = param_2[2];
-  iVar5 = param_2[3];
-  *(int *)(iVar3 + 0x2cb4) = param_2[4];
+  ((unsigned char *)0x9da8)[iVar5 + mapData] = 0x1;
+  iVar2 = listRecord[2];
+  iVar5 = listRecord[3];
+  *(int *)(iVar3 + 0x2cb4) = listRecord[4];
   *(int *)(iVar3 + 0x2cac) = iVar2;
   *(int *)(iVar3 + 0x2cb0) = iVar5;
   if (iVar6 != 0) {
-    piVar4 = (int *)(iVar3 + 0x2cb8);
-    piVar1 = param_2 + 5;
-    iVar2 = iVar6;
+    dstCursor = (int *)(iVar3 + 0x2cb8);
+    srcCursor = listRecord + 5;
+    remaining = iVar6;
     do {
-      iVar5 = *piVar1;
-      piVar1 = piVar1 + 1;
-      *piVar4 = iVar5;
-      piVar4 = piVar4 + 1;
-      iVar2 = iVar2 + -1;
-    } while (iVar2 != 0);
+      iVar5 = *srcCursor;
+      srcCursor = srcCursor + 1;
+      *dstCursor = iVar5;
+      dstCursor = dstCursor + 1;
+      remaining = remaining + -1;
+    } while (remaining != 0);
   }
   return (10 - iVar6) * -4 + 0x3c;
 }
 
 /* _glMap1VertexAttrib2ARB_ListExec @ 0x6df5c (164 bytes) */
-int _glMap1VertexAttrib2ARB_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap1VertexAttrib2ARB_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int *piVar1;
   int iVar2;
+  int remaining;
   int iVar3;
+  int mapData;
   int iVar4;
   int iVar5;
   int iVar6;
-  int *piVar7;
+  int *srcCursor;
   
-  iVar3 = _gleGetMapData(param_1);
-  iVar2 = *param_2;
-  iVar6 = param_2[1];
-  piVar7 = param_2 + 1;
-  iVar4 = iVar3 + iVar2 * 0xb0;
+  mapData = _gleGetMapData(glContext);
+  iVar2 = *listRecord;
+  iVar6 = listRecord[1];
+  srcCursor = listRecord + 1;
+  iVar4 = mapData + iVar2 * 0xb0;
   *(int *)(iVar4 + 0x2ca8) = iVar6;
   iVar5 = iVar4 + 0x2ca8;
-  ((unsigned char *)0x9da8)[iVar2 + iVar3] = 0x2;
-  iVar2 = param_2[3];
-  iVar3 = param_2[4];
-  *(int *)(iVar4 + 0x2cac) = param_2[2];
+  ((unsigned char *)0x9da8)[iVar2 + mapData] = 0x2;
+  iVar2 = listRecord[3];
+  iVar3 = listRecord[4];
+  *(int *)(iVar4 + 0x2cac) = listRecord[2];
   *(int *)(iVar4 + 0x2cb0) = iVar2;
   *(int *)(iVar4 + 0x2cb4) = iVar3;
-  for (iVar2 = iVar6; iVar2 != 0; iVar2 = iVar2 + -1) {
-    piVar1 = piVar7 + 4;
-    iVar3 = piVar7[5];
-    piVar7 = piVar7 + 2;
+  for (remaining = iVar6; remaining != 0; remaining = remaining + -1) {
+    piVar1 = srcCursor + 4;
+    iVar3 = srcCursor[5];
+    srcCursor = srcCursor + 2;
     *(int *)(iVar5 + 0x10) = *piVar1;
     *(int *)(iVar5 + 0x14) = iVar3;
     iVar5 = iVar5 + 8;
@@ -841,36 +854,38 @@ int _glMap1VertexAttrib2ARB_ListExec(param_1, param_2)
 }
 
 /* _glMap1VertexAttrib3ARB_ListExec @ 0x6e000 (172 bytes) */
-int _glMap1VertexAttrib3ARB_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap1VertexAttrib3ARB_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int *piVar1;
   int iVar2;
+  int remaining;
   int iVar3;
+  int mapData;
   int iVar4;
   int iVar5;
   int iVar6;
-  int *piVar7;
+  int *srcCursor;
   
-  iVar3 = _gleGetMapData(param_1);
-  iVar2 = *param_2;
-  iVar6 = param_2[1];
-  piVar7 = param_2 + 1;
-  iVar4 = iVar3 + iVar2 * 0xb0;
+  mapData = _gleGetMapData(glContext);
+  iVar2 = *listRecord;
+  iVar6 = listRecord[1];
+  srcCursor = listRecord + 1;
+  iVar4 = mapData + iVar2 * 0xb0;
   *(int *)(iVar4 + 0x2ca8) = iVar6;
   iVar5 = iVar4 + 0x2ca8;
-  ((unsigned char *)0x9da8)[iVar2 + iVar3] = 0x3;
-  iVar2 = param_2[3];
-  iVar3 = param_2[4];
-  *(int *)(iVar4 + 0x2cac) = param_2[2];
+  ((unsigned char *)0x9da8)[iVar2 + mapData] = 0x3;
+  iVar2 = listRecord[3];
+  iVar3 = listRecord[4];
+  *(int *)(iVar4 + 0x2cac) = listRecord[2];
   *(int *)(iVar4 + 0x2cb0) = iVar2;
   *(int *)(iVar4 + 0x2cb4) = iVar3;
-  for (iVar2 = iVar6; iVar2 != 0; iVar2 = iVar2 + -1) {
-    piVar1 = piVar7 + 4;
-    iVar3 = piVar7[5];
-    iVar4 = piVar7[6];
-    piVar7 = piVar7 + 3;
+  for (remaining = iVar6; remaining != 0; remaining = remaining + -1) {
+    piVar1 = srcCursor + 4;
+    iVar3 = srcCursor[5];
+    iVar4 = srcCursor[6];
+    srcCursor = srcCursor + 3;
     *(int *)(iVar5 + 0x10) = *piVar1;
     *(int *)(iVar5 + 0x14) = iVar3;
     *(int *)(iVar5 + 0x18) = iVar4;
@@ -880,12 +895,14 @@ int _glMap1VertexAttrib3ARB_ListExec(param_1, param_2)
 }
 
 /* _glMap1VertexAttrib4ARB_ListExec @ 0x6e0ac (200 bytes) */
-int _glMap1VertexAttrib4ARB_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap1VertexAttrib4ARB_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
+  int remaining;
   int iVar2;
+  int mapData;
   int iVar3;
   int iVar4;
   int iVar5;
@@ -893,24 +910,24 @@ int _glMap1VertexAttrib4ARB_ListExec(param_1, param_2)
   int iVar7;
   int iVar8;
   
-  iVar2 = _gleGetMapData(param_1);
-  iVar1 = *param_2;
-  iVar4 = param_2[1];
-  iVar3 = iVar2 + iVar1 * 0xb0;
+  mapData = _gleGetMapData(glContext);
+  iVar1 = *listRecord;
+  iVar4 = listRecord[1];
+  iVar3 = mapData + iVar1 * 0xb0;
   *(int *)(iVar3 + 0x2ca8) = iVar4;
-  ((unsigned char *)0x9da8)[iVar1 + iVar2] = 0x4;
-  iVar1 = param_2[3];
-  iVar2 = param_2[4];
-  *(int *)(iVar3 + 0x2cac) = param_2[2];
+  ((unsigned char *)0x9da8)[iVar1 + mapData] = 0x4;
+  iVar1 = listRecord[3];
+  iVar2 = listRecord[4];
+  *(int *)(iVar3 + 0x2cac) = listRecord[2];
   *(int *)(iVar3 + 0x2cb0) = iVar1;
   *(int *)(iVar3 + 0x2cb4) = iVar2;
   iVar2 = 0;
-  for (iVar1 = iVar4; iVar1 != 0; iVar1 = iVar1 + -1) {
+  for (remaining = iVar4; remaining != 0; remaining = remaining + -1) {
     iVar8 = iVar2 * 0x10 + iVar3 + 0x2ca8;
-    iVar7 = param_2[iVar2 * 4 + 8];
-    iVar6 = param_2[iVar2 * 4 + 6];
-    iVar5 = param_2[iVar2 * 4 + 7];
-    *(int *)(iVar8 + 0x10) = param_2[iVar2 * 4 + 5];
+    iVar7 = listRecord[iVar2 * 4 + 8];
+    iVar6 = listRecord[iVar2 * 4 + 6];
+    iVar5 = listRecord[iVar2 * 4 + 7];
+    *(int *)(iVar8 + 0x10) = listRecord[iVar2 * 4 + 5];
     *(int *)(iVar8 + 0x1c) = iVar7;
     *(int *)(iVar8 + 0x14) = iVar6;
     *(int *)(iVar8 + 0x18) = iVar5;
@@ -920,10 +937,10 @@ int _glMap1VertexAttrib4ARB_ListExec(param_1, param_2)
 }
 
 /* _glMap1d_Comp @ 0x6e174 (1080 bytes) */
-void _glMap1d_Comp(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,undefined4 param_9,double fparam_1,double fparam_2)
+void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefined4 u1ShadowLo,undefined4 u2ShadowHi,undefined4 u2ShadowLo,int stride,int order,undefined4 points,double u1,double u2)
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 glErrorCode;
+  int listRecord;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -947,121 +964,121 @@ void _glMap1d_Comp(int glContext,undefined4 param_2,undefined4 param_3,undefined
   double in_f13;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((fparam_1 != fparam_2) && (param_8 - 1U < 10)) {
-      switch(param_2) {
+    if ((u1 != u2) && (order - 1U < 10)) {
+      switch(target) {
       case 0xd90:
-        if (3 < param_7) {
-          iVar3 = (10 - param_8) * -0x10 + 0xb0;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Color_ListExec_00110188,iVar3);
-          if (iVar2 == 0) {
+        if (3 < stride) {
+          iVar3 = (10 - order) * -0x10 + 0xb0;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Color_ListExec_00110188,iVar3);
+          if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1ColordLoad)(glContext,extraout_r4_01,iVar3,param_4,param_5,param_7,param_8,param_9,
-                             iVar2,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,
+          ((void (*)())_gleMap1ColordLoad)(glContext,extraout_r4_01,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,
+                             listRecord,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,
                              in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 0xd91:
-        if (0 < param_7) {
-          iVar3 = (10 - param_8) * -4 + 0x38;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Index_ListExec_00110184,iVar3);
-          if (iVar2 == 0) {
+        if (0 < stride) {
+          iVar3 = (10 - order) * -4 + 0x38;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Index_ListExec_00110184,iVar3);
+          if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1IndexdLoad)(glContext,extraout_r4_02,iVar3,param_4,param_5,param_7,param_8,param_9,
-                             iVar2,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,
+          ((void (*)())_gleMap1IndexdLoad)(glContext,extraout_r4_02,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,
+                             listRecord,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,
                              in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 0xd92:
-        if (2 < param_7) {
-          iVar3 = (10 - param_8) * -0xc + 0x88;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Normal_ListExec_00110180,iVar3);
-          if (iVar2 == 0) {
+        if (2 < stride) {
+          iVar3 = (10 - order) * -0xc + 0x88;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Normal_ListExec_00110180,iVar3);
+          if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1NormaldLoad)(glContext,extraout_r4_03,iVar3,param_4,param_5,param_7,param_8,param_9,
-                              iVar2,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,
+          ((void (*)())_gleMap1NormaldLoad)(glContext,extraout_r4_03,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,
+                              listRecord,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,
                               in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 0xd93:
-        if (0 < param_7) {
-          iVar3 = (10 - param_8) * -4 + 0x38;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Texture1_ListExec_0011017c,iVar3);
-          if (iVar2 == 0) {
+        if (0 < stride) {
+          iVar3 = (10 - order) * -4 + 0x38;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Texture1_ListExec_0011017c,iVar3);
+          if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Texture1dLoad)(glContext,extraout_r4_04,iVar3,param_4,param_5,param_7,param_8,param_9,iVar2,
-                     fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
+          ((void (*)())_gleMap1Texture1dLoad)(glContext,extraout_r4_04,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
                      in_f12,in_f13);
           return;
         }
         break;
       case 0xd94:
-        if (1 < param_7) {
-          iVar3 = (10 - param_8) * -8 + 0x60;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Texture2_ListExec_00110178,iVar3);
-          if (iVar2 == 0) {
+        if (1 < stride) {
+          iVar3 = (10 - order) * -8 + 0x60;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Texture2_ListExec_00110178,iVar3);
+          if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Texture2dLoad)(glContext,extraout_r4_05,iVar3,param_4,param_5,param_7,param_8,param_9,iVar2,
-                     fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
+          ((void (*)())_gleMap1Texture2dLoad)(glContext,extraout_r4_05,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
                      in_f12,in_f13);
           return;
         }
         break;
       case 0xd95:
-        if (2 < param_7) {
-          iVar3 = (10 - param_8) * -0xc + 0x88;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Texture3_ListExec_00110174,iVar3);
-          if (iVar2 == 0) {
+        if (2 < stride) {
+          iVar3 = (10 - order) * -0xc + 0x88;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Texture3_ListExec_00110174,iVar3);
+          if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Texture3dLoad)(glContext,extraout_r4_06,iVar3,param_4,param_5,param_7,param_8,param_9,iVar2,
-                     fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
+          ((void (*)())_gleMap1Texture3dLoad)(glContext,extraout_r4_06,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
                      in_f12,in_f13);
           return;
         }
         break;
       case 0xd96:
-        if (3 < param_7) {
-          iVar3 = (10 - param_8) * -0x10 + 0xb0;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Texture4_ListExec_00110170,iVar3);
-          if (iVar2 == 0) {
+        if (3 < stride) {
+          iVar3 = (10 - order) * -0x10 + 0xb0;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Texture4_ListExec_00110170,iVar3);
+          if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Texture4dLoad)(glContext,extraout_r4_07,iVar3,param_4,param_5,param_7,param_8,param_9,iVar2,
-                     fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
+          ((void (*)())_gleMap1Texture4dLoad)(glContext,extraout_r4_07,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
                      in_f12,in_f13);
           return;
         }
         break;
       case 0xd97:
-        if (2 < param_7) {
-          iVar3 = (10 - param_8) * -0xc + 0x88;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Vertex3_ListExec_00110190,iVar3);
-          if (iVar2 == 0) {
+        if (2 < stride) {
+          iVar3 = (10 - order) * -0xc + 0x88;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Vertex3_ListExec_00110190,iVar3);
+          if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Vertex3dLoad)(glContext,extraout_r4,iVar3,param_4,param_5,param_7,param_8,param_9,iVar2,
-                     fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
+          ((void (*)())_gleMap1Vertex3dLoad)(glContext,extraout_r4,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
                      in_f12,in_f13);
           return;
         }
         break;
       case 0xd98:
-        if (3 < param_7) {
-          iVar3 = (10 - param_8) * -0x10 + 0xb0;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Vertex4_ListExec_0011018c,iVar3);
-          if (iVar2 == 0) {
+        if (3 < stride) {
+          iVar3 = (10 - order) * -0x10 + 0xb0;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Vertex4_ListExec_0011018c,iVar3);
+          if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Vertex4dLoad)(glContext,extraout_r4_00,iVar3,param_4,param_5,param_7,param_8,param_9,iVar2,
-                     fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
+          ((void (*)())_gleMap1Vertex4dLoad)(glContext,extraout_r4_00,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
                      in_f12,in_f13);
           return;
         }
@@ -1070,31 +1087,31 @@ void _glMap1d_Comp(int glContext,undefined4 param_2,undefined4 param_3,undefined
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
-        uVar1 = 0x500;
+        glErrorCode = 0x500;
         goto LAB_0006e5b0;
       }
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x501;
+    glErrorCode = 0x501;
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
 LAB_0006e5b0:
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
 /* _glMap1d_Exec @ 0x6e5d0 (836 bytes) */
-void _glMap1d_Exec(int glContext,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,undefined4 param_9,double fparam_1,double fparam_2)
+void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1ShadowLo,undefined4 u2ShadowHi,undefined4 u2ShadowLo,int stride,int order,undefined4 points,double u1,double u2)
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 glErrorCode;
+  int mapData;
   int iVar3;
   double in_f3;
   double in_f4;
@@ -1108,79 +1125,79 @@ void _glMap1d_Exec(int glContext,int param_2,undefined4 param_3,undefined4 param
   double in_f12;
   double in_f13;
   
-  iVar2 = _gleGetMapData(glContext);
+  mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((fparam_1 != fparam_2) && (param_8 - 1U < 10)) {
-      iVar3 = param_2 + -0xd90;
+    if ((u1 != u2) && (order - 1U < 10)) {
+      iVar3 = target + -0xd90;
       switch(iVar3) {
       case 0:
-        if (3 < param_7) {
-          ((void (*)())_gleMap1ColordLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,param_9,
-                             iVar2 + 0x1c0,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+        if (3 < stride) {
+          ((void (*)())_gleMap1ColordLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
+                             mapData + 0x1c0,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                              in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 1:
-        if (0 < param_7) {
-          ((void (*)())_gleMap1IndexdLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,param_9,
-                             iVar2 + 0x270,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+        if (0 < stride) {
+          ((void (*)())_gleMap1IndexdLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
+                             mapData + 0x270,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                              in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 2:
-        if (2 < param_7) {
-          ((void (*)())_gleMap1NormaldLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,param_9,
-                              iVar2 + 0x138,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+        if (2 < stride) {
+          ((void (*)())_gleMap1NormaldLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
+                              mapData + 0x138,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                               in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 3:
-        if (0 < param_7) {
-          ((void (*)())_gleMap1Texture1dLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,param_9,iVar2 + 0x2a8,
-                     fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
+        if (0 < stride) {
+          ((void (*)())_gleMap1Texture1dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x2a8,
+                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
                      in_f12,in_f13);
           return;
         }
         break;
       case 4:
-        if (1 < param_7) {
-          ((void (*)())_gleMap1Texture2dLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,param_9,iVar2 + 0x2e0,
-                     fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
+        if (1 < stride) {
+          ((void (*)())_gleMap1Texture2dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x2e0,
+                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
                      in_f12,in_f13);
           return;
         }
         break;
       case 5:
-        if (2 < param_7) {
-          ((void (*)())_gleMap1Texture3dLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,param_9,iVar2 + 0x340,
-                     fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
+        if (2 < stride) {
+          ((void (*)())_gleMap1Texture3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x340,
+                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
                      in_f12,in_f13);
           return;
         }
         break;
       case 6:
-        if (3 < param_7) {
-          ((void (*)())_gleMap1Texture4dLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,param_9,iVar2 + 0x3c8,
-                     fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
+        if (3 < stride) {
+          ((void (*)())_gleMap1Texture4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x3c8,
+                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
                      in_f12,in_f13);
           return;
         }
         break;
       case 7:
-        if (2 < param_7) {
-          ((void (*)())_gleMap1Vertex3dLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,param_9,iVar2,fparam_1,
-                     fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13)
+        if (2 < stride) {
+          ((void (*)())_gleMap1Vertex3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData,u1,
+                     u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13)
           ;
           return;
         }
         break;
       case 8:
-        if (3 < param_7) {
-          ((void (*)())_gleMap1Vertex4dLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,param_9,iVar2 + 0x88,
-                     fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
+        if (3 < stride) {
+          ((void (*)())_gleMap1Vertex4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x88,
+                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
                      in_f12,in_f13);
           return;
         }
@@ -1189,41 +1206,42 @@ void _glMap1d_Exec(int glContext,int param_2,undefined4 param_3,undefined4 param
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
-        uVar1 = 0x500;
+        glErrorCode = 0x500;
         goto LAB_0006e918;
       }
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x501;
+    glErrorCode = 0x501;
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
 LAB_0006e918:
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
 /* _glMap1d_CompExec @ 0x6e938 (116 bytes) */
-void _glMap1d_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9,double fparam_1,double fparam_2)
+void _glMap1d_CompExec(undefined4 glContext,undefined4 target,undefined4 u1ShadowHi,undefined4 u1ShadowLo,undefined4 u2ShadowHi,undefined4 u2ShadowLo,undefined4 stride,undefined4 order,undefined4 points,double u1,double u2)
 {
-  ((void (*)())_glMap1d_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,fparam_1,
-                fparam_2);
-  ((void (*)())_glMap1d_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,fparam_1,
-                fparam_2);
+  ((void (*)())_glMap1d_Comp)(glContext,target,u1ShadowHi,u1ShadowLo,u2ShadowHi,u2ShadowLo,stride,order,points,u1,
+                u2);
+  ((void (*)())_glMap1d_Exec)(glContext,target,u1ShadowHi,u1ShadowLo,u2ShadowHi,u2ShadowLo,stride,order,points,u1,
+                u2);
   return;
 }
 
 /* _glMap1f_Comp @ 0x6e9ac (1044 bytes) */
-int _glMap1f_Comp(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,int param_5,int param_6,undefined4 param_7,float fparam_1,float fparam_2)
+int _glMap1f_Comp(int glContext,undefined4 target,undefined4 u1Shadow,undefined4 u2Shadow,int stride,int order,undefined4 points,float u1,float u2)
 {
   undefined4 uVar1;
-  int iVar2;
+  undefined4 glErrorCode;
+  int listRecord;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -1243,129 +1261,129 @@ int _glMap1f_Comp(int glContext,undefined4 param_2,undefined4 param_3,undefined4
   double in_f8;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((fparam_1 != fparam_2) && (param_6 - 1U < 10)) {
-      switch(param_2) {
+    if ((u1 != u2) && (order - 1U < 10)) {
+      switch(target) {
       case 0xd90:
-        if (3 < param_5) {
-          iVar3 = (10 - param_6) * -0x10 + 0xb0;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Color_ListExec_00110188,iVar3);
-          if (iVar2 == 0) {
+        if (3 < stride) {
+          iVar3 = (10 - order) * -0x10 + 0xb0;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Color_ListExec_00110188,iVar3);
+          if (listRecord == 0) {
             return 0;
           }
-          uVar1 = ((int (*)())_gleMap1ColorfLoad)(glContext,extraout_r4_01,iVar3,param_5,param_6,param_7,iVar2,
-                                     fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+          uVar1 = ((int (*)())_gleMap1ColorfLoad)(glContext,extraout_r4_01,iVar3,stride,order,points,listRecord,
+                                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                      (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
         }
         break;
       case 0xd91:
-        if (0 < param_5) {
-          iVar3 = (10 - param_6) * -4 + 0x38;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Index_ListExec_00110184,iVar3);
-          if (iVar2 == 0) {
+        if (0 < stride) {
+          iVar3 = (10 - order) * -4 + 0x38;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Index_ListExec_00110184,iVar3);
+          if (listRecord == 0) {
             return 0;
           }
-          uVar1 = ((int (*)())_gleMap1IndexfLoad)(glContext,extraout_r4_02,iVar3,param_5,param_6,param_7,iVar2,
-                                     fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+          uVar1 = ((int (*)())_gleMap1IndexfLoad)(glContext,extraout_r4_02,iVar3,stride,order,points,listRecord,
+                                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                      (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
         }
         break;
       case 0xd92:
-        if (2 < param_5) {
-          iVar3 = (10 - param_6) * -0xc + 0x88;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Normal_ListExec_00110180,iVar3);
-          if (iVar2 == 0) {
+        if (2 < stride) {
+          iVar3 = (10 - order) * -0xc + 0x88;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Normal_ListExec_00110180,iVar3);
+          if (listRecord == 0) {
             return 0;
           }
-          uVar1 = ((int (*)())_gleMap1NormalfLoad)(glContext,extraout_r4_03,iVar3,param_5,param_6,param_7,iVar2,
-                                      fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+          uVar1 = ((int (*)())_gleMap1NormalfLoad)(glContext,extraout_r4_03,iVar3,stride,order,points,listRecord,
+                                      u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                       (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
         }
         break;
       case 0xd93:
-        if (0 < param_5) {
-          iVar3 = (10 - param_6) * -4 + 0x38;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Texture1_ListExec_0011017c,iVar3);
-          if (iVar2 == 0) {
+        if (0 < stride) {
+          iVar3 = (10 - order) * -4 + 0x38;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Texture1_ListExec_0011017c,iVar3);
+          if (listRecord == 0) {
             return 0;
           }
-          uVar1 = ((int (*)())_gleMap1Texture1fLoad)(glContext,extraout_r4_04,iVar3,param_5,param_6,param_7,iVar2,fparam_1,
-                             fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+          uVar1 = ((int (*)())_gleMap1Texture1fLoad)(glContext,extraout_r4_04,iVar3,stride,order,points,listRecord,u1,
+                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
         }
         break;
       case 0xd94:
-        if (1 < param_5) {
-          iVar3 = (10 - param_6) * -8 + 0x60;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Texture2_ListExec_00110178,iVar3);
-          if (iVar2 == 0) {
+        if (1 < stride) {
+          iVar3 = (10 - order) * -8 + 0x60;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Texture2_ListExec_00110178,iVar3);
+          if (listRecord == 0) {
             return 0;
           }
-          uVar1 = ((int (*)())_gleMap1Texture2fLoad)(glContext,extraout_r4_05,iVar3,param_5,param_6,param_7,iVar2,fparam_1,
-                             fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+          uVar1 = ((int (*)())_gleMap1Texture2fLoad)(glContext,extraout_r4_05,iVar3,stride,order,points,listRecord,u1,
+                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
         }
         break;
       case 0xd95:
-        if (2 < param_5) {
-          iVar3 = (10 - param_6) * -0xc + 0x88;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Texture3_ListExec_00110174,iVar3);
-          if (iVar2 == 0) {
+        if (2 < stride) {
+          iVar3 = (10 - order) * -0xc + 0x88;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Texture3_ListExec_00110174,iVar3);
+          if (listRecord == 0) {
             return 0;
           }
-          uVar1 = ((int (*)())_gleMap1Texture3fLoad)(glContext,extraout_r4_06,iVar3,param_5,param_6,param_7,iVar2,fparam_1,
-                             fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+          uVar1 = ((int (*)())_gleMap1Texture3fLoad)(glContext,extraout_r4_06,iVar3,stride,order,points,listRecord,u1,
+                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
         }
         break;
       case 0xd96:
-        if (3 < param_5) {
-          iVar3 = (10 - param_6) * -0x10 + 0xb0;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Texture4_ListExec_00110170,iVar3);
-          if (iVar2 == 0) {
+        if (3 < stride) {
+          iVar3 = (10 - order) * -0x10 + 0xb0;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Texture4_ListExec_00110170,iVar3);
+          if (listRecord == 0) {
             return 0;
           }
-          uVar1 = ((int (*)())_gleMap1Texture4fLoad)(glContext,extraout_r4_07,iVar3,param_5,param_6,param_7,iVar2,fparam_1,
-                             fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+          uVar1 = ((int (*)())_gleMap1Texture4fLoad)(glContext,extraout_r4_07,iVar3,stride,order,points,listRecord,u1,
+                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
         }
         break;
       case 0xd97:
-        if (2 < param_5) {
-          iVar3 = (10 - param_6) * -0xc + 0x88;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Vertex3_ListExec_00110190,iVar3);
-          if (iVar2 == 0) {
+        if (2 < stride) {
+          iVar3 = (10 - order) * -0xc + 0x88;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Vertex3_ListExec_00110190,iVar3);
+          if (listRecord == 0) {
             return 0;
           }
-          uVar1 = ((int (*)())_gleMap1Vertex3fLoad)(glContext,extraout_r4,iVar3,param_5,param_6,param_7,iVar2,fparam_1,
-                             fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+          uVar1 = ((int (*)())_gleMap1Vertex3fLoad)(glContext,extraout_r4,iVar3,stride,order,points,listRecord,u1,
+                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
         }
         break;
       case 0xd98:
-        if (3 < param_5) {
-          iVar3 = (10 - param_6) * -0x10 + 0xb0;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap1Vertex4_ListExec_0011018c,iVar3);
-          if (iVar2 == 0) {
+        if (3 < stride) {
+          iVar3 = (10 - order) * -0x10 + 0xb0;
+          listRecord = _gleAddListItem(glContext,PTR__glMap1Vertex4_ListExec_0011018c,iVar3);
+          if (listRecord == 0) {
             return 0;
           }
-          uVar1 = ((int (*)())_gleMap1Vertex4fLoad)(glContext,extraout_r4_00,iVar3,param_5,param_6,param_7,iVar2,fparam_1,
-                             fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+          uVar1 = ((int (*)())_gleMap1Vertex4fLoad)(glContext,extraout_r4_00,iVar3,stride,order,points,listRecord,u1,
+                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
@@ -1375,31 +1393,31 @@ int _glMap1f_Comp(int glContext,undefined4 param_2,undefined4 param_3,undefined4
         if (*(int *)(glContext + 0x7574) != 0) {
           return glContext;
         }
-        uVar1 = 0x500;
+        glErrorCode = 0x500;
         goto LAB_0006edc4;
       }
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return glContext;
     }
-    uVar1 = 0x501;
+    glErrorCode = 0x501;
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {
       return glContext;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
 LAB_0006edc4:
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return glContext;
 }
 
 /* _glMap1f_Exec @ 0x6ede4 (804 bytes) */
-void _glMap1f_Exec(int glContext,int param_2,undefined4 param_3,undefined4 param_4,int param_5,int param_6,undefined4 param_7,float fparam_1,float fparam_2)
+void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Shadow,int stride,int order,undefined4 points,float u1,float u2)
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 glErrorCode;
+  int mapData;
   int iVar3;
   undefined4 in_LR;
   double in_f3;
@@ -1409,81 +1427,81 @@ void _glMap1f_Exec(int glContext,int param_2,undefined4 param_3,undefined4 param
   double in_f7;
   double in_f8;
   
-  iVar2 = _gleGetMapData(glContext);
+  mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((fparam_1 != fparam_2) && (param_6 - 1U < 10)) {
-      iVar3 = param_2 + -0xd90;
+    if ((u1 != u2) && (order - 1U < 10)) {
+      iVar3 = target + -0xd90;
       switch(iVar3) {
       case 0:
-        if (3 < param_5) {
-          ((int (*)())_gleMap1ColorfLoad)(glContext,iVar3,param_3,param_5,param_6,param_7,iVar2 + 0x1c0,fparam_1,
-                             fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+        if (3 < stride) {
+          ((int (*)())_gleMap1ColorfLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x1c0,u1,
+                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
       case 1:
-        if (0 < param_5) {
-          ((int (*)())_gleMap1IndexfLoad)(glContext,iVar3,param_3,param_5,param_6,param_7,iVar2 + 0x270,fparam_1,
-                             fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+        if (0 < stride) {
+          ((int (*)())_gleMap1IndexfLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x270,u1,
+                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
       case 2:
-        if (2 < param_5) {
-          ((int (*)())_gleMap1NormalfLoad)(glContext,iVar3,param_3,param_5,param_6,param_7,iVar2 + 0x138,fparam_1,
-                              fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+        if (2 < stride) {
+          ((int (*)())_gleMap1NormalfLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x138,u1,
+                              u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                               (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                               (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
       case 3:
-        if (0 < param_5) {
-          ((int (*)())_gleMap1Texture1fLoad)(glContext,iVar3,param_3,param_5,param_6,param_7,iVar2 + 0x2a8,fparam_1,fparam_2,
+        if (0 < stride) {
+          ((int (*)())_gleMap1Texture1fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x2a8,u1,u2,
                      in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
       case 4:
-        if (1 < param_5) {
-          ((int (*)())_gleMap1Texture2fLoad)(glContext,iVar3,param_3,param_5,param_6,param_7,iVar2 + 0x2e0,fparam_1,fparam_2,
+        if (1 < stride) {
+          ((int (*)())_gleMap1Texture2fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x2e0,u1,u2,
                      in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
       case 5:
-        if (2 < param_5) {
-          ((int (*)())_gleMap1Texture3fLoad)(glContext,iVar3,param_3,param_5,param_6,param_7,iVar2 + 0x340,fparam_1,fparam_2,
+        if (2 < stride) {
+          ((int (*)())_gleMap1Texture3fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x340,u1,u2,
                      in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
       case 6:
-        if (3 < param_5) {
-          ((int (*)())_gleMap1Texture4fLoad)(glContext,iVar3,param_3,param_5,param_6,param_7,iVar2 + 0x3c8,fparam_1,fparam_2,
+        if (3 < stride) {
+          ((int (*)())_gleMap1Texture4fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x3c8,u1,u2,
                      in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
       case 7:
-        if (2 < param_5) {
-          ((int (*)())_gleMap1Vertex3fLoad)(glContext,iVar3,param_3,param_5,param_6,param_7,iVar2,fparam_1,fparam_2,in_f3,
+        if (2 < stride) {
+          ((int (*)())_gleMap1Vertex3fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData,u1,u2,in_f3,
                      in_f4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
       case 8:
-        if (3 < param_5) {
-          ((int (*)())_gleMap1Vertex4fLoad)(glContext,iVar3,param_3,param_5,param_6,param_7,iVar2 + 0x88,fparam_1,fparam_2,
+        if (3 < stride) {
+          ((int (*)())_gleMap1Vertex4fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x88,u1,u2,
                      in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
@@ -1493,38 +1511,38 @@ void _glMap1f_Exec(int glContext,int param_2,undefined4 param_3,undefined4 param
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
-        uVar1 = 0x500;
+        glErrorCode = 0x500;
         goto LAB_0006f10c;
       }
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x501;
+    glErrorCode = 0x501;
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
 LAB_0006f10c:
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
 /* _glMap1f_CompExec @ 0x6f12c (112 bytes) */
-void _glMap1f_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,float fparam_1,float fparam_2)
+void _glMap1f_CompExec(undefined4 glContext,undefined4 target,undefined4 u1Shadow,undefined4 u2Shadow,undefined4 stride,undefined4 order,undefined4 points,float u1,float u2)
 {
-  ((int (*)())_glMap1f_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,fparam_1,fparam_2);
-  ((void (*)())_glMap1f_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,fparam_1,fparam_2);
+  ((int (*)())_glMap1f_Comp)(glContext,target,u1Shadow,u2Shadow,stride,order,points,u1,u2);
+  ((void (*)())_glMap1f_Exec)(glContext,target,u1Shadow,u2Shadow,stride,order,points,u1,u2);
   return;
 }
 
 /* _glMapVertexAttrib1fARB_Comp @ 0x6f19c (432 bytes) */
-void _glMapVertexAttrib1fARB_Comp(int param_1,undefined4 param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,undefined4 param_8,float fparam_1,float fparam_2)
+void _glMapVertexAttrib1fARB_Comp(int glContext,undefined4 index,uint size,undefined4 u1Shadow,undefined4 u2Shadow,undefined4 stride,int order,undefined4 points,float u1,float u2)
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -1542,68 +1560,68 @@ void _glMapVertexAttrib1fARB_Comp(int param_1,undefined4 param_2,uint param_3,un
   double in_stack_ffffffb0;
   double in_stack_ffffffb8;
   
-  if (param_3 == 2) {
-    iVar2 = (10 - param_7) * -8 + 100;
-    puVar1 = (undefined4 *)
-             _gleAddListItem(param_1,PTR__glMap1VertexAttrib2ARB_ListExec_00110168,iVar2);
-    if (puVar1 == (undefined4 *)0x0) {
+  if (size == 2) {
+    iVar2 = (10 - order) * -8 + 100;
+    listRecord = (undefined4 *)
+             _gleAddListItem(glContext,PTR__glMap1VertexAttrib2ARB_ListExec_00110168,iVar2);
+    if (listRecord == (undefined4 *)0x0) {
       return;
     }
-    ((void (*)())_gleMap1VertexAttrib2fLoad)(param_1,extraout_r4_00,iVar2,param_6,param_7,param_8,puVar1 + 1,fparam_1,fparam_2,
+    ((void (*)())_gleMap1VertexAttrib2fLoad)(glContext,extraout_r4_00,iVar2,stride,order,points,listRecord + 1,u1,u2,
                in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,in_stack_ffffffa0,
                in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8);
   }
-  else if (param_3 < 3) {
-    if (param_3 != 1) {
+  else if (size < 3) {
+    if (size != 1) {
 LAB_0006f31c:
-      if (*(int *)(param_1 + 0x7574) != 0) {
+      if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
-      *(undefined4 *)(param_1 + 0x7574) = 0x501;
+      *(undefined4 *)(glContext + 0x7574) = 0x501;
       return;
     }
-    iVar2 = (10 - param_7) * -4 + 0x3c;
-    puVar1 = (undefined4 *)
-             _gleAddListItem(param_1,PTR__glMap1VertexAttrib1ARB_ListExec_0011016c,iVar2);
-    if (puVar1 == (undefined4 *)0x0) {
+    iVar2 = (10 - order) * -4 + 0x3c;
+    listRecord = (undefined4 *)
+             _gleAddListItem(glContext,PTR__glMap1VertexAttrib1ARB_ListExec_0011016c,iVar2);
+    if (listRecord == (undefined4 *)0x0) {
       return;
     }
-    ((void (*)())_gleMap1VertexAttrib1fLoad)(param_1,extraout_r4,iVar2,param_6,param_7,param_8,puVar1 + 1,fparam_1,fparam_2,in_f3,
+    ((void (*)())_gleMap1VertexAttrib1fLoad)(glContext,extraout_r4,iVar2,stride,order,points,listRecord + 1,u1,u2,in_f3,
                in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8,
                in_stack_ffffffb0,in_stack_ffffffb8);
   }
-  else if (param_3 == 3) {
-    iVar2 = (10 - param_7) * -0xc + 0x8c;
-    puVar1 = (undefined4 *)
-             _gleAddListItem(param_1,PTR__glMap1VertexAttrib3ARB_ListExec_00110164,iVar2);
-    if (puVar1 == (undefined4 *)0x0) {
+  else if (size == 3) {
+    iVar2 = (10 - order) * -0xc + 0x8c;
+    listRecord = (undefined4 *)
+             _gleAddListItem(glContext,PTR__glMap1VertexAttrib3ARB_ListExec_00110164,iVar2);
+    if (listRecord == (undefined4 *)0x0) {
       return;
     }
-    ((void (*)())_gleMap1VertexAttrib3fLoad)(param_1,extraout_r4_01,iVar2,param_6,param_7,param_8,puVar1 + 1,fparam_1,fparam_2,
+    ((void (*)())_gleMap1VertexAttrib3fLoad)(glContext,extraout_r4_01,iVar2,stride,order,points,listRecord + 1,u1,u2,
                in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,in_stack_ffffffa0,
                in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8);
   }
   else {
-    if (param_3 != 4) goto LAB_0006f31c;
-    iVar2 = (10 - param_7) * -0x10 + 0xb4;
-    puVar1 = (undefined4 *)
-             _gleAddListItem(param_1,PTR__glMap1VertexAttrib4ARB_ListExec_00110160,iVar2);
-    if (puVar1 == (undefined4 *)0x0) {
+    if (size != 4) goto LAB_0006f31c;
+    iVar2 = (10 - order) * -0x10 + 0xb4;
+    listRecord = (undefined4 *)
+             _gleAddListItem(glContext,PTR__glMap1VertexAttrib4ARB_ListExec_00110160,iVar2);
+    if (listRecord == (undefined4 *)0x0) {
       return;
     }
-    ((void (*)())_gleMap1VertexAttrib4fLoad)(param_1,extraout_r4_02,iVar2,param_6,param_7,param_8,puVar1 + 1,fparam_1,fparam_2,
+    ((void (*)())_gleMap1VertexAttrib4fLoad)(glContext,extraout_r4_02,iVar2,stride,order,points,listRecord + 1,u1,u2,
                in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,in_stack_ffffffa0,
                in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8);
   }
-  *puVar1 = param_2;
+  *listRecord = index;
   return;
 }
 
 /* _glMapVertexAttrib1fARB_Exec @ 0x6f34c (444 bytes) */
-void _glMapVertexAttrib1fARB_Exec(int glContext,uint param_2,uint param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,undefined4 param_8,float fparam_1,float fparam_2)
+void _glMapVertexAttrib1fARB_Exec(int glContext,uint index,uint size,undefined4 u1Shadow,undefined4 u2Shadow,int stride,int order,undefined4 points,float u1,float u2)
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 glErrorCode;
+  int mapData;
   undefined4 extraout_r4;
   uint uVar3;
   double in_f3;
@@ -1618,73 +1636,73 @@ void _glMapVertexAttrib1fARB_Exec(int glContext,uint param_2,uint param_3,undefi
   double in_stack_ffffffb0;
   double in_stack_ffffffb8;
   
-  uVar3 = param_3;
-  iVar2 = _gleGetMapData(glContext);
+  uVar3 = size;
+  mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((((param_2 < 0x10) && (fparam_1 != fparam_2)) && (0 < param_7)) && (param_7 < 0xb)) {
-      if (param_3 == 2) {
-        if (1 < param_6) {
-          ((void (*)())_gleMap1VertexAttrib2fLoad)(glContext,extraout_r4,uVar3,param_6,param_7,param_8,
-                     iVar2 + param_2 * 0xb0 + 0x2ca8,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7
+    if ((((index < 0x10) && (u1 != u2)) && (0 < order)) && (order < 0xb)) {
+      if (size == 2) {
+        if (1 < stride) {
+          ((void (*)())_gleMap1VertexAttrib2fLoad)(glContext,extraout_r4,uVar3,stride,order,points,
+                     mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7
                      ,in_f8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8,in_stack_ffffffb0,
                      in_stack_ffffffb8);
           goto LAB_0006f4c8;
         }
       }
-      else if (param_3 < 3) {
-        if ((param_3 == 1) && (0 < param_6)) {
-          ((void (*)())_gleMap1VertexAttrib1fLoad)(glContext,extraout_r4,uVar3,param_6,param_7,param_8,
-                     iVar2 + param_2 * 0xb0 + 0x2ca8,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7
+      else if (size < 3) {
+        if ((size == 1) && (0 < stride)) {
+          ((void (*)())_gleMap1VertexAttrib1fLoad)(glContext,extraout_r4,uVar3,stride,order,points,
+                     mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7
                      ,in_f8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8,in_stack_ffffffb0,
                      in_stack_ffffffb8);
           goto LAB_0006f4c8;
         }
       }
-      else if (param_3 == 3) {
-        if (2 < param_6) {
-          ((void (*)())_gleMap1VertexAttrib3fLoad)(glContext,extraout_r4,uVar3,param_6,param_7,param_8,
-                     iVar2 + param_2 * 0xb0 + 0x2ca8,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7
+      else if (size == 3) {
+        if (2 < stride) {
+          ((void (*)())_gleMap1VertexAttrib3fLoad)(glContext,extraout_r4,uVar3,stride,order,points,
+                     mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7
                      ,in_f8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8,in_stack_ffffffb0,
                      in_stack_ffffffb8);
           goto LAB_0006f4c8;
         }
       }
-      else if ((param_3 == 4) && (3 < param_6)) {
-        ((void (*)())_gleMap1VertexAttrib4fLoad)(glContext,extraout_r4,uVar3,param_6,param_7,param_8,iVar2 + param_2 * 0xb0 + 0x2ca8
-                   ,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,
+      else if ((size == 4) && (3 < stride)) {
+        ((void (*)())_gleMap1VertexAttrib4fLoad)(glContext,extraout_r4,uVar3,stride,order,points,mapData + index * 0xb0 + 0x2ca8
+                   ,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,
                    in_stack_ffffffa0,in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8);
 LAB_0006f4c8:
-        ((unsigned char *)0x9da8)[param_2 + iVar2]= SUB41(param_3,0);
+        ((unsigned char *)0x9da8)[index + mapData]= SUB41(size,0);
         return;
       }
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x501;
+    glErrorCode = 0x501;
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
 /* _glMapVertexAttrib1fARB_CompExec @ 0x6f508 (120 bytes) */
-void _glMapVertexAttrib1fARB_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,float fparam_1,float fparam_2)
+void _glMapVertexAttrib1fARB_CompExec(undefined4 glContext,undefined4 index,undefined4 size,undefined4 u1Shadow,undefined4 u2Shadow,undefined4 stride,undefined4 order,undefined4 points,float u1,float u2)
 {
-  ((void (*)())_glMapVertexAttrib1fARB_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,fparam_1,fparam_2);
-  ((void (*)())_glMapVertexAttrib1fARB_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,fparam_1,fparam_2);
+  ((void (*)())_glMapVertexAttrib1fARB_Comp)(glContext,index,size,u1Shadow,u2Shadow,stride,order,points,u1,u2);
+  ((void (*)())_glMapVertexAttrib1fARB_Exec)(glContext,index,size,u1Shadow,u2Shadow,stride,order,points,u1,u2);
   return;
 }
 
 /* _glMapVertexAttrib1dARB_Comp @ 0x6f580 (448 bytes) */
-void _glMapVertexAttrib1dARB_Comp(int param_1,undefined4 param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,int param_9,undefined4 param_10,double fparam_1,double fparam_2)
+void _glMapVertexAttrib1dARB_Comp(int glContext,undefined4 index,uint size,undefined4 u1ShadowHi,undefined4 u1ShadowLo,undefined4 u2ShadowHi,undefined4 u2ShadowLo,undefined4 stride,int order,undefined4 points,double u1,double u2)
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -1702,68 +1720,68 @@ void _glMapVertexAttrib1dARB_Comp(int param_1,undefined4 param_2,uint param_3,un
   double in_f12;
   double in_f13;
   
-  if (param_3 == 2) {
-    iVar2 = (10 - param_9) * -8 + 100;
-    puVar1 = (undefined4 *)
-             _gleAddListItem(param_1,PTR__glMap1VertexAttrib2ARB_ListExec_00110168,iVar2);
-    if (puVar1 == (undefined4 *)0x0) {
+  if (size == 2) {
+    iVar2 = (10 - order) * -8 + 100;
+    listRecord = (undefined4 *)
+             _gleAddListItem(glContext,PTR__glMap1VertexAttrib2ARB_ListExec_00110168,iVar2);
+    if (listRecord == (undefined4 *)0x0) {
       return;
     }
-    ((void (*)())_gleMap1VertexAttrib2dLoad)(param_1,extraout_r4_00,iVar2,param_4,param_5,param_8,param_9,param_10,puVar1 + 1,
-               fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,
+    ((void (*)())_gleMap1VertexAttrib2dLoad)(glContext,extraout_r4_00,iVar2,u1ShadowHi,u1ShadowLo,stride,order,points,listRecord + 1,
+               u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,
                in_f13);
   }
-  else if (param_3 < 3) {
-    if (param_3 != 1) {
+  else if (size < 3) {
+    if (size != 1) {
 LAB_0006f710:
-      if (*(int *)(param_1 + 0x7574) != 0) {
+      if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
-      *(undefined4 *)(param_1 + 0x7574) = 0x501;
+      *(undefined4 *)(glContext + 0x7574) = 0x501;
       return;
     }
-    iVar2 = (10 - param_9) * -4 + 0x3c;
-    puVar1 = (undefined4 *)
-             _gleAddListItem(param_1,PTR__glMap1VertexAttrib1ARB_ListExec_0011016c,iVar2);
-    if (puVar1 == (undefined4 *)0x0) {
+    iVar2 = (10 - order) * -4 + 0x3c;
+    listRecord = (undefined4 *)
+             _gleAddListItem(glContext,PTR__glMap1VertexAttrib1ARB_ListExec_0011016c,iVar2);
+    if (listRecord == (undefined4 *)0x0) {
       return;
     }
-    ((void (*)())_gleMap1VertexAttrib1dLoad)(param_1,extraout_r4,iVar2,param_4,param_5,param_8,param_9,param_10,puVar1 + 1,
-               fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,
+    ((void (*)())_gleMap1VertexAttrib1dLoad)(glContext,extraout_r4,iVar2,u1ShadowHi,u1ShadowLo,stride,order,points,listRecord + 1,
+               u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,
                in_f13);
   }
-  else if (param_3 == 3) {
-    iVar2 = (10 - param_9) * -0xc + 0x8c;
-    puVar1 = (undefined4 *)
-             _gleAddListItem(param_1,PTR__glMap1VertexAttrib3ARB_ListExec_00110164,iVar2);
-    if (puVar1 == (undefined4 *)0x0) {
+  else if (size == 3) {
+    iVar2 = (10 - order) * -0xc + 0x8c;
+    listRecord = (undefined4 *)
+             _gleAddListItem(glContext,PTR__glMap1VertexAttrib3ARB_ListExec_00110164,iVar2);
+    if (listRecord == (undefined4 *)0x0) {
       return;
     }
-    ((void (*)())_gleMap1VertexAttrib3dLoad)(param_1,extraout_r4_01,iVar2,param_4,param_5,param_8,param_9,param_10,puVar1 + 1,
-               fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,
+    ((void (*)())_gleMap1VertexAttrib3dLoad)(glContext,extraout_r4_01,iVar2,u1ShadowHi,u1ShadowLo,stride,order,points,listRecord + 1,
+               u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,
                in_f13);
   }
   else {
-    if (param_3 != 4) goto LAB_0006f710;
-    iVar2 = (10 - param_9) * -0x10 + 0xb4;
-    puVar1 = (undefined4 *)
-             _gleAddListItem(param_1,PTR__glMap1VertexAttrib4ARB_ListExec_00110160,iVar2);
-    if (puVar1 == (undefined4 *)0x0) {
+    if (size != 4) goto LAB_0006f710;
+    iVar2 = (10 - order) * -0x10 + 0xb4;
+    listRecord = (undefined4 *)
+             _gleAddListItem(glContext,PTR__glMap1VertexAttrib4ARB_ListExec_00110160,iVar2);
+    if (listRecord == (undefined4 *)0x0) {
       return;
     }
-    ((void (*)())_gleMap1VertexAttrib4dLoad)(param_1,extraout_r4_02,iVar2,param_4,param_5,param_8,param_9,param_10,puVar1 + 1,
-               fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,
+    ((void (*)())_gleMap1VertexAttrib4dLoad)(glContext,extraout_r4_02,iVar2,u1ShadowHi,u1ShadowLo,stride,order,points,listRecord + 1,
+               u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,
                in_f13);
   }
-  *puVar1 = param_2;
+  *listRecord = index;
   return;
 }
 
 /* _glMapVertexAttrib1dARB_Exec @ 0x6f740 (460 bytes) */
-void _glMapVertexAttrib1dARB_Exec(int glContext,uint param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,int param_8,int param_9,undefined4 param_10,double fparam_1,double fparam_2)
+void _glMapVertexAttrib1dARB_Exec(int glContext,uint index,uint size,undefined4 u1ShadowHi,undefined4 u1ShadowLo,undefined4 u2ShadowHi,undefined4 u2ShadowLo,int stride,int order,undefined4 points,double u1,double u2)
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 glErrorCode;
+  int mapData;
   undefined4 extraout_r4;
   uint uVar3;
   double in_f3;
@@ -1778,72 +1796,72 @@ void _glMapVertexAttrib1dARB_Exec(int glContext,uint param_2,uint param_3,undefi
   double in_f12;
   double in_f13;
   
-  uVar3 = param_3;
-  iVar2 = _gleGetMapData(glContext);
+  uVar3 = size;
+  mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((((param_2 < 0x10) && (fparam_1 != fparam_2)) && (0 < param_9)) && (param_9 < 0xb)) {
-      if (param_3 == 2) {
-        if (1 < param_8) {
-          ((void (*)())_gleMap1VertexAttrib2dLoad)(glContext,extraout_r4,uVar3,param_4,param_5,param_8,param_9,param_10,
-                     iVar2 + param_2 * 0xb0 + 0x2ca8,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7
+    if ((((index < 0x10) && (u1 != u2)) && (0 < order)) && (order < 0xb)) {
+      if (size == 2) {
+        if (1 < stride) {
+          ((void (*)())_gleMap1VertexAttrib2dLoad)(glContext,extraout_r4,uVar3,u1ShadowHi,u1ShadowLo,stride,order,points,
+                     mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7
                      ,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
           goto LAB_0006f8cc;
         }
       }
-      else if (param_3 < 3) {
-        if ((param_3 == 1) && (0 < param_8)) {
-          ((void (*)())_gleMap1VertexAttrib1dLoad)(glContext,extraout_r4,uVar3,param_4,param_5,param_8,param_9,param_10,
-                     iVar2 + param_2 * 0xb0 + 0x2ca8,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7
+      else if (size < 3) {
+        if ((size == 1) && (0 < stride)) {
+          ((void (*)())_gleMap1VertexAttrib1dLoad)(glContext,extraout_r4,uVar3,u1ShadowHi,u1ShadowLo,stride,order,points,
+                     mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7
                      ,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
           goto LAB_0006f8cc;
         }
       }
-      else if (param_3 == 3) {
-        if (2 < param_8) {
-          ((void (*)())_gleMap1VertexAttrib3dLoad)(glContext,extraout_r4,uVar3,param_4,param_5,param_8,param_9,param_10,
-                     iVar2 + param_2 * 0xb0 + 0x2ca8,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7
+      else if (size == 3) {
+        if (2 < stride) {
+          ((void (*)())_gleMap1VertexAttrib3dLoad)(glContext,extraout_r4,uVar3,u1ShadowHi,u1ShadowLo,stride,order,points,
+                     mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7
                      ,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
           goto LAB_0006f8cc;
         }
       }
-      else if ((param_3 == 4) && (3 < param_8)) {
-        ((void (*)())_gleMap1VertexAttrib4dLoad)(glContext,extraout_r4,uVar3,param_4,param_5,param_8,param_9,param_10,
-                   iVar2 + param_2 * 0xb0 + 0x2ca8,fparam_1,fparam_2,in_f3,in_f4,in_f5,in_f6,in_f7,
+      else if ((size == 4) && (3 < stride)) {
+        ((void (*)())_gleMap1VertexAttrib4dLoad)(glContext,extraout_r4,uVar3,u1ShadowHi,u1ShadowLo,stride,order,points,
+                   mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,
                    in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
 LAB_0006f8cc:
-        ((unsigned char *)0x9da8)[param_2 + iVar2]= SUB41(param_3,0);
+        ((unsigned char *)0x9da8)[index + mapData]= SUB41(size,0);
         return;
       }
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x501;
+    glErrorCode = 0x501;
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
 /* _glMapVertexAttrib1dARB_CompExec @ 0x6f90c (128 bytes) */
-void _glMapVertexAttrib1dARB_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,double fparam_1,double fparam_2)
+void _glMapVertexAttrib1dARB_CompExec(undefined4 glContext,undefined4 index,undefined4 size,undefined4 u1ShadowHi,undefined4 u1ShadowLo,undefined4 u2ShadowHi,undefined4 u2ShadowLo,undefined4 stride,undefined4 order,undefined4 points,double u1,double u2)
 {
-  ((void (*)())_glMapVertexAttrib1dARB_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10,
-             fparam_1,fparam_2);
-  ((void (*)())_glMapVertexAttrib1dARB_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10,
-             fparam_1,fparam_2);
+  ((void (*)())_glMapVertexAttrib1dARB_Comp)(glContext,index,size,u1ShadowHi,u1ShadowLo,u2ShadowHi,u2ShadowLo,stride,order,points,
+             u1,u2);
+  ((void (*)())_glMapVertexAttrib1dARB_Exec)(glContext,index,size,u1ShadowHi,u1ShadowLo,u2ShadowHi,u2ShadowLo,stride,order,points,
+             u1,u2);
   return;
 }
 
 /* _glMap2Vertex3_ListExec @ 0x6f98c (180 bytes) */
-int _glMap2Vertex3_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap2Vertex3_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int *piVar1;
   int iVar2;
@@ -1852,31 +1870,32 @@ int _glMap2Vertex3_ListExec(param_1, param_2)
   int iVar5;
   int iVar6;
   int iVar7;
+  int remaining;
   int iVar8;
   int iVar9;
   
-  iVar8 = _gleGetMapData(param_1);
-  iVar7 = param_2[1];
-  *(int *)(iVar8 + 0x478) = *param_2;
+  iVar8 = _gleGetMapData(glContext);
+  iVar7 = listRecord[1];
+  *(int *)(iVar8 + 0x478) = *listRecord;
   *(int *)(iVar8 + 0x47c) = iVar7;
-  iVar9 = *param_2;
-  iVar6 = param_2[1];
-  iVar7 = param_2[3];
-  iVar2 = param_2[6];
-  iVar3 = param_2[4];
-  iVar4 = param_2[5];
-  iVar5 = param_2[7];
-  *(int *)(iVar8 + 0x480) = param_2[2];
+  iVar9 = *listRecord;
+  iVar6 = listRecord[1];
+  iVar7 = listRecord[3];
+  iVar2 = listRecord[6];
+  iVar3 = listRecord[4];
+  iVar4 = listRecord[5];
+  iVar5 = listRecord[7];
+  *(int *)(iVar8 + 0x480) = listRecord[2];
   *(int *)(iVar8 + 0x484) = iVar7;
   *(int *)(iVar8 + 0x490) = iVar2;
   *(int *)(iVar8 + 0x488) = iVar3;
   *(int *)(iVar8 + 0x48c) = iVar4;
   *(int *)(iVar8 + 0x494) = iVar5;
-  for (iVar7 = iVar9 * iVar6; iVar7 != 0; iVar7 = iVar7 + -1) {
-    piVar1 = param_2 + 8;
-    iVar2 = param_2[9];
-    iVar3 = param_2[10];
-    param_2 = param_2 + 3;
+  for (remaining = iVar9 * iVar6; remaining != 0; remaining = remaining + -1) {
+    piVar1 = listRecord + 8;
+    iVar2 = listRecord[9];
+    iVar3 = listRecord[10];
+    listRecord = listRecord + 3;
     *(int *)(iVar8 + 0x498) = *piVar1;
     *(int *)(iVar8 + 0x49c) = iVar2;
     *(int *)(iVar8 + 0x4a0) = iVar3;
@@ -1886,44 +1905,45 @@ int _glMap2Vertex3_ListExec(param_1, param_2)
 }
 
 /* _glMap2Vertex4_ListExec @ 0x6fa40 (200 bytes) */
-int _glMap2Vertex4_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap2Vertex4_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
+  int mapData;
   int iVar7;
   int iVar8;
   int iVar9;
+  int remaining;
   
-  iVar6 = _gleGetMapData(param_1);
-  iVar5 = param_2[1];
-  *(int *)(iVar6 + 0x948) = *param_2;
-  *(int *)(iVar6 + 0x94c) = iVar5;
-  iVar7 = *param_2;
-  iVar4 = param_2[1];
-  iVar5 = param_2[3];
-  iVar9 = param_2[6];
-  iVar1 = param_2[4];
-  iVar2 = param_2[5];
-  iVar3 = param_2[7];
-  *(int *)(iVar6 + 0x950) = param_2[2];
-  *(int *)(iVar6 + 0x954) = iVar5;
-  *(int *)(iVar6 + 0x960) = iVar9;
-  *(int *)(iVar6 + 0x958) = iVar1;
-  *(int *)(iVar6 + 0x95c) = iVar2;
-  *(int *)(iVar6 + 0x964) = iVar3;
+  mapData = _gleGetMapData(glContext);
+  iVar5 = listRecord[1];
+  *(int *)(mapData + 0x948) = *listRecord;
+  *(int *)(mapData + 0x94c) = iVar5;
+  iVar7 = *listRecord;
+  iVar4 = listRecord[1];
+  iVar5 = listRecord[3];
+  iVar9 = listRecord[6];
+  iVar1 = listRecord[4];
+  iVar2 = listRecord[5];
+  iVar3 = listRecord[7];
+  *(int *)(mapData + 0x950) = listRecord[2];
+  *(int *)(mapData + 0x954) = iVar5;
+  *(int *)(mapData + 0x960) = iVar9;
+  *(int *)(mapData + 0x958) = iVar1;
+  *(int *)(mapData + 0x95c) = iVar2;
+  *(int *)(mapData + 0x964) = iVar3;
   iVar5 = 0;
-  for (iVar9 = iVar7 * iVar4; iVar9 != 0; iVar9 = iVar9 + -1) {
-    iVar8 = iVar5 * 0x10 + iVar6;
-    iVar1 = param_2[iVar5 * 4 + 8];
-    iVar2 = param_2[iVar5 * 4 + 9];
-    iVar3 = param_2[iVar5 * 4 + 10];
-    *(int *)(iVar8 + 0x974) = param_2[iVar5 * 4 + 0xb];
+  for (remaining = iVar7 * iVar4; remaining != 0; remaining = remaining + -1) {
+    iVar8 = iVar5 * 0x10 + mapData;
+    iVar1 = listRecord[iVar5 * 4 + 8];
+    iVar2 = listRecord[iVar5 * 4 + 9];
+    iVar3 = listRecord[iVar5 * 4 + 10];
+    *(int *)(iVar8 + 0x974) = listRecord[iVar5 * 4 + 0xb];
     *(int *)(iVar8 + 0x968) = iVar1;
     *(int *)(iVar8 + 0x96c) = iVar2;
     *(int *)(iVar8 + 0x970) = iVar3;
@@ -1933,44 +1953,45 @@ int _glMap2Vertex4_ListExec(param_1, param_2)
 }
 
 /* _glMap2Color_ListExec @ 0x6fb08 (200 bytes) */
-int _glMap2Color_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap2Color_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
+  int mapData;
   int iVar7;
   int iVar8;
   int iVar9;
+  int remaining;
   
-  iVar6 = _gleGetMapData(param_1);
-  iVar5 = param_2[1];
-  *(int *)(iVar6 + 0x1478) = *param_2;
-  *(int *)(iVar6 + 0x147c) = iVar5;
-  iVar7 = *param_2;
-  iVar4 = param_2[1];
-  iVar5 = param_2[3];
-  iVar9 = param_2[6];
-  iVar1 = param_2[4];
-  iVar2 = param_2[5];
-  iVar3 = param_2[7];
-  *(int *)(iVar6 + 0x1480) = param_2[2];
-  *(int *)(iVar6 + 0x1484) = iVar5;
-  *(int *)(iVar6 + 0x1490) = iVar9;
-  *(int *)(iVar6 + 0x1488) = iVar1;
-  *(int *)(iVar6 + 0x148c) = iVar2;
-  *(int *)(iVar6 + 0x1494) = iVar3;
+  mapData = _gleGetMapData(glContext);
+  iVar5 = listRecord[1];
+  *(int *)(mapData + 0x1478) = *listRecord;
+  *(int *)(mapData + 0x147c) = iVar5;
+  iVar7 = *listRecord;
+  iVar4 = listRecord[1];
+  iVar5 = listRecord[3];
+  iVar9 = listRecord[6];
+  iVar1 = listRecord[4];
+  iVar2 = listRecord[5];
+  iVar3 = listRecord[7];
+  *(int *)(mapData + 0x1480) = listRecord[2];
+  *(int *)(mapData + 0x1484) = iVar5;
+  *(int *)(mapData + 0x1490) = iVar9;
+  *(int *)(mapData + 0x1488) = iVar1;
+  *(int *)(mapData + 0x148c) = iVar2;
+  *(int *)(mapData + 0x1494) = iVar3;
   iVar5 = 0;
-  for (iVar9 = iVar7 * iVar4; iVar9 != 0; iVar9 = iVar9 + -1) {
-    iVar8 = iVar5 * 0x10 + iVar6;
-    iVar1 = param_2[iVar5 * 4 + 8];
-    iVar2 = param_2[iVar5 * 4 + 9];
-    iVar3 = param_2[iVar5 * 4 + 10];
-    *(int *)(iVar8 + 0x14a4) = param_2[iVar5 * 4 + 0xb];
+  for (remaining = iVar7 * iVar4; remaining != 0; remaining = remaining + -1) {
+    iVar8 = iVar5 * 0x10 + mapData;
+    iVar1 = listRecord[iVar5 * 4 + 8];
+    iVar2 = listRecord[iVar5 * 4 + 9];
+    iVar3 = listRecord[iVar5 * 4 + 10];
+    *(int *)(iVar8 + 0x14a4) = listRecord[iVar5 * 4 + 0xb];
     *(int *)(iVar8 + 0x1498) = iVar1;
     *(int *)(iVar8 + 0x149c) = iVar2;
     *(int *)(iVar8 + 0x14a0) = iVar3;
@@ -1980,55 +2001,56 @@ int _glMap2Color_ListExec(param_1, param_2)
 }
 
 /* _glMap2Index_ListExec @ 0x6fbd0 (168 bytes) */
-int _glMap2Index_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap2Index_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
-  int *piVar7;
-  int *piVar8;
+  int remaining;
+  int mapData;
+  int *dstCursor;
+  int *srcCursor;
   int iVar9;
   
-  iVar6 = _gleGetMapData(param_1);
-  iVar5 = param_2[1];
-  *(int *)(iVar6 + 0x1ad8) = *param_2;
-  *(int *)(iVar6 + 0x1adc) = iVar5;
-  iVar9 = *param_2 * param_2[1];
-  iVar5 = param_2[3];
-  iVar1 = param_2[6];
-  iVar2 = param_2[4];
-  iVar3 = param_2[5];
-  iVar4 = param_2[7];
-  *(int *)(iVar6 + 0x1ae0) = param_2[2];
-  *(int *)(iVar6 + 0x1ae4) = iVar5;
-  *(int *)(iVar6 + 0x1af0) = iVar1;
-  *(int *)(iVar6 + 0x1ae8) = iVar2;
-  *(int *)(iVar6 + 0x1aec) = iVar3;
-  *(int *)(iVar6 + 0x1af4) = iVar4;
+  mapData = _gleGetMapData(glContext);
+  iVar5 = listRecord[1];
+  *(int *)(mapData + 0x1ad8) = *listRecord;
+  *(int *)(mapData + 0x1adc) = iVar5;
+  iVar9 = *listRecord * listRecord[1];
+  iVar5 = listRecord[3];
+  iVar1 = listRecord[6];
+  iVar2 = listRecord[4];
+  iVar3 = listRecord[5];
+  iVar4 = listRecord[7];
+  *(int *)(mapData + 0x1ae0) = listRecord[2];
+  *(int *)(mapData + 0x1ae4) = iVar5;
+  *(int *)(mapData + 0x1af0) = iVar1;
+  *(int *)(mapData + 0x1ae8) = iVar2;
+  *(int *)(mapData + 0x1aec) = iVar3;
+  *(int *)(mapData + 0x1af4) = iVar4;
   if (iVar9 != 0) {
-    piVar7 = (int *)(iVar6 + 0x1af8);
-    piVar8 = param_2 + 8;
-    iVar5 = iVar9;
+    dstCursor = (int *)(mapData + 0x1af8);
+    srcCursor = listRecord + 8;
+    remaining = iVar9;
     do {
-      iVar1 = *piVar8;
-      piVar8 = piVar8 + 1;
-      *piVar7 = iVar1;
-      piVar7 = piVar7 + 1;
-      iVar5 = iVar5 + -1;
-    } while (iVar5 != 0);
+      iVar1 = *srcCursor;
+      srcCursor = srcCursor + 1;
+      *dstCursor = iVar1;
+      dstCursor = dstCursor + 1;
+      remaining = remaining + -1;
+    } while (remaining != 0);
   }
   return (100 - iVar9) * -4 + 0x1b0;
 }
 
 /* _glMap2Normal_ListExec @ 0x6fc78 (180 bytes) */
-int _glMap2Normal_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap2Normal_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int *piVar1;
   int iVar2;
@@ -2037,31 +2059,32 @@ int _glMap2Normal_ListExec(param_1, param_2)
   int iVar5;
   int iVar6;
   int iVar7;
+  int remaining;
   int iVar8;
   int iVar9;
   
-  iVar8 = _gleGetMapData(param_1);
-  iVar7 = param_2[1];
-  *(int *)(iVar8 + 0xfa8) = *param_2;
+  iVar8 = _gleGetMapData(glContext);
+  iVar7 = listRecord[1];
+  *(int *)(iVar8 + 0xfa8) = *listRecord;
   *(int *)(iVar8 + 0xfac) = iVar7;
-  iVar9 = *param_2;
-  iVar6 = param_2[1];
-  iVar7 = param_2[3];
-  iVar2 = param_2[6];
-  iVar3 = param_2[4];
-  iVar4 = param_2[5];
-  iVar5 = param_2[7];
-  *(int *)(iVar8 + 0xfb0) = param_2[2];
+  iVar9 = *listRecord;
+  iVar6 = listRecord[1];
+  iVar7 = listRecord[3];
+  iVar2 = listRecord[6];
+  iVar3 = listRecord[4];
+  iVar4 = listRecord[5];
+  iVar5 = listRecord[7];
+  *(int *)(iVar8 + 0xfb0) = listRecord[2];
   *(int *)(iVar8 + 0xfb4) = iVar7;
   *(int *)(iVar8 + 0xfc0) = iVar2;
   *(int *)(iVar8 + 0xfb8) = iVar3;
   *(int *)(iVar8 + 0xfbc) = iVar4;
   *(int *)(iVar8 + 0xfc4) = iVar5;
-  for (iVar7 = iVar9 * iVar6; iVar7 != 0; iVar7 = iVar7 + -1) {
-    piVar1 = param_2 + 8;
-    iVar2 = param_2[9];
-    iVar3 = param_2[10];
-    param_2 = param_2 + 3;
+  for (remaining = iVar9 * iVar6; remaining != 0; remaining = remaining + -1) {
+    piVar1 = listRecord + 8;
+    iVar2 = listRecord[9];
+    iVar3 = listRecord[10];
+    listRecord = listRecord + 3;
     *(int *)(iVar8 + 0xfc8) = *piVar1;
     *(int *)(iVar8 + 0xfcc) = iVar2;
     *(int *)(iVar8 + 0xfd0) = iVar3;
@@ -2071,87 +2094,89 @@ int _glMap2Normal_ListExec(param_1, param_2)
 }
 
 /* _glMap2Texture1_ListExec @ 0x6fd2c (168 bytes) */
-int _glMap2Texture1_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap2Texture1_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
-  int *piVar7;
-  int *piVar8;
+  int remaining;
+  int mapData;
+  int *dstCursor;
+  int *srcCursor;
   int iVar9;
   
-  iVar6 = _gleGetMapData(param_1);
-  iVar5 = param_2[1];
-  *(int *)(iVar6 + 0x1c88) = *param_2;
-  *(int *)(iVar6 + 0x1c8c) = iVar5;
-  iVar9 = *param_2 * param_2[1];
-  iVar5 = param_2[3];
-  iVar1 = param_2[6];
-  iVar2 = param_2[4];
-  iVar3 = param_2[5];
-  iVar4 = param_2[7];
-  *(int *)(iVar6 + 0x1c90) = param_2[2];
-  *(int *)(iVar6 + 0x1c94) = iVar5;
-  *(int *)(iVar6 + 0x1ca0) = iVar1;
-  *(int *)(iVar6 + 0x1c98) = iVar2;
-  *(int *)(iVar6 + 0x1c9c) = iVar3;
-  *(int *)(iVar6 + 0x1ca4) = iVar4;
+  mapData = _gleGetMapData(glContext);
+  iVar5 = listRecord[1];
+  *(int *)(mapData + 0x1c88) = *listRecord;
+  *(int *)(mapData + 0x1c8c) = iVar5;
+  iVar9 = *listRecord * listRecord[1];
+  iVar5 = listRecord[3];
+  iVar1 = listRecord[6];
+  iVar2 = listRecord[4];
+  iVar3 = listRecord[5];
+  iVar4 = listRecord[7];
+  *(int *)(mapData + 0x1c90) = listRecord[2];
+  *(int *)(mapData + 0x1c94) = iVar5;
+  *(int *)(mapData + 0x1ca0) = iVar1;
+  *(int *)(mapData + 0x1c98) = iVar2;
+  *(int *)(mapData + 0x1c9c) = iVar3;
+  *(int *)(mapData + 0x1ca4) = iVar4;
   if (iVar9 != 0) {
-    piVar7 = (int *)(iVar6 + 0x1ca8);
-    piVar8 = param_2 + 8;
-    iVar5 = iVar9;
+    dstCursor = (int *)(mapData + 0x1ca8);
+    srcCursor = listRecord + 8;
+    remaining = iVar9;
     do {
-      iVar1 = *piVar8;
-      piVar8 = piVar8 + 1;
-      *piVar7 = iVar1;
-      piVar7 = piVar7 + 1;
-      iVar5 = iVar5 + -1;
-    } while (iVar5 != 0);
+      iVar1 = *srcCursor;
+      srcCursor = srcCursor + 1;
+      *dstCursor = iVar1;
+      dstCursor = dstCursor + 1;
+      remaining = remaining + -1;
+    } while (remaining != 0);
   }
   return (100 - iVar9) * -4 + 0x1b0;
 }
 
 /* _glMap2Texture2_ListExec @ 0x6fdd4 (184 bytes) */
-int _glMap2Texture2_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap2Texture2_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
+  int mapData;
   int iVar7;
   int iVar8;
+  int remaining;
   
-  iVar6 = _gleGetMapData(param_1);
-  iVar4 = param_2[1];
-  *(int *)(iVar6 + 0x1e38) = *param_2;
-  *(int *)(iVar6 + 0x1e3c) = iVar4;
-  iVar7 = *param_2;
-  iVar3 = param_2[1];
-  iVar4 = param_2[3];
-  iVar8 = param_2[6];
-  iVar1 = param_2[4];
-  iVar5 = param_2[5];
-  iVar2 = param_2[7];
-  *(int *)(iVar6 + 0x1e40) = param_2[2];
-  *(int *)(iVar6 + 0x1e44) = iVar4;
-  *(int *)(iVar6 + 0x1e50) = iVar8;
-  *(int *)(iVar6 + 0x1e48) = iVar1;
-  *(int *)(iVar6 + 0x1e4c) = iVar5;
-  *(int *)(iVar6 + 0x1e54) = iVar2;
+  mapData = _gleGetMapData(glContext);
+  iVar4 = listRecord[1];
+  *(int *)(mapData + 0x1e38) = *listRecord;
+  *(int *)(mapData + 0x1e3c) = iVar4;
+  iVar7 = *listRecord;
+  iVar3 = listRecord[1];
+  iVar4 = listRecord[3];
+  iVar8 = listRecord[6];
+  iVar1 = listRecord[4];
+  iVar5 = listRecord[5];
+  iVar2 = listRecord[7];
+  *(int *)(mapData + 0x1e40) = listRecord[2];
+  *(int *)(mapData + 0x1e44) = iVar4;
+  *(int *)(mapData + 0x1e50) = iVar8;
+  *(int *)(mapData + 0x1e48) = iVar1;
+  *(int *)(mapData + 0x1e4c) = iVar5;
+  *(int *)(mapData + 0x1e54) = iVar2;
   iVar4 = 0;
-  for (iVar8 = iVar7 * iVar3; iVar8 != 0; iVar8 = iVar8 + -1) {
-    iVar5 = iVar4 * 8 + iVar6;
-    iVar1 = param_2[iVar4 * 2 + 8];
-    *(int *)(iVar5 + 0x1e5c) = param_2[iVar4 * 2 + 9];
+  for (remaining = iVar7 * iVar3; remaining != 0; remaining = remaining + -1) {
+    iVar5 = iVar4 * 8 + mapData;
+    iVar1 = listRecord[iVar4 * 2 + 8];
+    *(int *)(iVar5 + 0x1e5c) = listRecord[iVar4 * 2 + 9];
     *(int *)(iVar5 + 0x1e58) = iVar1;
     iVar4 = iVar4 + 1;
   }
@@ -2159,9 +2184,9 @@ int _glMap2Texture2_ListExec(param_1, param_2)
 }
 
 /* _glMap2Texture3_ListExec @ 0x6fe8c (180 bytes) */
-int _glMap2Texture3_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap2Texture3_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int *piVar1;
   int iVar2;
@@ -2170,31 +2195,32 @@ int _glMap2Texture3_ListExec(param_1, param_2)
   int iVar5;
   int iVar6;
   int iVar7;
+  int remaining;
   int iVar8;
   int iVar9;
   
-  iVar8 = _gleGetMapData(param_1);
-  iVar7 = param_2[1];
-  *(int *)(iVar8 + 0x2178) = *param_2;
+  iVar8 = _gleGetMapData(glContext);
+  iVar7 = listRecord[1];
+  *(int *)(iVar8 + 0x2178) = *listRecord;
   *(int *)(iVar8 + 0x217c) = iVar7;
-  iVar9 = *param_2;
-  iVar6 = param_2[1];
-  iVar7 = param_2[3];
-  iVar2 = param_2[6];
-  iVar3 = param_2[4];
-  iVar4 = param_2[5];
-  iVar5 = param_2[7];
-  *(int *)(iVar8 + 0x2180) = param_2[2];
+  iVar9 = *listRecord;
+  iVar6 = listRecord[1];
+  iVar7 = listRecord[3];
+  iVar2 = listRecord[6];
+  iVar3 = listRecord[4];
+  iVar4 = listRecord[5];
+  iVar5 = listRecord[7];
+  *(int *)(iVar8 + 0x2180) = listRecord[2];
   *(int *)(iVar8 + 0x2184) = iVar7;
   *(int *)(iVar8 + 0x2190) = iVar2;
   *(int *)(iVar8 + 0x2188) = iVar3;
   *(int *)(iVar8 + 0x218c) = iVar4;
   *(int *)(iVar8 + 0x2194) = iVar5;
-  for (iVar7 = iVar9 * iVar6; iVar7 != 0; iVar7 = iVar7 + -1) {
-    piVar1 = param_2 + 8;
-    iVar2 = param_2[9];
-    iVar3 = param_2[10];
-    param_2 = param_2 + 3;
+  for (remaining = iVar9 * iVar6; remaining != 0; remaining = remaining + -1) {
+    piVar1 = listRecord + 8;
+    iVar2 = listRecord[9];
+    iVar3 = listRecord[10];
+    listRecord = listRecord + 3;
     *(int *)(iVar8 + 0x2198) = *piVar1;
     *(int *)(iVar8 + 0x219c) = iVar2;
     *(int *)(iVar8 + 0x21a0) = iVar3;
@@ -2204,44 +2230,45 @@ int _glMap2Texture3_ListExec(param_1, param_2)
 }
 
 /* _glMap2Texture4_ListExec @ 0x6ff40 (200 bytes) */
-int _glMap2Texture4_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap2Texture4_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
+  int mapData;
   int iVar7;
   int iVar8;
   int iVar9;
+  int remaining;
   
-  iVar6 = _gleGetMapData(param_1);
-  iVar5 = param_2[1];
-  *(int *)(iVar6 + 0x2648) = *param_2;
-  *(int *)(iVar6 + 0x264c) = iVar5;
-  iVar7 = *param_2;
-  iVar4 = param_2[1];
-  iVar5 = param_2[3];
-  iVar9 = param_2[6];
-  iVar1 = param_2[4];
-  iVar2 = param_2[5];
-  iVar3 = param_2[7];
-  *(int *)(iVar6 + 0x2650) = param_2[2];
-  *(int *)(iVar6 + 0x2654) = iVar5;
-  *(int *)(iVar6 + 0x2660) = iVar9;
-  *(int *)(iVar6 + 0x2658) = iVar1;
-  *(int *)(iVar6 + 0x265c) = iVar2;
-  *(int *)(iVar6 + 0x2664) = iVar3;
+  mapData = _gleGetMapData(glContext);
+  iVar5 = listRecord[1];
+  *(int *)(mapData + 0x2648) = *listRecord;
+  *(int *)(mapData + 0x264c) = iVar5;
+  iVar7 = *listRecord;
+  iVar4 = listRecord[1];
+  iVar5 = listRecord[3];
+  iVar9 = listRecord[6];
+  iVar1 = listRecord[4];
+  iVar2 = listRecord[5];
+  iVar3 = listRecord[7];
+  *(int *)(mapData + 0x2650) = listRecord[2];
+  *(int *)(mapData + 0x2654) = iVar5;
+  *(int *)(mapData + 0x2660) = iVar9;
+  *(int *)(mapData + 0x2658) = iVar1;
+  *(int *)(mapData + 0x265c) = iVar2;
+  *(int *)(mapData + 0x2664) = iVar3;
   iVar5 = 0;
-  for (iVar9 = iVar7 * iVar4; iVar9 != 0; iVar9 = iVar9 + -1) {
-    iVar8 = iVar5 * 0x10 + iVar6;
-    iVar1 = param_2[iVar5 * 4 + 8];
-    iVar2 = param_2[iVar5 * 4 + 9];
-    iVar3 = param_2[iVar5 * 4 + 10];
-    *(int *)(iVar8 + 0x2674) = param_2[iVar5 * 4 + 0xb];
+  for (remaining = iVar7 * iVar4; remaining != 0; remaining = remaining + -1) {
+    iVar8 = iVar5 * 0x10 + mapData;
+    iVar1 = listRecord[iVar5 * 4 + 8];
+    iVar2 = listRecord[iVar5 * 4 + 9];
+    iVar3 = listRecord[iVar5 * 4 + 10];
+    *(int *)(iVar8 + 0x2674) = listRecord[iVar5 * 4 + 0xb];
     *(int *)(iVar8 + 0x2668) = iVar1;
     *(int *)(iVar8 + 0x266c) = iVar2;
     *(int *)(iVar8 + 0x2670) = iVar3;
@@ -2251,98 +2278,102 @@ int _glMap2Texture4_ListExec(param_1, param_2)
 }
 
 /* _glMap2VertexAttrib1ARB_ListExec @ 0x70008 (200 bytes) */
-int _glMap2VertexAttrib1ARB_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap2VertexAttrib1ARB_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
-  int *piVar3;
+  int *srcCursor;
   int iVar4;
-  int *piVar5;
+  int remaining;
+  int mapData;
+  int *dstCursor;
   int iVar6;
   int iVar7;
   int iVar8;
   int iVar9;
   
-  iVar4 = _gleGetMapData(param_1);
-  iVar9 = *param_2;
-  iVar8 = param_2[1];
-  iVar7 = param_2[2];
-  iVar6 = iVar4 + iVar9 * 0x660;
+  mapData = _gleGetMapData(glContext);
+  iVar9 = *listRecord;
+  iVar8 = listRecord[1];
+  iVar7 = listRecord[2];
+  iVar6 = mapData + iVar9 * 0x660;
   *(int *)(iVar6 + 0x37a8) = iVar8;
   *(int *)(iVar6 + 0x37ac) = iVar7;
   iVar7 = iVar7 * iVar8;
-  *(undefined1 *)(iVar9 + iVar4 + 0x9db8) = 1;
-  iVar4 = param_2[3];
-  iVar8 = param_2[4];
-  iVar9 = param_2[7];
-  iVar1 = param_2[5];
-  iVar2 = param_2[6];
-  *(int *)(iVar6 + 0x37c4) = param_2[8];
+  *(undefined1 *)(iVar9 + mapData + 0x9db8) = 1;
+  iVar4 = listRecord[3];
+  iVar8 = listRecord[4];
+  iVar9 = listRecord[7];
+  iVar1 = listRecord[5];
+  iVar2 = listRecord[6];
+  *(int *)(iVar6 + 0x37c4) = listRecord[8];
   *(int *)(iVar6 + 0x37b0) = iVar4;
   *(int *)(iVar6 + 0x37b4) = iVar8;
   *(int *)(iVar6 + 0x37c0) = iVar9;
   *(int *)(iVar6 + 0x37b8) = iVar1;
   *(int *)(iVar6 + 0x37bc) = iVar2;
   if (iVar7 != 0) {
-    piVar5 = (int *)(iVar6 + 0x37c8);
-    piVar3 = param_2 + 9;
-    iVar4 = iVar7;
+    dstCursor = (int *)(iVar6 + 0x37c8);
+    srcCursor = listRecord + 9;
+    remaining = iVar7;
     do {
-      iVar8 = *piVar3;
-      piVar3 = piVar3 + 1;
-      *piVar5 = iVar8;
-      piVar5 = piVar5 + 1;
-      iVar4 = iVar4 + -1;
-    } while (iVar4 != 0);
+      iVar8 = *srcCursor;
+      srcCursor = srcCursor + 1;
+      *dstCursor = iVar8;
+      dstCursor = dstCursor + 1;
+      remaining = remaining + -1;
+    } while (remaining != 0);
   }
   return (100 - iVar7) * -4 + 0x1b4;
 }
 
 /* _glMap2VertexAttrib2ARB_ListExec @ 0x700d0 (208 bytes) */
-int _glMap2VertexAttrib2ARB_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap2VertexAttrib2ARB_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int *piVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   int iVar5;
+  int remaining;
   int iVar6;
+  int mapData;
   int iVar7;
-  int *piVar8;
+  int *srcCursor;
   int iVar9;
   int iVar10;
   int iVar11;
   
-  iVar6 = _gleGetMapData(param_1);
-  iVar5 = *param_2;
-  piVar8 = param_2 + 1;
-  iVar11 = param_2[1];
-  iVar7 = param_2[2];
-  iVar9 = iVar6 + iVar5 * 0x660;
+  mapData = _gleGetMapData(glContext);
+  iVar5 = *listRecord;
+  srcCursor = listRecord + 1;
+  iVar11 = listRecord[1];
+  iVar7 = listRecord[2];
+  iVar9 = mapData + iVar5 * 0x660;
   iVar10 = iVar9 + 0x37a8;
   *(int *)(iVar9 + 0x37a8) = iVar11;
   *(int *)(iVar9 + 0x37ac) = iVar7;
-  *(undefined1 *)(iVar5 + iVar6 + 0x9db8) = 2;
-  iVar5 = param_2[4];
-  iVar6 = param_2[7];
-  iVar2 = param_2[5];
-  iVar3 = param_2[6];
-  iVar4 = param_2[8];
-  *(int *)(iVar9 + 0x37b0) = param_2[3];
+  *(undefined1 *)(iVar5 + mapData + 0x9db8) = 2;
+  iVar5 = listRecord[4];
+  iVar6 = listRecord[7];
+  iVar2 = listRecord[5];
+  iVar3 = listRecord[6];
+  iVar4 = listRecord[8];
+  *(int *)(iVar9 + 0x37b0) = listRecord[3];
   *(int *)(iVar9 + 0x37b4) = iVar5;
   *(int *)(iVar9 + 0x37c0) = iVar6;
   *(int *)(iVar9 + 0x37b8) = iVar2;
   *(int *)(iVar9 + 0x37bc) = iVar3;
   *(int *)(iVar9 + 0x37c4) = iVar4;
   iVar7 = iVar7 * iVar11;
-  for (iVar5 = iVar7; iVar5 != 0; iVar5 = iVar5 + -1) {
-    piVar1 = piVar8 + 8;
-    iVar6 = piVar8[9];
-    piVar8 = piVar8 + 2;
+  for (remaining = iVar7; remaining != 0; remaining = remaining + -1) {
+    piVar1 = srcCursor + 8;
+    iVar6 = srcCursor[9];
+    srcCursor = srcCursor + 2;
     *(int *)(iVar10 + 0x20) = *piVar1;
     *(int *)(iVar10 + 0x24) = iVar6;
     iVar10 = iVar10 + 8;
@@ -2351,49 +2382,51 @@ int _glMap2VertexAttrib2ARB_ListExec(param_1, param_2)
 }
 
 /* _glMap2VertexAttrib3ARB_ListExec @ 0x701a0 (216 bytes) */
-int _glMap2VertexAttrib3ARB_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap2VertexAttrib3ARB_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int *piVar1;
   int iVar2;
   int iVar3;
   int iVar4;
+  int remaining;
   int iVar5;
+  int mapData;
   int iVar6;
-  int *piVar7;
+  int *srcCursor;
   int iVar8;
   int iVar9;
   int iVar10;
   int iVar11;
   
-  iVar5 = _gleGetMapData(param_1);
-  iVar4 = *param_2;
-  piVar7 = param_2 + 1;
-  iVar11 = param_2[1];
-  iVar6 = param_2[2];
-  iVar8 = iVar5 + iVar4 * 0x660;
+  mapData = _gleGetMapData(glContext);
+  iVar4 = *listRecord;
+  srcCursor = listRecord + 1;
+  iVar11 = listRecord[1];
+  iVar6 = listRecord[2];
+  iVar8 = mapData + iVar4 * 0x660;
   iVar10 = iVar8 + 0x37a8;
   *(int *)(iVar8 + 0x37a8) = iVar11;
   *(int *)(iVar8 + 0x37ac) = iVar6;
-  *(undefined1 *)(iVar4 + iVar5 + 0x9db8) = 3;
-  iVar4 = param_2[4];
-  iVar5 = param_2[7];
-  iVar9 = param_2[5];
-  iVar2 = param_2[6];
-  iVar3 = param_2[8];
-  *(int *)(iVar8 + 0x37b0) = param_2[3];
+  *(undefined1 *)(iVar4 + mapData + 0x9db8) = 3;
+  iVar4 = listRecord[4];
+  iVar5 = listRecord[7];
+  iVar9 = listRecord[5];
+  iVar2 = listRecord[6];
+  iVar3 = listRecord[8];
+  *(int *)(iVar8 + 0x37b0) = listRecord[3];
   *(int *)(iVar8 + 0x37b4) = iVar4;
   *(int *)(iVar8 + 0x37c0) = iVar5;
   *(int *)(iVar8 + 0x37b8) = iVar9;
   *(int *)(iVar8 + 0x37bc) = iVar2;
   *(int *)(iVar8 + 0x37c4) = iVar3;
   iVar6 = iVar6 * iVar11;
-  for (iVar4 = iVar6; iVar4 != 0; iVar4 = iVar4 + -1) {
-    piVar1 = piVar7 + 8;
-    iVar5 = piVar7[9];
-    iVar9 = piVar7[10];
-    piVar7 = piVar7 + 3;
+  for (remaining = iVar6; remaining != 0; remaining = remaining + -1) {
+    piVar1 = srcCursor + 8;
+    iVar5 = srcCursor[9];
+    iVar9 = srcCursor[10];
+    srcCursor = srcCursor + 3;
     *(int *)(iVar10 + 0x20) = *piVar1;
     *(int *)(iVar10 + 0x24) = iVar5;
     *(int *)(iVar10 + 0x28) = iVar9;
@@ -2403,12 +2436,14 @@ int _glMap2VertexAttrib3ARB_ListExec(param_1, param_2)
 }
 
 /* _glMap2VertexAttrib4ARB_ListExec @ 0x70278 (236 bytes) */
-int _glMap2VertexAttrib4ARB_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glMap2VertexAttrib4ARB_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   int iVar2;
+  int remaining;
+  int mapData;
   int iVar3;
   int iVar4;
   int iVar5;
@@ -2416,20 +2451,20 @@ int _glMap2VertexAttrib4ARB_ListExec(param_1, param_2)
   int iVar7;
   int iVar8;
   
-  iVar2 = _gleGetMapData(param_1);
-  iVar6 = *param_2;
-  iVar4 = param_2[1];
-  iVar3 = param_2[2];
-  iVar1 = iVar2 + iVar6 * 0x660;
+  mapData = _gleGetMapData(glContext);
+  iVar6 = *listRecord;
+  iVar4 = listRecord[1];
+  iVar3 = listRecord[2];
+  iVar1 = mapData + iVar6 * 0x660;
   *(int *)(iVar1 + 0x37a8) = iVar4;
   *(int *)(iVar1 + 0x37ac) = iVar3;
-  *(undefined1 *)(iVar6 + iVar2 + 0x9db8) = 4;
-  iVar2 = param_2[4];
-  iVar6 = param_2[7];
-  iVar5 = param_2[5];
-  iVar7 = param_2[6];
-  iVar8 = param_2[8];
-  *(int *)(iVar1 + 0x37b0) = param_2[3];
+  *(undefined1 *)(iVar6 + mapData + 0x9db8) = 4;
+  iVar2 = listRecord[4];
+  iVar6 = listRecord[7];
+  iVar5 = listRecord[5];
+  iVar7 = listRecord[6];
+  iVar8 = listRecord[8];
+  *(int *)(iVar1 + 0x37b0) = listRecord[3];
   *(int *)(iVar1 + 0x37b4) = iVar2;
   *(int *)(iVar1 + 0x37c0) = iVar6;
   *(int *)(iVar1 + 0x37b8) = iVar5;
@@ -2437,12 +2472,12 @@ int _glMap2VertexAttrib4ARB_ListExec(param_1, param_2)
   *(int *)(iVar1 + 0x37c4) = iVar8;
   iVar3 = iVar3 * iVar4;
   iVar6 = 0;
-  for (iVar2 = iVar3; iVar2 != 0; iVar2 = iVar2 + -1) {
+  for (remaining = iVar3; remaining != 0; remaining = remaining + -1) {
     iVar4 = iVar6 * 0x10 + iVar1 + 0x37a8;
-    iVar8 = param_2[iVar6 * 4 + 0xc];
-    iVar7 = param_2[iVar6 * 4 + 10];
-    iVar5 = param_2[iVar6 * 4 + 0xb];
-    *(int *)(iVar4 + 0x20) = param_2[iVar6 * 4 + 9];
+    iVar8 = listRecord[iVar6 * 4 + 0xc];
+    iVar7 = listRecord[iVar6 * 4 + 10];
+    iVar5 = listRecord[iVar6 * 4 + 0xb];
+    *(int *)(iVar4 + 0x20) = listRecord[iVar6 * 4 + 9];
     *(int *)(iVar4 + 0x2c) = iVar8;
     *(int *)(iVar4 + 0x24) = iVar7;
     *(int *)(iVar4 + 0x28) = iVar5;
@@ -2452,10 +2487,10 @@ int _glMap2VertexAttrib4ARB_ListExec(param_1, param_2)
 }
 
 /* _glMap2d_Comp @ 0x70364 (1420 bytes) */
-void _glMap2d_Comp(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,int param_13,int param_14,undefined4 param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMap2d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefined4 u1ShadowLo,undefined4 u2ShadowHi,undefined4 u2ShadowLo,int ustride,int uorder,undefined4 v1ShadowHi,undefined4 v1ShadowLo,undefined4 v2ShadowHi,undefined4 v2ShadowLo,int vstride,int vorder,undefined4 points,double u1,double u2,double v1,double v2)
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 glErrorCode;
+  int listRecord;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -2478,18 +2513,18 @@ void _glMap2d_Comp(int glContext,undefined4 param_2,undefined4 param_3,undefined
   double in_f13;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((((fparam_1 != fparam_2) && (fparam_3 != fparam_4)) && (param_8 - 1U < 10)) &&
-       ((0 < param_14 && (param_14 < 0xb)))) {
-      switch(param_2) {
+    if ((((u1 != u2) && (v1 != v2)) && (uorder - 1U < 10)) &&
+       ((0 < vorder && (vorder < 0xb)))) {
+      switch(target) {
       case 0xdb0:
-        if ((3 < param_7) && (3 < param_13)) {
-          iVar3 = (100 - param_8 * param_14) * -0x10 + 0x660;
-          iVar4 = param_8;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Color_ListExec_001101bc,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2ColordLoad)(glContext,extraout_r4_01,iVar3,param_4,param_5,param_7,param_8,iVar4,
-                               param_9,param_10,param_11,param_13,param_14,param_15,iVar2,fparam_1,
-                               fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,
+        if ((3 < ustride) && (3 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -0x10 + 0x660;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Color_ListExec_001101bc,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2ColordLoad)(glContext,extraout_r4_01,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,
+                               v1ShadowHi,v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,
+                               u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,
                                in_f11,in_f12,in_f13);
             return;
           }
@@ -2497,14 +2532,14 @@ void _glMap2d_Comp(int glContext,undefined4 param_2,undefined4 param_3,undefined
         }
         break;
       case 0xdb1:
-        if ((0 < param_7) && (0 < param_13)) {
-          iVar3 = (100 - param_8 * param_14) * -4 + 0x1b0;
-          iVar4 = param_8;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Index_ListExec_001101b8,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2IndexdLoad)(glContext,extraout_r4_02,iVar3,param_4,param_5,param_7,param_8,iVar4,
-                               param_9,param_10,param_11,param_13,param_14,param_15,iVar2,fparam_1,
-                               fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,
+        if ((0 < ustride) && (0 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -4 + 0x1b0;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Index_ListExec_001101b8,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2IndexdLoad)(glContext,extraout_r4_02,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,
+                               v1ShadowHi,v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,
+                               u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,
                                in_f11,in_f12,in_f13);
             return;
           }
@@ -2512,14 +2547,14 @@ void _glMap2d_Comp(int glContext,undefined4 param_2,undefined4 param_3,undefined
         }
         break;
       case 0xdb2:
-        if ((2 < param_7) && (2 < param_13)) {
-          iVar3 = (100 - param_8 * param_14) * -0xc + 0x4d0;
-          iVar4 = param_8;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Normal_ListExec_001101b4,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2NormaldLoad)(glContext,extraout_r4_03,iVar3,param_4,param_5,param_7,param_8,iVar4,
-                                param_9,param_10,param_11,param_13,param_14,param_15,iVar2,fparam_1,
-                                fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,
+        if ((2 < ustride) && (2 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -0xc + 0x4d0;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Normal_ListExec_001101b4,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2NormaldLoad)(glContext,extraout_r4_03,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,
+                                v1ShadowHi,v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,
+                                u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,
                                 in_f11,in_f12,in_f13);
             return;
           }
@@ -2527,84 +2562,84 @@ void _glMap2d_Comp(int glContext,undefined4 param_2,undefined4 param_3,undefined
         }
         break;
       case 0xdb3:
-        if ((0 < param_7) && (0 < param_13)) {
-          iVar3 = (100 - param_8 * param_14) * -4 + 0x1b0;
-          iVar4 = param_8;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Texture1_ListExec_001101b0,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2Texture1dLoad)(glContext,extraout_r4_04,iVar3,param_4,param_5,param_7,param_8,iVar4,param_9,
-                       param_10,param_11,param_13,param_14,param_15,iVar2,fparam_1,fparam_2,fparam_3
-                       ,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+        if ((0 < ustride) && (0 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -4 + 0x1b0;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Texture1_ListExec_001101b0,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2Texture1dLoad)(glContext,extraout_r4_04,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
+                       v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,u2,v1
+                       ,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
           goto LAB_00070908;
         }
         break;
       case 0xdb4:
-        if ((1 < param_7) && (1 < param_13)) {
-          iVar3 = (100 - param_8 * param_14) * -8 + 0x340;
-          iVar4 = param_8;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Texture2_ListExec_001101ac,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2Texture2dLoad)(glContext,extraout_r4_05,iVar3,param_4,param_5,param_7,param_8,iVar4,param_9,
-                       param_10,param_11,param_13,param_14,param_15,iVar2,fparam_1,fparam_2,fparam_3
-                       ,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+        if ((1 < ustride) && (1 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -8 + 0x340;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Texture2_ListExec_001101ac,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2Texture2dLoad)(glContext,extraout_r4_05,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
+                       v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,u2,v1
+                       ,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
           goto LAB_00070908;
         }
         break;
       case 0xdb5:
-        if ((2 < param_7) && (2 < param_13)) {
-          iVar3 = (100 - param_8 * param_14) * -0xc + 0x4d0;
-          iVar4 = param_8;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Texture3_ListExec_001101a8,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2Texture3dLoad)(glContext,extraout_r4_06,iVar3,param_4,param_5,param_7,param_8,iVar4,param_9,
-                       param_10,param_11,param_13,param_14,param_15,iVar2,fparam_1,fparam_2,fparam_3
-                       ,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+        if ((2 < ustride) && (2 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -0xc + 0x4d0;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Texture3_ListExec_001101a8,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2Texture3dLoad)(glContext,extraout_r4_06,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
+                       v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,u2,v1
+                       ,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
           goto LAB_00070908;
         }
         break;
       case 0xdb6:
-        if ((3 < param_7) && (3 < param_13)) {
-          iVar3 = (100 - param_8 * param_14) * -0x10 + 0x660;
-          iVar4 = param_8;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Texture4_ListExec_001101a4,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2Texture4dLoad)(glContext,extraout_r4_07,iVar3,param_4,param_5,param_7,param_8,iVar4,param_9,
-                       param_10,param_11,param_13,param_14,param_15,iVar2,fparam_1,fparam_2,fparam_3
-                       ,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+        if ((3 < ustride) && (3 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -0x10 + 0x660;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Texture4_ListExec_001101a4,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2Texture4dLoad)(glContext,extraout_r4_07,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
+                       v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,u2,v1
+                       ,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
           goto LAB_00070908;
         }
         break;
       case 0xdb7:
-        if ((2 < param_7) && (2 < param_13)) {
-          iVar3 = (100 - param_8 * param_14) * -0xc + 0x4d0;
-          iVar4 = param_8;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Vertex3_ListExec_001101c4,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2Vertex3dLoad)(glContext,extraout_r4,iVar3,param_4,param_5,param_7,param_8,iVar4,param_9,
-                       param_10,param_11,param_13,param_14,param_15,iVar2,fparam_1,fparam_2,fparam_3
-                       ,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+        if ((2 < ustride) && (2 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -0xc + 0x4d0;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Vertex3_ListExec_001101c4,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2Vertex3dLoad)(glContext,extraout_r4,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
+                       v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,u2,v1
+                       ,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
           goto LAB_00070908;
         }
         break;
       case 0xdb8:
-        if ((3 < param_7) && (3 < param_13)) {
-          iVar3 = (100 - param_8 * param_14) * -0x10 + 0x660;
-          iVar4 = param_8;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Vertex4_ListExec_001101c0,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2Vertex4dLoad)(glContext,extraout_r4_00,iVar3,param_4,param_5,param_7,param_8,iVar4,param_9,
-                       param_10,param_11,param_13,param_14,param_15,iVar2,fparam_1,fparam_2,fparam_3
-                       ,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+        if ((3 < ustride) && (3 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -0x10 + 0x660;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Vertex4_ListExec_001101c0,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2Vertex4dLoad)(glContext,extraout_r4_00,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
+                       v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,u2,v1
+                       ,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
           goto LAB_00070908;
@@ -2612,28 +2647,28 @@ void _glMap2d_Comp(int glContext,undefined4 param_2,undefined4 param_3,undefined
         break;
       default:
         if (*(int *)(glContext + 0x7574) != 0) goto LAB_00070908;
-        uVar1 = 0x500;
+        glErrorCode = 0x500;
         goto LAB_00070904;
       }
     }
     if (*(int *)(glContext + 0x7574) != 0) goto LAB_00070908;
-    uVar1 = 0x501;
+    glErrorCode = 0x501;
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) goto LAB_00070908;
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
 LAB_00070904:
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
 LAB_00070908:
   return;
 }
 
 /* _glMap2d_Exec @ 0x70914 (1140 bytes) */
-void _glMap2d_Exec(int glContext,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,int param_13,int param_14,undefined4 param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1ShadowLo,undefined4 u2ShadowHi,undefined4 u2ShadowLo,int ustride,int uorder,undefined4 v1ShadowHi,undefined4 v1ShadowLo,undefined4 v2ShadowHi,undefined4 v2ShadowLo,int vstride,int vorder,undefined4 points,double u1,double u2,double v1,double v2)
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 glErrorCode;
+  int mapData;
   int iVar3;
   int iVar4;
   double in_f5;
@@ -2646,128 +2681,128 @@ void _glMap2d_Exec(int glContext,int param_2,undefined4 param_3,undefined4 param
   double in_f12;
   double in_f13;
   
-  iVar4 = param_8;
-  iVar2 = _gleGetMapData(glContext);
+  iVar4 = uorder;
+  mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((((fparam_1 != fparam_2) && (fparam_3 != fparam_4)) && (param_8 - 1U < 10)) &&
-       ((0 < param_14 && (param_14 < 0xb)))) {
-      iVar3 = param_2 + -0xdb0;
+    if ((((u1 != u2) && (v1 != v2)) && (uorder - 1U < 10)) &&
+       ((0 < vorder && (vorder < 0xb)))) {
+      iVar3 = target + -0xdb0;
       switch(iVar3) {
       case 0:
-        if ((3 < param_7) && (3 < param_13)) {
-          ((void (*)())_gleMap2ColordLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,iVar4,param_9,
-                             param_10,param_11,param_13,param_14,param_15,iVar2 + 0x1478,fparam_1,
-                             fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
+        if ((3 < ustride) && (3 < vstride)) {
+          ((void (*)())_gleMap2ColordLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
+                             v1ShadowLo,v2ShadowHi,vstride,vorder,points,mapData + 0x1478,u1,
+                             u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
                              in_f12,in_f13);
           return;
         }
         break;
       case 1:
-        if ((0 < param_7) && (0 < param_13)) {
-          ((void (*)())_gleMap2IndexdLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,iVar4,param_9,
-                             param_10,param_11,param_13,param_14,param_15,iVar2 + 0x1ad8,fparam_1,
-                             fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
+        if ((0 < ustride) && (0 < vstride)) {
+          ((void (*)())_gleMap2IndexdLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
+                             v1ShadowLo,v2ShadowHi,vstride,vorder,points,mapData + 0x1ad8,u1,
+                             u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
                              in_f12,in_f13);
           return;
         }
         break;
       case 2:
-        if ((2 < param_7) && (2 < param_13)) {
-          ((void (*)())_gleMap2NormaldLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,iVar4,param_9,
-                              param_10,param_11,param_13,param_14,param_15,iVar2 + 0xfa8,fparam_1,
-                              fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11
+        if ((2 < ustride) && (2 < vstride)) {
+          ((void (*)())_gleMap2NormaldLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
+                              v1ShadowLo,v2ShadowHi,vstride,vorder,points,mapData + 0xfa8,u1,
+                              u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11
                               ,in_f12,in_f13);
           return;
         }
         break;
       case 3:
-        if ((0 < param_7) && (0 < param_13)) {
-          ((void (*)())_gleMap2Texture1dLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,iVar4,param_9,param_10,
-                     param_11,param_13,param_14,param_15,iVar2 + 0x1c88,fparam_1,fparam_2,fparam_3,
-                     fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+        if ((0 < ustride) && (0 < vstride)) {
+          ((void (*)())_gleMap2Texture1dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
+                     v2ShadowHi,vstride,vorder,points,mapData + 0x1c88,u1,u2,v1,
+                     v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 4:
-        if ((1 < param_7) && (1 < param_13)) {
-          ((void (*)())_gleMap2Texture2dLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,iVar4,param_9,param_10,
-                     param_11,param_13,param_14,param_15,iVar2 + 0x1e38,fparam_1,fparam_2,fparam_3,
-                     fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+        if ((1 < ustride) && (1 < vstride)) {
+          ((void (*)())_gleMap2Texture2dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
+                     v2ShadowHi,vstride,vorder,points,mapData + 0x1e38,u1,u2,v1,
+                     v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 5:
-        if ((2 < param_7) && (2 < param_13)) {
-          ((void (*)())_gleMap2Texture3dLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,iVar4,param_9,param_10,
-                     param_11,param_13,param_14,param_15,iVar2 + 0x2178,fparam_1,fparam_2,fparam_3,
-                     fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+        if ((2 < ustride) && (2 < vstride)) {
+          ((void (*)())_gleMap2Texture3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
+                     v2ShadowHi,vstride,vorder,points,mapData + 0x2178,u1,u2,v1,
+                     v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 6:
-        if ((3 < param_7) && (3 < param_13)) {
-          ((void (*)())_gleMap2Texture4dLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,iVar4,param_9,param_10,
-                     param_11,param_13,param_14,param_15,iVar2 + 0x2648,fparam_1,fparam_2,fparam_3,
-                     fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+        if ((3 < ustride) && (3 < vstride)) {
+          ((void (*)())_gleMap2Texture4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
+                     v2ShadowHi,vstride,vorder,points,mapData + 0x2648,u1,u2,v1,
+                     v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 7:
-        if ((2 < param_7) && (2 < param_13)) {
-          ((void (*)())_gleMap2Vertex3dLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,iVar4,param_9,param_10,
-                     param_11,param_13,param_14,param_15,iVar2 + 0x478,fparam_1,fparam_2,fparam_3,
-                     fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+        if ((2 < ustride) && (2 < vstride)) {
+          ((void (*)())_gleMap2Vertex3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
+                     v2ShadowHi,vstride,vorder,points,mapData + 0x478,u1,u2,v1,
+                     v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 8:
-        if ((3 < param_7) && (3 < param_13)) {
-          ((void (*)())_gleMap2Vertex4dLoad)(glContext,iVar3,param_3,param_4,param_5,param_7,param_8,iVar4,param_9,param_10,
-                     param_11,param_13,param_14,param_15,iVar2 + 0x948,fparam_1,fparam_2,fparam_3,
-                     fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+        if ((3 < ustride) && (3 < vstride)) {
+          ((void (*)())_gleMap2Vertex4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
+                     v2ShadowHi,vstride,vorder,points,mapData + 0x948,u1,u2,v1,
+                     v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       default:
         if (*(int *)(glContext + 0x7574) != 0) goto LAB_00070da0;
-        uVar1 = 0x500;
+        glErrorCode = 0x500;
         goto LAB_00070d9c;
       }
     }
     if (*(int *)(glContext + 0x7574) != 0) goto LAB_00070da0;
-    uVar1 = 0x501;
+    glErrorCode = 0x501;
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) goto LAB_00070da0;
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
 LAB_00070d9c:
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
 LAB_00070da0:
   return;
 }
 
 /* _glMap2d_CompExec @ 0x70dac (156 bytes) */
-void _glMap2d_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,undefined4 param_13,undefined4 param_14,undefined4 param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMap2d_CompExec(undefined4 glContext,undefined4 target,undefined4 u1ShadowHi,undefined4 u1ShadowLo,undefined4 u2ShadowHi,undefined4 u2ShadowLo,undefined4 ustride,undefined4 uorder,undefined4 v1ShadowHi,undefined4 v1ShadowLo,undefined4 v2ShadowHi,undefined4 v2ShadowLo,undefined4 vstride,undefined4 vorder,undefined4 points,double u1,double u2,double v1,double v2)
 {
   undefined4 in_stack_ffffff88;
   undefined4 in_stack_ffffff8c;
   undefined4 in_stack_ffffff90;
   undefined4 in_stack_ffffff94;
   
-  ((void (*)())_glMap2d_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,in_stack_ffffff88,
-                in_stack_ffffff8c,in_stack_ffffff90,in_stack_ffffff94,param_13,param_14,param_15,
-                fparam_1,fparam_2,fparam_3,fparam_4);
-  ((void (*)())_glMap2d_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10,
-                param_11,param_12,param_13,param_14,param_15,fparam_1,fparam_2,fparam_3,fparam_4);
+  ((void (*)())_glMap2d_Comp)(glContext,target,u1ShadowHi,u1ShadowLo,u2ShadowHi,u2ShadowLo,ustride,uorder,in_stack_ffffff88,
+                in_stack_ffffff8c,in_stack_ffffff90,in_stack_ffffff94,vstride,vorder,points,
+                u1,u2,v1,v2);
+  ((void (*)())_glMap2d_Exec)(glContext,target,u1ShadowHi,u1ShadowLo,u2ShadowHi,u2ShadowLo,ustride,uorder,v1ShadowHi,v1ShadowLo,
+                v2ShadowHi,v2ShadowLo,vstride,vorder,points,u1,u2,v1,v2);
   return;
 }
 
 /* _glMap2f_Comp @ 0x70e48 (1420 bytes) */
-void _glMap2f_Comp(int glContext,int param_2,undefined4 param_3,undefined4 param_4,int param_5,int param_6,undefined4 param_7,undefined4 param_8,int param_9,int param_10,undefined4 param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
+void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Shadow,int ustride,int uorder,undefined4 v1Shadow,undefined4 v2Shadow,int vstride,int vorder,undefined4 points,float u1,float u2,float v1,float v2)
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 glErrorCode;
+  int listRecord;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -2791,23 +2826,23 @@ void _glMap2f_Comp(int glContext,int param_2,undefined4 param_3,undefined4 param
   double in_f13;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((((fparam_1 != fparam_2) && (fparam_3 != fparam_4)) && (param_6 - 1U < 10)) &&
-       ((0 < param_10 && (param_10 < 0xb)))) {
-      if (8 < param_2 - 0xdb0U) {
+    if ((((u1 != u2) && (v1 != v2)) && (uorder - 1U < 10)) &&
+       ((0 < vorder && (vorder < 0xb)))) {
+      if (8 < target - 0xdb0U) {
         if (*(int *)(glContext + 0x7574) != 0) goto LAB_000713ec;
-        uVar1 = 0x500;
+        glErrorCode = 0x500;
         goto LAB_000713e8;
       }
-      iVar5 = (param_2 - 0xdb0U) * 4;
-      switch(param_2) {
+      iVar5 = (target - 0xdb0U) * 4;
+      switch(target) {
       case 0xdb0:
-        if ((3 < param_5) && (3 < param_9)) {
-          iVar3 = (100 - param_6 * param_10) * -0x10 + 0x660;
-          iVar4 = param_6;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Color_ListExec_001101bc,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2ColorfLoad)(glContext,extraout_r4_01,iVar3,param_5,param_6,iVar4,iVar5,param_9,
-                               param_10,param_11,iVar2,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,
+        if ((3 < ustride) && (3 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -0x10 + 0x660;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Color_ListExec_001101bc,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2ColorfLoad)(glContext,extraout_r4_01,iVar3,ustride,uorder,iVar4,iVar5,vstride,
+                               vorder,points,listRecord,u1,u2,v1,v2,in_f5,
                                in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
@@ -2815,13 +2850,13 @@ void _glMap2f_Comp(int glContext,int param_2,undefined4 param_3,undefined4 param
         }
         break;
       case 0xdb1:
-        if ((0 < param_5) && (0 < param_9)) {
-          iVar3 = (100 - param_6 * param_10) * -4 + 0x1b0;
-          iVar4 = param_6;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Index_ListExec_001101b8,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2IndexfLoad)(glContext,extraout_r4_02,iVar3,param_5,param_6,iVar4,iVar5,param_9,
-                               param_10,param_11,iVar2,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,
+        if ((0 < ustride) && (0 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -4 + 0x1b0;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Index_ListExec_001101b8,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2IndexfLoad)(glContext,extraout_r4_02,iVar3,ustride,uorder,iVar4,iVar5,vstride,
+                               vorder,points,listRecord,u1,u2,v1,v2,in_f5,
                                in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
@@ -2829,13 +2864,13 @@ void _glMap2f_Comp(int glContext,int param_2,undefined4 param_3,undefined4 param
         }
         break;
       case 0xdb2:
-        if ((2 < param_5) && (2 < param_9)) {
-          iVar3 = (100 - param_6 * param_10) * -0xc + 0x4d0;
-          iVar4 = param_6;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Normal_ListExec_001101b4,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2NormalfLoad)(glContext,extraout_r4_03,iVar3,param_5,param_6,iVar4,iVar5,param_9,
-                                param_10,param_11,iVar2,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,
+        if ((2 < ustride) && (2 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -0xc + 0x4d0;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Normal_ListExec_001101b4,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2NormalfLoad)(glContext,extraout_r4_03,iVar3,ustride,uorder,iVar4,iVar5,vstride,
+                                vorder,points,listRecord,u1,u2,v1,v2,in_f5,
                                 in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
@@ -2843,13 +2878,13 @@ void _glMap2f_Comp(int glContext,int param_2,undefined4 param_3,undefined4 param
         }
         break;
       case 0xdb3:
-        if ((0 < param_5) && (0 < param_9)) {
-          iVar3 = (100 - param_6 * param_10) * -4 + 0x1b0;
-          iVar4 = param_6;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Texture1_ListExec_001101b0,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2Texture1fLoad)(glContext,extraout_r4_04,iVar3,param_5,param_6,iVar4,iVar5,param_9,param_10,
-                       param_11,iVar2,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
+        if ((0 < ustride) && (0 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -4 + 0x1b0;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Texture1_ListExec_001101b0,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2Texture1fLoad)(glContext,extraout_r4_04,iVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
+                       points,listRecord,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
                        in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
@@ -2857,13 +2892,13 @@ void _glMap2f_Comp(int glContext,int param_2,undefined4 param_3,undefined4 param
         }
         break;
       case 0xdb4:
-        if ((1 < param_5) && (1 < param_9)) {
-          iVar3 = (100 - param_6 * param_10) * -8 + 0x340;
-          iVar4 = param_6;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Texture2_ListExec_001101ac,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2Texture2fLoad)(glContext,extraout_r4_05,iVar3,param_5,param_6,iVar4,iVar5,param_9,param_10,
-                       param_11,iVar2,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
+        if ((1 < ustride) && (1 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -8 + 0x340;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Texture2_ListExec_001101ac,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2Texture2fLoad)(glContext,extraout_r4_05,iVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
+                       points,listRecord,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
                        in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
@@ -2871,13 +2906,13 @@ void _glMap2f_Comp(int glContext,int param_2,undefined4 param_3,undefined4 param
         }
         break;
       case 0xdb5:
-        if ((2 < param_5) && (2 < param_9)) {
-          iVar3 = (100 - param_6 * param_10) * -0xc + 0x4d0;
-          iVar4 = param_6;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Texture3_ListExec_001101a8,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2Texture3fLoad)(glContext,extraout_r4_06,iVar3,param_5,param_6,iVar4,iVar5,param_9,param_10,
-                       param_11,iVar2,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
+        if ((2 < ustride) && (2 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -0xc + 0x4d0;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Texture3_ListExec_001101a8,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2Texture3fLoad)(glContext,extraout_r4_06,iVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
+                       points,listRecord,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
                        in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
@@ -2885,13 +2920,13 @@ void _glMap2f_Comp(int glContext,int param_2,undefined4 param_3,undefined4 param
         }
         break;
       case 0xdb6:
-        if ((3 < param_5) && (3 < param_9)) {
-          iVar3 = (100 - param_6 * param_10) * -0x10 + 0x660;
-          iVar4 = param_6;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Texture4_ListExec_001101a4,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2Texture4fLoad)(glContext,extraout_r4_07,iVar3,param_5,param_6,iVar4,iVar5,param_9,param_10,
-                       param_11,iVar2,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
+        if ((3 < ustride) && (3 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -0x10 + 0x660;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Texture4_ListExec_001101a4,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2Texture4fLoad)(glContext,extraout_r4_07,iVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
+                       points,listRecord,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
                        in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
@@ -2899,13 +2934,13 @@ void _glMap2f_Comp(int glContext,int param_2,undefined4 param_3,undefined4 param
         }
         break;
       case 0xdb7:
-        if ((2 < param_5) && (2 < param_9)) {
-          iVar3 = (100 - param_6 * param_10) * -0xc + 0x4d0;
-          iVar4 = param_6;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Vertex3_ListExec_001101c4,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2Vertex3fLoad)(glContext,extraout_r4,iVar3,param_5,param_6,iVar4,iVar5,param_9,param_10,
-                       param_11,iVar2,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
+        if ((2 < ustride) && (2 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -0xc + 0x4d0;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Vertex3_ListExec_001101c4,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2Vertex3fLoad)(glContext,extraout_r4,iVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
+                       points,listRecord,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
                        in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
@@ -2913,13 +2948,13 @@ void _glMap2f_Comp(int glContext,int param_2,undefined4 param_3,undefined4 param
         }
         break;
       case 0xdb8:
-        if ((3 < param_5) && (3 < param_9)) {
-          iVar3 = (100 - param_6 * param_10) * -0x10 + 0x660;
-          iVar4 = param_6;
-          iVar2 = _gleAddListItem(glContext,PTR__glMap2Vertex4_ListExec_001101c0,iVar3);
-          if (iVar2 != 0) {
-            ((void (*)())_gleMap2Vertex4fLoad)(glContext,extraout_r4_00,iVar3,param_5,param_6,iVar4,iVar5,param_9,param_10,
-                       param_11,iVar2,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
+        if ((3 < ustride) && (3 < vstride)) {
+          iVar3 = (100 - uorder * vorder) * -0x10 + 0x660;
+          iVar4 = uorder;
+          listRecord = _gleAddListItem(glContext,PTR__glMap2Vertex4_ListExec_001101c0,iVar3);
+          if (listRecord != 0) {
+            ((void (*)())_gleMap2Vertex4fLoad)(glContext,extraout_r4_00,iVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
+                       points,listRecord,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
                        in_f9,in_f10,in_f11,in_f12,in_f13);
             return;
           }
@@ -2928,24 +2963,24 @@ void _glMap2f_Comp(int glContext,int param_2,undefined4 param_3,undefined4 param
       }
     }
     if (*(int *)(glContext + 0x7574) != 0) goto LAB_000713ec;
-    uVar1 = 0x501;
+    glErrorCode = 0x501;
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) goto LAB_000713ec;
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
 LAB_000713e8:
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
 LAB_000713ec:
   return;
 }
 
 /* _glMap2f_Exec @ 0x713f8 (1140 bytes) */
-void _glMap2f_Exec(int glContext,int param_2,undefined4 param_3,undefined4 param_4,int param_5,int param_6,undefined4 param_7,undefined4 param_8,int param_9,int param_10,undefined4 param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
+void _glMap2f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Shadow,int ustride,int uorder,undefined4 v1Shadow,undefined4 v2Shadow,int vstride,int vorder,undefined4 points,float u1,float u2,float v1,float v2)
 {
   int iVar1;
-  undefined4 uVar2;
-  int iVar3;
+  undefined4 glErrorCode;
+  int mapData;
   uint uVar4;
   int iVar5;
   double in_f5;
@@ -2958,112 +2993,112 @@ void _glMap2f_Exec(int glContext,int param_2,undefined4 param_3,undefined4 param
   double in_f12;
   double in_f13;
   
-  iVar5 = param_6;
-  iVar3 = _gleGetMapData(glContext);
+  iVar5 = uorder;
+  mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((((fparam_1 != fparam_2) && (fparam_3 != fparam_4)) && (param_6 - 1U < 10)) &&
-       ((0 < param_10 && (param_10 < 0xb)))) {
-      uVar4 = param_2 - 0xdb0;
+    if ((((u1 != u2) && (v1 != v2)) && (uorder - 1U < 10)) &&
+       ((0 < vorder && (vorder < 0xb)))) {
+      uVar4 = target - 0xdb0;
       if (8 < uVar4) {
         if (*(int *)(glContext + 0x7574) != 0) goto LAB_00071884;
-        uVar2 = 0x500;
+        glErrorCode = 0x500;
         goto LAB_00071880;
       }
       iVar1 = uVar4 * 4;
       switch(uVar4) {
       case 0:
-        if ((3 < param_5) && (3 < param_9)) {
-          ((void (*)())_gleMap2ColorfLoad)(glContext,uVar4,param_3,param_5,param_6,iVar5,iVar1,param_9,param_10,
-                             param_11,iVar3 + 0x1478,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6
+        if ((3 < ustride) && (3 < vstride)) {
+          ((void (*)())_gleMap2ColorfLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,
+                             points,mapData + 0x1478,u1,u2,v1,v2,in_f5,in_f6
                              ,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 1:
-        if ((0 < param_5) && (0 < param_9)) {
-          ((void (*)())_gleMap2IndexfLoad)(glContext,uVar4,param_3,param_5,param_6,iVar5,iVar1,param_9,param_10,
-                             param_11,iVar3 + 0x1ad8,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6
+        if ((0 < ustride) && (0 < vstride)) {
+          ((void (*)())_gleMap2IndexfLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,
+                             points,mapData + 0x1ad8,u1,u2,v1,v2,in_f5,in_f6
                              ,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 2:
-        if ((2 < param_5) && (2 < param_9)) {
-          ((void (*)())_gleMap2NormalfLoad)(glContext,uVar4,param_3,param_5,param_6,iVar5,iVar1,param_9,param_10,
-                              param_11,iVar3 + 0xfa8,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6
+        if ((2 < ustride) && (2 < vstride)) {
+          ((void (*)())_gleMap2NormalfLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,
+                              points,mapData + 0xfa8,u1,u2,v1,v2,in_f5,in_f6
                               ,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 3:
-        if ((0 < param_5) && (0 < param_9)) {
-          ((void (*)())_gleMap2Texture1fLoad)(glContext,uVar4,param_3,param_5,param_6,iVar5,iVar1,param_9,param_10,param_11,
-                     iVar3 + 0x1c88,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
+        if ((0 < ustride) && (0 < vstride)) {
+          ((void (*)())_gleMap2Texture1fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
+                     mapData + 0x1c88,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
                      in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 4:
-        if ((1 < param_5) && (1 < param_9)) {
-          ((void (*)())_gleMap2Texture2fLoad)(glContext,uVar4,param_3,param_5,param_6,iVar5,iVar1,param_9,param_10,param_11,
-                     iVar3 + 0x1e38,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
+        if ((1 < ustride) && (1 < vstride)) {
+          ((void (*)())_gleMap2Texture2fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
+                     mapData + 0x1e38,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
                      in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 5:
-        if ((2 < param_5) && (2 < param_9)) {
-          ((void (*)())_gleMap2Texture3fLoad)(glContext,uVar4,param_3,param_5,param_6,iVar5,iVar1,param_9,param_10,param_11,
-                     iVar3 + 0x2178,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
+        if ((2 < ustride) && (2 < vstride)) {
+          ((void (*)())_gleMap2Texture3fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
+                     mapData + 0x2178,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
                      in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 6:
-        if ((3 < param_5) && (3 < param_9)) {
-          ((void (*)())_gleMap2Texture4fLoad)(glContext,uVar4,param_3,param_5,param_6,iVar5,iVar1,param_9,param_10,param_11,
-                     iVar3 + 0x2648,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
+        if ((3 < ustride) && (3 < vstride)) {
+          ((void (*)())_gleMap2Texture4fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
+                     mapData + 0x2648,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
                      in_f9,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 7:
-        if ((2 < param_5) && (2 < param_9)) {
-          ((void (*)())_gleMap2Vertex3fLoad)(glContext,uVar4,param_3,param_5,param_6,iVar5,iVar1,param_9,param_10,param_11,
-                     iVar3 + 0x478,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9
+        if ((2 < ustride) && (2 < vstride)) {
+          ((void (*)())_gleMap2Vertex3fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
+                     mapData + 0x478,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9
                      ,in_f10,in_f11,in_f12,in_f13);
           return;
         }
         break;
       case 8:
-        if ((3 < param_5) && (3 < param_9)) {
-          ((void (*)())_gleMap2Vertex4fLoad)(glContext,uVar4,param_3,param_5,param_6,iVar5,iVar1,param_9,param_10,param_11,
-                     iVar3 + 0x948,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,in_f9
+        if ((3 < ustride) && (3 < vstride)) {
+          ((void (*)())_gleMap2Vertex4fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
+                     mapData + 0x948,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9
                      ,in_f10,in_f11,in_f12,in_f13);
           return;
         }
       }
     }
     if (*(int *)(glContext + 0x7574) != 0) goto LAB_00071884;
-    uVar2 = 0x501;
+    glErrorCode = 0x501;
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) goto LAB_00071884;
-    uVar2 = 0x502;
+    glErrorCode = 0x502;
   }
 LAB_00071880:
-  *(undefined4 *)(glContext + 0x7574) = uVar2;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
 LAB_00071884:
   return;
 }
 
 /* _glMap2f_CompExec @ 0x71890 (156 bytes) */
-void _glMap2f_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
+void _glMap2f_CompExec(undefined4 glContext,undefined4 target,undefined4 u1Shadow,undefined4 u2Shadow,undefined4 ustride,undefined4 uorder,undefined4 v1Shadow,undefined4 v2Shadow,undefined4 vstride,undefined4 vorder,undefined4 points,float u1,float u2,float v1,float v2)
 {
-  ((void (*)())_glMap2f_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10,
-                param_11,fparam_1,fparam_2,fparam_3,fparam_4);
-  ((void (*)())_glMap2f_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10,
-                param_11,fparam_1,fparam_2,fparam_3,fparam_4);
+  ((void (*)())_glMap2f_Comp)(glContext,target,u1Shadow,u2Shadow,ustride,uorder,v1Shadow,v2Shadow,vstride,vorder,
+                points,u1,u2,v1,v2);
+  ((void (*)())_glMap2f_Exec)(glContext,target,u1Shadow,u2Shadow,ustride,uorder,v1Shadow,v2Shadow,vstride,vorder,
+                points,u1,u2,v1,v2);
   return;
 }
 

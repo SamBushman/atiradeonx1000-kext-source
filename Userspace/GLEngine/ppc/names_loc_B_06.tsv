@@ -1,0 +1,46 @@
+local	_glBeginQuery_Exec	iVar6	framebufferObject	INFERRED	ctx+0x744c is handed to _gleUpdateFramebufferCompleteness(ctx, object+0x10, ...) before a draw: the bound framebuffer object
+use	_glBeginQuery_Exec	iVar8	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar8\ =\ 0;$	+1
+use	_glBeginQuery_Exec	iVar8	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+2
+use	_glBeginQuery_Exec	iVar8	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar8\ =\ 0;$@2	+1
+use	_glBeginQuery_Exec	iVar8	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar8\ =\ iVar8\ \+\ 1;$@2	+1
+use	_glBeginQuery_Exec	iVar8	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*\}\ while\ \(iVar8\ <\ 0x13\);$	+1
+local	_glBeginQuery_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_glDetachObjectARB_Exec	iVar6	hashObject	INFERRED	object found by name in a machine-object hash table (_gleLookupHashObject(table, name))
+use	_glDetachObjectARB_Exec	iVar9	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar9\ =\ 0;$	+1
+use	_glDetachObjectARB_Exec	iVar9	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar9\ \*\ 4\ \+\ iVar7\);$	+1
+use	_glDetachObjectARB_Exec	iVar9	loopIndex	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+2
+use	_glDetachObjectARB_Exec	iVar10	loopIndex2	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar10\ =\ 0;$	+1
+use	_glDetachObjectARB_Exec	iVar10	loopIndex2	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1
+use	_glDetachObjectARB_Exec	iVar10	loopIndex2	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*if\ \(iVar9\ <=\ iVar10\)\ goto\ LAB_000875c8;$	+1
+use	_glDetachObjectARB_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar4\ =\ \*\(int\ \*\*\)\(iVar5\ \+\ 0x44\);$	+1
+use	_glDetachObjectARB_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*if\ \(iVar6\ ==\ \*piVar4\)\ \{$	+1
+use	_glDetachObjectARB_Exec	piVar4	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar4\ =\ piVar4\ \+\ 1;$	+1
+local	_glDetachObjectARB_Exec	piVar8	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+use	_evaluateImageUnits	iVar17	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar17\ =\ 0;$	+1
+use	_evaluateImageUnits	iVar17	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar17\ =\ 0x10;$	+1
+use	_evaluateImageUnits	iVar17	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*if\ \(iVar17\ !=\ 0\)\ \{$	+1
+use	_evaluateImageUnits	iVar17	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar17\ =\ iVar17\ \+\ \-1;$	+2
+use	_evaluateImageUnits	iVar17	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar17\ =\ 0;$@3	+1
+use	_evaluateImageUnits	iVar17	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar17\ =\ 0x10;$@2	+1
+use	_evaluateImageUnits	iVar17	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*if\ \(iVar17\ !=\ 0\)\ \{$@2	+1
+use	_evaluateImageUnits	iVar17	remaining	INFERRED	down-counter: loaded with a count, decremented by 1 per iteration and tested against zero	^\s*iVar17\ =\ iVar17\ \+\ \-1;$@2	+2
+use	_evaluateImageUnits	iVar17	loopIndex3	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar17\ =\ 0;$@2	+1
+use	_evaluateImageUnits	iVar17	loopIndex3	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*if\ \(iVar17\ ==\ 0\)\ \{$	+1
+use	_evaluateImageUnits	iVar17	loopIndex3	INFERRED	counter: starts at a constant, only incremented by 1 and compared against a bound	^\s*iVar17\ =\ iVar17\ \+\ 1;$	+2
+local	_evaluateImageUnits	pcVar5	srcCursor	INFERRED	pointer advanced by a constant stride each iteration and only read through
+local	_evaluateImageUnits	piVar9	dstCursor	INFERRED	pointer advanced by a constant stride each iteration and only written through
+use	_evaluateImageUnits	puVar7	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*puVar7\ =\ local_a0\ \+\ iVar11\ \*\ 0x10;$	+1
+use	_evaluateImageUnits	puVar7	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*puVar7\ =\ \*\(ushort\ \*\)\(iVar6\ \+\ 0xc\);$	+2
+use	_evaluateImageUnits	puVar7	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*puVar7\ =\ \(ushort\ \*\)\(iVar16\ \+\ 0x6c\);$	+1
+use	_evaluateImageUnits	puVar7	dstCursor2	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*puVar7\ =\ uVar1;$	+2
+use	_evaluateImageUnits	puVar7	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar7\ =\ \(ushort\ \*\)\(iVar16\ \+\ 0x6c\);$@2	+1
+use	_evaluateImageUnits	puVar7	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*uVar1\ =\ \*puVar7;$	+1
+use	_evaluateImageUnits	puVar7	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*if\ \(\(\*\(int\ \*\)\(param_1\ \+\ 0x5430\)\ ==\ param_2\)\ \&\&$	+3
+use	_evaluateImageUnits	puVar7	srcCursor2	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*puVar7\ =\ puVar7\ \+\ 1;$@3	+1
+local	_evaluateImageUnits	puVar8	srcCursor3	INFERRED	pointer advanced by a constant stride each iteration and only read through
+use	_evaluateImageUnits	piVar13	dstCursor3	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*piVar13\ =\ local_120\ \+\ iVar11\ \*\ 0x10;$	+1
+use	_evaluateImageUnits	piVar13	dstCursor3	INFERRED	pointer advanced by a constant stride each iteration and only written through	^\s*\*piVar13\ =\ \*\(int\ \*\)\(iVar16\ \+\ 0x2c\);$	+2
+use	_evaluateImageUnits	piVar13	srcCursor4	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar13\ =\ local_120\ \+\ iVar11\ \*\ 0x10;$@2	+1
+use	_evaluateImageUnits	piVar13	srcCursor4	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*iVar16\ =\ \*piVar13;$	+2
+use	_evaluateImageUnits	piVar13	srcCursor4	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*piVar13\ =\ \(int\ \*\)\(iVar16\ \+\ 0x2c\);$	+1
+use	_evaluateImageUnits	piVar13	srcCursor4	INFERRED	pointer advanced by a constant stride each iteration and only read through	^\s*iVar6\ =\ \*piVar13;$	+2

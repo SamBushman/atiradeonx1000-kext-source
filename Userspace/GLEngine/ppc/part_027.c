@@ -1,43 +1,43 @@
 #include "decls.h"
 
 /* _glStencilFuncSeparate_ListExec @ 0x907f8 (56 bytes) */
-int _glStencilFuncSeparate_ListExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _glStencilFuncSeparate_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  undefined4 *listRecord;
 {
-  ((void (*)())_glStencilFuncSeparate_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3]);
+  ((void (*)())_glStencilFuncSeparate_Exec)(glContext,*listRecord,listRecord[1],listRecord[2],listRecord[3]);
   return 0x10;
 }
 
 /* _glStencilFuncSeparate_Comp @ 0x90830 (100 bytes) */
-int _glStencilFuncSeparate_Comp(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+int _glStencilFuncSeparate_Comp(glContext, face, func, ref, mask)
+  undefined4 glContext;
+  undefined4 face;
+  undefined4 func;
+  undefined4 ref;
+  undefined4 mask;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)_gleAddListItem(param_1,PTR__glStencilFuncSeparate_ListExec_00110308,0x10);
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[3] = param_5;
-    *puVar1 = param_2;
-    puVar1[1] = param_3;
-    puVar1[2] = param_4;
+  listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glStencilFuncSeparate_ListExec_00110308,0x10);
+  if (listRecord != (undefined4 *)0x0) {
+    listRecord[3] = mask;
+    *listRecord = face;
+    listRecord[1] = func;
+    listRecord[2] = ref;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glStencilFuncSeparate_Exec @ 0x90894 (212 bytes) */
-void _glStencilFuncSeparate_Exec(glContext, param_2, param_3, param_4, param_5)
+void _glStencilFuncSeparate_Exec(glContext, face, func, ref, mask)
   int glContext;
-  uint param_2;
-  int param_3;
-  uint param_4;
-  undefined4 param_5;
+  uint face;
+  int func;
+  uint ref;
+  undefined4 mask;
 {
-  undefined4 uVar1;
+  undefined4 glErrorCode;
   uint uVar2;
   undefined2 uVar3;
   
@@ -45,106 +45,106 @@ void _glStencilFuncSeparate_Exec(glContext, param_2, param_3, param_4, param_5)
     if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
     goto LAB_000908d0;
   }
-  if (7 < param_3 - 0x200U) goto LAB_000908c0;
-  if ((int)param_4 < 0) {
-    param_4 = 0;
+  if (7 < func - 0x200U) goto LAB_000908c0;
+  if ((int)ref < 0) {
+    ref = 0;
   }
   else {
     uVar2 = 0xffffffff >> (0x20U - *(int *)(*(int *)(glContext + 0x468c) + 0x40) & 0x3f);
-    if (uVar2 < param_4) {
-      param_4 = uVar2;
+    if (uVar2 < ref) {
+      ref = uVar2;
     }
   }
-  uVar3 = (undefined2)param_3;
-  if (param_2 == 0x405) {
+  uVar3 = (undefined2)func;
+  if (face == 0x405) {
     *(undefined2 *)(glContext + 0x3510) = uVar3;
-    *(uint *)(glContext + 0x350c) = param_4;
-    *(undefined4 *)(glContext + 0x3508) = param_5;
+    *(uint *)(glContext + 0x350c) = ref;
+    *(undefined4 *)(glContext + 0x3508) = mask;
     goto LAB_00090958;
   }
-  if (param_2 < 0x406) {
-    if (param_2 == 0x404) {
+  if (face < 0x406) {
+    if (face == 0x404) {
 LAB_0009094c:
       *(undefined2 *)(glContext + 0x3500) = uVar3;
-      *(uint *)(glContext + 0x34fc) = param_4;
-      *(undefined4 *)(glContext + 0x34f8) = param_5;
+      *(uint *)(glContext + 0x34fc) = ref;
+      *(undefined4 *)(glContext + 0x34f8) = mask;
 LAB_00090958:
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x10000000;
       return;
     }
   }
-  else if (param_2 == 0x408) {
+  else if (face == 0x408) {
     *(undefined2 *)(glContext + 0x3510) = uVar3;
-    *(uint *)(glContext + 0x350c) = param_4;
-    *(undefined4 *)(glContext + 0x3508) = param_5;
+    *(uint *)(glContext + 0x350c) = ref;
+    *(undefined4 *)(glContext + 0x3508) = mask;
     goto LAB_0009094c;
   }
 LAB_000908c0:
   if (*(int *)(glContext + 0x7574) != 0) {
     return;
   }
-  uVar1 = 0x500;
+  glErrorCode = 0x500;
 LAB_000908d0:
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
 /* _glStencilFuncSeparate_CompExec @ 0x90968 (80 bytes) */
-void _glStencilFuncSeparate_CompExec(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+void _glStencilFuncSeparate_CompExec(glContext, face, func, ref, mask)
+  undefined4 glContext;
+  undefined4 face;
+  undefined4 func;
+  undefined4 ref;
+  undefined4 mask;
 {
-  ((int (*)())_glStencilFuncSeparate_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((void (*)())_glStencilFuncSeparate_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((int (*)())_glStencilFuncSeparate_Comp)(glContext,face,func,ref,mask);
+  ((void (*)())_glStencilFuncSeparate_Exec)(glContext,face,func,ref,mask);
   return;
 }
 
 /* _glLineStipple_ListExec @ 0x909b8 (44 bytes) */
-int _glLineStipple_ListExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _glLineStipple_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  undefined4 *listRecord;
 {
-  ((void (*)())_glLineStipple_Exec)(param_1,*param_2,(uint)*(ushort *)(param_2 + 1));
+  ((void (*)())_glLineStipple_Exec)(glContext,*listRecord,(uint)*(ushort *)(listRecord + 1));
   return 8;
 }
 
 /* _glLineStipple_Comp @ 0x909e4 (84 bytes) */
-int _glLineStipple_Comp(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int _glLineStipple_Comp(glContext, factor, pattern)
+  undefined4 glContext;
+  undefined4 factor;
+  undefined4 pattern;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)_gleAddListItem(param_1,PTR__glLineStipple_ListExec_00110324,8);
-  if (puVar1 != (undefined4 *)0x0) {
-    *(undefined2 *)(puVar1 + 1) = (*(unsigned short *)((unsigned char *)&(param_3) + 2));
-    *puVar1 = param_2;
+  listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glLineStipple_ListExec_00110324,8);
+  if (listRecord != (undefined4 *)0x0) {
+    *(undefined2 *)(listRecord + 1) = (*(unsigned short *)((unsigned char *)&(pattern) + 2));
+    *listRecord = factor;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glLineStipple_Exec @ 0x90a38 (88 bytes) */
-void _glLineStipple_Exec(glContext, param_2, param_3)
+void _glLineStipple_Exec(glContext, factor, pattern)
   int glContext;
-  int param_2;
-  undefined4 param_3;
+  int factor;
+  undefined4 pattern;
 {
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (param_2 < 1) {
-      param_2 = 1;
+    if (factor < 1) {
+      factor = 1;
     }
-    else if (0xff < param_2) {
-      param_2 = 0xff;
+    else if (0xff < factor) {
+      factor = 0xff;
     }
-    *(int *)(glContext + 0x3184) = param_2;
-    *(undefined2 *)(glContext + 0x3188) = (*(unsigned short *)((unsigned char *)&(param_3) + 2));
+    *(int *)(glContext + 0x3184) = factor;
+    *(undefined2 *)(glContext + 0x3188) = (*(unsigned short *)((unsigned char *)&(pattern) + 2));
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x8000;
     return;
   }
@@ -156,13 +156,13 @@ void _glLineStipple_Exec(glContext, param_2, param_3)
 }
 
 /* _glLineStipple_CompExec @ 0x90a90 (64 bytes) */
-void _glLineStipple_CompExec(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+void _glLineStipple_CompExec(glContext, factor, pattern)
+  undefined4 glContext;
+  undefined4 factor;
+  undefined4 pattern;
 {
-  ((int (*)())_glLineStipple_Comp)(param_1,param_2,param_3);
-  ((void (*)())_glLineStipple_Exec)(param_1,param_2,param_3);
+  ((int (*)())_glLineStipple_Comp)(glContext,factor,pattern);
+  ((void (*)())_glLineStipple_Exec)(glContext,factor,pattern);
   return;
 }
 
@@ -172,33 +172,34 @@ int _glPolygonStipple_ListExec(param_1, param_2)
   int param_2;
 {
   int iVar1;
-  int iVar2;
+  int remaining;
   
-  iVar2 = 0x10;
+  remaining = 0x10;
   iVar1 = 0;
   do {
     *(undefined8 *)(iVar1 + param_1 + 0x3448) = *(undefined8 *)(iVar1 + param_2);
     iVar1 = iVar1 + 8;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    remaining = remaining + -1;
+  } while (remaining != 0);
   return 0x80;
 }
 
 /* _glPolygonStipple_Comp @ 0x90af8 (304 bytes) */
-int _glPolygonStipple_Comp(glContext, param_2)
+int _glPolygonStipple_Comp(glContext, mask)
   int glContext;
-  int param_2;
+  int mask;
 {
   uint uVar1;
   undefined4 uVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
+  int listRecord;
+  int remaining;
   
   iVar5 = *(int *)(glContext + 0x4a6c);
   if (iVar5 != 0) {
-    if (*(int *)(iVar5 + 0x38) < param_2 + 0x20) {
+    if (*(int *)(iVar5 + 0x38) < mask + 0x20) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return glContext;
       }
@@ -208,63 +209,63 @@ int _glPolygonStipple_Comp(glContext, param_2)
     if (*(int *)(iVar5 + 0x40) != 0) {
       _gleSynchronizePluginBuffer(glContext,iVar5 + 0x10);
     }
-    param_2 = param_2 + *(int *)(iVar5 + 0x30);
+    mask = mask + *(int *)(iVar5 + 0x30);
   }
-  iVar5 = _gleAddListItem(glContext,PTR__glPolygonStipple_ListExec_00110320,0x80);
-  if (iVar5 != 0) {
+  listRecord = _gleAddListItem(glContext,PTR__glPolygonStipple_ListExec_00110320,0x80);
+  if (listRecord != 0) {
     uVar1 = *(uint *)(glContext + 0x31d8);
     iVar3 = *(int *)(glContext + 0x31d4);
     if ((((*(char *)(glContext + 0x31e5) != '\0') || (*(int *)(glContext + 0x31cc) != 0)) ||
         (4 < *(int *)(glContext + 0x31e0))) || ((uVar1 & 7) != 0)) {
-      uVar2 = _gleFillImage(glContext,0x20,0x20,1,0x1900,0x1a00,param_2,iVar5);
+      uVar2 = _gleFillImage(glContext,0x20,0x20,1,0x1900,0x1a00,mask,listRecord);
       return uVar2;
     }
     iVar4 = 0;
-    iVar6 = 0x10;
+    remaining = 0x10;
     do {
-      *(undefined8 *)(iVar4 + iVar5) =
-           *(undefined8 *)(iVar4 + param_2 + iVar3 * 4 + ((int)uVar1 >> 3));
+      *(undefined8 *)(iVar4 + listRecord) =
+           *(undefined8 *)(iVar4 + mask + iVar3 * 4 + ((int)uVar1 >> 3));
       iVar4 = iVar4 + 8;
-      iVar6 = iVar6 + -1;
-    } while (iVar6 != 0);
+      remaining = remaining + -1;
+    } while (remaining != 0);
   }
-  return iVar5;
+  return listRecord;
 }
 
 /* _glPolygonStipple_Exec @ 0x90c28 (288 bytes) */
-void _glPolygonStipple_Exec(glContext, param_2)
+void _glPolygonStipple_Exec(glContext, mask)
   int glContext;
-  int param_2;
+  int mask;
 {
   uint uVar1;
   int iVar2;
   int iVar3;
-  int iVar4;
+  int remaining;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     iVar3 = *(int *)(glContext + 0x4a6c);
     if (iVar3 != 0) {
-      if (*(int *)(iVar3 + 0x38) < param_2 + 0x20) goto LAB_00090c68;
+      if (*(int *)(iVar3 + 0x38) < mask + 0x20) goto LAB_00090c68;
       if (*(int *)(iVar3 + 0x40) != 0) {
         _gleSynchronizePluginBuffer(glContext,iVar3 + 0x10);
       }
-      param_2 = param_2 + *(int *)(iVar3 + 0x30);
+      mask = mask + *(int *)(iVar3 + 0x30);
     }
     uVar1 = *(uint *)(glContext + 0x31d8);
     iVar3 = *(int *)(glContext + 0x31d4);
     if ((((*(char *)(glContext + 0x31e5) == '\0') && (*(int *)(glContext + 0x31cc) == 0)) &&
         (*(int *)(glContext + 0x31e0) < 5)) && ((uVar1 & 7) == 0)) {
-      iVar4 = 0x10;
+      remaining = 0x10;
       iVar2 = 0;
       do {
         *(undefined8 *)(iVar2 + glContext + 0x3448) =
-             *(undefined8 *)(iVar2 + param_2 + iVar3 * 4 + ((int)uVar1 >> 3));
+             *(undefined8 *)(iVar2 + mask + iVar3 * 4 + ((int)uVar1 >> 3));
         iVar2 = iVar2 + 8;
-        iVar4 = iVar4 + -1;
-      } while (iVar4 != 0);
+        remaining = remaining + -1;
+      } while (remaining != 0);
     }
     else {
-      _gleFillImage(glContext,0x20,0x20,1,0x1900,0x1a00,param_2,glContext + 0x3448);
+      _gleFillImage(glContext,0x20,0x20,1,0x1900,0x1a00,mask,glContext + 0x3448);
     }
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x1000000;
   }
@@ -278,49 +279,49 @@ LAB_00090c68:
 }
 
 /* _glPolygonStipple_CompExec @ 0x90d48 (56 bytes) */
-void _glPolygonStipple_CompExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+void _glPolygonStipple_CompExec(glContext, mask)
+  undefined4 glContext;
+  undefined4 mask;
 {
-  ((int (*)())_glPolygonStipple_Comp)(param_1,param_2);
-  ((void (*)())_glPolygonStipple_Exec)(param_1,param_2);
+  ((int (*)())_glPolygonStipple_Comp)(glContext,mask);
+  ((void (*)())_glPolygonStipple_Exec)(glContext,mask);
   return;
 }
 
 /* _glGetPolygonStipple_Exec @ 0x90d80 (284 bytes) */
-void _glGetPolygonStipple_Exec(glContext, param_2)
+void _glGetPolygonStipple_Exec(glContext, mask)
   int glContext;
-  int param_2;
+  int mask;
 {
   uint uVar1;
   int iVar2;
   int iVar3;
-  int iVar4;
+  int remaining;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     iVar3 = *(int *)(glContext + 0x4a68);
     if (iVar3 != 0) {
-      if (*(int *)(iVar3 + 0x38) < param_2 + 0x20) goto LAB_00090dc0;
+      if (*(int *)(iVar3 + 0x38) < mask + 0x20) goto LAB_00090dc0;
       if (*(int *)(iVar3 + 0x40) != 0) {
         _gleSynchronizePluginBuffer(glContext,iVar3 + 0x10);
       }
-      param_2 = param_2 + *(int *)(iVar3 + 0x30);
+      mask = mask + *(int *)(iVar3 + 0x30);
     }
     uVar1 = *(uint *)(glContext + 0x31bc);
     iVar3 = *(int *)(0x31b4 + glContext + 4);
     if ((((*(char *)(glContext + 0x31c9) != '\0') || (*(int *)(glContext + 0x31b0) != 0)) ||
         (4 < *(int *)(glContext + 0x31c4))) || ((uVar1 & 7) != 0)) {
-      _gleEmptyImage(glContext,0x20,0x20,0x1900,0x1a00,glContext + 0x3448,param_2);
+      _gleEmptyImage(glContext,0x20,0x20,0x1900,0x1a00,glContext + 0x3448,mask);
       return;
     }
-    iVar4 = 0x10;
+    remaining = 0x10;
     iVar2 = 0;
     do {
-      *(undefined8 *)(iVar2 + param_2 + iVar3 * 4 + ((int)uVar1 >> 3)) =
+      *(undefined8 *)(iVar2 + mask + iVar3 * 4 + ((int)uVar1 >> 3)) =
            *(undefined8 *)(iVar2 + glContext + 0x3448);
       iVar2 = iVar2 + 8;
-      iVar4 = iVar4 + -1;
-    } while (iVar4 != 0);
+      remaining = remaining + -1;
+    } while (remaining != 0);
   }
   else {
 LAB_00090dc0:
@@ -378,42 +379,44 @@ void _glSwap_RevertExec(glContext)
 }
 
 /* _glAreTexturesResident_Exec @ 0x90f7c (416 bytes) */
-int _glAreTexturesResident_Exec(glContext, param_2, param_3, param_4)
+int _glAreTexturesResident_Exec(glContext, n, textures, residences)
   int glContext;
-  int param_2;
-  undefined4 *param_3;
-  int param_4;
+  int n;
+  undefined4 *textures;
+  int residences;
 {
   undefined4 uVar1;
+  undefined4 glErrorCode;
   int iVar2;
   int iVar3;
+  int hashObject;
   int iVar4;
-  int iVar5;
+  int loopIndex;
   
   iVar4 = 1;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if (param_2 < 0) {
+    if (n < 0) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
       }
-      uVar1 = 0x501;
+      glErrorCode = 0x501;
     }
     else {
-      if (param_2 == 0) {
+      if (n == 0) {
         return 0;
       }
-      iVar2 = _malloc(param_2);
+      iVar2 = _malloc(n);
       if (iVar2 != 0) {
         if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
           _pthread_mutex_lock(*(int *)(glContext + 0x5148) + 0x8028);
         }
-        iVar5 = 0;
-        if (0 < param_2) {
+        loopIndex = 0;
+        if (0 < n) {
           do {
-            uVar1 = *param_3;
-            param_3 = param_3 + 1;
-            iVar3 = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,uVar1);
-            if (iVar3 == 0) {
+            uVar1 = *textures;
+            textures = textures + 1;
+            hashObject = _gleLookupHashObject(*(int *)(glContext + 0x5148) + 0x2008,uVar1);
+            if (hashObject == 0) {
               if (*(int *)(glContext + 0x7574) == 0) {
                 *(undefined4 *)(glContext + 0x7574) = 0x501;
               }
@@ -426,18 +429,18 @@ int _glAreTexturesResident_Exec(glContext, param_2, param_3, param_4)
                               );
             if (iVar3 == 0) {
               iVar4 = 0;
-              *(undefined1 *)(iVar2 + iVar5) = 0;
+              *(undefined1 *)(iVar2 + loopIndex) = 0;
             }
             else {
-              *(undefined1 *)(iVar2 + iVar5) = 1;
+              *(undefined1 *)(iVar2 + loopIndex) = 1;
             }
-            iVar5 = iVar5 + 1;
-          } while (iVar5 < param_2);
-          if ((iVar4 == 0) && (iVar5 = 0, 0 < param_2)) {
+            loopIndex = loopIndex + 1;
+          } while (loopIndex < n);
+          if ((iVar4 == 0) && (loopIndex = 0, 0 < n)) {
             do {
-              *(undefined1 *)(param_4 + iVar5) = *(undefined1 *)(iVar2 + iVar5);
-              iVar5 = iVar5 + 1;
-            } while (iVar5 < param_2);
+              *(undefined1 *)(residences + loopIndex) = *(undefined1 *)(iVar2 + loopIndex);
+              loopIndex = loopIndex + 1;
+            } while (loopIndex < n);
           }
         }
 LAB_000910e0:
@@ -451,23 +454,23 @@ LAB_000910e0:
       if (*(int *)(glContext + 0x7574) != 0) {
         return 0;
       }
-      uVar1 = 0x505;
+      glErrorCode = 0x505;
     }
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {
       return 0;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
-  *(undefined4 *)(glContext + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return 0;
 }
 
 /* _glIsTexture_Exec @ 0x9111c (168 bytes) */
-int _glIsTexture_Exec(glContext, param_2)
+int _glIsTexture_Exec(glContext, texture)
   int glContext;
-  undefined4 param_2;
+  undefined4 texture;
 {
   int iVar1;
   bool bVar2;
@@ -478,7 +481,7 @@ int _glIsTexture_Exec(glContext, param_2)
       _pthread_mutex_lock(iVar1 + 0x8028);
       iVar1 = *(int *)(glContext + 0x5148);
     }
-    iVar1 = _gleLookupHashObject(iVar1 + 0x2008,param_2);
+    iVar1 = _gleLookupHashObject(iVar1 + 0x2008,texture);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
@@ -494,427 +497,428 @@ int _glIsTexture_Exec(glContext, param_2)
 }
 
 /* _glBindTexture_ListExec @ 0x911c4 (44 bytes) */
-int _glBindTexture_ListExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _glBindTexture_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  undefined4 *listRecord;
 {
-  _glBindTexture_Exec(param_1,*param_2,param_2[1]);
+  _glBindTexture_Exec(glContext,*listRecord,listRecord[1]);
   return 8;
 }
 
 /* _glBindTexture_Comp @ 0x911f0 (84 bytes) */
-int _glBindTexture_Comp(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int _glBindTexture_Comp(glContext, target, texture)
+  undefined4 glContext;
+  undefined4 target;
+  undefined4 texture;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)_gleAddListItem(param_1,PTR__glBindTexture_ListExec_00110390,8);
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1[1] = param_3;
-    *puVar1 = param_2;
+  listRecord = (undefined4 *)_gleAddListItem(glContext,PTR__glBindTexture_ListExec_00110390,8);
+  if (listRecord != (undefined4 *)0x0) {
+    listRecord[1] = texture;
+    *listRecord = target;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glBindTexture_CompExec @ 0x91244 (64 bytes) */
-void _glBindTexture_CompExec(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+void _glBindTexture_CompExec(glContext, target, texture)
+  undefined4 glContext;
+  undefined4 target;
+  undefined4 texture;
 {
-  ((int (*)())_glBindTexture_Comp)(param_1,param_2,param_3);
-  _glBindTexture_Exec(param_1,param_2,param_3);
+  ((int (*)())_glBindTexture_Comp)(glContext,target,texture);
+  _glBindTexture_Exec(glContext,target,texture);
   return;
 }
 
 /* _glPrioritizeTextures_ListExec @ 0x91284 (72 bytes) */
-int _glPrioritizeTextures_ListExec(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+int _glPrioritizeTextures_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  int *listRecord;
 {
   int iVar1;
   
-  iVar1 = *param_2;
-  _glPrioritizeTextures_Exec(param_1,iVar1,param_2 + 1,param_2 + iVar1 + 1);
+  iVar1 = *listRecord;
+  _glPrioritizeTextures_Exec(glContext,iVar1,listRecord + 1,listRecord + iVar1 + 1);
   return iVar1 * 8 + 4;
 }
 
 /* _glPrioritizeTextures_Comp @ 0x912cc (144 bytes) */
-int _glPrioritizeTextures_Comp(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int _glPrioritizeTextures_Comp(glContext, n, textures, priorities)
+  undefined4 glContext;
+  int n;
+  int textures;
+  int priorities;
 {
-  int *piVar1;
+  int *listRecord;
   int iVar2;
-  int iVar3;
+  int remaining;
   
-  piVar1 = (int *)_gleAddListItem(param_1,PTR__glPrioritizeTextures_ListExec_0011038c,
-                                  param_2 * 8 + 4);
-  if (piVar1 != (int *)0x0) {
+  listRecord = (int *)_gleAddListItem(glContext,PTR__glPrioritizeTextures_ListExec_0011038c,
+                                  n * 8 + 4);
+  if (listRecord != (int *)0x0) {
     iVar2 = 0;
-    *piVar1 = param_2;
-    iVar3 = param_2;
-    if (0 < param_2) {
+    *listRecord = n;
+    remaining = n;
+    if (0 < n) {
       do {
-        piVar1[iVar2 + 1] = *(int *)(param_3 + iVar2 * 4);
-        piVar1[param_2 + iVar2 + 1] = *(int *)(param_4 + iVar2 * 4);
-        iVar3 = iVar3 + -1;
+        listRecord[iVar2 + 1] = *(int *)(textures + iVar2 * 4);
+        listRecord[n + iVar2 + 1] = *(int *)(priorities + iVar2 * 4);
+        remaining = remaining + -1;
         iVar2 = iVar2 + 1;
-      } while (iVar3 != 0);
+      } while (remaining != 0);
     }
   }
-  return piVar1;
+  return listRecord;
 }
 
 /* _glPrioritizeTextures_CompExec @ 0x9135c (72 bytes) */
-void _glPrioritizeTextures_CompExec(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+void _glPrioritizeTextures_CompExec(glContext, n, textures, priorities)
+  undefined4 glContext;
+  undefined4 n;
+  undefined4 textures;
+  undefined4 priorities;
 {
-  ((int (*)())_glPrioritizeTextures_Comp)(param_1,param_2,param_3,param_4);
-  _glPrioritizeTextures_Exec(param_1,param_2,param_3,param_4);
+  ((int (*)())_glPrioritizeTextures_Comp)(glContext,n,textures,priorities);
+  _glPrioritizeTextures_Exec(glContext,n,textures,priorities);
   return;
 }
 
 /* _glCompressedTexImage3D_ListExec @ 0x913a4 (96 bytes) */
-int _glCompressedTexImage3D_ListExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _glCompressedTexImage3D_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  undefined4 *listRecord;
 {
-  ((int (*)())_glCompressedTexImage3D_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6],
-             param_2[7],param_2 + 8);
-  return param_2[7] + 0x20;
+  ((int (*)())_glCompressedTexImage3D_Exec)(glContext,*listRecord,listRecord[1],listRecord[2],listRecord[3],listRecord[4],listRecord[5],listRecord[6],
+             listRecord[7],listRecord + 8);
+  return listRecord[7] + 0x20;
 }
 
 /* _glCompressedTexImage2D_ListExec @ 0x91404 (88 bytes) */
-int _glCompressedTexImage2D_ListExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _glCompressedTexImage2D_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  undefined4 *listRecord;
 {
-  ((int (*)())_glCompressedTexImage2D_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6],
-             param_2 + 7);
-  return param_2[6] + 0x1c;
+  ((int (*)())_glCompressedTexImage2D_Exec)(glContext,*listRecord,listRecord[1],listRecord[2],listRecord[3],listRecord[4],listRecord[5],listRecord[6],
+             listRecord + 7);
+  return listRecord[6] + 0x1c;
 }
 
 /* _glCompressedTexSubImage3D_ListExec @ 0x91464 (112 bytes) */
-int _glCompressedTexSubImage3D_ListExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _glCompressedTexSubImage3D_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  undefined4 *listRecord;
 {
-  ((int (*)())_glCompressedTexSubImage3D_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6],
-             param_2[7],param_2[8],param_2[9],param_2 + 10);
-  return param_2[9] + 0x28;
+  ((int (*)())_glCompressedTexSubImage3D_Exec)(glContext,*listRecord,listRecord[1],listRecord[2],listRecord[3],listRecord[4],listRecord[5],listRecord[6],
+             listRecord[7],listRecord[8],listRecord[9],listRecord + 10);
+  return listRecord[9] + 0x28;
 }
 
 /* _glCompressedTexSubImage2D_ListExec @ 0x914d4 (96 bytes) */
-int _glCompressedTexSubImage2D_ListExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _glCompressedTexSubImage2D_ListExec(glContext, listRecord)
+  undefined4 glContext;
+  undefined4 *listRecord;
 {
-  ((int (*)())_glCompressedTexSubImage2D_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6],
-             param_2[7],param_2 + 8);
-  return param_2[7] + 0x20;
+  ((int (*)())_glCompressedTexSubImage2D_Exec)(glContext,*listRecord,listRecord[1],listRecord[2],listRecord[3],listRecord[4],listRecord[5],listRecord[6],
+             listRecord[7],listRecord + 8);
+  return listRecord[7] + 0x20;
 }
 
 /* _glCompressedTexImage3D_Comp @ 0x9153c (344 bytes) */
-int _glCompressedTexImage3D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
-  int *param_1;
-  int param_2;
-  int param_3;
-  uint param_4;
-  int param_5;
-  int param_6;
-  int param_7;
-  int param_8;
-  int param_9;
-  int param_10;
+int _glCompressedTexImage3D_Comp(glContext, target, level, internalformat, width, height, depth, border, imageSize, data)
+  int *glContext;
+  int target;
+  int level;
+  uint internalformat;
+  int width;
+  int height;
+  int depth;
+  int border;
+  int imageSize;
+  int data;
 {
   undefined4 uVar1;
   int iVar2;
   
-  if (param_2 == 0x8070) {
-    uVar1 = ((int (*)())_glCompressedTexImage3D_Exec)(param_1,0x8070,param_3,param_4,param_5,param_6,param_7,param_8,param_9,
-                       param_10);
+  if (target == 0x8070) {
+    uVar1 = ((int (*)())_glCompressedTexImage3D_Exec)(glContext,0x8070,level,internalformat,width,height,depth,border,imageSize,
+                       data);
     return uVar1;
   }
-  if ((param_4 < 0x83f0) || (((0x83f3 < param_4 && (param_4 != 0x8837)) || (param_9 < 1)))) {
+  if ((internalformat < 0x83f0) || (((0x83f3 < internalformat && (internalformat != 0x8837)) || (imageSize < 1)))) {
 LAB_000915e4:
-    if (param_1[0x1d5d] == 0) {
-      param_1[0x1d5d] = 0x502;
+    if (glContext[0x1d5d] == 0) {
+      glContext[0x1d5d] = 0x502;
     }
   }
   else {
-    iVar2 = param_1[0x129b];
+    iVar2 = glContext[0x129b];
     if (iVar2 != 0) {
-      if (*(int *)(iVar2 + 0x38) < param_9 + param_10) goto LAB_000915e4;
+      if (*(int *)(iVar2 + 0x38) < imageSize + data) goto LAB_000915e4;
       if (*(int *)(iVar2 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(param_1,iVar2 + 0x10);
+        _gleSynchronizePluginBuffer(glContext,iVar2 + 0x10);
       }
-      param_10 = param_10 + *(int *)(iVar2 + 0x30);
+      data = data + *(int *)(iVar2 + 0x30);
     }
-    param_1 = (int *)_gleAddListItem(param_1,PTR__glCompressedTexImage3D_ListExec_001103a0,
-                                     param_9 + 0x20);
-    if (param_1 != (int *)0x0) {
-      *param_1 = param_2;
-      param_1[1] = param_3;
-      param_1[2] = param_4;
-      param_1[6] = param_8;
-      param_1[3] = param_5;
-      param_1[4] = param_6;
-      param_1[5] = param_7;
-      param_1[7] = param_9;
-      if (param_10 != 0) {
-        uVar1 = _memcpy(param_1 + 8,param_10,param_9);
+    glContext = (int *)_gleAddListItem(glContext,PTR__glCompressedTexImage3D_ListExec_001103a0,
+                                     imageSize + 0x20);
+    if (glContext != (int *)0x0) {
+      *glContext = target;
+      glContext[1] = level;
+      glContext[2] = internalformat;
+      glContext[6] = border;
+      glContext[3] = width;
+      glContext[4] = height;
+      glContext[5] = depth;
+      glContext[7] = imageSize;
+      if (data != 0) {
+        uVar1 = _memcpy(glContext + 8,data,imageSize);
         return uVar1;
       }
     }
   }
-  return param_1;
+  return glContext;
 }
 
 /* _glCompressedTexImage2D_Comp @ 0x91694 (404 bytes) */
-int _glCompressedTexImage2D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
-  int *param_1;
-  int param_2;
-  int param_3;
-  uint param_4;
-  int param_5;
-  int param_6;
-  int param_7;
-  int param_8;
-  int param_9;
+int _glCompressedTexImage2D_Comp(glContext, target, level, internalformat, width, height, border, imageSize, data)
+  int *glContext;
+  int target;
+  int level;
+  uint internalformat;
+  int width;
+  int height;
+  int border;
+  int imageSize;
+  int data;
 {
   undefined4 uVar1;
   int iVar2;
   
-  if (((param_2 == 0x8064) || (param_2 == 0x851b)) || (param_2 == 0x84f7)) {
-    uVar1 = ((int (*)())_glCompressedTexImage2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9);
+  if (((target == 0x8064) || (target == 0x851b)) || (target == 0x84f7)) {
+    uVar1 = ((int (*)())_glCompressedTexImage2D_Exec)(glContext,target,level,internalformat,width,height,border,imageSize,data);
     return uVar1;
   }
-  if (((param_4 < 0x83f0) || ((0x83f3 < param_4 && (param_4 != 0x8837)))) || (param_8 < 1)) {
+  if (((internalformat < 0x83f0) || ((0x83f3 < internalformat && (internalformat != 0x8837)))) || (imageSize < 1)) {
 LAB_0009177c:
-    if (param_1[0x1d5d] == 0) {
-      param_1[0x1d5d] = 0x502;
+    if (glContext[0x1d5d] == 0) {
+      glContext[0x1d5d] = 0x502;
     }
   }
   else {
-    iVar2 = param_1[0x129b];
+    iVar2 = glContext[0x129b];
     if (iVar2 != 0) {
-      if (*(int *)(iVar2 + 0x38) < param_8 + param_9) goto LAB_0009177c;
+      if (*(int *)(iVar2 + 0x38) < imageSize + data) goto LAB_0009177c;
       if (*(int *)(iVar2 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(param_1,iVar2 + 0x10);
+        _gleSynchronizePluginBuffer(glContext,iVar2 + 0x10);
       }
-      param_9 = param_9 + *(int *)(iVar2 + 0x30);
+      data = data + *(int *)(iVar2 + 0x30);
     }
-    param_1 = (int *)_gleAddListItem(param_1,PTR__glCompressedTexImage2D_ListExec_0011039c,
-                                     param_8 + 0x1c);
-    if (param_1 != (int *)0x0) {
-      *param_1 = param_2;
-      param_1[1] = param_3;
-      param_1[2] = param_4;
-      param_1[5] = param_7;
-      param_1[3] = param_5;
-      param_1[4] = param_6;
-      param_1[6] = param_8;
-      if (param_9 != 0) {
-        uVar1 = _memcpy(param_1 + 7,param_9,param_8);
+    glContext = (int *)_gleAddListItem(glContext,PTR__glCompressedTexImage2D_ListExec_0011039c,
+                                     imageSize + 0x1c);
+    if (glContext != (int *)0x0) {
+      *glContext = target;
+      glContext[1] = level;
+      glContext[2] = internalformat;
+      glContext[5] = border;
+      glContext[3] = width;
+      glContext[4] = height;
+      glContext[6] = imageSize;
+      if (data != 0) {
+        uVar1 = _memcpy(glContext + 7,data,imageSize);
         return uVar1;
       }
     }
   }
-  return param_1;
+  return glContext;
 }
 
 /* _glCompressedTexImage1D_Comp @ 0x91828 (76 bytes) */
-void _glCompressedTexImage1D_Comp(param_1, param_2, param_3, param_4)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  uint param_4;
+void _glCompressedTexImage1D_Comp(glContext, target, level, internalformat)
+  int glContext;
+  undefined4 target;
+  undefined4 level;
+  uint internalformat;
 {
-  undefined4 uVar1;
+  undefined4 glErrorCode;
   
-  if ((param_4 < 0x83f0) || ((0x83f3 < param_4 && (param_4 != 0x8837)))) {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+  if ((internalformat < 0x83f0) || ((0x83f3 < internalformat && (internalformat != 0x8837)))) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
   else {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x500;
+    glErrorCode = 0x500;
   }
-  *(undefined4 *)(param_1 + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
 /* _glCompressedTexSubImage3D_Comp @ 0x91874 (360 bytes) */
-int _glCompressedTexSubImage3D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  int *param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
-  int param_6;
-  int param_7;
-  int param_8;
-  int param_9;
-  uint param_10;
-  int param_11;
-  int param_12;
+int _glCompressedTexSubImage3D_Comp(glContext, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data)
+  int *glContext;
+  int target;
+  int level;
+  int xoffset;
+  int yoffset;
+  int zoffset;
+  int width;
+  int height;
+  int depth;
+  uint format;
+  int imageSize;
+  int data;
 {
   undefined4 uVar1;
   int iVar2;
   
-  if (param_2 == 0x8070) {
-    uVar1 = ((int (*)())_glCompressedTexSubImage3D_Exec)(param_1,0x8070,param_3,param_4,param_5,param_6,param_7,param_8,param_9,
-                       param_10,param_11,param_12);
+  if (target == 0x8070) {
+    uVar1 = ((int (*)())_glCompressedTexSubImage3D_Exec)(glContext,0x8070,level,xoffset,yoffset,zoffset,width,height,depth,
+                       format,imageSize,data);
     return uVar1;
   }
-  if ((param_10 < 0x83f0) || (((0x83f3 < param_10 && (param_10 != 0x8837)) || (param_11 < 1)))) {
+  if ((format < 0x83f0) || (((0x83f3 < format && (format != 0x8837)) || (imageSize < 1)))) {
 LAB_00091924:
-    if (param_1[0x1d5d] == 0) {
-      param_1[0x1d5d] = 0x502;
+    if (glContext[0x1d5d] == 0) {
+      glContext[0x1d5d] = 0x502;
     }
   }
   else {
-    iVar2 = param_1[0x129b];
+    iVar2 = glContext[0x129b];
     if (iVar2 != 0) {
-      if (*(int *)(iVar2 + 0x38) < param_11 + param_12) goto LAB_00091924;
+      if (*(int *)(iVar2 + 0x38) < imageSize + data) goto LAB_00091924;
       if (*(int *)(iVar2 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(param_1,iVar2 + 0x10);
+        _gleSynchronizePluginBuffer(glContext,iVar2 + 0x10);
       }
-      param_12 = param_12 + *(int *)(iVar2 + 0x30);
+      data = data + *(int *)(iVar2 + 0x30);
     }
-    param_1 = (int *)_gleAddListItem(param_1,PTR__glCompressedTexSubImage3D_ListExec_00110398,
-                                     param_11 + 0x28);
-    if (param_1 != (int *)0x0) {
-      *param_1 = param_2;
-      param_1[1] = param_3;
-      param_1[8] = param_10;
-      param_1[2] = param_4;
-      param_1[3] = param_5;
-      param_1[4] = param_6;
-      param_1[5] = param_7;
-      param_1[6] = param_8;
-      param_1[7] = param_9;
-      param_1[9] = param_11;
-      if (param_12 != 0) {
-        uVar1 = _memcpy(param_1 + 10,param_12,param_11);
+    glContext = (int *)_gleAddListItem(glContext,PTR__glCompressedTexSubImage3D_ListExec_00110398,
+                                     imageSize + 0x28);
+    if (glContext != (int *)0x0) {
+      *glContext = target;
+      glContext[1] = level;
+      glContext[8] = format;
+      glContext[2] = xoffset;
+      glContext[3] = yoffset;
+      glContext[4] = zoffset;
+      glContext[5] = width;
+      glContext[6] = height;
+      glContext[7] = depth;
+      glContext[9] = imageSize;
+      if (data != 0) {
+        uVar1 = _memcpy(glContext + 10,data,imageSize);
         return uVar1;
       }
     }
   }
-  return param_1;
+  return glContext;
 }
 
 /* _glCompressedTexSubImage2D_Comp @ 0x919dc (416 bytes) */
-int _glCompressedTexSubImage2D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
-  int *param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
-  int param_6;
-  int param_7;
-  uint param_8;
-  int param_9;
-  int param_10;
+int _glCompressedTexSubImage2D_Comp(glContext, target, level, xoffset, yoffset, width, height, format, imageSize, data)
+  int *glContext;
+  int target;
+  int level;
+  int xoffset;
+  int yoffset;
+  int width;
+  int height;
+  uint format;
+  int imageSize;
+  int data;
 {
   undefined4 uVar1;
   int iVar2;
   
-  if (((param_2 == 0x8064) || (param_2 == 0x851b)) || (param_2 == 0x84f7)) {
-    uVar1 = ((int (*)())_glCompressedTexSubImage2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,
-                       param_10);
+  if (((target == 0x8064) || (target == 0x851b)) || (target == 0x84f7)) {
+    uVar1 = ((int (*)())_glCompressedTexSubImage2D_Exec)(glContext,target,level,xoffset,yoffset,width,height,format,imageSize,
+                       data);
     return uVar1;
   }
-  if (((param_8 < 0x83f0) || ((0x83f3 < param_8 && (param_8 != 0x8837)))) || (param_9 < 1)) {
+  if (((format < 0x83f0) || ((0x83f3 < format && (format != 0x8837)))) || (imageSize < 1)) {
 LAB_00091acc:
-    if (param_1[0x1d5d] == 0) {
-      param_1[0x1d5d] = 0x502;
+    if (glContext[0x1d5d] == 0) {
+      glContext[0x1d5d] = 0x502;
     }
   }
   else {
-    iVar2 = param_1[0x129b];
+    iVar2 = glContext[0x129b];
     if (iVar2 != 0) {
-      if (*(int *)(iVar2 + 0x38) < param_9 + param_10) goto LAB_00091acc;
+      if (*(int *)(iVar2 + 0x38) < imageSize + data) goto LAB_00091acc;
       if (*(int *)(iVar2 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(param_1,iVar2 + 0x10);
+        _gleSynchronizePluginBuffer(glContext,iVar2 + 0x10);
       }
-      param_10 = param_10 + *(int *)(iVar2 + 0x30);
+      data = data + *(int *)(iVar2 + 0x30);
     }
-    param_1 = (int *)_gleAddListItem(param_1,PTR__glCompressedTexSubImage2D_ListExec_00110394,
-                                     param_9 + 0x20);
-    if (param_1 != (int *)0x0) {
-      *param_1 = param_2;
-      param_1[1] = param_3;
-      param_1[6] = param_8;
-      param_1[2] = param_4;
-      param_1[3] = param_5;
-      param_1[4] = param_6;
-      param_1[5] = param_7;
-      param_1[7] = param_9;
-      if (param_10 != 0) {
-        uVar1 = _memcpy(param_1 + 8,param_10,param_9);
+    glContext = (int *)_gleAddListItem(glContext,PTR__glCompressedTexSubImage2D_ListExec_00110394,
+                                     imageSize + 0x20);
+    if (glContext != (int *)0x0) {
+      *glContext = target;
+      glContext[1] = level;
+      glContext[6] = format;
+      glContext[2] = xoffset;
+      glContext[3] = yoffset;
+      glContext[4] = width;
+      glContext[5] = height;
+      glContext[7] = imageSize;
+      if (data != 0) {
+        uVar1 = _memcpy(glContext + 8,data,imageSize);
         return uVar1;
       }
     }
   }
-  return param_1;
+  return glContext;
 }
 
 /* _glCompressedTexSubImage1D_Comp @ 0x91b7c (76 bytes) */
-void _glCompressedTexSubImage1D_Comp(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  uint param_6;
+void _glCompressedTexSubImage1D_Comp(glContext, target, level, xoffset, width, format)
+  int glContext;
+  undefined4 target;
+  undefined4 level;
+  undefined4 xoffset;
+  undefined4 width;
+  uint format;
 {
-  undefined4 uVar1;
+  undefined4 glErrorCode;
   
-  if ((param_6 < 0x83f0) || ((0x83f3 < param_6 && (param_6 != 0x8837)))) {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+  if ((format < 0x83f0) || ((0x83f3 < format && (format != 0x8837)))) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
   else {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x500;
+    glErrorCode = 0x500;
   }
-  *(undefined4 *)(param_1 + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
 /* _glCompressedTexImage3D_Exec @ 0x91bc8 (700 bytes) */
-int _glCompressedTexImage3D_Exec(glContext, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+int _glCompressedTexImage3D_Exec(glContext, target, level, internalformat, width, height, depth, border, imageSize, data)
   int glContext;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  int param_9;
-  int param_10;
+  int target;
+  int level;
+  undefined4 internalformat;
+  undefined4 width;
+  undefined4 height;
+  undefined4 depth;
+  undefined4 border;
+  int imageSize;
+  int data;
 {
   byte bVar1;
   ushort uVar2;
   undefined4 uVar3;
+  undefined4 glErrorCode;
   uint uVar4;
   int iVar5;
   int iVar6;
@@ -922,37 +926,37 @@ int _glCompressedTexImage3D_Exec(glContext, param_2, param_3, param_4, param_5, 
   
   iVar5 = glContext;
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((param_10 == 0) && (*(char *)(glContext + 0x31e6) != '\0')) {
+    if ((data == 0) && (*(char *)(glContext + 0x31e6) != '\0')) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return glContext;
       }
-      uVar3 = 0x501;
+      glErrorCode = 0x501;
       goto LAB_00091ce0;
     }
     iVar6 = *(int *)(glContext + 0x4a6c);
     if (iVar6 != 0) {
-      if (*(int *)(iVar6 + 0x38) < param_9 + param_10) goto LAB_00091cd0;
+      if (*(int *)(iVar6 + 0x38) < imageSize + data) goto LAB_00091cd0;
       if (*(int *)(iVar6 + 0x40) != 0) {
         _gleSynchronizePluginBuffer(glContext,iVar6 + 0x10);
       }
-      param_10 = param_10 + *(int *)(iVar6 + 0x30);
+      data = data + *(int *)(iVar6 + 0x30);
     }
     iVar5 = _gleCheckCompressedTexImage3DArgs
-                      (glContext,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9);
+                      (glContext,target,level,internalformat,width,height,depth,border,imageSize);
     if (iVar5 == 0) {
       return 0;
     }
     uVar2 = *(ushort *)(iVar5 + 0x24);
     if ((uVar2 & 0x3c00) == 0x1000) {
 LAB_00091ce8:
-      uVar4 = param_2 - 0x8515;
+      uVar4 = target - 0x8515;
       if (5 < uVar4) {
         uVar4 = 0;
       }
-      iVar6 = iVar5 + uVar4 * 0x168 + param_3 * 0x18;
+      iVar6 = iVar5 + uVar4 * 0x168 + level * 0x18;
       iVar7 = iVar6 + 0xc4;
       if ((*(byte *)(iVar6 + 0xcf) & 0x20) != 0) {
-        _gleDeletePluginTextureLevel(glContext,iVar5,iVar7,uVar4,param_3);
+        _gleDeletePluginTextureLevel(glContext,iVar5,iVar7,uVar4,level);
         if (*(int *)(iVar6 + 0xd8) != 0) {
           bVar1 = *(byte *)(iVar6 + 0xcf);
           if ((bVar1 & 1) == 0) {
@@ -967,15 +971,15 @@ LAB_00091ce8:
         *(byte *)(iVar6 + 0xcf) = *(byte *)(iVar6 + 0xcf) & 0xdf;
       }
       iVar6 = _gleCreateTextureLevel
-                        (glContext,iVar5,iVar7,param_4,param_5,param_6,param_7,param_8,param_4,0,1,
-                         param_10);
-      if ((iVar6 != 0) && (param_10 != 0)) {
+                        (glContext,iVar5,iVar7,internalformat,width,height,depth,border,internalformat,0,1,
+                         data);
+      if ((iVar6 != 0) && (data != 0)) {
         _gleCompressedTextureImagePut
-                  (glContext,iVar7,0,0,0,param_5,param_6,param_7,param_4,param_9,param_10);
+                  (glContext,iVar7,0,0,0,width,height,depth,internalformat,imageSize,data);
       }
-      uVar3 = _gleCreatePluginTextureLevel(glContext,iVar5,iVar7,uVar4,param_3,param_4);
-      if ((((*(uint *)(iVar5 + 0x6c) & 0x8000) != 0) && (*(short *)(iVar5 + 0x60) == param_3)) &&
-         (iVar5 = _gleGenMipmapsToLevel(glContext,iVar5,0,param_3,0xf,1), uVar3 = 0, iVar5 != 0)) {
+      uVar3 = _gleCreatePluginTextureLevel(glContext,iVar5,iVar7,uVar4,level,internalformat);
+      if ((((*(uint *)(iVar5 + 0x6c) & 0x8000) != 0) && (*(short *)(iVar5 + 0x60) == level)) &&
+         (iVar5 = _gleGenMipmapsToLevel(glContext,iVar5,0,level,0xf,1), uVar3 = 0, iVar5 != 0)) {
         return iVar5;
       }
       *(uint *)(glContext + 0x314) =
@@ -992,64 +996,64 @@ LAB_00091cd0:
   if (*(int *)(glContext + 0x7574) != 0) {
     return iVar5;
   }
-  uVar3 = 0x502;
+  glErrorCode = 0x502;
 LAB_00091ce0:
-  *(undefined4 *)(glContext + 0x7574) = uVar3;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return iVar5;
 }
 
 /* _glCompressedTexImage2D_Exec @ 0x91e84 (692 bytes) */
-int _glCompressedTexImage2D_Exec(glContext, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+int _glCompressedTexImage2D_Exec(glContext, target, level, internalformat, width, height, border, imageSize, data)
   int glContext;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  int param_8;
-  int param_9;
+  int target;
+  int level;
+  undefined4 internalformat;
+  undefined4 width;
+  undefined4 height;
+  undefined4 border;
+  int imageSize;
+  int data;
 {
   byte bVar1;
   ushort uVar2;
-  undefined4 uVar3;
+  undefined4 glErrorCode;
   uint uVar4;
   int iVar5;
   int iVar6;
   int iVar7;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    if ((param_9 == 0) && (*(char *)(glContext + 0x31e6) != '\0')) {
+    if ((data == 0) && (*(char *)(glContext + 0x31e6) != '\0')) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
-      uVar3 = 0x501;
+      glErrorCode = 0x501;
       goto LAB_00091f94;
     }
     iVar6 = *(int *)(glContext + 0x4a6c);
     if (iVar6 != 0) {
-      if (*(int *)(iVar6 + 0x38) < param_8 + param_9) goto LAB_00091f84;
+      if (*(int *)(iVar6 + 0x38) < imageSize + data) goto LAB_00091f84;
       if (*(int *)(iVar6 + 0x40) != 0) {
         _gleSynchronizePluginBuffer(glContext,iVar6 + 0x10);
       }
-      param_9 = param_9 + *(int *)(iVar6 + 0x30);
+      data = data + *(int *)(iVar6 + 0x30);
     }
     iVar6 = _gleCheckCompressedTexImage2DArgs
-                      (glContext,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+                      (glContext,target,level,internalformat,width,height,border,imageSize);
     if (iVar6 == 0) {
       return;
     }
     uVar2 = *(ushort *)(iVar6 + 0x24);
     if ((uVar2 & 0x3c00) == 0x1000) {
 LAB_00091f9c:
-      uVar4 = param_2 - 0x8515;
+      uVar4 = target - 0x8515;
       if (5 < uVar4) {
         uVar4 = 0;
       }
-      iVar5 = iVar6 + uVar4 * 0x168 + param_3 * 0x18;
+      iVar5 = iVar6 + uVar4 * 0x168 + level * 0x18;
       iVar7 = iVar5 + 0xc4;
       if ((*(byte *)(iVar5 + 0xcf) & 0x20) != 0) {
-        _gleDeletePluginTextureLevel(glContext,iVar6,iVar7,uVar4,param_3);
+        _gleDeletePluginTextureLevel(glContext,iVar6,iVar7,uVar4,level);
         if (*(int *)(iVar5 + 0xd8) != 0) {
           bVar1 = *(byte *)(iVar5 + 0xcf);
           if ((bVar1 & 1) == 0) {
@@ -1064,14 +1068,14 @@ LAB_00091f9c:
         *(byte *)(iVar5 + 0xcf) = *(byte *)(iVar5 + 0xcf) & 0xdf;
       }
       iVar5 = _gleCreateTextureLevel
-                        (glContext,iVar6,iVar7,param_4,param_5,param_6,1,param_7,param_4,0,1,param_9);
-      if ((iVar5 != 0) && (param_9 != 0)) {
-        _gleCompressedTextureImagePut(glContext,iVar7,0,0,0,param_5,param_6,1,param_4,param_8,param_9)
+                        (glContext,iVar6,iVar7,internalformat,width,height,1,border,internalformat,0,1,data);
+      if ((iVar5 != 0) && (data != 0)) {
+        _gleCompressedTextureImagePut(glContext,iVar7,0,0,0,width,height,1,internalformat,imageSize,data)
         ;
       }
-      _gleCreatePluginTextureLevel(glContext,iVar6,iVar7,uVar4,param_3,param_4);
-      if ((((*(uint *)(iVar6 + 0x6c) & 0x8000) != 0) && (*(short *)(iVar6 + 0x60) == param_3)) &&
-         (iVar6 = _gleGenMipmapsToLevel(glContext,iVar6,uVar4,param_3,0xf,1), iVar6 != 0)) {
+      _gleCreatePluginTextureLevel(glContext,iVar6,iVar7,uVar4,level,internalformat);
+      if ((((*(uint *)(iVar6 + 0x6c) & 0x8000) != 0) && (*(short *)(iVar6 + 0x60) == level)) &&
+         (iVar6 = _gleGenMipmapsToLevel(glContext,iVar6,uVar4,level,0xf,1), iVar6 != 0)) {
         return;
       }
       *(uint *)(glContext + 0x314) =
@@ -1088,51 +1092,51 @@ LAB_00091f84:
   if (*(int *)(glContext + 0x7574) != 0) {
     return;
   }
-  uVar3 = 0x502;
+  glErrorCode = 0x502;
 LAB_00091f94:
-  *(undefined4 *)(glContext + 0x7574) = uVar3;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
 /* _glCompressedTexImage1D_Exec @ 0x92138 (76 bytes) */
-void _glCompressedTexImage1D_Exec(param_1, param_2, param_3, param_4)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  uint param_4;
+void _glCompressedTexImage1D_Exec(glContext, target, level, internalformat)
+  int glContext;
+  undefined4 target;
+  undefined4 level;
+  uint internalformat;
 {
-  undefined4 uVar1;
+  undefined4 glErrorCode;
   
-  if ((param_4 < 0x83f0) || ((0x83f3 < param_4 && (param_4 != 0x8837)))) {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+  if ((internalformat < 0x83f0) || ((0x83f3 < internalformat && (internalformat != 0x8837)))) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
   else {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x500;
+    glErrorCode = 0x500;
   }
-  *(undefined4 *)(param_1 + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
 /* _glCompressedTexSubImage3D_Exec @ 0x92184 (1464 bytes) */
-int _glCompressedTexSubImage3D_Exec(glContext, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
+int _glCompressedTexSubImage3D_Exec(glContext, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data)
   int glContext;
-  undefined4 param_2;
-  uint param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  int param_7;
-  int param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  int param_11;
-  int param_12;
+  undefined4 target;
+  uint level;
+  undefined4 xoffset;
+  undefined4 yoffset;
+  undefined4 zoffset;
+  int width;
+  int height;
+  undefined4 depth;
+  undefined4 format;
+  int imageSize;
+  int data;
 {
   int iVar1;
   int iVar2;
@@ -1146,25 +1150,25 @@ int _glCompressedTexSubImage3D_Exec(glContext, param_2, param_3, param_4, param_
   if (*(short *)(glContext + 0x4a10) < 0) {
     iVar7 = *(int *)(glContext + 0x4a6c);
     if (iVar7 != 0) {
-      if (*(int *)(iVar7 + 0x38) < param_11 + param_12) goto LAB_000921f0;
-      param_12 = param_12 + *(int *)(iVar7 + 0x30);
+      if (*(int *)(iVar7 + 0x38) < imageSize + data) goto LAB_000921f0;
+      data = data + *(int *)(iVar7 + 0x30);
     }
-    if ((param_7 != 0) && (param_8 != 0)) {
+    if ((width != 0) && (height != 0)) {
       iVar2 = _gleCheckCompressedTexSubImage3DArgs
-                        (glContext,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,
-                         param_10,param_11);
+                        (glContext,target,level,xoffset,yoffset,zoffset,width,height,depth,
+                         format,imageSize);
       iVar3 = 0;
       if (iVar2 != 0) {
-        iVar1 = iVar2 + param_3 * 0x18;
+        iVar1 = iVar2 + level * 0x18;
         iVar5 = iVar1 + 0xc4;
         if (iVar7 != 0) {
-          if (((((int)(uint)*(byte *)(iVar2 + 0x8d) <= (int)param_3) &&
-               ((int)param_3 <= (int)(uint)*(byte *)(iVar2 + 0x8f))) &&
-              ((*(ushort *)(iVar2 + 0x94) >> (param_3 & 0x3f) & 1) != 0)) &&
+          if (((((int)(uint)*(byte *)(iVar2 + 0x8d) <= (int)level) &&
+               ((int)level <= (int)(uint)*(byte *)(iVar2 + 0x8f))) &&
+              ((*(ushort *)(iVar2 + 0x94) >> (level & 0x3f) & 1) != 0)) &&
              (iVar3 = (**(code **)(glContext + 0x4710))
                                 (*(undefined4 *)(glContext + 0x4688),
                                  *(undefined4 *)(iVar2 + (uint)*(byte *)(glContext + 0x85a8) * 4),0,
-                                 param_3,param_4,param_5,param_6,param_7), iVar3 != 0)) {
+                                 level,xoffset,yoffset,zoffset,width), iVar3 != 0)) {
             *(undefined4 *)(iVar2 + 0x20) =
                  *(undefined4 *)
                   ((uint)*(byte *)(glContext + 0x85a8) * 4 + *(int *)(glContext + 0x5148) + 0x8054);
@@ -1177,17 +1181,17 @@ int _glCompressedTexSubImage3D_Exec(glContext, param_2, param_3, param_4, param_
               *(byte *)(iVar1 + 0xcf) = bVar4 & 0xef;
               *(ushort *)(iVar2 + 0xa0) =
                    *(ushort *)(iVar2 + 0xa0) &
-                   ((ushort)(-2 << (param_3 & 0x1f)) |
-                   (ushort)(0xfffffffe >> 0x20 - (param_3 & 0x1f)));
+                   ((ushort)(-2 << (level & 0x1f)) |
+                   (ushort)(0xfffffffe >> 0x20 - (level & 0x1f)));
             }
             *(byte *)(iVar1 + 0xcf) = *(byte *)(iVar1 + 0xcf) | 0x40;
             if ((*(uint *)(iVar2 + 0x6c) & 0x8000) == 0) {
               return iVar3;
             }
-            if ((int)*(short *)(iVar2 + 0x60) != param_3) {
+            if ((int)*(short *)(iVar2 + 0x60) != level) {
               return iVar3;
             }
-            uVar6 = param_3 + 1;
+            uVar6 = level + 1;
             if ((int)(uint)*(byte *)(iVar2 + 0x83) < (int)uVar6) {
               return iVar3;
             }
@@ -1211,13 +1215,13 @@ int _glCompressedTexSubImage3D_Exec(glContext, param_2, param_3, param_4, param_
             _gleSynchronizePluginBuffer(glContext,iVar7 + 0x10);
           }
         }
-        if (((((int)param_3 < (int)(uint)*(byte *)(iVar2 + 0x8d)) ||
-             ((int)(uint)*(byte *)(iVar2 + 0x8f) < (int)param_3)) ||
-            ((*(ushort *)(iVar2 + 0x94) >> (param_3 & 0x3f) & 1) == 0)) ||
+        if (((((int)level < (int)(uint)*(byte *)(iVar2 + 0x8d)) ||
+             ((int)(uint)*(byte *)(iVar2 + 0x8f) < (int)level)) ||
+            ((*(ushort *)(iVar2 + 0x94) >> (level & 0x3f) & 1) == 0)) ||
            (iVar3 = (**(code **)(glContext + 0x4710))
                               (*(undefined4 *)(glContext + 0x4688),
                                *(undefined4 *)(iVar2 + (uint)*(byte *)(glContext + 0x85a8) * 4),0,
-                               param_3,param_4,param_5,param_6,param_7), iVar3 == 0)) {
+                               level,xoffset,yoffset,zoffset,width), iVar3 == 0)) {
           bVar4 = *(byte *)(iVar1 + 0xcf);
           if ((bVar4 & 0x10) == 0) {
             if ((bVar4 & 0x40) == 0) {
@@ -1229,20 +1233,20 @@ int _glCompressedTexSubImage3D_Exec(glContext, param_2, param_3, param_4, param_
             }
             else {
               _gleUploadPluginTextureLevel
-                        (glContext,iVar2,iVar5,0,param_3,(uint)*(byte *)(glContext + 0x85a8));
+                        (glContext,iVar2,iVar5,0,level,(uint)*(byte *)(glContext + 0x85a8));
             }
           }
           iVar3 = _gleModifyPluginTextureLevel
-                            (glContext,iVar2,iVar5,0,param_3,param_4,param_5,param_6,param_7,param_8,
-                             param_9);
-          if (param_12 != 0) {
+                            (glContext,iVar2,iVar5,0,level,xoffset,yoffset,zoffset,width,height,
+                             depth);
+          if (data != 0) {
             iVar3 = _gleCompressedTextureImagePut
-                              (glContext,iVar5,param_4,param_5,param_6,param_7,param_8,param_9,
-                               param_10,param_11,param_12);
+                              (glContext,iVar5,xoffset,yoffset,zoffset,width,height,depth,
+                               format,imageSize,data);
           }
           if ((((*(uint *)(iVar2 + 0x6c) & 0x8000) == 0) ||
-              ((int)*(short *)(iVar2 + 0x60) != param_3)) ||
-             (iVar3 = _gleGenMipmapsToLevel(glContext,iVar2,0,param_3,0xf,1), iVar3 == 0)) {
+              ((int)*(short *)(iVar2 + 0x60) != level)) ||
+             (iVar3 = _gleGenMipmapsToLevel(glContext,iVar2,0,level,0xf,1), iVar3 == 0)) {
             *(uint *)(glContext + 0x314) =
                  *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
           }
@@ -1260,13 +1264,13 @@ int _glCompressedTexSubImage3D_Exec(glContext, param_2, param_3, param_4, param_
             *(byte *)(iVar1 + 0xcf) = bVar4 & 0xef;
             *(ushort *)(iVar2 + 0xa0) =
                  *(ushort *)(iVar2 + 0xa0) &
-                 ((ushort)(-2 << (param_3 & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (param_3 & 0x1f))
+                 ((ushort)(-2 << (level & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (level & 0x1f))
                  );
           }
           *(byte *)(iVar1 + 0xcf) = *(byte *)(iVar1 + 0xcf) | 0x40;
           if ((((*(uint *)(iVar2 + 0x6c) & 0x8000) != 0) &&
-              ((int)*(short *)(iVar2 + 0x60) == param_3)) &&
-             (uVar6 = param_3 + 1, (int)uVar6 <= (int)(uint)*(byte *)(iVar2 + 0x83))) {
+              ((int)*(short *)(iVar2 + 0x60) == level)) &&
+             (uVar6 = level + 1, (int)uVar6 <= (int)(uint)*(byte *)(iVar2 + 0x83))) {
             iVar7 = uVar6 * 0x18 + iVar2 + 0xc4;
             do {
               if (*(int *)(iVar7 + 0x14) != 0) {
@@ -1296,17 +1300,17 @@ LAB_000921f0:
 }
 
 /* _glCompressedTexSubImage2D_Exec @ 0x9273c (1552 bytes) */
-int _glCompressedTexSubImage2D_Exec(glContext, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+int _glCompressedTexSubImage2D_Exec(glContext, target, level, xoffset, yoffset, width, height, format, imageSize, data)
   int glContext;
-  int param_2;
-  uint param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  int param_6;
-  int param_7;
-  undefined4 param_8;
-  int param_9;
-  int param_10;
+  int target;
+  uint level;
+  undefined4 xoffset;
+  undefined4 yoffset;
+  int width;
+  int height;
+  undefined4 format;
+  int imageSize;
+  int data;
 {
   uint uVar1;
   int iVar2;
@@ -1321,28 +1325,28 @@ int _glCompressedTexSubImage2D_Exec(glContext, param_2, param_3, param_4, param_
   if (*(short *)(glContext + 0x4a10) < 0) {
     iVar9 = *(int *)(glContext + 0x4a6c);
     if (iVar9 != 0) {
-      if (*(int *)(iVar9 + 0x38) < param_9 + param_10) goto LAB_000927a4;
-      param_10 = param_10 + *(int *)(iVar9 + 0x30);
+      if (*(int *)(iVar9 + 0x38) < imageSize + data) goto LAB_000927a4;
+      data = data + *(int *)(iVar9 + 0x30);
     }
-    if (((param_6 != 0) && (param_7 != 0)) &&
+    if (((width != 0) && (height != 0)) &&
        (iVar3 = _gleCheckCompressedTexSubImage2DArgs
-                          (glContext,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9),
+                          (glContext,target,level,xoffset,yoffset,width,height,format,imageSize),
        iVar3 != 0)) {
-      uVar1 = param_2 - 0x8515;
+      uVar1 = target - 0x8515;
       if (5 < uVar1) {
         uVar1 = 0;
       }
       iVar7 = uVar1 * 0x168;
-      iVar2 = iVar3 + iVar7 + param_3 * 0x18;
+      iVar2 = iVar3 + iVar7 + level * 0x18;
       iVar8 = iVar2 + 0xc4;
       if (iVar9 != 0) {
-        if ((((int)(uint)*(byte *)(iVar3 + 0x8d) <= (int)param_3) &&
-            ((int)param_3 <= (int)(uint)*(byte *)(iVar3 + 0x8f))) &&
-           ((iVar5 = uVar1 * 2, (*(ushort *)(iVar5 + iVar3 + 0x94) >> (param_3 & 0x3f) & 1) != 0 &&
+        if ((((int)(uint)*(byte *)(iVar3 + 0x8d) <= (int)level) &&
+            ((int)level <= (int)(uint)*(byte *)(iVar3 + 0x8f))) &&
+           ((iVar5 = uVar1 * 2, (*(ushort *)(iVar5 + iVar3 + 0x94) >> (level & 0x3f) & 1) != 0 &&
             (iVar4 = (**(code **)(glContext + 0x4710))
                                (*(undefined4 *)(glContext + 0x4688),
                                 *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4),uVar1
-                                ,param_3,param_4,param_5,0,param_6), iVar4 != 0)))) {
+                                ,level,xoffset,yoffset,0,width), iVar4 != 0)))) {
           *(undefined4 *)(iVar3 + 0x20) =
                *(undefined4 *)
                 ((uint)*(byte *)(glContext + 0x85a8) * 4 + *(int *)(glContext + 0x5148) + 0x8054);
@@ -1355,17 +1359,17 @@ int _glCompressedTexSubImage2D_Exec(glContext, param_2, param_3, param_4, param_
             *(byte *)(iVar2 + 0xcf) = bVar6 & 0xef;
             *(ushort *)(iVar5 + iVar3 + 0xa0) =
                  *(ushort *)(iVar5 + iVar3 + 0xa0) &
-                 ((ushort)(-2 << (param_3 & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (param_3 & 0x1f))
+                 ((ushort)(-2 << (level & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (level & 0x1f))
                  );
           }
           *(byte *)(iVar2 + 0xcf) = *(byte *)(iVar2 + 0xcf) | 0x40;
           if ((*(uint *)(iVar3 + 0x6c) & 0x8000) == 0) {
             return;
           }
-          if ((int)*(short *)(iVar3 + 0x60) != param_3) {
+          if ((int)*(short *)(iVar3 + 0x60) != level) {
             return;
           }
-          uVar1 = param_3 + 1;
+          uVar1 = level + 1;
           if ((int)(uint)*(byte *)(iVar3 + 0x83) < (int)uVar1) {
             return;
           }
@@ -1389,13 +1393,13 @@ int _glCompressedTexSubImage2D_Exec(glContext, param_2, param_3, param_4, param_
           _gleSynchronizePluginBuffer(glContext,iVar9 + 0x10);
         }
       }
-      if (((((int)param_3 < (int)(uint)*(byte *)(iVar3 + 0x8d)) ||
-           ((int)(uint)*(byte *)(iVar3 + 0x8f) < (int)param_3)) ||
-          (iVar9 = uVar1 * 2, (*(ushort *)(iVar9 + iVar3 + 0x94) >> (param_3 & 0x3f) & 1) == 0)) ||
+      if (((((int)level < (int)(uint)*(byte *)(iVar3 + 0x8d)) ||
+           ((int)(uint)*(byte *)(iVar3 + 0x8f) < (int)level)) ||
+          (iVar9 = uVar1 * 2, (*(ushort *)(iVar9 + iVar3 + 0x94) >> (level & 0x3f) & 1) == 0)) ||
          (iVar5 = (**(code **)(glContext + 0x4710))
                             (*(undefined4 *)(glContext + 0x4688),
                              *(undefined4 *)(iVar3 + (uint)*(byte *)(glContext + 0x85a8) * 4),uVar1,
-                             param_3,param_4,param_5,0,param_6), iVar5 == 0)) {
+                             level,xoffset,yoffset,0,width), iVar5 == 0)) {
         bVar6 = *(byte *)(iVar2 + 0xcf);
         if ((bVar6 & 0x10) == 0) {
           if ((bVar6 & 0x40) == 0) {
@@ -1407,17 +1411,17 @@ int _glCompressedTexSubImage2D_Exec(glContext, param_2, param_3, param_4, param_
           }
           else {
             _gleUploadPluginTextureLevel
-                      (glContext,iVar3,iVar8,uVar1,param_3,(uint)*(byte *)(glContext + 0x85a8));
+                      (glContext,iVar3,iVar8,uVar1,level,(uint)*(byte *)(glContext + 0x85a8));
           }
         }
         _gleModifyPluginTextureLevel
-                  (glContext,iVar3,iVar8,uVar1,param_3,param_4,param_5,0,param_6,param_7,1);
-        if (param_10 != 0) {
+                  (glContext,iVar3,iVar8,uVar1,level,xoffset,yoffset,0,width,height,1);
+        if (data != 0) {
           _gleCompressedTextureImagePut
-                    (glContext,iVar8,param_4,param_5,0,param_6,param_7,1,param_8,param_9,param_10);
+                    (glContext,iVar8,xoffset,yoffset,0,width,height,1,format,imageSize,data);
         }
-        if ((((*(uint *)(iVar3 + 0x6c) & 0x8000) == 0) || ((int)*(short *)(iVar3 + 0x60) != param_3)
-            ) || (iVar9 = _gleGenMipmapsToLevel(glContext,iVar3,uVar1,param_3,0xf,1), iVar9 == 0)) {
+        if ((((*(uint *)(iVar3 + 0x6c) & 0x8000) == 0) || ((int)*(short *)(iVar3 + 0x60) != level)
+            ) || (iVar9 = _gleGenMipmapsToLevel(glContext,iVar3,uVar1,level,0xf,1), iVar9 == 0)) {
           *(uint *)(glContext + 0x314) =
                *(uint *)(glContext + 0x314) | 1 << (*(uint *)(glContext + 0x53d4) & 0x3f);
         }
@@ -1435,11 +1439,11 @@ int _glCompressedTexSubImage2D_Exec(glContext, param_2, param_3, param_4, param_
           *(byte *)(iVar2 + 0xcf) = bVar6 & 0xef;
           *(ushort *)(iVar9 + iVar3 + 0xa0) =
                *(ushort *)(iVar9 + iVar3 + 0xa0) &
-               ((ushort)(-2 << (param_3 & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (param_3 & 0x1f)));
+               ((ushort)(-2 << (level & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (level & 0x1f)));
         }
         *(byte *)(iVar2 + 0xcf) = *(byte *)(iVar2 + 0xcf) | 0x40;
-        if ((((*(uint *)(iVar3 + 0x6c) & 0x8000) != 0) && ((int)*(short *)(iVar3 + 0x60) == param_3)
-            ) && (uVar1 = param_3 + 1, (int)uVar1 <= (int)(uint)*(byte *)(iVar3 + 0x83))) {
+        if ((((*(uint *)(iVar3 + 0x6c) & 0x8000) != 0) && ((int)*(short *)(iVar3 + 0x60) == level)
+            ) && (uVar1 = level + 1, (int)uVar1 <= (int)(uint)*(byte *)(iVar3 + 0x83))) {
           iVar2 = uVar1 * 0x18 + iVar7 + iVar3 + 0xc4;
           do {
             if (*(int *)(iVar2 + 0x14) != 0) {
@@ -1468,41 +1472,42 @@ LAB_000927a4:
 }
 
 /* _glCompressedTexSubImage1D_Exec @ 0x92d4c (76 bytes) */
-void _glCompressedTexSubImage1D_Exec(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  uint param_6;
+void _glCompressedTexSubImage1D_Exec(glContext, target, level, xoffset, width, format)
+  int glContext;
+  undefined4 target;
+  undefined4 level;
+  undefined4 xoffset;
+  undefined4 width;
+  uint format;
 {
-  undefined4 uVar1;
+  undefined4 glErrorCode;
   
-  if ((param_6 < 0x83f0) || ((0x83f3 < param_6 && (param_6 != 0x8837)))) {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+  if ((format < 0x83f0) || ((0x83f3 < format && (format != 0x8837)))) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x502;
+    glErrorCode = 0x502;
   }
   else {
-    if (*(int *)(param_1 + 0x7574) != 0) {
+    if (*(int *)(glContext + 0x7574) != 0) {
       return;
     }
-    uVar1 = 0x500;
+    glErrorCode = 0x500;
   }
-  *(undefined4 *)(param_1 + 0x7574) = uVar1;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
 /* _glGetCompressedTexImage_Exec @ 0x92d98 (660 bytes) */
-void _glGetCompressedTexImage_Exec(glContext, param_2, param_3, param_4)
+void _glGetCompressedTexImage_Exec(glContext, target, lod, img)
   int glContext;
-  int param_2;
-  uint param_3;
-  int param_4;
+  int target;
+  uint lod;
+  int img;
 {
   byte bVar1;
-  undefined4 uVar2;
+  undefined4 glErrorCode;
+  undefined4 rowBytes;
   uint uVar3;
   int iVar4;
   int iVar5;
@@ -1537,40 +1542,40 @@ void _glGetCompressedTexImage_Exec(glContext, param_2, param_3, param_4)
   undefined4 local_30;
   undefined4 local_2c [4];
   
-  iVar5 = _gleLookUpNonProxyTexture(glContext,param_2);
+  iVar5 = _gleLookUpNonProxyTexture(glContext,target);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (iVar5 == 0) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
-      uVar2 = 0x500;
+      glErrorCode = 0x500;
       goto LAB_00092efc;
     }
-    if (0xe < param_3) {
+    if (0xe < lod) {
       if (*(int *)(glContext + 0x7574) != 0) {
         return;
       }
-      uVar2 = 0x501;
+      glErrorCode = 0x501;
       goto LAB_00092efc;
     }
-    uVar3 = param_2 - 0x8515;
+    uVar3 = target - 0x8515;
     if (5 < uVar3) {
       uVar3 = 0;
     }
-    iVar4 = iVar5 + uVar3 * 0x168 + param_3 * 0x18;
+    iVar4 = iVar5 + uVar3 * 0x168 + lod * 0x18;
     bVar1 = *(byte *)(iVar4 + 0xcf);
     if ((bVar1 & 0x20) == 0) {
       return;
     }
-    if ((((int)param_3 < (int)(uint)*(byte *)(iVar5 + 0x8d)) ||
-        ((int)(uint)*(byte *)(iVar5 + 0x8f) < (int)param_3)) || ((bVar1 & 0x40) == 0)) {
+    if ((((int)lod < (int)(uint)*(byte *)(iVar5 + 0x8d)) ||
+        ((int)(uint)*(byte *)(iVar5 + 0x8f) < (int)lod)) || ((bVar1 & 0x40) == 0)) {
       if ((bVar1 & 0x10) == 0) {
         return;
       }
     }
     else {
       _gleUploadPluginTextureLevel
-                (glContext,iVar5,iVar4 + 0xc4,uVar3,param_3,(uint)*(byte *)(glContext + 0x85a8));
+                (glContext,iVar5,iVar4 + 0xc4,uVar3,lod,(uint)*(byte *)(glContext + 0x85a8));
     }
     uVar3 = (uint)*(ushort *)(iVar4 + 0xca);
     iVar10 = glContext + 0x31b0;
@@ -1582,12 +1587,12 @@ void _glGetCompressedTexImage_Exec(glContext, param_2, param_3, param_4)
     iVar11 = *(int *)(glContext + 0x4a68);
     if (iVar11 == 0) {
 LAB_00092f24:
-      if ((((*(byte *)(iVar4 + 0xcf) & 1) != 0) && (param_4 + local_3c == *(int *)(iVar4 + 0xd8)))
+      if ((((*(byte *)(iVar4 + 0xcf) & 1) != 0) && (img + local_3c == *(int *)(iVar4 + 0xd8)))
          && (*(short *)(iVar4 + 0xd6) == 0)) {
         return;
       }
       local_9c = (uint)(*(char *)(glContext + 0x31c8) != '\0');
-      uVar2 = _gleRowBytes((uint)*(ushort *)(iVar4 + 0xd4),(uint)*(ushort *)(iVar4 + 0xd6),
+      rowBytes = _gleRowBytes((uint)*(ushort *)(iVar4 + 0xd4),(uint)*(ushort *)(iVar4 + 0xd6),
                            (uint)*(ushort *)(iVar4 + 0xd0));
       _glgConvertType((uint)*(ushort *)(iVar4 + 0xd4),(uint)*(ushort *)(iVar4 + 0xd6),&local_38,
                       &local_34,uVar3,iVar10,puVar8,piVar9);
@@ -1603,134 +1608,134 @@ LAB_00092f24:
       local_a0 = 2;
       local_94 = (uint)*(ushort *)(iVar4 + 200);
       local_90 = (uint)*(ushort *)(iVar4 + 0xca);
-      local_b0 = param_4 + local_3c;
+      local_b0 = img + local_3c;
       local_c0 = *(undefined4 *)(iVar4 + 0xd8);
       local_54 = 0;
-      local_bc = uVar2;
+      local_bc = rowBytes;
       _glgProcessPixels(glContext + 0x31a8,&local_c0,puVar6,puVar7,uVar3,iVar10,local_90,piVar9);
       return;
     }
-    if (local_48 + param_4 <= *(int *)(iVar11 + 0x38)) {
+    if (local_48 + img <= *(int *)(iVar11 + 0x38)) {
       if (*(int *)(iVar11 + 0x40) != 0) {
         _gleSynchronizePluginBuffer(glContext,iVar11 + 0x10);
       }
-      param_4 = param_4 + *(int *)(iVar11 + 0x30);
+      img = img + *(int *)(iVar11 + 0x30);
       goto LAB_00092f24;
     }
   }
   if (*(int *)(glContext + 0x7574) != 0) {
     return;
   }
-  uVar2 = 0x502;
+  glErrorCode = 0x502;
 LAB_00092efc:
-  *(undefined4 *)(glContext + 0x7574) = uVar2;
+  *(undefined4 *)(glContext + 0x7574) = glErrorCode;
   return;
 }
 
 /* _glCompressedTexImage3D_CompExec @ 0x9302c (128 bytes) */
-void _glCompressedTexImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
+void _glCompressedTexImage3D_CompExec(glContext, target, level, internalformat, width, height, depth, border, imageSize, data)
+  undefined4 glContext;
+  undefined4 target;
+  undefined4 level;
+  undefined4 internalformat;
+  undefined4 width;
+  undefined4 height;
+  undefined4 depth;
+  undefined4 border;
+  undefined4 imageSize;
+  undefined4 data;
 {
-  ((int (*)())_glCompressedTexImage3D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10);
-  ((int (*)())_glCompressedTexImage3D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10);
+  ((int (*)())_glCompressedTexImage3D_Comp)(glContext,target,level,internalformat,width,height,depth,border,imageSize,data);
+  ((int (*)())_glCompressedTexImage3D_Exec)(glContext,target,level,internalformat,width,height,depth,border,imageSize,data);
   return;
 }
 
 /* _glCompressedTexImage2D_CompExec @ 0x930ac (116 bytes) */
-void _glCompressedTexImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
+void _glCompressedTexImage2D_CompExec(glContext, target, level, internalformat, width, height, border, imageSize, data)
+  undefined4 glContext;
+  undefined4 target;
+  undefined4 level;
+  undefined4 internalformat;
+  undefined4 width;
+  undefined4 height;
+  undefined4 border;
+  undefined4 imageSize;
+  undefined4 data;
 {
-  ((int (*)())_glCompressedTexImage2D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9);
-  ((int (*)())_glCompressedTexImage2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9);
+  ((int (*)())_glCompressedTexImage2D_Comp)(glContext,target,level,internalformat,width,height,border,imageSize,data);
+  ((int (*)())_glCompressedTexImage2D_Exec)(glContext,target,level,internalformat,width,height,border,imageSize,data);
   return;
 }
 
 /* _glCompressedTexImage1D_CompExec @ 0x93120 (104 bytes) */
-void _glCompressedTexImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+void _glCompressedTexImage1D_CompExec(glContext, target, level, internalformat, width, border, imageSize, data)
+  undefined4 glContext;
+  undefined4 target;
+  undefined4 level;
+  undefined4 internalformat;
+  undefined4 width;
+  undefined4 border;
+  undefined4 imageSize;
+  undefined4 data;
 {
-  ((void (*)())_glCompressedTexImage1D_Comp)(param_1,param_2,param_3,param_4);
-  ((void (*)())_glCompressedTexImage1D_Exec)(param_1,param_2,param_3,param_4);
+  ((void (*)())_glCompressedTexImage1D_Comp)(glContext,target,level,internalformat);
+  ((void (*)())_glCompressedTexImage1D_Exec)(glContext,target,level,internalformat);
   return;
 }
 
 /* _glCompressedTexSubImage3D_CompExec @ 0x93188 (152 bytes) */
-void _glCompressedTexSubImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  undefined4 param_11;
-  undefined4 param_12;
+void _glCompressedTexSubImage3D_CompExec(glContext, target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data)
+  undefined4 glContext;
+  undefined4 target;
+  undefined4 level;
+  undefined4 xoffset;
+  undefined4 yoffset;
+  undefined4 zoffset;
+  undefined4 width;
+  undefined4 height;
+  undefined4 depth;
+  undefined4 format;
+  undefined4 imageSize;
+  undefined4 data;
 {
-  ((int (*)())_glCompressedTexSubImage3D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10,
-             param_11,param_12);
-  ((int (*)())_glCompressedTexSubImage3D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10,
-             param_11,param_12);
+  ((int (*)())_glCompressedTexSubImage3D_Comp)(glContext,target,level,xoffset,yoffset,zoffset,width,height,depth,format,
+             imageSize,data);
+  ((int (*)())_glCompressedTexSubImage3D_Exec)(glContext,target,level,xoffset,yoffset,zoffset,width,height,depth,format,
+             imageSize,data);
   return;
 }
 
 /* _glCompressedTexSubImage2D_CompExec @ 0x93220 (128 bytes) */
-void _glCompressedTexSubImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
+void _glCompressedTexSubImage2D_CompExec(glContext, target, level, xoffset, yoffset, width, height, format, imageSize, data)
+  undefined4 glContext;
+  undefined4 target;
+  undefined4 level;
+  undefined4 xoffset;
+  undefined4 yoffset;
+  undefined4 width;
+  undefined4 height;
+  undefined4 format;
+  undefined4 imageSize;
+  undefined4 data;
 {
-  ((int (*)())_glCompressedTexSubImage2D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10);
-  ((int (*)())_glCompressedTexSubImage2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10);
+  ((int (*)())_glCompressedTexSubImage2D_Comp)(glContext,target,level,xoffset,yoffset,width,height,format,imageSize,data);
+  ((int (*)())_glCompressedTexSubImage2D_Exec)(glContext,target,level,xoffset,yoffset,width,height,format,imageSize,data);
   return;
 }
 
 /* _glCompressedTexSubImage1D_CompExec @ 0x932a0 (104 bytes) */
-void _glCompressedTexSubImage1D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+void _glCompressedTexSubImage1D_CompExec(glContext, target, level, xoffset, width, format, imageSize, data)
+  undefined4 glContext;
+  undefined4 target;
+  undefined4 level;
+  undefined4 xoffset;
+  undefined4 width;
+  undefined4 format;
+  undefined4 imageSize;
+  undefined4 data;
 {
-  ((void (*)())_glCompressedTexSubImage1D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6);
-  ((void (*)())_glCompressedTexSubImage1D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6);
+  ((void (*)())_glCompressedTexSubImage1D_Comp)(glContext,target,level,xoffset,width,format);
+  ((void (*)())_glCompressedTexSubImage1D_Exec)(glContext,target,level,xoffset,width,format);
   return;
 }
 
@@ -1787,43 +1792,43 @@ int _glTexCoord4_ListExec(glContext, param_2)
 }
 
 /* _glTexCoord1d_Exec @ 0x93394 (32 bytes) */
-void _glTexCoord1d_Exec(int glContext,double fparam_1)
+void _glTexCoord1d_Exec(int glContext,double sCoord)
 {
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
-  *(float *)(glContext + 0x120) = (float)fparam_1;
+  *(float *)(glContext + 0x120) = (float)sCoord;
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   *(undefined4 *)(glContext + 0x124) = *(undefined4 *)(glContext + 0x20);
   return;
 }
 
 /* _glTexCoord1d_Comp @ 0x933b4 (88 bytes) */
-float * _glTexCoord1d_Comp(undefined4 param_1,double fparam_1)
+float * _glTexCoord1d_Comp(undefined4 glContext,double sCoord)
 {
-  float *pfVar1;
+  float *listRecord;
   
-  pfVar1 = (float *)_gleAddListItem(param_1,PTR__glTexCoord1_ListExec_001103c0,4);
-  if (pfVar1 != (float *)0x0) {
-    *pfVar1 = (float)fparam_1;
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glTexCoord1_ListExec_001103c0,4);
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)sCoord;
   }
-  return pfVar1;
+  return listRecord;
 }
 
 /* _glTexCoord1d_CompExec @ 0x9340c (64 bytes) */
-void _glTexCoord1d_CompExec(undefined4 param_1,double fparam_1)
+void _glTexCoord1d_CompExec(undefined4 glContext,double sCoord)
 {
-  ((float * (*)())_glTexCoord1d_Comp)(param_1,fparam_1);
-  ((void (*)())_glTexCoord1d_Exec)(param_1,fparam_1);
+  ((float * (*)())_glTexCoord1d_Comp)(glContext,sCoord);
+  ((void (*)())_glTexCoord1d_Exec)(glContext,sCoord);
   return;
 }
 
 /* _glTexCoord1dv_Exec @ 0x9344c (36 bytes) */
-void _glTexCoord1dv_Exec(glContext, param_2)
+void _glTexCoord1dv_Exec(glContext, v)
   int glContext;
-  double *param_2;
+  double *v;
 {
   double dVar1;
   
-  dVar1 = *param_2;
+  dVar1 = *v;
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   *(float *)(glContext + 0x120) = (float)dVar1;
@@ -1832,70 +1837,70 @@ void _glTexCoord1dv_Exec(glContext, param_2)
 }
 
 /* _glTexCoord1dv_Comp @ 0x93470 (84 bytes) */
-int _glTexCoord1dv_Comp(param_1, param_2)
-  undefined4 param_1;
-  double *param_2;
+int _glTexCoord1dv_Comp(glContext, v)
+  undefined4 glContext;
+  double *v;
 {
-  float *pfVar1;
+  float *listRecord;
   
-  pfVar1 = (float *)_gleAddListItem(param_1,PTR__glTexCoord1_ListExec_001103c0,4);
-  if (pfVar1 != (float *)0x0) {
-    *pfVar1 = (float)*param_2;
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glTexCoord1_ListExec_001103c0,4);
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)*v;
   }
-  return pfVar1;
+  return listRecord;
 }
 
 /* _glTexCoord1dv_CompExec @ 0x934c4 (56 bytes) */
-void _glTexCoord1dv_CompExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+void _glTexCoord1dv_CompExec(glContext, v)
+  undefined4 glContext;
+  undefined4 v;
 {
-  ((int (*)())_glTexCoord1dv_Comp)(param_1,param_2);
-  ((void (*)())_glTexCoord1dv_Exec)(param_1,param_2);
+  ((int (*)())_glTexCoord1dv_Comp)(glContext,v);
+  ((void (*)())_glTexCoord1dv_Exec)(glContext,v);
   return;
 }
 
 /* _glTexCoord2d_Exec @ 0x934fc (36 bytes) */
-void _glTexCoord2d_Exec(int glContext,double fparam_1,double fparam_2)
+void _glTexCoord2d_Exec(int glContext,double sCoord,double t)
 {
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
-  *(float *)(glContext + 0x120) = (float)fparam_1;
+  *(float *)(glContext + 0x120) = (float)sCoord;
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
-  *(float *)(glContext + 0x124) = (float)fparam_2;
+  *(float *)(glContext + 0x124) = (float)t;
   return;
 }
 
 /* _glTexCoord2d_Comp @ 0x93520 (108 bytes) */
-float * _glTexCoord2d_Comp(undefined4 param_1,double fparam_1,double fparam_2)
+float * _glTexCoord2d_Comp(undefined4 glContext,double sCoord,double t)
 {
-  float *pfVar1;
+  float *listRecord;
   
-  pfVar1 = (float *)_gleAddListItem(param_1,PTR__glTexCoord2_ListExec_001103bc,8);
-  if (pfVar1 != (float *)0x0) {
-    *pfVar1 = (float)fparam_1;
-    pfVar1[1] = (float)fparam_2;
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glTexCoord2_ListExec_001103bc,8);
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)sCoord;
+    listRecord[1] = (float)t;
   }
-  return pfVar1;
+  return listRecord;
 }
 
 /* _glTexCoord2d_CompExec @ 0x9358c (80 bytes) */
-void _glTexCoord2d_CompExec(undefined4 param_1,double fparam_1,double fparam_2)
+void _glTexCoord2d_CompExec(undefined4 glContext,double sCoord,double t)
 {
-  ((float * (*)())_glTexCoord2d_Comp)(param_1,fparam_1,fparam_2);
-  ((void (*)())_glTexCoord2d_Exec)(param_1,fparam_1,fparam_2);
+  ((float * (*)())_glTexCoord2d_Comp)(glContext,sCoord,t);
+  ((void (*)())_glTexCoord2d_Exec)(glContext,sCoord,t);
   return;
 }
 
 /* _glTexCoord2dv_Exec @ 0x935dc (44 bytes) */
-void _glTexCoord2dv_Exec(glContext, param_2)
+void _glTexCoord2dv_Exec(glContext, v)
   int glContext;
-  double *param_2;
+  double *v;
 {
   double dVar1;
   double dVar2;
   
-  dVar2 = param_2[1];
-  dVar1 = *param_2;
+  dVar2 = v[1];
+  dVar1 = *v;
   *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
   *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
   *(float *)(glContext + 0x120) = (float)dVar1;
@@ -1904,27 +1909,27 @@ void _glTexCoord2dv_Exec(glContext, param_2)
 }
 
 /* _glTexCoord2dv_Comp @ 0x93608 (96 bytes) */
-int _glTexCoord2dv_Comp(param_1, param_2)
-  undefined4 param_1;
-  double *param_2;
+int _glTexCoord2dv_Comp(glContext, v)
+  undefined4 glContext;
+  double *v;
 {
-  float *pfVar1;
+  float *listRecord;
   
-  pfVar1 = (float *)_gleAddListItem(param_1,PTR__glTexCoord2_ListExec_001103bc,8);
-  if (pfVar1 != (float *)0x0) {
-    *pfVar1 = (float)*param_2;
-    pfVar1[1] = (float)param_2[1];
+  listRecord = (float *)_gleAddListItem(glContext,PTR__glTexCoord2_ListExec_001103bc,8);
+  if (listRecord != (float *)0x0) {
+    *listRecord = (float)*v;
+    listRecord[1] = (float)v[1];
   }
-  return pfVar1;
+  return listRecord;
 }
 
 /* _glTexCoord2dv_CompExec @ 0x93668 (56 bytes) */
-void _glTexCoord2dv_CompExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+void _glTexCoord2dv_CompExec(glContext, v)
+  undefined4 glContext;
+  undefined4 v;
 {
-  ((int (*)())_glTexCoord2dv_Comp)(param_1,param_2);
-  ((void (*)())_glTexCoord2dv_Exec)(param_1,param_2);
+  ((int (*)())_glTexCoord2dv_Comp)(glContext,v);
+  ((void (*)())_glTexCoord2dv_Exec)(glContext,v);
   return;
 }
 
