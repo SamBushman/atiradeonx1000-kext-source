@@ -2206,8 +2206,8 @@ void _gleVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int 
 }
 
 /* _gleVtxTextureCoordGenEyeST @ 0xf6450 (140 bytes) */
-void _gleVtxTextureCoordGenEyeST(param_1, vertexCursor, vertexCount)
-  int param_1;
+void _gleVtxTextureCoordGenEyeST(glContext, vertexCursor, vertexCount)
+  int glContext;
   uint vertexCursor;
   int vertexCount;
 {
@@ -2219,21 +2219,21 @@ void _gleVtxTextureCoordGenEyeST(param_1, vertexCursor, vertexCount)
   float eyePlaneSA;
   float eyePlaneTB;
   float eyePlaneTC;
-  uint uVar9;
+  uint vertexEndThenRemaining;
   
-  uVar9 = vertexCursor + vertexCount * 0x100;
-  eyePlaneSD = *(float *)(param_1 + 0x3cf8);
-  eyePlaneSB = *(float *)(param_1 + 0x3cf0);
-  eyePlaneSC = *(float *)(param_1 + 0x3cf4);
-  eyePlaneTA = *(float *)(param_1 + 0x3d10);
-  eyePlaneTD = *(float *)(param_1 + 0x3d1c);
-  eyePlaneSA = *(float *)(param_1 + 0x3cec);
-  eyePlaneTB = *(float *)(param_1 + 0x3d14);
-  eyePlaneTC = *(float *)(param_1 + 0x3d18);
-  if (uVar9 <= vertexCursor) {
+  vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
+  eyePlaneSD = *(float *)(glContext + 0x3cf8);
+  eyePlaneSB = *(float *)(glContext + 0x3cf0);
+  eyePlaneSC = *(float *)(glContext + 0x3cf4);
+  eyePlaneTA = *(float *)(glContext + 0x3d10);
+  eyePlaneTD = *(float *)(glContext + 0x3d1c);
+  eyePlaneSA = *(float *)(glContext + 0x3cec);
+  eyePlaneTB = *(float *)(glContext + 0x3d14);
+  eyePlaneTC = *(float *)(glContext + 0x3d18);
+  if (vertexEndThenRemaining <= vertexCursor) {
     return;
   }
-  uVar9 = (uVar9 - vertexCursor) + 0xff >> 8;
+  vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
   do {
     *(float *)(vertexCursor + 0x84) =
          eyePlaneTD * *(float *)(vertexCursor + 0x2c) +
@@ -2244,8 +2244,8 @@ void _gleVtxTextureCoordGenEyeST(param_1, vertexCursor, vertexCount)
          (eyePlaneSC * *(float *)(vertexCursor + 0x28) +
          (eyePlaneSA * *(float *)(vertexCursor + 0x20) + eyePlaneSB * *(float *)(vertexCursor + 0x24)));
     vertexCursor = vertexCursor + 0x100;
-    uVar9 = uVar9 - 1;
-  } while (uVar9 != 0);
+    vertexEndThenRemaining = vertexEndThenRemaining - 1;
+  } while (vertexEndThenRemaining != 0);
   return;
 }
 
@@ -2473,21 +2473,21 @@ void _gleMultiVtxTextureCoordGenObjectSlow(glContext, vertexStartThenCursor, ver
   float objectPlaneTC;
   int unitState;
   int texCoordSlot;
-  uint uVar10;
+  uint vertexEndThenRemaining;
   uint vertexCursor;
-  int iVar12;
+  int unitByteOffsetThenStateAddress;
   uint remaining;
   
-  iVar12 = texUnit * 0x94;
-  uVar10 = vertexStartThenCursor + vertexCount * 0x100;
-  unitState = iVar12 + glContext;
+  unitByteOffsetThenStateAddress = texUnit * 0x94;
+  vertexEndThenRemaining = vertexStartThenCursor + vertexCount * 0x100;
+  unitState = unitByteOffsetThenStateAddress + glContext;
   if ((*(char *)(unitState + 0x3d78) != '\0') && (*(short *)(unitState + 0x3ce8) == 0x2401)) {
     objectPlaneSA = *(float *)(unitState + 0x3cfc);
     objectPlaneSD = *(float *)(unitState + 0x3d08);
     objectPlaneSB = *(float *)(unitState + 0x3d00);
     objectPlaneSC = *(float *)(unitState + 0x3d04);
-    if (vertexStartThenCursor < uVar10) {
-      remaining = (uVar10 - vertexStartThenCursor) + 0xff >> 8;
+    if (vertexStartThenCursor < vertexEndThenRemaining) {
+      remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
       vertexCursor = vertexStartThenCursor;
       do {
         objectYPtr = (float *)(vertexCursor + 0x24);
@@ -2502,14 +2502,14 @@ void _gleMultiVtxTextureCoordGenObjectSlow(glContext, vertexStartThenCursor, ver
       } while (remaining != 0);
     }
   }
-  unitState = iVar12 + glContext;
+  unitState = unitByteOffsetThenStateAddress + glContext;
   if ((*(char *)(unitState + 0x3d79) != '\0') && (*(short *)(unitState + 0x3d0c) == 0x2401)) {
     objectPlaneTA = *(float *)(unitState + 0x3d20);
     objectPlaneTD = *(float *)(unitState + 0x3d2c);
     objectPlaneTB = *(float *)(unitState + 0x3d24);
     objectPlaneTC = *(float *)(unitState + 0x3d28);
-    if (vertexStartThenCursor < uVar10) {
-      remaining = (uVar10 - vertexStartThenCursor) + 0xff >> 8;
+    if (vertexStartThenCursor < vertexEndThenRemaining) {
+      remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
       vertexCursor = vertexStartThenCursor;
       do {
         objectYPtr = (float *)(vertexCursor + 0x24);
@@ -2524,14 +2524,14 @@ void _gleMultiVtxTextureCoordGenObjectSlow(glContext, vertexStartThenCursor, ver
       } while (remaining != 0);
     }
   }
-  unitState = iVar12 + glContext;
+  unitState = unitByteOffsetThenStateAddress + glContext;
   if ((*(char *)(unitState + 0x3d7a) != '\0') && (*(short *)(unitState + 0x3d30) == 0x2401)) {
     objectPlaneRA = *(float *)(unitState + 0x3d44);
     objectPlaneRD = *(float *)(unitState + 0x3d50);
     objectPlaneRB = *(float *)(unitState + 0x3d48);
     objectPlaneRC = *(float *)(unitState + 0x3d4c);
-    if (vertexStartThenCursor < uVar10) {
-      remaining = (uVar10 - vertexStartThenCursor) + 0xff >> 8;
+    if (vertexStartThenCursor < vertexEndThenRemaining) {
+      remaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
       vertexCursor = vertexStartThenCursor;
       do {
         objectYPtr = (float *)(vertexCursor + 0x24);
@@ -2547,19 +2547,19 @@ void _gleMultiVtxTextureCoordGenObjectSlow(glContext, vertexStartThenCursor, ver
     }
     *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
   }
-  iVar12 = iVar12 + glContext;
-  if (*(char *)(iVar12 + 0x3d7b) == '\0') {
+  unitByteOffsetThenStateAddress = unitByteOffsetThenStateAddress + glContext;
+  if (*(char *)(unitByteOffsetThenStateAddress + 0x3d7b) == '\0') {
     return;
   }
-  if (*(short *)(iVar12 + 0x3d54) != 0x2401) {
+  if (*(short *)(unitByteOffsetThenStateAddress + 0x3d54) != 0x2401) {
     return;
   }
-  objectPlaneQA = *(float *)(iVar12 + 0x3d68);
-  objectPlaneQD = *(float *)(iVar12 + 0x3d74);
-  objectPlaneQB = *(float *)(iVar12 + 0x3d6c);
-  objectPlaneQC = *(float *)(iVar12 + 0x3d70);
-  if (vertexStartThenCursor < uVar10) {
-    uVar10 = (uVar10 - vertexStartThenCursor) + 0xff >> 8;
+  objectPlaneQA = *(float *)(unitByteOffsetThenStateAddress + 0x3d68);
+  objectPlaneQD = *(float *)(unitByteOffsetThenStateAddress + 0x3d74);
+  objectPlaneQB = *(float *)(unitByteOffsetThenStateAddress + 0x3d6c);
+  objectPlaneQC = *(float *)(unitByteOffsetThenStateAddress + 0x3d70);
+  if (vertexStartThenCursor < vertexEndThenRemaining) {
+    vertexEndThenRemaining = (vertexEndThenRemaining - vertexStartThenCursor) + 0xff >> 8;
     do {
       objectYPtr = (float *)(vertexStartThenCursor + 0x24);
       texCoordSlot = texUnit * 0x10 + vertexStartThenCursor;
@@ -2569,8 +2569,8 @@ void _gleMultiVtxTextureCoordGenObjectSlow(glContext, vertexStartThenCursor, ver
       vertexStartThenCursor = vertexStartThenCursor + 0x100;
       *(float *)(texCoordSlot + 0x8c) =
            objectPlaneQD * *objectWPtr + (objectPlaneQC * *objectZPtr + (objectPlaneQA * *objectXPtr + objectPlaneQB * *objectYPtr));
-      uVar10 = uVar10 - 1;
-    } while (uVar10 != 0);
+      vertexEndThenRemaining = vertexEndThenRemaining - 1;
+    } while (vertexEndThenRemaining != 0);
   }
   *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 2;
   return;

@@ -1,30 +1,30 @@
 #include "decls.h"
 
 /* _gleMultiVtxTextureCoordGenNormalSTR @ 0xf73b4 (88 bytes) */
-void _gleMultiVtxTextureCoordGenNormalSTR(param_1, vertexCursor, vertexCount, param_4)
-  int param_1;
+void _gleMultiVtxTextureCoordGenNormalSTR(glContext, vertexCursor, vertexCount, texUnit)
+  int glContext;
   uint vertexCursor;
   int vertexCount;
-  int param_4;
+  int texUnit;
 {
-  undefined4 *puVar1;
-  uint uVar2;
+  undefined4 *normalZPtr;
+  uint vertexEndThenRemaining;
   int texCoordSlot;
   
-  uVar2 = vertexCursor + vertexCount * 0x100;
-  if (vertexCursor < uVar2) {
-    uVar2 = (uVar2 - vertexCursor) + 0xff >> 8;
+  vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
+  if (vertexCursor < vertexEndThenRemaining) {
+    vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
     do {
-      texCoordSlot = param_4 * 0x10 + vertexCursor;
+      texCoordSlot = texUnit * 0x10 + vertexCursor;
       *(undefined4 *)(texCoordSlot + 0x80) = *(undefined4 *)(vertexCursor + 0x40);
       *(undefined4 *)(texCoordSlot + 0x84) = *(undefined4 *)(vertexCursor + 0x44);
-      puVar1 = (undefined4 *)(vertexCursor + 0x48);
+      normalZPtr = (undefined4 *)(vertexCursor + 0x48);
       vertexCursor = vertexCursor + 0x100;
-      *(undefined4 *)(texCoordSlot + 0x88) = *puVar1;
-      uVar2 = uVar2 - 1;
-    } while (uVar2 != 0);
+      *(undefined4 *)(texCoordSlot + 0x88) = *normalZPtr;
+      vertexEndThenRemaining = vertexEndThenRemaining - 1;
+    } while (vertexEndThenRemaining != 0);
   }
-  *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
+  *(uint *)(glContext + 0x486c) = *(uint *)(glContext + 0x486c) | 1;
   return;
 }
 
