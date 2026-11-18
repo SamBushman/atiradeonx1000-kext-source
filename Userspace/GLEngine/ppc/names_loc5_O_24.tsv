@@ -1,0 +1,26 @@
+local	_glFlush_RevertExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glMapVertexAttrib2dARB_Exec	extraout_r4	r4AfterCall	CONFIRMED	Ghidra pseudo-register extraout_r4: the value r4 holds after the call it follows (a register the function reads without having written it); no source-level role
+local	_glRasterPos4iv_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glRectdv_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glRectiv_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glRotateZ_Comp	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glSampleCoverage_CompExec	extraout_r4	r4AfterCall	CONFIRMED	Ghidra pseudo-register extraout_r4: the value r4 holds after the call it follows (a register the function reads without having written it); no source-level role
+local	_glSetRasterPos_Comp	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glTexSubImage2D_FlushExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glVertexAttrib4NubvARB_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glVertexAttrib4usvARB_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_gleCheckFramebufferStatus	extraout_f1	f1AfterCall	CONFIRMED	Ghidra pseudo-register extraout_f1: the value f1 holds after the call it follows, forwarded unchanged; no source-level role
+local	_gleCheckFramebufferStatus	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_gleClipPolyPlane	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_gleFeedbackPolygonFunc_body	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_gleFeedbackTriangles	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_gleInitDrawPixelsShareObject	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_gleMultiVtxTextureCoordGenEyeSlow	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_gleRevertSwapToPrimary	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_gleSwitchRenderersWriteBuffers	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_gleSwitchToNonRevertRenderer	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_gleTransformNormalBlend	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_gleVtxLightFastRGBABack	extraout_r3	r3AfterCall	CONFIRMED	Ghidra pseudo-register extraout_r3: the value r3 holds after the call it follows (a register the function reads without having written it); no source-level role
+local	_gleVtxLightRGBABackPtr	extraout_f1	f1AfterCall	CONFIRMED	Ghidra pseudo-register extraout_f1: the value f1 holds after the call it follows, forwarded unchanged; no source-level role
+local	_gleVtxLightRGBABackPtr	extraout_r3	r3AfterCall	CONFIRMED	Ghidra pseudo-register extraout_r3: the value r3 holds after the call it follows (a register the function reads without having written it); no source-level role
+local	_gleVtxTextureCoordGenSphereST	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls

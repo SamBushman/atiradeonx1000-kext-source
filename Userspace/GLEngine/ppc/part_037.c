@@ -434,13 +434,13 @@ void _glVertexAttrib4NubvARB_CompExec(glContext, index, v)
   undefined4 index;
   undefined4 v;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
   
   ((int (*)())_glVertexAttrib4NubvARB_Comp)(glContext,index,v);
-  ((double (*)())_glVertexAttrib4NubvARB_Exec)(glContext,index,v,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4);
+  ((double (*)())_glVertexAttrib4NubvARB_Exec)(glContext,index,v,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4);
   return;
 }
 

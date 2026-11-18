@@ -427,7 +427,7 @@ int _glColor3usv_Comp(glContext, v)
 }
 
 /* _glColor3usv_Exec @ 0x5bb28 (196 bytes) */
-double _glColor3usv_Exec(int glContext,ushort *v,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+double _glColor3usv_Exec(int glContext,ushort *v,double forwardedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   ushort greenRaw;
   float redConverted;
@@ -443,9 +443,9 @@ double _glColor3usv_Exec(int glContext,ushort *v,double fparam_1,double unusedFl
   *(float *)(glContext + 0x2a8) = blueConverted;
   *(float *)(glContext + 0x2a4) = (GH_U2F((unsigned int)((greenRaw | 0x4b000000))) - 8388608.0) * channelScale;
   if (*(char *)(glContext + 0x4df8) != '\0') {
-    fparam_1 = (double)(**(double ( **)(int,int))(glContext + 0x4de0))(glContext, glContext + 0x2a0);
+    forwardedFloatArg1 = (double)(**(double ( **)(int,int))(glContext + 0x4de0))(glContext, glContext + 0x2a0);
   }
-  return fparam_1;
+  return forwardedFloatArg1;
 }
 
 /* _glColor3usv_CompExec @ 0x5bbec (56 bytes) */

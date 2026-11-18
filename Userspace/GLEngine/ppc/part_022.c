@@ -882,14 +882,14 @@ int _glSetRasterPos_ListExec(glContext, listRecord)
 }
 
 /* _glSetRasterPos_Comp @ 0x7f3e0 (92 bytes) */
-void _glSetRasterPos_Comp(undefined4 glContext,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
+void _glSetRasterPos_Comp(undefined4 glContext,float forwardedFloatArg1,float fparam_2,float fparam_3,float fparam_4)
 {
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glSetRasterPos_ListExec_0011027c,0x10);
   if (listRecord != (float *)0x0) {
     listRecord[3] = (float)fparam_4;
-    *listRecord = (float)fparam_1;
+    *listRecord = (float)forwardedFloatArg1;
     listRecord[1] = (float)fparam_2;
     listRecord[2] = (float)fparam_3;
   }
@@ -1190,7 +1190,7 @@ void _glRasterPos2dv_CompExec(glContext, v)
   undefined4 glContext;
   undefined4 v;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1200,7 +1200,7 @@ void _glRasterPos2dv_CompExec(glContext, v)
   double incomingFpr8;
   
   ((void (*)())_glRasterPos2dv_Comp)(glContext,v);
-  ((void (*)())_glRasterPos2dv_Exec)(glContext,v,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRasterPos2dv_Exec)(glContext,v,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -1690,7 +1690,7 @@ void _glRasterPos2iv_CompExec(glContext, v)
   undefined4 glContext;
   undefined4 v;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1700,7 +1700,7 @@ void _glRasterPos2iv_CompExec(glContext, v)
   double incomingFpr8;
   
   ((void (*)())_glRasterPos2iv_Comp)(glContext,v);
-  ((void (*)())_glRasterPos2iv_Exec)(glContext,v,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRasterPos2iv_Exec)(glContext,v,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 

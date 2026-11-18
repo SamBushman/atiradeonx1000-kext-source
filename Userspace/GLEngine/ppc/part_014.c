@@ -989,7 +989,7 @@ void _glDrawBuffersARB_CompExec(glContext, n, bufs)
 }
 
 /* _glDrawPixels_ListExec @ 0x6360c (1320 bytes) */
-int _glDrawPixels_ListExec(int glContext,uint *recordedArgs,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+int _glDrawPixels_ListExec(int glContext,uint *recordedArgs,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
@@ -1017,7 +1017,7 @@ int _glDrawPixels_ListExec(int glContext,uint *recordedArgs,double fparam_1,doub
   int *changeWordCursor;
   int recordSize;
   float *rasterPos;
-  double extraout_f1;
+  double f1AfterCall;
   
   rasterScratchEndThenFastResult = *(int *)(glContext + 0x4854);
   rasterPos = (float *)(rasterScratchEndThenFastResult + -0x200);
@@ -1115,14 +1115,14 @@ LAB_000637ac:
         matrixChangeBits = *(int *)(glContext + 0x50ac);
         if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
           _gleUpdateMatrixFunc(glContext);
-          fparam_1 = extraout_f1;
+          forwardedFloatArg1 = f1AfterCall;
         }
         if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00063a3c;
         framebufferObject = *(int *)(glContext + 0x744c);
         changeWordCursor = (int *)(glContext + 0x310);
         rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
         if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,matrixChangeBits,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                      forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         }

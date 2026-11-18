@@ -3214,7 +3214,7 @@ void _gleVtxLightFastRGBABack(int glContext,int vertex,int vertexCount,double un
 {
   undefined4 colorAlpha;
   int iVar2;
-  int extraout_r3;
+  int r3AfterCall;
   int vertexIndex;
   uint enabledLightMask;
   uint lightIndex;
@@ -3550,7 +3550,7 @@ void _gleVtxLightRGBABackPtr(int glContext,int *vertexPtrCursor,int vertexCount,
   undefined4 colorAlpha;
   undefined *vectorNormalize;
   int glContextForCalls;
-  int extraout_r3;
+  int r3AfterCall;
   int r3AfterCall1;
   uint enabledLightMask;
   int vertexIndex;
@@ -3562,7 +3562,7 @@ void _gleVtxLightRGBABackPtr(int glContext,int *vertexPtrCursor,int vertexCount,
   int lightProducts;
   int lightRecord;
   int vertex;
-  double extraout_f1;
+  double f1AfterCall;
   double f1AfterCall1;
   double spotFactor;
   double specularPow;

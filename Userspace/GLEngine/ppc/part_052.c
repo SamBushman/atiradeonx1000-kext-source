@@ -214,7 +214,7 @@ void _glePolyCentroid(undefined4 unusedArg1,float *vertices,int vertexCount,floa
 }
 
 /* _gleClipPolyPlane @ 0xeba10 (496 bytes) */
-double _gleClipPolyPlane(int glContext,int *polygonList,int vertexCount,int *outputList,int *outVertexCount,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
+double _gleClipPolyPlane(int glContext,int *polygonList,int vertexCount,int *outputList,int *outVertexCount,double forwardedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
   float startWord09ThenDistance;
   float planeB;
@@ -275,7 +275,7 @@ double _gleClipPolyPlane(int glContext,int *polygonList,int vertexCount,int *out
                 (*(float *)(nextVertex + 0x20) * planeA + *(float *)(nextVertex + 0x24) * planeB));
         if (startWord09ThenDistance < floatZero) {
           if (floatZero <= distanceEnd) {
-            fparam_1 = (double)(**(double ( **)(int,int,int,int,double))(glContext + 0x49c8))
+            forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int,double))(glContext + 0x49c8))
                                          (glContext, *edgeStart, nextVertex, newVertexCursor, (double)(startWord09ThenDistance / (startWord09ThenDistance - distanceEnd)));
 LAB_000ebb68:
             *outputCursor = newVertexCursor;
@@ -287,7 +287,7 @@ LAB_000ebb68:
           *outputCursor = *edgeStart;
           outputCursor = outputCursor + 1;
           if (distanceEnd < floatZero) {
-            fparam_1 = (double)(**(double ( **)(int,int,int,int,double))(glContext + 0x49c8))
+            forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int,double))(glContext + 0x49c8))
                                          (glContext, edgeStart[1], *edgeStart, newVertexCursor, (double)(distanceEnd / (distanceEnd - startWord09ThenDistance)));
             *(undefined1 *)(newVertexCursor + 0x7c) = 0;
             goto LAB_000ebb68;
@@ -298,7 +298,7 @@ LAB_000ebb68:
       resultCount = (int)outputCursor - (int)polygonList >> 2;
       if (resultCount < 3) {
         *outVertexCount = 0;
-        return fparam_1;
+        return forwardedFloatArg1;
       }
       planePass = planePass + 1;
       passInputEnd = polygonList + resultCount;
@@ -315,7 +315,7 @@ LAB_000ebb68:
   }
   *outVertexCount = resultCount;
   *(int *)(glContext + 0x4858) = newVertexCursor;
-  return fparam_1;
+  return forwardedFloatArg1;
 }
 
 /* _gleCullPolygonStack @ 0xebc00 (192 bytes) */
@@ -462,7 +462,7 @@ void _gleFeedbackPolygonFunc_body(glContext)
   uint vertexCountThenClippedCount;
   int firstVertexThenCursorThenCullResultThenPolygonMode;
   uint remainingVertices;
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -555,7 +555,7 @@ LAB_000ec290:
     _gleFeedbackPolygon(glContext,firstVertexThenCursorThenCullResultThenPolygonMode,vertexCountThenClippedCount,cullResultThenPolygonModeThenVertexPtr);
     return;
   }
-  fparam_1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, firstVertexThenCursorThenCullResultThenPolygonMode, vertexCountThenClippedCount, 0);
+  forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, firstVertexThenCursorThenCullResultThenPolygonMode, vertexCountThenClippedCount, 0);
   polygonList = *(int **)(glContext + 0x4870);
   spareList = *(int **)(glContext + 0x4874);
   listCursorThenClipDestThenFlipCursor = polygonList;
@@ -574,7 +574,7 @@ LAB_000ec290:
   planeClippedFlag = 0;
   listCursorThenClipDestThenFlipCursor = spareList;
   if (*(char *)(glContext + 0x4e18) != '\0') {
-    ((double (*)())_gleClipPolyPlane)(glContext,polygonList,vertexCountThenClippedCount,spareList,&clippedCount,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+    ((double (*)())_gleClipPolyPlane)(glContext,polygonList,vertexCountThenClippedCount,spareList,&clippedCount,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
                       incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90);
     if (clippedCount == 0) {
       return;

@@ -844,7 +844,7 @@ void _glDrawRangeElements_CompExec(glContext, mode, start, end, count, type, ind
   undefined4 type;
   undefined4 indices;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -854,7 +854,7 @@ void _glDrawRangeElements_CompExec(glContext, mode, start, end, count, type, ind
   double incomingFpr8;
   
   ((int (*)())_glDrawRangeElements_Comp)(glContext,mode,start,end,count,type,indices);
-  ((void (*)())_glDrawRangeElements_Exec)(glContext,mode,start,end,count,type,indices,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,
+  ((void (*)())_glDrawRangeElements_Exec)(glContext,mode,start,end,count,type,indices,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,
              incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
@@ -1445,7 +1445,7 @@ void _glDrawElementArrayAPPLE_CompExec(glContext, mode, first, count)
   undefined4 first;
   undefined4 count;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1455,7 +1455,7 @@ void _glDrawElementArrayAPPLE_CompExec(glContext, mode, first, count)
   double incomingFpr8;
   
   ((int (*)())_glDrawElementArrayAPPLE_Comp)(glContext,mode,first,count);
-  ((void (*)())_glDrawElementArrayAPPLE_Exec)(glContext,mode,first,count,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glDrawElementArrayAPPLE_Exec)(glContext,mode,first,count,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -2133,7 +2133,7 @@ void _glMultiDrawElements_CompExec(glContext, mode, count, type, indices, primco
   undefined4 indices;
   undefined4 primcount;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -2143,7 +2143,7 @@ void _glMultiDrawElements_CompExec(glContext, mode, count, type, indices, primco
   double incomingFpr8;
   
   ((int (*)())_glMultiDrawElements_Comp)(glContext,mode,count,type,indices,primcount);
-  ((void (*)())_glMultiDrawElements_Exec)(glContext,mode,count,type,indices,primcount,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
+  ((void (*)())_glMultiDrawElements_Exec)(glContext,mode,count,type,indices,primcount,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
              incomingFpr7,incomingFpr8);
   return;
 }

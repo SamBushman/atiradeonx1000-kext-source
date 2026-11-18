@@ -246,7 +246,7 @@ void _glMapVertexAttrib2dARB_Exec(int glContext,uint index,uint size,undefined4 
 {
   undefined4 glErrorCode;
   int mapData;
-  undefined4 extraout_r4;
+  undefined4 r4AfterCall;
   uint uVar3;
   int iVar4;
   double incomingFpr5;
@@ -270,7 +270,7 @@ void _glMapVertexAttrib2dARB_Exec(int glContext,uint index,uint size,undefined4 
        (((0 < uorder && (uorder < 0xb)) && ((0 < vorder && (vorder < 0xb)))))) {
       if (size == 2) {
         if ((1 < ustride) && (1 < vstride)) {
-          ((void (*)())_gleMap2VertexAttrib2dLoad)(glContext,extraout_r4,uVar3,u1ShadowHi,u1ShadowLo,ustride,uorder,iVar4,
+          ((void (*)())_gleMap2VertexAttrib2dLoad)(glContext,r4AfterCall,uVar3,u1ShadowHi,u1ShadowLo,ustride,uorder,iVar4,
                      incomingStack_ffffff88,incomingStack_ffffff8c,incomingStack_ffffff90,vstride,vorder,
                      points,mapData + index * 0x660 + 0x37a8,u1,u2,v1,v2,
                      incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
@@ -279,7 +279,7 @@ void _glMapVertexAttrib2dARB_Exec(int glContext,uint index,uint size,undefined4 
       }
       else if (size < 3) {
         if (((size == 1) && (0 < ustride)) && (0 < vstride)) {
-          ((void (*)())_gleMap2VertexAttrib1dLoad)(glContext,extraout_r4,uVar3,u1ShadowHi,u1ShadowLo,ustride,uorder,iVar4,
+          ((void (*)())_gleMap2VertexAttrib1dLoad)(glContext,r4AfterCall,uVar3,u1ShadowHi,u1ShadowLo,ustride,uorder,iVar4,
                      incomingStack_ffffff88,incomingStack_ffffff8c,incomingStack_ffffff90,vstride,vorder,
                      points,mapData + index * 0x660 + 0x37a8,u1,u2,v1,v2,
                      incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
@@ -288,7 +288,7 @@ void _glMapVertexAttrib2dARB_Exec(int glContext,uint index,uint size,undefined4 
       }
       else if (size == 3) {
         if ((2 < ustride) && (2 < vstride)) {
-          ((void (*)())_gleMap2VertexAttrib3dLoad)(glContext,extraout_r4,uVar3,u1ShadowHi,u1ShadowLo,ustride,uorder,iVar4,
+          ((void (*)())_gleMap2VertexAttrib3dLoad)(glContext,r4AfterCall,uVar3,u1ShadowHi,u1ShadowLo,ustride,uorder,iVar4,
                      incomingStack_ffffff88,incomingStack_ffffff8c,incomingStack_ffffff90,vstride,vorder,
                      points,mapData + index * 0x660 + 0x37a8,u1,u2,v1,v2,
                      incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
@@ -296,7 +296,7 @@ void _glMapVertexAttrib2dARB_Exec(int glContext,uint index,uint size,undefined4 
         }
       }
       else if (((size == 4) && (3 < ustride)) && (3 < vstride)) {
-        ((void (*)())_gleMap2VertexAttrib4dLoad)(glContext,extraout_r4,uVar3,u1ShadowHi,u1ShadowLo,ustride,uorder,iVar4,incomingStack_ffffff88
+        ((void (*)())_gleMap2VertexAttrib4dLoad)(glContext,r4AfterCall,uVar3,u1ShadowHi,u1ShadowLo,ustride,uorder,iVar4,incomingStack_ffffff88
                    ,incomingStack_ffffff8c,incomingStack_ffffff90,vstride,vorder,points,
                    mapData + index * 0x660 + 0x37a8,u1,u2,v1,v2,incomingFpr5,incomingFpr6,
                    incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
@@ -3132,7 +3132,7 @@ void _glMateriali_CompExec(glContext, face, pname, param)
   undefined4 pname;
   undefined4 param;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -3142,7 +3142,7 @@ void _glMateriali_CompExec(glContext, face, pname, param)
   double incomingFpr8;
   
   ((int (*)())_glMateriali_Comp)(glContext,face,pname,param);
-  ((void (*)())_glMateriali_Exec)(glContext,face,pname,param,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
+  ((void (*)())_glMateriali_Exec)(glContext,face,pname,param,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
                     incomingFpr8);
   return;
 }

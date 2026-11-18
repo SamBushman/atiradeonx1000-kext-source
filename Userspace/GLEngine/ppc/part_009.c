@@ -839,7 +839,7 @@ void _glAccum_Exec(int glContext,int op,double value,double forwardedFloatArg2,d
   uint dispatchFlags;
   uint changeWord3;
   int *changeWordCursor;
-  double extraout_f1;
+  double f1AfterCall;
   double fparam_1_00;
   
   if ((-1 < *(short *)(glContext + 0x4a10)) || (*(int *)(*(int *)(glContext + 0x468c) + 0x44) < 1)) {
@@ -863,7 +863,7 @@ void _glAccum_Exec(int glContext,int op,double value,double forwardedFloatArg2,d
   fparam_1_00 = value;
   if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1_00 = extraout_f1;
+    fparam_1_00 = f1AfterCall;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_00056c00;
   framebufferObject = *(int *)(glContext + 0x744c);

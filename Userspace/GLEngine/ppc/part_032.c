@@ -1956,7 +1956,7 @@ void _glTexSubImage2D_FlushExec(forwardedArg1, forwardedArg2, forwardedArg3, for
   undefined4 forwardedArg9;
   undefined4 forwardedArg10;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1967,7 +1967,7 @@ void _glTexSubImage2D_FlushExec(forwardedArg1, forwardedArg2, forwardedArg3, for
   
   _glTexSubImage2D_Exec
             (forwardedArg1,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedArg8,forwardedArg9,forwardedArg10);
-  ((void (*)())_glFlush_Exec)(forwardedArg1,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glFlush_Exec)(forwardedArg1,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 

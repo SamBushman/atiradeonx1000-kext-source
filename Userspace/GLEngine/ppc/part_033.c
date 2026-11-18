@@ -2810,7 +2810,7 @@ void _glArrayElement_CompExec(glContext, i)
 {
   unsigned int ghidra_home[8] = { glContext, i, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 in_LR;
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -2820,7 +2820,7 @@ void _glArrayElement_CompExec(glContext, i)
   double incomingFpr8;
   
   ((int (*)())_glArrayElement_Comp)(glContext,i);
-  ((void (*)())_glArrayElement_Exec)(glContext,i,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+  ((void (*)())_glArrayElement_Exec)(glContext,i,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)((unsigned char *)ghidra_home + 0)),
              (*(double *)((unsigned char *)ghidra_home + 8)),(*(double *)((unsigned char *)ghidra_home + 16)));
   return;

@@ -101,7 +101,7 @@ void _glRectdv_CompExec(glContext, v1, v2)
   undefined4 v1;
   undefined4 v2;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -111,7 +111,7 @@ void _glRectdv_CompExec(glContext, v1, v2)
   double incomingFpr8;
   
   ((int (*)())_glRectdv_Comp)(glContext,v1,v2);
-  ((void (*)())_glRectdv_Exec)(glContext,v1,v2,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRectdv_Exec)(glContext,v1,v2,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -211,7 +211,7 @@ void _glRectiv_CompExec(glContext, v1, v2)
   undefined4 v1;
   undefined4 v2;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -221,7 +221,7 @@ void _glRectiv_CompExec(glContext, v1, v2)
   double incomingFpr8;
   
   ((int (*)())_glRectiv_Comp)(glContext,v1,v2);
-  ((void (*)())_glRectiv_Exec)(glContext,v1,v2,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRectiv_Exec)(glContext,v1,v2,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -412,14 +412,14 @@ undefined4 _glRotateXYZ_ListExec(int glContext,float *listRecord,double unusedFl
 }
 
 /* _glRotateZ_Comp @ 0x853dc (100 bytes) */
-void _glRotateZ_Comp(undefined4 glContext,float fparam_1,float fparam_2)
+void _glRotateZ_Comp(undefined4 glContext,float forwardedFloatArg1,float fparam_2)
 {
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glRotateZ_ListExec_00110288,8);
   if (listRecord != (float *)0x0) {
     listRecord[1] = (float)fparam_2;
-    *listRecord = (float)fparam_1;
+    *listRecord = (float)forwardedFloatArg1;
   }
   return;
 }
@@ -826,10 +826,10 @@ void _glSamplePass_Exec()
 /* _glSampleCoverage_CompExec @ 0x85f14 (72 bytes) */
 void _glSampleCoverage_CompExec(undefined4 glContext,undefined4 valueShadow,undefined4 invert,float value)
 {
-  undefined4 extraout_r4;
+  undefined4 r4AfterCall;
   
   ((float * (*)())_glSampleCoverage_Comp)(glContext,valueShadow,invert,value);
-  ((void (*)())_glSampleCoverage_Exec)(glContext,extraout_r4,invert,value);
+  ((void (*)())_glSampleCoverage_Exec)(glContext,r4AfterCall,invert,value);
   return;
 }
 

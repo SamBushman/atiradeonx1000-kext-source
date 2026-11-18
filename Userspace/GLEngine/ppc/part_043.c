@@ -204,7 +204,7 @@ void _gleFeedbackPolygon(glContext, firstVertex, vertexCount, polygonModeIndex)
 }
 
 /* _gleFeedbackTriangles @ 0xcc7e0 (612 bytes) */
-double _gleFeedbackTriangles(undefined4 glContext,int vertexCursor,int vertexCount,uint polygonModeIndex,double fparam_1)
+double _gleFeedbackTriangles(undefined4 glContext,int vertexCursor,int vertexCount,uint polygonModeIndex,double forwardedFloatArg1)
 {
   uint polygonModeBits;
   double dVar2;
@@ -225,19 +225,19 @@ double _gleFeedbackTriangles(undefined4 glContext,int vertexCursor,int vertexCou
         if (*(char *)(vertexCursor + 0x7c) != '\0') {
           ((void (*)())_gleFeedbackToken)(glContext,(double)(float)dVar3);
           _gleFeedbackHitRecord(glContext,vertexCursor);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
+          forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
           lineToken = 0x702;
         }
         if (*(char *)(vertexCursor + 0x17c) != '\0') {
           ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - dVar2));
           _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
+          forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
           lineToken = 0x702;
         }
         if (*(char *)(vertexCursor + 0x27c) != '\0') {
           ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - dVar2));
           _gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor);
+          forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor);
         }
         triangleStart = triangleStart + 3;
         vertexCursor = vertexCursor + 0x300;
@@ -249,15 +249,15 @@ double _gleFeedbackTriangles(undefined4 glContext,int vertexCursor,int vertexCou
       do {
         if (*(char *)(vertexCursor + 0x7c) != '\0') {
           ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor);
+          forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor);
         }
         if (*(char *)(vertexCursor + 0x17c) != '\0') {
           ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
+          forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
         }
         if (*(char *)(vertexCursor + 0x27c) != '\0') {
           ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
+          forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
         }
         triangleStart = triangleStart + 3;
         vertexCursor = vertexCursor + 0x300;
@@ -271,11 +271,11 @@ double _gleFeedbackTriangles(undefined4 glContext,int vertexCursor,int vertexCou
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f38);
       _gleFeedbackHitRecord(glContext,vertexCursor);
       _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
-      fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
+      forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
       vertexCursor = vertexCursor + 0x300;
     } while (triangleStart <= lastTriangleStart);
   }
-  return fparam_1;
+  return forwardedFloatArg1;
 }
 
 /* _gleFeedbackTriangleFan @ 0xcca44 (472 bytes) */
@@ -1491,7 +1491,7 @@ LAB_000ce630:
 }
 
 /* _gleCheckFramebufferStatus @ 0xce664 (1200 bytes) */
-int _gleCheckFramebufferStatus(int glContext,int framebufferRecord,int *param_3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,double fparam_1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
+int _gleCheckFramebufferStatus(int glContext,int framebufferRecord,int *param_3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,double forwardedFloatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8)
 {
   bool rendererInfoByte79Clear;
   bool stateClean;
@@ -1507,16 +1507,16 @@ int _gleCheckFramebufferStatus(int glContext,int framebufferRecord,int *param_3,
   uint dirtyWord3ThenMasked;
   uint dispatchFlags;
   int *dirtyFlagWords;
-  double extraout_f1;
+  double f1AfterCall;
   double f1AfterCall1;
   double extraout_f1_01;
   double f1AfterCall3;
   double f1AfterCall4;
   
   if (*(int *)(framebufferRecord + 0xdc) != 0) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferRecord,param_3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,fparam_1,floatArg2,floatArg3,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferRecord,param_3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7,forwardedFloatArg1,floatArg2,floatArg3,
                floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
-    fparam_1 = fparam_1;
+    forwardedFloatArg1 = forwardedFloatArg1;
   }
   if (*(int *)(framebufferRecord + 0xc0) != 0) {
     return *(int *)(framebufferRecord + 0xc0);
@@ -1524,17 +1524,17 @@ int _gleCheckFramebufferStatus(int glContext,int framebufferRecord,int *param_3,
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = f1AfterCall1;
+    forwardedFloatArg1 = f1AfterCall1;
   }
   if (*(char *)(glContext + 0x4691) != '\0') {
     framebufferObject = *(int *)(glContext + 0x744c);
     dirtyFlagWords = (int *)(glContext + 0x310);
     rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,param_3,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,fparam_1,floatArg2,
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,param_3,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,forwardedFloatArg1,floatArg2,
                  floatArg3,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
-      fparam_1 = fparam_1;
+      forwardedFloatArg1 = forwardedFloatArg1;
     }
     if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_000ce7a4:
@@ -1555,10 +1555,10 @@ LAB_000ce7a4:
       dirtyWord3ThenMasked = *(uint *)(glContext + 0x31c);
       if ((dirtyWord3ThenMasked & 0x15555) != 0) {
         if (*(char *)(glContext + 0x2e54) != '\0') {
-          fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
+          forwardedFloatArg1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
         }
         if (*(char *)(glContext + 0x3094) != '\0') {
-          fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
+          forwardedFloatArg1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
         }
         goto LAB_000ce7a4;
       }
@@ -1585,17 +1585,17 @@ LAB_000ce7a4:
                           (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,dirtyFlagWords);
         if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
             ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-           (fparam_1 = f1AfterCall3, (dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0')))
+           (forwardedFloatArg1 = f1AfterCall3, (dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0')))
         {
           if ((dispatchFlags & 4) == 0) {
             dispatchFlags = dispatchFlags & 0xfffffffe;
             *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x10000000;
           }
-          fparam_1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
+          forwardedFloatArg1 = (double)_gleUpdateDispatchCodeChange(glContext,dispatchFlags);
         }
       }
       else {
-        fparam_1 = (double)_gleSwitchToNonRevertRenderer(glContext);
+        forwardedFloatArg1 = (double)_gleSwitchToNonRevertRenderer(glContext);
       }
     }
     clearIndex = 0;
@@ -1610,14 +1610,14 @@ LAB_000ce7a4:
   matrixFuncDirty = *(int *)(glContext + 0x50ac);
   if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = f1AfterCall4;
+    forwardedFloatArg1 = f1AfterCall4;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_000cead8;
   framebufferObject = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,param_3,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,fparam_1,floatArg2,floatArg3
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,param_3,forwardedArg4,forwardedArg5,forwardedArg6,matrixFuncDirty,forwardedFloatArg1,floatArg2,floatArg3
                ,floatArg4,floatArg5,floatArg6,floatArg7,floatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }

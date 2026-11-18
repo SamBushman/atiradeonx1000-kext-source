@@ -2294,13 +2294,13 @@ void _gleVtxTextureCoordGenObjectST(param_1, vertexCursor, vertexCount)
 }
 
 /* _gleVtxTextureCoordGenSphereST @ 0xf6568 (92 bytes) */
-void _gleVtxTextureCoordGenSphereST(undefined4 param_1,uint vertexCursor,int vertexCount,double fparam_1)
+void _gleVtxTextureCoordGenSphereST(undefined4 param_1,uint vertexCursor,int vertexCount,double forwardedFloatArg1)
 {
   uint vertexEnd;
   
   vertexEnd = vertexCursor + vertexCount * 0x100;
   for (; vertexCursor < vertexEnd; vertexCursor = vertexCursor + 0x100) {
-    fparam_1 = (double)((double (*)())_gleSphereGenST)(param_1,vertexCursor + 0x20,vertexCursor + 0x40,vertexCursor + 0x80,fparam_1
+    forwardedFloatArg1 = (double)((double (*)())_gleSphereGenST)(param_1,vertexCursor + 0x20,vertexCursor + 0x40,vertexCursor + 0x80,forwardedFloatArg1
                                       );
   }
   return;
@@ -2577,7 +2577,7 @@ void _gleMultiVtxTextureCoordGenObjectSlow(glContext, vertexStartThenCursor, ver
 }
 
 /* _gleMultiVtxTextureCoordGenEyeSlow @ 0xf6ac0 (1408 bytes) */
-void _gleMultiVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int vertexCount,int texUnit,double fparam_1)
+void _gleMultiVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor,int vertexCount,int texUnit,double forwardedFloatArg1)
 {
   undefined4 *normalComponentPtr;
   float *eyeYOrNormalYPtr;
@@ -2626,7 +2626,7 @@ void _gleMultiVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor
       if (vertexStartThenCursor < vertexEndThenRemaining) {
         vertexCursor2 = vertexStartThenCursor;
         do {
-          fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&sphereMapS,fparam_1
+          forwardedFloatArg1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&sphereMapS,forwardedFloatArg1
                                             );
           texCoordSlot = texUnit * 0x10 + vertexCursor2;
           vertexCursor2 = vertexCursor2 + 0x100;
@@ -2673,7 +2673,7 @@ void _gleMultiVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor
     else if ((texGenMode == 0x8512) && (vertexStartThenCursor < vertexEndThenRemaining)) {
       vertexCursor2 = vertexStartThenCursor;
       do {
-        fparam_1 = (double)(**(double ( **)(int,int,int))vectorNormalize)(glContext, vertexCursor2 + 0x20, &eyeDirectionX);
+        forwardedFloatArg1 = (double)(**(double ( **)(int,int,int))vectorNormalize)(glContext, vertexCursor2 + 0x20, &eyeDirectionX);
         eyeYOrNormalYPtr = (float *)(vertexCursor2 + 0x44);
         texCoordSlot = texUnit * 0x10 + vertexCursor2;
         eyeXOrNormalXPtr = (float *)(vertexCursor2 + 0x40);
@@ -2692,7 +2692,7 @@ void _gleMultiVtxTextureCoordGenEyeSlow(int glContext,uint vertexStartThenCursor
       if (vertexStartThenCursor < vertexEndThenRemaining) {
         vertexCursor2 = vertexStartThenCursor;
         do {
-          fparam_1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&sphereMapS,fparam_1
+          forwardedFloatArg1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor2 + 0x20,vertexCursor2 + 0x40,&sphereMapS,forwardedFloatArg1
                                             );
           texCoordSlot = texUnit * 0x10 + vertexCursor2;
           vertexCursor2 = vertexCursor2 + 0x100;

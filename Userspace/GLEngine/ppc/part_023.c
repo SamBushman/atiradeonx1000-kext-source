@@ -444,7 +444,7 @@ void _glRasterPos3dv_CompExec(glContext, v)
   undefined4 glContext;
   undefined4 v;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -454,7 +454,7 @@ void _glRasterPos3dv_CompExec(glContext, v)
   double incomingFpr8;
   
   ((void (*)())_glRasterPos3dv_Comp)(glContext,v);
-  ((void (*)())_glRasterPos3dv_Exec)(glContext,v,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRasterPos3dv_Exec)(glContext,v,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -1085,7 +1085,7 @@ void _glRasterPos3iv_CompExec(glContext, v)
   undefined4 glContext;
   undefined4 v;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1095,7 +1095,7 @@ void _glRasterPos3iv_CompExec(glContext, v)
   double incomingFpr8;
   
   ((void (*)())_glRasterPos3iv_Comp)(glContext,v);
-  ((void (*)())_glRasterPos3iv_Exec)(glContext,v,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRasterPos3iv_Exec)(glContext,v,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -1727,7 +1727,7 @@ void _glRasterPos4dv_CompExec(glContext, v)
   undefined4 glContext;
   undefined4 v;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1737,7 +1737,7 @@ void _glRasterPos4dv_CompExec(glContext, v)
   double incomingFpr8;
   
   ((void (*)())_glRasterPos4dv_Comp)(glContext,v);
-  ((void (*)())_glRasterPos4dv_Exec)(glContext,v,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRasterPos4dv_Exec)(glContext,v,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -2367,7 +2367,7 @@ void _glRasterPos4iv_CompExec(glContext, v)
   undefined4 glContext;
   undefined4 v;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -2377,7 +2377,7 @@ void _glRasterPos4iv_CompExec(glContext, v)
   double incomingFpr8;
   
   ((void (*)())_glRasterPos4iv_Comp)(glContext,v);
-  ((void (*)())_glRasterPos4iv_Exec)(glContext,v,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  ((void (*)())_glRasterPos4iv_Exec)(glContext,v,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 

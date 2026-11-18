@@ -99,17 +99,17 @@ void _glEvalCoord2fv_CompExec(glContext, u)
 {
   unsigned int ghidra_home[8] = { glContext, u, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 in_LR;
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glEvalCoord2fv_Comp)(glContext,u);
-  ((void (*)())_glEvalCoord2fv_Exec)(glContext,u,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+  ((void (*)())_glEvalCoord2fv_Exec)(glContext,u,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)((unsigned char *)ghidra_home + 0)),
              (*(double *)((unsigned char *)ghidra_home + 8)));
   return;
@@ -917,7 +917,7 @@ void _glFlush_RevertExec(glContext)
   byte glContextByte85a5;
   undefined *puVar2;
   int iVar3;
-  double fparam_1;
+  double forwardedFloatArg1;
   double fparam_1_00;
   double incomingFpr2;
   double incomingFpr3;
@@ -940,8 +940,8 @@ void _glFlush_RevertExec(glContext)
     (**(code **)(*(int *)(iVar3 + 0x8884) + 0x138))
               (*(undefined4 *)(iVar3 + 0x85ac),*(undefined4 *)(glContext + 0x484c),
                *(undefined4 *)(glContext + 0x4848),0);
-    fparam_1 = (double)_gleSwitchToRenderer(glContext,(uint)glContextByte85a5);
-    ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
+    forwardedFloatArg1 = (double)_gleSwitchToRenderer(glContext,(uint)glContextByte85a5);
+    ((void (*)())_gleUpdateDepthRangeData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
                incomingStack_ffffffc0,incomingStack_ffffffc8,incomingStack_ffffffd0,incomingStack_ffffffd8);
     _gleUpdatePolyMode(glContext);
     ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);

@@ -1431,7 +1431,7 @@ int _glCopyColorSubTable_Comp(glContext, target, start, x, y, width)
 }
 
 /* _glCopyColorSubTable_Exec @ 0x60d78 (1044 bytes) */
-void _glCopyColorSubTable_Exec(int glContext,uint target,undefined4 start,undefined4 x,undefined4 y,int width,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
+void _glCopyColorSubTable_Exec(int glContext,uint target,undefined4 start,undefined4 x,undefined4 y,int width,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
@@ -1463,14 +1463,14 @@ void _glCopyColorSubTable_Exec(int glContext,uint target,undefined4 start,undefi
     forwardedWidthThenColorTable = width;
     if (matrixChangeBits != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
       _gleUpdateMatrixFunc(glContext);
-      fparam_1 = f1AfterCall;
+      forwardedFloatArg1 = f1AfterCall;
     }
     if (*(char *)(glContext + 0x4691) != '\0') {
       framebufferObject = *(int *)(glContext + 0x744c);
       changeWordCursor = (int *)(glContext + 0x310);
       rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedStart,forwardedX,forwardedY,forwardedWidthThenColorTable,matrixChangeBits,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,forwardedStart,forwardedX,forwardedY,forwardedWidthThenColorTable,matrixChangeBits,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                    forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       }

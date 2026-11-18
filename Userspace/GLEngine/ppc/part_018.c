@@ -960,15 +960,15 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
 {
   undefined4 glErrorCode;
   int listRecord;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
-  undefined4 extraout_r4_03;
-  undefined4 extraout_r4_04;
-  undefined4 extraout_r4_05;
-  undefined4 extraout_r4_06;
-  undefined4 extraout_r4_07;
+  undefined4 r4AfterCall;
+  undefined4 r4AfterCall1;
+  undefined4 r4AfterCall2;
+  undefined4 r4AfterCall3;
+  undefined4 r4AfterCall4;
+  undefined4 r4AfterCall5;
+  undefined4 r4AfterCall6;
+  undefined4 r4AfterCall7;
+  undefined4 r4AfterCall8;
   int recordSize;
   double incomingFpr3;
   double incomingFpr4;
@@ -992,7 +992,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1ColordLoad)(glContext,extraout_r4_01,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,
+          ((void (*)())_gleMap1ColordLoad)(glContext,r4AfterCall2,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,
                              listRecord,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,
                              incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -1005,7 +1005,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1IndexdLoad)(glContext,extraout_r4_02,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,
+          ((void (*)())_gleMap1IndexdLoad)(glContext,r4AfterCall3,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,
                              listRecord,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,
                              incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -1018,7 +1018,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1NormaldLoad)(glContext,extraout_r4_03,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,
+          ((void (*)())_gleMap1NormaldLoad)(glContext,r4AfterCall4,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,
                               listRecord,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,
                               incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
@@ -1031,7 +1031,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Texture1dLoad)(glContext,extraout_r4_04,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+          ((void (*)())_gleMap1Texture1dLoad)(glContext,r4AfterCall5,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1044,7 +1044,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Texture2dLoad)(glContext,extraout_r4_05,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+          ((void (*)())_gleMap1Texture2dLoad)(glContext,r4AfterCall6,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1057,7 +1057,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Texture3dLoad)(glContext,extraout_r4_06,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+          ((void (*)())_gleMap1Texture3dLoad)(glContext,r4AfterCall7,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1070,7 +1070,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Texture4dLoad)(glContext,extraout_r4_07,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+          ((void (*)())_gleMap1Texture4dLoad)(glContext,r4AfterCall8,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1083,7 +1083,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Vertex3dLoad)(glContext,extraout_r4,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+          ((void (*)())_gleMap1Vertex3dLoad)(glContext,r4AfterCall,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;
@@ -1096,7 +1096,7 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord == 0) {
             return;
           }
-          ((void (*)())_gleMap1Vertex4dLoad)(glContext,extraout_r4_00,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
+          ((void (*)())_gleMap1Vertex4dLoad)(glContext,r4AfterCall1,recordSize,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
                      incomingFpr12,incomingFpr13);
           return;

@@ -45,7 +45,7 @@ void _gleSetNormalFunc(glContext, param_2, param_3)
 }
 
 /* _gleTransformNormalBlend @ 0xc5310 (468 bytes) */
-void _gleTransformNormalBlend(int glContext,uint vertexArrayThenCursor,int vertexCount,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+void _gleTransformNormalBlend(int glContext,uint vertexArrayThenCursor,int vertexCount,double forwardedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   byte blendUnitCount;
   float matrix00;
@@ -86,7 +86,7 @@ void _gleTransformNormalBlend(int glContext,uint vertexArrayThenCursor,int verte
     do {
       matrix00 = *(float *)(blendMatrixCursor + 0x22c0);
       matrix01 = *(float *)(blendMatrixCursor + 0x22c4);
-      fparam_1 = (double)*(float *)(blendMatrixCursor + 0x22c8);
+      forwardedFloatArg1 = (double)*(float *)(blendMatrixCursor + 0x22c8);
       matrix10 = *(float *)(blendMatrixCursor + 0x22d0);
       matrix11 = *(float *)(blendMatrixCursor + 0x22d4);
       matrix12 = *(float *)(blendMatrixCursor + 0x22d8);
@@ -105,7 +105,7 @@ void _gleTransformNormalBlend(int glContext,uint vertexArrayThenCursor,int verte
                blendWeight * (normalZ * matrix20 + (normalX * matrix00 + (normalY * matrix10))
                         ) + *(float *)(vertexCursor + 0xf0);
           *(float *)(vertexCursor + 0xf8) =
-               blendWeight * (normalZ * matrix22 + (float)((double)normalX * fparam_1 + (double)(normalY * matrix12))) +
+               blendWeight * (normalZ * matrix22 + (float)((double)normalX * forwardedFloatArg1 + (double)(normalY * matrix12))) +
                *(float *)(vertexCursor + 0xf8);
           *(float *)(vertexCursor + 0xf4) =
                blendWeight * (normalZ * matrix21 + (normalX * matrix01 + (normalY * matrix11))
@@ -134,7 +134,7 @@ void _gleTransformNormalBlend(int glContext,uint vertexArrayThenCursor,int verte
   }
   else {
     for (; vertexArrayThenCursor < verticesLeft; vertexArrayThenCursor = vertexArrayThenCursor + 0x100) {
-      fparam_1 = (double)(**(double ( **)(int,int,int,double))vectorNormalize)(glContext, vertexArrayThenCursor + 0xf0, vertexArrayThenCursor + 0x40, fparam_1);
+      forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,double))vectorNormalize)(glContext, vertexArrayThenCursor + 0xf0, vertexArrayThenCursor + 0x40, forwardedFloatArg1);
     }
   }
   return;
@@ -2321,7 +2321,7 @@ void _gleSwitchRenderersWriteBuffers(glContext, unusedArg2, copyContextData)
   ushort savedDepthFunc;
   double saveStateResult;
   double viewportOffsetY;
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -2383,10 +2383,10 @@ void _gleSwitchRenderersWriteBuffers(glContext, unusedArg2, copyContextData)
       (**(code **)(glContext + 0x4788))
                 (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,glContext + 0x310);
     }
-    fparam_1 = (double)(**(double ( **)(int,int,int,int,int,int,int,int))(glContext + 0x46a4))
+    forwardedFloatArg1 = (double)(**(double ( **)(int,int,int,int,int,int,int,int))(glContext + 0x46a4))
                                  (*(undefined4 *)(glContext + 0x4688), &local_1a0, copyContextData[1], *copyContextData, 0x80e1, 0x8367, copyContextData[2], 0);
     if (scissorWasEnabled) {
-      fparam_1 = (double)((undefined4 (*)())_gleToggleScissorEnableState)(glContext,1,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,viewportOffsetY);
+      forwardedFloatArg1 = (double)((undefined4 (*)())_gleToggleScissorEnableState)(glContext,1,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,viewportOffsetY);
     }
     *(undefined4 *)(glContext + 0x31d0) = savedWord1;
     *(undefined4 *)(glContext + 0x31cc) = savedWord0;
@@ -2396,7 +2396,7 @@ void _gleSwitchRenderersWriteBuffers(glContext, unusedArg2, copyContextData)
     *(undefined4 *)(glContext + 0x31e0) = savedWord5;
     *(undefined4 *)(glContext + 0x31e4) = savedWord6;
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x200000;
-    ((void (*)())_gleRecoveryRestoreState)(glContext,auStack_a0,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,viewportOffsetY);
+    ((void (*)())_gleRecoveryRestoreState)(glContext,auStack_a0,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,viewportOffsetY);
   }
   return;
 }
@@ -2408,7 +2408,7 @@ int _gleRevertSwapToPrimary(glContext)
   int iVar1;
   undefined4 uVar2;
   uint uVar3;
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -2433,8 +2433,8 @@ int _gleRevertSwapToPrimary(glContext)
   (**(code **)(*(int *)(iVar1 + 0x8884) + 0x138))
             (*(undefined4 *)(iVar1 + 0x85ac),*(undefined4 *)(glContext + 0x484c),
              *(undefined4 *)(glContext + 0x4848),0);
-  fparam_1 = (double)((int (*)())_gleSwitchToRenderer)(glContext,uVar3);
-  ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+  forwardedFloatArg1 = (double)((int (*)())_gleSwitchToRenderer)(glContext,uVar3);
+  ((void (*)())_gleUpdateViewScissorData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   ((void (*)())_gleSwitchRenderersWriteBuffers)(glContext,uVar3,&local_30);
   uVar2 = ((int (*)())_gleFreeCopyContextData)(&local_30);
   return uVar2;
@@ -2513,7 +2513,7 @@ double _gleSwitchToNonRevertRenderer(glContext)
   uint switchResult;
   undefined4 switchResult2;
   uint currentRendererIndex;
-  double fparam_1;
+  double forwardedFloatArg1;
   double fparam_1_00;
   double incomingFpr2;
   double incomingFpr3;
@@ -2560,9 +2560,9 @@ double _gleSwitchToNonRevertRenderer(glContext)
       copyContextData3 = 0;
       copyContextData4 = 0;
       ((void (*)())_gleSwitchRenderersReadBuffers)(glContext,(uint)*(byte *)(glContext + 0x85a5),&copyContextData);
-      fparam_1 = (double)((int (*)())_gleSwitchToRenderer)(glContext,currentRendererIndex);
+      forwardedFloatArg1 = (double)((int (*)())_gleSwitchToRenderer)(glContext,currentRendererIndex);
       *(byte *)(glContext + 0x85a8) = currentRenderer;
-      ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,
+      ((void (*)())_gleUpdateDepthRangeData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,
                  incomingStack_ffffff90,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
       _gleUpdatePolyMode(glContext);
       ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
@@ -3199,7 +3199,7 @@ void _gleInitDrawPixelsShareObject(glContext, shareObject)
   int *dirtyFlagWords;
   double f1AfterCall;
   double f1AfterCall1;
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -3238,18 +3238,18 @@ void _gleInitDrawPixelsShareObject(glContext, shareObject)
   uVar5 = *(uint *)(glContext + 0x314) | 1;
   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x200000;
   *(uint *)(glContext + 0x314) = uVar5;
-  fparam_1 = f1AfterCall;
+  forwardedFloatArg1 = f1AfterCall;
   if (*(int *)(glContext + 0x50ac) != 0 ||
       (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(glContext);
-    fparam_1 = f1AfterCall1;
+    forwardedFloatArg1 = f1AfterCall1;
   }
   if (*(char *)(glContext + 0x4691) == '\0') goto LAB_000c9cc0;
   framebufferObject = *(int *)(glContext + 0x744c);
   dirtyFlagWords = (int *)(glContext + 0x310);
   rendererInfoByte79 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((framebufferObject != 0) && (*(int *)(framebufferObject + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,uVar5,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,framebufferObject + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,uVar5,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
                incomingFpr6,incomingFpr7,incomingFpr8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
