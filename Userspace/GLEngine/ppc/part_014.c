@@ -1366,7 +1366,7 @@ void _glDrawPixels_Exec(int glContext,uint width,int height,uint format,uint typ
   int *srcCursor;
   int imageEndOffset;
   int framebufferObject;
-  int iVar9;
+  int elementBytes;
   int matrixChangeBits;
   uint uVar10;
   int iVar11;
@@ -1374,14 +1374,14 @@ void _glDrawPixels_Exec(int glContext,uint width,int height,uint format,uint typ
   uint dispatchFlags;
   uint changeWord3;
   int pixelUnpackBuffer;
-  float *pfVar14;
-  int iVar15;
+  float *rasterPositionVertex;
+  int bufferSize;
   int *changeWordCursor;
   double extraout_f1;
   double extraout_f1_00;
   
   iVar6 = *(int *)(glContext + 0x4854);
-  pfVar14 = (float *)(iVar6 + -0x200);
+  rasterPositionVertex = (float *)(iVar6 + -0x200);
   if (-1 < *(short *)(glContext + 0x4a10)) goto LAB_00063f78;
   if (((int)width < 0) || (height < 0)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1442,15 +1442,15 @@ LAB_00063f08:
   iVar5 = pixels;
   if (pixelUnpackBuffer != 0) {
     imageEndOffset = _gleOffsetLimitImage(glContext + 0x31cc,width,height,format,type,pixels);
-    iVar15 = *(int *)(pixelUnpackBuffer + 0x38);
+    bufferSize = *(int *)(pixelUnpackBuffer + 0x38);
     fparam_1 = (double)((double (*)())_gleBytesPerElement)(type);
-    iVar9 = (int)fparam_1;
-    if (imageEndOffset <= iVar15) {
-      if (iVar9 == 0) {
-        iVar9 = _glePixelBytes(format,type);
+    elementBytes = (int)fparam_1;
+    if (imageEndOffset <= bufferSize) {
+      if (elementBytes == 0) {
+        elementBytes = _glePixelBytes(format,type);
         fparam_1 = extraout_f1;
       }
-      if (pixels == (pixels / iVar9) * iVar9) {
+      if (pixels == (pixels / elementBytes) * elementBytes) {
         pixels = pixels + *(int *)(pixelUnpackBuffer + 0x30);
         goto LAB_00063f94;
       }
@@ -1468,10 +1468,10 @@ LAB_00063f94:
   }
   glContextWord4e1c = *(uint *)(glContext + 0x4e1c);
   if (glContextWord4e1c == 0x1c01) {
-    *pfVar14 = *(float *)(glContext + 0x2e0);
+    *rasterPositionVertex = *(float *)(glContext + 0x2e0);
     *(undefined4 *)(iVar6 + -0x1fc) = *(undefined4 *)(glContext + 0x2e4);
     *(undefined4 *)(iVar6 + -0x1f8) = *(undefined4 *)(glContext + 0x2e8);
-    _gleFeedbackDrawPixels(glContext,pfVar14);
+    _gleFeedbackDrawPixels(glContext,rasterPositionVertex);
     return;
   }
   if (glContextWord4e1c < 0x1c02) {
@@ -1577,7 +1577,7 @@ LAB_000640f4:
         } while (remaining != 0);
       }
 LAB_00064218:
-      *pfVar14 = *(float *)(glContext + 0x4a44) * *(float *)(glContext + 0x2e0) +
+      *rasterPositionVertex = *(float *)(glContext + 0x4a44) * *(float *)(glContext + 0x2e0) +
                  *(float *)(glContext + 0x4a48);
       *(float *)(iVar6 + -0x1fc) =
            *(float *)(glContext + 0x4a4c) * *(float *)(glContext + 0x2e4) + *(float *)(glContext + 0x4a50)
@@ -1585,7 +1585,7 @@ LAB_00064218:
       *(float *)(iVar6 + -0x1f8) = *(float *)(glContext + 0x4a54) * *(float *)(glContext + 0x2e8);
       if (pixelUnpackBuffer != 0) {
         iVar6 = (**(code **)(glContext + 0x46a4))
-                          (*(undefined4 *)(glContext + 0x4688),pfVar14,width,height,format,type
+                          (*(undefined4 *)(glContext + 0x4688),rasterPositionVertex,width,height,format,type
                            ,pixels,0);
         if (iVar6 != 0) {
           return;
@@ -1600,7 +1600,7 @@ LAB_00064218:
         return;
       }
       (**(code **)(glContext + 0x46a4))
-                (*(undefined4 *)(glContext + 0x4688),pfVar14,width,height,format,type,pixels,0
+                (*(undefined4 *)(glContext + 0x4688),rasterPositionVertex,width,height,format,type,pixels,0
                 );
       return;
     }

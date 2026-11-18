@@ -1140,7 +1140,8 @@ int _gliSetInteger(glContext, stateId, valuePtr)
   int level;
   int faceCount;
   int surfaceHandle2;
-  int iVar12;
+  int depth;
+  int textureLevel;
   int iVar13;
   uint targetThenFace;
   int levelRecord2;
@@ -1305,7 +1306,7 @@ LAB_00020f04:
       iVar13 = valuePtr[3];
       iVar7 = valuePtr[4];
       iVar16 = valuePtr[5];
-      iVar12 = valuePtr[6];
+      depth = valuePtr[6];
       if (targetThenFace == 0xde1) {
 LAB_00020a7c:
         checkedTextureObject = _gleCheckTexImage2DArgs
@@ -1324,7 +1325,7 @@ LAB_00020a7c:
           }
           goto LAB_00020a7c;
         }
-        checkedTextureObject = ((int (*)())_gleCheckTexImage3DArgs)(glContext,0x806f,level,iVar13,iVar7,iVar16,iVar12,iVar9,0x80e1,0x1401);
+        checkedTextureObject = ((int (*)())_gleCheckTexImage3DArgs)(glContext,0x806f,level,iVar13,iVar7,iVar16,depth,iVar9,0x80e1,0x1401);
       }
       if (checkedTextureObject == 0) {
         return 0;
@@ -1364,7 +1365,7 @@ LAB_00020c88:
         }
         *(byte *)(levelBase + 0xcf) = *(byte *)(levelBase + 0xcf) & 0xdf;
       }
-      _gleCreateGlobalLevel(glContext,levelRecord2,iVar7,iVar16,iVar12,iVar9);
+      _gleCreateGlobalLevel(glContext,levelRecord2,iVar7,iVar16,depth,iVar9);
       _gleCreatePluginTextureLevel(glContext,checkedTextureObject,levelRecord2,targetThenFace,level,iVar13);
     }
     else {
@@ -1497,24 +1498,24 @@ joined_r0x00020e50:
       }
       loopIndex2 = 0;
       if (faceCount != 0) {
-        iVar12 = textureObject + 0xc4;
+        textureLevel = textureObject + 0xc4;
         do {
-          if ((*(byte *)(iVar12 + 0xb) & 0x20) != 0) {
-            _gleDeletePluginTextureLevel(glContext,textureObject,iVar12,0,0);
-            if (*(int *)(iVar12 + 0x14) != 0) {
-              levelFlagByte = *(byte *)(iVar12 + 0xb);
+          if ((*(byte *)(textureLevel + 0xb) & 0x20) != 0) {
+            _gleDeletePluginTextureLevel(glContext,textureObject,textureLevel,0,0);
+            if (*(int *)(textureLevel + 0x14) != 0) {
+              levelFlagByte = *(byte *)(textureLevel + 0xb);
               if ((levelFlagByte & 1) == 0) {
-                _gleFreeTextureLevel(glContext,textureObject,iVar12);
-                levelFlagByte = *(byte *)(iVar12 + 0xb);
+                _gleFreeTextureLevel(glContext,textureObject,textureLevel);
+                levelFlagByte = *(byte *)(textureLevel + 0xb);
               }
               else {
-                *(undefined4 *)(iVar12 + 0x14) = 0;
+                *(undefined4 *)(textureLevel + 0x14) = 0;
               }
-              *(byte *)(iVar12 + 0xb) = levelFlagByte & 0xef;
+              *(byte *)(textureLevel + 0xb) = levelFlagByte & 0xef;
             }
-            *(byte *)(iVar12 + 0xb) = *(byte *)(iVar12 + 0xb) & 0xdf;
+            *(byte *)(textureLevel + 0xb) = *(byte *)(textureLevel + 0xb) & 0xdf;
           }
-          ((int (*)())_gleCreateSurfaceLevel)(glContext,iVar12,iVar7,iVar16,0,0);
+          ((int (*)())_gleCreateSurfaceLevel)(glContext,textureLevel,iVar7,iVar16,0,0);
           if (stateId != 0x3e5) {
             mipmapSource = 0;
           }
@@ -1522,12 +1523,12 @@ joined_r0x00020e50:
             mipmapSource = valuePtr[7];
           }
           baseFormat = _gleReqToBase(iVar13);
-          _gleCreatePluginTextureLevel(glContext,textureObject,iVar12,loopIndex2,0,baseFormat);
+          _gleCreatePluginTextureLevel(glContext,textureObject,textureLevel,loopIndex2,0,baseFormat);
           if (mipmapSource != 0) {
             _gleGenSurfaceMipmaps(glContext,textureObject,loopIndex2,mipmapSource,*(uint *)(textureObject + 0x6c) >> 0xf & 1);
           }
           loopIndex2 = loopIndex2 + 1;
-          iVar12 = iVar12 + 0x168;
+          textureLevel = textureLevel + 0x168;
         } while (loopIndex2 < faceCount);
       }
     }

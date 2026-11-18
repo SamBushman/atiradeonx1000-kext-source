@@ -3562,9 +3562,9 @@ void _gleInitPipelineProgramState(glContext)
   int loopIndex2;
   char glContextByte85a42;
   byte glContextByte85a4;
-  undefined4 uVar3;
+  undefined4 rendererProgramHandle;
   uint uVar4;
-  uint uVar5;
+  uint listValue;
   ushort *srcCursor;
   undefined1 *allocatedBlock2;
   int iVar8;
@@ -3572,11 +3572,11 @@ void _gleInitPipelineProgramState(glContext)
   uint *cursor;
   undefined4 *srcCursor2;
   uint *cursor3;
-  uint uVar13;
+  uint entriesLeft;
   undefined4 *dstCursor;
   int sharedState;
   int iVar16;
-  uint uVar17;
+  uint previousValue;
   int iVar18;
   int loopIndex;
   uint loopIndex6;
@@ -3602,10 +3602,10 @@ void _gleInitPipelineProgramState(glContext)
       srcCursor2 = (undefined4 *)(iVar8 + 0x4a8);
       dstCursor = (undefined4 *)(iVar16 + 0x886c);
       do {
-        uVar3 = *srcCursor2;
+        rendererProgramHandle = *srcCursor2;
         loopIndex3 = loopIndex3 + 1;
         srcCursor2 = srcCursor2 + 1;
-        *dstCursor = uVar3;
+        *dstCursor = rendererProgramHandle;
         dstCursor = dstCursor + 0xb8;
       } while (loopIndex3 < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
@@ -3622,7 +3622,7 @@ void _gleInitPipelineProgramState(glContext)
   iVar18 = glContext;
   do {
     if (*(int *)(iVar16 + -0x7560) == 0) {
-      uVar17 = 0;
+      previousValue = 0;
       loopIndex6 = 0;
       allocatedBlock3 = (uint *)_malloc((uint)*(byte *)(glContext + 0x85a4) * 4 + 4);
       loopIndex7 = 1;
@@ -3665,17 +3665,17 @@ void _gleInitPipelineProgramState(glContext)
         do {
           uVar4 = 0x7ffffff;
           cursor2 = allocatedBlock3;
-          for (uVar13 = loopIndex7; uVar13 != 0; uVar13 = uVar13 - 1) {
-            uVar5 = *cursor2;
+          for (entriesLeft = loopIndex7; entriesLeft != 0; entriesLeft = entriesLeft - 1) {
+            listValue = *cursor2;
             cursor2 = cursor2 + 1;
-            if ((uVar17 < uVar5) && (uVar5 < uVar4)) {
-              uVar4 = uVar5;
+            if ((previousValue < listValue) && (listValue < uVar4)) {
+              uVar4 = listValue;
             }
           }
           iVar8 = loopIndex6 * 4;
           loopIndex6 = loopIndex6 + 1;
           *(uint *)(iVar8 + *(int *)(iVar16 + -0x7560)) = uVar4;
-          uVar17 = uVar4;
+          previousValue = uVar4;
         } while (loopIndex6 < loopIndex7);
       }
       _free(allocatedBlock3);
