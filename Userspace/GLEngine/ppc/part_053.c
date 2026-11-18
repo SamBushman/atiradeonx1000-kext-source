@@ -2294,13 +2294,13 @@ void _gleVtxTextureCoordGenObjectST(param_1, vertexCursor, vertexCount)
 }
 
 /* _gleVtxTextureCoordGenSphereST @ 0xf6568 (92 bytes) */
-void _gleVtxTextureCoordGenSphereST(undefined4 param_1,uint vertexCursor,int vertexCount,double forwardedFloatArg1)
+void _gleVtxTextureCoordGenSphereST(undefined4 glContext,uint vertexCursor,int vertexCount,double forwardedFloatArg1)
 {
   uint vertexEnd;
   
   vertexEnd = vertexCursor + vertexCount * 0x100;
   for (; vertexCursor < vertexEnd; vertexCursor = vertexCursor + 0x100) {
-    forwardedFloatArg1 = (double)((double (*)())_gleSphereGenST)(param_1,vertexCursor + 0x20,vertexCursor + 0x40,vertexCursor + 0x80,forwardedFloatArg1
+    forwardedFloatArg1 = (double)((double (*)())_gleSphereGenST)(glContext,vertexCursor + 0x20,vertexCursor + 0x40,vertexCursor + 0x80,forwardedFloatArg1
                                       );
   }
   return;

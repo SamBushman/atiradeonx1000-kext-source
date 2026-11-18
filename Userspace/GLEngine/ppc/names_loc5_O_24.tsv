@@ -3,9 +3,9 @@ local	_glMapVertexAttrib2dARB_Exec	extraout_r4	r4AfterCall	CONFIRMED	Ghidra pseu
 local	_glRasterPos4iv_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
 local	_glRectdv_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
 local	_glRectiv_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
-local	_glRotateZ_Comp	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glRotateZ_Comp	fparam_1	sinValue	CONFIRMED	first float argument (f1): callers pass (sinValue, cosValue); stored at listRecord[0]
 local	_glSampleCoverage_CompExec	extraout_r4	r4AfterCall	CONFIRMED	Ghidra pseudo-register extraout_r4: the value r4 holds after the call it follows (a register the function reads without having written it); no source-level role
-local	_glSetRasterPos_Comp	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
+local	_glSetRasterPos_Comp	fparam_1	x	CONFIRMED	first float argument (f1): callers pass (x, y, 0.0, 1.0) and the record stores x,y,z,w in order
 local	_glTexSubImage2D_FlushExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
 local	_glVertexAttrib4NubvARB_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls
 local	_glVertexAttrib4usvARB_CompExec	fparam_1	forwardedFloatArg1	CONFIRMED	first floating-point argument register (f1), unchanged on entry and forwarded to callees / reloaded from the f1 left by calls

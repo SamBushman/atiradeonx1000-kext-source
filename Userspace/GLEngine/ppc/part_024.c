@@ -412,14 +412,14 @@ undefined4 _glRotateXYZ_ListExec(int glContext,float *listRecord,double unusedFl
 }
 
 /* _glRotateZ_Comp @ 0x853dc (100 bytes) */
-void _glRotateZ_Comp(undefined4 glContext,float forwardedFloatArg1,float fparam_2)
+void _glRotateZ_Comp(undefined4 glContext,float sinValue,float cosValue)
 {
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glRotateZ_ListExec_00110288,8);
   if (listRecord != (float *)0x0) {
-    listRecord[1] = (float)fparam_2;
-    *listRecord = (float)forwardedFloatArg1;
+    listRecord[1] = (float)cosValue;
+    *listRecord = (float)sinValue;
   }
   return;
 }

@@ -1,0 +1,15 @@
+local	_glSetRasterPos_Comp	fparam_2	y	CONFIRMED	second float argument (f2): callers pass (x, y, 0.0, 1.0) and the record stores x,y,z,w in order
+local	_glSetRasterPos_Comp	fparam_3	z	CONFIRMED	third float argument (f3): callers pass (x, y, 0.0, 1.0) and the record stores x,y,z,w in order
+local	_glSetRasterPos_Comp	fparam_4	w	CONFIRMED	fourth float argument (f4): callers pass (x, y, 0.0, 1.0) and the record stores x,y,z,w in order
+local	_glRotateZ_Comp	fparam_2	cosValue	CONFIRMED	second float argument (f2): callers pass (sinValue, cosValue); stored at listRecord[1]
+local	_glTexGeni_Exec	fparam_2	zero	CONFIRMED	FLOAT_00108e50 (0.0) passed as the unused f2..f4 float arguments of _glTexGen_Exec
+local	_gleVtxTextureCoordGenSphereST	param_1	glContext	CONFIRMED	passed as the glContext parameter of _gleSphereGenST
+local	_gleFeedbackTriangles	dVar2	intToDoubleBias	CONFIRMED	DOUBLE_00108d70, the unsigned int-to-double magic number subtracted from CONCAT44(0x43300000,lineToken)
+local	_gleFeedbackTriangles	dVar3	lineResetTokenValue	INFERRED	DOUBLE_00108dd0: the first line token of each triangle is passed as this constant, matching lineToken = 0x707 (GL_LINE_RESET_TOKEN)
+local	_glTexGend_Exec	fparam_2	zero	CONFIRMED	FLOAT_00108e50 (0.0) passed as the unused f2..f4 float arguments of _glTexGen_Exec
+local	_glepPluginConnect	iVar1	symbolThenAddress	CONFIRMED	NSSymbol returned by _NSLookupSymbolInModule, then replaced by the address from _NSAddressOfSymbol, which is stored in the plugin's symbol slot (0 means the plugin is disconnected)
+local	_glepPluginDisconnect	iVar1	terminateSymbol	CONFIRMED	NSSymbol returned by _NSLookupSymbolInModule for "_gldTerminateLibrary"
+local	_glepPluginConnectAll	iVar1	connected	CONFIRMED	result of _glepPluginConnect: zero deletes the plugin from the list
+local	_glepValidatePlugin	local_20	versionMajor	INFERRED	first out value of the plugin info function (_glep_gld_names[0]); the plugin is accepted when the triple equals 2, 4, 0xb
+local	_glepValidatePlugin	local_1c	versionMinor	INFERRED	second out value of the plugin info function; accepted when 4
+local	_glepValidatePlugin	local_18	versionRevision	INFERRED	third out value of the plugin info function; accepted when 0xb

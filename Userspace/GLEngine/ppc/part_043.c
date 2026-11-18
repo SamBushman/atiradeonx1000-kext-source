@@ -207,14 +207,14 @@ void _gleFeedbackPolygon(glContext, firstVertex, vertexCount, polygonModeIndex)
 double _gleFeedbackTriangles(undefined4 glContext,int vertexCursor,int vertexCount,uint polygonModeIndex,double forwardedFloatArg1)
 {
   uint polygonModeBits;
-  double dVar2;
-  double dVar3;
+  double intToDoubleBias;
+  double lineResetTokenValue;
   undefined4 lineToken;
   int lastTriangleStart;
   int triangleStart;
   
-  dVar3 = DOUBLE_00108dd0;
-  dVar2 = DOUBLE_00108d70;
+  lineResetTokenValue = DOUBLE_00108dd0;
+  intToDoubleBias = DOUBLE_00108d70;
   polygonModeBits = polygonModeIndex & 3;
   lastTriangleStart = vertexCount + -3;
   triangleStart = 0;
@@ -223,19 +223,19 @@ double _gleFeedbackTriangles(undefined4 glContext,int vertexCursor,int vertexCou
       do {
         lineToken = 0x707;
         if (*(char *)(vertexCursor + 0x7c) != '\0') {
-          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)dVar3);
+          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)lineResetTokenValue);
           _gleFeedbackHitRecord(glContext,vertexCursor);
           forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
           lineToken = 0x702;
         }
         if (*(char *)(vertexCursor + 0x17c) != '\0') {
-          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - dVar2));
+          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - intToDoubleBias));
           _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
           forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
           lineToken = 0x702;
         }
         if (*(char *)(vertexCursor + 0x27c) != '\0') {
-          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - dVar2));
+          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - intToDoubleBias));
           _gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
           forwardedFloatArg1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor);
         }

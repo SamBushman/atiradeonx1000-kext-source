@@ -882,16 +882,16 @@ int _glSetRasterPos_ListExec(glContext, listRecord)
 }
 
 /* _glSetRasterPos_Comp @ 0x7f3e0 (92 bytes) */
-void _glSetRasterPos_Comp(undefined4 glContext,float forwardedFloatArg1,float fparam_2,float fparam_3,float fparam_4)
+void _glSetRasterPos_Comp(undefined4 glContext,float x,float y,float z,float w)
 {
   float *listRecord;
   
   listRecord = (float *)_gleAddListItem(glContext,PTR__glSetRasterPos_ListExec_0011027c,0x10);
   if (listRecord != (float *)0x0) {
-    listRecord[3] = (float)fparam_4;
-    *listRecord = (float)forwardedFloatArg1;
-    listRecord[1] = (float)fparam_2;
-    listRecord[2] = (float)fparam_3;
+    listRecord[3] = (float)w;
+    *listRecord = (float)x;
+    listRecord[1] = (float)y;
+    listRecord[2] = (float)z;
   }
   return;
 }

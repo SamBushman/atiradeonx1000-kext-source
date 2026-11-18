@@ -2634,10 +2634,10 @@ void _glTexGend_Comp(undefined4 glContext,undefined4 coord,undefined4 pname,doub
 /* _glTexGend_Exec @ 0x9c178 (40 bytes) */
 void _glTexGend_Exec(undefined4 glContext,undefined4 coord,undefined4 pname,double param)
 {
-  double fparam_2;
+  double zero;
   
-  fparam_2 = (double)FLOAT_00108e50;
-  ((void (*)())_glTexGen_Exec)(glContext,coord,pname,(double)(float)param,fparam_2,fparam_2,fparam_2);
+  zero = (double)FLOAT_00108e50;
+  ((void (*)())_glTexGen_Exec)(glContext,coord,pname,(double)(float)param,zero,zero,zero);
   return;
 }
 
@@ -2746,12 +2746,12 @@ void _glTexGeni_Exec(glContext, coord, pname, param)
   undefined4 pname;
   uint param;
 {
-  double fparam_2;
+  double zero;
   
-  fparam_2 = (double)FLOAT_00108e50;
+  zero = (double)FLOAT_00108e50;
   ((void (*)())_glTexGen_Exec)(glContext,coord,pname,
                  (double)(float)((double)CONCAT44(0x43300000,param ^ 0x80000000) - DOUBLE_00108d58
-                                ),fparam_2,fparam_2,fparam_2);
+                                ),zero,zero,zero);
   return;
 }
 

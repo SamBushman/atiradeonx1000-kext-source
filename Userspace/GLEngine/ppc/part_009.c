@@ -203,12 +203,12 @@ void _glepPluginDisconnectAll()
 void _glepPluginDisconnect(plugin)
   int plugin;
 {
-  int iVar1;
+  int terminateSymbol;
   code *a0;
   
   if (*(int *)(plugin + 0x108) != 0) {
-    iVar1 = _NSLookupSymbolInModule(*(undefined4 *)(plugin + 0x10c),"_gldTerminateLibrary");
-    if ((iVar1 != 0) && (a0 = (code *)_NSAddressOfSymbol(iVar1), a0 != (code *)0x0)) {
+    terminateSymbol = _NSLookupSymbolInModule(*(undefined4 *)(plugin + 0x10c),"_gldTerminateLibrary");
+    if ((terminateSymbol != 0) && (a0 = (code *)_NSAddressOfSymbol(terminateSymbol), a0 != (code *)0x0)) {
       (*a0)(a0);
     }
     _NSUnLinkModule(*(undefined4 *)(plugin + 0x10c),0);

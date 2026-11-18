@@ -88,15 +88,15 @@ LAB_00001554:
 /* _glepPluginConnectAll @ 0x15b4 (124 bytes) */
 void _glepPluginConnectAll()
 {
-  int iVar1;
+  int connected;
   int *plugin;
   
   if (_glep_plugin_head == 0) {
     ((void (*)())_glepLoadRenderers)();
     plugin = (int *)_glep_plugin_head;
     while (plugin != (int *)0x0) {
-      iVar1 = ((int (*)())_glepPluginConnect)(plugin);
-      if (iVar1 == 0) {
+      connected = ((int (*)())_glepPluginConnect)(plugin);
+      if (connected == 0) {
         plugin = (int *)_glepDeletePlugin(plugin);
       }
       else {
@@ -285,7 +285,7 @@ int _glepPluginConnect(plugin)
   int validateResult;
   int module;
   int createStatus;
-  int iVar1;
+  int symbolThenAddress;
   undefined4 result;
   char *cursor;
   int *symbolSlot;
@@ -305,16 +305,16 @@ int _glepPluginConnect(plugin)
         symbolSlot = (int *)(plugin + 0x114);
         cursor = _glep_gld_names;
         do {
-          iVar1 = _NSLookupSymbolInModule(*(undefined4 *)(plugin + 0x10c),cursor);
-          if (iVar1 == 0) {
+          symbolThenAddress = _NSLookupSymbolInModule(*(undefined4 *)(plugin + 0x10c),cursor);
+          if (symbolThenAddress == 0) {
 LAB_00001b38:
             _glepPluginDisconnect(plugin);
             goto LAB_00001b40;
           }
-          iVar1 = _NSAddressOfSymbol(iVar1);
-          *symbolSlot = iVar1;
+          symbolThenAddress = _NSAddressOfSymbol(symbolThenAddress);
+          *symbolSlot = symbolThenAddress;
           symbolSlot = symbolSlot + 1;
-          if (iVar1 == 0) goto LAB_00001b38;
+          if (symbolThenAddress == 0) goto LAB_00001b38;
           cursor = cursor + 0x20;
         } while ((int)symbolSlot < plugin + 0x208);
         goto LAB_00001b30;
@@ -346,9 +346,9 @@ int _glepValidatePlugin(plugin)
   int *otherPlugin;
   int initSymbol;
   code *symbolFunction;
-  int local_20;
-  int local_1c;
-  int local_18;
+  int versionMajor;
+  int versionMinor;
+  int versionRevision;
   uint pluginId [3];
   
   if (((*(int *)(plugin + 0x104) != 0xffff) &&
@@ -360,10 +360,10 @@ int _glepValidatePlugin(plugin)
               *(undefined4 *)(PTR__gle_io_data_00112434 + 0x10));
     infoSymbol = _NSLookupSymbolInModule(*(undefined4 *)(plugin + 0x10c),_glep_gld_names);
     if (((infoSymbol != 0) && (symbolFunction = (code *)_NSAddressOfSymbol(infoSymbol), symbolFunction != (code *)0x0)) &&
-       (infoSymbol = (*symbolFunction)(&local_20,&local_1c,&local_18,pluginId), infoSymbol != 0)) {
+       (infoSymbol = (*symbolFunction)(&versionMajor,&versionMinor,&versionRevision,pluginId), infoSymbol != 0)) {
       if (*(int *)(plugin + 0x104) == 0) {
         pluginId[0] = pluginId[0] & 0xff00;
-        if (((local_20 != 2) || (local_1c != 4)) || (local_18 != 0xb)) goto LAB_00001c9c;
+        if (((versionMajor != 2) || (versionMinor != 4)) || (versionRevision != 0xb)) goto LAB_00001c9c;
         listEmpty = _glep_plugin_head == (int *)0x0;
         if (!listEmpty) {
           otherPluginId = _glep_plugin_head[0x41];
