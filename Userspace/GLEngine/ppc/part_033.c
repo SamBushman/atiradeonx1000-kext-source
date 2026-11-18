@@ -1164,20 +1164,20 @@ void _glWeightPointerARB_Exec(glContext, size, type, stride, pointer)
   int stride;
   int pointer;
 {
-  undefined4 uVar1;
+  undefined4 bufferHandle;
   undefined4 glErrorCode;
-  int iVar2;
-  int iVar3;
+  int remainingRefCount;
+  int previousArrayBufferThenElementSize;
   int loopIndex;
   undefined4 *dstCursor;
   undefined4 *srcCursor;
   int clientState;
   undefined4 *dstCursor2;
-  uint uVar7;
-  int iVar8;
+  uint arrayFormatWordThenDispatchMask;
+  int boundArrayBuffer;
   
   clientState = *(int *)(glContext + 0x4a60);
-  uVar7 = stride << 7 | type & 0xf | (size & 3) << 4;
+  arrayFormatWordThenDispatchMask = stride << 7 | type & 0xf | (size & 3) << 4;
   if (*(short *)(glContext + 0x4a10) < 0) {
     *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
     *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | 0x200000;
@@ -1185,14 +1185,14 @@ void _glWeightPointerARB_Exec(glContext, size, type, stride, pointer)
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
     }
     *(int *)(clientState + 0xa8) = pointer;
-    iVar8 = *(int *)(clientState + 0x358);
-    iVar3 = *(int *)(clientState + 0x374);
-    if (iVar8 != iVar3) {
-      if ((iVar3 != 0) &&
-         (iVar2 = *(int *)(iVar3 + 8) + -1, *(int *)(iVar3 + 8) = iVar2, iVar2 == 0)) {
-        _gleFreeBufferObject(glContext,iVar3);
+    boundArrayBuffer = *(int *)(clientState + 0x358);
+    previousArrayBufferThenElementSize = *(int *)(clientState + 0x374);
+    if (boundArrayBuffer != previousArrayBufferThenElementSize) {
+      if ((previousArrayBufferThenElementSize != 0) &&
+         (remainingRefCount = *(int *)(previousArrayBufferThenElementSize + 8) + -1, *(int *)(previousArrayBufferThenElementSize + 8) = remainingRefCount, remainingRefCount == 0)) {
+        _gleFreeBufferObject(glContext,previousArrayBufferThenElementSize);
       }
-      if (iVar8 == 0) {
+      if (boundArrayBuffer == 0) {
         loopIndex = 0;
         *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
         *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) & 0xffdfffff;
@@ -1206,31 +1206,31 @@ void _glWeightPointerARB_Exec(glContext, size, type, stride, pointer)
         }
       }
       else {
-        *(int *)(iVar8 + 8) = *(int *)(iVar8 + 8) + 1;
+        *(int *)(boundArrayBuffer + 8) = *(int *)(boundArrayBuffer + 8) + 1;
         *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
         *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) | 0x200000;
         loopIndex = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           dstCursor2 = (undefined4 *)(clientState + 0x3f4);
-          srcCursor = (undefined4 *)(iVar8 + 0x10);
+          srcCursor = (undefined4 *)(boundArrayBuffer + 0x10);
           do {
-            uVar1 = *srcCursor;
+            bufferHandle = *srcCursor;
             loopIndex = loopIndex + 1;
             srcCursor = srcCursor + 1;
-            *dstCursor2 = uVar1;
+            *dstCursor2 = bufferHandle;
             dstCursor2 = dstCursor2 + 0x23;
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      *(int *)(clientState + 0x374) = iVar8;
+      *(int *)(clientState + 0x374) = boundArrayBuffer;
       *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
       *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | 0x10;
     }
-    if (iVar8 != 0) {
-      pointer = pointer + *(int *)(iVar8 + 0x30);
+    if (boundArrayBuffer != 0) {
+      pointer = pointer + *(int *)(boundArrayBuffer + 0x30);
     }
     *(int *)(glContext + 0x490c) = pointer;
-    if (*(uint *)(clientState + 0xbc) == uVar7) {
+    if (*(uint *)(clientState + 0xbc) == arrayFormatWordThenDispatchMask) {
       return;
     }
     if ((size - 1 < 4) && (-1 < stride)) {
@@ -1238,18 +1238,18 @@ void _glWeightPointerARB_Exec(glContext, size, type, stride, pointer)
       case 0x1400:
       case 0x1401:
         type = type | 0x8000;
-        iVar3 = 1;
+        previousArrayBufferThenElementSize = 1;
         break;
       case 0x1402:
       case 0x1403:
         type = type | 0x8000;
-        iVar3 = 2;
+        previousArrayBufferThenElementSize = 2;
         break;
       case 0x1404:
       case 0x1405:
         type = type | 0x8000;
       case 0x1406:
-        iVar3 = 4;
+        previousArrayBufferThenElementSize = 4;
         break;
       default:
         if (*(int *)(glContext + 0x7574) != 0) {
@@ -1258,15 +1258,15 @@ void _glWeightPointerARB_Exec(glContext, size, type, stride, pointer)
         glErrorCode = 0x500;
         goto LAB_000a43e4;
       case 0x140a:
-        iVar3 = 8;
+        previousArrayBufferThenElementSize = 8;
       }
       *(short *)(clientState + 0xb0) = (short)type;
-      *(char *)(clientState + 0xb4) = (char)iVar3;
+      *(char *)(clientState + 0xb4) = (char)previousArrayBufferThenElementSize;
       *(short *)(clientState + 0xb2) = (short)size;
       if (stride < 1) {
-        stride = size * iVar3;
+        stride = size * previousArrayBufferThenElementSize;
       }
-      *(uint *)(clientState + 0xbc) = uVar7;
+      *(uint *)(clientState + 0xbc) = arrayFormatWordThenDispatchMask;
       *(int *)(clientState + 0xac) = stride;
       *(undefined4 *)(glContext + 0x488c) = 0;
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
@@ -1275,9 +1275,9 @@ void _glWeightPointerARB_Exec(glContext, size, type, stride, pointer)
       if (*(int *)(glContext + 0x5408) != 0) {
         return;
       }
-      uVar7 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
+      arrayFormatWordThenDispatchMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
       *(undefined **)
-       ((*(uint *)(glContext + 0x4680) & uVar7 | *(uint *)(glContext + 0x4684) & ~uVar7) + 0xc) =
+       ((*(uint *)(glContext + 0x4680) & arrayFormatWordThenDispatchMask | *(uint *)(glContext + 0x4684) & ~arrayFormatWordThenDispatchMask) + 0xc) =
            PTR__glArrayElement_Exec_00110454;
       return;
     }
@@ -3155,42 +3155,42 @@ LAB_000a6da4:
 }
 
 /* _gleDrawArraysOrElements_Comp @ 0xa6dc0 (392 bytes) */
-int _gleDrawArraysOrElements_Comp(glContext, param_2, param_3, param_4)
+int _gleDrawArraysOrElements_Comp(glContext, mode, first, count)
   int glContext;
-  undefined4 param_2;
-  int param_3;
-  int param_4;
+  undefined4 mode;
+  int first;
+  int count;
 {
-  unsigned char cVar1;
-  uint uVar2;
-  uint uVar3;
+  unsigned char copiedByte;
+  uint clientMaskLowMasked;
+  uint clientMaskHigh;
   code *pcVar4;
   code *pcVar5;
   int clientState;
   code *dstCursor;
   int iVar8;
-  int iVar9;
+  int bitIndex;
   int remaining;
   int *dstCursor2;
   short *srcCursor;
-  code *pcVar12;
-  longlong lVar13;
-  undefined4 local_c0;
+  code *listDataCursor;
+  longlong shiftedBit64;
+  undefined4 arrayByteSizes;
   undefined1 auStack_44 [12];
   
   clientState = *(int *)(glContext + 0x4a60);
-  uVar3 = *(uint *)(clientState + 0x330);
+  clientMaskHigh = *(uint *)(clientState + 0x330);
   pcVar5 = *(code **)(clientState + 0x334);
-  uVar2 = (uint)pcVar5 & 0xff7fffff;
-  if ((0 < param_4) &&
-     (pcVar5 = (code *)((uint)pcVar5 & 0x10000), (uVar3 & 1) != 0 || pcVar5 != (code *)0x0)) {
-    dstCursor2 = &local_c0;
+  clientMaskLowMasked = (uint)pcVar5 & 0xff7fffff;
+  if ((0 < count) &&
+     (pcVar5 = (code *)((uint)pcVar5 & 0x10000), (clientMaskHigh & 1) != 0 || pcVar5 != (code *)0x0)) {
+    dstCursor2 = &arrayByteSizes;
     srcCursor = (short *)(clientState + 0x3a);
     iVar8 = 0;
-    iVar9 = 0x10;
+    bitIndex = 0x10;
     do {
-      lVar13 = ___ashldi3(0,1,iVar9);
-      if ((uVar3 & (uint)((ulonglong)lVar13 >> 0x20)) == 0 && (uVar2 & (uint)lVar13) == 0) {
+      shiftedBit64 = ___ashldi3(0,1,bitIndex);
+      if ((clientMaskHigh & (uint)((ulonglong)shiftedBit64 >> 0x20)) == 0 && (clientMaskLowMasked & (uint)shiftedBit64) == 0) {
         *dstCursor2 = 0;
       }
       else {
@@ -3198,26 +3198,26 @@ int _gleDrawArraysOrElements_Comp(glContext, param_2, param_3, param_4)
         *dstCursor2 = *srcCursor * 4;
       }
       dstCursor2 = dstCursor2 + 1;
-      iVar9 = iVar9 + 1;
+      bitIndex = bitIndex + 1;
       srcCursor = srcCursor + 0xc;
     } while ((int)dstCursor2 <= (int)auStack_44);
     pcVar5 = (code *)_gleAddListItem(glContext,PTR__glDrawArraysOrElements_ListExec_0011044c,
-                                     param_4 * iVar8 + 0x40);
+                                     count * iVar8 + 0x40);
     if (pcVar5 != (code *)0x0) {
-      *(undefined4 *)(pcVar5 + 0x14) = param_2;
+      *(undefined4 *)(pcVar5 + 0x14) = mode;
       *(undefined4 *)(pcVar5 + 4) = 0;
       dstCursor = pcVar5 + 0x20;
       *(undefined4 *)pcVar5 = 0;
       remaining = 0x20;
       *(int *)(pcVar5 + 0x1c) = iVar8;
-      *(int *)(pcVar5 + 8) = param_4 * iVar8;
-      pcVar4 = (code *)((int)&local_c0 + 3);
-      *(int *)(pcVar5 + 0x18) = param_4;
-      pcVar12 = pcVar5 + 0x40;
+      *(int *)(pcVar5 + 8) = count * iVar8;
+      pcVar4 = (code *)((int)&arrayByteSizes + 3);
+      *(int *)(pcVar5 + 0x18) = count;
+      listDataCursor = pcVar5 + 0x40;
       do {
-        cVar1 = *(char *)pcVar4;
+        copiedByte = *(char *)pcVar4;
         pcVar4 = pcVar4 + 4;
-        *(char *)dstCursor = cVar1;
+        *(char *)dstCursor = copiedByte;
         dstCursor = dstCursor + 1;
         remaining = remaining + -1;
       } while (remaining != 0);
@@ -3227,10 +3227,10 @@ int _gleDrawArraysOrElements_Comp(glContext, param_2, param_3, param_4)
         *(code **)(glContext + 0x488c) = pcVar5;
         pcVar4 = pcVar5;
       }
-      iVar8 = param_4 + param_3;
-      for (; param_3 < iVar8; param_3 = param_3 + 1) {
-        pcVar12 = (code *)(*pcVar4)(glContext,clientState + 0x30,pcVar12,param_3);
-        pcVar5 = pcVar12;
+      iVar8 = count + first;
+      for (; first < iVar8; first = first + 1) {
+        listDataCursor = (code *)(*pcVar4)(glContext,clientState + 0x30,listDataCursor,first);
+        pcVar5 = listDataCursor;
       }
     }
   }

@@ -248,17 +248,17 @@ void _glBufferData_Exec_body(glContext, target, bufferSize, data, usage)
   byte glContextByte85a8;
   uint size;
   undefined4 glContextWord4688;
-  undefined4 uVar3;
+  undefined4 uploadSource;
   int clientState;
-  uint uVar5;
-  int iVar6;
-  vm_address_t avStack_40 [7];
+  uint bufferDirtyBits;
+  int bufferObjectThenDirtyWordCursor;
+  vm_address_t allocatedAddress [7];
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8893) {
-      iVar6 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+      bufferObjectThenDirtyWordCursor = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
 LAB_00058acc:
-      if (iVar6 == 0) goto LAB_00058ad4;
+      if (bufferObjectThenDirtyWordCursor == 0) goto LAB_00058ad4;
       switch(usage) {
       case 0x88e0:
       case 0x88e1:
@@ -269,24 +269,24 @@ LAB_00058acc:
       case 0x88e8:
       case 0x88e9:
       case 0x88ea:
-        _gleOrphanBufferData(glContext,iVar6 + 0x10,bufferSize,usage & 0xffff);
-        if (*(int *)(iVar6 + 0x30) != 0) {
+        _gleOrphanBufferData(glContext,bufferObjectThenDirtyWordCursor + 0x10,bufferSize,usage & 0xffff);
+        if (*(int *)(bufferObjectThenDirtyWordCursor + 0x30) != 0) {
           if ((data != 0) && (bufferSize != 0)) {
-            _memcpy(*(int *)(iVar6 + 0x30),data,bufferSize);
+            _memcpy(*(int *)(bufferObjectThenDirtyWordCursor + 0x30),data,bufferSize);
           }
-          if (1 < *(int *)(iVar6 + 8)) {
+          if (1 < *(int *)(bufferObjectThenDirtyWordCursor + 8)) {
             if ((data == 0) || (bufferSize == 0)) {
               glContextWord4688 = *(undefined4 *)(glContext + 0x4688);
               glContextByte85a8 = *(byte *)(glContext + 0x85a8);
-              uVar3 = 0;
+              uploadSource = 0;
             }
             else {
               glContextWord4688 = *(undefined4 *)(glContext + 0x4688);
               glContextByte85a8 = *(byte *)(glContext + 0x85a8);
-              uVar3 = *(undefined4 *)(iVar6 + 0x30);
+              uploadSource = *(undefined4 *)(bufferObjectThenDirtyWordCursor + 0x30);
             }
             (**(code **)(glContext + 0x481c))
-                      (glContextWord4688,*(undefined4 *)((uint)glContextByte85a8 * 4 + iVar6 + 0x10),uVar3,bufferSize);
+                      (glContextWord4688,*(undefined4 *)((uint)glContextByte85a8 * 4 + bufferObjectThenDirtyWordCursor + 0x10),uploadSource,bufferSize);
             if (target - 0x8892 < 2) {
               _gleResetVACachePointers(glContext);
               clientState = *(int *)(glContext + 0x4a60);
@@ -295,29 +295,29 @@ LAB_00058acc:
               *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
             }
           }
-          *(short *)(iVar6 + 0x3c) = (short)usage;
-          *(undefined1 *)(iVar6 + 0x44) = 0;
-          *(int *)(iVar6 + 0x38) = bufferSize;
+          *(short *)(bufferObjectThenDirtyWordCursor + 0x3c) = (short)usage;
+          *(undefined1 *)(bufferObjectThenDirtyWordCursor + 0x44) = 0;
+          *(int *)(bufferObjectThenDirtyWordCursor + 0x38) = bufferSize;
           return;
         }
         size = bufferSize + 0xfffU & 0xfffff000;
         if (bufferSize == 0) {
-          uVar5 = 0;
-          avStack_40[0] = 0;
+          bufferDirtyBits = 0;
+          allocatedAddress[0] = 0;
 code_r0x00058cb0:
-          *(undefined1 *)(iVar6 + 0x44) = 0;
-          *(int *)(iVar6 + 0x38) = bufferSize;
-          *(short *)(iVar6 + 0x3c) = (short)usage;
-          *(uint *)(iVar6 + 0x34) = size;
-          *(vm_address_t *)(iVar6 + 0x30) = avStack_40[0];
-          if ((target - 0x8892 < 2) && (1 < *(int *)(iVar6 + 8))) {
+          *(undefined1 *)(bufferObjectThenDirtyWordCursor + 0x44) = 0;
+          *(int *)(bufferObjectThenDirtyWordCursor + 0x38) = bufferSize;
+          *(short *)(bufferObjectThenDirtyWordCursor + 0x3c) = (short)usage;
+          *(uint *)(bufferObjectThenDirtyWordCursor + 0x34) = size;
+          *(vm_address_t *)(bufferObjectThenDirtyWordCursor + 0x30) = allocatedAddress[0];
+          if ((target - 0x8892 < 2) && (1 < *(int *)(bufferObjectThenDirtyWordCursor + 8))) {
             _gleResetVACachePointers(glContext);
             clientState = *(int *)(glContext + 0x4a60);
             *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
             *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | 0x10;
             *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
           }
-          if (uVar5 == 0) {
+          if (bufferDirtyBits == 0) {
             return;
           }
           loopIndex = 0;
@@ -326,16 +326,16 @@ code_r0x00058cb0:
           }
           do {
             loopIndex = loopIndex + 1;
-            *(uint *)(iVar6 + 0x48) = *(uint *)(iVar6 + 0x48) | uVar5;
-            iVar6 = iVar6 + 4;
+            *(uint *)(bufferObjectThenDirtyWordCursor + 0x48) = *(uint *)(bufferObjectThenDirtyWordCursor + 0x48) | bufferDirtyBits;
+            bufferObjectThenDirtyWordCursor = bufferObjectThenDirtyWordCursor + 4;
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
           return;
         }
-        _vm_allocate(*(vm_map_t *)PTR_00112034,avStack_40,size,1);
-        if (avStack_40[0] != 0) {
-          uVar5 = 3;
+        _vm_allocate(*(vm_map_t *)PTR_00112034,allocatedAddress,size,1);
+        if (allocatedAddress[0] != 0) {
+          bufferDirtyBits = 3;
           if (data != 0) {
-            _memcpy(avStack_40[0],data,bufferSize);
+            _memcpy(allocatedAddress[0],data,bufferSize);
           }
           goto code_r0x00058cb0;
         }
@@ -349,16 +349,16 @@ code_r0x00058cb0:
     else {
       if (0x8893 < target) {
         if (target == 0x88eb) {
-          iVar6 = *(int *)(glContext + 0x4a68);
+          bufferObjectThenDirtyWordCursor = *(int *)(glContext + 0x4a68);
         }
         else {
           if (target != 0x88ec) goto LAB_00058b40;
-          iVar6 = *(int *)(glContext + 0x4a6c);
+          bufferObjectThenDirtyWordCursor = *(int *)(glContext + 0x4a6c);
         }
         goto LAB_00058acc;
       }
       if (target == 0x8892) {
-        iVar6 = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
+        bufferObjectThenDirtyWordCursor = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
         goto LAB_00058acc;
       }
     }
@@ -572,29 +572,29 @@ int _glMapBuffer_Exec(glContext, target, access)
   int access;
 {
   int loopIndex;
-  int *piVar1;
-  undefined4 *puVar2;
+  int *rendererFuncTableSlot;
+  undefined4 *rendererHandleSlot;
   undefined4 glErrorCode;
   vm_size_t size;
-  int iVar4;
+  int rendererSlotCursor;
   int loopIndex2;
-  int iVar6;
-  vm_address_t local_30 [7];
+  int bufferObjectThenDirtyWordCursor;
+  vm_address_t mappedAddress [7];
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target != 0x8893) {
       if (0x8893 < target) {
         if (target == 0x88eb) {
-          iVar6 = *(int *)(glContext + 0x4a68);
+          bufferObjectThenDirtyWordCursor = *(int *)(glContext + 0x4a68);
         }
         else {
           if (target != 0x88ec) goto LAB_000592a8;
-          iVar6 = *(int *)(glContext + 0x4a6c);
+          bufferObjectThenDirtyWordCursor = *(int *)(glContext + 0x4a6c);
         }
         goto LAB_00059290;
       }
       if (target == 0x8892) {
-        iVar6 = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
+        bufferObjectThenDirtyWordCursor = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
         goto LAB_00059290;
       }
 LAB_000592a8:
@@ -604,52 +604,52 @@ LAB_000592a8:
       glErrorCode = 0x500;
       goto LAB_0005933c;
     }
-    iVar6 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+    bufferObjectThenDirtyWordCursor = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
 LAB_00059290:
-    if (iVar6 != 0) {
+    if (bufferObjectThenDirtyWordCursor != 0) {
       if (2 < access - 35000U) goto LAB_000592a8;
-      if (*(char *)(iVar6 + 0x44) == '\0') {
-        local_30[0] = *(vm_address_t *)(iVar6 + 0x30);
-        *(undefined1 *)(iVar6 + 0x44) = 1;
-        *(short *)(iVar6 + 0x3e) = (short)access;
-        size = *(vm_size_t *)(iVar6 + 0x34);
-        if ((local_30[0] != 0) || (size == 0)) {
-          if (*(int *)(iVar6 + 0x40) != 0) {
-            _gleSynchronizePluginBuffer(glContext,iVar6 + 0x10);
+      if (*(char *)(bufferObjectThenDirtyWordCursor + 0x44) == '\0') {
+        mappedAddress[0] = *(vm_address_t *)(bufferObjectThenDirtyWordCursor + 0x30);
+        *(undefined1 *)(bufferObjectThenDirtyWordCursor + 0x44) = 1;
+        *(short *)(bufferObjectThenDirtyWordCursor + 0x3e) = (short)access;
+        size = *(vm_size_t *)(bufferObjectThenDirtyWordCursor + 0x34);
+        if ((mappedAddress[0] != 0) || (size == 0)) {
+          if (*(int *)(bufferObjectThenDirtyWordCursor + 0x40) != 0) {
+            _gleSynchronizePluginBuffer(glContext,bufferObjectThenDirtyWordCursor + 0x10);
           }
-          iVar4 = glContext + 0x10000;
+          rendererSlotCursor = glContext + 0x10000;
           loopIndex2 = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
-              piVar1 = (int *)(iVar4 + -0x777c);
-              puVar2 = (undefined4 *)(iVar4 + -0x7a54);
+              rendererFuncTableSlot = (int *)(rendererSlotCursor + -0x777c);
+              rendererHandleSlot = (undefined4 *)(rendererSlotCursor + -0x7a54);
               loopIndex2 = loopIndex2 + 1;
-              iVar4 = iVar4 + 0x2e0;
-              (**(code **)(*piVar1 + 0x1c4))(*puVar2,3,*(undefined4 *)(iVar6 + 0x10));
-              *(uint *)(iVar6 + 0x48) = *(uint *)(iVar6 + 0x48) | 2;
-              iVar6 = iVar6 + 4;
+              rendererSlotCursor = rendererSlotCursor + 0x2e0;
+              (**(code **)(*rendererFuncTableSlot + 0x1c4))(*rendererHandleSlot,3,*(undefined4 *)(bufferObjectThenDirtyWordCursor + 0x10));
+              *(uint *)(bufferObjectThenDirtyWordCursor + 0x48) = *(uint *)(bufferObjectThenDirtyWordCursor + 0x48) | 2;
+              bufferObjectThenDirtyWordCursor = bufferObjectThenDirtyWordCursor + 4;
             } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
-            return local_30[0];
+            return mappedAddress[0];
           }
-          return local_30[0];
+          return mappedAddress[0];
         }
-        _vm_allocate(*(vm_map_t *)PTR_00112034,local_30,size,1);
-        if (local_30[0] != 0) {
-          *(vm_address_t *)(iVar6 + 0x30) = local_30[0];
-          *(vm_size_t *)(iVar6 + 0x34) = size;
-          if (1 < *(int *)(iVar6 + 8)) {
+        _vm_allocate(*(vm_map_t *)PTR_00112034,mappedAddress,size,1);
+        if (mappedAddress[0] != 0) {
+          *(vm_address_t *)(bufferObjectThenDirtyWordCursor + 0x30) = mappedAddress[0];
+          *(vm_size_t *)(bufferObjectThenDirtyWordCursor + 0x34) = size;
+          if (1 < *(int *)(bufferObjectThenDirtyWordCursor + 8)) {
             _gleResetVACachePointers(glContext);
           }
           loopIndex = 0;
           if (*(char *)(glContext + 0x85a4) != '\0') {
             do {
               loopIndex = loopIndex + 1;
-              *(uint *)(iVar6 + 0x48) = *(uint *)(iVar6 + 0x48) | 3;
-              iVar6 = iVar6 + 4;
+              *(uint *)(bufferObjectThenDirtyWordCursor + 0x48) = *(uint *)(bufferObjectThenDirtyWordCursor + 0x48) | 3;
+              bufferObjectThenDirtyWordCursor = bufferObjectThenDirtyWordCursor + 4;
             } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
-            return local_30[0];
+            return mappedAddress[0];
           }
-          return local_30[0];
+          return mappedAddress[0];
         }
         if (*(int *)(glContext + 0x7574) != 0) {
           return 0;

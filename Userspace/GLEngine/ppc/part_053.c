@@ -17,12 +17,12 @@ void _gleFlushPrimitiveTCLRDirtyFunc(int glContext,double floatArg1,double float
 {
   int iVar1;
   int iVar2;
-  int iVar3;
+  int vertexWriteCursor;
   int iVar4;
-  int iVar5;
-  uint uVar6;
-  undefined8 local_220 [64];
-  int local_20 [5];
+  int vertexSizeThenSavedByteCount;
+  uint remainingQwords;
+  undefined8 savedVertexBytes [64];
+  int bufferVertexCapacity [5];
   
   if ((((*(char *)(glContext + 0x7580) != '\0') && ((*(uint *)(glContext + 0x486c) & 1) != 0)) &&
       (*(char *)(*(int *)(glContext + 0x468c) + 0x7a) == '\0')) &&
@@ -31,135 +31,135 @@ void _gleFlushPrimitiveTCLRDirtyFunc(int glContext,double floatArg1,double float
     (**(code **)(glContext + 0x4a0c))(glContext);
     return;
   }
-  iVar5 = (int)*(short *)(glContext + 0x487c);
+  vertexSizeThenSavedByteCount = (int)*(short *)(glContext + 0x487c);
   switch(*(undefined2 *)(glContext + 0x4a10)) {
   case 2:
     if (*(char *)(glContext + 0x4a18) == '\0') {
       iVar4 = 0;
       iVar2 = *(int *)(glContext + 0x4854);
       iVar1 = *(int *)(glContext + 0x4868);
-      if (0 < iVar5) {
-        uVar6 = iVar5 + 7U >> 3;
+      if (0 < vertexSizeThenSavedByteCount) {
+        remainingQwords = vertexSizeThenSavedByteCount + 7U >> 3;
         do {
           *(undefined8 *)(iVar2 + -0x100 + iVar4) = *(undefined8 *)(iVar1 + iVar4);
           iVar4 = iVar4 + 8;
-          uVar6 = uVar6 - 1;
-        } while (uVar6 != 0);
+          remainingQwords = remainingQwords - 1;
+        } while (remainingQwords != 0);
       }
     }
   case 3:
     iVar2 = 0;
     iVar1 = *(int *)(glContext + 0x4858);
     *(undefined1 *)(glContext + 0x4a18) = 1;
-    if (0 < iVar5) {
-      uVar6 = iVar5 + 7U >> 3;
+    if (0 < vertexSizeThenSavedByteCount) {
+      remainingQwords = vertexSizeThenSavedByteCount + 7U >> 3;
       do {
-        *(undefined8 *)((int)local_220 + iVar2) = *(undefined8 *)((iVar1 - iVar5) + iVar2);
+        *(undefined8 *)((int)savedVertexBytes + iVar2) = *(undefined8 *)((iVar1 - vertexSizeThenSavedByteCount) + iVar2);
         iVar2 = iVar2 + 8;
-        uVar6 = uVar6 - 1;
-      } while (uVar6 != 0);
+        remainingQwords = remainingQwords - 1;
+      } while (remainingQwords != 0);
     }
     break;
   case 5:
   case 8:
-    iVar2 = iVar5 * 2;
+    iVar2 = vertexSizeThenSavedByteCount * 2;
     iVar4 = 0;
-    iVar3 = *(int *)(glContext + 0x4858);
-    iVar1 = iVar5 * -2;
-    iVar5 = iVar2;
+    vertexWriteCursor = *(int *)(glContext + 0x4858);
+    iVar1 = vertexSizeThenSavedByteCount * -2;
+    vertexSizeThenSavedByteCount = iVar2;
     if (0 < iVar2) {
-      uVar6 = iVar2 + 7U >> 3;
+      remainingQwords = iVar2 + 7U >> 3;
       do {
-        *(undefined8 *)((int)local_220 + iVar4) = *(undefined8 *)(iVar3 + iVar1 + iVar4);
+        *(undefined8 *)((int)savedVertexBytes + iVar4) = *(undefined8 *)(vertexWriteCursor + iVar1 + iVar4);
         iVar4 = iVar4 + 8;
-        uVar6 = uVar6 - 1;
-      } while (uVar6 != 0);
+        remainingQwords = remainingQwords - 1;
+      } while (remainingQwords != 0);
     }
     break;
   case 6:
     iVar2 = 0;
     iVar4 = *(int *)(glContext + 0x4858);
     iVar1 = *(int *)(glContext + 0x4868);
-    if (0 < iVar5) {
+    if (0 < vertexSizeThenSavedByteCount) {
       do {
-        *(undefined8 *)((int)local_220 + iVar2) = *(undefined8 *)(iVar1 + iVar2);
+        *(undefined8 *)((int)savedVertexBytes + iVar2) = *(undefined8 *)(iVar1 + iVar2);
         iVar2 = iVar2 + 8;
-      } while (iVar2 < iVar5);
+      } while (iVar2 < vertexSizeThenSavedByteCount);
     }
     iVar2 = 0;
-    if (0 < iVar5) {
-      uVar6 = iVar5 + 7U >> 3;
+    if (0 < vertexSizeThenSavedByteCount) {
+      remainingQwords = vertexSizeThenSavedByteCount + 7U >> 3;
       do {
-        *(undefined8 *)((int)local_220 + iVar2 + iVar5) = *(undefined8 *)((iVar4 - iVar5) + iVar2);
+        *(undefined8 *)((int)savedVertexBytes + iVar2 + vertexSizeThenSavedByteCount) = *(undefined8 *)((iVar4 - vertexSizeThenSavedByteCount) + iVar2);
         iVar2 = iVar2 + 8;
-        uVar6 = uVar6 - 1;
-      } while (uVar6 != 0);
+        remainingQwords = remainingQwords - 1;
+      } while (remainingQwords != 0);
     }
     break;
   case 9:
     iVar2 = 0;
     iVar4 = *(int *)(glContext + 0x4858);
     iVar1 = *(int *)(glContext + 0x4868);
-    if (0 < iVar5) {
+    if (0 < vertexSizeThenSavedByteCount) {
       do {
-        *(undefined8 *)((int)local_220 + iVar2) = *(undefined8 *)(iVar1 + iVar2);
+        *(undefined8 *)((int)savedVertexBytes + iVar2) = *(undefined8 *)(iVar1 + iVar2);
         iVar2 = iVar2 + 8;
-      } while (iVar2 < iVar5);
+      } while (iVar2 < vertexSizeThenSavedByteCount);
     }
     iVar2 = 0;
-    iVar4 = iVar4 - iVar5;
-    if (0 < iVar5) {
-      uVar6 = iVar5 + 7U >> 3;
+    iVar4 = iVar4 - vertexSizeThenSavedByteCount;
+    if (0 < vertexSizeThenSavedByteCount) {
+      remainingQwords = vertexSizeThenSavedByteCount + 7U >> 3;
       do {
-        *(undefined8 *)((int)local_220 + iVar2 + iVar5) = *(undefined8 *)(iVar4 + iVar2);
+        *(undefined8 *)((int)savedVertexBytes + iVar2 + vertexSizeThenSavedByteCount) = *(undefined8 *)(iVar4 + iVar2);
         iVar2 = iVar2 + 8;
-        uVar6 = uVar6 - 1;
-      } while (uVar6 != 0);
+        remainingQwords = remainingQwords - 1;
+      } while (remainingQwords != 0);
     }
     if ((*(short *)(glContext + 0x34d2) == 0x1b01) || (*(short *)(glContext + 0x34d0) == 0x1b01)) {
       *(undefined1 *)(iVar4 + *(short *)(glContext + 0x487e)) = 0;
     }
   }
   (**(code **)(glContext + 0x4a08))(glContext);
-  local_20[0] = *(int *)(glContext + 0x4a14);
+  bufferVertexCapacity[0] = *(int *)(glContext + 0x4a14);
   iVar2 = (**(code **)(glContext + 0x46e8))
-                    (*(undefined4 *)(glContext + 0x4688),(int)*(short *)(glContext + 0x4a10),local_20);
+                    (*(undefined4 *)(glContext + 0x4688),(int)*(short *)(glContext + 0x4a10),bufferVertexCapacity);
   *(int *)(glContext + 0x4868) = iVar2;
-  *(int *)(glContext + 0x485c) = iVar2 + *(short *)(glContext + 0x487c) * local_20[0];
+  *(int *)(glContext + 0x485c) = iVar2 + *(short *)(glContext + 0x487c) * bufferVertexCapacity[0];
   switch(*(undefined2 *)(glContext + 0x4a10)) {
   default:
     goto switchD_000f37d0_caseD_0;
   case 2:
   case 3:
     iVar1 = 0;
-    if (0 < iVar5) {
-      uVar6 = iVar5 + 7U >> 3;
+    if (0 < vertexSizeThenSavedByteCount) {
+      remainingQwords = vertexSizeThenSavedByteCount + 7U >> 3;
       do {
-        *(undefined8 *)(iVar2 + iVar1) = *(undefined8 *)((int)local_220 + iVar1);
+        *(undefined8 *)(iVar2 + iVar1) = *(undefined8 *)((int)savedVertexBytes + iVar1);
         iVar1 = iVar1 + 8;
-        uVar6 = uVar6 - 1;
-      } while (uVar6 != 0);
+        remainingQwords = remainingQwords - 1;
+      } while (remainingQwords != 0);
     }
     break;
   case 9:
     if ((*(short *)(glContext + 0x34d2) == 0x1b01) || (*(short *)(glContext + 0x34d0) == 0x1b01)) {
-      *(undefined1 *)((int)local_220 + (int)*(short *)(glContext + 0x487e)) = 0;
+      *(undefined1 *)((int)savedVertexBytes + (int)*(short *)(glContext + 0x487e)) = 0;
     }
   case 6:
-    iVar5 = iVar5 << 1;
+    vertexSizeThenSavedByteCount = vertexSizeThenSavedByteCount << 1;
   case 5:
   case 8:
     iVar1 = 0;
-    if (0 < iVar5) {
-      uVar6 = iVar5 + 7U >> 3;
+    if (0 < vertexSizeThenSavedByteCount) {
+      remainingQwords = vertexSizeThenSavedByteCount + 7U >> 3;
       do {
-        *(undefined8 *)(iVar2 + iVar1) = *(undefined8 *)((int)local_220 + iVar1);
+        *(undefined8 *)(iVar2 + iVar1) = *(undefined8 *)((int)savedVertexBytes + iVar1);
         iVar1 = iVar1 + 8;
-        uVar6 = uVar6 - 1;
-      } while (uVar6 != 0);
+        remainingQwords = remainingQwords - 1;
+      } while (remainingQwords != 0);
     }
   }
-  iVar2 = iVar2 + iVar5;
+  iVar2 = iVar2 + vertexSizeThenSavedByteCount;
 switchD_000f37d0_caseD_0:
   *(int *)(glContext + 0x4858) = iVar2;
   *(undefined4 *)(glContext + 0x486c) = 0;

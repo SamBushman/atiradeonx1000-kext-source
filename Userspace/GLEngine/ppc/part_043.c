@@ -1,100 +1,100 @@
 #include "decls.h"
 
 /* _gleFeedbackLineStrip @ 0xcc278 (284 bytes) */
-void _gleFeedbackLineStrip(glContext, param_2, param_3, param_4)
+void _gleFeedbackLineStrip(glContext, vertices, vertexCount, lineResetMode)
   undefined4 glContext;
-  int param_2;
-  int param_3;
-  int param_4;
+  int vertices;
+  int vertexCount;
+  int lineResetMode;
 {
-  double dVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
+  double intToDoubleBias;
+  undefined4 firstSegmentToken;
+  undefined4 nextSegmentToken;
+  uint lastVertexAddr;
+  uint segmentStartVertex;
+  uint segmentEndVertex;
   
-  dVar1 = DOUBLE_00108d70;
-  if (1 < param_3) {
-    if (param_4 == 0) {
-      uVar3 = 0x702;
-      uVar2 = 0x702;
+  intToDoubleBias = DOUBLE_00108d70;
+  if (1 < vertexCount) {
+    if (lineResetMode == 0) {
+      nextSegmentToken = 0x702;
+      firstSegmentToken = 0x702;
     }
-    else if (param_4 == 1) {
-      uVar2 = 0x707;
-      uVar3 = 0x702;
+    else if (lineResetMode == 1) {
+      firstSegmentToken = 0x707;
+      nextSegmentToken = 0x702;
     }
     else {
-      uVar3 = 0x707;
-      uVar2 = 0x707;
+      nextSegmentToken = 0x707;
+      firstSegmentToken = 0x707;
     }
-    uVar5 = param_2 + 0x100;
-    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar2) - DOUBLE_00108d70))
+    segmentStartVertex = vertices + 0x100;
+    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,firstSegmentToken) - DOUBLE_00108d70))
     ;
-    _gleFeedbackHitRecord(glContext,param_2);
-    _gleFeedbackHitRecord(glContext,uVar5);
-    uVar4 = (param_2 + param_3 * 0x100) - 0x100;
-    if (uVar5 < uVar4) {
+    _gleFeedbackHitRecord(glContext,vertices);
+    _gleFeedbackHitRecord(glContext,segmentStartVertex);
+    lastVertexAddr = (vertices + vertexCount * 0x100) - 0x100;
+    if (segmentStartVertex < lastVertexAddr) {
       do {
-        uVar6 = uVar5 + 0x100;
-        ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar3) - dVar1));
-        _gleFeedbackHitRecord(glContext,uVar5);
-        _gleFeedbackHitRecord(glContext,uVar6);
-        uVar5 = uVar6;
-      } while (uVar6 < uVar4);
+        segmentEndVertex = segmentStartVertex + 0x100;
+        ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,nextSegmentToken) - intToDoubleBias));
+        _gleFeedbackHitRecord(glContext,segmentStartVertex);
+        _gleFeedbackHitRecord(glContext,segmentEndVertex);
+        segmentStartVertex = segmentEndVertex;
+      } while (segmentEndVertex < lastVertexAddr);
     }
   }
   return;
 }
 
 /* _gleFeedbackLineLoop @ 0xcc394 (344 bytes) */
-void _gleFeedbackLineLoop(glContext, param_2, param_3, param_4)
+void _gleFeedbackLineLoop(glContext, vertices, vertexCount, lineResetMode)
   undefined4 glContext;
-  int param_2;
-  int param_3;
-  int param_4;
+  int vertices;
+  int vertexCount;
+  int lineResetMode;
 {
-  double dVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  uint uVar4;
+  double intToDoubleBias;
+  undefined4 firstSegmentToken;
+  undefined4 nextSegmentToken;
+  uint lastVertexAddr;
   uint uVar5;
-  uint uVar6;
+  uint segmentStartVertex;
   
-  dVar1 = DOUBLE_00108d70;
-  if (0 < param_3) {
-    if (param_4 == 0) {
-      uVar3 = 0x702;
-      uVar2 = 0x702;
+  intToDoubleBias = DOUBLE_00108d70;
+  if (0 < vertexCount) {
+    if (lineResetMode == 0) {
+      nextSegmentToken = 0x702;
+      firstSegmentToken = 0x702;
     }
-    else if (param_4 == 1) {
-      uVar2 = 0x707;
-      uVar3 = 0x702;
+    else if (lineResetMode == 1) {
+      firstSegmentToken = 0x707;
+      nextSegmentToken = 0x702;
     }
     else {
-      uVar3 = 0x707;
-      uVar2 = 0x707;
+      nextSegmentToken = 0x707;
+      firstSegmentToken = 0x707;
     }
-    uVar5 = param_2 + 0x100;
-    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar2) - DOUBLE_00108d70))
+    uVar5 = vertices + 0x100;
+    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,firstSegmentToken) - DOUBLE_00108d70))
     ;
-    _gleFeedbackHitRecord(glContext,param_2);
+    _gleFeedbackHitRecord(glContext,vertices);
     _gleFeedbackHitRecord(glContext,uVar5);
-    uVar4 = (param_2 + param_3 * 0x100) - 0x100;
-    if (uVar5 < uVar4) {
-      uVar6 = uVar5;
+    lastVertexAddr = (vertices + vertexCount * 0x100) - 0x100;
+    if (uVar5 < lastVertexAddr) {
+      segmentStartVertex = uVar5;
       do {
-        uVar5 = uVar6 + 0x100;
-        ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar3) - dVar1));
-        _gleFeedbackHitRecord(glContext,uVar6);
+        uVar5 = segmentStartVertex + 0x100;
+        ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,nextSegmentToken) - intToDoubleBias));
+        _gleFeedbackHitRecord(glContext,segmentStartVertex);
         _gleFeedbackHitRecord(glContext,uVar5);
-        uVar6 = uVar5;
-      } while (uVar5 < uVar4);
+        segmentStartVertex = uVar5;
+      } while (uVar5 < lastVertexAddr);
     }
-    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar3) - DOUBLE_00108d70))
+    ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,nextSegmentToken) - DOUBLE_00108d70))
     ;
     _gleFeedbackHitRecord(glContext,uVar5);
-    _gleFeedbackHitRecord(glContext,param_2);
+    _gleFeedbackHitRecord(glContext,vertices);
   }
   return;
 }

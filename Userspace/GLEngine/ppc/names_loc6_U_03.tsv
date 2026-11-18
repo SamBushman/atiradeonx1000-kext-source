@@ -1,0 +1,23 @@
+local	_glePPLogParameters	iVar10	paramEntryPtr	INFERRED	paramIndex*8+paramEntries: address of the 8-byte parameter entry being logged (entry words are passed to _glePPLogParam as paramWord/paramWord2 and written back at +4/+6)
+local	_glePPLogParameters	uVar13	remainingParams	INFERRED	for-loop counter initialised to paramCount and decremented once per entry while the entry word is masked with 0xff1fffff
+local	_glePPLogParameters	local_70	paramWord	CONFIRMED	entry word 0 passed as the paramWord argument of _glePPLogParam and stored back to the entry
+local	_glePPLogParameters	local_6c	paramWord2	CONFIRMED	entry word 1 high half passed as the paramWord2 argument of _glePPLogParam and stored back to the entry
+local	_glMapBuffer_Exec	local_30	mappedAddress	CONFIRMED	local_30[0] starts as the buffer object data pointer (+0x30), is the out argument of _vm_allocate and is the function's return value (the mapped pointer)
+local	_glMapBuffer_Exec	iVar6	bufferObjectThenDirtyWordCursor	INFERRED	buffer object selected by target (ctx+0x4a68/0x4a6c or client state +0x358/+0x35c); in the per-renderer loops it is stepped by 4 to walk the dirty words at buffer+0x48
+local	_glMapBuffer_Exec	iVar4	rendererSlotCursor	INFERRED	ctx+0x10000 stepped by 0x2e0 per renderer (the renderer slot stride used for ctx+0x8884/0x85ac in other functions)
+local	_glMapBuffer_Exec	piVar1	rendererFuncTableSlot	INFERRED	address ctx+0x8884+k*0x2e0 holding the renderer function table; entry +0x1c4 is called with the renderer handle, 3 and the buffer handle
+local	_glMapBuffer_Exec	puVar2	rendererHandleSlot	INFERRED	address ctx+0x85ac+k*0x2e0 holding the renderer handle passed as first argument of the +0x1c4 callback
+local	_glBufferData_Exec_body	avStack_40	allocatedAddress	CONFIRMED	avStack_40[0] is the out argument of _vm_allocate, optionally filled by _memcpy from data and stored as the buffer data pointer at +0x30
+local	_glBufferData_Exec_body	uVar3	uploadSource	INFERRED	data pointer (buffer+0x30) or 0 when no data/size, third argument of the renderer callback ctx+0x481c(handle, bufferHandle, source, bufferSize)
+local	_glBufferData_Exec_body	uVar5	bufferDirtyBits	INFERRED	0 (empty buffer) or 3 (new allocation): OR-ed into the per-renderer dirty words at buffer+0x48 in the final loop
+local	_glBufferData_Exec_body	iVar6	bufferObjectThenDirtyWordCursor	INFERRED	buffer object selected by target (ctx+0x4a68/0x4a6c or client state +0x358/+0x35c); in the final loop it is stepped by 4 to walk the dirty words at buffer+0x48
+local	_glWeightPointerARB_Exec	uVar7	arrayFormatWordThenDispatchMask	INFERRED	starts as the packed array format stride<<7|type&0xf|(size&3)<<4 compared with the cached client-state word at +0xbc and stored there; at the end it is reused as the -(x==0) select mask for the dispatch slot
+local	_glWeightPointerARB_Exec	iVar8	boundArrayBuffer	INFERRED	client state +0x358 (the buffer bound to GL_ARRAY_BUFFER): refcounted into +0x374, its handles (+0x10) are copied to the per-renderer array records and its data pointer (+0x30) is added to pointer
+local	_glWeightPointerARB_Exec	iVar3	previousArrayBufferThenElementSize	INFERRED	client state +0x374 (previously bound weight-array buffer, refcount at +8 decremented and freed at 0); after the type switch it holds the element size 1/2/4/8
+local	_glWeightPointerARB_Exec	iVar2	remainingRefCount	INFERRED	refcount (+8) of the previous buffer after the decrement, compared with 0 to free the buffer object
+local	_glWeightPointerARB_Exec	uVar1	bufferHandle	INFERRED	per-renderer handle word read from buffer+0x10.. and copied into the client state array records
+local	_glProgramLocalParameter4dvARB_Exec	iVar6	programKindSlot	INFERRED	ctx + kind*4 (kind 0 = GL_VERTEX_PROGRAM_ARB 0x8620, 1 = fragment): +0x5420 of it is the current program record that receives the parameter
+local	_glProgramLocalParameter4dvARB_Exec	iVar7	dirtyBitWordBase	INFERRED	ctx + ((bit>>3)&0x1c): the word of the dirty bit array at +0x324 that gets the bit set
+local	_glProgramLocalParameter4dvARB_Exec	bVar1	dirtyBitIndex	INFERRED	byte looked up from the program's per-parameter table (+0x58 / +0x8c): bit>>3&0x1c selects the dirty word and bit&0x1f the bit set in the +0x324/+0x348 dirty arrays
+local	_glGetRenderbufferParameterivEXT_Exec	local_20	parameterValue	CONFIRMED	the single value computed from pname (width/height/format-derived size) and stored to *params at the end
+local	_glGetRenderbufferParameterivEXT_Exec	local_1c	queriedFormat	INFERRED	out buffer of the renderer query with selector 0x1003; its value is compared with the 0x8d46..0x8d49 stencil-index formats to derive the bit size placed in parameterValue

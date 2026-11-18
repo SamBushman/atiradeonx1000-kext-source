@@ -1238,8 +1238,8 @@ void _glGetRenderbufferParameterivEXT_Exec(glContext, target, pname, params)
   undefined4 glErrorCode;
   int iVar3;
   int iVar4;
-  uint local_20;
-  int local_1c [5];
+  uint parameterValue;
+  int queriedFormat [5];
   
   iVar4 = *(int *)(glContext + 0x7448);
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -1263,18 +1263,18 @@ switchD_00066504_caseD_8d45:
   if (iVar4 == 0) goto LAB_000664c4;
   switch(pname) {
   case 0x8d42:
-    local_20 = (uint)*(ushort *)(iVar4 + 0xd8);
+    parameterValue = (uint)*(ushort *)(iVar4 + 0xd8);
     break;
   case 0x8d43:
-    local_20 = (uint)*(ushort *)(iVar4 + 0xda);
+    parameterValue = (uint)*(ushort *)(iVar4 + 0xda);
     break;
   case 0x8d44:
     iVar4 = (uint)*(byte *)(glContext + 0x85a8) * 4 + iVar4;
     (**(code **)(glContext + 0x479c))
               (*(undefined4 *)(glContext + 0x4688),*(undefined4 *)(iVar4 + 0x10),0,0,((unsigned char *)0x00001003U),
-               &local_20,iVar4);
-    if (local_20 == 0) {
-      local_20 = 0x1908;
+               &parameterValue,iVar4);
+    if (parameterValue == 0) {
+      parameterValue = 0x1908;
     }
     break;
   default:
@@ -1298,31 +1298,31 @@ LAB_000665d0:
     iVar4 = (uint)*(byte *)(glContext + 0x85a8) * 4 + iVar4;
     (**(code **)(glContext + 0x479c))
               (*(undefined4 *)(glContext + 0x4688),*(undefined4 *)(iVar4 + 0x10),0,0,((unsigned char *)0x00001003U),
-               local_1c,iVar4);
-    if (local_1c[0] == 0x8d47) {
-      local_20 = 4;
+               queriedFormat,iVar4);
+    if (queriedFormat[0] == 0x8d47) {
+      parameterValue = 4;
     }
     else {
-      if (local_1c[0] < 0x8d48) {
-        if (local_1c[0] == 0x8d46) {
-          local_20 = 1;
+      if (queriedFormat[0] < 0x8d48) {
+        if (queriedFormat[0] == 0x8d46) {
+          parameterValue = 1;
           break;
         }
       }
       else {
-        if (local_1c[0] == 0x8d48) {
-          local_20 = 8;
+        if (queriedFormat[0] == 0x8d48) {
+          parameterValue = 8;
           break;
         }
-        if (local_1c[0] == 0x8d49) {
-          local_20 = 0x10;
+        if (queriedFormat[0] == 0x8d49) {
+          parameterValue = 0x10;
           break;
         }
       }
-      local_20 = 0;
+      parameterValue = 0;
     }
   }
-  *params = local_20;
+  *params = parameterValue;
   return;
 }
 

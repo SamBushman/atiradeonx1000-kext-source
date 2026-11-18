@@ -603,13 +603,13 @@ void _glProgramLocalParameter4dvARB_Exec(glContext, target, index, params)
   uint index;
   double *params;
 {
-  byte bVar1;
+  byte dirtyBitIndex;
   uint uVar2;
   undefined4 glErrorCode;
   int iVar4;
   int iVar5;
-  int iVar6;
-  int iVar7;
+  int programKindSlot;
+  int dirtyBitWordBase;
   
   if (target == 0x8620) {
     iVar5 = 0;
@@ -618,25 +618,25 @@ void _glProgramLocalParameter4dvARB_Exec(glContext, target, index, params)
 LAB_0007a1e8:
       *(uint *)(glContext + 0x31c) = uVar2;
       if (*(int *)(glContext + 0x5434) == 0) {
-        bVar1 = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x58);
+        dirtyBitIndex = *(byte *)(index + *(int *)(glContext + 0x5420) + 0x58);
       }
       else {
-        bVar1 = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x8c);
+        dirtyBitIndex = *(byte *)(index + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x8c);
       }
-      iVar7 = (bVar1 >> 3 & 0x1c) + glContext;
+      dirtyBitWordBase = (dirtyBitIndex >> 3 & 0x1c) + glContext;
       iVar4 = *(int *)(glContext + 0x5424);
-      iVar6 = iVar5 * 4 + glContext;
-      *(uint *)(iVar7 + 0x324) = *(uint *)(iVar7 + 0x324) | 1 << (bVar1 & 0x1f);
-      bVar1 = *(byte *)(index + iVar4 + 0x58);
-      iVar5 = (bVar1 >> 3 & 0x1c) + glContext;
-      *(uint *)(iVar5 + 0x348) = *(uint *)(iVar5 + 0x348) | 1 << (bVar1 & 0x1f);
-      iVar5 = *(int *)(*(int *)(iVar6 + 0x5420) + 0x4e0);
+      programKindSlot = iVar5 * 4 + glContext;
+      *(uint *)(dirtyBitWordBase + 0x324) = *(uint *)(dirtyBitWordBase + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+      dirtyBitIndex = *(byte *)(index + iVar4 + 0x58);
+      iVar5 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+      *(uint *)(iVar5 + 0x348) = *(uint *)(iVar5 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
+      iVar5 = *(int *)(*(int *)(programKindSlot + 0x5420) + 0x4e0);
       *(float *)(iVar5 + index * 0x10) = (float)*params;
       iVar5 = iVar5 + index * 0x10;
       *(float *)(iVar5 + 4) = (float)params[1];
       *(float *)(iVar5 + 8) = (float)params[2];
       *(float *)(iVar5 + 0xc) = (float)params[3];
-      _gleModifyPluginPipelineProgram(glContext,*(int *)(iVar6 + 0x5420) + 0x10,2);
+      _gleModifyPluginPipelineProgram(glContext,*(int *)(programKindSlot + 0x5420) + 0x10,2);
       return;
     }
   }

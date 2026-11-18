@@ -3895,13 +3895,13 @@ void _glePPLogParameters(glContext, program, paramCount, paramEntries, paramArra
   uint bankIndex;
   int sharedState;
   uint rangeEnd;
-  int iVar10;
+  int paramEntryPtr;
   uint loopIndex2;
   uint paramIndex;
-  uint uVar13;
+  uint remainingParams;
   undefined4 blockedSlotBits [12];
-  uint local_70;
-  uint local_6c;
+  uint paramWord;
+  uint paramWord2;
   uint arrayStartWord;
   uint arrayEndWord;
   
@@ -3933,7 +3933,7 @@ void _glePPLogParameters(glContext, program, paramCount, paramEntries, paramArra
       remaining = remaining + -1;
     } while (remaining != 0);
     loopIndex = 0;
-    for (uVar13 = paramCount; uVar13 != 0; uVar13 = uVar13 - 1) {
+    for (remainingParams = paramCount; remainingParams != 0; remainingParams = remainingParams - 1) {
       iVar5 = loopIndex * 8;
       loopIndex = loopIndex + 1;
       *(uint *)(iVar5 + paramEntries) = *(uint *)(iVar5 + paramEntries) & 0xff1fffff;
@@ -3948,27 +3948,27 @@ void _glePPLogParameters(glContext, program, paramCount, paramEntries, paramArra
         rangeEnd = (arrayEndWord & 0xffff) + 1;
         if (loopIndex3 <= loopIndex5) {
           iVar5 = paramIndex * 8;
-          iVar10 = iVar5 + paramEntries;
-          local_70 = *(undefined4 *)(iVar5 + paramEntries);
-          local_6c = *(uint *)(iVar10 + 4) & 0xffff0000;
-          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,bankIndex,local_70,local_6c,rangeEnd - paramIndex,0xffffffff,
+          paramEntryPtr = iVar5 + paramEntries;
+          paramWord = *(undefined4 *)(iVar5 + paramEntries);
+          paramWord2 = *(uint *)(paramEntryPtr + 4) & 0xffff0000;
+          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,bankIndex,paramWord,paramWord2,rangeEnd - paramIndex,0xffffffff,
                                  blockedSlotBits,lastSlot);
           if (iVar2 < 0) break;
           paramIndex = paramIndex + 1;
-          *(uint *)(iVar5 + paramEntries) = local_70;
-          *(uint *)(iVar10 + 4) = local_6c;
-          *(short *)(iVar10 + 6) = (short)iVar2;
+          *(uint *)(iVar5 + paramEntries) = paramWord;
+          *(uint *)(paramEntryPtr + 4) = paramWord2;
+          *(short *)(paramEntryPtr + 6) = (short)iVar2;
           *(uint *)(iVar5 + paramEntries) = *(uint *)(iVar5 + paramEntries) & 0xff1fffff | 0x200000;
         }
         for (; paramIndex < rangeEnd; paramIndex = paramIndex + 1) {
           iVar5 = paramIndex * 8;
-          iVar10 = iVar5 + paramEntries;
-          local_70 = *(undefined4 *)(iVar5 + paramEntries);
-          local_6c = *(uint *)(iVar10 + 4) & 0xffff0000;
-          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,bankIndex,local_70,local_6c,1,iVar2 + 1,blockedSlotBits,lastSlot);
-          *(uint *)(iVar5 + paramEntries) = local_70;
-          *(uint *)(iVar10 + 4) = local_6c;
-          *(short *)(iVar10 + 6) = (short)iVar2;
+          paramEntryPtr = iVar5 + paramEntries;
+          paramWord = *(undefined4 *)(iVar5 + paramEntries);
+          paramWord2 = *(uint *)(paramEntryPtr + 4) & 0xffff0000;
+          iVar2 = ((int (*)())_glePPLogParam)(glContext,sharedState,bankIndex,paramWord,paramWord2,1,iVar2 + 1,blockedSlotBits,lastSlot);
+          *(uint *)(iVar5 + paramEntries) = paramWord;
+          *(uint *)(paramEntryPtr + 4) = paramWord2;
+          *(short *)(paramEntryPtr + 6) = (short)iVar2;
           *(uint *)(iVar5 + paramEntries) = *(uint *)(iVar5 + paramEntries) & 0xff1fffff | 0x200000;
         }
         loopIndex5 = loopIndex5 + 1;
@@ -3979,14 +3979,14 @@ void _glePPLogParameters(glContext, program, paramCount, paramEntries, paramArra
       if (paramCount != 0) {
         do {
           iVar2 = loopIndex4 * 8;
-          local_70 = *(uint *)(iVar2 + paramEntries);
+          paramWord = *(uint *)(iVar2 + paramEntries);
           iVar5 = iVar2 + paramEntries;
-          if ((local_70 >> 0x15 & 7) == 0) {
-            local_6c = *(uint *)(iVar5 + 4) & 0xffff0000;
-            slotResult = ((int (*)())_glePPLogParam)(glContext,sharedState,bankIndex,local_70,local_6c,1,0xffffffff,blockedSlotBits,lastSlot
+          if ((paramWord >> 0x15 & 7) == 0) {
+            paramWord2 = *(uint *)(iVar5 + 4) & 0xffff0000;
+            slotResult = ((int (*)())_glePPLogParam)(glContext,sharedState,bankIndex,paramWord,paramWord2,1,0xffffffff,blockedSlotBits,lastSlot
                                   );
-            *(uint *)(iVar2 + paramEntries) = local_70;
-            *(uint *)(iVar5 + 4) = local_6c;
+            *(uint *)(iVar2 + paramEntries) = paramWord;
+            *(uint *)(iVar5 + 4) = paramWord2;
             *(undefined2 *)(iVar5 + 6) = slotResult;
             *(uint *)(iVar2 + paramEntries) = *(uint *)(iVar2 + paramEntries) & 0xff1fffff | 0x200000;
           }
