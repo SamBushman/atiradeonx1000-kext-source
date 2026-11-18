@@ -374,13 +374,13 @@ void _glCopyConvolutionFilter1D_Exec(glContext, target, internalformat, x, y, wi
   double extraout_f1_01;
   double dVar11;
   double extraout_f1_02;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   undefined1 auStack_e0 [188];
   
   uVar3 = x;
@@ -399,8 +399,8 @@ void _glCopyConvolutionFilter1D_Exec(glContext, target, internalformat, x, y, wi
       piVar10 = (int *)(glContext + 0x310);
       cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((iVar6 != 0) && (*(int *)(iVar6 + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar6 + 0x10,internalformat,uVar3,uVar7,uVar9,iVar8,dVar11,in_f2,in_f3,in_f4,
-                   in_f5,in_f6,in_f7,in_f8);
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar6 + 0x10,internalformat,uVar3,uVar7,uVar9,iVar8,dVar11,incomingFpr2,incomingFpr3,incomingFpr4,
+                   incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         dVar11 = dVar11;
       }
@@ -484,8 +484,8 @@ LAB_00069ab8:
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((target == 0x8010) && (iVar5 != 0)) {
       if (width < 0xc) {
-        ((void (*)())_glReadPixels_Exec)(glContext,x,y,width,1,iVar5,0x1406,auStack_e0,dVar11,in_f2,
-                           in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+        ((void (*)())_glReadPixels_Exec)(glContext,x,y,width,1,iVar5,0x1406,auStack_e0,dVar11,incomingFpr2,
+                           incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
         ((void (*)())_glConvolutionFilter1D_Exec)(glContext,0x8010,iVar5,width,iVar5,0x1406,auStack_e0);
         return;
       }
@@ -541,13 +541,13 @@ void _glCopyConvolutionFilter2D_Exec(glContext, target, internalformat, x, y, wi
   double extraout_f1_01;
   double dVar12;
   double extraout_f1_02;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   undefined1 auStack_7c0 [1944];
   
   uVar3 = x;
@@ -566,8 +566,8 @@ void _glCopyConvolutionFilter2D_Exec(glContext, target, internalformat, x, y, wi
       piVar11 = (int *)(glContext + 0x310);
       cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((iVar6 != 0) && (*(int *)(iVar6 + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar6 + 0x10,internalformat,uVar3,uVar7,iVar9,iVar8,dVar12,in_f2,in_f3,in_f4,
-                   in_f5,in_f6,in_f7,in_f8);
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar6 + 0x10,internalformat,uVar3,uVar7,iVar9,iVar8,dVar12,incomingFpr2,incomingFpr3,incomingFpr4,
+                   incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         dVar12 = dVar12;
       }
@@ -652,7 +652,7 @@ LAB_00069df4:
     if ((target == 0x8011) && (iVar5 != 0)) {
       if (((width < 0xc) && (height < 0xc)) && ((-1 < width && (-1 < height)))) {
         ((void (*)())_glReadPixels_Exec)(glContext,x,y,width,height,iVar5,0x1406,auStack_7c0,dVar12,
-                           in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+                           incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
         ((void (*)())_glConvolutionFilter2D_Exec)(glContext,0x8011,iVar5,width,height,iVar5,0x1406,auStack_7c0);
         return;
       }
@@ -1747,13 +1747,13 @@ void _glLightf_CompExec(undefined4 glContext,undefined4 light,undefined4 pname,f
 }
 
 /* _glLightfv_ListExec @ 0x6b7e8 (52 bytes) */
-undefined4 _glLightfv_ListExec(undefined4 glContext,undefined4 *recordedArgs,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10)
+undefined4 _glLightfv_ListExec(undefined4 glContext,undefined4 *recordedArgs,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
+  double incomingStack_ffffffb8;
+  double incomingStack_ffffffc0;
   
-  ((void (*)())_glLightfv_Exec)(glContext,*recordedArgs,recordedArgs[1],recordedArgs + 2,fparam_1,fparam_2,fparam_3,fparam_4,
-                  fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffb8,in_stack_ffffffc0);
+  ((void (*)())_glLightfv_Exec)(glContext,*recordedArgs,recordedArgs[1],recordedArgs + 2,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
+                  forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0);
   return 0x18;
 }
 
@@ -1804,32 +1804,32 @@ void _glLightfv_CompExec(glContext, light, pname, params)
   undefined4 params;
 {
   undefined4 in_LR;
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glLightfv_Comp)(glContext,light,pname,params);
-  ((void (*)())_glLightfv_Exec)(glContext,light,pname,params,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8
+  ((void (*)())_glLightfv_Exec)(glContext,light,pname,params,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8
                   ,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)));
   return;
 }
 
 /* _glLighti_ListExec @ 0x6b954 (52 bytes) */
-undefined4 _glLighti_ListExec(undefined4 glContext,undefined4 *recordedArgs,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+undefined4 _glLighti_ListExec(undefined4 glContext,undefined4 *recordedArgs,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
-  double in_stack_ffffffc8;
-  double in_stack_ffffffd0;
+  double incomingStack_ffffffb8;
+  double incomingStack_ffffffc0;
+  double incomingStack_ffffffc8;
+  double incomingStack_ffffffd0;
   
-  ((double (*)())_glLighti_Exec)(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],fparam_1,fparam_2,fparam_3,fparam_4,fparam_5
-                 ,fparam_6,fparam_7,fparam_8,in_stack_ffffffb8,in_stack_ffffffc0,in_stack_ffffffc8,
-                 in_stack_ffffffd0);
+  ((double (*)())_glLighti_Exec)(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5
+                 ,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8,
+                 incomingStack_ffffffd0);
   return 0xc;
 }
 
@@ -1852,7 +1852,7 @@ int _glLighti_Comp(glContext, light, pname, param)
 }
 
 /* _glLighti_Exec @ 0x6b9e4 (756 bytes) */
-double _glLighti_Exec(int glContext,int light,undefined4 pname,uint param,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+double _glLighti_Exec(int glContext,int light,undefined4 pname,uint param,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
   float fVar1;
   byte bVar2;
@@ -1988,16 +1988,16 @@ void _glLighti_CompExec(glContext, light, pname, param)
 }
 
 /* _glLightiv_ListExec @ 0x6bd34 (52 bytes) */
-undefined4 _glLightiv_ListExec(undefined4 glContext,undefined4 *recordedArgs,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+undefined4 _glLightiv_ListExec(undefined4 glContext,undefined4 *recordedArgs,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
-  double in_stack_ffffffc8;
-  double in_stack_ffffffd0;
+  double incomingStack_ffffffb8;
+  double incomingStack_ffffffc0;
+  double incomingStack_ffffffc8;
+  double incomingStack_ffffffd0;
   
-  ((void (*)())_glLightiv_Exec)(glContext,*recordedArgs,recordedArgs[1],recordedArgs + 2,fparam_1,fparam_2,fparam_3,fparam_4,
-                  fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffb8,in_stack_ffffffc0,
-                  in_stack_ffffffc8,in_stack_ffffffd0);
+  ((void (*)())_glLightiv_Exec)(glContext,*recordedArgs,recordedArgs[1],recordedArgs + 2,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
+                  forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0,
+                  incomingStack_ffffffc8,incomingStack_ffffffd0);
   return 0x18;
 }
 
@@ -2041,7 +2041,7 @@ int _glLightiv_Comp(glContext, light, pname, params)
 }
 
 /* _glLightiv_Exec @ 0x6be58 (2268 bytes) */
-void _glLightiv_Exec(int glContext,int light,undefined4 pname,uint *params,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void _glLightiv_Exec(int glContext,int light,undefined4 pname,uint *params,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
   double intToDoubleMagic;
   float fVar1;
@@ -2056,8 +2056,8 @@ void _glLightiv_Exec(int glContext,int light,undefined4 pname,uint *params,doubl
   int iVar10;
   uint uVar11;
   double dVar12;
-  double in_stack_ffffffa8;
-  double in_stack_ffffffb0;
+  double incomingStack_ffffffa8;
+  double incomingStack_ffffffb0;
   
   dVar6 = DOUBLE_00108d88;
   intToDoubleMagic = DOUBLE_00108d58;
@@ -2191,7 +2191,7 @@ switchD_0006bed0_default:
          fVar1 * *(float *)(glContext + 0x1cfc) +
          (fVar5 * *(float *)(glContext + 0x1cec) +
          (fVar4 * *(float *)(glContext + 0x1ccc) + fVar3 * *(float *)(glContext + 0x1cdc)));
-    ((double (*)())_gleUpdateLightPosition)(glContext,uVar11,fparam_1);
+    ((double (*)())_gleUpdateLightPosition)(glContext,uVar11,forwardedFloatArg1);
     goto LAB_0006c730;
   case 0x1204:
     *(float *)(iVar8 + 0x2860) =
@@ -2200,8 +2200,8 @@ switchD_0006bed0_default:
          (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
     *(float *)(iVar8 + 0x2868) =
          (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
-    ((void (*)())_gleTransformLightDirection)(glContext,uVar11,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
-               fparam_8,in_stack_ffffffa8,in_stack_ffffffb0);
+    ((void (*)())_gleTransformLightDirection)(glContext,uVar11,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
+               forwardedFloatArg8,incomingStack_ffffffa8,incomingStack_ffffffb0);
     goto LAB_0006c730;
   case 0x1205:
     fVar1 = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);

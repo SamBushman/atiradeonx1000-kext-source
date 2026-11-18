@@ -1014,9 +1014,9 @@ int _gliChoosePixelFormat(pixelFormatListOut, attributes)
 }
 
 /* _gliQueryRendererInfo @ 0x2aa8 (292 bytes) */
-int _gliQueryRendererInfo(param_1, param_2)
+int _gliQueryRendererInfo(param_1, forwardedArg2)
   int *param_1;
-  undefined4 param_2;
+  undefined4 forwardedArg2;
 {
   int *allocatedBlock;
   int *cursor;
@@ -1052,7 +1052,7 @@ int _gliQueryRendererInfo(param_1, param_2)
     cursor2 = allocatedBlock + 0xe;
     cursor = allocatedBlock;
     do {
-      iVar4 = (*(code *)puVar2[0x48])(cursor,param_2);
+      iVar4 = (*(code *)puVar2[0x48])(cursor,forwardedArg2);
       if (iVar4 == 0) {
         loopIndex2 = loopIndex2 + 1;
         *cursor = (int)cursor2;
@@ -1160,15 +1160,15 @@ int _glepGetPlugin(pluginId)
 }
 
 /* _gliCreateContext @ 0x2d18 (1112 bytes) */
-int _gliCreateContext(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _gliCreateContext(param_1, param_2, param_3, param_4, param_5, param_6, unusedArg7, unusedArg8)
   int *param_1;
   int *param_2;
   int param_3;
   undefined4 param_4;
   undefined4 param_5;
   uint param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
   uint loopIndex3;
   int loopIndex2;
@@ -3302,9 +3302,9 @@ int _gleCreateTextureObject(param_1, texture)
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 incomingR6;
+  undefined4 incomingR7;
+  undefined4 incomingR8;
   int iVar3;
   
   iVar3 = 0;
@@ -3317,19 +3317,19 @@ int _gleCreateTextureObject(param_1, texture)
   puVar2[1] = texture;
   puVar2[2] = 1;
   puVar2[3] = puVar1;
-  ((void (*)())_gleInitializeGLTexture)(param_1,iVar3,puVar2 + 4,in_r6,in_r7,in_r8,1);
+  ((void (*)())_gleInitializeGLTexture)(param_1,iVar3,puVar2 + 4,incomingR6,incomingR7,incomingR8,1);
   return puVar2;
 }
 
 /* _gleInitializeGLTexture @ 0x5a90 (832 bytes) */
-void _gleInitializeGLTexture(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+void _gleInitializeGLTexture(param_1, param_2, param_3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   undefined4 param_1;
   int param_2;
   undefined4 *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   int loopIndex2;
   undefined1 uVar2;

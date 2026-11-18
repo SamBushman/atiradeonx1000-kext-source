@@ -951,17 +951,17 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
   undefined4 extraout_r4_06;
   undefined4 extraout_r4_07;
   int iVar3;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_f9;
-  double in_f10;
-  double in_f11;
-  double in_f12;
-  double in_f13;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingFpr9;
+  double incomingFpr10;
+  double incomingFpr11;
+  double incomingFpr12;
+  double incomingFpr13;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((u1 != u2) && (order - 1U < 10)) {
@@ -974,8 +974,8 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
             return;
           }
           ((void (*)())_gleMap1ColordLoad)(glContext,extraout_r4_01,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,
-                             listRecord,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,
-                             in_f10,in_f11,in_f12,in_f13);
+                             listRecord,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,
+                             incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -987,8 +987,8 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
             return;
           }
           ((void (*)())_gleMap1IndexdLoad)(glContext,extraout_r4_02,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,
-                             listRecord,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,
-                             in_f10,in_f11,in_f12,in_f13);
+                             listRecord,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,
+                             incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -1000,8 +1000,8 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
             return;
           }
           ((void (*)())_gleMap1NormaldLoad)(glContext,extraout_r4_03,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,
-                              listRecord,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,
-                              in_f10,in_f11,in_f12,in_f13);
+                              listRecord,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,
+                              incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -1013,8 +1013,8 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
             return;
           }
           ((void (*)())_gleMap1Texture1dLoad)(glContext,extraout_r4_04,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
-                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
-                     in_f12,in_f13);
+                     u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
+                     incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -1026,8 +1026,8 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
             return;
           }
           ((void (*)())_gleMap1Texture2dLoad)(glContext,extraout_r4_05,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
-                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
-                     in_f12,in_f13);
+                     u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
+                     incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -1039,8 +1039,8 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
             return;
           }
           ((void (*)())_gleMap1Texture3dLoad)(glContext,extraout_r4_06,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
-                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
-                     in_f12,in_f13);
+                     u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
+                     incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -1052,8 +1052,8 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
             return;
           }
           ((void (*)())_gleMap1Texture4dLoad)(glContext,extraout_r4_07,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
-                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
-                     in_f12,in_f13);
+                     u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
+                     incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -1065,8 +1065,8 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
             return;
           }
           ((void (*)())_gleMap1Vertex3dLoad)(glContext,extraout_r4,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
-                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
-                     in_f12,in_f13);
+                     u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
+                     incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -1078,8 +1078,8 @@ void _glMap1d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
             return;
           }
           ((void (*)())_gleMap1Vertex4dLoad)(glContext,extraout_r4_00,iVar3,u1ShadowLo,u2ShadowHi,stride,order,points,listRecord,
-                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
-                     in_f12,in_f13);
+                     u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
+                     incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -1113,17 +1113,17 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
   undefined4 glErrorCode;
   int mapData;
   int iVar3;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_f9;
-  double in_f10;
-  double in_f11;
-  double in_f12;
-  double in_f13;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingFpr9;
+  double incomingFpr10;
+  double incomingFpr11;
+  double incomingFpr12;
+  double incomingFpr13;
   
   mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -1133,63 +1133,63 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
       case 0:
         if (3 < stride) {
           ((void (*)())_gleMap1ColordLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
-                             mapData + 0x1c0,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                             in_f9,in_f10,in_f11,in_f12,in_f13);
+                             mapData + 0x1c0,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                             incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 1:
         if (0 < stride) {
           ((void (*)())_gleMap1IndexdLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
-                             mapData + 0x270,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                             in_f9,in_f10,in_f11,in_f12,in_f13);
+                             mapData + 0x270,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                             incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 2:
         if (2 < stride) {
           ((void (*)())_gleMap1NormaldLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,
-                              mapData + 0x138,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                              in_f9,in_f10,in_f11,in_f12,in_f13);
+                              mapData + 0x138,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                              incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 3:
         if (0 < stride) {
           ((void (*)())_gleMap1Texture1dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x2a8,
-                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
-                     in_f12,in_f13);
+                     u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
+                     incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 4:
         if (1 < stride) {
           ((void (*)())_gleMap1Texture2dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x2e0,
-                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
-                     in_f12,in_f13);
+                     u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
+                     incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 5:
         if (2 < stride) {
           ((void (*)())_gleMap1Texture3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x340,
-                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
-                     in_f12,in_f13);
+                     u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
+                     incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 6:
         if (3 < stride) {
           ((void (*)())_gleMap1Texture4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x3c8,
-                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
-                     in_f12,in_f13);
+                     u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
+                     incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 7:
         if (2 < stride) {
           ((void (*)())_gleMap1Vertex3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData,u1,
-                     u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13)
+                     u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13)
           ;
           return;
         }
@@ -1197,8 +1197,8 @@ void _glMap1d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
       case 8:
         if (3 < stride) {
           ((void (*)())_gleMap1Vertex4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,stride,order,points,mapData + 0x88,
-                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
-                     in_f12,in_f13);
+                     u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
+                     incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -1253,12 +1253,12 @@ int _glMap1f_Comp(int glContext,undefined4 target,undefined4 u1Shadow,undefined4
   undefined4 extraout_r4_07;
   int iVar3;
   undefined4 in_LR;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((u1 != u2) && (order - 1U < 10)) {
@@ -1271,7 +1271,7 @@ int _glMap1f_Comp(int glContext,undefined4 target,undefined4 u1Shadow,undefined4
             return 0;
           }
           uVar1 = ((int (*)())_gleMap1ColorfLoad)(glContext,extraout_r4_01,iVar3,stride,order,points,listRecord,
-                                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+                                     u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                                      (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
@@ -1285,7 +1285,7 @@ int _glMap1f_Comp(int glContext,undefined4 target,undefined4 u1Shadow,undefined4
             return 0;
           }
           uVar1 = ((int (*)())_gleMap1IndexfLoad)(glContext,extraout_r4_02,iVar3,stride,order,points,listRecord,
-                                     u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+                                     u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                                      (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
@@ -1299,7 +1299,7 @@ int _glMap1f_Comp(int glContext,undefined4 target,undefined4 u1Shadow,undefined4
             return 0;
           }
           uVar1 = ((int (*)())_gleMap1NormalfLoad)(glContext,extraout_r4_03,iVar3,stride,order,points,listRecord,
-                                      u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+                                      u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                                       (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
@@ -1313,7 +1313,7 @@ int _glMap1f_Comp(int glContext,undefined4 target,undefined4 u1Shadow,undefined4
             return 0;
           }
           uVar1 = ((int (*)())_gleMap1Texture1fLoad)(glContext,extraout_r4_04,iVar3,stride,order,points,listRecord,u1,
-                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+                             u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
@@ -1327,7 +1327,7 @@ int _glMap1f_Comp(int glContext,undefined4 target,undefined4 u1Shadow,undefined4
             return 0;
           }
           uVar1 = ((int (*)())_gleMap1Texture2fLoad)(glContext,extraout_r4_05,iVar3,stride,order,points,listRecord,u1,
-                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+                             u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
@@ -1341,7 +1341,7 @@ int _glMap1f_Comp(int glContext,undefined4 target,undefined4 u1Shadow,undefined4
             return 0;
           }
           uVar1 = ((int (*)())_gleMap1Texture3fLoad)(glContext,extraout_r4_06,iVar3,stride,order,points,listRecord,u1,
-                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+                             u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
@@ -1355,7 +1355,7 @@ int _glMap1f_Comp(int glContext,undefined4 target,undefined4 u1Shadow,undefined4
             return 0;
           }
           uVar1 = ((int (*)())_gleMap1Texture4fLoad)(glContext,extraout_r4_07,iVar3,stride,order,points,listRecord,u1,
-                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+                             u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
@@ -1369,7 +1369,7 @@ int _glMap1f_Comp(int glContext,undefined4 target,undefined4 u1Shadow,undefined4
             return 0;
           }
           uVar1 = ((int (*)())_gleMap1Vertex3fLoad)(glContext,extraout_r4,iVar3,stride,order,points,listRecord,u1,
-                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+                             u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
@@ -1383,7 +1383,7 @@ int _glMap1f_Comp(int glContext,undefined4 target,undefined4 u1Shadow,undefined4
             return 0;
           }
           uVar1 = ((int (*)())_gleMap1Vertex4fLoad)(glContext,extraout_r4_00,iVar3,stride,order,points,listRecord,u1,
-                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+                             u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return uVar1;
@@ -1420,12 +1420,12 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
   int mapData;
   int iVar3;
   undefined4 in_LR;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -1435,7 +1435,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 0:
         if (3 < stride) {
           ((int (*)())_gleMap1ColorfLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x1c0,u1,
-                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+                             u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
@@ -1444,7 +1444,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 1:
         if (0 < stride) {
           ((int (*)())_gleMap1IndexfLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x270,u1,
-                             u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+                             u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
@@ -1453,7 +1453,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 2:
         if (2 < stride) {
           ((int (*)())_gleMap1NormalfLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x138,u1,
-                              u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+                              u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                               (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                               (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
@@ -1462,7 +1462,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 3:
         if (0 < stride) {
           ((int (*)())_gleMap1Texture1fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x2a8,u1,u2,
-                     in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
+                     incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
@@ -1470,7 +1470,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 4:
         if (1 < stride) {
           ((int (*)())_gleMap1Texture2fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x2e0,u1,u2,
-                     in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
+                     incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
@@ -1478,7 +1478,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 5:
         if (2 < stride) {
           ((int (*)())_gleMap1Texture3fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x340,u1,u2,
-                     in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
+                     incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
@@ -1486,15 +1486,15 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 6:
         if (3 < stride) {
           ((int (*)())_gleMap1Texture4fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x3c8,u1,u2,
-                     in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
+                     incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
       case 7:
         if (2 < stride) {
-          ((int (*)())_gleMap1Vertex3fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData,u1,u2,in_f3,
-                     in_f4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
+          ((int (*)())_gleMap1Vertex3fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData,u1,u2,incomingFpr3,
+                     incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
@@ -1502,7 +1502,7 @@ void _glMap1f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 8:
         if (3 < stride) {
           ((int (*)())_gleMap1Vertex4fLoad)(glContext,iVar3,u1Shadow,stride,order,points,mapData + 0x88,u1,u2,
-                     in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
+                     incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
@@ -1548,17 +1548,17 @@ void _glMapVertexAttrib1fARB_Comp(int glContext,undefined4 index,uint size,undef
   undefined4 extraout_r4_01;
   undefined4 extraout_r4_02;
   int iVar2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff98;
-  double in_stack_ffffffa0;
-  double in_stack_ffffffa8;
-  double in_stack_ffffffb0;
-  double in_stack_ffffffb8;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff98;
+  double incomingStack_ffffffa0;
+  double incomingStack_ffffffa8;
+  double incomingStack_ffffffb0;
+  double incomingStack_ffffffb8;
   
   if (size == 2) {
     iVar2 = (10 - order) * -8 + 100;
@@ -1568,8 +1568,8 @@ void _glMapVertexAttrib1fARB_Comp(int glContext,undefined4 index,uint size,undef
       return;
     }
     ((void (*)())_gleMap1VertexAttrib2fLoad)(glContext,extraout_r4_00,iVar2,stride,order,points,listRecord + 1,u1,u2,
-               in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,in_stack_ffffffa0,
-               in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8);
+               incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,
+               incomingStack_ffffffa8,incomingStack_ffffffb0,incomingStack_ffffffb8);
   }
   else if (size < 3) {
     if (size != 1) {
@@ -1586,9 +1586,9 @@ LAB_0006f31c:
     if (listRecord == (undefined4 *)0x0) {
       return;
     }
-    ((void (*)())_gleMap1VertexAttrib1fLoad)(glContext,extraout_r4,iVar2,stride,order,points,listRecord + 1,u1,u2,in_f3,
-               in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8,
-               in_stack_ffffffb0,in_stack_ffffffb8);
+    ((void (*)())_gleMap1VertexAttrib1fLoad)(glContext,extraout_r4,iVar2,stride,order,points,listRecord + 1,u1,u2,incomingFpr3,
+               incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8,
+               incomingStack_ffffffb0,incomingStack_ffffffb8);
   }
   else if (size == 3) {
     iVar2 = (10 - order) * -0xc + 0x8c;
@@ -1598,8 +1598,8 @@ LAB_0006f31c:
       return;
     }
     ((void (*)())_gleMap1VertexAttrib3fLoad)(glContext,extraout_r4_01,iVar2,stride,order,points,listRecord + 1,u1,u2,
-               in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,in_stack_ffffffa0,
-               in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8);
+               incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,
+               incomingStack_ffffffa8,incomingStack_ffffffb0,incomingStack_ffffffb8);
   }
   else {
     if (size != 4) goto LAB_0006f31c;
@@ -1610,8 +1610,8 @@ LAB_0006f31c:
       return;
     }
     ((void (*)())_gleMap1VertexAttrib4fLoad)(glContext,extraout_r4_02,iVar2,stride,order,points,listRecord + 1,u1,u2,
-               in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,in_stack_ffffffa0,
-               in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8);
+               incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,
+               incomingStack_ffffffa8,incomingStack_ffffffb0,incomingStack_ffffffb8);
   }
   *listRecord = index;
   return;
@@ -1624,17 +1624,17 @@ void _glMapVertexAttrib1fARB_Exec(int glContext,uint index,uint size,undefined4 
   int mapData;
   undefined4 extraout_r4;
   uint uVar3;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff98;
-  double in_stack_ffffffa0;
-  double in_stack_ffffffa8;
-  double in_stack_ffffffb0;
-  double in_stack_ffffffb8;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff98;
+  double incomingStack_ffffffa0;
+  double incomingStack_ffffffa8;
+  double incomingStack_ffffffb0;
+  double incomingStack_ffffffb8;
   
   uVar3 = size;
   mapData = _gleGetMapData(glContext);
@@ -1643,34 +1643,34 @@ void _glMapVertexAttrib1fARB_Exec(int glContext,uint index,uint size,undefined4 
       if (size == 2) {
         if (1 < stride) {
           ((void (*)())_gleMap1VertexAttrib2fLoad)(glContext,extraout_r4,uVar3,stride,order,points,
-                     mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7
-                     ,in_f8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8,in_stack_ffffffb0,
-                     in_stack_ffffffb8);
+                     mapData + index * 0xb0 + 0x2ca8,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
+                     ,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,
+                     incomingStack_ffffffb8);
           goto LAB_0006f4c8;
         }
       }
       else if (size < 3) {
         if ((size == 1) && (0 < stride)) {
           ((void (*)())_gleMap1VertexAttrib1fLoad)(glContext,extraout_r4,uVar3,stride,order,points,
-                     mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7
-                     ,in_f8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8,in_stack_ffffffb0,
-                     in_stack_ffffffb8);
+                     mapData + index * 0xb0 + 0x2ca8,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
+                     ,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,
+                     incomingStack_ffffffb8);
           goto LAB_0006f4c8;
         }
       }
       else if (size == 3) {
         if (2 < stride) {
           ((void (*)())_gleMap1VertexAttrib3fLoad)(glContext,extraout_r4,uVar3,stride,order,points,
-                     mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7
-                     ,in_f8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8,in_stack_ffffffb0,
-                     in_stack_ffffffb8);
+                     mapData + index * 0xb0 + 0x2ca8,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
+                     ,incomingFpr8,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,
+                     incomingStack_ffffffb8);
           goto LAB_0006f4c8;
         }
       }
       else if ((size == 4) && (3 < stride)) {
         ((void (*)())_gleMap1VertexAttrib4fLoad)(glContext,extraout_r4,uVar3,stride,order,points,mapData + index * 0xb0 + 0x2ca8
-                   ,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,
-                   in_stack_ffffffa0,in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8);
+                   ,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff98,
+                   incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,incomingStack_ffffffb8);
 LAB_0006f4c8:
         ((unsigned char *)0x9da8)[index + mapData]= SUB41(size,0);
         return;
@@ -1708,17 +1708,17 @@ void _glMapVertexAttrib1dARB_Comp(int glContext,undefined4 index,uint size,undef
   undefined4 extraout_r4_01;
   undefined4 extraout_r4_02;
   int iVar2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_f9;
-  double in_f10;
-  double in_f11;
-  double in_f12;
-  double in_f13;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingFpr9;
+  double incomingFpr10;
+  double incomingFpr11;
+  double incomingFpr12;
+  double incomingFpr13;
   
   if (size == 2) {
     iVar2 = (10 - order) * -8 + 100;
@@ -1728,8 +1728,8 @@ void _glMapVertexAttrib1dARB_Comp(int glContext,undefined4 index,uint size,undef
       return;
     }
     ((void (*)())_gleMap1VertexAttrib2dLoad)(glContext,extraout_r4_00,iVar2,u1ShadowHi,u1ShadowLo,stride,order,points,listRecord + 1,
-               u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,
-               in_f13);
+               u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,
+               incomingFpr13);
   }
   else if (size < 3) {
     if (size != 1) {
@@ -1747,8 +1747,8 @@ LAB_0006f710:
       return;
     }
     ((void (*)())_gleMap1VertexAttrib1dLoad)(glContext,extraout_r4,iVar2,u1ShadowHi,u1ShadowLo,stride,order,points,listRecord + 1,
-               u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,
-               in_f13);
+               u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,
+               incomingFpr13);
   }
   else if (size == 3) {
     iVar2 = (10 - order) * -0xc + 0x8c;
@@ -1758,8 +1758,8 @@ LAB_0006f710:
       return;
     }
     ((void (*)())_gleMap1VertexAttrib3dLoad)(glContext,extraout_r4_01,iVar2,u1ShadowHi,u1ShadowLo,stride,order,points,listRecord + 1,
-               u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,
-               in_f13);
+               u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,
+               incomingFpr13);
   }
   else {
     if (size != 4) goto LAB_0006f710;
@@ -1770,8 +1770,8 @@ LAB_0006f710:
       return;
     }
     ((void (*)())_gleMap1VertexAttrib4dLoad)(glContext,extraout_r4_02,iVar2,u1ShadowHi,u1ShadowLo,stride,order,points,listRecord + 1,
-               u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,
-               in_f13);
+               u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,
+               incomingFpr13);
   }
   *listRecord = index;
   return;
@@ -1784,17 +1784,17 @@ void _glMapVertexAttrib1dARB_Exec(int glContext,uint index,uint size,undefined4 
   int mapData;
   undefined4 extraout_r4;
   uint uVar3;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_f9;
-  double in_f10;
-  double in_f11;
-  double in_f12;
-  double in_f13;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingFpr9;
+  double incomingFpr10;
+  double incomingFpr11;
+  double incomingFpr12;
+  double incomingFpr13;
   
   uVar3 = size;
   mapData = _gleGetMapData(glContext);
@@ -1803,31 +1803,31 @@ void _glMapVertexAttrib1dARB_Exec(int glContext,uint index,uint size,undefined4 
       if (size == 2) {
         if (1 < stride) {
           ((void (*)())_gleMap1VertexAttrib2dLoad)(glContext,extraout_r4,uVar3,u1ShadowHi,u1ShadowLo,stride,order,points,
-                     mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7
-                     ,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                     mapData + index * 0xb0 + 0x2ca8,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
+                     ,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           goto LAB_0006f8cc;
         }
       }
       else if (size < 3) {
         if ((size == 1) && (0 < stride)) {
           ((void (*)())_gleMap1VertexAttrib1dLoad)(glContext,extraout_r4,uVar3,u1ShadowHi,u1ShadowLo,stride,order,points,
-                     mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7
-                     ,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                     mapData + index * 0xb0 + 0x2ca8,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
+                     ,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           goto LAB_0006f8cc;
         }
       }
       else if (size == 3) {
         if (2 < stride) {
           ((void (*)())_gleMap1VertexAttrib3dLoad)(glContext,extraout_r4,uVar3,u1ShadowHi,u1ShadowLo,stride,order,points,
-                     mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7
-                     ,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                     mapData + index * 0xb0 + 0x2ca8,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7
+                     ,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           goto LAB_0006f8cc;
         }
       }
       else if ((size == 4) && (3 < stride)) {
         ((void (*)())_gleMap1VertexAttrib4dLoad)(glContext,extraout_r4,uVar3,u1ShadowHi,u1ShadowLo,stride,order,points,
-                   mapData + index * 0xb0 + 0x2ca8,u1,u2,in_f3,in_f4,in_f5,in_f6,in_f7,
-                   in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                   mapData + index * 0xb0 + 0x2ca8,u1,u2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
+                   incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
 LAB_0006f8cc:
         ((unsigned char *)0x9da8)[index + mapData]= SUB41(size,0);
         return;
@@ -2502,15 +2502,15 @@ void _glMap2d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
   undefined4 extraout_r4_07;
   int iVar3;
   int iVar4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_f9;
-  double in_f10;
-  double in_f11;
-  double in_f12;
-  double in_f13;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingFpr9;
+  double incomingFpr10;
+  double incomingFpr11;
+  double incomingFpr12;
+  double incomingFpr13;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((((u1 != u2) && (v1 != v2)) && (uorder - 1U < 10)) &&
@@ -2524,8 +2524,8 @@ void _glMap2d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord != 0) {
             ((void (*)())_gleMap2ColordLoad)(glContext,extraout_r4_01,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,
                                v1ShadowHi,v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,
-                               u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,
-                               in_f11,in_f12,in_f13);
+                               u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,
+                               incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_00070908;
@@ -2539,8 +2539,8 @@ void _glMap2d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord != 0) {
             ((void (*)())_gleMap2IndexdLoad)(glContext,extraout_r4_02,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,
                                v1ShadowHi,v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,
-                               u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,
-                               in_f11,in_f12,in_f13);
+                               u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,
+                               incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_00070908;
@@ -2554,8 +2554,8 @@ void _glMap2d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord != 0) {
             ((void (*)())_gleMap2NormaldLoad)(glContext,extraout_r4_03,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,
                                 v1ShadowHi,v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,
-                                u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,
-                                in_f11,in_f12,in_f13);
+                                u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,
+                                incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_00070908;
@@ -2569,7 +2569,7 @@ void _glMap2d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord != 0) {
             ((void (*)())_gleMap2Texture1dLoad)(glContext,extraout_r4_04,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
                        v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,u2,v1
-                       ,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                       ,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_00070908;
@@ -2583,7 +2583,7 @@ void _glMap2d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord != 0) {
             ((void (*)())_gleMap2Texture2dLoad)(glContext,extraout_r4_05,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
                        v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,u2,v1
-                       ,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                       ,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_00070908;
@@ -2597,7 +2597,7 @@ void _glMap2d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord != 0) {
             ((void (*)())_gleMap2Texture3dLoad)(glContext,extraout_r4_06,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
                        v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,u2,v1
-                       ,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                       ,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_00070908;
@@ -2611,7 +2611,7 @@ void _glMap2d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord != 0) {
             ((void (*)())_gleMap2Texture4dLoad)(glContext,extraout_r4_07,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
                        v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,u2,v1
-                       ,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                       ,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_00070908;
@@ -2625,7 +2625,7 @@ void _glMap2d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord != 0) {
             ((void (*)())_gleMap2Vertex3dLoad)(glContext,extraout_r4,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
                        v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,u2,v1
-                       ,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                       ,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_00070908;
@@ -2639,7 +2639,7 @@ void _glMap2d_Comp(int glContext,undefined4 target,undefined4 u1ShadowHi,undefin
           if (listRecord != 0) {
             ((void (*)())_gleMap2Vertex4dLoad)(glContext,extraout_r4_00,iVar3,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
                        v1ShadowLo,v2ShadowHi,vstride,vorder,points,listRecord,u1,u2,v1
-                       ,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                       ,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_00070908;
@@ -2671,15 +2671,15 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
   int mapData;
   int iVar3;
   int iVar4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_f9;
-  double in_f10;
-  double in_f11;
-  double in_f12;
-  double in_f13;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingFpr9;
+  double incomingFpr10;
+  double incomingFpr11;
+  double incomingFpr12;
+  double incomingFpr13;
   
   iVar4 = uorder;
   mapData = _gleGetMapData(glContext);
@@ -2692,8 +2692,8 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         if ((3 < ustride) && (3 < vstride)) {
           ((void (*)())_gleMap2ColordLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
                              v1ShadowLo,v2ShadowHi,vstride,vorder,points,mapData + 0x1478,u1,
-                             u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
-                             in_f12,in_f13);
+                             u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
+                             incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -2701,8 +2701,8 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         if ((0 < ustride) && (0 < vstride)) {
           ((void (*)())_gleMap2IndexdLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
                              v1ShadowLo,v2ShadowHi,vstride,vorder,points,mapData + 0x1ad8,u1,
-                             u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,
-                             in_f12,in_f13);
+                             u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,
+                             incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -2710,8 +2710,8 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         if ((2 < ustride) && (2 < vstride)) {
           ((void (*)())_gleMap2NormaldLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,
                               v1ShadowLo,v2ShadowHi,vstride,vorder,points,mapData + 0xfa8,u1,
-                              u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11
-                              ,in_f12,in_f13);
+                              u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11
+                              ,incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -2719,7 +2719,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         if ((0 < ustride) && (0 < vstride)) {
           ((void (*)())_gleMap2Texture1dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
                      v2ShadowHi,vstride,vorder,points,mapData + 0x1c88,u1,u2,v1,
-                     v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                     v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -2727,7 +2727,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         if ((1 < ustride) && (1 < vstride)) {
           ((void (*)())_gleMap2Texture2dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
                      v2ShadowHi,vstride,vorder,points,mapData + 0x1e38,u1,u2,v1,
-                     v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                     v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -2735,7 +2735,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         if ((2 < ustride) && (2 < vstride)) {
           ((void (*)())_gleMap2Texture3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
                      v2ShadowHi,vstride,vorder,points,mapData + 0x2178,u1,u2,v1,
-                     v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                     v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -2743,7 +2743,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         if ((3 < ustride) && (3 < vstride)) {
           ((void (*)())_gleMap2Texture4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
                      v2ShadowHi,vstride,vorder,points,mapData + 0x2648,u1,u2,v1,
-                     v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                     v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -2751,7 +2751,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         if ((2 < ustride) && (2 < vstride)) {
           ((void (*)())_gleMap2Vertex3dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
                      v2ShadowHi,vstride,vorder,points,mapData + 0x478,u1,u2,v1,
-                     v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                     v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -2759,7 +2759,7 @@ void _glMap2d_Exec(int glContext,int target,undefined4 u1ShadowHi,undefined4 u1S
         if ((3 < ustride) && (3 < vstride)) {
           ((void (*)())_gleMap2Vertex4dLoad)(glContext,iVar3,u1ShadowHi,u1ShadowLo,u2ShadowHi,ustride,uorder,iVar4,v1ShadowHi,v1ShadowLo,
                      v2ShadowHi,vstride,vorder,points,mapData + 0x948,u1,u2,v1,
-                     v2,in_f5,in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                     v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
@@ -2785,13 +2785,13 @@ LAB_00070da0:
 /* _glMap2d_CompExec @ 0x70dac (156 bytes) */
 void _glMap2d_CompExec(undefined4 glContext,undefined4 target,undefined4 u1ShadowHi,undefined4 u1ShadowLo,undefined4 u2ShadowHi,undefined4 u2ShadowLo,undefined4 ustride,undefined4 uorder,undefined4 v1ShadowHi,undefined4 v1ShadowLo,undefined4 v2ShadowHi,undefined4 v2ShadowLo,undefined4 vstride,undefined4 vorder,undefined4 points,double u1,double u2,double v1,double v2)
 {
-  undefined4 in_stack_ffffff88;
-  undefined4 in_stack_ffffff8c;
-  undefined4 in_stack_ffffff90;
-  undefined4 in_stack_ffffff94;
+  undefined4 incomingStack_ffffff88;
+  undefined4 incomingStack_ffffff8c;
+  undefined4 incomingStack_ffffff90;
+  undefined4 incomingStack_ffffff94;
   
-  ((void (*)())_glMap2d_Comp)(glContext,target,u1ShadowHi,u1ShadowLo,u2ShadowHi,u2ShadowLo,ustride,uorder,in_stack_ffffff88,
-                in_stack_ffffff8c,in_stack_ffffff90,in_stack_ffffff94,vstride,vorder,points,
+  ((void (*)())_glMap2d_Comp)(glContext,target,u1ShadowHi,u1ShadowLo,u2ShadowHi,u2ShadowLo,ustride,uorder,incomingStack_ffffff88,
+                incomingStack_ffffff8c,incomingStack_ffffff90,incomingStack_ffffff94,vstride,vorder,points,
                 u1,u2,v1,v2);
   ((void (*)())_glMap2d_Exec)(glContext,target,u1ShadowHi,u1ShadowLo,u2ShadowHi,u2ShadowLo,ustride,uorder,v1ShadowHi,v1ShadowLo,
                 v2ShadowHi,v2ShadowLo,vstride,vorder,points,u1,u2,v1,v2);
@@ -2815,15 +2815,15 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
   int iVar3;
   int iVar4;
   int iVar5;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_f9;
-  double in_f10;
-  double in_f11;
-  double in_f12;
-  double in_f13;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingFpr9;
+  double incomingFpr10;
+  double incomingFpr11;
+  double incomingFpr12;
+  double incomingFpr13;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((((u1 != u2) && (v1 != v2)) && (uorder - 1U < 10)) &&
@@ -2842,8 +2842,8 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
           listRecord = _gleAddListItem(glContext,PTR__glMap2Color_ListExec_001101bc,iVar3);
           if (listRecord != 0) {
             ((void (*)())_gleMap2ColorfLoad)(glContext,extraout_r4_01,iVar3,ustride,uorder,iVar4,iVar5,vstride,
-                               vorder,points,listRecord,u1,u2,v1,v2,in_f5,
-                               in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                               vorder,points,listRecord,u1,u2,v1,v2,incomingFpr5,
+                               incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_000713ec;
@@ -2856,8 +2856,8 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
           listRecord = _gleAddListItem(glContext,PTR__glMap2Index_ListExec_001101b8,iVar3);
           if (listRecord != 0) {
             ((void (*)())_gleMap2IndexfLoad)(glContext,extraout_r4_02,iVar3,ustride,uorder,iVar4,iVar5,vstride,
-                               vorder,points,listRecord,u1,u2,v1,v2,in_f5,
-                               in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                               vorder,points,listRecord,u1,u2,v1,v2,incomingFpr5,
+                               incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_000713ec;
@@ -2870,8 +2870,8 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
           listRecord = _gleAddListItem(glContext,PTR__glMap2Normal_ListExec_001101b4,iVar3);
           if (listRecord != 0) {
             ((void (*)())_gleMap2NormalfLoad)(glContext,extraout_r4_03,iVar3,ustride,uorder,iVar4,iVar5,vstride,
-                                vorder,points,listRecord,u1,u2,v1,v2,in_f5,
-                                in_f6,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                                vorder,points,listRecord,u1,u2,v1,v2,incomingFpr5,
+                                incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_000713ec;
@@ -2884,8 +2884,8 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
           listRecord = _gleAddListItem(glContext,PTR__glMap2Texture1_ListExec_001101b0,iVar3);
           if (listRecord != 0) {
             ((void (*)())_gleMap2Texture1fLoad)(glContext,extraout_r4_04,iVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
-                       points,listRecord,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
-                       in_f9,in_f10,in_f11,in_f12,in_f13);
+                       points,listRecord,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                       incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_000713ec;
@@ -2898,8 +2898,8 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
           listRecord = _gleAddListItem(glContext,PTR__glMap2Texture2_ListExec_001101ac,iVar3);
           if (listRecord != 0) {
             ((void (*)())_gleMap2Texture2fLoad)(glContext,extraout_r4_05,iVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
-                       points,listRecord,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
-                       in_f9,in_f10,in_f11,in_f12,in_f13);
+                       points,listRecord,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                       incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_000713ec;
@@ -2912,8 +2912,8 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
           listRecord = _gleAddListItem(glContext,PTR__glMap2Texture3_ListExec_001101a8,iVar3);
           if (listRecord != 0) {
             ((void (*)())_gleMap2Texture3fLoad)(glContext,extraout_r4_06,iVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
-                       points,listRecord,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
-                       in_f9,in_f10,in_f11,in_f12,in_f13);
+                       points,listRecord,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                       incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_000713ec;
@@ -2926,8 +2926,8 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
           listRecord = _gleAddListItem(glContext,PTR__glMap2Texture4_ListExec_001101a4,iVar3);
           if (listRecord != 0) {
             ((void (*)())_gleMap2Texture4fLoad)(glContext,extraout_r4_07,iVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
-                       points,listRecord,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
-                       in_f9,in_f10,in_f11,in_f12,in_f13);
+                       points,listRecord,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                       incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_000713ec;
@@ -2940,8 +2940,8 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
           listRecord = _gleAddListItem(glContext,PTR__glMap2Vertex3_ListExec_001101c4,iVar3);
           if (listRecord != 0) {
             ((void (*)())_gleMap2Vertex3fLoad)(glContext,extraout_r4,iVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
-                       points,listRecord,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
-                       in_f9,in_f10,in_f11,in_f12,in_f13);
+                       points,listRecord,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                       incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_000713ec;
@@ -2954,8 +2954,8 @@ void _glMap2f_Comp(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
           listRecord = _gleAddListItem(glContext,PTR__glMap2Vertex4_ListExec_001101c0,iVar3);
           if (listRecord != 0) {
             ((void (*)())_gleMap2Vertex4fLoad)(glContext,extraout_r4_00,iVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
-                       points,listRecord,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
-                       in_f9,in_f10,in_f11,in_f12,in_f13);
+                       points,listRecord,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                       incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
             return;
           }
           goto LAB_000713ec;
@@ -2983,15 +2983,15 @@ void _glMap2f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
   int mapData;
   uint uVar4;
   int iVar5;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_f9;
-  double in_f10;
-  double in_f11;
-  double in_f12;
-  double in_f13;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingFpr9;
+  double incomingFpr10;
+  double incomingFpr11;
+  double incomingFpr12;
+  double incomingFpr13;
   
   iVar5 = uorder;
   mapData = _gleGetMapData(glContext);
@@ -3009,72 +3009,72 @@ void _glMap2f_Exec(int glContext,int target,undefined4 u1Shadow,undefined4 u2Sha
       case 0:
         if ((3 < ustride) && (3 < vstride)) {
           ((void (*)())_gleMap2ColorfLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,
-                             points,mapData + 0x1478,u1,u2,v1,v2,in_f5,in_f6
-                             ,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                             points,mapData + 0x1478,u1,u2,v1,v2,incomingFpr5,incomingFpr6
+                             ,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 1:
         if ((0 < ustride) && (0 < vstride)) {
           ((void (*)())_gleMap2IndexfLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,
-                             points,mapData + 0x1ad8,u1,u2,v1,v2,in_f5,in_f6
-                             ,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                             points,mapData + 0x1ad8,u1,u2,v1,v2,incomingFpr5,incomingFpr6
+                             ,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 2:
         if ((2 < ustride) && (2 < vstride)) {
           ((void (*)())_gleMap2NormalfLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,
-                              points,mapData + 0xfa8,u1,u2,v1,v2,in_f5,in_f6
-                              ,in_f7,in_f8,in_f9,in_f10,in_f11,in_f12,in_f13);
+                              points,mapData + 0xfa8,u1,u2,v1,v2,incomingFpr5,incomingFpr6
+                              ,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 3:
         if ((0 < ustride) && (0 < vstride)) {
           ((void (*)())_gleMap2Texture1fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
-                     mapData + 0x1c88,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
-                     in_f9,in_f10,in_f11,in_f12,in_f13);
+                     mapData + 0x1c88,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                     incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 4:
         if ((1 < ustride) && (1 < vstride)) {
           ((void (*)())_gleMap2Texture2fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
-                     mapData + 0x1e38,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
-                     in_f9,in_f10,in_f11,in_f12,in_f13);
+                     mapData + 0x1e38,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                     incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 5:
         if ((2 < ustride) && (2 < vstride)) {
           ((void (*)())_gleMap2Texture3fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
-                     mapData + 0x2178,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
-                     in_f9,in_f10,in_f11,in_f12,in_f13);
+                     mapData + 0x2178,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                     incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 6:
         if ((3 < ustride) && (3 < vstride)) {
           ((void (*)())_gleMap2Texture4fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
-                     mapData + 0x2648,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,
-                     in_f9,in_f10,in_f11,in_f12,in_f13);
+                     mapData + 0x2648,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+                     incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 7:
         if ((2 < ustride) && (2 < vstride)) {
           ((void (*)())_gleMap2Vertex3fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
-                     mapData + 0x478,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9
-                     ,in_f10,in_f11,in_f12,in_f13);
+                     mapData + 0x478,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9
+                     ,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
         break;
       case 8:
         if ((3 < ustride) && (3 < vstride)) {
           ((void (*)())_gleMap2Vertex4fLoad)(glContext,uVar4,u1Shadow,ustride,uorder,iVar5,iVar1,vstride,vorder,points,
-                     mapData + 0x948,u1,u2,v1,v2,in_f5,in_f6,in_f7,in_f8,in_f9
-                     ,in_f10,in_f11,in_f12,in_f13);
+                     mapData + 0x948,u1,u2,v1,v2,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9
+                     ,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           return;
         }
       }

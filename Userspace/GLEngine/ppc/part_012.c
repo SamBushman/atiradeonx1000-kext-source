@@ -33,7 +33,7 @@ int _glColor4us_Comp(glContext, red, green, blue, alpha)
 }
 
 /* _glColor4us_Exec @ 0x5d254 (204 bytes) */
-double _glColor4us_Exec(int glContext,uint red,uint green,uint blue,uint alpha,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+double _glColor4us_Exec(int glContext,uint red,uint green,uint blue,uint alpha,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float fVar1;
   float fVar2;
@@ -98,7 +98,7 @@ int _glColor4usv_Comp(glContext, v)
 }
 
 /* _glColor4usv_Exec @ 0x5d458 (220 bytes) */
-double _glColor4usv_Exec(int glContext,ushort *v,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+double _glColor4usv_Exec(int glContext,ushort *v,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float fVar1;
   float fVar2;

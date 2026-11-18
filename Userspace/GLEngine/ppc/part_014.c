@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _glCopyPixels_NoopExec @ 0x6227c (672 bytes) */
-void _glCopyPixels_NoopExec(int glContext,undefined4 x,undefined4 y,undefined4 width,undefined4 height,undefined4 type,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glCopyPixels_NoopExec(int glContext,undefined4 x,undefined4 y,undefined4 width,undefined4 height,undefined4 type,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
@@ -34,8 +34,8 @@ void _glCopyPixels_NoopExec(int glContext,undefined4 x,undefined4 y,undefined4 w
     piVar11 = (int *)(glContext + 0x310);
     cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((iVar4 != 0) && (*(int *)(iVar4 + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar4 + 0x10,uVar5,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
-                 fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar4 + 0x10,uVar5,uVar6,uVar7,uVar8,iVar9,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+                 forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
     }
@@ -110,8 +110,8 @@ LAB_000623a4:
     }
   }
   if (*(char *)(glContext + 0x759d) != '\0') {
-    ((void (*)())_glCopyPixels_Exec)(glContext,x,y,width,height,type,fparam_1,fparam_2,fparam_3,
-                       fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+    ((void (*)())_glCopyPixels_Exec)(glContext,x,y,width,height,type,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+                       forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     return;
   }
 LAB_000624c4:
@@ -155,17 +155,17 @@ void _glDepthFunc_CompExec(glContext, func)
 }
 
 /* _glDepthRange_ListExec @ 0x625c8 (44 bytes) */
-undefined4 _glDepthRange_ListExec(undefined4 glContext,double *recordedArgs,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+undefined4 _glDepthRange_ListExec(undefined4 glContext,double *recordedArgs,double unusedFloatArg1,double unusedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
-  double in_stack_ffffffc8;
-  double in_stack_ffffffd0;
-  double in_stack_ffffffd8;
+  double incomingStack_ffffffb8;
+  double incomingStack_ffffffc0;
+  double incomingStack_ffffffc8;
+  double incomingStack_ffffffd0;
+  double incomingStack_ffffffd8;
   
-  ((void (*)())_glDepthRange_Exec)(glContext,*recordedArgs,recordedArgs[1],fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
-                     fparam_8,in_stack_ffffffb8,in_stack_ffffffc0,in_stack_ffffffc8,
-                     in_stack_ffffffd0,in_stack_ffffffd8);
+  ((void (*)())_glDepthRange_Exec)(glContext,*recordedArgs,recordedArgs[1],forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
+                     forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8,
+                     incomingStack_ffffffd0,incomingStack_ffffffd8);
   return 0x10;
 }
 
@@ -183,7 +183,7 @@ double * _glDepthRange_Comp(undefined4 glContext,double zNear,double zFar)
 }
 
 /* _glDepthRange_Exec @ 0x62658 (320 bytes) */
-void _glDepthRange_Exec(int glContext,double zNear,double zFar,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glDepthRange_Exec(int glContext,double zNear,double zFar,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double forwardedFloatArg9,double forwardedFloatArg10,double forwardedFloatArg11,double forwardedFloatArg12,double forwardedFloatArg13)
 {
   double doubleZero;
   byte bVar1;
@@ -231,8 +231,8 @@ LAB_000626d0:
   iVar3 = (bVar1 >> 3 & 0x1c) + glContext;
   *(uint *)(iVar3 + 0x348) = *(uint *)(iVar3 + 0x348) | 1 << (bVar1 & 0x1f);
   *(uint *)(glContext + 0x318) = *(uint *)(glContext + 0x318) | 1;
-  ((void (*)())_gleUpdateDepthRangeData)(glContext,zNear,zFar,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
-             fparam_9,fparam_10,fparam_11,fparam_12,fparam_13);
+  ((void (*)())_gleUpdateDepthRangeData)(glContext,zNear,zFar,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,
+             forwardedFloatArg9,forwardedFloatArg10,forwardedFloatArg11,forwardedFloatArg12,forwardedFloatArg13);
   return;
 }
 
@@ -240,15 +240,15 @@ LAB_000626d0:
 void _glDepthRange_CompExec(undefined4 glContext,double zNear,double zFar)
 {
   undefined4 in_LR;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((double * (*)())_glDepthRange_Comp)(glContext,zNear,zFar);
-  ((void (*)())_glDepthRange_Exec)(glContext,zNear,zFar,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+  ((void (*)())_glDepthRange_Exec)(glContext,zNear,zFar,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                      (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
                      (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
   return;
@@ -613,16 +613,16 @@ void _glListBase_CompExec(glContext, base)
 }
 
 /* _glDrawBuffer_ListExec @ 0x62fc0 (40 bytes) */
-int _glDrawBuffer_ListExec(glContext, recordedArgs, param_3, param_4, param_5, param_6, param_7)
+int _glDrawBuffer_ListExec(glContext, recordedArgs, forwardedArg3, forwardedArg4, forwardedArg5, forwardedArg6, forwardedArg7)
   undefined4 glContext;
   undefined4 *recordedArgs;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 forwardedArg3;
+  undefined4 forwardedArg4;
+  undefined4 forwardedArg5;
+  undefined4 forwardedArg6;
+  undefined4 forwardedArg7;
 {
-  ((void (*)())_glDrawBuffer_Exec)(glContext,*recordedArgs,param_3,param_4,param_5,param_6,param_7);
+  ((void (*)())_glDrawBuffer_Exec)(glContext,*recordedArgs,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7);
   return 4;
 }
 
@@ -641,14 +641,14 @@ int _glDrawBuffer_Comp(glContext, mode)
 }
 
 /* _glDrawBuffer_Exec @ 0x63034 (472 bytes) */
-void _glDrawBuffer_Exec(glContext, mode, param_3, param_4, param_5, param_6, param_7)
+void _glDrawBuffer_Exec(glContext, mode, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int glContext;
   uint mode;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   int loopIndex;
   int remaining;
@@ -772,14 +772,14 @@ void _glDrawBuffer_CompExec(glContext, mode)
   undefined4 glContext;
   undefined4 mode;
 {
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
+  undefined4 incomingR5;
+  undefined4 incomingR6;
+  undefined4 incomingR7;
+  undefined4 incomingR8;
+  undefined4 incomingR9;
   
   ((int (*)())_glDrawBuffer_Comp)(glContext,mode);
-  ((void (*)())_glDrawBuffer_Exec)(glContext,mode,in_r5,in_r6,in_r7,in_r8,in_r9);
+  ((void (*)())_glDrawBuffer_Exec)(glContext,mode,incomingR5,incomingR6,incomingR7,incomingR8,incomingR9);
   return;
 }
 
@@ -970,18 +970,18 @@ LAB_000635a8:
 }
 
 /* _glDrawBuffersARB_CompExec @ 0x635cc (64 bytes) */
-void _glDrawBuffersARB_CompExec(glContext, mode, param_3)
+void _glDrawBuffersARB_CompExec(glContext, mode, forwardedArg3)
   undefined4 glContext;
   undefined4 mode;
-  undefined4 param_3;
+  undefined4 forwardedArg3;
 {
-  ((int (*)())_glDrawBuffersARB_Comp)(glContext,mode,param_3);
-  ((void (*)())_glDrawBuffersARB_Exec)(glContext,mode,param_3);
+  ((int (*)())_glDrawBuffersARB_Comp)(glContext,mode,forwardedArg3);
+  ((void (*)())_glDrawBuffersARB_Exec)(glContext,mode,forwardedArg3);
   return;
 }
 
 /* _glDrawPixels_ListExec @ 0x6360c (1320 bytes) */
-int _glDrawPixels_ListExec(int glContext,uint *recordedArgs,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+int _glDrawPixels_ListExec(int glContext,uint *recordedArgs,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
@@ -993,10 +993,10 @@ int _glDrawPixels_ListExec(int glContext,uint *recordedArgs,double fparam_1,doub
   uint uVar6;
   int *piVar7;
   int iVar8;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 incomingR5;
+  undefined4 incomingR6;
+  undefined4 incomingR7;
+  undefined4 incomingR8;
   uint uVar9;
   int iVar10;
   int *piVar11;
@@ -1107,8 +1107,8 @@ LAB_000637ac:
         piVar11 = (int *)(glContext + 0x310);
         cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
         if ((iVar8 != 0) && (*(int *)(iVar8 + 0xec) != 0)) {
-          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar8 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar10,fparam_1,fparam_2,fparam_3,
-                     fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+          ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar8 + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,iVar10,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+                     forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
         }
         if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
@@ -1335,7 +1335,7 @@ LAB_00063c10:
 }
 
 /* _glDrawPixels_Exec @ 0x63d8c (1520 bytes) */
-void _glDrawPixels_Exec(int glContext,uint width,int height,uint format,uint type,int pixels,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glDrawPixels_Exec(int glContext,uint width,int height,uint format,uint type,int pixels,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
@@ -1476,8 +1476,8 @@ LAB_00063f94:
       piVar16 = (int *)(glContext + 0x310);
       cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((iVar8 != 0) && (*(int *)(iVar8 + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar8 + 0x10,iVar11,uVar12,uVar10,iVar5,iVar9,fparam_1,fparam_2,fparam_3,
-                   fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar8 + 0x10,iVar11,uVar12,uVar10,iVar5,iVar9,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+                   forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       }
       if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
@@ -1605,23 +1605,23 @@ void _glDrawPixels_CompExec(glContext, width, height, format, type, pixels)
   undefined4 type;
   undefined4 pixels;
 {
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glDrawPixels_Comp)(glContext,width,height,format,type,pixels);
-  ((void (*)())_glDrawPixels_Exec)(glContext,width,height,format,type,pixels,fparam_1,in_f2,in_f3,in_f4,
-                     in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_glDrawPixels_Exec)(glContext,width,height,format,type,pixels,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,
+                     incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
 /* _glDrawPixels_NoopExec @ 0x643d4 (672 bytes) */
-void _glDrawPixels_NoopExec(int glContext,undefined4 width,undefined4 height,undefined4 format,undefined4 type,undefined4 pixels,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glDrawPixels_NoopExec(int glContext,undefined4 width,undefined4 height,undefined4 format,undefined4 type,undefined4 pixels,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
@@ -1654,8 +1654,8 @@ void _glDrawPixels_NoopExec(int glContext,undefined4 width,undefined4 height,und
     piVar11 = (int *)(glContext + 0x310);
     cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((iVar4 != 0) && (*(int *)(iVar4 + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar4 + 0x10,uVar5,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
-                 fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar4 + 0x10,uVar5,uVar6,uVar7,uVar8,iVar9,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+                 forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
     }
@@ -1730,8 +1730,8 @@ LAB_000644fc:
     }
   }
   if (*(char *)(glContext + 0x759d) != '\0') {
-    ((void (*)())_glDrawPixels_Exec)(glContext,width,height,format,type,pixels,fparam_1,fparam_2,fparam_3,
-                       fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+    ((void (*)())_glDrawPixels_Exec)(glContext,width,height,format,type,pixels,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+                       forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     return;
   }
 LAB_0006461c:
@@ -1939,16 +1939,16 @@ void _glEvalCoord1fv_CompExec(glContext, u)
 }
 
 /* _glEvalCoord2d_ListExec @ 0x64a78 (44 bytes) */
-undefined4 _glEvalCoord2d_ListExec(undefined4 glContext,float *recordedArgs,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+undefined4 _glEvalCoord2d_ListExec(undefined4 glContext,float *recordedArgs,double unusedFloatArg1,double unusedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
-  double in_stack_ffffffc8;
-  double in_stack_ffffffd0;
+  double incomingStack_ffffffb8;
+  double incomingStack_ffffffc0;
+  double incomingStack_ffffffc8;
+  double incomingStack_ffffffd0;
   
-  ((void (*)())_gleEvalMap2)(glContext,(double)*recordedArgs,(double)recordedArgs[1],fparam_3,fparam_4,fparam_5,fparam_6,
-               fparam_7,fparam_8,in_stack_ffffffb8,in_stack_ffffffc0,in_stack_ffffffc8,
-               in_stack_ffffffd0);
+  ((void (*)())_gleEvalMap2)(glContext,(double)*recordedArgs,(double)recordedArgs[1],forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
+               forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8,
+               incomingStack_ffffffd0);
   return 8;
 }
 
@@ -1966,14 +1966,14 @@ float * _glEvalCoord2d_Comp(undefined4 glContext,double u,double v)
 }
 
 /* _glEvalCoord2d_CompExec @ 0x64b1c (92 bytes) */
-void _glEvalCoord2d_CompExec(undefined4 glContext,double u,double v,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void _glEvalCoord2d_CompExec(undefined4 glContext,double u,double v,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double fparam_9,double forwardedFloatArg10,double forwardedFloatArg11,double forwardedFloatArg12)
 {
   undefined4 in_LR;
   
   ((float * (*)())_glEvalCoord2d_Comp)(glContext,u,v);
-  ((void (*)())_gleEvalMap2)(glContext,(double)(float)u,(double)(float)v,fparam_3,fparam_4,fparam_5,
-               fparam_6,fparam_7,fparam_8,(double)CONCAT44(in_LR,(*(unsigned int *)((unsigned char *)&(fparam_9) + 4))),fparam_10,fparam_11
-               ,fparam_12);
+  ((void (*)())_gleEvalMap2)(glContext,(double)(float)u,(double)(float)v,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,
+               forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,(double)CONCAT44(in_LR,(*(unsigned int *)((unsigned char *)&(fparam_9) + 4))),forwardedFloatArg10,forwardedFloatArg11
+               ,forwardedFloatArg12);
   return;
 }
 

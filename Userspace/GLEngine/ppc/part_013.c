@@ -1137,10 +1137,10 @@ void _glColorSubTable_CompExec(glContext, target, start, count, format, type, da
 }
 
 /* _glCopyColorTable_ListExec @ 0x60700 (60 bytes) */
-undefined4 _glCopyColorTable_ListExec(undefined4 glContext,undefined4 *recordedArgs,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+undefined4 _glCopyColorTable_ListExec(undefined4 glContext,undefined4 *recordedArgs,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  ((void (*)())_glCopyColorTable_Exec)(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4],fparam_1,fparam_2,fparam_3
-             ,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+  ((void (*)())_glCopyColorTable_Exec)(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4],forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3
+             ,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
   return 0x14;
 }
 
@@ -1167,7 +1167,7 @@ int _glCopyColorTable_Comp(glContext, target, internalformat, x, y, width)
 }
 
 /* _glCopyColorTable_Exec @ 0x607a8 (1232 bytes) */
-void _glCopyColorTable_Exec(int glContext,uint target,undefined4 internalformat,undefined4 x,undefined4 y,undefined4 width,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glCopyColorTable_Exec(int glContext,uint target,undefined4 internalformat,undefined4 x,undefined4 y,undefined4 width,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
@@ -1204,8 +1204,8 @@ void _glCopyColorTable_Exec(int glContext,uint target,undefined4 internalformat,
       piVar15 = (int *)(glContext + 0x310);
       cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((iVar8 != 0) && (*(int *)(iVar8 + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar8 + 0x10,uVar5,uVar9,uVar10,uVar11,iVar12,fparam_1,fparam_2,fparam_3,
-                   fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar8 + 0x10,uVar5,uVar9,uVar10,uVar11,iVar12,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+                   forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       }
       if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
@@ -1369,26 +1369,26 @@ void _glCopyColorTable_CompExec(glContext, target, internalformat, x, y, width)
   undefined4 y;
   undefined4 width;
 {
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glCopyColorTable_Comp)(glContext,target,internalformat,x,y,width);
-  ((void (*)())_glCopyColorTable_Exec)(glContext,target,internalformat,x,y,width,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,
-             in_f7,in_f8);
+  ((void (*)())_glCopyColorTable_Exec)(glContext,target,internalformat,x,y,width,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
+             incomingFpr7,incomingFpr8);
   return;
 }
 
 /* _glCopyColorSubTable_ListExec @ 0x60cd0 (60 bytes) */
-undefined4 _glCopyColorSubTable_ListExec(undefined4 glContext,undefined4 *recordedArgs,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+undefined4 _glCopyColorSubTable_ListExec(undefined4 glContext,undefined4 *recordedArgs,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  ((void (*)())_glCopyColorSubTable_Exec)(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4],fparam_1,fparam_2,fparam_3
-             ,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+  ((void (*)())_glCopyColorSubTable_Exec)(glContext,*recordedArgs,recordedArgs[1],recordedArgs[2],recordedArgs[3],recordedArgs[4],forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3
+             ,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
   return 0x14;
 }
 
@@ -1415,7 +1415,7 @@ int _glCopyColorSubTable_Comp(glContext, target, start, x, y, width)
 }
 
 /* _glCopyColorSubTable_Exec @ 0x60d78 (1044 bytes) */
-void _glCopyColorSubTable_Exec(int glContext,uint target,undefined4 start,undefined4 x,undefined4 y,int width,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glCopyColorSubTable_Exec(int glContext,uint target,undefined4 start,undefined4 x,undefined4 y,int width,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
@@ -1449,8 +1449,8 @@ void _glCopyColorSubTable_Exec(int glContext,uint target,undefined4 start,undefi
       piVar12 = (int *)(glContext + 0x310);
       cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((iVar6 != 0) && (*(int *)(iVar6 + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar6 + 0x10,uVar3,uVar7,uVar8,iVar10,iVar9,fparam_1,fparam_2,fparam_3,
-                   fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar6 + 0x10,uVar3,uVar7,uVar8,iVar10,iVar9,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+                   forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       }
       if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
@@ -1597,18 +1597,18 @@ void _glCopyColorSubTable_CompExec(glContext, target, start, x, y, width)
   undefined4 y;
   undefined4 width;
 {
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glCopyColorSubTable_Comp)(glContext,target,start,x,y,width);
-  ((void (*)())_glCopyColorSubTable_Exec)(glContext,target,start,x,y,width,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,
-             in_f7,in_f8);
+  ((void (*)())_glCopyColorSubTable_Exec)(glContext,target,start,x,y,width,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,
+             incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -2169,7 +2169,7 @@ LAB_00061d88:
 }
 
 /* _glCopyPixels_ListExec @ 0x61de0 (876 bytes) */
-undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
@@ -2180,10 +2180,10 @@ undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double 
   int iVar5;
   int *piVar6;
   int iVar7;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 incomingR5;
+  undefined4 incomingR6;
+  undefined4 incomingR7;
+  undefined4 incomingR8;
   int iVar8;
   int *piVar9;
   float *pfVar10;
@@ -2226,8 +2226,8 @@ undefined4 _glCopyPixels_ListExec(int glContext,undefined4 *recordedArgs,double 
       piVar9 = (int *)(glContext + 0x310);
       cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
       if ((iVar7 != 0) && (*(int *)(iVar7 + 0xec) != 0)) {
-        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar7 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar8,fparam_1,fparam_2,fparam_3,
-                   fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+        ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar7 + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,iVar8,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+                   forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
         *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       }
       if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
@@ -2386,18 +2386,18 @@ void _glCopyPixels_CompExec(glContext, x, y, width, height, type)
   undefined4 height;
   undefined4 type;
 {
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glCopyPixels_Comp)(glContext,x,y,width,height,type);
-  ((void (*)())_glCopyPixels_Exec)(glContext,x,y,width,height,type,fparam_1,in_f2,in_f3,in_f4,
-                     in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_glCopyPixels_Exec)(glContext,x,y,width,height,type,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,
+                     incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 

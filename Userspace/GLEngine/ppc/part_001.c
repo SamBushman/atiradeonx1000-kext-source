@@ -288,25 +288,25 @@ void _gleUpdateState(glContext)
   undefined *puVar1;
   undefined1 uVar2;
   undefined4 extraout_r4;
-  undefined4 in_r5;
-  undefined4 in_r6;
+  undefined4 incomingR5;
+  undefined4 incomingR6;
   int iVar3;
   int iVar4;
   double extraout_f1;
   double dVar5;
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
-  double in_stack_ffffffc8;
-  double in_stack_ffffffd0;
-  double in_stack_ffffffd8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffffb8;
+  double incomingStack_ffffffc0;
+  double incomingStack_ffffffc8;
+  double incomingStack_ffffffd0;
+  double incomingStack_ffffffd8;
   
   iVar3 = *(int *)(*(int *)(glContext + 0x468c) + 0x10);
   iVar4 = *(int *)(*(int *)(glContext + 0x468c) + 0xc);
@@ -346,11 +346,11 @@ void _gleUpdateState(glContext)
   } while (iVar4 < 8);
   ((void (*)())_gleUpdateInverseNeeds)(glContext);
   ((void (*)())_gleUpdateLightModel)(glContext);
-  ((void (*)())_gleUpdateClipPlane)(glContext,extraout_r4,in_r5,in_r6);
+  ((void (*)())_gleUpdateClipPlane)(glContext,extraout_r4,incomingR5,incomingR6);
   ((void (*)())_gleUpdateMatrixMode)(glContext);
   ((int (*)())_gleUpdateMatrixFunc)(glContext);
-  ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffffb8,
-             in_stack_ffffffc0,in_stack_ffffffc8,in_stack_ffffffd0,in_stack_ffffffd8);
+  ((void (*)())_gleUpdateDepthRangeData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffffb8,
+             incomingStack_ffffffc0,incomingStack_ffffffc8,incomingStack_ffffffd0,incomingStack_ffffffd8);
   ((void (*)())_gleUpdateTextureCoordGen)(glContext);
   iVar3 = 0;
   do {
@@ -361,7 +361,7 @@ void _gleUpdateState(glContext)
   ((double (*)())_gleUpdateFogData)(glContext);
   ((void (*)())_gleUpdatePolyMode)(glContext);
   dVar5 = (double)((double (*)())_gleUpdateEvalData)(glContext);
-  ((void (*)())_gleUpdateViewScissorData)(glContext,dVar5,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_gleUpdateViewScissorData)(glContext,dVar5,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   puVar1 = PTR__gleSetClipInterpFunc_00112038;
   *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
   *(undefined **)(glContext + 0x49cc) = puVar1;
@@ -545,7 +545,7 @@ LAB_00007490:
 }
 
 /* _gleUpdateLightPosition @ 0x74a4 (540 bytes) */
-double _gleUpdateLightPosition(int glContext,int param_2,double fparam_1)
+double _gleUpdateLightPosition(int glContext,int param_2,double unusedFloatArg1)
 {
   float floatZero;
   float floatOne;
@@ -559,10 +559,10 @@ double _gleUpdateLightPosition(int glContext,int param_2,double fparam_1)
   int iVar8;
   undefined4 uVar9;
   int iVar10;
-  undefined4 in_r6;
-  undefined4 in_r7;
+  undefined4 incomingR6;
+  undefined4 incomingR7;
   int iVar11;
-  undefined4 in_r8;
+  undefined4 incomingR8;
   undefined4 a6;
   
   iVar7 = glContext + param_2 * 0x80;
@@ -595,7 +595,7 @@ double _gleUpdateLightPosition(int glContext,int param_2,double fparam_1)
   *(undefined4 *)(iVar7 + 0x2880) = uVar9;
   *(undefined4 *)(iVar7 + 0x2884) = a6;
   *(float *)(iVar7 + 0x2888) = *(float *)(iVar7 + 0x2888) + floatOne;
-  (**(code **)puVar6)(glContext,iVar7 + 0x2880,iVar7 + 0x2880,in_r6,in_r7,in_r8,a6);
+  (**(code **)puVar6)(glContext,iVar7 + 0x2880,iVar7 + 0x2880,incomingR6,incomingR7,incomingR8,a6);
   ((void (*)())_gleUpdateLightFast)(glContext,param_2);
   ((void (*)())_gleUpdateLightModelFunc)(glContext);
   iVar7 = *(int *)(glContext + 0x5434);
@@ -627,7 +627,7 @@ double _gleUpdateLightPosition(int glContext,int param_2,double fparam_1)
 }
 
 /* _gleVectorNormalizeNO @ 0x76c0 (204 bytes) */
-double _gleVectorNormalizeNO(undefined4 param_1,float *param_2,float *param_3,double fparam_1)
+double _gleVectorNormalizeNO(undefined4 unusedArg1,float *param_2,float *param_3,double unusedFloatArg1)
 {
   float fVar1;
   float dVar2;
@@ -730,15 +730,15 @@ void _gleUpdateLightModelFunc(glContext)
 }
 
 /* _gleUpdateLightDirection @ 0x78f4 (220 bytes) */
-void _gleUpdateLightDirection(int glContext,int param_2,double fparam_1)
+void _gleUpdateLightDirection(int glContext,int param_2,double unusedFloatArg1)
 {
   byte bVar1;
   int iVar2;
-  undefined4 in_r6;
+  undefined4 incomingR6;
   int iVar3;
   
   (**(code **)PTR__gleVectorNormalize_00112064)
-            (glContext,glContext + param_2 * 0x80 + 0x2860,glContext + param_2 * 0x6c + 0x4a88,in_r6);
+            (glContext,glContext + param_2 * 0x80 + 0x2860,glContext + param_2 * 0x6c + 0x4a88,incomingR6);
   if (*(int *)(glContext + 0x5434) == 0) {
     bVar1 = *(byte *)(param_2 * 7 + *(int *)(glContext + 0x5420) + 0x25c);
   }
@@ -922,11 +922,11 @@ void _gleUpdateLightModel(glContext)
 }
 
 /* _gleUpdateClipPlane @ 0x7d98 (108 bytes) */
-void _gleUpdateClipPlane(glContext, param_2, param_3, param_4)
+void _gleUpdateClipPlane(glContext, unusedArg2, unusedArg3, unusedArg4)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
 {
   char cVar1;
   uint *puVar2;
@@ -1441,7 +1441,7 @@ int _gleUpdateTextureTransform(glContext)
 }
 
 /* _gleUpdateDepthRangeData @ 0x8c94 (156 bytes) */
-void _gleUpdateDepthRangeData(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleUpdateDepthRangeData(int glContext,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float fVar1;
   float fVar2;
@@ -1851,7 +1851,7 @@ double _gleUpdateEvalData(glContext)
 }
 
 /* _gleUpdateViewScissorData @ 0x9644 (1892 bytes) */
-void _gleUpdateViewScissorData(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _gleUpdateViewScissorData(int glContext,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8)
 {
   uint surfaceWidth;
   int surface;
@@ -2187,20 +2187,20 @@ void _gliSetCurrentPluginDispatchTable(glContext)
   undefined4 *puVar2;
   uint uVar3;
   int remaining;
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   puVar1 = PTR__gliDispatchNoop_00111e14;
   if (*(char *)(glContext + 0x4692) == '\0') {
     uVar3 = (**(code **)(glContext + 0x4784))
                       (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,glContext + 0x471c);
-    ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+    ((void (*)())_gleUpdateViewScissorData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
     if ((uVar3 & 4) == 0) {
       *(undefined1 *)(glContext + 0x7581) = 4;
     }
@@ -5604,12 +5604,12 @@ int _gleGenHashNames(param_1, listRange)
 }
 
 /* _gliAttachDrawableWithOptions @ 0x1250c (656 bytes) */
-int _gliAttachDrawableWithOptions(glContext, param_2, param_3, param_4, param_5)
+int _gliAttachDrawableWithOptions(glContext, param_2, param_3, param_4, forwardedArg5)
   int glContext;
   int param_2;
   int param_3;
   uint param_4;
-  undefined4 param_5;
+  undefined4 forwardedArg5;
 {
   bool bVar1;
   int iVar2;
@@ -5620,18 +5620,18 @@ int _gliAttachDrawableWithOptions(glContext, param_2, param_3, param_4, param_5)
   uint uVar7;
   double extraout_f1;
   double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffff98;
-  double in_stack_ffffffa0;
-  double in_stack_ffffffa8;
-  double in_stack_ffffffb0;
-  double in_stack_ffffffb8;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
+  double incomingStack_ffffff98;
+  double incomingStack_ffffffa0;
+  double incomingStack_ffffffa8;
+  double incomingStack_ffffffb0;
+  double incomingStack_ffffffb8;
   
   iVar2 = -(uint)(*(byte *)(glContext + 0x85a8) ^ *(byte *)(glContext + 0x85a6));
   bVar1 = false;
@@ -5648,7 +5648,7 @@ int _gliAttachDrawableWithOptions(glContext, param_2, param_3, param_4, param_5)
   *(undefined1 *)(glContext + 0x85a7) = 0;
   iVar4 = param_4 * 0x2e0 + glContext;
   uVar6 = (**(code **)(*(int *)(iVar4 + 0x8884) + 0x138))
-                    (*(undefined4 *)(iVar4 + 0x85ac),param_2,param_3,param_5);
+                    (*(undefined4 *)(iVar4 + 0x85ac),param_2,param_3,forwardedArg5);
   fparam_1 = extraout_f1;
   if ((uVar6 < 5) && (param_4 != *(byte *)(glContext + 0x85a8))) {
     fparam_1 = (double)_gliSwitchPlugin(glContext,param_4);
@@ -5656,8 +5656,8 @@ int _gliAttachDrawableWithOptions(glContext, param_2, param_3, param_4, param_5)
     uVar6 = 2;
   }
   if (uVar6 == 2) {
-    ((void (*)())_gliUpdatePluginConfig)(glContext,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,
-               in_stack_ffffffa0,in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8);
+    ((void (*)())_gliUpdatePluginConfig)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff98,
+               incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,incomingStack_ffffffb8);
 LAB_00012634:
     bVar1 = true;
 LAB_00012638:
@@ -5678,7 +5678,7 @@ LAB_000126b8:
       *(undefined1 *)(glContext + 0x85a7) = 1;
       iVar2 = uVar7 * 0x2e0 + glContext;
       uVar6 = (**(code **)(*(int *)(iVar2 + 0x8884) + 0x138))
-                        (*(undefined4 *)(iVar2 + 0x85ac),param_2,param_3,param_5);
+                        (*(undefined4 *)(iVar2 + 0x85ac),param_2,param_3,forwardedArg5);
       if (4 < uVar6) goto LAB_000126d8;
       if (uVar7 != *(byte *)(glContext + 0x85a8)) {
         _gliSwitchPlugin(glContext,uVar7);
@@ -5724,21 +5724,21 @@ LAB_00012774:
 }
 
 /* _gliUpdatePluginConfig @ 0x127a4 (104 bytes) */
-void _gliUpdatePluginConfig(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gliUpdatePluginConfig(int glContext,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   undefined *puVar1;
   double fparam_1_00;
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
-  double in_stack_ffffffc8;
-  double in_stack_ffffffd0;
-  double in_stack_ffffffd8;
+  double incomingStack_ffffffb8;
+  double incomingStack_ffffffc0;
+  double incomingStack_ffffffc8;
+  double incomingStack_ffffffd0;
+  double incomingStack_ffffffd8;
   
-  ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
-             in_stack_ffffffb8,in_stack_ffffffc0,in_stack_ffffffc8,in_stack_ffffffd0,
-             in_stack_ffffffd8);
+  ((void (*)())_gleUpdateDepthRangeData)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,
+             incomingStack_ffffffb8,incomingStack_ffffffc0,incomingStack_ffffffc8,incomingStack_ffffffd0,
+             incomingStack_ffffffd8);
   ((void (*)())_gleUpdatePolyMode)(glContext);
-  ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+  ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
   ((int (*)())_gleUpdateTextureTransform)(glContext);
   puVar1 = PTR__gleSetClipInterpFunc_00112038;
   *(undefined **)(glContext + 0x49c8) = PTR__gleSetEyeInterpFunc_0011203c;
@@ -8423,7 +8423,7 @@ LAB_00015f48:
 }
 
 /* _glViewport_Exec @ 0x15f6c (136 bytes) */
-void _glViewport_Exec(int glContext,undefined4 x,undefined4 y,int width,int height,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glViewport_Exec(int glContext,undefined4 x,undefined4 y,int width,int height,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int iVar1;
   undefined4 glErrorCode;
@@ -8447,7 +8447,7 @@ void _glViewport_Exec(int glContext,undefined4 x,undefined4 y,int width,int heig
       else {
         *(int *)(glContext + 0x1bac) = height;
       }
-      ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+      ((void (*)())_gleUpdateViewScissorData)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -8560,7 +8560,7 @@ int _glLoadIdentity_Exec(glContext)
 }
 
 /* _glOrtho_Exec @ 0x16190 (616 bytes) */
-void _glOrtho_Exec(int glContext,double left,double right,double bottom,double top,double zNear,double zFar,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glOrtho_Exec(int glContext,double left,double right,double bottom,double top,double zNear,double zFar,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float fVar1;
   float fVar2;
@@ -8675,9 +8675,9 @@ double _glEnable_Exec(glContext, cap)
 }
 
 /* _gleSetEnable_ALPHA_TEST @ 0x16464 (32 bytes) */
-void _gleSetEnable_ALPHA_TEST(param_1, param_2, param_3)
+void _gleSetEnable_ALPHA_TEST(param_1, unusedArg2, param_3)
   int param_1;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   uint param_3;
 {
   if (*(byte *)(param_1 + 0x30c6) == param_3) {

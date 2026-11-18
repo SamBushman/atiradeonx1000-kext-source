@@ -448,7 +448,7 @@ void _glFrontFace_CompExec(glContext, mode)
 }
 
 /* _glFrustum_ListExec @ 0x68030 (360 bytes) */
-undefined4 _glFrustum_ListExec(int glContext,float *recordedArgs,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
+undefined4 _glFrustum_ListExec(int glContext,float *recordedArgs,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
   float fVar1;
   float fVar2;
@@ -500,7 +500,7 @@ undefined4 _glFrustum_ListExec(int glContext,float *recordedArgs,double fparam_1
 }
 
 /* _glFrustum_Comp @ 0x68198 (408 bytes) */
-int _glFrustum_Comp(int glContext,double left,double right,double bottom,double top,double zNear,double zFar,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+int _glFrustum_Comp(int glContext,double left,double right,double bottom,double top,double zNear,double zFar,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float fVar1;
   float fVar2;
@@ -551,19 +551,19 @@ int _glFrustum_Comp(int glContext,double left,double right,double bottom,double 
 }
 
 /* _glFrustum_CompExec @ 0x68330 (120 bytes) */
-void _glFrustum_CompExec(undefined4 glContext,double left,double right,double bottom,double top,float zNear,double zFar,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glFrustum_CompExec(undefined4 glContext,double left,double right,double bottom,double top,float zNear,double zFar,double forwardedFloatArg7,double forwardedFloatArg8,double forwardedFloatArg9,double forwardedFloatArg10,double forwardedFloatArg11,double forwardedFloatArg12,double forwardedFloatArg13)
 {
-  double in_stack_ffffff68;
-  double in_stack_ffffff70;
-  double in_stack_ffffff78;
-  double in_stack_ffffff80;
-  double in_stack_ffffff88;
+  double incomingStack_ffffff68;
+  double incomingStack_ffffff70;
+  double incomingStack_ffffff78;
+  double incomingStack_ffffff80;
+  double incomingStack_ffffff88;
   
-  ((int (*)())_glFrustum_Comp)(glContext,left,right,bottom,top,zNear,zFar,fparam_7,fparam_8,
-                  in_stack_ffffff68,in_stack_ffffff70,in_stack_ffffff78,in_stack_ffffff80,
-                  in_stack_ffffff88);
-  ((void (*)())_glFrustum_Exec)(glContext,left,right,bottom,top,zNear,zFar,fparam_7,fparam_8,
-                  fparam_9,fparam_10,fparam_11,fparam_12,fparam_13);
+  ((int (*)())_glFrustum_Comp)(glContext,left,right,bottom,top,zNear,zFar,forwardedFloatArg7,forwardedFloatArg8,
+                  incomingStack_ffffff68,incomingStack_ffffff70,incomingStack_ffffff78,incomingStack_ffffff80,
+                  incomingStack_ffffff88);
+  ((void (*)())_glFrustum_Exec)(glContext,left,right,bottom,top,zNear,zFar,forwardedFloatArg7,forwardedFloatArg8,
+                  forwardedFloatArg9,forwardedFloatArg10,forwardedFloatArg11,forwardedFloatArg12,forwardedFloatArg13);
   return;
 }
 

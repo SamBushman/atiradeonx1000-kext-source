@@ -853,15 +853,15 @@ LAB_00059780:
 }
 
 /* _glClear_ListExec @ 0x597bc (40 bytes) */
-undefined4 _glClear_ListExec(undefined4 glContext,undefined4 *recordedArgs,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+undefined4 _glClear_ListExec(undefined4 glContext,undefined4 *recordedArgs,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
-  ((void (*)())_glClear_Exec)(glContext,*recordedArgs,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
-                fparam_8);
+  ((void (*)())_glClear_Exec)(glContext,*recordedArgs,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
+                forwardedFloatArg8);
   return 4;
 }
 
 /* _glClear_NoopExec @ 0x597e4 (640 bytes) */
-void _glClear_NoopExec(int glContext,undefined4 mask,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glClear_NoopExec(int glContext,undefined4 mask,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
@@ -869,10 +869,10 @@ void _glClear_NoopExec(int glContext,undefined4 mask,double fparam_1,double fpar
   char cVar2;
   int *piVar3;
   int iVar4;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 incomingR5;
+  undefined4 incomingR6;
+  undefined4 incomingR7;
+  undefined4 incomingR8;
   int iVar5;
   uint uVar6;
   int *piVar7;
@@ -890,8 +890,8 @@ void _glClear_NoopExec(int glContext,undefined4 mask,double fparam_1,double fpar
     piVar7 = (int *)(glContext + 0x310);
     cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
     if ((iVar4 != 0) && (*(int *)(iVar4 + 0xec) != 0)) {
-      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar4 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar5,fparam_1,fparam_2,fparam_3,
-                 fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+      ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar4 + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,iVar5,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+                 forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
       *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
       fparam_1 = fparam_1;
     }
@@ -966,8 +966,8 @@ LAB_000598fc:
     }
   }
   if (*(char *)(glContext + 0x759d) != '\0') {
-    ((void (*)())_glClear_Exec)(glContext,mask,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
-                  fparam_8);
+    ((void (*)())_glClear_Exec)(glContext,mask,fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
+                  forwardedFloatArg8);
     return;
   }
 LAB_00059a1c:

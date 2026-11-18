@@ -67,9 +67,9 @@ double _glDisable_Exec(glContext, cap)
 }
 
 /* _gleSetEnable_BLEND @ 0x16568 (32 bytes) */
-void _gleSetEnable_BLEND(param_1, param_2, param_3)
+void _gleSetEnable_BLEND(param_1, unusedArg2, param_3)
   int param_1;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   uint param_3;
 {
   if (*(byte *)(param_1 + 0x30e4) == param_3) {
@@ -81,9 +81,9 @@ void _gleSetEnable_BLEND(param_1, param_2, param_3)
 }
 
 /* _gleSetEnable_DEPTH_TEST @ 0x16588 (32 bytes) */
-void _gleSetEnable_DEPTH_TEST(param_1, param_2, param_3)
+void _gleSetEnable_DEPTH_TEST(param_1, unusedArg2, param_3)
   int param_1;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   uint param_3;
 {
   if (*(byte *)(param_1 + 0x3128) == param_3) {
@@ -112,9 +112,9 @@ void _glDepthMask_Exec(glContext, flag)
 }
 
 /* _gleSetEnable_CULL_FACE @ 0x165e8 (84 bytes) */
-void _gleSetEnable_CULL_FACE(glContext, param_2, param_3)
+void _gleSetEnable_CULL_FACE(glContext, unusedArg2, param_3)
   int glContext;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   uint param_3;
 {
   if (*(byte *)(glContext + 0x34da) != param_3) {
@@ -1060,15 +1060,15 @@ int _gleLookupHashObject(param_1, param_2)
 }
 
 /* _gleAddHashNameAndObject @ 0x17c54 (76 bytes) */
-int _gleAddHashNameAndObject(glContext, param_2, param_3)
+int _gleAddHashNameAndObject(glContext, forwardedArg2, param_3)
   undefined4 glContext;
-  undefined4 param_2;
+  undefined4 forwardedArg2;
   int param_3;
 {
   undefined4 uVar1;
   
-  uVar1 = ((int (*)())_gleAddHashName)(param_2,*(undefined4 *)(param_3 + 4));
-  ((void (*)())_gleAddHashObject)(param_2,param_3);
+  uVar1 = ((int (*)())_gleAddHashName)(forwardedArg2,*(undefined4 *)(param_3 + 4));
+  ((void (*)())_gleAddHashObject)(forwardedArg2,param_3);
   return uVar1;
 }
 
@@ -2250,11 +2250,11 @@ LAB_00019690:
 }
 
 /* _glePixelPackSettings @ 0x196b4 (376 bytes) */
-void _glePixelPackSettings(glContext, format, type, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
+void _glePixelPackSettings(glContext, format, type, forwardedArg4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   undefined4 glContext;
   undefined4 format;
   int type;
-  undefined4 param_4;
+  undefined4 forwardedArg4;
   int param_5;
   int *param_6;
   int *param_7;
@@ -2272,7 +2272,7 @@ void _glePixelPackSettings(glContext, format, type, param_4, param_5, param_6, p
   
   iVar1 = ((int (*)())_glePixelBytes)(format,type);
   *param_7 = iVar1;
-  uVar2 = ((int (*)())_gleRowBytes)(format,type,param_4);
+  uVar2 = ((int (*)())_gleRowBytes)(format,type,forwardedArg4);
   if (param_6 == (int *)0x0) {
     *param_9 = uVar2;
     *param_8 = 0;
@@ -2469,7 +2469,7 @@ LAB_00019af8:
 }
 
 /* _gleTextureImagePut_Fast @ 0x19b54 (900 bytes) */
-int _gleTextureImagePut_Fast(glContext, textureLevel, xoffset, yoffset, width, height, format, type, param_9, pixels)
+int _gleTextureImagePut_Fast(glContext, textureLevel, xoffset, yoffset, width, height, format, type, forwardedArg9, pixels)
   int glContext;
   int textureLevel;
   int xoffset;
@@ -2478,7 +2478,7 @@ int _gleTextureImagePut_Fast(glContext, textureLevel, xoffset, yoffset, width, h
   undefined4 height;
   uint format;
   uint type;
-  undefined4 param_9;
+  undefined4 forwardedArg9;
   int pixels;
 {
   bool bVar1;
@@ -2501,7 +2501,7 @@ int _gleTextureImagePut_Fast(glContext, textureLevel, xoffset, yoffset, width, h
   iVar4 = ((int (*)())_gleRowBytes)((uint)*(ushort *)(textureLevel + 0x10),(uint)*(ushort *)(textureLevel + 0x12),
                        (uint)*(ushort *)(textureLevel + 0xc));
   iVar7 = *(int *)(textureLevel + 0x14) + iVar3 * ((uint)*(ushort *)(textureLevel + 0xc) * yoffset + xoffset);
-  ((void (*)())_glePixelPackSettings)(glContext,format,type,width,height,param_9,&local_50,local_4c,&local_60,auStack_5c
+  ((void (*)())_glePixelPackSettings)(glContext,format,type,width,height,forwardedArg9,&local_50,local_4c,&local_60,auStack_5c
              ,auStack_58,auStack_54);
   iVar3 = ((int (*)())_gleComponents)(format);
   local_4c[0] = pixels + local_4c[0];
@@ -4427,9 +4427,9 @@ LAB_0001ca64:
 }
 
 /* _gleSetEnable_TEXTURE_RECTANGLE_EXT @ 0x1ca7c (80 bytes) */
-void _gleSetEnable_TEXTURE_RECTANGLE_EXT(glContext, param_2, param_3)
+void _gleSetEnable_TEXTURE_RECTANGLE_EXT(glContext, unusedArg2, param_3)
   int glContext;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   int param_3;
 {
   uint uVar1;
@@ -4457,7 +4457,7 @@ void _gleSetEnable_TEXTURE_RECTANGLE_EXT(glContext, param_2, param_3)
 }
 
 /* _glBegin_Exec @ 0x1cacc (704 bytes) */
-void _glBegin_Exec(int glContext,uint mode,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glBegin_Exec(int glContext,uint mode,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
@@ -4466,10 +4466,10 @@ void _glBegin_Exec(int glContext,uint mode,double fparam_1,double fparam_2,doubl
   undefined4 glErrorCode;
   int *piVar4;
   int iVar5;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 incomingR5;
+  undefined4 incomingR6;
+  undefined4 incomingR7;
+  undefined4 incomingR8;
   int iVar6;
   uint uVar7;
   int *piVar8;
@@ -4499,8 +4499,8 @@ void _glBegin_Exec(int glContext,uint mode,double fparam_1,double fparam_2,doubl
   piVar8 = (int *)(glContext + 0x310);
   cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
-               fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar5 + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,iVar6,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+               forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
   if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
@@ -4765,7 +4765,7 @@ void _glVertex2f_Exec(int glContext,double x,double y)
 }
 
 /* _gleSetVertexSubmitFunc @ 0x1d238 (156 bytes) */
-void _gleSetVertexSubmitFunc(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _gleSetVertexSubmitFunc(int glContext,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4)
 {
   undefined4 *puVar1;
   code *UNRECOVERED_JUMPTABLE;
@@ -4778,20 +4778,20 @@ void _gleSetVertexSubmitFunc(int glContext,undefined4 param_2,undefined4 param_3
   }
                     
                     
-  (*((int (*)(int,double,double,double,double))UNRECOVERED_JUMPTABLE))(glContext, fparam_1, fparam_2, fparam_3, fparam_4);
+  (*((int (*)(int,double,double,double,double))UNRECOVERED_JUMPTABLE))(glContext, forwardedFloatArg1, forwardedFloatArg2, forwardedFloatArg3, forwardedFloatArg4);
   return;
 }
 
 /* _gleBuildVertexFuncNO @ 0x1d2d4 (2472 bytes) */
-int _gleBuildVertexFuncNO(glContext, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _gleBuildVertexFuncNO(glContext, param_2, param_3, param_4, forwardedArg5, forwardedArg6, param_7, forwardedArg8)
   int glContext;
   int param_2;
   uint *param_3;
   uint param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 forwardedArg5;
+  undefined4 forwardedArg6;
   uint *param_7;
-  undefined4 param_8;
+  undefined4 forwardedArg8;
 {
   bool bVar1;
   ushort uVar2;
@@ -4874,7 +4874,7 @@ int _gleBuildVertexFuncNO(glContext, param_2, param_3, param_4, param_5, param_6
     }
 LAB_0001d42c:
     if (param_2 == 0) {
-      ((void (*)())_gleSetFunctionIDFromCurrent)(glContext,&uStack_d0,param_3,param_4,param_5,param_6,param_7,param_8);
+      ((void (*)())_gleSetFunctionIDFromCurrent)(glContext,&uStack_d0,param_3,param_4,forwardedArg5,forwardedArg6,param_7,forwardedArg8);
     }
     else if (*(int *)(glContext + 0x48ec) == 0) {
       _gleSetFunctionIDFromArray(glContext,*(int *)(glContext + 0x4a60) + 0x30,&uStack_d0);
@@ -5245,15 +5245,15 @@ LAB_0001de0c:
 }
 
 /* _gleSetFunctionIDFromCurrent @ 0x1de2c (92 bytes) */
-void _gleSetFunctionIDFromCurrent(glContext, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+void _gleSetFunctionIDFromCurrent(glContext, param_2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
   int glContext;
   uint *param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
   ushort uVar1;
   int iVar2;

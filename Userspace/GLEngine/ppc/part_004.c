@@ -1436,19 +1436,19 @@ void _glDeleteProgramsARB_Exec(glContext, n, programs)
 }
 
 /* _gleDeleteHashNameAndObject @ 0x30ef8 (136 bytes) */
-int _gleDeleteHashNameAndObject(glContext, param_2, param_3)
+int _gleDeleteHashNameAndObject(glContext, forwardedArg2, forwardedArg3)
   undefined4 glContext;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 forwardedArg2;
+  undefined4 forwardedArg3;
 {
   int iVar1;
   int iVar2;
   undefined4 uVar3;
   
-  iVar2 = ((int (*)())_gleRemoveHashName)(param_2,param_3);
+  iVar2 = ((int (*)())_gleRemoveHashName)(forwardedArg2,forwardedArg3);
   uVar3 = 0;
   if (iVar2 != 0) {
-    iVar2 = _gleRemoveHashObject(param_2,param_3);
+    iVar2 = _gleRemoveHashObject(forwardedArg2,forwardedArg3);
     if ((iVar2 != 0) && (iVar1 = *(int *)(iVar2 + 8) + -1, *(int *)(iVar2 + 8) = iVar1, iVar1 == 0))
     {
       (**(code **)(iVar2 + 0xc))(glContext);
@@ -1611,7 +1611,7 @@ void _glVertex4f_Exec(glContext)
 }
 
 /* _glFrustum_Exec @ 0x31220 (660 bytes) */
-void _glFrustum_Exec(int glContext,double left,double right,double bottom,double top,float zNear,double zFar,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glFrustum_Exec(int glContext,double left,double right,double bottom,double top,float zNear,double zFar,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float fVar1;
   float fVar2;
@@ -1782,9 +1782,9 @@ void _glDepthFunc_Exec(glContext, func)
 }
 
 /* _gleSetEnable_LINE_SMOOTH @ 0x31638 (32 bytes) */
-void _gleSetEnable_LINE_SMOOTH(param_1, param_2, param_3)
+void _gleSetEnable_LINE_SMOOTH(param_1, unusedArg2, param_3)
   int param_1;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   uint param_3;
 {
   if (*(byte *)(param_1 + 0x318d) == param_3) {
@@ -1796,7 +1796,7 @@ void _gleSetEnable_LINE_SMOOTH(param_1, param_2, param_3)
 }
 
 /* _glLightfv_Exec @ 0x31658 (1460 bytes) */
-void _glLightfv_Exec(int glContext,int light,undefined4 pname,float *params,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10)
+void _glLightfv_Exec(int glContext,int light,undefined4 pname,float *params,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
   byte bVar1;
   float fVar2;
@@ -1809,8 +1809,8 @@ void _glLightfv_Exec(int glContext,int light,undefined4 pname,float *params,doub
   int iVar9;
   uint uVar10;
   double dVar11;
-  double in_stack_ffffffa8;
-  double in_stack_ffffffb0;
+  double incomingStack_ffffffa8;
+  double incomingStack_ffffffb0;
   
   if (-1 < *(short *)(glContext + 0x4a10)) {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1915,14 +1915,14 @@ switchD_000316d0_default:
          fVar4 * *(float *)(glContext + 0x1cfc) +
          (fVar3 * *(float *)(glContext + 0x1cec) +
          (fVar5 * *(float *)(glContext + 0x1ccc) + fVar2 * *(float *)(glContext + 0x1cdc)));
-    ((double (*)())_gleUpdateLightPosition)(glContext,uVar10,fparam_1);
+    ((double (*)())_gleUpdateLightPosition)(glContext,uVar10,forwardedFloatArg1);
     goto LAB_00031c08;
   case 0x1204:
     *(float *)(iVar7 + 0x2860) = *params;
     *(float *)(iVar7 + 0x2864) = params[1];
     *(float *)(iVar7 + 0x2868) = params[2];
-    ((void (*)())_gleTransformLightDirection)(glContext,uVar10,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,
-               fparam_8,in_stack_ffffffa8,in_stack_ffffffb0);
+    ((void (*)())_gleTransformLightDirection)(glContext,uVar10,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,
+               forwardedFloatArg8,incomingStack_ffffffa8,incomingStack_ffffffb0);
     goto LAB_00031c08;
   case 0x1205:
     fVar5 = *params;
@@ -2028,9 +2028,9 @@ void _gleSetEnable_LIGHT(glContext, param_2, param_3)
 }
 
 /* _gleSetEnable_LIGHTING @ 0x31cc4 (220 bytes) */
-void _gleSetEnable_LIGHTING(glContext, param_2, param_3)
+void _gleSetEnable_LIGHTING(glContext, unusedArg2, param_3)
   int glContext;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   uint param_3;
 {
   undefined *puVar1;
@@ -2063,9 +2063,9 @@ void _gleSetEnable_LIGHTING(glContext, param_2, param_3)
 }
 
 /* _gleSetEnable_RESCALE_NORMAL_EXT @ 0x31da0 (44 bytes) */
-void _gleSetEnable_RESCALE_NORMAL_EXT(glContext, param_2, param_3)
+void _gleSetEnable_RESCALE_NORMAL_EXT(glContext, unusedArg2, param_3)
   int glContext;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   uint param_3;
 {
   if (*(byte *)(glContext + 0x280e) == param_3) {
@@ -2078,7 +2078,7 @@ void _gleSetEnable_RESCALE_NORMAL_EXT(glContext, param_2, param_3)
 }
 
 /* _glClear_Exec @ 0x31dcc (704 bytes) */
-void _glClear_Exec(int glContext,uint mask,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glClear_Exec(int glContext,uint mask,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   int remaining;
   int loopIndex;
@@ -2087,10 +2087,10 @@ void _glClear_Exec(int glContext,uint mask,double fparam_1,double fparam_2,doubl
   undefined4 glErrorCode;
   int *piVar4;
   int iVar5;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 incomingR5;
+  undefined4 incomingR6;
+  undefined4 incomingR7;
+  undefined4 incomingR8;
   int iVar6;
   uint uVar7;
   int *piVar8;
@@ -2123,8 +2123,8 @@ void _glClear_Exec(int glContext,uint mask,double fparam_1,double fparam_2,doubl
   piVar8 = (int *)(glContext + 0x310);
   cVar2 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
   if ((iVar5 != 0) && (*(int *)(iVar5 + 0xec) != 0)) {
-    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
-               fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+    ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar5 + 0x10,incomingR5,incomingR6,incomingR7,incomingR8,iVar6,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+               forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
     *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
   }
   if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
@@ -2327,10 +2327,10 @@ void _glRotatef_Exec(int glContext,double angle,double x,double y,double z)
   double dVar2;
   double dVar3;
   double fparam_3_00;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   fparam_3_00 = (double)*(float *)(glContext + 0x20);
   if ((y == fparam_3_00) && (z == fparam_3_00)) {
@@ -2340,8 +2340,8 @@ void _glRotatef_Exec(int glContext,double angle,double x,double y,double z)
     }
     dVar2 = _sin((double)(float)(angle * (double)fVar1));
     dVar3 = _cos((double)(float)(angle * (double)fVar1));
-    ((void (*)())_glRotateX_Exec)(glContext,(double)(float)dVar2,(double)(float)dVar3,fparam_3_00,z,in_f5,
-                    in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
+    ((void (*)())_glRotateX_Exec)(glContext,(double)(float)dVar2,(double)(float)dVar3,fparam_3_00,z,incomingFpr5,
+                    incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
@@ -2352,8 +2352,8 @@ void _glRotatef_Exec(int glContext,double angle,double x,double y,double z)
     }
     dVar2 = _sin((double)(float)(angle * (double)fVar1));
     dVar3 = _cos((double)(float)(angle * (double)fVar1));
-    ((void (*)())_glRotateY_Exec)(glContext,(double)(float)dVar2,(double)(float)dVar3,fparam_3_00,z,in_f5,
-                    in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
+    ((void (*)())_glRotateY_Exec)(glContext,(double)(float)dVar2,(double)(float)dVar3,fparam_3_00,z,incomingFpr5,
+                    incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
@@ -2364,8 +2364,8 @@ void _glRotatef_Exec(int glContext,double angle,double x,double y,double z)
     }
     dVar2 = _sin((double)(float)(angle * (double)fVar1));
     dVar3 = _cos((double)(float)(angle * (double)fVar1));
-    ((void (*)())_glRotateZ_Exec)(glContext,(double)(float)dVar2,(double)(float)dVar3,fparam_3_00,z,in_f5,
-                    in_f6,in_f7,in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
+    ((void (*)())_glRotateZ_Exec)(glContext,(double)(float)dVar2,(double)(float)dVar3,fparam_3_00,z,incomingFpr5,
+                    incomingFpr6,incomingFpr7,incomingFpr8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
     return;
   }
@@ -2374,7 +2374,7 @@ void _glRotatef_Exec(int glContext,double angle,double x,double y,double z)
 }
 
 /* _glRotateZ_Exec @ 0x324c4 (372 bytes) */
-void _glRotateZ_Exec(int glContext,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glRotateZ_Exec(int glContext,float fparam_1,float fparam_2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float fVar1;
   float fVar2;
@@ -2427,7 +2427,7 @@ void _glRotateZ_Exec(int glContext,float fparam_1,float fparam_2,double fparam_3
 }
 
 /* _glRotateY_Exec @ 0x32638 (372 bytes) */
-void _glRotateY_Exec(int glContext,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glRotateY_Exec(int glContext,float fparam_1,float fparam_2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float fVar1;
   float fVar2;
@@ -2583,7 +2583,7 @@ LAB_00032a4c:
 }
 
 /* _glMaterialfv_Exec @ 0x32a5c (1184 bytes) */
-void _glMaterialfv_Exec(int glContext,uint face,undefined *pname,float *params,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glMaterialfv_Exec(int glContext,uint face,undefined *pname,float *params,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8)
 {
   float fVar1;
   float fVar2;
@@ -2603,7 +2603,7 @@ void _glMaterialfv_Exec(int glContext,uint face,undefined *pname,float *params,d
   
   if (((*(char *)(glContext + 0x7580) != '\0') && (-1 < *(short *)(glContext + 0x4a10))) &&
      (*(char *)(glContext + 0x4664) == '\0')) {
-    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+    ((undefined4 (*)())_gleForceToSoftwareTCL)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8);
   }
   if (pname == (undefined *)0x1600) {
     local_34 = params[3];

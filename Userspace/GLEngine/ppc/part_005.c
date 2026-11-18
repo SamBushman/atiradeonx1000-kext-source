@@ -2656,18 +2656,18 @@ void _glMaterialfv_CompExec(glContext, face, pname, params)
   undefined4 pname;
   undefined4 params;
 {
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glMaterialfv_Comp)(glContext,face,pname,params);
-  ((void (*)())_glMaterialfv_Exec)(glContext,face,pname,params,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,
-                     in_f8);
+  ((void (*)())_glMaterialfv_Exec)(glContext,face,pname,params,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,
+                     incomingFpr8);
   return;
 }
 
@@ -2795,14 +2795,14 @@ void _glBegin_CompExec(glContext, mode)
   int glContext;
   undefined4 mode;
 {
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   if (*(char *)(glContext + 0x759c) == '\0') {
     if (*(int *)(glContext + 0x7574) == 0) {
@@ -2811,7 +2811,7 @@ void _glBegin_CompExec(glContext, mode)
     return;
   }
   ((int (*)())_glBegin_Comp)(glContext,mode);
-  ((void (*)())_glBegin_Exec)(glContext,mode,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_glBegin_Exec)(glContext,mode,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -3261,17 +3261,17 @@ void _glClear_CompExec(glContext, mask)
   undefined4 glContext;
   undefined4 mask;
 {
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glClear_Comp)(glContext,mask);
-  ((void (*)())_glClear_Exec)(glContext,mask,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())_glClear_Exec)(glContext,mask,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }
 
@@ -3290,9 +3290,9 @@ int _glClear_Comp(glContext, mask)
 }
 
 /* _gleSetEnable_STENCIL_TEST @ 0x3a3d0 (56 bytes) */
-void _gleSetEnable_STENCIL_TEST(param_1, param_2, param_3)
+void _gleSetEnable_STENCIL_TEST(param_1, unusedArg2, param_3)
   int param_1;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   int param_3;
 {
   uint uVar1;
