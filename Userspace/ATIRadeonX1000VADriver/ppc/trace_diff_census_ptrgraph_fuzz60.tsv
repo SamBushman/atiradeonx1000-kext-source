@@ -1,0 +1,19 @@
+#id	name	rc	pc	size	stock_cov	reb_cov	runs	IDENTICAL	REORDERED	READ_SET	FAULT_SITE	FAULT_MISMATCH	EFFECTS	EMUERR	TIMEOUT	UNINIT_REBUILT	UNINIT_OTHER	end_states	first_nonidentical	LAYOUT_DEP	PTR_VALUE_DEP	IMAGE_DATA_DEP
+3	_AVACreateRendererDVDExt	v	p	164	41	41	69	69	0	0	0	0	0	0	0	0	0	FAULT/FAULT:9,RET/RET:60		0	0	0
+21	ava_acquire_image	v	pn	308	77	77	94	23	70	0	0	0	0	0	0	0	0	FAULT/FAULT:35,RET/RET:59	REORDERED: same writes/reads per segment; order differs	1	0	0
+46	ava_emit_picture_setup_packet	v	pn	1416	193	254	127	59	68	0	0	0	0	0	0	0	0	FAULT/FAULT:127	REORDERED: same writes/reads per segment; order differs	0	0	0
+2	_AVACreateRendererDisplayExt	v	p	160	40	40	71	0	71	0	0	0	0	0	0	0	0	FAULT/FAULT:11,RET/RET:60	REORDERED: same writes/reads per segment; order differs	0	0	0
+23	ava_slot20_enqueue	v	pinp	192	48	48	114	35	79	0	0	0	0	0	0	0	0	FAULT/FAULT:78,RET/RET:36	REORDERED: same writes/reads per segment; order differs	0	0	0
+71	ava_emit_deint_enable_packet	v	p	184	46	46	129	32	97	0	0	0	0	0	0	0	0	FAULT/FAULT:70,RET/RET:59	REORDERED: same writes/reads per segment; order differs	0	0	0
+0	_AVACreateRenderer	v	ppp	520	130	130	105	33	72	0	0	0	0	0	0	0	0	FAULT/FAULT:46,RET/RET:59	REORDERED: same writes/reads per segment; order differs	0	0	0
+35	ava_init_context_state	v	p	1196	299	299	140	34	106	0	0	0	0	0	0	0	0	FAULT/FAULT:94,RET/RET:46	REORDERED: same writes/reads per segment; order differs	0	0	0
+48	ava_end_picture	v	p	468	42	85	133	0	68	0	15	0	0	0	0	0	50	FAULT/FAULT:118,RET/RET:15	FAULT_SITE: stock ('read', 525664) vs rebuilt ('read', 525672)	0	0	0
+63	ava_render_brightness_contrast_pass	v	pin	964	241	241	144	0	144	0	0	0	0	0	0	0	0	FAULT/FAULT:84,RET/RET:60	REORDERED: same writes/reads per segment; order differs	0	0	0
+68	ava_render_pass_47	v	piinnn	864	216	216	144	24	120	0	0	0	0	0	0	0	0	FAULT/FAULT:86,RET/RET:58	REORDERED: same writes/reads per segment; order differs	0	0	0
+62	ava_render_hue_saturation_pass	v	pin	1160	290	290	139	2	137	0	0	0	0	0	0	0	0	FAULT/FAULT:79,RET/RET:60	REORDERED: same writes/reads per segment; order differs	0	0	0
+65	ava_render_convert_frame_yuv2	v	pnp	1152	288	288	289	12	277	0	0	0	0	0	0	0	0	FAULT/FAULT:268,RET/RET:21	REORDERED: same writes/reads per segment; order differs	0	0	0
+73	ava_render_deinterlace_pass	v	ppii	600	150	150	306	26	280	0	0	0	0	0	0	0	0	FAULT/FAULT:264,RET/RET:42	REORDERED: same writes/reads per segment; order differs	0	0	0
+64	ava_render_convert_frame	v	pnp	204	51	51	295	31	264	0	0	0	0	0	0	0	0	FAULT/FAULT:281,RET/RET:14	REORDERED: same writes/reads per segment; order differs	0	0	0
+70	ava_dcache_flush_range_sync	v	pnniiiii	80	20	20	231	228	0	0	0	0	0	0	3	0	0	FAULT/FAULT:226,FAULT/TIMEOUT:2,RET/RET:2,TIMEOUT/TIMEOUT:1		0	0	0
+31	ava_release_subpicture	v	p	136	34	34	560	14	546	0	0	0	0	0	0	0	0	FAULT/FAULT:542,RET/RET:18	REORDERED: same writes/reads per segment; order differs	0	0	0
+8	ava_destroy_context	v	p	244	61	61	616	1	615	0	0	0	0	0	0	0	0	FAULT/FAULT:600,RET/RET:16	REORDERED: same writes/reads per segment; order differs	0	0	0

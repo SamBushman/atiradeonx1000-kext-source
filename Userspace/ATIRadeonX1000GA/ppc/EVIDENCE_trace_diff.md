@@ -24,3 +24,6 @@ Mode: `TD_ENTRYARGS=1 TD_HEAP=1 TD_REPAIR=12 TD_ARITY_FILE=arity_ga.tsv` (`contr
 
 ### Result on the fixed image (`trace_diff_census_ea_heap_fuzz150.tsv`)
 35 rows, 10,068 trials (47 excluded as layout-dependent): gate PASS 35, FAIL 0, REVIEW 0, NO-INFO 0, UNINIT 0. REORDERED 19, IDENTICAL 12, FAULT_SITE 4. 33 rows have runs where both images returned normally; 2 rows fault in every run. Not covered: the 45 corpus functions outside the ledger (unchanged).
+
+## Update Nov 17 (late afternoon): pointer-rich census of the fault-only rows (`ptrgraph_diff.py`)
+The GA rows of `trace_diff_census_emu_fuzz150.tsv` whose every run ended FAULT/FAULT were rerun with `Tools/userspace/emu/ptrgraph_diff.py` (pointer-rich arenas, see the GLDriver evidence of this date), `TD_ENTRYARGS=1 TD_HEAP=1 TD_REPAIR=12`, 8 seed trials + coverage-guided mutation to 60 inputs per row. Table: `trace_diff_census_ptrgraph_fuzz60.tsv`. Gate PASS for every row (no EFFECTS, no UNINIT_REBUILT). 9 rows: REORDERED 6, IDENTICAL 2, FAULT_SITE 1; 7 of 9 now return normally in both images; 2 still fault in every run (not verified beyond the common prefix).

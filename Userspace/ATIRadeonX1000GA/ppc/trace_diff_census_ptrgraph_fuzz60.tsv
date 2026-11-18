@@ -1,0 +1,10 @@
+#id	name	rc	pc	size	stock_cov	reb_cov	runs	IDENTICAL	REORDERED	READ_SET	FAULT_SITE	FAULT_MISMATCH	EFFECTS	EMUERR	TIMEOUT	UNINIT_REBUILT	UNINIT_OTHER	end_states	first_nonidentical	LAYOUT_DEP	PTR_VALUE_DEP	IMAGE_DATA_DEP
+0	__dyld_func_lookup	v	-	32	8	8	60	60	0	0	0	0	0	0	0	0	0	FAULT/FAULT:60		0	0	0
+17	_ATIRadeonX1000GAFactory	v	ii	324	81	81	60	0	60	0	0	0	0	0	0	0	0	RET/RET:60	REORDERED: same writes/reads per segment; order differs	0	0	0
+8	__QueryInterface	v	piiiip	340	56	64	182	182	0	0	0	0	0	0	0	0	0	FAULT/FAULT:135,RET/RET:47		0	0	0
+28	_createOffscreenBuffer	i	ppn	236	14	15	73	13	60	0	0	0	0	0	0	0	0	FAULT/FAULT:13,RET/RET:60	REORDERED: same writes/reads per segment; order differs	0	0	0
+33	_radeonHighlight	v	piiipn	860	24	62	93	40	53	0	0	0	0	0	0	0	0	FAULT/FAULT:34,RET/RET:59	REORDERED: same writes/reads per segment; order differs	0	0	0
+27	_createTextureBuffer	i	pnnn	260	22	25	60	0	60	0	0	0	0	0	0	0	0	RET/RET:60	REORDERED: same writes/reads per segment; order differs	0	0	0
+32	_radeonFill	v	ninnpi	1048	14	66	160	103	57	0	0	0	0	0	0	0	0	FAULT/FAULT:101,RET/RET:59	REORDERED: same writes/reads per segment; order differs	0	0	0
+30	_radeonCopy	v	piiin	1700	31	77	175	4	65	0	105	0	0	0	0	0	0	FAULT/FAULT:115,RET/RET:60	FAULT_PARTIAL: same fault ('read', 98); accesses completed before it differ: reads: only stock reads (1342241752, 4)	1	0	0
+11	_fillTextureWithPattern	v	pnii	664	56	59	280	30	250	0	0	0	0	0	0	0	0	FAULT/FAULT:280	REORDERED: same writes/reads per segment; order differs	0	0	0
