@@ -806,6 +806,10 @@ void _glLinkProgramARB_Exec(glContext, programObj)
   char *shaderString;
   undefined1 *stageRecord;
   int iVar18;
+  int unitRecord;
+  int shaderStringLength;
+  int attribIndex;
+  int uniformIndex;
   int vertexLocalParamCount;
   int uniformEntryOffset;
   int handleByteOffset;
@@ -1109,64 +1113,64 @@ LAB_0008879c:
                   *linkInfoRecord = *(undefined4 *)(sharedStateThenProgramObj + 0x28);
                   linkInfoRecord[1] = *(undefined4 *)(sharedStateThenProgramObj + 0x2c);
                   if (*(int *)(sharedStateThenProgramObj + 0x28) != 0) {
-                    iVar18 = 0;
+                    uniformIndex = 0;
                     uniformNameBuffer = _gleVecAlloc(*(int *)(sharedStateThenProgramObj + 0x28) * *(int *)(sharedStateThenProgramObj + 0x2c));
                     linkInfoRecord[2] = uniformNameBuffer;
                     uniformLocationTable = _gleVecAlloc(*(int *)(sharedStateThenProgramObj + 0x28) << 2);
                     linkInfoRecord[3] = uniformLocationTable;
                     if (0 < *(int *)(sharedStateThenProgramObj + 0x28)) {
                       do {
-                        activeUniformOk = _ShGetActiveUniform(*(undefined4 *)(sharedStateThenProgramObj + 0x40),iVar18,
+                        activeUniformOk = _ShGetActiveUniform(*(undefined4 *)(sharedStateThenProgramObj + 0x40),uniformIndex,
                                                     *(int *)(sharedStateThenProgramObj + 0x2c),activeNameLength,activeSize,
                                                     activeType,
-                                                    linkInfoRecord[2] + iVar18 * *(int *)(sharedStateThenProgramObj + 0x2c));
+                                                    linkInfoRecord[2] + uniformIndex * *(int *)(sharedStateThenProgramObj + 0x2c));
                         if (activeUniformOk == 0) {
-                          *(undefined4 *)(iVar18 * 4 + linkInfoRecord[3]) = 0xffffffff;
+                          *(undefined4 *)(uniformIndex * 4 + linkInfoRecord[3]) = 0xffffffff;
                         }
                         else {
                           uniformLocation = _ShGetUniformLocation
                                             (*(undefined4 *)(sharedStateThenProgramObj + 0x40),
-                                             linkInfoRecord[2] + iVar18 * *(int *)(sharedStateThenProgramObj + 0x2c));
-                          *(undefined4 *)(iVar18 * 4 + linkInfoRecord[3]) = uniformLocation;
+                                             linkInfoRecord[2] + uniformIndex * *(int *)(sharedStateThenProgramObj + 0x2c));
+                          *(undefined4 *)(uniformIndex * 4 + linkInfoRecord[3]) = uniformLocation;
                         }
-                        iVar18 = iVar18 + 1;
-                      } while (iVar18 < *(int *)(sharedStateThenProgramObj + 0x28));
+                        uniformIndex = uniformIndex + 1;
+                      } while (uniformIndex < *(int *)(sharedStateThenProgramObj + 0x28));
                     }
                   }
                   linkInfoRecord[4] = *(undefined4 *)(sharedStateThenProgramObj + 0x34);
                   linkInfoRecord[5] = *(undefined4 *)(sharedStateThenProgramObj + 0x38);
                   if (*(int *)(sharedStateThenProgramObj + 0x34) != 0) {
-                    iVar18 = 0;
+                    attribIndex = 0;
                     attribNameBuffer = _gleVecAlloc(*(int *)(sharedStateThenProgramObj + 0x34) * *(int *)(sharedStateThenProgramObj + 0x38));
                     linkInfoRecord[6] = attribNameBuffer;
                     attribLocationTable = _gleVecAlloc(*(int *)(sharedStateThenProgramObj + 0x34) << 2);
                     linkInfoRecord[7] = attribLocationTable;
                     if (0 < *(int *)(sharedStateThenProgramObj + 0x34)) {
                       do {
-                        activeAttribOk = _ShGetActiveAttrib(*(undefined4 *)(sharedStateThenProgramObj + 0x40),iVar18,
+                        activeAttribOk = _ShGetActiveAttrib(*(undefined4 *)(sharedStateThenProgramObj + 0x40),attribIndex,
                                                    *(int *)(sharedStateThenProgramObj + 0x38),activeNameLength,activeSize,
                                                    activeType,
-                                                   linkInfoRecord[6] + iVar18 * *(int *)(sharedStateThenProgramObj + 0x38));
+                                                   linkInfoRecord[6] + attribIndex * *(int *)(sharedStateThenProgramObj + 0x38));
                         if (activeAttribOk == 0) {
-                          *(undefined4 *)(iVar18 * 4 + linkInfoRecord[7]) = 0xffffffff;
+                          *(undefined4 *)(attribIndex * 4 + linkInfoRecord[7]) = 0xffffffff;
                         }
                         else {
                           attribLocation = _ShGetAttribLocation
                                             (*(undefined4 *)(sharedStateThenProgramObj + 0x40),
-                                             linkInfoRecord[6] + iVar18 * *(int *)(sharedStateThenProgramObj + 0x38));
-                          *(undefined4 *)(iVar18 * 4 + linkInfoRecord[7]) = attribLocation;
+                                             linkInfoRecord[6] + attribIndex * *(int *)(sharedStateThenProgramObj + 0x38));
+                          *(undefined4 *)(attribIndex * 4 + linkInfoRecord[7]) = attribLocation;
                         }
-                        iVar18 = iVar18 + 1;
-                      } while (iVar18 < *(int *)(sharedStateThenProgramObj + 0x34));
+                        attribIndex = attribIndex + 1;
+                      } while (attribIndex < *(int *)(sharedStateThenProgramObj + 0x34));
                     }
                   }
                   shaderString = *(char **)(stageShaders[stageIndex] + 0x2c);
                   if ((shaderString != (char *)0x0) && (*shaderString != '\0')) {
-                    iVar18 = _strlen(shaderString);
-                    shaderStringCopy = _gleVecAlloc(iVar18 + 1);
+                    shaderStringLength = _strlen(shaderString);
+                    shaderStringCopy = _gleVecAlloc(shaderStringLength + 1);
                     linkInfoRecord[8] = shaderStringCopy;
-                    iVar18 = _strlen(shaderString);
-                    _strncpy((char *)linkInfoRecord[8],shaderString,iVar18 + 1);
+                    shaderStringLength = _strlen(shaderString);
+                    _strncpy((char *)linkInfoRecord[8],shaderString,shaderStringLength + 1);
                   }
                   *(undefined4 **)(stageRecordForInfo + 0x518) = linkInfoRecord;
                 }
@@ -1225,15 +1229,15 @@ LAB_00088784:
       }
       unitIndex = 0;
       if (*(char *)(glContext + 0x85a4) != '\0') {
-        iVar18 = glContext + 0x85a0;
+        unitRecord = glContext + 0x85a0;
         do {
           perUnitByteOffset = unitIndex * 4;
           unitIndex = unitIndex + 1;
-          (**(code **)(*(int *)(iVar18 + 0x2e4) + 0x194))
-                    (*(undefined4 *)(iVar18 + 0xc),*(undefined4 *)(perUnitByteOffset + *stageRecordSlots + 0x4e4),1);
-          piVar13 = (int *)(iVar18 + 0x2e4);
-          puVar5 = (undefined4 *)(iVar18 + 0xc);
-          iVar18 = iVar18 + 0x2e0;
+          (**(code **)(*(int *)(unitRecord + 0x2e4) + 0x194))
+                    (*(undefined4 *)(unitRecord + 0xc),*(undefined4 *)(perUnitByteOffset + *stageRecordSlots + 0x4e4),1);
+          piVar13 = (int *)(unitRecord + 0x2e4);
+          puVar5 = (undefined4 *)(unitRecord + 0xc);
+          unitRecord = unitRecord + 0x2e0;
           (**(code **)(*piVar13 + 0x194))
                     (*puVar5,*(undefined4 *)(perUnitByteOffset + *(int *)(sharedStateThenProgramObj + 0x24) + 0x4e4),1);
         } while (unitIndex < (int)(uint)*(byte *)(glContext + 0x85a4));

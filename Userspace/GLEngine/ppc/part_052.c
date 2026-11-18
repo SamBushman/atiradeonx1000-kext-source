@@ -862,9 +862,9 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
   bool lightingEnabled;
   bool twoSidedLighting;
   bool windingFlip;
-  uint uVar8;
+  uint runStart;
   uint *puVar9;
-  undefined4 uVar10;
+  undefined4 batchEndReset;
   uint uVar11;
   uint uVar12;
   int iVar13;
@@ -878,10 +878,10 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
   uint uVar20;
   uint uVar21;
   uint vertexCount;
-  uint uVar22;
+  uint newRunStart;
   int iVar23;
   uint *polygonVertexList;
-  uint uVar25;
+  uint nextVertex;
   uint vertexCursor;
   double dVar27;
   double f1AfterCall;
@@ -958,10 +958,10 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
             facingChanged = false;
             iVar23 = 0;
             uVar11 = uVar21;
-            uVar8 = vertexCursor;
+            runStart = vertexCursor;
             while (uVar21 = uVar11, vertexCursor <= uVar12) {
-              uVar25 = vertexCursor + 0x100;
-              iVar13 = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,uVar25,vertexCursor + 0x200,uVar11,&backFacing,dVar27
+              nextVertex = vertexCursor + 0x100;
+              iVar13 = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,nextVertex,vertexCursor + 0x200,uVar11,&backFacing,dVar27
                                         ,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78
                                         ,incomingStack_ffffff80);
               dVar27 = f1AfterCall;
@@ -975,44 +975,44 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
                 }
                 iVar23 = iVar23 + 1;
                 iVar17 = backFacing;
-                uVar22 = uVar8;
+                newRunStart = runStart;
               }
               else {
-                uVar22 = uVar25;
+                newRunStart = nextVertex;
                 uVar21 = uVar11 ^ 1;
-                vertexCursor = uVar25;
+                vertexCursor = nextVertex;
                 if (0 < iVar23) break;
               }
               uVar11 = uVar11 ^ 1;
-              vertexCursor = uVar25;
-              uVar8 = uVar22;
+              vertexCursor = nextVertex;
+              runStart = newRunStart;
             }
             iVar13 = iVar23 + 2;
             if (2 < iVar13) {
               if (twoSidedLighting) {
                 if (facingChanged) {
-                  uVar11 = uVar8;
+                  uVar11 = runStart;
                   do {
                     *(byte *)(uVar11 + 0x7e) = *(byte *)(uVar11 + 0x7e) | 6;
                     uVar11 = uVar11 + 0x100;
-                  } while ((int)uVar11 <= (int)(uVar8 + 0x100));
+                  } while ((int)uVar11 <= (int)(runStart + 0x100));
                 }
                 lightFunc = *(code **)(iVar17 * 4 + glContext + 0x4de8);
 LAB_000ecb18:
-                (*lightFunc)(glContext,uVar8,iVar13);
+                (*lightFunc)(glContext,runStart,iVar13);
               }
               else if (lightingEnabled) {
                 lightFunc = *(code **)(glContext + 0x4de8);
                 goto LAB_000ecb18;
               }
               if ((!noVertexProgram) && (lightingEnabled)) {
-                _gleVPFlipColors(glContext,uVar8,iVar13,iVar17);
+                _gleVPFlipColors(glContext,runStart,iVar13,iVar17);
               }
-              uVar11 = uVar8;
+              uVar11 = runStart;
               if (uVar20 != 0) {
-                uVar11 = uVar8 + 0x100;
-                *triangleVertexList = uVar8 + 0x200;
-                triangleVertexList[2] = uVar8;
+                uVar11 = runStart + 0x100;
+                *triangleVertexList = runStart + 0x200;
+                triangleVertexList[2] = runStart;
                 triangleVertexList[1] = uVar11;
                 if (iVar17 != 0) {
                   facePolygonMode = *(ushort *)(glContext + 0x34d2);
@@ -1057,12 +1057,12 @@ LAB_000ecbb8: ;
             vertexCursor = vertexCursor + 0x100;
             polygonVertexList[1] = vertexCursor;
             if (noVertexProgram) {
-              uVar10 = *(undefined4 *)(glContext + 0x485c);
+              batchEndReset = *(undefined4 *)(glContext + 0x485c);
             }
             else {
-              uVar10 = *(undefined4 *)(glContext + 0x4854);
+              batchEndReset = *(undefined4 *)(glContext + 0x4854);
             }
-            *(undefined4 *)(glContext + 0x4858) = uVar10;
+            *(undefined4 *)(glContext + 0x4858) = batchEndReset;
             puVar15 = spareList;
             iVar13 = 3;
             puVar9 = polygonVertexList;
