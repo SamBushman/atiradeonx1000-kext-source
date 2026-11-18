@@ -865,7 +865,9 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
   uint runStart;
   uint *puVar9;
   undefined4 batchEndReset;
-  uint uVar11;
+  uint stripParity;
+  uint emitStart;
+  uint flipCursor;
   uint batchClipCodes;
   uint lastTriangleStart;
   int iVar13;
@@ -962,11 +964,11 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
           do {
             facingChanged = false;
             iVar23 = 0;
-            uVar11 = uVar21;
+            stripParity = uVar21;
             runStart = vertexCursor;
-            while (uVar21 = uVar11, vertexCursor <= lastTriangleStart) {
+            while (uVar21 = stripParity, vertexCursor <= lastTriangleStart) {
               nextVertex = vertexCursor + 0x100;
-              iVar13 = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,nextVertex,vertexCursor + 0x200,uVar11,&backFacing,dVar27
+              iVar13 = ((undefined4 (*)())_gleCullTriangle)(glContext,vertexCursor,nextVertex,vertexCursor + 0x200,stripParity,&backFacing,dVar27
                                         ,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff78
                                         ,incomingStack_ffffff80);
               dVar27 = f1AfterCall;
@@ -976,7 +978,7 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
                 }
                 if ((facingChanged) && (0 < iVar23)) break;
                 if (iVar23 == 0) {
-                  uVar20 = uVar11;
+                  uVar20 = stripParity;
                 }
                 iVar23 = iVar23 + 1;
                 previousFacing = backFacing;
@@ -984,11 +986,11 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
               }
               else {
                 newRunStart = nextVertex;
-                uVar21 = uVar11 ^ 1;
+                uVar21 = stripParity ^ 1;
                 vertexCursor = nextVertex;
                 if (0 < iVar23) break;
               }
-              uVar11 = uVar11 ^ 1;
+              stripParity = stripParity ^ 1;
               vertexCursor = nextVertex;
               runStart = newRunStart;
             }
@@ -996,11 +998,11 @@ void _gleFeedbackTriangleStripFunc_body(glContext)
             if (2 < iVar13) {
               if (twoSidedLighting) {
                 if (facingChanged) {
-                  uVar11 = runStart;
+                  flipCursor = runStart;
                   do {
-                    *(byte *)(uVar11 + 0x7e) = *(byte *)(uVar11 + 0x7e) | 6;
-                    uVar11 = uVar11 + 0x100;
-                  } while ((int)uVar11 <= (int)(runStart + 0x100));
+                    *(byte *)(flipCursor + 0x7e) = *(byte *)(flipCursor + 0x7e) | 6;
+                    flipCursor = flipCursor + 0x100;
+                  } while ((int)flipCursor <= (int)(runStart + 0x100));
                 }
                 lightFunc = *(code **)(previousFacing * 4 + glContext + 0x4de8);
 LAB_000ecb18:
@@ -1013,12 +1015,12 @@ LAB_000ecb18:
               if ((!noVertexProgram) && (lightingEnabled)) {
                 _gleVPFlipColors(glContext,runStart,iVar13,previousFacing);
               }
-              uVar11 = runStart;
+              emitStart = runStart;
               if (uVar20 != 0) {
-                uVar11 = runStart + 0x100;
+                emitStart = runStart + 0x100;
                 *triangleVertexList = runStart + 0x200;
                 triangleVertexList[2] = runStart;
-                triangleVertexList[1] = uVar11;
+                triangleVertexList[1] = emitStart;
                 if (previousFacing != 0) {
                   facePolygonMode = *(ushort *)(glContext + 0x34d2);
                 }
@@ -1035,7 +1037,7 @@ LAB_000ecb18:
               else {
                 facePolygonMode = *(ushort *)(glContext + 0x34d0);
               }
-              dVar27 = (double)_gleFeedbackTriangleStrip(glContext,uVar11,iVar13,facePolygonMode - 0x1b00);
+              dVar27 = (double)_gleFeedbackTriangleStrip(glContext,emitStart,iVar13,facePolygonMode - 0x1b00);
             }
 LAB_000ecbb8: ;
           } while (vertexCursor <= lastTriangleStart);
