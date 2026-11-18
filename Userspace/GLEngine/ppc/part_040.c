@@ -8674,7 +8674,8 @@ int _gleBuildModelviewTransformFuncAV_body(glContext, inputFlags)
   uint inputFlags;
 {
   uint matrixClassKey;
-  uint uVar2;
+  uint matrixIdentifier;
+  uint variantFlags;
   int funcCacheElem;
   int codeWordCount;
   int chunkWordCount;
@@ -8686,39 +8687,40 @@ int _gleBuildModelviewTransformFuncAV_body(glContext, inputFlags)
   undefined4 *codeEnd;
   undefined4 *codeCursor;
   undefined4 *bodyCursor;
-  uint uVar11;
+  uint matrixShapeBits;
+  uint fogMode;
   int *cacheHead;
   int *cacheScan;
   
   if (*(char *)(glContext + 0x4661) != '\0') {
     return (int *)PTR__gleTransformModelviewBlend_001109f8;
   }
-  uVar2 = (**(code **)PTR__gleGenerateMatrixIdentifier_00112060)(glContext,glContext + 0x1cc0);
-  *(uint *)(glContext + 0x5090) = uVar2;
-  uVar11 = uVar2;
-  if (((inputFlags & 2) != 0) && (uVar11 = uVar2 | 0xff00, (uVar2 & 0xc0c000c) == 0xc0c000c)) {
-    uVar11 = uVar2 & 0xffff00ff | 0xfb00;
+  matrixIdentifier = (**(code **)PTR__gleGenerateMatrixIdentifier_00112060)(glContext,glContext + 0x1cc0);
+  *(uint *)(glContext + 0x5090) = matrixIdentifier;
+  matrixShapeBits = matrixIdentifier;
+  if (((inputFlags & 2) != 0) && (matrixShapeBits = matrixIdentifier | 0xff00, (matrixIdentifier & 0xc0c000c) == 0xc0c000c)) {
+    matrixShapeBits = matrixIdentifier & 0xffff00ff | 0xfb00;
   }
-  uVar2 = inputFlags | *(ushort *)(glContext + 0x4fe8);
+  variantFlags = inputFlags | *(ushort *)(glContext + 0x4fe8);
   if (*(short *)(0x3170 + glContext + 4) == 0x1102) {
-    uVar2 = uVar2 | 0x20;
+    variantFlags = variantFlags | 0x20;
   }
   if ((*(byte *)(glContext + 0x50b4) & 1) == 0) {
-    if ((uVar2 & 0x10) == 0) {
-      uVar11 = uVar11 & 0xc0c0c0c | 0xb3e3f3f2;
+    if ((variantFlags & 0x10) == 0) {
+      matrixShapeBits = matrixShapeBits & 0xc0c0c0c | 0xb3e3f3f2;
     }
     else {
-      uVar11 = 0xbfeffbfe;
+      matrixShapeBits = 0xbfeffbfe;
     }
   }
-  matrixClassKey = uVar11;
-  if ((uVar11 != 0xbfeffbfe) && (matrixClassKey = 0x3fcff3fc, (uVar11 & 0x3fcff3fc) != 0x3fcff3fc)) {
+  matrixClassKey = matrixShapeBits;
+  if ((matrixShapeBits != 0xbfeffbfe) && (matrixClassKey = 0x3fcff3fc, (matrixShapeBits & 0x3fcff3fc) != 0x3fcff3fc)) {
     matrixClassKey = 0;
   }
   cacheHead = *(int **)(glContext + 0x5094);
   cacheScan = cacheHead;
   do {
-    if (matrixClassKey == cacheScan[2] && uVar2 == cacheScan[3]) {
+    if (matrixClassKey == cacheScan[2] && variantFlags == cacheScan[3]) {
       if (cacheScan != cacheHead) {
         _gleMoveFuncCacheElem(cacheHead,cacheScan);
         *(int **)(glContext + 0x5094) = cacheScan;
@@ -8732,7 +8734,7 @@ int _gleBuildModelviewTransformFuncAV_body(glContext, inputFlags)
     return (int *)PTR__gleRTCNoop_00112058;
   }
   *(uint *)(funcCacheElem + 8) = matrixClassKey;
-  *(uint *)(funcCacheElem + 0xc) = uVar2;
+  *(uint *)(funcCacheElem + 0xc) = variantFlags;
   if (*(short *)(glContext + 0x509a) == *(short *)(glContext + 0x5098)) {
     ((void (*)())_gleDeleteFuncCacheElem)(*(undefined4 *)(funcCacheElem + 4));
   }
@@ -8740,13 +8742,13 @@ int _gleBuildModelviewTransformFuncAV_body(glContext, inputFlags)
     *(short *)(glContext + 0x509a) = *(short *)(glContext + 0x509a) + 1;
   }
   codeEnd = (undefined4 *)(funcCacheElem + 0x20);
-  if ((matrixClassKey == 0xbfeffbfe) && ((uVar2 & 0xc) == 0)) goto LAB_000c4ac0;
-  uVar11 = uVar2 & 0xc;
+  if ((matrixClassKey == 0xbfeffbfe) && ((variantFlags & 0xc) == 0)) goto LAB_000c4ac0;
+  fogMode = variantFlags & 0xc;
   chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_glePrologAVRTC_10f1c8,codeEnd);
   loopStart = codeEnd + chunkWordCount;
   if (matrixClassKey != 0xbfeffbfe) {
     chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadMatrixPtrRTC_10f0a4,loopStart);
-    if ((uVar2 & 2) == 0) {
+    if ((variantFlags & 2) == 0) {
       codeChunk = &_gleLoadMatrixVectorsRTC_10f20c;
     }
     else {
@@ -8755,34 +8757,34 @@ int _gleBuildModelviewTransformFuncAV_body(glContext, inputFlags)
     chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_c44b8)(codeChunk,loopStart + chunkWordCount);
     loopStart = loopStart + chunkWordCount + chunkWordCount2;
   }
-  if (uVar11 == 8) {
+  if (fogMode == 8) {
     codeChunk = &_gleFogExpInitAVRTC;
 LAB_000c48cc:
     chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(codeChunk,loopStart);
     loopStart = loopStart + chunkWordCount;
   }
-  else if (uVar11 < 9) {
-    if (uVar11 == 4) {
+  else if (fogMode < 9) {
+    if (fogMode == 4) {
       codeChunk = &_gleFogLinearInitAVRTC;
       goto LAB_000c48cc;
     }
   }
-  else if (uVar11 == 0xc) {
+  else if (fogMode == 0xc) {
     codeChunk = &_gleFogExp2InitAVRTC;
     goto LAB_000c48cc;
   }
   if (matrixClassKey == 0) {
     chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadVectorsRTC_10f248,loopStart);
     codeCursor = loopStart + chunkWordCount;
-    if ((uVar2 & 1) == 0) {
-      if ((uVar2 & 2) == 0) {
+    if ((variantFlags & 1) == 0) {
+      if ((variantFlags & 2) == 0) {
         codeChunk = &_gleFullMatrixMultRTC_10f274;
       }
       else {
         codeChunk = &_gleFullMatrixMultZ0RTC_10f2b8;
       }
     }
-    else if ((uVar2 & 2) == 0) {
+    else if ((variantFlags & 2) == 0) {
       codeChunk = &_gleFullMatrixMultW1RTC_10f2ec;
     }
     else {
@@ -8804,13 +8806,13 @@ LAB_000c4998:
       goto LAB_000c4998;
     }
   }
-  if (uVar11 != 0) {
-    if ((uVar2 & 0x10) == 0) {
+  if (fogMode != 0) {
+    if ((variantFlags & 0x10) == 0) {
       if (matrixClassKey == 0xbfeffbfe) {
         chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(&_gleLoadVectorsToDstRTC,bodyCursor);
         bodyCursor = bodyCursor + chunkWordCount;
       }
-      if ((uVar2 & 0x20) == 0) goto LAB_000c4a24;
+      if ((variantFlags & 0x20) == 0) goto LAB_000c4a24;
       codeChunk = &_gleFogStoreCoordAVRTC;
     }
     else {
@@ -8820,19 +8822,19 @@ LAB_000c4998:
     bodyCursor = bodyCursor + chunkWordCount;
   }
 LAB_000c4a24:
-  if (uVar11 == 8) {
+  if (fogMode == 8) {
     codeChunk = &_gleFogExpAVRTC;
 LAB_000c4a68:
     chunkWordCount = ((int (*)())_gleRTCAddAChunk_c44b8)(codeChunk,bodyCursor);
     bodyCursor = bodyCursor + chunkWordCount;
   }
-  else if (uVar11 < 9) {
-    if (uVar11 == 4) {
+  else if (fogMode < 9) {
+    if (fogMode == 4) {
       codeChunk = &_gleFogLinearAVRTC;
       goto LAB_000c4a68;
     }
   }
-  else if (uVar11 == 0xc) {
+  else if (fogMode == 0xc) {
     codeChunk = &_gleFogExp2AVRTC;
     goto LAB_000c4a68;
   }

@@ -145,200 +145,200 @@ void _gleFeedbackLinesPtr(glContext, param_2, param_3, param_4)
 }
 
 /* _gleFeedbackPolygon @ 0xcc600 (480 bytes) */
-void _gleFeedbackPolygon(glContext, param_2, param_3, param_4)
+void _gleFeedbackPolygon(glContext, firstVertex, vertexCount, polygonModeIndex)
   undefined4 glContext;
-  uint param_2;
-  uint param_3;
-  uint param_4;
+  uint firstVertex;
+  uint vertexCount;
+  uint polygonModeIndex;
 {
-  uint uVar1;
+  uint edgeStart;
   double dVar2;
-  undefined4 uVar3;
+  undefined4 lineToken;
   uint uVar4;
   
   dVar2 = DOUBLE_00108d70;
-  uVar4 = param_4 & 3;
-  uVar3 = 0x707;
+  uVar4 = polygonModeIndex & 3;
+  lineToken = 0x707;
   if (uVar4 != 1) {
     if (uVar4 == 0) {
-      uVar4 = param_2 + param_3 * 0x100;
-      for (; param_2 < uVar4; param_2 = param_2 + 0x100) {
-        if ((*(char *)(param_2 + 0x7c) != '\0') && (*(char *)(param_2 + 0x7d) == '\0')) {
+      uVar4 = firstVertex + vertexCount * 0x100;
+      for (; firstVertex < uVar4; firstVertex = firstVertex + 0x100) {
+        if ((*(char *)(firstVertex + 0x7c) != '\0') && (*(char *)(firstVertex + 0x7d) == '\0')) {
           ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-          _gleFeedbackHitRecord(glContext,param_2);
+          _gleFeedbackHitRecord(glContext,firstVertex);
         }
       }
       return;
     }
     if (uVar4 == 2) {
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f30);
-      ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) -
+      ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,vertexCount ^ 0x80000000) -
                                                DOUBLE_00108d58));
-      uVar4 = param_2 + param_3 * 0x100;
-      for (; param_2 < uVar4; param_2 = param_2 + 0x100) {
-        _gleFeedbackHitRecord(glContext,param_2);
+      uVar4 = firstVertex + vertexCount * 0x100;
+      for (; firstVertex < uVar4; firstVertex = firstVertex + 0x100) {
+        _gleFeedbackHitRecord(glContext,firstVertex);
       }
       return;
     }
     if (uVar4 != 3) {
       return;
     }
-    uVar3 = 0x702;
+    lineToken = 0x702;
   }
-  uVar4 = param_2;
-  while (uVar1 = uVar4, uVar1 < (param_2 + param_3 * 0x100) - 0x100) {
-    uVar4 = uVar1 + 0x100;
-    if (*(char *)(uVar1 + 0x7c) != '\0') {
-      ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar3) - dVar2));
-      _gleFeedbackHitRecord(glContext,uVar1);
+  uVar4 = firstVertex;
+  while (edgeStart = uVar4, edgeStart < (firstVertex + vertexCount * 0x100) - 0x100) {
+    uVar4 = edgeStart + 0x100;
+    if (*(char *)(edgeStart + 0x7c) != '\0') {
+      ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - dVar2));
+      _gleFeedbackHitRecord(glContext,edgeStart);
       _gleFeedbackHitRecord(glContext,uVar4);
-      uVar3 = 0x702;
+      lineToken = 0x702;
     }
   }
-  if (*(char *)(uVar1 + 0x7c) != '\0') {
+  if (*(char *)(edgeStart + 0x7c) != '\0') {
     ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f34);
-    _gleFeedbackHitRecord(glContext,uVar1);
-    _gleFeedbackHitRecord(glContext,param_2);
+    _gleFeedbackHitRecord(glContext,edgeStart);
+    _gleFeedbackHitRecord(glContext,firstVertex);
   }
   return;
 }
 
 /* _gleFeedbackTriangles @ 0xcc7e0 (612 bytes) */
-double _gleFeedbackTriangles(undefined4 glContext,int param_2,int param_3,uint param_4,double fparam_1)
+double _gleFeedbackTriangles(undefined4 glContext,int vertexCursor,int vertexCount,uint polygonModeIndex,double fparam_1)
 {
-  uint uVar1;
+  uint polygonModeBits;
   double dVar2;
   double dVar3;
-  undefined4 uVar4;
-  int iVar5;
-  int iVar6;
+  undefined4 lineToken;
+  int lastTriangleStart;
+  int triangleStart;
   
   dVar3 = DOUBLE_00108dd0;
   dVar2 = DOUBLE_00108d70;
-  uVar1 = param_4 & 3;
-  iVar5 = param_3 + -3;
-  iVar6 = 0;
-  if (uVar1 == 1) {
-    if (-1 < iVar5) {
+  polygonModeBits = polygonModeIndex & 3;
+  lastTriangleStart = vertexCount + -3;
+  triangleStart = 0;
+  if (polygonModeBits == 1) {
+    if (-1 < lastTriangleStart) {
       do {
-        uVar4 = 0x707;
-        if (*(char *)(param_2 + 0x7c) != '\0') {
+        lineToken = 0x707;
+        if (*(char *)(vertexCursor + 0x7c) != '\0') {
           ((void (*)())_gleFeedbackToken)(glContext,(double)(float)dVar3);
-          _gleFeedbackHitRecord(glContext,param_2);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,param_2 + 0x100);
-          uVar4 = 0x702;
+          _gleFeedbackHitRecord(glContext,vertexCursor);
+          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
+          lineToken = 0x702;
         }
-        if (*(char *)(param_2 + 0x17c) != '\0') {
-          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar4) - dVar2));
-          _gleFeedbackHitRecord(glContext,param_2 + 0x100);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,param_2 + 0x200);
-          uVar4 = 0x702;
+        if (*(char *)(vertexCursor + 0x17c) != '\0') {
+          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - dVar2));
+          _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
+          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
+          lineToken = 0x702;
         }
-        if (*(char *)(param_2 + 0x27c) != '\0') {
-          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,uVar4) - dVar2));
-          _gleFeedbackHitRecord(glContext,param_2 + 0x200);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,param_2);
+        if (*(char *)(vertexCursor + 0x27c) != '\0') {
+          ((void (*)())_gleFeedbackToken)(glContext,(double)(float)((double)CONCAT44(0x43300000,lineToken) - dVar2));
+          _gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
+          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor);
         }
-        iVar6 = iVar6 + 3;
-        param_2 = param_2 + 0x300;
-      } while (iVar6 <= iVar5);
+        triangleStart = triangleStart + 3;
+        vertexCursor = vertexCursor + 0x300;
+      } while (triangleStart <= lastTriangleStart);
     }
   }
-  else if (uVar1 == 0) {
-    if (-1 < iVar5) {
+  else if (polygonModeBits == 0) {
+    if (-1 < lastTriangleStart) {
       do {
-        if (*(char *)(param_2 + 0x7c) != '\0') {
+        if (*(char *)(vertexCursor + 0x7c) != '\0') {
           ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,param_2);
+          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor);
         }
-        if (*(char *)(param_2 + 0x17c) != '\0') {
+        if (*(char *)(vertexCursor + 0x17c) != '\0') {
           ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,param_2 + 0x100);
+          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
         }
-        if (*(char *)(param_2 + 0x27c) != '\0') {
+        if (*(char *)(vertexCursor + 0x27c) != '\0') {
           ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f28);
-          fparam_1 = (double)_gleFeedbackHitRecord(glContext,param_2 + 0x200);
+          fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
         }
-        iVar6 = iVar6 + 3;
-        param_2 = param_2 + 0x300;
-      } while (iVar6 <= iVar5);
+        triangleStart = triangleStart + 3;
+        vertexCursor = vertexCursor + 0x300;
+      } while (triangleStart <= lastTriangleStart);
     }
   }
-  else if ((uVar1 == 2) && (-1 < iVar5)) {
+  else if ((polygonModeBits == 2) && (-1 < lastTriangleStart)) {
     do {
-      iVar6 = iVar6 + 3;
+      triangleStart = triangleStart + 3;
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f30);
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f38);
-      _gleFeedbackHitRecord(glContext,param_2);
-      _gleFeedbackHitRecord(glContext,param_2 + 0x100);
-      fparam_1 = (double)_gleFeedbackHitRecord(glContext,param_2 + 0x200);
-      param_2 = param_2 + 0x300;
-    } while (iVar6 <= iVar5);
+      _gleFeedbackHitRecord(glContext,vertexCursor);
+      _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
+      fparam_1 = (double)_gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
+      vertexCursor = vertexCursor + 0x300;
+    } while (triangleStart <= lastTriangleStart);
   }
   return fparam_1;
 }
 
 /* _gleFeedbackTriangleFan @ 0xcca44 (472 bytes) */
-double _gleFeedbackTriangleFan(glContext, param_2, param_3, param_4, param_5)
+double _gleFeedbackTriangleFan(glContext, centerVertex, vertexCursor, vertexCount, polygonModeIndex)
   undefined4 glContext;
-  undefined4 param_2;
-  int param_3;
-  int param_4;
-  uint param_5;
+  undefined4 centerVertex;
+  int vertexCursor;
+  int vertexCount;
+  uint polygonModeIndex;
 {
-  uint uVar1;
+  uint polygonModeBits;
   int iVar2;
-  int iVar3;
-  int iVar4;
-  float dVar5;
+  int triangleIndex;
+  int nextVertex;
+  float tokenValue;
   
-  uVar1 = param_5 & 3;
-  iVar2 = param_4 + -2;
-  iVar3 = 0;
-  if (uVar1 == 1) {
+  polygonModeBits = polygonModeIndex & 3;
+  iVar2 = vertexCount + -2;
+  triangleIndex = 0;
+  if (polygonModeBits == 1) {
     if (-1 < iVar2) {
-      dVar5 = (double)FLOAT_00108f34;
+      tokenValue = (double)FLOAT_00108f34;
       do {
-        iVar4 = param_3 + 0x100;
-        iVar3 = iVar3 + 1;
+        nextVertex = vertexCursor + 0x100;
+        triangleIndex = triangleIndex + 1;
         ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f2c);
-        _gleFeedbackHitRecord(glContext,param_2);
-        _gleFeedbackHitRecord(glContext,param_3);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar5);
-        _gleFeedbackHitRecord(glContext,param_3);
-        _gleFeedbackHitRecord(glContext,iVar4);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar5);
-        _gleFeedbackHitRecord(glContext,iVar4);
-        _gleFeedbackHitRecord(glContext,param_2);
-        param_3 = iVar4;
-      } while (iVar3 <= iVar2);
+        _gleFeedbackHitRecord(glContext,centerVertex);
+        _gleFeedbackHitRecord(glContext,vertexCursor);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
+        _gleFeedbackHitRecord(glContext,vertexCursor);
+        _gleFeedbackHitRecord(glContext,nextVertex);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
+        _gleFeedbackHitRecord(glContext,nextVertex);
+        _gleFeedbackHitRecord(glContext,centerVertex);
+        vertexCursor = nextVertex;
+      } while (triangleIndex <= iVar2);
     }
   }
-  else if (uVar1 == 0) {
+  else if (polygonModeBits == 0) {
     if (-1 < iVar2) {
-      dVar5 = (double)FLOAT_00108f28;
+      tokenValue = (double)FLOAT_00108f28;
       do {
-        iVar3 = iVar3 + 1;
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar5);
-        _gleFeedbackHitRecord(glContext,param_2);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar5);
-        _gleFeedbackHitRecord(glContext,param_3);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar5);
-        _gleFeedbackHitRecord(glContext,param_3 + 0x100);
-        param_3 = param_3 + 0x100;
-      } while (iVar3 <= iVar2);
+        triangleIndex = triangleIndex + 1;
+        ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
+        _gleFeedbackHitRecord(glContext,centerVertex);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
+        _gleFeedbackHitRecord(glContext,vertexCursor);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
+        _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
+        vertexCursor = vertexCursor + 0x100;
+      } while (triangleIndex <= iVar2);
     }
   }
-  else if ((uVar1 == 2) && (-1 < iVar2)) {
-    iVar2 = param_4 + -1;
+  else if ((polygonModeBits == 2) && (-1 < iVar2)) {
+    iVar2 = vertexCount + -1;
     do {
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f30);
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f38);
-      _gleFeedbackHitRecord(glContext,param_2);
-      _gleFeedbackHitRecord(glContext,param_3);
-      _gleFeedbackHitRecord(glContext,param_3 + 0x100);
+      _gleFeedbackHitRecord(glContext,centerVertex);
+      _gleFeedbackHitRecord(glContext,vertexCursor);
+      _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
       iVar2 = iVar2 + -1;
-      param_3 = param_3 + 0x100;
+      vertexCursor = vertexCursor + 0x100;
     } while (iVar2 != 0);
   }
   return;
@@ -525,71 +525,71 @@ double _gleFeedbackQuads(glContext, param_2, param_3, param_4)
 }
 
 /* _gleFeedbackQuadStrip @ 0xcd114 (552 bytes) */
-double _gleFeedbackQuadStrip(glContext, param_2, param_3, param_4)
+double _gleFeedbackQuadStrip(glContext, vertexCursor, vertexCount, polygonModeIndex)
   undefined4 glContext;
-  int param_2;
-  int param_3;
-  uint param_4;
+  int vertexCursor;
+  int vertexCount;
+  uint polygonModeIndex;
 {
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  float dVar5;
+  uint polygonModeBits;
+  int lastQuadStart;
+  int quadStart;
+  int nextQuadVertex;
+  float tokenValue;
   
-  uVar1 = param_4 & 3;
-  iVar2 = param_3 + -4;
-  iVar3 = 0;
-  if (uVar1 == 1) {
-    if (-1 < iVar2) {
-      dVar5 = (double)FLOAT_00108f34;
+  polygonModeBits = polygonModeIndex & 3;
+  lastQuadStart = vertexCount + -4;
+  quadStart = 0;
+  if (polygonModeBits == 1) {
+    if (-1 < lastQuadStart) {
+      tokenValue = (double)FLOAT_00108f34;
       do {
         ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f2c);
-        iVar3 = iVar3 + 2;
-        _gleFeedbackHitRecord(glContext,param_2);
-        _gleFeedbackHitRecord(glContext,param_2 + 0x100);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar5);
-        iVar4 = param_2 + 0x200;
-        _gleFeedbackHitRecord(glContext,param_2 + 0x100);
-        _gleFeedbackHitRecord(glContext,param_2 + 0x300);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar5);
-        _gleFeedbackHitRecord(glContext,param_2 + 0x300);
-        _gleFeedbackHitRecord(glContext,iVar4);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar5);
-        _gleFeedbackHitRecord(glContext,iVar4);
-        _gleFeedbackHitRecord(glContext,param_2);
-        param_2 = iVar4;
-      } while (iVar3 <= iVar2);
+        quadStart = quadStart + 2;
+        _gleFeedbackHitRecord(glContext,vertexCursor);
+        _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
+        nextQuadVertex = vertexCursor + 0x200;
+        _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
+        _gleFeedbackHitRecord(glContext,vertexCursor + 0x300);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
+        _gleFeedbackHitRecord(glContext,vertexCursor + 0x300);
+        _gleFeedbackHitRecord(glContext,nextQuadVertex);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
+        _gleFeedbackHitRecord(glContext,nextQuadVertex);
+        _gleFeedbackHitRecord(glContext,vertexCursor);
+        vertexCursor = nextQuadVertex;
+      } while (quadStart <= lastQuadStart);
     }
   }
-  else if (uVar1 == 0) {
-    if (-1 < iVar2) {
-      dVar5 = (double)FLOAT_00108f28;
+  else if (polygonModeBits == 0) {
+    if (-1 < lastQuadStart) {
+      tokenValue = (double)FLOAT_00108f28;
       do {
-        iVar3 = iVar3 + 2;
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar5);
-        _gleFeedbackHitRecord(glContext,param_2);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar5);
-        _gleFeedbackHitRecord(glContext,param_2 + 0x100);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar5);
-        _gleFeedbackHitRecord(glContext,param_2 + 0x300);
-        ((void (*)())_gleFeedbackToken)(glContext,(double)dVar5);
-        _gleFeedbackHitRecord(glContext,param_2 + 0x200);
-        param_2 = param_2 + 0x200;
-      } while (iVar3 <= iVar2);
+        quadStart = quadStart + 2;
+        ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
+        _gleFeedbackHitRecord(glContext,vertexCursor);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
+        _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
+        _gleFeedbackHitRecord(glContext,vertexCursor + 0x300);
+        ((void (*)())_gleFeedbackToken)(glContext,(double)tokenValue);
+        _gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
+        vertexCursor = vertexCursor + 0x200;
+      } while (quadStart <= lastQuadStart);
     }
   }
-  else if ((uVar1 == 2) && (-1 < iVar2)) {
+  else if ((polygonModeBits == 2) && (-1 < lastQuadStart)) {
     do {
-      iVar3 = iVar3 + 2;
+      quadStart = quadStart + 2;
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108f30);
       ((void (*)())_gleFeedbackToken)(glContext,(double)FLOAT_00108ea8);
-      _gleFeedbackHitRecord(glContext,param_2);
-      _gleFeedbackHitRecord(glContext,param_2 + 0x100);
-      _gleFeedbackHitRecord(glContext,param_2 + 0x300);
-      _gleFeedbackHitRecord(glContext,param_2 + 0x200);
-      param_2 = param_2 + 0x200;
-    } while (iVar3 <= iVar2);
+      _gleFeedbackHitRecord(glContext,vertexCursor);
+      _gleFeedbackHitRecord(glContext,vertexCursor + 0x100);
+      _gleFeedbackHitRecord(glContext,vertexCursor + 0x300);
+      _gleFeedbackHitRecord(glContext,vertexCursor + 0x200);
+      vertexCursor = vertexCursor + 0x200;
+    } while (quadStart <= lastQuadStart);
   }
   return;
 }

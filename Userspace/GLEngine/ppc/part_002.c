@@ -1653,14 +1653,14 @@ int _glTexImage2D_Exec(glContext, target, level, internalformat, width, height, 
   undefined4 type;
   int pixels;
 {
-  byte bVar1;
-  ushort uVar2;
+  byte levelFlags;
+  ushort textureTargetBits;
   undefined4 glErrorCode;
-  uint uVar4;
-  int iVar5;
+  uint faceIndex;
+  int levelWidth;
   int imageEndOffset;
   int iVar6;
-  int iVar7;
+  int levelHeight;
   int pixelUnpackBuffer;
   int iVar8;
   int textureLevel;
@@ -1707,60 +1707,60 @@ LAB_00018a2c:
   if (iVar6 == 0) {
     return 0;
   }
-  uVar2 = *(ushort *)(iVar6 + 0x24);
-  if ((uVar2 & 0x3c00) != 0x1000) {
-    if ((uVar2 & 0x3c00) == 0) {
-      *(ushort *)(iVar6 + 0x24) = uVar2 | 0x1000;
+  textureTargetBits = *(ushort *)(iVar6 + 0x24);
+  if ((textureTargetBits & 0x3c00) != 0x1000) {
+    if ((textureTargetBits & 0x3c00) == 0) {
+      *(ushort *)(iVar6 + 0x24) = textureTargetBits | 0x1000;
     }
-    else if ((uVar2 & 0xc00) != 0) goto LAB_00018a8c;
+    else if ((textureTargetBits & 0xc00) != 0) goto LAB_00018a8c;
   }
-  iVar7 = height;
-  iVar5 = width;
+  levelHeight = height;
+  levelWidth = width;
   if ((*(uint *)(glContext + 0x3410) & 2) == 0) {
     if (((*(uint *)(glContext + 0x3410) & 4) == 0) || (*(short *)(glContext + 0x3348) != -0x7fea))
     goto LAB_00018b08;
-    iVar7 = *(int *)(glContext + 0x3354);
-    iVar5 = *(int *)(glContext + 0x3350);
+    levelHeight = *(int *)(glContext + 0x3354);
+    levelWidth = *(int *)(glContext + 0x3350);
   }
   else {
     if (*(short *)(glContext + 0x3308) != -0x7fea) goto LAB_00018b08;
-    iVar7 = *(int *)(glContext + 0x3314);
-    iVar5 = *(int *)(glContext + 0x3310);
+    levelHeight = *(int *)(glContext + 0x3314);
+    levelWidth = *(int *)(glContext + 0x3310);
   }
-  iVar7 = (height - iVar7) + 1;
-  iVar5 = (width - iVar5) + 1;
+  levelHeight = (height - levelHeight) + 1;
+  levelWidth = (width - levelWidth) + 1;
 LAB_00018b08:
-  uVar4 = target - 0x8515;
-  if (5 < uVar4) {
-    uVar4 = 0;
+  faceIndex = target - 0x8515;
+  if (5 < faceIndex) {
+    faceIndex = 0;
   }
-  iVar8 = iVar6 + uVar4 * 0x168 + level * 0x18;
+  iVar8 = iVar6 + faceIndex * 0x168 + level * 0x18;
   textureLevel = iVar8 + 0xc4;
   if ((*(byte *)(iVar8 + 0xcf) & 0x20) != 0) {
-    _gleDeletePluginTextureLevel(glContext,iVar6,textureLevel,uVar4,level);
+    _gleDeletePluginTextureLevel(glContext,iVar6,textureLevel,faceIndex,level);
     if (*(int *)(iVar8 + 0xd8) != 0) {
-      bVar1 = *(byte *)(iVar8 + 0xcf);
-      if ((bVar1 & 1) == 0) {
+      levelFlags = *(byte *)(iVar8 + 0xcf);
+      if ((levelFlags & 1) == 0) {
         _gleFreeTextureLevel(glContext,iVar6,textureLevel);
-        bVar1 = *(byte *)(iVar8 + 0xcf);
+        levelFlags = *(byte *)(iVar8 + 0xcf);
       }
       else {
         *(undefined4 *)(iVar8 + 0xd8) = 0;
       }
-      *(byte *)(iVar8 + 0xcf) = bVar1 & 0xef;
+      *(byte *)(iVar8 + 0xcf) = levelFlags & 0xef;
     }
     *(byte *)(iVar8 + 0xcf) = *(byte *)(iVar8 + 0xcf) & 0xdf;
   }
-  iVar8 = ((int (*)())_gleCreateTextureLevel)(glContext,iVar6,textureLevel,internalformat,iVar5,iVar7,1,border,format,type,1,pixels);
+  iVar8 = ((int (*)())_gleCreateTextureLevel)(glContext,iVar6,textureLevel,internalformat,levelWidth,levelHeight,1,border,format,type,1,pixels);
   if ((iVar8 != 0) && (pixels != 0)) {
     iVar8 = ((int (*)())_gleTextureImagePut)(glContext,textureLevel,0,0,0,width,height,1,format,type,1,
                                 glContext + 0x31cc,pixels);
   }
-  if ((((iVar5 != 0) && (iVar7 != 0)) &&
-      (iVar8 = ((int (*)())_gleCreatePluginTextureLevel)(glContext,iVar6,textureLevel,uVar4,level,internalformat),
+  if ((((levelWidth != 0) && (levelHeight != 0)) &&
+      (iVar8 = ((int (*)())_gleCreatePluginTextureLevel)(glContext,iVar6,textureLevel,faceIndex,level,internalformat),
       (*(uint *)(iVar6 + 0x6c) & 0x8000) != 0)) &&
      ((*(short *)(iVar6 + 0x60) == level &&
-      (iVar6 = _gleGenMipmapsToLevel(glContext,iVar6,uVar4,level,0xf,1), iVar8 = 0, iVar6 != 0)))) {
+      (iVar6 = _gleGenMipmapsToLevel(glContext,iVar6,faceIndex,level,0xf,1), iVar8 = 0, iVar6 != 0)))) {
     return iVar6;
   }
   *(uint *)(glContext + 0x314) =

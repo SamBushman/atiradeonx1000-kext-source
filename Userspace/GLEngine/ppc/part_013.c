@@ -1182,8 +1182,8 @@ void _glCopyColorTable_Exec(int glContext,uint target,undefined4 internalformat,
   bool bVar1;
   bool noStateChangePending;
   char rendererInfoByte79;
-  byte bVar3;
-  ushort uVar4;
+  byte levelFlags;
+  ushort textureTargetBits;
   undefined4 uVar5;
   int *srcCursor;
   int iVar7;
@@ -1301,22 +1301,22 @@ LAB_000608e8:
     if (iVar12 == 0) {
       return;
     }
-    uVar4 = *(ushort *)(iVar12 + 0x24);
-    if ((uVar4 & 0x3c00) == 0x1000) {
+    textureTargetBits = *(ushort *)(iVar12 + 0x24);
+    if ((textureTargetBits & 0x3c00) == 0x1000) {
 LAB_00060a7c:
       iVar8 = iVar12 + 0xac;
       if ((*(byte *)(iVar12 + 0xb7) & 0x20) != 0) {
         _gleDeletePluginTextureLevel(glContext,iVar12,iVar8,0,0xffffffff);
         if (*(int *)(iVar12 + 0xc0) != 0) {
-          bVar3 = *(byte *)(iVar12 + 0xb7);
-          if ((bVar3 & 1) == 0) {
+          levelFlags = *(byte *)(iVar12 + 0xb7);
+          if ((levelFlags & 1) == 0) {
             _gleFreeTextureLevel(glContext,iVar12,iVar8);
-            bVar3 = *(byte *)(iVar12 + 0xb7);
+            levelFlags = *(byte *)(iVar12 + 0xb7);
           }
           else {
             *(undefined4 *)(iVar12 + 0xc0) = 0;
           }
-          *(byte *)(iVar12 + 0xb7) = bVar3 & 0xef;
+          *(byte *)(iVar12 + 0xb7) = levelFlags & 0xef;
         }
         *(byte *)(iVar12 + 0xb7) = *(byte *)(iVar12 + 0xb7) & 0xdf;
       }
@@ -1357,11 +1357,11 @@ LAB_00060a7c:
       _gleCreatePluginTextureLevel(glContext,iVar12,iVar8,0,0xffffffff,internalformat);
       return;
     }
-    if ((uVar4 & 0x3c00) == 0) {
-      *(ushort *)(iVar12 + 0x24) = uVar4 | 0x1000;
+    if ((textureTargetBits & 0x3c00) == 0) {
+      *(ushort *)(iVar12 + 0x24) = textureTargetBits | 0x1000;
       goto LAB_00060a7c;
     }
-    if ((uVar4 & 0xc00) == 0) goto LAB_00060a7c;
+    if ((textureTargetBits & 0xc00) == 0) goto LAB_00060a7c;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
     return;

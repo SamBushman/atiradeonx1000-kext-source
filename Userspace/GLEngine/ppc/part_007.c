@@ -671,8 +671,8 @@ void _gleTexLevelStorage(glContext, internalformat, format, type, storedFormat, 
   int border;
 {
   uint uVar1;
-  undefined2 uVar2;
-  undefined2 uVar3;
+  undefined2 chosenFormat;
+  undefined2 chosenType;
   
   if ((format == 0x85b9) && (type - 0x85ba < 2)) {
     *storedFormat = 0x85b9;
@@ -694,8 +694,8 @@ LAB_000468e8:
     if (internalformat == 0x804f) {
 LAB_00046df8:
       if ((type != 0x8033) && (type != 0x8365)) {
-        uVar2 = 0x1908;
-        uVar3 = 0x8033;
+        chosenFormat = 0x1908;
+        chosenType = 0x8033;
         goto LAB_00046fe0;
       }
     }
@@ -706,27 +706,27 @@ LAB_00046df8:
           return;
         }
 LAB_00046eac:
-        uVar2 = 0x1909;
+        chosenFormat = 0x1909;
 LAB_00046fcc:
-        *storedFormat = uVar2;
-        uVar3 = 0x1403;
+        *storedFormat = chosenFormat;
+        chosenType = 0x1403;
         goto LAB_00046c3c;
       }
       if (internalformat == 0x8052) {
 LAB_00046c6c:
         if ((type != 0x8036) && (type != 0x8368)) {
-          uVar2 = 0x1908;
-          uVar3 = 0x8036;
+          chosenFormat = 0x1908;
+          chosenType = 0x8036;
           goto LAB_00046fe0;
         }
       }
       else {
-        uVar2 = 0x1907;
+        chosenFormat = 0x1907;
         if (0x8052 < internalformat) goto LAB_00046fcc;
         if (internalformat == 0x8050) {
           if (((1 < type - 0x8363) && (type != 0x8034)) && (type != 0x8366)) {
-            uVar2 = 0x1907;
-            uVar3 = 0x8363;
+            chosenFormat = 0x1907;
+            chosenType = 0x8363;
             goto LAB_00046fe0;
           }
         }
@@ -784,49 +784,49 @@ LAB_00046f34:
         }
 LAB_00046fbc:
         if (3 < type - 0x1400) {
-          uVar2 = 0x1902;
-          uVar3 = 0x1405;
+          chosenFormat = 0x1902;
+          chosenType = 0x1405;
           goto LAB_00046fe0;
         }
-        uVar2 = 0x1902;
+        chosenFormat = 0x1902;
         goto LAB_00046fcc;
       }
-      uVar2 = 0x1900;
+      chosenFormat = 0x1900;
       if (internalformat < 0x80e2) {
         if (internalformat == 0x8059) goto LAB_00046c6c;
         if (0x8059 < internalformat) {
           if (0x805b < internalformat) {
             return;
           }
-          uVar2 = 0x1908;
+          chosenFormat = 0x1908;
           goto LAB_00046fcc;
         }
         if (internalformat == 0x8057) {
           if ((type == 0x8034) || (type == 0x8366)) goto LAB_00046c7c;
-          uVar2 = 0x1908;
-          uVar3 = 0x8034;
+          chosenFormat = 0x1908;
+          chosenType = 0x8034;
         }
         else {
           if (internalformat != 0x8058) {
             return;
           }
           if ((type == 0x8035) || (type == 0x8367)) goto LAB_00046c7c;
-          uVar2 = 0x1908;
-          uVar3 = 0x8035;
+          chosenFormat = 0x1908;
+          chosenType = 0x8035;
         }
         goto LAB_00046fe0;
       }
 LAB_00046fa0:
-      *storedFormat = uVar2;
-      uVar3 = 0x1401;
+      *storedFormat = chosenFormat;
+      chosenType = 0x1401;
       goto LAB_00046c3c;
     }
-    uVar2 = 0x190a;
+    chosenFormat = 0x190a;
     if (internalformat < 0x8046) {
       if (internalformat == 0x2a10) {
         if ((type == 0x8032) || (type == 0x8362)) goto LAB_00046c7c;
-        uVar2 = 0x1907;
-        uVar3 = 0x8032;
+        chosenFormat = 0x1907;
+        chosenType = 0x8032;
         goto LAB_00046fe0;
       }
       if (internalformat < 0x2a11) {
@@ -838,7 +838,7 @@ LAB_00046fa0:
                 return;
               }
 LAB_00046eb4:
-              uVar2 = 0x1909;
+              chosenFormat = 0x1909;
               goto LAB_00046fa0;
             }
             if (internalformat == 3) goto LAB_00046d0c;
@@ -853,7 +853,7 @@ LAB_00046e24:
             else if (type < 0x8367) {
               if ((type < 0x8363) && (type != 0x8362)) {
 LAB_00046e7c:
-                uVar2 = 0x1908;
+                chosenFormat = 0x1908;
                 goto LAB_00046fa0;
               }
             }
@@ -872,7 +872,7 @@ LAB_00046d0c:
             if (type < 0x8037) {
               if (((type < 0x8035) && (type != 0x8032)) && (type < 0x8032)) {
 LAB_00046d64:
-                uVar2 = 0x1907;
+                chosenFormat = 0x1907;
                 goto LAB_00046fa0;
               }
             }
@@ -891,7 +891,7 @@ LAB_00046d64:
           }
         }
 LAB_00046c54:
-        uVar2 = 0x190a;
+        chosenFormat = 0x190a;
         goto LAB_00046fa0;
       }
       if (0x8040 < internalformat) {
@@ -904,30 +904,30 @@ LAB_00046c54:
       }
       if (internalformat < 0x803d) {
 LAB_00046f0c:
-        uVar2 = 0x1906;
+        chosenFormat = 0x1906;
         goto LAB_00046fa0;
       }
-      uVar2 = 0x1906;
+      chosenFormat = 0x1906;
     }
     goto LAB_00046fcc;
   }
   if (0x8706 < internalformat) {
     if (internalformat == 0x8817) {
 LAB_00046e9c:
-      uVar2 = 0x1909;
+      chosenFormat = 0x1909;
 LAB_00046ea0:
-      *storedFormat = uVar2;
-      uVar3 = 0x1406;
+      *storedFormat = chosenFormat;
+      chosenType = 0x1406;
       goto LAB_00046c3c;
     }
     if (0x8817 < internalformat) {
       if (internalformat == 0x881d) {
 LAB_00046c30:
-        uVar2 = 0x1909;
+        chosenFormat = 0x1909;
       }
       else if (internalformat < 0x881e) {
         if (internalformat == 0x881a) {
-          uVar2 = 0x1908;
+          chosenFormat = 0x1908;
         }
         else {
           if (internalformat < 0x881b) {
@@ -935,98 +935,98 @@ LAB_00046c30:
               if (internalformat != 0x8819) {
                 return;
               }
-              uVar2 = 0x190a;
+              chosenFormat = 0x190a;
               goto LAB_00046ea0;
             }
             goto LAB_00046e9c;
           }
           if (internalformat == 0x881b) {
-            uVar2 = 0x1907;
+            chosenFormat = 0x1907;
           }
           else {
             if (internalformat != 0x881c) {
               return;
             }
-            uVar2 = 0x1906;
+            chosenFormat = 0x1906;
           }
         }
       }
       else {
         if (internalformat == 0x8837) {
 LAB_00046f1c:
-          uVar2 = 0x8837;
+          chosenFormat = 0x8837;
           goto LAB_00046f28;
         }
         if (0x8837 < internalformat) {
           if (internalformat == 0x885e) {
-            uVar2 = 0x86f4;
+            chosenFormat = 0x86f4;
             goto LAB_00046fa0;
           }
           if (internalformat != 0x885f) {
             return;
           }
-          uVar2 = 0x86f4;
+          chosenFormat = 0x86f4;
           goto LAB_00046fb0;
         }
         if (internalformat == 0x881e) goto LAB_00046c30;
         if (internalformat != 0x881f) {
           return;
         }
-        uVar2 = 0x190a;
+        chosenFormat = 0x190a;
       }
-      *storedFormat = uVar2;
-      uVar3 = 0x140b;
+      *storedFormat = chosenFormat;
+      chosenType = 0x140b;
       goto LAB_00046c3c;
     }
     if (internalformat != 0x870b) {
       if (0x870b < internalformat) {
         if (internalformat == 0x8814) {
-          uVar2 = 0x1908;
+          chosenFormat = 0x1908;
         }
         else {
           if (internalformat < 0x8815) {
             if (0x870d < internalformat) {
               return;
             }
-            uVar2 = 0x80e1;
-            uVar3 = 7;
+            chosenFormat = 0x80e1;
+            chosenType = 7;
             goto LAB_00046fe0;
           }
           if (internalformat == 0x8815) {
-            uVar2 = 0x1907;
+            chosenFormat = 0x1907;
           }
           else {
             if (internalformat != 0x8816) {
               return;
             }
-            uVar2 = 0x1906;
+            chosenFormat = 0x1906;
           }
         }
         goto LAB_00046ea0;
       }
       if (internalformat == 0x8709) {
 LAB_00046f88:
-        uVar2 = 0x86f5;
+        chosenFormat = 0x86f5;
         goto LAB_00046fb0;
       }
       if (internalformat < 0x870a) goto LAB_00046f68;
     }
 LAB_00046f90:
-    uVar2 = 0x86dc;
-    uVar3 = 0x86db;
+    chosenFormat = 0x86dc;
+    chosenType = 0x86db;
     goto LAB_00046fe0;
   }
-  uVar2 = 0x1906;
+  chosenFormat = 0x1906;
   if (0x8704 < internalformat) {
 LAB_00046fb0:
-    *storedFormat = uVar2;
-    uVar3 = 0x1400;
+    *storedFormat = chosenFormat;
+    chosenType = 0x1400;
     goto LAB_00046c3c;
   }
   if (internalformat == 0x86f8) {
 LAB_00046f70:
-    uVar2 = 0x86f4;
-    uVar3 = 5;
+    chosenFormat = 0x86f4;
+    chosenType = 5;
   }
   else {
     if (internalformat < 0x86f9) {
@@ -1040,20 +1040,20 @@ LAB_00046f70:
              ((format == 0x1906 ||
               (((format == 0x190a || (format == 0x1908)) || (format == 0x80e1))))))
           goto LAB_00046f0c;
-          uVar2 = 0x83f1;
+          chosenFormat = 0x83f1;
         }
         else {
-          uVar2 = 0x83f0;
+          chosenFormat = 0x83f0;
         }
 LAB_00046f28:
-        *storedFormat = uVar2;
-        uVar3 = 0;
+        *storedFormat = chosenFormat;
+        chosenType = 0;
         goto LAB_00046c3c;
       }
       if (internalformat != 0x86f4) {
         if (internalformat < 0x86f5) {
           if (internalformat == 0x84ee) {
-            uVar2 = 0x83f2;
+            chosenFormat = 0x83f2;
             goto LAB_00046f28;
           }
           uVar1 = 0x86dc;
@@ -1072,16 +1072,16 @@ LAB_00046f28:
     if (internalformat < 0x8700) {
       if (internalformat < 0x86fe) {
         if (internalformat < 0x86fb) {
-          uVar2 = 0x86f4;
-          uVar3 = 6;
+          chosenFormat = 0x86f4;
+          chosenType = 6;
           goto LAB_00046fe0;
         }
         if (0x86fc < internalformat) {
           return;
         }
       }
-      uVar2 = 0x80e1;
-      uVar3 = 8;
+      chosenFormat = 0x80e1;
+      chosenType = 8;
     }
     else {
       if (internalformat < 0x8701) {
@@ -1089,17 +1089,17 @@ LAB_00046f28:
       }
       if (internalformat < 0x8703) {
 LAB_00046f68:
-        uVar2 = 0x1909;
+        chosenFormat = 0x1909;
         goto LAB_00046fb0;
       }
-      uVar2 = 0x190a;
-      uVar3 = 1;
+      chosenFormat = 0x190a;
+      chosenType = 1;
     }
   }
 LAB_00046fe0:
-  *storedFormat = uVar2;
+  *storedFormat = chosenFormat;
 LAB_00046c3c:
-  *storedType = uVar3;
+  *storedType = chosenType;
   return;
 }
 
@@ -6233,70 +6233,70 @@ LAB_0004de9c:
 }
 
 /* _gleSetArrayLoadAddressNO @ 0x4df2c (504 bytes) */
-int _gleSetArrayLoadAddressNO(param_1, param_2, param_3, param_4)
-  uint *param_1;
-  int param_2;
-  uint param_3;
-  uint param_4;
+int _gleSetArrayLoadAddressNO(codeCursor, codeStart, arrayBaseOffset, elementStride)
+  uint *codeCursor;
+  int codeStart;
+  uint arrayBaseOffset;
+  uint elementStride;
 {
-  uint uVar1;
+  uint offsetField;
   uint uVar2;
   
-  if (param_4 == 0x3ff) {
-    *param_1 = param_3 & 0xffff | 0x81030000;
-    param_1[1] = param_3 + 4 & 0xffff | 0x81240000;
-    param_1[2] = 0x7d2649d6;
-    param_1[3] = 0x7ce84a14;
-    return param_1 + 4;
+  if (elementStride == 0x3ff) {
+    *codeCursor = arrayBaseOffset & 0xffff | 0x81030000;
+    codeCursor[1] = arrayBaseOffset + 4 & 0xffff | 0x81240000;
+    codeCursor[2] = 0x7d2649d6;
+    codeCursor[3] = 0x7ce84a14;
+    return codeCursor + 4;
   }
-  uVar2 = 0x1f - LZCOUNT(param_4);
-  uVar1 = param_3 & 0xffff;
-  *param_1 = uVar1 | 0x81030000;
-  if ((param_4 & (-2 << (uVar2 & 0x1f) | 0xfffffffeU >> 0x20 - (uVar2 & 0x1f))) == 0) {
+  uVar2 = 0x1f - LZCOUNT(elementStride);
+  offsetField = arrayBaseOffset & 0xffff;
+  *codeCursor = offsetField | 0x81030000;
+  if ((elementStride & (-2 << (uVar2 & 0x1f) | 0xfffffffeU >> 0x20 - (uVar2 & 0x1f))) == 0) {
     uVar2 = uVar2 * 0x800 | 0xc90000 | (0x1f - uVar2) * 2 | 0x54000000;
   }
   else {
-    uVar2 = param_4 & 0xffff | 0x1d260000;
+    uVar2 = elementStride & 0xffff | 0x1d260000;
   }
-  param_1[1] = uVar2;
-  param_1[2] = 0x7ce84a14;
-  switch((int)param_1 - param_2 >> 2) {
+  codeCursor[1] = uVar2;
+  codeCursor[2] = 0x7ce84a14;
+  switch((int)codeCursor - codeStart >> 2) {
   case 0:
-    *param_1 = uVar1 | 0x81030000;
-    param_1[1] = param_4 & 0xffff | 0x1d260000;
+    *codeCursor = offsetField | 0x81030000;
+    codeCursor[1] = elementStride & 0xffff | 0x1d260000;
     break;
   case 1:
-    param_1[1] = param_1[-1];
-    param_1[-1] = uVar1 | 0x81030000;
-    *param_1 = param_4 & 0xffff | 0x1d260000;
+    codeCursor[1] = codeCursor[-1];
+    codeCursor[-1] = offsetField | 0x81030000;
+    *codeCursor = elementStride & 0xffff | 0x1d260000;
     break;
   case 2:
-    param_1[2] = param_1[-1];
-    *param_1 = param_1[-2];
-    param_1[-2] = uVar1 | 0x81030000;
+    codeCursor[2] = codeCursor[-1];
+    *codeCursor = codeCursor[-2];
+    codeCursor[-2] = offsetField | 0x81030000;
     goto LAB_0004e0e0;
   case 3:
-    param_1[2] = param_1[-1];
-    *param_1 = param_1[-2];
-    param_1[-2] = param_1[-3];
-    param_1[-3] = uVar1 | 0x81030000;
+    codeCursor[2] = codeCursor[-1];
+    *codeCursor = codeCursor[-2];
+    codeCursor[-2] = codeCursor[-3];
+    codeCursor[-3] = offsetField | 0x81030000;
 LAB_0004e0e0:
-    param_1[-1] = param_4 & 0xffff | 0x1d260000;
-    param_1[1] = 0x7ce84a14;
+    codeCursor[-1] = elementStride & 0xffff | 0x1d260000;
+    codeCursor[1] = 0x7ce84a14;
     goto LAB_0004e12c;
   default:
-    param_1[2] = param_1[-1];
-    *param_1 = param_1[-2];
-    param_1[-1] = param_1[-3];
-    param_1[-3] = param_1[-4];
-    param_1[-4] = uVar1 | 0x81030000;
-    param_1[-2] = param_4 & 0xffff | 0x1d260000;
-    param_1[1] = 0x7ce84a14;
+    codeCursor[2] = codeCursor[-1];
+    *codeCursor = codeCursor[-2];
+    codeCursor[-1] = codeCursor[-3];
+    codeCursor[-3] = codeCursor[-4];
+    codeCursor[-4] = offsetField | 0x81030000;
+    codeCursor[-2] = elementStride & 0xffff | 0x1d260000;
+    codeCursor[1] = 0x7ce84a14;
     goto LAB_0004e12c;
   }
-  param_1[2] = 0x7ce84a14;
+  codeCursor[2] = 0x7ce84a14;
 LAB_0004e12c:
-  return param_1 + 3;
+  return codeCursor + 3;
 }
 
 /* _gleLoadDataElementNO @ 0x4e138 (2516 bytes) */

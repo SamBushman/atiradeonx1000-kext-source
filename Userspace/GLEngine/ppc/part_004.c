@@ -1654,15 +1654,15 @@ void _glFrustum_Exec(int glContext,double left,double right,double bottom,double
   float fVar2;
   float fVar3;
   float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  float fVar10;
+  float frustumA;
+  float frustumC;
+  float column2X;
+  float column2Y;
+  float column2Z;
+  float column2W;
   undefined4 glErrorCode;
   float *currentMatrix;
-  float dVar13;
+  float twoNear;
   
   currentMatrix = *(float **)(glContext + 0x4fec);
   if ((*(short *)(glContext + 0x4a10) < 0) && (*(int *)(glContext + 0x4ff4) < 0x18)) {
@@ -1685,21 +1685,21 @@ void _glFrustum_Exec(int glContext,double left,double right,double bottom,double
             fVar4 = -fVar3;
           }
           if (!(fVar4 < FLOAT_00108e80)) {
-            fVar7 = currentMatrix[8];
-            fVar8 = currentMatrix[9];
-            fVar9 = currentMatrix[10];
-            fVar10 = currentMatrix[0xb];
+            column2X = currentMatrix[8];
+            column2Y = currentMatrix[9];
+            column2Z = currentMatrix[10];
+            column2W = currentMatrix[0xb];
             fVar4 = (float)((top + bottom) * (double)(1.0 / fVar2));
-            fVar5 = (float)((right + left) * (double)(1.0 / fVar1));
-            fVar6 = (float)((zFar + zNear) * (double)(1.0 / fVar3));
-            dVar13 = (double)(zNear + zNear);
-            fVar1 = (float)((double)dVar13 * (double)(1.0 / fVar1));
-            currentMatrix[8] = (fVar7 * fVar6 + (*currentMatrix * fVar5 + currentMatrix[4] * fVar4)) - currentMatrix[0xc];
-            fVar3 = (float)(zFar * (double)dVar13 * (double)(1.0 / fVar3));
-            fVar2 = (float)((double)dVar13 * (double)(1.0 / fVar2));
-            currentMatrix[9] = (fVar8 * fVar6 + (currentMatrix[1] * fVar5 + currentMatrix[5] * fVar4)) - currentMatrix[0xd];
-            currentMatrix[10] = (fVar9 * fVar6 + (currentMatrix[2] * fVar5 + currentMatrix[6] * fVar4)) - currentMatrix[0xe];
-            currentMatrix[0xb] = (fVar10 * fVar6 + (currentMatrix[3] * fVar5 + currentMatrix[7] * fVar4)) - currentMatrix[0xf]
+            frustumA = (float)((right + left) * (double)(1.0 / fVar1));
+            frustumC = (float)((zFar + zNear) * (double)(1.0 / fVar3));
+            twoNear = (double)(zNear + zNear);
+            fVar1 = (float)((double)twoNear * (double)(1.0 / fVar1));
+            currentMatrix[8] = (column2X * frustumC + (*currentMatrix * frustumA + currentMatrix[4] * fVar4)) - currentMatrix[0xc];
+            fVar3 = (float)(zFar * (double)twoNear * (double)(1.0 / fVar3));
+            fVar2 = (float)((double)twoNear * (double)(1.0 / fVar2));
+            currentMatrix[9] = (column2Y * frustumC + (currentMatrix[1] * frustumA + currentMatrix[5] * fVar4)) - currentMatrix[0xd];
+            currentMatrix[10] = (column2Z * frustumC + (currentMatrix[2] * frustumA + currentMatrix[6] * fVar4)) - currentMatrix[0xe];
+            currentMatrix[0xb] = (column2W * frustumC + (currentMatrix[3] * frustumA + currentMatrix[7] * fVar4)) - currentMatrix[0xf]
             ;
             currentMatrix[3] = currentMatrix[3] * fVar1;
             currentMatrix[4] = currentMatrix[4] * fVar2;
@@ -1708,10 +1708,10 @@ void _glFrustum_Exec(int glContext,double left,double right,double bottom,double
             currentMatrix[1] = currentMatrix[1] * fVar1;
             currentMatrix[6] = currentMatrix[6] * fVar2;
             currentMatrix[2] = currentMatrix[2] * fVar1;
-            currentMatrix[0xf] = fVar10 * fVar3;
-            currentMatrix[0xc] = fVar7 * fVar3;
-            currentMatrix[0xd] = fVar8 * fVar3;
-            currentMatrix[0xe] = fVar9 * fVar3;
+            currentMatrix[0xf] = column2W * fVar3;
+            currentMatrix[0xc] = column2X * fVar3;
+            currentMatrix[0xd] = column2Y * fVar3;
+            currentMatrix[0xe] = column2Z * fVar3;
             currentMatrix[7] = currentMatrix[7] * fVar2;
             *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | *(uint *)(glContext + 0x50a8);
             *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | *(uint *)(glContext + 0x50a8);
