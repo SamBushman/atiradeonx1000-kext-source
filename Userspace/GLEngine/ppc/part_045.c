@@ -1350,14 +1350,14 @@ void _gleSelectLinesFunc(glContext)
   int glContext;
 {
   bool vertexProgramActive;
-  uint uVar2;
+  uint vertexEndThenRemaining;
   uint batchClipCodes;
   uint *listCursor;
   uint vertexCount;
   uint vertexCursor;
   uint *polygonList;
   double f1AfterCall;
-  double dVar8;
+  double f1AfterHookCall;
   
   vertexProgramActive = false;
   if ((*(char *)(glContext + 0x4664) != '\0') || (*(int *)(glContext + 0x5434) != 0)) {
@@ -1368,31 +1368,31 @@ void _gleSelectLinesFunc(glContext)
       (vertexCount = (*(int *)(glContext + 0x4858) - vertexCursor) / (uint)(int)*(short *)(glContext + 0x487c),
       1 < (int)vertexCount)) &&
      (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,vertexCount), (batchClipCodes & 0xff00) == 0)) {
-    dVar8 = f1AfterCall;
+    f1AfterHookCall = f1AfterCall;
     if (vertexProgramActive) {
       vertexCursor = *(uint *)(glContext + 0x4864);
     }
     else if (*(char *)(glContext + 0x4e18) != '\0') {
-      dVar8 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, vertexCount);
+      f1AfterHookCall = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, vertexCursor, vertexCount);
     }
     if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
       _gleSelectLines(glContext,vertexCursor,vertexCount);
       return;
     }
-    uVar2 = vertexCursor + vertexCount * 0x100;
+    vertexEndThenRemaining = vertexCursor + vertexCount * 0x100;
     polygonList = *(uint **)(glContext + 0x4870);
-    if (vertexCursor < uVar2) {
-      uVar2 = (uVar2 - vertexCursor) + 0xff >> 8;
+    if (vertexCursor < vertexEndThenRemaining) {
+      vertexEndThenRemaining = (vertexEndThenRemaining - vertexCursor) + 0xff >> 8;
       listCursor = polygonList;
       do {
         *listCursor = vertexCursor;
         vertexCursor = vertexCursor + 0x100;
         listCursor = listCursor + 1;
-        uVar2 = uVar2 - 1;
-      } while (uVar2 != 0);
+        vertexEndThenRemaining = vertexEndThenRemaining - 1;
+      } while (vertexEndThenRemaining != 0);
     }
     if ((*(char *)(glContext + 0x4e18) != '\0') &&
-       (vertexCount = ((int (*)())_gleClipLinesPlane)(glContext,polygonList,vertexCount,dVar8), vertexCount == 0)) {
+       (vertexCount = ((int (*)())_gleClipLinesPlane)(glContext,polygonList,vertexCount,f1AfterHookCall), vertexCount == 0)) {
       return;
     }
     if (((batchClipCodes & 0xff) == 0) ||

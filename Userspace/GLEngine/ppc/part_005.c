@@ -303,35 +303,35 @@ int _glPopMatrix_Exec(glContext)
   int glContext;
 {
   undefined4 glErrorCode;
-  uint uVar1;
-  undefined4 uVar2;
+  uint derivedMatrixBits;
+  undefined4 copyMatrixResult;
   int glContextWord4678;
-  int iVar4;
-  int iVar5;
+  int matrixModeSlot;
+  int stackBaseIndex;
   int remaining;
   int matrixModeIndex;
-  uint uVar8;
+  uint matrixDirtyBits;
   
   matrixModeIndex = *(int *)(glContext + 0x4ff4);
   if ((*(short *)(glContext + 0x4a10) < 0) && (matrixModeIndex < 0x18)) {
-    iVar4 = matrixModeIndex * 4 + glContext;
-    remaining = *(int *)(iVar4 + 0x4ffc);
+    matrixModeSlot = matrixModeIndex * 4 + glContext;
+    remaining = *(int *)(matrixModeSlot + 0x4ffc);
     if (0 < remaining) {
       remaining = remaining + -1;
       glContextWord4678 = *(int *)(glContext + 0x4678);
-      iVar5 = *(int *)(matrixModeIndex * 4 + *(int *)(glContext + 0x4ff8));
-      *(int *)(iVar4 + 0x4ffc) = remaining;
-      uVar2 = ((int (*)())_gleCopyMatrix)(glContextWord4678 + (iVar5 + remaining) * 0x40,glContext + matrixModeIndex * 0x40 + 0x1bc0);
-      uVar8 = *(uint *)(glContext + 0x50a8);
-      *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | uVar8;
-      if ((matrixModeIndex == 4) && ((uVar8 & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0)) {
-        uVar2 = ((int (*)())_gleCopyMatrix)(*(int *)(glContext + 0x4678) + remaining * 0x40 + 0x2b00,glContext + 0x22c0);
-        uVar1 = uVar8 & 0xfffffc;
-        uVar8 = uVar8 & 0xff000003;
-        *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) & ~uVar1;
+      stackBaseIndex = *(int *)(matrixModeIndex * 4 + *(int *)(glContext + 0x4ff8));
+      *(int *)(matrixModeSlot + 0x4ffc) = remaining;
+      copyMatrixResult = ((int (*)())_gleCopyMatrix)(glContextWord4678 + (stackBaseIndex + remaining) * 0x40,glContext + matrixModeIndex * 0x40 + 0x1bc0);
+      matrixDirtyBits = *(uint *)(glContext + 0x50a8);
+      *(uint *)(glContext + 0x50ac) = *(uint *)(glContext + 0x50ac) | matrixDirtyBits;
+      if ((matrixModeIndex == 4) && ((matrixDirtyBits & *(uint *)(glContext + 0x505c) & 0xfffffc) != 0)) {
+        copyMatrixResult = ((int (*)())_gleCopyMatrix)(*(int *)(glContext + 0x4678) + remaining * 0x40 + 0x2b00,glContext + 0x22c0);
+        derivedMatrixBits = matrixDirtyBits & 0xfffffc;
+        matrixDirtyBits = matrixDirtyBits & 0xff000003;
+        *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) & ~derivedMatrixBits;
       }
-      *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | uVar8;
-      return uVar2;
+      *(uint *)(glContext + 0x50b0) = *(uint *)(glContext + 0x50b0) | matrixDirtyBits;
+      return copyMatrixResult;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
       return glContext;

@@ -211,28 +211,28 @@ int _glIsBuffer_Exec(glContext, buffer)
   int glContext;
   undefined4 buffer;
 {
-  int iVar1;
-  bool bVar2;
+  int sharedStateThenBufferObject;
+  bool isBuffer;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar1 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar1 + 0x8028);
-      iVar1 = *(int *)(glContext + 0x5148);
+    sharedStateThenBufferObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenBufferObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenBufferObject + 0x8028);
+      sharedStateThenBufferObject = *(int *)(glContext + 0x5148);
     }
-    iVar1 = _gleLookupHashObject(iVar1 + 0x701c,buffer);
+    sharedStateThenBufferObject = _gleLookupHashObject(sharedStateThenBufferObject + 0x701c,buffer);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    bVar2 = iVar1 != 0;
+    isBuffer = sharedStateThenBufferObject != 0;
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    bVar2 = false;
+    isBuffer = false;
   }
-  return bVar2;
+  return isBuffer;
 }
 
 /* _glBufferData_Exec_body @ 0x58a1c (304 bytes) */
@@ -521,11 +521,11 @@ void _glGetBufferSubData_Exec(glContext, target, offset, size, data)
   undefined4 data;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int boundBufferObject;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8893) {
-      iVar2 = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
+      boundBufferObject = *(int *)(*(int *)(glContext + 0x4a60) + 0x35c);
     }
     else if (target < 0x8894) {
       if (target != 0x8892) {
@@ -536,23 +536,23 @@ LAB_00059160:
         glErrorCode = 0x500;
         goto LAB_00059198;
       }
-      iVar2 = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
+      boundBufferObject = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
     }
     else if (target == 0x88eb) {
-      iVar2 = *(int *)(glContext + 0x4a68);
+      boundBufferObject = *(int *)(glContext + 0x4a68);
     }
     else {
       if (target != 0x88ec) goto LAB_00059160;
-      iVar2 = *(int *)(glContext + 0x4a6c);
+      boundBufferObject = *(int *)(glContext + 0x4a6c);
     }
-    if ((iVar2 != 0) && (*(char *)(iVar2 + 0x44) == '\0')) {
-      if (*(int *)(iVar2 + 0x40) != 0) {
-        _gleSynchronizePluginBuffer(glContext,iVar2 + 0x10);
+    if ((boundBufferObject != 0) && (*(char *)(boundBufferObject + 0x44) == '\0')) {
+      if (*(int *)(boundBufferObject + 0x40) != 0) {
+        _gleSynchronizePluginBuffer(glContext,boundBufferObject + 0x10);
       }
-      if (*(int *)(iVar2 + 0x30) == 0) {
+      if (*(int *)(boundBufferObject + 0x30) == 0) {
         return;
       }
-      _memcpy(data,*(int *)(iVar2 + 0x30) + offset,size);
+      _memcpy(data,*(int *)(boundBufferObject + 0x30) + offset,size);
       return;
     }
   }
@@ -1808,23 +1808,23 @@ double _glColor3iv_Exec(glContext, v)
   int glContext;
   uint *v;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  double dVar5;
+  float redValue;
+  float blueValue;
+  float channelScale;
+  float channelBias;
+  double greenConverted;
   
-  fVar4 = FLOAT_00108e6c;
-  fVar3 = FLOAT_00108e68;
-  dVar5 = (double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - DOUBLE_00108d58;
-  fVar1 = (float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58) *
+  channelBias = FLOAT_00108e6c;
+  channelScale = FLOAT_00108e68;
+  greenConverted = (double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - DOUBLE_00108d58;
+  redValue = (float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e68 + FLOAT_00108e6c;
-  fVar2 = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58) *
+  blueValue = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e68 + FLOAT_00108e6c;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
-  *(float *)(glContext + 0x2a0) = fVar1;
-  *(float *)(glContext + 0x2a8) = fVar2;
-  *(float *)(glContext + 0x2a4) = (float)dVar5 * fVar3 + fVar4;
+  *(float *)(glContext + 0x2a0) = redValue;
+  *(float *)(glContext + 0x2a8) = blueValue;
+  *(float *)(glContext + 0x2a4) = (float)greenConverted * channelScale + channelBias;
   if (*(char *)(glContext + 0x4df8) != '\0') {
     (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
   }

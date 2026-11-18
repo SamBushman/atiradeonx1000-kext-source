@@ -925,41 +925,41 @@ void _glGetProgramEnvParameterdvARB_Exec(glContext, target, index, params)
   uint index;
   double *params;
 {
-  bool bVar1;
+  bool indexOutOfRange;
   undefined4 glErrorCode;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
+  uint expectedTarget;
+  int targetSlotThenEnvParams;
+  int envParam;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8620) {
-      bVar1 = 0xff < index;
-      iVar4 = 0;
+      indexOutOfRange = 0xff < index;
+      targetSlotThenEnvParams = 0;
     }
     else {
       if (target < 0x8621) {
-        uVar3 = 0x8200;
+        expectedTarget = 0x8200;
       }
       else {
-        uVar3 = 0x8804;
+        expectedTarget = 0x8804;
       }
-      if (target != uVar3) {
+      if (target != expectedTarget) {
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
         glErrorCode = 0x500;
         goto LAB_0007a8b8;
       }
-      bVar1 = 0x7f < index;
-      iVar4 = 1;
+      indexOutOfRange = 0x7f < index;
+      targetSlotThenEnvParams = 1;
     }
-    if (!bVar1) {
-      iVar4 = *(int *)(iVar4 * 8 + glContext + 0x4668);
-      iVar5 = iVar4 + index * 0x10;
-      *params = (double)*(float *)(iVar4 + index * 0x10);
-      params[1] = (double)*(float *)(iVar5 + 4);
-      params[2] = (double)*(float *)(iVar5 + 8);
-      params[3] = (double)*(float *)(iVar5 + 0xc);
+    if (!indexOutOfRange) {
+      targetSlotThenEnvParams = *(int *)(targetSlotThenEnvParams * 8 + glContext + 0x4668);
+      envParam = targetSlotThenEnvParams + index * 0x10;
+      *params = (double)*(float *)(targetSlotThenEnvParams + index * 0x10);
+      params[1] = (double)*(float *)(envParam + 4);
+      params[2] = (double)*(float *)(envParam + 8);
+      params[3] = (double)*(float *)(envParam + 0xc);
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -1105,41 +1105,41 @@ void _glGetProgramLocalParameterfvARB_Exec(glContext, target, index, params)
   uint index;
   undefined4 *params;
 {
-  bool bVar1;
+  bool indexOutOfRange;
   undefined4 glErrorCode;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
+  uint expectedTarget;
+  int targetSlotThenLocalParams;
+  int localParam;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x8620) {
-      bVar1 = 0xff < index;
-      iVar4 = 0;
+      indexOutOfRange = 0xff < index;
+      targetSlotThenLocalParams = 0;
     }
     else {
       if (target < 0x8621) {
-        uVar3 = 0x8200;
+        expectedTarget = 0x8200;
       }
       else {
-        uVar3 = 0x8804;
+        expectedTarget = 0x8804;
       }
-      if (target != uVar3) {
+      if (target != expectedTarget) {
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
         glErrorCode = 0x500;
         goto LAB_0007ab38;
       }
-      bVar1 = 0x7f < index;
-      iVar4 = 1;
+      indexOutOfRange = 0x7f < index;
+      targetSlotThenLocalParams = 1;
     }
-    if (!bVar1) {
-      iVar4 = *(int *)(*(int *)(iVar4 * 4 + glContext + 0x5420) + 0x4e0);
-      iVar5 = iVar4 + index * 0x10;
-      *params = *(undefined4 *)(iVar4 + index * 0x10);
-      params[1] = *(undefined4 *)(iVar5 + 4);
-      params[2] = *(undefined4 *)(iVar5 + 8);
-      params[3] = *(undefined4 *)(iVar5 + 0xc);
+    if (!indexOutOfRange) {
+      targetSlotThenLocalParams = *(int *)(*(int *)(targetSlotThenLocalParams * 4 + glContext + 0x5420) + 0x4e0);
+      localParam = targetSlotThenLocalParams + index * 0x10;
+      *params = *(undefined4 *)(targetSlotThenLocalParams + index * 0x10);
+      params[1] = *(undefined4 *)(localParam + 4);
+      params[2] = *(undefined4 *)(localParam + 8);
+      params[3] = *(undefined4 *)(localParam + 0xc);
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {

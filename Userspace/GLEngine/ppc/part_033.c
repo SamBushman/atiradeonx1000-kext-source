@@ -649,17 +649,17 @@ void _glElementPointerAPPLE_Exec(glContext, type, pointer)
   uint type;
   int pointer;
 {
-  bool bVar1;
-  undefined4 uVar2;
+  bool isAllowedIndexType;
+  undefined4 copiedWord;
   undefined4 glErrorCode;
   int clientState;
-  int iVar4;
-  int iVar5;
+  int newRefCount;
+  int oldBufferObject;
   int loopIndex;
   undefined4 *dstCursor;
   undefined4 *srcCursor;
   undefined4 *dstCursor2;
-  int iVar8;
+  int boundBufferObject;
   
   clientState = *(int *)(glContext + 0x4a60);
   if (*(short *)(glContext + 0x4a10) < 0) {
@@ -667,16 +667,16 @@ void _glElementPointerAPPLE_Exec(glContext, type, pointer)
       *(uint *)(glContext + 0x31c) = *(uint *)(glContext + 0x31c) | 0x100000;
     }
     *(int *)(clientState + 0xd8) = pointer;
-    iVar8 = *(int *)(clientState + 0x35c);
-    iVar5 = *(int *)(clientState + 0x37c);
+    boundBufferObject = *(int *)(clientState + 0x35c);
+    oldBufferObject = *(int *)(clientState + 0x37c);
     *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
     *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | 0x800000;
-    if (iVar8 != iVar5) {
-      if ((iVar5 != 0) &&
-         (iVar4 = *(int *)(iVar5 + 8) + -1, *(int *)(iVar5 + 8) = iVar4, iVar4 == 0)) {
-        _gleFreeBufferObject(glContext,iVar5);
+    if (boundBufferObject != oldBufferObject) {
+      if ((oldBufferObject != 0) &&
+         (newRefCount = *(int *)(oldBufferObject + 8) + -1, *(int *)(oldBufferObject + 8) = newRefCount, newRefCount == 0)) {
+        _gleFreeBufferObject(glContext,oldBufferObject);
       }
-      if (iVar8 == 0) {
+      if (boundBufferObject == 0) {
         loopIndex = 0;
         *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
         *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) & 0xff7fffff;
@@ -690,28 +690,28 @@ void _glElementPointerAPPLE_Exec(glContext, type, pointer)
         }
       }
       else {
-        *(int *)(iVar8 + 8) = *(int *)(iVar8 + 8) + 1;
+        *(int *)(boundBufferObject + 8) = *(int *)(boundBufferObject + 8) + 1;
         *(undefined4 *)(clientState + 0x338) = *(undefined4 *)(clientState + 0x338);
         *(uint *)(clientState + 0x33c) = *(uint *)(clientState + 0x33c) | 0x800000;
         loopIndex = 0;
         if (*(char *)(glContext + 0x85a4) != '\0') {
           dstCursor2 = (undefined4 *)(clientState + 0x3fc);
-          srcCursor = (undefined4 *)(iVar8 + 0x10);
+          srcCursor = (undefined4 *)(boundBufferObject + 0x10);
           do {
-            uVar2 = *srcCursor;
+            copiedWord = *srcCursor;
             loopIndex = loopIndex + 1;
             srcCursor = srcCursor + 1;
-            *dstCursor2 = uVar2;
+            *dstCursor2 = copiedWord;
             dstCursor2 = dstCursor2 + 0x23;
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
       }
-      *(int *)(clientState + 0x37c) = iVar8;
+      *(int *)(clientState + 0x37c) = boundBufferObject;
       *(undefined4 *)(clientState + 0x350) = *(undefined4 *)(clientState + 0x350);
       *(uint *)(clientState + 0x354) = *(uint *)(clientState + 0x354) | 0x10;
     }
-    if (iVar8 != 0) {
-      pointer = pointer + *(int *)(iVar8 + 0x30);
+    if (boundBufferObject != 0) {
+      pointer = pointer + *(int *)(boundBufferObject + 0x30);
     }
     *(int *)(glContext + 0x4914) = pointer;
     if (*(uint *)(clientState + 0xec) == (type & 0xf)) {
@@ -719,12 +719,12 @@ void _glElementPointerAPPLE_Exec(glContext, type, pointer)
     }
     if (type != 0x1403) {
       if (type < 0x1404) {
-        bVar1 = type == 0x1401;
+        isAllowedIndexType = type == 0x1401;
       }
       else {
-        bVar1 = type == 0x1405;
+        isAllowedIndexType = type == 0x1405;
       }
-      if (!bVar1) {
+      if (!isAllowedIndexType) {
         if (*(int *)(glContext + 0x7574) != 0) {
           return;
         }
@@ -1572,20 +1572,20 @@ void _glIndexPointer_Exec(glContext, type, stride, pointer)
   int stride;
   undefined4 pointer;
 {
-  undefined4 uVar1;
+  undefined4 elementBytes;
   undefined4 glErrorCode;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  int newRefCount;
+  int oldBufferObject;
+  int boundBufferObject;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < stride) {
       switch(type) {
       case 0x1401:
-        uVar1 = 1;
+        elementBytes = 1;
         break;
       case 0x1402:
-        uVar1 = 2;
+        elementBytes = 2;
         break;
       default:
         if (*(int *)(glContext + 0x7574) != 0) {
@@ -1595,32 +1595,32 @@ void _glIndexPointer_Exec(glContext, type, stride, pointer)
         goto LAB_000a4b28;
       case 0x1404:
       case 0x1406:
-        uVar1 = 4;
+        elementBytes = 4;
         break;
       case 0x140a:
-        uVar1 = 8;
+        elementBytes = 8;
       }
       *(undefined4 *)(glContext + 0x48e0) = pointer;
       *(short *)(glContext + 0x48e8) = (short)type;
       if (stride < 1) {
-        *(undefined4 *)(glContext + 0x48e4) = uVar1;
+        *(undefined4 *)(glContext + 0x48e4) = elementBytes;
       }
       else {
         *(int *)(glContext + 0x48e4) = stride;
       }
-      iVar3 = *(int *)(glContext + 0x48f4);
-      iVar4 = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
-      if (iVar4 == iVar3) {
+      oldBufferObject = *(int *)(glContext + 0x48f4);
+      boundBufferObject = *(int *)(*(int *)(glContext + 0x4a60) + 0x358);
+      if (boundBufferObject == oldBufferObject) {
         return;
       }
-      if ((iVar3 != 0) &&
-         (iVar2 = *(int *)(iVar3 + 8) + -1, *(int *)(iVar3 + 8) = iVar2, iVar2 == 0)) {
-        _gleFreeBufferObject(glContext,iVar3);
+      if ((oldBufferObject != 0) &&
+         (newRefCount = *(int *)(oldBufferObject + 8) + -1, *(int *)(oldBufferObject + 8) = newRefCount, newRefCount == 0)) {
+        _gleFreeBufferObject(glContext,oldBufferObject);
       }
-      if (iVar4 != 0) {
-        *(int *)(iVar4 + 8) = *(int *)(iVar4 + 8) + 1;
+      if (boundBufferObject != 0) {
+        *(int *)(boundBufferObject + 8) = *(int *)(boundBufferObject + 8) + 1;
       }
-      *(int *)(glContext + 0x48f4) = iVar4;
+      *(int *)(glContext + 0x48f4) = boundBufferObject;
       return;
     }
     if (*(int *)(glContext + 0x7574) != 0) {

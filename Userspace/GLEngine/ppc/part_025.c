@@ -3575,15 +3575,15 @@ void _glUniform1ivARB_Exec(glContext, location, count, value)
   bool stage0Updated;
   bool stage0Updated2;
   bool stage1Updated;
-  int iVar5;
+  int newValue;
   int rendererSlotOffset;
   int elementValueOffset;
   undefined4 uniformWord1;
-  int iVar7;
+  int elementCount;
   int elementMapOffset;
   int typeInfoFound;
   int loopIndex;
-  int iVar8;
+  int oldValue;
   int registerIndexThenOffset;
   undefined4 uniformWord3;
   int constantRegisterFile;
@@ -3596,8 +3596,8 @@ void _glUniform1ivARB_Exec(glContext, location, count, value)
   int currentProgram;
   int *dstCursor;
   int *rendererCallbacks;
-  double extraout_f1;
-  double fparam_1;
+  double f1AfterCall;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -3632,38 +3632,38 @@ void _glUniform1ivARB_Exec(glContext, location, count, value)
         }
         loopIndex2 = 0;
         dstCursor = (int *)(*(int *)(currentProgram + 0x4c) + location * 0x10);
-        iVar7 = uniformSize;
-        fparam_1 = extraout_f1;
+        elementCount = uniformSize;
+        forwardedFloatArg1 = f1AfterCall;
         if (0 < uniformSize) {
           do {
-            iVar8 = *dstCursor;
-            iVar5 = *value;
-            if (iVar8 != iVar5) {
+            oldValue = *dstCursor;
+            newValue = *value;
+            if (oldValue != newValue) {
               stage0Updated = true;
-              iVar7 = uniformSize;
+              elementCount = uniformSize;
               if (uniformType == 0x1404) {
 LAB_0008bc7c:
-                *dstCursor = iVar5;
+                *dstCursor = newValue;
               }
               else if (uniformType - 0x8b5dU < 8) {
-                *dstCursor = iVar5;
-                fparam_1 = (double)((double (*)())_setImageUnit)(glContext,currentProgram,*value,iVar8,uniformStageUse,uniformType,
-                                                 fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8)
+                *dstCursor = newValue;
+                forwardedFloatArg1 = (double)((double (*)())_setImageUnit)(glContext,currentProgram,*value,oldValue,uniformStageUse,uniformType,
+                                                 forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8)
                 ;
-                iVar7 = uniformSize;
+                elementCount = uniformSize;
               }
               else {
-                if (iVar5 == 0) goto LAB_0008bc7c;
+                if (newValue == 0) goto LAB_0008bc7c;
                 *dstCursor = 1;
               }
             }
             loopIndex2 = loopIndex2 + 1;
             dstCursor = dstCursor + 4;
             value = value + 1;
-          } while (loopIndex2 < iVar7);
+          } while (loopIndex2 < elementCount);
           if (stage0Updated) {
             loopIndex2 = 0;
-            if (0 < iVar7) {
+            if (0 < elementCount) {
               elementMapOffset = location << 2;
               elementValueOffset = location << 4;
               do {

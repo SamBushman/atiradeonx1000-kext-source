@@ -15,17 +15,17 @@ void _glEvalCoord2dv_CompExec(glContext, u)
 {
   unsigned int ghidra_home[8] = { glContext, u, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 in_LR;
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   _glEvalCoord2dv_Comp(glContext,u);
-  ((void (*)())_glEvalCoord2dv_Exec)(glContext,u,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+  ((void (*)())_glEvalCoord2dv_Exec)(glContext,u,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)((unsigned char *)ghidra_home + 0)),
              (*(double *)((unsigned char *)ghidra_home + 8)));
   return;
@@ -963,22 +963,22 @@ void _glGenRenderbuffersEXT_Exec(glContext, n, renderbuffers)
   int *renderbuffers;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int nameValue;
   int loopIndex;
-  int iVar4;
+  int sharedStateThenFirstName;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
-      iVar4 = *(int *)(glContext + 0x5148);
-      if (*(char *)(iVar4 + 0x8024) != '\0') {
-        _pthread_mutex_lock(iVar4 + 0x8028);
-        iVar4 = *(int *)(glContext + 0x5148);
+      sharedStateThenFirstName = *(int *)(glContext + 0x5148);
+      if (*(char *)(sharedStateThenFirstName + 0x8024) != '\0') {
+        _pthread_mutex_lock(sharedStateThenFirstName + 0x8028);
+        sharedStateThenFirstName = *(int *)(glContext + 0x5148);
       }
-      iVar4 = _gleGenHashNames(((unsigned char *)0x00001004) + iVar4,n);
+      sharedStateThenFirstName = _gleGenHashNames(((unsigned char *)0x00001004) + sharedStateThenFirstName,n);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      if (iVar4 == 0) {
+      if (sharedStateThenFirstName == 0) {
         return;
       }
       loopIndex = 0;
@@ -986,9 +986,9 @@ void _glGenRenderbuffersEXT_Exec(glContext, n, renderbuffers)
         return;
       }
       do {
-        iVar2 = loopIndex + iVar4;
+        nameValue = loopIndex + sharedStateThenFirstName;
         loopIndex = loopIndex + 1;
-        *renderbuffers = iVar2;
+        *renderbuffers = nameValue;
         renderbuffers = renderbuffers + 1;
         n = n + -1;
       } while (n != 0);
@@ -1203,28 +1203,28 @@ int _glIsRenderbufferEXT_Exec(glContext, renderbuffer)
   int glContext;
   undefined4 renderbuffer;
 {
-  int iVar1;
-  bool bVar2;
+  int sharedStateThenRenderbufferObject;
+  bool isRenderbuffer;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
-    iVar1 = *(int *)(glContext + 0x5148);
-    if (*(char *)(iVar1 + 0x8024) != '\0') {
-      _pthread_mutex_lock(iVar1 + 0x8028);
-      iVar1 = *(int *)(glContext + 0x5148);
+    sharedStateThenRenderbufferObject = *(int *)(glContext + 0x5148);
+    if (*(char *)(sharedStateThenRenderbufferObject + 0x8024) != '\0') {
+      _pthread_mutex_lock(sharedStateThenRenderbufferObject + 0x8028);
+      sharedStateThenRenderbufferObject = *(int *)(glContext + 0x5148);
     }
-    iVar1 = _gleLookupHashObject(((unsigned char *)0x00001004) + iVar1,renderbuffer);
+    sharedStateThenRenderbufferObject = _gleLookupHashObject(((unsigned char *)0x00001004) + sharedStateThenRenderbufferObject,renderbuffer);
     if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
       _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
     }
-    bVar2 = iVar1 != 0;
+    isRenderbuffer = sharedStateThenRenderbufferObject != 0;
   }
   else {
     if (*(int *)(glContext + 0x7574) == 0) {
       *(undefined4 *)(glContext + 0x7574) = 0x502;
     }
-    bVar2 = false;
+    isRenderbuffer = false;
   }
-  return bVar2;
+  return isRenderbuffer;
 }
 
 /* _glGetRenderbufferParameterivEXT_Exec @ 0x66480 (516 bytes) */
@@ -1333,22 +1333,22 @@ void _glGenFramebuffersEXT_Exec(glContext, n, framebuffers)
   int *framebuffers;
 {
   undefined4 glErrorCode;
-  int iVar2;
+  int nameValue;
   int loopIndex;
-  int iVar4;
+  int sharedStateThenFirstName;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
-      iVar4 = *(int *)(glContext + 0x5148);
-      if (*(char *)(iVar4 + 0x8024) != '\0') {
-        _pthread_mutex_lock(iVar4 + 0x8028);
-        iVar4 = *(int *)(glContext + 0x5148);
+      sharedStateThenFirstName = *(int *)(glContext + 0x5148);
+      if (*(char *)(sharedStateThenFirstName + 0x8024) != '\0') {
+        _pthread_mutex_lock(sharedStateThenFirstName + 0x8028);
+        sharedStateThenFirstName = *(int *)(glContext + 0x5148);
       }
-      iVar4 = _gleGenHashNames(iVar4,n);
+      sharedStateThenFirstName = _gleGenHashNames(sharedStateThenFirstName,n);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      if (iVar4 == 0) {
+      if (sharedStateThenFirstName == 0) {
         return;
       }
       loopIndex = 0;
@@ -1356,9 +1356,9 @@ void _glGenFramebuffersEXT_Exec(glContext, n, framebuffers)
         return;
       }
       do {
-        iVar2 = loopIndex + iVar4;
+        nameValue = loopIndex + sharedStateThenFirstName;
         loopIndex = loopIndex + 1;
-        *framebuffers = iVar2;
+        *framebuffers = nameValue;
         framebuffers = framebuffers + 1;
         n = n + -1;
       } while (n != 0);

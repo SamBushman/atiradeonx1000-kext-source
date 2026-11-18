@@ -376,66 +376,66 @@ void _gleUpdateLightColorChangeFunc(glContext)
 {
   ushort glContextShort30a6;
   char glContextByte4df8;
-  code *pcVar3;
+  code *colorChangeFunc;
   
   if (*(short *)(glContext + 0x30a4) == 0x404) {
     glContextShort30a6 = *(ushort *)(glContext + 0x30a6);
-    pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_F_D_001121bc;
+    colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_F_D_001121bc;
     if (glContextShort30a6 != 0x1201) {
       if (glContextShort30a6 < 0x1202) {
-        pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_F_A_001121c0;
+        colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_F_A_001121c0;
         if (glContextShort30a6 != 0x1200) {
 LAB_000070d4:
-          pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_F_AD_001121b4;
+          colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_F_AD_001121b4;
         }
       }
       else {
-        pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_F_S_001121b8;
+        colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_F_S_001121b8;
         if ((glContextShort30a6 != 0x1202) &&
-           (pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_F_E_001121c4, glContextShort30a6 != 0x1600))
+           (colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_F_E_001121c4, glContextShort30a6 != 0x1600))
         goto LAB_000070d4;
       }
     }
   }
   else if (*(short *)(glContext + 0x30a4) == 0x405) {
     glContextShort30a6 = *(ushort *)(glContext + 0x30a6);
-    pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_B_D_001121a8;
+    colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_B_D_001121a8;
     if (glContextShort30a6 != 0x1201) {
       if (glContextShort30a6 < 0x1202) {
-        pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_B_A_001121ac;
+        colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_B_A_001121ac;
         if (glContextShort30a6 != 0x1200) {
 LAB_0000713c:
-          pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_B_AD_001121a0;
+          colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_B_AD_001121a0;
         }
       }
       else {
-        pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_B_S_001121a4;
+        colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_B_S_001121a4;
         if ((glContextShort30a6 != 0x1202) &&
-           (pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_B_E_001121b0, glContextShort30a6 != 0x1600))
+           (colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_B_E_001121b0, glContextShort30a6 != 0x1600))
         goto LAB_0000713c;
       }
     }
   }
   else {
     glContextShort30a6 = *(ushort *)(glContext + 0x30a6);
-    pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_FB_D_00112194;
+    colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_FB_D_00112194;
     if (glContextShort30a6 != 0x1201) {
       if (glContextShort30a6 < 0x1202) {
-        pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_FB_A_00112198;
+        colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_FB_A_00112198;
         if (glContextShort30a6 != 0x1200) {
 LAB_000071a4:
-          pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_FB_AD_0011218c;
+          colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_FB_AD_0011218c;
         }
       }
       else {
-        pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_FB_S_00112190;
+        colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_FB_S_00112190;
         if ((glContextShort30a6 != 0x1202) &&
-           (pcVar3 = (code *)PTR__gleLightMaterialRGBAChange_FB_E_0011219c, glContextShort30a6 != 0x1600))
+           (colorChangeFunc = (code *)PTR__gleLightMaterialRGBAChange_FB_E_0011219c, glContextShort30a6 != 0x1600))
         goto LAB_000071a4;
       }
     }
   }
-  if (*(code **)(glContext + 0x4de0) == pcVar3) goto LAB_000071fc;
+  if (*(code **)(glContext + 0x4de0) == colorChangeFunc) goto LAB_000071fc;
   if (*(char *)(glContext + 0x30ab) == '\0') {
 LAB_000071dc:
     glContextByte4df8 = *(char *)(glContext + 0x4df8);
@@ -448,10 +448,10 @@ LAB_000071dc:
     }
   }
   if (glContextByte4df8 != '\0') {
-    (*pcVar3)(glContext,glContext + 0x2a0);
+    (*colorChangeFunc)(glContext,glContext + 0x2a0);
   }
 LAB_000071fc:
-  *(code **)(glContext + 0x4de0) = pcVar3;
+  *(code **)(glContext + 0x4de0) = colorChangeFunc;
   return;
 }
 
@@ -2158,26 +2158,26 @@ void _gleSelectVertexAddMaterialFunc(glContext)
 void _gleSelectVertexSubmitFunc(glContext)
   int glContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
-  short sVar4;
-  int iVar3;
+  undefined *evalFunc2;
+  undefined *evalFunc1;
+  short attribStride;
+  int layoutThenStrideBytes;
   int glContextWord5434;
   
-  puVar1 = PTR__gleSetVertexEval2Func_00112068;
+  evalFunc2 = PTR__gleSetVertexEval2Func_00112068;
   *(undefined **)(glContext + 0x4888) = PTR__gleSetVertexSubmitFunc_0011242c;
-  puVar2 = PTR__gleSetVertexEval1Func_0011206c;
+  evalFunc1 = PTR__gleSetVertexEval1Func_0011206c;
   *(undefined4 *)(glContext + 0x4890) = 0;
-  *(undefined **)(glContext + 0x4898) = puVar2;
-  *(undefined **)(glContext + 0x489c) = puVar1;
+  *(undefined **)(glContext + 0x4898) = evalFunc1;
+  *(undefined **)(glContext + 0x489c) = evalFunc2;
   if (((*(int *)(glContext + 0x4e1c) == 0x1c00) && (*(char *)(glContext + 0x7580) != '\0')) &&
      (*(int *)(glContext + 0x48d0) != 0)) {
-    sVar4 = (ushort)*(byte *)(*(int *)(glContext + 0x48d0) + 2) << 2;
-    *(short *)(glContext + 0x4880) = sVar4;
+    attribStride = (ushort)*(byte *)(*(int *)(glContext + 0x48d0) + 2) << 2;
+    *(short *)(glContext + 0x4880) = attribStride;
     if (*(int *)(glContext + 0x48d4) != 0) {
-      sVar4 = (ushort)*(byte *)(*(int *)(glContext + 0x48d4) + 2) << 2;
+      attribStride = (ushort)*(byte *)(*(int *)(glContext + 0x48d4) + 2) << 2;
     }
-    *(short *)(glContext + 0x4882) = sVar4;
+    *(short *)(glContext + 0x4882) = attribStride;
     return;
   }
   if (*(char *)(glContext + 0x4664) == '\0') {
@@ -2192,15 +2192,15 @@ void _gleSelectVertexSubmitFunc(glContext)
     glContextWord5434 = *(int *)(glContext + 0x5434);
   }
   if (glContextWord5434 == 0) {
-    iVar3 = *(int *)(*(int *)(glContext + 0x5420) + 0x4cc);
+    layoutThenStrideBytes = *(int *)(*(int *)(glContext + 0x5420) + 0x4cc);
   }
   else {
-    iVar3 = *(int *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x508);
+    layoutThenStrideBytes = *(int *)(*(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x508);
   }
-  if (iVar3 != 0) {
-    iVar3 = *(int *)(iVar3 + 0x20) * 0x10;
-    *(short *)(glContext + 0x487c) = (short)iVar3;
-    *(int *)(glContext + 0x485c) = *(int *)(glContext + 0x4854) + iVar3 * *(int *)(glContext + 0x4878);
+  if (layoutThenStrideBytes != 0) {
+    layoutThenStrideBytes = *(int *)(layoutThenStrideBytes + 0x20) * 0x10;
+    *(short *)(glContext + 0x487c) = (short)layoutThenStrideBytes;
+    *(int *)(glContext + 0x485c) = *(int *)(glContext + 0x4854) + layoutThenStrideBytes * *(int *)(glContext + 0x4878);
     return;
   }
   return;
@@ -5574,7 +5574,7 @@ int _gleGenHashNames(hashTable, listRange)
   int hashTable;
   uint listRange;
 {
-  uint uVar1;
+  uint resultThenRangeStart;
   int nextRangeCount;
   uint candidateEndName;
   undefined4 *previousRangeNode;
@@ -5584,7 +5584,7 @@ int _gleGenHashNames(hashTable, listRange)
   undefined4 *rangeNode;
   undefined4 *allocatedBlock2;
   
-  uVar1 = 0;
+  resultThenRangeStart = 0;
   rangeNode = *(undefined4 **)(hashTable + 0x1000);
   if (listRange != 0) {
     if (rangeNode == (undefined4 *)0x0) {
@@ -5595,9 +5595,9 @@ int _gleGenHashNames(hashTable, listRange)
       *(undefined4 **)(hashTable + 0x1000) = allocatedBlock2;
     }
     else {
-      uVar1 = rangeNode[1];
-      if (uVar1 != listRange + 1) {
-        if (listRange < uVar1) {
+      resultThenRangeStart = rangeNode[1];
+      if (resultThenRangeStart != listRange + 1) {
+        if (listRange < resultThenRangeStart) {
           allocatedBlock = (undefined4 *)_malloc(0xc);
           *(undefined4 **)(hashTable + 0x1000) = allocatedBlock;
           *allocatedBlock = rangeNode;
@@ -5609,13 +5609,13 @@ int _gleGenHashNames(hashTable, listRange)
           previousRangeNode = rangeNode;
           previousRangeCount = previousRangeNode[2];
           rangeNode = (undefined4 *)*previousRangeNode;
-          candidateFirstName = uVar1 + previousRangeCount;
+          candidateFirstName = resultThenRangeStart + previousRangeCount;
           candidateEndName = candidateFirstName + listRange;
           if (candidateEndName < candidateFirstName) {
             return 0;
           }
-          if ((rangeNode == (undefined4 *)0x0) || (uVar1 = rangeNode[1], candidateEndName < uVar1)) break;
-          if (candidateEndName == uVar1) {
+          if ((rangeNode == (undefined4 *)0x0) || (resultThenRangeStart = rangeNode[1], candidateEndName < resultThenRangeStart)) break;
+          if (candidateEndName == resultThenRangeStart) {
             nextRangeCount = rangeNode[2];
             *previousRangeNode = *rangeNode;
             previousRangeNode[2] = previousRangeCount + listRange + nextRangeCount;
@@ -5629,9 +5629,9 @@ int _gleGenHashNames(hashTable, listRange)
       rangeNode[1] = 1;
       rangeNode[2] = rangeNode[2] + listRange;
     }
-    uVar1 = 1;
+    resultThenRangeStart = 1;
   }
-  return uVar1;
+  return resultThenRangeStart;
 }
 
 /* _gliAttachDrawableWithOptions @ 0x1250c (656 bytes) */

@@ -162,22 +162,22 @@ void _gleBeginLineLoopRenderTCL(glContext)
 void _gleRenderLineLoopTCLFunc(glContext)
   int glContext;
 {
-  int iVar1;
+  int byteOffset;
   int remaining;
   undefined4 glContextWord4688;
   int glContextWord4854;
-  uint uVar5;
-  undefined4 uVar6;
+  uint vertexCount;
+  undefined4 renderAsLoop;
   int loopIndex;
   short glContextShort487c;
-  int iVar9;
+  int vertexStart;
   int glContextWord4858;
   code *UNRECOVERED_JUMPTABLE;
   
   glContextWord4854 = *(int *)(glContext + 0x4854);
   glContextWord4858 = *(int *)(glContext + 0x4858);
   glContextShort487c = *(short *)(glContext + 0x487c);
-  uVar5 = (uint)(glContextWord4858 - glContextWord4854) / (uint)(int)glContextShort487c;
+  vertexCount = (uint)(glContextWord4858 - glContextWord4854) / (uint)(int)glContextShort487c;
   if (*(char *)(glContext + 0x4a18) == '\0') {
     if (*(short *)(glContext + 0x4a10) < 0) {
       UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46bc);
@@ -186,34 +186,34 @@ void _gleRenderLineLoopTCLFunc(glContext)
       UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46b8);
     }
     glContextWord4688 = *(undefined4 *)(glContext + 0x4688);
-    uVar6 = 1;
+    renderAsLoop = 1;
   }
   else {
     if (*(short *)(glContext + 0x4a10) < 0) {
       remaining = (int)glContextShort487c >> 3;
       loopIndex = 0;
-      iVar9 = glContextWord4854;
+      vertexStart = glContextWord4854;
       if (0 < remaining) {
         while( true ) {
-          iVar1 = loopIndex * 8;
+          byteOffset = loopIndex * 8;
           loopIndex = loopIndex + 1;
-          *(undefined8 *)(iVar1 + glContextWord4858) = *(undefined8 *)(iVar1 + iVar9 + -0x100);
+          *(undefined8 *)(byteOffset + glContextWord4858) = *(undefined8 *)(byteOffset + vertexStart + -0x100);
           remaining = remaining + -1;
           if (remaining == 0) break;
-          iVar9 = *(int *)(glContext + 0x4854);
+          vertexStart = *(int *)(glContext + 0x4854);
         }
         glContextShort487c = *(short *)(glContext + 0x487c);
       }
-      uVar5 = uVar5 + 1;
+      vertexCount = vertexCount + 1;
       *(int *)(glContext + 0x4858) = glContextWord4858 + glContextShort487c;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46b8);
-    uVar6 = 0;
+    renderAsLoop = 0;
     glContextWord4688 = *(undefined4 *)(glContext + 0x4688);
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(glContextWord4688,glContextWord4854,uVar5,uVar6);
+  (*UNRECOVERED_JUMPTABLE)(glContextWord4688,glContextWord4854,vertexCount,renderAsLoop);
   return;
 }
 
@@ -296,22 +296,22 @@ void _gleEndList(glContext)
 }
 
 /* _gleIsHashName @ 0x3af50 (68 bytes) */
-int _gleIsHashName(param_1, param_2)
-  int param_1;
-  uint param_2;
+int _gleIsHashName(hashTable, name)
+  int hashTable;
+  uint name;
 {
-  int *piVar1;
+  int *rangeNode;
   
-  piVar1 = *(int **)(param_1 + 0x1000);
+  rangeNode = *(int **)(hashTable + 0x1000);
   while( true ) {
-    if (piVar1 == (int *)0x0) {
+    if (rangeNode == (int *)0x0) {
       return 0;
     }
-    if (param_2 < (uint)piVar1[1]) break;
-    if (param_2 < (uint)(piVar1[1] + piVar1[2])) {
+    if (name < (uint)rangeNode[1]) break;
+    if (name < (uint)(rangeNode[1] + rangeNode[2])) {
       return 1;
     }
-    piVar1 = (int *)*piVar1;
+    rangeNode = (int *)*rangeNode;
   }
   return 0;
 }

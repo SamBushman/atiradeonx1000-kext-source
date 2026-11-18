@@ -383,18 +383,18 @@ void _gliCopyAttributes(glContext, glContext2)
   int glContext;
   int glContext2;
 {
-  uint uVar1;
-  uint uVar2;
-  undefined1 auStack_2c60 [11340];
+  uint nextAttribBit;
+  uint attribBit;
+  undefined1 attribBuffer [11340];
   
   if ((glContext != 0) && (glContext2 != 0)) {
-    uVar2 = 1;
+    attribBit = 1;
     do {
-      _gleGetAttrib(glContext,uVar2,auStack_2c60);
-      uVar1 = uVar2 << 1;
-      _gleSetAttrib(glContext2,uVar2,auStack_2c60);
-      uVar2 = uVar1;
-    } while (uVar1 < 0xfffff);
+      _gleGetAttrib(glContext,attribBit,attribBuffer);
+      nextAttribBit = attribBit << 1;
+      _gleSetAttrib(glContext2,attribBit,attribBuffer);
+      attribBit = nextAttribBit;
+    } while (nextAttribBit < 0xfffff);
     _gleUpdateState(glContext2);
   }
   return;

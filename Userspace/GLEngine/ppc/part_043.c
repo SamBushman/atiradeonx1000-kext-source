@@ -688,17 +688,17 @@ void _gleBindRenderbuffer(glContext, renderbuffer)
   int renderbuffer;
 {
   undefined *freeTextureObject;
-  int iVar2;
-  int iVar3;
+  int sharedStateThenOldRenderbuffer;
+  int newRefCount;
   undefined4 incomingR6;
   undefined4 incomingR7;
   undefined4 incomingR8;
   undefined4 *renderbufferObject;
   
-  iVar2 = *(int *)(glContext + 0x5148);
+  sharedStateThenOldRenderbuffer = *(int *)(glContext + 0x5148);
   renderbufferObject = (undefined4 *)0x0;
   if (renderbuffer != 0) {
-    renderbufferObject = (undefined4 *)_gleLookupHashObject(((unsigned char *)0x00001004) + iVar2,renderbuffer);
+    renderbufferObject = (undefined4 *)_gleLookupHashObject(((unsigned char *)0x00001004) + sharedStateThenOldRenderbuffer,renderbuffer);
     if (renderbufferObject == (undefined4 *)0x0) {
       renderbufferObject = (undefined4 *)_malloc(0xaac);
       freeTextureObject = PTR__gleFreeTextureObject_00112154;
@@ -714,13 +714,13 @@ void _gleBindRenderbuffer(glContext, renderbuffer)
       *(undefined2 *)((int)renderbufferObject + 0x46) = 0x812f;
       *(undefined2 *)((int)renderbufferObject + 0x4a) = 0x2600;
       _gleCreatePluginTexture(glContext,renderbufferObject + 4);
-      _gleAddHashNameAndObject(glContext,((unsigned char *)0x00001004) + iVar2,renderbufferObject);
+      _gleAddHashNameAndObject(glContext,((unsigned char *)0x00001004) + sharedStateThenOldRenderbuffer,renderbufferObject);
     }
     renderbufferObject[2] = renderbufferObject[2] + 1;
   }
-  iVar2 = *(int *)(glContext + 0x7448);
-  if ((iVar2 != 0) && (iVar3 = *(int *)(iVar2 + 8) + -1, *(int *)(iVar2 + 8) = iVar3, iVar3 == 0)) {
-    _gleFreeTextureObject(glContext,iVar2);
+  sharedStateThenOldRenderbuffer = *(int *)(glContext + 0x7448);
+  if ((sharedStateThenOldRenderbuffer != 0) && (newRefCount = *(int *)(sharedStateThenOldRenderbuffer + 8) + -1, *(int *)(sharedStateThenOldRenderbuffer + 8) = newRefCount, newRefCount == 0)) {
+    _gleFreeTextureObject(glContext,sharedStateThenOldRenderbuffer);
   }
   *(undefined4 **)(glContext + 0x7448) = renderbufferObject;
   return;
@@ -3635,10 +3635,10 @@ void _LFSStreamChunkOutputDebugInfo(chunk)
   byte *chunk;
 {
   byte chunkKind;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
+  undefined4 constantXHighWord;
+  undefined4 constantYHighWord;
+  undefined4 constantXLowWord;
+  undefined4 constantYLowWord;
   char *lastFormat;
   undefined4 lastValue;
   uint sourceIndex;
@@ -3647,8 +3647,13 @@ void _LFSStreamChunkOutputDebugInfo(chunk)
   float constantX;
   float constantZ;
   float constantY;
-  undefined4 local_30;
-  undefined4 uStack_2c;
+  undefined4 constantWHighWord;
+  undefined4 constantZHighWord;
+  undefined4 constantYHighStaging;
+  undefined4 constantXHighStaging;
+  undefined4 constantXLowStaging;
+  undefined4 constantZLowWord;
+  undefined4 constantYLowStaging;
   
   _puts("LFSStreamChunk {");
   chunkKind = *chunk;
@@ -3694,20 +3699,20 @@ void _LFSStreamChunkOutputDebugInfo(chunk)
           constantX = (double)*(float *)(chunk + 4);
           constantY = (double)*(float *)(chunk + 8);
           constantZ = (double)*(float *)(chunk + 0xc);
-          local_30 = (undefined4)((ulonglong)(double)*(float *)(chunk + 0x10) >> 0x20);
-          lastValue = local_30;
-          local_30 = (undefined4)((ulonglong)(double)constantX >> 0x20);
-          uVar2 = local_30;
-          uStack_2c = SUB84((double)constantX,0);
-          uVar4 = uStack_2c;
-          local_30 = (undefined4)((ulonglong)(double)constantY >> 0x20);
-          uVar3 = local_30;
-          uStack_2c = SUB84((double)constantY,0);
-          uVar5 = uStack_2c;
-          local_30 = (undefined4)((ulonglong)(double)constantZ >> 0x20);
-          uStack_2c = SUB84((double)constantZ,0);
+          constantWHighWord = (undefined4)((ulonglong)(double)*(float *)(chunk + 0x10) >> 0x20);
+          lastValue = constantWHighWord;
+          constantXHighStaging = (undefined4)((ulonglong)(double)constantX >> 0x20);
+          constantXHighWord = constantXHighStaging;
+          constantXLowStaging = SUB84((double)constantX,0);
+          constantXLowWord = constantXLowStaging;
+          constantYHighStaging = (undefined4)((ulonglong)(double)constantY >> 0x20);
+          constantYHighWord = constantYHighStaging;
+          constantYLowStaging = SUB84((double)constantY,0);
+          constantYLowWord = constantYLowStaging;
+          constantZHighWord = (undefined4)((ulonglong)(double)constantZ >> 0x20);
+          constantZLowWord = SUB84((double)constantZ,0);
           _printf("      constant = { %f, %f, %f, %f }\n;",(double)constantX,(double)constantY,(double)constantZ,
-                  (double)*(float *)(chunk + 0x10),uVar2,uVar4,uVar3,uVar5,local_30,uStack_2c,
+                  (double)*(float *)(chunk + 0x10),constantXHighWord,constantXLowWord,constantYHighWord,constantYLowWord,constantZHighWord,constantZLowWord,
                   lastValue);
         }
         goto LAB_000d1838;

@@ -379,32 +379,32 @@ void _glGenVertexArraysEXT_Exec(glContext, n, ids)
   int *ids;
 {
   undefined4 glErrorCode;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  int nameValue;
+  int nameIndex;
+  int sharedStateThenFirstName;
   
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (-1 < n) {
-      iVar4 = *(int *)(glContext + 0x5148);
-      if (*(char *)(iVar4 + 0x8024) != '\0') {
-        _pthread_mutex_lock(iVar4 + 0x8028);
-        iVar4 = *(int *)(glContext + 0x5148);
+      sharedStateThenFirstName = *(int *)(glContext + 0x5148);
+      if (*(char *)(sharedStateThenFirstName + 0x8024) != '\0') {
+        _pthread_mutex_lock(sharedStateThenFirstName + 0x8028);
+        sharedStateThenFirstName = *(int *)(glContext + 0x5148);
       }
-      iVar4 = _gleGenHashNames(iVar4 + 0x5014,n);
+      sharedStateThenFirstName = _gleGenHashNames(sharedStateThenFirstName + 0x5014,n);
       if (*(char *)(*(int *)(glContext + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(glContext + 0x5148) + 0x8028);
       }
-      if (iVar4 == 0) {
+      if (sharedStateThenFirstName == 0) {
         return;
       }
-      iVar3 = 0;
+      nameIndex = 0;
       if (n < 1) {
         return;
       }
       do {
-        iVar2 = iVar3 + iVar4;
-        iVar3 = iVar3 + 1;
-        *ids = iVar2;
+        nameValue = nameIndex + sharedStateThenFirstName;
+        nameIndex = nameIndex + 1;
+        *ids = nameValue;
         ids = ids + 1;
         n = n + -1;
       } while (n != 0);
@@ -521,20 +521,20 @@ void _glVertexAttrib1sARB_CompExec(glContext, index, x)
 /* _glVertexAttrib1fARB_Exec @ 0xac254 (136 bytes) */
 void _glVertexAttrib1fARB_Exec(int glContext,uint index,float x)
 {
-  float fVar1;
-  float fVar2;
-  int iVar3;
+  float zeroComponent;
+  float oneComponent;
+  int attribRecord;
   code *UNRECOVERED_JUMPTABLE;
   
   if (index < 0x10) {
-    fVar1 = *(float *)(glContext + 0x20);
-    fVar2 = *(float *)(glContext + 0x24);
+    zeroComponent = *(float *)(glContext + 0x20);
+    oneComponent = *(float *)(glContext + 0x24);
     if (index != 0) {
-      iVar3 = glContext + index * 0x10;
-      *(float *)(iVar3 + 0x1a0) = (float)x;
-      *(float *)(iVar3 + 0x1ac) = fVar2;
-      *(float *)(iVar3 + 0x1a8) = fVar1;
-      *(float *)(iVar3 + 0x1a4) = fVar1;
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) = (float)x;
+      *(float *)(attribRecord + 0x1ac) = oneComponent;
+      *(float *)(attribRecord + 0x1a8) = zeroComponent;
+      *(float *)(attribRecord + 0x1a4) = zeroComponent;
       return;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x4884);
@@ -543,7 +543,7 @@ void _glVertexAttrib1fARB_Exec(int glContext,uint index,float x)
     }
                     
                     
-    (*UNRECOVERED_JUMPTABLE)(glContext,0,x,(double)fVar1,(double)fVar1,(double)fVar2);
+    (*UNRECOVERED_JUMPTABLE)(glContext,0,x,(double)zeroComponent,(double)zeroComponent,(double)oneComponent);
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -638,33 +638,33 @@ void _glVertexAttrib2sARB_Exec(glContext, index, x, y)
   uint x;
   uint y;
 {
-  float fVar1;
-  float fVar2;
+  float zeroComponent;
+  float oneComponent;
   double intToDoubleBias;
-  int iVar4;
-  code *pcVar5;
+  int attribRecord;
+  code *vertexFunc;
   
   intToDoubleBias = DOUBLE_00108d58;
   if (index < 0x10) {
-    fVar1 = *(float *)(glContext + 0x20);
-    fVar2 = *(float *)(glContext + 0x24);
+    zeroComponent = *(float *)(glContext + 0x20);
+    oneComponent = *(float *)(glContext + 0x24);
     if (index == 0) {
-      pcVar5 = *(code **)(glContext + 0x4884);
+      vertexFunc = *(code **)(glContext + 0x4884);
       if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-        pcVar5 = (code *)PTR__gleFlushAndSubmit_00112050;
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar5)(glContext,(double)(float)((double)CONCAT44(0x43300000,x ^ 0x80000000) -
+      (*vertexFunc)(glContext,(double)(float)((double)CONCAT44(0x43300000,x ^ 0x80000000) -
                                        DOUBLE_00108d58),
                 (double)(float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - DOUBLE_00108d58)
-                ,(double)fVar1,(double)fVar2);
+                ,(double)zeroComponent,(double)oneComponent);
     }
     else {
-      iVar4 = glContext + index * 0x10;
-      *(float *)(iVar4 + 0x1a0) =
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) =
            (float)((double)CONCAT44(0x43300000,x ^ 0x80000000) - DOUBLE_00108d58);
-      *(float *)(iVar4 + 0x1ac) = fVar2;
-      *(float *)(iVar4 + 0x1a8) = fVar1;
-      *(float *)(iVar4 + 0x1a4) = (float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - intToDoubleBias)
+      *(float *)(attribRecord + 0x1ac) = oneComponent;
+      *(float *)(attribRecord + 0x1a8) = zeroComponent;
+      *(float *)(attribRecord + 0x1a4) = (float)((double)CONCAT44(0x43300000,y ^ 0x80000000) - intToDoubleBias)
       ;
     }
   }
@@ -1296,13 +1296,13 @@ void _glVertexAttrib4NubARB_CompExec(glContext, index, x, y, z, w)
   undefined4 z;
   undefined4 w;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
   
   ((int (*)())_glVertexAttrib4NubARB_Comp)(glContext,index,x,y,z,w);
-  ((void (*)())_glVertexAttrib4NubARB_Exec)(glContext,index,x,y,z,w,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4);
+  ((void (*)())_glVertexAttrib4NubARB_Exec)(glContext,index,x,y,z,w,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4);
   return;
 }
 

@@ -59,7 +59,7 @@ void _glCombinerParameterivNV_CompExec(glContext, pname, params)
   undefined4 params;
 {
   undefined4 in_LR;
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -69,7 +69,7 @@ void _glCombinerParameterivNV_CompExec(glContext, pname, params)
   double incomingFpr8;
   
   _glCombinerParameterivNV_Comp(glContext,pname,params);
-  ((void (*)())_glCombinerParameterivNV_Exec)(glContext,pname,params,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
+  ((void (*)())_glCombinerParameterivNV_Exec)(glContext,pname,params,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
              (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)));
   return;
 }

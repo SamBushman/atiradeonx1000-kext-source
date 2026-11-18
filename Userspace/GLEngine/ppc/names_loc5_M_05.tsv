@@ -1,0 +1,156 @@
+local	_glIndexPointer_Exec	uVar1	elementBytes	CONFIRMED	size in bytes of one index element by type: 1 for GL_UNSIGNED_BYTE (0x1401), 2 for GL_UNSIGNED_SHORT/GL_SHORT (0x1402), 4 for GL_INT/GL_FLOAT (0x1404/0x1406), 8 for 0x140a; stored as the stride (ctx+0x48e4) when the caller passes stride < 1
+local	_glIndexPointer_Exec	iVar3	oldBufferObject	CONFIRMED	buffer object previously recorded at ctx+0x48f4: its refcount (+8) is dropped and it is freed with _gleFreeBufferObject when the count reaches zero
+local	_glIndexPointer_Exec	iVar4	boundBufferObject	CONFIRMED	buffer bound in the current vertex-array client state (*(ctx+0x4a60) + 0x358): the object the index pointer now refers to; its refcount (+8) is incremented and it replaces the object at ctx+0x48f4
+local	_glIndexPointer_Exec	iVar2	newRefCount	CONFIRMED	refcount (+8) of the old buffer object after the decrement; zero triggers _gleFreeBufferObject
+local	_glElementPointerAPPLE_Exec	bVar1	isAllowedIndexType	CONFIRMED	true for GL_UNSIGNED_BYTE (0x1401) and GL_UNSIGNED_INT (0x1405) in the branch reached after GL_UNSIGNED_SHORT (0x1403) is excluded; any other type raises GL_INVALID_ENUM
+local	_glElementPointerAPPLE_Exec	uVar2	copiedWord	CONFIRMED	word copied from the buffer object's table at +0x10 into the per-renderer records at clientState+0x3fc (stride 0x8c bytes)
+local	_glElementPointerAPPLE_Exec	iVar4	newRefCount	CONFIRMED	refcount (+8) of the old buffer object after the decrement; zero triggers _gleFreeBufferObject
+local	_glElementPointerAPPLE_Exec	iVar5	oldBufferObject	CONFIRMED	buffer object previously recorded at clientState+0x37c (element array slot)
+local	_glElementPointerAPPLE_Exec	iVar8	boundBufferObject	CONFIRMED	buffer bound in the client state at +0x35c (element array binding): replaces the recorded object at clientState+0x37c, its refcount (+8) is incremented and its offset (+0x30) is added to the pointer
+local	_gleCheckCopyTexSubImage2DArgs	bVar1	levelInRange	CONFIRMED	true unless level > 14 (then GL_INVALID_VALUE is recorded)
+use	_gleCheckCopyTexSubImage2DArgs	iVar3	readBufferExtentX	INFERRED	word at ctx+0x3350 or ctx+0x3310 (selected by the read-buffer mask at ctx+0x3410 and the short marker -0x7fea at +0x3348/+0x3308): subtracted from width as (width - value) + 1	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3350\);$	+1
+use	_gleCheckCopyTexSubImage2DArgs	iVar3	readBufferExtentX	INFERRED	word at ctx+0x3350 or ctx+0x3310 (selected by the read-buffer mask at ctx+0x3410 and the short marker -0x7fea at +0x3348/+0x3308): subtracted from width as (width - value) + 1	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3310\);$	+1
+use	_gleCheckCopyTexSubImage2DArgs	iVar3	readBufferExtentX	INFERRED	word at ctx+0x3350 or ctx+0x3310 (selected by the read-buffer mask at ctx+0x3410 and the short marker -0x7fea at +0x3348/+0x3308): subtracted from width as (width - value) + 1	^\s*param_6\ =\ \(param_6\ \-\ iVar3\)\ \+\ 1;$	+1
+use	_gleCheckCopyTexSubImage2DArgs	iVar3	xRangeValid	CONFIRMED	result of _gleCheckTexSubImageRange for the x offset and width against the level width (+4); zero returns 0	^\s*iVar3\ =\ _gleCheckTexSubImageRange\(param_1,iVar6,param_4,param_6,\(uint\)\*\(ushort\ \*\)\(iVar6\ \+\ 4\)\);$	+2
+local	_gleCheckCopyTexSubImage2DArgs	iVar5	readBufferExtentY	INFERRED	word at ctx+0x3354 or ctx+0x3314 (the pair of ctx+0x3350/0x3310): subtracted from height as (height - value) + 1
+local	_gleCheckCopyTexSubImage2DArgs	iVar6	levelImageThenYRangeValid	CONFIRMED	pointer to the texture level image record (texture + 0xc4 + level*0x18, or the cube-face variant for targets 0x8515..0x851a); finally reassigned the result of _gleCheckTexSubImageRange for the y offset and height
+local	_LFSStreamCompare	param_1	streamA	CONFIRMED	stream compared against param_2: the five chunk lists at +4..+0x14 are compared pairwise with _LFSStreamChunkListCompare
+local	_LFSStreamCompare	param_2	streamB	CONFIRMED	stream compared against param_1
+local	_LFSStreamCompare	iVar1	listCompareResult	CONFIRMED	result of _LFSStreamChunkListCompare for the current pair of chunk lists (0 = equal)
+local	_LFSStreamCompare	bVar2	streamsDiffer	CONFIRMED	true as soon as one chunk list comparison returns nonzero; otherwise the result of the last (+0x14) list comparison
+local	_LFSStreamAddConstantBinding	param_1	stream	CONFIRMED	stream whose first chunk list (*stream) receives the new constant-binding chunk (kind 3)
+local	_LFSStreamAddConstantBinding	param_2	binding	CONFIRMED	five-word constant binding (type, constantindex, envparameterindex, inlineconstantindex, localparameterindex, as printed by _LFSStreamChunkOutputDebugInfo) copied into the chunk at +4..+0x14
+local	_LFSStreamAddConstantBinding	uVar1	constantIndex	CONFIRMED	binding word 1, copied to chunk+8 (printed as constantindex)
+local	_LFSStreamAddConstantBinding	uVar3	envParameterIndex	CONFIRMED	binding word 2, copied to chunk+0xc (printed as envparameterindex)
+local	_LFSStreamAddConstantBinding	uVar4	inlineConstantIndex	CONFIRMED	binding word 3, copied to chunk+0x10 (printed as inlineconstantindex)
+local	_LFSStreamAddConstantBinding	puVar2	chunk	CONFIRMED	new chunk from _LFSStreamChunkCreate, kind byte 3 (constantbinding), appended to the stream's first chunk list
+local	_LFSStreamChunkListCompare	param_1	listA	CONFIRMED	chunk list (head +0, tail +4, count +8) compared with param_2
+local	_LFSStreamChunkListCompare	param_2	listB	CONFIRMED	chunk list compared with param_1
+local	_LFSStreamChunkListCompare	uVar1	differs	CONFIRMED	1 when the chunk counts (+8) differ or a chunk pair differs, 0 when all chunks are equal
+local	_LFSStreamChunkListCompare	iVar2	chunkCompareResult	CONFIRMED	result of _LFSStreamChunkCompare for the current chunk pair (nonzero = different)
+local	_LFSStreamChunkListCompare	iVar3	chunkA	CONFIRMED	cursor over the chunks of listA (head from *listA, next link at chunk+0x4c)
+local	_LFSStreamChunkListCompare	iVar4	chunkB	CONFIRMED	cursor over the chunks of listB (head from *listB, next link at chunk+0x4c)
+local	_LFSStreamChunkOutputDebugInfo	uVar2	constantXHighWord	INFERRED	high word of (double)constantX, passed in a GPR slot of the variadic _printf call
+local	_LFSStreamChunkOutputDebugInfo	uVar3	constantYHighWord	INFERRED	high word of (double)constantY, passed in a GPR slot of the variadic _printf call
+local	_LFSStreamChunkOutputDebugInfo	uVar4	constantXLowWord	INFERRED	low word of (double)constantX, passed in a GPR slot of the variadic _printf call
+local	_LFSStreamChunkOutputDebugInfo	uVar5	constantYLowWord	INFERRED	low word of (double)constantY, passed in a GPR slot of the variadic _printf call
+use	_LFSStreamChunkOutputDebugInfo	local_30	constantWHighWord	INFERRED	high word of (double)constant w (chunk+0x10), copied to lastValue for the variadic _printf call	^\s*local_30\ =\ \(undefined4\)\(\(ulonglong\)\(double\)\*\(float\ \*\)\(param_1\ \+\ 0x10\)\ >>\ 0x20\);$	+2
+use	_LFSStreamChunkOutputDebugInfo	local_30	constantXHighStaging	INFERRED	high word of (double)constantX, staged before being copied to uVar2	^\s*local_30\ =\ \(undefined4\)\(\(ulonglong\)\(double\)dVar11\ >>\ 0x20\);$	+2
+use	_LFSStreamChunkOutputDebugInfo	local_30	constantYHighStaging	INFERRED	high word of (double)constantY, staged before being copied to uVar3	^\s*local_30\ =\ \(undefined4\)\(\(ulonglong\)\(double\)dVar13\ >>\ 0x20\);$	+2
+use	_LFSStreamChunkOutputDebugInfo	local_30	constantZHighWord	INFERRED	high word of (double)constantZ, passed directly in the variadic _printf call	^\s*local_30\ =\ \(undefined4\)\(\(ulonglong\)\(double\)dVar12\ >>\ 0x20\);$	+1
+use	_LFSStreamChunkOutputDebugInfo	local_30	constantZHighWord	INFERRED	high word of (double)constantZ, passed directly in the variadic _printf call	^\s*_printf\("\ \ \ \ \ \ constant\ =\ \{\ %f,\ %f,\ %f,\ %f\ \}\\n;",\(double\)dVar11,\(double\)dVar13,\(double\)dVar12,$	+3
+use	_LFSStreamChunkOutputDebugInfo	uStack_2c	constantXLowStaging	INFERRED	low word of (double)constantX, staged before being copied to uVar4	^\s*uStack_2c\ =\ SUB84\(\(double\)dVar11,0\);$	+2
+use	_LFSStreamChunkOutputDebugInfo	uStack_2c	constantYLowStaging	INFERRED	low word of (double)constantY, staged before being copied to uVar5	^\s*uStack_2c\ =\ SUB84\(\(double\)dVar13,0\);$	+2
+use	_LFSStreamChunkOutputDebugInfo	uStack_2c	constantZLowWord	INFERRED	low word of (double)constantZ, passed directly in the variadic _printf call	^\s*uStack_2c\ =\ SUB84\(\(double\)dVar12,0\);$	+4
+local	_gleUpdateDispatchCodeChange	fparam_1	f1AfterSwitchToRenderer	INFERRED	Ghidra models the value left in f1 by _gleSwitchToRenderer as a double; only forwarded as the first FP argument of _gleUpdateDepthRangeData
+local	_gleUpdateDispatchCodeChange	fparam_1_00	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 only forwarded unchanged to _gleUpdateViewScissorData; the convention of the other Exec siblings
+local	_gleTransformModelviewBlend	param_2	vertexCursor	CONFIRMED	start of the 0x100-byte vertex records, advanced by 0x100 per iteration; words 0xf0..0xfc of each record are copied to 0x20..0x2c
+local	_gleTransformModelviewBlend	param_3	vertexCount	CONFIRMED	number of vertex records: the end address is param_2 + count*0x100
+local	_gleTransformModelviewBlend	uVar1	vertexEndThenRemaining	CONFIRMED	first the end address of the vertex records (start + vertexCount * 0x100, compared with the start to skip an empty run), then reassigned the down-counter of the records still to copy, (end - start + 0xff) >> 8
+local	_CheckTypeFormat	param_1	type	CONFIRMED	pixel component type compared with GL_BYTE..GL_FLOAT (0x1400..0x1406) and the packed types 0x8032..0x8036 / 0x8362..0x8368
+local	_CheckTypeFormat	param_2	format	CONFIRMED	pixel format compared with GL_RGB (0x1907), GL_RGBA (0x1908), GL_BGR/GL_BGRA (0x80e0/0x80e1) and 0x1903..0x190a
+local	_CheckTypeFormat	bVar1	formatAllowed	CONFIRMED	true when the format is permitted for the type; the function returns 1 for allowed combinations, 0 otherwise
+local	_glCompressedTexSubImage2D_Exec	iVar5	faceMaskOffsetThenPluginResult	CONFIRMED	faceIndex * 2: byte offset of the face's 16-bit per-level mask words in the texture object (+0x94, +0xa0); in the other path reassigned the result of the renderer dispatch call at ctx+0x4710 (nonzero = handled by the renderer)
+local	_glCompressedTexSubImage2D_Exec	iVar9	unpackBufferThenFaceMaskOffsetThenMipmapResult	CONFIRMED	pixel unpack buffer object at ctx+0x4a6c (size +0x38 checked against imageSize + data, base +0x30 added, +0x40 synchronised); later reassigned faceIndex * 2 (offset of the face's per-level mask words) and finally the result of _gleGenMipmapsToLevel
+local	_gleCreateSurfaceLevel	param_2	textureLevel	CONFIRMED	texture level record being initialised (+4 width, +6 height, +8 depth = 1, +0xa border = 0, +0xb flags = 0x32, +0x10 format, +0x12 type, +0x14 pixels = 0); same layout as _gleCreateTextureLevel
+local	_gleCreateSurfaceLevel	param_3	width	CONFIRMED	stored as 16-bit width at level+4
+local	_gleCreateSurfaceLevel	param_4	height	CONFIRMED	stored as 16-bit height at level+6
+local	_gleCreateSurfaceLevel	param_5	format	CONFIRMED	stored as 16-bit format at level+0x10 (the format field of _gleCreateTextureLevel); callers pass 0
+local	_gleCreateSurfaceLevel	param_6	type	CONFIRMED	stored as 16-bit type at level+0x12 (the type field of _gleCreateTextureLevel); callers pass 0
+local	_gle4444Filter2	uVar1	texel0	CONFIRMED	4444 texel at src
+local	_gle4444Filter2	uVar2	texelA	CONFIRMED	4444 texel at src + offsetA
+local	_gle4444Filter2	uVar3	texelB	CONFIRMED	4444 texel at src + offsetB
+local	_gle4444Filter2	uVar4	texelAB	CONFIRMED	4444 texel at src + offsetB + offsetA; the four texels are averaged per 4-bit channel
+local	_gle332Filter2	bVar1	texel0	CONFIRMED	3-3-2 texel at src
+local	_gle332Filter2	bVar2	texelA	CONFIRMED	3-3-2 texel at src + offsetA
+local	_gle332Filter2	bVar3	texelB	CONFIRMED	3-3-2 texel at src + offsetB
+local	_gle332Filter2	bVar4	texelAB	CONFIRMED	3-3-2 texel at src + offsetB + offsetA; the four texels are averaged per channel (0xe0 / 0x1c / 3)
+local	_gle332Filter1	bVar1	texel0	CONFIRMED	3-3-2 texel at src
+local	_gle332Filter1	bVar2	texelA	CONFIRMED	3-3-2 texel at src + offsetA; the two texels are averaged per channel (0xe0 / 0x1c / 3)
+local	_gleFloatFilter3	fVar1	texelBC	CONFIRMED	float read from pfVar6 = src + offsetB + offsetC (advanced one float per output sample), the BC member of the eight-sample average
+local	_gleFloatFilter3	pfVar2	sourceABC	CONFIRMED	pointer to the float at (src + offsetB + offsetC + offsetA) of the current sample: the ABC member of the eight-sample average
+local	_gleFloatFilter3	iVar4	sourceSample	CONFIRMED	src + byteOffset: base address of the current output sample's source floats, to which the offsets A, B, C are added
+local	_gleFloatFilter3	pfVar6	sourceBCCursor	CONFIRMED	cursor over the floats at src + offsetB + offsetC, advanced one float per output sample
+local	_gles16s16Filter3	iVar1	texelAB	CONFIRMED	16-bit signed texel pair at src + offsetB + offsetA
+local	_gles16s16Filter3	iVar2	texelAC	CONFIRMED	16-bit signed texel pair at src + offsetC + offsetA
+local	_gles16s16Filter3	iVar3	texelBC	CONFIRMED	16-bit signed texel pair at src + offsetC + offsetB
+local	_gles16s16Filter3	iVar4	texelABC	CONFIRMED	16-bit signed texel pair at src + offsetC + offsetB + offsetA; averaged with the other four per 16-bit lane
+local	_gles8s8Filter2	uVar1	texelAB	CONFIRMED	signed 8-bit texel pair at src + offsetB + offsetA; averaged per byte lane with the texels at src, +offsetA and +offsetB
+local	_gleShortFilter1	uVar2	remaining	CONFIRMED	down-counter of the output samples still to produce (count & 0x7fffffff)
+local	_gleTextureLevelBytes	param_2	textureLevel	CONFIRMED	texture level record: +4 width, +6 height, +8 depth, +0xc / +0xe allocated size shorts, +0x10 format, +0x12 type (zero for compressed levels)
+local	_gleTextureLevelBytes	iVar1	blockOrPixelCount	INFERRED	number of 4x4 blocks times depth for a compressed level (type 0), else the product of the +0xc / +0xe shorts and depth; multiplied by the per-unit byte size for the result
+local	_gleFreeTextureLevel	param_3	textureLevel	CONFIRMED	texture level record: its pixel storage (+0x14) is freed with _free, or deallocated with _vm_deallocate when flag bit 8 of byte +0xb is set, then cleared
+local	_glCopyConvolutionFilter1D_Comp	puVar1	listRecord	CONFIRMED	display-list record allocated by _gleAddListItem (0x18 bytes) receiving target, internalformat, x, y, width and the count word 1
+local	_glConvolutionFilter2D_Exec	iVar3	typeFormatValid	CONFIRMED	result of _CheckTypeFormat(type, format); zero raises GL_INVALID_ENUM / GL_INVALID_OPERATION
+local	_glConvolutionFilter2D_Exec	iVar5	elementBytes	CONFIRMED	bytes per element from _gleBytesPerElement(type), or _glePixelBytes(format, type) when that is zero; the pixel unpack buffer offset must be a multiple of it
+local	_glConvolutionFilter2D_Exec	iVar6	unpackBufferSize	CONFIRMED	size (+0x38) of the pixel unpack buffer object, compared with the image end offset
+local	_glGetSeparableFilter_Exec	iVar2	typeFormatValid	CONFIRMED	result of _CheckTypeFormat(type, format)
+local	_glGetSeparableFilter_Exec	iVar3	rowEndOffset	CONFIRMED	_gleOffsetLimitImage result for the row image (width from ctx+0x3350, height 1): end offset compared with the pack buffer size
+local	_glGetSeparableFilter_Exec	iVar4	columnEndOffset	CONFIRMED	_gleOffsetLimitImage result for the column image (width from ctx+0x3354, height 1): end offset compared with the pack buffer size
+local	_glGetSeparableFilter_Exec	iVar5	elementBytes	CONFIRMED	bytes per element from _gleBytesPerElement(type), or _glePixelBytes(format, type) when that is zero; the row and column offsets must be multiples of it
+local	_glGetSeparableFilter_Exec	iVar6	packBufferSize	CONFIRMED	size (+0x38) of the pixel pack buffer object
+local	_gleCullTriangle	param_2	vertex0	CONFIRMED	first triangle vertex record (x at +0, y at +4)
+local	_gleCullTriangle	param_3	vertex1	CONFIRMED	second triangle vertex record
+local	_gleCullTriangle	param_4	vertex2	CONFIRMED	third triangle vertex record
+local	_gleCullTriangle	param_5	windingFlip	CONFIRMED	XORed with the sign test of the signed area (0 for ordinary triangles, the strip parity for triangle strips; the sibling polygon cull uses the same value as windingFlip)
+local	_gleCullTriangle	param_6	backFacing	CONFIRMED	out parameter: receives orientation ^ 1 when the triangle is not culled (callers pass &backFacing)
+local	_gleCullTriangle	uVar1	orientation	CONFIRMED	0 or 1: the signed area sign test combined with the front-face byte at ctx+0x4fe1 and windingFlip; compared with the cull-face byte at ctx+0x4fe3 (equal means the triangle is culled, return 1)
+use	_gleModifyPixelRGBAIndex	uVar2	shiftMagnitude	CONFIRMED	-indexShift (the index shift at ctx+0x3214 is negative): right-shift amount of the integer and fraction parts	^\s*uVar2\ =\ \-uVar3;$	+2
+use	_gleModifyPixelRGBAIndex	uVar2	shiftMagnitude	CONFIRMED	-indexShift (the index shift at ctx+0x3214 is negative): right-shift amount of the integer and fraction parts	^\s*uVar3\ =\ \(int\)uVar5\ >>\ \(uVar2\ \-\ 0xf\ \&\ 0x3f\);$	+1
+use	_gleModifyPixelRGBAIndex	uVar2	shiftMagnitude	CONFIRMED	-indexShift (the index shift at ctx+0x3214 is negative): right-shift amount of the integer and fraction parts	^\s*uVar5\ =\ \(int\)uVar5\ >>\ \(uVar2\ \&\ 0x3f\);$	+2
+use	_gleModifyPixelRGBAIndex	uVar2	carryBits	CONFIRMED	bits crossing the integer/fraction boundary for a positive index shift: the fraction right-shifted by 15 - shift (or left-shifted by shift - 15), ORed into the integer part	^\s*uVar2\ =\ \(int\)uVar4\ >>\ \(0xf\ \-\ uVar3\ \&\ 0x3f\);$	+1
+use	_gleModifyPixelRGBAIndex	uVar2	carryBits	CONFIRMED	bits crossing the integer/fraction boundary for a positive index shift: the fraction right-shifted by 15 - shift (or left-shifted by shift - 15), ORed into the integer part	^\s*uVar2\ =\ uVar4\ <<\ \(uVar3\ \-\ 0xf\ \&\ 0x3f\);$	+1
+use	_gleModifyPixelRGBAIndex	uVar2	carryBits	CONFIRMED	bits crossing the integer/fraction boundary for a positive index shift: the fraction right-shifted by 15 - shift (or left-shifted by shift - 15), ORed into the integer part	^\s*uVar5\ =\ uVar5\ <<\ \(uVar3\ \&\ 0x3f\)\ \|\ uVar2;$	+1
+local	_gleModifyPixelRGBAIndex	uVar3	indexShiftThenCarryBits	CONFIRMED	GL_INDEX_SHIFT (ctx+0x3214, set by pname 0xd12), reused in the negative-shift branch for the carry bits shifted from the integer into the fraction
+local	_pow_10	param_1	exponent	CONFIRMED	power of ten: the multiplier is DOUBLE 1.0 (returned directly for 0), repeated factors of the +/-32 power constants, and the table entry (_up_0 / _down_1) for the remainder
+local	_pow_10	puVar1	tableEntryEnd	CONFIRMED	address just past the 8-byte table entry (_down_1 for negative exponents, _up_0 for positive ones) holding 10^-remainder / 10^remainder; the entry is read at -8
+local	_pow_10	dVar2	scale	CONFIRMED	accumulated multiplier starting at 1.0 (DOUBLE_00108d68): one 10^-32 / 10^32 constant factor per 32 of the exponent
+local	_gleGetMinmax	fVar1	zeroValue	CONFIRMED	(float)(4503601774854144.0 - DOUBLE_00108d58): the constant 4503601774854144.0 equals DOUBLE_00108d58 (the 0x43300000xxxxxxxx magic), so the value is 0.0; stored into the second half (indices 4..6) of the minmax table by the reset
+local	_gleGetMinmax	dVar2	intToDoubleBias	CONFIRMED	holds DOUBLE_00108d58 = 4503601774854144.0, the integer-to-double conversion magic subtracted from the CONCAT44(0x43300000,x) double (same convention as _glMapGrid1f_Exec)
+local	_gleGetMinmax	auStack_80	pixelRecordHeader	INFERRED	first word of the stack pixel record passed to the pixel insert function; the four floats that follow at +4..+0x10 are filled with the minimum, then the maximum, before each call (layout of the pixel records of _gleModifyPixelRGBAIndex: +4 red, +8 green, +0xc blue, +0x10 alpha)
+local	_gleGetMinmax	local_7c	pixelRed	CONFIRMED	pixel record +4: filled with minmaxTable[0] then minmaxTable[4] (red minimum, then maximum)
+local	_gleGetMinmax	local_78	pixelGreen	CONFIRMED	pixel record +8: filled with minmaxTable[1] then minmaxTable[5]
+local	_gleGetMinmax	local_74	pixelBlue	CONFIRMED	pixel record +0xc: filled with minmaxTable[2] then minmaxTable[6]
+local	_gleGetMinmax	local_70	pixelAlpha	CONFIRMED	pixel record +0x10: filled with minmaxTable[3] then minmaxTable[7]
+local	_glMapVertexAttrib2fARB_Exec	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it): forwarded unchanged to the _gleMap2VertexAttrib?fLoad call; no source-level role
+local	_glMapVertexAttrib2fARB_Exec	uVar3	sizeCopy	CONFIRMED	copy of the parameter size taken at entry and passed on unchanged to the _gleMap2VertexAttrib?fLoad call (the stale argument-register image); never otherwise read
+local	_glMapVertexAttrib2fARB_Exec	iVar4	ustrideCopy	CONFIRMED	copy of the parameter ustride taken at entry and passed on unchanged to the _gleMap2VertexAttrib?fLoad call; never otherwise read
+local	_glMapVertexAttrib2fARB_Exec	iVar5	uorderCopy	CONFIRMED	copy of the parameter uorder taken at entry and passed on unchanged to the _gleMap2VertexAttrib?fLoad call; never otherwise read
+local	_gleSetFunctionIDFromCurrent	param_2	funcDesc	CONFIRMED	function ID descriptor (top byte of word 0 = stream count, then 16-bit stream words from +4, then the output words); same object as funcDesc in _gleSetFunctionIDFromArray; word 0 receives the flags 0x60000
+local	_gleSetFunctionIDFromCurrent	uVar1	streamWord	CONFIRMED	16-bit stream word read from the descriptor; its slot number (>> 10) indexes the byte table at (ctx+0x4674)+0x400
+local	_gleSetFunctionIDFromCurrent	puVar3	streamWordCursor	CONFIRMED	cursor over the 16-bit stream words of the descriptor, starting at funcDesc + 1 and advanced two bytes per iteration
+local	_gleSetFunctionIDFromCurrent	uVar5	streamCountThenRemaining	CONFIRMED	stream count (word 0 >> 24), then the down-counter of the streams still to convert
+use	_gleRenderSmoothPolygonFunc_body	iVar7	texEnableBitsThenCullResult	CONFIRMED	result of _gleTexEnableBits (nonzero = some texture unit enabled, stored as texturingEnabled), later reused for the result of _gleCullPolygonStack (nonzero = polygon culled, return)	^\s*iVar7\ =\ _gleTexEnableBits\(param_1\);$	+1
+use	_gleRenderSmoothPolygonFunc_body	iVar7	texEnableBitsThenCullResult	CONFIRMED	result of _gleTexEnableBits (nonzero = some texture unit enabled, stored as texturingEnabled), later reused for the result of _gleCullPolygonStack (nonzero = polygon culled, return)	^\s*bVar2\ =\ iVar7\ !=\ 0;$	+1
+use	_gleRenderSmoothPolygonFunc_body	iVar7	texEnableBitsThenCullResult	CONFIRMED	result of _gleTexEnableBits (nonzero = some texture unit enabled, stored as texturingEnabled), later reused for the result of _gleCullPolygonStack (nonzero = polygon culled, return)	^\s*if\ \(\(cVar3\ !=\ '\\0'\)\ \&\&$@2	+2
+use	_gleRenderSmoothPolygonFunc_body	iVar7	remainingThenCullResult	CONFIRMED	down-counter of the polygon vertices still to be stored in the pointer list, later reused for the result of _gleCullPolygonPtrStack (nonzero = polygon culled, return)	^\s*iVar7\ =\ iVar14;$	+1
+use	_gleRenderSmoothPolygonFunc_body	iVar7	remainingThenCullResult	CONFIRMED	down-counter of the polygon vertices still to be stored in the pointer list, later reused for the result of _gleCullPolygonPtrStack (nonzero = polygon culled, return)	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+1
+use	_gleRenderSmoothPolygonFunc_body	iVar7	remainingThenCullResult	CONFIRMED	down-counter of the polygon vertices still to be stored in the pointer list, later reused for the result of _gleCullPolygonPtrStack (nonzero = polygon culled, return)	^\s*\}\ while\ \(iVar7\ !=\ 0\);$	+1
+use	_gleRenderSmoothPolygonFunc_body	iVar7	remainingThenCullResult	CONFIRMED	down-counter of the polygon vertices still to be stored in the pointer list, later reused for the result of _gleCullPolygonPtrStack (nonzero = polygon culled, return)	^\s*if\ \(\(cVar3\ !=\ '\\0'\)\ \&\&$	+2
+local	_gleRenderSmoothPolygonFunc_body	uVar9	planeClipRan	INFERRED	0, or 1 once _gleClipPolyPlane has run and the polygon/spare lists were swapped; passed as the last argument of _gleClipPoly
+local	_gleRenderSmoothPolygonFunc_body	fparam_1	f1AfterHookCall	INFERRED	Ghidra models the value left in f1 by the per-polygon hooks (ctx+0x53dc, 0x5064, 0x5068, 0x53e0, 0x5074) as a double; only forwarded as the first floating-point argument of _gleClipPolyPlane
+local	_glRasterPos4s_Exec	bVar1	rendererInfoByte79Zero	CONFIRMED	byte 0x79 of the object at ctx+0x468c compared with zero: selects the 0x17000000 / 0x17ffffff mask of word 3 and the shape of the all-clean test of the state-validation block
+local	_glRasterPos4s_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte 0x79 of the object at ctx+0x468c (same name in _glMultiDrawArrays_NoopExec): compared with zero for the mask selection
+local	_glRasterPos4s_Exec	uVar9	forwardedY	CONFIRMED	copy of the parameter y taken at entry and passed on unchanged (argument register of _gleUpdateFramebufferCompleteness); never otherwise read
+local	_glRasterPos4s_Exec	uVar6	forwardedZ	CONFIRMED	copy of the parameter z taken at entry and passed on unchanged (argument register of _gleUpdateFramebufferCompleteness); never otherwise read
+local	_glRasterPos4s_Exec	uVar7	forwardedW	CONFIRMED	copy of the parameter w taken at entry and passed on unchanged (argument register of _gleUpdateFramebufferCompleteness); never otherwise read
+local	_glRasterPos3s_Exec	bVar1	rendererInfoByte79Zero	CONFIRMED	byte 0x79 of the object at ctx+0x468c compared with zero: selects the 0x17000000 / 0x17ffffff mask of word 3 and the shape of the all-clean test of the state-validation block
+local	_glRasterPos3s_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte 0x79 of the object at ctx+0x468c (same name in _glMultiDrawArrays_NoopExec): compared with zero for the mask selection
+local	_glRasterPos3s_Exec	uVar8	forwardedY	CONFIRMED	copy of the parameter y taken at entry and passed on unchanged (argument register of _gleUpdateFramebufferCompleteness); never otherwise read
+local	_glRasterPos3s_Exec	uVar6	forwardedZ	CONFIRMED	copy of the parameter z taken at entry and passed on unchanged (argument register of _gleUpdateFramebufferCompleteness); never otherwise read
+local	_glRasterPos3sv_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other Exec siblings
+local	_glRasterPos4sv_CompExec	fparam_1	forwardedFloatArg1	INFERRED	stale floating-point argument register f1 (the signature's first FP parameter) only forwarded unchanged to the _Exec call; the convention of the other Exec siblings
+local	_glRasterPos3sv_Exec	bVar1	rendererInfoByte79Zero	CONFIRMED	byte 0x79 of the object at ctx+0x468c compared with zero: selects the 0x17000000 / 0x17ffffff mask of word 3 and the shape of the all-clean test of the state-validation block
+local	_glRasterPos3sv_Exec	cVar2	rendererInfoByte79	CONFIRMED	byte 0x79 of the object at ctx+0x468c (same name in _glMultiDrawArrays_NoopExec): compared with zero for the mask selection
+local	_glPopMatrix_Exec	uVar1	derivedMatrixBits	INFERRED	matrixDirtyBits & 0xfffffc: the bits cleared from the pending word at ctx+0x50b0 once the matrix-mode-4 copy to ctx+0x22c0 has been done
+local	_glPopMatrix_Exec	uVar2	copyMatrixResult	CONFIRMED	value returned by the last _gleCopyMatrix call, returned by the function
+local	_glPopMatrix_Exec	uVar8	matrixDirtyBits	INFERRED	word at ctx+0x50a8 ORed into ctx+0x50ac and, masked, into ctx+0x50b0 after the matrix is restored from the stack
+local	_glPopMatrix_Exec	iVar4	matrixModeSlot	CONFIRMED	glContext + matrixModeIndex * 4: base of the per-mode stack depth words (+0x4ffc)
+local	_glPopMatrix_Exec	iVar5	stackBaseIndex	INFERRED	per-mode base (in 0x40-byte matrices) read from the table at ctx+0x4ff8 indexed by matrix mode: added to the stack depth to address the saved matrix
+local	_glAreTexturesResident_Exec	iVar2	residenceBuffer	CONFIRMED	n-byte scratch buffer from _malloc receiving one residence byte (0 or 1) per texture; copied to the residences array when any texture is not resident, freed at the end
+local	_glAreTexturesResident_Exec	iVar4	allResident	CONFIRMED	return value: 1 (GL_TRUE) initially, set to 0 when a texture name is unknown or a texture is not resident
+use	_glAreTexturesResident_Exec	uVar1	textureName	CONFIRMED	texture name read from the textures array, looked up with _gleLookupHashObject	^\s*uVar1\ =\ \*param_3;$	+1
+use	_glAreTexturesResident_Exec	uVar1	textureName	CONFIRMED	texture name read from the textures array, looked up with _gleLookupHashObject	^\s*iVar3\ =\ _gleLookupHashObject\(\*\(int\ \*\)\(param_1\ \+\ 0x5148\)\ \+\ 0x2008,uVar1\);$	+1
+use	_glAreTexturesResident_Exec	iVar3	isResident	INFERRED	result of the renderer dispatch call at ctx+0x47ac for the texture's handle of the current renderer; zero marks the texture non-resident	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x47ac\)\)$	+1
+use	_glAreTexturesResident_Exec	iVar3	hashObject	CONFIRMED	right-hand side read of the object returned by _gleLookupHashObject (the earlier row named only its assignment line): the per-renderer handle is read at hashObject + 0x10 + renderer * 4	^\s*\*\(undefined4\ \*\)\(\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a8\)\ \*\ 4\ \+\ iVar3\ \+\ 0x10\)$	+1
+use	_glAreTexturesResident_Exec	iVar3	isResident	INFERRED	result of the renderer dispatch call at ctx+0x47ac for the texture's handle of the current renderer; zero marks the texture non-resident	^\s*if\ \(iVar3\ ==\ 0\)\ \{$@2	+1

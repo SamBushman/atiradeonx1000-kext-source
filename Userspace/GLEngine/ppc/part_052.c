@@ -366,19 +366,19 @@ int _gleCullPolygonStack(glContext, vertexRecords, vertexCount, windingFlip, bac
 }
 
 /* _gleCullTriangle @ 0xebcc0 (152 bytes) */
-undefined4 _gleCullTriangle(int glContext,float *param_2,float *param_3,float *param_4,uint param_5,uint *param_6,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
+undefined4 _gleCullTriangle(int glContext,float *vertex0,float *vertex1,float *vertex2,uint windingFlip,uint *backFacing,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10)
 {
-  uint uVar1;
+  uint orientation;
   
-  uVar1 = -(uint)((bool)*(char *)(glContext + 0x4fe1) ==
+  orientation = -(uint)((bool)*(char *)(glContext + 0x4fe1) ==
             FLOAT_00108e50 <
-            (*param_2 * param_3[1] - *param_3 * param_2[1]) +
-            ((*param_3 * param_4[1] - *param_4 * param_3[1])) +
-            ((*param_4 * param_2[1] - *param_2 * param_4[1])) ^ param_5) >> 0x1f;
-  if (*(byte *)(glContext + 0x4fe3) == uVar1) {
+            (*vertex0 * vertex1[1] - *vertex1 * vertex0[1]) +
+            ((*vertex1 * vertex2[1] - *vertex2 * vertex1[1])) +
+            ((*vertex2 * vertex0[1] - *vertex0 * vertex2[1])) ^ windingFlip) >> 0x1f;
+  if (*(byte *)(glContext + 0x4fe3) == orientation) {
     return 1;
   }
-  *param_6 = uVar1 ^ 1;
+  *backFacing = orientation ^ 1;
   return 0;
 }
 
@@ -1654,10 +1654,11 @@ void _gleRenderSmoothPolygonFunc_body(glContext)
   bool twoSidedLighting;
   int *polygonListCursor;
   int *clipOutputList;
-  int iVar7;
+  int texEnableBitsThenCullResult;
+  int remainingThenCullResult;
   int polygonModeIndex;
   uint batchClipCodes;
-  undefined4 uVar9;
+  undefined4 planeClipRan;
   code *faceLightFunc;
   code *drawPolygonFunc;
   int *spareList;
@@ -1665,7 +1666,7 @@ void _gleRenderSmoothPolygonFunc_body(glContext)
   int *polygonVertices;
   int polygonVertexCount;
   double f1AfterCall;
-  double fparam_1;
+  double f1AfterHookCall;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -1679,7 +1680,7 @@ void _gleRenderSmoothPolygonFunc_body(glContext)
   int backFacing [4];
   
   backFacing[0] = 0;
-  iVar7 = _gleTexEnableBits(glContext);
+  texEnableBitsThenCullResult = _gleTexEnableBits(glContext);
   twoSidedLighting = false;
   lightingEnabled = (int)-(uint)*(byte *)(glContext + 0x30aa) < 0;
   if ((lightingEnabled) && (*(char *)(glContext + 0x30ac) != '\0')) {
@@ -1695,20 +1696,20 @@ void _gleRenderSmoothPolygonFunc_body(glContext)
   if ((batchClipCodes & 0xff00) != 0) {
     return;
   }
-  texturingEnabled = iVar7 != 0;
-  fparam_1 = f1AfterCall;
+  texturingEnabled = texEnableBitsThenCullResult != 0;
+  f1AfterHookCall = f1AfterCall;
   if ((texturingEnabled) && (*(char *)(glContext + 0x53e4) != '\0')) {
-    fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, polygonVertices, polygonVertexCount);
+    f1AfterHookCall = (double)(**(double ( **)(int,int,int))(glContext + 0x53dc))(glContext, polygonVertices, polygonVertexCount);
   }
   if (*(char *)(glContext + 0x50b4) != '\0') {
-    fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, polygonVertices, polygonVertexCount);
+    f1AfterHookCall = (double)(**(double ( **)(int,int,int))(glContext + 0x5064))(glContext, polygonVertices, polygonVertexCount);
   }
   if (lightingEnabled) {
 LAB_000eda38:
-    fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x5068))(glContext, polygonVertices, polygonVertexCount);
+    f1AfterHookCall = (double)(**(double ( **)(int,int,int))(glContext + 0x5068))(glContext, polygonVertices, polygonVertexCount);
 LAB_000eda50:
     if ((texturingEnabled) && (*(char *)(glContext + 0x53e5) != '\0')) {
-      fparam_1 = (double)(**(double ( **)(int,int,int))(glContext + 0x53e0))(glContext, polygonVertices, polygonVertexCount);
+      f1AfterHookCall = (double)(**(double ( **)(int,int,int))(glContext + 0x53e0))(glContext, polygonVertices, polygonVertexCount);
     }
   }
   else if (texturingEnabled) {
@@ -1717,36 +1718,36 @@ LAB_000eda50:
   }
   if (((batchClipCodes & 0xff) != 0) || (*(char *)(glContext + 0x4e18) != '\0')) {
     if (texturingEnabled) {
-      fparam_1 = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, polygonVertices, polygonVertexCount, 0);
+      f1AfterHookCall = (double)(**(double ( **)(int,int,int,int))(glContext + 0x5074))(glContext, polygonVertices, polygonVertexCount, 0);
     }
     polygonList = *(int **)(glContext + 0x4870);
     spareList = *(int **)(glContext + 0x4874);
     polygonListCursor = polygonList;
-    iVar7 = polygonVertexCount;
+    remainingThenCullResult = polygonVertexCount;
     if (0 < polygonVertexCount) {
       do {
         *polygonListCursor = (int)polygonVertices;
         polygonVertices = polygonVertices + 0x40;
-        iVar7 = iVar7 + -1;
+        remainingThenCullResult = remainingThenCullResult + -1;
         polygonListCursor = polygonListCursor + 1;
-      } while (iVar7 != 0);
+      } while (remainingThenCullResult != 0);
     }
-    uVar9 = 0;
+    planeClipRan = 0;
     clipOutputList = spareList;
     if (*(char *)(glContext + 0x4e18) != '\0') {
-      ((double (*)())_gleClipPolyPlane)(glContext,polygonList,polygonVertexCount,spareList,&clippedVertexCount,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
+      ((double (*)())_gleClipPolyPlane)(glContext,polygonList,polygonVertexCount,spareList,&clippedVertexCount,f1AfterHookCall,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,
                         incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,incomingStack_ffffff90);
       if (clippedVertexCount == 0) {
         return;
       }
-      uVar9 = 1;
+      planeClipRan = 1;
       clipOutputList = polygonList;
       polygonVertexCount = clippedVertexCount;
       polygonList = spareList;
     }
     polygonVertices = polygonList;
     if ((batchClipCodes & 0xff) != 0) {
-      _gleClipPoly(glContext,polygonList,polygonVertexCount,batchClipCodes & 0xff,clipOutputList,&clippedVertexCount,uVar9);
+      _gleClipPoly(glContext,polygonList,polygonVertexCount,batchClipCodes & 0xff,clipOutputList,&clippedVertexCount,planeClipRan);
       if (clippedVertexCount == 0) {
         return;
       }
@@ -1756,7 +1757,7 @@ LAB_000eda50:
       }
     }
     if ((faceTestNeeded != '\0') &&
-       (iVar7 = ((int (*)())_gleCullPolygonPtrStack)(glContext,polygonVertices,polygonVertexCount,backFacing), iVar7 != 0)) {
+       (remainingThenCullResult = ((int (*)())_gleCullPolygonPtrStack)(glContext,polygonVertices,polygonVertexCount,backFacing), remainingThenCullResult != 0)) {
       return;
     }
     if (twoSidedLighting) {
@@ -1782,7 +1783,7 @@ LAB_000edbbc:
     goto LAB_000edcd4;
   }
   if ((faceTestNeeded != '\0') &&
-     (iVar7 = ((int (*)())_gleCullPolygonStack)(glContext,polygonVertices,polygonVertexCount,0,backFacing), iVar7 != 0)) {
+     (texEnableBitsThenCullResult = ((int (*)())_gleCullPolygonStack)(glContext,polygonVertices,polygonVertexCount,0,backFacing), texEnableBitsThenCullResult != 0)) {
     return;
   }
   if (texturingEnabled) {

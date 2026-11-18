@@ -83,10 +83,10 @@ void _glMapVertexAttrib2fARB_Exec(int glContext,uint index,uint size,undefined4 
 {
   undefined4 glErrorCode;
   int mapData;
-  undefined4 extraout_r4;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
+  undefined4 r4AfterCall;
+  uint sizeCopy;
+  int ustrideCopy;
+  int uorderCopy;
   double incomingFpr5;
   double incomingFpr6;
   double incomingFpr7;
@@ -97,16 +97,16 @@ void _glMapVertexAttrib2fARB_Exec(int glContext,uint index,uint size,undefined4 
   double incomingFpr12;
   double incomingFpr13;
   
-  uVar3 = size;
-  iVar4 = ustride;
-  iVar5 = uorder;
+  sizeCopy = size;
+  ustrideCopy = ustride;
+  uorderCopy = uorder;
   mapData = _gleGetMapData(glContext);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if ((((index < 0x10) && (u1 != u2)) && (v1 != v2)) &&
        (((0 < uorder && (uorder < 0xb)) && ((0 < vorder && (vorder < 0xb)))))) {
       if (size == 2) {
         if ((1 < ustride) && (1 < vstride)) {
-          ((void (*)())_gleMap2VertexAttrib2fLoad)(glContext,extraout_r4,uVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
+          ((void (*)())_gleMap2VertexAttrib2fLoad)(glContext,r4AfterCall,sizeCopy,ustride,uorder,ustrideCopy,uorderCopy,vstride,vorder,
                      points,mapData + index * 0x660 + 0x37a8,u1,u2,v1,v2,
                      incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           goto LAB_00071d40;
@@ -114,7 +114,7 @@ void _glMapVertexAttrib2fARB_Exec(int glContext,uint index,uint size,undefined4 
       }
       else if (size < 3) {
         if (((size == 1) && (0 < ustride)) && (0 < vstride)) {
-          ((void (*)())_gleMap2VertexAttrib1fLoad)(glContext,extraout_r4,uVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
+          ((void (*)())_gleMap2VertexAttrib1fLoad)(glContext,r4AfterCall,sizeCopy,ustride,uorder,ustrideCopy,uorderCopy,vstride,vorder,
                      points,mapData + index * 0x660 + 0x37a8,u1,u2,v1,v2,
                      incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           goto LAB_00071d40;
@@ -122,14 +122,14 @@ void _glMapVertexAttrib2fARB_Exec(int glContext,uint index,uint size,undefined4 
       }
       else if (size == 3) {
         if ((2 < ustride) && (2 < vstride)) {
-          ((void (*)())_gleMap2VertexAttrib3fLoad)(glContext,extraout_r4,uVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,
+          ((void (*)())_gleMap2VertexAttrib3fLoad)(glContext,r4AfterCall,sizeCopy,ustride,uorder,ustrideCopy,uorderCopy,vstride,vorder,
                      points,mapData + index * 0x660 + 0x37a8,u1,u2,v1,v2,
                      incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
           goto LAB_00071d40;
         }
       }
       else if (((size == 4) && (3 < ustride)) && (3 < vstride)) {
-        ((void (*)())_gleMap2VertexAttrib4fLoad)(glContext,extraout_r4,uVar3,ustride,uorder,iVar4,iVar5,vstride,vorder,points,
+        ((void (*)())_gleMap2VertexAttrib4fLoad)(glContext,r4AfterCall,sizeCopy,ustride,uorder,ustrideCopy,uorderCopy,vstride,vorder,points,
                    mapData + index * 0x660 + 0x37a8,u1,u2,v1,v2,incomingFpr5,incomingFpr6,
                    incomingFpr7,incomingFpr8,incomingFpr9,incomingFpr10,incomingFpr11,incomingFpr12,incomingFpr13);
 LAB_00071d40:

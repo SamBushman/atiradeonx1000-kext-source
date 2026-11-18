@@ -32,22 +32,22 @@ void _glColor3s_Exec(glContext, red, green, blue)
   uint green;
   uint blue;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  double dVar4;
-  double dVar5;
+  float redValue;
+  float channelScale;
+  float channelBias;
+  double greenConverted;
+  double blueConverted;
   
-  fVar3 = FLOAT_00108e74;
-  fVar2 = FLOAT_00108e70;
-  dVar5 = (double)CONCAT44(0x43300000,blue ^ 0x80000000) - DOUBLE_00108d58;
-  dVar4 = (double)CONCAT44(0x43300000,green ^ 0x80000000) - DOUBLE_00108d58;
-  fVar1 = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
+  channelBias = FLOAT_00108e74;
+  channelScale = FLOAT_00108e70;
+  blueConverted = (double)CONCAT44(0x43300000,blue ^ 0x80000000) - DOUBLE_00108d58;
+  greenConverted = (double)CONCAT44(0x43300000,green ^ 0x80000000) - DOUBLE_00108d58;
+  redValue = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e70 + FLOAT_00108e74;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
-  *(float *)(glContext + 0x2a0) = fVar1;
-  *(float *)(glContext + 0x2a8) = (float)dVar5 * fVar2 + fVar3;
-  *(float *)(glContext + 0x2a4) = (float)dVar4 * fVar2 + fVar3;
+  *(float *)(glContext + 0x2a0) = redValue;
+  *(float *)(glContext + 0x2a8) = (float)blueConverted * channelScale + channelBias;
+  *(float *)(glContext + 0x2a4) = (float)greenConverted * channelScale + channelBias;
   if (*(char *)(glContext + 0x4df8) != '\0') {
     (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
   }
@@ -314,19 +314,19 @@ double _glColor3uiv_Exec(glContext, v)
   int glContext;
   undefined4 *v;
 {
-  float fVar1;
-  double dVar2;
-  double dVar3;
-  double dVar4;
+  float channelScale;
+  double redConverted;
+  double greenConverted;
+  double blueConverted;
   
-  fVar1 = FLOAT_00108e6c;
-  dVar2 = (double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70;
-  dVar4 = (double)CONCAT44(0x43300000,v[2]) - DOUBLE_00108d70;
-  dVar3 = (double)CONCAT44(0x43300000,v[1]) - DOUBLE_00108d70;
+  channelScale = FLOAT_00108e6c;
+  redConverted = (double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70;
+  blueConverted = (double)CONCAT44(0x43300000,v[2]) - DOUBLE_00108d70;
+  greenConverted = (double)CONCAT44(0x43300000,v[1]) - DOUBLE_00108d70;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
-  *(float *)(glContext + 0x2a0) = (float)dVar2 * fVar1;
-  *(float *)(glContext + 0x2a8) = (float)dVar4 * fVar1;
-  *(float *)(glContext + 0x2a4) = (float)dVar3 * fVar1;
+  *(float *)(glContext + 0x2a0) = (float)redConverted * channelScale;
+  *(float *)(glContext + 0x2a8) = (float)blueConverted * channelScale;
+  *(float *)(glContext + 0x2a4) = (float)greenConverted * channelScale;
   if (*(char *)(glContext + 0x4df8) != '\0') {
     (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
   }
@@ -455,17 +455,17 @@ void _glColor3usv_CompExec(glContext, v)
 {
   unsigned int ghidra_home[8] = { glContext, v, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 in_LR;
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double forwardedFloatArg1;
+  double incomingFpr2;
+  double incomingFpr3;
+  double incomingFpr4;
+  double incomingFpr5;
+  double incomingFpr6;
+  double incomingFpr7;
+  double incomingFpr8;
   
   ((int (*)())_glColor3usv_Comp)(glContext,v);
-  ((double (*)())_glColor3usv_Exec)(glContext,v,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+  ((double (*)())_glColor3usv_Exec)(glContext,v,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,
                     (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)((unsigned char *)ghidra_home + 0)),
                     (*(double *)((unsigned char *)ghidra_home + 8)),(*(double *)((unsigned char *)ghidra_home + 16)));
   return;

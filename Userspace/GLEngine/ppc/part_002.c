@@ -1207,25 +1207,25 @@ int _gleLookUpNonProxyTexture(glContext, target)
   int glContext;
   uint target;
 {
-  int iVar1;
+  int activeUnitThenTextureObject;
   
-  iVar1 = *(int *)(glContext + 0x53d4);
+  activeUnitThenTextureObject = *(int *)(glContext + 0x53d4);
   if (target != 0x84f5) {
     if (target < 0x84f6) {
       if (target == 0xde1) {
-        iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5160);
+        activeUnitThenTextureObject = *(int *)(activeUnitThenTextureObject * 0x14 + glContext + 0x5160);
       }
       else if (target < 0xde2) {
         if (target != 0xde0) {
           return 0;
         }
-        iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5164);
+        activeUnitThenTextureObject = *(int *)(activeUnitThenTextureObject * 0x14 + glContext + 0x5164);
       }
       else {
         if (target != 0x806f) {
           return 0;
         }
-        iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5158);
+        activeUnitThenTextureObject = *(int *)(activeUnitThenTextureObject * 0x14 + glContext + 0x5158);
       }
       goto LAB_00017f48;
     }
@@ -1233,16 +1233,16 @@ int _gleLookUpNonProxyTexture(glContext, target)
       if ((target < 0x8515) && (target != 0x8513)) {
         return 0;
       }
-      iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x5154);
+      activeUnitThenTextureObject = *(int *)(activeUnitThenTextureObject * 0x14 + glContext + 0x5154);
       goto LAB_00017f48;
     }
     if (target != 0x85b3) {
       return 0;
     }
   }
-  iVar1 = *(int *)(iVar1 * 0x14 + glContext + 0x515c);
+  activeUnitThenTextureObject = *(int *)(activeUnitThenTextureObject * 0x14 + glContext + 0x515c);
 LAB_00017f48:
-  return iVar1 + 0x10;
+  return activeUnitThenTextureObject + 0x10;
 }
 
 /* _glTexParameteri_Exec @ 0x17f88 (40 bytes) */
@@ -3732,22 +3732,22 @@ int _glGetError_Exec(glContext)
   int glContext;
 {
   int iVar1;
-  uint uVar2;
+  uint rendererIndex;
   
-  uVar2 = 0;
+  rendererIndex = 0;
   if (*(short *)(glContext + 0x4a10) < 0) {
     iVar1 = *(int *)(glContext + 0x7574);
     *(undefined4 *)(glContext + 0x7574) = 0;
     if ((iVar1 == 0) && (*(char *)(glContext + 0x85a4) != '\0')) {
       do {
-        iVar1 = uVar2 * 0x2e0 + glContext;
+        iVar1 = rendererIndex * 0x2e0 + glContext;
         iVar1 = (**(code **)(*(int *)(iVar1 + 0x8884) + 0x180))(*(undefined4 *)(iVar1 + 0x85ac));
-        uVar2 = uVar2 + 1 & 0xff;
+        rendererIndex = rendererIndex + 1 & 0xff;
         if (iVar1 != 0) {
           return iVar1;
         }
         iVar1 = 0;
-      } while (uVar2 < *(byte *)(glContext + 0x85a4));
+      } while (rendererIndex < *(byte *)(glContext + 0x85a4));
     }
   }
   else {
@@ -5291,9 +5291,9 @@ LAB_0001de0c:
 }
 
 /* _gleSetFunctionIDFromCurrent @ 0x1de2c (92 bytes) */
-void _gleSetFunctionIDFromCurrent(glContext, param_2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+void _gleSetFunctionIDFromCurrent(glContext, funcDesc, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
   int glContext;
-  uint *param_2;
+  uint *funcDesc;
   undefined4 unusedArg3;
   undefined4 unusedArg4;
   undefined4 unusedArg5;
@@ -5301,27 +5301,27 @@ void _gleSetFunctionIDFromCurrent(glContext, param_2, unusedArg3, unusedArg4, un
   undefined4 unusedArg7;
   undefined4 unusedArg8;
 {
-  ushort uVar1;
+  ushort streamWord;
   int glContextPtr4674;
-  uint *puVar3;
+  uint *streamWordCursor;
   ushort *dstCursor;
-  uint uVar5;
+  uint streamCountThenRemaining;
   
   glContextPtr4674 = *(int *)(glContext + 0x4674);
-  uVar5 = *param_2 >> 0x18;
-  *param_2 = *param_2 | 0x60000;
-  if (uVar5 == 0) {
+  streamCountThenRemaining = *funcDesc >> 0x18;
+  *funcDesc = *funcDesc | 0x60000;
+  if (streamCountThenRemaining == 0) {
     return;
   }
-  puVar3 = param_2 + 1;
-  dstCursor = (ushort *)((int)param_2 + uVar5 * 2 + 4);
+  streamWordCursor = funcDesc + 1;
+  dstCursor = (ushort *)((int)funcDesc + streamCountThenRemaining * 2 + 4);
   do {
-    uVar1 = *(ushort *)puVar3;
-    puVar3 = (uint *)((int)puVar3 + 2);
-    *dstCursor = (*(byte *)(glContextPtr4674 + 0x400 + (uint)(uVar1 >> 10)) - 1) * 0x4000 | 0x3800;
+    streamWord = *(ushort *)streamWordCursor;
+    streamWordCursor = (uint *)((int)streamWordCursor + 2);
+    *dstCursor = (*(byte *)(glContextPtr4674 + 0x400 + (uint)(streamWord >> 10)) - 1) * 0x4000 | 0x3800;
     dstCursor = dstCursor + 1;
-    uVar5 = uVar5 - 1;
-  } while (uVar5 != 0);
+    streamCountThenRemaining = streamCountThenRemaining - 1;
+  } while (streamCountThenRemaining != 0);
   return;
 }
 

@@ -878,27 +878,27 @@ void _glePPEmulatorTerminate(glContext)
 void _gleFreeBufferState(glContext)
   int glContext;
 {
-  int iVar1;
+  int newRefCount;
   int glContextPtr48f4;
   int pixelUnpackBuffer;
   int pixelPackBuffer;
   
   glContextPtr48f4 = *(int *)(glContext + 0x48f4);
   if (glContextPtr48f4 != 0) {
-    iVar1 = *(int *)(glContextPtr48f4 + 8) + -1;
-    *(int *)(glContextPtr48f4 + 8) = iVar1;
-    if (iVar1 == 0) {
+    newRefCount = *(int *)(glContextPtr48f4 + 8) + -1;
+    *(int *)(glContextPtr48f4 + 8) = newRefCount;
+    if (newRefCount == 0) {
       _gleFreeBufferObject(glContext,glContextPtr48f4);
     }
     *(undefined4 *)(glContext + 0x48f4) = 0;
   }
   pixelPackBuffer = *(int *)(glContext + 0x4a68);
-  if ((pixelPackBuffer != 0) && (iVar1 = *(int *)(pixelPackBuffer + 8) + -1, *(int *)(pixelPackBuffer + 8) = iVar1, iVar1 == 0)) {
+  if ((pixelPackBuffer != 0) && (newRefCount = *(int *)(pixelPackBuffer + 8) + -1, *(int *)(pixelPackBuffer + 8) = newRefCount, newRefCount == 0)) {
     _gleFreeBufferObject(glContext,pixelPackBuffer);
   }
   pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
   *(undefined4 *)(glContext + 0x4a68) = 0;
-  if ((pixelUnpackBuffer != 0) && (iVar1 = *(int *)(pixelUnpackBuffer + 8) + -1, *(int *)(pixelUnpackBuffer + 8) = iVar1, iVar1 == 0)) {
+  if ((pixelUnpackBuffer != 0) && (newRefCount = *(int *)(pixelUnpackBuffer + 8) + -1, *(int *)(pixelUnpackBuffer + 8) = newRefCount, newRefCount == 0)) {
     _gleFreeBufferObject(glContext,pixelUnpackBuffer);
   }
   *(undefined4 *)(glContext + 0x4a6c) = 0;
@@ -1272,19 +1272,19 @@ void _gleDetachShaderObjects(glContext)
 {
   undefined *puVar1;
   int sharedState;
-  int *piVar3;
-  int *piVar4;
+  int *nextBucket;
+  int *bucketSlotThenObject;
   
   puVar1 = PTR__gleDetachShaderObjectIterFunc_001113e8;
   sharedState = *(int *)(glContext + 0x5148);
-  piVar4 = (int *)(sharedState + 0x6018);
+  bucketSlotThenObject = (int *)(sharedState + 0x6018);
   do {
-    piVar3 = piVar4 + 1;
-    for (piVar4 = (int *)*piVar4; piVar4 != (int *)0x0; piVar4 = (int *)*piVar4) {
-      (*(code *)puVar1)(glContext,piVar4);
+    nextBucket = bucketSlotThenObject + 1;
+    for (bucketSlotThenObject = (int *)*bucketSlotThenObject; bucketSlotThenObject != (int *)0x0; bucketSlotThenObject = (int *)*bucketSlotThenObject) {
+      (*(code *)puVar1)(glContext,bucketSlotThenObject);
     }
-    piVar4 = piVar3;
-  } while ((int)piVar3 <= sharedState + 0x7014);
+    bucketSlotThenObject = nextBucket;
+  } while ((int)nextBucket <= sharedState + 0x7014);
   return;
 }
 
@@ -1483,21 +1483,21 @@ int _gleDeleteHashNameAndObject(glContext, forwardedArg2, forwardedArg3)
   undefined4 forwardedArg2;
   undefined4 forwardedArg3;
 {
-  int iVar1;
-  int iVar2;
-  undefined4 uVar3;
+  int newRefCount;
+  int removeNameResultThenObject;
+  undefined4 wasDeleted;
   
-  iVar2 = ((int (*)())_gleRemoveHashName)(forwardedArg2,forwardedArg3);
-  uVar3 = 0;
-  if (iVar2 != 0) {
-    iVar2 = _gleRemoveHashObject(forwardedArg2,forwardedArg3);
-    if ((iVar2 != 0) && (iVar1 = *(int *)(iVar2 + 8) + -1, *(int *)(iVar2 + 8) = iVar1, iVar1 == 0))
+  removeNameResultThenObject = ((int (*)())_gleRemoveHashName)(forwardedArg2,forwardedArg3);
+  wasDeleted = 0;
+  if (removeNameResultThenObject != 0) {
+    removeNameResultThenObject = _gleRemoveHashObject(forwardedArg2,forwardedArg3);
+    if ((removeNameResultThenObject != 0) && (newRefCount = *(int *)(removeNameResultThenObject + 8) + -1, *(int *)(removeNameResultThenObject + 8) = newRefCount, newRefCount == 0))
     {
-      (**(code **)(iVar2 + 0xc))(glContext);
+      (**(code **)(removeNameResultThenObject + 0xc))(glContext);
     }
-    uVar3 = 1;
+    wasDeleted = 1;
   }
-  return uVar3;
+  return wasDeleted;
 }
 
 /* _gleRemoveHashName @ 0x30f80 (228 bytes) */
@@ -1555,8 +1555,8 @@ int _gleRemoveHashName(nameTable, name)
 }
 
 /* _glePPUnlogParameters @ 0x31064 (248 bytes) */
-void _glePPUnlogParameters(param_1, program, paramCount, paramEntries)
-  int param_1;
+void _glePPUnlogParameters(glContext, program, paramCount, paramEntries)
+  int glContext;
   int program;
   int paramCount;
   int paramEntries;
@@ -1564,7 +1564,7 @@ void _glePPUnlogParameters(param_1, program, paramCount, paramEntries)
   ushort slotPriority;
   uint slotIndex;
   uint bankIndex;
-  int iVar4;
+  int bankStateThenSlotPriorityAddress;
   int slotRecord;
   int sharedState;
   int loopIndex;
@@ -1573,26 +1573,26 @@ void _glePPUnlogParameters(param_1, program, paramCount, paramEntries)
   
   loopIndex = 0;
   bankIndex = (uint)*(ushort *)(program + 0x4ba);
-  sharedState = *(int *)(param_1 + 0x5148);
-  iVar4 = bankIndex * 0xa30 + sharedState;
-  *(int *)(iVar4 + 0x8a98) = *(int *)(iVar4 + 0x8a98) + 1;
+  sharedState = *(int *)(glContext + 0x5148);
+  bankStateThenSlotPriorityAddress = bankIndex * 0xa30 + sharedState;
+  *(int *)(bankStateThenSlotPriorityAddress + 0x8a98) = *(int *)(bankStateThenSlotPriorityAddress + 0x8a98) + 1;
   if (paramCount != 0) {
     do {
       paramWord2 = *(uint *)(loopIndex * 8 + paramEntries + 4);
       if ((*(uint *)(loopIndex * 8 + paramEntries) & 0x1f0000) != 0) {
         slotIndex = paramWord2 & 0xffff;
-        iVar4 = (bankIndex * 0x518 + slotIndex) * 2 + sharedState;
-        slotPriority = *(ushort *)(iVar4 + 0x8874);
+        bankStateThenSlotPriorityAddress = (bankIndex * 0x518 + slotIndex) * 2 + sharedState;
+        slotPriority = *(ushort *)(bankStateThenSlotPriorityAddress + 0x8874);
         if (slotPriority == 1) {
           slotRecord = (bankIndex * 0x146 + slotIndex) * 8 + sharedState;
           slotBitmapWord = (bankIndex * 0x28c + (slotIndex >> 5)) * 4 + sharedState;
-          *(undefined2 *)(iVar4 + 0x8874) = 0;
+          *(undefined2 *)(bankStateThenSlotPriorityAddress + 0x8874) = 0;
           *(undefined4 *)(slotRecord + 0x8074) = 0;
           *(undefined4 *)(slotRecord + 0x8078) = 0;
           *(uint *)(slotBitmapWord + 0x8a74) = *(uint *)(slotBitmapWord + 0x8a74) | 1 << (paramWord2 & 0x1f);
         }
         else if (1 < slotPriority) {
-          *(ushort *)(iVar4 + 0x8874) = slotPriority - 1;
+          *(ushort *)(bankStateThenSlotPriorityAddress + 0x8874) = slotPriority - 1;
         }
       }
       loopIndex = loopIndex + 1;

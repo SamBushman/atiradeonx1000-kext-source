@@ -620,57 +620,57 @@ int _CheckInternalFormat(internalformat)
 }
 
 /* _CheckTypeFormat @ 0x684b4 (184 bytes) */
-int _CheckTypeFormat(param_1, param_2)
-  uint param_1;
-  uint param_2;
+int _CheckTypeFormat(type, format)
+  uint type;
+  uint format;
 {
-  bool bVar1;
+  bool formatAllowed;
   
-  if (param_1 < 0x8037) {
-    if (0x8032 < param_1) {
+  if (type < 0x8037) {
+    if (0x8032 < type) {
 LAB_00068548:
-      if (param_2 == 0x1908) {
+      if (format == 0x1908) {
         return 1;
       }
-      bVar1 = param_2 == 0x80e1;
+      formatAllowed = format == 0x80e1;
       goto LAB_0006855c;
     }
-    if (param_1 < 0x1400) {
+    if (type < 0x1400) {
       return 1;
     }
-    if (param_1 < 0x1407) {
-      if (param_2 == 0x8000) {
+    if (type < 0x1407) {
+      if (format == 0x8000) {
         return 1;
       }
-      if (param_2 < 0x8001) {
-        bVar1 = 7 < param_2 - 0x1903;
+      if (format < 0x8001) {
+        formatAllowed = 7 < format - 0x1903;
       }
       else {
-        bVar1 = 1 < param_2 - 0x80e0;
+        formatAllowed = 1 < format - 0x80e0;
       }
-      if (!bVar1) {
+      if (!formatAllowed) {
         return 1;
       }
       return 0;
     }
-    if (param_1 != 0x8032) {
+    if (type != 0x8032) {
       return 1;
     }
   }
   else {
-    if (param_1 < 0x8362) {
+    if (type < 0x8362) {
       return 1;
     }
-    if (0x8364 < param_1) {
-      if (0x8368 < param_1) {
+    if (0x8364 < type) {
+      if (0x8368 < type) {
         return 1;
       }
       goto LAB_00068548;
     }
   }
-  bVar1 = param_2 == 0x1907;
+  formatAllowed = format == 0x1907;
 LAB_0006855c:
-  if (bVar1) {
+  if (formatAllowed) {
     return 1;
   }
   return 0;
@@ -1064,26 +1064,26 @@ int _glConvolutionParameterI_Comp(glContext, target, pname, params)
   uint pname;
   undefined4 *params;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)
+  listRecord = (undefined4 *)
            _gleAddListItem(glContext,PTR__glConvolutionParameteri_ListExec_00110124,0x18);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = target;
-    puVar1[1] = pname;
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = target;
+    listRecord[1] = pname;
     if (0x8012 < pname) {
       if (pname < 0x8016) {
-        puVar1[2] = *params;
+        listRecord[2] = *params;
       }
       else if (pname == 0x8154) {
-        puVar1[2] = *params;
-        puVar1[3] = params[1];
-        puVar1[4] = params[2];
-        puVar1[5] = params[3];
+        listRecord[2] = *params;
+        listRecord[3] = params[1];
+        listRecord[4] = params[2];
+        listRecord[5] = params[3];
       }
     }
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glConvolutionParameteri_Comp @ 0x68f1c (40 bytes) */
@@ -1110,19 +1110,19 @@ int _glCopyConvolutionFilter1D_Comp(glContext, target, internalformat, x, y, wid
   undefined4 y;
   undefined4 width;
 {
-  undefined4 *puVar1;
+  undefined4 *listRecord;
   
-  puVar1 = (undefined4 *)
+  listRecord = (undefined4 *)
            _gleAddListItem(glContext,PTR__glCopyConvolutionFilter1D_ListExec_00110120,0x18);
-  if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = target;
-    puVar1[5] = 1;
-    puVar1[1] = internalformat;
-    puVar1[2] = x;
-    puVar1[3] = y;
-    puVar1[4] = width;
+  if (listRecord != (undefined4 *)0x0) {
+    *listRecord = target;
+    listRecord[5] = 1;
+    listRecord[1] = internalformat;
+    listRecord[2] = x;
+    listRecord[3] = y;
+    listRecord[4] = width;
   }
-  return puVar1;
+  return listRecord;
 }
 
 /* _glCopyConvolutionFilter2D_Comp @ 0x68fbc (116 bytes) */

@@ -597,70 +597,70 @@ void _gleRenderPointsFunc_body(glContext)
   int glContext;
 {
   bool texturingEnabled;
-  int iVar2;
+  int renderPoints;
   int texEnableBits;
   uint batchClipCodes;
-  undefined4 uVar4;
+  undefined4 rendererHandle;
   code *UNRECOVERED_JUMPTABLE;
   int vertexCursor;
-  int iVar6;
+  int pointCount;
   
   texEnableBits = _gleTexEnableBits(glContext);
   vertexCursor = *(int *)(glContext + 0x4854);
-  iVar6 = *(int *)(glContext + 0x4858) - vertexCursor >> 8;
-  if ((iVar6 < 1) ||
-     (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,iVar6), (batchClipCodes & 0xff00) != 0)) {
+  pointCount = *(int *)(glContext + 0x4858) - vertexCursor >> 8;
+  if ((pointCount < 1) ||
+     (batchClipCodes = (**(code **)(glContext + 0x5060))(glContext,vertexCursor,pointCount), (batchClipCodes & 0xff00) != 0)) {
     return;
   }
   texturingEnabled = texEnableBits != 0;
   if ((texturingEnabled) && (*(char *)(glContext + 0x53e4) != '\0')) {
-    (**(code **)(glContext + 0x53dc))(glContext,vertexCursor,iVar6);
+    (**(code **)(glContext + 0x53dc))(glContext,vertexCursor,pointCount);
   }
   if (*(char *)(glContext + 0x50b4) != '\0') {
-    (**(code **)(glContext + 0x5064))(glContext,vertexCursor,iVar6);
+    (**(code **)(glContext + 0x5064))(glContext,vertexCursor,pointCount);
   }
   if ((*(char *)(glContext + 0x30aa) != '\0') || (*(char *)(glContext + 0x53e6) != '\0')) {
-    (**(code **)(glContext + 0x5068))(glContext,vertexCursor,iVar6);
+    (**(code **)(glContext + 0x5068))(glContext,vertexCursor,pointCount);
   }
   if (((batchClipCodes & 0xff) == 0) && (*(char *)(glContext + 0x4e18) == '\0')) {
     if (texturingEnabled) {
       if (*(char *)(glContext + 0x53e5) != '\0') {
-        (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,iVar6);
+        (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,pointCount);
       }
-      (**(code **)(glContext + 0x506c))(glContext,vertexCursor,iVar6,0);
+      (**(code **)(glContext + 0x506c))(glContext,vertexCursor,pointCount,0);
     }
     if (*(char *)(glContext + 0x30aa) != '\0') {
-      (**(code **)(glContext + 0x4de8))(glContext,vertexCursor,iVar6);
+      (**(code **)(glContext + 0x4de8))(glContext,vertexCursor,pointCount);
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46b0);
-    uVar4 = *(undefined4 *)(glContext + 0x4688);
-    iVar2 = vertexCursor;
+    rendererHandle = *(undefined4 *)(glContext + 0x4688);
+    renderPoints = vertexCursor;
   }
   else {
     if (texturingEnabled) {
       if (*(char *)(glContext + 0x53e5) != '\0') {
-        (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,iVar6);
+        (**(code **)(glContext + 0x53e0))(glContext,vertexCursor,pointCount);
       }
-      (**(code **)(glContext + 0x5074))(glContext,vertexCursor,iVar6,0);
+      (**(code **)(glContext + 0x5074))(glContext,vertexCursor,pointCount,0);
     }
-    iVar2 = *(int *)(glContext + 0x4870);
-    iVar6 = ((int (*)())_gleClipPoints)(glContext,vertexCursor,iVar6,iVar2);
-    if (iVar6 == 0) {
+    renderPoints = *(int *)(glContext + 0x4870);
+    pointCount = ((int (*)())_gleClipPoints)(glContext,vertexCursor,pointCount,renderPoints);
+    if (pointCount == 0) {
       return;
     }
     if ((*(char *)(glContext + 0x4e18) != '\0') &&
-       (iVar6 = ((int (*)())_gleClipPointsPlane)(glContext,iVar2,iVar6), iVar6 == 0)) {
+       (pointCount = ((int (*)())_gleClipPointsPlane)(glContext,renderPoints,pointCount), pointCount == 0)) {
       return;
     }
     if (*(char *)(glContext + 0x30aa) != '\0') {
-      (**(code **)(glContext + 0x4df0))(glContext,iVar2,iVar6);
+      (**(code **)(glContext + 0x4df0))(glContext,renderPoints,pointCount);
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x46d8);
-    uVar4 = *(undefined4 *)(glContext + 0x4688);
+    rendererHandle = *(undefined4 *)(glContext + 0x4688);
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(uVar4,iVar2,iVar6);
+  (*UNRECOVERED_JUMPTABLE)(rendererHandle,renderPoints,pointCount);
   return;
 }
 

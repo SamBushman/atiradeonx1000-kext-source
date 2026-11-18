@@ -221,7 +221,7 @@ void _glCopyTexSubImage1D_CompExec(glContext, target, level, xoffset, x, y, widt
   undefined4 y;
   undefined4 width;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -231,7 +231,7 @@ void _glCopyTexSubImage1D_CompExec(glContext, target, level, xoffset, x, y, widt
   double incomingFpr8;
   
   _glCopyTexSubImage1D_Comp(glContext,target,level,xoffset,x,y,width);
-  ((void (*)())_glCopyTexSubImage1D_Exec)(glContext,target,level,xoffset,x,y,width,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,
+  ((void (*)())_glCopyTexSubImage1D_Exec)(glContext,target,level,xoffset,x,y,width,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,
              incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   return;
 }

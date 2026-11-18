@@ -1825,25 +1825,27 @@ void _gleCleanupOrphans(glContext)
 void _gleSynchronizePluginBuffers(glContext)
   int glContext;
 {
-  int iVar1;
-  int iVar2;
+  int clientStateThenElementBuffer;
+  int pixelUnpackBuffer;
+  int pixelPackBuffer;
+  int arrayBuffer;
   
-  iVar1 = *(int *)(glContext + 0x4a60);
-  iVar2 = *(int *)(iVar1 + 0x358);
-  if ((iVar2 != 0) && (*(int *)(iVar2 + 0x40) != 0)) {
-    ((double (*)())_gleSynchronizePluginBuffer)(glContext,iVar2 + 0x10);
+  clientStateThenElementBuffer = *(int *)(glContext + 0x4a60);
+  arrayBuffer = *(int *)(clientStateThenElementBuffer + 0x358);
+  if ((arrayBuffer != 0) && (*(int *)(arrayBuffer + 0x40) != 0)) {
+    ((double (*)())_gleSynchronizePluginBuffer)(glContext,arrayBuffer + 0x10);
   }
-  iVar1 = *(int *)(iVar1 + 0x35c);
-  if ((iVar1 != 0) && (*(int *)(iVar1 + 0x40) != 0)) {
-    ((double (*)())_gleSynchronizePluginBuffer)(glContext,iVar1 + 0x10);
+  clientStateThenElementBuffer = *(int *)(clientStateThenElementBuffer + 0x35c);
+  if ((clientStateThenElementBuffer != 0) && (*(int *)(clientStateThenElementBuffer + 0x40) != 0)) {
+    ((double (*)())_gleSynchronizePluginBuffer)(glContext,clientStateThenElementBuffer + 0x10);
   }
-  iVar1 = *(int *)(glContext + 0x4a68);
-  if ((iVar1 != 0) && (*(int *)(iVar1 + 0x40) != 0)) {
-    ((double (*)())_gleSynchronizePluginBuffer)(glContext,iVar1 + 0x10);
+  pixelPackBuffer = *(int *)(glContext + 0x4a68);
+  if ((pixelPackBuffer != 0) && (*(int *)(pixelPackBuffer + 0x40) != 0)) {
+    ((double (*)())_gleSynchronizePluginBuffer)(glContext,pixelPackBuffer + 0x10);
   }
-  iVar1 = *(int *)(glContext + 0x4a6c);
-  if ((iVar1 != 0) && (*(int *)(iVar1 + 0x40) != 0)) {
-    ((double (*)())_gleSynchronizePluginBuffer)(glContext,iVar1 + 0x10);
+  pixelUnpackBuffer = *(int *)(glContext + 0x4a6c);
+  if ((pixelUnpackBuffer != 0) && (*(int *)(pixelUnpackBuffer + 0x40) != 0)) {
+    ((double (*)())_gleSynchronizePluginBuffer)(glContext,pixelUnpackBuffer + 0x10);
     return;
   }
   return;
@@ -2244,10 +2246,11 @@ void _gleSwitchRenderersReadBuffers(glContext, rendererIndex, copyContextData)
   int rendererIndex;
   int *copyContextData;
 {
-  int iVar1;
+  int readHeightThenColorBuffer;
+  int depthBuffer;
   uint dirtyBitsAfterRead;
   int readWidth;
-  double fparam_1;
+  double f1AfterHookCall;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -2285,17 +2288,17 @@ void _gleSwitchRenderersReadBuffers(glContext, rendererIndex, copyContextData)
     ((double (*)())_gleRecoverySaveState)(glContext,recoveryStateBuffer);
     readWidth = *(int *)(glContext + 0x1ba8);
     copyContextData[1] = readWidth;
-    iVar1 = *(int *)(glContext + 0x1bac);
-    *copyContextData = iVar1;
-    iVar1 = _malloc(readWidth * iVar1 * 4);
-    copyContextData[2] = iVar1;
-    fparam_1 = (double)(**(double ( **)(int,int,int,int,int,int,int,int))(glContext + 0x46a0))
-                                 (*(undefined4 *)(glContext + 0x4688), 0, 0, copyContextData[1], *copyContextData, 0x80e1, 0x8367, iVar1);
+    readHeightThenColorBuffer = *(int *)(glContext + 0x1bac);
+    *copyContextData = readHeightThenColorBuffer;
+    readHeightThenColorBuffer = _malloc(readWidth * readHeightThenColorBuffer * 4);
+    copyContextData[2] = readHeightThenColorBuffer;
+    f1AfterHookCall = (double)(**(double ( **)(int,int,int,int,int,int,int,int))(glContext + 0x46a0))
+                                 (*(undefined4 *)(glContext + 0x4688), 0, 0, copyContextData[1], *copyContextData, 0x80e1, 0x8367, readHeightThenColorBuffer);
     if (*(int *)(rendererIndex * 0x2e0 + glContext + 0x85ec) != 0) {
-      iVar1 = _malloc(copyContextData[1] * *copyContextData * 4);
-      copyContextData[4] = iVar1;
-      fparam_1 = (double)(**(double ( **)(int,int,int,int,int,int,int,int))(glContext + 0x46a0))
-                                   (*(undefined4 *)(glContext + 0x4688), 0, 0, copyContextData[1], *copyContextData, 0x1902, 0x1406, iVar1);
+      depthBuffer = _malloc(copyContextData[1] * *copyContextData * 4);
+      copyContextData[4] = depthBuffer;
+      f1AfterHookCall = (double)(**(double ( **)(int,int,int,int,int,int,int,int))(glContext + 0x46a0))
+                                   (*(undefined4 *)(glContext + 0x4688), 0, 0, copyContextData[1], *copyContextData, 0x1902, 0x1406, depthBuffer);
     }
     dirtyBitsAfterRead = *(uint *)(glContext + 0x310);
     *(undefined4 *)(0x31b4 + glContext) = savedWord1;
@@ -2306,7 +2309,7 @@ void _gleSwitchRenderersReadBuffers(glContext, rendererIndex, copyContextData)
     *(undefined4 *)(glContext + 0x31c4) = savedWord5;
     *(undefined4 *)(glContext + 0x31c8) = savedWord6;
     *(uint *)(glContext + 0x310) = dirtyBitsAfterRead | 0x200000;
-    ((void (*)())_gleRecoveryRestoreState)(glContext,recoveryStateBuffer,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+    ((void (*)())_gleRecoveryRestoreState)(glContext,recoveryStateBuffer,f1AfterHookCall,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
   }
   return;
 }
@@ -2617,8 +2620,8 @@ double _gleUpdateDispatchCodeChange(glContext, dispatchModeBits)
   undefined4 a3;
   undefined4 incomingR7;
   uint rendererIndex;
-  double fparam_1;
-  double fparam_1_00;
+  double f1AfterSwitchToRenderer;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
@@ -2659,11 +2662,11 @@ double _gleUpdateDispatchCodeChange(glContext, dispatchModeBits)
           _gleSynchronizePluginTextures(glContext);
           ((void (*)())_gleSynchronizePluginBuffers)(glContext);
           *(byte *)(glContext + 0x85a8) = rendererIndexByte;
-          fparam_1 = (double)((int (*)())_gleSwitchToRenderer)(glContext,(uint)*(byte *)(glContext + 0x85a5));
-          ((void (*)())_gleUpdateDepthRangeData)(glContext,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,
+          f1AfterSwitchToRenderer = (double)((int (*)())_gleSwitchToRenderer)(glContext,(uint)*(byte *)(glContext + 0x85a5));
+          ((void (*)())_gleUpdateDepthRangeData)(glContext,f1AfterSwitchToRenderer,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8,incomingStack_ffffff88,
                      incomingStack_ffffff90,incomingStack_ffffff98,incomingStack_ffffffa0,incomingStack_ffffffa8);
           _gleUpdatePolyMode(glContext);
-          ((void (*)())_gleUpdateViewScissorData)(glContext,fparam_1_00,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+          ((void (*)())_gleUpdateViewScissorData)(glContext,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
           _gleUpdateTextureTransform(glContext);
           setEyeInterpFunc = PTR__gleSetEyeInterpFunc_0011203c;
           a6 = PTR__gleSetClipInterpFunc_00112038;

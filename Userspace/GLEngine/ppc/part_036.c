@@ -177,39 +177,39 @@ double _glVertexAttrib2svARB_Exec(glContext, index, v)
   uint index;
   short *v;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  short sVar3;
+  undefined4 zeroComponent;
+  undefined4 oneComponent;
+  short secondComponent;
   double intToDoubleBias;
-  int iVar5;
+  int attribRecord;
   undefined4 incomingR6;
   undefined4 incomingR7;
-  code *pcVar6;
+  code *vertexFunc;
   
   intToDoubleBias = DOUBLE_00108d58;
   if (index < 0x10) {
-    uVar1 = *(undefined4 *)(glContext + 0x20);
-    uVar2 = *(undefined4 *)(glContext + 0x24);
+    zeroComponent = *(undefined4 *)(glContext + 0x20);
+    oneComponent = *(undefined4 *)(glContext + 0x24);
     if (index == 0) {
-      pcVar6 = *(code **)(glContext + 0x4884);
+      vertexFunc = *(code **)(glContext + 0x4884);
       if (*(int *)(glContext + 0x4858) == *(int *)(glContext + 0x485c)) {
-        pcVar6 = (code *)PTR__gleFlushAndSubmit_00112050;
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar6)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),0x43300000,
+      (*vertexFunc)(glContext,0,v,incomingR6,incomingR7,*(int *)(glContext + 0x4858),0x43300000,
                 (double)(float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) -
                                DOUBLE_00108d58),
                 (double)(float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) -
                                DOUBLE_00108d58));
     }
     else {
-      iVar5 = glContext + index * 0x10;
-      *(float *)(iVar5 + 0x1a0) =
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) =
            (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58);
-      sVar3 = v[1];
-      *(undefined4 *)(iVar5 + 0x1ac) = uVar2;
-      *(undefined4 *)(iVar5 + 0x1a8) = uVar1;
-      *(float *)(iVar5 + 0x1a4) =
-           (float)((double)CONCAT44(0x43300000,(int)sVar3 ^ 0x80000000) - intToDoubleBias);
+      secondComponent = v[1];
+      *(undefined4 *)(attribRecord + 0x1ac) = oneComponent;
+      *(undefined4 *)(attribRecord + 0x1a8) = zeroComponent;
+      *(float *)(attribRecord + 0x1a4) =
+           (float)((double)CONCAT44(0x43300000,(int)secondComponent ^ 0x80000000) - intToDoubleBias);
     }
   }
   else if (*(int *)(glContext + 0x7574) == 0) {
@@ -339,22 +339,22 @@ double _glVertexAttrib2dvARB_Exec(glContext, index, v)
   uint index;
   double *v;
 {
-  float fVar1;
-  float fVar2;
-  int iVar3;
+  float zeroComponent;
+  float oneComponent;
+  int attribRecord;
   code *UNRECOVERED_JUMPTABLE;
-  double dVar4;
+  double secondComponent;
   
   if (index < 0x10) {
-    fVar1 = *(float *)(glContext + 0x20);
-    fVar2 = *(float *)(glContext + 0x24);
+    zeroComponent = *(float *)(glContext + 0x20);
+    oneComponent = *(float *)(glContext + 0x24);
     if (index != 0) {
-      iVar3 = glContext + index * 0x10;
-      *(float *)(iVar3 + 0x1a0) = (float)*v;
-      dVar4 = v[1];
-      *(float *)(iVar3 + 0x1ac) = fVar2;
-      *(float *)(iVar3 + 0x1a8) = fVar1;
-      *(float *)(iVar3 + 0x1a4) = (float)dVar4;
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) = (float)*v;
+      secondComponent = v[1];
+      *(float *)(attribRecord + 0x1ac) = oneComponent;
+      *(float *)(attribRecord + 0x1a8) = zeroComponent;
+      *(float *)(attribRecord + 0x1a4) = (float)secondComponent;
       return;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x4884);
@@ -364,8 +364,8 @@ double _glVertexAttrib2dvARB_Exec(glContext, index, v)
                     
                     
     (*UNRECOVERED_JUMPTABLE)
-              (glContext,0,v,(double)(float)*v,(double)(float)v[1],(double)fVar1,
-               (double)fVar2);
+              (glContext,0,v,(double)(float)*v,(double)(float)v[1],(double)zeroComponent,
+               (double)oneComponent);
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -583,20 +583,20 @@ double _glVertexAttrib3dvARB_Exec(glContext, index, v)
   uint index;
   double *v;
 {
-  float fVar1;
-  int iVar2;
+  float oneComponent;
+  int attribRecord;
   code *UNRECOVERED_JUMPTABLE;
-  double dVar3;
+  double zValue;
   
   if (index < 0x10) {
-    fVar1 = *(float *)(glContext + 0x24);
+    oneComponent = *(float *)(glContext + 0x24);
     if (index != 0) {
-      iVar2 = glContext + index * 0x10;
-      *(float *)(iVar2 + 0x1a0) = (float)*v;
-      *(float *)(iVar2 + 0x1a4) = (float)v[1];
-      dVar3 = v[2];
-      *(float *)(iVar2 + 0x1ac) = fVar1;
-      *(float *)(iVar2 + 0x1a8) = (float)dVar3;
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) = (float)*v;
+      *(float *)(attribRecord + 0x1a4) = (float)v[1];
+      zValue = v[2];
+      *(float *)(attribRecord + 0x1ac) = oneComponent;
+      *(float *)(attribRecord + 0x1a8) = (float)zValue;
       return;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x4884);
@@ -607,7 +607,7 @@ double _glVertexAttrib3dvARB_Exec(glContext, index, v)
                     
     (*UNRECOVERED_JUMPTABLE)
               (glContext,0,v,(double)(float)*v,(double)(float)v[1],
-               (double)(float)v[2],(double)fVar1);
+               (double)(float)v[2],(double)oneComponent);
     return;
   }
   if (*(int *)(glContext + 0x7574) != 0) {
@@ -974,13 +974,13 @@ void _glVertexAttrib4ubvARB_CompExec(glContext, index, v)
   undefined4 index;
   undefined4 v;
 {
-  double fparam_1;
+  double forwardedFloatArg1;
   double incomingFpr2;
   double incomingFpr3;
   double incomingFpr4;
   
   ((int (*)())_glVertexAttrib4ubvARB_Comp)(glContext,index,v);
-  ((double (*)())_glVertexAttrib4ubvARB_Exec)(glContext,index,v,fparam_1,incomingFpr2,incomingFpr3,incomingFpr4);
+  ((double (*)())_glVertexAttrib4ubvARB_Exec)(glContext,index,v,forwardedFloatArg1,incomingFpr2,incomingFpr3,incomingFpr4);
   return;
 }
 
@@ -994,29 +994,30 @@ undefined4 _glVertexAttrib4ubvARB_ListExec(undefined4 glContext,undefined4 *list
 /* _glVertexAttrib4usvARB_Exec @ 0xaed54 (384 bytes) */
 double _glVertexAttrib4usvARB_Exec(int glContext,uint index,ushort *v,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4)
 {
-  int iVar1;
+  int vertexWriteCursor;
+  int attribRecord;
   undefined4 incomingR6;
-  code *pcVar2;
+  code *vertexFunc;
   
   if (index < 0x10) {
     if (index == 0) {
-      iVar1 = *(int *)(glContext + 0x4858);
-      pcVar2 = *(code **)(glContext + 0x4884);
-      if (iVar1 == *(int *)(glContext + 0x485c)) {
-        pcVar2 = (code *)PTR__gleFlushAndSubmit_00112050;
+      vertexWriteCursor = *(int *)(glContext + 0x4858);
+      vertexFunc = *(code **)(glContext + 0x4884);
+      if (vertexWriteCursor == *(int *)(glContext + 0x485c)) {
+        vertexFunc = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*pcVar2)(glContext,0,v,incomingR6,iVar1,iVar1,(uint)v[2],v[1] | 0x4b000000,
+      (*vertexFunc)(glContext,0,v,incomingR6,vertexWriteCursor,vertexWriteCursor,(uint)v[2],v[1] | 0x4b000000,
                 (double)(GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0),
                 (double)(GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0),
                 (double)(GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0),
                 (double)(GH_U2F((unsigned int)((v[3] | 0x4b000000))) - 8388608.0));
     }
     else {
-      iVar1 = glContext + index * 0x10;
-      *(float *)(iVar1 + 0x1a0) = GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0;
-      *(float *)(iVar1 + 0x1a4) = GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0;
-      *(float *)(iVar1 + 0x1a8) = GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0;
-      *(float *)(iVar1 + 0x1ac) = GH_U2F((unsigned int)((v[3] | 0x4b000000))) - 8388608.0;
+      attribRecord = glContext + index * 0x10;
+      *(float *)(attribRecord + 0x1a0) = GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0;
+      *(float *)(attribRecord + 0x1a4) = GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0;
+      *(float *)(attribRecord + 0x1a8) = GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0;
+      *(float *)(attribRecord + 0x1ac) = GH_U2F((unsigned int)((v[3] | 0x4b000000))) - 8388608.0;
     }
   }
   else if (*(int *)(glContext + 0x7574) == 0) {

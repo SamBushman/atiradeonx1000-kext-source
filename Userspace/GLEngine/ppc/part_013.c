@@ -1958,7 +1958,7 @@ void _glColorTableParameteriv_Exec(glContext, target, pname, params)
 {
   double intToDoubleMagic;
   undefined4 glErrorCode;
-  float *pfVar3;
+  float *colorTableScaleBias;
   
   intToDoubleMagic = DOUBLE_00108d58;
   if (-1 < *(short *)(glContext + 0x4a10)) {
@@ -1971,24 +1971,24 @@ void _glColorTableParameteriv_Exec(glContext, target, pname, params)
   switch(target) {
   case 0x80d0:
   case 0x80d3:
-    pfVar3 = (float *)(glContext + 0x33b0);
+    colorTableScaleBias = (float *)(glContext + 0x33b0);
     break;
   case 0x80d1:
   case 0x80d4:
-    pfVar3 = (float *)(glContext + 0x33d0);
+    colorTableScaleBias = (float *)(glContext + 0x33d0);
     break;
   case 0x80d2:
   case 0x80d5:
-    pfVar3 = (float *)(glContext + 0x33f0);
+    colorTableScaleBias = (float *)(glContext + 0x33f0);
     break;
   default:
     goto switchD_0006186c_default;
   }
   if (pname == 0x80d6) {
-    *pfVar3 = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
-    pfVar3[2] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
-    pfVar3[4] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
-    pfVar3[6] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
+    *colorTableScaleBias = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
+    colorTableScaleBias[2] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
+    colorTableScaleBias[4] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
+    colorTableScaleBias[6] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
   }
   else {
     if (pname != 0x80d7) {
@@ -2001,10 +2001,10 @@ LAB_000618b0:
       *(undefined4 *)(glContext + 0x7574) = glErrorCode;
       return;
     }
-    pfVar3[1] = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
-    pfVar3[3] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
-    pfVar3[5] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
-    pfVar3[7] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
+    colorTableScaleBias[1] = (float)((double)CONCAT44(0x43300000,*params ^ 0x80000000) - DOUBLE_00108d58);
+    colorTableScaleBias[3] = (float)((double)CONCAT44(0x43300000,params[1] ^ 0x80000000) - intToDoubleMagic);
+    colorTableScaleBias[5] = (float)((double)CONCAT44(0x43300000,params[2] ^ 0x80000000) - intToDoubleMagic);
+    colorTableScaleBias[7] = (float)((double)CONCAT44(0x43300000,params[3] ^ 0x80000000) - intToDoubleMagic);
   }
   *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 0x40000000;
   return;

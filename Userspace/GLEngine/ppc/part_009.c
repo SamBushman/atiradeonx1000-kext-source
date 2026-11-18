@@ -222,24 +222,24 @@ void _glepPluginDisconnect(plugin)
 /* _glepUnloadRenderers @ 0x55a68 (116 bytes) */
 void _glepUnloadRenderers()
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  int *pluginCursor;
+  undefined4 *ioData;
+  int nextPlugin;
   
-  piVar1 = (int *)_glep_plugin_head;
-  puVar2 = (undefined4 *)PTR__gle_io_data_00112434;
-  while (PTR__gle_io_data_00112434 = (undefined *)puVar2, piVar1 != (int *)0x0) {
-    iVar3 = *piVar1;
-    _free(piVar1);
-    piVar1 = (int *)iVar3;
-    puVar2 = (undefined4 *)PTR__gle_io_data_00112434;
+  pluginCursor = (int *)_glep_plugin_head;
+  ioData = (undefined4 *)PTR__gle_io_data_00112434;
+  while (PTR__gle_io_data_00112434 = (undefined *)ioData, pluginCursor != (int *)0x0) {
+    nextPlugin = *pluginCursor;
+    _free(pluginCursor);
+    pluginCursor = (int *)nextPlugin;
+    ioData = (undefined4 *)PTR__gle_io_data_00112434;
   }
   _glep_plugin_head = 0;
-  puVar2[4] = 0;
-  *puVar2 = 0;
-  puVar2[1] = 0;
-  puVar2[2] = 0;
-  puVar2[3] = 0;
+  ioData[4] = 0;
+  *ioData = 0;
+  ioData[1] = 0;
+  ioData[2] = 0;
+  ioData[3] = 0;
   return;
 }
 

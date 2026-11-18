@@ -33,23 +33,23 @@ int _glColor4us_Comp(glContext, red, green, blue, alpha)
 }
 
 /* _glColor4us_Exec @ 0x5d254 (204 bytes) */
-double _glColor4us_Exec(int glContext,uint red,uint green,uint blue,uint alpha,double fparam_1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+double _glColor4us_Exec(int glContext,uint red,uint green,uint blue,uint alpha,double f1ThenHookF1Result,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
+  float alphaComponent;
+  float greenComponent;
+  float blueComponent;
   
-  fVar1 = (GH_U2F((unsigned int)((alpha | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  fVar2 = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  fVar3 = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  alphaComponent = (GH_U2F((unsigned int)((alpha | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  greenComponent = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  blueComponent = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   *(float *)(glContext + 0x2a0) = (GH_U2F((unsigned int)((red | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  *(float *)(glContext + 0x2ac) = fVar1;
-  *(float *)(glContext + 0x2a4) = fVar2;
-  *(float *)(glContext + 0x2a8) = fVar3;
+  *(float *)(glContext + 0x2ac) = alphaComponent;
+  *(float *)(glContext + 0x2a4) = greenComponent;
+  *(float *)(glContext + 0x2a8) = blueComponent;
   if (*(char *)(glContext + 0x4df8) != '\0') {
-    fparam_1 = (double)(**(double ( **)(int,int))(glContext + 0x4de0))(glContext, glContext + 0x2a0);
+    f1ThenHookF1Result = (double)(**(double ( **)(int,int))(glContext + 0x4de0))(glContext, glContext + 0x2a0);
   }
-  return fparam_1;
+  return f1ThenHookF1Result;
 }
 
 /* _glColor4us_CompExec @ 0x5d320 (80 bytes) */

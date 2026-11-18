@@ -496,14 +496,14 @@ int _glMap1Vertex4_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int iVar1;
+  int pointIndex;
   int invUDeltaBits;
   int pointComponent0;
   int pointComponent1;
   int pointComponent2;
   int order;
   int mapData;
-  int iVar7;
+  int pointDest;
   int u2Bits;
   int remaining;
   
@@ -515,17 +515,17 @@ int _glMap1Vertex4_ListExec(glContext, listRecord)
   *(int *)(mapData + 0x90) = u2Bits;
   *(int *)(mapData + 0x94) = invUDeltaBits;
   *(int *)(mapData + 0x88) = order;
-  iVar1 = 0;
+  pointIndex = 0;
   for (remaining = order; remaining != 0; remaining = remaining + -1) {
-    iVar7 = iVar1 * 0x10 + mapData;
-    pointComponent0 = listRecord[iVar1 * 4 + 4];
-    pointComponent1 = listRecord[iVar1 * 4 + 5];
-    pointComponent2 = listRecord[iVar1 * 4 + 6];
-    *(int *)(iVar7 + 0xa4) = listRecord[iVar1 * 4 + 7];
-    *(int *)(iVar7 + 0x98) = pointComponent0;
-    *(int *)(iVar7 + 0x9c) = pointComponent1;
-    *(int *)(iVar7 + 0xa0) = pointComponent2;
-    iVar1 = iVar1 + 1;
+    pointDest = pointIndex * 0x10 + mapData;
+    pointComponent0 = listRecord[pointIndex * 4 + 4];
+    pointComponent1 = listRecord[pointIndex * 4 + 5];
+    pointComponent2 = listRecord[pointIndex * 4 + 6];
+    *(int *)(pointDest + 0xa4) = listRecord[pointIndex * 4 + 7];
+    *(int *)(pointDest + 0x98) = pointComponent0;
+    *(int *)(pointDest + 0x9c) = pointComponent1;
+    *(int *)(pointDest + 0xa0) = pointComponent2;
+    pointIndex = pointIndex + 1;
   }
   return (10 - order) * -0x10 + 0xb0;
 }
@@ -611,32 +611,32 @@ int _glMap1Normal_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int *piVar1;
+  int *pointComponent0Ptr;
   int invUDeltaBits;
   int pointComponent1;
   int pointComponent2;
   int order;
-  int iVar5;
+  int mapDataCursor;
   int u2Bits;
   int remaining;
   
-  iVar5 = _gleGetMapData(glContext);
+  mapDataCursor = _gleGetMapData(glContext);
   order = *listRecord;
   u2Bits = listRecord[2];
   invUDeltaBits = listRecord[3];
-  *(int *)(iVar5 + 0x13c) = listRecord[1];
-  *(int *)(iVar5 + 0x140) = u2Bits;
-  *(int *)(iVar5 + 0x144) = invUDeltaBits;
-  *(int *)(iVar5 + 0x138) = order;
+  *(int *)(mapDataCursor + 0x13c) = listRecord[1];
+  *(int *)(mapDataCursor + 0x140) = u2Bits;
+  *(int *)(mapDataCursor + 0x144) = invUDeltaBits;
+  *(int *)(mapDataCursor + 0x138) = order;
   for (remaining = order; remaining != 0; remaining = remaining + -1) {
-    piVar1 = listRecord + 4;
+    pointComponent0Ptr = listRecord + 4;
     pointComponent1 = listRecord[5];
     pointComponent2 = listRecord[6];
     listRecord = listRecord + 3;
-    *(int *)(iVar5 + 0x148) = *piVar1;
-    *(int *)(iVar5 + 0x14c) = pointComponent1;
-    *(int *)(iVar5 + 0x150) = pointComponent2;
-    iVar5 = iVar5 + 0xc;
+    *(int *)(mapDataCursor + 0x148) = *pointComponent0Ptr;
+    *(int *)(mapDataCursor + 0x14c) = pointComponent1;
+    *(int *)(mapDataCursor + 0x150) = pointComponent2;
+    mapDataCursor = mapDataCursor + 0xc;
   }
   return (10 - order) * -0xc + 0x88;
 }
@@ -832,15 +832,15 @@ int _glMap1VertexAttrib2ARB_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int *piVar1;
+  int *pointComponent0Ptr;
   int attribIndex;
   int u2Bits;
   int remaining;
-  int iVar3;
+  int pointComponent1;
   int invUDeltaBits;
   int mapData;
-  int iVar4;
-  int iVar5;
+  int attribMapBase;
+  int pointDestCursor;
   int order;
   int *srcCursor;
   
@@ -848,22 +848,22 @@ int _glMap1VertexAttrib2ARB_ListExec(glContext, listRecord)
   attribIndex = *listRecord;
   order = listRecord[1];
   srcCursor = listRecord + 1;
-  iVar4 = mapData + attribIndex * 0xb0;
-  *(int *)(iVar4 + 0x2ca8) = order;
-  iVar5 = iVar4 + 0x2ca8;
+  attribMapBase = mapData + attribIndex * 0xb0;
+  *(int *)(attribMapBase + 0x2ca8) = order;
+  pointDestCursor = attribMapBase + 0x2ca8;
   ((unsigned char *)0x9da8)[attribIndex + mapData] = 0x2;
   u2Bits = listRecord[3];
   invUDeltaBits = listRecord[4];
-  *(int *)(iVar4 + 0x2cac) = listRecord[2];
-  *(int *)(iVar4 + 0x2cb0) = u2Bits;
-  *(int *)(iVar4 + 0x2cb4) = invUDeltaBits;
+  *(int *)(attribMapBase + 0x2cac) = listRecord[2];
+  *(int *)(attribMapBase + 0x2cb0) = u2Bits;
+  *(int *)(attribMapBase + 0x2cb4) = invUDeltaBits;
   for (remaining = order; remaining != 0; remaining = remaining + -1) {
-    piVar1 = srcCursor + 4;
-    iVar3 = srcCursor[5];
+    pointComponent0Ptr = srcCursor + 4;
+    pointComponent1 = srcCursor[5];
     srcCursor = srcCursor + 2;
-    *(int *)(iVar5 + 0x10) = *piVar1;
-    *(int *)(iVar5 + 0x14) = iVar3;
-    iVar5 = iVar5 + 8;
+    *(int *)(pointDestCursor + 0x10) = *pointComponent0Ptr;
+    *(int *)(pointDestCursor + 0x14) = pointComponent1;
+    pointDestCursor = pointDestCursor + 8;
   }
   return (10 - order) * -8 + 100;
 }
@@ -919,38 +919,38 @@ int _glMap1VertexAttrib4ARB_ListExec(glContext, listRecord)
   int attribIndex;
   int u2Bits;
   int remaining;
-  int iVar2;
+  int pointIndex;
   int invUDeltaBits;
   int mapData;
-  int iVar3;
+  int attribMapBase;
   int order;
   int pointComponent2;
   int pointComponent1;
   int pointComponent3;
-  int iVar8;
+  int pointDest;
   
   mapData = _gleGetMapData(glContext);
   attribIndex = *listRecord;
   order = listRecord[1];
-  iVar3 = mapData + attribIndex * 0xb0;
-  *(int *)(iVar3 + 0x2ca8) = order;
+  attribMapBase = mapData + attribIndex * 0xb0;
+  *(int *)(attribMapBase + 0x2ca8) = order;
   ((unsigned char *)0x9da8)[attribIndex + mapData] = 0x4;
   u2Bits = listRecord[3];
   invUDeltaBits = listRecord[4];
-  *(int *)(iVar3 + 0x2cac) = listRecord[2];
-  *(int *)(iVar3 + 0x2cb0) = u2Bits;
-  *(int *)(iVar3 + 0x2cb4) = invUDeltaBits;
-  iVar2 = 0;
+  *(int *)(attribMapBase + 0x2cac) = listRecord[2];
+  *(int *)(attribMapBase + 0x2cb0) = u2Bits;
+  *(int *)(attribMapBase + 0x2cb4) = invUDeltaBits;
+  pointIndex = 0;
   for (remaining = order; remaining != 0; remaining = remaining + -1) {
-    iVar8 = iVar2 * 0x10 + iVar3 + 0x2ca8;
-    pointComponent3 = listRecord[iVar2 * 4 + 8];
-    pointComponent1 = listRecord[iVar2 * 4 + 6];
-    pointComponent2 = listRecord[iVar2 * 4 + 7];
-    *(int *)(iVar8 + 0x10) = listRecord[iVar2 * 4 + 5];
-    *(int *)(iVar8 + 0x1c) = pointComponent3;
-    *(int *)(iVar8 + 0x14) = pointComponent1;
-    *(int *)(iVar8 + 0x18) = pointComponent2;
-    iVar2 = iVar2 + 1;
+    pointDest = pointIndex * 0x10 + attribMapBase + 0x2ca8;
+    pointComponent3 = listRecord[pointIndex * 4 + 8];
+    pointComponent1 = listRecord[pointIndex * 4 + 6];
+    pointComponent2 = listRecord[pointIndex * 4 + 7];
+    *(int *)(pointDest + 0x10) = listRecord[pointIndex * 4 + 5];
+    *(int *)(pointDest + 0x1c) = pointComponent3;
+    *(int *)(pointDest + 0x14) = pointComponent1;
+    *(int *)(pointDest + 0x18) = pointComponent2;
+    pointIndex = pointIndex + 1;
   }
   return (10 - order) * -0x10 + 0xb4;
 }
@@ -1938,12 +1938,12 @@ int _glMap2Vertex4_ListExec(glContext, listRecord)
   int invVDeltaBits;
   int pointComponent2;
   int vorder;
-  int iVar5;
+  int pointIndex;
   int u2Bits;
   int vorder2;
   int mapData;
   int uorder;
-  int iVar8;
+  int pointDest;
   int invUDeltaBits;
   int remaining;
   
@@ -1964,17 +1964,17 @@ int _glMap2Vertex4_ListExec(glContext, listRecord)
   *(int *)(mapData + 0x958) = v1Bits;
   *(int *)(mapData + 0x95c) = v2Bits;
   *(int *)(mapData + 0x964) = invVDeltaBits;
-  iVar5 = 0;
+  pointIndex = 0;
   for (remaining = uorder * vorder; remaining != 0; remaining = remaining + -1) {
-    iVar8 = iVar5 * 0x10 + mapData;
-    pointComponent0 = listRecord[iVar5 * 4 + 8];
-    pointComponent1 = listRecord[iVar5 * 4 + 9];
-    pointComponent2 = listRecord[iVar5 * 4 + 10];
-    *(int *)(iVar8 + 0x974) = listRecord[iVar5 * 4 + 0xb];
-    *(int *)(iVar8 + 0x968) = pointComponent0;
-    *(int *)(iVar8 + 0x96c) = pointComponent1;
-    *(int *)(iVar8 + 0x970) = pointComponent2;
-    iVar5 = iVar5 + 1;
+    pointDest = pointIndex * 0x10 + mapData;
+    pointComponent0 = listRecord[pointIndex * 4 + 8];
+    pointComponent1 = listRecord[pointIndex * 4 + 9];
+    pointComponent2 = listRecord[pointIndex * 4 + 10];
+    *(int *)(pointDest + 0x974) = listRecord[pointIndex * 4 + 0xb];
+    *(int *)(pointDest + 0x968) = pointComponent0;
+    *(int *)(pointDest + 0x96c) = pointComponent1;
+    *(int *)(pointDest + 0x970) = pointComponent2;
+    pointIndex = pointIndex + 1;
   }
   return (100 - uorder * vorder) * -0x10 + 0x660;
 }
@@ -2231,7 +2231,7 @@ int _glMap2Texture3_ListExec(glContext, listRecord)
   undefined4 glContext;
   int *listRecord;
 {
-  int *piVar1;
+  int *pointComponent0Ptr;
   int invUDeltaBits;
   int pointComponent1;
   int v1Bits;
@@ -2242,13 +2242,13 @@ int _glMap2Texture3_ListExec(glContext, listRecord)
   int vorder2;
   int u2Bits;
   int remaining;
-  int iVar8;
+  int mapDataCursor;
   int uorder;
   
-  iVar8 = _gleGetMapData(glContext);
+  mapDataCursor = _gleGetMapData(glContext);
   vorder2 = listRecord[1];
-  *(int *)(iVar8 + 0x2178) = *listRecord;
-  *(int *)(iVar8 + 0x217c) = vorder2;
+  *(int *)(mapDataCursor + 0x2178) = *listRecord;
+  *(int *)(mapDataCursor + 0x217c) = vorder2;
   uorder = *listRecord;
   vorder = listRecord[1];
   u2Bits = listRecord[3];
@@ -2256,21 +2256,21 @@ int _glMap2Texture3_ListExec(glContext, listRecord)
   v1Bits = listRecord[4];
   v2Bits = listRecord[5];
   invVDeltaBits = listRecord[7];
-  *(int *)(iVar8 + 0x2180) = listRecord[2];
-  *(int *)(iVar8 + 0x2184) = u2Bits;
-  *(int *)(iVar8 + 0x2190) = invUDeltaBits;
-  *(int *)(iVar8 + 0x2188) = v1Bits;
-  *(int *)(iVar8 + 0x218c) = v2Bits;
-  *(int *)(iVar8 + 0x2194) = invVDeltaBits;
+  *(int *)(mapDataCursor + 0x2180) = listRecord[2];
+  *(int *)(mapDataCursor + 0x2184) = u2Bits;
+  *(int *)(mapDataCursor + 0x2190) = invUDeltaBits;
+  *(int *)(mapDataCursor + 0x2188) = v1Bits;
+  *(int *)(mapDataCursor + 0x218c) = v2Bits;
+  *(int *)(mapDataCursor + 0x2194) = invVDeltaBits;
   for (remaining = uorder * vorder; remaining != 0; remaining = remaining + -1) {
-    piVar1 = listRecord + 8;
+    pointComponent0Ptr = listRecord + 8;
     pointComponent1 = listRecord[9];
     pointComponent2 = listRecord[10];
     listRecord = listRecord + 3;
-    *(int *)(iVar8 + 0x2198) = *piVar1;
-    *(int *)(iVar8 + 0x219c) = pointComponent1;
-    *(int *)(iVar8 + 0x21a0) = pointComponent2;
-    iVar8 = iVar8 + 0xc;
+    *(int *)(mapDataCursor + 0x2198) = *pointComponent0Ptr;
+    *(int *)(mapDataCursor + 0x219c) = pointComponent1;
+    *(int *)(mapDataCursor + 0x21a0) = pointComponent2;
+    mapDataCursor = mapDataCursor + 0xc;
   }
   return (100 - uorder * vorder) * -0xc + 0x4d0;
 }
