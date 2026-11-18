@@ -541,257 +541,262 @@ void _gleSetProjectionFuncZ0W1(glContext, param_2, param_3)
 }
 
 /* _gleTransformProjectionBlend @ 0xc5edc (1264 bytes) */
-void _gleTransformProjectionBlend(int glContext,float *param_2,int param_3,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+void _gleTransformProjectionBlend(int glContext,float *vertices,int vertexCount,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  float fVar10;
-  float fVar11;
-  float fVar12;
-  float fVar13;
-  float fVar14;
-  float fVar15;
-  float fVar16;
-  float fVar17;
-  float fVar18;
-  float fVar19;
-  float fVar20;
-  float fVar21;
-  float fVar22;
-  float fVar23;
-  float fVar24;
-  float fVar25;
-  float fVar26;
-  float fVar27;
-  float fVar28;
-  float fVar29;
-  float fVar30;
-  float fVar31;
-  float fVar32;
-  float fVar33;
-  float fVar34;
+  float weightOrBlendM1OrProjM3;
+  float remainingWeightOrBlendM0OrClipBiasX;
+  float blendM2OrClipBiasY;
+  float blendM3OrProjM7;
+  float blendM4OrProjM11;
+  float blendM5OrProjM15;
+  float blendM6OrClipScaleX;
+  float blendM7OrClipScaleY;
+  float blendM8OrProjM8;
+  float blendM9OrProjM12;
+  float blendM10OrViewportScaleX;
+  float blendM11OrProjM5;
+  float blendM12OrProjM0;
+  float blendM13OrProjM1;
+  float blendM14OrProjM4;
+  float blendM15OrProjM9;
+  float objectYOrProjM13;
+  float objectXOrProjM14;
+  float objectZOrProjM2;
+  float objectWOrProjM6;
+  float blendWeightOrProjM10;
+  float viewportScaleY;
+  float viewportScaleZ;
+  float viewportOffsetY;
+  float viewportOffsetX;
+  float viewportOffsetZ;
+  float eyeXThenClipY;
+  float blendedEyeY;
+  float blendedEyeZ;
+  float blendedEyeW;
+  float fogValueThenClipX;
+  float fogFactorThenClipZ;
+  float clipW;
+  float negClipW;
   float floatZero;
-  int iVar36;
+  int lastWeightIndex;
   int loopIndex;
-  float *pfVar37;
-  float *pfVar38;
-  uint uVar39;
-  int iVar40;
-  uint uVar41;
-  float *pfVar42;
+  float *weightCursor;
+  float *nextVertex;
+  float *vertexEnd;
+  float *blendMatrix;
+  float *zeroCursor;
+  uint weightCount;
+  uint clipCodeOr;
+  int lastWeightSlot;
+  uint clipCode;
+  float *vertexCursor;
   int remaining;
-  uint uVar44;
-  double dVar45;
+  uint vertexIterations;
+  uint clipCodeAnd;
+  double fogExpResult;
   
   floatZero = FLOAT_00108e50;
-  uVar39 = (uint)*(byte *)(glContext + 0x4660);
-  pfVar38 = param_2 + param_3 * 0x40;
+  weightCount = (uint)*(byte *)(glContext + 0x4660);
+  vertexEnd = vertices + vertexCount * 0x40;
   if (*(char *)(glContext + 0x4662) == '\0') {
-    if (param_2 < pfVar38) {
-      uVar44 = (uint)((int)pfVar38 + (0xff - (int)param_2)) >> 8;
-      pfVar38 = param_2;
+    if (vertices < vertexEnd) {
+      vertexIterations = (uint)((int)vertexEnd + (0xff - (int)vertices)) >> 8;
+      zeroCursor = vertices;
       do {
-        pfVar38[0x3c] = floatZero;
-        pfVar38[0x3d] = floatZero;
-        pfVar38[0x3e] = floatZero;
-        pfVar38[0x3f] = floatZero;
-        pfVar38 = pfVar38 + 0x40;
-        uVar44 = uVar44 - 1;
-      } while (uVar44 != 0);
+        zeroCursor[0x3c] = floatZero;
+        zeroCursor[0x3d] = floatZero;
+        zeroCursor[0x3e] = floatZero;
+        zeroCursor[0x3f] = floatZero;
+        zeroCursor = zeroCursor + 0x40;
+        vertexIterations = vertexIterations - 1;
+      } while (vertexIterations != 0);
     }
   }
-  else if (param_2 < pfVar38) {
-    iVar36 = uVar39 - 1;
-    pfVar42 = param_2;
+  else if (vertices < vertexEnd) {
+    lastWeightIndex = weightCount - 1;
+    vertexCursor = vertices;
     do {
-      pfVar42[0x3c] = floatZero;
-      pfVar42[0x3d] = floatZero;
-      pfVar42[0x3e] = floatZero;
-      pfVar42[0x3f] = floatZero;
-      iVar40 = 0;
-      fVar2 = FLOAT_00108e54;
-      if (0 < iVar36) {
-        pfVar37 = pfVar42 + 0x18;
-        remaining = iVar36;
+      vertexCursor[0x3c] = floatZero;
+      vertexCursor[0x3d] = floatZero;
+      vertexCursor[0x3e] = floatZero;
+      vertexCursor[0x3f] = floatZero;
+      lastWeightSlot = 0;
+      remainingWeightOrBlendM0OrClipBiasX = FLOAT_00108e54;
+      if (0 < lastWeightIndex) {
+        weightCursor = vertexCursor + 0x18;
+        remaining = lastWeightIndex;
         do {
-          fVar1 = *pfVar37;
-          pfVar37 = pfVar37 + 1;
-          fVar2 = fVar2 - fVar1;
+          weightOrBlendM1OrProjM3 = *weightCursor;
+          weightCursor = weightCursor + 1;
+          remainingWeightOrBlendM0OrClipBiasX = remainingWeightOrBlendM0OrClipBiasX - weightOrBlendM1OrProjM3;
           remaining = remaining + -1;
-          iVar40 = iVar36;
+          lastWeightSlot = lastWeightIndex;
         } while (remaining != 0);
       }
-      pfVar37 = pfVar42 + 0x40;
-      pfVar42[iVar40 + 0x18] = fVar2;
-      pfVar42 = pfVar37;
-    } while (pfVar37 < pfVar38);
+      nextVertex = vertexCursor + 0x40;
+      vertexCursor[lastWeightSlot + 0x18] = remainingWeightOrBlendM0OrClipBiasX;
+      vertexCursor = nextVertex;
+    } while (nextVertex < vertexEnd);
   }
   loopIndex = 0;
-  if (uVar39 != 0) {
-    pfVar38 = (float *)(glContext + 0x1cc0);
+  if (weightCount != 0) {
+    blendMatrix = (float *)(glContext + 0x1cc0);
     do {
-      fVar2 = *pfVar38;
-      fVar1 = pfVar38[1];
-      fVar3 = pfVar38[2];
-      fVar4 = pfVar38[3];
-      fVar5 = pfVar38[4];
-      fVar6 = pfVar38[5];
-      fVar7 = pfVar38[6];
-      fVar8 = pfVar38[7];
-      fVar9 = pfVar38[8];
-      fVar10 = pfVar38[9];
-      fVar11 = pfVar38[10];
-      fVar12 = pfVar38[0xb];
-      fVar13 = pfVar38[0xc];
-      fVar14 = pfVar38[0xd];
-      fVar15 = pfVar38[0xe];
-      fVar16 = pfVar38[0xf];
-      if (param_2 < param_2 + param_3 * 0x40) {
-        uVar44 = (uint)((int)(param_2 + param_3 * 0x40) + (0xff - (int)param_2)) >> 8;
-        pfVar42 = param_2;
+      remainingWeightOrBlendM0OrClipBiasX = *blendMatrix;
+      weightOrBlendM1OrProjM3 = blendMatrix[1];
+      blendM2OrClipBiasY = blendMatrix[2];
+      blendM3OrProjM7 = blendMatrix[3];
+      blendM4OrProjM11 = blendMatrix[4];
+      blendM5OrProjM15 = blendMatrix[5];
+      blendM6OrClipScaleX = blendMatrix[6];
+      blendM7OrClipScaleY = blendMatrix[7];
+      blendM8OrProjM8 = blendMatrix[8];
+      blendM9OrProjM12 = blendMatrix[9];
+      blendM10OrViewportScaleX = blendMatrix[10];
+      blendM11OrProjM5 = blendMatrix[0xb];
+      blendM12OrProjM0 = blendMatrix[0xc];
+      blendM13OrProjM1 = blendMatrix[0xd];
+      blendM14OrProjM4 = blendMatrix[0xe];
+      blendM15OrProjM9 = blendMatrix[0xf];
+      if (vertices < vertices + vertexCount * 0x40) {
+        vertexIterations = (uint)((int)(vertices + vertexCount * 0x40) + (0xff - (int)vertices)) >> 8;
+        vertexCursor = vertices;
         do {
-          fVar17 = pfVar42[9];
-          fVar18 = pfVar42[8];
-          fVar19 = pfVar42[10];
-          fVar20 = pfVar42[0xb];
-          fVar21 = pfVar42[loopIndex + 0x18];
-          pfVar42[0x3c] =
-               fVar21 * (fVar20 * fVar13 + (fVar19 * fVar9 + (fVar18 * fVar2 + fVar17 * fVar5))) +
-               pfVar42[0x3c];
-          pfVar42[0x3f] =
-               fVar21 * (fVar20 * fVar16 + (fVar19 * fVar12 + (fVar18 * fVar4 + fVar17 * fVar8))) +
-               pfVar42[0x3f];
-          pfVar42[0x3d] =
-               fVar21 * (fVar20 * fVar14 + (fVar19 * fVar10 + (fVar18 * fVar1 + fVar17 * fVar6))) +
-               pfVar42[0x3d];
-          pfVar42[0x3e] =
-               fVar21 * (fVar20 * fVar15 + (fVar19 * fVar11 + (fVar18 * fVar3 + fVar17 * fVar7))) +
-               pfVar42[0x3e];
-          pfVar42 = pfVar42 + 0x40;
-          uVar44 = uVar44 - 1;
-        } while (uVar44 != 0);
+          objectYOrProjM13 = vertexCursor[9];
+          objectXOrProjM14 = vertexCursor[8];
+          objectZOrProjM2 = vertexCursor[10];
+          objectWOrProjM6 = vertexCursor[0xb];
+          blendWeightOrProjM10 = vertexCursor[loopIndex + 0x18];
+          vertexCursor[0x3c] =
+               blendWeightOrProjM10 * (objectWOrProjM6 * blendM12OrProjM0 + (objectZOrProjM2 * blendM8OrProjM8 + (objectXOrProjM14 * remainingWeightOrBlendM0OrClipBiasX + objectYOrProjM13 * blendM4OrProjM11))) +
+               vertexCursor[0x3c];
+          vertexCursor[0x3f] =
+               blendWeightOrProjM10 * (objectWOrProjM6 * blendM15OrProjM9 + (objectZOrProjM2 * blendM11OrProjM5 + (objectXOrProjM14 * blendM3OrProjM7 + objectYOrProjM13 * blendM7OrClipScaleY))) +
+               vertexCursor[0x3f];
+          vertexCursor[0x3d] =
+               blendWeightOrProjM10 * (objectWOrProjM6 * blendM13OrProjM1 + (objectZOrProjM2 * blendM9OrProjM12 + (objectXOrProjM14 * weightOrBlendM1OrProjM3 + objectYOrProjM13 * blendM5OrProjM15))) +
+               vertexCursor[0x3d];
+          vertexCursor[0x3e] =
+               blendWeightOrProjM10 * (objectWOrProjM6 * blendM14OrProjM4 + (objectZOrProjM2 * blendM10OrViewportScaleX + (objectXOrProjM14 * blendM2OrClipBiasY + objectYOrProjM13 * blendM6OrClipScaleX))) +
+               vertexCursor[0x3e];
+          vertexCursor = vertexCursor + 0x40;
+          vertexIterations = vertexIterations - 1;
+        } while (vertexIterations != 0);
       }
       loopIndex = loopIndex + 1;
-      pfVar38 = pfVar38 + 0x10;
-    } while (loopIndex < (int)uVar39);
+      blendMatrix = blendMatrix + 0x10;
+    } while (loopIndex < (int)weightCount);
   }
-  fVar2 = *(float *)(glContext + 0x4a20);
-  fVar1 = *(float *)(glContext + 0x1c8c);
-  pfVar38 = param_2 + param_3 * 0x40;
-  fVar3 = *(float *)(glContext + 0x4a28);
-  fVar4 = *(float *)(glContext + 0x1c9c);
-  uVar39 = 0;
-  fVar5 = *(float *)(glContext + 0x1cac);
-  uVar44 = 0xff;
-  fVar6 = *(float *)(glContext + 0x1cbc);
-  fVar7 = *(float *)(glContext + 0x4a1c);
-  fVar8 = *(float *)(glContext + 0x4a24);
-  fVar9 = *(float *)(glContext + 0x1ca0);
-  fVar10 = *(float *)(glContext + 0x1cb0);
-  fVar11 = *(float *)(glContext + 0x1b70);
-  fVar12 = *(float *)(glContext + 0x1c94);
-  fVar13 = *(float *)(glContext + 0x1c80);
-  fVar14 = *(float *)(glContext + 0x1c84);
-  fVar15 = *(float *)(glContext + 0x1c90);
-  fVar16 = *(float *)(glContext + 0x1ca4);
-  fVar17 = *(float *)(glContext + 0x1cb4);
-  fVar18 = *(float *)(glContext + 0x1cb8);
-  fVar19 = *(float *)(glContext + 0x1c88);
-  fVar20 = *(float *)(glContext + 0x1c98);
-  fVar21 = *(float *)(glContext + 0x1ca8);
-  fVar22 = *(float *)(glContext + 0x1b74);
-  fVar23 = *(float *)(glContext + 0x1b78);
-  fVar24 = *(float *)(glContext + 0x1b84);
-  fVar25 = *(float *)(glContext + 0x1b80);
-  fVar26 = *(float *)(glContext + 0x1b88);
+  remainingWeightOrBlendM0OrClipBiasX = *(float *)(glContext + 0x4a20);
+  weightOrBlendM1OrProjM3 = *(float *)(glContext + 0x1c8c);
+  vertexEnd = vertices + vertexCount * 0x40;
+  blendM2OrClipBiasY = *(float *)(glContext + 0x4a28);
+  blendM3OrProjM7 = *(float *)(glContext + 0x1c9c);
+  clipCodeOr = 0;
+  blendM4OrProjM11 = *(float *)(glContext + 0x1cac);
+  clipCodeAnd = 0xff;
+  blendM5OrProjM15 = *(float *)(glContext + 0x1cbc);
+  blendM6OrClipScaleX = *(float *)(glContext + 0x4a1c);
+  blendM7OrClipScaleY = *(float *)(glContext + 0x4a24);
+  blendM8OrProjM8 = *(float *)(glContext + 0x1ca0);
+  blendM9OrProjM12 = *(float *)(glContext + 0x1cb0);
+  blendM10OrViewportScaleX = *(float *)(glContext + 0x1b70);
+  blendM11OrProjM5 = *(float *)(glContext + 0x1c94);
+  blendM12OrProjM0 = *(float *)(glContext + 0x1c80);
+  blendM13OrProjM1 = *(float *)(glContext + 0x1c84);
+  blendM14OrProjM4 = *(float *)(glContext + 0x1c90);
+  blendM15OrProjM9 = *(float *)(glContext + 0x1ca4);
+  objectYOrProjM13 = *(float *)(glContext + 0x1cb4);
+  objectXOrProjM14 = *(float *)(glContext + 0x1cb8);
+  objectZOrProjM2 = *(float *)(glContext + 0x1c88);
+  objectWOrProjM6 = *(float *)(glContext + 0x1c98);
+  blendWeightOrProjM10 = *(float *)(glContext + 0x1ca8);
+  viewportScaleY = *(float *)(glContext + 0x1b74);
+  viewportScaleZ = *(float *)(glContext + 0x1b78);
+  viewportOffsetY = *(float *)(glContext + 0x1b84);
+  viewportOffsetX = *(float *)(glContext + 0x1b80);
+  viewportOffsetZ = *(float *)(glContext + 0x1b88);
   do {
-    if (pfVar38 <= param_2) {
+    if (vertexEnd <= vertices) {
       return;
     }
-    uVar41 = 0;
-    fVar27 = param_2[0x3c];
-    fVar28 = param_2[0x3d];
-    fVar29 = param_2[0x3e];
-    fVar30 = param_2[0x3f];
+    clipCode = 0;
+    eyeXThenClipY = vertices[0x3c];
+    blendedEyeY = vertices[0x3d];
+    blendedEyeZ = vertices[0x3e];
+    blendedEyeW = vertices[0x3f];
     if ((*(byte *)(glContext + 0x50b4) & 2) != 0) {
-      fVar31 = fVar29;
+      fogValueThenClipX = blendedEyeZ;
       if (*(short *)(glContext + 0x3166) == -0x7baf) {
-        fVar31 = param_2[0x17];
+        fogValueThenClipX = vertices[0x17];
       }
-      if (floatZero < fVar31) {
-        fVar31 = -fVar31;
+      if (floatZero < fogValueThenClipX) {
+        fogValueThenClipX = -fogValueThenClipX;
       }
-      fVar32 = FLOAT_00108e54;
+      fogFactorThenClipZ = FLOAT_00108e54;
       if (*(short *)(glContext + 0x3164) == 0x800) {
-        if (!(floatZero <= fVar31)) {
-          fVar31 = *(float *)(glContext + 0x3150) * fVar31;
+        if (!(floatZero <= fogValueThenClipX)) {
+          fogValueThenClipX = *(float *)(glContext + 0x3150) * fogValueThenClipX;
           goto LAB_000c628c;
         }
       }
       else if (*(short *)(glContext + 0x3164) == 0x2601) {
-        fVar31 = (*(float *)(glContext + 0x3158) + fVar31) * *(float *)(glContext + 0x315c);
-        if ((!(FLOAT_00108e54 < fVar31)) && (fVar32 = fVar31, fVar31 < floatZero)) {
-          fVar32 = FLOAT_00108e50;
+        fogValueThenClipX = (*(float *)(glContext + 0x3158) + fogValueThenClipX) * *(float *)(glContext + 0x315c);
+        if ((!(FLOAT_00108e54 < fogValueThenClipX)) && (fogFactorThenClipZ = fogValueThenClipX, fogValueThenClipX < floatZero)) {
+          fogFactorThenClipZ = FLOAT_00108e50;
         }
       }
       else {
-        fVar31 = *(float *)(glContext + 0x3150) * fVar31;
-        fVar31 = -fVar31 * fVar31;
+        fogValueThenClipX = *(float *)(glContext + 0x3150) * fogValueThenClipX;
+        fogValueThenClipX = -fogValueThenClipX * fogValueThenClipX;
 LAB_000c628c:
-        dVar45 = _exp((double)fVar31);
-        fVar32 = (float)dVar45;
+        fogExpResult = _exp((double)fogValueThenClipX);
+        fogFactorThenClipZ = (float)fogExpResult;
       }
-      param_2[0x13] = fVar32;
+      vertices[0x13] = fogFactorThenClipZ;
     }
-    fVar33 = fVar30 * fVar6 + (fVar29 * fVar5 + (fVar27 * fVar1 + fVar28 * fVar4));
-    fVar31 = fVar30 * (fVar7 * fVar10 + fVar2 * fVar6) +
-             (fVar29 * (fVar7 * fVar9 + fVar2 * fVar5) +
-             (fVar27 * (fVar7 * fVar13 + fVar2 * fVar1) + fVar28 * (fVar7 * fVar15 + fVar2 * fVar4)));
-    fVar34 = -fVar33;
-    fVar32 = fVar30 * fVar18 + (fVar29 * fVar21 + (fVar27 * fVar19 + fVar28 * fVar20));
-    fVar27 = fVar30 * (fVar8 * fVar17 + fVar3 * fVar6) +
-             (fVar29 * (fVar8 * fVar16 + fVar3 * fVar5) +
-             (fVar27 * (fVar8 * fVar14 + fVar3 * fVar1) + fVar28 * (fVar8 * fVar12 + fVar3 * fVar4)));
-    if (fVar31 < fVar34) {
-      uVar41 = 0x10;
+    clipW = blendedEyeW * blendM5OrProjM15 + (blendedEyeZ * blendM4OrProjM11 + (eyeXThenClipY * weightOrBlendM1OrProjM3 + blendedEyeY * blendM3OrProjM7));
+    fogValueThenClipX = blendedEyeW * (blendM6OrClipScaleX * blendM9OrProjM12 + remainingWeightOrBlendM0OrClipBiasX * blendM5OrProjM15) +
+             (blendedEyeZ * (blendM6OrClipScaleX * blendM8OrProjM8 + remainingWeightOrBlendM0OrClipBiasX * blendM4OrProjM11) +
+             (eyeXThenClipY * (blendM6OrClipScaleX * blendM12OrProjM0 + remainingWeightOrBlendM0OrClipBiasX * weightOrBlendM1OrProjM3) + blendedEyeY * (blendM6OrClipScaleX * blendM14OrProjM4 + remainingWeightOrBlendM0OrClipBiasX * blendM3OrProjM7)));
+    negClipW = -clipW;
+    fogFactorThenClipZ = blendedEyeW * objectXOrProjM14 + (blendedEyeZ * blendWeightOrProjM10 + (eyeXThenClipY * objectZOrProjM2 + blendedEyeY * objectWOrProjM6));
+    eyeXThenClipY = blendedEyeW * (blendM7OrClipScaleY * objectYOrProjM13 + blendM2OrClipBiasY * blendM5OrProjM15) +
+             (blendedEyeZ * (blendM7OrClipScaleY * blendM15OrProjM9 + blendM2OrClipBiasY * blendM4OrProjM11) +
+             (eyeXThenClipY * (blendM7OrClipScaleY * blendM13OrProjM1 + blendM2OrClipBiasY * weightOrBlendM1OrProjM3) + blendedEyeY * (blendM7OrClipScaleY * blendM11OrProjM5 + blendM2OrClipBiasY * blendM3OrProjM7)));
+    if (fogValueThenClipX < negClipW) {
+      clipCode = 0x10;
     }
-    if (fVar33 <= fVar31) {
-      uVar41 = uVar41 | 0x20;
+    if (clipW <= fogValueThenClipX) {
+      clipCode = clipCode | 0x20;
     }
-    if (fVar27 < fVar34) {
-      uVar41 = uVar41 | 4;
+    if (eyeXThenClipY < negClipW) {
+      clipCode = clipCode | 4;
     }
-    if (fVar33 <= fVar27) {
-      uVar41 = uVar41 | 8;
+    if (clipW <= eyeXThenClipY) {
+      clipCode = clipCode | 8;
     }
-    if (fVar32 < fVar34) {
-      uVar41 = uVar41 | 1;
+    if (fogFactorThenClipZ < negClipW) {
+      clipCode = clipCode | 1;
     }
-    if (fVar33 < fVar32) {
-      uVar41 = uVar41 | 2;
+    if (clipW < fogFactorThenClipZ) {
+      clipCode = clipCode | 2;
     }
-    param_2[4] = fVar31;
-    param_2[5] = fVar27;
-    param_2[6] = fVar32;
-    param_2[7] = fVar33;
-    *(char *)((int)param_2 + 0x7f) = (char)uVar41;
-    if (uVar41 == 0) {
-      fVar33 = FLOAT_00108e54 / fVar33;
-      param_2[3] = fVar33;
-      *param_2 = fVar31 * fVar33 * fVar11 + fVar25;
-      param_2[1] = fVar27 * fVar33 * fVar22 + fVar24;
-      param_2[2] = fVar32 * fVar33 * fVar23 + fVar26;
+    vertices[4] = fogValueThenClipX;
+    vertices[5] = eyeXThenClipY;
+    vertices[6] = fogFactorThenClipZ;
+    vertices[7] = clipW;
+    *(char *)((int)vertices + 0x7f) = (char)clipCode;
+    if (clipCode == 0) {
+      clipW = FLOAT_00108e54 / clipW;
+      vertices[3] = clipW;
+      *vertices = fogValueThenClipX * clipW * blendM10OrViewportScaleX + viewportOffsetX;
+      vertices[1] = eyeXThenClipY * clipW * viewportScaleY + viewportOffsetY;
+      vertices[2] = fogFactorThenClipZ * clipW * viewportScaleZ + viewportOffsetZ;
     }
-    param_2 = param_2 + 0x40;
-    uVar44 = uVar44 & uVar41;
-    uVar39 = uVar39 | uVar41;
+    vertices = vertices + 0x40;
+    clipCodeAnd = clipCodeAnd & clipCode;
+    clipCodeOr = clipCodeOr | clipCode;
   } while( true );
 }
 
@@ -3562,59 +3567,76 @@ int _pixelCenters(float floatArg1,float floatArg2,double floatArg3)
 }
 
 /* _gleDrawPixelsFast @ 0xca3d4 (3376 bytes) */
-int _gleDrawPixelsFast(glContext, param_2, param_3, param_4, param_5, param_6)
+int _gleDrawPixelsFast(glContext, width, height, format, typeThenTextureType, pixels)
   int glContext;
-  uint param_2;
-  uint param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+  uint width;
+  uint height;
+  int format;
+  int typeThenTextureType;
+  int pixels;
 {
   bool bVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
+  float zoomXSignF;
+  float nextTileXOffsetF;
+  float zoomYSignF;
+  float nextTileYOffsetF;
+  float nextTileDestX;
+  float quadX1;
+  float nextTileDestY;
+  float quadY1;
   char cVar8;
-  float fVar9;
-  int iVar10;
-  int iVar11;
-  double dVar12;
-  int *piVar13;
-  uint uVar14;
+  float rasterPosY;
+  int slotOffset;
+  int glContextPlus10000Copy2;
+  int slotOffset2;
+  double intToDoubleBias2;
+  int *dirtyFlagWords3;
+  uint texUnitCount;
+  uint imageHeight;
   int iVar15;
+  int tileQuadHeightInt;
+  int tileHeightInt;
   int *piVar16;
-  int *piVar17;
-  int iVar18;
+  int *textureLevel;
+  int *texUnitStateCursor;
+  int *dirtyFlagWordsCursor;
+  int textureType;
   undefined4 a1;
   undefined4 a1_00;
   undefined4 a1_01;
   undefined4 a1_02;
-  undefined4 uVar19;
+  undefined4 textureInternalFormat;
   int iVar20;
+  int drawTexture;
   int iVar21;
+  int slotOffset3;
   int remaining;
   int loopIndex;
   int matrixFuncDirty;
-  undefined2 uVar23;
+  undefined2 levelHeight;
   undefined4 *puVar22;
-  int iVar24;
-  uint uVar25;
-  int iVar26;
-  uint uVar27;
-  uint *puVar28;
+  int transferState;
+  uint tileXCounter;
+  int sourceFormat;
+  uint tileYCounter;
+  uint *drawPixelsShare;
   int iVar29;
-  uint uVar30;
+  int glContextPlus10000Copy3;
+  int dirtyWordValue;
+  uint imageWidth;
   uint loopIndex2;
-  uint uVar31;
+  uint boundaryX;
+  uint slotIndex;
+  uint dirtyWord3ThenMasked;
+  uint tileRowBytes;
+  uint boundaryY;
   uint loopIndex3;
   uint dispatchFlags;
-  float dVar32;
+  float zoomXSign;
   float doubleZero;
   double dVar33;
-  double fparam_1;
+  double tileRowBytesD;
+  double forwardedFpr1;
   double f1AfterCall;
   double extraout_f1_00;
   double f1AfterCall2;
@@ -3623,77 +3645,79 @@ int _gleDrawPixelsFast(glContext, param_2, param_3, param_4, param_5, param_6)
   double incomingFpr6;
   double incomingFpr7;
   double incomingFpr8;
-  float dVar35;
+  float tileXOffsetF;
+  float tileHeight;
   float dVar36;
-  double dVar37;
-  double fparam_1_00;
-  double dVar38;
-  double fparam_3;
+  float tileYOffsetF;
+  double absZoomX;
+  double rasterPosYDouble;
+  double absZoomY;
+  double zoomX;
   double f2;
-  double fparam_4;
-  double fparam_3_00;
-  float dVar39;
-  double fparam_2;
-  double dVar40;
+  double zoomYSign;
+  double zoomY;
+  float tileWidth;
+  double destYFraction;
+  double rasterPosXDouble;
   double intToDoubleBias;
   undefined4 incomingStack_fffffd90;
   undefined4 incomingStack_fffffd94;
   undefined4 incomingStack_fffffd98;
   undefined4 incomingStack_fffffd9c;
-  float local_24c;
-  float local_244;
-  float local_23c;
-  float local_234;
-  uint local_22c;
-  uint local_224;
-  undefined1 auStack_210 [240];
-  undefined4 local_120;
-  uint uStack_11c;
-  undefined4 local_118;
-  uint uStack_114;
-  undefined4 local_110;
-  uint uStack_10c;
-  longlong local_108;
-  undefined8 local_100;
-  longlong local_f8;
-  undefined4 local_f0;
-  int local_ec;
-  int local_e8;
-  int local_e4;
-  int *local_e0;
-  int local_dc;
-  int *local_d8;
+  float quadY0;
+  float quadX0;
+  float tileDestY;
+  float tileDestX;
+  uint tileYOffset;
+  uint tileXOffset;
+  undefined1 savedDrawState [240];
+  undefined4 intToDoubleHigh1;
+  uint intToDoubleLow1;
+  undefined4 intToDoubleHigh2;
+  uint intToDoubleLow2;
+  undefined4 intToDoubleHigh3;
+  uint intToDoubleLow3;
+  longlong doubleToIntScratch1;
+  undefined8 doubleToIntScratch2;
+  longlong doubleToIntScratch3;
+  undefined4 savedDrawStateToken;
+  int convertedPixels;
+  int sourcePixels;
+  int glContextPlus10000Copy;
+  int *dirtyFlagWords2;
+  int glContextPlus10000;
+  int *dirtyFlagWords;
   
-  fparam_3_00 = (double)*(float *)(glContext + 0x31ac);
-  local_ec = 0;
+  zoomY = (double)*(float *)(glContext + 0x31ac);
+  convertedPixels = 0;
   doubleZero = (double)FLOAT_00108e50;
-  fparam_3 = (double)*(float *)(glContext + 0x31a8);
-  local_234 = *(float *)(glContext + 0x2e0);
-  dVar40 = (double)local_234;
-  fVar9 = *(float *)(glContext + 0x2e4);
-  fparam_1_00 = (double)fVar9;
+  zoomX = (double)*(float *)(glContext + 0x31a8);
+  tileDestX = *(float *)(glContext + 0x2e0);
+  rasterPosXDouble = (double)tileDestX;
+  rasterPosY = *(float *)(glContext + 0x2e4);
+  rasterPosYDouble = (double)rasterPosY;
   f2 = (double)*(float *)(glContext + 0x2e8);
-  dVar38 = fparam_3_00;
-  if (!((double)doubleZero <= fparam_3_00)) {
-    dVar38 = -fparam_3_00;
+  absZoomY = zoomY;
+  if (!((double)doubleZero <= zoomY)) {
+    absZoomY = -zoomY;
   }
-  dVar37 = fparam_3;
-  if (!((double)doubleZero <= fparam_3)) {
-    dVar37 = -fparam_3;
+  absZoomX = zoomX;
+  if (!((double)doubleZero <= zoomX)) {
+    absZoomX = -zoomX;
   }
-  fVar2 = FLOAT_00108e54;
-  if (fparam_3 < (double)doubleZero) {
-    fVar2 = FLOAT_00108e58;
+  zoomXSignF = FLOAT_00108e54;
+  if (zoomX < (double)doubleZero) {
+    zoomXSignF = FLOAT_00108e58;
   }
-  dVar32 = (double)fVar2;
-  fVar2 = FLOAT_00108e54;
-  if (fparam_3_00 < (double)FLOAT_00108e50) {
-    fVar2 = FLOAT_00108e58;
+  zoomXSign = (double)zoomXSignF;
+  zoomYSignF = FLOAT_00108e54;
+  if (zoomY < (double)FLOAT_00108e50) {
+    zoomYSignF = FLOAT_00108e58;
   }
-  fparam_4 = (double)fVar2;
-  if ((((((fparam_3 == (double)FLOAT_00108e54) && (fparam_3_00 == (double)FLOAT_00108e54)) &&
-        ((int)param_2 < 0x201)) &&
-       ((((int)param_3 < 0x201 && (*(char *)(glContext + 0x30c6) == '\0')) &&
+  zoomYSign = (double)zoomYSignF;
+  if ((((((zoomX == (double)FLOAT_00108e54) && (zoomY == (double)FLOAT_00108e54)) &&
+        ((int)width < 0x201)) &&
+       ((((int)height < 0x201 && (*(char *)(glContext + 0x30c6) == '\0')) &&
         ((*(char *)(glContext + 0x30e4) == '\0' &&
          ((*(char *)(glContext + 0x3128) == '\0' && ((*(uint *)(glContext + 0x3520) & 3) == 0)))))))) &&
       ((*(char *)(glContext + 0x3ce4) == '\0' &&
@@ -3706,30 +3730,30 @@ int _gleDrawPixelsFast(glContext, param_2, param_3, param_4, param_5, param_6)
     return 0;
   }
   loopIndex2 = 0;
-  uVar14 = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xb4);
-  if (uVar14 != 0) {
-    piVar16 = (int *)(glContext + 0x3534);
+  texUnitCount = (uint)*(ushort *)(*(int *)(glContext + 0x468c) + 0xb4);
+  if (texUnitCount != 0) {
+    texUnitStateCursor = (int *)(glContext + 0x3534);
     do {
-      iVar15 = *piVar16;
-      piVar16 = piVar16 + 0x1f;
+      iVar15 = *texUnitStateCursor;
+      texUnitStateCursor = texUnitStateCursor + 0x1f;
       if (iVar15 != 0) {
         return 0;
       }
       loopIndex2 = loopIndex2 + 1;
-    } while (loopIndex2 < uVar14);
+    } while (loopIndex2 < texUnitCount);
   }
-  if (param_4 - 0x1901U < 2) {
+  if (format - 0x1901U < 2) {
     return 0;
   }
-  iVar15 = param_4;
-  iVar20 = param_5;
-  iVar21 = param_6;
-  local_e8 = param_6;
-  iVar18 = ((int (*)())_gleDrawPixelsFastPickTextureType)(param_5);
-  uVar30 = param_2;
-  uVar14 = param_3;
+  iVar15 = format;
+  iVar20 = typeThenTextureType;
+  iVar21 = pixels;
+  sourcePixels = pixels;
+  textureType = ((int (*)())_gleDrawPixelsFastPickTextureType)(typeThenTextureType);
+  imageWidth = width;
+  imageHeight = height;
   if (((*(uint *)(glContext + 0x3410) & 0x1ff) == 0) &&
-     (iVar24 = glContext + 0x31cc, iVar26 = param_4, (*(uint *)(glContext + 0x3414) & 0xff0000) == 0))
+     (transferState = glContext + 0x31cc, sourceFormat = format, (*(uint *)(glContext + 0x3414) & 0xff0000) == 0))
   goto LAB_000ca704;
   if (((*(uint *)(glContext + 0x3410) & 2) == 0) || (*(short *)(glContext + 0x3308) != -0x7fea)) {
     if (((*(uint *)(glContext + 0x3410) & 4) != 0) && (*(short *)(glContext + 0x3348) == -0x7fea)) {
@@ -3742,280 +3766,280 @@ int _gleDrawPixelsFast(glContext, param_2, param_3, param_4, param_5, param_6)
     iVar20 = *(int *)(glContext + 0x3314);
     iVar15 = *(int *)(glContext + 0x3310);
 LAB_000ca634:
-    uVar14 = (param_3 - iVar20) + 1;
-    uVar30 = (param_2 - iVar15) + 1;
+    imageHeight = (height - iVar20) + 1;
+    imageWidth = (width - iVar15) + 1;
   }
-  iVar15 = _glePixelBytes(0x80e1,iVar18);
-  local_ec = _gleVecAlloc(iVar15 * uVar30 * uVar14);
-  iVar15 = _glePixelBytes(0x80e1,iVar18);
-  iVar26 = 0x80e1;
-  iVar24 = 0;
-  ((void (*)())_CopySourceSubImageToTexture)(glContext,param_2,param_3,param_4,param_5,param_6,param_2,param_3,uVar30 * iVar15,0x80e1,
-             iVar18,local_ec,0,0,incomingStack_fffffd90,incomingStack_fffffd94,incomingStack_fffffd98,
+  iVar15 = _glePixelBytes(0x80e1,textureType);
+  convertedPixels = _gleVecAlloc(iVar15 * imageWidth * imageHeight);
+  iVar15 = _glePixelBytes(0x80e1,textureType);
+  sourceFormat = 0x80e1;
+  transferState = 0;
+  ((void (*)())_CopySourceSubImageToTexture)(glContext,width,height,format,typeThenTextureType,pixels,width,height,imageWidth * iVar15,0x80e1,
+             textureType,convertedPixels,0,0,incomingStack_fffffd90,incomingStack_fffffd94,incomingStack_fffffd98,
              incomingStack_fffffd9c,glContext + 0x31cc,1,(double)FLOAT_00108e50,(double)FLOAT_00108e50,
-             (double)dVar32,fparam_4);
-  local_e8 = local_ec;
-  iVar15 = param_4;
-  iVar20 = param_5;
-  iVar21 = param_6;
-  param_5 = iVar18;
+             (double)zoomXSign,zoomYSign);
+  sourcePixels = convertedPixels;
+  iVar15 = format;
+  iVar20 = typeThenTextureType;
+  iVar21 = pixels;
+  typeThenTextureType = textureType;
 LAB_000ca704:
-  puVar28 = (uint *)(glContext + 0x7488);
+  drawPixelsShare = (uint *)(glContext + 0x7488);
   if (*(int *)(glContext + 0x74a0) == 0) {
-    ((void (*)())_gleInitDrawPixelsShareObject)(glContext,puVar28);
+    ((void (*)())_gleInitDrawPixelsShareObject)(glContext,drawPixelsShare);
   }
   loopIndex3 = 0;
-  *(int *)(glContext + 0x7498) = iVar18;
+  *(int *)(glContext + 0x7498) = textureType;
   if (*(int *)(glContext + 0x7490) != 0) {
     do {
-      iVar10 = loopIndex3 * 4;
+      slotOffset = loopIndex3 * 4;
       loopIndex3 = loopIndex3 + 1;
-      *(short *)(*(int *)(iVar10 + *(int *)(glContext + 0x74a0)) + 0xd6) = (short)iVar18;
+      *(short *)(*(int *)(slotOffset + *(int *)(glContext + 0x74a0)) + 0xd6) = (short)textureType;
     } while (loopIndex3 < *(uint *)(glContext + 0x7490));
   }
-  local_f0 = ((int (*)())_gleDrawPixelsSaveState)(glContext,auStack_210);
-  local_224 = 0;
-  dVar39 = (double)FLOAT_00108f18;
-  if ((double)dVar32 == (double)FLOAT_00108e54) {
-    uStack_11c = ((uint (*)())_pixelBoundaryTopRight)(dVar40);
-    uStack_11c = uStack_11c ^ 0x80000000;
-    local_120 = 0x43300000;
-    uVar31 = uStack_11c;
+  savedDrawStateToken = ((int (*)())_gleDrawPixelsSaveState)(glContext,savedDrawState);
+  tileXOffset = 0;
+  tileWidth = (double)FLOAT_00108f18;
+  if ((double)zoomXSign == (double)FLOAT_00108e54) {
+    intToDoubleLow1 = ((uint (*)())_pixelBoundaryTopRight)(rasterPosXDouble);
+    intToDoubleLow1 = intToDoubleLow1 ^ 0x80000000;
+    intToDoubleHigh1 = 0x43300000;
+    boundaryX = intToDoubleLow1;
   }
   else {
-    uStack_114 = ((uint (*)())_pixelBoundaryBottomLeft)(dVar40);
-    uStack_114 = uStack_114 ^ 0x80000000;
-    local_118 = 0x43300000;
-    uVar31 = uStack_114;
+    intToDoubleLow2 = ((uint (*)())_pixelBoundaryBottomLeft)(rasterPosXDouble);
+    intToDoubleLow2 = intToDoubleLow2 ^ 0x80000000;
+    intToDoubleHigh2 = 0x43300000;
+    boundaryX = intToDoubleLow2;
   }
   intToDoubleBias = DOUBLE_00108d58;
-  uVar25 = 0;
-  if (0 < (int)uVar30) {
-    local_dc = glContext + 0x10000;
-    local_d8 = (int *)(glContext + 0x310);
-    local_244 = (float)((double)CONCAT44(0x43300000,uVar31) - DOUBLE_00108d58);
+  tileXCounter = 0;
+  if (0 < (int)imageWidth) {
+    glContextPlus10000 = glContext + 0x10000;
+    dirtyFlagWords = (int *)(glContext + 0x310);
+    quadX0 = (float)((double)CONCAT44(0x43300000,boundaryX) - DOUBLE_00108d58);
     do {
-      uStack_11c = uVar30 ^ 0x80000000;
-      local_118 = 0x43300000;
-      uStack_114 = local_224 ^ 0x80000000;
-      local_120 = 0x43300000;
-      dVar35 = (double)(float)((double)CONCAT44(0x43300000,uStack_114) - intToDoubleBias);
-      fVar2 = (dVar35 + dVar39);
-      if ((float)((double)CONCAT44(0x43300000,uStack_11c) - intToDoubleBias) < fVar2) {
-        local_110 = 0x43300000;
-        uStack_10c = uVar30 - local_224 ^ 0x80000000;
-        dVar39 = (double)(float)((double)CONCAT44(0x43300000,uStack_10c) - intToDoubleBias);
-        fVar2 = (dVar35 + dVar39);
+      intToDoubleLow1 = imageWidth ^ 0x80000000;
+      intToDoubleHigh2 = 0x43300000;
+      intToDoubleLow2 = tileXOffset ^ 0x80000000;
+      intToDoubleHigh1 = 0x43300000;
+      tileXOffsetF = (double)(float)((double)CONCAT44(0x43300000,intToDoubleLow2) - intToDoubleBias);
+      nextTileXOffsetF = (tileXOffsetF + tileWidth);
+      if ((float)((double)CONCAT44(0x43300000,intToDoubleLow1) - intToDoubleBias) < nextTileXOffsetF) {
+        intToDoubleHigh3 = 0x43300000;
+        intToDoubleLow3 = imageWidth - tileXOffset ^ 0x80000000;
+        tileWidth = (double)(float)((double)CONCAT44(0x43300000,intToDoubleLow3) - intToDoubleBias);
+        nextTileXOffsetF = (tileXOffsetF + tileWidth);
       }
-      dVar35 = (double)FLOAT_00108f18;
-      fVar4 = ((float)((double)dVar39 * dVar37) * dVar32 + local_234);
-      uStack_10c = ((int (*)())_pixelCenters)((double)local_234,(double)fVar4,fparam_3);
-      local_110 = 0x43300000;
-      uStack_10c = uStack_10c ^ 0x80000000;
-      local_108 = (longlong)(int)fVar2;
-      local_22c = 0;
-      fVar5 = ((float)((double)CONCAT44(0x43300000,uStack_10c) - intToDoubleBias) * dVar32 + local_244);
-      if (fparam_4 == (double)FLOAT_00108e54) {
-        uVar31 = ((uint (*)())_pixelBoundaryTopRight)(fparam_1_00);
-        uVar31 = uVar31 ^ 0x80000000;
+      tileHeight = (double)FLOAT_00108f18;
+      nextTileDestX = ((float)((double)tileWidth * absZoomX) * zoomXSign + tileDestX);
+      intToDoubleLow3 = ((int (*)())_pixelCenters)((double)tileDestX,(double)nextTileDestX,zoomX);
+      intToDoubleHigh3 = 0x43300000;
+      intToDoubleLow3 = intToDoubleLow3 ^ 0x80000000;
+      doubleToIntScratch1 = (longlong)(int)nextTileXOffsetF;
+      tileYOffset = 0;
+      quadX1 = ((float)((double)CONCAT44(0x43300000,intToDoubleLow3) - intToDoubleBias) * zoomXSign + quadX0);
+      if (zoomYSign == (double)FLOAT_00108e54) {
+        boundaryY = ((uint (*)())_pixelBoundaryTopRight)(rasterPosYDouble);
+        boundaryY = boundaryY ^ 0x80000000;
       }
       else {
-        uStack_114 = ((uint (*)())_pixelBoundaryBottomLeft)(fparam_1_00);
-        local_118 = 0x43300000;
-        uStack_114 = uStack_114 ^ 0x80000000;
-        uVar31 = uStack_114;
+        intToDoubleLow2 = ((uint (*)())_pixelBoundaryBottomLeft)(rasterPosYDouble);
+        intToDoubleHigh2 = 0x43300000;
+        intToDoubleLow2 = intToDoubleLow2 ^ 0x80000000;
+        boundaryY = intToDoubleLow2;
       }
-      dVar12 = DOUBLE_00108d58;
-      uVar27 = 0;
-      if (0 < (int)uVar14) {
-        local_e4 = local_dc;
-        local_e0 = local_d8;
-        local_24c = (float)((double)CONCAT44(0x43300000,uVar31) - intToDoubleBias);
-        local_23c = fVar9;
+      intToDoubleBias2 = DOUBLE_00108d58;
+      tileYCounter = 0;
+      if (0 < (int)imageHeight) {
+        glContextPlus10000Copy = glContextPlus10000;
+        dirtyFlagWords2 = dirtyFlagWords;
+        quadY0 = (float)((double)CONCAT44(0x43300000,boundaryY) - intToDoubleBias);
+        tileDestY = rasterPosY;
         do {
-          uStack_114 = uVar14 ^ 0x80000000;
-          local_110 = 0x43300000;
-          uStack_10c = local_22c ^ 0x80000000;
-          local_118 = 0x43300000;
-          dVar36 = (double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar12);
-          fVar3 = (dVar36 + dVar35);
-          if ((float)((double)CONCAT44(0x43300000,uStack_114) - dVar12) < fVar3) {
-            local_120 = 0x43300000;
-            uStack_11c = uVar14 - local_22c ^ 0x80000000;
-            dVar35 = (double)(float)((double)CONCAT44(0x43300000,uStack_11c) - dVar12);
-            fVar3 = (dVar36 + dVar35);
+          intToDoubleLow2 = imageHeight ^ 0x80000000;
+          intToDoubleHigh3 = 0x43300000;
+          intToDoubleLow3 = tileYOffset ^ 0x80000000;
+          intToDoubleHigh2 = 0x43300000;
+          tileYOffsetF = (double)(float)((double)CONCAT44(0x43300000,intToDoubleLow3) - intToDoubleBias2);
+          nextTileYOffsetF = (tileYOffsetF + tileHeight);
+          if ((float)((double)CONCAT44(0x43300000,intToDoubleLow2) - intToDoubleBias2) < nextTileYOffsetF) {
+            intToDoubleHigh1 = 0x43300000;
+            intToDoubleLow1 = imageHeight - tileYOffset ^ 0x80000000;
+            tileHeight = (double)(float)((double)CONCAT44(0x43300000,intToDoubleLow1) - intToDoubleBias2);
+            nextTileYOffsetF = (tileYOffsetF + tileHeight);
           }
-          dVar36 = (double)(float)((double)dVar35 * dVar38);
-          fVar6 = (float)((double)dVar36 * fparam_4 + (double)local_23c);
-          uStack_10c = ((int (*)())_pixelCenters)((double)local_23c,(double)fVar6,fparam_3_00);
-          iVar10 = local_e4;
-          local_110 = 0x43300000;
-          uStack_10c = uStack_10c ^ 0x80000000;
-          local_108 = (longlong)(int)fVar3;
-          fVar7 = (float)((double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar12) *
-                          fparam_4 + (double)local_24c);
-          if (!((double)dVar39 < (double)FLOAT_00108e54)) {
+          dVar36 = (double)(float)((double)tileHeight * absZoomY);
+          nextTileDestY = (float)((double)dVar36 * zoomYSign + (double)tileDestY);
+          intToDoubleLow3 = ((int (*)())_pixelCenters)((double)tileDestY,(double)nextTileDestY,zoomY);
+          glContextPlus10000Copy2 = glContextPlus10000Copy;
+          intToDoubleHigh3 = 0x43300000;
+          intToDoubleLow3 = intToDoubleLow3 ^ 0x80000000;
+          doubleToIntScratch1 = (longlong)(int)nextTileYOffsetF;
+          quadY1 = (float)((double)(float)((double)CONCAT44(0x43300000,intToDoubleLow3) - intToDoubleBias2) *
+                          zoomYSign + (double)quadY0);
+          if (!((double)tileWidth < (double)FLOAT_00108e54)) {
             dVar34 = (double)dVar36;
-            if ((double)dVar35 < (double)dVar36) {
-              dVar34 = (double)dVar35;
+            if ((double)tileHeight < (double)dVar36) {
+              dVar34 = (double)tileHeight;
             }
             if (!(dVar34 < (double)FLOAT_00108e54)) {
               loopIndex3 = 0;
-              if (*(char *)(local_e4 + -0x7a5c) != '\0') {
-                iVar29 = glContext + 0x10000;
+              if (*(char *)(glContextPlus10000Copy + -0x7a5c) != '\0') {
+                glContextPlus10000Copy3 = glContext + 0x10000;
                 do {
-                  iVar11 = loopIndex3 * 4;
-                  piVar16 = (int *)(iVar29 + -0x777c);
+                  slotOffset2 = loopIndex3 * 4;
+                  piVar16 = (int *)(glContextPlus10000Copy3 + -0x777c);
                   loopIndex3 = loopIndex3 + 1;
-                  puVar22 = (undefined4 *)(iVar29 + -0x7a54);
-                  iVar29 = iVar29 + 0x2e0;
+                  puVar22 = (undefined4 *)(glContextPlus10000Copy3 + -0x7a54);
+                  glContextPlus10000Copy3 = glContextPlus10000Copy3 + 0x2e0;
                   (**(code **)(*piVar16 + 0x1c4))
                             (*puVar22,1,
                              *(undefined4 *)
-                              (*(int *)(*puVar28 * 4 + *(int *)(glContext + 0x74a0)) + iVar11),iVar15,
+                              (*(int *)(*drawPixelsShare * 4 + *(int *)(glContext + 0x74a0)) + slotOffset2),iVar15,
                              iVar20,iVar21,*(int *)(glContext + 0x74a0));
-                } while (loopIndex3 < *(byte *)(iVar10 + -0x7a5c));
+                } while (loopIndex3 < *(byte *)(glContextPlus10000Copy2 + -0x7a5c));
               }
-              local_110 = 0x43300000;
-              local_108 = (longlong)(int)local_23c;
-              uStack_10c = (int)local_23c ^ 0x80000000;
-              fparam_2 = (double)(local_23c -
-                                 (float)((double)CONCAT44(0x43300000,uStack_10c) - dVar12));
-              uStack_10c = _glePixelBytes(0x80e1,iVar18);
-              uStack_10c = uStack_10c ^ 0x80000000;
-              local_110 = 0x43300000;
-              dVar34 = (double)dVar39 * (double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar12);
-              dVar33 = (double)(float)dVar34;
-              if (DOUBLE_00108d80 <= dVar33) {
-                uVar31 = (uint)(int)(dVar33 - DOUBLE_00108d80);
-                local_100 = (longlong)(int)uVar31;
-                uVar31 = uVar31 ^ 0x80000000;
+              intToDoubleHigh3 = 0x43300000;
+              doubleToIntScratch1 = (longlong)(int)tileDestY;
+              intToDoubleLow3 = (int)tileDestY ^ 0x80000000;
+              destYFraction = (double)(tileDestY -
+                                 (float)((double)CONCAT44(0x43300000,intToDoubleLow3) - intToDoubleBias2));
+              intToDoubleLow3 = _glePixelBytes(0x80e1,textureType);
+              intToDoubleLow3 = intToDoubleLow3 ^ 0x80000000;
+              intToDoubleHigh3 = 0x43300000;
+              dVar34 = (double)tileWidth * (double)(float)((double)CONCAT44(0x43300000,intToDoubleLow3) - intToDoubleBias2);
+              tileRowBytesD = (double)(float)dVar34;
+              if (DOUBLE_00108d80 <= tileRowBytesD) {
+                tileRowBytes = (uint)(int)(tileRowBytesD - DOUBLE_00108d80);
+                doubleToIntScratch2 = (longlong)(int)tileRowBytes;
+                tileRowBytes = tileRowBytes ^ 0x80000000;
               }
               else {
-                uVar31 = (uint)(int)dVar34;
-                local_108 = (longlong)(int)uVar31;
+                tileRowBytes = (uint)(int)dVar34;
+                doubleToIntScratch1 = (longlong)(int)tileRowBytes;
               }
-              iVar15 = (int)(double)dVar35;
-              local_f8 = (longlong)iVar15;
-              dVar34 = (double)dVar32;
-              dVar33 = fparam_4;
-              ((void (*)())_CopySourceSubImageToTexture)(glContext,uVar30,uVar14,iVar26,param_5,local_e8,(int)(double)dVar39,iVar15,uVar31,
-                         0x80e1,iVar18,
+              tileHeightInt = (int)(double)tileHeight;
+              doubleToIntScratch3 = (longlong)tileHeightInt;
+              dVar34 = (double)zoomXSign;
+              dVar33 = zoomYSign;
+              ((void (*)())_CopySourceSubImageToTexture)(glContext,imageWidth,imageHeight,sourceFormat,typeThenTextureType,sourcePixels,(int)(double)tileWidth,tileHeightInt,tileRowBytes,
+                         0x80e1,textureType,
                          *(int *)(0x74a4 + glContext) +
-                         *puVar28 * *(int *)(glContext + 0x748c),local_224,local_22c,incomingStack_fffffd90
-                         ,incomingStack_fffffd94,incomingStack_fffffd98,incomingStack_fffffd9c,iVar24,0,
-                         (double)(local_234 -
-                                 (float)((double)CONCAT44(0x43300000,(int)local_234 ^ 0x80000000) -
-                                        dVar12)),fparam_2,(double)dVar32,fparam_4);
-              iVar20 = *(int *)(*puVar28 * 4 + *(int *)(glContext + 0x74a0));
-              piVar16 = (int *)(iVar20 + 0xc4);
-              _gleDeletePluginTextureLevel(glContext,iVar20,piVar16,0,0);
-              *(short *)(iVar20 + 0xd0) = (short)(int)(double)dVar39;
-              if ((double)dVar35 < (double)dVar36) {
-                uVar23 = (short)iVar15;
+                         *drawPixelsShare * *(int *)(glContext + 0x748c),tileXOffset,tileYOffset,incomingStack_fffffd90
+                         ,incomingStack_fffffd94,incomingStack_fffffd98,incomingStack_fffffd9c,transferState,0,
+                         (double)(tileDestX -
+                                 (float)((double)CONCAT44(0x43300000,(int)tileDestX ^ 0x80000000) -
+                                        intToDoubleBias2)),destYFraction,(double)zoomXSign,zoomYSign);
+              drawTexture = *(int *)(*drawPixelsShare * 4 + *(int *)(glContext + 0x74a0));
+              textureLevel = (int *)(drawTexture + 0xc4);
+              _gleDeletePluginTextureLevel(glContext,drawTexture,textureLevel,0,0);
+              *(short *)(drawTexture + 0xd0) = (short)(int)(double)tileWidth;
+              if ((double)tileHeight < (double)dVar36) {
+                levelHeight = (short)tileHeightInt;
               }
               else {
-                iVar15 = (int)((double)dVar35 * dVar38);
-                (*(unsigned short *)((unsigned char *)&(local_100) + 6)) = (undefined2)iVar15;
-                uVar23 = (*(unsigned short *)((unsigned char *)&(local_100) + 6));
-                local_100 = (longlong)iVar15;
+                tileQuadHeightInt = (int)((double)tileHeight * absZoomY);
+                (*(unsigned short *)((unsigned char *)&(doubleToIntScratch2) + 6)) = (undefined2)tileQuadHeightInt;
+                levelHeight = (*(unsigned short *)((unsigned char *)&(doubleToIntScratch2) + 6));
+                doubleToIntScratch2 = (longlong)tileQuadHeightInt;
               }
-              *(undefined2 *)(iVar20 + 0xd2) = uVar23;
-              *(undefined2 *)(iVar20 + 200) = *(undefined2 *)(iVar20 + 0xd0);
-              *(undefined2 *)(iVar20 + 0xca) = *(undefined2 *)(iVar20 + 0xd2);
-              uVar19 = 0x8058;
-              if (iVar18 != 0x8367) {
-                uVar19 = 0x8057;
+              *(undefined2 *)(drawTexture + 0xd2) = levelHeight;
+              *(undefined2 *)(drawTexture + 200) = *(undefined2 *)(drawTexture + 0xd0);
+              *(undefined2 *)(drawTexture + 0xca) = *(undefined2 *)(drawTexture + 0xd2);
+              textureInternalFormat = 0x8058;
+              if (textureType != 0x8367) {
+                textureInternalFormat = 0x8057;
               }
               iVar15 = 0;
               iVar20 = 0;
-              fparam_1 = (double)_gleCreatePluginTextureLevel
+              forwardedFpr1 = (double)_gleCreatePluginTextureLevel
                                            (glContext,*(undefined4 *)
-                                                     (*puVar28 * 4 + *(int *)(glContext + 0x74a0)),
-                                            piVar16,0,0,uVar19);
+                                                     (*drawPixelsShare * 4 + *(int *)(glContext + 0x74a0)),
+                                            textureLevel,0,0,textureInternalFormat);
               loopIndex3 = 0;
-              if (*(char *)(iVar10 + -0x7a5c) != '\0') {
+              if (*(char *)(glContextPlus10000Copy2 + -0x7a5c) != '\0') {
                 puVar22 = (undefined4 *)(glContext + 0x86e8);
                 do {
-                  iVar21 = loopIndex3 * 4;
+                  slotOffset3 = loopIndex3 * 4;
                   loopIndex3 = loopIndex3 + 1;
                   *puVar22 = *(undefined4 *)
-                              (*(int *)(*puVar28 * 4 + *(int *)(glContext + 0x74a0)) + iVar21);
+                              (*(int *)(*drawPixelsShare * 4 + *(int *)(glContext + 0x74a0)) + slotOffset3);
                   puVar22 = puVar22 + 0xb8;
-                } while (loopIndex3 < *(byte *)(iVar10 + -0x7a5c));
+                } while (loopIndex3 < *(byte *)(glContextPlus10000Copy2 + -0x7a5c));
               }
               matrixFuncDirty = *(int *)(glContext + 0x50ac);
               *(uint *)(glContext + 0x314) = *(uint *)(glContext + 0x314) | 1;
               if (matrixFuncDirty != 0 || (*(uint *)(glContext + 0x505c) & *(uint *)(glContext + 0x50b0)) != 0) {
                 _gleUpdateMatrixFunc(glContext);
-                fparam_1 = f1AfterCall;
+                forwardedFpr1 = f1AfterCall;
               }
-              piVar13 = local_e0;
+              dirtyFlagWords3 = dirtyFlagWords2;
               if (*(char *)(glContext + 0x4691) != '\0') {
                 iVar29 = *(int *)(glContext + 0x744c);
                 cVar8 = *(char *)(*(int *)(glContext + 0x468c) + 0x79);
                 if ((iVar29 != 0) && (*(int *)(iVar29 + 0xec) != 0)) {
-                  ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar29 + 0x10,piVar16,iVar15,iVar20,uVar19,matrixFuncDirty,fparam_1,
-                             fparam_2,dVar34,dVar33,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+                  ((void (*)())_gleUpdateFramebufferCompleteness)(glContext,iVar29 + 0x10,textureLevel,iVar15,iVar20,textureInternalFormat,matrixFuncDirty,forwardedFpr1,
+                             destYFraction,dVar34,dVar33,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
                   *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x80000000;
-                  fparam_1 = fparam_1;
+                  forwardedFpr1 = forwardedFpr1;
                 }
                 if ((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5430) == 0)) {
 LAB_000cae0c:
-                  uVar31 = piVar13[3];
+                  dirtyWord3ThenMasked = dirtyFlagWords3[3];
                 }
                 else {
                   loopIndex = 0;
-                  piVar17 = piVar13 + 5;
+                  dirtyFlagWordsCursor = dirtyFlagWords3 + 5;
                   do {
-                    iVar29 = *piVar17;
-                    piVar17 = piVar17 + 1;
-                    if (iVar29 != 0) {
-                      piVar13[3] = piVar13[3] | 0x800000;
+                    dirtyWordValue = *dirtyFlagWordsCursor;
+                    dirtyFlagWordsCursor = dirtyFlagWordsCursor + 1;
+                    if (dirtyWordValue != 0) {
+                      dirtyFlagWords3[3] = dirtyFlagWords3[3] | 0x800000;
                       break;
                     }
                     loopIndex = loopIndex + 1;
                   } while (loopIndex < 9);
-                  uVar31 = piVar13[3];
-                  if ((uVar31 & 0x15555) != 0) {
+                  dirtyWord3ThenMasked = dirtyFlagWords3[3];
+                  if ((dirtyWord3ThenMasked & 0x15555) != 0) {
                     if (*(char *)(glContext + 0x2e54) != '\0') {
-                      piVar16 = (int *)0x0;
-                      fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
+                      textureLevel = (int *)0x0;
+                      forwardedFpr1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2c20,0);
                     }
                     if (*(char *)(glContext + 0x3094) != '\0') {
-                      piVar16 = (int *)((int)((unsigned char *)0x0) + 1);
-                      fparam_1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
+                      textureLevel = (int *)((int)((unsigned char *)0x0) + 1);
+                      forwardedFpr1 = (double)_gleUpdateLightRGBASums(glContext,glContext + 0x2e60,1);
                     }
                     goto LAB_000cae0c;
                   }
                 }
                 bVar1 = cVar8 == '\0';
                 if (bVar1) {
-                  uVar31 = uVar31 & 0x17000000;
+                  dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17000000;
                 }
                 else {
-                  uVar31 = uVar31 & 0x17ffffff;
+                  dirtyWord3ThenMasked = dirtyWord3ThenMasked & 0x17ffffff;
                 }
                 if (bVar1) {
-                  bVar1 = ((*piVar13 == 0 && piVar13[1] == 0) && uVar31 == 0) && piVar13[4] == 0;
+                  bVar1 = ((*dirtyFlagWords3 == 0 && dirtyFlagWords3[1] == 0) && dirtyWord3ThenMasked == 0) && dirtyFlagWords3[4] == 0;
                 }
                 else {
-                  bVar1 = (((*piVar13 == 0 && piVar13[1] == 0) && (piVar13[2] & 0xfffffffdU) == 0)
-                          && uVar31 == 0) && piVar13[4] == 0;
+                  bVar1 = (((*dirtyFlagWords3 == 0 && dirtyFlagWords3[1] == 0) && (dirtyFlagWords3[2] & 0xfffffffdU) == 0)
+                          && dirtyWord3ThenMasked == 0) && dirtyFlagWords3[4] == 0;
                 }
                 if (!bVar1) {
-                  if (*(char *)(iVar10 + -0x7a58) == *(char *)(iVar10 + -0x7a5a)) {
+                  if (*(char *)(glContextPlus10000Copy2 + -0x7a58) == *(char *)(glContextPlus10000Copy2 + -0x7a5a)) {
                     dispatchFlags = (**(code **)(glContext + 0x4788))
-                                       (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,piVar13);
+                                       (*(undefined4 *)(glContext + 0x4688),glContext + 0x4698,dirtyFlagWords3);
                     if ((((dispatchFlags & 3) != (uint)*(byte *)(glContext + 0x7580)) ||
                         ((dispatchFlags & 4) != (uint)*(byte *)(glContext + 0x7581))) ||
-                       (fparam_1 = f1AfterCall2,
+                       (forwardedFpr1 = f1AfterCall2,
                        (dispatchFlags & 8) != (uint)(*(char *)(glContext + 0x759d) == '\0'))) {
                       if ((dispatchFlags & 4) == 0) {
                         dispatchFlags = dispatchFlags & 0xfffffffe;
-                        piVar13[3] = piVar13[3] | 0x10000000;
+                        dirtyFlagWords3[3] = dirtyFlagWords3[3] | 0x10000000;
                       }
-                      fparam_1 = (double)((double (*)())_gleUpdateDispatchCodeChange)(glContext,dispatchFlags);
+                      forwardedFpr1 = (double)((double (*)())_gleUpdateDispatchCodeChange)(glContext,dispatchFlags);
                       if (*(char *)(glContext + 0x759d) == '\0') {
                         if (*(int *)(glContext + 0x7574) != 0) {
                           return 1;
@@ -4026,82 +4050,82 @@ LAB_000cae0c:
                     }
                   }
                   else {
-                    fparam_1 = (double)((double (*)())_gleSwitchToNonRevertRenderer)(glContext);
+                    forwardedFpr1 = (double)((double (*)())_gleSwitchToNonRevertRenderer)(glContext);
                   }
                   remaining = 0x13;
-                  piVar16 = piVar13;
+                  textureLevel = dirtyFlagWords3;
                   do {
-                    *piVar16 = 0;
-                    piVar16 = piVar16 + 1;
+                    *textureLevel = 0;
+                    textureLevel = textureLevel + 1;
                     remaining = remaining + -1;
                   } while (remaining != 0);
                 }
               }
-              ((void (*)())_glBegin_Exec)(glContext,7,fparam_1,fparam_2,dVar34,dVar33,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
+              ((void (*)())_glBegin_Exec)(glContext,7,forwardedFpr1,destYFraction,dVar34,dVar33,incomingFpr5,incomingFpr6,incomingFpr7,incomingFpr8);
               *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
               *(float *)(glContext + 300) = *(float *)(glContext + 0x24);
               *(undefined4 *)(glContext + 0x120) = 0;
               *(undefined4 *)(glContext + 0x124) = 0;
               (**(code **)(glContext + 0x4884))
-                        (glContext,a1,piVar16,iVar15,iVar20,*(undefined4 *)(glContext + 0x4858),
-                         (double)local_244,(double)local_24c,f2,(double)*(float *)(glContext + 0x24));
-              *(float *)(glContext + 0x120) = (float)(double)dVar39;
+                        (glContext,a1,textureLevel,iVar15,iVar20,*(undefined4 *)(glContext + 0x4858),
+                         (double)quadX0,(double)quadY0,f2,(double)*(float *)(glContext + 0x24));
+              *(float *)(glContext + 0x120) = (float)(double)tileWidth;
               *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
               *(undefined4 *)(glContext + 0x124) = 0;
               *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
               (**(code **)(glContext + 0x4884))
-                        (glContext,a1_00,piVar16,iVar15,iVar20,*(undefined4 *)(glContext + 0x4858),
-                         (double)fVar5,(double)local_24c,f2);
-              *(float *)(glContext + 0x120) = (float)(double)dVar39;
+                        (glContext,a1_00,textureLevel,iVar15,iVar20,*(undefined4 *)(glContext + 0x4858),
+                         (double)quadX1,(double)quadY0,f2);
+              *(float *)(glContext + 0x120) = (float)(double)tileWidth;
               dVar34 = (double)dVar36;
-              if ((double)dVar35 < (double)dVar36) {
-                dVar34 = (double)dVar35;
+              if ((double)tileHeight < (double)dVar36) {
+                dVar34 = (double)tileHeight;
               }
               *(float *)(glContext + 0x124) = (float)dVar34;
               *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
               *(undefined4 *)(glContext + 300) = *(undefined4 *)(glContext + 0x24);
               (**(code **)(glContext + 0x4884))
-                        (glContext,a1_01,piVar16,iVar15,iVar20,*(undefined4 *)(glContext + 0x4858),
-                         (double)fVar5,(double)fVar7,f2);
+                        (glContext,a1_01,textureLevel,iVar15,iVar20,*(undefined4 *)(glContext + 0x4858),
+                         (double)quadX1,(double)quadY1,f2);
               *(undefined4 *)(glContext + 0x120) = 0;
-              if ((double)dVar35 < (double)dVar36) {
-                dVar36 = (double)dVar35;
+              if ((double)tileHeight < (double)dVar36) {
+                dVar36 = (double)tileHeight;
               }
               *(float *)(glContext + 0x124) = (float)(double)dVar36;
               *(undefined4 *)(glContext + 0x128) = *(undefined4 *)(glContext + 0x20);
               *(float *)(glContext + 300) = *(float *)(glContext + 0x24);
               iVar21 = *(int *)(glContext + 0x4858);
               (**(code **)(glContext + 0x4884))
-                        (glContext,a1_02,piVar16,iVar15,iVar20,iVar21,(double)local_244,(double)fVar7,
+                        (glContext,a1_02,textureLevel,iVar15,iVar20,iVar21,(double)quadX0,(double)quadY1,
                          f2,(double)*(float *)(glContext + 0x24));
               _glEnd_Exec(glContext);
-              uVar31 = *puVar28;
-              *puVar28 = uVar31 + 1;
-              if (*(uint *)(glContext + 0x7490) <= uVar31 + 1) {
-                *puVar28 = 0;
+              slotIndex = *drawPixelsShare;
+              *drawPixelsShare = slotIndex + 1;
+              if (*(uint *)(glContext + 0x7490) <= slotIndex + 1) {
+                *drawPixelsShare = 0;
               }
             }
           }
-          uVar27 = (uint)(int)((double)(float)((double)CONCAT44(0x43300000,uVar27 ^ 0x80000000) - dVar12)
-                         + (double)dVar35);
-          local_f8 = (longlong)(int)uVar27;
-          local_24c = fVar7;
-          local_23c = fVar6;
-          local_22c = (int)fVar3;
-        } while ((int)uVar27 < (int)uVar14);
+          tileYCounter = (uint)(int)((double)(float)((double)CONCAT44(0x43300000,tileYCounter ^ 0x80000000) - intToDoubleBias2)
+                         + (double)tileHeight);
+          doubleToIntScratch3 = (longlong)(int)tileYCounter;
+          quadY0 = quadY1;
+          tileDestY = nextTileDestY;
+          tileYOffset = (int)nextTileYOffsetF;
+        } while ((int)tileYCounter < (int)imageHeight);
       }
-      uStack_10c = uVar25 ^ 0x80000000;
-      local_110 = 0x43300000;
-      uVar25 = (uint)(int)((double)(float)((double)CONCAT44(0x43300000,uStack_10c) - intToDoubleBias) + (double)dVar39);
-      local_f8 = (longlong)(int)uVar25;
-      local_244 = fVar5;
-      local_234 = fVar4;
-      local_224 = (int)fVar2;
-    } while ((int)uVar25 < (int)uVar30);
+      intToDoubleLow3 = tileXCounter ^ 0x80000000;
+      intToDoubleHigh3 = 0x43300000;
+      tileXCounter = (uint)(int)((double)(float)((double)CONCAT44(0x43300000,intToDoubleLow3) - intToDoubleBias) + (double)tileWidth);
+      doubleToIntScratch3 = (longlong)(int)tileXCounter;
+      quadX0 = quadX1;
+      tileDestX = nextTileDestX;
+      tileXOffset = (int)nextTileXOffsetF;
+    } while ((int)tileXCounter < (int)imageWidth);
   }
-  ((void (*)())_gleDrawPixelsRestoreState)(glContext,auStack_210,local_f0);
-  if (local_ec != 0) {
-    _gleVecFree(local_ec);
+  ((void (*)())_gleDrawPixelsRestoreState)(glContext,savedDrawState,savedDrawStateToken);
+  if (convertedPixels != 0) {
+    _gleVecFree(convertedPixels);
   }
   return 1;
 }

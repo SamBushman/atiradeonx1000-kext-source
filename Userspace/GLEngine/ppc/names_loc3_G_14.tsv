@@ -1,0 +1,4 @@
+local	_gleUpdatePrimitiveData	puVar1	stagedFuncPtr1	INFERRED	staging pointer for the next entry of the glBegin dispatch table (ctx+0x49e0..0x4a04): loaded from a PTR_ import slot (_gleBegin*/_gleVPBegin* routine) one step before it is stored; 27 webs with different targets, joined
+local	_gleUpdatePrimitiveData	puVar2	stagedFuncPtr2	INFERRED	second staging pointer for glBegin dispatch table entries (see stagedFuncPtr1); also the value stored to every entry when the 0x48d0 fallback applies
+local	_gleUpdatePrimitiveData	puVar3	stagedFuncPtr3	INFERRED	third staging pointer for dispatch table entries, also the glEnd entry (_glEnd_Exec/_glEnd_Comp/_glEnd_CompExec/_glEndNoMat_Exec) stored at dispatchTable+0x128; 38 webs with different targets, joined
+local	_gleUpdatePrimitiveData	uVar4	dispatchTable	CONFIRMED	the dispatch table object selected between ctx+0x4680 and ctx+0x4684 by (table4684[+0x128] == 0): its +0x128 slot receives the glEnd entry point

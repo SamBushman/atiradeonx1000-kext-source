@@ -1,0 +1,18 @@
+local	_gliCreateContext	param_1	contextOut	CONFIRMED	receives the new context (set to 0 first, to glContext on success); NULL returns 0x271e
+local	_gliCreateContext	param_2	rendererList	CONFIRMED	linked list of renderer descriptors (next in word 0, plugin id in word 1, flags in word 2); NULL means the default plugin 0x400
+local	_gliCreateContext	param_3	shareContext	CONFIRMED	existing context to share state with (checked for the 0x3463a223 magic at +0x467c and the same renderer count); NULL creates new shared state
+local	_gliCreateContext	param_4	dispatchTable4680	INFERRED	stored unchanged at glContext+0x4680
+local	_gliCreateContext	param_5	dispatchTable4684	INFERRED	stored unchanged at glContext+0x4684
+local	_gliCreateContext	param_6	createFlags	INFERRED	bit 0 requests an extra default-plugin entry (index recorded at +0x85a5) when no listed renderer is flagged 0x400/0x500
+local	_gliCreateContext	puVar1	rendererContextPtr	INFERRED	iVar4 - 0x7a54: the renderer's context word passed to its +0x130 callback during cleanup
+local	_gliCreateContext	bVar2	flagOrAllPluginsLoaded	INFERRED	first (createFlags & 1) with a software entry present, deciding to append a default renderer; then loopIndex3 == rendererCount (every plugin found)
+local	_gliCreateContext	bVar3	flagOrNoShareContext	INFERRED	first true when a listed renderer lacks flag 0x40; then shareContext == NULL
+local	_gliCreateContext	iVar4	rendererRecord	INFERRED	address inside the context's renderer array: glContext + index*0x2e0 + offset, used to store the plugin and for the +0x130 cleanup callbacks
+local	_gliCreateContext	iVar7	pluginOrOffsetOrReleaseResult	INFERRED	_glepGetPlugin result, then the renderer array byte offset index*0x2e0, then the _gleReleaseSharedState result
+local	_gliCreateContext	iVar9	sharedStateOrResult	INFERRED	the shared state pointer at ctx+0x5148, and the renderer create callback's result (nonzero: failure) used as the return value after cleanup
+local	_gliCreateContext	iVar10	rendererCursorOrIndex	INFERRED	glContext + 0x85ac advanced 0x2e0 per renderer while zeroing records, then the renderer index of the init loop
+local	_gliCreateContext	uVar8	sharedStateOrShareArg	INFERRED	_gleCreateSharedState/_gleShareSharedState result stored at ctx+0x5148, then the shared context's renderer word (or 0) passed to the renderer create callback
+local	_gliCreateContext	uVar11	entryIndex	CONFIRMED	number of renderer entries seen before the current one (uVar13 before incrementing): the index of a 0x400/0x500 default entry
+local	_gliCreateContext	uVar12	defaultIndexOrPluginFlags	INFERRED	index of the default entry (0xff = none) stored at +0x85a5, later the plugin id word (piVar14[1] masked) stored at renderer +0x8888
+local	_gliCreateContext	uVar13	rendererCountOrPluginId	INFERRED	number of renderer entries (stored at +0x85a4, limit 8), after being used as a temporary for the plugin id bits (word1 & 0xff00)
+local	_gliCreateContext	piVar14	listEntryOrRendererDispatch	INFERRED	the renderer descriptor list cursor, and in the cleanup loops the renderer dispatch object (iVar4 - 0x777c) whose +0x130 slot is called

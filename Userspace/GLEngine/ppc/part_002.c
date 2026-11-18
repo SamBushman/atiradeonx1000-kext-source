@@ -174,41 +174,53 @@ void _glTexEnvfv_Exec(glContext, target, pname, params)
   double twoPow31;
   int remaining2;
   int remaining;
-  bool bVar1;
-  byte bVar2;
-  float fVar3;
-  float fVar4;
+  bool matchesAllowedEnum;
+  byte dirtyBitIndex;
+  float envColorR;
+  float envColorA;
+  float envColorB;
+  float envColorG;
+  float paramFloat;
+  float alphaScale;
+  float rgbScale;
   float floatOne;
   undefined4 glErrorCode;
-  int iVar7;
+  int texUnitState;
+  int paramInt;
+  int dirtyWordAt348;
+  int unitDirtyBit;
   int glContextWord5424;
   float *cursor;
   undefined2 *dstCursor;
-  uint uVar10;
-  int iVar11;
-  code *pcVar12;
-  uint uVar13;
-  double dVar14;
-  double dVar15;
+  uint paramValueInt;
+  uint unitDirtyWord;
+  int shaderOpError;
+  int dirtyWordAt324;
+  code *texEnvMode;
+  code *combineAlpha;
+  code *combineRgb;
+  uint texUnit;
+  double validateParamAsDouble;
+  double paramAsDouble;
   
   floatOne = FLOAT_00108e54;
   floatZero = FLOAT_00108e50;
   twoPow31B = DOUBLE_00108d80;
-  uVar13 = *(uint *)(glContext + 0x53d4);
+  texUnit = *(uint *)(glContext + 0x53d4);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x86de) {
-      iVar7 = glContext + uVar13 * 0x7c;
+      texUnitState = glContext + texUnit * 0x7c;
       switch(pname) {
       case 0x86d9:
-        dVar15 = (double)*params;
-        if (DOUBLE_00108d80 <= dVar15) {
-          uVar10 = (int)(dVar15 - DOUBLE_00108d80) ^ 0x80000000;
+        paramAsDouble = (double)*params;
+        if (DOUBLE_00108d80 <= paramAsDouble) {
+          paramValueInt = (int)(paramAsDouble - DOUBLE_00108d80) ^ 0x80000000;
         }
         else {
-          uVar10 = (uint)(int)*params;
+          paramValueInt = (uint)(int)*params;
         }
-        if ((uVar10 != 0x8536) && (uVar10 != 0x8538)) goto switchD_00016744_caseD_86da;
-        *(short *)(iVar7 + 0x356c) = (short)uVar10;
+        if ((paramValueInt != 0x8536) && (paramValueInt != 0x8538)) goto switchD_00016744_caseD_86da;
+        *(short *)(texUnitState + 0x356c) = (short)paramValueInt;
         break;
       default:
 switchD_00016744_caseD_86da:
@@ -218,105 +230,105 @@ switchD_00016744_caseD_86da:
         glErrorCode = 0x500;
         goto LAB_0001736c;
       case 0x86df:
-        dVar15 = (double)*params;
-        if (DOUBLE_00108d80 <= dVar15) {
-          uVar10 = (int)(dVar15 - DOUBLE_00108d80) ^ 0x80000000;
+        paramAsDouble = (double)*params;
+        if (DOUBLE_00108d80 <= paramAsDouble) {
+          paramValueInt = (int)(paramAsDouble - DOUBLE_00108d80) ^ 0x80000000;
         }
         else {
-          uVar10 = (uint)(int)*params;
+          paramValueInt = (uint)(int)*params;
         }
-        iVar11 = _CheckNVShaderOperation(glContext,uVar10);
-        if (iVar11 != 0) {
+        shaderOpError = _CheckNVShaderOperation(glContext,paramValueInt);
+        if (shaderOpError != 0) {
           if (*(int *)(glContext + 0x7574) != 0) {
             return;
           }
-          *(int *)(glContext + 0x7574) = iVar11;
+          *(int *)(glContext + 0x7574) = shaderOpError;
           return;
         }
-        *(short *)(iVar7 + 0x3564) = (short)uVar10;
-        _gleUpdateTextureParams(glContext,uVar13);
+        *(short *)(texUnitState + 0x3564) = (short)paramValueInt;
+        _gleUpdateTextureParams(glContext,texUnit);
         break;
       case 0x86e0:
         remaining = 4;
         cursor = params;
         do {
-          fVar4 = *cursor;
-          dVar14 = (double)fVar4;
+          paramFloat = *cursor;
+          validateParamAsDouble = (double)paramFloat;
           cursor = cursor + 1;
-          if (twoPow31B <= dVar14) {
-            uVar10 = (int)(dVar14 - twoPow31B) ^ 0x80000000;
+          if (twoPow31B <= validateParamAsDouble) {
+            paramValueInt = (int)(validateParamAsDouble - twoPow31B) ^ 0x80000000;
           }
           else {
-            uVar10 = (uint)(int)fVar4;
+            paramValueInt = (uint)(int)paramFloat;
           }
-          if (((uVar10 != 0x201) && (uVar10 != 0x206)) && (*(int *)(glContext + 0x7574) == 0)) {
+          if (((paramValueInt != 0x201) && (paramValueInt != 0x206)) && (*(int *)(glContext + 0x7574) == 0)) {
             *(undefined4 *)(glContext + 0x7574) = 0x500;
           }
           twoPow31 = DOUBLE_00108d80;
           remaining = remaining + -1;
         } while (remaining != 0);
         remaining2 = 4;
-        dstCursor = (undefined2 *)(iVar7 + 0x3570);
+        dstCursor = (undefined2 *)(texUnitState + 0x3570);
         do {
-          fVar4 = *params;
-          dVar15 = (double)fVar4;
+          paramFloat = *params;
+          paramAsDouble = (double)paramFloat;
           params = params + 1;
-          if (twoPow31 <= dVar15) {
-            uVar10 = (int)(dVar15 - twoPow31) ^ 0x80000000;
+          if (twoPow31 <= paramAsDouble) {
+            paramValueInt = (int)(paramAsDouble - twoPow31) ^ 0x80000000;
           }
           else {
-            uVar10 = (uint)(int)fVar4;
+            paramValueInt = (uint)(int)paramFloat;
           }
-          if ((uVar10 == 0x201) || (uVar10 == 0x206)) {
-            *dstCursor = (short)uVar10;
+          if ((paramValueInt == 0x201) || (paramValueInt == 0x206)) {
+            *dstCursor = (short)paramValueInt;
           }
           dstCursor = dstCursor + 1;
           remaining2 = remaining2 + -1;
         } while (remaining2 != 0);
         break;
       case 0x86e1:
-        *(float *)(iVar7 + 0x3588) = *params;
-        *(float *)(iVar7 + 0x358c) = params[1];
-        *(float *)(iVar7 + 0x3590) = params[2];
-        *(float *)(iVar7 + 0x3594) = params[3];
+        *(float *)(texUnitState + 0x3588) = *params;
+        *(float *)(texUnitState + 0x358c) = params[1];
+        *(float *)(texUnitState + 0x3590) = params[2];
+        *(float *)(texUnitState + 0x3594) = params[3];
         break;
       case 0x86e2:
-        *(float *)(iVar7 + 0x3598) = *params;
+        *(float *)(texUnitState + 0x3598) = *params;
         break;
       case 0x86e3:
-        *(float *)(iVar7 + 0x359c) = *params;
+        *(float *)(texUnitState + 0x359c) = *params;
         break;
       case 0x86e4:
-        dVar15 = (double)*params;
-        if (DOUBLE_00108d80 <= dVar15) {
-          uVar10 = (int)(dVar15 - DOUBLE_00108d80) ^ 0x80000000;
+        paramAsDouble = (double)*params;
+        if (DOUBLE_00108d80 <= paramAsDouble) {
+          paramValueInt = (int)(paramAsDouble - DOUBLE_00108d80) ^ 0x80000000;
         }
         else {
-          uVar10 = (uint)(int)*params;
+          paramValueInt = (uint)(int)*params;
         }
-        if ((uVar10 < 0x84c0) || (*(ushort *)(*(int *)(glContext + 0x468c) + 0xb4) + 0x84c0 <= uVar10)
+        if ((paramValueInt < 0x84c0) || (*(ushort *)(*(int *)(glContext + 0x468c) + 0xb4) + 0x84c0 <= paramValueInt)
            ) goto switchD_00016744_caseD_86da;
-        *(short *)(iVar7 + 0x356a) = (short)uVar10;
+        *(short *)(texUnitState + 0x356a) = (short)paramValueInt;
         break;
       case 0x86e5:
-        *(float *)(iVar7 + 0x357c) = *params;
-        *(float *)(iVar7 + 0x3580) = params[1];
-        *(float *)(iVar7 + 0x3584) = params[2];
+        *(float *)(texUnitState + 0x357c) = *params;
+        *(float *)(texUnitState + 0x3580) = params[1];
+        *(float *)(texUnitState + 0x3584) = params[2];
       }
-      uVar10 = *(uint *)(glContext + 800);
-      iVar7 = 1;
+      unitDirtyWord = *(uint *)(glContext + 800);
+      unitDirtyBit = 1;
     }
     else {
       if (target == 0x8861) {
         if (pname == 0x8862) {
           if (*params == FLOAT_00108e50) {
-            uVar13 = *(uint *)(glContext + 0x3444) &
-                     (-2 << (uVar13 & 0x1f) | 0xfffffffeU >> 0x20 - (uVar13 & 0x1f));
+            texUnit = *(uint *)(glContext + 0x3444) &
+                     (-2 << (texUnit & 0x1f) | 0xfffffffeU >> 0x20 - (texUnit & 0x1f));
           }
           else {
-            uVar13 = *(uint *)(glContext + 0x3444) | 1 << (uVar13 & 0x3f);
+            texUnit = *(uint *)(glContext + 0x3444) | 1 << (texUnit & 0x3f);
           }
-          *(uint *)(glContext + 0x3444) = uVar13;
+          *(uint *)(glContext + 0x3444) = texUnit;
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x400000;
           return;
         }
@@ -324,120 +336,120 @@ switchD_00016744_caseD_86da:
       }
       if (target != 0x2300) {
         if ((target == 0x8500) && (pname == 0x8501)) {
-          iVar7 = 0x10000;
-          *(float *)(uVar13 * 0x7c + glContext + 0x3560) = *params;
-          uVar10 = *(uint *)(glContext + 800);
+          unitDirtyBit = 0x10000;
+          *(float *)(texUnit * 0x7c + glContext + 0x3560) = *params;
+          unitDirtyWord = *(uint *)(glContext + 800);
           goto LAB_0001734c;
         }
         goto switchD_00016744_caseD_86da;
       }
       if (pname == 0x2200) {
-        dVar15 = (double)*params;
-        if (DOUBLE_00108d80 <= dVar15) {
-          pcVar12 = (code *)((int)(dVar15 - DOUBLE_00108d80) ^ 0x80000000);
+        paramAsDouble = (double)*params;
+        if (DOUBLE_00108d80 <= paramAsDouble) {
+          texEnvMode = (code *)((int)(paramAsDouble - DOUBLE_00108d80) ^ 0x80000000);
         }
         else {
-          pcVar12 = (code *)(int)*params;
+          texEnvMode = (code *)(int)*params;
         }
-        if (pcVar12 != (code *)0x1e01) {
-          if (pcVar12 < (code *)0x1e02) {
-            if (pcVar12 != (code *)0x104) {
-              if (pcVar12 < (code *)0x105) {
-                bVar1 = pcVar12 == (code *)0x0;
+        if (texEnvMode != (code *)0x1e01) {
+          if (texEnvMode < (code *)0x1e02) {
+            if (texEnvMode != (code *)0x104) {
+              if (texEnvMode < (code *)0x105) {
+                matchesAllowedEnum = texEnvMode == (code *)0x0;
               }
               else {
-                bVar1 = pcVar12 == (code *)0xbe2;
+                matchesAllowedEnum = texEnvMode == (code *)0xbe2;
               }
 LAB_00016b00:
-              if (!bVar1) goto switchD_00016744_caseD_86da;
+              if (!matchesAllowedEnum) goto switchD_00016744_caseD_86da;
             }
           }
           else {
-            if (pcVar12 < (code *)0x2100) goto switchD_00016744_caseD_86da;
-            if ((code *)0x2100 < pcVar12) {
-              bVar1 = pcVar12 == (code *)0x8570;
+            if (texEnvMode < (code *)0x2100) goto switchD_00016744_caseD_86da;
+            if ((code *)0x2100 < texEnvMode) {
+              matchesAllowedEnum = texEnvMode == (code *)0x8570;
               goto LAB_00016b00;
             }
           }
         }
-        iVar7 = 1;
-        *(short *)(uVar13 * 0x7c + glContext + 0x3538) = (short)pcVar12;
-        uVar10 = *(uint *)(glContext + 800);
+        unitDirtyBit = 1;
+        *(short *)(texUnit * 0x7c + glContext + 0x3538) = (short)texEnvMode;
+        unitDirtyWord = *(uint *)(glContext + 800);
 LAB_0001734c:
-        *(uint *)(glContext + 800) = uVar10 | iVar7 << (uVar13 & 0x3f);
+        *(uint *)(glContext + 800) = unitDirtyWord | unitDirtyBit << (texUnit & 0x3f);
         return;
       }
       if (pname == 0x2201) {
-        fVar3 = *params;
-        iVar7 = glContext + uVar13 * 0x7c;
-        if (fVar3 < FLOAT_00108e50) {
-          *(float *)(iVar7 + 0x3524) = FLOAT_00108e50;
+        envColorR = *params;
+        texUnitState = glContext + texUnit * 0x7c;
+        if (envColorR < FLOAT_00108e50) {
+          *(float *)(texUnitState + 0x3524) = FLOAT_00108e50;
         }
-        else if (FLOAT_00108e54 < fVar3) {
-          *(float *)(iVar7 + 0x3524) = FLOAT_00108e54;
-        }
-        else {
-          *(float *)(iVar7 + 0x3524) = fVar3;
-        }
-        fVar3 = params[1];
-        if (fVar3 < floatZero) {
-          *(float *)(iVar7 + 0x3528) = floatZero;
-        }
-        else if (floatOne < fVar3) {
-          *(float *)(iVar7 + 0x3528) = floatOne;
+        else if (FLOAT_00108e54 < envColorR) {
+          *(float *)(texUnitState + 0x3524) = FLOAT_00108e54;
         }
         else {
-          *(float *)(iVar7 + 0x3528) = fVar3;
+          *(float *)(texUnitState + 0x3524) = envColorR;
         }
-        fVar3 = params[2];
-        if (fVar3 < floatZero) {
-          *(float *)(iVar7 + 0x352c) = floatZero;
+        envColorG = params[1];
+        if (envColorG < floatZero) {
+          *(float *)(texUnitState + 0x3528) = floatZero;
         }
-        else if (floatOne < fVar3) {
-          *(float *)(iVar7 + 0x352c) = floatOne;
-        }
-        else {
-          *(float *)(iVar7 + 0x352c) = fVar3;
-        }
-        fVar3 = params[3];
-        if (fVar3 < floatZero) {
-          *(float *)(iVar7 + 0x3530) = floatZero;
-        }
-        else if (floatOne < fVar3) {
-          *(float *)(iVar7 + 0x3530) = floatOne;
+        else if (floatOne < envColorG) {
+          *(float *)(texUnitState + 0x3528) = floatOne;
         }
         else {
-          *(float *)(iVar7 + 0x3530) = fVar3;
+          *(float *)(texUnitState + 0x3528) = envColorG;
+        }
+        envColorB = params[2];
+        if (envColorB < floatZero) {
+          *(float *)(texUnitState + 0x352c) = floatZero;
+        }
+        else if (floatOne < envColorB) {
+          *(float *)(texUnitState + 0x352c) = floatOne;
+        }
+        else {
+          *(float *)(texUnitState + 0x352c) = envColorB;
+        }
+        envColorA = params[3];
+        if (envColorA < floatZero) {
+          *(float *)(texUnitState + 0x3530) = floatZero;
+        }
+        else if (floatOne < envColorA) {
+          *(float *)(texUnitState + 0x3530) = floatOne;
+        }
+        else {
+          *(float *)(texUnitState + 0x3530) = envColorA;
         }
         if (*(int *)(glContext + 0x5434) == 0) {
-          bVar2 = *(byte *)(uVar13 + *(int *)(glContext + 0x5420) + 0x30c);
+          dirtyBitIndex = *(byte *)(texUnit + *(int *)(glContext + 0x5420) + 0x30c);
         }
         else {
-          bVar2 = *(byte *)(uVar13 + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x340);
+          dirtyBitIndex = *(byte *)(texUnit + *(int *)(*(int *)(glContext + 0x5430) + 0x20) + 0x340);
         }
-        iVar11 = (bVar2 >> 3 & 0x1c) + glContext;
+        dirtyWordAt324 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
         glContextWord5424 = *(int *)(glContext + 0x5424);
-        *(uint *)(iVar11 + 0x324) = *(uint *)(iVar11 + 0x324) | 1 << (bVar2 & 0x1f);
-        bVar2 = *(byte *)(uVar13 + glContextWord5424 + 0x30c);
-        iVar7 = (bVar2 >> 3 & 0x1c) + glContext;
-        *(uint *)(iVar7 + 0x348) = *(uint *)(iVar7 + 0x348) | 1 << (bVar2 & 0x1f);
-        iVar7 = 0x100;
-        uVar10 = *(uint *)(glContext + 800);
+        *(uint *)(dirtyWordAt324 + 0x324) = *(uint *)(dirtyWordAt324 + 0x324) | 1 << (dirtyBitIndex & 0x1f);
+        dirtyBitIndex = *(byte *)(texUnit + glContextWord5424 + 0x30c);
+        dirtyWordAt348 = (dirtyBitIndex >> 3 & 0x1c) + glContext;
+        *(uint *)(dirtyWordAt348 + 0x348) = *(uint *)(dirtyWordAt348 + 0x348) | 1 << (dirtyBitIndex & 0x1f);
+        unitDirtyBit = 0x100;
+        unitDirtyWord = *(uint *)(glContext + 800);
       }
       else {
         if (pname == 0x8588) {
-          iVar7 = (int)*params;
-          if (((iVar7 != 0x1702) && (0xf < iVar7 - 0x84c0U)) &&
-             (((iVar7 != 0x8576 && (((iVar7 != 0x8577 && (iVar7 != 0x8578)) && (iVar7 != 0)))) &&
-              (iVar7 != 1)))) goto switchD_00016744_caseD_86da;
-          *(short *)(uVar13 * 0x7c + glContext + 0x3546) = (short)iVar7;
+          paramInt = (int)*params;
+          if (((paramInt != 0x1702) && (0xf < paramInt - 0x84c0U)) &&
+             (((paramInt != 0x8576 && (((paramInt != 0x8577 && (paramInt != 0x8578)) && (paramInt != 0)))) &&
+              (paramInt != 1)))) goto switchD_00016744_caseD_86da;
+          *(short *)(texUnit * 0x7c + glContext + 0x3546) = (short)paramInt;
         }
         else if (pname < 0x8589) {
           if (pname == 0x8573) {
-            fVar4 = *params;
-            if (((fVar4 == FLOAT_00108e54) || (fVar4 == FLOAT_00108ea4)) ||
-               (fVar4 == FLOAT_00108ea8)) {
-              *(float *)(uVar13 * 0x7c + glContext + 0x3558) = fVar4;
+            rgbScale = *params;
+            if (((rgbScale == FLOAT_00108e54) || (rgbScale == FLOAT_00108ea4)) ||
+               (rgbScale == FLOAT_00108ea8)) {
+              *(float *)(texUnit * 0x7c + glContext + 0x3558) = rgbScale;
             }
             else {
 LAB_000172d8:
@@ -449,81 +461,81 @@ LAB_000172d8:
           else {
             if (0x8573 < pname) {
               if (pname == 0x8581) {
-                iVar7 = (int)*params;
-                if (((((iVar7 == 0x1702) || (iVar7 - 0x84c0U < 0x10)) || (iVar7 == 0x8576)) ||
-                    ((iVar7 == 0x8577 || (iVar7 == 0x8578)))) || ((iVar7 == 0 || (iVar7 == 1)))) {
-                  *(short *)(uVar13 * 0x7c + glContext + 0x3542) = (short)iVar7;
+                paramInt = (int)*params;
+                if (((((paramInt == 0x1702) || (paramInt - 0x84c0U < 0x10)) || (paramInt == 0x8576)) ||
+                    ((paramInt == 0x8577 || (paramInt == 0x8578)))) || ((paramInt == 0 || (paramInt == 1)))) {
+                  *(short *)(texUnit * 0x7c + glContext + 0x3542) = (short)paramInt;
                   goto LAB_000172fc;
                 }
               }
               else if (pname < 0x8582) {
                 if ((pname == 0x8580) &&
-                   (((((iVar7 = (int)*params, iVar7 == 0x1702 || (iVar7 - 0x84c0U < 0x10)) ||
-                      ((iVar7 == 0x8576 || ((iVar7 == 0x8577 || (iVar7 == 0x8578)))))) ||
-                     (iVar7 == 0)) || (iVar7 == 1)))) {
-                  *(short *)(uVar13 * 0x7c + glContext + 0x3540) = (short)iVar7;
+                   (((((paramInt = (int)*params, paramInt == 0x1702 || (paramInt - 0x84c0U < 0x10)) ||
+                      ((paramInt == 0x8576 || ((paramInt == 0x8577 || (paramInt == 0x8578)))))) ||
+                     (paramInt == 0)) || (paramInt == 1)))) {
+                  *(short *)(texUnit * 0x7c + glContext + 0x3540) = (short)paramInt;
                   goto LAB_000172fc;
                 }
               }
               else if ((pname == 0x8582) &&
-                      (((iVar7 = (int)*params, iVar7 == 0x1702 || (iVar7 - 0x84c0U < 0x10)) ||
-                       ((iVar7 == 0x8576 ||
-                        ((((iVar7 == 0x8577 || (iVar7 == 0x8578)) || (iVar7 == 0)) || (iVar7 == 1)))
+                      (((paramInt = (int)*params, paramInt == 0x1702 || (paramInt - 0x84c0U < 0x10)) ||
+                       ((paramInt == 0x8576 ||
+                        ((((paramInt == 0x8577 || (paramInt == 0x8578)) || (paramInt == 0)) || (paramInt == 1)))
                         ))))) {
-                *(short *)(uVar13 * 0x7c + glContext + 0x3544) = (short)iVar7;
+                *(short *)(texUnit * 0x7c + glContext + 0x3544) = (short)paramInt;
                 goto LAB_000172fc;
               }
               goto switchD_00016744_caseD_86da;
             }
             if (pname == 0x8571) {
-              pcVar12 = (code *)(int)*params;
-              if (pcVar12 < (code *)0x8576) {
-                if ((pcVar12 < (code *)0x8574) && (pcVar12 != (code *)0x1e01)) {
-                  if (pcVar12 < (code *)0x1e02) {
-                    bVar1 = pcVar12 == (code *)0x104;
+              combineRgb = (code *)(int)*params;
+              if (combineRgb < (code *)0x8576) {
+                if ((combineRgb < (code *)0x8574) && (combineRgb != (code *)0x1e01)) {
+                  if (combineRgb < (code *)0x1e02) {
+                    matchesAllowedEnum = combineRgb == (code *)0x104;
                   }
                   else {
-                    if (pcVar12 == (code *)0x2100) goto LAB_00016dfc;
-                    bVar1 = pcVar12 == (code *)0x84e7;
+                    if (combineRgb == (code *)0x2100) goto LAB_00016dfc;
+                    matchesAllowedEnum = combineRgb == (code *)0x84e7;
                   }
-                  if (!bVar1) goto switchD_00016744_caseD_86da;
+                  if (!matchesAllowedEnum) goto switchD_00016744_caseD_86da;
                 }
               }
-              else if ((pcVar12 < (code *)0x86ae) ||
-                      (((code *)0x86af < pcVar12 && ((code *)0x2 < pcVar12 + -0x8744))))
+              else if ((combineRgb < (code *)0x86ae) ||
+                      (((code *)0x86af < combineRgb && ((code *)0x2 < combineRgb + -0x8744))))
               goto switchD_00016744_caseD_86da;
 LAB_00016dfc:
-              *(short *)(uVar13 * 0x7c + glContext + 0x353c) = (short)pcVar12;
+              *(short *)(texUnit * 0x7c + glContext + 0x353c) = (short)combineRgb;
             }
             else {
               if (pname < 0x8572) {
                 if (pname == 0xd1c) {
-                  fVar4 = *params;
-                  if (((fVar4 != FLOAT_00108e54) && (fVar4 != FLOAT_00108ea4)) &&
-                     (fVar4 != FLOAT_00108ea8)) goto LAB_000172d8;
-                  *(float *)(uVar13 * 0x7c + glContext + 0x355c) = fVar4;
+                  alphaScale = *params;
+                  if (((alphaScale != FLOAT_00108e54) && (alphaScale != FLOAT_00108ea4)) &&
+                     (alphaScale != FLOAT_00108ea8)) goto LAB_000172d8;
+                  *(float *)(texUnit * 0x7c + glContext + 0x355c) = alphaScale;
                   goto LAB_000172fc;
                 }
                 goto switchD_00016744_caseD_86da;
               }
-              pcVar12 = (code *)(int)*params;
-              if (pcVar12 != (code *)0x84e7) {
-                if (pcVar12 < (code *)0x84e8) {
-                  if (pcVar12 != (code *)0x1e01) {
-                    if (pcVar12 < (code *)0x1e02) {
-                      bVar1 = pcVar12 == (code *)0x104;
+              combineAlpha = (code *)(int)*params;
+              if (combineAlpha != (code *)0x84e7) {
+                if (combineAlpha < (code *)0x84e8) {
+                  if (combineAlpha != (code *)0x1e01) {
+                    if (combineAlpha < (code *)0x1e02) {
+                      matchesAllowedEnum = combineAlpha == (code *)0x104;
                     }
                     else {
-                      bVar1 = pcVar12 == (code *)0x2100;
+                      matchesAllowedEnum = combineAlpha == (code *)0x2100;
                     }
-                    if (!bVar1) goto switchD_00016744_caseD_86da;
+                    if (!matchesAllowedEnum) goto switchD_00016744_caseD_86da;
                   }
                 }
-                else if ((pcVar12 < (code *)0x8574) ||
-                        (((code *)0x8575 < pcVar12 && ((code *)0x2 < pcVar12 + -0x8744))))
+                else if ((combineAlpha < (code *)0x8574) ||
+                        (((code *)0x8575 < combineAlpha && ((code *)0x2 < combineAlpha + -0x8744))))
                 goto switchD_00016744_caseD_86da;
               }
-              *(short *)(uVar13 * 0x7c + glContext + 0x353e) = (short)pcVar12;
+              *(short *)(texUnit * 0x7c + glContext + 0x353e) = (short)combineAlpha;
             }
           }
         }
@@ -531,60 +543,60 @@ LAB_00016dfc:
           if (pname != 0x8591) {
             if (pname < 0x8592) {
               if (pname == 0x858a) {
-                iVar7 = (int)*params;
-                if ((((((iVar7 == 0x1702) || (iVar7 - 0x84c0U < 0x10)) || (iVar7 == 0x8576)) ||
-                     ((iVar7 == 0x8577 || (iVar7 == 0x8578)))) || (iVar7 == 0)) || (iVar7 == 1)) {
-                  *(short *)(uVar13 * 0x7c + glContext + 0x354a) = (short)iVar7;
+                paramInt = (int)*params;
+                if ((((((paramInt == 0x1702) || (paramInt - 0x84c0U < 0x10)) || (paramInt == 0x8576)) ||
+                     ((paramInt == 0x8577 || (paramInt == 0x8578)))) || (paramInt == 0)) || (paramInt == 1)) {
+                  *(short *)(texUnit * 0x7c + glContext + 0x354a) = (short)paramInt;
                   goto LAB_000172fc;
                 }
               }
               else if (pname < 0x858a) {
-                iVar7 = (int)*params;
-                if ((((iVar7 == 0x1702) || (iVar7 - 0x84c0U < 0x10)) ||
-                    ((iVar7 == 0x8576 || (((iVar7 == 0x8577 || (iVar7 == 0x8578)) || (iVar7 == 0))))
-                    )) || (iVar7 == 1)) {
-                  *(short *)(uVar13 * 0x7c + glContext + 0x3548) = (short)iVar7;
+                paramInt = (int)*params;
+                if ((((paramInt == 0x1702) || (paramInt - 0x84c0U < 0x10)) ||
+                    ((paramInt == 0x8576 || (((paramInt == 0x8577 || (paramInt == 0x8578)) || (paramInt == 0))))
+                    )) || (paramInt == 1)) {
+                  *(short *)(texUnit * 0x7c + glContext + 0x3548) = (short)paramInt;
                   goto LAB_000172fc;
                 }
               }
               else if ((pname == 0x8590) && ((int)*params - 0x300U < 4)) {
-                *(short *)(uVar13 * 0x7c + glContext + 0x354c) = (short)(int)*params;
+                *(short *)(texUnit * 0x7c + glContext + 0x354c) = (short)(int)*params;
                 goto LAB_000172fc;
               }
             }
             else if (pname == 0x8598) {
               if ((int)*params - 0x302U < 2) {
-                *(short *)(uVar13 * 0x7c + glContext + 0x3552) = (short)(int)*params;
+                *(short *)(texUnit * 0x7c + glContext + 0x3552) = (short)(int)*params;
                 goto LAB_000172fc;
               }
             }
             else if (pname < 0x8599) {
               if ((pname == 0x8592) && ((int)*params - 0x300U < 4)) {
-                *(short *)(uVar13 * 0x7c + glContext + 0x3550) = (short)(int)*params;
+                *(short *)(texUnit * 0x7c + glContext + 0x3550) = (short)(int)*params;
                 goto LAB_000172fc;
               }
             }
             else if (pname == 0x8599) {
               if ((int)*params - 0x302U < 2) {
-                *(short *)(uVar13 * 0x7c + glContext + 0x3554) = (short)(int)*params;
+                *(short *)(texUnit * 0x7c + glContext + 0x3554) = (short)(int)*params;
                 goto LAB_000172fc;
               }
             }
             else if ((pname == 0x859a) && ((int)*params - 0x302U < 2)) {
-              *(short *)(uVar13 * 0x7c + glContext + 0x3556) = (short)(int)*params;
+              *(short *)(texUnit * 0x7c + glContext + 0x3556) = (short)(int)*params;
               goto LAB_000172fc;
             }
             goto switchD_00016744_caseD_86da;
           }
           if (3 < (int)*params - 0x300U) goto switchD_00016744_caseD_86da;
-          *(short *)(uVar13 * 0x7c + glContext + 0x354e) = (short)(int)*params;
+          *(short *)(texUnit * 0x7c + glContext + 0x354e) = (short)(int)*params;
         }
 LAB_000172fc:
-        uVar10 = *(uint *)(glContext + 800);
-        iVar7 = 0x1000000;
+        unitDirtyWord = *(uint *)(glContext + 800);
+        unitDirtyBit = 0x1000000;
       }
     }
-    *(uint *)(glContext + 800) = uVar10 | iVar7 << (uVar13 & 0x3f);
+    *(uint *)(glContext + 800) = unitDirtyWord | unitDirtyBit << (texUnit & 0x3f);
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -2668,226 +2680,231 @@ int _gleComponents(format)
 }
 
 /* _gleCreatePluginTextureLevel @ 0x19fbc (1228 bytes) */
-int _gleCreatePluginTextureLevel(glContext, param_2, param_3, param_4, level, internalformat)
+int _gleCreatePluginTextureLevel(glContext, textureObject, textureLevel, face, level, internalformat)
   int glContext;
-  undefined4 *param_2;
-  int param_3;
-  int param_4;
+  undefined4 *textureObject;
+  int textureLevel;
+  int face;
   uint level;
   uint internalformat;
 {
   uint loopIndex4;
   int loopIndex2;
-  int *piVar1;
-  byte bVar2;
-  ushort uVar3;
-  bool bVar4;
+  int *rendererDispatch;
+  byte faceCount;
+  ushort levelBit;
+  bool levelInconsistent;
   int remaining;
-  uint uVar6;
-  undefined4 uVar7;
-  uint uVar8;
-  uint uVar9;
-  undefined4 uVar10;
-  undefined4 *puVar11;
-  int iVar12;
-  int iVar13;
+  uint log2Height;
+  uint log2Depth;
+  undefined4 baseFormat;
+  undefined4 resetResult;
+  uint border;
+  uint maxLog2Size;
+  uint levelBorder;
+  undefined4 rendererTextureName;
+  undefined4 *faceMaskCursor;
+  undefined4 *rendererContext;
+  int widthAtLevel;
+  int levelRecord;
   int loopIndex;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
-  uint uVar18;
-  int iVar19;
-  uint uVar20;
+  int heightNoBorder;
+  int depthNoBorder;
+  int rendererCursor;
+  uint depthDimFlag;
+  uint heightDimFlag;
+  int widthNoBorder;
+  uint changeFlags;
   int loopIndex3;
-  undefined4 *puVar22;
-  int iVar23;
-  int iVar24;
+  undefined4 *faceMaskCursor2;
+  int depthAtLevel;
+  int heightAtLevel;
   
-  uVar8 = (uint)*(byte *)(param_3 + 10);
-  uVar18 = (uint)*(byte *)((int)param_2 + 0x92);
-  uVar17 = (uint)*(byte *)((int)param_2 + 0x93);
-  iVar19 = (uint)*(ushort *)(param_3 + 4) + uVar8 * -2;
-  bVar2 = *(byte *)(param_2 + 0x24);
-  iVar15 = (uint)*(ushort *)(param_3 + 6) - uVar8 * uVar18;
-  uVar20 = 0;
-  iVar16 = (uint)*(ushort *)(param_3 + 8) - uVar8 * uVar17;
+  border = (uint)*(byte *)(textureLevel + 10);
+  heightDimFlag = (uint)*(byte *)((int)textureObject + 0x92);
+  depthDimFlag = (uint)*(byte *)((int)textureObject + 0x93);
+  widthNoBorder = (uint)*(ushort *)(textureLevel + 4) + border * -2;
+  faceCount = *(byte *)(textureObject + 0x24);
+  heightNoBorder = (uint)*(ushort *)(textureLevel + 6) - border * heightDimFlag;
+  changeFlags = 0;
+  depthNoBorder = (uint)*(ushort *)(textureLevel + 8) - border * depthDimFlag;
   if (level == 0) {
-    if (*(int *)(param_3 + 0x14) != 0) {
-      uVar20 = 4;
+    if (*(int *)(textureLevel + 0x14) != 0) {
+      changeFlags = 4;
     }
-    if (*(char *)((int)param_2 + 0x91) == '\0') {
-      uVar8 = 0x1f - LZCOUNT(iVar19);
-      if (*(byte *)(param_2 + 0x21) != uVar8) {
-        *(char *)(param_2 + 0x21) = (char)uVar8;
-        uVar20 = uVar20 | 1;
+    if (*(char *)((int)textureObject + 0x91) == '\0') {
+      maxLog2Size = 0x1f - LZCOUNT(widthNoBorder);
+      if (*(byte *)(textureObject + 0x21) != maxLog2Size) {
+        *(char *)(textureObject + 0x21) = (char)maxLog2Size;
+        changeFlags = changeFlags | 1;
       }
-      if (uVar18 != 0) {
-        uVar6 = 0x1f - LZCOUNT(iVar15);
-        if ((int)uVar8 < (int)uVar6) {
-          uVar8 = uVar6;
+      if (heightDimFlag != 0) {
+        log2Height = 0x1f - LZCOUNT(heightNoBorder);
+        if ((int)maxLog2Size < (int)log2Height) {
+          maxLog2Size = log2Height;
         }
-        if (*(byte *)((int)param_2 + 0x85) != uVar6) {
-          *(char *)((int)param_2 + 0x85) = (char)uVar6;
-          uVar20 = uVar20 | 1;
+        if (*(byte *)((int)textureObject + 0x85) != log2Height) {
+          *(char *)((int)textureObject + 0x85) = (char)log2Height;
+          changeFlags = changeFlags | 1;
         }
-        if (uVar17 != 0) {
-          uVar6 = 0x1f - LZCOUNT(iVar16);
-          if ((int)uVar8 < (int)uVar6) {
-            uVar8 = uVar6;
+        if (depthDimFlag != 0) {
+          log2Depth = 0x1f - LZCOUNT(depthNoBorder);
+          if ((int)maxLog2Size < (int)log2Depth) {
+            maxLog2Size = log2Depth;
           }
-          if (*(byte *)((int)param_2 + 0x86) != uVar6) {
-            *(char *)((int)param_2 + 0x86) = (char)uVar6;
-            uVar20 = uVar20 | 1;
+          if (*(byte *)((int)textureObject + 0x86) != log2Depth) {
+            *(char *)((int)textureObject + 0x86) = (char)log2Depth;
+            changeFlags = changeFlags | 1;
           }
         }
       }
-      *(char *)((int)param_2 + 0x87) = (char)uVar8;
+      *(char *)((int)textureObject + 0x87) = (char)maxLog2Size;
     }
     else {
-      uVar20 = uVar20 | 1;
-      uVar8 = 1;
+      changeFlags = changeFlags | 1;
+      maxLog2Size = 1;
     }
-    if ((uVar20 & 1) == 0) {
-      *(ushort *)((int)param_2 + param_4 * 2 + 0x94) =
-           *(ushort *)((int)param_2 + param_4 * 2 + 0x94) | 1;
-      if (*(int *)(param_3 + 0x14) != 0) {
-        *(ushort *)((int)param_2 + param_4 * 2 + 0xa0) =
-             *(ushort *)((int)param_2 + param_4 * 2 + 0xa0) | 1;
+    if ((changeFlags & 1) == 0) {
+      *(ushort *)((int)textureObject + face * 2 + 0x94) =
+           *(ushort *)((int)textureObject + face * 2 + 0x94) | 1;
+      if (*(int *)(textureLevel + 0x14) != 0) {
+        *(ushort *)((int)textureObject + face * 2 + 0xa0) =
+             *(ushort *)((int)textureObject + face * 2 + 0xa0) | 1;
       }
     }
     else {
       loopIndex3 = 0;
-      if (bVar2 != 0) {
+      if (faceCount != 0) {
         loopIndex = 0;
-        puVar11 = param_2;
-        puVar22 = param_2;
+        faceMaskCursor = textureObject;
+        faceMaskCursor2 = textureObject;
         do {
           loopIndex4 = 0;
-          *(undefined2 *)(puVar11 + 0x25) = 0;
-          *(undefined2 *)(puVar11 + 0x28) = 0;
-          if (-1 < (int)uVar8) {
-            remaining = uVar8 + 1;
-            iVar13 = (int)param_2 + loopIndex + 0xc4;
-            iVar12 = iVar19;
-            iVar23 = iVar16;
-            iVar24 = iVar15;
+          *(undefined2 *)(faceMaskCursor + 0x25) = 0;
+          *(undefined2 *)(faceMaskCursor + 0x28) = 0;
+          if (-1 < (int)maxLog2Size) {
+            remaining = maxLog2Size + 1;
+            levelRecord = (int)textureObject + loopIndex + 0xc4;
+            widthAtLevel = widthNoBorder;
+            depthAtLevel = depthNoBorder;
+            heightAtLevel = heightNoBorder;
             do {
-              uVar9 = (uint)*(byte *)(iVar13 + 10);
-              if ((((uint)*(ushort *)(iVar13 + 4) == iVar12 + uVar9 * 2) &&
-                  ((uint)*(ushort *)(iVar13 + 6) == iVar24 + uVar9 * uVar18)) &&
-                 ((uint)*(ushort *)(iVar13 + 8) == iVar23 + uVar9 * uVar17)) {
-                uVar3 = (ushort)(1 << (loopIndex4 & 0x3f));
-                *(ushort *)(puVar22 + 0x25) = *(ushort *)(puVar22 + 0x25) | uVar3;
-                if (*(int *)(iVar13 + 0x14) != 0) {
-                  *(ushort *)(puVar22 + 0x28) = *(ushort *)(puVar22 + 0x28) | uVar3;
+              levelBorder = (uint)*(byte *)(levelRecord + 10);
+              if ((((uint)*(ushort *)(levelRecord + 4) == widthAtLevel + levelBorder * 2) &&
+                  ((uint)*(ushort *)(levelRecord + 6) == heightAtLevel + levelBorder * heightDimFlag)) &&
+                 ((uint)*(ushort *)(levelRecord + 8) == depthAtLevel + levelBorder * depthDimFlag)) {
+                levelBit = (ushort)(1 << (loopIndex4 & 0x3f));
+                *(ushort *)(faceMaskCursor2 + 0x25) = *(ushort *)(faceMaskCursor2 + 0x25) | levelBit;
+                if (*(int *)(levelRecord + 0x14) != 0) {
+                  *(ushort *)(faceMaskCursor2 + 0x28) = *(ushort *)(faceMaskCursor2 + 0x28) | levelBit;
                 }
               }
-              if (1 < iVar12) {
-                iVar12 = iVar12 >> 1;
+              if (1 < widthAtLevel) {
+                widthAtLevel = widthAtLevel >> 1;
               }
-              if (1 < iVar24) {
-                iVar24 = iVar24 >> 1;
+              if (1 < heightAtLevel) {
+                heightAtLevel = heightAtLevel >> 1;
               }
-              if (1 < iVar23) {
-                iVar23 = iVar23 >> 1;
+              if (1 < depthAtLevel) {
+                depthAtLevel = depthAtLevel >> 1;
               }
               loopIndex4 = loopIndex4 + 1;
-              iVar13 = iVar13 + 0x18;
+              levelRecord = levelRecord + 0x18;
               remaining = remaining + -1;
             } while (remaining != 0);
           }
           loopIndex3 = loopIndex3 + 1;
-          puVar22 = (undefined4 *)((int)puVar22 + 2);
-          puVar11 = (undefined4 *)((int)puVar11 + 2);
+          faceMaskCursor2 = (undefined4 *)((int)faceMaskCursor2 + 2);
+          faceMaskCursor = (undefined4 *)((int)faceMaskCursor + 2);
           loopIndex = loopIndex + 0x168;
-        } while (loopIndex3 < (int)(uint)bVar2);
+        } while (loopIndex3 < (int)(uint)faceCount);
       }
     }
-    if ((internalformat != *(ushort *)(param_2 + 0x1e)) || (*(int *)(param_3 + 0x10) != param_2[0x1f])) {
-      *(short *)(param_2 + 0x1e) = (short)internalformat;
-      *(undefined2 *)(param_2 + 0x1f) = *(undefined2 *)(param_3 + 0x10);
-      *(undefined2 *)((int)param_2 + 0x7e) = *(undefined2 *)(param_3 + 0x12);
+    if ((internalformat != *(ushort *)(textureObject + 0x1e)) || (*(int *)(textureLevel + 0x10) != textureObject[0x1f])) {
+      *(short *)(textureObject + 0x1e) = (short)internalformat;
+      *(undefined2 *)(textureObject + 0x1f) = *(undefined2 *)(textureLevel + 0x10);
+      *(undefined2 *)((int)textureObject + 0x7e) = *(undefined2 *)(textureLevel + 0x12);
       if (internalformat - 0x80e2 < 6) {
-        internalformat = (uint)*(ushort *)((int)param_2 + 0x7a);
+        internalformat = (uint)*(ushort *)((int)textureObject + 0x7a);
       }
-      uVar7 = ((int (*)())_gleReqToBase)(internalformat);
-      uVar20 = uVar20 | 1;
-      *(short *)((int)param_2 + 0x26) = (short)uVar7;
+      baseFormat = ((int (*)())_gleReqToBase)(internalformat);
+      changeFlags = changeFlags | 1;
+      *(short *)((int)textureObject + 0x26) = (short)baseFormat;
     }
     goto LAB_0001a408;
   }
   if ((int)level < 1) {
-    if (*(int *)(param_3 + 0x14) != 0) {
-      uVar20 = 0x40;
+    if (*(int *)(textureLevel + 0x14) != 0) {
+      changeFlags = 0x40;
     }
-    if ((uint)*(byte *)(param_2 + 0x23) != 0x1fU - LZCOUNT(iVar19)) {
-      *(char *)(param_2 + 0x23) = (char)(0x1fU - LZCOUNT(iVar19));
-      uVar20 = uVar20 | 0x20;
+    if ((uint)*(byte *)(textureObject + 0x23) != 0x1fU - LZCOUNT(widthNoBorder)) {
+      *(char *)(textureObject + 0x23) = (char)(0x1fU - LZCOUNT(widthNoBorder));
+      changeFlags = changeFlags | 0x20;
     }
-    if (internalformat != *(ushort *)((int)param_2 + 0x7a)) {
-      *(short *)((int)param_2 + 0x7a) = (short)internalformat;
-      if ((ushort)(*(short *)(param_2 + 0x1e) + 0x7f1eU) < 6) {
-        uVar7 = ((int (*)())_gleReqToBase)(internalformat);
-        *(short *)((int)param_2 + 0x26) = (short)uVar7;
+    if (internalformat != *(ushort *)((int)textureObject + 0x7a)) {
+      *(short *)((int)textureObject + 0x7a) = (short)internalformat;
+      if ((ushort)(*(short *)(textureObject + 0x1e) + 0x7f1eU) < 6) {
+        baseFormat = ((int (*)())_gleReqToBase)(internalformat);
+        *(short *)((int)textureObject + 0x26) = (short)baseFormat;
       }
-      uVar20 = uVar20 | 0x20;
+      changeFlags = changeFlags | 0x20;
     }
     goto LAB_0001a408;
   }
-  if (*(int *)(param_3 + 0x14) != 0) {
-    uVar20 = 4;
+  if (*(int *)(textureLevel + 0x14) != 0) {
+    changeFlags = 4;
   }
-  bVar4 = false;
-  if (*(char *)((int)param_2 + 0x91) == '\0') {
-    if (((0x1f - LZCOUNT(iVar19)) + level == (uint)*(byte *)(param_2 + 0x21)) ||
-       ((0x1f - LZCOUNT(iVar19) == 0 && ((int)(uint)*(byte *)(param_2 + 0x21) < (int)level)))) {
-      bVar4 = false;
-      if (uVar18 != 0) {
-        if (((0x1f - LZCOUNT(iVar15)) + level != (uint)*(byte *)((int)param_2 + 0x85)) &&
-           ((0x1f - LZCOUNT(iVar15) != 0 ||
-            ((int)level <= (int)(uint)*(byte *)((int)param_2 + 0x85))))) goto LAB_0001a32c;
-        bVar4 = false;
-        if (uVar17 != 0) {
-          if (((0x1f - LZCOUNT(iVar16)) + level != (uint)*(byte *)((int)param_2 + 0x86)) &&
-             ((0x1f - LZCOUNT(iVar16) != 0 ||
-              ((int)level <= (int)(uint)*(byte *)((int)param_2 + 0x86))))) goto LAB_0001a32c;
-          bVar4 = false;
+  levelInconsistent = false;
+  if (*(char *)((int)textureObject + 0x91) == '\0') {
+    if (((0x1f - LZCOUNT(widthNoBorder)) + level == (uint)*(byte *)(textureObject + 0x21)) ||
+       ((0x1f - LZCOUNT(widthNoBorder) == 0 && ((int)(uint)*(byte *)(textureObject + 0x21) < (int)level)))) {
+      levelInconsistent = false;
+      if (heightDimFlag != 0) {
+        if (((0x1f - LZCOUNT(heightNoBorder)) + level != (uint)*(byte *)((int)textureObject + 0x85)) &&
+           ((0x1f - LZCOUNT(heightNoBorder) != 0 ||
+            ((int)level <= (int)(uint)*(byte *)((int)textureObject + 0x85))))) goto LAB_0001a32c;
+        levelInconsistent = false;
+        if (depthDimFlag != 0) {
+          if (((0x1f - LZCOUNT(depthNoBorder)) + level != (uint)*(byte *)((int)textureObject + 0x86)) &&
+             ((0x1f - LZCOUNT(depthNoBorder) != 0 ||
+              ((int)level <= (int)(uint)*(byte *)((int)textureObject + 0x86))))) goto LAB_0001a32c;
+          levelInconsistent = false;
         }
       }
     }
     else {
 LAB_0001a32c:
-      bVar4 = true;
+      levelInconsistent = true;
     }
   }
-  uVar3 = (ushort)(1 << (level & 0x3f));
-  if (bVar4) {
-    *(ushort *)((int)param_2 + param_4 * 2 + 0x94) =
-         *(ushort *)((int)param_2 + param_4 * 2 + 0x94) & ~uVar3;
-    *(ushort *)((int)param_2 + param_4 * 2 + 0xa0) =
-         *(ushort *)((int)param_2 + param_4 * 2 + 0xa0) & ~uVar3;
+  levelBit = (ushort)(1 << (level & 0x3f));
+  if (levelInconsistent) {
+    *(ushort *)((int)textureObject + face * 2 + 0x94) =
+         *(ushort *)((int)textureObject + face * 2 + 0x94) & ~levelBit;
+    *(ushort *)((int)textureObject + face * 2 + 0xa0) =
+         *(ushort *)((int)textureObject + face * 2 + 0xa0) & ~levelBit;
   }
   else {
-    *(ushort *)((int)param_2 + param_4 * 2 + 0x94) =
-         uVar3 | *(ushort *)((int)param_2 + param_4 * 2 + 0x94);
-    if (*(int *)(param_3 + 0x14) != 0) {
-      *(ushort *)((int)param_2 + param_4 * 2 + 0xa0) =
-           uVar3 | *(ushort *)((int)param_2 + param_4 * 2 + 0xa0);
+    *(ushort *)((int)textureObject + face * 2 + 0x94) =
+         levelBit | *(ushort *)((int)textureObject + face * 2 + 0x94);
+    if (*(int *)(textureLevel + 0x14) != 0) {
+      *(ushort *)((int)textureObject + face * 2 + 0xa0) =
+           levelBit | *(ushort *)((int)textureObject + face * 2 + 0xa0);
     }
   }
 LAB_0001a408:
-  iVar16 = glContext + 0x10000;
-  uVar7 = ((int (*)())_gleResetLevels)(glContext,param_2,uVar20);
+  rendererCursor = glContext + 0x10000;
+  resetResult = ((int (*)())_gleResetLevels)(glContext,textureObject,changeFlags);
   loopIndex2 = 0;
   if (*(char *)(glContext + 0x85a4) != '\0') {
     do {
-      piVar1 = (int *)(iVar16 + -0x777c);
-      uVar10 = *param_2;
-      puVar11 = (undefined4 *)(iVar16 + -0x7a54);
-      iVar16 = iVar16 + 0x2e0;
+      rendererDispatch = (int *)(rendererCursor + -0x777c);
+      rendererTextureName = *textureObject;
+      rendererContext = (undefined4 *)(rendererCursor + -0x7a54);
+      rendererCursor = rendererCursor + 0x2e0;
       loopIndex2 = loopIndex2 + 1;
-      param_2 = param_2 + 1;
-      (**(code **)(*piVar1 + 0x150))(*puVar11,uVar10,uVar7,param_4,level);
+      textureObject = textureObject + 1;
+      (**(code **)(*rendererDispatch + 0x150))(*rendererContext,rendererTextureName,resetResult,face,level);
     } while (loopIndex2 < (int)(uint)*(byte *)(glContext + 0x85a4));
   }
   return;
@@ -3847,28 +3864,34 @@ void _glColor4ub_Exec(glContext, red, green, blue, alpha)
 /* _glTexEnvf_Exec @ 0x1b758 (2524 bytes) */
 void _glTexEnvf_Exec(int glContext,int target,uint pname,double param)
 {
-  bool bVar1;
+  bool enumAllowed;
   undefined4 glErrorCode;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
-  code *pcVar6;
-  uint uVar7;
+  int texUnitState;
+  int sourceEnum;
+  int texEnvDirtyBit;
+  int shaderOpError;
+  uint paramEnum;
+  uint texEnvDirtyWord;
+  code *envModeValue;
+  code *combineAlphaValue;
+  code *combineRgbValue;
+  uint texUnit;
+  uint coordReplaceMask;
   
-  uVar7 = *(uint *)(glContext + 0x53d4);
+  texUnit = *(uint *)(glContext + 0x53d4);
   if (*(short *)(glContext + 0x4a10) < 0) {
     if (target == 0x86de) {
-      iVar3 = glContext + uVar7 * 0x7c;
+      texUnitState = glContext + texUnit * 0x7c;
       switch(pname) {
       case 0x86d9:
         if (DOUBLE_00108d80 <= param) {
-          uVar5 = (int)(param - DOUBLE_00108d80) ^ 0x80000000;
+          paramEnum = (int)(param - DOUBLE_00108d80) ^ 0x80000000;
         }
         else {
-          uVar5 = (uint)(int)param;
+          paramEnum = (uint)(int)param;
         }
-        if ((uVar5 != 0x8536) && (uVar5 != 0x8538)) goto switchD_0001b7dc_caseD_86da;
-        *(short *)(iVar3 + 0x356c) = (short)uVar5;
+        if ((paramEnum != 0x8536) && (paramEnum != 0x8538)) goto switchD_0001b7dc_caseD_86da;
+        *(short *)(texUnitState + 0x356c) = (short)paramEnum;
         break;
       default:
 switchD_0001b7dc_caseD_86da:
@@ -3879,53 +3902,53 @@ switchD_0001b7dc_caseD_86da:
         goto LAB_0001c14c;
       case 0x86df:
         if (DOUBLE_00108d80 <= param) {
-          uVar5 = (int)(param - DOUBLE_00108d80) ^ 0x80000000;
+          paramEnum = (int)(param - DOUBLE_00108d80) ^ 0x80000000;
         }
         else {
-          uVar5 = (uint)(int)param;
+          paramEnum = (uint)(int)param;
         }
-        iVar4 = _CheckNVShaderOperation(glContext,uVar5);
-        if (iVar4 != 0) {
+        shaderOpError = _CheckNVShaderOperation(glContext,paramEnum);
+        if (shaderOpError != 0) {
           if (*(int *)(glContext + 0x7574) != 0) {
             return;
           }
-          *(int *)(glContext + 0x7574) = iVar4;
+          *(int *)(glContext + 0x7574) = shaderOpError;
           return;
         }
-        *(short *)(iVar3 + 0x3564) = (short)uVar5;
-        _gleUpdateTextureParams(glContext,uVar7);
+        *(short *)(texUnitState + 0x3564) = (short)paramEnum;
+        _gleUpdateTextureParams(glContext,texUnit);
         break;
       case 0x86e2:
-        *(float *)(iVar3 + 0x3598) = (float)param;
+        *(float *)(texUnitState + 0x3598) = (float)param;
         break;
       case 0x86e3:
-        *(float *)(iVar3 + 0x359c) = (float)param;
+        *(float *)(texUnitState + 0x359c) = (float)param;
         break;
       case 0x86e4:
         if (DOUBLE_00108d80 <= param) {
-          uVar5 = (int)(param - DOUBLE_00108d80) ^ 0x80000000;
+          paramEnum = (int)(param - DOUBLE_00108d80) ^ 0x80000000;
         }
         else {
-          uVar5 = (uint)(int)param;
+          paramEnum = (uint)(int)param;
         }
-        if ((uVar5 < 0x84c0) || (*(ushort *)(*(int *)(glContext + 0x468c) + 0xb4) + 0x84c0 <= uVar5))
+        if ((paramEnum < 0x84c0) || (*(ushort *)(*(int *)(glContext + 0x468c) + 0xb4) + 0x84c0 <= paramEnum))
         goto switchD_0001b7dc_caseD_86da;
-        *(short *)(iVar3 + 0x356a) = (short)uVar5;
+        *(short *)(texUnitState + 0x356a) = (short)paramEnum;
       }
-      uVar5 = *(uint *)(glContext + 800);
-      iVar3 = 1;
+      texEnvDirtyWord = *(uint *)(glContext + 800);
+      texEnvDirtyBit = 1;
     }
     else {
       if (target == 0x8861) {
         if (pname == 0x8862) {
           if (param == (double)FLOAT_00108e50) {
-            uVar7 = *(uint *)(glContext + 0x3444) &
-                    (-2 << (uVar7 & 0x1f) | 0xfffffffeU >> 0x20 - (uVar7 & 0x1f));
+            coordReplaceMask = *(uint *)(glContext + 0x3444) &
+                    (-2 << (texUnit & 0x1f) | 0xfffffffeU >> 0x20 - (texUnit & 0x1f));
           }
           else {
-            uVar7 = *(uint *)(glContext + 0x3444) | 1 << (uVar7 & 0x3f);
+            coordReplaceMask = *(uint *)(glContext + 0x3444) | 1 << (texUnit & 0x3f);
           }
-          *(uint *)(glContext + 0x3444) = uVar7;
+          *(uint *)(glContext + 0x3444) = coordReplaceMask;
           *(uint *)(glContext + 0x310) = *(uint *)(glContext + 0x310) | 0x400000;
           return;
         }
@@ -3933,54 +3956,54 @@ switchD_0001b7dc_caseD_86da:
       }
       if (target != 0x2300) {
         if ((target == 0x8500) && (pname == 0x8501)) {
-          iVar3 = 0x10000;
-          *(float *)(uVar7 * 0x7c + glContext + 0x3560) = (float)param;
-          uVar5 = *(uint *)(glContext + 800);
+          texEnvDirtyBit = 0x10000;
+          *(float *)(texUnit * 0x7c + glContext + 0x3560) = (float)param;
+          texEnvDirtyWord = *(uint *)(glContext + 800);
           goto LAB_0001c12c;
         }
         goto switchD_0001b7dc_caseD_86da;
       }
       if (pname == 0x2200) {
         if (DOUBLE_00108d80 <= param) {
-          pcVar6 = (code *)((int)(param - DOUBLE_00108d80) ^ 0x80000000);
+          envModeValue = (code *)((int)(param - DOUBLE_00108d80) ^ 0x80000000);
         }
         else {
-          pcVar6 = (code *)(int)param;
+          envModeValue = (code *)(int)param;
         }
-        if (pcVar6 != (code *)0x1e01) {
-          if (pcVar6 < (code *)0x1e02) {
-            if (pcVar6 != (code *)0x104) {
-              if (pcVar6 < (code *)0x105) {
-                bVar1 = pcVar6 == (code *)0x0;
+        if (envModeValue != (code *)0x1e01) {
+          if (envModeValue < (code *)0x1e02) {
+            if (envModeValue != (code *)0x104) {
+              if (envModeValue < (code *)0x105) {
+                enumAllowed = envModeValue == (code *)0x0;
               }
               else {
-                bVar1 = pcVar6 == (code *)0xbe2;
+                enumAllowed = envModeValue == (code *)0xbe2;
               }
 LAB_0001ba68:
-              if (!bVar1) goto switchD_0001b7dc_caseD_86da;
+              if (!enumAllowed) goto switchD_0001b7dc_caseD_86da;
             }
           }
           else {
-            if (pcVar6 < (code *)0x2100) goto switchD_0001b7dc_caseD_86da;
-            if ((code *)0x2100 < pcVar6) {
-              bVar1 = pcVar6 == (code *)0x8570;
+            if (envModeValue < (code *)0x2100) goto switchD_0001b7dc_caseD_86da;
+            if ((code *)0x2100 < envModeValue) {
+              enumAllowed = envModeValue == (code *)0x8570;
               goto LAB_0001ba68;
             }
           }
         }
-        iVar3 = 1;
-        *(short *)(uVar7 * 0x7c + glContext + 0x3538) = (short)pcVar6;
-        uVar5 = *(uint *)(glContext + 800);
+        texEnvDirtyBit = 1;
+        *(short *)(texUnit * 0x7c + glContext + 0x3538) = (short)envModeValue;
+        texEnvDirtyWord = *(uint *)(glContext + 800);
 LAB_0001c12c:
-        *(uint *)(glContext + 800) = uVar5 | iVar3 << (uVar7 & 0x3f);
+        *(uint *)(glContext + 800) = texEnvDirtyWord | texEnvDirtyBit << (texUnit & 0x3f);
         return;
       }
       if (pname == 0x8588) {
-        iVar3 = (int)param;
-        if (((iVar3 == 0x1702) || (iVar3 - 0x84c0U < 0x10)) ||
-           (((iVar3 == 0x8576 || (((iVar3 == 0x8577 || (iVar3 == 0x8578)) || (iVar3 == 0)))) ||
-            (iVar3 == 1)))) {
-          *(short *)(uVar7 * 0x7c + glContext + 0x3546) = (short)iVar3;
+        sourceEnum = (int)param;
+        if (((sourceEnum == 0x1702) || (sourceEnum - 0x84c0U < 0x10)) ||
+           (((sourceEnum == 0x8576 || (((sourceEnum == 0x8577 || (sourceEnum == 0x8578)) || (sourceEnum == 0)))) ||
+            (sourceEnum == 1)))) {
+          *(short *)(texUnit * 0x7c + glContext + 0x3546) = (short)sourceEnum;
           goto LAB_0001c0e0;
         }
         goto switchD_0001b7dc_caseD_86da;
@@ -3989,7 +4012,7 @@ LAB_0001c12c:
         if (pname == 0x8573) {
           if (((param == (double)FLOAT_00108e54) || (param == (double)FLOAT_00108ea4)) ||
              (param == (double)FLOAT_00108ea8)) {
-            *(float *)(uVar7 * 0x7c + glContext + 0x3558) = (float)param;
+            *(float *)(texUnit * 0x7c + glContext + 0x3558) = (float)param;
           }
           else {
 LAB_0001c0bc:
@@ -4001,80 +4024,80 @@ LAB_0001c0bc:
         else {
           if (0x8573 < pname) {
             if (pname == 0x8581) {
-              iVar3 = (int)param;
-              if (((((iVar3 == 0x1702) || (iVar3 - 0x84c0U < 0x10)) || (iVar3 == 0x8576)) ||
-                  ((iVar3 == 0x8577 || (iVar3 == 0x8578)))) || ((iVar3 == 0 || (iVar3 == 1)))) {
-                *(short *)(uVar7 * 0x7c + glContext + 0x3542) = (short)iVar3;
+              sourceEnum = (int)param;
+              if (((((sourceEnum == 0x1702) || (sourceEnum - 0x84c0U < 0x10)) || (sourceEnum == 0x8576)) ||
+                  ((sourceEnum == 0x8577 || (sourceEnum == 0x8578)))) || ((sourceEnum == 0 || (sourceEnum == 1)))) {
+                *(short *)(texUnit * 0x7c + glContext + 0x3542) = (short)sourceEnum;
                 goto LAB_0001c0e0;
               }
             }
             else if (pname < 0x8582) {
               if ((pname == 0x8580) &&
-                 (((((iVar3 = (int)param, iVar3 == 0x1702 || (iVar3 - 0x84c0U < 0x10)) ||
-                    ((iVar3 == 0x8576 || ((iVar3 == 0x8577 || (iVar3 == 0x8578)))))) || (iVar3 == 0)
-                   ) || (iVar3 == 1)))) {
-                *(short *)(uVar7 * 0x7c + glContext + 0x3540) = (short)iVar3;
+                 (((((sourceEnum = (int)param, sourceEnum == 0x1702 || (sourceEnum - 0x84c0U < 0x10)) ||
+                    ((sourceEnum == 0x8576 || ((sourceEnum == 0x8577 || (sourceEnum == 0x8578)))))) || (sourceEnum == 0)
+                   ) || (sourceEnum == 1)))) {
+                *(short *)(texUnit * 0x7c + glContext + 0x3540) = (short)sourceEnum;
                 goto LAB_0001c0e0;
               }
             }
             else if ((pname == 0x8582) &&
-                    (((iVar3 = (int)param, iVar3 == 0x1702 || (iVar3 - 0x84c0U < 0x10)) ||
-                     ((iVar3 == 0x8576 ||
-                      ((((iVar3 == 0x8577 || (iVar3 == 0x8578)) || (iVar3 == 0)) || (iVar3 == 1)))))
+                    (((sourceEnum = (int)param, sourceEnum == 0x1702 || (sourceEnum - 0x84c0U < 0x10)) ||
+                     ((sourceEnum == 0x8576 ||
+                      ((((sourceEnum == 0x8577 || (sourceEnum == 0x8578)) || (sourceEnum == 0)) || (sourceEnum == 1)))))
                      ))) {
-              *(short *)(uVar7 * 0x7c + glContext + 0x3544) = (short)iVar3;
+              *(short *)(texUnit * 0x7c + glContext + 0x3544) = (short)sourceEnum;
               goto LAB_0001c0e0;
             }
             goto switchD_0001b7dc_caseD_86da;
           }
           if (pname == 0x8571) {
-            pcVar6 = (code *)(int)param;
-            if (pcVar6 < (code *)0x8576) {
-              if ((pcVar6 < (code *)0x8574) && (pcVar6 != (code *)0x1e01)) {
-                if (pcVar6 < (code *)0x1e02) {
-                  bVar1 = pcVar6 == (code *)0x104;
+            combineRgbValue = (code *)(int)param;
+            if (combineRgbValue < (code *)0x8576) {
+              if ((combineRgbValue < (code *)0x8574) && (combineRgbValue != (code *)0x1e01)) {
+                if (combineRgbValue < (code *)0x1e02) {
+                  enumAllowed = combineRgbValue == (code *)0x104;
                 }
                 else {
-                  if (pcVar6 == (code *)0x2100) goto LAB_0001bc1c;
-                  bVar1 = pcVar6 == (code *)0x84e7;
+                  if (combineRgbValue == (code *)0x2100) goto LAB_0001bc1c;
+                  enumAllowed = combineRgbValue == (code *)0x84e7;
                 }
-                if (!bVar1) goto switchD_0001b7dc_caseD_86da;
+                if (!enumAllowed) goto switchD_0001b7dc_caseD_86da;
               }
             }
-            else if ((pcVar6 < (code *)0x86ae) ||
-                    (((code *)0x86af < pcVar6 && ((code *)0x2 < pcVar6 + -0x8744))))
+            else if ((combineRgbValue < (code *)0x86ae) ||
+                    (((code *)0x86af < combineRgbValue && ((code *)0x2 < combineRgbValue + -0x8744))))
             goto switchD_0001b7dc_caseD_86da;
 LAB_0001bc1c:
-            *(short *)(uVar7 * 0x7c + glContext + 0x353c) = (short)pcVar6;
+            *(short *)(texUnit * 0x7c + glContext + 0x353c) = (short)combineRgbValue;
           }
           else {
             if (pname < 0x8572) {
               if (pname == 0xd1c) {
                 if (((param != (double)FLOAT_00108e54) && (param != (double)FLOAT_00108ea4))
                    && (param != (double)FLOAT_00108ea8)) goto LAB_0001c0bc;
-                *(float *)(uVar7 * 0x7c + glContext + 0x355c) = (float)param;
+                *(float *)(texUnit * 0x7c + glContext + 0x355c) = (float)param;
                 goto LAB_0001c0e0;
               }
               goto switchD_0001b7dc_caseD_86da;
             }
-            pcVar6 = (code *)(int)param;
-            if (pcVar6 != (code *)0x84e7) {
-              if (pcVar6 < (code *)0x84e8) {
-                if (pcVar6 != (code *)0x1e01) {
-                  if (pcVar6 < (code *)0x1e02) {
-                    bVar1 = pcVar6 == (code *)0x104;
+            combineAlphaValue = (code *)(int)param;
+            if (combineAlphaValue != (code *)0x84e7) {
+              if (combineAlphaValue < (code *)0x84e8) {
+                if (combineAlphaValue != (code *)0x1e01) {
+                  if (combineAlphaValue < (code *)0x1e02) {
+                    enumAllowed = combineAlphaValue == (code *)0x104;
                   }
                   else {
-                    bVar1 = pcVar6 == (code *)0x2100;
+                    enumAllowed = combineAlphaValue == (code *)0x2100;
                   }
-                  if (!bVar1) goto switchD_0001b7dc_caseD_86da;
+                  if (!enumAllowed) goto switchD_0001b7dc_caseD_86da;
                 }
               }
-              else if ((pcVar6 < (code *)0x8574) ||
-                      (((code *)0x8575 < pcVar6 && ((code *)0x2 < pcVar6 + -0x8744))))
+              else if ((combineAlphaValue < (code *)0x8574) ||
+                      (((code *)0x8575 < combineAlphaValue && ((code *)0x2 < combineAlphaValue + -0x8744))))
               goto switchD_0001b7dc_caseD_86da;
             }
-            *(short *)(uVar7 * 0x7c + glContext + 0x353e) = (short)pcVar6;
+            *(short *)(texUnit * 0x7c + glContext + 0x353e) = (short)combineAlphaValue;
           }
         }
       }
@@ -4082,59 +4105,59 @@ LAB_0001bc1c:
         if (pname != 0x8591) {
           if (pname < 0x8592) {
             if (pname == 0x858a) {
-              iVar3 = (int)param;
-              if ((((((iVar3 == 0x1702) || (iVar3 - 0x84c0U < 0x10)) || (iVar3 == 0x8576)) ||
-                   ((iVar3 == 0x8577 || (iVar3 == 0x8578)))) || (iVar3 == 0)) || (iVar3 == 1)) {
-                *(short *)(uVar7 * 0x7c + glContext + 0x354a) = (short)iVar3;
+              sourceEnum = (int)param;
+              if ((((((sourceEnum == 0x1702) || (sourceEnum - 0x84c0U < 0x10)) || (sourceEnum == 0x8576)) ||
+                   ((sourceEnum == 0x8577 || (sourceEnum == 0x8578)))) || (sourceEnum == 0)) || (sourceEnum == 1)) {
+                *(short *)(texUnit * 0x7c + glContext + 0x354a) = (short)sourceEnum;
                 goto LAB_0001c0e0;
               }
             }
             else if (pname < 0x858a) {
-              iVar3 = (int)param;
-              if ((((iVar3 == 0x1702) || (iVar3 - 0x84c0U < 0x10)) ||
-                  ((iVar3 == 0x8576 || (((iVar3 == 0x8577 || (iVar3 == 0x8578)) || (iVar3 == 0))))))
-                 || (iVar3 == 1)) {
-                *(short *)(uVar7 * 0x7c + glContext + 0x3548) = (short)iVar3;
+              sourceEnum = (int)param;
+              if ((((sourceEnum == 0x1702) || (sourceEnum - 0x84c0U < 0x10)) ||
+                  ((sourceEnum == 0x8576 || (((sourceEnum == 0x8577 || (sourceEnum == 0x8578)) || (sourceEnum == 0))))))
+                 || (sourceEnum == 1)) {
+                *(short *)(texUnit * 0x7c + glContext + 0x3548) = (short)sourceEnum;
                 goto LAB_0001c0e0;
               }
             }
             else if ((pname == 0x8590) && ((int)param - 0x300U < 4)) {
-              *(short *)(uVar7 * 0x7c + glContext + 0x354c) = (short)(int)param;
+              *(short *)(texUnit * 0x7c + glContext + 0x354c) = (short)(int)param;
               goto LAB_0001c0e0;
             }
           }
           else if (pname == 0x8598) {
             if ((int)param - 0x302U < 2) {
-              *(short *)(uVar7 * 0x7c + glContext + 0x3552) = (short)(int)param;
+              *(short *)(texUnit * 0x7c + glContext + 0x3552) = (short)(int)param;
               goto LAB_0001c0e0;
             }
           }
           else if (pname < 0x8599) {
             if ((pname == 0x8592) && ((int)param - 0x300U < 4)) {
-              *(short *)(uVar7 * 0x7c + glContext + 0x3550) = (short)(int)param;
+              *(short *)(texUnit * 0x7c + glContext + 0x3550) = (short)(int)param;
               goto LAB_0001c0e0;
             }
           }
           else if (pname == 0x8599) {
             if ((int)param - 0x302U < 2) {
-              *(short *)(uVar7 * 0x7c + glContext + 0x3554) = (short)(int)param;
+              *(short *)(texUnit * 0x7c + glContext + 0x3554) = (short)(int)param;
               goto LAB_0001c0e0;
             }
           }
           else if ((pname == 0x859a) && ((int)param - 0x302U < 2)) {
-            *(short *)(uVar7 * 0x7c + glContext + 0x3556) = (short)(int)param;
+            *(short *)(texUnit * 0x7c + glContext + 0x3556) = (short)(int)param;
             goto LAB_0001c0e0;
           }
           goto switchD_0001b7dc_caseD_86da;
         }
         if (3 < (int)param - 0x300U) goto switchD_0001b7dc_caseD_86da;
-        *(short *)(uVar7 * 0x7c + glContext + 0x354e) = (short)(int)param;
+        *(short *)(texUnit * 0x7c + glContext + 0x354e) = (short)(int)param;
       }
 LAB_0001c0e0:
-      uVar5 = *(uint *)(glContext + 800);
-      iVar3 = 0x1000000;
+      texEnvDirtyWord = *(uint *)(glContext + 800);
+      texEnvDirtyBit = 0x1000000;
     }
-    *(uint *)(glContext + 800) = uVar5 | iVar3 << (uVar7 & 0x3f);
+    *(uint *)(glContext + 800) = texEnvDirtyWord | texEnvDirtyBit << (texUnit & 0x3f);
   }
   else {
     if (*(int *)(glContext + 0x7574) != 0) {
@@ -5450,116 +5473,118 @@ int _gleLoadForOptionsNO(param_1, param_2)
 }
 
 /* _gleStoreDataElementNO @ 0x1e1a4 (2540 bytes) */
-int _gleStoreDataElementNO(instrCursor, param_2, param_3, param_4, param_5, param_6, param_7)
+int _gleStoreDataElementNO(instrCursor, destOffset, srcComponentCount, elementType, elementSizeSelector, destComponentCount, formatFlags)
   uint *instrCursor;
-  uint param_2;
-  int param_3;
-  uint param_4;
-  int param_5;
-  int param_6;
-  uint param_7;
+  uint destOffset;
+  int srcComponentCount;
+  uint elementType;
+  int elementSizeSelector;
+  int destComponentCount;
+  uint formatFlags;
 {
-  bool bVar1;
-  uint uVar2;
+  bool caseMatched;
+  uint secondWord;
   uint *cursor;
-  uint uVar4;
+  uint defaultFourthComponent;
+  uint firstWord;
+  uint nextDisplacement;
   
-  if (param_5 == 1) {
-    if ((param_3 < 4) && (param_6 == 4)) {
-      uVar4 = 0x7f;
-      if ((param_4 != 8) && ((param_4 < 9 || (uVar4 = 0xff, param_4 != 9)))) {
-        uVar4 = 1;
+  if (elementSizeSelector == 1) {
+    if ((srcComponentCount < 4) && (destComponentCount == 4)) {
+      defaultFourthComponent = 0x7f;
+      if ((elementType != 8) && ((elementType < 9 || (defaultFourthComponent = 0xff, elementType != 9)))) {
+        defaultFourthComponent = 1;
       }
     }
     else {
-      uVar4 = 0;
+      defaultFourthComponent = 0;
     }
-    if ((param_7 >> 0x14 & 1) == 0) {
-      if (param_3 == 2) {
-        if (param_6 == 3) {
-          uVar4 = param_2 + 2;
-          uVar2 = param_2 & 0xffff | 0xb0050000;
+    if ((formatFlags >> 0x14 & 1) == 0) {
+      if (srcComponentCount == 2) {
+        if (destComponentCount == 3) {
+          nextDisplacement = destOffset + 2;
+          secondWord = destOffset & 0xffff | 0xb0050000;
           *instrCursor = 0x39400000;
           goto LAB_0001e570;
         }
-        if (param_6 < 4) {
-          if (param_6 != 2) {
+        if (destComponentCount < 4) {
+          if (destComponentCount != 2) {
             return instrCursor;
           }
 switchD_0001e87c_caseD_1:
           goto LAB_0001e284;
         }
-        if (param_6 == 4) {
-          uVar2 = 0x5400801e;
+        if (destComponentCount == 4) {
+          secondWord = 0x5400801e;
           goto LAB_0001e59c;
         }
-        if (param_6 != 5) {
+        if (destComponentCount != 5) {
           return instrCursor;
         }
 switchD_0001e87c_caseD_2:
-        uVar4 = 0x5400801e;
+        defaultFourthComponent = 0x5400801e;
 LAB_0001e588:
-        uVar2 = param_2 & 0xffff | 0x90050000;
+        secondWord = destOffset & 0xffff | 0x90050000;
         goto LAB_0001e304;
       }
-      if (param_3 < 3) {
-        if (param_3 != 1) {
+      if (srcComponentCount < 3) {
+        if (srcComponentCount != 1) {
           return instrCursor;
         }
-        switch(param_6) {
+        switch(destComponentCount) {
         default:
           goto switchD_0001e254_caseD_0;
         case 1:
           goto LAB_0001e4c8;
         case 2:
-          uVar4 = 0x5400402e;
-          uVar2 = param_2 & 0xffff | 0xb0050000;
+          defaultFourthComponent = 0x5400402e;
+          secondWord = destOffset & 0xffff | 0xb0050000;
           goto LAB_0001e304;
         case 3:
           *instrCursor = 0x5400402e;
-          uVar2 = param_2 + 2 & 0xffff | 0x98050000;
+          secondWord = destOffset + 2 & 0xffff | 0x98050000;
           instrCursor = instrCursor + 1;
-          *instrCursor = param_2 & 0xffff | 0xb0050000;
+          *instrCursor = destOffset & 0xffff | 0xb0050000;
           break;
         case 4:
-          uVar2 = 0x5400c00e;
+          secondWord = 0x5400c00e;
 LAB_0001e59c:
-          *instrCursor = uVar2;
-          uVar2 = param_2 & 0xffff | 0x90050000;
+          *instrCursor = secondWord;
+          secondWord = destOffset & 0xffff | 0x90050000;
           instrCursor = instrCursor + 1;
-          *instrCursor = uVar4 | 0x60000000;
+          *instrCursor = defaultFourthComponent | 0x60000000;
           break;
         case 5:
-          uVar4 = 0x5400c00e;
+          defaultFourthComponent = 0x5400c00e;
           goto LAB_0001e588;
         }
         goto LAB_0001e308;
       }
-      if (param_3 != 3) {
-        bVar1 = param_3 == 4;
+      if (srcComponentCount != 3) {
+        caseMatched = srcComponentCount == 4;
 LAB_0001e8f0:
-        if (!bVar1) {
+        if (!caseMatched) {
           return instrCursor;
         }
         goto switchD_0001e254_caseD_5;
       }
-      if (param_6 == 4) {
+      if (destComponentCount == 4) {
         *instrCursor = 0x5400801e;
         instrCursor[1] = 0x554a402e;
         instrCursor[2] = 0x7c005378;
         cursor = instrCursor + 3;
-        *cursor = uVar4 | 0x60000000;
+        *cursor = defaultFourthComponent | 0x60000000;
       }
       else {
-        if (param_6 < 5) {
-          if (param_6 != 3) {
+        if (destComponentCount < 5) {
+          if (destComponentCount != 3) {
             return instrCursor;
           }
-          uVar4 = param_2 & 0xffff | 0xb0050000;
-          uVar2 = param_2 + 2 & 0xffff | 0x99450000;
+          defaultFourthComponent = destOffset & 0xffff | 0xb0050000;
+          secondWord = destOffset + 2 & 0xffff | 0x99450000;
           goto LAB_0001e304;
         }
-        if (param_6 != 5) {
+        if (destComponentCount != 5) {
           return instrCursor;
         }
         *instrCursor = 0x5400801e;
@@ -5567,178 +5592,178 @@ LAB_0001e8f0:
         cursor = instrCursor + 2;
         *cursor = 0x7c005378;
       }
-      uVar4 = param_2 & 0xffff | 0x90050000;
+      firstWord = destOffset & 0xffff | 0x90050000;
 LAB_0001ebe0:
       instrCursor = cursor + 1;
-      *instrCursor = uVar4;
+      *instrCursor = firstWord;
     }
     else {
-      if (param_3 == 2) {
-        if (param_6 == 3) {
-          uVar4 = param_2 + 1;
-          *instrCursor = param_2 + 2 & 0xffff | 0x39400000;
+      if (srcComponentCount == 2) {
+        if (destComponentCount == 3) {
+          nextDisplacement = destOffset + 1;
+          *instrCursor = destOffset + 2 & 0xffff | 0x39400000;
           instrCursor = instrCursor + 1;
           *instrCursor = 0x7c05572c;
-          uVar2 = param_2 & 0xffff | 0x39400000;
+          secondWord = destOffset & 0xffff | 0x39400000;
 LAB_0001e570:
           instrCursor = instrCursor + 1;
-          *instrCursor = uVar2;
-          uVar2 = uVar4 & 0xffff | 0x99450000;
+          *instrCursor = secondWord;
+          secondWord = nextDisplacement & 0xffff | 0x99450000;
           goto LAB_0001e308;
         }
-        if (3 < param_6) {
-          if (param_6 != 4) {
-            if (param_6 != 5) {
+        if (3 < destComponentCount) {
+          if (destComponentCount != 4) {
+            if (destComponentCount != 5) {
               return instrCursor;
             }
-            uVar4 = param_2 & 0xffff | 0x39400000;
+            firstWord = destOffset & 0xffff | 0x39400000;
             *instrCursor = 0x5400801e;
-            uVar2 = 0x7c05552c;
+            secondWord = 0x7c05552c;
             goto LAB_0001e35c;
           }
           *instrCursor = 0x5400801e;
-          instrCursor[1] = param_2 & 0xffff | 0x39400000;
+          instrCursor[1] = destOffset & 0xffff | 0x39400000;
           cursor = instrCursor + 2;
-          *cursor = uVar4 | 0x60000000;
+          *cursor = defaultFourthComponent | 0x60000000;
           goto LAB_0001e448;
         }
-        if (param_6 != 2) {
+        if (destComponentCount != 2) {
           return instrCursor;
         }
-        uVar2 = 0x7c05572c;
-        uVar4 = param_2 + 2 & 0xffff | 0x39400000;
+        secondWord = 0x7c05572c;
+        defaultFourthComponent = destOffset + 2 & 0xffff | 0x39400000;
       }
       else {
-        if (param_3 < 3) {
-          if (param_3 != 1) {
+        if (srcComponentCount < 3) {
+          if (srcComponentCount != 1) {
             return instrCursor;
           }
-          switch(param_6) {
+          switch(destComponentCount) {
           default:
             goto switchD_0001e254_caseD_0;
           case 1:
-            param_2 = param_2 + 3;
+            destOffset = destOffset + 3;
 LAB_0001e4c8:
-            uVar4 = param_2 & 0xffff | 0x98050000;
+            firstWord = destOffset & 0xffff | 0x98050000;
             break;
           case 2:
 switchD_0001e254_caseD_2:
-            param_2 = param_2 + 2;
+            destOffset = destOffset + 2;
 LAB_0001e284:
-            uVar4 = param_2 & 0xffff | 0xb0050000;
+            firstWord = destOffset & 0xffff | 0xb0050000;
             break;
           case 3:
-            uVar4 = param_2 + 2 & 0xffff | 0xb0050000;
+            firstWord = destOffset + 2 & 0xffff | 0xb0050000;
             *instrCursor = 0x39400000;
-            uVar2 = param_2 + 1 & 0xffff | 0x99450000;
+            secondWord = destOffset + 1 & 0xffff | 0x99450000;
 LAB_0001e35c:
-            instrCursor[1] = uVar4;
+            instrCursor[1] = firstWord;
             instrCursor = instrCursor + 2;
-            *instrCursor = uVar2;
+            *instrCursor = secondWord;
             goto LAB_0001ebe4;
           case 4:
-            uVar4 = uVar4 << 8 | 0x64000000;
+            defaultFourthComponent = defaultFourthComponent << 8 | 0x64000000;
             goto LAB_0001e588;
           case 5:
 switchD_0001e254_caseD_5:
-            uVar4 = param_2 & 0xffff | 0x90050000;
+            firstWord = destOffset & 0xffff | 0x90050000;
           }
           goto LAB_0001e288;
         }
-        if (param_3 == 3) {
-          if (param_6 == 4) {
+        if (srcComponentCount == 3) {
+          if (destComponentCount == 4) {
             *instrCursor = 0x5400801e;
             instrCursor[1] = 0x554a402e;
             instrCursor[2] = 0x7c005378;
-            uVar4 = uVar4 | 0x60000000;
+            defaultFourthComponent = defaultFourthComponent | 0x60000000;
             cursor = instrCursor + 3;
-            *cursor = param_2 & 0xffff | 0x39400000;
+            *cursor = destOffset & 0xffff | 0x39400000;
           }
           else {
-            if (param_6 < 5) {
-              if (param_6 != 3) {
+            if (destComponentCount < 5) {
+              if (destComponentCount != 3) {
                 return instrCursor;
               }
-              uVar4 = param_2 + 2 & 0xffff | 0x39400000;
-              *instrCursor = param_2 + 1 & 0xffff | 0x99450000;
-              uVar2 = 0x7c05572c;
+              firstWord = destOffset + 2 & 0xffff | 0x39400000;
+              *instrCursor = destOffset + 1 & 0xffff | 0x99450000;
+              secondWord = 0x7c05572c;
               goto LAB_0001e35c;
             }
-            if (param_6 != 5) {
+            if (destComponentCount != 5) {
               return instrCursor;
             }
             *instrCursor = 0x5400801e;
             instrCursor[1] = 0x554a402e;
-            uVar4 = param_2 & 0xffff | 0x39400000;
+            defaultFourthComponent = destOffset & 0xffff | 0x39400000;
             cursor = instrCursor + 2;
             *cursor = 0x7c005378;
           }
           cursor = cursor + 1;
-          *cursor = uVar4;
+          *cursor = defaultFourthComponent;
 LAB_0001e448:
-          uVar4 = 0x7c05552c;
+          firstWord = 0x7c05552c;
           goto LAB_0001ebe0;
         }
-        if (param_3 != 4) {
+        if (srcComponentCount != 4) {
           return instrCursor;
         }
-        uVar4 = param_2 & 0xffff | 0x39400000;
-        uVar2 = 0x7c05552c;
+        defaultFourthComponent = destOffset & 0xffff | 0x39400000;
+        secondWord = 0x7c05552c;
       }
 LAB_0001e304:
-      *instrCursor = uVar4;
+      *instrCursor = defaultFourthComponent;
 LAB_0001e308:
       instrCursor = instrCursor + 1;
-      *instrCursor = uVar2;
+      *instrCursor = secondWord;
     }
   }
   else {
-    if (param_5 == 2) {
-      if ((param_3 < 4) && (param_6 == 4)) {
-        uVar4 = 0x7fff;
-        if ((param_4 != 10) && ((param_4 < 0xb || (uVar4 = 0xffff, param_4 != 0xb)))) {
-          uVar4 = 1;
+    if (elementSizeSelector == 2) {
+      if ((srcComponentCount < 4) && (destComponentCount == 4)) {
+        defaultFourthComponent = 0x7fff;
+        if ((elementType != 10) && ((elementType < 0xb || (defaultFourthComponent = 0xffff, elementType != 0xb)))) {
+          defaultFourthComponent = 1;
         }
       }
       else {
-        uVar4 = 0;
+        defaultFourthComponent = 0;
       }
-      if ((param_7 >> 0x14 & 1) == 0) {
-        if (param_3 != 2) {
-          if (2 < param_3) {
-            if (param_3 == 3) {
-              if (param_6 == 4) {
-                uVar2 = 0x554a0000;
-                uVar4 = uVar4 | 0x614a0000;
+      if ((formatFlags >> 0x14 & 1) == 0) {
+        if (srcComponentCount != 2) {
+          if (2 < srcComponentCount) {
+            if (srcComponentCount == 3) {
+              if (destComponentCount == 4) {
+                secondWord = 0x554a0000;
+                defaultFourthComponent = defaultFourthComponent | 0x614a0000;
                 goto LAB_0001e9d8;
               }
-              if (4 < param_6) {
-                if (param_6 != 5) {
+              if (4 < destComponentCount) {
+                if (destComponentCount != 5) {
                   return instrCursor;
                 }
-                uVar2 = param_2 + 4 & 0xffff;
-                uVar4 = 0x554a801e;
+                secondWord = destOffset + 4 & 0xffff;
+                defaultFourthComponent = 0x554a801e;
                 goto LAB_0001e9bc;
               }
-              if (param_6 != 3) {
+              if (destComponentCount != 3) {
                 return instrCursor;
               }
-              uVar4 = param_2 & 0xffff | 0x90050000;
-              uVar2 = param_2 + 4 & 0xffff | 0xb1450000;
+              defaultFourthComponent = destOffset & 0xffff | 0x90050000;
+              secondWord = destOffset + 4 & 0xffff | 0xb1450000;
             }
             else {
-              if (param_3 != 4) {
+              if (srcComponentCount != 4) {
                 return instrCursor;
               }
-              uVar4 = param_2 & 0xffff | 0x90050000;
-              uVar2 = param_2 + 4 & 0xffff | 0x91450000;
+              defaultFourthComponent = destOffset & 0xffff | 0x90050000;
+              secondWord = destOffset + 4 & 0xffff | 0x91450000;
             }
             goto LAB_0001e304;
           }
-          if (param_3 != 1) {
+          if (srcComponentCount != 1) {
             return instrCursor;
           }
-          switch(param_6) {
+          switch(destComponentCount) {
           default:
             goto switchD_0001e254_caseD_0;
           case 1:
@@ -5746,92 +5771,92 @@ LAB_0001e308:
           case 2:
             goto switchD_0001e87c_caseD_2;
           case 3:
-            uVar2 = 0x5400801e;
-            uVar4 = param_2 + 4;
+            secondWord = 0x5400801e;
+            nextDisplacement = destOffset + 4;
             goto LAB_0001e8b0;
           case 4:
-            uVar2 = 0x54000000;
-            uVar4 = uVar4 | 0x39400000;
+            secondWord = 0x54000000;
+            defaultFourthComponent = defaultFourthComponent | 0x39400000;
             break;
           case 5:
-            uVar4 = 0x5400801e;
+            firstWord = 0x5400801e;
 LAB_0001e780:
-            *instrCursor = uVar4;
+            *instrCursor = firstWord;
             instrCursor = instrCursor + 1;
             *instrCursor = 0x39400000;
 LAB_0001e79c:
-            uVar2 = param_2 + 4 & 0xffff;
+            secondWord = destOffset + 4 & 0xffff;
             instrCursor = instrCursor + 1;
-            *instrCursor = param_2 & 0xffff | 0x90050000;
+            *instrCursor = destOffset & 0xffff | 0x90050000;
             goto LAB_0001e9c8;
           }
 LAB_0001e9d8:
-          uVar2 = uVar2 | 0x801e;
+          secondWord = secondWord | 0x801e;
 LAB_0001e9dc:
-          *instrCursor = uVar2;
-          instrCursor[1] = uVar4;
+          *instrCursor = secondWord;
+          instrCursor[1] = defaultFourthComponent;
           cursor = instrCursor + 2;
-          *cursor = param_2 & 0xffff | 0x90050000;
-          uVar4 = param_2 + 4 & 0xffff | 0x91450000;
+          *cursor = destOffset & 0xffff | 0x90050000;
+          firstWord = destOffset + 4 & 0xffff | 0x91450000;
           goto LAB_0001ebe0;
         }
-        if (param_6 != 3) {
-          if (param_6 < 4) {
-            bVar1 = param_6 == 2;
+        if (destComponentCount != 3) {
+          if (destComponentCount < 4) {
+            caseMatched = destComponentCount == 2;
             goto LAB_0001e8f0;
           }
-          if (param_6 != 4) {
-            if (param_6 != 5) {
+          if (destComponentCount != 4) {
+            if (destComponentCount != 5) {
               return instrCursor;
             }
             goto switchD_0001e6ec_caseD_5;
           }
-          uVar2 = param_2 + 4 & 0xffff;
-          uVar4 = uVar4 | 0x39400000;
+          secondWord = destOffset + 4 & 0xffff;
+          defaultFourthComponent = defaultFourthComponent | 0x39400000;
           goto LAB_0001e9bc;
         }
-        uVar4 = param_2 + 4;
+        nextDisplacement = destOffset + 4;
 LAB_0001e920:
         *instrCursor = 0x39400000;
 LAB_0001e930:
         instrCursor = instrCursor + 1;
-        *instrCursor = param_2 & 0xffff | 0x90050000;
+        *instrCursor = destOffset & 0xffff | 0x90050000;
       }
       else {
-        if (param_3 == 2) {
-          if (param_6 == 3) {
-            uVar2 = 0x5400803e;
-            uVar4 = param_2 + 6;
+        if (srcComponentCount == 2) {
+          if (destComponentCount == 3) {
+            secondWord = 0x5400803e;
+            nextDisplacement = destOffset + 6;
 LAB_0001e8b0:
-            *instrCursor = uVar2;
+            *instrCursor = secondWord;
             instrCursor = instrCursor + 1;
             *instrCursor = 0x39400000;
             goto LAB_0001e930;
           }
-          if (param_6 < 4) {
-            if (param_6 != 2) {
+          if (destComponentCount < 4) {
+            if (destComponentCount != 2) {
               return instrCursor;
             }
-            uVar4 = 0x5400803e;
+            defaultFourthComponent = 0x5400803e;
             goto LAB_0001e588;
           }
-          if (param_6 != 4) {
-            if (param_6 != 5) {
+          if (destComponentCount != 4) {
+            if (destComponentCount != 5) {
               return instrCursor;
             }
-            uVar4 = 0x5400803e;
+            firstWord = 0x5400803e;
             goto LAB_0001e780;
           }
-          uVar4 = uVar4 | 0x3d400000;
+          defaultFourthComponent = defaultFourthComponent | 0x3d400000;
 LAB_0001e818:
-          uVar2 = 0x5400803e;
+          secondWord = 0x5400803e;
           goto LAB_0001e9dc;
         }
-        if (param_3 < 3) {
-          if (param_3 != 1) {
+        if (srcComponentCount < 3) {
+          if (srcComponentCount != 1) {
             return instrCursor;
           }
-          switch(param_6) {
+          switch(destComponentCount) {
           default:
             goto switchD_0001e254_caseD_0;
           case 1:
@@ -5839,11 +5864,11 @@ LAB_0001e818:
           case 2:
             goto switchD_0001e254_caseD_5;
           case 3:
-            uVar4 = param_2 + 6;
+            nextDisplacement = destOffset + 6;
             goto LAB_0001e920;
           case 4:
-            uVar2 = param_2 + 4 & 0xffff;
-            uVar4 = uVar4 | 0x3d400000;
+            secondWord = destOffset + 4 & 0xffff;
+            defaultFourthComponent = defaultFourthComponent | 0x3d400000;
             break;
           case 5:
 switchD_0001e6ec_caseD_5:
@@ -5851,130 +5876,130 @@ switchD_0001e6ec_caseD_5:
             goto LAB_0001e79c;
           }
 LAB_0001e9bc:
-          *instrCursor = uVar4;
+          *instrCursor = defaultFourthComponent;
           instrCursor = instrCursor + 1;
-          *instrCursor = param_2 & 0xffff | 0x90050000;
+          *instrCursor = destOffset & 0xffff | 0x90050000;
 LAB_0001e9c8:
-          uVar2 = uVar2 | 0x91450000;
+          secondWord = secondWord | 0x91450000;
           goto LAB_0001e308;
         }
-        if (param_3 != 3) {
-          if (param_3 != 4) {
+        if (srcComponentCount != 3) {
+          if (srcComponentCount != 4) {
             return instrCursor;
           }
-          uVar2 = 0x5400803e;
-          uVar4 = 0x554a803e;
+          secondWord = 0x5400803e;
+          defaultFourthComponent = 0x554a803e;
           goto LAB_0001e9dc;
         }
-        if (param_6 == 4) {
-          uVar4 = uVar4 | 0x654a0000;
+        if (destComponentCount == 4) {
+          defaultFourthComponent = defaultFourthComponent | 0x654a0000;
           goto LAB_0001e818;
         }
-        if (4 < param_6) {
-          if (param_6 != 5) {
+        if (4 < destComponentCount) {
+          if (destComponentCount != 5) {
             return instrCursor;
           }
-          uVar2 = param_2 + 4 & 0xffff;
-          uVar4 = 0x5400803e;
+          secondWord = destOffset + 4 & 0xffff;
+          defaultFourthComponent = 0x5400803e;
           goto LAB_0001e9bc;
         }
-        if (param_6 != 3) {
+        if (destComponentCount != 3) {
           return instrCursor;
         }
-        uVar4 = param_2 + 6;
+        nextDisplacement = destOffset + 6;
         *instrCursor = 0x5400803e;
         instrCursor = instrCursor + 1;
-        *instrCursor = param_2 & 0xffff | 0x90050000;
+        *instrCursor = destOffset & 0xffff | 0x90050000;
       }
-      uVar2 = uVar4 & 0xffff | 0xb1450000;
+      secondWord = nextDisplacement & 0xffff | 0xb1450000;
       goto LAB_0001e308;
     }
-    if (param_3 == 2) {
-      if (param_5 == 4) {
-        *instrCursor = param_2 & 0xffff | 0xd8250000;
+    if (srcComponentCount == 2) {
+      if (elementSizeSelector == 4) {
+        *instrCursor = destOffset & 0xffff | 0xd8250000;
       }
       else {
-        *instrCursor = param_2 & 0xffff | 0xd0250000;
+        *instrCursor = destOffset & 0xffff | 0xd0250000;
         instrCursor = instrCursor + 1;
-        *instrCursor = param_2 + 4 & 0xffff | 0xd0450000;
+        *instrCursor = destOffset + 4 & 0xffff | 0xd0450000;
       }
 LAB_0001eaac:
       instrCursor = instrCursor + 1;
-      if ((param_7 >> 0x15 & 1) == 0) {
-        if (param_6 < 3) {
+      if ((formatFlags >> 0x15 & 1) == 0) {
+        if (destComponentCount < 3) {
           return instrCursor;
         }
-        uVar4 = param_2 + 8 & 0xffff | 0xd0e50000;
+        firstWord = destOffset + 8 & 0xffff | 0xd0e50000;
         goto LAB_0001eb54;
       }
-      uVar4 = param_2 + 8;
-      if (param_6 != 3) {
-        if (param_6 == 4) {
-          uVar4 = param_2 + 8 & 0xffff | 0xd9250000;
+      firstWord = destOffset + 8;
+      if (destComponentCount != 3) {
+        if (destComponentCount == 4) {
+          firstWord = destOffset + 8 & 0xffff | 0xd9250000;
         }
         else {
-          if (param_6 != 5) {
+          if (destComponentCount != 5) {
             return instrCursor;
           }
-          uVar4 = param_2 + 8 & 0xffff | 0xd8e50000;
+          firstWord = destOffset + 8 & 0xffff | 0xd8e50000;
         }
         goto LAB_0001e288;
       }
     }
     else {
-      if (param_3 < 3) {
-        if (param_3 != 1) {
+      if (srcComponentCount < 3) {
+        if (srcComponentCount != 1) {
           return instrCursor;
         }
-        *instrCursor = param_2 & 0xffff | 0xd0250000;
+        *instrCursor = destOffset & 0xffff | 0xd0250000;
         instrCursor = instrCursor + 1;
-        if (param_6 < 2) {
+        if (destComponentCount < 2) {
           return instrCursor;
         }
-        *instrCursor = param_2 + 4 & 0xffff | 0xd0e50000;
+        *instrCursor = destOffset + 4 & 0xffff | 0xd0e50000;
         goto LAB_0001eaac;
       }
-      if (param_3 != 3) {
-        if (param_3 != 4) {
+      if (srcComponentCount != 3) {
+        if (srcComponentCount != 4) {
           return instrCursor;
         }
-        if (param_5 == 4) {
-          uVar4 = param_2 & 0xffff | 0xd8250000;
-          uVar2 = param_2 + 8 & 0xffff | 0xd8650000;
+        if (elementSizeSelector == 4) {
+          defaultFourthComponent = destOffset & 0xffff | 0xd8250000;
+          secondWord = destOffset + 8 & 0xffff | 0xd8650000;
           goto LAB_0001e304;
         }
-        *instrCursor = param_2 & 0xffff | 0xd0250000;
-        instrCursor[1] = param_2 + 4 & 0xffff | 0xd0450000;
+        *instrCursor = destOffset & 0xffff | 0xd0250000;
+        instrCursor[1] = destOffset + 4 & 0xffff | 0xd0450000;
         cursor = instrCursor + 2;
-        *cursor = param_2 + 8 & 0xffff | 0xd0650000;
-        uVar4 = param_2 + 0xc & 0xffff | 0xd0850000;
+        *cursor = destOffset + 8 & 0xffff | 0xd0650000;
+        firstWord = destOffset + 0xc & 0xffff | 0xd0850000;
         goto LAB_0001ebe0;
       }
-      if (param_5 == 4) {
-        *instrCursor = param_2 & 0xffff | 0xd8250000;
+      if (elementSizeSelector == 4) {
+        *instrCursor = destOffset & 0xffff | 0xd8250000;
       }
       else {
-        *instrCursor = param_2 & 0xffff | 0xd0250000;
+        *instrCursor = destOffset & 0xffff | 0xd0250000;
         instrCursor = instrCursor + 1;
-        *instrCursor = param_2 + 4 & 0xffff | 0xd0450000;
+        *instrCursor = destOffset + 4 & 0xffff | 0xd0450000;
       }
       instrCursor = instrCursor + 1;
-      uVar4 = param_2 + 8 & 0xffff | 0xd0650000;
+      firstWord = destOffset + 8 & 0xffff | 0xd0650000;
 LAB_0001eb54:
-      *instrCursor = uVar4;
+      *instrCursor = firstWord;
       instrCursor = instrCursor + 1;
-      if (param_6 == 4) {
-        uVar4 = param_2 + 0xc & 0xffff | 0xd1050000;
+      if (destComponentCount == 4) {
+        firstWord = destOffset + 0xc & 0xffff | 0xd1050000;
         goto LAB_0001e288;
       }
-      if (param_6 != 5) {
+      if (destComponentCount != 5) {
         return instrCursor;
       }
-      uVar4 = param_2 + 0xc;
+      firstWord = destOffset + 0xc;
     }
-    uVar4 = uVar4 & 0xffff | 0xd0e50000;
+    firstWord = firstWord & 0xffff | 0xd0e50000;
 LAB_0001e288:
-    *instrCursor = uVar4;
+    *instrCursor = firstWord;
   }
 LAB_0001ebe4:
   instrCursor = instrCursor + 1;

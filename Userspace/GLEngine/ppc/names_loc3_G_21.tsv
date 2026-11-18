@@ -1,0 +1,8 @@
+local	_gleFreeShaderObject	param_2	shaderObject	CONFIRMED	the GL object being freed: +0x10 kind (0x8b40 GL_PROGRAM_OBJECT_ARB, 0x8b48 GL_SHADER_OBJECT_ARB), +0x18 string, +0x20/+0x24 vertex/fragment program parts, +0x40 compiled shader, +0x44/+0x48 attached objects and count; freed last with _gleVecFree
+local	_gleFreeShaderObject	piVar1	rendererDispatch	INFERRED	iVar3 + 0x2e4: the renderer's dispatch object whose +0x1a0 slot deletes that renderer's per-program resource
+local	_gleFreeShaderObject	puVar2	rendererContextPtr	INFERRED	iVar3 + 0xc: address of the renderer context word passed to the +0x1a0 callback
+local	_gleFreeShaderObject	iVar3	freeTargetOrLoopIndex	INFERRED	one variable used for the pointers freed with _gleVecFree (program-part fields at +0x20, +8, +0xc, +0x18, +0x1c), then the attached-object loop index and the renderer record cursor (glContext + 0x85a0 stepped 0x2e0)
+local	_gleFreeShaderObject	iVar4	refCountMinusOne	CONFIRMED	attached object's reference count (+8) after decrement; the hash name and object are deleted when it reaches 1
+local	_gleFreeShaderObject	iVar5	subObjectOrCount	INFERRED	one variable holding the program part (shaderObject+0x20 or +0x24), its freed fields, the attached object count (+0x48) and the renderer loop index
+local	_gleFreeShaderObject	iVar6	attachedListOrByteOffset	INFERRED	the attached object pointer array (shaderObject+0x44) and, in the renderer loop, the byte offset index*4 into the per-renderer handle tables
+local	_gleFreeShaderObject	iVar7	attachedObject	CONFIRMED	element i of the attached object array: its +8 refcount is decremented and +4 names it in the hash

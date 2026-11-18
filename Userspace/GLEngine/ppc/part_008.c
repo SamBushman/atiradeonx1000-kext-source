@@ -1850,9 +1850,9 @@ void _gleSetClipInterpFunc(glContext, forwardedArg2, forwardedArg3, forwardedArg
 }
 
 /* _gleBuildInterpolateFunc @ 0x516ac (1776 bytes) */
-int _gleBuildInterpolateFunc(glContext, param_2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+int _gleBuildInterpolateFunc(glContext, clipSpaceFlag, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
   int glContext;
-  int param_2;
+  int clipSpaceFlag;
   undefined4 unusedArg3;
   undefined4 unusedArg4;
   undefined4 unusedArg5;
@@ -1862,57 +1862,65 @@ int _gleBuildInterpolateFunc(glContext, param_2, unusedArg3, unusedArg4, unusedA
 {
   uint loopIndex2;
   uint loopIndex;
-  bool bVar1;
-  uint uVar2;
+  bool programActive;
+  bool noBranchPending;
+  uint texCoordUnit;
+  uint funcKeyPartial;
   uint glContextWord4e1c;
-  int iVar3;
+  int funcCacheElem;
   int glContextWord5438;
   int remaining;
-  uint uVar4;
-  int iVar5;
+  uint unitShift;
+  int programRecord;
+  int chunkWordCountThenTotalWords;
   int chunkWordCountThenCodeCursor;
   int chunkWordCount;
-  int *piVar6;
+  int *selectedFunc;
+  int *funcCache;
   int chunkWordCount2;
-  undefined *puVar8;
+  undefined *pushInstructionsFn;
   undefined *codeChunk;
-  uint *puVar9;
+  uint *codeCursor;
   uint *srcCursor;
-  uint *puVar10;
-  uint uVar11;
-  uint uVar12;
-  int *piVar13;
-  int *piVar14;
-  uint *puVar15;
+  uint *srcEqualDestBranch;
+  uint funcKeyBase;
+  uint branchInstruction;
+  uint clipFlag;
+  uint funcKey;
+  uint enabledUnitsShifted;
+  int *cacheListHead;
+  int *cacheElem;
+  int *resultFunc;
+  uint *tailCodeCursor;
   
-  puVar10 = (uint *)0x0;
+  srcEqualDestBranch = (uint *)0x0;
   if ((*(uint *)PTR__gle_processor_0011204c & 0x10) == 0) {
-    piVar6 = (int *)_gleSelectArrayInterpFunc(glContext,param_2);
-    return piVar6;
+    selectedFunc = (int *)_gleSelectArrayInterpFunc(glContext,clipSpaceFlag);
+    return selectedFunc;
   }
-  uVar11 = 1;
-  if (param_2 != 1) {
-    uVar11 = 0x10;
+  funcKeyBase = 1;
+  if (clipSpaceFlag != 1) {
+    funcKeyBase = 0x10;
   }
   if (*(int *)(glContext + 0x34f4) == 0x1d01) {
-    uVar11 = uVar11 | 2;
+    funcKeyBase = funcKeyBase | 2;
   }
   glContextWord4e1c = *(uint *)(glContext + 0x4e1c);
   if (glContextWord4e1c == 0x1c01) {
-    uVar12 = uVar11 | 0x10020;
+    funcKey = funcKeyBase | 0x10020;
     if (((*(char *)(glContext + 0x4664) == '\0') && (*(int *)(glContext + 0x5434) == 0)) &&
-       (uVar12 = uVar11 | 0x10060, *(char *)(glContext + 0x30aa) != '\0')) {
-      uVar12 = uVar11 | 0x10470;
+       (funcKey = funcKeyBase | 0x10060, *(char *)(glContext + 0x30aa) != '\0')) {
+      funcKey = funcKeyBase | 0x10470;
     }
   }
   else {
-    uVar12 = uVar11;
+    funcKey = funcKeyBase;
     if ((glContextWord4e1c < 0x1c02) && (glContextWord4e1c == 0x1c00)) {
       if ((*(uint *)(*(int *)(glContext + 0x468c) + 0x94) & 4) == 0) {
-        uVar11 = uVar11 | 4;
+        funcKeyBase = funcKeyBase | 4;
       }
-      bVar1 = *(char *)(glContext + 0x466c) != '\0';
-      if (bVar1) {
+      programActive = *(char *)(glContext + 0x466c) != '\0';
+      if (programActive) {
         glContextWord5438 = *(int *)(glContext + 0x5438);
       }
       else {
@@ -1921,227 +1929,227 @@ int _gleBuildInterpolateFunc(glContext, param_2, unusedArg3, unusedArg4, unusedA
           loopIndex = 0;
           *(uint *)(glContext + 0x5150) = *(uint *)(glContext + 0x514c);
           do {
-            uVar12 = *(uint *)(glContext + 0x514c) >> (loopIndex & 0x3f);
-            if ((uVar12 & 1) == 0) {
-              if (uVar12 == 0) goto LAB_00051840;
+            enabledUnitsShifted = *(uint *)(glContext + 0x514c) >> (loopIndex & 0x3f);
+            if ((enabledUnitsShifted & 1) == 0) {
+              if (enabledUnitsShifted == 0) goto LAB_00051840;
             }
             else {
-              uVar11 = uVar11 | 0x10000 << (loopIndex & 0x3f);
+              funcKeyBase = funcKeyBase | 0x10000 << (loopIndex & 0x3f);
             }
             loopIndex = loopIndex + 1;
           } while( true );
         }
       }
-      iVar5 = 0;
-      if (bVar1) {
-        iVar5 = *(int *)(*(int *)(glContext + 0x5424) + 0x4cc);
+      programRecord = 0;
+      if (programActive) {
+        programRecord = *(int *)(*(int *)(glContext + 0x5424) + 0x4cc);
       }
       if (glContextWord5438 != 0) {
-        iVar5 = *(int *)(*(int *)(*(int *)(glContext + 0x5430) + 0x24) + 0x508);
+        programRecord = *(int *)(*(int *)(*(int *)(glContext + 0x5430) + 0x24) + 0x508);
       }
       *(undefined4 *)(glContext + 0x5150) = 0;
-      if (iVar5 != 0) {
-        srcCursor = (uint *)(iVar5 + *(int *)(iVar5 + 0x24) * 8);
-        for (remaining = *(int *)(iVar5 + 0x20); remaining != 0; remaining = remaining + -1) {
+      if (programRecord != 0) {
+        srcCursor = (uint *)(programRecord + *(int *)(programRecord + 0x24) * 8);
+        for (remaining = *(int *)(programRecord + 0x20); remaining != 0; remaining = remaining + -1) {
           if ((*srcCursor >> 0x10 & 0xf) == 7) {
-            uVar2 = *srcCursor & 0x1f;
-            uVar11 = uVar11 | 0x10000 << uVar2;
-            *(uint *)(glContext + 0x5150) = *(uint *)(glContext + 0x5150) | 1 << uVar2;
+            texCoordUnit = *srcCursor & 0x1f;
+            funcKeyBase = funcKeyBase | 0x10000 << texCoordUnit;
+            *(uint *)(glContext + 0x5150) = *(uint *)(glContext + 0x5150) | 1 << texCoordUnit;
           }
           srcCursor = srcCursor + 2;
         }
       }
 LAB_00051840:
-      uVar2 = uVar11;
+      funcKeyPartial = funcKeyBase;
       if ((*(char *)(glContext + 0x316a) != '\0') &&
-         (uVar2 = uVar11 | 0x80, *(short *)(0x3170 + glContext + 4) == 0x1102)) {
-        uVar2 = uVar11 | 0x280;
+         (funcKeyPartial = funcKeyBase | 0x80, *(short *)(0x3170 + glContext + 4) == 0x1102)) {
+        funcKeyPartial = funcKeyBase | 0x280;
       }
       if (((*(char *)(glContext + 0x30aa) == '\0') || (*(char *)(glContext + 0x4664) != '\0')) ||
          (*(int *)(glContext + 0x5434) != 0)) {
-        uVar12 = uVar2 | 0x20;
+        funcKey = funcKeyPartial | 0x20;
         if (*(char *)(glContext + 0x4fea) != '\0') {
-          uVar12 = uVar2 | 0x120;
+          funcKey = funcKeyPartial | 0x120;
         }
       }
       else {
-        uVar12 = uVar2 | 0x450;
+        funcKey = funcKeyPartial | 0x450;
       }
     }
   }
-  piVar6 = (int *)(glContext + 0x49d0);
-  if (param_2 != 0) {
-    piVar6 = (int *)(glContext + 0x49d8);
+  funcCache = (int *)(glContext + 0x49d0);
+  if (clipSpaceFlag != 0) {
+    funcCache = (int *)(glContext + 0x49d8);
   }
-  piVar13 = (int *)*piVar6;
-  piVar14 = piVar13;
+  cacheListHead = (int *)*funcCache;
+  cacheElem = cacheListHead;
   do {
-    if (uVar12 == piVar14[2]) {
-      if (piVar14 != piVar13) {
-        _gleMoveFuncCacheElem(piVar13,piVar14);
-        *piVar6 = (int)piVar14;
+    if (funcKey == cacheElem[2]) {
+      if (cacheElem != cacheListHead) {
+        _gleMoveFuncCacheElem(cacheListHead,cacheElem);
+        *funcCache = (int)cacheElem;
       }
-      return piVar14 + 8;
+      return cacheElem + 8;
     }
-    piVar14 = (int *)*piVar14;
-  } while (piVar14 != piVar13);
-  iVar3 = _gleCreateFuncCacheElem(piVar14,0xa0);
-  piVar14 = (int *)PTR__gleRTCNoop_00112058;
-  if (iVar3 != 0) {
-    *(uint *)(iVar3 + 8) = uVar12;
-    if (*(short *)((int)piVar6 + 6) == *(short *)(piVar6 + 1)) {
-      _gleDeleteFuncCacheElem(*(undefined4 *)(iVar3 + 4));
+    cacheElem = (int *)*cacheElem;
+  } while (cacheElem != cacheListHead);
+  funcCacheElem = _gleCreateFuncCacheElem(cacheElem,0xa0);
+  resultFunc = (int *)PTR__gleRTCNoop_00112058;
+  if (funcCacheElem != 0) {
+    *(uint *)(funcCacheElem + 8) = funcKey;
+    if (*(short *)((int)funcCache + 6) == *(short *)(funcCache + 1)) {
+      _gleDeleteFuncCacheElem(*(undefined4 *)(funcCacheElem + 4));
     }
     else {
-      *(short *)((int)piVar6 + 6) = *(short *)((int)piVar6 + 6) + 1;
+      *(short *)((int)funcCache + 6) = *(short *)((int)funcCache + 6) + 1;
     }
-    uVar11 = uVar12 & 1;
-    chunkWordCountThenCodeCursor = ((int (*)())_gleRTCAddAChunk_51324)(&_gleStartAVRTC,iVar3 + 0x20);
-    chunkWordCountThenCodeCursor = iVar3 + 0x20 + chunkWordCountThenCodeCursor * 4;
-    if (uVar11 != 0) {
+    clipFlag = funcKey & 1;
+    chunkWordCountThenCodeCursor = ((int (*)())_gleRTCAddAChunk_51324)(&_gleStartAVRTC,funcCacheElem + 0x20);
+    chunkWordCountThenCodeCursor = funcCacheElem + 0x20 + chunkWordCountThenCodeCursor * 4;
+    if (clipFlag != 0) {
       chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleCalculateTAVRTC,chunkWordCountThenCodeCursor);
       chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     }
     chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleInterpClip1AVRTC,chunkWordCountThenCodeCursor);
     chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
-    if (uVar11 != 0) {
+    if (clipFlag != 0) {
       chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleClipExactWAVRTC,chunkWordCountThenCodeCursor);
       chunkWordCountThenCodeCursor = chunkWordCountThenCodeCursor + chunkWordCount2 * 4;
     }
-    bVar1 = true;
+    noBranchPending = true;
     chunkWordCount2 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleInterpClip2AVRTC,chunkWordCountThenCodeCursor);
-    puVar9 = (uint *)(chunkWordCountThenCodeCursor + chunkWordCount2 * 4);
-    if ((uVar12 & 0x10) != 0) {
-      *puVar9 = 0x39200020;
-      puVar9 = puVar9 + 1;
-      if ((uVar12 & 3) == 1) {
-        chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleTestSrcEqualDestAVRTC,puVar9);
-        puVar9 = puVar9 + chunkWordCount;
-        puVar10 = puVar9 + -1;
-        bVar1 = puVar10 == (uint *)0x0;
+    codeCursor = (uint *)(chunkWordCountThenCodeCursor + chunkWordCount2 * 4);
+    if ((funcKey & 0x10) != 0) {
+      *codeCursor = 0x39200020;
+      codeCursor = codeCursor + 1;
+      if ((funcKey & 3) == 1) {
+        chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleTestSrcEqualDestAVRTC,codeCursor);
+        codeCursor = codeCursor + chunkWordCount;
+        srcEqualDestBranch = codeCursor + -1;
+        noBranchPending = srcEqualDestBranch == (uint *)0x0;
         codeChunk = &_gleCopyVecAVRTC;
       }
       else {
         codeChunk = &_gleInterpVecAVRTC;
-        bVar1 = true;
+        noBranchPending = true;
       }
-      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,puVar9);
-      puVar9 = puVar9 + chunkWordCount;
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,codeCursor);
+      codeCursor = codeCursor + chunkWordCount;
     }
-    if ((uVar12 & 0x20) != 0) {
-      *puVar9 = 0x39200030;
-      puVar9 = puVar9 + 1;
-      if ((uVar12 & 2) == 0) {
-        if (bVar1) {
-          chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleTestSrcEqualDestAVRTC,puVar9);
-          puVar9 = puVar9 + chunkWordCount;
-          puVar10 = puVar9 + -1;
-          bVar1 = puVar10 == (uint *)0x0;
+    if ((funcKey & 0x20) != 0) {
+      *codeCursor = 0x39200030;
+      codeCursor = codeCursor + 1;
+      if ((funcKey & 2) == 0) {
+        if (noBranchPending) {
+          chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleTestSrcEqualDestAVRTC,codeCursor);
+          codeCursor = codeCursor + chunkWordCount;
+          srcEqualDestBranch = codeCursor + -1;
+          noBranchPending = srcEqualDestBranch == (uint *)0x0;
         }
         codeChunk = &_gleCopyVecAVRTC;
       }
       else {
         codeChunk = &_gleInterpVecAVRTC;
       }
-      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,puVar9);
-      puVar9 = puVar9 + chunkWordCount;
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,codeCursor);
+      codeCursor = codeCursor + chunkWordCount;
     }
-    if ((uVar12 & 0x40) != 0) {
-      *puVar9 = 0x39200040;
-      puVar9 = puVar9 + 1;
-      if ((uVar12 & 2) == 0) {
-        if (bVar1) {
-          chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleTestSrcEqualDestAVRTC,puVar9);
-          puVar9 = puVar9 + chunkWordCount;
-          puVar10 = puVar9 + -1;
-          bVar1 = puVar10 == (uint *)0x0;
+    if ((funcKey & 0x40) != 0) {
+      *codeCursor = 0x39200040;
+      codeCursor = codeCursor + 1;
+      if ((funcKey & 2) == 0) {
+        if (noBranchPending) {
+          chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleTestSrcEqualDestAVRTC,codeCursor);
+          codeCursor = codeCursor + chunkWordCount;
+          srcEqualDestBranch = codeCursor + -1;
+          noBranchPending = srcEqualDestBranch == (uint *)0x0;
         }
         codeChunk = &_gleCopyVecAVRTC;
       }
       else {
         codeChunk = &_gleInterpVecAVRTC;
       }
-      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,puVar9);
-      puVar9 = puVar9 + chunkWordCount;
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,codeCursor);
+      codeCursor = codeCursor + chunkWordCount;
     }
-    if ((uVar12 & 0x100) != 0) {
-      *puVar9 = 0x39200050;
-      puVar9 = puVar9 + 1;
-      if ((uVar12 & 2) == 0) {
-        if (bVar1) {
-          chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleTestSrcEqualDestAVRTC,puVar9);
-          puVar9 = puVar9 + chunkWordCount;
-          puVar10 = puVar9 + -1;
-          bVar1 = puVar10 == (uint *)0x0;
+    if ((funcKey & 0x100) != 0) {
+      *codeCursor = 0x39200050;
+      codeCursor = codeCursor + 1;
+      if ((funcKey & 2) == 0) {
+        if (noBranchPending) {
+          chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleTestSrcEqualDestAVRTC,codeCursor);
+          codeCursor = codeCursor + chunkWordCount;
+          srcEqualDestBranch = codeCursor + -1;
+          noBranchPending = srcEqualDestBranch == (uint *)0x0;
         }
         codeChunk = &_gleCopyVecAVRTC;
       }
       else {
         codeChunk = &_gleInterpVecAVRTC;
       }
-      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,puVar9);
-      puVar9 = puVar9 + chunkWordCount;
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,codeCursor);
+      codeCursor = codeCursor + chunkWordCount;
     }
-    if ((uVar12 & 0x400) != 0) {
-      if (bVar1) {
-        chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleTestSrcEqualDestAVRTC,puVar9);
-        puVar9 = puVar9 + chunkWordCount;
-        puVar10 = puVar9 + -1;
-        bVar1 = puVar10 == (uint *)0x0;
+    if ((funcKey & 0x400) != 0) {
+      if (noBranchPending) {
+        chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleTestSrcEqualDestAVRTC,codeCursor);
+        codeCursor = codeCursor + chunkWordCount;
+        srcEqualDestBranch = codeCursor + -1;
+        noBranchPending = srcEqualDestBranch == (uint *)0x0;
       }
-      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleCopyMaterialsAVRTC,puVar9);
-      puVar9 = puVar9 + chunkWordCount;
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleCopyMaterialsAVRTC,codeCursor);
+      codeCursor = codeCursor + chunkWordCount;
     }
-    puVar15 = puVar9;
-    if (((uVar12 & 0x80) != 0) && ((uVar12 & 0x42) != 0x42)) {
-      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleInterpFogAVRTC,puVar9);
-      puVar15 = puVar9 + chunkWordCount;
+    tailCodeCursor = codeCursor;
+    if (((funcKey & 0x80) != 0) && ((funcKey & 0x42) != 0x42)) {
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleInterpFogAVRTC,codeCursor);
+      tailCodeCursor = codeCursor + chunkWordCount;
     }
-    if (((uVar12 & 0x200) != 0) && ((uVar12 & 0x102) != 0x102)) {
-      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleInterpFogCoordAVRTC,puVar15);
-      puVar15 = puVar15 + chunkWordCount;
+    if (((funcKey & 0x200) != 0) && ((funcKey & 0x102) != 0x102)) {
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleInterpFogCoordAVRTC,tailCodeCursor);
+      tailCodeCursor = tailCodeCursor + chunkWordCount;
     }
-    if (uVar12 >> 0x10 != 0) {
+    if (funcKey >> 0x10 != 0) {
       loopIndex2 = 0;
       do {
-        if ((uVar12 & 0x10000 << (loopIndex2 & 0x3f)) != 0) {
-          *puVar15 = loopIndex2 * 0x10 + 0x80 & 0xffff | 0x39200000;
-          if ((uVar12 & 4) == 0) {
+        if ((funcKey & 0x10000 << (loopIndex2 & 0x3f)) != 0) {
+          *tailCodeCursor = loopIndex2 * 0x10 + 0x80 & 0xffff | 0x39200000;
+          if ((funcKey & 4) == 0) {
             codeChunk = &_gleInterpTexNoDivAVRTC;
           }
-          else if (uVar11 == 0) {
+          else if (clipFlag == 0) {
             codeChunk = &_gleInterpTexTestAVRTC;
           }
           else {
             codeChunk = &_gleInterpTexAVRTC;
           }
-          chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,puVar15 + 1);
-          puVar15 = puVar15 + 1 + chunkWordCount;
+          chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(codeChunk,tailCodeCursor + 1);
+          tailCodeCursor = tailCodeCursor + 1 + chunkWordCount;
         }
       } while (((int)(loopIndex2 + 1) < 8) &&
-              (uVar4 = loopIndex2 + 0x11, loopIndex2 = loopIndex2 + 1, uVar12 >> (uVar4 & 0x3f) != 0));
+              (unitShift = loopIndex2 + 0x11, loopIndex2 = loopIndex2 + 1, funcKey >> (unitShift & 0x3f) != 0));
     }
-    if (uVar11 != 0) {
-      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleSetReturnAVRTC,puVar15);
-      puVar15 = puVar15 + chunkWordCount;
+    if (clipFlag != 0) {
+      chunkWordCount = ((int (*)())_gleRTCAddAChunk_51324)(&_gleSetReturnAVRTC,tailCodeCursor);
+      tailCodeCursor = tailCodeCursor + chunkWordCount;
     }
-    iVar5 = ((int (*)())_gleRTCAddAChunk_51324)(&_gleEndAVRTC,puVar15);
-    if (!bVar1) {
-      uVar11 = ((int (*)())_gleRTCBuildABranch_51354)(*puVar10,(int)puVar9 - (int)puVar10 >> 2);
-      *puVar10 = uVar11;
+    chunkWordCountThenTotalWords = ((int (*)())_gleRTCAddAChunk_51324)(&_gleEndAVRTC,tailCodeCursor);
+    if (!noBranchPending) {
+      branchInstruction = ((int (*)())_gleRTCBuildABranch_51354)(*srcEqualDestBranch,(int)codeCursor - (int)srcEqualDestBranch >> 2);
+      *srcEqualDestBranch = branchInstruction;
     }
-    iVar5 = (int)puVar15 + (iVar5 * 4 - iVar3) + -0x20 >> 2;
-    if (0xa0 < iVar5) {
+    chunkWordCountThenTotalWords = (int)tailCodeCursor + (chunkWordCountThenTotalWords * 4 - funcCacheElem) + -0x20 >> 2;
+    if (0xa0 < chunkWordCountThenTotalWords) {
                     
       _exit(1);
     }
-    iVar3 = _gleShrinkFuncCacheElem(iVar3,iVar5);
-    puVar8 = PTR__glePushInstructions_00112054;
-    *piVar6 = iVar3;
-    (**(code **)puVar8)(iVar5,(int *)(iVar3 + 0x20));
-    piVar14 = (int *)(iVar3 + 0x20);
+    funcCacheElem = _gleShrinkFuncCacheElem(funcCacheElem,chunkWordCountThenTotalWords);
+    pushInstructionsFn = PTR__glePushInstructions_00112054;
+    *funcCache = funcCacheElem;
+    (**(code **)pushInstructionsFn)(chunkWordCountThenTotalWords,(int *)(funcCacheElem + 0x20));
+    resultFunc = (int *)(funcCacheElem + 0x20);
   }
-  return piVar14;
+  return resultFunc;
 }
 
 /* _gleFeedbackPolygonPtr @ 0x51d9c (512 bytes) */

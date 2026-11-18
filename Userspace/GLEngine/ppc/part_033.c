@@ -2218,20 +2218,42 @@ LAB_000a5774:
 }
 
 /* _glArrayElement_Exec @ 0xa57ac (3652 bytes) */
-void _glArrayElement_Exec(int glContext,int i,double fparam_1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+void _glArrayElement_Exec(int glContext,int i,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  bool bVar1;
-  ushort uVar2;
+  bool pendingMaskEmpty;
+  bool attribMaskEmpty;
+  ushort texCoordSize;
+  ushort vertexType;
+  ushort vertexSize;
+  ushort attribType;
+  ushort attribSize;
+  ushort weightType;
+  ushort secondaryColorType;
+  ushort colorType;
+  ushort normalType;
+  ushort texCoordType;
   int clientState;
-  int iVar4;
-  int iVar5;
-  uint uVar6;
+  int texTarget;
+  int attribPtr;
+  int texCoordPtr;
+  uint texUnitBit;
+  uint attribIndex;
   code *UNRECOVERED_JUMPTABLE;
-  uint uVar7;
-  uint uVar8;
+  uint emptySlotMask;
+  uint enabledArrayMask;
+  uint enabledAttribMaskCopy;
+  uint attribBit;
   uint loopIndex;
-  int iVar9;
-  uint uVar10;
+  int texCoordArray;
+  int vertexPtr;
+  int attribArray;
+  int weightPtr;
+  int fogCoordPtr;
+  int secondaryColorPtr;
+  int colorPtr;
+  int normalPtr;
+  uint pendingTexUnitMask;
+  uint enabledAttribMask;
   double incomingStack_ffffff98;
   double incomingStack_ffffffa0;
   double incomingStack_ffffffa8;
@@ -2239,7 +2261,7 @@ void _glArrayElement_Exec(int glContext,int i,double fparam_1,double forwardedFl
   double incomingStack_ffffffb8;
   
   clientState = *(int *)(glContext + 0x4a60);
-  iVar9 = clientState + 0x10;
+  texCoordArray = clientState + 0x10;
   if ((((*(char *)(glContext + 0x7580) != '\0') || (*(char *)(glContext + 0x4664) != '\0')) ||
       (*(char *)(glContext + 0x30aa) == '\0')) || (*(char *)(glContext + 0x30ab) == '\0')) {
     UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x4894);
@@ -2248,8 +2270,8 @@ void _glArrayElement_Exec(int glContext,int i,double fparam_1,double forwardedFl
       UNRECOVERED_JUMPTABLE = (code *)_gleGetVertexElemFunc(glContext);
       *(code **)(glContext + 0x4894) = UNRECOVERED_JUMPTABLE;
       if (*(int *)(glContext + 0x5408) == 0) {
-        uVar7 = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
-        *(code **)((*(uint *)(glContext + 0x4680) & uVar7 | *(uint *)(glContext + 0x4684) & ~uVar7) +
+        emptySlotMask = -(uint)(*(int *)(*(uint *)(glContext + 0x4684) + 0xc) == 0);
+        *(code **)((*(uint *)(glContext + 0x4680) & emptySlotMask | *(uint *)(glContext + 0x4684) & ~emptySlotMask) +
                   0xc) = UNRECOVERED_JUMPTABLE;
       }
     }
@@ -2259,510 +2281,510 @@ void _glArrayElement_Exec(int glContext,int i,double fparam_1,double forwardedFl
     return;
   }
   *(undefined4 *)(glContext + 0x4894) = 0;
-  uVar7 = *(uint *)(clientState + 0x334);
-  if ((uVar7 & 0x400000) != 0) {
-    fparam_1 = (double)_glEdgeFlag_Exec(glContext,(uint)*(byte *)(*(int *)(clientState + 0xc0) +
+  enabledArrayMask = *(uint *)(clientState + 0x334);
+  if ((enabledArrayMask & 0x400000) != 0) {
+    forwardedFloatArg1 = (double)_glEdgeFlag_Exec(glContext,(uint)*(byte *)(*(int *)(clientState + 0xc0) +
                                                                i * *(int *)(clientState + 0xc4)));
   }
-  uVar10 = uVar7 & 0xff000000;
-  bVar1 = uVar10 == 0;
-  if (!bVar1) {
+  pendingTexUnitMask = enabledArrayMask & 0xff000000;
+  pendingMaskEmpty = pendingTexUnitMask == 0;
+  if (!pendingMaskEmpty) {
     loopIndex = 0;
     do {
-      uVar6 = 0x1000000 << (loopIndex & 0x3f);
-      if ((uVar10 & uVar6) != 0) {
-        uVar2 = *(ushort *)(iVar9 + 0xea);
-        uVar10 = uVar10 & ~uVar6;
-        iVar4 = loopIndex + 0x84c0;
-        iVar5 = *(int *)(iVar9 + 0xe0) + i * *(int *)(iVar9 + 0xe4);
-        if (uVar2 == 2) {
-          uVar2 = *(ushort *)(iVar9 + 0xe8);
-          if (uVar2 == 0x1404) {
-            fparam_1 = (double)_glMultiTexCoord2iv_Exec(glContext,iVar4,iVar5);
+      texUnitBit = 0x1000000 << (loopIndex & 0x3f);
+      if ((pendingTexUnitMask & texUnitBit) != 0) {
+        texCoordSize = *(ushort *)(texCoordArray + 0xea);
+        pendingTexUnitMask = pendingTexUnitMask & ~texUnitBit;
+        texTarget = loopIndex + 0x84c0;
+        texCoordPtr = *(int *)(texCoordArray + 0xe0) + i * *(int *)(texCoordArray + 0xe4);
+        if (texCoordSize == 2) {
+          texCoordType = *(ushort *)(texCoordArray + 0xe8);
+          if (texCoordType == 0x1404) {
+            forwardedFloatArg1 = (double)_glMultiTexCoord2iv_Exec(glContext,texTarget,texCoordPtr);
           }
-          else if (uVar2 < 0x1405) {
-            bVar1 = uVar10 == 0;
-            if (uVar2 != 0x1402) goto LAB_000a5ab8;
-            fparam_1 = (double)_glMultiTexCoord2sv_Exec(glContext,iVar4,iVar5);
+          else if (texCoordType < 0x1405) {
+            pendingMaskEmpty = pendingTexUnitMask == 0;
+            if (texCoordType != 0x1402) goto LAB_000a5ab8;
+            forwardedFloatArg1 = (double)_glMultiTexCoord2sv_Exec(glContext,texTarget,texCoordPtr);
           }
-          else if (uVar2 == 0x1406) {
-            fparam_1 = (double)_glMultiTexCoord2fv_Exec(glContext,iVar4,iVar5);
+          else if (texCoordType == 0x1406) {
+            forwardedFloatArg1 = (double)_glMultiTexCoord2fv_Exec(glContext,texTarget,texCoordPtr);
           }
           else {
-            bVar1 = uVar10 == 0;
-            if (uVar2 != 0x140a) goto LAB_000a5ab8;
-            fparam_1 = (double)_glMultiTexCoord2dv_Exec(glContext,iVar4,iVar5);
+            pendingMaskEmpty = pendingTexUnitMask == 0;
+            if (texCoordType != 0x140a) goto LAB_000a5ab8;
+            forwardedFloatArg1 = (double)_glMultiTexCoord2dv_Exec(glContext,texTarget,texCoordPtr);
           }
         }
-        else if (uVar2 < 3) {
-          bVar1 = uVar10 == 0;
-          if (uVar2 != 1) goto LAB_000a5ab8;
-          uVar2 = *(ushort *)(iVar9 + 0xe8);
-          if (uVar2 == 0x1404) {
-            fparam_1 = (double)_glMultiTexCoord1iv_Exec(glContext,iVar4,iVar5);
+        else if (texCoordSize < 3) {
+          pendingMaskEmpty = pendingTexUnitMask == 0;
+          if (texCoordSize != 1) goto LAB_000a5ab8;
+          texCoordType = *(ushort *)(texCoordArray + 0xe8);
+          if (texCoordType == 0x1404) {
+            forwardedFloatArg1 = (double)_glMultiTexCoord1iv_Exec(glContext,texTarget,texCoordPtr);
           }
-          else if (uVar2 < 0x1405) {
-            bVar1 = uVar10 == 0;
-            if (uVar2 != 0x1402) goto LAB_000a5ab8;
-            fparam_1 = (double)_glMultiTexCoord1sv_Exec(glContext,iVar4,iVar5);
+          else if (texCoordType < 0x1405) {
+            pendingMaskEmpty = pendingTexUnitMask == 0;
+            if (texCoordType != 0x1402) goto LAB_000a5ab8;
+            forwardedFloatArg1 = (double)_glMultiTexCoord1sv_Exec(glContext,texTarget,texCoordPtr);
           }
-          else if (uVar2 == 0x1406) {
-            fparam_1 = (double)_glMultiTexCoord1fv_Exec(glContext,iVar4,iVar5);
+          else if (texCoordType == 0x1406) {
+            forwardedFloatArg1 = (double)_glMultiTexCoord1fv_Exec(glContext,texTarget,texCoordPtr);
           }
           else {
-            bVar1 = uVar10 == 0;
-            if (uVar2 != 0x140a) goto LAB_000a5ab8;
-            fparam_1 = (double)_glMultiTexCoord1dv_Exec(glContext,iVar4,iVar5);
+            pendingMaskEmpty = pendingTexUnitMask == 0;
+            if (texCoordType != 0x140a) goto LAB_000a5ab8;
+            forwardedFloatArg1 = (double)_glMultiTexCoord1dv_Exec(glContext,texTarget,texCoordPtr);
           }
         }
-        else if (uVar2 == 3) {
-          uVar2 = *(ushort *)(iVar9 + 0xe8);
-          if (uVar2 == 0x1404) {
-            fparam_1 = (double)_glMultiTexCoord3iv_Exec(glContext,iVar4,iVar5);
+        else if (texCoordSize == 3) {
+          texCoordType = *(ushort *)(texCoordArray + 0xe8);
+          if (texCoordType == 0x1404) {
+            forwardedFloatArg1 = (double)_glMultiTexCoord3iv_Exec(glContext,texTarget,texCoordPtr);
           }
-          else if (uVar2 < 0x1405) {
-            bVar1 = uVar10 == 0;
-            if (uVar2 != 0x1402) goto LAB_000a5ab8;
-            fparam_1 = (double)_glMultiTexCoord3sv_Exec(glContext,iVar4,iVar5);
+          else if (texCoordType < 0x1405) {
+            pendingMaskEmpty = pendingTexUnitMask == 0;
+            if (texCoordType != 0x1402) goto LAB_000a5ab8;
+            forwardedFloatArg1 = (double)_glMultiTexCoord3sv_Exec(glContext,texTarget,texCoordPtr);
           }
-          else if (uVar2 == 0x1406) {
-            fparam_1 = (double)_glMultiTexCoord3fv_Exec(glContext,iVar4,iVar5);
+          else if (texCoordType == 0x1406) {
+            forwardedFloatArg1 = (double)_glMultiTexCoord3fv_Exec(glContext,texTarget,texCoordPtr);
           }
           else {
-            bVar1 = uVar10 == 0;
-            if (uVar2 != 0x140a) goto LAB_000a5ab8;
-            fparam_1 = (double)_glMultiTexCoord3dv_Exec(glContext,iVar4,iVar5);
+            pendingMaskEmpty = pendingTexUnitMask == 0;
+            if (texCoordType != 0x140a) goto LAB_000a5ab8;
+            forwardedFloatArg1 = (double)_glMultiTexCoord3dv_Exec(glContext,texTarget,texCoordPtr);
           }
         }
         else {
-          bVar1 = uVar10 == 0;
-          if (uVar2 != 4) goto LAB_000a5ab8;
-          uVar2 = *(ushort *)(iVar9 + 0xe8);
-          if (uVar2 == 0x1404) {
-            fparam_1 = (double)_glMultiTexCoord4iv_Exec(glContext,iVar4,iVar5);
+          pendingMaskEmpty = pendingTexUnitMask == 0;
+          if (texCoordSize != 4) goto LAB_000a5ab8;
+          texCoordType = *(ushort *)(texCoordArray + 0xe8);
+          if (texCoordType == 0x1404) {
+            forwardedFloatArg1 = (double)_glMultiTexCoord4iv_Exec(glContext,texTarget,texCoordPtr);
           }
-          else if (uVar2 < 0x1405) {
-            bVar1 = uVar10 == 0;
-            if (uVar2 != 0x1402) goto LAB_000a5ab8;
-            fparam_1 = (double)_glMultiTexCoord4sv_Exec(glContext,iVar4,iVar5);
+          else if (texCoordType < 0x1405) {
+            pendingMaskEmpty = pendingTexUnitMask == 0;
+            if (texCoordType != 0x1402) goto LAB_000a5ab8;
+            forwardedFloatArg1 = (double)_glMultiTexCoord4sv_Exec(glContext,texTarget,texCoordPtr);
           }
-          else if (uVar2 == 0x1406) {
-            fparam_1 = (double)_glMultiTexCoord4fv_Exec(glContext,iVar4,iVar5);
+          else if (texCoordType == 0x1406) {
+            forwardedFloatArg1 = (double)_glMultiTexCoord4fv_Exec(glContext,texTarget,texCoordPtr);
           }
           else {
-            bVar1 = uVar10 == 0;
-            if (uVar2 != 0x140a) goto LAB_000a5ab8;
-            fparam_1 = (double)_glMultiTexCoord4dv_Exec(glContext,iVar4,iVar5);
+            pendingMaskEmpty = pendingTexUnitMask == 0;
+            if (texCoordType != 0x140a) goto LAB_000a5ab8;
+            forwardedFloatArg1 = (double)_glMultiTexCoord4dv_Exec(glContext,texTarget,texCoordPtr);
           }
         }
-        bVar1 = uVar10 == 0;
+        pendingMaskEmpty = pendingTexUnitMask == 0;
       }
 LAB_000a5ab8:
       loopIndex = loopIndex + 1;
-      iVar9 = iVar9 + 0x18;
-    } while ((!bVar1) && ((int)loopIndex < 8));
+      texCoordArray = texCoordArray + 0x18;
+    } while ((!pendingMaskEmpty) && ((int)loopIndex < 8));
   }
-  if ((uVar7 & 0x20000) != 0) {
-    uVar2 = *(ushort *)(clientState + 0x50);
-    iVar9 = *(int *)(clientState + 0x48) + i * *(int *)(clientState + 0x4c);
-    if (uVar2 == 0x9400) {
-      fparam_1 = (double)_glNormal3bv_Exec(glContext,iVar9);
+  if ((enabledArrayMask & 0x20000) != 0) {
+    normalType = *(ushort *)(clientState + 0x50);
+    normalPtr = *(int *)(clientState + 0x48) + i * *(int *)(clientState + 0x4c);
+    if (normalType == 0x9400) {
+      forwardedFloatArg1 = (double)_glNormal3bv_Exec(glContext,normalPtr);
     }
-    else if (uVar2 < 0x9401) {
-      if (uVar2 == 0x1406) {
-        fparam_1 = (double)_glNormal3fv_Exec(glContext,iVar9);
+    else if (normalType < 0x9401) {
+      if (normalType == 0x1406) {
+        forwardedFloatArg1 = (double)_glNormal3fv_Exec(glContext,normalPtr);
       }
-      else if (uVar2 == 0x140a) {
-        fparam_1 = (double)_glNormal3dv_Exec(glContext,iVar9);
+      else if (normalType == 0x140a) {
+        forwardedFloatArg1 = (double)_glNormal3dv_Exec(glContext,normalPtr);
       }
     }
-    else if (uVar2 == 0x9402) {
-      fparam_1 = (double)_glNormal3sv_Exec(glContext,iVar9);
+    else if (normalType == 0x9402) {
+      forwardedFloatArg1 = (double)_glNormal3sv_Exec(glContext,normalPtr);
     }
-    else if (uVar2 == 0x9404) {
-      fparam_1 = (double)((double (*)())_glNormal3iv_Exec)(glContext,iVar9,fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
+    else if (normalType == 0x9404) {
+      forwardedFloatArg1 = (double)((double (*)())_glNormal3iv_Exec)(glContext,normalPtr,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
                                            forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffff98,
                                            incomingStack_ffffffa0,incomingStack_ffffffa8);
     }
   }
-  if ((uVar7 & 0x40000) != 0) {
-    iVar9 = *(int *)(clientState + 0x60) + i * *(int *)(clientState + 100);
+  if ((enabledArrayMask & 0x40000) != 0) {
+    colorPtr = *(int *)(clientState + 0x60) + i * *(int *)(clientState + 100);
     if (*(short *)(clientState + 0x6a) == 3) {
-      uVar2 = *(ushort *)(clientState + 0x68);
-      if (uVar2 == 0x9401) {
-        fparam_1 = (double)_glColor3ubv_Exec(glContext,iVar9);
+      colorType = *(ushort *)(clientState + 0x68);
+      if (colorType == 0x9401) {
+        forwardedFloatArg1 = (double)_glColor3ubv_Exec(glContext,colorPtr);
       }
-      else if (uVar2 < 0x9402) {
-        if (uVar2 == 0x140a) {
-          fparam_1 = (double)_glColor3dv_Exec(glContext,iVar9);
+      else if (colorType < 0x9402) {
+        if (colorType == 0x140a) {
+          forwardedFloatArg1 = (double)_glColor3dv_Exec(glContext,colorPtr);
         }
-        else if (uVar2 < 0x140b) {
-          if (uVar2 == 0x1406) {
+        else if (colorType < 0x140b) {
+          if (colorType == 0x1406) {
             if (*(char *)(glContext + 0x4df8) == '\0') {
-              fparam_1 = (double)_glColor3fv_NoColorMat_Exec(glContext,iVar9);
+              forwardedFloatArg1 = (double)_glColor3fv_NoColorMat_Exec(glContext,colorPtr);
             }
             else {
-              fparam_1 = (double)_glColor3fv_ColorMat_Exec(glContext,iVar9);
+              forwardedFloatArg1 = (double)_glColor3fv_ColorMat_Exec(glContext,colorPtr);
             }
           }
         }
-        else if (uVar2 == 0x9400) {
-          fparam_1 = (double)_glColor3bv_Exec(glContext,iVar9);
+        else if (colorType == 0x9400) {
+          forwardedFloatArg1 = (double)_glColor3bv_Exec(glContext,colorPtr);
         }
       }
-      else if (uVar2 == 0x9403) {
-        fparam_1 = (double)((double (*)())_glColor3usv_Exec)(glContext,iVar9,fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
+      else if (colorType == 0x9403) {
+        forwardedFloatArg1 = (double)((double (*)())_glColor3usv_Exec)(glContext,colorPtr,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
                                              forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffff98,
                                              incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,
                                              incomingStack_ffffffb8);
       }
-      else if (uVar2 < 0x9403) {
-        fparam_1 = (double)_glColor3sv_Exec(glContext,iVar9);
+      else if (colorType < 0x9403) {
+        forwardedFloatArg1 = (double)_glColor3sv_Exec(glContext,colorPtr);
       }
-      else if (uVar2 == 0x9404) {
-        fparam_1 = (double)_glColor3iv_Exec(glContext,iVar9);
+      else if (colorType == 0x9404) {
+        forwardedFloatArg1 = (double)_glColor3iv_Exec(glContext,colorPtr);
       }
-      else if (uVar2 == 0x9405) {
-        fparam_1 = (double)_glColor3uiv_Exec(glContext,iVar9);
+      else if (colorType == 0x9405) {
+        forwardedFloatArg1 = (double)_glColor3uiv_Exec(glContext,colorPtr);
       }
     }
     else if (*(short *)(clientState + 0x6a) == 4) {
-      uVar2 = *(ushort *)(clientState + 0x68);
-      if (uVar2 == 0x9401) {
-        fparam_1 = (double)_glColor4ubv_Exec(glContext,iVar9);
+      colorType = *(ushort *)(clientState + 0x68);
+      if (colorType == 0x9401) {
+        forwardedFloatArg1 = (double)_glColor4ubv_Exec(glContext,colorPtr);
       }
-      else if (uVar2 < 0x9402) {
-        if (uVar2 == 0x140a) {
-          fparam_1 = (double)_glColor4dv_Exec(glContext,iVar9);
+      else if (colorType < 0x9402) {
+        if (colorType == 0x140a) {
+          forwardedFloatArg1 = (double)_glColor4dv_Exec(glContext,colorPtr);
         }
-        else if (uVar2 < 0x140b) {
-          if (uVar2 == 0x1406) {
+        else if (colorType < 0x140b) {
+          if (colorType == 0x1406) {
             if (*(char *)(glContext + 0x4df8) == '\0') {
-              fparam_1 = (double)_glColor4fv_NoColorMat_Exec(glContext,iVar9);
+              forwardedFloatArg1 = (double)_glColor4fv_NoColorMat_Exec(glContext,colorPtr);
             }
             else {
-              fparam_1 = (double)_glColor4fv_ColorMat_Exec(glContext,iVar9);
+              forwardedFloatArg1 = (double)_glColor4fv_ColorMat_Exec(glContext,colorPtr);
             }
           }
         }
-        else if (uVar2 == 0x9400) {
-          fparam_1 = (double)_glColor4bv_Exec(glContext,iVar9);
+        else if (colorType == 0x9400) {
+          forwardedFloatArg1 = (double)_glColor4bv_Exec(glContext,colorPtr);
         }
       }
-      else if (uVar2 == 0x9403) {
-        fparam_1 = (double)((double (*)())_glColor4usv_Exec)(glContext,iVar9,fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
+      else if (colorType == 0x9403) {
+        forwardedFloatArg1 = (double)((double (*)())_glColor4usv_Exec)(glContext,colorPtr,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,
                                              forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,incomingStack_ffffff98,
                                              incomingStack_ffffffa0,incomingStack_ffffffa8,incomingStack_ffffffb0,
                                              incomingStack_ffffffb8);
       }
-      else if (uVar2 < 0x9403) {
-        fparam_1 = (double)_glColor4sv_Exec(glContext,iVar9);
+      else if (colorType < 0x9403) {
+        forwardedFloatArg1 = (double)_glColor4sv_Exec(glContext,colorPtr);
       }
-      else if (uVar2 == 0x9404) {
-        fparam_1 = (double)_glColor4iv_Exec(glContext,iVar9);
+      else if (colorType == 0x9404) {
+        forwardedFloatArg1 = (double)_glColor4iv_Exec(glContext,colorPtr);
       }
-      else if (uVar2 == 0x9405) {
-        fparam_1 = (double)_glColor4uiv_Exec(glContext,iVar9);
+      else if (colorType == 0x9405) {
+        forwardedFloatArg1 = (double)_glColor4uiv_Exec(glContext,colorPtr);
       }
     }
   }
-  if ((uVar7 & 0x100000) != 0) {
-    uVar2 = *(ushort *)(clientState + 0x98);
-    iVar9 = *(int *)(clientState + 0x90) + i * *(int *)(clientState + 0x94);
-    if (uVar2 == 0x9401) {
-      fparam_1 = (double)_glSecondaryColor3ubv_Exec(glContext,iVar9);
+  if ((enabledArrayMask & 0x100000) != 0) {
+    secondaryColorType = *(ushort *)(clientState + 0x98);
+    secondaryColorPtr = *(int *)(clientState + 0x90) + i * *(int *)(clientState + 0x94);
+    if (secondaryColorType == 0x9401) {
+      forwardedFloatArg1 = (double)_glSecondaryColor3ubv_Exec(glContext,secondaryColorPtr);
     }
-    else if (uVar2 < 0x9402) {
-      if (uVar2 == 0x140a) {
-        fparam_1 = (double)_glSecondaryColor3dv_Exec(glContext,iVar9);
+    else if (secondaryColorType < 0x9402) {
+      if (secondaryColorType == 0x140a) {
+        forwardedFloatArg1 = (double)_glSecondaryColor3dv_Exec(glContext,secondaryColorPtr);
       }
-      else if (uVar2 < 0x140b) {
-        if (uVar2 == 0x1406) {
-          fparam_1 = (double)_glSecondaryColor3fv_Exec(glContext,iVar9);
+      else if (secondaryColorType < 0x140b) {
+        if (secondaryColorType == 0x1406) {
+          forwardedFloatArg1 = (double)_glSecondaryColor3fv_Exec(glContext,secondaryColorPtr);
         }
       }
-      else if (uVar2 == 0x9400) {
-        fparam_1 = (double)_glSecondaryColor3bv_Exec(glContext,iVar9);
+      else if (secondaryColorType == 0x9400) {
+        forwardedFloatArg1 = (double)_glSecondaryColor3bv_Exec(glContext,secondaryColorPtr);
       }
     }
-    else if (uVar2 == 0x9403) {
-      fparam_1 = (double)_glSecondaryColor3usv_Exec(glContext,iVar9);
+    else if (secondaryColorType == 0x9403) {
+      forwardedFloatArg1 = (double)_glSecondaryColor3usv_Exec(glContext,secondaryColorPtr);
     }
-    else if (uVar2 < 0x9403) {
-      fparam_1 = (double)_glSecondaryColor3sv_Exec(glContext,iVar9);
+    else if (secondaryColorType < 0x9403) {
+      forwardedFloatArg1 = (double)_glSecondaryColor3sv_Exec(glContext,secondaryColorPtr);
     }
-    else if (uVar2 == 0x9404) {
-      fparam_1 = (double)_glSecondaryColor3iv_Exec(glContext,iVar9);
+    else if (secondaryColorType == 0x9404) {
+      forwardedFloatArg1 = (double)_glSecondaryColor3iv_Exec(glContext,secondaryColorPtr);
     }
-    else if (uVar2 == 0x9405) {
-      fparam_1 = (double)_glSecondaryColor3uiv_Exec(glContext,iVar9);
+    else if (secondaryColorType == 0x9405) {
+      forwardedFloatArg1 = (double)_glSecondaryColor3uiv_Exec(glContext,secondaryColorPtr);
     }
   }
-  if ((uVar7 & 0x80000) != 0) {
-    iVar9 = *(int *)(clientState + 0x78) + i * *(int *)(clientState + 0x7c);
+  if ((enabledArrayMask & 0x80000) != 0) {
+    fogCoordPtr = *(int *)(clientState + 0x78) + i * *(int *)(clientState + 0x7c);
     if (*(short *)(clientState + 0x80) == 0x1406) {
-      fparam_1 = (double)_glFogCoordfv_Exec(glContext,iVar9);
+      forwardedFloatArg1 = (double)_glFogCoordfv_Exec(glContext,fogCoordPtr);
     }
     else if (*(short *)(clientState + 0x80) == 0x140a) {
-      fparam_1 = (double)_glFogCoorddv_Exec(glContext,iVar9);
+      forwardedFloatArg1 = (double)_glFogCoorddv_Exec(glContext,fogCoordPtr);
     }
   }
-  if ((uVar7 & 0x200000) != 0) {
-    uVar2 = *(ushort *)(clientState + 0xb0);
-    iVar9 = *(int *)(clientState + 0xa8) + i * *(int *)(clientState + 0xac);
-    if (uVar2 == 0x9401) {
-      fparam_1 = (double)_glWeightubvARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),iVar9);
+  if ((enabledArrayMask & 0x200000) != 0) {
+    weightType = *(ushort *)(clientState + 0xb0);
+    weightPtr = *(int *)(clientState + 0xa8) + i * *(int *)(clientState + 0xac);
+    if (weightType == 0x9401) {
+      forwardedFloatArg1 = (double)_glWeightubvARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),weightPtr);
     }
-    else if (uVar2 < 0x9402) {
-      if (uVar2 == 0x140a) {
-        fparam_1 = (double)_glWeightdvARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),iVar9);
+    else if (weightType < 0x9402) {
+      if (weightType == 0x140a) {
+        forwardedFloatArg1 = (double)_glWeightdvARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),weightPtr);
       }
-      else if (uVar2 < 0x140b) {
-        if (uVar2 == 0x1406) {
-          fparam_1 = (double)_glWeightfvARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),iVar9);
+      else if (weightType < 0x140b) {
+        if (weightType == 0x1406) {
+          forwardedFloatArg1 = (double)_glWeightfvARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),weightPtr);
         }
       }
-      else if (uVar2 == 0x9400) {
-        fparam_1 = (double)_glWeightbvARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),iVar9);
+      else if (weightType == 0x9400) {
+        forwardedFloatArg1 = (double)_glWeightbvARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),weightPtr);
       }
     }
-    else if (uVar2 == 0x9403) {
-      fparam_1 = (double)_glWeightusvARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),iVar9);
+    else if (weightType == 0x9403) {
+      forwardedFloatArg1 = (double)_glWeightusvARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),weightPtr);
     }
-    else if (uVar2 < 0x9403) {
-      fparam_1 = (double)_glWeightsvARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),iVar9);
+    else if (weightType < 0x9403) {
+      forwardedFloatArg1 = (double)_glWeightsvARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),weightPtr);
     }
-    else if (uVar2 == 0x9404) {
-      fparam_1 = (double)_glWeightivARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),iVar9);
+    else if (weightType == 0x9404) {
+      forwardedFloatArg1 = (double)_glWeightivARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),weightPtr);
     }
-    else if (uVar2 == 0x9405) {
-      fparam_1 = (double)_glWeightuivARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),iVar9);
+    else if (weightType == 0x9405) {
+      forwardedFloatArg1 = (double)_glWeightuivARB_Exec(glContext,(int)*(short *)(clientState + 0xb2),weightPtr);
     }
   }
-  uVar10 = *(uint *)(clientState + 0x330);
-  if (uVar10 != 0) {
-    bVar1 = uVar10 == 0;
-    uVar6 = 0xf;
-    uVar8 = 0;
-    if (!bVar1) {
-      iVar9 = clientState + 0x178;
+  enabledAttribMask = *(uint *)(clientState + 0x330);
+  if (enabledAttribMask != 0) {
+    attribMaskEmpty = enabledAttribMask == 0;
+    attribIndex = 0xf;
+    enabledAttribMaskCopy = 0;
+    if (!attribMaskEmpty) {
+      attribArray = clientState + 0x178;
       do {
-        uVar8 = 1 << (uVar6 & 0x3f);
-        if ((uVar10 & uVar8) == 0) goto LAB_000a638c;
-        uVar10 = uVar10 & ~uVar8;
-        uVar2 = *(ushort *)(iVar9 + 0x1aa);
-        iVar4 = *(int *)(iVar9 + 0x1a0) + i * *(int *)(iVar9 + 0x1a4);
-        if (uVar2 == 2) {
-          uVar2 = *(ushort *)(iVar9 + 0x1a8);
-          if (uVar2 == 0x1406) {
-            fparam_1 = (double)_glVertexAttrib2fvARB_Exec(glContext,uVar6,iVar4);
+        attribBit = 1 << (attribIndex & 0x3f);
+        if ((enabledAttribMask & attribBit) == 0) goto LAB_000a638c;
+        enabledAttribMask = enabledAttribMask & ~attribBit;
+        attribSize = *(ushort *)(attribArray + 0x1aa);
+        attribPtr = *(int *)(attribArray + 0x1a0) + i * *(int *)(attribArray + 0x1a4);
+        if (attribSize == 2) {
+          attribType = *(ushort *)(attribArray + 0x1a8);
+          if (attribType == 0x1406) {
+            forwardedFloatArg1 = (double)_glVertexAttrib2fvARB_Exec(glContext,attribIndex,attribPtr);
             goto LAB_000a6388;
           }
-          if (uVar2 < 0x1407) {
-            bVar1 = uVar10 == 0;
-            if (uVar2 == 0x1402) {
-              fparam_1 = (double)_glVertexAttrib2svARB_Exec(glContext,uVar6,iVar4);
+          if (attribType < 0x1407) {
+            attribMaskEmpty = enabledAttribMask == 0;
+            if (attribType == 0x1402) {
+              forwardedFloatArg1 = (double)_glVertexAttrib2svARB_Exec(glContext,attribIndex,attribPtr);
               goto LAB_000a6388;
             }
           }
           else {
-            bVar1 = uVar10 == 0;
-            if (uVar2 == 0x140a) {
-              fparam_1 = (double)_glVertexAttrib2dvARB_Exec(glContext,uVar6,iVar4);
+            attribMaskEmpty = enabledAttribMask == 0;
+            if (attribType == 0x140a) {
+              forwardedFloatArg1 = (double)_glVertexAttrib2dvARB_Exec(glContext,attribIndex,attribPtr);
               goto LAB_000a6388;
             }
           }
         }
         else {
-          if (uVar2 < 3) {
-            bVar1 = uVar10 == 0;
-            if (uVar2 != 1) goto LAB_000a638c;
-            uVar2 = *(ushort *)(iVar9 + 0x1a8);
-            if (uVar2 != 0x1406) {
-              if (uVar2 < 0x1407) {
-                bVar1 = uVar10 == 0;
-                if (uVar2 == 0x1402) {
-                  fparam_1 = (double)_glVertexAttrib1svARB_Exec(glContext,uVar6,iVar4);
+          if (attribSize < 3) {
+            attribMaskEmpty = enabledAttribMask == 0;
+            if (attribSize != 1) goto LAB_000a638c;
+            attribType = *(ushort *)(attribArray + 0x1a8);
+            if (attribType != 0x1406) {
+              if (attribType < 0x1407) {
+                attribMaskEmpty = enabledAttribMask == 0;
+                if (attribType == 0x1402) {
+                  forwardedFloatArg1 = (double)_glVertexAttrib1svARB_Exec(glContext,attribIndex,attribPtr);
                   goto LAB_000a6388;
                 }
               }
               else {
-                bVar1 = uVar10 == 0;
-                if (uVar2 == 0x140a) {
-                  fparam_1 = (double)_glVertexAttrib1dvARB_Exec(glContext,uVar6,iVar4);
+                attribMaskEmpty = enabledAttribMask == 0;
+                if (attribType == 0x140a) {
+                  forwardedFloatArg1 = (double)_glVertexAttrib1dvARB_Exec(glContext,attribIndex,attribPtr);
                   goto LAB_000a6388;
                 }
               }
               goto LAB_000a638c;
             }
-            fparam_1 = (double)_glVertexAttrib1fvARB_Exec(glContext,uVar6,iVar4);
+            forwardedFloatArg1 = (double)_glVertexAttrib1fvARB_Exec(glContext,attribIndex,attribPtr);
           }
-          else if (uVar2 == 3) {
-            uVar2 = *(ushort *)(iVar9 + 0x1a8);
-            if (uVar2 != 0x1406) {
-              if (uVar2 < 0x1407) {
-                bVar1 = uVar10 == 0;
-                if (uVar2 == 0x1402) {
-                  fparam_1 = (double)_glVertexAttrib3svARB_Exec(glContext,uVar6,iVar4);
+          else if (attribSize == 3) {
+            attribType = *(ushort *)(attribArray + 0x1a8);
+            if (attribType != 0x1406) {
+              if (attribType < 0x1407) {
+                attribMaskEmpty = enabledAttribMask == 0;
+                if (attribType == 0x1402) {
+                  forwardedFloatArg1 = (double)_glVertexAttrib3svARB_Exec(glContext,attribIndex,attribPtr);
                   goto LAB_000a6388;
                 }
               }
               else {
-                bVar1 = uVar10 == 0;
-                if (uVar2 == 0x140a) {
-                  fparam_1 = (double)_glVertexAttrib3dvARB_Exec(glContext,uVar6,iVar4);
+                attribMaskEmpty = enabledAttribMask == 0;
+                if (attribType == 0x140a) {
+                  forwardedFloatArg1 = (double)_glVertexAttrib3dvARB_Exec(glContext,attribIndex,attribPtr);
                   goto LAB_000a6388;
                 }
               }
               goto LAB_000a638c;
             }
-            fparam_1 = (double)_glVertexAttrib3fvARB_Exec(glContext,uVar6,iVar4);
+            forwardedFloatArg1 = (double)_glVertexAttrib3fvARB_Exec(glContext,attribIndex,attribPtr);
           }
           else {
-            bVar1 = uVar10 == 0;
-            if (uVar2 != 4) goto LAB_000a638c;
-            uVar2 = *(ushort *)(iVar9 + 0x1a8);
-            if (uVar2 == 0x1406) {
-              fparam_1 = (double)_glVertexAttrib4fvARB_Exec(glContext,uVar6,iVar4);
+            attribMaskEmpty = enabledAttribMask == 0;
+            if (attribSize != 4) goto LAB_000a638c;
+            attribType = *(ushort *)(attribArray + 0x1a8);
+            if (attribType == 0x1406) {
+              forwardedFloatArg1 = (double)_glVertexAttrib4fvARB_Exec(glContext,attribIndex,attribPtr);
             }
-            else if (uVar2 < 0x1407) {
-              if (uVar2 == 0x1402) {
-                fparam_1 = (double)_glVertexAttrib4svARB_Exec(glContext,uVar6,iVar4);
+            else if (attribType < 0x1407) {
+              if (attribType == 0x1402) {
+                forwardedFloatArg1 = (double)_glVertexAttrib4svARB_Exec(glContext,attribIndex,attribPtr);
               }
-              else if (uVar2 < 0x1403) {
-                if (uVar2 == 0x1400) {
-                  fparam_1 = (double)_glVertexAttrib4bvARB_Exec(glContext,uVar6,iVar4);
+              else if (attribType < 0x1403) {
+                if (attribType == 0x1400) {
+                  forwardedFloatArg1 = (double)_glVertexAttrib4bvARB_Exec(glContext,attribIndex,attribPtr);
                 }
                 else {
-                  if (uVar2 != 0x1401) goto LAB_000a638c;
-                  fparam_1 = (double)((double (*)())_glVertexAttrib4ubvARB_Exec)(glContext,uVar6,iVar4,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+                  if (attribType != 0x1401) goto LAB_000a638c;
+                  forwardedFloatArg1 = (double)((double (*)())_glVertexAttrib4ubvARB_Exec)(glContext,attribIndex,attribPtr,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                                                 forwardedFloatArg4);
                 }
               }
-              else if (uVar2 == 0x1404) {
-                fparam_1 = (double)_glVertexAttrib4ivARB_Exec(glContext,uVar6,iVar4);
+              else if (attribType == 0x1404) {
+                forwardedFloatArg1 = (double)_glVertexAttrib4ivARB_Exec(glContext,attribIndex,attribPtr);
               }
-              else if (uVar2 < 0x1405) {
-                fparam_1 = (double)((double (*)())_glVertexAttrib4usvARB_Exec)(glContext,uVar6,iVar4,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+              else if (attribType < 0x1405) {
+                forwardedFloatArg1 = (double)((double (*)())_glVertexAttrib4usvARB_Exec)(glContext,attribIndex,attribPtr,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                                               forwardedFloatArg4);
               }
               else {
-                fparam_1 = (double)_glVertexAttrib4uivARB_Exec(glContext,uVar6,iVar4);
+                forwardedFloatArg1 = (double)_glVertexAttrib4uivARB_Exec(glContext,attribIndex,attribPtr);
               }
             }
-            else if (uVar2 == 0x9402) {
-              fparam_1 = (double)_glVertexAttrib4NsvARB_Exec(glContext,uVar6,iVar4);
+            else if (attribType == 0x9402) {
+              forwardedFloatArg1 = (double)_glVertexAttrib4NsvARB_Exec(glContext,attribIndex,attribPtr);
             }
-            else if (uVar2 < 0x9403) {
-              if (uVar2 == 0x9400) {
-                fparam_1 = (double)_glVertexAttrib4NbvARB_Exec(glContext,uVar6,iVar4);
+            else if (attribType < 0x9403) {
+              if (attribType == 0x9400) {
+                forwardedFloatArg1 = (double)_glVertexAttrib4NbvARB_Exec(glContext,attribIndex,attribPtr);
               }
-              else if (uVar2 < 0x9401) {
-                bVar1 = uVar10 == 0;
-                if (uVar2 != 0x140a) goto LAB_000a638c;
-                fparam_1 = (double)_glVertexAttrib4dvARB_Exec(glContext,uVar6,iVar4);
+              else if (attribType < 0x9401) {
+                attribMaskEmpty = enabledAttribMask == 0;
+                if (attribType != 0x140a) goto LAB_000a638c;
+                forwardedFloatArg1 = (double)_glVertexAttrib4dvARB_Exec(glContext,attribIndex,attribPtr);
               }
               else {
-                fparam_1 = (double)((double (*)())_glVertexAttrib4NubvARB_Exec)(glContext,uVar6,iVar4,fparam_1,forwardedFloatArg2,forwardedFloatArg3,
+                forwardedFloatArg1 = (double)((double (*)())_glVertexAttrib4NubvARB_Exec)(glContext,attribIndex,attribPtr,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                                               forwardedFloatArg4);
               }
             }
-            else if (uVar2 == 0x9404) {
-              fparam_1 = (double)_glVertexAttrib4NivARB_Exec(glContext,uVar6,iVar4);
+            else if (attribType == 0x9404) {
+              forwardedFloatArg1 = (double)_glVertexAttrib4NivARB_Exec(glContext,attribIndex,attribPtr);
             }
-            else if (uVar2 < 0x9404) {
-              fparam_1 = (double)((double (*)())_glVertexAttrib4NusvARB_Exec)(glContext,uVar6,iVar4,fparam_1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4)
+            else if (attribType < 0x9404) {
+              forwardedFloatArg1 = (double)((double (*)())_glVertexAttrib4NusvARB_Exec)(glContext,attribIndex,attribPtr,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4)
               ;
             }
             else {
-              bVar1 = uVar10 == 0;
-              if (uVar2 != 0x9405) goto LAB_000a638c;
-              fparam_1 = (double)_glVertexAttrib4NuivARB_Exec(glContext,uVar6,iVar4);
+              attribMaskEmpty = enabledAttribMask == 0;
+              if (attribType != 0x9405) goto LAB_000a638c;
+              forwardedFloatArg1 = (double)_glVertexAttrib4NuivARB_Exec(glContext,attribIndex,attribPtr);
             }
           }
 LAB_000a6388:
-          bVar1 = uVar10 == 0;
+          attribMaskEmpty = enabledAttribMask == 0;
         }
 LAB_000a638c:
-        uVar6 = uVar6 - 1;
-        iVar9 = iVar9 + -0x18;
-      } while ((!bVar1) && (-1 < (int)uVar6));
-      uVar8 = *(uint *)(clientState + 0x330);
+        attribIndex = attribIndex - 1;
+        attribArray = attribArray + -0x18;
+      } while ((!attribMaskEmpty) && (-1 < (int)attribIndex));
+      enabledAttribMaskCopy = *(uint *)(clientState + 0x330);
     }
-    if ((uVar8 & 1) != 0) {
+    if ((enabledAttribMaskCopy & 1) != 0) {
       return;
     }
   }
-  if ((uVar7 & 0x10000) != 0) {
-    uVar2 = *(ushort *)(clientState + 0x3a);
-    iVar9 = *(int *)(clientState + 0x30) + i * *(int *)(clientState + 0x34);
-    if (uVar2 == 3) {
-      uVar2 = *(ushort *)(clientState + 0x38);
-      if (uVar2 == 0x1404) {
-        ((void (*)())_glVertex3iv_Exec)(glContext,iVar9);
+  if ((enabledArrayMask & 0x10000) != 0) {
+    vertexSize = *(ushort *)(clientState + 0x3a);
+    vertexPtr = *(int *)(clientState + 0x30) + i * *(int *)(clientState + 0x34);
+    if (vertexSize == 3) {
+      vertexType = *(ushort *)(clientState + 0x38);
+      if (vertexType == 0x1404) {
+        ((void (*)())_glVertex3iv_Exec)(glContext,vertexPtr);
         return;
       }
-      if (uVar2 < 0x1405) {
-        if (uVar2 == 0x1402) {
-          ((void (*)())_glVertex3sv_Exec)(glContext,iVar9);
+      if (vertexType < 0x1405) {
+        if (vertexType == 0x1402) {
+          ((void (*)())_glVertex3sv_Exec)(glContext,vertexPtr);
           return;
         }
       }
       else {
-        if (uVar2 == 0x1406) {
-          _glVertex3fv_Exec(glContext,iVar9);
+        if (vertexType == 0x1406) {
+          _glVertex3fv_Exec(glContext,vertexPtr);
           return;
         }
-        if (uVar2 == 0x140a) {
-          _glVertex3dv_Exec(glContext,iVar9);
+        if (vertexType == 0x140a) {
+          _glVertex3dv_Exec(glContext,vertexPtr);
           return;
         }
       }
     }
-    else if (uVar2 < 4) {
-      if (uVar2 == 2) {
-        uVar2 = *(ushort *)(clientState + 0x38);
-        if (uVar2 == 0x1404) {
-          ((void (*)())_glVertex2iv_Exec)(glContext,iVar9);
+    else if (vertexSize < 4) {
+      if (vertexSize == 2) {
+        vertexType = *(ushort *)(clientState + 0x38);
+        if (vertexType == 0x1404) {
+          ((void (*)())_glVertex2iv_Exec)(glContext,vertexPtr);
           return;
         }
-        if (uVar2 < 0x1405) {
-          if (uVar2 == 0x1402) {
-            ((void (*)())_glVertex2sv_Exec)(glContext,iVar9);
+        if (vertexType < 0x1405) {
+          if (vertexType == 0x1402) {
+            ((void (*)())_glVertex2sv_Exec)(glContext,vertexPtr);
             return;
           }
         }
         else {
-          if (uVar2 == 0x1406) {
-            _glVertex2fv_Exec(glContext,iVar9);
+          if (vertexType == 0x1406) {
+            _glVertex2fv_Exec(glContext,vertexPtr);
             return;
           }
-          if (uVar2 == 0x140a) {
-            _glVertex2dv_Exec(glContext,iVar9);
+          if (vertexType == 0x140a) {
+            _glVertex2dv_Exec(glContext,vertexPtr);
             return;
           }
         }
       }
     }
-    else if (uVar2 == 4) {
-      uVar2 = *(ushort *)(clientState + 0x38);
-      if (uVar2 == 0x1404) {
-        ((void (*)())_glVertex4iv_Exec)(glContext,iVar9);
+    else if (vertexSize == 4) {
+      vertexType = *(ushort *)(clientState + 0x38);
+      if (vertexType == 0x1404) {
+        ((void (*)())_glVertex4iv_Exec)(glContext,vertexPtr);
         return;
       }
-      if (uVar2 < 0x1405) {
-        if (uVar2 == 0x1402) {
-          ((void (*)())_glVertex4sv_Exec)(glContext,iVar9);
+      if (vertexType < 0x1405) {
+        if (vertexType == 0x1402) {
+          ((void (*)())_glVertex4sv_Exec)(glContext,vertexPtr);
           return;
         }
       }
       else {
-        if (uVar2 == 0x1406) {
-          _glVertex4fv_Exec(glContext,iVar9);
+        if (vertexType == 0x1406) {
+          _glVertex4fv_Exec(glContext,vertexPtr);
           return;
         }
-        if (uVar2 == 0x140a) {
-          _glVertex4dv_Exec(glContext,iVar9);
+        if (vertexType == 0x140a) {
+          _glVertex4dv_Exec(glContext,vertexPtr);
           return;
         }
       }

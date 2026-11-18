@@ -961,26 +961,26 @@ void _gleGetHistogram(glContext, unusedArg2, reset, format, type, values)
   bool formatAboveBlue;
   bool formatAboveAbgr;
   double uintToDoubleBias;
-  undefined1 uVar18;
-  ushort uVar17;
-  int iVar19;
+  undefined1 outByte;
+  ushort outShort;
+  int binIndex;
   int binsRemaining;
   int packAlignment;
   int pixelBytes;
   int binByteOffset;
-  float fVar21;
-  float fVar22;
-  float fVar23;
-  float fVar24;
-  float *pfVar25;
+  float componentTemp1;
+  float componentTemp2;
+  float componentTemp3;
+  float componentTemp4;
+  float *resetCursor;
   float *dstCursor;
   int binCountThenRemaining;
   float *histogramTable;
   float *binCursor;
-  undefined4 local_80;
-  undefined4 local_7c;
-  undefined4 local_78;
-  undefined4 local_74;
+  undefined4 binWord0;
+  undefined4 binWord1;
+  undefined4 binWord2;
+  undefined4 binWord3;
   
   histogramTable = *(float **)(glContext + 0x3384);
   binCountThenRemaining = *(int *)(glContext + 0x3388);
@@ -1021,84 +1021,84 @@ void _gleGetHistogram(glContext, unusedArg2, reset, format, type, values)
     binsRemaining = binCountThenRemaining;
     do {
       if (type == 0x1406) {
-        fVar21 = (float)((double)CONCAT44(0x43300000,-*binCursor) - uintToDoubleBias);
-        fVar22 = (float)((double)CONCAT44(0x43300000,-binCursor[1]) - uintToDoubleBias);
-        fVar23 = (float)((double)CONCAT44(0x43300000,-binCursor[2]) - uintToDoubleBias);
-        fVar24 = (float)((double)CONCAT44(0x43300000,-binCursor[3]) - uintToDoubleBias);
+        componentTemp1 = (float)((double)CONCAT44(0x43300000,-*binCursor) - uintToDoubleBias);
+        componentTemp2 = (float)((double)CONCAT44(0x43300000,-binCursor[1]) - uintToDoubleBias);
+        componentTemp3 = (float)((double)CONCAT44(0x43300000,-binCursor[2]) - uintToDoubleBias);
+        componentTemp4 = (float)((double)CONCAT44(0x43300000,-binCursor[3]) - uintToDoubleBias);
         if (swapBytes) {
-          fVar21 = GH_U2F((unsigned int)(((uint)GH_F2U(fVar21) >> 0x18 | (uint)GH_F2U(fVar21) >> 8 & 0xff00 |
-                           ((uint)GH_F2U(fVar21) & 0xff00) << 8 | (int)GH_F2U(fVar21) << 0x18)));
-          fVar22 = GH_U2F((unsigned int)(((uint)GH_F2U(fVar22) >> 0x18 | (uint)GH_F2U(fVar22) >> 8 & 0xff00 |
-                           ((uint)GH_F2U(fVar22) & 0xff00) << 8 | (int)GH_F2U(fVar22) << 0x18)));
-          fVar23 = GH_U2F((unsigned int)(((uint)GH_F2U(fVar23) >> 0x18 | (uint)GH_F2U(fVar23) >> 8 & 0xff00 |
-                           ((uint)GH_F2U(fVar23) & 0xff00) << 8 | (int)GH_F2U(fVar23) << 0x18)));
-          fVar24 = GH_U2F((unsigned int)(((uint)GH_F2U(fVar24) >> 0x18 | (uint)GH_F2U(fVar24) >> 8 & 0xff00 |
-                           ((uint)GH_F2U(fVar24) & 0xff00) << 8 | (int)GH_F2U(fVar24) << 0x18)));
+          componentTemp1 = GH_U2F((unsigned int)(((uint)GH_F2U(componentTemp1) >> 0x18 | (uint)GH_F2U(componentTemp1) >> 8 & 0xff00 |
+                           ((uint)GH_F2U(componentTemp1) & 0xff00) << 8 | (int)GH_F2U(componentTemp1) << 0x18)));
+          componentTemp2 = GH_U2F((unsigned int)(((uint)GH_F2U(componentTemp2) >> 0x18 | (uint)GH_F2U(componentTemp2) >> 8 & 0xff00 |
+                           ((uint)GH_F2U(componentTemp2) & 0xff00) << 8 | (int)GH_F2U(componentTemp2) << 0x18)));
+          componentTemp3 = GH_U2F((unsigned int)(((uint)GH_F2U(componentTemp3) >> 0x18 | (uint)GH_F2U(componentTemp3) >> 8 & 0xff00 |
+                           ((uint)GH_F2U(componentTemp3) & 0xff00) << 8 | (int)GH_F2U(componentTemp3) << 0x18)));
+          componentTemp4 = GH_U2F((unsigned int)(((uint)GH_F2U(componentTemp4) >> 0x18 | (uint)GH_F2U(componentTemp4) >> 8 & 0xff00 |
+                           ((uint)GH_F2U(componentTemp4) & 0xff00) << 8 | (int)GH_F2U(componentTemp4) << 0x18)));
         }
         if (formatIsRgba) {
-          *dstCursor = fVar21;
-          dstCursor[1] = fVar22;
+          *dstCursor = componentTemp1;
+          dstCursor[1] = componentTemp2;
           dstCursor = dstCursor + 2;
-          *dstCursor = fVar23;
+          *dstCursor = componentTemp3;
           goto LAB_000d372c;
         }
         if (formatAboveRgba) {
           if (!formatIsAbgr) {
             if (formatAboveAbgr) {
               if (formatIsBgr) {
-                *dstCursor = fVar23;
+                *dstCursor = componentTemp3;
                 goto LAB_000d3714;
               }
               if (formatIsBgra) {
-                *dstCursor = fVar23;
-                dstCursor[1] = fVar22;
+                *dstCursor = componentTemp3;
+                dstCursor[1] = componentTemp2;
                 dstCursor = dstCursor + 2;
-                *dstCursor = fVar21;
+                *dstCursor = componentTemp1;
                 goto LAB_000d372c;
               }
             }
             else {
               if (formatIsLuminance) goto LAB_000d3720;
               if (formatIsLuminanceAlpha) {
-                *dstCursor = fVar21;
+                *dstCursor = componentTemp1;
 LAB_000d372c:
                 dstCursor = dstCursor + 1;
-                *dstCursor = fVar24;
+                *dstCursor = componentTemp4;
                 goto LAB_000d3730;
               }
             }
             goto LAB_000d3734;
           }
-          *dstCursor = fVar24;
+          *dstCursor = componentTemp4;
           dstCursor = dstCursor + 1;
-          *dstCursor = fVar23;
+          *dstCursor = componentTemp3;
 LAB_000d3714:
-          dstCursor[1] = fVar22;
+          dstCursor[1] = componentTemp2;
           dstCursor = dstCursor + 2;
-          *dstCursor = fVar21;
+          *dstCursor = componentTemp1;
         }
         else if (formatIsBlue) {
-          *dstCursor = fVar23;
+          *dstCursor = componentTemp3;
         }
         else if (formatAboveBlue) {
           if (formatIsAlpha) {
-            *dstCursor = fVar24;
+            *dstCursor = componentTemp4;
           }
           else {
             if (!formatIsRgb) goto LAB_000d3734;
-            *dstCursor = fVar21;
-            dstCursor[1] = fVar22;
+            *dstCursor = componentTemp1;
+            dstCursor[1] = componentTemp2;
             dstCursor = dstCursor + 2;
-            *dstCursor = fVar23;
+            *dstCursor = componentTemp3;
           }
         }
         else if (formatIsRed) {
 LAB_000d3720:
-          *dstCursor = fVar21;
+          *dstCursor = componentTemp1;
         }
         else {
           if (formatIsNotGreen) goto LAB_000d3734;
-          *dstCursor = fVar22;
+          *dstCursor = componentTemp2;
         }
 LAB_000d3730:
         dstCursor = dstCursor + 1;
@@ -1112,18 +1112,18 @@ LAB_000d3730:
 LAB_000d3048:
               *(undefined1 *)dstCursor = *(undefined1 *)((int)binCursor + 3);
               *(undefined1 *)((int)dstCursor + 1) = *(undefined1 *)((int)binCursor + 7);
-              uVar18 = *(undefined1 *)((int)binCursor + 0xb);
+              outByte = *(undefined1 *)((int)binCursor + 0xb);
 LAB_000d3074:
               dstCursor = (float *)((int)dstCursor + 2);
-              *(undefined1 *)dstCursor = uVar18;
+              *(undefined1 *)dstCursor = outByte;
 LAB_000d30ac:
-              uVar18 = *(undefined1 *)((int)binCursor + 0xf);
+              outByte = *(undefined1 *)((int)binCursor + 0xf);
             }
             else {
               if (!formatAboveRgba) {
                 if (!formatIsBlue) goto LAB_000d2f78;
 LAB_000d3020:
-                uVar18 = *(undefined1 *)((int)binCursor + 0xb);
+                outByte = *(undefined1 *)((int)binCursor + 0xb);
                 goto LAB_000d2f38;
               }
 LAB_000d2fc4:
@@ -1132,21 +1132,21 @@ LAB_000d2fc4:
                   if (formatIsBgr) {
                     *(undefined1 *)dstCursor = *(undefined1 *)((int)binCursor + 0xb);
                     *(undefined1 *)((int)dstCursor + 1) = *(undefined1 *)((int)binCursor + 7);
-                    uVar18 = *(undefined1 *)((int)binCursor + 3);
+                    outByte = *(undefined1 *)((int)binCursor + 3);
 LAB_000d2f54:
                     dstCursor = (float *)((int)dstCursor + 2);
-                    *(undefined1 *)dstCursor = uVar18;
+                    *(undefined1 *)dstCursor = outByte;
                     goto LAB_000d30b4;
                   }
                   if (!formatIsBgra) goto LAB_000d3734;
                   *(undefined1 *)dstCursor = *(undefined1 *)((int)binCursor + 0xb);
                   *(undefined1 *)((int)dstCursor + 1) = *(undefined1 *)((int)binCursor + 7);
-                  uVar18 = *(undefined1 *)((int)binCursor + 3);
+                  outByte = *(undefined1 *)((int)binCursor + 3);
                   goto LAB_000d3074;
                 }
                 if (formatIsLuminance) {
 LAB_000d309c:
-                  uVar18 = *(undefined1 *)((int)binCursor + 3);
+                  outByte = *(undefined1 *)((int)binCursor + 3);
                   goto LAB_000d2f38;
                 }
                 if (!formatIsLuminanceAlpha) goto LAB_000d3734;
@@ -1157,10 +1157,10 @@ LAB_000d309c:
               *(undefined1 *)((int)dstCursor + 1) = *(undefined1 *)((int)binCursor + 0xb);
               dstCursor = (float *)((int)dstCursor + 2);
               *(undefined1 *)dstCursor = *(undefined1 *)((int)binCursor + 7);
-              uVar18 = *(undefined1 *)((int)binCursor + 3);
+              outByte = *(undefined1 *)((int)binCursor + 3);
             }
             dstCursor = (float *)((int)dstCursor + 1);
-            *(undefined1 *)dstCursor = uVar18;
+            *(undefined1 *)dstCursor = outByte;
           }
           else {
             if (type != 0x1401) goto LAB_000d3734;
@@ -1173,194 +1173,194 @@ LAB_000d2f78:
                 if (!formatIsRgb) goto LAB_000d3734;
                 *(undefined1 *)dstCursor = *(undefined1 *)((int)binCursor + 3);
                 *(undefined1 *)((int)dstCursor + 1) = *(undefined1 *)((int)binCursor + 7);
-                uVar18 = *(undefined1 *)((int)binCursor + 0xb);
+                outByte = *(undefined1 *)((int)binCursor + 0xb);
                 goto LAB_000d2f54;
               }
-              uVar18 = *(undefined1 *)((int)binCursor + 0xf);
+              outByte = *(undefined1 *)((int)binCursor + 0xf);
             }
             else {
               if (formatIsRed) goto LAB_000d309c;
               if (formatIsNotGreen) goto LAB_000d3734;
-              uVar18 = *(undefined1 *)((int)binCursor + 7);
+              outByte = *(undefined1 *)((int)binCursor + 7);
             }
 LAB_000d2f38:
-            *(undefined1 *)dstCursor = uVar18;
+            *(undefined1 *)dstCursor = outByte;
           }
 LAB_000d30b4:
           dstCursor = (float *)((int)dstCursor + 1);
           goto LAB_000d3734;
         }
         if ((type == 0x1404) || (0x1404 < type)) {
-          local_80 = GH_F2U(*binCursor);
-          local_7c = GH_F2U(binCursor[1]);
-          local_78 = GH_F2U(binCursor[2]);
-          local_74 = GH_F2U(binCursor[3]);
+          binWord0 = GH_F2U(*binCursor);
+          binWord1 = GH_F2U(binCursor[1]);
+          binWord2 = GH_F2U(binCursor[2]);
+          binWord3 = GH_F2U(binCursor[3]);
           if (swapBytes) {
-            fVar24 = *binCursor;
-            fVar23 = binCursor[1];
-            fVar22 = binCursor[2];
-            fVar21 = binCursor[3];
-            local_80 = ((unsigned int)(((int)GH_F2U(fVar24) >> 0x18 | (uint)GH_F2U(fVar24) >> 8 & 0xff00 |
-                               ((uint)GH_F2U(fVar24) & 0xff00) << 8 | (int)GH_F2U(fVar24) << 0x18)));
-            local_7c = ((unsigned int)(((int)GH_F2U(fVar23) >> 0x18 | (uint)GH_F2U(fVar23) >> 8 & 0xff00 |
-                               ((uint)GH_F2U(fVar23) & 0xff00) << 8 | (int)GH_F2U(fVar23) << 0x18)));
-            local_78 = ((unsigned int)(((int)GH_F2U(fVar22) >> 0x18 | (uint)GH_F2U(fVar22) >> 8 & 0xff00 |
-                               ((uint)GH_F2U(fVar22) & 0xff00) << 8 | (int)GH_F2U(fVar22) << 0x18)));
-            local_74 = ((unsigned int)(((int)GH_F2U(fVar21) >> 0x18 | (uint)GH_F2U(fVar21) >> 8 & 0xff00 |
-                               ((uint)GH_F2U(fVar21) & 0xff00) << 8 | (int)GH_F2U(fVar21) << 0x18)));
+            componentTemp4 = *binCursor;
+            componentTemp3 = binCursor[1];
+            componentTemp2 = binCursor[2];
+            componentTemp1 = binCursor[3];
+            binWord0 = ((unsigned int)(((int)GH_F2U(componentTemp4) >> 0x18 | (uint)GH_F2U(componentTemp4) >> 8 & 0xff00 |
+                               ((uint)GH_F2U(componentTemp4) & 0xff00) << 8 | (int)GH_F2U(componentTemp4) << 0x18)));
+            binWord1 = ((unsigned int)(((int)GH_F2U(componentTemp3) >> 0x18 | (uint)GH_F2U(componentTemp3) >> 8 & 0xff00 |
+                               ((uint)GH_F2U(componentTemp3) & 0xff00) << 8 | (int)GH_F2U(componentTemp3) << 0x18)));
+            binWord2 = ((unsigned int)(((int)GH_F2U(componentTemp2) >> 0x18 | (uint)GH_F2U(componentTemp2) >> 8 & 0xff00 |
+                               ((uint)GH_F2U(componentTemp2) & 0xff00) << 8 | (int)GH_F2U(componentTemp2) << 0x18)));
+            binWord3 = ((unsigned int)(((int)GH_F2U(componentTemp1) >> 0x18 | (uint)GH_F2U(componentTemp1) >> 8 & 0xff00 |
+                               ((uint)GH_F2U(componentTemp1) & 0xff00) << 8 | (int)GH_F2U(componentTemp1) << 0x18)));
           }
           if (formatIsRgba) {
-            *(unsigned int *)dstCursor = local_80;
-            ((unsigned int *)dstCursor)[1] = local_7c;
-            local_80 = local_78;
+            *(unsigned int *)dstCursor = binWord0;
+            ((unsigned int *)dstCursor)[1] = binWord1;
+            binWord0 = binWord2;
 LAB_000d32f4:
             dstCursor = dstCursor + 2;
-            *(unsigned int *)dstCursor = local_80;
-            local_80 = local_74;
+            *(unsigned int *)dstCursor = binWord0;
+            binWord0 = binWord3;
           }
           else {
             if (!formatAboveRgba) {
-              fVar21 = GH_U2F(local_78);
+              componentTemp1 = GH_U2F(binWord2);
               if (!formatIsBlue) {
                 if (formatAboveBlue) {
-                  fVar21 = GH_U2F(local_74);
+                  componentTemp1 = GH_U2F(binWord3);
                   if (formatIsAlpha) goto LAB_000d32bc;
                   if (formatIsRgb) {
-                    *(unsigned int *)dstCursor = local_80;
-                    ((unsigned int *)dstCursor)[1] = local_7c;
+                    *(unsigned int *)dstCursor = binWord0;
+                    ((unsigned int *)dstCursor)[1] = binWord1;
                     goto LAB_000d32d8;
                   }
                 }
                 else {
-                  fVar21 = GH_U2F(local_80);
-                  if ((formatIsRed) || (fVar21 = GH_U2F(local_7c), !formatIsNotGreen)) goto LAB_000d32bc;
+                  componentTemp1 = GH_U2F(binWord0);
+                  if ((formatIsRed) || (componentTemp1 = GH_U2F(binWord1), !formatIsNotGreen)) goto LAB_000d32bc;
                 }
                 goto LAB_000d3734;
               }
 LAB_000d32bc:
-              *dstCursor = fVar21;
+              *dstCursor = componentTemp1;
               goto LAB_000d3730;
             }
             if (!formatIsAbgr) {
               if (formatAboveAbgr) {
                 if (formatIsBgr) {
-                  *(unsigned int *)dstCursor = local_78;
-                  ((unsigned int *)dstCursor)[1] = local_7c;
-                  local_78 = local_80;
+                  *(unsigned int *)dstCursor = binWord2;
+                  ((unsigned int *)dstCursor)[1] = binWord1;
+                  binWord2 = binWord0;
 LAB_000d32d8:
                   dstCursor = dstCursor + 2;
-                  *(unsigned int *)dstCursor = local_78;
+                  *(unsigned int *)dstCursor = binWord2;
                   goto LAB_000d3730;
                 }
                 if (formatIsBgra) {
-                  *(unsigned int *)dstCursor = local_78;
-                  ((unsigned int *)dstCursor)[1] = local_7c;
+                  *(unsigned int *)dstCursor = binWord2;
+                  ((unsigned int *)dstCursor)[1] = binWord1;
                   goto LAB_000d32f4;
                 }
               }
               else {
-                fVar21 = GH_U2F(local_80);
+                componentTemp1 = GH_U2F(binWord0);
                 if (formatIsLuminance) goto LAB_000d32bc;
                 if (formatIsLuminanceAlpha) {
-                  *(unsigned int *)dstCursor = local_80;
-                  local_80 = local_74;
+                  *(unsigned int *)dstCursor = binWord0;
+                  binWord0 = binWord3;
                   goto LAB_000d32fc;
                 }
               }
               goto LAB_000d3734;
             }
-            *(unsigned int *)dstCursor = local_74;
-            ((unsigned int *)dstCursor)[1] = local_78;
+            *(unsigned int *)dstCursor = binWord3;
+            ((unsigned int *)dstCursor)[1] = binWord2;
             dstCursor = dstCursor + 2;
-            *(unsigned int *)dstCursor = local_7c;
+            *(unsigned int *)dstCursor = binWord1;
           }
 LAB_000d32fc:
           dstCursor = dstCursor + 1;
-          *(unsigned int *)dstCursor = local_80;
+          *(unsigned int *)dstCursor = binWord0;
           goto LAB_000d3730;
         }
       }
-      (*(unsigned short *)((unsigned char *)&(local_80) + 2)) = SUB42(*binCursor,0);
-      (*(unsigned short *)((unsigned char *)&(local_7c) + 2)) = SUB42(binCursor[1],0);
-      (*(unsigned short *)((unsigned char *)&(local_78) + 2)) = SUB42(binCursor[2],0);
-      (*(unsigned short *)((unsigned char *)&(local_74) + 2)) = SUB42(binCursor[3],0);
+      (*(unsigned short *)((unsigned char *)&(binWord0) + 2)) = SUB42(*binCursor,0);
+      (*(unsigned short *)((unsigned char *)&(binWord1) + 2)) = SUB42(binCursor[1],0);
+      (*(unsigned short *)((unsigned char *)&(binWord2) + 2)) = SUB42(binCursor[2],0);
+      (*(unsigned short *)((unsigned char *)&(binWord3) + 2)) = SUB42(binCursor[3],0);
       if (swapBytes) {
-        (*(unsigned short *)((unsigned char *)&(local_80) + 2)) =
+        (*(unsigned short *)((unsigned char *)&(binWord0) + 2)) =
              (ushort)(((uint)GH_F2U(*binCursor) & 0xff) << 8) | (ushort)((uint)GH_F2U(*binCursor) >> 8) & 0xff;
-        (*(unsigned short *)((unsigned char *)&(local_7c) + 2)) =
+        (*(unsigned short *)((unsigned char *)&(binWord1) + 2)) =
              (ushort)(((uint)GH_F2U(binCursor[1]) & 0xff) << 8) | (ushort)((uint)GH_F2U(binCursor[1]) >> 8) & 0xff;
-        (*(unsigned short *)((unsigned char *)&(local_78) + 2)) =
+        (*(unsigned short *)((unsigned char *)&(binWord2) + 2)) =
              (ushort)(((uint)GH_F2U(binCursor[2]) & 0xff) << 8) | (ushort)((uint)GH_F2U(binCursor[2]) >> 8) & 0xff;
-        (*(unsigned short *)((unsigned char *)&(local_74) + 2)) =
+        (*(unsigned short *)((unsigned char *)&(binWord3) + 2)) =
              (ushort)(((uint)GH_F2U(binCursor[3]) & 0xff) << 8) | (ushort)((uint)GH_F2U(binCursor[3]) >> 8) & 0xff;
       }
       if (formatIsRgba) {
-        *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
-        *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
-        (*(unsigned short *)((unsigned char *)&(local_80) + 2)) = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
+        *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(binWord0) + 2));
+        *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(binWord1) + 2));
+        (*(unsigned short *)((unsigned char *)&(binWord0) + 2)) = (*(unsigned short *)((unsigned char *)&(binWord2) + 2));
 LAB_000d3270:
         dstCursor = dstCursor + 1;
-        *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
-        (*(unsigned short *)((unsigned char *)&(local_80) + 2)) = (*(unsigned short *)((unsigned char *)&(local_74) + 2));
+        *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(binWord0) + 2));
+        (*(unsigned short *)((unsigned char *)&(binWord0) + 2)) = (*(unsigned short *)((unsigned char *)&(binWord3) + 2));
 LAB_000d32ac:
         dstCursor = (float *)((int)dstCursor + 2);
-        *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
+        *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(binWord0) + 2));
 LAB_000d32b0:
         dstCursor = (float *)((int)dstCursor + 2);
       }
       else if (formatAboveRgba) {
         if (formatIsAbgr) {
-          *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_74) + 2));
-          *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
+          *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(binWord3) + 2));
+          *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(binWord2) + 2));
           dstCursor = dstCursor + 1;
-          *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
+          *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(binWord1) + 2));
           goto LAB_000d32ac;
         }
         if (formatAboveAbgr) {
           if (formatIsBgr) {
-            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
-            *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
-            (*(unsigned short *)((unsigned char *)&(local_78) + 2)) = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
+            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(binWord2) + 2));
+            *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(binWord1) + 2));
+            (*(unsigned short *)((unsigned char *)&(binWord2) + 2)) = (*(unsigned short *)((unsigned char *)&(binWord0) + 2));
 LAB_000d30dc:
             dstCursor = dstCursor + 1;
-            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
+            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(binWord2) + 2));
             goto LAB_000d32b0;
           }
           if (formatIsBgra) {
-            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
-            *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
+            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(binWord2) + 2));
+            *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(binWord1) + 2));
             goto LAB_000d3270;
           }
         }
         else {
-          uVar17 = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
+          outShort = (*(unsigned short *)((unsigned char *)&(binWord0) + 2));
           if (formatIsLuminance) goto LAB_000d30c0;
           if (formatIsLuminanceAlpha) {
-            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
-            (*(unsigned short *)((unsigned char *)&(local_80) + 2)) = (*(unsigned short *)((unsigned char *)&(local_74) + 2));
+            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(binWord0) + 2));
+            (*(unsigned short *)((unsigned char *)&(binWord0) + 2)) = (*(unsigned short *)((unsigned char *)&(binWord3) + 2));
             goto LAB_000d32ac;
           }
         }
       }
       else {
-        uVar17 = (*(unsigned short *)((unsigned char *)&(local_78) + 2));
+        outShort = (*(unsigned short *)((unsigned char *)&(binWord2) + 2));
         if (formatIsBlue) {
 LAB_000d30c0:
-          *(ushort *)dstCursor = uVar17;
+          *(ushort *)dstCursor = outShort;
           goto LAB_000d32b0;
         }
         if (formatAboveBlue) {
-          uVar17 = (*(unsigned short *)((unsigned char *)&(local_74) + 2));
+          outShort = (*(unsigned short *)((unsigned char *)&(binWord3) + 2));
           if (formatIsAlpha) goto LAB_000d30c0;
           if (formatIsRgb) {
-            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
-            *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
+            *(ushort *)dstCursor = (*(unsigned short *)((unsigned char *)&(binWord0) + 2));
+            *(ushort *)((int)dstCursor + 2) = (*(unsigned short *)((unsigned char *)&(binWord1) + 2));
             goto LAB_000d30dc;
           }
         }
         else {
-          uVar17 = (*(unsigned short *)((unsigned char *)&(local_80) + 2));
-          if ((formatIsRed) || (uVar17 = (*(unsigned short *)((unsigned char *)&(local_7c) + 2)), !formatIsNotGreen)) goto LAB_000d30c0;
+          outShort = (*(unsigned short *)((unsigned char *)&(binWord0) + 2));
+          if ((formatIsRed) || (outShort = (*(unsigned short *)((unsigned char *)&(binWord1) + 2)), !formatIsNotGreen)) goto LAB_000d30c0;
         }
       }
 LAB_000d3734:
@@ -1368,27 +1368,27 @@ LAB_000d3734:
       binsRemaining = binsRemaining + -1;
     } while (binsRemaining != 0);
   }
-  if ((reset != 0) && (iVar19 = 0, 0 < binCountThenRemaining)) {
-    pfVar25 = histogramTable;
+  if ((reset != 0) && (binIndex = 0, 0 < binCountThenRemaining)) {
+    resetCursor = histogramTable;
     do {
       if (format == 0x8032) goto LAB_000d3938;
       if (format < 0x8033) {
         if (format == 0x1906) {
 LAB_000d3920:
-          pfVar25[3] = 0.0;
+          resetCursor[3] = 0.0;
         }
         else if (format < 0x1907) {
           if (format == 0x1904) {
-            pfVar25[1] = 0.0;
+            resetCursor[1] = 0.0;
           }
           else if (format < 0x1905) {
             if (format == 0x1903) {
 LAB_000d3904:
-              *pfVar25 = 0.0;
+              *resetCursor = 0.0;
             }
           }
           else {
-            pfVar25[2] = 0.0;
+            resetCursor[2] = 0.0;
           }
         }
         else {
@@ -1396,7 +1396,7 @@ LAB_000d3904:
           if (format < 0x1908) goto LAB_000d3938;
           if (format == 0x1909) goto LAB_000d3904;
           if (format == 0x190a) {
-            *pfVar25 = 0.0;
+            *resetCursor = 0.0;
             goto LAB_000d3920;
           }
         }
@@ -1404,8 +1404,8 @@ LAB_000d3904:
       else {
         if (format == 0x80e1) {
 LAB_000d3928:
-          binByteOffset = iVar19 * 0x10;
-          histogramTable[iVar19 * 4 + 3] = 0.0;
+          binByteOffset = binIndex * 0x10;
+          histogramTable[binIndex * 4 + 3] = 0.0;
         }
         else {
           if (0x80e1 < format) {
@@ -1418,15 +1418,15 @@ LAB_000d3928:
           if (format < 0x8037) goto LAB_000d3928;
           if (format != 0x80e0) goto LAB_000d394c;
 LAB_000d3938:
-          binByteOffset = iVar19 << 4;
+          binByteOffset = binIndex << 4;
         }
         *(undefined4 *)((int)histogramTable + binByteOffset) = 0;
         *(undefined4 *)((int)histogramTable + binByteOffset + 8) = 0;
         *(undefined4 *)((int)histogramTable + binByteOffset + 4) = 0;
       }
 LAB_000d394c:
-      iVar19 = iVar19 + 1;
-      pfVar25 = pfVar25 + 4;
+      binIndex = binIndex + 1;
+      resetCursor = resetCursor + 4;
       binCountThenRemaining = binCountThenRemaining + -1;
     } while (binCountThenRemaining != 0);
   }
@@ -2776,15 +2776,17 @@ LAB_000d5570:
 }
 
 /* _gleVtxLightSpecRGBABack @ 0xd5590 (1640 bytes) */
-void _gleVtxLightSpecRGBABack(int glContext,int vertex,int vertexCount,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
+void _gleVtxLightSpecRGBABack(int glContext,int vertex,int vertexCount,double floatArg1,double floatArg2,double floatArg3,double floatArg4,double floatArg5,double floatArg6,double floatArg7,double floatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
-  float fVar1;
+  float doubleCrossY;
+  float directionalDoubleCrossZ;
+  float specularFactor;
   float inverseW;
-  float fVar2;
-  float fVar3;
+  float doubleCrossX;
+  float doubleCrossZ;
   undefined4 colorAlpha;
   undefined *vectorNormalize;
-  int iVar6;
+  int glContextForCalls;
   int extraout_r3;
   int extraout_r3_00;
   int r3AfterCall2;
@@ -2801,19 +2803,24 @@ void _gleVtxLightSpecRGBABack(int glContext,int vertex,int vertexCount,double fp
   double f1AfterCall1;
   double f1AfterCall2;
   double f1AfterCall3;
-  float dVar16;
+  float normalZ;
   float lightAttenuation;
-  double dVar17;
-  float dVar18;
+  double normalDotLight;
+  double directionalLightZ;
+  double specularR;
+  double lnCrossXCopy;
+  double specularDot;
+  float normalDotDirection;
   float lightContributionB;
   float floatOne;
-  float dVar20;
-  float dVar21;
+  float specularSumB;
+  float specularSumG;
   float floatZero;
-  float dVar23;
+  float specularSumR;
   float lightContributionG;
   float lightContributionR;
-  float dVar26;
+  float toLightYCopy;
+  float specularB;
   float colorB;
   float colorG;
   float colorR;
@@ -2829,23 +2836,23 @@ void _gleVtxLightSpecRGBABack(int glContext,int vertex,int vertexCount,double fp
   float halfX;
   float halfY;
   float halfZ;
-  float local_100;
-  float local_fc;
+  float toLightX;
+  float lnCrossYDir;
   float toLightY;
-  float local_f8;
+  float lightDirZ;
   float toLightZ;
-  float local_f0;
-  float local_ec;
-  float local_e8;
-  float local_e0;
-  float local_dc;
-  float local_d8;
+  float lnCrossX;
+  float lnCrossY;
+  float lnCrossZ;
+  float crossAdjustedLightX;
+  float crossAdjustedLightY;
+  float crossAdjustedLightZ;
   uint localViewer;
   
   vertexIndex = 0;
   localViewer = (uint)*(byte *)(glContext + 0x30ad);
   enabledLightMask = *(uint *)(glContext + 0x30a0);
-  iVar6 = glContext;
+  glContextForCalls = glContext;
   iStack00000020 = vertexCount;
   if (vertexCount < 1) {
     return;
@@ -2876,7 +2883,7 @@ LAB_000d55d4:
         halfY = -eyePosition[1];
         halfZ = -eyePosition[2];
         f1AfterCall1 = ((double (*)())(*(code **)PTR__gleVectorNormalize_00112064))(glContext,&halfX,&halfX);
-        fparam_1 = f1AfterCall1;
+        floatArg1 = f1AfterCall1;
       }
     }
     vectorNormalize = PTR__gleVectorNormalize_00112064;
@@ -2891,54 +2898,54 @@ LAB_000d55d4:
     lightParams2 = glContext;
     lightProducts = material;
     lightRecord = glContext;
-    dVar20 = (double)floatZero;
-    dVar21 = (double)floatZero;
-    dVar23 = (double)floatZero;
+    specularSumB = (double)floatZero;
+    specularSumG = (double)floatZero;
+    specularSumR = (double)floatZero;
     do {
       if ((enabledLightMask & 1 << (lightIndex & 0x3f)) == 0) {
         if (enabledLightMask >> (lightIndex & 0x3f) == 0) goto LAB_000d5b98;
       }
       else if (*(char *)(lightRecord + 0x4ad8) == '\0') {
         if (*(char *)(lightRecord + 0x4ad9) == '\0') {
-          local_100 = *(float *)(lightRecord + 0x4a70) - *eyePosition;
+          toLightX = *(float *)(lightRecord + 0x4a70) - *eyePosition;
           toLightY = *(float *)(lightRecord + 0x4a74) - eyePosition[1];
           toLightZ = *(float *)(lightRecord + 0x4a78) - eyePosition[2];
-          f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(glContext,&local_100,&local_100);
+          f1AfterCall2 = ((double (*)())(*(code **)vectorNormalize))(glContext,&toLightX,&toLightX);
           if ((*(char *)(lightRecord + 0x4adb) != '\0') || (f1AfterCall2 < (double)FLOAT_00108e80)) {
             lightAttenuation = (double)*(float *)(lightRecord + 0x4ad4);
-            fparam_1 = f1AfterCall2;
+            floatArg1 = f1AfterCall2;
           }
           else {
-            fparam_1 = (double)(float)((double)floatOne / f1AfterCall2);
+            floatArg1 = (double)(float)((double)floatOne / f1AfterCall2);
             lightAttenuation = (double)(floatOne / (float)((double)(float)((double)*(float *)(
-                                                  lightParams2 + 0x2878) * fparam_1) * fparam_1 +
+                                                  lightParams2 + 0x2878) * floatArg1) * floatArg1 +
                                                   (double)(float)((double)*(float *)(lightParams2 + 0x2874
-                                                                                    ) * fparam_1 +
+                                                                                    ) * floatArg1 +
                                                                  (double)*(float *)(lightParams2 + 0x2870)
                                                                  )));
           }
         }
         else {
           lightAttenuation = (double)FLOAT_00108e54;
-          local_100 = *(float *)(lightRecord + 0x4a7c);
+          toLightX = *(float *)(lightRecord + 0x4a7c);
           toLightY = *(float *)(lightRecord + 0x4a80);
           toLightZ = *(float *)(lightRecord + 0x4a84);
         }
         if (*(char *)(lightRecord + 0x4ada) != '\0') {
-          fparam_1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
-                              (local_100 * *(float *)(lightRecord + 0x4a88) +
+          floatArg1 = -(double)(toLightZ * *(float *)(lightRecord + 0x4a90) +
+                              (toLightX * *(float *)(lightRecord + 0x4a88) +
                               toLightY * *(float *)(lightRecord + 0x4a8c)));
-          if (fparam_1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d5b80;
-          fparam_1 = ((double (*)())_gleLightExponentPow)(iVar6,lightRecord + 0x4a70,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
-                                fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
+          if (floatArg1 < (double)*(float *)(lightParams2 + 0x286c)) goto LAB_000d5b80;
+          floatArg1 = ((double (*)())_gleLightExponentPow)(glContextForCalls,lightRecord + 0x4a70,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,
+                                floatArg6,floatArg7,floatArg8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                 incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-          lightAttenuation = (double)(float)((double)lightAttenuation * fparam_1);
-          iVar6 = iVar6;
+          lightAttenuation = (double)(float)((double)lightAttenuation * floatArg1);
+          glContextForCalls = glContextForCalls;
         }
         if (*(char *)(glContext + 0x30ae) == '\0') {
           if (localViewer == 0) {
             halfZ = (toLightZ + floatOne);
-            halfX = local_100;
+            halfX = toLightX;
             halfY = toLightY;
           }
           else {
@@ -2946,125 +2953,125 @@ LAB_000d55d4:
             halfY = -eyePosition[1];
             halfZ = -eyePosition[2];
             (**(code **)vectorNormalize)(glContext,&halfX,&halfX);
-            halfX = halfX + local_100;
+            halfX = halfX + toLightX;
             halfY = halfY + toLightY;
             halfZ = halfZ + toLightZ;
           }
           f1AfterCall3 = ((double (*)())(*(code **)vectorNormalize))(glContext,&halfX,&halfX);
-          fparam_1 = f1AfterCall3;
+          floatArg1 = f1AfterCall3;
         }
         if ((double)lightAttenuation != (double)FLOAT_00108e50) {
-          fparam_4 = (double)*(float *)(vertex + 0x44);
-          dVar26 = (double)toLightY;
-          fparam_5 = (double)*(float *)(vertex + 0x40);
-          fparam_3 = (double)local_100;
-          fparam_6 = (double)*(float *)(vertex + 0x48);
-          fparam_2 = (double)toLightZ;
+          floatArg4 = (double)*(float *)(vertex + 0x44);
+          toLightYCopy = (double)toLightY;
+          floatArg5 = (double)*(float *)(vertex + 0x40);
+          floatArg3 = (double)toLightX;
+          floatArg6 = (double)*(float *)(vertex + 0x48);
+          floatArg2 = (double)toLightZ;
           lightContributionR = (double)*(float *)(lightProducts + 0x50);
           lightContributionG = (double)*(float *)(lightProducts + 0x54);
           lightContributionB = (double)*(float *)(lightProducts + 0x58);
-          dVar17 = (double)(float)(fparam_6 * fparam_2 +
-                                  (double)(float)(fparam_5 * fparam_3 +
-                                                 (double)(float)(fparam_4 * (double)dVar26)));
-          if ((double)FLOAT_00108e50 < -dVar17) {
-            lightContributionR = -(double)(float)(dVar17 * (double)*(float *)(lightProducts + 0x60) - (double)lightContributionR);
-            lightContributionG = -(double)(float)(dVar17 * (double)*(float *)(lightProducts + 100) - (double)lightContributionG);
-            lightContributionB = -(double)(float)(dVar17 * (double)*(float *)(lightProducts + 0x68) - (double)lightContributionB);
+          normalDotLight = (double)(float)(floatArg6 * floatArg2 +
+                                  (double)(float)(floatArg5 * floatArg3 +
+                                                 (double)(float)(floatArg4 * (double)toLightYCopy)));
+          if ((double)FLOAT_00108e50 < -normalDotLight) {
+            lightContributionR = -(double)(float)(normalDotLight * (double)*(float *)(lightProducts + 0x60) - (double)lightContributionR);
+            lightContributionG = -(double)(float)(normalDotLight * (double)*(float *)(lightProducts + 100) - (double)lightContributionG);
+            lightContributionB = -(double)(float)(normalDotLight * (double)*(float *)(lightProducts + 0x68) - (double)lightContributionB);
             if (*(char *)(glContext + 0x30ae) == '\0') {
-              dVar17 = -(double)(float)(fparam_6 * (double)halfZ +
-                                       (double)(float)(fparam_5 * (double)halfX +
-                                                      (double)(float)(fparam_4 * (double)halfY))
+              specularDot = -(double)(float)(floatArg6 * (double)halfZ +
+                                       (double)(float)(floatArg5 * (double)halfX +
+                                                      (double)(float)(floatArg4 * (double)halfY))
                                        );
             }
             else {
-              local_f0 = (float)(fparam_6 * (double)dVar26 - (double)(float)(fparam_4 * fparam_2));
-              dVar17 = (double)local_f0;
-              local_e8 = (float)(fparam_4 * fparam_3 - (double)(float)(fparam_5 * (double)dVar26));
-              fparam_7 = (double)local_e8;
-              local_ec = (float)(fparam_5 * fparam_2 - (double)(float)(fparam_6 * fparam_3));
-              fparam_8 = (double)local_ec;
-              fVar1 = (float)(fparam_5 * fparam_7 - (double)(float)(fparam_6 * dVar17));
-              fVar2 = (float)(fparam_6 * fparam_8 - (double)(float)(fparam_4 * fparam_7));
-              fVar3 = (float)(fparam_4 * dVar17 - (double)(float)(fparam_5 * fparam_8));
-              local_dc = ((fVar1 + fVar1) + dVar26);
-              local_e0 = (float)((double)(fVar2 + fVar2) + fparam_3);
-              local_d8 = (float)((double)(fVar3 + fVar3) + fparam_2);
-              dVar17 = (double)(local_d8 * halfZ + (local_e0 * halfX + local_dc * halfY));
+              lnCrossX = (float)(floatArg6 * (double)toLightYCopy - (double)(float)(floatArg4 * floatArg2));
+              lnCrossXCopy = (double)lnCrossX;
+              lnCrossZ = (float)(floatArg4 * floatArg3 - (double)(float)(floatArg5 * (double)toLightYCopy));
+              floatArg7 = (double)lnCrossZ;
+              lnCrossY = (float)(floatArg5 * floatArg2 - (double)(float)(floatArg6 * floatArg3));
+              floatArg8 = (double)lnCrossY;
+              doubleCrossY = (float)(floatArg5 * floatArg7 - (double)(float)(floatArg6 * lnCrossXCopy));
+              doubleCrossX = (float)(floatArg6 * floatArg8 - (double)(float)(floatArg4 * floatArg7));
+              doubleCrossZ = (float)(floatArg4 * lnCrossXCopy - (double)(float)(floatArg5 * floatArg8));
+              crossAdjustedLightY = ((doubleCrossY + doubleCrossY) + toLightYCopy);
+              crossAdjustedLightX = (float)((double)(doubleCrossX + doubleCrossX) + floatArg3);
+              crossAdjustedLightZ = (float)((double)(doubleCrossZ + doubleCrossZ) + floatArg2);
+              specularDot = (double)(crossAdjustedLightZ * halfZ + (crossAdjustedLightX * halfX + crossAdjustedLightY * halfY));
             }
-            if (!((double)floatZero < dVar17)) goto LAB_000d5b34;
-            fparam_2 = (double)*(float *)(material + 0x40);
-            dVar17 = _pow(dVar17,fparam_2);
-            fVar1 = (float)dVar17;
-            dVar26 = (double)(fVar1 * *(float *)(lightProducts + 0x78));
-            iVar6 = r3AfterCall2;
-            fparam_1 = (double)(fVar1 * *(float *)(lightProducts + 0x74));
-            dVar17 = (double)(fVar1 * *(float *)(lightProducts + 0x70));
+            if (!((double)floatZero < specularDot)) goto LAB_000d5b34;
+            floatArg2 = (double)*(float *)(material + 0x40);
+            specularDot = _pow(specularDot,floatArg2);
+            specularFactor = (float)specularDot;
+            specularB = (double)(specularFactor * *(float *)(lightProducts + 0x78));
+            glContextForCalls = r3AfterCall2;
+            floatArg1 = (double)(specularFactor * *(float *)(lightProducts + 0x74));
+            specularR = (double)(specularFactor * *(float *)(lightProducts + 0x70));
           }
           else {
 LAB_000d5b34:
-            dVar26 = (double)FLOAT_00108e50;
-            fparam_1 = (double)dVar26;
-            dVar17 = (double)dVar26;
+            specularB = (double)FLOAT_00108e50;
+            floatArg1 = (double)specularB;
+            specularR = (double)specularB;
           }
           if ((double)lightAttenuation == (double)floatOne) {
             colorR = (double)(colorR + lightContributionR);
             colorG = (double)(colorG + lightContributionG);
             colorB = (double)(colorB + lightContributionB);
-            dVar23 = (double)(float)((double)dVar23 + dVar17);
-            dVar21 = (double)(float)((double)dVar21 + fparam_1);
-            dVar20 = (double)(dVar20 + dVar26);
+            specularSumR = (double)(float)((double)specularSumR + specularR);
+            specularSumG = (double)(float)((double)specularSumG + floatArg1);
+            specularSumB = (double)(specularSumB + specularB);
           }
           else {
-            dVar20 = (double)(lightAttenuation * dVar26 + dVar20);
+            specularSumB = (double)(lightAttenuation * specularB + specularSumB);
             colorR = (double)(lightAttenuation * lightContributionR + colorR);
             colorG = (double)(lightAttenuation * lightContributionG + colorG);
             colorB = (double)(lightAttenuation * lightContributionB + colorB);
-            dVar23 = (double)(float)((double)lightAttenuation * dVar17 + (double)dVar23);
-            dVar21 = (double)(float)((double)lightAttenuation * fparam_1 + (double)dVar21);
+            specularSumR = (double)(float)((double)lightAttenuation * specularR + (double)specularSumR);
+            specularSumG = (double)(float)((double)lightAttenuation * floatArg1 + (double)specularSumG);
           }
         }
       }
       else {
-        fparam_7 = (double)*(float *)(vertex + 0x44);
-        fparam_6 = (double)*(float *)(lightRecord + 0x4a80);
-        fparam_8 = (double)*(float *)(vertex + 0x40);
-        dVar16 = (double)*(float *)(vertex + 0x48);
-        dVar17 = (double)*(float *)(lightRecord + 0x4a84);
+        floatArg7 = (double)*(float *)(vertex + 0x44);
+        floatArg6 = (double)*(float *)(lightRecord + 0x4a80);
+        floatArg8 = (double)*(float *)(vertex + 0x40);
+        normalZ = (double)*(float *)(vertex + 0x48);
+        directionalLightZ = (double)*(float *)(lightRecord + 0x4a84);
         colorR = (double)(colorR + *(float *)(lightProducts + 0x50));
-        dVar18 = (double)(float)((double)dVar16 * dVar17 +
-                                (double)(float)(fparam_8 * (double)*(float *)(lightRecord + 0x4a7c) +
-                                               (double)(float)(fparam_7 * fparam_6)));
+        normalDotDirection = (double)(float)((double)normalZ * directionalLightZ +
+                                (double)(float)(floatArg8 * (double)*(float *)(lightRecord + 0x4a7c) +
+                                               (double)(float)(floatArg7 * floatArg6)));
         colorG = (double)(colorG + *(float *)(lightProducts + 0x54));
         colorB = (double)(colorB + *(float *)(lightProducts + 0x58));
-        fparam_1 = -(double)dVar18;
-        if ((double)floatZero < fparam_1) {
-          colorR = -(double)(dVar18 * *(float *)(lightProducts + 0x60) - colorR);
-          colorG = -(double)(dVar18 * *(float *)(lightProducts + 100) - colorG);
-          colorB = -(double)(dVar18 * *(float *)(lightProducts + 0x68) - colorB);
+        floatArg1 = -(double)normalDotDirection;
+        if ((double)floatZero < floatArg1) {
+          colorR = -(double)(normalDotDirection * *(float *)(lightProducts + 0x60) - colorR);
+          colorG = -(double)(normalDotDirection * *(float *)(lightProducts + 100) - colorG);
+          colorB = -(double)(normalDotDirection * *(float *)(lightProducts + 0x68) - colorB);
           if (*(char *)(glContext + 0x30ae) == '\0') {
-            fparam_1 = -(double)(dVar16 * *(float *)(lightParams + 0x2888) + (float)(fparam_8 *
+            floatArg1 = -(double)(normalZ * *(float *)(lightParams + 0x2888) + (float)(floatArg8 *
                                                        (double)*(float *)(lightParams + 0x2880) +
-                                                      (double)(float)(fparam_7 *
+                                                      (double)(float)(floatArg7 *
                                                                      (double)*(float *)(lightParams + 
                                                   0x2884))));
           }
           else {
-            local_f8 = *(float *)(lightRecord + 0x4a84);
-            local_100 = (float)((double)dVar16 * fparam_6 - (double)(float)(fparam_7 * dVar17));
-            local_fc = (float)(fparam_8 * dVar17 -
-                              (double)(dVar16 * *(float *)(lightRecord + 0x4a7c)));
-            fVar1 = (float)(fparam_7 * (double)local_100 -
-                           (double)(float)(fparam_8 * (double)local_fc));
-            fparam_1 = (double)(float)((double)(fVar1 + fVar1) + dVar17);
+            lightDirZ = *(float *)(lightRecord + 0x4a84);
+            toLightX = (float)((double)normalZ * floatArg6 - (double)(float)(floatArg7 * directionalLightZ));
+            lnCrossYDir = (float)(floatArg8 * directionalLightZ -
+                              (double)(normalZ * *(float *)(lightRecord + 0x4a7c)));
+            directionalDoubleCrossZ = (float)(floatArg7 * (double)toLightX -
+                           (double)(float)(floatArg8 * (double)lnCrossYDir));
+            floatArg1 = (double)(float)((double)(directionalDoubleCrossZ + directionalDoubleCrossZ) + directionalLightZ);
           }
-          if ((double)floatZero < fparam_1) {
-            fparam_1 = ((double (*)())_gleMaterialShinePow)(iVar6,material + 0x1e8,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
-                                  fparam_6,fparam_7,fparam_8,incomingStack_fffffea8,incomingStack_fffffeb0,
+          if ((double)floatZero < floatArg1) {
+            floatArg1 = ((double (*)())_gleMaterialShinePow)(glContextForCalls,material + 0x1e8,floatArg1,floatArg2,floatArg3,floatArg4,floatArg5,
+                                  floatArg6,floatArg7,floatArg8,incomingStack_fffffea8,incomingStack_fffffeb0,
                                   incomingStack_fffffeb8,incomingStack_fffffec0,incomingStack_fffffec8);
-            colorB = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
-            colorR = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
-            colorG = (double)(float)(fparam_1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
-            iVar6 = iVar6;
+            colorB = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x78) + (double)colorB);
+            colorR = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x70) + (double)colorR);
+            colorG = (double)(float)(floatArg1 * (double)*(float *)(lightProducts + 0x74) + (double)colorG);
+            glContextForCalls = glContextForCalls;
           }
         }
       }
@@ -3079,14 +3086,14 @@ LAB_000d5b80:
   goto LAB_000d5bd8;
 LAB_000d5b98:
   if (*(short *)(glContext + 0x30a8) == -0x7e06) {
-    *(float *)(vertex + 0x50) = (float)(double)dVar23;
-    *(float *)(vertex + 0x54) = (float)(double)dVar21;
-    *(float *)(vertex + 0x58) = (float)(double)dVar20;
+    *(float *)(vertex + 0x50) = (float)(double)specularSumR;
+    *(float *)(vertex + 0x54) = (float)(double)specularSumG;
+    *(float *)(vertex + 0x58) = (float)(double)specularSumB;
   }
   else {
-    colorR = (double)(colorR + dVar23);
-    colorG = (double)(colorG + dVar21);
-    colorB = (double)(colorB + dVar20);
+    colorR = (double)(colorR + specularSumR);
+    colorG = (double)(colorG + specularSumG);
+    colorB = (double)(colorB + specularSumB);
   }
   *(float *)(vertex + 0x30) = (float)(double)colorR;
   *(float *)(vertex + 0x34) = (float)(double)colorG;

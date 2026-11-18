@@ -3916,162 +3916,166 @@ int _gliCompDispatchTable(glContext)
 }
 
 /* _EstablishVertexFormat @ 0x42e0c (1196 bytes) */
-int _EstablishVertexFormat(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  uint *param_2;
-  int param_3;
-  int param_4;
-  int param_5;
-  int *param_6;
-  int *param_7;
+int _EstablishVertexFormat(vertexFormat, listCursor, commandLimit, sizeIndexBase, commandSizeTable, endCommandIndexOut, endCommandPtrOut)
+  int vertexFormat;
+  uint *listCursor;
+  int commandLimit;
+  int sizeIndexBase;
+  int commandSizeTable;
+  int *endCommandIndexOut;
+  int *endCommandPtrOut;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
-  uint uVar3;
-  int iVar4;
+  undefined *firstCommand;
+  undefined4 *commandEntry;
+  uint recordedSize;
+  int firstChainEntry;
+  int attribFormat;
+  int texCoordFormat;
   int loopIndex;
-  int iVar6;
-  uint uVar7;
-  undefined1 uVar8;
+  int firstCommandEntry;
+  uint componentCount;
+  uint recordedAttribSize;
+  uint operandIndex;
+  undefined1 sizeByte;
   int loopIndex2;
   
-  puVar1 = (undefined *)*param_2;
+  firstCommand = (undefined *)*listCursor;
   loopIndex = 0;
   loopIndex2 = 0;
-  iVar4 = *(int *)(((uint)puVar1 & 0x7c) + _gleDisplayListFunctionHash);
-  iVar6 = 0;
-  while ((iVar4 != 0 && (iVar6 = iVar4, puVar1 != *(undefined **)(iVar4 + 4)))) {
-    iVar4 = *(int *)(iVar4 + 0xc);
-    iVar6 = iVar4;
+  firstChainEntry = *(int *)(((uint)firstCommand & 0x7c) + _gleDisplayListFunctionHash);
+  firstCommandEntry = 0;
+  while ((firstChainEntry != 0 && (firstCommandEntry = firstChainEntry, firstCommand != *(undefined **)(firstChainEntry + 4)))) {
+    firstChainEntry = *(int *)(firstChainEntry + 0xc);
+    firstCommandEntry = firstChainEntry;
   }
-  if (puVar1 == PTR__glBegin_ListExec_00112150) {
-    if ((iVar6 == 0) || (*(undefined **)(iVar6 + 4) != PTR__glWeightARB_ListExec_0011214c)) {
-      param_2 = (uint *)((int)param_2 + *(int *)(param_5 + param_4 * 4));
+  if (firstCommand == PTR__glBegin_ListExec_00112150) {
+    if ((firstCommandEntry == 0) || (*(undefined **)(firstCommandEntry + 4) != PTR__glWeightARB_ListExec_0011214c)) {
+      listCursor = (uint *)((int)listCursor + *(int *)(commandSizeTable + sizeIndexBase * 4));
     }
     else {
-      param_2 = param_2 + param_2[1] + 2;
+      listCursor = listCursor + listCursor[1] + 2;
     }
     loopIndex2 = 1;
   }
-  for (; loopIndex2 < param_3; loopIndex2 = loopIndex2 + 1) {
-    puVar2 = *(undefined4 **)((*param_2 & 0x7c) + _gleDisplayListFunctionHash);
-    if (puVar2 == (undefined4 *)0x0) break;
+  for (; loopIndex2 < commandLimit; loopIndex2 = loopIndex2 + 1) {
+    commandEntry = *(undefined4 **)((*listCursor & 0x7c) + _gleDisplayListFunctionHash);
+    if (commandEntry == (undefined4 *)0x0) break;
     do {
-      if (*param_2 == puVar2[1]) break;
-      puVar2 = (undefined4 *)puVar2[3];
-    } while (puVar2 != (undefined4 *)0x0);
-    if (puVar2 == (undefined4 *)0x0) break;
-    uVar7 = puVar2[2];
-    uVar8 = (undefined1)uVar7;
-    switch(*puVar2) {
+      if (*listCursor == commandEntry[1]) break;
+      commandEntry = (undefined4 *)commandEntry[3];
+    } while (commandEntry != (undefined4 *)0x0);
+    if (commandEntry == (undefined4 *)0x0) break;
+    componentCount = commandEntry[2];
+    sizeByte = (undefined1)componentCount;
+    switch(*commandEntry) {
     case 0:
       goto switchD_00042f34_caseD_0;
     case 1:
-      *param_6 = loopIndex2;
-      *param_7 = (int)param_2;
+      *endCommandIndexOut = loopIndex2;
+      *endCommandPtrOut = (int)listCursor;
       return loopIndex;
     case 2:
     case 3:
     case 4:
-      if ((*(byte *)(param_1 + 0xc) == 0) && (*(char *)(param_1 + 0x1c) != '\0')) {
+      if ((*(byte *)(vertexFormat + 0xc) == 0) && (*(char *)(vertexFormat + 0x1c) != '\0')) {
         return 0;
       }
-      if (*(byte *)(param_1 + 0xc) < uVar7) {
-        *(undefined1 *)(param_1 + 0xc) = uVar8;
+      if (*(byte *)(vertexFormat + 0xc) < componentCount) {
+        *(undefined1 *)(vertexFormat + 0xc) = sizeByte;
       }
       goto LAB_0004325c;
     case 5:
     case 6:
-      if ((*(char *)(param_1 + 0xc) == '\0') && (*(char *)(param_1 + 0x1c) == '\0')) {
-        uVar3 = (uint)*(byte *)(param_1 + 0xe);
+      if ((*(char *)(vertexFormat + 0xc) == '\0') && (*(char *)(vertexFormat + 0x1c) == '\0')) {
+        recordedSize = (uint)*(byte *)(vertexFormat + 0xe);
       }
       else {
-        uVar3 = (uint)*(byte *)(param_1 + 0xe);
-        if (uVar3 == 0) {
+        recordedSize = (uint)*(byte *)(vertexFormat + 0xe);
+        if (recordedSize == 0) {
           return 0;
         }
       }
-      if (uVar3 < uVar7) {
-        *(undefined1 *)(param_1 + 0xe) = uVar8;
+      if (recordedSize < componentCount) {
+        *(undefined1 *)(vertexFormat + 0xe) = sizeByte;
       }
       break;
     case 7:
-      if (((*(char *)(param_1 + 0xc) != '\0') || (*(char *)(param_1 + 0x1c) != '\0')) &&
-         (*(char *)(param_1 + 0xd) == '\0')) {
+      if (((*(char *)(vertexFormat + 0xc) != '\0') || (*(char *)(vertexFormat + 0x1c) != '\0')) &&
+         (*(char *)(vertexFormat + 0xd) == '\0')) {
         return 0;
       }
-      *(undefined1 *)(param_1 + 0xd) = uVar8;
+      *(undefined1 *)(vertexFormat + 0xd) = sizeByte;
       break;
     case 8:
     case 9:
     case 10:
     case 0xb:
-      if ((*(char *)(param_1 + 0xc) == '\0') && (*(char *)(param_1 + 0x1c) == '\0')) {
-        uVar3 = (uint)*(byte *)(param_1 + 0x14);
+      if ((*(char *)(vertexFormat + 0xc) == '\0') && (*(char *)(vertexFormat + 0x1c) == '\0')) {
+        recordedSize = (uint)*(byte *)(vertexFormat + 0x14);
       }
       else {
-        uVar3 = (uint)*(byte *)(param_1 + 0x14);
-        if (uVar3 == 0) {
+        recordedSize = (uint)*(byte *)(vertexFormat + 0x14);
+        if (recordedSize == 0) {
           return 0;
         }
       }
-      if (uVar3 < uVar7) {
-        *(undefined1 *)(param_1 + 0x14) = uVar8;
+      if (recordedSize < componentCount) {
+        *(undefined1 *)(vertexFormat + 0x14) = sizeByte;
       }
       break;
     case 0xc:
     case 0xd:
     case 0xe:
-      if (((*(char *)(param_1 + 0xc) != '\0') || (*(char *)(param_1 + 0x1c) != '\0')) &&
-         (*(char *)(param_2[1] + param_1 + 0x14) == '\0')) {
+      if (((*(char *)(vertexFormat + 0xc) != '\0') || (*(char *)(vertexFormat + 0x1c) != '\0')) &&
+         (*(char *)(listCursor[1] + vertexFormat + 0x14) == '\0')) {
         return 0;
       }
-      iVar4 = param_2[1] + param_1;
-      if (*(byte *)(iVar4 + 0x14) < uVar7) {
-        *(undefined1 *)(iVar4 + 0x14) = uVar8;
+      texCoordFormat = listCursor[1] + vertexFormat;
+      if (*(byte *)(texCoordFormat + 0x14) < componentCount) {
+        *(undefined1 *)(texCoordFormat + 0x14) = sizeByte;
       }
       break;
     case 0xf:
     case 0x10:
     case 0x11:
-      if (((*(char *)(param_1 + 0xc) != '\0') || (*(char *)(param_1 + 0x1c) != '\0')) &&
-         (*(char *)(param_2[1] + param_1 + 0x1c) == '\0')) {
+      if (((*(char *)(vertexFormat + 0xc) != '\0') || (*(char *)(vertexFormat + 0x1c) != '\0')) &&
+         (*(char *)(listCursor[1] + vertexFormat + 0x1c) == '\0')) {
         return 0;
       }
-      uVar7 = param_2[1];
-      iVar4 = uVar7 + param_1;
-      if (*(byte *)(iVar4 + 0x1c) < 4) {
-        uVar8 = 4;
+      operandIndex = listCursor[1];
+      attribFormat = operandIndex + vertexFormat;
+      if (*(byte *)(attribFormat + 0x1c) < 4) {
+        sizeByte = 4;
 LAB_0004324c:
-        *(undefined1 *)(iVar4 + 0x1c) = uVar8;
-        uVar7 = param_2[1];
+        *(undefined1 *)(attribFormat + 0x1c) = sizeByte;
+        operandIndex = listCursor[1];
       }
       goto LAB_00043254;
     case 0x12:
     case 0x13:
     case 0x14:
-      if (((*(char *)(param_1 + 0xc) != '\0') || (*(char *)(param_1 + 0x1c) != '\0')) &&
-         (*(char *)(param_2[1] + param_1 + 0x1c) == '\0')) {
+      if (((*(char *)(vertexFormat + 0xc) != '\0') || (*(char *)(vertexFormat + 0x1c) != '\0')) &&
+         (*(char *)(listCursor[1] + vertexFormat + 0x1c) == '\0')) {
         return 0;
       }
-      uVar7 = param_2[1];
-      iVar4 = uVar7 + param_1;
-      if (*(byte *)(iVar4 + 0x1c) < 8) {
-        uVar8 = 8;
+      operandIndex = listCursor[1];
+      attribFormat = operandIndex + vertexFormat;
+      if (*(byte *)(attribFormat + 0x1c) < 8) {
+        sizeByte = 8;
         goto LAB_0004324c;
       }
       goto LAB_00043254;
     case 0x15:
     case 0x16:
     case 0x17:
-      if (((*(char *)(param_1 + 0xc) != '\0') || (*(char *)(param_1 + 0x1c) != '\0')) &&
-         (*(char *)(param_2[1] + param_1 + 0x1c) == '\0')) {
+      if (((*(char *)(vertexFormat + 0xc) != '\0') || (*(char *)(vertexFormat + 0x1c) != '\0')) &&
+         (*(char *)(listCursor[1] + vertexFormat + 0x1c) == '\0')) {
         return 0;
       }
-      uVar7 = param_2[1];
-      iVar4 = uVar7 + param_1;
-      if (*(byte *)(iVar4 + 0x1c) < 0xc) {
-        uVar8 = 0xc;
+      operandIndex = listCursor[1];
+      attribFormat = operandIndex + vertexFormat;
+      if (*(byte *)(attribFormat + 0x1c) < 0xc) {
+        sizeByte = 0xc;
         goto LAB_0004324c;
       }
       goto LAB_00043254;
@@ -4089,60 +4093,60 @@ LAB_0004324c:
     case 0x23:
     case 0x24:
     case 0x25:
-      if (((*(char *)(param_1 + 0xc) != '\0') || (*(char *)(param_1 + 0x1c) != '\0')) &&
-         (*(char *)(param_2[1] + param_1 + 0x1c) == '\0')) {
+      if (((*(char *)(vertexFormat + 0xc) != '\0') || (*(char *)(vertexFormat + 0x1c) != '\0')) &&
+         (*(char *)(listCursor[1] + vertexFormat + 0x1c) == '\0')) {
         return 0;
       }
-      uVar7 = param_2[1];
-      iVar4 = uVar7 + param_1;
-      if (*(byte *)(iVar4 + 0x1c) < 0x10) {
-        uVar8 = 0x10;
+      operandIndex = listCursor[1];
+      attribFormat = operandIndex + vertexFormat;
+      if (*(byte *)(attribFormat + 0x1c) < 0x10) {
+        sizeByte = 0x10;
         goto LAB_0004324c;
       }
 LAB_00043254:
-      if (uVar7 == 0) {
+      if (operandIndex == 0) {
 LAB_0004325c:
         loopIndex = loopIndex + 1;
       }
       break;
     case 0x26:
-      if (*(char *)(param_1 + 0xc) == '\0') {
-        uVar7 = (uint)*(byte *)(param_1 + 0x1c);
-        if (uVar7 != 0) goto LAB_00043288;
+      if (*(char *)(vertexFormat + 0xc) == '\0') {
+        recordedAttribSize = (uint)*(byte *)(vertexFormat + 0x1c);
+        if (recordedAttribSize != 0) goto LAB_00043288;
       }
       else {
-        uVar7 = (uint)*(byte *)(param_1 + 0x1c);
+        recordedAttribSize = (uint)*(byte *)(vertexFormat + 0x1c);
 LAB_00043288:
-        if (uVar7 == 0) {
+        if (recordedAttribSize == 0) {
           return 0;
         }
       }
-      if (uVar7 < param_2[1] << 2) {
-        *(char *)(param_1 + 0x1c) = (char)(param_2[1] << 2);
+      if (recordedAttribSize < listCursor[1] << 2) {
+        *(char *)(vertexFormat + 0x1c) = (char)(listCursor[1] << 2);
       }
       break;
     case 0x27:
-      if (((*(char *)(param_1 + 0xc) != '\0') || (*(char *)(param_1 + 0x1c) != '\0')) &&
-         (*(char *)(param_1 + 0xf) == '\0')) {
+      if (((*(char *)(vertexFormat + 0xc) != '\0') || (*(char *)(vertexFormat + 0x1c) != '\0')) &&
+         (*(char *)(vertexFormat + 0xf) == '\0')) {
         return 0;
       }
-      *(undefined1 *)(param_1 + 0xf) = uVar8;
+      *(undefined1 *)(vertexFormat + 0xf) = sizeByte;
       break;
     case 0x28:
-      if (((*(char *)(param_1 + 0xc) != '\0') || (*(char *)(param_1 + 0x1c) != '\0')) &&
-         (*(char *)(param_1 + 0x10) == '\0')) {
+      if (((*(char *)(vertexFormat + 0xc) != '\0') || (*(char *)(vertexFormat + 0x1c) != '\0')) &&
+         (*(char *)(vertexFormat + 0x10) == '\0')) {
         return 0;
       }
-      *(undefined1 *)(param_1 + 0x10) = uVar8;
+      *(undefined1 *)(vertexFormat + 0x10) = sizeByte;
       break;
     default:
       goto switchD_00042f34_default;
     }
-    if ((undefined *)puVar2[1] == PTR__glWeightARB_ListExec_0011214c) {
-      param_2 = param_2 + param_2[1] + 2;
+    if ((undefined *)commandEntry[1] == PTR__glWeightARB_ListExec_0011214c) {
+      listCursor = listCursor + listCursor[1] + 2;
     }
     else {
-      param_2 = (uint *)((int)param_2 + *(int *)(param_5 + (param_4 + loopIndex2) * 4));
+      listCursor = (uint *)((int)listCursor + *(int *)(commandSizeTable + (sizeIndexBase + loopIndex2) * 4));
     }
   }
 switchD_00042f34_caseD_0:

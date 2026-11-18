@@ -1,0 +1,69 @@
+local	_gle_dtostr	param_3	buffer	CONFIRMED	output character buffer; advanced past the sign and used as the left cursor when the integer digits are reversed in place
+local	_gle_dtostr	param_4	bufferSize	CONFIRMED	size of the output buffer in bytes: bufferEnd = buffer + bufferSize; fewer than 2 returns NULL
+local	_gle_dtostr	fparam_1	value	CONFIRMED	the double to convert; negated (and '-' written) when negative
+local	_gle_dtostr	fparam_2	tolerance	INFERRED	digit tolerance: a non-positive input is replaced by DOUBLE_00108e18; multiplied by 10 for every fraction digit and compared with the remaining fraction to stop the digit loop
+local	_gle_dtostr	local_50	exponent	CONFIRMED	uint[6]: [0] is the exponent: first the binary exponent written by _frexp, then the decimal exponent (rounded binary exponent times 0.30103) adjusted by the 10x loops, written after 'e' when nonzero
+local	_gle_dtostr	pcVar5	bufferEnd	CONFIRMED	buffer + bufferSize: one past the last byte; reaching it ends with NULL
+local	_gle_dtostr	pcVar6	writePtr	CONFIRMED	next character position in the output
+use	_gle_dtostr	pcVar7	reverseRight	CONFIRMED	right end of the integer digits (pcVar6), decremented while the digits are swapped to reverse them	^\s*pcVar7\ =\ pcVar6;$	+1
+use	_gle_dtostr	pcVar7	reverseRight	CONFIRMED	right end of the integer digits (pcVar6), decremented while the digits are swapped to reverse them	^\s*pcVar7\ =\ pcVar7\ \+\ \-1;$	+3
+use	_gle_dtostr	pcVar7	reverseRight	CONFIRMED	right end of the integer digits (pcVar6), decremented while the digits are swapped to reverse them	^\s*iVar4\ =\ \(int\)pcVar7\ \-\ \(int\)param_3;$	+1
+use	_gle_dtostr	pcVar7	exponentDigitsStart	CONFIRMED	first character after 'e' (and after '-'): the exponent digits are generated least significant first then reversed from here	^\s*pcVar7\ =\ pcVar6\ \+\ 1;$	+2
+use	_gle_dtostr	pcVar7	exponentDigitsStart	CONFIRMED	first character after 'e' (and after '-'): the exponent digits are generated least significant first then reversed from here	^\s*\*pcVar7\ =\ '\-';$	+3
+use	_gle_dtostr	pcVar7	exponentDigitsStart	CONFIRMED	first character after 'e' (and after '-'): the exponent digits are generated least significant first then reversed from here	^\s*iVar4\ =\ \(int\)pcVar6\ \-\ \(int\)pcVar7;$	+1
+use	_gle_dtostr	pcVar7	exponentDigitsStart	CONFIRMED	first character after 'e' (and after '-'): the exponent digits are generated least significant first then reversed from here	^\s*\*pcVar1\ =\ \*pcVar7;$	+4
+use	_gle_dtostr	pcVar7	resultPtr	CONFIRMED	return value: the terminating NUL position or NULL when the buffer ran out	^\s*pcVar7\ =\ \(char\ \*\)0x0;$	+1
+use	_gle_dtostr	pcVar7	resultPtr	CONFIRMED	return value: the terminating NUL position or NULL when the buffer ran out	^\s*pcVar7\ =\ pcVar6;$@2	+1
+use	_gle_dtostr	pcVar7	resultPtr	CONFIRMED	return value: the terminating NUL position or NULL when the buffer ran out	^\s*return\ pcVar7;$	+1
+use	_gle_dtostr	pcVar1	exponentWritePtr	CONFIRMED	next exponent digit position	^\s*pcVar1\ =\ pcVar7;$	+1
+use	_gle_dtostr	pcVar1	exponentWritePtr	CONFIRMED	next exponent digit position	^\s*pcVar1\ =\ pcVar7;$@2	+1
+use	_gle_dtostr	pcVar1	exponentWritePtr	CONFIRMED	next exponent digit position	^\s*while\ \(pcVar6\ =\ pcVar1,\ 0\ <\ \(int\)local_50\[0\]\)\ \{$	+1
+use	_gle_dtostr	pcVar1	exponentWritePtr	CONFIRMED	next exponent digit position	^\s*pcVar1\ =\ pcVar6\ \+\ 1;$	+1
+use	_gle_dtostr	pcVar1	exponentReverseEnd	CONFIRMED	right end of the exponent digits, decremented while they are swapped to reverse them	^\s*pcVar1\ =\ pcVar6;$	+1
+use	_gle_dtostr	pcVar1	exponentReverseEnd	CONFIRMED	right end of the exponent digits, decremented while they are swapped to reverse them	^\s*pcVar1\ =\ pcVar1\ \+\ \-1;$	+3
+use	_gle_dtostr	pcVar1	exponentReverseEnd	CONFIRMED	right end of the exponent digits, decremented while they are swapped to reverse them	^\s*iVar4\ =\ \(int\)pcVar1\ \-\ \(int\)pcVar7;$	+1
+use	_gle_dtostr	cVar2	swapTemp	CONFIRMED	character held while two digits are exchanged during the in-place reversal	^\s*cVar2\ =\ \*pcVar7;$	+1
+use	_gle_dtostr	cVar2	swapTemp	CONFIRMED	character held while two digits are exchanged during the in-place reversal	^\s*\*param_3\ =\ cVar2;$	+1
+use	_gle_dtostr	cVar2	swapTemp	CONFIRMED	character held while two digits are exchanged during the in-place reversal	^\s*cVar2\ =\ \*pcVar1;$	+1
+use	_gle_dtostr	cVar2	swapTemp	CONFIRMED	character held while two digits are exchanged during the in-place reversal	^\s*\*pcVar7\ =\ cVar2;$	+1
+use	_gle_dtostr	iVar4	reverseSpan	CONFIRMED	distance between the left and right cursor of the reversal; the loop swaps while it exceeds 1	^\s*iVar4\ =\ \(int\)pcVar6\ \-\ \(int\)param_3;$	+1
+use	_gle_dtostr	iVar4	reverseSpan	CONFIRMED	distance between the left and right cursor of the reversal; the loop swaps while it exceeds 1	^\s*while\ \(1\ <\ iVar4\)\ \{$	+1
+use	_gle_dtostr	iVar4	reverseSpan	CONFIRMED	distance between the left and right cursor of the reversal; the loop swaps while it exceeds 1	^\s*iVar4\ =\ \(int\)pcVar7\ \-\ \(int\)param_3;$	+1
+use	_gle_dtostr	iVar4	reverseSpan	CONFIRMED	distance between the left and right cursor of the reversal; the loop swaps while it exceeds 1	^\s*iVar4\ =\ \(int\)pcVar6\ \-\ \(int\)pcVar7;$	+1
+use	_gle_dtostr	iVar4	reverseSpan	CONFIRMED	distance between the left and right cursor of the reversal; the loop swaps while it exceeds 1	^\s*while\ \(1\ <\ iVar4\)\ \{$@2	+1
+use	_gle_dtostr	iVar4	reverseSpan	CONFIRMED	distance between the left and right cursor of the reversal; the loop swaps while it exceeds 1	^\s*iVar4\ =\ \(int\)pcVar1\ \-\ \(int\)pcVar7;$	+1
+local	_gle_dtostr	dVar3	ten	CONFIRMED	DOUBLE_00108e10 (10.0): multiplier that extracts the digit from the remainder
+use	_gle_dtostr	dVar8	doubleZero	CONFIRMED	DOUBLE_00108d60 (0.0): compared with value and tolerance	^\s*dVar8\ =\ DOUBLE_00108d60;$	+1
+use	_gle_dtostr	dVar8	doubleZero	CONFIRMED	DOUBLE_00108d60 (0.0): compared with value and tolerance	^\s*if\ \(dVar8\ <\ fparam_1\)\ \{$	+1
+use	_gle_dtostr	dVar8	decimalExponentRounded	INFERRED	_round((binary exponent) * DOUBLE_00108e28): the estimated decimal exponent as a double	^\s*dVar8\ =\ _round\(\(\(double\)CONCAT44\(0x43300000,local_50\[0\]\ \^\ 0x80000000\)\ \-\ DOUBLE_00108d58\)\ \*$	+3
+use	_gle_dtostr	dVar8	pow10OfExponent	CONFIRMED	_pow_10(exponent): the scale applied to the tolerance	^\s*dVar8\ =\ \(double\)\(\(double\ \(\*\)\(\)\)_pow_10\)\(local_50\[0\]\);$	+1
+use	_gle_dtostr	dVar8	pow10OfExponent	CONFIRMED	_pow_10(exponent): the scale applied to the tolerance	^\s*dVar10\ =\ fparam_2\ \*\ dVar8;$	+1
+use	_gle_dtostr	dVar8	scaledValue	CONFIRMED	value divided by 10^exponent (kept in [1,10) by the loops), then plus half a tolerance unit for rounding	^\s*dVar8\ =\ fparam_1\ \*\ dVar9;$	+1
+use	_gle_dtostr	dVar8	scaledValue	CONFIRMED	value divided by 10^exponent (kept in [1,10) by the loops), then plus half a tolerance unit for rounding	^\s*dVar8\ =\ fparam_1;$	+1
+use	_gle_dtostr	dVar8	scaledValue	CONFIRMED	value divided by 10^exponent (kept in [1,10) by the loops), then plus half a tolerance unit for rounding	^\s*for\ \(;\ DOUBLE_00108e10\ <=\ dVar8\ \+\ fparam_2\ \*\ DOUBLE_00108dc0;\ dVar8\ =\ dVar8\ \*\ DOUBLE_00108e08\)\ \{$	+1
+use	_gle_dtostr	dVar8	scaledValue	CONFIRMED	value divided by 10^exponent (kept in [1,10) by the loops), then plus half a tolerance unit for rounding	^\s*for\ \(;\ dVar8\ \+\ fparam_2\ \*\ DOUBLE_00108dc0\ <\ DOUBLE_00108d68;\ dVar8\ =\ dVar8\ \*\ DOUBLE_00108e10\)\ \{$	+1
+use	_gle_dtostr	dVar8	scaledValue	CONFIRMED	value divided by 10^exponent (kept in [1,10) by the loops), then plus half a tolerance unit for rounding	^\s*dVar8\ =\ fparam_1;$@2	+1
+use	_gle_dtostr	dVar8	scaledValue	CONFIRMED	value divided by 10^exponent (kept in [1,10) by the loops), then plus half a tolerance unit for rounding	^\s*dVar8\ =\ fparam_2\ \*\ DOUBLE_00108dc0\ \+\ dVar8;$	+2
+use	_gle_dtostr	dVar8	scaledValue	CONFIRMED	value divided by 10^exponent (kept in [1,10) by the loops), then plus half a tolerance unit for rounding	^\s*dVar9\ =\ _floor\(dVar8\);$	+1
+use	_gle_dtostr	dVar8	scaledValue	CONFIRMED	value divided by 10^exponent (kept in [1,10) by the loops), then plus half a tolerance unit for rounding	^\s*dVar8\ =\ dVar8\ \-\ dVar9;$	+2
+use	_gle_dtostr	dVar8	scaledValue	CONFIRMED	value divided by 10^exponent (kept in [1,10) by the loops), then plus half a tolerance unit for rounding	^\s*dVar8\ =\ dVar8\ \*\ dVar10;$	+1
+use	_gle_dtostr	dVar8	scaledValue	CONFIRMED	value divided by 10^exponent (kept in [1,10) by the loops), then plus half a tolerance unit for rounding	^\s*dVar9\ =\ _floor\(dVar8\);$@2	+2
+use	_gle_dtostr	dVar8	scaledValue	CONFIRMED	value divided by 10^exponent (kept in [1,10) by the loops), then plus half a tolerance unit for rounding	^\s*\}\ while\ \(fparam_2\ <\ dVar8\);$	+1
+use	_gle_dtostr	dVar9	pow10OfNegExponent	CONFIRMED	_pow_10(-exponent): the scale applied to the value	^\s*dVar9\ =\ \(double\)\(\(double\ \(\*\)\(\)\)_pow_10\)\(\-local_50\[0\]\);$	+1
+use	_gle_dtostr	dVar9	pow10OfNegExponent	CONFIRMED	_pow_10(-exponent): the scale applied to the value	^\s*dVar8\ =\ fparam_1\ \*\ dVar9;$	+1
+use	_gle_dtostr	dVar9	oneTenth	CONFIRMED	DOUBLE_00108e08 (0.1): divides the integer part by 10 to peel off the lowest digit	^\s*dVar9\ =\ DOUBLE_00108e08;$	+1
+use	_gle_dtostr	dVar9	oneTenth	CONFIRMED	DOUBLE_00108e08 (0.1): divides the integer part by 10 to peel off the lowest digit	^\s*dVar11\ =\ dVar10\ \*\ dVar9;$	+1
+use	_gle_dtostr	dVar9	integerPartOfValue	CONFIRMED	_floor(scaledValue): the integer part before the digit fraction is taken	^\s*dVar9\ =\ _floor\(dVar8\);$	+1
+use	_gle_dtostr	dVar9	integerPartOfValue	CONFIRMED	_floor(scaledValue): the integer part before the digit fraction is taken	^\s*dVar8\ =\ dVar8\ \-\ dVar9;$	+1
+use	_gle_dtostr	dVar9	fractionDigitValue	CONFIRMED	_floor(scaledValue*10): the next fraction digit, written as '0' + digit	^\s*dVar9\ =\ _floor\(dVar8\);$@2	+3
+use	_gle_dtostr	dVar10	scaledTolerance	CONFIRMED	tolerance scaled by 10^exponent along with the value	^\s*dVar10\ =\ fparam_2;$	+1
+use	_gle_dtostr	dVar10	scaledTolerance	CONFIRMED	tolerance scaled by 10^exponent along with the value	^\s*dVar10\ =\ fparam_2\ \*\ dVar8;$	+1
+use	_gle_dtostr	dVar10	scaledTolerance	CONFIRMED	tolerance scaled by 10^exponent along with the value	^\s*dVar10\ =\ dVar10\ \*\ DOUBLE_00108e10;$	+1
+use	_gle_dtostr	dVar10	scaledTolerance	CONFIRMED	tolerance scaled by 10^exponent along with the value	^\s*dVar10\ =\ dVar10\ \*\ DOUBLE_00108e08;$	+1
+use	_gle_dtostr	dVar10	scaledTolerance	CONFIRMED	tolerance scaled by 10^exponent along with the value	^\s*fparam_2\ =\ dVar10;$	+1
+use	_gle_dtostr	dVar10	integerPartRemaining	CONFIRMED	_floor of the integer part still to be converted, divided by 10 per digit	^\s*dVar10\ =\ _floor\(dVar8\);$	+1
+use	_gle_dtostr	dVar10	integerPartRemaining	CONFIRMED	_floor of the integer part still to be converted, divided by 10 per digit	^\s*while\ \(fparam_2\ <\ dVar10\)\ \{$	+1
+use	_gle_dtostr	dVar10	integerPartRemaining	CONFIRMED	_floor of the integer part still to be converted, divided by 10 per digit	^\s*dVar11\ =\ dVar10\ \*\ dVar9;$	+3
+use	_gle_dtostr	dVar10	tenForFraction	CONFIRMED	DOUBLE_00108e10 (10.0): multiplier of the fraction and tolerance in the fraction loop	^\s*dVar10\ =\ DOUBLE_00108e10;$	+1
+use	_gle_dtostr	dVar10	tenForFraction	CONFIRMED	DOUBLE_00108e10 (10.0): multiplier of the fraction and tolerance in the fraction loop	^\s*dVar8\ =\ dVar8\ \*\ dVar10;$	+2
+local	_gle_dtostr	dVar11	integerPartTimesTenth	CONFIRMED	integerPartRemaining * 0.1: its fractional part times 10 is the lowest decimal digit

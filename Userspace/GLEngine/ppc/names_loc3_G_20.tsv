@@ -1,0 +1,21 @@
+local	_gleGetHistogram	uVar18	outByte	CONFIRMED	the byte of the current bin component (binCursor + 3/7/0xb/0xf: low byte of the big-endian count word) written to the destination for GL_BYTE/GL_UNSIGNED_BYTE output
+local	_gleGetHistogram	uVar17	outShort	CONFIRMED	the 16-bit value of the current bin component written to the destination for GL_SHORT/GL_UNSIGNED_SHORT output
+use	_gleGetHistogram	iVar19	binIndex	CONFIRMED	index of the bin being cleared in the reset loop (the byte offset is binIndex * 0x10, 4 floats per bin)	^\s*if\ \(\(param_3\ !=\ 0\)\ \&\&\ \(iVar19\ =\ 0,\ 0\ <\ iVar26\)\)\ \{$	+1
+use	_gleGetHistogram	iVar19	binIndex	CONFIRMED	index of the bin being cleared in the reset loop (the byte offset is binIndex * 0x10, 4 floats per bin)	^\s*iVar20\ =\ iVar19\ \*\ 0x10;$	+2
+use	_gleGetHistogram	iVar19	binIndex	CONFIRMED	index of the bin being cleared in the reset loop (the byte offset is binIndex * 0x10, 4 floats per bin)	^\s*iVar20\ =\ iVar19\ <<\ 4;$	+1
+use	_gleGetHistogram	iVar19	binIndex	CONFIRMED	index of the bin being cleared in the reset loop (the byte offset is binIndex * 0x10, 4 floats per bin)	^\s*iVar19\ =\ iVar19\ \+\ 1;$	+1
+use	_gleGetHistogram	pfVar25	resetCursor	CONFIRMED	pointer to the bin being cleared in the reset loop (4 floats per bin, advanced by 4)	^\s*pfVar25\ =\ pfVar27;$	+1
+use	_gleGetHistogram	pfVar25	resetCursor	CONFIRMED	pointer to the bin being cleared in the reset loop (4 floats per bin, advanced by 4)	^\s*pfVar25\[3\]\ =\ 0\.0;$	+1
+use	_gleGetHistogram	pfVar25	resetCursor	CONFIRMED	pointer to the bin being cleared in the reset loop (4 floats per bin, advanced by 4)	^\s*pfVar25\[1\]\ =\ 0\.0;$	+1
+use	_gleGetHistogram	pfVar25	resetCursor	CONFIRMED	pointer to the bin being cleared in the reset loop (4 floats per bin, advanced by 4)	^\s*\*pfVar25\ =\ 0\.0;$	+1
+use	_gleGetHistogram	pfVar25	resetCursor	CONFIRMED	pointer to the bin being cleared in the reset loop (4 floats per bin, advanced by 4)	^\s*pfVar25\[2\]\ =\ 0\.0;$	+1
+use	_gleGetHistogram	pfVar25	resetCursor	CONFIRMED	pointer to the bin being cleared in the reset loop (4 floats per bin, advanced by 4)	^\s*\*pfVar25\ =\ 0\.0;$@2	+1
+use	_gleGetHistogram	pfVar25	resetCursor	CONFIRMED	pointer to the bin being cleared in the reset loop (4 floats per bin, advanced by 4)	^\s*pfVar25\ =\ pfVar25\ \+\ 4;$	+1
+local	_gleGetHistogram	fVar21	componentTemp1	INFERRED	temporary holding a bin component (red, or another channel after the byte-swap/reorder) before it is stored to the destination; role varies by path
+local	_gleGetHistogram	fVar22	componentTemp2	INFERRED	temporary holding a bin component (green, or another channel after the byte-swap/reorder) before it is stored to the destination; role varies by path
+local	_gleGetHistogram	fVar23	componentTemp3	INFERRED	temporary holding a bin component (blue, or another channel after the byte-swap/reorder) before it is stored to the destination; role varies by path
+local	_gleGetHistogram	fVar24	componentTemp4	INFERRED	temporary holding a bin component (alpha, or another channel after the byte-swap/reorder) before it is stored to the destination; role varies by path
+local	_gleGetHistogram	local_80	binWord0	INFERRED	raw bits of the bin's first component (red) as an integer for GL_INT/GL_UNSIGNED_INT output (byte-swapped when requested; also reused as a shuffle temporary); the high half holds the 16-bit value for short output
+local	_gleGetHistogram	local_7c	binWord1	INFERRED	raw bits of the bin's second component (green) as an integer for int/short output (byte-swapped when requested)
+local	_gleGetHistogram	local_78	binWord2	INFERRED	raw bits of the bin's third component (blue) as an integer for int/short output (byte-swapped when requested)
+local	_gleGetHistogram	local_74	binWord3	INFERRED	raw bits of the bin's fourth component (alpha) as an integer for int/short output (byte-swapped when requested)

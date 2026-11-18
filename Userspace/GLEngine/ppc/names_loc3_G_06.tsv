@@ -1,0 +1,71 @@
+local	_gleTransformProjectionBlend	fVar22	viewportScaleY	CONFIRMED	ctx+0x1b74: y scale of the viewport transform
+local	_gleTransformProjectionBlend	fVar23	viewportScaleZ	CONFIRMED	ctx+0x1b78: z scale of the viewport transform
+local	_gleTransformProjectionBlend	fVar25	viewportOffsetX	CONFIRMED	ctx+0x1b80: x offset of the viewport transform
+local	_gleTransformProjectionBlend	fVar24	viewportOffsetY	CONFIRMED	ctx+0x1b84: y offset of the viewport transform
+local	_gleTransformProjectionBlend	fVar26	viewportOffsetZ	CONFIRMED	ctx+0x1b88: z offset of the viewport transform
+local	_gleTransformProjectionBlend	fVar28	blendedEyeY	CONFIRMED	vertex float word 0x3d: blended eye-space y
+local	_gleTransformProjectionBlend	fVar29	blendedEyeZ	CONFIRMED	vertex float word 0x3e: blended eye-space z
+local	_gleTransformProjectionBlend	fVar30	blendedEyeW	CONFIRMED	vertex float word 0x3f: blended eye-space w
+local	_gleTransformProjectionBlend	fVar33	clipW	CONFIRMED	clip-space w, stored at vertex word 7; its reciprocal goes to word 3
+local	_gleTransformProjectionBlend	fVar34	negClipW	CONFIRMED	-clipW: lower bound of each clip-volume test
+local	_gleTransformProjectionBlend	dVar45	fogExpResult	CONFIRMED	double result of _exp(fogWorkValue), narrowed to the fog factor
+use	_gleTransformProjectionBlend	iVar36	lastWeightIndex	INFERRED	weightCount - 1: number of explicit weights, i.e. index of the implied last weight	^\s*iVar36\ =\ uVar39\ \-\ 1;$	+1
+use	_gleTransformProjectionBlend	iVar36	lastWeightIndex	INFERRED	weightCount - 1: number of explicit weights, i.e. index of the implied last weight	^\s*if\ \(0\ <\ iVar36\)\ \{$	+1
+use	_gleTransformProjectionBlend	iVar36	lastWeightIndex	INFERRED	weightCount - 1: number of explicit weights, i.e. index of the implied last weight	^\s*iVar43\ =\ iVar36;$	+1
+use	_gleTransformProjectionBlend	iVar36	lastWeightIndex	INFERRED	weightCount - 1: number of explicit weights, i.e. index of the implied last weight	^\s*iVar40\ =\ iVar36;$	+1
+local	_gleTransformProjectionBlend	iVar40	lastWeightSlot	INFERRED	0 when there are no explicit weights, else lastWeightIndex: the slot (vertex word 0x18+slot) that receives remainingWeight
+use	_gleTransformProjectionBlend	pfVar37	weightCursor	CONFIRMED	pointer running over the vertex's explicit weights (vertex + 0x18 words)	^\s*pfVar37\ =\ pfVar42\ \+\ 0x18;$	+1
+use	_gleTransformProjectionBlend	pfVar37	weightCursor	CONFIRMED	pointer running over the vertex's explicit weights (vertex + 0x18 words)	^\s*fVar1\ =\ \*pfVar37;$	+2
+use	_gleTransformProjectionBlend	pfVar37	nextVertex	CONFIRMED	vertex + 0x40 words: the next vertex, loop continuation test against vertexEnd	^\s*pfVar37\ =\ pfVar42\ \+\ 0x40;$	+1
+use	_gleTransformProjectionBlend	pfVar37	nextVertex	CONFIRMED	vertex + 0x40 words: the next vertex, loop continuation test against vertexEnd	^\s*pfVar42\ =\ pfVar37;$	+2
+use	_gleTransformProjectionBlend	pfVar38	vertexEnd	CONFIRMED	vertices + vertexCount*0x40 words: end of the vertex array	^\s*pfVar38\ =\ param_2\ \+\ param_3\ \*\ 0x40;$	+1
+use	_gleTransformProjectionBlend	pfVar38	vertexEnd	CONFIRMED	vertices + vertexCount*0x40 words: end of the vertex array	^\s*if\ \(param_2\ <\ pfVar38\)\ \{$	+2
+use	_gleTransformProjectionBlend	pfVar38	vertexEnd	CONFIRMED	vertices + vertexCount*0x40 words: end of the vertex array	^\s*else\ if\ \(param_2\ <\ pfVar38\)\ \{$	+1
+use	_gleTransformProjectionBlend	pfVar38	vertexEnd	CONFIRMED	vertices + vertexCount*0x40 words: end of the vertex array	^\s*\}\ while\ \(pfVar37\ <\ pfVar38\);$	+1
+use	_gleTransformProjectionBlend	pfVar38	zeroCursor	CONFIRMED	vertex cursor of the loop that clears the blended eye position (words 0x3c..0x3f) when blending is off	^\s*pfVar38\ =\ param_2;$	+1
+use	_gleTransformProjectionBlend	pfVar38	zeroCursor	CONFIRMED	vertex cursor of the loop that clears the blended eye position (words 0x3c..0x3f) when blending is off	^\s*pfVar38\[0x3c\]\ =\ fVar35;$	+5
+use	_gleTransformProjectionBlend	pfVar38	blendMatrix	CONFIRMED	pointer to the current weight's blend matrix, ctx+0x1cc0 advanced 0x10 floats per weight	^\s*pfVar38\ =\ \(float\ \*\)\(param_1\ \+\ 0x1cc0\);$	+1
+use	_gleTransformProjectionBlend	pfVar38	blendMatrix	CONFIRMED	pointer to the current weight's blend matrix, ctx+0x1cc0 advanced 0x10 floats per weight	^\s*fVar2\ =\ \*pfVar38;$	+16
+use	_gleTransformProjectionBlend	pfVar38	blendMatrix	CONFIRMED	pointer to the current weight's blend matrix, ctx+0x1cc0 advanced 0x10 floats per weight	^\s*pfVar38\ =\ pfVar38\ \+\ 0x10;$	+1
+use	_gleTransformProjectionBlend	pfVar38	vertexEnd	CONFIRMED	vertices + vertexCount*0x40 words: end of the vertex array	^\s*pfVar38\ =\ param_2\ \+\ param_3\ \*\ 0x40;$@2	+1
+use	_gleTransformProjectionBlend	pfVar38	vertexEnd	CONFIRMED	vertices + vertexCount*0x40 words: end of the vertex array	^\s*if\ \(pfVar38\ <=\ param_2\)\ \{$	+1
+local	_gleTransformProjectionBlend	pfVar42	vertexCursor	CONFIRMED	vertex being processed (vertices advanced by 0x40 words)
+use	_gleTransformProjectionBlend	uVar39	weightCount	CONFIRMED	byte at ctx+0x4660: number of blend weights	^\s*uVar39\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x4660\);$	+1
+use	_gleTransformProjectionBlend	uVar39	weightCount	CONFIRMED	byte at ctx+0x4660: number of blend weights	^\s*iVar36\ =\ uVar39\ \-\ 1;$	+1
+use	_gleTransformProjectionBlend	uVar39	weightCount	CONFIRMED	byte at ctx+0x4660: number of blend weights	^\s*if\ \(uVar39\ !=\ 0\)\ \{$	+1
+use	_gleTransformProjectionBlend	uVar39	weightCount	CONFIRMED	byte at ctx+0x4660: number of blend weights	^\s*\}\ while\ \(iVar36\ <\ \(int\)uVar39\);$	+1
+use	_gleTransformProjectionBlend	uVar39	clipCodeOr	CONFIRMED	OR of all vertices' clip codes (zero means every vertex is inside the clip volume)	^\s*uVar39\ =\ 0;$	+1
+use	_gleTransformProjectionBlend	uVar39	clipCodeOr	CONFIRMED	OR of all vertices' clip codes (zero means every vertex is inside the clip volume)	^\s*uVar39\ =\ uVar39\ \|\ uVar41;$	+1
+local	_gleTransformProjectionBlend	uVar41	clipCode	CONFIRMED	per-vertex clip-volume outcode (0x20/0x10 x, 8/4 y, 2/1 z), stored at vertex byte 0x7f
+use	_gleTransformProjectionBlend	uVar44	vertexIterations	CONFIRMED	(end - start + 0xff) >> 8: number of vertices left in the zeroing loop	^\s*uVar44\ =\ \(uint\)\(\(int\)pfVar38\ \+\ \(0xff\ \-\ \(int\)param_2\)\)\ >>\ 8;$	+1
+use	_gleTransformProjectionBlend	uVar44	vertexIterations	CONFIRMED	(end - start + 0xff) >> 8: number of vertices left in the zeroing loop	^\s*uVar44\ =\ uVar44\ \-\ 1;$	+2
+use	_gleTransformProjectionBlend	uVar44	vertexIterations	CONFIRMED	number of vertices left in the weight-blend loop	^\s*uVar44\ =\ \(uint\)\(\(int\)\(param_2\ \+\ param_3\ \*\ 0x40\)\ \+\ \(0xff\ \-\ \(int\)param_2\)\)\ >>\ 8;$	+1
+use	_gleTransformProjectionBlend	uVar44	vertexIterations	CONFIRMED	number of vertices left in the weight-blend loop	^\s*uVar44\ =\ uVar44\ \-\ 1;$@2	+2
+use	_gleTransformProjectionBlend	uVar44	clipCodeAnd	CONFIRMED	AND of all vertices' clip codes, starting at 0xff (nonzero means all vertices outside the same plane)	^\s*uVar44\ =\ 0xff;$	+1
+use	_gleTransformProjectionBlend	uVar44	clipCodeAnd	CONFIRMED	AND of all vertices' clip codes, starting at 0xff (nonzero means all vertices outside the same plane)	^\s*uVar44\ =\ uVar44\ \&\ uVar41;$	+1
+local	_gleTransformProjectionBlend	param_2	vertices	CONFIRMED	vertex array base (vertex stride 0x100 bytes); advanced through the array in the final loop
+local	_gleTransformProjectionBlend	param_3	vertexCount	CONFIRMED	number of vertices (end = vertices + vertexCount*0x40 words)
+local	_gleTransformProjectionBlend	fVar1	weightOrBlendM1OrProjM3	INFERRED	one Ghidra variable holding in turn: blend weight read from vertex word 0x18+i (weightValue); blend-matrix element 1; projection matrix element 3 (ctx+0x1c8c); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar2	remainingWeightOrBlendM0OrClipBiasX	INFERRED	one Ghidra variable holding in turn: implied last blend weight (1.0 minus the sum of the explicit weights); blend-matrix element 0; clip bias x (ctx+0x4a20); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar3	blendM2OrClipBiasY	INFERRED	one Ghidra variable holding in turn: blend-matrix element 2; clip bias y (ctx+0x4a28); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar4	blendM3OrProjM7	INFERRED	one Ghidra variable holding in turn: blend-matrix element 3; projection matrix element 7 (ctx+0x1c9c); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar5	blendM4OrProjM11	INFERRED	one Ghidra variable holding in turn: blend-matrix element 4; projection matrix element 11 (ctx+0x1cac); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar6	blendM5OrProjM15	INFERRED	one Ghidra variable holding in turn: blend-matrix element 5; projection matrix element 15 (ctx+0x1cbc); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar7	blendM6OrClipScaleX	INFERRED	one Ghidra variable holding in turn: blend-matrix element 6; clip scale x (ctx+0x4a1c); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar8	blendM7OrClipScaleY	INFERRED	one Ghidra variable holding in turn: blend-matrix element 7; clip scale y (ctx+0x4a24); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar9	blendM8OrProjM8	INFERRED	one Ghidra variable holding in turn: blend-matrix element 8; projection matrix element 8 (ctx+0x1ca0); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar10	blendM9OrProjM12	INFERRED	one Ghidra variable holding in turn: blend-matrix element 9; projection matrix element 12 (ctx+0x1cb0); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar11	blendM10OrViewportScaleX	INFERRED	one Ghidra variable holding in turn: blend-matrix element 10; viewport x scale (ctx+0x1b70); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar12	blendM11OrProjM5	INFERRED	one Ghidra variable holding in turn: blend-matrix element 11; projection matrix element 5 (ctx+0x1c94); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar13	blendM12OrProjM0	INFERRED	one Ghidra variable holding in turn: blend-matrix element 12; projection matrix element 0 (ctx+0x1c80); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar14	blendM13OrProjM1	INFERRED	one Ghidra variable holding in turn: blend-matrix element 13; projection matrix element 1 (ctx+0x1c84); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar15	blendM14OrProjM4	INFERRED	one Ghidra variable holding in turn: blend-matrix element 14; projection matrix element 4 (ctx+0x1c90); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar16	blendM15OrProjM9	INFERRED	one Ghidra variable holding in turn: blend-matrix element 15; projection matrix element 9 (ctx+0x1ca4); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar17	objectYOrProjM13	INFERRED	one Ghidra variable holding in turn: vertex word 9 (position y) in the blend loop; projection matrix element 13 (ctx+0x1cb4); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar18	objectXOrProjM14	INFERRED	one Ghidra variable holding in turn: vertex word 8 (position x) in the blend loop; projection matrix element 14 (ctx+0x1cb8); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar19	objectZOrProjM2	INFERRED	one Ghidra variable holding in turn: vertex word 10 (position z) in the blend loop; projection matrix element 2 (ctx+0x1c88); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar20	objectWOrProjM6	INFERRED	one Ghidra variable holding in turn: vertex word 11 (position w) in the blend loop; projection matrix element 6 (ctx+0x1c98); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar21	blendWeightOrProjM10	INFERRED	one Ghidra variable holding in turn: blend weight of the current matrix (vertex word 0x18+loopIndex) in the blend loop; projection matrix element 10 (ctx+0x1ca8); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar27	eyeXThenClipY	INFERRED	one Ghidra variable holding in turn: blended eye x (vertex word 0x3c) which is later reused for clip-space y (vertex word 5); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar31	fogValueThenClipX	INFERRED	one Ghidra variable holding in turn: fog working value (|eye z| through the fog-mode formula) which is later reused for clip-space x (vertex word 4); split into per-role names changes register allocation (gate), so one joined name
+local	_gleTransformProjectionBlend	fVar32	fogFactorThenClipZ	INFERRED	one Ghidra variable holding in turn: fog factor stored at vertex word 0x13, later reused for clip-space z (vertex word 6); split into per-role names changes register allocation (gate), so one joined name

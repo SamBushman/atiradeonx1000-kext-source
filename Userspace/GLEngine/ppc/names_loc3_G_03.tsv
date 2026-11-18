@@ -1,0 +1,161 @@
+local	_gleDrawPixelsFast	param_2	width	CONFIRMED	glDrawPixels(width, height, format, type, pixels): the caller _glDrawPixels_Exec passes width as the 2nd argument
+local	_gleDrawPixelsFast	param_3	height	CONFIRMED	glDrawPixels(width, height, format, type, pixels): 3rd argument
+local	_gleDrawPixelsFast	param_4	format	CONFIRMED	glDrawPixels(width, height, format, type, pixels): 4th argument; format - 0x1901 < 2 (GL_STENCIL_INDEX/GL_DEPTH_COMPONENT) is rejected
+local	_gleDrawPixelsFast	param_5	typeThenTextureType	INFERRED	GL type argument of glDrawPixels (passed to _gleDrawPixelsFastPickTextureType), overwritten with that texture type (iVar18) before the per-tile _CopySourceSubImageToTexture calls
+local	_gleDrawPixelsFast	param_6	pixels	CONFIRMED	glDrawPixels(width, height, format, type, pixels): 5th argument, the source pixel pointer
+local	_gleDrawPixelsFast	fparam_3	zoomX	CONFIRMED	float at context +0x31a8, written by glPixelZoom as xfactor
+local	_gleDrawPixelsFast	fparam_3_00	zoomY	CONFIRMED	float at context +0x31ac, written by glPixelZoom as yfactor
+local	_gleDrawPixelsFast	dVar37	absZoomX	INFERRED	zoomX, negated when it is below zero: |zoomX|
+local	_gleDrawPixelsFast	dVar38	absZoomY	INFERRED	zoomY, negated when it is below zero: |zoomY|
+use	_gleDrawPixelsFast	fVar2	zoomXSignF	INFERRED	1.0 (FLOAT_00108e54), or -1.0 (FLOAT_00108e58) when zoomX < 0	^\s*fVar2\ =\ FLOAT_00108e54;$	+1
+use	_gleDrawPixelsFast	fVar2	zoomXSignF	INFERRED	1.0 (FLOAT_00108e54), or -1.0 (FLOAT_00108e58) when zoomX < 0	^\s*fVar2\ =\ FLOAT_00108e58;$	+1
+use	_gleDrawPixelsFast	fVar2	zoomXSignF	INFERRED	1.0 (FLOAT_00108e54), or -1.0 (FLOAT_00108e58) when zoomX < 0	^\s*dVar32\ =\ \(double\)fVar2;$	+1
+use	_gleDrawPixelsFast	dVar32	zoomXSign	INFERRED	(double) of the zoomX sign 1.0/-1.0; scales the destination x extent	^\s*dVar32\ =\ \(double\)fVar2;$	+1
+use	_gleDrawPixelsFast	dVar32	zoomXSign	INFERRED	(double) of the zoomX sign 1.0/-1.0; scales the destination x extent	^\s*\(\(void\ \(\*\)\(\)\)_CopySourceSubImageToTexture\)\(param_1,param_2,param_3,param_4,param_5,param_6,param_2,param_3,uVar30\ \*\ iVar15,0x80e1,$	+4
+use	_gleDrawPixelsFast	dVar32	zoomXSign	INFERRED	(double) of the zoomX sign 1.0/-1.0; scales the destination x extent	^\s*if\ \(\(double\)dVar32\ ==\ \(double\)FLOAT_00108e54\)\ \{$	+1
+use	_gleDrawPixelsFast	dVar32	zoomXSign	INFERRED	(double) of the zoomX sign 1.0/-1.0; scales the destination x extent	^\s*fVar4\ =\ \(\(float\)\(\(double\)dVar39\ \*\ dVar37\)\ \*\ dVar32\ \+\ local_234\);$	+1
+use	_gleDrawPixelsFast	dVar32	zoomXSign	INFERRED	(double) of the zoomX sign 1.0/-1.0; scales the destination x extent	^\s*fVar5\ =\ \(\(float\)\(\(double\)CONCAT44\(0x43300000,uStack_10c\)\ \-\ dVar40\)\ \*\ dVar32\ \+\ local_244\);$	+1
+use	_gleDrawPixelsFast	dVar32	zoomXSign	INFERRED	(double) of the zoomX sign 1.0/-1.0; scales the destination x extent	^\s*dVar34\ =\ \(double\)dVar32;$	+1
+use	_gleDrawPixelsFast	dVar32	zoomXSign	INFERRED	(double) of the zoomX sign 1.0/-1.0; scales the destination x extent	^\s*\(\(void\ \(\*\)\(\)\)_CopySourceSubImageToTexture\)\(param_1,uVar30,uVar14,iVar26,param_5,local_e8,\(int\)\(double\)dVar39,iVar15,uVar31,$	+8
+use	_gleDrawPixelsFast	fVar2	zoomYSignF	INFERRED	1.0, or -1.0 when zoomY < 0	^\s*fVar2\ =\ FLOAT_00108e54;$@2	+1
+use	_gleDrawPixelsFast	fVar2	zoomYSignF	INFERRED	1.0, or -1.0 when zoomY < 0	^\s*fVar2\ =\ FLOAT_00108e58;$@2	+1
+use	_gleDrawPixelsFast	fVar2	zoomYSignF	INFERRED	1.0, or -1.0 when zoomY < 0	^\s*fparam_4\ =\ \(double\)fVar2;$	+1
+local	_gleDrawPixelsFast	fparam_4	zoomYSign	INFERRED	(double) of the zoomY sign 1.0/-1.0; scales the destination y extent
+use	_gleDrawPixelsFast	fVar2	nextTileXOffsetF	INFERRED	float tile x offset (tileXOffsetF) + tile width: the start of the next tile column; local_224 takes its integer value	^\s*fVar2\ =\ \(dVar35\ \+\ dVar39\);$	+2
+use	_gleDrawPixelsFast	fVar2	nextTileXOffsetF	INFERRED	float tile x offset (tileXOffsetF) + tile width: the start of the next tile column; local_224 takes its integer value	^\s*fVar2\ =\ \(dVar35\ \+\ dVar39\);$@2	+1
+use	_gleDrawPixelsFast	fVar2	nextTileXOffsetF	INFERRED	float tile x offset (tileXOffsetF) + tile width: the start of the next tile column; local_224 takes its integer value	^\s*local_108\ =\ \(longlong\)\(int\)fVar2;$	+1
+use	_gleDrawPixelsFast	fVar2	nextTileXOffsetF	INFERRED	float tile x offset (tileXOffsetF) + tile width: the start of the next tile column; local_224 takes its integer value	^\s*local_224\ =\ \(int\)fVar2;$	+1
+local	_gleDrawPixelsFast	fVar3	nextTileYOffsetF	INFERRED	float tile y offset (tileYOffsetF) + tile height: the start of the next tile row; local_22c takes its integer value
+use	_gleDrawPixelsFast	dVar35	tileXOffsetF	INFERRED	(double)(float) of local_224, the x offset of the current tile in source pixels	^\s*dVar35\ =\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uStack_114\)\ \-\ dVar40\);$	+2
+use	_gleDrawPixelsFast	dVar35	tileXOffsetF	INFERRED	(double)(float) of local_224, the x offset of the current tile in source pixels	^\s*fVar2\ =\ \(dVar35\ \+\ dVar39\);$@2	+1
+use	_gleDrawPixelsFast	dVar35	tileHeight	INFERRED	starts at FLOAT_00108f18 (the 512 pixel tile limit), clamped to the pixels left in the image height (imageHeight - tileYOffset)	^\s*dVar35\ =\ \(double\)FLOAT_00108f18;$	+1
+use	_gleDrawPixelsFast	dVar35	tileHeight	INFERRED	starts at FLOAT_00108f18 (the 512 pixel tile limit), clamped to the pixels left in the image height (imageHeight - tileYOffset)	^\s*fVar3\ =\ \(dVar36\ \+\ dVar35\);$	+1
+use	_gleDrawPixelsFast	dVar35	tileHeight	INFERRED	starts at FLOAT_00108f18 (the 512 pixel tile limit), clamped to the pixels left in the image height (imageHeight - tileYOffset)	^\s*dVar35\ =\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uStack_11c\)\ \-\ dVar12\);$	+2
+use	_gleDrawPixelsFast	dVar35	tileHeight	INFERRED	starts at FLOAT_00108f18 (the 512 pixel tile limit), clamped to the pixels left in the image height (imageHeight - tileYOffset)	^\s*dVar36\ =\ \(double\)\(float\)\(\(double\)dVar35\ \*\ dVar38\);$	+1
+use	_gleDrawPixelsFast	dVar35	tileHeight	INFERRED	starts at FLOAT_00108f18 (the 512 pixel tile limit), clamped to the pixels left in the image height (imageHeight - tileYOffset)	^\s*if\ \(\(double\)dVar35\ <\ \(double\)dVar36\)\ \{$	+2
+use	_gleDrawPixelsFast	dVar35	tileHeight	INFERRED	starts at FLOAT_00108f18 (the 512 pixel tile limit), clamped to the pixels left in the image height (imageHeight - tileYOffset)	^\s*iVar15\ =\ \(int\)\(double\)dVar35;$	+1
+use	_gleDrawPixelsFast	dVar35	tileHeight	INFERRED	starts at FLOAT_00108f18 (the 512 pixel tile limit), clamped to the pixels left in the image height (imageHeight - tileYOffset)	^\s*if\ \(\(double\)dVar35\ <\ \(double\)dVar36\)\ \{$@2	+1
+use	_gleDrawPixelsFast	dVar35	tileHeight	INFERRED	starts at FLOAT_00108f18 (the 512 pixel tile limit), clamped to the pixels left in the image height (imageHeight - tileYOffset)	^\s*iVar15\ =\ \(int\)\(\(double\)dVar35\ \*\ dVar38\);$	+1
+use	_gleDrawPixelsFast	dVar35	tileHeight	INFERRED	starts at FLOAT_00108f18 (the 512 pixel tile limit), clamped to the pixels left in the image height (imageHeight - tileYOffset)	^\s*if\ \(\(double\)dVar35\ <\ \(double\)dVar36\)\ \{$@3	+2
+use	_gleDrawPixelsFast	dVar35	tileHeight	INFERRED	starts at FLOAT_00108f18 (the 512 pixel tile limit), clamped to the pixels left in the image height (imageHeight - tileYOffset)	^\s*if\ \(\(double\)dVar35\ <\ \(double\)dVar36\)\ \{$@4	+2
+use	_gleDrawPixelsFast	dVar35	tileHeight	INFERRED	starts at FLOAT_00108f18 (the 512 pixel tile limit), clamped to the pixels left in the image height (imageHeight - tileYOffset)	^\s*uVar27\ =\ \(uint\)\(int\)\(\(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uVar27\ \^\ 0x80000000\)\ \-\ dVar12\)$	+2
+use	_gleDrawPixelsFast	dVar36	tileYOffsetF	INFERRED	(double)(float) of local_22c, the y offset of the current tile in source pixels	^\s*dVar36\ =\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uStack_10c\)\ \-\ dVar12\);$	+2
+use	_gleDrawPixelsFast	dVar36	tileYOffsetF	INFERRED	(double)(float) of local_22c, the y offset of the current tile in source pixels	^\s*fVar3\ =\ \(dVar36\ \+\ dVar35\);$@2	+1
+local	_gleDrawPixelsFast	dVar39	tileWidth	INFERRED	starts at FLOAT_00108f18 (the 512 pixel tile limit), clamped to the pixels left in the image width (imageWidth - tileXOffset)
+local	_gleDrawPixelsFast	fVar4	nextTileDestX	INFERRED	tileWidth * absZoomX * zoomXSign + tileDestX: window x where the next tile column starts
+local	_gleDrawPixelsFast	fVar5	quadX1	INFERRED	pixel-centre snapped width of the tile * zoomXSign + quadX0: second x edge of the textured quad
+local	_gleDrawPixelsFast	fVar6	nextTileDestY	INFERRED	tile quad height * zoomYSign + tileDestY: window y where the next tile row starts
+local	_gleDrawPixelsFast	fVar7	quadY1	INFERRED	pixel-centre snapped height of the tile * zoomYSign + quadY0: second y edge of the textured quad
+local	_gleDrawPixelsFast	local_244	quadX0	INFERRED	float of the _pixelBoundary result for the tile's x start: first x edge of the textured quad; set to quadX1 after each tile column
+local	_gleDrawPixelsFast	local_24c	quadY0	INFERRED	float of the _pixelBoundary result for the tile's y start: first y edge of the textured quad; set to quadY1 after each tile
+local	_gleDrawPixelsFast	local_234	tileDestX	INFERRED	context +0x2e0 (raster position x) at entry, then window x of the current tile column (advanced by nextTileDestX)
+local	_gleDrawPixelsFast	local_23c	tileDestY	INFERRED	raster position y (fVar9) at entry, then window y of the current tile (advanced by nextTileDestY)
+local	_gleDrawPixelsFast	fVar9	rasterPosY	INFERRED	float at context +0x2e4: the current raster position y (x is +0x2e0, z +0x2e8)
+use	_gleDrawPixelsFast	dVar40	rasterPosXDouble	INFERRED	(double) of the raster position x (local_234 at entry), argument of _pixelBoundaryTopRight/BottomLeft	^\s*dVar40\ =\ \(double\)local_234;$	+1
+use	_gleDrawPixelsFast	dVar40	rasterPosXDouble	INFERRED	(double) of the raster position x (local_234 at entry), argument of _pixelBoundaryTopRight/BottomLeft	^\s*uStack_11c\ =\ \(\(uint\ \(\*\)\(\)\)_pixelBoundaryTopRight\)\(dVar40\);$	+1
+use	_gleDrawPixelsFast	dVar40	rasterPosXDouble	INFERRED	(double) of the raster position x (local_234 at entry), argument of _pixelBoundaryTopRight/BottomLeft	^\s*uStack_114\ =\ \(\(uint\ \(\*\)\(\)\)_pixelBoundaryBottomLeft\)\(dVar40\);$	+1
+local	_gleDrawPixelsFast	fparam_1_00	rasterPosYDouble	INFERRED	(double) of the raster position y (fVar9), argument of _pixelBoundaryTopRight/BottomLeft
+local	_gleDrawPixelsFast	dVar12	intToDoubleBias2	INFERRED	literal-pool constant DOUBLE_00108d58 = 4503601774854144.0: the magic double subtracted in every int-to-double conversion of the inner loop
+local	_gleDrawPixelsFast	local_224	tileXOffset	INFERRED	integer x offset of the current tile column in source pixels: (int)nextTileXOffsetF of the previous column
+local	_gleDrawPixelsFast	local_22c	tileYOffset	INFERRED	integer y offset of the current tile in source pixels: (int)nextTileYOffsetF of the previous tile
+local	_gleDrawPixelsFast	uVar25	tileXCounter	INFERRED	loop counter over the image width: advanced by tileWidth until it reaches imageWidth
+local	_gleDrawPixelsFast	uVar27	tileYCounter	INFERRED	loop counter over the image height: advanced by tileHeight until it reaches imageHeight
+use	_gleDrawPixelsFast	uVar14	texUnitCount	INFERRED	ushort at *(context + 0x468c) + 0xb4, the number of texture units (the loop over the per-unit state words at +0x3534, stride 0x7c, bails out when one is non-zero)	^\s*uVar14\ =\ \(uint\)\*\(ushort\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x468c\)\ \+\ 0xb4\);$	+2
+use	_gleDrawPixelsFast	uVar14	texUnitCount	INFERRED	ushort at *(context + 0x468c) + 0xb4, the number of texture units (the loop over the per-unit state words at +0x3534, stride 0x7c, bails out when one is non-zero)	^\s*\}\ while\ \(uVar30\ <\ uVar14\);$	+1
+use	_gleDrawPixelsFast	uVar14	imageHeight	INFERRED	height (param_3), or (height - *(context + 0x3354 or 0x3314)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile rows	^\s*uVar14\ =\ param_3;$	+1
+use	_gleDrawPixelsFast	uVar14	imageHeight	INFERRED	height (param_3), or (height - *(context + 0x3354 or 0x3314)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile rows	^\s*uVar14\ =\ \(param_3\ \-\ iVar20\)\ \+\ 1;$	+1
+use	_gleDrawPixelsFast	uVar14	imageHeight	INFERRED	height (param_3), or (height - *(context + 0x3354 or 0x3314)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile rows	^\s*local_ec\ =\ _gleVecAlloc\(iVar15\ \*\ uVar30\ \*\ uVar14\);$	+1
+use	_gleDrawPixelsFast	uVar14	imageHeight	INFERRED	height (param_3), or (height - *(context + 0x3354 or 0x3314)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile rows	^\s*if\ \(0\ <\ \(int\)uVar14\)\ \{$	+1
+use	_gleDrawPixelsFast	uVar14	imageHeight	INFERRED	height (param_3), or (height - *(context + 0x3354 or 0x3314)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile rows	^\s*uStack_114\ =\ uVar14\ \^\ 0x80000000;$	+1
+use	_gleDrawPixelsFast	uVar14	imageHeight	INFERRED	height (param_3), or (height - *(context + 0x3354 or 0x3314)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile rows	^\s*uStack_11c\ =\ uVar14\ \-\ local_22c\ \^\ 0x80000000;$	+1
+use	_gleDrawPixelsFast	uVar14	imageHeight	INFERRED	height (param_3), or (height - *(context + 0x3354 or 0x3314)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile rows	^\s*\(\(void\ \(\*\)\(\)\)_CopySourceSubImageToTexture\)\(param_1,uVar30,uVar14,iVar26,param_5,local_e8,\(int\)\(double\)dVar39,iVar15,uVar31,$	+8
+use	_gleDrawPixelsFast	uVar14	imageHeight	INFERRED	height (param_3), or (height - *(context + 0x3354 or 0x3314)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile rows	^\s*\}\ while\ \(\(int\)uVar27\ <\ \(int\)uVar14\);$	+1
+use	_gleDrawPixelsFast	uVar30	imageWidth	INFERRED	width (param_2), or (width - *(context + 0x3350 or 0x3310)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile columns	^\s*uVar30\ =\ param_2;$	+1
+use	_gleDrawPixelsFast	uVar30	imageWidth	INFERRED	width (param_2), or (width - *(context + 0x3350 or 0x3310)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile columns	^\s*uVar30\ =\ \(param_2\ \-\ iVar15\)\ \+\ 1;$	+1
+use	_gleDrawPixelsFast	uVar30	imageWidth	INFERRED	width (param_2), or (width - *(context + 0x3350 or 0x3310)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile columns	^\s*local_ec\ =\ _gleVecAlloc\(iVar15\ \*\ uVar30\ \*\ uVar14\);$	+1
+use	_gleDrawPixelsFast	uVar30	imageWidth	INFERRED	width (param_2), or (width - *(context + 0x3350 or 0x3310)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile columns	^\s*\(\(void\ \(\*\)\(\)\)_CopySourceSubImageToTexture\)\(param_1,param_2,param_3,param_4,param_5,param_6,param_2,param_3,uVar30\ \*\ iVar15,0x80e1,$	+4
+use	_gleDrawPixelsFast	uVar30	imageWidth	INFERRED	width (param_2), or (width - *(context + 0x3350 or 0x3310)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile columns	^\s*if\ \(0\ <\ \(int\)uVar30\)\ \{$	+1
+use	_gleDrawPixelsFast	uVar30	imageWidth	INFERRED	width (param_2), or (width - *(context + 0x3350 or 0x3310)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile columns	^\s*uStack_11c\ =\ uVar30\ \^\ 0x80000000;$	+1
+use	_gleDrawPixelsFast	uVar30	imageWidth	INFERRED	width (param_2), or (width - *(context + 0x3350 or 0x3310)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile columns	^\s*uStack_10c\ =\ uVar30\ \-\ local_224\ \^\ 0x80000000;$	+1
+use	_gleDrawPixelsFast	uVar30	imageWidth	INFERRED	width (param_2), or (width - *(context + 0x3350 or 0x3310)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile columns	^\s*\(\(void\ \(\*\)\(\)\)_CopySourceSubImageToTexture\)\(param_1,uVar30,uVar14,iVar26,param_5,local_e8,\(int\)\(double\)dVar39,iVar15,uVar31,$	+8
+use	_gleDrawPixelsFast	uVar30	imageWidth	INFERRED	width (param_2), or (width - *(context + 0x3350 or 0x3310)) + 1 when ctx+0x3410 selects a filter image of type 0x8016 at +0x3308/+0x3348: the loop bound of the tile columns	^\s*\}\ while\ \(\(int\)uVar25\ <\ \(int\)uVar30\);$	+1
+local	_gleDrawPixelsFast	iVar18	textureType	INFERRED	result of _gleDrawPixelsFastPickTextureType(type): the texture pixel type; passed to _glePixelBytes and stored at context +0x7498
+local	_gleDrawPixelsFast	uVar19	textureInternalFormat	CONFIRMED	0x8058 (GL_RGBA8) or 0x8057 (GL_RGB5_A1) passed as the internal format of _gleCreatePluginTextureLevel
+local	_gleDrawPixelsFast	iVar24	transferState	INFERRED	context +0x31cc (pixel transfer state) while the source still needs the transfer operations, 0 once the pre-pass _CopySourceSubImageToTexture applied them; passed on as the state argument
+local	_gleDrawPixelsFast	iVar26	sourceFormat	INFERRED	format (param_4), or 0x80e1 (GL_BGRA) after the pre-pass converted the pixels; passed on as the format argument
+local	_gleDrawPixelsFast	local_e8	sourcePixels	INFERRED	pixels (param_6), or the converted buffer convertedPixels after the pre-pass; the source pointer of the per-tile copies
+local	_gleDrawPixelsFast	local_ec	convertedPixels	INFERRED	_gleVecAlloc buffer holding the pre-converted image; freed by _gleVecFree at the end when non-null
+local	_gleDrawPixelsFast	puVar28	drawPixelsShare	CONFIRMED	context +0x7488, initialised by _gleInitDrawPixelsShareObject; word 0 is the ring index of the texture used for the current tile
+use	_gleDrawPixelsFast	iVar20	drawTexture	INFERRED	texture object of the current ring slot: *(ring index * 4 + *(context + 0x74a0))	^\s*iVar20\ =\ \*\(int\ \*\)\(\*puVar28\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x74a0\)\);$	+4
+use	_gleDrawPixelsFast	iVar20	drawTexture	INFERRED	texture object of the current ring slot: *(ring index * 4 + *(context + 0x74a0))	^\s*\*\(undefined2\ \*\)\(iVar20\ \+\ 0xd2\)\ =\ uVar23;$	+3
+use	_gleDrawPixelsFast	piVar16	texUnitStateCursor	INFERRED	pointer into the per-texture-unit state words at context +0x3534, stride 0x1f words (0x7c bytes)	^\s*piVar16\ =\ \(int\ \*\)\(param_1\ \+\ 0x3534\);$	+1
+use	_gleDrawPixelsFast	piVar16	texUnitStateCursor	INFERRED	pointer into the per-texture-unit state words at context +0x3534, stride 0x1f words (0x7c bytes)	^\s*iVar15\ =\ \*piVar16;$	+2
+use	_gleDrawPixelsFast	piVar16	textureLevel	INFERRED	drawTexture + 0xc4: the level image record deleted and re-created with _gleDeletePluginTextureLevel / _gleCreatePluginTextureLevel	^\s*piVar16\ =\ \(int\ \*\)\(iVar20\ \+\ 0xc4\);$	+2
+use	_gleDrawPixelsFast	piVar16	textureLevel	INFERRED	drawTexture + 0xc4: the level image record deleted and re-created with _gleDeletePluginTextureLevel / _gleCreatePluginTextureLevel	^\s*\(param_1,\*\(undefined4\ \*\)$	+3
+use	_gleDrawPixelsFast	piVar16	textureLevel	INFERRED	drawTexture + 0xc4: the level image record deleted and re-created with _gleDeletePluginTextureLevel / _gleCreatePluginTextureLevel	^\s*\(\(void\ \(\*\)\(\)\)_gleUpdateFramebufferCompleteness\)\(param_1,iVar29\ \+\ 0x10,piVar16,iVar15,iVar20,uVar19,iVar21,fparam_1,$	+2
+use	_gleDrawPixelsFast	piVar16	textureLevel	INFERRED	drawTexture + 0xc4: the level image record deleted and re-created with _gleDeletePluginTextureLevel / _gleCreatePluginTextureLevel	^\s*piVar16\ =\ \(int\ \*\)0x0;$	+1
+use	_gleDrawPixelsFast	piVar16	textureLevel	INFERRED	drawTexture + 0xc4: the level image record deleted and re-created with _gleDeletePluginTextureLevel / _gleCreatePluginTextureLevel	^\s*piVar16\ =\ \(int\ \*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 1\);$	+1
+use	_gleDrawPixelsFast	piVar16	textureLevel	INFERRED	drawTexture + 0xc4: the level image record deleted and re-created with _gleDeletePluginTextureLevel / _gleCreatePluginTextureLevel	^\s*piVar16\ =\ piVar13;$	+1
+use	_gleDrawPixelsFast	piVar16	textureLevel	INFERRED	drawTexture + 0xc4: the level image record deleted and re-created with _gleDeletePluginTextureLevel / _gleCreatePluginTextureLevel	^\s*\*piVar16\ =\ 0;$	+2
+use	_gleDrawPixelsFast	piVar16	textureLevel	INFERRED	drawTexture + 0xc4: the level image record deleted and re-created with _gleDeletePluginTextureLevel / _gleCreatePluginTextureLevel	^\s*\(param_1,a1,piVar16,iVar15,iVar20,\*\(undefined4\ \*\)\(param_1\ \+\ 0x4858\),$	+2
+use	_gleDrawPixelsFast	piVar16	textureLevel	INFERRED	drawTexture + 0xc4: the level image record deleted and re-created with _gleDeletePluginTextureLevel / _gleCreatePluginTextureLevel	^\s*\(param_1,a1_00,piVar16,iVar15,iVar20,\*\(undefined4\ \*\)\(param_1\ \+\ 0x4858\),$	+2
+use	_gleDrawPixelsFast	piVar16	textureLevel	INFERRED	drawTexture + 0xc4: the level image record deleted and re-created with _gleDeletePluginTextureLevel / _gleCreatePluginTextureLevel	^\s*\(param_1,a1_01,piVar16,iVar15,iVar20,\*\(undefined4\ \*\)\(param_1\ \+\ 0x4858\),$	+2
+use	_gleDrawPixelsFast	piVar16	textureLevel	INFERRED	drawTexture + 0xc4: the level image record deleted and re-created with _gleDeletePluginTextureLevel / _gleCreatePluginTextureLevel	^\s*\(param_1,a1_02,piVar16,iVar15,iVar20,iVar21,\(double\)local_244,\(double\)fVar7,$	+2
+use	_gleDrawPixelsFast	iVar15	tileHeightInt	INFERRED	(int) of tileHeight	^\s*iVar15\ =\ \(int\)\(double\)dVar35;$	+2
+use	_gleDrawPixelsFast	iVar15	tileHeightInt	INFERRED	(int) of tileHeight	^\s*\(\(void\ \(\*\)\(\)\)_CopySourceSubImageToTexture\)\(param_1,uVar30,uVar14,iVar26,param_5,local_e8,\(int\)\(double\)dVar39,iVar15,uVar31,$	+8
+use	_gleDrawPixelsFast	iVar15	tileHeightInt	INFERRED	(int) of tileHeight	^\s*uVar23\ =\ \(short\)iVar15;$	+1
+use	_gleDrawPixelsFast	iVar15	tileQuadHeightInt	INFERRED	(int) of tileHeight * absZoomY	^\s*iVar15\ =\ \(int\)\(\(double\)dVar35\ \*\ dVar38\);$	+2
+use	_gleDrawPixelsFast	iVar15	tileQuadHeightInt	INFERRED	(int) of tileHeight * absZoomY	^\s*local_100\ =\ \(longlong\)iVar15;$	+1
+local	_gleDrawPixelsFast	uVar23	levelHeight	INFERRED	16-bit height stored at texture level +0xd2: tileHeightInt, or (int)(tileHeight * absZoomY) when that is larger
+use	_gleDrawPixelsFast	uVar31	boundaryX	INFERRED	_pixelBoundaryTopRight/BottomLeft(raster position x) result, flipped for int-to-double conversion	^\s*uVar31\ =\ uStack_11c;$	+1
+use	_gleDrawPixelsFast	uVar31	boundaryX	INFERRED	_pixelBoundaryTopRight/BottomLeft(raster position x) result, flipped for int-to-double conversion	^\s*uVar31\ =\ uStack_114;$	+1
+use	_gleDrawPixelsFast	uVar31	boundaryX	INFERRED	_pixelBoundaryTopRight/BottomLeft(raster position x) result, flipped for int-to-double conversion	^\s*local_244\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar31\)\ \-\ DOUBLE_00108d58\);$	+1
+use	_gleDrawPixelsFast	uVar31	boundaryY	INFERRED	_pixelBoundaryTopRight/BottomLeft(raster position y) result, flipped for int-to-double conversion	^\s*uVar31\ =\ \(\(uint\ \(\*\)\(\)\)_pixelBoundaryTopRight\)\(fparam_1_00\);$	+2
+use	_gleDrawPixelsFast	uVar31	boundaryY	INFERRED	_pixelBoundaryTopRight/BottomLeft(raster position y) result, flipped for int-to-double conversion	^\s*uVar31\ =\ uStack_114;$@2	+1
+use	_gleDrawPixelsFast	uVar31	boundaryY	INFERRED	_pixelBoundaryTopRight/BottomLeft(raster position y) result, flipped for int-to-double conversion	^\s*local_24c\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar31\)\ \-\ dVar40\);$	+1
+use	_gleDrawPixelsFast	uVar31	tileRowBytes	INFERRED	(uint)(tileWidth * bytes per pixel): row length in bytes of the tile, passed to _CopySourceSubImageToTexture	^\s*uVar31\ =\ \(uint\)\(int\)\(dVar33\ \-\ DOUBLE_00108d80\);$	+3
+use	_gleDrawPixelsFast	uVar31	tileRowBytes	INFERRED	(uint)(tileWidth * bytes per pixel): row length in bytes of the tile, passed to _CopySourceSubImageToTexture	^\s*uVar31\ =\ \(uint\)\(int\)dVar34;$	+2
+use	_gleDrawPixelsFast	uVar31	tileRowBytes	INFERRED	(uint)(tileWidth * bytes per pixel): row length in bytes of the tile, passed to _CopySourceSubImageToTexture	^\s*\(\(void\ \(\*\)\(\)\)_CopySourceSubImageToTexture\)\(param_1,uVar30,uVar14,iVar26,param_5,local_e8,\(int\)\(double\)dVar39,iVar15,uVar31,$	+8
+use	_gleDrawPixelsFast	uVar31	dirtyWord3ThenMasked	INFERRED	dirtyFlagWords[3] (context +0x31c) and then that word masked with 0x17000000 / 0x17ffffff	^\s*uVar31\ =\ piVar13\[3\];$	+1
+use	_gleDrawPixelsFast	uVar31	dirtyWord3ThenMasked	INFERRED	dirtyFlagWords[3] (context +0x31c) and then that word masked with 0x17000000 / 0x17ffffff	^\s*uVar31\ =\ piVar13\[3\];$@2	+2
+use	_gleDrawPixelsFast	uVar31	dirtyWord3ThenMasked	INFERRED	dirtyFlagWords[3] (context +0x31c) and then that word masked with 0x17000000 / 0x17ffffff	^\s*uVar31\ =\ uVar31\ \&\ 0x17000000;$	+1
+use	_gleDrawPixelsFast	uVar31	dirtyWord3ThenMasked	INFERRED	dirtyFlagWords[3] (context +0x31c) and then that word masked with 0x17000000 / 0x17ffffff	^\s*uVar31\ =\ uVar31\ \&\ 0x17ffffff;$	+1
+use	_gleDrawPixelsFast	uVar31	dirtyWord3ThenMasked	INFERRED	dirtyFlagWords[3] (context +0x31c) and then that word masked with 0x17000000 / 0x17ffffff	^\s*bVar1\ =\ \(\(\*piVar13\ ==\ 0\ \&\&\ piVar13\[1\]\ ==\ 0\)\ \&\&\ uVar31\ ==\ 0\)\ \&\&\ piVar13\[4\]\ ==\ 0;$	+1
+use	_gleDrawPixelsFast	uVar31	dirtyWord3ThenMasked	INFERRED	dirtyFlagWords[3] (context +0x31c) and then that word masked with 0x17000000 / 0x17ffffff	^\s*bVar1\ =\ \(\(\(\*piVar13\ ==\ 0\ \&\&\ piVar13\[1\]\ ==\ 0\)\ \&\&\ \(piVar13\[2\]\ \&\ 0xfffffffdU\)\ ==\ 0\)$	+2
+use	_gleDrawPixelsFast	uVar31	slotIndex	INFERRED	*drawPixelsShare: ring index of the texture slot, incremented (and wrapped at context +0x7490) after each tile	^\s*uVar31\ =\ \*puVar28;$	+3
+use	_gleDrawPixelsFast	dVar33	tileRowBytesD	INFERRED	(double)(float) of tileWidth * bytes per pixel	^\s*dVar33\ =\ \(double\)\(float\)dVar34;$	+3
+use	_gleDrawPixelsFast	iVar10	slotOffset	INFERRED	loop index * 4: byte offset into the per-slot array at context +0x74a0	^\s*iVar10\ =\ uVar31\ \*\ 4;$	+1
+use	_gleDrawPixelsFast	iVar10	slotOffset	INFERRED	loop index * 4: byte offset into the per-slot array at context +0x74a0	^\s*\*\(short\ \*\)\(\*\(int\ \*\)\(iVar10\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x74a0\)\)\ \+\ 0xd6\)\ =\ \(short\)iVar18;$	+1
+use	_gleDrawPixelsFast	iVar11	slotOffset2	INFERRED	loop index * 4: byte offset into the per-slot array at context +0x74a0	^\s*iVar11\ =\ uVar31\ \*\ 4;$	+1
+use	_gleDrawPixelsFast	iVar11	slotOffset2	INFERRED	loop index * 4: byte offset into the per-slot array at context +0x74a0	^\s*\(\*puVar22,1,$	+4
+use	_gleDrawPixelsFast	iVar21	slotOffset3	INFERRED	loop index * 4: byte offset into the per-slot array at context +0x74a0	^\s*iVar21\ =\ uVar31\ \*\ 4;$	+1
+use	_gleDrawPixelsFast	iVar21	slotOffset3	INFERRED	loop index * 4: byte offset into the per-slot array at context +0x74a0	^\s*\(\*\(int\ \*\)\(\*puVar28\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x74a0\)\)\ \+\ iVar21\);$	+1
+local	_gleDrawPixelsFast	local_d8	dirtyFlagWords	INFERRED	context + 0x310: the dirty-flag words
+local	_gleDrawPixelsFast	local_e0	dirtyFlagWords2	INFERRED	copy of local_d8 (context + 0x310)
+local	_gleDrawPixelsFast	piVar13	dirtyFlagWords3	INFERRED	copy of local_e0 (context + 0x310)
+local	_gleDrawPixelsFast	piVar17	dirtyFlagWordsCursor	INFERRED	piVar13 + 5: walks dirty-flag words 5..13
+use	_gleDrawPixelsFast	iVar29	dirtyWordValue	INFERRED	*dirtyFlagWordsCursor: word tested for non-zero (sets bit 0x800000 of word 3)	^\s*iVar29\ =\ \*piVar17;$	+1
+use	_gleDrawPixelsFast	iVar29	dirtyWordValue	INFERRED	*dirtyFlagWordsCursor: word tested for non-zero (sets bit 0x800000 of word 3)	^\s*if\ \(iVar29\ !=\ 0\)\ \{$	+1
+local	_gleDrawPixelsFast	local_120	intToDoubleHigh1	INFERRED	high word 0x43300000 of the magic double built for an int-to-double conversion (only ever assigned that constant)
+local	_gleDrawPixelsFast	local_118	intToDoubleHigh2	INFERRED	high word 0x43300000 of the magic double built for an int-to-double conversion (only ever assigned that constant)
+local	_gleDrawPixelsFast	local_110	intToDoubleHigh3	INFERRED	high word 0x43300000 of the magic double built for an int-to-double conversion (only ever assigned that constant)
+local	_gleDrawPixelsFast	uStack_11c	intToDoubleLow1	INFERRED	low word (int ^ 0x80000000) of the magic double built for an int-to-double conversion
+local	_gleDrawPixelsFast	uStack_114	intToDoubleLow2	INFERRED	low word (int ^ 0x80000000) of the magic double built for an int-to-double conversion
+local	_gleDrawPixelsFast	uStack_10c	intToDoubleLow3	INFERRED	low word (int ^ 0x80000000) of the magic double built for an int-to-double conversion
+local	_gleDrawPixelsFast	local_108	doubleToIntScratch1	INFERRED	stack slot receiving the (longlong)(int) result of a float-to-int conversion (fctiwz/stfd), never read back
+local	_gleDrawPixelsFast	local_100	doubleToIntScratch2	INFERRED	stack slot receiving the (longlong)(int) result of a float-to-int conversion, never read back
+local	_gleDrawPixelsFast	local_f8	doubleToIntScratch3	INFERRED	stack slot receiving the (longlong)(int) result of a float-to-int conversion, never read back
+local	_gleDrawPixelsFast	auStack_210	savedDrawState	CONFIRMED	buffer filled by _gleDrawPixelsSaveState and given back to _gleDrawPixelsRestoreState
+local	_gleDrawPixelsFast	local_f0	savedDrawStateToken	CONFIRMED	return value of _gleDrawPixelsSaveState, passed back to _gleDrawPixelsRestoreState
+local	_gleDrawPixelsFast	fparam_2	destYFraction	INFERRED	tileDestY - (float)(int)tileDestY: fractional part of the destination y, passed as a float argument of _CopySourceSubImageToTexture
+local	_gleDrawPixelsFast	fparam_1	forwardedFpr1	INFERRED	f1 return value of the last call, forwarded unchanged as the f1 argument of the next calls
+local	_gleDrawPixelsFast	local_dc	glContextPlus10000	INFERRED	glContext + 0x10000: base for the negative offsets (-0x7a5c, -0x777c, ...) of the per-texture-unit records
+local	_gleDrawPixelsFast	local_e4	glContextPlus10000Copy	INFERRED	copy of glContextPlus10000 (local_dc)
+use	_gleDrawPixelsFast	iVar10	glContextPlus10000Copy2	INFERRED	copy of glContextPlus10000Copy (local_e4)	^\s*iVar10\ =\ local_e4;$	+1
+use	_gleDrawPixelsFast	iVar10	glContextPlus10000Copy2	INFERRED	copy of glContextPlus10000Copy (local_e4)	^\s*\}\ while\ \(uVar31\ <\ \*\(byte\ \*\)\(iVar10\ \+\ \-0x7a5c\)\);$	+1
+use	_gleDrawPixelsFast	iVar10	glContextPlus10000Copy2	INFERRED	copy of glContextPlus10000Copy (local_e4)	^\s*if\ \(\*\(char\ \*\)\(iVar10\ \+\ \-0x7a5c\)\ !=\ '\\0'\)\ \{$	+1
+use	_gleDrawPixelsFast	iVar10	glContextPlus10000Copy2	INFERRED	copy of glContextPlus10000Copy (local_e4)	^\s*\}\ while\ \(uVar31\ <\ \*\(byte\ \*\)\(iVar10\ \+\ \-0x7a5c\)\);$@2	+1
+use	_gleDrawPixelsFast	iVar10	glContextPlus10000Copy2	INFERRED	copy of glContextPlus10000Copy (local_e4)	^\s*if\ \(\*\(char\ \*\)\(iVar10\ \+\ \-0x7a58\)\ ==\ \*\(char\ \*\)\(iVar10\ \+\ \-0x7a5a\)\)\ \{$	+1
+use	_gleDrawPixelsFast	iVar29	glContextPlus10000Copy3	INFERRED	glContext + 0x10000: base for the per-texture-unit records walked by the loop	^\s*iVar29\ =\ param_1\ \+\ 0x10000;$	+1
+use	_gleDrawPixelsFast	iVar29	glContextPlus10000Copy3	INFERRED	glContext + 0x10000: base for the per-texture-unit records walked by the loop	^\s*piVar16\ =\ \(int\ \*\)\(iVar29\ \+\ \-0x777c\);$	+1
+use	_gleDrawPixelsFast	iVar29	glContextPlus10000Copy3	INFERRED	glContext + 0x10000: base for the per-texture-unit records walked by the loop	^\s*puVar22\ =\ \(undefined4\ \*\)\(iVar29\ \+\ \-0x7a54\);$	+2

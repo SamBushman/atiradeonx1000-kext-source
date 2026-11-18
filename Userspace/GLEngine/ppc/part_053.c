@@ -564,163 +564,163 @@ void _gleDetachShaderObjectIterFunc(unusedArg1, param_2)
 }
 
 /* _gleFreeShaderObject @ 0xf40e0 (868 bytes) */
-void _gleFreeShaderObject(glContext, param_2)
+void _gleFreeShaderObject(glContext, shaderObject)
   int glContext;
-  int param_2;
+  int shaderObject;
 {
-  int *piVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int *rendererDispatch;
+  undefined4 *rendererContextPtr;
+  int freeTargetOrLoopIndex;
+  int refCountMinusOne;
+  int subObjectOrCount;
+  int attachedListOrByteOffset;
+  int attachedObject;
   
-  if (*(int *)(param_2 + 0x10) == 0x8b40) {
-    if (*(int *)(param_2 + 0x18) != 0) {
-      _free(*(int *)(param_2 + 0x18));
+  if (*(int *)(shaderObject + 0x10) == 0x8b40) {
+    if (*(int *)(shaderObject + 0x18) != 0) {
+      _free(*(int *)(shaderObject + 0x18));
     }
-    iVar5 = *(int *)(param_2 + 0x20);
-    if (*(int *)(iVar5 + 0x518) != 0) {
-      iVar3 = *(int *)(*(int *)(iVar5 + 0x518) + 0x20);
-      if (iVar3 != 0) {
-        _gleVecFree(iVar3);
-        iVar5 = *(int *)(param_2 + 0x20);
+    subObjectOrCount = *(int *)(shaderObject + 0x20);
+    if (*(int *)(subObjectOrCount + 0x518) != 0) {
+      freeTargetOrLoopIndex = *(int *)(*(int *)(subObjectOrCount + 0x518) + 0x20);
+      if (freeTargetOrLoopIndex != 0) {
+        _gleVecFree(freeTargetOrLoopIndex);
+        subObjectOrCount = *(int *)(shaderObject + 0x20);
       }
-      iVar3 = *(int *)(*(int *)(iVar5 + 0x518) + 8);
-      if (iVar3 != 0) {
-        _gleVecFree(iVar3);
-        iVar5 = *(int *)(param_2 + 0x20);
+      freeTargetOrLoopIndex = *(int *)(*(int *)(subObjectOrCount + 0x518) + 8);
+      if (freeTargetOrLoopIndex != 0) {
+        _gleVecFree(freeTargetOrLoopIndex);
+        subObjectOrCount = *(int *)(shaderObject + 0x20);
       }
-      iVar3 = *(int *)(*(int *)(iVar5 + 0x518) + 0xc);
-      if (iVar3 != 0) {
-        _gleVecFree(iVar3);
-        iVar5 = *(int *)(param_2 + 0x20);
+      freeTargetOrLoopIndex = *(int *)(*(int *)(subObjectOrCount + 0x518) + 0xc);
+      if (freeTargetOrLoopIndex != 0) {
+        _gleVecFree(freeTargetOrLoopIndex);
+        subObjectOrCount = *(int *)(shaderObject + 0x20);
       }
-      iVar3 = *(int *)(*(int *)(iVar5 + 0x518) + 0x18);
-      if (iVar3 != 0) {
-        _gleVecFree(iVar3);
-        iVar5 = *(int *)(param_2 + 0x20);
+      freeTargetOrLoopIndex = *(int *)(*(int *)(subObjectOrCount + 0x518) + 0x18);
+      if (freeTargetOrLoopIndex != 0) {
+        _gleVecFree(freeTargetOrLoopIndex);
+        subObjectOrCount = *(int *)(shaderObject + 0x20);
       }
-      iVar3 = *(int *)(*(int *)(iVar5 + 0x518) + 0x1c);
-      if (iVar3 != 0) {
-        _gleVecFree(iVar3);
-        iVar5 = *(int *)(param_2 + 0x20);
+      freeTargetOrLoopIndex = *(int *)(*(int *)(subObjectOrCount + 0x518) + 0x1c);
+      if (freeTargetOrLoopIndex != 0) {
+        _gleVecFree(freeTargetOrLoopIndex);
+        subObjectOrCount = *(int *)(shaderObject + 0x20);
       }
-      _gleVecFree(*(undefined4 *)(iVar5 + 0x518));
+      _gleVecFree(*(undefined4 *)(subObjectOrCount + 0x518));
     }
-    iVar5 = *(int *)(param_2 + 0x24);
-    if (*(int *)(iVar5 + 0x518) != 0) {
-      iVar3 = *(int *)(*(int *)(iVar5 + 0x518) + 0x20);
-      if (iVar3 != 0) {
-        _gleVecFree(iVar3);
-        iVar5 = *(int *)(param_2 + 0x24);
+    subObjectOrCount = *(int *)(shaderObject + 0x24);
+    if (*(int *)(subObjectOrCount + 0x518) != 0) {
+      freeTargetOrLoopIndex = *(int *)(*(int *)(subObjectOrCount + 0x518) + 0x20);
+      if (freeTargetOrLoopIndex != 0) {
+        _gleVecFree(freeTargetOrLoopIndex);
+        subObjectOrCount = *(int *)(shaderObject + 0x24);
       }
-      iVar3 = *(int *)(*(int *)(iVar5 + 0x518) + 8);
-      if (iVar3 != 0) {
-        _gleVecFree(iVar3);
-        iVar5 = *(int *)(param_2 + 0x24);
+      freeTargetOrLoopIndex = *(int *)(*(int *)(subObjectOrCount + 0x518) + 8);
+      if (freeTargetOrLoopIndex != 0) {
+        _gleVecFree(freeTargetOrLoopIndex);
+        subObjectOrCount = *(int *)(shaderObject + 0x24);
       }
-      iVar3 = *(int *)(*(int *)(iVar5 + 0x518) + 0xc);
-      if (iVar3 != 0) {
-        _gleVecFree(iVar3);
-        iVar5 = *(int *)(param_2 + 0x24);
+      freeTargetOrLoopIndex = *(int *)(*(int *)(subObjectOrCount + 0x518) + 0xc);
+      if (freeTargetOrLoopIndex != 0) {
+        _gleVecFree(freeTargetOrLoopIndex);
+        subObjectOrCount = *(int *)(shaderObject + 0x24);
       }
-      iVar3 = *(int *)(*(int *)(iVar5 + 0x518) + 0x18);
-      if (iVar3 != 0) {
-        _gleVecFree(iVar3);
-        iVar5 = *(int *)(param_2 + 0x24);
+      freeTargetOrLoopIndex = *(int *)(*(int *)(subObjectOrCount + 0x518) + 0x18);
+      if (freeTargetOrLoopIndex != 0) {
+        _gleVecFree(freeTargetOrLoopIndex);
+        subObjectOrCount = *(int *)(shaderObject + 0x24);
       }
-      iVar3 = *(int *)(*(int *)(iVar5 + 0x518) + 0x1c);
-      if (iVar3 != 0) {
-        _gleVecFree(iVar3);
-        iVar5 = *(int *)(param_2 + 0x24);
+      freeTargetOrLoopIndex = *(int *)(*(int *)(subObjectOrCount + 0x518) + 0x1c);
+      if (freeTargetOrLoopIndex != 0) {
+        _gleVecFree(freeTargetOrLoopIndex);
+        subObjectOrCount = *(int *)(shaderObject + 0x24);
       }
-      _gleVecFree(*(undefined4 *)(iVar5 + 0x518));
+      _gleVecFree(*(undefined4 *)(subObjectOrCount + 0x518));
     }
-    iVar5 = *(int *)(param_2 + 0x20);
-    if (*(int *)(iVar5 + 0x4dc) != 0) {
-      _PPEmulatorProgramFree(*(int *)(iVar5 + 0x4dc));
-      iVar5 = *(int *)(param_2 + 0x20);
+    subObjectOrCount = *(int *)(shaderObject + 0x20);
+    if (*(int *)(subObjectOrCount + 0x4dc) != 0) {
+      _PPEmulatorProgramFree(*(int *)(subObjectOrCount + 0x4dc));
+      subObjectOrCount = *(int *)(shaderObject + 0x20);
     }
-    if (*(int *)(iVar5 + 0x508) != 0) {
-      _gleVecFree(*(int *)(iVar5 + 0x508));
+    if (*(int *)(subObjectOrCount + 0x508) != 0) {
+      _gleVecFree(*(int *)(subObjectOrCount + 0x508));
     }
-    iVar5 = *(int *)(*(int *)(param_2 + 0x24) + 0x508);
-    if (iVar5 != 0) {
-      _gleVecFree(iVar5);
+    subObjectOrCount = *(int *)(*(int *)(shaderObject + 0x24) + 0x508);
+    if (subObjectOrCount != 0) {
+      _gleVecFree(subObjectOrCount);
     }
-    iVar5 = *(int *)(*(int *)(param_2 + 0x20) + 0x51c);
-    if (iVar5 != 0) {
-      _gleVecFree(iVar5);
+    subObjectOrCount = *(int *)(*(int *)(shaderObject + 0x20) + 0x51c);
+    if (subObjectOrCount != 0) {
+      _gleVecFree(subObjectOrCount);
     }
-    iVar5 = *(int *)(*(int *)(param_2 + 0x24) + 0x51c);
-    if (iVar5 != 0) {
-      _gleVecFree(iVar5);
+    subObjectOrCount = *(int *)(*(int *)(shaderObject + 0x24) + 0x51c);
+    if (subObjectOrCount != 0) {
+      _gleVecFree(subObjectOrCount);
     }
-    iVar5 = *(int *)(param_2 + 0x48);
-    iVar3 = 0;
-    if (iVar5 < 1) {
-      iVar6 = *(int *)(param_2 + 0x44);
+    subObjectOrCount = *(int *)(shaderObject + 0x48);
+    freeTargetOrLoopIndex = 0;
+    if (subObjectOrCount < 1) {
+      attachedListOrByteOffset = *(int *)(shaderObject + 0x44);
     }
     else {
-      iVar6 = *(int *)(param_2 + 0x44);
+      attachedListOrByteOffset = *(int *)(shaderObject + 0x44);
       do {
-        iVar7 = *(int *)(iVar3 * 4 + iVar6);
-        if ((iVar7 != 0) &&
-           (iVar4 = *(int *)(iVar7 + 8) + -1, *(int *)(iVar7 + 8) = iVar4, iVar4 == 1)) {
+        attachedObject = *(int *)(freeTargetOrLoopIndex * 4 + attachedListOrByteOffset);
+        if ((attachedObject != 0) &&
+           (refCountMinusOne = *(int *)(attachedObject + 8) + -1, *(int *)(attachedObject + 8) = refCountMinusOne, refCountMinusOne == 1)) {
           _gleDeleteHashNameAndObject
-                    (glContext,*(int *)(glContext + 0x5148) + 0x6018,*(undefined4 *)(iVar7 + 4));
-          iVar5 = *(int *)(param_2 + 0x48);
-          iVar6 = *(int *)(param_2 + 0x44);
+                    (glContext,*(int *)(glContext + 0x5148) + 0x6018,*(undefined4 *)(attachedObject + 4));
+          subObjectOrCount = *(int *)(shaderObject + 0x48);
+          attachedListOrByteOffset = *(int *)(shaderObject + 0x44);
         }
-        iVar3 = iVar3 + 1;
-      } while (iVar3 < iVar5);
+        freeTargetOrLoopIndex = freeTargetOrLoopIndex + 1;
+      } while (freeTargetOrLoopIndex < subObjectOrCount);
     }
-    if (iVar6 != 0) {
-      _free(iVar6);
+    if (attachedListOrByteOffset != 0) {
+      _free(attachedListOrByteOffset);
     }
-    if (*(int *)(param_2 + 0x40) != 0) {
-      _ShDestruct(*(int *)(param_2 + 0x40));
+    if (*(int *)(shaderObject + 0x40) != 0) {
+      _ShDestruct(*(int *)(shaderObject + 0x40));
     }
-    iVar5 = 0;
+    subObjectOrCount = 0;
     if (*(char *)(glContext + 0x85a4) != '\0') {
-      iVar3 = glContext + 0x85a0;
+      freeTargetOrLoopIndex = glContext + 0x85a0;
       do {
-        iVar6 = iVar5 * 4;
-        iVar5 = iVar5 + 1;
-        (**(code **)(*(int *)(iVar3 + 0x2e4) + 0x1a0))
-                  (*(undefined4 *)(iVar3 + 0xc),
-                   *(undefined4 *)(iVar6 + *(int *)(param_2 + 0x20) + 0x4e4));
-        piVar1 = (int *)(iVar3 + 0x2e4);
-        puVar2 = (undefined4 *)(iVar3 + 0xc);
-        iVar3 = iVar3 + 0x2e0;
-        (**(code **)(*piVar1 + 0x1a0))
-                  (*puVar2,*(undefined4 *)(iVar6 + *(int *)(param_2 + 0x24) + 0x4e4));
-      } while (iVar5 < (int)(uint)*(byte *)(glContext + 0x85a4));
+        attachedListOrByteOffset = subObjectOrCount * 4;
+        subObjectOrCount = subObjectOrCount + 1;
+        (**(code **)(*(int *)(freeTargetOrLoopIndex + 0x2e4) + 0x1a0))
+                  (*(undefined4 *)(freeTargetOrLoopIndex + 0xc),
+                   *(undefined4 *)(attachedListOrByteOffset + *(int *)(shaderObject + 0x20) + 0x4e4));
+        rendererDispatch = (int *)(freeTargetOrLoopIndex + 0x2e4);
+        rendererContextPtr = (undefined4 *)(freeTargetOrLoopIndex + 0xc);
+        freeTargetOrLoopIndex = freeTargetOrLoopIndex + 0x2e0;
+        (**(code **)(*rendererDispatch + 0x1a0))
+                  (*rendererContextPtr,*(undefined4 *)(attachedListOrByteOffset + *(int *)(shaderObject + 0x24) + 0x4e4));
+      } while (subObjectOrCount < (int)(uint)*(byte *)(glContext + 0x85a4));
     }
-    if (*(int *)(param_2 + 0x20) != 0) {
-      _gleVecFree(*(int *)(param_2 + 0x20));
+    if (*(int *)(shaderObject + 0x20) != 0) {
+      _gleVecFree(*(int *)(shaderObject + 0x20));
     }
-    if (*(int *)(param_2 + 0x24) != 0) {
-      _gleVecFree(*(int *)(param_2 + 0x24));
+    if (*(int *)(shaderObject + 0x24) != 0) {
+      _gleVecFree(*(int *)(shaderObject + 0x24));
     }
-    if (*(int *)(param_2 + 0x4c) != 0) {
-      _gleVecFree(*(int *)(param_2 + 0x4c));
-    }
-  }
-  else if ((*(int *)(param_2 + 0x10) == 0x8b48) && (*(int *)(param_2 + 0x20) - 0x8b30U < 2)) {
-    if (*(int *)(param_2 + 0x2c) != 0) {
-      _free(*(int *)(param_2 + 0x2c));
-    }
-    if (*(int *)(param_2 + 0x18) != 0) {
-      _free(*(int *)(param_2 + 0x18));
-    }
-    if (*(int *)(param_2 + 0x30) != 0) {
-      _ShDestruct(*(int *)(param_2 + 0x30));
+    if (*(int *)(shaderObject + 0x4c) != 0) {
+      _gleVecFree(*(int *)(shaderObject + 0x4c));
     }
   }
-  _gleVecFree(param_2);
+  else if ((*(int *)(shaderObject + 0x10) == 0x8b48) && (*(int *)(shaderObject + 0x20) - 0x8b30U < 2)) {
+    if (*(int *)(shaderObject + 0x2c) != 0) {
+      _free(*(int *)(shaderObject + 0x2c));
+    }
+    if (*(int *)(shaderObject + 0x18) != 0) {
+      _free(*(int *)(shaderObject + 0x18));
+    }
+    if (*(int *)(shaderObject + 0x30) != 0) {
+      _ShDestruct(*(int *)(shaderObject + 0x30));
+    }
+  }
+  _gleVecFree(shaderObject);
   return;
 }
 

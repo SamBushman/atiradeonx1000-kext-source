@@ -1161,179 +1161,179 @@ int _glepGetPlugin(pluginId)
 }
 
 /* _gliCreateContext @ 0x2d18 (1112 bytes) */
-int _gliCreateContext(param_1, param_2, param_3, param_4, param_5, param_6, unusedArg7, unusedArg8)
-  int *param_1;
-  int *param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  uint param_6;
+int _gliCreateContext(contextOut, rendererList, shareContext, dispatchTable4680, dispatchTable4684, createFlags, unusedArg7, unusedArg8)
+  int *contextOut;
+  int *rendererList;
+  int shareContext;
+  undefined4 dispatchTable4680;
+  undefined4 dispatchTable4684;
+  uint createFlags;
   undefined4 unusedArg7;
   undefined4 unusedArg8;
 {
   uint loopIndex3;
   int loopIndex2;
   int loopIndex;
-  undefined4 *puVar1;
-  bool bVar2;
-  bool bVar3;
-  int iVar4;
+  undefined4 *rendererContextPtr;
+  bool flagOrAllPluginsLoaded;
+  bool flagOrNoShareContext;
+  int rendererRecord;
   int glContext;
   uint pluginId;
-  int iVar7;
-  undefined4 uVar8;
-  int iVar9;
-  int iVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  int *piVar14;
+  int pluginOrOffsetOrReleaseResult;
+  undefined4 sharedStateOrShareArg;
+  int sharedStateOrResult;
+  int rendererCursorOrIndex;
+  uint entryIndex;
+  uint defaultIndexOrPluginFlags;
+  uint rendererCountOrPluginId;
+  int *listEntryOrRendererDispatch;
   
-  uVar12 = 0xff;
-  bVar3 = false;
-  if (param_1 == (int *)0x0) {
+  defaultIndexOrPluginFlags = 0xff;
+  flagOrNoShareContext = false;
+  if (contextOut == (int *)0x0) {
     return 0x271e;
   }
-  *param_1 = 0;
-  uVar13 = 0;
-  piVar14 = param_2;
-  if (param_2 != (int *)0x0) {
+  *contextOut = 0;
+  rendererCountOrPluginId = 0;
+  listEntryOrRendererDispatch = rendererList;
+  if (rendererList != (int *)0x0) {
     do {
-      uVar11 = uVar13;
-      if ((piVar14[1] & 0xff0000U) != 0x20000) {
+      entryIndex = rendererCountOrPluginId;
+      if ((listEntryOrRendererDispatch[1] & 0xff0000U) != 0x20000) {
         return 0x2712;
       }
-      if ((piVar14[2] & 0x40U) == 0) {
-        bVar3 = true;
+      if ((listEntryOrRendererDispatch[2] & 0x40U) == 0) {
+        flagOrNoShareContext = true;
       }
-      uVar13 = piVar14[1] & 0xff00;
-      if ((uVar13 == 0x400) || (uVar13 == 0x500)) {
-        uVar12 = uVar11;
+      rendererCountOrPluginId = listEntryOrRendererDispatch[1] & 0xff00;
+      if ((rendererCountOrPluginId == 0x400) || (rendererCountOrPluginId == 0x500)) {
+        defaultIndexOrPluginFlags = entryIndex;
       }
-      piVar14 = (int *)*piVar14;
-      uVar13 = uVar11 + 1;
-    } while (piVar14 != (int *)0x0);
-    if (uVar13 != 0) {
-      bVar2 = false;
-      if ((bVar3) && ((param_6 & 1) != 0)) {
-        bVar2 = true;
+      listEntryOrRendererDispatch = (int *)*listEntryOrRendererDispatch;
+      rendererCountOrPluginId = entryIndex + 1;
+    } while (listEntryOrRendererDispatch != (int *)0x0);
+    if (rendererCountOrPluginId != 0) {
+      flagOrAllPluginsLoaded = false;
+      if ((flagOrNoShareContext) && ((createFlags & 1) != 0)) {
+        flagOrAllPluginsLoaded = true;
       }
-      if (bVar2) {
-        if (uVar12 == 0xff) {
-          uVar12 = uVar13;
-          uVar13 = uVar11 + 2;
+      if (flagOrAllPluginsLoaded) {
+        if (defaultIndexOrPluginFlags == 0xff) {
+          defaultIndexOrPluginFlags = rendererCountOrPluginId;
+          rendererCountOrPluginId = entryIndex + 2;
         }
       }
       else {
-        uVar12 = 0xff;
+        defaultIndexOrPluginFlags = 0xff;
       }
-      if (8 < (int)uVar13) {
+      if (8 < (int)rendererCountOrPluginId) {
         return 0x2712;
       }
-      bVar3 = param_3 == 0;
-      if ((!bVar3) &&
-         ((*(int *)(param_3 + 0x467c) != 0x3463a223 || (*(byte *)(param_3 + 0x85a4) != uVar13)))) {
+      flagOrNoShareContext = shareContext == 0;
+      if ((!flagOrNoShareContext) &&
+         ((*(int *)(shareContext + 0x467c) != 0x3463a223 || (*(byte *)(shareContext + 0x85a4) != rendererCountOrPluginId)))) {
         return 0x2719;
       }
-      glContext = ((int (*)())_gleDCBAlloc)(uVar13 * 0x2e0 + 0x85b0);
+      glContext = ((int (*)())_gleDCBAlloc)(rendererCountOrPluginId * 0x2e0 + 0x85b0);
       if (glContext == 0) {
         return 0x2720;
       }
       loopIndex3 = 0;
-      bVar2 = uVar13 == 0;
+      flagOrAllPluginsLoaded = rendererCountOrPluginId == 0;
       *(undefined2 *)(glContext + 0x360) = 2;
       *(undefined2 *)(glContext + 0x362) = 4;
       *(undefined1 *)(glContext + 0x85a6) = 0;
-      *(char *)(glContext + 0x85a5) = (char)uVar12;
-      *(undefined4 *)(glContext + 0x4680) = param_4;
-      *(undefined4 *)(glContext + 0x4684) = param_5;
+      *(char *)(glContext + 0x85a5) = (char)defaultIndexOrPluginFlags;
+      *(undefined4 *)(glContext + 0x4680) = dispatchTable4680;
+      *(undefined4 *)(glContext + 0x4684) = dispatchTable4684;
       *(undefined4 *)(glContext + 0x5148) = 0;
-      *(char *)(glContext + 0x85a4) = (char)uVar13;
-      if (0 < (int)uVar13) {
-        iVar10 = glContext + 0x85ac;
+      *(char *)(glContext + 0x85a4) = (char)rendererCountOrPluginId;
+      if (0 < (int)rendererCountOrPluginId) {
+        rendererCursorOrIndex = glContext + 0x85ac;
         loopIndex2 = 0;
-        piVar14 = param_2;
+        listEntryOrRendererDispatch = rendererList;
         do {
-          _memset(iVar10,0,0x2e0);
-          if (piVar14 == (int *)0x0) {
-            uVar12 = 0x400;
-            iVar7 = ((int (*)())_glepGetPlugin)(0x400);
-            piVar14 = param_2;
-            if (iVar7 == 0) {
+          _memset(rendererCursorOrIndex,0,0x2e0);
+          if (listEntryOrRendererDispatch == (int *)0x0) {
+            defaultIndexOrPluginFlags = 0x400;
+            pluginOrOffsetOrReleaseResult = ((int (*)())_glepGetPlugin)(0x400);
+            listEntryOrRendererDispatch = rendererList;
+            if (pluginOrOffsetOrReleaseResult == 0) {
               pluginId = 0x500;
-              uVar12 = 0x500;
+              defaultIndexOrPluginFlags = 0x500;
               goto LAB_00002ef4;
             }
           }
           else {
-            pluginId = piVar14[1] & 0xff00;
-            uVar12 = piVar14[1] & 0xff00ffff;
+            pluginId = listEntryOrRendererDispatch[1] & 0xff00;
+            defaultIndexOrPluginFlags = listEntryOrRendererDispatch[1] & 0xff00ffff;
 LAB_00002ef4:
-            iVar7 = ((int (*)())_glepGetPlugin)(pluginId);
-            if (iVar7 == 0) {
-              bVar2 = loopIndex3 == uVar13;
+            pluginOrOffsetOrReleaseResult = ((int (*)())_glepGetPlugin)(pluginId);
+            if (pluginOrOffsetOrReleaseResult == 0) {
+              flagOrAllPluginsLoaded = loopIndex3 == rendererCountOrPluginId;
               break;
             }
           }
           loopIndex3 = loopIndex3 + 1;
-          iVar4 = loopIndex2 + glContext;
-          bVar2 = loopIndex3 == uVar13;
+          rendererRecord = loopIndex2 + glContext;
+          flagOrAllPluginsLoaded = loopIndex3 == rendererCountOrPluginId;
           loopIndex2 = loopIndex2 + 0x2e0;
-          *(int *)(iVar4 + 0x8884) = iVar7;
-          iVar10 = iVar10 + 0x2e0;
-          *(uint *)(iVar4 + 0x8888) = uVar12;
-          piVar14 = (int *)*piVar14;
-        } while ((int)loopIndex3 < (int)uVar13);
+          *(int *)(rendererRecord + 0x8884) = pluginOrOffsetOrReleaseResult;
+          rendererCursorOrIndex = rendererCursorOrIndex + 0x2e0;
+          *(uint *)(rendererRecord + 0x8888) = defaultIndexOrPluginFlags;
+          listEntryOrRendererDispatch = (int *)*listEntryOrRendererDispatch;
+        } while ((int)loopIndex3 < (int)rendererCountOrPluginId);
       }
-      if (bVar2) {
-        if (bVar3) {
-          uVar8 = ((int (*)())_gleCreateSharedState)(glContext);
+      if (flagOrAllPluginsLoaded) {
+        if (flagOrNoShareContext) {
+          sharedStateOrShareArg = ((int (*)())_gleCreateSharedState)(glContext);
         }
         else {
-          uVar8 = _gleShareSharedState(param_3);
+          sharedStateOrShareArg = _gleShareSharedState(shareContext);
         }
-        *(undefined4 *)(glContext + 0x5148) = uVar8;
-        iVar9 = *(int *)(glContext + 0x5148);
-        if (iVar9 == 0) {
+        *(undefined4 *)(glContext + 0x5148) = sharedStateOrShareArg;
+        sharedStateOrResult = *(int *)(glContext + 0x5148);
+        if (sharedStateOrResult == 0) {
           _gleDCBFree(glContext);
           return 0x2720;
         }
-        iVar10 = 0;
-        piVar14 = param_2;
-        if (0 < (int)uVar13) {
+        rendererCursorOrIndex = 0;
+        listEntryOrRendererDispatch = rendererList;
+        if (0 < (int)rendererCountOrPluginId) {
           while( true ) {
-            if (piVar14 == (int *)0x0) {
-              piVar14 = param_2;
+            if (listEntryOrRendererDispatch == (int *)0x0) {
+              listEntryOrRendererDispatch = rendererList;
             }
-            iVar7 = iVar10 * 0x2e0;
-            if (bVar3) {
-              uVar8 = 0;
+            pluginOrOffsetOrReleaseResult = rendererCursorOrIndex * 0x2e0;
+            if (flagOrNoShareContext) {
+              sharedStateOrShareArg = 0;
             }
             else {
-              uVar8 = *(undefined4 *)(iVar7 + param_3 + 0x85ac);
+              sharedStateOrShareArg = *(undefined4 *)(pluginOrOffsetOrReleaseResult + shareContext + 0x85ac);
             }
-            iVar9 = (**(code **)(*(int *)(iVar7 + glContext + 0x8884) + 300))
-                              (iVar7 + glContext + 0x85ac,piVar14,
-                               *(undefined4 *)(iVar10 * 4 + iVar9 + 0x8054),uVar8,
-                               glContext + iVar7 + 0x85b0,glContext + 0x360,glContext + iVar7 + 0x86e0);
-            if (iVar9 != 0) {
-              iVar7 = _gleReleaseSharedState(glContext);
-              if (-1 < iVar10) {
-                iVar4 = iVar10 * 0x2e0 + glContext + 0x10000;
+            sharedStateOrResult = (**(code **)(*(int *)(pluginOrOffsetOrReleaseResult + glContext + 0x8884) + 300))
+                              (pluginOrOffsetOrReleaseResult + glContext + 0x85ac,listEntryOrRendererDispatch,
+                               *(undefined4 *)(rendererCursorOrIndex * 4 + sharedStateOrResult + 0x8054),sharedStateOrShareArg,
+                               glContext + pluginOrOffsetOrReleaseResult + 0x85b0,glContext + 0x360,glContext + pluginOrOffsetOrReleaseResult + 0x86e0);
+            if (sharedStateOrResult != 0) {
+              pluginOrOffsetOrReleaseResult = _gleReleaseSharedState(glContext);
+              if (-1 < rendererCursorOrIndex) {
+                rendererRecord = rendererCursorOrIndex * 0x2e0 + glContext + 0x10000;
                 do {
-                  piVar14 = (int *)(iVar4 + -0x777c);
-                  puVar1 = (undefined4 *)(iVar4 + -0x7a54);
-                  iVar4 = iVar4 + -0x2e0;
-                  (**(code **)(*piVar14 + 0x130))(*puVar1);
-                  iVar10 = iVar10 + -1;
-                } while (-1 < iVar10);
+                  listEntryOrRendererDispatch = (int *)(rendererRecord + -0x777c);
+                  rendererContextPtr = (undefined4 *)(rendererRecord + -0x7a54);
+                  rendererRecord = rendererRecord + -0x2e0;
+                  (**(code **)(*listEntryOrRendererDispatch + 0x130))(*rendererContextPtr);
+                  rendererCursorOrIndex = rendererCursorOrIndex + -1;
+                } while (-1 < rendererCursorOrIndex);
               }
               goto LAB_00003108;
             }
-            iVar10 = iVar10 + 1;
-            piVar14 = (int *)*piVar14;
-            if ((int)uVar13 <= iVar10) break;
-            iVar9 = *(int *)(glContext + 0x5148);
+            rendererCursorOrIndex = rendererCursorOrIndex + 1;
+            listEntryOrRendererDispatch = (int *)*listEntryOrRendererDispatch;
+            if ((int)rendererCountOrPluginId <= rendererCursorOrIndex) break;
+            sharedStateOrResult = *(int *)(glContext + 0x5148);
           }
         }
         *(int *)(glContext + 0x468c) = glContext + 0x85b0;
@@ -1343,34 +1343,34 @@ LAB_00002ef4:
         if (_gl_list == 0) {
           ((int (*)())_gleCreateEnableHashTable)();
         }
-        iVar9 = ((int (*)())_gleInitializeContext)(glContext);
-        if (iVar9 == 0) {
+        sharedStateOrResult = ((int (*)())_gleInitializeContext)(glContext);
+        if (sharedStateOrResult == 0) {
           _gliSetCurrentPluginDispatchTable(glContext);
           _gliInitDispatchTable(glContext);
           _gliExecDispatchTable(glContext);
           *(int *)(glContext + 0x85a0) = _gl_list;
           _gl_list = glContext;
-          *param_1 = glContext;
+          *contextOut = glContext;
           return 0;
         }
         loopIndex = 0;
-        iVar7 = _gleReleaseSharedState(glContext);
+        pluginOrOffsetOrReleaseResult = _gleReleaseSharedState(glContext);
         if (*(char *)(glContext + 0x85a4) != '\0') {
-          iVar4 = glContext + 0x10000;
+          rendererRecord = glContext + 0x10000;
           do {
-            piVar14 = (int *)(iVar4 + -0x777c);
+            listEntryOrRendererDispatch = (int *)(rendererRecord + -0x777c);
             loopIndex = loopIndex + 1;
-            puVar1 = (undefined4 *)(iVar4 + -0x7a54);
-            iVar4 = iVar4 + 0x2e0;
-            (**(code **)(*piVar14 + 0x130))(*puVar1);
+            rendererContextPtr = (undefined4 *)(rendererRecord + -0x7a54);
+            rendererRecord = rendererRecord + 0x2e0;
+            (**(code **)(*listEntryOrRendererDispatch + 0x130))(*rendererContextPtr);
           } while (loopIndex < (int)(uint)*(byte *)(glContext + 0x85a4));
         }
 LAB_00003108:
-        if (iVar7 != 0) {
+        if (pluginOrOffsetOrReleaseResult != 0) {
           _gleDestroySharedState(glContext);
         }
         _gleDCBFree(glContext);
-        return iVar9;
+        return sharedStateOrResult;
       }
       _gleDCBFree(glContext);
     }

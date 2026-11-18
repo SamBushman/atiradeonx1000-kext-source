@@ -2920,161 +2920,172 @@ LAB_000e18b8:
 }
 
 /* _gle_dtostr @ 0xe18ec (1096 bytes) */
-char * _gle_dtostr(undefined4 unusedArg1,undefined4 unusedArg2,char *param_3,uint param_4,double fparam_1,double fparam_2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+char * _gle_dtostr(undefined4 unusedArg1,undefined4 unusedArg2,char *buffer,uint bufferSize,double value,double tolerance,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  char *pcVar1;
-  char cVar2;
-  double dVar3;
-  int iVar4;
-  char *pcVar5;
-  char *pcVar6;
-  char *pcVar7;
-  double dVar8;
-  double dVar9;
-  double dVar10;
-  double dVar11;
-  uint local_50 [6];
+  char *exponentWritePtr;
+  char *exponentReverseEnd;
+  char swapTemp;
+  double ten;
+  int reverseSpan;
+  char *bufferEnd;
+  char *writePtr;
+  char *reverseRight;
+  char *resultPtr;
+  char *exponentDigitsStart;
+  double doubleZero;
+  double scaledValue;
+  double pow10OfExponent;
+  double decimalExponentRounded;
+  double pow10OfNegExponent;
+  double fractionDigitValue;
+  double integerPartOfValue;
+  double oneTenth;
+  double scaledTolerance;
+  double tenForFraction;
+  double integerPartRemaining;
+  double integerPartTimesTenth;
+  uint exponent [6];
   
-  dVar8 = DOUBLE_00108d60;
-  pcVar5 = param_3 + param_4;
-  if (fparam_2 <= DOUBLE_00108d60) {
-    fparam_2 = DOUBLE_00108e18;
+  doubleZero = DOUBLE_00108d60;
+  bufferEnd = buffer + bufferSize;
+  if (tolerance <= DOUBLE_00108d60) {
+    tolerance = DOUBLE_00108e18;
   }
-  if (param_4 < 2) {
+  if (bufferSize < 2) {
     return (char *)0x0;
   }
-  if (fparam_1 < DOUBLE_00108d60) {
-    fparam_1 = -fparam_1;
-    *param_3 = '-';
-    param_3 = param_3 + 1;
+  if (value < DOUBLE_00108d60) {
+    value = -value;
+    *buffer = '-';
+    buffer = buffer + 1;
   }
-  dVar10 = fparam_2;
-  if (dVar8 < fparam_1) {
-    if ((fparam_1 < DOUBLE_00108e20) || (DOUBLE_00108e30 < fparam_1)) {
-      _frexp(fparam_1,local_50);
-      dVar8 = _round(((double)CONCAT44(0x43300000,local_50[0] ^ 0x80000000) - DOUBLE_00108d58) *
+  scaledTolerance = tolerance;
+  if (doubleZero < value) {
+    if ((value < DOUBLE_00108e20) || (DOUBLE_00108e30 < value)) {
+      _frexp(value,exponent);
+      decimalExponentRounded = _round(((double)CONCAT44(0x43300000,exponent[0] ^ 0x80000000) - DOUBLE_00108d58) *
                      DOUBLE_00108e28);
-      local_50[0] = (uint)(int)dVar8;
-      dVar8 = (double)((double (*)())_pow_10)(local_50[0]);
-      dVar9 = (double)((double (*)())_pow_10)(-local_50[0]);
-      dVar10 = fparam_2 * dVar8;
-      dVar8 = fparam_1 * dVar9;
+      exponent[0] = (uint)(int)decimalExponentRounded;
+      pow10OfExponent = (double)((double (*)())_pow_10)(exponent[0]);
+      pow10OfNegExponent = (double)((double (*)())_pow_10)(-exponent[0]);
+      scaledTolerance = tolerance * pow10OfExponent;
+      scaledValue = value * pow10OfNegExponent;
     }
     else {
-      local_50[0] = 0;
-      dVar8 = fparam_1;
+      exponent[0] = 0;
+      scaledValue = value;
     }
-    for (; DOUBLE_00108e10 <= dVar8 + fparam_2 * DOUBLE_00108dc0; dVar8 = dVar8 * DOUBLE_00108e08) {
-      local_50[0] = local_50[0] + 1;
-      dVar10 = dVar10 * DOUBLE_00108e10;
+    for (; DOUBLE_00108e10 <= scaledValue + tolerance * DOUBLE_00108dc0; scaledValue = scaledValue * DOUBLE_00108e08) {
+      exponent[0] = exponent[0] + 1;
+      scaledTolerance = scaledTolerance * DOUBLE_00108e10;
     }
-    for (; dVar8 + fparam_2 * DOUBLE_00108dc0 < DOUBLE_00108d68; dVar8 = dVar8 * DOUBLE_00108e10) {
-      local_50[0] = local_50[0] - 1;
-      dVar10 = dVar10 * DOUBLE_00108e08;
+    for (; scaledValue + tolerance * DOUBLE_00108dc0 < DOUBLE_00108d68; scaledValue = scaledValue * DOUBLE_00108e10) {
+      exponent[0] = exponent[0] - 1;
+      scaledTolerance = scaledTolerance * DOUBLE_00108e08;
     }
-    if (3 < (int)(((int)local_50[0] >> 0x1f ^ local_50[0]) - ((int)local_50[0] >> 0x1f)))
+    if (3 < (int)(((int)exponent[0] >> 0x1f ^ exponent[0]) - ((int)exponent[0] >> 0x1f)))
     goto LAB_000e1adc;
   }
-  local_50[0] = 0;
-  dVar8 = fparam_1;
-  fparam_2 = dVar10;
+  exponent[0] = 0;
+  scaledValue = value;
+  tolerance = scaledTolerance;
 LAB_000e1adc:
-  dVar8 = fparam_2 * DOUBLE_00108dc0 + dVar8;
-  dVar10 = _floor(dVar8);
-  dVar3 = DOUBLE_00108e10;
-  dVar9 = DOUBLE_00108e08;
-  pcVar6 = param_3;
-  while (fparam_2 < dVar10) {
-    if (pcVar6 == pcVar5) {
+  scaledValue = tolerance * DOUBLE_00108dc0 + scaledValue;
+  integerPartRemaining = _floor(scaledValue);
+  ten = DOUBLE_00108e10;
+  oneTenth = DOUBLE_00108e08;
+  writePtr = buffer;
+  while (tolerance < integerPartRemaining) {
+    if (writePtr == bufferEnd) {
       return (char *)0x0;
     }
-    dVar11 = dVar10 * dVar9;
-    dVar10 = _floor(dVar11);
-    *pcVar6 = (char)(int)((dVar11 - dVar10) * dVar3) + '0';
-    pcVar6 = pcVar6 + 1;
+    integerPartTimesTenth = integerPartRemaining * oneTenth;
+    integerPartRemaining = _floor(integerPartTimesTenth);
+    *writePtr = (char)(int)((integerPartTimesTenth - integerPartRemaining) * ten) + '0';
+    writePtr = writePtr + 1;
   }
-  if (param_3 < pcVar6) {
-    iVar4 = (int)pcVar6 - (int)param_3;
-    pcVar7 = pcVar6;
-    while (1 < iVar4) {
-      pcVar7 = pcVar7 + -1;
-      cVar2 = *pcVar7;
-      *pcVar7 = *param_3;
-      *param_3 = cVar2;
-      param_3 = param_3 + 1;
-      iVar4 = (int)pcVar7 - (int)param_3;
+  if (buffer < writePtr) {
+    reverseSpan = (int)writePtr - (int)buffer;
+    reverseRight = writePtr;
+    while (1 < reverseSpan) {
+      reverseRight = reverseRight + -1;
+      swapTemp = *reverseRight;
+      *reverseRight = *buffer;
+      *buffer = swapTemp;
+      buffer = buffer + 1;
+      reverseSpan = (int)reverseRight - (int)buffer;
     }
   }
   else {
-    *pcVar6 = '0';
-    pcVar6 = pcVar6 + 1;
+    *writePtr = '0';
+    writePtr = writePtr + 1;
   }
-  dVar9 = _floor(dVar8);
-  dVar10 = DOUBLE_00108e10;
-  dVar8 = dVar8 - dVar9;
-  if (fparam_2 < dVar8) {
-    if (pcVar6 == pcVar5) {
+  integerPartOfValue = _floor(scaledValue);
+  tenForFraction = DOUBLE_00108e10;
+  scaledValue = scaledValue - integerPartOfValue;
+  if (tolerance < scaledValue) {
+    if (writePtr == bufferEnd) {
       return (char *)0x0;
     }
-    *pcVar6 = '.';
-    pcVar6 = pcVar6 + 1;
+    *writePtr = '.';
+    writePtr = writePtr + 1;
     do {
-      if (pcVar6 == pcVar5) {
+      if (writePtr == bufferEnd) {
         return (char *)0x0;
       }
-      dVar8 = dVar8 * dVar10;
-      fparam_2 = fparam_2 * dVar10;
-      dVar9 = _floor(dVar8);
-      dVar8 = dVar8 - dVar9;
-      *pcVar6 = (char)(int)dVar9 + '0';
-      pcVar6 = pcVar6 + 1;
-    } while (fparam_2 < dVar8);
+      scaledValue = scaledValue * tenForFraction;
+      tolerance = tolerance * tenForFraction;
+      fractionDigitValue = _floor(scaledValue);
+      scaledValue = scaledValue - fractionDigitValue;
+      *writePtr = (char)(int)fractionDigitValue + '0';
+      writePtr = writePtr + 1;
+    } while (tolerance < scaledValue);
   }
-  else if (local_50[0] == 0) {
-    if ((int)pcVar5 - (int)pcVar6 < 2) {
+  else if (exponent[0] == 0) {
+    if ((int)bufferEnd - (int)writePtr < 2) {
       return (char *)0x0;
     }
-    *pcVar6 = '.';
-    pcVar6[1] = '0';
-    pcVar6 = pcVar6 + 2;
+    *writePtr = '.';
+    writePtr[1] = '0';
+    writePtr = writePtr + 2;
   }
-  if (local_50[0] != 0) {
-    if ((int)pcVar5 - (int)pcVar6 < 3) {
+  if (exponent[0] != 0) {
+    if ((int)bufferEnd - (int)writePtr < 3) {
       return (char *)0x0;
     }
-    *pcVar6 = 'e';
-    pcVar7 = pcVar6 + 1;
-    pcVar1 = pcVar7;
-    if ((int)local_50[0] < 0) {
-      local_50[0] = -local_50[0];
-      *pcVar7 = '-';
-      pcVar7 = pcVar6 + 2;
-      pcVar1 = pcVar7;
+    *writePtr = 'e';
+    exponentDigitsStart = writePtr + 1;
+    exponentWritePtr = exponentDigitsStart;
+    if ((int)exponent[0] < 0) {
+      exponent[0] = -exponent[0];
+      *exponentDigitsStart = '-';
+      exponentDigitsStart = writePtr + 2;
+      exponentWritePtr = exponentDigitsStart;
     }
-    while (pcVar6 = pcVar1, 0 < (int)local_50[0]) {
-      if (pcVar6 == pcVar5) {
+    while (writePtr = exponentWritePtr, 0 < (int)exponent[0]) {
+      if (writePtr == bufferEnd) {
         return (char *)0x0;
       }
-      *pcVar6 = (char)local_50[0] + (char)((int)local_50[0] / 10) * -10 + '0';
-      local_50[0] = (int)local_50[0] / 10;
-      pcVar1 = pcVar6 + 1;
+      *writePtr = (char)exponent[0] + (char)((int)exponent[0] / 10) * -10 + '0';
+      exponent[0] = (int)exponent[0] / 10;
+      exponentWritePtr = writePtr + 1;
     }
-    iVar4 = (int)pcVar6 - (int)pcVar7;
-    pcVar1 = pcVar6;
-    while (1 < iVar4) {
-      pcVar1 = pcVar1 + -1;
-      cVar2 = *pcVar1;
-      *pcVar1 = *pcVar7;
-      *pcVar7 = cVar2;
-      pcVar7 = pcVar7 + 1;
-      iVar4 = (int)pcVar1 - (int)pcVar7;
+    reverseSpan = (int)writePtr - (int)exponentDigitsStart;
+    exponentReverseEnd = writePtr;
+    while (1 < reverseSpan) {
+      exponentReverseEnd = exponentReverseEnd + -1;
+      swapTemp = *exponentReverseEnd;
+      *exponentReverseEnd = *exponentDigitsStart;
+      *exponentDigitsStart = swapTemp;
+      exponentDigitsStart = exponentDigitsStart + 1;
+      reverseSpan = (int)exponentReverseEnd - (int)exponentDigitsStart;
     }
   }
-  pcVar7 = (char *)0x0;
-  if (pcVar6 != pcVar5) {
-    *pcVar6 = '\0';
-    pcVar7 = pcVar6;
+  resultPtr = (char *)0x0;
+  if (writePtr != bufferEnd) {
+    *writePtr = '\0';
+    resultPtr = writePtr;
   }
-  return pcVar7;
+  return resultPtr;
 }
 

@@ -1226,7 +1226,7 @@ void _gleGenerateMipmapData(glContext, texture, face, sourceLevel, lastLevelThen
   int bytesPerPixel;
   int savedGlContext;
   int decodedData;
-  int iVar10;
+  int dstOrSrcCursorOrColumns;
   undefined4 rgbaRowBytes;
   undefined4 compressedBuffer;
   undefined4 compressedRowBytes;
@@ -1235,8 +1235,8 @@ void _gleGenerateMipmapData(glContext, texture, face, sourceLevel, lastLevelThen
   int incomingR8;
   undefined *puVar15;
   int incomingR10;
-  int iVar16;
-  int iVar17;
+  int cursorOrColumnsOrSkipBytes;
+  int srcCursor3;
   int dstCursor3;
   int columnsRemaining3;
   int sliceBytes;
@@ -1247,24 +1247,25 @@ void _gleGenerateMipmapData(glContext, texture, face, sourceLevel, lastLevelThen
   int rowBytes;
   int dstCursor4;
   int pixelStep;
-  int iVar23;
-  int iVar24;
-  int iVar25;
-  int iVar26;
-  int iVar27;
-  uint uVar28;
-  int iVar29;
-  int iVar30;
-  int iVar31;
+  int srcCursorLevelImageOrOffset;
+  int dstOrSrcCursorOrSkipBytes;
+  int dstOrSrcCursor;
+  int rowPixelsStrideOrCursor;
+  int cursorOrStrideOrCount;
+  uint typeBorderDepthOrRowCount;
+  int dstOrSrcCursorOrColumns2;
+  int dstCursor;
+  int dstCursor2;
   byte in_xer_so = 0;
-  byte bVar32;
-  byte in_cr1;
-  byte bVar33;
-  byte bVar34;
-  byte unaff_cr4;
-  byte in_cr5;
-  byte in_cr6;
-  byte bVar35;
+  byte borderCompareCr;
+  byte incomingCr1;
+  byte dimensionsCompareCr1;
+  byte dimensionsCompareCr2;
+  byte incomingCr4;
+  byte incomingCr5;
+  byte incomingCr6;
+  byte pixelTypeCompareCr;
+  byte savedCrHighByte;
   int iStack00000018;
   int iStack0000001c;
   int iStack00000020;
@@ -1313,23 +1314,23 @@ void _gleGenerateMipmapData(glContext, texture, face, sourceLevel, lastLevelThen
   int rowPadBytes;
   uint slicesRemaining;
   int borderCopy;
-  int local_9c;
-  int local_98;
-  int local_94;
-  int local_90;
+  int pixelPairBytesCopy5;
+  int pixelPairBytesCopy6;
+  int pixelPairBytesCopy7;
+  int sliceSkipBytes;
   int firstGeneratedLevel;
-  int local_88;
-  int local_84;
-  int local_80;
-  uint local_7c;
-  uint local_78;
-  int local_74;
-  uint local_70;
-  int local_6c;
-  int local_68;
-  int local_64;
-  int local_60;
-  int local_5c;
+  int rowSkipBytes5;
+  int pixelPairBytesCopy8;
+  int srcPixelAdvance3;
+  uint savedCrFields;
+  uint savedCrFields2;
+  int pixelPairBytes;
+  uint savedCrFields3;
+  int pixelPairBytesCopy1;
+  int pixelPairBytesCopy2;
+  int pixelPairBytesCopy3;
+  int srcPixelAdvance4;
+  int pixelPairBytesCopy4;
   
   dimensionCode = *(ushort *)(texture + 0x24) & 0xf;
   pixelPairShift = 0;
@@ -1364,10 +1365,10 @@ LAB_000fa6b0:
   filter2D = (code *)PTR__gle8888Filter2_001115d4;
   filter3D = (code *)PTR__gle8888Filter3_001115d0;
   pixelType = *(ushort *)(sourceImage + 0x12);
-  uVar28 = (uint)pixelType;
-  bVar35 = (uVar28 < 0x8032) << 3 | (0x8032 < uVar28) << 2 | (uVar28 == 0x8032) << 1 | in_xer_so & 1
+  typeBorderDepthOrRowCount = (uint)pixelType;
+  pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x8032) << 3 | (0x8032 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x8032) << 1 | in_xer_so & 1
   ;
-  if (uVar28 == 0x8032) {
+  if (typeBorderDepthOrRowCount == 0x8032) {
     filter1D = (code *)PTR__gle332Filter1_0011156c;
     filter2D = (code *)PTR__gle332Filter2_00111568;
     filter3D = (code *)PTR__gle332Filter3_00111564;
@@ -1375,33 +1376,33 @@ LAB_000faa98:
     bytesPerPixel = 1;
     goto LAB_000facc8;
   }
-  if (0x8032 >= uVar28) {
-    bVar35 = (uVar28 < 0x1400) << 3 | (0x1400 < uVar28) << 2 | (uVar28 == 0x1400) << 1 |
+  if (0x8032 >= typeBorderDepthOrRowCount) {
+    pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x1400) << 3 | (0x1400 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x1400) << 1 |
              in_xer_so & 1;
     bytesPerPixel = levelRecordThenComponentCount;
-    if (uVar28 == 0x1400) {
+    if (typeBorderDepthOrRowCount == 0x1400) {
       filter1D = (code *)PTR__gleByteFilter1_001115c0;
       filter2D = (code *)PTR__gleByteFilter2_001115bc;
       filter3D = (code *)PTR__gleByteFilter3_001115b8;
       goto LAB_000facc8;
     }
-    if (0x1400 >= uVar28) {
-      bVar35 = (uVar28 < 5) << 3 | (5 < uVar28) << 2 | (uVar28 == 5) << 1 | in_xer_so & 1;
-      if (uVar28 == 5) {
+    if (0x1400 >= typeBorderDepthOrRowCount) {
+      pixelTypeCompareCr = (typeBorderDepthOrRowCount < 5) << 3 | (5 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 5) << 1 | in_xer_so & 1;
+      if (typeBorderDepthOrRowCount == 5) {
         filter1D = (code *)PTR__gle1616Filter1_001114dc;
         filter2D = (code *)PTR__gle1616Filter2_001114d8;
         filter3D = (code *)PTR__gle1616Filter3_001114d4;
       }
       else {
-        if (5 >= uVar28) {
-          if (uVar28 == 0) {
+        if (5 >= typeBorderDepthOrRowCount) {
+          if (typeBorderDepthOrRowCount == 0) {
             levelRecordThenComponentCount = 4;
             puVar15 = &DAT_0010a634;
             filter1D = (code *)PTR__gle8888Filter1_001115d8;
             originalCompressedData = *(int *)(sourceImage + 0x14);
             decodedData = _malloc((uint)*(ushort *)(sourceImage + 4) * 4 * (uint)*(ushort *)(sourceImage + 6) *
                             (uint)*(ushort *)(sourceImage + 8));
-            bVar35 = (decodedData < 0) << 3 | (0 < decodedData) << 2 | (decodedData == 0) << 1 | in_xer_so & 1;
+            pixelTypeCompareCr = (decodedData < 0) << 3 | (0 < decodedData) << 2 | (decodedData == 0) << 1 | in_xer_so & 1;
             *(int *)(sourceImage + 0x14) = decodedData;
             if (decodedData == 0) {
               return;
@@ -1422,15 +1423,15 @@ LAB_000faa98:
             local_144 = (undefined1)pixelType;
             local_1ac = compressedRowBytes;
             local_19c = rgbaRowBytes;
-            local_18c = uVar28;
-            local_188 = uVar28;
+            local_18c = typeBorderDepthOrRowCount;
+            local_188 = typeBorderDepthOrRowCount;
             _glgProcessPixels(iStack00000018 + 0x31a8,&local_1b0,puVar13,puVar14,lastLevelThenLevelArg,incomingR8,
                               iStack00000018,incomingR10);
             bytesPerPixel = 4;
             goto LAB_000facc8;
           }
-          bVar35 = (uVar28 == 0) << 3 | (1 < uVar28) << 2 | (uVar28 == 1) << 1 | in_xer_so & 1;
-          if (uVar28 != 1) {
+          pixelTypeCompareCr = (typeBorderDepthOrRowCount == 0) << 3 | (1 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 1) << 1 | in_xer_so & 1;
+          if (typeBorderDepthOrRowCount != 1) {
             return;
           }
           filter1D = (code *)PTR__gles8s8Filter1_001114e8;
@@ -1438,20 +1439,20 @@ LAB_000faa98:
           filter3D = (code *)PTR__gles8s8Filter3_001114e0;
           goto LAB_000fac40;
         }
-        bVar35 = (uVar28 < 7) << 3 | (7 < uVar28) << 2 | (uVar28 == 7) << 1 | in_xer_so & 1;
-        if (uVar28 == 7) {
+        pixelTypeCompareCr = (typeBorderDepthOrRowCount < 7) << 3 | (7 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 7) << 1 | in_xer_so & 1;
+        if (typeBorderDepthOrRowCount == 7) {
           filter1D = (code *)PTR__gle8s8s8s8Filter1_001114c4;
           filter2D = (code *)PTR__gle8s8s8s8Filter2_001114c0;
           filter3D = (code *)PTR__gle8s8s8s8Filter3_001114bc;
         }
-        else if (uVar28 < 7) {
+        else if (typeBorderDepthOrRowCount < 7) {
           filter1D = (code *)PTR__gles16s16Filter1_001114d0;
           filter2D = (code *)PTR__gles16s16Filter2_001114cc;
           filter3D = (code *)PTR__gles16s16Filter3_001114c8;
         }
         else {
-          bVar35 = (uVar28 < 8) << 3 | (8 < uVar28) << 2 | (uVar28 == 8) << 1 | in_xer_so & 1;
-          if (uVar28 != 8) {
+          pixelTypeCompareCr = (typeBorderDepthOrRowCount < 8) << 3 | (8 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 8) << 1 | in_xer_so & 1;
+          if (typeBorderDepthOrRowCount != 8) {
             return;
           }
           filter1D = (code *)PTR__gles8s8s8s8Filter1_001114b8;
@@ -1461,24 +1462,24 @@ LAB_000faa98:
       }
       goto LAB_000facc4;
     }
-    bVar35 = (uVar28 < 0x1404) << 3 | (0x1404 < uVar28) << 2 | (uVar28 == 0x1404) << 1 |
+    pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x1404) << 3 | (0x1404 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x1404) << 1 |
              in_xer_so & 1;
-    if (uVar28 == 0x1404) {
+    if (typeBorderDepthOrRowCount == 0x1404) {
       filter1D = (code *)PTR__gleIntFilter1_00111590;
       filter2D = (code *)PTR__gleIntFilter2_0011158c;
       filter3D = (code *)PTR__gleIntFilter3_00111588;
     }
     else {
-      if (0x1404 >= uVar28) {
-        bVar35 = (uVar28 < 0x1402) << 3 | (0x1402 < uVar28) << 2 | (uVar28 == 0x1402) << 1 |
+      if (0x1404 >= typeBorderDepthOrRowCount) {
+        pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x1402) << 3 | (0x1402 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x1402) << 1 |
                  in_xer_so & 1;
-        if (uVar28 == 0x1402) {
+        if (typeBorderDepthOrRowCount == 0x1402) {
           filter1D = (code *)PTR__gleShortFilter1_001115a8;
           filter2D = (code *)PTR__gleShortFilter2_001115a4;
           filter3D = (code *)PTR__gleShortFilter3_001115a0;
         }
         else {
-          if (0x1402 >= uVar28) {
+          if (0x1402 >= typeBorderDepthOrRowCount) {
             filter1D = (code *)PTR__gleUbyteFilter1_001115cc;
             filter2D = (code *)PTR__gleUbyteFilter2_001115c8;
             filter3D = (code *)PTR__gleUbyteFilter3_001115c4;
@@ -1492,18 +1493,18 @@ LAB_000faa54:
         bytesPerPixel = levelRecordThenComponentCount << 1;
         goto LAB_000facc8;
       }
-      bVar35 = (uVar28 < 0x1406) << 3 | (0x1406 < uVar28) << 2 | (uVar28 == 0x1406) << 1 |
+      pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x1406) << 3 | (0x1406 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x1406) << 1 |
                in_xer_so & 1;
-      if (uVar28 == 0x1406) {
+      if (typeBorderDepthOrRowCount == 0x1406) {
         filter1D = (code *)PTR__gleFloatFilter1_00111584;
         filter2D = (code *)PTR__gleFloatFilter2_00111580;
         filter3D = (code *)PTR__gleFloatFilter3_0011157c;
       }
       else {
-        if (uVar28 >= 0x1406) {
-          bVar35 = (uVar28 < 0x140b) << 3 | (0x140b < uVar28) << 2 | (uVar28 == 0x140b) << 1 |
+        if (typeBorderDepthOrRowCount >= 0x1406) {
+          pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x140b) << 3 | (0x140b < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x140b) << 1 |
                    in_xer_so & 1;
-          if (uVar28 != 0x140b) {
+          if (typeBorderDepthOrRowCount != 0x140b) {
             return;
           }
           filter1D = (code *)PTR__gleHalfFloatFilter1_00111578;
@@ -1519,9 +1520,9 @@ LAB_000faa54:
     bytesPerPixel = levelRecordThenComponentCount << 2;
     goto LAB_000facc8;
   }
-  bVar35 = (uVar28 < 0x8365) << 3 | (0x8365 < uVar28) << 2 | (uVar28 == 0x8365) << 1 | in_xer_so & 1
+  pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x8365) << 3 | (0x8365 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x8365) << 1 | in_xer_so & 1
   ;
-  if (uVar28 == 0x8365) {
+  if (typeBorderDepthOrRowCount == 0x8365) {
 LAB_000faac0:
     filter1D = (code *)PTR__gle4444Filter1_00111548;
     filter2D = (code *)PTR__gle4444Filter2_00111544;
@@ -1530,11 +1531,11 @@ LAB_000fac40:
     bytesPerPixel = 2;
   }
   else {
-    if (0x8365 < uVar28) {
-      if (uVar28 < 0x85bc) {
-        if (0x85b9 < uVar28) {
+    if (0x8365 < typeBorderDepthOrRowCount) {
+      if (typeBorderDepthOrRowCount < 0x85bc) {
+        if (0x85b9 < typeBorderDepthOrRowCount) {
           format = *(ushort *)(sourceImage + 0x10);
-          bVar35 = (format < 0x85b9) << 3 | (0x85b9 < format) << 2 | (format == 0x85b9) << 1 |
+          pixelTypeCompareCr = (format < 0x85b9) << 3 | (0x85b9 < format) << 2 | (format == 0x85b9) << 1 |
                    in_xer_so & 1;
           if (format == 0x85b9) {
             pixelPairShift = 1;
@@ -1547,22 +1548,22 @@ LAB_000fac40:
           filter3D = (code *)PTR__gle88Filter3_0011151c;
           goto LAB_000fac40;
         }
-        bVar35 = (uVar28 < 0x8367) << 3 | (0x8367 < uVar28) << 2 | (uVar28 == 0x8367) << 1 |
+        pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x8367) << 3 | (0x8367 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x8367) << 1 |
                  in_xer_so & 1;
-        if (uVar28 == 0x8367) {
+        if (typeBorderDepthOrRowCount == 0x8367) {
 LAB_000fab84:
           filter1D = (code *)PTR__gle8888Filter1_001115d8;
         }
         else {
-          if (uVar28 < 0x8367) {
+          if (typeBorderDepthOrRowCount < 0x8367) {
             filter1D = (code *)PTR__gle1555RevFilter1_00111530;
             filter2D = (code *)PTR__gle1555RevFilter2_0011152c;
             filter3D = (code *)PTR__gle1555RevFilter3_00111528;
             goto LAB_000fac40;
           }
-          bVar35 = (uVar28 < 0x8368) << 3 | (0x8368 < uVar28) << 2 | (uVar28 == 0x8368) << 1 |
+          pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x8368) << 3 | (0x8368 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x8368) << 1 |
                    in_xer_so & 1;
-          if (uVar28 != 0x8368) {
+          if (typeBorderDepthOrRowCount != 0x8368) {
             return;
           }
           filter1D = (code *)PTR__gle2101010RevFilter1_0011150c;
@@ -1571,17 +1572,17 @@ LAB_000fab84:
         }
       }
       else {
-        bVar35 = (uVar28 < 0x86da) << 3 | (0x86da < uVar28) << 2 | (uVar28 == 0x86da) << 1 |
+        pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x86da) << 3 | (0x86da < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x86da) << 1 |
                  in_xer_so & 1;
-        if (uVar28 == 0x86da) {
+        if (typeBorderDepthOrRowCount == 0x86da) {
           filter1D = (code *)PTR__gles8s888Filter1_001114f4;
           filter2D = (code *)PTR__gles8s888Filter2_001114f0;
           filter3D = (code *)PTR__gles8s888Filter3_001114ec;
         }
         else {
-          bVar35 = (uVar28 < 0x86db) << 3 | (0x86db < uVar28) << 2 | (uVar28 == 0x86db) << 1 |
+          pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x86db) << 3 | (0x86db < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x86db) << 1 |
                    in_xer_so & 1;
-          if (uVar28 != 0x86db) {
+          if (typeBorderDepthOrRowCount != 0x86db) {
             return;
           }
           filter1D = (code *)PTR__gle88s8s8Filter1_00111500;
@@ -1591,19 +1592,19 @@ LAB_000fab84:
       }
     }
     else {
-      bVar35 = (uVar28 < 0x8036) << 3 | (0x8036 < uVar28) << 2 | (uVar28 == 0x8036) << 1 |
+      pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x8036) << 3 | (0x8036 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x8036) << 1 |
                in_xer_so & 1;
-      if (uVar28 != 0x8036) {
-        if (0x8036 < uVar28) {
-          bVar35 = (uVar28 < 0x8362) << 3 | (0x8362 < uVar28) << 2 | (uVar28 == 0x8362) << 1 |
+      if (typeBorderDepthOrRowCount != 0x8036) {
+        if (0x8036 < typeBorderDepthOrRowCount) {
+          pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x8362) << 3 | (0x8362 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x8362) << 1 |
                    in_xer_so & 1;
-          if (uVar28 == 0x8362) {
+          if (typeBorderDepthOrRowCount == 0x8362) {
             filter1D = (code *)PTR__gle233RevFilter1_00111560;
             filter2D = (code *)PTR__gle233RevFilter2_0011155c;
             filter3D = (code *)PTR__gle233RevFilter3_00111558;
             goto LAB_000faa98;
           }
-          if (uVar28 < 0x8362) {
+          if (typeBorderDepthOrRowCount < 0x8362) {
             return;
           }
           filter1D = (code *)PTR__gle565Filter1_00111554;
@@ -1611,10 +1612,10 @@ LAB_000fab84:
           filter3D = (code *)PTR__gle565Filter3_0011154c;
         }
         else {
-          bVar35 = (uVar28 < 0x8034) << 3 | (0x8034 < uVar28) << 2 | (uVar28 == 0x8034) << 1 |
+          pixelTypeCompareCr = (typeBorderDepthOrRowCount < 0x8034) << 3 | (0x8034 < typeBorderDepthOrRowCount) << 2 | (typeBorderDepthOrRowCount == 0x8034) << 1 |
                    in_xer_so & 1;
-          if (uVar28 != 0x8034) {
-            if (0x8034 < uVar28) goto LAB_000fab84;
+          if (typeBorderDepthOrRowCount != 0x8034) {
+            if (0x8034 < typeBorderDepthOrRowCount) goto LAB_000fab84;
             goto LAB_000faac0;
           }
           filter1D = (code *)PTR__gle5551Filter1_0011153c;
@@ -1631,40 +1632,40 @@ LAB_000facc4:
     bytesPerPixel = 4;
   }
 LAB_000facc8:
-  uVar28 = (uint)*(byte *)(sourceImage + 10);
+  typeBorderDepthOrRowCount = (uint)*(byte *)(sourceImage + 10);
   moreThanOneDimension = 1 < dimensions;
   isOneDimensional = dimensions == 1;
-  bVar33 = (dimensions < 1) << 3 | moreThanOneDimension << 2 | isOneDimensional << 1 | in_xer_so & 1;
-  twiceBorder = uVar28 * 2;
+  dimensionsCompareCr1 = (dimensions < 1) << 3 | moreThanOneDimension << 2 | isOneDimensional << 1 | in_xer_so & 1;
+  twiceBorder = typeBorderDepthOrRowCount * 2;
   srcThenDestInteriorHeight = (uint)*(ushort *)(sourceImage + 6);
-  srcThenDestInteriorWidth = (int)((uint)*(ushort *)(sourceImage + 4) + uVar28 * -2) >> (pixelPairShift & 0x3f);
+  srcThenDestInteriorWidth = (int)((uint)*(ushort *)(sourceImage + 4) + typeBorderDepthOrRowCount * -2) >> (pixelPairShift & 0x3f);
   if (moreThanOneDimension) {
-    srcThenDestInteriorHeight = srcThenDestInteriorHeight + uVar28 * -2;
+    srcThenDestInteriorHeight = srcThenDestInteriorHeight + typeBorderDepthOrRowCount * -2;
   }
   isThreeDimensional = 2 < dimensions;
   isTwoDimensional = dimensions == 2;
-  bVar34 = (dimensions < 2) << 3 | isThreeDimensional << 2 | isTwoDimensional << 1 | in_xer_so & 1;
+  dimensionsCompareCr2 = (dimensions < 2) << 3 | isThreeDimensional << 2 | isTwoDimensional << 1 | in_xer_so & 1;
   srcThenDestInteriorDepth = (uint)*(ushort *)(sourceImage + 8);
   if (isThreeDimensional) {
-    srcThenDestInteriorDepth = srcThenDestInteriorDepth + uVar28 * -2;
+    srcThenDestInteriorDepth = srcThenDestInteriorDepth + typeBorderDepthOrRowCount * -2;
   }
-  local_74 = bytesPerPixel << 1;
+  pixelPairBytes = bytesPerPixel << 1;
   nextLevel = sourceLevel + 1;
-  bVar32 = (uVar28 != 0) << 2 | (uVar28 == 0) << 1 | in_xer_so & 1;
-  local_7c = (uint)bVar32 << 0x1c | (uint)(in_cr1 & 0xf) << 0x18 | (uint)bVar33 << 0x14 |
-             (uint)bVar34 << 0x10 | (uint)(unaff_cr4 & 0xf) << 0xc | (uint)(in_cr5 & 0xf) << 8 |
-             (uint)(in_cr6 & 0xf) << 4 | (uint)(bVar35 & 0xf);
-  local_70 = (uint)bVar32 << 0x1c | (uint)(in_cr1 & 0xf) << 0x18 | (uint)bVar33 << 0x14 |
-             (uint)bVar34 << 0x10 | (uint)(unaff_cr4 & 0xf) << 0xc | (uint)(in_cr5 & 0xf) << 8 |
-             (uint)(in_cr6 & 0xf) << 4 | (uint)(bVar35 & 0xf);
+  borderCompareCr = (typeBorderDepthOrRowCount != 0) << 2 | (typeBorderDepthOrRowCount == 0) << 1 | in_xer_so & 1;
+  savedCrFields = (uint)borderCompareCr << 0x1c | (uint)(incomingCr1 & 0xf) << 0x18 | (uint)dimensionsCompareCr1 << 0x14 |
+             (uint)dimensionsCompareCr2 << 0x10 | (uint)(incomingCr4 & 0xf) << 0xc | (uint)(incomingCr5 & 0xf) << 8 |
+             (uint)(incomingCr6 & 0xf) << 4 | (uint)(pixelTypeCompareCr & 0xf);
+  savedCrFields3 = (uint)borderCompareCr << 0x1c | (uint)(incomingCr1 & 0xf) << 0x18 | (uint)dimensionsCompareCr1 << 0x14 |
+             (uint)dimensionsCompareCr2 << 0x10 | (uint)(incomingCr4 & 0xf) << 0xc | (uint)(incomingCr5 & 0xf) << 8 |
+             (uint)(incomingCr6 & 0xf) << 4 | (uint)(pixelTypeCompareCr & 0xf);
   borderCopy = twiceBorder >> 1;
-  iVar23 = sourceImage;
+  srcCursorLevelImageOrOffset = sourceImage;
   firstGeneratedLevel = nextLevel;
-  local_78 = local_7c;
-  local_6c = local_74;
-  local_68 = local_74;
-  local_64 = local_74;
-  local_5c = local_74;
+  savedCrFields2 = savedCrFields;
+  pixelPairBytesCopy1 = pixelPairBytes;
+  pixelPairBytesCopy2 = pixelPairBytes;
+  pixelPairBytesCopy3 = pixelPairBytes;
+  pixelPairBytesCopy4 = pixelPairBytes;
   do {
     if ((((srcThenDestInteriorWidth < 2) && ((int)srcThenDestInteriorHeight < 2)) && ((int)srcThenDestInteriorDepth < 2)) ||
        (iStack00000028 < nextLevel)) {
@@ -1678,31 +1679,31 @@ LAB_000facc8:
         _free(*(undefined4 *)(sourceImage + 0x14));
         *(int *)(sourceImage + 0x14) = originalCompressedData;
         if (levelsToRecompress < iStack00000028) {
-          iVar23 = levelsToRecompress * 0x18 + iStack0000001c + faceOffset + 0xc4;
+          srcCursorLevelImageOrOffset = levelsToRecompress * 0x18 + iStack0000001c + faceOffset + 0xc4;
           levelsToRecompress = iStack00000028 - levelsToRecompress;
           pixelTransferState = iStack00000018 + 0x31a8;
           savedGlContext = iStack00000018;
           do {
-            decodedLevelData = *(undefined4 *)(iVar23 + 0x14);
-            compressedBuffer = _malloc(blockBytes * ((int)(*(ushort *)(iVar23 + 4) + 3) >> 2) *
-                             ((int)(*(ushort *)(iVar23 + 6) + 3) >> 2));
-            *(undefined4 *)(iVar23 + 0x14) = compressedBuffer;
-            rgbaRowBytes = _gleRowBytes(0x1908,0x8035,(uint)*(ushort *)(iVar23 + 4));
-            compressedRowBytes = _gleRowBytes((uint)*(ushort *)(iVar23 + 0x10),0,(uint)*(ushort *)(iVar23 + 0xc)
+            decodedLevelData = *(undefined4 *)(srcCursorLevelImageOrOffset + 0x14);
+            compressedBuffer = _malloc(blockBytes * ((int)(*(ushort *)(srcCursorLevelImageOrOffset + 4) + 3) >> 2) *
+                             ((int)(*(ushort *)(srcCursorLevelImageOrOffset + 6) + 3) >> 2));
+            *(undefined4 *)(srcCursorLevelImageOrOffset + 0x14) = compressedBuffer;
+            rgbaRowBytes = _gleRowBytes(0x1908,0x8035,(uint)*(ushort *)(srcCursorLevelImageOrOffset + 4));
+            compressedRowBytes = _gleRowBytes((uint)*(ushort *)(srcCursorLevelImageOrOffset + 0x10),0,(uint)*(ushort *)(srcCursorLevelImageOrOffset + 0xc)
                                  );
             _glgConvertType(0x1908,0x8035,auStack_138,auStack_134,lastLevelThenLevelArg,incomingR8,savedGlContext,incomingR10);
             puVar13 = auStack_128;
             puVar14 = auStack_124;
-            _glgConvertType((uint)*(ushort *)(iVar23 + 0x10),0,auStack_128,auStack_124,lastLevelThenLevelArg,incomingR8
+            _glgConvertType((uint)*(ushort *)(srcCursorLevelImageOrOffset + 0x10),0,auStack_128,auStack_124,lastLevelThenLevelArg,incomingR8
                             ,savedGlContext,incomingR10);
             local_11c = 0;
             local_120 = 2;
             local_118 = 0;
-            local_114 = (uint)*(ushort *)(iVar23 + 4);
-            local_110 = (uint)*(ushort *)(iVar23 + 6);
+            local_114 = (uint)*(ushort *)(srcCursorLevelImageOrOffset + 4);
+            local_110 = (uint)*(ushort *)(srcCursorLevelImageOrOffset + 6);
             local_140 = decodedLevelData;
-            local_130 = *(undefined4 *)(iVar23 + 0x14);
-            iVar23 = iVar23 + 0x18;
+            local_130 = *(undefined4 *)(srcCursorLevelImageOrOffset + 0x14);
+            srcCursorLevelImageOrOffset = srcCursorLevelImageOrOffset + 0x18;
             local_d4 = 0;
             local_13c = rgbaRowBytes;
             local_12c = compressedRowBytes;
@@ -1719,401 +1720,401 @@ LAB_000facc8:
     if (srcThenDestInteriorWidth == 1) {
       pixelStep = 0;
     }
-    iVar26 = (int)(uint)*(ushort *)(iVar23 + 0xc) >> (pixelPairShift & 0x3f);
-    rowBytes = iVar26 * bytesPerPixel;
-    rowPadBytes = (iVar26 - (srcThenDestInteriorWidth + twiceBorder)) * bytesPerPixel;
-    iVar26 = 0;
+    rowPixelsStrideOrCursor = (int)(uint)*(ushort *)(srcCursorLevelImageOrOffset + 0xc) >> (pixelPairShift & 0x3f);
+    rowBytes = rowPixelsStrideOrCursor * bytesPerPixel;
+    rowPadBytes = (rowPixelsStrideOrCursor - (srcThenDestInteriorWidth + twiceBorder)) * bytesPerPixel;
+    rowPixelsStrideOrCursor = 0;
     if (srcThenDestInteriorHeight != 1) {
-      iVar26 = rowBytes;
+      rowPixelsStrideOrCursor = rowBytes;
     }
-    sliceBytes = (uint)*(ushort *)(iVar23 + 0xe) * rowBytes;
-    iVar16 = ((uint)*(ushort *)(iVar23 + 0xe) - (srcThenDestInteriorHeight + twiceBorder)) * rowBytes;
-    iVar27 = 0;
+    sliceBytes = (uint)*(ushort *)(srcCursorLevelImageOrOffset + 0xe) * rowBytes;
+    cursorOrColumnsOrSkipBytes = ((uint)*(ushort *)(srcCursorLevelImageOrOffset + 0xe) - (srcThenDestInteriorHeight + twiceBorder)) * rowBytes;
+    cursorOrStrideOrCount = 0;
     if (srcThenDestInteriorDepth != 1) {
-      iVar27 = sliceBytes;
+      cursorOrStrideOrCount = sliceBytes;
     }
     srcThenDestInteriorHeight = (uint)*(ushort *)(destLevelRecord + 0xca);
     srcThenDestInteriorWidth = (int)((uint)*(ushort *)(destLevelRecord + 200) - twiceBorder) >> (pixelPairShift & 0x3f);
     if (moreThanOneDimension) {
       srcThenDestInteriorHeight = srcThenDestInteriorHeight - twiceBorder;
     }
-    uVar28 = (uint)*(ushort *)(destLevelRecord + 0xcc);
-    srcThenDestInteriorDepth = uVar28;
+    typeBorderDepthOrRowCount = (uint)*(ushort *)(destLevelRecord + 0xcc);
+    srcThenDestInteriorDepth = typeBorderDepthOrRowCount;
     if (isThreeDimensional) {
-      srcThenDestInteriorDepth = uVar28 - twiceBorder;
+      srcThenDestInteriorDepth = typeBorderDepthOrRowCount - twiceBorder;
     }
-    iVar10 = _malloc((uint)*(ushort *)(destLevelRecord + 0xd0) * (uint)*(ushort *)(destLevelRecord + 0xd2) * uVar28 *
+    dstOrSrcCursorOrColumns = _malloc((uint)*(ushort *)(destLevelRecord + 0xd0) * (uint)*(ushort *)(destLevelRecord + 0xd2) * typeBorderDepthOrRowCount *
                      (bytesPerPixel >> (pixelPairShift & 0x3f)));
-    *(int *)(destLevelRecord + 0xd8) = iVar10;
-    iVar23 = *(int *)(iVar23 + 0x14);
+    *(int *)(destLevelRecord + 0xd8) = dstOrSrcCursorOrColumns;
+    srcCursorLevelImageOrOffset = *(int *)(srcCursorLevelImageOrOffset + 0x14);
     *(byte *)(destLevelRecord + 0xcf) = *(byte *)(destLevelRecord + 0xcf) | 0x10;
     if (isTwoDimensional) {
-      bVar35 = (byte)(local_78 >> 0x18);
-      if (!(bool)(bVar35 >> 5 & 1)) {
-        iVar16 = iVar10 + bytesPerPixel;
-        iVar27 = iVar23 + bytesPerPixel;
-        (*filter2D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel,rowBytes);
+      savedCrHighByte = (byte)(savedCrFields2 >> 0x18);
+      if (!(bool)(savedCrHighByte >> 5 & 1)) {
+        cursorOrColumnsOrSkipBytes = dstOrSrcCursorOrColumns + bytesPerPixel;
+        cursorOrStrideOrCount = srcCursorLevelImageOrOffset + bytesPerPixel;
+        (*filter2D)(dstOrSrcCursorOrColumns,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,bytesPerPixel,rowBytes);
         if (0 < srcThenDestInteriorWidth) {
-          iVar23 = iVar27;
+          srcCursorLevelImageOrOffset = cursorOrStrideOrCount;
           columnsRemaining3 = srcThenDestInteriorWidth;
-          iVar10 = iVar16;
+          dstOrSrcCursorOrColumns = cursorOrColumnsOrSkipBytes;
           do {
-            iVar16 = iVar10 + bytesPerPixel;
-            iVar27 = iVar23 + bytesPerPixel + pixelStep;
-            (*filter2D)(iVar10,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes);
+            cursorOrColumnsOrSkipBytes = dstOrSrcCursorOrColumns + bytesPerPixel;
+            cursorOrStrideOrCount = srcCursorLevelImageOrOffset + bytesPerPixel + pixelStep;
+            (*filter2D)(dstOrSrcCursorOrColumns,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,pixelStep,rowBytes);
             columnsRemaining3 = columnsRemaining3 + -1;
-            iVar23 = iVar27;
-            iVar10 = iVar16;
+            srcCursorLevelImageOrOffset = cursorOrStrideOrCount;
+            dstOrSrcCursorOrColumns = cursorOrColumnsOrSkipBytes;
           } while (columnsRemaining3 != 0);
         }
-        iVar10 = iVar16 + bytesPerPixel;
-        (*filter2D)(iVar16,iVar27 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes);
-        iVar23 = (iVar27 - bytesPerPixel) + bytesPerPixel * 2 + rowPadBytes;
+        dstOrSrcCursorOrColumns = cursorOrColumnsOrSkipBytes + bytesPerPixel;
+        (*filter2D)(cursorOrColumnsOrSkipBytes,cursorOrStrideOrCount - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes);
+        srcCursorLevelImageOrOffset = (cursorOrStrideOrCount - bytesPerPixel) + bytesPerPixel * 2 + rowPadBytes;
       }
-      iVar27 = local_74;
+      cursorOrStrideOrCount = pixelPairBytes;
       if (0 < (int)srcThenDestInteriorHeight) {
-        iVar16 = rowPadBytes + iVar26;
-        uVar28 = srcThenDestInteriorHeight;
+        cursorOrColumnsOrSkipBytes = rowPadBytes + rowPixelsStrideOrCursor;
+        typeBorderDepthOrRowCount = srcThenDestInteriorHeight;
         do {
-          iVar17 = iVar23;
-          iVar24 = iVar10;
-          if (!(bool)(bVar35 >> 5 & 1)) {
-            iVar24 = iVar10 + bytesPerPixel;
-            iVar17 = iVar23 + bytesPerPixel;
-            (*filter2D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel,iVar26);
+          srcCursor3 = srcCursorLevelImageOrOffset;
+          dstOrSrcCursorOrSkipBytes = dstOrSrcCursorOrColumns;
+          if (!(bool)(savedCrHighByte >> 5 & 1)) {
+            dstOrSrcCursorOrSkipBytes = dstOrSrcCursorOrColumns + bytesPerPixel;
+            srcCursor3 = srcCursorLevelImageOrOffset + bytesPerPixel;
+            (*filter2D)(dstOrSrcCursorOrColumns,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,bytesPerPixel,rowPixelsStrideOrCursor);
           }
-          iVar23 = iVar17;
-          iVar10 = srcThenDestInteriorWidth;
-          iVar29 = iVar24;
+          srcCursorLevelImageOrOffset = srcCursor3;
+          dstOrSrcCursorOrColumns = srcThenDestInteriorWidth;
+          dstOrSrcCursorOrColumns2 = dstOrSrcCursorOrSkipBytes;
           if (0 < srcThenDestInteriorWidth) {
             do {
-              iVar24 = iVar29 + bytesPerPixel;
-              iVar17 = iVar23 + bytesPerPixel + pixelStep;
-              (*filter2D)(iVar29,iVar23,levelRecordThenComponentCount,pixelStep,iVar26);
-              iVar10 = iVar10 + -1;
-              iVar23 = iVar17;
-              iVar29 = iVar24;
-            } while (iVar10 != 0);
+              dstOrSrcCursorOrSkipBytes = dstOrSrcCursorOrColumns2 + bytesPerPixel;
+              srcCursor3 = srcCursorLevelImageOrOffset + bytesPerPixel + pixelStep;
+              (*filter2D)(dstOrSrcCursorOrColumns2,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,pixelStep,rowPixelsStrideOrCursor);
+              dstOrSrcCursorOrColumns = dstOrSrcCursorOrColumns + -1;
+              srcCursorLevelImageOrOffset = srcCursor3;
+              dstOrSrcCursorOrColumns2 = dstOrSrcCursorOrSkipBytes;
+            } while (dstOrSrcCursorOrColumns != 0);
           }
-          iVar10 = iVar24;
-          if (!(bool)(bVar35 >> 5 & 1)) {
-            iVar23 = iVar17 - bytesPerPixel;
-            iVar10 = iVar24 + bytesPerPixel;
-            iVar17 = iVar23 + iVar27;
-            (*filter2D)(iVar24,iVar23,levelRecordThenComponentCount,bytesPerPixel,iVar26);
+          dstOrSrcCursorOrColumns = dstOrSrcCursorOrSkipBytes;
+          if (!(bool)(savedCrHighByte >> 5 & 1)) {
+            srcCursorLevelImageOrOffset = srcCursor3 - bytesPerPixel;
+            dstOrSrcCursorOrColumns = dstOrSrcCursorOrSkipBytes + bytesPerPixel;
+            srcCursor3 = srcCursorLevelImageOrOffset + cursorOrStrideOrCount;
+            (*filter2D)(dstOrSrcCursorOrSkipBytes,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,bytesPerPixel,rowPixelsStrideOrCursor);
           }
-          uVar28 = uVar28 - 1;
-          iVar23 = iVar17 + iVar16;
-        } while (uVar28 != 0);
+          typeBorderDepthOrRowCount = typeBorderDepthOrRowCount - 1;
+          srcCursorLevelImageOrOffset = srcCursor3 + cursorOrColumnsOrSkipBytes;
+        } while (typeBorderDepthOrRowCount != 0);
       }
-      if (!(bool)(bVar35 >> 5 & 1)) {
-        iVar27 = iVar10 + bytesPerPixel;
-        iVar26 = (iVar23 - rowBytes) + bytesPerPixel;
-        (*filter2D)(iVar10,iVar23 - rowBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes);
+      if (!(bool)(savedCrHighByte >> 5 & 1)) {
+        cursorOrStrideOrCount = dstOrSrcCursorOrColumns + bytesPerPixel;
+        rowPixelsStrideOrCursor = (srcCursorLevelImageOrOffset - rowBytes) + bytesPerPixel;
+        (*filter2D)(dstOrSrcCursorOrColumns,srcCursorLevelImageOrOffset - rowBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes);
         if (0 < srcThenDestInteriorWidth) {
-          iVar23 = iVar26;
-          iVar16 = srcThenDestInteriorWidth;
-          dstCursor3 = iVar27;
+          srcCursorLevelImageOrOffset = rowPixelsStrideOrCursor;
+          cursorOrColumnsOrSkipBytes = srcThenDestInteriorWidth;
+          dstCursor3 = cursorOrStrideOrCount;
           do {
-            iVar27 = dstCursor3 + bytesPerPixel;
-            iVar26 = iVar23 + bytesPerPixel + pixelStep;
-            (*filter2D)(dstCursor3,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes);
-            iVar16 = iVar16 + -1;
-            iVar23 = iVar26;
-            dstCursor3 = iVar27;
-          } while (iVar16 != 0);
+            cursorOrStrideOrCount = dstCursor3 + bytesPerPixel;
+            rowPixelsStrideOrCursor = srcCursorLevelImageOrOffset + bytesPerPixel + pixelStep;
+            (*filter2D)(dstCursor3,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,pixelStep,rowBytes);
+            cursorOrColumnsOrSkipBytes = cursorOrColumnsOrSkipBytes + -1;
+            srcCursorLevelImageOrOffset = rowPixelsStrideOrCursor;
+            dstCursor3 = cursorOrStrideOrCount;
+          } while (cursorOrColumnsOrSkipBytes != 0);
         }
-        (*filter2D)(iVar27,iVar26 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes);
+        (*filter2D)(cursorOrStrideOrCount,rowPixelsStrideOrCursor - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes);
       }
       destWidth = *(ushort *)(destLevelRecord + 200);
       incomingR10 = 0;
-      uVar28 = 1;
+      typeBorderDepthOrRowCount = 1;
       uVar6 = *(ushort *)(destLevelRecord + 0xca);
 LAB_000fb8d8:
       destHeight = (uint)uVar6;
       incomingR8 = borderCopy;
-      iVar23 = borderCopy;
+      srcCursorLevelImageOrOffset = borderCopy;
 LAB_000fb8dc:
       lastLevelThenLevelArg = nextLevel;
       _gleModifyPluginTextureLevel
-                (iStack00000018,iStack0000001c,destLevelRecord + 0xc4,iStack00000020,nextLevel,incomingR8,iVar23,
-                 incomingR10,(uint)destWidth,destHeight,uVar28);
+                (iStack00000018,iStack0000001c,destLevelRecord + 0xc4,iStack00000020,nextLevel,incomingR8,srcCursorLevelImageOrOffset,
+                 incomingR10,(uint)destWidth,destHeight,typeBorderDepthOrRowCount);
     }
     else if (isThreeDimensional) {
       if (dimensions == 3) {
-        bVar35 = (byte)(local_70 >> 0x18);
-        if (!(bool)(bVar35 >> 5 & 1)) {
-          iVar29 = iVar10 + bytesPerPixel;
-          iVar24 = iVar23 + bytesPerPixel;
-          (*filter3D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+        savedCrHighByte = (byte)(savedCrFields3 >> 0x18);
+        if (!(bool)(savedCrHighByte >> 5 & 1)) {
+          dstOrSrcCursorOrColumns2 = dstOrSrcCursorOrColumns + bytesPerPixel;
+          dstOrSrcCursorOrSkipBytes = srcCursorLevelImageOrOffset + bytesPerPixel;
+          (*filter3D)(dstOrSrcCursorOrColumns,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
           if (0 < srcThenDestInteriorWidth) {
-            iVar23 = iVar24;
-            iVar10 = srcThenDestInteriorWidth;
-            iVar31 = iVar29;
+            srcCursorLevelImageOrOffset = dstOrSrcCursorOrSkipBytes;
+            dstOrSrcCursorOrColumns = srcThenDestInteriorWidth;
+            dstCursor2 = dstOrSrcCursorOrColumns2;
             do {
-              iVar29 = iVar31 + bytesPerPixel;
-              iVar24 = iVar23 + bytesPerPixel + pixelStep;
-              (*filter3D)(iVar31,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes,sliceBytes);
-              iVar10 = iVar10 + -1;
-              iVar23 = iVar24;
-              iVar31 = iVar29;
-            } while (iVar10 != 0);
+              dstOrSrcCursorOrColumns2 = dstCursor2 + bytesPerPixel;
+              dstOrSrcCursorOrSkipBytes = srcCursorLevelImageOrOffset + bytesPerPixel + pixelStep;
+              (*filter3D)(dstCursor2,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,pixelStep,rowBytes,sliceBytes);
+              dstOrSrcCursorOrColumns = dstOrSrcCursorOrColumns + -1;
+              srcCursorLevelImageOrOffset = dstOrSrcCursorOrSkipBytes;
+              dstCursor2 = dstOrSrcCursorOrColumns2;
+            } while (dstOrSrcCursorOrColumns != 0);
           }
-          local_9c = local_6c;
-          iVar10 = iVar29 + bytesPerPixel;
-          iVar23 = (iVar24 - bytesPerPixel) + local_6c;
-          (*filter3D)(iVar29,iVar24 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
-          iVar23 = iVar23 + rowPadBytes;
+          pixelPairBytesCopy5 = pixelPairBytesCopy1;
+          dstOrSrcCursorOrColumns = dstOrSrcCursorOrColumns2 + bytesPerPixel;
+          srcCursorLevelImageOrOffset = (dstOrSrcCursorOrSkipBytes - bytesPerPixel) + pixelPairBytesCopy1;
+          (*filter3D)(dstOrSrcCursorOrColumns2,dstOrSrcCursorOrSkipBytes - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+          srcCursorLevelImageOrOffset = srcCursorLevelImageOrOffset + rowPadBytes;
           if (0 < (int)srcThenDestInteriorHeight) {
-            local_80 = bytesPerPixel + pixelStep;
-            iVar24 = rowPadBytes + iVar26;
-            uVar28 = srcThenDestInteriorHeight;
+            srcPixelAdvance3 = bytesPerPixel + pixelStep;
+            dstOrSrcCursorOrSkipBytes = rowPadBytes + rowPixelsStrideOrCursor;
+            typeBorderDepthOrRowCount = srcThenDestInteriorHeight;
             do {
-              iVar30 = iVar10 + bytesPerPixel;
-              iVar25 = iVar23 + bytesPerPixel;
-              (*filter3D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel,iVar26,sliceBytes);
-              iVar23 = local_80;
-              iVar10 = iVar25;
-              iVar29 = srcThenDestInteriorWidth;
-              iVar31 = iVar30;
+              dstCursor = dstOrSrcCursorOrColumns + bytesPerPixel;
+              dstOrSrcCursor = srcCursorLevelImageOrOffset + bytesPerPixel;
+              (*filter3D)(dstOrSrcCursorOrColumns,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,bytesPerPixel,rowPixelsStrideOrCursor,sliceBytes);
+              srcCursorLevelImageOrOffset = srcPixelAdvance3;
+              dstOrSrcCursorOrColumns = dstOrSrcCursor;
+              dstOrSrcCursorOrColumns2 = srcThenDestInteriorWidth;
+              dstCursor2 = dstCursor;
               if (0 < srcThenDestInteriorWidth) {
                 do {
-                  iVar30 = iVar31 + bytesPerPixel;
-                  iVar25 = iVar10 + iVar23;
-                  (*filter3D)(iVar31,iVar10,levelRecordThenComponentCount,pixelStep,iVar26,sliceBytes);
-                  iVar29 = iVar29 + -1;
-                  iVar10 = iVar25;
-                  iVar31 = iVar30;
-                } while (iVar29 != 0);
+                  dstCursor = dstCursor2 + bytesPerPixel;
+                  dstOrSrcCursor = dstOrSrcCursorOrColumns + srcCursorLevelImageOrOffset;
+                  (*filter3D)(dstCursor2,dstOrSrcCursorOrColumns,levelRecordThenComponentCount,pixelStep,rowPixelsStrideOrCursor,sliceBytes);
+                  dstOrSrcCursorOrColumns2 = dstOrSrcCursorOrColumns2 + -1;
+                  dstOrSrcCursorOrColumns = dstOrSrcCursor;
+                  dstCursor2 = dstCursor;
+                } while (dstOrSrcCursorOrColumns2 != 0);
               }
-              iVar10 = iVar30 + bytesPerPixel;
-              iVar23 = (iVar25 - bytesPerPixel) + local_9c;
-              (*filter3D)(iVar30,iVar25 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,iVar26,sliceBytes);
-              uVar28 = uVar28 - 1;
-              iVar23 = iVar23 + iVar24;
-            } while (uVar28 != 0);
+              dstOrSrcCursorOrColumns = dstCursor + bytesPerPixel;
+              srcCursorLevelImageOrOffset = (dstOrSrcCursor - bytesPerPixel) + pixelPairBytesCopy5;
+              (*filter3D)(dstCursor,dstOrSrcCursor - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowPixelsStrideOrCursor,sliceBytes);
+              typeBorderDepthOrRowCount = typeBorderDepthOrRowCount - 1;
+              srcCursorLevelImageOrOffset = srcCursorLevelImageOrOffset + dstOrSrcCursorOrSkipBytes;
+            } while (typeBorderDepthOrRowCount != 0);
           }
-          iVar29 = iVar10 + bytesPerPixel;
-          iVar24 = (iVar23 - rowBytes) + bytesPerPixel;
-          (*filter3D)(iVar10,iVar23 - rowBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+          dstOrSrcCursorOrColumns2 = dstOrSrcCursorOrColumns + bytesPerPixel;
+          dstOrSrcCursorOrSkipBytes = (srcCursorLevelImageOrOffset - rowBytes) + bytesPerPixel;
+          (*filter3D)(dstOrSrcCursorOrColumns,srcCursorLevelImageOrOffset - rowBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
           if (0 < srcThenDestInteriorWidth) {
-            iVar23 = iVar24;
-            iVar10 = srcThenDestInteriorWidth;
-            iVar31 = iVar29;
+            srcCursorLevelImageOrOffset = dstOrSrcCursorOrSkipBytes;
+            dstOrSrcCursorOrColumns = srcThenDestInteriorWidth;
+            dstCursor2 = dstOrSrcCursorOrColumns2;
             do {
-              iVar29 = iVar31 + bytesPerPixel;
-              iVar24 = iVar23 + bytesPerPixel + pixelStep;
-              (*filter3D)(iVar31,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes,sliceBytes);
-              iVar10 = iVar10 + -1;
-              iVar23 = iVar24;
-              iVar31 = iVar29;
-            } while (iVar10 != 0);
+              dstOrSrcCursorOrColumns2 = dstCursor2 + bytesPerPixel;
+              dstOrSrcCursorOrSkipBytes = srcCursorLevelImageOrOffset + bytesPerPixel + pixelStep;
+              (*filter3D)(dstCursor2,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,pixelStep,rowBytes,sliceBytes);
+              dstOrSrcCursorOrColumns = dstOrSrcCursorOrColumns + -1;
+              srcCursorLevelImageOrOffset = dstOrSrcCursorOrSkipBytes;
+              dstCursor2 = dstOrSrcCursorOrColumns2;
+            } while (dstOrSrcCursorOrColumns != 0);
           }
-          iVar10 = iVar29 + bytesPerPixel;
-          iVar23 = (iVar24 - bytesPerPixel) + local_9c;
-          (*filter3D)(iVar29,iVar24 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
-          iVar23 = iVar23 + rowPadBytes + rowBytes + iVar16;
+          dstOrSrcCursorOrColumns = dstOrSrcCursorOrColumns2 + bytesPerPixel;
+          srcCursorLevelImageOrOffset = (dstOrSrcCursorOrSkipBytes - bytesPerPixel) + pixelPairBytesCopy5;
+          (*filter3D)(dstOrSrcCursorOrColumns2,dstOrSrcCursorOrSkipBytes - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+          srcCursorLevelImageOrOffset = srcCursorLevelImageOrOffset + rowPadBytes + rowBytes + cursorOrColumnsOrSkipBytes;
         }
         if (0 < (int)srcThenDestInteriorDepth) {
-          local_90 = iVar16 + iVar27;
-          local_88 = rowPadBytes + iVar26;
+          sliceSkipBytes = cursorOrColumnsOrSkipBytes + cursorOrStrideOrCount;
+          rowSkipBytes5 = rowPadBytes + rowPixelsStrideOrCursor;
           slicesRemaining = srcThenDestInteriorDepth;
-          local_60 = bytesPerPixel + pixelStep;
-          local_98 = local_68;
-          local_84 = local_5c;
+          srcPixelAdvance4 = bytesPerPixel + pixelStep;
+          pixelPairBytesCopy6 = pixelPairBytesCopy2;
+          pixelPairBytesCopy8 = pixelPairBytesCopy4;
           do {
-            if (!(bool)(bVar35 >> 5 & 1)) {
-              iVar24 = iVar10 + bytesPerPixel;
-              iVar16 = iVar23 + bytesPerPixel;
-              (*filter3D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel,rowBytes,iVar27);
+            if (!(bool)(savedCrHighByte >> 5 & 1)) {
+              dstOrSrcCursorOrSkipBytes = dstOrSrcCursorOrColumns + bytesPerPixel;
+              cursorOrColumnsOrSkipBytes = srcCursorLevelImageOrOffset + bytesPerPixel;
+              (*filter3D)(dstOrSrcCursorOrColumns,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,bytesPerPixel,rowBytes,cursorOrStrideOrCount);
               if (0 < srcThenDestInteriorWidth) {
-                iVar23 = iVar16;
-                iVar10 = srcThenDestInteriorWidth;
-                iVar29 = iVar24;
+                srcCursorLevelImageOrOffset = cursorOrColumnsOrSkipBytes;
+                dstOrSrcCursorOrColumns = srcThenDestInteriorWidth;
+                dstOrSrcCursorOrColumns2 = dstOrSrcCursorOrSkipBytes;
                 do {
-                  iVar24 = iVar29 + bytesPerPixel;
-                  iVar16 = iVar23 + bytesPerPixel + pixelStep;
-                  (*filter3D)(iVar29,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes,iVar27);
-                  iVar10 = iVar10 + -1;
-                  iVar23 = iVar16;
-                  iVar29 = iVar24;
-                } while (iVar10 != 0);
+                  dstOrSrcCursorOrSkipBytes = dstOrSrcCursorOrColumns2 + bytesPerPixel;
+                  cursorOrColumnsOrSkipBytes = srcCursorLevelImageOrOffset + bytesPerPixel + pixelStep;
+                  (*filter3D)(dstOrSrcCursorOrColumns2,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,pixelStep,rowBytes,cursorOrStrideOrCount);
+                  dstOrSrcCursorOrColumns = dstOrSrcCursorOrColumns + -1;
+                  srcCursorLevelImageOrOffset = cursorOrColumnsOrSkipBytes;
+                  dstOrSrcCursorOrColumns2 = dstOrSrcCursorOrSkipBytes;
+                } while (dstOrSrcCursorOrColumns != 0);
               }
-              iVar10 = iVar24 + bytesPerPixel;
-              iVar23 = (iVar16 - bytesPerPixel) + local_98 + rowPadBytes;
-              (*filter3D)(iVar24,iVar16 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,iVar27);
+              dstOrSrcCursorOrColumns = dstOrSrcCursorOrSkipBytes + bytesPerPixel;
+              srcCursorLevelImageOrOffset = (cursorOrColumnsOrSkipBytes - bytesPerPixel) + pixelPairBytesCopy6 + rowPadBytes;
+              (*filter3D)(dstOrSrcCursorOrSkipBytes,cursorOrColumnsOrSkipBytes - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,cursorOrStrideOrCount);
             }
-            iVar24 = local_60;
-            iVar16 = local_88;
+            dstOrSrcCursorOrSkipBytes = srcPixelAdvance4;
+            cursorOrColumnsOrSkipBytes = rowSkipBytes5;
             if (0 < (int)srcThenDestInteriorHeight) {
-              local_94 = local_84;
-              uVar28 = srcThenDestInteriorHeight;
+              pixelPairBytesCopy7 = pixelPairBytesCopy8;
+              typeBorderDepthOrRowCount = srcThenDestInteriorHeight;
               do {
-                iVar29 = iVar23;
-                iVar31 = iVar10;
-                if (!(bool)(bVar35 >> 5 & 1)) {
-                  iVar31 = iVar10 + bytesPerPixel;
-                  iVar29 = iVar23 + bytesPerPixel;
-                  (*filter3D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel,iVar26,iVar27);
+                dstOrSrcCursorOrColumns2 = srcCursorLevelImageOrOffset;
+                dstCursor2 = dstOrSrcCursorOrColumns;
+                if (!(bool)(savedCrHighByte >> 5 & 1)) {
+                  dstCursor2 = dstOrSrcCursorOrColumns + bytesPerPixel;
+                  dstOrSrcCursorOrColumns2 = srcCursorLevelImageOrOffset + bytesPerPixel;
+                  (*filter3D)(dstOrSrcCursorOrColumns,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,bytesPerPixel,rowPixelsStrideOrCursor,cursorOrStrideOrCount);
                 }
-                iVar23 = iVar29;
-                iVar10 = srcThenDestInteriorWidth;
-                iVar25 = iVar31;
+                srcCursorLevelImageOrOffset = dstOrSrcCursorOrColumns2;
+                dstOrSrcCursorOrColumns = srcThenDestInteriorWidth;
+                dstOrSrcCursor = dstCursor2;
                 if (0 < srcThenDestInteriorWidth) {
                   do {
-                    iVar31 = iVar25 + bytesPerPixel;
-                    iVar29 = iVar23 + iVar24;
-                    (*filter3D)(iVar25,iVar23,levelRecordThenComponentCount,pixelStep,iVar26,iVar27);
-                    iVar10 = iVar10 + -1;
-                    iVar23 = iVar29;
-                    iVar25 = iVar31;
-                  } while (iVar10 != 0);
+                    dstCursor2 = dstOrSrcCursor + bytesPerPixel;
+                    dstOrSrcCursorOrColumns2 = srcCursorLevelImageOrOffset + dstOrSrcCursorOrSkipBytes;
+                    (*filter3D)(dstOrSrcCursor,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,pixelStep,rowPixelsStrideOrCursor,cursorOrStrideOrCount);
+                    dstOrSrcCursorOrColumns = dstOrSrcCursorOrColumns + -1;
+                    srcCursorLevelImageOrOffset = dstOrSrcCursorOrColumns2;
+                    dstOrSrcCursor = dstCursor2;
+                  } while (dstOrSrcCursorOrColumns != 0);
                 }
-                iVar10 = iVar31;
-                if (!(bool)(bVar35 >> 5 & 1)) {
-                  iVar23 = iVar29 - bytesPerPixel;
-                  iVar10 = iVar31 + bytesPerPixel;
-                  iVar29 = iVar23 + local_94;
-                  (*filter3D)(iVar31,iVar23,levelRecordThenComponentCount,bytesPerPixel,iVar26,iVar27);
+                dstOrSrcCursorOrColumns = dstCursor2;
+                if (!(bool)(savedCrHighByte >> 5 & 1)) {
+                  srcCursorLevelImageOrOffset = dstOrSrcCursorOrColumns2 - bytesPerPixel;
+                  dstOrSrcCursorOrColumns = dstCursor2 + bytesPerPixel;
+                  dstOrSrcCursorOrColumns2 = srcCursorLevelImageOrOffset + pixelPairBytesCopy7;
+                  (*filter3D)(dstCursor2,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,bytesPerPixel,rowPixelsStrideOrCursor,cursorOrStrideOrCount);
                 }
-                uVar28 = uVar28 - 1;
-                iVar23 = iVar29 + iVar16;
-              } while (uVar28 != 0);
+                typeBorderDepthOrRowCount = typeBorderDepthOrRowCount - 1;
+                srcCursorLevelImageOrOffset = dstOrSrcCursorOrColumns2 + cursorOrColumnsOrSkipBytes;
+              } while (typeBorderDepthOrRowCount != 0);
             }
-            if (!(bool)(bVar35 >> 5 & 1)) {
-              iVar24 = iVar10 + bytesPerPixel;
-              iVar16 = (iVar23 - rowBytes) + bytesPerPixel;
-              (*filter3D)(iVar10,iVar23 - rowBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes,iVar27);
+            if (!(bool)(savedCrHighByte >> 5 & 1)) {
+              dstOrSrcCursorOrSkipBytes = dstOrSrcCursorOrColumns + bytesPerPixel;
+              cursorOrColumnsOrSkipBytes = (srcCursorLevelImageOrOffset - rowBytes) + bytesPerPixel;
+              (*filter3D)(dstOrSrcCursorOrColumns,srcCursorLevelImageOrOffset - rowBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes,cursorOrStrideOrCount);
               if (0 < srcThenDestInteriorWidth) {
-                iVar23 = iVar16;
-                iVar10 = srcThenDestInteriorWidth;
-                iVar29 = iVar24;
+                srcCursorLevelImageOrOffset = cursorOrColumnsOrSkipBytes;
+                dstOrSrcCursorOrColumns = srcThenDestInteriorWidth;
+                dstOrSrcCursorOrColumns2 = dstOrSrcCursorOrSkipBytes;
                 do {
-                  iVar24 = iVar29 + bytesPerPixel;
-                  iVar16 = iVar23 + bytesPerPixel + pixelStep;
-                  (*filter3D)(iVar29,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes,iVar27);
-                  iVar10 = iVar10 + -1;
-                  iVar23 = iVar16;
-                  iVar29 = iVar24;
-                } while (iVar10 != 0);
+                  dstOrSrcCursorOrSkipBytes = dstOrSrcCursorOrColumns2 + bytesPerPixel;
+                  cursorOrColumnsOrSkipBytes = srcCursorLevelImageOrOffset + bytesPerPixel + pixelStep;
+                  (*filter3D)(dstOrSrcCursorOrColumns2,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,pixelStep,rowBytes,cursorOrStrideOrCount);
+                  dstOrSrcCursorOrColumns = dstOrSrcCursorOrColumns + -1;
+                  srcCursorLevelImageOrOffset = cursorOrColumnsOrSkipBytes;
+                  dstOrSrcCursorOrColumns2 = dstOrSrcCursorOrSkipBytes;
+                } while (dstOrSrcCursorOrColumns != 0);
               }
-              iVar10 = iVar24 + bytesPerPixel;
-              iVar23 = (iVar16 - bytesPerPixel) + local_98;
-              (*filter3D)(iVar24,iVar16 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,iVar27);
-              iVar23 = iVar23 + rowPadBytes + rowBytes;
+              dstOrSrcCursorOrColumns = dstOrSrcCursorOrSkipBytes + bytesPerPixel;
+              srcCursorLevelImageOrOffset = (cursorOrColumnsOrSkipBytes - bytesPerPixel) + pixelPairBytesCopy6;
+              (*filter3D)(dstOrSrcCursorOrSkipBytes,cursorOrColumnsOrSkipBytes - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,cursorOrStrideOrCount);
+              srcCursorLevelImageOrOffset = srcCursorLevelImageOrOffset + rowPadBytes + rowBytes;
             }
             slicesRemaining = slicesRemaining - 1;
-            iVar23 = iVar23 + local_90;
+            srcCursorLevelImageOrOffset = srcCursorLevelImageOrOffset + sliceSkipBytes;
           } while (slicesRemaining != 0);
         }
-        if (!(bool)(bVar35 >> 5 & 1)) {
-          iVar16 = iVar10 + bytesPerPixel;
-          iVar27 = (iVar23 - sliceBytes) + bytesPerPixel;
-          (*filter3D)(iVar10,iVar23 - sliceBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+        if (!(bool)(savedCrHighByte >> 5 & 1)) {
+          cursorOrColumnsOrSkipBytes = dstOrSrcCursorOrColumns + bytesPerPixel;
+          cursorOrStrideOrCount = (srcCursorLevelImageOrOffset - sliceBytes) + bytesPerPixel;
+          (*filter3D)(dstOrSrcCursorOrColumns,srcCursorLevelImageOrOffset - sliceBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
           if (0 < srcThenDestInteriorWidth) {
-            iVar23 = iVar27;
-            iVar10 = srcThenDestInteriorWidth;
-            iVar24 = iVar16;
+            srcCursorLevelImageOrOffset = cursorOrStrideOrCount;
+            dstOrSrcCursorOrColumns = srcThenDestInteriorWidth;
+            dstOrSrcCursorOrSkipBytes = cursorOrColumnsOrSkipBytes;
             do {
-              iVar16 = iVar24 + bytesPerPixel;
-              iVar27 = iVar23 + bytesPerPixel + pixelStep;
-              (*filter3D)(iVar24,iVar23,levelRecordThenComponentCount,pixelStep,rowBytes,sliceBytes);
-              iVar10 = iVar10 + -1;
-              iVar23 = iVar27;
-              iVar24 = iVar16;
-            } while (iVar10 != 0);
+              cursorOrColumnsOrSkipBytes = dstOrSrcCursorOrSkipBytes + bytesPerPixel;
+              cursorOrStrideOrCount = srcCursorLevelImageOrOffset + bytesPerPixel + pixelStep;
+              (*filter3D)(dstOrSrcCursorOrSkipBytes,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,pixelStep,rowBytes,sliceBytes);
+              dstOrSrcCursorOrColumns = dstOrSrcCursorOrColumns + -1;
+              srcCursorLevelImageOrOffset = cursorOrStrideOrCount;
+              dstOrSrcCursorOrSkipBytes = cursorOrColumnsOrSkipBytes;
+            } while (dstOrSrcCursorOrColumns != 0);
           }
-          iVar23 = local_64;
-          iVar24 = iVar16 + bytesPerPixel;
-          iVar10 = (iVar27 - bytesPerPixel) + local_64;
-          (*filter3D)(iVar16,iVar27 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
-          iVar10 = iVar10 + rowPadBytes;
+          srcCursorLevelImageOrOffset = pixelPairBytesCopy3;
+          dstOrSrcCursorOrSkipBytes = cursorOrColumnsOrSkipBytes + bytesPerPixel;
+          dstOrSrcCursorOrColumns = (cursorOrStrideOrCount - bytesPerPixel) + pixelPairBytesCopy3;
+          (*filter3D)(cursorOrColumnsOrSkipBytes,cursorOrStrideOrCount - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+          dstOrSrcCursorOrColumns = dstOrSrcCursorOrColumns + rowPadBytes;
           if (0 < (int)srcThenDestInteriorHeight) {
-            iVar27 = rowPadBytes + iVar26;
-            uVar28 = srcThenDestInteriorHeight;
+            cursorOrStrideOrCount = rowPadBytes + rowPixelsStrideOrCursor;
+            typeBorderDepthOrRowCount = srcThenDestInteriorHeight;
             do {
-              iVar31 = iVar24 + bytesPerPixel;
-              iVar29 = iVar10 + bytesPerPixel;
-              (*filter3D)(iVar24,iVar10,levelRecordThenComponentCount,bytesPerPixel,iVar26,sliceBytes);
-              iVar16 = iVar29;
-              iVar10 = srcThenDestInteriorWidth;
-              iVar24 = iVar31;
+              dstCursor2 = dstOrSrcCursorOrSkipBytes + bytesPerPixel;
+              dstOrSrcCursorOrColumns2 = dstOrSrcCursorOrColumns + bytesPerPixel;
+              (*filter3D)(dstOrSrcCursorOrSkipBytes,dstOrSrcCursorOrColumns,levelRecordThenComponentCount,bytesPerPixel,rowPixelsStrideOrCursor,sliceBytes);
+              cursorOrColumnsOrSkipBytes = dstOrSrcCursorOrColumns2;
+              dstOrSrcCursorOrColumns = srcThenDestInteriorWidth;
+              dstOrSrcCursorOrSkipBytes = dstCursor2;
               if (0 < srcThenDestInteriorWidth) {
                 do {
-                  iVar31 = iVar24 + bytesPerPixel;
-                  iVar29 = iVar16 + bytesPerPixel + pixelStep;
-                  (*filter3D)(iVar24,iVar16,levelRecordThenComponentCount,pixelStep,iVar26,sliceBytes);
-                  iVar10 = iVar10 + -1;
-                  iVar16 = iVar29;
-                  iVar24 = iVar31;
-                } while (iVar10 != 0);
+                  dstCursor2 = dstOrSrcCursorOrSkipBytes + bytesPerPixel;
+                  dstOrSrcCursorOrColumns2 = cursorOrColumnsOrSkipBytes + bytesPerPixel + pixelStep;
+                  (*filter3D)(dstOrSrcCursorOrSkipBytes,cursorOrColumnsOrSkipBytes,levelRecordThenComponentCount,pixelStep,rowPixelsStrideOrCursor,sliceBytes);
+                  dstOrSrcCursorOrColumns = dstOrSrcCursorOrColumns + -1;
+                  cursorOrColumnsOrSkipBytes = dstOrSrcCursorOrColumns2;
+                  dstOrSrcCursorOrSkipBytes = dstCursor2;
+                } while (dstOrSrcCursorOrColumns != 0);
               }
-              iVar24 = iVar31 + bytesPerPixel;
-              iVar10 = (iVar29 - bytesPerPixel) + iVar23 + iVar27;
-              (*filter3D)(iVar31,iVar29 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,iVar26,sliceBytes);
-              uVar28 = uVar28 - 1;
-            } while (uVar28 != 0);
+              dstOrSrcCursorOrSkipBytes = dstCursor2 + bytesPerPixel;
+              dstOrSrcCursorOrColumns = (dstOrSrcCursorOrColumns2 - bytesPerPixel) + srcCursorLevelImageOrOffset + cursorOrStrideOrCount;
+              (*filter3D)(dstCursor2,dstOrSrcCursorOrColumns2 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowPixelsStrideOrCursor,sliceBytes);
+              typeBorderDepthOrRowCount = typeBorderDepthOrRowCount - 1;
+            } while (typeBorderDepthOrRowCount != 0);
           }
-          iVar26 = iVar24 + bytesPerPixel;
-          iVar23 = (iVar10 - rowBytes) + bytesPerPixel;
-          (*filter3D)(iVar24,iVar10 - rowBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+          rowPixelsStrideOrCursor = dstOrSrcCursorOrSkipBytes + bytesPerPixel;
+          srcCursorLevelImageOrOffset = (dstOrSrcCursorOrColumns - rowBytes) + bytesPerPixel;
+          (*filter3D)(dstOrSrcCursorOrSkipBytes,dstOrSrcCursorOrColumns - rowBytes,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
           if (0 < srcThenDestInteriorWidth) {
-            iVar27 = iVar23;
-            iVar16 = srcThenDestInteriorWidth;
-            iVar10 = iVar26;
+            cursorOrStrideOrCount = srcCursorLevelImageOrOffset;
+            cursorOrColumnsOrSkipBytes = srcThenDestInteriorWidth;
+            dstOrSrcCursorOrColumns = rowPixelsStrideOrCursor;
             do {
-              iVar26 = iVar10 + bytesPerPixel;
-              iVar23 = iVar27 + bytesPerPixel + pixelStep;
-              (*filter3D)(iVar10,iVar27,levelRecordThenComponentCount,pixelStep,rowBytes,sliceBytes);
-              iVar16 = iVar16 + -1;
-              iVar27 = iVar23;
-              iVar10 = iVar26;
-            } while (iVar16 != 0);
+              rowPixelsStrideOrCursor = dstOrSrcCursorOrColumns + bytesPerPixel;
+              srcCursorLevelImageOrOffset = cursorOrStrideOrCount + bytesPerPixel + pixelStep;
+              (*filter3D)(dstOrSrcCursorOrColumns,cursorOrStrideOrCount,levelRecordThenComponentCount,pixelStep,rowBytes,sliceBytes);
+              cursorOrColumnsOrSkipBytes = cursorOrColumnsOrSkipBytes + -1;
+              cursorOrStrideOrCount = srcCursorLevelImageOrOffset;
+              dstOrSrcCursorOrColumns = rowPixelsStrideOrCursor;
+            } while (cursorOrColumnsOrSkipBytes != 0);
           }
-          (*filter3D)(iVar26,iVar23 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
+          (*filter3D)(rowPixelsStrideOrCursor,srcCursorLevelImageOrOffset - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel,rowBytes,sliceBytes);
         }
         destWidth = *(ushort *)(destLevelRecord + 200);
         uVar6 = *(ushort *)(destLevelRecord + 0xca);
-        uVar28 = (uint)*(ushort *)(destLevelRecord + 0xcc);
+        typeBorderDepthOrRowCount = (uint)*(ushort *)(destLevelRecord + 0xcc);
         incomingR10 = borderCopy;
         goto LAB_000fb8d8;
       }
     }
     else if (isOneDimensional) {
-      bVar35 = (byte)(local_7c >> 0x18);
-      iVar26 = iVar23;
-      dstCursor4 = iVar10;
-      if (!(bool)(bVar35 >> 5 & 1)) {
-        dstCursor4 = iVar10 + bytesPerPixel;
-        iVar26 = iVar23 + bytesPerPixel;
-        (*filter1D)(iVar10,iVar23,levelRecordThenComponentCount,bytesPerPixel);
+      savedCrHighByte = (byte)(savedCrFields >> 0x18);
+      rowPixelsStrideOrCursor = srcCursorLevelImageOrOffset;
+      dstCursor4 = dstOrSrcCursorOrColumns;
+      if (!(bool)(savedCrHighByte >> 5 & 1)) {
+        dstCursor4 = dstOrSrcCursorOrColumns + bytesPerPixel;
+        rowPixelsStrideOrCursor = srcCursorLevelImageOrOffset + bytesPerPixel;
+        (*filter1D)(dstOrSrcCursorOrColumns,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,bytesPerPixel);
       }
       if (0 < srcThenDestInteriorWidth) {
-        iVar23 = iVar26;
-        iVar27 = srcThenDestInteriorWidth;
-        iVar16 = dstCursor4;
+        srcCursorLevelImageOrOffset = rowPixelsStrideOrCursor;
+        cursorOrStrideOrCount = srcThenDestInteriorWidth;
+        cursorOrColumnsOrSkipBytes = dstCursor4;
         do {
-          dstCursor4 = iVar16 + bytesPerPixel;
-          iVar26 = iVar23 + bytesPerPixel + pixelStep;
-          (*filter1D)(iVar16,iVar23,levelRecordThenComponentCount,pixelStep);
-          iVar27 = iVar27 + -1;
-          iVar23 = iVar26;
-          iVar16 = dstCursor4;
-        } while (iVar27 != 0);
+          dstCursor4 = cursorOrColumnsOrSkipBytes + bytesPerPixel;
+          rowPixelsStrideOrCursor = srcCursorLevelImageOrOffset + bytesPerPixel + pixelStep;
+          (*filter1D)(cursorOrColumnsOrSkipBytes,srcCursorLevelImageOrOffset,levelRecordThenComponentCount,pixelStep);
+          cursorOrStrideOrCount = cursorOrStrideOrCount + -1;
+          srcCursorLevelImageOrOffset = rowPixelsStrideOrCursor;
+          cursorOrColumnsOrSkipBytes = dstCursor4;
+        } while (cursorOrStrideOrCount != 0);
       }
-      if (!(bool)(bVar35 >> 5 & 1)) {
-        (*filter1D)(dstCursor4,iVar26 - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel);
+      if (!(bool)(savedCrHighByte >> 5 & 1)) {
+        (*filter1D)(dstCursor4,rowPixelsStrideOrCursor - bytesPerPixel,levelRecordThenComponentCount,bytesPerPixel);
       }
       destWidth = *(ushort *)(destLevelRecord + 200);
       incomingR10 = 0;
-      uVar28 = 1;
+      typeBorderDepthOrRowCount = 1;
       destHeight = 1;
       incomingR8 = twiceBorder >> 1;
-      iVar23 = 0;
+      srcCursorLevelImageOrOffset = 0;
       goto LAB_000fb8dc;
     }
     nextLevel = nextLevel + 1;
-    iVar23 = destLevelRecord + 0xc4;
+    srcCursorLevelImageOrOffset = destLevelRecord + 0xc4;
   } while( true );
 }
 
