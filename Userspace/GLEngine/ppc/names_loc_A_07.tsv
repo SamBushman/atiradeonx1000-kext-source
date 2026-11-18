@@ -1,0 +1,62 @@
+use	_glepLoadRenderers	iVar9	nameLength	INFERRED	_CFStringGetLength of the IOGLBundleName property; used as malloc size (+1) and _CFStringGetCString buffer size	^\s*iVar9\ =\ _CFStringGetLength\(iVar7\);$	+2
+use	_glepLoadRenderers	iVar9	nameLength	INFERRED	_CFStringGetLength of the IOGLBundleName property; used as malloc size (+1) and _CFStringGetCString buffer size	^\s*if\ \(\(!bVar2\)\ \&\&\ \(iVar9\ =\ _CFStringGetCString\(iVar7,pcVar12,iVar9\ \+\ 1,0\),\ iVar9\ !=\ 0\)\)\ \{$	+1
+use	_glepLoadRenderers	iVar9	compareResult	CONFIRMED	result of _strcmp of the plugin path against the registered plugins	^\s*iVar9\ =\ _strcmp\(acStack_140,piVar15\ \+\ 1\);$	+2
+use	_glepLoadRenderers	bVar1	noCStringPtr	INFERRED	pcVar8 == NULL: _CFStringGetCStringPtr returned no direct C string, so a copy is made	^\s*bVar1\ =\ pcVar8\ ==\ \(char\ \*\)0x0;$	+2
+use	_glepLoadRenderers	bVar1	noCStringPtr	INFERRED	pcVar8 == NULL: _CFStringGetCStringPtr returned no direct C string, so a copy is made	^\s*bVar1\ =\ bVar2;$	+1
+use	_glepLoadRenderers	bVar1	noCStringPtr	INFERRED	pcVar8 == NULL: _CFStringGetCStringPtr returned no direct C string, so a copy is made	^\s*if\ \(!bVar1\)\ \{$	+1
+use	_glepLoadRenderers	bVar2	noHeapCopy	INFERRED	pcVar12 == NULL: no malloc'd copy to _free at the end	^\s*bVar2\ =\ pcVar12\ ==\ \(char\ \*\)0x0;$	+2
+use	_glepLoadRenderers	bVar2	noHeapCopy	INFERRED	pcVar12 == NULL: no malloc'd copy to _free at the end	^\s*bVar1\ =\ bVar2;$	+1
+use	_glepLoadRenderers	bVar2	noHeapCopy	INFERRED	pcVar12 == NULL: no malloc'd copy to _free at the end	^\s*bVar2\ =\ true;$	+1
+use	_glepLoadRenderers	bVar2	noHeapCopy	INFERRED	pcVar12 == NULL: no malloc'd copy to _free at the end	^\s*if\ \(!bVar2\)\ \{$	+1
+use	_glepLoadRenderers	iVar3	entryOffset	INFERRED	index * 4: byte offset into the scandir name list	^\s*iVar3\ =\ iVar9\ \*\ 4;$	+2
+use	_glepLoadRenderers	iVar3	entryOffset	INFERRED	index * 4: byte offset into the scandir name list	^\s*_strncat\(acStack_140,\(char\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ local_40\[0\]\)\ \+\ 8\),0x100\);$	+1
+use	_glepLoadRenderers	iVar3	entryOffset	INFERRED	index * 4: byte offset into the scandir name list	^\s*_strncat\(acStack_140,\(char\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ local_40\[0\]\)\ \+\ 8\),0x100\);$@2	+1
+use	_glepLoadRenderers	iVar3	entryOffset	INFERRED	index * 4: byte offset into the scandir name list	^\s*_free\(\*\(undefined4\ \*\)\(iVar3\ \+\ iVar11\)\);$	+1
+use	_glepLoadRenderers	puVar4	cfAllocator	INFERRED	PTR_00112430 dereferenced as the allocator argument of _IORegistryEntryCreateCFProperty	^\s*puVar4\ =\ PTR_00112430;$	+1
+use	_glepLoadRenderers	puVar4	cfAllocator	INFERRED	PTR_00112430 dereferenced as the allocator argument of _IORegistryEntryCreateCFProperty	^\s*if\ \(\(iVar7\ !=\ 0\)\ \&\&$	+3
+use	_glepLoadRenderers	puVar4	bindSurfaceFunc	CONFIRMED	PTR__gleBindSurface stored into _gle_io_data+0x10	^\s*puVar4\ =\ PTR__gleBindSurface_00111e0c;$	+1
+use	_glepLoadRenderers	puVar4	bindSurfaceFunc	CONFIRMED	PTR__gleBindSurface stored into _gle_io_data+0x10	^\s*\*\(undefined\ \*\*\)\(puVar5\ \+\ 0x10\)\ =\ puVar4;$	+1
+use	_glepLoadRenderers	puVar5	gleIoData	CONFIRMED	PTR__gle_io_data: +0 entry count, +4 entry array, +0xc/+0x10 hook slots	^\s*puVar5\ =\ PTR__gle_io_data_00112434;$	+1
+use	_glepLoadRenderers	puVar5	gleIoData	CONFIRMED	PTR__gle_io_data: +0 entry count, +4 entry array, +0xc/+0x10 hook slots	^\s*iVar7\ =\ \*\(int\ \*\)\(uVar14\ \*\ 4\ \+\ \*\(int\ \*\)\(puVar5\ \+\ 4\)\);$	+1
+use	_glepLoadRenderers	puVar5	gleIoData	CONFIRMED	PTR__gle_io_data: +0 entry count, +4 entry array, +0xc/+0x10 hook slots	^\s*\}\ while\ \(uVar14\ <\ \*\(uint\ \*\)puVar5\);$	+1
+use	_glepLoadRenderers	puVar5	gleIoData	CONFIRMED	PTR__gle_io_data: +0 entry count, +4 entry array, +0xc/+0x10 hook slots	^\s*puVar5\ =\ PTR__gle_io_data_00112434;$@2	+1
+use	_glepLoadRenderers	puVar5	gleIoData	CONFIRMED	PTR__gle_io_data: +0 entry count, +4 entry array, +0xc/+0x10 hook slots	^\s*\*\(undefined\ \*\*\)\(puVar5\ \+\ 0x10\)\ =\ puVar4;$	+1
+use	_glepLoadRenderers	uVar6	pluginRendererMask	INFERRED	renderer bitmask stored at plugin+0x110: existing bits | 1 << renderer index	^\s*uVar6\ =\ piVar15\[0x44\]\ \|\ 1\ <<\ \(uVar14\ \&\ 0x3f\);$	+1
+use	_glepLoadRenderers	uVar6	pluginRendererMask	INFERRED	renderer bitmask stored at plugin+0x110: existing bits | 1 << renderer index	^\s*uVar6\ =\ 1\ <<\ \(uVar14\ \&\ 0x3f\);$	+1
+use	_glepLoadRenderers	uVar6	pluginRendererMask	INFERRED	renderer bitmask stored at plugin+0x110: existing bits | 1 << renderer index	^\s*\*\(uint\ \*\)\(\(int\)piVar15\ \+\ 0x110\)\ =\ uVar6;$	+1
+use	_glepLoadRenderers	uVar6	bitShift	INFERRED	renderer index & 0x3f used as the shift count of the all-renderers mask	^\s*uVar6\ =\ uVar14\ \&\ 0x3f;$	+1
+use	_glepLoadRenderers	uVar6	bitShift	INFERRED	renderer index & 0x3f used as the shift count of the all-renderers mask	^\s*uVar13\ =\ uVar13\ \|\ 1\ <<\ uVar6;$	+1
+use	_glepLoadRenderers	iVar7	dirEntryCount	CONFIRMED	result of _scandir, the loop bound of the directory scan	^\s*iVar7\ =\ _scandir\(pcVar8,local_40,0,0\);$	+2
+use	_glepLoadRenderers	iVar7	dirEntryCount	CONFIRMED	result of _scandir, the loop bound of the directory scan	^\s*if\ \(0\ <\ iVar7\)\ \{$	+1
+use	_glepLoadRenderers	iVar7	dirEntryCount	CONFIRMED	result of _scandir, the loop bound of the directory scan	^\s*\}\ while\ \(iVar9\ <\ iVar7\);$	+1
+use	_glepLoadRenderers	pcVar8	bundleName	INFERRED	C string of the IOGLBundleName property, appended to /System/Library/Extensions/	^\s*pcVar8\ =\ \(char\ \*\)_CFStringGetCStringPtr\(iVar7,0\);$	+2
+use	_glepLoadRenderers	pcVar8	bundleName	INFERRED	C string of the IOGLBundleName property, appended to /System/Library/Extensions/	^\s*pcVar8\ =\ pcVar12;$	+1
+use	_glepLoadRenderers	pcVar8	bundleName	INFERRED	C string of the IOGLBundleName property, appended to /System/Library/Extensions/	^\s*_strncat\(acStack_140,pcVar8,0x100\);$	+1
+use	_glepLoadRenderers	pcVar8	bundleName	INFERRED	C string of the IOGLBundleName property, appended to /System/Library/Extensions/	^\s*_strncat\(acStack_140,pcVar8,0x100\);$@2	+1
+use	_glepLoadRenderers	pcVar8	resourcesDir	CONFIRMED	GL_RESOURCES environment value or the default OpenGL.framework Resources path passed to _scandir	^\s*pcVar8\ =\ "/System/Library/Frameworks/OpenGL\.framework/Versions/A/Resources/";$	+1
+use	_glepLoadRenderers	pcVar8	resourcesDir	CONFIRMED	GL_RESOURCES environment value or the default OpenGL.framework Resources path passed to _scandir	^\s*pcVar8\ =\ pcVar12;$@2	+1
+use	_glepLoadRenderers	pcVar8	resourcesDir	CONFIRMED	GL_RESOURCES environment value or the default OpenGL.framework Resources path passed to _scandir	^\s*iVar7\ =\ _scandir\(pcVar8,local_40,0,0\);$	+1
+use	_glepLoadRenderers	pcVar8	resourcesDir	CONFIRMED	GL_RESOURCES environment value or the default OpenGL.framework Resources path passed to _scandir	^\s*_strncpy\(acStack_140,pcVar8,0x100\);$	+1
+use	_glepLoadRenderers	iVar10	memcmpResult	CONFIRMED	_memcmp of the entry name with GLDriver / GLRendererFloat	^\s*iVar10\ =\ _memcmp\(iVar16,"GLDriver",8\);$	+2
+use	_glepLoadRenderers	iVar10	pathLength	CONFIRMED	_strlen of the plugin path buffer	^\s*iVar10\ =\ _strlen\(acStack_140\);$	+2
+use	_glepLoadRenderers	iVar11	dirEntries	CONFIRMED	copy of local_40[0], the scandir name list	^\s*iVar11\ =\ local_40\[0\];$	+1
+use	_glepLoadRenderers	iVar11	dirEntries	CONFIRMED	copy of local_40[0], the scandir name list	^\s*iVar11\ =\ local_40\[0\];$@2	+1
+use	_glepLoadRenderers	iVar11	dirEntries	CONFIRMED	copy of local_40[0], the scandir name list	^\s*_free\(\*\(undefined4\ \*\)\(iVar3\ \+\ iVar11\)\);$	+1
+use	_glepLoadRenderers	iVar11	scannedPlugin	CONFIRMED	new plugin record from _glepAddPlugin	^\s*iVar11\ =\ \(\(int\ \(\*\)\(\)\)_glepAddPlugin\)\(\);$	+2
+use	_glepLoadRenderers	iVar11	scannedPlugin	CONFIRMED	new plugin record from _glepAddPlugin	^\s*_strncpy\(\(char\ \*\)\(iVar11\ \+\ 4\),acStack_140,0x100\);$	+2
+use	_glepLoadRenderers	pcVar12	nameCopy	INFERRED	malloc'd copy of the bundle name (or NULL), freed at the end	^\s*pcVar12\ =\ \(char\ \*\)0x0;$	+1
+use	_glepLoadRenderers	pcVar12	nameCopy	INFERRED	malloc'd copy of the bundle name (or NULL), freed at the end	^\s*pcVar12\ =\ \(char\ \*\)_malloc\(iVar9\ \+\ 1\);$	+4
+use	_glepLoadRenderers	pcVar12	nameCopy	INFERRED	malloc'd copy of the bundle name (or NULL), freed at the end	^\s*_free\(pcVar12\);$	+1
+use	_glepLoadRenderers	pcVar12	envResourcesDir	CONFIRMED	result of _getenv("GL_RESOURCES")	^\s*pcVar12\ =\ \(char\ \*\)_getenv\("GL_RESOURCES"\);$	+1
+use	_glepLoadRenderers	pcVar12	envResourcesDir	CONFIRMED	result of _getenv("GL_RESOURCES")	^\s*if\ \(pcVar12\ !=\ \(char\ \*\)0x0\)\ \{$	+2
+use	_glepLoadRenderers	uVar13	allRendererBits	INFERRED	OR of 1 << index over all registry entries, stored as the renderer mask of scanned plugins	^\s*uVar13\ =\ 0;$	+1
+use	_glepLoadRenderers	uVar13	allRendererBits	INFERRED	OR of 1 << index over all registry entries, stored as the renderer mask of scanned plugins	^\s*uVar13\ =\ uVar13\ \|\ 1\ <<\ uVar6;$	+1
+use	_glepLoadRenderers	uVar13	allRendererBits	INFERRED	OR of 1 << index over all registry entries, stored as the renderer mask of scanned plugins	^\s*\*\(uint\ \*\)\(iVar11\ \+\ 0x110\)\ =\ uVar13;$	+1
+use	_glepLoadRenderers	piVar15	pluginIter	CONFIRMED	walks the _glep_plugin_head list comparing the path stored at +4	^\s*for\ \(piVar15\ =\ \(int\ \*\)_glep_plugin_head;\ piVar15\ !=\ \(int\ \*\)0x0;\ piVar15\ =\ \(int\ \*\)\*piVar15\)$	+1
+use	_glepLoadRenderers	piVar15	pluginIter	CONFIRMED	walks the _glep_plugin_head list comparing the path stored at +4	^\s*iVar9\ =\ _strcmp\(acStack_140,piVar15\ \+\ 1\);$	+1
+use	_glepLoadRenderers	piVar15	pluginIter	CONFIRMED	walks the _glep_plugin_head list comparing the path stored at +4	^\s*uVar6\ =\ piVar15\[0x44\]\ \|\ 1\ <<\ \(uVar14\ \&\ 0x3f\);$	+1
+use	_glepLoadRenderers	piVar15	pluginIter	CONFIRMED	walks the _glep_plugin_head list comparing the path stored at +4	^\s*piVar15\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)_glepAddPlugin\)\(\);$	+3
+use	_glepLoadRenderers	piVar15	pluginIter	CONFIRMED	walks the _glep_plugin_head list comparing the path stored at +4	^\s*\*\(uint\ \*\)\(\(int\)piVar15\ \+\ 0x110\)\ =\ uVar6;$	+1
+use	_glepLoadRenderers	iVar16	dirEntryName	INFERRED	dirent pointer + 8 (d_name) compared with GLDriver / GLRendererFloat	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar3\ \+\ local_40\[0\]\)\ \+\ 8;$	+3
+local	_glepLoadRenderers	acStack_140	pluginPath	CONFIRMED	256-byte buffer built with _strncpy/_strncat/_strcat and copied into the plugin record at +4
+local	_glepLoadRenderers	local_40	nameList	CONFIRMED	out parameter of _scandir (array of dirent pointers), freed after the scan

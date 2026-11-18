@@ -1,0 +1,121 @@
+local	_gleInitVectorConstants	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleInitConstants)
+local	_gleCreateTextureObject	param_2	texture	INFERRED	callers pass their variable `texture` here (1 call site(s), e.g. in _gleBindTexture)
+local	_gleCreatePipelineProgramObject	param_3	program	INFERRED	callers pass their variable `program` here (1 call site(s), e.g. in _gleBindPipelineProgram)
+local	_gleLookUpTexture2D	param_2	target	INFERRED	callers pass their variable `target` here (1 call site(s), e.g. in _gleCheckTexImage2DArgs)
+local	_gleCheckTexImageArgs	param_2	level	INFERRED	callers pass their variable `level` here (2 call site(s), e.g. in _gleCheckTexImage2DArgs)
+local	_gleCheckTexImageArgs	param_3	format	INFERRED	callers pass their variable `format` here (2 call site(s), e.g. in _gleCheckTexImage2DArgs)
+local	_gleCheckTexImageArgs	param_4	type	INFERRED	callers pass their variable `type` here (2 call site(s), e.g. in _gleCheckTexImage2DArgs)
+local	_gleCheckTexImageArgs	param_5	internalformat	INFERRED	callers pass their variable `internalformat` here (2 call site(s), e.g. in _gleCheckTexImage2DArgs)
+local	_gleCheckTexImageArgs	param_6	border	INFERRED	callers pass their variable `border` here (2 call site(s), e.g. in _gleCheckTexImage2DArgs)
+local	_gleCheckTexSubImageArgs	param_1	glContext	INFERRED	callers pass their variable `glContext` here (2 call site(s), e.g. in _gleCheckTexImageArgs)
+local	_gleCheckTexSubImageArgs	param_2	level	INFERRED	callers pass their variable `level` here (1 call site(s), e.g. in _gleCheckTexSubImage2DArgs)
+local	_gleCheckTexSubImageArgs	param_3	format	INFERRED	callers pass their variable `format` here (1 call site(s), e.g. in _gleCheckTexSubImage2DArgs)
+local	_gleCheckTexSubImageArgs	param_4	type	INFERRED	callers pass their variable `type` here (1 call site(s), e.g. in _gleCheckTexSubImage2DArgs)
+local	_glePixelPackSettings	param_2	format	INFERRED	callers pass their variable `format` here (1 call site(s), e.g. in _gleCreateTextureLevel)
+local	_glePixelPackSettings	param_3	type	INFERRED	callers pass their variable `type` here (1 call site(s), e.g. in _gleCreateTextureLevel)
+local	_gleTextureImagePut_Fast	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleTextureImagePut)
+local	_gleTextureImagePut_Fast	param_6	height	INFERRED	callers pass their variable `height` here (1 call site(s), e.g. in _gleTextureImagePut)
+local	_gleTextureImagePut_Fast	param_7	format	INFERRED	callers pass their variable `format` here (1 call site(s), e.g. in _gleTextureImagePut)
+local	_gleTextureImagePut_Fast	param_8	type	INFERRED	callers pass their variable `type` here (1 call site(s), e.g. in _gleTextureImagePut)
+local	_gleComponents	param_1	format	INFERRED	callers pass their variable `format` here (4 call site(s), e.g. in _glePixelBytes)
+local	_gleReqToBase	param_1	internalformat	INFERRED	callers pass their variable `internalformat` here (2 call site(s), e.g. in _gleCreatePluginTextureLevel)
+local	_gleLookUpNonProxyTexture2D	param_2	target	INFERRED	callers pass their variable `target` here (2 call site(s), e.g. in _gleCheckTexSubImage2DArgs)
+local	_gleCheckTexSubImageRange	param_1	glContext	INFERRED	callers pass their variable `glContext` here (2 call site(s), e.g. in _gleCheckTexSubImage2DArgs)
+local	_glePPLogParam	param_1	glContext	INFERRED	callers pass their variable `glContext` here (3 call site(s), e.g. in _glePPLogParameters)
+local	_gleVPGetResultOffset	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _PPEmulatorProgramSetupHandlesFromPPStream)
+local	_gleVPGetParameterPtr	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _PPEmulatorProgramSetupHandlesFromPPStream)
+local	_gleLookUpTexture3D	param_2	target	INFERRED	callers pass their variable `target` here (1 call site(s), e.g. in _gleCheckTexImage3DArgs)
+local	_gleFreePixelMap	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleTerminateContext)
+local	_gleFreeMaterials	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleTerminateContext)
+local	_gleFreeAllAttrib	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleTerminateContext)
+local	_gleFreeVertexArrays	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleTerminateContext)
+local	_gleFreeFunctions	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleTerminateContext)
+local	_gleFreeQueryMachine	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleTerminateContext)
+local	_gleFreeFenceMachine	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleTerminateContext)
+local	_glePPEmulatorTerminate	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleTerminateContext)
+local	_gleFreePipelineProgramState	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleTerminateContext)
+local	_gleClearPipelineProgram	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleFreePipelineProgramObject)
+local	_gleFreeMapData	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleTerminateContext)
+local	_gleFreeTextureState	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleTerminateContext)
+local	_gleDetachShaderObjects	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleReleaseSharedState)
+local	_gleAddListItemWithFree	param_1	glContext	INFERRED	callers pass their variable `glContext` here (2 call site(s), e.g. in _gleOptimizeDisplayList)
+local	_CloseCurrentVAR	param_1	glContext	INFERRED	callers pass their variable `glContext` here (4 call site(s), e.g. in _gleOptimizeDisplayList)
+local	_gleTexLevelStorage	param_2	internalformat	INFERRED	callers pass their variable `internalformat` here (1 call site(s), e.g. in _gleCreateTextureLevel)
+local	_gleTexLevelStorage	param_3	format	INFERRED	callers pass their variable `format` here (1 call site(s), e.g. in _gleCreateTextureLevel)
+local	_gleTexLevelStorage	param_4	type	INFERRED	callers pass their variable `type` here (1 call site(s), e.g. in _gleCreateTextureLevel)
+local	_gleTexLevelStorage	param_7	border	INFERRED	callers pass their variable `border` here (1 call site(s), e.g. in _gleCreateTextureLevel)
+local	_gleTextureLevelBytes	param_1	glContext	INFERRED	callers pass their variable `glContext` here (2 call site(s), e.g. in _gleAllocateTextureLevel)
+local	_gleCopy	param_1	lists	INFERRED	callers pass their variable `lists` here (1 call site(s), e.g. in _glCallLists_Comp)
+local	_gleCopy	param_4	height	INFERRED	callers pass their variable `height` here (1 call site(s), e.g. in _glDrawPixels_Comp)
+local	_gleDrawArraysOrElements_IMM_Exec	param_2	mode	INFERRED	callers pass their variable `mode` here (1 call site(s), e.g. in _gleEvalDrawArraysOrElements_Entires_Exec)
+local	_gleDrawArraysOrElements_IMM_Exec	param_3	first	INFERRED	callers pass their variable `first` here (1 call site(s), e.g. in _gleEvalDrawArraysOrElements_Entires_Exec)
+local	_gleDrawArraysOrElements_IMM_Exec	param_4	count	INFERRED	callers pass their variable `count` here (1 call site(s), e.g. in _gleEvalDrawArraysOrElements_Entires_Exec)
+local	_gleDrawArraysOrElements_VAR_Exec	param_2	mode	INFERRED	callers pass their variable `mode` here (1 call site(s), e.g. in _gleEvalDrawArraysOrElements_Entires_Exec)
+local	_gleDrawArraysOrElements_VAR_Exec	param_3	first	INFERRED	callers pass their variable `first` here (1 call site(s), e.g. in _gleEvalDrawArraysOrElements_Entires_Exec)
+local	_gleDrawArraysOrElements_VAR_Exec	param_4	count	INFERRED	callers pass their variable `count` here (1 call site(s), e.g. in _gleEvalDrawArraysOrElements_Entires_Exec)
+local	_glePolyClipCode	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in _gleClipPoly)
+local	_gleCheckCopyTexImageArgs	param_2	level	INFERRED	callers pass their variable `level` here (1 call site(s), e.g. in _gleCheckCopyTexImage2DArgs)
+local	_gleCheckCopyTexImageArgs	param_3	internalformat	INFERRED	callers pass their variable `internalformat` here (1 call site(s), e.g. in _gleCheckCopyTexImage2DArgs)
+local	_gleCheckCopyTexImageArgs	param_4	border	INFERRED	callers pass their variable `border` here (1 call site(s), e.g. in _gleCheckCopyTexImage2DArgs)
+local	_gleSetEnable_LIGHT	param_1	glContext	INFERRED	forwarded unchanged to parameter `glContext` of _gleUpdateLightFast (2 call(s), unanimous)
+local	_CloseCurrentVAR	param_1	glContext	INFERRED	forwarded unchanged to parameter `glContext` of _gleAddListItem (1 call(s), unanimous)
+local	_gleFreePipelineProgramState	param_1	glContext	INFERRED	forwarded unchanged to parameter `glContext` of _gleFreePipelineProgramObject (2 call(s), unanimous)
+local	_gleTextureImagePut_Fast	param_1	glContext	INFERRED	forwarded unchanged to parameter `glContext` of _glePixelPackSettings (1 call(s), unanimous)
+local	_glePixelPackSettings	param_2	format	INFERRED	forwarded unchanged to parameter `format` of _glePixelBytes (2 call(s), unanimous)
+local	_glePixelPackSettings	param_3	type	INFERRED	forwarded unchanged to parameter `type` of _glePixelBytes (2 call(s), unanimous)
+local	_gleFreeTextureState	param_1	glContext	INFERRED	forwarded unchanged to parameter `glContext` of _gleFreeTextureObject (6 call(s), unanimous)
+local	_gleDCBRealloc	param_1	glContext	INFERRED	forwarded unchanged to parameter `glContext` of _gleDCBFree (1 call(s), unanimous)
+local	_gleOptimizeDisplayList	param_2	list	INFERRED	forwarded unchanged to parameter `list` of _gleNewList (1 call(s), unanimous)
+local	_gleOptimizedListFreeFunc	param_1	glContext	INFERRED	forwarded unchanged to parameter `glContext` of _gleFreeVertexArrayObject (1 call(s), unanimous)
+local	_gleAddListItemWithFree	param_1	glContext	INFERRED	forwarded unchanged to parameter `glContext` of _gleAddListItem (1 call(s), unanimous)
+local	_gleMultMatrix	param_1	leftMatrix	CONFIRMED	matrix product in column-major order: out[4c+r] = sum_k A[4k+r]*B[4c+k] (e.g. out[0] = A[0]*B[0] + A[4]*B[1] + A[8]*B[2] + A[12]*B[3]); param_1 is the left factor A
+local	_gleMultMatrix	param_2	rightMatrix	CONFIRMED	matrix product in column-major order: out[4c+r] = sum_k A[4k+r]*B[4c+k] (e.g. out[0] = A[0]*B[0] + A[4]*B[1] + A[8]*B[2] + A[12]*B[3]); param_2 is the right factor B
+local	_gleMultMatrix	param_3	product	CONFIRMED	matrix product in column-major order: out[4c+r] = sum_k A[4k+r]*B[4c+k] (e.g. out[0] = A[0]*B[0] + A[4]*B[1] + A[8]*B[2] + A[12]*B[3]); param_3 receives the product
+local	_gleMultMatrixf	param_1	leftMatrix	CONFIRMED	left factor A of the column-major product out = A * m (out[0] = A[0]*m[0] + A[4]*m[1] + A[8]*m[2] + A[12]*m[3])
+local	_gleMultMatrixf	param_3	product	CONFIRMED	destination of the column-major product A * m
+local	_gleMultMatrixd	param_1	leftMatrix	CONFIRMED	left factor A of the column-major product out = A * m (out[0] = A[0]*m[0] + A[4]*m[1] + A[8]*m[2] + A[12]*m[3])
+local	_gleMultMatrixd	param_3	product	CONFIRMED	destination of the column-major product A * m
+local	_gleTexLevelStorage	param_2	internalformat	CONFIRMED	compared with internal-format enums (0x8048.. GL_RGB4 family, 0x83f0 S3TC, 0x84ea..)
+local	_gleTexLevelStorage	param_3	format	CONFIRMED	compared with 0x85b9 (GL_YCBCR_422_APPLE) as the pixel format and copied to *param_5
+local	_gleTexLevelStorage	param_4	type	CONFIRMED	compared with type enums (0x85ba/0x85bb GL_UNSIGNED_SHORT_8_8_APPLE, 0x8033/0x8363 packed types) and copied to *param_6
+local	_gleTexLevelStorage	param_5	storedFormat	INFERRED	output: the pixel format chosen for the level storage (*param_5 = 0x1908 etc.); the texture level format field is read at level+0x10
+local	_gleTexLevelStorage	param_6	storedType	INFERRED	output: the pixel type chosen for the level storage (*param_6 = 0x8033 etc.); the texture level type field is read at level+0x12
+local	_gleGetState	param_3	values	INFERRED	output buffer of 16 doubles: the glGet*v callers read the returned count and then convert *values elements into params
+local	_gleGetState	param_4	valueType	INFERRED	output: set to 0x1404 (GL_INT) at entry; callers test it against 0x1404 to decide whether the values are ints or doubles
+local	_gleGetAttrib	param_2	attribBit	INFERRED	_gliCopyAttributes calls it with 1,2,4,... while < 0xfffff: one call per GL_*_BIT attribute group (0x400 = GL_STENCIL_BUFFER_BIT is tested here)
+local	_gleGetAttrib	param_3	attribBuffer	INFERRED	buffer of 11340 bytes (auStack_2c60 in _gliCopyAttributes) that _gleGetAttrib fills and _gleSetAttrib reads: the saved attribute group state
+local	_gleSetAttrib	param_2	attribBit	INFERRED	_gliCopyAttributes calls it with 1,2,4,... while < 0xfffff: one call per GL_*_BIT attribute group (0x400 = GL_STENCIL_BUFFER_BIT is tested here)
+local	_gleSetAttrib	param_3	attribBuffer	INFERRED	buffer of 11340 bytes (auStack_2c60 in _gliCopyAttributes) that _gleGetAttrib fills and _gleSetAttrib reads: the saved attribute group state
+local	_gleTextureImagePut	param_2	textureLevel	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 2 is textureLevel; level fields width/format/type/data are read at +0xc/+0x10/+0x12/+0x14
+local	_gleTextureImagePut	param_3	xoffset	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 3 is xoffset
+local	_gleTextureImagePut	param_4	yoffset	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 4 is yoffset
+local	_gleTextureImagePut	param_5	zoffset	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 5 is zoffset
+local	_gleTextureImagePut	param_6	width	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 6 is width
+local	_gleTextureImagePut	param_13	pixels	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 13 is pixels
+local	_gleTextureImagePut_Slow	param_2	textureLevel	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 2 is textureLevel; level fields width/format/type/data are read at +0xc/+0x10/+0x12/+0x14
+local	_gleTextureImagePut_Slow	param_3	xoffset	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 3 is xoffset
+local	_gleTextureImagePut_Slow	param_4	yoffset	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 4 is yoffset
+local	_gleTextureImagePut_Slow	param_5	zoffset	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 5 is zoffset
+local	_gleTextureImagePut_Slow	param_6	width	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 6 is width
+local	_gleTextureImagePut_Slow	param_7	height	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 7 is height
+local	_gleTextureImagePut_Slow	param_8	depth	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 8 is depth
+local	_gleTextureImagePut_Slow	param_9	format	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 9 is format
+local	_gleTextureImagePut_Slow	param_10	type	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 10 is type
+local	_gleTextureImagePut_Slow	param_13	pixels	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 13 is pixels
+local	_gleTextureImagePut_Fast	param_2	textureLevel	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 2 is textureLevel; level fields width/format/type/data are read at +0xc/+0x10/+0x12/+0x14
+local	_gleTextureImagePut_Fast	param_3	xoffset	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 3 is xoffset
+local	_gleTextureImagePut_Fast	param_4	yoffset	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 4 is yoffset
+local	_gleTextureImagePut_Fast	param_5	width	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 5 is width
+local	_gleTextureImagePut_Fast	param_6	height	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 6 is height
+local	_gleTextureImagePut_Fast	param_7	format	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 7 is format
+local	_gleTextureImagePut_Fast	param_8	type	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 8 is type
+local	_gleTextureImagePut_Fast	param_10	pixels	INFERRED	_gleTextureImagePut passes (ctx, level, xoffset, yoffset, zoffset, width, height, depth, format, type,...) on to Slow/Fast; fast path requires zoffset == 0 and depth == 1: position 10 is pixels
+local	_gleTextureImagePut_FastUbyte	param_2	width	INFERRED	called from _gleTextureImagePut_Fast(ctx,width,height,src,dst,srcRowBytes,..,levelFormat,format); copies rows of height with src += srcRowStride, dst += dstRowPad, row-end += dstRowBytes
+local	_gleTextureImagePut_FastUbyte	param_3	height	INFERRED	called from _gleTextureImagePut_Fast(ctx,width,height,src,dst,srcRowBytes,..,levelFormat,format); copies rows of height with src += srcRowStride, dst += dstRowPad, row-end += dstRowBytes
+local	_gleTextureImagePut_FastUbyte	param_4	srcPixels	INFERRED	called from _gleTextureImagePut_Fast(ctx,width,height,src,dst,srcRowBytes,..,levelFormat,format); copies rows of height with src += srcRowStride, dst += dstRowPad, row-end += dstRowBytes
+local	_gleTextureImagePut_FastUbyte	param_5	dstPixels	INFERRED	called from _gleTextureImagePut_Fast(ctx,width,height,src,dst,srcRowBytes,..,levelFormat,format); copies rows of height with src += srcRowStride, dst += dstRowPad, row-end += dstRowBytes
+local	_gleTextureImagePut_FastUbyte	param_6	srcRowStride	INFERRED	called from _gleTextureImagePut_Fast(ctx,width,height,src,dst,srcRowBytes,..,levelFormat,format); copies rows of height with src += srcRowStride, dst += dstRowPad, row-end += dstRowBytes
+local	_gleTextureImagePut_FastUbyte	param_8	dstRowPad	INFERRED	called from _gleTextureImagePut_Fast(ctx,width,height,src,dst,srcRowBytes,..,levelFormat,format); copies rows of height with src += srcRowStride, dst += dstRowPad, row-end += dstRowBytes
+local	_gleTextureImagePut_FastUbyte	param_9	dstRowBytes	INFERRED	called from _gleTextureImagePut_Fast(ctx,width,height,src,dst,srcRowBytes,..,levelFormat,format); copies rows of height with src += srcRowStride, dst += dstRowPad, row-end += dstRowBytes
+local	_gleTextureImagePut_FastUbyte	param_10	dstFormat	INFERRED	called from _gleTextureImagePut_Fast(ctx,width,height,src,dst,srcRowBytes,..,levelFormat,format); copies rows of height with src += srcRowStride, dst += dstRowPad, row-end += dstRowBytes
+local	_gleTextureImagePut_FastUbyte	param_11	srcFormat	INFERRED	called from _gleTextureImagePut_Fast(ctx,width,height,src,dst,srcRowBytes,..,levelFormat,format); copies rows of height with src += srcRowStride, dst += dstRowPad, row-end += dstRowBytes

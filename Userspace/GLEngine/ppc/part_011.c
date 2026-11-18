@@ -1,36 +1,36 @@
 #include "decls.h"
 
 /* _glColor3s_Comp @ 0x5af7c (204 bytes) */
-int _glColor3s_Comp(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  uint param_2;
-  uint param_3;
-  uint param_4;
+int _glColor3s_Comp(glContext, red, green, blue)
+  undefined4 glContext;
+  uint red;
+  uint green;
+  uint blue;
 {
-  double dVar1;
+  double intToDoubleMagic;
   float fVar2;
   float fVar3;
   float *pfVar4;
   
-  pfVar4 = (float *)_gleAddListItem(param_1,PTR__glColor3_ListExec_0011005c,0xc);
+  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   fVar3 = FLOAT_00108e74;
   fVar2 = FLOAT_00108e70;
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleMagic = DOUBLE_00108d58;
   if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+    *pfVar4 = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e70 + FLOAT_00108e74;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - dVar1) * fVar2 + fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - dVar1) * fVar2 + fVar3;
+    pfVar4[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    pfVar4[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
   }
   return pfVar4;
 }
 
 /* _glColor3s_Exec @ 0x5b048 (196 bytes) */
-void _glColor3s_Exec(glContext, param_2, param_3, param_4)
+void _glColor3s_Exec(glContext, red, green, blue)
   int glContext;
-  uint param_2;
-  uint param_3;
-  uint param_4;
+  uint red;
+  uint green;
+  uint blue;
 {
   float fVar1;
   float fVar2;
@@ -40,9 +40,9 @@ void _glColor3s_Exec(glContext, param_2, param_3, param_4)
   
   fVar3 = FLOAT_00108e74;
   fVar2 = FLOAT_00108e70;
-  dVar5 = (double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58;
-  dVar4 = (double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58;
-  fVar1 = (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+  dVar5 = (double)CONCAT44(0x43300000,blue ^ 0x80000000) - DOUBLE_00108d58;
+  dVar4 = (double)CONCAT44(0x43300000,green ^ 0x80000000) - DOUBLE_00108d58;
+  fVar1 = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e70 + FLOAT_00108e74;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
   *(float *)(glContext + 0x2a0) = fVar1;
@@ -55,46 +55,46 @@ void _glColor3s_Exec(glContext, param_2, param_3, param_4)
 }
 
 /* _glColor3s_CompExec @ 0x5b10c (72 bytes) */
-void _glColor3s_CompExec(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+void _glColor3s_CompExec(glContext, red, green, blue)
+  undefined4 glContext;
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
 {
-  ((int (*)())_glColor3s_Comp)(param_1,param_2,param_3,param_4);
-  ((void (*)())_glColor3s_Exec)(param_1,param_2,param_3,param_4);
+  ((int (*)())_glColor3s_Comp)(glContext,red,green,blue);
+  ((void (*)())_glColor3s_Exec)(glContext,red,green,blue);
   return;
 }
 
 /* _glColor3sv_Comp @ 0x5b154 (208 bytes) */
-int _glColor3sv_Comp(param_1, param_2)
-  undefined4 param_1;
-  short *param_2;
+int _glColor3sv_Comp(glContext, v)
+  undefined4 glContext;
+  short *v;
 {
-  double dVar1;
+  double intToDoubleMagic;
   float fVar2;
   float fVar3;
   float *pfVar4;
   
-  pfVar4 = (float *)_gleAddListItem(param_1,PTR__glColor3_ListExec_0011005c,0xc);
+  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   fVar3 = FLOAT_00108e74;
   fVar2 = FLOAT_00108e70;
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleMagic = DOUBLE_00108d58;
   if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+    *pfVar4 = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e70 + FLOAT_00108e74;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - dVar1) * fVar2 +
+    pfVar4[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,(int)param_2[2] ^ 0x80000000) - dVar1) * fVar2 +
+    pfVar4[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
   }
   return pfVar4;
 }
 
 /* _glColor3sv_Exec @ 0x5b224 (208 bytes) */
-double _glColor3sv_Exec(glContext, param_2)
+double _glColor3sv_Exec(glContext, v)
   int glContext;
-  short *param_2;
+  short *v;
 {
   float fVar1;
   float fVar2;
@@ -104,9 +104,9 @@ double _glColor3sv_Exec(glContext, param_2)
   
   fVar3 = FLOAT_00108e74;
   fVar2 = FLOAT_00108e70;
-  dVar5 = (double)CONCAT44(0x43300000,(int)param_2[2] ^ 0x80000000) - DOUBLE_00108d58;
-  dVar4 = (double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - DOUBLE_00108d58;
-  fVar1 = (float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+  dVar5 = (double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - DOUBLE_00108d58;
+  dVar4 = (double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - DOUBLE_00108d58;
+  fVar1 = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e70 + FLOAT_00108e74;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
   *(float *)(glContext + 0x2a0) = fVar1;
@@ -119,51 +119,51 @@ double _glColor3sv_Exec(glContext, param_2)
 }
 
 /* _glColor3sv_CompExec @ 0x5b2f4 (56 bytes) */
-void _glColor3sv_CompExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+void _glColor3sv_CompExec(glContext, v)
+  undefined4 glContext;
+  undefined4 v;
 {
-  ((int (*)())_glColor3sv_Comp)(param_1,param_2);
-  ((double (*)())_glColor3sv_Exec)(param_1,param_2);
+  ((int (*)())_glColor3sv_Comp)(glContext,v);
+  ((double (*)())_glColor3sv_Exec)(glContext,v);
   return;
 }
 
 /* _glColor3ub_Comp @ 0x5b32c (120 bytes) */
-int _glColor3ub_Comp(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int _glColor3ub_Comp(glContext, red, green, blue)
+  int glContext;
+  int red;
+  int green;
+  int blue;
 {
   undefined4 *puVar1;
   int iVar2;
   
-  iVar2 = *(int *)(param_1 + 0x4674);
-  puVar1 = (undefined4 *)_gleAddListItem(param_1,PTR__glColor3_ListExec_0011005c,0xc);
+  iVar2 = *(int *)(glContext + 0x4674);
+  puVar1 = (undefined4 *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = *(undefined4 *)(iVar2 + param_2 * 4);
-    puVar1[1] = *(undefined4 *)(param_3 * 4 + iVar2);
-    puVar1[2] = *(undefined4 *)(iVar2 + param_4 * 4);
+    *puVar1 = *(undefined4 *)(iVar2 + red * 4);
+    puVar1[1] = *(undefined4 *)(green * 4 + iVar2);
+    puVar1[2] = *(undefined4 *)(iVar2 + blue * 4);
   }
   return puVar1;
 }
 
 /* _glColor3ub_CompExec @ 0x5b3f0 (148 bytes) */
-void _glColor3ub_CompExec(glContext, param_2, param_3, param_4)
+void _glColor3ub_CompExec(glContext, red, green, blue)
   int glContext;
-  int param_2;
-  int param_3;
-  int param_4;
+  int red;
+  int green;
+  int blue;
 {
   undefined4 uVar1;
   undefined4 uVar2;
   int iVar3;
   
-  ((int (*)())_glColor3ub_Comp)(glContext,param_2,param_3,param_4);
+  ((int (*)())_glColor3ub_Comp)(glContext,red,green,blue);
   iVar3 = *(int *)(glContext + 0x4674);
-  uVar1 = *(undefined4 *)(param_4 * 4 + iVar3);
-  uVar2 = *(undefined4 *)(param_3 * 4 + iVar3);
-  *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)(param_2 * 4 + iVar3);
+  uVar1 = *(undefined4 *)(blue * 4 + iVar3);
+  uVar2 = *(undefined4 *)(green * 4 + iVar3);
+  *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)(red * 4 + iVar3);
   *(undefined4 *)(glContext + 0x2a4) = uVar2;
   *(undefined4 *)(glContext + 0x2a8) = uVar1;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
@@ -177,36 +177,36 @@ void _glColor3ub_CompExec(glContext, param_2, param_3, param_4)
 }
 
 /* _glColor3ubv_Comp @ 0x5b438 (124 bytes) */
-int _glColor3ubv_Comp(param_1, param_2)
-  int param_1;
-  byte *param_2;
+int _glColor3ubv_Comp(glContext, v)
+  int glContext;
+  byte *v;
 {
   undefined4 *puVar1;
   int iVar2;
   
-  iVar2 = *(int *)(param_1 + 0x4674);
-  puVar1 = (undefined4 *)_gleAddListItem(param_1,PTR__glColor3_ListExec_0011005c,0xc);
+  iVar2 = *(int *)(glContext + 0x4674);
+  puVar1 = (undefined4 *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = *(undefined4 *)(iVar2 + (uint)*param_2 * 4);
-    puVar1[1] = *(undefined4 *)(iVar2 + (uint)param_2[1] * 4);
-    puVar1[2] = *(undefined4 *)(iVar2 + (uint)param_2[2] * 4);
+    *puVar1 = *(undefined4 *)(iVar2 + (uint)*v * 4);
+    puVar1[1] = *(undefined4 *)(iVar2 + (uint)v[1] * 4);
+    puVar1[2] = *(undefined4 *)(iVar2 + (uint)v[2] * 4);
   }
   return puVar1;
 }
 
 /* _glColor3ubv_Exec @ 0x5b4b4 (88 bytes) */
-double _glColor3ubv_Exec(glContext, param_2)
+double _glColor3ubv_Exec(glContext, v)
   int glContext;
-  byte *param_2;
+  byte *v;
 {
   undefined4 uVar1;
   undefined4 uVar2;
   int iVar3;
   
   iVar3 = *(int *)(glContext + 0x4674);
-  uVar1 = *(undefined4 *)(iVar3 + (uint)param_2[2] * 4);
-  uVar2 = *(undefined4 *)((uint)param_2[1] * 4 + iVar3);
-  *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)((uint)*param_2 * 4 + iVar3);
+  uVar1 = *(undefined4 *)(iVar3 + (uint)v[2] * 4);
+  uVar2 = *(undefined4 *)((uint)v[1] * 4 + iVar3);
+  *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)((uint)*v * 4 + iVar3);
   *(undefined4 *)(glContext + 0x2a4) = uVar2;
   *(undefined4 *)(glContext + 0x2a8) = uVar1;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
@@ -220,43 +220,43 @@ double _glColor3ubv_Exec(glContext, param_2)
 }
 
 /* _glColor3ubv_CompExec @ 0x5b50c (56 bytes) */
-void _glColor3ubv_CompExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+void _glColor3ubv_CompExec(glContext, v)
+  undefined4 glContext;
+  undefined4 v;
 {
-  ((int (*)())_glColor3ubv_Comp)(param_1,param_2);
-  ((double (*)())_glColor3ubv_Exec)(param_1,param_2);
+  ((int (*)())_glColor3ubv_Comp)(glContext,v);
+  ((double (*)())_glColor3ubv_Exec)(glContext,v);
   return;
 }
 
 /* _glColor3ui_Comp @ 0x5b544 (184 bytes) */
-int _glColor3ui_Comp(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int _glColor3ui_Comp(glContext, red, green, blue)
+  undefined4 glContext;
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
 {
   double dVar1;
   float fVar2;
   float *pfVar3;
   
-  pfVar3 = (float *)_gleAddListItem(param_1,PTR__glColor3_ListExec_0011005c,0xc);
+  pfVar3 = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   fVar2 = FLOAT_00108e6c;
   dVar1 = DOUBLE_00108d70;
   if (pfVar3 != (float *)0x0) {
-    *pfVar3 = (float)((double)CONCAT44(0x43300000,param_2) - DOUBLE_00108d70) * FLOAT_00108e6c;
-    pfVar3[1] = (float)((double)CONCAT44(0x43300000,param_3) - dVar1) * fVar2;
-    pfVar3[2] = (float)((double)CONCAT44(0x43300000,param_4) - dVar1) * fVar2;
+    *pfVar3 = (float)((double)CONCAT44(0x43300000,red) - DOUBLE_00108d70) * FLOAT_00108e6c;
+    pfVar3[1] = (float)((double)CONCAT44(0x43300000,green) - dVar1) * fVar2;
+    pfVar3[2] = (float)((double)CONCAT44(0x43300000,blue) - dVar1) * fVar2;
   }
   return pfVar3;
 }
 
 /* _glColor3ui_Exec @ 0x5b5fc (176 bytes) */
-void _glColor3ui_Exec(glContext, param_2, param_3, param_4)
+void _glColor3ui_Exec(glContext, red, green, blue)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
 {
   float fVar1;
   double dVar2;
@@ -264,9 +264,9 @@ void _glColor3ui_Exec(glContext, param_2, param_3, param_4)
   double dVar4;
   
   fVar1 = FLOAT_00108e6c;
-  dVar2 = (double)CONCAT44(0x43300000,param_2) - DOUBLE_00108d70;
-  dVar4 = (double)CONCAT44(0x43300000,param_4) - DOUBLE_00108d70;
-  dVar3 = (double)CONCAT44(0x43300000,param_3) - DOUBLE_00108d70;
+  dVar2 = (double)CONCAT44(0x43300000,red) - DOUBLE_00108d70;
+  dVar4 = (double)CONCAT44(0x43300000,blue) - DOUBLE_00108d70;
+  dVar3 = (double)CONCAT44(0x43300000,green) - DOUBLE_00108d70;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
   *(float *)(glContext + 0x2a0) = (float)dVar2 * fVar1;
   *(float *)(glContext + 0x2a8) = (float)dVar4 * fVar1;
@@ -278,41 +278,41 @@ void _glColor3ui_Exec(glContext, param_2, param_3, param_4)
 }
 
 /* _glColor3ui_CompExec @ 0x5b6ac (72 bytes) */
-void _glColor3ui_CompExec(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+void _glColor3ui_CompExec(glContext, red, green, blue)
+  undefined4 glContext;
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
 {
-  ((int (*)())_glColor3ui_Comp)(param_1,param_2,param_3,param_4);
-  ((void (*)())_glColor3ui_Exec)(param_1,param_2,param_3,param_4);
+  ((int (*)())_glColor3ui_Comp)(glContext,red,green,blue);
+  ((void (*)())_glColor3ui_Exec)(glContext,red,green,blue);
   return;
 }
 
 /* _glColor3uiv_Comp @ 0x5b6f4 (188 bytes) */
-int _glColor3uiv_Comp(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _glColor3uiv_Comp(glContext, v)
+  undefined4 glContext;
+  undefined4 *v;
 {
   double dVar1;
   float fVar2;
   float *pfVar3;
   
-  pfVar3 = (float *)_gleAddListItem(param_1,PTR__glColor3_ListExec_0011005c,0xc);
+  pfVar3 = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   fVar2 = FLOAT_00108e6c;
   dVar1 = DOUBLE_00108d70;
   if (pfVar3 != (float *)0x0) {
-    *pfVar3 = (float)((double)CONCAT44(0x43300000,*param_2) - DOUBLE_00108d70) * FLOAT_00108e6c;
-    pfVar3[1] = (float)((double)CONCAT44(0x43300000,param_2[1]) - dVar1) * fVar2;
-    pfVar3[2] = (float)((double)CONCAT44(0x43300000,param_2[2]) - dVar1) * fVar2;
+    *pfVar3 = (float)((double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70) * FLOAT_00108e6c;
+    pfVar3[1] = (float)((double)CONCAT44(0x43300000,v[1]) - dVar1) * fVar2;
+    pfVar3[2] = (float)((double)CONCAT44(0x43300000,v[2]) - dVar1) * fVar2;
   }
   return pfVar3;
 }
 
 /* _glColor3uiv_Exec @ 0x5b7b0 (188 bytes) */
-double _glColor3uiv_Exec(glContext, param_2)
+double _glColor3uiv_Exec(glContext, v)
   int glContext;
-  undefined4 *param_2;
+  undefined4 *v;
 {
   float fVar1;
   double dVar2;
@@ -320,9 +320,9 @@ double _glColor3uiv_Exec(glContext, param_2)
   double dVar4;
   
   fVar1 = FLOAT_00108e6c;
-  dVar2 = (double)CONCAT44(0x43300000,*param_2) - DOUBLE_00108d70;
-  dVar4 = (double)CONCAT44(0x43300000,param_2[2]) - DOUBLE_00108d70;
-  dVar3 = (double)CONCAT44(0x43300000,param_2[1]) - DOUBLE_00108d70;
+  dVar2 = (double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70;
+  dVar4 = (double)CONCAT44(0x43300000,v[2]) - DOUBLE_00108d70;
+  dVar3 = (double)CONCAT44(0x43300000,v[1]) - DOUBLE_00108d70;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
   *(float *)(glContext + 0x2a0) = (float)dVar2 * fVar1;
   *(float *)(glContext + 0x2a8) = (float)dVar4 * fVar1;
@@ -334,49 +334,49 @@ double _glColor3uiv_Exec(glContext, param_2)
 }
 
 /* _glColor3uiv_CompExec @ 0x5b86c (56 bytes) */
-void _glColor3uiv_CompExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+void _glColor3uiv_CompExec(glContext, v)
+  undefined4 glContext;
+  undefined4 v;
 {
-  ((int (*)())_glColor3uiv_Comp)(param_1,param_2);
-  ((double (*)())_glColor3uiv_Exec)(param_1,param_2);
+  ((int (*)())_glColor3uiv_Comp)(glContext,v);
+  ((double (*)())_glColor3uiv_Exec)(glContext,v);
   return;
 }
 
 /* _glColor3us_Comp @ 0x5b8a4 (192 bytes) */
-int _glColor3us_Comp(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  uint param_2;
-  uint param_3;
-  uint param_4;
+int _glColor3us_Comp(glContext, red, green, blue)
+  undefined4 glContext;
+  uint red;
+  uint green;
+  uint blue;
 {
   float fVar1;
   float *pfVar2;
   
-  pfVar2 = (float *)_gleAddListItem(param_1,PTR__glColor3_ListExec_0011005c,0xc);
+  pfVar2 = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   fVar1 = FLOAT_00108e74;
   if (pfVar2 != (float *)0x0) {
-    *pfVar2 = (GH_U2F((unsigned int)((param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-    pfVar2[1] = (GH_U2F((unsigned int)((param_3 | 0x4b000000))) - 8388608.0) * fVar1;
-    pfVar2[2] = (GH_U2F((unsigned int)((param_4 | 0x4b000000))) - 8388608.0) * fVar1;
+    *pfVar2 = (GH_U2F((unsigned int)((red | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+    pfVar2[1] = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * fVar1;
+    pfVar2[2] = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * fVar1;
   }
   return pfVar2;
 }
 
 /* _glColor3us_Exec @ 0x5b964 (184 bytes) */
-double _glColor3us_Exec(int glContext,uint param_2,uint param_3,uint param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+double _glColor3us_Exec(int glContext,uint red,uint green,uint blue,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
   float fVar3;
   
   fVar3 = FLOAT_00108e74;
-  fVar1 = (GH_U2F((unsigned int)((param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  fVar2 = (GH_U2F((unsigned int)((param_4 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  fVar1 = (GH_U2F((unsigned int)((red | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  fVar2 = (GH_U2F((unsigned int)((blue | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
   *(float *)(glContext + 0x2a0) = fVar1;
   *(float *)(glContext + 0x2a8) = fVar2;
-  *(float *)(glContext + 0x2a4) = (GH_U2F((unsigned int)((param_3 | 0x4b000000))) - 8388608.0) * fVar3;
+  *(float *)(glContext + 0x2a4) = (GH_U2F((unsigned int)((green | 0x4b000000))) - 8388608.0) * fVar3;
   if (*(char *)(glContext + 0x4df8) != '\0') {
     fparam_1 = (double)(**(double ( **)(int,int))(glContext + 0x4de0))(glContext, glContext + 0x2a0);
   }
@@ -384,13 +384,13 @@ double _glColor3us_Exec(int glContext,uint param_2,uint param_3,uint param_4,dou
 }
 
 /* _glColor3us_CompExec @ 0x5ba1c (72 bytes) */
-void _glColor3us_CompExec(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+void _glColor3us_CompExec(glContext, red, green, blue)
+  undefined4 glContext;
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { glContext, red, green, blue, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 in_LR;
   double fparam_1;
   double in_f2;
@@ -401,33 +401,33 @@ void _glColor3us_CompExec(param_1, param_2, param_3, param_4)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glColor3us_Comp)(param_1,param_2,param_3,param_4);
-  ((double (*)())_glColor3us_Exec)(param_1,param_2,param_3,param_4,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,
+  ((int (*)())_glColor3us_Comp)(glContext,red,green,blue);
+  ((double (*)())_glColor3us_Exec)(glContext,red,green,blue,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,
                    in_f8,(double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
                    (*(double *)((unsigned char *)ghidra_home + 0)),(*(double *)((unsigned char *)ghidra_home + 8)),(*(double *)((unsigned char *)ghidra_home + 16)));
   return;
 }
 
 /* _glColor3usv_Comp @ 0x5ba64 (196 bytes) */
-int _glColor3usv_Comp(param_1, param_2)
-  undefined4 param_1;
-  ushort *param_2;
+int _glColor3usv_Comp(glContext, v)
+  undefined4 glContext;
+  ushort *v;
 {
   float fVar1;
   float *pfVar2;
   
-  pfVar2 = (float *)_gleAddListItem(param_1,PTR__glColor3_ListExec_0011005c,0xc);
+  pfVar2 = (float *)_gleAddListItem(glContext,PTR__glColor3_ListExec_0011005c,0xc);
   fVar1 = FLOAT_00108e74;
   if (pfVar2 != (float *)0x0) {
-    *pfVar2 = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-    pfVar2[1] = (GH_U2F((unsigned int)((param_2[1] | 0x4b000000))) - 8388608.0) * fVar1;
-    pfVar2[2] = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * fVar1;
+    *pfVar2 = (GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+    pfVar2[1] = (GH_U2F((unsigned int)((v[1] | 0x4b000000))) - 8388608.0) * fVar1;
+    pfVar2[2] = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * fVar1;
   }
   return pfVar2;
 }
 
 /* _glColor3usv_Exec @ 0x5bb28 (196 bytes) */
-double _glColor3usv_Exec(int glContext,ushort *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+double _glColor3usv_Exec(int glContext,ushort *v,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   ushort uVar1;
   float fVar2;
@@ -435,9 +435,9 @@ double _glColor3usv_Exec(int glContext,ushort *param_2,double fparam_1,double fp
   float fVar4;
   
   fVar4 = FLOAT_00108e74;
-  uVar1 = param_2[1];
-  fVar2 = (GH_U2F((unsigned int)((*param_2 | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
-  fVar3 = (GH_U2F((unsigned int)((param_2[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  uVar1 = v[1];
+  fVar2 = (GH_U2F((unsigned int)((*v | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
+  fVar3 = (GH_U2F((unsigned int)((v[2] | 0x4b000000))) - 8388608.0) * FLOAT_00108e74;
   *(undefined4 *)(glContext + 0x2ac) = *(undefined4 *)(glContext + 0x24);
   *(float *)(glContext + 0x2a0) = fVar2;
   *(float *)(glContext + 0x2a8) = fVar3;
@@ -449,11 +449,11 @@ double _glColor3usv_Exec(int glContext,ushort *param_2,double fparam_1,double fp
 }
 
 /* _glColor3usv_CompExec @ 0x5bbec (56 bytes) */
-void _glColor3usv_CompExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+void _glColor3usv_CompExec(glContext, v)
+  undefined4 glContext;
+  undefined4 v;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { glContext, v, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 in_LR;
   double fparam_1;
   double in_f2;
@@ -464,60 +464,60 @@ void _glColor3usv_CompExec(param_1, param_2)
   double in_f7;
   double in_f8;
   
-  ((int (*)())_glColor3usv_Comp)(param_1,param_2);
-  ((double (*)())_glColor3usv_Exec)(param_1,param_2,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+  ((int (*)())_glColor3usv_Comp)(glContext,v);
+  ((double (*)())_glColor3usv_Exec)(glContext,v,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                     (double)CONCAT44(in_LR,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc))),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)((unsigned char *)ghidra_home + 0)),
                     (*(double *)((unsigned char *)ghidra_home + 8)),(*(double *)((unsigned char *)ghidra_home + 16)));
   return;
 }
 
 /* _glColor4b_Comp @ 0x5bc24 (240 bytes) */
-int _glColor4b_Comp(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  uint param_2;
-  uint param_3;
-  uint param_4;
-  uint param_5;
+int _glColor4b_Comp(glContext, red, green, blue, alpha)
+  undefined4 glContext;
+  uint red;
+  uint green;
+  uint blue;
+  uint alpha;
 {
-  double dVar1;
+  double intToDoubleMagic;
   float fVar2;
   float fVar3;
   float *pfVar4;
   
-  pfVar4 = (float *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
+  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar3 = FLOAT_00108e64;
   fVar2 = FLOAT_00108e60;
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleMagic = DOUBLE_00108d58;
   if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+    *pfVar4 = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e60 + FLOAT_00108e64;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - dVar1) * fVar2 + fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - dVar1) * fVar2 + fVar3;
-    pfVar4[3] = (float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - dVar1) * fVar2 + fVar3;
+    pfVar4[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    pfVar4[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    pfVar4[3] = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
   }
   return pfVar4;
 }
 
 /* _glColor4b_Exec @ 0x5bd14 (216 bytes) */
-void _glColor4b_Exec(glContext, param_2, param_3, param_4, param_5)
+void _glColor4b_Exec(glContext, red, green, blue, alpha)
   int glContext;
-  uint param_2;
-  uint param_3;
-  uint param_4;
-  uint param_5;
+  uint red;
+  uint green;
+  uint blue;
+  uint alpha;
 {
   float fVar1;
   float fVar2;
   float fVar3;
   
-  fVar2 = (float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar2 = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e60 + FLOAT_00108e64;
-  fVar3 = (float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar3 = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e60 + FLOAT_00108e64;
-  fVar1 = (float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar1 = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e60 + FLOAT_00108e64;
   *(float *)(glContext + 0x2a0) =
-       (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e60
+       (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e60
        + FLOAT_00108e64;
   *(float *)(glContext + 0x2a4) = fVar2;
   *(float *)(glContext + 0x2ac) = fVar3;
@@ -529,62 +529,62 @@ void _glColor4b_Exec(glContext, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4b_CompExec @ 0x5bdec (80 bytes) */
-void _glColor4b_CompExec(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+void _glColor4b_CompExec(glContext, red, green, blue, alpha)
+  undefined4 glContext;
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
+  undefined4 alpha;
 {
-  ((int (*)())_glColor4b_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((void (*)())_glColor4b_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((int (*)())_glColor4b_Comp)(glContext,red,green,blue,alpha);
+  ((void (*)())_glColor4b_Exec)(glContext,red,green,blue,alpha);
   return;
 }
 
 /* _glColor4bv_Comp @ 0x5be3c (260 bytes) */
-int _glColor4bv_Comp(param_1, param_2)
-  undefined4 param_1;
-  char *param_2;
+int _glColor4bv_Comp(glContext, v)
+  undefined4 glContext;
+  char *v;
 {
-  double dVar1;
+  double intToDoubleMagic;
   float fVar2;
   float fVar3;
   float *pfVar4;
   
-  pfVar4 = (float *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
+  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar3 = FLOAT_00108e64;
   fVar2 = FLOAT_00108e60;
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleMagic = DOUBLE_00108d58;
   if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+    *pfVar4 = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e60 + FLOAT_00108e64;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - dVar1) * fVar2 +
+    pfVar4[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,(int)param_2[2] ^ 0x80000000) - dVar1) * fVar2 +
+    pfVar4[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[3] = (float)((double)CONCAT44(0x43300000,(int)param_2[3] ^ 0x80000000) - dVar1) * fVar2 +
+    pfVar4[3] = (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
   }
   return pfVar4;
 }
 
 /* _glColor4bv_Exec @ 0x5bf40 (248 bytes) */
-double _glColor4bv_Exec(glContext, param_2)
+double _glColor4bv_Exec(glContext, v)
   int glContext;
-  char *param_2;
+  char *v;
 {
   float fVar1;
   float fVar2;
   float fVar3;
   
-  fVar2 = (float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar2 = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e60 + FLOAT_00108e64;
-  fVar3 = (float)((double)CONCAT44(0x43300000,(int)param_2[3] ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar3 = (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e60 + FLOAT_00108e64;
-  fVar1 = (float)((double)CONCAT44(0x43300000,(int)param_2[2] ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar1 = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e60 + FLOAT_00108e64;
   *(float *)(glContext + 0x2a0) =
-       (float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+       (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e60 + FLOAT_00108e64;
   *(float *)(glContext + 0x2a4) = fVar2;
   *(float *)(glContext + 0x2ac) = fVar3;
@@ -596,68 +596,68 @@ double _glColor4bv_Exec(glContext, param_2)
 }
 
 /* _glColor4bv_CompExec @ 0x5c038 (56 bytes) */
-void _glColor4bv_CompExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+void _glColor4bv_CompExec(glContext, v)
+  undefined4 glContext;
+  undefined4 v;
 {
-  ((int (*)())_glColor4bv_Comp)(param_1,param_2);
-  ((double (*)())_glColor4bv_Exec)(param_1,param_2);
+  ((int (*)())_glColor4bv_Comp)(glContext,v);
+  ((double (*)())_glColor4bv_Exec)(glContext,v);
   return;
 }
 
 /* _glColor4d_Comp @ 0x5c070 (108 bytes) */
-void _glColor4d_Comp(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glColor4d_Comp(undefined4 glContext,double red,double green,double blue,double alpha)
 {
   float *pfVar1;
   
-  pfVar1 = (float *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
+  pfVar1 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = (float)fparam_1;
-    pfVar1[1] = (float)fparam_2;
-    pfVar1[2] = (float)fparam_3;
-    pfVar1[3] = (float)fparam_4;
+    *pfVar1 = (float)red;
+    pfVar1[1] = (float)green;
+    pfVar1[2] = (float)blue;
+    pfVar1[3] = (float)alpha;
   }
   return;
 }
 
 /* _glColor4d_CompExec @ 0x5c0dc (96 bytes) */
-void _glColor4d_CompExec(undefined4 param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glColor4d_CompExec(undefined4 glContext,double red,double green,double blue,double alpha)
 {
-  ((void (*)())_glColor4d_Comp)(param_1,fparam_1,fparam_2,fparam_3,fparam_4);
-  ((void (*)())_glColor4d_Exec)(param_1,fparam_1,fparam_2,fparam_3,fparam_4);
+  ((void (*)())_glColor4d_Comp)(glContext,red,green,blue,alpha);
+  ((void (*)())_glColor4d_Exec)(glContext,red,green,blue,alpha);
   return;
 }
 
 /* _glColor4dv_Comp @ 0x5c13c (120 bytes) */
-int _glColor4dv_Comp(param_1, param_2)
-  undefined4 param_1;
-  double *param_2;
+int _glColor4dv_Comp(glContext, v)
+  undefined4 glContext;
+  double *v;
 {
   float *pfVar1;
   
-  pfVar1 = (float *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
+  pfVar1 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = (float)*param_2;
-    pfVar1[1] = (float)param_2[1];
-    pfVar1[2] = (float)param_2[2];
-    pfVar1[3] = (float)param_2[3];
+    *pfVar1 = (float)*v;
+    pfVar1[1] = (float)v[1];
+    pfVar1[2] = (float)v[2];
+    pfVar1[3] = (float)v[3];
   }
   return pfVar1;
 }
 
 /* _glColor4dv_Exec @ 0x5c1b4 (76 bytes) */
-double _glColor4dv_Exec(glContext, param_2)
+double _glColor4dv_Exec(glContext, v)
   int glContext;
-  double *param_2;
+  double *v;
 {
   double dVar1;
   double dVar2;
   double dVar3;
   
-  dVar1 = *param_2;
-  dVar3 = param_2[1];
-  dVar2 = param_2[2];
-  *(float *)(glContext + 0x2ac) = (float)param_2[3];
+  dVar1 = *v;
+  dVar3 = v[1];
+  dVar2 = v[2];
+  *(float *)(glContext + 0x2ac) = (float)v[3];
   *(float *)(glContext + 0x2a0) = (float)dVar1;
   *(float *)(glContext + 0x2a4) = (float)dVar3;
   *(float *)(glContext + 0x2a8) = (float)dVar2;
@@ -671,22 +671,22 @@ double _glColor4dv_Exec(glContext, param_2)
 }
 
 /* _glColor4dv_CompExec @ 0x5c200 (56 bytes) */
-void _glColor4dv_CompExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+void _glColor4dv_CompExec(glContext, v)
+  undefined4 glContext;
+  undefined4 v;
 {
-  ((int (*)())_glColor4dv_Comp)(param_1,param_2);
-  ((double (*)())_glColor4dv_Exec)(param_1,param_2);
+  ((int (*)())_glColor4dv_Comp)(glContext,v);
+  ((double (*)())_glColor4dv_Exec)(glContext,v);
   return;
 }
 
 /* _glColor4f_ColorMat_Exec @ 0x5c238 (32 bytes) */
-void _glColor4f_ColorMat_Exec(int glContext,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
+void _glColor4f_ColorMat_Exec(int glContext,float red,float green,float blue,float alpha)
 {
-  *(float *)(glContext + 0x2a0) = (float)fparam_1;
-  *(float *)(glContext + 0x2a4) = (float)fparam_2;
-  *(float *)(glContext + 0x2a8) = (float)fparam_3;
-  *(float *)(glContext + 0x2ac) = (float)fparam_4;
+  *(float *)(glContext + 0x2a0) = (float)red;
+  *(float *)(glContext + 0x2a4) = (float)green;
+  *(float *)(glContext + 0x2a8) = (float)blue;
+  *(float *)(glContext + 0x2ac) = (float)alpha;
                     
                     
   (**(code **)(glContext + 0x4de0))(glContext,glContext + 0x2a0);
@@ -694,35 +694,35 @@ void _glColor4f_ColorMat_Exec(int glContext,float fparam_1,float fparam_2,float 
 }
 
 /* _glColor4fv_Comp @ 0x5c258 (104 bytes) */
-int _glColor4fv_Comp(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _glColor4fv_Comp(glContext, v)
+  undefined4 glContext;
+  undefined4 *v;
 {
   undefined4 *puVar1;
   
-  puVar1 = (undefined4 *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
+  puVar1 = (undefined4 *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = *param_2;
-    puVar1[1] = param_2[1];
-    puVar1[2] = param_2[2];
-    puVar1[3] = param_2[3];
+    *puVar1 = *v;
+    puVar1[1] = v[1];
+    puVar1[2] = v[2];
+    puVar1[3] = v[3];
   }
   return puVar1;
 }
 
 /* _glColor4fv_ColorMat_Exec @ 0x5c2c0 (48 bytes) */
-double _glColor4fv_ColorMat_Exec(glContext, param_2)
+double _glColor4fv_ColorMat_Exec(glContext, v)
   int glContext;
-  undefined4 *param_2;
+  undefined4 *v;
 {
   undefined4 uVar1;
   undefined4 uVar2;
   undefined4 uVar3;
   
-  uVar1 = param_2[3];
-  uVar2 = param_2[1];
-  uVar3 = param_2[2];
-  *(undefined4 *)(glContext + 0x2a0) = *param_2;
+  uVar1 = v[3];
+  uVar2 = v[1];
+  uVar3 = v[2];
+  *(undefined4 *)(glContext + 0x2a0) = *v;
   *(undefined4 *)(glContext + 0x2a4) = uVar2;
   *(undefined4 *)(glContext + 0x2a8) = uVar3;
   *(undefined4 *)(glContext + 0x2ac) = uVar1;
@@ -733,66 +733,66 @@ double _glColor4fv_ColorMat_Exec(glContext, param_2)
 }
 
 /* _glColor4fv_CompExec @ 0x5c2f0 (96 bytes) */
-void _glColor4fv_CompExec(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+void _glColor4fv_CompExec(glContext, v)
+  int glContext;
+  undefined4 v;
 {
-  ((int (*)())_glColor4fv_Comp)(param_1,param_2);
-  if (*(char *)(param_1 + 0x4df8) != '\0') {
-    ((double (*)())_glColor4fv_ColorMat_Exec)(param_1,param_2);
+  ((int (*)())_glColor4fv_Comp)(glContext,v);
+  if (*(char *)(glContext + 0x4df8) != '\0') {
+    ((double (*)())_glColor4fv_ColorMat_Exec)(glContext,v);
     return;
   }
-  _glColor4fv_NoColorMat_Exec(param_1,param_2);
+  _glColor4fv_NoColorMat_Exec(glContext,v);
   return;
 }
 
 /* _glColor4i_Comp @ 0x5c350 (240 bytes) */
-int _glColor4i_Comp(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  uint param_2;
-  uint param_3;
-  uint param_4;
-  uint param_5;
+int _glColor4i_Comp(glContext, red, green, blue, alpha)
+  undefined4 glContext;
+  uint red;
+  uint green;
+  uint blue;
+  uint alpha;
 {
-  double dVar1;
+  double intToDoubleMagic;
   float fVar2;
   float fVar3;
   float *pfVar4;
   
-  pfVar4 = (float *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
+  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar3 = FLOAT_00108e6c;
   fVar2 = FLOAT_00108e68;
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleMagic = DOUBLE_00108d58;
   if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+    *pfVar4 = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e68 + FLOAT_00108e6c;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - dVar1) * fVar2 + fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - dVar1) * fVar2 + fVar3;
-    pfVar4[3] = (float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - dVar1) * fVar2 + fVar3;
+    pfVar4[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    pfVar4[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    pfVar4[3] = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
   }
   return pfVar4;
 }
 
 /* _glColor4i_Exec @ 0x5c440 (216 bytes) */
-void _glColor4i_Exec(glContext, param_2, param_3, param_4, param_5)
+void _glColor4i_Exec(glContext, red, green, blue, alpha)
   int glContext;
-  uint param_2;
-  uint param_3;
-  uint param_4;
-  uint param_5;
+  uint red;
+  uint green;
+  uint blue;
+  uint alpha;
 {
   float fVar1;
   float fVar2;
   float fVar3;
   
-  fVar2 = (float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar2 = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e68 + FLOAT_00108e6c;
-  fVar3 = (float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar3 = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e68 + FLOAT_00108e6c;
-  fVar1 = (float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar1 = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e68 + FLOAT_00108e6c;
   *(float *)(glContext + 0x2a0) =
-       (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e68
+       (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e68
        + FLOAT_00108e6c;
   *(float *)(glContext + 0x2a4) = fVar2;
   *(float *)(glContext + 0x2ac) = fVar3;
@@ -804,62 +804,62 @@ void _glColor4i_Exec(glContext, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4i_CompExec @ 0x5c518 (80 bytes) */
-void _glColor4i_CompExec(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+void _glColor4i_CompExec(glContext, red, green, blue, alpha)
+  undefined4 glContext;
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
+  undefined4 alpha;
 {
-  ((int (*)())_glColor4i_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((void (*)())_glColor4i_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((int (*)())_glColor4i_Comp)(glContext,red,green,blue,alpha);
+  ((void (*)())_glColor4i_Exec)(glContext,red,green,blue,alpha);
   return;
 }
 
 /* _glColor4iv_Comp @ 0x5c568 (244 bytes) */
-int _glColor4iv_Comp(param_1, param_2)
-  undefined4 param_1;
-  uint *param_2;
+int _glColor4iv_Comp(glContext, v)
+  undefined4 glContext;
+  uint *v;
 {
-  double dVar1;
+  double intToDoubleMagic;
   float fVar2;
   float fVar3;
   float *pfVar4;
   
-  pfVar4 = (float *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
+  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar3 = FLOAT_00108e6c;
   fVar2 = FLOAT_00108e68;
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleMagic = DOUBLE_00108d58;
   if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+    *pfVar4 = (float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e68 + FLOAT_00108e6c;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - dVar1) * fVar2 +
+    pfVar4[1] = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,param_2[2] ^ 0x80000000) - dVar1) * fVar2 +
+    pfVar4[2] = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[3] = (float)((double)CONCAT44(0x43300000,param_2[3] ^ 0x80000000) - dVar1) * fVar2 +
+    pfVar4[3] = (float)((double)CONCAT44(0x43300000,v[3] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
   }
   return pfVar4;
 }
 
 /* _glColor4iv_Exec @ 0x5c65c (232 bytes) */
-double _glColor4iv_Exec(glContext, param_2)
+double _glColor4iv_Exec(glContext, v)
   int glContext;
-  uint *param_2;
+  uint *v;
 {
   float fVar1;
   float fVar2;
   float fVar3;
   
-  fVar2 = (float)((double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar2 = (float)((double)CONCAT44(0x43300000,v[1] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e68 + FLOAT_00108e6c;
-  fVar3 = (float)((double)CONCAT44(0x43300000,param_2[3] ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar3 = (float)((double)CONCAT44(0x43300000,v[3] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e68 + FLOAT_00108e6c;
-  fVar1 = (float)((double)CONCAT44(0x43300000,param_2[2] ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar1 = (float)((double)CONCAT44(0x43300000,v[2] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e68 + FLOAT_00108e6c;
   *(float *)(glContext + 0x2a0) =
-       (float)((double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+       (float)((double)CONCAT44(0x43300000,*v ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e68 + FLOAT_00108e6c;
   *(float *)(glContext + 0x2a4) = fVar2;
   *(float *)(glContext + 0x2ac) = fVar3;
@@ -871,62 +871,62 @@ double _glColor4iv_Exec(glContext, param_2)
 }
 
 /* _glColor4iv_CompExec @ 0x5c744 (56 bytes) */
-void _glColor4iv_CompExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+void _glColor4iv_CompExec(glContext, v)
+  undefined4 glContext;
+  undefined4 v;
 {
-  ((int (*)())_glColor4iv_Comp)(param_1,param_2);
-  ((double (*)())_glColor4iv_Exec)(param_1,param_2);
+  ((int (*)())_glColor4iv_Comp)(glContext,v);
+  ((double (*)())_glColor4iv_Exec)(glContext,v);
   return;
 }
 
 /* _glColor4s_Comp @ 0x5c77c (240 bytes) */
-int _glColor4s_Comp(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  uint param_2;
-  uint param_3;
-  uint param_4;
-  uint param_5;
+int _glColor4s_Comp(glContext, red, green, blue, alpha)
+  undefined4 glContext;
+  uint red;
+  uint green;
+  uint blue;
+  uint alpha;
 {
-  double dVar1;
+  double intToDoubleMagic;
   float fVar2;
   float fVar3;
   float *pfVar4;
   
-  pfVar4 = (float *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
+  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar3 = FLOAT_00108e74;
   fVar2 = FLOAT_00108e70;
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleMagic = DOUBLE_00108d58;
   if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+    *pfVar4 = (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e70 + FLOAT_00108e74;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - dVar1) * fVar2 + fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - dVar1) * fVar2 + fVar3;
-    pfVar4[3] = (float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - dVar1) * fVar2 + fVar3;
+    pfVar4[1] = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    pfVar4[2] = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
+    pfVar4[3] = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - intToDoubleMagic) * fVar2 + fVar3;
   }
   return pfVar4;
 }
 
 /* _glColor4s_Exec @ 0x5c86c (216 bytes) */
-void _glColor4s_Exec(glContext, param_2, param_3, param_4, param_5)
+void _glColor4s_Exec(glContext, red, green, blue, alpha)
   int glContext;
-  uint param_2;
-  uint param_3;
-  uint param_4;
-  uint param_5;
+  uint red;
+  uint green;
+  uint blue;
+  uint alpha;
 {
   float fVar1;
   float fVar2;
   float fVar3;
   
-  fVar2 = (float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar2 = (float)((double)CONCAT44(0x43300000,green ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e70 + FLOAT_00108e74;
-  fVar3 = (float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar3 = (float)((double)CONCAT44(0x43300000,alpha ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e70 + FLOAT_00108e74;
-  fVar1 = (float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar1 = (float)((double)CONCAT44(0x43300000,blue ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e70 + FLOAT_00108e74;
   *(float *)(glContext + 0x2a0) =
-       (float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e70
+       (float)((double)CONCAT44(0x43300000,red ^ 0x80000000) - DOUBLE_00108d58) * FLOAT_00108e70
        + FLOAT_00108e74;
   *(float *)(glContext + 0x2a4) = fVar2;
   *(float *)(glContext + 0x2ac) = fVar3;
@@ -938,62 +938,62 @@ void _glColor4s_Exec(glContext, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4s_CompExec @ 0x5c944 (80 bytes) */
-void _glColor4s_CompExec(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+void _glColor4s_CompExec(glContext, red, green, blue, alpha)
+  undefined4 glContext;
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
+  undefined4 alpha;
 {
-  ((int (*)())_glColor4s_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((void (*)())_glColor4s_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((int (*)())_glColor4s_Comp)(glContext,red,green,blue,alpha);
+  ((void (*)())_glColor4s_Exec)(glContext,red,green,blue,alpha);
   return;
 }
 
 /* _glColor4sv_Comp @ 0x5c994 (244 bytes) */
-int _glColor4sv_Comp(param_1, param_2)
-  undefined4 param_1;
-  short *param_2;
+int _glColor4sv_Comp(glContext, v)
+  undefined4 glContext;
+  short *v;
 {
-  double dVar1;
+  double intToDoubleMagic;
   float fVar2;
   float fVar3;
   float *pfVar4;
   
-  pfVar4 = (float *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
+  pfVar4 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar3 = FLOAT_00108e74;
   fVar2 = FLOAT_00108e70;
-  dVar1 = DOUBLE_00108d58;
+  intToDoubleMagic = DOUBLE_00108d58;
   if (pfVar4 != (float *)0x0) {
-    *pfVar4 = (float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+    *pfVar4 = (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
               FLOAT_00108e70 + FLOAT_00108e74;
-    pfVar4[1] = (float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - dVar1) * fVar2 +
+    pfVar4[1] = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[2] = (float)((double)CONCAT44(0x43300000,(int)param_2[2] ^ 0x80000000) - dVar1) * fVar2 +
+    pfVar4[2] = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
-    pfVar4[3] = (float)((double)CONCAT44(0x43300000,(int)param_2[3] ^ 0x80000000) - dVar1) * fVar2 +
+    pfVar4[3] = (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - intToDoubleMagic) * fVar2 +
                 fVar3;
   }
   return pfVar4;
 }
 
 /* _glColor4sv_Exec @ 0x5ca88 (232 bytes) */
-double _glColor4sv_Exec(glContext, param_2)
+double _glColor4sv_Exec(glContext, v)
   int glContext;
-  short *param_2;
+  short *v;
 {
   float fVar1;
   float fVar2;
   float fVar3;
   
-  fVar2 = (float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar2 = (float)((double)CONCAT44(0x43300000,(int)v[1] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e70 + FLOAT_00108e74;
-  fVar3 = (float)((double)CONCAT44(0x43300000,(int)param_2[3] ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar3 = (float)((double)CONCAT44(0x43300000,(int)v[3] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e70 + FLOAT_00108e74;
-  fVar1 = (float)((double)CONCAT44(0x43300000,(int)param_2[2] ^ 0x80000000) - DOUBLE_00108d58) *
+  fVar1 = (float)((double)CONCAT44(0x43300000,(int)v[2] ^ 0x80000000) - DOUBLE_00108d58) *
           FLOAT_00108e70 + FLOAT_00108e74;
   *(float *)(glContext + 0x2a0) =
-       (float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58) *
+       (float)((double)CONCAT44(0x43300000,(int)*v ^ 0x80000000) - DOUBLE_00108d58) *
        FLOAT_00108e70 + FLOAT_00108e74;
   *(float *)(glContext + 0x2a4) = fVar2;
   *(float *)(glContext + 0x2ac) = fVar3;
@@ -1005,73 +1005,73 @@ double _glColor4sv_Exec(glContext, param_2)
 }
 
 /* _glColor4sv_CompExec @ 0x5cb70 (56 bytes) */
-void _glColor4sv_CompExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+void _glColor4sv_CompExec(glContext, v)
+  undefined4 glContext;
+  undefined4 v;
 {
-  ((int (*)())_glColor4sv_Comp)(param_1,param_2);
-  ((double (*)())_glColor4sv_Exec)(param_1,param_2);
+  ((int (*)())_glColor4sv_Comp)(glContext,v);
+  ((double (*)())_glColor4sv_Exec)(glContext,v);
   return;
 }
 
 /* _glColor4ub_Comp @ 0x5cba8 (136 bytes) */
-int _glColor4ub_Comp(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
+int _glColor4ub_Comp(glContext, red, green, blue, alpha)
+  int glContext;
+  int red;
+  int green;
+  int blue;
+  int alpha;
 {
   undefined4 *puVar1;
   int iVar2;
   
-  iVar2 = *(int *)(param_1 + 0x4674);
-  puVar1 = (undefined4 *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
+  iVar2 = *(int *)(glContext + 0x4674);
+  puVar1 = (undefined4 *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = *(undefined4 *)(iVar2 + param_2 * 4);
-    puVar1[1] = *(undefined4 *)(param_3 * 4 + iVar2);
-    puVar1[2] = *(undefined4 *)(iVar2 + param_4 * 4);
-    puVar1[3] = *(undefined4 *)(param_5 * 4 + iVar2);
+    *puVar1 = *(undefined4 *)(iVar2 + red * 4);
+    puVar1[1] = *(undefined4 *)(green * 4 + iVar2);
+    puVar1[2] = *(undefined4 *)(iVar2 + blue * 4);
+    puVar1[3] = *(undefined4 *)(alpha * 4 + iVar2);
   }
   return puVar1;
 }
 
 /* _glColor4ub_CompExec @ 0x5cc30 (80 bytes) */
-void _glColor4ub_CompExec(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+void _glColor4ub_CompExec(glContext, red, green, blue, alpha)
+  undefined4 glContext;
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
+  undefined4 alpha;
 {
-  ((int (*)())_glColor4ub_Comp)(param_1,param_2,param_3,param_4,param_5);
-  _glColor4ub_Exec(param_1,param_2,param_3,param_4,param_5);
+  ((int (*)())_glColor4ub_Comp)(glContext,red,green,blue,alpha);
+  _glColor4ub_Exec(glContext,red,green,blue,alpha);
   return;
 }
 
 /* _glColor4ubv_Comp @ 0x5cc80 (140 bytes) */
-int _glColor4ubv_Comp(param_1, param_2)
-  int param_1;
-  byte *param_2;
+int _glColor4ubv_Comp(glContext, v)
+  int glContext;
+  byte *v;
 {
   undefined4 *puVar1;
   int iVar2;
   
-  iVar2 = *(int *)(param_1 + 0x4674);
-  puVar1 = (undefined4 *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
+  iVar2 = *(int *)(glContext + 0x4674);
+  puVar1 = (undefined4 *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   if (puVar1 != (undefined4 *)0x0) {
-    *puVar1 = *(undefined4 *)(iVar2 + (uint)*param_2 * 4);
-    puVar1[1] = *(undefined4 *)(iVar2 + (uint)param_2[1] * 4);
-    puVar1[2] = *(undefined4 *)(iVar2 + (uint)param_2[2] * 4);
-    puVar1[3] = *(undefined4 *)(iVar2 + (uint)param_2[3] * 4);
+    *puVar1 = *(undefined4 *)(iVar2 + (uint)*v * 4);
+    puVar1[1] = *(undefined4 *)(iVar2 + (uint)v[1] * 4);
+    puVar1[2] = *(undefined4 *)(iVar2 + (uint)v[2] * 4);
+    puVar1[3] = *(undefined4 *)(iVar2 + (uint)v[3] * 4);
   }
   return puVar1;
 }
 
 /* _glColor4ubv_Exec @ 0x5cd0c (96 bytes) */
-double _glColor4ubv_Exec(glContext, param_2)
+double _glColor4ubv_Exec(glContext, v)
   int glContext;
-  byte *param_2;
+  byte *v;
 {
   undefined4 uVar1;
   undefined4 uVar2;
@@ -1079,10 +1079,10 @@ double _glColor4ubv_Exec(glContext, param_2)
   int iVar4;
   
   iVar4 = *(int *)(glContext + 0x4674);
-  uVar1 = *(undefined4 *)(iVar4 + (uint)param_2[3] * 4);
-  uVar2 = *(undefined4 *)((uint)param_2[1] * 4 + iVar4);
-  uVar3 = *(undefined4 *)((uint)param_2[2] * 4 + iVar4);
-  *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)((uint)*param_2 * 4 + iVar4);
+  uVar1 = *(undefined4 *)(iVar4 + (uint)v[3] * 4);
+  uVar2 = *(undefined4 *)((uint)v[1] * 4 + iVar4);
+  uVar3 = *(undefined4 *)((uint)v[2] * 4 + iVar4);
+  *(undefined4 *)(glContext + 0x2a0) = *(undefined4 *)((uint)*v * 4 + iVar4);
   *(undefined4 *)(glContext + 0x2a4) = uVar2;
   *(undefined4 *)(glContext + 0x2a8) = uVar3;
   *(undefined4 *)(glContext + 0x2ac) = uVar1;
@@ -1096,56 +1096,56 @@ double _glColor4ubv_Exec(glContext, param_2)
 }
 
 /* _glColor4ubv_CompExec @ 0x5cd6c (56 bytes) */
-void _glColor4ubv_CompExec(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+void _glColor4ubv_CompExec(glContext, v)
+  undefined4 glContext;
+  undefined4 v;
 {
-  ((int (*)())_glColor4ubv_Comp)(param_1,param_2);
-  ((double (*)())_glColor4ubv_Exec)(param_1,param_2);
+  ((int (*)())_glColor4ubv_Comp)(glContext,v);
+  ((double (*)())_glColor4ubv_Exec)(glContext,v);
   return;
 }
 
 /* _glColor4ui_Comp @ 0x5cda4 (216 bytes) */
-int _glColor4ui_Comp(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+int _glColor4ui_Comp(glContext, red, green, blue, alpha)
+  undefined4 glContext;
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
+  undefined4 alpha;
 {
   double dVar1;
   float fVar2;
   float *pfVar3;
   
-  pfVar3 = (float *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
+  pfVar3 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar2 = FLOAT_00108e6c;
   dVar1 = DOUBLE_00108d70;
   if (pfVar3 != (float *)0x0) {
-    *pfVar3 = (float)((double)CONCAT44(0x43300000,param_2) - DOUBLE_00108d70) * FLOAT_00108e6c;
-    pfVar3[1] = (float)((double)CONCAT44(0x43300000,param_3) - dVar1) * fVar2;
-    pfVar3[2] = (float)((double)CONCAT44(0x43300000,param_4) - dVar1) * fVar2;
-    pfVar3[3] = (float)((double)CONCAT44(0x43300000,param_5) - dVar1) * fVar2;
+    *pfVar3 = (float)((double)CONCAT44(0x43300000,red) - DOUBLE_00108d70) * FLOAT_00108e6c;
+    pfVar3[1] = (float)((double)CONCAT44(0x43300000,green) - dVar1) * fVar2;
+    pfVar3[2] = (float)((double)CONCAT44(0x43300000,blue) - dVar1) * fVar2;
+    pfVar3[3] = (float)((double)CONCAT44(0x43300000,alpha) - dVar1) * fVar2;
   }
   return pfVar3;
 }
 
 /* _glColor4ui_Exec @ 0x5ce7c (192 bytes) */
-void _glColor4ui_Exec(glContext, param_2, param_3, param_4, param_5)
+void _glColor4ui_Exec(glContext, red, green, blue, alpha)
   int glContext;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
+  undefined4 alpha;
 {
   float fVar1;
   float fVar2;
   float fVar3;
   
-  fVar1 = (float)((double)CONCAT44(0x43300000,param_3) - DOUBLE_00108d70) * FLOAT_00108e6c;
-  fVar2 = (float)((double)CONCAT44(0x43300000,param_5) - DOUBLE_00108d70) * FLOAT_00108e6c;
-  fVar3 = (float)((double)CONCAT44(0x43300000,param_4) - DOUBLE_00108d70) * FLOAT_00108e6c;
+  fVar1 = (float)((double)CONCAT44(0x43300000,green) - DOUBLE_00108d70) * FLOAT_00108e6c;
+  fVar2 = (float)((double)CONCAT44(0x43300000,alpha) - DOUBLE_00108d70) * FLOAT_00108e6c;
+  fVar3 = (float)((double)CONCAT44(0x43300000,blue) - DOUBLE_00108d70) * FLOAT_00108e6c;
   *(float *)(glContext + 0x2a0) =
-       (float)((double)CONCAT44(0x43300000,param_2) - DOUBLE_00108d70) * FLOAT_00108e6c;
+       (float)((double)CONCAT44(0x43300000,red) - DOUBLE_00108d70) * FLOAT_00108e6c;
   *(float *)(glContext + 0x2a4) = fVar1;
   *(float *)(glContext + 0x2ac) = fVar2;
   *(float *)(glContext + 0x2a8) = fVar3;
@@ -1156,53 +1156,53 @@ void _glColor4ui_Exec(glContext, param_2, param_3, param_4, param_5)
 }
 
 /* _glColor4ui_CompExec @ 0x5cf3c (80 bytes) */
-void _glColor4ui_CompExec(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+void _glColor4ui_CompExec(glContext, red, green, blue, alpha)
+  undefined4 glContext;
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
+  undefined4 alpha;
 {
-  ((int (*)())_glColor4ui_Comp)(param_1,param_2,param_3,param_4,param_5);
-  ((void (*)())_glColor4ui_Exec)(param_1,param_2,param_3,param_4,param_5);
+  ((int (*)())_glColor4ui_Comp)(glContext,red,green,blue,alpha);
+  ((void (*)())_glColor4ui_Exec)(glContext,red,green,blue,alpha);
   return;
 }
 
 /* _glColor4uiv_Comp @ 0x5cf8c (220 bytes) */
-int _glColor4uiv_Comp(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _glColor4uiv_Comp(glContext, v)
+  undefined4 glContext;
+  undefined4 *v;
 {
   double dVar1;
   float fVar2;
   float *pfVar3;
   
-  pfVar3 = (float *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
+  pfVar3 = (float *)_gleAddListItem(glContext,PTR__glColor4_ListExec_00110058,0x10);
   fVar2 = FLOAT_00108e6c;
   dVar1 = DOUBLE_00108d70;
   if (pfVar3 != (float *)0x0) {
-    *pfVar3 = (float)((double)CONCAT44(0x43300000,*param_2) - DOUBLE_00108d70) * FLOAT_00108e6c;
-    pfVar3[1] = (float)((double)CONCAT44(0x43300000,param_2[1]) - dVar1) * fVar2;
-    pfVar3[2] = (float)((double)CONCAT44(0x43300000,param_2[2]) - dVar1) * fVar2;
-    pfVar3[3] = (float)((double)CONCAT44(0x43300000,param_2[3]) - dVar1) * fVar2;
+    *pfVar3 = (float)((double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70) * FLOAT_00108e6c;
+    pfVar3[1] = (float)((double)CONCAT44(0x43300000,v[1]) - dVar1) * fVar2;
+    pfVar3[2] = (float)((double)CONCAT44(0x43300000,v[2]) - dVar1) * fVar2;
+    pfVar3[3] = (float)((double)CONCAT44(0x43300000,v[3]) - dVar1) * fVar2;
   }
   return pfVar3;
 }
 
 /* _glColor4uiv_Exec @ 0x5d068 (208 bytes) */
-double _glColor4uiv_Exec(glContext, param_2)
+double _glColor4uiv_Exec(glContext, v)
   int glContext;
-  undefined4 *param_2;
+  undefined4 *v;
 {
   float fVar1;
   float fVar2;
   float fVar3;
   
-  fVar1 = (float)((double)CONCAT44(0x43300000,param_2[1]) - DOUBLE_00108d70) * FLOAT_00108e6c;
-  fVar2 = (float)((double)CONCAT44(0x43300000,param_2[3]) - DOUBLE_00108d70) * FLOAT_00108e6c;
-  fVar3 = (float)((double)CONCAT44(0x43300000,param_2[2]) - DOUBLE_00108d70) * FLOAT_00108e6c;
+  fVar1 = (float)((double)CONCAT44(0x43300000,v[1]) - DOUBLE_00108d70) * FLOAT_00108e6c;
+  fVar2 = (float)((double)CONCAT44(0x43300000,v[3]) - DOUBLE_00108d70) * FLOAT_00108e6c;
+  fVar3 = (float)((double)CONCAT44(0x43300000,v[2]) - DOUBLE_00108d70) * FLOAT_00108e6c;
   *(float *)(glContext + 0x2a0) =
-       (float)((double)CONCAT44(0x43300000,*param_2) - DOUBLE_00108d70) * FLOAT_00108e6c;
+       (float)((double)CONCAT44(0x43300000,*v) - DOUBLE_00108d70) * FLOAT_00108e6c;
   *(float *)(glContext + 0x2a4) = fVar1;
   *(float *)(glContext + 0x2ac) = fVar2;
   *(float *)(glContext + 0x2a8) = fVar3;

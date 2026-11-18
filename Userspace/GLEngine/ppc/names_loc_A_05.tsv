@@ -1,0 +1,1327 @@
+use	_glepLoadRenderers	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_glepLoadRenderers	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar9\ \*\ 4;$	+1
+use	_glepLoadRenderers	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+1
+use	_glepLoadRenderers	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar9\ <\ iVar7\);$	+1
+use	_glepLoadRenderers	uVar14	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar14\ =\ 0;$	+1
+use	_glepLoadRenderers	uVar14	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ \*\(int\ \*\)\(uVar14\ \*\ 4\ \+\ \*\(int\ \*\)\(puVar5\ \+\ 4\)\);$	+1
+use	_glepLoadRenderers	uVar14	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ piVar15\[0x44\]\ \|\ 1\ <<\ \(uVar14\ \&\ 0x3f\);$	+1
+use	_glepLoadRenderers	uVar14	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ 1\ <<\ \(uVar14\ \&\ 0x3f\);$	+1
+use	_glepLoadRenderers	uVar14	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ uVar14\ \&\ 0x3f;$	+2
+use	_glepLoadRenderers	uVar14	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar14\ <\ \*\(uint\ \*\)puVar5\);$	+1
+use	_glepPluginConnect	pcVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pcVar3\ =\ _glep_gld_names;$	+1
+use	_glepPluginConnect	pcVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*iVar1\ =\ _NSLookupSymbolInModule\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x10c\),pcVar3\);$	+1
+use	_glepPluginConnect	pcVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pcVar3\ =\ pcVar3\ \+\ 0x20;$	+1
+use	_glePreInitGlobals	iVar8	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 0x100;$	+1
+use	_glePreInitGlobals	iVar8	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
+use	_glePreInitGlobals	iVar8	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 8;$	+1
+use	_glePreInitGlobals	iVar8	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$@2	+2
+use	_glePreInitGlobals	iVar8	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 0x10;$	+1
+use	_glePreInitGlobals	iVar8	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$@3	+2
+use	_glePreInitGlobals	puVar6	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar6\ =\ puVar3\ \+\ 0x408;$	+1
+use	_glePreInitGlobals	puVar6	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar6\ =\ 4;$	+2
+use	_glePreInitGlobals	puVar6	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar6\ =\ puVar3\ \+\ 0x410;$	+1
+use	_glePreInitGlobals	puVar6	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar6\ =\ 4;$@2	+2
+use	_glePreInitGlobals	uVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ 0;$	+1
+use	_glePreInitGlobals	uVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ uVar7\ \^\ 0x80000000;$	+2
+use	_gleOptimizeDisplayListCreateHashTable	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_gleOptimizeDisplayListCreateHashTable	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(\(int\)\&DAT_00110a30\ \+\ iVar9\);$	+3
+use	_gleOptimizeDisplayListCreateHashTable	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*puVar5\ =\ \*\(undefined4\ \*\)\(\(int\)\&_fi\ \+\ iVar9\);$	+1
+use	_gleOptimizeDisplayListCreateHashTable	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 0x10;$	+1
+use	_gleOptimizeDisplayListCreateHashTable	ppuVar8	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*ppuVar8\ =\ \&PTR__glBegin_ListExec_00110a2c;$	+1
+use	_gleOptimizeDisplayListCreateHashTable	ppuVar8	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*ppuVar8\ =\ ppuVar8\ \+\ 4;$	+1
+use	_gleOptimizeDisplayListCreateHashTable	ppuVar8	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\}\ while\ \(\*ppuVar8\ !=\ \(undefined\ \*\)0x0\);$	+1
+use	_gliQueryRendererInfo	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_gliQueryRendererInfo	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	_gliQueryRendererInfo	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*piVar1\ =\ \(int\ \*\)_malloc\(iVar6\ \*\ 0x38\);$	+1
+use	_gliQueryRendererInfo	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$@2	+1
+use	_gliQueryRendererInfo	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$@2	+1
+use	_gliQueryRendererInfo	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(iVar6\ !=\ 0\)\ \&\&\ \(iVar4\ ==\ 0\)\)\ \{$	+2
+use	_gliQueryRendererInfo	piVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*piVar3\ =\ piVar1;$	+1
+use	_gliQueryRendererInfo	piVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*iVar4\ =\ \(\*\(code\ \*\)puVar2\[0x48\]\)\(piVar3,param_2\);$	+1
+use	_gliQueryRendererInfo	piVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*piVar3\ =\ \(int\)piVar5;$	+3
+use	_gliQueryRendererInfo	piVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*piVar3\ =\ piVar3\ \+\ 0xe;$	+1
+use	_gliQueryRendererInfo	piVar5	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*piVar5\ =\ piVar1\ \+\ 0xe;$	+1
+use	_gliQueryRendererInfo	piVar5	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*piVar3\ =\ \(int\)piVar5;$	+1
+use	_gliQueryRendererInfo	piVar5	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*piVar5\ =\ piVar5\ \+\ 0xe;$	+1
+use	_gliCreateContext	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ 0;$@2	+1
+use	_gliCreateContext	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ iVar10\ \+\ 1;$@2	+1
+use	_gliCreateContext	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar10\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(iVar5\ \+\ 0x85a4\)\);$	+1
+use	_gliCreateContext	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_gliCreateContext	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar9\ \+\ iVar5;$	+1
+use	_gliCreateContext	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 0x2e0;$	+1
+use	_gliCreateContext	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ 0;$	+1
+use	_gliCreateContext	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar2\ =\ uVar11\ ==\ uVar13;$	+1
+use	_gliCreateContext	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ uVar11\ \+\ 1;$	+1
+use	_gliCreateContext	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar2\ =\ uVar11\ ==\ uVar13;$@2	+1
+use	_gliCreateContext	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(\(int\)uVar11\ <\ \(int\)uVar13\);$	+1
+use	_gleCreateSharedState	iVar1	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar1\ =\ 0x400;$	+1
+use	_gleCreateSharedState	iVar1	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	_gleCreateSharedState	iVar13	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar13\ =\ 0x100;$	+1
+use	_gleCreateSharedState	iVar13	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar13\ =\ iVar13\ \+\ \-1;$	+2
+use	_gleCreateSharedState	iVar13	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar13\ =\ 9;$	+1
+use	_gleCreateSharedState	iVar13	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar13\ =\ iVar13\ \+\ \-1;$@2	+2
+use	_gleCreateSharedState	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gleCreateSharedState	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar10\ =\ \(undefined4\ \*\)\(iVar5\ \*\ 4\ \+\ iVar3\ \+\ 0x8a74\);$	+1
+use	_gleCreateSharedState	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 0x28c;$	+1
+use	_gleCreateSharedState	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_gleCreateSharedState	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	_gleCreateSharedState	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar6\ <\ 2\);$	+1
+use	_gleCreateSharedState	iVar9	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_gleCreateSharedState	iVar9	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar2\ =\ \(undefined4\ \*\)\(iVar9\ \*\ 0x1004\ \+\ iVar3\);$	+1
+use	_gleCreateSharedState	iVar9	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+1
+use	_gleCreateSharedState	iVar9	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar9\ <\ 8\);$	+1
+use	_gleCreateSharedState	uVar12	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar12\ =\ 0;$	+1
+use	_gleCreateSharedState	uVar12	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar12\ =\ uVar12\ \+\ 1;$	+1
+use	_gleCreateSharedState	uVar12	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(\(int\)uVar12\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleCreateSharedState	uVar12	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar12\ ==\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\)\ \{$	+4
+use	_gleCreateSharedState	uVar12	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ uVar12\ \-\ 1;$	+1
+use	_gleCreateEnableHashTable	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 0x400;$	+1
+use	_gleCreateEnableHashTable	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	_gleCreateEnableHashTable	puVar2	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar2\ =\ puVar3;$	+1
+use	_gleCreateEnableHashTable	puVar2	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar2\ =\ 0;$	+4
+use	_gleInitializeContext	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 0x13;$	+1
+use	_gleInitializeContext	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	_gleInitializeContext	iVar5	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 3;$	+1
+use	_gleInitializeContext	iVar5	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@2	+2
+use	_gleNullMemoryPointers	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ 1;$	+1
+use	_gleNullMemoryPointers	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+1
+use	_gleNullMemoryPointers	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar2\);$	+1
+use	_gleNullMemoryPointers	iVar2	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ 0x10;$	+1
+use	_gleNullMemoryPointers	iVar2	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$@2	+2
+use	_gleNullMemoryPointers	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ 0;$	+1
+use	_gleNullMemoryPointers	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+use	_gleNullMemoryPointers	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar2\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleNullMemoryPointers	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_gleNullMemoryPointers	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
+use	_gleNullMemoryPointers	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar3\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleNullMemoryPointers	iVar3	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$@2	+1
+use	_gleNullMemoryPointers	iVar3	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar3\ \+\ 1;$@2	+1
+use	_gleNullMemoryPointers	iVar3	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar3\ <\ 0x10\);$	+1
+use	_gleNullMemoryPointers	iVar3	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ 3;$	+1
+use	_gleNullMemoryPointers	iVar3	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+use	_gleNullMemoryPointers	iVar3	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ 5;$	+1
+use	_gleNullMemoryPointers	iVar3	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$@2	+2
+use	_gleNullMemoryPointers	iVar4	remaining5	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ 5;$	+1
+use	_gleNullMemoryPointers	iVar4	remaining5	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	_gleAllocMaterials	iVar1	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar1\ =\ 1;$	+1
+use	_gleAllocMaterials	iVar1	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+1
+use	_gleAllocMaterials	iVar1	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar1\);$	+1
+use	_gleInitGLDState	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 0x10;$	+1
+use	_gleInitGLDState	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	_gleInitGLDState	iVar10	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 8;$	+1
+use	_gleInitGLDState	iVar10	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$@2	+2
+use	_gleInitGLDState	iVar10	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 0x17;$	+1
+use	_gleInitGLDState	iVar10	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$@3	+1
+use	_gleInitGLDState	iVar10	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar10\);$	+1
+use	_gleInitGLDState	iVar10	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 6;$	+1
+use	_gleInitGLDState	iVar10	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$@4	+2
+use	_gleInitGLDState	iVar10	remaining5	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 8;$@2	+1
+use	_gleInitGLDState	iVar10	remaining5	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$@5	+2
+use	_gleInitGLDState	iVar10	remaining6	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 7;$	+1
+use	_gleInitGLDState	iVar10	remaining6	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$@6	+2
+use	_gleInitGLDState	iVar10	remaining7	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 0x100;$	+1
+use	_gleInitGLDState	iVar10	remaining7	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$@7	+2
+use	_gleInitGLDState	iVar10	remaining8	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 0x80;$	+1
+use	_gleInitGLDState	iVar10	remaining8	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$@8	+2
+use	_gleInitGLDState	iVar11	remaining9	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar11\ =\ 4;$	+1
+use	_gleInitGLDState	iVar11	remaining9	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar11\ =\ iVar11\ \+\ \-1;$	+2
+use	_gleInitGLDState	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
+use	_gleInitGLDState	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(iVar8\ ==\ 0\)\ \{$	+1
+use	_gleInitGLDState	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+1
+use	_gleInitGLDState	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar8\ <\ 2\);$	+1
+use	_gleInitGLDState	iVar9	remaining10	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ 0x20;$	+1
+use	_gleInitGLDState	iVar9	remaining10	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
+use	_gleInitGLDState	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_gleInitGLDState	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar9\ \*\ 0x80\ \+\ param_1;$	+1
+use	_gleInitGLDState	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+2
+use	_gleInitGLDState	iVar9	remaining11	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ 1;$	+1
+use	_gleInitGLDState	iVar9	remaining11	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$@2	+1
+use	_gleInitGLDState	iVar9	remaining11	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar9\);$	+1
+use	_gleInitGLIState	iVar4	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ 0x10;$	+1
+use	_gleInitGLIState	iVar4	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	_gleInitGLIState	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gleInitGLIState	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar5\ \*\ 0x40;$	+2
+use	_gleInitGLIState	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ 0xcb\);$	+1
+use	_gleInitGLIState	iVar5	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 3;$	+1
+use	_gleInitGLIState	iVar5	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	_gleInitGLIState	iVar5	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 0x18;$	+1
+use	_gleInitGLIState	iVar5	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@2	+2
+use	_gleInitGLIState	iVar6	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 8;$	+1
+use	_gleInitGLIState	iVar6	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_gleInitDerivedState	iVar4	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ 1;$	+1
+use	_gleInitDerivedState	iVar4	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+1
+use	_gleInitDerivedState	iVar4	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar4\);$	+1
+use	_gleInitDerivedState	iVar4	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ 8;$	+1
+use	_gleInitDerivedState	iVar4	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ iVar4\ \+\ \-1;$@2	+2
+use	_gleInitDerivedState	iVar6	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 8;$	+1
+use	_gleInitDerivedState	iVar6	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_gleInitTextureState	iVar12	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar12\ =\ 2;$	+1
+use	_gleInitTextureState	iVar12	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar12\ =\ iVar12\ \+\ \-1;$	+1
+use	_gleInitTextureState	iVar12	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar12\);$	+1
+use	_gleInitTextureState	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_gleInitTextureState	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)_gleCreateTextureObject\)\(iVar3\ <<\ 4\ \|\ 0x1204,0\);$	+1
+use	_gleInitTextureState	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
+use	_gleInitTextureState	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar3\ <\ 3\);$	+1
+use	_gleInitTextureState	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$@2	+1
+use	_gleInitTextureState	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar3\ \+\ 1;$@2	+1
+use	_gleInitTextureState	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar3\ <\ 0x10\);$	+1
+use	_gleInitTextureState	iVar4	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ 0xf;$	+1
+use	_gleInitTextureState	iVar4	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+1
+use	_gleInitTextureState	iVar4	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar4\);$	+1
+use	_gleInitTextureState	iVar5	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gleInitTextureState	iVar5	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_gleInitTextureState	iVar5	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleInitTextureState	iVar5	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$@2	+1
+use	_gleInitTextureState	iVar5	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$@2	+1
+use	_gleInitTextureState	iVar5	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@2	+1
+use	_gleInitTextureState	iVar8	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
+use	_gleInitTextureState	iVar8	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+1
+use	_gleInitTextureState	iVar8	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar8\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleInitTextureState	uVar10	loopIndex6	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar10\ =\ 0;$	+1
+use	_gleInitTextureState	uVar10	loopIndex6	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_gleCreateTextureObject\)\(uVar10\ \|\ 0x1000,0\);$	+1
+use	_gleInitTextureState	uVar10	loopIndex6	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ uVar10\ \*\ 4\ \+\ param_1\ \+\ 0x10000;$	+1
+use	_gleInitTextureState	uVar10	loopIndex6	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar10\ =\ uVar10\ \+\ 1;$	+1
+use	_gleInitTextureState	uVar10	loopIndex6	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(\(int\)uVar10\ <\ 5\);$	+1
+use	_gleInitTextureState	uVar10	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar10\ =\ 0;$@2	+1
+use	_gleInitTextureState	uVar10	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)_gleCreateTextureObject\)\(uVar10\ \|\ 0x1100,0\);$	+2
+use	_gleInitTextureState	uVar10	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(\(int\)uVar10\ <\ 5\);$@2	+1
+use	_gleInitTextureState	uVar10	loopIndex8	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar10\ =\ 0;$@3	+1
+use	_gleInitTextureState	uVar10	loopIndex8	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_gleCreateTextureObject\)\(uVar10\ \|\ 0x1304,0\);$	+2
+use	_gleInitializeGLTexture	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$	+1
+use	_gleInitializeGLTexture	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ \(int\)param_3\ \+\ iVar7;$	+1
+use	_gleInitializeGLTexture	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ iVar7\ \+\ 0x168;$	+1
+use	_gleInitializeGLTexture	iVar8	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 8;$	+1
+use	_gleInitializeGLTexture	iVar8	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
+use	_gleInitializeGLTexture	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
+use	_gleInitializeGLTexture	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+1
+use	_gleInitializeGLTexture	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar8\ <\ param_2\);$	+1
+use	_gleInitializeGLTexture	iVar9	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ 0xf;$	+1
+use	_gleInitializeGLTexture	iVar9	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
+use	_gleInitializeGLTexture	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar3\ =\ param_3;$	+1
+use	_gleInitializeGLTexture	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar3\ =\ 0;$	+2
+use	_gleCreatePluginTexture	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_gleCreatePluginTexture	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_gleCreatePluginTexture	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleInitPipelineProgramState	iVar19	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar19\ =\ 0;$	+1
+use	_gleInitPipelineProgramState	iVar19	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_gleCreatePipelineProgramObject\)\(param_1,iVar19,0\);$	+1
+use	_gleInitPipelineProgramState	iVar19	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar19\ =\ iVar19\ \+\ 1;$	+1
+use	_gleInitPipelineProgramState	iVar19	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar19\ <\ 2\);$	+1
+use	_gleInitPipelineProgramState	iVar19	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar19\ =\ 0;$@2	+1
+use	_gleInitPipelineProgramState	iVar19	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(iVar19\ !=\ 0\)\ \{$	+1
+use	_gleInitPipelineProgramState	iVar19	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar19\ =\ iVar19\ \+\ 1;$@2	+1
+use	_gleInitPipelineProgramState	iVar19	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(1\ <\ iVar19\)\ \{$	+1
+use	_gleInitPipelineProgramState	iVar21	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar21\ =\ 0;$	+1
+use	_gleInitPipelineProgramState	iVar21	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar21\ =\ iVar21\ \+\ 1;$	+1
+use	_gleInitPipelineProgramState	iVar21	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar21\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleInitPipelineProgramState	iVar8	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
+use	_gleInitPipelineProgramState	iVar8	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+2
+use	_gleInitPipelineProgramState	puVar10	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar10\ =\ puVar9\ \+\ 1;$	+1
+use	_gleInitPipelineProgramState	puVar10	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar10\ =\ uVar4;$	+1
+use	_gleInitPipelineProgramState	puVar10	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar10\ =\ puVar10\ \+\ 1;$	+1
+use	_gleInitPipelineProgramState	puVar10	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar10\ =\ puVar9;$	+1
+use	_gleInitPipelineProgramState	puVar10	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar5\ =\ \*puVar10;$	+2
+use	_gleInitPipelineProgramState	puVar12	cursor3	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar12\ =\ puVar9;$	+1
+use	_gleInitPipelineProgramState	puVar12	cursor3	INFERRED	only ever set to a start value and stepped (cursor)	^\s*if\ \(uVar4\ ==\ \*puVar12\)\ break;$	+1
+use	_gleInitPipelineProgramState	puVar12	cursor3	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar12\ =\ puVar12\ \+\ 1;$	+1
+use	_gleInitPipelineProgramState	uVar13	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar13\ =\ 0;$	+1
+use	_gleInitPipelineProgramState	uVar13	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar13\ =\ uVar13\ \+\ 1;$	+1
+use	_gleInitPipelineProgramState	uVar13	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar13\ <\ uVar22\);$	+1
+use	_gleInitPipelineProgramState	uVar13	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar13\ ==\ uVar22\)\ \{$	+1
+use	_gleInitPipelineProgramState	uVar20	loopIndex6	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar20\ =\ 0;$	+1
+use	_gleInitPipelineProgramState	uVar20	loopIndex6	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ uVar20\ \*\ 4;$	+2
+use	_gleInitPipelineProgramState	uVar20	loopIndex6	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar20\ <\ uVar22\);$	+1
+use	_gleInitPipelineProgramState	uVar22	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar22\ =\ 1;$	+1
+use	_gleInitPipelineProgramState	uVar22	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar22\ !=\ 0\)\ \{$	+1
+use	_gleInitPipelineProgramState	uVar22	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar13\ <\ uVar22\);$	+1
+use	_gleInitPipelineProgramState	uVar22	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar13\ ==\ uVar22\)\ \{$	+1
+use	_gleInitPipelineProgramState	uVar22	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar22\ =\ uVar22\ \+\ 1;$	+1
+use	_gleInitPipelineProgramState	uVar22	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(uint\ \*\)\(iVar16\ \+\ \-0x7564\)\ =\ uVar22;$	+2
+use	_gleInitPipelineProgramState	uVar22	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar22\ !=\ 0\)\ \{$@2	+1
+use	_gleInitPipelineProgramState	uVar22	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*for\ \(uVar13\ =\ uVar22;\ uVar13\ !=\ 0;\ uVar13\ =\ uVar13\ \-\ 1\)\ \{$	+1
+use	_gleInitPipelineProgramState	uVar22	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar20\ <\ uVar22\);$	+1
+use	_gleCreatePipelineProgramObject	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 8;$	+1
+use	_gleCreatePipelineProgramObject	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	_gleCreatePipelineProgramObject	iVar10	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 9;$	+1
+use	_gleCreatePipelineProgramObject	iVar10	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$@2	+2
+use	_gleCreatePipelineProgramObject	iVar10	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 0x450;$	+1
+use	_gleCreatePipelineProgramObject	iVar10	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$@3	+2
+use	_gleCreatePipelineProgramObject	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ 0;$	+1
+use	_gleCreatePipelineProgramObject	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar1\ =\ iVar10\ \*\ 0x10;$	+2
+use	_gleCreatePipelineProgramObject	iVar7	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ 0x100;$	+1
+use	_gleCreatePipelineProgramObject	iVar7	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ 0x80;$	+1
+use	_gleCreatePipelineProgramObject	iVar7	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ 0;$	+1
+use	_gleCreatePipelineProgramObject	iVar7	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*puVar6\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)_gleVecAlloc\)\(uVar2\ \+\ iVar7\ \*\ 0x10\);$	+1
+use	_gleCreatePipelineProgramObject	iVar7	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*for\ \(;\ iVar7\ !=\ 0;\ iVar7\ =\ iVar7\ \+\ \-1\)\ \{$	+1
+use	_gleCreatePipelineProgramObject	puVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ puVar6\ \+\ 0x12a;$	+1
+use	_gleCreatePipelineProgramObject	puVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar4\ =\ 0;$	+2
+use	_gleCreatePipelineProgramObject	puVar4	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ puVar6\ \+\ 10;$	+1
+use	_gleCreatePipelineProgramObject	puVar4	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar4\ =\ 0;$@2	+2
+use	_gleCreatePluginPipelineProgram	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_gleCreatePluginPipelineProgram	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_gleCreatePluginPipelineProgram	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleInitBufferState	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ 0x20;$	+1
+use	_gleInitBufferState	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	_gleInitVertexArrayState	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_gleInitVertexArrayState	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_gleInitVertexArrayState	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleCreateVertexArrayObject	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 0x20;$	+1
+use	_gleCreateVertexArrayObject	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	_gleCreateVertexArrayObject	iVar5	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 0x20;$@2	+1
+use	_gleCreateVertexArrayObject	iVar5	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@2	+2
+use	_gleCreateVertexArrayObject	iVar5	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 8;$	+1
+use	_gleCreateVertexArrayObject	iVar5	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@3	+2
+use	_gleCreateVertexArrayObject	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gleCreateVertexArrayObject	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_gleCreateVertexArrayObject	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleCreateVertexArrayObject	iVar6	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 0x20;$	+1
+use	_gleCreateVertexArrayObject	iVar6	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_gleCreateVertexArrayObject	puVar2	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar2\ =\ puVar4;$	+1
+use	_gleCreateVertexArrayObject	puVar2	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar2\[0xc\]\ =\ 0;$	+9
+use	_gleCreateVertexArrayObject	puVar2	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar2\ =\ puVar4\ \+\ 0xd8;$	+1
+use	_gleCreateVertexArrayObject	puVar2	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar2\ =\ 0;$	+2
+use	_gleCreateVertexArrayObject	puVar2	cursor3	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar2\ =\ puVar4\ \+\ 4;$	+1
+use	_gleCreateVertexArrayObject	puVar2	cursor3	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar2\ =\ 0;$@2	+2
+use	_gleCreateVertexArrayObject	puVar2	cursor4	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar2\ =\ puVar4;$@2	+1
+use	_gleCreateVertexArrayObject	puVar2	cursor4	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar2\[0x118\]\ =\ 0;$	+1
+use	_gleCreateVertexArrayObject	puVar2	cursor4	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar2\[0x119\]\ =\ 0xffffffff;$	+2
+use	_gleCreateVertexArrayObject	puVar2	cursor4	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar2\ =\ puVar2\ \+\ 0x23;$	+1
+use	_gleCreateVertexArrayObject	puVar3	cursor5	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar3\ =\ puVar4\ \+\ 0xf8;$	+1
+use	_gleCreateVertexArrayObject	puVar3	cursor5	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar3\ =\ 0;$	+2
+use	_gleCreatePluginVertexArray	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_gleCreatePluginVertexArray	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_gleCreatePluginVertexArray	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleInitFenceMachine	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ 0x400;$	+1
+use	_gleInitFenceMachine	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	_gleInitQueryMachine	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ 0x400;$	+1
+use	_gleInitQueryMachine	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	_gleUpdateLightExponents	iVar3	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ 0xb;$	+1
+use	_gleUpdateLightExponents	iVar3	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+use	_gleUpdateLightExponents	iVar5	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 9;$	+1
+use	_gleUpdateLightExponents	iVar5	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+1
+use	_gleUpdateLightExponents	iVar5	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar5\);$	+1
+use	_gleUpdateClipPlane	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gleUpdateClipPlane	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_gleUpdateClipPlane	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x4dfc\)\ =\ iVar5;$	+1
+use	_gleUpdateClipPlane	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 6;$	+1
+use	_gleUpdateClipPlane	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_gleUpdateClipPlane	uVar4	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ 0;$	+1
+use	_gleUpdateClipPlane	uVar4	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(uVar3\ \&\ 1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+2
+use	_gleUpdateClipPlane	uVar4	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ uVar4\ \+\ 1;$	+1
+use	_gleUpdateMatrixFunc	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 0x18;$	+1
+use	_gleUpdateMatrixFunc	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	_gleUpdateMatrixFunc	uVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar9\ =\ 0;$	+1
+use	_gleUpdateMatrixFunc	uVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(\(uVar8\ \|\ \(uVar8\ >>\ 4\ \|\ uVar8\ >>\ 3\)\ \&\ 1\)\ >>\ \(uVar9\ \&\ 0x3f\)\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	_gleUpdateMatrixFunc	uVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar5\ =\ \*\(byte\ \*\)\(uVar9\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x5420\)\ \+\ 0x328\);$	+1
+use	_gleUpdateMatrixFunc	uVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar5\ =\ \*\(byte\ \*\)\(uVar9\ \*\ 4\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x5430\)\ \+\ 0x20\)\ \+\ 0x35c\);$	+1
+use	_gleUpdateMatrixFunc	uVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ uVar9\ \*\ 4;$	+1
+use	_gleUpdateMatrixFunc	uVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar9\ =\ uVar9\ \+\ 1;$	+1
+use	_gleUpdateTextureCoordGen	iVar27	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar27\ =\ 0;$	+1
+use	_gleUpdateTextureCoordGen	iVar27	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(iVar27\ !=\ 0\)\ \&\&\ \(\*pcVar28\ !=\ '\\0'\)\)\ \{$	+1
+use	_gleUpdateTextureCoordGen	iVar27	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar27\ =\ iVar27\ \+\ 1;$	+1
+use	_gleUpdateTextureCoordGen	iVar31	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar31\ =\ 8;$	+1
+use	_gleUpdateTextureCoordGen	iVar31	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar31\ =\ iVar31\ \+\ \-1;$	+2
+use	_gliSetCurrentPluginDispatchTable	iVar4	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ 0x21;$	+1
+use	_gliSetCurrentPluginDispatchTable	iVar4	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	_glGetString_Exec	pcVar5	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pcVar5\ =\ \*ppuVar4;$	+1
+use	_glGetString_Exec	pcVar5	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*cVar2\ =\ \*pcVar5;$	+1
+use	_glGetString_Exec	pcVar5	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pcVar5\ =\ pcVar5\ \+\ 1;$	+2
+use	_glGetString_Exec	ppuVar4	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*ppuVar4\ =\ \&_engine_extensions;$	+1
+use	_glGetString_Exec	ppuVar4	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pcVar5\ =\ \*ppuVar4;$	+2
+use	_glGetString_Exec	ppuVar4	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\}\ while\ \(\(int\)ppuVar4\ <\ 0x110389\);$	+1
+use	_glGetString_Exec	uVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ 0;$	+1
+use	_glGetString_Exec	uVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(\*\(uint\ \*\)\(\(\(int\)uVar7\ >>\ 5\)\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x468c\)\ \+\ 0x124\)\ >>\ \(uVar7\ \&\ 0x1f\)\ \&$	+2
+use	_glGetString_Exec	uVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*switch\(uVar7\)\ \{$	+1
+use	_glGetString_Exec	uVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ uVar7\ \+\ 1;$	+2
+use	_glGenFencesAPPLE_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_glGenFencesAPPLE_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar3\ \+\ iVar4;$	+2
+use	_gleDCBRealloc	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_gleDCBRealloc	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar1\ =\ iVar6\ \*\ 4;$	+2
+use	_glGetIntegerv_Exec	pdVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pdVar3\ =\ local_a0;$	+2
+use	_glGetIntegerv_Exec	pdVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*iVar2\ =\ \*\(int\ \*\)pdVar3;$	+2
+use	_glGetIntegerv_Exec	pdVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*dVar6\ =\ \*pdVar3;$	+2
+use	_glGetIntegerv_Exec	pdVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*dVar5\ =\ \*pdVar3;$	+2
+use	_glTexEnvfv_Exec	iVar11	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar11\ =\ 4;$	+1
+use	_glTexEnvfv_Exec	iVar11	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar11\ =\ iVar11\ \+\ \-1;$	+2
+use	_glTexEnvfv_Exec	iVar11	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar11\ =\ 4;$@2	+1
+use	_glTexEnvfv_Exec	iVar11	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar11\ =\ iVar11\ \+\ \-1;$@2	+2
+use	_glTexEnvfv_Exec	pfVar8	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar8\ =\ param_4;$	+1
+use	_glTexEnvfv_Exec	pfVar8	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*fVar4\ =\ \*pfVar8;$	+1
+use	_glTexEnvfv_Exec	pfVar8	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar8\ =\ pfVar8\ \+\ 1;$	+1
+use	_glGenTextures_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_glGenTextures_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar4\ \+\ iVar3;$	+2
+use	_gleBindTexture	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$	+1
+use	_gleBindTexture	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+1
+use	_gleBindTexture	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar7\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleModifyPluginTexture	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_gleModifyPluginTexture	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	_gleModifyPluginTexture	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar6\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleModifyPluginTexture	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
+use	_gleModifyPluginTexture	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+1
+use	_gleModifyPluginTexture	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar8\ <\ \(int\)uVar7\);$	+1
+use	_gleModifyPluginTexture	iVar9	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_gleModifyPluginTexture	iVar9	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+1
+use	_gleModifyPluginTexture	iVar9	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar9\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleModifyPluginTexture	iVar9	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$@2	+1
+use	_gleModifyPluginTexture	iVar9	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*piVar4\ =\ \(int\ \*\)\(\(int\)param_2\ \+\ uVar5\ \*\ 0x18\ \+\ iVar9\ \+\ 0xc4\);$	+1
+use	_gleModifyPluginTexture	iVar9	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 0x168;$	+1
+use	_gleModifyPluginTexture	puVar10	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar10\ =\ param_2;$	+1
+use	_gleModifyPluginTexture	puVar10	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x154\)\)\(\*puVar1,\*puVar10,uVar7\ \|\ 0x80\);$	+2
+use	_gleCreateTextureLevel	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_gleCreateTextureLevel	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_gleCreateTextureLevel	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleCreatePluginTextureLevel	iVar14	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar14\ =\ 0;$	+1
+use	_gleCreatePluginTextureLevel	iVar14	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar13\ =\ \(int\)param_2\ \+\ iVar14\ \+\ 0xc4;$	+1
+use	_gleCreatePluginTextureLevel	iVar14	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar14\ =\ iVar14\ \+\ 0x168;$	+1
+use	_gleCreatePluginTextureLevel	iVar15	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar15\ =\ 0;$	+1
+use	_gleCreatePluginTextureLevel	iVar15	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar15\ =\ iVar15\ \+\ 1;$	+1
+use	_gleCreatePluginTextureLevel	iVar15	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar15\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleCreatePluginTextureLevel	iVar21	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar21\ =\ 0;$	+1
+use	_gleCreatePluginTextureLevel	iVar21	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar21\ =\ iVar21\ \+\ 1;$	+1
+use	_gleCreatePluginTextureLevel	iVar21	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar21\ <\ \(int\)\(uint\)bVar2\);$	+1
+use	_gleCreatePluginTextureLevel	uVar6	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ 0;$	+1
+use	_gleCreatePluginTextureLevel	uVar6	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ \(ushort\)\(1\ <<\ \(uVar6\ \&\ 0x3f\)\);$	+1
+use	_gleCreatePluginTextureLevel	uVar6	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ uVar6\ \+\ 1;$	+1
+use	_gleResetLevels	iVar16	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar16\ =\ 0;$	+1
+use	_gleResetLevels	iVar16	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar18\ =\ uVar20\ \*\ 0x18\ \+\ param_2\ \+\ iVar16\ \+\ 0xc4;$	+1
+use	_gleResetLevels	iVar16	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar16\ =\ iVar16\ \+\ 0x168;$	+1
+use	_gleResetLevels	iVar19	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar19\ =\ 0xf;$	+1
+use	_gleResetLevels	iVar19	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar19\ =\ iVar19\ \+\ \-1;$	+2
+use	_gleResetLevels	iVar19	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar19\ =\ 0;$@4	+1
+use	_gleResetLevels	iVar19	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\(param_1,param_2,iVar18,iVar19,uVar20,\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a8\)\);$	+1
+use	_gleResetLevels	iVar19	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\(param_1,param_2,iVar18,iVar19,uVar20,0,0,0,\(uint\)\*\(ushort\ \*\)\(iVar18\ \+\ 4\),$	+2
+use	_gleResetLevels	iVar19	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar19\ =\ iVar19\ \+\ 1;$	+1
+use	_gleResetLevels	iVar19	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar19\ <\ \(int\)uVar13\);$	+1
+use	_gleResetLevels	uVar17	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar17\ =\ 0;$	+1
+use	_gleResetLevels	uVar17	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar10\ =\ uVar17;$	+1
+use	_gleResetLevels	uVar17	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar17\ =\ uVar17\ \+\ 1;$	+1
+use	_glBegin_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glBegin_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+2
+use	_glBegin_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 0x13;$	+1
+use	_glBegin_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_gleCalculateOptions	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_gleCalculateOptions	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ \*\(ushort\ \*\)\(\(int\)param_1\ \+\ \(param_2\ \+\ iVar9\)\ \*\ 2\ \+\ 4\)\ >>\ 10\ \&\ 0xf;$	+1
+use	_gleCalculateOptions	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ \(\*\(ushort\ \*\)\(\(int\)param_1\ \+\ \(param_2\ \+\ iVar9\)\ \*\ 2\ \+\ 4\)\ >>\ 0xe\)\ \+\ 1;$	+1
+use	_gleCalculateOptions	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+1
+use	_gleStoreDataElementNO	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar3\ =\ param_1\ \+\ 3;$	+2
+use	_gleStoreDataElementNO	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar3\ =\ param_1\ \+\ 2;$	+2
+use	_gleStoreDataElementNO	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*param_1\ =\ puVar3\ \+\ 1;$	+1
+use	_gleStoreDataElementNO	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar3\ =\ param_1\ \+\ 2;$@2	+2
+use	_gleStoreDataElementNO	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar3\ =\ param_1\ \+\ 3;$@2	+2
+use	_gleStoreDataElementNO	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar3\ =\ param_1\ \+\ 2;$@3	+2
+use	_gleStoreDataElementNO	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar3\ =\ puVar3\ \+\ 1;$	+2
+use	_gleStoreDataElementNO	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar3\ =\ param_1\ \+\ 2;$@4	+2
+use	_gleStoreDataElementNO	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar3\ =\ param_1\ \+\ 2;$@5	+2
+use	_glFlush_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glFlush_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+2
+use	_glFlush_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 0x13;$	+1
+use	_glFlush_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_gleModifyPluginTextureLevel	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_gleModifyPluginTextureLevel	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	_gleModifyPluginTextureLevel	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar6\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleModifyPluginTextureLevel	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$@2	+1
+use	_gleModifyPluginTextureLevel	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$@2	+1
+use	_gleModifyPluginTextureLevel	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar6\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@2	+1
+use	_gleTestObject	uVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ 0;$	+1
+use	_gleTestObject	uVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ uVar6\ \+\ 1;$	+1
+use	_gleTestObject	uVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar6\ <\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleTestObject	uVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ 0;$@2	+1
+use	_gleTestObject	uVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ uVar6\ \+\ 1;$@2	+1
+use	_gleTestObject	uVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar6\ <\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@2	+1
+use	_gleTestObject	uVar6	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ 0;$@3	+1
+use	_gleTestObject	uVar6	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ uVar6\ \+\ 1;$@3	+1
+use	_gleTestObject	uVar6	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar6\ <\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@3	+1
+use	_gleTestObject	uVar6	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ 0;$@4	+1
+use	_gleTestObject	uVar6	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ uVar6\ \+\ 1;$@4	+1
+use	_gleTestObject	uVar6	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar6\ <\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@4	+1
+use	_gleTestObject	uVar6	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ 0;$@5	+1
+use	_gleTestObject	uVar6	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ uVar6\ \+\ 1;$@5	+1
+use	_gleTestObject	uVar6	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar6\ <\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@5	+1
+use	_glDeleteTextures_Exec_body	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
+use	_glDeleteTextures_Exec_body	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+1
+use	_glDeleteTextures_Exec_body	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar8\ <\ param_2\);$	+1
+use	_glDeleteTextures_Exec_body	piVar5	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*piVar5\ =\ piVar6;$	+1
+use	_glDeleteTextures_Exec_body	piVar5	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*iVar2\ =\ \*piVar5;$	+2
+use	_glDeleteTextures_Exec_body	uVar11	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ 0;$	+1
+use	_glDeleteTextures_Exec_body	uVar11	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleBindTexture\(param_1,uVar4,0,uVar11\);$	+1
+use	_glDeleteTextures_Exec_body	uVar11	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ uVar11\ \+\ 1;$	+1
+use	_glDeleteTextures_Exec_body	uVar11	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar11\ <\ 0x10\);$	+1
+use	_glDeleteTextures_Exec_body	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ 0;$@2	+1
+use	_glDeleteTextures_Exec_body	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleFramebufferTexture\(param_1,uVar11,0,0,0,0,0\);$	+1
+use	_glDeleteTextures_Exec_body	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ uVar11\ \+\ 1;$@2	+2
+use	_glDeleteTextures_Exec_body	uVar4	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ 0;$	+1
+use	_glDeleteTextures_Exec_body	uVar4	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleBindTexture\(param_1,uVar4,0,uVar11\);$	+1
+use	_glDeleteTextures_Exec_body	uVar4	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ uVar4\ \+\ 1;$	+1
+use	_glDeleteTextures_Exec_body	uVar4	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar4\ <\ 5\);$	+1
+use	_gleFreeTextureObject	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_gleFreeTextureObject	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_gleFreeTextureObject	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ iVar2\);$	+1
+use	_gleFreeTextureObject	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gleFreeTextureObject	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ param_2\ \+\ iVar5\ \+\ 0xd4;$	+1
+use	_gleFreeTextureObject	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 0x168;$	+1
+use	_gleFreeTextureObject	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 0xe;$	+1
+use	_gleFreeTextureObject	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+1
+use	_gleFreeTextureObject	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar6\);$	+1
+use	_gleDeletePluginTexture	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gleDeletePluginTexture	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar5\ \*\ 4;$	+1
+use	_gleDeletePluginTexture	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_gleDeletePluginTexture	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gliSetInteger	iVar16	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar16\ =\ 0;$	+1
+use	_gliSetInteger	iVar16	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar16\ =\ iVar16\ \+\ 1;$	+1
+use	_gliSetInteger	iVar16	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar16\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gliSetInteger	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_gliSetInteger	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleCreatePluginTextureLevel\(param_1,iVar10,iVar12,iVar9,0,uVar5\);$	+1
+use	_gliSetInteger	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleGenSurfaceMipmaps\(param_1,iVar10,iVar9,iVar6,\*\(uint\ \*\)\(iVar10\ \+\ 0x6c\)\ >>\ 0xf\ \&\ 1\);$	+1
+use	_gliSetInteger	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+1
+use	_gliSetInteger	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar9\ <\ iVar11\);$	+1
+use	_glGetFloatv_Exec	pdVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pdVar3\ =\ local_a0;$	+2
+use	_glGetFloatv_Exec	pdVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*dVar5\ =\ \*pdVar3;$	+2
+use	_glGetFloatv_Exec	pdVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar2\ =\ \*\(uint\ \*\)pdVar3;$	+2
+use	_glGenProgramsARB_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_glGenProgramsARB_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar3\ \+\ iVar4;$	+2
+use	_gleBindPipelineProgram	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ 0;$	+1
+use	_gleBindPipelineProgram	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar10\ \*\ 4;$	+2
+use	_gleBindPipelineProgram	iVar7	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ 9;$	+1
+use	_gleBindPipelineProgram	iVar7	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ 0;$	+1
+use	_gleBindPipelineProgram	iVar7	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ 5;$	+1
+use	_gleBindPipelineProgram	iVar7	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*if\ \(iVar7\ !=\ 0\)\ \{$	+1
+use	_gleBindPipelineProgram	iVar7	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2
+use	_gleBindPipelineProgram	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_gleBindPipelineProgram	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+1
+use	_gleBindPipelineProgram	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar9\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glProgramStringARB_Exec	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 9;$	+1
+use	_glProgramStringARB_Exec	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	_glProgramStringARB_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glProgramStringARB_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(\(int\)local_60\ \+\ iVar6\)\ =\ uVar3;$	+2
+use	_glProgramStringARB_Exec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
+use	_glProgramStringARB_Exec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\*\(char\ \*\)\(param_5\ \+\ iVar8\)\ ==\ '\\0'\)\ break;$	+5
+use	_glProgramStringARB_Exec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined1\ \*\)\(iVar6\ \+\ iVar8\)\ =\ 0;$	+1
+use	_glProgramStringARB_Exec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x18\)\ =\ iVar8;$	+1
+use	_glProgramStringARB_Exec	iVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$@2	+1
+use	_glProgramStringARB_Exec	iVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(\(int\)local_60\ \+\ iVar8\)\ =\ uVar3;$	+2
+use	_glProgramStringARB_Exec	iVar8	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 5;$	+1
+use	_glProgramStringARB_Exec	iVar8	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
+use	_glProgramStringARB_Exec	iVar8	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$@3	+1
+use	_glProgramStringARB_Exec	iVar8	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar1\ =\ \(uint\ \*\)\(\(int\)local_60\ \+\ iVar8\);$	+2
+use	_glProgramStringARB_Exec	iVar9	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ 9;$	+1
+use	_glProgramStringARB_Exec	iVar9	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
+use	_glProgramStringARB_Exec	iVar9	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_glProgramStringARB_Exec	iVar9	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar1\ =\ \(uint\ \*\)\(\(int\)local_60\ \+\ iVar9\);$	+2
+use	_glProgramStringARB_Exec	iVar9	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ 9;$@2	+1
+use	_glProgramStringARB_Exec	iVar9	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$@2	+2
+use	_glePPPruneAttribs	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ 0;$	+1
+use	_glePPPruneAttribs	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar3\ !=\ \*\(ushort\ \*\)\(iVar4\ \+\ 0x12\)\)\ \{$	+3
+use	_glePPPruneAttribs	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ uVar3\ \+\ 1;$	+1
+use	_glePPPruneOutputs	uVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar5\ =\ 0;$	+1
+use	_glePPPruneOutputs	uVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar5\ !=\ \*\(ushort\ \*\)\(iVar2\ \+\ 0x12\)\)\ \{$	+3
+use	_glePPPruneOutputs	uVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar5\ =\ uVar5\ \+\ 1;$	+1
+use	_glePPPruneLocals	uVar1	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar1\ =\ 0;$	+1
+use	_glePPPruneLocals	uVar1	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar1\ !=\ \*\(ushort\ \*\)\(iVar2\ \+\ 0x12\)\)\ \{$	+3
+use	_glePPPruneLocals	uVar1	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar1\ =\ uVar1\ \+\ 1;$	+1
+use	_glePPPruneParams	uVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ 0;$	+1
+use	_glePPPruneParams	uVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar4\ !=\ \*\(ushort\ \*\)\(iVar8\ \+\ 0x12\)\)\ \{$	+3
+use	_glePPPruneParams	uVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ uVar4\ \+\ 1;$	+1
+use	_glePPLogParameters	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ 9;$	+1
+use	_glePPLogParameters	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	_glePPLogParameters	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ 0;$	+1
+use	_glePPLogParameters	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar2\ \*\ 8;$	+2
+use	_glePPLogParameters	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar3\ =\ local_a0;$	+1
+use	_glePPLogParameters	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar3\ =\ 0;$	+2
+use	_glePPLogParameters	uVar11	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ 0;$	+1
+use	_glePPLogParameters	uVar11	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ uVar11\ \+\ 1;$	+1
+use	_glePPLogParameters	uVar11	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar11\ <\ \*\(uint\ \*\)\(iVar5\ \+\ 0x8a9c\)\);$	+1
+use	_glePPLogParameters	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ 0;$@2	+1
+use	_glePPLogParameters	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar11\ <=\ uVar13\)\ \{$	+1
+use	_glePPLogParameters	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(uVar13\ ==\ param_5\)\ \|\|\ \(uVar11\ =\ uVar11\ \+\ 1,\ param_5\ <\ uVar11\)\)\ \{$	+1
+use	_glePPLogParameters	uVar11	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ 0;$@3	+1
+use	_glePPLogParameters	uVar11	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ uVar11\ \*\ 8;$	+1
+use	_glePPLogParameters	uVar11	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ uVar11\ \+\ 1;$@2	+2
+use	_glePPLogParameters	uVar13	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar13\ =\ 0;$	+1
+use	_glePPLogParameters	uVar13	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*local_60\ =\ \*\(uint\ \*\)\(param_6\ \+\ uVar13\ \*\ 8\);$	+2
+use	_glePPLogParameters	uVar13	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar11\ <=\ uVar13\)\ \{$	+1
+use	_glePPLogParameters	uVar13	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar13\ =\ uVar13\ \+\ 1;$	+2
+use	_glePPLogParameters	uVar13	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(uVar13\ ==\ param_5\)\ \|\|\ \(uVar11\ =\ uVar11\ \+\ 1,\ param_5\ <\ uVar11\)\)\ \{$	+1
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ 0;$	+1
+use	_PPEmulatorProgramSetupHandlesFromPPStream	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*local_2c\ =\ iVar2\ \*\ 0x10;$	+2
+use	_glePPUpdateProgram	uVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar8\ =\ 0;$	+1
+use	_glePPUpdateProgram	uVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar6\ =\ \*\(uint\ \*\)\(uVar8\ \*\ 8\ \+\ iVar2\ \+\ iVar3\ \*\ 8\);$	+2
+use	_glePPUpdateProgram	uVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ \(\(int\)uVar8\ >>\ 5\)\ \*\ 4\ \+\ param_2;$	+2
+use	_glePPUpdateProgram	uVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar8\ =\ uVar8\ \+\ 1;$	+2
+use	_gleVPChanged	iVar3	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ 9;$	+1
+use	_gleVPChanged	iVar3	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+use	_gleVPChanged	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_gleVPChanged	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar1\ =\ iVar4\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0x20\);$	+2
+use	_gleVPChanged	iVar7	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ 9;$	+1
+use	_gleVPChanged	iVar7	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2
+use	_gleModifyPluginPipelineProgram	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gleModifyPluginPipelineProgram	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_gleModifyPluginPipelineProgram	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleUpdateLightRGBASums	iVar21	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar21\ =\ 0;$	+1
+use	_gleUpdateLightRGBASums	iVar21	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ \(int\)GH_F2U\(fVar3\)\ \+\ iVar21;$	+1
+use	_gleUpdateLightRGBASums	iVar21	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x50\)\ =\ \*\(float\ \*\)\(iVar22\ \+\ 0x2820\)\ \*\ \*param_2;$	+4
+use	_gleUpdateLightRGBASums	iVar21	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x50\)\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x50\);$	+4
+use	_gleUpdateLightRGBASums	iVar21	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*param_2\[0x7a\]\ =\ param_2\[0x7a\]\ \+\ \*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x50\);$	+3
+use	_gleUpdateLightRGBASums	iVar21	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x60\)\ =\ \*\(float\ \*\)\(iVar22\ \+\ 0x2830\)\ \*\ param_2\[4\];$	+4
+use	_gleUpdateLightRGBASums	iVar21	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x60\)\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x60\);$	+4
+use	_gleUpdateLightRGBASums	iVar21	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x70\)\ =\ \*\(float\ \*\)\(iVar22\ \+\ 0x2840\)\ \*\ param_2\[8\];$	+4
+use	_gleUpdateLightRGBASums	iVar21	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(\(int\)param_2\ \+\ iVar21\ \+\ 0x7c\)\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x7c\);$	+4
+use	_gleUpdateLightRGBASums	iVar21	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar21\ =\ iVar21\ \+\ 0x30;$	+1
+use	_gleUpdateLightRGBASums	iVar22	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar22\ =\ 0xb;$	+1
+use	_gleUpdateLightRGBASums	iVar22	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar22\ =\ iVar22\ \+\ \-1;$	+2
+use	_gleUpdateLightRGBASums	iVar22	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar22\ =\ 0xb;$@2	+1
+use	_gleUpdateLightRGBASums	iVar22	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar22\ =\ iVar22\ \+\ \-1;$@2	+2
+use	_gleUpdateLightRGBASums	pfVar12	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar12\ =\ param_2\ \+\ 0x82;$	+1
+use	_gleUpdateLightRGBASums	pfVar12	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*pfVar12\ =\ fVar4;$	+2
+use	_gleUpdateLightRGBASums	pfVar5	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar5\ =\ param_2\ \+\ 0x82;$	+1
+use	_gleUpdateLightRGBASums	pfVar5	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*pfVar5\ =\ \(float\)dVar23;$	+2
+use	_gleUpdateLightRGBASums	pfVar5	cursor3	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar5\ =\ param_2\ \+\ 0x82;$@2	+1
+use	_gleUpdateLightRGBASums	pfVar5	cursor3	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*pfVar5\ =\ 1\.0;$	+2
+use	_gleUpdateLightRGBASums	uVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar8\ =\ 0;$	+1
+use	_gleUpdateLightRGBASums	uVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar8\ =\ uVar8\ \+\ 1;$	+1
+use	_gleUpdateLightRGBASums	uVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar8\ <\ 10\);$	+1
+use	_gleUpdateLightRGBASums	uVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar8\ =\ 0;$@2	+1
+use	_gleUpdateLightRGBASums	uVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(uVar20\ \&\ 1\ <<\ \(uVar8\ \&\ 0x3f\)\)\ ==\ 0\)\ \{$	+2
+use	_gleUpdateLightRGBASums	uVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(uVar8\ \*\ 6\ \+\ param_3\ \*\ 3\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x5420\)\ \+\ 0x290\);$	+1
+use	_gleUpdateLightRGBASums	uVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(uVar8\ \*\ 6\ \+\ param_3\ \*\ 3\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x5430\)\ \+\ 0x20\)\ \+$	+2
+use	_gleUpdateLightRGBASums	uVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(uVar8\ \*\ 6\ \+\ param_3\ \*\ 3\ \+\ iVar15\ \+\ 0x290\);$	+1
+use	_gleUpdateLightRGBASums	uVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(uVar8\ \*\ 6\ \+\ param_3\ \*\ 3\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x5420\)\ \+\ 0x291\);$	+1
+use	_gleUpdateLightRGBASums	uVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(uVar8\ \*\ 6\ \+\ param_3\ \*\ 3\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x5430\)\ \+\ 0x20\)\ \+$@2	+2
+use	_gleUpdateLightRGBASums	uVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(uVar8\ \*\ 6\ \+\ param_3\ \*\ 3\ \+\ iVar15\ \+\ 0x291\);$	+1
+use	_gleUpdateLightRGBASums	uVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(uVar8\ \*\ 6\ \+\ param_3\ \*\ 3\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x5420\)\ \+\ 0x292\);$	+1
+use	_gleUpdateLightRGBASums	uVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(uVar8\ \*\ 6\ \+\ param_3\ \*\ 3\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x5430\)\ \+\ 0x20\)\ \+$@3	+2
+use	_gleUpdateLightRGBASums	uVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(uVar8\ \*\ 6\ \+\ param_3\ \*\ 3\ \+\ iVar6\ \+\ 0x292\);$	+1
+use	_gleUpdateLightRGBASums	uVar8	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar8\ =\ uVar8\ \+\ 1;$@2	+1
+use	_gliDestroyContext	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gliDestroyContext	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_gliDestroyContext	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleFreeOrphans	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$	+1
+use	_gleFreeOrphans	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+1
+use	_gleFreeOrphans	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar7\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleFreeOrphans	piVar5	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*piVar5\ =\ piVar6\ \+\ 7;$	+1
+use	_gleFreeOrphans	piVar5	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*iVar4\ =\ \*piVar5;$	+2
+use	_gleFreeMaterials	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ 1;$	+1
+use	_gleFreeMaterials	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+1
+use	_gleFreeMaterials	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar2\);$	+1
+use	_gleFreeAllAttrib	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_gleFreeAllAttrib	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
+use	_gleFreeAllAttrib	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar3\ <\ iVar1\);$	+1
+use	_gleFreeAllAttrib	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$@2	+1
+use	_gleFreeAllAttrib	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar3\ \+\ 1;$@2	+1
+use	_gleFreeAllAttrib	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar3\ <\ iVar1\);$@2	+1
+use	_gleFreeQueryMachine	iVar1	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar1\ =\ 0x3ff;$	+1
+use	_gleFreeQueryMachine	iVar1	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	_gleFreeFenceMachine	iVar1	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar1\ =\ 0x3ff;$	+1
+use	_gleFreeFenceMachine	iVar1	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	_gleFreeVertexArrayObject	iVar3	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ 0x1f;$	+1
+use	_gleFreeVertexArrayObject	iVar3	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+use	_gleDestroyPluginVertexArray	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gleDestroyPluginVertexArray	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar5\ \*\ 4;$	+1
+use	_gleDestroyPluginVertexArray	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_gleDestroyPluginVertexArray	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleFreePipelineProgramState	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ 1;$	+1
+use	_gleFreePipelineProgramState	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+1
+use	_gleFreePipelineProgramState	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar2\);$	+1
+use	_gleClearPipelineProgram	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_gleClearPipelineProgram	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar1\ =\ iVar3\ \*\ 0x10;$	+2
+use	_gleClearPipelineProgram	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 0x100;$	+1
+use	_gleClearPipelineProgram	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 0x80;$	+1
+use	_gleClearPipelineProgram	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 0;$	+1
+use	_gleClearPipelineProgram	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*for\ \(;\ iVar5\ !=\ 0;\ iVar5\ =\ iVar5\ \+\ \-1\)\ \{$	+1
+use	_gleDestroyPluginPipelineProgram	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_gleDestroyPluginPipelineProgram	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_gleDestroyPluginPipelineProgram	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleReclaimDrawPixelResources	uVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar2\ =\ 0;$	+1
+use	_gleReclaimDrawPixelResources	uVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleDeletePluginTexture\(param_1,puVar1\[uVar2\]\);$	+2
+use	_gleReclaimDrawPixelResources	uVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar2\ =\ uVar2\ \+\ 1;$	+1
+use	_gleFreeTextureState	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ 0;$	+1
+use	_gleFreeTextureState	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+use	_gleFreeTextureState	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar2\ <\ 0x10\);$	+1
+use	_gleFreeTextureState	iVar3	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ 0xf;$	+1
+use	_gleFreeTextureState	iVar3	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+use	_gleFreeTextureState	iVar3	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ 2;$	+1
+use	_gleFreeTextureState	iVar3	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$@2	+1
+use	_gleFreeTextureState	iVar3	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar3\);$@2	+1
+use	_gleFreeTextureState	iVar4	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ 4;$	+1
+use	_gleFreeTextureState	iVar4	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	_gleReleaseSharedState	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_gleReleaseSharedState	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar3\ \*\ 0x1004;$	+1
+use	_gleReleaseSharedState	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
+use	_gleReleaseSharedState	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar3\ <\ 8\);$	+1
+use	_gleReleaseSharedState	iVar3	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ 1;$	+1
+use	_gleReleaseSharedState	iVar3	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+1
+use	_gleReleaseSharedState	iVar3	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar3\);$	+1
+use	_gleReleaseSharedState	iVar8	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 0x3ff;$	+1
+use	_gleReleaseSharedState	iVar8	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+1
+use	_gleReleaseSharedState	iVar8	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar8\);$	+1
+use	_gleDestroySharedState	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_gleDestroySharedState	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_gleDestroySharedState	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glGetBooleanv_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glGetBooleanv_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(bool\ \*\)\(param_3\ \+\ iVar6\)\ =\ dVar7\ !=\ dVar1;$	+2
+use	_glGetBooleanv_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$@2	+1
+use	_glGetBooleanv_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(char\ \*\)\(param_3\ \+\ iVar6\)\ =\ '\\x01'\ \-\ \(iVar3\ ==\ 0\);$	+2
+use	_glGetBooleanv_Exec	pdVar5	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pdVar5\ =\ local_a0;$	+2
+use	_glGetBooleanv_Exec	pdVar5	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*dVar7\ =\ \*pdVar5;$	+2
+use	_glGetBooleanv_Exec	pdVar5	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*iVar3\ =\ \*\(int\ \*\)pdVar5;$	+2
+use	_glDeleteProgramsARB_Exec	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ 0;$	+1
+use	_glDeleteProgramsARB_Exec	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleBindPipelineProgram\(param_1,uVar3,0\);$	+1
+use	_glDeleteProgramsARB_Exec	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ uVar3\ \+\ 1;$	+2
+use	_glePPUnlogParameters	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$	+1
+use	_glePPUnlogParameters	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar7\ \*\ 8\ \+\ param_4\ \+\ 4\);$	+2
+use	_glePPUnlogParameters	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+1
+use	_gleDestroyEnableHashTable	iVar3	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ 0x3ff;$	+1
+use	_gleDestroyEnableHashTable	iVar3	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+use	_glClear_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glClear_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+2
+use	_glClear_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 0x13;$	+1
+use	_glClear_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_gleLightMaterialRGBAChange_FB_A	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_gleLightMaterialRGBAChange_FB_A	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar2\ =\ \(undefined8\ \*\)\(\(int\ \(\*\)\(\)\)_glePushMaterial\)\(param_1,iVar6\);$	+1
+use	_gleLightMaterialRGBAChange_FB_A	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar6\ \*\ 6\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x5420\)\ \+\ 0x2c0\);$	+1
+use	_gleLightMaterialRGBAChange_FB_A	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar6\ \*\ 6\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x5430\)\ \+\ 0x20\)\ \+\ 0x2f4\);$	+1
+use	_gleLightMaterialRGBAChange_FB_A	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar6\ \*\ 6;$	+1
+use	_gleLightMaterialRGBAChange_FB_A	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	_gleLightMaterialRGBAChange_FB_A	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar6\ <\ 2\);$	+1
+use	_gleLightMaterialRGBAChange_FB_D	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gleLightMaterialRGBAChange_FB_D	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)_glePushMaterial\)\(param_1,iVar5\);$	+1
+use	_gleLightMaterialRGBAChange_FB_D	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar5\ \*\ 6\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x5420\)\ \+\ 0x2c1\);$	+1
+use	_gleLightMaterialRGBAChange_FB_D	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar5\ \*\ 6\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x5430\)\ \+\ 0x20\)\ \+\ 0x2f5\);$	+1
+use	_gleLightMaterialRGBAChange_FB_D	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar5\ \*\ 6;$	+1
+use	_gleLightMaterialRGBAChange_FB_D	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_gleLightMaterialRGBAChange_FB_D	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ 2\);$	+1
+use	_gleLightMaterialShineChange_FB	uVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar5\ =\ 0;$	+1
+use	_gleLightMaterialShineChange_FB	uVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)_glePushMaterial\)\(param_1,uVar5\);$	+1
+use	_gleLightMaterialShineChange_FB	uVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(uVar5\ \*\ 6\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x5420\)\ \+\ 0x2c4\);$	+1
+use	_gleLightMaterialShineChange_FB	uVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(uVar5\ \*\ 6\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x5430\)\ \+\ 0x20\)\ \+\ 0x2f8\);$	+1
+use	_gleLightMaterialShineChange_FB	uVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ uVar5\ \*\ 6;$	+1
+use	_gleLightMaterialShineChange_FB	uVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar5\ =\ uVar5\ \+\ 1;$	+1
+use	_gleLightMaterialShineChange_FB	uVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar5\ <\ 2\);$	+1
+use	_gleLightMaterialRGBAChange_FB_S	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gleLightMaterialRGBAChange_FB_S	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)_glePushMaterial\)\(param_1,iVar5\);$	+1
+use	_gleLightMaterialRGBAChange_FB_S	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar5\ \*\ 6\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x5420\)\ \+\ 0x2c2\);$	+1
+use	_gleLightMaterialRGBAChange_FB_S	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar5\ \*\ 6\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x5430\)\ \+\ 0x20\)\ \+\ 0x2f6\);$	+1
+use	_gleLightMaterialRGBAChange_FB_S	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar5\ \*\ 6;$	+1
+use	_gleLightMaterialRGBAChange_FB_S	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_gleLightMaterialRGBAChange_FB_S	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ 2\);$	+1
+use	_gleModelMatInvert	iVar1	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar1\ =\ 0;$	+1
+use	_gleModelMatInvert	iVar1	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(float\ \*\)\(iVar1\ \+\ param_1\ \+\ 0x22c0\)\ =$	+3
+use	_gleModelMatInvert	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ 0x10;$	+1
+use	_gleModelMatInvert	iVar2	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	_gleRenderLineLoopTCLFunc	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$	+1
+use	_gleRenderLineLoopTCLFunc	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar1\ =\ iVar7\ \*\ 8;$	+2
+use	_gleOptimizeDisplayList	iVar11	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar11\ =\ 0x1e;$	+1
+use	_gleOptimizeDisplayList	iVar11	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar11\ =\ iVar11\ \+\ \-1;$	+2
+use	_gleOptimizeDisplayList	puVar18	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar18\ =\ \&local_2ec;$	+1
+use	_gleOptimizeDisplayList	puVar18	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar18\[0xd\]\ =\ puVar18\[0xc\]\ \+\ \(uint\)bVar33;$	+2
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar26\ =\ 0;$	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar13\ =\ \(\(int\ \(\*\)\(\)\)_EstablishVertexFormat\)\(\&local_2f0,puVar29,uVar23,uVar26,iVar24,\&local_80,\&local_7c\);$	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar13\ =\ \*\(int\ \*\)\(uVar26\ \*\ 4\ \+\ iVar24\)\ \-\ 4;$	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ \*\(int\ \*\)\(uVar26\ \*\ 4\ \+\ iVar24\)\);$	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar31\ =\ uVar26\ \+\ local_80\ \+\ 1;$	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*local_7c\ =\ \(uint\ \*\)\(\(int\)local_7c\ \+\ \*\(int\ \*\)\(iVar24\ \+\ \(uVar26\ \+\ local_80\)\ \*\ 4\)\);$	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(\(puVar5\ ==\ \(uint\ \*\)0x0\)\ \|\|\ \(uVar7\ =\ \*puVar5,\ uVar7\ !=\ 0\)\)\ \|\|$	+7
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ \*\(int\ \*\)\(iVar24\ \+\ uVar26\ \*\ 4\)\);$	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar26\ =\ uVar26\ \+\ 1;$	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(puVar16\ !=\ PTR__glEnd_ListExec_0011212c\)\ \&\&\ \(uVar26\ <\ uVar23\)\)\ \{$	+2
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar26\ =\ uVar26\ \+\ 1;$@2	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(\(puVar16\ !=\ PTR__glEnd_ListExec_0011212c\)\ \&\&\ \(uVar26\ <\ uVar23\)\);$	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(puVar16\ ==\ PTR__glEnd_ListExec_0011212c\)\ \&\&\ \(uVar26\ <\ uVar23\)\)\ \{$	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ \*\(int\ \*\)\(iVar24\ \+\ uVar26\ \*\ 4\)\);$@2	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar26\ =\ uVar26\ \+\ 1;$@3	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar13\ =\ \*\(int\ \*\)\(uVar26\ \*\ 4\ \+\ iVar24\)\ \-\ 4;$@2	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar13\ =\ \*\(int\ \*\)\(uVar26\ \*\ 4\ \+\ iVar24\)\ \-\ 4;$@3	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ \*\(int\ \*\)\(iVar24\ \+\ uVar26\ \*\ 4\)\);$@3	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar26\ =\ uVar26\ \+\ 1;$@4	+1
+use	_gleOptimizeDisplayList	uVar26	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar26\ <\ uVar23\);$	+1
+use	_EstablishVertexFormat	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_EstablishVertexFormat	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*return\ iVar5;$	+1
+use	_EstablishVertexFormat	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_EstablishVertexFormat	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_EstablishVertexFormat	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 1;$	+1
+use	_EstablishVertexFormat	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*for\ \(;\ iVar9\ <\ param_3;\ iVar9\ =\ iVar9\ \+\ 1\)\ \{$	+1
+use	_EstablishVertexFormat	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*param_6\ =\ iVar9;$	+1
+use	_EstablishVertexFormat	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*param_2\ =\ \(uint\ \*\)\(\(int\)param_2\ \+\ \*\(int\ \*\)\(param_5\ \+\ \(param_4\ \+\ iVar9\)\ \*\ 4\)\);$	+1
+use	_glSwap_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glSwap_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+2
+use	_glSwap_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 0x13;$	+1
+use	_glSwap_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_gleCallList	uVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar5\ =\ 0;$	+1
+use	_gleCallList	uVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar5\ =\ uVar5\ \+\ 1;$	+1
+use	_gleCallList	uVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar5\ <\ uVar4\);$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+2
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	iVar9	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ 0x13;$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	iVar9	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$@2	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	iVar9	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$@2	+2
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	iVar9	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ 0x13;$@2	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	iVar9	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$@2	+2
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ 0;$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x514c\)\ >>\ \(uVar11\ \&\ 0x3f\);$	+1
+use	_gleSetupAndDrawArraysOrElementsOutOfLine_ListExec	uVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ uVar11\ \+\ 1;$	+1
+use	_gleCreateDrawArraysOrElementsVertexObject	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 1;$	+1
+use	_gleCreateDrawArraysOrElementsVertexObject	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ iVar8\ \+\ 0x20\);$	+1
+use	_gleCreateDrawArraysOrElementsVertexObject	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*lVar10\ =\ ___ashldi3\(0,1,iVar8\ \+\ 0x10\);$	+1
+use	_gleCreateDrawArraysOrElementsVertexObject	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar1\ =\ iVar8\ \*\ 0x18\ \+\ iVar9;$	+1
+use	_gleCreateDrawArraysOrElementsVertexObject	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(iVar8\ ==\ 0\)\ break;$	+3
+use	_gleCreateDrawArraysOrElementsVertexObject	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
+use	_gleFlushPluginVertexArray	puVar10	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar10\ =\ param_2\ \+\ 0x114;$	+1
+use	_gleFlushPluginVertexArray	puVar10	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar10\[1\]\ =\ puVar10\[1\]\ \|\ uVar8;$	+3
+use	_gleFlushPluginVertexArray	uVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ 0;$	+1
+use	_gleFlushPluginVertexArray	uVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ uVar7\ \+\ 1;$	+1
+use	_gleFlushPluginVertexArray	uVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar7\ ==\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\)\ break;$	+1
+use	_gleSetCurrentVertexObject	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_gleSetCurrentVertexObject	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_gleSetCurrentVertexObject	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleResetVACachePointers	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 0x20;$	+1
+use	_gleResetVACachePointers	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_gleSetupOutOfLineDrawPointers	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ 0;$@2	+1
+use	_gleSetupOutOfLineDrawPointers	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1
+use	_gleSetupOutOfLineDrawPointers	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar10\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleSetupOutOfLineDrawPointers	iVar16	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar16\ =\ 1;$	+1
+use	_gleSetupOutOfLineDrawPointers	iVar16	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar14\ =\ param_2\ \+\ iVar16;$	+1
+use	_gleSetupOutOfLineDrawPointers	iVar16	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(iVar16\ \*\ 0x18\ \+\ iVar13\ \+\ 0x20\)\ =\ 0;$	+1
+use	_gleSetupOutOfLineDrawPointers	iVar16	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar16\ \*\ 0x18\ \+\ iVar13;$	+1
+use	_gleSetupOutOfLineDrawPointers	iVar16	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*lVar17\ =\ ___ashldi3\(0,0x10000,iVar16\);$	+1
+use	_gleSetupOutOfLineDrawPointers	iVar16	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar16\ \*\ 0x18;$	+2
+use	_gleSetupOutOfLineDrawPointers	iVar16	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar16\ <\ 0x20\);$	+1
+use	_gleDrawArraysSyncState	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ 0x11;$	+1
+use	_gleDrawArraysSyncState	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(iVar10\ \*\ 0x10\ \+\ param_1\ \+\ 0xa8\)\ =\ uVar6;$	+1
+use	_gleDrawArraysSyncState	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(iVar10\ \*\ 0x10\ \+\ param_1\ \+\ 0xac\)\ =\ uVar6;$	+1
+use	_gleDrawArraysSyncState	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1
+use	_gleDrawArraysSyncState	iVar12	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar12\ =\ 8;$	+1
+use	_gleDrawArraysSyncState	iVar12	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar12\ =\ iVar12\ \+\ \-1;$	+2
+use	_gleDrawArraysSyncState	iVar12	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar12\ =\ 0xf;$	+1
+use	_gleDrawArraysSyncState	iVar12	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar12\ =\ iVar12\ \+\ \-1;$@2	+2
+use	_gleDrawArraysSyncState	iVar7	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$	+1
+use	_gleDrawArraysSyncState	iVar7	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ param_1\ \+\ 300\)\ =\ uVar5;$	+2
+use	_gleDrawArraysSyncState	iVar7	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ iVar7\ \+\ 0x10;$	+1
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+2
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	iVar8	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 0x13;$	+1
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	iVar8	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$@2	+1
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ iVar8\ \+\ 1;$@2	+2
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	iVar8	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 0x13;$@2	+1
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	iVar8	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$@2	+2
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	uVar10	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar10\ =\ 0;$	+1
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	uVar10	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x514c\)\ >>\ \(uVar10\ \&\ 0x3f\);$	+1
+use	_gleDrawArraysOrElementsOutOfLine_ListExec	uVar10	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar10\ =\ uVar10\ \+\ 1;$	+1
+use	_glReadPixels_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_glReadPixels_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
+use	_glReadPixels_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar3\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glReadPixels_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glReadPixels_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+2
+use	_glReadPixels_Exec	iVar6	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$@2	+1
+use	_glReadPixels_Exec	iVar6	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$@2	+1
+use	_glReadPixels_Exec	iVar6	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar6\ <\ 0x13\);$	+1
+use	_glGetTexLevelParameteriv_Exec_body	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_glGetTexLevelParameteriv_Exec_body	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+2
+use	_glGetTexLevelParameteriv_Exec_body	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 0x13;$	+1
+use	_glGetTexLevelParameteriv_Exec_body	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4\ \+\ 3;$	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@2	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor3	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4\ \+\ 3;$@2	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor3	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@3	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor4	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4\ \+\ 1;$	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor4	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@4	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor5	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4\ \+\ 1;$@2	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor5	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*param_5\ =\ puVar4\[2\];$	+4
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor6	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@18	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor6	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*param_5\ =\ puVar4\[3\];$	+5
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor7	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@19	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor7	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*param_5\ =\ puVar4\[2\];$@2	+4
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor8	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@20	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor8	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*param_5\ =\ puVar4\[2\];$@3	+5
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor9	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@21	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor9	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@8	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor10	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@22	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor10	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*param_5\ =\ \*puVar4;$	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor10	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar1\ =\ puVar4\ \+\ 1;$	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor11	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@23	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor11	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@9	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor12	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@24	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor12	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@10	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor13	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@25	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor13	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*param_5\ =\ \*puVar4;$@2	+4
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor14	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@26	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor14	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@11	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor15	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@27	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor15	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@12	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor16	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@28	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor16	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@13	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor17	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4\ \+\ 3;$@3	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor17	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@14	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor18	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4\ \+\ 2;$	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor18	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@15	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor19	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4\ \+\ 2;$@2	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor19	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@16	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor20	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@29	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor20	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@17	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor21	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@30	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor21	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@18	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor22	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@31	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor22	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*param_5\ =\ \*puVar4;$@3	+3
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor23	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@32	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor23	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@19	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor24	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@33	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor24	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@20	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor25	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@34	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor25	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@21	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor26	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@35	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor26	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*param_5\ =\ puVar4\[3\];$@2	+3
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor27	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4\ \+\ 2;$@3	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor27	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@23	+2
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor28	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4\ \+\ 3;$@4	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor28	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*param_5\ =\ puVar4\[\-1\];$	+3
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor29	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar4\ =\ param_4;$@36	+1
+use	_gleTextureImagePut_FastUbyte	puVar4	cursor29	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar3\ =\ \*puVar4;$@25	+2
+use	_gleCopy	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_gleCopy	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar1\ =\ iVar3\ \*\ 4;$	+2
+use	_gleCopy	uVar4	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ 0;$	+1
+use	_gleCopy	uVar4	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ uVar4\ \+\ 1;$	+1
+use	_gleCopy	uVar4	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(param_4\ <=\ uVar4\)\ \{$	+1
+use	_gleDeletePluginTextureLevel	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ 0;$	+1
+use	_gleDeletePluginTextureLevel	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1
+use	_gleDeletePluginTextureLevel	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar10\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleInvertMatrices	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ 0;$	+1
+use	_gleInvertMatrices	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x50b0\)\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x50b0\)\ \&\ \~\(1\ <<\ \(uVar3\ \&\ 0x3f\)\);$	+2
+use	_gleInvertMatrices	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ uVar3\ \+\ 1;$	+2
+use	_gleSetAttrib	iVar16	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ 0x80;$	+1
+use	_gleSetAttrib	iVar16	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ iVar16\ \+\ \-1;$	+2
+use	_gleSetAttrib	iVar16	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ 4;$	+1
+use	_gleSetAttrib	iVar16	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ iVar16\ \+\ \-1;$@2	+2
+use	_gleSetAttrib	iVar16	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ 0x10;$	+1
+use	_gleSetAttrib	iVar16	remaining3	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ iVar16\ \+\ \-1;$@3	+2
+use	_gleSetAttrib	iVar16	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ 0x100;$	+1
+use	_gleSetAttrib	iVar16	remaining4	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ iVar16\ \+\ \-1;$@4	+2
+use	_gleSetAttrib	iVar16	remaining5	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ 0x80;$@2	+1
+use	_gleSetAttrib	iVar16	remaining5	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ iVar16\ \+\ \-1;$@5	+2
+use	_gleSetAttrib	iVar16	remaining6	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ 4;$@2	+1
+use	_gleSetAttrib	iVar16	remaining6	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ iVar16\ \+\ \-1;$@6	+2
+use	_gleSetAttrib	iVar16	remaining7	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ 0x10;$@2	+1
+use	_gleSetAttrib	iVar16	remaining7	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ iVar16\ \+\ \-1;$@7	+2
+use	_gleSetAttrib	iVar16	remaining8	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ 0x10;$@3	+1
+use	_gleSetAttrib	iVar16	remaining8	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ iVar16\ \+\ \-1;$@8	+2
+use	_gleSetAttrib	iVar16	remaining9	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ 8;$	+1
+use	_gleSetAttrib	iVar16	remaining9	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ iVar16\ \+\ \-1;$@9	+2
+use	_gleSetAttrib	iVar16	remaining10	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ 1;$	+1
+use	_gleSetAttrib	iVar16	remaining10	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar16\ =\ iVar16\ \+\ \-1;$@10	+1
+use	_gleSetAttrib	iVar16	remaining10	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar16\);$	+1
+use	_gleSetAttrib	iVar22	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar22\ =\ 0;$	+1
+use	_gleSetAttrib	iVar22	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleBindTexture\(param_1,iVar27,\*puVar25,iVar22\);$	+1
+use	_gleSetAttrib	iVar22	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar22\ =\ iVar22\ \+\ 1;$	+1
+use	_gleSetAttrib	iVar22	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar22\ <\ 0x10\);$	+1
+use	_gleSetAttrib	iVar24	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar24\ =\ 0;$	+1
+use	_gleSetAttrib	iVar24	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar24\ =\ iVar24\ \+\ 1;$	+1
+use	_gleSetAttrib	iVar24	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar24\ <\ 2\);$	+1
+use	_gleSetAttrib	iVar26	remaining11	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar26\ =\ 0x10;$	+1
+use	_gleSetAttrib	iVar26	remaining11	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar26\ =\ iVar26\ \+\ \-1;$	+2
+use	_gleSetAttrib	iVar26	remaining12	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar26\ =\ 8;$	+1
+use	_gleSetAttrib	iVar26	remaining12	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar26\ =\ iVar26\ \+\ \-1;$@2	+2
+use	_gleSetAttrib	iVar26	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar26\ =\ 0;$	+1
+use	_gleSetAttrib	iVar26	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar22\ =\ param_1\ \+\ iVar26\ \*\ 8;$	+1
+use	_gleSetAttrib	iVar26	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar26\ =\ iVar26\ \+\ 0x10;$	+1
+use	_gleSetAttrib	iVar27	remaining13	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar27\ =\ 5;$	+1
+use	_gleSetAttrib	iVar27	remaining13	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar27\ =\ iVar27\ \+\ \-1;$	+2
+use	_gleSetAttrib	iVar27	remaining14	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar27\ =\ 0;$@2	+1
+use	_gleSetAttrib	iVar27	remaining14	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar27\ =\ iVar27\ \+\ \-1;$@2	+1
+use	_gleSetAttrib	iVar27	remaining14	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar27\);$	+1
+use	_gleSetAttrib	iVar28	remaining15	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar28\ =\ 4;$	+1
+use	_gleSetAttrib	iVar28	remaining15	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar28\ =\ iVar28\ \+\ \-1;$	+2
+use	_gleSetAttrib	iVar7	remaining16	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ 8;$	+1
+use	_gleSetAttrib	iVar7	remaining16	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2
+use	_gleSetAttrib	iVar7	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$	+1
+use	_gleSetAttrib	iVar7	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*piVar19\ =\ \(int\ \*\)\(param_1\ \+\ iVar7\ \*\ 4\ \+\ 0x5154\);$	+1
+use	_gleSetAttrib	iVar7	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ iVar7\ \+\ 5;$	+1
+use	_gleSetAttrib	iVar7	remaining17	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ 1;$	+1
+use	_gleSetAttrib	iVar7	remaining17	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ iVar7\ \+\ \-1;$@2	+1
+use	_gleSetAttrib	iVar7	remaining17	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(\-1\ <\ iVar7\);$	+1
+use	_gleSetAttrib	iVar8	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
+use	_gleSetAttrib	iVar8	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(iVar26\ \+\ 4\)\ =\ \*\(undefined4\ \*\)\(\(int\)param_3\ \+\ iVar8\ \+\ 0x710\);$	+1
+use	_gleSetAttrib	iVar8	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar25\ =\ \(undefined4\ \*\)\(\(int\)param_3\ \+\ iVar8\ \+\ 0x524\);$	+1
+use	_gleSetAttrib	iVar8	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar14\ =\ \(undefined1\ \*\)\(iVar8\ \+\ \(int\)param_3\);$	+1
+use	_gleSetAttrib	iVar8	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar14\ =\ \(undefined1\ \*\)\(iVar8\ \+\ \(int\)param_3\);$@2	+1
+use	_gleSetAttrib	iVar8	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ iVar8\ \+\ 0x214;$	+1
+use	_gleSetAttrib	iVar8	loopIndex6	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$@2	+1
+use	_gleSetAttrib	iVar8	loopIndex6	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar14\ =\ \(undefined1\ \*\)\(iVar8\ \+\ \(int\)param_3\);$@3	+1
+use	_gleSetAttrib	iVar8	loopIndex6	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ iVar8\ \+\ 0xb0;$	+1
+use	_gleSetAttrib	iVar8	remaining18	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 7;$	+1
+use	_gleSetAttrib	iVar8	remaining18	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
+use	_gleSetAttrib	pfVar11	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3;$	+1
+use	_gleSetAttrib	pfVar11	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*\(undefined2\ \*\)\(iVar16\ \+\ 0x10\)\ =\ \*\(undefined2\ \*\)\(\(int\)pfVar11\ \+\ 10\);$	+6
+use	_gleSetAttrib	pfVar11	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar1\ =\ pfVar11\ \+\ 6;$	+2
+use	_gleSetAttrib	pfVar11	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\}\ while\ \(\(int\)pfVar11\ <=\ \(int\)\(param_3\ \+\ 7\)\);$	+1
+use	_gleSetAttrib	pfVar11	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3;$@2	+1
+use	_gleSetAttrib	pfVar11	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*\(float\ \*\)\(iVar16\ \+\ 0x1a0\)\ =\ pfVar11\[0x20\];$	+5
+use	_gleSetAttrib	pfVar11	cursor3	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3\ \+\ 0x60;$	+1
+use	_gleSetAttrib	pfVar11	cursor3	INFERRED	only ever set to a start value and stepped (cursor)	^\s*fVar9\ =\ \*pfVar11;$	+2
+use	_gleSetAttrib	pfVar11	cursor4	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3;$@3	+1
+use	_gleSetAttrib	pfVar11	cursor4	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*\(float\ \*\)\(iVar16\ \+\ 0x120\)\ =\ \*pfVar11;$	+4
+use	_gleSetAttrib	pfVar11	cursor4	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*\(float\ \*\)\(iVar8\ \+\ 0x80\)\ =\ pfVar11\[0x80\];$	+5
+use	_gleSetAttrib	pfVar11	cursor5	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3;$@4	+1
+use	_gleSetAttrib	pfVar11	cursor5	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*\(float\ \*\)\(iVar16\ \+\ 0x2850\)\ =\ pfVar11\[0x17\];$	+25
+use	_gleSetAttrib	pfVar11	cursor5	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ pfVar11\ \+\ 0x19;$	+1
+use	_gleSetAttrib	pfVar11	cursor6	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3;$@5	+1
+use	_gleSetAttrib	pfVar11	cursor6	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*\*\(float\ \*\*\)\(iVar7\ \+\ 0x4dd0\)\ =\ pfVar11\[0x19b\];$	+16
+use	_gleSetAttrib	pfVar11	cursor6	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*\(float\ \*\)\(\*piVar19\ \+\ 0x40\)\ =\ pfVar11\[0x1ae\];$	+5
+use	_gleSetAttrib	pfVar11	cursor7	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3;$@6	+1
+use	_gleSetAttrib	pfVar11	cursor7	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*\(float\ \*\)\(iVar16\ \+\ 0x3cfc\)\ =\ pfVar11\[1\];$	+41
+use	_gleSetAttrib	pfVar11	cursor8	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3\ \+\ 0x990;$	+1
+use	_gleSetAttrib	pfVar11	cursor8	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*\(float\ \*\)\(iVar16\ \+\ 0x10\)\ =\ pfVar11\[2\];$	+5
+use	_gleSetAttrib	pfVar11	cursor9	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3;$@7	+1
+use	_gleSetAttrib	pfVar11	cursor9	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar20\ =\ pfVar11\ \+\ 0x9bc;$	+1
+use	_gleSetAttrib	pfVar11	cursor9	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ pfVar11\ \+\ 0x2c;$	+1
+use	_gleSetAttrib	pfVar11	cursor10	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3\ \+\ 0xaf8;$	+1
+use	_gleSetAttrib	pfVar11	cursor10	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*\(undefined2\ \*\)\(iVar7\ \+\ 0x14\)\ =\ \*\(undefined2\ \*\)\(\(int\)pfVar11\ \+\ 0xe\);$	+4
+use	_gleSetAttrib	pfVar11	cursor11	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3\ \+\ 0x808;$	+1
+use	_gleSetAttrib	pfVar11	cursor11	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*\(float\ \*\)\(iVar16\ \+\ 0xc\)\ =\ pfVar11\[3\];$	+5
+use	_gleSetAttrib	pfVar11	cursor12	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3\ \+\ 7;$	+1
+use	_gleSetAttrib	pfVar11	cursor12	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar15\ =\ _gleBindPipelineProgram\(param_1,\ iVar16,\ \*\(unsigned\ int\ \*\)pfVar11\);$	+1
+use	_gleSetAttrib	pfVar11	cursor12	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ pfVar11\ \+\ 1;$@2	+1
+use	_gleSetAttrib	pfVar11	cursor13	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3\ \+\ 8;$	+1
+use	_gleSetAttrib	pfVar11	cursor13	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*pfVar20\ =\ pfVar11\[1\];$	+5
+use	_gleSetAttrib	pfVar11	cursor14	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3\ \+\ 0x408;$	+1
+use	_gleSetAttrib	pfVar11	cursor14	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*pfVar20\ =\ pfVar11\[1\];$@2	+5
+use	_gleSetAttrib	pfVar11	cursor15	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar11\ =\ param_3\ \+\ 8;$@2	+1
+use	_gleSetAttrib	pfVar11	cursor15	INFERRED	only ever set to a start value and stepped (cursor)	^\s*fVar9\ =\ \*pfVar11;$@2	+2
+use	_gleSetAttrib	pfVar20	cursor16	INFERRED	only ever set to a start value and stepped (cursor)	^\s*pfVar20\ =\ pfVar11\ \+\ 0x9bc;$	+1
+use	_gleSetAttrib	pfVar20	cursor16	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*\(float\ \*\)\(iVar27\ \+\ 0x10\)\ =\ pfVar20\[2\];$	+5
+use	_gleSetAttrib	puVar21	cursor17	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar21\ =\ puVar14\ \+\ 0x2660;$	+1
+use	_gleSetAttrib	puVar21	cursor17	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*\(undefined2\ \*\)\(iVar18\ \+\ 0x10\)\ =\ \*\(undefined2\ \*\)\(puVar21\ \+\ 10\);$	+4
+use	_gleSetAttrib	uVar4	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ 0;$	+1
+use	_gleSetAttrib	uVar4	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(\(uint\)GH_F2U\(fVar9\)\ \&\ 1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ ==\ 0\)\ \{$	+2
+use	_gleSetAttrib	uVar4	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*cVar5\ =\ \(char\)\(\(unsigned\ char\ \*\)0x9da8\)\[uVar4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x7450\)\]<<\ 2$	+1
+use	_gleSetAttrib	uVar4	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(char\ \*\)\(param_1\ \+\ uVar4\ \+\ 0x7524\)\ =\ cVar5;$	+1
+use	_gleSetAttrib	uVar4	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(\(uint\)GH_F2U\(fVar10\)\ \&\ 1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	_gleSetAttrib	uVar4	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*cVar5\ =\ \*\(char\ \*\)\(uVar4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x7450\)\ \+\ 0x9db8\)\ <<\ 2;$	+1
+use	_gleSetAttrib	uVar4	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(char\ \*\)\(param_1\ \+\ uVar4\ \+\ 0x7564\)\ =\ cVar5;$	+2
+use	_gleSetAttrib	uVar4	loopIndex8	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ 0;$@2	+1
+use	_gleSetAttrib	uVar4	loopIndex8	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(\(uint\)GH_F2U\(fVar9\)\ \&\ 1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ ==\ 0\)\ \{$@2	+2
+use	_gleSetAttrib	uVar4	loopIndex8	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*cVar5\ =\ \(char\)\(\(unsigned\ char\ \*\)0x9da8\)\[uVar4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x7450\)\]<<\ 2;$	+1
+use	_gleSetAttrib	uVar4	loopIndex8	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(char\ \*\)\(param_1\ \+\ uVar4\ \+\ 0x7524\)\ =\ cVar5;$@2	+1
+use	_gleSetAttrib	uVar4	loopIndex8	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(\(uint\)GH_F2U\(fVar10\)\ \&\ 1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$@2	+1
+use	_gleSetAttrib	uVar4	loopIndex8	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*cVar5\ =\ \*\(char\ \*\)\(uVar4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x7450\)\ \+\ 0x9db8\)\ <<\ 2;$@2	+1
+use	_gleSetAttrib	uVar4	loopIndex8	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(char\ \*\)\(param_1\ \+\ uVar4\ \+\ 0x7564\)\ =\ cVar5;$@2	+2
+use	_glGetDoublev_Exec	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_glGetDoublev_Exec	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uStack_1c\ =\ local_a0\[iVar5\ \*\ 2\]\ \^\ 0x80000000;$	+2
+use	_glGetDoublev_Exec	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_glGetDoublev_Exec	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar3\ =\ local_a0;$	+2
+use	_glGetDoublev_Exec	puVar3	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*uVar6\ =\ \*\(undefined8\ \*\)puVar3;$	+2
+use	_glColorPointer_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_glColorPointer_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
+use	_glColorPointer_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar3\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glColorPointer_Exec	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$@2	+1
+use	_glColorPointer_Exec	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar3\ \+\ 1;$@2	+1
+use	_glColorPointer_Exec	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar3\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@2	+1
+use	_glVertexPointer_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_glVertexPointer_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
+use	_glVertexPointer_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar3\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glVertexPointer_Exec	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$@2	+1
+use	_glVertexPointer_Exec	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar3\ \+\ 1;$@2	+1
+use	_glVertexPointer_Exec	iVar3	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar3\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@2	+1
+use	_glTexCoordPointer_Exec	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_glTexCoordPointer_Exec	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_glTexCoordPointer_Exec	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glTexCoordPointer_Exec	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$@2	+1
+use	_glTexCoordPointer_Exec	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$@2	+1
+use	_glTexCoordPointer_Exec	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@2	+1
+use	_gleDrawArraysOrElements_IMM_Exec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_gleDrawArraysOrElements_IMM_Exec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+2
+use	_gleDrawArraysOrElements_IMM_Exec	iVar9	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ 0x13;$	+1
+use	_gleDrawArraysOrElements_IMM_Exec	iVar9	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
+use	_gleDrawArraysOrElements_IMM_Exec	uVar12	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar12\ =\ 0;$	+1
+use	_gleDrawArraysOrElements_IMM_Exec	uVar12	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar5\ =\ uVar11\ >>\ \(uVar12\ \&\ 0x3f\);$	+1
+use	_gleDrawArraysOrElements_IMM_Exec	uVar12	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*lVar15\ =\ ___ashldi3\(0,0x1000000,uVar12\);$	+1
+use	_gleDrawArraysOrElements_IMM_Exec	uVar12	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar12\ =\ uVar12\ \+\ 1;$	+1
+use	_gleArrayIncAndStoreVertexLoop	puVar1	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar1\ =\ param_1\ \+\ 1;$	+1
+use	_gleArrayIncAndStoreVertexLoop	puVar1	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar1\ =\ 0x80c348cc;$	+1
+use	_gleArrayIncAndStoreVertexLoop	puVar1	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar1\ =\ param_1\ \+\ 3;$	+2
+use	_gleArrayIncAndStoreVertexLoop	puVar1	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar1\ =\ 0x38c60001;$	+1
+use	_gleArrayIncAndStoreVertexLoop	puVar1	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar1\ =\ puVar1\ \+\ 1;$	+1
+use	_gleArrayIncAndStoreVertexLoop	puVar1	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar1\ =\ 0x810348c8;$	+7
+use	_gleModifyPluginVertexArray	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gleModifyPluginVertexArray	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_gleModifyPluginVertexArray	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleModifyPluginVertexArray	puVar8	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar8\ =\ param_2\ \+\ 0x114;$	+1
+use	_gleModifyPluginVertexArray	puVar8	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar8\[1\]\ =\ puVar8\[1\]\ \|\ uVar6;$	+3
+use	_glFinishRender_Exec	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_glFinishRender_Exec	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_glFinishRender_Exec	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleDrawArraysOrElements_VAR_Exec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_gleDrawArraysOrElements_VAR_Exec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+1
+use	_gleDrawArraysOrElements_VAR_Exec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar9\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glSetFenceAPPLE_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glSetFenceAPPLE_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+2
+use	_glSetFenceAPPLE_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$@2	+1
+use	_glSetFenceAPPLE_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$@2	+1
+use	_glSetFenceAPPLE_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar6\ <\ 0x13\);$	+1
+use	_gleCreateFenceObject	iVar4	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ 8;$	+1
+use	_gleCreateFenceObject	iVar4	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	_gleCreateFenceObject	puVar2	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar2\ =\ puVar3\ \+\ 4;$	+1
+use	_gleCreateFenceObject	puVar2	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*puVar2\ =\ 0;$	+2
+use	_gleCreatePluginFence	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_gleCreatePluginFence	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_gleCreatePluginFence	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glPrioritizeTextures_Exec	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$	+1
+use	_glPrioritizeTextures_Exec	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar7\ \*\ 4\ \+\ param_3\);$	+1
+use	_glPrioritizeTextures_Exec	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*fVar4\ =\ \*\(float\ \*\)\(iVar7\ \*\ 4\ \+\ param_4\);$	+1
+use	_glPrioritizeTextures_Exec	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+2
+use	_gleCopyPixelMapi	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ 0;$	+1
+use	_gleCopyPixelMapi	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(int\ \*\)\(puVar1\ \+\ iVar2\ \*\ 4\)\ =\ param_1\[iVar2\];$	+1
+use	_gleCopyPixelMapi	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+use	_gleCopyPixelMapf	iVar1	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar1\ =\ 0;$	+1
+use	_gleCopyPixelMapf	iVar1	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(float\ \*\)\(puVar2\ \+\ iVar1\ \*\ 4\)\ =\ param_1\[iVar1\];$	+1
+use	_gleCopyPixelMapf	iVar1	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar1\ =\ iVar1\ \+\ 1;$	+1
+use	_gleDestroyPluginFence	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_gleDestroyPluginFence	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar5\ \*\ 4;$	+1
+use	_gleDestroyPluginFence	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_gleDestroyPluginFence	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar20\ =\ 0;$	+1
+use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(bVar4\)\ \&\&\ \(uVar9\ =\ uVar19,\ 0\ <\ iVar20\)\)\ break;$	+2
+use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(0\ <\ iVar20\)\ break;$	+1
+use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(3\ <\ iVar20\)\ \{$	+1
+use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\(\*pcVar11\)\(param_1,uVar18,iVar20\);$	+1
+use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleVPFlipColors\(param_1,uVar18,iVar20,iVar12\);$	+1
+use	_gleFeedbackQuadsFunc_body	iVar20	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*dVar22\ =\ \(double\)_gleFeedbackQuads\(param_1,uVar18,iVar20,uVar2\ \-\ 0x1b00\);$	+1
+use	_gleFeedbackQuadsFunc_body	puVar14	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*if\ \(\(\(!bVar3\)\ \&\&\ \(bVar5\)\)\ \&\&\ \(puVar14\ =\ puVar16,\ iVar21\ =\ iVar20,\ 0\ <\ iVar20\)\)\ \{$	+1
+use	_gleFeedbackQuadsFunc_body	puVar14	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*_gleVPFlipColors\(param_1,\*puVar14,1,iVar10\);$	+1
+use	_gleFeedbackQuadsFunc_body	puVar14	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar14\ =\ puVar14\ \+\ 1;$	+1
+use	_gleRTCAddAChunk_51324	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ 0;$	+1
+use	_gleRTCAddAChunk_51324	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+use	_gleRTCAddAChunk_51324	iVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*return\ iVar2;$	+1
+use	_gleClipPoly	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(param_2\ !=\ param_5\)\ \&\&\ \(iVar4\ =\ 0,\ iVar10\ =\ iVar5,\ 0\ <\ iVar5\)\)\ \{$	+1
+use	_gleClipPoly	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*param_5\[iVar4\]\ =\ param_2\[iVar4\];$	+1
+use	_gleClipPoly	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_gleClipPoly	piVar7	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*piVar7\ =\ piVar6;$	+1
+use	_gleClipPoly	piVar7	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*piVar7\ =\ iVar5;$	+2
+use	_gleClipPoly	piVar7	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*piVar7\ =\ iVar1;$	+1
+use	_gleClipPoly	piVar7	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\*piVar7\ =\ iVar1;$@2	+1
+use	_gleClipPoly	piVar7	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*piVar7\ =\ piVar7\ \+\ 1;$@2	+1
+use	_gleClipPoly	piVar7	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*iVar5\ =\ \(int\)piVar7\ \-\ \(int\)piVar6\ >>\ 2;$	+1
+use	_gleClipPoly	piVar7	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*piVar7\ =\ param_2;$	+1
+use	_gleClipPoly	piVar7	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*piVar6\ =\ piVar7;$	+1
+use	_gleClipPoly	piVar9	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*for\ \(piVar9\ =\ param_2;\ piVar9\ <\ piVar8;\ piVar9\ =\ piVar9\ \+\ 1\)\ \{$	+2
+use	_gleClipPoly	piVar9	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*if\ \(\(uVar2\ \&\ \*\(byte\ \*\)\(piVar9\[1\]\ \+\ 0x7f\)\)\ !=\ 0\)\ \{$	+2
+use	_gleClipPoly	piVar9	cursor2	INFERRED	only ever set to a start value and stepped (cursor)	^\s*else\ if\ \(\(uVar2\ \&\ \*\(byte\ \*\)\(piVar9\[1\]\ \+\ 0x7f\)\)\ ==\ 0\)\ \{$	+2
+use	_gleBuildInterpolateFunc	uVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar2\ =\ 0;$	+1
+use	_gleBuildInterpolateFunc	uVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar12\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x514c\)\ >>\ \(uVar2\ \&\ 0x3f\);$	+1
+use	_gleBuildInterpolateFunc	uVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar11\ =\ uVar11\ \|\ 0x10000\ <<\ \(uVar2\ \&\ 0x3f\);$	+1
+use	_gleBuildInterpolateFunc	uVar2	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar2\ =\ uVar2\ \+\ 1;$	+1
+use	_gleBuildInterpolateFunc	uVar2	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar2\ =\ 0;$@2	+1
+use	_gleBuildInterpolateFunc	uVar2	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(uVar12\ \&\ 0x10000\ <<\ \(uVar2\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+2
+use	_gleBuildInterpolateFunc	uVar2	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(\(\(int\)\(uVar2\ \+\ 1\)\ <\ 8\)\ \&\&$	+2
+use	_gleFeedbackPolygonPtr	piVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*for\ \(piVar4\ =\ param_2;\ piVar4\ <\ param_2\ \+\ \(param_3\ \-\ 1\);\ piVar4\ =\ piVar4\ \+\ 1\)\ \{$	+2
+use	_gleFeedbackPolygonPtr	piVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\(\(double\ \(\*\)\(\)\)_gleFeedbackHitRecord\)\(param_1,\*piVar4\);$	+2
+use	_gleFeedbackPolygonPtr	piVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*if\ \(\*\(char\ \*\)\(\*piVar4\ \+\ 0x7c\)\ !=\ '\\0'\)\ \{$@2	+1
+use	_gleFeedbackPolygonPtr	piVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*\(\(double\ \(\*\)\(\)\)_gleFeedbackHitRecord\)\(param_1,\*piVar4\);$@2	+1
+use	_gleMultiTextureMatTransPtr	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ 0;$	+1
+use	_gleMultiTextureMatTransPtr	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar1\ =\ uVar2\ >>\ \(uVar3\ \&\ 0x3f\);$	+1
+use	_gleMultiTextureMatTransPtr	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x5078\)\)\(param_1,param_2,param_3,uVar3\);$	+1
+use	_gleMultiTextureMatTransPtr	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ uVar3\ \+\ 1;$	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ 0;$	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ uVar7\ \+\ 1;$	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar7\ <\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ 0;$@2	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ uVar7\ \+\ 1;$@2	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar7\ <\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@2	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ 0;$@3	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ uVar7\ \+\ 1;$@3	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar7\ <\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@3	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ 0;$@4	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ uVar7\ \+\ 1;$@4	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar7\ <\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@4	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ 0;$@5	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ uVar7\ \+\ 1;$@5	+1
+use	_glFinishObjectAPPLE_Exec	uVar7	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(uVar7\ <\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$@5	+1
+use	_gleLightMaterialRGBAChange_FB_AD	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$	+1
+use	_gleLightMaterialRGBAChange_FB_AD	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*puVar2\ =\ \(undefined8\ \*\)_glePushMaterial\(param_1,iVar7\);$	+1
+use	_gleLightMaterialRGBAChange_FB_AD	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar7\ \*\ 6\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x5420\)\ \+\ 0x2c0\);$	+1
+use	_gleLightMaterialRGBAChange_FB_AD	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar7\ \*\ 6\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x5430\)\ \+\ 0x20\)\ \+\ 0x2f4\);$	+1
+use	_gleLightMaterialRGBAChange_FB_AD	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar7\ \*\ 6;$	+1
+use	_gleLightMaterialRGBAChange_FB_AD	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+1
+use	_gleLightMaterialRGBAChange_FB_AD	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar7\ <\ 2\);$	+1
+use	_glCopyTexImage2D_Exec	iVar14	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar14\ =\ 0;$	+1
+use	_glCopyTexImage2D_Exec	iVar14	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar14\ =\ iVar14\ \+\ 1;$	+2
+use	_glCopyTexImage2D_Exec	iVar14	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar14\ =\ 0x13;$	+1
+use	_glCopyTexImage2D_Exec	iVar14	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar14\ =\ iVar14\ \+\ \-1;$	+2
+use	_glRasterPos2i_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glRasterPos2i_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+2
+use	_glRasterPos2i_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 0x13;$	+1
+use	_glRasterPos2i_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_gleSetRasterPos	iVar18	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar18\ =\ 0;$	+1
+use	_gleSetRasterPos	iVar18	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar18\ =\ iVar18\ \+\ 1;$	+2
+use	_gleSetRasterPos	iVar20	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar20\ =\ 8;$	+1
+use	_gleSetRasterPos	iVar20	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar20\ =\ iVar20\ \+\ \-1;$	+2
+use	_glBitmap_Exec	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$	+1
+use	_glBitmap_Exec	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+2
+use	_glBitmap_Exec	iVar7	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ 0x13;$	+1
+use	_glBitmap_Exec	iVar7	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2
+use	_glCopyPixels_Exec	iVar11	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar11\ =\ 0;$	+1
+use	_glCopyPixels_Exec	iVar11	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar11\ =\ iVar11\ \+\ 1;$	+2
+use	_glCopyPixels_Exec	iVar11	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar11\ =\ 0x13;$	+1
+use	_glCopyPixels_Exec	iVar11	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar11\ =\ iVar11\ \+\ \-1;$	+2
+use	_glFinish_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glFinish_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+2
+use	_glFinish_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$@2	+1
+use	_glFinish_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$@2	+1
+use	_glFinish_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar6\ <\ 0x13\);$	+1
+use	_glFinish_Exec	uVar7	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ 0;$	+1
+use	_glFinish_Exec	uVar7	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar7\ !=\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a8\)\)\ \{$	+1
+use	_glFinish_Exec	uVar7	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ uVar7\ \+\ 1;$	+1
+use	_glFinish_Exec	uVar7	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(\(int\)uVar7\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glGetTexImage_Exec	iVar15	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar15\ =\ 0;$	+1
+use	_glGetTexImage_Exec	iVar15	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar15\ =\ iVar15\ \+\ 1;$	+1
+use	_glGetTexImage_Exec	iVar15	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar15\ <\ \(int\)\(uint\)\*\(ushort\ \*\)\(iVar6\ \+\ 0xcc\)\);$	+1
+use	_gleFlushPrimitiveTCLFunc	iVar1	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar1\ =\ 0;$	+1
+use	_gleFlushPrimitiveTCLFunc	iVar1	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined8\ \*\)\(iVar2\ \+\ iVar1\)\ =\ \*\(undefined8\ \*\)\(\(int\)local_220\ \+\ iVar1\);$	+2
+use	_gleFlushPrimitiveTCLFunc	iVar1	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar1\ =\ 0;$@2	+1
+use	_gleFlushPrimitiveTCLFunc	iVar1	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined8\ \*\)\(iVar2\ \+\ iVar1\)\ =\ \*\(undefined8\ \*\)\(\(int\)local_220\ \+\ iVar1\);$@2	+2
+use	_gleFlushPrimitiveTCLFunc	iVar2	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ 0;$	+1
+use	_gleFlushPrimitiveTCLFunc	iVar2	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined8\ \*\)\(\(int\)local_220\ \+\ iVar2\)\ =\ \*\(undefined8\ \*\)\(\(iVar1\ \-\ iVar5\)\ \+\ iVar2\);$	+2
+use	_gleFlushPrimitiveTCLFunc	iVar2	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ 0;$@2	+1
+use	_gleFlushPrimitiveTCLFunc	iVar2	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined8\ \*\)\(\(int\)local_220\ \+\ iVar2\)\ =\ \*\(undefined8\ \*\)\(iVar1\ \+\ iVar2\);$	+3
+use	_gleFlushPrimitiveTCLFunc	iVar2	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ 0;$@3	+1
+use	_gleFlushPrimitiveTCLFunc	iVar2	loopIndex5	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined8\ \*\)\(\(int\)local_220\ \+\ iVar2\ \+\ iVar5\)\ =\ \*\(undefined8\ \*\)\(\(iVar4\ \-\ iVar5\)\ \+\ iVar2\);$	+2
+use	_gleFlushPrimitiveTCLFunc	iVar2	loopIndex6	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ 0;$@4	+1
+use	_gleFlushPrimitiveTCLFunc	iVar2	loopIndex6	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined8\ \*\)\(\(int\)local_220\ \+\ iVar2\)\ =\ \*\(undefined8\ \*\)\(iVar1\ \+\ iVar2\);$@2	+3
+use	_gleFlushPrimitiveTCLFunc	iVar2	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ 0;$@5	+1
+use	_gleFlushPrimitiveTCLFunc	iVar2	loopIndex7	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined8\ \*\)\(\(int\)local_220\ \+\ iVar2\ \+\ iVar5\)\ =\ \*\(undefined8\ \*\)\(iVar4\ \+\ iVar2\);$	+2
+use	_gleFlushPrimitiveTCLFunc	iVar4	loopIndex8	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_gleFlushPrimitiveTCLFunc	iVar4	loopIndex8	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined8\ \*\)\(iVar2\ \+\ \-0x100\ \+\ iVar4\)\ =\ \*\(undefined8\ \*\)\(iVar1\ \+\ iVar4\);$	+2
+use	_gleFlushPrimitiveTCLFunc	iVar4	loopIndex9	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$@2	+1
+use	_gleFlushPrimitiveTCLFunc	iVar4	loopIndex9	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined8\ \*\)\(\(int\)local_220\ \+\ iVar4\)\ =\ \*\(undefined8\ \*\)\(iVar3\ \+\ iVar1\ \+\ iVar4\);$	+2
+use	_glAccum_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glAccum_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+2
+use	_glAccum_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 0x13;$	+1
+use	_glAccum_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_glBegin_NoopExec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glBegin_NoopExec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+2
+use	_glBegin_NoopExec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 0x13;$	+1
+use	_glBegin_NoopExec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_glBitmap_ListExec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_glBitmap_ListExec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+2
+use	_glBitmap_ListExec	iVar9	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ 0x13;$	+1
+use	_glBitmap_ListExec	iVar9	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
+use	_glBitmap_NoopExec	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_glBitmap_NoopExec	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+2
+use	_glBitmap_NoopExec	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 0x13;$	+1
+use	_glBitmap_NoopExec	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	_glDeleteBuffers_Exec	iVar13	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar13\ =\ 0;$	+1
+use	_glDeleteBuffers_Exec	iVar13	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(uint\ \*\)\(iVar3\ \+\ 0x33c\)\ =\ uVar7\ \&\ \~\(1\ <<\ \(iVar13\ \+\ 0x10U\ \&\ 0x3f\)\);$	+1
+use	_glDeleteBuffers_Exec	iVar13	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar13\ =\ iVar13\ \+\ 1;$	+1
+use	_glDeleteBuffers_Exec	iVar13	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar13\ <\ 0x20\);$	+1
+use	_glDeleteBuffers_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glDeleteBuffers_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	_glDeleteBuffers_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar6\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glGenBuffers_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_glGenBuffers_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar3\ \+\ iVar4;$	+2
+use	_glBufferData_Exec_body	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_glBufferData_Exec_body	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_glBufferData_Exec_body	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glBufferSubData_Exec	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_glBufferSubData_Exec	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_glBufferSubData_Exec	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glBufferSubData_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 0;$	+1
+use	_glBufferSubData_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	_glBufferSubData_Exec	iVar6	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar6\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glMapBuffer_Exec	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_glMapBuffer_Exec	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_glMapBuffer_Exec	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glMapBuffer_Exec	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_glMapBuffer_Exec	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_glMapBuffer_Exec	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar5\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glClear_NoopExec	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_glClear_NoopExec	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+2
+use	_glClear_NoopExec	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ 0x13;$	+1
+use	_glClear_NoopExec	iVar5	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	_glCopyColorTable_Exec	iVar12	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar12\ =\ 0;$	+1
+use	_glCopyColorTable_Exec	iVar12	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar12\ =\ iVar12\ \+\ 1;$	+2
+use	_glCopyColorTable_Exec	iVar12	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar12\ =\ 0x13;$	+1
+use	_glCopyColorTable_Exec	iVar12	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar12\ =\ iVar12\ \+\ \-1;$	+2
+use	_glCopyColorSubTable_Exec	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ 0;$	+1
+use	_glCopyColorSubTable_Exec	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+2
+use	_glCopyColorSubTable_Exec	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 0x13;$	+1
+use	_glCopyColorSubTable_Exec	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	_glCopyPixels_ListExec	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
+use	_glCopyPixels_ListExec	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+2
+use	_glCopyPixels_ListExec	iVar8	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 0x13;$	+1
+use	_glCopyPixels_ListExec	iVar8	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
+use	_glCopyPixels_NoopExec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_glCopyPixels_NoopExec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+2
+use	_glCopyPixels_NoopExec	iVar9	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ 0x13;$	+1
+use	_glCopyPixels_NoopExec	iVar9	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
+use	_glCallLists_Exec	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$	+1
+use	_glCallLists_Exec	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*pbVar1\ =\ \(byte\ \*\)\(\(int\)param_4\ \+\ iVar7\);$	+2
+use	_glCallLists_Exec	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar7\ <\ param_2\);$	+1
+use	_glCallLists_Exec	iVar7	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$@2	+1
+use	_glCallLists_Exec	iVar7	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*pbVar1\ =\ \(byte\ \*\)\(\(int\)param_4\ \+\ iVar7\);$@2	+2
+use	_glCallLists_Exec	iVar7	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar7\ <\ param_2\);$@2	+1
+use	_glCallLists_Exec	iVar7	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$@3	+1
+use	_glCallLists_Exec	iVar7	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ iVar7\ \+\ 2;$	+1
+use	_glCallLists_Exec	iVar7	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar7\ <\ param_2\ <<\ 1\);$	+1
+use	_glDrawBuffer_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ 3;$	+1
+use	_glDrawBuffer_Exec	iVar6	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	_glDrawBuffer_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar6\ =\ 1;$	+1
+use	_glDrawBuffer_Exec	iVar6	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ iVar6\ \*\ 2;$	+2
+use	_glDrawBuffer_Exec	iVar7	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ 3;$	+1
+use	_glDrawBuffer_Exec	iVar7	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2
+use	_glDrawBuffersARB_Exec	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ 0;$	+1
+use	_glDrawBuffersARB_Exec	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(param_3\[iVar10\]\ ==\ 0\)\ goto\ LAB_000634c4;$	+1
+use	_glDrawBuffersARB_Exec	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(0\ <\ iVar10\)\ \{$	+1
+use	_glDrawBuffersARB_Exec	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(param_3\[iVar10\]\ ==\ \*piVar4\)\ goto\ LAB_000635b8;$	+1
+use	_glDrawBuffersARB_Exec	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar8\ <\ iVar10\);$	+1
+use	_glDrawBuffersARB_Exec	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*switch\(param_3\[iVar10\]\)\ \{$	+1
+use	_glDrawBuffersARB_Exec	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\(\*\(int\ \*\)\(param_1\ \+\ 0x744c\)\ !=\ 0\)\ \|\|$	+3
+use	_glDrawBuffersARB_Exec	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar9\ =\ param_3\[iVar10\]\ \-\ 0x8ce0;$	+1
+use	_glDrawBuffersARB_Exec	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+2
+use	_glDrawBuffersARB_Exec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$@2	+1
+use	_glDrawBuffersARB_Exec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar8\ \*\ 2;$	+2
+use	_glDrawBuffersARB_Exec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(3\ <\ iVar8\)\ break;$	+1
+use	_glDrawBuffersARB_Exec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined2\ \*\)\(iVar8\ \*\ 2\ \+\ iVar10\ \+\ 0xc0\)\ =\ uVar1;$	+2
+use	_glDrawBuffersARB_Exec	iVar8	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(iVar8\ <\ 4\)\ goto\ LAB_00063528;$	+1
+use	_glDrawBuffersARB_Exec	piVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*piVar4\ =\ param_3;$	+1
+use	_glDrawBuffersARB_Exec	piVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*if\ \(param_3\[iVar10\]\ ==\ \*piVar4\)\ goto\ LAB_000635b8;$	+1
+use	_glDrawBuffersARB_Exec	piVar4	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*piVar4\ =\ piVar4\ \+\ 1;$	+1
+use	_glDrawBuffersARB_Exec	uVar7	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ 0;$	+1
+use	_glDrawBuffersARB_Exec	uVar7	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar7\ =\ uVar7\ \+\ 1;$	+1
+use	_glDrawBuffersARB_Exec	uVar7	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\*\(uint\ \*\)\(iVar8\ \+\ 0x14\)\ <=\ uVar7\)\ goto\ LAB_000635b8;$	+1
+use	_glDrawPixels_ListExec	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ 0;$	+1
+use	_glDrawPixels_ListExec	iVar10	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+2
+use	_glDrawPixels_ListExec	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ 0x13;$	+1
+use	_glDrawPixels_ListExec	iVar10	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	_glDrawPixels_Exec	iVar11	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar11\ =\ 0;$	+1
+use	_glDrawPixels_Exec	iVar11	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar11\ =\ iVar11\ \+\ 1;$	+2
+use	_glDrawPixels_Exec	iVar11	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar11\ =\ 0x13;$	+1
+use	_glDrawPixels_Exec	iVar11	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar11\ =\ iVar11\ \+\ \-1;$	+2
+use	_glDrawPixels_NoopExec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_glDrawPixels_NoopExec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+2
+use	_glDrawPixels_NoopExec	iVar9	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ 0x13;$	+1
+use	_glDrawPixels_NoopExec	iVar9	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
+use	_glFinish_RevertExec	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ 0;$	+1
+use	_glFinish_RevertExec	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(uVar3\ !=\ \*\(byte\ \*\)\(param_1\ \+\ 0x85a8\)\)\ \{$	+1
+use	_glFinish_RevertExec	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ uVar3\ \+\ 1;$	+1
+use	_glFinish_RevertExec	uVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(\(int\)uVar3\ <\ \(int\)\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x85a4\)\);$	+1
+use	_glGenRenderbuffersEXT_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_glGenRenderbuffersEXT_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar3\ \+\ iVar4;$	+2
+use	_glDeleteRenderbuffersEXT_Exec_body	piVar10	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*piVar10\ =\ piVar5;$	+1
+use	_glDeleteRenderbuffersEXT_Exec_body	piVar10	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*iVar2\ =\ \*piVar10;$	+2
+use	_glDeleteRenderbuffersEXT_Exec_body	uVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar8\ =\ 0;$	+1
+use	_glDeleteRenderbuffersEXT_Exec_body	uVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*_gleFramebufferTexture\(param_1,uVar8,0,0,0,0,0\);$	+1
+use	_glDeleteRenderbuffersEXT_Exec_body	uVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar8\ =\ uVar8\ \+\ 1;$	+2
+use	_glGenFramebuffersEXT_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar3\ =\ 0;$	+1
+use	_glGenFramebuffersEXT_Exec	iVar3	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar3\ \+\ iVar4;$	+2
+use	_glGenerateMipmapEXT_Exec	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
+use	_glGenerateMipmapEXT_Exec	iVar5	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+2
+use	_glCopyConvolutionFilter1D_Exec	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ 0;$	+1
+use	_glCopyConvolutionFilter1D_Exec	iVar8	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+2
+use	_glCopyConvolutionFilter1D_Exec	iVar8	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 0x13;$	+1
+use	_glCopyConvolutionFilter1D_Exec	iVar8	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
+use	_glCopyConvolutionFilter2D_Exec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ 0;$	+1
+use	_glCopyConvolutionFilter2D_Exec	iVar9	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+2
+use	_glCopyConvolutionFilter2D_Exec	iVar9	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ 0x13;$	+1
+use	_glCopyConvolutionFilter2D_Exec	iVar9	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
+use	_glResetHistogram_Exec	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
+use	_glResetHistogram_Exec	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar4\ \*\ 0x10;$	+2
+use	_glResetHistogram_Exec	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar4\ <\ \*\(int\ \*\)\(param_1\ \+\ 0x3388\)\);$	+1

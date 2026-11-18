@@ -1,0 +1,11 @@
+local	_gliGetInteger	param_2	stateId	INFERRED	compared with the state ids 0xe0, 0x164..0x184 ...; each id selects the context field (short at ctx+0x509a, ctx+0x48bc ...) copied to *param_3
+local	_gliGetInteger	param_3	valuePtr	CONFIRMED	NULL is rejected with 0x271e; the selected state value is stored through it (*param_3 = 0xaa8 for id 0xe0)
+local	_gliSetInteger	param_2	stateId	INFERRED	compared with the state ids (0x176 ...) that select the context field to update, same id space as _gliGetInteger
+local	_gliSetInteger	param_3	valuePtr	CONFIRMED	NULL is rejected with 0x271e; the new state value is read through it (iVar10 = *param_3)
+local	_gliGetVersion	param_1	majorVersion	INFERRED	*param_1 = 2 on success (first of the three version out parameters)
+local	_gliGetVersion	param_2	minorVersion	INFERRED	*param_2 = 3 on success (second of the three version out parameters)
+local	_glepGetPlugin	param_1	pluginId	CONFIRMED	compared with the plugin record field at +0x104 (piVar1[0x41]) while walking _glep_plugin_head; the matching plugin is returned
+local	_glepPluginDisconnect	param_1	plugin	CONFIRMED	plugin record: image at +0x108 and module at +0x10c are unlinked/destroyed after calling its _gldTerminateLibrary
+local	_gliChoosePixelFormat	param_1	pixelFormatListOut	INFERRED	*param_1 = 0 at entry and receives the pixel format list returned by the plugins (flags |= 0x20000 on each entry)
+local	_gliChoosePixelFormat	param_2	attributes	INFERRED	NULL is rejected (0x271e) and the pointer is passed unchanged to every plugin choose-pixel-format entry point (piVar4[0x46])
+local	_gliChoosePixelFormat	piVar4	plugin	INFERRED	walks the plugin list from _glepGetPlugins (next at +0) calling the plugin entry point at +0x118

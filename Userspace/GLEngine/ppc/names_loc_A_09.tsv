@@ -1,0 +1,31 @@
+use	_glepAddPlugin	puVar1	tailLink	CONFIRMED	address of the link slot to fill: &_glep_plugin_head, then the last node found by the list walk; receives the new plugin pointer	^\s*puVar1\ =\ \&_glep_plugin_head;$	+1
+use	_glepAddPlugin	puVar1	tailLink	CONFIRMED	address of the link slot to fill: &_glep_plugin_head, then the last node found by the list walk; receives the new plugin pointer	^\s*puVar1\ =\ puVar2;$	+1
+use	_glepAddPlugin	puVar1	tailLink	CONFIRMED	address of the link slot to fill: &_glep_plugin_head, then the last node found by the list walk; receives the new plugin pointer	^\s*\*puVar1\ =\ puVar3;$	+1
+use	_glepAddPlugin	puVar2	node	CONFIRMED	list walk cursor over _glep_plugin_head (next pointer at +0)	^\s*for\ \(puVar2\ =\ _glep_plugin_head;\ puVar2\ !=\ \(undefined4\ \*\)0x0;\ puVar2\ =\ \(undefined4\ \*\)\*puVar2\)\ \{$	+2
+use	_glepAddPlugin	puVar2	result	CONFIRMED	NULL or the new plugin record, returned	^\s*puVar2\ =\ \(undefined4\ \*\)0x0;$	+1
+use	_glepAddPlugin	puVar2	result	CONFIRMED	NULL or the new plugin record, returned	^\s*puVar2\ =\ puVar3;$	+1
+use	_glepAddPlugin	puVar2	result	CONFIRMED	NULL or the new plugin record, returned	^\s*return\ puVar2;$	+1
+use	_glepAddPlugin	puVar3	newPlugin	CONFIRMED	_malloc(0x208) plugin record: next at +0, path string at +4, state fields at 0x104..0x110	^\s*puVar3\ =\ \(undefined4\ \*\)_malloc\(0x208\);$	+1
+use	_glepAddPlugin	puVar3	newPlugin	CONFIRMED	_malloc(0x208) plugin record: next at +0, path string at +4, state fields at 0x104..0x110	^\s*if\ \(puVar3\ !=\ \(undefined4\ \*\)0x0\)\ \{$	+9
+use	_glepPluginConnect	iVar1	createStatus	CONFIRMED	result of _NSCreateObjectFileImageFromFile, compared with 1 (success)	^\s*iVar1\ =\ _NSCreateObjectFileImageFromFile\(param_1\ \+\ 4,local_30\);$	+2
+use	_glepPluginConnect	iVar1	module	CONFIRMED	result of _NSLinkModule, stored at plugin+0x10c	^\s*iVar1\ =\ _NSLinkModule\(local_30\[0\],param_1\ \+\ 4,2\);$	+3
+use	_glepPluginConnect	iVar1	validateResult	CONFIRMED	result of _glepValidatePlugin	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_glepValidatePlugin\)\(param_1\);$	+2
+use	_glepPluginConnect	uVar2	result	CONFIRMED	1 on success (already connected / all symbols bound), 0 on failure; returned	^\s*uVar2\ =\ 0;$	+1
+use	_glepPluginConnect	uVar2	result	CONFIRMED	1 on success (already connected / all symbols bound), 0 on failure; returned	^\s*uVar2\ =\ 1;$	+1
+use	_glepPluginConnect	uVar2	result	CONFIRMED	1 on success (already connected / all symbols bound), 0 on failure; returned	^\s*return\ uVar2;$	+1
+use	_glepPluginConnect	piVar4	symbolSlot	CONFIRMED	walks the entry-point table at plugin+0x114 .. plugin+0x208, one resolved symbol address per slot	^\s*piVar4\ =\ \(int\ \*\)\(param_1\ \+\ 0x114\);$	+1
+use	_glepPluginConnect	piVar4	symbolSlot	CONFIRMED	walks the entry-point table at plugin+0x114 .. plugin+0x208, one resolved symbol address per slot	^\s*\*piVar4\ =\ iVar1;$	+2
+use	_glepPluginConnect	piVar4	symbolSlot	CONFIRMED	walks the entry-point table at plugin+0x114 .. plugin+0x208, one resolved symbol address per slot	^\s*\}\ while\ \(\(int\)piVar4\ <\ param_1\ \+\ 0x208\);$	+1
+use	_glepValidatePlugin	uVar2	otherPluginId	INFERRED	plugin id (+0x104 slot of the plugin at piVar3) compared with this plugin's id local_14[0]	^\s*uVar2\ =\ _glep_plugin_head\[0x41\];$	+1
+use	_glepValidatePlugin	uVar2	otherPluginId	INFERRED	plugin id (+0x104 slot of the plugin at piVar3) compared with this plugin's id local_14[0]	^\s*while\ \(local_14\[0\]\ !=\ uVar2\)\ \{$	+1
+use	_glepValidatePlugin	uVar2	otherPluginId	INFERRED	plugin id (+0x104 slot of the plugin at piVar3) compared with this plugin's id local_14[0]	^\s*uVar2\ =\ piVar3\[0x41\];$	+1
+use	_glepValidatePlugin	piVar3	otherPlugin	INFERRED	walks the plugin list comparing ids	^\s*piVar3\ =\ _glep_plugin_head;$	+1
+use	_glepValidatePlugin	piVar3	otherPlugin	INFERRED	walks the plugin list comparing ids	^\s*piVar3\ =\ \(int\ \*\)\*piVar3;$	+2
+use	_glepValidatePlugin	piVar3	otherPlugin	INFERRED	walks the plugin list comparing ids	^\s*uVar2\ =\ piVar3\[0x41\];$	+1
+use	_glepValidatePlugin	iVar4	initSymbol	CONFIRMED	_NSLookupSymbolInModule(module, "_gldInitializeLibrary")	^\s*if\ \(\(\(\*\(int\ \*\)\(param_1\ \+\ 0x104\)\ !=\ 0xffff\)\ \&\&$	+3
+use	_glepValidatePlugin	iVar4	infoSymbol	INFERRED	_NSLookupSymbolInModule of the first name in _glep_gld_names (the renderer info query)	^\s*iVar4\ =\ _NSLookupSymbolInModule\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x10c\),_glep_gld_names\);$	+3
+local	_glepPluginConnect	param_1	plugin	CONFIRMED	plugin record: next at +0, path at +4 (passed to _NSCreateObjectFileImageFromFile), module/image at +0x108/+0x10c, entry table at +0x114
+local	_glepValidatePlugin	param_1	plugin	CONFIRMED	plugin record: state/id at +0x104, module at +0x10c, renderer mask at +0x110 passed to _gldInitializeLibrary
+local	_gleStoreDataElementNO	param_1	instrCursor	INFERRED	writes PPC instruction words (e.g. 0x39400000 li, 0x88070000 lbz, 0xa0070000 lhz) through the pointer and returns it advanced: the code-emission cursor
+local	_gleLoadDataElementNO	param_1	instrCursor	INFERRED	writes PPC instruction words (e.g. 0x39400000 li, 0x88070000 lbz, 0xa0070000 lhz) through the pointer and returns it advanced: the code-emission cursor
+local	_glepPluginConnect	local_30	objectFileImage	CONFIRMED	out parameter of _NSCreateObjectFileImageFromFile, stored at plugin+0x108
