@@ -806,6 +806,9 @@ void _glLinkProgramARB_Exec(glContext, programObj)
   char *shaderString;
   undefined1 *stageRecord;
   int iVar18;
+  int shaderIndex;
+  int ppStreamManager;
+  int fragmentLocalParamCount;
   int vertexLocalParamCount;
   int uniformEntryOffset;
   int handleByteOffset;
@@ -1029,12 +1032,12 @@ void _glLinkProgramARB_Exec(glContext, programObj)
           }
         }
         fragmentStage = *(int *)(sharedStateThenProgramObj + 0x24);
-        iVar18 = _ShGetNumShaderLocalParams(*(undefined4 *)(sharedStateThenProgramObj + 0x40),1);
-        if (iVar18 != 0) {
+        fragmentLocalParamCount = _ShGetNumShaderLocalParams(*(undefined4 *)(sharedStateThenProgramObj + 0x40),1);
+        if (fragmentLocalParamCount != 0) {
           rowIndex = 0;
-          fragmentLocalParams = _gleVecAlloc(iVar18 << 4);
+          fragmentLocalParams = _gleVecAlloc(fragmentLocalParamCount << 4);
           *(int *)(fragmentStage + 0x51c) = fragmentLocalParams;
-          if (0 < iVar18) {
+          if (0 < fragmentLocalParamCount) {
             do {
               localParamOffset = rowIndex * 0x10;
               rowIndex = rowIndex + 1;
@@ -1043,8 +1046,8 @@ void _glLinkProgramARB_Exec(glContext, programObj)
               *(undefined4 *)(localParamEntry + 0xc) = 0;
               *(undefined4 *)(localParamEntry + 4) = 0;
               *(undefined4 *)(localParamEntry + 8) = 0;
-              iVar18 = iVar18 + -1;
-            } while (iVar18 != 0);
+              fragmentLocalParamCount = fragmentLocalParamCount + -1;
+            } while (fragmentLocalParamCount != 0);
           }
         }
         stageIndex = 0;
@@ -1056,15 +1059,15 @@ void _glLinkProgramARB_Exec(glContext, programObj)
           else {
             stageRecord = (undefined1 *)*stageRecordSlots;
           }
-          iVar18 = _ShGetPPStreamManager(*(undefined4 *)(sharedStateThenProgramObj + 0x40),isFragmentStage);
-          if (iVar18 != 0) {
-            _PPStreamGetStream(iVar18,0,streamLength);
+          ppStreamManager = _ShGetPPStreamManager(*(undefined4 *)(sharedStateThenProgramObj + 0x40),isFragmentStage);
+          if (ppStreamManager != 0) {
+            _PPStreamGetStream(ppStreamManager,0,streamLength);
             if (streamLength[0] != 0) {
               streamBuffer = _gleVecAlloc(streamLength[0] << 3);
               *(undefined4 *)(stageRecord + 0x508) = streamBuffer;
-              _PPStreamGetStream(iVar18,streamBuffer,streamLength);
+              _PPStreamGetStream(ppStreamManager,streamBuffer,streamLength);
               if ((*(int *)(stageRecord + 0x508) != 0) && (*stageRecord = 1, !isFragmentStage)) {
-                streamCopy = _PPStreamDuplicate(iVar18);
+                streamCopy = _PPStreamDuplicate(ppStreamManager);
                 _glpPPShaderLinearizeStreamMgr(streamCopy,0xf9);
                 emulatorProgram = _PPEmulatorProgramCreate();
                 *(undefined4 *)(stageRecord + 0x4dc) = emulatorProgram;
@@ -1083,7 +1086,7 @@ void _glLinkProgramARB_Exec(glContext, programObj)
           stageShaders[1] = 0;
           attachedCountCopy = *(int *)(sharedStateThenProgramObj + 0x48);
           attachmentsValid = attachedCountCopy < 3;
-          iVar18 = 0;
+          shaderIndex = 0;
           if (attachedCountCopy < 1) {
 LAB_0008879c:
             if (attachmentsValid) {
@@ -1177,14 +1180,14 @@ LAB_0008879c:
           else if (attachmentsValid) {
             attachmentsValid = true;
             do {
-              attachedShader = *(int *)(iVar18 * 4 + *(int *)(sharedStateThenProgramObj + 0x44));
+              attachedShader = *(int *)(shaderIndex * 4 + *(int *)(sharedStateThenProgramObj + 0x44));
               if (attachedShader != 0) {
                 if ((stageShaders[0] == 0) && (*(int *)(attachedShader + 0x20) == 0x8b31)) {
                   stageShaders[0] = attachedShader;
                 }
                 else {
                   if ((stageShaders[1] != 0) ||
-                     (attachedShader = *(int *)(iVar18 * 4 + *(int *)(sharedStateThenProgramObj + 0x44)),
+                     (attachedShader = *(int *)(shaderIndex * 4 + *(int *)(sharedStateThenProgramObj + 0x44)),
                      *(code **)(attachedShader + 0x20) != (code *)0x8b30)) {
                     attachmentsValid = false;
                     goto LAB_00088784;
@@ -1194,8 +1197,8 @@ LAB_0008879c:
                 attachedCountCopy = *(int *)(sharedStateThenProgramObj + 0x48);
               }
 LAB_00088784:
-              iVar18 = iVar18 + 1;
-              if (attachedCountCopy <= iVar18) goto LAB_0008879c;
+              shaderIndex = shaderIndex + 1;
+              if (attachedCountCopy <= shaderIndex) goto LAB_0008879c;
             } while (attachmentsValid);
           }
         }

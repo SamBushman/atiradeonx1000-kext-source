@@ -1,0 +1,14 @@
+local	_gliGetInteger	uVar1	stateValue	CONFIRMED	the integer state value read for stateId (shorts, bytes, flags or ShGet* results), finally stored to *valuePtr
+use	_gliGetInteger	uVar3	driverResult	CONFIRMED	return value of the renderer's get-integer hook at ctx+0x477c, returned unchanged	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x477c\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x4688\),param_2,param_3\)$	+1
+use	_gliGetInteger	uVar3	driverResult	CONFIRMED	return value of the renderer's get-integer hook at ctx+0x477c, returned unchanged	^\s*return\ uVar3;$	+1
+use	_gliGetInteger	uVar3	objectKind	CONFIRMED	hash object kind code (1, 2, 3, 4, 5, 6, 7, -11, -12) passed as the kind argument of _gleGetHashMachineObjectNameTargetPairs	^\s*uVar3\ =\ 6;$	+1
+use	_gliGetInteger	uVar3	objectKind	CONFIRMED	hash object kind code (1, 2, 3, 4, 5, 6, 7, -11, -12) passed as the kind argument of _gleGetHashMachineObjectNameTargetPairs	^\s*uVar3\ =\ 1;$	+1
+use	_gliGetInteger	uVar3	objectKind	CONFIRMED	hash object kind code (1, 2, 3, 4, 5, 6, 7, -11, -12) passed as the kind argument of _gleGetHashMachineObjectNameTargetPairs	^\s*_gleGetHashMachineObjectNameTargetPairs\(param_1,puVar4,uVar3,param_3\);$	+1
+use	_gliGetInteger	uVar3	objectKind	CONFIRMED	hash object kind code (1, 2, 3, 4, 5, 6, 7, -11, -12) passed as the kind argument of _gleGetHashMachineObjectNameTargetPairs	^\s*uVar3\ =\ 0xfffffff5;$	+1
+use	_gliGetInteger	uVar3	objectKind	CONFIRMED	hash object kind code (1, 2, 3, 4, 5, 6, 7, -11, -12) passed as the kind argument of _gleGetHashMachineObjectNameTargetPairs	^\s*uVar3\ =\ 5;$	+1
+use	_gliGetInteger	uVar3	objectKind	CONFIRMED	hash object kind code (1, 2, 3, 4, 5, 6, 7, -11, -12) passed as the kind argument of _gleGetHashMachineObjectNameTargetPairs	^\s*uVar3\ =\ 7;$	+1
+use	_gliGetInteger	uVar3	objectKind	CONFIRMED	hash object kind code (1, 2, 3, 4, 5, 6, 7, -11, -12) passed as the kind argument of _gleGetHashMachineObjectNameTargetPairs	^\s*uVar3\ =\ 0xfffffff4;$	+1
+use	_gliGetInteger	uVar3	objectKind	CONFIRMED	hash object kind code (1, 2, 3, 4, 5, 6, 7, -11, -12) passed as the kind argument of _gleGetHashMachineObjectNameTargetPairs	^\s*uVar3\ =\ 0;$	+1
+use	_gliGetInteger	uVar3	objectKind	CONFIRMED	hash object kind code (1, 2, 3, 4, 5, 6, 7, -11, -12) passed as the kind argument of _gleGetHashMachineObjectNameTargetPairs	^\s*uVar3\ =\ 2;$	+1
+use	_gliGetInteger	uVar3	objectKind	CONFIRMED	hash object kind code (1, 2, 3, 4, 5, 6, 7, -11, -12) passed as the kind argument of _gleGetHashMachineObjectNameTargetPairs	^\s*uVar3\ =\ 3;$	+1
+use	_gliGetInteger	uVar3	objectKind	CONFIRMED	hash object kind code (1, 2, 3, 4, 5, 6, 7, -11, -12) passed as the kind argument of _gleGetHashMachineObjectNameTargetPairs	^\s*uVar3\ =\ 4;$	+1
